@@ -1,0 +1,21 @@
+# usage: astyle --options=victron.astyle <source.cpp>
+indent=tab
+indent-switches
+indent-after-parens
+indent-continuation=2
+style=1tbs
+keep-one-line-statements
+attach-namespaces
+attach-inlines
+attach-extern-c
+attach-closing-while
+attach-return-type
+pad-oper
+pad-header
+unpad-paren
+align-pointer=name
+align-reference=name
+max-code-length=120
+lineend=linux
+suffix=none
+
