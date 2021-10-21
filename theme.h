@@ -26,6 +26,8 @@ class Theme : public QObject
 	Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY highlightColorChanged)
 	Q_PROPERTY(QColor dimColor READ dimColor NOTIFY dimColorChanged)
 	Q_PROPERTY(int fontSizeMedium READ fontSizeMedium CONSTANT)
+	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
+	Q_PROPERTY(int iconSizeMedium READ iconSizeMedium CONSTANT)
 
 public:
 	enum DisplayMode {
@@ -45,6 +47,8 @@ public:
 
 	enum OtherProperty {
 		FontSizeMedium = 0,
+		MarginSmall,
+		IconSizeMedium
 	};
 	Q_ENUM(OtherProperty)
 
@@ -61,6 +65,8 @@ public:
 	QColor dimColor() const;
 
 	int fontSizeMedium() const;
+	int marginSmall() const;
+	int iconSizeMedium() const;
 
 Q_SIGNALS:
 	void displayModeChanged();
@@ -71,7 +77,7 @@ Q_SIGNALS:
 	void dimColorChanged();
 
 private:
-	DisplayMode m_displayMode = Light;
+	DisplayMode m_displayMode = Dark;
 
 	/* these values depend on the currently selected displayMode */
 	QVector<QVector<QVariant> > m_colorValues {
@@ -107,6 +113,10 @@ private:
 	QVector<QVariant> m_otherValues {
 		/* [FontSizeMedium] */
 		16,
+		/* [MarginSmall] */
+		8,
+		/* [IconSizeMedium] */
+		32,
 	};
 };
 
