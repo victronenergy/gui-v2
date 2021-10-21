@@ -2,5 +2,22 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>components/CircularMultiGauge.qml</file>
+        <file>components/NavBar.qml</file>
+        <file>components/NavButton.qml</file>
+        <file>pages/BriefPage.qml</file>
+        <file>pages/Page.qml</file>
+        <file>images/brief.svg</file>
+        <file>pages/BriefMonitorPanel.qml</file>
+        <file>pages/LevelsPage.qml</file>
+        <file>pages/NotificationsPage.qml</file>
+        <file>pages/OverviewPage.qml</file>
+        <file>pages/SettingsPage.qml</file>
+        <file>components/Button.qml</file>
+        <file>components/Label.qml</file>
+        <file>images/levels.svg</file>
+        <file>images/notifications.svg</file>
+        <file>images/overview.svg</file>
+        <file>images/settings.svg</file>
+        <file>images/panel-toggle.svg</file>
     </qresource>
 </RCC>

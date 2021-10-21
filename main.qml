@@ -5,6 +5,8 @@
 import QtQuick
 import QtQuick.Window
 import Victron.VenusOS
+import "pages"
+import "components"
 
 Window {
 	id: root
@@ -16,20 +18,77 @@ Window {
 	//: Application title
 	//% "Venus OS GUI"
 	//~ Context only shown on desktop systems
-	title: qsTrId("venus_os-label-application_title")
+	title: qsTrId("venus_os_gui")
 
-	Text {
-		anchors.bottom: gauge.top
-		anchors.horizontalCenter: gauge.horizontalCenter
+	ListView {
+		id: pageStack
 
-		//: Gauge title
-		//% "Levels"
-		text: qsTrId("venus_os-label-gauge_levels")
+		width: root.width
+		height: root.height - navBar.height
+
+		orientation: Qt.Horizontal
+		highlightMoveDuration: 500  // TODO move into Theme if this is final
+
+		model: ListModel {
+			ListElement {
+				//% "Brief"
+				text: qsTrId("nav_brief")
+				icon: "qrc:/images/brief.svg"
+				url: "qrc:/pages/BriefPage.qml"
+			}
+
+			ListElement {
+				//% "Overview"
+				text: qsTrId("nav_overview")
+				icon: "qrc:/images/overview.svg"
+				url: "qrc:/pages/OverviewPage.qml"
+			}
+
+			ListElement {
+				//% "Levels"
+				text: qsTrId("nav_levels")
+				icon: "qrc:/images/levels.svg"
+				url: "qrc:/pages/LevelsPage.qml"
+			}
+
+			ListElement {
+				//% "Notifications"
+				text: qsTrId("nav_notifications")
+				icon: "qrc:/images/notifications.svg"
+				url: "qrc:/pages/NotificationsPage.qml"
+			}
+
+			ListElement {
+				//% "Settings"
+				text: qsTrId("nav_settings")
+				icon: "qrc:/images/settings.svg"
+				url: "qrc:/pages/SettingsPage.qml"
+			}
+		}
+
+		delegate: Loader {
+			id: pageDelegate
+
+			width: root.width
+			height: pageStack.height
+			source: model.url
+
+			Binding {
+				target: pageDelegate.item
+				property: 'isTopPage'
+				value: model.index === pageStack.currentIndex
+			}
+		}
 	}
-	CircularMultiGauge {
-		id: gauge
-		anchors.centerIn: parent
-		width: 100
-		height: 100
+
+	NavBar {
+		id: navBar
+
+		anchors.bottom: parent.bottom
+		model: pageStack.model
+
+		onButtonClicked: function (buttonIndex) {
+			pageStack.currentIndex = buttonIndex
+		}
 	}
 }

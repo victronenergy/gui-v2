@@ -46,6 +46,16 @@ int Theme::fontSizeMedium() const
 	return otherValue(FontSizeMedium).toInt();
 }
 
+int Theme::marginSmall() const
+{
+	return otherValue(MarginSmall).toInt();
+}
+
+int Theme::iconSizeMedium() const
+{
+	return otherValue(IconSizeMedium).toInt();
+}
+
 Theme::DisplayMode Theme::displayMode() const
 {
 	return m_displayMode;
