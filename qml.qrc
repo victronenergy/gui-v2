@@ -32,5 +32,11 @@
         <file>images/panel-toggled.svg</file>
         <file>images/sunny.svg</file>
         <file>images/settings.png</file>
+        <file>components/Arc.qml</file>
+        <file>components/ProgressArc.qml</file>
+        <file>images/battery.svg</file>
+        <file>images/blackWater.svg</file>
+        <file>images/freshWater.svg</file>
+        <file>images/tank.svg</file>
     </qresource>
 </RCC>
