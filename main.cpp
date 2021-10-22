@@ -27,6 +27,8 @@ int main(int argc, char *argv[])
 		});
 
 	/* components */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Arc.qml")),
+		"Victron.VenusOS", 2, 0, "Arc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Button.qml")),
 		"Victron.VenusOS", 2, 0, "Button");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularMultiGauge.qml")),
@@ -37,6 +39,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "NavBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavButton.qml")),
 		"Victron.VenusOS", 2, 0, "NavButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ProgressArc.qml")),
+		"Victron.VenusOS", 2, 0, "ProgressArc");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
 		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
