@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl
 import Victron.VenusOS
 
 MouseArea {
@@ -10,12 +11,13 @@ MouseArea {
 
 	property alias icon: buttonIcon
 	property alias text: buttonText.text
+	property alias color: buttonIcon.color
 
 	width: Math.max(buttonIcon.width*2, buttonText.width + Theme.marginSmall*2)
 	height: buttonText.y + buttonText.height
 	opacity: containsPress ? 0.5 : 1
 
-	Image {
+	ColorImage {
 		id: buttonIcon
 
 		anchors.horizontalCenter: parent.horizontalCenter
@@ -30,7 +32,7 @@ MouseArea {
 		anchors.horizontalCenter: parent.horizontalCenter
 
 		horizontalAlignment: Text.AlignHCenter
-		color: Theme.primaryFontColor
+		color: buttonIcon.color
 		font.pixelSize: Theme.fontSizeMedium
 	}
 }
