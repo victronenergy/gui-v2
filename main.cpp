@@ -10,6 +10,7 @@
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QQuickWindow>
+#include <QScreen>
 
 #include <QtDebug>
 
@@ -78,10 +79,17 @@ int main(int argc, char *argv[])
 	   before initial binding evaluation. */
 
 	component.completeCreate();
+
 #if defined(VENUS_DESKTOP_BUILD)
-	window->show();
+	const bool desktop(true);
 #else
-	window->showFullScreen();
+	const bool desktop(QGuiApplication::primaryScreen()->availableSize().height() > 600);
 #endif
+	if (desktop) {
+		window->show();
+	} else {
+		window->showFullScreen();
+	}
+
 	return app.exec();
 }
