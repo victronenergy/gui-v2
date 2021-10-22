@@ -41,6 +41,16 @@ QColor Theme::dimColor() const
 	return colorValue(m_displayMode, DimColor);
 }
 
+QColor Theme::primaryButtonColor() const
+{
+	return colorValue(m_displayMode, PrimaryButtonColor);
+}
+
+QColor Theme::secondaryButtonColor() const
+{
+	return colorValue(m_displayMode, SecondaryButtonColor);
+}
+
 int Theme::fontSizeMedium() const
 {
 	return otherValue(FontSizeMedium).toInt();
@@ -72,5 +82,7 @@ void Theme::setDisplayMode(Theme::DisplayMode mode)
 		emit secondaryFontColorChanged();
 		emit highlightColorChanged();
 		emit dimColorChanged();
+		emit primaryButtonColorChanged();
+		emit secondaryButtonColorChanged();
 	}
 }
