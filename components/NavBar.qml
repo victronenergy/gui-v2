@@ -18,14 +18,14 @@ Row {
 	Repeater {
 		id: buttonRepeater
 
-		property int activeIndex: 0
+		property int currentIndex: 0
 
 		delegate: NavButton {
 			text: model.text
 			icon.source: model.icon
-			color: buttonRepeater.activeIndex === model.index ? Theme.primaryButtonColor : Theme.secondaryButtonColor
+			color: buttonRepeater.currentIndex === model.index ? Theme.primaryFontColor : Theme.secondaryFontColor
 			onClicked: {
-				buttonRepeater.activeIndex = model.index
+				buttonRepeater.currentIndex = model.index
 				root.buttonClicked(model.index)
 			}
 		}
