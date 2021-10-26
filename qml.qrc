@@ -19,5 +19,7 @@
         <file>images/overview.svg</file>
         <file>images/settings.svg</file>
         <file>images/panel-toggle.svg</file>
+        <file>fonts/MuseoSans-500.otf</file>
+        <file>components/VenusFont.qml</file>
     </qresource>
 </RCC>

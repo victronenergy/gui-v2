@@ -6,7 +6,6 @@ import QtQuick
 import QtQuick.Window
 import Victron.VenusOS
 import "pages"
-import "components"
 
 Window {
 	id: root

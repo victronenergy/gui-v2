@@ -25,8 +25,6 @@ class Theme : public QObject
 	Q_PROPERTY(QColor secondaryFontColor READ secondaryFontColor NOTIFY secondaryFontColorChanged)
 	Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY highlightColorChanged)
 	Q_PROPERTY(QColor dimColor READ dimColor NOTIFY dimColorChanged)
-	Q_PROPERTY(QColor primaryButtonColor READ primaryButtonColor NOTIFY primaryButtonColorChanged)
-	Q_PROPERTY(QColor secondaryButtonColor READ secondaryButtonColor NOTIFY secondaryButtonColorChanged)
 	Q_PROPERTY(int fontSizeMedium READ fontSizeMedium CONSTANT)
 	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
 	Q_PROPERTY(int iconSizeMedium READ iconSizeMedium CONSTANT)
@@ -44,8 +42,6 @@ public:
 		SecondaryFontColor,
 		HighlightColor,
 		DimColor,
-		PrimaryButtonColor,
-		SecondaryButtonColor,
 	};
 	Q_ENUM(ColorProperty)
 
@@ -67,8 +63,6 @@ public:
 	QColor secondaryFontColor() const;
 	QColor highlightColor() const;
 	QColor dimColor() const;
-	QColor primaryButtonColor() const;
-	QColor secondaryButtonColor() const;
 
 	int fontSizeMedium() const;
 	int marginSmall() const;
@@ -81,8 +75,6 @@ Q_SIGNALS:
 	void secondaryFontColorChanged();
 	void highlightColorChanged();
 	void dimColorChanged();
-	void primaryButtonColorChanged();
-	void secondaryButtonColorChanged();
 
 private:
 	DisplayMode m_displayMode = Dark;
@@ -94,34 +86,26 @@ private:
 			/* [BackgroundColor] */
 			QVariant::fromValue<QColor>(QColor(255, 255, 255)),
 			/* [PrimaryFontColor] */
-			QVariant::fromValue<QColor>(QColor(0, 0, 0)),
+			QVariant::fromValue<QColor>(QColor(39, 38, 34)),
 			/* [SecondaryFontColor] */
-			QVariant::fromValue<QColor>(QColor(111, 111, 111)),
+			QVariant::fromValue<QColor>(QColor(150, 149, 145)),
 			/* [HighlightColor] */
 			QVariant::fromValue<QColor>(QColor(5, 111, 255)),
 			/* [DimColor] */
 			QVariant::fromValue<QColor>(QColor(5, 55, 122)),
-			/* [PrimaryButtonColor] */
-			QVariant::fromValue<QColor>(QColor(39, 38, 34)),
-			/* [SecondaryButtonColor] */
-			QVariant::fromValue<QColor>(QColor(150, 149, 145)),
 		},
 		/* [Dark] */
 		{
 			/* [BackgroundColor] */
 			QVariant::fromValue<QColor>(QColor(22, 22, 22)),
 			/* [PrimaryFontColor] */
-			QVariant::fromValue<QColor>(QColor(222, 222, 222)),
+			QVariant::fromValue<QColor>(QColor(255, 255, 255)),
 			/* [SecondaryFontColor] */
-			QVariant::fromValue<QColor>(QColor(111, 111, 111)),
+			QVariant::fromValue<QColor>(QColor(100, 99, 95)),
 			/* [HighlightColor] */
 			QVariant::fromValue<QColor>(QColor(5, 111, 255)),
 			/* [DimColor] */
 			QVariant::fromValue<QColor>(QColor(5, 55, 122)),
-			/* [PrimaryButtonColor] */
-			QVariant::fromValue<QColor>(QColor(255, 255, 255)),
-			/* [SecondaryButtonColor] */
-			QVariant::fromValue<QColor>(QColor(100, 99, 95)),
 		}
 	};
 

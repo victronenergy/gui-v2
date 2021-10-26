@@ -24,8 +24,22 @@ int main(int argc, char *argv[])
 		[](QQmlEngine *, QJSEngine *) -> QObject* {
 			return new Victron::VenusOS::Theme;
 		});
+
+	/* components */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Button.qml")),
+		"Victron.VenusOS", 2, 0, "Button");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularMultiGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Label.qml")),
+		"Victron.VenusOS", 2, 0, "Label");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavBar.qml")),
+		"Victron.VenusOS", 2, 0, "NavBar");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavButton.qml")),
+		"Victron.VenusOS", 2, 0, "NavButton");
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
+		"Victron.VenusOS", 2, 0, "VenusFont");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/VenusText.qml")),
+		"Victron.VenusOS", 2, 0, "VenusText");
 
 	QGuiApplication app(argc, argv);
 
