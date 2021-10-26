@@ -7,5 +7,6 @@ import Victron.VenusOS
 
 Text {
 	color: Theme.primaryFontColor
+	font.family: VenusFont.normal.name
 	font.pixelSize: Theme.fontSizeMedium
 }

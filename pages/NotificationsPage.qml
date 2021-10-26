@@ -5,8 +5,6 @@
 import QtQuick
 import Victron.VenusOS
 
-import "../components"
-
 Page {
 	id: root
 
