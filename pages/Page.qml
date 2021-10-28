@@ -10,7 +10,5 @@ Rectangle {
 
 	property bool isTopPage
 
-	width: parent.width
-	height: parent.height
 	color: Theme.backgroundColor
 }
