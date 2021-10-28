@@ -21,5 +21,16 @@
         <file>images/panel-toggle.svg</file>
         <file>fonts/MuseoSans-500.otf</file>
         <file>components/VenusFont.qml</file>
+        <file>images/cloud.svg</file>
+        <file>images/rain.svg</file>
+        <file>images/scatteredcloud.svg</file>
+        <file>components/WeatherDetails.qml</file>
+        <file>images/consumption.svg</file>
+        <file>images/generator.svg</file>
+        <file>images/grid.svg</file>
+        <file>images/solaryield.svg</file>
+        <file>images/panel-toggled.svg</file>
+        <file>images/sunny.svg</file>
+        <file>images/settings.png</file>
     </qresource>
 </RCC>

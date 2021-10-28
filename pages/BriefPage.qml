@@ -12,15 +12,26 @@ Page {
 		id: gauge
 
 		x: sidePanel.x/2 - width/2
-		y: root.height/2 - height/2
-		width: 300
-		height: 300
+		anchors {
+			top: parent.top
+			topMargin: 56
+		}
+		width: 315
+		height: 320
 	}
 
 	Button {
-		x: sidePanel.x - width
-		y: Theme.marginSmall
-		icon.source: "qrc:/images/panel-toggle.svg"
+		id: button
+
+		anchors {
+			top: parent.top
+			topMargin: 15
+			right: parent.right
+			rightMargin: 27
+		}
+		width: icon.implicitWidth
+		height: icon.implicitHeight
+		icon.source: sidePanel.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
 
 		onClicked: {
 			sidePanel.state = (sidePanel.state == '') ? 'hidden' : ''
@@ -30,17 +41,16 @@ Page {
 	BriefMonitorPanel {
 		id: sidePanel
 
+		anchors.top: button.bottom
 		x: root.width
-		width: root.width / 3
-		height: root.height
-
 		opacity: 0
-
+		width: 240
+		height: 367
 		states: State {
 			name: 'hidden'
 			PropertyChanges {
 				target: sidePanel
-				x: root.width - sidePanel.width
+				x: root.width - sidePanel.width - Theme.horizontalPageMargin
 				opacity: 1
 			}
 		}

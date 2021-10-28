@@ -10,8 +10,8 @@ import "pages"
 Window {
 	id: root
 
-	width: 1024
-	height: 768
+	width: 800
+	height: 480
 	color: Theme.backgroundColor
 
 	//: Application title
@@ -60,7 +60,7 @@ Window {
 			ListElement {
 				//% "Settings"
 				text: qsTrId("nav_settings")
-				icon: "qrc:/images/settings.svg"
+				icon: "qrc:/images/settings.png"
 				url: "qrc:/pages/SettingsPage.qml"
 			}
 		}
@@ -84,6 +84,7 @@ Window {
 		id: navBar
 
 		anchors.bottom: parent.bottom
+		anchors.bottomMargin: 3
 		model: pageStack.model
 
 		onButtonClicked: function (buttonIndex) {

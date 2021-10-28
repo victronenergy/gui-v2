@@ -13,7 +13,7 @@ Row {
 	signal buttonClicked(buttonIndex: int)
 
 	anchors.horizontalCenter: parent.horizontalCenter
-	height: 100
+	spacing: 32
 
 	Repeater {
 		id: buttonRepeater

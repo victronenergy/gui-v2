@@ -25,8 +25,10 @@ class Theme : public QObject
 	Q_PROPERTY(QColor secondaryFontColor READ secondaryFontColor NOTIFY secondaryFontColorChanged)
 	Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY highlightColorChanged)
 	Q_PROPERTY(QColor dimColor READ dimColor NOTIFY dimColorChanged)
+	Q_PROPERTY(QColor weatherColor READ weatherColor CONSTANT)
 	Q_PROPERTY(int fontSizeMedium READ fontSizeMedium CONSTANT)
 	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
+	Q_PROPERTY(int horizontalPageMargin READ horizontalPageMargin CONSTANT)
 	Q_PROPERTY(int iconSizeMedium READ iconSizeMedium CONSTANT)
 
 public:
@@ -48,7 +50,9 @@ public:
 	enum OtherProperty {
 		FontSizeMedium = 0,
 		MarginSmall,
-		IconSizeMedium
+		HorizontalPageMargin,
+		IconSizeMedium,
+		WeatherColor, /* The color of the weather details is the same in both Light and Dark modes */
 	};
 	Q_ENUM(OtherProperty)
 
@@ -63,9 +67,11 @@ public:
 	QColor secondaryFontColor() const;
 	QColor highlightColor() const;
 	QColor dimColor() const;
+	QColor weatherColor() const;
 
 	int fontSizeMedium() const;
 	int marginSmall() const;
+	int horizontalPageMargin() const;
 	int iconSizeMedium() const;
 
 Q_SIGNALS:
@@ -97,7 +103,7 @@ private:
 		/* [Dark] */
 		{
 			/* [BackgroundColor] */
-			QVariant::fromValue<QColor>(QColor(22, 22, 22)),
+			QVariant::fromValue<QColor>(QColor(00, 00, 00)),
 			/* [PrimaryFontColor] */
 			QVariant::fromValue<QColor>(QColor(255, 255, 255)),
 			/* [SecondaryFontColor] */
@@ -112,11 +118,15 @@ private:
 	/* these values do not depend on the currently selected displayMode */
 	QVector<QVariant> m_otherValues {
 		/* [FontSizeMedium] */
-		16,
+		18,
 		/* [MarginSmall] */
-		8,
+		7,
+		/* [HorizontalPageMargin] */
+		24,
 		/* [IconSizeMedium] */
 		32,
+		/* [WeatherColor] - The color of the weather details is the same in both Light and Dark modes */
+		QVariant::fromValue<QColor>(QColor(150, 149, 145)),
 	};
 };
 

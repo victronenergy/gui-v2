@@ -8,7 +8,7 @@ import Victron.VenusOS
 Button {
 	id: root
 
-	width: Theme.iconSizeMedium * 4
+	width: 112
 	icon.width: Theme.iconSizeMedium
 	icon.height: Theme.iconSizeMedium
 }

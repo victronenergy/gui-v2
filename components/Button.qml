@@ -3,7 +3,8 @@
 */
 
 import QtQuick
-import QtQuick.Controls.impl
+import QtQuick.Controls as C
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 MouseArea {
@@ -11,17 +12,21 @@ MouseArea {
 
 	property alias icon: buttonIcon
 	property alias text: buttonText.text
-	property alias color: buttonIcon.color
+	property var color
 
-	width: Math.max(buttonIcon.width*2, buttonText.width + Theme.marginSmall*2)
 	height: buttonText.y + buttonText.height
-	opacity: containsPress ? 0.5 : 1
 
-	ColorImage {
+	CP.ColorImage {
 		id: buttonIcon
 
 		anchors.horizontalCenter: parent.horizontalCenter
-		fillMode: Image.PreserveAspectFit
+		fillMode: Image.Pad
+		color: root.color
+		Behavior on color {
+			ColorAnimation {
+				duration: 100 // TODO move into Theme if this is final
+			}
+		}
 	}
 
 	Label {
