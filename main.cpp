@@ -38,6 +38,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "NavButton");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
 		"Victron.VenusOS", 2, 0, "VenusFont");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
+		"Victron.VenusOS", 2, 0, "WeatherDetails");
 
 	QGuiApplication app(argc, argv);
 

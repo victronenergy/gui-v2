@@ -41,6 +41,11 @@ QColor Theme::dimColor() const
 	return colorValue(m_displayMode, DimColor);
 }
 
+QColor Theme::weatherColor() const
+{
+	return otherValue(WeatherColor).value<QColor>();
+}
+
 int Theme::fontSizeMedium() const
 {
 	return otherValue(FontSizeMedium).toInt();
@@ -49,6 +54,11 @@ int Theme::fontSizeMedium() const
 int Theme::marginSmall() const
 {
 	return otherValue(MarginSmall).toInt();
+}
+
+int Theme::horizontalPageMargin() const
+{
+	return otherValue(HorizontalPageMargin).toInt();
 }
 
 int Theme::iconSizeMedium() const
