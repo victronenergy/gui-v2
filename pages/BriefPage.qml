@@ -66,9 +66,9 @@ Page {
 
 	ListModel {
 		id: dataModel
-		ListElement { value: 15; text: 'Fuel'; icon: '/images/tank.svg' }
-		ListElement { value: 60; text: 'Battery'; icon: '/images/battery.svg' }
-		ListElement { value: 72; text: 'Fresh water'; icon: '/images/freshWater.svg' }
-		ListElement { value: 39; text: 'Black water'; icon: '/images/blackWater.svg' }
+		ListElement { value: 15; text: 'Fuel'; icon: '/images/tank.svg'; status: Theme.Ok }
+		ListElement { value: 60; text: 'Battery'; icon: '/images/battery.svg'; status: Theme.Warning }
+		ListElement { value: 92; text: 'Fresh water'; icon: '/images/freshWater.svg'; status: Theme.Critical }
+		ListElement { value: 39; text: 'Black water'; icon: '/images/blackWater.svg'; status: Theme.Ok }
 	}
 }

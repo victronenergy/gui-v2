@@ -28,6 +28,8 @@ Item {
 				anchors.centerIn: parent
 				w: width
 				value: model.value
+				progressColor: Theme.statusColorValue(model.status)
+				remainderColor: Theme.statusColorValue(model.status, true)
 				strokeWidth: gauges.strokeWidth
 			}
 		}

@@ -26,6 +26,12 @@ class Theme : public QObject
 	Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY highlightColorChanged)
 	Q_PROPERTY(QColor dimColor READ dimColor NOTIFY dimColorChanged)
 	Q_PROPERTY(QColor weatherColor READ weatherColor CONSTANT)
+	Q_PROPERTY(QColor okColor READ okColor NOTIFY okColorChanged)
+	Q_PROPERTY(QColor okSecondaryColor READ okSecondaryColor NOTIFY okSecondaryColorChanged)
+	Q_PROPERTY(QColor warningColor READ warningColor NOTIFY warningColorChanged)
+	Q_PROPERTY(QColor warningSecondaryColor READ warningSecondaryColor NOTIFY warningSecondaryColorChanged)
+	Q_PROPERTY(QColor criticalColor READ criticalColor NOTIFY criticalColorChanged)
+	Q_PROPERTY(QColor criticalSecondaryColor READ criticalSecondaryColor NOTIFY criticalSecondaryColorChanged)
 	Q_PROPERTY(int fontSizeMedium READ fontSizeMedium CONSTANT)
 	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
 	Q_PROPERTY(int horizontalPageMargin READ horizontalPageMargin CONSTANT)
@@ -44,6 +50,12 @@ public:
 		SecondaryFontColor,
 		HighlightColor,
 		DimColor,
+		OkColor,
+		OkSecondaryColor,
+		WarningColor,
+		WarningSecondaryColor,
+		CriticalColor,
+		CriticalSecondaryColor
 	};
 	Q_ENUM(ColorProperty)
 
@@ -56,8 +68,17 @@ public:
 	};
 	Q_ENUM(OtherProperty)
 
+	enum StatusLevel {
+		Ok = 0,
+		Warning,
+		Critical
+	};
+	Q_ENUM(StatusLevel)
+
 	Q_INVOKABLE QColor colorValue(DisplayMode mode, ColorProperty role) const;
 	Q_INVOKABLE QVariant otherValue(OtherProperty role) const;
+
+	Q_INVOKABLE QColor statusColorValue(StatusLevel level, bool secondaryColor = false) const;
 
 	DisplayMode displayMode() const;
 	void setDisplayMode(DisplayMode mode);
@@ -68,6 +89,12 @@ public:
 	QColor highlightColor() const;
 	QColor dimColor() const;
 	QColor weatherColor() const;
+	QColor okColor() const;
+	QColor okSecondaryColor() const;
+	QColor warningColor() const;
+	QColor warningSecondaryColor() const;
+	QColor criticalColor() const;
+	QColor criticalSecondaryColor() const;
 
 	int fontSizeMedium() const;
 	int marginSmall() const;
@@ -81,16 +108,22 @@ Q_SIGNALS:
 	void secondaryFontColorChanged();
 	void highlightColorChanged();
 	void dimColorChanged();
+	void okColorChanged();
+	void okSecondaryColorChanged();
+	void warningColorChanged();
+	void warningSecondaryColorChanged();
+	void criticalColorChanged();
+	void criticalSecondaryColorChanged();
 
 private:
-	DisplayMode m_displayMode = Dark;
+	DisplayMode m_displayMode =  Dark;
 
 	/* these values depend on the currently selected displayMode */
 	QVector<QVector<QVariant> > m_colorValues {
 		/* [Light] */
 		{
 			/* [BackgroundColor] */
-			QVariant::fromValue<QColor>(QColor(255, 255, 255)),
+			QVariant::fromValue<QColor>(QColor(230, 229, 225)),
 			/* [PrimaryFontColor] */
 			QVariant::fromValue<QColor>(QColor(39, 38, 34)),
 			/* [SecondaryFontColor] */
@@ -99,6 +132,18 @@ private:
 			QVariant::fromValue<QColor>(QColor(5, 111, 255)),
 			/* [DimColor] */
 			QVariant::fromValue<QColor>(QColor(5, 55, 122)),
+			/* [OkColor] */
+			QVariant::fromValue<QColor>(QColor(56, 125, 197)),
+			/* [OkSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(195, 208, 219)),
+			/* [WarningColor] */
+			QVariant::fromValue<QColor>(QColor(240, 150, 46)),
+			/* [WarningSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(232, 213, 189)),
+			/* [CriticalColor] */
+			QVariant::fromValue<QColor>(QColor(243, 92, 88)),
+			/* [CriticalSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(233, 202, 198)),
 		},
 		/* [Dark] */
 		{
@@ -112,6 +157,18 @@ private:
 			QVariant::fromValue<QColor>(QColor(5, 111, 255)),
 			/* [DimColor] */
 			QVariant::fromValue<QColor>(QColor(5, 55, 122)),
+			/* [OkColor] */
+			QVariant::fromValue<QColor>(QColor(56, 125, 197)),
+			/* [OkSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(17, 37, 59)),
+			/* [WarningColor] */
+			QVariant::fromValue<QColor>(QColor(240, 150, 46)),
+			/* [WarningSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(72, 45, 14)),
+			/* [CriticalColor] */
+			QVariant::fromValue<QColor>(QColor(243, 92, 88)),
+			/* [CriticalSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(73, 28, 26)),
 		}
 	};
 
