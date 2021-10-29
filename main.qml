@@ -25,6 +25,7 @@ Window {
 		width: root.width
 		height: root.height - navBar.height
 
+		interactive: false
 		orientation: Qt.Horizontal
 		highlightMoveDuration: 500  // TODO move into Theme if this is final
 
