@@ -10,9 +10,36 @@ import Victron.VenusOS
 Item {
 	id: gauges
 
+	enum ValueType {
+		RisingPercentage,
+		FallingPercentage
+	}
+
 	property var model
 	readonly property real step: Math.round(height * 0.18)
 	readonly property real strokeWidth: Math.round(step * 0.3)
+
+	function statusFromRisingValue(value) {
+		if (value >= 85) return Theme.Critical
+		if (value >= 60) return Theme.Warning
+		return Theme.Ok
+	}
+
+	function statusFromFallingValue(value) {
+		if (value <= 15) return Theme.Critical
+		if (value <= 40) return Theme.Warning
+		return Theme.Ok
+	}
+
+	function getValueStatus(value, valueType) {
+		if (valueType === CircularMultiGauge.RisingPercentage) {
+			return statusFromRisingValue(value)
+		}
+		if (valueType === CircularMultiGauge.FallingPercentage) {
+			return statusFromFallingValue(value)
+		}
+		return Theme.Ok
+	}
 
 	Item {
 		// Antialiasing
@@ -23,11 +50,15 @@ Item {
 		Repeater {
 			model: gauges.model
 			delegate: ProgressArc {
+				property int status: getValueStatus(model.value, model.valueType)
+				
 				width: gauges.width - (strokeWidth + index*step)
 				height: width
 				anchors.centerIn: parent
 				w: width
 				value: model.value
+				progressColor: Theme.statusColorValue(status)
+				remainderColor: Theme.statusColorValue(status, true)
 				strokeWidth: gauges.strokeWidth
 			}
 		}
