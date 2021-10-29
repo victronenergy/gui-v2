@@ -66,9 +66,10 @@ Page {
 
 	ListModel {
 		id: dataModel
-		ListElement { value: 15; text: 'Fuel'; icon: '/images/tank.svg' }
-		ListElement { value: 60; text: 'Battery'; icon: '/images/battery.svg' }
-		ListElement { value: 72; text: 'Fresh water'; icon: '/images/freshWater.svg' }
-		ListElement { value: 39; text: 'Black water'; icon: '/images/blackWater.svg' }
+
+		ListElement { value: 10; text: 'Fuel'; icon: '/images/tank.svg'; valueType: CircularMultiGauge.FallingPercentage }
+		ListElement { value: 60; text: 'Battery'; icon: '/images/battery.svg'; valueType: CircularMultiGauge.FallingPercentage }
+		ListElement { value: 80; text: 'Fresh water'; icon: '/images/freshWater.svg'; valueType: CircularMultiGauge.FallingPercentage }
+		ListElement { value: 20; text: 'Black water'; icon: '/images/blackWater.svg'; valueType: CircularMultiGauge.FallingPercentage }
 	}
 }
