@@ -11,27 +11,27 @@
         <extra-Context>only shown on desktop systems</extra-Context>
     </message>
     <message id="nav_brief">
-        <location filename="../main.qml" line="34"/>
+        <location filename="../main.qml" line="35"/>
         <source>Brief</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="nav_overview">
-        <location filename="../main.qml" line="41"/>
+        <location filename="../main.qml" line="42"/>
         <source>Overview</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="nav_levels">
-        <location filename="../main.qml" line="48"/>
+        <location filename="../main.qml" line="49"/>
         <source>Levels</source>
         <translation>Niveaux</translation>
     </message>
     <message id="nav_notifications">
-        <location filename="../main.qml" line="55"/>
+        <location filename="../main.qml" line="56"/>
         <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="nav_settings">
-        <location filename="../main.qml" line="62"/>
+        <location filename="../main.qml" line="63"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
