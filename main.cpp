@@ -2,6 +2,7 @@
 ** Copyright (C) 2021 Victron Energy B.V.
 */
 
+#include "language.h"
 #include "logging.h"
 #include "theme.h"
 
@@ -62,6 +63,11 @@ int main(int argc, char *argv[])
 	}
 
 	QQmlEngine engine;
+	qmlRegisterSingletonType<Victron::VenusOS::Language>(
+		"Victron.VenusOS", 2, 0, "Language",
+		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
+			return new Victron::VenusOS::Language(engine);
+		});
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
 
 	if (component.isError()) {

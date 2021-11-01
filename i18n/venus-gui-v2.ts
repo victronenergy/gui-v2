@@ -35,5 +35,17 @@
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="settings_toggle_display_mode">
+        <location filename="../pages/SettingsPage.qml" line="28"/>
+        <source>Toggle Display Mode</source>
+        <extracomment>Change between light and dark modes</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings_toggle_language">
+        <location filename="../pages/SettingsPage.qml" line="36"/>
+        <source>Toggle Language</source>
+        <extracomment>Select a new language</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
