@@ -133,3 +133,18 @@ void Theme::setDisplayMode(Theme::DisplayMode mode)
 		emit criticalSecondaryColorChanged();
 	}
 }
+
+Theme::ScreenSize Theme::screenSize() const
+{
+	return m_screenSize;
+}
+
+void Theme::setScreenSize(ScreenSize screenSize)
+{
+	if (screenSize == m_screenSize)
+	{
+		return;
+	}
+	m_screenSize = screenSize;
+	emit screenSizeChanged();
+}
