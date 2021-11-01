@@ -34,6 +34,8 @@ list(APPEND SOURCES
     main.cpp
     theme.h
     theme.cpp
+    language.h
+    language.cpp
     logging.h
     ${QML_RESOURCES}
 )
