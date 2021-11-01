@@ -10,8 +10,8 @@ import "pages"
 Window {
 	id: root
 
-	width: 800
-	height: 480
+	width: [800, 1024][Theme.screenSize]
+	height: [480, 600][Theme.screenSize]
 	color: Theme.backgroundColor
 
 	//: Application title
@@ -24,7 +24,6 @@ Window {
 
 		width: root.width
 		height: root.height - navBar.height
-
 		interactive: false
 		orientation: Qt.Horizontal
 		highlightMoveDuration: 500  // TODO move into Theme if this is final

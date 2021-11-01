@@ -36,6 +36,7 @@ class Theme : public QObject
 	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
 	Q_PROPERTY(int horizontalPageMargin READ horizontalPageMargin CONSTANT)
 	Q_PROPERTY(int iconSizeMedium READ iconSizeMedium CONSTANT)
+	Q_PROPERTY(ScreenSize screenSize READ screenSize WRITE setScreenSize NOTIFY screenSizeChanged)
 
 public:
 	enum DisplayMode {
@@ -43,6 +44,12 @@ public:
 		Dark,
 	};
 	Q_ENUM(DisplayMode)
+
+	enum ScreenSize {
+		FiveInch800x480,
+		SevenInch1024x600
+	};
+	Q_ENUM(ScreenSize)
 
 	enum ColorProperty {
 		BackgroundColor = 0,
@@ -82,6 +89,7 @@ public:
 
 	DisplayMode displayMode() const;
 	void setDisplayMode(DisplayMode mode);
+	void setScreenSize(ScreenSize screenSize);
 
 	QColor backgroundColor() const;
 	QColor primaryFontColor() const;
@@ -100,6 +108,7 @@ public:
 	int marginSmall() const;
 	int horizontalPageMargin() const;
 	int iconSizeMedium() const;
+	ScreenSize screenSize() const;
 
 Q_SIGNALS:
 	void displayModeChanged();
@@ -114,9 +123,11 @@ Q_SIGNALS:
 	void warningSecondaryColorChanged();
 	void criticalColorChanged();
 	void criticalSecondaryColorChanged();
+	void screenSizeChanged();
 
 private:
 	DisplayMode m_displayMode =  Dark;
+	ScreenSize m_screenSize = FiveInch800x480;
 
 	/* these values depend on the currently selected displayMode */
 	QVector<QVector<QVariant> > m_colorValues {
