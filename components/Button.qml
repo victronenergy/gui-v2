@@ -15,6 +15,8 @@ MouseArea {
 	property var color
 
 	height: buttonText.y + buttonText.height
+	implicitHeight: buttonText.height + (buttonIcon.height ? (buttonIcon.height + Theme.marginSmall) : 0)
+	implicitWidth: Math.max(buttonText.implicitWidth, buttonIcon.implicitWidth)
 
 	CP.ColorImage {
 		id: buttonIcon
@@ -33,7 +35,7 @@ MouseArea {
 		id: buttonText
 
 		anchors.top: buttonIcon.bottom
-		anchors.topMargin: Theme.marginSmall
+		anchors.topMargin: buttonIcon.height ? Theme.marginSmall : 0
 		anchors.horizontalCenter: parent.horizontalCenter
 
 		horizontalAlignment: Text.AlignHCenter

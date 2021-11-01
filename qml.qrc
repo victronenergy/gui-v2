@@ -4,6 +4,7 @@
         <file>components/CircularMultiGauge.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
+        <file>components/NavContainer.qml</file>
         <file>pages/BriefPage.qml</file>
         <file>pages/Page.qml</file>
         <file>images/brief.svg</file>

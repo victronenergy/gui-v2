@@ -109,6 +109,17 @@ int Theme::iconSizeMedium() const
 	return otherValue(IconSizeMedium).toInt();
 }
 
+qreal Theme::scaleFactor() const
+{
+	return otherValue(ScaleFactor).toReal();
+}
+
+void Theme::setScaleFactor(qreal f)
+{
+	m_otherValues[ScaleFactor] = QVariant::fromValue<qreal>(f);
+	emit scaleFactorChanged();
+}
+
 Theme::DisplayMode Theme::displayMode() const
 {
 	return m_displayMode;
@@ -133,3 +144,5 @@ void Theme::setDisplayMode(Theme::DisplayMode mode)
 		emit criticalSecondaryColorChanged();
 	}
 }
+
+

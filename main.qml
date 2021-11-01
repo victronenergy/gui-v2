@@ -10,8 +10,8 @@ import "pages"
 Window {
 	id: root
 
-	width: 800
-	height: 480
+	width: Theme.scaleFactor == 1.0 ? 800 : 1024
+	height: Theme.scaleFactor == 1.0 ? 480 : 600
 	color: Theme.backgroundColor
 
 	//: Application title
@@ -19,77 +19,23 @@ Window {
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
 
-	ListView {
-		id: pageStack
+	Item {
+		id: offsetItem
 
-		width: root.width
-		height: root.height - navBar.height
+		x: Theme.scaleFactor == 1.0 ? 0 : 12
+		width: Theme.scaleFactor == 1.0 ? 800 : 1000
+		height: Theme.scaleFactor == 1.0 ? 480 : 600
 
-		interactive: false
-		orientation: Qt.Horizontal
-		highlightMoveDuration: 500  // TODO move into Theme if this is final
+		NavContainer {
+			id: scaleItem
 
-		model: ListModel {
-			ListElement {
-				//% "Brief"
-				text: qsTrId("nav_brief")
-				icon: "qrc:/images/brief.svg"
-				url: "qrc:/pages/BriefPage.qml"
-			}
+			width: 800
+			height: 480
 
-			ListElement {
-				//% "Overview"
-				text: qsTrId("nav_overview")
-				icon: "qrc:/images/overview.svg"
-				url: "qrc:/pages/OverviewPage.qml"
-			}
-
-			ListElement {
-				//% "Levels"
-				text: qsTrId("nav_levels")
-				icon: "qrc:/images/levels.svg"
-				url: "qrc:/pages/LevelsPage.qml"
-			}
-
-			ListElement {
-				//% "Notifications"
-				text: qsTrId("nav_notifications")
-				icon: "qrc:/images/notifications.svg"
-				url: "qrc:/pages/NotificationsPage.qml"
-			}
-
-			ListElement {
-				//% "Settings"
-				text: qsTrId("nav_settings")
-				icon: "qrc:/images/settings.png"
-				url: "qrc:/pages/SettingsPage.qml"
-			}
-		}
-
-		delegate: Loader {
-			id: pageDelegate
-
-			width: root.width
-			height: pageStack.height
-			source: model.url
-
-			Binding {
-				target: pageDelegate.item
-				property: 'isTopPage'
-				value: model.index === pageStack.currentIndex
-			}
-		}
-	}
-
-	NavBar {
-		id: navBar
-
-		anchors.bottom: parent.bottom
-		anchors.bottomMargin: 3
-		model: pageStack.model
-
-		onButtonClicked: function (buttonIndex) {
-			pageStack.currentIndex = buttonIndex
+			scale: Theme.scaleFactor
+			/* Why are the following required? */
+			x: Theme.scaleFactor == 1.0 ? 0 : 100
+			y: Theme.scaleFactor == 1.0 ? 0 : 60
 		}
 	}
 }

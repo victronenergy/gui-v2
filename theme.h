@@ -10,6 +10,8 @@
 #include <QtCore/QVariant>
 #include <QtCore/QVector>
 #include <QtGui/QColor>
+#include <QtGui/QGuiApplication>
+#include <QtGui/QScreen>
 
 namespace Victron {
 
@@ -36,6 +38,8 @@ class Theme : public QObject
 	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
 	Q_PROPERTY(int horizontalPageMargin READ horizontalPageMargin CONSTANT)
 	Q_PROPERTY(int iconSizeMedium READ iconSizeMedium CONSTANT)
+
+	Q_PROPERTY(qreal scaleFactor READ scaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged)
 
 public:
 	enum DisplayMode {
@@ -65,6 +69,7 @@ public:
 		HorizontalPageMargin,
 		IconSizeMedium,
 		WeatherColor, /* The color of the weather details is the same in both Light and Dark modes */
+		ScaleFactor,
 	};
 	Q_ENUM(OtherProperty)
 
@@ -101,6 +106,9 @@ public:
 	int horizontalPageMargin() const;
 	int iconSizeMedium() const;
 
+	qreal scaleFactor() const;
+	void setScaleFactor(qreal f);
+
 Q_SIGNALS:
 	void displayModeChanged();
 	void backgroundColorChanged();
@@ -114,6 +122,7 @@ Q_SIGNALS:
 	void warningSecondaryColorChanged();
 	void criticalColorChanged();
 	void criticalSecondaryColorChanged();
+	void scaleFactorChanged();
 
 private:
 	DisplayMode m_displayMode =  Dark;
@@ -184,6 +193,8 @@ private:
 		32,
 		/* [WeatherColor] - The color of the weather details is the same in both Light and Dark modes */
 		QVariant::fromValue<QColor>(QColor(150, 149, 145)),
+		/* [ScaleFactor] */
+		QGuiApplication::primaryScreen()->availableSize().height() >= 600 ? 1.25 : 1.0,
 	};
 };
 
