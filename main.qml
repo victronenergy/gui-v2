@@ -85,7 +85,6 @@ Window {
 		id: navBar
 
 		anchors.bottom: parent.bottom
-		anchors.bottomMargin: 3
 		model: pageStack.model
 
 		onButtonClicked: function (buttonIndex) {
