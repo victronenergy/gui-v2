@@ -14,12 +14,20 @@ MouseArea {
 	property alias text: buttonText.text
 	property var color
 
-	height: buttonText.y + buttonText.height
+	property int topSpacing: Theme.marginSmall
+	property int interSpacing: Theme.marginSmall
+	property int bottomSpacing: Theme.marginSmall
+	property int horizontalSpacing: Theme.marginSmall
+
+	implicitHeight: topSpacing + buttonIcon.height + (buttonIcon.height ? interSpacing : 0) + buttonText.height + bottomSpacing
+	implicitWidth: Math.max(buttonText.implicitWidth, buttonIcon.implicitWidth) + 2*horizontalSpacing
 
 	CP.ColorImage {
 		id: buttonIcon
 
 		anchors.horizontalCenter: parent.horizontalCenter
+		y: buttonIcon.height ? root.topSpacing : 0
+
 		fillMode: Image.Pad
 		color: root.color
 		Behavior on color {
@@ -32,9 +40,11 @@ MouseArea {
 	Label {
 		id: buttonText
 
-		anchors.top: buttonIcon.bottom
-		anchors.topMargin: Theme.marginSmall
-		anchors.horizontalCenter: parent.horizontalCenter
+		anchors {
+			top: buttonIcon.bottom
+			topMargin: root.interSpacing
+			horizontalCenter: parent.horizontalCenter
+		}
 
 		horizontalAlignment: Text.AlignHCenter
 		color: buttonIcon.color
