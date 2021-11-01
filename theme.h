@@ -84,6 +84,8 @@ public:
 
 	Q_INVOKABLE QColor colorValue(DisplayMode mode, ColorProperty role) const;
 	Q_INVOKABLE QVariant otherValue(OtherProperty role) const;
+	Q_INVOKABLE QString displayModeToString(DisplayMode mode) const;
+	Q_INVOKABLE QString screenSizeToString(ScreenSize screenSize) const;
 
 	Q_INVOKABLE QColor statusColorValue(StatusLevel level, bool secondaryColor = false) const;
 

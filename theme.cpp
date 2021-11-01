@@ -16,6 +16,16 @@ QVariant Theme::otherValue(OtherProperty role) const
 	return m_otherValues[role];
 }
 
+Q_INVOKABLE QString Theme::displayModeToString(DisplayMode mode) const
+{
+	return QVariant::fromValue(mode).toString();
+}
+
+Q_INVOKABLE QString Theme::screenSizeToString(ScreenSize screenSize) const
+{
+	return QVariant::fromValue(screenSize).toString();
+}
+
 QColor Theme::statusColorValue(StatusLevel level, bool secondaryColor) const
 {
 	switch (level) {
@@ -141,10 +151,8 @@ Theme::ScreenSize Theme::screenSize() const
 
 void Theme::setScreenSize(ScreenSize screenSize)
 {
-	if (screenSize == m_screenSize)
-	{
-		return;
+	if (screenSize != m_screenSize)	{
+		m_screenSize = screenSize;
+		emit screenSizeChanged();
 	}
-	m_screenSize = screenSize;
-	emit screenSizeChanged();
 }
