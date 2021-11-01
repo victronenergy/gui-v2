@@ -30,6 +30,11 @@ Page {
 			right: parent.right
 			rightMargin: 27
 		}
+
+		topSpacing: 0
+		bottomSpacing: 0
+		horizontalSpacing: 0
+
 		width: icon.implicitWidth
 		height: icon.implicitHeight
 		icon.source: sidePanel.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
