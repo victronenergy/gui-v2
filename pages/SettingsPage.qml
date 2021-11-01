@@ -15,15 +15,30 @@ Page {
 	}
 
 	Button {
+		id: scaleButton
+
 		anchors {
 			topMargin: Theme.horizontalPageMargin
 			top: label.bottom
 			horizontalCenter: parent.horizontalCenter
 		}
 
-		width: implicitWidth; height: implicitHeight
 		text: "Toggle Scale"
 		color: Theme.scaleFactor == 1.0 ? Theme.primaryFontColor : Theme.okColor
 		onClicked: Theme.scaleFactor = (Theme.scaleFactor == 1.0 ? 1.25 : 1.0)
+	}
+
+	Button {
+		id: displayModeButton
+
+		anchors {
+			topMargin: Theme.horizontalPageMargin
+			top: scaleButton.bottom
+			horizontalCenter: parent.horizontalCenter
+		}
+
+		text: "Toggle Display Mode"
+		color: Theme.displayMode == Theme.Dark ? Theme.primaryFontColor : Theme.okColor
+		onClicked: Theme.displayMode = (Theme.displayMode == Theme.Dark ? Theme.Light : Theme.Dark)
 	}
 }
