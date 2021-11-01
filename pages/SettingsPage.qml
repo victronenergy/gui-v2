@@ -41,4 +41,18 @@ Page {
 		color: Theme.displayMode == Theme.Dark ? Theme.primaryFontColor : Theme.okColor
 		onClicked: Theme.displayMode = (Theme.displayMode == Theme.Dark ? Theme.Light : Theme.Dark)
 	}
+
+	Button {
+		id: languageButton
+
+		anchors {
+			topMargin: Theme.horizontalPageMargin
+			top: displayModeButton.bottom
+			horizontalCenter: parent.horizontalCenter
+		}
+
+		text: "Toggle Language"
+		color: Language.current == "eng" ? Theme.primaryFontColor : Theme.okColor
+		onClicked: Language.current = (Language.current == "eng" ? "fra" : "eng")
+	}
 }
