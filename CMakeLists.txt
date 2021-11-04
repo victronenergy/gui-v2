@@ -15,14 +15,14 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml LinguistTools)
+find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools)
 if (NOT ${Qt6_FOUND})
     # cmake can't automatically find Qt 6.2 on Ubuntu Linux, give it a hint:
     if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
         list(APPEND CMAKE_PREFIX_PATH "/opt/Qt/6.2.0/gcc_64/lib/cmake/")
     endif()
 
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml LinguistTools REQUIRED)
+    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools REQUIRED)
 endif()
 
 option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD=ON" OFF) # Disabled by default
@@ -72,6 +72,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Quick
     Qt6::Svg
     Qt6::Xml
+    Qt6::DBus
 )
 
 qt6_add_qml_module(${PROJECT_NAME}
