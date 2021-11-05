@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import Victron.Velib
 import Victron.VenusOS
 
 Page {
@@ -67,6 +68,15 @@ Page {
 				properties: 'x,opacity'; duration: 400
 				easing.type: Easing.InQuad
 			}
+		}
+	}
+
+	property VeQuickItem batterySoC: VeQuickItem { uid: veSystem.childUId("/Dc/Battery/Soc") }
+
+	Connections {
+		target: batterySoC
+		function onValueChanged(veItem, value) {
+			dataModel.setProperty(1, 'value', value)
 		}
 	}
 
