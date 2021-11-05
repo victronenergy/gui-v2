@@ -20,21 +20,6 @@ Window {
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
 
-	VeQuickItem {
-		id: veDBus
-		uid: "dbus"
-	}
-
-	VeQuickItem {
-		id: veSystem
-		uid: "dbus/com.victronenergy.system"
-	}
-
-	VeQuickItem {
-		id: veSettings
-		uid: "dbus/com.victronenergy.settings"
-	}
-
 	ListView {
 		id: pageStack
 
