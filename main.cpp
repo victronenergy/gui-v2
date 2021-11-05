@@ -6,6 +6,9 @@
 #include "logging.h"
 #include "theme.h"
 
+#include <velib/qt/v_busitems.h>
+#include <velib/qt/ve_qitems_dbus.hpp>
+
 #include <QTranslator>
 #include <QGuiApplication>
 #include <QQmlComponent>
@@ -47,7 +50,56 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
 
+	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
+
 	QGuiApplication app(argc, argv);
+	QGuiApplication::setApplicationName("Venus");
+	QGuiApplication::setApplicationVersion("2.0");
+
+	QCommandLineParser parser;
+	parser.setApplicationDescription("Venus GUI");
+	parser.addHelpOption();
+	parser.addVersionOption();
+
+	QCommandLineOption dbusAddress({ "d",  "dbus" },
+		QGuiApplication::tr("main", "Specify the D-Bus address to connect to"),
+		QGuiApplication::tr("main", "dbus"));
+	parser.addOption(dbusAddress);
+
+	QCommandLineOption noDBus({ "n", "no-dbus" },
+		QGuiApplication::tr("main", "Do not connect to D-Bus"));
+	parser.addOption(noDBus);
+
+	parser.process(app);
+
+	QScopedPointer<VeQItemDbusProducer> producer;
+	QScopedPointer<VeQItemSettings> settings;
+
+	if (!parser.isSet(noDBus)) {
+		QString dbusAddr("tcp:host=localhost,port=3000");
+		if (parser.isSet(dbusAddress)) {
+			dbusAddr = parser.value(dbusAddress);
+		}
+
+		// Default to the session bus on the pc
+		// note: the actual connection is checked in run...
+		VBusItems::setConnectionType(QDBusConnection::SessionBus);
+		VBusItems::setDBusAddress(dbusAddr);
+
+		QDBusConnection dbus = VBusItems::getConnection();
+		if (!dbus.isConnected()) {
+			qCritical() << "DBus connection failed.";
+			exit(EXIT_FAILURE);
+		}
+
+		// The part importing items from the dbus..
+		producer.reset(new VeQItemDbusProducer(VeQItems::getRoot(), "dbus"));
+		producer->open(VBusItems::getConnection());
+
+		settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
+	} else {
+		// TODO: Can we make this fail gracefully?
+	}
 
 	/* Load appropriate translations, e.g. :/i18n/venus-gui-v2_fr.qm */
 	QTranslator translator;
