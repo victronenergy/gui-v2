@@ -88,7 +88,7 @@ Item {
 					horizontalAlignment: Text.AlignRight
 					font.pixelSize: Math.ceil(strokeWidth * 0.85)
 					color: Theme.primaryFontColor
-					text: model.text
+					text: qsTrId(model.text)
 
 					ColorImage {
 						anchors.left: parent.right
