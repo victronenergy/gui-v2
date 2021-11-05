@@ -12,6 +12,7 @@
 #include <QTranslator>
 #include <QGuiApplication>
 #include <QQmlComponent>
+#include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QScreen>
@@ -66,39 +67,32 @@ int main(int argc, char *argv[])
 		QGuiApplication::tr("main", "dbus"));
 	parser.addOption(dbusAddress);
 
-	QCommandLineOption noDBus({ "n", "no-dbus" },
-		QGuiApplication::tr("main", "Do not connect to D-Bus"));
-	parser.addOption(noDBus);
+	QCommandLineOption dbusDefault(QString("dbus-default"),
+		QGuiApplication::tr("main", "Use the default D-Bus address to connect to"),
+		QString(),
+		QString("tcp:host=localhost,port=3000"));
+	parser.addOption(dbusDefault);
 
 	parser.process(app);
 
-	QScopedPointer<VeQItemDbusProducer> producer;
+	QScopedPointer<VeQItemDbusProducer> producer(new VeQItemDbusProducer(VeQItems::getRoot(), "dbus"));
 	QScopedPointer<VeQItemSettings> settings;
 
-	if (!parser.isSet(noDBus)) {
-		QString dbusAddr("tcp:host=localhost,port=3000");
-		if (parser.isSet(dbusAddress)) {
-			dbusAddr = parser.value(dbusAddress);
-		}
-
+	if (parser.isSet(dbusAddress) || parser.isSet(dbusDefault)) {
 		// Default to the session bus on the pc
-		// note: the actual connection is checked in run...
 		VBusItems::setConnectionType(QDBusConnection::SessionBus);
-		VBusItems::setDBusAddress(dbusAddr);
+		VBusItems::setDBusAddress(parser.value(parser.isSet(dbusAddress) ? dbusAddress : dbusDefault));
 
 		QDBusConnection dbus = VBusItems::getConnection();
-		if (!dbus.isConnected()) {
+		if (dbus.isConnected()) {
+			producer->open(dbus);
+			settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
+		} else {
 			qCritical() << "DBus connection failed.";
 			exit(EXIT_FAILURE);
 		}
-
-		// The part importing items from the dbus..
-		producer.reset(new VeQItemDbusProducer(VeQItems::getRoot(), "dbus"));
-		producer->open(VBusItems::getConnection());
-
-		settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
 	} else {
-		// TODO: Can we make this fail gracefully?
+		producer->open(VBusItems::getConnection());
 	}
 
 	/* Load appropriate translations, e.g. :/i18n/venus-gui-v2_fr.qm */
@@ -120,6 +114,9 @@ int main(int argc, char *argv[])
 		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
 			return new Victron::VenusOS::Language(engine);
 		});
+
+	engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
+
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
 
 	if (component.isError()) {
