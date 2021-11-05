@@ -147,9 +147,20 @@ Page {
 	ListModel {
 		id: dataModel
 
-		ListElement { value: 10; text: 'Fuel'; icon: '/images/tank.svg'; valueType: CircularMultiGauge.FallingPercentage }
-		ListElement { value: 60; text: 'Battery'; icon: '/images/battery.svg'; valueType: CircularMultiGauge.FallingPercentage }
-		ListElement { value: 80; text: 'Fresh water'; icon: '/images/freshWater.svg'; valueType: CircularMultiGauge.FallingPercentage }
-		ListElement { value: 20; text: 'Black water'; icon: '/images/blackWater.svg'; valueType: CircularMultiGauge.FallingPercentage }
+		ListElement { value: 10; text: 'gaugeFuelText'; icon: '/images/tank.svg'; valueType: CircularMultiGauge.FallingPercentage }
+		ListElement { value: 60; text: 'gaugeBatteryText'; icon: '/images/battery.svg'; valueType: CircularMultiGauge.FallingPercentage }
+		ListElement { value: 80; text: 'gaugeFreshWaterText'; icon: '/images/freshWater.svg'; valueType: CircularMultiGauge.FallingPercentage }
+		ListElement { value: 20; text: 'gaugeBlackWaterText'; icon: '/images/blackWater.svg'; valueType: CircularMultiGauge.FallingPercentage }
 	}
+
+	property var _gaugeStrings: [
+		//% "Fuel"
+		QT_TRID_NOOP('gaugeFuelText'),
+		//% "Battery"
+		QT_TRID_NOOP('gaugeBatteryText'),
+		//% "Fresh water"
+		QT_TRID_NOOP('gaugeFreshWaterText'),
+		//% "Black water"
+		QT_TRID_NOOP('gaugeBlackWaterText')
+	]
 }

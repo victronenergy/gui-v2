@@ -45,6 +45,26 @@
         <location filename="../pages/SettingsPage.qml" line="36"/>
         <source>Toggle Language</source>
         <extracomment>Select a new language</extracomment>
+        <translation></translation>
+    </message>
+    <message id="gaugeFuelText">
+        <location filename="../pages/BriefPage.qml" line="158"/>
+        <source>Fuel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="gaugeBatteryText">
+        <location filename="../pages/BriefPage.qml" line="160"/>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="gaugeFreshWaterText">
+        <location filename="../pages/BriefPage.qml" line="162"/>
+        <source>Fresh water</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="gaugeBlackWaterText">
+        <location filename="../pages/BriefPage.qml" line="164"/>
+        <source>Black water</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
