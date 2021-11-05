@@ -38,6 +38,7 @@ Page {
 		width: icon.implicitWidth
 		height: icon.implicitHeight
 		icon.source: sidePanel.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
+		color: Theme.primaryFontColor
 
 		onClicked: {
 			sidePanel.state = (sidePanel.state == '') ? 'hidden' : ''
