@@ -30,6 +30,28 @@ option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD
 qt6_add_resources(QML_RESOURCES
     qml.qrc)
 
+include_directories(velib/inc .)
+
+set(VELIB_SOURCES
+    velib/inc/velib/velib_config.h
+    velib/inc/velib/qt/ve_qitems_dbus.hpp
+    velib/inc/velib/qt/ve_qitem_dbus_publisher.hpp
+    velib/inc/velib/qt/ve_qitem.hpp
+    velib/inc/velib/qt/ve_qitem_loader.hpp
+    velib/inc/velib/qt/ve_qitem_tree_model.hpp
+    velib/inc/velib/qt/v_busitems.h
+    velib/src/qt/v_busitem_proxy.h
+    velib/src/qt/v_busitem_proxy.cpp
+    velib/src/qt/ve_qitem_dbus_virtual_object.hpp
+    velib/src/qt/ve_qitem_dbus_virtual_object.cpp
+    velib/src/qt/ve_qitems_dbus.cpp
+    velib/src/qt/ve_qitem_dbus_publisher.cpp
+    velib/src/qt/ve_qitem.cpp
+    velib/src/qt/ve_qitem_loader.cpp
+    velib/src/qt/ve_qitem_tree_model.cpp
+    velib/src/qt/v_busitems.cpp
+)
+
 list(APPEND SOURCES
     main.cpp
     theme.h
@@ -37,6 +59,7 @@ list(APPEND SOURCES
     language.h
     language.cpp
     logging.h
+    ${VELIB_SOURCES}
     ${QML_RESOURCES}
 )
 
