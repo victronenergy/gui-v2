@@ -76,9 +76,73 @@ Page {
 	Connections {
 		target: batterySoC
 		function onValueChanged(veItem, value) {
+			console.log('batterySoC:', batterySoC.value)
 			dataModel.setProperty(1, 'value', value)
 		}
 	}
+
+	property var tanks: []
+
+	function getTanks() {
+		const childIds = veDBus.childIds
+
+		let tanksIds = []
+		for (let i = 0; i < childIds.length; ++i) {
+			let id = childIds[i]
+			if (id.startsWith('com.victronenergy.tank.')) {
+				tanksIds.push(id)
+			}
+		}
+		tanks = tanksIds
+	}
+
+	Connections {
+		target: veDBus
+		function onChildIdsChanged() { getTanks() }
+		Component.onCompleted: getTanks()
+	}
+
+	Instantiator {
+		model: tanks
+		delegate: QtObject {
+			id: tank
+			property string uid: modelData
+			property int type: -1
+			property int level: -1
+			property var modelIndex: {
+				if (type === 0) { // Fuel
+					return 0
+				} else if (type === 1) { // Fresh
+					return 2
+				} else if (type === 5) { // Black
+					return 3
+				}
+				return undefined
+			}
+			property bool valid: type >= 0 && level >= 0 && modelIndex !== undefined
+			onValidChanged: console.log('tank - type:', type, 'level:', level)
+
+			property VeQuickItem _tankType: VeQuickItem {
+				uid: "dbus/" + tank.uid + "/FluidType"
+				onValueChanged: tank.type = value || -1
+			}
+			property VeQuickItem _tankLevel: VeQuickItem {
+				uid: "dbus/" + tank.uid + "/Level"
+				onValueChanged: tank.level = value || -1
+			}
+
+			property var _binding: Binding {
+				when: valid
+				target: dataModel.get(modelIndex)
+				property: 'value'
+				value: tank.level
+			}
+		}
+	}
+
+	property var fuelLevel
+	property var freshLevel
+	property var blackLevel
 
 	ListModel {
 		id: dataModel
