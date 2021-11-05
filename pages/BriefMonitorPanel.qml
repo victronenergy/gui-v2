@@ -48,6 +48,7 @@ Page {
 					leftMargin: 5
 				}
 				source: "qrc:/images/cloud.svg"
+				color: Theme.primaryFontColor
 			}
 		}
 		Item { width: 1; height: 6 }
