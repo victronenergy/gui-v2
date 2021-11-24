@@ -7,47 +7,67 @@ import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-MouseArea {
+C.Button {
 	id: root
 
-	property alias icon: buttonIcon
-	property alias text: buttonText.text
-	property var color
+	leftPadding: 0
+	rightPadding: 0
+	topPadding: 0
+	bottomPadding: 0
+	leftInset: 0
+	rightInset: 0
+	topInset: 0
+	bottomInset: 0
+	spacing: Theme.marginSmall
 
-	property int topSpacing: Theme.marginSmall
-	property int interSpacing: Theme.marginSmall
-	property int bottomSpacing: Theme.marginSmall
-	property int horizontalSpacing: Theme.marginSmall
+	icon.width: buttonIcon.implicitWidth
+	icon.height: buttonIcon.implicitHeight
 
-	implicitHeight: topSpacing + buttonIcon.height + (buttonIcon.height ? interSpacing : 0) + buttonText.height + bottomSpacing
-	implicitWidth: Math.max(buttonText.implicitWidth, buttonIcon.implicitWidth) + 2*horizontalSpacing
-
-	CP.ColorImage {
-		id: buttonIcon
-
-		anchors.horizontalCenter: parent.horizontalCenter
-		y: buttonIcon.height ? root.topSpacing : 0
-
-		fillMode: Image.Pad
-		color: root.color
-		Behavior on color {
-			ColorAnimation {
-				duration: 100 // TODO move into Theme if this is final
-			}
-		}
+	background: Item {
+		implicitWidth: root.contentItem.implicitWidth
+		implicitHeight: root.contentItem.implicitHeight
 	}
 
-	Label {
-		id: buttonText
+	icon.color: down || checked
+				? (Theme.displayMode == Theme.Dark ? Theme.primaryFontColor : Theme.okColor)
+				: (Theme.displayMode == Theme.Dark ? Theme.secondaryFontColor : Theme.okSecondaryColor)
 
-		anchors {
-			top: buttonIcon.bottom
-			topMargin: root.interSpacing
-			horizontalCenter: parent.horizontalCenter
+	contentItem: Item {
+		implicitWidth: Math.max(buttonText.implicitWidth, buttonIcon.implicitWidth)
+		implicitHeight: buttonText.y + buttonText.height
+
+		CP.ColorImage {
+			id: buttonIcon
+
+			anchors.horizontalCenter: parent.horizontalCenter
+			fillMode: Image.Pad
+
+			source: root.icon.source
+			width: root.icon.width
+			height: root.icon.height
+			color: root.icon.color
+			cache: root.icon.cache
+
+			Behavior on color {
+				ColorAnimation {
+					duration: 100 // TODO move into Theme if this is final
+				}
+			}
 		}
 
-		horizontalAlignment: Text.AlignHCenter
-		color: buttonIcon.color
-		font.pixelSize: Theme.fontSizeMedium
+		Label {
+			id: buttonText
+
+			anchors {
+				top: buttonIcon.bottom
+				topMargin: root.spacing
+				horizontalCenter: parent.horizontalCenter
+			}
+
+			horizontalAlignment: Text.AlignHCenter
+			color: root.icon.color
+			font.pixelSize: Theme.fontSizeMedium
+			text: root.text
+		}
 	}
 }
