@@ -8,11 +8,12 @@ import Victron.VenusOS
 Button {
 	id: root
 
-	topSpacing: 9
-	bottomSpacing: 5
-	interSpacing: 7
+	spacing: 7
 
 	width: 112
+	height: 67
 	icon.width: Theme.iconSizeMedium
 	icon.height: Theme.iconSizeMedium
+
+	flat: true
 }

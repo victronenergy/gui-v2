@@ -23,7 +23,8 @@ Row {
 		delegate: NavButton {
 			text: model.text
 			icon.source: model.icon
-			color: buttonRepeater.currentIndex === model.index ? Theme.primaryFontColor : Theme.secondaryFontColor
+			checked: buttonRepeater.currentIndex === model.index
+
 			onClicked: {
 				buttonRepeater.currentIndex = model.index
 				root.buttonClicked(model.index)

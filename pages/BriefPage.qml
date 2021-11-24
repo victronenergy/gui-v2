@@ -32,14 +32,8 @@ Page {
 			rightMargin: 27
 		}
 
-		topSpacing: 0
-		bottomSpacing: 0
-		horizontalSpacing: 0
-
-		width: icon.implicitWidth
-		height: icon.implicitHeight
 		icon.source: sidePanel.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
-		color: Theme.primaryFontColor
+		icon.color: Theme.primaryFontColor
 
 		onClicked: {
 			sidePanel.state = (sidePanel.state == '') ? 'hidden' : ''
