@@ -10,6 +10,13 @@ import Victron.VenusOS
 C.Button {
 	id: root
 
+	property color color: Theme.primaryFontColor
+	property color backgroundColor: flat
+			? 'transparent'
+			: down ? Theme.okColor : Theme.okSecondaryColor
+	property alias border: backgroundRect.border
+	property alias radius: backgroundRect.radius
+
 	leftPadding: 0
 	rightPadding: 0
 	topPadding: 0
@@ -20,22 +27,29 @@ C.Button {
 	bottomInset: 0
 	spacing: Theme.marginSmall
 
+	implicitWidth: Math.max(buttonText.implicitWidth, buttonIcon.implicitWidth)
+	implicitHeight: buttonIcon.status === Image.Null
+			? buttonText.height
+			: buttonText.y + buttonText.height
+	height: 40
+
 	icon.width: buttonIcon.implicitWidth
 	icon.height: buttonIcon.implicitHeight
+	icon.color: root.color
 
-	background: Item {
-		implicitWidth: root.contentItem.implicitWidth
-		implicitHeight: root.contentItem.implicitHeight
+	font.pixelSize: Theme.fontSizeMedium
+	flat: true
+
+	background: Rectangle {
+		id: backgroundRect
+
+		color: root.backgroundColor
+		border.width: root.flat ? 0 : 2
+		border.color: Theme.okColor
+		radius: 6
 	}
 
-	icon.color: down || checked
-				? (Theme.displayMode == Theme.Dark ? Theme.primaryFontColor : Theme.okColor)
-				: (Theme.displayMode == Theme.Dark ? Theme.secondaryFontColor : Theme.okSecondaryColor)
-
 	contentItem: Item {
-		implicitWidth: Math.max(buttonText.implicitWidth, buttonIcon.implicitWidth)
-		implicitHeight: buttonText.y + buttonText.height
-
 		CP.ColorImage {
 			id: buttonIcon
 
@@ -58,15 +72,15 @@ C.Button {
 		Label {
 			id: buttonText
 
-			anchors {
-				top: buttonIcon.bottom
-				topMargin: root.spacing
-				horizontalCenter: parent.horizontalCenter
-			}
-
+			x: parent.width/2 - width/2
+			y: buttonIcon.status === Image.Null
+			   ? parent.height/2 - height/2
+			   : buttonIcon.y + buttonIcon.height + root.spacing
+			verticalAlignment: Text.AlignVCenter
 			horizontalAlignment: Text.AlignHCenter
-			color: root.icon.color
-			font.pixelSize: Theme.fontSizeMedium
+
+			color: root.color
+			font.pixelSize: root.font.pixelSize
 			text: root.text
 		}
 	}
