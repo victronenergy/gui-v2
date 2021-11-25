@@ -32,7 +32,11 @@ class Theme : public QObject
 	Q_PROPERTY(QColor warningSecondaryColor READ warningSecondaryColor NOTIFY warningSecondaryColorChanged)
 	Q_PROPERTY(QColor criticalColor READ criticalColor NOTIFY criticalColorChanged)
 	Q_PROPERTY(QColor criticalSecondaryColor READ criticalSecondaryColor NOTIFY criticalSecondaryColorChanged)
+	Q_PROPERTY(QColor goColor READ goColor NOTIFY goColorChanged)
+	Q_PROPERTY(QColor goSecondaryColor READ goSecondaryColor NOTIFY goSecondaryColorChanged)
 	Q_PROPERTY(int fontSizeMedium READ fontSizeMedium CONSTANT)
+	Q_PROPERTY(int fontSizeLarge READ fontSizeLarge CONSTANT)
+	Q_PROPERTY(int fontSizeExtraLarge READ fontSizeExtraLarge CONSTANT)
 	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
 	Q_PROPERTY(int horizontalPageMargin READ horizontalPageMargin CONSTANT)
 	Q_PROPERTY(int iconSizeMedium READ iconSizeMedium CONSTANT)
@@ -62,12 +66,16 @@ public:
 		WarningColor,
 		WarningSecondaryColor,
 		CriticalColor,
-		CriticalSecondaryColor
+		CriticalSecondaryColor,
+		GoColor,
+		GoSecondaryColor
 	};
 	Q_ENUM(ColorProperty)
 
 	enum OtherProperty {
 		FontSizeMedium = 0,
+		FontSizeLarge,
+		FontSizeExtraLarge,
 		MarginSmall,
 		HorizontalPageMargin,
 		IconSizeMedium,
@@ -105,8 +113,12 @@ public:
 	QColor warningSecondaryColor() const;
 	QColor criticalColor() const;
 	QColor criticalSecondaryColor() const;
+	QColor goColor() const;
+	QColor goSecondaryColor() const;
 
 	int fontSizeMedium() const;
+	int fontSizeLarge() const;
+	int fontSizeExtraLarge() const;
 	int marginSmall() const;
 	int horizontalPageMargin() const;
 	int iconSizeMedium() const;
@@ -125,6 +137,8 @@ Q_SIGNALS:
 	void warningSecondaryColorChanged();
 	void criticalColorChanged();
 	void criticalSecondaryColorChanged();
+	void goColorChanged();
+	void goSecondaryColorChanged();
 	void screenSizeChanged();
 
 private:
@@ -157,6 +171,10 @@ private:
 			QVariant::fromValue<QColor>(QColor(243, 92, 88)),
 			/* [CriticalSecondaryColor] */
 			QVariant::fromValue<QColor>(QColor(233, 202, 198)),
+			/* [GoColor] */
+			QVariant::fromValue<QColor>(QColor(114, 184, 76)),
+			/* [GoSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(34, 55, 23)),
 		},
 		/* [Dark] */
 		{
@@ -182,6 +200,10 @@ private:
 			QVariant::fromValue<QColor>(QColor(243, 92, 88)),
 			/* [CriticalSecondaryColor] */
 			QVariant::fromValue<QColor>(QColor(73, 28, 26)),
+			/* [GoColor] */
+			QVariant::fromValue<QColor>(QColor(114, 184, 76)),
+			/* [GoSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(34, 55, 23)),
 		}
 	};
 
@@ -189,6 +211,10 @@ private:
 	QVector<QVariant> m_otherValues {
 		/* [FontSizeMedium] */
 		18,
+		/* [FontSizeLarge] */
+		28,
+		/* [FontSizeExtraLarge] */
+		56,
 		/* [MarginSmall] */
 		7,
 		/* [HorizontalPageMargin] */

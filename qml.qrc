@@ -12,8 +12,16 @@
         <file>pages/NotificationsPage.qml</file>
         <file>pages/OverviewPage.qml</file>
         <file>pages/SettingsPage.qml</file>
+        <file>components/ActionButton.qml</file>
         <file>components/Button.qml</file>
         <file>components/Label.qml</file>
+        <file>components/RadioButton.qml</file>
+        <file>components/SegmentedButtonRow.qml</file>
+        <file>components/Slider.qml</file>
+        <file>components/SpinBox.qml</file>
+        <file>components/Switch.qml</file>
+        <file>images/icon_minus.svg</file>
+        <file>images/icon_plus.svg</file>
         <file>images/levels.svg</file>
         <file>images/notifications.svg</file>
         <file>images/overview.svg</file>

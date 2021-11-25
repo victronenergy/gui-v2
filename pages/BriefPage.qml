@@ -33,7 +33,6 @@ Page {
 		}
 
 		icon.source: sidePanel.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
-		icon.color: Theme.primaryFontColor
 
 		onClicked: {
 			sidePanel.state = (sidePanel.state == '') ? 'hidden' : ''

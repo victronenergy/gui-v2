@@ -99,9 +99,29 @@ QColor Theme::criticalSecondaryColor() const
 	return colorValue(m_displayMode, CriticalSecondaryColor);
 }
 
+QColor Theme::goColor() const
+{
+	return colorValue(m_displayMode, GoColor);
+}
+
+QColor Theme::goSecondaryColor() const
+{
+	return colorValue(m_displayMode, GoSecondaryColor);
+}
+
 int Theme::fontSizeMedium() const
 {
 	return otherValue(FontSizeMedium).toInt();
+}
+
+int Theme::fontSizeLarge() const
+{
+	return otherValue(FontSizeLarge).toInt();
+}
+
+int Theme::fontSizeExtraLarge() const
+{
+	return otherValue(FontSizeExtraLarge).toInt();
 }
 
 int Theme::marginSmall() const
