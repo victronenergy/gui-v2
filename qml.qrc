@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>components/ComboBox.qml</file>
         <file>components/CircularMultiGauge.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
@@ -20,6 +21,7 @@
         <file>components/Slider.qml</file>
         <file>components/SpinBox.qml</file>
         <file>components/Switch.qml</file>
+        <file>images/dropdown.svg</file>
         <file>images/icon_minus.svg</file>
         <file>images/icon_plus.svg</file>
         <file>images/levels.svg</file>
