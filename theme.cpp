@@ -109,6 +109,26 @@ QColor Theme::goSecondaryColor() const
 	return colorValue(m_displayMode, GoSecondaryColor);
 }
 
+QColor Theme::controlCardBackgroundColor() const
+{
+	return colorValue(m_displayMode, ControlCardBackgroundColor);
+}
+
+QColor Theme::separatorBarColor() const
+{
+	return colorValue(m_displayMode, SeparatorBarColor);
+}
+
+QColor Theme::spinboxButtonColor() const
+{
+	return colorValue(m_displayMode, SpinboxButtonColor);
+}
+
+QColor Theme::spinboxButtonSecondaryColor() const
+{
+	return colorValue(m_displayMode, SpinboxButtonSecondaryColor);
+}
+
 int Theme::fontSizeMedium() const
 {
 	return otherValue(FontSizeMedium).toInt();

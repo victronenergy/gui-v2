@@ -34,6 +34,10 @@ class Theme : public QObject
 	Q_PROPERTY(QColor criticalSecondaryColor READ criticalSecondaryColor NOTIFY criticalSecondaryColorChanged)
 	Q_PROPERTY(QColor goColor READ goColor NOTIFY goColorChanged)
 	Q_PROPERTY(QColor goSecondaryColor READ goSecondaryColor NOTIFY goSecondaryColorChanged)
+	Q_PROPERTY(QColor controlCardBackgroundColor READ controlCardBackgroundColor NOTIFY controlCardBackgroundColorChanged)
+	Q_PROPERTY(QColor separatorBarColor READ separatorBarColor NOTIFY separatorBarColorChanged)
+	Q_PROPERTY(QColor spinboxButtonColor READ spinboxButtonColor NOTIFY spinboxButtonColorChanged)
+	Q_PROPERTY(QColor spinboxButtonSecondaryColor READ spinboxButtonSecondaryColor NOTIFY spinboxButtonSecondaryColorChanged)
 	Q_PROPERTY(int fontSizeMedium READ fontSizeMedium CONSTANT)
 	Q_PROPERTY(int fontSizeLarge READ fontSizeLarge CONSTANT)
 	Q_PROPERTY(int fontSizeExtraLarge READ fontSizeExtraLarge CONSTANT)
@@ -68,7 +72,11 @@ public:
 		CriticalColor,
 		CriticalSecondaryColor,
 		GoColor,
-		GoSecondaryColor
+		GoSecondaryColor,
+		ControlCardBackgroundColor,
+		SeparatorBarColor,
+		SpinboxButtonColor,
+		SpinboxButtonSecondaryColor
 	};
 	Q_ENUM(ColorProperty)
 
@@ -115,6 +123,10 @@ public:
 	QColor criticalSecondaryColor() const;
 	QColor goColor() const;
 	QColor goSecondaryColor() const;
+	QColor controlCardBackgroundColor() const;
+	QColor separatorBarColor() const;
+	QColor spinboxButtonColor() const;
+	QColor spinboxButtonSecondaryColor() const;
 
 	int fontSizeMedium() const;
 	int fontSizeLarge() const;
@@ -140,6 +152,10 @@ Q_SIGNALS:
 	void goColorChanged();
 	void goSecondaryColorChanged();
 	void screenSizeChanged();
+	void controlCardBackgroundColorChanged();
+	void separatorBarColorChanged();
+	void spinboxButtonColorChanged();
+	void spinboxButtonSecondaryColorChanged();
 
 private:
 	DisplayMode m_displayMode =  Dark;
@@ -175,6 +191,15 @@ private:
 			QVariant::fromValue<QColor>(QColor(114, 184, 76)),
 			/* [GoSecondaryColor] */
 			QVariant::fromValue<QColor>(QColor(34, 55, 23)),
+			/* [ControlCardBackgroundColor] */
+			QVariant::fromValue<QColor>(QColor(20, 20, 20)),
+			/* [SeparatorBarColor] */
+			QVariant::fromValue<QColor>(QColor(39, 38, 34)),
+			/* [SpinboxButtonColor] */
+			QVariant::fromValue<QColor>(QColor(56, 125, 197, 153)),
+			/* [SpinboxButtonSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(56, 125, 197, 76)),
+
 		},
 		/* [Dark] */
 		{
@@ -204,6 +229,14 @@ private:
 			QVariant::fromValue<QColor>(QColor(114, 184, 76)),
 			/* [GoSecondaryColor] */
 			QVariant::fromValue<QColor>(QColor(34, 55, 23)),
+			/* [ControlCardBackgroundColor] */
+			QVariant::fromValue<QColor>(QColor(20, 20, 20)),
+			/* [SeparatorBarColor] */
+			QVariant::fromValue<QColor>(QColor(39, 38, 34)),
+			/* [SpinboxButtonColor] */
+			QVariant::fromValue<QColor>(QColor(56, 125, 197, 153)),
+			/* [SpinboxButtonSecondaryColor] */
+			QVariant::fromValue<QColor>(QColor(56, 125, 197, 76)),
 		}
 	};
 

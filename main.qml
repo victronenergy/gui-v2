@@ -14,6 +14,7 @@ Window {
 
 	property Item battery: dbusData.item.battery
 	property Item tanks: dbusData.item.tanks
+	property alias dialogManager: dialogManager
 
 	width: [800, 1024][Theme.screenSize]
 	height: [480, 600][Theme.screenSize]
@@ -117,5 +118,53 @@ Window {
 				uid: "dbus/com.victronenergy.settings"
 			}
 		}
+	}
+	Rectangle {
+		id: controlsDialog
+
+		anchors {
+			top: parent.top
+			topMargin: 40
+			bottom: parent.bottom
+		}
+
+		width: parent.width
+		color: Theme.backgroundColor
+		visible: opacity > 0.0
+		opacity: 0.0
+		Behavior on opacity { NumberAnimation { duration: 300 } }
+
+		function show() {
+			opacity = 1.0
+		}
+
+		function hide() {
+			opacity = 0.0
+		}
+
+		MouseArea {
+			anchors.fill: parent
+			onClicked: controlsDialog.hide()
+		}
+
+		ListView {
+			anchors {
+				left: parent.left
+				leftMargin: 24 // TODO - handle 7" size if it is different
+				right: parent.right
+				top: parent.top
+				bottom: parent.bottom
+				bottomMargin: 8 // TODO - handle 7" size if it is different
+			}
+			spacing: 16
+			orientation: ListView.Horizontal
+			model: ControlCardsModel
+			delegate: Loader {
+				source: url
+			}
+		}
+	}
+	DialogManager {
+		id: dialogManager
 	}
 }

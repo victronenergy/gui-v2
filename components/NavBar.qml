@@ -24,6 +24,7 @@ Row {
 			text: model.text
 			icon.source: model.icon
 			checked: buttonRepeater.currentIndex === model.index
+			color: checked ? Theme.okColor : Theme.secondaryFontColor
 
 			onClicked: {
 				buttonRepeater.currentIndex = model.index

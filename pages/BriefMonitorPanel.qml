@@ -10,6 +10,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	controlsButton.visible: false
+
 	Column {
 		anchors {
 			fill: parent

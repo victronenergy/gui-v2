@@ -16,6 +16,7 @@ C.Button {
 			: down ? Theme.okColor : Theme.okSecondaryColor
 	property alias border: backgroundRect.border
 	property alias radius: backgroundRect.radius
+	property bool centerIconVertically
 
 	leftPadding: 0
 	rightPadding: 0
@@ -54,6 +55,7 @@ C.Button {
 			id: buttonIcon
 
 			anchors.horizontalCenter: parent.horizontalCenter
+			anchors.verticalCenter: centerIconVertically ? parent.verticalCenter : undefined
 			fillMode: Image.Pad
 
 			source: root.icon.source

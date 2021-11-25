@@ -46,8 +46,16 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ComboBox");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Gauges.qml")),
 		"Victron.VenusOS", 2, 0, "Gauges");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlCard.qml")),
+		"Victron.VenusOS", 2, 0, "ControlCard");
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/ControlCardsModel.qml")),
+		"Victron.VenusOS", 2, 0, "ControlCardsModel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlValue.qml")),
+		"Victron.VenusOS", 2, 0, "ControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Label.qml")),
 		"Victron.VenusOS", 2, 0, "Label");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ModalDialog.qml")),
+		"Victron.VenusOS", 2, 0, "ModalDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavBar.qml")),
 		"Victron.VenusOS", 2, 0, "NavBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavButton.qml")),
@@ -62,6 +70,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ScaledArcGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SegmentedButtonRow.qml")),
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
+		"Victron.VenusOS", 2, 0, "SeparatorBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Slider.qml")),
 		"Victron.VenusOS", 2, 0, "Slider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SpinBox.qml")),
@@ -72,6 +82,18 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
+
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/ESSCard.qml")),
+		"Victron.VenusOS", 2, 0, "ESSCard");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/GeneratorCard.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorCard");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/InverterCard.qml")),
+		"Victron.VenusOS", 2, 0, "InverterCard");
+
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InputCurrentLimitDialog.qml")),
+		"Victron.VenusOS", 2, 0, "InputCurrentLimitDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/DialogManager.qml")),
+		"Victron.VenusOS", 2, 0, "DialogManager");
 
 	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
 
