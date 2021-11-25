@@ -40,6 +40,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Button");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularMultiGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ComboBox.qml")),
+		"Victron.VenusOS", 2, 0, "ComboBox");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Label.qml")),
 		"Victron.VenusOS", 2, 0, "Label");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavBar.qml")),
