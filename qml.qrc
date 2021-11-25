@@ -60,5 +60,19 @@
         <file>pages/SolarYieldGauge.qml</file>
         <file>components/ScaledArc.qml</file>
         <file>components/ScaledArcGauge.qml</file>
+        <file>images/controls.svg</file>
+        <file>images/inverter.svg</file>
+        <file>components/ControlCard.qml</file>
+        <file>controlcards/GeneratorCard.qml</file>
+        <file>controlcards/InverterCard.qml</file>
+        <file>controlcards/ESSCard.qml</file>
+        <file>images/ess.svg</file>
+        <file>components/ControlValue.qml</file>
+        <file>components/ModalDialog.qml</file>
+        <file>components/ControlCardsModel.qml</file>
+        <file>dialogs/InputCurrentLimitDialog.qml</file>
+        <file>components/SeparatorBar.qml</file>
+        <file>images/controls-toggled.svg</file>
+        <file>dialogs/DialogManager.qml</file>
     </qresource>
 </RCC>

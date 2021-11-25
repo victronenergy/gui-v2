@@ -135,13 +135,14 @@ Page {
 
 		anchors {
 			top: parent.top
-			topMargin: 15
+			topMargin: 14
 			right: parent.right
-			rightMargin: 27
+			rightMargin: 26
 		}
 
 		icon.source: root.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
 		onClicked: root.state = root.state === '' ? 'panelOpen' : ''
+		color: Theme.okColor
 	}
 
 	BriefMonitorPanel {

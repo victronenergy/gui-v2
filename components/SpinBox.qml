@@ -28,8 +28,7 @@ C.SpinBox {
 		implicitWidth: root.buttonWidth
 		implicitHeight: 72
 		radius: 6
-		color: root.up.pressed ? Theme.okColor : Theme.okSecondaryColor
-		opacity: enabled ? 1 : 0.3  // TODO need disabled opacity from Design
+		color: root.up.pressed ? Theme.okSecondaryColor : Theme.spinboxButtonColor // TODO need disabled rgba from Design
 
 		Image {
 			anchors.centerIn: parent
@@ -42,9 +41,7 @@ C.SpinBox {
 		implicitWidth: root.buttonWidth
 		implicitHeight: 72
 		radius: 6
-		color: root.down.pressed ? Theme.okColor : Theme.okSecondaryColor
-		opacity: enabled ? 1 : 0.3  // TODO need disabled opacity from Design
-
+		color: root.down.pressed ? Theme.okSecondaryColor : Theme.spinboxButtonColor // TODO need disabled rgba from Design
 		Image {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'
