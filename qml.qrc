@@ -46,5 +46,7 @@
         <file>images/blackWater.svg</file>
         <file>images/freshWater.svg</file>
         <file>images/tank.svg</file>
+        <file>data/Battery.qml</file>
+        <file>data/Tanks.qml</file>
     </qresource>
 </RCC>

@@ -7,9 +7,13 @@ import QtQuick.Window
 import Victron.Velib
 import Victron.VenusOS
 import "pages"
+import "data"
 
 Window {
 	id: root
+
+	property Item battery: dbusData.item.battery
+	property Item tanks: dbusData.item.tanks
 
 	width: [800, 1024][Theme.screenSize]
 	height: [480, 600][Theme.screenSize]
@@ -89,6 +93,29 @@ Window {
 
 		onButtonClicked: function (buttonIndex) {
 			pageStack.currentIndex = buttonIndex
+		}
+	}
+
+	Loader {
+		id: dbusData
+
+		active: dbusConnected
+		sourceComponent: Item {
+			property Battery battery: Battery {}
+			property Tanks tanks: Tanks {}
+
+			VeQuickItem {
+				id: veDBus
+				uid: "dbus"
+			}
+			VeQuickItem {
+				id: veSystem
+				uid: "dbus/com.victronenergy.system"
+			}
+			VeQuickItem {
+				id: veSettings
+				uid: "dbus/com.victronenergy.settings"
+			}
 		}
 	}
 }
