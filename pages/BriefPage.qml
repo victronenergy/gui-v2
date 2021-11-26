@@ -5,6 +5,7 @@
 import QtQuick
 import Victron.Velib
 import Victron.VenusOS
+import "../data"
 
 Page {
 	id: root
@@ -19,7 +20,7 @@ Page {
 		}
 		width: 315
 		height: 320
-		model: dataModel
+		model: gaugeModel
 	}
 
 	Button {
@@ -64,100 +65,43 @@ Page {
 		}
 	}
 
-	Loader {
-		active: dbusConnected
-		sourceComponent: Item {
-			VeQuickItem {
-				id: veDBus
-				uid: "dbus"
-			}
-			VeQuickItem {
-				id: veSystem
-				uid: "dbus/com.victronenergy.system"
-			}
-			VeQuickItem {
-				id: veSettings
-				uid: "dbus/com.victronenergy.settings"
-			}
-
-			property VeQuickItem batterySoC: VeQuickItem { uid: veSystem.childUId("/Dc/Battery/Soc") }
-
-			Connections {
-				target: batterySoC
-				function onValueChanged(veItem, value) {
-					console.log('batterySoC:', batterySoC.value)
-					dataModel.setProperty(1, 'value', value)
-				}
-			}
-
-			property var tanks: []
-
-			function getTanks() {
-				const childIds = veDBus.childIds
-
-				let tanksIds = []
-				for (let i = 0; i < childIds.length; ++i) {
-					let id = childIds[i]
-					if (id.startsWith('com.victronenergy.tank.')) {
-						tanksIds.push(id)
-					}
-				}
-				tanks = tanksIds
-			}
-
-			Connections {
-				target: veDBus
-				function onChildIdsChanged() { getTanks() }
-				Component.onCompleted: getTanks()
-			}
-
-			Instantiator {
-				model: tanks
-				delegate: QtObject {
-					id: tank
-					property string uid: modelData
-					property int type: -1
-					property int level: -1
-					property var modelIndex: {
-						if (type === 0) { // Fuel
-							return 0
-						} else if (type === 1) { // Fresh
-							return 2
-						} else if (type === 5) { // Black
-							return 3
-						}
-						return undefined
-					}
-					property bool valid: type >= 0 && level >= 0 && modelIndex !== undefined
-					onValidChanged: console.log('tank - type:', type, 'level:', level)
-
-					property VeQuickItem _tankType: VeQuickItem {
-						uid: "dbus/" + tank.uid + "/FluidType"
-						onValueChanged: tank.type = value || -1
-					}
-					property VeQuickItem _tankLevel: VeQuickItem {
-						uid: "dbus/" + tank.uid + "/Level"
-						onValueChanged: tank.level = value || -1
-					}
-
-					property var _binding: Binding {
-						when: valid
-						target: dataModel.get(modelIndex)
-						property: 'value'
-						value: tank.level
-					}
-				}
-			}
-		}
-	}
-
 	ListModel {
-		id: dataModel
+		id: gaugeModel
 
 		ListElement { value: 10; text: 'gaugeFuelText'; icon: '/images/tank.svg'; valueType: CircularMultiGauge.FallingPercentage }
 		ListElement { value: 60; text: 'gaugeBatteryText'; icon: '/images/battery.svg'; valueType: CircularMultiGauge.FallingPercentage }
 		ListElement { value: 80; text: 'gaugeFreshWaterText'; icon: '/images/freshWater.svg'; valueType: CircularMultiGauge.FallingPercentage }
 		ListElement { value: 20; text: 'gaugeBlackWaterText'; icon: '/images/blackWater.svg'; valueType: CircularMultiGauge.FallingPercentage }
+	}
+
+	Binding {
+		when: battery
+		target: gaugeModel.get(1)
+		property: 'value'
+		value: battery.stateOfCharge
+	}
+
+	Instantiator {
+		model: tanks ? tanks.model : null
+		delegate: QtObject {
+			property var modelIndex: {
+				if (tank.type === Tanks.Fuel) {
+					return 0
+				} else if (tank.type === Tanks.FreshWater) {
+					return 2
+				} else if (tank.type === Tanks.BlackWater) {
+					return 3
+				}
+				return undefined
+			}
+
+			property var _binding: Binding {
+				when: modelIndex !== undefined
+				target: gaugeModel.get(modelIndex)
+				property: 'value'
+				value: tank.level
+			}
+		}
 	}
 
 	property var _gaugeStrings: [
