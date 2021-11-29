@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls as C
 import Victron.VenusOS
 
 Button {
@@ -13,6 +14,7 @@ Button {
 	icon.width: Theme.iconSizeMedium
 	icon.height: Theme.iconSizeMedium
 	spacing: Theme.marginSmall
+	display: C.AbstractButton.TextUnderIcon
 
 	color: down || checked
 		   ? (Theme.displayMode == Theme.Dark ? Theme.primaryFontColor : Theme.okColor)

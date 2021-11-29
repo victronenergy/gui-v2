@@ -31,19 +31,32 @@ int main(int argc, char *argv[])
 			return new Victron::VenusOS::Theme;
 		});
 
+	/* controls */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Button.qml")),
+		"Victron.VenusOS", 2, 0, "Button");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ComboBox.qml")),
+		"Victron.VenusOS", 2, 0, "ComboBox");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Label.qml")),
+		"Victron.VenusOS", 2, 0, "Label");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButton.qml")),
+		"Victron.VenusOS", 2, 0, "RadioButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Slider.qml")),
+		"Victron.VenusOS", 2, 0, "Slider");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/SpinBox.qml")),
+		"Victron.VenusOS", 2, 0, "SpinBox");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Switch.qml")),
+		"Victron.VenusOS", 2, 0, "Switch");
+
 	/* components */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ActionButton.qml")),
+		"Victron.VenusOS", 2, 0, "ActionButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Arc.qml")),
 		"Victron.VenusOS", 2, 0, "Arc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGauge.qml")),
 		"Victron.VenusOS", 2, 0, "ArcGauge");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ActionButton.qml")),
-		"Victron.VenusOS", 2, 0, "ActionButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Button.qml")),
-		"Victron.VenusOS", 2, 0, "Button");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularMultiGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ComboBox.qml")),
-		"Victron.VenusOS", 2, 0, "ComboBox");
+
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Gauges.qml")),
 		"Victron.VenusOS", 2, 0, "Gauges");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlCard.qml")),
@@ -52,8 +65,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ControlCardsModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "ControlValue");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Label.qml")),
-		"Victron.VenusOS", 2, 0, "Label");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ModalDialog.qml")),
 		"Victron.VenusOS", 2, 0, "ModalDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavBar.qml")),
@@ -62,8 +73,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "NavButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ProgressArc.qml")),
 		"Victron.VenusOS", 2, 0, "ProgressArc");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/RadioButton.qml")),
-		"Victron.VenusOS", 2, 0, "RadioButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArc.qml")),
 		"Victron.VenusOS", 2, 0, "ScaledArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArcGauge.qml")),
@@ -72,12 +81,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
 		"Victron.VenusOS", 2, 0, "SeparatorBar");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Slider.qml")),
-		"Victron.VenusOS", 2, 0, "Slider");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SpinBox.qml")),
-		"Victron.VenusOS", 2, 0, "SpinBox");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Switch.qml")),
-		"Victron.VenusOS", 2, 0, "Switch");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
 		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
