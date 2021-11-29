@@ -1,27 +1,55 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>components/ComboBox.qml</file>
+        <file>components/controls/Button.qml</file>
+        <file>components/controls/ComboBox.qml</file>
+        <file>components/controls/Label.qml</file>
+        <file>components/controls/RadioButton.qml</file>
+        <file>components/controls/Slider.qml</file>
+        <file>components/controls/SpinBox.qml</file>
+        <file>components/controls/Switch.qml</file>
+        <file>components/ActionButton.qml</file>
+        <file>components/Arc.qml</file>
+        <file>components/ArcGauge.qml</file>
         <file>components/CircularMultiGauge.qml</file>
+        <file>components/ControlCard.qml</file>
+        <file>components/ControlCardsModel.qml</file>
+        <file>components/ControlValue.qml</file>
+        <file>components/Gauges.qml</file>
+        <file>components/ModalDialog.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
+        <file>components/ProgressArc.qml</file>
+        <file>components/ScaledArc.qml</file>
+        <file>components/ScaledArcGauge.qml</file>
+        <file>components/SegmentedButtonRow.qml</file>
+        <file>components/SeparatorBar.qml</file>
+        <file>components/VenusFont.qml</file>
+        <file>components/WeatherDetails.qml</file>
+        <file>components/Utils.js</file>
+        <file>data/Battery.qml</file>
+        <file>data/Generators.qml</file>
+        <file>data/Tanks.qml</file>
         <file>pages/BriefPage.qml</file>
         <file>pages/Page.qml</file>
-        <file>images/brief.svg</file>
         <file>pages/BriefMonitorPanel.qml</file>
+        <file>pages/GeneratorLeftGauge.qml</file>
+        <file>pages/GeneratorMiniGauge.qml</file>
+        <file>pages/GeneratorRightGauge.qml</file>
         <file>pages/LevelsPage.qml</file>
+        <file>pages/LoadGauge.qml</file>
+        <file>pages/LoadMiniGauge.qml</file>
         <file>pages/NotificationsPage.qml</file>
         <file>pages/OverviewPage.qml</file>
         <file>pages/SettingsPage.qml</file>
-        <file>components/ActionButton.qml</file>
-        <file>components/Button.qml</file>
-        <file>components/Label.qml</file>
-        <file>components/RadioButton.qml</file>
-        <file>components/SegmentedButtonRow.qml</file>
-        <file>components/Slider.qml</file>
-        <file>components/SpinBox.qml</file>
-        <file>components/Switch.qml</file>
-        <file>images/dropdown.svg</file>
+        <file>pages/SolarYieldGauge.qml</file>
+        <file>dialogs/DialogManager.qml</file>
+        <file>dialogs/InputCurrentLimitDialog.qml</file>
+        <file>controlcards/GeneratorCard.qml</file>
+        <file>controlcards/InverterCard.qml</file>
+        <file>controlcards/ESSCard.qml</file>
+        <file>fonts/MuseoSans-500.otf</file>
+        <file>images/brief.svg</file>
         <file>images/icon_minus.svg</file>
         <file>images/icon_plus.svg</file>
         <file>images/levels.svg</file>
@@ -29,12 +57,9 @@
         <file>images/overview.svg</file>
         <file>images/settings.svg</file>
         <file>images/panel-toggle.svg</file>
-        <file>fonts/MuseoSans-500.otf</file>
-        <file>components/VenusFont.qml</file>
         <file>images/cloud.svg</file>
         <file>images/rain.svg</file>
         <file>images/scatteredcloud.svg</file>
-        <file>components/WeatherDetails.qml</file>
         <file>images/consumption.svg</file>
         <file>images/generator.svg</file>
         <file>images/grid.svg</file>
@@ -42,39 +67,14 @@
         <file>images/panel-toggled.svg</file>
         <file>images/sunny.svg</file>
         <file>images/settings.png</file>
-        <file>components/Arc.qml</file>
-        <file>components/ProgressArc.qml</file>
         <file>images/battery.svg</file>
         <file>images/blackWater.svg</file>
         <file>images/freshWater.svg</file>
         <file>images/tank.svg</file>
-        <file>data/Battery.qml</file>
-        <file>data/Tanks.qml</file>
-        <file>components/Gauges.qml</file>
-        <file>components/ArcGauge.qml</file>
-        <file>pages/GeneratorLeftGauge.qml</file>
-        <file>pages/LoadGauge.qml</file>
-        <file>pages/GeneratorRightGauge.qml</file>
-        <file>pages/GeneratorMiniGauge.qml</file>
-        <file>pages/LoadMiniGauge.qml</file>
-        <file>pages/SolarYieldGauge.qml</file>
-        <file>components/ScaledArc.qml</file>
-        <file>components/ScaledArcGauge.qml</file>
+        <file>images/dropdown.svg</file>
         <file>images/controls.svg</file>
-        <file>images/inverter.svg</file>
-        <file>components/ControlCard.qml</file>
-        <file>controlcards/GeneratorCard.qml</file>
-        <file>controlcards/InverterCard.qml</file>
-        <file>controlcards/ESSCard.qml</file>
-        <file>images/ess.svg</file>
-        <file>components/ControlValue.qml</file>
-        <file>components/ModalDialog.qml</file>
-        <file>components/ControlCardsModel.qml</file>
-        <file>dialogs/InputCurrentLimitDialog.qml</file>
-        <file>components/SeparatorBar.qml</file>
         <file>images/controls-toggled.svg</file>
-        <file>dialogs/DialogManager.qml</file>
-        <file>components/Utils.js</file>
-        <file>data/Generators.qml</file>
+        <file>images/inverter.svg</file>
+        <file>images/ess.svg</file>
     </qresource>
 </RCC>

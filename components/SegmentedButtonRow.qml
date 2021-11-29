@@ -10,6 +10,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	property int fontPixelSize: Theme.fontSizeLarge
 	property alias model: buttonRepeater.model
 	property int currentIndex
 
@@ -41,7 +42,7 @@ Item {
 				backgroundColor: (down || checked)
 								 ? Theme.okColor
 								 : Theme.okSecondaryColor
-				font.pixelSize: Theme.fontSizeLarge
+				font.pixelSize: root.fontPixelSize
 				radius: 8
 				text: modelData
 
@@ -64,7 +65,10 @@ Item {
 						   : 'transparent'
 				}
 
-				onClicked: root.buttonClicked(model.index)
+				onClicked: {
+					root.buttonClicked(model.index)
+					root.currentIndex = model.index
+				}
 			}
 		}
 	}
