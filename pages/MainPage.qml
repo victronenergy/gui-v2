@@ -13,13 +13,6 @@ Page {
 
 	controlsButton.visible: false
 
-	Connections {
-		target: navStack.currentItem
-		function onControlsButtonClicked(wasToggled) {
-			root.controlsButtonClicked(wasToggled)
-		}
-	}
-
 	C.StackView {
 		id: navStack
 		clip: true

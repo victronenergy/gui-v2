@@ -18,7 +18,7 @@ Rectangle {
 
 	MouseArea {
 		anchors.fill: parent
-		onClicked: if (page) page.controlsButtonClicked(page.isControlCardsPage)
+		onClicked: if (page) page.controlsButton.clicked()
 	}
 
 	Row {

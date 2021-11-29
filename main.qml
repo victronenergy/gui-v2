@@ -69,13 +69,12 @@ Window {
 	}
 
 	Connections {
-		target: pageStack.currentItem
-		function onControlsButtonClicked(wasToggled) {
-			if (wasToggled) {
-				pageStack.pop()
-			} else {
-				pageStack.push("qrc:/pages/ControlCardsPage.qml")
-			}
+		target: PageManager.emitter
+		function onPagePushRequested(page) {
+			pageStack.push(page)
+		}
+		function onPagePopRequested(page) {
+			pageStack.pop()
 		}
 	}
 

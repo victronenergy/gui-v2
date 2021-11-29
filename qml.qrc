@@ -8,6 +8,7 @@
         <file>components/controls/Slider.qml</file>
         <file>components/controls/SpinBox.qml</file>
         <file>components/controls/Switch.qml</file>
+        <file>components/controls/TabButton.qml</file>
         <file>components/ActionButton.qml</file>
         <file>components/Arc.qml</file>
         <file>components/ArcGauge.qml</file>
@@ -24,12 +25,14 @@
         <file>components/ScaledArcGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
+        <file>components/SolarYieldHistory.qml</file>
         <file>components/VenusFont.qml</file>
         <file>components/WeatherDetails.qml</file>
         <file>components/Utils.js</file>
         <file>data/Battery.qml</file>
         <file>data/Generators.qml</file>
         <file>data/Tanks.qml</file>
+        <file>pages/PageManager.qml</file>
         <file>pages/Page.qml</file>
         <file>pages/MainPage.qml</file>
         <file>pages/ControlCardsPage.qml</file>
@@ -45,12 +48,14 @@
         <file>pages/OverviewPage.qml</file>
         <file>pages/SettingsPage.qml</file>
         <file>pages/SolarYieldGauge.qml</file>
+        <file>pages/SolarYieldPage.qml</file>
         <file>dialogs/DialogManager.qml</file>
         <file>dialogs/InputCurrentLimitDialog.qml</file>
         <file>controlcards/GeneratorCard.qml</file>
         <file>controlcards/InverterCard.qml</file>
         <file>controlcards/ESSCard.qml</file>
         <file>fonts/MuseoSans-500.otf</file>
+        <file>images/back.svg</file>
         <file>images/brief.svg</file>
         <file>images/icon_minus.svg</file>
         <file>images/icon_plus.svg</file>

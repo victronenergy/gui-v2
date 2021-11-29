@@ -46,6 +46,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SpinBox");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Switch.qml")),
 		"Victron.VenusOS", 2, 0, "Switch");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/TabButton.qml")),
+		"Victron.VenusOS", 2, 0, "TabButton");
 
 	/* components */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ActionButton.qml")),
@@ -81,6 +83,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
 		"Victron.VenusOS", 2, 0, "SeparatorBar");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarYieldHistory.qml")),
+		"Victron.VenusOS", 2, 0, "SolarYieldHistory");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
 		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
@@ -98,6 +102,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/DialogManager.qml")),
 		"Victron.VenusOS", 2, 0, "DialogManager");
 
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/pages/PageManager.qml")),
+		"Victron.VenusOS", 2, 0, "PageManager");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/Page.qml")),
 		"Victron.VenusOS", 2, 0, "Page");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/MainPage.qml")),

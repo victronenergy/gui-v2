@@ -10,7 +10,6 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	signal controlsButtonClicked(bool wasToggled)
 	property bool isControlCardsPage
 	property alias controlsButton: controlsButton
 
@@ -31,6 +30,6 @@ Item {
 		icon.source: isControlCardsPage ? "qrc:/images/controls-toggled.svg" : "qrc:/images/controls.svg"
 		icon.width: 28
 		icon.height: 28
-		onClicked: root.controlsButtonClicked(isControlCardsPage)
+		onClicked: isControlCardsPage ? PageManager.popPage() : PageManager.pushPage("qrc:/pages/ControlCardsPage.qml")
 	}
 }
