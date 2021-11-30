@@ -56,6 +56,10 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ProgressArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/RadioButton.qml")),
 		"Victron.VenusOS", 2, 0, "RadioButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArc.qml")),
+		"Victron.VenusOS", 2, 0, "ScaledArc");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArcGauge.qml")),
+		"Victron.VenusOS", 2, 0, "ScaledArcGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SegmentedButtonRow.qml")),
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Slider.qml")),

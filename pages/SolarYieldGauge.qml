@@ -11,11 +11,11 @@ import "../data"
 Item {
 	id: root
 
-	property var values: [ 45, 68, 75, 82 ]
+	property var values: [ 45, 82, 75, 68 ]
 
 	Repeater {
 		model: root.values
-		delegate: ArcGauge {
+		delegate: ScaledArcGauge {
 			width: 60
 			x: index * 12
 			opacity: 1.0 - index * 0.2
@@ -23,6 +23,7 @@ Item {
 			startAngle: 270 - 25
 			endAngle: 270 + 25
 			radius: 360 - index * 12
+			direction: PathArc.Clockwise
 			strokeWidth: 10
 			value: modelData
 		}

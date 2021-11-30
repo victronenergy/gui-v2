@@ -58,5 +58,7 @@
         <file>pages/GeneratorMiniGauge.qml</file>
         <file>pages/LoadMiniGauge.qml</file>
         <file>pages/SolarYieldGauge.qml</file>
+        <file>components/ScaledArc.qml</file>
+        <file>components/ScaledArcGauge.qml</file>
     </qresource>
 </RCC>

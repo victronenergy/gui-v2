@@ -3,10 +3,9 @@
 */
 
 import QtQuick
-import QtQuick.Window
+import QtQuick.Shapes
 import Victron.VenusOS
 
-// A progress gauge running an on arc, where 0° is at the top, and positive is clockwise
 Item {
 	id: gauge
 
@@ -27,7 +26,7 @@ Item {
 		layer.enabled: true
 		layer.samples: 4
 
-		ProgressArc {
+		ScaledArc {
 			id: arc
 
 			property int status: Gauges.getValueStatus(gauge.value, gauge.valueType)
@@ -37,10 +36,8 @@ Item {
 			height: width
 			x: arcX !== undefined ? arcX : (gauge.alignment === Qt.AlignRight ? (gauge.width - 2*radius) - margin : margin)
 			y: arcY !== undefined ? arcY : ((gauge.height - height) / 2 - margin)
-			radius: gauge.radius
 			value: gauge.value
-			progressColor: Theme.statusColorValue(status)
-			remainderColor: Theme.statusColorValue(status, true)
+			strokeColor: Theme.statusColorValue(status)
 		}
 	}
 }
