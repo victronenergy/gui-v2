@@ -8,11 +8,12 @@ import QtQuick.Shapes
 ShapePath {
 	id: path
 
-	property real w
+	property real radius
 	property real startAngle
 	property real endAngle
+	property alias direction: arc.direction
+	property alias useLargeArc: arc.useLargeArc
 
-	readonly property real r: w/2
 	readonly property var startOffsets: angleToCoords(degreesToRadians(startAngle))
 	readonly property var endOffsets: angleToCoords(degreesToRadians(endAngle))
 
@@ -32,15 +33,16 @@ ShapePath {
 	capStyle: ShapePath.RoundCap
 	joinStyle: ShapePath.RoundJoin
 
-	startX: path.r + path.startOffsets[1] * path.r
-	startY: path.r - path.startOffsets[0] * path.r
+	startX: path.radius + path.startOffsets[1] * path.radius
+	startY: path.radius - path.startOffsets[0] * path.radius
 
 	PathArc {
-		direction: PathArc.Clockwise
-		radiusX: path.r
-		radiusY: path.r
+		id: arc
+
+		radiusX: path.radius
+		radiusY: path.radius
 		useLargeArc: (endAngle - startAngle) > 180
-		x: path.r + path.endOffsets[1] * path.r
-		y: path.r - path.endOffsets[0] * path.r
+		x: path.radius + path.endOffsets[1] * path.radius
+		y: path.radius - path.endOffsets[0] * path.radius
 	}
 }

@@ -34,6 +34,8 @@ int main(int argc, char *argv[])
 	/* components */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Arc.qml")),
 		"Victron.VenusOS", 2, 0, "Arc");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGauge.qml")),
+		"Victron.VenusOS", 2, 0, "ArcGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ActionButton.qml")),
 		"Victron.VenusOS", 2, 0, "ActionButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Button.qml")),

@@ -10,13 +10,17 @@ Shape {
 	id: control
 
 	property real value
-	property real w
+	property real radius
 	property bool animationEnabled: true
 	property real strokeWidth: 10
 	property alias progressColor: progress.strokeColor
 	property alias remainderColor: remainder.strokeColor
+	property alias startAngle: progress.startAngle
+	property alias endAngle: remainder.endAngle
+	property int direction: PathArc.Clockwise
+	property color fillColor: "transparent"
 
-	property real transitionAngle: 270 * Math.min(Math.max(control.value, 0.0), 100.0) / 100.0
+	property real transitionAngle: startAngle + ((endAngle - startAngle) * Math.min(Math.max(control.value, 0.0), 100.0) / 100.0)
 	Behavior on transitionAngle {
 		enabled: control.animationEnabled
 		NumberAnimation {
@@ -26,20 +30,24 @@ Shape {
 	}
 
 	Arc {
-		id:remainder
-		w: control.w
+		id: remainder
+
+		radius: control.radius
 		startAngle: control.transitionAngle
-		endAngle: 270
+		direction: control.direction
 		strokeWidth: control.strokeWidth
 		strokeColor: Theme.dimColor
+		fillColor: control.fillColor
 	}
 
 	Arc {
 		id: progress
-		w: control.w
-		startAngle: 0
+
+		radius: control.radius
 		endAngle: control.transitionAngle
+		direction: control.direction
 		strokeWidth: control.strokeWidth
 		strokeColor: Theme.highlightColor
+		fillColor: control.fillColor
 	}
 }

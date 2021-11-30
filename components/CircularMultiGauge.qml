@@ -28,7 +28,9 @@ Item {
 				width: gauges.width - (strokeWidth + index*step)
 				height: width
 				anchors.centerIn: parent
-				w: width
+				radius: width/2
+				startAngle: 0
+				endAngle: 270
 				value: model.value
 				progressColor: Theme.statusColorValue(status)
 				remainderColor: Theme.statusColorValue(status, true)
