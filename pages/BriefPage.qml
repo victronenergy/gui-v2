@@ -209,7 +209,7 @@ Page {
 			'blackwater': {
 				textId: 'gaugeBlackWaterText',
 				icon: '/images/blackWater.svg',
-				valueType: Gauges.FallingPercentage
+				valueType: Gauges.RisingPercentage
 			}
 		})
 
