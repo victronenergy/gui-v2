@@ -21,14 +21,14 @@ Item {
 	function _getTanks() {
 		const childIds = veDBus.childIds
 
-		let tanksIds = []
+		let tankIds = []
 		for (let i = 0; i < childIds.length; ++i) {
 			let id = childIds[i]
 			if (id.startsWith('com.victronenergy.tank.')) {
-				tanksIds.push(id)
+				tankIds.push(id)
 			}
 		}
-		_tanks = tanksIds
+		_tanks = tankIds
 	}
 
 	Connections {
@@ -63,11 +63,11 @@ Item {
 				}
 			}
 
-			property VeQuickItem _tankType: VeQuickItem {
+			property VeQuickItem _type: VeQuickItem {
 				uid: "dbus/" + tank.uid + "/FluidType"
 				onValueChanged: tank.type = value || -1
 			}
-			property VeQuickItem _tankLevel: VeQuickItem {
+			property VeQuickItem _level: VeQuickItem {
 				uid: "dbus/" + tank.uid + "/Level"
 				onValueChanged: tank.level = value || -1
 			}
