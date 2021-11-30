@@ -97,39 +97,19 @@ Window {
 		}
 	}
 
-	Loader {
-		id: dbusData
-
-		active: dbusConnected
-		sourceComponent: Item {
-			property Battery battery: Battery {}
-			property Tanks tanks: Tanks {}
-
-			VeQuickItem {
-				id: veDBus
-				uid: "dbus"
-			}
-			VeQuickItem {
-				id: veSystem
-				uid: "dbus/com.victronenergy.system"
-			}
-			VeQuickItem {
-				id: veSettings
-				uid: "dbus/com.victronenergy.settings"
-			}
-		}
-	}
 	Rectangle {
-		id: controlsDialog
+		id: controlsDialogContainer
 
 		anchors {
 			top: parent.top
 			topMargin: 40
 			bottom: parent.bottom
+			left: parent.left
+			right: parent.right
 		}
 
-		width: parent.width
 		color: Theme.backgroundColor
+		enabled: visible
 		visible: opacity > 0.0
 		opacity: 0.0
 		Behavior on opacity { NumberAnimation { duration: 300 } }
@@ -144,7 +124,7 @@ Window {
 
 		MouseArea {
 			anchors.fill: parent
-			onClicked: controlsDialog.hide()
+			onClicked: controlsDialogContainer.hide()
 		}
 
 		ListView {
@@ -166,5 +146,28 @@ Window {
 	}
 	DialogManager {
 		id: dialogManager
+	}
+
+	Loader {
+		id: dbusData
+
+		active: dbusConnected
+		sourceComponent: Item {
+			property Battery battery: Battery {}
+			property Tanks tanks: Tanks {}
+
+			VeQuickItem {
+				id: veDBus
+				uid: "dbus"
+			}
+			VeQuickItem {
+				id: veSystem
+				uid: "dbus/com.victronenergy.system"
+			}
+			VeQuickItem {
+				id: veSettings
+				uid: "dbus/com.victronenergy.settings"
+			}
+		}
 	}
 }

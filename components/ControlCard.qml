@@ -17,7 +17,7 @@ Rectangle {
 
 	MouseArea {
 		anchors.fill: parent
-		onClicked: controlsDialog.visible = false
+		onClicked: controlsDialogContainer.hide()
 	}
 	Row {
 		anchors {

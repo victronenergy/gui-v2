@@ -6,16 +6,14 @@ import QtQuick
 import Victron.VenusOS
 
 Item {
-	property var activeDialog
+	id: root
+
 	property alias inputCurrentLimitDialog: inputCurrentLimitDialog
 
 	anchors.fill: parent
 
 	InputCurrentLimitDialog {
 		id: inputCurrentLimitDialog
-
-		active: activeDialog === inputCurrentLimitDialog
-		onAccepted: activeDialog = null
-		onRejected: activeDialog = null
+		visible: false
 	}
 }

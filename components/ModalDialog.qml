@@ -17,18 +17,12 @@ Dialog {
 	horizontalPadding: 0
 	contentHeight: parent.height
 	contentWidth: parent.width
-	visible: opacity != 0
-	opacity: 0
 
-	onActiveChanged: opacity = active ? 1 : 0
-	onVisibleChanged: {
-		if (visible === false) {
-			done(result)
-		}
+	enter: Transition {
+		NumberAnimation { properties: "opacity"; from: 0.0; to: 1.0; duration: 300 }
 	}
-
-	Behavior on opacity {
-		NumberAnimation { duration: 300 }
+	exit: Transition {
+		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 300 }
 	}
 
 	background: Rectangle {
@@ -84,10 +78,7 @@ Dialog {
 				spacing: 0
 				//% "Close"
 				text: qsTrId("controlcard_close")
-				onClicked: {
-					root.result = Dialog.Rejected
-					root.opacity = 0
-				}
+				onClicked: root.reject()
 			}
 			SeparatorBar {
 				anchors {
@@ -104,10 +95,7 @@ Dialog {
 				spacing: 0
 				//% "Set"
 				text: qsTrId("controlcard_set")
-				onClicked: {
-					root.result = Dialog.Accepted
-					root.opacity = 0
-				}
+				onClicked: root.accept()
 			}
 		}
 	]

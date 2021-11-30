@@ -25,12 +25,12 @@ Rectangle {
 
 		height: 26
 		color: Theme.okColor
-		icon.source: controlsDialog.visible ? "qrc:/images/controls-toggled.svg" : "qrc:/images/controls.svg"
+		icon.source: controlsDialogContainer.visible ? "qrc:/images/controls-toggled.svg" : "qrc:/images/controls.svg"
 		onClicked: {
-			if (!controlsDialog.visible) {
-				controlsDialog.show()
+			if (!controlsDialogContainer.visible) {
+				controlsDialogContainer.show()
 			} else {
-				controlsDialog.hide()
+				controlsDialogContainer.hide()
 			}
 		}
 	}
