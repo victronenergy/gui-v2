@@ -14,6 +14,8 @@ Window {
 
 	property Item battery: dbusData.item.battery
 	property Item tanks: dbusData.item.tanks
+	property Item generators: dbusData.item.generators
+
 	property alias dialogManager: dialogManager
 
 	width: [800, 1024][Theme.screenSize]
@@ -155,6 +157,7 @@ Window {
 		sourceComponent: Item {
 			property Battery battery: Battery {}
 			property Tanks tanks: Tanks {}
+			property Generators generators: Generators {}
 
 			VeQuickItem {
 				id: veDBus
