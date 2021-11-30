@@ -49,6 +49,8 @@ Page {
 		model: gaugeData.model
 	}
 
+	property real sideOpacity: 1
+
 	Loader {
 		id: leftEdge
 		anchors {
@@ -59,6 +61,7 @@ Page {
 			right: gauge.left
 		}
 		height: 320
+		opacity: root.sideOpacity
 		active: leftGaugeTypes.length === 1
 		source: {
 			switch (leftGaugeTypes[0]) {
@@ -78,6 +81,7 @@ Page {
 			left: gauge.right
 		}
 		height: 320
+		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 1
 		source: {
 			switch (rightGaugeTypes[0]) {
@@ -97,6 +101,7 @@ Page {
 			left: gauge.right
 		}
 		height: 160
+		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 2
 		source: {
 			switch (rightGaugeTypes[0]) {
@@ -115,6 +120,7 @@ Page {
 			left: gauge.right
 		}
 		height: 160
+		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 2
 		source: {
 			switch (rightGaugeTypes[1]) {
@@ -134,11 +140,8 @@ Page {
 			rightMargin: 27
 		}
 
-		icon.source: sidePanel.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
-
-		onClicked: {
-			sidePanel.state = (sidePanel.state == '') ? 'hidden' : ''
-		}
+		icon.source: root.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
+		onClicked: root.state = root.state === '' ? 'panelOpen' : ''
 	}
 
 	BriefMonitorPanel {
@@ -149,21 +152,6 @@ Page {
 		opacity: 0
 		width: 240
 		height: 367
-		states: State {
-			name: 'hidden'
-			PropertyChanges {
-				target: sidePanel
-				x: root.width - sidePanel.width - Theme.horizontalPageMargin
-				opacity: 1
-			}
-		}
-
-		transitions: Transition {
-			NumberAnimation {
-				properties: 'x,opacity'; duration: 400
-				easing.type: Easing.InQuad
-			}
-		}
 	}
 
 	property var gaugeConfig: [
@@ -273,5 +261,60 @@ Page {
 		QT_TRID_NOOP('gaugeFreshWaterText'),
 		//% "Black water"
 		QT_TRID_NOOP('gaugeBlackWaterText')
+	]
+
+	states: State {
+		name: 'panelOpen'
+		PropertyChanges {
+			target: sidePanel
+			x: root.width - sidePanel.width - Theme.horizontalPageMargin
+			opacity: 1
+		}
+		PropertyChanges {
+			target: root
+			sideOpacity: 0
+		}
+	}
+
+	transitions: [
+		Transition {
+			to: "panelOpen"
+			from: ""
+			ParallelAnimation {
+				NumberAnimation {
+					target: root
+					property: 'sideOpacity'
+					duration: 200
+				}
+				NumberAnimation {
+					target: sidePanel
+					properties: 'x,opacity'
+					duration: 400
+					easing.type: Easing.InQuad
+				}
+			}
+		},
+		Transition {
+			to: ""
+			from: "panelOpen"
+			ParallelAnimation {
+				SequentialAnimation {
+					PauseAnimation {
+						duration: 200
+					}
+					NumberAnimation {
+						target: root
+						property: 'sideOpacity'
+						duration: 200
+					}
+				}
+				NumberAnimation {
+					target: sidePanel
+					properties: 'x,opacity'
+					duration: 400
+					easing.type: Easing.InQuad
+				}
+			}
+		}
 	]
 }
