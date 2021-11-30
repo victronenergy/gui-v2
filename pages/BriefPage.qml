@@ -101,22 +101,22 @@ Page {
 			'battery': {
 				textId: 'gaugeBatteryText',
 				icon: '/images/battery.svg',
-				valueType: CircularMultiGauge.FallingPercentage
+				valueType: Gauges.FallingPercentage
 			},
 			'fuel': {
 				textId: 'gaugeFuelText',
 				icon: '/images/tank.svg',
-				valueType: CircularMultiGauge.FallingPercentage
+				valueType: Gauges.FallingPercentage
 			},
 			'freshwater': {
 				textId: 'gaugeFreshWaterText',
 				icon: '/images/freshWater.svg',
-				valueType: CircularMultiGauge.FallingPercentage
+				valueType: Gauges.FallingPercentage
 			},
 			'blackwater': {
 				textId: 'gaugeBlackWaterText',
 				icon: '/images/blackWater.svg',
-				valueType: CircularMultiGauge.FallingPercentage
+				valueType: Gauges.FallingPercentage
 			}
 		})
 
