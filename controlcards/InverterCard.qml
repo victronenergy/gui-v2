@@ -39,7 +39,7 @@ ControlCard {
 			displayValue.text: qsTrId("amps").arg(value / 1000)
 			onClicked: {
 				dialogManager.inputCurrentLimitDialog.newInputCurrentLimit = root.inputCurrentLimit
-				dialogManager.activeDialog = dialogManager.inputCurrentLimitDialog
+				dialogManager.inputCurrentLimitDialog.open()
 			}
 		}
 		ControlValue {
@@ -51,7 +51,6 @@ ControlCard {
 	}
 	Connections {
 		target: dialogManager.inputCurrentLimitDialog
-
 		function onSetInputCurrentLimit(newValue) {
 			root.inputCurrentLimit = newValue
 		}

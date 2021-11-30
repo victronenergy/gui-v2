@@ -53,8 +53,5 @@ ModalDialog {
 		}
 	]
 
-	onAccepted: {
-		root.setInputCurrentLimit(newInputCurrentLimit)
-		close()
-	}
+	onAccepted: root.setInputCurrentLimit(newInputCurrentLimit)
 }
