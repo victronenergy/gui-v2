@@ -51,5 +51,12 @@
         <file>data/Battery.qml</file>
         <file>data/Tanks.qml</file>
         <file>components/Gauges.qml</file>
+        <file>components/ArcGauge.qml</file>
+        <file>pages/GeneratorLeftGauge.qml</file>
+        <file>pages/LoadGauge.qml</file>
+        <file>pages/GeneratorRightGauge.qml</file>
+        <file>pages/GeneratorMiniGauge.qml</file>
+        <file>pages/LoadMiniGauge.qml</file>
+        <file>pages/SolarYieldGauge.qml</file>
     </qresource>
 </RCC>

@@ -10,6 +10,32 @@ import "../data"
 Page {
 	id: root
 
+	// Temporary code?
+	property bool solarYieldPresent: true
+	property bool generatorPresent: true
+	property bool loadPresent: true
+
+	property var leftGaugeTypes: []
+	property var rightGaugeTypes: []
+
+	function populateSideGauges() {
+		// Determine which side gauges are to be displayed
+		let leftTypes = []
+		let rightTypes = []
+		if (solarYieldPresent) {
+			leftTypes.push('solar')
+		}
+		if (generatorPresent) {
+			(solarYieldPresent ? rightTypes : leftTypes).push('generator')
+		}
+		if (loadPresent) {
+			rightTypes.push('load')
+		}
+
+		leftGaugeTypes = leftTypes
+		rightGaugeTypes = rightTypes
+	}
+
 	CircularMultiGauge {
 		id: gauge
 
@@ -21,6 +47,81 @@ Page {
 		width: 315
 		height: 320
 		model: gaugeData.model
+	}
+
+	Loader {
+		id: leftEdge
+		anchors {
+			top: parent.top
+			topMargin: 56
+			left: parent.left
+			leftMargin: 40
+			right: gauge.left
+		}
+		height: 320
+		active: leftGaugeTypes.length === 1
+		source: {
+			switch (leftGaugeTypes[0]) {
+			case 'solar': return 'SolarYieldGauge.qml'
+			case 'generator': return 'GeneratorLeftGauge.qml'
+			}
+			return ''
+		}
+	}
+	Loader {
+		id: rightEdge
+		anchors {
+			top: parent.top
+			topMargin: 56
+			right: parent.right
+			rightMargin: 40
+			left: gauge.right
+		}
+		height: 320
+		active: rightGaugeTypes.length === 1
+		source: {
+			switch (rightGaugeTypes[0]) {
+			case 'generator': return 'GeneratorRightGauge.qml'
+			case 'load': return 'LoadGauge.qml'
+			}
+			return ''
+		}
+	}
+	Loader {
+		id: rightUpper
+		anchors {
+			top: parent.top
+			topMargin: 56
+			right: parent.right
+			rightMargin: 40
+			left: gauge.right
+		}
+		height: 160
+		active: rightGaugeTypes.length === 2
+		source: {
+			switch (rightGaugeTypes[0]) {
+			case 'generator': return 'GeneratorMiniGauge.qml'
+			}
+			return ''
+		}
+	}
+	Loader {
+		id: rightLower
+		anchors {
+			top: parent.top
+			topMargin: 216
+			right: parent.right
+			rightMargin: 40
+			left: gauge.right
+		}
+		height: 160
+		active: rightGaugeTypes.length === 2
+		source: {
+			switch (rightGaugeTypes[1]) {
+			case 'load': return 'LoadMiniGauge.qml'
+			}
+			return ''
+		}
 	}
 
 	Button {
@@ -73,7 +174,11 @@ Page {
 	]
 
 	onGaugeConfigChanged: gaugeData.populateModel()
-	Component.onCompleted: gaugeData.populateModel()
+
+	Component.onCompleted: {
+		root.populateSideGauges()
+		gaugeData.populateModel()
+	}
 
 	Item {
 		id: gaugeData
