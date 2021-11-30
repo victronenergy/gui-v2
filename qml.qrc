@@ -50,5 +50,6 @@
         <file>images/tank.svg</file>
         <file>data/Battery.qml</file>
         <file>data/Tanks.qml</file>
+        <file>components/Gauges.qml</file>
     </qresource>
 </RCC>
