@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.Velib
+import "/components/Utils.js" as Utils
 
 Item {
 	id: root
@@ -28,7 +29,10 @@ Item {
 				tankIds.push(id)
 			}
 		}
-		_tanks = tankIds
+
+		if (Utils.arrayCompare(_tanks, tankIds)) {
+			_tanks = tankIds
+		}
 	}
 
 	Connections {
@@ -48,14 +52,7 @@ Item {
 
 			property bool valid: type >= 0 && level >= 0
 			onValidChanged: {
-				let index = -1
-				for (let i = 0; i < root.model.count; ++i) {
-					if (root.model.get(i) === tank) {
-						index = i
-						break
-					}
-				}
-
+				const index = Utils.findIndex(root.model, tank)
 				if (valid && index < 0) {
 					root.model.append({ tank: tank })
 				} else if (!valid && index >= 0) {
