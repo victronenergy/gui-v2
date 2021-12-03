@@ -62,11 +62,11 @@ Item {
 
 			property VeQuickItem _type: VeQuickItem {
 				uid: "dbus/" + tank.uid + "/FluidType"
-				onValueChanged: tank.type = value || -1
+				onValueChanged: tank.type = value === undefined ? -1 : value
 			}
 			property VeQuickItem _level: VeQuickItem {
 				uid: "dbus/" + tank.uid + "/Level"
-				onValueChanged: tank.level = value || -1
+				onValueChanged: tank.level = value === undefined ? -1 : value
 			}
 		}
 	}
