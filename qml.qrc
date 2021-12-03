@@ -74,5 +74,6 @@
         <file>components/SeparatorBar.qml</file>
         <file>images/controls-toggled.svg</file>
         <file>dialogs/DialogManager.qml</file>
+        <file>components/Utils.js</file>
     </qresource>
 </RCC>
