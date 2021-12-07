@@ -73,7 +73,7 @@ Dialog {
 			Button {
 				width: parent.width / 2
 				height: parent.height
-				font.pixelSize: 22
+				font.pixelSize: Theme.fontSizeControlValue
 				color: Theme.primaryFontColor
 				spacing: 0
 				//% "Close"
@@ -90,7 +90,7 @@ Dialog {
 			Button {
 				width: parent.width / 2
 				height: parent.height
-				font.pixelSize: 22
+				font.pixelSize: Theme.fontSizeControlValue
 				color: Theme.primaryFontColor
 				spacing: 0
 				//% "Set"

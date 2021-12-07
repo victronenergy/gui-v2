@@ -41,6 +41,7 @@ class Theme : public QObject
 	Q_PROPERTY(int fontSizeMedium READ fontSizeMedium CONSTANT)
 	Q_PROPERTY(int fontSizeLarge READ fontSizeLarge CONSTANT)
 	Q_PROPERTY(int fontSizeExtraLarge READ fontSizeExtraLarge CONSTANT)
+	Q_PROPERTY(int fontSizeControlValue READ fontSizeControlValue CONSTANT)
 	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
 	Q_PROPERTY(int horizontalPageMargin READ horizontalPageMargin CONSTANT)
 	Q_PROPERTY(int iconSizeMedium READ iconSizeMedium CONSTANT)
@@ -84,6 +85,7 @@ public:
 		FontSizeMedium = 0,
 		FontSizeLarge,
 		FontSizeExtraLarge,
+		FontSizeControlValue,
 		MarginSmall,
 		HorizontalPageMargin,
 		IconSizeMedium,
@@ -131,6 +133,7 @@ public:
 	int fontSizeMedium() const;
 	int fontSizeLarge() const;
 	int fontSizeExtraLarge() const;
+	int fontSizeControlValue() const;
 	int marginSmall() const;
 	int horizontalPageMargin() const;
 	int iconSizeMedium() const;
@@ -248,6 +251,8 @@ private:
 		28,
 		/* [FontSizeExtraLarge] */
 		56,
+		/* [FontSizeControlValue] */
+		22,
 		/* [MarginSmall] */
 		7,
 		/* [HorizontalPageMargin] */

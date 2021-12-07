@@ -8,12 +8,12 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property alias inputCurrentLimitDialog: inputCurrentLimitDialog
-
-	anchors.fill: parent
-
-	InputCurrentLimitDialog {
-		id: inputCurrentLimitDialog
+	property InputCurrentLimitDialog inputCurrentLimitDialog: InputCurrentLimitDialog {
 		visible: false
 	}
+	property InverterChargerModeDialog inverterChargerModeDialog: InverterChargerModeDialog {
+		visible: false
+	}
+
+	anchors.fill: parent
 }

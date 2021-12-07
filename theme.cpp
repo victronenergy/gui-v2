@@ -144,6 +144,11 @@ int Theme::fontSizeExtraLarge() const
 	return otherValue(FontSizeExtraLarge).toInt();
 }
 
+int Theme::fontSizeControlValue() const
+{
+	return otherValue(FontSizeControlValue).toInt();
+}
+
 int Theme::marginSmall() const
 {
 	return otherValue(MarginSmall).toInt();

@@ -46,7 +46,7 @@ C.ComboBox {
 				}
 
 				text: model.text
-				font.pixelSize: 22 // TODO add to Theme if size is used elsewhere
+				font.pixelSize: Theme.fontSizeControlValue
 				elide: Text.ElideRight
 				color: delegateIcon.color
 			}
@@ -91,7 +91,7 @@ C.ComboBox {
 			}
 
 			text: root.displayText
-			font.pixelSize: 22 // TODO add to Theme if size is used elsewhere
+			font.pixelSize: Theme.fontSizeControlValue
 			elide: Text.ElideRight
 		}
 	}

@@ -10,6 +10,8 @@ import Victron.VenusOS
 C.RadioButton {
 	id: root
 
+	property alias label: label
+
 	indicator: Rectangle {
 		x: root.width - width
 		y: parent.height / 2 - height / 2
@@ -36,6 +38,7 @@ C.RadioButton {
 		Label {
 			id: label
 
+			font.pixelSize: Theme.fontSizeControlValue
 			text: root.text
 			color: Theme.primaryFontColor
 			verticalAlignment: Text.AlignVCenter
