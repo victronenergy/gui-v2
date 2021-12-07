@@ -9,8 +9,8 @@ ControlCard {
 	id: root
 
 	property int inputCurrentLimit: 10700 // (mA) TODO - hook this up to the real value
-	//% "On"
-	property var mode: qsTrId("inverter_card_on") // TODO - hook this up to the real value
+
+	property int modeIndex: 0 // TODO - hook this up to the real value
 
 	icon.source: "qrc:/images/inverter.svg"
 	//% "Inverter"
@@ -46,13 +46,23 @@ ControlCard {
 			rectangle.width: 180
 			//% "Mode"
 			label.text: qsTrId("controlcard_mode")
-			displayValue.text: root.mode
+			displayValue.text: qsTrId(ControlCardsModel.inverterModeStrings[modeIndex])
+			onClicked: {
+				dialogManager.inverterChargerModeDialog.newModeIndex = modeIndex
+				dialogManager.inverterChargerModeDialog.open()
+			}
 		}
 	}
 	Connections {
 		target: dialogManager.inputCurrentLimitDialog
 		function onSetInputCurrentLimit(newValue) {
 			root.inputCurrentLimit = newValue
+		}
+	}
+	Connections {
+		target: dialogManager.inverterChargerModeDialog
+		function onSetMode(newIndex) {
+			modeIndex = newIndex
 		}
 	}
 }

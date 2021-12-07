@@ -11,6 +11,18 @@ import QtQuick
 */
 ListModel {
 	id: cards
+
+	property var inverterModeStrings: [
+		//% "On"
+		QT_TRID_NOOP('inverter_card_on'),
+		//% "Charger only"
+		QT_TRID_NOOP('inverter_card_charger_only'),
+		//% "Inverter only"
+		QT_TRID_NOOP('inverter_card_inverter_only'),
+		//% "Off"
+		QT_TRID_NOOP('inverter_card_off'),
+	]
+
 	ListElement {
 		url: "qrc:/controlcards/GeneratorCard.qml"
 	}

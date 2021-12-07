@@ -63,7 +63,7 @@ Column {
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			color: Theme.primaryFontColor
-			font.pixelSize: 22
+			font.pixelSize: Theme.fontSizeControlValue
 		}
 	}
 	SeparatorBar {
