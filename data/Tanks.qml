@@ -37,7 +37,7 @@ Item {
 
 	Connections {
 		target: veDBus
-		function onChildIdsChanged() { _getTanks() }
+		function onChildIdsChanged() { Qt.callLater(_getTanks) }
 		Component.onCompleted: _getTanks()
 	}
 
@@ -47,25 +47,27 @@ Item {
 			id: tank
 
 			property string uid: modelData
+			property string dbusUid: "dbus/" + tank.uid
+
 			property int type: -1
 			property int level: -1
 
-			property bool valid: type >= 0 && level >= 0
-			onValidChanged: {
+			property bool _valid: type >= 0 && level >= 0
+			on_ValidChanged: {
 				const index = Utils.findIndex(root.model, tank)
-				if (valid && index < 0) {
+				if (_valid && index < 0) {
 					root.model.append({ tank: tank })
-				} else if (!valid && index >= 0) {
+				} else if (!_valid && index >= 0) {
 					root.model.remove(index)
 				}
 			}
 
 			property VeQuickItem _type: VeQuickItem {
-				uid: "dbus/" + tank.uid + "/FluidType"
+				uid: dbusUid + "/FluidType"
 				onValueChanged: tank.type = value === undefined ? -1 : value
 			}
 			property VeQuickItem _level: VeQuickItem {
-				uid: "dbus/" + tank.uid + "/Level"
+				uid: dbusUid + "/Level"
 				onValueChanged: tank.level = value === undefined ? -1 : value
 			}
 		}
