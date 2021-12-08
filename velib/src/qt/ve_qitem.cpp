@@ -216,6 +216,13 @@ void VeQItem::produceValue(QVariant variant, State state, bool forceChanged)
 		emit seenChanged();
 	}
 
+	// Temporary:
+	if (valueIsChanged) {
+		if (qEnvironmentVariableIntValue("DBUS_DEBUG") > 0) {
+			qWarning() << "  --" << uniqueId() << "::" << mValue;
+		}
+	}
+
 	if (stateIsChanged)
 		emit stateChanged(this, state);
 	if (valueIsChanged)
