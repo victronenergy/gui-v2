@@ -3,15 +3,16 @@
 */
 
 import QtQuick
+import QtQuick.Controls as C
+import QtQuick.Templates as CT
 import Victron.VenusOS
 
-Rectangle {
+Item {
 	id: root
 
-	property bool isTopPage
+	signal controlsButtonClicked(bool wasToggled)
+	property bool isControlCardsPage
 	property alias controlsButton: controlsButton
-
-	color: Theme.backgroundColor
 
 	Button {
 		id: controlsButton
@@ -23,15 +24,13 @@ Rectangle {
 			topMargin: 10
 		}
 
-		height: 26
+		height: 32
+		width: height
+		display: C.AbstractButton.IconOnly
 		color: Theme.okColor
-		icon.source: controlsDialogContainer.visible ? "qrc:/images/controls-toggled.svg" : "qrc:/images/controls.svg"
-		onClicked: {
-			if (!controlsDialogContainer.visible) {
-				controlsDialogContainer.show()
-			} else {
-				controlsDialogContainer.hide()
-			}
-		}
+		icon.source: isControlCardsPage ? "qrc:/images/controls-toggled.svg" : "qrc:/images/controls.svg"
+		icon.width: 28
+		icon.height: 28
+		onClicked: root.controlsButtonClicked(isControlCardsPage)
 	}
 }

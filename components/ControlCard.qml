@@ -6,6 +6,7 @@ import QtQuick
 import Victron.VenusOS
 
 Rectangle {
+	property Page page: ListView.view ? ListView.view.parent : null
 	property alias icon: icon
 	property alias title: title
 	property alias status: status
@@ -17,8 +18,9 @@ Rectangle {
 
 	MouseArea {
 		anchors.fill: parent
-		onClicked: controlsDialogContainer.hide()
+		onClicked: if (page) page.controlsButtonClicked(page.isControlCardsPage)
 	}
+
 	Row {
 		anchors {
 			left: parent.left
@@ -36,6 +38,7 @@ Rectangle {
 			font.pixelSize: Theme.fontSizeMedium
 		}
 	}
+
 	Label {
 		id: status
 

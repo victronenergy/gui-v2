@@ -7,10 +7,8 @@ import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-Page {
+Item {
 	id: root
-
-	controlsButton.visible: false
 
 	Column {
 		anchors {
