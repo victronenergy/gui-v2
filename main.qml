@@ -91,6 +91,8 @@ Window {
 			property Battery battery: Battery {}
 			property Tanks tanks: Tanks {}
 			property Generators generators: Generators {}
+			property Inverters inverters: Inverters {}
+			property Relays relays: Relays {}
 
 			VeQuickItem {
 				id: veDBus
