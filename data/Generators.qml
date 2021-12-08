@@ -60,7 +60,7 @@ Item {
 
 	Connections {
 		target: veStartStop
-		function onChildIdsChanged() { _getGenerators() }
+		function onChildIdsChanged() { Qt.callLater(_getGenerators) }
 		Component.onCompleted: _getGenerators()
 	}
 
@@ -70,35 +70,37 @@ Item {
 			id: generator
 
 			property string uid: modelData
+			property string dbusUid: veStartStop.uid + "/" + generator.uid
+
 			property int state: -1
 			property bool manualStart
 			property int runtime: -1
 			property int runningBy: -1
 
-			property bool valid: state >= 0
-			onValidChanged: {
+			property bool _valid: state >= 0
+			on_ValidChanged: {
 				const index = Utils.findIndex(root.model, generator)
-				if (valid && index < 0) {
+				if (_valid && index < 0) {
 					root.model.append({ generator: generator })
-				} else if (!valid && index >= 0) {
+				} else if (!_valid && index >= 0) {
 					root.model.remove(index)
 				}
 			}
 
 			property VeQuickItem _state: VeQuickItem {
-				uid: veStartStop.uid + "/" + generator.uid + "/State"
+				uid: dbusUid + "/State"
 				onValueChanged: generator.state = value === undefined ? -1 : value
 			}
 			property VeQuickItem _manualStart: VeQuickItem {
-				uid: veStartStop.uid + "/" + generator.uid + "/ManualStart"
+				uid: dbusUid + "/ManualStart"
 				onValueChanged: generator.manualStart = value === undefined ? false : value
 			}
 			property VeQuickItem _runtime: VeQuickItem {
-				uid: veStartStop.uid + "/" + generator.uid + "/Runtime"
+				uid: dbusUid + "/Runtime"
 				onValueChanged: generator.runtime = value === undefined ? -1 : value
 			}
 			property VeQuickItem _runningBy: VeQuickItem {
-				uid: veStartStop.uid + "/" + generator.uid + "/RunningByConditionCode"
+				uid: dbusUid + "/RunningByConditionCode"
 				onValueChanged: generator.runningBy = value === undefined ? -1 : value
 			}
 		}
