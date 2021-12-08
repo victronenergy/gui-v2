@@ -29,6 +29,8 @@
         <file>components/Utils.js</file>
         <file>data/Battery.qml</file>
         <file>data/Generators.qml</file>
+        <file>data/Inverters.qml</file>
+        <file>data/Relays.qml</file>
         <file>data/Tanks.qml</file>
         <file>pages/Page.qml</file>
         <file>pages/MainPage.qml</file>
