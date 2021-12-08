@@ -30,8 +30,10 @@
         <file>data/Battery.qml</file>
         <file>data/Generators.qml</file>
         <file>data/Tanks.qml</file>
-        <file>pages/BriefPage.qml</file>
         <file>pages/Page.qml</file>
+        <file>pages/MainPage.qml</file>
+        <file>pages/ControlCardsPage.qml</file>
+        <file>pages/BriefPage.qml</file>
         <file>pages/BriefMonitorPanel.qml</file>
         <file>pages/GeneratorLeftGauge.qml</file>
         <file>pages/GeneratorMiniGauge.qml</file>

@@ -98,6 +98,39 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/DialogManager.qml")),
 		"Victron.VenusOS", 2, 0, "DialogManager");
 
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/Page.qml")),
+		"Victron.VenusOS", 2, 0, "Page");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/MainPage.qml")),
+		"Victron.VenusOS", 2, 0, "MainPage");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/ControlCardsPage.qml")),
+		"Victron.VenusOS", 2, 0, "ControlCardsPage");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/LevelsPage.qml")),
+		"Victron.VenusOS", 2, 0, "LevelsPage");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/OverviewPage.qml")),
+		"Victron.VenusOS", 2, 0, "OverviewPage");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/SettingsPage.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsPage");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/BriefPage.qml")),
+		"Victron.VenusOS", 2, 0, "BriefPage");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/NotificationsPage.qml")),
+		"Victron.VenusOS", 2, 0, "NotificationsPage");
+
+	// TODO: the following are components, not pages, and should be moved.
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/BriefMonitorPanel.qml")),
+		"Victron.VenusOS", 2, 0, "BriefMonitorPanel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/GeneratorMiniGauge.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorMiniGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/LoadMiniGauge.qml")),
+		"Victron.VenusOS", 2, 0, "LoadMiniGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/GeneratorLeftGauge.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorLeftGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/GeneratorRightGauge.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorRightGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/LoadGauge.qml")),
+		"Victron.VenusOS", 2, 0, "LoadGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/SolarYieldGauge.qml")),
+		"Victron.VenusOS", 2, 0, "SolarYieldGauge");
+
 	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
 
 	QGuiApplication app(argc, argv);

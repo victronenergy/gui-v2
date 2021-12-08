@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls as C
 import Victron.Velib
 import Victron.VenusOS
 import "../data"
@@ -140,7 +141,12 @@ Page {
 			rightMargin: 26
 		}
 
+		width: 32
+		height: width
+		display: C.AbstractButton.IconOnly
 		icon.source: root.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
+		icon.width: 28
+		icon.height: 20
 		onClicked: root.state = root.state === '' ? 'panelOpen' : ''
 		color: Theme.okColor
 	}

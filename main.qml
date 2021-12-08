@@ -4,6 +4,7 @@
 
 import QtQuick
 import QtQuick.Window
+import QtQuick.Controls
 import Victron.Velib
 import Victron.VenusOS
 import "pages"
@@ -27,125 +28,57 @@ Window {
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
 
-	ListView {
+	StackView {
 		id: pageStack
+		anchors.fill: parent
+		initialItem: "qrc:/pages/MainPage.qml"
 
-		width: root.width
-		height: root.height - navBar.height
-		interactive: false
-		orientation: Qt.Horizontal
-		highlightMoveDuration: 500  // TODO move into Theme if this is final
-
-		model: ListModel {
-			ListElement {
-				//% "Brief"
-				text: qsTrId("nav_brief")
-				icon: "qrc:/images/brief.svg"
-				url: "qrc:/pages/BriefPage.qml"
-			}
-
-			ListElement {
-				//% "Overview"
-				text: qsTrId("nav_overview")
-				icon: "qrc:/images/overview.svg"
-				url: "qrc:/pages/OverviewPage.qml"
-			}
-
-			ListElement {
-				//% "Levels"
-				text: qsTrId("nav_levels")
-				icon: "qrc:/images/levels.svg"
-				url: "qrc:/pages/LevelsPage.qml"
-			}
-
-			ListElement {
-				//% "Notifications"
-				text: qsTrId("nav_notifications")
-				icon: "qrc:/images/notifications.svg"
-				url: "qrc:/pages/NotificationsPage.qml"
-			}
-
-			ListElement {
-				//% "Settings"
-				text: qsTrId("nav_settings")
-				icon: "qrc:/images/settings.png"
-				url: "qrc:/pages/SettingsPage.qml"
+		// Slide new drill-down pages in from the right
+		pushEnter: Transition {
+			PropertyAnimation {
+				property: "x"
+				from: width
+				to: 0
+				duration: 250
 			}
 		}
-
-		delegate: Loader {
-			id: pageDelegate
-
-			width: root.width
-			height: pageStack.height
-			source: model.url
-
-			Binding {
-				target: pageDelegate.item
-				property: 'isTopPage'
-				value: model.index === pageStack.currentIndex
+		pushExit: Transition {
+			PropertyAnimation {
+				property: "x"
+				from: 0
+				to: -width
+				duration: 250
+			}
+		}
+		popEnter: Transition {
+			PropertyAnimation {
+				property: "x"
+				from: 0
+				to: width
+				duration: 250
+			}
+		}
+		popExit: Transition {
+			PropertyAnimation {
+				property: "x"
+				from: -width
+				to: 0
+				duration: 250
 			}
 		}
 	}
 
-	NavBar {
-		id: navBar
-
-		anchors.bottom: parent.bottom
-		model: pageStack.model
-
-		onButtonClicked: function (buttonIndex) {
-			pageStack.currentIndex = buttonIndex
-		}
-	}
-
-	Rectangle {
-		id: controlsDialogContainer
-
-		anchors {
-			top: parent.top
-			topMargin: 40
-			bottom: parent.bottom
-			left: parent.left
-			right: parent.right
-		}
-
-		color: Theme.backgroundColor
-		enabled: visible
-		visible: opacity > 0.0
-		opacity: 0.0
-		Behavior on opacity { NumberAnimation { duration: 300 } }
-
-		function show() {
-			opacity = 1.0
-		}
-
-		function hide() {
-			opacity = 0.0
-		}
-
-		MouseArea {
-			anchors.fill: parent
-			onClicked: controlsDialogContainer.hide()
-		}
-
-		ListView {
-			anchors {
-				left: parent.left
-				leftMargin: 24 // TODO - handle 7" size if it is different
-				right: parent.right
-				top: parent.top
-				bottom: parent.bottom
-				bottomMargin: 8 // TODO - handle 7" size if it is different
-			}
-			spacing: 16
-			orientation: ListView.Horizontal
-			model: ControlCardsModel
-			delegate: Loader {
-				source: url
+	Connections {
+		target: pageStack.currentItem
+		function onControlsButtonClicked(wasToggled) {
+			if (wasToggled) {
+				pageStack.pop()
+			} else {
+				pageStack.push("qrc:/pages/ControlCardsPage.qml")
 			}
 		}
 	}
+
 	DialogManager {
 		id: dialogManager
 	}
