@@ -10,9 +10,19 @@ import Victron.VenusOS
 C.Slider {
 	id: root
 
+	implicitHeight: Math.max(background.implicitHeight, handle.implicitHeight)
 	background: Rectangle {
-		x: root.leftPadding
-		y: root.topPadding + root.availableHeight / 2 - height / 2
+		anchors {
+			top: parent.top
+			topMargin: parent.height/3
+			bottom: parent.bottom
+			bottomMargin: parent.height/3
+			left: parent.left
+			leftMargin: parent.leftPadding
+			right: parent.right
+			rightMargin: parent.rightPadding
+		}
+
 		implicitWidth: 496
 		implicitHeight: 8
 		width: root.availableWidth
@@ -31,6 +41,8 @@ C.Slider {
 	handle: Rectangle {
 		x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
 		y: root.topPadding + root.availableHeight / 2 - height / 2
+		height: parent.height
+		width: height
 		implicitWidth: 24
 		implicitHeight: 24
 		radius: 12

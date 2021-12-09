@@ -48,6 +48,7 @@
         <file>pages/SettingsPage.qml</file>
         <file>pages/SolarYieldGauge.qml</file>
         <file>dialogs/DialogManager.qml</file>
+        <file>dialogs/ESSMinimumSOCDialog.qml</file>
         <file>dialogs/InputCurrentLimitDialog.qml</file>
         <file>dialogs/InverterChargerModeDialog.qml</file>
         <file>dialogs/GeneratorDisableAutostartDialog.qml</file>
@@ -87,5 +88,6 @@
         <file>images/controls-toggled.svg</file>
         <file>images/inverter.svg</file>
         <file>images/ess.svg</file>
+        <file>images/information.svg</file>
     </qresource>
 </RCC>
