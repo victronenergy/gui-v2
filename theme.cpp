@@ -6,6 +6,13 @@
 
 using namespace Victron::VenusOS;
 
+QColor Theme::colorValueWithOpacity(DisplayMode mode, ColorProperty role, qreal opacity) const
+{
+	QColor col = m_colorValues[mode][role].value<QColor>();
+	col.setAlphaF(opacity);
+	return col;
+}
+
 QColor Theme::colorValue(DisplayMode mode, ColorProperty role) const
 {
 	return m_colorValues[mode][role].value<QColor>();
@@ -129,6 +136,11 @@ QColor Theme::spinboxButtonSecondaryColor() const
 	return colorValue(m_displayMode, SpinboxButtonSecondaryColor);
 }
 
+int Theme::fontSizeSubcardHeader() const
+{
+	return otherValue(FontSizeSubcardHeader).toInt();
+}
+
 int Theme::fontSizeMedium() const
 {
 	return otherValue(FontSizeMedium).toInt();
@@ -137,6 +149,11 @@ int Theme::fontSizeMedium() const
 int Theme::fontSizeLarge() const
 {
 	return otherValue(FontSizeLarge).toInt();
+}
+
+int Theme::fontSizeWarningDialogHeader() const
+{
+	return otherValue(FontSizeWarningDialogHeader).toInt();
 }
 
 int Theme::fontSizeExtraLarge() const

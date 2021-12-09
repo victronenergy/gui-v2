@@ -38,8 +38,10 @@ class Theme : public QObject
 	Q_PROPERTY(QColor separatorBarColor READ separatorBarColor NOTIFY separatorBarColorChanged)
 	Q_PROPERTY(QColor spinboxButtonColor READ spinboxButtonColor NOTIFY spinboxButtonColorChanged)
 	Q_PROPERTY(QColor spinboxButtonSecondaryColor READ spinboxButtonSecondaryColor NOTIFY spinboxButtonSecondaryColorChanged)
+	Q_PROPERTY(int fontSizeSubcardHeader READ fontSizeSubcardHeader CONSTANT)
 	Q_PROPERTY(int fontSizeMedium READ fontSizeMedium CONSTANT)
 	Q_PROPERTY(int fontSizeLarge READ fontSizeLarge CONSTANT)
+	Q_PROPERTY(int fontSizeWarningDialogHeader READ fontSizeWarningDialogHeader CONSTANT)
 	Q_PROPERTY(int fontSizeExtraLarge READ fontSizeExtraLarge CONSTANT)
 	Q_PROPERTY(int fontSizeControlValue READ fontSizeControlValue CONSTANT)
 	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
@@ -82,8 +84,10 @@ public:
 	Q_ENUM(ColorProperty)
 
 	enum OtherProperty {
-		FontSizeMedium = 0,
+		FontSizeSubcardHeader = 0,
+		FontSizeMedium,
 		FontSizeLarge,
+		FontSizeWarningDialogHeader,
 		FontSizeExtraLarge,
 		FontSizeControlValue,
 		MarginSmall,
@@ -100,6 +104,7 @@ public:
 	};
 	Q_ENUM(StatusLevel)
 
+	Q_INVOKABLE QColor colorValueWithOpacity(DisplayMode mode, ColorProperty role, qreal opacity) const;
 	Q_INVOKABLE QColor colorValue(DisplayMode mode, ColorProperty role) const;
 	Q_INVOKABLE QVariant otherValue(OtherProperty role) const;
 	Q_INVOKABLE QString displayModeToString(DisplayMode mode) const;
@@ -130,8 +135,10 @@ public:
 	QColor spinboxButtonColor() const;
 	QColor spinboxButtonSecondaryColor() const;
 
+	int fontSizeSubcardHeader() const;
 	int fontSizeMedium() const;
 	int fontSizeLarge() const;
+	int fontSizeWarningDialogHeader() const;
 	int fontSizeExtraLarge() const;
 	int fontSizeControlValue() const;
 	int marginSmall() const;
@@ -245,10 +252,14 @@ private:
 
 	/* these values do not depend on the currently selected displayMode */
 	QVector<QVariant> m_otherValues {
+		/* [FontSizeSubcardHeader] */
+		16,
 		/* [FontSizeMedium] */
 		18,
 		/* [FontSizeLarge] */
 		28,
+		/* [FontSizeWarningDialogHeader] */
+		36,
 		/* [FontSizeExtraLarge] */
 		56,
 		/* [FontSizeControlValue] */

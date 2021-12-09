@@ -7,13 +7,10 @@ import Victron.VenusOS
 
 Item {
 	id: root
-
-	property InputCurrentLimitDialog inputCurrentLimitDialog: InputCurrentLimitDialog {
-		visible: false
-	}
-	property InverterChargerModeDialog inverterChargerModeDialog: InverterChargerModeDialog {
-		visible: false
-	}
-
 	anchors.fill: parent
+
+	property InputCurrentLimitDialog inputCurrentLimitDialog: InputCurrentLimitDialog {}
+	property InverterChargerModeDialog inverterChargerModeDialog: InverterChargerModeDialog {}
+	property GeneratorDisableAutostartDialog generatorDisableAutostartDialog: GeneratorDisableAutostartDialog {}
+	property GeneratorDurationSelectorDialog generatorDurationSelectorDialog: GeneratorDurationSelectorDialog {}
 }
