@@ -15,15 +15,16 @@ ModalDialog {
 	//% "Input current limit"
 	titleText: qsTrId("controlcard_input_current_limit")
 
-	contentChildren: [
+	contentItem: Column {
+		anchors.topMargin: 96
+		anchors.top: parent.top
+		width: parent.width
+		spacing: 40
+
 		SpinBox {
 			id: spinbox
 
-			anchors {
-				top: root.content.top
-				topMargin: 96
-				horizontalCenter: root.content.horizontalCenter
-			}
+			anchors.horizontalCenter: parent.horizontalCenter
 			width: 490
 			height: 72
 			buttonWidth: 136
@@ -38,20 +39,17 @@ ModalDialog {
 			}
 			value: newInputCurrentLimit
 			onValueChanged: newInputCurrentLimit = value
-		},
+		}
+
 		SegmentedButtonRow {
-			anchors {
-				top: spinbox.bottom
-				topMargin: 40
-				horizontalCenter: root.content.horizontalCenter
-			}
+			anchors.horizontalCenter: parent.horizontalCenter
 			model: [6, 10, 13, 16, 25, 32, 63] // TODO - these numbers will come from a list we get from DBus
 			onButtonClicked: function (buttonIndex){
 				currentIndex = buttonIndex
 				spinbox.value = model[currentIndex] * 1000 // mA
 			}
 		}
-	]
+	}
 
 	onAccepted: root.setInputCurrentLimit(newInputCurrentLimit)
 }

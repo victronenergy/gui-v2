@@ -15,47 +15,53 @@ ModalDialog {
 	//% "Inverter / Charger mode"
 	titleText: qsTrId("controlcard_inverter_charger_mode")
 
-	contentChildren: [
-		Column {
-			anchors.centerIn: parent
-			anchors.verticalCenterOffset: 2
-			anchors.horizontalCenterOffset: -8
-			Repeater {
-				id: repeater
-
-				model: ControlCardsModel.inverterModeStrings
-				delegate: buttonStyling
-			}
+	contentItem: Column {
+		anchors {
+			top: parent.top
+			left: parent.left
+			right: parent.right
+			margins: 64
 		}
-	]
+
+		Repeater {
+			id: repeater
+			width: parent.width
+			model: ControlCardsModel.inverterModeStrings
+			delegate: buttonStyling
+		}
+	}
+
 	Component {
 		id: buttonStyling
 
 		Item {
-			width: 480
+			width: parent.width
 			height: 56
 
 			RadioButton {
 				id: button
 
 				anchors {
+					left: parent.left
+					leftMargin: 16
 					right: parent.right
+					rightMargin: 16
+					verticalCenter: parent.verticalCenter
 				}
 				checked: index === root.newModeIndex
-				width: 470
 				label.topPadding: -2
 				text: qsTrId(modelData)
 				onClicked: root.newModeIndex = index
 			}
 			SeparatorBar {
 				anchors {
-					top: button.bottom
-					topMargin: 9
+					bottom: parent.bottom
 					left: parent.left
 					leftMargin: 8
+					right: parent.right
+					rightMargin: 8
 				}
-
-				width: parent.width
+				height: 1
 			}
 		}
 	}
