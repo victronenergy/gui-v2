@@ -23,6 +23,15 @@ ListModel {
 		QT_TRID_NOOP('inverter_card_off'),
 	]
 
+	property var essModeStrings: [
+		//% "Keep batteries charged"
+		QT_TRID_NOOP('ess_card_keep_batteries_charged'),
+		//% "Optimized with battery life"
+		QT_TRID_NOOP('ess_card_optimized_with_battery_life'),
+		//% "Optimized without battery life"
+		QT_TRID_NOOP('ess_card_optimized_without_battery_life')
+	]
+
 	ListElement {
 		url: "qrc:/controlcards/GeneratorCard.qml"
 	}

@@ -9,6 +9,7 @@ Item {
 	id: root
 	anchors.fill: parent
 
+	property ESSMinimumSOCDialog essMinimumSOCDialog: ESSMinimumSOCDialog {}
 	property InputCurrentLimitDialog inputCurrentLimitDialog: InputCurrentLimitDialog {}
 	property InverterChargerModeDialog inverterChargerModeDialog: InverterChargerModeDialog {}
 	property GeneratorDisableAutostartDialog generatorDisableAutostartDialog: GeneratorDisableAutostartDialog {}
