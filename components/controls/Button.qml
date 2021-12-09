@@ -29,6 +29,7 @@ C.Button {
 
 	icon.color: root.color
 
+	font.family: VenusFont.normal.name
 	font.pixelSize: Theme.fontSizeMedium
 	flat: true
 

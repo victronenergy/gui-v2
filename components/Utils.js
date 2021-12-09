@@ -46,3 +46,13 @@ function findIndex(container, value) {
 
 	return -1
 }
+
+function convertRuntimeToHHMM(runtimeSecs) {
+	if (runtimeSecs === -1)
+		return "--:--"
+	var hours = Math.floor(runtimeSecs / 3600)
+	var minutes = Math.floor((runtimeSecs - (hours * 3600)) / 60)
+	if (hours < 10) hours = "0" + hours
+	if (minutes < 10) minutes = "0" + minutes
+	return hours + ":" + minutes
+}

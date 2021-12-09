@@ -31,6 +31,10 @@ int main(int argc, char *argv[])
 			return new Victron::VenusOS::Theme;
 		});
 
+	/* data sources */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Generators.qml")),
+		"Victron.VenusOS", 2, 0, "Generators");
+
 	/* controls */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Button.qml")),
 		"Victron.VenusOS", 2, 0, "Button");
@@ -56,7 +60,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ArcGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularMultiGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
-
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Gauges.qml")),
 		"Victron.VenusOS", 2, 0, "Gauges");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlCard.qml")),
@@ -86,6 +89,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
 
+	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/ESSCard.qml")),
 		"Victron.VenusOS", 2, 0, "ESSCard");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/GeneratorCard.qml")),
@@ -93,11 +97,19 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/InverterCard.qml")),
 		"Victron.VenusOS", 2, 0, "InverterCard");
 
+	/* dialogs */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InputCurrentLimitDialog.qml")),
 		"Victron.VenusOS", 2, 0, "InputCurrentLimitDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InverterChargerModeDialog.qml")),
+		"Victron.VenusOS", 2, 0, "InverterChargerModeDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDisableAutostartDialog.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorDisableAutostartDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDurationSelectorDialog.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/DialogManager.qml")),
 		"Victron.VenusOS", 2, 0, "DialogManager");
 
+	/* pages */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/Page.qml")),
 		"Victron.VenusOS", 2, 0, "Page");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/MainPage.qml")),

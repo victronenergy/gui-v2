@@ -10,12 +10,14 @@ import Victron.VenusOS
 C.SpinBox {
 	id: root
 
+	property alias label: label
 	property int buttonWidth: 64
 
 	height: 72
 	spacing: Theme.marginSmall
 
 	contentItem: Label {
+		id: label
 		text: root.value
 		font.pixelSize: Theme.fontSizeExtraLarge
 		horizontalAlignment: Qt.AlignHCenter
