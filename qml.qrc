@@ -24,6 +24,7 @@
         <file>components/ScaledArcGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
+        <file>components/SwitchesModel.qml</file>
         <file>components/VenusFont.qml</file>
         <file>components/WeatherDetails.qml</file>
         <file>components/Utils.js</file>
@@ -53,9 +54,10 @@
         <file>dialogs/InverterChargerModeDialog.qml</file>
         <file>dialogs/GeneratorDisableAutostartDialog.qml</file>
         <file>dialogs/GeneratorDurationSelectorDialog.qml</file>
+        <file>controlcards/ESSCard.qml</file>
         <file>controlcards/GeneratorCard.qml</file>
         <file>controlcards/InverterCard.qml</file>
-        <file>controlcards/ESSCard.qml</file>
+        <file>controlcards/SwitchesCard.qml</file>
         <file>fonts/MuseoSans-500.otf</file>
         <file>images/brief.svg</file>
         <file>images/icon_alarm_48.svg</file>
@@ -89,5 +91,6 @@
         <file>images/inverter.svg</file>
         <file>images/ess.svg</file>
         <file>images/information.svg</file>
+        <file>images/switches.svg</file>
     </qresource>
 </RCC>
