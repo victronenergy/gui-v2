@@ -10,19 +10,25 @@ import Victron.VenusOS
 C.Switch {
 	id: root
 
-	indicator: Rectangle {
+	readonly property int _indicatorOverlap: 2
+
+	background: Rectangle {
 		implicitWidth: 44
 		implicitHeight: 20
-		x: root.width - width
+		x: _indicatorOverlap
 		y: parent.height / 2 - height / 2
 		radius: 12
 		color: root.checked ? Theme.okColor : 'transparent'
 		border.color: root.checked ? 'transparent' : Theme.secondaryFontColor
 		border.width: 2
+	}
 
+	indicator: Item {
+		implicitWidth: background.width + 2*_indicatorOverlap
 		Rectangle {
 			x: root.checked ? parent.width - width : 0
-			y: parent.height / 2 - height / 2
+			y: root.height / 2 - height / 2
+
 			width: 24
 			height: 24
 			radius: 12
@@ -38,7 +44,7 @@ C.Switch {
 	}
 
 	contentItem: Item {
-		implicitWidth: label.implicitWidth + root.indicator.implicitWidth + root.spacing
+		implicitWidth: root.text === "" ? 0 : label.implicitWidth + root.indicator.implicitWidth + root.spacing
 
 		Label {
 			id: label

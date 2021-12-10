@@ -84,6 +84,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
 		"Victron.VenusOS", 2, 0, "SeparatorBar");
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/SwitchesModel.qml")),
+		"Victron.VenusOS", 2, 0, "SwitchesModel");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
 		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
@@ -96,6 +98,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "GeneratorCard");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/InverterCard.qml")),
 		"Victron.VenusOS", 2, 0, "InverterCard");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/SwitchesCard.qml")),
+		"Victron.VenusOS", 2, 0, "SwitchesCard");
 
 	/* dialogs */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InputCurrentLimitDialog.qml")),

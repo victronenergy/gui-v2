@@ -41,5 +41,8 @@ ListModel {
 	ListElement {
 		url: "qrc:/controlcards/ESSCard.qml"
 	}
+	ListElement {
+		url: "qrc:/controlcards/SwitchesCard.qml"
+	}
 }
 
