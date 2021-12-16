@@ -41,8 +41,9 @@ class Theme : public QObject
 	Q_PROPERTY(int fontSizeSubcardHeader READ fontSizeSubcardHeader CONSTANT)
 	Q_PROPERTY(int fontSizeMedium READ fontSizeMedium CONSTANT)
 	Q_PROPERTY(int fontSizeLarge READ fontSizeLarge CONSTANT)
+	Q_PROPERTY(int fontSizeXL READ fontSizeXL CONSTANT)
+	Q_PROPERTY(int fontSizeXXL READ fontSizeXXL CONSTANT)
 	Q_PROPERTY(int fontSizeWarningDialogHeader READ fontSizeWarningDialogHeader CONSTANT)
-	Q_PROPERTY(int fontSizeExtraLarge READ fontSizeExtraLarge CONSTANT)
 	Q_PROPERTY(int fontSizeControlValue READ fontSizeControlValue CONSTANT)
 	Q_PROPERTY(int marginSmall READ marginSmall CONSTANT)
 	Q_PROPERTY(int horizontalPageMargin READ horizontalPageMargin CONSTANT)
@@ -87,8 +88,9 @@ public:
 		FontSizeSubcardHeader = 0,
 		FontSizeMedium,
 		FontSizeLarge,
+		FontSizeXL,
+		FontSizeXXL,
 		FontSizeWarningDialogHeader,
-		FontSizeExtraLarge,
 		FontSizeControlValue,
 		MarginSmall,
 		HorizontalPageMargin,
@@ -138,8 +140,9 @@ public:
 	int fontSizeSubcardHeader() const;
 	int fontSizeMedium() const;
 	int fontSizeLarge() const;
+	int fontSizeXL() const;
+	int fontSizeXXL() const;
 	int fontSizeWarningDialogHeader() const;
-	int fontSizeExtraLarge() const;
 	int fontSizeControlValue() const;
 	int marginSmall() const;
 	int horizontalPageMargin() const;
@@ -258,10 +261,12 @@ private:
 		18,
 		/* [FontSizeLarge] */
 		28,
+		/* [FontSizeXL] */
+		34,
+		/* [FontSizeXXL] */
+		56,
 		/* [FontSizeWarningDialogHeader] */
 		36,
-		/* [FontSizeExtraLarge] */
-		56,
 		/* [FontSizeControlValue] */
 		22,
 		/* [MarginSmall] */

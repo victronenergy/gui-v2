@@ -19,7 +19,7 @@ C.SpinBox {
 	contentItem: Label {
 		id: label
 		text: root.value
-		font.pixelSize: Theme.fontSizeExtraLarge
+		font.pixelSize: Theme.fontSizeXXL
 		horizontalAlignment: Qt.AlignHCenter
 		verticalAlignment: Qt.AlignVCenter
 	}

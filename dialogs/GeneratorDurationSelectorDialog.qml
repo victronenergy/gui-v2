@@ -69,7 +69,7 @@ ModalDialog {
 
 			text: ":"
 			color: Theme.secondaryFontColor
-			font.pixelSize: Theme.fontSizeExtraLarge
+			font.pixelSize: Theme.fontSizeXXL
 		}
 
 		SpinBox {

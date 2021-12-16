@@ -92,6 +92,44 @@ Page {
 			return ''
 		}
 	}
+
+	/*	Example of how to use 'ValueDisplay'
+	Column {
+		spacing: 20
+		anchors {
+			top: parent.top
+			topMargin: 164
+			right: parent.right
+			rightMargin: 68
+		}
+		ValueDisplay {
+			title.text: "Generator"
+			physicalQuantity: Units.Power
+			value: 874
+			icon.source: "qrc:/images/generator.svg"
+		}
+		ValueDisplay {
+			title.text: "Loads"
+			physicalQuantity: Units.Power
+			value: 6251.1234
+			icon.source: "qrc:/images/consumption.svg"
+		}
+	}
+	ValueDisplay {
+		anchors {
+			top: parent.top
+			topMargin: 208
+			left: parent.left
+			leftMargin: 88
+		}
+		rightAligned: false
+		title.text: "Solar yield"
+		physicalQuantity: Units.Power
+		value: 428
+		precision: 2
+		icon.source: "qrc:/images/solaryield.svg"
+	}
+	*/
 	Loader {
 		id: rightUpper
 		anchors {
