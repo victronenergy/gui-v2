@@ -25,9 +25,11 @@
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
         <file>components/SwitchesModel.qml</file>
+        <file>components/Units.qml</file>
+        <file>components/Utils.js</file>
+        <file>components/ValueDisplay.qml</file>
         <file>components/VenusFont.qml</file>
         <file>components/WeatherDetails.qml</file>
-        <file>components/Utils.js</file>
         <file>data/Battery.qml</file>
         <file>data/Generators.qml</file>
         <file>data/Inverters.qml</file>

@@ -151,14 +151,19 @@ int Theme::fontSizeLarge() const
 	return otherValue(FontSizeLarge).toInt();
 }
 
+int Theme::fontSizeXL() const
+{
+	return otherValue(FontSizeXL).toInt();
+}
+
+int Theme::fontSizeXXL() const
+{
+	return otherValue(FontSizeXXL).toInt();
+}
+
 int Theme::fontSizeWarningDialogHeader() const
 {
 	return otherValue(FontSizeWarningDialogHeader).toInt();
-}
-
-int Theme::fontSizeExtraLarge() const
-{
-	return otherValue(FontSizeExtraLarge).toInt();
 }
 
 int Theme::fontSizeControlValue() const

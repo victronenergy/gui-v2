@@ -86,6 +86,10 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SeparatorBar");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/SwitchesModel.qml")),
 		"Victron.VenusOS", 2, 0, "SwitchesModel");
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Units.qml")),
+		"Victron.VenusOS", 2, 0, "Units");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ValueDisplay.qml")),
+		"Victron.VenusOS", 2, 0, "ValueDisplay");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
 		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),

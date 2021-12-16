@@ -25,7 +25,7 @@ ModalDialog {
 				topMargin: 27
 				horizontalCenter: parent.horizontalCenter
 			}
-			font.pixelSize: Theme.fontSizeExtraLarge
+			font.pixelSize: Theme.fontSizeXXL
 			text: qsTrId("%1%").arg(root.newMinimumSOC)
 		}
 		Label {

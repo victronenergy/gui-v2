@@ -33,7 +33,7 @@ ModalDialog {
 			contentItem: Label {
 				//% "%1 A"
 				text: qsTrId("%1 A").arg(spinbox.value/1000)
-				font.pixelSize: Theme.fontSizeExtraLarge
+				font.pixelSize: Theme.fontSizeXXL
 				horizontalAlignment: Qt.AlignHCenter
 				verticalAlignment: Qt.AlignVCenter
 			}
