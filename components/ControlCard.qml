@@ -6,20 +6,14 @@ import QtQuick
 import Victron.VenusOS
 
 Rectangle {
-	property Page page: ListView.view ? ListView.view.parent : null
 	property alias icon: icon
 	property alias title: title
 	property alias status: status
 
 	width: 368 // TODO - handle 7" size if it is different
-	height: 432 // TODO - handle 7" size if it is different
+	height: parent.height
 	color: Theme.controlCardBackgroundColor
 	radius: 8
-
-	MouseArea {
-		anchors.fill: parent
-		onClicked: if (page) page.controlsButtonClicked(page.isControlCardsPage)
-	}
 
 	Row {
 		anchors {

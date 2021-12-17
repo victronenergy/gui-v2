@@ -13,14 +13,19 @@ Row {
 	signal buttonClicked(buttonIndex: int)
 
 	anchors.horizontalCenter: parent.horizontalCenter
-	spacing: 32
+	height: 72
+
+	spacing: 8 // TODO: 16 in 7inch mode
 
 	Repeater {
 		id: buttonRepeater
 
+		height: parent.height
 		property int currentIndex: 0
 
 		delegate: NavButton {
+			height: parent.height
+			width: 144 // TODO: 176 in 7inch mode
 			text: model.text
 			icon.source: model.icon
 			icon.width: model.iconWidth

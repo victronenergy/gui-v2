@@ -19,11 +19,13 @@
         <file>components/ModalDialog.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
+        <file>components/PageStack.qml</file>
         <file>components/ProgressArc.qml</file>
         <file>components/ScaledArc.qml</file>
         <file>components/ScaledArcGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
+        <file>components/StatusBar.qml</file>
         <file>components/SwitchesModel.qml</file>
         <file>components/Units.qml</file>
         <file>components/Utils.js</file>
@@ -35,6 +37,7 @@
         <file>data/Inverters.qml</file>
         <file>data/Relays.qml</file>
         <file>data/Tanks.qml</file>
+        <file>pages/PageManager.qml</file>
         <file>pages/Page.qml</file>
         <file>pages/MainPage.qml</file>
         <file>pages/ControlCardsPage.qml</file>

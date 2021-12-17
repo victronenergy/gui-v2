@@ -40,13 +40,10 @@ Page {
 	CircularMultiGauge {
 		id: gauge
 
+		height: parent.height
+		width: height
 		x: sidePanel.x/2 - width/2
-		anchors {
-			top: parent.top
-			topMargin: 56
-		}
-		width: 315
-		height: 320
+
 		model: gaugeData.model
 	}
 
@@ -56,12 +53,11 @@ Page {
 		id: leftEdge
 		anchors {
 			top: parent.top
-			topMargin: 56
 			left: parent.left
-			leftMargin: 40
+			leftMargin: 40 // TODO: 56 for 7inch
 			right: gauge.left
 		}
-		height: 320
+		height: parent.height
 		opacity: root.sideOpacity
 		active: leftGaugeTypes.length === 1
 		source: {
@@ -76,12 +72,11 @@ Page {
 		id: rightEdge
 		anchors {
 			top: parent.top
-			topMargin: 56
 			right: parent.right
-			rightMargin: 40
+			rightMargin: 40 // TODO: 56 for 7inch
 			left: gauge.right
 		}
-		height: 320
+		height: parent.height
 		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 1
 		source: {
@@ -134,12 +129,11 @@ Page {
 		id: rightUpper
 		anchors {
 			top: parent.top
-			topMargin: 56
 			right: parent.right
 			rightMargin: 40
 			left: gauge.right
 		}
-		height: 160
+		height: parent.height/2
 		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 2
 		source: {
@@ -152,13 +146,12 @@ Page {
 	Loader {
 		id: rightLower
 		anchors {
-			top: parent.top
-			topMargin: 216
+			top: rightUpper.bottom
 			right: parent.right
 			rightMargin: 40
 			left: gauge.right
 		}
-		height: 160
+		height: parent.height/2
 		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 2
 		source: {
@@ -169,34 +162,15 @@ Page {
 		}
 	}
 
-	Button {
-		id: button
-
-		anchors {
-			top: parent.top
-			topMargin: 14
-			right: parent.right
-			rightMargin: 26
-		}
-
-		width: 32
-		height: width
-		display: C.AbstractButton.IconOnly
-		icon.source: root.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
-		icon.width: 28
-		icon.height: 20
-		onClicked: root.state = root.state === '' ? 'panelOpen' : ''
-		color: Theme.okColor
-	}
-
 	BriefMonitorPanel {
 		id: sidePanel
 
-		anchors.top: button.bottom
-		x: root.width
-		opacity: 0
 		width: 240
 		height: 367
+
+		// hidden by default.
+		x: root.width
+		opacity: 0.0
 	}
 
 	property var gaugeConfig: [
@@ -308,6 +282,7 @@ Page {
 		QT_TRID_NOOP('gaugeBlackWaterText')
 	]
 
+	state: PageManager.sidePanelActive ? 'panelOpen' : ''
 	states: State {
 		name: 'panelOpen'
 		PropertyChanges {

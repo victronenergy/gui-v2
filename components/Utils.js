@@ -84,3 +84,12 @@ function formatAsHHMM(seconds) {
 	const duration = decomposeDuration(seconds)
 	return pad(duration.h, 2) + ":" + pad(duration.m, 2)
 }
+
+function reactToSignalOnce(sig, slot) {
+	var f = function() {
+		slot.apply(this, arguments)
+		sig.disconnect(f)
+	}
+	sig.connect(f)
+}
+

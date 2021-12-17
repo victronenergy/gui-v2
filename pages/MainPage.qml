@@ -11,15 +11,6 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	controlsButton.visible: false
-
-	Connections {
-		target: navStack.currentItem
-		function onControlsButtonClicked(wasToggled) {
-			root.controlsButtonClicked(wasToggled)
-		}
-	}
-
 	C.StackView {
 		id: navStack
 		clip: true
@@ -35,18 +26,18 @@ Page {
 
 		// Fade new navigation pages in
 		replaceEnter: Transition {
-			PropertyAnimation {
-				property: "opacity"
+			OpacityAnimator {
 				from: 0.0
 				to: 1.0
+				easing.type: Easing.InOutQuad
 				duration: 250
 			}
 		}
 		replaceExit: Transition {
-			PropertyAnimation {
-				property: "opacity"
+			OpacityAnimator {
 				from: 1.0
 				to: 0.0
+				easing.type: Easing.InOutQuad
 				duration: 250
 			}
 		}
@@ -104,11 +95,64 @@ Page {
 		}
 
 		property var currentUrl: navBar.model.get(0).url
+		onCurrentUrlChanged: PageManager.sidePanelVisible = (currentUrl == navBar.model.get(0).url)
 		onButtonClicked: function (buttonIndex) {
 			var navUrl = model.get(buttonIndex).url
 			if (navUrl != currentUrl) {
 				currentUrl = navUrl
 				navStack.replace(null, navUrl)
+			}
+		}
+
+		property bool hidden: navBar.y === root.height
+
+		function show() {
+			if (hidden) {
+				animateNavBarIn.start()
+			}
+		}
+
+		function hide() {
+			if (!hidden) {
+				animateNavBarOut.start()
+			}
+		}
+
+		SequentialAnimation {
+			id: animateNavBarIn
+			NumberAnimation {
+				target: navBar
+				property: "y"
+				from: root.height
+				to: root.height - navBar.height
+				duration: 250
+				easing.type: Easing.InOutQuad
+			}
+			OpacityAnimator {
+				target: navBar
+				from: 0.0
+				to: 1.0
+				duration: 250
+				easing.type: Easing.InOutQuad
+			}
+		}
+
+		SequentialAnimation {
+			id: animateNavBarOut
+			OpacityAnimator {
+				target: navBar
+				from: 1.0
+				to: 0.0
+				duration: 250
+				easing.type: Easing.InOutQuad
+			}
+			NumberAnimation {
+				target: navBar
+				property: "y"
+				from: root.height - navBar.height
+				to: root.height
+				duration: 250
+				easing.type: Easing.InOutQuad
 			}
 		}
 	}
