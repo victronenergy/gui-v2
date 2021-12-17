@@ -1,0 +1,80 @@
+/*
+** Copyright (C) 2021 Victron Energy B.V.
+*/
+
+import QtQuick
+import QtQuick.Controls as C
+import Victron.VenusOS
+
+Item {
+	id: root
+
+	property bool controlsActive
+	property bool sidePanelActive
+	property bool sidePanelVisible
+
+	width: parent.width
+	height: 48
+
+	Button {
+		id: controlsButton
+
+		anchors {
+			left: parent.left
+			leftMargin: 26
+			verticalCenter: parent.verticalCenter
+		}
+
+		height: 32
+		width: height
+		display: C.AbstractButton.IconOnly
+		color: Theme.okColor
+		icon.source: root.controlsActive ? "qrc:/images/controls-toggled.svg" : "qrc:/images/controls.svg"
+		icon.width: 28
+		icon.height: 28
+		onClicked: root.controlsActive = !root.controlsActive
+	}
+
+	Label {
+		id: clockLabel
+		anchors.centerIn: parent
+		font.pixelSize: 22
+		text: clockTimer.timeString
+		Timer {
+			id: clockTimer
+			interval: 1000 // 1 second
+			running: root.opacity > 0.0
+			property string timeString: "00:00"
+			onTriggered: {
+				var currDate = new Date()
+				var hours = currDate.getHours()
+				var mins = currDate.getMinutes()
+				if (hours < 10) hours = "0" + hours
+				if (mins < 10)   mins = "0" + mins
+				timeString = hours + ":" + mins
+			}
+		}
+	}
+
+	Button {
+		id: sidePanelButton
+
+		anchors {
+			right: parent.right
+			rightMargin: 26
+			verticalCenter: parent.verticalCenter
+		}
+
+		opacity: sidePanelVisible ? 1.0 : 0.0
+		Behavior on opacity { OpacityAnimator { duration: 250; easing.type: Easing.InOutQuad } }
+
+		height: 32
+		width: height
+		display: C.AbstractButton.IconOnly
+		color: Theme.okColor
+		icon.source: root.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
+		icon.width: 28
+		icon.height: 20
+		onClicked: root.sidePanelActive = !root.sidePanelActive
+	}
+}

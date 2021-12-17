@@ -74,6 +74,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "NavBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavButton.qml")),
 		"Victron.VenusOS", 2, 0, "NavButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/PageStack.qml")),
+		"Victron.VenusOS", 2, 0, "PageStack");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ProgressArc.qml")),
 		"Victron.VenusOS", 2, 0, "ProgressArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArc.qml")),
@@ -84,6 +86,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
 		"Victron.VenusOS", 2, 0, "SeparatorBar");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/StatusBar.qml")),
+		"Victron.VenusOS", 2, 0, "StatusBar");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/SwitchesModel.qml")),
 		"Victron.VenusOS", 2, 0, "SwitchesModel");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Units.qml")),
@@ -106,6 +110,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SwitchesCard");
 
 	/* dialogs */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/DialogManager.qml")),
+		"Victron.VenusOS", 2, 0, "DialogManager");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InputCurrentLimitDialog.qml")),
 		"Victron.VenusOS", 2, 0, "InputCurrentLimitDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InverterChargerModeDialog.qml")),
@@ -114,10 +120,10 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "GeneratorDisableAutostartDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDurationSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/DialogManager.qml")),
-		"Victron.VenusOS", 2, 0, "DialogManager");
 
 	/* pages */
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/pages/PageManager.qml")),
+		"Victron.VenusOS", 2, 0, "PageManager");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/Page.qml")),
 		"Victron.VenusOS", 2, 0, "Page");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/MainPage.qml")),
