@@ -27,8 +27,11 @@ int main(int argc, char *argv[])
 	   we need to register them into the appropriate type namespace manually. */
 	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
 		"Victron.VenusOS", 2, 0, "Theme",
-		[](QQmlEngine *, QJSEngine *) -> QObject* {
-			return new Victron::VenusOS::Theme;
+		&Victron::VenusOS::Theme::instance);
+	qmlRegisterSingletonType<Victron::VenusOS::Language>(
+		"Victron.VenusOS", 2, 0, "Language",
+		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
+			return new Victron::VenusOS::Language(engine);
 		});
 
 	/* data sources */
@@ -215,16 +218,14 @@ int main(int argc, char *argv[])
 	}
 
 	QQmlEngine engine;
-	qmlRegisterSingletonType<Victron::VenusOS::Language>(
-		"Victron.VenusOS", 2, 0, "Language",
-		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
-			return new Victron::VenusOS::Language(engine);
-		});
-
+	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
+	engine.setProperty("screenSize", Victron::VenusOS::Theme::FiveInch);
+	//(QGuiApplication::primaryScreen()->availableSize().height() < 1024)
+	//		? Victron::VenusOS::Theme::FiveInch
+	//		: Victron::VenusOS::Theme::SevenInch);
 	engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
-
 	if (component.isError()) {
 		qWarning() << component.errorString();
 		return EXIT_FAILURE;
@@ -239,10 +240,8 @@ int main(int argc, char *argv[])
 	}
 
 	engine.setIncubationController(window->incubationController());
-
 	/* Write to window properties here to perform any additional initialization
 	   before initial binding evaluation. */
-
 	component.completeCreate();
 
 #if defined(VENUS_DESKTOP_BUILD)

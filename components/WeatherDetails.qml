@@ -22,7 +22,7 @@ Column {
 	Label {
 		id: day
 
-		color: Theme.weatherColor
+		color: Theme.color.font.tertiary
 		height: 22
 		anchors.left: parent.left
 		font.pixelSize: column.pixelsize
@@ -38,14 +38,14 @@ Column {
 
 			font.pixelSize: column.pixelsize
 			width: implicitWidth
-			color: Theme.weatherColor
+			color: day.color
 		}
 		CP.ColorImage {
 			id: image
 
 			anchors.verticalCenter: parent.verticalCenter
 			width: implicitWidth
-			color: Theme.weatherColor
+			color: day.color
 		}
 	}
 }

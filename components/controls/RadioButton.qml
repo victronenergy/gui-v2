@@ -4,44 +4,51 @@
 
 import QtQuick
 import QtQuick.Controls as C
+import QtQuick.Templates as CT
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-C.RadioButton {
+CT.RadioButton {
 	id: root
 
 	property alias label: label
 
+	implicitWidth: Math.max(
+		implicitBackgroundWidth + leftInset + rightInset,
+		implicitContentWidth + leftPadding + rightPadding)
+	implicitHeight: Math.max(
+		implicitBackgroundHeight + topInset + bottomInset,
+		implicitContentHeight + topPadding + bottomPadding,
+		implicitIndicatorHeight + topPadding + bottomPadding)
+
 	indicator: Rectangle {
-		x: root.width - width
-		y: parent.height / 2 - height / 2
-		implicitWidth: 24
-		implicitHeight: 24
-		radius: 12
-		border.width: 2
-		border.color: root.down || root.checked ? Theme.okColor : Theme.secondaryFontColor
+		anchors {
+			right: parent.right
+			verticalCenter: parent.verticalCenter
+		}
+		implicitWidth: Theme.geometry.radioButton.indicator.width
+		implicitHeight: implicitWidth
+		radius: implicitWidth/2
+		border.width: Theme.geometry.radioButton.border.width
+		border.color: (root.down || root.checked) ? Theme.color.radioButton.indicator.on
+				: Theme.color.radioButton.indicator.off
 		color: 'transparent'
 
 		Rectangle {
 			anchors.centerIn: parent
-			width: 16
-			height: 16
-			radius: 8
-			color: Theme.okColor
+			implicitWidth: Theme.geometry.radioButton.indicator.dot.width
+			implicitHeight: implicitWidth
+			radius: implicitWidth/2
+			color: Theme.color.radioButton.indicator.on
 			visible: root.down || root.checked
 		}
 	}
 
-	contentItem: Item {
-		implicitWidth: label.implicitWidth + root.indicator.implicitWidth + root.spacing
+	contentItem: Label {
+		id: label
 
-		Label {
-			id: label
-
-			font.pixelSize: Theme.fontSizeControlValue
-			text: root.text
-			color: Theme.primaryFontColor
-			verticalAlignment: Text.AlignVCenter
-		}
+		font.pixelSize: Theme.font.size.m
+		text: root.text
+		verticalAlignment: Text.AlignVCenter
 	}
 }

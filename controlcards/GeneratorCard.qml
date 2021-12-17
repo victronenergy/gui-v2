@@ -16,7 +16,7 @@ ControlCard {
 	property int runtime: 3793 // seconds remaining?
 	property int runningBy: Generators.GeneratorRunningBy.Manual
 
-	icon.source: "qrc:/images/generator.svg"
+	title.icon.source: "qrc:/images/generator.svg"
 	//% "Generator"
 	title.text: qsTrId("controlcard_generator")
 	status.text: root.state === Generators.GeneratorState.Error ?
@@ -53,8 +53,8 @@ ControlCard {
 				: "qrc:/images/icon_autostart_24.svg"
 		text: Utils.formatAsHHMM(root.runtime)
 		font.family: VenusFont.normal.name
-		font.pixelSize: Theme.fontSizeControlValue
-		color: root.runtime > 0 ? Theme.primaryFontColor : Theme.weatherColor
+		font.pixelSize: Theme.font.size.m
+		color: root.runtime > 0 ? Theme.color.font.primary : Theme.color.font.tertiary
 	}
 
 	Label {
@@ -62,10 +62,11 @@ ControlCard {
 		anchors {
 			top: timerDisplay.bottom
 			left: parent.left
-			leftMargin: 16
+			leftMargin: Theme.geometry.controlCard.contentMargins
 		}
 
-		color: root.state === Generators.GeneratorState.Error ? Theme.criticalColor : Theme.weatherColor
+		color: root.state === Generators.GeneratorState.Error ? Theme.color.critical
+			: Theme.color.font.tertiary
 		text: root.state !== Generators.GeneratorState.Running ?
 				"" // not running, empty substatus.
 			: root.runningBy === Generators.GeneratorRunningBy.Manual ?
@@ -114,14 +115,14 @@ ControlCard {
 			right: parent.right
 		}
 
-		height: 56
+		height: Theme.geometry.controlCard.mediumItem.height
 
 		Label {
 			id: autostartLabel
 			anchors {
 				verticalCenter: parent.verticalCenter
 				left: parent.left
-				leftMargin: 16
+				leftMargin: Theme.geometry.controlCard.contentMargins
 			}
 
 			//% "Autostart"
@@ -132,7 +133,7 @@ ControlCard {
 			anchors {
 				verticalCenter: parent.verticalCenter
 				right: parent.right
-				rightMargin: 16
+				rightMargin: Theme.geometry.controlCard.contentMargins
 			}
 
 			property bool generatorAutostartValue: true // TODO: bind to data model
@@ -159,39 +160,38 @@ ControlCard {
 		id: subcard
 		anchors {
 			left: parent.left
-			leftMargin: 8
+			leftMargin: Theme.geometry.controlCard.subCard.margins
 			right: parent.right
-			rightMargin: 8
+			rightMargin: Theme.geometry.controlCard.subCard.margins
 			top: autostartRow.bottom
-			topMargin: 16
+			topMargin: 2*Theme.geometry.controlCard.subCard.margins
 			bottom: parent.bottom
-			bottomMargin: 8
+			bottomMargin: Theme.geometry.controlCard.subCard.margins
 		}
 
 		Rectangle {
 			id: subcardBgRect
 			anchors.fill: parent
-			color: Theme.separatorBarColor
-			opacity: 0.5 // TODO: ask Serj for a solid-color version instead?
-			radius: 8
+			color: Theme.color.background.tertiary
+			radius: Theme.geometry.controlCard.radius
 		}
 
 		Label {
 			id: subcardHeader
 			anchors {
 				left: parent.left
-				leftMargin: 16
+				leftMargin: Theme.geometry.controlCard.contentMargins
 				right: parent.right
-				rightMargin: 16
+				rightMargin: Theme.geometry.controlCard.contentMargins
 			}
 
-			height: 40
+			height: Theme.geometry.controlCard.subCard.header.height
 			verticalAlignment: Text.AlignVCenter
 			horizontalAlignment: Text.AlignLeft
-			font.pixelSize: Theme.fontSizeSubcardHeader
+			font.pixelSize: Theme.font.size.xs
 			//% "Manual control"
 			text: qsTrId("controlcard_generator_subcard_header_manualcontrol")
-			color: Theme.weatherColor
+			color: Theme.color.font.tertiary
 		}
 		SeparatorBar {
 			id: subcardHeaderSeparator
@@ -209,14 +209,14 @@ ControlCard {
 				right: parent.right
 			}
 
-			height: 56
+			height: Theme.geometry.controlCard.mediumItem.height
 
 			Label {
 				id: timedRunLabel
 				anchors {
 					verticalCenter: parent.verticalCenter
 					left: parent.left
-					leftMargin: 16
+					leftMargin: Theme.geometry.controlCard.contentMargins
 				}
 
 				//% "Timed run"
@@ -227,7 +227,7 @@ ControlCard {
 				anchors {
 					verticalCenter: parent.verticalCenter
 					right: parent.right
-					rightMargin: 16
+					rightMargin: Theme.geometry.controlCard.contentMargins
 				}
 			}
 		}
@@ -236,9 +236,9 @@ ControlCard {
 			anchors {
 				top: timedRunRow.bottom
 				left: parent.left
-				leftMargin: 8
+				leftMargin: Theme.geometry.controlCard.itemSeparator.margins
 				right: parent.right
-				rightMargin: 8
+				rightMargin: Theme.geometry.controlCard.itemSeparator.margins
 			}
 		}
 		Item {
@@ -249,14 +249,14 @@ ControlCard {
 				right: parent.right
 			}
 
-			height: 72
+			height: Theme.geometry.controlCard.largeItem.height
 
 			Label {
 				id: durationLabel
 				anchors {
 					verticalCenter: parent.verticalCenter
 					left: parent.left
-					leftMargin: 16
+					leftMargin: Theme.geometry.controlCard.contentMargins
 				}
 
 				//% "Duration"
@@ -267,17 +267,17 @@ ControlCard {
 				anchors {
 					verticalCenter: parent.verticalCenter
 					right: parent.right
-					rightMargin: 16
+					rightMargin: Theme.geometry.controlCard.contentMargins
 				}
-				height: 40
-				width: 112
+				height: Theme.geometry.generatorCard.durationButton.height
+				width: Theme.geometry.generatorCard.durationButton.width
 
 				flat: !enabled
 				enabled: timedRunSwitch.checked
-				color: enabled ? Theme.primaryFontColor : Theme.secondaryFontColor
-				backgroundColor: enabled ? Theme.spinboxButtonSecondaryColor : Theme.separatorBarColor
-				border.color: Theme.okColor
-				font.pixelSize: Theme.fontSizeControlValue
+				color: enabled ? Theme.color.font.primary : Theme.color.font.disabled
+				backgroundColor: enabled ? Theme.color.button.outline.background : Theme.color.background.disabled
+				border.color: Theme.color.ok
+				font.pixelSize: Theme.font.size.m
 
 				text: Utils.formatAsHHMM(selectedRuntime)
 				property int selectedRuntime: 0 // TODO: bind to data model
@@ -296,20 +296,20 @@ ControlCard {
 			anchors {
 				top: durationRow.bottom
 				left: parent.left
-				leftMargin: 8
+				leftMargin: Theme.geometry.controlCard.itemSeparator.margins
 				right: parent.right
-				rightMargin: 8
+				rightMargin: Theme.geometry.controlCard.itemSeparator.margins
 			}
 		}
 		Button {
 			id: startButton
 			anchors {
-				margins: 16
+				margins: Theme.geometry.controlCard.contentMargins
 				bottom: parent.bottom
 				left: parent.left
 				right: parent.right
 			}
-			height: 48
+			height: Theme.geometry.generatorCard.startButton.height
 
 			enabled: root.state !== Generators.GeneratorState.Error
 
@@ -321,13 +321,13 @@ ControlCard {
 					qsTrId("controlcard_generator_subcard_button_start")
 
 			backgroundColor: root.state === Generators.GeneratorState.Error
-					? Theme.colorValueWithOpacity(Theme.displayMode, Theme.SeparatorBarColor, 0.6)
+					? Theme.color.background.disabled
 				: root.state === Generators.GeneratorState.Running
-					? Theme.colorValueWithOpacity(Theme.displayMode, Theme.CriticalColor, 0.6)
+					? Theme.color.dimCritical
 				: /* Stopped */
-					  Theme.colorValueWithOpacity(Theme.displayMode, Theme.GoColor, 0.6)
-			color: root.state === Generators.GeneratorState.Error ? Theme.secondaryFontColor
-				: Theme.primaryFontColor
+					  Theme.color.dimGo
+			color: root.state === Generators.GeneratorState.Error ? Theme.color.font.disabled
+				: Theme.color.font.primary
 
 			onClicked: {
 				// TODO: hook up to data model.

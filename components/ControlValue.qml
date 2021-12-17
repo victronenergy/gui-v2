@@ -5,68 +5,56 @@
 import QtQuick
 import Victron.VenusOS
 
-Column {
+Item {
 	id: root
 
 	property var value
 	property alias label: label
-	property alias rectangle: rectangle
-	property alias displayValue: displayValueText
+	property alias button: button
 
 	signal clicked()
 
-	spacing: 16
+	height: Theme.geometry.controlCard.largeItem.height
 
-	Item {
-		width: parent.width
-		height: 40
+	Label {
+		id: label
+
 		anchors {
+			verticalCenter: parent.verticalCenter
 			left: parent.left
-			leftMargin: 8
+			leftMargin: Theme.geometry.controlCard.contentMargins
+			right: button.left
+			rightMargin: Theme.geometry.controlCard.contentMargins
 		}
-
-		Label {
-			id: label
-
-			anchors {
-				left: parent.left
-				verticalCenter: parent.verticalCenter
-			}
-			width: parent.width - rectangle.width - rectangle.anchors.rightMargin
-			elide: Text.ElideRight
-			font.pixelSize: Theme.fontSizeMedium
-			color: Theme.primaryFontColor
+		elide: Text.ElideRight
+		font.pixelSize: Theme.font.size.s
+		color: Theme.color.font.primary
+	}
+	Button {
+		id: button
+		anchors {
+			verticalCenter: parent.verticalCenter
+			right: parent.right
+			rightMargin: Theme.geometry.controlCard.contentMargins
 		}
-		Rectangle {
-			id: rectangle
+		height: Theme.geometry.essCard.minimumSocButton.height
+		width: Theme.geometry.essCard.minimumSocButton.width
 
-			anchors {
-				right: parent.right
-				rightMargin: 16
-				verticalCenter: parent.verticalCenter
-			}
-			border.color: Theme.okColor
-			border.width: 2
-			color: Theme.spinboxButtonSecondaryColor
-			height: 40
-			radius: 6
-			MouseArea {
-				anchors.fill: parent
-				onClicked: root.clicked()
-			}
-		}
-		Text {
-			id: displayValueText
+		flat: false
+		color: Theme.color.font.primary
+		backgroundColor: Theme.color.button.outline.background
+		border.color: Theme.color.ok
+		font.pixelSize: Theme.font.size.m
 
-			anchors.fill: rectangle
-			elide: Text.ElideRight
-			horizontalAlignment: Text.AlignHCenter
-			verticalAlignment: Text.AlignVCenter
-			color: Theme.primaryFontColor
-			font.pixelSize: Theme.fontSizeControlValue
-		}
+		onClicked: root.clicked()
 	}
 	SeparatorBar {
-		width: 352
+		anchors {
+			bottom: parent.bottom
+			left: parent.left
+			right: parent.right
+			leftMargin: Theme.geometry.controlCard.itemSeparator.margins
+			rightMargin: Theme.geometry.controlCard.itemSeparator.margins
+		}
 	}
 }

@@ -25,7 +25,7 @@ ModalDialog {
 				topMargin: 27
 				horizontalCenter: parent.horizontalCenter
 			}
-			font.pixelSize: Theme.fontSizeXXL
+			font.pixelSize: Theme.font.size.xxl
 			text: qsTrId("%1%").arg(root.newMinimumSOC)
 		}
 		Label {
@@ -35,7 +35,7 @@ ModalDialog {
 				top: label.bottom
 				horizontalCenter: parent.horizontalCenter
 			}
-			color: Theme.weatherColor
+			color: Theme.color.font.tertiary
 			//% "Unless grid fails"
 			text: qsTrId("ess_unless_grid_fails")
 		}
@@ -62,7 +62,7 @@ ModalDialog {
 				topMargin: 31
 				horizontalCenter: parent.horizontalCenter
 			}
-			color: Theme.weatherColor
+			color: Theme.color.font.tertiary
 			//% "For xxx type batteries, below 10% is not recommended"
 			text: qsTrId("ess_recommended")
 		}

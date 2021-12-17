@@ -40,7 +40,13 @@ Page {
 	CircularMultiGauge {
 		id: gauge
 
-		height: parent.height
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry.circularMultiGauge.topMargin
+			bottom: parent.bottom
+			bottomMargin: Theme.geometry.circularMultiGauge.bottomMargin
+		}
+
 		width: height
 		x: sidePanel.x/2 - width/2
 
@@ -54,7 +60,7 @@ Page {
 		anchors {
 			top: parent.top
 			left: parent.left
-			leftMargin: 40 // TODO: 56 for 7inch
+			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			right: gauge.left
 		}
 		height: parent.height
@@ -73,7 +79,7 @@ Page {
 		anchors {
 			top: parent.top
 			right: parent.right
-			rightMargin: 40 // TODO: 56 for 7inch
+			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: gauge.right
 		}
 		height: parent.height
@@ -130,7 +136,7 @@ Page {
 		anchors {
 			top: parent.top
 			right: parent.right
-			rightMargin: 40
+			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: gauge.right
 		}
 		height: parent.height/2
@@ -148,7 +154,7 @@ Page {
 		anchors {
 			top: rightUpper.bottom
 			right: parent.right
-			rightMargin: 40
+			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: gauge.right
 		}
 		height: parent.height/2
@@ -165,8 +171,8 @@ Page {
 	BriefMonitorPanel {
 		id: sidePanel
 
-		width: 240
-		height: 367
+		anchors.verticalCenter: parent.verticalCenter
+		width: Theme.geometry.briefPage.sidePanel.width
 
 		// hidden by default.
 		x: root.width
@@ -287,7 +293,7 @@ Page {
 		name: 'panelOpen'
 		PropertyChanges {
 			target: sidePanel
-			x: root.width - sidePanel.width - Theme.horizontalPageMargin
+			x: root.width - sidePanel.width - Theme.geometry.page.grid.horizontalMargin
 			opacity: 1
 		}
 		PropertyChanges {
@@ -300,16 +306,16 @@ Page {
 		Transition {
 			to: "panelOpen"
 			from: ""
-			ParallelAnimation {
+			SequentialAnimation {
 				NumberAnimation {
 					target: root
 					property: 'sideOpacity'
-					duration: 200
+					duration: Theme.animation.briefPage.edgeGauge.fade.duration
 				}
 				NumberAnimation {
 					target: sidePanel
 					properties: 'x,opacity'
-					duration: 400
+					duration: Theme.animation.briefPage.sidePanel.slide.duration
 					easing.type: Easing.InQuad
 				}
 			}
@@ -317,22 +323,17 @@ Page {
 		Transition {
 			to: ""
 			from: "panelOpen"
-			ParallelAnimation {
-				SequentialAnimation {
-					PauseAnimation {
-						duration: 200
-					}
-					NumberAnimation {
-						target: root
-						property: 'sideOpacity'
-						duration: 200
-					}
-				}
+			SequentialAnimation {
 				NumberAnimation {
 					target: sidePanel
 					properties: 'x,opacity'
-					duration: 400
+					duration: Theme.animation.briefPage.sidePanel.slide.duration
 					easing.type: Easing.InQuad
+				}
+				NumberAnimation {
+					target: root
+					property: 'sideOpacity'
+					duration: Theme.animation.briefPage.edgeGauge.fade.duration
 				}
 			}
 		}

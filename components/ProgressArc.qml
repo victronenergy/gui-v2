@@ -12,7 +12,7 @@ Shape {
 	property real value
 	property real radius
 	property bool animationEnabled: true
-	property real strokeWidth: 10
+	property real strokeWidth: Theme.geometry.progressArc.strokeWidth
 	property alias progressColor: progress.strokeColor
 	property alias remainderColor: remainder.strokeColor
 	property alias startAngle: progress.startAngle
@@ -24,7 +24,7 @@ Shape {
 	Behavior on transitionAngle {
 		enabled: control.animationEnabled
 		NumberAnimation {
-			duration: 600
+			duration: Theme.animation.progressArc.duration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -36,7 +36,7 @@ Shape {
 		startAngle: control.transitionAngle
 		direction: control.direction
 		strokeWidth: control.strokeWidth
-		strokeColor: Theme.dimColor
+		strokeColor: Theme.color.darkOk
 		fillColor: control.fillColor
 	}
 
@@ -47,7 +47,7 @@ Shape {
 		endAngle: control.transitionAngle
 		direction: control.direction
 		strokeWidth: control.strokeWidth
-		strokeColor: Theme.highlightColor
+		strokeColor: Theme.color.ok
 		fillColor: control.fillColor
 	}
 }

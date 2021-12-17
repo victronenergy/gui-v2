@@ -13,17 +13,17 @@ Page {
 	ListView {
 		anchors {
 			left: parent.left
-			leftMargin: 24 // TODO - handle 7" size if it is different
+			leftMargin: Theme.geometry.controlCardsPage.leftMargin
 			right: parent.right
 			top: parent.top
 			bottom: parent.bottom
-			bottomMargin: 16 // TODO - handle 7" size if it is different
+			bottomMargin: Theme.geometry.controlCardsPage.bottomMargin
 		}
-		spacing: 16
+		spacing: Theme.geometry.controlCardsPage.spacing
 		orientation: ListView.Horizontal
 		model: ControlCardsModel
 		delegate: Loader {
-			height: parent.height
+			height: parent ? parent.height : 0
 			source: url
 		}
 	}

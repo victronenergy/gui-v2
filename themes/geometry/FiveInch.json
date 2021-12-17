@@ -1,0 +1,99 @@
+{
+    "animation.page.slide.duration": 250,
+    "animation.page.fade.duration": 250,
+    "animation.progressArc.duration": 600,
+    "animation.statusBar.sidePanelButton.fade.duration": 250,
+    "animation.briefPage.edgeGauge.fade.duration": 200,
+    "animation.briefPage.sidePanel.slide.duration": 350,
+
+    "geometry.page.grid.horizontalMargin": 24,
+    "geometry.page.grid.columnWidth": 48,
+    "geometry.page.grid.gutter": 16,
+
+    "geometry.button.spacing": 7,
+    "geometry.button.radius": 6,
+    "geometry.button.border.width": 2,
+
+    "geometry.radioButton.indicator.width": 24,
+    "geometry.radioButton.indicator.dot.width": 16,
+    "geometry.radioButton.border.width": 2,
+
+    "geometry.slider.groove.height": 8,
+    "geometry.slider.groove.radius": 8,
+    "geometry.slider.handle.width": 24,
+
+    "geometry.spinBox.indicator.width": 64,
+    "geometry.spinBox.indicator.height": 72,
+    "geometry.spinBox.indicator.radius": 6,
+
+    "geometry.switch.indicator.width": 24,
+    "geometry.switch.groove.margins": 2,
+    "geometry.switch.groove.width": 44,
+    "geometry.switch.groove.height": 20,
+    "geometry.switch.groove.border.width": 2,
+
+    "geometry.separatorBar.width": 1,
+
+    "geometry.statusBar.height": 48,
+    "geometry.statusBar.button.width": 32,
+    "geometry.statusBar.button.height": 32,
+
+    "geometry.navigationBar.height": 72,
+    "geometry.navigationBar.spacing": 8,
+    "geometry.navigationBar.button.width": 144,
+    "geometry.navigationBar.button.icon.width": 32,
+    "geometry.navigationBar.button.icon.height": 32,
+
+    "geometry.controlCard.width": 368,
+    "geometry.controlCard.height": 416,
+    "geometry.controlCard.radius": 8,
+    "geometry.controlCard.contentMargins": 16,
+    "geometry.controlCard.title.spacing": 6,
+    "geometry.controlCard.title.leftMargin": 16,
+    "geometry.controlCard.title.topMargin": 10,
+    "geometry.controlCard.title.leftPadding" : 4,
+    "geometry.controlCard.smallItem.height" : 48,
+    "geometry.controlCard.mediumItem.height" : 56,
+    "geometry.controlCard.largeItem.height" : 72,
+    "geometry.controlCard.itemSeparator.margins": 8,
+    "geometry.controlCard.subCard.margins": 8,
+    "geometry.controlCard.subCard.header.height": 40,
+
+    "geometry.modalDialog.width": 624,
+    "geometry.modalDialog.height": 368,
+    "geometry.modalDialog.radius": 8,
+    "geometry.modalDialog.header.height": 64,
+    "geometry.modalDialog.header.title.topMargin": 21,
+    "geometry.modalDialog.footer.height": 64,
+    "geometry.modalDialog.footer.midSeparator.width": 1,
+    "geometry.modalDialog.footer.midSeparator.margins": 8,
+
+    "geometry.arc.strokeWidth": 8,
+    "geometry.progressArc.strokeWidth": 8,
+
+    "geometry.circularMultiGauge.strokeWidth": 16,
+    "geometry.circularMultiGauge.topMargin": 16,
+    "geometry.circularMultiGauge.bottomMargin": 12,
+    "geometry.circularMultiGauge.spacing": 64,
+    "geometry.circularMultiGauge.labels.rightMargin": 44,
+    "geometry.circularMultiGauge.labels.spacing": 10,
+
+    "geometry.controlCardsPage.bottomMargin": 16,
+    "geometry.controlCardsPage.spacing": 16,
+
+    "geometry.briefPage.edgeGauge.horizontalMargin": 40,
+    "geometry.briefPage.edgeGauge.radius": 360,
+    "geometry.briefPage.edgeGauge.width": 60,
+    "geometry.briefPage.sidePanel.width": 240,
+    "geometry.briefPage.sidePanel.delegateHeight": 40,
+
+    "geometry.generatorCard.durationButton.height": 40,
+    "geometry.generatorCard.durationButton.width": 112,
+    "geometry.generatorCard.startButton.height": 48,
+
+    "geometry.essCard.minimumSocButton.height": 40,
+    "geometry.essCard.minimumSocButton.width": 112,
+    "geometry.essCard.warningIcon.rightMargin": 18,
+
+    "geometry.inverterCard.topMargin": 96
+}

@@ -13,14 +13,14 @@ ControlCard {
 	property int minimumSOC: 90
 	property int batteryLifeLimit: 80
 
-	icon.source: "qrc:/images/ess.svg"
+	title.icon.source: "qrc:/images/ess.svg"
 	//% "ESS"
 	title.text: qsTrId("controlcard_ess")
 
 	Column {
 		anchors {
 			top: parent.top
-			topMargin: 54
+			topMargin: Theme.geometry.controlCard.mediumItem.height
 		}
 		width: parent.width
 		Repeater {
@@ -30,17 +30,16 @@ ControlCard {
 			model: ControlCardsModel.essModeStrings
 			delegate: Item {
 				width: parent.width
-				height: 56
+				height: Theme.geometry.controlCard.mediumItem.height
 				RadioButton {
 					id: button
 
 					anchors {
-						top: parent.top
-						topMargin: 10
+						verticalCenter: parent.verticalCenter
 						left: parent.left
-						leftMargin: 12
+						leftMargin: Theme.geometry.controlCard.contentMargins
 						right: parent.right
-						rightMargin: 14
+						rightMargin: Theme.geometry.controlCard.contentMargins
 					}
 					label.font.pixelSize: 18
 					label.topPadding: 1
@@ -51,45 +50,92 @@ ControlCard {
 				SeparatorBar {
 					anchors {
 						bottom: parent.bottom
-						horizontalCenter: parent.horizontalCenter
+						left: parent.left
+						right: parent.right
+						leftMargin: Theme.geometry.controlCard.itemSeparator.margins
+						rightMargin: Theme.geometry.controlCard.itemSeparator.margins
 					}
-					width: parent.width - 16
 				}
 			}
 		}
-		ControlValue {
-			anchors {
-				left: parent.left
-				leftMargin: 10
+		Item {
+			id: minimumSocRow
+			height: 72
+			width: parent.width
+
+			Label {
+				id: minimumSocLabel
+				anchors {
+					verticalCenter: parent.verticalCenter
+					left: parent.left
+					leftMargin: Theme.geometry.controlCard.contentMargins
+				}
+
+				//% "Minimum SOC"
+				text: qsTrId("ess_card_minimum_soc")
 			}
-			topPadding: 16
-			spacing: 15
-			rectangle.width: 112
-			//% "Minimum SOC"
-			label.text: qsTrId("ess_card_minimum_soc")
-			displayValue.text: qsTrId("%1%").arg(root.minimumSOC)
-			onClicked: {
-				dialogManager.essMinimumSOCDialog.newMinimumSOC = root.minimumSOC
-				dialogManager.essMinimumSOCDialog.open()
+			Button {
+				id: minimumSocButton
+				anchors {
+					verticalCenter: parent.verticalCenter
+					right: parent.right
+					rightMargin: Theme.geometry.controlCard.contentMargins
+				}
+				height: Theme.geometry.essCard.minimumSocButton.height
+				width: Theme.geometry.essCard.minimumSocButton.width
+
+				flat: false
+				color: Theme.color.font.primary
+				backgroundColor: Theme.color.button.outline.background
+				border.color: Theme.color.ok
+				font.pixelSize: Theme.font.size.m
+
+				text: qsTrId("%1%").arg(root.minimumSOC)
+
+				onClicked: {
+					dialogManager.essMinimumSOCDialog.newMinimumSOC = root.minimumSOC
+					dialogManager.essMinimumSOCDialog.open()
+				}
+			}
+			SeparatorBar {
+				anchors {
+					bottom: parent.bottom
+					left: parent.left
+					right: parent.right
+					leftMargin: Theme.geometry.controlCard.itemSeparator.margins
+					rightMargin: Theme.geometry.controlCard.itemSeparator.margins
+				}
 			}
 		}
-		CP.IconLabel {
-			id: warning
+		Item {
+			id: warningRow
+			height: Theme.geometry.controlCard.mediumItem.height
+			width: parent.width
 
-			anchors {
-				left: parent.left
-				leftMargin: 18
+			Label {
+				id: warning
+				anchors {
+					left: parent.left
+					leftMargin: Theme.geometry.controlCard.contentMargins
+					verticalCenter: parent.verticalCenter
+				}
+				visible: root.minimumSOC < root.batteryLifeLimit
+				color: Theme.color.font.tertiary
+				font.family: VenusFont.normal.name
+				font.pixelSize: Theme.font.size.s
+				//% "Battery life limit: %1%"
+				text: qsTrId("ess_battery_life_limit").arg(root.batteryLifeLimit)
 			}
-			topPadding: 17
-			spacing: 135
-			mirrored: true
-			visible: root.minimumSOC < root.batteryLifeLimit
-			icon.source: "qrc:/images/information.svg"
-			color: Theme.weatherColor
-			font.family: VenusFont.normal.name
-			font.pixelSize: Theme.fontSizeMedium
-			//% "Battery life limit: %1%"
-			text: qsTrId("ess_battery_life_limit").arg(root.batteryLifeLimit)
+			CP.IconImage {
+				visible: warning.visible
+				anchors {
+					right: parent.right
+					rightMargin: Theme.geometry.essCard.warningIcon.rightMargin
+					verticalCenter: parent.verticalCenter
+				}
+				source: "qrc:/images/information.svg"
+				color: Theme.color.font.primary
+			}
 		}
 	}
 	Connections {

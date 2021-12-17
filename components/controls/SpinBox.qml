@@ -4,33 +4,45 @@
 
 import QtQuick
 import QtQuick.Controls as C
+import QtQuick.Templates as CT
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-C.SpinBox {
+CT.SpinBox {
 	id: root
 
 	property alias label: label
-	property int buttonWidth: 64
 
-	height: 72
-	spacing: Theme.marginSmall
+	implicitWidth: Math.max(
+		implicitBackgroundWidth + leftInset + rightInset,
+		contentItem.implicitWidth + leftPadding + rightPadding,
+			+ 2*spacing
+			+ up.implicitIndicatorWidth
+			+ down.implicitIndicatorWidth)
+	implicitHeight: Math.max(
+		implicitContentHeight + topPadding + bottomPadding,
+		implicitBackgroundHeight,
+		up.implicitIndicatorHeight,
+		down.implicitIndicatorHeight)
+	spacing: Theme.geometry.spinBox.spacing
 
 	contentItem: Label {
 		id: label
 		text: root.value
-		font.pixelSize: Theme.fontSizeXXL
+		color: Theme.color.font.primary
+		font.pixelSize: Theme.font.size.xxl
 		horizontalAlignment: Qt.AlignHCenter
 		verticalAlignment: Qt.AlignVCenter
 	}
 
 	up.indicator: Rectangle {
-		x: parent.width - width
+		x: root.mirrored ? 0 : parent.width - width
 		height: parent.height
-		implicitWidth: root.buttonWidth
-		implicitHeight: 72
-		radius: 6
-		color: root.up.pressed ? Theme.okSecondaryColor : Theme.spinboxButtonColor // TODO need disabled rgba from Design
+		implicitWidth: Theme.geometry.spinBox.indicator.width
+		implicitHeight: Theme.geometry.spinBox.indicator.height
+		radius: Theme.geometry.spinBox.indicator.radius
+		color: root.up.pressed ? Theme.color.spinbox.indicator.pressed.background
+			: Theme.color.spinbox.indicator.background
 
 		Image {
 			anchors.centerIn: parent
@@ -39,11 +51,13 @@ C.SpinBox {
 	}
 
 	down.indicator: Rectangle {
+		x: root.mirrored ? parent.width - width : 0
 		height: parent.height
-		implicitWidth: root.buttonWidth
-		implicitHeight: 72
-		radius: 6
-		color: root.down.pressed ? Theme.okSecondaryColor : Theme.spinboxButtonColor // TODO need disabled rgba from Design
+		implicitWidth: Theme.geometry.spinBox.indicator.width
+		implicitHeight: Theme.geometry.spinBox.indicator.height
+		radius: Theme.geometry.spinBox.indicator.radius
+		color: root.up.pressed ? Theme.color.spinbox.indicator.pressed.background
+			: Theme.color.spinbox.indicator.background
 		Image {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'
@@ -51,6 +65,7 @@ C.SpinBox {
 	}
 
 	background: Item {
-		implicitWidth: root.width - root.buttonWidth*2 - root.spacing*2
+		implicitWidth: 2*Theme.geometry.spinBox.indicator.width + 2*Theme.geometry.spinBox.spacing
+		implicitHeight: Theme.geometry.spinBox.indicator.height
 	}
 }

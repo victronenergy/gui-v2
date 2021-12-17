@@ -46,7 +46,7 @@ ModalDialog {
 
 			//% "Disable Autostart?"
 			text: qsTrId("controlcard_generator_disableautostartdialog_title")
-			font.pixelSize: Theme.fontSizeWarningDialogHeader
+			font.pixelSize: Theme.font.size.xl
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 		}
@@ -67,7 +67,7 @@ ModalDialog {
 			horizontalAlignment: Text.AlignHCenter
 			//% "Consequences description..."
 			text: qsTrId("controlcard_generator_disableautostartdialog_consequences")
-			font.pixelSize: Theme.fontSizeControlValue
+			font.pixelSize: Theme.font.size.m
 		}
 	}
 }

@@ -14,21 +14,21 @@ Item {
 	property bool sidePanelVisible
 
 	width: parent.width
-	height: 48
+	height: Theme.geometry.statusBar.height
 
 	Button {
 		id: controlsButton
 
 		anchors {
 			left: parent.left
-			leftMargin: 26
+			leftMargin: Theme.geometry.statusBar.horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
 
-		height: 32
-		width: height
+		height: Theme.geometry.statusBar.button.height
+		width: Theme.geometry.statusBar.button.width
 		display: C.AbstractButton.IconOnly
-		color: Theme.okColor
+		color: Theme.color.ok
 		icon.source: root.controlsActive ? "qrc:/images/controls-toggled.svg" : "qrc:/images/controls.svg"
 		icon.width: 28
 		icon.height: 28
@@ -61,17 +61,17 @@ Item {
 
 		anchors {
 			right: parent.right
-			rightMargin: 26
+			rightMargin: Theme.geometry.statusBar.horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
 
 		opacity: sidePanelVisible ? 1.0 : 0.0
-		Behavior on opacity { OpacityAnimator { duration: 250; easing.type: Easing.InOutQuad } }
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation.statusBar.sidePanelButton.fade.duration; easing.type: Easing.InOutQuad } }
 
-		height: 32
-		width: height
+		height: Theme.geometry.statusBar.button.height
+		width: Theme.geometry.statusBar.button.width
 		display: C.AbstractButton.IconOnly
-		color: Theme.okColor
+		color: Theme.color.ok
 		icon.source: root.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
 		icon.width: 28
 		icon.height: 20

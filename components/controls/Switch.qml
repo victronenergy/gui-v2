@@ -4,54 +4,67 @@
 
 import QtQuick
 import QtQuick.Controls as C
+import QtQuick.Templates as CT
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-C.Switch {
+CT.Switch {
 	id: root
 
-	readonly property int _indicatorOverlap: 2
+	implicitWidth: Math.max(
+		implicitBackgroundWidth + leftInset + rightInset,
+		implicitContentWidth + leftPadding + rightPadding)
+	implicitHeight: Math.max(
+		implicitBackgroundHeight + topInset + bottomInset,
+		implicitContentHeight + topPadding + bottomPadding,
+		implicitIndicatorHeight + topPadding + bottomPadding)
 
-	background: Rectangle {
-		implicitWidth: 44
-		implicitHeight: 20
-		x: _indicatorOverlap
-		y: parent.height / 2 - height / 2
-		radius: 12
-		color: root.checked ? Theme.okColor : 'transparent'
-		border.color: root.checked ? 'transparent' : Theme.secondaryFontColor
-		border.width: 2
+	leftPadding: 0
+	rightPadding: 0
+	topPadding: 0
+	bottomPadding: 0
+
+	background: Item {
+		implicitHeight: root.indicator.implicitHeight
+		implicitWidth: 2*root.indicator.implicitWidth
+
+		Rectangle {
+			anchors {
+				fill: parent
+				margins: Theme.geometry.switch.groove.margins
+			}
+
+			radius: root.indicator.radius
+			color: root.checked ? Theme.color.switch.groove.on
+				: Theme.color.switch.groove.off
+			border.color: root.checked ? Theme.color.switch.groove.border.on
+				: Theme.color.switch.groove.border.off
+			border.width: Theme.geometry.switch.groove.border.width
+		}
 	}
 
-	indicator: Item {
-		implicitWidth: background.width + 2*_indicatorOverlap
-		Rectangle {
-			x: root.checked ? parent.width - width : 0
-			y: root.height / 2 - height / 2
+	indicator: Rectangle {
+		implicitWidth: Theme.geometry.switch.indicator.width
+		implicitHeight: implicitWidth
+		radius: implicitWidth/2
+		height: parent.height
+		width: height
+		x: root.checked ? parent.width - width : 0
+		y: parent.height/2 - height/2
+		color: Theme.color.switch.indicator
 
-			width: 24
-			height: 24
-			radius: 12
-			color: Theme.primaryFontColor
-
-			Behavior on x {
-				NumberAnimation {
-					duration: 200
-					easing.type: Easing.InOutQuad
-				}
+		Behavior on x {
+			NumberAnimation {
+				duration: 200
+				easing.type: Easing.InOutQuad
 			}
 		}
 	}
 
-	contentItem: Item {
-		implicitWidth: root.text === "" ? 0 : label.implicitWidth + root.indicator.implicitWidth + root.spacing
-
-		Label {
-			id: label
-
-			text: root.text
-			color: Theme.primaryFontColor
-			verticalAlignment: Text.AlignVCenter
-		}
+	contentItem: Label {
+		id: label
+		text: root.text
+		color: Theme.color.font.primary
+		verticalAlignment: Text.AlignVCenter
 	}
 }

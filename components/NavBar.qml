@@ -13,9 +13,8 @@ Row {
 	signal buttonClicked(buttonIndex: int)
 
 	anchors.horizontalCenter: parent.horizontalCenter
-	height: 72
-
-	spacing: 8 // TODO: 16 in 7inch mode
+	height: Theme.geometry.navigationBar.height
+	spacing: Theme.geometry.navigationBar.spacing
 
 	Repeater {
 		id: buttonRepeater
@@ -25,13 +24,13 @@ Row {
 
 		delegate: NavButton {
 			height: parent.height
-			width: 144 // TODO: 176 in 7inch mode
+			width: Theme.geometry.navigationBar.button.width
 			text: model.text
 			icon.source: model.icon
 			icon.width: model.iconWidth
 			icon.height: model.iconHeight
 			checked: buttonRepeater.currentIndex === model.index
-			color: checked ? Theme.okColor : Theme.secondaryFontColor
+			color: checked ? Theme.color.ok : Theme.color.font.tertiary
 
 			onClicked: {
 				buttonRepeater.currentIndex = model.index

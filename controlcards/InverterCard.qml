@@ -12,7 +12,7 @@ ControlCard {
 
 	property int modeIndex: 0 // TODO - hook this up to the real value
 
-	icon.source: "qrc:/images/inverter.svg"
+	title.icon.source: "qrc:/images/inverter.svg"
 	//% "Inverter"
 	title.text: qsTrId("controlcard_inverter")
 
@@ -22,31 +22,29 @@ ControlCard {
 	Column {
 		anchors {
 			top: parent.top
-			topMargin: 121
+			topMargin: Theme.geometry.inverterCard.topMargin
 			left: parent.left
-			leftMargin: 8
 			right: parent.right
-			rightMargin: 16
 		}
-		spacing: 16
 		ControlValue {
-			rectangle.width: 112
+			width: parent.width
 			value: root.inputCurrentLimit
 			//% "Input current limit"
 			label.text: qsTrId("controlcard_input_current_limit")
 
 			//% "%1 A"
-			displayValue.text: qsTrId("amps").arg(value / 1000)
+			button.text: qsTrId("amps").arg(value / 1000)
 			onClicked: {
 				dialogManager.inputCurrentLimitDialog.newInputCurrentLimit = root.inputCurrentLimit
 				dialogManager.inputCurrentLimitDialog.open()
 			}
 		}
 		ControlValue {
-			rectangle.width: 180
+			width: parent.width
+			button.width: 180
 			//% "Mode"
 			label.text: qsTrId("controlcard_mode")
-			displayValue.text: qsTrId(ControlCardsModel.inverterModeStrings[modeIndex])
+			button.text: qsTrId(ControlCardsModel.inverterModeStrings[modeIndex])
 			onClicked: {
 				dialogManager.inverterChargerModeDialog.newModeIndex = modeIndex
 				dialogManager.inverterChargerModeDialog.open()

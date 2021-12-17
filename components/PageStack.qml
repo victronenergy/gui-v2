@@ -12,7 +12,8 @@ C.StackView {
 			property: "x"
 			from: width
 			to: 0
-			duration: 250
+			duration: Theme.animation.page.slide.duration
+			easing.type: Easing.InOutQuad
 		}
 	}
 	pushExit: Transition {
@@ -20,7 +21,8 @@ C.StackView {
 			property: "x"
 			from: 0
 			to: -width
-			duration: 250
+			duration: Theme.animation.page.slide.duration
+			easing.type: Easing.InOutQuad
 		}
 	}
 	popEnter: Transition {
@@ -28,7 +30,8 @@ C.StackView {
 			property: "x"
 			from: -width
 			to: 0
-			duration: 250
+			duration: Theme.animation.page.slide.duration
+			easing.type: Easing.InOutQuad
 		}
 	}
 	popExit: Transition {
@@ -36,7 +39,8 @@ C.StackView {
 			property: "x"
 			from: 0
 			to: width
-			duration: 250
+			duration: Theme.animation.page.slide.duration
+			easing.type: Easing.InOutQuad
 		}
 	}
 }

@@ -37,11 +37,11 @@ C.Dialog {
 	}
 
 	background: Rectangle {
-		implicitWidth: 624
-		implicitHeight: 368
-		radius: 8
-		color: Theme.controlCardBackgroundColor
-		border.color: Theme.separatorBarColor
+		implicitWidth: Theme.geometry.modalDialog.width
+		implicitHeight: Theme.geometry.modalDialog.height
+		radius: Theme.geometry.modalDialog.radius
+		color: Theme.color.background.secondary
+		border.color: Theme.color.background.disabled
 
 		Rectangle {
 			// TODO: do this with shader, or with border image taking noise sample.
@@ -57,23 +57,23 @@ C.Dialog {
 
 	header: Item {
 		width: parent.width
-		height: root.titleText.length ? 64 : 0
+		height: root.titleText.length ? Theme.geometry.modalDialog.header.height : 0
 
 		Label {
 			anchors {
 				top: parent.top
-				topMargin: 21
+				topMargin: Theme.geometry.modalDialog.header.title.topMargin
 				horizontalCenter: parent.horizontalCenter
 			}
 			horizontalAlignment: Text.AlignHCenter
-			color: Theme.primaryFontColor
-			font.pixelSize: Theme.fontSizeLarge
+			color: Theme.color.font.primary
+			font.pixelSize: Theme.font.size.l
 			text: root.titleText
 		}
 	}
 
 	footer: Item {
-		height: 64
+		height: Theme.geometry.modalDialog.footer.height
 		SeparatorBar {
 			id: footerTopSeparator
 			anchors {
@@ -90,8 +90,8 @@ C.Dialog {
 				bottom: parent.bottom
 			}
 
-			font.pixelSize: Theme.fontSizeControlValue
-			color: Theme.primaryFontColor
+			font.pixelSize: Theme.font.size.m
+			color: Theme.color.font.primary
 			spacing: 0
 			enabled: root.dialogDoneOptions !== ModalDialog.DialogDoneOptions.OkOnly
 			text: root.dialogDoneOptions === ModalDialog.DialogDoneOptions.OkOnly ?
@@ -109,11 +109,11 @@ C.Dialog {
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
-				bottomMargin: 8
+				bottomMargin: Theme.geometry.modalDialog.footer.midSeparator.margins
 				top: parent.top
-				topMargin: 8
+				topMargin: Theme.geometry.modalDialog.footer.midSeparator.margins
 			}
-			width: 1
+			width: Theme.geometry.modalDialog.footer.midSeparator.width
 		}
 		Button {
 			anchors {
@@ -123,8 +123,8 @@ C.Dialog {
 				bottom: parent.bottom
 			}
 
-			font.pixelSize: Theme.fontSizeControlValue
-			color: Theme.primaryFontColor
+			font.pixelSize: Theme.font.size.m
+			color: Theme.color.font.primary
 			spacing: 0
 			text: root.dialogDoneOptions === ModalDialog.DialogDoneOptions.SetAndClose ?
 					//% "Set"

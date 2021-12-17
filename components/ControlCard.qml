@@ -3,45 +3,45 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
+import QtQuick.Controls as C
 import Victron.VenusOS
 
 Rectangle {
-	property alias icon: icon
 	property alias title: title
 	property alias status: status
 
-	width: 368 // TODO - handle 7" size if it is different
+	width: Theme.geometry.controlCard.width
 	height: parent.height
-	color: Theme.controlCardBackgroundColor
-	radius: 8
+	color: Theme.color.background.secondary
+	radius: Theme.geometry.controlCard.radius
 
-	Row {
+	CP.IconLabel {
+		id: title
 		anchors {
-			left: parent.left
-			leftMargin: 20
 			top: parent.top
-			topMargin: 12
+			topMargin: Theme.geometry.controlCard.title.topMargin
+			left: parent.left
+			leftMargin: Theme.geometry.controlCard.title.leftMargin
 		}
-		spacing: 8
-		Image {
-			id: icon
-		}
-		Label {
-			id: title
 
-			font.pixelSize: Theme.fontSizeMedium
-		}
+		leftPadding: Theme.geometry.controlCard.title.leftPadding
+		spacing: Theme.geometry.controlCard.title.spacing
+		display: C.AbstractButton.TextBesideIcon
+
+		font.family: VenusFont.normal.name
+		font.pixelSize: Theme.font.size.s
+		color: Theme.color.font.primary
 	}
 
 	Label {
 		id: status
 
 		anchors {
-			top: parent.top
-			topMargin: 37
+			top: title.bottom
 			left: parent.left
-			leftMargin: 16
+			leftMargin: Theme.geometry.controlCard.title.leftMargin
 		}
-		font.pixelSize: Theme.fontSizeLarge
+		font.pixelSize: Theme.font.size.l
 	}
 }
