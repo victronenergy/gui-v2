@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 ModalDialog {
 	id: root
@@ -57,7 +58,7 @@ ModalDialog {
 			height: 72
 			from: 0
 			to: 59
-			label.text: value < 10 ? "0"+value : value
+			label.text: Utils.pad(value, 2)
 		}
 
 		Label {
@@ -85,7 +86,7 @@ ModalDialog {
 			height: 72
 			from: 0
 			to: 59
-			label.text: value < 10 ? "0"+value : value
+			label.text: Utils.pad(value, 2)
 		}
 	}
 
