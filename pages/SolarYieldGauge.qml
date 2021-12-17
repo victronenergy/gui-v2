@@ -16,15 +16,15 @@ Item {
 	Repeater {
 		model: root.values
 		delegate: ScaledArcGauge {
-			width: 60
+			width: Theme.geometry.briefPage.edgeGauge.width
 			x: index * 12
 			opacity: 1.0 - index * 0.2
 			height: root.height
 			startAngle: 270 - 25
 			endAngle: 270 + 25
-			radius: 360 - index * 12
+			radius: Theme.geometry.briefPage.edgeGauge.radius - index * 12
 			direction: PathArc.Clockwise
-			strokeWidth: 10
+			strokeWidth: Theme.geometry.arc.strokeWidth
 			value: modelData
 		}
 	}

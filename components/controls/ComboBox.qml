@@ -34,7 +34,7 @@ C.ComboBox {
 				x: root.leftPadding - 2
 				anchors.verticalCenter: parent.verticalCenter
 				source: model.icon
-				color: !!model.enabled ? Theme.primaryFontColor : Theme.secondaryFontColor
+				color: !!model.enabled ? Theme.color.font.primary : Theme.color.font.secondary
 			}
 
 			Label {
@@ -46,7 +46,7 @@ C.ComboBox {
 				}
 
 				text: model.text
-				font.pixelSize: Theme.fontSizeControlValue
+				font.pixelSize: Theme.font.size.m
 				elide: Text.ElideRight
 				color: delegateIcon.color
 			}
@@ -54,7 +54,7 @@ C.ComboBox {
 
 		background: Rectangle {
 			color: itemDelegate.down || model.index === root.currentIndex
-				   ? Theme.okColor
+				   ? Theme.color.ok
 				   : Theme.okSecondaryColor
 		}
 
@@ -67,7 +67,7 @@ C.ComboBox {
 		y: root.topPadding + (root.availableHeight - height) / 2
 
 		source: 'qrc:/images/dropdown.svg'
-		color: Theme.okColor
+		color: Theme.color.ok
 	}
 
 	contentItem: Item {
@@ -91,7 +91,7 @@ C.ComboBox {
 			}
 
 			text: root.displayText
-			font.pixelSize: Theme.fontSizeControlValue
+			font.pixelSize: Theme.font.size.m
 			elide: Text.ElideRight
 		}
 	}
@@ -99,10 +99,10 @@ C.ComboBox {
 	background: Rectangle {
 		width: root.width
 		height: root.height
-		border.color: Theme.okColor
+		border.color: Theme.color.ok
 		border.width: 2
 		radius: 6
-		color: root.pressed ? Theme.okColor : Theme.okSecondaryColor
+		color: root.pressed ? Theme.color.ok : Theme.okSecondaryColor
 	}
 
 	popup: C.Popup {
@@ -120,7 +120,7 @@ C.ComboBox {
 
 		background: Rectangle {
 			color: Theme.okSecondaryColor
-			border.color: Theme.okColor
+			border.color: Theme.color.ok
 			border.width: 2
 			radius: 6
 		}

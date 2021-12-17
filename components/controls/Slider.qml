@@ -23,18 +23,18 @@ C.Slider {
 			rightMargin: parent.rightPadding
 		}
 
-		implicitWidth: 496
-		implicitHeight: 8
+		implicitWidth: 4*Theme.geometry.slider.handle.width // suitably small.
+		implicitHeight: Theme.geometry.slider.groove.height
 		width: root.availableWidth
 		height: implicitHeight
-		radius: 8
-		color: Theme.okSecondaryColor
+		radius: Theme.geometry.slider.groove.radius
+		color: Theme.color.slider.groove.background
 
 		Rectangle {
 			width: root.visualPosition * parent.width
 			height: parent.height
-			color: Theme.okColor
-			radius: 8
+			color: Theme.color.slider.background
+			radius: Theme.geometry.slider.groove.radius
 		}
 	}
 
@@ -43,9 +43,9 @@ C.Slider {
 		y: root.topPadding + root.availableHeight / 2 - height / 2
 		height: parent.height
 		width: height
-		implicitWidth: 24
-		implicitHeight: 24
-		radius: 12
-		color: Theme.primaryFontColor
+		implicitWidth: Theme.geometry.slider.handle.width
+		implicitHeight: implicitWidth
+		radius: implicitWidth/2
+		color: Theme.color.font.primary
 	}
 }

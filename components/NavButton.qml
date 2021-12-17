@@ -9,12 +9,12 @@ import Victron.VenusOS
 Button {
 	id: root
 
-	icon.width: Theme.iconSizeMedium
-	icon.height: Theme.iconSizeMedium
-	spacing: Theme.marginSmall
+	icon.width: Theme.geometry.navigationBar.button.icon.width
+	icon.height: Theme.geometry.navigationBar.button.icon.height
+	spacing: Theme.geometry.navigationBar.button.spacing
 	display: C.AbstractButton.TextUnderIcon
 
-	color: down || checked
-		   ? (Theme.displayMode == Theme.Dark ? Theme.primaryFontColor : Theme.okColor)
-		   : (Theme.displayMode == Theme.Dark ? Theme.secondaryFontColor : Theme.okSecondaryColor)
+	color: (down || checked)
+		   ? Theme.color.navigationBar.button.on
+		   : Theme.color.navigationBar.button.on
 }

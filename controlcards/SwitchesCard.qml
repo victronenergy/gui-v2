@@ -6,14 +6,14 @@ import QtQuick
 import Victron.VenusOS
 
 ControlCard {
-	icon.source: "qrc:/images/switches.svg"
+	title.icon.source: "qrc:/images/switches.svg"
 	//% "Switches"
 	title.text: qsTrId("controlcard_switches")
 
 	ListView {
-		anchors{
+		anchors {
 			top: parent.top
-			topMargin: 52
+			topMargin: Theme.geometry.controlCard.mediumItem.height
 			left: parent.left
 			right: parent.right
 			bottom: parent.bottom
@@ -21,11 +21,11 @@ ControlCard {
 		model: SwitchesModel
 		delegate: Item {
 			width: parent.width
-			height: 56
+			height: Theme.geometry.controlCard.mediumItem.height
 			Label {
 				anchors {
 					left: parent.left
-					leftMargin: 16
+					leftMargin: Theme.geometry.controlCard.contentMargins
 					verticalCenter: parent.verticalCenter
 				}
 				text: qsTrId(model.text)
@@ -33,7 +33,7 @@ ControlCard {
 			Switch {
 				anchors {
 					right: parent.right
-					rightMargin: 16
+					rightMargin: Theme.geometry.controlCard.contentMargins
 					verticalCenter: parent.verticalCenter
 				}
 				checked: model.on ? true : false
@@ -42,9 +42,9 @@ ControlCard {
 			SeparatorBar {
 				anchors {
 					left: parent.left
-					leftMargin: 8
+					leftMargin: Theme.geometry.controlCard.itemSeparator.margins
 					right: parent.right
-					rightMargin: 8
+					rightMargin: Theme.geometry.controlCard.itemSeparator.margins
 					bottom: parent.bottom
 				}
 			}

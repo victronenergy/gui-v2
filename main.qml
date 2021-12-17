@@ -21,7 +21,7 @@ Window {
 
 	width: [800, 1024][Theme.screenSize]
 	height: [480, 600][Theme.screenSize]
-	color: Theme.backgroundColor
+	color: Theme.color.background.primary
 
 	//: Application title
 	//% "Venus OS GUI"

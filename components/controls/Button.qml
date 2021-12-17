@@ -11,14 +11,14 @@ import Victron.VenusOS
 C.Button {
 	id: root
 
-	property color color: Theme.primaryFontColor
-	property color backgroundColor: flat ? 'transparent'
-			: down ? Theme.okColor
-			: Theme.okSecondaryColor
+	property color color: Theme.color.font.primary
+	property color backgroundColor: flat ? Theme.color.button.flat.background
+			: down ? Theme.color.button.outline.down.background
+			: Theme.color.button.outline.background
 	property alias border: backgroundRect.border
 	property alias radius: backgroundRect.radius
 
-	spacing: Theme.marginSmall
+	spacing: Theme.geometry.button.spacing
 	topPadding: 0
 	bottomPadding: 0
 	leftPadding: 0
@@ -30,16 +30,16 @@ C.Button {
 	icon.color: root.color
 
 	font.family: VenusFont.normal.name
-	font.pixelSize: Theme.fontSizeMedium
+	font.pixelSize: Theme.font.size.s
 	flat: true
 
 	background: Rectangle {
 		id: backgroundRect
 
 		color: root.backgroundColor
-		border.width: root.flat ? 0 : 2
-		border.color: Theme.okColor
-		radius: 6
+		border.width: root.flat ? 0 : Theme.geometry.button.border.width
+		border.color: Theme.color.button.outline.border
+		radius: Theme.geometry.button.radius
 	}
 
 	contentItem: CP.IconLabel {

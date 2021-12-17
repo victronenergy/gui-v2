@@ -24,7 +24,7 @@ Shape {
 	Behavior on valueArc {
 		enabled: control.animationEnabled
 		NumberAnimation {
-			duration: 600
+			duration: Theme.animation.progressArc.duration
 			easing.type: Easing.InOutQuad
 		}
 	}

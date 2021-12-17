@@ -1,214 +1,42 @@
-/*
-** Copyright (C) 2021 Victron Energy B.V.
-*/
-
 #include "theme.h"
 
-using namespace Victron::VenusOS;
+#include <QQmlComponent>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QRegularExpression>
+#include <QVariant>
+#include <QColor>
 
-QColor Theme::colorValueWithOpacity(DisplayMode mode, ColorProperty role, qreal opacity) const
-{
-	QColor col = m_colorValues[mode][role].value<QColor>();
-	col.setAlphaF(opacity);
-	return col;
-}
-
-QColor Theme::colorValue(DisplayMode mode, ColorProperty role) const
-{
-	return m_colorValues[mode][role].value<QColor>();
-}
-
-QVariant Theme::otherValue(OtherProperty role) const
-{
-	return m_otherValues[role];
-}
-
-Q_INVOKABLE QString Theme::displayModeToString(DisplayMode mode) const
-{
-	return QVariant::fromValue(mode).toString();
-}
-
-Q_INVOKABLE QString Theme::screenSizeToString(ScreenSize screenSize) const
-{
-	return QVariant::fromValue(screenSize).toString();
-}
-
-QColor Theme::statusColorValue(StatusLevel level, bool secondaryColor) const
-{
-	switch (level) {
-	case Warning:
-		return colorValue(m_displayMode, secondaryColor ? WarningSecondaryColor : WarningColor);
-	case Critical:
-		return colorValue(m_displayMode, secondaryColor ? CriticalSecondaryColor : CriticalColor);
-	default:
-		break;
+namespace {
+	QRegularExpression optimizeExpression(const QString &expression)
+	{
+		QRegularExpression regexp(expression);
+		regexp.optimize();
+		return regexp;
 	}
-	return colorValue(m_displayMode, secondaryColor ? OkSecondaryColor : OkColor);
 }
 
-QColor Theme::backgroundColor() const
+namespace Victron {
+namespace VenusOS {
+
+QObject* Theme::instance(QQmlEngine *engine, QJSEngine *)
 {
-	return colorValue(m_displayMode, BackgroundColor);
+	Theme *theme = new Theme;
+	const Theme::ScreenSize screenSize = engine->property("screenSize").value<Theme::ScreenSize>();
+	const Theme::ColorScheme colorScheme = engine->property("colorScheme").value<Theme::ColorScheme>();
+qWarning() << "XXXXXXXXXXXXXXXX initial theme load with :" << screenSize << "," << colorScheme;
+	theme->load(screenSize, colorScheme);
+	return theme;
 }
 
-QColor Theme::primaryFontColor() const
+Theme::Theme(QObject *parent)
+	: QQmlPropertyMap(this, parent)
 {
-	return colorValue(m_displayMode, PrimaryFontColor);
 }
 
-QColor Theme::secondaryFontColor() const
+Theme::~Theme()
 {
-	return colorValue(m_displayMode, SecondaryFontColor);
-}
-
-QColor Theme::highlightColor() const
-{
-	return colorValue(m_displayMode, HighlightColor);
-}
-
-QColor Theme::dimColor() const
-{
-	return colorValue(m_displayMode, DimColor);
-}
-
-QColor Theme::weatherColor() const
-{
-	return otherValue(WeatherColor).value<QColor>();
-}
-
-QColor Theme::okColor() const
-{
-	return colorValue(m_displayMode, OkColor);
-}
-
-QColor Theme::okSecondaryColor() const
-{
-	return colorValue(m_displayMode, OkSecondaryColor);
-}
-
-QColor Theme::warningColor() const
-{
-	return colorValue(m_displayMode, WarningColor);
-}
-
-QColor Theme::warningSecondaryColor() const
-{
-	return colorValue(m_displayMode, WarningSecondaryColor);
-}
-
-QColor Theme::criticalColor() const
-{
-	return colorValue(m_displayMode, CriticalColor);
-}
-
-QColor Theme::criticalSecondaryColor() const
-{
-	return colorValue(m_displayMode, CriticalSecondaryColor);
-}
-
-QColor Theme::goColor() const
-{
-	return colorValue(m_displayMode, GoColor);
-}
-
-QColor Theme::goSecondaryColor() const
-{
-	return colorValue(m_displayMode, GoSecondaryColor);
-}
-
-QColor Theme::controlCardBackgroundColor() const
-{
-	return colorValue(m_displayMode, ControlCardBackgroundColor);
-}
-
-QColor Theme::separatorBarColor() const
-{
-	return colorValue(m_displayMode, SeparatorBarColor);
-}
-
-QColor Theme::spinboxButtonColor() const
-{
-	return colorValue(m_displayMode, SpinboxButtonColor);
-}
-
-QColor Theme::spinboxButtonSecondaryColor() const
-{
-	return colorValue(m_displayMode, SpinboxButtonSecondaryColor);
-}
-
-int Theme::fontSizeSubcardHeader() const
-{
-	return otherValue(FontSizeSubcardHeader).toInt();
-}
-
-int Theme::fontSizeMedium() const
-{
-	return otherValue(FontSizeMedium).toInt();
-}
-
-int Theme::fontSizeLarge() const
-{
-	return otherValue(FontSizeLarge).toInt();
-}
-
-int Theme::fontSizeXL() const
-{
-	return otherValue(FontSizeXL).toInt();
-}
-
-int Theme::fontSizeXXL() const
-{
-	return otherValue(FontSizeXXL).toInt();
-}
-
-int Theme::fontSizeWarningDialogHeader() const
-{
-	return otherValue(FontSizeWarningDialogHeader).toInt();
-}
-
-int Theme::fontSizeControlValue() const
-{
-	return otherValue(FontSizeControlValue).toInt();
-}
-
-int Theme::marginSmall() const
-{
-	return otherValue(MarginSmall).toInt();
-}
-
-int Theme::horizontalPageMargin() const
-{
-	return otherValue(HorizontalPageMargin).toInt();
-}
-
-int Theme::iconSizeMedium() const
-{
-	return otherValue(IconSizeMedium).toInt();
-}
-
-Theme::DisplayMode Theme::displayMode() const
-{
-	return m_displayMode;
-}
-
-void Theme::setDisplayMode(Theme::DisplayMode mode)
-{
-	if (m_displayMode != mode) {
-		m_displayMode = mode;
-		emit displayModeChanged();
-		/* also emit change signals for all color values */
-		emit backgroundColorChanged();
-		emit primaryFontColorChanged();
-		emit secondaryFontColorChanged();
-		emit highlightColorChanged();
-		emit dimColorChanged();
-		emit okColorChanged();
-		emit okSecondaryColorChanged();
-		emit warningColorChanged();
-		emit warningSecondaryColorChanged();
-		emit criticalColorChanged();
-		emit criticalSecondaryColorChanged();
-	}
 }
 
 Theme::ScreenSize Theme::screenSize() const
@@ -216,10 +44,158 @@ Theme::ScreenSize Theme::screenSize() const
 	return m_screenSize;
 }
 
-void Theme::setScreenSize(ScreenSize screenSize)
+Theme::ColorScheme Theme::colorScheme() const
 {
-	if (screenSize != m_screenSize)	{
+	return m_colorScheme;
+}
+
+bool Theme::load(ScreenSize screenSize, ColorScheme colorScheme)
+{
+	bool geometry = parseTheme(QStringLiteral(":/themes/geometry/%1.json")
+			.arg(QMetaEnum::fromType<Theme::ScreenSize>().valueToKey(screenSize)));
+	bool geometry_resolved = parseTheme(QStringLiteral(":/themes/geometry/%1-resolved.json")
+			.arg(QMetaEnum::fromType<Theme::ScreenSize>().valueToKey(screenSize)));
+	bool color = parseTheme(QStringLiteral(":/themes/color/%1.json")
+			.arg(QMetaEnum::fromType<Theme::ColorScheme>().valueToKey(colorScheme)));
+	bool color_resolved = parseTheme(QStringLiteral(":/themes/color/%1-resolved.json")
+			.arg(QMetaEnum::fromType<Theme::ColorScheme>().valueToKey(colorScheme)));
+	bool typography = parseTheme(QStringLiteral(":/themes/typography/Typography.json"));
+
+	if (m_screenSize != screenSize) {
 		m_screenSize = screenSize;
 		emit screenSizeChanged();
 	}
+
+	if (m_colorScheme != colorScheme) {
+		m_colorScheme = colorScheme;
+		emit colorSchemeChanged();
+	}
+
+	return geometry && geometry_resolved && color && color_resolved && typography;
 }
+
+QVariant Theme::resolvedValue(const QString &key, bool *found) const
+{
+	if (found) *found = false;
+	const QString resolvedSubTree = key.mid(0, key.lastIndexOf(QLatin1Char('.')));
+	if (!m_subTrees.contains(resolvedSubTree)) {
+		qWarning() << "Theme: unable to resolve:" << key << ": subtree does not exist.";
+	} else {
+		QQmlPropertyMap *subtree = m_subTrees[resolvedSubTree];
+		const QString valueKey = key.mid(resolvedSubTree.length()+1);
+		if (!subtree->contains(valueKey)) {
+			qWarning() << "Theme: unable to resolve:" << key << ": subtree does not contain key.";
+		} else {
+			if (found) *found = true;
+			return subtree->value(valueKey);
+		}
+	}
+	return QVariant();
+}
+
+QVariant Theme::parseValue(const QJsonValue &value)
+{
+	if (value.isString()) {
+		const QString valueStr = value.toString();
+
+		static const QRegularExpression hexColor = ::optimizeExpression(
+				QStringLiteral("^#[0-9a-fA-F]{6}$"));
+		static const QRegularExpression rgbaColor = ::optimizeExpression(
+				QStringLiteral("^rgba\\((\\d+), (\\d+), (\\d+), (\\d+(?:\\.\\d+)?)\\)$"));
+
+		QRegularExpressionMatch match = hexColor.match(valueStr);
+		if (match.hasMatch()) {
+			return QColor(valueStr);
+		}
+
+		match = rgbaColor.match(valueStr);
+		if (match.hasMatch()) {
+			return QColor(
+				match.captured(1).toInt(),
+				match.captured(2).toInt(),
+				match.captured(3).toInt(),
+				qRound(255 * match.captured(4).toDouble()));
+		}
+
+		// Check to see if the value should resolve to a pre-existing theme value.
+		if (valueStr.startsWith(QStringLiteral("geometry."))
+				|| valueStr.startsWith(QStringLiteral("color."))
+				|| valueStr.startsWith(QStringLiteral("font."))) {
+			bool found = false;
+			const QVariant value = resolvedValue(valueStr, &found);
+			if (found) {
+				return value;
+			}
+		}
+
+		return valueStr;
+	} else {
+		return value.toVariant();
+	}
+}
+
+void Theme::insertValue(
+		QQmlPropertyMap *tree,
+		const QString &key,
+		const QJsonValue &value,
+		int depth)
+{
+	const int dot = key.indexOf(QLatin1Char('.'), depth);
+	if (dot == -1) {
+		const QString name = key.mid(depth);
+		tree->insert(name, parseValue(value));
+		return;
+	}
+
+	const QString subtreeKey = key.mid(0, dot);
+	QQmlPropertyMap *subtree = nullptr;
+	if (m_subTrees.contains(subtreeKey)) {
+		subtree = m_subTrees[subtreeKey];
+	} else {
+		subtree = new QQmlPropertyMap(this);
+		m_subTrees.insert(subtreeKey, subtree);
+		tree->insert(key.mid(depth, dot-depth), QVariant::fromValue(subtree));
+	}
+	insertValue(subtree, key, value, dot+1);
+}
+
+bool Theme::parseTheme(const QString &themeFile)
+{
+	QFile file(themeFile);
+	if (!file.open(QIODevice::ReadOnly)) {
+		qWarning() << "Error opening theme file:" << themeFile
+			<< ":" << file.errorString();
+		return false;
+	}
+
+	QJsonParseError err;
+	const QJsonDocument doc = QJsonDocument::fromJson(file.readAll(), &err);
+	if (doc.isNull()) {
+		qWarning() << "Error parsing JSON:" << themeFile
+			<< ":" << qPrintable(err.errorString());
+		return false;
+	}
+
+	const QJsonObject obj = doc.object();
+	for (auto it = obj.constBegin(); it != obj.constEnd(); ++it) {
+		insertValue(this, it.key(), it.value());
+	}
+
+	return true;
+}
+
+QColor Theme::statusColorValue(StatusLevel level, bool darkColor) const
+{
+	const QString key = (level == Ok && darkColor) ? QStringLiteral("color.darkOk")
+			: (level == Ok) ? QStringLiteral("color.ok")
+			: (level == Warning && darkColor) ? QStringLiteral("color.darkWarning")
+			: (level == Warning) ? QStringLiteral("color.warning")
+			: (level == Critical && darkColor) ? QStringLiteral("color.darkCritical")
+			: QStringLiteral("color.critical");
+	const QVariant c = resolvedValue(key);
+	return c.typeId() == QMetaType::QColor ? c.value<QColor>() : QColor(c.value<QString>());
+}
+
+}
+}
+

@@ -28,7 +28,7 @@ ShapePath {
 	}
 
 	strokeColor: "black"
-	strokeWidth: 18
+	strokeWidth: Theme.geometry.arc.strokeWidth
 	fillColor: "transparent"
 	capStyle: ShapePath.RoundCap
 	joinStyle: ShapePath.RoundJoin

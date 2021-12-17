@@ -30,7 +30,7 @@ ModalDialog {
 
 			//% "hr"
 			text: qsTrId("controlcard_generator_durationselectordialog_hr")
-			color: Theme.secondaryFontColor
+			color: Theme.color.font.secondary
 		}
 
 		Label {
@@ -42,7 +42,7 @@ ModalDialog {
 
 			//% "min"
 			text: qsTrId("controlcard_generator_durationselectordialog_min")
-			color: Theme.secondaryFontColor
+			color: Theme.color.font.secondary
 		}
 
 		SpinBox {
@@ -69,8 +69,8 @@ ModalDialog {
 			}
 
 			text: ":"
-			color: Theme.secondaryFontColor
-			font.pixelSize: Theme.fontSizeXXL
+			color: Theme.color.font.secondary
+			font.pixelSize: Theme.font.size.xxl
 		}
 
 		SpinBox {

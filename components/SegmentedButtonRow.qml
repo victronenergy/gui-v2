@@ -10,7 +10,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property int fontPixelSize: Theme.fontSizeLarge
+	property int fontPixelSize: Theme.font.size.l
 	property alias model: buttonRepeater.model
 	property int currentIndex
 
@@ -26,44 +26,28 @@ Item {
 	Row {
 		id: buttonRow
 
+		height: parent.height
 		width: parent.width
 
 		Repeater {
 			id: buttonRepeater
+			height: parent.height
 
+			// TODO: use QtQuick.Shape to draw the asymmetric rounded edge.
 			delegate: Button {
 				id: buttonDelegate
 
 				property int modelIndex: model.index
 
 				width: root.width / buttonRepeater.count
-				height: root.height
+				height: parent.height
 				checked: model.index === root.currentIndex
 				backgroundColor: (down || checked)
-								 ? Theme.okColor
-								 : Theme.okSecondaryColor
+								 ? Theme.color.ok
+								 : Theme.color.darkOk
 				font.pixelSize: root.fontPixelSize
-				radius: 8
+				radius: 0
 				text: modelData
-
-				// Use rectangles to cover the left/right edges to avoid showing the rounded
-				// background rects for all non-edge buttons.
-				Rectangle {
-					x: -1   // cover border anti-aliasing
-					width: parent.radius
-					height: parent.height
-					color: buttonDelegate.modelIndex !== 0
-						   ? parent.backgroundColor
-						   : 'transparent'
-				}
-				Rectangle {
-					x: parent.width - width
-					width: parent.radius
-					height: parent.height
-					color: buttonDelegate.modelIndex !== buttonRepeater.count-1
-						   ? parent.backgroundColor
-						   : 'transparent'
-				}
 
 				onClicked: {
 					root.buttonClicked(model.index)
@@ -75,7 +59,7 @@ Item {
 
 	Rectangle {
 		anchors.fill: parent
-		border.color: Theme.okColor
+		border.color: Theme.color.ok
 		border.width: 2
 		radius: 8
 		color: 'transparent'

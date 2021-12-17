@@ -8,10 +8,9 @@ import Victron.VenusOS
 Button {
 	id: root
 
-	width: 320
-	height: 48
+	flat: true
 
 	backgroundColor: checked
-		 ? (down ? Theme.criticalColor : Theme.criticalSecondaryColor)
-		 : (down ? Theme.goColor : Theme.goSecondaryColor)
+		 ? (down ? Theme.color.critical : Theme.color.darkCritical)
+		 : (down ? Theme.color.go : Theme.color.darkGo)
 }

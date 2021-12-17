@@ -9,11 +9,11 @@ import "../data"
 
 // TODO
 ArcGauge {
-	width: 60
+	width: Theme.geometry.briefPage.edgeGauge.width
 	height: parent.height
 	value: 66
 	startAngle: 270 - 25
 	endAngle: 270 + 25
-	radius: 360
-	strokeWidth: 10
+	radius: Theme.geometry.briefPage.edgeGauge.radius
+	strokeWidth: Theme.geometry.arc.strokeWidth
 }

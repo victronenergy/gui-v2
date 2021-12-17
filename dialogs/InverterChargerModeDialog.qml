@@ -36,7 +36,7 @@ ModalDialog {
 
 		Item {
 			width: parent.width
-			height: 56
+			height: Theme.geometry.controlCard.mediumItem.height
 
 			RadioButton {
 				id: button

@@ -27,13 +27,13 @@ ModalDialog {
 			anchors.horizontalCenter: parent.horizontalCenter
 			width: 490
 			height: 72
-			buttonWidth: 136
+			//buttonWidth: 136
 			stepSize: 100 // mA
 			to: 1000000 // mA
 			contentItem: Label {
 				//% "%1 A"
 				text: qsTrId("%1 A").arg(spinbox.value/1000)
-				font.pixelSize: Theme.fontSizeXXL
+				font.pixelSize: Theme.font.size.xxl
 				horizontalAlignment: Qt.AlignHCenter
 				verticalAlignment: Qt.AlignVCenter
 			}

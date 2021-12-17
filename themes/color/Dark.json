@@ -1,0 +1,27 @@
+{
+    "color.go": "#72B84C",
+    "color.dimGo": "#9972B84C",
+    "color.darkGo": "#4D72B84C",
+
+    "color.ok": "#387DC5",
+    "color.dimOk": "#99387DC5",
+    "color.darkOk": "#4D387DC5",
+
+    "color.warning": "#F0962E",
+    "color.dimWarning": "#F0962E",
+    "color.darkWarning": "#4DF0962E",
+
+    "color.critical": "#F35C58",
+    "color.dimCritical": "#F35C58",
+    "color.darkCritical": "#4DF35C58",
+
+    "color.font.primary": "#FFFFFF",
+    "color.font.secondary": "#B3FFFFFF",
+    "color.font.tertiary": "#969591",
+    "color.font.disabled": "#64635F",
+
+    "color.background.primary": "#000000",
+    "color.background.secondary": "#141414",
+    "color.background.tertiary": "#7F272622",
+    "color.background.disabled": "#272622"
+}
