@@ -3,7 +3,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import Victron.Velib
 import Victron.VenusOS
 import "../data"
@@ -43,13 +42,10 @@ Page {
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry.circularMultiGauge.topMargin
-			bottom: parent.bottom
-			bottomMargin: Theme.geometry.circularMultiGauge.bottomMargin
 		}
-
-		width: height
+		width: 320
+		height: width
 		x: sidePanel.x/2 - width/2
-
 		model: gaugeData.model
 	}
 

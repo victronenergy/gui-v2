@@ -4,20 +4,20 @@
 
 import QtQuick
 import QtQuick.Window
-import QtQuick.Controls.impl
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Item {
 	id: gauges
 
 	property var model
-	readonly property real step: Theme.geometry.circularMultiGauge.spacing
 	readonly property real strokeWidth: Theme.geometry.circularMultiGauge.strokeWidth
 
+	// Step change in the size of the bounding boxes of successive gauges
+	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry.circularMultiGauge.spacing)
+
 	Item {
-		id: gaugeContainer
 		anchors.fill: parent
-		anchors.margins: gauges.strokeWidth/2
 
 		// Antialiasing
 		layer.enabled: true
@@ -28,7 +28,7 @@ Item {
 			model: gauges.model
 			delegate: ProgressArc {
 				property int status: Gauges.getValueStatus(model.value, model.valueType)
-				width: parent.width - (strokeWidth + index*step)
+				width: parent.width - (strokeWidth + index*_stepSize)
 				height: width
 				anchors.centerIn: parent
 				radius: width/2
@@ -46,6 +46,7 @@ Item {
 		id: textCol
 
 		anchors.top: parent.top
+		anchors.topMargin: strokeWidth/2
 		anchors.bottom: parent.verticalCenter
 		anchors.left: parent.left
 		anchors.right: parent.horizontalCenter
@@ -54,17 +55,20 @@ Item {
 		Repeater {
 			width: parent.width
 			model: gauges.model
-			delegate:Label {
-				y: gaugeContainer.anchors.margins/3 + (index*gauges.step/2)
-				width: parent.width
+			delegate: Label {
+				anchors.verticalCenter: textCol.top
+				anchors.verticalCenterOffset: index * _stepSize/2
+				anchors.right: parent.right
+				anchors.rightMargin: Theme.geometry.circularMultiGauge.labels.spacing
+				anchors.left: parent.left
 				horizontalAlignment: Text.AlignRight
 				font.pixelSize: Theme.font.size.m
 				color: Theme.color.font.primary
 				text: qsTrId(model.textId)
 
-				ColorImage {
+				CP.ColorImage {
 					anchors.left: parent.right
-					anchors.leftMargin: Theme.geometry.circularMultiGauge.labels.spacing
+					anchors.leftMargin: Theme.geometry.circularMultiGauge.icons.spacing
 					anchors.verticalCenter: parent.verticalCenter
 					source: model.icon
 					color: Theme.color.font.primary
