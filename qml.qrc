@@ -12,6 +12,7 @@
         <file>components/Arc.qml</file>
         <file>components/ArcGauge.qml</file>
         <file>components/CircularMultiGauge.qml</file>
+        <file>components/CircularSingleGauge.qml</file>
         <file>components/ControlCard.qml</file>
         <file>components/ControlCardsModel.qml</file>
         <file>components/ControlValue.qml</file>

@@ -36,17 +36,35 @@ Page {
 		rightGaugeTypes = rightTypes
 	}
 
-	CircularMultiGauge {
-		id: gauge
+	Loader {
+		id: mainGauge
+
+		property bool multipleValues: gaugeData.model.count > 1
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.circularMultiGauge.topMargin
+			topMargin: Theme.geometry.mainGauge.topMargin
 		}
-		width: 320
+		width: Theme.geometry.mainGauge.size
 		height: width
 		x: sidePanel.x/2 - width/2
-		model: gaugeData.model
+		sourceComponent: gaugeData.model.count === 0 ? null : (multipleValues ? multiGauge : singleGauge)
+	}
+
+	Component {
+		id: multiGauge
+
+		CircularMultiGauge {
+			model: gaugeData.model
+		}
+	}
+
+	Component {
+		id: singleGauge
+
+		CircularSingleGauge {
+			model: gaugeData.model.get(0)
+		}
 	}
 
 	property real sideOpacity: 1
@@ -57,7 +75,7 @@ Page {
 			top: parent.top
 			left: parent.left
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
-			right: gauge.left
+			right: mainGauge.left
 		}
 		height: parent.height
 		opacity: root.sideOpacity
@@ -76,7 +94,7 @@ Page {
 			top: parent.top
 			right: parent.right
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
-			left: gauge.right
+			left: mainGauge.right
 		}
 		height: parent.height
 		opacity: root.sideOpacity
@@ -133,7 +151,7 @@ Page {
 			top: parent.top
 			right: parent.right
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
-			left: gauge.right
+			left: mainGauge.right
 		}
 		height: parent.height/2
 		opacity: root.sideOpacity
@@ -151,7 +169,7 @@ Page {
 			top: rightUpper.bottom
 			right: parent.right
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
-			left: gauge.right
+			left: mainGauge.right
 		}
 		height: parent.height/2
 		opacity: root.sideOpacity
@@ -198,7 +216,8 @@ Page {
 			_populated = false
 
 			model.clear()
-			for (let i = 0; i < gaugeConfig.length; ++i) {
+			const n = Math.min(Math.random() * 6, gaugeConfig.length)
+			for (let i = 0; i < n; ++i) {
 				const type = gaugeConfig[i]
 				if (type in _gaugeTypeProperties) {
 					const props = _gaugeTypeProperties[type]
