@@ -47,6 +47,20 @@ function findIndex(container, value) {
 	return -1
 }
 
+function decomposeDuration(seconds) {
+	const h = Math.floor(seconds / 3600)
+	const m = Math.floor((seconds - (h * 3600)) / 60)
+	return {
+		h: h,
+		m: m,
+		s: Math.floor(seconds - (h * 3600 + m * 60))
+	}
+}
+
+function composeDuration(hours, minutes, seconds) {
+	return (hours || 0) * 3600 + (minutes || 0) * 60 + (seconds || 0)
+}
+
 function pad(val, length, char) {
 	const str = '' + val
 	const n = str.length
@@ -63,10 +77,10 @@ function pad(val, length, char) {
 	return rv + str
 }
 
-function convertRuntimeToHHMM(runtimeSecs) {
-	if (runtimeSecs === -1)
+function formatAsHHMM(seconds) {
+	if (Number.isNaN(seconds) || seconds < 0)
 		return "--:--"
-	var hours = Math.floor(runtimeSecs / 3600)
-	var minutes = Math.floor((runtimeSecs - (hours * 3600)) / 60)
-	return pad(hours, 2) + ":" + pad(minutes, 2)
+
+	const duration = decomposeDuration(seconds)
+	return pad(duration.h, 2) + ":" + pad(duration.m, 2)
 }
