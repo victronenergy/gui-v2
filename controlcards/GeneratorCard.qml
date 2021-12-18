@@ -51,7 +51,7 @@ ControlCard {
 						? "qrc:/images/icon_manualstart_timer_24.svg"
 						: "qrc:/images/icon_manualstart_24.svg"
 				: "qrc:/images/icon_autostart_24.svg"
-		text: Utils.convertRuntimeToHHMM(root.runtime)
+		text: Utils.formatAsHHMM(root.runtime)
 		font.family: VenusFont.normal.name
 		font.pixelSize: Theme.fontSizeControlValue
 		color: root.runtime > 0 ? Theme.primaryFontColor : Theme.weatherColor
@@ -279,7 +279,7 @@ ControlCard {
 				border.color: Theme.okColor
 				font.pixelSize: Theme.fontSizeControlValue
 
-				text: Utils.convertRuntimeToHHMM(selectedRuntime)
+				text: Utils.formatAsHHMM(selectedRuntime)
 				property int selectedRuntime: 0 // TODO: bind to data model
 
 				onClicked: dialogManager.generatorDurationSelectorDialog.open()

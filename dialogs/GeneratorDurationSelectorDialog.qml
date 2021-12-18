@@ -90,7 +90,5 @@ ModalDialog {
 		}
 	}
 
-	onAccepted: {
-		duration = 3600 * hrSpinbox.value + minSpinbox.value
-	}
+	onAccepted: duration = Utils.composeDuration(hrSpinbox.value, minSpinbox.value)
 }
