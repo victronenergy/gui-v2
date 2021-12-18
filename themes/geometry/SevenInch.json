@@ -74,12 +74,17 @@
     "geometry.arc.strokeWidth": 8,
     "geometry.progressArc.strokeWidth": 8,
 
+    "geometry.mainGauge.size": 400,
+    "geometry.mainGauge.topMargin": 48,
+
     "geometry.circularMultiGauge.strokeWidth": 16,
-    "geometry.circularMultiGauge.topMargin": 24,
     "geometry.circularMultiGauge.spacing": 16,
     "geometry.circularMultiGauge.labels.rightMargin": 20,
     "geometry.circularMultiGauge.labels.spacing": 18,
     "geometry.circularMultiGauge.icons.spacing": 6,
+
+    "geometry.circularSingularGauge.strokeWidth": 16,
+    "geometry.circularSingularGauge.labels.bottomMargin": 154,
 
     "geometry.controlCardsPage.bottomMargin": 16,
     "geometry.controlCardsPage.spacing": 16,
