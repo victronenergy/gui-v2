@@ -9,51 +9,56 @@ import Victron.VenusOS
 
 Column {
 	id: root
+	property int generatorPower: 874 // TODO - hook up to real data
+	property int generatorMaxPower: 1000 // TODO - hook up to real data
+
 	Item {
+		height: Theme.geometry.briefPage.sidePanel.header.height
 		width: parent.width
-		height: 22
-
-		Label {
-			anchors.left: parent.left
-			text: "Sun 3 Oct"
-		}
-		Label {
-			anchors.right: parent.right
-			text: "12:23"
-		}
-	}
-	Item { width: 1; height: 3 }
-	Item {
-		height: 41
-		width: 50
-
 		Label {
 			id: temperature
 
-			font.pixelSize: 34
-			text: "12°"
+			anchors.verticalCenter: parent.verticalCenter
+
+			font.pixelSize: Theme.font.size.l
+			text: "10°"
 		}
 		CP.ColorImage {
+			id: image
+
 			anchors {
-				top: parent.top
-				topMargin: 6
+				verticalCenter: parent.verticalCenter
 				left: temperature.right
-				leftMargin: 5
+				leftMargin: Theme.geometry.briefPage.sidePanel.header.image.leftMargin
 			}
 			source: "qrc:/images/cloud.svg"
 			color: Theme.color.font.primary
 		}
+		Label {
+			anchors {
+				verticalCenter: parent.verticalCenter
+				right: parent.right
+				rightMargin: Theme.geometry.briefPage.sidePanel.header.date.rightMargin
+			}
+			font.pixelSize: Theme.font.size.m
+			text: "Sun 3 Oct"
+		}
 	}
-	Item { width: 1; height: 6 }
+	SeparatorBar {
+		width: parent.width
+		height: Theme.geometry.briefPage.sidePanel.separatorBar.height
+	}
 	Row {
+		topPadding: Theme.geometry.briefPage.sidePanel.forecastRow.topPadding
+		spacing: Theme.geometry.briefPage.sidePanel.forecastRow.spacing
 		WeatherDetails {
 			day: "Mon"
-			temperature: "6°"
+			temperature: "9°"
 			source: "qrc:/images/rain.svg"
 		}
 		WeatherDetails {
 			day: "Tue"
-			temperature: "8°"
+			temperature: "11°"
 			source: "qrc:/images/scatteredcloud.svg"
 		}
 		WeatherDetails {
@@ -61,65 +66,146 @@ Column {
 			temperature: "13°"
 			source: "qrc:/images/sunny.svg"
 		}
-		WeatherDetails {
-			day: "Thu"
-			temperature: "8°"
-			source: "qrc:/images/scatteredcloud.svg"
-		}
 	}
-	Item { width: 1; height: 33 }
 	ListView {
 		id: listView
+		property var decorations: [solarYieldDecoration, generatorDecoration, loadsDecoration]
 		width: parent.width
-		height: model.count * delegateHeight
+		height: Theme.geometry.briefPage.sidePanel.listView.height
 		orientation: ListView.Vertical
-		property int delegateHeight: Theme.geometry.briefPage.sidePanel.delegateHeight
-		model: ListModel {
-			ListElement {
-				labelText: "Generator"
-				valueText: "483 W"
-				imageSource: "qrc:/images/generator.svg"
-			}
-			ListElement {
-				labelText: "Grid"
-				valueText: "Off"
-				imageSource: "qrc:/images/grid.svg"
-			}
-			ListElement {
-				labelText: "Solar yield"
-				valueText: "80 W"
-				imageSource: "qrc:/images/solaryield.svg"
-			}
-			ListElement {
-				labelText: "Consum"
-				valueText: "268 W"
-				imageSource: "qrc:/images/consumption.svg"
+		topMargin: Theme.geometry.briefPage.sidePanel.topSpacing
+		spacing: Theme.geometry.briefPage.sidePanel.columnSpacing
+		model: ListModel { // TODO: hook up to real data
+			Component.onCompleted: {
+				append({
+						height: Theme.geometry.briefPage.sidePanel.solarYield.height,
+						//% "Solar yield"
+						labelText: qsTrId("brief_solar_yield"),
+						value: 428,
+						type: Units.Power,
+						imageSource: "qrc:/images/solaryield.svg",
+						decorationIndex: 0,
+						topMargin: Theme.geometry.briefPage.sidePanel.solarYield.topMargin
+					})
+				append({
+						height: Theme.geometry.briefPage.sidePanel.generator.height,
+						//% "Generator"
+						labelText: qsTrId("brief_generator"),
+						value: 874,
+						type: Units.Power,
+						imageSource: "qrc:/images/generator.svg",
+						decorationIndex: 1,
+						topMargin: Theme.geometry.briefPage.sidePanel.generator.topMargin
+					})
+				append({
+						height: Theme.geometry.briefPage.sidePanel.loads.height,
+						//% "Loads"
+						labelText: qsTrId("brief_loads"),
+						value: 6.25,
+						type: Units.Power,
+						imageSource: "qrc:/images/consumption.svg",
+						decorationIndex: 2,
+						topMargin: Theme.geometry.briefPage.sidePanel.loads.topMargin
+					})
 			}
 		}
 		delegate: Item {
-			width: parent.width
-			height: listView.delegateHeight
-			CP.ColorImage {
-				id: image
+			width: root.width
+			height: model.height
+			ValueDisplay {
+				id: valueDisplay
 
-				anchors.verticalCenter: parent.verticalCenter
-				width: implicitWidth
-				height: implicitHeight
-				source: imageSource
-				color: Theme.color.font.primary
-			}
-			Label {
 				anchors {
-					verticalCenter: parent.verticalCenter
-					left: image.right
-					leftMargin: 9
+					top: parent.top
+					topMargin: model.topMargin
 				}
-				text: labelText
+				title.text: model.labelText
+				physicalQuantity: model.type
+				value: model.value
+				icon.source: model.imageSource
+				rightAligned: false
+				fontSize: Theme.font.size.l
 			}
-			Label {
-				anchors.right: parent.right
-				font.pixelSize: 28
-				text: valueText
+			Loader {
+				anchors{
+					right: parent.right
+					bottom: parent.bottom
+				}
+				sourceComponent: listView.decorations[decorationIndex]
+			}
+		}
+		Component {
+			id: solarYieldDecoration
+			Item {
+				width: root.width
+				height: Theme.geometry.briefPage.sidePanel.solarYield.height
+				BarChart {
+					anchors {
+						right: parent.right
+						rightMargin: Theme.geometry.briefPage.sidePanel.solarYield.rightMargin
+						bottom: parent.bottom
+						bottomMargin: Theme.geometry.briefPage.sidePanel.solarYield.bottomMargin
+					}
+					width: Theme.geometry.briefPage.sidePanel.solarYield.width
+
+					model: [0.8, 1, 0.8, 0.5, 0.65, 0.3, 0.2, 0.8, 1, 0.85, 0.7] // TODO: hook up to real data
+				}
+			}
+		}
+		Component {
+			id: generatorDecoration
+
+			Item {
+				width: root.width
+				height: Theme.geometry.briefPage.sidePanel.generator.height
+				GeneratorIconLabel {
+					anchors {
+						right: parent.right
+						bottom: parent.bottom
+						bottomMargin: Theme.geometry.briefPage.sidePanel.generator.label.bottomMargin
+					}
+					spacing: Theme.geometry.briefPage.sidePanel.generator.label.spacing
+					state: Generators.GeneratorState.Running
+					runtime: 25*60
+					runningBy: Generators.GeneratorRunningBy.Soc
+				}
+				Slider {
+					id: slider
+
+					anchors {
+						right: parent.right
+						bottom: parent.bottom
+					}
+					grooveVerticalPadding: 0
+					enabled: false // not interactive
+					width: parent.width
+					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
+					value: 0.8 // TODO - hook up to real data
+					showHandle: false
+				}
+			}
+		}
+		Component {
+			id: loadsDecoration
+			Item {
+				width: root.width
+				height: Theme.geometry.briefPage.sidePanel.loads.height
+				Slider {
+					id: slider
+
+					anchors {
+						right: parent.right
+						bottom: parent.bottom
+					}
+					grooveVerticalPadding: 0
+					enabled: false // not interactive
+					width: parent.width
+					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
+					value: 0.7
+					highlightColor: Theme.color.warning
+					grooveColor: Theme.color.darkWarning
+					showHandle: false
+				}
 			}
 		}
 	}

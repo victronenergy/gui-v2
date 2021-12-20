@@ -55,24 +55,31 @@ Item {
 		Repeater {
 			width: parent.width
 			model: gauges.model
-			delegate: Label {
+			delegate: Row {
 				anchors.verticalCenter: textCol.top
 				anchors.verticalCenterOffset: index * _stepSize/2
 				anchors.right: parent.right
-				anchors.rightMargin: Theme.geometry.circularMultiGauge.labels.spacing
-				anchors.left: parent.left
-				horizontalAlignment: Text.AlignRight
-				font.pixelSize: Theme.font.size.m
-				color: Theme.color.font.primary
-				text: qsTrId(model.textId)
-
+				spacing: Theme.geometry.circularMultiGauge.row.spacing
+				Label {
+					horizontalAlignment: Text.AlignRight
+					font.pixelSize: Theme.font.size.m
+					color: Theme.color.font.primary
+					text: qsTrId(model.textId)
+				}
+				Label {
+					anchors.verticalCenter: parent.verticalCenter
+					horizontalAlignment: Text.AlignRight
+					font.pixelSize: Theme.font.size.m
+					color: Theme.color.font.primary
+					visible: Preferences.showPercentagesInBriefPage
+					//% "%1%"
+					text: qsTrId("%1%").arg(model.value)
+				}
 				CP.ColorImage {
-					anchors.left: parent.right
-					anchors.leftMargin: Theme.geometry.circularMultiGauge.icons.spacing
 					anchors.verticalCenter: parent.verticalCenter
 					source: model.icon
 					color: Theme.color.font.primary
-					fillMode: Image.PreserveAspectFit
+					fillMode: Image.Pad
 					smooth: true
 				}
 			}

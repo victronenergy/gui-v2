@@ -100,6 +100,7 @@
 
     "geometry.circularMultiGauge.strokeWidth": 16,
     "geometry.circularMultiGauge.spacing": 16,
+    "geometry.circularMultiGauge.row.spacing": 7,
     "geometry.circularMultiGauge.labels.rightMargin": 20,
     "geometry.circularMultiGauge.labels.spacing": 18,
     "geometry.circularMultiGauge.icons.spacing": 6,
@@ -114,8 +115,30 @@
     "geometry.briefPage.edgeGauge.horizontalMargin": 56,
     "geometry.briefPage.edgeGauge.radius": 456,
     "geometry.briefPage.edgeGauge.width": 80,
-    "geometry.briefPage.sidePanel.width": 240,
+    "geometry.briefPage.sidePanel.width": 304,
     "geometry.briefPage.sidePanel.delegateHeight": 40,
+    "geometry.briefPage.sidePanel.topMargin": 21,
+    "geometry.briefPage.sidePanel.columnSpacing": 25,
+    "geometry.briefPage.sidePanel.topSpacing": 58,
+    "geometry.briefPage.sidePanel.header.height": 34,
+    "geometry.briefPage.sidePanel.header.image.leftMargin": 5,
+    "geometry.briefPage.sidePanel.header.date.rightMargin": 4,
+    "geometry.briefPage.sidePanel.separatorBar.height": 2,
+    "geometry.briefPage.sidePanel.forecastRow.topPadding": 6,
+    "geometry.briefPage.sidePanel.forecastRow.spacing": 44,
+    "geometry.briefPage.sidePanel.listView.height": 300,
+    "geometry.briefPage.sidePanel.solarYield.width": 168,
+    "geometry.briefPage.sidePanel.solarYield.height": 64,
+    "geometry.briefPage.sidePanel.solarYield.rightMargin": 8,
+    "geometry.briefPage.sidePanel.solarYield.bottomMargin": 8,
+    "geometry.briefPage.sidePanel.solarYield.topMargin": 7,
+    "geometry.briefPage.sidePanel.generator.height": 72,
+    "geometry.briefPage.sidePanel.generator.topMargin": 7,
+    "geometry.briefPage.sidePanel.generator.label.bottomMargin": 20,
+    "geometry.briefPage.sidePanel.generator.label.spacing": 7,
+    "geometry.briefPage.sidePanel.generator.slider.height": 8,
+    "geometry.briefPage.sidePanel.loads.height": 70,
+    "geometry.briefPage.sidePanel.loads.topMargin": 5,
 
     "geometry.splashView.verticalCenterOffset": -20,
     "geometry.splashView.spacing": 68,
@@ -125,9 +148,33 @@
     "geometry.generatorCard.durationButton.width": 112,
     "geometry.generatorCard.startButton.height": 48,
 
+    "geometry.generatorIconLabel.spacing": 5,
+    "geometry.generatorIconLabel.icon.width": 24,
+
+    "geometry.generatorRuntimeDuration.height": 72,
+    "geometry.generatorRuntimeDuration.durationLabel.leftMargin": 16,
+    "geometry.generatorRuntimeDuration.durationButton.rightMargin": 16,
+    "geometry.generatorRuntimeDuration.durationButton.height": 40,
+    "geometry.generatorRuntimeDuration.durationButton.width": 112,
+
     "geometry.essCard.minimumSocButton.height": 40,
     "geometry.essCard.minimumSocButton.width": 112,
     "geometry.essCard.warningIcon.rightMargin": 18,
 
-    "geometry.inverterCard.topMargin": 96
+    "geometry.inverterCard.topMargin": 96,
+
+    "geometry.barChart.height": 47,
+    "geometry.barChart.spacing": 8,
+    "geometry.barChart.barWidth": 8,
+    "geometry.barChart.barRadius": 12,
+
+    "geometry.valueDisplay.titleRow.spacing": 4,
+    "geometry.valueDisplay.icon.width": 24,
+    "geometry.valueDisplay.quantityRow.spacing": 2,
+
+    "geometry.weatherDetails.width": 72,
+    "geometry.weatherDetails.day.height": 22,
+    "geometry.weatherDetails.row.topPadding": -2,
+    "geometry.weatherDetails.row.spacing": 3,
+    "geometry.weatherDetails.pixelSize": 18
 }

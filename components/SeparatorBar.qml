@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 
 Rectangle {
-	width: Theme.geometry.separatorBar.width
-	height: Theme.geometry.separatorBar.width
+	implicitWidth: Theme.geometry.separatorBar.width
+	implicitHeight: Theme.geometry.separatorBar.width
 	color: Theme.color.background.disabled
 }

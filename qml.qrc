@@ -13,6 +13,7 @@
         <file>components/Arc.qml</file>
         <file>components/ArcGauge.qml</file>
         <file>components/AsymmetricRoundedRectangle.qml</file>
+        <file>components/BarChart.qml</file>
         <file>components/CircularMultiGauge.qml</file>
         <file>components/CircularSingleGauge.qml</file>
         <file>components/ControlCard.qml</file>
@@ -22,10 +23,12 @@
         <file>components/RadioButtonControlValue.qml</file>
         <file>components/SwitchControlValue.qml</file>
         <file>components/Gauges.qml</file>
+        <file>components/GeneratorIconLabel.qml</file>
         <file>components/MainView.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
         <file>components/PageStack.qml</file>
+        <file>components/Preferences.qml</file>
         <file>components/ProgressArc.qml</file>
         <file>components/ScaledArc.qml</file>
         <file>components/ScaledArcGauge.qml</file>
