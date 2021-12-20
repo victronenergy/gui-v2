@@ -185,7 +185,10 @@ Page {
 	BriefMonitorPanel {
 		id: sidePanel
 
-		anchors.verticalCenter: parent.verticalCenter
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry.briefPage.sidePanel.topMargin
+		}
 		width: Theme.geometry.briefPage.sidePanel.width
 
 		// hidden by default.

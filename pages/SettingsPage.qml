@@ -59,5 +59,16 @@ Page {
 			text: qsTrId("settings_toggle_language")
 			onClicked: Language.current = (Language.current === Language.English ? Language.French : Language.English)
 		}
+
+		Button {
+			anchors.horizontalCenter: parent.horizontalCenter
+			//% "Toggle Percentage Mode"
+			//: When true, the Brief page shows percentages
+			text: qsTrId("settings_toggle_percentage")
+			onClicked: {
+				Preferences.showPercentagesInBriefPage = !Preferences.showPercentagesInBriefPage
+				console.log(Preferences.showPercentagesInBriefPage)
+			}
+		}
 	}
 }

@@ -10,13 +10,19 @@ import Victron.VenusOS
 C.Slider {
 	id: root
 
+	property color grooveColor: Theme.color.slider.groove.background
+	property color highlightColor: Theme.color.slider.background
+	property color indicatorColor: Theme.color.font.primary
+	property int grooveVerticalPadding: height / 3
+	property bool showHandle: true
+
 	implicitHeight: Math.max(background.implicitHeight, handle.implicitHeight)
 	background: Rectangle {
 		anchors {
 			top: parent.top
-			topMargin: parent.height/3
+			topMargin: root.grooveVerticalPadding
 			bottom: parent.bottom
-			bottomMargin: parent.height/3
+			bottomMargin: root.grooveVerticalPadding
 			left: parent.left
 			leftMargin: parent.leftPadding
 			right: parent.right
@@ -28,12 +34,12 @@ C.Slider {
 		width: root.availableWidth
 		height: implicitHeight
 		radius: Theme.geometry.slider.groove.radius
-		color: Theme.color.slider.groove.background
+		color: grooveColor
 
 		Rectangle {
 			width: root.visualPosition * parent.width
 			height: parent.height
-			color: Theme.color.slider.background
+			color: highlightColor
 			radius: Theme.geometry.slider.groove.radius
 		}
 	}
@@ -46,6 +52,7 @@ C.Slider {
 		implicitWidth: Theme.geometry.slider.handle.width
 		implicitHeight: implicitWidth
 		radius: implicitWidth/2
-		color: Theme.color.font.primary
+		color: indicatorColor
+		visible: root.showHandle
 	}
 }

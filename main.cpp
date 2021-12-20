@@ -65,6 +65,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ArcGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AsymmetricRoundedRectangle.qml")),
 		"Victron.VenusOS", 2, 0, "AsymmetricRoundedRectangle");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/BarChart.qml")),
+		"Victron.VenusOS", 2, 0, "BarChart");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularMultiGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularSingleGauge.qml")),
@@ -85,12 +87,18 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SwitchControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/MainView.qml")),
 		"Victron.VenusOS", 2, 0, "MainView");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GeneratorIconLabel.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorIconLabel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ModalDialog.qml")),
+		"Victron.VenusOS", 2, 0, "ModalDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavBar.qml")),
 		"Victron.VenusOS", 2, 0, "NavBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavButton.qml")),
 		"Victron.VenusOS", 2, 0, "NavButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/PageStack.qml")),
 		"Victron.VenusOS", 2, 0, "PageStack");
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Preferences.qml")),
+		"Victron.VenusOS", 2, 0, "Preferences");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ProgressArc.qml")),
 		"Victron.VenusOS", 2, 0, "ProgressArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArc.qml")),

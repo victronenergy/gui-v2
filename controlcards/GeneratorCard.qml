@@ -29,7 +29,7 @@ ControlCard {
 					//% "Running"
 					qsTrId("controlcard_generator_status_running")
 
-	CP.IconLabel {
+	GeneratorIconLabel {
 		id: timerDisplay
 		anchors {
 			right: parent.right
@@ -55,6 +55,9 @@ ControlCard {
 		font.family: VenusFont.normal.name
 		font.pixelSize: Theme.font.size.m
 		color: root.runtime > 0 ? Theme.color.font.primary : Theme.color.font.tertiary
+		state: root.state
+		runtime: root.runtime
+		runningBy: root.runningBy
 	}
 
 	Label {
