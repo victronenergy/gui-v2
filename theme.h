@@ -13,6 +13,8 @@
 #include <QString>
 #include <QColor>
 
+#include <deque>
+
 namespace Victron {
 namespace VenusOS {
 
@@ -59,17 +61,20 @@ Q_SIGNALS:
 
 private:
 	bool parseTheme(const QString &themeFile);
-	QVariant parseValue(const QJsonValue &value);
+	QVariant parseValue(const QJsonValue &value, const QString &key, bool defer = true);
 	void insertValue(
 		QQmlPropertyMap *tree,
 		const QString &key,
 		const QJsonValue &value,
-		int depth = 0);
-	QVariant resolvedValue(const QString &key, bool *found = nullptr) const;
+		int depth = 0,
+		bool defer = true);
+	QVariant resolvedValue(const QString &key, bool *found = nullptr, bool warnOnFailure = true) const;
+	QColor resolvedColor(const QString &value) const;
 
 	QHash<QString, QQmlPropertyMap *> m_subTrees;
 	ScreenSize m_screenSize = FiveInch;
 	ColorScheme m_colorScheme = Dark;
+	std::deque<std::pair<QString, QJsonValue>> m_deferred;
 };
 
 }

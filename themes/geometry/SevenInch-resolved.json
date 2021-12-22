@@ -1,6 +1,0 @@
-{
-    "geometry.spinBox.spacing": "geometry.button.spacing",
-    "geometry.statusBar.horizontalMargin": "geometry.page.grid.horizontalMargin",
-    "geometry.navigationBar.button.spacing": "geometry.button.spacing",
-    "geometry.controlCardsPage.leftMargin": "geometry.page.grid.horizontalMargin"
-}
