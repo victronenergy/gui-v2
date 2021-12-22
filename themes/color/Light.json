@@ -23,5 +23,30 @@
     "color.background.primary": "#FFFFFF",
     "color.background.secondary": "#E6E5E1",
     "color.background.tertiary": "#7FE6E5E1",
-    "color.background.disabled": "#272622"
+    "color.background.disabled": "#272622",
+
+    "color.button.outline.background": "color.darkOk",
+    "color.button.outline.down.background": "color.ok",
+    "color.button.outline.border": "color.ok",
+    "color.button.flat.background": "transparent",
+    "color.button.flat.go.background": "color.dimGo",
+    "color.button.flat.stop.background": "color.dimCritical",
+
+    "color.radioButton.indicator.on": "color.ok",
+    "color.radioButton.indicator.off": "color.font.disabled",
+
+    "color.slider.groove.background": "color.darkOk",
+    "color.slider.background": "color.ok",
+
+    "color.spinbox.indicator.background": "color.dimOk",
+    "color.spinbox.indicator.pressed.background": "color.darkOk",
+
+    "color.switch.groove.off": "transparent",
+    "color.switch.groove.on": "color.ok",
+    "color.switch.groove.border.off": "color.font.disabled",
+    "color.switch.groove.border.on": "transparent",
+    "color.switch.indicator": "color.font.primary",
+
+    "color.navigationBar.button.on": "color.font.primary",
+    "color.navigationBar.button.of": "color.font.secondary"
 }

@@ -53,11 +53,7 @@ bool Theme::load(ScreenSize screenSize, ColorScheme colorScheme)
 {
 	bool geometry = parseTheme(QStringLiteral(":/themes/geometry/%1.json")
 			.arg(QMetaEnum::fromType<Theme::ScreenSize>().valueToKey(screenSize)));
-	bool geometry_resolved = parseTheme(QStringLiteral(":/themes/geometry/%1-resolved.json")
-			.arg(QMetaEnum::fromType<Theme::ScreenSize>().valueToKey(screenSize)));
 	bool color = parseTheme(QStringLiteral(":/themes/color/%1.json")
-			.arg(QMetaEnum::fromType<Theme::ColorScheme>().valueToKey(colorScheme)));
-	bool color_resolved = parseTheme(QStringLiteral(":/themes/color/%1-resolved.json")
 			.arg(QMetaEnum::fromType<Theme::ColorScheme>().valueToKey(colorScheme)));
 	bool typography = parseTheme(QStringLiteral(":/themes/typography/Typography.json"));
 
@@ -71,20 +67,20 @@ bool Theme::load(ScreenSize screenSize, ColorScheme colorScheme)
 		emit colorSchemeChanged();
 	}
 
-	return geometry && geometry_resolved && color && color_resolved && typography;
+	return geometry && color && typography;
 }
 
-QVariant Theme::resolvedValue(const QString &key, bool *found) const
+QVariant Theme::resolvedValue(const QString &key, bool *found, bool warnOnFailure) const
 {
 	if (found) *found = false;
 	const QString resolvedSubTree = key.mid(0, key.lastIndexOf(QLatin1Char('.')));
 	if (!m_subTrees.contains(resolvedSubTree)) {
-		qWarning() << "Theme: unable to resolve:" << key << ": subtree does not exist.";
+		if (warnOnFailure) qWarning() << "Theme: unable to resolve:" << key << ": subtree does not exist.";
 	} else {
 		QQmlPropertyMap *subtree = m_subTrees[resolvedSubTree];
 		const QString valueKey = key.mid(resolvedSubTree.length()+1);
 		if (!subtree->contains(valueKey)) {
-			qWarning() << "Theme: unable to resolve:" << key << ": subtree does not contain key.";
+			if (warnOnFailure) qWarning() << "Theme: unable to resolve:" << key << ": subtree does not contain key.";
 		} else {
 			if (found) *found = true;
 			return subtree->value(valueKey);
@@ -93,39 +89,55 @@ QVariant Theme::resolvedValue(const QString &key, bool *found) const
 	return QVariant();
 }
 
-QVariant Theme::parseValue(const QJsonValue &value)
+QColor Theme::resolvedColor(const QString &value) const
+{
+	static const QRegularExpression hexColor = ::optimizeExpression(
+			QStringLiteral("^#[0-9a-fA-F]{6,8}$"));
+	static const QRegularExpression rgbaColor = ::optimizeExpression(
+			QStringLiteral("^rgba\\((\\d+), (\\d+), (\\d+), (\\d+(?:\\.\\d+)?)\\)$"));
+
+	if (value == "transparent") {
+		return QColor(value);
+	}
+
+	QRegularExpressionMatch match = hexColor.match(value);
+	if (match.hasMatch()) {
+		return QColor(value);
+	}
+
+	match = rgbaColor.match(value);
+	if (match.hasMatch()) {
+		return QColor(
+			match.captured(1).toInt(),
+			match.captured(2).toInt(),
+			match.captured(3).toInt(),
+			qRound(255 * match.captured(4).toDouble()));
+	}
+
+	return {};
+}
+
+QVariant Theme::parseValue(const QJsonValue &value, const QString &key, bool defer)
 {
 	if (value.isString()) {
 		const QString valueStr = value.toString();
 
-		static const QRegularExpression hexColor = ::optimizeExpression(
-				QStringLiteral("^#[0-9a-fA-F]{6}$"));
-		static const QRegularExpression rgbaColor = ::optimizeExpression(
-				QStringLiteral("^rgba\\((\\d+), (\\d+), (\\d+), (\\d+(?:\\.\\d+)?)\\)$"));
-
-		QRegularExpressionMatch match = hexColor.match(valueStr);
-		if (match.hasMatch()) {
-			return QColor(valueStr);
-		}
-
-		match = rgbaColor.match(valueStr);
-		if (match.hasMatch()) {
-			return QColor(
-				match.captured(1).toInt(),
-				match.captured(2).toInt(),
-				match.captured(3).toInt(),
-				qRound(255 * match.captured(4).toDouble()));
-		}
+		QColor color = resolvedColor(valueStr);
+		if (color.isValid())
+			return QVariant::fromValue(color);
 
 		// Check to see if the value should resolve to a pre-existing theme value.
-		if (valueStr.startsWith(QStringLiteral("geometry."))
-				|| valueStr.startsWith(QStringLiteral("color."))
-				|| valueStr.startsWith(QStringLiteral("font."))) {
-			bool found = false;
-			const QVariant value = resolvedValue(valueStr, &found);
-			if (found) {
-				return value;
+		bool found = false;
+		const QVariant var = resolvedValue(valueStr, &found, !defer);
+		if (found) {
+			if (var.isNull()) {
+				// Still not resolved - try again
+				m_deferred.push_back({ key, value });
 			}
+			return var;
+		} else if (defer) {
+			m_deferred.push_back({ key, value });
+			return QVariant();
 		}
 
 		return valueStr;
@@ -138,12 +150,13 @@ void Theme::insertValue(
 		QQmlPropertyMap *tree,
 		const QString &key,
 		const QJsonValue &value,
-		int depth)
+		int depth,
+		bool defer)
 {
 	const int dot = key.indexOf(QLatin1Char('.'), depth);
 	if (dot == -1) {
 		const QString name = key.mid(depth);
-		tree->insert(name, parseValue(value));
+		tree->insert(name, parseValue(value, key, defer));
 		return;
 	}
 
@@ -156,7 +169,7 @@ void Theme::insertValue(
 		m_subTrees.insert(subtreeKey, subtree);
 		tree->insert(key.mid(depth, dot-depth), QVariant::fromValue(subtree));
 	}
-	insertValue(subtree, key, value, dot+1);
+	insertValue(subtree, key, value, dot+1, defer);
 }
 
 bool Theme::parseTheme(const QString &themeFile)
@@ -179,6 +192,13 @@ bool Theme::parseTheme(const QString &themeFile)
 	const QJsonObject obj = doc.object();
 	for (auto it = obj.constBegin(); it != obj.constEnd(); ++it) {
 		insertValue(this, it.key(), it.value());
+	}
+
+	// Process any previously deferred values
+	while (!m_deferred.empty()) {
+		const auto &pair(m_deferred.front());
+		insertValue(this, pair.first, pair.second, 0, false);
+		m_deferred.pop_front();
 	}
 
 	return true;

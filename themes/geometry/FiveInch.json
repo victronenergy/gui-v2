@@ -25,6 +25,7 @@
     "geometry.spinBox.indicator.width": 64,
     "geometry.spinBox.indicator.height": 72,
     "geometry.spinBox.indicator.radius": 6,
+    "geometry.spinBox.spacing": "geometry.button.spacing",
 
     "geometry.switch.indicator.width": 24,
     "geometry.switch.groove.margins": 2,
@@ -37,12 +38,14 @@
     "geometry.statusBar.height": 48,
     "geometry.statusBar.button.width": 32,
     "geometry.statusBar.button.height": 32,
+    "geometry.statusBar.horizontalMargin": "geometry.page.grid.horizontalMargin",
 
     "geometry.navigationBar.height": 72,
     "geometry.navigationBar.spacing": 8,
     "geometry.navigationBar.button.width": 144,
     "geometry.navigationBar.button.icon.width": 32,
     "geometry.navigationBar.button.icon.height": 32,
+    "geometry.navigationBar.button.spacing": "geometry.button.spacing",
 
     "geometry.controlCard.width": 368,
     "geometry.controlCard.height": 416,
@@ -80,6 +83,7 @@
 
     "geometry.controlCardsPage.bottomMargin": 16,
     "geometry.controlCardsPage.spacing": 16,
+    "geometry.controlCardsPage.leftMargin": "geometry.page.grid.horizontalMargin",
 
     "geometry.briefPage.edgeGauge.horizontalMargin": 40,
     "geometry.briefPage.edgeGauge.radius": 360,
