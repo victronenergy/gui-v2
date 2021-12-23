@@ -99,12 +99,8 @@
         <file>images/switches.svg</file>
         <file>themes/geometry/FiveInch.json</file>
         <file>themes/geometry/SevenInch.json</file>
-        <file>themes/geometry/FiveInch-resolved.json</file>
-        <file>themes/geometry/SevenInch-resolved.json</file>
         <file>themes/color/Light.json</file>
         <file>themes/color/Dark.json</file>
-        <file>themes/color/Light-resolved.json</file>
-        <file>themes/color/Dark-resolved.json</file>
         <file>themes/typography/Typography.json</file>
     </qresource>
 </RCC>
