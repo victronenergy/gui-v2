@@ -266,7 +266,7 @@ Page {
 		Binding {
 			target: battery ? gaugeData._gaugeData(gaugeData._batteryIndex) : null
 			property: 'value'
-			value: battery.stateOfCharge
+			value: battery ? battery.stateOfCharge : null
 		}
 
 		Instantiator {
