@@ -48,5 +48,5 @@
     "color.switch.indicator": "color.font.primary",
 
     "color.navigationBar.button.on": "color.font.primary",
-    "color.navigationBar.button.of": "color.font.secondary"
+    "color.navigationBar.button.off": "color.font.secondary"
 }

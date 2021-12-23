@@ -45,6 +45,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ComboBox");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Label.qml")),
 		"Victron.VenusOS", 2, 0, "Label");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ProgressBar.qml")),
+		"Victron.VenusOS", 2, 0, "ProgressBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButton.qml")),
 		"Victron.VenusOS", 2, 0, "RadioButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Slider.qml")),

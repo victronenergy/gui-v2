@@ -2,6 +2,7 @@
     "animation.page.slide.duration": 250,
     "animation.page.fade.duration": 250,
     "animation.progressArc.duration": 600,
+    "animation.progressBar.duration": 2000,
     "animation.statusBar.sidePanelButton.fade.duration": 250,
     "animation.briefPage.edgeGauge.fade.duration": 200,
     "animation.briefPage.sidePanel.slide.duration": 350,
@@ -13,6 +14,9 @@
     "geometry.button.spacing": 7,
     "geometry.button.radius": 6,
     "geometry.button.border.width": 2,
+
+    "geometry.progressBar.height": 8,
+    "geometry.progressBar.radius": 8,
 
     "geometry.radioButton.indicator.width": 24,
     "geometry.radioButton.indicator.dot.width": 16,
