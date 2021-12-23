@@ -32,6 +32,9 @@
     "color.button.flat.go.background": "color.dimGo",
     "color.button.flat.stop.background": "color.dimCritical",
 
+    "color.progressBar.indicator": "color.ok",
+    "color.progressBar.background": "color.darkOk",
+
     "color.radioButton.indicator.on": "color.ok",
     "color.radioButton.indicator.off": "color.font.disabled",
 
@@ -48,5 +51,5 @@
     "color.switch.indicator": "color.font.primary",
 
     "color.navigationBar.button.on": "color.font.primary",
-    "color.navigationBar.button.of": "color.font.secondary"
+    "color.navigationBar.button.off": "color.font.secondary"
 }

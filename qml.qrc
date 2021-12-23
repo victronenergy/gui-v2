@@ -4,6 +4,7 @@
         <file>components/controls/Button.qml</file>
         <file>components/controls/ComboBox.qml</file>
         <file>components/controls/Label.qml</file>
+        <file>components/controls/ProgressBar.qml</file>
         <file>components/controls/RadioButton.qml</file>
         <file>components/controls/Slider.qml</file>
         <file>components/controls/SpinBox.qml</file>
