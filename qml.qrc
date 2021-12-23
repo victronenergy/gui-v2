@@ -18,6 +18,7 @@
         <file>components/ControlCardsModel.qml</file>
         <file>components/ControlValue.qml</file>
         <file>components/Gauges.qml</file>
+        <file>components/MainView.qml</file>
         <file>components/ModalDialog.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
@@ -27,6 +28,7 @@
         <file>components/ScaledArcGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
+        <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
         <file>components/SwitchesModel.qml</file>
         <file>components/Units.qml</file>
@@ -99,6 +101,8 @@
         <file>images/ess.svg</file>
         <file>images/information.svg</file>
         <file>images/switches.svg</file>
+        <file>images/splash-logo-5inch.svg</file>
+        <file>images/splash-logo-7inch.svg</file>
         <file>themes/geometry/FiveInch.json</file>
         <file>themes/geometry/SevenInch.json</file>
         <file>themes/color/Light.json</file>

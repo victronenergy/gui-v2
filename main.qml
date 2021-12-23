@@ -28,101 +28,34 @@ Window {
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
 
-	StatusBar {
-		id: statusBar
+	SplashView {
+		id: splashView
+		anchors.fill: parent
+		visible: opacity > 0.0
+		opacity: 1.0
 
-		sidePanelVisible: PageManager.sidePanelVisible
-		property bool hidden: statusBar.y === -statusBar.height
-		property bool sidePanelWasVisible
-
-		onControlsActiveChanged: {
-			if (controlsActive) {
-				if (PageManager.sidePanelVisible) {
-					statusBar.sidePanelWasVisible = true
-				}
-				PageManager.sidePanelVisible = false
-				PageManager.pushPage("qrc:/pages/ControlCardsPage.qml")
-			} else {
-				PageManager.popPage()
-				if (statusBar.sidePanelWasVisible) {
-					PageManager.sidePanelVisible = true
-				}
-			}
-		}
-
-		onSidePanelActiveChanged: {
-			PageManager.sidePanelActive = sidePanelActive
-		}
-
-		function show() {
-			if (hidden) {
-				animateStatusBarIn.start()
-			}
-		}
-
-		function hide() {
-			if (!hidden) {
-				animateStatusBarOut.start()
-			}
-		}
-
-		SequentialAnimation {
-			id: animateStatusBarIn
+		Behavior on opacity {
 			NumberAnimation {
-				target: statusBar
-				property: "y"
-				from: -statusBar.height
-				to: 0
-				duration: 250
-				easing.type: Easing.InOutQuad
-			}
-			OpacityAnimator {
-				target: statusBar
-				from: 0.0
-				to: 1.0
-				duration: 250
+				duration: Theme.animation.page.fade.duration
 				easing.type: Easing.InOutQuad
 			}
 		}
 
-		SequentialAnimation {
-			id: animateStatusBarOut
-			OpacityAnimator {
-				target: statusBar
-				from: 1.0
-				to: 0.0
-				duration: 250
-				easing.type: Easing.InOutQuad
-			}
-			NumberAnimation {
-				target: statusBar
-				property: "y"
-				from: 0
-				to: -statusBar.height
-				duration: 250
-				easing.type: Easing.InOutQuad
-			}
+		onHideSplash: {
+			splashView.opacity = 0.0
+			mainView.opacity = 1.0
 		}
 	}
 
-	PageStack {
-		id: pageStack
-		anchors {
-			top: statusBar.bottom
-			left: parent.left
-			right: parent.right
-			bottom: parent.bottom
-		}
+	MainView {
+		id: mainView
+		anchors.fill: parent
+		opacity: 0.0
 
-		Connections {
-			target: PageManager.emitter
-
-			function onPagePushRequested() {
-				pageStack.push(PageManager.pageToPush)
-			}
-
-			function onPagePopRequested() {
-				pageStack.pop()
+		Behavior on opacity {
+			NumberAnimation {
+				duration: Theme.animation.page.fade.duration
+				easing.type: Easing.InOutQuad
 			}
 		}
 	}

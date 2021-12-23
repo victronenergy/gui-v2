@@ -75,6 +75,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ControlCardsModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "ControlValue");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/MainView.qml")),
+		"Victron.VenusOS", 2, 0, "MainView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ModalDialog.qml")),
 		"Victron.VenusOS", 2, 0, "ModalDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavBar.qml")),
@@ -93,6 +95,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
 		"Victron.VenusOS", 2, 0, "SeparatorBar");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SplashView.qml")),
+		"Victron.VenusOS", 2, 0, "SplashView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/StatusBar.qml")),
 		"Victron.VenusOS", 2, 0, "StatusBar");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/SwitchesModel.qml")),

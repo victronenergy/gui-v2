@@ -2,7 +2,9 @@
     "animation.page.slide.duration": 250,
     "animation.page.fade.duration": 250,
     "animation.progressArc.duration": 600,
-    "animation.progressBar.duration": 2000,
+    "animation.progressBar.duration": 1000,
+    "animation.statusBar.slide.duration": 250,
+    "animation.statusBar.fade.duration": 250,
     "animation.statusBar.sidePanelButton.fade.duration": 250,
     "animation.briefPage.edgeGauge.fade.duration": 200,
     "animation.briefPage.sidePanel.slide.duration": 350,
@@ -99,6 +101,10 @@
     "geometry.briefPage.edgeGauge.width": 60,
     "geometry.briefPage.sidePanel.width": 240,
     "geometry.briefPage.sidePanel.delegateHeight": 40,
+
+    "geometry.splashView.verticalCenterOffset": -20,
+    "geometry.splashView.spacing": 56,
+    "geometry.splashView.progressBar.width": 368,
 
     "geometry.generatorCard.durationButton.height": 40,
     "geometry.generatorCard.durationButton.width": 112,
