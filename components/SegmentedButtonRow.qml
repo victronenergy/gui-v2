@@ -33,7 +33,6 @@ Item {
 			id: buttonRepeater
 			height: parent.height
 
-			// TODO: use QtQuick.Shape to draw the asymmetric rounded edge.
 			delegate: Button {
 				id: buttonDelegate
 
@@ -42,12 +41,12 @@ Item {
 				width: root.width / buttonRepeater.count
 				height: parent.height
 				checked: model.index === root.currentIndex
-				backgroundColor: (down || checked)
-								 ? Theme.color.ok
-								 : Theme.color.darkOk
 				font.pixelSize: root.fontPixelSize
-				radius: 0
+				flat: false
 				text: modelData
+				roundedSide: modelIndex === 0 ? AsymmetricRoundedRectangle.RoundedSide.Left
+					: modelIndex === (buttonRepeater.count-1) ? AsymmetricRoundedRectangle.RoundedSide.Right
+					: AsymmetricRoundedRectangle.RoundedSide.NoneHorizontal
 
 				onClicked: {
 					root.buttonClicked(model.index)
@@ -55,13 +54,5 @@ Item {
 				}
 			}
 		}
-	}
-
-	Rectangle {
-		anchors.fill: parent
-		border.color: Theme.color.ok
-		border.width: 2
-		radius: 8
-		color: 'transparent'
 	}
 }
