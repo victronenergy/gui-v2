@@ -77,8 +77,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/MainView.qml")),
 		"Victron.VenusOS", 2, 0, "MainView");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ModalDialog.qml")),
-		"Victron.VenusOS", 2, 0, "ModalDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavBar.qml")),
 		"Victron.VenusOS", 2, 0, "NavBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavButton.qml")),
@@ -123,6 +121,10 @@ int main(int argc, char *argv[])
 	/* dialogs */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/DialogManager.qml")),
 		"Victron.VenusOS", 2, 0, "DialogManager");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/ModalDialog.qml")),
+		"Victron.VenusOS", 2, 0, "ModalDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/ModalWarningDialog.qml")),
+		"Victron.VenusOS", 2, 0, "ModalWarningDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InputCurrentLimitDialog.qml")),
 		"Victron.VenusOS", 2, 0, "InputCurrentLimitDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InverterChargerModeDialog.qml")),

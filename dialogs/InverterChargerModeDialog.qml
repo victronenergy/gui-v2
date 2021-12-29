@@ -13,7 +13,7 @@ ModalDialog {
 	signal setMode(var newValue)
 
 	//% "Inverter / Charger mode"
-	titleText: qsTrId("controlcard_inverter_charger_mode")
+	title: qsTrId("controlcard_inverter_charger_mode")
 
 	contentItem: Column {
 		anchors {

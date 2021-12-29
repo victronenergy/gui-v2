@@ -77,6 +77,14 @@
     "geometry.modalDialog.footer.midSeparator.width": 1,
     "geometry.modalDialog.footer.midSeparator.margins": 8,
 
+    "geometry.modalWarningDialog.alarmIcon.topMargin": 44,
+    "geometry.modalWarningDialog.alarmIcon.width": 48,
+    "geometry.modalWarningDialog.title.spacing": 32,
+    "geometry.modalWarningDialog.title.horizontalMargin": "geometry.page.grid.horizontalMargin",
+    "geometry.modalWarningDialog.title.height": 24,
+    "geometry.modalWarningDialog.description.spacing": 12,
+    "geometry.modalWarningDialog.description.horizontalMargin": "geometry.page.grid.horizontalMargin",
+
     "geometry.arc.strokeWidth": 8,
     "geometry.progressArc.strokeWidth": 8,
 

@@ -13,7 +13,7 @@ ModalDialog {
 	signal setMinimumSOC(var newValue)
 
 	//% "Minimum SOC"
-	titleText: qsTrId("ess_card_minimum_soc")
+	title: qsTrId("ess_card_minimum_soc")
 
 	contentItem: Item {
 		width: parent.width

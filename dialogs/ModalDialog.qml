@@ -9,9 +9,6 @@ import Victron.VenusOS
 C.Dialog {
 	id: root
 
-	property string titleText
-	property bool active: false
-
 	enum DialogDoneOptions {
 		OkOnly = 0,
 		OkAndCancel = 1,
@@ -30,10 +27,10 @@ C.Dialog {
 	anchors.centerIn: parent
 
 	enter: Transition {
-		NumberAnimation { properties: "opacity"; from: 0.0; to: 1.0; duration: 300 }
+		NumberAnimation { properties: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
 	}
 	exit: Transition {
-		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 300 }
+		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration }
 	}
 
 	background: Rectangle {
@@ -56,8 +53,8 @@ C.Dialog {
 	}
 
 	header: Item {
-		width: parent.width
-		height: root.titleText.length ? Theme.geometry.modalDialog.header.height : 0
+		width: parent ? parent.width : 0
+		height: root.title.length ? Theme.geometry.modalDialog.header.height : 0
 
 		Label {
 			anchors {
@@ -68,7 +65,7 @@ C.Dialog {
 			horizontalAlignment: Text.AlignHCenter
 			color: Theme.color.font.primary
 			font.pixelSize: Theme.font.size.l
-			text: root.titleText
+			text: root.title
 		}
 	}
 
@@ -83,6 +80,7 @@ C.Dialog {
 			}
 		}
 		Button {
+			visible: root.dialogDoneOptions !== ModalDialog.DialogDoneOptions.OkOnly
 			anchors {
 				left: parent.left
 				right: footerMidSeparator.left
@@ -106,6 +104,7 @@ C.Dialog {
 		}
 		SeparatorBar {
 			id: footerMidSeparator
+			visible: root.dialogDoneOptions !== ModalDialog.DialogDoneOptions.OkOnly
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
@@ -117,7 +116,7 @@ C.Dialog {
 		}
 		Button {
 			anchors {
-				left: footerMidSeparator.right
+				left: root.dialogDoneOptions === ModalDialog.DialogDoneOptions.OkOnly ? parent.left : footerMidSeparator.right
 				right: parent.right
 				top: parent.top
 				bottom: parent.bottom
