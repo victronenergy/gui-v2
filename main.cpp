@@ -63,6 +63,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Arc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGauge.qml")),
 		"Victron.VenusOS", 2, 0, "ArcGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AsymmetricRoundedRectangle.qml")),
+		"Victron.VenusOS", 2, 0, "AsymmetricRoundedRectangle");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularMultiGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularSingleGauge.qml")),
@@ -99,6 +101,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "StatusBar");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/SwitchesModel.qml")),
 		"Victron.VenusOS", 2, 0, "SwitchesModel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ToastNotification.qml")),
+		"Victron.VenusOS", 2, 0, "ToastNotification");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Units.qml")),
 		"Victron.VenusOS", 2, 0, "Units");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ValueDisplay.qml")),

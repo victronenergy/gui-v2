@@ -47,5 +47,38 @@ Page {
 				dialogManager.showWarning(warningNotificationTitle,  warningNotificationDescription)
 			}
 		}
+
+		Button {
+			anchors.horizontalCenter: parent.horizontalCenter
+
+			topPadding: 12
+			bottomPadding: 12
+			leftPadding: 20
+			rightPadding: 20
+
+			flat: false
+
+			//% "Generate Toast Notification"
+			//: Generate a popup (toast) notification
+			text: qsTrId("notifications_generate_toast_notification")
+
+			//% "Mollitia quis est quas deleniti quibusdam explicabo quasi."
+			property string shortText: qsTrId("notifications_toast_short_text")
+
+			//% "Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur."
+			property string longText: qsTrId("notifications_toast_long_text")
+
+			property int currentCategory: ToastNotification.Category.Error
+			property bool useShortText: false
+
+			onClicked: {
+				currentCategory = (currentCategory + 1)
+				if (currentCategory > ToastNotification.Category.Error) {
+					currentCategory = ToastNotification.Category.None
+					useShortText = !useShortText
+				}
+				dialogManager.showToastNotification(currentCategory, useShortText ? shortText : longText)
+			}
+		}
 	}
 }
