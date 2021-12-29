@@ -8,6 +8,7 @@
     "animation.statusBar.sidePanelButton.fade.duration": 250,
     "animation.briefPage.edgeGauge.fade.duration": 200,
     "animation.briefPage.sidePanel.slide.duration": 350,
+    "animation.toastNotification.fade.duration": 250,
 
     "geometry.page.grid.horizontalMargin": 40,
     "geometry.page.grid.columnWidth": 64,
@@ -52,6 +53,12 @@
     "geometry.navigationBar.button.icon.width": 32,
     "geometry.navigationBar.button.icon.height": 32,
     "geometry.navigationBar.button.spacing": "geometry.button.spacing",
+
+    "geometry.toastNotification.margins" : 24,
+    "geometry.toastNotification.radius" : 8,
+    "geometry.toastNotification.minHeight": 64,
+    "geometry.toastNotification.icon.width": 28,
+    "geometry.toastNotification.label.padding": 16,
 
     "geometry.controlCard.width": 448,
     "geometry.controlCard.height": 520,

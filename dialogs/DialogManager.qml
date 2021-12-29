@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 Item {
 	id: root
@@ -20,5 +21,20 @@ Item {
 		warningNotification.title = title
 		warningNotification.description = description
 		warningNotification.open()
+	}
+
+	function showToastNotification(category, text) {
+		var toast = toaster.createObject(this, { "category": category, "text": text })
+		root._toastNotifications.push(toast)
+		Utils.reactToSignalOnce(toast.dismissed, function() {
+			var lastToast = root._toastNotifications.pop()
+			lastToast.destroy()
+		})
+	}
+
+	property var _toastNotifications: []
+	Component {
+		id: toaster
+		ToastNotification { }
 	}
 }

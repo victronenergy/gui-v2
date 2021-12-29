@@ -12,6 +12,7 @@
         <file>components/ActionButton.qml</file>
         <file>components/Arc.qml</file>
         <file>components/ArcGauge.qml</file>
+        <file>components/AsymmetricRoundedRectangle.qml</file>
         <file>components/CircularMultiGauge.qml</file>
         <file>components/CircularSingleGauge.qml</file>
         <file>components/ControlCard.qml</file>
@@ -30,6 +31,7 @@
         <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
         <file>components/SwitchesModel.qml</file>
+        <file>components/ToastNotification.qml</file>
         <file>components/Units.qml</file>
         <file>components/Utils.js</file>
         <file>components/ValueDisplay.qml</file>
@@ -104,6 +106,10 @@
         <file>images/switches.svg</file>
         <file>images/splash-logo-5inch.svg</file>
         <file>images/splash-logo-7inch.svg</file>
+        <file>images/toast_icon_alarm.svg</file>
+        <file>images/toast_icon_checkmark.svg</file>
+        <file>images/toast_icon_close.svg</file>
+        <file>images/toast_icon_info.svg</file>
         <file>themes/geometry/FiveInch.json</file>
         <file>themes/geometry/SevenInch.json</file>
         <file>themes/color/Light.json</file>

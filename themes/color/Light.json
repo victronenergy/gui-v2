@@ -48,5 +48,16 @@
     "color.switch.indicator": "color.font.primary",
 
     "color.navigationBar.button.on": "color.font.primary",
-    "color.navigationBar.button.off": "color.font.secondary"
+    "color.navigationBar.button.off": "color.font.secondary",
+
+    "color.toastNotification.foreground": "color.font.primary",
+    "color.toastNotification.background.none": "#504F4B",
+    "color.toastNotification.background.informative": "#295C91",
+    "color.toastNotification.background.confirmation": "#5C9C39",
+    "color.toastNotification.background.warning": "#BD7624",
+    "color.toastNotification.background.error": "#BF4845",
+    "color.toastNotification.highlight.informative": "color.ok",
+    "color.toastNotification.highlight.confirmation": "color.go",
+    "color.toastNotification.highlight.warning": "color.warning",
+    "color.toastNotification.highlight.error": "color.critical"
 }
