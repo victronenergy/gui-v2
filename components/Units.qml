@@ -4,7 +4,6 @@
 pragma Singleton
 
 import QtQuick
-import Victron.VenusOS
 
 QtObject {
 	// TODO: add other quantites as needed, eg. Distance, Volume
@@ -25,19 +24,19 @@ QtObject {
 	function getDisplayText(physicalQuantity, value, precision) {
 		var rv = { number: -1, units: "" }
 		switch (physicalQuantity) {
-		case Units.Power:
+		case Units.PhysicalQuantity.Power:
 			rv = {
 				number: parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision)),
 				units: (value < 1000) ? "W" : "kW"
 			}
 			break;
-		case Units.Voltage:
+		case Units.PhysicalQuantity.Voltage:
 			rv = {
 				number: parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision)),
 				units: (value < 1000) ? "V" : "kV"
 			}
 			break;
-		case Units.Current:
+		case Units.PhysicalQuantity.Current:
 			rv = {
 				number: parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision)),
 				units: (value < 1000) ? "A" : "kA"
