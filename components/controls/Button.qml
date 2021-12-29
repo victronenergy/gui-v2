@@ -3,29 +3,33 @@
 */
 
 import QtQuick
-import QtQuick.Templates
+import QtQuick.Templates as CT
 import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-C.Button {
+CT.Button {
 	id: root
 
-	property color color: Theme.color.font.primary
-	property color backgroundColor: flat ? Theme.color.button.flat.background
-			: down ? Theme.color.button.outline.down.background
+	property color color: enabled ? Theme.color.font.primary : Theme.color.font.disabled
+	property color backgroundColor: !enabled ? Theme.color.background.disabled
+			: down ? downColor
+			: flat ? Theme.color.button.flat.background
 			: Theme.color.button.outline.background
+	property color downColor: flat ? Theme.color.button.flat.background
+			: Theme.color.button.outline.down.background
 	property alias border: backgroundRect.border
 	property alias radius: backgroundRect.radius
 
+	down: pressed || checked || highlighted
 	spacing: Theme.geometry.button.spacing
 	topPadding: 0
 	bottomPadding: 0
 	leftPadding: 0
 	rightPadding: 0
 
-	implicitWidth: contentItem.implicitWidth
-	implicitHeight: contentItem.implicitHeight
+	implicitWidth: contentItem.implicitWidth + root.leftPadding + root.rightPadding
+	implicitHeight: contentItem.implicitHeight + root.topPadding + root.bottomPadding
 
 	icon.color: root.color
 

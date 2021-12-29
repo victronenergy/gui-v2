@@ -274,9 +274,6 @@ ControlCard {
 
 				flat: !enabled
 				enabled: timedRunSwitch.checked
-				color: enabled ? Theme.color.font.primary : Theme.color.font.disabled
-				backgroundColor: enabled ? Theme.color.button.outline.background : Theme.color.background.disabled
-				border.color: Theme.color.ok
 				font.pixelSize: Theme.font.size.m
 
 				text: Utils.formatAsHHMM(selectedRuntime)
@@ -323,9 +320,9 @@ ControlCard {
 			backgroundColor: root.state === Generators.GeneratorState.Error
 					? Theme.color.background.disabled
 				: root.state === Generators.GeneratorState.Running
-					? Theme.color.dimCritical
+					? down ? Theme.color.critical : Theme.color.dimCritical
 				: /* Stopped */
-					  Theme.color.dimGo
+					  down ? Theme.color.go : Theme.color.dimGo
 			color: root.state === Generators.GeneratorState.Error ? Theme.color.font.disabled
 				: Theme.color.font.primary
 

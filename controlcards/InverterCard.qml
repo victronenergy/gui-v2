@@ -41,7 +41,7 @@ ControlCard {
 		}
 		ControlValue {
 			width: parent.width
-			button.width: 180
+			button.width: Math.max(button.implicitWidth, 180)
 			//% "Mode"
 			label.text: qsTrId("controlcard_mode")
 			button.text: qsTrId(ControlCardsModel.inverterModeStrings[modeIndex])
