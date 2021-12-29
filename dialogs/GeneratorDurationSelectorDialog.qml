@@ -12,7 +12,7 @@ ModalDialog {
 	property int duration
 
 	//% "Duration"
-	titleText: qsTrId("controlcard_generator_durationselectordialog_title")
+	title: qsTrId("controlcard_generator_durationselectordialog_title")
 
 	contentItem: Item {
 		anchors {

@@ -13,7 +13,7 @@ ModalDialog {
 	signal setInputCurrentLimit(var newValue)
 
 	//% "Input current limit"
-	titleText: qsTrId("controlcard_input_current_limit")
+	title: qsTrId("controlcard_input_current_limit")
 
 	contentItem: Column {
 		anchors.topMargin: 96
