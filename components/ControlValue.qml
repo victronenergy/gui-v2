@@ -42,7 +42,6 @@ Item {
 
 		flat: false
 		color: Theme.color.font.primary
-		backgroundColor: Theme.color.button.outline.background
 		border.color: Theme.color.ok
 		font.pixelSize: Theme.font.size.m
 

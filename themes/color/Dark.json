@@ -8,11 +8,11 @@
     "color.darkOk": "#4D387DC5",
 
     "color.warning": "#F0962E",
-    "color.dimWarning": "#F0962E",
+    "color.dimWarning": "#99F0962E",
     "color.darkWarning": "#4DF0962E",
 
     "color.critical": "#F35C58",
-    "color.dimCritical": "#F35C58",
+    "color.dimCritical": "#99F35C58",
     "color.darkCritical": "#4DF35C58",
 
     "color.font.primary": "#FFFFFF",
