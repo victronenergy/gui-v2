@@ -59,5 +59,10 @@
     "color.toastNotification.highlight.informative": "color.ok",
     "color.toastNotification.highlight.confirmation": "color.go",
     "color.toastNotification.highlight.warning": "color.warning",
-    "color.toastNotification.highlight.error": "color.critical"
+    "color.toastNotification.highlight.error": "color.critical",
+
+    "color.overviewPage.widget.background": "color.darkOk",
+    "color.overviewPage.widget.border": "color.ok",
+    "color.overviewPage.widget.sideGauge.background": "color.darkOk",
+    "color.overviewPage.widget.sideGauge.highlight": "color.ok"
 }

@@ -9,6 +9,7 @@
         <file>components/controls/Slider.qml</file>
         <file>components/controls/SpinBox.qml</file>
         <file>components/controls/Switch.qml</file>
+        <file>components/widgets/OverviewWidget.qml</file>
         <file>components/ActionButton.qml</file>
         <file>components/Arc.qml</file>
         <file>components/ArcGauge.qml</file>
