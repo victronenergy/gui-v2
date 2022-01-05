@@ -10,6 +10,17 @@
         <file>components/controls/SpinBox.qml</file>
         <file>components/controls/Switch.qml</file>
         <file>components/widgets/OverviewWidget.qml</file>
+        <file>components/widgets/SegmentedWidget.qml</file>
+        <file>components/widgets/AlternatorWidget.qml</file>
+        <file>components/widgets/GeneratorWidget.qml</file>
+        <file>components/widgets/GridWidget.qml</file>
+        <file>components/widgets/ShoreWidget.qml</file>
+        <file>components/widgets/SolarYieldWidget.qml</file>
+        <file>components/widgets/WindWidget.qml</file>
+        <file>components/widgets/InverterWidget.qml</file>
+        <file>components/widgets/BatteryWidget.qml</file>
+        <file>components/widgets/AcLoadsWidget.qml</file>
+        <file>components/widgets/DcLoadsWidget.qml</file>
         <file>components/ActionButton.qml</file>
         <file>components/Arc.qml</file>
         <file>components/ArcGauge.qml</file>
@@ -35,9 +46,11 @@
         <file>components/ScaledArcGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
+        <file>components/SolarYieldGraph.qml</file>
         <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
         <file>components/SwitchesModel.qml</file>
+        <file>components/ThreePhaseDisplay.qml</file>
         <file>components/ToastNotification.qml</file>
         <file>components/Units.qml</file>
         <file>components/Utils.js</file>

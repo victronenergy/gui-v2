@@ -196,5 +196,10 @@
     "geometry.overviewPage.widget.l.height": 152,
     "geometry.overviewPage.widget.m.height": 100,
     "geometry.overviewPage.widget.s.height": 80,
-    "geometry.overviewPage.widget.xs.height": 64
+    "geometry.overviewPage.widget.xs.height": 64,
+
+    "geometry.overviewPage.widget.solar.graph.bar.width": 8,
+    "geometry.overviewPage.widget.solar.graph.bar.radius": 8,
+    "geometry.overviewPage.widget.solar.graph.height": 42,
+    "geometry.overviewPage.widget.solar.graph.margins": 8
 }
