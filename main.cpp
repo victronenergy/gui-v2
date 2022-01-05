@@ -126,6 +126,10 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
 
+	/* widgets */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/OverviewWidget.qml")),
+		"Victron.VenusOS", 2, 0, "OverviewWidget");
+
 	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/ESSCard.qml")),
 		"Victron.VenusOS", 2, 0, "ESSCard");

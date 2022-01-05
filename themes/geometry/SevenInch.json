@@ -140,6 +140,21 @@
     "geometry.briefPage.sidePanel.loads.height": 70,
     "geometry.briefPage.sidePanel.loads.topMargin": 5,
 
+    "geometry.barChart.height": 47,
+    "geometry.barChart.spacing": 8,
+    "geometry.barChart.barWidth": 8,
+    "geometry.barChart.barRadius": 12,
+
+    "geometry.valueDisplay.titleRow.spacing": 4,
+    "geometry.valueDisplay.icon.width": 24,
+    "geometry.valueDisplay.quantityRow.spacing": 2,
+
+    "geometry.weatherDetails.width": 72,
+    "geometry.weatherDetails.day.height": 22,
+    "geometry.weatherDetails.row.topPadding": -2,
+    "geometry.weatherDetails.row.spacing": 3,
+    "geometry.weatherDetails.pixelSize": 18,
+
     "geometry.splashView.verticalCenterOffset": -20,
     "geometry.splashView.spacing": 68,
     "geometry.splashView.progressBar.width": 464,
@@ -163,18 +178,23 @@
 
     "geometry.inverterCard.topMargin": 96,
 
-    "geometry.barChart.height": 47,
-    "geometry.barChart.spacing": 8,
-    "geometry.barChart.barWidth": 8,
-    "geometry.barChart.barRadius": 12,
+    "geometry.overviewPage.widget.radius": 8,
+    "geometry.overviewPage.widget.border.width": 2,
+    "geometry.overviewPage.widget.content.leftMargin": 16,
+    "geometry.overviewPage.widget.title.height": 32,
+    "geometry.overviewPage.widget.value.height": 40,
+    "geometry.overviewPage.widget.value.xs.height": 32,
+    "geometry.overviewPage.widget.sideGauge.margins": 8,
+    "geometry.overviewPage.widget.sideGauge.width": 8,
+    "geometry.overviewPage.widget.sideGauge.radius": 8,
+    "geometry.overviewPage.widget.input.width": 176,
+    "geometry.overviewPage.widget.battery.width": 240,
+    "geometry.overviewPage.widget.inverter.width": 240,
+    "geometry.overviewPage.widget.output.width": 176,
 
-    "geometry.valueDisplay.titleRow.spacing": 4,
-    "geometry.valueDisplay.icon.width": 24,
-    "geometry.valueDisplay.quantityRow.spacing": 2,
-
-    "geometry.weatherDetails.width": 72,
-    "geometry.weatherDetails.day.height": 22,
-    "geometry.weatherDetails.row.topPadding": -2,
-    "geometry.weatherDetails.row.spacing": 3,
-    "geometry.weatherDetails.pixelSize": 18
+    "geometry.overviewPage.widget.xl.height": 352,
+    "geometry.overviewPage.widget.l.height": 152,
+    "geometry.overviewPage.widget.m.height": 100,
+    "geometry.overviewPage.widget.s.height": 80,
+    "geometry.overviewPage.widget.xs.height": 64
 }
