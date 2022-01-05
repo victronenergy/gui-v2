@@ -109,12 +109,16 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
 		"Victron.VenusOS", 2, 0, "SeparatorBar");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarYieldGraph.qml")),
+		"Victron.VenusOS", 2, 0, "SolarYieldGraph");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SplashView.qml")),
 		"Victron.VenusOS", 2, 0, "SplashView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/StatusBar.qml")),
 		"Victron.VenusOS", 2, 0, "StatusBar");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/SwitchesModel.qml")),
 		"Victron.VenusOS", 2, 0, "SwitchesModel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ThreePhaseDisplay.qml")),
+		"Victron.VenusOS", 2, 0, "ThreePhaseDisplay");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ToastNotification.qml")),
 		"Victron.VenusOS", 2, 0, "ToastNotification");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Units.qml")),
@@ -129,6 +133,28 @@ int main(int argc, char *argv[])
 	/* widgets */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/OverviewWidget.qml")),
 		"Victron.VenusOS", 2, 0, "OverviewWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/SegmentedWidget.qml")),
+		"Victron.VenusOS", 2, 0, "SegmentedWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AlternatorWidget.qml")),
+		"Victron.VenusOS", 2, 0, "AlternatorWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/GeneratorWidget.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/GridWidget.qml")),
+		"Victron.VenusOS", 2, 0, "GridWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/ShoreWidget.qml")),
+		"Victron.VenusOS", 2, 0, "ShoreWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/SolarYieldWidget.qml")),
+		"Victron.VenusOS", 2, 0, "SolarYieldWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WindWidget.qml")),
+		"Victron.VenusOS", 2, 0, "WindWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/InverterWidget.qml")),
+		"Victron.VenusOS", 2, 0, "InverterWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/BatteryWidget.qml")),
+		"Victron.VenusOS", 2, 0, "BatteryWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AcLoadsWidget.qml")),
+		"Victron.VenusOS", 2, 0, "AcLoadsWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/DcLoadsWidget.qml")),
+		"Victron.VenusOS", 2, 0, "DcLoadsWidget");
 
 	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/ESSCard.qml")),

@@ -66,7 +66,7 @@ Column {
 		Label {
 			anchors.verticalCenter: parent.verticalCenter
 			font.pixelSize: fontSize
-			opacity: 0.7
+			opacity: 0.7 // TODO: use a Theme color instead
 			//% "%1"
 			text: qsTrId("value_unit").arg(_displayValue.units)
 		}
