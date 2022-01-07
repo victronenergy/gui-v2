@@ -46,7 +46,8 @@ Page {
 	NavBar {
 		id: navBar
 
-		anchors.bottom: parent.bottom
+		y: root.height - height // cannot use an anchor, else show()/hide() don't work.
+
 		model: ListModel {
 			ListElement {
 				//% "Brief"
@@ -156,4 +157,6 @@ Page {
 			}
 		}
 	}
+
+	Component.onCompleted: PageManager.navBar = navBar
 }

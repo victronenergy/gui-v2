@@ -33,6 +33,7 @@ Rectangle {
 	property int size: OverviewWidget.Size.M
 	property var connectorNubLocations: [OverviewWidget.CenterRight]
 
+	property bool overviewPageInteractive: true
 	property alias interactive: mouseArea.enabled
 
 	property alias physicalQuantity: valueDisplay.physicalQuantity
@@ -50,16 +51,28 @@ Rectangle {
 
 	signal clicked()
 
-	height: size === OverviewWidget.Size.XL ? Theme.geometry.overviewPage.widget.xl.height
-		  : size === OverviewWidget.Size.L ? Theme.geometry.overviewPage.widget.l.height
-		  : size === OverviewWidget.Size.M ? Theme.geometry.overviewPage.widget.m.height
-		  : size === OverviewWidget.Size.S ? Theme.geometry.overviewPage.widget.s.height
-		  : /* OverviewWidget.Size.XS */ Theme.geometry.overviewPage.widget.xs.height
+	height: size === OverviewWidget.Size.XL ? overviewPageInteractive
+			? Theme.geometry.overviewPage.widget.interactive.xl.height
+			: Theme.geometry.overviewPage.widget.noninteractive.xl.height
+		  : size === OverviewWidget.Size.L ? overviewPageInteractive
+			? Theme.geometry.overviewPage.widget.interactive.l.height
+			: Theme.geometry.overviewPage.widget.noninteractive.l.height
+		  : size === OverviewWidget.Size.M ? overviewPageInteractive
+			? Theme.geometry.overviewPage.widget.interactive.m.height
+			: Theme.geometry.overviewPage.widget.noninteractive.m.height
+		  : size === OverviewWidget.Size.S ? overviewPageInteractive
+			? Theme.geometry.overviewPage.widget.interactive.s.height
+			: Theme.geometry.overviewPage.widget.noninteractive.s.height
+		  : /* OverviewWidget.Size.XS */ overviewPageInteractive
+			? Theme.geometry.overviewPage.widget.interactive.xs.height
+			: Theme.geometry.overviewPage.widget.noninteractive.xs.height
 
 	radius: Theme.geometry.overviewPage.widget.radius
 	border.width: interactive ? Theme.geometry.overviewPage.widget.border.width : 0
 	border.color: Theme.color.overviewPage.widget.border
 	color: Theme.color.overviewPage.widget.background
+
+	Behavior on height { NumberAnimation { duration: Theme.animation.overviewPage.interactive.duration; easing.type: Easing.InOutQuad } }
 
 	// TODO:
 	// ConnectorNub { /* top */ }
