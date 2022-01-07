@@ -11,6 +11,7 @@ Item {
 	StatusBar {
 		id: statusBar
 
+		controlsVisible: PageManager.controlsVisible
 		sidePanelVisible: PageManager.sidePanelVisible
 		property bool hidden: statusBar.y === -statusBar.height
 		property bool sidePanelWasVisible
@@ -99,10 +100,12 @@ Item {
 
 			function onPagePushRequested() {
 				pageStack.push(PageManager.pageToPush)
+				PageManager.mainPageActive = pageStack.depth === 1
 			}
 
 			function onPagePopRequested() {
 				pageStack.pop()
+				PageManager.mainPageActive = pageStack.depth === 1
 			}
 		}
 	}

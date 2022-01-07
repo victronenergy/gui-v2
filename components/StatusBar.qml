@@ -10,6 +10,7 @@ Item {
 	id: root
 
 	property bool controlsActive
+	property bool controlsVisible: true
 	property bool sidePanelActive
 	property bool sidePanelVisible
 
@@ -33,6 +34,9 @@ Item {
 		icon.width: 28
 		icon.height: 28
 		onClicked: root.controlsActive = !root.controlsActive
+
+		opacity: controlsVisible ? 1.0 : 0.0
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation.statusBar.sidePanelButton.fade.duration } }
 	}
 
 	Label {
@@ -66,7 +70,7 @@ Item {
 		}
 
 		opacity: sidePanelVisible ? 1.0 : 0.0
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation.statusBar.sidePanelButton.fade.duration; easing.type: Easing.InOutQuad } }
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation.statusBar.sidePanelButton.fade.duration } }
 
 		height: Theme.geometry.statusBar.button.height
 		width: Theme.geometry.statusBar.button.width

@@ -25,7 +25,6 @@ QObject* Theme::instance(QQmlEngine *engine, QJSEngine *)
 	Theme *theme = new Theme;
 	const Theme::ScreenSize screenSize = engine->property("screenSize").value<Theme::ScreenSize>();
 	const Theme::ColorScheme colorScheme = engine->property("colorScheme").value<Theme::ColorScheme>();
-qWarning() << "XXXXXXXXXXXXXXXX initial theme load with :" << screenSize << "," << colorScheme;
 	theme->load(screenSize, colorScheme);
 	return theme;
 }
@@ -127,6 +126,10 @@ QVariant Theme::parseValue(const QJsonValue &value, const QString &key, bool def
 			return QVariant::fromValue(color);
 
 		// Check to see if the value should resolve to a pre-existing theme value.
+		if (!valueStr.contains('.')) {
+			return valueStr; // no, just a string value.
+		}
+
 		bool found = false;
 		const QVariant var = resolvedValue(valueStr, &found, !defer);
 		if (found) {

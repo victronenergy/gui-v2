@@ -64,5 +64,6 @@
     "color.overviewPage.widget.background": "color.darkOk",
     "color.overviewPage.widget.border": "color.ok",
     "color.overviewPage.widget.sideGauge.background": "color.darkOk",
-    "color.overviewPage.widget.sideGauge.highlight": "color.ok"
+    "color.overviewPage.widget.sideGauge.highlight": "color.ok",
+    "color.overviewPage.widget.solar.graph.bar": "color.ok"
 }

@@ -25,4 +25,7 @@ QtObject {
 	// Ugly hack, but ...
 	property bool sidePanelVisible
 	property bool sidePanelActive
+	property bool controlsVisible: true
+	property bool mainPageActive: true
+	property var navBar
 }
