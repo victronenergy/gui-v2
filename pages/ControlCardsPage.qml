@@ -21,6 +21,8 @@ Page {
 		}
 		spacing: Theme.geometry.controlCardsPage.spacing
 		orientation: ListView.Horizontal
+		snapMode: ListView.SnapOneItem
+		boundsBehavior: Flickable.DragOverBounds
 		model: ControlCardsModel
 		delegate: Loader {
 			height: parent ? parent.height : 0
