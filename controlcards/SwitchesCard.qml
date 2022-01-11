@@ -19,35 +19,10 @@ ControlCard {
 			bottom: parent.bottom
 		}
 		model: SwitchesModel
-		delegate: Item {
-			width: parent.width
-			height: Theme.geometry.controlCard.mediumItem.height
-			Label {
-				anchors {
-					left: parent.left
-					leftMargin: Theme.geometry.controlCard.contentMargins
-					verticalCenter: parent.verticalCenter
-				}
-				text: qsTrId(model.text)
-			}
-			Switch {
-				anchors {
-					right: parent.right
-					rightMargin: Theme.geometry.controlCard.contentMargins
-					verticalCenter: parent.verticalCenter
-				}
-				checked: model.on ? true : false
-				onToggled: SwitchesModel.setProperty(index, "on", checked)
-			}
-			SeparatorBar {
-				anchors {
-					left: parent.left
-					leftMargin: Theme.geometry.controlCard.itemSeparator.margins
-					right: parent.right
-					rightMargin: Theme.geometry.controlCard.itemSeparator.margins
-					bottom: parent.bottom
-				}
-			}
+		delegate: SwitchControlValue {
+			label.text: qsTrId(model.text)
+			button.checked: model.on ? true : false
+			onClicked: SwitchesModel.setProperty(index, "on", button.checked)
 		}
 	}
 }

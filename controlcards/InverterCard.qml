@@ -26,12 +26,10 @@ ControlCard {
 			left: parent.left
 			right: parent.right
 		}
-		ControlValue {
-			width: parent.width
+		ButtonControlValue {
 			value: root.inputCurrentLimit
 			//% "Input current limit"
 			label.text: qsTrId("controlcard_input_current_limit")
-
 			//% "%1 A"
 			button.text: qsTrId("amps").arg(value / 1000)
 			onClicked: {
@@ -39,7 +37,7 @@ ControlCard {
 				dialogManager.inputCurrentLimitDialog.open()
 			}
 		}
-		ControlValue {
+		ButtonControlValue {
 			width: parent.width
 			button.width: Math.max(button.implicitWidth, 180)
 			//% "Mode"

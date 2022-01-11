@@ -107,51 +107,30 @@ ControlCard {
 		}
 	}
 
-	Item {
-		id: autostartRow
-		anchors {
-			top: substatus.bottom
-			left: parent.left
-			right: parent.right
+	SwitchControlValue {
+		id: autostartSwitch
+
+		property bool generatorAutostartValue: true // TODO: bind to data model
+
+		anchors.top: substatus.bottom
+
+		//% "Autostart"
+		label.text: qsTrId("controlcard_generator_label_autostart")
+		button.checkable: false
+		button.checked: generatorAutostartValue
+
+		onClicked: {
+			if (generatorAutostartValue) {
+				// check if they really want to disable
+				dialogManager.generatorDisableAutostartDialog.open()
+			} else {
+				generatorAutostartValue = true
+			}
 		}
-
-		height: Theme.geometry.controlCard.mediumItem.height
-
-		Label {
-			id: autostartLabel
-			anchors {
-				verticalCenter: parent.verticalCenter
-				left: parent.left
-				leftMargin: Theme.geometry.controlCard.contentMargins
-			}
-
-			//% "Autostart"
-			text: qsTrId("controlcard_generator_label_autostart")
-		}
-		Switch {
-			id: autostartSwitch
-			anchors {
-				verticalCenter: parent.verticalCenter
-				right: parent.right
-				rightMargin: Theme.geometry.controlCard.contentMargins
-			}
-
-			property bool generatorAutostartValue: true // TODO: bind to data model
-			checkable: false
-			checked: generatorAutostartValue
-			onClicked: {
-				if (generatorAutostartValue) {
-					// check if they really want to disable
-					dialogManager.generatorDisableAutostartDialog.open()
-				} else {
-					generatorAutostartValue = true
-				}
-			}
-			Connections {
-				target: dialogManager.generatorDisableAutostartDialog
-				function onAccepted() {
-					autostartSwitch.generatorAutostartValue = false
-				}
+		Connections {
+			target: dialogManager.generatorDisableAutostartDialog
+			function onAccepted() {
+				autostartSwitch.generatorAutostartValue = false
 			}
 		}
 	}
@@ -163,7 +142,7 @@ ControlCard {
 			leftMargin: Theme.geometry.controlCard.subCard.margins
 			right: parent.right
 			rightMargin: Theme.geometry.controlCard.subCard.margins
-			top: autostartRow.bottom
+			top: autostartSwitch.bottom
 			topMargin: 2*Theme.geometry.controlCard.subCard.margins
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry.controlCard.subCard.margins
@@ -201,63 +180,25 @@ ControlCard {
 				right: parent.right
 			}
 		}
-		Item {
-			id: timedRunRow
-			anchors {
-				top: subcardHeaderSeparator.bottom
-				left: parent.left
-				right: parent.right
-			}
+		SwitchControlValue {
+			id: timedRunSwitch
 
-			height: Theme.geometry.controlCard.mediumItem.height
-
-			Label {
-				id: timedRunLabel
-				anchors {
-					verticalCenter: parent.verticalCenter
-					left: parent.left
-					leftMargin: Theme.geometry.controlCard.contentMargins
-				}
-
-				//% "Timed run"
-				text: qsTrId("controlcard_generator_subcard_label_timedrun")
-			}
-			Switch {
-				id: timedRunSwitch
-				anchors {
-					verticalCenter: parent.verticalCenter
-					right: parent.right
-					rightMargin: Theme.geometry.controlCard.contentMargins
-				}
-			}
+			anchors.top: subcardHeaderSeparator.bottom
+			//% "Timed run"
+			label.text: qsTrId("controlcard_generator_subcard_label_timedrun")
 		}
-		SeparatorBar {
-			id: timedRunSeparator
-			anchors {
-				top: timedRunRow.bottom
-				left: parent.left
-				leftMargin: Theme.geometry.controlCard.itemSeparator.margins
-				right: parent.right
-				rightMargin: Theme.geometry.controlCard.itemSeparator.margins
-			}
-		}
-		ControlValue {
+		ButtonControlValue {
 			id: durationButton
 
 			property int selectedRuntime: 0 // TODO: bind to data model
 
-			anchors {
-				top: timedRunSeparator.bottom
-				left: parent.left
-				right: parent.right
-			}
-
+			anchors.top: timedRunSwitch.bottom
 			//% "Duration"
 			label.text: qsTrId("controlcard_generator_subcard_label_duration")
 
 			button.height: Theme.geometry.generatorCard.durationButton.height
 			button.width: Theme.geometry.generatorCard.durationButton.width
-			button.enabled: timedRunSwitch.checked
+			button.enabled: timedRunSwitch.button.checked
 			button.text: Utils.formatAsHHMM(durationButton.selectedRuntime)
 
 			onClicked: dialogManager.generatorDurationSelectorDialog.open()

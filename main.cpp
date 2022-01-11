@@ -77,6 +77,12 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ControlCardsModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "ControlValue");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ButtonControlValue.qml")),
+		"Victron.VenusOS", 2, 0, "ButtonControlValue");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/RadioButtonControlValue.qml")),
+		"Victron.VenusOS", 2, 0, "RadioButtonControlValue");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SwitchControlValue.qml")),
+		"Victron.VenusOS", 2, 0, "SwitchControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/MainView.qml")),
 		"Victron.VenusOS", 2, 0, "MainView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavBar.qml")),

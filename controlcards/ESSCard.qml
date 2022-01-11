@@ -28,39 +28,15 @@ ControlCard {
 
 			width: parent.width
 			model: ControlCardsModel.essModeStrings
-			delegate: Item {
-				width: parent.width
-				height: Theme.geometry.controlCard.mediumItem.height
-				RadioButton {
-					id: button
-
-					anchors {
-						verticalCenter: parent.verticalCenter
-						left: parent.left
-						leftMargin: Theme.geometry.controlCard.contentMargins
-						right: parent.right
-						rightMargin: Theme.geometry.controlCard.contentMargins
-					}
-					label.font.pixelSize: 18
-					label.topPadding: 1
-					checked: root.essModeIndex === index
-					text: qsTrId(modelData)
-					onClicked: root.essModeIndex = index
-				}
-				SeparatorBar {
-					anchors {
-						bottom: parent.bottom
-						left: parent.left
-						right: parent.right
-						leftMargin: Theme.geometry.controlCard.itemSeparator.margins
-						rightMargin: Theme.geometry.controlCard.itemSeparator.margins
-					}
-				}
+			delegate: SwitchControlValue {
+				button.checked: root.essModeIndex === index
+				label.text: qsTrId(modelData)
+				onClicked: root.essModeIndex = index
 			}
 		}
-		ControlValue {
+		ButtonControlValue {
 			id: minimumSocRow
-			width: parent.width
+
 			//% "Minimum SOC"
 			label.text: qsTrId("ess_card_minimum_soc")
 			button.text: qsTrId("%1%").arg(root.minimumSOC)
