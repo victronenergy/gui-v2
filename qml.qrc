@@ -18,6 +18,9 @@
         <file>components/ControlCard.qml</file>
         <file>components/ControlCardsModel.qml</file>
         <file>components/ControlValue.qml</file>
+        <file>components/ButtonControlValue.qml</file>
+        <file>components/RadioButtonControlValue.qml</file>
+        <file>components/SwitchControlValue.qml</file>
         <file>components/Gauges.qml</file>
         <file>components/MainView.qml</file>
         <file>components/NavBar.qml</file>

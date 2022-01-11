@@ -34,35 +34,10 @@ ModalDialog {
 	Component {
 		id: buttonStyling
 
-		Item {
-			width: parent.width
-			height: Theme.geometry.controlCard.mediumItem.height
-
-			RadioButton {
-				id: button
-
-				anchors {
-					left: parent.left
-					leftMargin: 16
-					right: parent.right
-					rightMargin: 16
-					verticalCenter: parent.verticalCenter
-				}
-				checked: index === root.newModeIndex
-				label.topPadding: -2
-				text: qsTrId(modelData)
-				onClicked: root.newModeIndex = index
-			}
-			SeparatorBar {
-				anchors {
-					bottom: parent.bottom
-					left: parent.left
-					leftMargin: 8
-					right: parent.right
-					rightMargin: 8
-				}
-				height: 1
-			}
+		RadioButtonControlValue {
+			button.checked: index === root.newModeIndex
+			label.text: qsTrId(modelData)
+			onClicked: root.newModeIndex = index
 		}
 	}
 
