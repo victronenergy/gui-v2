@@ -58,51 +58,15 @@ ControlCard {
 				}
 			}
 		}
-		Item {
+		ControlValue {
 			id: minimumSocRow
-			height: 72
 			width: parent.width
-
-			Label {
-				id: minimumSocLabel
-				anchors {
-					verticalCenter: parent.verticalCenter
-					left: parent.left
-					leftMargin: Theme.geometry.controlCard.contentMargins
-				}
-
-				//% "Minimum SOC"
-				text: qsTrId("ess_card_minimum_soc")
-			}
-			Button {
-				id: minimumSocButton
-				anchors {
-					verticalCenter: parent.verticalCenter
-					right: parent.right
-					rightMargin: Theme.geometry.controlCard.contentMargins
-				}
-				height: Theme.geometry.essCard.minimumSocButton.height
-				width: Theme.geometry.essCard.minimumSocButton.width
-
-				flat: false
-				color: Theme.color.font.primary
-				font.pixelSize: Theme.font.size.m
-
-				text: qsTrId("%1%").arg(root.minimumSOC)
-
-				onClicked: {
-					dialogManager.essMinimumSOCDialog.newMinimumSOC = root.minimumSOC
-					dialogManager.essMinimumSOCDialog.open()
-				}
-			}
-			SeparatorBar {
-				anchors {
-					bottom: parent.bottom
-					left: parent.left
-					right: parent.right
-					leftMargin: Theme.geometry.controlCard.itemSeparator.margins
-					rightMargin: Theme.geometry.controlCard.itemSeparator.margins
-				}
+			//% "Minimum SOC"
+			label.text: qsTrId("ess_card_minimum_soc")
+			button.text: qsTrId("%1%").arg(root.minimumSOC)
+			onClicked: {
+				dialogManager.essMinimumSOCDialog.newMinimumSOC = root.minimumSOC
+				dialogManager.essMinimumSOCDialog.open()
 			}
 		}
 		Item {

@@ -241,61 +241,32 @@ ControlCard {
 				rightMargin: Theme.geometry.controlCard.itemSeparator.margins
 			}
 		}
-		Item {
-			id: durationRow
+		ControlValue {
+			id: durationButton
+
+			property int selectedRuntime: 0 // TODO: bind to data model
+
 			anchors {
 				top: timedRunSeparator.bottom
 				left: parent.left
 				right: parent.right
 			}
 
-			height: Theme.geometry.controlCard.largeItem.height
+			//% "Duration"
+			label.text: qsTrId("controlcard_generator_subcard_label_duration")
 
-			Label {
-				id: durationLabel
-				anchors {
-					verticalCenter: parent.verticalCenter
-					left: parent.left
-					leftMargin: Theme.geometry.controlCard.contentMargins
+			button.height: Theme.geometry.generatorCard.durationButton.height
+			button.width: Theme.geometry.generatorCard.durationButton.width
+			button.enabled: timedRunSwitch.checked
+			button.text: Utils.formatAsHHMM(durationButton.selectedRuntime)
+
+			onClicked: dialogManager.generatorDurationSelectorDialog.open()
+
+			Connections {
+				target: dialogManager.generatorDurationSelectorDialog
+				function onDurationChanged() {
+					durationButton.selectedRuntime = dialogManager.generatorDurationSelectorDialog.duration
 				}
-
-				//% "Duration"
-				text: qsTrId("controlcard_generator_subcard_label_duration")
-			}
-			Button {
-				id: durationButton
-				anchors {
-					verticalCenter: parent.verticalCenter
-					right: parent.right
-					rightMargin: Theme.geometry.controlCard.contentMargins
-				}
-				height: Theme.geometry.generatorCard.durationButton.height
-				width: Theme.geometry.generatorCard.durationButton.width
-
-				flat: !enabled
-				enabled: timedRunSwitch.checked
-				font.pixelSize: Theme.font.size.m
-
-				text: Utils.formatAsHHMM(selectedRuntime)
-				property int selectedRuntime: 0 // TODO: bind to data model
-
-				onClicked: dialogManager.generatorDurationSelectorDialog.open()
-				Connections {
-					target: dialogManager.generatorDurationSelectorDialog
-					function onDurationChanged() {
-						durationButton.selectedRuntime = dialogManager.generatorDurationSelectorDialog.duration
-					}
-				}
-			}
-		}
-		SeparatorBar {
-			id: durationSeparator
-			anchors {
-				top: durationRow.bottom
-				left: parent.left
-				leftMargin: Theme.geometry.controlCard.itemSeparator.margins
-				right: parent.right
-				rightMargin: Theme.geometry.controlCard.itemSeparator.margins
 			}
 		}
 		Button {
