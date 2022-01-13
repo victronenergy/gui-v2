@@ -18,4 +18,18 @@ ArcGauge {
 	radius: Theme.geometry.briefPage.edgeGauge.radius
 	strokeWidth: Theme.geometry.arc.strokeWidth
 	value: 33
+	ValueDisplay {
+		anchors {
+			right: parent.right
+			rightMargin: Theme.geometry.loadGauge.label.rightMargin
+			verticalCenter: parent.verticalCenter
+			verticalCenterOffset: Theme.geometry.loadGauge.label.verticalCenterOffset
+		}
+		title.text: qsTrId("brief_loads")
+		physicalQuantity: Units.Power
+		value: 6250 // TODO - hook up to real value
+		icon.source: "qrc:/images/consumption.svg"
+		rightAligned: true
+		fontSize: Theme.briefPage.gauge.label.font.size
+	}
 }
