@@ -39,6 +39,7 @@ Column {
 			anchors.verticalCenter: parent.verticalCenter
 		}
 		Item {
+			anchors.verticalCenter: parent.verticalCenter
 			width: Theme.geometry.valueDisplay.icon.width
 			height: width
 			Image {
@@ -59,13 +60,13 @@ Column {
 		}
 		Label {
 			anchors.verticalCenter: parent.verticalCenter
-			font.pixelSize: fontSize
+			font.pixelSize: root.fontSize
 			//% "%1"
 			text: qsTrId("value_label").arg(_displayValue.number)
 		}
 		Label {
 			anchors.verticalCenter: parent.verticalCenter
-			font.pixelSize: fontSize
+			font.pixelSize: root.fontSize
 			opacity: 0.7 // TODO: use a Theme color instead
 			//% "%1"
 			text: qsTrId("value_unit").arg(_displayValue.units)
