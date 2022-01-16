@@ -68,5 +68,9 @@
     "color.overviewPage.widget.border": "color.ok",
     "color.overviewPage.widget.sideGauge.background": "color.darkOk",
     "color.overviewPage.widget.sideGauge.highlight": "color.ok",
-    "color.overviewPage.widget.solar.graph.bar": "color.ok"
+    "color.overviewPage.widget.solar.graph.bar": "color.ok",
+
+    "color.overviewPage.connector.electron.outerColor": "#4CFFFFFF",
+    "color.overviewPage.connector.electron.innerColor": "#4CFFFFFF",
+    "color.overviewPage.connector.electron.centerColor": "#FFFFFF"
 }

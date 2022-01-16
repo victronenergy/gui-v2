@@ -116,7 +116,6 @@ Page {
 		overviewPageInteractive: root.interactive
 	}
 
-
 	GridWidget {
 		id: gridWidget
 		anchors {
@@ -131,6 +130,15 @@ Page {
 		dataModel: _dataModel.inputs.grid
 		overviewPageInteractive: root.interactive
 	}
+	WidgetConnector {
+		startWidget: gridWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: inverterWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: gridWidget.dataModel != undefined
+		straight: true
+	}
+
 	ShoreWidget {
 		id: shoreWidget
 		anchors {
@@ -146,6 +154,15 @@ Page {
 		dataModel: _dataModel.inputs.shore
 		overviewPageInteractive: root.interactive
 	}
+	WidgetConnector {
+		startWidget: shoreWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: inverterWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: shoreWidget.dataModel != undefined
+		straight: shoreWidget.size > OverviewWidget.Size.M
+	}
+
 	GeneratorWidget {
 		id: generatorWidget
 		anchors {
@@ -164,6 +181,14 @@ Page {
 		dataModel: _dataModel.inputs.generator
 		overviewPageInteractive: root.interactive
 	}
+	WidgetConnector {
+		startWidget: generatorWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: inverterWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: generatorWidget.dataModel != undefined
+	}
+
 	AlternatorWidget {
 		id: alternatorWidget
 		anchors {
@@ -183,6 +208,14 @@ Page {
 		dataModel: _dataModel.inputs.alternator
 		overviewPageInteractive: root.interactive
 	}
+	WidgetConnector {
+		startWidget: alternatorWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: batteryWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: alternatorWidget.dataModel != undefined
+	}
+
 	WindWidget {
 		id: windWidget
 		anchors {
@@ -203,6 +236,14 @@ Page {
 		dataModel: _dataModel.inputs.wind
 		overviewPageInteractive: root.interactive
 	}
+	WidgetConnector {
+		startWidget: windWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: batteryWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: windWidget.dataModel != undefined
+	}
+
 	SolarYieldWidget {
 		id: solarWidget
 		anchors {
@@ -224,6 +265,20 @@ Page {
 		dataModel: _dataModel.inputs.solar
 		overviewPageInteractive: root.interactive
 	}
+	WidgetConnector {
+		startWidget: solarWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: inverterWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: solarWidget.dataModel != undefined
+	}
+	WidgetConnector {
+		startWidget: solarWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: batteryWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: solarWidget.dataModel != undefined
+	}
 
 	// the two central widgets are always present
 	InverterWidget {
@@ -236,8 +291,24 @@ Page {
 		width: Theme.geometry.overviewPage.widget.inverter.width
 		overviewPageInteractive: root.interactive
 	}
+	WidgetConnector {
+		startWidget: inverterWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: acLoadsWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: acLoadsWidget.dataModel != undefined
+		straight: true
+	}
+	WidgetConnector {
+		startWidget: inverterWidget
+		startLocation: WidgetConnector.Location.Bottom
+		endWidget: batteryWidget
+		endLocation: WidgetConnector.Location.Top
+		animated: true // TODO set based on the battery status?
+	}
 
 	BatteryWidget {
+		id: batteryWidget
 		anchors {
 			top: inverterWidget.bottom
 			topMargin: Theme.geometry.overviewPage.layout.two.topMargin
@@ -246,6 +317,13 @@ Page {
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.battery.width
 		overviewPageInteractive: root.interactive
+	}
+	WidgetConnector {
+		startWidget: batteryWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: dcLoadsWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: dcLoadsWidget.dataModel != undefined
 	}
 
 	// the two output widgets are always present
@@ -262,6 +340,7 @@ Page {
 	}
 
 	DcLoadsWidget {
+		id: dcLoadsWidget
 		anchors {
 			top: acLoadsWidget.bottom
 			topMargin: Theme.geometry.overviewPage.layout.two.topMargin
