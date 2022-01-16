@@ -155,6 +155,10 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "AcLoadsWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/DcLoadsWidget.qml")),
 		"Victron.VenusOS", 2, 0, "DcLoadsWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnector.qml")),
+		"Victron.VenusOS", 2, 0, "WidgetConnector");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorPath.qml")),
+		"Victron.VenusOS", 2, 0, "WidgetConnectorPath");
 
 	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/ESSCard.qml")),

@@ -17,21 +17,7 @@ Rectangle {
 		XL
 	}
 
-	// A widget may have up to 4 nubs: left, right, top, bottom.
-	// The left and right nubs may be located at upper, centre, or lower positions.
-	enum ConnectorNubLocation {
-		VerticalUpperRight,
-		VerticalUpperLeft,
-		VerticalCenterRight,
-		VerticalCenterLeft,
-		VerticalLowerRight,
-		VerticalLowerLeft,
-		HorizontalCenterBottom,
-		HorizontalCenterTop
-	}
-
 	property int size: OverviewWidget.Size.M
-	property var connectorNubLocations: [OverviewWidget.CenterRight]
 
 	property bool overviewPageInteractive: true
 	property alias interactive: mouseArea.enabled
@@ -73,12 +59,6 @@ Rectangle {
 	color: Theme.color.overviewPage.widget.background
 
 	Behavior on height { NumberAnimation { duration: Theme.animation.overviewPage.interactive.duration; easing.type: Easing.InOutQuad } }
-
-	// TODO:
-	// ConnectorNub { /* top */ }
-	// ConnectorNub { /* bottom */ }
-	// ConnectorNub { /* left */ }
-	// ConnectorNub { /* right */ }
 
 	MouseArea {
 		id: mouseArea
