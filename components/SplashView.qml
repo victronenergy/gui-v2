@@ -18,6 +18,10 @@ Rectangle {
 		anchors.verticalCenterOffset: Theme.geometry.splashView.verticalCenterOffset
 		source: Theme.screenSize === Theme.FiveInch ? "qrc:/images/splash-logo-5inch.svg"
 			: "qrc:/images/splash-logo-7inch.svg"
+		MouseArea {
+			anchors.fill: parent
+			onClicked: root.hideSplash()
+		}
 	}
 
 	ProgressBar {

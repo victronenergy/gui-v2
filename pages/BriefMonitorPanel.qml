@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2021 Victron Energy B.V.
+** Copyright (C) 2022 Victron Energy B.V.
 */
 
 import QtQuick
@@ -190,6 +190,30 @@ Column {
 			Item {
 				width: root.width
 				height: Theme.geometry.briefPage.sidePanel.loads.height
+				LoadGraph {
+					id: loadGraph
+
+					anchors {
+						right: parent.right
+						top: parent.top
+						topMargin: Theme.geometry.briefPage.sidePanel.loadGraph.topMargin
+						bottom: parent.bottom
+						bottomMargin: Theme.geometry.briefPage.sidePanel.loadGraph.bottomMargin
+					}
+					interval: timer.interval
+					enableAnimation: PageManager.sidePanelActive
+
+					Timer {		// TODO - data model
+						id: timer
+						interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
+						running: PageManager.sidePanelActive
+						repeat: true
+						onTriggered: {
+							loadGraph.addValue(Math.random())
+						}
+					}
+				}
+
 				Slider {
 					id: slider
 

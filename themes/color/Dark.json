@@ -72,5 +72,15 @@
 
     "color.overviewPage.connector.electron.outerColor": "#4CFFFFFF",
     "color.overviewPage.connector.electron.innerColor": "#4CFFFFFF",
-    "color.overviewPage.connector.electron.centerColor": "#FFFFFF"
+    "color.overviewPage.connector.electron.centerColor": "#FFFFFF",
+
+    "color.briefPage.sidePanel.loadGraph.dotColor": "#504F4B",
+    "color.briefPage.sidePanel.loadGraph.backgroundColor": "black",
+    "color.briefPage.sidePanel.loadGraph.warning.strokeColor": "#F0962E",
+    "color.briefPage.sidePanel.loadGraph.warning.gradientColor1": "#F0952E",
+    "color.briefPage.sidePanel.loadGraph.warning.gradientColor2": "transparent",
+    "color.briefPage.sidePanel.loadGraph.nominal.strokeColor": "#387DC5",
+    "color.briefPage.sidePanel.loadGraph.nominal.gradientColor1": "#387DC5",
+    "color.briefPage.sidePanel.loadGraph.nominal.gradientColor2": "transparent",
+    "color.briefPage.sidePanel.loadGraph.horizontalGradient.color": "transparent"
 }
