@@ -39,6 +39,8 @@
         <file>components/Gauges.qml</file>
         <file>components/GeneratorIconLabel.qml</file>
         <file>components/MainView.qml</file>
+        <file>components/LoadGraph.qml</file>
+        <file>components/LoadGraphShapePath.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
         <file>components/PageStack.qml</file>

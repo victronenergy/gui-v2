@@ -87,6 +87,10 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SwitchControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/MainView.qml")),
 		"Victron.VenusOS", 2, 0, "MainView");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LoadGraph.qml")),
+		"Victron.VenusOS", 2, 0, "LoadGraph");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LoadGraphShapePath.qml")),
+		"Victron.VenusOS", 2, 0, "LoadGraphShapePath");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GeneratorIconLabel.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorIconLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ModalDialog.qml")),
