@@ -31,7 +31,7 @@ Rectangle {
 			horizontalCenter: parent.horizontalCenter
 		}
 		width: Theme.geometry.splashView.progressBar.width
-		indeterminate: true
+		indeterminate: root.visible
 	}
 
 	Timer {
