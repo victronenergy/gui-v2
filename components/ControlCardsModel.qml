@@ -32,6 +32,8 @@ ListModel {
 		QT_TRID_NOOP('ess_card_optimized_without_battery_life')
 	]
 
+	property int inputCurrentLimit: 10700 // (mA) TODO - hook this up to the real value
+
 	ListElement {
 		url: "qrc:/controlcards/GeneratorCard.qml"
 	}
