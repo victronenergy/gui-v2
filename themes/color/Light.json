@@ -66,6 +66,7 @@
     "color.overviewPage.widget.sideGauge.background": "color.darkOk",
     "color.overviewPage.widget.sideGauge.highlight": "color.ok",
     "color.overviewPage.widget.solar.graph.bar": "color.ok",
+    "color.overviewPage.backgroundColor": "#E6E5E1",
 
     "color.briefPage.sidePanel.loadGraph.dotColor": "#504F4B",
     "color.briefPage.sidePanel.loadGraph.backgroundColor": "white",
