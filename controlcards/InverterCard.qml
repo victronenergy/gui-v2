@@ -8,8 +8,6 @@ import Victron.VenusOS
 ControlCard {
 	id: root
 
-	property int inputCurrentLimit: 10700 // (mA) TODO - hook this up to the real value
-
 	property int modeIndex: 0 // TODO - hook this up to the real value
 
 	title.icon.source: "qrc:/images/inverter.svg"
@@ -27,13 +25,13 @@ ControlCard {
 			right: parent.right
 		}
 		ButtonControlValue {
-			value: root.inputCurrentLimit
+			value: ControlCardsModel.inputCurrentLimit
 			//% "Input current limit"
 			label.text: qsTrId("controlcard_input_current_limit")
 			//% "%1 A"
 			button.text: qsTrId("amps").arg(value / 1000)
 			onClicked: {
-				dialogManager.inputCurrentLimitDialog.newInputCurrentLimit = root.inputCurrentLimit
+				dialogManager.inputCurrentLimitDialog.newInputCurrentLimit = ControlCardsModel.inputCurrentLimit
 				dialogManager.inputCurrentLimitDialog.open()
 			}
 		}
@@ -52,7 +50,7 @@ ControlCard {
 	Connections {
 		target: dialogManager.inputCurrentLimitDialog
 		function onSetInputCurrentLimit(newValue) {
-			root.inputCurrentLimit = newValue
+			ControlCardsModel.inputCurrentLimit = newValue
 		}
 	}
 	Connections {

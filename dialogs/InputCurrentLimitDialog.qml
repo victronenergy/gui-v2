@@ -46,6 +46,7 @@ ModalDialog {
 			model: [6, 10, 13, 16, 25, 32, 63] // TODO - these numbers will come from a list we get from DBus
 			onButtonClicked: function (buttonIndex){
 				currentIndex = buttonIndex
+				newInputCurrentLimit = model[currentIndex] * 1000 // mA
 				spinbox.value = model[currentIndex] * 1000 // mA
 			}
 		}
