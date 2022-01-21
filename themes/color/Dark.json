@@ -73,6 +73,7 @@
     "color.overviewPage.connector.electron.outerColor": "#4CFFFFFF",
     "color.overviewPage.connector.electron.innerColor": "#4CFFFFFF",
     "color.overviewPage.connector.electron.centerColor": "#FFFFFF",
+    "color.overviewPage.backgroundColor": "color.background.primary",
 
     "color.briefPage.sidePanel.loadGraph.dotColor": "#504F4B",
     "color.briefPage.sidePanel.loadGraph.backgroundColor": "black",

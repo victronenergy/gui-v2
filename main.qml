@@ -21,7 +21,7 @@ Window {
 
 	width: [800, 1024][Theme.screenSize]
 	height: [480, 600][Theme.screenSize]
-	color: Theme.color.background.primary
+	color: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml" ? Theme.color.overviewPage.backgroundColor : Theme.color.background.primary
 
 	//: Application title
 	//% "Venus OS GUI"
