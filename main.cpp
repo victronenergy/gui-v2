@@ -8,6 +8,7 @@
 
 #include <velib/qt/v_busitems.h>
 #include <velib/qt/ve_qitems_dbus.hpp>
+#include <velib/qt/ve_qitem.hpp>
 
 #include <QTranslator>
 #include <QGuiApplication>
@@ -227,6 +228,7 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SolarYieldGauge");
 
 	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
+	qmlRegisterType<VeQItem>("Victron.Velib", 1, 0, "VeQItem");
 
 	QGuiApplication app(argc, argv);
 	QGuiApplication::setApplicationName("Venus");

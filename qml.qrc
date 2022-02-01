@@ -65,7 +65,9 @@
         <file>data/Generators.qml</file>
         <file>data/Inverters.qml</file>
         <file>data/Relays.qml</file>
+        <file>data/SolarChargers.qml</file>
         <file>data/Tanks.qml</file>
+        <file>demo/SolarChargers.qml</file>
         <file>pages/PageManager.qml</file>
         <file>pages/Page.qml</file>
         <file>pages/MainPage.qml</file>
