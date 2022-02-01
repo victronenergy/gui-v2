@@ -9,15 +9,19 @@ import Victron.Velib
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 import "data"
+import "demo" as Demo
 
 Window {
 	id: root
 
-	property Item battery: dbusData.item.battery
-	property Item tanks: dbusData.item.tanks
-	property Item generators: dbusData.item.generators
+	property Item battery: dataLoader.item.battery
+	property Item tanks: dataLoader.item.tanks
+	property Item generators: dataLoader.item.generators
+	property Item solarChargers: dataLoader.item.solarChargers
 
 	property alias dialogManager: dialogManager
+
+	property Item dataLoader: dbusData.active ? dbusData : demoData
 
 	width: [800, 1024][Theme.screenSize]
 	height: [480, 600][Theme.screenSize]
@@ -74,6 +78,7 @@ Window {
 			property Generators generators: Generators {}
 			property Inverters inverters: Inverters {}
 			property Relays relays: Relays {}
+			property SolarChargers solarChargers: SolarChargers {}
 
 			VeQuickItem {
 				id: veDBus
@@ -87,6 +92,22 @@ Window {
 				id: veSettings
 				uid: "dbus/com.victronenergy.settings"
 			}
+		}
+	}
+
+	Loader {
+		id: demoData
+
+		active: !dbusConnected
+		sourceComponent: Item {
+			// TODO make demo versions
+//            property Battery battery: Battery {}
+//            property Tanks tanks: Tanks {}
+//            property Generators generators: Generators {}
+//            property Inverters inverters: Inverters {}
+//            property Relays relays: Relays {}
+
+			property Demo.SolarChargers solarChargers: Demo.SolarChargers {}
 		}
 	}
 }

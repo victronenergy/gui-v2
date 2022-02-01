@@ -11,12 +11,10 @@ import "../data"
 Item {
 	id: root
 
-	property var values: [ 45, 82, 75, 68 ]
-
 	Repeater {
 		id: repeater
 
-		model: root.values
+		model: solarChargers ? solarChargers.model : null
 		delegate: ScaledArcGauge {
 			width: Theme.geometry.briefPage.edgeGauge.width
 			x: index*strokeWidth
@@ -27,7 +25,7 @@ Item {
 			radius: Theme.geometry.briefPage.edgeGauge.radius - index*strokeWidth
 			direction: PathArc.Clockwise
 			strokeWidth: Theme.geometry.arc.strokeWidth
-			value: modelData
+			value: solarTracker.power
 		}
 	}
 	ValueDisplay {
@@ -41,7 +39,7 @@ Item {
 		}
 		title.text: qsTrId("brief_solar_yield")
 		physicalQuantity: Units.Power
-		value: 428 // TODO - hook up to real value
+		value: solarChargers ? solarChargers.power : 0
 		icon.source: "qrc:/images/solaryield.svg"
 		rightAligned: false
 		fontSize: Theme.briefPage.gauge.label.font.size
