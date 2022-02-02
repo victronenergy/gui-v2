@@ -10,7 +10,7 @@ import Victron.VenusOS
 Item {
 	id: gauges
 
-	property var model
+	property QtObject model
 	readonly property real strokeWidth: Theme.geometry.circularMultiGauge.strokeWidth
 
 	// Step change in the size of the bounding boxes of successive gauges

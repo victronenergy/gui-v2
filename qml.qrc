@@ -68,6 +68,7 @@
         <file>data/SolarChargers.qml</file>
         <file>data/Tanks.qml</file>
         <file>demo/SolarChargers.qml</file>
+        <file>demo/Tanks.qml</file>
         <file>pages/PageManager.qml</file>
         <file>pages/Page.qml</file>
         <file>pages/MainPage.qml</file>

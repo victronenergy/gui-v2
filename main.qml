@@ -102,7 +102,7 @@ Window {
 		sourceComponent: Item {
 			// TODO make demo versions
 //            property Battery battery: Battery {}
-//            property Tanks tanks: Tanks {}
+			property Demo.Tanks tanks: Demo.Tanks {}
 //            property Generators generators: Generators {}
 //            property Inverters inverters: Inverters {}
 //            property Relays relays: Relays {}
