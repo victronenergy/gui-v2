@@ -9,66 +9,45 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
+	// Model of all solar trackers for all solar chargers
 	property ListModel model: ListModel {}
 
+	// Overall voltage and power for all chargers
 	property real voltage
 	property real power
 
-	property string _dbusUid
-	property var _solarTrackers: []
+	property var _solarChargers: []
 
 	function _getSolarChargers() {
-		if (_dbusUid.length > 0) {
-			return
-		}
 		const childIds = veDBus.childIds
+
+		let solarChargerIds = []
 		for (let i = 0; i < childIds.length; ++i) {
-			let childId = childIds[i]
-			if (childId.startsWith('com.victronenergy.solarcharger.')) {
-				_dbusUid = childId
-				return
-			}
-		}
-	}
-
-	function _getTrackers() {
-		const childIds = vePvConfig.childIds
-		let trackerIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let childId = childIds[i]
-			// TODO test this where multiple trackers are present
-			if (!isNaN(childId)) {
-				trackerIds.push(childId)
+			let id = childIds[i]
+			if (id.startsWith('com.victronenergy.solarcharger.')) {
+				solarChargerIds.push(id)
 			}
 		}
 
-		if (Utils.arrayCompare(_solarTrackers, trackerIds)) {
-			_solarTrackers = trackerIds
+		if (Utils.arrayCompare(_solarChargers, solarChargerIds) !== 0) {
+			_solarChargers = solarChargerIds
 		}
 	}
 
-	VeQuickItem {
-		id: veVoltage
-		uid: _dbusUid ? "dbus/" + _dbusUid + "/Pv/V" : ""
-		onStateChanged: {
-			if (state == VeQItem.Synchronized) {
-				// This dbus path exists; docs say this means there is only one tracker
-				root.model.append({ solarTracker: singleTracker })
-			} else if (state == VeQItem.Offline) {
-				// This dbus path does not exist; docs say this means there are multiple trackers,
-				// so initiate the bindings to find the child objects.
-				console.log("Found solar charger with multiple trackers")
-				vePvConfig.uid = "dbus/" + _dbusUid + "/Pv"
-			}
+	function _updateTotalVoltage() {
+		let v = 0
+		for (let i = 0; i < _solarChargers.length; ++i) {
+			v += _chargersInstantiator.objectAt(i).voltage
 		}
-
-		onValueChanged: root.voltage = value === undefined ? -1 : value
+		voltage = v
 	}
 
-	VeQuickItem {
-		id: veYield
-		uid: _dbusUid ? "dbus/" + _dbusUid + "/Yield/Power" : ""
-		onValueChanged: root.power = value === undefined ? -1 : value
+	function _updateTotalPower() {
+		let p = 0
+		for (let i = 0; i < _solarChargers.length; ++i) {
+			p += _chargersInstantiator.objectAt(i).power
+		}
+		power = p
 	}
 
 	Connections {
@@ -77,59 +56,119 @@ Item {
 		Component.onCompleted: _getSolarChargers()
 	}
 
-	VeQuickItem {
-		id: vePvConfig
-	}
-
-	Connections {
-		target: vePvConfig
-		function onChildIdsChanged() { Qt.callLater(_getTrackers) }
-		Component.onCompleted: _getTrackers()
-	}
-
-	// Used when there is only a single solar tracker. Properties must be same as those in the
-	// multi-tracker model.
-	QtObject {
-		id: singleTracker
-
-		property real voltage: root.voltage
-		property real power: root.power
-	}
-
 	Instantiator {
-		model: _solarTrackers
+		id: _chargersInstantiator
+
+		model: _solarChargers
 
 		delegate: QtObject {
-			id: solarTracker
+			id: solarCharger
 
-			property string uid: modelData
-			property string dbusUid: "dbus/" + _dbusUid + "/Pv/" + solarTracker.uid
-
+			// Overall voltage and power for this charger
 			property real voltage
 			property real power
 
-			property bool _valid
-			on_ValidChanged: {
-				const index = Utils.findIndex(root.model, inverter)
-				if (_valid && index < 0) {
-					root.model.append({ inverter: inverter })
-				} else if (!_valid && index >= 0) {
-					root.model.remove(index)
+			property string _dbusUid: modelData
+			property var _solarTrackers: []
+
+			function _getTrackers() {
+				const childIds = _vePvConfig.childIds
+				let trackerIds = []
+				for (let i = 0; i < childIds.length; ++i) {
+					let childId = childIds[i]
+					// TODO test this where multiple trackers are present
+					if (!isNaN(childId)) {
+						trackerIds.push(childId)
+					}
+				}
+
+				if (Utils.arrayCompare(_solarTrackers, trackerIds)) {
+					_solarTrackers = trackerIds
 				}
 			}
 
-			property VeQuickItem _voltage: VeQuickItem {
-				uid: dbusUid ? dbusUid + "/V" : ""
-				onValueChanged: {
-					_valid |= (value === undefined)
-					solarTracker.voltage = value === undefined ? -1 : value
+			onVoltageChanged: root._updateTotalVoltage()
+			onPowerChanged: root._updateTotalPower()
+
+			property var _veVoltage: VeQuickItem {
+				uid: _dbusUid ? "dbus/" + _dbusUid + "/Pv/V" : ""
+				onStateChanged: {
+					if (state == VeQItem.Synchronized) {
+						// This dbus path exists; docs say this means there is only one tracker
+						const index = Utils.findIndex(root.model, _singleTracker)
+						if (index < 0) {
+							root.model.append({ solarTracker: _singleTracker })
+						}
+					} else if (state == VeQItem.Offline) {
+						// This dbus path does not exist; docs say this means there are multiple trackers,
+						// so initiate the bindings to find the child objects.
+						console.log("Found solar charger with multiple trackers")
+						_vePvConfig.uid = "dbus/" + _dbusUid + "/Pv"
+					}
 				}
+
+				onValueChanged: solarCharger.voltage = value === undefined ? 0 : value
 			}
-			property VeQuickItem _power: VeQuickItem {
-				uid: dbusUid ? dbusUid + "/P" : ""
-				onValueChanged: {
-					_valid |= (value === undefined)
-					solarTracker.power = value === undefined ? -1 : value
+
+			property var _veYield: VeQuickItem {
+				uid: _dbusUid ? "dbus/" + _dbusUid + "/Yield/Power" : ""
+				onValueChanged: solarCharger.power = value === undefined ? 0 : value
+			}
+
+			property var _vePvConfig: VeQuickItem {
+				id: _vePvConfig
+			}
+
+			property var _trackersUpdate: Connections {
+				target: _vePvConfig
+				function onChildIdsChanged() { Qt.callLater(_getTrackers) }
+				Component.onCompleted: _getTrackers()
+			}
+
+			// Used when there is only a single solar tracker for this charger. Properties must be
+			// same as those in the multi-tracker model.
+			property var _singleTracker: QtObject {
+				property real voltage: solarCharger.voltage
+				property real power: solarCharger.power
+			}
+
+			property var _trackersInstantiator: Instantiator {
+				model: _solarTrackers
+
+				delegate: QtObject {
+					id: solarTracker
+
+					property string uid: modelData
+					property string dbusUid: "dbus/" + _dbusUid + "/Pv/" + solarTracker.uid
+
+					// Voltage and power for this tracker only
+					property real voltage
+					property real power
+
+					property bool _valid
+					on_ValidChanged: {
+						const index = Utils.findIndex(root.model, solarTracker)
+						if (_valid && index < 0) {
+							root.model.append({ solarTracker: solarTracker })
+						} else if (!_valid && index >= 0) {
+							root.model.remove(index)
+						}
+					}
+
+					property VeQuickItem _voltage: VeQuickItem {
+						uid: dbusUid ? dbusUid + "/V" : ""
+						onValueChanged: {
+							_valid |= (value === undefined)
+							solarTracker.voltage = value === undefined ? 0 : value
+						}
+					}
+					property VeQuickItem _power: VeQuickItem {
+						uid: dbusUid ? dbusUid + "/P" : ""
+						onValueChanged: {
+							_valid |= (value === undefined)
+							solarTracker.power = value === undefined ? 0 : value
+						}
+					}
 				}
 			}
 		}
