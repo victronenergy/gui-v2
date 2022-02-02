@@ -196,52 +196,37 @@ Page {
 		opacity: 0.0
 	}
 
-	property var gaugeConfig: [
-		'fuel',
-		'battery',
-		'freshwater',
-		'blackwater'
-	]
-
-	onGaugeConfigChanged: gaugeData.populateModel()
-
 	Component.onCompleted: {
 		root.populateSideGauges()
-		gaugeData.populateModel()
 	}
 
 	Item {
 		id: gaugeData
 
-		property ListModel model: ListModel {}
-
-		function populateModel() {
-			_populated = false
-
-			model.clear()
-			const n = Math.min(Math.random() * 6, gaugeConfig.length)
-			for (let i = 0; i < n; ++i) {
-				const type = gaugeConfig[i]
-				if (type in _gaugeTypeProperties) {
-					const props = _gaugeTypeProperties[type]
-					model.append(Object.assign({}, props, { value: Math.floor(Math.random() * 100) * 1.0 }))
-				}
+		property ListModel model: ListModel {
+			Component.onCompleted: {
+				insert(0, Object.assign({}, gaugeData._gaugeTypeProperties['battery'],
+						{ gaugeType: 'battery', value: 0.0 }))
+				batteryValueBinding.target = gaugeData.model.get(0)
 			}
-
-			_populated = true
 		}
 
-		property bool _populated: false
+		property var _gaugeConfig: [
+			'fuel',
+			'battery',
+			'freshwater',
+			'blackwater'
+		]
 
 		property var _gaugeTypeProperties: ({
-			'battery': {
-				textId: 'gaugeBatteryText',
-				icon: '/images/battery.svg',
-				valueType: Gauges.FallingPercentage
-			},
 			'fuel': {
 				textId: 'gaugeFuelText',
 				icon: '/images/tank.svg',
+				valueType: Gauges.FallingPercentage
+			},
+			'battery': {
+				textId: 'gaugeBatteryText',
+				icon: '/images/battery.svg',
 				valueType: Gauges.FallingPercentage
 			},
 			'freshwater': {
@@ -259,7 +244,16 @@ Page {
 		property int _batteryIndex: _gaugeIndex("battery")
 
 		function _gaugeIndex(type) {
-			return _populated ? gaugeConfig.indexOf(type) : -1
+			for (let i = 0; i < gaugeData.model.count; ++i) {
+				if (gaugeData.model.get(i).gaugeType == type) {
+					return i
+				}
+			}
+			return -1
+		}
+
+		function _gaugeOrder(type) {
+			return tanks && tanks.model ? _gaugeConfig.indexOf(type) : -1
 		}
 
 		function _gaugeData(index) {
@@ -267,13 +261,14 @@ Page {
 		}
 
 		Binding {
-			target: battery ? gaugeData._gaugeData(gaugeData._batteryIndex) : null
+			id: batteryValueBinding
 			property: 'value'
-			value: battery ? battery.stateOfCharge : null
+			value: battery ? Math.round(battery.stateOfCharge) : null
 		}
 
 		Instantiator {
 			model: tanks ? tanks.model : null
+
 			delegate: QtObject {
 				property string gaugeType: {
 					switch (tank.type) {
@@ -284,10 +279,33 @@ Page {
 					return ''
 				}
 
-				property int modelIndex: gaugeData._gaugeIndex(gaugeType)
+				onGaugeTypeChanged: {
+					let orderedTypeIndex = gaugeData._gaugeOrder(gaugeType)
+					let insertionIndex = -1
+					for (let i = 0; i < gaugeData.model.count; ++i) {
+						let currentGaugeType = gaugeData.model.get(i).gaugeType
+						if (orderedTypeIndex < gaugeData._gaugeOrder(currentGaugeType)) {
+							insertionIndex = i
+							break
+						}
+					}
+					if (insertionIndex < 0) {
+						insertionIndex = gaugeData.model.count
+					}
+					if (modelIndex >= 0) {
+						gaugeData.model.move(modelIndex, insertionIndex, 1)
+					} else {
+						gaugeData.model.insert(insertionIndex, Object.assign({},
+								gaugeData._gaugeTypeProperties[gaugeType],
+								{ gaugeType: gaugeType, value: 0.0 }))
+					}
+					modelIndex = insertionIndex
+				}
+
+				property int modelIndex: -1
 
 				property var updater: Binding {
-					target: gaugeData._gaugeData(modelIndex)
+					target: modelIndex >= 0 ? gaugeData._gaugeData(modelIndex) : null
 					property: 'value'
 					value: tank.level
 				}

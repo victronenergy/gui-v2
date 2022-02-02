@@ -10,7 +10,7 @@ import Victron.VenusOS
 Item {
 	id: gauges
 
-	property var model
+	property QtObject model // must be QtObject instead of var, else cannot update its values via Binding objects
 	readonly property real strokeWidth: Theme.geometry.circularSingularGauge.strokeWidth
 
 	Item {
