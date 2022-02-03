@@ -33,11 +33,14 @@
         <file>components/ControlCard.qml</file>
         <file>components/ControlCardsModel.qml</file>
         <file>components/ControlValue.qml</file>
+        <file>components/ExpandedTanksView.qml</file>
         <file>components/ButtonControlValue.qml</file>
         <file>components/RadioButtonControlValue.qml</file>
         <file>components/SwitchControlValue.qml</file>
         <file>components/Gauges.qml</file>
         <file>components/GeneratorIconLabel.qml</file>
+        <file>components/LevelsPageButtonRow.qml</file>
+        <file>components/LevelsPageGaugeDelegate.qml</file>
         <file>components/MainView.qml</file>
         <file>components/LoadGraph.qml</file>
         <file>components/LoadGraphShapePath.qml</file>
@@ -54,6 +57,7 @@
         <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
         <file>components/SwitchesModel.qml</file>
+        <file>components/TankGauge.qml</file>
         <file>components/ThreePhaseDisplay.qml</file>
         <file>components/ToastNotification.qml</file>
         <file>components/Units.qml</file>
@@ -112,6 +116,8 @@
         <file>images/acloads.svg</file>
         <file>images/brief.svg</file>
         <file>images/dcloads.svg</file>
+        <file>images/fuel.svg</file>
+        <file>images/freshWater20x27.svg</file>
         <file>images/icon_alarm_48.svg</file>
         <file>images/icon_autostart_24.svg</file>
         <file>images/icon_manualstart_24.svg</file>
@@ -121,6 +127,7 @@
         <file>images/inverter_charger.svg</file>
         <file>images/levels.svg</file>
         <file>images/notifications.svg</file>
+        <file>images/oil.svg</file>
         <file>images/overview.svg</file>
         <file>images/settings.svg</file>
         <file>images/panel-toggle.svg</file>
@@ -130,6 +137,7 @@
         <file>images/consumption.svg</file>
         <file>images/generator.svg</file>
         <file>images/grid.svg</file>
+        <file>images/liveWell.svg</file>
         <file>images/solaryield.svg</file>
         <file>images/panel-toggled.svg</file>
         <file>images/sunny.svg</file>
@@ -153,6 +161,7 @@
         <file>images/toast_icon_checkmark.svg</file>
         <file>images/toast_icon_close.svg</file>
         <file>images/toast_icon_info.svg</file>
+        <file>images/wasteWater.svg</file>
         <file>themes/geometry/FiveInch.json</file>
         <file>themes/geometry/SevenInch.json</file>
         <file>themes/color/Light.json</file>

@@ -28,4 +28,5 @@ QtObject {
 	property bool controlsVisible: true
 	property bool mainPageActive: true
 	property var navBar
+	property var statusBar
 }

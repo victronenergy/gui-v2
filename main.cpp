@@ -84,12 +84,18 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ButtonControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "ButtonControlValue");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ExpandedTanksView.qml")),
+		"Victron.VenusOS", 2, 0, "ExpandedTanksView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/RadioButtonControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "RadioButtonControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SwitchControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "SwitchControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/MainView.qml")),
 		"Victron.VenusOS", 2, 0, "MainView");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LevelsPageButtonRow.qml")),
+		"Victron.VenusOS", 2, 0, "LevelsPageButtonRow");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LevelsPageGaugeDelegate.qml")),
+		"Victron.VenusOS", 2, 0, "LevelsPageGaugeDelegate");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LoadGraph.qml")),
 		"Victron.VenusOS", 2, 0, "LoadGraph");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LoadGraphShapePath.qml")),
@@ -122,6 +128,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SplashView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/StatusBar.qml")),
 		"Victron.VenusOS", 2, 0, "StatusBar");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/TankGauge.qml")),
+		"Victron.VenusOS", 2, 0, "TankGauge");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/SwitchesModel.qml")),
 		"Victron.VenusOS", 2, 0, "SwitchesModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ThreePhaseDisplay.qml")),
