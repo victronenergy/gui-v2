@@ -13,6 +13,8 @@ Item {
 		All,			// allow all sides to be rounded, show all borders
 		Left,			// round left, hide right border
 		Right,			// round right, hide left border
+		Top,			// round top, hide bottom border
+		Bottom,			// round bottom, hide top border
 		NoneHorizontal	// no rounding, show top/bottom borders only
 	}
 
@@ -57,8 +59,8 @@ Item {
 		id: backgroundRect
 		anchors {
 			fill: parent
-			topMargin: root.border.width
-			bottomMargin: root.border.width
+			topMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Top ? root.radius : 0
+			bottomMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Bottom ? root.radius : 0
 			leftMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Left ? root.radius : 0
 			rightMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right ? root.radius : 0
 		}
@@ -74,15 +76,20 @@ Item {
 			fill: parent
 			leftMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right ? root.width - root.radius : 0
 			rightMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Left ? root.width - root.radius : 0
+			topMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Bottom ? root.height - root.radius : 0
+			bottomMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Top ? root.height - root.radius : 0
 		}
 
 		visible: root.roundedSide !== AsymmetricRoundedRectangle.RoundedSide.NoneHorizontal
 		clip: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Left
-			|| root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right
+			  || root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right
+			  || root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Top
+			  || root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Bottom
 
 		Rectangle {
 			id: roundedRect
 			x: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right ? -(root.width - root.radius) : 0
+			y: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Bottom ? -(root.height - root.radius) : 0
 			width: root.width
 			height: root.height
 			color: Theme.color.button.outline.background
