@@ -5,6 +5,7 @@
 import QtQuick
 import Victron.Velib
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 import "../data"
 
 // TODO
@@ -25,7 +26,7 @@ Item {
 			radius: Theme.geometry.briefPage.edgeGauge.radius - index*strokeWidth
 			direction: PathArc.Clockwise
 			strokeWidth: Theme.geometry.arc.strokeWidth
-			value: solarTracker.power
+			value: solarTracker.power / Utils.maximumValue("solarTracker.power") * 100
 		}
 	}
 	ValueDisplay {

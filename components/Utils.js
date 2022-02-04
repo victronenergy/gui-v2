@@ -3,6 +3,8 @@
 */
 .pragma library
 
+var maxValues = {}
+
 function arrayCompare(lhs, rhs) {
 	if (!Array.isArray(lhs)) {
 		if (!Array.isArray(rhs)) {
@@ -93,3 +95,12 @@ function reactToSignalOnce(sig, slot) {
 	sig.connect(f)
 }
 
+function updateMaximumValue(key, value) {
+    // Set a max value slightly larger than previously known highest value
+    maxValues[key] = value * 1.2
+}
+
+function maximumValue(key) {
+    // TODO should we fetch a max from some data storage preset instead?
+    return maxValues[key] || 1  // use default=1 to avoid zero division for ratio calc
+}
