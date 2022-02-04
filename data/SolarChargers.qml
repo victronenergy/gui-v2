@@ -48,6 +48,9 @@ Item {
 			p += _chargersInstantiator.objectAt(i).power
 		}
 		power = p
+
+		// Set max tracker power based on total number of trackers
+		Utils.updateMaximumValue("solarTracker.power", power / Math.max(1, model.count))
 	}
 
 	Connections {
@@ -90,23 +93,27 @@ Item {
 			onVoltageChanged: root._updateTotalVoltage()
 			onPowerChanged: root._updateTotalPower()
 
-			property var _veVoltage: VeQuickItem {
-				uid: _dbusUid ? "dbus/" + _dbusUid + "/Pv/V" : ""
-				onStateChanged: {
-					if (state == VeQItem.Synchronized) {
-						// This dbus path exists; docs say this means there is only one tracker
-						const index = Utils.findIndex(root.model, _singleTracker)
-						if (index < 0) {
-							root.model.append({ solarTracker: _singleTracker })
+			property var _veNrOfTrackers: VeQuickItem {
+				uid: _dbusUid ? "dbus/" + _dbusUid + "/NrOfTrackers" : ""
+				onValueChanged: {
+					if (value !== undefined) {
+						if (value === 1) {
+							// When there is a single tracker, the /Pv/x paths do not exist, so
+							// add a single tracker directly to the model.
+							const index = Utils.findIndex(root.model, _singleTracker)
+							if (index < 0) {
+								root.model.append({ solarTracker: _singleTracker })
+							}
+						} else {
+							// Initiate the bindings to find the /Pv/x child objects.
+							_vePvConfig.uid = "dbus/" + _dbusUid + "/Pv"
 						}
-					} else if (state == VeQItem.Offline) {
-						// This dbus path does not exist; docs say this means there are multiple trackers,
-						// so initiate the bindings to find the child objects.
-						console.log("Found solar charger with multiple trackers")
-						_vePvConfig.uid = "dbus/" + _dbusUid + "/Pv"
 					}
 				}
+			}
 
+			property var _veVoltage: VeQuickItem {
+				uid: _dbusUid ? "dbus/" + _dbusUid + "/Pv/V" : ""
 				onValueChanged: solarCharger.voltage = value === undefined ? 0 : value
 			}
 

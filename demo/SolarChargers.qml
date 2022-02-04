@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 Item {
 	id: root
@@ -15,13 +16,15 @@ Item {
 	property real voltage
 	property real power
 
+	onPowerChanged: Utils.updateMaximumValue("solarTracker.power", power / Math.max(1, model.count))
+
 	function populateModel() {
 		voltage = 0
 		power = 0
 		model.clear()
 		let dummyValuesCount = Math.floor(Math.random() * 5) * 1.0
 		for (let i = 0; i < dummyValuesCount; ++i) {
-			let p = Math.floor(Math.random() * 200) * 1.0
+			let p = 50 + (Math.floor(Math.random() * 200) * 1.0)
 			let v = power / 10
 			root.voltage += v
 			root.power += p
