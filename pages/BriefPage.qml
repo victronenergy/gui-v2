@@ -11,7 +11,7 @@ Page {
 	id: root
 
 	// Temporary code?
-	property bool solarYieldPresent: true
+	property bool solarYieldPresent: solarChargers && solarChargers.model.count > 0
 	property bool generatorPresent: true
 	property bool loadPresent: true
 
