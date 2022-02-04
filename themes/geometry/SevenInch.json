@@ -164,6 +164,9 @@
     "geometry.solarYieldGauge.valueDisplay.leftMargin": 48,
     "geometry.solarYieldGauge.valueDisplay.verticalCenterOffset": 12,
 
+    "geometry.generatorLeftGauge.valueDisplay.leftMargin": 48,
+    "geometry.generatorLeftGauge.valueDisplay.verticalCenterOffset": 12,
+
     "geometry.barChart.height": 47,
     "geometry.barChart.spacing": 8,
     "geometry.barChart.barWidth": 8,
