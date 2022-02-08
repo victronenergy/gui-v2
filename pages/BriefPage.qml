@@ -10,10 +10,9 @@ import "../data"
 Page {
 	id: root
 
-	// Temporary code?
-	property bool solarYieldPresent: solarChargers && solarChargers.model.count > 0
-	property bool generatorPresent: true
-	property bool loadPresent: true
+	readonly property bool solarYieldPresent: solarChargers && solarChargers.model.count > 0
+	readonly property bool generatorPresent: generators && !!generators.generator
+	readonly property bool loadPresent: true    // TODO check for AC,DC inputs
 
 	property var leftGaugeTypes: []
 	property var rightGaugeTypes: []
@@ -35,6 +34,10 @@ Page {
 		leftGaugeTypes = leftTypes
 		rightGaugeTypes = rightTypes
 	}
+
+	onSolarYieldPresentChanged: root.populateSideGauges()
+	onGeneratorPresentChanged: root.populateSideGauges()
+	onLoadPresentChanged: root.populateSideGauges()
 
 	Loader {
 		id: mainGauge
@@ -107,44 +110,6 @@ Page {
 			return ''
 		}
 	}
-
-	/*	Example of how to use 'ValueDisplay'
-	Column {
-		spacing: 20
-		anchors {
-			top: parent.top
-			topMargin: 164
-			right: parent.right
-			rightMargin: 68
-		}
-		ValueDisplay {
-			title.text: "Generator"
-			physicalQuantity: Units.Power
-			value: 874
-			icon.source: "qrc:/images/generator.svg"
-		}
-		ValueDisplay {
-			title.text: "Loads"
-			physicalQuantity: Units.Power
-			value: 6251.1234
-			icon.source: "qrc:/images/consumption.svg"
-		}
-	}
-	ValueDisplay {
-		anchors {
-			top: parent.top
-			topMargin: 208
-			left: parent.left
-			leftMargin: 88
-		}
-		rightAligned: false
-		title.text: "Solar yield"
-		physicalQuantity: Units.Power
-		value: 428
-		precision: 2
-		icon.source: "qrc:/images/solaryield.svg"
-	}
-	*/
 	Loader {
 		id: rightUpper
 		anchors {
@@ -194,10 +159,6 @@ Page {
 		// hidden by default.
 		x: root.width
 		opacity: 0.0
-	}
-
-	Component.onCompleted: {
-		root.populateSideGauges()
 	}
 
 	Item {

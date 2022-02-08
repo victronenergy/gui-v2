@@ -34,6 +34,7 @@ Item {
 	}
 
 	property ListModel model: ListModel {}
+	property QtObject generator  // the first valid generator
 
 	property var _generators: []
 
@@ -82,8 +83,14 @@ Item {
 				const index = Utils.findIndex(root.model, generator)
 				if (_valid && index < 0) {
 					root.model.append({ generator: generator })
+					if (!root.generator) {
+						root.generator = generator
+					}
 				} else if (!_valid && index >= 0) {
 					root.model.remove(index)
+					if (root.generator == generator) {
+						root.generator = null
+					}
 				}
 			}
 
