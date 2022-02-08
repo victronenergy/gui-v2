@@ -97,7 +97,7 @@ function reactToSignalOnce(sig, slot) {
 
 function updateMaximumValue(key, value) {
     // Set a max value slightly larger than previously known highest value
-    maxValues[key] = value * 1.2
+    maxValues[key] = Math.max(maxValues[key] || 0, value * 1.2)
 }
 
 function maximumValue(key) {

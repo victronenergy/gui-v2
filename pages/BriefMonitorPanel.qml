@@ -150,6 +150,8 @@ Column {
 
 					model: [0.8, 1, 0.8, 0.5, 0.65, 0.3, 0.2, 0.8, 1, 0.85, 0.7] // TODO: hook up to real data
 				}
+
+				history: solarChargers ? solarChargers.yieldHistory: []
 			}
 		}
 		Component {
