@@ -26,12 +26,13 @@ OverviewWidget {
 		SolarYieldGraph {
 			id: barGraph
 			anchors {
-				horizontalCenter: parent.horizontalCenter
+				left: parent.left
+				leftMargin: Theme.geometry.overviewPage.widget.content.leftMargin
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry.overviewPage.widget.solar.graph.margins
 			}
+			width: root.width - anchors.leftMargin
 			height: Theme.geometry.overviewPage.widget.solar.graph.height
-			history: dataModel.history
 		}
 	]
 }

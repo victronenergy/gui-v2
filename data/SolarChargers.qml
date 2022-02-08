@@ -15,6 +15,7 @@ Item {
 	// Overall voltage and power for all chargers
 	property real voltage
 	property real power
+	property var yieldHistory: []
 
 	property var _solarChargers: []
 
@@ -36,7 +37,7 @@ Item {
 
 	function _updateTotalVoltage() {
 		let v = 0
-		for (let i = 0; i < _solarChargers.length; ++i) {
+		for (let i = 0; i < _chargersInstantiator.count; ++i) {
 			v += _chargersInstantiator.objectAt(i).voltage
 		}
 		voltage = v
@@ -44,13 +45,40 @@ Item {
 
 	function _updateTotalPower() {
 		let p = 0
-		for (let i = 0; i < _solarChargers.length; ++i) {
+		for (let i = 0; i < _chargersInstantiator.count; ++i) {
 			p += _chargersInstantiator.objectAt(i).power
 		}
 		power = p
 
 		// Set max tracker power based on total number of trackers
 		Utils.updateMaximumValue("solarTracker.power", power / Math.max(1, model.count))
+	}
+
+	function _updateYieldHistory() {
+		// Each charger has a yield total for each day. Create a total yield history containing the
+		// sum of the yield for each day across all chargers.
+		let totalDailyYields = {}
+		let maxHistoryCount = 0
+		let i = 0
+
+		for (i = 0; i < _chargersInstantiator.count; ++i) {
+			let charger = _chargersInstantiator.objectAt(i)
+			let dailyYields = charger.dailyYields
+			maxHistoryCount = Math.max(maxHistoryCount, charger.historyCount)
+			for (let historyId in dailyYields) {
+				totalDailyYields[historyId] = dailyYields[historyId] + (totalDailyYields[historyId] || 0)
+			}
+		}
+
+		// Move sums into an ordered list, assuming history ids are 0,1,2 etc
+		let _yieldHistory = []
+		for (i = 0; i < maxHistoryCount; ++i) {
+			let dailyYield = totalDailyYields[i + ""]
+			_yieldHistory.push(dailyYield || 0)
+		}
+		if (Utils.arrayCompare(_yieldHistory, yieldHistory) !== 0) {
+			yieldHistory = _yieldHistory
+		}
 	}
 
 	Connections {
@@ -67,12 +95,15 @@ Item {
 		delegate: QtObject {
 			id: solarCharger
 
-			// Overall voltage and power for this charger
+			// Overall values for this charger
 			property real voltage
 			property real power
+			property var dailyYields: ({})
+			readonly property int historyCount: _historyIds.length
 
 			property string _dbusUid: modelData
 			property var _solarTrackers: []
+			property var _historyIds: []
 
 			function _getTrackers() {
 				const childIds = _vePvConfig.childIds
@@ -88,6 +119,31 @@ Item {
 				if (Utils.arrayCompare(_solarTrackers, trackerIds)) {
 					_solarTrackers = trackerIds
 				}
+			}
+
+			function _getHistory() {
+				const childIds = _veHistory.childIds
+				let historyIds = []
+				for (let i = 0; i < childIds.length; ++i) {
+					let childId = childIds[i]
+					if (!isNaN(childId)) {
+						historyIds.push(childId)
+					}
+				}
+
+				if (Utils.arrayCompare(_historyIds, historyIds)) {
+					_historyIds = historyIds
+				}
+			}
+
+			function _updateDailyYields() {
+				let _dailyYields = {}
+				for (let i = 0; i < _historyInstantiator.count; ++i) {
+					var historyItem = _historyInstantiator.objectAt(i)
+					_dailyYields[historyItem.historyId] = historyItem.value
+				}
+				dailyYields = _dailyYields
+				root._updateYieldHistory()
 			}
 
 			onVoltageChanged: root._updateTotalVoltage()
@@ -130,6 +186,16 @@ Item {
 				target: _vePvConfig
 				function onChildIdsChanged() { Qt.callLater(_getTrackers) }
 				Component.onCompleted: _getTrackers()
+			}
+
+			property var _veHistory: VeQuickItem {
+				uid: _dbusUid ? "dbus/" + _dbusUid + "/History/Daily" : ""
+			}
+
+			property var _veHistoryUpdate: Connections {
+				target: _veHistory
+				function onChildIdsChanged() { Qt.callLater(_getHistory) }
+				Component.onCompleted: _getHistory()
 			}
 
 			// Used when there is only a single solar tracker for this charger. Properties must be
@@ -176,6 +242,17 @@ Item {
 							solarTracker.power = value === undefined ? 0 : value
 						}
 					}
+				}
+			}
+
+			property var _historyInstantiator: Instantiator {
+				model: _historyIds
+
+				delegate: VeQuickItem {
+					property string historyId: modelData
+					uid: _veHistory.childUId("/" + modelData + "/Yield")
+
+					onValueChanged: if (value !== undefined) solarCharger._updateDailyYields()
 				}
 			}
 		}
