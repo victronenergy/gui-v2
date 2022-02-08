@@ -79,12 +79,15 @@ function pad(val, length, char) {
 	return rv + str
 }
 
-function formatAsHHMM(seconds) {
+function formatAsHHMM(seconds, showUnits) {
 	if (Number.isNaN(seconds) || seconds < 0)
 		return "--:--"
 
-	const duration = decomposeDuration(seconds)
-	return pad(duration.h, 2) + ":" + pad(duration.m, 2)
+    const duration = decomposeDuration(seconds)
+    return pad(duration.h, 2)
+            + (showUnits ? "h:" : ":")
+            + pad(duration.m, 2)
+            + (showUnits ? "m" : "")
 }
 
 function reactToSignalOnce(sig, slot) {

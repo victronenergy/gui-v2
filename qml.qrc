@@ -69,6 +69,7 @@
         <file>data/SystemAc.qml</file>
         <file>data/SystemDc.qml</file>
         <file>data/Tanks.qml</file>
+        <file>demo/Battery.qml</file>
         <file>demo/Generators.qml</file>
         <file>demo/SolarChargers.qml</file>
         <file>demo/SystemAc.qml</file>

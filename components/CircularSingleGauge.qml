@@ -37,10 +37,7 @@ Item {
 	}
 
 	Column {
-		anchors.bottom: parent.bottom
-		anchors.bottomMargin: Theme.geometry.circularSingularGauge.labels.bottomMargin
-		anchors.horizontalCenter: parent.horizontalCenter
-		spacing: -6
+		anchors.centerIn: parent
 		
 		Row {
 			anchors.horizontalCenter: parent.horizontalCenter
@@ -72,10 +69,16 @@ Item {
 			}
 			Label {
 				font.pixelSize: Theme.font.size.xxxl
-				color: Theme.color.font.primary
-				opacity: 0.7
+				color: Theme.color.font.secondary
 				text: '%'
 			}
+		}
+
+		Label {
+			anchors.horizontalCenter: parent.horizontalCenter
+			font.pixelSize: Theme.font.size.s
+			color: Theme.color.font.secondary
+			text: model.caption
 		}
 	}
 }
