@@ -5,9 +5,9 @@
 import QtQuick
 import Victron.Velib
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 import "../data"
 
-// TODO
 ArcGauge {
 	width: Theme.geometry.briefPage.edgeGauge.width
 	alignment: Qt.AlignRight
@@ -16,8 +16,9 @@ ArcGauge {
 	endAngle: 90 - 24
 	radius: Theme.geometry.briefPage.edgeGauge.radius
 	strokeWidth: Theme.geometry.arc.strokeWidth
-	value: 66
+	value: systemTotals.generatorPower / Utils.maximumValue("systemTotals.generatorPower") * 100
 	arcY: -(radius - parent.height) - strokeWidth/2
+
 	ValueDisplay {
 		anchors {
 			right: parent.right
@@ -27,7 +28,7 @@ ArcGauge {
 		}
 		title.text: qsTrId("brief_generator")
 		physicalQuantity: Units.Power
-		value: 874 // TODO - hook up to real value
+		value: systemTotals.generatorPower
 		icon.source: "qrc:/images/generator.svg"
 		rightAligned: true
 		fontSize: Theme.briefPage.gauge.label.font.size

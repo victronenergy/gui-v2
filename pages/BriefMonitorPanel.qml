@@ -6,11 +6,10 @@ import QtQuick
 import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 Column {
 	id: root
-	property int generatorPower: 874 // TODO - hook up to real data
-	property int generatorMaxPower: 1000 // TODO - hook up to real data
 
 	Item {
 		height: Theme.geometry.briefPage.sidePanel.header.height
@@ -67,6 +66,25 @@ Column {
 			source: "qrc:/images/sunny.svg"
 		}
 	}
+
+	Binding {
+		id: solarUpdate
+		property: "value"
+		value: solarChargers ? solarChargers.power : 0
+	}
+
+	Binding {
+		id: generatorUpdate
+		property: "value"
+		value: systemTotals.generatorPower
+	}
+
+	Binding {
+		id: loadsUpdate
+		property: "value"
+		value: systemTotals.loadPower
+	}
+
 	ListView {
 		id: listView
 		property var decorations: [solarYieldDecoration, generatorDecoration, loadsDecoration]
@@ -75,38 +93,43 @@ Column {
 		orientation: ListView.Vertical
 		topMargin: Theme.geometry.briefPage.sidePanel.topSpacing
 		spacing: Theme.geometry.briefPage.sidePanel.columnSpacing
-		model: ListModel { // TODO: hook up to real data
+		model: ListModel {
 			Component.onCompleted: {
 				append({
 						height: Theme.geometry.briefPage.sidePanel.solarYield.height,
 						//% "Solar yield"
 						labelText: qsTrId("brief_solar_yield"),
-						value: 428,
+						value: 0,
 						type: Units.Power,
 						imageSource: "qrc:/images/solaryield.svg",
 						decorationIndex: 0,
 						topMargin: Theme.geometry.briefPage.sidePanel.solarYield.topMargin
 					})
+				solarUpdate.target = get(count - 1)
+
 				append({
 						height: Theme.geometry.briefPage.sidePanel.generator.height,
 						//% "Generator"
 						labelText: qsTrId("brief_generator"),
-						value: 874,
+						value: 0,
 						type: Units.Power,
 						imageSource: "qrc:/images/generator.svg",
 						decorationIndex: 1,
 						topMargin: Theme.geometry.briefPage.sidePanel.generator.topMargin
 					})
+				generatorUpdate.target = get(count - 1)
+
 				append({
 						height: Theme.geometry.briefPage.sidePanel.loads.height,
 						//% "Loads"
 						labelText: qsTrId("brief_loads"),
-						value: 6.25,
+						value: 0,
 						type: Units.Power,
 						imageSource: "qrc:/images/consumption.svg",
 						decorationIndex: 2,
 						topMargin: Theme.geometry.briefPage.sidePanel.loads.topMargin
 					})
+				loadsUpdate.target = get(count - 1)
 			}
 		}
 		delegate: Item {
@@ -136,19 +159,16 @@ Column {
 		}
 		Component {
 			id: solarYieldDecoration
-			Item {
-				width: root.width
-				height: Theme.geometry.briefPage.sidePanel.solarYield.height
-				BarChart {
-					anchors {
-						right: parent.right
-						rightMargin: Theme.geometry.briefPage.sidePanel.solarYield.rightMargin
-						bottom: parent.bottom
-						bottomMargin: Theme.geometry.briefPage.sidePanel.solarYield.bottomMargin
-					}
-					width: Theme.geometry.briefPage.sidePanel.solarYield.width
 
-					model: [0.8, 1, 0.8, 0.5, 0.65, 0.3, 0.2, 0.8, 1, 0.85, 0.7] // TODO: hook up to real data
+			SolarYieldGraph {
+				width: Theme.geometry.briefPage.sidePanel.solarYield.width
+				height: Theme.geometry.briefPage.sidePanel.solarYield.height
+
+				anchors {
+					right: parent.right
+					rightMargin: Theme.geometry.briefPage.sidePanel.solarYield.rightMargin
+					bottom: parent.bottom
+					bottomMargin: Theme.geometry.briefPage.sidePanel.solarYield.bottomMargin
 				}
 
 				history: solarChargers ? solarChargers.yieldHistory: []
@@ -160,6 +180,7 @@ Column {
 			Item {
 				width: root.width
 				height: Theme.geometry.briefPage.sidePanel.generator.height
+
 				GeneratorIconLabel {
 					anchors {
 						right: parent.right
@@ -167,9 +188,10 @@ Column {
 						bottomMargin: Theme.geometry.briefPage.sidePanel.generator.label.bottomMargin
 					}
 					spacing: Theme.geometry.briefPage.sidePanel.generator.label.spacing
-					state: Generators.GeneratorState.Running
-					runtime: 25*60
-					runningBy: Generators.GeneratorRunningBy.Soc
+					state: generators ? generators.generator.state : Generators.GeneratorState.Stopped
+					runtime: generators ? generators.generator.runtime : 0
+					runningBy: generators ? generators.generator.runningBy : Generators.GeneratorRunningBy.Stopped
+
 				}
 				Slider {
 					id: slider
@@ -182,7 +204,7 @@ Column {
 					enabled: false // not interactive
 					width: parent.width
 					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
-					value: 0.8 // TODO - hook up to real data
+					value: systemTotals.generatorPower
 					showHandle: false
 				}
 			}
@@ -205,13 +227,14 @@ Column {
 					interval: timer.interval
 					enableAnimation: PageManager.sidePanelActive
 
-					Timer {		// TODO - data model
+					Timer {
 						id: timer
 						interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-						running: PageManager.sidePanelActive
+						running: PageManager.sidePanelActive && !!systemAc
 						repeat: true
 						onTriggered: {
-							loadGraph.addValue(Math.random())
+							let loadValue = systemTotals.loadPower / Utils.maximumValue("systemTotals.loadPower")
+							loadGraph.addValue(loadValue)
 						}
 					}
 				}
@@ -227,7 +250,7 @@ Column {
 					enabled: false // not interactive
 					width: parent.width
 					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
-					value: 0.7
+					value: systemTotals.loadPower / Utils.maximumValue("systemTotals.loadPower")
 					highlightColor: Theme.color.warning
 					grooveColor: Theme.color.darkWarning
 					showHandle: false
