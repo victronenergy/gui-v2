@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "../data" as DBusData
 
 Item {
 	id: root
@@ -14,10 +15,18 @@ Item {
 
 	function populateModel() {
 		model.clear()
-		for (let tankType = 0; tankType < 6; ++tankType) {
+
+		// Occasionally simulate what it looks like with only the battery
+		const batteryOnly = Math.random() < 0.1
+		if (batteryOnly) {
+			return
+		}
+
+		const maxTankType = DBusData.Tanks.TankType.BlackWater
+		for (let tankType = 0; tankType < maxTankType + 1; ++tankType) {
 			var tankData = {
 				type: tankType,
-				level: Math.floor(Math.random() * 100) * 1.0,
+				level: Math.floor(Math.random() * 100),
 			}
 			model.append({ tank: tankData })
 		}

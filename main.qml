@@ -106,7 +106,7 @@ Window {
 		active: !dbusConnected
 		sourceComponent: Item {
 			// TODO make demo versions
-//            property Battery battery: Battery {}
+			property Demo.Battery battery: Demo.Battery {}
 			property Demo.Tanks tanks: Demo.Tanks {}
 			property Demo.Generators generators: Demo.Generators {}
 //            property Inverters inverters: Inverters {}

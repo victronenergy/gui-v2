@@ -108,7 +108,6 @@
     "geometry.circularMultiGauge.icons.spacing": 6,
 
     "geometry.circularSingularGauge.strokeWidth": 16,
-    "geometry.circularSingularGauge.labels.bottomMargin": 114,
 
     "geometry.controlCardsPage.bottomMargin": 16,
     "geometry.controlCardsPage.spacing": 16,

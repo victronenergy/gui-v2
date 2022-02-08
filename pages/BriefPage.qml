@@ -5,6 +5,7 @@
 import QtQuick
 import Victron.Velib
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 import "../data"
 
 Page {
@@ -169,6 +170,7 @@ Page {
 				insert(0, Object.assign({}, gaugeData._gaugeTypeProperties['battery'],
 						{ gaugeType: 'battery', value: 0.0 }))
 				batteryValueBinding.target = gaugeData.model.get(0)
+				batteryCaptionBinding.target = batteryValueBinding.target
 			}
 		}
 
@@ -183,21 +185,25 @@ Page {
 			'fuel': {
 				textId: 'gaugeFuelText',
 				icon: '/images/tank.svg',
+				caption: '',
 				valueType: Gauges.FallingPercentage
 			},
 			'battery': {
 				textId: 'gaugeBatteryText',
 				icon: '/images/battery.svg',
+				caption: '',
 				valueType: Gauges.FallingPercentage
 			},
 			'freshwater': {
 				textId: 'gaugeFreshWaterText',
 				icon: '/images/freshWater.svg',
+				caption: '',
 				valueType: Gauges.FallingPercentage
 			},
 			'blackwater': {
 				textId: 'gaugeBlackWaterText',
 				icon: '/images/blackWater.svg',
+				caption: '',
 				valueType: Gauges.RisingPercentage
 			}
 		})
@@ -223,8 +229,14 @@ Page {
 
 		Binding {
 			id: batteryValueBinding
-			property: 'value'
+			property: "value"
 			value: battery ? Math.round(battery.stateOfCharge) : null
+		}
+
+		Binding {
+			id: batteryCaptionBinding
+			property: "caption"
+			value: battery && battery.timeToGo > 0 ? Utils.formatAsHHMM(battery.timeToGo, true) : ""
 		}
 
 		Instantiator {
