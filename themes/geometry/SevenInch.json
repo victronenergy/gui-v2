@@ -236,9 +236,9 @@
     "geometry.overviewPage.connector.electron.innerWidth": 4,
     "geometry.overviewPage.connector.electron.centerWidth": 2,
     "geometry.overviewPage.connector.electron.velocity": 100,
+    "geometry.overviewPage.connector.electron.pauseDuration": 500,
 
     "geometry.overviewPage.layout.bottomMargin": 8,
-
     "geometry.overviewPage.layout.one.size": "XL",
     "geometry.overviewPage.layout.one.topMargin": 0,
     "geometry.overviewPage.layout.two.size": "L",

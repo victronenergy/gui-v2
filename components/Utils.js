@@ -107,3 +107,8 @@ function maximumValue(key) {
     // TODO should we fetch a max from some data storage preset instead?
     return maxValues[key] || 1  // use default=1 to avoid zero division for ratio calc
 }
+
+// Can't use % operator, that gives remainder rather than a modulo that wraps.
+function modulo(dividend, divisor) {
+    return dividend - divisor * Math.floor(dividend / divisor)
+}
