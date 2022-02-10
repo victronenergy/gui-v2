@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 Item {
 	id: root
@@ -22,6 +23,12 @@ Item {
 
 	// Animates from start to end
 	property bool animated
+
+	property real _animationProgress
+	property real _diagonalDistance: Math.sqrt(connectorPath.width * connectorPath.width
+		   + connectorPath.height * connectorPath.height
+		   - (2 * connectorPath.width * connectorPath.height)
+		   * Math.cos(90))
 
 	visible: startWidget.visible && endWidget.visible
 
@@ -146,39 +153,59 @@ Item {
 				pathElements: connectorPath.pathElements
 			}
 
-			Rectangle {
-				id: electron
+			Repeater {
+				id: electronRepeater
 
-				width: Theme.geometry.overviewPage.connector.electron.outerWidth
-				height: Theme.geometry.overviewPage.connector.electron.outerWidth
-				color: Theme.color.overviewPage.connector.electron.outerColor
-				radius: Theme.geometry.overviewPage.connector.electron.outerWidth / 2
-				opacity: animPathInterpolator.progress < 0.01 || animPathInterpolator.progress > 0.9 ? 0 : 1
+				// electron interval = distance between electrons (i.e. how often to spawn a new electron)
+				model: root.animated
+					   ? Math.floor(root._diagonalDistance / Theme.geometry.overviewPage.connector.electron.interval)
+					   : null
 
-				x: animPathInterpolator.x - width/2
-				y: animPathInterpolator.y - height/2
+				delegate: Rectangle {
+					id: electron
 
-				Behavior on opacity {
-					NumberAnimation { duration: 250 }
-				}
+					width: Theme.geometry.overviewPage.connector.electron.outerWidth
+					height: Theme.geometry.overviewPage.connector.electron.outerWidth
+					color: Theme.color.overviewPage.connector.electron.outerColor
+					radius: Theme.geometry.overviewPage.connector.electron.outerWidth / 2
+					opacity: animPathInterpolator.progress < 0.01 || animPathInterpolator.progress > 0.9 ? 0 : 1
 
-				Rectangle {
-					id: electronInner
-					anchors.centerIn: parent
+					x: animPathInterpolator.x - width/2
+					y: animPathInterpolator.y - height/2
 
-					width: Theme.geometry.overviewPage.connector.electron.innerWidth
-					height: Theme.geometry.overviewPage.connector.electron.innerWidth
-					radius: Theme.geometry.overviewPage.connector.electron.innerWidth / 2
-					color: Theme.color.overviewPage.connector.electron.innerColor
+					Behavior on opacity {
+						NumberAnimation { duration: 250 }
+					}
 
 					Rectangle {
-						id: electronCenter
+						id: electronInner
 						anchors.centerIn: parent
 
-						width: Theme.geometry.overviewPage.connector.electron.centerWidth
-						height: Theme.geometry.overviewPage.connector.electron.centerWidth
-						radius: Theme.geometry.overviewPage.connector.electron.centerWidth / 2
-						color: Theme.color.overviewPage.connector.electron.centerColor
+						width: Theme.geometry.overviewPage.connector.electron.innerWidth
+						height: Theme.geometry.overviewPage.connector.electron.innerWidth
+						radius: Theme.geometry.overviewPage.connector.electron.innerWidth / 2
+						color: Theme.color.overviewPage.connector.electron.innerColor
+
+						Rectangle {
+							id: electronCenter
+							anchors.centerIn: parent
+
+							width: Theme.geometry.overviewPage.connector.electron.centerWidth
+							height: Theme.geometry.overviewPage.connector.electron.centerWidth
+							radius: Theme.geometry.overviewPage.connector.electron.centerWidth / 2
+							color: Theme.color.overviewPage.connector.electron.centerColor
+						}
+					}
+
+					// Cannot use PathAnimation, because after the first animation loop it ignores the
+					// initial PathArc in the path.
+					PathInterpolator {
+						id: animPathInterpolator
+
+						path: animPath
+
+						// Evenly space out the progress of each electron
+						progress: Utils.modulo(root._animationProgress - ((1 / electronRepeater.count) * model.index), 1)
 					}
 				}
 			}
@@ -193,34 +220,18 @@ Item {
 		pathElements: connectorPath.pathElements
 	}
 
-	// Cannot use PathAnimation, because after the first animation loop it ignores the
-	// initial PathArc in the path.
-	PathInterpolator {
-		id: animPathInterpolator
-
-		path: animPath
-	}
-
 	SequentialAnimation {
 		running: root.animated
 		loops: Animation.Infinite
 
 		NumberAnimation {
-			id: anim
-			target: animPathInterpolator
-			property: 'progress'
+			target: root
+			property: "_animationProgress"
 			from: 0; to: 1
 			duration: {
 				// animate at a constant rate of pixels/sec, based on the diagonal length of the shape
-				var diagonalDist = Math.sqrt(connectorPath.width * connectorPath.width
-											 + connectorPath.height * connectorPath.height
-											 - (2 * connectorPath.width * connectorPath.height)
-											 * Math.cos(90))
-				return diagonalDist / Theme.geometry.overviewPage.connector.electron.velocity * 1000
+				return _diagonalDistance / Theme.geometry.overviewPage.connector.electron.velocity * 1000
 			}
 		}
-
-		PauseAnimation { duration: Theme.geometry.overviewPage.connector.electron.pauseDuration }
 	}
-
 }
