@@ -21,7 +21,7 @@ OverviewWidget {
 			anchors {
 				top: parent.top
 				left: parent.left
-				leftMargin: Theme.geometry.overviewPage.widget.content.leftMargin
+				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
 
 			text: "Absorption" // TODO: data model

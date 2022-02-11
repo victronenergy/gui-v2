@@ -30,7 +30,7 @@ ArcGauge {
 		physicalQuantity: Units.Power
 		value: systemTotals.generatorPower
 		icon.source: "qrc:/images/generator.svg"
-		rightAligned: true
+		alignment: Qt.AlignRight
 		fontSize: Theme.briefPage.gauge.label.font.size
 	}
 }

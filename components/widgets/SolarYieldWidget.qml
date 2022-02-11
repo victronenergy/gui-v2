@@ -19,20 +19,20 @@ OverviewWidget {
 			anchors {
 				top: parent.top
 				left: parent.left
-				leftMargin: Theme.geometry.overviewPage.widget.content.leftMargin
+				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
 		},
 
 		SolarYieldGraph {
 			id: barGraph
 			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry.overviewPage.widget.content.leftMargin
+				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry.overviewPage.widget.solar.graph.margins
 			}
-			width: root.width - anchors.leftMargin
+			width: root.width - Theme.geometry.overviewPage.widget.solar.graph.margins*2
 			height: Theme.geometry.overviewPage.widget.solar.graph.height
+			history: root.dataModel.yieldHistory
 		}
 	]
 }

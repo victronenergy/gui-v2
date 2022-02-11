@@ -130,6 +130,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Units");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ValueDisplay.qml")),
 		"Victron.VenusOS", 2, 0, "ValueDisplay");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ValueQuantityDisplay.qml")),
+		"Victron.VenusOS", 2, 0, "ValueQuantityDisplay");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
 		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),

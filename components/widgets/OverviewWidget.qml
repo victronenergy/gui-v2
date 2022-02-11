@@ -126,10 +126,12 @@ Rectangle {
 
 	ValueDisplay {
 		id: valueDisplay
-		anchors.right: sideGauge.left
-		anchors.rightMargin: sideGauge.anchors.margins
-		anchors.leftMargin: Theme.geometry.overviewPage.widget.content.leftMargin
-		rightAligned: false
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry.overviewPage.widget.content.verticalMargin
+			left: parent.left
+			leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+		}
 		titleRow.height: Theme.geometry.overviewPage.widget.title.height
 		quantityRow.height: root.size === OverviewWidget.Size.XS
 			? Theme.geometry.overviewPage.widget.value.xs.height
