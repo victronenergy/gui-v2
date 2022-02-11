@@ -9,33 +9,24 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
+	readonly property int _phaseCount: 1 + Math.floor(Math.random() * 3)
+
 	property ListModel model: ListModel {
 		Component.onCompleted: {
-			let phaseCount = 1 + Math.floor(Math.random() * 3)
-			root._populateModel(phaseCount)
+			root._populateModel()
 		}
 	}
 
-	property QtObject genset: QtObject {
-		property real power
+	property real gensetPower
+	property real consumptionPower
 
-		onPowerChanged: Utils.updateMaximumValue("systemAc.genset.power", power)
-	}
-
-	property QtObject consumption: QtObject {
-		readonly property real power: powerOnInput + powerOnOutput
-		property real powerOnInput
-		property real powerOnOutput
-	}
-
-	function _populateModel(phaseCount) {
+	function _populateModel() {
 		model.clear()
-		for (let i = 0; i < phaseCount; ++i) {
+		for (let i = 0; i < 3; ++i) {
 			model.append({
-				phaseId: "L" + (i + 1),
-				gensetPower: 0,
-				consumptionPowerOnInput: 0,
-				consumptionPowerOnOutput: 0,
+				name: "L" + (i + 1),
+				gensetPower: NaN,
+				consumptionPower: NaN,
 			})
 		}
 	}
@@ -48,30 +39,25 @@ Item {
 
 		onTriggered: {
 			// For consumption, add some wild fluctuations that can be seen in the Brief side panel graph
-			let genset = 1800 + Math.floor(Math.random() * 20)
-			let inputConsumption = Math.floor(Math.random() * 800)
-			let outputConsumption = Math.floor(Math.random() * 10)
-			let randomIndex = Math.floor(Math.random() * root.model.count)
+			let gensetPower = 1800 + Math.floor(Math.random() * 20)
+			let consumptionPower = Math.floor(Math.random() * 800)
+			let randomIndex = Math.floor(Math.random() * (root._phaseCount-1))
 
 			root.model.set(randomIndex, {
-				gensetPower: genset,
-				consumptionPowerOnInput: inputConsumption,
-				consumptionPowerOnOutput: outputConsumption,
+				gensetPower: gensetPower,
+				consumptionPower: consumptionPower,
 			})
 
-			let totalGenset = 0
-			let totalInputConsumption = 0
-			let totalOutputConsumption = 0
+			let totalGensetPower = 0
+			let totalConsumptionPower = 0
 
 			for (let i = 0; i < root.model.count; ++i) {
 				let data = root.model.get(i)
-				totalGenset += data.gensetPower
-				totalInputConsumption += data.consumptionPowerOnInput
-				totalOutputConsumption += data.consumptionPowerOnOutput
+				totalGensetPower += data.gensetPower || 0
+				totalConsumptionPower += data.consumptionPower || 0
 			}
-			root.genset.power = totalGenset
-			root.consumption.powerOnInput = totalInputConsumption
-			root.consumption.powerOnOutput = totalOutputConsumption
+			root.gensetPower = totalGensetPower
+			root.consumptionPower = totalConsumptionPower
 		}
 	}
 }
