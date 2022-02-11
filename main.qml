@@ -19,9 +19,7 @@ Window {
 	property Item generators: dataLoader.item.generators
 	property Item gridMeter: dataLoader.item.gridMeter
 	property Item solarChargers: dataLoader.item.solarChargers
-	property Item systemAc: dataLoader.item.systemAc
-	property Item systemDc: dataLoader.item.systemDc
-	property alias systemTotals: systemTotals
+	property Item system: dataLoader.item.system
 
 	property alias dialogManager: dialogManager
 
@@ -84,8 +82,7 @@ Window {
 			property Inverters inverters: Inverters {}
 			property Relays relays: Relays {}
 			property SolarChargers solarChargers: SolarChargers {}
-			property SystemAc systemAc: SystemAc {}
-			property SystemDc systemDc: SystemDc {}
+			property System system: System {}
 
 			VeQuickItem {
 				id: veDBus
@@ -116,22 +113,7 @@ Window {
 //            property Relays relays: Relays {}
 
 			property Demo.SolarChargers solarChargers: Demo.SolarChargers {}
-			property Demo.SystemAc systemAc: Demo.SystemAc {}
-			property Demo.SystemDc systemDc: Demo.SystemDc {}
+			property Demo.System system: Demo.System {}
 		}
-	}
-
-	QtObject {
-		id: systemTotals
-
-		// total load = AC + DC consumption
-		property real loadPower: (systemAc ? systemAc.consumption.power : 0)
-				+ (systemDc ? systemDc.power : 0)
-		onLoadPowerChanged: Utils.updateMaximumValue("systemTotals.loadPower", loadPower)
-
-		// total generator input = AC + DC input
-		// TODO add DC generator input data.
-		property real generatorPower: (systemAc ? systemAc.genset.power : 0)
-		onGeneratorPowerChanged: Utils.updateMaximumValue("systemTotals.generatorPower", loadPower)
 	}
 }

@@ -13,16 +13,6 @@ OverviewWidget {
 	icon.source: "qrc:/images/solaryield.svg"
 
 	extraContent.children: [
-		Label {
-			id: statusLabel
-			text: "Today: XYZ kW" // TODO: data model
-			anchors {
-				top: parent.top
-				left: parent.left
-				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
-			}
-		},
-
 		SolarYieldGraph {
 			id: barGraph
 			anchors {

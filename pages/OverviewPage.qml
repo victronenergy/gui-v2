@@ -265,7 +265,8 @@ Page {
 		visible: !segmentedWidget.visible && dataModel != undefined
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: visible ? _widgetSize("solar") : OverviewWidget.Size.Zero
-		dataModel: _dataModel.inputs.solar
+		value: solarChargers ? solarChargers.power : 0
+		dataModel: solarChargers
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
@@ -342,6 +343,9 @@ Page {
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.output.width
 		overviewPageInteractive: root.interactive
+		value: system ? system.ac.consumptionPower : NaN
+		dataModel: system ? system.ac.model : null
+		phaseValueProperty: "consumptionPower"
 	}
 
 	DcLoadsWidget {
@@ -355,6 +359,7 @@ Page {
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.output.width
 		overviewPageInteractive: root.interactive
+		value: system ? system.dc.power : 0
 	}
 
 	MouseArea {

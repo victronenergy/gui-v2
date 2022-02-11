@@ -18,7 +18,7 @@ ArcGauge {
 	endAngle: 90 - 25
 	radius: Theme.geometry.briefPage.edgeGauge.radius
 	strokeWidth: Theme.geometry.arc.strokeWidth
-	value: systemTotals.loadPower / Utils.maximumValue("systemTotals.loadPower") * 100
+	value: system ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
 
 	ValueDisplay {
 		anchors {
@@ -29,7 +29,7 @@ ArcGauge {
 		}
 		title.text: qsTrId("brief_loads")
 		physicalQuantity: Units.Power
-		value: systemTotals.loadPower
+		value: system ? system.loads.power : 0
 		icon.source: "qrc:/images/consumption.svg"
 		alignment: Qt.AlignRight
 		fontSize: Theme.briefPage.gauge.label.font.size

@@ -68,6 +68,7 @@
         <file>data/Inverters.qml</file>
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
+        <file>data/System.qml</file>
         <file>data/SystemAc.qml</file>
         <file>data/SystemDc.qml</file>
         <file>data/Tanks.qml</file>
@@ -75,6 +76,7 @@
         <file>demo/Generators.qml</file>
         <file>demo/GridMeter.qml</file>
         <file>demo/SolarChargers.qml</file>
+        <file>demo/System.qml</file>
         <file>demo/SystemAc.qml</file>
         <file>demo/SystemDc.qml</file>
         <file>demo/Tanks.qml</file>
@@ -107,13 +109,16 @@
         <file>controlcards/InverterCard.qml</file>
         <file>controlcards/SwitchesCard.qml</file>
         <file>fonts/MuseoSans-500.otf</file>
+        <file>images/acloads.svg</file>
         <file>images/brief.svg</file>
+        <file>images/dcloads.svg</file>
         <file>images/icon_alarm_48.svg</file>
         <file>images/icon_autostart_24.svg</file>
         <file>images/icon_manualstart_24.svg</file>
         <file>images/icon_manualstart_timer_24.svg</file>
         <file>images/icon_minus.svg</file>
         <file>images/icon_plus.svg</file>
+        <file>images/inverter_charger.svg</file>
         <file>images/levels.svg</file>
         <file>images/notifications.svg</file>
         <file>images/overview.svg</file>

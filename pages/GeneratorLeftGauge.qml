@@ -13,7 +13,7 @@ ArcGauge {
 
 	width: Theme.geometry.briefPage.edgeGauge.width
 	height: parent.height
-	value: systemTotals.generatorPower / Utils.maximumValue("systemTotals.generatorPower") * 100
+	value: system ? system.generator.power / Utils.maximumValue("system.generator.power") * 100 : 0
 	startAngle: 270 - 25
 	endAngle: 270 + 25
 	radius: Theme.geometry.briefPage.edgeGauge.radius
@@ -28,7 +28,7 @@ ArcGauge {
 		}
 		title.text: qsTrId("brief_generator")
 		physicalQuantity: Units.Power
-		value: systemTotals.generatorPower
+		value: system ? system.generator.power : 0
 		icon.source: "qrc:/images/generator.svg"
 		fontSize: Theme.briefPage.gauge.label.font.size
 	}

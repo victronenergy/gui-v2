@@ -146,9 +146,6 @@ Item {
 				root._updateYieldHistory()
 			}
 
-			onVoltageChanged: root._updateTotalVoltage()
-			onPowerChanged: root._updateTotalPower()
-
 			property var _veNrOfTrackers: VeQuickItem {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/NrOfTrackers" : ""
 				onValueChanged: {
@@ -170,12 +167,18 @@ Item {
 
 			property var _veVoltage: VeQuickItem {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/Pv/V" : ""
-				onValueChanged: solarCharger.voltage = value === undefined ? 0 : value
+				onValueChanged: {
+					solarCharger.voltage = value === undefined ? 0 : value
+					root._updateTotalVoltage()
+				}
 			}
 
 			property var _veYield: VeQuickItem {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/Yield/Power" : ""
-				onValueChanged: solarCharger.power = value === undefined ? 0 : value
+				onValueChanged: {
+					solarCharger.power = value === undefined ? 0 : value
+					root._updateTotalPower()
+				}
 			}
 
 			property var _vePvConfig: VeQuickItem {

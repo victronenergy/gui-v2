@@ -76,13 +76,13 @@ Column {
 	Binding {
 		id: generatorUpdate
 		property: "value"
-		value: systemTotals.generatorPower
+		value: system ? system.generator.power : 0
 	}
 
 	Binding {
 		id: loadsUpdate
 		property: "value"
-		value: systemTotals.loadPower
+		value: system ? system.loads.power : 0
 	}
 
 	ListView {
@@ -203,7 +203,7 @@ Column {
 					enabled: false // not interactive
 					width: parent.width
 					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
-					value: systemTotals.generatorPower
+					value: system ? system.generator.power : 0
 					showHandle: false
 				}
 			}
@@ -229,10 +229,10 @@ Column {
 					Timer {
 						id: timer
 						interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-						running: PageManager.sidePanelActive && !!systemAc
+						running: PageManager.sidePanelActive
 						repeat: true
 						onTriggered: {
-							let loadValue = systemTotals.loadPower / Utils.maximumValue("systemTotals.loadPower")
+							let loadValue = system ? system.loads.power / Utils.maximumValue("system.loads.power") : 0
 							loadGraph.addValue(loadValue)
 						}
 					}
@@ -249,7 +249,7 @@ Column {
 					enabled: false // not interactive
 					width: parent.width
 					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
-					value: systemTotals.loadPower / Utils.maximumValue("systemTotals.loadPower")
+					value: system ? system.loads.power / Utils.maximumValue("system.loads.power") : 0
 					highlightColor: Theme.color.warning
 					grooveColor: Theme.color.darkWarning
 					showHandle: false

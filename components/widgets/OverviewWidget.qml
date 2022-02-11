@@ -133,9 +133,12 @@ Rectangle {
 			leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 		}
 		titleRow.height: Theme.geometry.overviewPage.widget.title.height
-		quantityRow.height: root.size === OverviewWidget.Size.XS
-			? Theme.geometry.overviewPage.widget.value.xs.height
-			: Theme.geometry.overviewPage.widget.value.height
+		quantityRow.visible: root.physicalQuantity >= 0
+		quantityRow.height: quantityRow.visible
+			? (root.size === OverviewWidget.Size.XS
+			   ? Theme.geometry.overviewPage.widget.value.xs.height
+			   : Theme.geometry.overviewPage.widget.value.height)
+			: 0
 	}
 
 	Item {
