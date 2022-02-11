@@ -5,71 +5,71 @@
 import QtQuick
 import Victron.VenusOS
 
-Column {
+Item {
 	id: root
 
-	property var physicalQuantity: Units.Power // eg. Units.Voltage, Units.Current, Units.Power
-	property real value // in SI units, eg. 1234 for 1234W
-	property int precision: 3 // this will display 1.23kW, given a value of 1234
-	property bool rightAligned: true // on the right hand side, we anchor to the right. Vice-versa for the left hand side.
+
+	property int alignment: Qt.AlignLeft    // if right-aligned, icon is on right side
 	property int fontSize: Theme.font.size.xl
 
 	property alias icon: icon
 	property alias title: title
+	property alias value: quantityRow.value
+	property alias physicalQuantity: quantityRow.physicalQuantity
+	property alias precision: quantityRow.precision
+
 	property alias quantityRow: quantityRow
 	property alias titleRow: titleRow
-	readonly property var _displayValue: Units.getDisplayText(root.physicalQuantity, root.value, root.precision)
 
-	anchors {
-		right: rightAligned ? parent.right : undefined
-		left: rightAligned ? undefined : parent.left
-	}
-	Row {
+	implicitWidth: Math.max(titleRow.width, quantityRow.width)
+	implicitHeight: titleRow.height + quantityRow.height
+
+	Item {
 		id: titleRow
 
 		anchors {
-			right: rightAligned ? parent.right : undefined
-			left: rightAligned ? undefined : parent.left
+			left: root.alignment == Qt.AlignLeft ? parent.left : undefined
+			right: root.alignment == Qt.AlignRight ? parent.right : undefined
+			horizontalCenter: root.alignment == Qt.AlignHCenter ? parent.horizontalCenter : undefined
 		}
-		layoutDirection: rightAligned ? Qt.LeftToRight : Qt.RightToLeft
-		spacing: Theme.geometry.valueDisplay.titleRow.spacing
+		width: Math.max(title.width, icon.width)
+		height: Math.max(title.height, icon.height)
+
+		Image {
+			id: icon
+
+			anchors {
+				verticalCenter: parent.verticalCenter
+				left: root.alignment != Qt.AlignRight ? parent.left : undefined
+				right: root.alignment == Qt.AlignRight ? parent.right : undefined
+			}
+			width: Theme.geometry.valueDisplay.icon.width
+			height: width
+			fillMode: Image.Pad
+		}
+
 		Label {
 			id: title
 
-			anchors.verticalCenter: parent.verticalCenter
-		}
-		Item {
-			anchors.verticalCenter: parent.verticalCenter
-			width: Theme.geometry.valueDisplay.icon.width
-			height: width
-			Image {
-				id: icon
-
-				anchors.centerIn: parent
+			anchors {
+				verticalCenter: parent.verticalCenter
+				left: root.alignment != Qt.AlignRight ? icon.right : undefined
+				leftMargin: Theme.geometry.valueDisplay.titleRow.spacing
+				right: root.alignment == Qt.AlignRight ? icon.left : undefined
+				rightMargin: Theme.geometry.valueDisplay.titleRow.spacing
 			}
 		}
-
 	}
-	Row {
+
+	ValueQuantityDisplay {
 		id: quantityRow
 
-		spacing: Theme.geometry.valueDisplay.quantityRow.spacing
 		anchors {
-			right: rightAligned ? parent.right : undefined
-			left: rightAligned ? undefined : parent.left
+			top: titleRow.bottom
+			left: root.alignment == Qt.AlignLeft ? parent.left : undefined
+			right: root.alignment == Qt.AlignRight ? parent.right : undefined
+			horizontalCenter: root.alignment == Qt.AlignHCenter ? parent.horizontalCenter : undefined
 		}
-		Label {
-			anchors.verticalCenter: parent.verticalCenter
-			font.pixelSize: root.fontSize
-			//% "%1"
-			text: qsTrId("value_label").arg(_displayValue.number)
-		}
-		Label {
-			anchors.verticalCenter: parent.verticalCenter
-			font.pixelSize: root.fontSize
-			opacity: 0.7 // TODO: use a Theme color instead
-			//% "%1"
-			text: qsTrId("value_unit").arg(_displayValue.units)
-		}
+		font.pixelSize: root.fontSize
 	}
 }

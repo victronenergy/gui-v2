@@ -18,15 +18,15 @@ OverviewWidget {
 		ThreePhaseDisplay {
 			anchors {
 				fill: parent
-				leftMargin: Theme.geometry.overviewPage.widget.content.leftMargin
+				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 				rightMargin: Theme.geometry.overviewPage.widget.sideGauge.margins
 			}
 
 			visible: root.size >= OverviewWidget.Size.L
 
-			l1Value: root.dataModel != undefined ? root.dataModel.L1 : "--"
-			l2Value: root.dataModel != undefined ? root.dataModel.L2 : "--"
-			l3Value: root.dataModel != undefined ? root.dataModel.L3 : "--"
+//            l1Value: root.dataModel != undefined ? root.dataModel.L1 : "--"
+//            l2Value: root.dataModel != undefined ? root.dataModel.L2 : "--"
+//            l3Value: root.dataModel != undefined ? root.dataModel.L3 : "--"
 		}
 	]
 }

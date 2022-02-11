@@ -31,7 +31,7 @@ ArcGauge {
 		physicalQuantity: Units.Power
 		value: systemTotals.loadPower
 		icon.source: "qrc:/images/consumption.svg"
-		rightAligned: true
+		alignment: Qt.AlignRight
 		fontSize: Theme.briefPage.gauge.label.font.size
 	}
 }

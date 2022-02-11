@@ -42,7 +42,6 @@ Item {
 		physicalQuantity: Units.Power
 		value: solarChargers ? solarChargers.power : 0
 		icon.source: "qrc:/images/solaryield.svg"
-		rightAligned: false
 		fontSize: Theme.briefPage.gauge.label.font.size
 	}
 }

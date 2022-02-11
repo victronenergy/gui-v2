@@ -17,6 +17,7 @@ Window {
 	property Item battery: dataLoader.item.battery
 	property Item tanks: dataLoader.item.tanks
 	property Item generators: dataLoader.item.generators
+	property Item gridMeter: dataLoader.item.gridMeter
 	property Item solarChargers: dataLoader.item.solarChargers
 	property Item systemAc: dataLoader.item.systemAc
 	property Item systemDc: dataLoader.item.systemDc
@@ -79,6 +80,7 @@ Window {
 			property Battery battery: Battery {}
 			property Tanks tanks: Tanks {}
 			property Generators generators: Generators {}
+			property GridMeter gridMeter: GridMeter {}
 			property Inverters inverters: Inverters {}
 			property Relays relays: Relays {}
 			property SolarChargers solarChargers: SolarChargers {}
@@ -109,6 +111,7 @@ Window {
 			property Demo.Battery battery: Demo.Battery {}
 			property Demo.Tanks tanks: Demo.Tanks {}
 			property Demo.Generators generators: Demo.Generators {}
+			property Demo.GridMeter gridMeter: Demo.GridMeter {}
 //            property Inverters inverters: Inverters {}
 //            property Relays relays: Relays {}
 

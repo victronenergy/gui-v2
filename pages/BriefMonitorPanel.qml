@@ -146,7 +146,6 @@ Column {
 				physicalQuantity: model.type
 				value: model.value
 				icon.source: model.imageSource
-				rightAligned: false
 				fontSize: Theme.font.size.l
 			}
 			Loader {

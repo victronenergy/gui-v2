@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 Page {
 	id: root
@@ -126,7 +127,10 @@ Page {
 		visible: !segmentedWidget.visible && dataModel != undefined
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: visible ? _widgetSize("grid") : OverviewWidget.Size.Zero
-		dataModel: _dataModel.inputs.grid
+		value: gridMeter ? gridMeter.power : 0
+		dataModel: gridMeter ? gridMeter.model : null
+		sideGaugeValue: value / Utils.maximumValue("grid.power")
+		phaseValueProperty: "power"
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {

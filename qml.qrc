@@ -59,10 +59,12 @@
         <file>components/Units.qml</file>
         <file>components/Utils.js</file>
         <file>components/ValueDisplay.qml</file>
+        <file>components/ValueQuantityDisplay.qml</file>
         <file>components/VenusFont.qml</file>
         <file>components/WeatherDetails.qml</file>
         <file>data/Battery.qml</file>
         <file>data/Generators.qml</file>
+        <file>data/GridMeter.qml</file>
         <file>data/Inverters.qml</file>
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
@@ -71,6 +73,7 @@
         <file>data/Tanks.qml</file>
         <file>demo/Battery.qml</file>
         <file>demo/Generators.qml</file>
+        <file>demo/GridMeter.qml</file>
         <file>demo/SolarChargers.qml</file>
         <file>demo/SystemAc.qml</file>
         <file>demo/SystemDc.qml</file>

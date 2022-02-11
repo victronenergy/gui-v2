@@ -10,7 +10,9 @@ QtObject {
 	enum PhysicalQuantity {
 		Voltage,
 		Current,
-		Power
+		Power,
+		Percentage,
+		Temperature
 	}
 
 	/*	physicalQuantity	|	precision:	|	value:	|	output:
@@ -22,27 +24,43 @@ QtObject {
 				Power		|		2		|	123		|	120W
 	*/
 	function getDisplayText(physicalQuantity, value, precision) {
-		var rv = { number: -1, units: "" }
+		let number = isNaN(value)
+			? "--"
+			: parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision))
+		let rv
 		switch (physicalQuantity) {
 		case Units.PhysicalQuantity.Power:
 			rv = {
-				number: parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision)),
+				number: number,
 				units: (value < 1000) ? "W" : "kW"
 			}
 			break;
 		case Units.PhysicalQuantity.Voltage:
 			rv = {
-				number: parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision)),
+				number: number,
 				units: (value < 1000) ? "V" : "kV"
 			}
 			break;
 		case Units.PhysicalQuantity.Current:
 			rv = {
-				number: parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision)),
+				number: number,
 				units: (value < 1000) ? "A" : "kA"
 			}
 			break;
+		case Units.PhysicalQuantity.Percentage:
+			rv = {
+				number: number,
+				units: "%"
+			}
+			break;
+		case Units.PhysicalQuantity.Temperature:
+			rv = {
+				number: number,
+				units: "°"
+			}
+			break;
 		default:
+			rv = { number: -1, units: "" }
 			break;
 		}
 		return rv

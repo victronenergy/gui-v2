@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.Velib
+import "/components/Utils.js" as Utils
 
 Item {
 	id: root
@@ -49,6 +50,7 @@ Item {
 					total += gridObjects.objectAt(i).power || 0
 				}
 				root.power = total
+				Utils.updateMaximumValue("grid.power", root.power)
 			}
 		}
 	}
