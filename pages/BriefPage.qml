@@ -171,6 +171,7 @@ Page {
 						{ gaugeType: 'battery', value: 0.0 }))
 				batteryValueBinding.target = gaugeData.model.get(0)
 				batteryCaptionBinding.target = batteryValueBinding.target
+				batteryIconBinding.target = batteryValueBinding.target
 			}
 		}
 
@@ -237,6 +238,12 @@ Page {
 			id: batteryCaptionBinding
 			property: "caption"
 			value: battery && battery.timeToGo > 0 ? Utils.formatAsHHMM(battery.timeToGo, true) : ""
+		}
+
+		Binding {
+			id: batteryIconBinding
+			property: "icon"
+			value: battery ? battery.icon : ""
 		}
 
 		Instantiator {

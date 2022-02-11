@@ -64,16 +64,18 @@
     "color.toastNotification.highlight.warning": "color.warning",
     "color.toastNotification.highlight.error": "color.critical",
 
+    "color.overviewPage.backgroundColor": "color.background.primary",
+    "color.overviewPage.connector.electron.outerColor": "#4CFFFFFF",
+    "color.overviewPage.connector.electron.innerColor": "#4CFFFFFF",
+    "color.overviewPage.connector.electron.centerColor": "#FFFFFF",
+
     "color.overviewPage.widget.background": "color.darkOk",
     "color.overviewPage.widget.border": "color.ok",
     "color.overviewPage.widget.sideGauge.background": "color.darkOk",
     "color.overviewPage.widget.sideGauge.highlight": "color.ok",
     "color.overviewPage.widget.solar.graph.bar": "color.ok",
-
-    "color.overviewPage.connector.electron.outerColor": "#4CFFFFFF",
-    "color.overviewPage.connector.electron.innerColor": "#4CFFFFFF",
-    "color.overviewPage.connector.electron.centerColor": "#FFFFFF",
-    "color.overviewPage.backgroundColor": "color.background.primary",
+    "color.overviewPage.widget.battery.background": "#31649c",
+    "color.overviewPage.widget.battery.animatedBar": "#7394bd",
 
     "color.briefPage.sidePanel.loadGraph.dotColor": "#504F4B",
     "color.briefPage.sidePanel.loadGraph.backgroundColor": "black",
