@@ -316,6 +316,8 @@ Page {
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.battery.width
 		overviewPageInteractive: root.interactive
+		value: battery ? battery.stateOfCharge : 0
+		dataModel: battery
 	}
 	WidgetConnector {
 		startWidget: batteryWidget

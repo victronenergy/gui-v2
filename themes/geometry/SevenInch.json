@@ -206,7 +206,8 @@
 
     "geometry.overviewPage.widget.radius": 8,
     "geometry.overviewPage.widget.border.width": 2,
-    "geometry.overviewPage.widget.content.leftMargin": 16,
+    "geometry.overviewPage.widget.content.verticalMargin": 4,
+    "geometry.overviewPage.widget.content.horizontalMargin": 16,
     "geometry.overviewPage.widget.title.height": 32,
     "geometry.overviewPage.widget.value.height": 40,
     "geometry.overviewPage.widget.value.xs.height": 32,
@@ -216,6 +217,12 @@
 
     "geometry.overviewPage.widget.input.width": 176,
     "geometry.overviewPage.widget.battery.width": 240,
+    "geometry.overviewPage.widget.battery.animatedBar.minimumWidth": 4,
+    "geometry.overviewPage.widget.battery.animatedBar.maximumWidth": 22,
+    "geometry.overviewPage.widget.battery.animatedBar.minimumWidth": 4,
+    "geometry.overviewPage.widget.battery.animatedBar.height": 4,
+    "geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing": 4,
+    "geometry.overviewPage.widget.battery.animatedBar.verticalSpacing": 4,
     "geometry.overviewPage.widget.inverter.width": 240,
     "geometry.overviewPage.widget.output.width": 176,
 

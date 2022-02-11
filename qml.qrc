@@ -127,6 +127,8 @@
         <file>images/sunny.svg</file>
         <file>images/settings.png</file>
         <file>images/battery.svg</file>
+        <file>images/battery_charging.svg</file>
+        <file>images/battery_discharging.svg</file>
         <file>images/blackWater.svg</file>
         <file>images/freshWater.svg</file>
         <file>images/tank.svg</file>
