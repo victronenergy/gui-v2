@@ -10,8 +10,8 @@ OverviewWidget {
 
 	property string phaseValueProperty
 
-	//% "Generator"
-	title.text: qsTrId("overview_widget_generator_title")
+	//% "DC Generator"
+	title.text: qsTrId("overview_widget_dcgenerator_title")
 	icon.source: "qrc:/images/generator.svg"
 
 	extraContent.children: [
@@ -23,8 +23,6 @@ OverviewWidget {
 			}
 
 			visible: root.size >= OverviewWidget.Size.L
-			model: root.dataModel
-			phaseValueProperty: root.phaseValueProperty
 		}
 	]
 }

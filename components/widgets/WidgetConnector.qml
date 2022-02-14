@@ -24,6 +24,7 @@ Item {
 	// Animates from start to end
 	property bool animated
 
+	property bool _animated: visible && animated
 	property real _animationProgress
 	property real _diagonalDistance: Math.sqrt(connectorPath.width * connectorPath.width
 		   + connectorPath.height * connectorPath.height
@@ -157,7 +158,7 @@ Item {
 				id: electronRepeater
 
 				// electron interval = distance between electrons (i.e. how often to spawn a new electron)
-				model: root.animated
+				model: root._animated
 					   ? Math.floor(root._diagonalDistance / Theme.geometry.overviewPage.connector.electron.interval)
 					   : null
 
@@ -221,7 +222,7 @@ Item {
 	}
 
 	SequentialAnimation {
-		running: root.animated
+		running: root._animated
 		loops: Animation.Infinite
 
 		NumberAnimation {

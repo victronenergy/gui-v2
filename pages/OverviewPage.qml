@@ -12,121 +12,111 @@ Page {
 	property bool interactive: PageManager.navBar && !PageManager.navBar.hidden
 
 	// TODO: integrate with real data model.
-	property var _dataModel: ({
-		"inputs": {
-			"count": 2,
-			"grid": {
-				"L1": 140,
-				"L2": 260,
-				"L3": 32,
-			},
-			"solar": {
-				"instantaneous": 2001,
-				"today": 603000,
+	property var _inputs: [
+//        gridWidget,
+//        shoreWidget,
+//        dcGeneratorWidget,
+		generatorWidget,
+//        alternatorWidget,
+//        windWidget,
+		solarWidget
+	]
+
+	// Preferred order for the input widgets on the left hand side
+	readonly property var _inputWidgetsOrder: [ gridWidget, shoreWidget, generatorWidget,
+		dcGeneratorWidget, alternatorWidget, windWidget, solarWidget ]
+
+	function _topAnchor(widget) {
+		if (_inputs.length == 1) {
+			return widget.parent.top
+		}
+		let widgetIndex = _inputWidgetsOrder.indexOf(widget)
+		if (widgetIndex < 0) {
+			console.warn("Error: unknown widget")
+			return undefined
+		}
+		if (widgetIndex == 0) {
+			return widget.parent.top
+		}
+		for (let i = widgetIndex-1; i >= 0; i--) {
+			if (_inputWidgetsOrder[i].visible) {
+				return _inputWidgetsOrder[i].bottom
 			}
 		}
-	})
-
-	// determine the layout we should use, based on the
-	// available data in the data model.
-	property var _layoutName: _determineLayoutName()
-	function _determineLayoutName() {
-		if (_dataModel.inputs.count === 0) {
-			return "zero"
-		} else if (_dataModel.inputs.count === 1) {
-			return "one"
-		} else if (_dataModel.inputs.count === 2) {
-			return "two"
-		} else if (_dataModel.inputs.count === 3) {
-			return "three"
-		} else if (_dataModel.inputs.count === 4) {
-			return "four"
-		} else {
-			return "segmented"
-		}
+		return widget.parent.top
 	}
 
-	function _isLastWidgetInTripleLayout(widgetType) {
-		// figure out if we're the last active input
-		var expectedOrder = ["grid", "shore", "generator", "alternator", "wind", "solar"]
-		var activeCount = 0
-		var isLast = false
-		expectedOrder.foreach(function(value) {
-			if (value == widgetType) {
-				isLast = activeCount === 2
-			}
-			if (_dataModel.inputs[value] != undefined && !isLast) {
-				activeCount++
-			}
-		})
-		return isLast
-	}
-
-	function _widgetSize(widgetType) {
-		if (_layoutName === "segmented"
-				|| !Object.keys(_dataModel.inputs).includes(widgetType)) {
+	function _widgetSize(widget) {
+		if (_inputs.indexOf(widget) < 0) {
 			return OverviewWidget.Size.Zero
 		}
-
-		var sizeStr = "Zero"
-		if (_layoutName === "three") {
-			sizeStr = _isLastWidgetInTripleLayout(widgetType)
-				? Theme.geometry.overviewPage.layout.three.last.size
-				: Theme.geometry.overviewPage.layout.three.size
-		} else {
-			sizeStr = Theme.geometry.overviewPage.layout[_layoutName].size
+		switch (_inputs.length) {
+		case 1:
+			return OverviewWidget.Size.XL
+		case 2:
+			return OverviewWidget.Size.L
+		case 3:
+			// If this widget has extraContent, prefer L size, unless there is already another
+			// widget in a L size.
+			if (widget.extraContent.children.length > 0) {
+				let widgetIndex = _inputWidgetsOrder.indexOf(widget)
+				if (widgetIndex < 0) {
+					console.warn("Error: unknown widget")
+					return OverviewWidget.Size.M
+				}
+				for (let i = 0; i < widgetIndex; ++i) {
+					if (_inputWidgetsOrder[i].size >= OverviewWidget.Size.L) {
+						return OverviewWidget.Size.M
+					}
+				}
+				return OverviewWidget.Size.L
+			}
+			return OverviewWidget.Size.M
+		case 4:
+			return OverviewWidget.Size.S
+		case 5:
+			return OverviewWidget.Size.XS
 		}
-
-		switch (sizeStr) {
-		case "XS": return OverviewWidget.Size.XS
-		case "S": return OverviewWidget.Size.S
-		case "M": return OverviewWidget.Size.M
-		case "L": return OverviewWidget.Size.L
-		case "XL": return OverviewWidget.Size.XL
-		default: return OverviewWidget.Size.Zero
-		}
+		return OverviewWidget.Size.L
 	}
 
-	function _widgetMargin(widgetType) {
-		if (_layoutName === "segmented"
-				|| !Object.keys(_dataModel.inputs).includes(widgetType)) {
+	function _widgetMargin(widget) {
+		if (_inputs.length == 0 || _inputs.indexOf(widget) == 0) {
 			return 0
 		}
-
-		if (_layoutName === "three") {
-			return _isLastWidgetInTripleLayout(widgetType)
-				? Theme.geometry.overviewPage.layout.three.last.topMargin
-				: Theme.geometry.overviewPage.layout.three.topMargin
-		} else {
-			return Theme.geometry.overviewPage.layout[_layoutName].topMargin
+		switch (_inputs.length) {
+		case 2:
+			return Theme.geometry.overviewPage.layout.two.topMargin
+		case 3:
+			return Theme.geometry.overviewPage.layout.three.topMargin
+		case 4:
+			return Theme.geometry.overviewPage.layout.four.topMargin
 		}
+		return 0
 	}
 
-	// the input widgets are dynamically populated from data model.
-	SegmentedWidget {
-		id: segmentedWidget
+	SegmentedWidgetBackground {
 		anchors {
 			top: parent.top
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-
-		visible: _dataModel.count >= 5
-		width: Theme.geometry.overviewPage.widget.input.width
-		overviewPageInteractive: root.interactive
+		visible: _inputs.length >= 5
+		segments: _inputs
 	}
 
 	GridWidget {
 		id: gridWidget
+
 		anchors {
-			top: parent.top
+			top: _topAnchor(gridWidget)
+			topMargin: _widgetMargin(gridWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-
-		visible: !segmentedWidget.visible && dataModel != undefined
 		width: Theme.geometry.overviewPage.widget.input.width
-		size: visible ? _widgetSize("grid") : OverviewWidget.Size.Zero
+		size: _widgetSize(gridWidget)
+
 		value: gridMeter ? gridMeter.power : 0
 		dataModel: gridMeter ? gridMeter.model : null
 		sideGaugeValue: value / Utils.maximumValue("grid.power")
@@ -138,23 +128,30 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: gridWidget.dataModel != undefined
-		straight: true
+		animated: gridMeter && gridMeter.power !== NaN
+		straight: gridWidget.size > OverviewWidget.Size.M
 	}
 
 	ShoreWidget {
 		id: shoreWidget
+
 		anchors {
-			top: gridWidget.visible ? gridWidget.bottom : parent.top
-			topMargin: !gridWidget.visible ? 0 : _widgetMargin("shore")
+			top: _topAnchor(shoreWidget)
+			topMargin: _widgetMargin(shoreWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-
-		visible: !segmentedWidget.visible && dataModel != undefined
 		width: Theme.geometry.overviewPage.widget.input.width
-		size: visible ? _widgetSize("shore") : OverviewWidget.Size.Zero
-		dataModel: _dataModel.inputs.shore
+		size: _widgetSize(shoreWidget)
+
+		 // TODO
+		value: 500
+		sideGaugeValue: 0.5
+		dataModel: ListModel {
+			ListElement { name: "L1"; power: 123 }
+			ListElement { name: "L2"; power: 456 }
+		}
+		phaseValueProperty: "power"
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
@@ -162,26 +159,30 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: shoreWidget.dataModel != undefined
+		animated: shoreWidget.dataModel != undefined    // TODO
 		straight: shoreWidget.size > OverviewWidget.Size.M
 	}
 
 	GeneratorWidget {
 		id: generatorWidget
+
 		anchors {
-			top: shoreWidget.visible ? shoreWidget.bottom
-			   : gridWidget.visible ? gridWidget.bottom
-			   : parent.top
-			topMargin: !shoreWidget.visible && !gridWidget.visible
-				? 0 : _widgetMargin("generator")
+			top: _topAnchor(generatorWidget)
+			topMargin: _widgetMargin(generatorWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-
-		visible: !segmentedWidget.visible && dataModel != undefined
 		width: Theme.geometry.overviewPage.widget.input.width
-		size: visible ? _widgetSize("generator") : OverviewWidget.Size.Zero
-		dataModel: _dataModel.inputs.generator
+		size: _widgetSize(generatorWidget)
+
+		// TODO
+		value: 500
+		dataModel: ListModel {
+			ListElement { name: "L1"; power: 123 }
+			ListElement { name: "L2"; power: 456 }
+		}
+		phaseValueProperty: "power"
+
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
@@ -189,26 +190,48 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: generatorWidget.dataModel != undefined
+		animated: generatorWidget.dataModel != undefined // TODO
+		straight: generatorWidget.size > OverviewWidget.Size.M
+	}
+
+	GeneratorWidget {
+		id: dcGeneratorWidget
+
+		anchors {
+			top: _topAnchor(dcGeneratorWidget)
+			topMargin: _widgetMargin(dcGeneratorWidget)
+			left: parent.left
+			leftMargin: Theme.geometry.page.grid.horizontalMargin
+		}
+		width: Theme.geometry.overviewPage.widget.input.width
+		size: _widgetSize(dcGeneratorWidget)
+
+		// TODO
+		value: 500
+		overviewPageInteractive: root.interactive
+	}
+	WidgetConnector {
+		startWidget: dcGeneratorWidget
+		startLocation: WidgetConnector.Location.Right
+		endWidget: batteryWidget
+		endLocation: WidgetConnector.Location.Left
+		animated: dcGeneratorWidget.dataModel != undefined // TODO
+		straight: dcGeneratorWidget.size > OverviewWidget.Size.M
 	}
 
 	AlternatorWidget {
 		id: alternatorWidget
+
 		anchors {
-			top: generatorWidget.visible ? generatorWidget.bottom
-			   : shoreWidget.visible ? shoreWidget.bottom
-			   : gridWidget.visible ? gridWidget.bottom
-			   : parent.top
-			topMargin: !generatorWidget.visible && !shoreWidget.visible && !gridWidget.visible
-				? 0 : _widgetMargin("alternator")
+			top: _topAnchor(alternatorWidget)
+			topMargin: _widgetMargin(alternatorWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-
-		visible: !segmentedWidget.visible && dataModel != undefined
 		width: Theme.geometry.overviewPage.widget.input.width
-		size: visible ? _widgetSize("alternator") : OverviewWidget.Size.Zero
-		dataModel: _dataModel.inputs.alternator
+		size: _widgetSize(alternatorWidget)
+
+		value: 500 // TODO
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
@@ -216,27 +239,22 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: alternatorWidget.dataModel != undefined
+		animated: alternatorWidget.dataModel != undefined // TODO
 	}
 
 	WindWidget {
 		id: windWidget
+
 		anchors {
-			top: alternatorWidget.visible ? alternatorWidget.bottom
-			   : generatorWidget.visible ? generatorWidget.bottom
-			   : shoreWidget.visible ? shoreWidget.bottom
-			   : gridWidget.visible ? gridWidget.bottom
-			   : parent.top
-			topMargin: !alternatorWidget.visible && !generatorWidget.visible && !shoreWidget.visible && !gridWidget.visible
-				? 0 : _widgetMargin("wind")
+			top: _topAnchor(windWidget)
+			topMargin: _widgetMargin(windWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-
-		visible: !segmentedWidget.visible && dataModel != undefined
 		width: Theme.geometry.overviewPage.widget.input.width
-		size: visible ? _widgetSize("wind") : OverviewWidget.Size.Zero
-		dataModel: _dataModel.inputs.wind
+		size: _widgetSize(windWidget)
+
+		value: 500 // TODO
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
@@ -244,28 +262,22 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: windWidget.dataModel != undefined
+		animated: windWidget.dataModel != undefined // TODO
 	}
 
 	SolarYieldWidget {
 		id: solarWidget
+
 		anchors {
-			top: windWidget.visible ? windWidget.bottom
-			   : alternatorWidget.visible ? alternatorWidget.bottom
-			   : generatorWidget.visible ? generatorWidget.bottom
-			   : shoreWidget.visible ? shoreWidget.bottom
-			   : gridWidget.visible ? gridWidget.bottom
-			   : parent.top
-			topMargin: !windWidget.visible && !alternatorWidget.visible && !generatorWidget.visible && !shoreWidget.visible && !gridWidget.visible
-				? 0 : _widgetMargin("solar")
+			top: _topAnchor(solarWidget)
+			topMargin: _widgetMargin(solarWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-
-		visible: !segmentedWidget.visible && dataModel != undefined
 		width: Theme.geometry.overviewPage.widget.input.width
-		size: visible ? _widgetSize("solar") : OverviewWidget.Size.Zero
-		value: solarChargers ? solarChargers.power : 0
+		size: _widgetSize(solarWidget)
+
+		value: solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
 		dataModel: solarChargers
 		overviewPageInteractive: root.interactive
 	}
@@ -274,14 +286,14 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: solarWidget.dataModel != undefined
+		animated: solarChargers && solarChargers.power !== NaN
 	}
 	WidgetConnector {
 		startWidget: solarWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: solarWidget.dataModel != undefined
+		animated: solarChargers && solarChargers.power !== NaN
 	}
 
 	// the two central widgets are always present

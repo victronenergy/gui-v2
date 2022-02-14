@@ -8,9 +8,11 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	property string phaseValueProperty
+
 	//% "Shore"
 	title.text: qsTrId("overview_widget_shore_title")
-	icon.source: "qrc:/images/solaryield.svg"
+	icon.source: "qrc:/images/shore.svg"
 
 	sideGaugeVisible: true
 
@@ -23,10 +25,8 @@ OverviewWidget {
 			}
 
 			visible: root.size >= OverviewWidget.Size.L
-
-//            l1Value: root.dataModel != undefined ? root.dataModel.L1 : "--"
-//            l2Value: root.dataModel != undefined ? root.dataModel.L2 : "--"
-//            l3Value: root.dataModel != undefined ? root.dataModel.L3 : "--"
+			model: root.dataModel
+			phaseValueProperty: root.phaseValueProperty
 		}
 	]
 }

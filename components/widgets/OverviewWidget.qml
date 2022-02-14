@@ -35,6 +35,8 @@ Rectangle {
 
 	property var dataModel
 
+	property bool _isSegment: size === OverviewWidget.Size.XS
+
 	signal clicked()
 
 	height: size === OverviewWidget.Size.XL ? overviewPageInteractive
@@ -53,10 +55,11 @@ Rectangle {
 			? Theme.geometry.overviewPage.widget.interactive.xs.height
 			: Theme.geometry.overviewPage.widget.noninteractive.xs.height
 
-	radius: Theme.geometry.overviewPage.widget.radius
-	border.width: interactive ? Theme.geometry.overviewPage.widget.border.width : 0
+	visible: size !== OverviewWidget.Size.Zero
+	radius: _isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
+	border.width: interactive && !_isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
 	border.color: Theme.color.overviewPage.widget.border
-	color: Theme.color.overviewPage.widget.background
+	color: _isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
 	Behavior on height { NumberAnimation { duration: Theme.animation.overviewPage.interactive.duration; easing.type: Easing.InOutQuad } }
 
@@ -139,6 +142,9 @@ Rectangle {
 			   ? Theme.geometry.overviewPage.widget.value.xs.height
 			   : Theme.geometry.overviewPage.widget.value.height)
 			: 0
+		fontSize: root.size === OverviewWidget.Size.XS
+				  ? Theme.font.size.l
+				  : Theme.font.size.xl
 	}
 
 	Item {
@@ -150,5 +156,6 @@ Rectangle {
 			top: valueDisplay.bottom
 			bottom: parent.bottom
 		}
+		visible: root.size >= OverviewWidget.Size.M
 	}
 }
