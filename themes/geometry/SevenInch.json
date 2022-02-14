@@ -246,16 +246,8 @@
     "geometry.overviewPage.connector.electron.velocity": 100,
     "geometry.overviewPage.connector.electron.pauseDuration": 500,
 
-    "geometry.overviewPage.layout.bottomMargin": 8,
-    "geometry.overviewPage.layout.one.size": "XL",
-    "geometry.overviewPage.layout.one.topMargin": 0,
-    "geometry.overviewPage.layout.two.size": "L",
     "geometry.overviewPage.layout.two.topMargin": 48,
-    "geometry.overviewPage.layout.three.size": "S",
     "geometry.overviewPage.layout.three.topMargin": 8,
-    "geometry.overviewPage.layout.three.last.size": "L",
-    "geometry.overviewPage.layout.three.last.topMargin": 8,
-    "geometry.overviewPage.layout.four.size": "S",
     "geometry.overviewPage.layout.four.topMargin": 8,
 
     "geometry.overviewPage.widget.solar.graph.bar.width": 8,

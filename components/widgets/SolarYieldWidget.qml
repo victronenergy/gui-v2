@@ -20,6 +20,7 @@ OverviewWidget {
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry.overviewPage.widget.solar.graph.margins
 			}
+			visible: root.size >= OverviewWidget.Size.L
 			width: root.width - Theme.geometry.overviewPage.widget.solar.graph.margins*2
 			height: Theme.geometry.overviewPage.widget.solar.graph.height
 			history: root.dataModel.yieldHistory

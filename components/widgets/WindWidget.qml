@@ -10,5 +10,5 @@ OverviewWidget {
 
 	//% "Wind"
 	title.text: qsTrId("overview_widget_wind_title")
-	icon.source: "qrc:/images/solaryield.svg"
+	icon.source: "qrc:/images/wind.svg"
 }
