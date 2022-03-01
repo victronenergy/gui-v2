@@ -29,13 +29,13 @@ Item {
 	property int state: veSystemState.value || System.State.Off
 
 	property QtObject loads: QtObject {
-		readonly property real power: ac.consumptionPower + dc.power
+		readonly property real power: ac.consumption.power + dc.power
 		onPowerChanged: Utils.updateMaximumValue("system.loads.power", power)
 	}
 
 	property QtObject generator: QtObject {
 		// TODO add DC generator input data.
-		readonly property real power: ac.gensetPower
+		readonly property real power: ac.genset.power
 		onPowerChanged: Utils.updateMaximumValue("system ? system.generator.power : 0", power)
 	}
 

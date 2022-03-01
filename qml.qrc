@@ -11,7 +11,7 @@
         <file>components/controls/Switch.qml</file>
         <file>components/widgets/OverviewWidget.qml</file>
         <file>components/widgets/AlternatorWidget.qml</file>
-        <file>components/widgets/GeneratorWidget.qml</file>
+        <file>components/widgets/AcGeneratorWidget.qml</file>
         <file>components/widgets/DcGeneratorWidget.qml</file>
         <file>components/widgets/GridWidget.qml</file>
         <file>components/widgets/ShoreWidget.qml</file>
@@ -67,9 +67,10 @@
         <file>components/ValueQuantityDisplay.qml</file>
         <file>components/VenusFont.qml</file>
         <file>components/WeatherDetails.qml</file>
+        <file>data/AcInputs.qml</file>
+        <file>data/AcInputServiceLoader.qml</file>
         <file>data/Battery.qml</file>
         <file>data/Generators.qml</file>
-        <file>data/GridMeter.qml</file>
         <file>data/Inverters.qml</file>
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
@@ -77,9 +78,9 @@
         <file>data/SystemAc.qml</file>
         <file>data/SystemDc.qml</file>
         <file>data/Tanks.qml</file>
+        <file>demo/AcInputs.qml</file>
         <file>demo/Battery.qml</file>
         <file>demo/Generators.qml</file>
-        <file>demo/GridMeter.qml</file>
         <file>demo/SolarChargers.qml</file>
         <file>demo/System.qml</file>
         <file>demo/SystemAc.qml</file>

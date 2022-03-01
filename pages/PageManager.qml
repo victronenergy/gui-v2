@@ -29,4 +29,5 @@ QtObject {
 	property bool mainPageActive: true
 	property var navBar
 	property var statusBar
+	property bool navBarAnimating
 }

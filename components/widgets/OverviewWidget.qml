@@ -61,7 +61,10 @@ Rectangle {
 	border.color: Theme.color.overviewPage.widget.border
 	color: _isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
-	Behavior on height { NumberAnimation { duration: Theme.animation.overviewPage.interactive.duration; easing.type: Easing.InOutQuad } }
+	Behavior on height {
+		enabled: PageManager.navBarAnimating
+		NumberAnimation { duration: Theme.animation.overviewPage.interactive.duration; easing.type: Easing.InOutQuad }
+	}
 
 	MouseArea {
 		id: mouseArea

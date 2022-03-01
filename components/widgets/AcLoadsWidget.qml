@@ -8,7 +8,8 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
-	property string phaseValueProperty
+	property var phaseModel
+	property string phaseModelProperty
 
 	//% "AC Loads"
 	title.text: qsTrId("overview_widget_acloads_title")
@@ -23,9 +24,9 @@ OverviewWidget {
 				rightMargin: Theme.geometry.overviewPage.widget.sideGauge.margins
 			}
 
-			visible: root.size >= OverviewWidget.Size.L
-			model: root.dataModel
-			phaseValueProperty: root.phaseValueProperty
+			visible: model != null && root.size >= OverviewWidget.Size.L
+			model: root.phaseModel && root.phaseModel.count > 1 ? root.phaseModel : null
+			phaseModelProperty: root.phaseModelProperty
 		}
 	]
 }

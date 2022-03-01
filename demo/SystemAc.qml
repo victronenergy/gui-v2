@@ -9,26 +9,41 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	readonly property int _phaseCount: 1 + Math.floor(Math.random() * 3)
+	property QtObject genset: QtObject {
+		property real power
 
-	property ListModel model: ListModel {
-		Component.onCompleted: {
-			root._populateModel()
+		property ListModel phases: ListModel {
+			Component.onCompleted: root._populateModel(genset.phases)
 		}
 	}
 
-	property real gensetPower
-	property real consumptionPower
+	property QtObject consumption: ListModel {
+		property real power
 
-	function _populateModel() {
+		property ListModel phases: ListModel {
+			Component.onCompleted: root._populateModel(consumption.phases)
+		}
+	}
+
+	readonly property int _phaseCount: 1 + Math.floor(Math.random() * 3)
+
+	function _populateModel(model) {
 		model.clear()
-		for (let i = 0; i < 3; ++i) {
+		for (let i = 0; i < _phaseCount; ++i) {
 			model.append({
 				name: "L" + (i + 1),
-				gensetPower: NaN,
-				consumptionPower: NaN,
+				power: NaN
 			})
 		}
+	}
+
+	function _updateTotal(obj) {
+		let totalPower = 0
+		for (let i = 0; i < obj.phases.count; ++i) {
+			let data = obj.phases.get(i)
+			totalPower += data.power || 0
+		}
+		obj.power = totalPower
 	}
 
 	Timer {
@@ -38,26 +53,18 @@ Item {
 		triggeredOnStart: true
 
 		onTriggered: {
-			// For consumption, add some wild fluctuations that can be seen in the Brief side panel graph
-			let gensetPower = 1800 + Math.floor(Math.random() * 20)
-			let consumptionPower = Math.floor(Math.random() * 800)
-			let randomIndex = Math.floor(Math.random() * (root._phaseCount-1))
-
-			root.model.set(randomIndex, {
-				gensetPower: gensetPower,
-				consumptionPower: consumptionPower,
+			let randomIndex = Math.floor(Math.random() * root._phaseCount)
+			genset.phases.set(randomIndex, {
+				power: 1800 + Math.floor(Math.random() * 20)
 			})
 
-			let totalGensetPower = 0
-			let totalConsumptionPower = 0
+			// For consumption, add some wild fluctuations that can be seen in the Brief side panel graph
+			consumption.phases.set(randomIndex, {
+				power: Math.floor(Math.random() * 800),
+			})
 
-			for (let i = 0; i < root.model.count; ++i) {
-				let data = root.model.get(i)
-				totalGensetPower += data.gensetPower || 0
-				totalConsumptionPower += data.consumptionPower || 0
-			}
-			root.gensetPower = totalGensetPower
-			root.consumptionPower = totalConsumptionPower
+			root._updateTotal(genset)
+			root._updateTotal(consumption)
 		}
 	}
 }

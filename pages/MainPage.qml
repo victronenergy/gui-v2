@@ -119,6 +119,12 @@ Page {
 			}
 		}
 
+		Binding {
+			target: PageManager
+			property: "navBarAnimating"
+			value: animateNavBarIn.running || animateNavBarOut.running
+		}
+
 		SequentialAnimation {
 			id: animateNavBarIn
 			NumberAnimation {

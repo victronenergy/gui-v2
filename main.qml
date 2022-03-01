@@ -14,10 +14,10 @@ import "demo" as Demo
 Window {
 	id: root
 
+	property Item acInputs: dataLoader.item.acInputs
 	property Item battery: dataLoader.item.battery
 	property Item tanks: dataLoader.item.tanks
 	property Item generators: dataLoader.item.generators
-	property Item gridMeter: dataLoader.item.gridMeter
 	property Item solarChargers: dataLoader.item.solarChargers
 	property Item system: dataLoader.item.system
 
@@ -83,10 +83,10 @@ Window {
 
 		active: dbusConnected
 		sourceComponent: Item {
+			property AcInputs acInputs: AcInputs {}
 			property Battery battery: Battery {}
 			property Tanks tanks: Tanks {}
 			property Generators generators: Generators {}
-			property GridMeter gridMeter: GridMeter {}
 			property Inverters inverters: Inverters {}
 			property Relays relays: Relays {}
 			property SolarChargers solarChargers: SolarChargers {}
@@ -113,10 +113,10 @@ Window {
 		active: !dbusConnected
 		sourceComponent: Item {
 			// TODO make demo versions
+			property Demo.AcInputs acInputs: Demo.AcInputs {}
 			property Demo.Battery battery: Demo.Battery {}
 			property Demo.Tanks tanks: Demo.Tanks {}
 			property Demo.Generators generators: Demo.Generators {}
-			property Demo.GridMeter gridMeter: Demo.GridMeter {}
 //            property Inverters inverters: Inverters {}
 //            property Relays relays: Relays {}
 

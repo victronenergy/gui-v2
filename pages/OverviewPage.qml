@@ -11,26 +11,65 @@ Page {
 
 	property bool interactive: PageManager.navBar && !PageManager.navBar.hidden
 
-	// TODO: integrate with real data model.
-	property var _inputs: [
-//        gridWidget,
-//        shoreWidget,
-//        dcGeneratorWidget,
-		generatorWidget,
-//        alternatorWidget,
-//        windWidget,
-		solarWidget
-	]
+	property var _leftWidgets: []
 
 	// Preferred order for the input widgets on the left hand side
-	readonly property var _inputWidgetsOrder: [ gridWidget, shoreWidget, generatorWidget,
+	readonly property var _leftWidgetOrder: [ gridWidget, shoreWidget, acGeneratorWidget,
 		dcGeneratorWidget, alternatorWidget, windWidget, solarWidget ]
 
-	function _topAnchor(widget) {
-		if (_inputs.length == 1) {
+	// Use a delayed binding to avoid repopulating the model unnecessarily
+	readonly property bool _shouldResetLeftWidgets: (acInputs && acInputs.model.count)
+			|| (solarChargers && solarChargers.model.count)
+	on_ShouldResetLeftWidgetsChanged: Qt.callLater(_resetLeftWidgets)
+
+	function _resetLeftWidgets() {
+		if (!acInputs) {
+			_leftWidgets = []
+			return
+		}
+
+		let widgetCandidates = []
+		for (let i = 0; i < acInputs.model.count; ++i) {
+			let input = acInputs.model.get(i).input
+			let widget = null
+			switch (input.source) {
+			case AcInputs.InputType.Grid:
+				widget = gridWidget
+				break
+			case AcInputs.InputType.Generator:
+				widget = acGeneratorWidget
+				break
+			case AcInputs.InputType.Shore:
+				widget = shoreWidget
+				break
+			}
+			widget.dataModel = input
+			widgetCandidates.splice(_leftWidgetInsertionIndex(widget, widgetCandidates), 0, widget)
+		}
+
+		// TODO add DC inputs (DC generator, alternator, wind) when dbus backend available
+
+		if (solarChargers && solarChargers.model.count > 0) {
+			widgetCandidates.splice(_leftWidgetInsertionIndex(solarWidget, widgetCandidates), 0, solarWidget)
+		}
+		_leftWidgets = widgetCandidates
+	}
+
+	function _leftWidgetInsertionIndex(widget, candidateArray) {
+		const orderedIndex = _leftWidgetOrder.indexOf(widget)
+		for (let i = 0; i < candidateArray.length; ++i) {
+			if (orderedIndex < _leftWidgetOrder.indexOf(candidateArray[i])) {
+				return i
+			}
+		}
+		return candidateArray.length
+	}
+
+	function _leftWidgetTopAnchor(widget) {
+		if (_leftWidgets.length == 1) {
 			return widget.parent.top
 		}
-		let widgetIndex = _inputWidgetsOrder.indexOf(widget)
+		let widgetIndex = _leftWidgetOrder.indexOf(widget)
 		if (widgetIndex < 0) {
 			console.warn("Error: unknown widget")
 			return undefined
@@ -39,18 +78,18 @@ Page {
 			return widget.parent.top
 		}
 		for (let i = widgetIndex-1; i >= 0; i--) {
-			if (_inputWidgetsOrder[i].visible) {
-				return _inputWidgetsOrder[i].bottom
+			if (_leftWidgetOrder[i].visible) {
+				return _leftWidgetOrder[i].bottom
 			}
 		}
 		return widget.parent.top
 	}
 
 	function _widgetSize(widget) {
-		if (_inputs.indexOf(widget) < 0) {
+		if (_leftWidgets.indexOf(widget) < 0) {
 			return OverviewWidget.Size.Zero
 		}
-		switch (_inputs.length) {
+		switch (_leftWidgets.length) {
 		case 1:
 			return OverviewWidget.Size.XL
 		case 2:
@@ -59,13 +98,13 @@ Page {
 			// If this widget has extraContent, prefer L size, unless there is already another
 			// widget in a L size.
 			if (widget.extraContent.children.length > 0) {
-				let widgetIndex = _inputWidgetsOrder.indexOf(widget)
+				let widgetIndex = _leftWidgetOrder.indexOf(widget)
 				if (widgetIndex < 0) {
 					console.warn("Error: unknown widget")
 					return OverviewWidget.Size.M
 				}
 				for (let i = 0; i < widgetIndex; ++i) {
-					if (_inputWidgetsOrder[i].size >= OverviewWidget.Size.L) {
+					if (_leftWidgetOrder[i].size >= OverviewWidget.Size.L) {
 						return OverviewWidget.Size.M
 					}
 				}
@@ -80,19 +119,16 @@ Page {
 		return OverviewWidget.Size.L
 	}
 
-	function _widgetMargin(widget) {
-		if (_inputs.length == 0 || _inputs.indexOf(widget) == 0) {
+	function _leftWidgetTopMargin(widget) {
+		if (_leftWidgets.length == 0 || _leftWidgets.indexOf(widget) == 0) {
 			return 0
 		}
-		switch (_inputs.length) {
-		case 2:
-			return Theme.geometry.overviewPage.layout.two.topMargin
-		case 3:
-			return Theme.geometry.overviewPage.layout.three.topMargin
-		case 4:
-			return Theme.geometry.overviewPage.layout.four.topMargin
+		let totalWidgetHeight = 0
+		for (let i = 0; i < _leftWidgets.length; ++i) {
+			totalWidgetHeight += _leftWidgets[i].height
 		}
-		return 0
+		let availableHeight = batteryWidget.y + batteryWidget.height
+		return (availableHeight - totalWidgetHeight) / (_leftWidgets.length - 1)
 	}
 
 	SegmentedWidgetBackground {
@@ -101,26 +137,26 @@ Page {
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-		visible: _inputs.length >= 5
-		segments: _inputs
+		visible: _leftWidgets.length >= Theme.geometry.overviewPage.layout.segmentedWidgetThreshold
+		segments: _leftWidgets
 	}
 
 	GridWidget {
 		id: gridWidget
 
 		anchors {
-			top: _topAnchor(gridWidget)
-			topMargin: _widgetMargin(gridWidget)
+			top: _leftWidgetTopAnchor(gridWidget)
+			topMargin: _leftWidgetTopMargin(gridWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(gridWidget)
 
-		value: gridMeter ? gridMeter.power : 0
-		dataModel: gridMeter ? gridMeter.model : null
+		value: dataModel ? dataModel.power : NaN
 		sideGaugeValue: value / Utils.maximumValue("grid.power")
-		phaseValueProperty: "power"
+		phaseModel: dataModel ? dataModel.phases : null
+		phaseModelProperty: "power"
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
@@ -128,7 +164,7 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: gridMeter && gridMeter.power !== NaN
+		animated: !!gridWidget.dataModel && gridWidget.dataModel.connected
 		straight: gridWidget.size > OverviewWidget.Size.M
 	}
 
@@ -136,22 +172,18 @@ Page {
 		id: shoreWidget
 
 		anchors {
-			top: _topAnchor(shoreWidget)
-			topMargin: _widgetMargin(shoreWidget)
+			top: _leftWidgetTopAnchor(shoreWidget)
+			topMargin: _leftWidgetTopMargin(shoreWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(shoreWidget)
 
-		 // TODO
-		value: 500
-		sideGaugeValue: 0.5
-		dataModel: ListModel {
-			ListElement { name: "L1"; power: 123 }
-			ListElement { name: "L2"; power: 456 }
-		}
-		phaseValueProperty: "power"
+		value: dataModel ? dataModel.power : NaN
+		sideGaugeValue: 0.5 // TODO when max available
+		phaseModel: dataModel ? dataModel.phases : null
+		phaseModelProperty: "power"
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
@@ -159,47 +191,41 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: shoreWidget.dataModel != undefined    // TODO
+		animated: !!shoreWidget.dataModel && shoreWidget.dataModel.connected
 		straight: shoreWidget.size > OverviewWidget.Size.M
 	}
 
-	GeneratorWidget {
-		id: generatorWidget
+	AcGeneratorWidget {
+		id: acGeneratorWidget
 
 		anchors {
-			top: _topAnchor(generatorWidget)
-			topMargin: _widgetMargin(generatorWidget)
+			top: _leftWidgetTopAnchor(acGeneratorWidget)
+			topMargin: _leftWidgetTopMargin(acGeneratorWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
-		size: _widgetSize(generatorWidget)
-
-		// TODO
-		value: 500
-		dataModel: ListModel {
-			ListElement { name: "L1"; power: 123 }
-			ListElement { name: "L2"; power: 456 }
-		}
-		phaseValueProperty: "power"
-
+		size: _widgetSize(acGeneratorWidget)
+		value: dataModel ? dataModel.power : NaN
+		phaseModel: dataModel ? dataModel.phases : null
+		phaseModelProperty: "power"
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
-		startWidget: generatorWidget
+		startWidget: acGeneratorWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: generatorWidget.dataModel != undefined // TODO
-		straight: generatorWidget.size > OverviewWidget.Size.M
+		animated: !!acGeneratorWidget.dataModel && acGeneratorWidget.dataModel.connected
+		straight: acGeneratorWidget.size > OverviewWidget.Size.M
 	}
 
-	GeneratorWidget {
+	DcGeneratorWidget {
 		id: dcGeneratorWidget
 
 		anchors {
-			top: _topAnchor(dcGeneratorWidget)
-			topMargin: _widgetMargin(dcGeneratorWidget)
+			top: _leftWidgetTopAnchor(dcGeneratorWidget)
+			topMargin: _leftWidgetTopMargin(dcGeneratorWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
@@ -223,8 +249,8 @@ Page {
 		id: alternatorWidget
 
 		anchors {
-			top: _topAnchor(alternatorWidget)
-			topMargin: _widgetMargin(alternatorWidget)
+			top: _leftWidgetTopAnchor(alternatorWidget)
+			topMargin: _leftWidgetTopMargin(alternatorWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
@@ -246,8 +272,8 @@ Page {
 		id: windWidget
 
 		anchors {
-			top: _topAnchor(windWidget)
-			topMargin: _widgetMargin(windWidget)
+			top: _leftWidgetTopAnchor(windWidget)
+			topMargin: _leftWidgetTopMargin(windWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
@@ -269,8 +295,8 @@ Page {
 		id: solarWidget
 
 		anchors {
-			top: _topAnchor(solarWidget)
-			topMargin: _widgetMargin(solarWidget)
+			top: _leftWidgetTopAnchor(solarWidget)
+			topMargin: _leftWidgetTopMargin(solarWidget)
 			left: parent.left
 			leftMargin: Theme.geometry.page.grid.horizontalMargin
 		}
@@ -327,7 +353,7 @@ Page {
 		id: batteryWidget
 		anchors {
 			top: inverterWidget.bottom
-			topMargin: Theme.geometry.overviewPage.layout.two.topMargin
+			topMargin: Theme.geometry.overviewPage.layout.topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
 		size: OverviewWidget.Size.L
@@ -355,16 +381,17 @@ Page {
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.output.width
 		overviewPageInteractive: root.interactive
-		value: system ? system.ac.consumptionPower : NaN
-		dataModel: system ? system.ac.model : null
-		phaseValueProperty: "consumptionPower"
+		dataModel: system ? system.ac.consumption : null
+		value: dataModel ? dataModel.power : NaN
+		phaseModel: dataModel ? dataModel.phases : null
+		phaseModelProperty: "power"
 	}
 
 	DcLoadsWidget {
 		id: dcLoadsWidget
 		anchors {
 			top: acLoadsWidget.bottom
-			topMargin: Theme.geometry.overviewPage.layout.two.topMargin
+			topMargin: Theme.geometry.overviewPage.layout.topMargin
 			right: parent.right
 			rightMargin: Theme.geometry.page.grid.horizontalMargin
 		}

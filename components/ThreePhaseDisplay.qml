@@ -11,7 +11,7 @@ Column {
 	property var physicalQuantity: Units.Power // eg. Units.Voltage, Units.Current, Units.Power
 	property int precision: 3 // this will display 1.23 kW, given a value of 1234 W
 	property alias model: phaseRepeater.model
-	property string phaseValueProperty
+	property string phaseModelProperty: "power"
 
 	Repeater {
 		id: phaseRepeater
@@ -29,7 +29,7 @@ Column {
 
 			ValueQuantityDisplay {
 				anchors.right: parent.right
-				value: model[root.phaseValueProperty]
+				value: model[root.phaseModelProperty]
 				physicalQuantity: root.physicalQuantity
 				precision: root.precision
 				valueColor: Theme.color.font.secondary
