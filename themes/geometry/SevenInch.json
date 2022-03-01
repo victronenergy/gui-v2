@@ -229,14 +229,14 @@
 
     "geometry.overviewPage.widget.interactive.xl.height": 352,
     "geometry.overviewPage.widget.interactive.l.height": 152,
-    "geometry.overviewPage.widget.interactive.m.height": 100,
-    "geometry.overviewPage.widget.interactive.s.height": 80,
-    "geometry.overviewPage.widget.interactive.xs.height": 64,
+    "geometry.overviewPage.widget.interactive.m.height": 92,
+    "geometry.overviewPage.widget.interactive.s.height": 82,
+    "geometry.overviewPage.widget.interactive.xs.height": 70,
     "geometry.overviewPage.widget.noninteractive.xl.height": 400,
     "geometry.overviewPage.widget.noninteractive.l.height": 176,
-    "geometry.overviewPage.widget.noninteractive.m.height": 112,
-    "geometry.overviewPage.widget.noninteractive.s.height": 88,
-    "geometry.overviewPage.widget.noninteractive.xs.height": 64,
+    "geometry.overviewPage.widget.noninteractive.m.height": 104,
+    "geometry.overviewPage.widget.noninteractive.s.height": 94,
+    "geometry.overviewPage.widget.noninteractive.xs.height": 80,
 
     "geometry.overviewPage.connector.nub.width": 12,
     "geometry.overviewPage.connector.line.width": 2,
@@ -246,9 +246,8 @@
     "geometry.overviewPage.connector.electron.velocity": 100,
     "geometry.overviewPage.connector.electron.pauseDuration": 500,
 
-    "geometry.overviewPage.layout.two.topMargin": 48,
-    "geometry.overviewPage.layout.three.topMargin": 8,
-    "geometry.overviewPage.layout.four.topMargin": 8,
+    "geometry.overviewPage.layout.topMargin": 48,
+    "geometry.overviewPage.layout.segmentedWidgetThreshold": 5,
 
     "geometry.overviewPage.widget.solar.graph.bar.width": 8,
     "geometry.overviewPage.widget.solar.graph.bar.radius": 8,

@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
 		});
 
 	/* data sources */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/AcInputs.qml")),
+		"Victron.VenusOS", 2, 0, "AcInputs");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Generators.qml")),
 		"Victron.VenusOS", 2, 0, "Generators");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/System.qml")),
@@ -154,8 +156,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SegmentedWidgetBackground");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AlternatorWidget.qml")),
 		"Victron.VenusOS", 2, 0, "AlternatorWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/GeneratorWidget.qml")),
-		"Victron.VenusOS", 2, 0, "GeneratorWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AcGeneratorWidget.qml")),
+		"Victron.VenusOS", 2, 0, "AcGeneratorWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/DcGeneratorWidget.qml")),
 		"Victron.VenusOS", 2, 0, "DcGeneratorWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/GridWidget.qml")),
