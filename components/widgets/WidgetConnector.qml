@@ -33,6 +33,9 @@ Item {
 
 	visible: startWidget.visible && endWidget.visible
 
+	// Animation doesn't appear to update duration when distance changes, so force it here.
+	on_DiagonalDistanceChanged: electronAnim.restart()
+
 	WidgetConnectorPath {
 		id: connectorPath
 
@@ -222,6 +225,8 @@ Item {
 	}
 
 	SequentialAnimation {
+		id: electronAnim
+
 		running: root._animated
 		loops: Animation.Infinite
 
@@ -229,10 +234,9 @@ Item {
 			target: root
 			property: "_animationProgress"
 			from: 0; to: 1
-			duration: {
-				// animate at a constant rate of pixels/sec, based on the diagonal length of the shape
-				return _diagonalDistance / Theme.geometry.overviewPage.connector.electron.velocity * 1000
-			}
+
+			// animate at a constant rate of pixels/sec, based on the diagonal length of the shape
+			duration: _diagonalDistance / Theme.geometry.overviewPage.connector.electron.velocity * 1000
 		}
 	}
 }
