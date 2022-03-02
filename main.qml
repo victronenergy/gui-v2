@@ -15,6 +15,7 @@ Window {
 	id: root
 
 	property Item acInputs: dataLoader.item.acInputs
+	property Item dcInputs: dataLoader.item.dcInputs
 	property Item battery: dataLoader.item.battery
 	property Item tanks: dataLoader.item.tanks
 	property Item generators: dataLoader.item.generators
@@ -84,6 +85,7 @@ Window {
 		active: dbusConnected
 		sourceComponent: Item {
 			property AcInputs acInputs: AcInputs {}
+			property DcInputs dcInputs: DcInputs {}
 			property Battery battery: Battery {}
 			property Tanks tanks: Tanks {}
 			property Generators generators: Generators {}
@@ -114,6 +116,7 @@ Window {
 		sourceComponent: Item {
 			// TODO make demo versions
 			property Demo.AcInputs acInputs: Demo.AcInputs {}
+			property Demo.DcInputs dcInputs: Demo.DcInputs {}
 			property Demo.Battery battery: Demo.Battery {}
 			property Demo.Tanks tanks: Demo.Tanks {}
 			property Demo.Generators generators: Demo.Generators {}
