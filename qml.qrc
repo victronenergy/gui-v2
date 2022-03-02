@@ -69,6 +69,7 @@
         <file>components/WeatherDetails.qml</file>
         <file>data/AcInputs.qml</file>
         <file>data/AcInputServiceLoader.qml</file>
+        <file>data/DcInputs.qml</file>
         <file>data/Battery.qml</file>
         <file>data/Generators.qml</file>
         <file>data/Inverters.qml</file>
@@ -79,6 +80,7 @@
         <file>data/SystemDc.qml</file>
         <file>data/Tanks.qml</file>
         <file>demo/AcInputs.qml</file>
+        <file>demo/DcInputs.qml</file>
         <file>demo/Battery.qml</file>
         <file>demo/Generators.qml</file>
         <file>demo/SolarChargers.qml</file>

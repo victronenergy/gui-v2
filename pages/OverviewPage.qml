@@ -19,6 +19,7 @@ Page {
 
 	// Use a delayed binding to avoid repopulating the model unnecessarily
 	readonly property bool _shouldResetLeftWidgets: (acInputs && acInputs.model.count)
+			|| (dcInputs && dcInputs.model.count)
 			|| (solarChargers && solarChargers.model.count)
 	on_ShouldResetLeftWidgetsChanged: Qt.callLater(_resetLeftWidgets)
 
@@ -29,30 +30,50 @@ Page {
 		}
 
 		let widgetCandidates = []
-		for (let i = 0; i < acInputs.model.count; ++i) {
-			let input = acInputs.model.get(i).input
-			let widget = null
-			switch (input.source) {
-			case AcInputs.InputType.Grid:
-				widget = gridWidget
-				break
-			case AcInputs.InputType.Generator:
-				widget = acGeneratorWidget
-				break
-			case AcInputs.InputType.Shore:
-				widget = shoreWidget
-				break
-			}
-			widget.dataModel = input
-			widgetCandidates.splice(_leftWidgetInsertionIndex(widget, widgetCandidates), 0, widget)
-		}
-
-		// TODO add DC inputs (DC generator, alternator, wind) when dbus backend available
+		_addModelWidgets(acInputs.model, widgetCandidates)
+		_addModelWidgets(dcInputs.model, widgetCandidates)
 
 		if (solarChargers && solarChargers.model.count > 0) {
 			widgetCandidates.splice(_leftWidgetInsertionIndex(solarWidget, widgetCandidates), 0, solarWidget)
 		}
 		_leftWidgets = widgetCandidates
+	}
+
+	function _addModelWidgets(inputModel, widgetCandidates) {
+		for (let i = 0; i < inputModel.count; ++i) {
+			let input = inputModel.get(i).input
+			let widget = null
+			if (inputModel === acInputs.model)  {
+				switch (input.source) {
+				case AcInputs.InputType.Grid:
+					widget = gridWidget
+					break
+				case AcInputs.InputType.Generator:
+					widget = acGeneratorWidget
+					break
+				case AcInputs.InputType.Shore:
+					widget = shoreWidget
+					break
+				}
+			} else {
+				switch (input.source) {
+				case DcInputs.InputType.Alternator:
+					widget = alternatorWidget
+					break
+				case DcInputs.InputType.DcGenerator:
+					widget = dcGeneratorWidget
+					break
+				case DcInputs.InputType.Wind:
+					widget = windWidget
+					break
+				default:
+					console.warn("Unknown AC/DC input type:", input.source, "for model:", inputModel)
+					continue
+				}
+			}
+			widget.dataModel = input
+			widgetCandidates.splice(_leftWidgetInsertionIndex(widget, widgetCandidates), 0, widget)
+		}
 	}
 
 	function _leftWidgetInsertionIndex(widget, candidateArray) {
@@ -152,12 +173,13 @@ Page {
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(gridWidget)
+		overviewPageInteractive: root.interactive
 
 		value: dataModel ? dataModel.power : NaN
+		physicalQuantity: Units.Power
 		sideGaugeValue: value / Utils.maximumValue("grid.power")
 		phaseModel: dataModel ? dataModel.phases : null
 		phaseModelProperty: "power"
-		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
 		startWidget: gridWidget
@@ -179,12 +201,13 @@ Page {
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(shoreWidget)
+		overviewPageInteractive: root.interactive
 
 		value: dataModel ? dataModel.power : NaN
+		physicalQuantity: Units.Power
 		sideGaugeValue: 0.5 // TODO when max available
 		phaseModel: dataModel ? dataModel.phases : null
 		phaseModelProperty: "power"
-		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
 		startWidget: shoreWidget
@@ -206,10 +229,12 @@ Page {
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(acGeneratorWidget)
+		overviewPageInteractive: root.interactive
+
 		value: dataModel ? dataModel.power : NaN
+		physicalQuantity: Units.Power
 		phaseModel: dataModel ? dataModel.phases : null
 		phaseModelProperty: "power"
-		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
 		startWidget: acGeneratorWidget
@@ -231,17 +256,19 @@ Page {
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(dcGeneratorWidget)
-
-		// TODO
-		value: 500
 		overviewPageInteractive: root.interactive
+
+		value: dataModel ? dataModel.current : NaN
+		physicalQuantity: Units.Current
 	}
 	WidgetConnector {
 		startWidget: dcGeneratorWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: dcGeneratorWidget.dataModel != undefined // TODO
+		animated: !!dcGeneratorWidget.dataModel
+				  && dcGeneratorWidget.dataModel.current !== NaN
+				  && dcGeneratorWidget.dataModel.current > 0
 		straight: dcGeneratorWidget.size > OverviewWidget.Size.M
 	}
 
@@ -256,16 +283,19 @@ Page {
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(alternatorWidget)
-
-		value: 500 // TODO
 		overviewPageInteractive: root.interactive
+
+		value: dataModel ? dataModel.current : NaN
+		physicalQuantity: Units.Current
 	}
 	WidgetConnector {
 		startWidget: alternatorWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: alternatorWidget.dataModel != undefined // TODO
+		animated: !!alternatorWidget.dataModel
+				  && alternatorWidget.dataModel.current !== NaN
+				  && alternatorWidget.dataModel.current > 0
 	}
 
 	WindWidget {
@@ -279,16 +309,19 @@ Page {
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(windWidget)
-
-		value: 500 // TODO
 		overviewPageInteractive: root.interactive
+
+		value: dataModel ? dataModel.current : NaN
+		physicalQuantity: Units.Current
 	}
 	WidgetConnector {
 		startWidget: windWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: windWidget.dataModel != undefined // TODO
+		animated: !!windWidget.dataModel
+				  && windWidget.dataModel.current !== NaN
+				  && windWidget.dataModel.current > 0
 	}
 
 	SolarYieldWidget {
