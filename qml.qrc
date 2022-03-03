@@ -9,6 +9,7 @@
         <file>components/controls/Slider.qml</file>
         <file>components/controls/SpinBox.qml</file>
         <file>components/controls/Switch.qml</file>
+        <file>components/widgets/AcInputWidget.qml</file>
         <file>components/widgets/OverviewWidget.qml</file>
         <file>components/widgets/AlternatorWidget.qml</file>
         <file>components/widgets/AcGeneratorWidget.qml</file>
@@ -79,6 +80,7 @@
         <file>data/SystemAc.qml</file>
         <file>data/SystemDc.qml</file>
         <file>data/Tanks.qml</file>
+        <file>demo/DemoConfig.qml</file>
         <file>demo/AcInputs.qml</file>
         <file>demo/DcInputs.qml</file>
         <file>demo/Battery.qml</file>

@@ -13,6 +13,7 @@ Item {
 	property real temperature: veBatteryTemp.value || 0
 	property real timeToGo: veTimeToGo.value || 0    // in seconds
 	property string icon: Utils.batteryIcon(root)
+	readonly property bool idle: current === 0 || power === 0
 
 	VeQuickItem {
 		id: veBatterySoC

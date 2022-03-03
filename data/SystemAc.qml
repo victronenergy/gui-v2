@@ -22,7 +22,8 @@ Item {
 	}
 
 	function _populate(model, count) {
-		if (model.count === 0) {
+		if (model.count !== count) {
+			model.clear()
 			for (let i = 0; i < count; ++i) {
 				let data = {
 					name: "L" + (i + 1),

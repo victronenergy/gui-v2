@@ -20,7 +20,6 @@ OverviewWidget {
 		Label {
 			id: statusLabel
 			anchors {
-				top: parent.top
 				left: parent.left
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
@@ -64,7 +63,7 @@ OverviewWidget {
 					//% "Equalize"
 					return qsTrId("overview_widget_state_equalisationcharging")
 				case System.State.PassThrough:
-					//: System state = 'Pass-through'
+					//: System state = 'Pass-thru'
 					//% "Pass-through"
 					return qsTrId("overview_widget_state_passthrough")
 				case System.State.Inverting:

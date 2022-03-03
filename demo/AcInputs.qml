@@ -10,11 +10,14 @@ import "../data" as DBusData
 Item {
 	id: root
 
-	property ListModel model: ListModel {
-		Component.onCompleted: _populateModel()
+	property ListModel model: ListModel {}
+
+	function addInput(inputType, phaseCount) {
+		let input = inputComponent.createObject(root, { "source": inputType, "phaseCount": phaseCount || 1 })
+		model.append({ input: input })
 	}
 
-	function _populateModel() {
+	function populate() {
 		// Add a random set of AC inputs.
 		model.clear()
 		let types = [
@@ -22,12 +25,11 @@ Item {
 				DBusData.AcInputs.InputType.Generator,
 				DBusData.AcInputs.InputType.Shore,
 			]
-		const modelCount = Math.floor(Math.random() * types.length) + 1  // from zero to all types
+		// Have 2 inputs at most, to leave some space for DC inputs in overview page
+		const modelCount = Math.floor(Math.random() * 2) + 1
 		for (let i = 0; i < modelCount; ++i) {
 			const index = Math.floor(Math.random() * types.length)
-			let input = inputComponent.createObject(root)
-			input.source = types[index]
-			model.append({ input: input })
+			addInput(types[index])
 			types.splice(index, 1)
 		}
 	}
@@ -50,13 +52,13 @@ Item {
 			property real voltage
 			property ListModel phases: ListModel {
 				Component.onCompleted: {
-					for (let i = 0; i < _phaseCount; ++i) {
+					for (let i = 0; i < phaseCount; ++i) {
 						append({ name: "L" + (i+1), frequency: NaN, current: NaN, power: NaN, voltage: NaN })
 					}
 				}
 			}
 
-			readonly property int _phaseCount: 1 + Math.floor(Math.random() * 2)
+			property int phaseCount: 1
 
 			property Timer _dummyConnected: Timer {
 				running: true
@@ -69,13 +71,14 @@ Item {
 				running: true
 				repeat: true
 				interval: 10000 + (Math.random() * 10000)
+				triggeredOnStart: true
 
 				onTriggered: {
 					let properties = ["frequency", "current", "power", "voltage"]
 					for (let propIndex = 0; propIndex < properties.length; ++propIndex) {
 						let propTotal = 0
 						const propName = properties[propIndex]
-						for (let i = 0; i < input._phaseCount; ++i) {
+						for (let i = 0; i < input.phaseCount; ++i) {
 							const value = Math.random() * 300
 							input.phases.setProperty(i, propName, value)
 							propTotal += value
@@ -83,16 +86,6 @@ Item {
 						input[propName] = propTotal
 					}
 				}
-			}
-		}
-	}
-
-	Connections {
-		target: PageManager.navBar || null
-
-		function onCurrentUrlChanged() {
-			if (PageManager.navBar.currentUrl !== "qrc:/pages/OverviewPage.qml") {
-				root._populateModel()
 			}
 		}
 	}

@@ -11,7 +11,9 @@ Rectangle {
 	property alias segments: separatorRepeater.model
 
 	width: Theme.geometry.overviewPage.widget.input.width
-	height: visible ? segments[segments.length-1].y + segments[segments.length-1].height : 0
+	height: segments && segments.length > 1 && visible
+			? segments[segments.length-1].y + segments[segments.length-1].height
+			: 0
 
 	radius: Theme.geometry.overviewPage.widget.radius
 	border.width: Theme.geometry.overviewPage.widget.border.width
@@ -20,6 +22,8 @@ Rectangle {
 
 	Repeater {
 		id: separatorRepeater
+
+		model: null
 
 		Rectangle {
 			visible: model.index > 0

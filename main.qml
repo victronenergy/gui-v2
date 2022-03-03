@@ -113,6 +113,8 @@ Window {
 		id: demoData
 
 		active: !dbusConnected
+		focus: active
+
 		sourceComponent: Item {
 			// TODO make demo versions
 			property Demo.AcInputs acInputs: Demo.AcInputs {}
@@ -125,6 +127,15 @@ Window {
 
 			property Demo.SolarChargers solarChargers: Demo.SolarChargers {}
 			property Demo.System system: Demo.System {}
+
+			Demo.DemoConfig {
+				width: root.width
+				height: root.height
+				focus: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
+
+				Keys.onLeftPressed: prevOverviewLayout()
+				Keys.onRightPressed: nextOverviewLayout()
+			}
 		}
 	}
 }

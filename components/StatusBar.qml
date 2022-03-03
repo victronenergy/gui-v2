@@ -35,6 +35,7 @@ Item {
 		icon.height: 28
 		onClicked: root.controlsActive = !root.controlsActive
 
+		enabled: controlsVisible
 		opacity: controlsVisible ? 1.0 : 0.0
 		Behavior on opacity { OpacityAnimator { duration: Theme.animation.statusBar.sidePanelButton.fade.duration } }
 	}

@@ -13,7 +13,7 @@ Item {
 		property real power
 
 		property ListModel phases: ListModel {
-			Component.onCompleted: root._populateModel(genset.phases)
+			Component.onCompleted: root._populate(genset.phases)
 		}
 	}
 
@@ -21,13 +21,13 @@ Item {
 		property real power
 
 		property ListModel phases: ListModel {
-			Component.onCompleted: root._populateModel(consumption.phases)
+			Component.onCompleted: root._populate(consumption.phases)
 		}
 	}
 
 	readonly property int _phaseCount: 1 + Math.floor(Math.random() * 3)
 
-	function _populateModel(model) {
+	function _populate(model) {
 		model.clear()
 		for (let i = 0; i < _phaseCount; ++i) {
 			model.append({
@@ -46,7 +46,7 @@ Item {
 		obj.power = totalPower
 	}
 
-	Timer {
+	property Timer demoTimer: Timer {
 		running: true
 		interval: 2000
 		repeat: true
