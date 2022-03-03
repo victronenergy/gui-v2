@@ -10,7 +10,7 @@ Item {
 	id: root
 
 	property ListModel model: ListModel {
-		Component.onCompleted: root.populateModel()
+		Component.onCompleted: root.populate()
 	}
 
 	property real voltage
@@ -19,27 +19,21 @@ Item {
 
 	onPowerChanged: Utils.updateMaximumValue("solarTracker.power", power / Math.max(1, model.count))
 
-	function populateModel() {
+	function clear() {
 		voltage = 0
 		power = 0
 		model.clear()
-		let dummyValuesCount = Math.floor(Math.random() * 5)
-		for (let i = 0; i < dummyValuesCount; ++i) {
+	}
+
+	function populate() {
+		clear()
+		const chargerCount = Math.floor(Math.random() * 4) + 1
+		for (let i = 0; i < chargerCount; ++i) {
 			let p = 50 + Math.floor(Math.random() * 200)
 			let v = power / 10
 			root.voltage += v
 			root.power += p
 			model.append({ "solarTracker": { "voltage": v, "power": p } })
-		}
-	}
-
-	Connections {
-		target: PageManager.navBar || null
-
-		function onCurrentUrlChanged() {
-			if (PageManager.navBar.currentUrl !== "qrc:/pages/OverviewPage.qml") {
-				populateModel()
-			}
 		}
 	}
 }

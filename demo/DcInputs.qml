@@ -10,11 +10,14 @@ import "../data" as DBusData
 Item {
 	id: root
 
-	property ListModel model: ListModel {
-		Component.onCompleted: _populateModel()
+	property ListModel model: ListModel {}
+
+	function addInput(inputType) {
+		let input = inputComponent.createObject(root, { "source": inputType })
+		model.append({ input: input })
 	}
 
-	function _populateModel() {
+	function populate() {
 		// Add a random set of DC inputs.
 		model.clear()
 		let types = [
@@ -22,12 +25,11 @@ Item {
 				DBusData.DcInputs.InputType.DcGenerator,
 				DBusData.DcInputs.InputType.Wind,
 			]
-		const modelCount = Math.floor(Math.random() * types.length) + 1  // from zero to all types
+		// Have 2 inputs at most, to leave some space for AC inputs in overview page
+		const modelCount = Math.floor(Math.random() * 2) + 1
 		for (let i = 0; i < modelCount; ++i) {
 			const index = Math.floor(Math.random() * types.length)
-			let input = inputComponent.createObject(root)
-			input.source = types[index]
-			model.append({ input: input })
+			addInput(types[index])
 			types.splice(index, 1)
 		}
 	}
@@ -48,6 +50,7 @@ Item {
 				running: true
 				repeat: true
 				interval: 10000 + (Math.random() * 10000)
+				triggeredOnStart: true
 
 				onTriggered: {
 					let properties = ["voltage", "current", "temperature"]
@@ -58,16 +61,6 @@ Item {
 						input[propName] = value
 					}
 				}
-			}
-		}
-	}
-
-	Connections {
-		target: PageManager.navBar || null
-
-		function onCurrentUrlChanged() {
-			if (PageManager.navBar.currentUrl !== "qrc:/pages/OverviewPage.qml") {
-				root._populateModel()
 			}
 		}
 	}

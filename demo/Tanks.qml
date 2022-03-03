@@ -10,10 +10,10 @@ Item {
 	id: root
 
 	property ListModel model: ListModel {
-		Component.onCompleted: root.populateModel()
+		Component.onCompleted: root.populate()
 	}
 
-	function populateModel() {
+	function populate() {
 		model.clear()
 
 		// Occasionally simulate what it looks like with only the battery
@@ -37,7 +37,7 @@ Item {
 
 		function onCurrentUrlChanged() {
 			if (PageManager.navBar.currentUrl !== "qrc:/pages/OverviewPage.qml") {
-				populateModel()
+				populate()
 			}
 		}
 	}

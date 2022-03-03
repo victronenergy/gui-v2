@@ -15,4 +15,5 @@ Item {
 	property real temperature: 28.33
 	property real timeToGo: 190 * 60
 	property string icon: Utils.batteryIcon(root)
+	readonly property bool idle: current === 0 || power === 0
 }

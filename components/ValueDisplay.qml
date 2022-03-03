@@ -22,7 +22,7 @@ Item {
 	property alias titleRow: titleRow
 
 	implicitWidth: Math.max(titleRow.width, quantityRow.width)
-	implicitHeight: titleRow.height + quantityRow.height
+	implicitHeight: titleRow.height + (quantityRow.visible ? quantityRow.height : 0)
 
 	Item {
 		id: titleRow
@@ -71,5 +71,6 @@ Item {
 			horizontalCenter: root.alignment == Qt.AlignHCenter ? parent.horizontalCenter : undefined
 		}
 		font.pixelSize: root.fontSize
+		visible: root.physicalQuantity >= 0
 	}
 }

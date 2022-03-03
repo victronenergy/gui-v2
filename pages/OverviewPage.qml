@@ -116,28 +116,36 @@ Page {
 		case 2:
 			return OverviewWidget.Size.L
 		case 3:
-			// If this widget has extraContent, prefer L size, unless there is already another
-			// widget in a L size.
+		case 4:
+			// If this widget has extraContent, prefer L size, unless there is a previous widget
+			// in a L size.
+			const reducedSize = _leftWidgets.length == 3 ? OverviewWidget.Size.M : OverviewWidget.Size.XS
+			let i = 0
 			if (widget.extraContent.children.length > 0) {
 				let widgetIndex = _leftWidgetOrder.indexOf(widget)
 				if (widgetIndex < 0) {
 					console.warn("Error: unknown widget")
-					return OverviewWidget.Size.M
+					return reducedSize
 				}
-				for (let i = 0; i < widgetIndex; ++i) {
+				for (i = 0; i < widgetIndex; ++i) {
 					if (_leftWidgetOrder[i].size >= OverviewWidget.Size.L) {
-						return OverviewWidget.Size.M
+						return reducedSize
 					}
 				}
 				return OverviewWidget.Size.L
+			} else {
+				// If there are any other widgets in a large size, return the reduced size
+				for (i = 0; i < _leftWidgets.length; ++i) {
+					if (_leftWidgets[i] != widget && _leftWidgets[i].size >= OverviewWidget.Size.L) {
+						return reducedSize
+					}
+				}
 			}
-			return OverviewWidget.Size.M
-		case 4:
-			return OverviewWidget.Size.S
-		case 5:
+			// There are no large widgets; use the same size for all left widgets
+			return _leftWidgets.length == 3 ? OverviewWidget.Size.M : OverviewWidget.Size.S
+		default:
 			return OverviewWidget.Size.XS
 		}
-		return OverviewWidget.Size.L
 	}
 
 	function _leftWidgetTopMargin(widget) {
@@ -153,6 +161,8 @@ Page {
 	}
 
 	SegmentedWidgetBackground {
+		id: segmentedBackground
+
 		anchors {
 			top: parent.top
 			left: parent.left
@@ -174,6 +184,7 @@ Page {
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(gridWidget)
 		overviewPageInteractive: root.interactive
+		isSegment: segmentedBackground.visible
 
 		value: dataModel ? dataModel.power : NaN
 		physicalQuantity: Units.Power
@@ -202,6 +213,7 @@ Page {
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(shoreWidget)
 		overviewPageInteractive: root.interactive
+		isSegment: segmentedBackground.visible
 
 		value: dataModel ? dataModel.power : NaN
 		physicalQuantity: Units.Power
@@ -230,6 +242,7 @@ Page {
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(acGeneratorWidget)
 		overviewPageInteractive: root.interactive
+		isSegment: segmentedBackground.visible
 
 		value: dataModel ? dataModel.power : NaN
 		physicalQuantity: Units.Power
@@ -257,6 +270,7 @@ Page {
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(dcGeneratorWidget)
 		overviewPageInteractive: root.interactive
+		isSegment: segmentedBackground.visible
 
 		value: dataModel ? dataModel.current : NaN
 		physicalQuantity: Units.Current
@@ -267,7 +281,7 @@ Page {
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
 		animated: !!dcGeneratorWidget.dataModel
-				  && dcGeneratorWidget.dataModel.current !== NaN
+				  && !isNaN(dcGeneratorWidget.dataModel.current)
 				  && dcGeneratorWidget.dataModel.current > 0
 		straight: dcGeneratorWidget.size > OverviewWidget.Size.M
 	}
@@ -284,6 +298,7 @@ Page {
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(alternatorWidget)
 		overviewPageInteractive: root.interactive
+		isSegment: segmentedBackground.visible
 
 		value: dataModel ? dataModel.current : NaN
 		physicalQuantity: Units.Current
@@ -294,7 +309,7 @@ Page {
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
 		animated: !!alternatorWidget.dataModel
-				  && alternatorWidget.dataModel.current !== NaN
+				  && !isNaN(alternatorWidget.dataModel.current)
 				  && alternatorWidget.dataModel.current > 0
 	}
 
@@ -310,6 +325,7 @@ Page {
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(windWidget)
 		overviewPageInteractive: root.interactive
+		isSegment: segmentedBackground.visible
 
 		value: dataModel ? dataModel.current : NaN
 		physicalQuantity: Units.Current
@@ -320,7 +336,7 @@ Page {
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
 		animated: !!windWidget.dataModel
-				  && windWidget.dataModel.current !== NaN
+				  && !isNaN(windWidget.dataModel.current)
 				  && windWidget.dataModel.current > 0
 	}
 
@@ -335,6 +351,7 @@ Page {
 		}
 		width: Theme.geometry.overviewPage.widget.input.width
 		size: _widgetSize(solarWidget)
+		isSegment: segmentedBackground.visible
 
 		value: solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
 		dataModel: solarChargers
@@ -345,14 +362,15 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: solarChargers && solarChargers.power !== NaN
+		animated: solarChargers && !isNaN(solarChargers.power)
 	}
 	WidgetConnector {
 		startWidget: solarWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: solarChargers && solarChargers.power !== NaN
+		animated: solarChargers && !isNaN(solarChargers.power)
+				  && battery && !battery.idle
 	}
 
 	// the two central widgets are always present
@@ -365,6 +383,7 @@ Page {
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.inverter.width
 		overviewPageInteractive: root.interactive
+		physicalQuantity: -1
 	}
 	WidgetConnector {
 		startWidget: inverterWidget
@@ -379,7 +398,7 @@ Page {
 		startLocation: WidgetConnector.Location.Bottom
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Top
-		animated: true // TODO set based on the battery status?
+		animated: batteryWidget.dataModel && !batteryWidget.dataModel.idle
 	}
 
 	BatteryWidget {
@@ -400,7 +419,7 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: dcLoadsWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: dcLoadsWidget.dataModel != undefined
+		animated: batteryWidget.dataModel && !batteryWidget.dataModel.idle
 	}
 
 	// the two output widgets are always present
@@ -411,14 +430,19 @@ Page {
 			right: parent.right
 			rightMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-		size: OverviewWidget.Size.L
+		size: dcLoadsWidget.size === OverviewWidget.Size.Zero
+			  ? OverviewWidget.Size.XL
+			  : OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.output.width
 		overviewPageInteractive: root.interactive
+
 		dataModel: system ? system.ac.consumption : null
 		value: dataModel ? dataModel.power : NaN
 		phaseModel: dataModel ? dataModel.phases : null
 		phaseModelProperty: "power"
 	}
+
+	property real thing: NaN
 
 	DcLoadsWidget {
 		id: dcLoadsWidget
@@ -428,10 +452,12 @@ Page {
 			right: parent.right
 			rightMargin: Theme.geometry.page.grid.horizontalMargin
 		}
-		size: OverviewWidget.Size.L
+		size: !!system && !isNaN(system.dc.power) ? OverviewWidget.Size.L : OverviewWidget.Size.Zero
 		width: Theme.geometry.overviewPage.widget.output.width
 		overviewPageInteractive: root.interactive
-		value: system ? system.dc.power : 0
+
+		dataModel: system ? system.dc : null
+		value: dataModel.power || 0
 	}
 
 	MouseArea {

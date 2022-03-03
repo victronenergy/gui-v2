@@ -35,7 +35,7 @@ Rectangle {
 
 	property var dataModel
 
-	property bool _isSegment: size === OverviewWidget.Size.XS
+	property bool isSegment
 
 	signal clicked()
 
@@ -56,10 +56,10 @@ Rectangle {
 			: Theme.geometry.overviewPage.widget.noninteractive.xs.height
 
 	visible: size !== OverviewWidget.Size.Zero
-	radius: _isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
-	border.width: interactive && !_isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
+	radius: isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
+	border.width: interactive && !isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
 	border.color: Theme.color.overviewPage.widget.border
-	color: _isSegment ? "transparent" : Theme.color.overviewPage.widget.background
+	color: isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
 	Behavior on height {
 		enabled: PageManager.navBarAnimating
@@ -138,13 +138,6 @@ Rectangle {
 			left: parent.left
 			leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 		}
-		titleRow.height: Theme.geometry.overviewPage.widget.title.height
-		quantityRow.visible: root.physicalQuantity >= 0
-		quantityRow.height: quantityRow.visible
-			? (root.size === OverviewWidget.Size.XS
-			   ? Theme.geometry.overviewPage.widget.value.xs.height
-			   : Theme.geometry.overviewPage.widget.value.height)
-			: 0
 		fontSize: root.size === OverviewWidget.Size.XS
 				  ? Theme.font.size.l
 				  : Theme.font.size.xl

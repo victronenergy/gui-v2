@@ -208,7 +208,7 @@
 
     "geometry.overviewPage.widget.radius": 8,
     "geometry.overviewPage.widget.border.width": 2,
-    "geometry.overviewPage.widget.content.verticalMargin": 4,
+    "geometry.overviewPage.widget.content.verticalMargin": 6,
     "geometry.overviewPage.widget.content.horizontalMargin": 16,
     "geometry.overviewPage.widget.title.height": 32,
     "geometry.overviewPage.widget.value.height": 40,
@@ -230,14 +230,14 @@
 
     "geometry.overviewPage.widget.interactive.xl.height": 352,
     "geometry.overviewPage.widget.interactive.l.height": 152,
-    "geometry.overviewPage.widget.interactive.m.height": 92,
+    "geometry.overviewPage.widget.interactive.m.height": 90,
     "geometry.overviewPage.widget.interactive.s.height": 82,
-    "geometry.overviewPage.widget.interactive.xs.height": 70,
+    "geometry.overviewPage.widget.interactive.xs.height": 66,
     "geometry.overviewPage.widget.noninteractive.xl.height": 400,
     "geometry.overviewPage.widget.noninteractive.l.height": 176,
     "geometry.overviewPage.widget.noninteractive.m.height": 104,
     "geometry.overviewPage.widget.noninteractive.s.height": 94,
-    "geometry.overviewPage.widget.noninteractive.xs.height": 80,
+    "geometry.overviewPage.widget.noninteractive.xs.height": 70,
 
     "geometry.overviewPage.connector.nub.width": 12,
     "geometry.overviewPage.connector.line.width": 2,

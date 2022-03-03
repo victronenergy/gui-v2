@@ -36,6 +36,7 @@ OverviewWidget {
 			anchors.horizontalCenter: parent.horizontalCenter
 			topPadding: Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing / 2
 			horizontalItemAlignment: Grid.AlignHCenter
+			visible: !dataModel.idle
 
 			columns: {
 				const maxWidth = parent.width - Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*4
@@ -134,10 +135,10 @@ OverviewWidget {
 				left: parent.left
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
-			text: root.value === 0
+			text: dataModel.idle
 					//% "Idle"
 				  ? qsTrId("overview_widget_battery_idle")
-				  : (root.value > 0
+				  : (dataModel.current > 0
 					  //% "Charging"
 					? qsTrId("overview_widget_battery_charging")
 					  //% "Discharging"
