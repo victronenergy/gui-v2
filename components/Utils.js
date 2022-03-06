@@ -90,6 +90,23 @@ function formatAsHHMM(seconds, showUnits) {
             + (showUnits ? "m" : "")
 }
 
+function formatAsHHMMSS(seconds, showUnits) {
+    if (Number.isNaN(seconds) || seconds < 0)
+        return "--:--"
+
+    const duration = decomposeDuration(seconds)
+
+    // If more than 60 minutes, show hours as well
+    let s = pad(duration.m, 2)
+        + (showUnits ? "m:" : ":")
+        + pad(duration.s, 2)
+        + (showUnits ? "s" : "")
+    if (duration.m > 60) {
+        s = pad(duration.h, 2) + (showUnits ? "h:" : ":") + s
+    }
+    return s
+}
+
 function reactToSignalOnce(sig, slot) {
 	var f = function() {
 		slot.apply(this, arguments)

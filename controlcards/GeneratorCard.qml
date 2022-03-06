@@ -11,50 +11,45 @@ import "/components/Utils.js" as Utils
 ControlCard {
 	id: root
 
-	// data from Generators.qml.  TODO: hook up.
-	property int state: Generators.GeneratorState.Running
-	property int runtime: 3793 // seconds remaining?
-	property int runningBy: Generators.GeneratorRunningBy.Manual
+	property int state: Generators.GeneratorState.Stopped
+	property int runtime
+	property int runningBy: Generators.GeneratorRunningBy.NotRunning
+	property int manualStartTimer
+	property bool autostart
+
+	signal manualStart(durationSecs: int)
+	signal manualStop()
+	signal changeAutoStart(newAutoStart: bool)
 
 	title.icon.source: "qrc:/images/generator.svg"
 	//% "Generator"
 	title.text: qsTrId("controlcard_generator")
-	status.text: root.state === Generators.GeneratorState.Error ?
-					//% "ERROR"
-					qsTrId("controlcard_generator_status_error")
-				: root.state === Generators.GeneratorState.Stopped ?
-					//% "Stopped"
-					qsTrId("controlcard_generator_status_stopped")
-				: /* Running */
-					//% "Running"
-					qsTrId("controlcard_generator_status_running")
+	status.text: {
+		switch (state) {
+		case Generators.GeneratorState.Running:
+			//% "Running"
+			return qsTrId("controlcard_generator_status_running")
+		case Generators.GeneratorState.Error:
+			//% "ERROR"
+			return qsTrId("controlcard_generator_status_error")
+		default:
+			//% "Stopped"
+			return qsTrId("controlcard_generator_status_stopped")
+		}
+	}
 
 	GeneratorIconLabel {
 		id: timerDisplay
 		anchors {
 			right: parent.right
-			rightMargin: 14
+			rightMargin: Theme.geometry.controlCard.contentMargins
 			top: parent.status.top
 			topMargin: parent.status.topMargin
 			bottom: parent.status.bottom
 			bottomMargin: parent.status.bottomMargin
 		}
 
-		spacing: 5
-		display: C.AbstractButton.TextBesideIcon
-
-		icon.width: 24
-		icon.height: 24
-		icon.source: root.state !== Generators.GeneratorState.Running ? ""
-				: root.runningBy === Generators.GeneratorRunningBy.Manual
-					? root.runtime > 0
-						? "qrc:/images/icon_manualstart_timer_24.svg"
-						: "qrc:/images/icon_manualstart_24.svg"
-				: "qrc:/images/icon_autostart_24.svg"
-		text: Utils.formatAsHHMM(root.runtime)
-		font.family: VenusFont.normal.name
-		font.pixelSize: Theme.font.size.m
-		color: root.runtime > 0 ? Theme.color.font.primary : Theme.color.font.tertiary
+		visible: root.state === Generators.GeneratorState.Running
 		state: root.state
 		runtime: root.runtime
 		runningBy: root.runningBy
@@ -87,22 +82,22 @@ ControlCard {
 			case Generators.GeneratorRunningBy.LossOfCommunication:
 				//% "Loss of comm"
 				return qsTrId("controlcard_generator_substatus_lossofcomm")
-			case root.runningBy === Generators.GeneratorRunningBy.Soc:
+			case Generators.GeneratorRunningBy.Soc:
 				//% "State of charge"
 				return qsTrId("controlcard_generator_substatus_stateofcharge")
-			case root.runningBy === Generators.GeneratorRunningBy.Acload:
+			case Generators.GeneratorRunningBy.Acload:
 				//% "AC load"
 				return qsTrId("controlcard_generator_substatus_acload")
-			case root.runningBy === Generators.GeneratorRunningBy.BatteryCurrent:
+			case Generators.GeneratorRunningBy.BatteryCurrent:
 				//% "Battery current"
 				return qsTrId("controlcard_generator_substatus_batterycurrent")
-			case root.runningBy === Generators.GeneratorRunningBy.BatteryVoltage:
+			case Generators.GeneratorRunningBy.BatteryVoltage:
 				//% "Battery voltage"
 				return qsTrId("controlcard_generator_substatus_batteryvoltage")
-			case root.runningBy === Generators.GeneratorRunningBy.InverterHighTemp:
+			case Generators.GeneratorRunningBy.InverterHighTemp:
 				//% "Inverter high temp"
 				return qsTrId("controlcard_generator_substatus_inverterhigh_temp")
-			case root.runningBy === Generators.GeneratorRunningBy.InverterOverload:
+			case Generators.GeneratorRunningBy.InverterOverload:
 				//% "Inverter overload"
 				return qsTrId("controlcard_generator_substatus_inverteroverload")
 			default: return "" // unknown substatus.
@@ -113,27 +108,25 @@ ControlCard {
 	SwitchControlValue {
 		id: autostartSwitch
 
-		property bool generatorAutostartValue: true // TODO: bind to data model
-
 		anchors.top: substatus.bottom
 
 		//% "Autostart"
 		label.text: qsTrId("controlcard_generator_label_autostart")
-		button.checkable: false
-		button.checked: generatorAutostartValue
+		button.checked: root.autostart
+		enabled: root.state !== Generators.GeneratorState.Running
 
 		onClicked: {
-			if (generatorAutostartValue) {
+			if (root.autostart) {
 				// check if they really want to disable
 				dialogManager.generatorDisableAutostartDialog.open()
 			} else {
-				generatorAutostartValue = true
+				root.changeAutoStart(true)
 			}
 		}
 		Connections {
 			target: dialogManager.generatorDisableAutostartDialog
 			function onAccepted() {
-				autostartSwitch.generatorAutostartValue = false
+				root.changeAutoStart(false)
 			}
 		}
 	}
@@ -189,11 +182,12 @@ ControlCard {
 			anchors.top: subcardHeaderSeparator.bottom
 			//% "Timed run"
 			label.text: qsTrId("controlcard_generator_subcard_label_timedrun")
+			enabled: root.state !== Generators.GeneratorState.Running
 		}
 		ButtonControlValue {
 			id: durationButton
 
-			property int selectedRuntime: 0 // TODO: bind to data model
+			property int duration: root.manualStartTimer
 
 			anchors.top: timedRunSwitch.bottom
 			//% "Duration"
@@ -202,14 +196,15 @@ ControlCard {
 			button.height: Theme.geometry.generatorCard.durationButton.height
 			button.width: Theme.geometry.generatorCard.durationButton.width
 			button.enabled: timedRunSwitch.button.checked
-			button.text: Utils.formatAsHHMM(durationButton.selectedRuntime)
+					&& root.state !== Generators.GeneratorState.Running
+			button.text: Utils.formatAsHHMM(durationButton.duration)
 
 			onClicked: dialogManager.generatorDurationSelectorDialog.open()
 
 			Connections {
 				target: dialogManager.generatorDurationSelectorDialog
 				function onDurationChanged() {
-					durationButton.selectedRuntime = dialogManager.generatorDurationSelectorDialog.duration
+					durationButton.duration = dialogManager.generatorDurationSelectorDialog.duration
 				}
 			}
 		}
@@ -242,13 +237,10 @@ ControlCard {
 				: Theme.color.font.primary
 
 			onClicked: {
-				// TODO: hook up to data model.
 				if (root.state === Generators.GeneratorState.Running) {
-					root.state = Generators.GeneratorState.Stopped
-					root.runtime = -1
+					root.manualStop()
 				} else {
-					root.state = Generators.GeneratorState.Running
-					root.runtime = 7357
+					root.manualStart(durationButton.duration)
 				}
 			}
 		}

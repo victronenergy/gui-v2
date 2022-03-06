@@ -186,10 +186,10 @@ Column {
 						bottom: parent.bottom
 						bottomMargin: Theme.geometry.briefPage.sidePanel.generator.label.bottomMargin
 					}
-					spacing: Theme.geometry.briefPage.sidePanel.generator.label.spacing
-					state: generators ? generators.generator.state : Generators.GeneratorState.Stopped
-					runtime: generators ? generators.generator.runtime : 0
-					runningBy: generators ? generators.generator.runningBy : Generators.GeneratorRunningBy.Stopped
+					// In most cases there is only 1 generator, so don't worry about other ones here.
+					state: generator0 ? generator0.state : Generators.GeneratorState.Stopped
+					runtime: generator0 ? generator0.runtime : 0
+					runningBy: generator0 ? generator0.runningBy : Generators.GeneratorRunningBy.NotRunning
 
 				}
 				Slider {

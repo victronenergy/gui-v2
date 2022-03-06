@@ -35,8 +35,9 @@ CT.Switch {
 			}
 
 			radius: root.indicator.radius
-			color: root.checked ? Theme.color.switch.groove.on
-				: Theme.color.switch.groove.off
+			color: root.enabled
+				   ? (root.checked ? Theme.color.switch.groove.on : Theme.color.switch.groove.off)
+				   : Theme.color.font.disabled
 			border.color: root.checked ? Theme.color.switch.groove.border.on
 				: Theme.color.switch.groove.border.off
 			border.width: Theme.geometry.switch.groove.border.width
@@ -51,7 +52,9 @@ CT.Switch {
 		width: height
 		x: root.checked ? parent.width - width : 0
 		y: parent.height/2 - height/2
-		color: Theme.color.switch.indicator
+		color: root.enabled
+			   ? Theme.color.switch.indicator.enabled
+			   : Theme.color.switch.indicator.disabled
 
 		Behavior on x {
 			NumberAnimation {

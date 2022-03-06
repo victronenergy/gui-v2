@@ -137,7 +137,6 @@
     "geometry.briefPage.sidePanel.generator.height": 72,
     "geometry.briefPage.sidePanel.generator.topMargin": 7,
     "geometry.briefPage.sidePanel.generator.label.bottomMargin": 9,
-    "geometry.briefPage.sidePanel.generator.label.spacing": 7,
     "geometry.briefPage.sidePanel.generator.slider.height": 8,
     "geometry.briefPage.sidePanel.loads.height": 72,
     "geometry.briefPage.sidePanel.loads.topMargin": 5,
@@ -192,6 +191,7 @@
 
     "geometry.generatorIconLabel.spacing": 5,
     "geometry.generatorIconLabel.icon.width": 24,
+    "geometry.generatorIconLabel.label.width": 62,
 
     "geometry.generatorRuntimeDuration.height": 72,
     "geometry.generatorRuntimeDuration.durationLabel.leftMargin": 16,
