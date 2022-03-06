@@ -11,6 +11,8 @@ Page {
 	id: root
 
 	ListView {
+		id: cardsView
+
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry.controlCardsPage.leftMargin
@@ -23,10 +25,32 @@ Page {
 		orientation: ListView.Horizontal
 		snapMode: ListView.SnapOneItem
 		boundsBehavior: Flickable.DragOverBounds
-		model: ControlCardsModel
-		delegate: Loader {
-			height: parent ? parent.height : 0
-			source: url
+
+		model: ObjectModel {
+			Row {
+				height: cardsView.height
+
+				Repeater {
+					model: generators ? generators.model : null
+
+					GeneratorCard {
+						state: model.generator.state
+						runtime: model.generator.runtime
+						runningBy: model.generator.runningBy
+						manualStartTimer: model.generator.manualStartTimer
+
+						// TODO bind 'autostart' property to dbus backend value (not yet available)
+						// and add changeAutoStart() handler to update when autostart switch is toggled.
+
+						onManualStart: function(durationSecs) {
+							model.generator.start(durationSecs)
+						}
+						onManualStop: {
+							model.generator.stop()
+						}
+					}
+				}
+			}
 		}
 	}
 }

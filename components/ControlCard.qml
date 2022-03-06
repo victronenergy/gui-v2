@@ -12,7 +12,7 @@ Rectangle {
 	property alias status: status
 
 	width: Theme.geometry.controlCard.width
-	height: parent.height
+	height: parent ? parent.height : 0
 	color: Theme.color.background.secondary
 	radius: Theme.geometry.controlCard.radius
 

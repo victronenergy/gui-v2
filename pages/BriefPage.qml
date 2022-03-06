@@ -12,7 +12,7 @@ Page {
 	id: root
 
 	readonly property bool solarYieldPresent: solarChargers && solarChargers.model.count > 0
-	readonly property bool generatorPresent: generators && !!generators.generator
+	readonly property bool generatorPresent: !!generator0
 	readonly property bool loadPresent: true    // TODO check for AC,DC inputs
 
 	property var leftGaugeTypes: []

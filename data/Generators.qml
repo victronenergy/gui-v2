@@ -9,19 +9,14 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum GeneratorType {
-		Relay = 0,
-		FischerPanda = 1
-	}
-
 	enum GeneratorState {
-		Running = 0,
-		Stopped = 1,
+		Stopped = 0,    // not 2 as documented?
+		Running = 1,
 		Error = 10
 	}
 
 	enum GeneratorRunningBy {
-		Stopped = 0,
+		NotRunning = 0,
 		Manual = 1,
 		TestRun = 2,
 		LossOfCommunication = 3,
@@ -34,7 +29,7 @@ Item {
 	}
 
 	property ListModel model: ListModel {}
-	property QtObject generator  // the first valid generator
+	property QtObject generator0  // the first valid generator
 
 	property var _generators: []
 
@@ -74,22 +69,31 @@ Item {
 			property string dbusUid: veStartStop.uid + "/" + generator.uid
 
 			property int state: -1
-			property bool manualStart
+			property int manualStartTimer
 			property int runtime: -1
 			property int runningBy: -1
+
+			function start(durationSecs) {
+				_manualStartTimer.setValue(durationSecs)
+				_manualStart.setValue(1)
+			}
+
+			function stop() {
+				_manualStart.setValue(0)
+			}
 
 			property bool _valid: state >= 0
 			on_ValidChanged: {
 				const index = Utils.findIndex(root.model, generator)
 				if (_valid && index < 0) {
 					root.model.append({ generator: generator })
-					if (!root.generator) {
-						root.generator = generator
+					if (!root.generator0) {
+						root.generator0 = generator
 					}
 				} else if (!_valid && index >= 0) {
 					root.model.remove(index)
-					if (root.generator == generator) {
-						root.generator = null
+					if (root.generator0 == generator) {
+						root.generator0 = null
 					}
 				}
 			}
@@ -100,7 +104,11 @@ Item {
 			}
 			property VeQuickItem _manualStart: VeQuickItem {
 				uid: dbusUid + "/ManualStart"
-				onValueChanged: generator.manualStart = value === undefined ? false : value
+				// no valueChanged handler, only used to start/stop the generator
+			}
+			property VeQuickItem _manualStartTimer: VeQuickItem {
+				uid: dbusUid + "/ManualStartTimer"
+				onValueChanged: generator.manualStartTimer = value === undefined ? -1 : value
 			}
 			property VeQuickItem _runtime: VeQuickItem {
 				uid: dbusUid + "/Runtime"

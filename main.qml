@@ -18,7 +18,9 @@ Window {
 	property Item dcInputs: dataLoader.item.dcInputs
 	property Item battery: dataLoader.item.battery
 	property Item tanks: dataLoader.item.tanks
+	property Item inverters: dataLoader.item.inverters
 	property Item generators: dataLoader.item.generators
+	property var generator0: generators ? generators.generator0 : null
 	property Item solarChargers: dataLoader.item.solarChargers
 	property Item system: dataLoader.item.system
 

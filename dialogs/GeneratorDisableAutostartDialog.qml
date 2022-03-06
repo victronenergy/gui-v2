@@ -14,6 +14,7 @@ ModalWarningDialog {
 	//% "Disable Autostart?"
 	title: qsTrId("controlcard_generator_disableautostartdialog_title")
 
+	// TODO set text to something meaningful
 	//% "Consequences description..."
 	description: qsTrId("controlcard_generator_disableautostartdialog_consequences")
 }

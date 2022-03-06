@@ -48,7 +48,8 @@
     "color.switch.groove.on": "color.ok",
     "color.switch.groove.border.off": "color.font.disabled",
     "color.switch.groove.border.on": "transparent",
-    "color.switch.indicator": "color.font.primary",
+    "color.switch.indicator.enabled": "color.font.primary",
+    "color.switch.indicator.disabled": "color.font.secondary",
 
     "color.navigationBar.button.on": "color.font.primary",
     "color.navigationBar.button.off": "color.font.secondary",
