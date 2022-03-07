@@ -8,6 +8,8 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	property int systemState
+
 	//% "Inverter / Charger"
 	title.text: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
@@ -26,10 +28,7 @@ OverviewWidget {
 			font.pixelSize: Theme.font.size.xl
 
 			text: {
-				if (!system) {
-					return ""
-				}
-				switch (system.state) {
+				switch (root.systemState) {
 				case System.State.Off:
 					//: System state = 'Off'
 					//% "Off"

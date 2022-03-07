@@ -86,6 +86,7 @@
         <file>demo/DcInputs.qml</file>
         <file>demo/Battery.qml</file>
         <file>demo/Generators.qml</file>
+        <file>demo/Inverters.qml</file>
         <file>demo/SolarChargers.qml</file>
         <file>demo/System.qml</file>
         <file>demo/SystemAc.qml</file>

@@ -360,6 +360,7 @@ Page {
 		width: Theme.geometry.overviewPage.widget.inverter.width
 		overviewPageInteractive: root.interactive
 		physicalQuantity: -1
+		systemState: system ? system.state : 0
 	}
 	WidgetConnector {
 		startWidget: inverterWidget

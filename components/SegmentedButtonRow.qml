@@ -16,8 +16,8 @@ Item {
 
 	signal buttonClicked(buttonIndex: int)
 
-	width: 496
-	height: 48
+	implicitWidth: parent.width
+	implicitHeight: Theme.geometry.segmentedButtonRow.height
 
 	C.ButtonGroup {
 		buttons: root.children

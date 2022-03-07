@@ -8,26 +8,41 @@ import Victron.VenusOS
 ModalDialog {
 	id: root
 
-	property int newInputCurrentLimit
+	property int currentLimit
+	property int inputType
+	property int inputIndex
+	property alias ampOptions: buttonRow.model
 
-	signal setInputCurrentLimit(var newValue)
+	function currentLimitText(type) {
+		switch (type) {
+		case Inverters.InputType.Grid:
+			//% "Grid current limit"
+			return qsTrId("inverter_current_limit_grid")
+		case Inverters.InputType.Generator:
+			//% "Generator current limit"
+			return qsTrId("inverter_current_limit_generator")
+		case Inverters.InputType.Shore:
+			//% "Shore current limit"
+			return qsTrId("inverter_current_limit_shore")
+		default:
+			return ""
+		}
+	}
 
-	//% "Input current limit"
-	title: qsTrId("controlcard_input_current_limit")
+	title: currentLimitText(inputType)
 
 	contentItem: Column {
-		anchors.topMargin: 96
-		anchors.top: parent.top
-		width: parent.width
-		spacing: 40
+		id: contentColumn
+
+		anchors.topMargin: Theme.geometry.modalDialog.content.topMargin
+		anchors.top: root.header.bottom
+		spacing: Theme.geometry.modalDialog.content.spacing
 
 		SpinBox {
 			id: spinbox
 
+			width: parent.width - 2*Theme.geometry.modalDialog.content.horizontalMargin
 			anchors.horizontalCenter: parent.horizontalCenter
-			width: 490
-			height: 72
-			//buttonWidth: 136
 			stepSize: 100 // mA
 			to: 1000000 // mA
 			contentItem: Label {
@@ -37,20 +52,20 @@ ModalDialog {
 				horizontalAlignment: Qt.AlignHCenter
 				verticalAlignment: Qt.AlignVCenter
 			}
-			value: newInputCurrentLimit
-			onValueChanged: newInputCurrentLimit = value
+			value: root.currentLimit
+			onValueChanged: root.currentLimit = value
 		}
 
 		SegmentedButtonRow {
+			id: buttonRow
+
+			width: spinbox.width
 			anchors.horizontalCenter: parent.horizontalCenter
-			model: [6, 10, 13, 16, 25, 32, 63] // TODO - these numbers will come from a list we get from DBus
 			onButtonClicked: function (buttonIndex){
 				currentIndex = buttonIndex
-				newInputCurrentLimit = model[currentIndex] * 1000 // mA
+				root.currentLimit = model[currentIndex] * 1000 // mA
 				spinbox.value = model[currentIndex] * 1000 // mA
 			}
 		}
 	}
-
-	onAccepted: root.setInputCurrentLimit(newInputCurrentLimit)
 }
