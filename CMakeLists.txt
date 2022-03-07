@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.5)
 cmake_policy(SET CMP0079 NEW)
 
 project(venus-gui-v2 LANGUAGES CXX)
+set(TRANSLATIONS_TS_TARGET venus-gui-v2-translations-ts)
+set(TRANSLATIONS_QM_TARGET venus-gui-v2-translations-qm)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -14,6 +16,7 @@ set(CMAKE_AUTOMOC ON)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+message("Building VenusOS for ${CMAKE_SYSTEM_NAME}")
 
 find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools)
 if (NOT ${Qt6_FOUND})
@@ -29,6 +32,45 @@ option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD
 
 qt6_add_resources(QML_RESOURCES
     qml.qrc)
+
+# translations support.
+# note: the base venus-gui-v2.ts was generated with:
+# lupdate.exe qml.qrc -ts i18n/venus-gui-v2.ts)
+set(TRANSLATIONS_TS_FILES
+        "i18n/venus-gui-v2.ts"
+        "i18n/venus-gui-v2_en.ts"
+        "i18n/venus-gui-v2_fr.ts")
+set(TRANSLATIONS_QM_FILES
+        "i18n/venus-gui-v2.qm"
+        "i18n/venus-gui-v2_en.qm"
+        "i18n/venus-gui-v2_fr.qm")
+# manually generate .ts files via a custom command.
+# it would be good if we could do this via qt6_add_lupdate
+# instead, but that macro is broken, so do it ourselves.
+add_custom_target(${TRANSLATIONS_TS_TARGET}
+    SOURCES ${QML_RESOURCES})
+add_custom_command(
+    TARGET ${TRANSLATIONS_TS_TARGET}
+    BYPRODUCTS ${TRANSLATIONS_TS_FILES}
+    COMMENT "Manually updating translations files"
+    COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lupdate
+        ARGS "${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc"
+             -ts ${TRANSLATIONS_TS_FILES}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+# add a custom target to generate the .qm files via qt6_add_lrelease().
+# force the .qm generation step to depend on the .ts generation step.
+set_source_files_properties(${TRANSLATIONS_TS_FILES}
+    PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/i18n")
+add_custom_target(${TRANSLATIONS_QM_TARGET}
+    SOURCES ${TRANSLATIONS_TS_FILES})
+add_dependencies(${TRANSLATIONS_QM_TARGET} ${TRANSLATIONS_TS_TARGET})
+# generate .qm files
+add_custom_command(
+    TARGET ${TRANSLATIONS_QM_TARGET}
+    COMMENT "Manually releasing translations files"
+    COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lrelease
+        ARGS ${TRANSLATIONS_TS_FILES} -idbased
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(velib/inc .)
 
@@ -63,7 +105,6 @@ list(APPEND SOURCES
     ${QML_RESOURCES}
 )
 
-message("Building VenusOS for ${CMAKE_SYSTEM_NAME}")
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
     add_compile_definitions(VENUS_DESKTOP_BUILD)
     add_executable(${PROJECT_NAME}
@@ -85,6 +126,12 @@ else()
         ${SOURCES}
     )
 endif()
+
+add_dependencies(${PROJECT_NAME} ${TRANSLATIONS_QM_TARGET})
+qt_add_resources(${PROJECT_NAME} "i18n"
+    PREFIX "/i18n"
+    BASE "i18n"
+    FILES ${TRANSLATIONS_QM_FILES})
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
@@ -108,27 +155,9 @@ if (Qt6QmlImportScanner_FOUND)
     qt6_import_qml_plugins(${PROJECT_NAME})
 endif()
 
-# translations support.
-# note: the base venus-gui-v2.ts was generated with:
-# lupdate.exe qml.qrc -ts i18n/venus-gui-v2.ts
-add_custom_command(
-    TARGET ${PROJECT_NAME}
-    PRE_BUILD
-    COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lupdate
-    ARGS "qml.qrc" -ts "i18n/venus-gui-v2.ts"
-                       "i18n/venus-gui-v2_en.ts"
-                       "i18n/venus-gui-v2_fr.ts"
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMENT "Manually generating base translations file"
-)
-# the custom command above shouldn't be required...
-qt6_add_translations(${PROJECT_NAME}
-    TS_FILES
-        i18n/venus-gui-v2.ts # base
-        i18n/venus-gui-v2_en.ts
-        i18n/venus-gui-v2_fr.ts
-    SOURCES
-        ${QML_RESOURCES}
-    LRELEASE_OPTIONS
-        -idbased
-)
+# see if the dependency graph is correct, for translations support...
+add_custom_target(graphviz
+                 "${CMAKE_COMMAND}" "--graphviz=venus" .
+                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+# disable it for now, can re-enable for future analysis when required.
+#add_dependencies(${PROJECT_NAME} graphviz)
