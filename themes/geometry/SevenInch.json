@@ -28,6 +28,8 @@
     "geometry.radioButton.indicator.dot.width": 16,
     "geometry.radioButton.border.width": 2,
 
+    "geometry.segmentedButtonRow.height": 48,
+
     "geometry.slider.groove.height": 8,
     "geometry.slider.groove.radius": 8,
     "geometry.slider.handle.width": 24,
@@ -71,11 +73,13 @@
     "geometry.controlCard.title.leftMargin": 16,
     "geometry.controlCard.title.topMargin": 10,
     "geometry.controlCard.title.leftPadding" : 4,
+    "geometry.controlCard.subCard.header.height": 40,
     "geometry.controlCard.smallItem.height" : 48,
     "geometry.controlCard.mediumItem.height" : 56,
     "geometry.controlCard.largeItem.height" : 72,
     "geometry.controlCard.itemSeparator.margins": 8,
     "geometry.controlCard.subCard.margins": 8,
+    "geometry.controlCard.subCard.header.height": 40,
     "geometry.controlCard.subCard.header.height": 40,
 
     "geometry.modalDialog.width": 624,
@@ -86,6 +90,9 @@
     "geometry.modalDialog.footer.height": 64,
     "geometry.modalDialog.footer.midSeparator.width": 1,
     "geometry.modalDialog.footer.midSeparator.margins": 8,
+    "geometry.modalDialog.content.topMargin": 32,
+    "geometry.modalDialog.content.spacing": 40,
+    "geometry.modalDialog.content.horizontalMargin": 64,
 
     "geometry.modalWarningDialog.alarmIcon.topMargin": 44,
     "geometry.modalWarningDialog.alarmIcon.width": 48,
@@ -202,8 +209,6 @@
     "geometry.essCard.minimumSocButton.height": 40,
     "geometry.essCard.minimumSocButton.width": 112,
     "geometry.essCard.warningIcon.rightMargin": 18,
-
-    "geometry.inverterCard.topMargin": 96,
 
     "geometry.overviewPage.widget.radius": 8,
     "geometry.overviewPage.widget.border.width": 2,

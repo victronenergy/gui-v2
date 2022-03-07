@@ -33,12 +33,12 @@ Item {
 	property var _inverters: []
 
 	function _getInverters() {
-		const childIds = veConfig.childIds
+		const childIds = veDBus.childIds
 
 		let inverterIds = []
 		for (let i = 0; i < childIds.length; ++i) {
 			let id = childIds[i]
-			if (!isNaN(parseInt(id))) {
+			if (id.startsWith("com.victronenergy.vebus.")) {
 				inverterIds.push(id)
 			}
 		}
@@ -54,7 +54,7 @@ Item {
 	}
 
 	Connections {
-		target: veConfig
+		target: veDBus
 		function onChildIdsChanged() { Qt.callLater(_getInverters) }
 		Component.onCompleted: _getInverters()
 	}
@@ -65,11 +65,10 @@ Item {
 			id: inverter
 
 			property string uid: modelData
-			property string configUid: veConfig.uid + "/" + inverter.uid
+			property string serviceUid: "dbus/" + inverter.uid
 
-			property string serviceType
-			property string serviceName
 			property int productId: -1
+			property string productName
 			property int productType: _productUpperByte === 0x19 || _productUpperByte === 0x26
 									  ? Inverters.EuProduct
 									  : (_productUpperByte === 0x20 || _productUpperByte === 0x27 ? Inverters.UsProduct : -1)
@@ -85,6 +84,7 @@ Item {
 			property var _euAmpOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ]
 			property var _usAmpOptions: [ 10.0, 15.0, 20.0, 30.0, 50.0, 100.0 ]
 
+			property int state: -1
 			property int mode: -1
 			property bool modeAdjustable
 
@@ -97,14 +97,14 @@ Item {
 			property bool currentLimit2Adjustable
 
 			function setMode(newMode) {
-				_mode.value = newMode
+				_mode.setValue(newMode)
 			}
 
 			function setCurrentLimit1(newLimit) {
-				_currentLimit1.value = newLimit
+				_currentLimit1.setValue(newLimit)
 			}
 			function setCurrentLimit2(newLimit) {
-				_currentLimit2.value = newLimit
+				_currentLimit2.setValue(newLimit)
 			}
 
 			property bool _valid: productType != -1
@@ -117,29 +117,28 @@ Item {
 				}
 			}
 
-			property string _serviceUid: serviceName ? 'dbus/' + serviceName : ''
-			property string _valuesUid: serviceName ? 'dbus/' + serviceName + "/Ac/In" : ''
-
-			property VeQuickItem _serviceType: VeQuickItem {
-				uid: configUid + "/ServiceType"
-				onValueChanged: inverter.serviceType = value === undefined ? '' : value
-			}
-			property VeQuickItem _service: VeQuickItem {
-				uid: configUid + "/ServiceName"
-				onValueChanged: inverter.serviceName = value === undefined ? '' : value
+			property VeQuickItem _state: VeQuickItem {
+				uid: inverter.serviceUid + "/State"
+				onValueChanged: inverter.state = value === undefined ? -1 : value
 			}
 
 			property VeQuickItem _productId: VeQuickItem {
-				uid: _serviceUid ? _serviceUid + "/ProductId" : ''
+				uid: inverter.serviceUid + "/ProductId"
 				onValueChanged: inverter.productId = value === undefined ? false : value
 			}
 
+			property VeQuickItem _productName: VeQuickItem {
+				uid: inverter.serviceUid + "/ProductName"
+				onValueChanged: inverter.productName = value === undefined ? "" : value
+			}
+
 			property VeQuickItem _mode: VeQuickItem {
-				uid: _serviceUid ? _serviceUid + "/Mode" : ''
+				uid: inverter.serviceUid + "/Mode"
 				onValueChanged: inverter.mode = value === undefined ? -1 : value
 			}
+
 			property VeQuickItem _modeAdjustable: VeQuickItem {
-				uid: _serviceUid ? _serviceUid + "/ModeIsAdjustable" : ''
+				uid: inverter.serviceUid + "/ModeIsAdjustable"
 				onValueChanged: inverter.modeAdjustable = value === undefined ? false : (value > 0)
 			}
 
@@ -148,11 +147,11 @@ Item {
 				onValueChanged: inverter.input1Type = value === undefined ? -1 : value
 			}
 			property VeQuickItem _currentLimit1: VeQuickItem {
-				uid: _valuesUid ? _valuesUid + "/1/CurrentLimit" : ''
+				uid: inverter.serviceUid + "/Ac/In/1/CurrentLimit"
 				onValueChanged: inverter.currentLimit1 = value === undefined ? -1.0 : value
 			}
 			property VeQuickItem _currentLimit1Adjustable: VeQuickItem {
-				uid: _valuesUid ? _valuesUid + "/1/CurrentLimitIsAdjustable" : ''
+				uid: inverter.serviceUid + "/Ac/In/1/CurrentLimitIsAdjustable"
 				onValueChanged: inverter.currentLimit1Adjustable = value === undefined ? false : (value > 0)
 			}
 
@@ -161,11 +160,11 @@ Item {
 				onValueChanged: inverter.input2Type = value === undefined ? -1 : value
 			}
 			property VeQuickItem _currentLimit2: VeQuickItem {
-				uid: _valuesUid ? _valuesUid + "/2/CurrentLimit" : ''
+				uid: inverter.serviceUid + "/Ac/In/2/CurrentLimit"
 				onValueChanged: inverter.currentLimit2 = value === undefined ? -1.0 : value
 			}
 			property VeQuickItem _currentLimit2Adjustable: VeQuickItem {
-				uid: _valuesUid ? _valuesUid + "/2/CurrentLimitIsAdjustable" : ''
+				uid: inverter.serviceUid + "/Ac/In/2/CurrentLimitIsAdjustable"
 				onValueChanged: inverter.currentLimit2Adjustable = value === undefined ? false : (value > 0)
 			}
 		}

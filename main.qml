@@ -123,8 +123,8 @@ Window {
 			property Demo.DcInputs dcInputs: Demo.DcInputs {}
 			property Demo.Battery battery: Demo.Battery {}
 			property Demo.Tanks tanks: Demo.Tanks {}
+			property Demo.Inverters inverters: Demo.Inverters {}
 			property Demo.Generators generators: Demo.Generators {}
-//            property Inverters inverters: Inverters {}
 //            property Relays relays: Relays {}
 
 			property Demo.SolarChargers solarChargers: Demo.SolarChargers {}

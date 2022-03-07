@@ -13,7 +13,7 @@ Item {
 	enum State {
 		Off = 0,
 		LowPower = 1,
-		VEBusFaultCondition = 2,
+		FaultCondition = 2,
 		BulkCharging = 3,
 		AbsorptionCharging = 4,
 		FloatCharging = 5,
