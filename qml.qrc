@@ -10,6 +10,7 @@
         <file>components/controls/SpinBox.qml</file>
         <file>components/controls/Switch.qml</file>
         <file>components/widgets/AcInputWidget.qml</file>
+        <file>components/widgets/DcInputWidget.qml</file>
         <file>components/widgets/OverviewWidget.qml</file>
         <file>components/widgets/AlternatorWidget.qml</file>
         <file>components/widgets/AcGeneratorWidget.qml</file>

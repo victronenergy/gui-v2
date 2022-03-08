@@ -8,6 +8,8 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	property var yieldHistory: []
+
 	//% "Solar yield"
 	title.text: qsTrId("overview_widget_solaryield_title")
 	icon.source: "qrc:/images/solaryield.svg"
@@ -23,7 +25,7 @@ OverviewWidget {
 			visible: root.size >= OverviewWidget.Size.L
 			width: root.width - Theme.geometry.overviewPage.widget.solar.graph.margins*2
 			height: Theme.geometry.overviewPage.widget.solar.graph.height
-			history: root.dataModel.yieldHistory
+			history: root.yieldHistory
 		}
 	]
 }

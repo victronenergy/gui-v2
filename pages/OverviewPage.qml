@@ -71,7 +71,7 @@ Page {
 					continue
 				}
 			}
-			widget.dataModel = input
+			widget.input = input
 			widgetCandidates.splice(_leftWidgetInsertionIndex(widget, widgetCandidates), 0, widget)
 		}
 	}
@@ -185,19 +185,14 @@ Page {
 		size: _widgetSize(gridWidget)
 		overviewPageInteractive: root.interactive
 		isSegment: segmentedBackground.visible
-
-		value: dataModel ? dataModel.power : NaN
-		physicalQuantity: Units.Power
 		sideGaugeValue: value / Utils.maximumValue("grid.power")
-		phaseModel: dataModel ? dataModel.phases : null
-		phaseModelProperty: "power"
 	}
 	WidgetConnector {
 		startWidget: gridWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: !!gridWidget.dataModel && gridWidget.dataModel.connected
+		animated: !!gridWidget.input && gridWidget.input.connected
 		straight: gridWidget.size > OverviewWidget.Size.M
 	}
 
@@ -214,19 +209,14 @@ Page {
 		size: _widgetSize(shoreWidget)
 		overviewPageInteractive: root.interactive
 		isSegment: segmentedBackground.visible
-
-		value: dataModel ? dataModel.power : NaN
-		physicalQuantity: Units.Power
 		sideGaugeValue: 0.5 // TODO when max available
-		phaseModel: dataModel ? dataModel.phases : null
-		phaseModelProperty: "power"
 	}
 	WidgetConnector {
 		startWidget: shoreWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: !!shoreWidget.dataModel && shoreWidget.dataModel.connected
+		animated: !!shoreWidget.input && shoreWidget.input.connected
 		straight: shoreWidget.size > OverviewWidget.Size.M
 	}
 
@@ -243,18 +233,13 @@ Page {
 		size: _widgetSize(acGeneratorWidget)
 		overviewPageInteractive: root.interactive
 		isSegment: segmentedBackground.visible
-
-		value: dataModel ? dataModel.power : NaN
-		physicalQuantity: Units.Power
-		phaseModel: dataModel ? dataModel.phases : null
-		phaseModelProperty: "power"
 	}
 	WidgetConnector {
 		startWidget: acGeneratorWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: inverterWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: !!acGeneratorWidget.dataModel && acGeneratorWidget.dataModel.connected
+		animated: !!acGeneratorWidget.input && acGeneratorWidget.input.connected
 		straight: acGeneratorWidget.size > OverviewWidget.Size.M
 	}
 
@@ -271,18 +256,15 @@ Page {
 		size: _widgetSize(dcGeneratorWidget)
 		overviewPageInteractive: root.interactive
 		isSegment: segmentedBackground.visible
-
-		value: dataModel ? dataModel.current : NaN
-		physicalQuantity: Units.Current
 	}
 	WidgetConnector {
 		startWidget: dcGeneratorWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: !!dcGeneratorWidget.dataModel
-				  && !isNaN(dcGeneratorWidget.dataModel.current)
-				  && dcGeneratorWidget.dataModel.current > 0
+		animated: !!dcGeneratorWidget.input
+				  && !isNaN(dcGeneratorWidget.input.current)
+				  && dcGeneratorWidget.input.current > 0
 		straight: dcGeneratorWidget.size > OverviewWidget.Size.M
 	}
 
@@ -299,18 +281,15 @@ Page {
 		size: _widgetSize(alternatorWidget)
 		overviewPageInteractive: root.interactive
 		isSegment: segmentedBackground.visible
-
-		value: dataModel ? dataModel.current : NaN
-		physicalQuantity: Units.Current
 	}
 	WidgetConnector {
 		startWidget: alternatorWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: !!alternatorWidget.dataModel
-				  && !isNaN(alternatorWidget.dataModel.current)
-				  && alternatorWidget.dataModel.current > 0
+		animated: !!alternatorWidget.input
+				  && !isNaN(alternatorWidget.input.current)
+				  && alternatorWidget.input.current > 0
 	}
 
 	WindWidget {
@@ -326,18 +305,15 @@ Page {
 		size: _widgetSize(windWidget)
 		overviewPageInteractive: root.interactive
 		isSegment: segmentedBackground.visible
-
-		value: dataModel ? dataModel.current : NaN
-		physicalQuantity: Units.Current
 	}
 	WidgetConnector {
 		startWidget: windWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: !!windWidget.dataModel
-				  && !isNaN(windWidget.dataModel.current)
-				  && windWidget.dataModel.current > 0
+		animated: !!windWidget.input
+				  && !isNaN(windWidget.input.current)
+				  && windWidget.input.current > 0
 	}
 
 	SolarYieldWidget {
@@ -354,7 +330,7 @@ Page {
 		isSegment: segmentedBackground.visible
 
 		value: solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
-		dataModel: solarChargers
+		yieldHistory: solarChargers.yieldHistory
 		overviewPageInteractive: root.interactive
 	}
 	WidgetConnector {
@@ -390,7 +366,7 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: acLoadsWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: acLoadsWidget.dataModel != undefined
+		animated: acLoadsWidget.input != undefined
 		straight: true
 	}
 	WidgetConnector {
@@ -398,7 +374,7 @@ Page {
 		startLocation: WidgetConnector.Location.Bottom
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Top
-		animated: batteryWidget.dataModel && !batteryWidget.dataModel.idle
+		animated: batteryWidget.batteryData && !batteryWidget.batteryData.idle
 	}
 
 	BatteryWidget {
@@ -411,15 +387,14 @@ Page {
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.battery.width
 		overviewPageInteractive: root.interactive
-		value: battery ? battery.stateOfCharge : 0
-		dataModel: battery
+		batteryData: battery
 	}
 	WidgetConnector {
 		startWidget: batteryWidget
 		startLocation: WidgetConnector.Location.Right
 		endWidget: dcLoadsWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: batteryWidget.dataModel && !batteryWidget.dataModel.idle
+		animated: batteryWidget.batteryData && !batteryWidget.batteryData.idle
 	}
 
 	// the two output widgets are always present
@@ -435,10 +410,8 @@ Page {
 			  : OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.output.width
 		overviewPageInteractive: root.interactive
-
-		dataModel: system ? system.ac.consumption : null
-		value: dataModel ? dataModel.power : NaN
-		phaseModel: dataModel ? dataModel.phases : null
+		value: system ? system.ac.consumption.power : NaN
+		phaseModel: system ? system.ac.consumption.phases : null
 		phaseModelProperty: "power"
 	}
 
@@ -455,9 +428,7 @@ Page {
 		size: !!system && !isNaN(system.dc.power) ? OverviewWidget.Size.L : OverviewWidget.Size.Zero
 		width: Theme.geometry.overviewPage.widget.output.width
 		overviewPageInteractive: root.interactive
-
-		dataModel: system ? system.dc : null
-		value: dataModel.power || 0
+		value: system ? system.dc.power || 0 : 0
 	}
 
 	MouseArea {

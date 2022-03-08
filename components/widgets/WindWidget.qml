@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-OverviewWidget {
+DcInputWidget {
 	id: root
 
 	//% "Wind"

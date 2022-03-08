@@ -9,10 +9,13 @@ import "../Utils.js" as Utils
 OverviewWidget {
 	id: root
 
+	property var batteryData
+
 	//% "Battery"
 	title.text: qsTrId("overview_widget_battery_title")
-	icon.source: Utils.batteryIcon(dataModel)
+	icon.source: Utils.batteryIcon(batteryData)
 
+	value: batteryData.stateOfCharge
 	physicalQuantity: Units.Percentage
 	precision: 2
 
@@ -36,7 +39,7 @@ OverviewWidget {
 			anchors.horizontalCenter: parent.horizontalCenter
 			topPadding: Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing / 2
 			horizontalItemAlignment: Grid.AlignHCenter
-			visible: !dataModel.idle
+			visible: !batteryData.idle
 
 			columns: {
 				const maxWidth = parent.width - Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*4
@@ -123,7 +126,7 @@ OverviewWidget {
 			right: parent.right
 			rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 		}
-		text: dataModel.timeToGo > 0 ? Utils.formatAsHHMM(dataModel.timeToGo, true) : ""
+		text: batteryData.timeToGo > 0 ? Utils.formatAsHHMM(batteryData.timeToGo, true) : ""
 		color: Theme.color.font.secondary
 		font.pixelSize: Theme.font.size.m
 	}
@@ -135,10 +138,10 @@ OverviewWidget {
 				left: parent.left
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
-			text: dataModel.idle
+			text: batteryData.idle
 					//% "Idle"
 				  ? qsTrId("overview_widget_battery_idle")
-				  : (dataModel.current > 0
+				  : (batteryData.current > 0
 					  //% "Charging"
 					? qsTrId("overview_widget_battery_charging")
 					  //% "Discharging"
@@ -158,7 +161,7 @@ OverviewWidget {
 			ValueQuantityDisplay {
 				id: batteryPowerDisplay
 
-				value: dataModel.power
+				value: batteryData.power
 				physicalQuantity: Units.Power
 				font.pixelSize: Theme.font.size.m
 			}
@@ -171,7 +174,7 @@ OverviewWidget {
 					id: batteryCurrentDisplay
 
 					anchors.horizontalCenter: parent.horizontalCenter
-					value: dataModel.current
+					value: batteryData.current
 					physicalQuantity: Units.Current
 					font.pixelSize: Theme.font.size.m
 				}
@@ -180,7 +183,7 @@ OverviewWidget {
 			ValueQuantityDisplay {
 				id: batteryTempDisplay
 
-				value: dataModel.temperature
+				value: batteryData.temperature
 				physicalQuantity: Units.Temperature
 				font.pixelSize: Theme.font.size.m
 			}
