@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2021 Victron Energy B.V.
+** Copyright (C) 2022 Victron Energy B.V.
 */
 
 import QtQuick
