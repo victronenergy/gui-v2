@@ -29,7 +29,7 @@ Rectangle {
 	property alias title: valueDisplay.title
 
 	property alias sideGaugeVisible: sideGauge.visible
-	property alias sideGaugeValue: sideGauge.value
+	property real sideGaugeValue
 
 	property alias extraContent: extraContent
 
@@ -80,7 +80,7 @@ Rectangle {
 			margins: Theme.geometry.overviewPage.widget.sideGauge.margins
 		}
 
-		property real value: 0.0 // 0.0 -> 1.0
+		property real value: Math.max(0, Math.min(1.0, root.sideGaugeValue)) // 0.0 -> 1.0
 		visible: false
 		width: Theme.geometry.overviewPage.widget.sideGauge.width
 		radius: Theme.geometry.overviewPage.widget.sideGauge.radius
