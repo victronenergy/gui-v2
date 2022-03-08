@@ -64,8 +64,8 @@ OverviewWidget {
 					return qsTrId("overview_widget_state_equalisationcharging")
 				case System.State.PassThrough:
 					//: System state = 'Pass-thru'
-					//% "Pass-through"
-					return qsTrId("overview_widget_state_passthrough")
+					//% "Pass-thru"
+					return qsTrId("overview_widget_state_passthru")
 				case System.State.Inverting:
 					//: System state = 'Inverting'
 					//% "Inverting"
