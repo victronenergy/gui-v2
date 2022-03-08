@@ -33,8 +33,6 @@ Rectangle {
 
 	property alias extraContent: extraContent
 
-	property var dataModel
-
 	property bool isSegment
 
 	signal clicked()

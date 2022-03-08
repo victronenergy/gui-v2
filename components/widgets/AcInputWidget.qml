@@ -8,8 +8,14 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	property var input
 	property var phaseModel
 	property string phaseModelProperty
+
+	value: input ? input.power : NaN
+	physicalQuantity: Units.Power
+	phaseModel: input ? input.phases : null
+	phaseModelProperty: "power"
 
 	extraContent.children: phaseModel && phaseModel.count > 1 ? _phases : []
 
