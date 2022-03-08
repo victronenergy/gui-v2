@@ -98,6 +98,8 @@ Item {
 	]
 
 	property int overviewConfigIndex: -1
+	property bool randomizeOverviewConfig: true
+	property bool _updating
 
 	function setConfigIndex(configIndex) {
 		overviewConfigIndex = configIndex
@@ -134,19 +136,24 @@ Item {
 
 		} else {
 			// Return to app default state: populate all models with random data
+			randomizeOverviewConfig = true
 			resetDemoData()
 		}
 
 		// Force page reload
+		_updating = true
 		PageManager.navBar.buttonClicked(0)
 		PageManager.navBar.buttonClicked(1)
+		_updating = false
 	}
 
 	function nextOverviewLayout() {
+		randomizeOverviewConfig = false
 		setConfigIndex(overviewConfigIndex == overviewConfigs.length-1 ? -1 : overviewConfigIndex+1)
 	}
 
 	function prevOverviewLayout() {
+		randomizeOverviewConfig = false
 		setConfigIndex(overviewConfigIndex < 0 ? overviewConfigs.length-1 : overviewConfigIndex-1)
 	}
 
@@ -162,6 +169,8 @@ Item {
 	Component.onCompleted: resetDemoData()
 
 	Rectangle {
+		id: demoTitleBackground
+
 		anchors {
 			top: parent.top
 			horizontalCenter: parent.horizontalCenter
@@ -170,11 +179,28 @@ Item {
 		height: demoTitle.height * 1.1
 		color: "white"
 		opacity: 0.9
+		visible: demoTitleTimer.running && !randomizeOverviewConfig
 
 		Label {
 			id: demoTitle
 			anchors.centerIn: parent
 			color: "black"
+			onTextChanged: demoTitleTimer.restart()
+		}
+
+		Timer {
+			id: demoTitleTimer
+			interval: 3000
+		}
+	}
+
+	Connections {
+		target: PageManager.navBar || null
+		function onCurrentUrlChanged() {
+			if (randomizeOverviewConfig && !root._updating
+					&& PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml") {
+				setConfigIndex(Math.floor(Math.random() * overviewConfigs.length))
+			}
 		}
 	}
 }
