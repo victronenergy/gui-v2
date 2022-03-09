@@ -6,11 +6,15 @@ import QtQuick
 import Victron.VenusOS
 
 ControlCard {
+	property alias model: switchesView.model
+
 	title.icon.source: "qrc:/images/switches.svg"
 	//% "Switches"
 	title.text: qsTrId("controlcard_switches")
 
 	ListView {
+		id: switchesView
+
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry.controlCard.mediumItem.height
@@ -18,11 +22,17 @@ ControlCard {
 			right: parent.right
 			bottom: parent.bottom
 		}
-		model: SwitchesModel
 		delegate: SwitchControlValue {
-			label.text: qsTrId(model.text)
-			button.checked: model.on ? true : false
-			onClicked: SwitchesModel.setProperty(index, "on", button.checked)
+			//: Relay number
+			//% "Relay %1"
+			label.text: qsTrId("controlcard_relay_name").arg(model.index + 1)
+			button.checked: model.relay.state === Relays.State.Active
+			onClicked: {
+				var newState = model.relay.state === Relays.State.Active
+						? Relays.State.Inactive
+						: Relays.State.Active
+				model.relay.setState(newState)
+			}
 		}
 	}
 }

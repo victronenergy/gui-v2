@@ -46,6 +46,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Generators");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Inverters.qml")),
 		"Victron.VenusOS", 2, 0, "Inverters");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Relays.qml")),
+		"Victron.VenusOS", 2, 0, "Relays");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/System.qml")),
 		"Victron.VenusOS", 2, 0, "System");
 
@@ -86,8 +88,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Gauges");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlCard.qml")),
 		"Victron.VenusOS", 2, 0, "ControlCard");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/ControlCardsModel.qml")),
-		"Victron.VenusOS", 2, 0, "ControlCardsModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "ControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ButtonControlValue.qml")),
@@ -138,8 +138,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "StatusBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/TankGauge.qml")),
 		"Victron.VenusOS", 2, 0, "TankGauge");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/SwitchesModel.qml")),
-		"Victron.VenusOS", 2, 0, "SwitchesModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ThreePhaseDisplay.qml")),
 		"Victron.VenusOS", 2, 0, "ThreePhaseDisplay");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ToastNotification.qml")),

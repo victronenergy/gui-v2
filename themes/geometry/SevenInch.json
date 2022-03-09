@@ -123,7 +123,7 @@
 
     "geometry.controlCardsPage.bottomMargin": 16,
     "geometry.controlCardsPage.spacing": 16,
-    "geometry.controlCardsPage.leftMargin": "geometry.page.grid.horizontalMargin",
+    "geometry.controlCardsPage.horizontalMargin": "geometry.page.grid.horizontalMargin",
 
     "geometry.briefPage.edgeGauge.horizontalMargin": 56,
     "geometry.briefPage.edgeGauge.radius": 456,

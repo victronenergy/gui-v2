@@ -19,12 +19,13 @@ Page {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry.controlCardsPage.leftMargin
+			leftMargin: Theme.geometry.controlCardsPage.horizontalMargin
 			right: parent.right
 			top: parent.top
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry.controlCardsPage.bottomMargin
 		}
+		rightMargin: Theme.geometry.controlCardsPage.horizontalMargin
 		spacing: Theme.geometry.controlCardsPage.spacing
 		orientation: ListView.Horizontal
 		snapMode: ListView.SnapOneItem
@@ -111,6 +112,11 @@ Page {
 				onChangeMinimumStateOfCharge: function(newMinSoc) {
 					ess.setMinimumStateOfCharge(newMinSoc)
 				}
+			}
+
+			SwitchesCard {
+				width: root.cardWidth
+				model: relays ? relays.model : null
 			}
 		}
 	}
