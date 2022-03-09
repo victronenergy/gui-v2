@@ -22,6 +22,7 @@ Window {
 	property Item inverters: dataLoader.item.inverters
 	property Item generators: dataLoader.item.generators
 	property var generator0: generators ? generators.generator0 : null
+	property Item relays: dataLoader.item.relays
 	property Item solarChargers: dataLoader.item.solarChargers
 	property Item system: dataLoader.item.system
 
@@ -128,7 +129,7 @@ Window {
 			property Demo.Tanks tanks: Demo.Tanks {}
 			property Demo.Inverters inverters: Demo.Inverters {}
 			property Demo.Generators generators: Demo.Generators {}
-//            property Relays relays: Relays {}
+			property Demo.Relays relays: Demo.Relays {}
 
 			property Demo.SolarChargers solarChargers: Demo.SolarChargers {}
 			property Demo.System system: Demo.System {}

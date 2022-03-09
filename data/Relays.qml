@@ -9,12 +9,9 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum RelayState {
+	enum State {
 		Inactive = 0,
 		Active = 1
-		// Documentation suggests (but appears to be wrong):
-		//Active = 1,
-		//Inactive = 2
 	}
 
 	property ListModel model: ListModel {}
@@ -57,7 +54,7 @@ Item {
 			property int state: -1
 
 			function setState(newState) {
-				_state = newState
+				_state.setValue(newState)
 			}
 
 			property bool _valid: state >= 0

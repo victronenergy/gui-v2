@@ -34,7 +34,6 @@
         <file>components/CircularMultiGauge.qml</file>
         <file>components/CircularSingleGauge.qml</file>
         <file>components/ControlCard.qml</file>
-        <file>components/ControlCardsModel.qml</file>
         <file>components/ControlValue.qml</file>
         <file>components/ExpandedTanksView.qml</file>
         <file>components/ButtonControlValue.qml</file>
@@ -59,7 +58,6 @@
         <file>components/SolarYieldGraph.qml</file>
         <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
-        <file>components/SwitchesModel.qml</file>
         <file>components/TankGauge.qml</file>
         <file>components/ThreePhaseDisplay.qml</file>
         <file>components/ToastNotification.qml</file>
@@ -90,6 +88,7 @@
         <file>demo/Generators.qml</file>
         <file>demo/Inverters.qml</file>
         <file>demo/SolarChargers.qml</file>
+        <file>demo/Relays.qml</file>
         <file>demo/System.qml</file>
         <file>demo/SystemAc.qml</file>
         <file>demo/SystemDc.qml</file>
