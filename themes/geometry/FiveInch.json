@@ -21,6 +21,9 @@
     "geometry.button.radius": 6,
     "geometry.button.border.width": 2,
 
+    "geometry.buttonControlValue.height": 40,
+    "geometry.buttonControlValue.width": 112,
+
     "geometry.progressBar.height": 8,
     "geometry.progressBar.radius": 8,
 
@@ -65,7 +68,8 @@
     "geometry.toastNotification.icon.width": 28,
     "geometry.toastNotification.label.padding": 16,
 
-    "geometry.controlCard.width": 368,
+    "geometry.controlCard.minimumWidth": 352,
+    "geometry.controlCard.maximumWidth": 368,
     "geometry.controlCard.height": 416,
     "geometry.controlCard.radius": 8,
     "geometry.controlCard.contentMargins": 16,
@@ -73,6 +77,8 @@
     "geometry.controlCard.title.leftMargin": 16,
     "geometry.controlCard.title.topMargin": 10,
     "geometry.controlCard.title.leftPadding" : 4,
+    "geometry.controlCard.title.icon.height" : 24,
+    "geometry.controlCard.subCard.header.height": 40,
     "geometry.controlCard.smallItem.height" : 48,
     "geometry.controlCard.mediumItem.height" : 56,
     "geometry.controlCard.largeItem.height" : 72,
@@ -207,7 +213,6 @@
 
     "geometry.essCard.minimumSocButton.height": 40,
     "geometry.essCard.minimumSocButton.width": 112,
-    "geometry.essCard.warningIcon.rightMargin": 18,
 
     "geometry.overviewPage.widget.radius": 8,
     "geometry.overviewPage.widget.border.width": 2,

@@ -17,7 +17,7 @@ ControlCard {
 	signal changeMode(newMode: int)
 	signal changeCurrentLimit(index: int, newCurrentLimit: int)
 
-	title.icon.source: "qrc:/images/inverter.svg"
+	title.icon.source: "qrc:/images/inverter_charger.svg"
 	//% "Inverter / Charger"
 	title.text: qsTrId("controlcard_inverter_charger")
 

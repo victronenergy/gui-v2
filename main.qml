@@ -17,6 +17,7 @@ Window {
 	property Item acInputs: dataLoader.item.acInputs
 	property Item dcInputs: dataLoader.item.dcInputs
 	property Item battery: dataLoader.item.battery
+	property Item ess: dataLoader.item.ess
 	property Item tanks: dataLoader.item.tanks
 	property Item inverters: dataLoader.item.inverters
 	property Item generators: dataLoader.item.generators
@@ -89,6 +90,7 @@ Window {
 			property AcInputs acInputs: AcInputs {}
 			property DcInputs dcInputs: DcInputs {}
 			property Battery battery: Battery {}
+			property Ess ess: Ess {}
 			property Tanks tanks: Tanks {}
 			property Generators generators: Generators {}
 			property Inverters inverters: Inverters {}
@@ -122,6 +124,7 @@ Window {
 			property Demo.AcInputs acInputs: Demo.AcInputs {}
 			property Demo.DcInputs dcInputs: Demo.DcInputs {}
 			property Demo.Battery battery: Demo.Battery {}
+			property Demo.Ess ess: Demo.Ess {}
 			property Demo.Tanks tanks: Demo.Tanks {}
 			property Demo.Inverters inverters: Demo.Inverters {}
 			property Demo.Generators generators: Demo.Generators {}

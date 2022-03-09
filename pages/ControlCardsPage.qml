@@ -10,6 +10,10 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	property int cardWidth: cardsView.count > 2
+			? Theme.geometry.controlCard.minimumWidth
+			: Theme.geometry.controlCard.maximumWidth
+
 	ListView {
 		id: cardsView
 
@@ -34,6 +38,7 @@ Page {
 					model: generators ? generators.model : null
 
 					GeneratorCard {
+						width: root.cardWidth
 						state: model.generator.state
 						runtime: model.generator.runtime
 						runningBy: model.generator.runningBy
@@ -59,6 +64,7 @@ Page {
 					model: inverters ? inverters.model : null
 
 					InverterCard {
+						width: root.cardWidth
 						state: model.inverter.state
 						ampOptions: model.inverter.ampOptions
 						mode: model.inverter.mode
@@ -90,6 +96,20 @@ Page {
 							}
 						}
 					}
+				}
+			}
+
+			ESSCard {
+				width: root.cardWidth
+				state: ess ? ess.state : Ess.State.Unused
+				minimumStateOfCharge: ess ? ess.minimumStateOfCharge : 0
+				stateOfChargeLimit: ess ? ess.stateOfChargeLimit : 0
+
+				onChangeState: function(newState) {
+					ess.setState(newState)
+				}
+				onChangeMinimumStateOfCharge: function(newMinSoc) {
+					ess.setMinimumStateOfCharge(newMinSoc)
 				}
 			}
 		}

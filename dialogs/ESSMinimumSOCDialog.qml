@@ -8,9 +8,7 @@ import Victron.VenusOS
 ModalDialog {
 	id: root
 
-	property int newMinimumSOC
-
-	signal setMinimumSOC(var newValue)
+	property int minimumStateOfCharge
 
 	//% "Minimum SOC"
 	title: qsTrId("ess_card_minimum_soc")
@@ -26,7 +24,7 @@ ModalDialog {
 				horizontalCenter: parent.horizontalCenter
 			}
 			font.pixelSize: Theme.font.size.xxl
-			text: qsTrId("%1%").arg(root.newMinimumSOC)
+			text: qsTrId("%1%").arg(root.minimumStateOfCharge)
 		}
 		Label {
 			id: label2
@@ -51,8 +49,8 @@ ModalDialog {
 			to: 100
 			width: parent.width - 128
 			height: 24
-			value: newMinimumSOC
-			onMoved: newMinimumSOC = value
+			value: root.minimumStateOfCharge
+			onMoved: root.minimumStateOfCharge = value
 		}
 		Label {
 			id: recommendation
@@ -63,10 +61,9 @@ ModalDialog {
 				horizontalCenter: parent.horizontalCenter
 			}
 			color: Theme.color.font.tertiary
+			// TODO set this text depending on battery type?
 			//% "For xxx type batteries, below 10% is not recommended"
 			text: qsTrId("ess_recommended")
 		}
 	}
-
-	onAccepted: root.setMinimumSOC(newMinimumSOC)
 }

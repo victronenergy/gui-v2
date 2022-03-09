@@ -18,8 +18,8 @@ ControlValue {
 		id: button
 
 		anchors.verticalCenter: parent.verticalCenter
-		height: Theme.geometry.essCard.minimumSocButton.height
-		width: Theme.geometry.essCard.minimumSocButton.width
+		height: Theme.geometry.buttonControlValue.height
+		width: Theme.geometry.buttonControlValue.width
 
 		flat: !enabled
 		border.color: Theme.color.ok
