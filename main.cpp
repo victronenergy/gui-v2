@@ -40,6 +40,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "AcInputs");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DcInputs.qml")),
 		"Victron.VenusOS", 2, 0, "DcInputs");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Ess.qml")),
+		"Victron.VenusOS", 2, 0, "Ess");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Generators.qml")),
 		"Victron.VenusOS", 2, 0, "Generators");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Inverters.qml")),

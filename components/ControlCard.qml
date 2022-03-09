@@ -11,7 +11,7 @@ Rectangle {
 	property alias title: title
 	property alias status: status
 
-	width: Theme.geometry.controlCard.width
+	width: Theme.geometry.controlCard.maximumWidth
 	height: parent ? parent.height : 0
 	color: Theme.color.background.secondary
 	radius: Theme.geometry.controlCard.radius
@@ -28,6 +28,7 @@ Rectangle {
 		leftPadding: Theme.geometry.controlCard.title.leftPadding
 		spacing: Theme.geometry.controlCard.title.spacing
 		display: C.AbstractButton.TextBesideIcon
+		icon.height: Theme.geometry.controlCard.title.icon.height
 
 		font.family: VenusFont.normal.name
 		font.pixelSize: Theme.font.size.s
