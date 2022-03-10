@@ -13,6 +13,7 @@ OverviewWidget {
 	//% "Solar yield"
 	title.text: qsTrId("overview_widget_solaryield_title")
 	icon.source: "qrc:/images/solaryield.svg"
+	type: OverviewWidget.Type.Solar
 
 	extraContent.children: [
 		SolarYieldGraph {
