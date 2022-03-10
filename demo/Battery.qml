@@ -16,4 +16,35 @@ Item {
 	property real timeToGo: 190 * 60
 	property string icon: Utils.batteryIcon(root)
 	readonly property bool idle: current === 0 || power === 0
+	property var chargeAnimation: chargeAnimation
+
+	SequentialAnimation on stateOfCharge {
+		id: chargeAnimation
+		loops: Animation.Infinite
+
+		ScriptAction {
+			script: {
+				root.power = Math.abs(root.power)
+				root.current = Math.abs(root.current)
+			}
+		}
+		NumberAnimation {
+			to: 100
+			duration: 2 * 60 * 1000
+		}
+		PauseAnimation {
+			duration: 10 * 1000
+		}
+		ScriptAction {
+			script: {
+				// negative value == discharging
+				root.power *= -1
+				root.current *= -1
+			}
+		}
+		NumberAnimation {
+			to: 0
+			duration: 2 * 60 * 1000
+		}
+	}
 }

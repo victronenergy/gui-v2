@@ -99,9 +99,9 @@ Item {
 
 	property int overviewConfigIndex: -1
 	property bool randomizeOverviewConfig: true
-	property bool _updating
+	property var _lastPageUrl
 
-	function setConfigIndex(configIndex) {
+	function setConfigIndex(configIndex, forceReload) {
 		overviewConfigIndex = configIndex
 		let config = overviewConfigs[configIndex]
 		if (config) {
@@ -128,6 +128,7 @@ Item {
 				system.dc.demoTimer.running = config.system.dc !== undefined
 			}
 			if (config.battery) {
+				battery.chargeAnimation.running = false
 				battery.stateOfCharge = config.battery.stateOfCharge
 				battery.current = config.battery.current
 			}
@@ -140,11 +141,11 @@ Item {
 			resetDemoData()
 		}
 
-		// Force page reload
-		_updating = true
-		PageManager.navBar.buttonClicked(0)
-		PageManager.navBar.buttonClicked(1)
-		_updating = false
+		// Force page reload, otherwise layout may not change if it is the current page
+		if (PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml") {
+			PageManager.navBar.buttonClicked(0)
+			PageManager.navBar.buttonClicked(1)
+		}
 	}
 
 	function nextOverviewLayout() {
@@ -163,6 +164,7 @@ Item {
 		solarChargers.populate()
 		system.ac.demoTimer.running = true
 		system.dc.demoTimer.running = true
+		battery.chargeAnimation.running = true
 		demoTitle.text = ""
 	}
 
@@ -197,10 +199,12 @@ Item {
 	Connections {
 		target: PageManager.navBar || null
 		function onCurrentUrlChanged() {
-			if (randomizeOverviewConfig && !root._updating
-					&& PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml") {
+			if (randomizeOverviewConfig
+					&& PageManager.navBar.currentUrl !== "qrc:/pages/OverviewPage.qml"
+					&& _lastPageUrl === "qrc:/pages/OverviewPage.qml") {
 				setConfigIndex(Math.floor(Math.random() * overviewConfigs.length))
 			}
+			_lastPageUrl = PageManager.navBar.currentUrl
 		}
 	}
 }
