@@ -14,6 +14,7 @@ OverviewWidget {
 	//% "AC Loads"
 	title.text: qsTrId("overview_widget_acloads_title")
 	icon.source: "qrc:/images/acloads.svg"
+	type: OverviewWidget.Type.AcLoads
 	enabled: false
 
 	extraContent.children: [

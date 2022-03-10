@@ -8,6 +8,21 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
+	enum Type {
+		UnknownType,
+		Grid,
+		Shore,
+		AcGenerator,
+		DcGenerator,
+		Alternator,
+		Wind,
+		Solar,
+		Inverter,
+		Battery,
+		AcLoads,
+		DcLoads
+	}
+
 	enum Size {
 		Zero, // i.e. not visible
 		XS,
@@ -17,6 +32,7 @@ Rectangle {
 		XL
 	}
 
+	property int type: OverviewWidget.Type.UnknownType
 	property int size: OverviewWidget.Size.M
 
 	property alias physicalQuantity: valueDisplay.physicalQuantity
@@ -31,7 +47,7 @@ Rectangle {
 	property alias extraContent: extraContent
 	property bool isSegment
 
-	property int interactiveHeight: size === OverviewWidget.Size.XL
+	readonly property int interactiveHeight: size === OverviewWidget.Size.XL
 		  ? Theme.geometry.overviewPage.widget.interactive.xl.height
 		  : size === OverviewWidget.Size.L
 			? Theme.geometry.overviewPage.widget.interactive.l.height
@@ -40,7 +56,7 @@ Rectangle {
 			  : size === OverviewWidget.Size.S
 			  ? Theme.geometry.overviewPage.widget.interactive.s.height
 			  : Theme.geometry.overviewPage.widget.interactive.xs.height
-	property int nonInteractiveHeight: size === OverviewWidget.Size.XL
+	readonly property int nonInteractiveHeight: size === OverviewWidget.Size.XL
 		  ? Theme.geometry.overviewPage.widget.noninteractive.xl.height
 		  : size === OverviewWidget.Size.L
 			? Theme.geometry.overviewPage.widget.noninteractive.l.height
@@ -49,7 +65,6 @@ Rectangle {
 			  : size === OverviewWidget.Size.S
 			  ? Theme.geometry.overviewPage.widget.noninteractive.s.height
 			  : Theme.geometry.overviewPage.widget.noninteractive.xs.height
-	property bool heightAnimated
 
 	signal clicked()
 
@@ -61,7 +76,6 @@ Rectangle {
 	color: isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
 	Behavior on height {
-		enabled: root.heightAnimated
 		NumberAnimation {
 			duration: Theme.animation.overviewPage.interactive.duration
 			easing.type: Easing.InOutQuad

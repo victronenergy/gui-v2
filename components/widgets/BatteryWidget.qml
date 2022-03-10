@@ -36,6 +36,7 @@ OverviewWidget {
 	//% "Battery"
 	title.text: qsTrId("overview_widget_battery_title")
 	icon.source: Utils.batteryIcon(batteryData)
+	type: OverviewWidget.Type.Battery
 
 	value: batteryData.stateOfCharge
 	physicalQuantity: Units.Percentage

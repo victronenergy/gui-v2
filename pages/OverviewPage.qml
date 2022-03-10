@@ -12,14 +12,59 @@ Page {
 	property var _leftWidgets: []
 
 	// Preferred order for the input widgets on the left hand side
-	readonly property var _leftWidgetOrder: [ gridWidget, shoreWidget, acGeneratorWidget,
-		dcGeneratorWidget, alternatorWidget, windWidget, solarWidget ]
+	readonly property var _leftWidgetOrder: [
+		OverviewWidget.Type.Grid,
+		OverviewWidget.Type.Shore,
+		OverviewWidget.Type.AcGenerator,
+		OverviewWidget.Type.DcGenerator,
+		OverviewWidget.Type.Alternator,
+		OverviewWidget.Type.Wind,
+		OverviewWidget.Type.Solar
+	]
 
 	// Use a delayed binding to avoid repopulating the model unnecessarily
 	readonly property bool _shouldResetLeftWidgets: (acInputs && acInputs.model.count)
 			|| (dcInputs && dcInputs.model.count)
 			|| (solarChargers && solarChargers.model.count)
 	on_ShouldResetLeftWidgetsChanged: Qt.callLater(_resetLeftWidgets)
+
+	property var _createdWidgets: ({})
+
+	function _createWidget(type, args) {
+		if (_createdWidgets[type] !== undefined) {
+			return _createdWidgets[type]
+		}
+		args = args || {}
+		let widget = null
+		switch (type) {
+		case OverviewWidget.Type.Grid:
+			widget = gridComponent.createObject(root, args)
+			break
+		case OverviewWidget.Type.Shore:
+			widget = shoreComponent.createObject(root, args)
+			break
+		case OverviewWidget.Type.AcGenerator:
+			widget = acGeneratorComponent.createObject(root, args)
+			break
+		case OverviewWidget.Type.DcGenerator:
+			widget = dcGeneratorComponent.createObject(root, args)
+			break
+		case OverviewWidget.Type.Alternator:
+			widget = alternatorComponent.createObject(root, args)
+			break
+		case OverviewWidget.Type.Wind:
+			widget = windComponent.createObject(root, args)
+			break
+		case OverviewWidget.Type.Solar:
+			widget = solarComponent.createObject(root, args)
+			break
+		default:
+			console.warn('Cannot create widget of unsupported type:', type)
+			return null
+		}
+		_createdWidgets[type] = widget
+		return widget
+	}
 
 	function _resetLeftWidgets() {
 		if (!acInputs) {
@@ -32,7 +77,8 @@ Page {
 		_addModelWidgets(dcInputs.model, widgetCandidates)
 
 		if (solarChargers && solarChargers.model.count > 0) {
-			widgetCandidates.splice(_leftWidgetInsertionIndex(solarWidget, widgetCandidates), 0, solarWidget)
+			widgetCandidates.splice(_leftWidgetInsertionIndex(OverviewWidget.Type.Solar, widgetCandidates),
+					0, _createWidget(OverviewWidget.Type.Solar))
 		}
 		_leftWidgets = widgetCandidates
 	}
@@ -40,65 +86,80 @@ Page {
 	function _addModelWidgets(inputModel, widgetCandidates) {
 		for (let i = 0; i < inputModel.count; ++i) {
 			let input = inputModel.get(i).input
-			let widget = null
+			let widgetType = -1
 			if (inputModel === acInputs.model)  {
 				switch (input.source) {
 				case AcInputs.InputType.Grid:
-					widget = gridWidget
+					widgetType = OverviewWidget.Type.Grid
 					break
 				case AcInputs.InputType.Generator:
-					widget = acGeneratorWidget
+					widgetType = OverviewWidget.Type.AcGenerator
 					break
 				case AcInputs.InputType.Shore:
-					widget = shoreWidget
+					widgetType = OverviewWidget.Type.Shore
+					break
+				default:
 					break
 				}
 			} else {
 				switch (input.source) {
 				case DcInputs.InputType.Alternator:
-					widget = alternatorWidget
+					widgetType = OverviewWidget.Type.Alternator
 					break
 				case DcInputs.InputType.DcGenerator:
-					widget = dcGeneratorWidget
+					widgetType = OverviewWidget.Type.DcGenerator
 					break
 				case DcInputs.InputType.Wind:
-					widget = windWidget
+					widgetType = OverviewWidget.Type.Wind
 					break
 				default:
-					console.warn("Unknown AC/DC input type:", input.source, "for model:", inputModel)
-					continue
+					break
 				}
 			}
-			widget.input = input
-			widgetCandidates.splice(_leftWidgetInsertionIndex(widget, widgetCandidates), 0, widget)
+			if (widgetType < 0) {
+				console.warn("Unknown AC/DC input type:", input.source, "for model:", inputModel)
+				continue
+			}
+			let widget = _createWidget(widgetType, { input: input })
+			widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
 		}
 	}
 
-	function _leftWidgetInsertionIndex(widget, candidateArray) {
-		const orderedIndex = _leftWidgetOrder.indexOf(widget)
+	function _leftWidgetInsertionIndex(widgetType, candidateArray) {
+		const orderedIndex = _leftWidgetOrder.indexOf(widgetType)
 		for (let i = 0; i < candidateArray.length; ++i) {
-			if (orderedIndex < _leftWidgetOrder.indexOf(candidateArray[i])) {
+			if (orderedIndex < _leftWidgetOrder.indexOf(candidateArray[i].type)) {
 				return i
 			}
 		}
 		return candidateArray.length
 	}
 
+	function _widgetForType(widgetType) {
+		for (let i = 0; i < _leftWidgets.length; ++i) {
+			if (_leftWidgets[i].type === widgetType) {
+				return _leftWidgets[i]
+			}
+		}
+		return null
+	}
+
 	function _leftWidgetTopAnchor(widget) {
 		if (_leftWidgets.length == 1) {
 			return widget.parent.top
 		}
-		let widgetIndex = _leftWidgetOrder.indexOf(widget)
+		const widgetIndex = _leftWidgetOrder.indexOf(widget.type)
 		if (widgetIndex < 0) {
-			console.warn("Error: unknown widget")
+			console.warn("Error: unknown widget", widget, widget.type)
 			return undefined
 		}
 		if (widgetIndex == 0) {
 			return widget.parent.top
 		}
 		for (let i = widgetIndex-1; i >= 0; i--) {
-			if (_leftWidgetOrder[i].visible) {
-				return _leftWidgetOrder[i].bottom
+			const w = _widgetForType(_leftWidgetOrder[i])
+			if (w && w.visible) {
+				return w.bottom
 			}
 		}
 		return widget.parent.top
@@ -120,13 +181,14 @@ Page {
 			const reducedSize = _leftWidgets.length == 3 ? OverviewWidget.Size.M : OverviewWidget.Size.XS
 			let i = 0
 			if (widget.extraContent.children.length > 0) {
-				let widgetIndex = _leftWidgetOrder.indexOf(widget)
+				let widgetIndex = _leftWidgetOrder.indexOf(widget.type)
 				if (widgetIndex < 0) {
-					console.warn("Error: unknown widget")
+					console.warn("Error: unknown widget", widget, widget.type)
 					return reducedSize
 				}
 				for (i = 0; i < widgetIndex; ++i) {
-					if (_leftWidgetOrder[i].size >= OverviewWidget.Size.L) {
+					const w = _widgetForType(_leftWidgetOrder[i])
+					if (w && w.size >= OverviewWidget.Size.L) {
 						return reducedSize
 					}
 				}
@@ -170,195 +232,224 @@ Page {
 		segments: _leftWidgets
 	}
 
-	GridWidget {
-		id: gridWidget
+	Component {
+		id: gridComponent
 
-		anchors {
-			top: _leftWidgetTopAnchor(gridWidget)
-			topMargin: _leftWidgetTopMargin(gridWidget)
-			left: parent.left
-			leftMargin: Theme.geometry.page.grid.horizontalMargin
+		GridWidget {
+			id: gridWidget
+
+			anchors {
+				top: _leftWidgetTopAnchor(gridWidget)
+				topMargin: _leftWidgetTopMargin(gridWidget)
+				left: parent.left
+				leftMargin: Theme.geometry.page.grid.horizontalMargin
+			}
+			width: Theme.geometry.overviewPage.widget.input.width
+			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			size: _widgetSize(gridWidget)
+			isSegment: segmentedBackground.visible
+			sideGaugeValue: value / Utils.maximumValue("grid.power")
+
+			WidgetConnector {
+				parent: root
+				startWidget: gridWidget
+				startLocation: WidgetConnector.Location.Right
+				endWidget: inverterWidget
+				endLocation: WidgetConnector.Location.Left
+				animated: !!gridWidget.input && gridWidget.input.connected
+				straight: gridWidget.size > OverviewWidget.Size.M
+			}
 		}
-		width: Theme.geometry.overviewPage.widget.input.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
-		size: _widgetSize(gridWidget)
-		isSegment: segmentedBackground.visible
-		sideGaugeValue: value / Utils.maximumValue("grid.power")
-	}
-	WidgetConnector {
-		startWidget: gridWidget
-		startLocation: WidgetConnector.Location.Right
-		endWidget: inverterWidget
-		endLocation: WidgetConnector.Location.Left
-		animated: !!gridWidget.input && gridWidget.input.connected
-		straight: gridWidget.size > OverviewWidget.Size.M
 	}
 
-	ShoreWidget {
-		id: shoreWidget
+	Component {
+		id: shoreComponent
 
-		anchors {
-			top: _leftWidgetTopAnchor(shoreWidget)
-			topMargin: _leftWidgetTopMargin(shoreWidget)
-			left: parent.left
-			leftMargin: Theme.geometry.page.grid.horizontalMargin
+		ShoreWidget {
+			id: shoreWidget
+
+			anchors {
+				top: _leftWidgetTopAnchor(shoreWidget)
+				topMargin: _leftWidgetTopMargin(shoreWidget)
+				left: parent.left
+				leftMargin: Theme.geometry.page.grid.horizontalMargin
+			}
+			width: Theme.geometry.overviewPage.widget.input.width
+			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			size: _widgetSize(shoreWidget)
+			isSegment: segmentedBackground.visible
+			sideGaugeValue: 0.5 // TODO when max available
+
+			WidgetConnector {
+				parent: root
+				startWidget: shoreWidget
+				startLocation: WidgetConnector.Location.Right
+				endWidget: inverterWidget
+				endLocation: WidgetConnector.Location.Left
+				animated: !!shoreWidget.input && shoreWidget.input.connected
+				straight: shoreWidget.size > OverviewWidget.Size.M
+			}
 		}
-		width: Theme.geometry.overviewPage.widget.input.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
-		size: _widgetSize(shoreWidget)
-		isSegment: segmentedBackground.visible
-		sideGaugeValue: 0.5 // TODO when max available
-	}
-	WidgetConnector {
-		startWidget: shoreWidget
-		startLocation: WidgetConnector.Location.Right
-		endWidget: inverterWidget
-		endLocation: WidgetConnector.Location.Left
-		animated: !!shoreWidget.input && shoreWidget.input.connected
-		straight: shoreWidget.size > OverviewWidget.Size.M
 	}
 
-	AcGeneratorWidget {
-		id: acGeneratorWidget
+	Component {
+		id: acGeneratorComponent
 
-		anchors {
-			top: _leftWidgetTopAnchor(acGeneratorWidget)
-			topMargin: _leftWidgetTopMargin(acGeneratorWidget)
-			left: parent.left
-			leftMargin: Theme.geometry.page.grid.horizontalMargin
+		AcGeneratorWidget {
+			id: acGeneratorWidget
+
+			anchors {
+				top: _leftWidgetTopAnchor(acGeneratorWidget)
+				topMargin: _leftWidgetTopMargin(acGeneratorWidget)
+				left: parent.left
+				leftMargin: Theme.geometry.page.grid.horizontalMargin
+			}
+			width: Theme.geometry.overviewPage.widget.input.width
+			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			size: _widgetSize(acGeneratorWidget)
+			isSegment: segmentedBackground.visible
+
+			WidgetConnector {
+				parent: root
+				startWidget: acGeneratorWidget
+				startLocation: WidgetConnector.Location.Right
+				endWidget: inverterWidget
+				endLocation: WidgetConnector.Location.Left
+				animated: !!acGeneratorWidget.input && acGeneratorWidget.input.connected
+				straight: acGeneratorWidget.size > OverviewWidget.Size.M
+			}
 		}
-		width: Theme.geometry.overviewPage.widget.input.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
-		size: _widgetSize(acGeneratorWidget)
-		isSegment: segmentedBackground.visible
-	}
-	WidgetConnector {
-		startWidget: acGeneratorWidget
-		startLocation: WidgetConnector.Location.Right
-		endWidget: inverterWidget
-		endLocation: WidgetConnector.Location.Left
-		animated: !!acGeneratorWidget.input && acGeneratorWidget.input.connected
-		straight: acGeneratorWidget.size > OverviewWidget.Size.M
 	}
 
-	DcGeneratorWidget {
-		id: dcGeneratorWidget
+	Component {
+		id: dcGeneratorComponent
 
-		anchors {
-			top: _leftWidgetTopAnchor(dcGeneratorWidget)
-			topMargin: _leftWidgetTopMargin(dcGeneratorWidget)
-			left: parent.left
-			leftMargin: Theme.geometry.page.grid.horizontalMargin
+		DcGeneratorWidget {
+			id: dcGeneratorWidget
+
+			anchors {
+				top: _leftWidgetTopAnchor(dcGeneratorWidget)
+				topMargin: _leftWidgetTopMargin(dcGeneratorWidget)
+				left: parent.left
+				leftMargin: Theme.geometry.page.grid.horizontalMargin
+			}
+			width: Theme.geometry.overviewPage.widget.input.width
+			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			size: _widgetSize(dcGeneratorWidget)
+			isSegment: segmentedBackground.visible
+
+			WidgetConnector {
+				parent: root
+				startWidget: dcGeneratorWidget
+				startLocation: WidgetConnector.Location.Right
+				endWidget: batteryWidget
+				endLocation: WidgetConnector.Location.Left
+				animated: !!dcGeneratorWidget.input
+						  && !isNaN(dcGeneratorWidget.input.current)
+						  && dcGeneratorWidget.input.current > 0
+				straight: dcGeneratorWidget.size > OverviewWidget.Size.M
+			}
 		}
-		width: Theme.geometry.overviewPage.widget.input.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
-		size: _widgetSize(dcGeneratorWidget)
-		isSegment: segmentedBackground.visible
-	}
-	WidgetConnector {
-		startWidget: dcGeneratorWidget
-		startLocation: WidgetConnector.Location.Right
-		endWidget: batteryWidget
-		endLocation: WidgetConnector.Location.Left
-		animated: !!dcGeneratorWidget.input
-				  && !isNaN(dcGeneratorWidget.input.current)
-				  && dcGeneratorWidget.input.current > 0
-		straight: dcGeneratorWidget.size > OverviewWidget.Size.M
 	}
 
-	AlternatorWidget {
-		id: alternatorWidget
+	Component {
+		id: alternatorComponent
 
-		anchors {
-			top: _leftWidgetTopAnchor(alternatorWidget)
-			topMargin: _leftWidgetTopMargin(alternatorWidget)
-			left: parent.left
-			leftMargin: Theme.geometry.page.grid.horizontalMargin
+		AlternatorWidget {
+			id: alternatorWidget
+
+			anchors {
+				top: _leftWidgetTopAnchor(alternatorWidget)
+				topMargin: _leftWidgetTopMargin(alternatorWidget)
+				left: parent.left
+				leftMargin: Theme.geometry.page.grid.horizontalMargin
+			}
+			width: Theme.geometry.overviewPage.widget.input.width
+			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			size: _widgetSize(alternatorWidget)
+			isSegment: segmentedBackground.visible
+
+			WidgetConnector {
+				parent: root
+				startWidget: alternatorWidget
+				startLocation: WidgetConnector.Location.Right
+				endWidget: batteryWidget
+				endLocation: WidgetConnector.Location.Left
+				animated: !!alternatorWidget.input
+						  && !isNaN(alternatorWidget.input.current)
+						  && alternatorWidget.input.current > 0
+			}
 		}
-		width: Theme.geometry.overviewPage.widget.input.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
-		size: _widgetSize(alternatorWidget)
-		isSegment: segmentedBackground.visible
-	}
-	WidgetConnector {
-		startWidget: alternatorWidget
-		startLocation: WidgetConnector.Location.Right
-		endWidget: batteryWidget
-		endLocation: WidgetConnector.Location.Left
-		animated: !!alternatorWidget.input
-				  && !isNaN(alternatorWidget.input.current)
-				  && alternatorWidget.input.current > 0
 	}
 
-	WindWidget {
-		id: windWidget
+	Component {
+		id: windComponent
 
-		anchors {
-			top: _leftWidgetTopAnchor(windWidget)
-			topMargin: _leftWidgetTopMargin(windWidget)
-			left: parent.left
-			leftMargin: Theme.geometry.page.grid.horizontalMargin
+		WindWidget {
+			id: windWidget
+
+			anchors {
+				top: _leftWidgetTopAnchor(windWidget)
+				topMargin: _leftWidgetTopMargin(windWidget)
+				left: parent.left
+				leftMargin: Theme.geometry.page.grid.horizontalMargin
+			}
+			width: Theme.geometry.overviewPage.widget.input.width
+			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			size: _widgetSize(windWidget)
+			isSegment: segmentedBackground.visible
+
+			WidgetConnector {
+				parent: root
+				startWidget: windWidget
+				startLocation: WidgetConnector.Location.Right
+				endWidget: batteryWidget
+				endLocation: WidgetConnector.Location.Left
+				animated: !!windWidget.input
+						  && !isNaN(windWidget.input.current)
+						  && windWidget.input.current > 0
+			}
 		}
-		width: Theme.geometry.overviewPage.widget.input.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
-		size: _widgetSize(windWidget)
-		isSegment: segmentedBackground.visible
-	}
-	WidgetConnector {
-		startWidget: windWidget
-		startLocation: WidgetConnector.Location.Right
-		endWidget: batteryWidget
-		endLocation: WidgetConnector.Location.Left
-		animated: !!windWidget.input
-				  && !isNaN(windWidget.input.current)
-				  && windWidget.input.current > 0
 	}
 
-	SolarYieldWidget {
-		id: solarWidget
+	Component {
+		id: solarComponent
 
-		anchors {
-			top: _leftWidgetTopAnchor(solarWidget)
-			topMargin: _leftWidgetTopMargin(solarWidget)
-			left: parent.left
-			leftMargin: Theme.geometry.page.grid.horizontalMargin
+		SolarYieldWidget {
+			id: solarWidget
+
+			anchors {
+				top: _leftWidgetTopAnchor(solarWidget)
+				topMargin: _leftWidgetTopMargin(solarWidget)
+				left: parent.left
+				leftMargin: Theme.geometry.page.grid.horizontalMargin
+			}
+			width: Theme.geometry.overviewPage.widget.input.width
+			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			size: _widgetSize(solarWidget)
+			isSegment: segmentedBackground.visible
+
+			value: solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
+			yieldHistory: solarChargers.yieldHistory
+
+			WidgetConnector {
+				parent: root
+				startWidget: solarWidget
+				startLocation: WidgetConnector.Location.Right
+				endWidget: inverterWidget
+				endLocation: WidgetConnector.Location.Left
+				animated: solarChargers && !isNaN(solarChargers.power)
+			}
+			WidgetConnector {
+				parent: root
+				startWidget: solarWidget
+				startLocation: WidgetConnector.Location.Right
+				endWidget: batteryWidget
+				endLocation: WidgetConnector.Location.Left
+				animated: solarChargers && !isNaN(solarChargers.power)
+						  && battery && !battery.idle
+			}
 		}
-		width: Theme.geometry.overviewPage.widget.input.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
-		size: _widgetSize(solarWidget)
-		isSegment: segmentedBackground.visible
-
-		value: solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
-		yieldHistory: solarChargers.yieldHistory
-	}
-	WidgetConnector {
-		startWidget: solarWidget
-		startLocation: WidgetConnector.Location.Right
-		endWidget: inverterWidget
-		endLocation: WidgetConnector.Location.Left
-		animated: solarChargers && !isNaN(solarChargers.power)
-	}
-	WidgetConnector {
-		startWidget: solarWidget
-		startLocation: WidgetConnector.Location.Right
-		endWidget: batteryWidget
-		endLocation: WidgetConnector.Location.Left
-		animated: solarChargers && !isNaN(solarChargers.power)
-				  && battery && !battery.idle
 	}
 
 	// the two central widgets are always present
@@ -371,8 +462,6 @@ Page {
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.inverter.width
 		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
 		physicalQuantity: -1
 		systemState: system ? system.state : 0
 	}
@@ -402,8 +491,6 @@ Page {
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.battery.width
 		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
 		animationRunning: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
 		animationPaused: PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
 						 || PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
@@ -430,8 +517,6 @@ Page {
 			  : OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.output.width
 		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
 		value: system ? system.ac.consumption.power : NaN
 		phaseModel: system ? system.ac.consumption.phases : null
 		phaseModelProperty: "power"
@@ -448,8 +533,6 @@ Page {
 		size: !!system && !isNaN(system.dc.power) ? OverviewWidget.Size.L : OverviewWidget.Size.Zero
 		width: Theme.geometry.overviewPage.widget.output.width
 		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
-		heightAnimated: PageManager.interactivity === PageManager.InteractionMode.Idle
-						|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
 		value: system ? system.dc.power || 0 : 0
 	}
 
