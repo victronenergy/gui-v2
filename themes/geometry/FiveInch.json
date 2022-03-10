@@ -250,7 +250,7 @@
     "geometry.overviewPage.connector.electron.innerWidth": 4,
     "geometry.overviewPage.connector.electron.centerWidth": 2,
     "geometry.overviewPage.connector.electron.velocity": 30,
-    "geometry.overviewPage.connector.electron.interval": 27,
+    "geometry.overviewPage.connector.electron.interval": 34,
 
     "geometry.overviewPage.layout.topMargin": 48,
     "geometry.overviewPage.layout.segmentedWidgetThreshold": 5,
