@@ -10,6 +10,28 @@ OverviewWidget {
 	id: root
 
 	property var batteryData
+	property alias animationRunning: barAnimation.running
+	property alias animationPaused: barAnimation.paused
+
+	property var _evenAnimationTargets: []
+	property var _oddAnimationTargets: []
+
+	function _updateBarAnimation() {
+		let evenTargets = []
+		let oddTargets = []
+		for (let i = 0; i < animatedBarsRepeater.count; ++i) {
+			if (i % 2 == 0) {
+				evenTargets.push(animatedBarsRepeater.itemAt(i))
+			} else {
+				oddTargets.push(animatedBarsRepeater.itemAt(i))
+			}
+		}
+		root._evenAnimationTargets = evenTargets
+		root._oddAnimationTargets = oddTargets
+		if (root.animationRunning) {
+			barAnimation.restart()
+		}
+	}
 
 	//% "Battery"
 	title.text: qsTrId("overview_widget_battery_title")
@@ -53,22 +75,24 @@ OverviewWidget {
 				id: animatedBarsRepeater
 
 				model: {
-					const maxHeight = animationRect.height - Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2
+					// Always use the interactiveHeight to calculate the model, to avoid changing
+					// the model when changing between interactive and idle mode.
+					const interactiveAnimationRectHeight = Math.floor(root.interactiveHeight * root.value/100) - root.border.width*2
+					const maxHeight = interactiveAnimationRectHeight - Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2
 					const maxRows = maxHeight / (Theme.geometry.overviewPage.widget.battery.animatedBar.height
 						+ Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2)
 					const rows = Math.max(0, Math.floor(maxRows))
-					return animationGrid.columns * rows
+
+					// Ensure an odd row count so that the animation does not jump (due to changes
+					// in the alternate-row pattern of animations) when the model changes.
+					const oddRowCount = Math.max(0, rows % 2 ? rows : rows - 1)
+					return animationGrid.columns * oddRowCount
 				}
 
 				delegate: Item {
 					id: animatedBar
 
-					readonly property real fromWidth: model.index % 2
-							? Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
-							: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
-					readonly property real toWidth: model.index % 2
-							? Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
-							: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
+					property alias barWidth: bar.width
 
 					width: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
 						   + Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*2
@@ -76,36 +100,66 @@ OverviewWidget {
 							+ Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2
 
 					Rectangle {
+						id: bar
+
 						anchors.centerIn: parent
-						width: animatedBar.fromWidth
 						height: Theme.geometry.overviewPage.widget.battery.animatedBar.height
 						color: Theme.color.overviewPage.widget.battery.animatedBar
 						radius: height
-
-						SequentialAnimation on width {
-							loops: Animation.Infinite
-							running: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
-
-							NumberAnimation {
-								from: animatedBar.fromWidth
-								to: animatedBar.toWidth
-								duration: 800
-							}
-							PauseAnimation {
-								duration: 200
-							}
-							NumberAnimation {
-								from: animatedBar.toWidth
-								to: animatedBar.fromWidth
-								duration: 800
-							}
-							PauseAnimation {
-								duration: 200
-							}
-						}
 					}
 				}
+
+				onCountChanged: Qt.callLater(root._updateBarAnimation)
 			}
+		}
+	}
+
+	SequentialAnimation {
+		id: barAnimation
+
+		loops: Animation.Infinite
+
+		ParallelAnimation {
+			NumberAnimation {
+				targets: root._evenAnimationTargets
+				property: "barWidth"
+				from: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
+				to: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
+				duration: 800
+				alwaysRunToEnd: true
+			}
+			NumberAnimation {
+				targets: root._oddAnimationTargets
+				property: "barWidth"
+				from: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
+				to: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
+				duration: 800
+				alwaysRunToEnd: true
+			}
+		}
+		PauseAnimation {
+			duration: 200
+		}
+		ParallelAnimation {
+			NumberAnimation {
+				targets: root._evenAnimationTargets
+				property: "barWidth"
+				from: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
+				to: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
+				duration: 800
+				alwaysRunToEnd: true
+			}
+			NumberAnimation {
+				targets: root._oddAnimationTargets
+				property: "barWidth"
+				from: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
+				to: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
+				duration: 800
+				alwaysRunToEnd: true
+			}
+		}
+		PauseAnimation {
+			duration: 200
 		}
 	}
 

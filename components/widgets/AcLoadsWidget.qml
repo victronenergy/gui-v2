@@ -14,7 +14,7 @@ OverviewWidget {
 	//% "AC Loads"
 	title.text: qsTrId("overview_widget_acloads_title")
 	icon.source: "qrc:/images/acloads.svg"
-	interactive: false
+	enabled: false
 
 	extraContent.children: [
 		ThreePhaseDisplay {

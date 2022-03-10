@@ -19,9 +19,6 @@ Rectangle {
 
 	property int size: OverviewWidget.Size.M
 
-	property bool overviewPageInteractive: true
-	property alias interactive: mouseArea.enabled
-
 	property alias physicalQuantity: valueDisplay.physicalQuantity
 	property alias value: valueDisplay.value
 	property alias precision: valueDisplay.precision
@@ -32,42 +29,48 @@ Rectangle {
 	property real sideGaugeValue
 
 	property alias extraContent: extraContent
-
 	property bool isSegment
+
+	property int interactiveHeight: size === OverviewWidget.Size.XL
+		  ? Theme.geometry.overviewPage.widget.interactive.xl.height
+		  : size === OverviewWidget.Size.L
+			? Theme.geometry.overviewPage.widget.interactive.l.height
+			: size === OverviewWidget.Size.M
+			  ? Theme.geometry.overviewPage.widget.interactive.m.height
+			  : size === OverviewWidget.Size.S
+			  ? Theme.geometry.overviewPage.widget.interactive.s.height
+			  : Theme.geometry.overviewPage.widget.interactive.xs.height
+	property int nonInteractiveHeight: size === OverviewWidget.Size.XL
+		  ? Theme.geometry.overviewPage.widget.noninteractive.xl.height
+		  : size === OverviewWidget.Size.L
+			? Theme.geometry.overviewPage.widget.noninteractive.l.height
+			: size === OverviewWidget.Size.M
+			  ? Theme.geometry.overviewPage.widget.noninteractive.m.height
+			  : size === OverviewWidget.Size.S
+			  ? Theme.geometry.overviewPage.widget.noninteractive.s.height
+			  : Theme.geometry.overviewPage.widget.noninteractive.xs.height
+	property bool heightAnimated
 
 	signal clicked()
 
-	height: size === OverviewWidget.Size.XL ? overviewPageInteractive
-			? Theme.geometry.overviewPage.widget.interactive.xl.height
-			: Theme.geometry.overviewPage.widget.noninteractive.xl.height
-		  : size === OverviewWidget.Size.L ? overviewPageInteractive
-			? Theme.geometry.overviewPage.widget.interactive.l.height
-			: Theme.geometry.overviewPage.widget.noninteractive.l.height
-		  : size === OverviewWidget.Size.M ? overviewPageInteractive
-			? Theme.geometry.overviewPage.widget.interactive.m.height
-			: Theme.geometry.overviewPage.widget.noninteractive.m.height
-		  : size === OverviewWidget.Size.S ? overviewPageInteractive
-			? Theme.geometry.overviewPage.widget.interactive.s.height
-			: Theme.geometry.overviewPage.widget.noninteractive.s.height
-		  : /* OverviewWidget.Size.XS */ overviewPageInteractive
-			? Theme.geometry.overviewPage.widget.interactive.xs.height
-			: Theme.geometry.overviewPage.widget.noninteractive.xs.height
-
+	height: interactiveHeight
 	visible: size !== OverviewWidget.Size.Zero
 	radius: isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
-	border.width: interactive && !isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
+	border.width: enabled && !isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
 	border.color: Theme.color.overviewPage.widget.border
 	color: isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
 	Behavior on height {
-		enabled: PageManager.navBarAnimating
-		NumberAnimation { duration: Theme.animation.overviewPage.interactive.duration; easing.type: Easing.InOutQuad }
+		enabled: root.heightAnimated
+		NumberAnimation {
+			duration: Theme.animation.overviewPage.interactive.duration
+			easing.type: Easing.InOutQuad
+		}
 	}
 
 	MouseArea {
 		id: mouseArea
 		anchors.fill: parent
-		enabled: true
 		onClicked: root.clicked()
 	}
 

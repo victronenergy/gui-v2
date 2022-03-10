@@ -119,14 +119,11 @@ Page {
 			}
 		}
 
-		Binding {
-			target: PageManager
-			property: "navBarAnimating"
-			value: animateNavBarIn.running || animateNavBarOut.running
-		}
-
 		SequentialAnimation {
 			id: animateNavBarIn
+
+			running: PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+
 			NumberAnimation {
 				target: navBar
 				property: "y"
@@ -142,10 +139,24 @@ Page {
 				duration: 250
 				easing.type: Easing.InOutQuad
 			}
+			ScriptAction {
+				script: {
+					PageManager.controlsVisible = true
+					PageManager.interactivity = PageManager.InteractionMode.Interactive
+				}
+			}
 		}
 
 		SequentialAnimation {
 			id: animateNavBarOut
+
+			running: PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+
+			ScriptAction {
+				script: {
+					PageManager.controlsVisible = false
+				}
+			}
 			OpacityAnimator {
 				target: navBar
 				from: 1.0
@@ -160,6 +171,11 @@ Page {
 				to: root.height
 				duration: 250
 				easing.type: Easing.InOutQuad
+			}
+			ScriptAction {
+				script: {
+					PageManager.interactivity = PageManager.InteractionMode.Idle
+				}
 			}
 		}
 	}
