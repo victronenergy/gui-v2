@@ -169,40 +169,17 @@ Item {
 					   ? Math.floor(root._diagonalDistance / Theme.geometry.overviewPage.connector.electron.interval)
 					   : null
 
-				delegate: Rectangle {
+				delegate: Image {
 					id: electron
 
-					width: Theme.geometry.overviewPage.connector.electron.outerWidth
-					height: Theme.geometry.overviewPage.connector.electron.outerWidth
-					color: Theme.color.overviewPage.connector.electron.outerColor
-					radius: Theme.geometry.overviewPage.connector.electron.outerWidth / 2
-					opacity: animPathInterpolator.progress < 0.01 || animPathInterpolator.progress > 0.9 ? 0 : 1
-
+					source: "qrc:/images/electron.svg"
 					x: animPathInterpolator.x - width/2
 					y: animPathInterpolator.y - height/2
+					rotation: animPathInterpolator.angle
+					opacity: animPathInterpolator.progress < 0.01 || animPathInterpolator.progress > 0.9 ? 0 : 1
 
 					Behavior on opacity {
 						NumberAnimation { duration: 250 }
-					}
-
-					Rectangle {
-						id: electronInner
-						anchors.centerIn: parent
-
-						width: Theme.geometry.overviewPage.connector.electron.innerWidth
-						height: Theme.geometry.overviewPage.connector.electron.innerWidth
-						radius: Theme.geometry.overviewPage.connector.electron.innerWidth / 2
-						color: Theme.color.overviewPage.connector.electron.innerColor
-
-						Rectangle {
-							id: electronCenter
-							anchors.centerIn: parent
-
-							width: Theme.geometry.overviewPage.connector.electron.centerWidth
-							height: Theme.geometry.overviewPage.connector.electron.centerWidth
-							radius: Theme.geometry.overviewPage.connector.electron.centerWidth / 2
-							color: Theme.color.overviewPage.connector.electron.centerColor
-						}
 					}
 
 					// Cannot use PathAnimation, because after the first animation loop it ignores the
