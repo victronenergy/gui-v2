@@ -28,6 +28,10 @@ Page {
 			|| (solarChargers && solarChargers.model.count)
 	on_ShouldResetLeftWidgetsChanged: Qt.callLater(_resetLeftWidgets)
 
+	property bool _pauseWidgetAnimations: widgetResizingTimer.running
+		  || PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+		  || PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+
 	property var _createdWidgets: ({})
 
 	function _createWidget(type, args) {
@@ -256,7 +260,8 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: inverterWidget
 				endLocation: WidgetConnector.Location.Left
-				animated: !!gridWidget.input && gridWidget.input.connected
+				animationRunning: !!gridWidget.input && gridWidget.input.connected
+				animationPaused: root._pauseWidgetAnimations
 				straight: gridWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -286,7 +291,8 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: inverterWidget
 				endLocation: WidgetConnector.Location.Left
-				animated: !!shoreWidget.input && shoreWidget.input.connected
+				animationRunning: !!shoreWidget.input && shoreWidget.input.connected
+				animationPaused: root._pauseWidgetAnimations
 				straight: shoreWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -315,7 +321,8 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: inverterWidget
 				endLocation: WidgetConnector.Location.Left
-				animated: !!acGeneratorWidget.input && acGeneratorWidget.input.connected
+				animationRunning: !!acGeneratorWidget.input && acGeneratorWidget.input.connected
+				animationPaused: root._pauseWidgetAnimations
 				straight: acGeneratorWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -344,7 +351,8 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: batteryWidget
 				endLocation: WidgetConnector.Location.Left
-				animated: !!dcGeneratorWidget.input
+				animationRunning: !!dcGeneratorWidget.input
+				animationPaused: root._pauseWidgetAnimations
 						  && !isNaN(dcGeneratorWidget.input.current)
 						  && dcGeneratorWidget.input.current > 0
 				straight: dcGeneratorWidget.size > OverviewWidget.Size.M
@@ -375,7 +383,8 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: batteryWidget
 				endLocation: WidgetConnector.Location.Left
-				animated: !!alternatorWidget.input
+				animationRunning: !!alternatorWidget.input
+				animationPaused: root._pauseWidgetAnimations
 						  && !isNaN(alternatorWidget.input.current)
 						  && alternatorWidget.input.current > 0
 			}
@@ -405,7 +414,8 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: batteryWidget
 				endLocation: WidgetConnector.Location.Left
-				animated: !!windWidget.input
+				animationRunning: !!windWidget.input
+				animationPaused: root._pauseWidgetAnimations
 						  && !isNaN(windWidget.input.current)
 						  && windWidget.input.current > 0
 			}
@@ -438,7 +448,8 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: inverterWidget
 				endLocation: WidgetConnector.Location.Left
-				animated: solarChargers && !isNaN(solarChargers.power)
+				animationRunning: solarChargers && !isNaN(solarChargers.power)
+				animationPaused: root._pauseWidgetAnimations
 			}
 			WidgetConnector {
 				parent: root
@@ -446,7 +457,8 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: batteryWidget
 				endLocation: WidgetConnector.Location.Left
-				animated: solarChargers && !isNaN(solarChargers.power)
+				animationRunning: solarChargers && !isNaN(solarChargers.power)
+				animationPaused: root._pauseWidgetAnimations
 						  && battery && !battery.idle
 			}
 		}
@@ -470,7 +482,8 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: acLoadsWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: acLoadsWidget.input != undefined
+		animationRunning: acLoadsWidget.input != undefined
+		animationPaused: root._pauseWidgetAnimations
 		straight: true
 	}
 	WidgetConnector {
@@ -478,7 +491,8 @@ Page {
 		startLocation: WidgetConnector.Location.Bottom
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Top
-		animated: batteryWidget.batteryData && !batteryWidget.batteryData.idle
+		animationRunning: batteryWidget.batteryData && !batteryWidget.batteryData.idle
+		animationPaused: root._pauseWidgetAnimations
 	}
 
 	BatteryWidget {
@@ -492,8 +506,7 @@ Page {
 		width: Theme.geometry.overviewPage.widget.battery.width
 		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
 		animationRunning: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
-		animationPaused: PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
-						 || PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+		animationPaused: root._pauseWidgetAnimations
 		batteryData: battery
 	}
 	WidgetConnector {
@@ -501,7 +514,8 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: dcLoadsWidget
 		endLocation: WidgetConnector.Location.Left
-		animated: batteryWidget.batteryData && !batteryWidget.batteryData.idle
+		animationRunning: batteryWidget.batteryData && !batteryWidget.batteryData.idle
+		animationPaused: root._pauseWidgetAnimations
 	}
 
 	// the two output widgets are always present
@@ -542,5 +556,14 @@ Page {
 		height: root.height
 		enabled: PageManager.interactivity === PageManager.InteractionMode.Idle
 		onClicked: PageManager.interactivity = PageManager.InteractionMode.ExitIdleMode
+	}
+
+	// Syncs with the timing of when the overview widgets are changing in height, so that battery
+	// and connector animations can be paused while this is happening.
+	Timer {
+		id: widgetResizingTimer
+		interval: Theme.animation.overviewPage.interactive.duration
+		running: PageManager.interactivity === PageManager.InteractionMode.Idle
+				 || PageManager.interactivity === PageManager.InteractionMode.Interactive
 	}
 }
