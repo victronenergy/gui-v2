@@ -26,9 +26,10 @@ Item {
 	property bool straight
 
 	// Animates from start to end
-	property bool animated
+	property bool animationRunning
+	property bool animationPaused
 
-	property bool _animated: visible && animated
+	property bool _animated: visible && animationRunning
 	property real _animationProgress
 	property real _diagonalDistance: Math.sqrt(connectorPath.width * connectorPath.width
 		   + connectorPath.height * connectorPath.height
@@ -38,7 +39,11 @@ Item {
 	visible: startWidget.visible && endWidget.visible
 
 	// Animation doesn't appear to update duration when distance changes, so force it here.
-	on_DiagonalDistanceChanged: electronAnim.restart()
+	on_DiagonalDistanceChanged: {
+		if (!animationPaused) {
+			electronAnim.restart()
+		}
+	}
 
 	WidgetConnectorPath {
 		id: connectorPath
@@ -205,19 +210,18 @@ Item {
 		pathElements: connectorPath.pathElements
 	}
 
-	SequentialAnimation {
+	NumberAnimation {
 		id: electronAnim
 
+		target: root
+		property: "_animationProgress"
+		from: 0; to: 1
+
 		running: root._animated
+		paused: root.animationPaused && running
 		loops: Animation.Infinite
 
-		NumberAnimation {
-			target: root
-			property: "_animationProgress"
-			from: 0; to: 1
-
-			// animate at a constant rate of pixels/sec, based on the diagonal length of the shape
-			duration: _diagonalDistance / Theme.geometry.overviewPage.connector.electron.velocity * 1000
-		}
+		// animate at a constant rate of pixels/sec, based on the diagonal length of the shape
+		duration: _diagonalDistance / Theme.geometry.overviewPage.connector.electron.velocity * 1000
 	}
 }
