@@ -300,6 +300,8 @@
     "geometry.levelsPage.subgauge.width2": 40,
     "geometry.levelsPage.subgauge.width3": 24,
     "geometry.levelsPage.subgauge.width4": 16,
+    "geometry.levelsPage.gaugeDelegate.height.interactive": 296,
+    "geometry.levelsPage.gaugeDelegate.height.fullScreen": 384,
     "geometry.levelsPage.gaugeDelegate.tanks1.width": 128,
     "geometry.levelsPage.gaugeDelegate.tanks2.width": 128,
     "geometry.levelsPage.gaugeDelegate.tanks3.width": 136,
