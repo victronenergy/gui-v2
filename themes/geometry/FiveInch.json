@@ -211,9 +211,6 @@
     "geometry.generatorRuntimeDuration.durationButton.height": 40,
     "geometry.generatorRuntimeDuration.durationButton.width": 112,
 
-    "geometry.essCard.minimumSocButton.height": 40,
-    "geometry.essCard.minimumSocButton.width": 112,
-
     "geometry.overviewPage.widget.radius": 8,
     "geometry.overviewPage.widget.border.width": 2,
     "geometry.overviewPage.widget.content.verticalMargin": 6,
