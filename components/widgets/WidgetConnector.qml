@@ -48,13 +48,11 @@ Item {
 	WidgetConnectorPath {
 		id: connectorPath
 
-		// The path geometry encloses half of the start and end nubs precisely, so that the bounds
-		// can clip the nubs to create the nub semicircles.
+		// The path geometry encloses the space between the start and end widgets.
 		x: Math.min(startX, endX) - (direction == Qt.Vertical ? startNub.width/2 : 0)
 		y: Math.min(startY, endY) - (direction == Qt.Horizontal ? startNub.height/2 : 0)
 		width: Math.max(startX, endX) - x + (direction == Qt.Vertical ? endNub.width/2 : 0)
 		height: Math.max(startY, endY) - y + (direction == Qt.Horizontal ? endNub.height/2 : 0)
-		clip: true
 
 		direction: (startLocation == WidgetConnector.Location.Left
 					|| startLocation == WidgetConnector.Location.Right)
@@ -63,66 +61,44 @@ Item {
 				   ? Qt.Horizontal
 				   : Qt.Vertical
 
-		startNub.x: startX - x - startNub.width/2
-		startNub.y: startY - y - startNub.height/2
-		endNub.x: endX - x - endNub.width/2
-		endNub.y: endY - y - endNub.height/2
+		startNub.x: startX - x - (direction === Qt.Horizontal ? 0 : startNub.width)
+		startNub.y: startY - y
 
-		startX: {
-			if (straight && connectorPath.direction == Qt.Vertical && startWidget.width > endWidget.width) {
-				return endX
-			}
-			switch (startLocation) {
-			case WidgetConnector.Location.Left:
-				return startWidget.x
-			case WidgetConnector.Location.Right:
-				return startWidget.x + startWidget.width
-			default:
-				return startWidget.x + startWidget.width/2
-			}
-		}
+		endNub.x: endX - x - endNub.width
+		endNub.y: endY - y - (direction === Qt.Horizontal ? 0 : endNub.height)
+		endNub.rotation: 180
 
-		startY: {
-			if (straight && connectorPath.direction == Qt.Horizontal && startWidget.height > endWidget.height) {
-				return endY
-			}
-			switch (startLocation) {
-			case WidgetConnector.Location.Top:
-				return startWidget.y
-			case WidgetConnector.Location.Bottom:
-				return startWidget.y + startWidget.height
-			default:
-				return startWidget.y + startWidget.height/2
-			}
-		}
+		startX: (straight && connectorPath.direction == Qt.Vertical && startWidget.width > endWidget.width)
+			? endX
+			: startLocation === WidgetConnector.Location.Left
+			  ? startWidget.x
+			  : startLocation === WidgetConnector.Location.Right
+				? startWidget.x + startWidget.width
+				: startWidget.x + startWidget.width/2   // Top/Bottom location
 
-		endX: {
-			if (straight && connectorPath.direction == Qt.Vertical && endWidget.width > startWidget.width) {
-				return startX
-			}
-			switch (endLocation) {
-			case WidgetConnector.Location.Left:
-				return endWidget.x
-			case WidgetConnector.Location.Right:
-				return endWidget.x + endWidget.width
-			default:
-				return endWidget.x + endWidget.width/2
-			}
-		}
+		startY: (straight && connectorPath.direction == Qt.Horizontal && startWidget.height > endWidget.height)
+				? endY
+				: startLocation === WidgetConnector.Location.Top
+				  ? startWidget.y
+				  : startLocation === WidgetConnector.Location.Bottom
+					? startWidget.y + startWidget.height
+					: startWidget.y + startWidget.height/2  // Left/Right location
 
-		endY: {
-			if (straight && connectorPath.direction == Qt.Horizontal && endWidget.height > startWidget.height) {
-				return startY
-			}
-			switch (endLocation) {
-			case WidgetConnector.Location.Top:
-				return endWidget.y
-			case WidgetConnector.Location.Bottom:
-				return endWidget.y + endWidget.height
-			default:
-				return endWidget.y + endWidget.height/2
-			}
-		}
+		endX: (straight && connectorPath.direction == Qt.Vertical && endWidget.width > startWidget.width)
+			  ? startX
+			  : endLocation === WidgetConnector.Location.Left
+				? endWidget.x
+				: endLocation === WidgetConnector.Location.Right
+				  ? endWidget.x + endWidget.width
+				  : endWidget.x + endWidget.width/2 // Top/Bottom location
+
+		endY: (straight && connectorPath.direction == Qt.Horizontal && endWidget.height > startWidget.height)
+			  ? startY
+			  : endLocation === WidgetConnector.Location.Top
+				? endWidget.y
+				: endLocation === WidgetConnector.Location.Bottom
+				  ? endWidget.y + endWidget.height
+				  : endWidget.y + endWidget.height/2    // Left/Right location
 
 		Shape {
 			id: connectorShape
@@ -177,9 +153,9 @@ Item {
 				delegate: Image {
 					id: electron
 
-					source: "qrc:/images/electron.svg"
 					x: animPathInterpolator.x - width/2
 					y: animPathInterpolator.y - height/2
+					source: "qrc:/images/electron.svg"
 					rotation: animPathInterpolator.angle
 					opacity: animPathInterpolator.progress < 0.01 || animPathInterpolator.progress > 0.9 ? 0 : 1
 

@@ -174,6 +174,8 @@
         <file>images/toast_icon_close.svg</file>
         <file>images/toast_icon_info.svg</file>
         <file>images/wasteWater.svg</file>
+        <file>images/widget_connector_nub_horizontal.svg</file>
+        <file>images/widget_connector_nub_vertical.svg</file>
         <file>images/wind.svg</file>
         <file>themes/geometry/FiveInch.json</file>
         <file>themes/geometry/SevenInch.json</file>

@@ -1,5 +1,6 @@
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Controls.impl as CP
 
 Item {
 	id: root
@@ -73,21 +74,19 @@ Item {
 		}
 	]
 
-	Rectangle {
+	CP.ColorImage {
 		id: startNub
 
-		width: Theme.geometry.overviewPage.connector.nub.width
-		height: Theme.geometry.overviewPage.connector.nub.width
-		radius: Theme.geometry.overviewPage.connector.nub.width/2
-		color: Theme.color.overviewPage.widget.border
+		source: root.direction === Qt.Horizontal
+				? "qrc:/images/widget_connector_nub_horizontal.svg"
+				: "qrc:/images/widget_connector_nub_vertical.svg"
 	}
 
-	Rectangle {
+	CP.ColorImage {
 		id: endNub
 
-		width: Theme.geometry.overviewPage.connector.nub.width
-		height: Theme.geometry.overviewPage.connector.nub.width
-		radius: Theme.geometry.overviewPage.connector.nub.width/2
-		color: Theme.color.overviewPage.widget.border
+		source: root.direction === Qt.Horizontal
+				? "qrc:/images/widget_connector_nub_horizontal.svg"
+				: "qrc:/images/widget_connector_nub_vertical.svg"
 	}
 }
