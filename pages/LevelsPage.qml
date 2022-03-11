@@ -149,15 +149,6 @@ Page {
 		Theme.geometry.levelsPage.subgauge.width3,
 		Theme.geometry.levelsPage.subgauge.width4
 	]
-	readonly property var gaugeDelegateWidths: [
-		Theme.geometry.levelsPage.gaugeDelegate.tanks1.width,
-		Theme.geometry.levelsPage.gaugeDelegate.tanks2.width,
-		Theme.geometry.levelsPage.gaugeDelegate.tanks3.width,
-		Theme.geometry.levelsPage.gaugeDelegate.tanks4.width,
-		Theme.geometry.levelsPage.gaugeDelegate.tanks5.width
-	]
-	readonly property int gaugeDelegateWidthDeltaManyTanks: gaugeDelegateWidths[Theme.geometry.levelsPage.tankMergeCount - 1] -
-															gaugeDelegateWidths[Theme.geometry.levelsPage.tankMergeCount - 2]
 
 	function addTank(type, name, percentage = Math.random(), mergingAllowed = true) {
 		var newTank = {
