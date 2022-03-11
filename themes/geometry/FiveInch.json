@@ -211,9 +211,6 @@
     "geometry.generatorRuntimeDuration.durationButton.height": 40,
     "geometry.generatorRuntimeDuration.durationButton.width": 112,
 
-    "geometry.essCard.minimumSocButton.height": 40,
-    "geometry.essCard.minimumSocButton.width": 112,
-
     "geometry.overviewPage.widget.radius": 8,
     "geometry.overviewPage.widget.border.width": 2,
     "geometry.overviewPage.widget.content.verticalMargin": 6,
@@ -292,6 +289,7 @@
     "geometry.levelsPage.gauge.percentageText.spacing": 1,
     "geometry.levelsPage.gauge.percentage.opacity": 0.7,
     "geometry.levelsPage.gauge.valueText.bottomMargin": 12,
+    "geometry.levelsPage.gauge.valueText.height": 19,
     "geometry.levelsPage.subgauges.topMargin": 12,
     "geometry.levelsPage.subgauges.leftMargin": 16,
     "geometry.levelsPage.subgauges.bottomMargin": 8,
@@ -315,5 +313,4 @@
     "geometry.levelsPage.tankGauge.spacing": 2,
     "geometry.levelsPage.tankGauge.bottomOfTopSegmentPercentage": 0.75,
     "geometry.levelsPage.tankGauge.topOfBottomSegmentPercentage": 0.25
-
 }
