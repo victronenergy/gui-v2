@@ -14,20 +14,30 @@ Rectangle {
 	property real percentage: 0
 	property int gaugeIndex: 0
 
+	readonly property var gaugeDelegateWidths: [
+		Theme.geometry.levelsPage.gaugeDelegate.tanks1.width,
+		Theme.geometry.levelsPage.gaugeDelegate.tanks2.width,
+		Theme.geometry.levelsPage.gaugeDelegate.tanks3.width,
+		Theme.geometry.levelsPage.gaugeDelegate.tanks4.width,
+		Theme.geometry.levelsPage.gaugeDelegate.tanks5.width
+	]
+	readonly property int gaugeDelegateWidthDeltaManyTanks: gaugeDelegateWidths[gaugeDelegateWidths.length - 1] -
+															gaugeDelegateWidths[gaugeDelegateWidths.length - 2]
+
 	signal splitGauge(int index)
 
 	implicitWidth: {
 		if (model.gaugeTanks.count === 0) {
 			return 0
 		}
-		if (model.gaugeTanks.count > Theme.geometry.levelsPage.tankMergeCount) {
-			return gaugeDelegateWidths[Theme.geometry.levelsPage.tankMergeCount - 1] +
-					((model.gaugeTanks.count - Theme.geometry.levelsPage.tankMergeCount) * gaugeDelegateWidthDeltaManyTanks)
+		if (model.gaugeTanks.count >= gaugeDelegateWidths.length) {
+			return gaugeDelegateWidths[gaugeDelegateWidths.length - 1] +
+					((model.gaugeTanks.count - gaugeDelegateWidths.length) * gaugeDelegateWidthDeltaManyTanks)
 		}
 
 		return gaugeDelegateWidths[model.gaugeTanks.count - 1]
 	}
-    implicitHeight: interactive ? Theme.geometry.levelsPage.gaugeDelegate.height.interactive : Theme.geometry.levelsPage.gaugeDelegate.height.fullScreen
+	implicitHeight: interactive ? Theme.geometry.levelsPage.gaugeDelegate.height.interactive : Theme.geometry.levelsPage.gaugeDelegate.height.fullScreen
 	color: Theme.color.levelsPage.gauge.backgroundColor
 	radius: Theme.geometry.levelsPage.gauge.radius
 

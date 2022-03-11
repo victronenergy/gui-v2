@@ -158,6 +158,7 @@
     "geometry.briefPage.sidePanel.loadGraph.bottomMargin": 14,
     "geometry.briefPage.sidePanel.loadGraph.width": 176,
     "geometry.briefPage.sidePanel.loadGraph.height": 51,
+    "geometry.briefPage.sidePanel.loadGraph.horizontalGradient.width": 10,
 
     "geometry.generatorMiniGauge.label.rightMargin": 28,
     "geometry.generatorMiniGauge.label.bottomMargin": 6,
