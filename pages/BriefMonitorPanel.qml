@@ -98,7 +98,7 @@ Column {
 				append({
 						height: Theme.geometry.briefPage.sidePanel.solarYield.height,
 						//% "Solar yield"
-						labelText: qsTrId("brief_solar_yield"),
+						labelText: QT_TRID_NOOP("brief_solar_yield"),
 						value: 0,
 						type: Units.Power,
 						imageSource: "qrc:/images/solaryield.svg",
@@ -110,7 +110,7 @@ Column {
 				append({
 						height: Theme.geometry.briefPage.sidePanel.generator.height,
 						//% "Generator"
-						labelText: qsTrId("brief_generator"),
+						labelText: QT_TRID_NOOP("brief_generator"),
 						value: 0,
 						type: Units.Power,
 						imageSource: "qrc:/images/generator.svg",
@@ -122,7 +122,7 @@ Column {
 				append({
 						height: Theme.geometry.briefPage.sidePanel.loads.height,
 						//% "Loads"
-						labelText: qsTrId("brief_loads"),
+						labelText: QT_TRID_NOOP("brief_loads"),
 						value: 0,
 						type: Units.Power,
 						imageSource: "qrc:/images/consumption.svg",
@@ -142,7 +142,7 @@ Column {
 					top: parent.top
 					topMargin: model.topMargin
 				}
-				title.text: model.labelText
+				title.text: qsTrId(model.labelText)
 				physicalQuantity: model.type
 				value: model.value
 				icon.source: model.imageSource
