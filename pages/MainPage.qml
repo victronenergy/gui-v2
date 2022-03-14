@@ -51,7 +51,7 @@ Page {
 		model: ListModel {
 			ListElement {
 				//% "Brief"
-				text: qsTrId("nav_brief")
+				text: QT_TRID_NOOP("nav_brief")
 				icon: "qrc:/images/brief.svg"
 				iconWidth: 28
 				iconHeight: 28
@@ -60,7 +60,7 @@ Page {
 
 			ListElement {
 				//% "Overview"
-				text: qsTrId("nav_overview")
+				text: QT_TRID_NOOP("nav_overview")
 				icon: "qrc:/images/overview.svg"
 				iconWidth: 28
 				iconHeight: 22
@@ -69,7 +69,7 @@ Page {
 
 			ListElement {
 				//% "Levels"
-				text: qsTrId("nav_levels")
+				text: QT_TRID_NOOP("nav_levels")
 				icon: "qrc:/images/levels.svg"
 				iconWidth: 28
 				iconHeight: 20
@@ -78,7 +78,7 @@ Page {
 
 			ListElement {
 				//% "Notifications"
-				text: qsTrId("nav_notifications")
+				text: QT_TRID_NOOP("nav_notifications")
 				icon: "qrc:/images/notifications.svg"
 				iconWidth: 28
 				iconHeight: 26
@@ -87,7 +87,7 @@ Page {
 
 			ListElement {
 				//% "Settings"
-				text: qsTrId("nav_settings")
+				text: QT_TRID_NOOP("nav_settings")
 				icon: "qrc:/images/settings.png"
 				iconWidth: 24
 				iconHeight: 24

@@ -25,7 +25,7 @@ Row {
 		delegate: NavButton {
 			height: parent.height
 			width: Theme.geometry.navigationBar.button.width
-			text: model.text
+			text: qsTrId(model.text)
 			icon.source: model.icon
 			icon.width: model.iconWidth
 			icon.height: model.iconHeight
