@@ -29,23 +29,36 @@ QString Language::toString(QLocale::Language language) const
 void Language::setCurrentLanguage(QLocale::Language language)
 {
 	if (language != m_currentLanguage) {
-		QTranslator translator;
-		if (translator.load(
-				QLocale(language),
-				QLatin1String("venus-gui-v2"),
-				QLatin1String("_"),
-				QLatin1String(":/i18n"))) {
-			QCoreApplication::installTranslator(&translator);
-			qCDebug(venusGui) << "Successfully loaded translations for locale" << QLocale(language).name();
-			if (m_qmlEngine) {
-				m_currentLanguage = language;
-				m_qmlEngine->retranslate();
-				emit currentLanguageChanged();
+		const bool alreadyLoaded = m_loadedTranslators.contains(language);
+		QTranslator *currTranslator = m_loadedTranslators.value(m_currentLanguage);
+		QTranslator *translator = alreadyLoaded
+				? m_loadedTranslators.value(language)
+				: new QTranslator(this);
+		if (!alreadyLoaded) {
+			if (translator->load(
+					QLocale(language),
+					QLatin1String("venus-gui-v2"),
+					QLatin1String("_"),
+					QLatin1String(":/i18n"))) {
+				qCDebug(venusGui) << "Successfully loaded translations for locale" << QLocale(language).name();
 			} else {
-				qCWarning(venusGui) << "Unable to retranslate";
+				qCWarning(venusGui) << "Unable to load translations for locale" << QLocale().name();
+				translator->deleteLater();
+				return;
 			}
+		}
+
+		QCoreApplication::installTranslator(translator);
+		if (currTranslator) {
+			QCoreApplication::removeTranslator(currTranslator);
+		}
+		m_currentLanguage = language;
+
+		if (m_qmlEngine) {
+			m_qmlEngine->retranslate();
+			emit currentLanguageChanged();
 		} else {
-			qCWarning(venusGui) << "Unable to load translations for locale" << QLocale().name();
+			qCWarning(venusGui) << "Unable to retranslate";
 		}
 	}
 }

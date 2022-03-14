@@ -8,6 +8,9 @@
 #include <QLocale>
 #include <QObject>
 #include <QString>
+#include <QHash>
+
+class QTranslator;
 
 class QQmlEngine;
 
@@ -34,6 +37,7 @@ Q_SIGNALS:
 private:
 	QLocale::Language m_currentLanguage = QLocale::English;
 	QQmlEngine* m_qmlEngine = nullptr;
+	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
 };
 
 } /* VenusOS */
