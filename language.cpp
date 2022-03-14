@@ -31,9 +31,7 @@ void Language::setCurrentLanguage(QLocale::Language language)
 	if (language != m_currentLanguage) {
 		const bool alreadyLoaded = m_loadedTranslators.contains(language);
 		QTranslator *currTranslator = m_loadedTranslators.value(m_currentLanguage);
-		QTranslator *translator = alreadyLoaded
-				? m_loadedTranslators.value(language)
-				: new QTranslator(this);
+		QTranslator *translator = alreadyLoaded	? m_loadedTranslators.value(language) : new QTranslator(this);
 		if (!alreadyLoaded) {
 			if (translator->load(
 					QLocale(language),
@@ -42,15 +40,20 @@ void Language::setCurrentLanguage(QLocale::Language language)
 					QLatin1String(":/i18n"))) {
 				qCDebug(venusGui) << "Successfully loaded translations for locale" << QLocale(language).name();
 			} else {
-				qCWarning(venusGui) << "Unable to load translations for locale" << QLocale().name();
+				qCWarning(venusGui) << "Unable to load translations for locale" << QLocale(language).name();
 				translator->deleteLater();
 				return;
 			}
 		}
-
-		QCoreApplication::installTranslator(translator);
+		if (!QCoreApplication::installTranslator(translator)) {
+			qCWarning(venusGui) << "Unable to install translator for locale" << QLocale(language).name();
+			translator->deleteLater();
+			return;
+		}
 		if (currTranslator) {
-			QCoreApplication::removeTranslator(currTranslator);
+			if (!QCoreApplication::removeTranslator(currTranslator)) {
+				qCWarning(venusGui) << "Unable to remove old translator for locale" << QLocale(language).name();
+			}
 		}
 		m_currentLanguage = language;
 
