@@ -77,7 +77,7 @@ Rectangle {
 
 	Behavior on height {
 		NumberAnimation {
-			duration: Theme.animation.overviewPage.interactive.duration
+			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad
 		}
 	}
