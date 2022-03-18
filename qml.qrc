@@ -109,6 +109,7 @@
         <file>pages/OverviewPage.qml</file>
         <file>pages/SettingsPage.qml</file>
         <file>pages/SolarYieldGauge.qml</file>
+        <file>pages/TanksTab.qml</file>
         <file>dialogs/DialogManager.qml</file>
         <file>dialogs/ModalDialog.qml</file>
         <file>dialogs/ModalWarningDialog.qml</file>

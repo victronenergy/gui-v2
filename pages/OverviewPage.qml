@@ -562,7 +562,7 @@ Page {
 	// and connector animations can be paused while this is happening.
 	Timer {
 		id: widgetResizingTimer
-		interval: Theme.animation.overviewPage.interactive.duration
+		interval: Theme.animation.page.idleResize.duration
 		running: PageManager.interactivity === PageManager.InteractionMode.Idle
 				 || PageManager.interactivity === PageManager.InteractionMode.Interactive
 	}
