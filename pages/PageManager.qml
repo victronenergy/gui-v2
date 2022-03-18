@@ -36,9 +36,10 @@ QtObject {
 	property Timer _idleModeTimer: Timer {
 		running: root.mainPageActive
 			&& root.navBar
-			&& root.navBar.currentUrl == "qrc:/pages/OverviewPage.qml"
+			&& (root.navBar.currentUrl == "qrc:/pages/OverviewPage.qml"
+				|| root.navBar.currentUrl == "qrc:/pages/LevelsPage.qml")
 			&& root.interactivity === PageManager.InteractionMode.Interactive
-		interval: Theme.animation.overviewPage.interactive.timeout
+		interval: Theme.animation.page.idleResize.timeout
 		onTriggered: root.interactivity = PageManager.InteractionMode.EnterIdleMode
 	}
 

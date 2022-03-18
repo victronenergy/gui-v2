@@ -9,8 +9,8 @@
     "animation.briefPage.edgeGauge.fade.duration": 200,
     "animation.briefPage.sidePanel.slide.duration": 350,
     "animation.toastNotification.fade.duration": 250,
-    "animation.overviewPage.interactive.duration": 250,
-    "animation.overviewPage.interactive.timeout": 6000,
+    "animation.page.idleResize.duration": 250,
+    "animation.page.idleResize.timeout": 6000,
     "animation.levelsPage.animation.duration": 500,
 
     "geometry.page.grid.horizontalMargin": 24,
@@ -268,6 +268,7 @@
     "geometry.levelsPage.buttons.width": 368,
     "geometry.levelsPage.buttons.height": 40,
     "geometry.levelsPage.gaugesView.interactive.topMargin": 16,
+    "geometry.levelsPage.gaugesView.interactive.bottomMargin" : 16,
     "geometry.levelsPage.gaugesView.fullScreen.topMargin": 0,
     "geometry.levelsPage.gaugesView.fullScreen.bottomMargin" : 48,
     "geometry.levelsPage.gaugesView.leftMargin": 24,

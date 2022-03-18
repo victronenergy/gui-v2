@@ -22,5 +22,7 @@ SegmentedButtonRow {
 		}
 	}
 
-	Behavior on anchors.topMargin { NumberAnimation { duration: Theme.animation.statusBar.slide.duration; easing.type: Easing.InOutQuad } }
+	Behavior on anchors.topMargin {
+		NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
+	}
 }
