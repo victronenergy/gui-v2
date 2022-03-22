@@ -76,6 +76,7 @@ Rectangle {
 	color: isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
 	Behavior on height {
+		enabled: PageManager.animatingIdleResize
 		NumberAnimation {
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad

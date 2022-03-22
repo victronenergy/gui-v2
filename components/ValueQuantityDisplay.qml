@@ -8,7 +8,7 @@ import Victron.VenusOS
 Row {
 	id: root
 
-	property real value   // in SI units, eg. 1234 for 1234W
+	property real value: NaN   // in SI units, eg. 1234 for 1234W
 	property var physicalQuantity: Units.Power // eg. Units.Voltage, Units.Current, Units.Power
 	property int precision: 3 // this will display 1.23kW, given a value of 1234
 	property alias valueColor: valueLabel.color
@@ -18,10 +18,14 @@ Row {
 
 	spacing: Theme.geometry.valueDisplay.quantityRow.spacing
 
+	// Restrict the height to the baseline to align the baseline of labels in different
+	// ValueQuantityDisplay items with different font sizes (e.g. horizontally-aligned
+	// EnvironmentGauge labels with different sizes).
+	height: Math.ceil(valueLabel.baselineOffset)
+
 	Label {
 		id: valueLabel
 
-		anchors.verticalCenter: parent.verticalCenter
 		color: Theme.color.font.primary
 		text: root._displayValue.number
 	}
@@ -29,7 +33,6 @@ Row {
 	Label {
 		id: unitLabel
 
-		anchors.verticalCenter: parent.verticalCenter
 		opacity: 0.7 // TODO: use a Theme color instead
 		text: root._displayValue.units
 		font: valueLabel.font
