@@ -100,5 +100,16 @@
     "color.levelsPage.liveWell.borderColor": "#249989",
     "color.levelsPage.oil.borderColor": "#856B5D",
     "color.levelsPage.blackWater.borderColor": "#6B4AB3",
-    "color.levelsPage.gasoline.borderColor": "#9B8A45"
+    "color.levelsPage.gasoline.borderColor": "#9B8A45",
+
+    "color.levelsPage.environment.panel.title": "#FFFFFF",
+    "color.levelsPage.environment.panel.background": "#FFFFFF",
+    "color.levelsPage.environment.panel.border.color": "#969591",
+    "color.levelsPage.environment.gauge.zeroMarker": "#FFFFFF",
+    "color.levelsPage.environment.temperatureGauge.gradient.color1": "#D66A67",
+    "color.levelsPage.environment.temperatureGauge.gradient.color2": "#7E6EB7",
+    "color.levelsPage.environment.temperatureGauge.gradient.color3": "#5991CE",
+    "color.levelsPage.environment.humidityGauge.gradient.color1": "#5D9AD7",
+    "color.levelsPage.environment.humidityGauge.gradient.color2": "#97B974",
+    "color.levelsPage.environment.humidityGauge.gradient.color3": "#DBB78E"
 }

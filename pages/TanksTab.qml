@@ -142,7 +142,7 @@ ListView {
 		Theme.geometry.levelsPage.gauge.spacing6,
 		Theme.geometry.levelsPage.gauge.spacing7,
 	]
-	readonly property bool _interactive: PageManager.interactivity !== PageManager.InteractionMode.Idle
+
 	readonly property var _subgaugeWidths: [
 		Theme.geometry.levelsPage.subgauge.width1,
 		Theme.geometry.levelsPage.subgauge.width2,
@@ -307,15 +307,9 @@ ListView {
 	Behavior on anchors.leftMargin {
 		NumberAnimation { duration: Theme.animation.levelsPage.animation.duration; easing.type: Easing.InOutQuad }
 	}
-	Behavior on anchors.topMargin {
-		NumberAnimation { duration: Theme.animation.statusBar.slide.duration; easing.type: Easing.InOutQuad }
-	}
-	Behavior on anchors.bottomMargin {
-		NumberAnimation { duration: Theme.animation.statusBar.slide.duration; easing.type: Easing.InOutQuad }
-	}
 
 	delegate: LevelsPageGaugeDelegate {
-		interactive: _interactive
+		interactive: PageManager.interactivity !== PageManager.InteractionMode.Idle
 		totalCapacity: model.gaugeTanks.count * 1000 // TODO - hook up to real capacity
 		percentage: {
 			var retval = 0

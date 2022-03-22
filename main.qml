@@ -83,6 +83,23 @@ Window {
 		id: dialogManager
 	}
 
+	MouseArea {
+		id: idleModeMouseArea
+
+		anchors.fill: parent
+		enabled: PageManager.interactivity === PageManager.InteractionMode.Idle
+		onClicked: PageManager.interactivity = PageManager.InteractionMode.ExitIdleMode
+	}
+
+
+	MouseArea {
+		anchors.fill: parent
+		onPressed: function(mouse) {
+			mouse.accepted = false
+			PageManager.idleModeTimer.restart()
+		}
+	}
+
 	Loader {
 		id: dbusData
 

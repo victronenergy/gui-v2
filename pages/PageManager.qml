@@ -30,10 +30,16 @@ QtObject {
 	property bool mainPageActive: true
 	property var navBar
 	property var statusBar
+	property int levelsTabIndex
 
 	property int interactivity: PageManager.InteractionMode.Interactive
 
-	property Timer _idleModeTimer: Timer {
+	// True when the UI layout on a page should be resizing before/after idle/interactive mode changes.
+	readonly property bool animatingIdleResize: _widgetResizingTimer.running
+			|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+			|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+
+	property Timer idleModeTimer: Timer {
 		running: root.mainPageActive
 			&& root.navBar
 			&& (root.navBar.currentUrl == "qrc:/pages/OverviewPage.qml"
@@ -41,6 +47,12 @@ QtObject {
 			&& root.interactivity === PageManager.InteractionMode.Interactive
 		interval: Theme.animation.page.idleResize.timeout
 		onTriggered: root.interactivity = PageManager.InteractionMode.EnterIdleMode
+	}
+
+	property Timer _widgetResizingTimer: Timer {
+		interval: Theme.animation.page.idleResize.duration
+		running: PageManager.interactivity === PageManager.InteractionMode.Idle
+				 || PageManager.interactivity === PageManager.InteractionMode.Interactive
 	}
 
 	function pushPage(page) {
