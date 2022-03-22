@@ -17,6 +17,7 @@ Window {
 	property Item acInputs: dataLoader.item.acInputs
 	property Item dcInputs: dataLoader.item.dcInputs
 	property Item battery: dataLoader.item.battery
+	property Item environmentLevels: dataLoader.item.environmentLevels
 	property Item ess: dataLoader.item.ess
 	property Item tanks: dataLoader.item.tanks
 	property Item inverters: dataLoader.item.inverters
@@ -108,6 +109,7 @@ Window {
 			property AcInputs acInputs: AcInputs {}
 			property DcInputs dcInputs: DcInputs {}
 			property Battery battery: Battery {}
+			property EnvironmentLevels environmentLevels: EnvironmentLevels {}
 			property Ess ess: Ess {}
 			property Tanks tanks: Tanks {}
 			property Generators generators: Generators {}
@@ -138,27 +140,19 @@ Window {
 		focus: active
 
 		sourceComponent: Item {
-			// TODO make demo versions
 			property Demo.AcInputs acInputs: Demo.AcInputs {}
 			property Demo.DcInputs dcInputs: Demo.DcInputs {}
 			property Demo.Battery battery: Demo.Battery {}
+			property Demo.EnvironmentLevels environmentLevels: Demo.EnvironmentLevels {}
 			property Demo.Ess ess: Demo.Ess {}
 			property Demo.Tanks tanks: Demo.Tanks {}
 			property Demo.Inverters inverters: Demo.Inverters {}
 			property Demo.Generators generators: Demo.Generators {}
 			property Demo.Relays relays: Demo.Relays {}
-
 			property Demo.SolarChargers solarChargers: Demo.SolarChargers {}
 			property Demo.System system: Demo.System {}
 
-			Demo.DemoConfig {
-				width: root.width
-				height: root.height
-				focus: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
-
-				Keys.onLeftPressed: prevOverviewLayout()
-				Keys.onRightPressed: nextOverviewLayout()
-			}
+			Demo.DemoConfig {}
 		}
 	}
 }

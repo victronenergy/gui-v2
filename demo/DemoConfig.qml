@@ -5,183 +5,74 @@
 import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
-import "../data" as DBusData
+import "pages"
 
 Item {
 	id: root
 
-	property var overviewConfigs: [
-		{
-			name: "ESS - AC & DC coupled.  PV Inverter on AC Bus + AC output",
-			acInputs: { types: [ DBusData.AcInputs.Grid ] },
-			solar: {},
-			system: { state: DBusData.System.State.Inverting, ac: {}, dc: {} },
-			battery: { stateOfCharge: 64, current: 1 },
-		},
-		{
-			name: "ESS - AC & DC coupled. PV Inverter on AC Out",
-			acInputs: { types: [ DBusData.AcInputs.Grid ] },
-			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
-			battery: { stateOfCharge: 73, current: -1 },
-		},
-		// TODO "ESS - AC & DC coupled. PV Inverter on AC Out (Amps version)",
-		{
-			name: "Phase self consumption",
-			acInputs: { types: [ DBusData.AcInputs.Generator ] },
-			solar: {},
-			system: { state: DBusData.System.State.PassThrough, ac: {} },
-			battery: { stateOfCharge: 29, current: 1 },
-		},
-		{
-			name: "Off grid",
-			acInputs: { types: [ DBusData.AcInputs.Generator ] },  // TODO 'stopped' state
-			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
-			battery: { stateOfCharge: 95, current: 1 },
-		},
-		{
-			name: "ESS - AC coupled on AC Output",
-			acInputs: { types: [ DBusData.AcInputs.Grid ] },  // TODO what does up arrow icon in Grid indicate?
-			solar: {},
-			system: { state: DBusData.System.State.FloatCharging, ac: {} },
-			battery: { stateOfCharge: 100, current: 0 },
-		},
-		{
-			name: "Pure Energy Storage - no PV",
-			acInputs: { types: [ DBusData.AcInputs.Grid ] },
-			// TODO state should be 'Scheduled charging', but not in dbus API?
-			system: { state: DBusData.System.State.FloatCharging, ac: {} },
-			battery: { stateOfCharge: 43, current: 1 },
-		},
-		{
-			name: "Combo (amps): Shore / DC Generator / Left & Right Alternator / Solar",
-			acInputs: { types: [ DBusData.AcInputs.Shore ], phases: 3 },
-			dcInputs: { types: [ DBusData.DcInputs.DcGenerator, DBusData.DcInputs.Alternator ] },
-			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
-		},
-		{
-			name: "Single-phase Shore",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
-		},
-		{
-			name: "Single phase + solar",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
-			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
-		},
-		{
-			name: "Small RV with alternator or small boat",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
-			dcInputs: { types: [ DBusData.DcInputs.Alternator ] },
-			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
-		},
-		{
-			name: "Catamaran with wind: Shore / Solar / Left alternator / Right alternator / Wind",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
-			dcInputs: { types: [ DBusData.DcInputs.Alternator, DBusData.DcInputs.Wind ] },
-			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
-			battery: { stateOfCharge: 43, current: 1 },
-		},
-		{
-			name: "Boat with DC generator",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
-			dcInputs: { types: [ DBusData.DcInputs.DcGenerator, DBusData.DcInputs.Alternator, DBusData.DcInputs.Wind ] },
-			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
-			battery: { stateOfCharge: 43, current: 1 },
-		},
-	]
+	readonly property var _demos: ({
+		"qrc:/pages/OverviewPage.qml": overviewDemo,
+		"qrc:/pages/LevelsPage.qml": levelsDemo,
+	})
 
-	property int overviewConfigIndex: -1
-	property bool randomizeOverviewConfig: true
-	property var _lastPageUrl
-
-	function setConfigIndex(configIndex, forceReload) {
-		overviewConfigIndex = configIndex
-		let config = overviewConfigs[configIndex]
+	// Set to a specified config, or -1 to select a random config.
+	function setConfigIndex(demo, configIndex, forceReload) {
+		let config = configIndex === -1
+				? demo.configs[Math.floor(Math.random() * demo.configs.length)]
+				: demo.configs[configIndex]
+		demo.configIndex = configIndex
 		if (config) {
-			let i = 0
-			acInputs.model.clear()
-			if (config.acInputs) {
-				for (i = 0; i < config.acInputs.types.length; ++i) {
-					acInputs.addInput(config.acInputs.types[i], config.acInputs.phases || 1)
-				}
-			}
-			dcInputs.model.clear()
-			if (config.dcInputs) {
-				for (i = 0; i < config.dcInputs.types.length; ++i) {
-					dcInputs.addInput(config.dcInputs.types[i])
-				}
-			}
-			solarChargers.clear()
-			if (config.solar) {
-				solarChargers.populate()
-			}
-			if (config.system) {
-				system.state = config.system.state
-				system.ac.demoTimer.running = config.system.ac !== undefined
-				system.dc.demoTimer.running = config.system.dc !== undefined
-			}
-			if (config.battery) {
-				battery.chargeAnimation.running = false
-				battery.stateOfCharge = config.battery.stateOfCharge
-				battery.current = config.battery.current
-			}
-
-			demoTitle.text = (configIndex + 1) + ". " + config.name
-
+			demo.loadConfig(config)
+			demoTitle.text = configIndex === -1 ? "" : (configIndex+1 + ". " + config.name || "")
 		} else {
-			// Return to app default state: populate all models with random data
-			randomizeOverviewConfig = true
-			resetDemoData()
+			demo.reset()
+			demoTitle.text = ""
 		}
 
-		// Force page reload, otherwise layout may not change if it is the current page
-		if (PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml") {
-			PageManager.navBar.buttonClicked(0)
-			PageManager.navBar.buttonClicked(1)
+		// Overview page doesn't update layout if already on that page
+		if (forceReload && PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml") {
+			const pageIndex = indexOfPage(PageManager.navBar.currentUrl)
+			PageManager.navBar.buttonClicked(PageManager.navBar.model.count - 1) // go to settings page
+			PageManager.navBar.buttonClicked(pageIndex)
 		}
 	}
 
-	function nextOverviewLayout() {
-		randomizeOverviewConfig = false
-		setConfigIndex(overviewConfigIndex == overviewConfigs.length-1 ? -1 : overviewConfigIndex+1)
+	function nextConfig() {
+		const demo = _demos[PageManager.navBar.currentUrl]
+		const nextIndex = demo.configIndex === demo.configs.length-1 ? 0 : demo.configIndex+1
+		setConfigIndex(demo, nextIndex, true)
 	}
 
-	function prevOverviewLayout() {
-		randomizeOverviewConfig = false
-		setConfigIndex(overviewConfigIndex < 0 ? overviewConfigs.length-1 : overviewConfigIndex-1)
+	function previousConfig() {
+		const demo = _demos[PageManager.navBar.currentUrl]
+		const prevIndex = demo.configIndex <= 0 ? demo.configs.length-1 : demo.configIndex-1
+		setConfigIndex(demo, prevIndex, true)
 	}
 
-	function resetDemoData() {
-		acInputs.populate()
-		dcInputs.populate()
-		solarChargers.populate()
-		system.ac.demoTimer.running = true
-		system.dc.demoTimer.running = true
-		battery.chargeAnimation.running = true
-		demoTitle.text = ""
+	function indexOfPage(url) {
+		for (let i = 0; i < PageManager.navBar.model.count; ++i) {
+			if (PageManager.navBar.model.get(i).url === url) {
+				return i
+			}
+		}
+		console.warn('Cannot find url', url, 'in navBar.model')
+		return -1
 	}
 
-	Component.onCompleted: resetDemoData()
+	anchors.fill: parent
+	focus: PageManager.navBar.currentUrl in root._demos
+
+	Keys.onLeftPressed: previousConfig()
+	Keys.onRightPressed: nextConfig()
 
 	Rectangle {
 		id: demoTitleBackground
 
-		anchors {
-			top: parent.top
-			horizontalCenter: parent.horizontalCenter
-		}
 		width: demoTitle.width * 1.1
 		height: demoTitle.height * 1.1
 		color: "white"
 		opacity: 0.9
-		visible: demoTitleTimer.running && !randomizeOverviewConfig
+		visible: demoTitleTimer.running
 
 		Label {
 			id: demoTitle
@@ -199,12 +90,27 @@ Item {
 	Connections {
 		target: PageManager.navBar || null
 		function onCurrentUrlChanged() {
-			if (randomizeOverviewConfig
-					&& PageManager.navBar.currentUrl !== "qrc:/pages/OverviewPage.qml"
-					&& _lastPageUrl === "qrc:/pages/OverviewPage.qml") {
-				setConfigIndex(Math.floor(Math.random() * overviewConfigs.length))
+			for (let demoUrl in _demos) {
+				const demo = _demos[demoUrl]
+				if (PageManager.navBar.currentUrl === demoUrl) {
+					if (demo.configIndex === -1) {
+						setConfigIndex(demo, -1, false)
+					}
+					break
+				}
 			}
-			_lastPageUrl = PageManager.navBar.currentUrl
 		}
+	}
+
+	OverviewPageDemo {
+		id: overviewDemo
+
+		property int configIndex: -1
+	}
+
+	LevelsPageDemo {
+		id: levelsDemo
+
+		property int configIndex: -1
 	}
 }

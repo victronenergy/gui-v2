@@ -73,6 +73,7 @@
         <file>data/AcInputServiceLoader.qml</file>
         <file>data/DcInputs.qml</file>
         <file>data/Battery.qml</file>
+        <file>data/EnvironmentLevels.qml</file>
         <file>data/Ess.qml</file>
         <file>data/Generators.qml</file>
         <file>data/Inverters.qml</file>
@@ -86,6 +87,7 @@
         <file>demo/AcInputs.qml</file>
         <file>demo/DcInputs.qml</file>
         <file>demo/Battery.qml</file>
+        <file>demo/EnvironmentLevels.qml</file>
         <file>demo/Ess.qml</file>
         <file>demo/Generators.qml</file>
         <file>demo/Inverters.qml</file>
@@ -95,6 +97,8 @@
         <file>demo/SystemAc.qml</file>
         <file>demo/SystemDc.qml</file>
         <file>demo/Tanks.qml</file>
+        <file>demo/pages/LevelsPageDemo.qml</file>
+        <file>demo/pages/OverviewPageDemo.qml</file>
         <file>pages/PageManager.qml</file>
         <file>pages/Page.qml</file>
         <file>pages/MainPage.qml</file>
