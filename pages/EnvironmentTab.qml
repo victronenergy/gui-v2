@@ -47,7 +47,7 @@ Flickable {
 
 		Repeater {
 			id: levelsRepeater
-			model: [{ temp: 121, humidity: 199 }, { temp: 5 }, { temp: 5, humidity: 11 }, { temp: 15, humidity: 11 }]
+			model: environmentLevels.model
 
 			delegate: EnvironmentGaugePanel {
 				horizontalSize: {
@@ -69,9 +69,9 @@ Flickable {
 				verticalSize: PageManager.interactivity === PageManager.InteractionMode.Idle
 						? EnvironmentGaugePanel.Size.Expanded
 						: EnvironmentGaugePanel.Size.Compact
-				title: "Water tank temperature"
-				temperature: modelData.temp || NaN
-				humidity: modelData.humidity || NaN
+				title: model.input.customName || model.input.productName || ""
+				temperature: model.input.temperature
+				humidity: model.input.humidity
 			}
 		}
 	}
