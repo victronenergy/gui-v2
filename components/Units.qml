@@ -24,45 +24,37 @@ QtObject {
 				Power		|		2		|	123		|	120W
 	*/
 	function getDisplayText(physicalQuantity, value, precision) {
-		let number = isNaN(value)
-			? "--"
-			: parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision))
-		let rv
+		let unitText = ""
 		switch (physicalQuantity) {
 		case Units.PhysicalQuantity.Power:
-			rv = {
-				number: number,
-				units: (value < 1000) ? "W" : "kW"
-			}
+			value = _adjustedValue(value, precision)
+			unitText = (value < 1000) ? "W" : "kW"
 			break;
 		case Units.PhysicalQuantity.Voltage:
-			rv = {
-				number: number,
-				units: (value < 1000) ? "V" : "kV"
-			}
+			value = _adjustedValue(value, precision)
+			unitText = (value < 1000) ? "V" : "kV"
 			break;
 		case Units.PhysicalQuantity.Current:
-			rv = {
-				number: number,
-				units: (value < 1000) ? "A" : "kA"
-			}
+			value = _adjustedValue(value, precision)
+			unitText = (value < 1000) ? "A" : "kA"
 			break;
 		case Units.PhysicalQuantity.Percentage:
-			rv = {
-				number: number,
-				units: "%"
-			}
+			value = Math.round(value)
+			unitText = "%"
 			break;
 		case Units.PhysicalQuantity.Temperature:
-			rv = {
-				number: number,
-				units: "°"
-			}
+			unitText = "\u00b0"
 			break;
 		default:
-			rv = { number: -1, units: "" }
 			break;
 		}
-		return rv
+		return {
+			number: isNaN(value) ? "--" : value,
+			units: unitText
+		}
+	}
+
+	function _adjustedValue(value, precision) {
+		return parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision))
 	}
 }

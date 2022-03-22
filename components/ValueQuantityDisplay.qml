@@ -8,7 +8,7 @@ import Victron.VenusOS
 Row {
 	id: root
 
-	property real value   // in SI units, eg. 1234 for 1234W
+	property real value: NaN   // in SI units, eg. 1234 for 1234W
 	property var physicalQuantity: Units.Power // eg. Units.Voltage, Units.Current, Units.Power
 	property int precision: 3 // this will display 1.23kW, given a value of 1234
 	property alias valueColor: valueLabel.color

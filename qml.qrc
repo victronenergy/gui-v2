@@ -35,13 +35,15 @@
         <file>components/CircularSingleGauge.qml</file>
         <file>components/ControlCard.qml</file>
         <file>components/ControlValue.qml</file>
+        <file>components/EnvironmentGauge.qml</file>
+        <file>components/EnvironmentGaugePanel.qml</file>
         <file>components/ExpandedTanksView.qml</file>
         <file>components/ButtonControlValue.qml</file>
         <file>components/RadioButtonControlValue.qml</file>
         <file>components/SwitchControlValue.qml</file>
         <file>components/Gauges.qml</file>
         <file>components/GeneratorIconLabel.qml</file>
-        <file>components/LevelsPageButtonRow.qml</file>
+        <file>components/TabBar.qml</file>
         <file>components/LevelsPageGaugeDelegate.qml</file>
         <file>components/MainView.qml</file>
         <file>components/LoadGraph.qml</file>
@@ -99,6 +101,7 @@
         <file>pages/ControlCardsPage.qml</file>
         <file>pages/BriefPage.qml</file>
         <file>pages/BriefMonitorPanel.qml</file>
+        <file>pages/EnvironmentTab.qml</file>
         <file>pages/GeneratorLeftGauge.qml</file>
         <file>pages/GeneratorMiniGauge.qml</file>
         <file>pages/GeneratorRightGauge.qml</file>
@@ -132,10 +135,12 @@
         <file>images/freshWater20x27.svg</file>
         <file>images/icon_alarm_48.svg</file>
         <file>images/icon_autostart_24.svg</file>
-        <file>images/icon_manualstart_24.svg</file>
+        <file>images/icon_humidity_32.svg</file>
         <file>images/icon_manualstart_timer_24.svg</file>
+        <file>images/icon_manualstart_24.svg</file>
         <file>images/icon_minus.svg</file>
         <file>images/icon_plus.svg</file>
+        <file>images/icon_temp_32.svg</file>
         <file>images/inverter_charger.svg</file>
         <file>images/levels.svg</file>
         <file>images/notifications.svg</file>
