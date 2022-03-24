@@ -89,7 +89,7 @@ Window {
 
 		anchors.fill: parent
 		enabled: PageManager.interactivity === PageManager.InteractionMode.Idle
-		onClicked: PageManager.interactivity = PageManager.InteractionMode.ExitIdleMode
+		onClicked: PageManager.interactivity = PageManager.InteractionMode.BeginExitIdleMode
 	}
 
 	Loader {

@@ -33,6 +33,10 @@ Page {
 			}
 		}
 
+		opacity: PageManager.interactivity === PageManager.InteractionMode.Interactive
+			 || PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode ? 1.0 : 0.0
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration } }
+
 		// Remember currentIndex when returning to the Levels page
 		currentIndex: PageManager.levelsTabIndex
 

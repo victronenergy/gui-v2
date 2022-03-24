@@ -292,21 +292,10 @@ ListView {
 	}
 
 	width: childrenRect.width
-	Behavior on width {
-		NumberAnimation {
-			duration: Theme.animation.levelsPage.animation.duration
-			easing.type: Easing.InOutQuad
-		}
-	}
 
 	model: root._gaugesModel
 	orientation: ListView.Horizontal
 	spacing: root._gaugesModel.count > 1 ? root._spacing[root._gaugesModel.count - 2] : 0
-
-	Behavior on spacing { NumberAnimation { duration: Theme.animation.levelsPage.animation.duration } }
-	Behavior on anchors.leftMargin {
-		NumberAnimation { duration: Theme.animation.levelsPage.animation.duration; easing.type: Easing.InOutQuad }
-	}
 
 	delegate: LevelsPageGaugeDelegate {
 		interactive: PageManager.interactivity !== PageManager.InteractionMode.Idle

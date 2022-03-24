@@ -16,38 +16,29 @@ Item {
 
 	readonly property real _midpointX: _xDistanceBetweenNubs / 2
 	readonly property real _midpointY: _yDistanceBetweenNubs / 2
-	readonly property real _xDistanceBetweenNubs: {
-		// for vertical connectors, take the nub width into account
-		var nubWidth = 0
-		if (direction == Qt.Vertical) {
-			nubWidth += endNub.width
-		}
-		var dist = endNub.x > startNub.x
-				? endNub.x - (startNub.x + startNub.width - nubWidth)
-				: (endNub.x - (startNub.x - startNub.width + nubWidth))
-		return dist
-	}
-	readonly property real _yDistanceBetweenNubs: {
-		var dist = endNub.y - startNub.y
-		// for vertical connectors, take the nub height into account
-		if (startLocation == WidgetConnector.Location.Top) {
-			dist += endNub.height
-		} else if (startLocation == WidgetConnector.Location.Bottom) {
-			dist -= endNub.height
-		}
-		return dist
-	}
+	readonly property real _xDistanceBetweenNubs: endNub.x > startNub.x
+			? (endNub.x - (startNub.x + startNub.width - _adjustedNubWidth))
+			: (endNub.x - (startNub.x - startNub.width + _adjustedNubWidth))
+	readonly property real _yDistanceBetweenNubs:  endNub.y - startNub.y + _adjustedNubHeight
+
+	// Cache some intermediate values using optimised bindings for performance
+	// Use the x radius to show a more evenly-rounded radius when possible
+	property int _absMidpointX: _midpointX >= 0 ? _midpointX : -_midpointX
+	property int _absMidpointY: _midpointY >= 0 ? _midpointY : -_midpointY
+	property int _smallestRadius: _absMidpointX < _absMidpointY ? _absMidpointX : _absMidpointY
+	// for vertical connectors, take the nub width into account
+	property int _adjustedNubWidth: direction === Qt.Vertical ? endNub.width : 0
+	// for vertical connectors, take the nub height into account
+	property int _adjustedNubHeight: startLocation === WidgetConnector.Location.Top ? endNub.height
+			: startLocation === WidgetConnector.Location.Bottom ? -endNub.height
+			: 0
 
 	property list<QtObject> pathElements: [
 		PathArc {
 			id: startArc
 
 			x: _midpointX
-			y: {
-				// Use the x radius to show a more evenly-rounded radius when possible
-				var smallestRadius = Math.min(Math.abs(_midpointX), Math.abs(_midpointY))
-				return startNub.y < endNub.y ? smallestRadius : -smallestRadius
-			}
+			y: startNub.y < endNub.y ? _smallestRadius : -_smallestRadius
 
 			radiusX: x
 			radiusY: y

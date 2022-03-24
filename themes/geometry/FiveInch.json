@@ -9,6 +9,7 @@
     "animation.briefPage.edgeGauge.fade.duration": 200,
     "animation.briefPage.sidePanel.slide.duration": 350,
     "animation.toastNotification.fade.duration": 250,
+    "animation.page.idleOpacity.duration": 250,
     "animation.page.idleResize.duration": 250,
     "animation.page.idleResize.timeout": 6000,
     "animation.levelsPage.animation.duration": 500,

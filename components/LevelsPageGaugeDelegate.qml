@@ -37,7 +37,7 @@ Rectangle {
 
 		return gaugeDelegateWidths[model.gaugeTanks.count - 1]
 	}
-	height: interactive ? Theme.geometry.levelsPage.augeDelegate.height.interactive : Theme.geometry.levelsPage.gaugeDelegate.height.fullScreen
+	height: interactive ? Theme.geometry.levelsPage.gaugeDelegate.height.interactive : Theme.geometry.levelsPage.gaugeDelegate.height.fullScreen
 	color: Theme.color.levelsPage.gauge.backgroundColor
 	radius: Theme.geometry.levelsPage.gauge.radius
 

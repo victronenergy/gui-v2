@@ -10,6 +10,7 @@ Page {
 	id: root
 
 	property var _leftWidgets: []
+	property var _allWidgets: []
 
 	// Preferred order for the input widgets on the left hand side
 	readonly property var _leftWidgetOrder: [
@@ -29,6 +30,43 @@ Page {
 	on_ShouldResetLeftWidgetsChanged: Qt.callLater(_resetLeftWidgets)
 
 	property var _createdWidgets: ({})
+
+	// Animations on y and height are expensive.
+	// We only want to calculate these one ONCE PER FRAME if possible.
+	// Hence, we bind to the "bindableHeight" and "bindableY" values, and update those once per frame.
+	property int _leftWidgetsTopMargin: _leftWidgets.length > 1 ? (_leftWidgetsVerticalSpace - _totalLeftWidgetHeights) / (_leftWidgets.length -  1) : 0
+	property int _leftWidgetsVerticalSpace: 0
+	property int _totalLeftWidgetHeights: 0
+
+	Timer {
+		id: manualAnimationTimer
+		interval: 32 // 30 fps because 60 fps is not achievable.
+		running: true
+		repeat: true
+		onTriggered: {
+			var i = 0
+			var currWidget = null
+			var totalHeight = 0
+			var nextWidgetYPosition = 0
+			for ( ; i < _leftWidgets.length; ++i) {
+				currWidget = _allWidgets[i]
+				// update the bindableHeightAndY values for each widget
+				currWidget.bindableHeightAndY = [currWidget.height, currWidget.y]
+				// and update each left widget's y value
+				currWidget.y = nextWidgetYPosition
+				nextWidgetYPosition = currWidget.y + currWidget.height + _leftWidgetsTopMargin
+				// also accumulate the total left widgets height value
+				totalHeight += currWidget.height
+			}
+			for ( ; i < _allWidgets.length; ++i) {
+				currWidget = _allWidgets[i]
+				currWidget.bindableHeightAndY = [currWidget.height, currWidget.y]
+			}
+			_totalLeftWidgetHeights = totalHeight
+			// and calculate how much vertical space we have for left widgets (i.e. same as the y value of the bottom of the battery widget)
+			_leftWidgetsVerticalSpace = batteryWidget.bindableHeightAndY[1] + batteryWidget.bindableHeightAndY[0]
+		}
+	}
 
 	function _createWidget(type, args) {
 		if (_createdWidgets[type] !== undefined) {
@@ -66,6 +104,12 @@ Page {
 		return widget
 	}
 
+	function _populateAllWidgets() {
+		var temp = _leftWidgets.slice() // shallow clone copy.
+		temp.push(batteryWidget, inverterWidget, acLoadsWidget, dcLoadsWidget)
+		_allWidgets = temp
+	}
+
 	function _resetLeftWidgets() {
 		if (!acInputs) {
 			_leftWidgets = []
@@ -81,6 +125,7 @@ Page {
 					0, _createWidget(OverviewWidget.Type.Solar))
 		}
 		_leftWidgets = widgetCandidates
+		_populateAllWidgets()
 	}
 
 	function _addModelWidgets(inputModel, widgetCandidates) {
@@ -208,18 +253,6 @@ Page {
 		}
 	}
 
-	function _leftWidgetTopMargin(widget) {
-		if (_leftWidgets.length == 0 || _leftWidgets.indexOf(widget) == 0) {
-			return 0
-		}
-		let totalWidgetHeight = 0
-		for (let i = 0; i < _leftWidgets.length; ++i) {
-			totalWidgetHeight += _leftWidgets[i].height
-		}
-		let availableHeight = batteryWidget.y + batteryWidget.height
-		return (availableHeight - totalWidgetHeight) / (_leftWidgets.length - 1)
-	}
-
 	SegmentedWidgetBackground {
 		id: segmentedBackground
 
@@ -239,13 +272,14 @@ Page {
 			id: gridWidget
 
 			anchors {
-				top: _leftWidgetTopAnchor(gridWidget)
-				topMargin: _leftWidgetTopMargin(gridWidget)
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
+
 			width: Theme.geometry.overviewPage.widget.input.width
-			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 			size: _widgetSize(gridWidget)
 			isSegment: segmentedBackground.visible
 			sideGaugeValue: value / Utils.maximumValue("grid.power")
@@ -270,13 +304,13 @@ Page {
 			id: shoreWidget
 
 			anchors {
-				top: _leftWidgetTopAnchor(shoreWidget)
-				topMargin: _leftWidgetTopMargin(shoreWidget)
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
 			width: Theme.geometry.overviewPage.widget.input.width
-			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 			size: _widgetSize(shoreWidget)
 			isSegment: segmentedBackground.visible
 			sideGaugeValue: 0.5 // TODO when max available
@@ -301,13 +335,13 @@ Page {
 			id: acGeneratorWidget
 
 			anchors {
-				top: _leftWidgetTopAnchor(acGeneratorWidget)
-				topMargin: _leftWidgetTopMargin(acGeneratorWidget)
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
 			width: Theme.geometry.overviewPage.widget.input.width
-			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 			size: _widgetSize(acGeneratorWidget)
 			isSegment: segmentedBackground.visible
 
@@ -331,13 +365,13 @@ Page {
 			id: dcGeneratorWidget
 
 			anchors {
-				top: _leftWidgetTopAnchor(dcGeneratorWidget)
-				topMargin: _leftWidgetTopMargin(dcGeneratorWidget)
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
 			width: Theme.geometry.overviewPage.widget.input.width
-			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 			size: _widgetSize(dcGeneratorWidget)
 			isSegment: segmentedBackground.visible
 
@@ -363,13 +397,13 @@ Page {
 			id: alternatorWidget
 
 			anchors {
-				top: _leftWidgetTopAnchor(alternatorWidget)
-				topMargin: _leftWidgetTopMargin(alternatorWidget)
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
 			width: Theme.geometry.overviewPage.widget.input.width
-			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 			size: _widgetSize(alternatorWidget)
 			isSegment: segmentedBackground.visible
 
@@ -394,13 +428,13 @@ Page {
 			id: windWidget
 
 			anchors {
-				top: _leftWidgetTopAnchor(windWidget)
-				topMargin: _leftWidgetTopMargin(windWidget)
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
 			width: Theme.geometry.overviewPage.widget.input.width
-			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 			size: _widgetSize(windWidget)
 			isSegment: segmentedBackground.visible
 
@@ -425,13 +459,13 @@ Page {
 			id: solarWidget
 
 			anchors {
-				top: _leftWidgetTopAnchor(solarWidget)
-				topMargin: _leftWidgetTopMargin(solarWidget)
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
 			width: Theme.geometry.overviewPage.widget.input.width
-			height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+			height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 			size: _widgetSize(solarWidget)
 			isSegment: segmentedBackground.visible
 
@@ -469,7 +503,9 @@ Page {
 		}
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.inverter.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+		height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+				|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+				|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 		physicalQuantity: -1
 		systemState: system ? system.state : 0
 	}
@@ -491,6 +527,7 @@ Page {
 		animationPaused: PageManager.animatingIdleResize
 	}
 
+
 	BatteryWidget {
 		id: batteryWidget
 		anchors {
@@ -500,7 +537,9 @@ Page {
 		}
 		size: OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.battery.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+		height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+				|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+				|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 		animationRunning: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
 		animationPaused: PageManager.animatingIdleResize
 		batteryData: battery
@@ -526,7 +565,9 @@ Page {
 			  ? OverviewWidget.Size.XL
 			  : OverviewWidget.Size.L
 		width: Theme.geometry.overviewPage.widget.output.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+		height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+				|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+				|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 		value: system ? system.ac.consumption.power : NaN
 		phaseModel: system ? system.ac.consumption.phases : null
 		phaseModelProperty: "power"
@@ -542,7 +583,9 @@ Page {
 		}
 		size: !!system && !isNaN(system.dc.power) ? OverviewWidget.Size.L : OverviewWidget.Size.Zero
 		width: Theme.geometry.overviewPage.widget.output.width
-		height: PageManager.interactivity === PageManager.InteractionMode.Idle ? nonInteractiveHeight : interactiveHeight
+		height: (PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+				|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+				|| PageManager.interactivity === PageManager.InteractionMode.Idle) ? nonInteractiveHeight : interactiveHeight
 		value: system ? system.dc.power || 0 : 0
 	}
 }

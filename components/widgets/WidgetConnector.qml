@@ -31,16 +31,20 @@ Item {
 
 	property bool _animated: visible && animationRunning
 	property real _animationProgress
-	property real _diagonalDistance: Math.sqrt(connectorPath.width * connectorPath.width
-		   + connectorPath.height * connectorPath.height
-		   - (2 * connectorPath.width * connectorPath.height)
-		   * Math.cos(90))
+	property real _electronTravelDistance
 
 	visible: startWidget.visible && endWidget.visible
 
-	// Animation doesn't appear to update duration when distance changes, so force it here.
-	on_DiagonalDistanceChanged: {
-		if (!animationPaused) {
+	// Ideally, we would just calculate it in Component.onCompleted, but this didn't work for me
+	// presumably because some height is being set asynchronously via a Behavior.
+	Timer {
+		running: true
+		repeat: false
+		interval: Theme.animation.page.idleResize.duration // wait for Behavior to finish...
+		// simplified to just manhattan distance, and only calculate once rather than when the height/y change
+		// as otherwise the model destroys and recreates electrons in rapid succession due to the animation.
+		onTriggered: {
+			_electronTravelDistance = connectorPath.width + connectorPath.height
 			electronAnim.restart()
 		}
 	}
@@ -68,37 +72,25 @@ Item {
 		endNub.y: endY - y - (direction === Qt.Horizontal ? 0 : endNub.height)
 		endNub.rotation: 180
 
-		startX: (straight && connectorPath.direction == Qt.Vertical && startWidget.width > endWidget.width)
-			? endX
-			: startLocation === WidgetConnector.Location.Left
-			  ? startWidget.x
-			  : startLocation === WidgetConnector.Location.Right
-				? startWidget.x + startWidget.width
-				: startWidget.x + startWidget.width/2   // Top/Bottom location
+		startX: startLocation === WidgetConnector.Location.Left ? startWidget.x
+			: startLocation === WidgetConnector.Location.Right ? startWidget.x + startWidget.width
+			: straight && connectorPath.direction === Qt.Vertical && startWidget.width > endWidget.width ? endX
+			: startWidget.x + startWidget.width/2 // Top/Bottom location
 
-		startY: (straight && connectorPath.direction == Qt.Horizontal && startWidget.height > endWidget.height)
-				? endY
-				: startLocation === WidgetConnector.Location.Top
-				  ? startWidget.y
-				  : startLocation === WidgetConnector.Location.Bottom
-					? startWidget.y + startWidget.height
-					: startWidget.y + startWidget.height/2  // Left/Right location
+		endX: endLocation === WidgetConnector.Location.Left ? endWidget.x
+			: endLocation === WidgetConnector.Location.Right ? endWidget.x + endWidget.width
+			: straight && connectorPath.direction === Qt.Vertical && endWidget.width > startWidget.width ? startX
+			: endWidget.x + endWidget.width/2 // Top/Bottom location
 
-		endX: (straight && connectorPath.direction == Qt.Vertical && endWidget.width > startWidget.width)
-			  ? startX
-			  : endLocation === WidgetConnector.Location.Left
-				? endWidget.x
-				: endLocation === WidgetConnector.Location.Right
-				  ? endWidget.x + endWidget.width
-				  : endWidget.x + endWidget.width/2 // Top/Bottom location
+		startY: startLocation === WidgetConnector.Location.Top ? startWidget.bindableHeightAndY[1]
+			: startLocation === WidgetConnector.Location.Bottom ? startWidget.bindableHeightAndY[1] + startWidget.bindableHeightAndY[0]
+			: straight && connectorPath.direction === Qt.Horizontal && startWidget.bindableHeightAndY[0] > endWidget.bindableHeightAndY[0] ? endY
+			: startWidget.bindableHeightAndY[0]/2 + startWidget.bindableHeightAndY[1] // Left/Right location
 
-		endY: (straight && connectorPath.direction == Qt.Horizontal && endWidget.height > startWidget.height)
-			  ? startY
-			  : endLocation === WidgetConnector.Location.Top
-				? endWidget.y
-				: endLocation === WidgetConnector.Location.Bottom
-				  ? endWidget.y + endWidget.height
-				  : endWidget.y + endWidget.height/2    // Left/Right location
+		endY: endLocation === WidgetConnector.Location.Top ? endWidget.bindableHeightAndY[1]
+			: endLocation === WidgetConnector.Location.Bottom ? endWidget.bindableHeightAndY[1] + endWidget.bindableHeightAndY[0]
+			: straight && connectorPath.direction === Qt.Horizontal && endWidget.bindableHeightAndY[0] > startWidget.bindableHeightAndY[0] ? startY
+			: endWidget.bindableHeightAndY[0]/2 + endWidget.bindableHeightAndY[1] // Left/Right location
 
 		Shape {
 			id: connectorShape
@@ -146,9 +138,7 @@ Item {
 				id: electronRepeater
 
 				// electron interval = distance between electrons (i.e. how often to spawn a new electron)
-				model: root._animated
-					   ? Math.floor(root._diagonalDistance / Theme.geometry.overviewPage.connector.electron.interval)
-					   : null
+				model: root._electronTravelDistance / Theme.geometry.overviewPage.connector.electron.interval
 
 				delegate: Image {
 					id: electron
@@ -193,11 +183,13 @@ Item {
 		property: "_animationProgress"
 		from: 0; to: 1
 
+		// If performance gets too bad, we might want to pause the animation during
+		// the resize animation.  For now, though, keep the eye-candy.
+		//paused: root.animationPaused && running
 		running: root._animated
-		paused: root.animationPaused && running
 		loops: Animation.Infinite
 
 		// animate at a constant rate of pixels/sec, based on the diagonal length of the shape
-		duration: _diagonalDistance / Theme.geometry.overviewPage.connector.electron.velocity * 1000
+		duration: (_electronTravelDistance / Theme.geometry.overviewPage.connector.electron.velocity) * 1000
 	}
 }

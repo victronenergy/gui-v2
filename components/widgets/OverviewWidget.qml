@@ -68,6 +68,12 @@ Rectangle {
 
 	signal clicked()
 
+	// The following properties exist to improve performance of
+	// idle animation, by reducing the amount of times dependent bindings
+	// are triggered during the animation.
+	// These bindings will be overwritten by values by a timer when animating.
+	property var bindableHeightAndY: [0, 0] // [height, y]
+
 	height: interactiveHeight
 	visible: size !== OverviewWidget.Size.Zero
 	radius: isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
@@ -76,7 +82,6 @@ Rectangle {
 	color: isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
 	Behavior on height {
-		enabled: PageManager.animatingIdleResize
 		NumberAnimation {
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad

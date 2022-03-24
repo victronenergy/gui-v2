@@ -13,7 +13,6 @@ Page {
 
 	C.StackView {
 		id: navStack
-		clip: true
 
 		anchors {
 			left: parent.left
@@ -122,21 +121,27 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarIn
 
-			running: PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+			running: PageManager.interactivity === PageManager.InteractionMode.BeginExitIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
 
 			NumberAnimation {
 				target: navBar
 				property: "y"
 				from: root.height
 				to: root.height - navBar.height
-				duration: 250
+				duration: Theme.animation.page.idleResize.duration
 				easing.type: Easing.InOutQuad
+			}
+			ScriptAction {
+				script: {
+					PageManager.interactivity = PageManager.InteractionMode.ExitIdleMode
+				}
 			}
 			OpacityAnimator {
 				target: navBar
 				from: 0.0
 				to: 1.0
-				duration: 250
+				duration: Theme.animation.page.idleOpacity.duration
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
@@ -150,7 +155,8 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarOut
 
-			running: PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
+			running: PageManager.interactivity === PageManager.InteractionMode.BeginEnterIdleMode
+					|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
 
 			ScriptAction {
 				script: {
@@ -161,15 +167,20 @@ Page {
 				target: navBar
 				from: 1.0
 				to: 0.0
-				duration: 250
+				duration: Theme.animation.page.idleOpacity.duration
 				easing.type: Easing.InOutQuad
+			}
+			ScriptAction {
+				script: {
+					PageManager.interactivity = PageManager.InteractionMode.EnterIdleMode
+				}
 			}
 			NumberAnimation {
 				target: navBar
 				property: "y"
 				from: root.height - navBar.height
 				to: root.height
-				duration: 250
+				duration: Theme.animation.page.idleResize.duration
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
