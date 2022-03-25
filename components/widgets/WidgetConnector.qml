@@ -43,9 +43,9 @@ Item {
 	function _widgetRect(widget) {
 		return Qt.rect(
 			widget.x,
-			expanded ? widget.nonInteractiveY : widget.interactiveY,
+			expanded ? widget.expandedY : widget.compactY,
 			widget.width,
-			expanded ? widget.nonInteractiveHeight : widget.interactiveHeight
+			expanded ? widget.expandedHeight : widget.compactHeight
 		)
 	}
 
@@ -54,7 +54,7 @@ Item {
 	Timer {
 		running: true
 		repeat: false
-		interval: Theme.animation.overviewPage.interactive.duration // wait for widget height behaviors to finish
+		interval: Theme.animation.page.idleResize.duration // wait for widget height behaviors to finish
 		onTriggered: {
 			// Calculate the model once when the height/y changes, to avoid multiple model changes
 			// due to animation.
@@ -120,14 +120,14 @@ Item {
 
 		Behavior on startY {
 			NumberAnimation {
-				duration: Theme.animation.overviewPage.interactive.duration
+				duration: Theme.animation.page.idleResize.duration
 				easing.type: Easing.InOutQuad
 			}
 		}
 
 		Behavior on endY {
 			NumberAnimation {
-				duration: Theme.animation.overviewPage.interactive.duration
+				duration: Theme.animation.page.idleResize.duration
 				easing.type: Easing.InOutQuad
 			}
 		}
