@@ -11,13 +11,13 @@ Item {
 	property var value
 	property alias label: label
 	property alias contentRow: contentRow
+	property alias separator: separatorBar
 
 	width: parent.width
 	implicitHeight: Theme.geometry.controlCard.largeItem.height
 
 	Label {
 		id: label
-
 		anchors {
 			verticalCenter: parent.verticalCenter
 			left: parent.left
@@ -25,6 +25,7 @@ Item {
 			right: contentRow.left
 			rightMargin: Theme.geometry.controlCard.contentMargins
 		}
+
 		elide: Text.ElideRight
 		font.pixelSize: Theme.font.size.s
 		color: Theme.color.font.primary
@@ -36,9 +37,11 @@ Item {
 			right: parent.right
 			rightMargin: Theme.geometry.controlCard.contentMargins
 		}
+
 		height: parent.height
 	}
 	SeparatorBar {
+		id: separatorBar
 		anchors {
 			bottom: parent.bottom
 			left: parent.left
@@ -46,5 +49,7 @@ Item {
 			leftMargin: Theme.geometry.controlCard.itemSeparator.margins
 			rightMargin: Theme.geometry.controlCard.itemSeparator.margins
 		}
+
+		height: visible ? implicitHeight : 0
 	}
 }

@@ -13,7 +13,7 @@ Rectangle {
 
 	width: Theme.geometry.controlCard.maximumWidth
 	height: parent ? parent.height : 0
-	color: Theme.color.background.secondary
+	color: Theme.colorScheme === Theme.Light ? Theme.color.background.primary : Theme.color.background.secondary
 	radius: Theme.geometry.controlCard.radius
 
 	CP.IconLabel {
@@ -29,6 +29,7 @@ Rectangle {
 		spacing: Theme.geometry.controlCard.title.spacing
 		display: C.AbstractButton.TextBesideIcon
 		icon.height: Theme.geometry.controlCard.title.icon.height
+		icon.color: title.color
 
 		font.family: VenusFont.normal.name
 		font.pixelSize: Theme.font.size.s

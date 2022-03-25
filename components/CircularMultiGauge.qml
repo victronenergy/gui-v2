@@ -59,6 +59,7 @@ Item {
 				anchors.verticalCenter: textCol.top
 				anchors.verticalCenterOffset: index * _stepSize/2
 				anchors.right: parent.right
+				anchors.rightMargin: Math.max(0, Theme.geometry.circularMultiGauge.icons.maxWidth - iconImage.width)
 				spacing: Theme.geometry.circularMultiGauge.row.spacing
 				Label {
 					horizontalAlignment: Text.AlignRight
@@ -76,6 +77,7 @@ Item {
 					text: qsTrId("%1%").arg(model.value)
 				}
 				CP.ColorImage {
+					id: iconImage
 					anchors.verticalCenter: parent.verticalCenter
 					source: model.icon
 					color: Theme.color.font.primary

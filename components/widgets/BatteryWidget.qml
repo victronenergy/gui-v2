@@ -43,24 +43,33 @@ OverviewWidget {
 	physicalQuantity: Units.Percentage
 	precision: 2
 
+	color: "transparent"
+
 	Rectangle {
 		id: animationRect
+		z: -1
 
 		anchors {
-			left: parent.left
-			leftMargin: root.border.width
-			right: parent.right
-			rightMargin: root.border.width
-			bottom: parent.bottom
-			bottomMargin: root.border.width
+			fill: parent
+			margins: root.border.width
 		}
-		height: Math.floor(parent.height * root.value/100) - root.border.width*2
-		z: -1
-		color: Theme.color.overviewPage.widget.battery.background
+
+		gradient: Gradient {
+			GradientStop { position: 0.0; color: Theme.color.overviewPage.widget.background }
+			GradientStop { position: Math.min(0.999999, (1.0 - root.value/100)); color: Theme.color.overviewPage.widget.background }
+			GradientStop { position: Math.min(1.0, (1.0 - root.value/100) + 0.001); color: Theme.color.overviewPage.widget.battery.background }
+			GradientStop { position: 1.0; color: Theme.color.overviewPage.widget.battery.background }
+		}
 
 		Grid {
 			id: animationGrid
-			anchors.horizontalCenter: parent.horizontalCenter
+			anchors {
+				top: parent.top
+				topMargin: parent.height - Math.floor(parent.height * root.value/100) - root.border.width*2
+				horizontalCenter: parent.horizontalCenter
+				bottom: parent.bottom
+			}
+
 			topPadding: Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing / 2
 			horizontalItemAlignment: Grid.AlignHCenter
 			visible: !batteryData.idle
@@ -114,6 +123,15 @@ OverviewWidget {
 				onCountChanged: Qt.callLater(root._updateBarAnimation)
 			}
 		}
+
+		Rectangle {
+			anchors.fill: animationGrid
+
+			gradient: Gradient {
+				GradientStop { position: 0.0; color: "transparent" }
+				GradientStop { position: 1.0; color: Theme.color.overviewPage.widget.battery.background }
+			}
+		}
 	}
 
 	SequentialAnimation {
@@ -165,16 +183,6 @@ OverviewWidget {
 		}
 	}
 
-	Rectangle {
-		anchors.fill: animationRect
-		z: -1
-
-		gradient: Gradient {
-			GradientStop { position: 0.0; color: "transparent" }
-			GradientStop { position: 1.0; color: Theme.color.overviewPage.widget.battery.background }
-		}
-	}
-
 	Label {
 		anchors {
 			bottom: extraContent.top
@@ -182,6 +190,7 @@ OverviewWidget {
 			right: parent.right
 			rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 		}
+
 		text: batteryData.timeToGo > 0 ? Utils.formatAsHHMM(batteryData.timeToGo, true) : ""
 		color: Theme.color.font.secondary
 		font.pixelSize: Theme.font.size.m
@@ -194,6 +203,7 @@ OverviewWidget {
 				left: parent.left
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
+
 			text: batteryData.idle
 					//% "Idle"
 				  ? qsTrId("overview_widget_battery_idle")
@@ -212,6 +222,7 @@ OverviewWidget {
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry.overviewPage.widget.content.verticalMargin
 			}
+
 			width: root.width - Theme.geometry.overviewPage.widget.content.horizontalMargin*2
 
 			ValueQuantityDisplay {

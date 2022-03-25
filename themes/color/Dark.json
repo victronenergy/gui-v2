@@ -75,7 +75,7 @@
     "color.overviewPage.widget.sideGauge.background": "color.darkOk",
     "color.overviewPage.widget.sideGauge.highlight": "color.ok",
     "color.overviewPage.widget.solar.graph.bar": "color.ok",
-    "color.overviewPage.widget.battery.background": "#31649c",
+    "color.overviewPage.widget.battery.background": "#387DC5",
     "color.overviewPage.widget.battery.animatedBar": "#7394bd",
 
     "color.briefPage.sidePanel.loadGraph.dotColor": "#504F4B",

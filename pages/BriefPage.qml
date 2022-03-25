@@ -185,7 +185,7 @@ Page {
 		property var _gaugeTypeProperties: ({
 			'fuel': {
 				textId: 'gaugeFuelText',
-				icon: '/images/tank.svg',
+				icon: '/images/fueltank.svg',
 				caption: '',
 				valueType: Gauges.FallingPercentage
 			},

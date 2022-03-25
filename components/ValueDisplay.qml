@@ -3,11 +3,11 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Item {
 	id: root
-
 
 	property int alignment: Qt.AlignLeft    // if right-aligned, icon is on right side
 	property int fontSize: Theme.font.size.xl
@@ -35,7 +35,7 @@ Item {
 		width: Math.max(title.width, icon.width)
 		height: Math.max(title.height, icon.height)
 
-		Image {
+		CP.ColorImage {
 			id: icon
 
 			anchors {
@@ -46,6 +46,7 @@ Item {
 			width: Theme.geometry.valueDisplay.icon.width
 			height: width
 			fillMode: Image.Pad
+			color: title.color
 		}
 
 		Label {
