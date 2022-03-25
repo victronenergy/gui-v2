@@ -123,6 +123,7 @@
     "geometry.circularMultiGauge.row.spacing": 7,
     "geometry.circularMultiGauge.labels.rightMargin": 20,
     "geometry.circularMultiGauge.labels.spacing": 18,
+    "geometry.circularMultiGauge.icons.maxWidth": 18,
     "geometry.circularMultiGauge.icons.spacing": 6,
 
     "geometry.circularSingularGauge.strokeWidth": 16,

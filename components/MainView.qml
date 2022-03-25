@@ -16,6 +16,8 @@ Item {
 		property bool hidden: statusBar.y === -statusBar.height
 		property bool sidePanelWasVisible
 
+		Component.onCompleted: PageManager.statusBar = statusBar
+
 		onControlsActiveChanged: {
 			if (controlsActive) {
 				if (PageManager.sidePanelVisible) {

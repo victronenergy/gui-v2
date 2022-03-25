@@ -113,6 +113,7 @@ ControlCard {
 		//% "Autostart"
 		label.text: qsTrId("controlcard_generator_label_autostart")
 		button.checked: root.autostart
+		separator.visible: false
 		enabled: root.state !== Generators.GeneratorState.Running
 
 		onClicked: {
@@ -139,7 +140,7 @@ ControlCard {
 			right: parent.right
 			rightMargin: Theme.geometry.controlCard.subCard.margins
 			top: autostartSwitch.bottom
-			topMargin: 2*Theme.geometry.controlCard.subCard.margins
+			topMargin: Theme.geometry.controlCard.subCard.margins
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry.controlCard.subCard.margins
 		}
