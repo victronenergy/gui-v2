@@ -13,6 +13,9 @@
     "animation.page.idleResize.timeout": 6000,
     "animation.levelsPage.animation.duration": 500,
 
+    "geometry.screen.width": 800,
+    "geometry.screen.height": 480,
+
     "geometry.page.grid.horizontalMargin": 24,
     "geometry.page.grid.columnWidth": 48,
     "geometry.page.grid.gutter": 16,
@@ -225,7 +228,7 @@
     "geometry.overviewPage.widget.sideGauge.width": 8,
     "geometry.overviewPage.widget.sideGauge.radius": 8,
 
-    "geometry.overviewPage.widget.input.width": 176,
+    "geometry.overviewPage.widget.width": 176,
     "geometry.overviewPage.widget.battery.width": 240,
     "geometry.overviewPage.widget.battery.animatedBar.minimumWidth": 4,
     "geometry.overviewPage.widget.battery.animatedBar.maximumWidth": 22,
@@ -234,7 +237,6 @@
     "geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing": 4,
     "geometry.overviewPage.widget.battery.animatedBar.verticalSpacing": 6,
     "geometry.overviewPage.widget.inverter.width": 240,
-    "geometry.overviewPage.widget.output.width": 176,
 
     "geometry.overviewPage.widget.interactive.xl.height": 352,
     "geometry.overviewPage.widget.interactive.l.height": 152,
@@ -254,7 +256,10 @@
     "geometry.overviewPage.connector.electron.velocity": 30,
     "geometry.overviewPage.connector.electron.interval": 34,
 
-    "geometry.overviewPage.layout.topMargin": 48,
+    "geometry.overviewPage.layout.interactive.topMargin": 0,
+    "geometry.overviewPage.layout.interactive.bottomMargin": 8,
+    "geometry.overviewPage.layout.noninteractive.topMargin": 0,
+    "geometry.overviewPage.layout.noninteractive.bottomMargin": 32,
     "geometry.overviewPage.layout.segmentedWidgetThreshold": 5,
 
     "geometry.overviewPage.widget.solar.graph.bar.width": 8,
