@@ -9,7 +9,7 @@ import QtQuick.Controls.impl as CP
 Rectangle {
 	id: root
 
-	property bool interactive: true
+	property bool expanded
 	property real percentage: 0.0
 	property bool isGrouped: false
 	readonly property int _gaugeType: _tankProperties[model.type].gaugeType
@@ -59,7 +59,7 @@ Rectangle {
 	CP.ColorImage {
 		anchors {
 			top: parent.top
-			topMargin: root.interactive ? 0 : Theme.geometry.levelsPage.tankGauge.alarmIcon.topMargin // TODO animate
+			topMargin: root.expanded ? Theme.geometry.levelsPage.tankGauge.alarmIcon.topMargin : 0  // TODO animate
 			horizontalCenter: parent.horizontalCenter
 		}
 		width: Theme.geometry.levelsPage.tankGauge.alarmIcon.width

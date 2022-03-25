@@ -51,12 +51,12 @@ Page {
 		anchors {
 			top: tabBar.bottom
 			topMargin: PageManager.interactivity === PageManager.InteractionMode.Idle
-					   ? Theme.geometry.levelsPage.gaugesView.fullScreen.topMargin
-					   : Theme.geometry.levelsPage.gaugesView.interactive.topMargin
+					   ? Theme.geometry.levelsPage.gaugesView.expanded.topMargin
+					   : Theme.geometry.levelsPage.gaugesView.compact.topMargin
 			bottom: parent.bottom
 			bottomMargin: PageManager.interactivity === PageManager.InteractionMode.Idle
-						  ? Theme.geometry.levelsPage.gaugesView.fullScreen.bottomMargin
-						  : Theme.geometry.levelsPage.gaugesView.interactive.bottomMargin
+						  ? Theme.geometry.levelsPage.gaugesView.expanded.bottomMargin
+						  : Theme.geometry.levelsPage.gaugesView.compact.bottomMargin
 			left: anchorCenter ? undefined : parent.left
 			leftMargin: anchorCenter ? 0 : Theme.geometry.levelsPage.gaugesView.leftMargin
 			horizontalCenter: anchorCenter ? parent.horizontalCenter : undefined
@@ -81,12 +81,12 @@ Page {
 		anchors {
 			top: tabBar.bottom
 			topMargin: PageManager.interactivity === PageManager.InteractionMode.Idle
-					   ? Theme.geometry.levelsPage.gaugesView.fullScreen.topMargin
-					   : Theme.geometry.levelsPage.gaugesView.interactive.topMargin
+					   ? Theme.geometry.levelsPage.gaugesView.expanded.topMargin
+					   : Theme.geometry.levelsPage.gaugesView.compact.topMargin
 			bottom: parent.bottom
 			bottomMargin: PageManager.interactivity === PageManager.InteractionMode.Idle
-						  ? Theme.geometry.levelsPage.gaugesView.fullScreen.bottomMargin
-						  : Theme.geometry.levelsPage.gaugesView.interactive.bottomMargin
+						  ? Theme.geometry.levelsPage.gaugesView.expanded.bottomMargin
+						  : Theme.geometry.levelsPage.gaugesView.compact.bottomMargin
 			left: parent.left
 			right: parent.right
 		}

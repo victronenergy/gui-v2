@@ -83,37 +83,37 @@ Page {
 	}
 
 	function resetWidgetPositions(widgets) {
-		let interactiveWidgetHeights = 0
-		let nonInteractiveWidgetHeights = 0
+		let compactWidgetHeights = 0
+		let expandedWidgetHeights = 0
 		let i = 0
 		let widget = null
 
 		for (i = 0; i < widgets.length; ++i) {
 			widget = widgets[i]
-			interactiveWidgetHeights += widget.getInteractiveHeight(widget.size)
-			nonInteractiveWidgetHeights += widget.getNonInteractiveHeight(widget.size)
+			compactWidgetHeights += widget.getCompactHeight(widget.size)
+			expandedWidgetHeights += widget.getExpandedHeight(widget.size)
 		}
 
-		const interactiveAreaHeight = Theme.geometry.screen.height
+		const compactPageHeight = Theme.geometry.screen.height
 				- Theme.geometry.statusBar.height
 				- Theme.geometry.navigationBar.height
-				- Theme.geometry.overviewPage.layout.interactive.topMargin
-				- Theme.geometry.overviewPage.layout.interactive.bottomMargin
-		const interactiveWidgetsTopMargin = Math.max(0, (interactiveAreaHeight - interactiveWidgetHeights) / Math.max(1, widgets.length - 1))
+				- Theme.geometry.overviewPage.layout.compact.topMargin
+				- Theme.geometry.overviewPage.layout.compact.bottomMargin
+		const compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
 
-		const nonInteractiveAreaHeight = Theme.geometry.screen.height
+		const expandedPageHeight = Theme.geometry.screen.height
 				- Theme.geometry.statusBar.height
-				- Theme.geometry.overviewPage.layout.noninteractive.topMargin
-				- Theme.geometry.overviewPage.layout.noninteractive.bottomMargin
-		const nonInteractiveWidgetsTopMargin = Math.max(0, (nonInteractiveAreaHeight - nonInteractiveWidgetHeights) / Math.max(1, widgets.length - 1))
+				- Theme.geometry.overviewPage.layout.expanded.topMargin
+				- Theme.geometry.overviewPage.layout.expanded.bottomMargin
+		const expandedWidgetsTopMargin = Math.max(0, (expandedPageHeight - expandedWidgetHeights) / Math.max(1, widgets.length - 1))
 
 		let prevWidget = null
 		for (i = 0; i < widgets.length; ++i) {
 			widget = widgets[i]
 			if (i > 0) {
 				prevWidget = widgets[i-1]
-				widget.interactiveY = prevWidget.interactiveY + prevWidget.getInteractiveHeight(prevWidget.size) + interactiveWidgetsTopMargin
-				widget.nonInteractiveY = prevWidget.nonInteractiveY + prevWidget.getNonInteractiveHeight(prevWidget.size) + nonInteractiveWidgetsTopMargin
+				widget.compactY = prevWidget.compactY + prevWidget.getCompactHeight(prevWidget.size) + compactWidgetsTopMargin
+				widget.expandedY = prevWidget.expandedY + prevWidget.getExpandedHeight(prevWidget.size) + expandedWidgetsTopMargin
 			}
 		}
 	}

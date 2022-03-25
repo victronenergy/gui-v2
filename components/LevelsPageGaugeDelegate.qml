@@ -9,7 +9,7 @@ import QtQuick.Controls.impl as CP
 Rectangle {
 	id: root
 
-	property bool interactive: true
+	property bool expanded
 	property int totalCapacity: 0
 	property real percentage: 0
 	property int gaugeIndex: 0
@@ -37,7 +37,9 @@ Rectangle {
 
 		return gaugeDelegateWidths[model.gaugeTanks.count - 1]
 	}
-	height: interactive ? Theme.geometry.levelsPage.gaugeDelegate.height.interactive : Theme.geometry.levelsPage.gaugeDelegate.height.fullScreen
+	height: root.expanded
+			? Theme.geometry.levelsPage.gaugeDelegate.expanded.height
+			: Theme.geometry.levelsPage.gaugeDelegate.compact.height
 	color: Theme.color.levelsPage.gauge.backgroundColor
 	radius: Theme.geometry.levelsPage.gauge.radius
 
@@ -111,7 +113,7 @@ Rectangle {
 		model: gaugeTanks
 		orientation: ListView.Horizontal
 		delegate: TankGauge {
-			interactive: root.interactive
+			expanded: root.expanded
 			width: subgauges.count > _subgaugeWidths.length ? _subgaugeWidths[_subgaugeWidths.length - 1] : _subgaugeWidths[subgauges.count - 1]
 			height: subgauges.height
 			percentage: model.percentage

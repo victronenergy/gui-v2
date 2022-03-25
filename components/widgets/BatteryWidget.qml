@@ -77,10 +77,10 @@ OverviewWidget {
 				id: animatedBarsRepeater
 
 				model: {
-					// Always use the interactiveHeight to calculate the model, to avoid changing
-					// the model when changing between interactive and idle mode.
-					const interactiveAnimationRectHeight = Math.floor(root.interactiveHeight * root.value/100) - root.border.width*2
-					const maxHeight = interactiveAnimationRectHeight - Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2
+					// Always use the compactHeight to calculate the model, to avoid changing the
+					// model when switching between expanded and compact height.
+					const compactAnimatingAreaHeight = Math.floor(root.compactHeight * root.value/100) - root.border.width*2
+					const maxHeight = compactAnimatingAreaHeight - Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2
 					const maxRows = maxHeight / (Theme.geometry.overviewPage.widget.battery.animatedBar.height
 						+ Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2)
 					const rows = Math.max(0, Math.floor(maxRows))
