@@ -10,7 +10,7 @@ Rectangle {
 
 	property alias segments: separatorRepeater.model
 
-	width: Theme.geometry.overviewPage.widget.input.width
+	width: Theme.geometry.overviewPage.widget.width
 	height: segments && segments.length > 1 && visible
 			? segments[segments.length-1].y + segments[segments.length-1].height
 			: 0

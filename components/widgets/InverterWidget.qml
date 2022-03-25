@@ -14,6 +14,7 @@ OverviewWidget {
 	title.text: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
 	type: OverviewWidget.Type.Inverter
+	width: Theme.geometry.overviewPage.widget.inverter.width
 
 	sideGaugeVisible: true
 	sideGaugeValue: 0.7 // TODO: data model

@@ -47,28 +47,41 @@ Rectangle {
 	property alias extraContent: extraContent
 	property bool isSegment
 
-	readonly property int interactiveHeight: size === OverviewWidget.Size.XL
+	property real interactiveY
+	property real nonInteractiveY
+	readonly property int interactiveHeight: getInteractiveHeight(size)
+	readonly property int nonInteractiveHeight: getNonInteractiveHeight(size)
+	property bool expanded
+
+	function getInteractiveHeight(s) {
+		return s === OverviewWidget.Size.XL
 		  ? Theme.geometry.overviewPage.widget.interactive.xl.height
-		  : size === OverviewWidget.Size.L
+		  : s === OverviewWidget.Size.L
 			? Theme.geometry.overviewPage.widget.interactive.l.height
-			: size === OverviewWidget.Size.M
+			: s === OverviewWidget.Size.M
 			  ? Theme.geometry.overviewPage.widget.interactive.m.height
-			  : size === OverviewWidget.Size.S
-			  ? Theme.geometry.overviewPage.widget.interactive.s.height
+			  : s === OverviewWidget.Size.Size
+			  ? Theme.geometry.overviewPage.widget.interactive.Size.height
 			  : Theme.geometry.overviewPage.widget.interactive.xs.height
-	readonly property int nonInteractiveHeight: size === OverviewWidget.Size.XL
-		  ? Theme.geometry.overviewPage.widget.noninteractive.xl.height
-		  : size === OverviewWidget.Size.L
-			? Theme.geometry.overviewPage.widget.noninteractive.l.height
-			: size === OverviewWidget.Size.M
-			  ? Theme.geometry.overviewPage.widget.noninteractive.m.height
-			  : size === OverviewWidget.Size.S
-			  ? Theme.geometry.overviewPage.widget.noninteractive.s.height
-			  : Theme.geometry.overviewPage.widget.noninteractive.xs.height
+	}
+
+	function getNonInteractiveHeight(s) {
+		return s === OverviewWidget.Size.XL
+			? Theme.geometry.overviewPage.widget.noninteractive.xl.height
+			: s === OverviewWidget.Size.L
+			  ? Theme.geometry.overviewPage.widget.noninteractive.l.height
+			  : s === OverviewWidget.Size.M
+				? Theme.geometry.overviewPage.widget.noninteractive.m.height
+				: s === OverviewWidget.Size.S
+				? Theme.geometry.overviewPage.widget.noninteractive.s.height
+				: Theme.geometry.overviewPage.widget.noninteractive.xs.height
+	}
 
 	signal clicked()
 
-	height: interactiveHeight
+	y: expanded ? nonInteractiveY : interactiveY
+	width: Theme.geometry.overviewPage.widget.width
+	height: expanded ? nonInteractiveHeight : interactiveHeight
 	visible: size !== OverviewWidget.Size.Zero
 	radius: isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
 	border.width: enabled && !isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
@@ -79,6 +92,13 @@ Rectangle {
 		enabled: PageManager.animatingIdleResize
 		NumberAnimation {
 			duration: Theme.animation.page.idleResize.duration
+			easing.type: Easing.InOutQuad
+		}
+	}
+
+	Behavior on y {
+		NumberAnimation {
+			duration: Theme.animation.overviewPage.interactive.duration
 			easing.type: Easing.InOutQuad
 		}
 	}
