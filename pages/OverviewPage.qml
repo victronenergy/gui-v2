@@ -249,7 +249,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+			expanded: PageManager.expandLayout
+			animateGeometry: PageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 			sideGaugeValue: value / Utils.maximumValue("grid.power")
 
@@ -259,9 +260,9 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: inverterWidget
 				endLocation: WidgetConnector.Location.Left
-				expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+				expanded: PageManager.expandLayout
+				animateGeometry: PageManager.animatingIdleResize
 				animationRunning: !!gridWidget.input && gridWidget.input.connected
-				animationPaused: PageManager.animatingIdleResize
 				straight: gridWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -277,7 +278,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+			expanded: PageManager.expandLayout
+			animateGeometry: PageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 			sideGaugeValue: 0.5 // TODO when max available
 
@@ -287,9 +289,9 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: inverterWidget
 				endLocation: WidgetConnector.Location.Left
-				expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+				expanded: PageManager.expandLayout
+				animateGeometry: PageManager.animatingIdleResize
 				animationRunning: !!shoreWidget.input && shoreWidget.input.connected
-				animationPaused: PageManager.animatingIdleResize
 				straight: shoreWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -305,7 +307,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+			expanded: PageManager.expandLayout
+			animateGeometry: PageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
@@ -314,9 +317,9 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: inverterWidget
 				endLocation: WidgetConnector.Location.Left
-				expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+				expanded: PageManager.expandLayout
+				animateGeometry: PageManager.animatingIdleResize
 				animationRunning: !!acGeneratorWidget.input && acGeneratorWidget.input.connected
-				animationPaused: PageManager.animatingIdleResize
 				straight: acGeneratorWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -332,7 +335,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+			expanded: PageManager.expandLayout
+			animateGeometry: PageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
@@ -341,9 +345,9 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: batteryWidget
 				endLocation: WidgetConnector.Location.Left
-				expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+				expanded: PageManager.expandLayout
+				animateGeometry: PageManager.animatingIdleResize
 				animationRunning: !!dcGeneratorWidget.input
-				animationPaused: PageManager.animatingIdleResize
 						  && !isNaN(dcGeneratorWidget.input.current)
 						  && dcGeneratorWidget.input.current > 0
 				straight: dcGeneratorWidget.size > OverviewWidget.Size.M
@@ -361,7 +365,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+			expanded: PageManager.expandLayout
+			animateGeometry: PageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
@@ -370,9 +375,9 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: batteryWidget
 				endLocation: WidgetConnector.Location.Left
-				expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+				expanded: PageManager.expandLayout
+				animateGeometry: PageManager.animatingIdleResize
 				animationRunning: !!alternatorWidget.input
-				animationPaused: PageManager.animatingIdleResize
 						  && !isNaN(alternatorWidget.input.current)
 						  && alternatorWidget.input.current > 0
 			}
@@ -389,7 +394,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+			expanded: PageManager.expandLayout
+			animateGeometry: PageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
@@ -398,9 +404,9 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: batteryWidget
 				endLocation: WidgetConnector.Location.Left
-				expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+				expanded: PageManager.expandLayout
+				animateGeometry: PageManager.animatingIdleResize
 				animationRunning: !!windWidget.input
-				animationPaused: PageManager.animatingIdleResize
 						  && !isNaN(windWidget.input.current)
 						  && windWidget.input.current > 0
 			}
@@ -417,7 +423,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+			expanded: PageManager.expandLayout
+			animateGeometry: PageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			value: solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
@@ -429,9 +436,9 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: inverterWidget
 				endLocation: WidgetConnector.Location.Left
-				expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+				expanded: PageManager.expandLayout
+				animateGeometry: PageManager.animatingIdleResize
 				animationRunning: solarChargers && !isNaN(solarChargers.power)
-				animationPaused: PageManager.animatingIdleResize
 			}
 			WidgetConnector {
 				parent: root
@@ -439,9 +446,9 @@ Page {
 				startLocation: WidgetConnector.Location.Right
 				endWidget: batteryWidget
 				endLocation: WidgetConnector.Location.Left
-				expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+				expanded: PageManager.expandLayout
+				animateGeometry: PageManager.animatingIdleResize
 				animationRunning: solarChargers && !isNaN(solarChargers.power)
-				animationPaused: PageManager.animatingIdleResize
 						  && battery && !battery.idle
 			}
 		}
@@ -452,7 +459,8 @@ Page {
 		id: inverterWidget
 		anchors.horizontalCenter: parent.horizontalCenter
 		size: OverviewWidget.Size.L
-		expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+		expanded: PageManager.expandLayout
+		animateGeometry: PageManager.animatingIdleResize
 		physicalQuantity: -1
 		systemState: system ? system.state : 0
 	}
@@ -461,9 +469,9 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: acLoadsWidget
 		endLocation: WidgetConnector.Location.Left
-		expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+		expanded: PageManager.expandLayout
+		animateGeometry: PageManager.animatingIdleResize
 		animationRunning: acLoadsWidget.input != undefined
-		animationPaused: PageManager.animatingIdleResize
 		straight: true
 	}
 	WidgetConnector {
@@ -471,18 +479,18 @@ Page {
 		startLocation: WidgetConnector.Location.Bottom
 		endWidget: batteryWidget
 		endLocation: WidgetConnector.Location.Top
-		expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+		expanded: PageManager.expandLayout
+		animateGeometry: PageManager.animatingIdleResize
 		animationRunning: batteryWidget.batteryData && !batteryWidget.batteryData.idle
-		animationPaused: PageManager.animatingIdleResize
 	}
 
 	BatteryWidget {
 		id: batteryWidget
 		anchors.horizontalCenter: parent.horizontalCenter
 		size: OverviewWidget.Size.L
-		expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+		expanded: PageManager.expandLayout
+		animateGeometry: PageManager.animatingIdleResize
 		animationRunning: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
-		animationPaused: PageManager.animatingIdleResize
 		batteryData: battery
 	}
 	WidgetConnector {
@@ -490,9 +498,9 @@ Page {
 		startLocation: WidgetConnector.Location.Right
 		endWidget: dcLoadsWidget
 		endLocation: WidgetConnector.Location.Left
-		expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+		expanded: PageManager.expandLayout
+		animateGeometry: PageManager.animatingIdleResize
 		animationRunning: batteryWidget.batteryData && !batteryWidget.batteryData.idle
-		animationPaused: PageManager.animatingIdleResize
 	}
 
 	// the two output widgets are always present
@@ -505,7 +513,8 @@ Page {
 		size: dcLoadsWidget.size === OverviewWidget.Size.Zero
 			  ? OverviewWidget.Size.XL
 			  : OverviewWidget.Size.L
-		expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+		expanded: PageManager.expandLayout
+		animateGeometry: PageManager.animatingIdleResize
 		value: system ? system.ac.consumption.power : NaN
 		phaseModel: system ? system.ac.consumption.phases : null
 		phaseModelProperty: "power"
@@ -518,7 +527,8 @@ Page {
 			rightMargin: Theme.geometry.page.grid.horizontalMargin
 		}
 		size: !!system && !isNaN(system.dc.power) ? OverviewWidget.Size.L : OverviewWidget.Size.Zero
-		expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+		expanded: PageManager.expandLayout
+		animateGeometry: PageManager.animatingIdleResize
 		value: system ? system.dc.power || 0 : 0
 	}
 }

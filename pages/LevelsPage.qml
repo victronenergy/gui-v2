@@ -14,9 +14,15 @@ Page {
 
 		anchors {
 			top: parent.top
-			topMargin: PageManager.interactivity === PageManager.InteractionMode.Idle ? -tabBar.height : 0
+			topMargin: PageManager.expandLayout ? -tabBar.height : 0
 			horizontalCenter: parent.horizontalCenter
 		}
+		opacity: PageManager.interactivity === PageManager.InteractionMode.Interactive
+				 || PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+				 ? 1.0
+				 : 0.0
+
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration } }
 
 		Behavior on anchors.topMargin {
 			NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
@@ -50,11 +56,11 @@ Page {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: PageManager.interactivity === PageManager.InteractionMode.Idle
+			topMargin: PageManager.expandLayout
 					   ? Theme.geometry.levelsPage.gaugesView.expanded.topMargin
 					   : Theme.geometry.levelsPage.gaugesView.compact.topMargin
 			bottom: parent.bottom
-			bottomMargin: PageManager.interactivity === PageManager.InteractionMode.Idle
+			bottomMargin: PageManager.expandLayout
 						  ? Theme.geometry.levelsPage.gaugesView.expanded.bottomMargin
 						  : Theme.geometry.levelsPage.gaugesView.compact.bottomMargin
 			left: anchorCenter ? undefined : parent.left
@@ -80,11 +86,11 @@ Page {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: PageManager.interactivity === PageManager.InteractionMode.Idle
+			topMargin: PageManager.expandLayout
 					   ? Theme.geometry.levelsPage.gaugesView.expanded.topMargin
 					   : Theme.geometry.levelsPage.gaugesView.compact.topMargin
 			bottom: parent.bottom
-			bottomMargin: PageManager.interactivity === PageManager.InteractionMode.Idle
+			bottomMargin: PageManager.expandLayout
 						  ? Theme.geometry.levelsPage.gaugesView.expanded.bottomMargin
 						  : Theme.geometry.levelsPage.gaugesView.compact.bottomMargin
 			left: parent.left

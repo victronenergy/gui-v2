@@ -36,56 +36,6 @@ Item {
 		onSidePanelActiveChanged: {
 			PageManager.sidePanelActive = sidePanelActive
 		}
-
-		function show() {
-			if (hidden) {
-				animateStatusBarIn.start()
-			}
-		}
-
-		function hide() {
-			if (!hidden) {
-				animateStatusBarOut.start()
-			}
-		}
-
-		SequentialAnimation {
-			id: animateStatusBarIn
-			NumberAnimation {
-				target: statusBar
-				property: "y"
-				from: -statusBar.height
-				to: 0
-				duration: Theme.animation.statusBar.slide.duration
-				easing.type: Easing.InOutQuad
-			}
-			OpacityAnimator {
-				target: statusBar
-				from: 0.0
-				to: 1.0
-				duration: Theme.animation.statusBar.fade.duration
-				easing.type: Easing.InOutQuad
-			}
-		}
-
-		SequentialAnimation {
-			id: animateStatusBarOut
-			OpacityAnimator {
-				target: statusBar
-				from: 1.0
-				to: 0.0
-				duration: Theme.animation.statusBar.fade.duration
-				easing.type: Easing.InOutQuad
-			}
-			NumberAnimation {
-				target: statusBar
-				property: "y"
-				from: 0
-				to: -statusBar.height
-				duration: Theme.animation.statusBar.slide.duration
-				easing.type: Easing.InOutQuad
-			}
-		}
 	}
 
 	PageStack {
