@@ -11,9 +11,11 @@ QtObject {
 
 	enum InteractionMode {
 		Interactive,
-		EnterIdleMode,
+		EnterIdleMode,  // Fade out nav bar
+		BeginFullScreen,    // Slide out nav bar, expand UI layout
 		Idle,
-		ExitIdleMode
+		EndFullScreen,  // Slide in nav bar, compress UI layout
+		ExitIdleMode    // Fade in nav bar
 	}
 
 	property var pageToPush
@@ -35,9 +37,11 @@ QtObject {
 	property int interactivity: PageManager.InteractionMode.Interactive
 
 	// True when the UI layout on a page should be resizing before/after idle/interactive mode changes.
-	readonly property bool animatingIdleResize: _widgetResizingTimer.running
-			|| PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
-			|| PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+	readonly property bool animatingIdleResize: PageManager.interactivity === PageManager.InteractionMode.BeginFullScreen
+			|| PageManager.interactivity === PageManager.InteractionMode.EndFullScreen
+
+	readonly property bool expandLayout: PageManager.interactivity === PageManager.InteractionMode.BeginFullScreen
+			|| PageManager.interactivity === PageManager.InteractionMode.Idle
 
 	property Timer idleModeTimer: Timer {
 		running: root.mainPageActive
@@ -47,12 +51,6 @@ QtObject {
 			&& root.interactivity === PageManager.InteractionMode.Interactive
 		interval: Theme.animation.page.idleResize.timeout
 		onTriggered: root.interactivity = PageManager.InteractionMode.EnterIdleMode
-	}
-
-	property Timer _widgetResizingTimer: Timer {
-		interval: Theme.animation.page.idleResize.duration
-		running: PageManager.interactivity === PageManager.InteractionMode.Idle
-				 || PageManager.interactivity === PageManager.InteractionMode.Interactive
 	}
 
 	function pushPage(page) {

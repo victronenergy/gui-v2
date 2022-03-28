@@ -37,7 +37,7 @@ Item {
 
 		enabled: controlsVisible
 		opacity: controlsVisible ? 1.0 : 0.0
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation.statusBar.sidePanelButton.fade.duration } }
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration } }
 	}
 
 	Label {
@@ -71,7 +71,7 @@ Item {
 		}
 
 		opacity: sidePanelVisible ? 1.0 : 0.0
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation.statusBar.sidePanelButton.fade.duration } }
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration } }
 
 		height: Theme.geometry.statusBar.button.height
 		width: Theme.geometry.statusBar.button.width

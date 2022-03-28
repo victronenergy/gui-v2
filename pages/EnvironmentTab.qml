@@ -66,7 +66,7 @@ Flickable {
 							? EnvironmentGaugePanel.Size.Compact
 							: EnvironmentGaugePanel.Size.Expanded
 				}
-				verticalSize: PageManager.interactivity === PageManager.InteractionMode.Idle
+				verticalSize: PageManager.expandLayout
 						? EnvironmentGaugePanel.Size.Expanded
 						: EnvironmentGaugePanel.Size.Compact
 				title: model.input.customName || model.input.productName || ""

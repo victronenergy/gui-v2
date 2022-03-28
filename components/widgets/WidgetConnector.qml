@@ -22,13 +22,13 @@ Item {
 	property int startLocation
 	property int endLocation
 	property bool expanded
+	property bool animateGeometry
 
 	// Forces a straight line by aligning the nubs using the centre of the smaller widget
 	property bool straight
 
 	// Animates from start to end
 	property bool animationRunning
-	property bool animationPaused
 
 	property bool _animated: visible && animationRunning
 	property real _animationProgress
@@ -119,6 +119,7 @@ Item {
 				  : _endWidgetRect.y + _endWidgetRect.height/2 - endNub.height/2    // Left/Right location
 
 		Behavior on startY {
+			enabled: root.animateGeometry
 			NumberAnimation {
 				duration: Theme.animation.page.idleResize.duration
 				easing.type: Easing.InOutQuad
@@ -126,6 +127,7 @@ Item {
 		}
 
 		Behavior on endY {
+			enabled: root.animateGeometry
 			NumberAnimation {
 				duration: Theme.animation.page.idleResize.duration
 				easing.type: Easing.InOutQuad

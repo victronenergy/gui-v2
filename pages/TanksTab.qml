@@ -309,7 +309,7 @@ ListView {
 	}
 
 	delegate: LevelsPageGaugeDelegate {
-		expanded: PageManager.interactivity === PageManager.InteractionMode.Idle
+		expanded: PageManager.expandLayout
 		totalCapacity: model.gaugeTanks.count * 1000 // TODO - hook up to real capacity
 		percentage: {
 			var retval = 0

@@ -52,6 +52,7 @@ Rectangle {
 	readonly property int compactHeight: getCompactHeight(size)
 	readonly property int expandedHeight: getExpandedHeight(size)
 	property bool expanded
+	property bool animateGeometry
 
 	function getCompactHeight(s) {
 		return s === OverviewWidget.Size.XL
@@ -89,7 +90,7 @@ Rectangle {
 	color: isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
 	Behavior on height {
-		enabled: PageManager.animatingIdleResize
+		enabled: root.animateGeometry
 		NumberAnimation {
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad
@@ -97,6 +98,7 @@ Rectangle {
 	}
 
 	Behavior on y {
+		enabled: root.animateGeometry
 		NumberAnimation {
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad
