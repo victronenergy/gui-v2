@@ -12,7 +12,10 @@ QtObject {
 		Current,
 		Power,
 		Percentage,
-		Temperature
+		Temperature,
+		Liters,
+		CubicMeters,
+		Gallons
 	}
 
 	/*	physicalQuantity	|	precision:	|	value:	|	output:
@@ -23,27 +26,56 @@ QtObject {
 				Power		|		5		|	123		|	123W
 				Power		|		2		|	123		|	120W
 	*/
-	function getDisplayText(physicalQuantity, value, precision) {
+	function getDisplayText(physicalQuantity, value, precision, unitMatchValue = undefined) {
 		let unitText = ""
+		unitMatchValue = unitMatchValue === undefined ? value : unitMatchValue
+
 		switch (physicalQuantity) {
 		case Units.PhysicalQuantity.Power:
-			value = _adjustedValue(value, precision)
-			unitText = (value < 1000) ? "W" : "kW"
+			if (isNaN(value)) {
+				unitText = "W"
+			} else {
+				value = _adjustedValue(value, precision, unitMatchValue)
+				unitText = unitMatchValue < 1000 ? "W" : "kW"
+			}
 			break;
 		case Units.PhysicalQuantity.Voltage:
-			value = _adjustedValue(value, precision)
-			unitText = (value < 1000) ? "V" : "kV"
+			if (isNaN(value)) {
+				unitText = "V"
+			} else {
+				value = _adjustedValue(value, precision, unitMatchValue)
+				unitText = unitMatchValue < 1000 ? "V" : "kV"
+			}
 			break;
 		case Units.PhysicalQuantity.Current:
-			value = _adjustedValue(value, precision)
-			unitText = (value < 1000) ? "A" : "kA"
+			if (isNaN(value)) {
+				unitText = "A"
+			} else {
+				value = _adjustedValue(value, precision, unitMatchValue)
+				unitText = unitMatchValue < 1000 ? "A" : "kA"
+			}
 			break;
 		case Units.PhysicalQuantity.Percentage:
-			value = Math.round(value)
+			value = isNaN(value) ? value : Math.round(value)
 			unitText = "%"
 			break;
 		case Units.PhysicalQuantity.Temperature:
 			unitText = "\u00b0"
+			break;
+		case Units.PhysicalQuantity.Liters:
+			if (isNaN(value)) {
+				unitText = "\u2113" // 'l' symbol
+			} else {
+				value = _adjustedValue(value, precision, unitMatchValue)
+				unitText = unitMatchValue < 1000 ? "\u2113" : "\u3398"
+			}
+			break;
+		case Units.PhysicalQuantity.CubicMeters:
+			value = isNaN(value) ? value : value.toPrecision(precision)
+			unitText = "\u33A5"
+			break;
+		case Units.PhysicalQuantity.Gallons:
+			unitText = "gal"
 			break;
 		default:
 			break;
@@ -54,7 +86,17 @@ QtObject {
 		}
 	}
 
-	function _adjustedValue(value, precision) {
-		return parseFloat((value < 1000 ? value : (value / 1000)).toPrecision(precision))
+	function getCapacityDisplayText(physicalQuantity, capacity, remaining, precision) {
+		// Use the capacity to determine the unit to be displayed for both 'remaining' and 'capacity'
+		const remainingDisplay = getDisplayText(physicalQuantity, remaining, precision, capacity)
+		const capacityDisplay = getDisplayText(physicalQuantity, capacity, precision)
+		return ("%1/%2%3")
+				.arg(remainingDisplay.number)
+				.arg(capacityDisplay.number)
+				.arg(capacityDisplay.units)
+	}
+
+	function _adjustedValue(value, precision, unitMatchValue) {
+		return parseFloat((unitMatchValue < 1000 ? value : (value / 1000)).toPrecision(precision))
 	}
 }

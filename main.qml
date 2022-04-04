@@ -85,10 +85,6 @@ Window {
 		}
 	}
 
-	DialogManager {
-		id: dialogManager
-	}
-
 	MouseArea {
 		id: idleModeMouseArea
 
@@ -97,13 +93,16 @@ Window {
 		onClicked: PageManager.interactivity = PageManager.InteractionMode.EndFullScreen
 	}
 
-
 	MouseArea {
 		anchors.fill: parent
 		onPressed: function(mouse) {
 			mouse.accepted = false
 			PageManager.idleModeTimer.restart()
 		}
+	}
+
+	DialogManager {
+		id: dialogManager
 	}
 
 	Loader {

@@ -63,11 +63,19 @@ Page {
 			bottomMargin: PageManager.expandLayout
 						  ? Theme.geometry.levelsPage.gaugesView.expanded.bottomMargin
 						  : Theme.geometry.levelsPage.gaugesView.compact.bottomMargin
-			left: anchorCenter ? undefined : parent.left
-			leftMargin: anchorCenter ? 0 : Theme.geometry.levelsPage.gaugesView.leftMargin
-			horizontalCenter: anchorCenter ? parent.horizontalCenter : undefined
 		}
+		x: contentWidth > width
+				? Theme.geometry.levelsPage.gaugesView.horizontalMargin
+				: parent.width/2 - contentWidth / 2
+		width: parent.width
+		rightMargin: contentWidth > width
+					 ? 2*Theme.geometry.levelsPage.gaugesView.horizontalMargin
+					 : 0
 
+		Behavior on x {
+			enabled: tanksTab.animateModelChanges
+			NumberAnimation { duration: Theme.animation.levelsPage.tanks.modelChangeResize.duration; easing.type: Easing.InOutQuad }
+		}
 		Behavior on anchors.topMargin {
 			NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
 		}

@@ -67,7 +67,8 @@ Page {
 		id: singleGauge
 
 		CircularSingleGauge {
-			model: gaugeData.model.get(0)
+			model: gaugeData.model.count > 0 ? gaugeData.model.get(0) : null
+			caption: battery && battery.timeToGo > 0 ? Utils.formatAsHHMM(battery.timeToGo, true) : ""
 		}
 	}
 
@@ -165,144 +166,118 @@ Page {
 	Item {
 		id: gaugeData
 
-		property ListModel model: ListModel {
-			Component.onCompleted: {
-				insert(0, Object.assign({}, gaugeData._gaugeTypeProperties['battery'],
-						{ gaugeType: 'battery', value: 0.0 }))
-				batteryValueBinding.target = gaugeData.model.get(0)
-				batteryCaptionBinding.target = batteryValueBinding.target
-				batteryIconBinding.target = batteryValueBinding.target
-			}
-		}
+		// Use -1 to represent the Battery, as it is not one of the tank type enum values.
+		property int batteryType: -1
 
-		property var _gaugeConfig: [
-			'fuel',
-			'battery',
-			'freshwater',
-			'blackwater'
-		]
+		property ListModel model: ListModel {}
 
-		property var _gaugeTypeProperties: ({
-			'fuel': {
-				textId: 'gaugeFuelText',
-				icon: '/images/fueltank.svg',
-				caption: '',
-				valueType: Gauges.FallingPercentage
-			},
-			'battery': {
-				textId: 'gaugeBatteryText',
-				icon: '/images/battery.svg',
-				caption: '',
-				valueType: Gauges.FallingPercentage
-			},
-			'freshwater': {
-				textId: 'gaugeFreshWaterText',
-				icon: '/images/freshWater.svg',
-				caption: '',
-				valueType: Gauges.FallingPercentage
-			},
-			'blackwater': {
-				textId: 'gaugeBlackWaterText',
-				icon: '/images/blackWater.svg',
-				caption: '',
-				valueType: Gauges.RisingPercentage
-			}
-		})
-
-		property int _batteryIndex: _gaugeIndex("battery")
-
-		function _gaugeIndex(type) {
-			for (let i = 0; i < gaugeData.model.count; ++i) {
-				if (gaugeData.model.get(i).gaugeType == type) {
-					return i
+		Connections {
+			target: battery
+			function onIconChanged() {
+				if (gaugeData.model.count > 0) {
+					gaugeData.model.setProperty(0, "icon", battery.icon)
 				}
 			}
-			return -1
-		}
-
-		function _gaugeOrder(type) {
-			return tanks && tanks.model ? _gaugeConfig.indexOf(type) : -1
-		}
-
-		function _gaugeData(index) {
-			return index >= 0 && index < model.count ? model.get(index) : null
-		}
-
-		Binding {
-			id: batteryValueBinding
-			property: "value"
-			value: battery ? Math.round(battery.stateOfCharge) : null
-		}
-
-		Binding {
-			id: batteryCaptionBinding
-			property: "caption"
-			value: battery && battery.timeToGo > 0 ? Utils.formatAsHHMM(battery.timeToGo, true) : ""
-		}
-
-		Binding {
-			id: batteryIconBinding
-			property: "icon"
-			value: battery ? battery.icon : ""
 		}
 
 		Instantiator {
-			model: tanks ? tanks.model : null
+			model: [gaugeData.batteryType].concat(tanks.tankTypes)
 
 			delegate: QtObject {
-				property string gaugeType: {
-					switch (tank.type) {
-					case Tanks.Fuel: return 'fuel'
-					case Tanks.FreshWater: return 'freshwater'
-					case Tanks.BlackWater: return 'blackwater'
-					}
-					return ''
-				}
+				readonly property int tankType: modelData
+				readonly property bool isBattery: modelData === gaugeData.batteryType
+				readonly property var tankModel: isBattery ? 1 : tanks.tankModel(tankType)
+				readonly property var tankModelCount: tankModel.count
+				property bool deleted
 
-				onGaugeTypeChanged: {
-					let orderedTypeIndex = gaugeData._gaugeOrder(gaugeType)
-					let insertionIndex = -1
-					for (let i = 0; i < gaugeData.model.count; ++i) {
-						let currentGaugeType = gaugeData.model.get(i).gaugeType
-						if (orderedTypeIndex < gaugeData._gaugeOrder(currentGaugeType)) {
-							insertionIndex = i
+				readonly property string tankName: isBattery
+						  //% "Battery"
+						? qsTrId("brief_battery")
+						: Gauges.tankProperties(tankType).name
+				readonly property real tankLevel: isBattery
+						? Math.round(battery ? battery.stateOfCharge : 0)
+						: (tankModel.totalCapacity === 0
+						   ? 0
+						   : (tankModel.totalRemaining / tankModel.totalCapacity) * 100)
+
+				function orderedGaugeIndex() {
+					if (tankModel.count === 0) {
+						return -1
+					}
+					if (isBattery) {
+						return 0
+					}
+					let gaugeIndex = 1  // Skip over Battery gauge at index 0
+					for (let i = 0; i < tanks.tankTypes.length; ++i) {
+						if (tanks.tankTypes[i] === tankType) {
 							break
+						} else {
+							if (tanks.tankModel(tanks.tankTypes[i]).count > 0) {
+								gaugeIndex++
+							}
 						}
 					}
-					if (insertionIndex < 0) {
-						insertionIndex = gaugeData.model.count
+					return gaugeIndex
+				}
+
+				function insertedGaugeIndex() {
+					for (let i = 0; i < gaugeData.model.count; ++i) {
+						if (gaugeData.model.get(i).tankType === tankType) {
+							return i
+						}
 					}
-					if (modelIndex >= 0) {
-						gaugeData.model.move(modelIndex, insertionIndex, 1)
+					return -1
+				}
+
+				function updateGaugeModel() {
+					if (deleted) {
+						return
+					}
+					const orderedIndex = orderedGaugeIndex()
+					const insertedIndex = insertedGaugeIndex()
+
+					if (orderedIndex < 0) {
+						// No tanks are present for this tank type anymore, so remove it from the model
+						if (insertedIndex >= 0) {
+							gaugeData.model.remove(insertedIndex)
+						}
+						return
+					}
+
+					if (insertedIndex >= 0) {
+						if (orderedIndex !== insertedIndex) {
+							// Gauge is already in list, but at wrong index
+							gaugeData.model.move(insertedIndex, orderedIndex, 1)
+						}
+						gaugeData.model.set(orderedIndex, { name: tankName, value: tankLevel })
 					} else {
-						gaugeData.model.insert(insertionIndex, Object.assign({},
-								gaugeData._gaugeTypeProperties[gaugeType],
-								{ gaugeType: gaugeType, value: 0.0 }))
+						let gaugeProperties
+						if (isBattery) {
+							gaugeProperties = {
+								icon: "/images/battery.svg",
+								valueType: Gauges.FallingPercentage,
+								name: tankName,
+								tankType: tankType,
+								value: tankLevel
+							}
+						} else {
+							gaugeProperties = Object.assign({}, Gauges.tankProperties(tankType),
+									{ name: tankName, tankType: tankType, value: tankLevel })
+						}
+						gaugeData.model.insert(Math.min(orderedIndex, gaugeData.model.count), gaugeProperties)
 					}
-					modelIndex = insertionIndex
 				}
 
-				property int modelIndex: -1
+				// If tank data changes, update the model at the end of the event loop to avoid
+				// excess updates if multiple values change simultaneously for the same tank.
+				onTankLevelChanged: Qt.callLater(updateGaugeModel)
+				onTankNameChanged: Qt.callLater(updateGaugeModel)
+				onTankModelCountChanged: Qt.callLater(updateGaugeModel)
 
-				property var updater: Binding {
-					target: modelIndex >= 0 ? gaugeData._gaugeData(modelIndex) : null
-					property: 'value'
-					value: tank.level
-				}
+				Component.onDestruction: deleted = true
 			}
 		}
 	}
-
-	property var _gaugeStrings: [
-		//% "Fuel"
-		QT_TRID_NOOP('gaugeFuelText'),
-		//% "Battery"
-		QT_TRID_NOOP('gaugeBatteryText'),
-		//% "Fresh water"
-		QT_TRID_NOOP('gaugeFreshWaterText'),
-		//% "Black water"
-		QT_TRID_NOOP('gaugeBlackWaterText')
-	]
 
 	state: PageManager.sidePanelActive ? 'panelOpen' : ''
 	states: State {

@@ -7,46 +7,34 @@ import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 
 Rectangle {
-	id: tankGroupData
+	id: root
 
-	property bool showTankGroupData: false
-	property alias model: groupedSubgaugesRepeater.model
+	property bool active
+	property alias tankModel: groupedSubgaugesRepeater.model
+	readonly property var _tankProperties: Gauges.tankProperties(tankModel.type)
 
 	parent: dialogManager
 	anchors.fill: parent
 	color: Theme.color.levelsPage.tankGroupData.background.color
-	opacity: 0
+	opacity: active ? 1 : 0
 
-	OpacityAnimator on opacity {
-		from: 0;
-		to: 1;
-		running: showTankGroupData
-		duration: Theme.animation.levelsPage.animation.duration
-	}
-	SequentialAnimation {
-		id: hideTankGroupDataAnimation
-
-		running: false
-		NumberAnimation {
-			target: tankGroupData
-			property: "opacity"
-			to: 0
-			duration: Theme.animation.levelsPage.animation.duration
-			easing.type: Easing.InOutQuad
-		}
-		ScriptAction {
-			script: showTankGroupData = false
+	Behavior on opacity {
+		OpacityAnimator {
+			duration: Theme.animation.levelsPage.tanks.expandedView.fade.duration
 		}
 	}
+
 	MouseArea {
 		anchors.fill: parent
-		onClicked: hideTankGroupDataAnimation.running = true
+		enabled: root.active
+		onClicked: root.active = false
 	}
+
 	Rectangle {
 		color: Theme.color.levelsPage.gauge.backgroundColor
 		radius: Theme.geometry.levelsPage.gauge.radius
 		border.width: Theme.geometry.levelsPage.gauge.border.width
-		border.color: parent.model && parent.model.get(0) ? _tankProperties[parent.model.get(0).type].borderColor : "transparent"
+		border.color: root._tankProperties.borderColor
 		width: groupedSubgauges.width + Theme.geometry.levelsPage.tankGroupData.horizontalMargin
 		height: groupedSubgauges.height
 		anchors.centerIn: groupedSubgauges
@@ -57,10 +45,12 @@ Rectangle {
 
 		anchors.centerIn: parent
 		spacing: groupedSubgaugesRepeater.count > 2 ? Theme.geometry.levelsPage.tankGroupData.spacing3 : Theme.geometry.levelsPage.tankGroupData.spacing2
+
 		Repeater {
 			id: groupedSubgaugesRepeater
 
 			height: Theme.geometry.levelsPage.tankGroupData.height
+
 			delegate: Item {
 				width: Theme.geometry.levelsPage.groupedSubgauges.delegate.width
 				height: Theme.geometry.levelsPage.groupedSubgauges.delegate.height
@@ -70,21 +60,22 @@ Rectangle {
 						top: parent.top
 						topMargin: Theme.geometry.levelsPage.gauge.icon.topMargin
 						horizontalCenter: parent.horizontalCenter
-						horizontalCenterOffset: Theme.geometry.levelsPage.gauge.icon.horizontalCenterOffset
 					}
-					source: _tankProperties[type].icon
+					source: root._tankProperties.icon
 					color: Theme.color.levelsPage.tankIcon
 				}
 				Label {
 					id: label
-					height: Theme.geometry.levelsPage.gauge.label.height
 					anchors {
 						top: img.bottom
 						topMargin: Theme.geometry.levelsPage.gauge.label.topMargin
-						horizontalCenter: parent.horizontalCenter
+						left: parent.left
+						leftMargin: Theme.geometry.levelsPage.gauge.label.horizontalMargin
+						right: parent.right
+						rightMargin: Theme.geometry.levelsPage.gauge.label.horizontalMargin
 					}
 					font.pixelSize: Theme.font.size.s
-					text: name
+					text: model.tank.name || root._tankProperties.name
 				}
 				TankGauge {
 					anchors {
@@ -95,36 +86,35 @@ Rectangle {
 					}
 					width: parent.width
 					height: groupedSubgauges.height
-					percentage: model.percentage
+					gaugeValueType: root._tankProperties.valueType
+					value: model.tank.level / 100
 				}
-				Row {
+				ValueQuantityDisplay {
 					id: percentageText
+
 					anchors {
 						horizontalCenter: parent.horizontalCenter
 						bottom: valueText.top
+						bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
 					}
-					spacing: Theme.geometry.levelsPage.gauge.percentageText.spacing
-
-					Label {
-						font.pixelSize: Theme.levelsPage.percentageText.font.size
-						text: (100 * percentage).toFixed(0)
-					}
-					Label {
-						font.pixelSize: Theme.levelsPage.percentageText.font.size
-						opacity: Theme.geometry.levelsPage.gauge.percentage.opacity
-						text: '%'
-					}
+					font.pixelSize: Theme.levelsPage.percentageText.font.size
+					physicalQuantity: Units.PhysicalQuantity.Percentage
+					value: model.tank.level
 				}
 				Label {
 					id: valueText
+
 					anchors {
 						bottom: parent.bottom
 						bottomMargin: Theme.geometry.levelsPage.gauge.valueText.bottomMargin
 						horizontalCenter: parent.horizontalCenter
 					}
 					font.pixelSize: Theme.font.size.xs
-					opacity: Theme.geometry.levelsPage.gauge.percentage.opacity
-					text: ("%1/%2ℓ").arg((percentage * 1000).toFixed(0)).arg(1000) // TODO - connect to real capacity
+					color: Theme.color.font.secondary
+					text: Units.getCapacityDisplayText(root.tankModel.unit,
+							model.tank.capacity,
+							model.tank.remaining,
+							Theme.geometry.levelsPage.gauge.valueText.precision)
 				}
 			}
 		}
