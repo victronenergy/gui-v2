@@ -10,7 +10,7 @@ import Victron.VenusOS
 Item {
 	id: gauges
 
-	property QtObject model
+	property alias model: arcRepeater.model
 	readonly property real strokeWidth: Theme.geometry.circularMultiGauge.strokeWidth
 
 	// Step change in the size of the bounding boxes of successive gauges
@@ -24,6 +24,7 @@ Item {
 		layer.samples: 4
 
 		Repeater {
+			id: arcRepeater
 			width: parent.width
 			model: gauges.model
 			delegate: ProgressArc {
@@ -38,6 +39,7 @@ Item {
 				progressColor: Theme.statusColorValue(status)
 				remainderColor: Theme.statusColorValue(status, true)
 				strokeWidth: gauges.strokeWidth
+				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
 			}
 		}
 	}
@@ -61,11 +63,13 @@ Item {
 				anchors.right: parent.right
 				anchors.rightMargin: Math.max(0, Theme.geometry.circularMultiGauge.icons.maxWidth - iconImage.width)
 				spacing: Theme.geometry.circularMultiGauge.row.spacing
+				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
+
 				Label {
 					horizontalAlignment: Text.AlignRight
 					font.pixelSize: Theme.font.size.m
 					color: Theme.color.font.primary
-					text: qsTrId(model.textId)
+					text: model.name
 				}
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
@@ -79,9 +83,10 @@ Item {
 				CP.ColorImage {
 					id: iconImage
 					anchors.verticalCenter: parent.verticalCenter
+					height: Theme.geometry.briefPage.centerGauge.icon.height
 					source: model.icon
 					color: Theme.color.font.primary
-					fillMode: Image.Pad
+					fillMode: Image.PreserveAspectFit
 					smooth: true
 				}
 			}

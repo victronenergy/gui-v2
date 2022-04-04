@@ -50,6 +50,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Relays");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/System.qml")),
 		"Victron.VenusOS", 2, 0, "System");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Tanks.qml")),
+		"Victron.VenusOS", 2, 0, "Tanks");
 
 	/* controls */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Button.qml")),

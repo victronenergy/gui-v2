@@ -9,30 +9,59 @@ import QtQuick.Controls.impl as CP
 Rectangle {
 	id: root
 
-	property bool expanded
-	property real percentage: 0.0
+	enum WarningLevel {
+		OK,
+		Warning,
+		Critical,
+		Alarm
+	}
+
+	property int gaugeValueType
+	property real value: 0.0
 	property bool isGrouped: false
-	readonly property int _gaugeType: _tankProperties[model.type].gaugeType
-	readonly property int _barHeight: (height / 4) - Theme.geometry.levelsPage.tankGauge.spacing
-	readonly property int _warningLevel: _gaugeType === Gauges.FallingPercentage ?
-											 ((percentage < 0.1) ? 2 : ((percentage < 0.2) ? 1 : 0 )) :
-											 ((percentage > 0.9) ? 2 : ((percentage > 0.8) ? 1 : 0 )) // TODO: hook up to real warning / critical levels
-	readonly property color _barGaugeBackgroundColor: [
-		Theme.color.levelsPage.tankGroupData.barGaugeBackgroundColor.ok,
-		Theme.color.levelsPage.tankGroupData.barGaugeBackgroundColor.warning,
-		Theme.color.levelsPage.tankGroupData.barGaugeBackgroundColor.critical][_warningLevel]
 
-	readonly property color _barGaugeForegroundColor: [Theme.color.ok, Theme.color.warning, Theme.color.critical][_warningLevel]
+	// TODO: hook up to real warning / critical levels
+	readonly property int _warningLevel: gaugeValueType === Gauges.FallingPercentage
+			? (value <= 0.05
+			  ? TankGauge.WarningLevel.Alarm
+			  : value <= 0.1
+				? TankGauge.WarningLevel.Critical
+				  : value <= 0.2
+				  ? TankGauge.WarningLevel.Warning
+				  : TankGauge.WarningLevel.OK)
+			: (value >= 0.95
+			   ? TankGauge.WarningLevel.Alarm
+			   : value >= 0.9
+				 ? TankGauge.WarningLevel.Critical
+				   : value >= 0.8
+				   ? TankGauge.WarningLevel.Warning
+				   : TankGauge.WarningLevel.OK)
 
-	signal testAddTank()					// only used for testing
-	signal testRemoveTank(int tankIndex)	// only used for testing
+	readonly property var _backgroundColors: [
+		Theme.color.darkOk,
+		Theme.color.darkWarning,
+		Theme.color.darkCritical,
+		Theme.color.darkCritical
+	]
+	readonly property var _foregroundColors: [
+		Theme.color.ok,
+		Theme.color.warning,
+		Theme.color.critical,
+		Theme.color.critical
+	]
+	readonly property var _barGaugeBackgroundColor: _backgroundColors[_warningLevel]
+	readonly property color _barGaugeForegroundColor: _foregroundColors[_warningLevel]
 
 	radius: Theme.geometry.levelsPage.tankGauge.radius
-	gradient: Gradient { // Take care if modifying this; be sure to test the edge cases of percentage == 0.0 and percentage == 1.0
-		GradientStop { position: 0.0; color: root.percentage >= 1.0 ? root._barGaugeForegroundColor : root._barGaugeBackgroundColor }
-		GradientStop { position: Math.min(0.999999, (1.0 - root.percentage)); color: root.percentage >= 1.0 ? root._barGaugeForegroundColor : root._barGaugeBackgroundColor }
-		GradientStop { position: Math.min(1.0, (1.0 - root.percentage) + 0.001); color: root.percentage <= 0.0 ? root._barGaugeBackgroundColor : root._barGaugeForegroundColor }
-		GradientStop { position: 1.0; color: root._barGaugeForegroundColor }
+	gradient: Gradient { // Take care if modifying this; be sure to test the edge cases of value == 0.0 and value == 1.0
+		GradientStop { position: 0.0; color: root.value >= 1.0 ? root._barGaugeForegroundColor : root._barGaugeBackgroundColor }
+		GradientStop { position: Math.min(0.999999, (1.0 - root.value)); color: root.value >= 1.0 ? root._barGaugeForegroundColor : root._barGaugeBackgroundColor }
+		GradientStop { position: Math.min(1.0, (1.0 - root.value) + 0.001); color: root.value <= 0.0 ? root._barGaugeBackgroundColor : root._barGaugeForegroundColor }
+		GradientStop { position: 1.0; color: root.value <= 0.0 ? root._barGaugeBackgroundColor : root._barGaugeForegroundColor }
+	}
+
+	Behavior on value {
+		NumberAnimation {}
 	}
 
 	Rectangle {
@@ -57,25 +86,14 @@ Rectangle {
 	}
 
 	CP.ColorImage {
-		anchors {
-			top: parent.top
-			topMargin: root.expanded ? Theme.geometry.levelsPage.tankGauge.alarmIcon.topMargin : 0  // TODO animate
-			horizontalCenter: parent.horizontalCenter
-		}
-		width: Theme.geometry.levelsPage.tankGauge.alarmIcon.width
+		anchors.horizontalCenter: parent.horizontalCenter
+		y: (root.height / 4 / 2) - (height / 2)
 		height: Theme.geometry.levelsPage.tankGauge.alarmIcon.height
-		visible: {
-			if (root.isGrouped) {
-				return false
-			}
-			if (_gaugeType === Gauges.FallingPercentage) {
-				return (root.percentage < 0.05) ? true : false
-			} else
-			{
-				return (root.percentage > 0.95) ? true : false
-			}
-		}
-		color: _gaugeType === Gauges.FallingPercentage ? Theme.color.levelsPage.fallingGauge.alarmIcon : Theme.color.levelsPage.risingGauge.alarmIcon
+		fillMode: Image.PreserveAspectFit
+		visible: !root.isGrouped && root._warningLevel === TankGauge.WarningLevel.Alarm
+		color: root.gaugeValueType === Gauges.FallingPercentage
+			   ? Theme.color.levelsPage.fallingGauge.alarmIcon
+			   : Theme.color.levelsPage.risingGauge.alarmIcon
 		source: "qrc:/images/icon_alarm_48.svg"
 	}
 }

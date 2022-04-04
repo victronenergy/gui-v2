@@ -33,8 +33,8 @@ Row {
 	Label {
 		id: unitLabel
 
-		opacity: 0.7 // TODO: use a Theme color instead
 		text: root._displayValue.units
 		font: valueLabel.font
+		color: Theme.color.font.secondary
 	}
 }

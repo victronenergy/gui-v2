@@ -12,6 +12,7 @@ Item {
 
 	property QtObject model // must be QtObject instead of var, else cannot update its values via Binding objects
 	readonly property real strokeWidth: Theme.geometry.circularSingularGauge.strokeWidth
+	property alias caption: captionLabel.text
 
 	Item {
 		anchors.fill: parent
@@ -54,7 +55,7 @@ Item {
 				anchors.verticalCenter: icon.verticalCenter
 				font.pixelSize: Theme.font.size.m
 				color: Theme.color.font.primary
-				text: qsTrId(model.textId)
+				text: model.name
 			}
 		}
 
@@ -75,10 +76,11 @@ Item {
 		}
 
 		Label {
+			id: captionLabel
+
 			anchors.horizontalCenter: parent.horizontalCenter
 			font.pixelSize: Theme.font.size.s
 			color: Theme.color.font.secondary
-			text: model.caption
 		}
 	}
 }

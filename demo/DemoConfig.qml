@@ -29,8 +29,8 @@ Item {
 			demoTitle.text = ""
 		}
 
-		// Overview page doesn't update layout if already on that page
-		if (forceReload && PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml") {
+		// Overview and Levels pages don't update layout if already on that page
+		if (forceReload) {
 			const pageIndex = indexOfPage(PageManager.navBar.currentUrl)
 			PageManager.navBar.buttonClicked(PageManager.navBar.model.count - 1) // go to settings page
 			PageManager.navBar.buttonClicked(pageIndex)
