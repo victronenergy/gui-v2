@@ -18,6 +18,16 @@ Item {
 
 	property ListModel model: ListModel {}
 
+	property var _monitorModes: ({
+		"-1": DcInputs.InputType.DcGenerator,
+		// -2 AC charger
+		// -3 DC charger
+		// -4 Water generator
+		// -7 Shaft generator
+		// -8 Wind charger
+		"-8": DcInputs.InputType.Wind,
+	})
+
 	property var _inputs: []
 
 	function _getInputs() {
@@ -60,14 +70,16 @@ Item {
 				} else if (uid.startsWith("com.victronenergy.fuelcell.")) {
 					return DcInputs.InputType.FuelCell
 				} if (uid.startsWith("com.victronenergy.dcsource.")) {
-					// TODO should check some type value from com.victronenergy.dcsource
-					return DcInputs.InputType.UnknownType
+					// Use DC Generator as the catch-all type for any DC power source that isn't
+					// specifically handled.
+					return root._monitorModes[monitorMode.toString()] || DcInputs.InputType.DcGenerator
 				}
 			}
 
 			property real voltage
 			property real current
 			property real temperature
+			property int monitorMode
 
 			Component.onCompleted: {
 				root.model.append({ input: input })
@@ -92,6 +104,11 @@ Item {
 			property var _temperature: VeQuickItem {
 				uid: input.serviceUid + "/Dc/0/Temperature"
 				onValueChanged: input.temperature = value === undefined ? NaN : value
+			}
+
+			property var _monitorMode: VeQuickItem {
+				uid: input.serviceUid + "/Settings/MonitorMode"
+				onValueChanged: input.monitorMode = value === undefined ? NaN : value
 			}
 		}
 	}
