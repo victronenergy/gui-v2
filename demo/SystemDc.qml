@@ -14,6 +14,7 @@ Item {
 		running: true
 		interval: 1000
 		repeat: true
+		triggeredOnStart: true
 
 		onTriggered: {
 			root.power = 500 + Math.floor(Math.random() * 100)

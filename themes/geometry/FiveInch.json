@@ -9,6 +9,7 @@
     "animation.page.idleOpacity.duration": 250,
     "animation.page.idleResize.duration": 250,
     "animation.page.idleResize.timeout": 6000,
+    "animation.overviewPage.connector.fade.duration": 100,
     "animation.levelsPage.tanks.expandedView.fade.duration": 500,
     "animation.levelsPage.tanks.modelChangeResize.duration": 500,
 
@@ -257,6 +258,7 @@
     "geometry.overviewPage.connector.electron.centerWidth": 2,
     "geometry.overviewPage.connector.electron.velocity": 30,
     "geometry.overviewPage.connector.electron.interval": 34,
+    "geometry.overviewPage.connector.animationPowerThreshold": 30,
 
     "geometry.overviewPage.layout.compact.topMargin": 0,
     "geometry.overviewPage.layout.compact.bottomMargin": 8,

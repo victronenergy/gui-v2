@@ -74,14 +74,24 @@ Item {
 				triggeredOnStart: true
 
 				onTriggered: {
+					// Positive energy value = imported energy, flowing towards inverter/charger.
+					// Negative energy value = exported energy, flowing towards grid.
+					const negativeEnergyFlow = Math.random() > 0.5
+					const zeroEnergyFlow = Math.random() > 0.8
 					let properties = ["frequency", "current", "power", "voltage"]
 					for (let propIndex = 0; propIndex < properties.length; ++propIndex) {
 						let propTotal = 0
 						const propName = properties[propIndex]
 						for (let i = 0; i < input.phaseCount; ++i) {
-							const value = Math.random() * 300
-							input.phases.setProperty(i, propName, value)
-							propTotal += value
+							if (zeroEnergyFlow) {
+								input.phases.setProperty(i, propName, NaN)
+							} else {
+								const value = negativeEnergyFlow && (propName === "power" || propName === "current")
+											? (Math.random() * 300) * -1
+											: Math.random() * 300
+								input.phases.setProperty(i, propName, value)
+								propTotal += value
+							}
 						}
 						input[propName] = propTotal
 					}

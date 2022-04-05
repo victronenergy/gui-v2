@@ -22,11 +22,15 @@ Page {
 		OverviewWidget.Type.Solar
 	]
 
-	// Use a delayed binding to avoid repopulating the model unnecessarily
-	readonly property bool _shouldResetWidgets: (acInputs && acInputs.model.count)
-			|| (dcInputs && dcInputs.model.count)
-			|| (solarChargers && solarChargers.model.count)
+	// Set a counter that updates whenever the layout should change.
+	// Use a delayed binding to avoid repopulating the model unnecessarily.
+	readonly property int _shouldResetWidgets: (acInputs && acInputs.model.count)
+			+ (dcInputs && dcInputs.model.count)
+			+ (dcLoadsWidget.size === _laidOutDcLoadsWidgetSize ? 0 : 1)
+			+ (solarChargers && solarChargers.model.count)
 	on_ShouldResetWidgetsChanged: Qt.callLater(_resetWidgets)
+
+	property int _laidOutDcLoadsWidgetSize: -1
 
 	property var _createdWidgets: ({})
 
@@ -80,6 +84,8 @@ Page {
 		resetWidgetPositions(_leftWidgets)
 		resetWidgetPositions([inverterWidget, batteryWidget])
 		resetWidgetPositions([acLoadsWidget, dcLoadsWidget])
+
+		_laidOutDcLoadsWidgetSize = dcLoadsWidget.size
 	}
 
 	function resetWidgetPositions(widgets) {
@@ -227,6 +233,34 @@ Page {
 		return candidateArray.length
 	}
 
+	function _inputConnectorAnimationMode(connectorWidget) {
+		// Assumes startWidget is the AC/DC input widget.
+		if (!connectorWidget.startWidget.input) {
+			return WidgetConnector.AnimationMode.NotAnimated
+		}
+		const power = connectorWidget.startWidget.input.power
+		if (isNaN(power) || Math.abs(power) <= Theme.geometry.overviewPage.connector.animationPowerThreshold) {
+			return WidgetConnector.AnimationMode.NotAnimated
+		}
+
+		if (connectorWidget.endWidget === inverterWidget) {
+				// For AC inputs, positive power means energy is flowing towards inverter/charger,
+				// and negative power means energy is flowing towards the input.
+			return power > Theme.geometry.overviewPage.connector.animationPowerThreshold
+					? WidgetConnector.AnimationMode.StartToEnd
+					: WidgetConnector.AnimationMode.EndToStart
+		} else if (connectorWidget.endWidget === batteryWidget) {
+			// For DC inputs, positive power means energy is flowing towards battery.
+			return power > Theme.geometry.overviewPage.connector.animationPowerThreshold
+					? WidgetConnector.AnimationMode.StartToEnd
+					: WidgetConnector.AnimationMode.NotAnimated
+		} else {
+			console.warn("Unrecognised connector end widget:",
+						 connectorWidget, connectorWidget.endWidget)
+			return WidgetConnector.AnimationMode.NotAnimated
+		}
+	}
+
 	SegmentedWidgetBackground {
 		id: segmentedBackground
 
@@ -252,9 +286,11 @@ Page {
 			expanded: PageManager.expandLayout
 			animateGeometry: PageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
-			sideGaugeValue: value / Utils.maximumValue("grid.power")
+			sideGaugeValue: value / Utils.maximumValue("grid.power")    // TODO when max available
 
 			WidgetConnector {
+				id: gridWidgetConnector
+
 				parent: root
 				startWidget: gridWidget
 				startLocation: WidgetConnector.Location.Right
@@ -262,7 +298,7 @@ Page {
 				endLocation: WidgetConnector.Location.Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
-				animationRunning: !!gridWidget.input && gridWidget.input.connected
+				animationMode: root._inputConnectorAnimationMode(gridWidgetConnector)
 				straight: gridWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -284,6 +320,8 @@ Page {
 			sideGaugeValue: 0.5 // TODO when max available
 
 			WidgetConnector {
+				id: shoreWidgetConnector
+
 				parent: root
 				startWidget: shoreWidget
 				startLocation: WidgetConnector.Location.Right
@@ -291,7 +329,7 @@ Page {
 				endLocation: WidgetConnector.Location.Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
-				animationRunning: !!shoreWidget.input && shoreWidget.input.connected
+				animationMode: root._inputConnectorAnimationMode(shoreWidgetConnector)
 				straight: shoreWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -312,6 +350,8 @@ Page {
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
+				id: acGeneratorConnector
+
 				parent: root
 				startWidget: acGeneratorWidget
 				startLocation: WidgetConnector.Location.Right
@@ -319,7 +359,7 @@ Page {
 				endLocation: WidgetConnector.Location.Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
-				animationRunning: !!acGeneratorWidget.input && acGeneratorWidget.input.connected
+				animationMode: root._inputConnectorAnimationMode(acGeneratorConnector)
 				straight: acGeneratorWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -340,6 +380,8 @@ Page {
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
+				id: dcGeneratorConnector
+
 				parent: root
 				startWidget: dcGeneratorWidget
 				startLocation: WidgetConnector.Location.Right
@@ -347,9 +389,7 @@ Page {
 				endLocation: WidgetConnector.Location.Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
-				animationRunning: !!dcGeneratorWidget.input
-						  && !isNaN(dcGeneratorWidget.input.current)
-						  && dcGeneratorWidget.input.current > 0
+				animationMode: root._inputConnectorAnimationMode(dcGeneratorConnector)
 				straight: dcGeneratorWidget.size > OverviewWidget.Size.M
 			}
 		}
@@ -370,6 +410,8 @@ Page {
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
+				id: alternatorConnector
+
 				parent: root
 				startWidget: alternatorWidget
 				startLocation: WidgetConnector.Location.Right
@@ -377,9 +419,7 @@ Page {
 				endLocation: WidgetConnector.Location.Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
-				animationRunning: !!alternatorWidget.input
-						  && !isNaN(alternatorWidget.input.current)
-						  && alternatorWidget.input.current > 0
+				animationMode: root._inputConnectorAnimationMode(alternatorConnector)
 			}
 		}
 	}
@@ -399,6 +439,8 @@ Page {
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
+				id: windConnector
+
 				parent: root
 				startWidget: windWidget
 				startLocation: WidgetConnector.Location.Right
@@ -406,9 +448,7 @@ Page {
 				endLocation: WidgetConnector.Location.Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
-				animationRunning: !!windWidget.input
-						  && !isNaN(windWidget.input.current)
-						  && windWidget.input.current > 0
+				animationMode: root._inputConnectorAnimationMode(windConnector)
 			}
 		}
 	}
@@ -427,29 +467,46 @@ Page {
 			animateGeometry: PageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
-			value: solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
+			value: !!solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
 			yieldHistory: solarChargers.yieldHistory
 
 			WidgetConnector {
+				id: acSolarConnector
+
 				parent: root
 				startWidget: solarWidget
 				startLocation: WidgetConnector.Location.Right
 				endWidget: inverterWidget
 				endLocation: WidgetConnector.Location.Left
+				visible: !!solarChargers && !isNaN(solarChargers.acPower)
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
-				animationRunning: solarChargers && !isNaN(solarChargers.power)
+
+				// Energy always flows towards inverter/charger, never towards solar charger.
+				animationMode: !!solarChargers
+						&& !isNaN(solarChargers.acPower)
+						&& Math.abs(solarChargers.acPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+							   ? WidgetConnector.AnimationMode.StartToEnd
+							   : WidgetConnector.AnimationMode.NotAnimated
 			}
 			WidgetConnector {
+				id: dcSolarConnector
+
 				parent: root
 				startWidget: solarWidget
 				startLocation: WidgetConnector.Location.Right
 				endWidget: batteryWidget
 				endLocation: WidgetConnector.Location.Left
+				visible: !!solarChargers && !isNaN(solarChargers.dcPower)
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
-				animationRunning: solarChargers && !isNaN(solarChargers.power)
-						  && battery && !battery.idle
+
+				// Energy always flows towards battery, never towards solar charger.
+				animationMode: !!solarChargers
+						&& !isNaN(solarChargers.dcPower)
+						&& Math.abs(solarChargers.dcPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+							   ? WidgetConnector.AnimationMode.StartToEnd
+							   : WidgetConnector.AnimationMode.NotAnimated
 			}
 		}
 	}
@@ -471,8 +528,15 @@ Page {
 		endLocation: WidgetConnector.Location.Left
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
-		animationRunning: acLoadsWidget.input != undefined
 		straight: true
+
+		// If load power is positive (i.e. consumed energy), energy flows to load.
+		animationMode: !!system
+				&& !isNaN(system.ac.consumption.power)
+				&& system.ac.consumption.power > 0
+				&& Math.abs(system.ac.consumption.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+					? WidgetConnector.AnimationMode.StartToEnd
+					: WidgetConnector.AnimationMode.NotAnimated
 	}
 	WidgetConnector {
 		startWidget: inverterWidget
@@ -481,7 +545,15 @@ Page {
 		endLocation: WidgetConnector.Location.Top
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
-		animationRunning: batteryWidget.batteryData && !batteryWidget.batteryData.idle
+
+		// If battery power is positive, energy flows to battery, else flows to inverter/charger.
+		animationMode: !!battery
+				&& !isNaN(battery.power)
+				&& Math.abs(battery.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+						? (battery.power > 0
+								? WidgetConnector.AnimationMode.StartToEnd
+								: WidgetConnector.AnimationMode.EndToStart)
+						: WidgetConnector.AnimationMode.NotAnimated
 	}
 
 	BatteryWidget {
@@ -500,7 +572,14 @@ Page {
 		endLocation: WidgetConnector.Location.Left
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
-		animationRunning: batteryWidget.batteryData && !batteryWidget.batteryData.idle
+
+		// If load power is positive (i.e. consumed energy), energy flows to load.
+		animationMode: !!system
+				&& !isNaN(system.dc.power)
+				&& system.dc.power > 0
+				&& Math.abs(system.dc.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+					? WidgetConnector.AnimationMode.StartToEnd
+					: WidgetConnector.AnimationMode.NotAnimated
 	}
 
 	// the two output widgets are always present
@@ -529,6 +608,6 @@ Page {
 		size: !!system && !isNaN(system.dc.power) ? OverviewWidget.Size.L : OverviewWidget.Size.Zero
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
-		value: system ? system.dc.power || 0 : 0
+		value: system ? system.dc.power || NaN : NaN
 	}
 }

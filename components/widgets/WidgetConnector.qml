@@ -17,28 +17,30 @@ Item {
 		Bottom
 	}
 
+	enum AnimationMode {
+		NotAnimated,
+		StartToEnd,
+		EndToStart
+	}
+
 	property var startWidget
 	property var endWidget
 	property int startLocation
 	property int endLocation
+
+	property int animationMode: WidgetConnector.AnimationMode.NotAnimated
 	property bool expanded
 	property bool animateGeometry
 
 	// Forces a straight line by aligning the nubs using the centre of the smaller widget
 	property bool straight
 
-	// Animates from start to end
-	property bool animationRunning
-
-	property bool _animated: visible && animationRunning
+	readonly property bool _animated: visible && animationMode !== WidgetConnector.AnimationMode.NotAnimated
 	property real _animationProgress
 	property real _electronTravelDistance
 
 	readonly property rect _startWidgetRect: _widgetRect(startWidget)
 	readonly property rect _endWidgetRect: _widgetRect(endWidget)
-
-	property int _electronCount: Math.floor(root._diagonalDistance / Theme.geometry.overviewPage.connector.electron.interval)
-	property int _lastSetElectronCount
 
 	function _widgetRect(widget) {
 		return Qt.rect(
@@ -49,19 +51,18 @@ Item {
 		)
 	}
 
-	visible: startWidget.visible && endWidget.visible
-
-	Timer {
-		running: true
-		repeat: false
-		interval: Theme.animation.page.idleResize.duration // wait for widget height behaviors to finish
-		onTriggered: {
-			// Calculate the model once when the height/y changes, to avoid multiple model changes
-			// due to animation.
-			_electronTravelDistance = connectorPath.width + connectorPath.height
+	function _reset() {
+		// Only calculate the model once, to avoid multiple model changes due to animation.
+		_electronTravelDistance = _animated ? connectorPath.width + connectorPath.height : 0
+		if (_animated) {
 			electronAnim.restart()
 		}
 	}
+
+	visible: startWidget.visible && endWidget.visible
+
+	onAnimationModeChanged: Qt.callLater(_reset)
+	Component.onCompleted: Qt.callLater(_reset)
 
 	WidgetConnectorPath {
 		id: connectorPath
@@ -185,14 +186,20 @@ Item {
 				delegate: Image {
 					id: electron
 
+					readonly property real progress: root.animationMode === WidgetConnector.AnimationMode.StartToEnd
+							? animPathInterpolator.progress
+							: 1 - animPathInterpolator.progress
+
 					x: animPathInterpolator.x - width/2
 					y: animPathInterpolator.y - height/2
 					source: "qrc:/images/electron.svg"
-					rotation: animPathInterpolator.angle
-					opacity: animPathInterpolator.progress < 0.01 || animPathInterpolator.progress > 0.9 ? 0 : 1
+					rotation: root.animationMode === WidgetConnector.AnimationMode.StartToEnd
+							  ? animPathInterpolator.angle
+							  : animPathInterpolator.angle + 180
+					opacity: progress < 0.01 || progress > 0.8 ? 0 : 1
 
 					Behavior on opacity {
-						NumberAnimation { duration: 250 }
+						NumberAnimation { duration: Theme.animation.overviewPage.connector.fade.duration }
 					}
 
 					// Cannot use PathAnimation, because after the first animation loop it ignores the
@@ -223,7 +230,13 @@ Item {
 
 		target: root
 		property: "_animationProgress"
-		from: 0; to: 1
+
+		from: root.animationMode === WidgetConnector.AnimationMode.StartToEnd
+			  ? 0
+			  : 1
+		to: root.animationMode === WidgetConnector.AnimationMode.StartToEnd
+			? 1
+			: 0
 
 		running: root._animated
 		loops: Animation.Infinite
