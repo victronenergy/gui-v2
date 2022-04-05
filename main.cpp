@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
 		});
 
 	/* data sources */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Battery.qml")),
+		"Victron.VenusOS", 2, 0, "Battery");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/AcInputs.qml")),
 		"Victron.VenusOS", 2, 0, "AcInputs");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DcInputs.qml")),
