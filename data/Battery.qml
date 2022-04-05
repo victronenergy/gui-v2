@@ -7,13 +7,21 @@ import Victron.Velib
 import "../components/Utils.js" as Utils
 
 Item {
+	enum Mode {
+		Idle,
+		Charging,
+		Discharging
+	}
+
 	property real stateOfCharge: veBatterySoC.value || 0
 	property real power: veBatteryPower.value || 0
 	property real current: veBatteryCurrent.value || 0
 	property real temperature: veBatteryTemp.value || 0
 	property real timeToGo: veTimeToGo.value || 0    // in seconds
 	property string icon: Utils.batteryIcon(root)
-	readonly property bool idle: current === 0 || power === 0
+	property int mode: power === 0
+			? Battery.Mode.Idle
+			: (power > 0 ? Battery.Mode.Charging : Battery.Mode.Discharging)
 
 	VeQuickItem {
 		id: veBatterySoC

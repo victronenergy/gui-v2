@@ -72,7 +72,7 @@ OverviewWidget {
 
 			topPadding: Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing / 2
 			horizontalItemAlignment: Grid.AlignHCenter
-			visible: !batteryData.idle
+			visible: batteryData.mode === Battery.Mode.Charging
 
 			columns: {
 				const maxWidth = parent.width - Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*4
@@ -204,10 +204,10 @@ OverviewWidget {
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
 
-			text: batteryData.idle
+			text: batteryData.mode === Battery.Mode.Idle
 					//% "Idle"
 				  ? qsTrId("overview_widget_battery_idle")
-				  : (batteryData.current > 0
+				  : (batteryData.mode === Battery.Mode.Charging
 					  //% "Charging"
 					? qsTrId("overview_widget_battery_charging")
 					  //% "Discharging"
