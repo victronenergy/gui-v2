@@ -12,12 +12,21 @@ Item {
 	// Model of all solar trackers for all solar chargers
 	property ListModel model: ListModel {}
 
-	// Overall voltage and power for all chargers
-	property real voltage
-	property real power
+	// Overall solar power
+	readonly property real power: isNaN(acPower) && isNaN(dcPower)
+			? NaN
+			: (isNaN(acPower) ? 0 : acPower) + (isNaN(dcPower) ? 0 : dcPower)
+	property real acPower: NaN
+	readonly property real dcPower: veDcPower.value === undefined ? NaN : veDcPower.value
+
 	property var yieldHistory: []
 
 	property var _solarChargers: []
+
+	onPowerChanged: {
+		// Set max tracker power based on total number of trackers
+		Utils.updateMaximumValue("solarTracker.power", power / Math.max(1, model.count))
+	}
 
 	function _getSolarChargers() {
 		const childIds = veDBus.childIds
@@ -33,25 +42,6 @@ Item {
 		if (Utils.arrayCompare(_solarChargers, solarChargerIds) !== 0) {
 			_solarChargers = solarChargerIds
 		}
-	}
-
-	function _updateTotalVoltage() {
-		let v = 0
-		for (let i = 0; i < _chargersInstantiator.count; ++i) {
-			v += _chargersInstantiator.objectAt(i).voltage
-		}
-		voltage = v
-	}
-
-	function _updateTotalPower() {
-		let p = 0
-		for (let i = 0; i < _chargersInstantiator.count; ++i) {
-			p += _chargersInstantiator.objectAt(i).power
-		}
-		power = p
-
-		// Set max tracker power based on total number of trackers
-		Utils.updateMaximumValue("solarTracker.power", power / Math.max(1, model.count))
 	}
 
 	function _updateYieldHistory() {
@@ -81,6 +71,77 @@ Item {
 		}
 	}
 
+	// AC power is the total power from Ac/PvOnGrid, Ac/PvOnGenset and Ac/PvOnOutput.
+	Instantiator {
+		id: acPvMonitor
+
+		function updateAcPower() {
+			let p = NaN
+			for (let i = 0; i < count; ++i) {
+				const value = objectAt(i).power
+				if (value !== undefined) {
+					if (isNaN(p)) {
+						p = 0
+					}
+					p += value
+				}
+			}
+			root.acPower = p
+		}
+
+		model: [
+			"dbus/com.victronenergy.system/Ac/PvOnGrid",
+			"dbus/com.victronenergy.system/Ac/PvOnGenset",
+			"dbus/com.victronenergy.system/Ac/PvOnOutput"
+		]
+
+		delegate: QtObject {
+			id: acPvDelegate
+
+			readonly property string dbusUid: modelData
+			property real power: NaN
+
+			function updatePower() {
+				let p = NaN
+				for (let i = 0; i < pvPhases.count; ++i) {
+					const value = pvPhases.objectAt(i).value
+					if (value !== undefined) {
+						if (isNaN(p)) {
+							p = 0
+						}
+						p += value
+					}
+				}
+				power = p
+				acPvMonitor.updateAcPower()
+			}
+
+			property var vePhaseCount: VeQuickItem {
+				uid: acPvDelegate.dbusUid + "/NumberOfPhases"
+				onValueChanged: {
+					const phaseCount = value === undefined ? 0 : value
+					if (pvPhases.count !== phaseCount) {
+						pvPhases.model = phaseCount
+					}
+				}
+			}
+
+			// Each Ac/PvOnX uid has 1-3 phases with power, e.g. Ac/PvOnGrid/L1/Power, Ac/PvOnGrid/L2/Power
+			property var pvPhases: Instantiator {
+				delegate: VeQuickItem {
+					uid: acPvDelegate.dbusUid + "/L" + (model.index + 1) + "/Power"
+					onValueChanged: acPvDelegate.updatePower()
+				}
+			}
+		}
+	}
+
+	VeQuickItem {
+		id: veDcPower
+
+		uid: "dbus/com.victronenergy.system/Dc/Pv/Power"
+	}
+
 	Connections {
 		target: veDBus
 		function onChildIdsChanged() { Qt.callLater(_getSolarChargers) }
@@ -96,7 +157,6 @@ Item {
 			id: solarCharger
 
 			// Overall values for this charger
-			property real voltage
 			property real power
 			property var dailyYields: ({})
 			readonly property int historyCount: _historyIds.length
@@ -165,20 +225,9 @@ Item {
 				}
 			}
 
-			property var _veVoltage: VeQuickItem {
-				uid: _dbusUid ? "dbus/" + _dbusUid + "/Pv/V" : ""
-				onValueChanged: {
-					solarCharger.voltage = value === undefined ? 0 : value
-					root._updateTotalVoltage()
-				}
-			}
-
 			property var _veYield: VeQuickItem {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/Yield/Power" : ""
-				onValueChanged: {
-					solarCharger.power = value === undefined ? 0 : value
-					root._updateTotalPower()
-				}
+				onValueChanged: solarCharger.power = value === undefined ? 0 : value
 			}
 
 			property var _vePvConfig: VeQuickItem {
@@ -204,7 +253,6 @@ Item {
 			// Used when there is only a single solar tracker for this charger. Properties must be
 			// same as those in the multi-tracker model.
 			property var _singleTracker: QtObject {
-				property real voltage: solarCharger.voltage
 				property real power: solarCharger.power
 			}
 
@@ -217,8 +265,7 @@ Item {
 					property string uid: modelData
 					property string dbusUid: "dbus/" + _dbusUid + "/Pv/" + solarTracker.uid
 
-					// Voltage and power for this tracker only
-					property real voltage
+					// Power for this tracker only
 					property real power
 
 					property bool _valid
@@ -228,14 +275,6 @@ Item {
 							root.model.append({ solarTracker: solarTracker })
 						} else if (!_valid && index >= 0) {
 							root.model.remove(index)
-						}
-					}
-
-					property VeQuickItem _voltage: VeQuickItem {
-						uid: dbusUid ? dbusUid + "/V" : ""
-						onValueChanged: {
-							_valid |= (value === undefined)
-							solarTracker.voltage = value === undefined ? 0 : value
 						}
 					}
 					property VeQuickItem _power: VeQuickItem {
