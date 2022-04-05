@@ -34,13 +34,13 @@ Item {
 	property var _generators: []
 
 	function _getGenerators() {
-		const childIds = veStartStop.childIds
+		const childIds = veDBus.childIds
 
 		let generatorIds = []
 		for (let i = 0; i < childIds.length; ++i) {
 			let id = childIds[i]
-			if ([ 'Generator0', 'Generator1', 'FischerPanda0' ].indexOf(id) !== -1) {
-				generatorIds.push(id)
+			if (id.startsWith("com.victronenergy.generator.")) {
+				generatorIds.push(childIds[i])
 			}
 		}
 
@@ -49,13 +49,8 @@ Item {
 		}
 	}
 
-	VeQuickItem {
-		id: veStartStop
-		uid: "dbus/com.victronenergy.generator.startstop0"
-	}
-
 	Connections {
-		target: veStartStop
+		target: veDBus
 		function onChildIdsChanged() { Qt.callLater(_getGenerators) }
 		Component.onCompleted: _getGenerators()
 	}
@@ -66,7 +61,7 @@ Item {
 			id: generator
 
 			property string uid: modelData
-			property string dbusUid: veStartStop.uid + "/" + generator.uid
+			property string dbusUid: "dbus/" + uid
 
 			property int state: -1
 			property int manualStartTimer
