@@ -56,6 +56,8 @@ Item {
 	}
 
 	Instantiator {
+		id: generatorObjects
+
 		model: _generators
 		delegate: QtObject {
 			id: generator
@@ -67,6 +69,7 @@ Item {
 			property int manualStartTimer
 			property int runtime: -1
 			property int runningBy: -1
+			property int deviceInstance: -1
 
 			function start(durationSecs) {
 				_manualStartTimer.setValue(durationSecs)
@@ -112,6 +115,24 @@ Item {
 			property VeQuickItem _runningBy: VeQuickItem {
 				uid: dbusUid + "/RunningByConditionCode"
 				onValueChanged: generator.runningBy = value === undefined ? -1 : value
+			}
+			property VeQuickItem _deviceInstance: VeQuickItem {
+				uid: dbusUid + "/DeviceInstance"
+				onValueChanged: {
+					generator.deviceInstance = value === undefined ? -1 : value
+
+					// Set generator0 to the one with the lowest DeviceInstance
+					if (!root.generator0 && generator.deviceInstance >= 0) {
+						root.generator0 = generator
+					}
+					for (let i = 0; i < generatorObjects.count; ++i) {
+						const currentGenerator = generatorObjects.objectAt(i)
+						if (currentGenerator.deviceInstance >= 0
+								&& currentGenerator.deviceInstance < root.generator0.deviceInstance) {
+							root.generator0 = currentGenerator
+						}
+					}
+				}
 			}
 		}
 	}
