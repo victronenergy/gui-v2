@@ -6,6 +6,8 @@
 #include "logging.h"
 #include "theme.h"
 
+#include <math.h>
+
 #include <velib/qt/v_busitems.h>
 #include <velib/qt/ve_qitems_dbus.hpp>
 #include <velib/qt/ve_qitem.hpp>
@@ -317,10 +319,14 @@ int main(int argc, char *argv[])
 
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
-	engine.setProperty("screenSize", Victron::VenusOS::Theme::FiveInch);
-	//(QGuiApplication::primaryScreen()->availableSize().height() < 1024)
-	//		? Victron::VenusOS::Theme::FiveInch
-	//		: Victron::VenusOS::Theme::SevenInch);
+
+	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
+	const int screenDiagonalMm = sqrt((physicalScreenSize.width() * physicalScreenSize.width())
+			+ (physicalScreenSize.height() * physicalScreenSize.height()));
+	engine.setProperty("screenSize", (round(screenDiagonalMm / 10 / 2.5) == 7)
+			? Victron::VenusOS::Theme::SevenInch
+			: Victron::VenusOS::Theme::FiveInch);
+
 	engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
