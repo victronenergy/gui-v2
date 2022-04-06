@@ -13,6 +13,7 @@ Row {
 	property int precision: 3 // this will display 1.23kW, given a value of 1234
 	property alias valueColor: valueLabel.color
 	property alias font: valueLabel.font
+	property bool alignToBaseline
 
 	readonly property var _displayValue: Units.getDisplayText(physicalQuantity, value, precision)
 
@@ -21,7 +22,7 @@ Row {
 	// Restrict the height to the baseline to align the baseline of labels in different
 	// ValueQuantityDisplay items with different font sizes (e.g. horizontally-aligned
 	// EnvironmentGauge labels with different sizes).
-	height: Math.ceil(valueLabel.baselineOffset)
+	height: alignToBaseline ? Math.ceil(valueLabel.baselineOffset) : implicitHeight
 
 	Label {
 		id: valueLabel

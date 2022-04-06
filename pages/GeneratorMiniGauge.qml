@@ -31,6 +31,6 @@ ArcGauge {
 		value: system ? system.generator.power : 0
 		icon.source: "qrc:/images/generator.svg"
 		alignment: Qt.AlignRight
-		fontSize: Theme.briefPage.gauge.label.font.size
+		fontSize: Theme.font.size.xl
 	}
 }

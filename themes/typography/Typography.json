@@ -5,8 +5,5 @@
     "font.size.l": 28,
     "font.size.xl": 36,
     "font.size.xxl": 56,
-    "font.size.xxxl": 68,
-    "briefPage.gauge.label.font.size": 34,
-    "levelsPage.percentageText.font.size": 34,
-    "levelsPage.buttons.font.size": 18
+    "font.size.xxxl": 68
 }

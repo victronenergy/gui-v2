@@ -105,22 +105,36 @@ Page {
 				- Theme.geometry.navigationBar.height
 				- Theme.geometry.overviewPage.layout.compact.topMargin
 				- Theme.geometry.overviewPage.layout.compact.bottomMargin
-		const compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
+		let compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
 
 		const expandedPageHeight = Theme.geometry.screen.height
 				- Theme.geometry.statusBar.height
 				- Theme.geometry.overviewPage.layout.expanded.topMargin
 				- Theme.geometry.overviewPage.layout.expanded.bottomMargin
-		const expandedWidgetsTopMargin = Math.max(0, (expandedPageHeight - expandedWidgetHeights) / Math.max(1, widgets.length - 1))
+		let expandedWidgetsTopMargin = Math.max(0, (expandedPageHeight - expandedWidgetHeights) / Math.max(1, widgets.length - 1))
+
+		if (widgets === _leftWidgets
+				&& widgets.length >= Theme.geometry.overviewPage.layout.segmentedWidgetThreshold) {
+			// For a segmented widget layout, increase the widget height by a proportion of the
+			// margin (so the increase is spread out over all of the widgets).
+			const reductionRatio = (Theme.geometry.overviewPage.layout.segmentedWidgetThreshold - 1)
+					/ Theme.geometry.overviewPage.layout.segmentedWidgetThreshold
+			compactWidgetsTopMargin = compactWidgetsTopMargin * reductionRatio
+			expandedWidgetsTopMargin = expandedWidgetsTopMargin * reductionRatio
+		}
 
 		let prevWidget = null
 		for (i = 0; i < widgets.length; ++i) {
+			// Position each widget below the previous widget in this set.
 			widget = widgets[i]
 			if (i > 0) {
 				prevWidget = widgets[i-1]
 				widget.compactY = prevWidget.compactY + prevWidget.getCompactHeight(prevWidget.size) + compactWidgetsTopMargin
 				widget.expandedY = prevWidget.expandedY + prevWidget.getExpandedHeight(prevWidget.size) + expandedWidgetsTopMargin
 			}
+			// Position the segment border correctly when showing as segments.
+			widget.segmentCompactMargin = compactWidgetsTopMargin
+			widget.segmentExpandedMargin = expandedWidgetsTopMargin
 		}
 	}
 
@@ -244,8 +258,8 @@ Page {
 		}
 
 		if (connectorWidget.endWidget === inverterWidget) {
-				// For AC inputs, positive power means energy is flowing towards inverter/charger,
-				// and negative power means energy is flowing towards the input.
+			// For AC inputs, positive power means energy is flowing towards inverter/charger,
+			// and negative power means energy is flowing towards the input.
 			return power > Theme.geometry.overviewPage.connector.animationPowerThreshold
 					? WidgetConnector.AnimationMode.StartToEnd
 					: WidgetConnector.AnimationMode.EndToStart
