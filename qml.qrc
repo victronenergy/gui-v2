@@ -68,6 +68,7 @@
         <file>components/ValueDisplay.qml</file>
         <file>components/ValueQuantityDisplay.qml</file>
         <file>components/VenusFont.qml</file>
+        <file>components/VerticalGauge.qml</file>
         <file>components/WeatherDetails.qml</file>
         <file>data/AcInputs.qml</file>
         <file>data/AcInputServiceLoader.qml</file>

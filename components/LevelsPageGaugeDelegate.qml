@@ -128,7 +128,7 @@ Rectangle {
 			bottom: valueText.top
 			bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
 		}
-		font.pixelSize: Theme.levelsPage.percentageText.font.size
+		font.pixelSize: Theme.font.size.xl
 		physicalQuantity: Units.PhysicalQuantity.Percentage
 		value: root.level
 	}

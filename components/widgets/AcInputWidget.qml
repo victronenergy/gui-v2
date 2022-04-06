@@ -22,9 +22,12 @@ OverviewWidget {
 	property list<ThreePhaseDisplay> _phases: [
 		ThreePhaseDisplay {
 			anchors {
-				fill: parent
+				left: parent ? parent.left : undefined
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
-				rightMargin: Theme.geometry.overviewPage.widget.sideGauge.margins
+				right: parent ? parent.right : undefined
+				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				bottom: parent ? parent.bottom : undefined
+				bottomMargin: Theme.geometry.overviewPage.widget.content.verticalMargin
 			}
 
 			visible: model != null && root.size >= OverviewWidget.Size.L

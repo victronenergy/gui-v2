@@ -42,7 +42,7 @@ Rectangle {
 	property alias title: valueDisplay.title
 
 	property alias sideGaugeVisible: sideGauge.visible
-	property real sideGaugeValue
+	property alias sideGaugeValue: sideGauge.value
 
 	property alias extraContent: extraContent
 	property bool isSegment
@@ -51,6 +51,8 @@ Rectangle {
 	property real expandedY
 	readonly property int compactHeight: getCompactHeight(size)
 	readonly property int expandedHeight: getExpandedHeight(size)
+	property real segmentCompactMargin
+	property real segmentExpandedMargin
 	property bool expanded
 	property bool animateGeometry
 
@@ -61,8 +63,8 @@ Rectangle {
 			? Theme.geometry.overviewPage.widget.compact.l.height
 			: s === OverviewWidget.Size.M
 			  ? Theme.geometry.overviewPage.widget.compact.m.height
-			  : s === OverviewWidget.Size.Size
-			  ? Theme.geometry.overviewPage.widget.compact.Size.height
+			  : s === OverviewWidget.Size.S
+			  ? Theme.geometry.overviewPage.widget.compact.s.height
 			  : Theme.geometry.overviewPage.widget.compact.xs.height
 	}
 
@@ -78,11 +80,11 @@ Rectangle {
 				: Theme.geometry.overviewPage.widget.expanded.xs.height
 	}
 
-	signal clicked()
-
 	y: expanded ? expandedY : compactY
 	width: Theme.geometry.overviewPage.widget.width
-	height: expanded ? expandedHeight : compactHeight
+	height: expanded
+			? expandedHeight + (isSegment ? segmentExpandedMargin : 0)
+			: compactHeight + (isSegment ? segmentCompactMargin : 0)
 	visible: size !== OverviewWidget.Size.Zero
 	radius: isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
 	border.width: enabled && !isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
@@ -105,13 +107,7 @@ Rectangle {
 		}
 	}
 
-	MouseArea {
-		id: mouseArea
-		anchors.fill: parent
-		onClicked: root.clicked()
-	}
-
-	Rectangle {
+	VerticalGauge {
 		id: sideGauge
 		anchors {
 			top: parent.top
@@ -119,66 +115,23 @@ Rectangle {
 			right: parent.right
 			margins: Theme.geometry.overviewPage.widget.sideGauge.margins
 		}
-
-		property real value: Math.max(0, Math.min(1.0, root.sideGaugeValue)) // 0.0 -> 1.0
-		visible: false
 		width: Theme.geometry.overviewPage.widget.sideGauge.width
 		radius: Theme.geometry.overviewPage.widget.sideGauge.radius
-		color: Theme.color.overviewPage.widget.sideGauge.background
-
-		// We could do the highlight more accurately (and it would scale nicer)
-		// with a single full-height rounded rectangle inside a clip item.
-		// However, that would require adding a clip, which can affect performance.
-
-		Rectangle {
-			id: highlightTop
-			anchors {
-				top: parent.top
-				left: parent.left
-				right: parent.right
-			}
-
-			radius: parent.radius
-			height: parent.value === 1.0 ? 2*radius : 0
-			color: Theme.color.overviewPage.widget.sideGauge.highlight
-		}
-
-		Rectangle {
-			id: highlight
-			anchors {
-				bottom: highlightBottom.verticalCenter
-				left: parent.left
-				right: parent.right
-			}
-			height: Math.max(0, (parent.value * parent.height) - 2*parent.radius)
-			color: Theme.color.overviewPage.widget.sideGauge.highlight
-		}
-
-		Rectangle {
-			id: highlightBottom
-			anchors {
-				bottom: parent.bottom
-				left: parent.left
-				right: parent.right
-			}
-
-			radius: parent.radius
-			height: parent.value > 0.0004 ? 2*radius : 0
-			color: Theme.color.overviewPage.widget.sideGauge.highlight
-		}
+		backgroundColor: Theme.color.overviewPage.widget.sideGauge.background
+		foregroundColor: Theme.color.overviewPage.widget.sideGauge.highlight
+		visible: false
 	}
 
 	ValueDisplay {
 		id: valueDisplay
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry.overviewPage.widget.content.verticalMargin
-			left: parent.left
-			leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
-		}
+
+		x: Theme.geometry.overviewPage.widget.content.horizontalMargin
+		y: root.size > OverviewWidget.Size.S
+		   ? Theme.geometry.overviewPage.widget.content.verticalMargin
+		   : parent.height/2 - height/2
 		fontSize: root.size === OverviewWidget.Size.XS
-				  ? Theme.font.size.l
-				  : Theme.font.size.xl
+				  ? Theme.geometry.overviewPage.widget.value.minimumFontSize
+				  : Theme.geometry.overviewPage.widget.value.maximumFontSize
 	}
 
 	Item {

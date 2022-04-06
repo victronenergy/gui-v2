@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 
-Rectangle {
+VerticalGauge {
 	id: root
 
 	enum WarningLevel {
@@ -17,7 +17,6 @@ Rectangle {
 	}
 
 	property int gaugeValueType
-	property real value: 0.0
 	property bool isGrouped: false
 
 	// TODO: hook up to real warning / critical levels
@@ -49,20 +48,10 @@ Rectangle {
 		Theme.color.critical,
 		Theme.color.critical
 	]
-	readonly property var _barGaugeBackgroundColor: _backgroundColors[_warningLevel]
-	readonly property color _barGaugeForegroundColor: _foregroundColors[_warningLevel]
 
+	backgroundColor: _backgroundColors[_warningLevel]
+	foregroundColor: _foregroundColors[_warningLevel]
 	radius: Theme.geometry.levelsPage.tankGauge.radius
-	gradient: Gradient { // Take care if modifying this; be sure to test the edge cases of value == 0.0 and value == 1.0
-		GradientStop { position: 0.0; color: root.value >= 1.0 ? root._barGaugeForegroundColor : root._barGaugeBackgroundColor }
-		GradientStop { position: Math.min(0.999999, (1.0 - root.value)); color: root.value >= 1.0 ? root._barGaugeForegroundColor : root._barGaugeBackgroundColor }
-		GradientStop { position: Math.min(1.0, (1.0 - root.value) + 0.001); color: root.value <= 0.0 ? root._barGaugeBackgroundColor : root._barGaugeForegroundColor }
-		GradientStop { position: 1.0; color: root.value <= 0.0 ? root._barGaugeBackgroundColor : root._barGaugeForegroundColor }
-	}
-
-	Behavior on value {
-		NumberAnimation {}
-	}
 
 	Rectangle {
 		width: parent.width

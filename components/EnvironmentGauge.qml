@@ -137,5 +137,6 @@ Item {
 			horizontalCenter: parent.horizontalCenter
 		}
 		font.pixelSize: root.reduceFontSize ? Theme.font.size.m : Theme.font.size.xl
+		alignToBaseline: true
 	}
 }
