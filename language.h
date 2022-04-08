@@ -35,7 +35,8 @@ Q_SIGNALS:
 	void currentLanguageChanged();
 
 private:
-	QLocale::Language m_currentLanguage = QLocale::English;
+	bool installTranslatorForLanguage(QLocale::Language language);
+	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
 	QQmlEngine* m_qmlEngine = nullptr;
 	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
 };
