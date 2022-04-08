@@ -5,6 +5,7 @@
 import QtQuick
 import QtQuick.Shapes
 import Victron.VenusOS
+import Qt5Compat.GraphicalEffects
 
 Shape {
 	id: root
@@ -24,7 +25,12 @@ Shape {
 
 	smooth: true
 	layer.enabled: true
-	layer.samples: 8
+	//layer.samples: 4
+	layer.effect: FastBlur {
+		transparentBorder: true
+		radius: 4
+	}
+
 	NumberAnimation on offset {
 		id: animation
 

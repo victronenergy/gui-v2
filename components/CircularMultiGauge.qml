@@ -6,6 +6,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
+import Qt5Compat.GraphicalEffects
 
 Item {
 	id: gauges
@@ -21,7 +22,11 @@ Item {
 
 		// Antialiasing
 		layer.enabled: true
-		layer.samples: 4
+		//layer.samples: 4
+		layer.effect: FastBlur {
+			transparentBorder: true
+			radius: 4
+		}
 
 		Repeater {
 			id: arcRepeater

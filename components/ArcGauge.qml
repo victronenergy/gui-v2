@@ -5,6 +5,7 @@
 import QtQuick
 import QtQuick.Window
 import Victron.VenusOS
+import Qt5Compat.GraphicalEffects
 
 // A progress gauge running an on arc, where 0° is at the top, and positive is clockwise
 Item {
@@ -25,7 +26,11 @@ Item {
 		// Antialiasing
 		anchors.fill: parent
 		layer.enabled: true
-		layer.samples: 4
+		//layer.samples: 4
+		layer.effect: FastBlur {
+			transparentBorder: true
+			radius: 4
+		}
 
 		ProgressArc {
 			id: arc
