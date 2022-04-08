@@ -12,7 +12,6 @@
 #include <velib/qt/ve_qitems_dbus.hpp>
 #include <velib/qt/ve_qitem.hpp>
 
-#include <QTranslator>
 #include <QGuiApplication>
 #include <QQmlComponent>
 #include <QQmlContext>
@@ -31,7 +30,7 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
 		"Victron.VenusOS", 2, 0, "Theme",
 		&Victron::VenusOS::Theme::instance);
-	qmlRegisterSingletonType<Victron::VenusOS::Language>(
+	const int languageSingletonId = qmlRegisterSingletonType<Victron::VenusOS::Language>(
 		"Victron.VenusOS", 2, 0, "Language",
 		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
 			return new Victron::VenusOS::Language(engine);
@@ -304,21 +303,11 @@ int main(int argc, char *argv[])
 		producer->open(VBusItems::getConnection());
 	}
 
-	/* Load appropriate translations, e.g. :/i18n/venus-gui-v2_fr.qm */
-	QTranslator translator;
-	if (translator.load(
-		QLocale(),
-		QLatin1String("venus-gui-v2"),
-		QLatin1String("_"),
-		QLatin1String(":/i18n"))) {
-		QCoreApplication::installTranslator(&translator);
-		qCDebug(venusGui) << "Successfully loaded translations for locale" << QLocale().name();
-	} else {
-		qCWarning(venusGui) << "Unable to load translations for locale" << QLocale().name();
-	}
-
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
+
+	/* Force construction of translator */
+	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
 
 	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
 	const int screenDiagonalMm = sqrt((physicalScreenSize.width() * physicalScreenSize.width())
