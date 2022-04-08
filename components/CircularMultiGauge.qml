@@ -17,11 +17,11 @@ Item {
 	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry.circularMultiGauge.spacing)
 
 	Item {
-		anchors.fill: parent
-
-		// Antialiasing
-		layer.enabled: true
-		layer.samples: 4
+		id: arcGauges
+		readonly property int antialiasingFactor: 2
+		width: parent.width*antialiasingFactor
+		height: parent.height*antialiasingFactor
+		visible: false
 
 		Repeater {
 			id: arcRepeater
@@ -29,7 +29,7 @@ Item {
 			model: gauges.model
 			delegate: ProgressArc {
 				property int status: Gauges.getValueStatus(model.value, model.valueType)
-				width: parent.width - (strokeWidth + index*_stepSize)
+				width: parent.width - (strokeWidth + index*_stepSize*arcGauges.antialiasingFactor)
 				height: width
 				anchors.centerIn: parent
 				radius: width/2
@@ -38,10 +38,16 @@ Item {
 				value: model.value
 				progressColor: Theme.statusColorValue(status)
 				remainderColor: Theme.statusColorValue(status, true)
-				strokeWidth: gauges.strokeWidth
+				strokeWidth: gauges.strokeWidth * arcGauges.antialiasingFactor
 				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
 			}
 		}
+	}
+	ShaderEffectSource {
+		id: antialiasedArcGauges
+		anchors.fill: parent
+		sourceItem: arcGauges
+		smooth: true
 	}
 
 	Item {

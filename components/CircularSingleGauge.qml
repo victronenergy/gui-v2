@@ -15,16 +15,16 @@ Item {
 	property alias caption: captionLabel.text
 
 	Item {
-		anchors.fill: parent
-
-		// Antialiasing
-		layer.enabled: true
-		layer.samples: 4
+		id: arcGauge
+		readonly property int antialiasingFactor: 2
+		width: parent.width*antialiasingFactor
+		height: parent.height*antialiasingFactor
+		visible: false
 
 		ProgressArc {
 			property int status: Gauges.getValueStatus(model.value, model.valueType)
 			
-			width: gauges.width - strokeWidth
+			width: parent.width - strokeWidth
 			height: width
 			anchors.centerIn: parent
 			radius: width/2
@@ -33,8 +33,14 @@ Item {
 			value: model.value
 			progressColor: Theme.statusColorValue(status)
 			remainderColor: Theme.statusColorValue(status, true)
-			strokeWidth: gauges.strokeWidth
+			strokeWidth: gauges.strokeWidth * arcGauge.antialiasingFactor
 		}
+	}
+	ShaderEffectSource {
+		id: antialiasedArcGauge
+		anchors.fill: parent
+		sourceItem: arcGauge
+		smooth: true
 	}
 
 	Column {

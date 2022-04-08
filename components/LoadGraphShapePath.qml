@@ -24,7 +24,6 @@ Shape {
 
 	smooth: true
 	layer.enabled: true
-	layer.samples: 8
 	NumberAnimation on offset {
 		id: animation
 
