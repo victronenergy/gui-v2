@@ -149,7 +149,7 @@ ControlCard {
 			id: subcardBgRect
 			anchors.fill: parent
 			color: Theme.color.background.tertiary
-			radius: Theme.geometry.controlCard.radius
+			radius: Theme.geometry.panel.radius
 		}
 
 		Label {

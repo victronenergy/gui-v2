@@ -334,7 +334,7 @@ Page {
 		name: 'panelOpen'
 		PropertyChanges {
 			target: sidePanel
-			x: root.width - sidePanel.width - Theme.geometry.page.grid.horizontalMargin
+			x: root.width - sidePanel.width - Theme.geometry.page.content.horizontalMargin
 			opacity: 1
 		}
 		PropertyChanges {

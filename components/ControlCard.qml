@@ -13,8 +13,8 @@ Rectangle {
 
 	width: Theme.geometry.controlCard.maximumWidth
 	height: parent ? parent.height : 0
-	color: Theme.colorScheme === Theme.Light ? Theme.color.background.primary : Theme.color.background.secondary
-	radius: Theme.geometry.controlCard.radius
+	color: Theme.color.background.secondary
+	radius: Theme.geometry.panel.radius
 
 	CP.IconLabel {
 		id: title

@@ -281,7 +281,7 @@ Page {
 		anchors {
 			top: parent.top
 			left: parent.left
-			leftMargin: Theme.geometry.page.grid.horizontalMargin
+			leftMargin: Theme.geometry.page.content.horizontalMargin
 		}
 		visible: _leftWidgets.length >= Theme.geometry.overviewPage.layout.segmentedWidgetThreshold
 		segments: _leftWidgets
@@ -295,7 +295,7 @@ Page {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.page.grid.horizontalMargin
+				leftMargin: Theme.geometry.page.content.horizontalMargin
 			}
 			expanded: PageManager.expandLayout
 			animateGeometry: PageManager.animatingIdleResize
@@ -326,7 +326,7 @@ Page {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.page.grid.horizontalMargin
+				leftMargin: Theme.geometry.page.content.horizontalMargin
 			}
 			expanded: PageManager.expandLayout
 			animateGeometry: PageManager.animatingIdleResize
@@ -357,7 +357,7 @@ Page {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.page.grid.horizontalMargin
+				leftMargin: Theme.geometry.page.content.horizontalMargin
 			}
 			expanded: PageManager.expandLayout
 			animateGeometry: PageManager.animatingIdleResize
@@ -387,7 +387,7 @@ Page {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.page.grid.horizontalMargin
+				leftMargin: Theme.geometry.page.content.horizontalMargin
 			}
 			expanded: PageManager.expandLayout
 			animateGeometry: PageManager.animatingIdleResize
@@ -417,7 +417,7 @@ Page {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.page.grid.horizontalMargin
+				leftMargin: Theme.geometry.page.content.horizontalMargin
 			}
 			expanded: PageManager.expandLayout
 			animateGeometry: PageManager.animatingIdleResize
@@ -446,7 +446,7 @@ Page {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.page.grid.horizontalMargin
+				leftMargin: Theme.geometry.page.content.horizontalMargin
 			}
 			expanded: PageManager.expandLayout
 			animateGeometry: PageManager.animatingIdleResize
@@ -475,7 +475,7 @@ Page {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.page.grid.horizontalMargin
+				leftMargin: Theme.geometry.page.content.horizontalMargin
 			}
 			expanded: PageManager.expandLayout
 			animateGeometry: PageManager.animatingIdleResize
@@ -601,7 +601,7 @@ Page {
 		id: acLoadsWidget
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry.page.grid.horizontalMargin
+			rightMargin: Theme.geometry.page.content.horizontalMargin
 		}
 		size: dcLoadsWidget.size === OverviewWidget.Size.Zero
 			  ? OverviewWidget.Size.XL
@@ -617,7 +617,7 @@ Page {
 		id: dcLoadsWidget
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry.page.grid.horizontalMargin
+			rightMargin: Theme.geometry.page.content.horizontalMargin
 		}
 		size: !!system && !isNaN(system.dc.power) ? OverviewWidget.Size.L : OverviewWidget.Size.Zero
 		expanded: PageManager.expandLayout
