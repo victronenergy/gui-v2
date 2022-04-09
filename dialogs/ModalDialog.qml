@@ -37,7 +37,7 @@ C.Dialog {
 		implicitWidth: Theme.geometry.modalDialog.width
 		implicitHeight: Theme.geometry.modalDialog.height
 		radius: Theme.geometry.modalDialog.radius
-		color: Theme.colorScheme === Theme.Light ? Theme.color.background.primary : Theme.color.background.secondary
+		color: Theme.color.background.secondary
 		border.color: Theme.color.background.disabled
 
 		Rectangle {

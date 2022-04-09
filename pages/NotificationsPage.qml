@@ -19,10 +19,10 @@ Page {
 	Column {
 		anchors {
 			top: label.bottom
-			topMargin: Theme.geometry.page.grid.horizontalMargin
+			topMargin: Theme.geometry.page.content.horizontalMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		spacing: Theme.geometry.page.grid.horizontalMargin
+		spacing: Theme.geometry.page.content.horizontalMargin
 
 		Button {
 			anchors.horizontalCenter: parent.horizontalCenter

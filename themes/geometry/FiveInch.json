@@ -16,9 +16,7 @@
     "geometry.screen.width": 800,
     "geometry.screen.height": 480,
 
-    "geometry.page.grid.horizontalMargin": 24,
-    "geometry.page.grid.columnWidth": 48,
-    "geometry.page.grid.gutter": 16,
+    "geometry.page.content.horizontalMargin": 24,
 
     "geometry.button.spacing": 7,
     "geometry.button.radius": 6,
@@ -26,6 +24,9 @@
 
     "geometry.buttonControlValue.height": 40,
     "geometry.buttonControlValue.width": 112,
+
+    "geometry.panel.radius": 8,
+    "geometry.panel.content.margins": 16,
 
     "geometry.progressBar.height": 8,
     "geometry.progressBar.radius": 8,
@@ -56,7 +57,7 @@
     "geometry.statusBar.height": 48,
     "geometry.statusBar.button.width": 32,
     "geometry.statusBar.button.height": 32,
-    "geometry.statusBar.horizontalMargin": "geometry.page.grid.horizontalMargin",
+    "geometry.statusBar.horizontalMargin": "geometry.page.content.horizontalMargin",
 
     "geometry.tabBar.width": 368,
     "geometry.tabBar.height": 40,
@@ -107,10 +108,10 @@
     "geometry.modalWarningDialog.alarmIcon.topMargin": 44,
     "geometry.modalWarningDialog.alarmIcon.width": 48,
     "geometry.modalWarningDialog.title.spacing": 32,
-    "geometry.modalWarningDialog.title.horizontalMargin": "geometry.page.grid.horizontalMargin",
+    "geometry.modalWarningDialog.title.horizontalMargin": "geometry.page.content.horizontalMargin",
     "geometry.modalWarningDialog.title.height": 24,
     "geometry.modalWarningDialog.description.spacing": 12,
-    "geometry.modalWarningDialog.description.horizontalMargin": "geometry.page.grid.horizontalMargin",
+    "geometry.modalWarningDialog.description.horizontalMargin": "geometry.page.content.horizontalMargin",
 
     "geometry.arc.strokeWidth": 8,
     "geometry.progressArc.strokeWidth": 8,
@@ -130,7 +131,7 @@
 
     "geometry.controlCardsPage.bottomMargin": 16,
     "geometry.controlCardsPage.spacing": 16,
-    "geometry.controlCardsPage.horizontalMargin": "geometry.page.grid.horizontalMargin",
+    "geometry.controlCardsPage.horizontalMargin": "geometry.page.content.horizontalMargin",
 
     "geometry.briefPage.centerGauge.maximumGaugeCount": 4,
     "geometry.briefPage.centerGauge.icon.height": 22,
