@@ -11,6 +11,24 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	title: navStack.currentItem.title || ""
+	navigationButton: navStack.depth > 1
+			? StatusBar.NavigationButton.Back
+			: StatusBar.NavigationButton.ControlsInactive
+	hasSidePanel: navStack.currentItem.hasSidePanel
+
+	Connections {
+		target: PageManager.emitter
+
+		function onPagePushRequested(obj, properties) {
+			navStack.push(obj, properties)
+		}
+
+		function onPagePopRequested() {
+			navStack.pop()
+		}
+	}
+
 	C.StackView {
 		id: navStack
 		clip: true
@@ -96,7 +114,6 @@ Page {
 		}
 
 		property var currentUrl: navBar.model.get(0).url
-		onCurrentUrlChanged: PageManager.sidePanelVisible = (currentUrl == navBar.model.get(0).url)
 		onButtonClicked: function (buttonIndex) {
 			var navUrl = model.get(buttonIndex).url
 			if (navUrl != currentUrl) {
@@ -147,7 +164,6 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.controlsVisible = true
 					PageManager.interactivity = PageManager.InteractionMode.Interactive
 				}
 			}
@@ -159,11 +175,6 @@ Page {
 			running: PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
 					 || PageManager.interactivity === PageManager.InteractionMode.BeginFullScreen
 
-			ScriptAction {
-				script: {
-					PageManager.controlsVisible = false
-				}
-			}
 			OpacityAnimator {
 				target: navBar
 				from: 1.0

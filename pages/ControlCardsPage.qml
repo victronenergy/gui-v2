@@ -14,6 +14,8 @@ Page {
 			? Theme.geometry.controlCard.minimumWidth
 			: Theme.geometry.controlCard.maximumWidth
 
+	navigationButton: StatusBar.NavigationButton.ControlsActive
+
 	ListView {
 		id: cardsView
 

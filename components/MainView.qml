@@ -11,25 +11,29 @@ Item {
 	StatusBar {
 		id: statusBar
 
-		controlsVisible: PageManager.controlsVisible
-		sidePanelVisible: PageManager.sidePanelVisible
-		property bool hidden: statusBar.y === -statusBar.height
-		property bool sidePanelWasVisible
+		title: pageStack.currentItem.title || ""
+
+		navigationButton:  pageStack.currentItem.navigationButton
+		navigationButtonEnabled: PageManager.interactivity === PageManager.InteractionMode.Interactive
+		sidePanelButtonEnabled: PageManager.interactivity === PageManager.InteractionMode.Interactive
+				&& pageStack.currentItem.hasSidePanel
 
 		Component.onCompleted: PageManager.statusBar = statusBar
 
-		onControlsActiveChanged: {
-			if (controlsActive) {
-				if (PageManager.sidePanelVisible) {
-					statusBar.sidePanelWasVisible = true
-				}
-				PageManager.sidePanelVisible = false
-				PageManager.pushPage("qrc:/pages/ControlCardsPage.qml")
-			} else {
+		onNavigationButtonClicked: {
+			switch (navigationButton) {
+			case StatusBar.NavigationButton.ControlsInactive:
+				PageManager.pushLayer("qrc:/pages/ControlCardsPage.qml")
+				break
+			case StatusBar.NavigationButton.ControlsActive:
+				PageManager.popLayer()
+				break
+			case StatusBar.NavigationButton.Back:
 				PageManager.popPage()
-				if (statusBar.sidePanelWasVisible) {
-					PageManager.sidePanelVisible = true
-				}
+				break
+			default:
+				console.warn("Unrecognised navigation button", navigationButton)
+				break
 			}
 		}
 
@@ -50,12 +54,12 @@ Item {
 		Connections {
 			target: PageManager.emitter
 
-			function onPagePushRequested() {
-				pageStack.push(PageManager.pageToPush)
+			function onLayerPushRequested(obj, properties) {
+				pageStack.push(obj, properties)
 				PageManager.mainPageActive = pageStack.depth === 1
 			}
 
-			function onPagePopRequested() {
+			function onLayerPopRequested() {
 				pageStack.pop()
 				PageManager.mainPageActive = pageStack.depth === 1
 			}

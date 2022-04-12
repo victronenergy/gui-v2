@@ -9,46 +9,59 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property bool controlsActive
-	property bool controlsVisible: true
+	enum NavigationButton {
+		ControlsInactive,
+		ControlsActive,
+		Back
+	}
+
+	property string title
+	property int navigationButton: StatusBar.NavigationBar.ControlsInactive
+	property alias navigationButtonEnabled: navigationButton.enabled
 	property bool sidePanelActive
-	property bool sidePanelVisible
+	property alias sidePanelButtonEnabled: sidePanelButton.enabled
+
+	signal navigationButtonClicked()
 
 	width: parent.width
 	height: Theme.geometry.statusBar.height
 
 	Button {
-		id: controlsButton
+		id: navigationButton
 
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry.statusBar.horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
-
-		height: Theme.geometry.statusBar.button.height
 		width: Theme.geometry.statusBar.button.width
+		height: Theme.geometry.statusBar.button.height
+		icon.width: Theme.geometry.statusBar.button.icon.width
+		icon.height: Theme.geometry.statusBar.button.icon.height
 		display: C.AbstractButton.IconOnly
 		color: Theme.color.ok
-		icon.source: root.controlsActive ? "qrc:/images/controls-toggled.svg" : "qrc:/images/controls.svg"
-		icon.width: 28
-		icon.height: 28
-		onClicked: root.controlsActive = !root.controlsActive
+		icon.source: root.navigationButton === StatusBar.NavigationButton.ControlsInactive
+					 ? "qrc:/images/icon_controls_off_32.svg"
+					 : root.navigationButton === StatusBar.NavigationButton.ControlsActive
+					   ? "qrc:/images/icon_controls_on_32.svg"
+					   : "qrc:/images/icon_back_32.svg"
 
-		enabled: controlsVisible
-		opacity: controlsVisible ? 1.0 : 0.0
+		opacity: enabled ? 1.0 : 0.0
 		Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration } }
+
+		onClicked: root.navigationButtonClicked()
 	}
 
 	Label {
 		id: clockLabel
 		anchors.centerIn: parent
 		font.pixelSize: 22
-		text: clockTimer.timeString
+		text: root.title.length > 0 ? root.title : clockTimer.timeString
+
 		Timer {
 			id: clockTimer
 			interval: 1000 // 1 second
-			running: root.opacity > 0.0
+			running: root.opacity > 0.0 && root.title.length === 0
 			property string timeString: "00:00"
 			onTriggered: {
 				var currDate = new Date()
@@ -70,16 +83,19 @@ Item {
 			verticalCenter: parent.verticalCenter
 		}
 
-		opacity: sidePanelVisible ? 1.0 : 0.0
+		opacity: enabled ? 1.0 : 0.0
 		Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration } }
 
-		height: Theme.geometry.statusBar.button.height
 		width: Theme.geometry.statusBar.button.width
+		height: Theme.geometry.statusBar.button.height
+		icon.width: Theme.geometry.statusBar.button.icon.width
+		icon.height: Theme.geometry.statusBar.button.icon.height
 		display: C.AbstractButton.IconOnly
 		color: Theme.color.ok
-		icon.source: root.state === '' ? "qrc:/images/panel-toggle.svg" : "qrc:/images/panel-toggled.svg"
-		icon.width: 28
-		icon.height: 20
+		backgroundColor: "transparent"
+		icon.source: root.sidePanelActive
+					 ? "qrc:/images/icon_sidepanel_on_32.svg"
+					 : "qrc:/images/icon_sidepanel_off_32.svg"
 		onClicked: root.sidePanelActive = !root.sidePanelActive
 	}
 }
