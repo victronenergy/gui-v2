@@ -97,7 +97,9 @@ Window {
 		anchors.fill: parent
 		onPressed: function(mouse) {
 			mouse.accepted = false
-			PageManager.idleModeTimer.restart()
+			if (PageManager.idleModeTimer.running) {
+				PageManager.idleModeTimer.restart()
+			}
 		}
 	}
 
