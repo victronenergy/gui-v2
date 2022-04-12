@@ -138,11 +138,16 @@
         <file>images/freshWater20x27.svg</file>
         <file>images/icon_alarm_48.svg</file>
         <file>images/icon_autostart_24.svg</file>
+        <file>images/icon_back_32.svg</file>
+        <file>images/icon_controls_off_32.svg</file>
+        <file>images/icon_controls_on_32.svg</file>
         <file>images/icon_humidity_32.svg</file>
         <file>images/icon_manualstart_timer_24.svg</file>
         <file>images/icon_manualstart_24.svg</file>
         <file>images/icon_minus.svg</file>
         <file>images/icon_plus.svg</file>
+        <file>images/icon_sidepanel_off_32.svg</file>
+        <file>images/icon_sidepanel_on_32.svg</file>
         <file>images/icon_temp_32.svg</file>
         <file>images/inverter_charger.svg</file>
         <file>images/levels.svg</file>
@@ -150,7 +155,6 @@
         <file>images/oil.svg</file>
         <file>images/overview.svg</file>
         <file>images/settings.svg</file>
-        <file>images/panel-toggle.svg</file>
         <file>images/cloud.svg</file>
         <file>images/rain.svg</file>
         <file>images/scatteredcloud.svg</file>
@@ -159,7 +163,6 @@
         <file>images/grid.svg</file>
         <file>images/liveWell.svg</file>
         <file>images/solaryield.svg</file>
-        <file>images/panel-toggled.svg</file>
         <file>images/sunny.svg</file>
         <file>images/settings.png</file>
         <file>images/battery.svg</file>
@@ -169,8 +172,6 @@
         <file>images/freshWater.svg</file>
         <file>images/tank.svg</file>
         <file>images/dropdown.svg</file>
-        <file>images/controls.svg</file>
-        <file>images/controls-toggled.svg</file>
         <file>images/inverter.svg</file>
         <file>images/ess.svg</file>
         <file>images/information.svg</file>

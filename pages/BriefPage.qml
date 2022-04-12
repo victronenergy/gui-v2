@@ -58,6 +58,8 @@ Page {
 		rightGaugeTypes = rightTypes
 	}
 
+	hasSidePanel: true
+
 	onSolarYieldPresentChanged: root.populateSideGauges()
 	onGeneratorPresentChanged: root.populateSideGauges()
 	onDcLoadPresentChanged: root.populateSideGauges()

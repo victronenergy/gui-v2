@@ -18,17 +18,15 @@ QtObject {
 		ExitIdleMode    // Fade in nav bar
 	}
 
-	property var pageToPush
-
 	property QtObject emitter: QtObject {
-		signal pagePushRequested()
+		signal pagePushRequested(var obj, var properties)
 		signal pagePopRequested()
+		signal layerPushRequested(var obj, var properties)
+		signal layerPopRequested()
 	}
 
 	// Ugly hack, but ...
-	property bool sidePanelVisible
 	property bool sidePanelActive
-	property bool controlsVisible: true
 	property bool mainPageActive: true
 	property var navBar
 	property var statusBar
@@ -53,12 +51,19 @@ QtObject {
 		onTriggered: root.interactivity = PageManager.InteractionMode.EnterIdleMode
 	}
 
-	function pushPage(page) {
-		pageToPush = page
-		emitter.pagePushRequested()
+	function pushPage(obj, properties) {
+		emitter.pagePushRequested(obj, properties)
 	}
 
 	function popPage() {
 		emitter.pagePopRequested()
+	}
+
+	function pushLayer(obj, properties) {
+		emitter.layerPushRequested(obj, properties)
+	}
+
+	function popLayer() {
+		emitter.layerPopRequested()
 	}
 }

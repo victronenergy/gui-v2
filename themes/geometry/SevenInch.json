@@ -55,9 +55,11 @@
     "geometry.separatorBar.width": 1,
 
     "geometry.statusBar.height": 48,
-    "geometry.statusBar.button.width": 32,
-    "geometry.statusBar.button.height": 32,
-    "geometry.statusBar.horizontalMargin": "geometry.page.content.horizontalMargin",
+    "geometry.statusBar.button.width": 48,
+    "geometry.statusBar.button.height": 48,
+    "geometry.statusBar.button.icon.width": 32,
+    "geometry.statusBar.button.icon.height": 32,
+    "geometry.statusBar.horizontalMargin": 32,
 
     "geometry.tabBar.width": 464,
     "geometry.tabBar.height": 40,
