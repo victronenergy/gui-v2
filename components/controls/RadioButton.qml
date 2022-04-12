@@ -15,7 +15,8 @@ CT.RadioButton {
 
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
-		implicitContentWidth + leftPadding + rightPadding)
+		implicitContentWidth + leftPadding + rightPadding,
+		implicitIndicatorWidth + leftPadding + rightPadding)
 	implicitHeight: Math.max(
 		implicitBackgroundHeight + topInset + bottomInset,
 		implicitContentHeight + topPadding + bottomPadding,
