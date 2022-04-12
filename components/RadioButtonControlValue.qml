@@ -18,7 +18,6 @@ ControlValue {
 		id: button
 
 		anchors.verticalCenter: parent.verticalCenter
-		width: implicitIndicatorWidth   // cannot be zero, else button not clickable
 		font.pixelSize: Theme.font.size.m
 
 		onClicked: root.clicked()
