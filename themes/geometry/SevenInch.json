@@ -35,7 +35,27 @@
     "geometry.radioButton.indicator.dot.width": 16,
     "geometry.radioButton.border.width": 2,
 
+    "geometry.scrollBar.bar.width": 8,
+    "geometry.scrollBar.bar.radius": 8,
+    "geometry.scrollBar.horizontalMargin": 16,
+
     "geometry.segmentedButtonRow.height": 48,
+
+    "geometry.settingsListButton.height": 34,
+    "geometry.settingsListButton.radius": 6,
+    "geometry.settingsListButton.contents.horizontalMargin": 16,
+
+    "geometry.settingsListItem.height": 64,
+    "geometry.settingsListItem.radius": 8,
+    "geometry.settingsListItem.content.leftMargin": 24,
+    "geometry.settingsListItem.content.rightMargin": 18,
+    "geometry.settingsListItem.content.verticalMargin": 12,
+    "geometry.settingsListItem.content.spacing": 17,
+    "geometry.settingsListItem.separator.width": 1,
+    "geometry.settingsListItem.slider.width": 560,
+    "geometry.settingsListItem.slider.button.size": 24,
+    "geometry.settingsListItem.slider.spacing": 14,
+    "geometry.settingsListItem.slider.stepDivsion": 10,
 
     "geometry.slider.groove.height": 8,
     "geometry.slider.groove.radius": 8,
@@ -360,5 +380,13 @@
     "geometry.levelsPage.environment.humidityGauge.maximumValue": 100,
     "geometry.levelsPage.environment.humidityGauge.gradient.position1": 0.16,
     "geometry.levelsPage.environment.humidityGauge.gradient.position2": 0.49,
-    "geometry.levelsPage.environment.humidityGauge.gradient.position3": 0.9
+    "geometry.levelsPage.environment.humidityGauge.gradient.position3": 0.9,
+
+    "geometry.settingsPage.settingsList.topMargin": 6,
+    "geometry.settingsPage.settingsList.bottomMargin": 16,
+    "geometry.settingsPage.settingsList.spacing": 4,
+    "geometry.settingsPage.settingsList.gradient.height": 28,
+    "geometry.settingsPage.settingsList.gradient.position1": 0,
+    "geometry.settingsPage.settingsList.gradient.position2": 0.55,
+    "geometry.settingsPage.settingsList.gradient.position3": 1
 }

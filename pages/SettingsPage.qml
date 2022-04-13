@@ -8,66 +8,53 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	Label {
-		id: label
-		anchors.top: parent.top
-		anchors.topMargin: 20
-		anchors.horizontalCenter: parent.horizontalCenter
-		text: "SettingsPage placeholder"
-	}
+	SettingsListView {
+		id: settingsListView
 
-	Column {
-		anchors {
-			top: label.bottom
-			topMargin: Theme.geometry.page.grid.horizontalMargin
-			horizontalCenter: parent.horizontalCenter
-		}
-		spacing: Theme.geometry.page.grid.horizontalMargin
+		model: [
+			{
+				// Temporary, demonstrates the settings UI
+				text: "Demo settings page",
+				page: "/pages/settings/DemoSettingsPage.qml"
+			},
+			{
+				//% "Display & Language"
+				text: qsTrId("settings_display_and_language"),
+			},
+			{
+				//% "General"
+				text: qsTrId("settings_general"),
+			},
+			{
+				//% "Firmware"
+				text: qsTrId("settings_firmware"),
+			},
+			{
+				//% "Date & time"
+				text: qsTrId("settings_date_and_time"),
+			},
+			{
+				//% "Remote console"
+				text: qsTrId("settings_remote_console"),
+			},
+			{
+				//% "System setup"
+				text: qsTrId("settings_system_setup"),
+			},
+			{
+				//% "DVCC"
+				text: qsTrId("settings_dvcc"),
+			},
+			{
+				//% "VRM online portal"
+				text: qsTrId("settings_vrm_online_portal"),
+			},
+		]
 
-		Button {
-			anchors.horizontalCenter: parent.horizontalCenter
-			//% "Toggle Display Mode"
-			//: Change between light and dark modes
-			text: qsTrId("settings_toggle_display_mode")
+		delegate: SettingsListNavigationItem {
+			text: modelData.text
 			onClicked: {
-				if (Theme.colorScheme == Theme.Dark) {
-					Theme.load(Theme.screenSize, Theme.Light)
-				} else {
-					Theme.load(Theme.screenSize, Theme.Dark)
-				}
-			}
-		}
-
-		Button {
-			anchors.horizontalCenter: parent.horizontalCenter
-			//% "Toggle Size"
-			//: Switch between 5 inch and 7 inch mode on Desktop
-			text: qsTrId("settings_toggle_size")
-			onClicked: {
-				if (Theme.screenSize == Theme.FiveInch) {
-					Theme.load(Theme.SevenInch, Theme.colorScheme)
-				} else {
-					Theme.load(Theme.FiveInch, Theme.colorScheme)
-				}
-			}
-		}
-
-		Button {
-			anchors.horizontalCenter: parent.horizontalCenter
-			//% "Toggle Language"
-			//: Select a new language
-			text: qsTrId("settings_toggle_language")
-			onClicked: Language.current = (Language.current === Language.English ? Language.French : Language.English)
-		}
-
-		Button {
-			anchors.horizontalCenter: parent.horizontalCenter
-			//% "Toggle Percentage Mode"
-			//: When true, the Brief page shows percentages
-			text: qsTrId("settings_toggle_percentage")
-			onClicked: {
-				Preferences.showPercentagesInBriefPage = !Preferences.showPercentagesInBriefPage
-				console.log(Preferences.showPercentagesInBriefPage)
+				PageManager.pushPage(modelData.page, {"title": modelData.text})
 			}
 		}
 	}
