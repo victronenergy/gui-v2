@@ -34,18 +34,11 @@ Window {
 	width: [800, 1024][Theme.screenSize]
 	height: [480, 600][Theme.screenSize]
 	color: {
-		if (Theme.colorScheme === Theme.Light
-				&& PageManager.statusBar
-				&& PageManager.statusBar.controlsActive) {
-			return Theme.color.overviewPage.backgroundColor
+		if (Theme.colorScheme === Theme.Dark
+				|| PageManager.navBar.currentUrl === "qrc:/pages/BriefPage.qml") {
+			return Theme.color.background.primary
 		}
-		switch (PageManager.navBar.currentUrl) {
-		case "qrc:/pages/OverviewPage.qml":
-		case "qrc:/pages/LevelsPage.qml":
-			return Theme.color.overviewPage.backgroundColor
-			break
-		default: return Theme.color.background.primary
-		}
+		return Theme.color.background.tertiary
 	}
 
 	//: Application title

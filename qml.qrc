@@ -6,6 +6,7 @@
         <file>components/controls/Label.qml</file>
         <file>components/controls/ProgressBar.qml</file>
         <file>components/controls/RadioButton.qml</file>
+        <file>components/controls/ScrollBar.qml</file>
         <file>components/controls/Slider.qml</file>
         <file>components/controls/SpinBox.qml</file>
         <file>components/controls/Switch.qml</file>
@@ -60,6 +61,16 @@
         <file>components/ScaledArcGauge.qml</file>
         <file>components/SideGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
+        <file>components/SettingsListButton.qml</file>
+        <file>components/SettingsListView.qml</file>
+        <file>components/SettingsListNavigationItem.qml</file>
+        <file>components/SettingsListRadioButton.qml</file>
+        <file>components/SettingsListRadioButtonGroup.qml</file>
+        <file>components/SettingsListSlider.qml</file>
+        <file>components/SettingsListSwitch.qml</file>
+        <file>components/SettingsListItem.qml</file>
+        <file>components/SettingsListTextItem.qml</file>
+        <file>components/SettingsListTextGroup.qml</file>
         <file>components/SeparatorBar.qml</file>
         <file>components/SolarYieldGraph.qml</file>
         <file>components/SplashView.qml</file>

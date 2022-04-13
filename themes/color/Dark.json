@@ -38,6 +38,15 @@
     "color.radioButton.indicator.on": "color.ok",
     "color.radioButton.indicator.off": "color.font.disabled",
 
+    "color.settingsListItem.background": "color.background.secondary",
+    "color.settingsListItem.down.background": "color.font.disabled",
+    "color.settingsListItem.forwardIcon": "color.font.disabled",
+    "color.settingsListItem.down.forwardIcon": "color.font.tertiary",
+    "color.settingsListItem.separator": "#64635F",
+    "color.settingsListItem.secondaryText": "#969591",
+
+    "color.scrollBar.bar": "#272622",
+
     "color.slider.groove.background": "color.darkOk",
     "color.slider.background": "color.ok",
 
@@ -65,7 +74,6 @@
     "color.toastNotification.highlight.warning": "color.warning",
     "color.toastNotification.highlight.error": "color.critical",
 
-    "color.overviewPage.backgroundColor": "color.background.primary",
     "color.overviewPage.connector.electron.outerColor": "#4CFFFFFF",
     "color.overviewPage.connector.electron.innerColor": "#4CFFFFFF",
     "color.overviewPage.connector.electron.centerColor": "#FFFFFF",
@@ -111,5 +119,9 @@
     "color.levelsPage.environment.temperatureGauge.gradient.color3": "#1D3D60",
     "color.levelsPage.environment.humidityGauge.gradient.color1": "#1C3F62",
     "color.levelsPage.environment.humidityGauge.gradient.color2": "#405A25",
-    "color.levelsPage.environment.humidityGauge.gradient.color3": "#784B17"
+    "color.levelsPage.environment.humidityGauge.gradient.color3": "#784B17",
+
+    "color.settingsPage.settingsList.gradient.color1": "transparent",
+    "color.settingsPage.settingsList.gradient.color2": "#66000000",
+    "color.settingsPage.settingsList.gradient.color3": "#000000"
 }
