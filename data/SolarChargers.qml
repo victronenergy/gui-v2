@@ -64,6 +64,7 @@ Item {
 		let _yieldHistory = []
 		for (i = 0; i < maxHistoryCount; ++i) {
 			let dailyYield = totalDailyYields[i + ""]
+			Utils.updateMaximumValue("dailySolarYield", dailyYield)
 			_yieldHistory.push(dailyYield || 0)
 		}
 		if (Utils.arrayCompare(_yieldHistory, yieldHistory) !== 0) {

@@ -12,24 +12,46 @@ Page {
 	id: root
 
 	readonly property bool solarYieldPresent: solarChargers && solarChargers.model.count > 0
-	readonly property bool generatorPresent: !!generator0
-	readonly property bool loadPresent: true    // TODO check for AC,DC inputs
+
+	readonly property bool generatorPresent: system && system.generator.power
+	readonly property real generatorPower: system ? system.generator.power : 0
+	readonly property real generatorPowerPercentage: generatorPower / Utils.maximumValue("system.generator.power") * 100
+
+	readonly property bool acLoadPresent: system && system.ac.consumption.power
+	readonly property real acLoad: acLoadPresent ? system.ac.consumption.power : 0
+	readonly property real acLoadPercentage: acLoad / Utils.maximumValue("system.ac.consumption.power") * 100
+
+	readonly property bool dcLoadPresent: system && system.dc.power
+	readonly property real dcLoad: dcLoadPresent ? system.dc.power : 0
+	readonly property real dcLoadPercentage: dcLoad / Utils.maximumValue("system.dc.power") * 100
+
+	readonly property bool combinedLoadPresent: system && system.loads.power
+	readonly property real combinedLoad: combinedLoadPresent ? system.loads.power : 0
+	readonly property real combinedLoadPercentage: combinedLoadPresent ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
 
 	property var leftGaugeTypes: []
 	property var rightGaugeTypes: []
+	property real sideOpacity: 1
 
 	function populateSideGauges() {
 		// Determine which side gauges are to be displayed
 		let leftTypes = []
 		let rightTypes = []
+		if (generatorPresent) {
+			leftTypes.push('generator')
+		}
 		if (solarYieldPresent) {
 			leftTypes.push('solar')
 		}
-		if (generatorPresent) {
-			(solarYieldPresent ? rightTypes : leftTypes).push('generator')
-		}
-		if (loadPresent) {
-			rightTypes.push('load')
+		if (acLoadPresent && dcLoadPresent) {
+			rightTypes.push('combinedload')
+		} else {
+			if (acLoadPresent) {
+				rightTypes.push('acload')
+			}
+			if (dcLoadPresent) {
+				rightTypes.push('dcload')
+			}
 		}
 
 		leftGaugeTypes = leftTypes
@@ -38,7 +60,8 @@ Page {
 
 	onSolarYieldPresentChanged: root.populateSideGauges()
 	onGeneratorPresentChanged: root.populateSideGauges()
-	onLoadPresentChanged: root.populateSideGauges()
+	onDcLoadPresentChanged: root.populateSideGauges()
+	onAcLoadPresentChanged: root.populateSideGauges()
 
 	Loader {
 		id: mainGauge
@@ -72,81 +95,108 @@ Page {
 		}
 	}
 
-	property real sideOpacity: 1
-
 	Loader {
 		id: leftEdge
+
+		readonly property string gaugeType: leftGaugeTypes.length >= 1 ? leftGaugeTypes[0] : ''
+
+		onGaugeTypeChanged: {
+			if (gaugeType === 'generator') {
+				setSource('qrc:/components/SideGauge.qml', {
+					"gaugeAlignmentX": Qt.AlignLeft,
+					"gaugeAlignmentY": Qt.binding(function() { return leftGaugeTypes.length === 2 ? Qt.AlignTop : Qt.AlignVCenter } ),
+					"arcX": Qt.binding(function() { return leftGaugeTypes.length === 1 ? 10 : undefined } ),
+					"direction": PathArc.Clockwise,
+					"startAngle": Qt.binding(function() { return leftGaugeTypes.length === 2 ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)} ),
+					"source": "qrc:/images/generator.svg",
+					"value": Qt.binding(function() { return generatorPowerPercentage }),
+					"textValue": Qt.binding(function() { return generatorPower })
+				})
+			} else if (gaugeType === 'solar'){
+				setSource('qrc:/components/SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignVCenter})
+			}
+		}
 		anchors {
 			top: parent.top
+			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
 			left: parent.left
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			right: mainGauge.left
 		}
-		height: parent.height
+		active: leftGaugeTypes.length >= 1
 		opacity: root.sideOpacity
-		active: leftGaugeTypes.length === 1
-		source: {
-			switch (leftGaugeTypes[0]) {
-			case 'solar': return 'SolarYieldGauge.qml'
-			case 'generator': return 'GeneratorLeftGauge.qml'
-			}
-			return ''
-		}
 	}
+
+	Loader {
+		id: leftLower
+
+		readonly property string gaugeType: leftGaugeTypes.length === 2 ? leftGaugeTypes[1] : ''
+
+		onGaugeTypeChanged: setSource('qrc:/components/SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignBottom})
+		anchors {
+			top: leftGaugeTypes.length, leftEdge.bottom
+			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
+			left: parent.left
+			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
+			right: mainGauge.left
+		}
+		active: leftGaugeTypes.length === 2
+		opacity: root.sideOpacity
+	}
+
 	Loader {
 		id: rightEdge
+
+		readonly property string gaugeType: rightGaugeTypes.length >= 1 ? rightGaugeTypes[0] : ''
+
+		onGaugeTypeChanged: {
+			setSource('qrc:/components/SideGauge.qml', {
+				"gaugeAlignmentY": Qt.binding(function(){ return rightGaugeTypes.length == 2 ? Qt.AlignTop : Qt.AlignVCenter }),
+				"source": Qt.binding(function() {
+					return rightGaugeTypes.length == 2 ?
+						(gaugeType === 'acload' ? "qrc:/images/acloads.svg" : "qrc:/images/dcloads.svg") : "qrc:/images/consumption.svg"
+				}),
+				"value": Qt.binding(function() {
+					return rightGaugeTypes.length == 2 ? (gaugeType === 'acload' ? acLoadPercentage : dcLoadPercentage) : combinedLoadPercentage
+				}),
+				"textValue": Qt.binding(function() {
+					return rightGaugeTypes.length == 2 ? (gaugeType === 'acload' ? acLoad : dcLoad) : combinedLoad
+				})
+			})
+		}
 		anchors {
 			top: parent.top
+			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
 			right: parent.right
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: mainGauge.right
 		}
-		height: parent.height
 		opacity: root.sideOpacity
-		active: rightGaugeTypes.length === 1
-		source: {
-			switch (rightGaugeTypes[0]) {
-			case 'generator': return 'GeneratorRightGauge.qml'
-			case 'load': return 'LoadGauge.qml'
-			}
-			return ''
-		}
+		active: rightGaugeTypes.length >= 1
 	}
-	Loader {
-		id: rightUpper
-		anchors {
-			top: parent.top
-			right: parent.right
-			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
-			left: mainGauge.right
-		}
-		height: parent.height/2
-		opacity: root.sideOpacity
-		active: rightGaugeTypes.length === 2
-		source: {
-			switch (rightGaugeTypes[0]) {
-			case 'generator': return 'GeneratorMiniGauge.qml'
-			}
-			return ''
-		}
-	}
+
 	Loader {
 		id: rightLower
+
+		readonly property string gaugeType: rightGaugeTypes.length === 2 ? rightGaugeTypes[1] : ''
+
+		onGaugeTypeChanged: {
+			setSource('qrc:/components/SideGauge.qml', {
+				"gaugeAlignmentY": Qt.AlignBottom,
+				"source": Qt.binding(function() { return (gaugeType === 'acload' ? "qrc:/images/acloads.svg" : "qrc:/images/dcloads.svg") }),
+				"value": Qt.binding(function() { return gaugeType === 'acload' ? acLoadPercentage : dcLoadPercentage }),
+				"textValue": Qt.binding(function() { return gaugeType === 'acload' ? acLoad : dcLoad })
+			})
+		}
 		anchors {
-			top: rightUpper.bottom
+			top: rightEdge.bottom
+			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
 			right: parent.right
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: mainGauge.right
 		}
-		height: parent.height/2
 		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 2
-		source: {
-			switch (rightGaugeTypes[1]) {
-			case 'load': return 'LoadMiniGauge.qml'
-			}
-			return ''
-		}
 	}
 
 	BriefMonitorPanel {

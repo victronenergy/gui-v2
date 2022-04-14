@@ -11,6 +11,7 @@ Item {
 
 	property QtObject genset: QtObject {
 		property real power
+		onPowerChanged: Utils.updateMaximumValue("system.ac.genset.power", power)
 
 		property ListModel phases: ListModel {}
 	}
@@ -18,6 +19,7 @@ Item {
 	property QtObject consumption: ListModel {
 		property real power
 
+		onPowerChanged: Utils.updateMaximumValue("system.ac.consumption.power", power)
 		property ListModel phases: ListModel {}
 	}
 

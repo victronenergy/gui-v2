@@ -18,9 +18,8 @@ Shape {
 	property alias strokeColor: arc.strokeColor
 	property alias direction: arc.direction
 	property alias fillColor: arc.fillColor
-
-	property real midAngle: (startAngle + endAngle) / 2
 	property real valueArc: ((endAngle - startAngle) * Math.min(Math.max(control.value, 0.0), 100.0) / 100.0)
+
 	Behavior on valueArc {
 		enabled: control.animationEnabled
 		NumberAnimation {
@@ -32,7 +31,7 @@ Shape {
 	Arc {
 		id: arc
 
-		startAngle: control.midAngle - control.valueArc/2
-		endAngle: control.midAngle + control.valueArc/2
+		startAngle: control.startAngle
+		endAngle: control.startAngle + control.valueArc
 	}
 }
