@@ -32,7 +32,7 @@ Shape {
 	Arc {
 		id: arc
 
-		startAngle: control.midAngle - control.valueArc/2
-		endAngle: control.midAngle + control.valueArc/2
+		startAngle: control.startAngle
+		endAngle: control.startAngle + control.valueArc
 	}
 }

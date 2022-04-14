@@ -9,28 +9,40 @@ import "/components/Utils.js" as Utils
 import "../data"
 
 ArcGauge {
-	width: Theme.geometry.briefPage.edgeGauge.width
+	id: root
+
+	property int gaugeAlignmentY: Qt.AlignTop // valid values: Qt.AlignTop, Qt.AlignBottom
+	readonly property int maxAngle: Theme.geometry.briefPage.edgeGauge.maxAngle
+	readonly property int arcOffset: -(radius - root.height) - strokeWidth / 2
+	readonly property int maxArcHeight: Math.sin(Utils.degreesToRadians(maxAngle)) * radius
+
+	implicitWidth: Theme.geometry.briefPage.edgeGauge.width
+	implicitHeight: gaugeAlignmentY === Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.height : Theme.geometry.briefPage.smallEdgeGauge.height
 	alignment: Qt.AlignRight
 	direction: PathArc.Counterclockwise
-	startAngle: 90 + 24
-	endAngle: 90 + 3
+	startAngle: gaugeAlignmentY === Qt.AlignTop ? 90 : 90 + maxAngle
+	endAngle: startAngle - maxAngle
 	radius: Theme.geometry.briefPage.edgeGauge.radius
 	strokeWidth: Theme.geometry.arc.strokeWidth
-	value: system ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
-	arcY: -radius + strokeWidth/2
+	value: 50//system ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
+	arcY: gaugeAlignmentY === Qt.AlignTop ? arcOffset : arcOffset - maxArcHeight
 
-	ValueDisplay {
+	ArcGaugeValueDisplay {
 		anchors {
 			right: parent.right
 			rightMargin: Theme.geometry.loadMiniGauge.label.rightMargin
-			top: parent.top
-			topMargin: Theme.geometry.loadMiniGauge.label.topMargin
+			top: root.gaugeAlignmentY ===  Qt.AlignBottom ? parent.top : undefined
+			bottom: root.gaugeAlignmentY ===  Qt.AlignTop ? parent.bottom : undefined
 		}
-		title.text: qsTrId("brief_loads")
+		gaugeAlignmentY: root.gaugeAlignmentY
+		layoutDirection: Qt.RightToLeft  // load gauges are always on the RHS, and look like "1 kW [icon]", not "[icon] 1kW"
+		source: "qrc:/images/consumption.svg"
 		physicalQuantity: Units.Power
 		value: system ? system.loads.power : 0
-		icon.source: "qrc:/images/consumption.svg"
-		alignment: Qt.AlignRight
-		fontSize: Theme.font.size.xl
+	}
+	Rectangle {
+		anchors.fill: parent
+		color: gaugeAlignmentY === Qt.AlignTop ? "red" : "green"
+		opacity: 0.1
 	}
 }

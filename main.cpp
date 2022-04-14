@@ -79,9 +79,11 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ActionButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Arc.qml")),
 		"Victron.VenusOS", 2, 0, "Arc");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGauge.qml")),
-		"Victron.VenusOS", 2, 0, "ArcGauge");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AsymmetricRoundedRectangle.qml")),
+    qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGauge.qml")),
+        "Victron.VenusOS", 2, 0, "ArcGauge");
+    qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGaugeValueDisplay.qml")),
+        "Victron.VenusOS", 2, 0, "ArcGaugeValueDisplay");
+    qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AsymmetricRoundedRectangle.qml")),
 		"Victron.VenusOS", 2, 0, "AsymmetricRoundedRectangle");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/BarChart.qml")),
 		"Victron.VenusOS", 2, 0, "BarChart");
@@ -316,7 +318,8 @@ int main(int argc, char *argv[])
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
 
-	engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
+    //engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
+    engine.rootContext()->setContextProperty("dbusConnected", false);
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
 	if (component.isError()) {
