@@ -134,9 +134,17 @@
 
     "geometry.briefPage.centerGauge.maximumGaugeCount": 4,
     "geometry.briefPage.centerGauge.icon.height": 22,
-    "geometry.briefPage.edgeGauge.horizontalMargin": 56,
+    "geometry.briefPage.edgeGauge.horizontalMargin": 40,
+    "geometry.briefPage.edgeGauge.topMargin": 44,
     "geometry.briefPage.edgeGauge.radius": 456,
     "geometry.briefPage.edgeGauge.width": 80,
+    "geometry.briefPage.edgeGauge.font.size": 44,
+    "geometry.briefPage.smallEdgeGauge.height": 184,
+    "geometry.briefPage.smallEdgeGauge.maxAngle": 22,
+    "geometry.briefPage.largeEdgeGauge.topMargin": 60,
+    "geometry.briefPage.largeEdgeGauge.height": 320,
+    "geometry.briefPage.largeEdgeGauge.maxAngle": 51,
+    "geometry.briefPage.lowerGauge.topMargin": 32,
     "geometry.briefPage.sidePanel.width": 304,
     "geometry.briefPage.sidePanel.delegateHeight": 40,
     "geometry.briefPage.sidePanel.topMargin": 21,
@@ -172,7 +180,7 @@
     "geometry.generatorMiniGauge.label.rightMargin": 28,
     "geometry.generatorMiniGauge.label.bottomMargin": 6,
 
-    "geometry.loadMiniGauge.label.rightMargin": 28,
+    "geometry.loadMiniGauge.label.rightMargin": 34,
     "geometry.loadMiniGauge.label.topMargin": 17,
 
     "geometry.generatorRightGauge.label.rightMargin": 34,

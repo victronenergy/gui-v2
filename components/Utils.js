@@ -137,3 +137,7 @@ function batteryIcon(battery) {
 function modulo(dividend, divisor) {
     return dividend - divisor * Math.floor(dividend / divisor)
 }
+
+function degreesToRadians(degrees) {
+	return (degrees * Math.PI / 180)
+}

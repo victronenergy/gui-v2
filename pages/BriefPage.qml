@@ -17,21 +17,24 @@ Page {
 
 	property var leftGaugeTypes: []
 	property var rightGaugeTypes: []
+	property real sideOpacity: 1
 
 	function populateSideGauges() {
 		// Determine which side gauges are to be displayed
 		let leftTypes = []
 		let rightTypes = []
+		if (generatorPresent) {
+			leftTypes.push('generator')
+		}
 		if (solarYieldPresent) {
 			leftTypes.push('solar')
-		}
-		if (generatorPresent) {
-			(solarYieldPresent ? rightTypes : leftTypes).push('generator')
 		}
 		if (loadPresent) {
 			rightTypes.push('load')
 		}
-
+		if (loadPresent) { // TODO - "The two arcs for output layout is a solution for cases where we can not merge AC and DC data"
+			rightTypes.push('load')
+		}
 		leftGaugeTypes = leftTypes
 		rightGaugeTypes = rightTypes
 	}
@@ -72,81 +75,146 @@ Page {
 		}
 	}
 
-	property real sideOpacity: 1
-
 	Loader {
 		id: leftEdge
+
+		readonly property string gaugeType: leftGaugeTypes.length === 1 ? leftGaugeTypes[0] : ''
+
+		onGaugeTypeChanged: {
+			if (gaugeType === 'generator') {
+				setSource('qrc:/components/SideGauge.qml', {
+					"gaugeAlignmentY": Qt.AlignVCenter,
+					"gaugeAlignmentX": Qt.AlignLeft,
+					"arcX": 10,
+					"direction": PathArc.Clockwise,
+					"startAngle": 270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2,
+					"source": "qrc:/images/generator.svg",
+					"value": system ? system.generator.power : 0
+				})
+			} else {
+				setSource('SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignVCenter})
+			}
+		}
 		anchors {
 			top: parent.top
+			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
 			left: parent.left
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			right: mainGauge.left
 		}
-		height: parent.height
-		opacity: root.sideOpacity
 		active: leftGaugeTypes.length === 1
-		source: {
-			switch (leftGaugeTypes[0]) {
-			case 'solar': return 'SolarYieldGauge.qml'
-			case 'generator': return 'GeneratorLeftGauge.qml'
-			}
-			return ''
-		}
+		opacity: root.sideOpacity
 	}
+	Loader {
+		id: leftUpper
+
+		readonly property string gaugeType: leftGaugeTypes.length === 2 ? leftGaugeTypes[0] : ''
+
+		onGaugeTypeChanged: {
+			if (gaugeType === 'generator') {
+				setSource('qrc:/components/SideGauge.qml', {
+					"gaugeAlignmentY": Qt.AlignTop,
+					"gaugeAlignmentX": Qt.AlignLeft,
+					"direction": PathArc.Clockwise,
+					"startAngle": 270,
+					"source": "qrc:/images/generator.svg",
+					"value": system ? system.generator.power : 0
+				})
+			} else {
+				setSource('SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignTop})
+			}
+		}
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
+			left: parent.left
+			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
+			right: mainGauge.left
+		}
+		active: leftGaugeTypes.length === 2
+		opacity: root.sideOpacity
+	}
+	Loader {
+		id: leftLower
+
+		readonly property string gaugeType: leftGaugeTypes.length === 2 ? leftGaugeTypes[1] : ''
+
+		onGaugeTypeChanged: setSource('SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignBottom})
+		anchors {
+			top: leftGaugeTypes.length, leftUpper.bottom
+			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
+			left: parent.left
+			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
+			right: mainGauge.left
+		}
+		active: leftGaugeTypes.length === 2
+		opacity: root.sideOpacity
+	}
+
 	Loader {
 		id: rightEdge
+
+		readonly property string gaugeType: rightGaugeTypes.length === 1 ? rightGaugeTypes[0] : ''
+
+		onGaugeTypeChanged: {
+			setSource('qrc:/components/SideGauge.qml', {
+				"gaugeAlignmentY": Qt.AlignVCenter,
+				"value": system && system.loads && system.loads.power ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
+			})
+		}
 		anchors {
 			top: parent.top
+			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
 			right: parent.right
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: mainGauge.right
 		}
-		height: parent.height
 		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 1
-		source: {
-			switch (rightGaugeTypes[0]) {
-			case 'generator': return 'GeneratorRightGauge.qml'
-			case 'load': return 'LoadGauge.qml'
-			}
-			return ''
-		}
 	}
+
 	Loader {
 		id: rightUpper
+
+		readonly property string gaugeType: rightGaugeTypes.length === 2 ? rightGaugeTypes[0] : ''
+
+		onGaugeTypeChanged: {
+			setSource('qrc:/components/SideGauge.qml', {
+				"gaugeAlignmentY": Qt.AlignTop,
+				"value": system && system.loads && system.loads.power ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
+			})
+		}
 		anchors {
 			top: parent.top
+			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
 			right: parent.right
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: mainGauge.right
 		}
-		height: parent.height/2
 		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 2
-		source: {
-			switch (rightGaugeTypes[0]) {
-			case 'generator': return 'GeneratorMiniGauge.qml'
-			}
-			return ''
-		}
 	}
 	Loader {
 		id: rightLower
+
+		readonly property string gaugeType: rightGaugeTypes.length === 2 ? rightGaugeTypes[1] : ''
+
+		onGaugeTypeChanged: {
+			setSource('qrc:/components/SideGauge.qml',
+				{
+					"gaugeAlignmentY": Qt.AlignBottom,
+					"value": system && system.loads && system.loads.power ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
+				})
+		}
 		anchors {
 			top: rightUpper.bottom
+			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
 			right: parent.right
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: mainGauge.right
 		}
-		height: parent.height/2
 		opacity: root.sideOpacity
 		active: rightGaugeTypes.length === 2
-		source: {
-			switch (rightGaugeTypes[1]) {
-			case 'load': return 'LoadMiniGauge.qml'
-			}
-			return ''
-		}
 	}
 
 	BriefMonitorPanel {

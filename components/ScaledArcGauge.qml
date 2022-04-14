@@ -29,7 +29,6 @@ Item {
 		ScaledArc {
 			id: arc
 
-			property int status: Gauges.getValueStatus(gauge.value, gauge.valueType)
 			property real margin: strokeWidth/2
 
 			width: radius*2 - strokeWidth
@@ -37,7 +36,7 @@ Item {
 			x: arcX !== undefined ? arcX : (gauge.alignment === Qt.AlignRight ? (gauge.width - 2*radius) - margin : margin)
 			y: arcY !== undefined ? arcY : ((gauge.height - height) / 2 - margin)
 			value: gauge.value
-			strokeColor: Theme.statusColorValue(status)
+			strokeColor: Theme.color.ok
 		}
 	}
 }

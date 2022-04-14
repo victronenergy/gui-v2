@@ -5,12 +5,18 @@
 import QtQuick
 import Victron.Velib
 import Victron.VenusOS
+import QtQuick.Controls.impl as CP
 import "/components/Utils.js" as Utils
 import "../data"
 
-// TODO
 Item {
 	id: root
+
+	property int gaugeAlignmentY: Qt.AlignVCenter // valid values: Qt.AlignVCenter, Qt.AlignBottom
+	readonly property int _gaugeAlignmentX: Qt.AlignLeft
+	readonly property int _maxAngle: gaugeAlignmentY === Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.maxAngle : Theme.geometry.briefPage.smallEdgeGauge.maxAngle
+
+	implicitHeight: gaugeAlignmentY === Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.height : Theme.geometry.briefPage.smallEdgeGauge.height
 
 	Repeater {
 		id: repeater
@@ -19,30 +25,26 @@ Item {
 		delegate: ScaledArcGauge {
 			width: Theme.geometry.briefPage.edgeGauge.width
 			x: index*strokeWidth
-			opacity: 1.0 - index * 0.2
+			opacity: 1.0 - index * 0.3
 			height: root.height
-			startAngle: 270 - 25
-			endAngle: 270 + 25
+			startAngle: root.gaugeAlignmentY === Qt.AlignVCenter ? 270 + _maxAngle / 2 : 270
+			endAngle: startAngle - _maxAngle
 			radius: Theme.geometry.briefPage.edgeGauge.radius - index*strokeWidth
-			direction: PathArc.Clockwise
+			direction: PathArc.Counterclockwise
 			strokeWidth: Theme.geometry.arc.strokeWidth
+			arcY: root.gaugeAlignmentY === Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
 			value: solarTracker.power / Utils.maximumValue("solarTracker.power") * 100
 		}
 	}
-	ValueDisplay {
+	ArcGaugeValueDisplay {
 		id: valueDisplay
 
-		anchors {
-			left: repeater.left
-			leftMargin: Theme.geometry.solarYieldGauge.valueDisplay.leftMargin
-			verticalCenter: parent.verticalCenter
-			verticalCenterOffset: Theme.geometry.solarYieldGauge.valueDisplay.verticalCenterOffset
-		}
-		title.text: qsTrId("brief_solar_yield")
+		gaugeAlignmentX: root._gaugeAlignmentX
+		gaugeAlignmentY: root.gaugeAlignmentY
+		layoutDirection: root._gaugeAlignmentX === Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
+		source: "qrc:/images/solaryield.svg"
 		physicalQuantity: Units.Power
-		value: solarChargers ? solarChargers.power : 0
-		icon.source: "qrc:/images/solaryield.svg"
-		fontSize: Theme.font.size.xl
+		value: solarChargers ? solarChargers.power : NaN
 	}
 }
 

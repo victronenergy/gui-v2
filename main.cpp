@@ -81,6 +81,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Arc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGauge.qml")),
 		"Victron.VenusOS", 2, 0, "ArcGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGaugeValueDisplay.qml")),
+		"Victron.VenusOS", 2, 0, "ArcGaugeValueDisplay");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AsymmetricRoundedRectangle.qml")),
 		"Victron.VenusOS", 2, 0, "AsymmetricRoundedRectangle");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/BarChart.qml")),
@@ -139,6 +141,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
 		"Victron.VenusOS", 2, 0, "SeparatorBar");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SideGauge.qml")),
+		"Victron.VenusOS", 2, 0, "SideGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarYieldGraph.qml")),
 		"Victron.VenusOS", 2, 0, "SolarYieldGraph");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SplashView.qml")),
@@ -247,10 +251,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "BriefMonitorPanel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/GeneratorMiniGauge.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorMiniGauge");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/LoadMiniGauge.qml")),
-		"Victron.VenusOS", 2, 0, "LoadMiniGauge");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/GeneratorLeftGauge.qml")),
-		"Victron.VenusOS", 2, 0, "GeneratorLeftGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/GeneratorRightGauge.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorRightGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/LoadGauge.qml")),
