@@ -590,7 +590,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="brief_battery">
-        <location filename="../pages/BriefPage.qml" line="250"/>
+        <location filename="../pages/BriefPage.qml" line="276"/>
         <source>Battery</source>
         <translation type="unfinished"></translation>
     </message>

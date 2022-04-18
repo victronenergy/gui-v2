@@ -27,6 +27,7 @@ Row {
 	Label {
 		id: valueLabel
 
+		anchors.verticalCenter: parent.verticalCenter
 		color: Theme.color.font.primary
 		text: root._displayValue.number
 	}
@@ -34,6 +35,7 @@ Row {
 	Label {
 		id: unitLabel
 
+		anchors.verticalCenter: parent.verticalCenter
 		text: root._displayValue.units
 		font: valueLabel.font
 		color: Theme.color.font.secondary

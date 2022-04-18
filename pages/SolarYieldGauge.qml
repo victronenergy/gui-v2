@@ -13,8 +13,10 @@ import "../data"
 Item {
 	id: root
 
-	property int gaugeAlignmentY: Qt.AlignVCenter // valid values: Qt.AlignTop, Qt.AlignVCenter, Qt.AlignBottom
-	readonly property int maxAngle: 25
+	property int gaugeAlignmentY: Qt.AlignVCenter // valid values: Qt.AlignVCenter, Qt.AlignBottom
+	property int gaugeAlignmentX: Qt.AlignLeft
+	readonly property int maxAngle: gaugeAlignmentY === Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.maxAngle : Theme.geometry.briefPage.smallEdgeGauge.maxAngle
+
 
 	implicitHeight: gaugeAlignmentY === Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.height : Theme.geometry.briefPage.smallEdgeGauge.height
 
@@ -27,15 +29,27 @@ Item {
 			x: index*strokeWidth
 			opacity: 1.0 - index * 0.3
 			height: root.height
-			startAngle: 270
+			startAngle: root.gaugeAlignmentY === Qt.AlignVCenter ? 270 + maxAngle / 2 : 270
 			endAngle: startAngle - maxAngle
 			radius: Theme.geometry.briefPage.edgeGauge.radius - index*strokeWidth
 			direction: PathArc.Counterclockwise
 			strokeWidth: Theme.geometry.arc.strokeWidth
-			arcY: -radius + strokeWidth/2//-(radius - root.height) - strokeWidth / 2
-			value: 50 // solarTracker.power / Utils.maximumValue("solarTracker.power") * 100
+			arcY: root.gaugeAlignmentY === Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
+			value: 100 // solarTracker.power / Utils.maximumValue("solarTracker.power") * 100
 		}
 	}
+	ArcGaugeValueDisplay {
+		id: valueDisplay
+
+		gaugeAlignmentX: root.gaugeAlignmentX
+		gaugeAlignmentY: root.gaugeAlignmentY
+		layoutDirection: root.gaugeAlignmentX === Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
+		source: "qrc:/images/solaryield.svg"
+		physicalQuantity: Units.Power
+		value: 100 //solarTracker.power / Utils.maximumValue("solarTracker.power") * 100
+	}
+
+	/*
 	CP.ColorImage {
 		id: icon
 
@@ -60,7 +74,6 @@ Item {
 		physicalQuantity: Units.Power
 		value: system ? system.generator.power : 0
 	}
-	/*
 	ValueDisplay {
 		id: valueDisplay
 
