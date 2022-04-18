@@ -34,7 +34,6 @@ ArcGauge {
 
 		gaugeAlignmentX: root.gaugeAlignmentX
 		gaugeAlignmentY: root.gaugeAlignmentY
-		layoutDirection: root.gaugeAlignmentX === Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
 		source: "qrc:/images/consumption.svg"
 		physicalQuantity: Units.Power
 		value: system ? system.loads.power : 0

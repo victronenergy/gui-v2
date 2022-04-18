@@ -52,8 +52,6 @@ Page {
 	property int rightDummyIndex: 0
 	property var rightdummygauges: [rightgauges1, rightgauges2, rightgauges3]
 
-
-
 	Timer {
 		interval: 1000
 		running: true
@@ -110,7 +108,7 @@ Page {
 
 		onGaugeTypeChanged: {
 			if (gaugeType === 'generator') {
-				setSource('LoadMiniGauge.qml', {
+				setSource('qrc:/components/SideGauge.qml', {
 					"gaugeAlignmentY": Qt.AlignVCenter,
 					"gaugeAlignmentX": Qt.AlignLeft,
 					"arcX": 10,
@@ -139,7 +137,7 @@ Page {
 
 		onGaugeTypeChanged: {
 			if (gaugeType === 'generator') {
-				setSource('LoadMiniGauge.qml', {
+				setSource('qrc:/components/SideGauge.qml', {
 					"gaugeAlignmentY": Qt.AlignTop,
 					"gaugeAlignmentX": Qt.AlignLeft,
 					"direction": PathArc.Clockwise,
@@ -185,7 +183,7 @@ Page {
 
 		readonly property string gaugeType: rightGaugeTypes.length === 1 ? rightGaugeTypes[0] : ''
 
-		onGaugeTypeChanged: setSource('LoadMiniGauge.qml', {"gaugeAlignmentY": Qt.AlignVCenter})
+		onGaugeTypeChanged: setSource('qrc:/components/SideGauge.qml', {"gaugeAlignmentY": Qt.AlignVCenter})
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
@@ -202,7 +200,7 @@ Page {
 
 		readonly property string gaugeType: rightGaugeTypes.length === 2 ? rightGaugeTypes[0] : ''
 
-		onGaugeTypeChanged: setSource('LoadMiniGauge.qml', {"gaugeAlignmentY": Qt.AlignTop})
+		onGaugeTypeChanged: setSource('qrc:/components/SideGauge.qml', {"gaugeAlignmentY": Qt.AlignTop})
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
@@ -218,7 +216,7 @@ Page {
 
 		readonly property string gaugeType: rightGaugeTypes.length === 2 ? rightGaugeTypes[1] : ''
 
-		onGaugeTypeChanged: setSource('LoadMiniGauge.qml', {"gaugeAlignmentY": Qt.AlignBottom})
+		onGaugeTypeChanged: setSource('qrc:/components/SideGauge.qml', {"gaugeAlignmentY": Qt.AlignBottom})
 		anchors {
 			top: rightUpper.bottom
 			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin

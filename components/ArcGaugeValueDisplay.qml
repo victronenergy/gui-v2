@@ -9,8 +9,8 @@ import Victron.VenusOS
 Row {
 	id: root
 
-	property int gaugeAlignmentY: Qt.AlignTop // valid values: Qt.AlignTop, Qt.AlignBottom
-	property int gaugeAlignmentX: Qt.AlignLeft
+	property int gaugeAlignmentY: Qt.AlignTop // valid values: Qt.AlignTop, Qt.AlignVCenter, Qt.AlignBottom
+	property int gaugeAlignmentX: Qt.AlignLeft // valid values: Qt.AlignLeft, Qt.AlignRight
 	property alias source: icon.source
 	property alias value: quantityRow.value
 	property alias physicalQuantity: quantityRow.physicalQuantity
@@ -25,6 +25,7 @@ Row {
 		bottom: root.gaugeAlignmentY ===  Qt.AlignTop ? parent.bottom : undefined
 	}
 	spacing: 4
+	layoutDirection: root.gaugeAlignmentX === Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
 
 	CP.ColorImage {
 		id: icon

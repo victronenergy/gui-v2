@@ -29,6 +29,7 @@
         <file>components/ActionButton.qml</file>
         <file>components/Arc.qml</file>
         <file>components/ArcGauge.qml</file>
+        <file>components/ArcGaugeValueDisplay.qml</file>
         <file>components/AsymmetricRoundedRectangle.qml</file>
         <file>components/BarChart.qml</file>
         <file>components/CircularMultiGauge.qml</file>
@@ -55,6 +56,7 @@
         <file>components/ProgressArc.qml</file>
         <file>components/ScaledArc.qml</file>
         <file>components/ScaledArcGauge.qml</file>
+        <file>components/SideGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
         <file>components/SolarYieldGraph.qml</file>
@@ -107,12 +109,10 @@
         <file>pages/BriefPage.qml</file>
         <file>pages/BriefMonitorPanel.qml</file>
         <file>pages/EnvironmentTab.qml</file>
-        <file>pages/GeneratorLeftGauge.qml</file>
         <file>pages/GeneratorMiniGauge.qml</file>
         <file>pages/GeneratorRightGauge.qml</file>
         <file>pages/LevelsPage.qml</file>
         <file>pages/LoadGauge.qml</file>
-        <file>pages/LoadMiniGauge.qml</file>
         <file>pages/NotificationsPage.qml</file>
         <file>pages/OverviewPage.qml</file>
         <file>pages/SettingsPage.qml</file>
@@ -194,6 +194,5 @@
         <file>themes/color/Light.json</file>
         <file>themes/color/Dark.json</file>
         <file>themes/typography/Typography.json</file>
-        <file>components/ArcGaugeValueDisplay.qml</file>
     </qresource>
 </RCC>
