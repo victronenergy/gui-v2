@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.Velib
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import "/Utils.js" as Utils
 import "../data"
 
 ArcGauge {
@@ -26,7 +26,7 @@ ArcGauge {
 	endAngle: direction === PathArc.Counterclockwise ? startAngle - maxAngle : startAngle + maxAngle
 	radius: Theme.geometry.briefPage.edgeGauge.radius
 	strokeWidth: Theme.geometry.arc.strokeWidth
-	value: 50//system ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
+	value: system ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
 	arcY: gaugeAlignmentY === Qt.AlignTop ? arcOffset : gaugeAlignmentY === Qt.AlignVCenter ? undefined : arcOffset - maxArcHeight
 
 	ArcGaugeValueDisplay {
