@@ -24,7 +24,7 @@ Row {
 		verticalCenter: root.gaugeAlignmentY === Qt.AlignVCenter ? parent.verticalCenter : undefined
 		bottom: root.gaugeAlignmentY ===  Qt.AlignTop ? parent.bottom : undefined
 	}
-	spacing: 4
+	spacing: Theme.geometry.briefPage.edgeGauge.valueDisplay.spacing
 	layoutDirection: root.gaugeAlignmentX === Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
 
 	CP.ColorImage {

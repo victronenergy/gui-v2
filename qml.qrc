@@ -44,6 +44,7 @@
         <file>components/SwitchControlValue.qml</file>
         <file>components/Gauges.qml</file>
         <file>components/GeneratorIconLabel.qml</file>
+        <file>components/SolarYieldGauge.qml</file>
         <file>components/TabBar.qml</file>
         <file>components/LevelsPageGaugeDelegate.qml</file>
         <file>components/MainView.qml</file>
@@ -51,6 +52,7 @@
         <file>components/LoadGraphShapePath.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
+        <file>components/Page.qml</file>
         <file>components/PageStack.qml</file>
         <file>components/Preferences.qml</file>
         <file>components/ProgressArc.qml</file>
@@ -102,21 +104,16 @@
         <file>demo/Tanks.qml</file>
         <file>demo/pages/LevelsPageDemo.qml</file>
         <file>demo/pages/OverviewPageDemo.qml</file>
-        <file>pages/PageManager.qml</file>
-        <file>pages/Page.qml</file>
-        <file>pages/MainPage.qml</file>
-        <file>pages/ControlCardsPage.qml</file>
-        <file>pages/BriefPage.qml</file>
         <file>pages/BriefMonitorPanel.qml</file>
+        <file>pages/BriefPage.qml</file>
+        <file>pages/ControlCardsPage.qml</file>
         <file>pages/EnvironmentTab.qml</file>
-        <file>pages/GeneratorMiniGauge.qml</file>
-        <file>pages/GeneratorRightGauge.qml</file>
         <file>pages/LevelsPage.qml</file>
-        <file>pages/LoadGauge.qml</file>
+        <file>pages/MainPage.qml</file>
         <file>pages/NotificationsPage.qml</file>
         <file>pages/OverviewPage.qml</file>
+        <file>pages/PageManager.qml</file>
         <file>pages/SettingsPage.qml</file>
-        <file>pages/SolarYieldGauge.qml</file>
         <file>pages/TanksTab.qml</file>
         <file>dialogs/DialogManager.qml</file>
         <file>dialogs/ModalDialog.qml</file>

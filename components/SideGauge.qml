@@ -17,6 +17,7 @@ ArcGauge {
 	readonly property int arcOffset: -(radius - root.height) - strokeWidth / 2
 	readonly property int maxArcHeight: Math.sin(Utils.degreesToRadians(maxAngle)) * radius
 	property alias source: valueDisplay.source
+	property alias textValue: valueDisplay.value
 
 	implicitWidth: Theme.geometry.briefPage.edgeGauge.width
 	implicitHeight: gaugeAlignmentY === Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.height : Theme.geometry.briefPage.smallEdgeGauge.height

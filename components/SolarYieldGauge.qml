@@ -21,7 +21,7 @@ Item {
 	Repeater {
 		id: repeater
 
-		model: solarChargers ? solarChargers.model : null
+		model: solarChargers ? solarChargers.yieldHistory : null
 		delegate: ScaledArcGauge {
 			width: Theme.geometry.briefPage.edgeGauge.width
 			x: index*strokeWidth
@@ -33,7 +33,7 @@ Item {
 			direction: PathArc.Counterclockwise
 			strokeWidth: Theme.geometry.arc.strokeWidth
 			arcY: root.gaugeAlignmentY === Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
-			value: solarTracker.power / Utils.maximumValue("solarTracker.power") * 100
+			value: modelData / Utils.maximumValue("dailySolarYield") * 100
 		}
 	}
 	ArcGaugeValueDisplay {

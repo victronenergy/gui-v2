@@ -83,28 +83,28 @@ function formatAsHHMM(seconds, showUnits) {
 	if (Number.isNaN(seconds) || seconds < 0)
 		return "--:--"
 
-    const duration = decomposeDuration(seconds)
-    return pad(duration.h, 2)
-            + (showUnits ? "h:" : ":")
-            + pad(duration.m, 2)
-            + (showUnits ? "m" : "")
+	const duration = decomposeDuration(seconds)
+	return pad(duration.h, 2)
+			+ (showUnits ? "h:" : ":")
+			+ pad(duration.m, 2)
+			+ (showUnits ? "m" : "")
 }
 
 function formatAsHHMMSS(seconds, showUnits) {
-    if (Number.isNaN(seconds) || seconds < 0)
-        return "--:--"
+	if (Number.isNaN(seconds) || seconds < 0)
+		return "--:--"
 
-    const duration = decomposeDuration(seconds)
+	const duration = decomposeDuration(seconds)
 
-    // If more than 60 minutes, show hours as well
-    let s = pad(duration.m, 2)
-        + (showUnits ? "m:" : ":")
-        + pad(duration.s, 2)
-        + (showUnits ? "s" : "")
-    if (duration.m > 60) {
-        s = pad(duration.h, 2) + (showUnits ? "h:" : ":") + s
-    }
-    return s
+	// If more than 60 minutes, show hours as well
+	let s = pad(duration.m, 2)
+		+ (showUnits ? "m:" : ":")
+		+ pad(duration.s, 2)
+		+ (showUnits ? "s" : "")
+	if (duration.m > 60) {
+		s = pad(duration.h, 2) + (showUnits ? "h:" : ":") + s
+	}
+	return s
 }
 
 function reactToSignalOnce(sig, slot) {
@@ -116,26 +116,29 @@ function reactToSignalOnce(sig, slot) {
 }
 
 function updateMaximumValue(key, value) {
-    // Set a max value slightly larger than previously known highest value
-    maxValues[key] = Math.max(maxValues[key] || 0, value * 1.2)
+	// Set a max value slightly larger than previously known highest value
+	if (isNaN(value)) {
+		return
+	}
+	maxValues[key] = Math.max(maxValues[key] || 0, value * 1.2)
 }
 
 function maximumValue(key) {
-    // TODO should we fetch a max from some data storage preset instead?
-    return maxValues[key] || 1  // use default=1 to avoid zero division for ratio calc
+	// TODO should we fetch a max from some data storage preset instead?
+	return maxValues[key] || 1  // use default=1 to avoid zero division for ratio calc
 }
 
 function batteryIcon(battery) {
-    if (!battery || battery.power == 0) {
-        return "../images/battery.svg"
-    }
+	if (!battery || battery.power == 0) {
+		return "../images/battery.svg"
+	}
 
-    return battery.power > 0 ? "../images/battery_charging.svg" : "../images/battery_discharging.svg"
+	return battery.power > 0 ? "../images/battery_charging.svg" : "../images/battery_discharging.svg"
 }
 
 // Can't use % operator, that gives remainder rather than a modulo that wraps.
 function modulo(dividend, divisor) {
-    return dividend - divisor * Math.floor(dividend / divisor)
+	return dividend - divisor * Math.floor(dividend / divisor)
 }
 
 function degreesToRadians(degrees) {

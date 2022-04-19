@@ -11,6 +11,7 @@ Item {
 
 	property QtObject genset: QtObject {
 		property real power
+		onPowerChanged: Utils.updateMaximumValue("system.ac.genset.power", power)
 
 		property ListModel phases: ListModel {
 			Component.onCompleted: root._populate(genset.phases)
@@ -19,6 +20,7 @@ Item {
 
 	property QtObject consumption: ListModel {
 		property real power
+		onPowerChanged: Utils.updateMaximumValue("system.ac.consumption.power", power)
 
 		property ListModel phases: ListModel {
 			Component.onCompleted: root._populate(consumption.phases)
@@ -55,7 +57,7 @@ Item {
 		onTriggered: {
 			let randomIndex = Math.floor(Math.random() * root._phaseCount)
 			genset.phases.set(randomIndex, {
-				power: 1800 + Math.floor(Math.random() * 20)
+				power: Math.floor(Math.random() * 10000)
 			})
 
 			// For consumption, add some wild fluctuations that can be seen in the Brief side panel graph

@@ -44,4 +44,9 @@ Item {
 			model.append({ "solarTracker": { "power": chargerPower } })
 		}
 	}
+	Component.onCompleted: {
+		for (var i in yieldHistory) {
+			Utils.updateMaximumValue("dailySolarYield", yieldHistory[i])
+		}
+	}
 }

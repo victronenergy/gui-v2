@@ -139,6 +139,7 @@
     "geometry.briefPage.edgeGauge.radius": 456,
     "geometry.briefPage.edgeGauge.width": 80,
     "geometry.briefPage.edgeGauge.font.size": 44,
+    "geometry.briefPage.edgeGauge.valueDisplay.spacing": 4,
     "geometry.briefPage.smallEdgeGauge.height": 184,
     "geometry.briefPage.smallEdgeGauge.maxAngle": 22,
     "geometry.briefPage.largeEdgeGauge.topMargin": 60,

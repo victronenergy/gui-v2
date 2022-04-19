@@ -36,7 +36,7 @@ Item {
 	property QtObject generator: QtObject {
 		// TODO add DC generator input data.
 		readonly property real power: ac.genset.power
-		onPowerChanged: Utils.updateMaximumValue("system ? system.generator.power : 0", power)
+		onPowerChanged: Utils.updateMaximumValue("system.generator.power", power)
 	}
 
 	property SystemAc ac: SystemAc {}

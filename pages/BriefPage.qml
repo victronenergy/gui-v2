@@ -12,8 +12,22 @@ Page {
 	id: root
 
 	readonly property bool solarYieldPresent: solarChargers && solarChargers.model.count > 0
-	readonly property bool generatorPresent: !!generator0
-	readonly property bool loadPresent: true    // TODO check for AC,DC inputs
+
+	readonly property bool generatorPresent: system && system.generator.power
+	readonly property real generatorPower: system ? system.generator.power : 0
+	readonly property real generatorPowerPercentage: generatorPower / Utils.maximumValue("system.generator.power") * 100
+
+	readonly property bool acLoadPresent: system && system.ac.consumption.power
+	readonly property real acLoad: acLoadPresent ? system.ac.consumption.power : 0
+	readonly property real acLoadPercentage: acLoad / Utils.maximumValue("system.ac.consumption.power") * 100
+
+	readonly property bool dcLoadPresent: system && system.dc.power
+	readonly property real dcLoad: dcLoadPresent ? system.dc.power : 0
+	readonly property real dcLoadPercentage: dcLoad / Utils.maximumValue("system.dc.power") * 100
+
+	readonly property bool combinedLoadPresent: system && system.loads.power
+	readonly property real combinedLoad: combinedLoadPresent ? system.loads.power : 0
+	readonly property real combinedLoadPercentage: combinedLoadPresent ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
 
 	property var leftGaugeTypes: []
 	property var rightGaugeTypes: []
@@ -29,19 +43,25 @@ Page {
 		if (solarYieldPresent) {
 			leftTypes.push('solar')
 		}
-		if (loadPresent) {
-			rightTypes.push('load')
+		if (acLoadPresent && dcLoadPresent) {
+			rightTypes.push('combinedload')
+		} else {
+			if (acLoadPresent) {
+				rightTypes.push('acload')
+			}
+			if (dcLoadPresent) {
+				rightTypes.push('dcload')
+			}
 		}
-		if (loadPresent) { // TODO - "The two arcs for output layout is a solution for cases where we can not merge AC and DC data"
-			rightTypes.push('load')
-		}
+
 		leftGaugeTypes = leftTypes
 		rightGaugeTypes = rightTypes
 	}
 
 	onSolarYieldPresentChanged: root.populateSideGauges()
 	onGeneratorPresentChanged: root.populateSideGauges()
-	onLoadPresentChanged: root.populateSideGauges()
+	onDcLoadPresentChanged: root.populateSideGauges()
+	onAcLoadPresentChanged: root.populateSideGauges()
 
 	Loader {
 		id: mainGauge
@@ -78,21 +98,22 @@ Page {
 	Loader {
 		id: leftEdge
 
-		readonly property string gaugeType: leftGaugeTypes.length === 1 ? leftGaugeTypes[0] : ''
+		readonly property string gaugeType: leftGaugeTypes.length >= 1 ? leftGaugeTypes[0] : ''
 
 		onGaugeTypeChanged: {
 			if (gaugeType === 'generator') {
 				setSource('qrc:/components/SideGauge.qml', {
-					"gaugeAlignmentY": Qt.AlignVCenter,
 					"gaugeAlignmentX": Qt.AlignLeft,
-					"arcX": 10,
+					"gaugeAlignmentY": Qt.binding(function() { return leftGaugeTypes.length === 2 ? Qt.AlignTop : Qt.AlignVCenter } ),
+					"arcX": Qt.binding(function() { return leftGaugeTypes.length === 1 ? 10 : undefined } ),
 					"direction": PathArc.Clockwise,
-					"startAngle": 270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2,
+					"startAngle": Qt.binding(function() { return leftGaugeTypes.length === 2 ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)} ),
 					"source": "qrc:/images/generator.svg",
-					"value": system ? system.generator.power : 0
+					"value": Qt.binding(function() { return generatorPowerPercentage }),
+					"textValue": Qt.binding(function() { return generatorPower })
 				})
-			} else {
-				setSource('SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignVCenter})
+			} else if (gaugeType === 'solar'){
+				setSource('qrc:/components/SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignVCenter})
 			}
 		}
 		anchors {
@@ -102,46 +123,18 @@ Page {
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			right: mainGauge.left
 		}
-		active: leftGaugeTypes.length === 1
+		active: leftGaugeTypes.length >= 1
 		opacity: root.sideOpacity
 	}
-	Loader {
-		id: leftUpper
 
-		readonly property string gaugeType: leftGaugeTypes.length === 2 ? leftGaugeTypes[0] : ''
-
-		onGaugeTypeChanged: {
-			if (gaugeType === 'generator') {
-				setSource('qrc:/components/SideGauge.qml', {
-					"gaugeAlignmentY": Qt.AlignTop,
-					"gaugeAlignmentX": Qt.AlignLeft,
-					"direction": PathArc.Clockwise,
-					"startAngle": 270,
-					"source": "qrc:/images/generator.svg",
-					"value": system ? system.generator.power : 0
-				})
-			} else {
-				setSource('SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignTop})
-			}
-		}
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
-			left: parent.left
-			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
-			right: mainGauge.left
-		}
-		active: leftGaugeTypes.length === 2
-		opacity: root.sideOpacity
-	}
 	Loader {
 		id: leftLower
 
 		readonly property string gaugeType: leftGaugeTypes.length === 2 ? leftGaugeTypes[1] : ''
 
-		onGaugeTypeChanged: setSource('SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignBottom})
+		onGaugeTypeChanged: setSource('qrc:/components/SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignBottom})
 		anchors {
-			top: leftGaugeTypes.length, leftUpper.bottom
+			top: leftGaugeTypes.length, leftEdge.bottom
 			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
 			left: parent.left
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
@@ -154,12 +147,21 @@ Page {
 	Loader {
 		id: rightEdge
 
-		readonly property string gaugeType: rightGaugeTypes.length === 1 ? rightGaugeTypes[0] : ''
+		readonly property string gaugeType: rightGaugeTypes.length >= 1 ? rightGaugeTypes[0] : ''
 
 		onGaugeTypeChanged: {
 			setSource('qrc:/components/SideGauge.qml', {
-				"gaugeAlignmentY": Qt.AlignVCenter,
-				"value": system && system.loads && system.loads.power ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
+				"gaugeAlignmentY": Qt.binding(function(){ return rightGaugeTypes.length == 2 ? Qt.AlignTop : Qt.AlignVCenter }),
+				"source": Qt.binding(function() {
+					return rightGaugeTypes.length == 2 ?
+						(gaugeType === 'acload' ? "qrc:/images/acloads.svg" : "qrc:/images/dcloads.svg") : "qrc:/images/consumption.svg"
+				}),
+				"value": Qt.binding(function() {
+					return rightGaugeTypes.length == 2 ? (gaugeType === 'acload' ? acLoadPercentage : dcLoadPercentage) : combinedLoadPercentage
+				}),
+				"textValue": Qt.binding(function() {
+					return rightGaugeTypes.length == 2 ? (gaugeType === 'acload' ? acLoad : dcLoad) : combinedLoad
+				})
 			})
 		}
 		anchors {
@@ -170,44 +172,24 @@ Page {
 			left: mainGauge.right
 		}
 		opacity: root.sideOpacity
-		active: rightGaugeTypes.length === 1
+		active: rightGaugeTypes.length >= 1
 	}
 
-	Loader {
-		id: rightUpper
-
-		readonly property string gaugeType: rightGaugeTypes.length === 2 ? rightGaugeTypes[0] : ''
-
-		onGaugeTypeChanged: {
-			setSource('qrc:/components/SideGauge.qml', {
-				"gaugeAlignmentY": Qt.AlignTop,
-				"value": system && system.loads && system.loads.power ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
-			})
-		}
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
-			right: parent.right
-			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
-			left: mainGauge.right
-		}
-		opacity: root.sideOpacity
-		active: rightGaugeTypes.length === 2
-	}
 	Loader {
 		id: rightLower
 
 		readonly property string gaugeType: rightGaugeTypes.length === 2 ? rightGaugeTypes[1] : ''
 
 		onGaugeTypeChanged: {
-			setSource('qrc:/components/SideGauge.qml',
-				{
-					"gaugeAlignmentY": Qt.AlignBottom,
-					"value": system && system.loads && system.loads.power ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
-				})
+			setSource('qrc:/components/SideGauge.qml', {
+				"gaugeAlignmentY": Qt.AlignBottom,
+				"source": Qt.binding(function() { return (gaugeType === 'acload' ? "qrc:/images/acloads.svg" : "qrc:/images/dcloads.svg") }),
+				"value": Qt.binding(function() { return gaugeType === 'acload' ? acLoadPercentage : dcLoadPercentage }),
+				"textValue": Qt.binding(function() { return gaugeType === 'acload' ? acLoad : dcLoad })
+			})
 		}
 		anchors {
-			top: rightUpper.bottom
+			top: rightEdge.bottom
 			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
 			right: parent.right
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin

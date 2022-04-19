@@ -4,11 +4,13 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 Item {
 	id: root
 
 	property real power: NaN
+	onPowerChanged: Utils.updateMaximumValue("system.dc.power", power)
 
 	property Timer demoTimer: Timer {
 		running: true
