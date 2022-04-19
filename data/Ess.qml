@@ -3,17 +3,18 @@
 */
 
 import QtQuick
-import Victron.Velib
-import "/components/Utils.js" as Utils
+import Victron.VenusOS
+//import Victron.Velib
 
 Item {
 	id: root
 
-	readonly property int state: _getState()
-	readonly property int minimumStateOfCharge: veMinimumSocLimit.value || 0
-	readonly property int stateOfChargeLimit: veSocLimit.value || 0
+	readonly property int state: -1 // _getState()
+	readonly property int minimumStateOfCharge: 0 // veMinimumSocLimit.value || 0
+	readonly property int stateOfChargeLimit: 0 // veSocLimit.value || 0
 
 	function setState(s) {
+/*
 		// Hub 4 mode
 		if (s === Enums.Ess_State_ExternalControl && veHub4Mode.value !== Enums.Ess_Hub4ModeState_Disabled) {
 			veHub4Mode.setValue(Enums.Ess_Hub4ModeState_Disabled)
@@ -40,12 +41,13 @@ Item {
 			veState.setValue(Enums.Ess_BatteryLifeState_BatteryLifeStateDisabled)
 			break
 		}
+*/
 	}
 
 	function setMinimumStateOfCharge(soc) {
-		veMinimumSocLimit.setValue(soc)
+//		veMinimumSocLimit.setValue(soc)
 	}
-
+/*
 	function _getState() {
 		let hub4Mode = veHub4Mode.value
 		let currentState = veState.value
@@ -94,4 +96,5 @@ Item {
 		id: veSocLimit
 		uid: veSettings.childUId("/Settings/CGwacs/BatteryLife/SocLimit")
 	}
+*/
 }

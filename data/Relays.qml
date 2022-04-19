@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
@@ -14,7 +14,7 @@ Item {
 	property var _relays: []
 
 	function _getRelays() {
-		const childIds = veRelay.childIds
+		const childIds = [] // veRelay.childIds
 
 		let relayIds = []
 		for (let i = 0; i < childIds.length; ++i) {
@@ -28,7 +28,7 @@ Item {
 			_relays = relayIds
 		}
 	}
-
+/*
 	VeQuickItem {
 		id: veRelay
 		uid: "dbus/com.victronenergy.system/Relay"
@@ -39,7 +39,7 @@ Item {
 		function onChildIdsChanged() { Qt.callLater(_getRelays) }
 		Component.onCompleted: _getRelays()
 	}
-
+*/
 	Instantiator {
 		model: _relays
 		delegate: QtObject {
@@ -49,7 +49,7 @@ Item {
 			property int state: -1
 
 			function setState(newState) {
-				_state.setValue(newState)
+//				_state.setValue(newState)
 			}
 
 			property bool _valid: state >= 0
@@ -61,11 +61,12 @@ Item {
 					root.model.remove(index)
 				}
 			}
-
+/*
 			property VeQuickItem _state: VeQuickItem {
 				uid: veRelay.uid + "/" + relay.uid + "/State"
 				onValueChanged: relay.state = value === undefined ? -1 : value
 			}
+*/
 		}
 	}
 }

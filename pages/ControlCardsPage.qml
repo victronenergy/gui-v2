@@ -4,7 +4,7 @@
 
 import QtQuick
 import QtQuick.Window
-import Victron.Velib
+//import Victron.Velib
 import Victron.VenusOS
 
 Page {

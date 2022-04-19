@@ -4,14 +4,13 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
 	id: root
 
-
-	property int state: veSystemState.value || Enums.System_State_Off
+	property int state: Enums.System_State_Off // veSystemState.value || Enums.System_State_Off
 
 	property QtObject loads: QtObject {
 		readonly property real power: ac.consumption.power + dc.power
@@ -26,9 +25,10 @@ Item {
 
 	property SystemAc ac: SystemAc {}
 	property SystemDc dc: SystemDc {}
-
+/*
 	VeQuickItem {
 		id: veSystemState
 		uid: veSystem.childUId("SystemState/State")
 	}
+*/
 }

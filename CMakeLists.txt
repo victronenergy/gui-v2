@@ -7,9 +7,9 @@ set(TRANSLATIONS_TS_TARGET venus-gui-v2-translations-ts)
 set(TRANSLATIONS_QM_TARGET venus-gui-v2-translations-qm)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -18,14 +18,14 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 message("Building VenusOS for ${CMAKE_SYSTEM_NAME}")
 
-find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools)
+find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml LinguistTools)
 if (NOT ${Qt6_FOUND})
     # cmake can't automatically find Qt 6.2 on Ubuntu Linux, give it a hint:
     if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
         list(APPEND CMAKE_PREFIX_PATH "/opt/Qt/6.2.0/gcc_64/lib/cmake/")
     endif()
 
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools REQUIRED)
+    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml REQUIRED)
 endif()
 
 option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD=ON" OFF) # Disabled by default
@@ -72,27 +72,27 @@ add_custom_command(
         ARGS ${TRANSLATIONS_TS_FILES} -idbased
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-include_directories(velib/inc .)
-
-set(VELIB_SOURCES
-    velib/inc/velib/velib_config.h
-    velib/inc/velib/qt/ve_qitems_dbus.hpp
-    velib/inc/velib/qt/ve_qitem_dbus_publisher.hpp
-    velib/inc/velib/qt/ve_qitem.hpp
-    velib/inc/velib/qt/ve_qitem_loader.hpp
-    velib/inc/velib/qt/ve_qitem_tree_model.hpp
-    velib/inc/velib/qt/v_busitems.h
-    velib/src/qt/v_busitem_proxy.h
-    velib/src/qt/v_busitem_proxy.cpp
-    velib/src/qt/ve_qitem_dbus_virtual_object.hpp
-    velib/src/qt/ve_qitem_dbus_virtual_object.cpp
-    velib/src/qt/ve_qitems_dbus.cpp
-    velib/src/qt/ve_qitem_dbus_publisher.cpp
-    velib/src/qt/ve_qitem.cpp
-    velib/src/qt/ve_qitem_loader.cpp
-    velib/src/qt/ve_qitem_tree_model.cpp
-    velib/src/qt/v_busitems.cpp
-)
+# remove all dbus things
+#include_directories(velib/inc .)
+#set(VELIB_SOURCES
+#    velib/inc/velib/velib_config.h
+#    velib/inc/velib/qt/ve_qitems_dbus.hpp
+#    velib/inc/velib/qt/ve_qitem_dbus_publisher.hpp
+#    velib/inc/velib/qt/ve_qitem.hpp
+#    velib/inc/velib/qt/ve_qitem_loader.hpp
+#    velib/inc/velib/qt/ve_qitem_tree_model.hpp
+#    velib/inc/velib/qt/v_busitems.h
+#    velib/src/qt/v_busitem_proxy.h
+#    velib/src/qt/v_busitem_proxy.cpp
+#    velib/src/qt/ve_qitem_dbus_virtual_object.hpp
+#    velib/src/qt/ve_qitem_dbus_virtual_object.cpp
+#    velib/src/qt/ve_qitems_dbus.cpp
+#    velib/src/qt/ve_qitem_dbus_publisher.cpp
+#    velib/src/qt/ve_qitem.cpp
+#    velib/src/qt/ve_qitem_loader.cpp
+#    velib/src/qt/ve_qitem_tree_model.cpp
+#    velib/src/qt/v_busitems.cpp
+#)
 
 list(APPEND SOURCES
     main.cpp
@@ -103,28 +103,28 @@ list(APPEND SOURCES
     logging.h
     enums.h
     enums.cpp
-    ${VELIB_SOURCES}
+#    ${VELIB_SOURCES}
     ${QML_RESOURCES}
 )
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
     add_compile_definitions(VENUS_DESKTOP_BUILD)
-    add_executable(${PROJECT_NAME}
+    qt_add_executable(${PROJECT_NAME}
       MACOSX_BUNDLE
       ${SOURCES}
     )
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     add_compile_definitions(VENUS_DESKTOP_BUILD)
-    add_executable(${PROJECT_NAME}
+    qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
 elseif(VENUS_DESKTOP_BUILD)
     add_compile_definitions(VENUS_DESKTOP_BUILD)
-    add_executable(${PROJECT_NAME}
+    qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
 else()
-    add_executable(${PROJECT_NAME}
+    qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
 endif()
@@ -144,7 +144,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Quick
     Qt6::Svg
     Qt6::Xml
-    Qt6::DBus
 )
 
 qt6_add_qml_module(${PROJECT_NAME}

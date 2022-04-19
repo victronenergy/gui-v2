@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
@@ -14,7 +14,7 @@ Item {
 	property var _inverters: []
 
 	function _getInverters() {
-		const childIds = veDBus.childIds
+		const childIds = [] // veDBus.childIds
 
 		let inverterIds = []
 		for (let i = 0; i < childIds.length; ++i) {
@@ -28,7 +28,7 @@ Item {
 			_inverters = inverterIds
 		}
 	}
-
+/*
 	VeQuickItem {
 		id: veConfig
 		uid: "dbus/com.victronenergy.system/Ac/In"
@@ -39,7 +39,7 @@ Item {
 		function onChildIdsChanged() { Qt.callLater(_getInverters) }
 		Component.onCompleted: _getInverters()
 	}
-
+*/
 	Instantiator {
 		model: _inverters
 		delegate: QtObject {
@@ -78,14 +78,14 @@ Item {
 			property bool currentLimit2Adjustable
 
 			function setMode(newMode) {
-				_mode.setValue(newMode)
+//				_mode.setValue(newMode)
 			}
 
 			function setCurrentLimit1(newLimit) {
-				_currentLimit1.setValue(newLimit)
+//				_currentLimit1.setValue(newLimit)
 			}
 			function setCurrentLimit2(newLimit) {
-				_currentLimit2.setValue(newLimit)
+//				_currentLimit2.setValue(newLimit)
 			}
 
 			property bool _valid: productType != -1
@@ -97,7 +97,7 @@ Item {
 					root.model.remove(index)
 				}
 			}
-
+/*
 			property VeQuickItem _state: VeQuickItem {
 				uid: inverter.serviceUid + "/State"
 				onValueChanged: inverter.state = value === undefined ? -1 : value
@@ -148,6 +148,7 @@ Item {
 				uid: inverter.serviceUid + "/Ac/In/2/CurrentLimitIsAdjustable"
 				onValueChanged: inverter.currentLimit2Adjustable = value === undefined ? false : (value > 0)
 			}
+*/
 		}
 	}
 }

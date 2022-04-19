@@ -4,7 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
@@ -102,7 +102,7 @@ Item {
 	property var _tanks: []
 
 	function _getTanks() {
-		const childIds = veDBus.childIds
+		const childIds = [] // veDBus.childIds
 
 		let tankIds = []
 		for (let i = 0; i < childIds.length; ++i) {
@@ -151,13 +151,13 @@ Item {
 			model[prop] += newValue
 		}
 	}
-
+/*
 	Connections {
 		target: veDBus
 		function onChildIdsChanged() { Qt.callLater(_getTanks) }
 		Component.onCompleted: _getTanks()
 	}
-
+*/
 	Instantiator {
 		id: tankObjects
 
@@ -186,7 +186,7 @@ Item {
 					model.remove(index)
 				}
 			}
-
+/*
 			property VeQuickItem _status: VeQuickItem {
 				uid: dbusUid + "/Status"
 				onValueChanged: tank.status = value === undefined ? -1 : value
@@ -220,6 +220,7 @@ Item {
 					root._updateTotal(tank.type, "totalCapacity", prevValue, tank.capacity)
 				}
 			}
+*/
 		}
 	}
 }

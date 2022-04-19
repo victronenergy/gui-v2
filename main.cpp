@@ -9,9 +9,10 @@
 
 #include <math.h>
 
-#include <velib/qt/v_busitems.h>
-#include <velib/qt/ve_qitems_dbus.hpp>
-#include <velib/qt/ve_qitem.hpp>
+// remove all dbus things
+//#include <velib/qt/v_busitems.h>
+//#include <velib/qt/ve_qitems_dbus.hpp>
+//#include <velib/qt/ve_qitem.hpp>
 
 #include <QGuiApplication>
 #include <QQmlComponent>
@@ -19,6 +20,7 @@
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QScreen>
+#include <QCommandLineParser>
 
 #include <QtDebug>
 
@@ -264,8 +266,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/SolarYieldGauge.qml")),
 		"Victron.VenusOS", 2, 0, "SolarYieldGauge");
 
-	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
-	qmlRegisterType<VeQItem>("Victron.Velib", 1, 0, "VeQItem");
+	//qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
+	//qmlRegisterType<VeQItem>("Victron.Velib", 1, 0, "VeQItem");
 
 	QGuiApplication app(argc, argv);
 	QGuiApplication::setApplicationName("Venus");
@@ -289,9 +291,9 @@ int main(int argc, char *argv[])
 
 	parser.process(app);
 
+/*
 	QScopedPointer<VeQItemDbusProducer> producer(new VeQItemDbusProducer(VeQItems::getRoot(), "dbus"));
 	QScopedPointer<VeQItemSettings> settings;
-
 	if (parser.isSet(dbusAddress) || parser.isSet(dbusDefault)) {
 		// Default to the session bus on the pc
 		VBusItems::setConnectionType(QDBusConnection::SessionBus);
@@ -308,6 +310,7 @@ int main(int argc, char *argv[])
 	} else {
 		producer->open(VBusItems::getConnection());
 	}
+*/
 
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
@@ -322,7 +325,7 @@ int main(int argc, char *argv[])
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
 
-	engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
+	engine.rootContext()->setContextProperty("dbusConnected", false /* VBusItems::getConnection().isConnected() */);
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
 	if (component.isError()) {

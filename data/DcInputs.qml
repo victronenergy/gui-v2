@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
@@ -40,13 +40,13 @@ Item {
 			_inputs = inputIds
 		}
 	}
-
+/*
 	Connections {
 		target: veDBus
 		function onChildIdsChanged() { Qt.callLater(_getInputs) }
 		Component.onCompleted: _getInputs()
 	}
-
+*/
 
 	Instantiator {
 		model: _inputs || null
@@ -83,7 +83,7 @@ Item {
 					root.model.remove(index)
 				}
 			}
-
+/*
 			property var _voltage: VeQuickItem {
 				uid: input.serviceUid + "/Dc/0/Voltage"
 				onValueChanged: input.voltage = value === undefined ? NaN : value
@@ -103,6 +103,7 @@ Item {
 				uid: input.serviceUid + "/Settings/MonitorMode"
 				onValueChanged: input.monitorMode = value === undefined ? NaN : value
 			}
+*/
 		}
 	}
 }

@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 import "/components/Gauges.js" as Gauges

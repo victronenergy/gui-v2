@@ -5,7 +5,7 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
-import Victron.Velib
+//import Victron.Velib
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 import "data"
@@ -132,7 +132,7 @@ Window {
 			property Relays relays: Relays {}
 			property SolarChargers solarChargers: SolarChargers {}
 			property System system: System {}
-
+/*
 			VeQuickItem {
 				id: veDBus
 				uid: "dbus"
@@ -145,6 +145,7 @@ Window {
 				id: veSettings
 				uid: "dbus/com.victronenergy.settings"
 			}
+*/
 		}
 	}
 

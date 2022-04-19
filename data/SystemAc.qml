@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
@@ -45,7 +45,7 @@ Item {
 		}
 		obj[propName] = total
 	}
-
+/*
 	VeQuickItem {
 		uid: veSystem.childUId("/Ac/ConsumptionOnInput/NumberOfPhases")
 		onValueChanged: {
@@ -55,12 +55,12 @@ Item {
 			}
 		}
 	}
-
+*/
 	Instantiator {
 		id: consumptionInputObjects
 
 		model: null
-		delegate: VeQuickItem {
+		delegate: Item { property var value } /*VeQuickItem {
 			uid: veDBus.childUId("/Ac/ConsumptionOnInput/L" + (index + 1) + "/Power")
 
 			onValueChanged: {
@@ -70,9 +70,9 @@ Item {
 				root.consumption.phases.set(model.index, { "inputPower": inputPower, "power": combinedPower })
 				root.updateTotal(root.consumption, "power")
 			}
-		}
+		}*/
 	}
-
+/*
 	VeQuickItem {
 		uid: veSystem.childUId("/Ac/ConsumptionOnOutput/NumberOfPhases")
 		onValueChanged: {
@@ -82,12 +82,13 @@ Item {
 			}
 		}
 	}
+*/
 
 	Instantiator {
 		id: consumptionOutputObjects
 
 		model: null
-		delegate: VeQuickItem {
+		delegate: Item { property var value } /*VeQuickItem {
 			uid: veDBus.childUId("/Ac/ConsumptionOnOutput/L" + (index + 1) + "/Power")
 
 			onValueChanged: {
@@ -97,9 +98,9 @@ Item {
 				root.consumption.phases.set(model.index, { "outputPower": outputPower, "power": combinedPower })
 				root.updateTotal(root.consumption, "power")
 			}
-		}
+		}*/
 	}
-
+/*
 	VeQuickItem {
 		uid: veSystem.childUId("/Ac/Genset/NumberOfPhases")
 		onValueChanged: {
@@ -109,12 +110,12 @@ Item {
 			}
 		}
 	}
-
+*/
 	Instantiator {
 		id: gensetObjects
 
 		model: null
-		delegate: VeQuickItem {
+		delegate: Item { property var value } /*VeQuickItem {
 			uid: veDBus.childUId("/Ac/Genset/L" + (index + 1) + "/Power")
 
 			onValueChanged: {
@@ -122,6 +123,6 @@ Item {
 				root.genset.phases.set(model.index, { "power": power })
 				root.updateTotal(root.genset, "power")
 			}
-		}
+		}*/
 	}
 }

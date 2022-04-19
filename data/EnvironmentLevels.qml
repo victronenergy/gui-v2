@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
@@ -28,26 +28,26 @@ Item {
 			_environmentInputs = environmentInputIds
 		}
 	}
-
+/*
 	Connections {
 		target: veDBus
 		function onChildIdsChanged() { Qt.callLater(_getEnvironmentInputs) }
 		Component.onCompleted: _getEnvironmentInputs()
 	}
-
+*/
 	Instantiator {
 		model: root._environmentInputs
 
 		delegate: QtObject {
 			id: input
 
-			property string customName: _veCustomName.value || ""
-			property string productName: _veCustomName.value || ""
+			property string customName: "" // _veCustomName.value || ""
+			property string productName: "" // _veCustomName.value || ""
 			property real temperature
 			property real humidity
 
 			property string _dbusUid: modelData
-
+/*
 			property var _veCustomName: VeQuickItem {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/CustomName" : ""
 			}
@@ -62,7 +62,7 @@ Item {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/Humidity" : ""
 				onValueChanged: input.humidity = value === undefined ? NaN : value
 			}
-
+*/
 			Component.onCompleted: {
 				root.model.append({ input: input })
 			}

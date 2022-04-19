@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
@@ -17,7 +17,7 @@ Item {
 			? NaN
 			: (isNaN(acPower) ? 0 : acPower) + (isNaN(dcPower) ? 0 : dcPower)
 	property real acPower: NaN
-	readonly property real dcPower: veDcPower.value === undefined ? NaN : veDcPower.value
+	readonly property real dcPower: NaN // veDcPower.value === undefined ? NaN : veDcPower.value
 
 	property var yieldHistory: []
 
@@ -29,7 +29,7 @@ Item {
 	}
 
 	function _getSolarChargers() {
-		const childIds = veDBus.childIds
+		const childIds = [] // veDBus.childIds
 
 		let solarChargerIds = []
 		for (let i = 0; i < childIds.length; ++i) {
@@ -115,7 +115,7 @@ Item {
 				power = p
 				acPvMonitor.updateAcPower()
 			}
-
+/*
 			property var vePhaseCount: VeQuickItem {
 				uid: acPvDelegate.dbusUid + "/NumberOfPhases"
 				onValueChanged: {
@@ -125,17 +125,17 @@ Item {
 					}
 				}
 			}
-
+*/
 			// Each Ac/PvOnX uid has 1-3 phases with power, e.g. Ac/PvOnGrid/L1/Power, Ac/PvOnGrid/L2/Power
 			property var pvPhases: Instantiator {
-				delegate: VeQuickItem {
+				delegate: Item { property var value } /* VeQuickItem {
 					uid: acPvDelegate.dbusUid + "/L" + (model.index + 1) + "/Power"
 					onValueChanged: acPvDelegate.updatePower()
-				}
+				} */
 			}
 		}
 	}
-
+/*
 	VeQuickItem {
 		id: veDcPower
 
@@ -147,7 +147,7 @@ Item {
 		function onChildIdsChanged() { Qt.callLater(_getSolarChargers) }
 		Component.onCompleted: _getSolarChargers()
 	}
-
+*/
 	Instantiator {
 		id: _chargersInstantiator
 
@@ -166,7 +166,7 @@ Item {
 			property var _historyIds: []
 
 			function _getTrackers() {
-				const childIds = _vePvConfig.childIds
+				const childIds = [] // _vePvConfig.childIds
 				let trackerIds = []
 				for (let i = 0; i < childIds.length; ++i) {
 					let childId = childIds[i]
@@ -205,7 +205,7 @@ Item {
 				dailyYields = _dailyYields
 				root._updateYieldHistory()
 			}
-
+/*
 			property var _veNrOfTrackers: VeQuickItem {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/NrOfTrackers" : ""
 				onValueChanged: {
@@ -249,7 +249,7 @@ Item {
 				function onChildIdsChanged() { Qt.callLater(_getHistory) }
 				Component.onCompleted: _getHistory()
 			}
-
+*/
 			// Used when there is only a single solar tracker for this charger. Properties must be
 			// same as those in the multi-tracker model.
 			property var _singleTracker: QtObject {
@@ -277,6 +277,7 @@ Item {
 							root.model.remove(index)
 						}
 					}
+/*
 					property VeQuickItem _power: VeQuickItem {
 						uid: dbusUid ? dbusUid + "/P" : ""
 						onValueChanged: {
@@ -284,18 +285,19 @@ Item {
 							solarTracker.power = value === undefined ? 0 : value
 						}
 					}
+*/
 				}
 			}
 
 			property var _historyInstantiator: Instantiator {
 				model: _historyIds
 
-				delegate: VeQuickItem {
+				delegate: Item { property var value } /* VeQuickItem {
 					property string historyId: modelData
 					uid: _veHistory.childUId("/" + modelData + "/Yield")
 
 					onValueChanged: if (value !== undefined) solarCharger._updateDailyYields()
-				}
+				}*/
 			}
 		}
 	}

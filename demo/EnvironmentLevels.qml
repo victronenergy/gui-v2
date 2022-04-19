@@ -4,8 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
-import "/components/Utils.js" as Utils
+//import Victron.Velib
 
 Item {
 	id: root

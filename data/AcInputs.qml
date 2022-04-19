@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
@@ -14,7 +14,7 @@ Item {
 	property var _inputs: []
 
 	function _getInputs() {
-		const childIds = veConfig.childIds
+		const childIds = [] // veConfig.childIds
 
 		let inputIds = []
 		for (let i = 0; i < childIds.length; ++i) {
@@ -28,7 +28,7 @@ Item {
 			_inputs = inputIds
 		}
 	}
-
+/*
 	VeQuickItem {
 		id: veConfig
 		uid: "dbus/com.victronenergy.system/Ac/In"
@@ -39,7 +39,7 @@ Item {
 		function onChildIdsChanged() { Qt.callLater(_getInputs) }
 		Component.onCompleted: _getInputs()
 	}
-
+*/
 	/*
 	Each AC input has basic config details at com.victronenergy.system /Ac/In/x. E.g. for Input 0:
 		/Ac/In/0/Connected: 			1
@@ -85,7 +85,7 @@ Item {
 			property string _serviceUid: serviceName ? 'dbus/' + serviceName : ''
 
 			// --- General config details about the input, from com.victronenergey.system ---
-
+/*
 			property VeQuickItem _serviceType: VeQuickItem {
 				uid: configUid + "/ServiceType"
 				onValueChanged: input.serviceType = value === undefined ? '' : value
@@ -112,7 +112,7 @@ Item {
 				uid: _serviceUid ? _serviceUid + "/ProductId" : ''
 				onValueChanged: input.productId = value === undefined ? false : value
 			}
-
+*/
 			property AcInputServiceLoader _serviceLoader: AcInputServiceLoader {
 				id: _serviceLoader
 

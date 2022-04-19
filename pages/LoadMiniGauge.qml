@@ -3,7 +3,6 @@
 */
 
 import QtQuick
-import Victron.Velib
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 import "../data"

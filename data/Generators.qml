@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
@@ -15,7 +15,7 @@ Item {
 	property var _generators: []
 
 	function _getGenerators() {
-		const childIds = veDBus.childIds
+		const childIds = [] // veDBus.childIds
 
 		let generatorIds = []
 		for (let i = 0; i < childIds.length; ++i) {
@@ -29,13 +29,13 @@ Item {
 			_generators = generatorIds
 		}
 	}
-
+/*
 	Connections {
 		target: veDBus
 		function onChildIdsChanged() { Qt.callLater(_getGenerators) }
 		Component.onCompleted: _getGenerators()
 	}
-
+*/
 	Instantiator {
 		id: generatorObjects
 
@@ -76,7 +76,7 @@ Item {
 					}
 				}
 			}
-
+/*
 			property VeQuickItem _state: VeQuickItem {
 				uid: dbusUid + "/State"
 				onValueChanged: generator.state = value === undefined ? -1 : value
@@ -115,6 +115,7 @@ Item {
 					}
 				}
 			}
+*/
 		}
 	}
 }

@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import Victron.Velib
+//import Victron.Velib
 import "/components/Utils.js" as Utils
 
 
@@ -58,9 +58,9 @@ Loader {
 		if (serviceUid == "") {
 			return null
 		} else if (serviceType == "vebus") {
-			return vebusComponent
+			return null // vebusComponent
 		} else if (serviceType == "grid" || serviceType == "genset") {
-			return gridOrGensetComponent
+			return null // gridOrGensetComponent
 		} else {
 			console.warn("Unsupported AC input service:", serviceType)
 			return null
@@ -74,7 +74,7 @@ Loader {
 	ListModel {
 		id: invalidPhases
 	}
-
+/*
 	VeQuickItem {
 		uid: {
 			if (!root.item) {
@@ -165,4 +165,5 @@ Loader {
 			}
 		}
 	}
+*/
 }
