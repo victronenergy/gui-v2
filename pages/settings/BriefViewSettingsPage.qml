@@ -31,7 +31,7 @@ Page {
 					secondaryText: Gauges.tankProperties(model.value).name || ""
 
 					onClicked: {
-						PageManager.pushPage(briefLevelComponent, {
+						Global.pageManager.pushPage(briefLevelComponent, {
 							tankType: Qt.binding(function() { return model.value }),
 							levelIndex: model.index
 						})

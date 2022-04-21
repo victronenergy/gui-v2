@@ -6,6 +6,7 @@ import QtQuick
 import Victron.Velib
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
+import "/components/Gauges.js" as Gauges
 import "../data"
 
 Page {
@@ -299,7 +300,7 @@ Page {
 		}
 	}
 
-	state: PageManager.sidePanelActive ? 'panelOpen' : ''
+	state: Global.pageManager.sidePanelActive ? 'panelOpen' : ''
 	states: State {
 		name: 'panelOpen'
 		PropertyChanges {

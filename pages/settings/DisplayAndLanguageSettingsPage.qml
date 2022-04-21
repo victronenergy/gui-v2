@@ -84,7 +84,7 @@ Page {
 				//% "Brief view levels"
 				text: qsTrId("settings_brief_view_levels")
 				onClicked: {
-					PageManager.pushPage("/pages/settings/BriefViewSettingsPage.qml", {"title": text})
+					Global.pageManager.pushPage("/pages/settings/BriefViewSettingsPage.qml", {"title": text})
 				}
 			}
 

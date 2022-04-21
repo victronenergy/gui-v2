@@ -79,7 +79,7 @@ Item {
 
 			Behavior on y {
 				// Only animate when the value has changed, and not when the page is resizing
-				enabled: !PageManager.animatingIdleResize
+				enabled: !Global.pageManager.animatingIdleResize
 				NumberAnimation {}
 			}
 

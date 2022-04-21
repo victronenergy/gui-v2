@@ -19,10 +19,10 @@ FocusScope {
 	width: parent ? parent.width : 0
 	height: parent ? parent.height : 0
 
-	C.StackView.onActivated: PageManager.currentPage = root
+	C.StackView.onActivated: Global.pageManager.currentPage = root
 
 	// TODO only pass this on if demo mode is active
 	Keys.onReleased: function(event) {
-		PageManager.emitter.demoKeyPressed(event)
+		Global.pageManager.emitter.demoKeyPressed(event)
 	}
 }

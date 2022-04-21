@@ -41,6 +41,15 @@ Window {
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
 
+	PageManager {
+		id: pageManager
+		Component.onCompleted: {
+			if (Global.pageManager == null) {
+				Global.pageManager = pageManager
+			}
+		}
+	}
+
 	SplashView {
 		id: splashView
 		anchors.fill: parent
@@ -64,6 +73,7 @@ Window {
 		id: mainView
 		anchors.fill: parent
 		opacity: 0.0
+		pageManager: pageManager
 
 		Behavior on opacity {
 			NumberAnimation {
@@ -77,16 +87,16 @@ Window {
 		id: idleModeMouseArea
 
 		anchors.fill: parent
-		enabled: PageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
-		onClicked: PageManager.interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
+		enabled: pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
+		onClicked: pageManager.interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
 	}
 
 	MouseArea {
 		anchors.fill: parent
 		onPressed: function(mouse) {
 			mouse.accepted = false
-			if (PageManager.idleModeTimer.running) {
-				PageManager.idleModeTimer.restart()
+			if (pageManager.idleModeTimer.running) {
+				pageManager.idleModeTimer.restart()
 			}
 		}
 	}

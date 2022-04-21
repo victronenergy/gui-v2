@@ -6,12 +6,8 @@ pragma Singleton
 
 import QtQuick
 
-Item {
-	property alias normal: normal
-
-	FontLoader {
-		id: normal
-
+QtObject {
+	property FontLoader normal: FontLoader {
 		source: "qrc:/fonts/MuseoSans-500.otf"
 	}
 }

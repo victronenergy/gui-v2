@@ -20,7 +20,7 @@ Page {
 	fullScreenWhenIdle: navStack.currentItem.fullScreenWhenIdle
 
 	Connections {
-		target: PageManager.emitter
+		target: Global.pageManager.emitter
 
 		function onPagePushRequested(obj, properties) {
 			navStack.push(obj, properties)
@@ -34,7 +34,7 @@ Page {
 	C.StackView {
 		id: navStack
 		clip: true
-		focus: PageManager.currentPage === root
+		focus: Global.pageManager.currentPage === root
 
 		anchors {
 			left: parent.left
@@ -118,6 +118,7 @@ Page {
 		}
 
 		property var currentUrl: navBar.model.get(0).url
+
 		onButtonClicked: function (buttonIndex) {
 			var navUrl = model.get(buttonIndex).url
 			if (navUrl != currentUrl) {
@@ -143,8 +144,8 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarIn
 
-			running: PageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
-					 || PageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
+			running: Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
+					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
 
 			NumberAnimation {
 				target: navBar
@@ -156,7 +157,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
+					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
 				}
 			}
 			OpacityAnimator {
@@ -168,7 +169,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
+					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
 				}
 			}
 		}
@@ -176,8 +177,8 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarOut
 
-			running: PageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
-					 || PageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
+			running: Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
+					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
 
 			OpacityAnimator {
 				target: navBar
@@ -188,7 +189,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
+					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
 				}
 			}
 			NumberAnimation {
@@ -201,11 +202,11 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
+					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
 				}
 			}
 		}
 	}
 
-	Component.onCompleted: PageManager.navBar = navBar
+	Component.onCompleted: Global.pageManager.navBar = navBar
 }

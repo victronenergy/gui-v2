@@ -66,7 +66,8 @@ Flickable {
 							? VenusOS.EnvironmentGaugePanel_Size_Compact
 							: VenusOS.EnvironmentGaugePanel_Size_Expanded
 				}
-				verticalSize: PageManager.expandLayout
+
+				verticalSize: Global.pageManager.expandLayout
 						? VenusOS.EnvironmentGaugePanel_Size_Expanded
 						: VenusOS.EnvironmentGaugePanel_Size_Compact
 				title: model.input.customName || model.input.productName || ""

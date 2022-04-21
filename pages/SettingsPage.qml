@@ -56,7 +56,7 @@ Page {
 		delegate: SettingsListNavigationItem {
 			text: modelData.text
 			onClicked: {
-				PageManager.pushPage(modelData.page, {"title": modelData.text})
+				Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
 			}
 		}
 	}

@@ -9,7 +9,7 @@ import Victron.Velib
 QtObject {
 	id: root
 
-	property var configs: PageManager.levelsTabIndex === 0
+	property var configs: Global.pageManager.levelsTabIndex === 0
 			? tankConfigs
 			: environmentConfigs
 
