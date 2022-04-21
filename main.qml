@@ -63,56 +63,65 @@ Window {
 		Component.onCompleted: Global.preferences = preferences
 	}
 
-	DialogManager {
-		id: dialogManager
-	}
+	Item {
+		// Necessary for WebAssembly, where by default the window takes up the entire browser size.
+		id: uiItem
+		clip: true
+		anchors.centerIn: parent
+		width: [800, 1024][Theme.screenSize]
+		height: [480, 600][Theme.screenSize]
 
-	SplashView {
-		id: splashView
-		anchors.fill: parent
-		visible: opacity > 0.0
-		opacity: 1.0
+		DialogManager {
+			id: dialogManager
+		}
 
-		Behavior on opacity {
-			NumberAnimation {
-				duration: Theme.animation.page.fade.duration
-				easing.type: Easing.InOutQuad
+		SplashView {
+			id: splashView
+			anchors.fill: parent
+			visible: opacity > 0.0
+			opacity: 1.0
+
+			Behavior on opacity {
+				NumberAnimation {
+					duration: Theme.animation.page.fade.duration
+					easing.type: Easing.InOutQuad
+				}
+			}
+
+			onHideSplash: {
+				splashView.opacity = 0.0
+				mainView.opacity = 1.0
 			}
 		}
 
-		onHideSplash: {
-			splashView.opacity = 0.0
-			mainView.opacity = 1.0
-		}
-	}
+		MainView {
+			id: mainView
+			anchors.fill: parent
+			opacity: 0.0
+			pageManager: pageManager
 
-	MainView {
-		id: mainView
-		anchors.fill: parent
-		opacity: 0.0
-		pageManager: pageManager
-
-		Behavior on opacity {
-			NumberAnimation {
-				duration: Theme.animation.page.fade.duration
-				easing.type: Easing.InOutQuad
+			Behavior on opacity {
+				NumberAnimation {
+					duration: Theme.animation.page.fade.duration
+					easing.type: Easing.InOutQuad
+				}
 			}
 		}
-	}
 
-	MouseArea {
-		id: idleModeMouseArea
+		MouseArea {
+			id: idleModeMouseArea
 
-		anchors.fill: parent
-		enabled: pageManager.interactivity === Enums.PageManager_InteractionMode_Idle
-		onClicked: pageManager.interactivity = Enums.PageManager_InteractionMode_EndFullScreen
-	}
+			anchors.fill: parent
+			enabled: pageManager.interactivity === Enums.PageManager_InteractionMode_Idle
+			onClicked: pageManager.interactivity = Enums.PageManager_InteractionMode_EndFullScreen
+		}
 
-	MouseArea {
-		anchors.fill: parent
-		onPressed: function(mouse) {
-			mouse.accepted = false
-			pageManager.idleModeTimer.restart()
+		MouseArea {
+			anchors.fill: parent
+			onPressed: function(mouse) {
+				mouse.accepted = false
+				pageManager.idleModeTimer.restart()
+			}
 		}
 	}
 
