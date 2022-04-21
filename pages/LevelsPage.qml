@@ -28,16 +28,12 @@ Page {
 			NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
 		}
 
-		model: ListModel {
-			ListElement {
-				//% "Tanks"
-				text: QT_TRID_NOOP("levels_page_tanks")
-			}
-			ListElement {
-				//% "Environment"
-				text: QT_TRID_NOOP("levels_page_environment")
-			}
-		}
+		model: [
+			//% "Tanks"
+			qsTrId("levels_page_tanks"),
+			//% "Environment"
+			qsTrId("levels_page_environment")
+		]
 
 		// Remember currentIndex when returning to the Levels page
 		currentIndex: PageManager.levelsTabIndex

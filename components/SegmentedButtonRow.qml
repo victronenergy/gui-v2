@@ -43,7 +43,7 @@ Item {
 				checked: model.index === root.currentIndex
 				font.pixelSize: root.fontPixelSize
 				flat: false
-				text: qsTrId(model.text)
+				text: modelData
 				roundedSide: modelIndex === 0 ? AsymmetricRoundedRectangle.RoundedSide.Left
 					: modelIndex === (buttonRepeater.count-1) ? AsymmetricRoundedRectangle.RoundedSide.Right
 					: AsymmetricRoundedRectangle.RoundedSide.NoneHorizontal
