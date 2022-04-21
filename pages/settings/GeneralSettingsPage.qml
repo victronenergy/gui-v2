@@ -21,7 +21,7 @@ Page {
 			SettingsListItem {
 				//% "Set root password"
 				text: qsTrId("settings_set_root_password")
-				showAccessLevel: User.AccessSuperUser
+				showAccessLevel: VenusOS.User_AccessType_SuperUser
 				// TODO show text input with VKB
 			}
 
@@ -31,7 +31,7 @@ Page {
 				//% "SSH on LAN"
 				text: qsTrId("settings_ssh_on_lan")
 				source: "com.victronenergy.settings/Settings/System/SSHLocal"
-				showAccessLevel: User.AccessSuperUser
+				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 
 			SettingsListSwitch {

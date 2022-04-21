@@ -4,16 +4,11 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	enum Size {
-		Compact,
-		Expanded
-	}
-
 	property alias title: titleLabel.text
 	property real temperature: NaN
 	property real humidity: NaN
-	property int horizontalSize: EnvironmentGaugePanel.Size.Expanded
-	property int verticalSize: EnvironmentGaugePanel.Size.Expanded
+	property int horizontalSize: VenusOS.EnvironmentGaugePanel_Size_Expanded
+	property int verticalSize: VenusOS.EnvironmentGaugePanel_Size_Expanded
 
 	readonly property int compactWidth: _twoGauges
 		? Theme.geometry.levelsPage.environment.gaugePanel.twoGauge.compact.width
@@ -26,8 +21,8 @@ Rectangle {
 
 	readonly property int _twoGauges: !isNaN(temperature) && !isNaN(humidity)
 
-	width: horizontalSize === EnvironmentGaugePanel.Size.Expanded ? expandedWidth : compactWidth
-	height: verticalSize === EnvironmentGaugePanel.Size.Expanded ? expandedHeight : compactHeight
+	width: horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedWidth : compactWidth
+	height: verticalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedHeight : compactHeight
 
 	color: Theme.color.levelsPage.environment.panel.border.color
 	radius: Theme.geometry.levelsPage.environment.gaugePanel.radius
@@ -81,10 +76,10 @@ Rectangle {
 		//: Abbreviation of "Celsius"
 		//% "C"
 		text: qsTrId("environment_gauge_celsius")
-		physicalQuantity: Units.Temperature
+		physicalQuantity: VenusOS.Units_PhysicalQuantity_Temperature
 		value: Math.round(root.temperature)
 		zeroMarkerVisible: true
-		reduceFontSize: root._twoGauges && root.horizontalSize === EnvironmentGaugePanel.Size.Compact
+		reduceFontSize: root._twoGauges && root.horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Compact
 		minimumValue: Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue
 		maximumValue: Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue
 
@@ -122,10 +117,10 @@ Rectangle {
 			//: Abbreviation of "Room Humidity"
 			//% "RH"
 			text: qsTrId("environment_gauge_humidity")
-			physicalQuantity: Units.Percentage
+			physicalQuantity: VenusOS.Units_PhysicalQuantity_Percentage
 			value: Math.round(root.humidity)
 			zeroMarkerVisible: false
-			reduceFontSize: root._twoGauges && root.horizontalSize === EnvironmentGaugePanel.Size.Compact
+			reduceFontSize: root._twoGauges && root.horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Compact
 			minimumValue: Theme.geometry.levelsPage.environment.humidityGauge.minimumValue
 			maximumValue: Theme.geometry.levelsPage.environment.humidityGauge.maximumValue
 

@@ -14,7 +14,7 @@ Page {
 			? Theme.geometry.controlCard.minimumWidth
 			: Theme.geometry.controlCard.maximumWidth
 
-	navigationButton: StatusBar.NavigationButton.ControlsActive
+	navigationButton: VenusOS.StatusBar_NavigationButtonStyle_ControlsActive
 
 	ListView {
 		id: cardsView
@@ -104,7 +104,7 @@ Page {
 
 			ESSCard {
 				width: root.cardWidth
-				state: ess ? ess.state : Ess.State.Unused
+				state: ess ? ess.state : VenusOS.Ess_State_Unused
 				minimumStateOfCharge: ess ? ess.minimumStateOfCharge : 0
 				stateOfChargeLimit: ess ? ess.stateOfChargeLimit : 0
 

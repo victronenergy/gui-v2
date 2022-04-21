@@ -43,7 +43,7 @@ Item {
 		gaugeAlignmentY: root.gaugeAlignmentY
 		layoutDirection: root._gaugeAlignmentX === Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
 		source: "qrc:/images/solaryield.svg"
-		physicalQuantity: Units.Power
+		physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
 		value: solarChargers ? solarChargers.power : NaN
 	}
 }

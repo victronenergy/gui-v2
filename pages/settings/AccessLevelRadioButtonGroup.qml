@@ -11,27 +11,27 @@ SettingsListRadioButtonGroup {
 	//% "Access level"
 	text: qsTrId("settings_access_level")
 	source: "com.victronenergy.settings/Settings/System/AccessLevel"
-	writeAccessLevel: User.AccessUser
+	writeAccessLevel: VenusOS.User_AccessType_User
 
 	model: [
 		//% "User"
-		{ display: qsTrId("settings_access_user"), value: User.AccessUser },
+		{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User },
 		//% "User & Installer"
-		{ display: qsTrId("settings_access_user_installer"), value: User.AccessInstaller },
+		{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer },
 		//% "Superuser"
-		{ display: qsTrId("settings_access_superuser"), value: User.AccessSuperUser },
+		{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser },
 		//% "Service"
-		{ display: qsTrId("settings_access_service"), value: User.AccessService },
+		{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service },
 	]
 	currentIndex: {
 		switch (systemSettings.accessLevel) {
-		case User.AccessUser:
+		case VenusOS.User_AccessType_User:
 			return 0
-		case User.AccessInstaller:
+		case VenusOS.User_AccessType_Installer:
 			return 1
-		case User.AccessSuperUser:
+		case VenusOS.User_AccessType_SuperUser:
 			return 2
-		case User.AccessService:
+		case VenusOS.User_AccessType_Service:
 			return 3
 		default:
 			return -1
@@ -48,8 +48,8 @@ SettingsListRadioButtonGroup {
 		running: parent.pulledDown
 		interval: 5000
 		onTriggered: {
-			if (systemSettings.accessLevel >= User.AccessInstaller) {
-				systemSettings.setAccessLevel(User.AccessSuperUser)
+			if (systemSettings.accessLevel >= VenusOS.User_AccessType_Installer) {
+				systemSettings.setAccessLevel(VenusOS.User_AccessType_SuperUser)
 			}
 		}
 	}
@@ -60,8 +60,8 @@ SettingsListRadioButtonGroup {
 		repeatCount = 0
 	}
 	Keys.onRightPressed: function(event) {
-		if (systemSettings.accessLevel !== User.AccessSuperUser && ++repeatCount > 60) {
-			systemSettings.setAccessLevel(User.AccessSuperUser)
+		if (systemSettings.accessLevel !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
+			systemSettings.setAccessLevel(VenusOS.User_AccessType_SuperUser)
 			repeatCount = 0
 		}
 	}
@@ -78,7 +78,7 @@ SettingsListRadioButtonGroup {
 	Keys.onDownPressed: function(event) {
 		if (downCount < 5) ++downCount;
 		if (upCount === 5 && downCount === 5) {
-			systemSettings.setAccessLevel(User.AccessService)
+			systemSettings.setAccessLevel(VenusOS.User_AccessType_Service)
 			upCount = 0
 		}
 		event.accepted = false

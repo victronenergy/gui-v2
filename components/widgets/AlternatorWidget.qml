@@ -11,5 +11,5 @@ DcInputWidget {
 	//% "Alternator"
 	title.text: qsTrId("overview_widget_alternator_title")
 	icon.source: "qrc:/images/alternator.svg"
-	type: OverviewWidget.Type.Alternator
+	type: VenusOS.OverviewWidget_Type_Alternator
 }

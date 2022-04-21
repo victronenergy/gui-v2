@@ -14,17 +14,17 @@ Item {
 
 	property QtObject briefView: QtObject {
 		property ListModel gauges: ListModel {
-			ListElement { value: Gauges.Battery }
-			ListElement { value: Gauges.Fuel }
-			ListElement { value: Gauges.FreshWater }
-			ListElement { value: Gauges.BlackWater }
+			ListElement { value: VenusOS.Tank_Type_Battery }
+			ListElement { value: VenusOS.Tank_Type_Fuel }
+			ListElement { value: VenusOS.Tank_Type_FreshWater }
+			ListElement { value: VenusOS.Tank_Type_BlackWater }
 		}
 		property bool showPercentages
 
 		function setGauge(index, value) {
 			const obj = briefViewLevels.objectAt(index)
 			if (obj) {
-				obj.setValue(value === Gauges.Battery ? -1 : value)
+				obj.setValue(value === VenusOS.Tank_Type_Battery ? -1 : value)
 				gauges.setProperty(index, "value", value)
 			} else {
 				console.warn("No gauge at index", index)
@@ -43,7 +43,7 @@ Item {
 
 				onValueChanged: {
 					if (value !== undefined) {
-						const v = value === -1 ? Gauges.Battery : value
+						const v = value === -1 ? VenusOS.Tank_Type_Battery : value
 						root.briefView.gauges.setProperty(model.index, "value", v)
 					}
 				}

@@ -16,15 +16,7 @@ Item {
 		margins: Theme.geometry.toastNotification.margins
 	}
 
-	enum Category {
-		None,
-		Informative,
-		Confirmation,
-		Warning,
-		Error
-	}
-
-	property int category: ToastNotification.None
+	property int category: VenusOS.ToastNotification_Category_None
 	property alias backgroundColor: background.color
 	property alias highlightColor: highlight.color
 	property alias icon: icon
@@ -47,10 +39,10 @@ Item {
 		anchors.fill: parent
 
 		radius: Theme.geometry.toastNotification.radius
-		color: root.category === ToastNotification.None ? Theme.color.toastNotification.background.none
-			 : root.category === ToastNotification.Informative ? Theme.color.toastNotification.background.informative
-			 : root.category === ToastNotification.Confirmation ? Theme.color.toastNotification.background.confirmation
-			 : root.category === ToastNotification.Warning ? Theme.color.toastNotification.background.warning
+		color: root.category === VenusOS.ToastNotification_Category_None ? Theme.color.toastNotification.background.none
+			 : root.category === VenusOS.ToastNotification_Category_Informative ? Theme.color.toastNotification.background.informative
+			 : root.category === VenusOS.ToastNotification_Category_Confirmation ? Theme.color.toastNotification.background.confirmation
+			 : root.category === VenusOS.ToastNotification_Category_Warning ? Theme.color.toastNotification.background.warning
 			 : Theme.color.toastNotification.background.error
 
 		AsymmetricRoundedRectangle {
@@ -66,9 +58,10 @@ Item {
 			radius: parent.radius
 			flat: true
 
-			color: root.category === ToastNotification.Informative ? Theme.color.toastNotification.highlight.informative
-				 : root.category === ToastNotification.Confirmation ? Theme.color.toastNotification.highlight.confirmation
-				 : root.category === ToastNotification.Warning ? Theme.color.toastNotification.highlight.warning
+			color: root.category === VenusOS.ToastNotification_Category_None ? Theme.color.toastNotification.background.none
+				 : root.category === VenusOS.ToastNotification_Category_Informative ? Theme.color.toastNotification.highlight.informative
+				 : root.category === VenusOS.ToastNotification_Category_Confirmation ? Theme.color.toastNotification.highlight.confirmation
+				 : root.category === VenusOS.ToastNotification_Category_Warning ? Theme.color.toastNotification.highlight.warning
 				 : Theme.color.toastNotification.highlight.error
 
 			CP.IconImage {
@@ -77,9 +70,9 @@ Item {
 
 				width: Theme.geometry.toastNotification.icon.width
 				color: Theme.color.toastNotification.foreground
-				source: root.category === ToastNotification.None ? ""
-					  : root.category === ToastNotification.Informative ? "qrc:/images/toast_icon_info.svg"
-					  : root.category === ToastNotification.Confirmation ? "qrc:/images/toast_icon_checkmark.svg"
+				source: root.category === VenusOS.ToastNotification_Category_None ? ""
+					  : root.category === VenusOS.ToastNotification_Category_Informative ? "qrc:/images/toast_icon_info.svg"
+					  : root.category === VenusOS.ToastNotification_Category_Confirmation ? "qrc:/images/toast_icon_checkmark.svg"
 					  : "qrc:/images/toast_icon_alarm.svg"
 			}
 		}

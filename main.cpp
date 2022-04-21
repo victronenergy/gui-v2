@@ -5,6 +5,7 @@
 #include "language.h"
 #include "logging.h"
 #include "theme.h"
+#include "enums.h"
 
 #include <math.h>
 
@@ -52,6 +53,9 @@ int main(int argc, char *argv[])
 		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
 			return new Victron::VenusOS::Language(engine);
 		});
+	qmlRegisterSingletonType<Victron::VenusOS::Enums>(
+		"Victron.VenusOS", 2, 0, "VenusOS",
+		&Victron::VenusOS::Enums::instance);
 
 	/* data sources */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Battery.qml")),
@@ -241,10 +245,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "WidgetConnector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorPath.qml")),
 		"Victron.VenusOS", 2, 0, "WidgetConnectorPath");
-
-	/* models */
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/models/User.qml")),
-		"Victron.VenusOS", 2, 0, "User");
 
 	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/ESSCard.qml")),

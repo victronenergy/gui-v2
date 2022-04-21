@@ -84,7 +84,6 @@
         <file>components/VenusFont.qml</file>
         <file>components/VerticalGauge.qml</file>
         <file>components/WeatherDetails.qml</file>
-        <file>components/models/User.qml</file>
         <file>data/AcInputs.qml</file>
         <file>data/AcInputServiceLoader.qml</file>
         <file>data/DcInputs.qml</file>

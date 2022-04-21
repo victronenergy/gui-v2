@@ -14,8 +14,8 @@ Item {
 	property alias backgroundRect: backgroundRect
 	property int spacing: Theme.geometry.settingsPage.settingsList.spacing
 
-	property int showAccessLevel: User.AccessUser
-	property int writeAccessLevel: User.AccessUser
+	property int showAccessLevel: VenusOS.User_AccessType_User
+	property int writeAccessLevel: VenusOS.User_AccessType_User
 	readonly property bool userHasWriteAccess: systemSettings.accessLevel >= writeAccessLevel
 
 	readonly property bool defaultVisible: systemSettings.accessLevel >= showAccessLevel

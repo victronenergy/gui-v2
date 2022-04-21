@@ -77,8 +77,8 @@ Window {
 		id: idleModeMouseArea
 
 		anchors.fill: parent
-		enabled: PageManager.interactivity === PageManager.InteractionMode.Idle
-		onClicked: PageManager.interactivity = PageManager.InteractionMode.EndFullScreen
+		enabled: PageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
+		onClicked: PageManager.interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
 	}
 
 	MouseArea {

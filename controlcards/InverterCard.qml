@@ -9,7 +9,7 @@ ControlCard {
 	id: root
 
 	property int state
-	property int mode: Inverters.InverterMode.Off
+	property int mode: VenusOS.Inverters_Mode_Off
 	property bool modeAdjustable
 	property var ampOptions: []
 	property alias currentLimits: currentLimitRepeater.model
@@ -24,51 +24,51 @@ ControlCard {
 	status.text: {
 		// TODO this duplicates the translations in OverviewWidget, should move the translations to a common component
 		switch (root.state) {
-		case System.State.Off:
+		case VenusOS.System_State_Off:
 			//: System state = 'Off'
 			//% "Off"
 			return qsTrId("overview_widget_state_off")
-		case System.State.LowPower:
+		case VenusOS.System_State_LowPower:
 			//: System state = 'Low power'
 			//% "Low power"
 			return qsTrId("overview_widget_state_lowpower")
-		case System.State.FaultCondition:
+		case VenusOS.System_State_FaultCondition:
 			//: System state = 'Fault condition'
 			//% "Fault"
 			return qsTrId("overview_widget_state_faultcondition")
-		case System.State.BulkCharging:
+		case VenusOS.System_State_BulkCharging:
 			//: System state = 'Bulk charging'
 			//% "Bulk"
 			return qsTrId("overview_widget_state_bulkcharging")
-		case System.State.AbsorptionCharging:
+		case VenusOS.System_State_AbsorptionCharging:
 			//: System state = 'Absorption charging'
 			//% "Absorption"
 			return qsTrId("overview_widget_state_absorptioncharging")
-		case System.State.FloatCharging:
+		case VenusOS.System_State_FloatCharging:
 			//: System state = 'Float charging'
 			//% "Float"
 			return qsTrId("overview_widget_state_floatcharging")
-		case System.State.StorageMode:
+		case VenusOS.System_State_StorageMode:
 			//: System state = 'Storage mode'
 			//% "Storage"
 			return qsTrId("overview_widget_state_storagemode")
-		case System.State.EqualisationCharging:
+		case VenusOS.System_State_EqualizationCharging:
 			//: System state = 'Equalization charging'
 			//% "Equalize"
 			return qsTrId("overview_widget_state_equalisationcharging")
-		case System.State.PassThrough:
+		case VenusOS.System_State_PassThrough:
 			//: System state = 'Pass-thru'
 			//% "Pass-through"
 			return qsTrId("overview_widget_state_passthrough")
-		case System.State.Inverting:
+		case VenusOS.System_State_Inverting:
 			//: System state = 'Inverting'
 			//% "Inverting"
 			return qsTrId("overview_widget_state_inverting")
-		case System.State.Assisting:
+		case VenusOS.System_State_Assisting:
 			//: System state = 'Assisting'
 			//% "Assisting"
 			return qsTrId("overview_widget_state_assisting")
-		case System.State.Discharging:
+		case VenusOS.System_State_Discharging:
 			//: System state = 'Discharging'
 			//% "Discharging"
 			return qsTrId("overview_widget_state_discharging")

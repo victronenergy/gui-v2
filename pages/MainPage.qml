@@ -13,8 +13,8 @@ Page {
 
 	title: navStack.currentItem.title || ""
 	navigationButton: navStack.depth > 1
-			? StatusBar.NavigationButton.Back
-			: StatusBar.NavigationButton.ControlsInactive
+			? VenusOS.StatusBar_NavigationButtonStyle_Back
+			: VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive
 	hasSidePanel: navStack.currentItem.hasSidePanel
 	backgroundColor: navStack.currentItem.backgroundColor
 	fullScreenWhenIdle: navStack.currentItem.fullScreenWhenIdle
@@ -143,8 +143,8 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarIn
 
-			running: PageManager.interactivity === PageManager.InteractionMode.EndFullScreen
-					 || PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+			running: PageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
+					 || PageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
 
 			NumberAnimation {
 				target: navBar
@@ -156,7 +156,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = PageManager.InteractionMode.ExitIdleMode
+					PageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
 				}
 			}
 			OpacityAnimator {
@@ -168,7 +168,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = PageManager.InteractionMode.Interactive
+					PageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
 				}
 			}
 		}
@@ -176,8 +176,8 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarOut
 
-			running: PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
-					 || PageManager.interactivity === PageManager.InteractionMode.BeginFullScreen
+			running: PageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
+					 || PageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
 
 			OpacityAnimator {
 				target: navBar
@@ -188,7 +188,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = PageManager.InteractionMode.BeginFullScreen
+					PageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
 				}
 			}
 			NumberAnimation {
@@ -201,7 +201,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = PageManager.InteractionMode.Idle
+					PageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
 				}
 			}
 		}

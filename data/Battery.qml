@@ -3,16 +3,11 @@
 */
 
 import QtQuick
+import Victron.VenusOS
 import Victron.Velib
 import "../components/Utils.js" as Utils
 
 Item {
-	enum Mode {
-		Idle,
-		Charging,
-		Discharging
-	}
-
 	property real stateOfCharge: veBatterySoC.value || 0
 	property real power: veBatteryPower.value || 0
 	property real current: veBatteryCurrent.value || 0
@@ -20,8 +15,8 @@ Item {
 	property real timeToGo: veTimeToGo.value || 0    // in seconds
 	property string icon: Utils.batteryIcon(root)
 	property int mode: power === 0
-			? Battery.Mode.Idle
-			: (power > 0 ? Battery.Mode.Charging : Battery.Mode.Discharging)
+			? VenusOS.Battery_Mode_Idle
+			: (power > 0 ? VenusOS.Battery_Mode_Charging : VenusOS.Battery_Mode_Discharging)
 
 	VeQuickItem {
 		id: veBatterySoC

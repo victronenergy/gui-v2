@@ -9,14 +9,8 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	enum NavigationButton {
-		ControlsInactive,
-		ControlsActive,
-		Back
-	}
-
 	property string title
-	property int navigationButton: StatusBar.NavigationBar.ControlsInactive
+	property int navigationButton: VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive
 	property alias navigationButtonEnabled: navigationButton.enabled
 	property bool sidePanelActive
 	property alias sidePanelButtonEnabled: sidePanelButton.enabled
@@ -40,9 +34,9 @@ Item {
 		icon.height: Theme.geometry.statusBar.button.icon.height
 		display: C.AbstractButton.IconOnly
 		color: Theme.color.ok
-		icon.source: root.navigationButton === StatusBar.NavigationButton.ControlsInactive
+		icon.source: root.navigationButton === VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive
 					 ? "qrc:/images/icon_controls_off_32.svg"
-					 : root.navigationButton === StatusBar.NavigationButton.ControlsActive
+					 : root.navigationButton === VenusOS.StatusBar_NavigationButtonStyle_ControlsActive
 					   ? "qrc:/images/icon_controls_on_32.svg"
 					   : "qrc:/images/icon_back_32.svg"
 

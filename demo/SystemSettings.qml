@@ -9,14 +9,14 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	property int accessLevel: User.AccessUser
+	property int accessLevel: VenusOS.User_AccessType_User
 
 	property QtObject briefView: QtObject {
 		property ListModel gauges: ListModel {
-			ListElement { value: Gauges.Battery }
-			ListElement { value: Gauges.Fuel }
-			ListElement { value: Gauges.FreshWater }
-			ListElement { value: Gauges.BlackWater }
+			ListElement { value: VenusOS.Tank_Type_Battery }
+			ListElement { value: VenusOS.Tank_Type_Fuel }
+			ListElement { value: VenusOS.Tank_Type_FreshWater }
+			ListElement { value: VenusOS.Tank_Type_BlackWater }
 		}
 		property bool showPercentages
 

@@ -14,7 +14,7 @@ OverviewWidget {
 	//% "AC Loads"
 	title.text: qsTrId("overview_widget_acloads_title")
 	icon.source: "qrc:/images/acloads.svg"
-	type: OverviewWidget.Type.AcLoads
+	type: VenusOS.OverviewWidget_Type_AcLoads
 	enabled: false
 
 	extraContent.children: [
@@ -28,7 +28,7 @@ OverviewWidget {
 				bottomMargin: Theme.geometry.overviewPage.widget.content.verticalMargin
 			}
 
-			visible: model != null && root.size >= OverviewWidget.Size.L
+			visible: model != null && root.size >= VenusOS.OverviewWidget_Size_L
 			model: root.phaseModel && root.phaseModel.count > 1 ? root.phaseModel : null
 			phaseModelProperty: root.phaseModelProperty
 		}

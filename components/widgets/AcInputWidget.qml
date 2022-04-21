@@ -13,7 +13,7 @@ OverviewWidget {
 	property string phaseModelProperty
 
 	value: input ? input.power : NaN
-	physicalQuantity: Units.Power
+	physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
 	phaseModel: input ? input.phases : null
 	phaseModelProperty: "power"
 
@@ -30,7 +30,7 @@ OverviewWidget {
 				bottomMargin: Theme.geometry.overviewPage.widget.content.verticalMargin
 			}
 
-			visible: model != null && root.size >= OverviewWidget.Size.L
+			visible: model != null && root.size >= VenusOS.OverviewWidget_Size_L
 			model: root.phaseModel && root.phaseModel.count > 1 ? root.phaseModel : null
 			phaseModelProperty: root.phaseModelProperty
 		}

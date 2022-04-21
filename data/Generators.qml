@@ -9,25 +9,6 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum GeneratorState {
-		Stopped = 0,    // not 2 as documented?
-		Running = 1,
-		Error = 10
-	}
-
-	enum GeneratorRunningBy {
-		NotRunning = 0,
-		Manual = 1,
-		TestRun = 2,
-		LossOfCommunication = 3,
-		Soc = 4,
-		Acload = 5,
-		BatteryCurrent = 6,
-		BatteryVoltage = 7,
-		InverterHighTemp = 8,
-		InverterOverload = 9
-	}
-
 	property ListModel model: ListModel {}
 	property QtObject generator0  // the first valid generator
 
