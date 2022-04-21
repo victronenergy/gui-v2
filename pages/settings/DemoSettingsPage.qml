@@ -22,7 +22,7 @@ Page {
 
 			SettingsListSwitch {
 				text: "Switch"
-				onCheckedChanged: console.log("Switch now checked?", checked)
+				onClicked: console.log("Switch now checked?", checked)
 			}
 
 			SettingsListSwitch {

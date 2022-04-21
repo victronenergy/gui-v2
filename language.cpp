@@ -11,6 +11,85 @@
 
 using namespace Victron::VenusOS;
 
+LanguageModel::LanguageModel(QObject *parent)
+	: QAbstractListModel(parent)
+{
+	m_languages.append({ "English", "en", QLocale::English });
+	m_languages.append({ "Čeština", "cs", QLocale::Czech });
+	m_languages.append({ "Deutsch", "de", QLocale::German });
+	m_languages.append({ "Español", "es", QLocale::Spanish });
+	m_languages.append({ "Français", "fr", QLocale::French });
+	m_languages.append({ "Italiano", "it", QLocale::Italian });
+	m_languages.append({ "Nederlands", "nl", QLocale::Dutch });
+	m_languages.append({ "Русский", "ru", QLocale::Russian });
+	m_languages.append({ "Română", "ro", QLocale::Romanian });
+	m_languages.append({ "Svenska", "se", QLocale::NorthernSami });
+	m_languages.append({ "Türkçe", "tr", QLocale::Turkish });
+	m_languages.append({ "中文", "zh", QLocale::Chinese });
+	m_languages.append({ "العربية", "ar", QLocale::Arabic });
+}
+
+LanguageModel::~LanguageModel()
+{
+}
+
+int LanguageModel::currentLanguage() const
+{
+	return m_currentLanguage;
+}
+
+void LanguageModel::setCurrentLanguage(int language)
+{
+	QLocale::Language lang = QLocale::Language(language);
+	if (lang != m_currentLanguage) {
+		for (int i = 0; i < m_languages.count(); ++i) {
+			if (m_languages.at(i).language == lang) {
+				m_currentLanguage = lang;
+				m_currentIndex = i;
+				emit currentIndexChanged();
+				emit currentLanguageChanged();
+				emit currentDisplayTextChanged();
+				break;
+			}
+		}
+	}
+}
+
+int LanguageModel::currentIndex() const
+{
+	return m_currentIndex;
+}
+
+QString LanguageModel::currentDisplayText() const
+{
+	if (m_currentIndex < 0 || m_currentIndex >= m_languages.count()) {
+		return QString();
+	}
+	return m_languages.at(m_currentIndex).name;
+}
+
+int LanguageModel::languageAt(int index) const
+{
+	if (index < 0 || index >= m_languages.count()) {
+		return QLocale::AnyLanguage;
+	}
+	return m_languages.at(index).language;
+}
+
+int LanguageModel::rowCount(const QModelIndex &) const
+{
+	return m_languages.count();
+}
+
+QVariant LanguageModel::data(const QModelIndex &index, int role) const
+{
+	if (role != Qt::DisplayRole || index.row() < 0 || index.row() >= m_languages.count()) {
+		return QVariant();
+	}
+	return m_languages.at(index.row()).name;
+}
+
+
 Language::Language(QQmlEngine* engine) : QObject(nullptr),
 	m_qmlEngine(engine)
 {

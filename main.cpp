@@ -227,6 +227,10 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorPath.qml")),
 		"Victron.VenusOS", 2, 0, "WidgetConnectorPath");
 
+	/* models */
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/models/User.qml")),
+		"Victron.VenusOS", 2, 0, "User");
+
 	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/ESSCard.qml")),
 		"Victron.VenusOS", 2, 0, "ESSCard");
@@ -279,6 +283,8 @@ int main(int argc, char *argv[])
 
 	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
 	qmlRegisterType<VeQItem>("Victron.Velib", 1, 0, "VeQItem");
+
+	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");
 
 	QGuiApplication app(argc, argv);
 	QGuiApplication::setApplicationName("Venus");

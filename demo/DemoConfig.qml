@@ -60,42 +60,51 @@ Item {
 	}
 
 	anchors.fill: parent
-	focus: true
 
-	Keys.onPressed: function(event) {
-		switch (event.key) {
-		case Qt.Key_Left:
-			if (PageManager.navBar.currentUrl in root._demos) {
-				previousConfig()
+	Connections {
+		target: PageManager.emitter
+
+		function onDemoKeyPressed(event) {
+			switch (event.key) {
+			case Qt.Key_Left:
+				if (PageManager.navBar.currentUrl in root._demos) {
+					previousConfig()
+					event.accepted = true
+				}
+				break
+			case Qt.Key_Right:
+				if (PageManager.navBar.currentUrl in root._demos) {
+					nextConfig()
+					event.accepted = true
+				}
+				break
+			case Qt.Key_Plus:
+				if (Theme.screenSize !== Theme.SevenInch) {
+					Theme.load(Theme.SevenInch, Theme.colorScheme)
+					event.accepted = true
+				}
+				break
+			case Qt.Key_Minus:
+				if (Theme.screenSize !== Theme.FiveInch) {
+					Theme.load(Theme.FiveInch, Theme.colorScheme)
+					event.accepted = true
+				}
+				break
+			case Qt.Key_C:
+				if (Theme.colorScheme == Theme.Dark) {
+					Theme.load(Theme.screenSize, Theme.Light)
+				} else {
+					Theme.load(Theme.screenSize, Theme.Dark)
+				}
+				event.accepted = true
+				break
+			case Qt.Key_L:
+				Language.current = (Language.current === Language.English ? Language.French : Language.English)
+				event.accepted = true
+				break
+			default:
+				break
 			}
-			break
-		case Qt.Key_Right:
-			if (PageManager.navBar.currentUrl in root._demos) {
-				nextConfig()
-			}
-			break
-		case Qt.Key_Plus:
-			if (Theme.screenSize !== Theme.SevenInch) {
-				Theme.load(Theme.SevenInch, Theme.colorScheme)
-			}
-			break
-		case Qt.Key_Minus:
-			if (Theme.screenSize !== Theme.FiveInch) {
-				Theme.load(Theme.FiveInch, Theme.colorScheme)
-			}
-			break
-		case Qt.Key_C:
-			if (Theme.colorScheme == Theme.Dark) {
-				Theme.load(Theme.screenSize, Theme.Light)
-			} else {
-				Theme.load(Theme.screenSize, Theme.Dark)
-			}
-			break
-		case Qt.Key_L:
-			Language.current = (Language.current === Language.English ? Language.French : Language.English)
-			break
-		default:
-			break
 		}
 	}
 
