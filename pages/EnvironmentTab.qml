@@ -52,7 +52,7 @@ Flickable {
 			delegate: EnvironmentGaugePanel {
 				horizontalSize: {
 					if (levelsRepeater.count === 0) {
-						return EnvironmentGaugePanel.Size.Expanded
+						return Enums.EnvironmentGaugePanel_Size_Expanded
 					}
 					// If available area is not big enough to fit all the panels at their max width,
 					// use a compact (reduced) width for two-gauge panels.
@@ -63,12 +63,12 @@ Flickable {
 					}
 					const requiredAreaWidth = panelWidths + ((levelsRepeater.count-1) * Theme.geometry.levelsPage.environment.minimumSpacing)
 					return requiredAreaWidth > availableAreaWidth
-							? EnvironmentGaugePanel.Size.Compact
-							: EnvironmentGaugePanel.Size.Expanded
+							? Enums.EnvironmentGaugePanel_Size_Compact
+							: Enums.EnvironmentGaugePanel_Size_Expanded
 				}
 				verticalSize: PageManager.expandLayout
-						? EnvironmentGaugePanel.Size.Expanded
-						: EnvironmentGaugePanel.Size.Compact
+						? Enums.EnvironmentGaugePanel_Size_Expanded
+						: Enums.EnvironmentGaugePanel_Size_Compact
 				title: model.input.customName || model.input.productName || ""
 				temperature: model.input.temperature
 				humidity: model.input.humidity

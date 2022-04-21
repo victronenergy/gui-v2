@@ -5,12 +5,11 @@
 import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
-import "../data" as DBusData
 
 Item {
 	id: root
 
-	property int state: DBusData.System.State.AbsorptionCharging
+	property int state: Enums.System_State_AbsorptionCharging
 
 	property QtObject loads: QtObject {
 		readonly property real power: ac.consumption.power + dc.power

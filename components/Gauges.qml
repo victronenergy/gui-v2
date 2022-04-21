@@ -8,11 +8,6 @@ import QtQml
 import Victron.VenusOS
 
 QtObject {
-	enum ValueType {
-		RisingPercentage,
-		FallingPercentage
-	}
-
 	function statusFromRisingValue(value) {
 		if (value >= 85) return Theme.Critical
 		if (value >= 60) return Theme.Warning
@@ -26,10 +21,10 @@ QtObject {
 	}
 
 	function getValueStatus(value, valueType) {
-		if (valueType === Gauges.RisingPercentage) {
+		if (valueType === Enums.Gauges_ValueType_RisingPercentage) {
 			return statusFromRisingValue(value)
 		}
-		if (valueType === Gauges.FallingPercentage) {
+		if (valueType === Enums.Gauges_ValueType_FallingPercentage) {
 			return statusFromFallingValue(value)
 		}
 		return Theme.Ok
@@ -37,58 +32,58 @@ QtObject {
 
 	function tankProperties(type) {
 		switch (type) {
-		case Tanks.TankType.Fuel:
+		case Enums.Tank_Type_Fuel:
 			return {
 				icon: "/images/fuel.svg",
-				valueType: Gauges.FallingPercentage,
+				valueType: Enums.Gauges_ValueType_FallingPercentage,
 				borderColor: Theme.color.levelsPage.fuel.borderColor,
 				//% "Fuel"
 				name: qsTrId("tank_fuel")
 			}
-		case Tanks.TankType.FreshWater:
+		case Enums.Tank_Type_FreshWater:
 			return {
 				icon: "/images/freshWater20x27.svg",
-				valueType: Gauges.FallingPercentage,
+				valueType: Enums.Gauges_ValueType_FallingPercentage,
 				borderColor: Theme.color.levelsPage.freshWater.borderColor,
 				//% "Fresh water"
 				name: qsTrId("tank_fresh_water")
 			}
-		case Tanks.TankType.WasteWater:
+		case Enums.Tank_Type_WasteWater:
 			return {
 				icon: "/images/wasteWater.svg",
-				valueType: Gauges.RisingPercentage,
+				valueType: Enums.Gauges_ValueType_RisingPercentage,
 				borderColor: Theme.color.levelsPage.wasteWater.borderColor,
 				//% "Waste water"
 				name: qsTrId("tank_waste_water")
 			}
-		case Tanks.TankType.LiveWell:
+		case Enums.Tank_Type_LiveWell:
 			return {
 				icon: "/images/liveWell.svg",
-				valueType: Gauges.FallingPercentage,
+				valueType: Enums.Gauges_ValueType_FallingPercentage,
 				borderColor: Theme.color.levelsPage.liveWell.borderColor,
 				//% "Live well"
 				name: qsTrId("tank_live_well")
 			}
-		case Tanks.TankType.Oil:
+		case Enums.Tank_Type_Oil:
 			return {
 				icon: "/images/oil.svg",
-				valueType: Gauges.FallingPercentage,
+				valueType: Enums.Gauges_ValueType_FallingPercentage,
 				borderColor: Theme.color.levelsPage.oil.borderColor,
 				//% "Oil"
 				name: qsTrId("tank_oil")
 			}
-		case Tanks.TankType.BlackWater:
+		case Enums.Tank_Type_BlackWater:
 			return {
 				icon: "/images/blackWater.svg",
-				valueType: Gauges.RisingPercentage,
+				valueType: Enums.Gauges_ValueType_RisingPercentage,
 				borderColor: Theme.color.levelsPage.blackWater.borderColor,
 				//% "Black water"
 				name: qsTrId("tank_black_water")
 			}
-		case Tanks.TankType.Gasoline:
+		case Enums.Tank_Type_Gasoline:
 			return {
 				icon: "/images/tank.svg", // same as "Fuel"
-				valueType: Gauges.FallingPercentage,
+				valueType: Enums.Gauges_ValueType_FallingPercentage,
 				borderColor: Theme.color.levelsPage.gasoline.borderColor,
 				//% "Gasoline"
 				name: qsTrId("tank_gasoline")

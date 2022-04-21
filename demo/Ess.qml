@@ -3,14 +3,13 @@
 */
 
 import QtQuick
-import Victron.Velib
+import Victron.VenusOS
 import "/components/Utils.js" as Utils
-import "../data" as DBusData
 
 Item {
 	id: root
 
-	property int state: DBusData.Ess.State.OptimizedWithBatteryLife
+	property int state: Enums.Ess_State_OptimizedWithBatteryLife
 	property int minimumStateOfCharge: 60
 	property int stateOfChargeLimit: 80
 

@@ -10,80 +10,63 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum TankType {
-		Fuel = 0,
-		FreshWater = 1,
-		WasteWater = 2,
-		LiveWell = 3,
-		Oil = 4,
-		BlackWater = 5,
-		Gasoline = 6
-	}
-
-	enum Status {
-		OK = 0,
-		Disconnected = 1,
-		ShortCircuited = 2,
-		Unknown = 3
-	}
-
 	readonly property var tankTypes: [
-		Tanks.TankType.Fuel,
-		Tanks.TankType.FreshWater,
-		Tanks.TankType.WasteWater,
-		Tanks.TankType.LiveWell,
-		Tanks.TankType.Oil,
-		Tanks.TankType.BlackWater,
-		Tanks.TankType.Gasoline
+		Enums.Tank_Type_Fuel,
+		Enums.Tank_Type_FreshWater,
+		Enums.Tank_Type_WasteWater,
+		Enums.Tank_Type_LiveWell,
+		Enums.Tank_Type_Oil,
+		Enums.Tank_Type_BlackWater,
+		Enums.Tank_Type_Gasoline
 	]
 
 	readonly property ListModel fuelTanks: ListModel {
-		readonly property int type: Tanks.TankType.Fuel
+		readonly property int type: Enums.Tank_Type_Fuel
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.CubicMeters
+		property int unit: Enums.Units_PhysicalQuantity_CubicMeters
 		objectName: "Fuel"
 	}
 	readonly property ListModel freshWaterTanks: ListModel {
-		readonly property int type: Tanks.TankType.FreshWater
+		readonly property int type: Enums.Tank_Type_FreshWater
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.CubicMeters
+		property int unit: Enums.Units_PhysicalQuantity_CubicMeters
 		objectName: "FreshWater"
 	}
 	readonly property ListModel wasteWaterTanks: ListModel {
-		readonly property int type: Tanks.TankType.WasteWater
+		readonly property int type: Enums.Tank_Type_WasteWater
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.CubicMeters
+		property int unit: Enums.Units_PhysicalQuantity_CubicMeters
 		objectName: "WasteWater"
 	}
 	readonly property ListModel liveWellTanks: ListModel {
-		readonly property int type: Tanks.TankType.LiveWell
+		readonly property int type: Enums.Tank_Type_LiveWell
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.CubicMeters
+		property int unit: Enums.Units_PhysicalQuantity_CubicMeters
 		objectName: "LiveWell"
 	}
 	readonly property ListModel oilTanks: ListModel {
-		readonly property int type: Tanks.TankType.Oil
+		readonly property int type: Enums.Tank_Type_Oil
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.CubicMeters
+		property int unit: Enums.Units_PhysicalQuantity_CubicMeters
 		objectName: "Oil"
 	}
 	readonly property ListModel blackWaterTanks: ListModel {
-		readonly property int type: Tanks.TankType.BlackWater
+		readonly property int type: Enums.Tank_Type_BlackWater
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.CubicMeters
+		property int unit: Enums.Units_PhysicalQuantity_CubicMeters
 		objectName: "BlackWater"
 	}
 	readonly property ListModel gasolineTanks: ListModel {
-		readonly property int type: Tanks.TankType.Gasoline
+		readonly property int type: Enums.Tank_Type_Gasoline
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.CubicMeters
+		property int unit: Enums.Units_PhysicalQuantity_CubicMeters
 		objectName: "Gasoline"
 	}
 
@@ -97,19 +80,19 @@ Item {
 
 	function tankModel(type) {
 		switch (type) {
-		case Tanks.TankType.Fuel:
+		case Enums.Tank_Type_Fuel:
 			return fuelTanks
-		case Tanks.TankType.FreshWater:
+		case Enums.Tank_Type_FreshWater:
 			return freshWaterTanks
-		case Tanks.TankType.WasteWater:
+		case Enums.Tank_Type_WasteWater:
 			return wasteWaterTanks
-		case Tanks.TankType.LiveWell:
+		case Enums.Tank_Type_LiveWell:
 			return liveWellTanks
-		case Tanks.TankType.Oil:
+		case Enums.Tank_Type_Oil:
 			return oilTanks
-		case Tanks.TankType.BlackWater:
+		case Enums.Tank_Type_BlackWater:
 			return blackWaterTanks
-		case Tanks.TankType.Gasoline:
+		case Enums.Tank_Type_Gasoline:
 			return gasolineTanks
 		}
 		console.warn("Unknown tank type", type)

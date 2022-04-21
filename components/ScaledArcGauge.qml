@@ -10,7 +10,7 @@ Item {
 	id: gauge
 
 	property real value
-	property int valueType: Gauges.FallingPercentage
+	property int valueType: Enums.Gauges_ValueType_FallingPercentage
 	property alias startAngle: arc.startAngle
 	property alias endAngle: arc.endAngle
 	property alias radius: arc.radius

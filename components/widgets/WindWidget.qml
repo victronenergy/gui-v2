@@ -11,5 +11,5 @@ DcInputWidget {
 	//% "Wind"
 	title.text: qsTrId("overview_widget_wind_title")
 	icon.source: "qrc:/images/wind.svg"
-	type: OverviewWidget.Type.Wind
+	type: Enums.OverviewWidget_Type_Wind
 }

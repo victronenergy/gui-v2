@@ -9,23 +9,16 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum InputType {
-		UnknownType = 0,
-		Alternator = 1,
-		DcGenerator = 2,
-		Wind = 3
-	}
-
 	property ListModel model: ListModel {}
 
 	property var _monitorModes: ({
-		"-1": DcInputs.InputType.DcGenerator,
+		"-1": Enums.DcInputs_InputType_DcGenerator,
 		// -2 AC charger
 		// -3 DC charger
 		// -4 Water generator
 		// -7 Shaft generator
 		// -8 Wind charger
-		"-8": DcInputs.InputType.Wind,
+		"-8": Enums.DcInputs_InputType_Wind,
 	})
 
 	property var _inputs: []
@@ -66,13 +59,13 @@ Item {
 
 			property int source: {
 				if (uid.startsWith("com.victronenergy.alternator.")) {
-					return DcInputs.InputType.Alternator
+					return Enums.DcInputs_InputType_Alternator
 				} else if (uid.startsWith("com.victronenergy.fuelcell.")) {
-					return DcInputs.InputType.FuelCell
+					return Enums.DcInputs_InputType_FuelCell
 				} if (uid.startsWith("com.victronenergy.dcsource.")) {
 					// Use DC Generator as the catch-all type for any DC power source that isn't
 					// specifically handled.
-					return root._monitorModes[monitorMode.toString()] || DcInputs.InputType.DcGenerator
+					return root._monitorModes[monitorMode.toString()] || Enums.DcInputs_InputType_DcGenerator
 				}
 			}
 

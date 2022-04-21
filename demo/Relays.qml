@@ -3,9 +3,9 @@
 */
 
 import QtQuick
+import Victron.VenusOS
 import Victron.Velib
 import "/components/Utils.js" as Utils
-import "../data" as DBusData
 
 Item {
 	id: root
@@ -24,7 +24,7 @@ Item {
 		model: 3
 
 		delegate: QtObject {
-			property int state: model.index % 2 == 0 ? DBusData.Relays.Inactive : DBusData.Relays.Active
+			property int state: model.index % 2 == 0 ? Enums.Relays_State_Inactive : Enums.Relays_State_Active
 
 			function setState(s) {
 				state = s

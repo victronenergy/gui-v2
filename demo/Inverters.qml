@@ -3,9 +3,9 @@
 */
 
 import QtQuick
+import Victron.VenusOS
 import Victron.Velib
 import "/components/Utils.js" as Utils
-import "../data" as DBusData
 
 Item {
 	id: root
@@ -20,12 +20,12 @@ Item {
 			productId: 9816,
 			productName: "Quattro 48/5000/70-2x100",
 			ampOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ],   // EU amp options
-			mode: DBusData.Inverters.InverterMode.On,
+			mode: Enums.Inverters_Mode_On,
 			modeAdjustable: true,
-			input1Type: DBusData.Inverters.InputType.Generator,
+			input1Type: Enums.Inverters_InputType_Generator,
 			currentLimit1: 50,
 			currentLimit1Adjustable: true,
-			input2Type: DBusData.Inverters.InputType.Shore,
+			input2Type: Enums.Inverters_InputType_Shore,
 			currentLimit2: 16,
 			currentLimit2Adjustable: false,
 		}

@@ -102,7 +102,7 @@ Page {
 
 			ESSCard {
 				width: root.cardWidth
-				state: ess ? ess.state : Ess.State.Unused
+				state: ess ? ess.state : Enums.Ess_State_Unused
 				minimumStateOfCharge: ess ? ess.minimumStateOfCharge : 0
 				stateOfChargeLimit: ess ? ess.stateOfChargeLimit : 0
 

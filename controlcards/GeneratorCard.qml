@@ -11,9 +11,9 @@ import "/components/Utils.js" as Utils
 ControlCard {
 	id: root
 
-	property int state: Generators.GeneratorState.Stopped
+	property int state: Enums.Generators_State_Stopped
 	property int runtime
-	property int runningBy: Generators.GeneratorRunningBy.NotRunning
+	property int runningBy: Enums.Generators_RunningBy_NotRunning
 	property int manualStartTimer
 	property bool autostart
 
@@ -26,10 +26,10 @@ ControlCard {
 	title.text: qsTrId("controlcard_generator")
 	status.text: {
 		switch (state) {
-		case Generators.GeneratorState.Running:
+		case Enums.Generators_State_Running:
 			//% "Running"
 			return qsTrId("controlcard_generator_status_running")
-		case Generators.GeneratorState.Error:
+		case Enums.Generators_State_Error:
 			//% "ERROR"
 			return qsTrId("controlcard_generator_status_error")
 		default:
@@ -49,7 +49,7 @@ ControlCard {
 			bottomMargin: parent.status.bottomMargin
 		}
 
-		visible: root.state === Generators.GeneratorState.Running
+		visible: root.state === Enums.Generators_State_Running
 		state: root.state
 		runtime: root.runtime
 		runningBy: root.runningBy
@@ -63,14 +63,14 @@ ControlCard {
 			leftMargin: Theme.geometry.controlCard.contentMargins
 		}
 
-		color: root.state === Generators.GeneratorState.Error ? Theme.color.critical
+		color: root.state === Enums.Generators_State_Error ? Theme.color.critical
 			: Theme.color.font.tertiary
-		text: root.state !== Generators.GeneratorState.Running ?
+		text: root.state !== Enums.Generators_State_Running ?
 				"" // not running, empty substatus.
-			: root.runningBy === Generators.GeneratorRunningBy.Manual ?
+			: root.runningBy === Enums.Generators_RunningBy_Manual ?
 				//% "Manual started"
 				qsTrId("controlcard_generator_substatus_manualstarted")
-			: root.runningBy === Generators.GeneratorRunningBy.TestRun ?
+			: root.runningBy === Enums.Generators_RunningBy_TestRun ?
 				//% "Test run"
 				qsTrId("controlcard_generator_substatus_testrun")
 			: ( //% "Auto-started"
@@ -79,25 +79,25 @@ ControlCard {
 
 		function substatusForRunningBy(runningBy) {
 			switch (root.runningBy) {
-			case Generators.GeneratorRunningBy.LossOfCommunication:
+			case Enums.Generators_RunningBy_LossOfCommunication:
 				//% "Loss of comm"
 				return qsTrId("controlcard_generator_substatus_lossofcomm")
-			case Generators.GeneratorRunningBy.Soc:
+			case Enums.Generators_RunningBy_Soc:
 				//% "State of charge"
 				return qsTrId("controlcard_generator_substatus_stateofcharge")
-			case Generators.GeneratorRunningBy.Acload:
+			case Enums.Generators_RunningBy_Acload:
 				//% "AC load"
 				return qsTrId("controlcard_generator_substatus_acload")
-			case Generators.GeneratorRunningBy.BatteryCurrent:
+			case Enums.Generators_RunningBy_BatteryCurrent:
 				//% "Battery current"
 				return qsTrId("controlcard_generator_substatus_batterycurrent")
-			case Generators.GeneratorRunningBy.BatteryVoltage:
+			case Enums.Generators_RunningBy_BatteryVoltage:
 				//% "Battery voltage"
 				return qsTrId("controlcard_generator_substatus_batteryvoltage")
-			case Generators.GeneratorRunningBy.InverterHighTemp:
+			case Enums.Generators_RunningBy_InverterHighTemp:
 				//% "Inverter high temp"
 				return qsTrId("controlcard_generator_substatus_inverterhigh_temp")
-			case Generators.GeneratorRunningBy.InverterOverload:
+			case Enums.Generators_RunningBy_InverterOverload:
 				//% "Inverter overload"
 				return qsTrId("controlcard_generator_substatus_inverteroverload")
 			default: return "" // unknown substatus.
@@ -114,7 +114,7 @@ ControlCard {
 		label.text: qsTrId("controlcard_generator_label_autostart")
 		button.checked: root.autostart
 		separator.visible: false
-		enabled: root.state !== Generators.GeneratorState.Running
+		enabled: root.state !== Enums.Generators_State_Running
 
 		onClicked: {
 			if (root.autostart) {
@@ -183,7 +183,7 @@ ControlCard {
 			anchors.top: subcardHeaderSeparator.bottom
 			//% "Timed run"
 			label.text: qsTrId("controlcard_generator_subcard_label_timedrun")
-			enabled: root.state !== Generators.GeneratorState.Running
+			enabled: root.state !== Enums.Generators_State_Running
 		}
 		ButtonControlValue {
 			id: durationButton
@@ -197,7 +197,7 @@ ControlCard {
 			button.height: Theme.geometry.generatorCard.durationButton.height
 			button.width: Theme.geometry.generatorCard.durationButton.width
 			button.enabled: timedRunSwitch.button.checked
-					&& root.state !== Generators.GeneratorState.Running
+					&& root.state !== Enums.Generators_State_Running
 			button.text: Utils.formatAsHHMM(durationButton.duration)
 
 			onClicked: dialogManager.generatorDurationSelectorDialog.open()
@@ -219,26 +219,26 @@ ControlCard {
 			}
 			height: Theme.geometry.generatorCard.startButton.height
 
-			enabled: root.state !== Generators.GeneratorState.Error
+			enabled: root.state !== Enums.Generators_State_Error
 
-			text: root.state === Generators.GeneratorState.Running ?
+			text: root.state === Enums.Generators_State_Running ?
 					//% "Stop"
 					qsTrId("controlcard_generator_subcard_button_stop")
 				: /* stopped */
 					//% "Start"
 					qsTrId("controlcard_generator_subcard_button_start")
 
-			backgroundColor: root.state === Generators.GeneratorState.Error
+			backgroundColor: root.state === Enums.Generators_State_Error
 					? Theme.color.background.disabled
-				: root.state === Generators.GeneratorState.Running
+				: root.state === Enums.Generators_State_Running
 					? down ? Theme.color.critical : Theme.color.dimCritical
 				: /* Stopped */
 					  down ? Theme.color.go : Theme.color.dimGo
-			color: root.state === Generators.GeneratorState.Error ? Theme.color.font.disabled
+			color: root.state === Enums.Generators_State_Error ? Theme.color.font.disabled
 				: Theme.color.font.primary
 
 			onClicked: {
-				if (root.state === Generators.GeneratorState.Running) {
+				if (root.state === Enums.Generators_State_Running) {
 					root.manualStop()
 				} else {
 					root.manualStart(durationButton.duration)

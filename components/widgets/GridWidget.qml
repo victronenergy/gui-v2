@@ -11,7 +11,7 @@ AcInputWidget {
 	//% "Grid"
 	title.text: qsTrId("overview_widget_grid_title")
 	icon.source: "qrc:/images/grid.svg"
-	type: OverviewWidget.Type.Grid
+	type: Enums.OverviewWidget_Type_Grid
 
 	sideGaugeVisible: true
 }

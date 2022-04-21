@@ -10,32 +10,19 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum Location {
-		Left,
-		Right,
-		Top,
-		Bottom
-	}
-
-	enum AnimationMode {
-		NotAnimated,
-		StartToEnd,
-		EndToStart
-	}
-
 	property var startWidget
 	property var endWidget
 	property int startLocation
 	property int endLocation
 
-	property int animationMode: WidgetConnector.AnimationMode.NotAnimated
+	property int animationMode: Enums.WidgetConnector_AnimationMode_NotAnimated
 	property bool expanded
 	property bool animateGeometry
 
 	// Forces a straight line by aligning the nubs using the centre of the smaller widget
 	property bool straight
 
-	readonly property bool _animated: visible && animationMode !== WidgetConnector.AnimationMode.NotAnimated
+	readonly property bool _animated: visible && animationMode !== Enums.WidgetConnector_AnimationMode_NotAnimated
 	property real _animationProgress
 	property real _electronTravelDistance
 
@@ -73,10 +60,10 @@ Item {
 		width: Math.max(startX, endX) - x + (direction == Qt.Vertical ? endNub.width/2 : 0)
 		height: Math.max(startY, endY) - y + (direction == Qt.Horizontal ? endNub.height/2 : 0)
 
-		direction: (startLocation == WidgetConnector.Location.Left
-					|| startLocation == WidgetConnector.Location.Right)
-					&& (endLocation == WidgetConnector.Location.Left
-					|| endLocation == WidgetConnector.Location.Right)
+		direction: (startLocation == Enums.WidgetConnector_Location_Left
+					|| startLocation == Enums.WidgetConnector_Location_Right)
+					&& (endLocation == Enums.WidgetConnector_Location_Left
+					|| endLocation == Enums.WidgetConnector_Location_Right)
 				   ? Qt.Horizontal
 				   : Qt.Vertical
 
@@ -89,33 +76,33 @@ Item {
 
 		startX: (straight && connectorPath.direction == Qt.Vertical && _startWidgetRect.width > _endWidgetRect.width)
 			? endX
-			: startLocation === WidgetConnector.Location.Left
+			: startLocation === Enums.WidgetConnector_Location_Left
 			  ? _startWidgetRect.x
-			  : startLocation === WidgetConnector.Location.Right
+			  : startLocation === Enums.WidgetConnector_Location_Right
 				? _startWidgetRect.x + _startWidgetRect.width
 				: _startWidgetRect.x + _startWidgetRect.width/2 - startNub.height/2   // Top/Bottom location
 
 		startY: (straight && connectorPath.direction == Qt.Horizontal && _startWidgetRect.height > _endWidgetRect.height)
 				? endY
-				: startLocation === WidgetConnector.Location.Top
+				: startLocation === Enums.WidgetConnector_Location_Top
 				  ? _startWidgetRect.y
-				  : startLocation === WidgetConnector.Location.Bottom
+				  : startLocation === Enums.WidgetConnector_Location_Bottom
 					? _startWidgetRect.y + _startWidgetRect.height
 					: _startWidgetRect.y + _startWidgetRect.height/2 - startNub.height/2  // Left/Right location
 
 		endX: (straight && connectorPath.direction == Qt.Vertical && _endWidgetRect.width > _startWidgetRect.width)
 			  ? startX
-			  : endLocation === WidgetConnector.Location.Left
+			  : endLocation === Enums.WidgetConnector_Location_Left
 				? _endWidgetRect.x
-				: endLocation === WidgetConnector.Location.Right
+				: endLocation === Enums.WidgetConnector_Location_Right
 				  ? _endWidgetRect.x + _endWidgetRect.width
 				  : _endWidgetRect.x + _endWidgetRect.width/2 - endNub.height/2 // Top/Bottom location
 
 		endY: (straight && connectorPath.direction == Qt.Horizontal && _endWidgetRect.height > _startWidgetRect.height)
 			  ? startY
-			  : endLocation === WidgetConnector.Location.Top
+			  : endLocation === Enums.WidgetConnector_Location_Top
 				? _endWidgetRect.y
-				: endLocation === WidgetConnector.Location.Bottom
+				: endLocation === Enums.WidgetConnector_Location_Bottom
 				  ? _endWidgetRect.y + _endWidgetRect.height
 				  : _endWidgetRect.y + _endWidgetRect.height/2 - endNub.height/2    // Left/Right location
 
@@ -141,9 +128,9 @@ Item {
 			anchors {
 				left: {
 					switch (startLocation) {
-					case WidgetConnector.Location.Left:
+					case Enums.WidgetConnector_Location_Left:
 						return connectorPath.startNub.left
-					case WidgetConnector.Location.Right:
+					case Enums.WidgetConnector_Location_Right:
 						return connectorPath.startNub.right
 					default:
 						return undefined
@@ -151,8 +138,8 @@ Item {
 				}
 				horizontalCenter: {
 					switch (startLocation) {
-					case WidgetConnector.Location.Top:   // fall through
-					case WidgetConnector.Location.Bottom:
+					case Enums.WidgetConnector_Location_Top:   // fall through
+					case Enums.WidgetConnector_Location_Bottom:
 						return connectorPath.startNub.horizontalCenter
 					default:
 						return undefined
@@ -160,9 +147,9 @@ Item {
 				}
 				top: {
 					switch (startLocation) {
-					case WidgetConnector.Location.Top:
+					case Enums.WidgetConnector_Location_Top:
 						return connectorPath.startNub.top
-					case WidgetConnector.Location.Bottom:
+					case Enums.WidgetConnector_Location_Bottom:
 						return connectorPath.startNub.bottom
 					default:
 						return connectorPath.startNub.verticalCenter
@@ -186,14 +173,14 @@ Item {
 				delegate: Image {
 					id: electron
 
-					readonly property real progress: root.animationMode === WidgetConnector.AnimationMode.StartToEnd
+					readonly property real progress: root.animationMode === Enums.WidgetConnector_AnimationMode_StartToEnd
 							? animPathInterpolator.progress
 							: 1 - animPathInterpolator.progress
 
 					x: animPathInterpolator.x - width/2
 					y: animPathInterpolator.y - height/2
 					source: "qrc:/images/electron.svg"
-					rotation: root.animationMode === WidgetConnector.AnimationMode.StartToEnd
+					rotation: root.animationMode === Enums.WidgetConnector_AnimationMode_StartToEnd
 							  ? animPathInterpolator.angle
 							  : animPathInterpolator.angle + 180
 					opacity: progress < 0.01 || progress > 0.8 ? 0 : 1
@@ -231,10 +218,10 @@ Item {
 		target: root
 		property: "_animationProgress"
 
-		from: root.animationMode === WidgetConnector.AnimationMode.StartToEnd
+		from: root.animationMode === Enums.WidgetConnector_AnimationMode_StartToEnd
 			  ? 0
 			  : 1
-		to: root.animationMode === WidgetConnector.AnimationMode.StartToEnd
+		to: root.animationMode === Enums.WidgetConnector_AnimationMode_StartToEnd
 			? 1
 			: 0
 

@@ -9,32 +9,25 @@ import QtQuick.Controls.impl as CP
 VerticalGauge {
 	id: root
 
-	enum WarningLevel {
-		OK,
-		Warning,
-		Critical,
-		Alarm
-	}
-
 	property int gaugeValueType
 	property bool isGrouped: false
 
 	// TODO: hook up to real warning / critical levels
-	readonly property int _warningLevel: gaugeValueType === Gauges.FallingPercentage
+	readonly property int _warningLevel: gaugeValueType === Enums.Gauges_ValueType_FallingPercentage
 			? (value <= 0.05
-			  ? TankGauge.WarningLevel.Alarm
+			  ? Enums.TankGauge_WarningLevel_Alarm
 			  : value <= 0.1
-				? TankGauge.WarningLevel.Critical
+				? Enums.TankGauge_WarningLevel_Critical
 				  : value <= 0.2
-				  ? TankGauge.WarningLevel.Warning
-				  : TankGauge.WarningLevel.OK)
+				  ? Enums.TankGauge_WarningLevel_Warning
+				  : Enums.TankGauge_WarningLevel_Ok)
 			: (value >= 0.95
-			   ? TankGauge.WarningLevel.Alarm
+			   ? Enums.TankGauge_WarningLevel_Alarm
 			   : value >= 0.9
-				 ? TankGauge.WarningLevel.Critical
+				 ? Enums.TankGauge_WarningLevel_Critical
 				   : value >= 0.8
-				   ? TankGauge.WarningLevel.Warning
-				   : TankGauge.WarningLevel.OK)
+				   ? Enums.TankGauge_WarningLevel_Warning
+				   : Enums.TankGauge_WarningLevel_Ok)
 
 	readonly property var _backgroundColors: [
 		Theme.color.darkOk,
@@ -79,8 +72,8 @@ VerticalGauge {
 		y: (root.height / 4 / 2) - (height / 2)
 		height: Theme.geometry.levelsPage.tankGauge.alarmIcon.height
 		fillMode: Image.PreserveAspectFit
-		visible: !root.isGrouped && root._warningLevel === TankGauge.WarningLevel.Alarm
-		color: root.gaugeValueType === Gauges.FallingPercentage
+		visible: !root.isGrouped && root._warningLevel === Enums.TankGauge_WarningLevel_Alarm
+		color: root.gaugeValueType === Enums.Gauges_ValueType_FallingPercentage
 			   ? Theme.color.levelsPage.fallingGauge.alarmIcon
 			   : Theme.color.levelsPage.risingGauge.alarmIcon
 		source: "qrc:/images/icon_alarm_48.svg"

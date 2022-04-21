@@ -33,21 +33,21 @@ ControlCard {
 
 			width: parent.width
 			model: [
-				Ess.State.KeepBatteriesCharged,
-				Ess.State.OptimizedWithBatteryLife,
-				Ess.State.OptimizedWithoutBatteryLife,
+				Enums.Ess_State_KeepBatteriesCharged,
+				Enums.Ess_State_OptimizedWithBatteryLife,
+				Enums.Ess_State_OptimizedWithoutBatteryLife,
 			]
 			delegate: RadioButtonControlValue {
 				button.checked: root.state === modelData
 				label.text: {
 					switch (modelData) {
-					case Ess.State.OptimizedWithBatteryLife:
+					case Enums.Ess_State_OptimizedWithBatteryLife:
 						//% "Optimized with battery life"
 						return qsTrId('ess_card_optimized_with_battery_life')
-					case Ess.State.KeepBatteriesCharged:
+					case Enums.Ess_State_KeepBatteriesCharged:
 						//% "Keep batteries charged"
 						return qsTrId('ess_card_keep_batteries_charged')
-					case Ess.State.OptimizedWithoutBatteryLife:
+					case Enums.Ess_State_OptimizedWithoutBatteryLife:
 						//% "Optimized without battery life"
 						return qsTrId('ess_card_optimized_without_battery_life')
 					default:
@@ -83,7 +83,7 @@ ControlCard {
 					leftMargin: Theme.geometry.controlCard.contentMargins
 					verticalCenter: parent.verticalCenter
 				}
-				visible: root.state === Ess.State.OptimizedWithBatteryLife
+				visible: root.state === Enums.Ess_State_OptimizedWithBatteryLife
 				color: Theme.color.font.tertiary
 				font.family: VenusFont.normal.name
 				font.pixelSize: Theme.font.size.s

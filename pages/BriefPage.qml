@@ -255,7 +255,7 @@ Page {
 						if (isBattery) {
 							gaugeProperties = {
 								icon: "/images/battery.svg",
-								valueType: Gauges.FallingPercentage,
+								valueType: Enums.Gauges_ValueType_FallingPercentage,
 								name: tankName,
 								tankType: tankType,
 								value: tankLevel

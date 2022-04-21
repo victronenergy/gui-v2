@@ -9,25 +9,6 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum ProductType {
-		EuProduct = 0,
-		UsProduct = 1
-	}
-
-	enum InverterMode {
-		ChargerOnly = 1,
-		InverterOnly = 2,
-		On = 3,
-		Off = 4
-	}
-
-	enum InputType {
-		Unused = 0,
-		Grid = 1,
-		Generator = 2,
-		Shore = 3
-	}
-
 	property ListModel model: ListModel {}
 
 	property var _inverters: []
@@ -70,11 +51,11 @@ Item {
 			property int productId: -1
 			property string productName
 			property int productType: _productUpperByte === 0x19 || _productUpperByte === 0x26
-									  ? Inverters.EuProduct
-									  : (_productUpperByte === 0x20 || _productUpperByte === 0x27 ? Inverters.UsProduct : -1)
-			property var ampOptions: productType === Inverters.EuProduct
+									  ? Enums.Inverters_ProductType_EuProduct
+									  : (_productUpperByte === 0x20 || _productUpperByte === 0x27 ? Enums.Inverters_ProductType_UsProduct : -1)
+			property var ampOptions: productType === Enums.Inverters_ProductType_EuProduct
 									 ? _euAmpOptions
-									 : (productType === Inverters.UsProduct ? _usAmpOptions : [])
+									 : (productType === Enums.Inverters_ProductType_UsProduct ? _usAmpOptions : [])
 
 			/* - Mask the Product id with `0xFF00`
 			 * - If the result is `0x1900` or `0x2600` it is an EU model (230VAC)

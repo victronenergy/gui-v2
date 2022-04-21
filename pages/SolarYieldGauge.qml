@@ -39,7 +39,7 @@ Item {
 			verticalCenterOffset: Theme.geometry.solarYieldGauge.valueDisplay.verticalCenterOffset
 		}
 		title.text: qsTrId("brief_solar_yield")
-		physicalQuantity: Units.Power
+		physicalQuantity: Enums.Units_PhysicalQuantity_Power
 		value: solarChargers ? solarChargers.power : 0
 		icon.source: "qrc:/images/solaryield.svg"
 		fontSize: Theme.font.size.xl

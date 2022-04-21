@@ -27,7 +27,7 @@ ArcGauge {
 			topMargin: Theme.geometry.loadMiniGauge.label.topMargin
 		}
 		title.text: qsTrId("brief_loads")
-		physicalQuantity: Units.Power
+		physicalQuantity: Enums.Units_PhysicalQuantity_Power
 		value: system ? system.loads.power : 0
 		icon.source: "qrc:/images/consumption.svg"
 		alignment: Qt.AlignRight

@@ -3,9 +3,8 @@
 */
 
 import QtQuick
-import Victron.Velib
 import Victron.VenusOS
-import "../../data" as DBusData
+import Victron.Velib
 
 QtObject {
 	id: root
@@ -18,127 +17,127 @@ QtObject {
 		{
 			name: "Check Fuel colors",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 100, capacity: 1000, remaining: 1000 },
-				{ type: DBusData.Tanks.Fuel, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.Fuel, level: 20, capacity: 1000, remaining: 200 },
-				{ type: DBusData.Tanks.Fuel, level: 10, capacity: 1000, remaining: 100 },
-				{ type: DBusData.Tanks.Fuel, level: 0, capacity: 1000, remaining: 0 },
+				{ type: Enums.Tank_Type_Fuel, level: 100, capacity: 1000, remaining: 1000 },
+				{ type: Enums.Tank_Type_Fuel, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_Fuel, level: 20, capacity: 1000, remaining: 200 },
+				{ type: Enums.Tank_Type_Fuel, level: 10, capacity: 1000, remaining: 100 },
+				{ type: Enums.Tank_Type_Fuel, level: 0, capacity: 1000, remaining: 0 },
 			]
 		},
 		{
 			name: "Check BlackWater colors (different from Fuel level colors)",
 			tanks: [
-				{ type: DBusData.Tanks.BlackWater, level: 100, capacity: 1000, remaining: 1000 },
-				{ type: DBusData.Tanks.BlackWater, level: 90, capacity: 1000, remaining: 900 },
-				{ type: DBusData.Tanks.BlackWater, level: 85, capacity: 1000, remaining: 850 },
-				{ type: DBusData.Tanks.BlackWater, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.BlackWater, level: 0, capacity: 1000, remaining: 0 },
+				{ type: Enums.Tank_Type_BlackWater, level: 100, capacity: 1000, remaining: 1000 },
+				{ type: Enums.Tank_Type_BlackWater, level: 90, capacity: 1000, remaining: 900 },
+				{ type: Enums.Tank_Type_BlackWater, level: 85, capacity: 1000, remaining: 850 },
+				{ type: Enums.Tank_Type_BlackWater, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_BlackWater, level: 0, capacity: 1000, remaining: 0 },
 			]
 		},
 		{
 			name: "1 tank",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 46.34, capacity: 1000, remaining: 463 }
+				{ type: Enums.Tank_Type_Fuel, level: 46.34, capacity: 1000, remaining: 463 }
 			],
 		},
 		{
 			name: "2 tanks",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 46.34, capacity: 1000, remaining: 463 } ,
-				{ type: DBusData.Tanks.FreshWater, level: 50, capacity: 2000, remaining: 1000 }
+				{ type: Enums.Tank_Type_Fuel, level: 46.34, capacity: 1000, remaining: 463 } ,
+				{ type: Enums.Tank_Type_FreshWater, level: 50, capacity: 2000, remaining: 1000 }
 			],
 		},
 		{
 			name: "3 tanks (two of same type)",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 16.34, capacity: 1000, remaining: 163 },
-				{ type: DBusData.Tanks.Fuel, level: 75.334, capacity: 1000, remaining: 753 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_Fuel, level: 16.34, capacity: 1000, remaining: 163 },
+				{ type: Enums.Tank_Type_Fuel, level: 75.334, capacity: 1000, remaining: 753 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
 			]
 		},
 		{
 			name: "4 tanks (two of same type)",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 46.34, capacity: 1000, remaining: 463 },
-				{ type: DBusData.Tanks.Fuel, level: 75.334, capacity: 1000, remaining: 753 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
-				{ type: DBusData.Tanks.BlackWater, level: 25, capacity: 200, remaining: 50 },
+				{ type: Enums.Tank_Type_Fuel, level: 46.34, capacity: 1000, remaining: 463 },
+				{ type: Enums.Tank_Type_Fuel, level: 75.334, capacity: 1000, remaining: 753 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_BlackWater, level: 25, capacity: 200, remaining: 50 },
 			]
 		},
 		{
 			name: "5 tanks (two of same type)",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 46.34, capacity: 1000, remaining: 463 },
-				{ type: DBusData.Tanks.Fuel, level: 75.334, capacity: 1000, remaining: 753 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
-				{ type: DBusData.Tanks.WasteWater, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.BlackWater, level: 25, capacity: 200, remaining: 50 },
+				{ type: Enums.Tank_Type_Fuel, level: 46.34, capacity: 1000, remaining: 463 },
+				{ type: Enums.Tank_Type_Fuel, level: 75.334, capacity: 1000, remaining: 753 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_WasteWater, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_BlackWater, level: 25, capacity: 200, remaining: 50 },
 			]
 		},
 		{
 			name: "6 tanks (merge 2 Fuel tanks)",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 46.34, capacity: 1000, remaining: 463 },
-				{ type: DBusData.Tanks.Fuel, level: 75.334, capacity: 1000, remaining: 753 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
-				{ type: DBusData.Tanks.WasteWater, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.Oil, level: 80.2, capacity: 100, remaining: 802 },
-				{ type: DBusData.Tanks.BlackWater, level: 25, capacity: 200, remaining: 50 },
+				{ type: Enums.Tank_Type_Fuel, level: 46.34, capacity: 1000, remaining: 463 },
+				{ type: Enums.Tank_Type_Fuel, level: 75.334, capacity: 1000, remaining: 753 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_WasteWater, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_Oil, level: 80.2, capacity: 100, remaining: 802 },
+				{ type: Enums.Tank_Type_BlackWater, level: 25, capacity: 200, remaining: 50 },
 			]
 		},
 		{
 			name: "7 tanks (merge 2 Freshwater tanks)",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 75.334, capacity: 1000, remaining: 753 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
-				{ type: DBusData.Tanks.FreshWater, level: 50, capacity: 2000, remaining: 1000 },
-				{ type: DBusData.Tanks.WasteWater, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.LiveWell, level: 20, capacity: 1000, remaining: 200 },
-				{ type: DBusData.Tanks.Oil, level: 80.2, capacity: 100, remaining: 802 },
-				{ type: DBusData.Tanks.BlackWater, level: 25, capacity: 200, remaining: 50 },
+				{ type: Enums.Tank_Type_Fuel, level: 75.334, capacity: 1000, remaining: 753 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_FreshWater, level: 50, capacity: 2000, remaining: 1000 },
+				{ type: Enums.Tank_Type_WasteWater, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_LiveWell, level: 20, capacity: 1000, remaining: 200 },
+				{ type: Enums.Tank_Type_Oil, level: 80.2, capacity: 100, remaining: 802 },
+				{ type: Enums.Tank_Type_BlackWater, level: 25, capacity: 200, remaining: 50 },
 			]
 		},
 		{
 			name: "8 tanks (merge 3 BlackWater tanks)",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 46.34, capacity: 1000, remaining: 463 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
-				{ type: DBusData.Tanks.WasteWater, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.LiveWell, level: 20, capacity: 1000, remaining: 200 },
-				{ type: DBusData.Tanks.Oil, level: 80.2, capacity: 100, remaining: 802 },
-				{ type: DBusData.Tanks.BlackWater, level: 25, capacity: 200, remaining: 50 },
-				{ type: DBusData.Tanks.BlackWater, level: 50, capacity: 200, remaining: 100 },
-				{ type: DBusData.Tanks.BlackWater, level: 75, capacity: 200, remaining: 150 },
+				{ type: Enums.Tank_Type_Fuel, level: 46.34, capacity: 1000, remaining: 463 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_WasteWater, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_LiveWell, level: 20, capacity: 1000, remaining: 200 },
+				{ type: Enums.Tank_Type_Oil, level: 80.2, capacity: 100, remaining: 802 },
+				{ type: Enums.Tank_Type_BlackWater, level: 25, capacity: 200, remaining: 50 },
+				{ type: Enums.Tank_Type_BlackWater, level: 50, capacity: 200, remaining: 100 },
+				{ type: Enums.Tank_Type_BlackWater, level: 75, capacity: 200, remaining: 150 },
 			]
 		},
 		{
 			name: "10 tanks (merge 3 Fuel tanks and 2 WasteWater tanks)",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 46.34, capacity: 1000, remaining: 463 },
-				{ type: DBusData.Tanks.Fuel, level: 75.334, capacity: 1000, remaining: 753 },
-				{ type: DBusData.Tanks.Fuel, level: 75.334, capacity: 1000, remaining: 753 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
-				{ type: DBusData.Tanks.WasteWater, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.WasteWater, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.LiveWell, level: 20, capacity: 1000, remaining: 200 },
-				{ type: DBusData.Tanks.Oil, level: 80.2, capacity: 100, remaining: 802 },
-				{ type: DBusData.Tanks.BlackWater, level: 25, capacity: 200, remaining: 50 },
-				{ type: DBusData.Tanks.Gasoline, level: 25, capacity: 200, remaining: 50 },
+				{ type: Enums.Tank_Type_Fuel, level: 46.34, capacity: 1000, remaining: 463 },
+				{ type: Enums.Tank_Type_Fuel, level: 75.334, capacity: 1000, remaining: 753 },
+				{ type: Enums.Tank_Type_Fuel, level: 75.334, capacity: 1000, remaining: 753 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_WasteWater, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_WasteWater, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_LiveWell, level: 20, capacity: 1000, remaining: 200 },
+				{ type: Enums.Tank_Type_Oil, level: 80.2, capacity: 100, remaining: 802 },
+				{ type: Enums.Tank_Type_BlackWater, level: 25, capacity: 200, remaining: 50 },
+				{ type: Enums.Tank_Type_Gasoline, level: 25, capacity: 200, remaining: 50 },
 			]
 		},
 		{
 			name: "10 tanks (merge 3 Fuel tanks and 2 WasteWater tanks)",
 			tanks: [
-				{ type: DBusData.Tanks.Fuel, level: 46.34, capacity: 1000, remaining: 463 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
-				{ type: DBusData.Tanks.FreshWater, level: 10, capacity: 2000, remaining: 100 },
-				{ type: DBusData.Tanks.WasteWater, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.WasteWater, level: 75, capacity: 1000, remaining: 750 },
-				{ type: DBusData.Tanks.LiveWell, level: 20, capacity: 1000, remaining: 200 },
-				{ type: DBusData.Tanks.Oil, level: 80.2, capacity: 100, remaining: 802 },
-				{ type: DBusData.Tanks.BlackWater, level: 25, capacity: 200, remaining: 50 },
-				{ type: DBusData.Tanks.Gasoline, level: 25, capacity: 200, remaining: 50 },
+				{ type: Enums.Tank_Type_Fuel, level: 46.34, capacity: 1000, remaining: 463 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_FreshWater, level: 10, capacity: 2000, remaining: 100 },
+				{ type: Enums.Tank_Type_WasteWater, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_WasteWater, level: 75, capacity: 1000, remaining: 750 },
+				{ type: Enums.Tank_Type_LiveWell, level: 20, capacity: 1000, remaining: 200 },
+				{ type: Enums.Tank_Type_Oil, level: 80.2, capacity: 100, remaining: 802 },
+				{ type: Enums.Tank_Type_BlackWater, level: 25, capacity: 200, remaining: 50 },
+				{ type: Enums.Tank_Type_Gasoline, level: 25, capacity: 200, remaining: 50 },
 			]
 		},
 	]

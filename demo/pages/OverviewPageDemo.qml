@@ -3,9 +3,8 @@
 */
 
 import QtQuick
-import Victron.Velib
 import Victron.VenusOS
-import "../../data" as DBusData
+import Victron.Velib
 
 QtObject {
 	id: root
@@ -13,86 +12,86 @@ QtObject {
 	readonly property var configs: [
 		{
 			name: "ESS - AC & DC coupled.  PV Inverter on AC Bus + AC output",
-			acInputs: { types: [ DBusData.AcInputs.Grid ] },
+			acInputs: { types: [ Enums.AcInputs_InputType_Grid ] },
 			solar: {},
-			system: { state: DBusData.System.State.Inverting, ac: {}, dc: {} },
+			system: { state: Enums.System_State_Inverting, ac: {}, dc: {} },
 			battery: { stateOfCharge: 64, current: 1 },
 		},
 		{
 			name: "ESS - AC & DC coupled. PV Inverter on AC Out",
-			acInputs: { types: [ DBusData.AcInputs.Grid ] },
+			acInputs: { types: [ Enums.AcInputs_InputType_Grid ] },
 			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
+			system: { state: Enums.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 73, current: -1 },
 		},
 		// TODO "ESS - AC & DC coupled. PV Inverter on AC Out (Amps version)",
 		{
 			name: "Phase self consumption",
-			acInputs: { types: [ DBusData.AcInputs.Generator ] },
+			acInputs: { types: [ Enums.AcInputs_InputType_Generator ] },
 			solar: {},
-			system: { state: DBusData.System.State.PassThrough, ac: {} },
+			system: { state: Enums.System_State_PassThrough, ac: {} },
 			battery: { stateOfCharge: 29, current: 1 },
 		},
 		{
 			name: "Off grid",
-			acInputs: { types: [ DBusData.AcInputs.Generator ] },  // TODO 'stopped' state
+			acInputs: { types: [ Enums.AcInputs_InputType_Generator ] },  // TODO 'stopped' state
 			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
+			system: { state: Enums.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 95, current: 1 },
 		},
 		{
 			name: "ESS - AC coupled on AC Output",
-			acInputs: { types: [ DBusData.AcInputs.Grid ] },  // TODO what does up arrow icon in Grid indicate?
+			acInputs: { types: [ Enums.AcInputs_InputType_Grid ] },  // TODO what does up arrow icon in Grid indicate?
 			solar: {},
-			system: { state: DBusData.System.State.FloatCharging, ac: {} },
+			system: { state: Enums.System_State_FloatCharging, ac: {} },
 			battery: { stateOfCharge: 100, current: 0 },
 		},
 		{
 			name: "Pure Energy Storage - no PV",
-			acInputs: { types: [ DBusData.AcInputs.Grid ] },
+			acInputs: { types: [ Enums.AcInputs_InputType_Grid ] },
 			// TODO state should be 'Scheduled charging', but not in dbus API?
-			system: { state: DBusData.System.State.FloatCharging, ac: {} },
+			system: { state: Enums.System_State_FloatCharging, ac: {} },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
 		{
 			name: "Combo (amps): Shore / DC Generator / Left & Right Alternator / Solar",
-			acInputs: { types: [ DBusData.AcInputs.Shore ], phases: 3 },
-			dcInputs: { types: [ DBusData.DcInputs.DcGenerator, DBusData.DcInputs.Alternator ] },
+			acInputs: { types: [ Enums.AcInputs_InputType_Shore ], phases: 3 },
+			dcInputs: { types: [ Enums.DcInputs_InputType_DcGenerator, Enums.DcInputs_InputType_Alternator ] },
 			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
+			system: { state: Enums.System_State_AbsorptionCharging, ac: {}, dc: {} },
 		},
 		{
 			name: "Single-phase Shore",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
+			acInputs: { types: [ Enums.AcInputs_InputType_Shore ] },
+			system: { state: Enums.System_State_AbsorptionCharging, ac: {}, dc: {} },
 		},
 		{
 			name: "Single phase + solar",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
+			acInputs: { types: [ Enums.AcInputs_InputType_Shore ] },
 			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
+			system: { state: Enums.System_State_AbsorptionCharging, ac: {}, dc: {} },
 		},
 		{
 			name: "Small RV with alternator or small boat",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
-			dcInputs: { types: [ DBusData.DcInputs.Alternator ] },
+			acInputs: { types: [ Enums.AcInputs_InputType_Shore ] },
+			dcInputs: { types: [ Enums.DcInputs_InputType_Alternator ] },
 			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
+			system: { state: Enums.System_State_AbsorptionCharging, ac: {}, dc: {} },
 		},
 		{
 			name: "Catamaran with wind: Shore / Solar / Left alternator / Right alternator / Wind",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
-			dcInputs: { types: [ DBusData.DcInputs.Alternator, DBusData.DcInputs.Wind ] },
+			acInputs: { types: [ Enums.AcInputs_InputType_Shore ] },
+			dcInputs: { types: [ Enums.DcInputs_InputType_Alternator, Enums.DcInputs_InputType_Wind ] },
 			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
+			system: { state: Enums.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
 		{
 			name: "Boat with DC generator",
-			acInputs: { types: [ DBusData.AcInputs.Shore ] },
-			dcInputs: { types: [ DBusData.DcInputs.DcGenerator, DBusData.DcInputs.Alternator, DBusData.DcInputs.Wind ] },
+			acInputs: { types: [ Enums.AcInputs_InputType_Shore ] },
+			dcInputs: { types: [ Enums.DcInputs_InputType_DcGenerator, Enums.DcInputs_InputType_Alternator, Enums.DcInputs_InputType_Wind ] },
 			solar: {},
-			system: { state: DBusData.System.State.AbsorptionCharging, ac: {}, dc: {} },
+			system: { state: Enums.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
 	]

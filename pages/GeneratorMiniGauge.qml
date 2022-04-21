@@ -27,7 +27,7 @@ ArcGauge {
 			bottomMargin: Theme.geometry.generatorMiniGauge.label.bottomMargin
 		}
 		title.text: qsTrId("brief_generator")
-		physicalQuantity: Units.Power
+		physicalQuantity: Enums.Units_PhysicalQuantity_Power
 		value: system ? system.generator.power : 0
 		icon.source: "qrc:/images/generator.svg"
 		alignment: Qt.AlignRight

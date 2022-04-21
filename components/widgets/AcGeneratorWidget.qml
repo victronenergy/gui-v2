@@ -11,5 +11,5 @@ AcInputWidget {
 	//% "Generator"
 	title.text: qsTrId("overview_widget_generator_title")
 	icon.source: "qrc:/images/generator.svg"
-	type: OverviewWidget.Type.AcGenerator
+	type: Enums.OverviewWidget_Type_AcGenerator
 }

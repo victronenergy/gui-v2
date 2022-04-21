@@ -11,6 +11,6 @@ OverviewWidget {
 	//% "DC Loads"
 	title.text: qsTrId("overview_widget_dcloads_title")
 	icon.source: "qrc:/images/dcloads.svg"
-	type: OverviewWidget.Type.DcLoads
+	type: Enums.OverviewWidget_Type_DcLoads
 	enabled: false
 }

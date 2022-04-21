@@ -10,23 +10,8 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum State {
-		Off = 0,
-		LowPower = 1,
-		FaultCondition = 2,
-		BulkCharging = 3,
-		AbsorptionCharging = 4,
-		FloatCharging = 5,
-		StorageMode = 6,
-		EqualisationCharging = 7,
-		PassThrough = 8,
-		Inverting = 9,
-		Assisting = 10,
-		Discharging = 256,
-		Sustain = 257
-	}
 
-	property int state: veSystemState.value || System.State.Off
+	property int state: veSystemState.value || Enums.System_State_Off
 
 	property QtObject loads: QtObject {
 		readonly property real power: ac.consumption.power + dc.power

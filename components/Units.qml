@@ -4,20 +4,9 @@
 pragma Singleton
 
 import QtQuick
+import Victron.VenusOS
 
 QtObject {
-	// TODO: add other quantites as needed, eg. Distance, Volume
-	enum PhysicalQuantity {
-		Voltage,
-		Current,
-		Power,
-		Percentage,
-		Temperature,
-		Liters,
-		CubicMeters,
-		Gallons
-	}
-
 	/*	physicalQuantity	|	precision:	|	value:	|	output:
 		-----------------------------------------------------------
 				Power		|		5		|	1234.56	|	1.2346kW
@@ -31,7 +20,7 @@ QtObject {
 		unitMatchValue = unitMatchValue === undefined ? value : unitMatchValue
 
 		switch (physicalQuantity) {
-		case Units.PhysicalQuantity.Power:
+		case Enums.Units_PhysicalQuantity_Power:
 			if (isNaN(value)) {
 				unitText = "W"
 			} else {
@@ -39,7 +28,7 @@ QtObject {
 				unitText = unitMatchValue < 1000 ? "W" : "kW"
 			}
 			break;
-		case Units.PhysicalQuantity.Voltage:
+		case Enums.Units_PhysicalQuantity_Voltage:
 			if (isNaN(value)) {
 				unitText = "V"
 			} else {
@@ -47,7 +36,7 @@ QtObject {
 				unitText = unitMatchValue < 1000 ? "V" : "kV"
 			}
 			break;
-		case Units.PhysicalQuantity.Current:
+		case Enums.Units_PhysicalQuantity_Current:
 			if (isNaN(value)) {
 				unitText = "A"
 			} else {
@@ -55,14 +44,14 @@ QtObject {
 				unitText = unitMatchValue < 1000 ? "A" : "kA"
 			}
 			break;
-		case Units.PhysicalQuantity.Percentage:
+		case Enums.Units_PhysicalQuantity_Percentage:
 			value = isNaN(value) ? value : Math.round(value)
 			unitText = "%"
 			break;
-		case Units.PhysicalQuantity.Temperature:
+		case Enums.Units_PhysicalQuantity_Temperature:
 			unitText = "\u00b0"
 			break;
-		case Units.PhysicalQuantity.Liters:
+		case Enums.Units_PhysicalQuantity_Liters:
 			if (isNaN(value)) {
 				unitText = "\u2113" // 'l' symbol
 			} else {
@@ -70,11 +59,11 @@ QtObject {
 				unitText = unitMatchValue < 1000 ? "\u2113" : "\u3398"
 			}
 			break;
-		case Units.PhysicalQuantity.CubicMeters:
+		case Enums.Units_PhysicalQuantity_CubicMeters:
 			value = isNaN(value) ? value : value.toPrecision(precision)
 			unitText = "\u33A5"
 			break;
-		case Units.PhysicalQuantity.Gallons:
+		case Enums.Units_PhysicalQuantity_Gallons:
 			unitText = "gal"
 			break;
 		default:

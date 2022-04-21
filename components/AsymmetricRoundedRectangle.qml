@@ -9,17 +9,8 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	enum RoundedSide {
-		All,			// allow all sides to be rounded, show all borders
-		Left,			// round left, hide right border
-		Right,			// round right, hide left border
-		Top,			// round top, hide bottom border
-		Bottom,			// round bottom, hide top border
-		NoneHorizontal	// no rounding, show top/bottom borders only
-	}
-
 	property bool flat: false // has outline/border by default
-	property int roundedSide: AsymmetricRoundedRectangle.RoundedSide.Left
+	property int roundedSide: Enums.AsymmetricRoundedRectangle_RoundedSide_Left
 	property alias backgroundColor: backgroundRect.color // must be opaque and match the surface the control is placed on
 	property alias color: roundedRect.color
 	property alias radius: roundedRect.radius
@@ -32,11 +23,11 @@ Item {
 		anchors {
 			fill: parent
 			bottomMargin: root.height - root.border.width
-			leftMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Left ? root.radius : 0
-			rightMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right ? root.radius : 0
+			leftMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Left ? root.radius : 0
+			rightMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Right ? root.radius : 0
 		}
 
-		visible: root.roundedSide !== AsymmetricRoundedRectangle.RoundedSide.All
+		visible: root.roundedSide !== Enums.AsymmetricRoundedRectangle_RoundedSide_All
 
 		color: roundedRect.border.color
 	}
@@ -46,11 +37,11 @@ Item {
 		anchors {
 			fill: parent
 			topMargin: root.height - root.border.width
-			leftMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Left ? root.radius : 0
-			rightMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right ? root.radius : 0
+			leftMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Left ? root.radius : 0
+			rightMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Right ? root.radius : 0
 		}
 
-		visible: root.roundedSide !== AsymmetricRoundedRectangle.RoundedSide.All
+		visible: root.roundedSide !== Enums.AsymmetricRoundedRectangle_RoundedSide_All
 
 		color: roundedRect.border.color
 	}
@@ -59,13 +50,13 @@ Item {
 		id: backgroundRect
 		anchors {
 			fill: parent
-			topMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Top ? root.radius : 0
-			bottomMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Bottom ? root.radius : 0
-			leftMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Left ? root.radius : 0
-			rightMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right ? root.radius : 0
+			topMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Top ? root.radius : 0
+			bottomMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Bottom ? root.radius : 0
+			leftMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Left ? root.radius : 0
+			rightMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Right ? root.radius : 0
 		}
 
-		visible: root.roundedSide !== AsymmetricRoundedRectangle.RoundedSide.All
+		visible: root.roundedSide !== Enums.AsymmetricRoundedRectangle_RoundedSide_All
 
 		color: roundedRect.color
 	}
@@ -74,22 +65,22 @@ Item {
 		id: clipRect
 		anchors {
 			fill: parent
-			leftMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right ? root.width - root.radius : 0
-			rightMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Left ? root.width - root.radius : 0
-			topMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Bottom ? root.height - root.radius : 0
-			bottomMargin: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Top ? root.height - root.radius : 0
+			leftMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Right ? root.width - root.radius : 0
+			rightMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Left ? root.width - root.radius : 0
+			topMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Bottom ? root.height - root.radius : 0
+			bottomMargin: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Top ? root.height - root.radius : 0
 		}
 
-		visible: root.roundedSide !== AsymmetricRoundedRectangle.RoundedSide.NoneHorizontal
-		clip: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Left
-			  || root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right
-			  || root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Top
-			  || root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Bottom
+		visible: root.roundedSide !== Enums.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
+		clip: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Left
+			  || root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Right
+			  || root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Top
+			  || root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Bottom
 
 		Rectangle {
 			id: roundedRect
-			x: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Right ? -(root.width - root.radius) : 0
-			y: root.roundedSide === AsymmetricRoundedRectangle.RoundedSide.Bottom ? -(root.height - root.radius) : 0
+			x: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Right ? -(root.width - root.radius) : 0
+			y: root.roundedSide === Enums.AsymmetricRoundedRectangle_RoundedSide_Bottom ? -(root.height - root.radius) : 0
 			width: root.width
 			height: root.height
 			color: Theme.color.button.outline.background

@@ -9,7 +9,7 @@ import Victron.VenusOS
 ModalWarningDialog {
 	id: root
 
-	dialogDoneOptions: ModalDialog.DialogDoneOptions.OkAndCancel
+	dialogDoneOptions: Enums.ModalDialog_DoneOptions_OkAndCancel
 
 	//% "Disable Autostart?"
 	title: qsTrId("controlcard_generator_disableautostartdialog_title")

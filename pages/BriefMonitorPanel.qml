@@ -100,7 +100,7 @@ Column {
 						//% "Solar yield"
 						labelText: QT_TRID_NOOP("brief_solar_yield"),
 						value: 0,
-						type: Units.Power,
+						type: Enums.Units_PhysicalQuantity_Power,
 						imageSource: "qrc:/images/solaryield.svg",
 						decorationIndex: 0,
 						topMargin: Theme.geometry.briefPage.sidePanel.solarYield.topMargin
@@ -112,7 +112,7 @@ Column {
 						//% "Generator"
 						labelText: QT_TRID_NOOP("brief_generator"),
 						value: 0,
-						type: Units.Power,
+						type: Enums.Units_PhysicalQuantity_Power,
 						imageSource: "qrc:/images/generator.svg",
 						decorationIndex: 1,
 						topMargin: Theme.geometry.briefPage.sidePanel.generator.topMargin
@@ -124,7 +124,7 @@ Column {
 						//% "Loads"
 						labelText: QT_TRID_NOOP("brief_loads"),
 						value: 0,
-						type: Units.Power,
+						type: Enums.Units_PhysicalQuantity_Power,
 						imageSource: "qrc:/images/consumption.svg",
 						decorationIndex: 2,
 						topMargin: Theme.geometry.briefPage.sidePanel.loads.topMargin
@@ -187,9 +187,9 @@ Column {
 						bottomMargin: Theme.geometry.briefPage.sidePanel.generator.label.bottomMargin
 					}
 					// In most cases there is only 1 generator, so don't worry about other ones here.
-					state: generator0 ? generator0.state : Generators.GeneratorState.Stopped
+					state: generator0 ? generator0.state : Enums.Generators_State_Stopped
 					runtime: generator0 ? generator0.runtime : 0
-					runningBy: generator0 ? generator0.runningBy : Generators.GeneratorRunningBy.NotRunning
+					runningBy: generator0 ? generator0.runningBy : Enums.Generators_RunningBy_NotRunning
 
 				}
 				Slider {

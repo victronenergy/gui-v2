@@ -8,32 +8,8 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	enum Type {
-		UnknownType,
-		Grid,
-		Shore,
-		AcGenerator,
-		DcGenerator,
-		Alternator,
-		Wind,
-		Solar,
-		Inverter,
-		Battery,
-		AcLoads,
-		DcLoads
-	}
-
-	enum Size {
-		Zero, // i.e. not visible
-		XS,
-		S,
-		M,
-		L,
-		XL
-	}
-
-	property int type: OverviewWidget.Type.UnknownType
-	property int size: OverviewWidget.Size.M
+	property int type: Enums.OverviewWidget_Type_UnknownType
+	property int size: Enums.OverviewWidget_Size_M
 
 	property alias physicalQuantity: valueDisplay.physicalQuantity
 	property alias value: valueDisplay.value
@@ -57,25 +33,25 @@ Rectangle {
 	property bool animateGeometry
 
 	function getCompactHeight(s) {
-		return s === OverviewWidget.Size.XL
+		return s === Enums.OverviewWidget_Size_XL
 		  ? Theme.geometry.overviewPage.widget.compact.xl.height
-		  : s === OverviewWidget.Size.L
+		  : s === Enums.OverviewWidget_Size_L
 			? Theme.geometry.overviewPage.widget.compact.l.height
-			: s === OverviewWidget.Size.M
+			: s === Enums.OverviewWidget_Size_M
 			  ? Theme.geometry.overviewPage.widget.compact.m.height
-			  : s === OverviewWidget.Size.S
+			  : s === Enums.OverviewWidget_Size_S
 			  ? Theme.geometry.overviewPage.widget.compact.s.height
 			  : Theme.geometry.overviewPage.widget.compact.xs.height
 	}
 
 	function getExpandedHeight(s) {
-		return s === OverviewWidget.Size.XL
+		return s === Enums.OverviewWidget_Size_XL
 			? Theme.geometry.overviewPage.widget.expanded.xl.height
-			: s === OverviewWidget.Size.L
+			: s === Enums.OverviewWidget_Size_L
 			  ? Theme.geometry.overviewPage.widget.expanded.l.height
-			  : s === OverviewWidget.Size.M
+			  : s === Enums.OverviewWidget_Size_M
 				? Theme.geometry.overviewPage.widget.expanded.m.height
-				: s === OverviewWidget.Size.S
+				: s === Enums.OverviewWidget_Size_S
 				? Theme.geometry.overviewPage.widget.expanded.s.height
 				: Theme.geometry.overviewPage.widget.expanded.xs.height
 	}
@@ -85,7 +61,7 @@ Rectangle {
 	height: expanded
 			? expandedHeight + (isSegment ? segmentExpandedMargin : 0)
 			: compactHeight + (isSegment ? segmentCompactMargin : 0)
-	visible: size !== OverviewWidget.Size.Zero
+	visible: size !== Enums.OverviewWidget_Size_Zero
 	radius: isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
 	border.width: enabled && !isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
 	border.color: Theme.color.overviewPage.widget.border
@@ -126,10 +102,10 @@ Rectangle {
 		id: valueDisplay
 
 		x: Theme.geometry.overviewPage.widget.content.horizontalMargin
-		y: root.size > OverviewWidget.Size.S
+		y: root.size > Enums.OverviewWidget_Size_S
 		   ? Theme.geometry.overviewPage.widget.content.verticalMargin
 		   : parent.height/2 - height/2
-		fontSize: root.size === OverviewWidget.Size.XS
+		fontSize: root.size === Enums.OverviewWidget_Size_XS
 				  ? Theme.geometry.overviewPage.widget.value.minimumFontSize
 				  : Theme.geometry.overviewPage.widget.value.maximumFontSize
 	}
@@ -143,6 +119,6 @@ Rectangle {
 			top: valueDisplay.bottom
 			bottom: parent.bottom
 		}
-		visible: root.size >= OverviewWidget.Size.M
+		visible: root.size >= Enums.OverviewWidget_Size_M
 	}
 }

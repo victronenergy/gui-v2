@@ -3,9 +3,9 @@
 */
 
 import QtQuick
+import Victron.VenusOS
 import Victron.Velib
 import "/components/Utils.js" as Utils
-import "../data" as DBusData
 
 Item {
 	id: root
@@ -29,21 +29,21 @@ Item {
 		QtObject {
 			id: generator
 
-			property int state: DBusData.Generators.GeneratorState.Running
+			property int state: Enums.Generators_State_Running
 			property int manualStartTimer
 			property int runtime: 35
-			property int runningBy: DBusData.Generators.GeneratorRunningBy.Soc
+			property int runningBy: Enums.Generators_RunningBy_Soc
 
 			function start(durationSecs) {
 				manualStartTimer = durationSecs
-				state = DBusData.Generators.GeneratorState.Running
-				runningBy = DBusData.Generators.GeneratorRunningBy.Manual
+				state = Enums.Generators_State_Running
+				runningBy = Enums.Generators_RunningBy_Manual
 				runTimerTimer.start()
 			}
 
 			function stop() {
-				state = DBusData.Generators.GeneratorState.Stopped
-				runningBy = DBusData.Generators.GeneratorRunningBy.NotRunning
+				state = Enums.Generators_State_Stopped
+				runningBy = Enums.Generators_RunningBy_NotRunning
 				runTimerTimer.stop()
 			}
 

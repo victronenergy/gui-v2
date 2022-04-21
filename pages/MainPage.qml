@@ -122,8 +122,8 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarIn
 
-			running: PageManager.interactivity === PageManager.InteractionMode.EndFullScreen
-					 || PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+			running: PageManager.interactivity === Enums.PageManager_InteractionMode_EndFullScreen
+					 || PageManager.interactivity === Enums.PageManager_InteractionMode_ExitIdleMode
 
 			NumberAnimation {
 				target: navBar
@@ -135,7 +135,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = PageManager.InteractionMode.ExitIdleMode
+					PageManager.interactivity = Enums.PageManager_InteractionMode_ExitIdleMode
 				}
 			}
 			OpacityAnimator {
@@ -148,7 +148,7 @@ Page {
 			ScriptAction {
 				script: {
 					PageManager.controlsVisible = true
-					PageManager.interactivity = PageManager.InteractionMode.Interactive
+					PageManager.interactivity = Enums.PageManager_InteractionMode_Interactive
 				}
 			}
 		}
@@ -156,8 +156,8 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarOut
 
-			running: PageManager.interactivity === PageManager.InteractionMode.EnterIdleMode
-					 || PageManager.interactivity === PageManager.InteractionMode.BeginFullScreen
+			running: PageManager.interactivity === Enums.PageManager_InteractionMode_EnterIdleMode
+					 || PageManager.interactivity === Enums.PageManager_InteractionMode_BeginFullScreen
 
 			ScriptAction {
 				script: {
@@ -173,7 +173,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = PageManager.InteractionMode.BeginFullScreen
+					PageManager.interactivity = Enums.PageManager_InteractionMode_BeginFullScreen
 				}
 			}
 			NumberAnimation {
@@ -186,7 +186,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = PageManager.InteractionMode.Idle
+					PageManager.interactivity = Enums.PageManager_InteractionMode_Idle
 				}
 			}
 		}

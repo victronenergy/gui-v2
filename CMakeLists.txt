@@ -101,6 +101,8 @@ list(APPEND SOURCES
     language.h
     language.cpp
     logging.h
+    enums.h
+    enums.cpp
     ${VELIB_SOURCES}
     ${QML_RESOURCES}
 )
