@@ -9,15 +9,6 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	enum InteractionMode {
-		Interactive,
-		EnterIdleMode,  // Fade out nav bar
-		BeginFullScreen,    // Slide out nav bar, expand UI layout
-		Idle,
-		EndFullScreen,  // Slide in nav bar, compress UI layout
-		ExitIdleMode    // Fade in nav bar
-	}
-
 	property QtObject emitter: QtObject {
 		signal pagePushRequested(var obj, var properties)
 		signal pagePopRequested()
@@ -34,20 +25,20 @@ QtObject {
 	property var statusBar
 	property int levelsTabIndex
 
-	property int interactivity: PageManager.InteractionMode.Interactive
+	property int interactivity: VenusOS.PageManager_InteractionMode_Interactive
 
 	// True when the UI layout on a page should be resizing before/after idle/interactive mode changes.
-	readonly property bool animatingIdleResize: PageManager.interactivity === PageManager.InteractionMode.BeginFullScreen
-			|| PageManager.interactivity === PageManager.InteractionMode.EndFullScreen
+	readonly property bool animatingIdleResize: PageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
+			|| PageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
 
-	readonly property bool expandLayout: PageManager.interactivity === PageManager.InteractionMode.BeginFullScreen
-			|| PageManager.interactivity === PageManager.InteractionMode.Idle
+	readonly property bool expandLayout: PageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
+			|| PageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
 
 	property Timer idleModeTimer: Timer {
 		running: root.currentPage && root.currentPage.fullScreenWhenIdle
-			&& root.interactivity === PageManager.InteractionMode.Interactive
+			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 		interval: Theme.animation.page.idleResize.timeout
-		onTriggered: root.interactivity = PageManager.InteractionMode.EnterIdleMode
+		onTriggered: root.interactivity = VenusOS.PageManager_InteractionMode_EnterIdleMode
 	}
 
 	function pushPage(obj, properties) {

@@ -30,9 +30,9 @@ Item {
 	readonly property real _yDistanceBetweenNubs: {
 		var dist = endNub.y - startNub.y
 		// for vertical connectors, take the nub height into account
-		if (startLocation == WidgetConnector.Location.Top) {
+		if (startLocation == VenusOS.WidgetConnector_Location_Top) {
 			dist += endNub.height
-		} else if (startLocation == WidgetConnector.Location.Bottom) {
+		} else if (startLocation == VenusOS.WidgetConnector_Location_Bottom) {
 			dist -= endNub.height
 		}
 		return dist

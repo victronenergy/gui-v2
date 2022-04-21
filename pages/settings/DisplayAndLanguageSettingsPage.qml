@@ -24,14 +24,14 @@ Page {
 				//% "Brightness"
 				text: qsTrId("settings_brightness")
 				source: "com.victronenergy.settings/Settings/Gui/Brightness"
-				writeAccessLevel: User.AccessUser
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			SettingsListRadioButtonGroup {
 				//% "Display off time"
 				text: qsTrId("settings_display_off_time")
 				source: "com.victronenergy.settings/Settings/Gui/DisplayOff"
-				writeAccessLevel: User.AccessUser
+				writeAccessLevel: VenusOS.User_AccessType_User
 
 				model: [
 					//% "10 sec"
@@ -91,7 +91,7 @@ Page {
 			SettingsListRadioButtonGroup {
 				//% "Language"
 				text: qsTrId("settings_language")
-				writeAccessLevel: User.AccessUser
+				writeAccessLevel: VenusOS.User_AccessType_User
 				model: LanguageModel { currentLanguage: Language.current }
 				currentIndex: model.currentIndex
 				secondaryText: model.currentDisplayText

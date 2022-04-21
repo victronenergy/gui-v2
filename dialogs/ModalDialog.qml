@@ -9,12 +9,7 @@ import Victron.VenusOS
 C.Dialog {
 	id: root
 
-	enum DialogDoneOptions {
-		OkOnly = 0,
-		OkAndCancel = 1,
-		SetAndClose = 2
-	}
-	property int dialogDoneOptions: ModalDialog.DialogDoneOptions.SetAndClose
+	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndClose
 
 	modal: true
 
@@ -80,7 +75,7 @@ C.Dialog {
 			}
 		}
 		Button {
-			visible: root.dialogDoneOptions !== ModalDialog.DialogDoneOptions.OkOnly
+			visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
 			anchors {
 				left: parent.left
 				right: footerMidSeparator.left
@@ -91,10 +86,10 @@ C.Dialog {
 			font.pixelSize: Theme.font.size.m
 			color: Theme.color.font.primary
 			spacing: 0
-			enabled: root.dialogDoneOptions !== ModalDialog.DialogDoneOptions.OkOnly
-			text: root.dialogDoneOptions === ModalDialog.DialogDoneOptions.OkOnly ?
+			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
+			text: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly ?
 					""
-				: root.dialogDoneOptions === ModalDialog.DialogDoneOptions.OkAndCancel ?
+				: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel ?
 					//% "Cancel"
 					qsTrId("controlcard_cancel")
 				: /* SetAndClose */
@@ -104,7 +99,7 @@ C.Dialog {
 		}
 		SeparatorBar {
 			id: footerMidSeparator
-			visible: root.dialogDoneOptions !== ModalDialog.DialogDoneOptions.OkOnly
+			visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
@@ -116,7 +111,7 @@ C.Dialog {
 		}
 		Button {
 			anchors {
-				left: root.dialogDoneOptions === ModalDialog.DialogDoneOptions.OkOnly ? parent.left : footerMidSeparator.right
+				left: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly ? parent.left : footerMidSeparator.right
 				right: parent.right
 				top: parent.top
 				bottom: parent.bottom
@@ -125,7 +120,7 @@ C.Dialog {
 			font.pixelSize: Theme.font.size.m
 			color: Theme.color.font.primary
 			spacing: 0
-			text: root.dialogDoneOptions === ModalDialog.DialogDoneOptions.SetAndClose ?
+			text: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndClose ?
 					//% "Set"
 					qsTrId("controlcard_set")
 				:   //% "Ok"

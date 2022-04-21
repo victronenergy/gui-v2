@@ -26,11 +26,11 @@ ControlCard {
 			//: Relay number
 			//% "Relay %1"
 			label.text: qsTrId("controlcard_relay_name").arg(model.index + 1)
-			button.checked: model.relay.state === Relays.State.Active
+			button.checked: model.relay.state === VenusOS.Relays_State_Active
 			onClicked: {
-				var newState = model.relay.state === Relays.State.Active
-						? Relays.State.Inactive
-						: Relays.State.Active
+				var newState = model.relay.state === VenusOS.Relays_State_Active
+						? VenusOS.Relays_State_Inactive
+						: VenusOS.Relays_State_Active
 				model.relay.setState(newState)
 			}
 		}

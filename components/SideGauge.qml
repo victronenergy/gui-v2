@@ -35,7 +35,7 @@ ArcGauge {
 		gaugeAlignmentX: root.gaugeAlignmentX
 		gaugeAlignmentY: root.gaugeAlignmentY
 		source: "qrc:/images/consumption.svg"
-		physicalQuantity: Units.Power
+		physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
 		value: parent.value
 	}
 }

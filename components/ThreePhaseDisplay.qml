@@ -8,7 +8,7 @@ import Victron.VenusOS
 Column {
 	id: root
 
-	property var physicalQuantity: Units.Power // eg. Units.Voltage, Units.Current, Units.Power
+	property var physicalQuantity: VenusOS.Units_PhysicalQuantity_Power // eg. Units.Voltage, Units.Current, Units.Power
 	property int precision: 3 // this will display 1.23 kW, given a value of 1234 W
 	property alias model: phaseRepeater.model
 	property string phaseModelProperty: "power"

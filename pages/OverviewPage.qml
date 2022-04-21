@@ -13,13 +13,13 @@ Page {
 
 	// Preferred order for the input widgets on the left hand side
 	readonly property var _leftWidgetOrder: [
-		OverviewWidget.Type.Grid,
-		OverviewWidget.Type.Shore,
-		OverviewWidget.Type.AcGenerator,
-		OverviewWidget.Type.DcGenerator,
-		OverviewWidget.Type.Alternator,
-		OverviewWidget.Type.Wind,
-		OverviewWidget.Type.Solar
+		VenusOS.OverviewWidget_Type_Grid,
+		VenusOS.OverviewWidget_Type_Shore,
+		VenusOS.OverviewWidget_Type_AcGenerator,
+		VenusOS.OverviewWidget_Type_DcGenerator,
+		VenusOS.OverviewWidget_Type_Alternator,
+		VenusOS.OverviewWidget_Type_Wind,
+		VenusOS.OverviewWidget_Type_Solar
 	]
 
 	// Set a counter that updates whenever the layout should change.
@@ -56,26 +56,26 @@ Page {
 			widget = _leftWidgets[i]
 			switch (_leftWidgets.length) {
 			case 1:
-				widget.size = OverviewWidget.Size.XL
+				widget.size = VenusOS.OverviewWidget_Size_XL
 				break
 			case 2:
-				widget.size = OverviewWidget.Size.L
+				widget.size = VenusOS.OverviewWidget_Size_L
 				break
 			case 3:
 			case 4:
 				// Only one of the widgets can have L size, and the other ones use a reduced size.
 				if (widget === firstLargeWidget) {
-					widget.size = OverviewWidget.Size.L
+					widget.size = VenusOS.OverviewWidget_Size_L
 				} else if (firstLargeWidget != null) {
 					// There is a large widget, so use M or XS size to fit around it
-					widget.size = _leftWidgets.length == 3 ? OverviewWidget.Size.M : OverviewWidget.Size.XS
+					widget.size = _leftWidgets.length == 3 ? VenusOS.OverviewWidget_Size_M : VenusOS.OverviewWidget_Size_XS
 				} else {
 					// There are no large widgets; use the same size for all left widgets
-					widget.size = _leftWidgets.length == 3 ? OverviewWidget.Size.M : OverviewWidget.Size.S
+					widget.size = _leftWidgets.length == 3 ? VenusOS.OverviewWidget_Size_M : VenusOS.OverviewWidget_Size_S
 				}
 				break
 			default:
-				widget.size = OverviewWidget.Size.XS
+				widget.size = VenusOS.OverviewWidget_Size_XS
 				break
 			}
 		}
@@ -145,25 +145,25 @@ Page {
 		args = args || {}
 		let widget = null
 		switch (type) {
-		case OverviewWidget.Type.Grid:
+		case VenusOS.OverviewWidget_Type_Grid:
 			widget = gridComponent.createObject(root, args)
 			break
-		case OverviewWidget.Type.Shore:
+		case VenusOS.OverviewWidget_Type_Shore:
 			widget = shoreComponent.createObject(root, args)
 			break
-		case OverviewWidget.Type.AcGenerator:
+		case VenusOS.OverviewWidget_Type_AcGenerator:
 			widget = acGeneratorComponent.createObject(root, args)
 			break
-		case OverviewWidget.Type.DcGenerator:
+		case VenusOS.OverviewWidget_Type_DcGenerator:
 			widget = dcGeneratorComponent.createObject(root, args)
 			break
-		case OverviewWidget.Type.Alternator:
+		case VenusOS.OverviewWidget_Type_Alternator:
 			widget = alternatorComponent.createObject(root, args)
 			break
-		case OverviewWidget.Type.Wind:
+		case VenusOS.OverviewWidget_Type_Wind:
 			widget = windComponent.createObject(root, args)
 			break
-		case OverviewWidget.Type.Solar:
+		case VenusOS.OverviewWidget_Type_Solar:
 			widget = solarComponent.createObject(root, args)
 			break
 		default:
@@ -176,7 +176,7 @@ Page {
 
 	function _resetLeftWidgets() {
 		for (let widgetType in _createdWidgets) {
-			_createdWidgets[widgetType].size = OverviewWidget.Size.Zero
+			_createdWidgets[widgetType].size = VenusOS.OverviewWidget_Size_Zero
 		}
 
 		if (!acInputs) {
@@ -189,8 +189,8 @@ Page {
 		_addModelWidgets(dcInputs.model, widgetCandidates)
 
 		if (solarChargers && solarChargers.model.count > 0) {
-			widgetCandidates.splice(_leftWidgetInsertionIndex(OverviewWidget.Type.Solar, widgetCandidates),
-					0, _createWidget(OverviewWidget.Type.Solar))
+			widgetCandidates.splice(_leftWidgetInsertionIndex(VenusOS.OverviewWidget_Type_Solar, widgetCandidates),
+					0, _createWidget(VenusOS.OverviewWidget_Type_Solar))
 		}
 		_leftWidgets = widgetCandidates
 	}
@@ -201,28 +201,28 @@ Page {
 			let widgetType = -1
 			if (inputModel === acInputs.model)  {
 				switch (input.source) {
-				case AcInputs.InputType.Grid:
-					widgetType = OverviewWidget.Type.Grid
+				case VenusOS.AcInputs_InputType_Grid:
+					widgetType = VenusOS.OverviewWidget_Type_Grid
 					break
-				case AcInputs.InputType.Generator:
-					widgetType = OverviewWidget.Type.AcGenerator
+				case VenusOS.AcInputs_InputType_Generator:
+					widgetType = VenusOS.OverviewWidget_Type_AcGenerator
 					break
-				case AcInputs.InputType.Shore:
-					widgetType = OverviewWidget.Type.Shore
+				case VenusOS.AcInputs_InputType_Shore:
+					widgetType = VenusOS.OverviewWidget_Type_Shore
 					break
 				default:
 					break
 				}
 			} else {
 				switch (input.source) {
-				case DcInputs.InputType.Alternator:
-					widgetType = OverviewWidget.Type.Alternator
+				case VenusOS.DcInputs_InputType_Alternator:
+					widgetType = VenusOS.OverviewWidget_Type_Alternator
 					break
-				case DcInputs.InputType.DcGenerator:
-					widgetType = OverviewWidget.Type.DcGenerator
+				case VenusOS.DcInputs_InputType_DcGenerator:
+					widgetType = VenusOS.OverviewWidget_Type_DcGenerator
 					break
-				case DcInputs.InputType.Wind:
-					widgetType = OverviewWidget.Type.Wind
+				case VenusOS.DcInputs_InputType_Wind:
+					widgetType = VenusOS.OverviewWidget_Type_Wind
 					break
 				default:
 					break
@@ -250,28 +250,28 @@ Page {
 	function _inputConnectorAnimationMode(connectorWidget) {
 		// Assumes startWidget is the AC/DC input widget.
 		if (!connectorWidget.startWidget.input) {
-			return WidgetConnector.AnimationMode.NotAnimated
+			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
 		const power = connectorWidget.startWidget.input.power
 		if (isNaN(power) || Math.abs(power) <= Theme.geometry.overviewPage.connector.animationPowerThreshold) {
-			return WidgetConnector.AnimationMode.NotAnimated
+			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
 
 		if (connectorWidget.endWidget === inverterWidget) {
 			// For AC inputs, positive power means energy is flowing towards inverter/charger,
 			// and negative power means energy is flowing towards the input.
 			return power > Theme.geometry.overviewPage.connector.animationPowerThreshold
-					? WidgetConnector.AnimationMode.StartToEnd
-					: WidgetConnector.AnimationMode.EndToStart
+					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+					: VenusOS.WidgetConnector_AnimationMode_EndToStart
 		} else if (connectorWidget.endWidget === batteryWidget) {
 			// For DC inputs, positive power means energy is flowing towards battery.
 			return power > Theme.geometry.overviewPage.connector.animationPowerThreshold
-					? WidgetConnector.AnimationMode.StartToEnd
-					: WidgetConnector.AnimationMode.NotAnimated
+					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		} else {
 			console.warn("Unrecognised connector end widget:",
 						 connectorWidget, connectorWidget.endWidget)
-			return WidgetConnector.AnimationMode.NotAnimated
+			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
 	}
 
@@ -309,13 +309,13 @@ Page {
 
 				parent: root
 				startWidget: gridWidget
-				startLocation: WidgetConnector.Location.Right
+				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterWidget
-				endLocation: WidgetConnector.Location.Left
+				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(gridWidgetConnector)
-				straight: gridWidget.size > OverviewWidget.Size.M
+				straight: gridWidget.size > VenusOS.OverviewWidget_Size_M
 			}
 		}
 	}
@@ -340,13 +340,13 @@ Page {
 
 				parent: root
 				startWidget: shoreWidget
-				startLocation: WidgetConnector.Location.Right
+				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterWidget
-				endLocation: WidgetConnector.Location.Left
+				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(shoreWidgetConnector)
-				straight: shoreWidget.size > OverviewWidget.Size.M
+				straight: shoreWidget.size > VenusOS.OverviewWidget_Size_M
 			}
 		}
 	}
@@ -370,13 +370,13 @@ Page {
 
 				parent: root
 				startWidget: acGeneratorWidget
-				startLocation: WidgetConnector.Location.Right
+				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterWidget
-				endLocation: WidgetConnector.Location.Left
+				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(acGeneratorConnector)
-				straight: acGeneratorWidget.size > OverviewWidget.Size.M
+				straight: acGeneratorWidget.size > VenusOS.OverviewWidget_Size_M
 			}
 		}
 	}
@@ -400,13 +400,13 @@ Page {
 
 				parent: root
 				startWidget: dcGeneratorWidget
-				startLocation: WidgetConnector.Location.Right
+				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
-				endLocation: WidgetConnector.Location.Left
+				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(dcGeneratorConnector)
-				straight: dcGeneratorWidget.size > OverviewWidget.Size.M
+				straight: dcGeneratorWidget.size > VenusOS.OverviewWidget_Size_M
 			}
 		}
 	}
@@ -430,9 +430,9 @@ Page {
 
 				parent: root
 				startWidget: alternatorWidget
-				startLocation: WidgetConnector.Location.Right
+				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
-				endLocation: WidgetConnector.Location.Left
+				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(alternatorConnector)
@@ -459,9 +459,9 @@ Page {
 
 				parent: root
 				startWidget: windWidget
-				startLocation: WidgetConnector.Location.Right
+				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
-				endLocation: WidgetConnector.Location.Left
+				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(windConnector)
@@ -491,9 +491,9 @@ Page {
 
 				parent: root
 				startWidget: solarWidget
-				startLocation: WidgetConnector.Location.Right
+				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterWidget
-				endLocation: WidgetConnector.Location.Left
+				endLocation: VenusOS.WidgetConnector_Location_Left
 				visible: !!solarChargers && !isNaN(solarChargers.acPower)
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
@@ -502,17 +502,17 @@ Page {
 				animationMode: !!solarChargers
 						&& !isNaN(solarChargers.acPower)
 						&& Math.abs(solarChargers.acPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-							   ? WidgetConnector.AnimationMode.StartToEnd
-							   : WidgetConnector.AnimationMode.NotAnimated
+							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
 			WidgetConnector {
 				id: dcSolarConnector
 
 				parent: root
 				startWidget: solarWidget
-				startLocation: WidgetConnector.Location.Right
+				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
-				endLocation: WidgetConnector.Location.Left
+				endLocation: VenusOS.WidgetConnector_Location_Left
 				visible: !!solarChargers && !isNaN(solarChargers.dcPower)
 				expanded: PageManager.expandLayout
 				animateGeometry: PageManager.animatingIdleResize
@@ -521,8 +521,8 @@ Page {
 				animationMode: !!solarChargers
 						&& !isNaN(solarChargers.dcPower)
 						&& Math.abs(solarChargers.dcPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-							   ? WidgetConnector.AnimationMode.StartToEnd
-							   : WidgetConnector.AnimationMode.NotAnimated
+							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
 		}
 	}
@@ -531,7 +531,7 @@ Page {
 	InverterWidget {
 		id: inverterWidget
 		anchors.horizontalCenter: parent.horizontalCenter
-		size: OverviewWidget.Size.L
+		size: VenusOS.OverviewWidget_Size_L
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
 		physicalQuantity: -1
@@ -539,9 +539,9 @@ Page {
 	}
 	WidgetConnector {
 		startWidget: inverterWidget
-		startLocation: WidgetConnector.Location.Right
+		startLocation: VenusOS.WidgetConnector_Location_Right
 		endWidget: acLoadsWidget
-		endLocation: WidgetConnector.Location.Left
+		endLocation: VenusOS.WidgetConnector_Location_Left
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
 		straight: true
@@ -551,14 +551,14 @@ Page {
 				&& !isNaN(system.ac.consumption.power)
 				&& system.ac.consumption.power > 0
 				&& Math.abs(system.ac.consumption.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-					? WidgetConnector.AnimationMode.StartToEnd
-					: WidgetConnector.AnimationMode.NotAnimated
+					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
 	WidgetConnector {
 		startWidget: inverterWidget
-		startLocation: WidgetConnector.Location.Bottom
+		startLocation: VenusOS.WidgetConnector_Location_Bottom
 		endWidget: batteryWidget
-		endLocation: WidgetConnector.Location.Top
+		endLocation: VenusOS.WidgetConnector_Location_Top
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
 
@@ -567,15 +567,15 @@ Page {
 				&& !isNaN(battery.power)
 				&& Math.abs(battery.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
 						? (battery.power > 0
-								? WidgetConnector.AnimationMode.StartToEnd
-								: WidgetConnector.AnimationMode.EndToStart)
-						: WidgetConnector.AnimationMode.NotAnimated
+								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
+						: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
 
 	BatteryWidget {
 		id: batteryWidget
 		anchors.horizontalCenter: parent.horizontalCenter
-		size: OverviewWidget.Size.L
+		size: VenusOS.OverviewWidget_Size_L
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
 		animationRunning: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
@@ -583,9 +583,9 @@ Page {
 	}
 	WidgetConnector {
 		startWidget: batteryWidget
-		startLocation: WidgetConnector.Location.Right
+		startLocation: VenusOS.WidgetConnector_Location_Right
 		endWidget: dcLoadsWidget
-		endLocation: WidgetConnector.Location.Left
+		endLocation: VenusOS.WidgetConnector_Location_Left
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
 
@@ -594,8 +594,8 @@ Page {
 				&& !isNaN(system.dc.power)
 				&& system.dc.power > 0
 				&& Math.abs(system.dc.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-					? WidgetConnector.AnimationMode.StartToEnd
-					: WidgetConnector.AnimationMode.NotAnimated
+					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
 
 	// the two output widgets are always present
@@ -605,9 +605,9 @@ Page {
 			right: parent.right
 			rightMargin: Theme.geometry.page.content.horizontalMargin
 		}
-		size: dcLoadsWidget.size === OverviewWidget.Size.Zero
-			  ? OverviewWidget.Size.XL
-			  : OverviewWidget.Size.L
+		size: dcLoadsWidget.size === VenusOS.OverviewWidget_Size_Zero
+			  ? VenusOS.OverviewWidget_Size_XL
+			  : VenusOS.OverviewWidget_Size_L
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
 		value: system ? system.ac.consumption.power : NaN
@@ -621,7 +621,7 @@ Page {
 			right: parent.right
 			rightMargin: Theme.geometry.page.content.horizontalMargin
 		}
-		size: !!system && !isNaN(system.dc.power) ? OverviewWidget.Size.L : OverviewWidget.Size.Zero
+		size: !!system && !isNaN(system.dc.power) ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_Zero
 		expanded: PageManager.expandLayout
 		animateGeometry: PageManager.animatingIdleResize
 		value: system ? system.dc.power || NaN : NaN

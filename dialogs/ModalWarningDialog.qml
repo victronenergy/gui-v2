@@ -11,7 +11,7 @@ ModalDialog {
 
 	property string description
 
-	dialogDoneOptions: ModalDialog.DialogDoneOptions.OkOnly
+	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
 	header: null
 
 	contentItem: Item {

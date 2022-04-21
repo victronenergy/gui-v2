@@ -129,7 +129,7 @@ Rectangle {
 			bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
 		}
 		font.pixelSize: Theme.font.size.xl
-		physicalQuantity: Units.PhysicalQuantity.Percentage
+		physicalQuantity: VenusOS.Units_PhysicalQuantity_Percentage
 		value: root.level
 	}
 

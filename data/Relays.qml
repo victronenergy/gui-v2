@@ -9,11 +9,6 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum State {
-		Inactive = 0,
-		Active = 1
-	}
-
 	property ListModel model: ListModel {}
 
 	property var _relays: []

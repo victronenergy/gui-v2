@@ -230,14 +230,14 @@ Page {
 				if (tanks.totalTankCount === 0) {
 					// Just show battery
 					for (i = gaugeData.model.count-1; i > 0; --i) {
-						if (gaugeData.model.get(i).tankType !== Gauges.Battery) {
+						if (gaugeData.model.get(i).tankType !== VenusOS.Tank_Type_Battery) {
 							gaugeData.model.remove(i)
 						}
 					}
 					if (gaugeData.model.count === 0) {
 						gaugeData.model.append(Object.assign({},
-								Gauges.tankProperties(Gauges.Battery),
-								{ tankType: Gauges.Battery, value: 0 }))
+								Gauges.tankProperties(VenusOS.Tank_Type_Battery),
+								{ tankType:VenusOS.Tank_Type_Battery, value: 0 }))
 					}
 				} else if (gaugeObjects.count === 0 || gaugeObjects.count === 1) {
 					// Multiple tanks are available now, so update the UI
@@ -265,7 +265,7 @@ Page {
 
 			delegate: QtObject {
 				readonly property int tankType: model.tankType
-				readonly property bool isBattery: tankType === Gauges.Battery
+				readonly property bool isBattery: tankType === VenusOS.Tank_Type_Battery
 				readonly property string tankName: model.name
 				readonly property string tankIcon: isBattery ? battery.icon : model.icon
 				readonly property var tankModel: isBattery ? 1 : tanks.tankModel(tankType)

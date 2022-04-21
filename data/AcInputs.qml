@@ -9,13 +9,6 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	enum InputType {
-		Unused = 0,
-		Grid = 1,
-		Generator = 2,
-		Shore = 3
-	}
-
 	property ListModel model: ListModel {}
 
 	property var _inputs: []

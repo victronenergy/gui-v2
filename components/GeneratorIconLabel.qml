@@ -24,8 +24,8 @@ Item {
 		anchors.verticalCenter: parent.verticalCenter
 		width: Theme.geometry.generatorIconLabel.icon.width
 		height: Theme.geometry.generatorIconLabel.icon.width
-		source: root.state !== Generators.GeneratorState.Running ? ""
-			: root.runningBy === Generators.GeneratorRunningBy.Manual
+		source: root.state !== VenusOS.Generators_State_Running ? ""
+			: root.runningBy === VenusOS.Generators_RunningBy_Manual
 				? root.runtime > 0
 					? "qrc:/images/icon_manualstart_timer_24.svg"
 					: "qrc:/images/icon_manualstart_24.svg"

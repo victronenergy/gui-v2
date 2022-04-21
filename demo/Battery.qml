@@ -3,9 +3,9 @@
 */
 
 import QtQuick
+import Victron.VenusOS
 import Victron.Velib
 import "../components/Utils.js" as Utils
-import "../data" as DBusData
 
 Item {
 	id: root
@@ -17,8 +17,8 @@ Item {
 	property real timeToGo: 190 * 60
 	property string icon: Utils.batteryIcon(root)
 	property int mode: power === 0
-			? DBusData.Battery.Mode.Idle
-			: (power > 0 ? DBusData.Battery.Mode.Charging : DBusData.Battery.Mode.Discharging)
+			? VenusOS.Battery_Mode_Idle
+			: (power > 0 ? VenusOS.Battery_Mode_Charging : VenusOS.Battery_Mode_Discharging)
 	property var chargeAnimation: chargeAnimation
 
 	SequentialAnimation on stateOfCharge {

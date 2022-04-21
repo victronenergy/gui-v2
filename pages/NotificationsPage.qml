@@ -68,13 +68,13 @@ Page {
 			//% "Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur."
 			property string longText: qsTrId("notifications_toast_long_text")
 
-			property int currentCategory: ToastNotification.Category.Error
+			property int currentCategory: VenusOS.ToastNotification_Category_Error
 			property bool useShortText: false
 
 			onClicked: {
 				currentCategory = (currentCategory + 1)
-				if (currentCategory > ToastNotification.Category.Error) {
-					currentCategory = ToastNotification.Category.None
+				if (currentCategory > VenusOS.ToastNotification_Category_Error) {
+					currentCategory = VenusOS.ToastNotification_Category_None
 					useShortText = !useShortText
 				}
 				dialogManager.showToastNotification(currentCategory, useShortText ? shortText : longText)

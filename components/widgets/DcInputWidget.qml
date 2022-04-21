@@ -11,5 +11,5 @@ OverviewWidget {
 	property var input
 
 	value: input ? input.current : NaN
-	physicalQuantity: Units.Current
+	physicalQuantity: VenusOS.Units_PhysicalQuantity_Current
 }

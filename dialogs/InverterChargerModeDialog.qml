@@ -12,16 +12,16 @@ ModalDialog {
 
 	function modeText(m) {
 		switch (m) {
-		case Inverters.InverterMode.On:
+		case VenusOS.Inverters_Mode_On:
 			//% "On"
 			return qsTrId("inverter_charger_mode_charger_on")
-		case Inverters.InverterMode.ChargerOnly:
+		case VenusOS.Inverters_Mode_ChargerOnly:
 			//% "Charger only"
 			return qsTrId("inverter_charger_mode_charger_only")
-		case Inverters.InverterMode.InverterOnly:
+		case VenusOS.Inverters_Mode_InverterOnly:
 			//% "Inverter only"
 			return qsTrId("inverter_charger_mode_inverter_only")
-		case Inverters.InverterMode.Off:
+		case VenusOS.Inverters_Mode_Off:
 			//% "Off"
 			return qsTrId("inverter_charger_mode_off")
 		default:
@@ -44,10 +44,10 @@ ModalDialog {
 			id: repeater
 			width: parent.width
 			model: [
-				Inverters.InverterMode.On,
-				Inverters.InverterMode.ChargerOnly,
-				Inverters.InverterMode.InverterOnly,
-				Inverters.InverterMode.Off,
+				VenusOS.Inverters_Mode_On,
+				VenusOS.Inverters_Mode_ChargerOnly,
+				VenusOS.Inverters_Mode_InverterOnly,
+				VenusOS.Inverters_Mode_Off,
 			]
 			delegate: buttonStyling
 		}

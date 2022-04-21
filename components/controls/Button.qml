@@ -41,7 +41,7 @@ CT.Button {
 	background: AsymmetricRoundedRectangle {
 		id: backgroundRect
 
-		roundedSide: AsymmetricRoundedRectangle.RoundedSide.All
+		roundedSide: VenusOS.AsymmetricRoundedRectangle_RoundedSide_All
 		color: root.backgroundColor
 		border.width: root.flat ? 0 : Theme.geometry.button.border.width
 		border.color: Theme.color.button.outline.border

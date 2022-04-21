@@ -16,21 +16,21 @@ Item {
 		title: pageStack.currentItem.title || ""
 
 		navigationButton:  pageStack.currentItem.navigationButton
-		navigationButtonEnabled: PageManager.interactivity === PageManager.InteractionMode.Interactive
-		sidePanelButtonEnabled: PageManager.interactivity === PageManager.InteractionMode.Interactive
+		navigationButtonEnabled: PageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+		sidePanelButtonEnabled: PageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				&& pageStack.currentItem.hasSidePanel
 
 		Component.onCompleted: PageManager.statusBar = statusBar
 
 		onNavigationButtonClicked: {
 			switch (navigationButton) {
-			case StatusBar.NavigationButton.ControlsInactive:
+			case VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive:
 				PageManager.pushLayer("qrc:/pages/ControlCardsPage.qml")
 				break
-			case StatusBar.NavigationButton.ControlsActive:
+			case VenusOS.StatusBar_NavigationButtonStyle_ControlsActive:
 				PageManager.popLayer()
 				break
-			case StatusBar.NavigationButton.Back:
+			case VenusOS.StatusBar_NavigationButtonStyle_Back:
 				PageManager.popPage()
 				break
 			default:

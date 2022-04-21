@@ -3,42 +3,12 @@
 */
 
 import QtQuick
+import Victron.VenusOS
 import Victron.Velib
 import "/components/Utils.js" as Utils
 
 Item {
 	id: root
-
-	enum State {
-		OptimizedWithBatteryLife,
-		OptimizedWithoutBatteryLife,
-		KeepBatteriesCharged,
-		ExternalControl // Used internally to determine overall ESS state
-	}
-
-	// For internal use
-	enum Hub4ModeState {
-		Hub4PhaseCompensation = 1,
-		Hub4PhaseSplit = 2,
-		Hub4Disabled = 3
-	}
-
-	// For internal use
-	enum BatteryLifeState {
-		BatteryLifeStateDisabled = 0,
-		BatteryLifeStateRestart = 1,
-		BatteryLifeStateDefault = 2,
-		BatteryLifeStateAbsorption = 3,
-		BatteryLifeStateFloat = 4,
-		BatteryLifeStateDischarged = 5,
-		BatteryLifeStateForceCharge = 6,
-		BatteryLifeStateSustain = 7,
-		BatteryLifeStateLowSocCharge = 8,
-		BatteryKeepCharged = 9,
-		BatterySocGuardDefault = 10,
-		BatterySocGuardDischarged = 11,
-		BatterySocGuardLowSocCharge = 12
-	}
 
 	readonly property int state: _getState()
 	readonly property int minimumStateOfCharge: veMinimumSocLimit.value || 0
@@ -46,29 +16,29 @@ Item {
 
 	function setState(s) {
 		// Hub 4 mode
-		if (s === Ess.State.ExternalControl && veHub4Mode.value !== Ess.Hub4ModeState.Hub4Disabled) {
-			veHub4Mode.setValue(Ess.Hub4ModeState.Hub4Disabled)
-		} else if (s !== Ess.State.ExternalControl && veHub4Mode.value === Ess.Hub4ModeState.Hub4Disabled) {
-			veHub4Mode.setValue(Ess.Hub4ModeState.Hub4PhaseCompensation)
+		if (s === VenusOS.Ess_State_ExternalControl && veHub4Mode.value !== VenusOS.Ess_Hub4ModeState_Disabled) {
+			veHub4Mode.setValue(VenusOS.Ess_Hub4ModeState_Disabled)
+		} else if (s !== VenusOS.Ess_State_ExternalControl && veHub4Mode.value === VenusOS.Ess_Hub4ModeState_Disabled) {
+			veHub4Mode.setValue(VenusOS.Ess_Hub4ModeState_PhaseCompensation)
 		}
 
 		// BatteryLife state
 		switch (s) {
-		case Ess.State.OptimizedWithBatteryLife:
+		case VenusOS.Ess_State_OptimizedWithBatteryLife:
 			if (!_isBatteryLifeActive(veState.value)) {
-				veState.setValue(Ess.BatteryLifeState.BatteryLifeStateRestart)
+				veState.setValue(VenusOS.Ess_BatteryLifeState_BatteryLifeStateRestart)
 			}
 			break
-		case Ess.State.OptimizedWithoutBatteryLife:
+		case VenusOS.Ess_State_OptimizedWithoutBatteryLife:
 			if (!_isBatterySocGuardActive(veState.value)) {
-				veState.setValue(Ess.BatteryLifeState.BatterySocGuardDefault)
+				veState.setValue(VenusOS.Ess_BatteryLifeState_BatterySocGuardDefault)
 			}
 			break
-		case Ess.State.KeepBatteriesCharged:
-			veState.setValue(Ess.BatteryLifeState.BatteryKeepCharged)
+		case VenusOS.Ess_State_KeepBatteriesCharged:
+			veState.setValue(VenusOS.Ess_BatteryLifeState_BatteryKeepCharged)
 			break
-		case Ess.State.ExternalControl:
-			veState.setValue(Ess.BatteryLifeState.BatteryLifeStateDisabled)
+		case VenusOS.Ess_State_ExternalControl:
+			veState.setValue(VenusOS.Ess_BatteryLifeState_BatteryLifeStateDisabled)
 			break
 		}
 	}
@@ -84,26 +54,26 @@ Item {
 			return -1
 		}
 
-		if (hub4Mode === Ess.Hub4ModeState.Hub4Disabled) {
-			return Ess.State.ExternalControl
+		if (hub4Mode === VenusOS.Ess_Hub4ModeState_Disabled) {
+			return VenusOS.Ess_State_ExternalControl
 		} else if (_isBatteryLifeActive(currentState)) {
-			return Ess.State.OptimizedWithBatteryLife
+			return VenusOS.Ess_State_OptimizedWithBatteryLife
 		} else if (_isBatterySocGuardActive(currentState)) {
-			return Ess.State.OptimizedWithoutBatteryLife
-		} else if (currentState === Ess.BatteryLifeState.BatteryKeepCharged) {
-			return Ess.State.KeepBatteriesCharged
+			return VenusOS.Ess_State_OptimizedWithoutBatteryLife
+		} else if (currentState === VenusOS.Ess_BatteryLifeState_BatteryKeepCharged) {
+			return VenusOS.Ess_State_KeepBatteriesCharged
 		}
-		return Ess.State.OptimizedWithBatteryLife
+		return VenusOS.Ess_State_OptimizedWithBatteryLife
 	}
 
 	function _isBatteryLifeActive(s) {
-		return s >= Ess.BatteryLifeState.BatteryLifeStateRestart
-				&& s <= Ess.BatteryLifeState.BatteryLifeStateLowSocCharge
+		return s >= VenusOS.Ess_BatteryLifeState_BatteryLifeStateRestart
+				&& s <= VenusOS.Ess_BatteryLifeState_BatteryLifeStateLowSocCharge
 	}
 
 	function _isBatterySocGuardActive(s) {
-		return s >= Ess.BatteryLifeState.BatterySocGuardDefault
-				&& s <= Ess.BatteryLifeState.BatterySocGuardLowSocCharge
+		return s >= VenusOS.Ess_BatteryLifeState_BatterySocGuardDefault
+				&& s <= VenusOS.Ess_BatteryLifeState_BatterySocGuardLowSocCharge
 	}
 
 	VeQuickItem {

@@ -4,68 +4,67 @@
 
 import QtQuick
 import Victron.VenusOS
-import "../data" as DBusData
 
 Item {
 	id: root
 
 	readonly property var tankTypes: [
-		DBusData.Tanks.TankType.Fuel,
-		DBusData.Tanks.TankType.FreshWater,
-		DBusData.Tanks.TankType.WasteWater,
-		DBusData.Tanks.TankType.LiveWell,
-		DBusData.Tanks.TankType.Oil,
-		DBusData.Tanks.TankType.BlackWater,
-		DBusData.Tanks.TankType.Gasoline
+		VenusOS.Tank_Type_Fuel,
+		VenusOS.Tank_Type_FreshWater,
+		VenusOS.Tank_Type_WasteWater,
+		VenusOS.Tank_Type_LiveWell,
+		VenusOS.Tank_Type_Oil,
+		VenusOS.Tank_Type_BlackWater,
+		VenusOS.Tank_Type_Gasoline
 	]
 
 	readonly property ListModel fuelTanks: ListModel {
-		readonly property int type: DBusData.Tanks.TankType.Fuel
+		readonly property int type: VenusOS.Tank_Type_Fuel
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.Liters
+		property int unit: VenusOS.Units_PhysicalQuantity_Liters
 		objectName: "Fuel"
 	}
 	readonly property ListModel freshWaterTanks: ListModel {
-		readonly property int type: DBusData.Tanks.TankType.FreshWater
+		readonly property int type: VenusOS.Tank_Type_FreshWater
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.Liters
+		property int unit: VenusOS.Units_PhysicalQuantity_Liters
 		objectName: "FreshWater"
 	}
 	readonly property ListModel wasteWaterTanks: ListModel {
-		readonly property int type: DBusData.Tanks.TankType.WasteWater
+		readonly property int type: VenusOS.Tank_Type_WasteWater
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.Liters
+		property int unit: VenusOS.Units_PhysicalQuantity_Liters
 		objectName: "WasteWater"
 	}
 	readonly property ListModel liveWellTanks: ListModel {
-		readonly property int type: DBusData.Tanks.TankType.LiveWell
+		readonly property int type: VenusOS.Tank_Type_LiveWell
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.Liters
+		property int unit: VenusOS.Units_PhysicalQuantity_Liters
 		objectName: "LiveWell"
 	}
 	readonly property ListModel oilTanks: ListModel {
-		readonly property int type: DBusData.Tanks.TankType.Oil
+		readonly property int type: VenusOS.Tank_Type_Oil
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.Liters
+		property int unit: VenusOS.Units_PhysicalQuantity_Liters
 		objectName: "Oil"
 	}
 	readonly property ListModel blackWaterTanks: ListModel {
-		readonly property int type: DBusData.Tanks.TankType.BlackWater
+		readonly property int type: VenusOS.Tank_Type_BlackWater
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.Liters
+		property int unit: VenusOS.Units_PhysicalQuantity_Liters
 		objectName: "BlackWater"
 	}
 	readonly property ListModel gasolineTanks: ListModel {
-		readonly property int type: DBusData.Tanks.TankType.Gasoline
+		readonly property int type: VenusOS.Tank_Type_Gasoline
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: Units.PhysicalQuantity.Liters
+		property int unit: VenusOS.Units_PhysicalQuantity_Liters
 		objectName: "Gasoline"
 	}
 
@@ -79,19 +78,19 @@ Item {
 
 	function tankModel(type) {
 		switch (type) {
-		case DBusData.Tanks.TankType.Fuel:
+		case VenusOS.Tank_Type_Fuel:
 			return fuelTanks
-		case DBusData.Tanks.TankType.FreshWater:
+		case VenusOS.Tank_Type_FreshWater:
 			return freshWaterTanks
-		case DBusData.Tanks.TankType.WasteWater:
+		case VenusOS.Tank_Type_WasteWater:
 			return wasteWaterTanks
-		case DBusData.Tanks.TankType.LiveWell:
+		case VenusOS.Tank_Type_LiveWell:
 			return liveWellTanks
-		case DBusData.Tanks.TankType.Oil:
+		case VenusOS.Tank_Type_Oil:
 			return oilTanks
-		case DBusData.Tanks.TankType.BlackWater:
+		case VenusOS.Tank_Type_BlackWater:
 			return blackWaterTanks
-		case DBusData.Tanks.TankType.Gasoline:
+		case VenusOS.Tank_Type_Gasoline:
 			return gasolineTanks
 		}
 		console.warn("Unknown tank type", type)
@@ -108,7 +107,7 @@ Item {
 		}
 
 		// Add 3 tanks of random types
-		const maxTankType = DBusData.Tanks.TankType.Gasoline
+		const maxTankType = VenusOS.Tank_Type_Gasoline
 		for (let i = 0; i < 3; ++i) {
 			const tankType = Math.floor(Math.random() * maxTankType + 1)
 			const level = Math.random()

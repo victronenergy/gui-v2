@@ -36,11 +36,11 @@ OverviewWidget {
 	//% "Battery"
 	title.text: qsTrId("overview_widget_battery_title")
 	icon.source: Utils.batteryIcon(batteryData)
-	type: OverviewWidget.Type.Battery
+	type: VenusOS.OverviewWidget_Type_Battery
 	width: Theme.geometry.overviewPage.widget.battery.width
 
 	value: batteryData.stateOfCharge
-	physicalQuantity: Units.Percentage
+	physicalQuantity: VenusOS.Units_PhysicalQuantity_Percentage
 	precision: 2
 
 	color: "transparent"
@@ -72,7 +72,7 @@ OverviewWidget {
 
 			topPadding: Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing / 2
 			horizontalItemAlignment: Grid.AlignHCenter
-			visible: batteryData.mode === Battery.Mode.Charging
+			visible: batteryData.mode === VenusOS.Battery_Mode_Charging
 
 			columns: {
 				const maxWidth = parent.width - Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*4
@@ -204,10 +204,10 @@ OverviewWidget {
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
 
-			text: batteryData.mode === Battery.Mode.Idle
+			text: batteryData.mode === VenusOS.Battery_Mode_Idle
 					//% "Idle"
 				  ? qsTrId("overview_widget_battery_idle")
-				  : (batteryData.mode === Battery.Mode.Charging
+				  : (batteryData.mode === VenusOS.Battery_Mode_Charging
 					  //% "Charging"
 					? qsTrId("overview_widget_battery_charging")
 					  //% "Discharging"
@@ -229,7 +229,7 @@ OverviewWidget {
 				id: batteryPowerDisplay
 
 				value: batteryData.power
-				physicalQuantity: Units.Power
+				physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
 				font.pixelSize: Theme.font.size.m
 			}
 
@@ -242,7 +242,7 @@ OverviewWidget {
 
 					anchors.horizontalCenter: parent.horizontalCenter
 					value: batteryData.current
-					physicalQuantity: Units.Current
+					physicalQuantity: VenusOS.Units_PhysicalQuantity_Current
 					font.pixelSize: Theme.font.size.m
 				}
 			}
@@ -251,7 +251,7 @@ OverviewWidget {
 				id: batteryTempDisplay
 
 				value: batteryData.temperature
-				physicalQuantity: Units.Temperature
+				physicalQuantity: VenusOS.Units_PhysicalQuantity_Temperature
 				font.pixelSize: Theme.font.size.m
 			}
 		}

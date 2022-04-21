@@ -5,7 +5,6 @@
 import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
-import "../data" as DBusData
 
 Item {
 	id: root
@@ -21,9 +20,9 @@ Item {
 		// Add a random set of AC inputs.
 		model.clear()
 		let types = [
-				DBusData.AcInputs.InputType.Grid,
-				DBusData.AcInputs.InputType.Generator,
-				DBusData.AcInputs.InputType.Shore,
+				VenusOS.AcInputs_InputType_Grid,
+				VenusOS.AcInputs_InputType_Generator,
+				VenusOS.AcInputs_InputType_Shore,
 			]
 		// Have 2 inputs at most, to leave some space for DC inputs in overview page
 		const modelCount = Math.floor(Math.random() * 2) + 1

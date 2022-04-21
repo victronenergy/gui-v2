@@ -19,8 +19,8 @@ Page {
 			topMargin: PageManager.expandLayout ? -tabBar.height : 0
 			horizontalCenter: parent.horizontalCenter
 		}
-		opacity: PageManager.interactivity === PageManager.InteractionMode.Interactive
-				 || PageManager.interactivity === PageManager.InteractionMode.ExitIdleMode
+		opacity: PageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+				 || PageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
 				 ? 1.0
 				 : 0.0
 

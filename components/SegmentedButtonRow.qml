@@ -44,10 +44,9 @@ Item {
 				font.pixelSize: root.fontPixelSize
 				flat: false
 				text: modelData
-				roundedSide: modelIndex === 0 ? AsymmetricRoundedRectangle.RoundedSide.Left
-					: modelIndex === (buttonRepeater.count-1) ? AsymmetricRoundedRectangle.RoundedSide.Right
-					: AsymmetricRoundedRectangle.RoundedSide.NoneHorizontal
-
+				roundedSide: modelIndex === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
+					: modelIndex === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
+					: VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
 				onClicked: {
 					root.buttonClicked(model.index)
 					root.currentIndex = model.index
