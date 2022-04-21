@@ -10,7 +10,7 @@ import Victron.VenusOS
 Item {
 	id: gauges
 
-	property QtObject model // must be QtObject instead of var, else cannot update its values via Binding objects
+	property var model
 	readonly property real strokeWidth: Theme.geometry.circularSingularGauge.strokeWidth
 	property alias caption: captionLabel.text
 
@@ -22,7 +22,7 @@ Item {
 		layer.samples: 4
 
 		ProgressArc {
-			property int status: Gauges.getValueStatus(model.value, model.valueType)
+			property int status: model ? Gauges.getValueStatus(model.value, model.valueType) : 0
 			
 			width: gauges.width - strokeWidth
 			height: width
@@ -30,7 +30,7 @@ Item {
 			radius: width/2
 			startAngle: 0
 			endAngle: 360
-			value: model.value
+			value: model ? model.value : 0
 			progressColor: Theme.statusColorValue(status)
 			remainderColor: Theme.statusColorValue(status, true)
 			strokeWidth: gauges.strokeWidth
@@ -46,7 +46,7 @@ Item {
 
 			CP.ColorImage {
 				id: icon
-				source: model.icon
+				source: model ? model.icon : ""
 				color: Theme.color.font.primary
 				fillMode: Image.PreserveAspectFit
 				smooth: true
@@ -55,7 +55,7 @@ Item {
 				anchors.verticalCenter: icon.verticalCenter
 				font.pixelSize: Theme.font.size.m
 				color: Theme.color.font.primary
-				text: model.name
+				text: model ? model.name : ""
 			}
 		}
 
@@ -66,7 +66,7 @@ Item {
 			Label {
 				font.pixelSize: Theme.font.size.xxxl
 				color: Theme.color.font.primary
-				text: model.value
+				text: model ? model.value : ""
 			}
 			Label {
 				font.pixelSize: Theme.font.size.xxxl

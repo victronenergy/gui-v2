@@ -76,9 +76,9 @@ Item {
 					horizontalAlignment: Text.AlignRight
 					font.pixelSize: Theme.font.size.m
 					color: Theme.color.font.primary
-					visible: Preferences.showPercentagesInBriefPage
+					visible: systemSettings.briefView.showPercentages
 					//% "%1%"
-					text: qsTrId("%1%").arg(model.value)
+					text: qsTrId("%1%").arg(Math.round(model.value))
 				}
 				CP.ColorImage {
 					id: iconImage

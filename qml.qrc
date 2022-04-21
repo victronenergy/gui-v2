@@ -55,7 +55,6 @@
         <file>components/NavButton.qml</file>
         <file>components/Page.qml</file>
         <file>components/PageStack.qml</file>
-        <file>components/Preferences.qml</file>
         <file>components/ProgressArc.qml</file>
         <file>components/ScaledArc.qml</file>
         <file>components/ScaledArcGauge.qml</file>
@@ -129,6 +128,7 @@
         <file>pages/PageManager.qml</file>
         <file>pages/SettingsPage.qml</file>
         <file>pages/TanksTab.qml</file>
+        <file>pages/settings/BriefViewSettingsPage.qml</file>
         <file>pages/settings/DemoSettingsPage.qml</file>
         <file>pages/settings/DisplayAndLanguageSettingsPage.qml</file>
         <file>pages/settings/GeneralSettingsPage.qml</file>

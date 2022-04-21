@@ -92,7 +92,7 @@ Page {
 		id: singleGauge
 
 		CircularSingleGauge {
-			model: gaugeData.model.count > 0 ? gaugeData.model.get(0) : null
+			model: gaugeData.model.get(0)
 			caption: battery && battery.timeToGo > 0 ? Utils.formatAsHHMM(battery.timeToGo, true) : ""
 		}
 	}
@@ -218,112 +218,78 @@ Page {
 	Item {
 		id: gaugeData
 
-		// Use -1 to represent the Battery, as it is not one of the tank type enum values.
-		property int batteryType: -1
-
 		property ListModel model: ListModel {}
 
 		Connections {
-			target: battery
-			function onIconChanged() {
-				if (gaugeData.model.count > 0) {
-					gaugeData.model.setProperty(0, "icon", battery.icon)
+			target: tanks
+
+			function onTotalTankCountChanged() {
+				let i
+				if (tanks.totalTankCount === 0) {
+					// Just show battery
+					for (i = gaugeData.model.count-1; i > 0; --i) {
+						if (gaugeData.model.get(i).tankType !== Gauges.Battery) {
+							gaugeData.model.remove(i)
+						}
+					}
+					if (gaugeData.model.count === 0) {
+						gaugeData.model.append(Object.assign({},
+								Gauges.tankProperties(Gauges.Battery),
+								{ tankType: Gauges.Battery, value: 0 }))
+					}
+				} else if (gaugeObjects.count === 0 || gaugeObjects.count === 1) {
+					// Multiple tanks are available now, so update the UI
+					for (i = 0; i < systemSettings.briefView.gauges.count; ++i) {
+						const tankType = systemSettings.briefView.gauges.get(i).value
+						const tankData = Object.assign({},
+								Gauges.tankProperties(tankType),
+								{ tankType: tankType, value: 0 })
+						if (i < gaugeData.model.count) {
+							gaugeData.model.set(i, tankData)
+						} else {
+							gaugeData.model.append(tankData)
+						}
+					}
 				}
 			}
+
+			Component.onCompleted: onTotalTankCountChanged()
 		}
 
 		Instantiator {
-			model: [gaugeData.batteryType].concat(tanks.tankTypes)
+			id: gaugeObjects
+
+			model: gaugeData.model
 
 			delegate: QtObject {
-				readonly property int tankType: modelData
-				readonly property bool isBattery: modelData === gaugeData.batteryType
+				readonly property int tankType: model.tankType
+				readonly property bool isBattery: tankType === Gauges.Battery
+				readonly property string tankName: model.name
+				readonly property string tankIcon: isBattery ? battery.icon : model.icon
 				readonly property var tankModel: isBattery ? 1 : tanks.tankModel(tankType)
-				readonly property var tankModelCount: tankModel.count
+				readonly property var tankModelCount: isBattery ? 1 : tankModel.count
 				property bool deleted
 
-				readonly property string tankName: isBattery
-						  //% "Battery"
-						? qsTrId("brief_battery")
-						: Gauges.tankProperties(tankType).name
+				readonly property var _tankProperties: Gauges.tankProperties(tankType)
+
 				readonly property real tankLevel: isBattery
 						? Math.round(battery ? battery.stateOfCharge : 0)
-						: (tankModel.totalCapacity === 0
+						: (tankModelCount === 0 || tankModel.totalCapacity === 0
 						   ? 0
 						   : (tankModel.totalRemaining / tankModel.totalCapacity) * 100)
-
-				function orderedGaugeIndex() {
-					if (tankModel.count === 0) {
-						return -1
-					}
-					if (isBattery) {
-						return 0
-					}
-					let gaugeIndex = 1  // Skip over Battery gauge at index 0
-					for (let i = 0; i < tanks.tankTypes.length; ++i) {
-						if (tanks.tankTypes[i] === tankType) {
-							break
-						} else {
-							if (tanks.tankModel(tanks.tankTypes[i]).count > 0) {
-								gaugeIndex++
-							}
-						}
-					}
-					return gaugeIndex
-				}
-
-				function insertedGaugeIndex() {
-					for (let i = 0; i < gaugeData.model.count; ++i) {
-						if (gaugeData.model.get(i).tankType === tankType) {
-							return i
-						}
-					}
-					return -1
-				}
 
 				function updateGaugeModel() {
 					if (deleted) {
 						return
 					}
-					const orderedIndex = orderedGaugeIndex()
-					const insertedIndex = insertedGaugeIndex()
-
-					if (orderedIndex < 0) {
-						// No tanks are present for this tank type anymore, so remove it from the model
-						if (insertedIndex >= 0) {
-							gaugeData.model.remove(insertedIndex)
-						}
-						return
-					}
-
-					if (insertedIndex >= 0) {
-						if (orderedIndex !== insertedIndex) {
-							// Gauge is already in list, but at wrong index
-							gaugeData.model.move(insertedIndex, orderedIndex, 1)
-						}
-						gaugeData.model.set(orderedIndex, { name: tankName, value: tankLevel })
-					} else {
-						let gaugeProperties
-						if (isBattery) {
-							gaugeProperties = {
-								icon: "/images/battery.svg",
-								valueType: Gauges.FallingPercentage,
-								name: tankName,
-								tankType: tankType,
-								value: tankLevel
-							}
-						} else {
-							gaugeProperties = Object.assign({}, Gauges.tankProperties(tankType),
-									{ name: tankName, tankType: tankType, value: tankLevel })
-						}
-						gaugeData.model.insert(Math.min(orderedIndex, gaugeData.model.count), gaugeProperties)
-					}
+					gaugeData.model.set(model.index, { name: tankName, icon: tankIcon, value: tankLevel })
 				}
 
 				// If tank data changes, update the model at the end of the event loop to avoid
 				// excess updates if multiple values change simultaneously for the same tank.
-				onTankLevelChanged: Qt.callLater(updateGaugeModel)
 				onTankNameChanged: Qt.callLater(updateGaugeModel)
+				onTankIconChanged: Qt.callLater(updateGaugeModel)
+				onTankLevelChanged: Qt.callLater(updateGaugeModel)
 				onTankModelCountChanged: Qt.callLater(updateGaugeModel)
 
 				Component.onDestruction: deleted = true
