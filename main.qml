@@ -34,13 +34,7 @@ Window {
 
 	width: [800, 1024][Theme.screenSize]
 	height: [480, 600][Theme.screenSize]
-	color: {
-		if (Theme.colorScheme === Theme.Dark
-				|| PageManager.navBar.currentUrl === "qrc:/pages/BriefPage.qml") {
-			return Theme.color.background.primary
-		}
-		return Theme.color.background.tertiary
-	}
+	color: mainView.backgroundColor
 
 	//: Application title
 	//% "Venus OS GUI"

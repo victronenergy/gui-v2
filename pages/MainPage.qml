@@ -16,6 +16,7 @@ Page {
 			? StatusBar.NavigationButton.Back
 			: StatusBar.NavigationButton.ControlsInactive
 	hasSidePanel: navStack.currentItem.hasSidePanel
+	backgroundColor: navStack.currentItem.backgroundColor
 
 	Connections {
 		target: PageManager.emitter

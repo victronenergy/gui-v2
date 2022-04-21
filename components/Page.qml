@@ -14,6 +14,7 @@ FocusScope {
 	property bool hasSidePanel
 	property int navigationButton
 	property bool isCurrentPage
+	property color backgroundColor: Theme.color.page.background
 
 	width: parent ? parent.width : 0
 	height: parent ? parent.height : 0

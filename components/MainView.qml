@@ -8,6 +8,8 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	readonly property color backgroundColor: pageStack.currentItem.backgroundColor
+
 	StatusBar {
 		id: statusBar
 
