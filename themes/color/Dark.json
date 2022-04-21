@@ -74,6 +74,8 @@
     "color.toastNotification.highlight.warning": "color.warning",
     "color.toastNotification.highlight.error": "color.critical",
 
+    "color.page.background": "#000000",
+
     "color.overviewPage.connector.electron.outerColor": "#4CFFFFFF",
     "color.overviewPage.connector.electron.innerColor": "#4CFFFFFF",
     "color.overviewPage.connector.electron.centerColor": "#FFFFFF",
@@ -86,6 +88,7 @@
     "color.overviewPage.widget.battery.background": "#387DC5",
     "color.overviewPage.widget.battery.animatedBar": "#7394bd",
 
+    "color.briefPage.background": "#000000",
     "color.briefPage.sidePanel.loadGraph.dotColor": "#504F4B",
     "color.briefPage.sidePanel.loadGraph.backgroundColor": "black",
     "color.briefPage.sidePanel.loadGraph.warning.strokeColor": "#F0962E",

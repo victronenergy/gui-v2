@@ -59,6 +59,7 @@ Page {
 	}
 
 	hasSidePanel: true
+	backgroundColor: Theme.color.briefPage.background
 
 	onSolarYieldPresentChanged: root.populateSideGauges()
 	onGeneratorPresentChanged: root.populateSideGauges()
