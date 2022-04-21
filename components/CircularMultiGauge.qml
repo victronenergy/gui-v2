@@ -6,6 +6,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
+import "/components/Gauges.js" as Gauges
 
 Item {
 	id: gauges
@@ -76,7 +77,7 @@ Item {
 					horizontalAlignment: Text.AlignRight
 					font.pixelSize: Theme.font.size.m
 					color: Theme.color.font.primary
-					visible: Preferences.showPercentagesInBriefPage
+					visible: Global.preferences.showPercentagesInBriefPage
 					//% "%1%"
 					text: qsTrId("%1%").arg(model.value)
 				}

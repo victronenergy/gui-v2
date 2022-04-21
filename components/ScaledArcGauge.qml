@@ -5,6 +5,7 @@
 import QtQuick
 import QtQuick.Shapes
 import Victron.VenusOS
+import "/components/Gauges.js" as Gauges
 
 Item {
 	id: gauge

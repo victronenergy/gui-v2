@@ -11,6 +11,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	property PageManager pageManager: Global.pageManager
+
 	C.StackView {
 		id: navStack
 		clip: true
@@ -96,7 +98,7 @@ Page {
 		}
 
 		property var currentUrl: navBar.model.get(0).url
-		onCurrentUrlChanged: PageManager.sidePanelVisible = (currentUrl == navBar.model.get(0).url)
+		onCurrentUrlChanged: if (pageManager) pageManager.sidePanelVisible = (currentUrl == navBar.model.get(0).url)
 		onButtonClicked: function (buttonIndex) {
 			var navUrl = model.get(buttonIndex).url
 			if (navUrl != currentUrl) {
@@ -122,8 +124,8 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarIn
 
-			running: PageManager.interactivity === Enums.PageManager_InteractionMode_EndFullScreen
-					 || PageManager.interactivity === Enums.PageManager_InteractionMode_ExitIdleMode
+			running: pageManager.interactivity === Enums.PageManager_InteractionMode_EndFullScreen
+					 || pageManager.interactivity === Enums.PageManager_InteractionMode_ExitIdleMode
 
 			NumberAnimation {
 				target: navBar
@@ -135,7 +137,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = Enums.PageManager_InteractionMode_ExitIdleMode
+					pageManager.interactivity = Enums.PageManager_InteractionMode_ExitIdleMode
 				}
 			}
 			OpacityAnimator {
@@ -147,8 +149,8 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.controlsVisible = true
-					PageManager.interactivity = Enums.PageManager_InteractionMode_Interactive
+					pageManager.controlsVisible = true
+					pageManager.interactivity = Enums.PageManager_InteractionMode_Interactive
 				}
 			}
 		}
@@ -156,12 +158,12 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarOut
 
-			running: PageManager.interactivity === Enums.PageManager_InteractionMode_EnterIdleMode
-					 || PageManager.interactivity === Enums.PageManager_InteractionMode_BeginFullScreen
+			running: pageManager.interactivity === Enums.PageManager_InteractionMode_EnterIdleMode
+					 || pageManager.interactivity === Enums.PageManager_InteractionMode_BeginFullScreen
 
 			ScriptAction {
 				script: {
-					PageManager.controlsVisible = false
+					pageManager.controlsVisible = false
 				}
 			}
 			OpacityAnimator {
@@ -173,7 +175,7 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = Enums.PageManager_InteractionMode_BeginFullScreen
+					pageManager.interactivity = Enums.PageManager_InteractionMode_BeginFullScreen
 				}
 			}
 			NumberAnimation {
@@ -186,11 +188,11 @@ Page {
 			}
 			ScriptAction {
 				script: {
-					PageManager.interactivity = Enums.PageManager_InteractionMode_Idle
+					pageManager.interactivity = Enums.PageManager_InteractionMode_Idle
 				}
 			}
 		}
 	}
 
-	Component.onCompleted: PageManager.navBar = navBar
+	Component.onCompleted: pageManager.navBar = navBar
 }

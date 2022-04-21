@@ -6,6 +6,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
+import "/components/Gauges.js" as Gauges
 
 Item {
 	id: gauges
@@ -23,7 +24,7 @@ Item {
 
 		ProgressArc {
 			property int status: Gauges.getValueStatus(model.value, model.valueType)
-			
+
 			width: gauges.width - strokeWidth
 			height: width
 			anchors.centerIn: parent
@@ -39,7 +40,7 @@ Item {
 
 	Column {
 		anchors.centerIn: parent
-		
+
 		Row {
 			anchors.horizontalCenter: parent.horizontalCenter
 			spacing: 6

@@ -1,10 +1,8 @@
 /*
 ** Copyright (C) 2021 Victron Energy B.V.
 */
-pragma Singleton
 
-import QtQuick
-
+import QtQml
 
 QtObject {
 	property bool showPercentagesInBriefPage: false

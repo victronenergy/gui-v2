@@ -4,7 +4,9 @@ import Victron.VenusOS
 
 C.StackView {
 	id: pageStack
-	initialItem: "qrc:/pages/MainPage.qml"
+
+	property PageManager pageManager
+	Component.onCompleted: pageStack.push("qrc:/pages/MainPage.qml", {"pageManager": pageManager})
 
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {

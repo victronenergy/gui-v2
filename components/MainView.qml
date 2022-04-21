@@ -8,33 +8,35 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	property PageManager pageManager
+
 	StatusBar {
 		id: statusBar
 
-		controlsVisible: PageManager.controlsVisible
-		sidePanelVisible: PageManager.sidePanelVisible
+		controlsVisible: pageManager.controlsVisible
+		sidePanelVisible: pageManager.sidePanelVisible
 		property bool hidden: statusBar.y === -statusBar.height
 		property bool sidePanelWasVisible
 
-		Component.onCompleted: PageManager.statusBar = statusBar
+		Component.onCompleted: pageManager.statusBar = statusBar
 
 		onControlsActiveChanged: {
 			if (controlsActive) {
-				if (PageManager.sidePanelVisible) {
+				if (pageManager.sidePanelVisible) {
 					statusBar.sidePanelWasVisible = true
 				}
-				PageManager.sidePanelVisible = false
-				PageManager.pushPage("qrc:/pages/ControlCardsPage.qml")
+				pageManager.sidePanelVisible = false
+				pageManager.pushPage("qrc:/pages/ControlCardsPage.qml")
 			} else {
-				PageManager.popPage()
+				pageManager.popPage()
 				if (statusBar.sidePanelWasVisible) {
-					PageManager.sidePanelVisible = true
+					pageManager.sidePanelVisible = true
 				}
 			}
 		}
 
 		onSidePanelActiveChanged: {
-			PageManager.sidePanelActive = sidePanelActive
+			pageManager.sidePanelActive = sidePanelActive
 		}
 	}
 
@@ -47,17 +49,19 @@ Item {
 			bottom: parent.bottom
 		}
 
+		pageManager: root.pageManager
+
 		Connections {
-			target: PageManager.emitter
+			target: pageManager.emitter
 
 			function onPagePushRequested() {
-				pageStack.push(PageManager.pageToPush)
-				PageManager.mainPageActive = pageStack.depth === 1
+				pageStack.push(pageManager.pageToPush)
+				pageManager.mainPageActive = pageStack.depth === 1
 			}
 
 			function onPagePopRequested() {
 				pageStack.pop()
-				PageManager.mainPageActive = pageStack.depth === 1
+				pageManager.mainPageActive = pageStack.depth === 1
 			}
 		}
 	}

@@ -66,8 +66,8 @@ Page {
 			//: When true, the Brief page shows percentages
 			text: qsTrId("settings_toggle_percentage")
 			onClicked: {
-				Preferences.showPercentagesInBriefPage = !Preferences.showPercentagesInBriefPage
-				console.log(Preferences.showPercentagesInBriefPage)
+				Global.preferences.showPercentagesInBriefPage = !Global.preferences.showPercentagesInBriefPage
+				console.log(Global.preferences.showPercentagesInBriefPage)
 			}
 		}
 	}

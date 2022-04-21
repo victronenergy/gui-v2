@@ -297,8 +297,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.expandLayout
-			animateGeometry: PageManager.animatingIdleResize
+			expanded: Global.pageManager.expandLayout
+			animateGeometry: Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 			sideGaugeValue: value / Utils.maximumValue("grid.power")    // TODO when max available
 
@@ -310,8 +310,8 @@ Page {
 				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: inverterWidget
 				endLocation: Enums.WidgetConnector_Location_Left
-				expanded: PageManager.expandLayout
-				animateGeometry: PageManager.animatingIdleResize
+				expanded: Global.pageManager.expandLayout
+				animateGeometry: Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(gridWidgetConnector)
 				straight: gridWidget.size > Enums.OverviewWidget_Size_M
 			}
@@ -328,8 +328,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.expandLayout
-			animateGeometry: PageManager.animatingIdleResize
+			expanded: Global.pageManager.expandLayout
+			animateGeometry: Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 			sideGaugeValue: 0.5 // TODO when max available
 
@@ -341,8 +341,8 @@ Page {
 				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: inverterWidget
 				endLocation: Enums.WidgetConnector_Location_Left
-				expanded: PageManager.expandLayout
-				animateGeometry: PageManager.animatingIdleResize
+				expanded: Global.pageManager.expandLayout
+				animateGeometry: Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(shoreWidgetConnector)
 				straight: shoreWidget.size > Enums.OverviewWidget_Size_M
 			}
@@ -359,8 +359,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.expandLayout
-			animateGeometry: PageManager.animatingIdleResize
+			expanded: Global.pageManager.expandLayout
+			animateGeometry: Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
@@ -371,8 +371,8 @@ Page {
 				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: inverterWidget
 				endLocation: Enums.WidgetConnector_Location_Left
-				expanded: PageManager.expandLayout
-				animateGeometry: PageManager.animatingIdleResize
+				expanded: Global.pageManager.expandLayout
+				animateGeometry: Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(acGeneratorConnector)
 				straight: acGeneratorWidget.size > Enums.OverviewWidget_Size_M
 			}
@@ -389,8 +389,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.expandLayout
-			animateGeometry: PageManager.animatingIdleResize
+			expanded: Global.pageManager.expandLayout
+			animateGeometry: Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
@@ -401,8 +401,8 @@ Page {
 				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: Enums.WidgetConnector_Location_Left
-				expanded: PageManager.expandLayout
-				animateGeometry: PageManager.animatingIdleResize
+				expanded: Global.pageManager.expandLayout
+				animateGeometry: Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(dcGeneratorConnector)
 				straight: dcGeneratorWidget.size > Enums.OverviewWidget_Size_M
 			}
@@ -419,8 +419,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.expandLayout
-			animateGeometry: PageManager.animatingIdleResize
+			expanded: Global.pageManager.expandLayout
+			animateGeometry: Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
@@ -431,8 +431,8 @@ Page {
 				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: Enums.WidgetConnector_Location_Left
-				expanded: PageManager.expandLayout
-				animateGeometry: PageManager.animatingIdleResize
+				expanded: Global.pageManager.expandLayout
+				animateGeometry: Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(alternatorConnector)
 			}
 		}
@@ -448,8 +448,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.expandLayout
-			animateGeometry: PageManager.animatingIdleResize
+			expanded: Global.pageManager.expandLayout
+			animateGeometry: Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			WidgetConnector {
@@ -460,8 +460,8 @@ Page {
 				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: Enums.WidgetConnector_Location_Left
-				expanded: PageManager.expandLayout
-				animateGeometry: PageManager.animatingIdleResize
+				expanded: Global.pageManager.expandLayout
+				animateGeometry: Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(windConnector)
 			}
 		}
@@ -477,8 +477,8 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.page.grid.horizontalMargin
 			}
-			expanded: PageManager.expandLayout
-			animateGeometry: PageManager.animatingIdleResize
+			expanded: Global.pageManager.expandLayout
+			animateGeometry: Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
 			value: !!solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
@@ -493,8 +493,8 @@ Page {
 				endWidget: inverterWidget
 				endLocation: Enums.WidgetConnector_Location_Left
 				visible: !!solarChargers && !isNaN(solarChargers.acPower)
-				expanded: PageManager.expandLayout
-				animateGeometry: PageManager.animatingIdleResize
+				expanded: Global.pageManager.expandLayout
+				animateGeometry: Global.pageManager.animatingIdleResize
 
 				// Energy always flows towards inverter/charger, never towards solar charger.
 				animationMode: !!solarChargers
@@ -512,8 +512,8 @@ Page {
 				endWidget: batteryWidget
 				endLocation: Enums.WidgetConnector_Location_Left
 				visible: !!solarChargers && !isNaN(solarChargers.dcPower)
-				expanded: PageManager.expandLayout
-				animateGeometry: PageManager.animatingIdleResize
+				expanded: Global.pageManager.expandLayout
+				animateGeometry: Global.pageManager.animatingIdleResize
 
 				// Energy always flows towards battery, never towards solar charger.
 				animationMode: !!solarChargers
@@ -530,8 +530,8 @@ Page {
 		id: inverterWidget
 		anchors.horizontalCenter: parent.horizontalCenter
 		size: Enums.OverviewWidget_Size_L
-		expanded: PageManager.expandLayout
-		animateGeometry: PageManager.animatingIdleResize
+		expanded: Global.pageManager.expandLayout
+		animateGeometry: Global.pageManager.animatingIdleResize
 		physicalQuantity: -1
 		systemState: system ? system.state : 0
 	}
@@ -540,8 +540,8 @@ Page {
 		startLocation: Enums.WidgetConnector_Location_Right
 		endWidget: acLoadsWidget
 		endLocation: Enums.WidgetConnector_Location_Left
-		expanded: PageManager.expandLayout
-		animateGeometry: PageManager.animatingIdleResize
+		expanded: Global.pageManager.expandLayout
+		animateGeometry: Global.pageManager.animatingIdleResize
 		straight: true
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
@@ -557,8 +557,8 @@ Page {
 		startLocation: Enums.WidgetConnector_Location_Bottom
 		endWidget: batteryWidget
 		endLocation: Enums.WidgetConnector_Location_Top
-		expanded: PageManager.expandLayout
-		animateGeometry: PageManager.animatingIdleResize
+		expanded: Global.pageManager.expandLayout
+		animateGeometry: Global.pageManager.animatingIdleResize
 
 		// If battery power is positive, energy flows to battery, else flows to inverter/charger.
 		animationMode: !!battery
@@ -574,9 +574,9 @@ Page {
 		id: batteryWidget
 		anchors.horizontalCenter: parent.horizontalCenter
 		size: Enums.OverviewWidget_Size_L
-		expanded: PageManager.expandLayout
-		animateGeometry: PageManager.animatingIdleResize
-		animationRunning: PageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
+		expanded: Global.pageManager.expandLayout
+		animateGeometry: Global.pageManager.animatingIdleResize
+		animationRunning: Global.pageManager.navBar.currentUrl === "qrc:/pages/OverviewPage.qml"
 		batteryData: battery
 	}
 	WidgetConnector {
@@ -584,8 +584,8 @@ Page {
 		startLocation: Enums.WidgetConnector_Location_Right
 		endWidget: dcLoadsWidget
 		endLocation: Enums.WidgetConnector_Location_Left
-		expanded: PageManager.expandLayout
-		animateGeometry: PageManager.animatingIdleResize
+		expanded: Global.pageManager.expandLayout
+		animateGeometry: Global.pageManager.animatingIdleResize
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: !!system
@@ -606,8 +606,8 @@ Page {
 		size: dcLoadsWidget.size === Enums.OverviewWidget_Size_Zero
 			  ? Enums.OverviewWidget_Size_XL
 			  : Enums.OverviewWidget_Size_L
-		expanded: PageManager.expandLayout
-		animateGeometry: PageManager.animatingIdleResize
+		expanded: Global.pageManager.expandLayout
+		animateGeometry: Global.pageManager.animatingIdleResize
 		value: system ? system.ac.consumption.power : NaN
 		phaseModel: system ? system.ac.consumption.phases : null
 		phaseModelProperty: "power"
@@ -620,8 +620,8 @@ Page {
 			rightMargin: Theme.geometry.page.grid.horizontalMargin
 		}
 		size: !!system && !isNaN(system.dc.power) ? Enums.OverviewWidget_Size_L : Enums.OverviewWidget_Size_Zero
-		expanded: PageManager.expandLayout
-		animateGeometry: PageManager.animatingIdleResize
+		expanded: Global.pageManager.expandLayout
+		animateGeometry: Global.pageManager.animatingIdleResize
 		value: system ? system.dc.power || NaN : NaN
 	}
 }

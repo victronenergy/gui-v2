@@ -14,11 +14,11 @@ Page {
 
 		anchors {
 			top: parent.top
-			topMargin: PageManager.expandLayout ? -tabBar.height : 0
+			topMargin: Global.pageManager.expandLayout ? -tabBar.height : 0
 			horizontalCenter: parent.horizontalCenter
 		}
-		opacity: PageManager.interactivity === Enums.PageManager_InteractionMode_Interactive
-				 || PageManager.interactivity === Enums.PageManager_InteractionMode_ExitIdleMode
+		opacity: Global.pageManager.interactivity === Enums.PageManager_InteractionMode_Interactive
+				 || Global.pageManager.interactivity === Enums.PageManager_InteractionMode_ExitIdleMode
 				 ? 1.0
 				 : 0.0
 
@@ -40,14 +40,14 @@ Page {
 		}
 
 		// Remember currentIndex when returning to the Levels page
-		currentIndex: PageManager.levelsTabIndex
+		currentIndex: Global.pageManager.levelsTabIndex
 
 		onCurrentIndexChanged: {
 			// Load the Environments tab the first time it is required
 			if (currentIndex === 1 && !environmentsTabLoader.active) {
 				environmentsTabLoader.active = true
 			}
-			PageManager.levelsTabIndex = currentIndex
+			Global.pageManager.levelsTabIndex = currentIndex
 		}
 	}
 
@@ -56,11 +56,11 @@ Page {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: PageManager.expandLayout
+			topMargin: Global.pageManager.expandLayout
 					   ? Theme.geometry.levelsPage.gaugesView.expanded.topMargin
 					   : Theme.geometry.levelsPage.gaugesView.compact.topMargin
 			bottom: parent.bottom
-			bottomMargin: PageManager.expandLayout
+			bottomMargin: Global.pageManager.expandLayout
 						  ? Theme.geometry.levelsPage.gaugesView.expanded.bottomMargin
 						  : Theme.geometry.levelsPage.gaugesView.compact.bottomMargin
 		}
@@ -94,11 +94,11 @@ Page {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: PageManager.expandLayout
+			topMargin: Global.pageManager.expandLayout
 					   ? Theme.geometry.levelsPage.gaugesView.expanded.topMargin
 					   : Theme.geometry.levelsPage.gaugesView.compact.topMargin
 			bottom: parent.bottom
-			bottomMargin: PageManager.expandLayout
+			bottomMargin: Global.pageManager.expandLayout
 						  ? Theme.geometry.levelsPage.gaugesView.expanded.bottomMargin
 						  : Theme.geometry.levelsPage.gaugesView.compact.bottomMargin
 			left: parent.left

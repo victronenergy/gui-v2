@@ -66,7 +66,7 @@ Flickable {
 							? Enums.EnvironmentGaugePanel_Size_Compact
 							: Enums.EnvironmentGaugePanel_Size_Expanded
 				}
-				verticalSize: PageManager.expandLayout
+				verticalSize: Global.pageManager.expandLayout
 						? Enums.EnvironmentGaugePanel_Size_Expanded
 						: Enums.EnvironmentGaugePanel_Size_Compact
 				title: model.input.customName || model.input.productName || ""

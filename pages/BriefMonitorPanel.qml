@@ -224,12 +224,12 @@ Column {
 						bottomMargin: Theme.geometry.briefPage.sidePanel.loadGraph.bottomMargin
 					}
 					interval: timer.interval
-					enableAnimation: PageManager.sidePanelActive
+					enableAnimation: Global.pageManager.sidePanelActive
 
 					Timer {
 						id: timer
 						interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-						running: PageManager.sidePanelActive
+						running: Global.pageManager.sidePanelActive
 						repeat: true
 						onTriggered: {
 							let loadValue = system ? system.loads.power / Utils.maximumValue("system.loads.power") : 0

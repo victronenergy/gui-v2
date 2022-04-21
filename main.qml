@@ -35,11 +35,11 @@ Window {
 	height: [480, 600][Theme.screenSize]
 	color: {
 		if (Theme.colorScheme === Theme.Light
-				&& PageManager.statusBar
-				&& PageManager.statusBar.controlsActive) {
+				&& pageManager.statusBar
+				&& pageManager.statusBar.controlsActive) {
 			return Theme.color.overviewPage.backgroundColor
 		}
-		switch (PageManager.navBar.currentUrl) {
+		switch (pageManager.navBar.currentUrl) {
 		case "qrc:/pages/OverviewPage.qml":
 		case "qrc:/pages/LevelsPage.qml":
 			return Theme.color.overviewPage.backgroundColor
@@ -52,6 +52,20 @@ Window {
 	//% "Venus OS GUI"
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
+
+	PageManager {
+		id: pageManager
+		Component.onCompleted: Global.pageManager = pageManager
+	}
+
+	Preferences {
+		id: preferences
+		Component.onCompleted: Global.preferences = preferences
+	}
+
+	DialogManager {
+		id: dialogManager
+	}
 
 	SplashView {
 		id: splashView
@@ -76,6 +90,7 @@ Window {
 		id: mainView
 		anchors.fill: parent
 		opacity: 0.0
+		pageManager: pageManager
 
 		Behavior on opacity {
 			NumberAnimation {
@@ -89,20 +104,16 @@ Window {
 		id: idleModeMouseArea
 
 		anchors.fill: parent
-		enabled: PageManager.interactivity === Enums.PageManager_InteractionMode_Idle
-		onClicked: PageManager.interactivity = Enums.PageManager_InteractionMode_EndFullScreen
+		enabled: pageManager.interactivity === Enums.PageManager_InteractionMode_Idle
+		onClicked: pageManager.interactivity = Enums.PageManager_InteractionMode_EndFullScreen
 	}
 
 	MouseArea {
 		anchors.fill: parent
 		onPressed: function(mouse) {
 			mouse.accepted = false
-			PageManager.idleModeTimer.restart()
+			pageManager.idleModeTimer.restart()
 		}
-	}
-
-	DialogManager {
-		id: dialogManager
 	}
 
 	Loader {

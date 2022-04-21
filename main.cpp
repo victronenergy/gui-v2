@@ -39,6 +39,10 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<Victron::VenusOS::Enums>(
 		"Victron.VenusOS", 2, 0, "Enums",
 		&Victron::VenusOS::Enums::instance);
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
+		"Victron.VenusOS", 2, 0, "VenusFont");
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/Global.qml")),
+		"Victron.VenusOS", 2, 0, "Global");
 
 	/* data sources */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Battery.qml")),
@@ -93,7 +97,7 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularSingleGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularSingleGauge");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Gauges.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Gauges.qml")),
 		"Victron.VenusOS", 2, 0, "Gauges");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlCard.qml")),
 		"Victron.VenusOS", 2, 0, "ControlCard");
@@ -131,7 +135,7 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "NavButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/PageStack.qml")),
 		"Victron.VenusOS", 2, 0, "PageStack");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Preferences.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Preferences.qml")),
 		"Victron.VenusOS", 2, 0, "Preferences");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ProgressArc.qml")),
 		"Victron.VenusOS", 2, 0, "ProgressArc");
@@ -155,14 +159,12 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ThreePhaseDisplay");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ToastNotification.qml")),
 		"Victron.VenusOS", 2, 0, "ToastNotification");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Units.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Units.qml")),
 		"Victron.VenusOS", 2, 0, "Units");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ValueDisplay.qml")),
 		"Victron.VenusOS", 2, 0, "ValueDisplay");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ValueQuantityDisplay.qml")),
 		"Victron.VenusOS", 2, 0, "ValueQuantityDisplay");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
-		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
 
@@ -227,7 +229,7 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
 
 	/* pages */
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/pages/PageManager.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/PageManager.qml")),
 		"Victron.VenusOS", 2, 0, "PageManager");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/Page.qml")),
 		"Victron.VenusOS", 2, 0, "Page");

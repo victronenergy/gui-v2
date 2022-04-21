@@ -31,27 +31,27 @@ Item {
 
 		// Overview and Levels pages don't update layout if already on that page
 		if (forceReload) {
-			const pageIndex = indexOfPage(PageManager.navBar.currentUrl)
-			PageManager.navBar.buttonClicked(PageManager.navBar.model.count - 1) // go to settings page
-			PageManager.navBar.buttonClicked(pageIndex)
+			const pageIndex = indexOfPage(Global.pageManager.navBar.currentUrl)
+			Global.pageManager.navBar.buttonClicked(Global.pageManager.navBar.model.count - 1) // go to settings page
+			Global.pageManager.navBar.buttonClicked(pageIndex)
 		}
 	}
 
 	function nextConfig() {
-		const demo = _demos[PageManager.navBar.currentUrl]
+		const demo = _demos[Global.pageManager.navBar.currentUrl]
 		const nextIndex = demo.configIndex === demo.configs.length-1 ? 0 : demo.configIndex+1
 		setConfigIndex(demo, nextIndex, true)
 	}
 
 	function previousConfig() {
-		const demo = _demos[PageManager.navBar.currentUrl]
+		const demo = _demos[Global.pageManager.navBar.currentUrl]
 		const prevIndex = demo.configIndex <= 0 ? demo.configs.length-1 : demo.configIndex-1
 		setConfigIndex(demo, prevIndex, true)
 	}
 
 	function indexOfPage(url) {
-		for (let i = 0; i < PageManager.navBar.model.count; ++i) {
-			if (PageManager.navBar.model.get(i).url === url) {
+		for (let i = 0; i < Global.pageManager.navBar.model.count; ++i) {
+			if (Global.pageManager.navBar.model.get(i).url === url) {
 				return i
 			}
 		}
@@ -60,7 +60,7 @@ Item {
 	}
 
 	anchors.fill: parent
-	focus: PageManager.navBar.currentUrl in root._demos
+	focus: Global.pageManager.navBar.currentUrl in root._demos
 
 	Keys.onLeftPressed: previousConfig()
 	Keys.onRightPressed: nextConfig()
@@ -88,11 +88,11 @@ Item {
 	}
 
 	Connections {
-		target: PageManager.navBar || null
+		target: Global.pageManager.navBar || null
 		function onCurrentUrlChanged() {
 			for (let demoUrl in _demos) {
 				const demo = _demos[demoUrl]
-				if (PageManager.navBar.currentUrl === demoUrl) {
+				if (Global.pageManager.navBar.currentUrl === demoUrl) {
 					if (demo.configIndex === -1) {
 						setConfigIndex(demo, -1, false)
 					}
