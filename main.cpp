@@ -23,6 +23,23 @@
 
 Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
+namespace {
+
+void addSettings(VeQItemSettingsInfo *info)
+{
+	// 0=Dark, 1=Light, 2=Auto
+	info->add("Gui/DisplayMode", 0, 0, 2);
+
+	// Brief settings levels are 0-6 (Fuel - Gasoline) or -1 for Battery.
+	info->add("Gui/BriefView/Level/1", -1, -1, 6);     // Battery
+	info->add("Gui/BriefView/Level/2", 0, -1, 6);    // Fuel
+	info->add("Gui/BriefView/Level/3", 1, -1, 6);    // Fresh water
+	info->add("Gui/BriefView/Level/4", 5, -1, 6);    // Black water
+	info->add("Gui/BriefView/ShowPercentages", 0, 0, 1);
+}
+
+}
+
 int main(int argc, char *argv[])
 {
 	/* QML type registrations.  As we (currently) don't create an installed module,
@@ -81,8 +98,6 @@ int main(int argc, char *argv[])
 	/* components */
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Gauges.qml")),
 		"Victron.VenusOS", 2, 0, "Gauges");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Preferences.qml")),
-		"Victron.VenusOS", 2, 0, "Preferences");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Units.qml")),
 		"Victron.VenusOS", 2, 0, "Units");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
@@ -320,6 +335,13 @@ int main(int argc, char *argv[])
 		if (dbus.isConnected()) {
 			producer->open(dbus);
 			settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
+
+			VeQItemSettingsInfo settingsInfo;
+			addSettings(&settingsInfo);
+			if (!settings->addSettings(settingsInfo)) {
+				qCritical() << "Adding settings failed, localsettings not running?";
+				exit(EXIT_FAILURE);
+			}
 		} else {
 			qCritical() << "DBus connection failed.";
 			exit(EXIT_FAILURE);

@@ -70,8 +70,10 @@ Page {
 				onOptionClicked: function(index) {
 					if (index === 0) {
 						Theme.load(Theme.screenSize, Theme.Dark)
+						systemSettings.setDisplayMode(Theme.Dark)
 					} else if (index === 1) {
 						Theme.load(Theme.screenSize, Theme.Light)
+						systemSettings.setDisplayMode(Theme.Light)
 					} else {
 						// TODO set auto mode
 					}
@@ -81,6 +83,9 @@ Page {
 			SettingsListNavigationItem {
 				//% "Brief view levels"
 				text: qsTrId("settings_brief_view_levels")
+				onClicked: {
+					PageManager.pushPage("/pages/settings/BriefViewSettingsPage.qml", {"title": text})
+				}
 			}
 
 			SettingsListRadioButtonGroup {
