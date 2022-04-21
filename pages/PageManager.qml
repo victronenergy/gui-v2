@@ -23,6 +23,8 @@ QtObject {
 		signal pagePopRequested()
 		signal layerPushRequested(var obj, var properties)
 		signal layerPopRequested()
+
+		signal demoKeyPressed(var event)
 	}
 
 	// Ugly hack, but ...

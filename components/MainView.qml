@@ -51,6 +51,8 @@ Item {
 			bottom: parent.bottom
 		}
 
+		focus: true
+
 		Connections {
 			target: PageManager.emitter
 

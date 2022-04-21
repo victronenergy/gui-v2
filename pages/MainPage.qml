@@ -32,6 +32,7 @@ Page {
 	C.StackView {
 		id: navStack
 		clip: true
+		focus: root.isCurrentPage
 
 		anchors {
 			left: parent.left
@@ -60,6 +61,7 @@ Page {
 			}
 		}
 	}
+
 
 	NavBar {
 		id: navBar

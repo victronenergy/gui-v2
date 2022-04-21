@@ -85,6 +85,7 @@
         <file>components/VenusFont.qml</file>
         <file>components/VerticalGauge.qml</file>
         <file>components/WeatherDetails.qml</file>
+        <file>components/models/User.qml</file>
         <file>data/AcInputs.qml</file>
         <file>data/AcInputServiceLoader.qml</file>
         <file>data/DcInputs.qml</file>
@@ -96,6 +97,7 @@
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
         <file>data/System.qml</file>
+        <file>data/SystemSettings.qml</file>
         <file>data/SystemAc.qml</file>
         <file>data/SystemDc.qml</file>
         <file>data/Tanks.qml</file>
@@ -110,6 +112,7 @@
         <file>demo/SolarChargers.qml</file>
         <file>demo/Relays.qml</file>
         <file>demo/System.qml</file>
+        <file>demo/SystemSettings.qml</file>
         <file>demo/SystemAc.qml</file>
         <file>demo/SystemDc.qml</file>
         <file>demo/Tanks.qml</file>
@@ -126,6 +129,10 @@
         <file>pages/PageManager.qml</file>
         <file>pages/SettingsPage.qml</file>
         <file>pages/TanksTab.qml</file>
+        <file>pages/settings/DemoSettingsPage.qml</file>
+        <file>pages/settings/DisplayAndLanguageSettingsPage.qml</file>
+        <file>pages/settings/GeneralSettingsPage.qml</file>
+        <file>pages/settings/AccessLevelRadioButtonGroup.qml</file>
         <file>dialogs/DialogManager.qml</file>
         <file>dialogs/ModalDialog.qml</file>
         <file>dialogs/ModalWarningDialog.qml</file>

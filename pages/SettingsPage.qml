@@ -18,12 +18,9 @@ Page {
 				page: "/pages/settings/DemoSettingsPage.qml"
 			},
 			{
-				//% "Display & Language"
-				text: qsTrId("settings_display_and_language"),
-			},
-			{
 				//% "General"
 				text: qsTrId("settings_general"),
+				page: "/pages/settings/GeneralSettingsPage.qml"
 			},
 			{
 				//% "Firmware"
@@ -44,6 +41,11 @@ Page {
 			{
 				//% "DVCC"
 				text: qsTrId("settings_dvcc"),
+			},
+			{
+				//% "Display & Language"
+				text: qsTrId("settings_display_and_language"),
+				page: "/pages/settings/DisplayAndLanguageSettingsPage.qml"
 			},
 			{
 				//% "VRM online portal"

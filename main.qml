@@ -26,6 +26,7 @@ Window {
 	property Item relays: dataLoader.item.relays
 	property Item solarChargers: dataLoader.item.solarChargers
 	property Item system: dataLoader.item.system
+	property Item systemSettings: dataLoader.item.systemSettings
 
 	property alias dialogManager: dialogManager
 
@@ -116,6 +117,7 @@ Window {
 			property Relays relays: Relays {}
 			property SolarChargers solarChargers: SolarChargers {}
 			property System system: System {}
+			property SystemSettings systemSettings: SystemSettings {}
 
 			VeQuickItem {
 				id: veDBus
@@ -136,7 +138,6 @@ Window {
 		id: demoData
 
 		active: !dbusConnected
-		focus: active
 
 		sourceComponent: Item {
 			property Demo.AcInputs acInputs: Demo.AcInputs {}
@@ -150,6 +151,7 @@ Window {
 			property Demo.Relays relays: Demo.Relays {}
 			property Demo.SolarChargers solarChargers: Demo.SolarChargers {}
 			property Demo.System system: Demo.System {}
+			property Demo.SystemSettings systemSettings: Demo.SystemSettings {}
 
 			Demo.DemoConfig {}
 		}

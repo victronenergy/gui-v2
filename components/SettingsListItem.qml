@@ -14,8 +14,16 @@ Item {
 	property alias backgroundRect: backgroundRect
 	property int spacing: Theme.geometry.settingsPage.settingsList.spacing
 
+	property int showAccessLevel: User.AccessUser
+	property int writeAccessLevel: User.AccessUser
+	readonly property bool userHasWriteAccess: systemSettings.accessLevel >= writeAccessLevel
+
+	readonly property bool defaultVisible: systemSettings.accessLevel >= showAccessLevel
+
 	width: parent ? parent.width : 0
 	implicitHeight: visible ? backgroundRect.height + spacing : 0
+	visible: defaultVisible
+	enabled: userHasWriteAccess
 
 	Rectangle {
 		id: backgroundRect

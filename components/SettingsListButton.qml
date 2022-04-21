@@ -22,6 +22,8 @@ SettingsListItem {
 			height: Theme.geometry.settingsListButton.height
 			radius: Theme.geometry.settingsListButton.radius
 			flat: false
+			enabled: root.userHasWriteAccess
+
 			onClicked: root.clicked()
 		}
 	]
