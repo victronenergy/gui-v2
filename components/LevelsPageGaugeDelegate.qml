@@ -5,6 +5,8 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
+import "/components/Gauges.js" as Gauges
+import "/components/Units.js" as Units
 
 Rectangle {
 	id: root
@@ -53,7 +55,7 @@ Rectangle {
 	border.color: tankProperties.borderColor
 
 	Behavior on height {
-		enabled: PageManager.animatingIdleResize
+		enabled: Global.pageManager.animatingIdleResize
 		NumberAnimation {
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad

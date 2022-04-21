@@ -8,6 +8,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	property PageManager pageManager
 	readonly property color backgroundColor: pageStack.currentItem.backgroundColor
 
 	StatusBar {
@@ -16,22 +17,22 @@ Item {
 		title: pageStack.currentItem.title || ""
 
 		navigationButton:  pageStack.currentItem.navigationButton
-		navigationButtonEnabled: PageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-		sidePanelButtonEnabled: PageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+		navigationButtonEnabled: pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+		sidePanelButtonEnabled: pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				&& pageStack.currentItem.hasSidePanel
 
-		Component.onCompleted: PageManager.statusBar = statusBar
+		Component.onCompleted: pageManager.statusBar = statusBar
 
 		onNavigationButtonClicked: {
 			switch (navigationButton) {
 			case VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive:
-				PageManager.pushLayer("qrc:/pages/ControlCardsPage.qml")
+				pageManager.pushLayer("qrc:/pages/ControlCardsPage.qml")
 				break
 			case VenusOS.StatusBar_NavigationButtonStyle_ControlsActive:
-				PageManager.popLayer()
+				pageManager.popLayer()
 				break
 			case VenusOS.StatusBar_NavigationButtonStyle_Back:
-				PageManager.popPage()
+				pageManager.popPage()
 				break
 			default:
 				console.warn("Unrecognised navigation button", navigationButton)
@@ -40,7 +41,7 @@ Item {
 		}
 
 		onSidePanelActiveChanged: {
-			PageManager.sidePanelActive = sidePanelActive
+			pageManager.sidePanelActive = sidePanelActive
 		}
 	}
 
@@ -54,9 +55,10 @@ Item {
 		}
 
 		focus: true
+		pageManager: root.pageManager
 
 		Connections {
-			target: PageManager.emitter
+			target: pageManager.emitter
 
 			function onLayerPushRequested(obj, properties) {
 				pageStack.push(obj, properties)

@@ -40,7 +40,7 @@ Item {
 		model: root.model
 
 		delegate: Timer {
-			running: PageManager.navBar.currentUrl === "qrc:/pages/LevelsPage.qml"
+			running: Global.pageManager.navBar.currentUrl === "qrc:/pages/LevelsPage.qml"
 			repeat: true
 			interval: 10 * 1000
 			onTriggered: {

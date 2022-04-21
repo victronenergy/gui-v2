@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Global.qml</file>
         <file>components/controls/Button.qml</file>
         <file>components/controls/ComboBox.qml</file>
         <file>components/controls/Label.qml</file>
@@ -43,7 +44,6 @@
         <file>components/ButtonControlValue.qml</file>
         <file>components/RadioButtonControlValue.qml</file>
         <file>components/SwitchControlValue.qml</file>
-        <file>components/Gauges.qml</file>
         <file>components/GeneratorIconLabel.qml</file>
         <file>components/SolarYieldGauge.qml</file>
         <file>components/TabBar.qml</file>
@@ -77,13 +77,14 @@
         <file>components/TankGauge.qml</file>
         <file>components/ThreePhaseDisplay.qml</file>
         <file>components/ToastNotification.qml</file>
-        <file>components/Units.qml</file>
-        <file>components/Utils.js</file>
         <file>components/ValueDisplay.qml</file>
         <file>components/ValueQuantityDisplay.qml</file>
         <file>components/VenusFont.qml</file>
         <file>components/VerticalGauge.qml</file>
         <file>components/WeatherDetails.qml</file>
+        <file>components/Utils.js</file>
+        <file>components/Gauges.js</file>
+        <file>components/Units.js</file>
         <file>data/AcInputs.qml</file>
         <file>data/AcInputServiceLoader.qml</file>
         <file>data/DcInputs.qml</file>

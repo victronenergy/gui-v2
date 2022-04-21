@@ -42,7 +42,7 @@ SettingsListNavigationItem {
 	}
 
 	onClicked: {
-		PageManager.pushPage(optionsPageComponent)
+		Global.pageManager.pushPage(optionsPageComponent)
 	}
 
 	VeQuickItem {

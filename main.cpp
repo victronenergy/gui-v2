@@ -56,6 +56,10 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<Victron::VenusOS::Enums>(
 		"Victron.VenusOS", 2, 0, "VenusOS",
 		&Victron::VenusOS::Enums::instance);
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
+		"Victron.VenusOS", 2, 0, "VenusFont");
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/Global.qml")),
+		"Victron.VenusOS", 2, 0, "Global");
 
 	/* data sources */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Battery.qml")),
@@ -100,13 +104,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Switch");
 
 	/* components */
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Gauges.qml")),
-		"Victron.VenusOS", 2, 0, "Gauges");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/Units.qml")),
-		"Victron.VenusOS", 2, 0, "Units");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
-		"Victron.VenusOS", 2, 0, "VenusFont");
-
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ActionButton.qml")),
 		"Victron.VenusOS", 2, 0, "ActionButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Arc.qml")),
@@ -273,6 +270,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
 
 	/* pages */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/PageManager.qml")),
+		"Victron.VenusOS", 2, 0, "PageManager");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/BriefMonitorPanel.qml")),
 		"Victron.VenusOS", 2, 0, "BriefMonitorPanel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/ControlCardsPage.qml")),
@@ -285,8 +284,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "MainPage");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/OverviewPage.qml")),
 		"Victron.VenusOS", 2, 0, "OverviewPage");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/pages/PageManager.qml")),
-		"Victron.VenusOS", 2, 0, "PageManager");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/SettingsPage.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsPage");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/TanksTab.qml")),

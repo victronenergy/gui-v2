@@ -104,7 +104,7 @@ ListView {
 					title: mergeTanks
 						   ? tankProperties.name
 						   : model.tank.name || tankProperties.name
-					expanded: PageManager.expandLayout
+					expanded: Global.pageManager.expandLayout
 
 					level: mergeTanks
 							? (gaugeTanks.totalCapacity === 0

@@ -1,7 +1,6 @@
 /*
 ** Copyright (C) 2021 Victron Energy B.V.
 */
-pragma Singleton
 
 import QtQml
 import Victron.VenusOS
@@ -28,14 +27,15 @@ QtObject {
 	property int interactivity: VenusOS.PageManager_InteractionMode_Interactive
 
 	// True when the UI layout on a page should be resizing before/after idle/interactive mode changes.
-	readonly property bool animatingIdleResize: PageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
-			|| PageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
+	readonly property bool animatingIdleResize: root.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
+			|| root.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
 
-	readonly property bool expandLayout: PageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
-			|| PageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
+	readonly property bool expandLayout: root.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
+			|| root.interactivity === VenusOS.PageManager_InteractionMode_Idle
 
 	property Timer idleModeTimer: Timer {
-		running: root.currentPage && root.currentPage.fullScreenWhenIdle
+		running: root.currentPage !== null && root.currentPage !== undefined
+			&& root.currentPage.fullScreenWhenIdle
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 		interval: Theme.animation.page.idleResize.timeout
 		onTriggered: root.interactivity = VenusOS.PageManager_InteractionMode_EnterIdleMode
