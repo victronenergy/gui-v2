@@ -13,6 +13,7 @@ QtObject {
 		signal pagePopRequested()
 		signal layerPushRequested(var obj, var properties)
 		signal layerPopRequested()
+		signal allPagesLoaded()
 
 		signal demoKeyPressed(var event)
 	}

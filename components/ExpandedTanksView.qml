@@ -14,6 +14,7 @@ Rectangle {
 	property bool active
 	property alias tankModel: groupedSubgaugesRepeater.model
 	readonly property var _tankProperties: Gauges.tankProperties(tankModel.type)
+	property bool animationEnabled: true
 
 	parent: dialogManager
 	anchors.fill: parent
@@ -21,6 +22,7 @@ Rectangle {
 	opacity: active ? 1 : 0
 
 	Behavior on opacity {
+		enabled: root.animationEnabled
 		OpacityAnimator {
 			duration: Theme.animation.levelsPage.tanks.expandedView.fade.duration
 		}
@@ -89,6 +91,7 @@ Rectangle {
 					width: parent.width
 					height: groupedSubgauges.height
 					gaugeValueType: root._tankProperties.valueType
+					animationEnabled: root.animationEnabled
 					value: model.tank.level / 100
 				}
 				ValueQuantityDisplay {

@@ -25,9 +25,13 @@ Page {
 				 ? 1.0
 				 : 0.0
 
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration } }
+		Behavior on opacity {
+			enabled: root.isCurrentPage
+			OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration }
+		}
 
 		Behavior on anchors.topMargin {
+			enabled: root.isCurrentPage
 			NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
 		}
 
@@ -70,15 +74,18 @@ Page {
 		rightMargin: contentWidth > width
 					 ? 2*Theme.geometry.levelsPage.gaugesView.horizontalMargin
 					 : 0
+		animationEnabled: root.isCurrentPage
 
 		Behavior on x {
-			enabled: tanksTab.animateModelChanges
+			enabled: root.isCurrentPage && tanksTab.animateModelChanges
 			NumberAnimation { duration: Theme.animation.levelsPage.tanks.modelChangeResize.duration; easing.type: Easing.InOutQuad }
 		}
 		Behavior on anchors.topMargin {
+			enabled: root.isCurrentPage
 			NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
 		}
 		Behavior on anchors.bottomMargin {
+			enabled: root.isCurrentPage
 			NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
 		}
 
@@ -105,12 +112,16 @@ Page {
 		}
 
 		Behavior on anchors.topMargin {
+			enabled: root.isCurrentPage
 			NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
 		}
 		Behavior on anchors.bottomMargin {
+			enabled: root.isCurrentPage
 			NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
 		}
 
-		sourceComponent: EnvironmentTab { }
+		sourceComponent: EnvironmentTab {
+			animationEnabled: root.isCurrentPage
+		}
 	}
 }

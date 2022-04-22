@@ -14,6 +14,7 @@ Item {
 	property var model
 	readonly property real strokeWidth: Theme.geometry.circularSingularGauge.strokeWidth
 	property alias caption: captionLabel.text
+	property alias animationEnabled: arc.animationEnabled
 
 	Item {
 		anchors.fill: parent
@@ -23,6 +24,8 @@ Item {
 		layer.samples: 4
 
 		ProgressArc {
+			id: arc
+
 			property int status: model ? Gauges.getValueStatus(model.value, model.valueType) : 0
 			width: gauges.width - strokeWidth
 			height: width

@@ -14,6 +14,7 @@ Item {
 	property alias navigationButtonEnabled: navigationButton.enabled
 	property bool sidePanelActive
 	property alias sidePanelButtonEnabled: sidePanelButton.enabled
+	property bool animationEnabled: true
 
 	signal navigationButtonClicked()
 
@@ -41,7 +42,10 @@ Item {
 					   : "qrc:/images/icon_back_32.svg"
 
 		opacity: enabled ? 1.0 : 0.0
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration } }
+		Behavior on opacity {
+			enabled: root.animationEnabled
+			OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration }
+		}
 
 		onClicked: root.navigationButtonClicked()
 	}
@@ -78,7 +82,12 @@ Item {
 		}
 
 		opacity: enabled ? 1.0 : 0.0
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration } }
+		Behavior on opacity {
+			enabled: root.animationEnabled
+			OpacityAnimator {
+				duration: Theme.animation.page.idleOpacity.duration
+			}
+		}
 
 		width: Theme.geometry.statusBar.button.width
 		height: Theme.geometry.statusBar.button.height

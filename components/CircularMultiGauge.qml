@@ -13,6 +13,7 @@ Item {
 
 	property alias model: arcRepeater.model
 	readonly property real strokeWidth: Theme.geometry.circularMultiGauge.strokeWidth
+	property bool animationEnabled: true
 
 	// Step change in the size of the bounding boxes of successive gauges
 	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry.circularMultiGauge.spacing)
@@ -41,6 +42,7 @@ Item {
 				remainderColor: Theme.statusColorValue(status, true)
 				strokeWidth: gauges.strokeWidth
 				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
+				animationEnabled: gauges.animationEnabled
 			}
 		}
 	}

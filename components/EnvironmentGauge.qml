@@ -15,6 +15,7 @@ Item {
 	property alias zeroMarkerVisible: zeroMarker.visible
 	property bool reduceFontSize
 	property alias gradient: gaugeBar.gradient
+	property bool animationEnabled: true
 
 	function _barYPosForValue(v) {
 		const range = maximumValue - minimumValue
@@ -79,7 +80,7 @@ Item {
 
 			Behavior on y {
 				// Only animate when the value has changed, and not when the page is resizing
-				enabled: !Global.pageManager.animatingIdleResize
+				enabled: root.animationEnabled && !Global.pageManager.animatingIdleResize
 				NumberAnimation {}
 			}
 

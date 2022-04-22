@@ -15,6 +15,7 @@ FocusScope {
 	property int navigationButton
 	property color backgroundColor: Theme.color.page.background
 	property bool fullScreenWhenIdle
+	readonly property bool isCurrentPage: Global.pageManager.currentPage === root
 
 	width: parent ? parent.width : 0
 	height: parent ? parent.height : 0

@@ -9,6 +9,8 @@ import QtQuick.Controls.impl as CP
 Flickable {
 	id: root
 
+	property bool animationEnabled: true
+
 	width: parent.width
 	height: parent.height
 	contentWidth: contentRow.width
@@ -50,6 +52,7 @@ Flickable {
 			model: environmentLevels.model
 
 			delegate: EnvironmentGaugePanel {
+				animationEnabled: root.animationEnabled
 				horizontalSize: {
 					if (levelsRepeater.count === 0) {
 						return VenusOS.EnvironmentGaugePanel_Size_Expanded

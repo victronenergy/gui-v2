@@ -31,6 +31,7 @@ Rectangle {
 	property real segmentExpandedMargin
 	property bool expanded
 	property bool animateGeometry
+	property bool animationEnabled: true
 
 	function getCompactHeight(s) {
 		return s === VenusOS.OverviewWidget_Size_XL
@@ -85,6 +86,7 @@ Rectangle {
 
 	VerticalGauge {
 		id: sideGauge
+
 		anchors {
 			top: parent.top
 			bottom: parent.bottom
@@ -96,6 +98,7 @@ Rectangle {
 		backgroundColor: Theme.color.overviewPage.widget.sideGauge.background
 		foregroundColor: Theme.color.overviewPage.widget.sideGauge.highlight
 		visible: false
+		animationEnabled: root.animationEnabled
 	}
 
 	ValueDisplay {

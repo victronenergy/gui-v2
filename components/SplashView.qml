@@ -34,10 +34,12 @@ Rectangle {
 		indeterminate: root.visible
 	}
 
-	Timer {
-		id: loadFinishedTimer
-		interval: 3600
-		running: root.visible
-		onTriggered: root.hideSplash()
+	Connections {
+		ignoreUnknownSignals: true // SplashView gets created before PageManager - suppress warning messages about "no signal of the target matches the name"
+		target: Global.pageManager.emitter
+
+		function onAllPagesLoaded() {
+			root.hideSplash()
+		}
 	}
 }
