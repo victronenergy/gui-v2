@@ -11,13 +11,38 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	title: navStack.currentItem.title || ""
+	property int _loadedPages: 0
+
+	on_LoadedPagesChanged: {
+		if (_loadedPages === navBar.model.count) {
+			Global.pageManager.emitter.allPagesLoaded()
+		}
+	}
+
+	title: navStack.currentItem ? navStack.currentItem.title : ""
 	navigationButton: navStack.depth > 1
 			? VenusOS.StatusBar_NavigationButtonStyle_Back
 			: VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive
-	hasSidePanel: navStack.currentItem.hasSidePanel
-	backgroundColor: navStack.currentItem.backgroundColor
-	fullScreenWhenIdle: navStack.currentItem.fullScreenWhenIdle
+	hasSidePanel: navStack.currentItem ? navStack.currentItem.hasSidePanel : false
+	backgroundColor: navStack.currentItem ? navStack.currentItem.backgroundColor : Theme.color.page.background
+	fullScreenWhenIdle: navStack.currentItem ? navStack.currentItem.fullScreenWhenIdle : false
+
+	Repeater {
+		id: preloader // preload all of the pages to improve performance
+
+		model: navBar.model
+		Loader {
+			y: root.height
+			asynchronous: true
+			source: url
+			onStatusChanged: if (status === Loader.Ready) {
+				if (index === 0) {
+					navStack.push(item)
+				}
+				_loadedPages++
+			}
+		}
+	}
 
 	Connections {
 		target: Global.pageManager.emitter
@@ -42,8 +67,6 @@ Page {
 			top: parent.top
 			bottom: navBar.top
 		}
-
-		initialItem: navBar.currentUrl
 
 		// Fade new navigation pages in
 		replaceEnter: Transition {
@@ -79,7 +102,6 @@ Page {
 				iconHeight: 28
 				url: "qrc:/pages/BriefPage.qml"
 			}
-
 			ListElement {
 				//% "Overview"
 				text: QT_TRID_NOOP("nav_overview")
@@ -88,7 +110,6 @@ Page {
 				iconHeight: 22
 				url: "qrc:/pages/OverviewPage.qml"
 			}
-
 			ListElement {
 				//% "Levels"
 				text: QT_TRID_NOOP("nav_levels")
@@ -97,7 +118,6 @@ Page {
 				iconHeight: 20
 				url: "qrc:/pages/LevelsPage.qml"
 			}
-
 			ListElement {
 				//% "Notifications"
 				text: QT_TRID_NOOP("nav_notifications")
@@ -106,7 +126,6 @@ Page {
 				iconHeight: 26
 				url: "qrc:/pages/NotificationsPage.qml"
 			}
-
 			ListElement {
 				//% "Settings"
 				text: QT_TRID_NOOP("nav_settings")
@@ -118,12 +137,14 @@ Page {
 		}
 
 		property var currentUrl: navBar.model.get(0).url
+		property var currentItem: navBar.model.get(0).item
+		onCurrentUrlChanged: PageManager.sidePanelVisible = (currentUrl == navBar.model.get(0).url)
 
 		onButtonClicked: function (buttonIndex) {
 			var navUrl = model.get(buttonIndex).url
 			if (navUrl != currentUrl) {
 				currentUrl = navUrl
-				navStack.replace(null, navUrl)
+				navStack.replace(null, preloader.itemAt(buttonIndex).item)
 			}
 		}
 

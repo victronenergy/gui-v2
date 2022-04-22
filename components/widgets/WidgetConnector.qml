@@ -186,7 +186,10 @@ Item {
 					opacity: progress < 0.01 || progress > 0.8 ? 0 : 1
 
 					Behavior on opacity {
-						NumberAnimation { duration: Theme.animation.overviewPage.connector.fade.duration }
+						enabled: root._animated
+						NumberAnimation {
+							duration: Theme.animation.overviewPage.connector.fade.duration
+						}
 					}
 
 					// Cannot use PathAnimation, because after the first animation loop it ignores the

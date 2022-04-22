@@ -18,6 +18,7 @@ Item {
 	property alias radius: arc.radius
 	property alias strokeWidth: arc.strokeWidth
 	property alias direction: arc.direction
+	property alias animationEnabled: arc.animationEnabled
 	property int alignment: Qt.AlignLeft
 	property var arcX
 	property var arcY
