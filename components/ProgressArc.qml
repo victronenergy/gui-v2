@@ -24,6 +24,7 @@ Shape {
 	Behavior on transitionAngle {
 		enabled: control.animationEnabled
 		NumberAnimation {
+			onRunningChanged: console.log("ProgressArc animation: running:", running)
 			duration: Theme.animation.progressArc.duration
 			easing.type: Easing.InOutQuad
 		}

@@ -8,6 +8,8 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	objectName: "AcInputWidget"
+
 	property var input
 	property var phaseModel
 	property string phaseModelProperty

@@ -109,6 +109,7 @@ Item {
 		Behavior on startY {
 			enabled: root.animateGeometry
 			NumberAnimation {
+				onRunningChanged: console.log("WidgetConnector animation 1: running:", running)
 				duration: Theme.animation.page.idleResize.duration
 				easing.type: Easing.InOutQuad
 			}
@@ -117,6 +118,7 @@ Item {
 		Behavior on endY {
 			enabled: root.animateGeometry
 			NumberAnimation {
+				onRunningChanged: console.log("WidgetConnector animation 2: running:", running)
 				duration: Theme.animation.page.idleResize.duration
 				easing.type: Easing.InOutQuad
 			}
@@ -186,7 +188,11 @@ Item {
 					opacity: progress < 0.01 || progress > 0.8 ? 0 : 1
 
 					Behavior on opacity {
-						NumberAnimation { duration: Theme.animation.overviewPage.connector.fade.duration }
+						enabled: root._animated
+						NumberAnimation {
+							duration: Theme.animation.overviewPage.connector.fade.duration
+							onRunningChanged: console.log("WidgetConnector electronRepeater animation 1: running:", running)
+						}
 					}
 
 					// Cannot use PathAnimation, because after the first animation loop it ignores the
@@ -215,6 +221,7 @@ Item {
 	NumberAnimation {
 		id: electronAnim
 
+		onRunningChanged: console.log("WidgetConnector electronAnim: running:", running)
 		target: root
 		property: "_animationProgress"
 

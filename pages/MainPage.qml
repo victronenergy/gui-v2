@@ -11,13 +11,29 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	title: navStack.currentItem.title || ""
+	Repeater {
+		id: repeater
+
+		model: navBar.model
+		Loader {
+			y: root.height
+			asynchronous: true
+			source: url
+			onStatusChanged: if (status === Loader.Ready) {
+				if (index === 0) {
+					navStack.push(item)
+				}
+			}
+		}
+	}
+
+	title: navStack.currentItem ? navStack.currentItem.title : ""
 	navigationButton: navStack.depth > 1
 			? VenusOS.StatusBar_NavigationButtonStyle_Back
 			: VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive
-	hasSidePanel: navStack.currentItem.hasSidePanel
-	backgroundColor: navStack.currentItem.backgroundColor
-	fullScreenWhenIdle: navStack.currentItem.fullScreenWhenIdle
+	hasSidePanel: navStack.currentItem ? navStack.currentItem.hasSidePanel : false
+	backgroundColor: navStack.currentItem ? navStack.currentItem.backgroundColor : "black"
+	fullScreenWhenIdle: navStack.currentItem ? navStack.currentItem.fullScreenWhenIdle : false
 
 	Connections {
 		target: Global.pageManager.emitter
@@ -43,11 +59,10 @@ Page {
 			bottom: navBar.top
 		}
 
-		initialItem: navBar.currentUrl
-
 		// Fade new navigation pages in
 		replaceEnter: Transition {
 			OpacityAnimator {
+				onRunningChanged: console.log("MainPage animation 1: running:", running)
 				from: 0.0
 				to: 1.0
 				easing.type: Easing.InOutQuad
@@ -56,6 +71,7 @@ Page {
 		}
 		replaceExit: Transition {
 			OpacityAnimator {
+				onRunningChanged: console.log("MainPage animation 2: running:", running)
 				from: 1.0
 				to: 0.0
 				easing.type: Easing.InOutQuad
@@ -72,6 +88,15 @@ Page {
 
 		model: ListModel {
 			ListElement {
+				//% "Notifications"
+				text: QT_TRID_NOOP("nav_notifications")
+				icon: "qrc:/images/notifications.svg"
+				iconWidth: 28
+				iconHeight: 26
+				url: "qrc:/pages/NotificationsPage.qml"
+			}
+			/*
+			ListElement {
 				//% "Brief"
 				text: QT_TRID_NOOP("nav_brief")
 				icon: "qrc:/images/brief.svg"
@@ -79,7 +104,6 @@ Page {
 				iconHeight: 28
 				url: "qrc:/pages/BriefPage.qml"
 			}
-
 			ListElement {
 				//% "Overview"
 				text: QT_TRID_NOOP("nav_overview")
@@ -88,7 +112,6 @@ Page {
 				iconHeight: 22
 				url: "qrc:/pages/OverviewPage.qml"
 			}
-
 			ListElement {
 				//% "Levels"
 				text: QT_TRID_NOOP("nav_levels")
@@ -99,15 +122,6 @@ Page {
 			}
 
 			ListElement {
-				//% "Notifications"
-				text: QT_TRID_NOOP("nav_notifications")
-				icon: "qrc:/images/notifications.svg"
-				iconWidth: 28
-				iconHeight: 26
-				url: "qrc:/pages/NotificationsPage.qml"
-			}
-
-			ListElement {
 				//% "Settings"
 				text: QT_TRID_NOOP("nav_settings")
 				icon: "qrc:/images/settings.png"
@@ -115,15 +129,19 @@ Page {
 				iconHeight: 24
 				url: "qrc:/pages/SettingsPage.qml"
 			}
+			*/
+
 		}
 
 		property var currentUrl: navBar.model.get(0).url
+		property var currentItem: navBar.model.get(0).item
+		onCurrentUrlChanged: PageManager.sidePanelVisible = (currentUrl == navBar.model.get(0).url)
 
 		onButtonClicked: function (buttonIndex) {
 			var navUrl = model.get(buttonIndex).url
 			if (navUrl != currentUrl) {
 				currentUrl = navUrl
-				navStack.replace(null, navUrl)
+				navStack.replace(null, repeater.itemAt(buttonIndex).item)
 			}
 		}
 
@@ -143,11 +161,13 @@ Page {
 
 		SequentialAnimation {
 			id: animateNavBarIn
+			onRunningChanged: console.log("MainPage animation 3: running:", running)
 
 			running: Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
 					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
 
 			NumberAnimation {
+				onRunningChanged: console.log("MainPage animation 4: running:", running)
 				target: navBar
 				property: "y"
 				from: root.height
@@ -156,11 +176,13 @@ Page {
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
+				onRunningChanged: console.log("MainPage animation 5: running:", running)
 				script: {
 					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
 				}
 			}
 			OpacityAnimator {
+				onRunningChanged: console.log("MainPage animation 6: running:", running)
 				target: navBar
 				from: 0.0
 				to: 1.0
@@ -168,6 +190,7 @@ Page {
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
+				onRunningChanged: console.log("MainPage animation 77: running:", running)
 				script: {
 					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
 				}
@@ -177,10 +200,12 @@ Page {
 		SequentialAnimation {
 			id: animateNavBarOut
 
+			onRunningChanged: console.log("MainPage animation 7: running:", running)
 			running: Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
 					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
 
 			OpacityAnimator {
+				onRunningChanged: console.log("MainPage animation 8: running:", running)
 				target: navBar
 				from: 1.0
 				to: 0.0
@@ -188,11 +213,13 @@ Page {
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
+				onRunningChanged: console.log("MainPage animation 9: running:", running)
 				script: {
 					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
 				}
 			}
 			NumberAnimation {
+				onRunningChanged: console.log("MainPage animation 10: running:", running)
 				target: navBar
 				property: "y"
 				from: root.height - navBar.height
@@ -201,6 +228,7 @@ Page {
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
+				onRunningChanged: console.log("MainPage animation 11: running:", running)
 				script: {
 					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
 				}

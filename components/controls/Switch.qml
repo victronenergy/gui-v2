@@ -58,6 +58,7 @@ CT.Switch {
 
 		Behavior on x {
 			NumberAnimation {
+				onRunningChanged: console.log("Switch animation: running:", running)
 				duration: 200
 				easing.type: Easing.InOutQuad
 			}

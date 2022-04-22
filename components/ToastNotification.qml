@@ -27,7 +27,7 @@ Item {
 	implicitHeight: Math.max(Theme.geometry.toastNotification.minHeight,
 			label.implicitHeight + 2*Theme.geometry.toastNotification.label.padding)
 
-	Behavior on opacity { OpacityAnimator { duration: Theme.animation.toastNotification.fade.duration } }
+	Behavior on opacity { OpacityAnimator { duration: Theme.animation.toastNotification.fade.duration; onRunningChanged: console.log("ToastNotification: animator running:", running) } }
 	opacity: dismiss.dismissClicked ? 0.0
 		: dismiss.dismissAvailable  ? 1.0
 		: 0.0

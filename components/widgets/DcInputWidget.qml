@@ -8,6 +8,7 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	objectName: "DcInputWidget"
 	property var input
 
 	value: input ? input.current : NaN

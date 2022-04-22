@@ -16,6 +16,7 @@ C.StackView {
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {
 		NumberAnimation {
+			onRunningChanged: console.log("PageStack pushEnter animation: running:", running)
 			property: "x"
 			from: width
 			to: 0
@@ -25,6 +26,7 @@ C.StackView {
 	}
 	pushExit: Transition {
 		NumberAnimation {
+			onRunningChanged: console.log("PageStack pushExit animation: running:", running)
 			property: "x"
 			from: 0
 			to: -width
@@ -34,6 +36,7 @@ C.StackView {
 	}
 	popEnter: Transition {
 		NumberAnimation {
+			onRunningChanged: console.log("PageStack popEnter animation: running:", running)
 			property: "x"
 			from: -width
 			to: 0
@@ -43,6 +46,7 @@ C.StackView {
 	}
 	popExit: Transition {
 		NumberAnimation {
+			onRunningChanged: console.log("PageStack popExit animation: running:", running)
 			property: "x"
 			from: 0
 			to: width

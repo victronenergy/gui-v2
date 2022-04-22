@@ -13,6 +13,7 @@ Rectangle {
 
 	property color backgroundColor
 	property color foregroundColor
+	property alias animationEnabled: animation.enabled
 
 	gradient: Gradient { // Take care if modifying this; be sure to test the edge cases of value == 0.0 and value == 1.0
 		GradientStop { position: 0.0; color: root.value >= 1.0 ? root.foregroundColor : root.backgroundColor }
@@ -22,6 +23,8 @@ Rectangle {
 	}
 
 	Behavior on value {
-		NumberAnimation {}
+		id: animation
+
+		NumberAnimation { onRunningChanged: console.log("VerticalGauge animation: running:", running, root.objectName)}
 	}
 }

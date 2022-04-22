@@ -9,6 +9,7 @@ import QtQuick.Controls.impl as CP
 VerticalGauge {
 	id: root
 
+	objectName: "TankGauge"
 	property int gaugeValueType
 	property bool isGrouped: false
 

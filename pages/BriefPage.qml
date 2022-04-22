@@ -88,6 +88,7 @@ Page {
 
 		CircularMultiGauge {
 			model: gaugeData.model
+			animationEnabled: root.isCurrentPage
 		}
 	}
 
@@ -97,6 +98,7 @@ Page {
 		CircularSingleGauge {
 			model: gaugeData.model.get(0)
 			caption: battery && battery.timeToGo > 0 ? Utils.formatAsHHMM(battery.timeToGo, true) : ""
+			animationEnabled: root.isCurrentPage
 		}
 	}
 
@@ -113,6 +115,7 @@ Page {
 					"arcX": Qt.binding(function() { return leftGaugeTypes.length === 1 ? 10 : undefined } ),
 					"direction": PathArc.Clockwise,
 					"startAngle": Qt.binding(function() { return leftGaugeTypes.length === 2 ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)} ),
+					"animationEnabled": Qt.binding(function() { return root.isCurrentPage } ),
 					"source": "qrc:/images/generator.svg",
 					"value": Qt.binding(function() { return generatorPowerPercentage }),
 					"textValue": Qt.binding(function() { return generatorPower })
@@ -157,6 +160,7 @@ Page {
 		onGaugeTypeChanged: {
 			setSource('qrc:/components/SideGauge.qml', {
 				"gaugeAlignmentY": Qt.binding(function(){ return rightGaugeTypes.length == 2 ? Qt.AlignTop : Qt.AlignVCenter }),
+				"animationEnabled": Qt.binding(function() { return root.isCurrentPage } ),
 				"source": Qt.binding(function() {
 					return rightGaugeTypes.length == 2 ?
 						(gaugeType === 'acload' ? "qrc:/images/acloads.svg" : "qrc:/images/dcloads.svg") : "qrc:/images/consumption.svg"
@@ -187,6 +191,7 @@ Page {
 
 		onGaugeTypeChanged: {
 			setSource('qrc:/components/SideGauge.qml', {
+				"animationEnabled": Qt.binding(function() { return root.isCurrentPage } ),
 				"gaugeAlignmentY": Qt.AlignBottom,
 				"source": Qt.binding(function() { return (gaugeType === 'acload' ? "qrc:/images/acloads.svg" : "qrc:/images/dcloads.svg") }),
 				"value": Qt.binding(function() { return gaugeType === 'acload' ? acLoadPercentage : dcLoadPercentage }),
@@ -319,12 +324,15 @@ Page {
 			to: "panelOpen"
 			from: ""
 			SequentialAnimation {
+				onRunningChanged: console.log("BriefPage animation 10: running:", running)
 				NumberAnimation {
 					target: root
 					property: 'sideOpacity'
 					duration: Theme.animation.briefPage.edgeGauge.fade.duration
+					onRunningChanged: console.log("BriefPage animation 1: running:", running)
 				}
 				NumberAnimation {
+					onRunningChanged: console.log("BriefPage animation 2: running:", running)
 					target: sidePanel
 					properties: 'x,opacity'
 					duration: Theme.animation.briefPage.sidePanel.slide.duration
@@ -336,13 +344,16 @@ Page {
 			to: ""
 			from: "panelOpen"
 			SequentialAnimation {
+				onRunningChanged: console.log("BriefPage animation 3: running:", running)
 				NumberAnimation {
+					onRunningChanged: console.log("BriefPage animation 4: running:", running)
 					target: sidePanel
 					properties: 'x,opacity'
 					duration: Theme.animation.briefPage.sidePanel.slide.duration
 					easing.type: Easing.InQuad
 				}
 				NumberAnimation {
+					onRunningChanged: console.log("BriefPage animation 5: running:", running)
 					target: root
 					property: 'sideOpacity'
 					duration: Theme.animation.briefPage.edgeGauge.fade.duration

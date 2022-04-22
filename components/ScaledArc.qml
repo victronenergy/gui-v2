@@ -23,6 +23,7 @@ Shape {
 	Behavior on valueArc {
 		enabled: control.animationEnabled
 		NumberAnimation {
+			onRunningChanged: console.log("ScaledArc animation: running:", running)
 			duration: Theme.animation.progressArc.duration
 			easing.type: Easing.InOutQuad
 		}

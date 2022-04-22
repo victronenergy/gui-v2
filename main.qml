@@ -58,6 +58,7 @@ Window {
 
 		Behavior on opacity {
 			NumberAnimation {
+				onRunningChanged: console.log("splashView animation: running:", running)
 				duration: Theme.animation.page.fade.duration
 				easing.type: Easing.InOutQuad
 			}
@@ -77,6 +78,7 @@ Window {
 
 		Behavior on opacity {
 			NumberAnimation {
+				onRunningChanged: console.log("mainView animation: running:", running)
 				duration: Theme.animation.page.fade.duration
 				easing.type: Easing.InOutQuad
 			}
@@ -145,6 +147,7 @@ Window {
 
 		sourceComponent: Item {
 			property Demo.AcInputs acInputs: Demo.AcInputs {}
+			/*
 			property Demo.DcInputs dcInputs: Demo.DcInputs {}
 			property Demo.Battery battery: Demo.Battery {}
 			property Demo.EnvironmentLevels environmentLevels: Demo.EnvironmentLevels {}
@@ -156,6 +159,7 @@ Window {
 			property Demo.SolarChargers solarChargers: Demo.SolarChargers {}
 			property Demo.System system: Demo.System {}
 			property Demo.SystemSettings systemSettings: Demo.SystemSettings {}
+			*/
 
 			Demo.DemoConfig {}
 		}

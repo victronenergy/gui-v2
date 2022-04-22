@@ -8,6 +8,8 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	objectName: "SolarYieldWidget"
+
 	property var yieldHistory: []
 
 	//% "Solar yield"

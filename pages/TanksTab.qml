@@ -15,6 +15,7 @@ ListView {
 	id: root
 
 	property bool animateModelChanges
+	property bool animationEnabled: true
 
 	property int _tankItemCount // No. of visible tank items, where merged tanks only count as one item
 	property var _mergedTankTypes: []
@@ -100,6 +101,7 @@ ListView {
 				LevelsPageGaugeDelegate {
 					id: gaugeDelegate
 
+					animationEnabled: root.animationEnabled
 					tankType: tankTypeDelegate.tankType
 					title: mergeTanks
 						   ? tankProperties.name
@@ -152,6 +154,7 @@ ListView {
 		active: false
 		sourceComponent: ExpandedTanksView {
 			tankModel: expandedTanksLoader.tankModel
+			animationEnabled: root.animationEnabled
 		}
 	}
 }

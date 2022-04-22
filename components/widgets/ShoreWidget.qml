@@ -8,6 +8,7 @@ import Victron.VenusOS
 AcInputWidget {
 	id: root
 
+	objectName: "ShoreWidget"
 	//% "Shore"
 	title.text: qsTrId("overview_widget_shore_title")
 	icon.source: "qrc:/images/shore.svg"

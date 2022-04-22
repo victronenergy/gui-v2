@@ -11,6 +11,7 @@ import "/components/Units.js" as Units
 Rectangle {
 	id: root
 
+	property bool animationEnabled: true
 	property int tankType
 	property alias title: label.text
 	property alias icon: img
@@ -55,8 +56,9 @@ Rectangle {
 	border.color: tankProperties.borderColor
 
 	Behavior on height {
-		enabled: Global.pageManager.animatingIdleResize
+		enabled: root.animationEnabled && Global.pageManager.animatingIdleResize
 		NumberAnimation {
+			onRunningChanged: console.log("LevelsPageGaugeDelegate: animation: running:", running)
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad
 		}
@@ -112,6 +114,8 @@ Rectangle {
 			delegate: Loader {
 				active: model.index === 0 || root.mergeTanks
 				sourceComponent: TankGauge {
+					objectName: "LevelsPageGaugeDelegate"
+					animationEnabled: root.animationEnabled
 					width: root._gaugeDelegateWidth
 					height: subgauges.height
 					gaugeValueType: root.tankProperties.valueType

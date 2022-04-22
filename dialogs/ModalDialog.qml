@@ -22,10 +22,10 @@ C.Dialog {
 	anchors.centerIn: parent
 
 	enter: Transition {
-		NumberAnimation { properties: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
+		NumberAnimation { properties: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration; onRunningChanged: console.log("ModalDialog: running:", running) }
 	}
 	exit: Transition {
-		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration }
+		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration; onRunningChanged: console.log("ModalDialog: running:", running) }
 	}
 
 	background: Rectangle {

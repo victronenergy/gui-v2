@@ -8,6 +8,7 @@ import Victron.VenusOS
 AcInputWidget {
 	id: root
 
+	objectName: "GridWidget"
 	//% "Grid"
 	title.text: qsTrId("overview_widget_grid_title")
 	icon.source: "qrc:/images/grid.svg"

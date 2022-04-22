@@ -69,7 +69,7 @@ Item {
 			property Timer _dummyValues: Timer {
 				running: true
 				repeat: true
-				interval: 10000 + (Math.random() * 10000)
+				interval: 200//10000 + (Math.random() * 10000)
 				triggeredOnStart: true
 
 				onTriggered: {

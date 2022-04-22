@@ -9,6 +9,7 @@ Rectangle {
 	property real humidity: NaN
 	property int horizontalSize: VenusOS.EnvironmentGaugePanel_Size_Expanded
 	property int verticalSize: VenusOS.EnvironmentGaugePanel_Size_Expanded
+	property bool animationEnabled: true
 
 	readonly property int compactWidth: _twoGauges
 		? Theme.geometry.levelsPage.environment.gaugePanel.twoGauge.compact.width
@@ -28,7 +29,8 @@ Rectangle {
 	radius: Theme.geometry.levelsPage.environment.gaugePanel.radius
 
 	Behavior on height {
-		NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
+		enabled: root.animationEnabled
+		NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad; onRunningChanged: console.log("EnvironmentGaugePanel animation: running:", running) }
 	}
 
 	Rectangle {
@@ -72,6 +74,7 @@ Rectangle {
 			horizontalCenter: humidityGaugeLoader.active ? undefined : parent.horizontalCenter
 		}
 
+		animationEnabled: root.animationEnabled
 		icon.source: "qrc:/images/icon_temp_32.svg"
 		//: Abbreviation of "Celsius"
 		//% "C"
@@ -117,6 +120,7 @@ Rectangle {
 			//: Abbreviation of "Room Humidity"
 			//% "RH"
 			text: qsTrId("environment_gauge_humidity")
+			animationEnabled: root.animationEnabled
 			physicalQuantity: VenusOS.Units_PhysicalQuantity_Percentage
 			value: Math.round(root.humidity)
 			zeroMarkerVisible: false
@@ -140,5 +144,4 @@ Rectangle {
 			}
 		}
 	}
-
 }

@@ -360,7 +360,8 @@ int main(int argc, char *argv[])
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
 
-	engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
+	//engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
+	engine.rootContext()->setContextProperty("dbusConnected", false);
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
 	if (component.isError()) {

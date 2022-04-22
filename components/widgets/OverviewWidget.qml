@@ -7,7 +7,7 @@ import Victron.VenusOS
 
 Rectangle {
 	id: root
-
+	objectName: "OverviewWidget"
 	property int type: VenusOS.OverviewWidget_Type_UnknownType
 	property int size: VenusOS.OverviewWidget_Size_M
 
@@ -31,6 +31,7 @@ Rectangle {
 	property real segmentExpandedMargin
 	property bool expanded
 	property bool animateGeometry
+	property bool animationEnabled: true
 
 	function getCompactHeight(s) {
 		return s === VenusOS.OverviewWidget_Size_XL
@@ -70,6 +71,7 @@ Rectangle {
 	Behavior on height {
 		enabled: root.animateGeometry
 		NumberAnimation {
+			onRunningChanged: console.log("OverviewWidget animation 1: running:", running)
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad
 		}
@@ -78,6 +80,7 @@ Rectangle {
 	Behavior on y {
 		enabled: root.animateGeometry
 		NumberAnimation {
+			onRunningChanged: console.log("OverviewWidget animation 2: running:", running)
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad
 		}
@@ -85,6 +88,8 @@ Rectangle {
 
 	VerticalGauge {
 		id: sideGauge
+
+		objectName: root.objectName
 		anchors {
 			top: parent.top
 			bottom: parent.bottom
@@ -96,6 +101,7 @@ Rectangle {
 		backgroundColor: Theme.color.overviewPage.widget.sideGauge.background
 		foregroundColor: Theme.color.overviewPage.widget.sideGauge.highlight
 		visible: false
+		animationEnabled: root.animationEnabled
 	}
 
 	ValueDisplay {

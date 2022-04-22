@@ -35,9 +35,11 @@ T.ProgressBar {
 			property int startX: 0
 
 			SequentialAnimation on startX {
+				onRunningChanged: console.log("ProgressBar animation 1: running:", running)
 				loops: Animation.Infinite
 				running: root.indeterminate
 				NumberAnimation {
+					onRunningChanged: console.log("ProgressBar animation 2: running:", running)
 					from: -container.width
 					to: root.width
 					duration: Theme.animation.progressBar.duration

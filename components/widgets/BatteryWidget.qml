@@ -9,6 +9,7 @@ import "../Utils.js" as Utils
 OverviewWidget {
 	id: root
 
+	objectName: "BatteryWidget"
 	property var batteryData
 	property alias animationRunning: barAnimation.running
 	property alias animationPaused: barAnimation.paused
@@ -120,7 +121,10 @@ OverviewWidget {
 					}
 				}
 
-				onCountChanged: Qt.callLater(root._updateBarAnimation)
+				onCountChanged: {
+					console.log("animatedBarsRepeater.count:", count)
+					Qt.callLater(root._updateBarAnimation)
+				}
 			}
 		}
 
@@ -137,10 +141,13 @@ OverviewWidget {
 	SequentialAnimation {
 		id: barAnimation
 
+		onRunningChanged: console.log("BatteryWidget bar animation 1: running:", running)
 		loops: Animation.Infinite
 
 		ParallelAnimation {
+			onRunningChanged: console.log("BatteryWidget bar animation 10: running:", running)
 			NumberAnimation {
+				onRunningChanged: console.log("BatteryWidget bar animation 2: running:", running)
 				targets: root._evenAnimationTargets
 				property: "barWidth"
 				from: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
@@ -149,6 +156,7 @@ OverviewWidget {
 				alwaysRunToEnd: true
 			}
 			NumberAnimation {
+				onRunningChanged: console.log("BatteryWidget bar animation 3: running:", running)
 				targets: root._oddAnimationTargets
 				property: "barWidth"
 				from: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
@@ -158,10 +166,13 @@ OverviewWidget {
 			}
 		}
 		PauseAnimation {
+			onRunningChanged: console.log("BatteryWidget bar animation 4: running:", running)
 			duration: 200
 		}
 		ParallelAnimation {
+			onRunningChanged: console.log("BatteryWidget bar animation 5: running:", running)
 			NumberAnimation {
+				onRunningChanged: console.log("BatteryWidget bar animation 6: running:", running)
 				targets: root._evenAnimationTargets
 				property: "barWidth"
 				from: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
@@ -170,6 +181,7 @@ OverviewWidget {
 				alwaysRunToEnd: true
 			}
 			NumberAnimation {
+				onRunningChanged: console.log("BatteryWidget bar animation 7: running:", running)
 				targets: root._oddAnimationTargets
 				property: "barWidth"
 				from: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
@@ -179,6 +191,7 @@ OverviewWidget {
 			}
 		}
 		PauseAnimation {
+			onRunningChanged: console.log("BatteryWidget bar animation 8: running:", running)
 			duration: 200
 		}
 	}

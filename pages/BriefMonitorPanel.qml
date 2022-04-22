@@ -257,4 +257,5 @@ Column {
 			}
 		}
 	}
+	Component.onCompleted: console.log("blah")
 }

@@ -8,6 +8,8 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	objectName: "InverterWidget"
+
 	property int systemState
 
 	//% "Inverter / Charger"

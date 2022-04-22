@@ -137,7 +137,7 @@ Item {
 				const demo = _demos[demoUrl]
 				if (Global.pageManager.navBar.currentUrl === demoUrl) {
 					if (demo.configIndex === -1) {
-						setConfigIndex(demo, -1, false)
+						//setConfigIndex(demo, -1, false)
 					}
 					break
 				}

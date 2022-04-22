@@ -33,6 +33,7 @@ Shape {
 		duration: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
 		loops: Animation.Infinite
 		running: root.enableAnimation
+		onRunningChanged: console.log("LoadGraphShapePath: animation running:", running)
 	}
 	ShapePath {
 		id: shapePath
