@@ -275,6 +275,8 @@ Page {
 		}
 	}
 
+	fullScreenWhenIdle: true
+
 	SegmentedWidgetBackground {
 		id: segmentedBackground
 

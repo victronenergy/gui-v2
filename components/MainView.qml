@@ -60,12 +60,10 @@ Item {
 
 			function onLayerPushRequested(obj, properties) {
 				pageStack.push(obj, properties)
-				PageManager.mainPageActive = pageStack.depth === 1
 			}
 
 			function onLayerPopRequested() {
 				pageStack.pop()
-				PageManager.mainPageActive = pageStack.depth === 1
 			}
 		}
 	}

@@ -13,14 +13,13 @@ FocusScope {
 	property string title
 	property bool hasSidePanel
 	property int navigationButton
-	property bool isCurrentPage
 	property color backgroundColor: Theme.color.page.background
+	property bool fullScreenWhenIdle
 
 	width: parent ? parent.width : 0
 	height: parent ? parent.height : 0
 
-	C.StackView.onActivated: isCurrentPage = true
-	C.StackView.onDeactivated: isCurrentPage = false
+	C.StackView.onActivated: PageManager.currentPage = root
 
 	// TODO only pass this on if demo mode is active
 	Keys.onReleased: function(event) {
