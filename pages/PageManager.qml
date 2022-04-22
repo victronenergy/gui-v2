@@ -28,8 +28,8 @@ QtObject {
 	}
 
 	// Ugly hack, but ...
+	property var currentPage
 	property bool sidePanelActive
-	property bool mainPageActive: true
 	property var navBar
 	property var statusBar
 	property int levelsTabIndex
@@ -44,10 +44,7 @@ QtObject {
 			|| PageManager.interactivity === PageManager.InteractionMode.Idle
 
 	property Timer idleModeTimer: Timer {
-		running: root.mainPageActive
-			&& root.navBar
-			&& (root.navBar.currentUrl == "qrc:/pages/OverviewPage.qml"
-				|| root.navBar.currentUrl == "qrc:/pages/LevelsPage.qml")
+		running: root.currentPage && root.currentPage.fullScreenWhenIdle
 			&& root.interactivity === PageManager.InteractionMode.Interactive
 		interval: Theme.animation.page.idleResize.timeout
 		onTriggered: root.interactivity = PageManager.InteractionMode.EnterIdleMode

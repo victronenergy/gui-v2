@@ -17,6 +17,7 @@ Page {
 			: StatusBar.NavigationButton.ControlsInactive
 	hasSidePanel: navStack.currentItem.hasSidePanel
 	backgroundColor: navStack.currentItem.backgroundColor
+	fullScreenWhenIdle: navStack.currentItem.fullScreenWhenIdle
 
 	Connections {
 		target: PageManager.emitter
@@ -33,7 +34,7 @@ Page {
 	C.StackView {
 		id: navStack
 		clip: true
-		focus: root.isCurrentPage
+		focus: PageManager.currentPage === root
 
 		anchors {
 			left: parent.left

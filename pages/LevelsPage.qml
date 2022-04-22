@@ -9,6 +9,8 @@ import QtQuick.Controls.impl as CP
 Page {
 	id: root
 
+	fullScreenWhenIdle: true
+
 	TabBar {
 		id: tabBar
 
