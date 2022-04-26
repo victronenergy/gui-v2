@@ -4,13 +4,11 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
 
 SettingsListItem {
 	id: root
 
-	property string source
-	readonly property alias veItem: veItem
+	property alias source: dataPoint.source
 	readonly property alias slider: slider
 
 	property real _emittedValue
@@ -19,7 +17,7 @@ SettingsListItem {
 
 	onValueChanged: function(value) {
 		if (source.length > 0) {
-			veItem.setValue(value)
+			dataPoint.setValue(value)
 		}
 	}
 
@@ -45,10 +43,10 @@ SettingsListItem {
 			width: Theme.geometry.settingsListItem.slider.width
 			live: false
 
-			from: veItem.min !== undefined ? veItem.min : 0
-			to: veItem.max !== undefined ? veItem.max : 1
+			from: dataPoint.min !== undefined ? dataPoint.min : 0
+			to: dataPoint.max !== undefined ? dataPoint.max : 1
 			stepSize: (to-from) / Theme.geometry.settingsListItem.slider.stepDivsion
-			value: to > from && veItem.value !== undefined ? veItem.value : 0
+			value: to > from && dataPoint.value !== undefined ? dataPoint.value : 0
 
 			onPressedChanged: {
 				if (slider.value !== root._emittedValue) {
@@ -73,8 +71,7 @@ SettingsListItem {
 		}
 	]
 
-	VeQuickItem {
-		id: veItem
-		uid: source.length > 0 && dbusConnected ? "dbus/" + source : ""
+	DataPoint {
+		id: dataPoint
 	}
 }

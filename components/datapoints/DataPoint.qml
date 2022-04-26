@@ -19,7 +19,6 @@ QtObject {
 	property var max: sourceObject ? sourceObject.max : undefined
 
 	property var _dbusImpl
-	property bool _deleted
 
 	function setValue(v) {
 		if (sourceObject) {
@@ -30,7 +29,7 @@ QtObject {
 	}
 
 	function _dbusImplStatusChanged() {
-		if (!_dbusImpl || _deleted) {
+		if (!_dbusImpl) {
 			return
 		}
 		if (_dbusImpl.status === Component.Error) {
@@ -81,5 +80,11 @@ QtObject {
 
 	onSourceTypeChanged: _reset()
 	Component.onCompleted: _reset()
-	Component.onDestruction: _deleted = true
+	Component.onDestruction: {
+		if (_dbusImpl) {
+			// Precaution for if asynchronous component creation finishes after object destruction.
+			_dbusImpl.statusChanged.disconnect(_dbusImplStatusChanged)
+			_dbusImpl = null
+		}
+	}
 }

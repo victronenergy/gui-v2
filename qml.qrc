@@ -14,6 +14,16 @@
         <file>components/datapoints/DataPoint.qml</file>
         <file>components/datapoints/DataPointDBusImpl.qml</file>
         <file>components/datapoints/DemoModeDataPoint.qml</file>
+        <file>components/settings/SettingsListButton.qml</file>
+        <file>components/settings/SettingsListView.qml</file>
+        <file>components/settings/SettingsListNavigationItem.qml</file>
+        <file>components/settings/SettingsListRadioButton.qml</file>
+        <file>components/settings/SettingsListRadioButtonGroup.qml</file>
+        <file>components/settings/SettingsListSlider.qml</file>
+        <file>components/settings/SettingsListSwitch.qml</file>
+        <file>components/settings/SettingsListItem.qml</file>
+        <file>components/settings/SettingsListTextItem.qml</file>
+        <file>components/settings/SettingsListTextGroup.qml</file>
         <file>components/widgets/AcInputWidget.qml</file>
         <file>components/widgets/DcInputWidget.qml</file>
         <file>components/widgets/OverviewWidget.qml</file>
@@ -63,16 +73,6 @@
         <file>components/ScaledArcGauge.qml</file>
         <file>components/SideGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
-        <file>components/SettingsListButton.qml</file>
-        <file>components/SettingsListView.qml</file>
-        <file>components/SettingsListNavigationItem.qml</file>
-        <file>components/SettingsListRadioButton.qml</file>
-        <file>components/SettingsListRadioButtonGroup.qml</file>
-        <file>components/SettingsListSlider.qml</file>
-        <file>components/SettingsListSwitch.qml</file>
-        <file>components/SettingsListItem.qml</file>
-        <file>components/SettingsListTextItem.qml</file>
-        <file>components/SettingsListTextGroup.qml</file>
         <file>components/SeparatorBar.qml</file>
         <file>components/SolarYieldGraph.qml</file>
         <file>components/SplashView.qml</file>
