@@ -4,31 +4,22 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
-import "/components/Utils.js" as Utils
 
 Item {
 	id: root
 
-	property ListModel model: ListModel {}
-
 	function populate() {
-		model.clear()
 		const inputCount = _rand(1, 8)
 		for (let i = 0; i < inputCount; ++i) {
-			var data = {
+			const inputObj = inputComponent.createObject(root, {
 				customName: "Sensor " + (i + 1),
 				temperature: _rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
 						Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue),
 				humidity: _rand(Theme.geometry.levelsPage.environment.humidityGauge.minimumValue,
 						Theme.geometry.levelsPage.environment.humidityGauge.maximumValue)
-			}
-			addInput(data)
+			})
+			Global.environmentInputs.addInput(inputObj)
 		}
-	}
-
-	function addInput(data) {
-		model.append({'input': data })
 	}
 
 	function _rand(min, max) {
@@ -36,23 +27,50 @@ Item {
 		return (Math.random() * range) + min
 	}
 
-	Instantiator {
-		model: root.model
+	property Component inputComponent: Component {
+		QtObject {
+			property string customName
+			property real temperature
+			property real humidity
+		}
+	}
+
+	property Connections demoConn: Connections {
+		target: Global.demoManager || null
+
+		function onSetEnvironmentInputsRequested(config) {
+			Global.environmentInputs.model.clear()
+
+			if (config) {
+				for (let i = 0; i < config.length; ++i) {
+					const inputObj = inputComponent.createObject(root, config[i])
+					Global.environmentInputs.addInput(inputObj)
+				}
+			}
+		}
+	}
+
+	property Instantiator inputObjects: Instantiator {
+		model: Global.environmentInputs.model
 
 		delegate: Timer {
-			running: Global.pageManager.navBar.currentUrl === "qrc:/pages/LevelsPage.qml"
+			running: Global.demoManager.timersActive
 			repeat: true
 			interval: 10 * 1000
 			onTriggered: {
-				let data = root.model.get(model.index)
+				let data = Global.environmentInputs.model.get(model.index)
 				data.temperature = root._rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
 						Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
 				if (!isNaN(model.humidity)) {
 					data.humidity = root._rand(Theme.geometry.levelsPage.environment.humidityGauge.minimumValue,
 							Theme.geometry.levelsPage.environment.humidityGauge.maximumValue)
 				}
-				root.model.set(model.index, data)
+				Global.environmentInputs.model.set(model.index, data)
 			}
 		}
+	}
+
+	Component.onCompleted: {
+		populate()
 	}
 }

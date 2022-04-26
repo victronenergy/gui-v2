@@ -4,14 +4,12 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
 import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
 
-
-	property int state: veSystemState.value || VenusOS.System_State_Off
+	property int state
 
 	property QtObject loads: QtObject {
 		readonly property real power: ac.consumption.power + dc.power
@@ -27,8 +25,10 @@ Item {
 	property SystemAc ac: SystemAc {}
 	property SystemDc dc: SystemDc {}
 
-	VeQuickItem {
-		id: veSystemState
-		uid: veSystem.childUId("SystemState/State")
+	function reset() {
+		ac.reset()
+		dc.reset()
 	}
+
+	Component.onCompleted: Global.system = root
 }

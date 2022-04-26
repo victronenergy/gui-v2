@@ -3,14 +3,14 @@
 */
 
 import QtQuick
-import Victron.Velib
-import "/components/Utils.js" as Utils
+import Victron.VenusOS
 
-Item {
+QtObject {
 	id: root
 
-	property real power: _systemPower.value === undefined ? NaN : (_systemPower.value || 0)
-	onPowerChanged: Utils.updateMaximumValue("system.dc.power", power)
+	property real power
 
-	property VeQuickItem _systemPower: VeQuickItem { uid: veSystem.childUId("/Dc/System/Power") }
+	function reset() {
+		power = NaN
+	}
 }

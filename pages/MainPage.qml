@@ -5,7 +5,6 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls as C
-import Victron.Velib
 import Victron.VenusOS
 
 Page {
@@ -45,7 +44,7 @@ Page {
 	}
 
 	Connections {
-		target: Global.pageManager.emitter
+		target: Global.pageManager ? Global.pageManager.emitter : null
 
 		function onPagePushRequested(obj, properties) {
 			navStack.push(obj, properties)

@@ -224,14 +224,6 @@ public:
 	};
 	Q_ENUM(Inverters_Mode)
 
-	enum Inverters_InputType {
-		Inverters_InputType_Unused = 0,
-		Inverters_InputType_Grid,
-		Inverters_InputType_Generator,
-		Inverters_InputType_Shore
-	};
-	Q_ENUM(Inverters_InputType)
-
 	enum Relays_State {
 		Relays_State_Inactive = 0,
 		Relays_State_Active
@@ -291,6 +283,20 @@ public:
 		PageManager_InteractionMode_ExitIdleMode     // Fade in nav bar
 	};
 	Q_ENUM(PageManager_InteractionMode)
+
+	enum DataPoint_SourceType {
+		DataPoint_UnknownSource,
+		DataPoint_DBusSource,
+		DataPoint_MockSource
+	};
+	Q_ENUM(DataPoint_SourceType)
+
+	enum SystemSettings_DemoMode {
+		SystemSettings_DemoModeInactive,
+		SystemSettings_DemoModeActive,
+		SystemSettings_DemoModeUnknown = 255
+	};
+	Q_ENUM(SystemSettings_DemoMode)
 };
 
 }

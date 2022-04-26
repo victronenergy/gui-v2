@@ -62,24 +62,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Global");
 
 	/* data sources */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Battery.qml")),
-		"Victron.VenusOS", 2, 0, "Battery");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/AcInputs.qml")),
-		"Victron.VenusOS", 2, 0, "AcInputs");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DcInputs.qml")),
-		"Victron.VenusOS", 2, 0, "DcInputs");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Ess.qml")),
-		"Victron.VenusOS", 2, 0, "Ess");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Generators.qml")),
-		"Victron.VenusOS", 2, 0, "Generators");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Inverters.qml")),
-		"Victron.VenusOS", 2, 0, "Inverters");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Relays.qml")),
-		"Victron.VenusOS", 2, 0, "Relays");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/System.qml")),
-		"Victron.VenusOS", 2, 0, "System");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/Tanks.qml")),
-		"Victron.VenusOS", 2, 0, "Tanks");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DataManager.qml")),
+		"Victron.VenusOS", 2, 0, "DataManager");
 
 	/* controls */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Button.qml")),
@@ -208,6 +192,12 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ValueQuantityDisplay");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
+
+	/* data points */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/datapoints/DataPoint.qml")),
+		"Victron.VenusOS", 2, 0, "DataPoint");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/datapoints/DemoModeDataPoint.qml")),
+		"Victron.VenusOS", 2, 0, "DemoModeDataPoint");
 
 	/* widgets */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/OverviewWidget.qml")),

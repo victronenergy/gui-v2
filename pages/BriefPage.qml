@@ -3,7 +3,6 @@
 */
 
 import QtQuick
-import Victron.Velib
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 import "/components/Gauges.js" as Gauges
@@ -12,23 +11,23 @@ import "../data"
 Page {
 	id: root
 
-	readonly property bool solarYieldPresent: solarChargers && solarChargers.model.count > 0
+	readonly property bool solarYieldPresent: Global.solarChargers.model.count > 0
 
-	readonly property bool generatorPresent: system && system.generator.power
-	readonly property real generatorPower: system ? system.generator.power : 0
+	readonly property bool generatorPresent: !isNaN(Global.system.generator.power)
+	readonly property real generatorPower: Global.system.generator.power
 	readonly property real generatorPowerPercentage: generatorPower / Utils.maximumValue("system.generator.power") * 100
 
-	readonly property bool acLoadPresent: system && system.ac.consumption.power
-	readonly property real acLoad: acLoadPresent ? system.ac.consumption.power : 0
+	readonly property bool acLoadPresent: Global.system.ac.consumption.power
+	readonly property real acLoad: acLoadPresent ? Global.system.ac.consumption.power : 0
 	readonly property real acLoadPercentage: acLoad / Utils.maximumValue("system.ac.consumption.power") * 100
 
-	readonly property bool dcLoadPresent: system && system.dc.power
-	readonly property real dcLoad: dcLoadPresent ? system.dc.power : 0
+	readonly property bool dcLoadPresent: !isNaN(Global.system.dc.power)
+	readonly property real dcLoad: dcLoadPresent ? Global.system.dc.power : 0
 	readonly property real dcLoadPercentage: dcLoad / Utils.maximumValue("system.dc.power") * 100
 
-	readonly property bool combinedLoadPresent: system && system.loads.power
-	readonly property real combinedLoad: combinedLoadPresent ? system.loads.power : 0
-	readonly property real combinedLoadPercentage: combinedLoadPresent ? system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
+	readonly property bool combinedLoadPresent: !isNaN(Global.system.loads.power)
+	readonly property real combinedLoad: combinedLoadPresent ? Global.system.loads.power : 0
+	readonly property real combinedLoadPercentage: combinedLoadPresent ? Global.system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
 
 	property var leftGaugeTypes: []
 	property var rightGaugeTypes: []
@@ -71,8 +70,6 @@ Page {
 	Loader {
 		id: mainGauge
 
-		property bool multipleValues: gaugeData.model.count > 1
-
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry.mainGauge.topMargin
@@ -80,7 +77,7 @@ Page {
 		width: Theme.geometry.mainGauge.size
 		height: width
 		x: sidePanel.x/2 - width/2
-		sourceComponent: gaugeData.model.count === 0 ? null : (multipleValues ? multiGauge : singleGauge)
+		sourceComponent: Global.tanks.totalTankCount <= 1 ? singleGauge : multiGauge
 	}
 
 	Component {
@@ -96,8 +93,13 @@ Page {
 		id: singleGauge
 
 		CircularSingleGauge {
-			model: gaugeData.model.get(0)
-			caption: battery && battery.timeToGo > 0 ? Utils.formatAsHHMM(battery.timeToGo, true) : ""
+			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
+
+			name: properties.name
+			icon.source: Global.battery.icon
+			value: Math.round(Global.battery.stateOfCharge || 0)
+			status: Gauges.getValueStatus(value, properties.valueType)
+			caption: Global.battery.timeToGo > 0 ? Utils.formatAsHHMM(Global.battery.timeToGo, true) : ""
 			animationEnabled: root.isCurrentPage
 		}
 	}
@@ -226,71 +228,45 @@ Page {
 	Item {
 		id: gaugeData
 
-		property ListModel model: ListModel {}
-
-		Connections {
-			target: tanks
-
-			function onTotalTankCountChanged() {
-				let i
-				if (tanks.totalTankCount === 0) {
-					// Just show battery
-					for (i = gaugeData.model.count-1; i > 0; --i) {
-						if (gaugeData.model.get(i).tankType !== VenusOS.Tank_Type_Battery) {
-							gaugeData.model.remove(i)
-						}
-					}
-					if (gaugeData.model.count === 0) {
-						gaugeData.model.append(Object.assign({},
-								Gauges.tankProperties(VenusOS.Tank_Type_Battery),
-								{ tankType:VenusOS.Tank_Type_Battery, value: 0 }))
-					}
-				} else if (gaugeObjects.count === 0 || gaugeObjects.count === 1) {
-					// Multiple tanks are available now, so update the UI
-					for (i = 0; i < systemSettings.briefView.gauges.count; ++i) {
-						const tankType = systemSettings.briefView.gauges.get(i).value
-						const tankData = Object.assign({},
-								Gauges.tankProperties(tankType),
-								{ tankType: tankType, value: 0 })
-						if (i < gaugeData.model.count) {
-							gaugeData.model.set(i, tankData)
-						} else {
-							gaugeData.model.append(tankData)
-						}
-					}
+		property ListModel model: ListModel {
+			Component.onCompleted: {
+				for (let i = 0; i < Global.systemSettings.briefView.gauges.count; ++i) {
+					const tankType = Global.systemSettings.briefView.gauges.get(i).value
+					append(Object.assign({},
+						   Gauges.tankProperties(tankType),
+						   { tankType: tankType, value: 0 }))
 				}
 			}
-
-			Component.onCompleted: onTotalTankCountChanged()
 		}
 
 		Instantiator {
 			id: gaugeObjects
 
-			model: gaugeData.model
+			model: Global.systemSettings.briefView.gauges
 
 			delegate: QtObject {
-				readonly property int tankType: model.tankType
+				readonly property int tankType: model.value
 				readonly property bool isBattery: tankType === VenusOS.Tank_Type_Battery
-				readonly property string tankName: model.name
-				readonly property string tankIcon: isBattery ? battery.icon : model.icon
-				readonly property var tankModel: isBattery ? 1 : tanks.tankModel(tankType)
-				readonly property var tankModelCount: isBattery ? 1 : tankModel.count
+				readonly property string tankName: _tankProperties.name
+				readonly property string tankIcon: isBattery ? Global.battery.icon : _tankProperties.icon
+				readonly property var tankModel: isBattery ? 1 : Global.tanks.tankModel(tankType)
 				property bool deleted
 
-				readonly property var _tankProperties: Gauges.tankProperties(tankType)
-
 				readonly property real tankLevel: isBattery
-						? Math.round(battery ? battery.stateOfCharge : 0)
-						: (tankModelCount === 0 || tankModel.totalCapacity === 0
+						? Math.round(Global.battery.stateOfCharge || 0)
+						: (tankModel.count === 0 || tankModel.totalCapacity === 0
 						   ? 0
 						   : (tankModel.totalRemaining / tankModel.totalCapacity) * 100)
+
+				readonly property var _tankProperties: Gauges.tankProperties(tankType)
 
 				function updateGaugeModel() {
 					if (deleted) {
 						return
 					}
-					gaugeData.model.set(model.index, { name: tankName, icon: tankIcon, value: tankLevel })
+					if (model.index < gaugeData.model.count) {
+						gaugeData.model.set(model.index, { name: tankName, icon: tankIcon, value: tankLevel })
+					}
 				}
 
 				// If tank data changes, update the model at the end of the event loop to avoid
@@ -298,7 +274,6 @@ Page {
 				onTankNameChanged: Qt.callLater(updateGaugeModel)
 				onTankIconChanged: Qt.callLater(updateGaugeModel)
 				onTankLevelChanged: Qt.callLater(updateGaugeModel)
-				onTankModelCountChanged: Qt.callLater(updateGaugeModel)
 
 				Component.onDestruction: deleted = true
 			}

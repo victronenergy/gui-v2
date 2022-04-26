@@ -4,23 +4,17 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
-import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
 
-	property ListModel model: ListModel {
-		Component.onCompleted: {
-			for (let i = 0; i < instantiator.count; ++i) {
-				append({ relay: instantiator.objectAt(i) })
-			}
+	function populate() {
+		for (let i = 0; i < relayObjects.count; ++i) {
+			Global.relays.addRelay(relayObjects.objectAt(i))
 		}
 	}
 
-	Instantiator {
-		id: instantiator
-
+	property Instantiator relayObjects: Instantiator {
 		model: 3
 
 		delegate: QtObject {
@@ -30,5 +24,9 @@ Item {
 				state = s
 			}
 		}
+	}
+
+	Component.onCompleted: {
+		populate()
 	}
 }

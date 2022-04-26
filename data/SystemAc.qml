@@ -3,24 +3,50 @@
 */
 
 import QtQuick
-import Victron.Velib
 import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
 
 	property QtObject genset: QtObject {
-		property real power
+		property real power: NaN
 		onPowerChanged: Utils.updateMaximumValue("system.ac.genset.power", power)
 
 		property ListModel phases: ListModel {}
+
+		function resetPhases(phaseCount) {
+			root._populate(phases, phaseCount)
+			root._updateTotalFromPhases(root.genset, "power")
+		}
+
+		function setPhaseData(index, data) {
+			phases.set(index, data)
+			root._updateTotalFromPhases(root.genset, "power")
+		}
 	}
 
-	property QtObject consumption: ListModel {
-		property real power
-
+	property QtObject consumption: QtObject {
+		property real power: NaN
 		onPowerChanged: Utils.updateMaximumValue("system.ac.consumption.power", power)
+
 		property ListModel phases: ListModel {}
+
+		function resetPhases(phaseCount) {
+			root._populate(phases, phaseCount)
+			root._updateTotalFromPhases(root.consumption, "power")
+		}
+
+		function setPhaseData(index, data) {
+			phases.set(index, data)
+			root._updateTotalFromPhases(root.consumption, "power")
+		}
+	}
+
+	function reset() {
+		root.genset.phases.clear()
+		root.genset.power = NaN
+		root.consumption.phases.clear()
+		root.consumption.power = NaN
 	}
 
 	function _populate(model, count) {
@@ -39,91 +65,15 @@ Item {
 		}
 	}
 
-	function updateTotal(obj, propName) {
-		let total = 0
+	function _updateTotalFromPhases(obj, propName) {
+		let total = NaN
 		for (let i = 0; i < obj.phases.count; ++i) {
+			if (isNaN(total)) {
+				total = 0
+			}
 			let data = obj.phases.get(i)
 			total += data[propName] || 0
 		}
 		obj[propName] = total
-	}
-
-	VeQuickItem {
-		uid: veSystem.childUId("/Ac/ConsumptionOnInput/NumberOfPhases")
-		onValueChanged: {
-			if (value !== undefined) {
-				root._populate(root.consumption.phases, value)
-				consumptionInputObjects.model = value
-			}
-		}
-	}
-
-	Instantiator {
-		id: consumptionInputObjects
-
-		model: null
-		delegate: VeQuickItem {
-			uid: veDBus.childUId("/Ac/ConsumptionOnInput/L" + (index + 1) + "/Power")
-
-			onValueChanged: {
-				const inputPower = value === undefined ? 0 : value
-				const outputPower = root.consumption.phases.get(model.index).outputPower
-				const combinedPower = inputPower + outputPower
-				root.consumption.phases.set(model.index, { "inputPower": inputPower, "power": combinedPower })
-				root.updateTotal(root.consumption, "power")
-			}
-		}
-	}
-
-	VeQuickItem {
-		uid: veSystem.childUId("/Ac/ConsumptionOnOutput/NumberOfPhases")
-		onValueChanged: {
-			if (value !== undefined) {
-				root._populate(root.consumption.phases, value)
-				consumptionOutputObjects.model = value
-			}
-		}
-	}
-
-	Instantiator {
-		id: consumptionOutputObjects
-
-		model: null
-		delegate: VeQuickItem {
-			uid: veDBus.childUId("/Ac/ConsumptionOnOutput/L" + (index + 1) + "/Power")
-
-			onValueChanged: {
-				const inputPower = root.consumption.phases.get(model.index).inputPower
-				const outputPower = value === undefined ? 0 : value
-				const combinedPower = inputPower + outputPower
-				root.consumption.phases.set(model.index, { "outputPower": outputPower, "power": combinedPower })
-				root.updateTotal(root.consumption, "power")
-			}
-		}
-	}
-
-	VeQuickItem {
-		uid: veSystem.childUId("/Ac/Genset/NumberOfPhases")
-		onValueChanged: {
-			if (value !== undefined) {
-				root._populate(root.genset.phases, value)
-				gensetObjects.model = value
-			}
-		}
-	}
-
-	Instantiator {
-		id: gensetObjects
-
-		model: null
-		delegate: VeQuickItem {
-			uid: veDBus.childUId("/Ac/Genset/L" + (index + 1) + "/Power")
-
-			onValueChanged: {
-				const power = value === undefined ? 0 : value
-				root.genset.phases.set(model.index, { "power": power })
-				root.updateTotal(root.genset, "power")
-			}
-		}
 	}
 }

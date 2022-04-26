@@ -11,8 +11,10 @@ import "/components/Gauges.js" as Gauges
 Item {
 	id: gauges
 
-	property var model
-	readonly property real strokeWidth: Theme.geometry.circularSingularGauge.strokeWidth
+	property alias icon: icon
+	property alias name: nameLabel.text
+	property alias value: arc.value
+	property int status
 	property alias caption: captionLabel.text
 	property alias animationEnabled: arc.animationEnabled
 
@@ -26,17 +28,15 @@ Item {
 		ProgressArc {
 			id: arc
 
-			property int status: model ? Gauges.getValueStatus(model.value, model.valueType) : 0
 			width: gauges.width - strokeWidth
 			height: width
 			anchors.centerIn: parent
 			radius: width/2
 			startAngle: 0
 			endAngle: 360
-			value: model ? model.value : 0
-			progressColor: Theme.statusColorValue(status)
-			remainderColor: Theme.statusColorValue(status, true)
-			strokeWidth: gauges.strokeWidth
+			progressColor: Theme.statusColorValue(gauges.status)
+			remainderColor: Theme.statusColorValue(gauges.status, true)
+			strokeWidth: Theme.geometry.circularSingularGauge.strokeWidth
 		}
 	}
 
@@ -49,16 +49,17 @@ Item {
 
 			CP.ColorImage {
 				id: icon
-				source: model ? model.icon : ""
+
 				color: Theme.color.font.primary
 				fillMode: Image.PreserveAspectFit
 				smooth: true
 			}
 			Label {
+				id: nameLabel
+
 				anchors.verticalCenter: icon.verticalCenter
 				font.pixelSize: Theme.font.size.m
 				color: Theme.color.font.primary
-				text: model ? model.name : ""
 			}
 		}
 
@@ -69,7 +70,7 @@ Item {
 			Label {
 				font.pixelSize: Theme.font.size.xxxl
 				color: Theme.color.font.primary
-				text: model ? model.value : ""
+				text: gauges.value
 			}
 			Label {
 				font.pixelSize: Theme.font.size.xxxl

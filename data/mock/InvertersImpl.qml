@@ -4,15 +4,9 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
-import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
-
-	property ListModel model: ListModel {
-		Component.onCompleted: populate()
-	}
 
 	function populate() {
 		let quattro = {
@@ -22,20 +16,18 @@ Item {
 			ampOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ],   // EU amp options
 			mode: VenusOS.Inverters_Mode_On,
 			modeAdjustable: true,
-			input1Type: VenusOS.Inverters_InputType_Generator,
+			input1Type: VenusOS.AcInputs_InputType_Generator,
 			currentLimit1: 50,
 			currentLimit1Adjustable: true,
-			input2Type: VenusOS.Inverters_InputType_Shore,
+			input2Type: VenusOS.AcInputs_InputType_Shore,
 			currentLimit2: 16,
 			currentLimit2Adjustable: false,
 		}
 		let inverter = inverterComponent.createObject(root, quattro)
-		model.append({ inverter: inverter })
+		Global.inverters.addInverter(inverter)
 	}
 
-	Component {
-		id: inverterComponent
-
+	property Component inverterComponent: Component {
 		QtObject {
 			id: inverter
 
@@ -68,5 +60,9 @@ Item {
 				currentLimit2 = newLimit
 			}
 		}
+	}
+
+	Component.onCompleted: {
+		populate()
 	}
 }

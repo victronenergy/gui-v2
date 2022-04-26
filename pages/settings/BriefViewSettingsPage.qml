@@ -6,6 +6,8 @@ import QtQuick
 import QtQuick.Controls
 import Victron.VenusOS
 
+import "/components/Gauges.js" as Gauges
+
 Page {
 	id: root
 
@@ -22,7 +24,7 @@ Page {
 			width: parent.width
 
 			Repeater {
-				model: systemSettings.briefView.gauges
+				model: Global.systemSettings.briefView.gauges
 
 				delegate: SettingsListNavigationItem {
 					//: Level number
@@ -43,8 +45,8 @@ Page {
 				//: Show percentage values in Brief view
 				//% "Show %"
 				text: qsTrId("settings_briefview_show_percentage")
-				checked: systemSettings.briefView.showPercentages
-				onClicked: systemSettings.briefView.setShowPercentages(checked)
+				checked: Global.systemSettings.briefView.showPercentages
+				onClicked: Global.systemSettings.briefView.setShowPercentages(checked)
 			}
 		}
 	}
@@ -57,14 +59,23 @@ Page {
 			property int levelIndex
 
 			SettingsListView {
-				model: Gauges.gaugeTypes
+				model: [
+					VenusOS.Tank_Type_Battery,
+					VenusOS.Tank_Type_Fuel,
+					VenusOS.Tank_Type_FreshWater,
+					VenusOS.Tank_Type_WasteWater,
+					VenusOS.Tank_Type_LiveWell,
+					VenusOS.Tank_Type_Oil,
+					VenusOS.Tank_Type_BlackWater,
+					VenusOS.Tank_Type_Gasoline
+				]
 				delegate: SettingsListRadioButton {
 					text: Gauges.tankProperties(modelData).name || ""
 					checked: tankType === modelData
 					buttonGroup: radioButtonGroup
 
 					onClicked: {
-						systemSettings.briefView.setGauge(levelIndex, modelData)
+						Global.systemSettings.briefView.setGauge(levelIndex, modelData)
 					}
 				}
 

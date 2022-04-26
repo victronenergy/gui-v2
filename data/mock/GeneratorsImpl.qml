@@ -4,26 +4,18 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
-import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
 
-	property var generator0
-
-	property ListModel model: ListModel {
-		Component.onCompleted: {
-			for (let i = 0; i < instantiator.count; ++i) {
-				append({ generator: instantiator.objectAt(i) })
-			}
-			generator0 = instantiator.objectAt(0)
+	function populate() {
+		for (let i = 0; i < generatorObjects.count; ++i) {
+			Global.generators.addGenerator(generatorObjects.objectAt(i))
 		}
+		Global.generators.first = generatorObjects.objectAt(0)
 	}
 
-	Instantiator {
-		id: instantiator
-
+	property Instantiator generatorObjects: Instantiator {
 		model: 1    // TODO randomly generate multiple generators sometimes
 
 		QtObject {
@@ -53,5 +45,9 @@ Item {
 				onTriggered: generator.runtime += 1
 			}
 		}
+	}
+
+	Component.onCompleted: {
+		populate()
 	}
 }

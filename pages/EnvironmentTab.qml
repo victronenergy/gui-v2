@@ -49,7 +49,7 @@ Flickable {
 
 		Repeater {
 			id: levelsRepeater
-			model: environmentLevels.model
+			model: Global.environmentInputs.model
 
 			delegate: EnvironmentGaugePanel {
 				animationEnabled: root.animationEnabled

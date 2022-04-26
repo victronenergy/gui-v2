@@ -70,19 +70,19 @@ Column {
 	Binding {
 		id: solarUpdate
 		property: "value"
-		value: solarChargers ? solarChargers.power : 0
+		value: Global.solarChargers.power
 	}
 
 	Binding {
 		id: generatorUpdate
 		property: "value"
-		value: system ? system.generator.power : 0
+		value: Global.system.generator.power
 	}
 
 	Binding {
 		id: loadsUpdate
 		property: "value"
-		value: system ? system.loads.power : 0
+		value: Global.system.loads.power
 	}
 
 	ListView {
@@ -170,7 +170,7 @@ Column {
 					bottomMargin: Theme.geometry.briefPage.sidePanel.solarYield.bottomMargin
 				}
 
-				history: solarChargers ? solarChargers.yieldHistory: []
+				history: Global.solarChargers.yieldHistory
 			}
 		}
 		Component {
@@ -187,9 +187,9 @@ Column {
 						bottomMargin: Theme.geometry.briefPage.sidePanel.generator.label.bottomMargin
 					}
 					// In most cases there is only 1 generator, so don't worry about other ones here.
-					state: generator0 ? generator0.state : VenusOS.Generators_State_Stopped
-					runtime: generator0 ? generator0.runtime : 0
-					runningBy: generator0 ? generator0.runningBy : VenusOS.Generators_RunningBy_NotRunning
+					state: Global.generators.first ? Global.generators.first.state : VenusOS.Generators_State_Stopped
+					runtime: Global.generators.first ? Global.generators.first.runtime : 0
+					runningBy: Global.generators.first ? Global.generators.first.runningBy : VenusOS.Generators_RunningBy_NotRunning
 
 				}
 				Slider {
@@ -203,7 +203,7 @@ Column {
 					enabled: false // not interactive
 					width: parent.width
 					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
-					value: system ? system.generator.power : 0
+					value: Global.system.generator.power
 					showHandle: false
 				}
 			}
@@ -232,7 +232,7 @@ Column {
 						running: Global.pageManager.sidePanelActive
 						repeat: true
 						onTriggered: {
-							let loadValue = system ? system.loads.power / Utils.maximumValue("system.loads.power") : 0
+							let loadValue = Global.system.loads.power / Utils.maximumValue("system.loads.power")
 							loadGraph.addValue(loadValue)
 						}
 					}
@@ -249,7 +249,7 @@ Column {
 					enabled: false // not interactive
 					width: parent.width
 					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
-					value: system ? system.loads.power / Utils.maximumValue("system.loads.power") : 0
+					value: Global.system.loads.power / Utils.maximumValue("system.loads.power")
 					highlightColor: Theme.color.warning
 					grooveColor: Theme.color.darkWarning
 					showHandle: false

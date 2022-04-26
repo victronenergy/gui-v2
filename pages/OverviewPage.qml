@@ -24,10 +24,10 @@ Page {
 
 	// Set a counter that updates whenever the layout should change.
 	// Use a delayed binding to avoid repopulating the model unnecessarily.
-	readonly property int _shouldResetWidgets: (acInputs && acInputs.model.count)
-			+ (dcInputs && dcInputs.model.count)
+	readonly property int _shouldResetWidgets: Global.acInputs.model.count
+			+ Global.dcInputs.model.count
 			+ (dcLoadsWidget.size === _laidOutDcLoadsWidgetSize ? 0 : 1)
-			+ (solarChargers && solarChargers.model.count)
+			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
 	on_ShouldResetWidgetsChanged: Qt.callLater(_resetWidgets)
 
 	property int _laidOutDcLoadsWidgetSize: -1
@@ -179,16 +179,16 @@ Page {
 			_createdWidgets[widgetType].size = VenusOS.OverviewWidget_Size_Zero
 		}
 
-		if (!acInputs) {
+		if (!Global.acInputs) {
 			_leftWidgets = []
 			return
 		}
 
 		let widgetCandidates = []
-		_addModelWidgets(acInputs.model, widgetCandidates)
-		_addModelWidgets(dcInputs.model, widgetCandidates)
+		_addModelWidgets(Global.acInputs.model, widgetCandidates)
+		_addModelWidgets(Global.dcInputs.model, widgetCandidates)
 
-		if (solarChargers && solarChargers.model.count > 0) {
+		if (Global.solarChargers.model.count > 0) {
 			widgetCandidates.splice(_leftWidgetInsertionIndex(VenusOS.OverviewWidget_Type_Solar, widgetCandidates),
 					0, _createWidget(VenusOS.OverviewWidget_Type_Solar))
 		}
@@ -199,7 +199,7 @@ Page {
 		for (let i = 0; i < inputModel.count; ++i) {
 			let input = inputModel.get(i).input
 			let widgetType = -1
-			if (inputModel === acInputs.model)  {
+			if (inputModel === Global.acInputs.model)  {
 				switch (input.source) {
 				case VenusOS.AcInputs_InputType_Grid:
 					widgetType = VenusOS.OverviewWidget_Type_Grid
@@ -487,8 +487,8 @@ Page {
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
-			value: !!solarChargers ? solarChargers.power : 0  // TODO show amps instead if configured
-			yieldHistory: solarChargers.yieldHistory
+			value: Global.solarChargers.power  // TODO show amps instead if configured
+			yieldHistory: Global.solarChargers.yieldHistory
 
 			WidgetConnector {
 				id: acSolarConnector
@@ -498,15 +498,14 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				visible: !!solarChargers && !isNaN(solarChargers.acPower)
+				visible: !isNaN(Global.solarChargers.acPower)
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 
 				// Energy always flows towards inverter/charger, never towards solar charger.
 				animationMode: root.isCurrentPage
-						&& !!solarChargers
-						&& !isNaN(solarChargers.acPower)
-						&& Math.abs(solarChargers.acPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+						&& !isNaN(Global.solarChargers.acPower)
+						&& Math.abs(Global.solarChargers.acPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -518,14 +517,14 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				visible: !!solarChargers && !isNaN(solarChargers.dcPower)
+				visible: !isNaN(Global.solarChargers.dcPower)
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 
 				// Energy always flows towards battery, never towards solar charger.
-				animationMode: root.isCurrentPage && !!solarChargers
-						&& !isNaN(solarChargers.dcPower)
-						&& Math.abs(solarChargers.dcPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+				animationMode: root.isCurrentPage
+						&& !isNaN(Global.solarChargers.dcPower)
+						&& Math.abs(Global.solarChargers.dcPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -540,7 +539,7 @@ Page {
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 		physicalQuantity: -1
-		systemState: system ? system.state : 0
+		systemState: Global.system.state
 	}
 	WidgetConnector {
 		startWidget: inverterWidget
@@ -553,10 +552,9 @@ Page {
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
-				&& !!system
-				&& !isNaN(system.ac.consumption.power)
-				&& system.ac.consumption.power > 0
-				&& Math.abs(system.ac.consumption.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+				&& !isNaN(Global.system.ac.consumption.power)
+				&& Global.system.ac.consumption.power > 0
+				&& Math.abs(Global.system.ac.consumption.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -570,10 +568,9 @@ Page {
 
 		// If battery power is positive, energy flows to battery, else flows to inverter/charger.
 		animationMode: root.isCurrentPage
-				&& !!battery
-				&& !isNaN(battery.power)
-				&& Math.abs(battery.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-						? (battery.power > 0
+				&& !isNaN(Global.battery.power)
+				&& Math.abs(Global.battery.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+						? (Global.battery.power > 0
 								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
 						: VenusOS.WidgetConnector_AnimationMode_NotAnimated
@@ -587,7 +584,7 @@ Page {
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 		animationRunning: root.isCurrentPage
 		animationEnabled: root.isCurrentPage
-		batteryData: battery
+		batteryData: Global.battery
 	}
 	WidgetConnector {
 		startWidget: batteryWidget
@@ -599,10 +596,9 @@ Page {
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
-				&& !!system
-				&& !isNaN(system.dc.power)
-				&& system.dc.power > 0
-				&& Math.abs(system.dc.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+				&& !isNaN(Global.system.dc.power)
+				&& Global.system.dc.power > 0
+				&& Math.abs(Global.system.dc.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -620,8 +616,8 @@ Page {
 			  : VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-		value: system ? system.ac.consumption.power : NaN
-		phaseModel: system ? system.ac.consumption.phases : null
+		value: Global.system.ac.consumption.power
+		phaseModel: Global.system.ac.consumption.phases
 		phaseModelProperty: "power"
 	}
 
@@ -632,9 +628,9 @@ Page {
 			rightMargin: Theme.geometry.page.content.horizontalMargin
 		}
 
-		size: !!system && !isNaN(system.dc.power) ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_Zero
+		size: !isNaN(Global.system.dc.power) ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_Zero
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-		value: system ? system.dc.power || NaN : NaN
+		value: Global.system.dc.power
 	}
 }

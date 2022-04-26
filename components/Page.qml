@@ -4,7 +4,6 @@
 
 import QtQuick
 import QtQuick.Controls as C
-import QtQuick.Templates as CT
 import Victron.VenusOS
 
 FocusScope {
@@ -22,8 +21,9 @@ FocusScope {
 
 	C.StackView.onActivated: Global.pageManager.currentPage = root
 
-	// TODO only pass this on if demo mode is active
-	Keys.onReleased: function(event) {
-		Global.pageManager.emitter.demoKeyPressed(event)
+	Keys.onPressed: function(event) {
+		if (Global.demoManager) {
+			Global.demoManager.keyPressed(event)
+		}
 	}
 }

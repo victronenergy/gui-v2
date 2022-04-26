@@ -4,7 +4,6 @@
 
 import QtQuick
 import QtQuick.Window
-import Victron.Velib
 import Victron.VenusOS
 
 Page {
@@ -38,7 +37,7 @@ Page {
 				height: cardsView.height
 
 				Repeater {
-					model: generators ? generators.model : null
+					model: Global.generators.model
 
 					GeneratorCard {
 						width: root.cardWidth
@@ -64,7 +63,7 @@ Page {
 				height: cardsView.height
 
 				Repeater {
-					model: inverters ? inverters.model : null
+					model: Global.inverters.model
 
 					InverterCard {
 						width: root.cardWidth
@@ -104,21 +103,21 @@ Page {
 
 			ESSCard {
 				width: root.cardWidth
-				state: ess ? ess.state : VenusOS.Ess_State_Unused
-				minimumStateOfCharge: ess ? ess.minimumStateOfCharge : 0
-				stateOfChargeLimit: ess ? ess.stateOfChargeLimit : 0
+				state: Global.ess.state
+				minimumStateOfCharge: Global.ess.minimumStateOfCharge
+				stateOfChargeLimit: Global.ess.stateOfChargeLimit
 
 				onChangeState: function(newState) {
-					ess.setState(newState)
+					Global.ess.setStateRequested(newState)
 				}
 				onChangeMinimumStateOfCharge: function(newMinSoc) {
-					ess.setMinimumStateOfCharge(newMinSoc)
+					Global.ess.setMinimumStateOfChargeRequested(newMinSoc)
 				}
 			}
 
 			SwitchesCard {
 				width: root.cardWidth
-				model: relays ? relays.model : null
+				model: Global.relays.model
 			}
 		}
 	}
