@@ -4,7 +4,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
 
 Page {
 	id: root
@@ -76,13 +75,11 @@ Page {
 				//% "Audible alarm"
 				text: qsTrId("settings_audible_alarm")
 				source: "com.victronenergy.settings/Settings/Alarm/Audible"
-				visible: defaultVisible && buzzerStateItem.value !== undefined
+				visible: defaultVisible && buzzerStateDataPoint.value !== undefined
 
-				VeQuickItem {
-					id: buzzerStateItem
-					uid: dbusConnected
-						 ? "dbus/com.victronenergy.system/Buzzer/State"
-						 : ""
+				DataPoint {
+					id: buzzerStateDataPoint
+					source: "com.victronenergy.system/Buzzer/State"
 				}
 			}
 

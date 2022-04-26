@@ -76,8 +76,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ProgressBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButton.qml")),
 		"Victron.VenusOS", 2, 0, "RadioButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListButton.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ScrollBar.qml")),
 		"Victron.VenusOS", 2, 0, "ScrollBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Slider.qml")),
@@ -144,24 +142,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ScaledArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArcGauge.qml")),
 		"Victron.VenusOS", 2, 0, "ScaledArcGauge");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListItem.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListTextItem.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListTextItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListView.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListView");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListNavigationItem.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListNavigationItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListRadioButton.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListRadioButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListRadioButtonGroup.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListRadioButtonGroup");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListSlider.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListSlider");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListSwitch.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListSwitch");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SettingsListTextGroup.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListTextGroup");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SegmentedButtonRow.qml")),
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
@@ -198,6 +178,28 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "DataPoint");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/datapoints/DemoModeDataPoint.qml")),
 		"Victron.VenusOS", 2, 0, "DemoModeDataPoint");
+
+	/* settings list items */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListButton.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListItem.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextItem.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListTextItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListView.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListView");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListNavigationItem.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListNavigationItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListRadioButton.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListRadioButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListRadioButtonGroup.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListRadioButtonGroup");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListSlider.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListSlider");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListSwitch.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListSwitch");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextGroup.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListTextGroup");
 
 	/* widgets */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/OverviewWidget.qml")),

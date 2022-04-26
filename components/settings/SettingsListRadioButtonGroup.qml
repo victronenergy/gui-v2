@@ -6,7 +6,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import Victron.Velib
 
 // Each item in the model is expected to have at least 2 values:
 //      - "display": the text to display for this option
@@ -18,10 +17,9 @@ import Victron.Velib
 SettingsListNavigationItem {
 	id: root
 
-	property string source
+	property alias source: dataPoint.source
 	property var model: []
 	property int currentIndex
-	readonly property alias veItem: veItem
 
 	signal optionClicked(index: int)
 
@@ -30,11 +28,11 @@ SettingsListNavigationItem {
 			: ""
 
 	currentIndex: {
-		if (!model || model.length === undefined || source.length === 0 || veItem.value === undefined) {
+		if (!model || model.length === undefined || source.length === 0 || dataPoint.value === undefined) {
 			return -1
 		}
 		for (let i = 0; i < model.length; ++i) {
-			if (model[i].value === veItem.value) {
+			if (model[i].value === dataPoint.value) {
 				return i
 			}
 		}
@@ -45,9 +43,8 @@ SettingsListNavigationItem {
 		Global.pageManager.pushPage(optionsPageComponent)
 	}
 
-	VeQuickItem {
-		id: veItem
-		uid: source.length > 0 && dbusConnected ? "dbus/" + source : ""
+	DataPoint {
+		id: dataPoint
 	}
 
 	Component {
@@ -68,7 +65,7 @@ SettingsListNavigationItem {
 
 					onClicked: {
 						if (source.length > 0) {
-							veItem.setValue(Array.isArray(root.model) ? modelData.value : model.value)
+							dataPoint.setValue(Array.isArray(root.model) ? modelData.value : model.value)
 						}
 						root.currentIndex = model.index
 						root.optionClicked(model.index)
