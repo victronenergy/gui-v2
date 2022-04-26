@@ -4,10 +4,8 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
-import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
 
 	readonly property var tankTypes: [
@@ -95,131 +93,76 @@ Item {
 		case VenusOS.Tank_Type_Gasoline:
 			return gasolineTanks
 		}
-		console.warn("Unknown tank type", type)
+		console.warn("tankModel(): Unknown tank type", type)
 		return null
 	}
 
-	property var _tanks: []
-
-	function _getTanks() {
-		const childIds = veDBus.childIds
-
-		let tankIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let id = childIds[i]
-			if (id.startsWith('com.victronenergy.tank.')) {
-				tankIds.push(id)
-			}
-		}
-
-		if (Utils.arrayCompare(_tanks, tankIds)) {
-			_tanks = tankIds
-		}
-	}
-
-	function _updateTotals(type) {
-		if (type < 0) {
+	function updateTankModelTotals(tankType) {
+		const model = tankModel(tankType)
+		if (!model) {
+			console.warn("updateTankModelTotals(): Unknown tank type", tankType)
 			return
 		}
-		const model = tankModel(type)
-		let totalRemaining = 0
-		let totalCapacity = 0
-		for (let i = 0; i < tankObjects.count; ++i) {
-			const tank = tankObjects.objectAt(i)
-			if (tank.type === type) {
-				if (!isNaN(tank.remaining)) {
-					totalRemaining += tank.remaining
+		let totalRemaining = NaN
+		let totalCapacity = NaN
+		for (let i = 0; i < model.count; ++i) {
+			const tank = model.get(i).tank
+			if (!isNaN(tank.remaining)) {
+				if (isNaN(totalRemaining)) {
+					totalRemaining = 0
 				}
-				if (!isNaN(tank.capacity)) {
-					totalCapacity += tank.capacity
+				totalRemaining += tank.remaining
+			}
+			if (!isNaN(tank.capacity)) {
+				if (isNaN(totalCapacity)) {
+					totalCapacity = 0
 				}
+				totalCapacity += tank.capacity
 			}
 		}
 		model.totalRemaining = totalRemaining
 		model.totalCapacity = totalCapacity
 	}
 
-	function _updateTotal(type, prop, prevValue, newValue) {
-		if (type < 0) {
+	function addTank(data) {
+		const model = tankModel(data.type)
+		if (!model) {
+			console.warn("addTank(): Unknown tank type", data.type)
 			return
 		}
-		const model = tankModel(type)
-		if (!isNaN(prevValue)) {
-			model[prop] -= prevValue
-		}
-		if (!isNaN(newValue)) {
-			model[prop] += newValue
-		}
+		model.append({'tank': data })
+		updateTankModelTotals(data.type)
 	}
 
-	Connections {
-		target: veDBus
-		function onChildIdsChanged() { Qt.callLater(_getTanks) }
-		Component.onCompleted: _getTanks()
+	function removeTank(tankType, index) {
+		const model = tankModel(tankType)
+		if (!model) {
+			console.warn("removeTank(): Unknown tank type", tankType)
+			return
+		}
+		if (index < 0 || index >= model.count) {
+			console.warn("Model", model, "has count", model.count, "but tried remove() index", index)
+			return
+		}
+		model.remove(index)
+		updateTankModelTotals(tankType)
 	}
 
-	Instantiator {
-		id: tankObjects
+	function setTankData(index, data) {
+		const model = tankModel(data.type)
+		if (!model) {
+			console.warn("setTankData(): Unknown tank type", data.type)
+			return
+		}
+		model.set(index, {"tank": data})
+		updateTankModelTotals(data.type)
+	}
 
-		model: _tanks
-		delegate: QtObject {
-			id: tank
-
-			property string uid: modelData
-			property string dbusUid: "dbus/" + tank.uid
-
-			property int status: -1
-			property int type: -1
-			property string name
-			property int level
-			property real remaining: NaN
-			property real capacity: NaN
-
-			property bool _valid: type >= 0
-			on_ValidChanged: {
-				const model = root.tankModel(type)
-				const index = Utils.findIndex(model, tank)
-				if (_valid && index < 0) {
-					model.append({ tank: tank })
-					root._updateTotals(tank.type)
-				} else if (!_valid && index >= 0) {
-					model.remove(index)
-				}
-			}
-
-			property VeQuickItem _status: VeQuickItem {
-				uid: dbusUid + "/Status"
-				onValueChanged: tank.status = value === undefined ? -1 : value
-			}
-			property VeQuickItem _type: VeQuickItem {
-				uid: dbusUid + "/FluidType"
-				onValueChanged: tank.type = value === undefined ? -1 : value
-			}
-			property VeQuickItem _customName: VeQuickItem {
-				uid: dbusUid + "/CustomName"
-				onValueChanged: tank.name = value === undefined ? -1 : value
-			}
-			property VeQuickItem _level: VeQuickItem {
-				uid: dbusUid + "/Level"
-				onValueChanged: tank.level = value === undefined ? -1 : value
-			}
-			property VeQuickItem _remaining: VeQuickItem {
-				uid: dbusUid + "/Remaining"
-				onValueChanged: {
-					const prevValue = tank.remaining
-					tank.remaining = value === undefined ? -1 : value
-					root._updateTotal(tank.type, "totalRemaining", prevValue, tank.remaining)
-				}
-			}
-
-			property VeQuickItem _capacity: VeQuickItem {
-				uid: dbusUid + "/Capacity"
-				onValueChanged: {
-					const prevValue = tank.remaining
-					tank.capacity = value === undefined ? -1 : value
-					root._updateTotal(tank.type, "totalCapacity", prevValue, tank.capacity)
-				}
-			}
+	function reset() {
+		for (let i = 0; i < tankTypes.length; ++i) {
+			tankModel(tankTypes[i]).clear()
 		}
 	}
+
+	Component.onCompleted: Global.tanks = root
 }

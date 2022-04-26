@@ -16,9 +16,9 @@ Item {
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_User
-	readonly property bool userHasWriteAccess: systemSettings.accessLevel >= writeAccessLevel
+	readonly property bool userHasWriteAccess: Global.systemSettings.accessLevel >= writeAccessLevel
 
-	readonly property bool defaultVisible: systemSettings.accessLevel >= showAccessLevel
+	readonly property bool defaultVisible: Global.systemSettings.accessLevel >= showAccessLevel
 
 	width: parent ? parent.width : 0
 	implicitHeight: visible ? backgroundRect.height + spacing : 0

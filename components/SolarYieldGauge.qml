@@ -3,7 +3,6 @@
 */
 
 import QtQuick
-import Victron.Velib
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 import "/components/Utils.js" as Utils
@@ -21,7 +20,7 @@ Item {
 	Repeater {
 		id: repeater
 
-		model: solarChargers ? solarChargers.yieldHistory : null
+		model: Global.solarChargers.yieldHistory
 		delegate: ScaledArcGauge {
 			width: Theme.geometry.briefPage.edgeGauge.width
 			x: index*strokeWidth
@@ -44,7 +43,7 @@ Item {
 		layoutDirection: root._gaugeAlignmentX === Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
 		source: "qrc:/images/solaryield.svg"
 		physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
-		value: solarChargers ? solarChargers.power : NaN
+		value: Global.solarChargers.power
 	}
 }
 

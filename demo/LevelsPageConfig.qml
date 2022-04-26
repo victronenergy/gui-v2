@@ -4,7 +4,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
 
 QtObject {
 	id: root
@@ -245,27 +244,7 @@ QtObject {
 	]
 
 	function loadConfig(config) {
-		let i = 0
-
-		if (config.tanks) {
-			tanks.clearModels()
-			for (i = 0; i < config.tanks.length; ++i) {
-				tanks.addTank(config.tanks[i])
-			}
-		}
-
-		if (config.inputs) {
-			environmentLevels.model.clear()
-			for (i = 0; i < config.inputs.length; ++i) {
-				environmentLevels.addInput(config.inputs[i])
-			}
-		}
+		Global.demoManager.setTanksRequested(config.tanks)
+		Global.demoManager.setEnvironmentInputsRequested(config.inputs)
 	}
-
-	function reset() {
-		tanks.populate()
-		environmentLevels.populate()
-	}
-
-	Component.onCompleted: reset()
 }

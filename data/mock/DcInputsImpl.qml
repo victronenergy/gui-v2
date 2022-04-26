@@ -4,21 +4,12 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
-
-	property ListModel model: ListModel {}
-
-	function addInput(inputType) {
-		let input = inputComponent.createObject(root, { "source": inputType })
-		model.append({ input: input })
-	}
 
 	function populate() {
 		// Add a random set of DC inputs.
-		model.clear()
 		let types = [
 				VenusOS.DcInputs_InputType_Alternator,
 				VenusOS.DcInputs_InputType_DcGenerator,
@@ -28,14 +19,28 @@ Item {
 		const modelCount = Math.floor(Math.random() * 2) + 1
 		for (let i = 0; i < modelCount; ++i) {
 			const index = Math.floor(Math.random() * types.length)
-			addInput(types[index])
+			const input = inputComponent.createObject(root, { "source": types[index] })
+			Global.dcInputs.addInput(input)
 			types.splice(index, 1)
 		}
 	}
 
-	Component {
-		id: inputComponent
+	property Connections demoConn: Connections {
+		target: Global.demoManager || null
 
+		function onSetDcInputsRequested(config) {
+			Global.dcInputs.model.clear()
+
+			if (config) {
+				for (let i = 0; i < config.types.length; ++i) {
+					const input = inputComponent.createObject(root, { source: config.types[i] })
+					Global.dcInputs.addInput(input)
+				}
+			}
+		}
+	}
+
+	property Component inputComponent: Component {
 		QtObject {
 			id: input
 
@@ -46,7 +51,7 @@ Item {
 			property real temperature
 
 			property Timer _dummyValues: Timer {
-				running: true
+				running: Global.demoManager.timersActive
 				repeat: true
 				interval: 10000 + (Math.random() * 10000)
 				triggeredOnStart: true
@@ -62,5 +67,9 @@ Item {
 				}
 			}
 		}
+	}
+
+	Component.onCompleted: {
+		populate()
 	}
 }

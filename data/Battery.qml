@@ -4,42 +4,31 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
-import "../components/Utils.js" as Utils
 
-Item {
-	property real stateOfCharge: veBatterySoC.value || 0
-	property real power: veBatteryPower.value || 0
-	property real current: veBatteryCurrent.value || 0
-	property real temperature: veBatteryTemp.value || 0
-	property real timeToGo: veTimeToGo.value || 0    // in seconds
-	property string icon: Utils.batteryIcon(root)
-	property int mode: power === 0
+QtObject {
+	id: root
+
+	property real stateOfCharge
+	property real power
+	property real current
+	property real temperature
+	property real timeToGo      // in seconds
+	property string icon: (power === 0 || power === NaN)
+			? "../images/battery.svg"
+			: power > 0
+			  ? "../images/battery_charging.svg"
+			  : "../images/battery_discharging.svg"
+	property int mode: (power === 0 || power === NaN)
 			? VenusOS.Battery_Mode_Idle
 			: (power > 0 ? VenusOS.Battery_Mode_Charging : VenusOS.Battery_Mode_Discharging)
 
-	VeQuickItem {
-		id: veBatterySoC
-		uid: veSystem.childUId("/Dc/Battery/Soc")
+	function reset() {
+		stateOfCharge = NaN
+		power = NaN
+		current = NaN
+		temperature = NaN
+		timeToGo = NaN
 	}
 
-	VeQuickItem {
-		id: veBatteryPower
-		uid: veSystem.childUId("/Dc/Battery/Power")
-	}
-
-	VeQuickItem {
-		id: veBatteryCurrent
-		uid: veSystem.childUId("/Dc/Battery/Current")
-	}
-
-	VeQuickItem {
-		id: veBatteryTemp
-		uid: veSystem.childUId("/Dc/Battery/Temperature")
-	}
-
-	VeQuickItem {
-		id: veTimeToGo
-		uid: veSystem.childUId("/Dc/Battery/TimeToGo")
-	}
+	Component.onCompleted: Global.battery = root
 }

@@ -8,18 +8,23 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property PageManager pageManager
-	readonly property color backgroundColor: pageStack.currentItem.backgroundColor
+	readonly property color backgroundColor: !!pageStack.currentItem
+			? pageStack.currentItem.backgroundColor
+			: Theme.color.page.background
+
+	property var pageManager
 
 	StatusBar {
 		id: statusBar
 
-		title: pageStack.currentItem.title || ""
+		title: !!pageStack.currentItem ? pageStack.currentItem.title || "" : ""
 
-		navigationButton:  pageStack.currentItem.navigationButton
+		navigationButton: !!pageStack.currentItem
+				? pageStack.currentItem.navigationButton
+				: VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive
 		navigationButtonEnabled: pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 		sidePanelButtonEnabled: pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				&& pageStack.currentItem.hasSidePanel
+				&& !!pageStack.currentItem && pageStack.currentItem.hasSidePanel
 
 		Component.onCompleted: pageManager.statusBar = statusBar
 
@@ -47,6 +52,7 @@ Item {
 
 	PageStack {
 		id: pageStack
+
 		anchors {
 			top: statusBar.bottom
 			left: parent.left
@@ -55,7 +61,15 @@ Item {
 		}
 
 		focus: true
-		pageManager: root.pageManager
+
+		Connections {
+			target: Global
+			function onReadyChanged() {
+				if (Global.ready && pageStack.depth === 0) {
+					pageStack.push("qrc:/pages/MainPage.qml")
+				}
+			}
+		}
 
 		Connections {
 			target: pageManager.emitter

@@ -24,7 +24,7 @@ SettingsListRadioButtonGroup {
 		{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service },
 	]
 	currentIndex: {
-		switch (systemSettings.accessLevel) {
+		switch (Global.systemSettings.accessLevel) {
 		case VenusOS.User_AccessType_User:
 			return 0
 		case VenusOS.User_AccessType_Installer:
@@ -39,7 +39,7 @@ SettingsListRadioButtonGroup {
 	}
 
 	onOptionClicked: function(index) {
-		systemSettings.setAccessLevel(model[index].value)
+		Global.systemSettings.setAccessLevelRequested(model[index].value)
 	}
 
 	// touch version to get super user
@@ -48,8 +48,8 @@ SettingsListRadioButtonGroup {
 		running: parent.pulledDown
 		interval: 5000
 		onTriggered: {
-			if (systemSettings.accessLevel >= VenusOS.User_AccessType_Installer) {
-				systemSettings.setAccessLevel(VenusOS.User_AccessType_SuperUser)
+			if (Global.systemSettings.accessLevel >= VenusOS.User_AccessType_Installer) {
+				Global.systemSettings.setAccessLevelRequested(VenusOS.User_AccessType_SuperUser)
 			}
 		}
 	}
@@ -60,8 +60,8 @@ SettingsListRadioButtonGroup {
 		repeatCount = 0
 	}
 	Keys.onRightPressed: function(event) {
-		if (systemSettings.accessLevel !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
-			systemSettings.setAccessLevel(VenusOS.User_AccessType_SuperUser)
+		if (Global.systemSettings.accessLevel !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
+			Global.systemSettings.setAccessLevelRequested(VenusOS.User_AccessType_SuperUser)
 			repeatCount = 0
 		}
 	}
@@ -78,7 +78,7 @@ SettingsListRadioButtonGroup {
 	Keys.onDownPressed: function(event) {
 		if (downCount < 5) ++downCount;
 		if (upCount === 5 && downCount === 5) {
-			systemSettings.setAccessLevel(VenusOS.User_AccessType_Service)
+			Global.systemSettings.setAccessLevelRequested(VenusOS.User_AccessType_Service)
 			upCount = 0
 		}
 		event.accepted = false

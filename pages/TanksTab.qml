@@ -39,25 +39,25 @@ ListView {
 
 	function _updateLayout(initialLayout) {
 		let i = 0
-		for (i = tanks.tankTypes.length - 1; i >= 0; --i) {
-			if (tanks.tankModel(tanks.tankTypes[i]).count > 0) {
-				_lastVisibleTankType = tanks.tankTypes[i]
+		for (i = Global.tanks.tankTypes.length - 1; i >= 0; --i) {
+			if (Global.tanks.tankModel(Global.tanks.tankTypes[i]).count > 0) {
+				_lastVisibleTankType = Global.tanks.tankTypes[i]
 				break
 			}
 		}
 
-		if (tanks.totalTankCount < Theme.geometry.levelsPage.tankMergeThreshold) {
+		if (Global.tanks.totalTankCount < Theme.geometry.levelsPage.tankMergeThreshold) {
 			// There is no more than one tank per type, so merging is not required
-			_tankItemCount = tanks.totalTankCount
+			_tankItemCount = Global.tanks.totalTankCount
 			_mergedTankTypes = []
 		} else {
-			let tankItemCountIfMerged = tanks.totalTankCount
+			let tankItemCountIfMerged = Global.tanks.totalTankCount
 			let mergedTankTypes = []
-			for (i = 0; i < tanks.tankTypes.length; ++i) {
-				const tankModel = tanks.tankModel(tanks.tankTypes[i])
+			for (i = 0; i < Global.tanks.tankTypes.length; ++i) {
+				const tankModel = Global.tanks.tankModel(Global.tanks.tankTypes[i])
 				if (tankModel.count > 1) {
 					tankItemCountIfMerged = tankItemCountIfMerged - tankModel.count + 1
-					mergedTankTypes.push(tanks.tankTypes[i])
+					mergedTankTypes.push(Global.tanks.tankTypes[i])
 					if (tankItemCountIfMerged < Theme.geometry.levelsPage.tankMergeThreshold) {
 						break
 					}
@@ -72,7 +72,7 @@ ListView {
 		}
 	}
 
-	model: tanks.tankTypes
+	model: Global.tanks.tankTypes
 	orientation: ListView.Horizontal
 	boundsBehavior: Flickable.StopAtBounds
 
@@ -80,7 +80,7 @@ ListView {
 		id: tankTypeDelegate
 
 		readonly property int tankType: modelData
-		readonly property var tankModel: tanks.tankModel(tankType)
+		readonly property var tankModel: Global.tanks.tankModel(tankType)
 		readonly property bool mergeTanks: root._mergedTankTypes.indexOf(tankType) >= 0
 
 		// Add spacing between this set of tank types and the next
@@ -138,7 +138,7 @@ ListView {
 	}
 
 	Connections {
-		target: tanks
+		target: Global.tanks
 		function onTotalTankCountChanged() {
 			Qt.callLater(_updateLayout)
 		}

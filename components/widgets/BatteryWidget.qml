@@ -35,7 +35,7 @@ OverviewWidget {
 
 	//% "Battery"
 	title.text: qsTrId("overview_widget_battery_title")
-	icon.source: Utils.batteryIcon(batteryData)
+	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
 	width: Theme.geometry.overviewPage.widget.battery.width
 

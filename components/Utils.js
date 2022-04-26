@@ -128,14 +128,6 @@ function maximumValue(key) {
 	return maxValues[key] || 1  // use default=1 to avoid zero division for ratio calc
 }
 
-function batteryIcon(battery) {
-	if (!battery || battery.power == 0) {
-		return "../images/battery.svg"
-	}
-
-	return battery.power > 0 ? "../images/battery_charging.svg" : "../images/battery_discharging.svg"
-}
-
 // Can't use % operator, that gives remainder rather than a modulo that wraps.
 function modulo(dividend, divisor) {
 	return dividend - divisor * Math.floor(dividend / divisor)

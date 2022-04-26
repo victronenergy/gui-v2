@@ -4,12 +4,13 @@
 
 import QtQuick
 import Victron.Velib
+import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
 
-	property ListModel model: ListModel {}
+	property var veDBus
 
 	property var _environmentInputs: []
 
@@ -29,13 +30,12 @@ Item {
 		}
 	}
 
-	Connections {
+	property Connections veDBusConn: Connections {
 		target: veDBus
 		function onChildIdsChanged() { Qt.callLater(_getEnvironmentInputs) }
-		Component.onCompleted: _getEnvironmentInputs()
 	}
 
-	Instantiator {
+	property Instantiator inputObjects: Instantiator {
 		model: root._environmentInputs
 
 		delegate: QtObject {
@@ -64,14 +64,19 @@ Item {
 			}
 
 			Component.onCompleted: {
-				root.model.append({ input: input })
+				Global.environmentInputs.addInput(input)
 			}
 			Component.onDestruction: {
-				const index = Utils.findIndex(root.model, input)
+				const index = Utils.findIndex(Global.environmentInputs.model, input)
 				if (index >= 0) {
-					root.model.remove(index)
+					Global.environmentInputs.removeInput(index)
 				}
 			}
 		}
+	}
+
+
+	Component.onCompleted: {
+		_getEnvironmentInputs()
 	}
 }

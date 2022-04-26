@@ -69,11 +69,9 @@ Page {
 
 				onOptionClicked: function(index) {
 					if (index === 0) {
-						Theme.load(Theme.screenSize, Theme.Dark)
-						systemSettings.setDisplayMode(Theme.Dark)
+						Global.systemSettings.setDisplayModeRequested(Theme.Dark)
 					} else if (index === 1) {
-						Theme.load(Theme.screenSize, Theme.Light)
-						systemSettings.setDisplayMode(Theme.Light)
+						Global.systemSettings.setDisplayModeRequested(Theme.Light)
 					} else {
 						// TODO set auto mode
 					}

@@ -85,6 +85,16 @@ Page {
 						 : ""
 				}
 			}
+
+			SettingsListSwitch {
+				//% "Demo mode"
+				text: qsTrId("settings_demo_mode")
+				checked: Global.systemSettings.demoMode == VenusOS.SystemSettings_DemoModeActive
+				onClicked: {
+					Global.systemSettings.setDemoModeRequested(
+						checked ? VenusOS.SystemSettings_DemoModeActive : VenusOS.SystemSettings_DemoModeInactive)
+				}
+			}
 		}
 	}
 }

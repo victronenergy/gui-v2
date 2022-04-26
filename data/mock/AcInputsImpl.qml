@@ -4,21 +4,12 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
-
-	property ListModel model: ListModel {}
-
-	function addInput(inputType, phaseCount) {
-		let input = inputComponent.createObject(root, { "source": inputType, "phaseCount": phaseCount || 1 })
-		model.append({ input: input })
-	}
 
 	function populate() {
 		// Add a random set of AC inputs.
-		model.clear()
 		let types = [
 				VenusOS.AcInputs_InputType_Grid,
 				VenusOS.AcInputs_InputType_Generator,
@@ -28,14 +19,31 @@ Item {
 		const modelCount = Math.floor(Math.random() * 2) + 1
 		for (let i = 0; i < modelCount; ++i) {
 			const index = Math.floor(Math.random() * types.length)
-			addInput(types[index])
+			const input = inputComponent.createObject(root, { "source": types[index] })
+			Global.acInputs.addInput(input)
 			types.splice(index, 1)
 		}
 	}
 
-	Component {
-		id: inputComponent
+	property Connections demoConn: Connections {
+		target: Global.demoManager || null
 
+		function onSetAcInputsRequested(config) {
+			Global.acInputs.model.clear()
+
+			if (config) {
+				for (let i = 0; i < config.types.length; ++i) {
+					const input = inputComponent.createObject(root, {
+						source: config.types[i],
+						phaseCount: config.phaseCount || 1
+					})
+					Global.acInputs.addInput(input)
+				}
+			}
+		}
+	}
+
+	property Component inputComponent: Component {
 		QtObject {
 			id: input
 
@@ -60,14 +68,14 @@ Item {
 			property int phaseCount: 1
 
 			property Timer _dummyConnected: Timer {
-				running: true
+				running: Global.demoManager.timersActive
 				repeat: true
 				interval: 10000 + (Math.random() * 10000)
 				onTriggered: input.connected = !input.connected
 			}
 
 			property Timer _dummyValues: Timer {
-				running: true
+				running: Global.demoManager.timersActive
 				repeat: true
 				interval: 10000 + (Math.random() * 10000)
 				triggeredOnStart: true
@@ -97,5 +105,9 @@ Item {
 				}
 			}
 		}
+	}
+
+	Component.onCompleted: {
+		populate()
 	}
 }
