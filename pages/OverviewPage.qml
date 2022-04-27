@@ -582,7 +582,6 @@ Page {
 		size: VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-		animationRunning: root.isCurrentPage
 		animationEnabled: root.isCurrentPage
 		batteryData: Global.battery
 	}
