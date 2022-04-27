@@ -10,7 +10,6 @@ OverviewWidget {
 	id: root
 
 	property var batteryData
-	property alias animationRunning: barAnimation.running
 	property alias animationPaused: barAnimation.paused
 
 	property var _evenAnimationTargets: []
@@ -33,7 +32,7 @@ OverviewWidget {
 		}
 		root._evenAnimationTargets = evenTargets
 		root._oddAnimationTargets = oddTargets
-		if (root.animationRunning) {
+		if (root.animationEnabled) {
 			barAnimation.restart()
 		}
 	}
@@ -143,6 +142,7 @@ OverviewWidget {
 		id: barAnimation
 
 		loops: Animation.Infinite
+		running: root.animationEnabled
 
 		ParallelAnimation {
 			NumberAnimation {
