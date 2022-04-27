@@ -325,7 +325,7 @@
     "geometry.levelsPage.gauge.icon.topMargin": 18,
     "geometry.levelsPage.gauge.label.topMargin": 8,
     "geometry.levelsPage.gauge.label.horizontalMargin": 8,
-    "geometry.levelsPage.gauge.valueText.topMargin": 6,
+    "geometry.levelsPage.gauge.valueText.topMargin": -4,
     "geometry.levelsPage.gauge.valueText.bottomMargin": 12,
     "geometry.levelsPage.gauge.valueText.precision": 3,
     "geometry.levelsPage.subgauges.topMargin": 12,

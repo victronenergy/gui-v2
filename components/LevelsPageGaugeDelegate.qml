@@ -143,8 +143,13 @@ Rectangle {
 		anchors {
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry.levelsPage.gauge.valueText.bottomMargin
-			horizontalCenter: parent.horizontalCenter
+			left: parent.left
+			leftMargin: Theme.geometry.levelsPage.gauge.border.width
+			right: parent.right
+			rightMargin: Theme.geometry.levelsPage.gauge.border.width
 		}
+		horizontalAlignment: Text.AlignHCenter
+		fontSizeMode: Text.HorizontalFit
 		font.pixelSize: Theme.font.size.xs
 		color: Theme.color.font.secondary
 		text: Units.getCapacityDisplayText(root.gaugeTanks.unit,
