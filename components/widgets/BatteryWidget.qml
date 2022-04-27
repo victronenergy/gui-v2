@@ -20,10 +20,15 @@ OverviewWidget {
 		let evenTargets = []
 		let oddTargets = []
 		for (let i = 0; i < animatedBarsRepeater.count; ++i) {
+			const animationTarget = animatedBarsRepeater.itemAt(i)
+			if (!animationTarget) {
+				// Don't set animation targets until all bar delegates have been initialized
+				return
+			}
 			if (i % 2 == 0) {
-				evenTargets.push(animatedBarsRepeater.itemAt(i))
+				evenTargets.push(animationTarget)
 			} else {
-				oddTargets.push(animatedBarsRepeater.itemAt(i))
+				oddTargets.push(animationTarget)
 			}
 		}
 		root._evenAnimationTargets = evenTargets
@@ -118,9 +123,9 @@ OverviewWidget {
 						color: Theme.color.overviewPage.widget.battery.animatedBar
 						radius: height
 					}
-				}
 
-				onCountChanged: Qt.callLater(root._updateBarAnimation)
+					Component.onCompleted: Qt.callLater(root._updateBarAnimation)
+				}
 			}
 		}
 
