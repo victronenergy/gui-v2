@@ -30,31 +30,40 @@ QtObject {
 		}
 	}
 
-	function _updateYieldHistory() {
-		// Each charger has a yield total for each day. Create a total yield history containing the
-		// sum of the yield for each day across all chargers.
-		let totalDailyYields = {}
-		let maxHistoryCount = 0
-		let i = 0
+	function _updateYieldHistory(dayToUpdate) {
+		let modelWasEmpty = Global.solarChargers.yieldHistory.count === 0
 
-		for (i = 0; i < chargersInstantiator.count; ++i) {
-			let charger = chargersInstantiator.objectAt(i)
-			let dailyYields = charger.dailyYields
-			maxHistoryCount = Math.max(maxHistoryCount, charger.historyCount)
-			for (let historyId in dailyYields) {
-				totalDailyYields[historyId] = dailyYields[historyId] + (totalDailyYields[historyId] || 0)
+		let maxHistoryCount = 0
+		let charger
+		let i
+		for (i = 0; i < chargerObjects.count; ++i) {
+			charger = chargerObjects.objectAt(i)
+			if (charger) {
+				maxHistoryCount = Math.max(maxHistoryCount, charger.yieldHistoryObjects.count)
 			}
 		}
 
-		// Move sums into an ordered list, assuming history ids are 0,1,2 etc
-		let _yieldHistory = []
-		for (i = 0; i < maxHistoryCount; ++i) {
-			let dailyYield = totalDailyYields[i + ""]
-			Utils.updateMaximumValue("dailySolarYield", dailyYield)
-			_yieldHistory.push(dailyYield || 0)
-		}
-		if (Utils.arrayCompare(_yieldHistory, Global.solarChargers.yieldHistory) !== 0) {
-			Global.solarChargers.yieldHistory = _yieldHistory
+		// day 0 = today, day 1 = one day ago, etc.
+		for (let day = 0; day < maxHistoryCount; ++day) {
+			let dailyYield = 0
+			for (i = 0; i < chargerObjects.count; ++i) {
+				charger = chargerObjects.objectAt(i)
+				if (charger) {
+					const historyObject = charger.yieldHistoryObjects.objectAt(day)
+					if (historyObject) {
+						dailyYield += (historyObject.value || 0)
+					}
+				}
+			}
+			if (day == 0) {
+				Global.solarChargers.yieldHistory.maximum = dailyYield
+			} else {
+				Global.solarChargers.yieldHistory.maximum = Math.max(
+						Global.solarChargers.yieldHistory.maximum, dailyYield)
+			}
+			if (modelWasEmpty || day === dayToUpdate) {
+				Global.solarChargers.yieldHistory.setYield(day, dailyYield)
+			}
 		}
 	}
 
@@ -131,142 +140,108 @@ QtObject {
 		function onChildIdsChanged() { Qt.callLater(_getSolarChargers) }
 	}
 
-	property Instantiator chargersInstantiator: Instantiator {
+	property Instantiator chargerObjects: Instantiator {
 		model: _solarChargers
 
 		delegate: QtObject {
 			id: solarCharger
 
-			// Overall values for this charger
 			property real power
-			property var dailyYields: ({})
-			readonly property int historyCount: _historyIds.length
+			property real voltage
+
+			property ListModel trackers: ListModel {}
 
 			property string _dbusUid: modelData
-			property var _solarTrackers: []
-			property var _historyIds: []
 
-			function _getTrackers() {
-				const childIds = _vePvConfig.childIds
-				let trackerIds = []
-				for (let i = 0; i < childIds.length; ++i) {
-					let childId = childIds[i]
-					// TODO test this where multiple trackers are present
-					if (!isNaN(childId)) {
-						trackerIds.push(childId)
+			function _updateTotal(chargerProperty, trackerProperty) {
+				let total = NaN
+				for (let i = 0; i < _trackerObjects.count; ++i) {
+					const trackerObject = _trackerObjects.objectAt(i)
+					const value = trackerObject[trackerProperty].value
+					if (!isNaN(value)) {
+						if (isNaN(total)) {
+							total = 0
+						}
+						total += value
 					}
 				}
-
-				if (Utils.arrayCompare(_solarTrackers, trackerIds)) {
-					_solarTrackers = trackerIds
-				}
+				solarCharger[chargerProperty] = total
 			}
 
-			function _getHistory() {
-				const childIds = _veHistory.childIds
-				let historyIds = []
-				for (let i = 0; i < childIds.length; ++i) {
-					let childId = childIds[i]
-					if (!isNaN(childId)) {
-						historyIds.push(childId)
+			property Instantiator yieldHistoryObjects: Instantiator {
+				// Yield for each previous day, in kwh
+				delegate: VeQuickItem {
+					// uid is e.g. com.victronenergy.solarcharger.tty0/History/Daily/<day>/Yield
+					uid: _dbusUid ? "dbus/" + _dbusUid + "/History/Daily/" + model.index + "/Yield" : ""
+					onValueChanged: Qt.callLater(root._updateYieldHistory, model.index)
+				}
+			}
+			property var _veHistoryCount: VeQuickItem {
+				uid: _dbusUid ? "dbus/" + _dbusUid + "/History/Overall/DaysAvailable" : ""
+				onValueChanged: {
+					if (value !== undefined) {
+						yieldHistoryObjects.model = value
 					}
 				}
-
-				if (Utils.arrayCompare(_historyIds, historyIds)) {
-					_historyIds = historyIds
-				}
-			}
-
-			function _updateDailyYields() {
-				let _dailyYields = {}
-				for (let i = 0; i < _historyInstantiator.count; ++i) {
-					var historyItem = _historyInstantiator.objectAt(i)
-					_dailyYields[historyItem.historyId] = historyItem.value
-				}
-				dailyYields = _dailyYields
-				Qt.callLater(root._updateYieldHistory)
 			}
 
 			property var _veNrOfTrackers: VeQuickItem {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/NrOfTrackers" : ""
 				onValueChanged: {
 					if (value !== undefined) {
-						if (value === 1) {
-							// When there is a single tracker, the /Pv/x paths do not exist, so
-							// add a single tracker directly to the model.
-							const index = Utils.findIndex(Global.solarChargers.model, _singleTracker)
-							if (index < 0) {
-								Global.solarChargers.addTracker(_singleTracker)
-							}
-						} else {
-							// Initiate the bindings to find the /Pv/x child objects.
-							_vePvConfig.uid = "dbus/" + _dbusUid + "/Pv"
-						}
+						_trackerObjects.model = value
 					}
 				}
 			}
 
-			property var _veYield: VeQuickItem {
-				uid: _dbusUid ? "dbus/" + _dbusUid + "/Yield/Power" : ""
-				onValueChanged: solarCharger.power = value === undefined ? 0 : value
-			}
-
-			property var _vePvConfig: VeQuickItem {
-				onChildIdsChanged: Qt.callLater(_getTrackers)
-				Component.onCompleted: _getTrackers()
-			}
-
-			property var _veHistory: VeQuickItem {
-				uid: _dbusUid ? "dbus/" + _dbusUid + "/History/Daily" : ""
-				onChildIdsChanged: Qt.callLater(_getHistory)
-				Component.onCompleted: _getHistory()
-			}
-
-			// Used when there is only a single solar tracker for this charger. Properties must be
-			// same as those in the multi-tracker model.
-			property var _singleTracker: QtObject {
-				property real power: solarCharger.power
-			}
-
-			property var _trackersInstantiator: Instantiator {
-				model: _solarTrackers
-
+			property Instantiator _trackerObjects: Instantiator {
 				delegate: QtObject {
-					id: solarTracker
+					id: tracker
 
-					property string uid: modelData
-					property string dbusUid: "dbus/" + _dbusUid + "/Pv/" + solarTracker.uid
-
-					// Power for this tracker only
-					property real power
-
-					property bool _valid
-					on_ValidChanged: {
-						const index = Utils.findIndex(Global.solarChargers.model, solarTracker)
-						if (_valid && index < 0) {
-							Global.solarChargers.addTracker(solarTracker)
-						} else if (!_valid && index >= 0) {
-							Global.solarChargers.removeTracker(index)
-						}
+					// When there is only one tracker, use these paths:
+					// /Yield/Power      <- PV array power (Watts).
+					// /Pv/V             <- PV array voltage, path exists only for single tracker product (all common MPPTs)
+					// When there are multiple trackers, use these paths:
+					// /Pv/x/P           <- PV array power from tracker no. x+1.
+					// /Pv/x/V           <- PV array voltage from tracker x+1
+					property var vePower: VeQuickItem {
+						uid: _dbusUid
+							 ? _trackerObjects.count === 1
+							   ? "dbus/" + _dbusUid + "/Yield/Power"
+							   : "dbus/" + _dbusUid + "/Pv/" + model.index + "/P"
+							 : ""
+						onValueChanged: solarCharger._updateTotal("power", "vePower")
 					}
-					property VeQuickItem _power: VeQuickItem {
-						uid: dbusUid ? dbusUid + "/P" : ""
-						onValueChanged: {
-							_valid |= (value === undefined)
-							solarTracker.power = value === undefined ? 0 : value
+					property var veVoltage: VeQuickItem {
+						uid: _dbusUid
+							 ? _trackerObjects.count === 1
+							   ? "dbus/" + _dbusUid + "/Pv/V"
+							   : "dbus/" + _dbusUid + "/Pv/" + model.index + "/V"
+							 : ""
+						onValueChanged: solarCharger._updateTotal("voltage", "veVoltage")
+					}
+
+					Component.onCompleted: {
+						solarCharger.trackers.append({ solarTracker: tracker })
+					}
+
+					Component.onDestruction: {
+						const index = Utils.findIndex(solarCharger.trackers, tracker)
+						if (index >= 0) {
+							solarCharger.trackers.remove(index)
 						}
 					}
 				}
 			}
 
-			property var _historyInstantiator: Instantiator {
-				model: _historyIds
+			Component.onCompleted: {
+				Global.solarChargers.addCharger(solarCharger)
+			}
 
-				delegate: VeQuickItem {
-					property string historyId: modelData
-					uid: _veHistory.childUId("/" + modelData + "/Yield")
-
-					onValueChanged: if (value !== undefined) solarCharger._updateDailyYields()
+			Component.onDestruction: {
+				const index = Utils.findIndex(Global.solarChargers.model, solarCharger)
+				if (index >= 0) {
+					Global.solarChargers.removeCharger(index)
 				}
 			}
 		}

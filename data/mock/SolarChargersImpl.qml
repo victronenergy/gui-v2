@@ -22,23 +22,47 @@ QtObject {
 			Global.solarChargers.acPower += chargerAcPower
 			Global.solarChargers.dcPower += chargerDcPower
 
-			const trackerObj = trackerComponent.createObject(root, {
-				acPower: chargerAcPower,
-				dcPower: chargerDcPower
+			const chargerObj = chargerComponent.createObject(root, {
+				power: chargerPower,
 			})
-			Global.solarChargers.addTracker(trackerObj)
+			// assume one tracker for now
+			const trackerObj = chargerComponent.createObject(root, {
+				power: chargerPower,
+			})
+			chargerObj.trackers.append({ solarTracker: trackerObj })
+			Global.solarChargers.addCharger(chargerObj)
 		}
 
-		Global.solarChargers.yieldHistory = [13400, 18500, 16200, 12100, 9300, 6600, 3200, 1040, 4400, 8800, 9300, 6600, 3200]
-		for (var historyIndex in Global.solarChargers.yieldHistory) {
-			Utils.updateMaximumValue("dailySolarYield", Global.solarChargers.yieldHistory[historyIndex])
+		populateYieldHistory()
+	}
+
+	function populateYieldHistory() {
+		Global.solarChargers.yieldHistory.clear()
+		for (let day = 0; day < 30; day++) {
+			const dailyYield = 50 + (Math.random() * 100)    // kwh
+			if (day == 0) {
+				Global.solarChargers.yieldHistory.maximum = dailyYield
+			} else {
+				Global.solarChargers.yieldHistory.maximum = Math.max(
+						Global.solarChargers.yieldHistory.maximum, dailyYield)
+			}
+			Global.solarChargers.yieldHistory.setYield(day, dailyYield)
+		}
+	}
+
+	property Component chargerComponent: Component {
+		QtObject {
+			property real power
+			property real voltage
+
+			property ListModel trackers: ListModel {}
 		}
 	}
 
 	property Component trackerComponent: Component {
 		QtObject {
-			property real acPower
-			property real dcPower
+			property real power
+			property real voltage
 		}
 	}
 
@@ -48,20 +72,27 @@ QtObject {
 		function onSetSolarChargersRequested(config) {
 			Global.solarChargers.reset()
 
-			if (config && config.trackers) {
+			if (config && config.chargers) {
 				Global.solarChargers.acPower = 0
 				Global.solarChargers.dcPower = 0
 
-				for (let i = 0; i < config.trackers.length; ++i) {
-					Global.solarChargers.acPower += config.trackers[i].acPower
-					Global.solarChargers.dcPower += config.trackers[i].dcPower
+				for (let i = 0; i < config.chargers.length; ++i) {
+					Global.solarChargers.acPower += config.chargers[i].acPower
+					Global.solarChargers.dcPower += config.chargers[i].dcPower
 
-					const trackerObj = trackerComponent.createObject(root, {
-						acPower: config.trackers[i].acPower,
-						dcPower: config.trackers[i].dcPower
+					const chargerObj = chargerComponent.createObject(root, {
+						power: config.chargers[i].acPower + config.chargers[i].dcPower
 					})
-					Global.solarChargers.addTracker(trackerObj)
+					// assume one tracker for now
+					const trackerObj = chargerComponent.createObject(root, {
+						power: chargerObj.power,
+					})
+					chargerObj.trackers.append({ solarTracker: trackerObj })
+
+					Global.solarChargers.addCharger(chargerObj)
 				}
+
+				populateYieldHistory()
 			}
 		}
 	}

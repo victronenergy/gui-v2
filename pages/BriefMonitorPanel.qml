@@ -169,8 +169,6 @@ Column {
 					bottom: parent.bottom
 					bottomMargin: Theme.geometry.briefPage.sidePanel.solarYield.bottomMargin
 				}
-
-				history: Global.solarChargers.yieldHistory
 			}
 		}
 		Component {

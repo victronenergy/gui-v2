@@ -8,42 +8,29 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property var history: []
-
-	property var _displayedHistory: {
-		if (!history) {
-			return []
-		}
-		let maxBars = Math.max(0, width / (Theme.geometry.overviewPage.widget.solar.graph.bar.width
-			+ Theme.geometry.overviewPage.widget.solar.graph.margins))
-		return history.slice(0, maxBars)
-	}
-
-	property var _maxValue: {
-		var currMax = 0
-		for (var i = 0; i < _displayedHistory.length; ++i) {
-			if (currMax < _displayedHistory[i]) {
-				currMax = _displayedHistory[i]
-			}
-		}
-		return currMax
-	}
+	readonly property int _maxBars: Math.max(0, width / (Theme.geometry.overviewPage.widget.solar.graph.bar.width
+		+ Theme.geometry.overviewPage.widget.solar.graph.margins))
 
 	Row {
-		anchors.horizontalCenter: parent.horizontalCenter
-		width: (_displayedHistory.length * Theme.geometry.overviewPage.widget.solar.graph.bar.width)
-			+ ((_displayedHistory.length-1) * Theme.geometry.overviewPage.widget.solar.graph.margins)
+		anchors {
+			horizontalCenter: parent.horizontalCenter
+			bottom: parent.bottom
+		}
+		width: (_maxBars * Theme.geometry.overviewPage.widget.solar.graph.bar.width)
+			+ ((_maxBars-1) * Theme.geometry.overviewPage.widget.solar.graph.margins)
 		spacing: Theme.geometry.overviewPage.widget.solar.graph.margins
 
 		Repeater {
-			model: root._displayedHistory
+			id: dayRepeater
 
-			Rectangle {
+			model: Global.solarChargers.yieldHistory
+			delegate: Rectangle {
 				anchors.bottom: parent.bottom
-				height: root.height * (modelData / root._maxValue)
+				height: visible ? root.height * (model.value / Math.max(1, Global.solarChargers.yieldHistory.maximum)) : 0
 				width: Theme.geometry.overviewPage.widget.solar.graph.bar.width
 				radius: Theme.geometry.overviewPage.widget.solar.graph.bar.radius
 				color: Theme.color.overviewPage.widget.solar.graph.bar
+				visible: model.index < root._maxBars
 			}
 		}
 	}
