@@ -6,7 +6,6 @@ import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 import "/components/Utils.js" as Utils
-import "../data"
 
 Item {
 	id: root
@@ -32,7 +31,7 @@ Item {
 			direction: PathArc.Counterclockwise
 			strokeWidth: Theme.geometry.arc.strokeWidth
 			arcY: root.gaugeAlignmentY === Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
-			value: modelData / Utils.maximumValue("dailySolarYield") * 100
+			value: Utils.scaleToRange(model.value, 0, Global.solarChargers.yieldHistory.maximum, 0, 100)
 		}
 	}
 	ArcGaugeValueDisplay {

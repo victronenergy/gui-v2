@@ -488,7 +488,6 @@ Page {
 			isSegment: segmentedBackground.visible
 
 			value: Global.solarChargers.power  // TODO show amps instead if configured
-			yieldHistory: Global.solarChargers.yieldHistory
 
 			WidgetConnector {
 				id: acSolarConnector

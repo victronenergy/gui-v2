@@ -38,7 +38,7 @@ Item {
 		if (forceReload) {
 			const pageIndex = indexOfPage(Global.pageManager.navBar.currentUrl)
 			Global.pageManager.navBar.buttonClicked(Global.pageManager.navBar.model.count - 1) // go to settings page
-			Global.pageManager.navBar.buttonClicked(pageIndex)
+			Qt.callLater(Global.pageManager.navBar.buttonClicked, pageIndex)
 		}
 	}
 
