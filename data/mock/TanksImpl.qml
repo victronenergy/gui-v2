@@ -20,7 +20,7 @@ QtObject {
 		for (let i = 0; i < 3; ++i) {
 			const tankType = Math.floor(Math.random() * maxTankType + 1)
 			const level = Math.random()
-			const capacity = 1000
+			const capacity = 1  // m3
 			const tankObj = tankComponent.createObject(root, {
 				type: tankType,
 				level: level * 100,
@@ -83,11 +83,12 @@ QtObject {
 				// add a tank
 				model = Global.tanks.tankModel(Math.floor(Math.random() * Global.tanks.tankTypes.length))
 				const randomLevel = Math.random()
+				const capacity = 1  // m3
 				const tankObj = tankComponent.createObject(root, {
 					type: model.type,
 					level: randomLevel * 100,
-					capacity: 1000,
-					remaining: 1000 * randomLevel,
+					capacity: capacity,
+					remaining: capacity * randomLevel,
 				})
 				Global.tanks.addTank(tankObj)
 			} else {
