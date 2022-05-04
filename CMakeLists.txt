@@ -102,8 +102,7 @@ set(VELIB_SOURCES
     velib/src/qt/v_busitems.cpp
 )
 
-set(QINETIC_SOURCES
->>>>>>> extra compiler warnings
+set(VENUS_SOURCES
     main.cpp
     theme.h
     theme.cpp
@@ -112,12 +111,6 @@ set(QINETIC_SOURCES
     logging.h
     enums.h
     enums.cpp
-)
-
-list(APPEND SOURCES
-    ${QINETIC_SOURCES}
-    ${VELIB_SOURCES}
-    ${QML_RESOURCES}
 )
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
@@ -138,6 +131,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
         ${SOURCES}
     )
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+    list(APPEND venusCompileFlags "-Wall" "-Wextra" "-Werror" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
     add_compile_definitions(VENUS_DESKTOP_BUILD)
     qt_add_executable(${PROJECT_NAME}
       MACOSX_BUNDLE
@@ -154,6 +148,7 @@ elseif(VENUS_DESKTOP_BUILD)
         ${SOURCES}
     )
 else()
+    list(APPEND venusCompileFlags "-Wall" "-Wextra" "-Werror" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
@@ -165,11 +160,10 @@ qt_add_resources(${PROJECT_NAME} "i18n"
     BASE "i18n"
     FILES ${TRANSLATIONS_QM_FILES})
 
-list(APPEND qineticCompileFlags "-Wall" "-Wextra" "-Werror" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
 set_source_files_properties(
-    ${QINETIC_SOURCES}
+    ${VENUS_SOURCES}
     PROPERTIES
-    COMPILE_OPTIONS "${qineticCompileFlags}"
+    COMPILE_OPTIONS "${venusCompileFlags}"
 )
 
 target_compile_definitions(${PROJECT_NAME}

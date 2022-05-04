@@ -4,6 +4,7 @@
 
 import QtQuick
 import QtQuick.Controls as C
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Item {
@@ -70,6 +71,42 @@ Item {
 				timeString = hours + ":" + mins
 			}
 		}
+	}
+	Button {
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry.notificationsPage.snoozeButton.topMargin
+			right: parent.right
+			rightMargin: Theme.geometry.notificationsPage.snoozeButton.rightMargin
+		}
+		enabled: !!Global.pageManager.navBar
+					&& Global.pageManager.navBar.currentUrl === "qrc:/pages/NotificationsPage.qml"
+					&& Global.notifications.audibleAlarmActive
+					&& !Global.notifications.snoozeAudibleAlarmActive
+		opacity: enabled ? 1 : 0
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation.toastNotification.fade.duration} }
+		border.width: Theme.geometry.button.border.width
+		border.color: Theme.color.critical
+		width: Theme.geometry.notificationsPage.snoozeButton.width
+		height: Theme.geometry.notificationsPage.snoozeButton.height
+		backgroundColor: Theme.color.darkCritical
+		radius: Theme.geometry.notificationsPage.snoozeButton.radius
+		contentItem: Row {
+			leftPadding: Theme.geometry.notificationsPage.snoozeButton.image.leftMargin
+			anchors.verticalCenter: parent.verticalCenter
+			spacing: Theme.geometry.notificationsPage.snoozeButton.spacing
+			CP.IconLabel {
+				anchors.verticalCenter: parent.verticalCenter
+				icon.source: "qrc:/images/icon_alarm_snooze_24"
+			}
+			Label {
+				anchors.verticalCenter: parent.verticalCenter
+				font.pixelSize: Theme.font.size.xs
+				//% "Silence alarm"
+				text: qsTrId("silence_alarm")
+			}
+		}
+		onClicked: Global.notifications.snoozeAudibleAlarmActive = true
 	}
 
 	Button {

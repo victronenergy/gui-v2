@@ -17,6 +17,7 @@ import QtQml
 QtObject {
 	property var pageManager
 	property var demoManager    // only valid when demo mode is active
+	property date now: new Date()
 
 	// data sources
 	property var acInputs
@@ -26,6 +27,7 @@ QtObject {
 	property var ess
 	property var generators
 	property var inverters
+	property var notifications
 	property var relays
 	property var solarChargers
 	property var system
@@ -34,5 +36,12 @@ QtObject {
 
 	readonly property bool ready: pageManager != null && dataBackendLoaded
 	property bool dataBackendLoaded
+
+	readonly property Timer _timer: Timer {
+		interval: 60000 // 1 minute
+		running: true
+		repeat: true
+		onTriggered: now = new Date()
+	}
 }
 

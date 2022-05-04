@@ -15,6 +15,7 @@ QtObject {
 	property var ess: EssImpl {}
 	property var generators: GeneratorsImpl {}
 	property var inverters: InvertersImpl {}
+	property var notifications: NotificationsImpl {}
 	property var relays: RelaysImpl {}
 	property var solarChargers: SolarChargersImpl {}
 	property var system: SystemImpl {}

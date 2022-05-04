@@ -67,6 +67,8 @@
         <file>components/LoadGraphShapePath.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
+        <file>components/NotificationDelegate.qml</file>
+        <file>components/NotificationsView.qml</file>
         <file>components/Page.qml</file>
         <file>components/PageStack.qml</file>
         <file>components/ProgressArc.qml</file>
@@ -98,6 +100,8 @@
         <file>data/EnvironmentInputs.qml</file>
         <file>data/Ess.qml</file>
         <file>data/Generators.qml</file>
+        <file>data/Notifications.qml</file>
+        <file>data/dbus/NotificationsImpl.qml</file>
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
         <file>data/System.qml</file>
@@ -126,6 +130,7 @@
         <file>data/mock/GeneratorsImpl.qml</file>
         <file>data/mock/InvertersImpl.qml</file>
         <file>data/mock/MockDataManager.qml</file>
+        <file>data/mock/NotificationsImpl.qml</file>
         <file>data/mock/RelaysImpl.qml</file>
         <file>data/mock/SolarChargersImpl.qml</file>
         <file>data/mock/SystemImpl.qml</file>
@@ -134,6 +139,7 @@
         <file>demo/DemoManager.qml</file>
         <file>demo/LevelsPageConfig.qml</file>
         <file>demo/BriefAndOverviewPageConfig.qml</file>
+        <file>demo/NotificationsPageConfig.qml</file>
         <file>pages/BriefMonitorPanel.qml</file>
         <file>pages/BriefPage.qml</file>
         <file>pages/ControlCardsPage.qml</file>
@@ -172,8 +178,10 @@
         <file>images/fueltank.svg</file>
         <file>images/freshWater20x27.svg</file>
         <file>images/icon_alarm_48.svg</file>
+        <file>images/icon_alarm_snooze_24</file>
         <file>images/icon_autostart_24.svg</file>
         <file>images/icon_back_32.svg</file>
+        <file>images/icon_checkmark_48.svg</file>
         <file>images/icon_controls_off_32.svg</file>
         <file>images/icon_controls_on_32.svg</file>
         <file>images/icon_humidity_32.svg</file>

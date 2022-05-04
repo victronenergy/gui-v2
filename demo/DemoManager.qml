@@ -18,6 +18,7 @@ Item {
 	signal setSolarChargersRequested(var config)
 	signal setSystemRequested(var config)
 	signal setTanksRequested(var config)
+	signal deactivateSingleAlarm()
 
 	readonly property var _demoConfigConfigs: ({
 		"qrc:/pages/BriefPage.qml": briefAndOverviewConfig,
@@ -97,6 +98,22 @@ Item {
 			demoConfigTitle.text = "Language: " + Language.toString(Language.current)
 			event.accepted = true
 			break
+		case Qt.Key_N:
+			if (event.modifiers & Qt.ShiftModifier) {
+				root.deactivateSingleAlarm()
+			} else {
+				Global.notifications.addNotification(notificationsConfig.getRandomAlarm())
+			}
+			event.accepted = true
+			break
+		case Qt.Key_O:
+			notificationsConfig.showToastNotification()
+			event.accepted = true
+			break
+		case Qt.Key_P:
+			dialogManager.showWarning(notificationsConfig.warningNotificationTitle, notificationsConfig.warningNotificationDescription)
+			event.accepted = true
+			break
 		case Qt.Key_T:
 			root.timersActive = !root.timersActive
 			demoConfigTitle.text = "Timers on: " + root.timersActive
@@ -141,5 +158,9 @@ Item {
 		id: levelsConfig
 
 		property int configIndex: -1
+	}
+
+	NotificationsPageConfig {
+		id: notificationsConfig
 	}
 }

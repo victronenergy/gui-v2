@@ -3,82 +3,106 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Page {
 	id: root
-
-	Label {
-		id: label
-		anchors.top: parent.top
-		anchors.topMargin: 20
-		anchors.horizontalCenter: parent.horizontalCenter
-		text: "NotificationsPage placeholder"
-	}
-
-	Column {
+	NotificationsView {
+		id: historicalNotificationsView
 		anchors {
-			top: label.bottom
-			topMargin: Theme.geometry.page.content.horizontalMargin
-			horizontalCenter: parent.horizontalCenter
+			top: parent.top
+			topMargin: Theme.geometry.notificationsPage.topMargin - Theme.geometry.statusBar.height
+			bottom: parent.bottom
+			left: parent.left
+			leftMargin: Theme.geometry.notificationsPage.horizontalMargin
+			right: parent.right
 		}
-		spacing: Theme.geometry.page.content.horizontalMargin
+		header: Item {
+			id: headerItem
+			height: history.y + history.height
 
-		Button {
-			anchors.horizontalCenter: parent.horizontalCenter
-
-			topPadding: 12
-			bottomPadding: 12
-			leftPadding: 20
-			rightPadding: 20
-
-			flat: false
-
-			//% "Generate Modal Notification"
-			//: Generate a fullscreen modal warning notification
-			text: qsTrId("notifications_generate_modal_notification")
-
-			//% "Inverter temperature"
-			property string warningNotificationTitle: qsTrId("notifications_warning_title_inverter_temperature")
-			//% "Suggest user an action or inaction, inform about status.  This text can be long and should wrap."
-			property string warningNotificationDescription: qsTrId("notifications_warning_description_inverter_temperature")
-
-			onClicked: {
-				dialogManager.showWarning(warningNotificationTitle,  warningNotificationDescription)
+			NotificationsView {
+				id: activeNotificationsView // these notifications are active and/or not acknowledged
+				implicitHeight: childrenRect.height
+				interactive: false
+				model: Global.notifications.model
+				// When a new notification is raised, scroll to the top of the list header.
+				// We can't do this via 'onCountChanged', as the count changes before headerItem.height is updated.
+				onHeightChanged: historicalNotificationsView.contentY = -headerItem.height
 			}
-		}
+			Row {
+				id: noCurrentAlerts
 
-		Button {
-			anchors.horizontalCenter: parent.horizontalCenter
-
-			topPadding: 12
-			bottomPadding: 12
-			leftPadding: 20
-			rightPadding: 20
-
-			flat: false
-
-			//% "Generate Toast Notification"
-			//: Generate a popup (toast) notification
-			text: qsTrId("notifications_generate_toast_notification")
-
-			//% "Mollitia quis est quas deleniti quibusdam explicabo quasi."
-			property string shortText: qsTrId("notifications_toast_short_text")
-
-			//% "Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur."
-			property string longText: qsTrId("notifications_toast_long_text")
-
-			property int currentCategory: VenusOS.ToastNotification_Category_Error
-			property bool useShortText: false
-
-			onClicked: {
-				currentCategory = (currentCategory + 1)
-				if (currentCategory > VenusOS.ToastNotification_Category_Error) {
-					currentCategory = VenusOS.ToastNotification_Category_None
-					useShortText = !useShortText
+				anchors {
+					top: activeNotificationsView.bottom
+					topMargin: Theme.geometry.notificationsPage.checkmark.topMargin - Theme.geometry.statusBar.height
+					left: parent.left
+					leftMargin: Theme.geometry.notificationsPage.checkmark.leftMargin - Theme.geometry.notificationsPage.horizontalMargin
 				}
-				dialogManager.showToastNotification(currentCategory, useShortText ? shortText : longText)
+				visible: Global.notifications.model.count === 0
+				spacing: Theme.geometry.notificationsPage.checkmark.spacing
+
+				CP.ColorImage {
+					anchors.top: parent.top
+					source: "qrc:/images/icon_checkmark_48"
+					fillMode: Image.PreserveAspectFit
+					smooth: true
+				}
+				Label {
+					anchors.verticalCenter: parent.verticalCenter
+					color: Theme.color.notificationsPage.text.color
+					font.pixelSize: Theme.font.size.l
+
+					//% "No current alerts"
+					text: qsTrId("notifications_no_current_alerts")
+				}
 			}
+			Label {
+				id: history
+				anchors {
+					top: Global.notifications.model.count === 0
+						? noCurrentAlerts.bottom : activeNotificationsView.bottom
+					topMargin: Global.notifications.model.count === 0
+						? Theme.geometry.notificationsPage.history.topMargin : Theme.geometry.notificationsPage.delegate.topMargin
+					left: parent.left
+				}
+				bottomPadding: Theme.geometry.notificationsPage.history.bottomPadding
+
+				visible: historicalNotificationsView.count !== 0
+				color: Theme.color.notificationsPage.text.color
+				//% "History"
+				text: qsTrId("notifications_history")
+			}
+		}
+
+		model: Global.notifications.historyModel
+		add: Transition {
+			SequentialAnimation {
+				PropertyAction { property: "opacity"; value: 0}
+				PauseAnimation { duration: Theme.animation.notificationsPage.delegate.displaced.duration }
+				NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: Theme.animation.notificationsPage.delegate.opacity.duration }
+			}
+		}
+		displaced: Transition {
+			NumberAnimation { properties: "x,y"; duration: Theme.animation.notificationsPage.delegate.displaced.duration }
+		}
+		ScrollBar.vertical: ScrollBar {
+			anchors.right: parent.right
+		}
+	}
+	Rectangle {
+		anchors {
+			bottom: parent.bottom
+			left: parent.left
+			right: parent.right
+			rightMargin: Theme.geometry.notificationsPage.delegate.rightMargin
+		}
+		height: Theme.geometry.notificationsPage.gradient.height
+		gradient: Gradient {
+			orientation: Gradient.Vertical
+			GradientStop { position: 0; color: Theme.color.notificationsPage.gradient.topColor }
+			GradientStop { position: 1; color: Theme.color.notificationsPage.gradient.bottomColor }
 		}
 	}
 }
