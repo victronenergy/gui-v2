@@ -3,81 +3,130 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Page {
 	id: root
 
-	Label {
-		id: label
-		anchors.top: parent.top
-		anchors.topMargin: 20
-		anchors.horizontalCenter: parent.horizontalCenter
-		text: "NotificationsPage placeholder"
+	Row {
+		id: noCurrentAlerts
+
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry.notificationsPage.checkmark.topMargin
+			left: parent.left
+			leftMargin: Theme.geometry.notificationsPage.checkmark.leftMargin
+		}
+		spacing: Theme.geometry.notificationsPage.checkmark.spacing
+		height: childrenRect.height
+
+		CP.ColorImage {
+			anchors.verticalCenter: parent.verticalCenter
+			source: "qrc:/images/icon_checkmark_48"
+			fillMode: Image.PreserveAspectFit
+			smooth: true
+		}
+		Label {
+			anchors.verticalCenter: parent.verticalCenter
+			color: Theme.color.notificationsPage.text.color1
+			font.pixelSize: Theme.font.size.l
+
+			//% "No current alerts"
+			text: qsTrId("notifications_no_current_alerts")
+		}
 	}
 
-	Column {
+	Label {
+		id: label
+		anchors {
+			top: noCurrentAlerts.bottom
+			topMargin: Theme.geometry.notificationsPage.history.topMargin
+			left: parent.left
+			leftMargin: Theme.geometry.notificationsPage.history.leftMargin
+		}
+		color: Theme.color.notificationsPage.text.color1
+
+		//% "History"
+		text: qsTrId("notifications_history")
+	}
+	ListView {
 		anchors {
 			top: label.bottom
-			topMargin: Theme.geometry.page.content.horizontalMargin
-			horizontalCenter: parent.horizontalCenter
+			topMargin: Theme.geometry.notificationsPage.history.spacing
+			left: parent.left
+			leftMargin: Theme.geometry.notificationsPage.history.leftMargin
 		}
-		spacing: Theme.geometry.page.content.horizontalMargin
-
-		Button {
-			anchors.horizontalCenter: parent.horizontalCenter
-
-			topPadding: 12
-			bottomPadding: 12
-			leftPadding: 20
-			rightPadding: 20
-
-			flat: false
-
-			//% "Generate Modal Notification"
-			//: Generate a fullscreen modal warning notification
-			text: qsTrId("notifications_generate_modal_notification")
-
-			//% "Inverter temperature"
-			property string warningNotificationTitle: qsTrId("notifications_warning_title_inverter_temperature")
-			//% "Suggest user an action or inaction, inform about status.  This text can be long and should wrap."
-			property string warningNotificationDescription: qsTrId("notifications_warning_description_inverter_temperature")
-
-			onClicked: {
-				dialogManager.showWarning(warningNotificationTitle,  warningNotificationDescription)
+		spacing: Theme.geometry.notificationsPage.historyView.spacing
+		height: childrenRect.height
+		model: ListModel {
+			ListElement {
+				acknowledged: false
+				category: VenusOS.ToastNotification_Category_Error
+				source: "Fuel tank custom name"
+				description: "Fuel level low 15%"
+			}
+			ListElement {
+				acknowledged: false
+				category: VenusOS.ToastNotification_Category_Warning
+				source: "RS 48/6000/100 HQ2050NMMEX"
+				description: "Low battery voltage 46.69V"
+			}
+			ListElement {
+				acknowledged: true
+				category: VenusOS.ToastNotification_Category_Informative
+				source: "System"
+				description: "Software update available"
 			}
 		}
-
-		Button {
-			anchors.horizontalCenter: parent.horizontalCenter
-
-			topPadding: 12
-			bottomPadding: 12
-			leftPadding: 20
-			rightPadding: 20
-
-			flat: false
-
-			//% "Generate Toast Notification"
-			//: Generate a popup (toast) notification
-			text: qsTrId("notifications_generate_toast_notification")
-
-			//% "Mollitia quis est quas deleniti quibusdam explicabo quasi."
-			property string shortText: qsTrId("notifications_toast_short_text")
-
-			//% "Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur."
-			property string longText: qsTrId("notifications_toast_long_text")
-
-			property int currentCategory: VenusOS.ToastNotification_Category_Error
-			property bool useShortText: false
-
-			onClicked: {
-				currentCategory = (currentCategory + 1)
-				if (currentCategory > VenusOS.ToastNotification_Category_Error) {
-					currentCategory = VenusOS.ToastNotification_Category_None
-					useShortText = !useShortText
+		delegate: Rectangle {
+			width: Theme.geometry.notificationsPage.delegate.width
+			height: Theme.geometry.notificationsPage.delegate.height
+			radius: Theme.geometry.toastNotification.radius
+			color: Theme.color.background.secondary
+			Row {
+				anchors {
+					top: parent.top
+					bottom: parent.bottom
+					left: parent.left
+					leftMargin: Theme.geometry.notificationsPage.delegate.marker.leftMargin
 				}
-				dialogManager.showToastNotification(currentCategory, useShortText ? shortText : longText)
+				Rectangle {
+					anchors {
+						top: parent.top
+						topMargin: Theme.geometry.notificationsPage.delegate.marker.topMargin
+					}
+					width: Theme.geometry.notificationsPage.delegate.marker.width
+					height: width
+					radius: Theme.geometry.notificationsPage.delegate.marker.radius
+					color: acknowledged ? "transparent" : Theme.color.critical
+				}
+				Item {
+					height: 1
+					width: Theme.geometry.notificationsPage.delegate.spacing1
+				}
+				CP.ColorImage {
+					anchors.verticalCenter: parent.verticalCenter
+					fillMode: Image.PreserveAspectFit
+					smooth: true
+					source: category === VenusOS.ToastNotification_Category_Informative ? "qrc:/images/toast_icon_info.svg" : "qrc:/images/toast_icon_alarm.svg"
+				}
+				Item {
+					height: 1
+					width: Theme.geometry.notificationsPage.delegate.spacing2
+				}
+				Column {
+					anchors.verticalCenter: parent.verticalCenter
+					spacing: Theme.geometry.notificationsPage.delegate.spacing3
+					Label {
+						color: Theme.color.settingsListItem.secondaryText
+						text: source
+					}
+					Label {
+						color: Theme.color.settingsListItem.secondaryText
+						text: description
+					}
+				}
 			}
 		}
 	}
