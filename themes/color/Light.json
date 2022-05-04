@@ -71,11 +71,11 @@
     "color.toastNotification.highlight.warning": "color.warning",
     "color.toastNotification.highlight.error": "color.critical",
 
+    "color.page.background": "#E6E5E1",
+
     "color.overviewPage.connector.electron.outerColor": "#4CFFFFFF",
     "color.overviewPage.connector.electron.innerColor": "#4CFFFFFF",
     "color.overviewPage.connector.electron.centerColor": "#FFFFFF",
-
-    "color.page.background": "#E6E5E1",
 
     "color.overviewPage.widget.background": "color.background.primary",
     "color.overviewPage.widget.border": "color.ok",
@@ -123,5 +123,10 @@
 
     "color.settingsPage.settingsList.gradient.color1": "transparent",
     "color.settingsPage.settingsList.gradient.color2": "#66E6E5E1",
-    "color.settingsPage.settingsList.gradient.color3": "#E6E5E1"
+    "color.settingsPage.settingsList.gradient.color3": "#E6E5E1",
+
+    "color.notificationsPage.delegate.name.text.color": "color.font.disabled",
+    "color.notificationsPage.gradient.topColor": "transparent",
+    "color.notificationsPage.gradient.bottomColor": "#E6E5E1",
+    "color.notificationsPage.text.color": "color.font.disabled"
 }

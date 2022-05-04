@@ -36,6 +36,19 @@ Row {
 				buttonRepeater.currentIndex = model.index
 				root.buttonClicked(model.index)
 			}
+			Rectangle {
+				anchors {
+					top: parent.top
+					topMargin: Theme.geometry.navigationBar.notifications.redDot.topMargin
+					horizontalCenter: parent.horizontalCenter
+					horizontalCenterOffset: Theme.geometry.navigationBar.notifications.redDot.horizontalCenterOffset
+				}
+				width: Theme.geometry.notificationsPage.delegate.marker.width
+				height: width
+				radius: Theme.geometry.notificationsPage.delegate.marker.radius
+				color: Theme.color.critical
+				visible: model.url === "qrc:/pages/NotificationsPage.qml" && Global.notifications.newNotifications
+			}
 		}
 	}
 }
