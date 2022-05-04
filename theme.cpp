@@ -156,7 +156,7 @@ void Theme::insertValue(
 		int depth,
 		bool defer)
 {
-	const int dot = key.indexOf(QLatin1Char('.'), depth);
+	const int dot = static_cast<int>(key.indexOf(QLatin1Char('.'), depth));
 	if (dot == -1) {
 		const QString name = key.mid(depth);
 		tree->insert(name, parseValue(value, key, defer));

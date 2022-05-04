@@ -78,7 +78,7 @@ int LanguageModel::languageAt(int index) const
 
 int LanguageModel::rowCount(const QModelIndex &) const
 {
-	return m_languages.count();
+	return static_cast<int>(m_languages.count());
 }
 
 QVariant LanguageModel::data(const QModelIndex &index, int role) const

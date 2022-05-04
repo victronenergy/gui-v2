@@ -29,13 +29,13 @@ public:
 		FiveInch = 0,
 		SevenInch
 	};
-	Q_ENUM(ScreenSize);
+	Q_ENUM(ScreenSize)
 
 	enum ColorScheme {
 		Dark = 0,
 		Light
 	};
-	Q_ENUM(ColorScheme);
+	Q_ENUM(ColorScheme)
 
 	enum StatusLevel {
 		Ok = 0,

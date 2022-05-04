@@ -102,7 +102,8 @@ set(VELIB_SOURCES
     velib/src/qt/v_busitems.cpp
 )
 
-set(VENUS_SOURCES
+set(QINETIC_SOURCES
+>>>>>>> extra compiler warnings
     main.cpp
     theme.h
     theme.cpp
@@ -111,6 +112,12 @@ set(VENUS_SOURCES
     logging.h
     enums.h
     enums.cpp
+)
+
+list(APPEND SOURCES
+    ${QINETIC_SOURCES}
+    ${VELIB_SOURCES}
+    ${QML_RESOURCES}
 )
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
@@ -157,6 +164,13 @@ qt_add_resources(${PROJECT_NAME} "i18n"
     PREFIX "/i18n"
     BASE "i18n"
     FILES ${TRANSLATIONS_QM_FILES})
+
+list(APPEND qineticCompileFlags "-Wall" "-Wextra" "-Werror" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
+set_source_files_properties(
+    ${QINETIC_SOURCES}
+    PROPERTIES
+    COMPILE_OPTIONS "${qineticCompileFlags}"
+)
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
