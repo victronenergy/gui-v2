@@ -63,6 +63,8 @@ class Language : public QObject
 	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged FINAL)
 public:
 	explicit Language(QQmlEngine* engine);
+	Language(const Victron::VenusOS::Language&) = delete;
+	Language& operator=(const Victron::VenusOS::Language&) = delete;
 
 	Q_ENUM(QLocale::Language)
 

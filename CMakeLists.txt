@@ -94,7 +94,7 @@ set(VELIB_SOURCES
     velib/src/qt/v_busitems.cpp
 )
 
-list(APPEND SOURCES
+set(QINETIC_SOURCES
     main.cpp
     theme.h
     theme.cpp
@@ -103,6 +103,10 @@ list(APPEND SOURCES
     logging.h
     enums.h
     enums.cpp
+)
+
+list(APPEND SOURCES
+    ${QINETIC_SOURCES}
     ${VELIB_SOURCES}
     ${QML_RESOURCES}
 )
@@ -134,6 +138,15 @@ qt_add_resources(${PROJECT_NAME} "i18n"
     PREFIX "/i18n"
     BASE "i18n"
     FILES ${TRANSLATIONS_QM_FILES})
+
+# "-Weffc++"  "-Wsign-promo"
+list(APPEND flags "-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wlogical-op" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-null-sentinel" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
+set(flags2, -Wall -Wextra)
+set_source_files_properties(
+    main.cpp
+    PROPERTIES
+    COMPILE_OPTIONS "${flags}"
+)
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)

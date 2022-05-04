@@ -346,8 +346,8 @@ int main(int argc, char *argv[])
 	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
 
 	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
-	const int screenDiagonalMm = sqrt((physicalScreenSize.width() * physicalScreenSize.width())
-			+ (physicalScreenSize.height() * physicalScreenSize.height()));
+	const int screenDiagonalMm = static_cast<int>(sqrt((physicalScreenSize.width() * physicalScreenSize.width())
+			+ (physicalScreenSize.height() * physicalScreenSize.height())));
 	engine.setProperty("screenSize", (round(screenDiagonalMm / 10 / 2.5) == 7)
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
