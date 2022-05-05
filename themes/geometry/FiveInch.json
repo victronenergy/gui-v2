@@ -107,6 +107,8 @@
     "geometry.notificationsPage.delegate.spacing1" : 6,
     "geometry.notificationsPage.delegate.spacing2" : 24,
     "geometry.notificationsPage.delegate.spacing3" : 3,
+    "geometry.notificationsPage.delegate.topMargin" : 15,
+    "geometry.notificationsPage.delegate.rightMargin" : 24,
 
     "geometry.toastNotification.margins" : 24,
     "geometry.toastNotification.radius" : 8,

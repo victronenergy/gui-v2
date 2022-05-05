@@ -130,6 +130,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "NavBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavButton.qml")),
 		"Victron.VenusOS", 2, 0, "NavButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NotificationDelegate.qml")),
+		"Victron.VenusOS", 2, 0, "NotificationDelegate");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Page.qml")),
 		"Victron.VenusOS", 2, 0, "Page");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/PageStack.qml")),

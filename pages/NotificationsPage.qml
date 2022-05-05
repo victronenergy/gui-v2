@@ -9,9 +9,12 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property var _locale: Qt.locale()
+
 	Row {
 		id: noCurrentAlerts
 
+		visible: activeNotifications.count === 0
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry.notificationsPage.checkmark.topMargin
@@ -50,6 +53,12 @@ Page {
 		//% "History"
 		text: qsTrId("notifications_history")
 	}
+	//readonly property string date1: Date.fromLocaleString(Qt.locale(), "Tue 2022-03-27 10:56:06", "MM-dd hh:mm")
+	readonly property string date1: "Mar 27 10:20"
+	function formatDateString(date) {
+		return date.toLocaleDateString(_locale, "MMMM d  ") + date.toLocaleTimeString(_locale, "hh:mm") // Mar 27  10:20
+	}
+
 	ListView {
 		anchors {
 			top: label.bottom
@@ -59,75 +68,37 @@ Page {
 		}
 		spacing: Theme.geometry.notificationsPage.historyView.spacing
 		height: childrenRect.height
-		model: ListModel {
-			ListElement {
-				acknowledged: false
-				category: VenusOS.ToastNotification_Category_Error
-				source: "Fuel tank custom name"
-				description: "Fuel level low 15%"
-			}
-			ListElement {
-				acknowledged: false
-				category: VenusOS.ToastNotification_Category_Warning
-				source: "RS 48/6000/100 HQ2050NMMEX"
-				description: "Low battery voltage 46.69V"
-			}
-			ListElement {
-				acknowledged: true
-				category: VenusOS.ToastNotification_Category_Informative
-				source: "System"
-				description: "Software update available"
-			}
-		}
-		delegate: Rectangle {
-			width: Theme.geometry.notificationsPage.delegate.width
-			height: Theme.geometry.notificationsPage.delegate.height
-			radius: Theme.geometry.toastNotification.radius
-			color: Theme.color.background.secondary
-			Row {
-				anchors {
-					top: parent.top
-					bottom: parent.bottom
-					left: parent.left
-					leftMargin: Theme.geometry.notificationsPage.delegate.marker.leftMargin
-				}
-				Rectangle {
-					anchors {
-						top: parent.top
-						topMargin: Theme.geometry.notificationsPage.delegate.marker.topMargin
-					}
-					width: Theme.geometry.notificationsPage.delegate.marker.width
-					height: width
-					radius: Theme.geometry.notificationsPage.delegate.marker.radius
-					color: acknowledged ? "transparent" : Theme.color.critical
-				}
-				Item {
-					height: 1
-					width: Theme.geometry.notificationsPage.delegate.spacing1
-				}
-				CP.ColorImage {
-					anchors.verticalCenter: parent.verticalCenter
-					fillMode: Image.PreserveAspectFit
-					smooth: true
-					source: category === VenusOS.ToastNotification_Category_Informative ? "qrc:/images/toast_icon_info.svg" : "qrc:/images/toast_icon_alarm.svg"
-				}
-				Item {
-					height: 1
-					width: Theme.geometry.notificationsPage.delegate.spacing2
-				}
-				Column {
-					anchors.verticalCenter: parent.verticalCenter
-					spacing: Theme.geometry.notificationsPage.delegate.spacing3
-					Label {
-						color: Theme.color.settingsListItem.secondaryText
-						text: source
-					}
-					Label {
-						color: Theme.color.settingsListItem.secondaryText
-						text: description
-					}
-				}
-			}
+		model: historicalNotifications
+		delegate: NotificationDelegate {}
+	}
+	ListModel {
+		id: activeNotifications // either active or acknowledged
+	}
+	ListModel {
+		id: historicalNotifications // inactive and acknowledged
+		Component.onCompleted: {
+			var date = new Date()
+			append({acknowledged: true,
+					active: false,
+					category: VenusOS.ToastNotification_Category_Error,
+					date: formatDateString(date),
+					source: "Fuel tank custom name",
+					description: "Fuel level low 15%"
+					})
+			append({acknowledged: true,
+					active: false,
+					category: VenusOS.ToastNotification_Category_Warning,
+					date: formatDateString(date),
+					source: "RS 48/6000/100 HQ2050NMMEX",
+					description: "Low battery voltage 46.69V"
+					})
+			append({acknowledged: true,
+					active: false,
+					category: VenusOS.ToastNotification_Category_Informative,
+					date: formatDateString(date),
+					source: "System",
+					description: "Software update available"
+					})
 		}
 	}
 }

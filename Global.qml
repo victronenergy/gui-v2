@@ -26,6 +26,7 @@ QtObject {
 	property var ess
 	property var generators
 	property var inverters
+	property var notifications
 	property var relays
 	property var solarChargers
 	property var system

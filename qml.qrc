@@ -66,6 +66,7 @@
         <file>components/LoadGraphShapePath.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
+        <file>components/NotificationDelegate.qml</file>
         <file>components/Page.qml</file>
         <file>components/PageStack.qml</file>
         <file>components/ProgressArc.qml</file>
