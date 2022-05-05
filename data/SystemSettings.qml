@@ -10,11 +10,11 @@ QtObject {
 
 	property int accessLevel
 	property int demoMode
-	property int displayMode
+	property int colorScheme
 
 	signal setAccessLevelRequested(accessLevel: int)
 	signal setDemoModeRequested(demoMode: int)
-	signal setDisplayModeRequested(displayMode: int)
+	signal setColorSchemeRequested(colorScheme: int)
 
 	property QtObject briefView: QtObject {
 		// Default settings

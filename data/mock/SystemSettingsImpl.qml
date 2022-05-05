@@ -11,7 +11,7 @@ QtObject {
 	Component.onCompleted: {
 		Global.systemSettings.accessLevel = VenusOS.User_AccessType_User
 		Global.systemSettings.demoMode = 1
-		Global.systemSettings.displayMode = Theme.Dark
+		Global.systemSettings.colorScheme = Theme.Dark
 
 		Global.systemSettings.briefView.showPercentages = false
 	}
@@ -23,9 +23,9 @@ QtObject {
 			Global.systemSettings.accessLevel = accessLevel
 		}
 
-		function onSetDisplayModeRequested(displayMode) {
-			Theme.load(Theme.screenSize, displayMode)
-			Global.systemSettings.displayMode = displayMode
+		function onSetColorSchemeRequested(colorScheme) {
+			Theme.load(Theme.screenSize, colorScheme)
+			Global.systemSettings.colorScheme = colorScheme
 		}
 
 		// Don't connect to onSetDemoModeRequested() here, it is handled from DataPoint in main.qml.
