@@ -32,14 +32,14 @@ QtObject {
 									 source: "Fuel tank custom name",
 									 description: "Fuel level low 15%"
 								 })
-/*		Global.notifications.add({
+		Global.notifications.add({
 									 acknowledged: true,
 									 active: false,
-									 category: VenusOS.ToastNotification_Category_Warning,
+									 category: VenusOS.ToastNotification_Category_Error,
 									 date: formatDateString(date),
-									 source: "RS 48/6000/100 HQ2050NMMEX",
-									 description: "Low battery voltage 46.69V"
-								 })*/
+									 source: "Fuel tank custom name",
+									 description: "Fuel level low 15%"
+								 })
 		Global.notifications.add({
 									 acknowledged: false,
 									 active: true,
