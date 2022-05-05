@@ -65,6 +65,7 @@ Item {
 	Ess {}
 	Generators {}
 	Inverters {}
+	Notifications {}
 	Relays {}
 	SolarChargers {}
 	System {}

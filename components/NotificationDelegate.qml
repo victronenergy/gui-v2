@@ -32,6 +32,7 @@ Rectangle {
 			anchors.verticalCenter: parent.verticalCenter
 			fillMode: Image.PreserveAspectFit
 			smooth: true
+			opacity: active ? 1 : 0.3
 			color: category === VenusOS.ToastNotification_Category_Informative ? Theme.color.ok :
 																				 category === VenusOS.ToastNotification_Category_Warning ? Theme.color.warning : Theme.color.critical
 			source: category === VenusOS.ToastNotification_Category_Informative ? "qrc:/images/toast_icon_info.svg" : "qrc:/images/toast_icon_alarm.svg"
@@ -66,6 +67,6 @@ Rectangle {
 	}
 	MouseArea {
 		anchors.fill: parent
-		onClicked: console.log("clicked", index)
+		onClicked: Global.notifications.acknowledge(index)
 	}
 }

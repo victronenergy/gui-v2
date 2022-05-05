@@ -67,6 +67,7 @@
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
         <file>components/NotificationDelegate.qml</file>
+        <file>components/NotificationsView.qml</file>
         <file>components/Page.qml</file>
         <file>components/PageStack.qml</file>
         <file>components/ProgressArc.qml</file>
@@ -76,6 +77,7 @@
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
         <file>components/SolarYieldGraph.qml</file>
+        <file>components/Spacer.qml</file>
         <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
         <file>components/TankGauge.qml</file>
@@ -98,6 +100,7 @@
         <file>data/EnvironmentInputs.qml</file>
         <file>data/Ess.qml</file>
         <file>data/Generators.qml</file>
+        <file>data/Notifications.qml</file>
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
         <file>data/System.qml</file>
@@ -126,6 +129,7 @@
         <file>data/mock/GeneratorsImpl.qml</file>
         <file>data/mock/InvertersImpl.qml</file>
         <file>data/mock/MockDataManager.qml</file>
+        <file>data/mock/NotificationsImpl.qml</file>
         <file>data/mock/RelaysImpl.qml</file>
         <file>data/mock/SolarChargersImpl.qml</file>
         <file>data/mock/SystemImpl.qml</file>

@@ -132,6 +132,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "NavButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NotificationDelegate.qml")),
 		"Victron.VenusOS", 2, 0, "NotificationDelegate");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NotificationsView.qml")),
+		"Victron.VenusOS", 2, 0, "NotificationsView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Page.qml")),
 		"Victron.VenusOS", 2, 0, "Page");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/PageStack.qml")),
@@ -154,6 +156,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SolarYieldGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarYieldGraph.qml")),
 		"Victron.VenusOS", 2, 0, "SolarYieldGraph");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Spacer.qml")),
+		"Victron.VenusOS", 2, 0, "Spacer");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SplashView.qml")),
 		"Victron.VenusOS", 2, 0, "SplashView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/StatusBar.qml")),
