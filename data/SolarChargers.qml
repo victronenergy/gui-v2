@@ -39,6 +39,14 @@ QtObject {
 	property real acPower: NaN
 	property real dcPower: NaN
 
+	// Unlike for power, the AC and DC currents cannot be combined because amps for AC and DC
+	// sources are on different scales. So if they are both present, the total is NaN.
+	readonly property real current: !isNaN(acCurrent) && !isNaN(dcCurrent)
+			? NaN
+			: isNaN(acCurrent) ? dcCurrent : acCurrent
+	property real acCurrent: NaN
+	property real dcCurrent: NaN
+
 	function addCharger(charger) {
 		model.append({ solarCharger: charger })
 	}
@@ -50,6 +58,8 @@ QtObject {
 	function reset() {
 		acPower = NaN
 		dcPower = NaN
+		acCurrent = NaN
+		dcCurrent = NaN
 		model.clear()
 		yieldHistory.clear()
 		yieldHistory.maximum = 0

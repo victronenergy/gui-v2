@@ -5,6 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Velib
+import "/components/Utils.js" as Utils
 
 QtObject {
 	id: root
@@ -19,76 +20,82 @@ QtObject {
 
 	//--- AC data ---
 
-	property VeQuickItem inputConsumptionPhaseCount: VeQuickItem {
-		uid: veSystem.childUId("/Ac/ConsumptionOnInput/NumberOfPhases")
+	property VeQuickItem consumptionPhaseCount: VeQuickItem {
+		uid: veSystem.childUId("/Ac/Consumption/NumberOfPhases")
 		onValueChanged: {
 			if (value !== undefined) {
-				Global.system.ac.consumption.resetPhases(value)
+				Global.system.ac.consumption.setPhaseCount(value)
 				consumptionInputObjects.model = value
+				consumptionOutputObjects.model = value
 			}
 		}
 	}
 
 	property Instantiator consumptionInputObjects: Instantiator {
 		model: null
-		delegate: VeQuickItem {
-			uid: veDBus.childUId("/Ac/ConsumptionOnInput/L" + (index + 1) + "/Power")
+		delegate: QtObject {
+			id: consumptionInput
 
-			onValueChanged: {
-				const inputPower = value === undefined ? 0 : value
-				const outputPower = Global.system.ac.consumption.phases.get(model.index).outputPower
-				const combinedPower = inputPower + outputPower
-				Global.system.ac.consumption.setPhaseData(model.index,
-						{ "inputPower": inputPower, "power": combinedPower })
+			property real power: NaN
+			property real current: NaN
+
+			property VeQuickItem vePower: VeQuickItem {
+				uid: veDBus.childUId("/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Power")
+				onValueChanged: {
+					consumptionInput.power = value === undefined ? NaN : value
+					Qt.callLater(root._updateConsumptionModel, model.index)
+				}
 			}
-		}
-	}
-
-	property VeQuickItem outputConsumptionPhaseCount: VeQuickItem {
-		uid: veSystem.childUId("/Ac/ConsumptionOnOutput/NumberOfPhases")
-		onValueChanged: {
-			if (value !== undefined) {
-				Global.system.ac.consumption.resetPhases(value)
-				consumptionOutputObjects.model = value
+			// TODO this path doesn't exist in dbus yet but should be provided at a later stage.
+			// Verify when it is added.
+			property VeQuickItem veCurrent: VeQuickItem {
+				uid: veDBus.childUId("/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Current")
+				onValueChanged: {
+					consumptionInput.current = value === undefined ? NaN : value
+					Qt.callLater(root._updateConsumptionModel, model.index)
+				}
 			}
 		}
 	}
 
 	property Instantiator consumptionOutputObjects: Instantiator {
 		model: null
-		delegate: VeQuickItem {
-			uid: veDBus.childUId("/Ac/ConsumptionOnOutput/L" + (index + 1) + "/Power")
+		delegate: QtObject {
+			id: consumptionOutput
 
-			onValueChanged: {
-				const inputPower = Global.system.ac.consumption.phases.get(model.index).inputPower
-				const outputPower = value === undefined ? 0 : value
-				const combinedPower = inputPower + outputPower
-				Global.system.ac.consumption.setPhaseData(model.index,
-						{ "outputPower": outputPower, "power": combinedPower })
+			property real power: NaN
+			property real current: NaN
+
+			property VeQuickItem vePower: VeQuickItem {
+				uid: veDBus.childUId("/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Power")
+				onValueChanged: {
+					consumptionOutput.power = value === undefined ? NaN : value
+					Qt.callLater(root._updateConsumptionModel, model.index)
+				}
+			}
+			property VeQuickItem veCurrent: VeQuickItem {
+				uid: veDBus.childUId("/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Current")
+				onValueChanged: {
+					consumptionOutput.current = value === undefined ? NaN : value
+					Qt.callLater(root._updateConsumptionModel, model.index)
+				}
 			}
 		}
 	}
 
-	property VeQuickItem gensetPhaseCount: VeQuickItem {
-		uid: veSystem.childUId("/Ac/Genset/NumberOfPhases")
-		onValueChanged: {
-			if (value !== undefined) {
-				Global.system.ac.genset.resetPhases(value)
-				gensetObjects.model = value
-			}
-		}
-	}
+	function _updateConsumptionModel(index) {
+		const inputConsumption = consumptionInputObjects.objectAt(index)
+		const inputPower = inputConsumption ? inputConsumption.power : NaN
+		const inputCurrent = inputConsumption ? inputConsumption.current : NaN
 
-	property Instantiator gensetObjects: Instantiator {
-		model: null
-		delegate: VeQuickItem {
-			uid: veDBus.childUId("/Ac/Genset/L" + (index + 1) + "/Power")
+		const outputConsumption = consumptionOutputObjects.objectAt(index)
+		const outputPower = outputConsumption ? outputConsumption.power : NaN
+		const outputCurrent = outputConsumption ? outputConsumption.current : NaN
 
-			onValueChanged: {
-				const power = value === undefined ? 0 : value
-				Global.system.ac.genset.setPhaseData(model.index, { "power": power })
-			}
-		}
+		Global.system.ac.consumption.setPhaseData(index, {
+			power: Utils.sumRealNumbers(inputPower, outputPower),
+			current: Utils.sumRealNumbers(inputCurrent, outputCurrent)
+		})
 	}
 
 	//--- DC data ---
@@ -96,5 +103,10 @@ QtObject {
 	property VeQuickItem veSystemPower: VeQuickItem {
 		uid: veSystem.childUId("/Dc/System/Power")
 		onValueChanged: Global.system.dc.power = value === undefined ? NaN : value
+	}
+
+	property VeQuickItem veBatteryVoltage: VeQuickItem {
+		uid: veSystem.childUId("/Dc/Battery/Voltage")
+		onValueChanged: Global.system.dc.voltage = value === undefined ? NaN : value
 	}
 }

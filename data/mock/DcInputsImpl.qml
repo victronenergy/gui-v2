@@ -20,6 +20,7 @@ QtObject {
 		for (let i = 0; i < modelCount; ++i) {
 			const index = Math.floor(Math.random() * types.length)
 			const input = inputComponent.createObject(root, { "source": types[index] })
+			_createdObjects.push(input)
 			Global.dcInputs.addInput(input)
 			types.splice(index, 1)
 		}
@@ -29,11 +30,15 @@ QtObject {
 		target: Global.demoManager || null
 
 		function onSetDcInputsRequested(config) {
-			Global.dcInputs.model.clear()
+			Global.dcInputs.reset()
+			while (_createdObjects.length > 0) {
+				_createdObjects.pop().destroy()
+			}
 
 			if (config) {
 				for (let i = 0; i < config.types.length; ++i) {
 					const input = inputComponent.createObject(root, { source: config.types[i] })
+					_createdObjects.push(input)
 					Global.dcInputs.addInput(input)
 				}
 			}
@@ -48,6 +53,7 @@ QtObject {
 
 			property real voltage
 			property real current
+			property real power: (isNaN(voltage) || isNaN(current) || voltage === 0) ? NaN : voltage * current
 			property real temperature
 
 			property Timer _dummyValues: Timer {
@@ -61,13 +67,26 @@ QtObject {
 					for (let propIndex = 0; propIndex < properties.length; ++propIndex) {
 						let propTotal = 0
 						const propName = properties[propIndex]
-						const value = Math.random() * 300
+						let value = 0
+						if (propName === "voltage") {
+							value = 20 + Math.random() * 10
+						} else if (propName === "current") {
+							value = 1 + Math.random()
+						} else if (propName === "temperature") {
+							value = 50 + Math.random() * 50
+						} else {
+							console.warn("Unhandled property", propName)
+						}
+
 						input[propName] = value
 					}
+					Global.dcInputs.updateTotals()
 				}
 			}
 		}
 	}
+
+	property var _createdObjects: []
 
 	Component.onCompleted: {
 		populate()

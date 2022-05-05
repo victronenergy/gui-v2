@@ -75,6 +75,22 @@ QtObject {
 				}
 			}
 
+			onConnectedChanged: {
+				if (connected) {
+					Global.acInputs.connectedInput = input
+				} else if (!connected && Global.acInputs.connectedInput === input) {
+					Global.acInputs.connectedInput = null
+				}
+			}
+
+			onSourceChanged: {
+				if (source === VenusOS.AcInputs_InputType_Generator) {
+					Global.acInputs.generatorInput = input
+				} else if (Global.acInputs.generatorInput === input) {
+					Global.acInputs.generatorInput = null
+				}
+			}
+
 			property string _serviceUid: serviceName ? 'dbus/' + serviceName : ''
 
 			// --- General config details about the input, from com.victronenergey.system ---

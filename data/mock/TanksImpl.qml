@@ -28,6 +28,7 @@ QtObject {
 				capacity: capacity
 			})
 			Global.tanks.addTank(tankObj)
+			_createdObjects.push(tankObj)
 		}
 	}
 
@@ -45,11 +46,15 @@ QtObject {
 
 		function onSetTanksRequested(config) {
 			Global.tanks.reset()
+			while (_createdObjects.length > 0) {
+				_createdObjects.pop().destroy()
+			}
 
 			if (config) {
 				for (let i = 0; i < config.length; ++i) {
 					const tankObj = tankComponent.createObject(root, config[i])
 					Global.tanks.addTank(tankObj)
+					_createdObjects.push(tankObj)
 				}
 			}
 		}
@@ -104,6 +109,8 @@ QtObject {
 			}
 		}
 	}
+
+	property var _createdObjects: []
 
 	Component.onCompleted: {
 		populate()
