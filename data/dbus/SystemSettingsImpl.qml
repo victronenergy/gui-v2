@@ -18,9 +18,9 @@ QtObject {
 			veAccessLevel.setValue(accessLevel)
 		}
 
-		function onSetDisplayModeRequested(displayMode) {
-			Theme.load(Theme.screenSize, displayMode)
-			veDisplayMode.setValue(displayMode)
+		function onSetColorSchemeRequested(colorScheme) {
+			Theme.load(Theme.screenSize, colorScheme)
+			veColorScheme.setValue(colorScheme)
 		}
 
 		// Don't connect to onSetDemoModeRequested() here, it is handled from DataPoint in main.qml.
@@ -69,8 +69,8 @@ QtObject {
 		onValueChanged: if (value !== undefined) Global.systemSettings.accessLevel = value
 	}
 
-	property VeQuickItem veDisplayMode: VeQuickItem {
-		uid: veSettings.childUId("/Settings/Gui/DisplayMode")
+	property VeQuickItem veColorScheme: VeQuickItem {
+		uid: veSettings.childUId("/Settings/Gui/ColorScheme")
 		onValueChanged: {
 			if (value !== undefined) {
 				if (value === Theme.Dark) {
@@ -78,7 +78,7 @@ QtObject {
 				} else if (value === Theme.Light) {
 					Theme.load(Theme.screenSize, Theme.Light)
 				}
-				Global.systemSettings.displayMode = value
+				Global.systemSettings.colorScheme = value
 			}
 		}
 	}

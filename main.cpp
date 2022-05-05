@@ -29,7 +29,7 @@ namespace {
 void addSettings(VeQItemSettingsInfo *info)
 {
 	// 0=Dark, 1=Light, 2=Auto
-	info->add("Gui/DisplayMode", 0, 0, 2);
+	info->add("Gui/ColorScheme", 0, 0, 2);
 
 	// Brief settings levels are 0-6 (Fuel - Gasoline) or -1 for Battery.
 	info->add("Gui/BriefView/Level/1", -1, -1, 6);     // Battery
