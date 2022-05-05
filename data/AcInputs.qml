@@ -8,6 +8,12 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	property var connectedInput // Only one AC input can be connected and active at any time.
+	property var generatorInput
+
+	property real power: connectedInput != null ? connectedInput.power : NaN
+	property real current: connectedInput != null ? connectedInput.current : NaN
+
 	property ListModel model: ListModel {}
 
 	function addInput(input) {
@@ -15,11 +21,24 @@ QtObject {
 	}
 
 	function removeInput(index) {
+		if (index < 0 || index >= model.count) {
+			console.warn("removeInput(): bad index", index)
+			return
+		}
+		const input = get(index).input
+		if (input === connectedInput) {
+			connectedInput = null
+		}
+		if (input === generatorInput) {
+			generatorInput = null
+		}
 		model.remove(index)
 	}
 
 	function reset() {
 		model.clear()
+		connectedInput = null
+		generatorInput = null
 	}
 
 	Component.onCompleted: Global.acInputs = root

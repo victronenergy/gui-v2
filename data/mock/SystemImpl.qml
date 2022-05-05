@@ -10,9 +10,7 @@ QtObject {
 
 	function populate() {
 		Global.system.state = VenusOS.System_State_AbsorptionCharging
-
-		Global.system.ac.genset.resetPhases(_phaseCount)
-		Global.system.ac.consumption.resetPhases(_phaseCount)
+		Global.system.ac.consumption.setPhaseCount(_phaseCount)
 	}
 
 	property Connections demoConn: Connections {
@@ -28,15 +26,14 @@ QtObject {
 					randomizeAcValues.running = true
 				} else {
 					randomizeAcValues.running = false
-					Global.system.ac.genset.resetPhases(0)
-					Global.system.ac.consumption.resetPhases(0)
+					Global.system.ac.consumption.setPhaseCount(0)
 				}
 
 				if (config.dc) {
 					randomizeDcValues.running = true
 				} else {
 					randomizeDcValues.running = false
-					Global.system.dc.power = NaN
+					Global.system.dc.reset()
 				}
 			}
 		}
@@ -53,14 +50,10 @@ QtObject {
 		triggeredOnStart: true
 
 		onTriggered: {
-			let randomIndex = Math.floor(Math.random() * root._phaseCount)
-			Global.system.ac.genset.setPhaseData(randomIndex, {
-				power: Math.floor(Math.random() * 10000)
-			})
-			// For consumption, add some wild fluctuations that can be seen in the Brief side panel graph
-			Global.system.ac.consumption.setPhaseData(randomIndex, {
-				power: Math.floor(Math.random() * 800),
-			})
+			// Use some wild fluctuations that can be seen in the Brief side panel graph
+			const randomIndex = Math.floor(Math.random() * root._phaseCount)
+			const power = Math.floor(Math.random() * 800)
+			Global.system.ac.consumption.setPhaseData(randomIndex, { power: power, current: power * 0.01})
 		}
 	}
 
@@ -74,6 +67,7 @@ QtObject {
 
 		onTriggered: {
 			Global.system.dc.power = 500 + Math.floor(Math.random() * 100)
+			Global.system.dc.voltage = 20 + Math.floor(Math.random() * 10)
 		}
 	}
 

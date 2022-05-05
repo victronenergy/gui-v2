@@ -551,9 +551,9 @@ Page {
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
-				&& !isNaN(Global.system.ac.consumption.power)
-				&& Global.system.ac.consumption.power > 0
-				&& Math.abs(Global.system.ac.consumption.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+				&& !isNaN(Global.system.loads.acPower)
+				&& Global.system.loads.acPower > 0
+				&& Math.abs(Global.system.loads.acPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -594,9 +594,9 @@ Page {
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
-				&& !isNaN(Global.system.dc.power)
-				&& Global.system.dc.power > 0
-				&& Math.abs(Global.system.dc.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+				&& !isNaN(Global.system.loads.dcPower)
+				&& Global.system.loads.dcPower > 0
+				&& Math.abs(Global.system.loads.dcPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -614,7 +614,7 @@ Page {
 			  : VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-		value: Global.system.ac.consumption.power
+		value: Global.system.loads.acPower
 		phaseModel: Global.system.ac.consumption.phases
 		phaseModelProperty: "power"
 	}
@@ -626,9 +626,11 @@ Page {
 			rightMargin: Theme.geometry.page.content.horizontalMargin
 		}
 
-		size: !isNaN(Global.system.dc.power) ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_Zero
+		size: !isNaN(Global.system.loads.dcPower)
+				? VenusOS.OverviewWidget_Size_L
+				: VenusOS.OverviewWidget_Size_Zero
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-		value: Global.system.dc.power
+		value: Global.system.loads.dcPower
 	}
 }

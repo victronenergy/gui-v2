@@ -69,18 +69,30 @@ QtObject {
 
 	// AC power is the total power from Ac/PvOnGrid, Ac/PvOnGenset and Ac/PvOnOutput.
 	property Instantiator acPvMonitor: Instantiator {
-		function updateAcPower() {
-			let p = NaN
+		function updateAcTotals() {
+			let totalPower = NaN
+			let totalCurrent = NaN
+
 			for (let i = 0; i < count; ++i) {
-				const value = objectAt(i).power
-				if (value !== undefined) {
-					if (isNaN(p)) {
-						p = 0
+				const acPv = objectAt(i)
+				for (let j = 0; j < acPv.pvPhases.count; ++j) {
+					const phase = acPv.pvPhases.objectAt(j)
+					if (!isNaN(phase.power)) {
+						if (isNaN(totalPower)) {
+							totalPower = 0
+						}
+						totalPower += phase.power
 					}
-					p += value
+					if (!isNaN(phase.current)) {
+						if (isNaN(totalCurrent)) {
+							totalCurrent = 0
+						}
+						totalCurrent += phase.current
+					}
 				}
 			}
-			Global.solarChargers.acPower = p
+			Global.solarChargers.acPower = totalPower
+			Global.solarChargers.acCurrent = totalCurrent
 		}
 
 		model: [
@@ -93,22 +105,6 @@ QtObject {
 			id: acPvDelegate
 
 			readonly property string dbusUid: modelData
-			property real power: NaN
-
-			function updatePower() {
-				let p = NaN
-				for (let i = 0; i < pvPhases.count; ++i) {
-					const value = pvPhases.objectAt(i).value
-					if (value !== undefined) {
-						if (isNaN(p)) {
-							p = 0
-						}
-						p += value
-					}
-				}
-				power = p
-				acPvMonitor.updateAcPower()
-			}
 
 			property var vePhaseCount: VeQuickItem {
 				uid: acPvDelegate.dbusUid + "/NumberOfPhases"
@@ -120,11 +116,29 @@ QtObject {
 				}
 			}
 
-			// Each Ac/PvOnX uid has 1-3 phases with power, e.g. Ac/PvOnGrid/L1/Power, Ac/PvOnGrid/L2/Power
+			// Each Ac/PvOnX uid has 1-3 phases with power and current, e.g. Ac/PvOnGrid/L1/Power,
+			// Ac/PvOnGrid/L1/Current
 			property var pvPhases: Instantiator {
-				delegate: VeQuickItem {
-					uid: acPvDelegate.dbusUid + "/L" + (model.index + 1) + "/Power"
-					onValueChanged: acPvDelegate.updatePower()
+				delegate: QtObject {
+					id: phase
+
+					property real power
+					property real current
+
+					property VeQuickItem vePower: VeQuickItem {
+						uid: acPvDelegate.dbusUid + "/L" + (model.index + 1) + "/Power"
+						onValueChanged: {
+							phase.power = value === undefined ? NaN : value
+							Qt.callLater(acPvMonitor.updateAcTotals)
+						}
+					}
+					property VeQuickItem veCurrent: VeQuickItem {
+						uid: acPvDelegate.dbusUid + "/L" + (model.index + 1) + "/Current"
+						onValueChanged: {
+							phase.current = value === undefined ? NaN : value
+							Qt.callLater(acPvMonitor.updateAcTotals)
+						}
+					}
 				}
 			}
 		}
@@ -133,6 +147,11 @@ QtObject {
 	property VeQuickItem veDcPower: VeQuickItem {
 		uid: "dbus/com.victronenergy.system/Dc/Pv/Power"
 		onValueChanged: Global.solarChargers.dcPower = value === undefined ? NaN : value
+	}
+
+	property VeQuickItem veDcCurrent: VeQuickItem {
+		uid: "dbus/com.victronenergy.system/Dc/Pv/Current"
+		onValueChanged: Global.solarChargers.dcCurrent = value === undefined ? NaN : value
 	}
 
 	property Connections veDBusConn: Connections {

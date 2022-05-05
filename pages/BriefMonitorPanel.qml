@@ -76,7 +76,7 @@ Column {
 	Binding {
 		id: generatorUpdate
 		property: "value"
-		value: Global.system.generator.power
+		value: Global.acInputs.generatorInput ? Global.acInputs.generatorInput.power : 0
 	}
 
 	Binding {
@@ -201,7 +201,7 @@ Column {
 					enabled: false // not interactive
 					width: parent.width
 					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
-					value: Global.system.generator.power
+					value: Global.acInputs.generatorInput ? Global.acInputs.generatorInput.power : 0
 					showHandle: false
 				}
 			}

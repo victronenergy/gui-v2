@@ -20,6 +20,7 @@ QtObject {
 		for (let i = 0; i < modelCount; ++i) {
 			const index = Math.floor(Math.random() * types.length)
 			const input = inputComponent.createObject(root, { "source": types[index] })
+			_createdObjects.push(input)
 			Global.acInputs.addInput(input)
 			types.splice(index, 1)
 		}
@@ -29,7 +30,10 @@ QtObject {
 		target: Global.demoManager || null
 
 		function onSetAcInputsRequested(config) {
-			Global.acInputs.model.clear()
+			Global.acInputs.reset()
+			while (_createdObjects.length > 0) {
+				_createdObjects.pop().destroy()
+			}
 
 			if (config) {
 				for (let i = 0; i < config.types.length; ++i) {
@@ -37,6 +41,7 @@ QtObject {
 						source: config.types[i],
 						phaseCount: config.phaseCount || 1
 					})
+					_createdObjects.push(input)
 					Global.acInputs.addInput(input)
 				}
 			}
@@ -71,7 +76,19 @@ QtObject {
 				running: Global.demoManager.timersActive
 				repeat: true
 				interval: 10000 + (Math.random() * 10000)
-				onTriggered: input.connected = !input.connected
+				triggeredOnStart: true
+				onTriggered: {
+					// Only 1 AC input is connected at a time. Randomly select a different input
+					// as the connected one.
+					for (let i = 0; i < Global.acInputs.model.count; ++i) {
+						const currInput = Global.acInputs.model.get(i).input
+						if (currInput === input) {
+							currInput.connected = true
+						} else {
+							input.connected = false
+						}
+					}
+				}
 			}
 
 			property Timer _dummyValues: Timer {
@@ -104,8 +121,24 @@ QtObject {
 					}
 				}
 			}
+
+			onConnectedChanged: {
+				if (connected) {
+					Global.acInputs.connectedInput = input
+				} else if (!connected && Global.acInputs.connectedInput === input) {
+					Global.acInputs.connectedInput = null
+				}
+			}
+
+			Component.onCompleted: {
+				if (source === VenusOS.AcInputs_InputType_Generator) {
+					Global.acInputs.generatorInput = input
+				}
+			}
 		}
 	}
+
+	property var _createdObjects: []
 
 	Component.onCompleted: {
 		populate()

@@ -10,6 +10,9 @@ QtObject {
 
 	Component.onCompleted: {
 		Global.systemSettings.accessLevel = VenusOS.User_AccessType_User
+		Global.systemSettings.demoMode = 1
+		Global.systemSettings.displayMode = Theme.Dark
+
 		Global.systemSettings.briefView.showPercentages = false
 	}
 
