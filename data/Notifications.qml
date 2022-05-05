@@ -10,14 +10,35 @@ QtObject {
 
 	property ListModel model: ListModel {}
 	property ListModel historyModel: ListModel{}
+	property bool audibleAlarmActive: false
+	property bool snoozeAudibleAlarmActive: false
+	property var page
 
+
+	function handleChanges() {
+		console.log("Notifications: handleChanges")
+		let newAudibleAlarmActive = false
+		for (var i = 0; i < model.count; ++i) {
+			var notification = model.get(i)
+			if (notification.category === VenusOS.ToastNotification_Category_Error) {
+				newAudibleAlarmActive = true
+			}
+		}
+		audibleAlarmActive = newAudibleAlarmActive
+	}
 
 	function add(input) {
 		if (input.acknowledged && !input.active) {
 			historyModel.append(input)
 		} else {
 			model.append(input)
+			handleChanges()
 		}
+	}
+
+	function update(index, element) {
+		model.set(index, element)
+		handleChanges()
 	}
 
 	function deactivate() {
@@ -26,10 +47,10 @@ QtObject {
 			if (notification.active) {
 				notification.active = false
 				if (notification.acknowledged === false) {
-					model.set(i, notification)
+					update(i, notification)
 				} else {
 					historyModel.insert(0, notification)
-					model.remove(i)
+					remove(i)
 				}
 				break
 			}
@@ -38,6 +59,7 @@ QtObject {
 
 	function remove(index) {
 		model.remove(index)
+		handleChanges()
 	}
 
 	function acknowledge(index) {
@@ -46,17 +68,17 @@ QtObject {
 			notification.acknowledged = true
 			if (notification.active === false) {
 				historyModel.insert(0, notification)
-				model.remove(index)
+				remove(index)
 			} else {
-				model.set(index, notification)
+				update(index, notification)
 			}
 		}
 		notification = Global.notifications.model.get(index)
-
 	}
 
 	function reset() {
 		model.clear()
+		handleChanges()
 	}
 
 	Component.onCompleted: Global.notifications = root

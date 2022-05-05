@@ -70,4 +70,5 @@ Page {
 		model: Global.notifications.historyModel
 		onCountChanged: console.log("historyNotificationsView: count:", count)
 	}
+	Component.onCompleted: Global.notifications.page = root
 }

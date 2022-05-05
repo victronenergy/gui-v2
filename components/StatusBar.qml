@@ -4,6 +4,7 @@
 
 import QtQuick
 import QtQuick.Controls as C
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Item {
@@ -70,6 +71,41 @@ Item {
 				timeString = hours + ":" + mins
 			}
 		}
+	}
+	Button {
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry.notificationsPage.snoozeButton.topMargin
+			right: parent.right
+			rightMargin: Theme.geometry.notificationsPage.snoozeButton.rightMargin
+		}
+		visible: Global.notifications.page.isCurrentPage &&
+					Global.notifications.audibleAlarmActive &&
+					!Global.notifications.snoozeAudibleAlarmActive
+		border.width: 2
+		border.color: Theme.color.critical
+		width: Theme.geometry.notificationsPage.snoozeButton.width
+		height: Theme.geometry.notificationsPage.snoozeButton.height
+		backgroundColor: Theme.color.darkCritical
+		radius: Theme.geometry.notificationsPage.snoozeButton.radius
+		contentItem: Row {
+			leftPadding: Theme.geometry.notificationsPage.snoozeButton.image.leftMargin
+			anchors.verticalCenter: parent.verticalCenter
+			spacing: Theme.geometry.notificationsPage.snoozeButton.spacing
+			CP.IconLabel {
+				anchors {
+					verticalCenter: parent.verticalCenter
+				}
+				icon.source: "qrc:/images/icon_alarm_snooze_24"
+			}
+			Label {
+				anchors.verticalCenter: parent.verticalCenter
+				font.pixelSize: Theme.font.size.xs
+				//% "Snooze alarm"
+				text: qsTrId("snooze_alarm")
+			}
+		}
+		onClicked: Global.notifications.snoozeAudibleAlarmActive = true
 	}
 
 	Button {
