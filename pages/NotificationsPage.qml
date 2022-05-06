@@ -45,8 +45,20 @@ Page {
 				left: parent.left
 				leftMargin: Theme.geometry.notificationsPage.checkmark.leftMargin
 			}
-			visible: Global.notifications.model.count === 0
+			visible: false
 			spacing: Theme.geometry.notificationsPage.checkmark.spacing
+			opacity: 0
+			SequentialAnimation {
+				running: Global.notifications.model.count === 0
+				ScriptAction{ script: { noCurrentAlerts.opacity = 0; noCurrentAlerts.visible = true } }
+				OpacityAnimator { target: noCurrentAlerts; from: 0; to: 1; duration: 1000 }
+			}
+			SequentialAnimation {
+				running: Global.notifications.model.count !== 0
+				OpacityAnimator { target: noCurrentAlerts; from: 1; to: 0; duration: 1000 }
+				NumberAnimation { target: noCurrentAlerts; property: "height"; to: 0; duration: 1000}
+				ScriptAction{ script: { noCurrentAlerts.visible = false } }
+			}
 
 			CP.ColorImage {
 				anchors.verticalCenter: parent.verticalCenter
@@ -87,29 +99,6 @@ Page {
 			onCountChanged: console.log("historyNotificationsView: count:", count)
 		}
 	}
-	/*
-	LinearGradient {
-		id: mask
-		anchors {
-			bottom: parent.bottom
-			left: parent.left
-			right: parent.right
-		}
-		height: Theme.geometry.notificationsPage.gradient.height
-		gradient: Gradient {
-			orientation: Gradient.Vertical
-			GradientStop { position: 0; color: Theme.color.notificationsPage.gradient.topColor }
-			GradientStop { position: 1; color: Theme.color.notificationsPage.gradient.bottomColor }
-		}
-		visible: false
-	}
-
-	OpacityMask {
-		anchors.fill: mask
-		source: root
-		maskSource: mask
-	}
-	*/
 	Rectangle {
 		anchors {
 			bottom: parent.bottom
