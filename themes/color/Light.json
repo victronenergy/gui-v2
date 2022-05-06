@@ -125,5 +125,7 @@
     "color.settingsPage.settingsList.gradient.color2": "#66E6E5E1",
     "color.settingsPage.settingsList.gradient.color3": "#E6E5E1",
 
+    "color.notificationsPage.gradient.topColor": "transparent",
+    "color.notificationsPage.gradient.bottomColor": "#E6E5E1",
     "color.notificationsPage.text.color1": "color.font.disabled"
 }

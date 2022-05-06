@@ -116,6 +116,7 @@
     "geometry.notificationsPage.snoozeButton.height" : 32,
     "geometry.notificationsPage.snoozeButton.radius" : 8,
     "geometry.notificationsPage.snoozeButton.spacing" : 7,
+    "geometry.notificationsPage.gradient.height" : 28,
 
     "geometry.toastNotification.margins" : 24,
     "geometry.toastNotification.radius" : 8,

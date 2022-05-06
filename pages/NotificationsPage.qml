@@ -4,6 +4,8 @@
 
 import QtQuick
 import QtQuick.Controls.impl as CP
+import QtQuick.Shapes
+import Qt5Compat.GraphicalEffects
 import Victron.VenusOS
 
 Page {
@@ -85,4 +87,41 @@ Page {
 			onCountChanged: console.log("historyNotificationsView: count:", count)
 		}
 	}
+	/*
+	LinearGradient {
+		id: mask
+		anchors {
+			bottom: parent.bottom
+			left: parent.left
+			right: parent.right
+		}
+		height: Theme.geometry.notificationsPage.gradient.height
+		gradient: Gradient {
+			orientation: Gradient.Vertical
+			GradientStop { position: 0; color: Theme.color.notificationsPage.gradient.topColor }
+			GradientStop { position: 1; color: Theme.color.notificationsPage.gradient.bottomColor }
+		}
+		visible: false
+	}
+
+	OpacityMask {
+		anchors.fill: mask
+		source: root
+		maskSource: mask
+	}
+	*/
+	Rectangle {
+		anchors {
+			bottom: parent.bottom
+			left: parent.left
+			right: parent.right
+		}
+		height: Theme.geometry.notificationsPage.gradient.height
+		gradient: Gradient {
+			orientation: Gradient.Vertical
+			GradientStop { position: 0; color: Theme.color.notificationsPage.gradient.topColor }
+			GradientStop { position: 1; color: Theme.color.notificationsPage.gradient.bottomColor }
+		}
+	}
+
 }
