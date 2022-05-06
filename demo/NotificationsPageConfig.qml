@@ -8,9 +8,9 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property var date: new Date()
 	readonly property var _locale: Qt.locale()
-	readonly property var dummyNotifications: [
+	property date date: new Date()
+	property var dummyAlarms: [
 		{
 			acknowledged: true,
 			active: true,
@@ -28,7 +28,7 @@ QtObject {
 			description: "Fuel level low 15%"
 		},
 		{
-			acknowledged: true,
+			acknowledged: false,
 			active: false,
 			category: VenusOS.ToastNotification_Category_Error,
 			date: formatDateString(date),
@@ -49,13 +49,11 @@ QtObject {
 		return date.toLocaleDateString(_locale, "MMMM d  ") + date.toLocaleTimeString(_locale, "hh:mm") // Mar 27  10:20
 	}
 
-	function populate() {
-		for (var i = 0; i < dummyNotifications.length; ++i) {
-			Global.notifications.add(dummyNotifications[i])
-		}
+	function getRandomAlarm() {
+		var index = Math.floor(Math.random() * dummyAlarms.length)
+		var alarm = dummyAlarms[index]
+		alarm.date = formatDateString(new Date())
+		return alarm
 	}
 
-	Component.onCompleted: {
-		populate()
-	}
 }

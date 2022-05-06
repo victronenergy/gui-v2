@@ -107,6 +107,8 @@ Item {
 			console.log("N:", event.modifiers)
 			if (event.modifiers & Qt.ShiftModifier) {
 				Global.notifications._deactivateSingleAlarm()
+			} else {
+				Global.notifications.add(notificationsConfig.getRandomAlarm())
 			}
 
 			event.accepted = true
@@ -155,5 +157,9 @@ Item {
 		id: levelsConfig
 
 		property int configIndex: -1
+	}
+
+	NotificationsPageConfig {
+		id: notificationsConfig
 	}
 }

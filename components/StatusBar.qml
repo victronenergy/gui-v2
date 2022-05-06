@@ -79,7 +79,8 @@ Item {
 			right: parent.right
 			rightMargin: Theme.geometry.notificationsPage.snoozeButton.rightMargin
 		}
-		visible: Global.pageManager.navBar.currentUrl === "qrc:/pages/NotificationsPage.qml" &&
+		visible: !!Global.pageManager.navBar &&
+					Global.pageManager.navBar.currentUrl === "qrc:/pages/NotificationsPage.qml" &&
 					Global.notifications.audibleAlarmActive &&
 					!Global.notifications.snoozeAudibleAlarmActive
 		opacity: visible

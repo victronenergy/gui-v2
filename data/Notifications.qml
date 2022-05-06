@@ -16,9 +16,9 @@ QtObject {
 
 	function add(input) {
 		if (input.acknowledged && !input.active) {
-			historyModel.append(input)
+			historyModel.insert(0, input)
 		} else {
-			model.append(input)
+			model.insert(0, input)
 			_handleChanges()
 		}
 	}

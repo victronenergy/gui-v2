@@ -101,6 +101,7 @@
         <file>data/Ess.qml</file>
         <file>data/Generators.qml</file>
         <file>data/Notifications.qml</file>
+        <file>data/dbus/NotificationsImpl.qml</file>
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
         <file>data/System.qml</file>
@@ -137,6 +138,7 @@
         <file>data/mock/TanksImpl.qml</file>
         <file>demo/DemoManager.qml</file>
         <file>demo/LevelsPageConfig.qml</file>
+        <file>demo/NotificationsPageConfig.qml</file>
         <file>demo/OverviewPageConfig.qml</file>
         <file>pages/BriefMonitorPanel.qml</file>
         <file>pages/BriefPage.qml</file>
