@@ -70,5 +70,9 @@ Page {
 		model: Global.notifications.historyModel
 		onCountChanged: console.log("historyNotificationsView: count:", count)
 	}
+	ScrollBar.vertical: ScrollBar {
+		topPadding: Theme.geometry.settingsPage.settingsList.topMargin
+		bottomPadding: Theme.geometry.settingsPage.settingsList.bottomMargin
+	}
 	Component.onCompleted: Global.notifications.page = root
 }

@@ -14,52 +14,18 @@ QtObject {
 	property bool snoozeAudibleAlarmActive: false
 	property var page
 
-
-	function handleChanges() {
-		console.log("Notifications: handleChanges")
-		let newAudibleAlarmActive = false
-		for (var i = 0; i < model.count; ++i) {
-			var notification = model.get(i)
-			if (notification.category === VenusOS.ToastNotification_Category_Error) {
-				newAudibleAlarmActive = true
-			}
-		}
-		audibleAlarmActive = newAudibleAlarmActive
-	}
-
 	function add(input) {
 		if (input.acknowledged && !input.active) {
 			historyModel.append(input)
 		} else {
 			model.append(input)
-			handleChanges()
-		}
-	}
-
-	function update(index, element) {
-		model.set(index, element)
-		handleChanges()
-	}
-
-	function deactivate() {
-		for (var i = 0; i < model.count; ++i) {
-			let notification = model.get(i)
-			if (notification.active) {
-				notification.active = false
-				if (notification.acknowledged === false) {
-					update(i, notification)
-				} else {
-					historyModel.insert(0, notification)
-					remove(i)
-				}
-				break
-			}
+			_handleChanges()
 		}
 	}
 
 	function remove(index) {
 		model.remove(index)
-		handleChanges()
+		_handleChanges()
 	}
 
 	function acknowledge(index) {
@@ -78,7 +44,43 @@ QtObject {
 
 	function reset() {
 		model.clear()
-		handleChanges()
+		_handleChanges()
+	}
+
+	function update(index, element) {
+		model.set(index, element)
+		_handleChanges()
+	}
+
+	function _deactivateSingleAlarm() { // used in demo mode only
+		for (var i = 0; i < model.count; ++i) {
+			let notification = model.get(i)
+			if (notification.active) {
+				notification.active = false
+				if (notification.acknowledged === false) {
+					update(i, notification)
+				} else {
+					historyModel.insert(0, notification)
+					remove(i)
+				}
+				break
+			}
+		}
+	}
+
+	function _generateRandomAlarm() {  // used in demo mode only
+	}
+
+	function _handleChanges() {
+		console.log("Notifications: handleChanges")
+		let newAudibleAlarmActive = false
+		for (var i = 0; i < model.count; ++i) {
+			var notification = model.get(i)
+			if (notification.category === VenusOS.ToastNotification_Category_Error) {
+				newAudibleAlarmActive = true
+			}
+		}
+		audibleAlarmActive = newAudibleAlarmActive
 	}
 
 	Component.onCompleted: Global.notifications = root

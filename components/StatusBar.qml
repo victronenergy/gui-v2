@@ -79,9 +79,12 @@ Item {
 			right: parent.right
 			rightMargin: Theme.geometry.notificationsPage.snoozeButton.rightMargin
 		}
-		visible: Global.notifications.page.isCurrentPage &&
+		visible: Global.pageManager.navBar.currentUrl === "qrc:/pages/NotificationsPage.qml" &&
 					Global.notifications.audibleAlarmActive &&
 					!Global.notifications.snoozeAudibleAlarmActive
+		opacity: visible
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation.toastNotification.fade.duration} }
+		onOpacityChanged: console.log("opacity:", opacity)
 		border.width: 2
 		border.color: Theme.color.critical
 		width: Theme.geometry.notificationsPage.snoozeButton.width

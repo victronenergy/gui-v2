@@ -98,13 +98,17 @@ Item {
 			}
 			event.accepted = true
 			break
-		case Qt.Key_D:
-			Global.notifications.deactivate()
-			event.accepted = true
-			break
 		case Qt.Key_L:
 			Language.current = (Language.current === Language.English ? Language.French : Language.English)
 			demoConfigTitle.text = "Language: " + Language.toString(Language.current)
+			event.accepted = true
+			break
+		case Qt.Key_N:
+			console.log("N:", event.modifiers)
+			if (event.modifiers & Qt.ShiftModifier) {
+				Global.notifications._deactivateSingleAlarm()
+			}
+
 			event.accepted = true
 			break
 		case Qt.Key_T:
