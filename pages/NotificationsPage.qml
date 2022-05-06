@@ -9,6 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	onHeightChanged: console.log("NotificationsPage: height:", height)
 	NotificationsView {
 		id: activeNotificationsView // these notifications are active and/or not acknowledged
 
@@ -57,11 +58,13 @@ Page {
 			left: parent.left
 			leftMargin: Theme.geometry.notificationsPage.leftMargin
 		}
+		visible: historicalNotificationsView.count !== 0
 		color: Theme.color.notificationsPage.text.color1
 		//% "History"
 		text: qsTrId("notifications_history")
 	}
 	NotificationsView { // these notifications are inactive and have been acknowledged
+		id: historicalNotificationsView
 		anchors {
 			top: history.bottom
 			topMargin: Theme.geometry.notificationsPage.history.spacing
@@ -70,9 +73,4 @@ Page {
 		model: Global.notifications.historyModel
 		onCountChanged: console.log("historyNotificationsView: count:", count)
 	}
-	ScrollBar.vertical: ScrollBar {
-		topPadding: Theme.geometry.settingsPage.settingsList.topMargin
-		bottomPadding: Theme.geometry.settingsPage.settingsList.bottomMargin
-	}
-	Component.onCompleted: Global.notifications.page = root
 }

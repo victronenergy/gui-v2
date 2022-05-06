@@ -28,14 +28,6 @@ QtObject {
 			description: "Fuel level low 15%"
 		},
 		{
-			acknowledged: true,
-			active: false,
-			category: VenusOS.ToastNotification_Category_Error,
-			date: formatDateString(date),
-			source: "Fuel tank custom name",
-			description: "Fuel level low 15%"
-		},
-		{
 			acknowledged: false,
 			active: true,
 			category: VenusOS.ToastNotification_Category_Informative,
