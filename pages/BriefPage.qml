@@ -10,61 +10,11 @@ import "/components/Gauges.js" as Gauges
 Page {
 	id: root
 
-	readonly property bool solarYieldPresent: Global.solarChargers.model.count > 0
-
-	readonly property bool generatorPresent: !isNaN(Global.system.generator.power)
-	readonly property real generatorPower: Global.system.generator.power
-	readonly property real generatorPowerPercentage: generatorPower / Utils.maximumValue("system.generator.power") * 100
-
-	readonly property bool acLoadPresent: Global.system.ac.consumption.power
-	readonly property real acLoad: acLoadPresent ? Global.system.ac.consumption.power : 0
-	readonly property real acLoadPercentage: acLoad / Utils.maximumValue("system.ac.consumption.power") * 100
-
-	readonly property bool dcLoadPresent: !isNaN(Global.system.dc.power)
-	readonly property real dcLoad: dcLoadPresent ? Global.system.dc.power : 0
-	readonly property real dcLoadPercentage: dcLoad / Utils.maximumValue("system.dc.power") * 100
-
-	readonly property bool combinedLoadPresent: !isNaN(Global.system.loads.power)
-	readonly property real combinedLoad: combinedLoadPresent ? Global.system.loads.power : 0
-	readonly property real combinedLoadPercentage: combinedLoadPresent ? Global.system.loads.power / Utils.maximumValue("system.loads.power") * 100 : 0
-
-	property var leftGaugeTypes: []
-	property var rightGaugeTypes: []
 	property real sideOpacity: 1
-
-	function populateSideGauges() {
-		// Determine which side gauges are to be displayed
-		let leftTypes = []
-		let rightTypes = []
-		if (generatorPresent) {
-			leftTypes.push('generator')
-		}
-		if (solarYieldPresent) {
-			leftTypes.push('solar')
-		}
-		if (acLoadPresent && dcLoadPresent) {
-			rightTypes.push('combinedload')
-		} else {
-			if (acLoadPresent) {
-				rightTypes.push('acload')
-			}
-			if (dcLoadPresent) {
-				rightTypes.push('dcload')
-			}
-		}
-
-		leftGaugeTypes = leftTypes
-		rightGaugeTypes = rightTypes
-	}
 
 	hasSidePanel: true
 	backgroundColor: Theme.color.briefPage.background
 	fullScreenWhenIdle: true
-
-	onSolarYieldPresentChanged: root.populateSideGauges()
-	onGeneratorPresentChanged: root.populateSideGauges()
-	onDcLoadPresentChanged: root.populateSideGauges()
-	onAcLoadPresentChanged: root.populateSideGauges()
 
 	Loader {
 		id: mainGauge
@@ -106,25 +56,6 @@ Page {
 	Loader {
 		id: leftEdge
 
-		readonly property string gaugeType: leftGaugeTypes.length >= 1 ? leftGaugeTypes[0] : ''
-
-		onGaugeTypeChanged: {
-			if (gaugeType === 'generator') {
-				setSource('qrc:/components/SideGauge.qml', {
-					"gaugeAlignmentX": Qt.AlignLeft,
-					"gaugeAlignmentY": Qt.binding(function() { return leftGaugeTypes.length === 2 ? Qt.AlignTop : Qt.AlignVCenter } ),
-					"arcX": Qt.binding(function() { return leftGaugeTypes.length === 1 ? 10 : undefined } ),
-					"direction": PathArc.Clockwise,
-					"startAngle": Qt.binding(function() { return leftGaugeTypes.length === 2 ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)} ),
-					"animationEnabled": Qt.binding(function() { return root.isCurrentPage } ),
-					"source": "qrc:/images/generator.svg",
-					"value": Qt.binding(function() { return generatorPowerPercentage }),
-					"textValue": Qt.binding(function() { return generatorPower })
-				})
-			} else if (gaugeType === 'solar'){
-				setSource('qrc:/components/SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignVCenter})
-			}
-		}
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
@@ -132,48 +63,62 @@ Page {
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			right: mainGauge.left
 		}
-		active: leftGaugeTypes.length >= 1
+		// Show gauge even if there are no active AC inputs, so that the gauge visibility doesn't
+		// jump on/off when inputs are connected/disconnected
+		active: Global.acInputs.model.count > 0 || Global.dcInputs.model.count > 0
 		opacity: root.sideOpacity
+
+		sourceComponent: SideGauge {
+			gaugeAlignmentX: Qt.AlignLeft
+			gaugeAlignmentY: leftLower.active ? Qt.AlignTop : Qt.AlignVCenter
+			arcX: leftLower.active ? undefined : 10
+			direction: PathArc.Clockwise
+			startAngle: leftLower.active ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)
+			animationEnabled: root.isCurrentPage
+			source: {
+				const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
+						+ Global.dcInputs.model.count
+				if (totalInputs <= 1) {
+					if (Global.acInputs.connectedInput !== null) {
+						return VenusOS.acInputIcon(Global.acInputs.connectedInput.source)
+					} else if (Global.acInputs.generatorInput !== null) {
+						return VenusOS.acInputIcon(Global.acInputs.generatorInput.source)
+					} else if (Global.dcInputs.model.count > 0) {
+						return VenusOS.dcInputIcon(Global.dcInputs.model.get(0).source)
+					}
+				}
+				return "qrc:/images/icon_input_24.svg"
+			}
+			value: ((Global.acInputs.power || 0) + (Global.dcInputs.power || 0))
+					/ Utils.maximumValue("briefPage.inputsPower") * 100
+			textValue: isNaN(Global.acInputs.power) && isNaN(Global.dcInputs.power)
+					? NaN
+					: (Global.acInputs.power || 0) + (Global.dcInputs.power || 0)
+			onTextValueChanged: Utils.updateMaximumValue("briefPage.inputsPower", textValue)
+		}
 	}
 
 	Loader {
 		id: leftLower
 
-		readonly property string gaugeType: leftGaugeTypes.length === 2 ? leftGaugeTypes[1] : ''
-
-		onGaugeTypeChanged: setSource('qrc:/components/SolarYieldGauge.qml', {"gaugeAlignmentY": Qt.AlignBottom})
 		anchors {
-			top: leftGaugeTypes.length, leftEdge.bottom
+			top: leftEdge.bottom
 			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
 			left: parent.left
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			right: mainGauge.left
 		}
-		active: leftGaugeTypes.length === 2
+		active: Global.solarChargers.model.count > 0
 		opacity: root.sideOpacity
+
+		sourceComponent: SolarYieldGauge {
+			gaugeAlignmentY: Qt.AlignBottom
+		}
 	}
 
 	Loader {
 		id: rightEdge
 
-		readonly property string gaugeType: rightGaugeTypes.length >= 1 ? rightGaugeTypes[0] : ''
-
-		onGaugeTypeChanged: {
-			setSource('qrc:/components/SideGauge.qml', {
-				"gaugeAlignmentY": Qt.binding(function(){ return rightGaugeTypes.length == 2 ? Qt.AlignTop : Qt.AlignVCenter }),
-				"animationEnabled": Qt.binding(function() { return root.isCurrentPage } ),
-				"source": Qt.binding(function() {
-					return rightGaugeTypes.length == 2 ?
-						(gaugeType === 'acload' ? "qrc:/images/acloads.svg" : "qrc:/images/dcloads.svg") : "qrc:/images/consumption.svg"
-				}),
-				"value": Qt.binding(function() {
-					return rightGaugeTypes.length == 2 ? (gaugeType === 'acload' ? acLoadPercentage : dcLoadPercentage) : combinedLoadPercentage
-				}),
-				"textValue": Qt.binding(function() {
-					return rightGaugeTypes.length == 2 ? (gaugeType === 'acload' ? acLoad : dcLoad) : combinedLoad
-				})
-			})
-		}
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
@@ -182,23 +127,19 @@ Page {
 			left: mainGauge.right
 		}
 		opacity: root.sideOpacity
-		active: rightGaugeTypes.length >= 1
+		active: !isNaN(Global.system.loads.acPower) || rightLower.active
+		sourceComponent: SideGauge {
+			gaugeAlignmentY: rightLower.active ? Qt.AlignTop : Qt.AlignVCenter
+			animationEnabled: root.isCurrentPage
+			source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
+			value: (Global.system.loads.acPower || 0) / Utils.maximumValue("system.loads.acPower") * 100
+			textValue: Global.system.loads.acPower
+		}
 	}
 
 	Loader {
 		id: rightLower
 
-		readonly property string gaugeType: rightGaugeTypes.length === 2 ? rightGaugeTypes[1] : ''
-
-		onGaugeTypeChanged: {
-			setSource('qrc:/components/SideGauge.qml', {
-				"animationEnabled": Qt.binding(function() { return root.isCurrentPage } ),
-				"gaugeAlignmentY": Qt.AlignBottom,
-				"source": Qt.binding(function() { return (gaugeType === 'acload' ? "qrc:/images/acloads.svg" : "qrc:/images/dcloads.svg") }),
-				"value": Qt.binding(function() { return gaugeType === 'acload' ? acLoadPercentage : dcLoadPercentage }),
-				"textValue": Qt.binding(function() { return gaugeType === 'acload' ? acLoad : dcLoad })
-			})
-		}
 		anchors {
 			top: rightEdge.bottom
 			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
@@ -207,7 +148,14 @@ Page {
 			left: mainGauge.right
 		}
 		opacity: root.sideOpacity
-		active: rightGaugeTypes.length === 2
+		active: !isNaN(Global.system.loads.dcPower)
+		sourceComponent: SideGauge {
+			gaugeAlignmentY: Qt.AlignBottom
+			animationEnabled: root.isCurrentPage
+			source: "qrc:/images/dcloads.svg"
+			value: (Global.system.loads.dcPower || 0) / Utils.maximumValue("system.loads.dcPower") * 100
+			textValue: Global.system.loads.dcPower
+		}
 	}
 
 	BriefMonitorPanel {

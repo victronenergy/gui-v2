@@ -17,5 +17,39 @@ Enums::~Enums()
 {
 }
 
+QString Enums::acInputIcon(AcInputs_InputType type)
+{
+	switch (type) {
+	case AcInputs_InputType_Unused:
+		return "";
+	case AcInputs_InputType_Grid:
+		return "qrc:/images/grid.svg";
+	case AcInputs_InputType_Generator:
+		return "qrc:/images/generator.svg";
+	case AcInputs_InputType_Shore:
+		return "qrc:/images/shore.svg";
+	default:
+		break;
+	}
+	return QString();
+}
+
+QString Enums::dcInputIcon(DcInputs_InputType type)
+{
+	switch (type) {
+	case DcInputs_InputType_Unknown:
+		return "";
+	case DcInputs_InputType_Alternator:
+		return "qrc:/images/alternator.svg";
+	case DcInputs_InputType_DcGenerator:
+		return "qrc:/images/generator.svg";
+	case DcInputs_InputType_Wind:
+		return "qrc:/images/wind.svg";
+	default:
+		break;
+	}
+	return QString();
+}
+
 }
 }

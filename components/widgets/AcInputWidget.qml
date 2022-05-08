@@ -8,18 +8,18 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
-	property var input
+	property var input: Global.acInputs.connectedInput
 	property var phaseModel
 	property string phaseModelProperty
 
-	value: input ? input.power : NaN
+	value: input && input.connected ? input.power : NaN
 	physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
 	phaseModel: input ? input.phases : null
 	phaseModelProperty: "power"
 
-	extraContent.children: phaseModel && phaseModel.count > 1 ? _phases : []
+	extraContent.children: phaseModel && phaseModel.count > 1 ? phaseDisplay : []
 
-	property list<ThreePhaseDisplay> _phases: [
+	property list<ThreePhaseDisplay> phaseDisplay: [
 		ThreePhaseDisplay {
 			anchors {
 				left: parent ? parent.left : undefined

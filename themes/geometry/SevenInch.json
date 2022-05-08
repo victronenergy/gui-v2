@@ -5,6 +5,7 @@
     "animation.progressBar.duration": 1000,
     "animation.briefPage.edgeGauge.fade.duration": 200,
     "animation.briefPage.sidePanel.slide.duration": 350,
+    "animation.briefPage.sidePanel.sliderValueChange.duration": 200,
     "animation.toastNotification.fade.duration": 250,
     "animation.page.idleOpacity.duration": 250,
     "animation.page.idleResize.duration": 250,
