@@ -26,6 +26,8 @@ Page {
 	// Use a delayed binding to avoid repopulating the model unnecessarily.
 	readonly property int _shouldResetWidgets: Global.acInputs.model.count
 			+ Global.dcInputs.model.count
+			+ (Global.acInputs.connectedInput ? Global.acInputs.connectedInput.source : -1)
+			+ (Global.acInputs.generatorInput ? 1 : 0)
 			+ (dcLoadsWidget.size === _laidOutDcLoadsWidgetSize ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
 	on_ShouldResetWidgetsChanged: Qt.callLater(_resetWidgets)
@@ -131,7 +133,11 @@ Page {
 				prevWidget = widgets[i-1]
 				widget.compactY = prevWidget.compactY + prevWidget.getCompactHeight(prevWidget.size) + compactWidgetsTopMargin
 				widget.expandedY = prevWidget.expandedY + prevWidget.getExpandedHeight(prevWidget.size) + expandedWidgetsTopMargin
+			} else {
+				widget.compactY = 0
+				widget.expandedY = 0
 			}
+
 			// Position the segment border correctly when showing as segments.
 			widget.segmentCompactMargin = compactWidgetsTopMargin
 			widget.segmentExpandedMargin = expandedWidgetsTopMargin
@@ -175,66 +181,71 @@ Page {
 	}
 
 	function _resetLeftWidgets() {
-		for (let widgetType in _createdWidgets) {
+		let widgetType = -1
+		for (widgetType in _createdWidgets) {
 			_createdWidgets[widgetType].size = VenusOS.OverviewWidget_Size_Zero
 		}
 
-		if (!Global.acInputs) {
-			_leftWidgets = []
-			return
+		// Add AC widget. Only the connected AC input is relevant. If none are connected, use the
+		// generator if available.
+		let widgetCandidates = []
+		let widget
+		if (Global.acInputs.connectedInput != null) {
+			switch (Global.acInputs.connectedInput.source) {
+			case VenusOS.AcInputs_InputType_Grid:
+				widgetType = VenusOS.OverviewWidget_Type_Grid
+				break
+			case VenusOS.AcInputs_InputType_Generator:
+				widgetType = VenusOS.OverviewWidget_Type_AcGenerator
+				break
+			case VenusOS.AcInputs_InputType_Shore:
+				widgetType = VenusOS.OverviewWidget_Type_Shore
+				break
+			default:
+				break
+			}
+			if (widgetType < 0) {
+				console.warn("Unknown AC input type:", Global.acInputs.connectedInput.source)
+			} else {
+				widget = _createWidget(widgetType)
+				widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
+			}
+		} else if (Global.acInputs.generatorInput != null) {
+			widget = _createWidget(VenusOS.OverviewWidget_Type_AcGenerator)
+			widgetCandidates.splice(_leftWidgetInsertionIndex(VenusOS.OverviewWidget_Type_AcGenerator, widgetCandidates), 0, widget)
 		}
 
-		let widgetCandidates = []
-		_addModelWidgets(Global.acInputs.model, widgetCandidates)
-		_addModelWidgets(Global.dcInputs.model, widgetCandidates)
+		// Add DC widgets
+		for (let i = 0; i < Global.dcInputs.model.count; ++i) {
+			const dcInput = Global.dcInputs.model.get(i).input
+			switch (dcInput.source) {
+			case VenusOS.DcInputs_InputType_Alternator:
+				widgetType = VenusOS.OverviewWidget_Type_Alternator
+				break
+			case VenusOS.DcInputs_InputType_DcGenerator:
+				widgetType = VenusOS.OverviewWidget_Type_DcGenerator
+				break
+			case VenusOS.DcInputs_InputType_Wind:
+				widgetType = VenusOS.OverviewWidget_Type_Wind
+				break
+			default:
+				break
+			}
+			if (widgetType < 0) {
+				console.warn("Unknown DC input type:", dcInput.source)
+				return
+			}
+			widget = _createWidget(widgetType)
+			widget.input = dcInput
+			widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
+		}
 
+		// Add solar widget
 		if (Global.solarChargers.model.count > 0) {
 			widgetCandidates.splice(_leftWidgetInsertionIndex(VenusOS.OverviewWidget_Type_Solar, widgetCandidates),
 					0, _createWidget(VenusOS.OverviewWidget_Type_Solar))
 		}
 		_leftWidgets = widgetCandidates
-	}
-
-	function _addModelWidgets(inputModel, widgetCandidates) {
-		for (let i = 0; i < inputModel.count; ++i) {
-			let input = inputModel.get(i).input
-			let widgetType = -1
-			if (inputModel === Global.acInputs.model)  {
-				switch (input.source) {
-				case VenusOS.AcInputs_InputType_Grid:
-					widgetType = VenusOS.OverviewWidget_Type_Grid
-					break
-				case VenusOS.AcInputs_InputType_Generator:
-					widgetType = VenusOS.OverviewWidget_Type_AcGenerator
-					break
-				case VenusOS.AcInputs_InputType_Shore:
-					widgetType = VenusOS.OverviewWidget_Type_Shore
-					break
-				default:
-					break
-				}
-			} else {
-				switch (input.source) {
-				case VenusOS.DcInputs_InputType_Alternator:
-					widgetType = VenusOS.OverviewWidget_Type_Alternator
-					break
-				case VenusOS.DcInputs_InputType_DcGenerator:
-					widgetType = VenusOS.OverviewWidget_Type_DcGenerator
-					break
-				case VenusOS.DcInputs_InputType_Wind:
-					widgetType = VenusOS.OverviewWidget_Type_Wind
-					break
-				default:
-					break
-				}
-			}
-			if (widgetType < 0) {
-				console.warn("Unknown AC/DC input type:", input.source, "for model:", inputModel)
-				continue
-			}
-			let widget = _createWidget(widgetType, { input: input })
-			widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
-		}
 	}
 
 	function _leftWidgetInsertionIndex(widgetType, candidateArray) {

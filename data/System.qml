@@ -17,6 +17,8 @@ QtObject {
 		readonly property real acPower: ac.consumption.power
 		readonly property real dcPower: dc.power
 		onPowerChanged: Utils.updateMaximumValue("system.loads.power", power)
+		onAcPowerChanged: Utils.updateMaximumValue("system.loads.acPower", power)
+		onDcPowerChanged: Utils.updateMaximumValue("system.loads.dcPower", power)
 
 		// Unlike for power, the AC and DC currents cannot be combined because amps for AC and DC
 		// sources are on different scales. So if they are both present, the total is NaN.

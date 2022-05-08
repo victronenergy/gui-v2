@@ -9,20 +9,16 @@ QtObject {
 	id: root
 
 	function populate() {
-		// Add a random set of AC inputs.
+		// Add all possible AC inputs (only one will be connected at any time)
 		let types = [
 				VenusOS.AcInputs_InputType_Grid,
 				VenusOS.AcInputs_InputType_Generator,
 				VenusOS.AcInputs_InputType_Shore,
 			]
-		// Have 2 inputs at most, to leave some space for DC inputs in overview page
-		const modelCount = Math.floor(Math.random() * 2) + 1
-		for (let i = 0; i < modelCount; ++i) {
-			const index = Math.floor(Math.random() * types.length)
-			const input = inputComponent.createObject(root, { "source": types[index] })
+		for (let i = 0; i < types.length; ++i) {
+			const input = inputComponent.createObject(root, { "source": types[i] })
 			_createdObjects.push(input)
 			Global.acInputs.addInput(input)
-			types.splice(index, 1)
 		}
 	}
 
@@ -35,14 +31,51 @@ QtObject {
 				_createdObjects.pop().destroy()
 			}
 
+			// disable connection changes temporarily so that the UI will show the
+			// connected input as requested
+			_disableAutoConnectedChanges.start()
+
 			if (config) {
-				for (let i = 0; i < config.types.length; ++i) {
-					const input = inputComponent.createObject(root, {
-						source: config.types[i],
-						phaseCount: config.phaseCount || 1
-					})
-					_createdObjects.push(input)
-					Global.acInputs.addInput(input)
+				const input = inputComponent.createObject(root, {
+					source: config.type,
+					phaseCount: config.phaseCount || 1
+				})
+				_createdObjects.push(input)
+				Global.acInputs.addInput(input)
+
+				for (let i = 0; i < Global.acInputs.model.count; ++i) {
+					if (input.source === config.type && config.connected) {
+						input.connected = true
+					} else {
+						input.connected = false
+					}
+				}
+			}
+		}
+	}
+
+	property Timer _disableAutoConnectedChanges: Timer {
+		interval: 5000
+	}
+
+	property Timer _dummyConnected: Timer {
+		running: Global.demoManager.timersActive && !_disableAutoConnectedChanges.running
+		repeat: true
+		interval: 10000 + (Math.random() * 10000)
+		triggeredOnStart: true
+		onTriggered: {
+			// Only 1 AC input is connected at a time. Randomly select a different input
+			// as the connected one.
+			let randomIndex = Math.floor(Math.random() * Global.acInputs.model.count)
+			if (Math.random() < 0.2) {
+				randomIndex = -1    // sometimes, just disconnect all inputs
+			}
+			for (let i = 0; i < Global.acInputs.model.count; ++i) {
+				const currInput = Global.acInputs.model.get(i).input
+				if (i === randomIndex) {
+					currInput.connected = true
+				} else {
+					currInput.connected = false
 				}
 			}
 		}
@@ -71,25 +104,6 @@ QtObject {
 			}
 
 			property int phaseCount: 1
-
-			property Timer _dummyConnected: Timer {
-				running: Global.demoManager.timersActive
-				repeat: true
-				interval: 10000 + (Math.random() * 10000)
-				triggeredOnStart: true
-				onTriggered: {
-					// Only 1 AC input is connected at a time. Randomly select a different input
-					// as the connected one.
-					for (let i = 0; i < Global.acInputs.model.count; ++i) {
-						const currInput = Global.acInputs.model.get(i).input
-						if (currInput === input) {
-							currInput.connected = true
-						} else {
-							input.connected = false
-						}
-					}
-				}
-			}
 
 			property Timer _dummyValues: Timer {
 				running: Global.demoManager.timersActive

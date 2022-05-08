@@ -20,11 +20,12 @@ Item {
 	signal setTanksRequested(var config)
 
 	readonly property var _demoConfigConfigs: ({
-		"qrc:/pages/OverviewPage.qml": overviewConfig,
+		"qrc:/pages/BriefPage.qml": briefAndOverviewConfig,
+		"qrc:/pages/OverviewPage.qml": briefAndOverviewConfig,
 		"qrc:/pages/LevelsPage.qml": levelsConfig,
 	})
 
-	function setConfigIndex(demoConfig, configIndex, forceReload) {
+	function setConfigIndex(demoConfig, configIndex) {
 		let config = demoConfig.configs[configIndex]
 		demoConfig.configIndex = configIndex
 		if (config) {
@@ -33,25 +34,18 @@ Item {
 		} else {
 			demoConfigTitle.text = ""
 		}
-
-		// Overview and Levels pages sometimes don't update layout if already on that page
-		if (forceReload) {
-			const pageIndex = indexOfPage(Global.pageManager.navBar.currentUrl)
-			Global.pageManager.navBar.buttonClicked(Global.pageManager.navBar.model.count - 1) // go to settings page
-			Qt.callLater(Global.pageManager.navBar.buttonClicked, pageIndex)
-		}
 	}
 
 	function nextConfig() {
 		const demoConfig = _demoConfigConfigs[Global.pageManager.navBar.currentUrl]
 		const nextIndex = demoConfig.configIndex === demoConfig.configs.length-1 ? 0 : demoConfig.configIndex+1
-		setConfigIndex(demoConfig, nextIndex, true)
+		setConfigIndex(demoConfig, nextIndex)
 	}
 
 	function previousConfig() {
 		const demoConfig = _demoConfigConfigs[Global.pageManager.navBar.currentUrl]
 		const prevIndex = demoConfig.configIndex <= 0 ? demoConfig.configs.length-1 : demoConfig.configIndex-1
-		setConfigIndex(demoConfig, prevIndex, true)
+		setConfigIndex(demoConfig, prevIndex)
 	}
 
 	function indexOfPage(url) {
@@ -137,8 +131,8 @@ Item {
 		}
 	}
 
-	OverviewPageConfig {
-		id: overviewConfig
+	BriefAndOverviewPageConfig {
+		id: briefAndOverviewConfig
 
 		property int configIndex: -1
 	}

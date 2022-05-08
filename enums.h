@@ -297,6 +297,9 @@ public:
 		SystemSettings_DemoModeUnknown = 255
 	};
 	Q_ENUM(SystemSettings_DemoMode)
+
+	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
+	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };
 
 }

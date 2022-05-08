@@ -203,6 +203,8 @@ Column {
 					height: Theme.geometry.briefPage.sidePanel.generator.slider.height
 					value: Global.acInputs.generatorInput ? Global.acInputs.generatorInput.power : 0
 					showHandle: false
+
+					Behavior on value { NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration } }
 				}
 			}
 		}
@@ -251,6 +253,8 @@ Column {
 					highlightColor: Theme.color.warning
 					grooveColor: Theme.color.darkWarning
 					showHandle: false
+
+					Behavior on value { NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration } }
 				}
 			}
 		}

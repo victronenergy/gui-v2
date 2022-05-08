@@ -132,7 +132,7 @@
         <file>data/mock/TanksImpl.qml</file>
         <file>demo/DemoManager.qml</file>
         <file>demo/LevelsPageConfig.qml</file>
-        <file>demo/OverviewPageConfig.qml</file>
+        <file>demo/BriefAndOverviewPageConfig.qml</file>
         <file>pages/BriefMonitorPanel.qml</file>
         <file>pages/BriefPage.qml</file>
         <file>pages/ControlCardsPage.qml</file>
@@ -176,6 +176,7 @@
         <file>images/icon_controls_off_32.svg</file>
         <file>images/icon_controls_on_32.svg</file>
         <file>images/icon_humidity_32.svg</file>
+        <file>images/icon_input_24.svg</file>
         <file>images/icon_manualstart_timer_24.svg</file>
         <file>images/icon_manualstart_24.svg</file>
         <file>images/icon_minus.svg</file>
