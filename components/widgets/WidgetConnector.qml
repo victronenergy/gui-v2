@@ -49,6 +49,7 @@ Item {
 	visible: startWidget.visible && endWidget.visible
 
 	onAnimationModeChanged: Qt.callLater(_reset)
+	on_AnimatedChanged: Qt.callLater(_reset)
 	Component.onCompleted: Qt.callLater(_reset)
 
 	WidgetConnectorPath {
