@@ -9,11 +9,14 @@
 
 #include <math.h>
 
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
 #include <velib/qt/v_busitems.h>
 #include <velib/qt/ve_qitems_dbus.hpp>
 #include <velib/qt/ve_qitem.hpp>
+#endif
 
 #include <QGuiApplication>
+#include <QQuickView>
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
@@ -25,7 +28,7 @@
 Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 namespace {
-
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
 void addSettings(VeQItemSettingsInfo *info)
 {
 	// 0=Dark, 1=Light, 2=Auto
@@ -38,7 +41,7 @@ void addSettings(VeQItemSettingsInfo *info)
 	info->add("Gui/BriefView/Level/4", 5, -1, 6);    // Black water
 	info->add("Gui/BriefView/ShowPercentages", 0, 0, 1);
 }
-
+#endif
 }
 
 int main(int argc, char *argv[])
@@ -60,6 +63,10 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/Global.qml")),
 		"Victron.VenusOS", 2, 0, "Global");
+
+	/* main content */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/ApplicationContent.qml")),
+		"Victron.VenusOS", 2, 0, "ApplicationContent");
 
 	/* data sources */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DataManager.qml")),
@@ -285,8 +292,10 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/NotificationsPage.qml")),
 		"Victron.VenusOS", 2, 0, "NotificationsPage");
 
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
 	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
 	qmlRegisterType<VeQItem>("Victron.Velib", 1, 0, "VeQItem");
+#endif
 
 	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");
 
@@ -294,6 +303,7 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationName("Venus");
 	QGuiApplication::setApplicationVersion("2.0");
 
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
 	QCommandLineParser parser;
 	parser.setApplicationDescription("Venus GUI");
 	parser.addHelpOption();
@@ -338,6 +348,7 @@ int main(int argc, char *argv[])
 	} else {
 		producer->open(VBusItems::getConnection());
 	}
+#endif
 
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
@@ -345,14 +356,18 @@ int main(int argc, char *argv[])
 	/* Force construction of translator */
 	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
 
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
 	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
 	const int screenDiagonalMm = sqrt((physicalScreenSize.width() * physicalScreenSize.width())
 			+ (physicalScreenSize.height() * physicalScreenSize.height()));
 	engine.setProperty("screenSize", (round(screenDiagonalMm / 10 / 2.5) == 7)
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
-
 	engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
+#else
+	engine.setProperty("screenSize", Victron::VenusOS::Theme::SevenInch);
+	engine.rootContext()->setContextProperty("dbusConnected", false); // TODO: MQTT instead.
+#endif
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
 	if (component.isError()) {
@@ -369,6 +384,7 @@ int main(int argc, char *argv[])
 	}
 
 	engine.setIncubationController(window->incubationController());
+
 	/* Write to window properties here to perform any additional initialization
 	   before initial binding evaluation. */
 	component.completeCreate();

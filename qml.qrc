@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>ApplicationContent.qml</file>
         <file>Global.qml</file>
         <file>components/controls/Button.qml</file>
         <file>components/controls/ComboBox.qml</file>

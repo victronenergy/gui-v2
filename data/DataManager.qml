@@ -5,7 +5,6 @@
 import QtQuick
 import Victron.VenusOS
 
-import "dbus" as DBusData
 import "mock" as MockData
 
 Item {
@@ -75,7 +74,7 @@ Item {
 		id: dbusDataLoader
 
 		active: false
-		sourceComponent: DBusData.DBusDataManager {}
+		source: active ? "qrc:/data/dbus/DBusDataManager.qml" : undefined
 
 		onLoaded: Global.dataBackendLoaded = true
 	}
