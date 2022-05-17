@@ -23,33 +23,9 @@ Page {
 				page: "/pages/settings/GeneralSettingsPage.qml"
 			},
 			{
-				//% "Firmware"
-				text: qsTrId("settings_firmware"),
-			},
-			{
-				//% "Date & time"
-				text: qsTrId("settings_date_and_time"),
-			},
-			{
-				//% "Remote console"
-				text: qsTrId("settings_remote_console"),
-			},
-			{
-				//% "System setup"
-				text: qsTrId("settings_system_setup"),
-			},
-			{
-				//% "DVCC"
-				text: qsTrId("settings_dvcc"),
-			},
-			{
 				//% "Display & Language"
 				text: qsTrId("settings_display_and_language"),
 				page: "/pages/settings/DisplayAndLanguageSettingsPage.qml"
-			},
-			{
-				//% "VRM online portal"
-				text: qsTrId("settings_vrm_online_portal"),
 			},
 		]
 
