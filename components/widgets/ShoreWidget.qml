@@ -9,7 +9,7 @@ AcInputWidget {
 	id: root
 
 	//% "Shore"
-	title.text: qsTrId("overview_widget_shore_title")
+	title: qsTrId("overview_widget_shore_title")
 	icon.source: "qrc:/images/shore.svg"
 	type: VenusOS.OverviewWidget_Type_Shore
 

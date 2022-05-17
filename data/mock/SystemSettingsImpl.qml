@@ -12,12 +12,17 @@ QtObject {
 		Global.systemSettings.accessLevel = VenusOS.User_AccessType_User
 		Global.systemSettings.demoMode = 1
 		Global.systemSettings.colorScheme = Theme.Dark
+		Global.systemSettings.energyUnit = VenusOS.Units_Energy_Watt
+		Global.systemSettings.temperatureUnit = VenusOS.Units_Temperature_Celsius
+		Global.systemSettings.volumeUnit = VenusOS.Units_Volume_CubicMeter
 
 		Global.systemSettings.briefView.showPercentages = false
 	}
 
 	property Connections sysSettingsConn: Connections {
 		target: Global.systemSettings
+
+		// Don't connect to onSetDemoModeRequested() here, it is handled from DataPoint in main.qml.
 
 		function onSetAccessLevelRequested(accessLevel) {
 			Global.systemSettings.accessLevel = accessLevel
@@ -28,7 +33,17 @@ QtObject {
 			Global.systemSettings.colorScheme = colorScheme
 		}
 
-		// Don't connect to onSetDemoModeRequested() here, it is handled from DataPoint in main.qml.
+		function onSetEnergyUnitRequested(energyUnit) {
+			Global.systemSettings.energyUnit = energyUnit
+		}
+
+		function onSetTemperatureUnitRequested(temperatureUnit) {
+			Global.systemSettings.temperatureUnit = temperatureUnit
+		}
+
+		function onSetVolumeUnitRequested(volumeUnit) {
+			Global.systemSettings.volumeUnit = volumeUnit
+		}
 	}
 
 	property Connections briefSettingsConn: Connections {

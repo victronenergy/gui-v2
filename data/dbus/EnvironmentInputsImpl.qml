@@ -43,7 +43,7 @@ QtObject {
 
 			property string customName: _veCustomName.value || ""
 			property string productName: _veCustomName.value || ""
-			property real temperature
+			property real temperature_celsius
 			property real humidity
 
 			property string _dbusUid: modelData
@@ -56,7 +56,7 @@ QtObject {
 			}
 			property var _veTemperature: VeQuickItem {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/Temperature" : ""
-				onValueChanged: input.temperature = value === undefined ? NaN : value
+				onValueChanged: input.temperature_celsius = value === undefined ? NaN : value
 			}
 			property var _veHumidity: VeQuickItem {
 				uid: _dbusUid ? "dbus/" + _dbusUid + "/Humidity" : ""

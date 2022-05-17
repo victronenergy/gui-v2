@@ -14,8 +14,9 @@ ArcGauge {
 	readonly property int maxAngle: gaugeAlignmentY === Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.maxAngle : Theme.geometry.briefPage.smallEdgeGauge.maxAngle
 	readonly property int arcOffset: -(radius - root.height) - strokeWidth / 2
 	readonly property int maxArcHeight: Math.sin(Utils.degreesToRadians(maxAngle)) * radius
-	property alias source: valueDisplay.source
-	property alias textValue: valueDisplay.value
+
+	property alias icon: quantityLabel.icon
+	property alias quantityLabel: quantityLabel.quantityLabel
 
 	implicitWidth: Theme.geometry.briefPage.edgeGauge.width
 	implicitHeight: gaugeAlignmentY === Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.height : Theme.geometry.briefPage.smallEdgeGauge.height
@@ -27,13 +28,10 @@ ArcGauge {
 	strokeWidth: Theme.geometry.arc.strokeWidth
 	arcY: gaugeAlignmentY === Qt.AlignTop ? arcOffset : gaugeAlignmentY === Qt.AlignVCenter ? undefined : arcOffset - maxArcHeight
 
-	ArcGaugeValueDisplay {
-		id: valueDisplay
+	ArcGaugeQuantityLabel {
+		id: quantityLabel
 
 		gaugeAlignmentX: root.gaugeAlignmentX
 		gaugeAlignmentY: root.gaugeAlignmentY
-		source: "qrc:/images/consumption.svg"
-		physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
-		value: parent.value
 	}
 }

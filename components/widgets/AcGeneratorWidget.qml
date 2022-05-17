@@ -10,7 +10,7 @@ AcInputWidget {
 	id: root
 
 	//% "Generator"
-	title.text: qsTrId("overview_widget_generator_title")
+	title: qsTrId("overview_widget_generator_title")
 	icon.source: "qrc:/images/generator.svg"
 	type: VenusOS.OverviewWidget_Type_AcGenerator
 	input: Global.acInputs.generatorInput
@@ -21,6 +21,7 @@ AcInputWidget {
 	property list<Label> _generatorInfo: [
 		Label {
 			x: Theme.geometry.overviewPage.widget.content.horizontalMargin
+			y: Theme.geometry.overviewPage.widget.extraContent.topMargin
 			width: parent ? parent.width - 2*Theme.geometry.overviewPage.widget.content.horizontalMargin : 0
 			elide: Text.ElideRight
 

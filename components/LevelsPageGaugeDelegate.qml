@@ -124,7 +124,7 @@ Rectangle {
 		}
 	}
 
-	ValueQuantityDisplay {
+	QuantityLabel {
 		id: percentageText
 
 		anchors {
@@ -133,8 +133,8 @@ Rectangle {
 			bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
 		}
 		font.pixelSize: Theme.font.size.xl
-		physicalQuantity: VenusOS.Units_PhysicalQuantity_Percentage
-		value: root.level
+		unit: VenusOS.Units_Percentage
+		value: Math.round(root.level)
 	}
 
 	Label {
@@ -152,9 +152,9 @@ Rectangle {
 		fontSizeMode: Text.HorizontalFit
 		font.pixelSize: Theme.font.size.xs
 		color: Theme.color.font.secondary
-		text: Units.getCapacityDisplayText(root.gaugeTanks.unit,
+		text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
 				root.totalCapacity,
 				root.totalRemaining,
-				Theme.geometry.levelsPage.gauge.valueText.precision)
+				Theme.geometry.quantityLabel.valueLength)
 	}
 }

@@ -19,7 +19,7 @@ ControlCard {
 
 	title.icon.source: "qrc:/images/ess.svg"
 	//% "ESS"
-	title.text: qsTrId("controlcard_ess")
+	title: qsTrId("controlcard_ess")
 
 	Column {
 		anchors {

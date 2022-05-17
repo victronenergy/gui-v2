@@ -75,7 +75,7 @@ Page {
 			direction: PathArc.Clockwise
 			startAngle: leftLower.active ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)
 			animationEnabled: root.isCurrentPage
-			source: {
+			icon.source: {
 				const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
 						+ Global.dcInputs.model.count
 				if (totalInputs <= 1) {
@@ -90,11 +90,20 @@ Page {
 				return "qrc:/images/icon_input_24.svg"
 			}
 			value: ((Global.acInputs.power || 0) + (Global.dcInputs.power || 0))
-					/ Utils.maximumValue("briefPage.inputsPower") * 100
-			textValue: isNaN(Global.acInputs.power) && isNaN(Global.dcInputs.power)
-					? NaN
-					: (Global.acInputs.power || 0) + (Global.dcInputs.power || 0)
-			onTextValueChanged: Utils.updateMaximumValue("briefPage.inputsPower", textValue)
+					/ Utils.maximumValue("briefPage.inputsPower")
+			onValueChanged: Utils.updateMaximumValue("briefPage.inputsPower", value)
+
+			// AC and DC amp values cannot be combined. If there are both AC and DC values, show
+			// Watts even if Amps is preferred.
+			quantityLabel.unit: Global.systemSettings.energyUnit === VenusOS.Units_Energy_Amp
+					&& (Global.acInputs.current || 0 === 0) || (Global.dcInputs.current || 0 === 0)
+					   ? VenusOS.Units_Energy_Amp
+					   : VenusOS.Units_Energy_Watt
+			quantityLabel.value: quantityLabel.unit === VenusOS.Units_Energy_Amp
+					? (Global.acInputs.current || 0 === 0)
+					  ? Global.dcInputs.current
+					  : Global.acInputs.current
+					: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
 		}
 	}
 
@@ -131,9 +140,9 @@ Page {
 		sourceComponent: SideGauge {
 			gaugeAlignmentY: rightLower.active ? Qt.AlignTop : Qt.AlignVCenter
 			animationEnabled: root.isCurrentPage
-			source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
+			icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 			value: (Global.system.loads.acPower || 0) / Utils.maximumValue("system.loads.acPower") * 100
-			textValue: Global.system.loads.acPower
+			quantityLabel.dataObject: Global.system.ac.consumption
 		}
 	}
 
@@ -152,9 +161,9 @@ Page {
 		sourceComponent: SideGauge {
 			gaugeAlignmentY: Qt.AlignBottom
 			animationEnabled: root.isCurrentPage
-			source: "qrc:/images/dcloads.svg"
+			icon.source: "qrc:/images/dcloads.svg"
 			value: (Global.system.loads.dcPower || 0) / Utils.maximumValue("system.loads.dcPower") * 100
-			textValue: Global.system.loads.dcPower
+			quantityLabel.dataObject: Global.system.dc
 		}
 	}
 
@@ -162,8 +171,8 @@ Page {
 		id: sidePanel
 
 		anchors {
-			top: parent.top
-			topMargin: Theme.geometry.briefPage.sidePanel.topMargin
+			verticalCenter: mainGauge.verticalCenter
+			verticalCenterOffset: Theme.geometry.briefPage.sidePanel.verticalCenterOffset
 		}
 		width: Theme.geometry.briefPage.sidePanel.width
 

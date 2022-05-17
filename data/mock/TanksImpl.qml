@@ -52,7 +52,11 @@ QtObject {
 
 			if (config) {
 				for (let i = 0; i < config.length; ++i) {
-					const tankObj = tankComponent.createObject(root, config[i])
+					let props = config[i]
+					if (props.remaining === undefined) {
+						props.remaining = props.capacity * (props.level / 100)
+					}
+					const tankObj = tankComponent.createObject(root, props)
 					Global.tanks.addTank(tankObj)
 					_createdObjects.push(tankObj)
 				}

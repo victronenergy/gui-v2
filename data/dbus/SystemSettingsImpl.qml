@@ -14,6 +14,8 @@ QtObject {
 	property Connections sysSettingsConn: Connections {
 		target: Global.systemSettings
 
+		// Don't connect to onSetDemoModeRequested() here, it is handled from DataPoint in main.qml.
+
 		function onSetAccessLevelRequested(accessLevel) {
 			veAccessLevel.setValue(accessLevel)
 		}
@@ -23,7 +25,20 @@ QtObject {
 			veColorScheme.setValue(colorScheme)
 		}
 
-		// Don't connect to onSetDemoModeRequested() here, it is handled from DataPoint in main.qml.
+		function onSetEnergyUnitRequested(energyUnit) {
+			veEnergyUnit.setValue(energyUnit)
+			Global.systemSettings.energyUnit = energyUnit
+		}
+
+		function onSetTemperatureUnitRequested(temperatureUnit) {
+			veTemperatureUnit.setValue(temperatureUnit)
+			Global.systemSettings.temperatureUnit = temperatureUnit
+		}
+
+		function onSetVolumeUnitRequested(volumeUnit) {
+			veVolumeUnit.setValue(volumeUnit)
+			Global.systemSettings.volumeUnit = volumeUnit
+		}
 	}
 
 	property Connections briefSettingsConn: Connections {
@@ -81,5 +96,20 @@ QtObject {
 				Global.systemSettings.colorScheme = value
 			}
 		}
+	}
+
+	property VeQuickItem veEnergyUnit: VeQuickItem {
+		uid: veSettings.childUId("/Settings/Gui/Units/Energy")
+		onValueChanged: if (value !== undefined) Global.systemSettings.energyUnit = value
+	}
+
+	property VeQuickItem veTemperatureUnit: VeQuickItem {
+		uid: veSettings.childUId("/Settings/Gui/Units/Temperature")
+		onValueChanged: if (value !== undefined) Global.systemSettings.temperatureUnit = value
+	}
+
+	property VeQuickItem veVolumeUnit: VeQuickItem {
+		uid: veSettings.childUId("/Settings/Gui/Units/Volume")
+		onValueChanged: if (value !== undefined) Global.systemSettings.volumeUnit = value
 	}
 }

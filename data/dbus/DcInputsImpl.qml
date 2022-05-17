@@ -71,7 +71,7 @@ QtObject {
 			property real voltage: NaN
 			property real current: NaN
 			property real power: isNaN(voltage) || isNaN(current) ? NaN : voltage * current
-			property real temperature: NaN
+			property real temperature_celsius: NaN
 			property int monitorMode
 
 			Component.onCompleted: {
@@ -102,7 +102,7 @@ QtObject {
 
 			property var _temperature: VeQuickItem {
 				uid: input.serviceUid + "/Dc/0/Temperature"
-				onValueChanged: input.temperature = value === undefined ? NaN : value
+				onValueChanged: input.temperature_celsius = value === undefined ? NaN : value
 			}
 
 			property var _monitorMode: VeQuickItem {

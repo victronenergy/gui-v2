@@ -317,7 +317,7 @@ Page {
 			animateGeometry: Global.pageManager.animatingIdleResize
 			animationEnabled: root.isCurrentPage
 			isSegment: segmentedBackground.visible
-			sideGaugeValue: value / Utils.maximumValue("grid.power")    // TODO when max available
+			sideGaugeValue: quantityLabel.value / Utils.maximumValue("grid.power")    // TODO when max available
 
 			WidgetConnector {
 				id: gridWidgetConnector
@@ -498,8 +498,6 @@ Page {
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
 
-			value: Global.solarChargers.power  // TODO show amps instead if configured
-
 			WidgetConnector {
 				id: acSolarConnector
 
@@ -548,7 +546,6 @@ Page {
 		size: VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-		physicalQuantity: -1
 		systemState: Global.system.state
 	}
 	WidgetConnector {
@@ -625,9 +622,6 @@ Page {
 			  : VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-		value: Global.system.loads.acPower
-		phaseModel: Global.system.ac.consumption.phases
-		phaseModelProperty: "power"
 	}
 
 	DcLoadsWidget {
@@ -642,6 +636,5 @@ Page {
 				: VenusOS.OverviewWidget_Size_Zero
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-		value: Global.system.loads.dcPower
 	}
 }

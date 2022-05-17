@@ -23,7 +23,7 @@ ControlCard {
 
 	title.icon.source: "qrc:/images/generator.svg"
 	//% "Generator"
-	title.text: qsTrId("controlcard_generator")
+	title: qsTrId("controlcard_generator")
 	status.text: {
 		switch (state) {
 		case VenusOS.Generators_State_Running:
