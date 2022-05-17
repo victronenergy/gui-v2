@@ -5,6 +5,8 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
+import "/components/Utils.js" as Utils
+import "/components/Units.js" as Units
 
 Flickable {
 	id: root
@@ -74,7 +76,9 @@ Flickable {
 						? VenusOS.EnvironmentGaugePanel_Size_Expanded
 						: VenusOS.EnvironmentGaugePanel_Size_Compact
 				title: model.input.customName || model.input.productName || ""
-				temperature: model.input.temperature
+				temperature: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit
+						? Units.celsiusToFahrenheit(model.input.temperature_celsius)
+						: model.input.temperature_celsius
 				humidity: model.input.humidity
 			}
 		}

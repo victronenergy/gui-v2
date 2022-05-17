@@ -9,14 +9,9 @@ OverviewWidget {
 	id: root
 
 	property var input: Global.acInputs.connectedInput
-	property var phaseModel
-	property string phaseModelProperty
+	property var phaseModel: input && input.connected ? input.phases : null
 
-	value: input && input.connected ? input.power : NaN
-	physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
-	phaseModel: input ? input.phases : null
-	phaseModelProperty: "power"
-
+	quantityLabel.dataObject: input && input.connected ? input : null
 	extraContent.children: phaseModel && phaseModel.count > 1 ? phaseDisplay : []
 
 	property list<ThreePhaseDisplay> phaseDisplay: [
@@ -27,12 +22,11 @@ OverviewWidget {
 				right: parent ? parent.right : undefined
 				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 				bottom: parent ? parent.bottom : undefined
-				bottomMargin: Theme.geometry.overviewPage.widget.content.verticalMargin
+				bottomMargin: Theme.geometry.overviewPage.widget.extraContent.bottomMargin
 			}
 
 			visible: model != null && root.size >= VenusOS.OverviewWidget_Size_L
 			model: root.phaseModel && root.phaseModel.count > 1 ? root.phaseModel : null
-			phaseModelProperty: root.phaseModelProperty
 		}
 	]
 }

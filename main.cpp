@@ -34,6 +34,11 @@ void addSettings(VeQItemSettingsInfo *info)
 	// 0=Dark, 1=Light, 2=Auto
 	info->add("Gui/ColorScheme", 0, 0, 2);
 
+	// see enum.h Units_Type for enum values
+	info->add("Gui/Units/Energy", 2); // watt, amp
+	info->add("Gui/Units/Temperature", 4);  // celsius, fahrenheit
+	info->add("Gui/Units/Volume", 6);  // cubic meter, liter, gallon US, gallon imperial
+
 	// Brief settings levels are 0-6 (Fuel - Gasoline) or -1 for Battery.
 	info->add("Gui/BriefView/Level/1", -1, -1, 6);     // Battery
 	info->add("Gui/BriefView/Level/2", 0, -1, 6);    // Fuel
@@ -99,8 +104,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "Arc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGauge.qml")),
 		"Victron.VenusOS", 2, 0, "ArcGauge");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGaugeValueDisplay.qml")),
-		"Victron.VenusOS", 2, 0, "ArcGaugeValueDisplay");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGaugeQuantityLabel.qml")),
+		"Victron.VenusOS", 2, 0, "ArcGaugeQuantityLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AsymmetricRoundedRectangle.qml")),
 		"Victron.VenusOS", 2, 0, "AsymmetricRoundedRectangle");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/BarChart.qml")),
@@ -147,6 +152,10 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "PageStack");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ProgressArc.qml")),
 		"Victron.VenusOS", 2, 0, "ProgressArc");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityLabel.qml")),
+		"Victron.VenusOS", 2, 0, "QuantityLabel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/EnergyQuantityLabel.qml")),
+		"Victron.VenusOS", 2, 0, "EnergyQuantityLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/RadioButtonControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "RadioButtonControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArc.qml")),
@@ -179,10 +188,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ThreePhaseDisplay");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ToastNotification.qml")),
 		"Victron.VenusOS", 2, 0, "ToastNotification");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ValueDisplay.qml")),
-		"Victron.VenusOS", 2, 0, "ValueDisplay");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ValueQuantityDisplay.qml")),
-		"Victron.VenusOS", 2, 0, "ValueQuantityDisplay");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
 
@@ -247,6 +252,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "WidgetConnector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorPath.qml")),
 		"Victron.VenusOS", 2, 0, "WidgetConnectorPath");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetHeader.qml")),
+		"Victron.VenusOS", 2, 0, "WidgetHeader");
 
 	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/ESSCard.qml")),

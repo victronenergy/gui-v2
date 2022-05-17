@@ -9,10 +9,11 @@ QtObject {
 	id: root
 
 	function populate() {
-		Global.battery.stateOfCharge = 64.12
-		Global.battery.power = 55.15
-		Global.battery.current = 14.24
-		Global.battery.temperature = 28.33
+		Global.battery.stateOfCharge = 64.12335
+		Global.battery.voltage = 55.1534
+		Global.battery.current = 14.243
+		Global.battery.power = Global.battery.voltage * Global.battery.current
+		Global.battery.temperature_celsius = 28.33
 		Global.battery.timeToGo = 190 * 60
 		_initialized = true
 	}

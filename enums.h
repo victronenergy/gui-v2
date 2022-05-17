@@ -71,18 +71,19 @@ public:
 	};
 	Q_ENUM(ToastNotification_Category)
 
-	// TODO: add other quantites as needed, eg. Distance, Volume
-	enum Units_PhysicalQuantity {
-		Units_PhysicalQuantity_Voltage,
-		Units_PhysicalQuantity_Current,
-		Units_PhysicalQuantity_Power,
-		Units_PhysicalQuantity_Percentage,
-		Units_PhysicalQuantity_Temperature,
-		Units_PhysicalQuantity_Liters,
-		Units_PhysicalQuantity_CubicMeters,
-		Units_PhysicalQuantity_Gallons
+	enum Units_Type {
+		Units_Percentage,
+		Units_Potential_Volt,
+		Units_Energy_Watt,
+		Units_Energy_Amp,
+		Units_Temperature_Celsius,
+		Units_Temperature_Fahrenheit,
+		Units_Volume_CubicMeter,
+		Units_Volume_Liter,
+		Units_Volume_GallonUS,
+		Units_Volume_GallonImperial
 	};
-	Q_ENUM(Units_PhysicalQuantity)
+	Q_ENUM(Units_Type)
 	
 	enum User_AccessType {
 		User_AccessType_User,

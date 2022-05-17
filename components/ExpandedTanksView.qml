@@ -79,6 +79,8 @@ Rectangle {
 						rightMargin: Theme.geometry.levelsPage.gauge.label.horizontalMargin
 					}
 					font.pixelSize: Theme.font.size.s
+					horizontalAlignment: Text.AlignHCenter
+					elide: Text.ElideRight
 					text: model.tank.name || root._tankProperties.name
 				}
 				TankGauge {
@@ -94,7 +96,7 @@ Rectangle {
 					animationEnabled: root.animationEnabled
 					value: model.tank.level / 100
 				}
-				ValueQuantityDisplay {
+				QuantityLabel {
 					id: percentageText
 
 					anchors {
@@ -103,8 +105,8 @@ Rectangle {
 						bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
 					}
 					font.pixelSize: Theme.font.size.xl
-					physicalQuantity: VenusOS.Units_PhysicalQuantity_Percentage
-					value: model.tank.level
+					unit: VenusOS.Units_Percentage
+					value: Math.round(model.tank.level)
 				}
 				Label {
 					id: valueText
@@ -119,7 +121,7 @@ Rectangle {
 					text: Units.getCapacityDisplayText(root.tankModel.unit,
 							model.tank.capacity,
 							model.tank.remaining,
-							Theme.geometry.levelsPage.gauge.valueText.precision)
+							Theme.geometry.quantityLabel.valueLength)
 				}
 			}
 		}

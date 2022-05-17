@@ -8,13 +8,19 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property int accessLevel
-	property int demoMode
-	property int colorScheme
+	property int accessLevel: -1
+	property int demoMode: -1
+	property int colorScheme: -1
+	property int energyUnit: -1
+	property int temperatureUnit: -1
+	property int volumeUnit: -1
 
-	signal setAccessLevelRequested(accessLevel: int)
 	signal setDemoModeRequested(demoMode: int)
+	signal setAccessLevelRequested(accessLevel: int)
 	signal setColorSchemeRequested(colorScheme: int)
+	signal setEnergyUnitRequested(energyUnit: int)
+	signal setTemperatureUnitRequested(temperatureUnit: int)
+	signal setVolumeUnitRequested(volumeUnit: int)
 
 	property QtObject briefView: QtObject {
 		// Default settings

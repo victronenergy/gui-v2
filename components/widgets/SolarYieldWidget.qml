@@ -9,9 +9,11 @@ OverviewWidget {
 	id: root
 
 	//% "Solar yield"
-	title.text: qsTrId("overview_widget_solaryield_title")
+	title: qsTrId("overview_widget_solaryield_title")
 	icon.source: "qrc:/images/solaryield.svg"
 	type: VenusOS.OverviewWidget_Type_Solar
+
+	quantityLabel.dataObject: Global.solarChargers
 
 	extraContent.children: [
 		Label {
@@ -20,6 +22,8 @@ OverviewWidget {
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 				right: parent.right
 				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				top: parent.top
+				topMargin: Theme.geometry.overviewPage.widget.extraContent.topMargin
 			}
 			//: Today's solar yield, in kwh
 			//% "Today: %1kwh"

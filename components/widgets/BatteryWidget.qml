@@ -5,6 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 import "../Utils.js" as Utils
+import "../Units.js" as Units
 
 OverviewWidget {
 	id: root
@@ -38,14 +39,13 @@ OverviewWidget {
 	}
 
 	//% "Battery"
-	title.text: qsTrId("overview_widget_battery_title")
+	title: qsTrId("overview_widget_battery_title")
 	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
 	width: Theme.geometry.overviewPage.widget.battery.width
 
-	value: batteryData.stateOfCharge
-	physicalQuantity: VenusOS.Units_PhysicalQuantity_Percentage
-	precision: 2
+	quantityLabel.value: Math.round(batteryData.stateOfCharge)
+	quantityLabel.unit: VenusOS.Units_Percentage
 
 	color: "transparent"
 
@@ -60,8 +60,8 @@ OverviewWidget {
 
 		gradient: Gradient {
 			GradientStop { position: 0.0; color: Theme.color.overviewPage.widget.background }
-			GradientStop { position: Math.min(0.999999, (1.0 - root.value/100)); color: Theme.color.overviewPage.widget.background }
-			GradientStop { position: Math.min(1.0, (1.0 - root.value/100) + 0.001); color: Theme.color.overviewPage.widget.battery.background }
+			GradientStop { position: Math.min(0.999999, (1.0 - root.quantityLabel.value/100)); color: Theme.color.overviewPage.widget.background }
+			GradientStop { position: Math.min(1.0, (1.0 - root.quantityLabel.value/100) + 0.001); color: Theme.color.overviewPage.widget.battery.background }
 			GradientStop { position: 1.0; color: Theme.color.overviewPage.widget.battery.background }
 		}
 
@@ -69,7 +69,7 @@ OverviewWidget {
 			id: animationGrid
 			anchors {
 				top: parent.top
-				topMargin: parent.height - Math.floor(parent.height * root.value/100) - root.border.width*2
+				topMargin: parent.height - Math.floor(parent.height * root.quantityLabel.value/100) - root.border.width*2
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
 			}
@@ -92,7 +92,7 @@ OverviewWidget {
 				model: {
 					// Always use the compactHeight to calculate the model, to avoid changing the
 					// model when switching between expanded and compact height.
-					const compactAnimatingAreaHeight = Math.floor(root.compactHeight * root.value/100) - root.border.width*2
+					const compactAnimatingAreaHeight = Math.floor(root.compactHeight * root.quantityLabel.value/100) - root.border.width*2
 					const maxHeight = compactAnimatingAreaHeight - Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2
 					const maxRows = maxHeight / (Theme.geometry.overviewPage.widget.battery.animatedBar.height
 						+ Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2)
@@ -205,6 +205,7 @@ OverviewWidget {
 		Label {
 			anchors {
 				top: parent.top
+				topMargin: Theme.geometry.overviewPage.widget.extraContent.topMargin
 				left: parent.left
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
@@ -225,16 +226,16 @@ OverviewWidget {
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry.overviewPage.widget.content.verticalMargin
+				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
 
 			width: root.width - Theme.geometry.overviewPage.widget.content.horizontalMargin*2
 
-			ValueQuantityDisplay {
+			QuantityLabel {
 				id: batteryPowerDisplay
 
-				value: batteryData.power
-				physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
+				value: batteryData.voltage
+				unit: VenusOS.Units_Potential_Volt
 				font.pixelSize: Theme.font.size.m
 			}
 
@@ -242,21 +243,23 @@ OverviewWidget {
 				height: batteryCurrentDisplay.height
 				width: parent.width - batteryPowerDisplay.width - batteryTempDisplay.width
 
-				ValueQuantityDisplay {
+				QuantityLabel {
 					id: batteryCurrentDisplay
 
 					anchors.horizontalCenter: parent.horizontalCenter
 					value: batteryData.current
-					physicalQuantity: VenusOS.Units_PhysicalQuantity_Current
+					unit: VenusOS.Units_Energy_Amp
 					font.pixelSize: Theme.font.size.m
 				}
 			}
 
-			ValueQuantityDisplay {
+			QuantityLabel {
 				id: batteryTempDisplay
 
-				value: batteryData.temperature
-				physicalQuantity: VenusOS.Units_PhysicalQuantity_Temperature
+				value: Math.round(Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+					   ? batteryData.temperature_celsius
+					   : Units.celsiusToFahrenheit(batteryData.temperature_celsius))
+				unit: Global.systemSettings.temperatureUnit
 				font.pixelSize: Theme.font.size.m
 			}
 		}

@@ -98,6 +98,14 @@ Page {
 					Language.current = model.languageAt(index)
 				}
 			}
+
+			SettingsListNavigationItem {
+				//% "Units"
+				text: qsTrId("settings_units")
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/UnitSettingsPage.qml", {"title": text})
+				}
+			}
 		}
 	}
 }

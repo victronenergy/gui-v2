@@ -22,49 +22,42 @@ QtObject {
 		readonly property int type: VenusOS.Tank_Type_Fuel
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: VenusOS.Units_PhysicalQuantity_CubicMeters
 		objectName: "Fuel"
 	}
 	readonly property ListModel freshWaterTanks: ListModel {
 		readonly property int type: VenusOS.Tank_Type_FreshWater
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: VenusOS.Units_PhysicalQuantity_CubicMeters
 		objectName: "FreshWater"
 	}
 	readonly property ListModel wasteWaterTanks: ListModel {
 		readonly property int type: VenusOS.Tank_Type_WasteWater
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: VenusOS.Units_PhysicalQuantity_CubicMeters
 		objectName: "WasteWater"
 	}
 	readonly property ListModel liveWellTanks: ListModel {
 		readonly property int type: VenusOS.Tank_Type_LiveWell
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: VenusOS.Units_PhysicalQuantity_CubicMeters
 		objectName: "LiveWell"
 	}
 	readonly property ListModel oilTanks: ListModel {
 		readonly property int type: VenusOS.Tank_Type_Oil
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: VenusOS.Units_PhysicalQuantity_CubicMeters
 		objectName: "Oil"
 	}
 	readonly property ListModel blackWaterTanks: ListModel {
 		readonly property int type: VenusOS.Tank_Type_BlackWater
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: VenusOS.Units_PhysicalQuantity_CubicMeters
 		objectName: "BlackWater"
 	}
 	readonly property ListModel gasolineTanks: ListModel {
 		readonly property int type: VenusOS.Tank_Type_Gasoline
 		property real totalCapacity
 		property real totalRemaining
-		property int unit: VenusOS.Units_PhysicalQuantity_CubicMeters
 		objectName: "Gasoline"
 	}
 

@@ -11,11 +11,9 @@ Rectangle {
 	property int type: VenusOS.OverviewWidget_Type_UnknownType
 	property int size: VenusOS.OverviewWidget_Size_M
 
-	property alias physicalQuantity: valueDisplay.physicalQuantity
-	property alias value: valueDisplay.value
-	property alias precision: valueDisplay.precision
-	property alias icon: valueDisplay.icon
-	property alias title: valueDisplay.title
+	property alias icon: widgetHeader.icon
+	property alias title: widgetHeader.title
+	property alias quantityLabel: quantityLabel
 
 	property alias sideGaugeVisible: sideGauge.visible
 	property alias sideGaugeValue: sideGauge.value
@@ -101,16 +99,33 @@ Rectangle {
 		animationEnabled: root.animationEnabled
 	}
 
-	ValueDisplay {
-		id: valueDisplay
+	Item {
+		id: header
 
 		x: Theme.geometry.overviewPage.widget.content.horizontalMargin
 		y: root.size > VenusOS.OverviewWidget_Size_S
 		   ? Theme.geometry.overviewPage.widget.content.verticalMargin
 		   : parent.height/2 - height/2
-		fontSize: root.size === VenusOS.OverviewWidget_Size_XS
-				  ? Theme.geometry.overviewPage.widget.value.minimumFontSize
-				  : Theme.geometry.overviewPage.widget.value.maximumFontSize
+		width: parent.width - 2*Theme.geometry.overviewPage.widget.content.horizontalMargin
+		height: widgetHeader.height + (quantityLabel.visible ? quantityLabel.height : 0)
+
+		WidgetHeader {
+			id: widgetHeader
+
+			width: parent.width
+		}
+
+		EnergyQuantityLabel {
+			id: quantityLabel
+
+			anchors {
+				top: widgetHeader.bottom
+				topMargin: Theme.geometry.overviewPage.widget.header.spacing
+			}
+			font.pixelSize: root.size === VenusOS.OverviewWidget_Size_XS
+					  ? Theme.geometry.overviewPage.widget.value.minimumFontSize
+					  : Theme.geometry.overviewPage.widget.value.maximumFontSize
+		}
 	}
 
 	Item {
@@ -119,7 +134,7 @@ Rectangle {
 			left: parent.left
 			right: sideGauge.visible ? sideGauge.left : parent.right
 			rightMargin: sideGauge.visible ? sideGauge.anchors.margins : 0
-			top: valueDisplay.bottom
+			top: header.bottom
 			bottom: parent.bottom
 		}
 		visible: root.size >= VenusOS.OverviewWidget_Size_M

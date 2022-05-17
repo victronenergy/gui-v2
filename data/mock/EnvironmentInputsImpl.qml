@@ -13,7 +13,7 @@ Item {
 		for (let i = 0; i < inputCount; ++i) {
 			const inputObj = inputComponent.createObject(root, {
 				customName: "Sensor " + (i + 1),
-				temperature: _rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
+				temperature_celsius: _rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
 						Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue),
 				humidity: _rand(Theme.geometry.levelsPage.environment.humidityGauge.minimumValue,
 						Theme.geometry.levelsPage.environment.humidityGauge.maximumValue)
@@ -30,7 +30,7 @@ Item {
 	property Component inputComponent: Component {
 		QtObject {
 			property string customName
-			property real temperature
+			property real temperature_celsius
 			property real humidity
 		}
 	}
@@ -59,7 +59,7 @@ Item {
 			interval: 10 * 1000
 			onTriggered: {
 				let data = Global.environmentInputs.model.get(model.index)
-				data.temperature = root._rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
+				data.temperature_celsius = root._rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
 						Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
 				if (!isNaN(model.humidity)) {
 					data.humidity = root._rand(Theme.geometry.levelsPage.environment.humidityGauge.minimumValue,

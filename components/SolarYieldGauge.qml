@@ -34,15 +34,13 @@ Item {
 			value: Utils.scaleToRange(model.value, 0, Global.solarChargers.yieldHistory.maximum, 0, 100)
 		}
 	}
-	ArcGaugeValueDisplay {
-		id: valueDisplay
+	ArcGaugeQuantityLabel {
+		id: quantityLabel
 
 		gaugeAlignmentX: root._gaugeAlignmentX
 		gaugeAlignmentY: root.gaugeAlignmentY
-		layoutDirection: root._gaugeAlignmentX === Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
-		source: "qrc:/images/solaryield.svg"
-		physicalQuantity: VenusOS.Units_PhysicalQuantity_Power
-		value: Global.solarChargers.power
+		icon.source: "qrc:/images/solaryield.svg"
+		quantityLabel.dataObject: Global.solarChargers
 	}
 }
 

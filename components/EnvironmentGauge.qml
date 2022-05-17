@@ -7,8 +7,8 @@ Item {
 
 	property alias icon: typeIcon
 	property alias text: typeLabel.text
-	property alias value: quantityDisplay.value
-	property alias physicalQuantity: quantityDisplay.physicalQuantity
+	property alias value: quantityLabel.value
+	property alias unit: quantityLabel.unit
 
 	property real minimumValue: 0
 	property real maximumValue: 100
@@ -63,7 +63,7 @@ Item {
 		anchors {
 			top: typeLabel.bottom
 			topMargin: Theme.geometry.levelsPage.environment.gauge.bar.topMargin
-			bottom: quantityDisplay.top
+			bottom: quantityLabel.top
 			bottomMargin: Theme.geometry.levelsPage.environment.gauge.bar.bottomMargin
 			horizontalCenter: parent.horizontalCenter
 		}
@@ -129,15 +129,14 @@ Item {
 		}
 	}
 
-	ValueQuantityDisplay {
-		id: quantityDisplay
+	QuantityLabel {
+		id: quantityLabel
 
 		anchors {
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.levelsPage.environment.gauge.quantityDisplay.bottomMargin
+			bottomMargin: Theme.geometry.levelsPage.environment.gauge.quantityLabel.bottomMargin
 			horizontalCenter: parent.horizontalCenter
 		}
 		font.pixelSize: root.reduceFontSize ? Theme.font.size.m : Theme.font.size.xl
-		alignToBaseline: true
 	}
 }

@@ -14,6 +14,11 @@ QtObject {
 		onValueChanged: Global.battery.stateOfCharge = value === undefined ? NaN : value
 	}
 
+	property VeQuickItem veVoltage: VeQuickItem {
+		uid: veSystem.childUId("/Dc/Battery/Voltage")
+		onValueChanged: Global.battery.voltage = value === undefined ? NaN : value
+	}
+
 	property VeQuickItem vePower: VeQuickItem {
 		uid: veSystem.childUId("/Dc/Battery/Power")
 		onValueChanged: Global.battery.power = value === undefined ? NaN : value
@@ -26,7 +31,7 @@ QtObject {
 
 	property VeQuickItem veTemperature: VeQuickItem {
 		uid: veSystem.childUId("/Dc/Battery/Temperature")
-		onValueChanged: Global.battery.temperature = value === undefined ? NaN : value
+		onValueChanged: Global.battery.temperature_celsius = value === undefined ? NaN : value
 	}
 
 	property VeQuickItem veTimeToGo: VeQuickItem {

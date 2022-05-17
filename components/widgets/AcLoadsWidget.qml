@@ -8,14 +8,13 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
-	property var phaseModel
-	property string phaseModelProperty
-
 	//% "AC Loads"
-	title.text: qsTrId("overview_widget_acloads_title")
+	title: qsTrId("overview_widget_acloads_title")
 	icon.source: "qrc:/images/acloads.svg"
 	type: VenusOS.OverviewWidget_Type_AcLoads
 	enabled: false
+
+	quantityLabel.dataObject: Global.system.ac.consumption
 
 	extraContent.children: [
 		ThreePhaseDisplay {
@@ -25,12 +24,11 @@ OverviewWidget {
 				right: parent ? parent.right : undefined
 				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 				bottom: parent ? parent.bottom : undefined
-				bottomMargin: Theme.geometry.overviewPage.widget.content.verticalMargin
+				bottomMargin: Theme.geometry.overviewPage.widget.extraContent.bottomMargin
 			}
 
 			visible: model != null && root.size >= VenusOS.OverviewWidget_Size_L
-			model: root.phaseModel && root.phaseModel.count > 1 ? root.phaseModel : null
-			phaseModelProperty: root.phaseModelProperty
+			model: Global.system.ac.consumption.phases.count > 1 ? Global.system.ac.consumption.phases : null
 		}
 	]
 }

@@ -19,7 +19,7 @@ ControlCard {
 
 	title.icon.source: "qrc:/images/inverter_charger.svg"
 	//% "Inverter / Charger"
-	title.text: qsTrId("controlcard_inverter_charger")
+	title: qsTrId("controlcard_inverter_charger")
 
 	status.text: {
 		// TODO this duplicates the translations in OverviewWidget, should move the translations to a common component

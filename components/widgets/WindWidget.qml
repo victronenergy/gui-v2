@@ -9,7 +9,7 @@ DcInputWidget {
 	id: root
 
 	//% "Wind"
-	title.text: qsTrId("overview_widget_wind_title")
+	title: qsTrId("overview_widget_wind_title")
 	icon.source: "qrc:/images/wind.svg"
 	type: VenusOS.OverviewWidget_Type_Wind
 }

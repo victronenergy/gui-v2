@@ -21,7 +21,6 @@ Item {
 	Image {
 		id: icon
 
-		anchors.verticalCenter: parent.verticalCenter
 		width: Theme.geometry.generatorIconLabel.icon.width
 		height: Theme.geometry.generatorIconLabel.icon.width
 		source: root.state !== VenusOS.Generators_State_Running ? ""
@@ -32,14 +31,12 @@ Item {
 			: "qrc:/images/icon_autostart_24.svg"
 	}
 
-
 	Label {
 		id: label
 
 		anchors {
 			left: icon.right
 			leftMargin: Theme.geometry.generatorIconLabel.spacing
-			verticalCenter: parent.verticalCenter
 		}
 		// set a fixed width to prevent the label from resizing when the runtime changes
 		width: Theme.geometry.generatorIconLabel.label.width

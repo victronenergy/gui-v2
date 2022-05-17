@@ -1,5 +1,6 @@
 import QtQuick
 import Victron.VenusOS
+import "/components/Units.js" as Units
 
 Rectangle {
 	id: root
@@ -73,18 +74,22 @@ Rectangle {
 			bottom: parent.bottom
 			horizontalCenter: humidityGaugeLoader.active ? undefined : parent.horizontalCenter
 		}
-
 		animationEnabled: root.animationEnabled
 		icon.source: "qrc:/images/icon_temp_32.svg"
-		//: Abbreviation of "Celsius"
-		//% "C"
-		text: qsTrId("environment_gauge_celsius")
-		physicalQuantity: VenusOS.Units_PhysicalQuantity_Temperature
-		value: Math.round(root.temperature)
 		zeroMarkerVisible: true
 		reduceFontSize: root._twoGauges && root.horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Compact
-		minimumValue: Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue
-		maximumValue: Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue
+
+		text: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? "F" : "C"
+		value: Math.round(root.temperature)
+		unit: Global.systemSettings.temperatureUnit
+
+		// TODO min and max need to come from dbus backend, but not yet available.
+		minimumValue: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+				? Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue
+				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue)
+		maximumValue: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+				? Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue
+				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
 
 		gradient: Gradient {
 			GradientStop {
@@ -121,7 +126,7 @@ Rectangle {
 			//% "RH"
 			text: qsTrId("environment_gauge_humidity")
 			animationEnabled: root.animationEnabled
-			physicalQuantity: VenusOS.Units_PhysicalQuantity_Percentage
+			unit: VenusOS.Units_Percentage
 			value: Math.round(root.humidity)
 			zeroMarkerVisible: false
 			reduceFontSize: root._twoGauges && root.horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Compact
