@@ -75,7 +75,7 @@ Item {
 		id: dbusDataLoader
 
 		active: false
-		source: active ? "qrc:/data/dbus/DBusDataManager.qml" : undefined
+		source: active ? "qrc:/data/dbus/DBusDataManager.qml" : ""
 
 		onLoaded: Global.dataBackendLoaded = true
 	}
