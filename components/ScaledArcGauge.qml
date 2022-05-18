@@ -22,10 +22,13 @@ Item {
 	property var arcY
 
 	Item {
-		// Antialiasing
+		id: antialiased
 		anchors.fill: parent
+
+		// Antialiasing without requiring multisample framebuffers.
 		layer.enabled: true
-		layer.samples: 4
+		layer.smooth: true
+		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
 
 		ScaledArc {
 			id: arc

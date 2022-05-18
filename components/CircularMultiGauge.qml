@@ -19,11 +19,13 @@ Item {
 	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry.circularMultiGauge.spacing)
 
 	Item {
+		id: antialiased
 		anchors.fill: parent
 
-		// Antialiasing
+		// Antialiasing without requiring multisample framebuffers.
 		layer.enabled: true
-		layer.samples: 4
+		layer.smooth: true
+		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
 
 		Repeater {
 			id: arcRepeater
