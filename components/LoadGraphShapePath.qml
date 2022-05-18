@@ -23,8 +23,12 @@ Shape {
 	function calcY(data) { return (1 - data) * height }
 
 	smooth: true
+
+	// Antialiasing without requiring multisample framebuffers.
 	layer.enabled: true
-	layer.samples: 8
+	layer.smooth: true
+	layer.textureSize: Qt.size(root.width*2, root.height*2)
+
 	NumberAnimation on offset {
 		id: animation
 

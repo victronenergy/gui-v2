@@ -459,6 +459,11 @@ int main(int argc, char *argv[])
 		return EXIT_FAILURE;
 	}
 
+#if defined(VENUS_DESKTOP_BUILD)
+	QSurfaceFormat format = window->format();
+	format.setSamples(4); // enable MSAA
+	window->setFormat(format);
+#endif
 	engine.setIncubationController(window->incubationController());
 
 	/* Write to window properties here to perform any additional initialization
