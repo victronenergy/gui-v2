@@ -10,7 +10,7 @@ ControlCard {
 
 	title.icon.source: "qrc:/images/switches.svg"
 	//% "Switches"
-	title: qsTrId("controlcard_switches")
+	title.text: qsTrId("controlcard_switches")
 
 	ListView {
 		id: switchesView
