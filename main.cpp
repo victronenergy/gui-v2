@@ -6,6 +6,7 @@
 #include "logging.h"
 #include "theme.h"
 #include "enums.h"
+#include "progressarc.h"
 
 #include <math.h>
 
@@ -152,6 +153,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "PageStack");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ProgressArc.qml")),
 		"Victron.VenusOS", 2, 0, "ProgressArc");
+	qmlRegisterType<Victron::VenusOS::ProgressArc>(
+		"Victron.VenusOS", 2, 0, "ProgressArc2");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityLabel.qml")),
 		"Victron.VenusOS", 2, 0, "QuantityLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/EnergyQuantityLabel.qml")),

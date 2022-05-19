@@ -23,18 +23,18 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml LinguistTools REQUIRED)
+    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml LinguistTools ShaderTools REQUIRED)
 else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools)
+    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools ShaderTools)
     if (NOT ${Qt6_FOUND})
         # cmake can't automatically find Qt 6.2 on Ubuntu Linux, give it a hint:
         if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
             list(APPEND CMAKE_PREFIX_PATH "/opt/Qt/6.2.0/gcc_64/lib/cmake/")
         endif()
-        find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools REQUIRED)
+        find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools ShaderTools REQUIRED)
     endif()
 endif()
 
@@ -111,6 +111,8 @@ set(VENUS_SOURCES
     logging.h
     enums.h
     enums.cpp
+    progressarc.h
+    progressarc.cpp
 )
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
@@ -153,6 +155,13 @@ else()
         ${SOURCES}
     )
 endif()
+
+qt_add_shaders(${PROJECT_NAME} "shaders"
+    BATCHABLE # shouldn't be needed, but ... QTBUG-96940
+    PREFIX "/shaders"
+    BASE "shaders"
+    FILES "shaders/progressarc.vert"
+          "shaders/progressarc.frag")
 
 add_dependencies(${PROJECT_NAME} ${TRANSLATIONS_QM_TARGET})
 qt_add_resources(${PROJECT_NAME} "i18n"

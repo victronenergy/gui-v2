@@ -27,18 +27,30 @@ Item {
 		layer.smooth: true
 		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
 
-		ProgressArc {
+		ProgressArc2 {
 			id: arc
 
-			width: gauges.width - strokeWidth
+			width: gauges.width
 			height: width
 			anchors.centerIn: parent
-			radius: width/2
+			radius: width/2 - strokeWidth/2
 			startAngle: 0
 			endAngle: 360
 			progressColor: Theme.statusColorValue(gauges.status)
 			remainderColor: Theme.statusColorValue(gauges.status, true)
 			strokeWidth: Theme.geometry.circularSingularGauge.strokeWidth
+
+			Timer {
+				id: dbgTimerXXXXXXXXXXXXXXX
+				interval: 2000
+				running: true
+				repeat: true
+				property bool toggle
+				onTriggered: {
+					toggle = !toggle
+					arc.progressColor = toggle ? Theme.statusColorValue(gauges.status) : "blue"
+				}
+			}
 		}
 	}
 

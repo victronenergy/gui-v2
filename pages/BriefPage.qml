@@ -26,7 +26,7 @@ Page {
 		width: Theme.geometry.mainGauge.size
 		height: width
 		x: sidePanel.x/2 - width/2
-		sourceComponent: Global.tanks.totalTankCount <= 1 ? singleGauge : multiGauge
+		sourceComponent: singleGauge //XXXXXXXXXXXXXXX// Global.tanks.totalTankCount <= 1 ? singleGauge : multiGauge
 	}
 
 	Component {
@@ -50,6 +50,8 @@ Page {
 			status: Gauges.getValueStatus(value, properties.valueType)
 			caption: Global.battery.timeToGo > 0 ? Utils.formatAsHHMM(Global.battery.timeToGo, true) : ""
 			animationEnabled: root.isCurrentPage
+			
+//Rectangle { anchors.fill: parent; color: "blue"; opacity: 0.3; id: dbg1XXXXXXXXXXXXX }
 		}
 	}
 
