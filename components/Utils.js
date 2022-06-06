@@ -130,22 +130,22 @@ function maximumValue(key) {
 
 function scaleToRange(value, valueMin, valueMax, scaledMin, scaledMax)
 {
-    if (valueMin >= valueMax) {
-        console.warn("scaleToRange() failed, valueMin", valueMin, ">= valueMax", valueMax)
-        return value
-    }
-    if (scaledMin >= scaledMax) {
-        console.warn("scaleToRange() failed, scaledMin", scaledMin, ">= valueMax", scaledMax)
-        return value
-    }
-    if (value < valueMin || value > valueMax) {
-        console.warn("scaleToRange() failed, value", value, "not within range", valueMin, valueMax)
-        return value
-    }
+	if (valueMin >= valueMax) {
+		console.warn("scaleToRange() failed, valueMin", valueMin, ">= valueMax", valueMax)
+		return value
+	}
+	if (scaledMin >= scaledMax) {
+		console.warn("scaleToRange() failed, scaledMin", scaledMin, ">= valueMax", scaledMax)
+		return value
+	}
+	if (value < valueMin || value > valueMax) {
+		console.warn("scaleToRange() failed, value", value, "not within range", valueMin, valueMax)
+		return value
+	}
 
-    const origRange = valueMax - valueMin
-    const scaledRange = scaledMax - scaledMin
-    return scaledRange * (value / origRange)
+	const origRange = valueMax - valueMin
+	const scaledRange = scaledMax - scaledMin
+	return scaledRange * (value / origRange)
 }
 
 // Can't use % operator, that gives remainder rather than a modulo that wraps.
@@ -159,11 +159,11 @@ function degreesToRadians(degrees) {
 
 // This considers whether the values are NaN. If both are NaN, the result is NaN.
 function sumRealNumbers(a, b) {
-    return isNaN(a) && isNaN(b)
-        ? NaN
-        : isNaN(a)
-          ? b
-          : isNaN(b)
-            ? a
-            : a + b
+	return isNaN(a) && isNaN(b)
+		? NaN
+		: isNaN(a)
+		  ? b
+		  : isNaN(b)
+			? a
+			: a + b
 }
