@@ -16,6 +16,7 @@ QtObject {
 	property var ess: EssImpl { veSettings: root.veSettings }
 	property var generators: GeneratorsImpl { veDBus: root.veDBus }
 	property var inverters: InvertersImpl { veDBus: root.veDBus; veSettings: root.veSettings }
+	property var notifications: NotificationsImpl {}
 	property var relays: RelaysImpl {}
 	property var solarChargers: SolarChargersImpl { veDBus: root.veDBus }
 	property var system: SystemImpl { veDBus: root.veDBus; veSystem: root.veSystem }

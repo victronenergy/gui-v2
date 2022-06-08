@@ -100,9 +100,10 @@ Item {
 			break
 		case Qt.Key_N:
 			if (event.modifiers & Qt.ShiftModifier) {
-				root.deactivateSingleAlarm()
+				Global.notifications.activeModel.deactivateSingleAlarm()
 			} else {
-				Global.notifications.addNotification(notificationsConfig.getRandomAlarm())
+				var n = notificationsConfig.getRandomAlarm()
+				Global.notifications.activeModel.insertByDate(n.acknowledged, n.active, n.type, n.deviceName, n.dateTime, n.description)
 			}
 			event.accepted = true
 			break

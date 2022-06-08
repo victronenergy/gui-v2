@@ -26,7 +26,7 @@ Page {
 				id: activeNotificationsView // these notifications are active and/or not acknowledged
 				implicitHeight: childrenRect.height
 				interactive: false
-				model: Global.notifications.model
+				model: Global.notifications.activeModel
 				// When a new notification is raised, scroll to the top of the list header.
 				// We can't do this via 'onCountChanged', as the count changes before headerItem.height is updated.
 				onHeightChanged: historicalNotificationsView.contentY = -headerItem.height
@@ -40,7 +40,7 @@ Page {
 					left: parent.left
 					leftMargin: Theme.geometry.notificationsPage.checkmark.leftMargin - Theme.geometry.notificationsPage.horizontalMargin
 				}
-				visible: Global.notifications.model.count === 0
+				visible: Global.notifications.activeModel.count === 0
 				spacing: Theme.geometry.notificationsPage.checkmark.spacing
 
 				CP.ColorImage {
@@ -61,9 +61,9 @@ Page {
 			Label {
 				id: history
 				anchors {
-					top: Global.notifications.model.count === 0
+					top: Global.notifications.activeModel.count === 0
 						? noCurrentAlerts.bottom : activeNotificationsView.bottom
-					topMargin: Global.notifications.model.count === 0
+					topMargin: Global.notifications.activeModel.count === 0
 						? Theme.geometry.notificationsPage.history.topMargin : Theme.geometry.notificationsPage.delegate.topMargin
 					left: parent.left
 				}
@@ -75,8 +75,7 @@ Page {
 				text: qsTrId("notifications_history")
 			}
 		}
-
-		model: Global.notifications.historyModel
+		model: Global.notifications.historicalModel
 		add: Transition {
 			SequentialAnimation {
 				PropertyAction { property: "opacity"; value: 0}

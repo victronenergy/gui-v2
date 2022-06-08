@@ -22,40 +22,40 @@ QtObject {
 	//% "Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur."
 	property string longText: qsTrId("notifications_toast_long_text")
 
-	property int currentCategory: VenusOS.ToastNotification_Category_Error
+	property int currentType: VenusOS.Notification_Warning
 	property bool useShortText: false
 
 	property var dummyAlarms: [
 		{
 			acknowledged: true,
 			active: true,
-			category: VenusOS.ToastNotification_Category_Warning,
-			date: root.date,
-			source: "RS 48/6000/100 HQ2050NMMEX",
+			type: VenusOS.Notification_Warning,
+			dateTime: root.date,
+			deviceName: "RS 48/6000/100 HQ2050NMMEX",
 			description: "Low battery voltage 45V"
 		},
 		{
 			acknowledged: false,
 			active: true,
-			category: VenusOS.ToastNotification_Category_Error,
-			date: root.date,
-			source: "Fuel tank custom name",
+			type: VenusOS.Notification_Alarm,
+			dateTime: root.date,
+			deviceName: "Fuel tank custom name",
 			description: "Fuel level low 15%"
 		},
 		{
 			acknowledged: false,
 			active: false,
-			category: VenusOS.ToastNotification_Category_Error,
-			date: root.date,
-			source: "Fuel tank custom name",
+			type: VenusOS.Notification_Alarm,
+			dateTime: root.date,
+			deviceName: "Fuel tank custom name",
 			description: "Fuel level low 15%"
 		},
 		{
 			acknowledged: false,
 			active: true,
-			category: VenusOS.ToastNotification_Category_Informative,
-			date: root.date,
-			source: "System",
+			type: VenusOS.Notification_Notification,
+			dateTime: root.date,
+			deviceName: "System",
 			description: "Software update available"
 		}
 	]
@@ -63,16 +63,16 @@ QtObject {
 	function getRandomAlarm() {
 		var index = Math.floor(Math.random() * dummyAlarms.length)
 		var alarm = dummyAlarms[index]
-		alarm.date = new Date()
+		alarm.dateTime = new Date()
 		return alarm
 	}
 
 	function showToastNotification() {
-		currentCategory = (currentCategory + 1)
-		if (currentCategory > VenusOS.ToastNotification_Category_Error) {
-			currentCategory = VenusOS.ToastNotification_Category_None
+		currentType = (currentType + 1)
+		if (currentType > VenusOS.Notification_Notification) {
+			currentType = VenusOS.Notification_Warning
 			useShortText = !useShortText
 		}
-		dialogManager.showToastNotification(currentCategory, useShortText ? shortText : longText)
+		dialogManager.showToastNotification(currentType, useShortText ? shortText : longText)
 	}
 }

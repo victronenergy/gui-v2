@@ -299,6 +299,13 @@ public:
 	};
 	Q_ENUM(SystemSettings_DemoMode)
 
+	enum Notification_Type {
+		Notification_Warning,
+		Notification_Alarm,
+		Notification_Notification
+	};
+	Q_ENUM(Notification_Type)
+
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };

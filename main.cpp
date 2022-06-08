@@ -6,7 +6,7 @@
 #include "logging.h"
 #include "theme.h"
 #include "enums.h"
-
+#include "notificationsmodel.h"
 #include <math.h>
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
@@ -70,6 +70,16 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "VenusFont");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/Global.qml")),
 		"Victron.VenusOS", 2, 0, "Global");
+	qmlRegisterSingletonType<Victron::VenusOS::ActiveNotificationsModel>(
+		"Victron.VenusOS", 2, 0, "ActiveNotificationsModel",
+		[](QQmlEngine *, QJSEngine *) -> QObject * {
+		return Victron::VenusOS::ActiveNotificationsModel::instance();
+	});
+	qmlRegisterSingletonType<Victron::VenusOS::HistoricalNotificationsModel>(
+		"Victron.VenusOS", 2, 0, "HistoricalNotificationsModel",
+		[](QQmlEngine *, QJSEngine *) -> QObject * {
+		return Victron::VenusOS::HistoricalNotificationsModel::instance();
+	});
 
 	/* main content */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/ApplicationContent.qml")),

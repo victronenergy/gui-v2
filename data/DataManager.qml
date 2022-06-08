@@ -40,6 +40,7 @@ Item {
 		Global.ess.reset()
 		Global.generators.reset()
 		Global.inverters.reset()
+		Global.notifications.reset()
 		Global.relays.reset()
 		Global.solarChargers.reset()
 		Global.system.reset()

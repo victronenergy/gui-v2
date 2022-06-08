@@ -111,6 +111,8 @@ set(VENUS_SOURCES
     logging.h
     enums.h
     enums.cpp
+    notificationsmodel.h
+    notificationsmodel.cpp
 )
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
