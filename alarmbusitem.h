@@ -2,7 +2,7 @@
 #define ALARMBUSITEM_H
 
 #include <QObject>
-#include <QLinkedList>
+#include <list>
 
 #include <velib/qt/ve_qitem.hpp>
 
@@ -10,15 +10,21 @@
 #include <dbus_services.h>
 #include <dbus_service.h>
 
+namespace Victron {
+namespace VenusOS {
+class ActiveNotificationsModel;
+}
+}
+
 // Object containing the alarms being monitored in a certain service
 class DeviceAlarms : public QObject {
 	Q_OBJECT
 
 public:
-	DeviceAlarms(DBusService *service, NotificationCenter *noticationCenter) :
+	DeviceAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter) :
 		QObject(service),
 		mService(service),
-		mNotificationCenter(noticationCenter)
+		mActiveNotificationModel(noticationCenter)
 	{
 	}
 
@@ -30,26 +36,26 @@ public:
 	void addChargerError(const QString &busitemPathAlarm);
 	void addWakespeedError(const QString &busitemPathAlarm);
 
-	static DeviceAlarms *createBatteryAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createSolarChargerAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createAcChargerAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createInverterAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createMultiRsAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createSystemCalcAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createGeneratorStartStopAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createDigitalInputAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createVecanAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createEssAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createTankAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createDcMeterAlarms(DBusService *service, NotificationCenter *noticationCenter);
-	static DeviceAlarms *createAlternatorAlarms(DBusService *service, NotificationCenter *noticationCenter);
+	static DeviceAlarms *createBatteryAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createSolarChargerAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createAcChargerAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createInverterAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createMultiRsAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createSystemCalcAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createGeneratorStartStopAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createDigitalInputAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createVecanAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createEssAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createTankAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createDcMeterAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
+	static DeviceAlarms *createAlternatorAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
 
-	NotificationCenter *notificationCenter() { return mNotificationCenter; }
+	Victron::VenusOS::ActiveNotificationsModel *notificationCenter() { return mActiveNotificationModel; }
 
 protected:
 	DBusService *mService;
-	QLinkedList<AlarmMonitor *> mAlarms;
-	NotificationCenter *mNotificationCenter;
+	std::list<AlarmMonitor *> mAlarms;
+	Victron::VenusOS::ActiveNotificationsModel *mActiveNotificationModel;
 };
 
 // Object to add alarms to the discovered services
@@ -58,20 +64,20 @@ class AlarmBusitem : public QObject
 	Q_OBJECT
 
 public:
-	explicit AlarmBusitem(DBusServices *services, NotificationCenter *notificationCenter);
+	explicit AlarmBusitem(DBusServices *services, Victron::VenusOS::ActiveNotificationsModel *notificationCenter);
 
 public slots:
 	void dbusServiceFound(DBusService *service);
 
 private:
-	NotificationCenter *mNotificationCenter;
+	Victron::VenusOS::ActiveNotificationsModel *mActiveNotificationModel;
 };
 
 class VebusAlarms : public DeviceAlarms {
 	Q_OBJECT
 
 public:
-	VebusAlarms(DBusService *service, NotificationCenter *noticationCenter);
+	VebusAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
 
 	QString highTempTextL1(bool single) { return single ? tr("High Temperature") : tr("High Temperature on L1"); }
 	QString inverterOverloadTextL1(bool single) { return single ? tr("Inverter overload") : tr("Inverter overload on L1"); }
@@ -95,7 +101,7 @@ class BatteryAlarms : public DeviceAlarms {
 	Q_OBJECT
 
 public:
-	BatteryAlarms(DBusService *service, NotificationCenter *noticationCenter);
+	BatteryAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
 
 private slots:
 	void numberOfDistributorsChanged(VeQItem *item, QVariant value);

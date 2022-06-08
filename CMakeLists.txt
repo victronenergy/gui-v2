@@ -93,7 +93,6 @@ set(VELIB_SOURCES
     velib/inc/velib/qt/ve_qitem_tree_model.hpp
     velib/inc/velib/qt/v_busitems.h
     velib/inc/velib/qt/vebus_error.hpp
-    velib/inc/velib/ve_regs.h
     velib/inc/velib/velib_config.h
     velib/src/qt/bms_error.cpp
     velib/src/qt/charger_error.cpp

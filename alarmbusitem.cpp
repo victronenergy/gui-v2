@@ -9,36 +9,36 @@ AlarmMonitor *DeviceAlarms::addTripplet(const QString &description, const QStrin
 {
 	AlarmMonitor *ret = new AlarmMonitor(mService, AlarmMonitor::REGULAR, busitemPathAlarm,
 										 description, busitemSetting, busitemPathValue, this);
-	mAlarms.append(ret);
+	mAlarms.push_back(ret);
 	return ret;
 }
 
 void DeviceAlarms::addVebusError(const QString &busitemPathAlarm)
 {
-	mAlarms.append(new AlarmMonitor(mService, AlarmMonitor::VEBUS_ERROR, busitemPathAlarm, "", "", "", this));
+	mAlarms.push_back(new AlarmMonitor(mService, AlarmMonitor::VEBUS_ERROR, busitemPathAlarm, "", "", "", this));
 }
 
 void DeviceAlarms::addBmsError(const QString &busitemPathAlarm)
 {
-	mAlarms.append(new AlarmMonitor(mService, AlarmMonitor::BMS_ERROR, busitemPathAlarm, "", "", "", this));
+	mAlarms.push_back(new AlarmMonitor(mService, AlarmMonitor::BMS_ERROR, busitemPathAlarm, "", "", "", this));
 }
 
 void DeviceAlarms::addChargerError(const QString &busitemPathAlarm)
 {
-	mAlarms.append(new AlarmMonitor(mService, AlarmMonitor::CHARGER_ERROR, busitemPathAlarm, "", "", "", this));
+	mAlarms.push_back(new AlarmMonitor(mService, AlarmMonitor::CHARGER_ERROR, busitemPathAlarm, "", "", "", this));
 }
 
 void DeviceAlarms::addWakespeedError(const QString &busitemPathAlarm)
 {
-	mAlarms.append(new AlarmMonitor(mService, AlarmMonitor::WAKESPEED_ERROR, busitemPathAlarm, "", "", "", this));
+	mAlarms.push_back(new AlarmMonitor(mService, AlarmMonitor::WAKESPEED_ERROR, busitemPathAlarm, "", "", "", this));
 }
 
-DeviceAlarms *DeviceAlarms::createBatteryAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createBatteryAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	return new BatteryAlarms(service, noticationCenter);
 }
 
-DeviceAlarms *DeviceAlarms::createGeneratorStartStopAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createGeneratorStartStopAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -47,7 +47,7 @@ DeviceAlarms *DeviceAlarms::createGeneratorStartStopAlarms(DBusService *service,
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createDigitalInputAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createDigitalInputAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -56,7 +56,7 @@ DeviceAlarms *DeviceAlarms::createDigitalInputAlarms(DBusService *service, Notif
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createSolarChargerAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createSolarChargerAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -67,7 +67,7 @@ DeviceAlarms *DeviceAlarms::createSolarChargerAlarms(DBusService *service, Notif
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createAcChargerAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createAcChargerAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -78,7 +78,7 @@ DeviceAlarms *DeviceAlarms::createAcChargerAlarms(DBusService *service, Notifica
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createInverterAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createInverterAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -94,7 +94,7 @@ DeviceAlarms *DeviceAlarms::createInverterAlarms(DBusService *service, Notificat
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createMultiRsAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createMultiRsAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -110,7 +110,7 @@ DeviceAlarms *DeviceAlarms::createMultiRsAlarms(DBusService *service, Notificati
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createSystemCalcAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createSystemCalcAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -120,7 +120,7 @@ DeviceAlarms *DeviceAlarms::createSystemCalcAlarms(DBusService *service, Notific
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createVecanAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createVecanAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -129,7 +129,7 @@ DeviceAlarms *DeviceAlarms::createVecanAlarms(DBusService *service, Notification
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createEssAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createEssAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -138,7 +138,7 @@ DeviceAlarms *DeviceAlarms::createEssAlarms(DBusService *service, NotificationCe
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createTankAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createTankAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -148,7 +148,7 @@ DeviceAlarms *DeviceAlarms::createTankAlarms(DBusService *service, NotificationC
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createDcMeterAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createDcMeterAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = new DeviceAlarms(service, noticationCenter);
 
@@ -162,7 +162,7 @@ DeviceAlarms *DeviceAlarms::createDcMeterAlarms(DBusService *service, Notificati
 	return alarms;
 }
 
-DeviceAlarms *DeviceAlarms::createAlternatorAlarms(DBusService *service, NotificationCenter *noticationCenter)
+DeviceAlarms *DeviceAlarms::createAlternatorAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter)
 {
 	DeviceAlarms *alarms = createDcMeterAlarms(service, noticationCenter);
 
@@ -172,9 +172,9 @@ DeviceAlarms *DeviceAlarms::createAlternatorAlarms(DBusService *service, Notific
 	return alarms;
 }
 
-AlarmBusitem::AlarmBusitem(DBusServices *services, NotificationCenter *notificationCenter) :
+AlarmBusitem::AlarmBusitem(DBusServices *services, Victron::VenusOS::ActiveNotificationsModel *notificationCenter) :
 	QObject(services),
-	mNotificationCenter(notificationCenter)
+	mActiveNotificationModel(notificationCenter)
 {
 	connect(services, SIGNAL(dbusServiceFound(DBusService*)), SLOT(dbusServiceFound(DBusService*)));
 }
@@ -184,56 +184,56 @@ void AlarmBusitem::dbusServiceFound(DBusService *service)
 	switch (service->getType())
 	{
 	case DBusService::DBUS_SERVICE_BATTERY:
-		DeviceAlarms::createBatteryAlarms(service, mNotificationCenter);
+		DeviceAlarms::createBatteryAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_FUELCELL:
 	case DBusService::DBUS_SERVICE_DCSOURCE:
 	case DBusService::DBUS_SERVICE_DCLOAD:
 	case DBusService::DBUS_SERVICE_DCSYSTEM:
-		DeviceAlarms::createDcMeterAlarms(service, mNotificationCenter);
+		DeviceAlarms::createDcMeterAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_ALTERNATOR:
-		DeviceAlarms::createAlternatorAlarms(service, mNotificationCenter);
+		DeviceAlarms::createAlternatorAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_MULTI:
-		new VebusAlarms(service, mNotificationCenter);
+		new VebusAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_MULTI_RS:
-		DeviceAlarms::createMultiRsAlarms(service, mNotificationCenter);
+		DeviceAlarms::createMultiRsAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_SOLAR_CHARGER:
-		DeviceAlarms::createSolarChargerAlarms(service, mNotificationCenter);
+		DeviceAlarms::createSolarChargerAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_AC_CHARGER:
-		DeviceAlarms::createAcChargerAlarms(service, mNotificationCenter);
+		DeviceAlarms::createAcChargerAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_INVERTER:
-		DeviceAlarms::createInverterAlarms(service, mNotificationCenter);
+		DeviceAlarms::createInverterAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_SYSTEM_CALC:
-		DeviceAlarms::createSystemCalcAlarms(service, mNotificationCenter);
+		DeviceAlarms::createSystemCalcAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_GENERATOR_STARTSTOP:
-		DeviceAlarms::createGeneratorStartStopAlarms(service, mNotificationCenter);
+		DeviceAlarms::createGeneratorStartStopAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_DIGITAL_INPUT:
-		DeviceAlarms::createDigitalInputAlarms(service, mNotificationCenter);
+		DeviceAlarms::createDigitalInputAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_VECAN:
-		DeviceAlarms::createVecanAlarms(service, mNotificationCenter);
+		DeviceAlarms::createVecanAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_HUB4:
-		DeviceAlarms::createEssAlarms(service, mNotificationCenter);
+		DeviceAlarms::createEssAlarms(service, mActiveNotificationModel);
 		break;
 	case DBusService::DBUS_SERVICE_TANK:
-		DeviceAlarms::createTankAlarms(service, mNotificationCenter);
+		DeviceAlarms::createTankAlarms(service, mActiveNotificationModel);
 		break;
 	default:
 		;
 	}
 }
 
-VebusAlarms::VebusAlarms(DBusService *service, NotificationCenter *noticationCenter) : DeviceAlarms(service, noticationCenter)
+VebusAlarms::VebusAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter) : DeviceAlarms(service, noticationCenter)
 {
 	mNumberOfPhases = service->item("/Ac/NumberOfPhases");
 	mNumberOfPhases->getValueAndChanges(this, SLOT(numberOfPhasesChanged(VeQItem *, QVariant)));
@@ -301,8 +301,17 @@ void VebusAlarms::numberOfPhasesChanged(VeQItem *item, QVariant value)
 		update(singlePhase);
 	}
 }
+/* TODO - declare translatable strings like this:
+static const char * const ids[] = {
+	//% "High Temperature"
+	QT_TRID_NOOP("high_temperature")
+};
 
-BatteryAlarms::BatteryAlarms(DBusService *service, NotificationCenter *noticationCenter) :
+... and then, 
+
+	addTripplet(tr("high_temperature"),			"/Alarms/HighTemperature",		"",		"/Dc/0/Temperature");
+*/
+BatteryAlarms::BatteryAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter) :
 	DeviceAlarms(service, noticationCenter), mDistributorAlarmsAdded(false)
 {
 	mNrOfDistributors = service->item("/NrOfDistributors");

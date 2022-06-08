@@ -38,7 +38,7 @@ Rectangle {
 	width: Theme.geometry.notificationsPage.delegate.width
 	height: Theme.geometry.notificationsPage.delegate.height
 	radius: Theme.geometry.toastNotification.radius
-	color: Theme.color.background.secondary
+	color: mouseArea.containsPress ? Theme.color.settingsListItem.down.background : Theme.color.background.secondary
 
 	Row {
 		anchors {
@@ -102,6 +102,7 @@ Rectangle {
 		text: _formatTimestamp(root.date)
 	}
 	MouseArea {
+		id: mouseArea
 		anchors.fill: parent
 		onClicked: model.acknowledged = true
 	}

@@ -4,8 +4,7 @@
 #include <QObject>
 #include <velib/qt/ve_qitem.hpp>
 
-#include "notification.h"
-#include "notification_center.h"
+#include "notificationsmodel.h"
 #include <dbus_service.h>
 
 class DeviceAlarms;
@@ -49,7 +48,6 @@ private slots:
 
 private:
 	DBusService *mService;
-	Notification *mNotification;
 	VeQItem *mBusitemValue;
 	VeQItem *mAlarmTrigger;
 	Type mType;
@@ -58,7 +56,7 @@ private:
 	DeviceAlarms *mDeviceAlarms;
 
 	bool mustBeShown(DbusAlarm alarm);
-	void addNotification(Notification::Type type);
+	void addOrUpdateNotification(Victron::VenusOS::Enums::Notification_Type type);
 };
 
 #endif

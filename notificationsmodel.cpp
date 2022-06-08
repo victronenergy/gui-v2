@@ -1,114 +1,41 @@
 #include "notificationsmodel.h"
 
 #include <QString>
+#include <QTimer>
 
 using namespace Victron::VenusOS;
 
-Notification::Notification() :
-	m_acknowledged(false),
-	m_active(true),
-	m_type(Enums::Notification_Alarm),
-	m_deviceName(""),
-	m_dateTime(QDateTime::currentDateTime()),
-	m_description(""),
-	m_value("")
-{
-}
-
 Notification::Notification(const Notification& other) :
-	m_acknowledged(other.m_acknowledged),
-	m_active(other.m_active),
-	m_type(other.m_type),
-	m_deviceName(other.m_deviceName),
-	m_dateTime(other.m_dateTime),
-	m_description(other.m_description),
-	m_value(other.m_value)
+	acknowledged(other.acknowledged),
+	active(other.active),
+	type(other.type),
+	deviceName(other.deviceName),
+	dateTime(other.dateTime),
+	description(other.description),
+	value(other.value)
 {
 }
 
-Notification::Notification(const bool acknowledged, const bool active, const Enums::Notification_Type type, const QString &deviceName, const QDateTime& dateTime, const QString &description) :
-	m_acknowledged(acknowledged),
-	m_active(active),
-	m_type(type),
-	m_deviceName(deviceName),
-	m_dateTime(dateTime),
-	m_description(description)
-{
+Notification& Notification::operator=(const Notification &other) {
+	acknowledged = other.acknowledged;
+	active = other.active;
+	type = other.type;
+	deviceName = other.deviceName;
+	dateTime = other.dateTime;
+	description = other.description;
+	value = other.value;
+
+	return *this;
 }
 
-bool Notification::acknowledged() const
+Notification::Notification(const bool _acknowledged, const bool _active, const Enums::Notification_Type _type, const QString& _deviceName, const QDateTime& _dateTime, const QString& _description) :
+	acknowledged(_acknowledged),
+	active(_active),
+	type(_type),
+	deviceName(_deviceName),
+	dateTime(_dateTime),
+	description(_description)
 {
-	return m_acknowledged;
-}
-
-void Notification::setAcknowledged(const bool acknowledged)
-{
-	if (acknowledged != m_acknowledged) {
-		m_acknowledged = acknowledged;
-	}
-}
-
-bool Notification::active() const
-{
-	return m_active;
-}
-
-void Notification::setActive(const bool active)
-{
-	if (active != m_active) {
-		m_active = active;
-	}
-}
-
-Enums::Notification_Type Notification::type() const
-{
-	return m_type;
-}
-
-void Notification::setType(Enums::Notification_Type type)
-{
-	if (type != m_type) {
-		m_type = type;
-	}
-}
-
-QString Notification::serviceName() const
-{
-	return m_deviceName;
-}
-void Notification::setServiceName(const QString service)
-{
-	m_deviceName = service;
-}
-
-QDateTime Notification::dateTime() const
-{
-	return m_dateTime;
-}
-void Notification::setDateTime(const QDateTime date)
-{
-	m_dateTime = date;
-}
-
-QString Notification::description()const
-{
-	return m_description;
-}
-void Notification::setDescription(const QString description)
-{
-	m_description = description;
-}
-
-QString Notification::value() const
-{
-	return m_value;
-}
-
-void Notification::setValue(const QString &value)
-{
-	if (value != m_value) {
-		m_value = value;
-	}
 }
 
 NotificationsModel::NotificationsModel(QObject *parent)
@@ -149,35 +76,33 @@ QVariant NotificationsModel::data(const QModelIndex &index, int role) const
 	switch (role)
 	{
 	case AcknowledgedRole:
-		return notification.acknowledged();
+		return notification.acknowledged;
 	case ActiveRole:
-		return notification.active();
+		return notification.active;
 	case TypeRole:
-		return notification.type();
+		return notification.type;
 	case ServiceRole:
-		return notification.serviceName();
+		return notification.deviceName;
 	case DateTimeRole:
-		return notification.dateTime();
+		return notification.dateTime;
 	case DescriptionRole:
-		return notification.description();
+		return notification.description;
 	case ValueRole:
-		return notification.value();
-	default: {
-			return QVariant();
-		}
+		return notification.value;
+	default:
+		return QVariant();
 	}
 }
 
-void NotificationsModel::insert(const int index, const Notification& newNotification)
+void NotificationsModel::insert(const int index, const Notification& notification)
 {
-	if(index < 0 || index > m_data.count()) {
+	if (index < 0 || index > m_data.count()) {
 		return;
 	}
 	if (static_cast<int>(m_data.count()) == m_maxNotifications)
 	{
 		remove(static_cast<int>(m_data.count() - 1));
 	}
-	Notification notification(newNotification);
 
 	emit beginInsertRows(QModelIndex(), index, index);
 	m_data.insert(index, notification);
@@ -191,7 +116,7 @@ void NotificationsModel::insertByDate(const Victron::VenusOS::Notification& newN
 	{
 		const Notification& notification = m_data.at(i);
 
-		if (newNotification.dateTime() > notification.dateTime())
+		if (newNotification.dateTime > notification.dateTime)
 		{
 			insert(i, newNotification);
 			return;
@@ -200,12 +125,13 @@ void NotificationsModel::insertByDate(const Victron::VenusOS::Notification& newN
 	append(newNotification);
 }
 
-void NotificationsModel::insertByDate(bool acknowledged,
-						const bool active,
-						const Enums::Notification_Type type,
-						const QString& name,
-						const QDateTime& date,
-						const QString& description)
+void NotificationsModel::insertByDate(
+		bool acknowledged,
+		const bool active,
+		const Enums::Notification_Type type,
+		const QString& name,
+		const QDateTime& date,
+		const QString& description)
 {
 	Notification notification(acknowledged, active, type, name, date, description);
 	insertByDate(notification);
@@ -245,7 +171,7 @@ void NotificationsModel::deactivateSingleAlarm() // testing only
 	for (int i = 0; i < m_data.count(); ++i)
 	{
 		const Notification& notification = m_data.at(i);
-		if (notification.active())
+		if (notification.active)
 		{
 			setData(createIndex(i, 0), false, ActiveRole);
 			break;
@@ -260,10 +186,36 @@ ActiveNotificationsModel::ActiveNotificationsModel(QObject *parent)
 	Q_ASSERT(result);
 	result = connect(this, &ActiveNotificationsModel::dataChanged, this, &ActiveNotificationsModel::handleChanges);
 	Q_ASSERT(result);
+	qDebug() << "NotificationCenter test()";
+	//QTimer::singleShot(2000, this, SLOT(test())); // TEST
 }
 
 ActiveNotificationsModel::~ActiveNotificationsModel()
 {
+}
+
+void ActiveNotificationsModel::addOrUpdateNotification(Enums::Notification_Type type, const QString &devicename, const QString &description, const QString &/*value*/)
+{
+	for (int i = 0; i < m_data.count(); ++i)
+	{
+		const Notification& n = m_data.at(i);
+		if ((n.deviceName == devicename) && (n.description == description))
+		{
+			QModelIndex index(createIndex(i, 0));
+			if (type == Enums::Notification_Inactive)
+			{
+				setData(index, false, ActiveRole);
+				return;
+			}
+			setData(index, true, ActiveRole);
+			setData(index, type, TypeRole);
+			return;
+		}
+	}
+	if (type != Enums::Notification_Inactive)
+	{
+		insertByDate(Notification(false, true, type, devicename, QDateTime::currentDateTime(), description));
+	}
 }
 
 ActiveNotificationsModel* ActiveNotificationsModel::instance(QObject* parent)
@@ -283,24 +235,27 @@ bool ActiveNotificationsModel::setData(const QModelIndex &index, const QVariant 
 		return false;
 	}
 
-	Notification &notification = m_data[index.row()];
+	Notification& notification = m_data[index.row()];
 	switch (role)
 	{
 	case AcknowledgedRole:
-		notification.setAcknowledged(value.toBool());
-		if (notification.acknowledged() && !notification.active())
+		notification.acknowledged = value.toBool();
+		if (notification.acknowledged && !notification.active)
 		{
 			HistoricalNotificationsModel::instance()->insertByDate(notification);
 			remove(index.row());
 		}
 		break;
 	case ActiveRole:
-		notification.setActive(value.toBool());
-		if (notification.acknowledged() && !notification.active())
+		notification.active = value.toBool();
+		if (notification.acknowledged && !notification.active)
 		{
 			HistoricalNotificationsModel::instance()->insertByDate(notification);
 			remove(index.row());
 		}
+		break;
+	case TypeRole:
+		notification.type = value.value<Enums::Notification_Type>();
 		break;
 	default: {
 			return false;
@@ -311,32 +266,32 @@ bool ActiveNotificationsModel::setData(const QModelIndex &index, const QVariant 
 	return true ;
 }
 
-bool ActiveNotificationsModel::newNotifications() const
+bool ActiveNotificationsModel::hasNewNotifications() const
 {
-	return m_newNotifications;
+	return m_hasNewNotifications;
 }
 
-void ActiveNotificationsModel::setNewNotifications(const bool newNotifications)
+void ActiveNotificationsModel::setHasNewNotifications(const bool hasNewNotifications)
 {
-	if (newNotifications != m_newNotifications)
+	if (hasNewNotifications != m_hasNewNotifications)
 	{
-		m_newNotifications = newNotifications;
-		emit newNotificationsChanged();
+		m_hasNewNotifications = hasNewNotifications;
+		emit hasNewNotificationsChanged();
 	}
 }
 
 void ActiveNotificationsModel::handleChanges()
 {
-	bool newNotifications = false;
+	bool hasNewNotifications = false;
 	for (int i = 0; i < m_data.count(); ++i)
 	{
 		const Notification& n = m_data.at(i);
-		if (!n.acknowledged())
+		if (!n.acknowledged)
 		{
-			newNotifications = true;
+			hasNewNotifications = true;
 		}
 	}
-	setNewNotifications(newNotifications);
+	setHasNewNotifications(hasNewNotifications);
 }
 
 HistoricalNotificationsModel::HistoricalNotificationsModel(QObject *parent)
