@@ -6,7 +6,7 @@ Rectangle {
 	id: root
 
 	property bool acknowledged
-	property bool active
+	property bool alarmActive
 	property int category
 	property date date
 	property string source
@@ -65,11 +65,11 @@ Rectangle {
 			anchors.verticalCenter: parent.verticalCenter
 			fillMode: Image.PreserveAspectFit
 			smooth: true
-			opacity: root.active ? 1 : 0.3 // TODO - store opacity as a theme constant
-			color: root.category === VenusOS.ToastNotification_Category_Informative
-				   ? Theme.color.ok : root.category === VenusOS.ToastNotification_Category_Warning
+			opacity: root.alarmActive ? 1 : 0.3 // TODO - store opacity as a theme constant
+			color: root.category === VenusOS.Notification_Notification
+				   ? Theme.color.ok : root.category === VenusOS.Notification_Warning
 					 ? Theme.color.warning : Theme.color.critical
-			source: root.category === VenusOS.ToastNotification_Category_Informative
+			source: root.category === VenusOS.Notification_Notification
 					? "qrc:/images/toast_icon_info.svg" : "qrc:/images/toast_icon_alarm.svg"
 		}
 		Item {
@@ -103,6 +103,6 @@ Rectangle {
 	}
 	MouseArea {
 		anchors.fill: parent
-		onClicked: Global.notifications.acknowledgeNotification(index)
+		onClicked: model.acknowledged = true
 	}
 }

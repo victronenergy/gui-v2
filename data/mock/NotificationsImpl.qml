@@ -13,58 +13,45 @@ QtObject {
 	property var date1dAgo: new Date()
 	property var date8dAgo: new Date()
 	readonly property var _locale: Qt.locale()
-	readonly property var dummyNotifications: [
+	property var dummyNotifications: [
 		{
 			acknowledged: true,
 			active: true,
-			category: VenusOS.ToastNotification_Category_Warning,
-			date: root.date8dAgo,
-			source: "RS 48/6000/100 HQ2050NMMEX",
+			type: VenusOS.Notification_Warning,
+			dateTime: root.date8dAgo,
+			deviceName: "RS 48/6000/100 HQ2050NMMEX",
 			description: "Low battery voltage 45V"
 		},
 		{
 			acknowledged: false,
 			active: false,
-			category: VenusOS.ToastNotification_Category_Error,
-			date: root.date1dAgo,
-			source: "Fuel tank custom name",
-			description: "Fuel level low 15%"
+			type: VenusOS.Notification_Alarm,
+			dateTime: root.date1dAgo,
+			deviceName: "Fuel tank custom name",
+			description: "Fuel level low 15%",
 		},
 		{
 			acknowledged: false,
 			active: true,
-			category: VenusOS.ToastNotification_Category_Informative,
-			date: root.date2h10mAgo,
-			source: "System",
-			description: "Software update available"
+			type: VenusOS.Notification_Notification,
+			dateTime: root.date2h10mAgo,
+			deviceName: "System",
+			description: "Software update available",
 		},
 		{
 			acknowledged: false,
 			active: true,
-			category: VenusOS.ToastNotification_Category_Informative,
-			date: root.date26MinutesAgo,
-			source: "System",
+			type: VenusOS.Notification_Notification,
+			dateTime: root.date26MinutesAgo,
+			deviceName: "System",
 			description: "Software update available"
 		}
 	]
-	property Connections demoConnections: Connections {
-		target: Global.demoManager || null
-
-		function onDeactivateSingleAlarm() {
-			for (var i = 0; i < Global.notifications.model.count; ++i) {
-				let notification = Global.notifications.model.get(i)
-				if (notification.active) {
-					notification.active = false
-					Global.notifications.updateNotification(i, notification)
-					break
-				}
-			}
-		}
-	}
 
 	function populate() {
 		for (var i = 0; i < dummyNotifications.length; ++i) {
-			Global.notifications.addNotification(dummyNotifications[i])
+			var n = dummyNotifications[i]
+			Global.notifications.activeModel.insertByDate(n.acknowledged, n.active, n.type, n.deviceName, n.dateTime, n.description)
 		}
 	}
 

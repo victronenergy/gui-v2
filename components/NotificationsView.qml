@@ -5,10 +5,10 @@ ListView {
 	spacing: Theme.geometry.notificationsPage.historyView.spacing
 	delegate: NotificationDelegate {
 		acknowledged: model.acknowledged
-		active: model.active
-		category: model.category
-		date: model.date
-		source: model.source
+		alarmActive: model.active
 		description: model.description
+		category: model.type
+		date: model.dateTime
+		source: model.service
 	}
 }
