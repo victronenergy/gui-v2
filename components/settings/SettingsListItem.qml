@@ -44,6 +44,7 @@ Item {
 			right: content.left
 			rightMargin: Theme.geometry.settingsListItem.content.spacing
 			verticalCenter: parent.verticalCenter
+			verticalCenterOffset: -root.spacing/2
 		}
 		font.pixelSize: Theme.font.size.m
 		wrapMode: Text.Wrap
@@ -56,6 +57,7 @@ Item {
 			right: parent.right
 			rightMargin: Theme.geometry.settingsListItem.content.rightMargin
 			verticalCenter: parent.verticalCenter
+			verticalCenterOffset: -root.spacing/2
 		}
 		spacing: Theme.geometry.settingsListItem.content.spacing
 	}
