@@ -17,6 +17,7 @@ import QtQml
 QtObject {
 	property var pageManager
 	property var demoManager    // only valid when demo mode is active
+	property var inputPanel
 	property date now: new Date()
 
 	// data sources
@@ -43,5 +44,7 @@ QtObject {
 		repeat: true
 		onTriggered: now = new Date()
 	}
+
+	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 }
 

@@ -51,6 +51,8 @@ void addSettings(VeQItemSettingsInfo *info)
 
 int main(int argc, char *argv[])
 {
+	qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+
 	/* QML type registrations.  As we (currently) don't create an installed module,
 	   we need to register them into the appropriate type namespace manually. */
 	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
@@ -96,6 +98,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SpinBox");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Switch.qml")),
 		"Victron.VenusOS", 2, 0, "Switch");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/TextField.qml")),
+		"Victron.VenusOS", 2, 0, "TextField");
 
 	/* components */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ActionButton.qml")),
@@ -126,6 +130,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "EnvironmentGaugePanel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ExpandedTanksView.qml")),
 		"Victron.VenusOS", 2, 0, "ExpandedTanksView");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/InputPanel.qml")),
+		"Victron.VenusOS", 2, 0, "InputPanel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GeneratorIconLabel.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorIconLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LevelsPageGaugeDelegate.qml")),
@@ -216,6 +222,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SettingsListSlider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListSwitch.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListSwitch");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextField.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListTextField");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextGroup.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListTextGroup");
 

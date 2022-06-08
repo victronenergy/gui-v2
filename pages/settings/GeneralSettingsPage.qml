@@ -17,11 +17,11 @@ Page {
 		model: ObjectModel {
 			AccessLevelRadioButtonGroup {}
 
-			SettingsListItem {
+			SettingsListTextField {
 				//% "Set root password"
 				text: qsTrId("settings_set_root_password")
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
-				// TODO show text input with VKB
+				placeholderText: "* * * * * *"
 			}
 
 			SettingsListSwitch {
