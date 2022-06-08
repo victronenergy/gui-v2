@@ -12,6 +12,7 @@
         <file>components/controls/Slider.qml</file>
         <file>components/controls/SpinBox.qml</file>
         <file>components/controls/Switch.qml</file>
+        <file>components/controls/TextField.qml</file>
         <file>components/datapoints/DataPoint.qml</file>
         <file>components/datapoints/DataPointDBusImpl.qml</file>
         <file>components/datapoints/DemoModeDataPoint.qml</file>
@@ -24,6 +25,7 @@
         <file>components/settings/SettingsListSwitch.qml</file>
         <file>components/settings/SettingsListItem.qml</file>
         <file>components/settings/SettingsListTextItem.qml</file>
+        <file>components/settings/SettingsListTextField.qml</file>
         <file>components/settings/SettingsListTextGroup.qml</file>
         <file>components/widgets/AcInputWidget.qml</file>
         <file>components/widgets/DcInputWidget.qml</file>
@@ -56,6 +58,7 @@
         <file>components/EnvironmentGauge.qml</file>
         <file>components/EnvironmentGaugePanel.qml</file>
         <file>components/ExpandedTanksView.qml</file>
+        <file>components/InputPanel.qml</file>
         <file>components/ButtonControlValue.qml</file>
         <file>components/RadioButtonControlValue.qml</file>
         <file>components/SwitchControlValue.qml</file>

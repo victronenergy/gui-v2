@@ -93,6 +93,11 @@ Page {
 				onClicked: console.log("Button was clicked")
 			}
 
+			SettingsListTextField {
+				text: "Text input"
+				placeholderText: "Enter text"
+			}
+
 			SettingsListItem {
 				text: "Custom item"
 

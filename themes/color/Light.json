@@ -60,6 +60,9 @@
     "color.navigationBar.button.on": "color.font.primary",
     "color.navigationBar.button.off": "color.font.secondary",
 
+    "color.textField.background": "transparent",
+    "color.textField.border": "color.ok",
+
     "color.toastNotification.foreground": "color.font.primary",
     "color.toastNotification.background.none": "#504F4B",
     "color.toastNotification.background.informative": "#295C91",

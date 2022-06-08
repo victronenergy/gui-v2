@@ -59,6 +59,8 @@
     "geometry.settingsListItem.slider.button.size": 24,
     "geometry.settingsListItem.slider.spacing": 14,
     "geometry.settingsListItem.slider.stepDivsion": 10,
+    "geometry.settingsListItem.textField.minimumWidth": 236,
+    "geometry.settingsListItem.textField.maximumWidth": 472,
 
     "geometry.slider.groove.height": 8,
     "geometry.slider.groove.radius": 8,
@@ -125,6 +127,9 @@
     "geometry.notificationsPage.gradient.height" : 28,
     "geometry.notificationsPage.history.bottomPadding" : 3,
     "geometry.notificationsPage.scrollBar.rightMargin" : 8,
+
+    "geometry.textField.height": 40,
+    "geometry.textField.horizontalMargin": 16,
 
     "geometry.toastNotification.margins" : 24,
     "geometry.toastNotification.radius" : 8,

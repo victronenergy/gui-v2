@@ -99,11 +99,53 @@ Item {
 				mouse.accepted = true
 				pageManager.interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
 			}
+			if (Global.inputPanel && Global.inputPanel.testCloseOnClick(idleModeMouseArea, mouse.x, mouse.y)) {
+				mouse.accepted = true
+			}
 		}
 	}
 
 	DialogManager {
 		// we rely on the implicit Z ordering, so must be declared after the other views.
 		id: dialogManager
+	}
+
+	// Load the VKB separately so that the app still runs if QtQuick.VirtualKeyboard is not
+	// available (e.g. in Qt WASM).
+	// Place this above idleModeMouseArea so that the mouse area can call testCloseOnClick() when
+	// clicking outside of the focused text field, below the VKB layer.
+	Loader {
+		id: inputPanelLoader
+
+		x: 0
+		y: root.height
+		source: "qrc:/components/InputPanel.qml"
+
+		onStatusChanged: {
+			if (status === Loader.Ready) {
+				Global.inputPanel = item
+			} else if (status === Loader.Error) {
+				console.warn("Cannot load InputPanel!")
+			}
+		}
+
+		states: State {
+			name: "visible"
+			when: Qt.inputMethod.visible
+
+			PropertyChanges {
+				target: inputPanelLoader
+				y: root.height - inputPanelLoader.item.height
+			}
+		}
+
+		transitions: Transition {
+			NumberAnimation {
+				property: "y"
+				duration: Theme.animation.inputPanel.slide.duration
+				easing.type: Easing.InOutQuad
+			}
+		}
+
 	}
 }
