@@ -47,7 +47,7 @@ Row {
 				height: width
 				radius: Theme.geometry.notificationsPage.delegate.marker.radius
 				color: Theme.color.critical
-				visible: model.url === "qrc:/pages/NotificationsPage.qml" && Global.notifications.activeModel.newNotifications
+				visible: model.url === "qrc:/pages/NotificationsPage.qml" && Global.notifications.activeModel.hasNewNotifications
 			}
 		}
 	}

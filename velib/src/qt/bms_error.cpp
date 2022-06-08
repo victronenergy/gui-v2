@@ -1,5 +1,6 @@
 #include <velib/qt/bms_error.hpp>
-#include <velib/ve_regs.h>
+#include <velib/types/types.h>
+#include <velib/inc/velib/vecan/regs_payload.h>
 
 QString BmsError::getDescription(int errorNumber)
 {

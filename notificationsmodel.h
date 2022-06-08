@@ -8,16 +8,17 @@
 #include <QVariantList>
 #include "enums.h"
 
+class AlarmMonitor;
+
 namespace Victron {
 
 namespace VenusOS {
 
 class QQmlEngine;
 class QJSEngine;
-class Notification
+
+struct Notification
 {
-public:
-	Notification();
 	Notification(const Notification& other);
 	Notification(const bool acknowledged,
 				 const bool active,
@@ -25,29 +26,15 @@ public:
 				 const QString &deviceName,
 				 const QDateTime& dateTime,
 				 const QString &description);
-	bool acknowledged() const;
-	void setAcknowledged(const bool acknowledged);
-	bool active() const;
-	void setActive(const bool active);
-	Enums::Notification_Type type() const;
-	void setType(Enums::Notification_Type type);
-	QString serviceName() const;
-	void setServiceName(const QString service);
-	QDateTime dateTime() const;
-	void setDateTime(const QDateTime date);
-	QString description() const;
-	void setDescription(const QString description);
-	QString value() const;
-	void setValue(const QString &value);
+	Notification& operator=(const Notification &other);
 
-private:
-	bool m_acknowledged;
-	bool m_active;
-	Enums::Notification_Type m_type;
-	QString m_deviceName;
-	QDateTime m_dateTime;
-	QString m_description;
-	QString m_value;
+	bool acknowledged = false;
+	bool active = true;
+	Enums::Notification_Type type = Enums::Notification_Alarm;
+	QString deviceName;
+	QDateTime dateTime;
+	QString description;
+	QString value;
 };
 
 class NotificationsModel : public QAbstractListModel
@@ -66,11 +53,11 @@ public:
 		ValueRole
 	};
 
-	virtual ~NotificationsModel() override = 0;
+	~NotificationsModel() override = 0;
 
-	virtual int count(const QModelIndex& parent = QModelIndex()) const;
-	virtual int rowCount(const QModelIndex &parent) const override;
-	virtual QVariant data(const QModelIndex& index, int role) const override;
+	int count(const QModelIndex& parent = QModelIndex()) const;
+	int rowCount(const QModelIndex &parent) const override;
+	QVariant data(const QModelIndex& index, int role) const override;
 
 	void insertByDate(const Victron::VenusOS::Notification& newNotification);
 	Q_INVOKABLE void deactivateSingleAlarm(); // testing only
@@ -90,9 +77,9 @@ signals:
 
 protected:
 	explicit NotificationsModel(QObject *parent = nullptr);
-	virtual QHash<int, QByteArray> roleNames() const override;
+	QHash<int, QByteArray> roleNames() const override;
 
-	QList<Notification>  m_data;
+	QList<Notification> m_data;
 	const int m_maxNotifications;
 
 private:
@@ -102,26 +89,27 @@ private:
 class ActiveNotificationsModel : public NotificationsModel
 {
 	Q_OBJECT
-	Q_PROPERTY(bool newNotifications READ newNotifications NOTIFY newNotificationsChanged) // when true, we display a red dot on the 'notifications' button in the nav bar
+	Q_PROPERTY(bool hasNewNotifications READ hasNewNotifications NOTIFY hasNewNotificationsChanged) // when true, we display a red dot on the 'notifications' button in the nav bar
 public:
 
 	~ActiveNotificationsModel() override;
 	static ActiveNotificationsModel* instance(QObject* parent = nullptr);
-	virtual bool setData(const QModelIndex &index, const QVariant &value, int role) override;
-	bool newNotifications() const;
+	bool setData(const QModelIndex &index, const QVariant &value, int role) override;
+	bool hasNewNotifications() const;
+	void addOrUpdateNotification(Enums::Notification_Type type, const QString &devicename, const QString &description, const QString &value);
 
 public slots:
 	void handleChanges();
 
 signals:
-	void newNotificationsChanged();
+	void hasNewNotificationsChanged();
 
 protected:
 	explicit ActiveNotificationsModel(QObject *parent = nullptr);
 
 private:
-	void setNewNotifications(const bool newNotifications);
-	bool m_newNotifications;
+	void setHasNewNotifications(const bool hasNewNotifications);
+	bool m_hasNewNotifications;
 };
 
 class HistoricalNotificationsModel : public NotificationsModel
@@ -130,7 +118,7 @@ class HistoricalNotificationsModel : public NotificationsModel
 public:
 	~HistoricalNotificationsModel() override;
 	static HistoricalNotificationsModel* instance(QObject* parent = nullptr);
-	virtual bool setData(const QModelIndex &index, const QVariant &value, int role) override;
+	bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
 protected:
 	explicit HistoricalNotificationsModel(QObject *parent = nullptr);

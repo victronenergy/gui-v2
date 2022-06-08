@@ -21,7 +21,7 @@ public:
 	}
 
 	void initialScan();
-	int getCount() { return mServices.count(); }
+	int getCount() { return static_cast<int>(mServices.count()); }
 	Q_INVOKABLE DBusService *at(int i) { return mServices.values()[i]; }
 	Q_INVOKABLE DBusService *get(QString const &name);
 

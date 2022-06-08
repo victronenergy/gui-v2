@@ -1,7 +1,7 @@
 #include "alarmmonitor.h"
 #include "alarmbusitem.h"
 #include "wakespeed_error.hpp"
-
+#include "notificationsmodel.h"
 #include <velib/qt/charger_error.hpp>
 #include <velib/qt/bms_error.hpp>
 #include <velib/qt/vebus_error.hpp>
@@ -9,7 +9,7 @@
 AlarmMonitor::AlarmMonitor(DBusService *service, Type type, const QString &busitemPathAlarm,
 			const QString &description, const QString &alarmEnablePath,
 			const QString &alarmValuePath, DeviceAlarms *parent) :
-	QObject(parent), mService(service), mNotification(0), mAlarmTrigger(0), mType(type),
+	QObject(parent), mService(service), mAlarmTrigger(0), mType(type),
 	mDescription(description), mDeviceAlarms(parent)
 {
 	// Alarms can optionally be enabled / supressed by a setting.
@@ -38,8 +38,6 @@ AlarmMonitor::AlarmMonitor(DBusService *service, Type type, const QString &busit
 
 AlarmMonitor::~AlarmMonitor()
 {
-	if (mNotification)
-		mNotification->setActive(false);
 }
 
 bool AlarmMonitor::mustBeShown(DbusAlarm alarm)
@@ -55,14 +53,7 @@ bool AlarmMonitor::mustBeShown(DbusAlarm alarm)
 
 void AlarmMonitor::updateAlarm(VeQItem *item, QVariant var)
 {
-	Q_UNUSED(item);
-
-	// If there was a previous warning / error it is no longer valid
-	if (mNotification) {
-		mNotification->setActive(false);
-		mNotification->disconnect(this);
-		mNotification = 0;
-	}
+	Q_UNUSED(item)
 
 	if (!var.isValid() || mEnabledNotifications == NO_ALARM)
 		return;
@@ -121,13 +112,10 @@ void AlarmMonitor::updateAlarm(VeQItem *item, QVariant var)
 		break;
 	}
 
-	if (!mustBeShown(alarm))
-		return;
+	addOrUpdateNotification(alarm == DBUS_NO_ERROR ? Victron::VenusOS::Enums::Notification_Inactive :
+											 alarm == DBUS_WARNING ? Victron::VenusOS::Enums::Notification_Warning :
+																	 Victron::VenusOS::Enums::Notification_Alarm );
 
-	if (alarm == DBUS_WARNING)
-		addNotification(Notification::WARNING);
-	else
-		addNotification(Notification::ALARM);
 }
 
 // Copied to mEnabledNotifications since having the enabled as a setting is optional
@@ -138,14 +126,12 @@ void AlarmMonitor::settingChanged(VeQItem *item, QVariant var)
 		updateAlarm(item, mAlarmTrigger->getValue());
 }
 
-void AlarmMonitor::addNotification(Notification::Type type)
+void AlarmMonitor::addOrUpdateNotification(Victron::VenusOS::Enums::Notification_Type type)
 {
-	mNotification = mDeviceAlarms->notificationCenter()->addNotification(type, mService->getDescription(),
+	Victron::VenusOS::ActiveNotificationsModel::instance()->addOrUpdateNotification(type, mService->getDescription(),
 														  mDescription, mBusitemValue->getText());
-	connect(mNotification, SIGNAL(destroyed()), this, SLOT(notificationDestroyed()));
 }
 
 void AlarmMonitor::notificationDestroyed()
 {
-	mNotification = 0;
 }

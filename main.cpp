@@ -6,6 +6,7 @@
 #include "logging.h"
 #include "theme.h"
 #include "enums.h"
+#include "dbus_service.h"
 #include "notificationsmodel.h"
 #include <math.h>
 
@@ -13,6 +14,8 @@
 #include <velib/qt/v_busitems.h>
 #include <velib/qt/ve_qitems_dbus.hpp>
 #include <velib/qt/ve_qitem.hpp>
+#include "dbus_services.h"
+#include "alarmbusitem.h"
 #endif
 
 #include <QGuiApplication>
@@ -355,6 +358,8 @@ int main(int argc, char *argv[])
 
 	QScopedPointer<VeQItemDbusProducer> producer(new VeQItemDbusProducer(VeQItems::getRoot(), "dbus"));
 	QScopedPointer<VeQItemSettings> settings;
+	QScopedPointer<DBusServices> services;
+	QScopedPointer<AlarmBusitem> alarmBusItem;
 
 	if (parser.isSet(dbusAddress) || parser.isSet(dbusDefault)) {
 		// Default to the session bus on the pc
@@ -364,8 +369,10 @@ int main(int argc, char *argv[])
 		QDBusConnection dbus = VBusItems::getConnection();
 		if (dbus.isConnected()) {
 			producer->open(dbus);
+			services.reset(new DBusServices(producer->services()));
+			alarmBusItem.reset(new AlarmBusitem(services.get(), Victron::VenusOS::ActiveNotificationsModel::instance()));
+			services->initialScan();
 			settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
-
 			VeQItemSettingsInfo settingsInfo;
 			addSettings(&settingsInfo);
 			if (!settings->addSettings(settingsInfo)) {

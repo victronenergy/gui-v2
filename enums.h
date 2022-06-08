@@ -300,6 +300,7 @@ public:
 	Q_ENUM(SystemSettings_DemoMode)
 
 	enum Notification_Type {
+		Notification_Inactive,
 		Notification_Warning,
 		Notification_Alarm,
 		Notification_Notification
