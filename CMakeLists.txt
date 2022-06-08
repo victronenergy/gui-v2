@@ -83,14 +83,21 @@ add_custom_command(
 include_directories(velib/inc .)
 
 set(VELIB_SOURCES
-    velib/inc/velib/velib_config.h
-    velib/inc/velib/qt/ve_qitems_dbus.hpp
+    velib/inc/velib/qt/bms_error.hpp
+    velib/inc/velib/qt/charger_error.hpp
     velib/inc/velib/qt/ve_qitem_dbus_publisher.hpp
+    velib/inc/velib/qt/ve_qitems_dbus.hpp
     velib/inc/velib/qt/ve_qitem.hpp
     velib/inc/velib/qt/ve_qitem_loader.hpp
+    velib/inc/velib/qt/ve_qitem_table_model.hpp
     velib/inc/velib/qt/ve_qitem_tree_model.hpp
     velib/inc/velib/qt/v_busitems.h
-    velib/src/qt/v_busitem_proxy.h
+    velib/inc/velib/qt/vebus_error.hpp
+    velib/inc/velib/ve_regs.h
+    velib/inc/velib/velib_config.h
+    velib/src/qt/bms_error.cpp
+    velib/src/qt/charger_error.cpp
+    velib/src/qt/v_busitem_proxy.cpp
     velib/src/qt/v_busitem_proxy.cpp
     velib/src/qt/ve_qitem_dbus_virtual_object.hpp
     velib/src/qt/ve_qitem_dbus_virtual_object.cpp
@@ -98,8 +105,19 @@ set(VELIB_SOURCES
     velib/src/qt/ve_qitem_dbus_publisher.cpp
     velib/src/qt/ve_qitem.cpp
     velib/src/qt/ve_qitem_loader.cpp
+    velib/src/qt/ve_qitem_table_model.cpp
     velib/src/qt/ve_qitem_tree_model.cpp
     velib/src/qt/v_busitems.cpp
+    velib/src/qt/vebus_error.cpp
+    alarmbusitem.h
+    alarmbusitem.cpp
+    alarmmonitor.h
+    alarmmonitor.cpp
+    dbus_service.h
+    dbus_service.cpp
+    dbus_services.h
+    dbus_services.cpp
+    wakespeed_error.cpp
 )
 
 set(VENUS_SOURCES
