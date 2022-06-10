@@ -41,44 +41,6 @@ endif()
 qt_add_resources(QML_RESOURCES
     qml.qrc)
 
-# translations support.
-# note: the base venus-gui-v2.ts was generated with:
-# lupdate.exe qml.qrc -ts i18n/venus-gui-v2.ts)
-set(TRANSLATIONS_TS_FILES
-        "i18n/venus-gui-v2.ts"
-        "i18n/venus-gui-v2_en.ts"
-        "i18n/venus-gui-v2_fr.ts")
-set(TRANSLATIONS_QM_FILES
-        "i18n/venus-gui-v2.qm"
-        "i18n/venus-gui-v2_en.qm"
-        "i18n/venus-gui-v2_fr.qm")
-# manually generate .ts files via a custom command.
-# it would be good if we could do this via qt6_add_lupdate
-# instead, but that macro is broken, so do it ourselves.
-add_custom_target(${TRANSLATIONS_TS_TARGET}
-    SOURCES ${QML_RESOURCES})
-add_custom_command(
-    TARGET ${TRANSLATIONS_TS_TARGET}
-    BYPRODUCTS ${TRANSLATIONS_TS_FILES}
-    COMMENT "Manually updating translations files"
-    COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lupdate
-        ARGS "${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc"
-             -ts ${TRANSLATIONS_TS_FILES}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-# add a custom target to generate the .qm files via qt6_add_lrelease().
-# force the .qm generation step to depend on the .ts generation step.
-set_source_files_properties(${TRANSLATIONS_TS_FILES}
-    PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/i18n")
-add_custom_target(${TRANSLATIONS_QM_TARGET}
-    SOURCES ${TRANSLATIONS_TS_FILES})
-add_dependencies(${TRANSLATIONS_QM_TARGET} ${TRANSLATIONS_TS_TARGET})
-# generate .qm files
-add_custom_command(
-    TARGET ${TRANSLATIONS_QM_TARGET}
-    COMMENT "Manually releasing translations files"
-    COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lrelease
-        ARGS ${TRANSLATIONS_TS_FILES} -idbased
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(velib/inc .)
 
@@ -144,6 +106,45 @@ else()
         ${QML_RESOURCES}
     )
 endif()
+
+# translations support.
+# note: the base venus-gui-v2.ts was generated with:
+# lupdate.exe qml.qrc -ts i18n/venus-gui-v2.ts)
+set(TRANSLATIONS_TS_FILES
+        "i18n/venus-gui-v2.ts"
+	"i18n/venus-gui-v2_en.ts"
+	"i18n/venus-gui-v2_fr.ts")
+set(TRANSLATIONS_QM_FILES
+        "i18n/venus-gui-v2.qm"
+	"i18n/venus-gui-v2_en.qm"
+	"i18n/venus-gui-v2_fr.qm")
+# manually generate .ts files via a custom command.
+# it would be good if we could do this via qt6_add_lupdate
+# instead, but that macro is broken, so do it ourselves.
+add_custom_target(${TRANSLATIONS_TS_TARGET}
+    SOURCES ${QML_RESOURCES} ${SOURCES})
+add_custom_command(
+    TARGET ${TRANSLATIONS_TS_TARGET}
+    BYPRODUCTS ${TRANSLATIONS_TS_FILES}
+    COMMENT "Manually updating translations files"
+    COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lupdate
+        ARGS "${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc" ${SOURCES}
+	     -ts ${TRANSLATIONS_TS_FILES}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+# add a custom target to generate the .qm files via qt6_add_lrelease().
+# force the .qm generation step to depend on the .ts generation step.
+set_source_files_properties(${TRANSLATIONS_TS_FILES}
+    PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/i18n")
+add_custom_target(${TRANSLATIONS_QM_TARGET}
+    SOURCES ${TRANSLATIONS_TS_FILES})
+add_dependencies(${TRANSLATIONS_QM_TARGET} ${TRANSLATIONS_TS_TARGET})
+# generate .qm files
+add_custom_command(
+    TARGET ${TRANSLATIONS_QM_TARGET}
+    COMMENT "Manually releasing translations files"
+    COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lrelease
+        ARGS ${TRANSLATIONS_TS_FILES} -idbased
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     qt_add_executable(${PROJECT_NAME}

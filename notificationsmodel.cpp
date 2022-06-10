@@ -186,8 +186,6 @@ ActiveNotificationsModel::ActiveNotificationsModel(QObject *parent)
 	Q_ASSERT(result);
 	result = connect(this, &ActiveNotificationsModel::dataChanged, this, &ActiveNotificationsModel::handleChanges);
 	Q_ASSERT(result);
-	qDebug() << "NotificationCenter test()";
-	//QTimer::singleShot(2000, this, SLOT(test())); // TEST
 }
 
 ActiveNotificationsModel::~ActiveNotificationsModel()

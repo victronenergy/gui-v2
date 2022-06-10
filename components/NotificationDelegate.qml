@@ -87,7 +87,7 @@ Rectangle {
 			Label {
 				color: Theme.color.font.primary
 				font.pixelSize: Theme.font.size.m
-				text: root.description
+				text: qsTrId(root.description)
 			}
 		}
 	}
