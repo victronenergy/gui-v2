@@ -20,6 +20,7 @@ echo import QtQuick >> %DHQML%
 echo import QtQuick.Window >> %DHQML%
 echo import QtQuick.Controls >> %DHQML%
 echo import QtQuick.Layouts >> %DHQML%
+echo import QtQuick.VirtualKeyboard >> %DHQML%
 echo= >> %DHQML%
 echo Item { } >> %DHQML%
 echo= >> %DHQML%

@@ -9,6 +9,7 @@ import Victron.VenusOS
 QtVirtualKeyboard.InputPanel {
 	id: root
 
+	property var mainViewItem
 	property var focusedItem
 	property var focusedFlickable
 	property real toContentY
@@ -55,8 +56,8 @@ QtVirtualKeyboard.InputPanel {
 				console.warn("onAboutToFocusTextField(): invalid item/flickable:", textField, flickable)
 				return
 			}
-			const inputPanelY = mainView.height - root.height
-			const toWinY = textField.mapToItem(mainView, 0, toTextFieldY).y
+			const inputPanelY = mainViewItem.height - root.height
+			const toWinY = textField.mapToItem(mainViewItem, 0, toTextFieldY).y
 			const delta = toWinY - inputPanelY
 
 			if (delta > 0) {
