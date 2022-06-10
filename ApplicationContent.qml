@@ -9,6 +9,8 @@ import "data" as Data
 import "demo" as Demo
 
 Item {
+	id: root
+
 	property alias dialogManager: dialogManager
 	property alias mainView: mainView
 
@@ -110,42 +112,21 @@ Item {
 		id: dialogManager
 	}
 
-	// Load the VKB separately so that the app still runs if QtQuick.VirtualKeyboard is not
-	// available (e.g. in Qt WASM).
 	// Place this above idleModeMouseArea so that the mouse area can call testCloseOnClick() when
 	// clicking outside of the focused text field, below the VKB layer.
-	Loader {
-		id: inputPanelLoader
+	InputPanel {
+		id: vkb
 
-		x: 0
-		y: root.height
-		source: "qrc:/components/InputPanel.qml"
+		mainViewItem: mainView
+		y: Qt.inputMethod.visible ? root.height - vkb.height : root.height
 
-		onStatusChanged: {
-			if (status === Loader.Ready) {
-				Global.inputPanel = item
-			} else if (status === Loader.Error) {
-				console.warn("Cannot load InputPanel!")
-			}
-		}
-
-		states: State {
-			name: "visible"
-			when: Qt.inputMethod.visible
-
-			PropertyChanges {
-				target: inputPanelLoader
-				y: root.height - inputPanelLoader.item.height
-			}
-		}
-
-		transitions: Transition {
+		Behavior on y {
 			NumberAnimation {
-				property: "y"
 				duration: Theme.animation.inputPanel.slide.duration
 				easing.type: Easing.InOutQuad
 			}
 		}
 
+		Component.onCompleted: Global.inputPanel = vkb
 	}
 }

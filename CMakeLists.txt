@@ -23,7 +23,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml LinguistTools REQUIRED)
+    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml VirtualKeyboard LinguistTools REQUIRED)
 else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -196,6 +196,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
         Qt6::Quick
         Qt6::Svg
         Qt6::Xml
+        Qt6::VirtualKeyboard
     )
 else()
     target_link_libraries(${PROJECT_NAME} PRIVATE
