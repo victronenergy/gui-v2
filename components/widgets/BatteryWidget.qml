@@ -42,7 +42,6 @@ OverviewWidget {
 	title: qsTrId("overview_widget_battery_title")
 	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
-	width: Theme.geometry.overviewPage.widget.battery.width
 
 	quantityLabel.value: Math.round(batteryData.stateOfCharge)
 	quantityLabel.unit: VenusOS.Units_Percentage

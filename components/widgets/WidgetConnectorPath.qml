@@ -1,41 +1,46 @@
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls.impl as CP
 
 Item {
 	id: root
 
-	property alias startNub: startNub
-	property alias endNub: endNub
 	property int direction: Qt.Horizontal
+	property bool expanded
 
-	property real startX
-	property real startY
-	property real endX
-	property real endY
+	// start/end anchor points
+	property real startAnchorX
+	property real startAnchorY
+	property real startAnchorCompactY
+	property real startAnchorExpandedY
+	property real endAnchorX
+	property real endAnchorY
+	property real endAnchorCompactY
+	property real endAnchorExpandedY
 
-	readonly property real _midpointX: _xDistanceBetweenNubs / 2
-	readonly property real _midpointY: _yDistanceBetweenNubs / 2
-	readonly property real _xDistanceBetweenNubs: {
-		// for vertical connectors, take the nub width into account
-		var nubWidth = 0
-		if (direction == Qt.Vertical) {
-			nubWidth += endNub.width
-		}
-		var dist = endNub.x > startNub.x
-				? endNub.x - (startNub.x + startNub.width - nubWidth)
-				: (endNub.x - (startNub.x - startNub.width + nubWidth))
-		return dist
-	}
-	readonly property real _yDistanceBetweenNubs: {
-		var dist = endNub.y - startNub.y
-		// for vertical connectors, take the nub height into account
-		if (startLocation == VenusOS.WidgetConnector_Location_Top) {
-			dist += endNub.height
-		} else if (startLocation == VenusOS.WidgetConnector_Location_Bottom) {
-			dist -= endNub.height
-		}
-		return dist
+	// y pos for this item
+	property real compactY
+	property real expandedY
+
+	// distance between anchor points on the x and y axes
+	property real xDistance
+	property real yDistance: compactYDistance
+	property real compactYDistance
+	property real expandedYDistance
+	property real _midpointX
+	readonly property real _midpointY: yDistance / 2
+
+	// Initialize y values to their compact variants. The height does not need to change when
+	// switching between compact/expanded mode as the Item height does not affect the path.
+	y: compactY
+	startAnchorY: startAnchorCompactY
+	endAnchorY: endAnchorCompactY
+
+	function reloadPathLayout() {
+		xDistance = endAnchorX - startAnchorX
+		_midpointX = xDistance / 2
+
+		compactYDistance = endAnchorCompactY - startAnchorCompactY
+		expandedYDistance = endAnchorExpandedY - startAnchorExpandedY
 	}
 
 	property list<QtObject> pathElements: [
@@ -43,12 +48,9 @@ Item {
 			id: startArc
 
 			x: _midpointX
-			y: {
-				// Use the x radius to show a more evenly-rounded radius when possible
-				var smallestRadius = Math.min(Math.abs(_midpointX), Math.abs(_midpointY))
-				return startNub.y < endNub.y ? smallestRadius : -smallestRadius
-			}
-
+			y: startAnchorY < endAnchorY
+			   ? Math.min(Math.abs(_midpointX), Math.abs(_midpointY))  // the smallest available radius
+			   : -Math.min(Math.abs(_midpointX), Math.abs(_midpointY))
 			radiusX: x
 			radiusY: y
 			direction: (_midpointX < 0 && _midpointY < 0) || (_midpointX > 0 && _midpointY > 0)
@@ -57,8 +59,9 @@ Item {
 
 		PathLine {
 			id: line
-			relativeX: startNub.y == endNub.y ? _xDistanceBetweenNubs : 0
-			relativeY: _yDistanceBetweenNubs - startArc.radiusY - endArc.radiusY
+
+			relativeX: startAnchorY == endAnchorY ? xDistance : 0
+			relativeY: yDistance - startArc.radiusY - endArc.radiusY
 		},
 
 		PathArc {
@@ -73,20 +76,4 @@ Item {
 					   : PathArc.Counterclockwise
 		}
 	]
-
-	CP.ColorImage {
-		id: startNub
-
-		source: root.direction === Qt.Horizontal
-				? "qrc:/images/widget_connector_nub_horizontal.svg"
-				: "qrc:/images/widget_connector_nub_vertical.svg"
-	}
-
-	CP.ColorImage {
-		id: endNub
-
-		source: root.direction === Qt.Horizontal
-				? "qrc:/images/widget_connector_nub_horizontal.svg"
-				: "qrc:/images/widget_connector_nub_vertical.svg"
-	}
 }

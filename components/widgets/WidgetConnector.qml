@@ -16,147 +16,186 @@ Item {
 	property int endLocation
 
 	property int animationMode: VenusOS.WidgetConnector_AnimationMode_NotAnimated
-	property bool expanded
+	property alias expanded: connectorPath.expanded
 	property bool animateGeometry
+	readonly property bool defaultVisible: startWidget.visible && endWidget.visible && _initialized
 
-	// Forces a straight line by aligning the nubs using the centre of the smaller widget
+	// Forces a straight line by aligning the anchor points using the centre of the smaller widget
 	property bool straight
 
-	readonly property bool _animated: visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated
+	readonly property bool _animated: _initialized && visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	property real _animationProgress
 	property real _electronTravelDistance
 
-	readonly property rect _startWidgetRect: _widgetRect(startWidget)
-	readonly property rect _endWidgetRect: _widgetRect(endWidget)
+	property bool _initialized
 
-	function _widgetRect(widget) {
+	function reset() {
+		// Disable _initialized to ensure path distance calculations are not updated before layout is complete.
+		_initialized = false
+		connectorPath.widgetConnectorLayoutChanged()
+		_initialized = true
+		Qt.callLater(_resetDistance)
+	}
+
+	function _widgetRect(widget, expandedGeometry) {
 		return Qt.rect(
 			widget.x,
-			expanded ? widget.expandedY : widget.compactY,
+			expandedGeometry ? widget.expandedY : widget.compactY,
 			widget.width,
-			expanded ? widget.expandedHeight : widget.compactHeight
+			expandedGeometry ? widget.expandedHeight : widget.compactHeight
 		)
 	}
 
-	function _reset() {
-		// Only calculate the model once, to avoid multiple model changes due to animation.
-		_electronTravelDistance = _animated ? connectorPath.width + connectorPath.height : 0
+	// Calculate the Repeater model imperatively, to avoid multiple model changes when the
+	// animation state changes or when the connector path resizes.
+	function _resetDistance() {
+		if (!_initialized) {
+			return
+		}
+
+		// Sets the distance between electrons (i.e. how often to spawn a new electron)
+		const electronTravelDistance = _animated ? _electronTravelDistance : 0
+		const modelCount = Math.floor(electronTravelDistance / Theme.geometry.overviewPage.connector.electron.interval)
+		if (electronRepeater.count !== modelCount) {
+			electronRepeater.model = modelCount
+		}
+
 		if (_animated) {
+			// Animate at a constant rate of pixels/sec, based on the diagonal length of the shape
+			electronAnim.duration = electronTravelDistance / Theme.geometry.overviewPage.connector.electron.velocity * 1000
 			electronAnim.restart()
 		}
 	}
 
-	visible: startWidget.visible && endWidget.visible
+	visible: defaultVisible
+	on_AnimatedChanged: Qt.callLater(_resetDistance)
 
-	onAnimationModeChanged: Qt.callLater(_reset)
-	on_AnimatedChanged: Qt.callLater(_reset)
-	Component.onCompleted: Qt.callLater(_reset)
+	states: State {
+		name: "expanded"
+		when: root.expanded && root._initialized
+
+		PropertyChanges { target: connectorPath; y: connectorPath.expandedY; yDistance: connectorPath.expandedYDistance }
+		PropertyChanges { target: connectorPath; startAnchorY: connectorPath.startAnchorExpandedY }
+		PropertyChanges { target: connectorPath; endAnchorY: connectorPath.endAnchorExpandedY }
+	}
+
+	transitions: Transition {
+		enabled: root.animateGeometry
+
+		NumberAnimation {
+			properties: "y,yDistance,startAnchorY,endAnchorY"
+			duration: Theme.animation.page.idleResize.duration
+			easing.type: Easing.InOutQuad
+		}
+	}
 
 	WidgetConnectorPath {
 		id: connectorPath
 
-		// The path geometry encloses the space between the start and end widgets.
-		x: Math.min(startX, endX) - (direction == Qt.Vertical ? startNub.width/2 : 0)
-		y: Math.min(startY, endY) - (direction == Qt.Horizontal ? startNub.height/2 : 0)
-		width: Math.max(startX, endX) - x + (direction == Qt.Vertical ? endNub.width/2 : 0)
-		height: Math.max(startY, endY) - y + (direction == Qt.Horizontal ? endNub.height/2 : 0)
+		function widgetConnectorLayoutChanged() {
+			direction = (startLocation == VenusOS.WidgetConnector_Location_Left
+						|| startLocation == VenusOS.WidgetConnector_Location_Right)
+						&& (endLocation == VenusOS.WidgetConnector_Location_Left
+						|| endLocation == VenusOS.WidgetConnector_Location_Right)
+					   ? Qt.Horizontal
+					   : Qt.Vertical
 
-		direction: (startLocation == VenusOS.WidgetConnector_Location_Left
-					|| startLocation == VenusOS.WidgetConnector_Location_Right)
-					&& (endLocation == VenusOS.WidgetConnector_Location_Left
-					|| endLocation == VenusOS.WidgetConnector_Location_Right)
-				   ? Qt.Horizontal
-				   : Qt.Vertical
+			// Initialize the path geometry to enclose the space between the start and end anchors.
+			_initXGeometry()
+			_initYGeometry(false)
+			_initYGeometry(true)
 
-		startNub.x: startX - x - (direction === Qt.Horizontal ? 0 : startNub.width)
-		startNub.y: startY - y
-
-		endNub.x: endX - x - endNub.width
-		endNub.y: endY - y - (direction === Qt.Horizontal ? 0 : endNub.height)
-		endNub.rotation: 180
-
-		startX: (straight && connectorPath.direction == Qt.Vertical && _startWidgetRect.width > _endWidgetRect.width)
-			? endX
-			: startLocation === VenusOS.WidgetConnector_Location_Left
-			  ? _startWidgetRect.x
-			  : startLocation === VenusOS.WidgetConnector_Location_Right
-				? _startWidgetRect.x + _startWidgetRect.width
-				: _startWidgetRect.x + _startWidgetRect.width/2 - startNub.height/2   // Top/Bottom location
-
-		startY: (straight && connectorPath.direction == Qt.Horizontal && _startWidgetRect.height > _endWidgetRect.height)
-				? endY
-				: startLocation === VenusOS.WidgetConnector_Location_Top
-				  ? _startWidgetRect.y
-				  : startLocation === VenusOS.WidgetConnector_Location_Bottom
-					? _startWidgetRect.y + _startWidgetRect.height
-					: _startWidgetRect.y + _startWidgetRect.height/2 - startNub.height/2  // Left/Right location
-
-		endX: (straight && connectorPath.direction == Qt.Vertical && _endWidgetRect.width > _startWidgetRect.width)
-			  ? startX
-			  : endLocation === VenusOS.WidgetConnector_Location_Left
-				? _endWidgetRect.x
-				: endLocation === VenusOS.WidgetConnector_Location_Right
-				  ? _endWidgetRect.x + _endWidgetRect.width
-				  : _endWidgetRect.x + _endWidgetRect.width/2 - endNub.height/2 // Top/Bottom location
-
-		endY: (straight && connectorPath.direction == Qt.Horizontal && _endWidgetRect.height > _startWidgetRect.height)
-			  ? startY
-			  : endLocation === VenusOS.WidgetConnector_Location_Top
-				? _endWidgetRect.y
-				: endLocation === VenusOS.WidgetConnector_Location_Bottom
-				  ? _endWidgetRect.y + _endWidgetRect.height
-				  : _endWidgetRect.y + _endWidgetRect.height/2 - endNub.height/2    // Left/Right location
-
-		Behavior on startY {
-			enabled: root.animateGeometry
-			NumberAnimation {
-				duration: Theme.animation.page.idleResize.duration
-				easing.type: Easing.InOutQuad
-			}
+			reloadPathLayout()
 		}
 
-		Behavior on endY {
-			enabled: root.animateGeometry
-			NumberAnimation {
-				duration: Theme.animation.page.idleResize.duration
-				easing.type: Easing.InOutQuad
+		function _initXGeometry() {
+			const startWidgetRect = _widgetRect(startWidget, false)
+			const endWidgetRect = _widgetRect(endWidget, false)
+			const anchorWidth = direction === Qt.Horizontal
+					? Theme.geometry.overviewPage.connector.anchor.width
+					: Theme.geometry.overviewPage.connector.anchor.height
+
+			const _startX = startLocation === VenusOS.WidgetConnector_Location_Left
+				  ? startWidgetRect.x - anchorWidth
+				  : startLocation === VenusOS.WidgetConnector_Location_Right
+					? startWidgetRect.x + startWidgetRect.width + anchorWidth
+					: startWidgetRect.x + startWidgetRect.width/2   // Top/Bottom location
+			const _endX = endLocation === VenusOS.WidgetConnector_Location_Left
+				  ? endWidgetRect.x - anchorWidth
+				  : endLocation === VenusOS.WidgetConnector_Location_Right
+					? endWidgetRect.x + endWidgetRect.width + anchorWidth
+					: endWidgetRect.x + endWidgetRect.width/2 // Top/Bottom location
+			let startX = _startX
+			let endX = _endX
+
+			// If the path is straight, align the path to the smaller of the start/end widgets.
+			if (straight && direction === Qt.Vertical) {
+				if (startWidgetRect.width > endWidgetRect.width) {
+					startX = _endX
+				} else if (startWidgetRect.width < endWidgetRect.width) {
+					endX = _startX
+				}
+			}
+
+			// x positions stay constant. The anchor points must be positioned with x value instead of
+			// anchor bindings, else the position may be incorrect when reloadPathLayout() is called.
+			x = Math.min(startX, endX)
+			width = Math.max(1, Math.max(startX, endX) - x)
+			startAnchorX = startX
+			endAnchorX = endX
+		}
+
+		function _initYGeometry(expandedGeometry) {
+			const startWidgetRect = _widgetRect(startWidget, expandedGeometry)
+			const endWidgetRect = _widgetRect(endWidget, expandedGeometry)
+			const anchorHeight = direction === Qt.Horizontal
+					? Theme.geometry.overviewPage.connector.anchor.height
+					: Theme.geometry.overviewPage.connector.anchor.width
+
+			// Work out the start and end of the path depending on the direction and orientation.
+			const _startY = startLocation === VenusOS.WidgetConnector_Location_Top
+				  ? startWidgetRect.y - anchorHeight
+				  : startLocation === VenusOS.WidgetConnector_Location_Bottom
+					? startWidgetRect.y + startWidgetRect.height + anchorHeight
+					: startWidgetRect.y + startWidgetRect.height/2  // Left/Right location
+			const _endY = endLocation === VenusOS.WidgetConnector_Location_Top
+				  ? endWidgetRect.y - anchorHeight
+				  : endLocation === VenusOS.WidgetConnector_Location_Bottom
+					? endWidgetRect.y + endWidgetRect.height + anchorHeight
+					: endWidgetRect.y + endWidgetRect.height/2  // Left/Right location
+			let startY = _startY
+			let endY = _endY
+
+			// If the path is straight, align the path to the smaller of the start/end widgets.
+			if (straight && direction === Qt.Horizontal) {
+				if (startWidgetRect.height > endWidgetRect.height) {
+					startY = _endY
+				} else if (startWidgetRect.height < endWidgetRect.height) {
+					endY = _startY
+				}
+			}
+
+			// y and height change depending on compact/expanded state
+			if (expandedGeometry) {
+				expandedY = Math.min(startY, endY)
+				startAnchorExpandedY = startY - expandedY
+				endAnchorExpandedY = endY - expandedY
+			} else {
+				compactY = Math.min(startY, endY)
+				startAnchorCompactY = startY - compactY
+				endAnchorCompactY = endY - compactY
+
+				// We could also set a different electron travel distance in expanded mode, but it
+				// makes little difference visually and results in more Repeater model changes.
+				const compactHeight = Math.max(startY, endY) - compactY
+				_electronTravelDistance = width + compactHeight
 			}
 		}
 
 		Shape {
 			id: connectorShape
 
-			anchors {
-				left: {
-					switch (startLocation) {
-					case VenusOS.WidgetConnector_Location_Left:
-						return connectorPath.startNub.left
-					case VenusOS.WidgetConnector_Location_Right:
-						return connectorPath.startNub.right
-					default:
-						return undefined
-					}
-				}
-				horizontalCenter: {
-					switch (startLocation) {
-					case VenusOS.WidgetConnector_Location_Top:   // fall through
-					case VenusOS.WidgetConnector_Location_Bottom:
-						return connectorPath.startNub.horizontalCenter
-					default:
-						return undefined
-					}
-				}
-				top: {
-					switch (startLocation) {
-					case VenusOS.WidgetConnector_Location_Top:
-						return connectorPath.startNub.top
-					case VenusOS.WidgetConnector_Location_Bottom:
-						return connectorPath.startNub.bottom
-					default:
-						return connectorPath.startNub.verticalCenter
-					}
-				}
-			}
+			y: connectorPath.startAnchorY
 
 			ShapePath {
 				strokeWidth: Theme.geometry.overviewPage.connector.line.width
@@ -167,9 +206,6 @@ Item {
 
 			Repeater {
 				id: electronRepeater
-
-				// electron interval = distance between electrons (i.e. how often to spawn a new electron)
-				model: Math.floor(root._electronTravelDistance / Theme.geometry.overviewPage.connector.electron.interval)
 
 				delegate: Image {
 					id: electron
@@ -231,8 +267,5 @@ Item {
 
 		running: root._animated
 		loops: Animation.Infinite
-
-		// animate at a constant rate of pixels/sec, based on the diagonal length of the shape
-		duration: _electronTravelDistance / Theme.geometry.overviewPage.connector.electron.velocity * 1000
 	}
 }

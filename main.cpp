@@ -271,6 +271,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "VerticalGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnector.qml")),
 		"Victron.VenusOS", 2, 0, "WidgetConnector");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorAnchor.qml")),
+		"Victron.VenusOS", 2, 0, "WidgetConnectorAnchor");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorPath.qml")),
 		"Victron.VenusOS", 2, 0, "WidgetConnectorPath");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetHeader.qml")),
