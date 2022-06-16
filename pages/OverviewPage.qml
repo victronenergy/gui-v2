@@ -10,6 +10,8 @@ Page {
 	id: root
 
 	property var _leftWidgets: []
+	readonly property var _centerWidgets: [inverterWidget, batteryWidget]
+	readonly property var _rightWidgets: [acLoadsWidget, dcLoadsWidget]
 
 	// Preferred order for the input widgets on the left hand side
 	readonly property var _leftWidgetOrder: [
@@ -28,11 +30,9 @@ Page {
 			+ Global.dcInputs.model.count
 			+ (Global.acInputs.connectedInput ? Global.acInputs.connectedInput.source : -1)
 			+ (Global.acInputs.generatorInput ? 1 : 0)
-			+ (dcLoadsWidget.size === _laidOutDcLoadsWidgetSize ? 0 : 1)
+			+ (isNaN(Global.system.loads.dcPower) ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
 	on_ShouldResetWidgetsChanged: Qt.callLater(_resetWidgets)
-
-	property int _laidOutDcLoadsWidgetSize: -1
 
 	property var _createdWidgets: ({})
 
@@ -41,6 +41,7 @@ Page {
 	// calculations are also only done once; otherwise, the recalculation/repainting of the paths
 	//  and path animations is very expensive and creates jerky animations on device.
 	function _resetWidgets() {
+		width = Theme.geometry.screen.width
 		_resetLeftWidgets()
 
 		let i = 0
@@ -53,7 +54,7 @@ Page {
 			}
 		}
 
-		// Set the widget sizes
+		// Set the left widget sizes
 		for (i = 0; i < _leftWidgets.length; ++i) {
 			widget = _leftWidgets[i]
 			switch (_leftWidgets.length) {
@@ -82,12 +83,37 @@ Page {
 			}
 		}
 
+		// Set AC and DC load widget sizes
+		dcLoadsWidget.size = !isNaN(Global.system.loads.dcPower)
+				? VenusOS.OverviewWidget_Size_L
+				: VenusOS.OverviewWidget_Size_Zero
+		acLoadsWidget.size = dcLoadsWidget.size === VenusOS.OverviewWidget_Size_Zero
+				? VenusOS.OverviewWidget_Size_XL
+				: VenusOS.OverviewWidget_Size_L
+
 		// Set the widget positions
 		resetWidgetPositions(_leftWidgets)
-		resetWidgetPositions([inverterWidget, batteryWidget])
-		resetWidgetPositions([acLoadsWidget, dcLoadsWidget])
+		resetWidgetPositions(_centerWidgets)
+		resetWidgetPositions(_rightWidgets)
 
-		_laidOutDcLoadsWidgetSize = dcLoadsWidget.size
+		// Initialize the widget connector geometry
+		resetWidgetConnectors(_leftWidgets)
+		resetWidgetConnectors(_centerWidgets)
+		resetWidgetConnectors(_rightWidgets)
+	}
+
+	function resetWidgetConnectors(widgets) {
+		for (let i = 0; i < widgets.length; ++i) {
+			const connectors = widgets[i].connectors
+			for (let j = 0; j < connectors.length; ++j) {
+				// For all left widgets except for solar (which has two connectors), straighten the
+				// connector if there is only one widget (as it will expand to full size).
+				if (widgets === _leftWidgets) {
+					connectors[j].straight = connectors.length === 1 && _leftWidgets.length === 1
+				}
+				connectors[j].reset()
+			}
+		}
 	}
 
 	function resetWidgetPositions(widgets) {
@@ -125,6 +151,7 @@ Page {
 			expandedWidgetsTopMargin = expandedWidgetsTopMargin * reductionRatio
 		}
 
+		// Set widget y and height
 		let prevWidget = null
 		for (i = 0; i < widgets.length; ++i) {
 			// Position each widget below the previous widget in this set.
@@ -141,6 +168,21 @@ Page {
 			// Position the segment border correctly when showing as segments.
 			widget.segmentCompactMargin = compactWidgetsTopMargin
 			widget.segmentExpandedMargin = expandedWidgetsTopMargin
+		}
+
+		// Set widget x and width
+		for (i = 0; i < widgets.length; ++i) {
+			widget = widgets[i]
+			if (widgets === _leftWidgets) {
+				widget.width = Theme.geometry.overviewPage.widget.leftWidgetWidth
+				widget.x = Theme.geometry.page.content.horizontalMargin
+			} else if (widgets === _centerWidgets) {
+				widget.width = Theme.geometry.overviewPage.widget.centerWidgetWidth
+				widget.x = root.width/2 - widget.width/2
+			} else if (widgets === _rightWidgets) {
+				widget.width = Theme.geometry.overviewPage.widget.rightWidgetWidth
+				widget.x = root.width - widget.width - Theme.geometry.page.content.horizontalMargin
+			}
 		}
 	}
 
@@ -216,7 +258,8 @@ Page {
 		}
 
 		// Add DC widgets
-		for (let i = 0; i < Global.dcInputs.model.count; ++i) {
+		let i
+		for (i = 0; i < Global.dcInputs.model.count; ++i) {
 			const dcInput = Global.dcInputs.model.get(i).input
 			switch (dcInput.source) {
 			case VenusOS.DcInputs_InputType_Alternator:
@@ -246,6 +289,11 @@ Page {
 					0, _createWidget(VenusOS.OverviewWidget_Type_Solar))
 		}
 		_leftWidgets = widgetCandidates
+
+		segmentedBackground.visible = _leftWidgets.length >= Theme.geometry.overviewPage.layout.segmentedWidgetThreshold
+		for (i = 0; i < _leftWidgets.length; ++i) {
+			_leftWidgets[i].isSegment = segmentedBackground.visible
+		}
 	}
 
 	function _leftWidgetInsertionIndex(widgetType, candidateArray) {
@@ -299,7 +347,7 @@ Page {
 			left: parent.left
 			leftMargin: Theme.geometry.page.content.horizontalMargin
 		}
-		visible: _leftWidgets.length >= Theme.geometry.overviewPage.layout.segmentedWidgetThreshold
+		visible: false
 		segments: _leftWidgets
 	}
 
@@ -309,15 +357,18 @@ Page {
 		GridWidget {
 			id: gridWidget
 
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry.page.content.horizontalMargin
-			}
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: Global.pageManager.animatingIdleResize
 			animationEnabled: root.isCurrentPage
 			isSegment: segmentedBackground.visible
 			sideGaugeValue: quantityLabel.value / Utils.maximumValue("grid.power")    // TODO when max available
+			connectors: [ gridWidgetConnector ]
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Right
+				y: gridWidgetConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
+				visible: gridWidgetConnector.visible
+			}
 
 			WidgetConnector {
 				id: gridWidgetConnector
@@ -330,7 +381,6 @@ Page {
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(gridWidgetConnector)
-				straight: gridWidget.size > VenusOS.OverviewWidget_Size_M
 			}
 		}
 	}
@@ -341,14 +391,16 @@ Page {
 		ShoreWidget {
 			id: shoreWidget
 
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry.page.content.horizontalMargin
-			}
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-			isSegment: segmentedBackground.visible
 			sideGaugeValue: 0.5 // TODO when max available
+			connectors: [ shoreWidgetConnector ]
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Right
+				y: shoreWidgetConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
+				visible: shoreWidgetConnector.visible
+			}
 
 			WidgetConnector {
 				id: shoreWidgetConnector
@@ -361,7 +413,6 @@ Page {
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(shoreWidgetConnector)
-				straight: shoreWidget.size > VenusOS.OverviewWidget_Size_M
 			}
 		}
 	}
@@ -372,13 +423,16 @@ Page {
 		AcGeneratorWidget {
 			id: acGeneratorWidget
 
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry.page.content.horizontalMargin
-			}
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
+			connectors: [ acGeneratorConnector ]
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Right
+				y: acGeneratorConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
+				visible: acGeneratorConnector.visible
+			}
 
 			WidgetConnector {
 				id: acGeneratorConnector
@@ -391,7 +445,6 @@ Page {
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(acGeneratorConnector)
-				straight: acGeneratorWidget.size > VenusOS.OverviewWidget_Size_M
 			}
 		}
 	}
@@ -402,13 +455,16 @@ Page {
 		DcGeneratorWidget {
 			id: dcGeneratorWidget
 
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry.page.content.horizontalMargin
-			}
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
+			connectors: [ dcGeneratorConnector ]
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Right
+				y: dcGeneratorConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
+				visible: dcGeneratorConnector.visible
+			}
 
 			WidgetConnector {
 				id: dcGeneratorConnector
@@ -421,7 +477,6 @@ Page {
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 				animationMode: root._inputConnectorAnimationMode(dcGeneratorConnector)
-				straight: dcGeneratorWidget.size > VenusOS.OverviewWidget_Size_M
 			}
 		}
 	}
@@ -432,13 +487,15 @@ Page {
 		AlternatorWidget {
 			id: alternatorWidget
 
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry.page.content.horizontalMargin
-			}
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
+			connectors: [ alternatorConnector ]
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Right
+				visible: alternatorConnector.visible
+			}
 
 			WidgetConnector {
 				id: alternatorConnector
@@ -461,13 +518,15 @@ Page {
 		WindWidget {
 			id: windWidget
 
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry.page.content.horizontalMargin
-			}
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
+			connectors: [ windConnector ]
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Right
+				visible: windConnector.visible
+			}
 
 			WidgetConnector {
 				id: windConnector
@@ -490,13 +549,15 @@ Page {
 		SolarYieldWidget {
 			id: solarWidget
 
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry.page.content.horizontalMargin
-			}
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			isSegment: segmentedBackground.visible
+			connectors: [ acSolarConnector, dcSolarConnector ]
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Right
+				visible: acSolarConnector.visible || dcSolarConnector.visible
+			}
 
 			WidgetConnector {
 				id: acSolarConnector
@@ -506,7 +567,7 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				visible: !isNaN(Global.solarChargers.acPower)
+				visible: defaultVisible && !isNaN(Global.solarChargers.acPower)
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 
@@ -542,13 +603,31 @@ Page {
 	// the two central widgets are always present
 	InverterWidget {
 		id: inverterWidget
-		anchors.horizontalCenter: parent.horizontalCenter
+
 		size: VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 		systemState: Global.system.state
+		connectors: [ inverterToAcLoadsConnector, inverterToBatteryConnector ]
+
+		WidgetConnectorAnchor {
+			id: inverterLeftConnectorAnchor
+			location: VenusOS.WidgetConnector_Location_Left
+			visible: Global.acInputs.connectedInput
+					|| Global.acInputs.generatorInput
+					|| !isNaN(Global.solarChargers.acPower)
+		}
+		WidgetConnectorAnchor {
+			location: VenusOS.WidgetConnector_Location_Right
+			visible: inverterToAcLoadsConnector.visible
+		}
+		WidgetConnectorAnchor {
+			location: VenusOS.WidgetConnector_Location_Bottom
+		}
 	}
 	WidgetConnector {
+		id: inverterToAcLoadsConnector
+
 		startWidget: inverterWidget
 		startLocation: VenusOS.WidgetConnector_Location_Right
 		endWidget: acLoadsWidget
@@ -566,6 +645,8 @@ Page {
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
 	WidgetConnector {
+		id: inverterToBatteryConnector
+
 		startWidget: inverterWidget
 		startLocation: VenusOS.WidgetConnector_Location_Bottom
 		endWidget: batteryWidget
@@ -585,14 +666,29 @@ Page {
 
 	BatteryWidget {
 		id: batteryWidget
-		anchors.horizontalCenter: parent.horizontalCenter
+
 		size: VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 		animationEnabled: root.isCurrentPage
 		batteryData: Global.battery
+		connectors: [ batteryToDcLoadsConnector ]
+
+		WidgetConnectorAnchor {
+			location: VenusOS.WidgetConnector_Location_Left
+			visible: Global.dcInputs.model.count > 0 || !isNaN(Global.solarChargers.dcPower)
+		}
+		WidgetConnectorAnchor {
+			location: VenusOS.WidgetConnector_Location_Right
+			visible: batteryToDcLoadsConnector.visible
+		}
+		WidgetConnectorAnchor {
+			location: VenusOS.WidgetConnector_Location_Top
+		}
 	}
 	WidgetConnector {
+		id: batteryToDcLoadsConnector
+
 		startWidget: batteryWidget
 		startLocation: VenusOS.WidgetConnector_Location_Right
 		endWidget: dcLoadsWidget
@@ -612,29 +708,24 @@ Page {
 	// the two output widgets are always present
 	AcLoadsWidget {
 		id: acLoadsWidget
-		anchors {
-			right: parent.right
-			rightMargin: Theme.geometry.page.content.horizontalMargin
-		}
 
-		size: dcLoadsWidget.size === VenusOS.OverviewWidget_Size_Zero
-			  ? VenusOS.OverviewWidget_Size_XL
-			  : VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+
+		WidgetConnectorAnchor {
+			location: VenusOS.WidgetConnector_Location_Left
+			y: inverterLeftConnectorAnchor.y
+		}
 	}
 
 	DcLoadsWidget {
 		id: dcLoadsWidget
-		anchors {
-			right: parent.right
-			rightMargin: Theme.geometry.page.content.horizontalMargin
-		}
 
-		size: !isNaN(Global.system.loads.dcPower)
-				? VenusOS.OverviewWidget_Size_L
-				: VenusOS.OverviewWidget_Size_Zero
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+
+		WidgetConnectorAnchor {
+			location: VenusOS.WidgetConnector_Location_Left
+		}
 	}
 }

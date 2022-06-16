@@ -280,9 +280,10 @@
     "geometry.overviewPage.widget.sideGauge.width": 8,
     "geometry.overviewPage.widget.sideGauge.radius": 8,
     "geometry.overviewPage.widget.header.spacing": 4,
+    "geometry.overviewPage.widget.leftWidgetWidth": 224,
+    "geometry.overviewPage.widget.centerWidgetWidth": 304,
+    "geometry.overviewPage.widget.rightWidgetWidth": 224,
 
-    "geometry.overviewPage.widget.width": 224,
-    "geometry.overviewPage.widget.battery.width": 304,
     "geometry.overviewPage.widget.battery.animatedBar.minimumWidth": 4,
     "geometry.overviewPage.widget.battery.animatedBar.maximumWidth": 22,
     "geometry.overviewPage.widget.battery.animatedBar.minimumWidth": 4,
@@ -290,7 +291,6 @@
     "geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing": 4,
     "geometry.overviewPage.widget.battery.animatedBar.verticalSpacing": 4,
     "geometry.overviewPage.widget.battery.bottomRow.bottomMargin": 8,
-    "geometry.overviewPage.widget.inverter.width": 304,
 
     "geometry.overviewPage.widget.compact.xl.height": 464,
     "geometry.overviewPage.widget.compact.l.height": 192,
@@ -310,6 +310,8 @@
     "geometry.overviewPage.connector.electron.velocity": 30,
     "geometry.overviewPage.connector.electron.interval": 34,
     "geometry.overviewPage.connector.animationPowerThreshold": 30,
+    "geometry.overviewPage.connector.anchor.width": 6,
+    "geometry.overviewPage.connector.anchor.height": 12,
 
     "geometry.overviewPage.layout.compact.topMargin": 0,
     "geometry.overviewPage.layout.compact.bottomMargin": 8,

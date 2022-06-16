@@ -20,11 +20,12 @@ Rectangle {
 
 	property alias extraContent: extraContent
 	property bool isSegment
+	property var connectors: []
 
 	property real compactY
 	property real expandedY
-	readonly property int compactHeight: getCompactHeight(size)
-	readonly property int expandedHeight: getExpandedHeight(size)
+	readonly property int compactHeight: getCompactHeight(size) + (isSegment ? segmentCompactMargin : 0)
+	readonly property int expandedHeight: getExpandedHeight(size) + (isSegment ? segmentExpandedMargin : 0)
 	property real segmentCompactMargin
 	property real segmentExpandedMargin
 	property bool expanded
@@ -55,28 +56,26 @@ Rectangle {
 				: Theme.geometry.overviewPage.widget.expanded.xs.height
 	}
 
-	y: expanded ? expandedY : compactY
-	width: Theme.geometry.overviewPage.widget.width
-	height: expanded
-			? expandedHeight + (isSegment ? segmentExpandedMargin : 0)
-			: compactHeight + (isSegment ? segmentCompactMargin : 0)
+	y: compactY
+	height: compactHeight
 	visible: size !== VenusOS.OverviewWidget_Size_Zero
 	radius: isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
 	border.width: enabled && !isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
 	border.color: Theme.color.overviewPage.widget.border
 	color: isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
-	Behavior on height {
-		enabled: root.animateGeometry
-		NumberAnimation {
-			duration: Theme.animation.page.idleResize.duration
-			easing.type: Easing.InOutQuad
-		}
+	states: State {
+		name: "expanded"
+		when: root.expanded
+
+		PropertyChanges { target: root; y: root.expandedY; height: root.expandedHeight }
 	}
 
-	Behavior on y {
+	transitions: Transition {
 		enabled: root.animateGeometry
+
 		NumberAnimation {
+			properties: "y,height"
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad
 		}
