@@ -25,7 +25,9 @@ Item {
 
 	readonly property bool _animated: _initialized && visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	property real _animationProgress
+
 	property real _electronTravelDistance
+	property real _electronFadeEnd
 
 	property bool _initialized
 
@@ -56,8 +58,14 @@ Item {
 		// Sets the distance between electrons (i.e. how often to spawn a new electron)
 		const electronTravelDistance = _animated ? _electronTravelDistance : 0
 		const modelCount = Math.floor(electronTravelDistance / Theme.geometry.overviewPage.connector.electron.interval)
+
 		if (electronRepeater.count !== modelCount) {
 			electronRepeater.model = modelCount
+
+			if (electronTravelDistance > 0) {
+				const fadeDistance = 2 * Theme.geometry.overviewPage.connector.anchor.width
+				_electronFadeEnd = (electronTravelDistance - fadeDistance) / electronTravelDistance
+			}
 		}
 
 		if (_animated) {
@@ -224,8 +232,10 @@ Item {
 					rotation: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							  ? animPathInterpolator.angle
 							  : animPathInterpolator.angle + 180
-					opacity: progress < 0.01 || progress > 0.8 ? 0 : 1
 
+					// Fade out the electron just before it reaches the end of the path, so that it
+					// disappears nicely into the end anchor point, instead of disappearing abruptly.
+					opacity: progress > _electronFadeEnd ? 0 : 1
 					Behavior on opacity {
 						enabled: root._animated
 						NumberAnimation {
