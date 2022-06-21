@@ -70,6 +70,10 @@ Item {
 	visible: defaultVisible
 	on_AnimatedChanged: Qt.callLater(_resetDistance)
 
+	// Ensure electrons are shown above connector paths that do not have electrons, to avoid a
+	// situation where non-animated connector paths partially obscure electrons from other paths.
+	z: electronRepeater.count === 0 ? -1 : 0
+
 	states: State {
 		name: "expanded"
 		when: root.expanded && root._initialized
