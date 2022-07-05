@@ -227,8 +227,15 @@
         <file>images/information.svg</file>
         <file>images/shore.svg</file>
         <file>images/switches.svg</file>
+        <file>images/splash-anim.gif</file>
+        <file>images/splash-anim-5inch.gif</file>
+        <file>images/splash-anim-7inch.gif</file>
         <file>images/splash-logo-5inch.svg</file>
         <file>images/splash-logo-7inch.svg</file>
+        <file>images/splash-logo-only-5inch.svg</file>
+        <file>images/splash-logo-only-7inch.svg</file>
+        <file>images/splash-logo-text-5inch.svg</file>
+        <file>images/splash-logo-text-7inch.svg</file>
         <file>images/toast_icon_alarm.svg</file>
         <file>images/toast_icon_checkmark.svg</file>
         <file>images/toast_icon_close.svg</file>

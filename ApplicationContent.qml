@@ -62,12 +62,15 @@ Item {
 
 		Behavior on opacity {
 			NumberAnimation {
-				duration: Theme.animation.page.fade.duration
+				// deliberately longer than the normal page fade animation
+				// so that the fade-out to the actual gauge content looks smoother.
+				duration: Theme.animation.splash.fade.duration
 				easing.type: Easing.InOutQuad
 			}
 		}
 
 		onHideSplash: {
+			pageManager.idleModeTimer.restart()
 			splashView.enabled = false
 			mainView.enabled = true
 		}

@@ -1,6 +1,9 @@
 {
     "animation.page.slide.duration": 250,
     "animation.page.fade.duration": 250,
+    "animation.splash.progress.duration": 1500,
+    "animation.splash.itemFade.duration": 250,
+    "animation.splash.fade.duration": 400,
     "animation.progressArc.duration": 600,
     "animation.progressBar.duration": 1000,
     "animation.briefPage.edgeGauge.fade.duration": 200,
@@ -251,7 +254,7 @@
     "geometry.weatherDetails.row.spacing": 3,
     "geometry.weatherDetails.pixelSize": 18,
 
-    "geometry.splashView.verticalCenterOffset": -20,
+    "geometry.splashView.verticalCenterOffset": -12,
     "geometry.splashView.spacing": 56,
     "geometry.splashView.progressBar.width": 368,
 

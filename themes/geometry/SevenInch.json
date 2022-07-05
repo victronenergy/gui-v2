@@ -1,6 +1,9 @@
 {
     "animation.page.slide.duration": 250,
     "animation.page.fade.duration": 250,
+    "animation.splash.progress.duration": 1500,
+    "animation.splash.itemFade.duration": 250,
+    "animation.splash.fade.duration": 400,
     "animation.progressArc.duration": 600,
     "animation.progressBar.duration": 1000,
     "animation.briefPage.edgeGauge.fade.duration": 200,
@@ -15,6 +18,7 @@
     "animation.levelsPage.tanks.modelChangeResize.duration": 500,
     "animation.notificationsPage.delegate.displaced.duration": 400,
     "animation.notificationsPage.delegate.opacity.duration": 400,
+    "animation.inputPanel.slide.duration": 250,
 
     "geometry.screen.width": 1024,
     "geometry.screen.height": 600,
@@ -250,7 +254,7 @@
     "geometry.weatherDetails.row.spacing": 3,
     "geometry.weatherDetails.pixelSize": 18,
 
-    "geometry.splashView.verticalCenterOffset": -20,
+    "geometry.splashView.verticalCenterOffset": -12,
     "geometry.splashView.spacing": 68,
     "geometry.splashView.progressBar.width": 464,
 
