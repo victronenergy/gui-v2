@@ -28,10 +28,9 @@ Item {
 		Repeater {
 			id: arcRepeater
 			width: parent.width
-			model: gauges.model
 			delegate: ProgressArc {
 				property int status: Gauges.getValueStatus(model.value, model.valueType)
-				width: parent.width - (strokeWidth + index*_stepSize)
+				width: parent.width - (index*_stepSize)
 				height: width
 				anchors.centerIn: parent
 				radius: width/2

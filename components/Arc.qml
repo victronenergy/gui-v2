@@ -17,6 +17,8 @@ ShapePath {
 	readonly property var startOffsets: angleToCoords(degreesToRadians(startAngle))
 	readonly property var endOffsets: angleToCoords(degreesToRadians(endAngle))
 
+	readonly property real _reducedRadius: radius - strokeWidth/2
+
 	function angleToCoords(theta) {
 		const x = Math.cos(theta)
 		const y = Math.sin(theta)
@@ -33,16 +35,16 @@ ShapePath {
 	capStyle: ShapePath.RoundCap
 	joinStyle: ShapePath.RoundJoin
 
-	startX: path.radius + path.startOffsets[1] * path.radius
-	startY: path.radius - path.startOffsets[0] * path.radius
+	startX: path.radius + path.startOffsets[1] * path._reducedRadius
+	startY: path.radius - path.startOffsets[0] * path._reducedRadius
 
 	PathArc {
 		id: arc
 
-		radiusX: path.radius
-		radiusY: path.radius
+		radiusX: path._reducedRadius
+		radiusY: path._reducedRadius
 		useLargeArc: (endAngle - startAngle) > 180
-		x: path.radius + path.endOffsets[1] * path.radius
-		y: path.radius - path.endOffsets[0] * path.radius
+		x: path.radius + path.endOffsets[1] * path._reducedRadius
+		y: path.radius - path.endOffsets[0] * path._reducedRadius
 	}
 }
