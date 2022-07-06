@@ -92,6 +92,7 @@
     "color.overviewPage.widget.battery.animatedBar": "#7394bd",
 
     "color.briefPage.background": "#000000",
+    "color.briefPage.circularGauge.shine": "#BBFFFFFF",
     "color.briefPage.sidePanel.loadGraph.dotColor": "#504F4B",
     "color.briefPage.sidePanel.loadGraph.backgroundColor": "black",
     "color.briefPage.sidePanel.loadGraph.warning.strokeColor": "#F0962E",

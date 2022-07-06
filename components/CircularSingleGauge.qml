@@ -17,6 +17,7 @@ Item {
 	property int status
 	property alias caption: captionLabel.text
 	property alias animationEnabled: arc.animationEnabled
+	property alias shineAnimationEnabled: arc.shineAnimationEnabled
 
 	Item {
 		anchors.fill: parent

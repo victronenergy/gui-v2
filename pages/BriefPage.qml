@@ -50,6 +50,7 @@ Page {
 			status: Gauges.getValueStatus(value, properties.valueType)
 			caption: Global.battery.timeToGo > 0 ? Utils.formatAsHHMM(Global.battery.timeToGo, true) : ""
 			animationEnabled: root.isCurrentPage
+			shineAnimationEnabled: Global.battery.mode === VenusOS.Battery_Mode_Charging
 		}
 	}
 
