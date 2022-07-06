@@ -28,7 +28,7 @@ Item {
 		ProgressArc {
 			id: arc
 
-			width: gauges.width - strokeWidth
+			width: gauges.width
 			height: width
 			anchors.centerIn: parent
 			radius: width/2

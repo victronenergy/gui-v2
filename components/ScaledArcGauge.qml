@@ -30,12 +30,10 @@ Item {
 		ScaledArc {
 			id: arc
 
-			property real margin: strokeWidth/2
-
-			width: radius*2 - strokeWidth
+			width: radius*2
 			height: width
-			x: arcX !== undefined ? arcX : (gauge.alignment === Qt.AlignRight ? (gauge.width - 2*radius) - margin : margin)
-			y: arcY !== undefined ? arcY : ((gauge.height - height) / 2 - margin)
+			x: arcX !== undefined ? arcX : (gauge.alignment === Qt.AlignRight ? (gauge.width - 2*radius) : 0)
+			y: arcY !== undefined ? arcY : ((gauge.height - height) / 2)
 			value: gauge.value
 			strokeColor: Theme.color.ok
 		}
