@@ -42,6 +42,7 @@ Item {
 				strokeWidth: gauges.strokeWidth
 				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
 				animationEnabled: gauges.animationEnabled
+				shineAnimationEnabled: model.tankType === VenusOS.Tank_Type_Battery && Global.battery.mode === VenusOS.Battery_Mode_Charging
 			}
 		}
 	}
