@@ -3,8 +3,6 @@
     "animation.page.fade.duration": 250,
     "animation.progressArc.duration": 600,
     "animation.progressBar.duration": 1000,
-    "animation.briefPage.centerGauge.shine.width": 0.15,
-    "animation.briefPage.centerGauge.shine.highlight": 0.03,
     "animation.briefPage.centerGauge.shine.pauseRatio": 3.0,
     "animation.briefPage.centerGauge.shine.duration": 1300,
     "animation.briefPage.edgeGauge.fade.duration": 200,
@@ -200,6 +198,8 @@
     "geometry.controlCardsPage.spacing": 16,
     "geometry.controlCardsPage.horizontalMargin": "geometry.page.content.horizontalMargin",
 
+    "geometry.briefPage.centerGauge.shine.highlightPosition": 0.8,
+    "geometry.briefPage.centerGauge.shine.widthRatio": 0.3,
     "geometry.briefPage.centerGauge.maximumGaugeCount": 4,
     "geometry.briefPage.centerGauge.icon.height": 22,
     "geometry.briefPage.edgeGauge.horizontalMargin": 24,

@@ -114,6 +114,7 @@ Item {
 
 	// Place this above idleModeMouseArea so that the mouse area can call testCloseOnClick() when
 	// clicking outside of the focused text field, below the VKB layer.
+	// Comment out this InputPanel for WebAssembly builds - QTBUG-104109.
 	InputPanel {
 		id: vkb
 
