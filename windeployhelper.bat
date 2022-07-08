@@ -21,6 +21,7 @@ echo import QtQuick.Window >> %DHQML%
 echo import QtQuick.Controls >> %DHQML%
 echo import QtQuick.Layouts >> %DHQML%
 echo import QtQuick.VirtualKeyboard >> %DHQML%
+echo import Qt5Compat.GraphicalEffects >> %DHQML%
 echo= >> %DHQML%
 echo Item { } >> %DHQML%
 echo= >> %DHQML%
