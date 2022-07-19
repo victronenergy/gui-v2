@@ -8,6 +8,7 @@
 #include "enums.h"
 #include "dbus_service.h"
 #include "notificationsmodel.h"
+#include "clocktime.h"
 #include <math.h>
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
@@ -82,6 +83,11 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "HistoricalNotificationsModel",
 		[](QQmlEngine *, QJSEngine *) -> QObject * {
 		return Victron::VenusOS::HistoricalNotificationsModel::instance();
+	});
+	qmlRegisterSingletonType<Victron::VenusOS::ClockTime>(
+		"Victron.VenusOS", 2, 0, "ClockTime",
+		[](QQmlEngine *, QJSEngine *) -> QObject * {
+		return Victron::VenusOS::ClockTime::instance();
 	});
 
 	/* main content */

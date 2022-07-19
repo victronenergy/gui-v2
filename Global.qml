@@ -18,7 +18,6 @@ QtObject {
 	property var pageManager
 	property var demoManager    // only valid when demo mode is active
 	property var inputPanel
-	property date now: new Date()
 
 	// data sources
 	property var acInputs
@@ -37,13 +36,6 @@ QtObject {
 
 	readonly property bool ready: pageManager != null && dataBackendLoaded
 	property bool dataBackendLoaded
-
-	readonly property Timer _timer: Timer {
-		interval: 60000 // 1 minute
-		running: true
-		repeat: true
-		onTriggered: now = new Date()
-	}
 
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 }

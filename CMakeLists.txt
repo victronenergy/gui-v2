@@ -83,6 +83,8 @@ set(VELIB_SOURCES
 
 set(VENUS_SOURCES
     main.cpp
+    clocktime.h
+    clocktime.cpp
     theme.h
     theme.cpp
     language.h
