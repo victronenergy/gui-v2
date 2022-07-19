@@ -14,6 +14,8 @@ Item {
 	property alias model: arcRepeater.model
 	readonly property real strokeWidth: Theme.geometry.circularMultiGauge.strokeWidth
 	property bool animationEnabled: true
+	property real labelMargin
+	property alias labelOpacity: textCol.opacity
 
 	// Step change in the size of the bounding boxes of successive gauges
 	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry.circularMultiGauge.spacing)
@@ -55,10 +57,9 @@ Item {
 		anchors.bottom: parent.verticalCenter
 		anchors.left: parent.left
 		anchors.right: parent.horizontalCenter
-		anchors.rightMargin: Theme.geometry.circularMultiGauge.labels.rightMargin
+		anchors.rightMargin: Theme.geometry.circularMultiGauge.labels.rightMargin + gauges.labelMargin
 
 		Repeater {
-			width: parent.width
 			model: gauges.model
 			delegate: Row {
 				anchors.verticalCenter: textCol.top

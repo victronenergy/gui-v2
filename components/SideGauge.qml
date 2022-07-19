@@ -15,6 +15,7 @@ ArcGauge {
 	readonly property int arcOffset: -(radius - root.height) - strokeWidth / 2
 	readonly property int maxArcHeight: Math.sin(Utils.degreesToRadians(maxAngle)) * radius
 
+	property alias label: quantityLabel
 	property alias icon: quantityLabel.icon
 	property alias quantityLabel: quantityLabel.quantityLabel
 

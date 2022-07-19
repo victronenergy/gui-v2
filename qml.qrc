@@ -183,6 +183,10 @@
         <file>images/fuel.svg</file>
         <file>images/fueltank.svg</file>
         <file>images/freshWater20x27.svg</file>
+        <file>images/gauge_intro_5_matte_black.gif</file>
+        <file>images/gauge_intro_5_matte_white.gif</file>
+        <file>images/gauge_intro_7_matte_black.gif</file>
+        <file>images/gauge_intro_7_matte_white.gif</file>
         <file>images/icon_alarm_48.svg</file>
         <file>images/icon_alarm_snooze_24</file>
         <file>images/icon_autostart_24.svg</file>
@@ -227,8 +231,10 @@
         <file>images/information.svg</file>
         <file>images/shore.svg</file>
         <file>images/switches.svg</file>
-        <file>images/splash-logo-5inch.svg</file>
-        <file>images/splash-logo-7inch.svg</file>
+        <file>images/splash-logo-icon-5inch.svg</file>
+        <file>images/splash-logo-icon-7inch.svg</file>
+        <file>images/splash-logo-text-5inch.svg</file>
+        <file>images/splash-logo-text-7inch.svg</file>
         <file>images/toast_icon_alarm.svg</file>
         <file>images/toast_icon_checkmark.svg</file>
         <file>images/toast_icon_close.svg</file>

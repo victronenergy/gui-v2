@@ -13,12 +13,13 @@ Row {
 	property int gaugeAlignmentX: Qt.AlignLeft // valid values: Qt.AlignLeft, Qt.AlignRight
 	property alias icon: icon
 	property alias quantityLabel: quantityLabel
+	property real leftMargin
 
 	// Use x/y bindings as the layout sometimes did not update dynamically when multiple anchor
 	// bindings were used instead.
 	x: root.gaugeAlignmentX === Qt.AlignLeft
-	   ? Theme.geometry.loadMiniGauge.label.rightMargin
-	   : parent.width - width - Theme.geometry.loadMiniGauge.label.rightMargin
+	   ? Theme.geometry.loadMiniGauge.label.rightMargin + leftMargin
+	   : parent.width - width - Theme.geometry.loadMiniGauge.label.rightMargin + leftMargin
 	y: gaugeAlignmentY === Qt.AlignVCenter
 	   ? parent.height/2 - height/2
 	   : gaugeAlignmentY === Qt.AlignTop

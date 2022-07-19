@@ -13,7 +13,6 @@ QtObject {
 		signal pagePopRequested()
 		signal layerPushRequested(var obj, var properties)
 		signal layerPopRequested()
-		signal allPagesLoaded()
 	}
 
 	// Ugly hack, but ...

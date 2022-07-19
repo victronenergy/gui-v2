@@ -9,7 +9,7 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	property bool timersActive: true
+	property bool timersActive: !Global.splashScreenVisible
 
 	signal setBatteryRequested(var config)
 	signal setAcInputsRequested(var config)

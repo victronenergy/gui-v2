@@ -11,6 +11,8 @@ Item {
 	id: root
 
 	property int gaugeAlignmentY: Qt.AlignVCenter // valid values: Qt.AlignVCenter, Qt.AlignBottom
+	property alias label: quantityLabel
+
 	readonly property int _gaugeAlignmentX: Qt.AlignLeft
 	readonly property int _maxAngle: gaugeAlignmentY === Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.maxAngle : Theme.geometry.briefPage.smallEdgeGauge.maxAngle
 
