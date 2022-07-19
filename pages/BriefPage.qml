@@ -10,7 +10,11 @@ import "/components/Gauges.js" as Gauges
 Page {
 	id: root
 
-	property real sideOpacity: 1
+	property real _gaugeArcMargin: Theme.animation.briefPage.gaugeArc.initialize.margin
+	property real _gaugeLabelMargin: Theme.animation.briefPage.gaugeLabel.initialize.margin
+	property real _gaugeArcOpacity: 0
+	property real _gaugeLabelOpacity: 0
+	property bool _animationEnabled
 
 	hasSidePanel: true
 	backgroundColor: Theme.color.briefPage.background
@@ -34,7 +38,9 @@ Page {
 
 		CircularMultiGauge {
 			model: gaugeData.model
-			animationEnabled: root.isCurrentPage
+			animationEnabled: root._animationEnabled
+			labelOpacity: root._gaugeLabelOpacity
+			labelMargin: root._gaugeLabelMargin
 		}
 	}
 
@@ -49,7 +55,7 @@ Page {
 			value: Math.round(Global.battery.stateOfCharge || 0)
 			status: Gauges.getValueStatus(value, properties.valueType)
 			caption: Global.battery.timeToGo > 0 ? Utils.formatAsHHMM(Global.battery.timeToGo, true) : ""
-			animationEnabled: root.isCurrentPage
+			animationEnabled: root._animationEnabled
 			shineAnimationEnabled: Global.battery.mode === VenusOS.Battery_Mode_Charging
 		}
 	}
@@ -67,7 +73,6 @@ Page {
 		// Show gauge even if there are no active AC inputs, so that the gauge visibility doesn't
 		// jump on/off when inputs are connected/disconnected
 		active: Global.acInputs.model.count > 0 || Global.dcInputs.model.count > 0
-		opacity: root.sideOpacity
 
 		sourceComponent: SideGauge {
 			gaugeAlignmentX: Qt.AlignLeft
@@ -75,7 +80,13 @@ Page {
 			arcX: leftLower.active ? undefined : 10
 			direction: PathArc.Clockwise
 			startAngle: leftLower.active ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)
-			animationEnabled: root.isCurrentPage
+			animationEnabled: root._animationEnabled
+
+			x: root._gaugeArcMargin
+			opacity: root._gaugeArcOpacity
+			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
+			label.opacity: root._gaugeLabelOpacity
+
 			icon.source: {
 				const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
 						+ Global.dcInputs.model.count
@@ -119,10 +130,14 @@ Page {
 			right: mainGauge.left
 		}
 		active: Global.solarChargers.model.count > 0
-		opacity: root.sideOpacity
 
 		sourceComponent: SolarYieldGauge {
 			gaugeAlignmentY: Qt.AlignBottom
+
+			x: root._gaugeArcMargin
+			opacity: root._gaugeArcOpacity
+			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
+			label.opacity: root._gaugeLabelOpacity
 		}
 	}
 
@@ -136,14 +151,18 @@ Page {
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: mainGauge.right
 		}
-		opacity: root.sideOpacity
 		active: !isNaN(Global.system.loads.acPower) || rightLower.active
 		sourceComponent: SideGauge {
 			gaugeAlignmentY: rightLower.active ? Qt.AlignTop : Qt.AlignVCenter
-			animationEnabled: root.isCurrentPage
+			animationEnabled: root._animationEnabled
 			icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 			value: (Global.system.loads.acPower || 0) / Utils.maximumValue("system.loads.acPower") * 100
 			quantityLabel.dataObject: Global.system.ac.consumption
+
+			x: -root._gaugeArcMargin
+			opacity: root._gaugeArcOpacity
+			label.leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
+			label.opacity: root._gaugeLabelOpacity
 		}
 	}
 
@@ -157,14 +176,18 @@ Page {
 			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			left: mainGauge.right
 		}
-		opacity: root.sideOpacity
 		active: !isNaN(Global.system.loads.dcPower)
 		sourceComponent: SideGauge {
 			gaugeAlignmentY: Qt.AlignBottom
-			animationEnabled: root.isCurrentPage
+			animationEnabled: root._animationEnabled
 			icon.source: "qrc:/images/dcloads.svg"
 			value: (Global.system.loads.dcPower || 0) / Utils.maximumValue("system.loads.dcPower") * 100
 			quantityLabel.dataObject: Global.system.dc
+
+			x: -root._gaugeArcMargin
+			opacity: root._gaugeArcOpacity
+			label.leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
+			label.opacity: root._gaugeLabelOpacity
 		}
 	}
 
@@ -237,28 +260,67 @@ Page {
 		}
 	}
 
-	state: Global.pageManager.sidePanelActive ? 'panelOpen' : ''
-	states: State {
-		name: 'panelOpen'
-		PropertyChanges {
-			target: sidePanel
-			x: root.width - sidePanel.width - Theme.geometry.page.content.horizontalMargin
-			opacity: 1
+	states: [
+		State {
+			name: "initialized"
+			when: !Global.splashScreenVisible && !Global.pageManager.sidePanelActive
+			PropertyChanges {
+				target: root
+				_gaugeArcMargin: 0
+				_gaugeLabelMargin: 0
+				_gaugeArcOpacity: 1
+				_gaugeLabelOpacity: 1
+				_animationEnabled: root.isCurrentPage
+			}
+		},
+		State {
+			name: "panelOpen"
+			extend: "initialized"
+			when: Global.pageManager.sidePanelActive
+			PropertyChanges {
+				target: sidePanel
+				x: root.width - sidePanel.width - Theme.geometry.page.content.horizontalMargin
+				opacity: 1
+			}
+			PropertyChanges {
+				target: root
+				_gaugeArcOpacity: 0
+				_gaugeLabelOpacity: 0
+			}
 		}
-		PropertyChanges {
-			target: root
-			sideOpacity: 0
-		}
-	}
+	]
 
 	transitions: [
 		Transition {
-			to: "panelOpen"
 			from: ""
+			to: "initialized"
+			SequentialAnimation {
+				ParallelAnimation {
+					NumberAnimation {
+						target: root
+						properties: "_gaugeArcOpacity,_gaugeArcMargin"
+						duration: Theme.animation.briefPage.gaugeArc.initialize.duration
+					}
+					SequentialAnimation {
+						PauseAnimation {
+							duration: Theme.animation.briefPage.gaugeLabel.initialize.delayedStart.duration
+						}
+						NumberAnimation {
+							target: root
+							properties: "_gaugeLabelOpacity,_gaugeLabelMargin"
+							duration: Theme.animation.briefPage.gaugeLabel.initialize.duration
+						}
+					}
+				}
+			}
+		},
+		Transition {
+			to: "panelOpen"
+			from: "initialized"
 			SequentialAnimation {
 				NumberAnimation {
 					target: root
-					property: 'sideOpacity'
+					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
 					duration: Theme.animation.briefPage.edgeGauge.fade.duration
 				}
 				NumberAnimation {
@@ -270,7 +332,7 @@ Page {
 			}
 		},
 		Transition {
-			to: ""
+			to: "initialized"
 			from: "panelOpen"
 			SequentialAnimation {
 				NumberAnimation {
@@ -281,7 +343,7 @@ Page {
 				}
 				NumberAnimation {
 					target: root
-					property: 'sideOpacity'
+					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
 					duration: Theme.animation.briefPage.edgeGauge.fade.duration
 				}
 			}

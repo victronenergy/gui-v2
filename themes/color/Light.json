@@ -32,6 +32,9 @@
     "color.button.flat.go.background": "color.dimGo",
     "color.button.flat.stop.background": "color.dimCritical",
 
+    "color.progressBar.indicator": "color.ok",
+    "color.progressBar.background": "color.darkOk",
+
     "color.radioButton.indicator.on": "color.ok",
     "color.radioButton.indicator.off": "color.font.disabled",
 
@@ -49,6 +52,8 @@
 
     "color.spinbox.indicator.background": "color.dimOk",
     "color.spinbox.indicator.pressed.background": "color.darkOk",
+
+    "color.splash.logo": "color.ok",
 
     "color.switch.groove.off": "transparent",
     "color.switch.groove.on": "color.ok",

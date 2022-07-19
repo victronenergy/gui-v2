@@ -12,12 +12,6 @@ Page {
 
 	property int _loadedPages: 0
 
-	on_LoadedPagesChanged: {
-		if (_loadedPages === navBar.model.count) {
-			Global.pageManager.emitter.allPagesLoaded()
-		}
-	}
-
 	title: navStack.currentItem ? navStack.currentItem.title : ""
 	navigationButton: navStack.depth > 1
 			? VenusOS.StatusBar_NavigationButtonStyle_Back
@@ -39,6 +33,9 @@ Page {
 					navStack.push(item)
 				}
 				_loadedPages++
+				if (_loadedPages === navBar.model.count) {
+					Global.allPagesLoaded = true
+				}
 			}
 		}
 	}
@@ -69,6 +66,8 @@ Page {
 
 		// Fade new navigation pages in
 		replaceEnter: Transition {
+			enabled: Global.allPagesLoaded
+
 			OpacityAnimator {
 				from: 0.0
 				to: 1.0
@@ -77,6 +76,8 @@ Page {
 			}
 		}
 		replaceExit: Transition {
+			enabled: Global.allPagesLoaded
+
 			OpacityAnimator {
 				from: 1.0
 				to: 0.0
@@ -90,7 +91,8 @@ Page {
 	NavBar {
 		id: navBar
 
-		y: root.height - height // cannot use an anchor, else show()/hide() don't work.
+		opacity: 0
+		y: root.height
 
 		model: ListModel {
 			ListElement {
@@ -147,17 +149,26 @@ Page {
 			}
 		}
 
-		property bool hidden: navBar.y === root.height
+		SequentialAnimation {
+			running: !Global.splashScreenVisible
 
-		function show() {
-			if (hidden) {
-				animateNavBarIn.start()
+			PauseAnimation {
+				duration: Theme.animation.navBar.initialize.delayedStart.duration
 			}
-		}
-
-		function hide() {
-			if (!hidden) {
-				animateNavBarOut.start()
+			ParallelAnimation {
+				NumberAnimation {
+					target: navBar
+					property: "y"
+					from: root.height - navBar.height + Theme.animation.navBar.initialize.margin
+					to: root.height - navBar.height
+					duration: Theme.animation.navBar.initialize.fade.duration
+				}
+				NumberAnimation {
+					target: navBar
+					property: "opacity"
+					to: 1
+					duration: Theme.animation.navBar.initialize.fade.duration
+				}
 			}
 		}
 

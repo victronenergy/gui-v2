@@ -21,6 +21,21 @@ Item {
 
 	width: parent.width
 	height: Theme.geometry.statusBar.height
+	opacity: 0
+
+	SequentialAnimation {
+		running: !Global.splashScreenVisible
+
+		PauseAnimation {
+			duration: Theme.animation.statusBar.initialize.delayedStart.duration
+		}
+		NumberAnimation {
+			target: root
+			property: "opacity"
+			to: 1
+			duration: Theme.animation.statusBar.initialize.fade.duration
+		}
+	}
 
 	Button {
 		id: navigationButton

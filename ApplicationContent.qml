@@ -56,38 +56,15 @@ Item {
 		Component.onCompleted: Global.pageManager = pageManager
 	}
 
-	SplashView {
-		id: splashView
-		anchors.fill: parent
-		enabled: true
-		opacity: enabled ? 1 : 0
-
-		Behavior on opacity {
-			NumberAnimation {
-				duration: Theme.animation.page.fade.duration
-				easing.type: Easing.InOutQuad
-			}
-		}
-
-		onHideSplash: {
-			splashView.enabled = false
-			mainView.enabled = true
-		}
-	}
-
 	MainView {
 		id: mainView
 		anchors.fill: parent
-		enabled: false
-		opacity: enabled ? 1 : 0
 		pageManager: pageManager
+	}
 
-		Behavior on opacity {
-			NumberAnimation {
-				duration: Theme.animation.page.fade.duration
-				easing.type: Easing.InOutQuad
-			}
-		}
+	SplashView {
+		id: splashView
+		anchors.fill: parent
 	}
 
 	MouseArea {

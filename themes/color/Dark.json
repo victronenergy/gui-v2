@@ -53,6 +53,8 @@
     "color.spinbox.indicator.background": "color.dimOk",
     "color.spinbox.indicator.pressed.background": "color.darkOk",
 
+    "color.splash.logo": "#FFFFFF",
+
     "color.switch.groove.off": "transparent",
     "color.switch.groove.on": "color.ok",
     "color.switch.groove.border.off": "color.font.disabled",
