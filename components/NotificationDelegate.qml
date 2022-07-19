@@ -13,7 +13,7 @@ Rectangle {
 	property string description
 
 	function _formatTimestamp(date) {
-		let ms = Math.floor(Global.now - date)
+		let ms = Math.floor(ClockTime.currentDateTime - date)
 		let minutes = Math.floor(ms / 60000)
 		if (minutes < 1) {
 			//% "now"

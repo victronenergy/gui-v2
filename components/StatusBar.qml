@@ -55,23 +55,9 @@ Item {
 		id: clockLabel
 		anchors.centerIn: parent
 		font.pixelSize: 22
-		text: root.title.length > 0 ? root.title : clockTimer.timeString
-
-		Timer {
-			id: clockTimer
-			interval: 1000 // 1 second
-			running: root.opacity > 0.0 && root.title.length === 0
-			property string timeString: "00:00"
-			onTriggered: {
-				var currDate = new Date()
-				var hours = currDate.getHours()
-				var mins = currDate.getMinutes()
-				if (hours < 10) hours = "0" + hours
-				if (mins < 10)   mins = "0" + mins
-				timeString = hours + ":" + mins
-			}
-		}
+		text: root.title.length > 0 ? root.title : ClockTime.currentTimeText
 	}
+
 	Button {
 		anchors {
 			top: parent.top
