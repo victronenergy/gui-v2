@@ -293,7 +293,7 @@ void VeQItemDbusVirtualObject::onTextChanged(VeQItem *item)
 
 void VeQItemDbusVirtualObject::normalizeVariant(QVariant &v)
 {
-	if (v.userType() == QVariant::Map) {
+	if (v.userType() == QMetaType::QVariantMap) {
 		QVariantMap m = v.toMap();
 		normalizeMap(m);
 	} else if (v.userType() == qMetaTypeId<QDBusVariant>()) {
