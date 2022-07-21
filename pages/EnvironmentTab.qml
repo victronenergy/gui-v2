@@ -80,7 +80,43 @@ Flickable {
 						? Units.celsiusToFahrenheit(model.input.temperature_celsius)
 						: model.input.temperature_celsius
 				humidity: model.input.humidity
+				temperatureGaugeGradient: temperatureGradient
+				humidityGaugeGradient: humidityGradient
 			}
+		}
+	}
+
+	Gradient {
+		id: temperatureGradient
+
+		GradientStop {
+			position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position1
+			color: Theme.color.levelsPage.environment.temperatureGauge.gradient.color1
+		}
+		GradientStop {
+			position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position2
+			color: Theme.color.levelsPage.environment.temperatureGauge.gradient.color2
+		}
+		GradientStop {
+			position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position3
+			color: Theme.color.levelsPage.environment.temperatureGauge.gradient.color3
+		}
+	}
+
+	Gradient {
+		id: humidityGradient
+
+		GradientStop {
+			position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position1
+			color: Theme.color.levelsPage.environment.humidityGauge.gradient.color1
+		}
+		GradientStop {
+			position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position2
+			color: Theme.color.levelsPage.environment.humidityGauge.gradient.color2
+		}
+		GradientStop {
+			position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position3
+			color: Theme.color.levelsPage.environment.humidityGauge.gradient.color3
 		}
 	}
 }
