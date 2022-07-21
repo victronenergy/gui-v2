@@ -1,5 +1,5 @@
-#include <dbus_service.h>
-#include <dbus_services.h>
+#include <gui-v1/dbus_service.h>
+#include <gui-v1/dbus_services.h>
 
 void DBusServices::initialScan()
 {

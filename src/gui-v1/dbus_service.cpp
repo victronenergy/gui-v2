@@ -1,8 +1,8 @@
 #include <qstringlist.h>
 #include <QEvent>
 
-#include <dbus_service.h>
-#include <dbus_services.h>
+#include <gui-v1/dbus_service.h>
+#include <gui-v1/dbus_services.h>
 
 DBusService::DBusService(VeQItem *serviceItem, DbusServiceType serviceType, QObject *parent) :
 	QObject(parent),

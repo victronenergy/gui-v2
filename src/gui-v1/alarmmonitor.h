@@ -4,8 +4,8 @@
 #include <QObject>
 #include <velib/qt/ve_qitem.hpp>
 
-#include "notificationsmodel.h"
-#include <dbus_service.h>
+#include <gui-v1/dbus_service.h>
+#include <src/notificationsmodel.h>
 
 class DeviceAlarms;
 

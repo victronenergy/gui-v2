@@ -7,8 +7,8 @@
 #include <velib/qt/ve_qitem.hpp>
 
 #include "alarmmonitor.h"
-#include <dbus_services.h>
-#include <dbus_service.h>
+#include <gui-v1/dbus_services.h>
+#include <gui-v1/dbus_service.h>
 
 namespace Victron {
 namespace VenusOS {

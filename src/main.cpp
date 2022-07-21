@@ -2,21 +2,21 @@
 ** Copyright (C) 2021 Victron Energy B.V.
 */
 
-#include "language.h"
-#include "logging.h"
-#include "theme.h"
-#include "enums.h"
-#include "dbus_service.h"
-#include "notificationsmodel.h"
-#include "clocktime.h"
+#include "gui-v1/dbus_service.h"
+#include "src/language.h"
+#include "src/logging.h"
+#include "src/theme.h"
+#include "src/enums.h"
+#include "src/notificationsmodel.h"
+#include "src/clocktime.h"
 #include <math.h>
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
-#include <velib/qt/v_busitems.h>
-#include <velib/qt/ve_qitems_dbus.hpp>
-#include <velib/qt/ve_qitem.hpp>
-#include "dbus_services.h"
-#include "alarmbusitem.h"
+#include "velib/qt/v_busitems.h"
+#include "velib/qt/ve_qitems_dbus.hpp"
+#include "velib/qt/ve_qitem.hpp"
+#include "gui-v1/dbus_services.h"
+#include "gui-v1/alarmbusitem.h"
 #endif
 
 #include <QGuiApplication>
