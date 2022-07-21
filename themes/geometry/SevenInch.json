@@ -17,6 +17,7 @@
     "animation.levelsPage.tanks.modelChangeResize.duration": 500,
     "animation.notificationsPage.delegate.displaced.duration": 400,
     "animation.notificationsPage.delegate.opacity.duration": 400,
+    "animation.inputPanel.slide.duration": 250,
 
     "geometry.screen.width": 1024,
     "geometry.screen.height": 600,
