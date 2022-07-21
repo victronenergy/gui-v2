@@ -1,4 +1,4 @@
-#include <wakespeed_error.hpp>
+#include <gui-v1/wakespeed_error.hpp>
 
 /*
  * From the "Wakespeed Communications and Configurations Guide":

@@ -1,7 +1,7 @@
 #include "alarmmonitor.h"
 #include "alarmbusitem.h"
 #include "wakespeed_error.hpp"
-#include "notificationsmodel.h"
+
 #include <velib/qt/charger_error.hpp>
 #include <velib/qt/bms_error.hpp>
 #include <velib/qt/vebus_error.hpp>
