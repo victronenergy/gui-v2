@@ -25,36 +25,31 @@ CT.Switch {
 	bottomPadding: 0
 
 	background: Item {
-		implicitHeight: root.indicator.implicitHeight
-		implicitWidth: 2*root.indicator.implicitWidth
+		implicitWidth: Theme.geometry.switch.container.width
+		implicitHeight: Theme.geometry.switch.container.height
+		anchors.verticalCenter: parent.verticalCenter
 
 		Rectangle {
-			anchors {
-				fill: parent
-				margins: Theme.geometry.switch.groove.margins
-			}
+			anchors.centerIn: parent
+			width: Theme.geometry.switch.groove.width
+			height: Theme.geometry.switch.groove.height
+			radius: Theme.geometry.switch.indicator.width
 
-			radius: root.indicator.radius
 			color: root.enabled
 				   ? (root.checked ? Theme.color.switch.groove.on : Theme.color.switch.groove.off)
-				   : Theme.color.font.disabled
+				   : Theme.color.switch.groove.disabled
 			border.color: root.checked ? Theme.color.switch.groove.border.on
 				: Theme.color.switch.groove.border.off
 			border.width: Theme.geometry.switch.groove.border.width
 		}
 	}
 
-	indicator: Rectangle {
-		implicitWidth: Theme.geometry.switch.indicator.width
-		implicitHeight: implicitWidth
-		radius: implicitWidth/2
-		height: parent.height
-		width: height
+	indicator: Image {
 		x: root.checked ? parent.width - width : 0
-		y: parent.height/2 - height/2
-		color: root.enabled
-			   ? Theme.color.switch.indicator.enabled
-			   : Theme.color.switch.indicator.disabled
+		y: parent.height/2 - height/2 + Theme.geometry.switch.indicator.shadowOffset
+		width: Theme.geometry.switch.indicator.width
+		height: Theme.geometry.switch.indicator.width
+		source: "qrc:/images/switch_indicator.png"
 
 		Behavior on x {
 			NumberAnimation {

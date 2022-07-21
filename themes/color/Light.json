@@ -55,12 +55,11 @@
 
     "color.splash.logo": "color.ok",
 
+    "color.switch.groove.disabled": "#969591",
     "color.switch.groove.off": "transparent",
     "color.switch.groove.on": "color.ok",
-    "color.switch.groove.border.off": "color.font.disabled",
+    "color.switch.groove.border.off": "#969591",
     "color.switch.groove.border.on": "transparent",
-    "color.switch.indicator.enabled": "color.font.primary",
-    "color.switch.indicator.disabled": "color.font.secondary",
 
     "color.navigationBar.button.on": "color.font.primary",
     "color.navigationBar.button.off": "color.font.secondary",
