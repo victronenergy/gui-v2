@@ -29,7 +29,7 @@ Rectangle {
 		spacing: Theme.geometry.controlCard.title.spacing
 		display: C.AbstractButton.TextBesideIcon
 		icon.height: Theme.geometry.controlCard.title.icon.height
-		icon.color: title.color
+		icon.color: Theme.color.font.primary
 
 		font.family: VenusFont.normal.name
 		font.pixelSize: Theme.font.size.s
