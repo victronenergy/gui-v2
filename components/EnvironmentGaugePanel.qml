@@ -12,6 +12,9 @@ Rectangle {
 	property int verticalSize: VenusOS.EnvironmentGaugePanel_Size_Expanded
 	property bool animationEnabled: true
 
+	property var temperatureGaugeGradient
+	property var humidityGaugeGradient
+
 	readonly property int compactWidth: _twoGauges
 		? Theme.geometry.levelsPage.environment.gaugePanel.twoGauge.compact.width
 		: Theme.geometry.levelsPage.environment.gaugePanel.oneGauge.compact.width
@@ -90,21 +93,7 @@ Rectangle {
 		maximumValue: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
 				? Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue
 				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
-
-		gradient: Gradient {
-			GradientStop {
-				position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position1
-				color: Theme.color.levelsPage.environment.temperatureGauge.gradient.color1
-			}
-			GradientStop {
-				position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position2
-				color: Theme.color.levelsPage.environment.temperatureGauge.gradient.color2
-			}
-			GradientStop {
-				position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position3
-				color: Theme.color.levelsPage.environment.temperatureGauge.gradient.color3
-			}
-		}
+		gradient: root.temperatureGaugeGradient
 	}
 
 	Loader {
@@ -132,21 +121,7 @@ Rectangle {
 			reduceFontSize: root._twoGauges && root.horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Compact
 			minimumValue: Theme.geometry.levelsPage.environment.humidityGauge.minimumValue
 			maximumValue: Theme.geometry.levelsPage.environment.humidityGauge.maximumValue
-
-			gradient: Gradient {
-				GradientStop {
-					position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position1
-					color: Theme.color.levelsPage.environment.humidityGauge.gradient.color1
-				}
-				GradientStop {
-					position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position2
-					color: Theme.color.levelsPage.environment.humidityGauge.gradient.color2
-				}
-				GradientStop {
-					position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position3
-					color: Theme.color.levelsPage.environment.humidityGauge.gradient.color3
-				}
-			}
+			gradient: root.humidityGaugeGradient
 		}
 	}
 }
