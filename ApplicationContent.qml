@@ -14,6 +14,8 @@ Item {
 	property alias dialogManager: dialogManager
 	property alias mainView: mainView
 
+	property var _inputComponent
+
 	Data.DataManager {
 		id: dataManager
 	}
@@ -112,22 +114,18 @@ Item {
 		id: dialogManager
 	}
 
-	// Place this above idleModeMouseArea so that the mouse area can call testCloseOnClick() when
-	// clicking outside of the focused text field, below the VKB layer.
-	// Comment out this InputPanel for WebAssembly builds - QTBUG-104109.
-	InputPanel {
-		id: vkb
-
-		mainViewItem: mainView
-		y: Qt.inputMethod.visible ? root.height - vkb.height : root.height
-
-		Behavior on y {
-			NumberAnimation {
-				duration: Theme.animation.inputPanel.slide.duration
-				easing.type: Easing.InOutQuad
+	// Create the InputPanel dynamically in case QtQuick.VirtualKeyboard is not available (e.g. on
+	// Qt for WebAssembly due to QTBUG-104109).
+	// Note the VKB layer is the top-most layer, to allow the idleModeMouseArea beneath to call
+	// testCloseOnClick() when clicking outside of the focused text field, to auto-close the VKB.
+	Component.onCompleted: {
+		_inputComponent = Qt.createComponent(Qt.resolvedUrl("qrc:/components/InputPanel.qml"), Component.Asynchronous)
+		_inputComponent.statusChanged.connect(function() {
+			if (_inputComponent.status === Component.Ready) {
+				Global.inputPanel = _inputComponent.createObject(root, { mainViewItem: mainView })
+			} else if (_inputComponent.status === Component.Error) {
+				console.warn("Cannot load InputPanel:", _inputComponent.errorString())
 			}
-		}
-
-		Component.onCompleted: Global.inputPanel = vkb
+		})
 	}
 }
