@@ -130,7 +130,7 @@ add_custom_command(
     BYPRODUCTS ${TRANSLATIONS_TS_FILES}
     COMMENT "Manually updating translations files"
     COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lupdate
-        ARGS "${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc" ${SOURCES}
+        ARGS "${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc" src
 	     -ts ${TRANSLATIONS_TS_FILES}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 # add a custom target to generate the .qm files via qt6_add_lrelease().
