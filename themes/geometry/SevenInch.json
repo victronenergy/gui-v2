@@ -83,7 +83,6 @@
 
     "geometry.slider.groove.height": 8,
     "geometry.slider.groove.radius": 8,
-    "geometry.slider.handle.width": 24,
 
     "geometry.spinBox.indicator.width": 64,
     "geometry.spinBox.indicator.height": 72,
@@ -95,7 +94,7 @@
     "geometry.switch.groove.width": 44,
     "geometry.switch.groove.height": 20,
     "geometry.switch.groove.border.width": 2,
-    "geometry.switch.indicator.width": 26,
+    "geometry.switch.indicator.width": 28,
     "geometry.switch.indicator.shadowOffset": 2,
 
     "geometry.separatorBar.width": 1,

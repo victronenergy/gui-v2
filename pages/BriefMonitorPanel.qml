@@ -142,7 +142,6 @@ Column {
 		}
 
 		Slider {
-			grooveVerticalPadding: 0
 			enabled: false // not interactive
 			width: parent.width
 			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
@@ -201,7 +200,6 @@ Column {
 		}
 
 		Slider {
-			grooveVerticalPadding: 0
 			enabled: false // not interactive
 			width: parent.width
 			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
