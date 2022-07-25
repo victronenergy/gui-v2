@@ -83,11 +83,9 @@ Rectangle {
 		anchors {
 			top: img.bottom
 			topMargin: Theme.geometry.levelsPage.gauge.label.topMargin
-			left: parent.left
-			leftMargin: Theme.geometry.levelsPage.gauge.label.horizontalMargin
-			right: parent.right
-			rightMargin: Theme.geometry.levelsPage.gauge.label.horizontalMargin
+			horizontalCenter: parent.horizontalCenter
 		}
+		width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
 		font.pixelSize: Theme.font.size.s
 		horizontalAlignment: Text.AlignHCenter
 		elide: Text.ElideRight
@@ -143,11 +141,9 @@ Rectangle {
 		anchors {
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry.levelsPage.gauge.valueText.bottomMargin
-			left: parent.left
-			leftMargin: Theme.geometry.levelsPage.gauge.border.width
-			right: parent.right
-			rightMargin: Theme.geometry.levelsPage.gauge.border.width
+			horizontalCenter: parent.horizontalCenter
 		}
+		width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
 		horizontalAlignment: Text.AlignHCenter
 		fontSizeMode: Text.HorizontalFit
 		font.pixelSize: Theme.font.size.xs

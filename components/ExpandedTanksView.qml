@@ -73,11 +73,9 @@ Rectangle {
 					anchors {
 						top: img.bottom
 						topMargin: Theme.geometry.levelsPage.gauge.label.topMargin
-						left: parent.left
-						leftMargin: Theme.geometry.levelsPage.gauge.label.horizontalMargin
-						right: parent.right
-						rightMargin: Theme.geometry.levelsPage.gauge.label.horizontalMargin
+						horizontalCenter: parent.horizontalCenter
 					}
+					width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
 					font.pixelSize: Theme.font.size.s
 					horizontalAlignment: Text.AlignHCenter
 					elide: Text.ElideRight
@@ -116,9 +114,12 @@ Rectangle {
 						bottomMargin: Theme.geometry.levelsPage.gauge.valueText.bottomMargin
 						horizontalCenter: parent.horizontalCenter
 					}
+					width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
+					horizontalAlignment: Text.AlignHCenter
+					fontSizeMode: Text.HorizontalFit
 					font.pixelSize: Theme.font.size.xs
 					color: Theme.color.font.secondary
-					text: Units.getCapacityDisplayText(root.tankModel.unit,
+					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
 							model.tank.capacity,
 							model.tank.remaining,
 							Theme.geometry.quantityLabel.valueLength)
