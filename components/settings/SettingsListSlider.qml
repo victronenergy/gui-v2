@@ -24,6 +24,7 @@ SettingsListItem {
 	content.spacing: Theme.geometry.settingsListItem.slider.spacing
 	content.children: [
 		Button {
+			anchors.verticalCenter: slider.verticalCenter
 			icon.width: Theme.geometry.settingsListItem.slider.button.size
 			icon.height: Theme.geometry.settingsListItem.slider.button.size
 			icon.source: "/images/icon_minus.svg"
@@ -57,6 +58,7 @@ SettingsListItem {
 		},
 
 		Button {
+			anchors.verticalCenter: slider.verticalCenter
 			icon.width: Theme.geometry.settingsListItem.slider.button.size
 			icon.height: Theme.geometry.settingsListItem.slider.button.size
 			icon.source: "/images/icon_plus.svg"
