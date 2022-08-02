@@ -19,18 +19,14 @@ Row {
 	Repeater {
 		id: buttonRepeater
 
-		height: parent.height
 		property int currentIndex: 0
 
 		delegate: NavButton {
-			height: parent.height
+			height: root.height
 			width: Theme.geometry.navigationBar.button.width
 			text: qsTrId(model.text)
 			icon.source: model.icon
-			icon.width: model.iconWidth
-			icon.height: model.iconHeight
 			checked: buttonRepeater.currentIndex === model.index
-			color: checked ? Theme.color.ok : Theme.color.font.tertiary
 
 			onClicked: {
 				buttonRepeater.currentIndex = model.index
