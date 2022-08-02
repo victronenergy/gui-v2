@@ -219,6 +219,7 @@
     "geometry.briefPage.centerGauge.shine.widthRatio": 0.3,
     "geometry.briefPage.centerGauge.maximumGaugeCount": 4,
     "geometry.briefPage.centerGauge.icon.height": 22,
+    "geometry.briefPage.centerGauge.centerTextSpacing": 2,
     "geometry.briefPage.edgeGauge.horizontalMargin": 24,
     "geometry.briefPage.edgeGauge.topMargin": 24,
     "geometry.briefPage.edgeGauge.radius": 360,

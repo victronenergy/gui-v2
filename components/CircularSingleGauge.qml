@@ -43,6 +43,7 @@ Item {
 
 	Column {
 		anchors.centerIn: parent
+		spacing: Theme.geometry.briefPage.centerGauge.centerTextSpacing
 
 		Row {
 			anchors.horizontalCenter: parent.horizontalCenter
@@ -64,20 +65,11 @@ Item {
 			}
 		}
 
-		Row {
+		QuantityLabel {
 			anchors.horizontalCenter: parent.horizontalCenter
-			spacing: 6
-
-			Label {
-				font.pixelSize: Theme.font.size.xxxl
-				color: Theme.color.font.primary
-				text: gauges.value
-			}
-			Label {
-				font.pixelSize: Theme.font.size.xxxl
-				color: Theme.color.font.secondary
-				text: '%'
-			}
+			font.pixelSize: Theme.font.size.xxxl
+			unit: VenusOS.Units_Percentage
+			value: gauges.value
 		}
 
 		Label {
