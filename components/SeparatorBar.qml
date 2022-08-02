@@ -8,5 +8,5 @@ import Victron.VenusOS
 Rectangle {
 	implicitWidth: Theme.geometry.separatorBar.width
 	implicitHeight: Theme.geometry.separatorBar.width
-	color: Theme.color.background.disabled
+	color: Theme.color.card.separator
 }

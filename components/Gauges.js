@@ -41,7 +41,7 @@ function tankProperties(type) {
 		return {
 			icon: "/images/fuel.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
-			borderColor: V.Theme.color.levelsPage.fuel.borderColor,
+			borderColor: V.Theme.color.fuel,
 			//% "Fuel"
 			name: qsTrId("gauges_fuel")
 		}
@@ -49,7 +49,7 @@ function tankProperties(type) {
 		return {
 			icon: "/images/freshWater20x27.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
-			borderColor: V.Theme.color.levelsPage.freshWater.borderColor,
+			borderColor: V.Theme.color.freshWater,
 			//% "Fresh water"
 			name: qsTrId("gauges_fresh_water")
 		}
@@ -57,7 +57,7 @@ function tankProperties(type) {
 		return {
 			icon: "/images/wasteWater.svg",
 			valueType: V.VenusOS.Gauges_ValueType_RisingPercentage,
-			borderColor: V.Theme.color.levelsPage.wasteWater.borderColor,
+			borderColor: V.Theme.color.wasteWater,
 			//% "Waste water"
 			name: qsTrId("gauges_waste_water")
 		}
@@ -65,7 +65,7 @@ function tankProperties(type) {
 		return {
 			icon: "/images/liveWell.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
-			borderColor: V.Theme.color.levelsPage.liveWell.borderColor,
+			borderColor: V.Theme.color.liveWell,
 			//% "Live well"
 			name: qsTrId("gauges_live_well")
 		}
@@ -73,7 +73,7 @@ function tankProperties(type) {
 		return {
 			icon: "/images/oil.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
-			borderColor: V.Theme.color.levelsPage.oil.borderColor,
+			borderColor: V.Theme.color.oil,
 			//% "Oil"
 			name: qsTrId("gauges_oil")
 		}
@@ -81,7 +81,7 @@ function tankProperties(type) {
 		return {
 			icon: "/images/blackWater.svg",
 			valueType: V.VenusOS.Gauges_ValueType_RisingPercentage,
-			borderColor: V.Theme.color.levelsPage.blackWater.borderColor,
+			borderColor: V.Theme.color.blackWater,
 			//% "Black water"
 			name: qsTrId("gauges_black_water")
 		}
@@ -89,7 +89,7 @@ function tankProperties(type) {
 		return {
 			icon: "/images/tank.svg", // same as "Fuel"
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
-			borderColor: V.Theme.color.levelsPage.gasoline.borderColor,
+			borderColor: V.Theme.color.gasoline,
 			//% "Gasoline"
 			name: qsTrId("gauges_gasoline")
 		}

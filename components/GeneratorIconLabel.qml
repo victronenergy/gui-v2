@@ -42,6 +42,6 @@ Item {
 		width: Theme.geometry.generatorIconLabel.label.width
 		text: Utils.formatAsHHMMSS(root.runtime)
 		font.pixelSize: Theme.font.size.m
-		color: root.runtime > 0 ? Theme.color.font.primary : Theme.color.font.tertiary
+		color: root.runtime > 0 ? Theme.color.font.primary : Theme.color.font.secondary
 	}
 }

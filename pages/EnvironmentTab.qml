@@ -91,15 +91,15 @@ Flickable {
 
 		GradientStop {
 			position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position1
-			color: Theme.color.levelsPage.environment.temperatureGauge.gradient.color1
+			color: Theme.color.temperature1
 		}
 		GradientStop {
 			position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position2
-			color: Theme.color.levelsPage.environment.temperatureGauge.gradient.color2
+			color: Theme.color.temperature2
 		}
 		GradientStop {
 			position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position3
-			color: Theme.color.levelsPage.environment.temperatureGauge.gradient.color3
+			color: Theme.color.temperature3
 		}
 	}
 
@@ -108,15 +108,15 @@ Flickable {
 
 		GradientStop {
 			position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position1
-			color: Theme.color.levelsPage.environment.humidityGauge.gradient.color1
+			color: Theme.color.humidity1
 		}
 		GradientStop {
 			position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position2
-			color: Theme.color.levelsPage.environment.humidityGauge.gradient.color2
+			color: Theme.color.humidity2
 		}
 		GradientStop {
 			position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position3
-			color: Theme.color.levelsPage.environment.humidityGauge.gradient.color3
+			color: Theme.color.humidity3
 		}
 	}
 }
