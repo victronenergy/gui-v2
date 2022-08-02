@@ -154,6 +154,11 @@ Item {
 						   : "Gallons (Imperial)")
 			event.accepted = true
 			break
+		case Qt.Key_Space:
+			Global.allPagesLoaded = true
+			Global.splashScreenVisible = false
+			event.accepted = true
+			break
 		default:
 			break
 		}

@@ -10,6 +10,7 @@ Rectangle {
 	id: root
 
 	color: Theme.color.background.primary
+	visible: Global.splashScreenVisible
 
 	OpacityAnimator on opacity {
 		id: fadeOutAnim
@@ -19,7 +20,6 @@ Rectangle {
 		duration: Theme.animation.splash.fade.duration
 		onRunningChanged: {
 			if (!running) {
-				root.visible = false
 				Global.splashScreenVisible = false
 			}
 		}
