@@ -5,6 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
+import "/components/Gauges.js" as Gauges
 
 VerticalGauge {
 	id: root
@@ -12,38 +13,10 @@ VerticalGauge {
 	property int gaugeValueType
 	property bool isGrouped: false
 
-	// TODO: hook up to real warning / critical levels
-	readonly property int _warningLevel: gaugeValueType === VenusOS.Gauges_ValueType_FallingPercentage
-			? (value <= 0.05
-			  ? VenusOS.TankGauge_WarningLevel_Alarm
-			  : value <= 0.1
-				? VenusOS.TankGauge_WarningLevel_Critical
-				  : value <= 0.2
-				  ? VenusOS.TankGauge_WarningLevel_Warning
-				  : VenusOS.TankGauge_WarningLevel_Ok)
-			: (value >= 0.95
-			   ? VenusOS.TankGauge_WarningLevel_Alarm
-			   : value >= 0.9
-				 ? VenusOS.TankGauge_WarningLevel_Critical
-				   : value >= 0.8
-				   ? VenusOS.TankGauge_WarningLevel_Warning
-				   : VenusOS.TankGauge_WarningLevel_Ok)
+	readonly property int _gaugeStatus: Gauges.getValueStatus(value * 100, gaugeValueType)
 
-	readonly property var _backgroundColors: [
-		Theme.color.darkOk,
-		Theme.color.darkWarning,
-		Theme.color.darkCritical,
-		Theme.color.darkCritical
-	]
-	readonly property var _foregroundColors: [
-		Theme.color.ok,
-		Theme.color.warning,
-		Theme.color.critical,
-		Theme.color.critical
-	]
-
-	backgroundColor: _backgroundColors[_warningLevel]
-	foregroundColor: _foregroundColors[_warningLevel]
+	backgroundColor: Theme.statusColorValue(root._gaugeStatus, true)
+	foregroundColor: Theme.statusColorValue(root._gaugeStatus)
 	radius: Theme.geometry.levelsPage.tankGauge.radius
 
 	Rectangle {
@@ -72,7 +45,9 @@ VerticalGauge {
 		y: (root.height / 4 / 2) - (height / 2)
 		height: Theme.geometry.levelsPage.tankGauge.alarmIcon.height
 		fillMode: Image.PreserveAspectFit
-		visible: !root.isGrouped && root._warningLevel === VenusOS.TankGauge_WarningLevel_Alarm
+		visible: !root.isGrouped
+				 && ((gaugeValueType === VenusOS.Gauges_ValueType_FallingPercentage && value <= 0.05)
+					 || (gaugeValueType === VenusOS.Gauges_ValueType_RisingPercentage && value >= 0.95))
 		color: root.gaugeValueType === VenusOS.Gauges_ValueType_FallingPercentage
 			   ? Theme.color.levelsPage.fallingGauge.alarmIcon
 			   : Theme.color.levelsPage.risingGauge.alarmIcon

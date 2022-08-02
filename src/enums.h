@@ -54,14 +54,6 @@ public:
 	};
 	Q_ENUM(StatusBar_NavigationButtonStyle)
 
-	enum TankGauge_WarningLevel {
-		TankGauge_WarningLevel_Ok,
-		TankGauge_WarningLevel_Warning,
-		TankGauge_WarningLevel_Critical,
-		TankGauge_WarningLevel_Alarm
-	};
-	Q_ENUM(TankGauge_WarningLevel)
-
 	enum ToastNotification_Category {
 		ToastNotification_Category_None,
 		ToastNotification_Category_Informative,
