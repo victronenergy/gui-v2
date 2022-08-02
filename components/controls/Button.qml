@@ -20,7 +20,6 @@ CT.Button {
 			: Theme.color.ok
 	property alias border: backgroundRect.border
 	property alias radius: backgroundRect.radius
-	property alias roundedSide: backgroundRect.roundedSide
 
 	down: pressed || checked
 	spacing: Theme.geometry.button.spacing
@@ -38,10 +37,9 @@ CT.Button {
 	font.pixelSize: Theme.font.size.s
 	flat: true
 
-	background: AsymmetricRoundedRectangle {
+	background: Rectangle {
 		id: backgroundRect
 
-		roundedSide: VenusOS.AsymmetricRoundedRectangle_RoundedSide_All
 		color: root.backgroundColor
 		border.width: root.flat ? 0 : Theme.geometry.button.border.width
 		border.color: Theme.color.ok
