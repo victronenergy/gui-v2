@@ -165,7 +165,7 @@ ControlCard {
 			height: Theme.geometry.controlCard.subCard.header.height
 			verticalAlignment: Text.AlignVCenter
 			horizontalAlignment: Text.AlignLeft
-			font.pixelSize: Theme.font.size.xs
+			font.pixelSize: Theme.font.size.caption
 			//% "Manual control"
 			text: qsTrId("controlcard_generator_subcard_header_manualcontrol")
 			color: Theme.color.font.secondary

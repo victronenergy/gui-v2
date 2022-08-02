@@ -46,7 +46,7 @@ Item {
 			verticalCenter: parent.verticalCenter
 			verticalCenterOffset: -root.spacing/2
 		}
-		font.pixelSize: Theme.font.size.m
+		font.pixelSize: Theme.font.size.body2
 		wrapMode: Text.Wrap
 	}
 

@@ -23,7 +23,7 @@ SettingsListItem {
 				width: separator.visible
 					   ? implicitWidth + Theme.geometry.settingsListItem.content.spacing
 					   : implicitWidth
-				font.pixelSize: Theme.font.size.m
+				font.pixelSize: Theme.font.size.body2
 				color: Theme.color.settingsListItem.secondaryText
 				text: modelData
 

@@ -10,7 +10,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property int fontPixelSize: Theme.font.size.l
+	property int fontPixelSize: Theme.font.size.body3
 	property alias model: buttonRepeater.model
 	property int currentIndex
 

@@ -102,7 +102,7 @@ Item {
 			}
 			Label {
 				anchors.verticalCenter: parent.verticalCenter
-				font.pixelSize: Theme.font.size.xs
+				font.pixelSize: Theme.font.size.caption
 				//% "Silence alarm"
 				text: qsTrId("silence_alarm")
 			}

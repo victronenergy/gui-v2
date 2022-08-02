@@ -23,7 +23,7 @@ ModalDialog {
 				topMargin: 27
 				horizontalCenter: parent.horizontalCenter
 			}
-			font.pixelSize: Theme.font.size.xxl
+			font.pixelSize: Theme.font.size.h3
 			text: qsTrId("%1%").arg(root.minimumStateOfCharge)
 		}
 		Label {

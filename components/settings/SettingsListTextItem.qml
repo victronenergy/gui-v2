@@ -18,7 +18,7 @@ SettingsListItem {
 			anchors.verticalCenter: parent.verticalCenter
 			visible: root.secondaryText.length > 0
 			text: dataPoint.value || ""
-			font.pixelSize: Theme.font.size.m
+			font.pixelSize: Theme.font.size.body2
 			color: Theme.color.settingsListItem.secondaryText
 		}
 	]

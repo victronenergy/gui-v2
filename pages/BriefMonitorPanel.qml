@@ -25,7 +25,7 @@ Column {
 
 				anchors.verticalCenter: parent.verticalCenter
 
-				font.pixelSize: Theme.font.size.l
+				font.pixelSize: Theme.font.size.body3
 				text: "10°"
 			}
 			CP.ColorImage {
@@ -45,7 +45,7 @@ Column {
 					right: parent.right
 					rightMargin: Theme.geometry.briefPage.sidePanel.header.date.rightMargin
 				}
-				font.pixelSize: Theme.font.size.m
+				font.pixelSize: Theme.font.size.body2
 				text: "Sun 3 Oct"
 			}
 		}
@@ -92,7 +92,7 @@ Column {
 
 			anchors.top: solarHeader.bottom
 			dataObject: Global.solarChargers
-			font.pixelSize: Theme.font.size.l
+			font.pixelSize: Theme.font.size.body3
 		}
 
 		SolarYieldGraph {
@@ -126,7 +126,7 @@ Column {
 
 				anchors.top: generatorHeader.bottom
 				dataObject: Global.acInputs.generatorInput
-				font.pixelSize: Theme.font.size.l
+				font.pixelSize: Theme.font.size.body3
 			}
 
 			GeneratorIconLabel {
@@ -173,7 +173,7 @@ Column {
 
 				anchors.top: loadsHeader.bottom
 				dataObject: Global.system.loads
-				font.pixelSize: Theme.font.size.l
+				font.pixelSize: Theme.font.size.body3
 			}
 
 			LoadGraph {

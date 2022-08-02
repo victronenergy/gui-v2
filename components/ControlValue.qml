@@ -27,7 +27,7 @@ Item {
 		}
 
 		elide: Text.ElideRight
-		font.pixelSize: Theme.font.size.s
+		font.pixelSize: Theme.font.size.body1
 		color: Theme.color.font.primary
 	}
 	Row {

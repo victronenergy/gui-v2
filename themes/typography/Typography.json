@@ -1,9 +1,11 @@
 {
-    "font.size.xs": 16,
-    "font.size.s": 18,
-    "font.size.m": 22,
-    "font.size.l": 28,
-    "font.size.xl": 36,
-    "font.size.xxl": 56,
-    "font.size.xxxl": 68
+    "font.size.caption": 16,
+    "font.size.body1": 18,
+    "font.size.body2": 22,
+    "font.size.body3": 28,
+    "font.size.h1": 34,
+    "font.size.h2": 44,
+    "font.size.h3": 56,
+    "font.size.h4": 68,
+    "font.size.h5": 86
 }

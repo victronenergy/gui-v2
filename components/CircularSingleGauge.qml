@@ -60,14 +60,14 @@ Item {
 				id: nameLabel
 
 				anchors.verticalCenter: icon.verticalCenter
-				font.pixelSize: Theme.font.size.m
+				font.pixelSize: Theme.font.size.body2
 				color: Theme.color.font.primary
 			}
 		}
 
 		QuantityLabel {
 			anchors.horizontalCenter: parent.horizontalCenter
-			font.pixelSize: Theme.font.size.xxxl
+			font.pixelSize: Theme.font.size.h5
 			unit: VenusOS.Units_Percentage
 			value: gauges.value
 		}
@@ -76,7 +76,7 @@ Item {
 			id: captionLabel
 
 			anchors.horizontalCenter: parent.horizontalCenter
-			font.pixelSize: Theme.font.size.s
+			font.pixelSize: Theme.font.size.body1
 			color: Theme.color.font.secondary
 		}
 	}

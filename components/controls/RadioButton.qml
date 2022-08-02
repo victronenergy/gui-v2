@@ -48,7 +48,7 @@ CT.RadioButton {
 	contentItem: Label {
 		id: label
 
-		font.pixelSize: Theme.font.size.m
+		font.pixelSize: Theme.font.size.body2
 		text: root.text
 		verticalAlignment: Text.AlignVCenter
 	}

@@ -30,7 +30,7 @@ CT.SpinBox {
 		id: label
 		text: root.value
 		color: Theme.color.font.primary
-		font.pixelSize: Theme.font.size.xxl
+		font.pixelSize: Theme.font.size.h3
 		horizontalAlignment: Qt.AlignHCenter
 		verticalAlignment: Qt.AlignVCenter
 	}

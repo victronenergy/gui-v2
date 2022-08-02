@@ -197,7 +197,7 @@ OverviewWidget {
 
 		text: batteryData.timeToGo > 0 ? Utils.formatAsHHMM(batteryData.timeToGo, true) : ""
 		color: Theme.color.font.secondary
-		font.pixelSize: Theme.font.size.m
+		font.pixelSize: Theme.font.size.body2
 	}
 
 	extraContent.children: [
@@ -217,7 +217,7 @@ OverviewWidget {
 					? qsTrId("overview_widget_battery_charging")
 					  //% "Discharging"
 					: qsTrId("overview_widget_battery_discharging"))
-			font.pixelSize: Theme.font.size.s
+			font.pixelSize: Theme.font.size.body1
 			color: Theme.color.font.secondary
 		},
 
@@ -235,7 +235,7 @@ OverviewWidget {
 
 				value: batteryData.voltage
 				unit: VenusOS.Units_Potential_Volt
-				font.pixelSize: Theme.font.size.m
+				font.pixelSize: Theme.font.size.body2
 			}
 
 			Item {
@@ -248,7 +248,7 @@ OverviewWidget {
 					anchors.horizontalCenter: parent.horizontalCenter
 					value: batteryData.current
 					unit: VenusOS.Units_Energy_Amp
-					font.pixelSize: Theme.font.size.m
+					font.pixelSize: Theme.font.size.body2
 				}
 			}
 
@@ -259,7 +259,7 @@ OverviewWidget {
 					   ? batteryData.temperature_celsius
 					   : Units.celsiusToFahrenheit(batteryData.temperature_celsius))
 				unit: Global.systemSettings.temperatureUnit
-				font.pixelSize: Theme.font.size.m
+				font.pixelSize: Theme.font.size.body2
 			}
 		}
 	]

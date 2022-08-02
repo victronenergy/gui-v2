@@ -71,14 +71,14 @@ Item {
 
 				Label {
 					horizontalAlignment: Text.AlignRight
-					font.pixelSize: Theme.font.size.m
+					font.pixelSize: Theme.font.size.body2
 					color: Theme.color.font.primary
 					text: model.name
 				}
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					horizontalAlignment: Text.AlignRight
-					font.pixelSize: Theme.font.size.m
+					font.pixelSize: Theme.font.size.body2
 					color: Theme.color.font.primary
 					visible: Global.systemSettings.briefView.showPercentages
 					//% "%1%"

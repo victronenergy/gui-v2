@@ -32,7 +32,7 @@ Rectangle {
 		icon.color: Theme.color.font.primary
 
 		font.family: VenusFont.normal.name
-		font.pixelSize: Theme.font.size.s
+		font.pixelSize: Theme.font.size.body1
 		color: Theme.color.font.primary
 	}
 
@@ -44,6 +44,6 @@ Rectangle {
 			left: parent.left
 			leftMargin: Theme.geometry.controlCard.title.leftMargin
 		}
-		font.pixelSize: Theme.font.size.l
+		font.pixelSize: Theme.font.size.body3
 	}
 }

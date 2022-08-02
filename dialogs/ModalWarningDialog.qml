@@ -48,7 +48,7 @@ ModalDialog {
 			height: Theme.geometry.modalWarningDialog.title.height
 
 			text: root.title
-			font.pixelSize: Theme.font.size.xl
+			font.pixelSize: Theme.font.size.h1
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 		}
@@ -68,7 +68,7 @@ ModalDialog {
 
 			horizontalAlignment: Text.AlignHCenter
 			text: root.description
-			font.pixelSize: Theme.font.size.m
+			font.pixelSize: Theme.font.size.body2
 			wrapMode: Text.Wrap
 		}
 	}

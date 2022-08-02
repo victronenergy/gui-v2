@@ -26,7 +26,7 @@ OverviewWidget {
 				left: parent.left
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
-			font.pixelSize: Theme.font.size.xl
+			font.pixelSize: Theme.font.size.h1
 
 			text: {
 				switch (root.systemState) {
