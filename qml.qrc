@@ -4,7 +4,6 @@
         <file>ApplicationContent.qml</file>
         <file>Global.qml</file>
         <file>components/controls/Button.qml</file>
-        <file>components/controls/ComboBox.qml</file>
         <file>components/controls/Label.qml</file>
         <file>components/controls/ProgressBar.qml</file>
         <file>components/controls/RadioButton.qml</file>
@@ -51,7 +50,6 @@
         <file>components/ArcGauge.qml</file>
         <file>components/ArcGaugeQuantityLabel.qml</file>
         <file>components/AsymmetricRoundedRectangle.qml</file>
-        <file>components/BarChart.qml</file>
         <file>components/CircularMultiGauge.qml</file>
         <file>components/CircularSingleGauge.qml</file>
         <file>components/ControlCard.qml</file>

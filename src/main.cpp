@@ -101,8 +101,6 @@ int main(int argc, char *argv[])
 	/* controls */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Button.qml")),
 		"Victron.VenusOS", 2, 0, "Button");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ComboBox.qml")),
-		"Victron.VenusOS", 2, 0, "ComboBox");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Label.qml")),
 		"Victron.VenusOS", 2, 0, "Label");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ProgressBar.qml")),
@@ -131,8 +129,6 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ArcGaugeQuantityLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AsymmetricRoundedRectangle.qml")),
 		"Victron.VenusOS", 2, 0, "AsymmetricRoundedRectangle");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/BarChart.qml")),
-		"Victron.VenusOS", 2, 0, "BarChart");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ButtonControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "ButtonControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularMultiGauge.qml")),
