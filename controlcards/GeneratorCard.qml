@@ -210,7 +210,7 @@ ControlCard {
 				}
 			}
 		}
-		Button {
+		ActionButton {
 			id: startButton
 			anchors {
 				margins: Theme.geometry.controlCard.contentMargins
@@ -229,14 +229,7 @@ ControlCard {
 					//% "Start"
 					qsTrId("controlcard_generator_subcard_button_start")
 
-			backgroundColor: root.state === VenusOS.Generators_State_Error
-					? Theme.color.background.disabled
-				: root.state === VenusOS.Generators_State_Running
-					? down ? Theme.color.critical : Theme.color.dimCritical
-				: /* Stopped */
-					  down ? Theme.color.go : Theme.color.dimGo
-			color: root.state === VenusOS.Generators_State_Error ? Theme.color.font.disabled
-				: Theme.color.font.primary
+			checked: root.state === VenusOS.Generators_State_Running
 
 			onClicked: {
 				if (root.state === VenusOS.Generators_State_Running) {

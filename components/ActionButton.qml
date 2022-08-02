@@ -10,7 +10,9 @@ Button {
 
 	flat: true
 
+	color: enabled ? Theme.color.font.primary : Theme.color.gray2
+
 	backgroundColor: checked
-		 ? (down ? Theme.color.critical : Theme.color.darkCritical)
-		 : (down ? Theme.color.go : Theme.color.darkGo)
+		 ? (pressed ? Theme.color.dimRed : Theme.color.red)
+		 : (pressed ? Theme.color.dimGreen : Theme.color.green)
 }
