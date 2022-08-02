@@ -61,6 +61,14 @@ Item {
 
 	function keyPressed(event) {
 		switch (event.key) {
+		case Qt.Key_1:
+		case Qt.Key_2:
+		case Qt.Key_3:
+		case Qt.Key_4:
+		case Qt.Key_5:
+			Global.pageManager.navBar.currentIndex = event.key - Qt.Key_1
+			event.accepted = true
+			break
 		case Qt.Key_Left:
 			if (Global.pageManager.navBar.currentUrl in root._demoConfigConfigs) {
 				previousConfig()

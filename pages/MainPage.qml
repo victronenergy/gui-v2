@@ -127,16 +127,8 @@ Page {
 			}
 		}
 
-		property var currentUrl: navBar.model.get(0).url
-		property var currentItem: navBar.model.get(0).item
-		onCurrentUrlChanged: PageManager.sidePanelVisible = (currentUrl == navBar.model.get(0).url)
-
-		onButtonClicked: function (buttonIndex) {
-			var navUrl = model.get(buttonIndex).url
-			if (navUrl != currentUrl) {
-				currentUrl = navUrl
-				navStack.replace(null, preloader.itemAt(buttonIndex).item)
-			}
+		onCurrentIndexChanged: {
+			navStack.replace(null, preloader.itemAt(currentIndex).item)
 		}
 
 		SequentialAnimation {
