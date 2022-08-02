@@ -99,40 +99,30 @@ Page {
 				//% "Brief"
 				text: QT_TRID_NOOP("nav_brief")
 				icon: "qrc:/images/brief.svg"
-				iconWidth: 28
-				iconHeight: 28
 				url: "qrc:/pages/BriefPage.qml"
 			}
 			ListElement {
 				//% "Overview"
 				text: QT_TRID_NOOP("nav_overview")
 				icon: "qrc:/images/overview.svg"
-				iconWidth: 28
-				iconHeight: 22
 				url: "qrc:/pages/OverviewPage.qml"
 			}
 			ListElement {
 				//% "Levels"
 				text: QT_TRID_NOOP("nav_levels")
 				icon: "qrc:/images/levels.svg"
-				iconWidth: 28
-				iconHeight: 20
 				url: "qrc:/pages/LevelsPage.qml"
 			}
 			ListElement {
 				//% "Notifications"
 				text: QT_TRID_NOOP("nav_notifications")
 				icon: "qrc:/images/notifications.svg"
-				iconWidth: 28
-				iconHeight: 26
 				url: "qrc:/pages/NotificationsPage.qml"
 			}
 			ListElement {
 				//% "Settings"
 				text: QT_TRID_NOOP("nav_settings")
 				icon: "qrc:/images/settings.png"
-				iconWidth: 24
-				iconHeight: 24
 				url: "qrc:/pages/SettingsPage.qml"
 			}
 		}
