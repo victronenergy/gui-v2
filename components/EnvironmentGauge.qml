@@ -53,7 +53,7 @@ Item {
 			topMargin: Theme.geometry.levelsPage.environment.gauge.typeLabel.topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		font.pixelSize: Theme.font.size.s
+		font.pixelSize: Theme.font.size.body1
 		color: Theme.color.font.primary
 	}
 
@@ -111,7 +111,7 @@ Item {
 			x: parent.width/2 - width/2
 			y: visible ? root._barYPosForValue(0) - height/2 : 0
 			text: "0"
-			font.pixelSize: Theme.font.size.s
+			font.pixelSize: Theme.font.size.body1
 			color: Theme.color.levelsPage.environment.gauge.zeroMarker
 		}
 
@@ -137,6 +137,6 @@ Item {
 			bottomMargin: Theme.geometry.levelsPage.environment.gauge.quantityLabel.bottomMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		font.pixelSize: root.reduceFontSize ? Theme.font.size.m : Theme.font.size.xl
+		font.pixelSize: root.reduceFontSize ? Theme.font.size.body2 : Theme.font.size.h1
 	}
 }

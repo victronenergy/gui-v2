@@ -76,7 +76,7 @@ Rectangle {
 						horizontalCenter: parent.horizontalCenter
 					}
 					width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
-					font.pixelSize: Theme.font.size.s
+					font.pixelSize: Theme.font.size.body1
 					horizontalAlignment: Text.AlignHCenter
 					elide: Text.ElideRight
 					text: model.tank.name || root._tankProperties.name
@@ -102,7 +102,7 @@ Rectangle {
 						bottom: valueText.top
 						bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
 					}
-					font.pixelSize: Theme.font.size.xl
+					font.pixelSize: Theme.font.size.h1
 					unit: VenusOS.Units_Percentage
 					value: Math.round(model.tank.level)
 				}
@@ -117,7 +117,7 @@ Rectangle {
 					width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
 					horizontalAlignment: Text.AlignHCenter
 					fontSizeMode: Text.HorizontalFit
-					font.pixelSize: Theme.font.size.xs
+					font.pixelSize: Theme.font.size.caption
 					color: Theme.color.font.secondary
 					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
 							model.tank.capacity,

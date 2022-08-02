@@ -18,7 +18,7 @@ ControlValue {
 		id: button
 
 		anchors.verticalCenter: parent.verticalCenter
-		font.pixelSize: Theme.font.size.m
+		font.pixelSize: Theme.font.size.body2
 
 		onClicked: root.clicked()
 	}

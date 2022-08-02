@@ -52,7 +52,7 @@ Page {
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					color: Theme.color.notificationsPage.text.color
-					font.pixelSize: Theme.font.size.l
+					font.pixelSize: Theme.font.size.body3
 
 					//% "No current alerts"
 					text: qsTrId("notifications_no_current_alerts")

@@ -62,7 +62,7 @@ Rectangle {
 		leftPadding: Theme.geometry.levelsPage.environment.gaugePanel.border.width
 		rightPadding: Theme.geometry.levelsPage.environment.gaugePanel.border.width
 
-		font.pixelSize: Theme.font.size.xs
+		font.pixelSize: Theme.font.size.caption
 		color: Theme.color.levelsPage.environment.panel.title
 		elide: Text.ElideRight
 	}

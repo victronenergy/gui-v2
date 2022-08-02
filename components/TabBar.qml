@@ -10,5 +10,5 @@ SegmentedButtonRow {
 
 	width: Theme.geometry.tabBar.width
 	height: Theme.geometry.tabBar.height
-	fontPixelSize: Theme.font.size.s
+	fontPixelSize: Theme.font.size.body1
 }

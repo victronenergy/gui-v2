@@ -36,7 +36,7 @@ Column {
 		Label {
 			id: temperature
 
-			font.pixelSize: Theme.font.size.m
+			font.pixelSize: Theme.font.size.body2
 			width: implicitWidth
 			color: day.color
 		}

@@ -23,7 +23,7 @@ ControlValue {
 
 		flat: !enabled
 		border.color: Theme.color.ok
-		font.pixelSize: Theme.font.size.m
+		font.pixelSize: Theme.font.size.body2
 
 		onClicked: root.clicked()
 	}

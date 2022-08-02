@@ -86,7 +86,7 @@ ControlCard {
 				visible: root.state === VenusOS.Ess_State_OptimizedWithBatteryLife
 				color: Theme.color.font.secondary
 				font.family: VenusFont.normal.name
-				font.pixelSize: Theme.font.size.s
+				font.pixelSize: Theme.font.size.body1
 				//% "Battery life limit: %1%"
 				text: qsTrId("ess_battery_life_limit").arg(root.stateOfChargeLimit)
 			}

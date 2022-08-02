@@ -59,7 +59,7 @@ C.Dialog {
 			}
 			horizontalAlignment: Text.AlignHCenter
 			color: Theme.color.font.primary
-			font.pixelSize: Theme.font.size.l
+			font.pixelSize: Theme.font.size.body3
 			text: root.title
 		}
 	}
@@ -83,7 +83,7 @@ C.Dialog {
 				bottom: parent.bottom
 			}
 
-			font.pixelSize: Theme.font.size.m
+			font.pixelSize: Theme.font.size.body2
 			color: Theme.color.font.primary
 			spacing: 0
 			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
@@ -117,7 +117,7 @@ C.Dialog {
 				bottom: parent.bottom
 			}
 
-			font.pixelSize: Theme.font.size.m
+			font.pixelSize: Theme.font.size.body2
 			color: Theme.color.font.primary
 			spacing: 0
 			text: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndClose ?
