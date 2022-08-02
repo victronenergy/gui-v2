@@ -31,25 +31,39 @@ Item {
 
 		Repeater {
 			id: buttonRepeater
-			height: parent.height
 
-			delegate: Button {
+			delegate: AsymmetricRoundedRectangle {
 				id: buttonDelegate
-
-				property int modelIndex: model.index
 
 				width: root.width / buttonRepeater.count
 				height: parent.height
-				checked: model.index === root.currentIndex
-				font.pixelSize: root.fontPixelSize
-				flat: false
-				text: modelData
-				roundedSide: modelIndex === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
-					: modelIndex === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
+				color: mouseArea.pressed || model.index === root.currentIndex
+					   ? Theme.color.ok
+					   : Theme.color.darkOk
+				border.width: Theme.geometry.button.border.width
+				border.color: Theme.color.ok
+				radius: Theme.geometry.button.radius
+
+				roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
+					: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
 					: VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
-				onClicked: {
-					root.buttonClicked(model.index)
-					root.currentIndex = model.index
+
+				Label {
+					anchors.centerIn: parent
+					font.pixelSize: root.fontPixelSize
+					text: modelData
+					color: Theme.color.font.primary
+				}
+
+				MouseArea {
+					id: mouseArea
+
+					anchors.fill: parent
+
+					onClicked: {
+						root.buttonClicked(model.index)
+						root.currentIndex = model.index
+					}
 				}
 			}
 		}
