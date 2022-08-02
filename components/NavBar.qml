@@ -9,8 +9,8 @@ Row {
 	id: root
 
 	property alias model: buttonRepeater.model
-
-	signal buttonClicked(buttonIndex: int)
+	property int currentIndex
+	property url currentUrl
 
 	anchors.horizontalCenter: parent.horizontalCenter
 	height: Theme.geometry.navigationBar.height
@@ -19,19 +19,26 @@ Row {
 	Repeater {
 		id: buttonRepeater
 
-		property int currentIndex: 0
-
 		delegate: NavButton {
 			height: root.height
 			width: Theme.geometry.navigationBar.button.width
 			text: qsTrId(model.text)
 			icon.source: model.icon
-			checked: buttonRepeater.currentIndex === model.index
+			checked: root.currentIndex === model.index
+			enabled: root.currentIndex !== model.index
+			backgroundColor: "transparent"
 
 			onClicked: {
-				buttonRepeater.currentIndex = model.index
-				root.buttonClicked(model.index)
+				root.currentIndex = model.index
+				root.currentUrl = model.url
 			}
+
+			Component.onCompleted: {
+				if (model.index === root.currentIndex) {
+					root.currentUrl = model.url
+				}
+			}
+
 			Rectangle {
 				anchors {
 					top: parent.top
