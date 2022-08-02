@@ -48,7 +48,6 @@
     "geometry.buttonControlValue.width": 112,
     
     "geometry.panel.radius": 8,
-    "geometry.panel.content.margins": 16,
 
     "geometry.progressBar.height": 8,
     "geometry.progressBar.radius": 8,
@@ -119,7 +118,6 @@
     "geometry.navigationBar.notifications.redDot.horizontalCenterOffset": 12,
 
     "geometry.notificationsPage.horizontalMargin" : 40,
-    "geometry.notificationsPage.active.topMargin" : 56,
     "geometry.notificationsPage.checkmark.topMargin" : 112,
     "geometry.notificationsPage.checkmark.leftMargin" : 56,
     "geometry.notificationsPage.checkmark.spacing" : 16,
@@ -146,7 +144,6 @@
     "geometry.notificationsPage.snoozeButton.spacing" : 7,
     "geometry.notificationsPage.gradient.height" : 28,
     "geometry.notificationsPage.history.bottomPadding" : 3,
-    "geometry.notificationsPage.scrollBar.rightMargin" : 8,
 
     "geometry.textField.height": 40,
     "geometry.textField.horizontalMargin": 16,
@@ -159,8 +156,6 @@
 
     "geometry.controlCard.minimumWidth": 428,
     "geometry.controlCard.maximumWidth": 448,
-    "geometry.controlCard.height": 520,
-    "geometry.controlCard.radius": 8,
     "geometry.controlCard.contentMargins": 16,
     "geometry.controlCard.title.spacing": 4,
     "geometry.controlCard.title.leftMargin": 16,
@@ -168,7 +163,6 @@
     "geometry.controlCard.title.leftPadding" : 4,
     "geometry.controlCard.title.icon.height" : 24,
     "geometry.controlCard.subCard.header.height": 40,
-    "geometry.controlCard.smallItem.height" : 48,
     "geometry.controlCard.mediumItem.height" : 56,
     "geometry.controlCard.largeItem.height" : 72,
     "geometry.controlCard.itemSeparator.margins": 8,
@@ -205,9 +199,7 @@
     "geometry.circularMultiGauge.spacing": 16,
     "geometry.circularMultiGauge.row.spacing": 7,
     "geometry.circularMultiGauge.labels.rightMargin": 20,
-    "geometry.circularMultiGauge.labels.spacing": 18,
     "geometry.circularMultiGauge.icons.maxWidth": 18,
-    "geometry.circularMultiGauge.icons.spacing": 6,
 
     "geometry.circularSingularGauge.strokeWidth": 16,
 
@@ -228,7 +220,6 @@
     "geometry.briefPage.edgeGauge.quantityLabel.spacing": 4,
     "geometry.briefPage.smallEdgeGauge.height": 184,
     "geometry.briefPage.smallEdgeGauge.maxAngle": 22,
-    "geometry.briefPage.largeEdgeGauge.topMargin": 60,
     "geometry.briefPage.largeEdgeGauge.height": 320,
     "geometry.briefPage.largeEdgeGauge.maxAngle": 51,
     "geometry.briefPage.lowerGauge.topMargin": 32,
@@ -253,12 +244,6 @@
     "geometry.briefPage.sidePanel.loadGraph.horizontalGradient.width": 10,
 
     "geometry.loadMiniGauge.label.rightMargin": 34,
-    "geometry.loadMiniGauge.label.topMargin": 17,
-
-    "geometry.barChart.height": 47,
-    "geometry.barChart.spacing": 8,
-    "geometry.barChart.barWidth": 8,
-    "geometry.barChart.barRadius": 12,
 
     "geometry.quantityLabel.spacing": 2,
     "geometry.quantityLabel.bottomMargin": 2,
@@ -286,12 +271,6 @@
     "geometry.generatorIconLabel.spacing": 5,
     "geometry.generatorIconLabel.icon.width": 24,
     "geometry.generatorIconLabel.label.width": 62,
-
-    "geometry.generatorRuntimeDuration.height": 72,
-    "geometry.generatorRuntimeDuration.durationLabel.leftMargin": 16,
-    "geometry.generatorRuntimeDuration.durationButton.rightMargin": 16,
-    "geometry.generatorRuntimeDuration.durationButton.height": 40,
-    "geometry.generatorRuntimeDuration.durationButton.width": 112,
 
     "geometry.overviewPage.widget.radius": 8,
     "geometry.overviewPage.widget.border.width": 2,
@@ -329,9 +308,6 @@
     "geometry.overviewPage.widget.expanded.xs.height": 88,
 
     "geometry.overviewPage.connector.line.width": 2,
-    "geometry.overviewPage.connector.electron.outerWidth": 8,
-    "geometry.overviewPage.connector.electron.innerWidth": 4,
-    "geometry.overviewPage.connector.electron.centerWidth": 2,
     "geometry.overviewPage.connector.electron.velocity": 30,
     "geometry.overviewPage.connector.electron.interval": 34,
     "geometry.overviewPage.connector.animationPowerThreshold": 30,
@@ -373,7 +349,6 @@
     "geometry.levelsPage.gauge.label.topMargin": 8,
     "geometry.levelsPage.gauge.valueText.topMargin": 2,
     "geometry.levelsPage.gauge.valueText.bottomMargin": 12,
-    "geometry.levelsPage.gauge.valueText.precision": 3,
     "geometry.levelsPage.subgauges.topMargin": 12,
     "geometry.levelsPage.subgauges.horizontalMargin": 16,
     "geometry.levelsPage.subgauges.bottomMargin": 10,
