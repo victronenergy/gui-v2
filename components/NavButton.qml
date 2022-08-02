@@ -14,7 +14,7 @@ Button {
 	spacing: Theme.geometry.navigationBar.button.spacing
 	display: C.AbstractButton.TextUnderIcon
 
-	color: (down || checked)
+	color: down
 		   ? Theme.color.navigationBar.button.on
-		   : Theme.color.navigationBar.button.on
+		   : Theme.color.navigationBar.button.off
 }

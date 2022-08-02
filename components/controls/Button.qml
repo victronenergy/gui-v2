@@ -14,15 +14,15 @@ CT.Button {
 	property color color: enabled ? Theme.color.font.primary : Theme.color.font.disabled
 	property color backgroundColor: !enabled ? Theme.color.background.disabled
 			: down ? downColor
-			: flat ? Theme.color.button.flat.background
-			: Theme.color.button.outline.background
-	property color downColor: flat ? Theme.color.button.flat.background
-			: Theme.color.button.outline.down.background
+			: flat ? "transparent"
+			: Theme.color.darkOk
+	property color downColor: flat ? "transparent"
+			: Theme.color.ok
 	property alias border: backgroundRect.border
 	property alias radius: backgroundRect.radius
 	property alias roundedSide: backgroundRect.roundedSide
 
-	down: pressed || checked || highlighted
+	down: pressed || checked
 	spacing: Theme.geometry.button.spacing
 	topPadding: 0
 	bottomPadding: 0
@@ -44,7 +44,7 @@ CT.Button {
 		roundedSide: VenusOS.AsymmetricRoundedRectangle_RoundedSide_All
 		color: root.backgroundColor
 		border.width: root.flat ? 0 : Theme.geometry.button.border.width
-		border.color: Theme.color.button.outline.border
+		border.color: Theme.color.ok
 		radius: Theme.geometry.button.radius
 	}
 

@@ -84,7 +84,7 @@ ControlCard {
 					verticalCenter: parent.verticalCenter
 				}
 				visible: root.state === VenusOS.Ess_State_OptimizedWithBatteryLife
-				color: Theme.color.font.tertiary
+				color: Theme.color.font.secondary
 				font.family: VenusFont.normal.name
 				font.pixelSize: Theme.font.size.s
 				//% "Battery life limit: %1%"

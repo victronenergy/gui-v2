@@ -10,14 +10,15 @@ import Victron.VenusOS
 C.Slider {
 	id: root
 
-	property color grooveColor: Theme.color.slider.groove.background
-	property color highlightColor: Theme.color.slider.background
-	property color indicatorColor: Theme.color.font.primary
-	property bool showHandle: true
+	property alias grooveColor: backgroundRect.color
+	property alias highlightColor: highlightRect.color
+	property alias showHandle: handleImg.visible
 
 	implicitHeight: Math.max(background.implicitHeight, handle.implicitHeight)
 
 	background: Rectangle {
+		id: backgroundRect
+
 		anchors {
 			left: parent.left
 			leftMargin: parent.leftPadding
@@ -31,22 +32,25 @@ C.Slider {
 		width: root.availableWidth
 		height: Theme.geometry.slider.groove.height
 		radius: Theme.geometry.slider.groove.radius
-		color: grooveColor
+		color: Theme.color.darkOk
 
 		Rectangle {
+			id: highlightRect
+
 			width: root.visualPosition * parent.width
 			height: Theme.geometry.slider.groove.height
-			color: highlightColor
+			color: Theme.color.ok
 			radius: Theme.geometry.slider.groove.radius
 		}
 	}
 
 	handle: Image {
+		id: handleImg
+
 		x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
 		y: root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry.switch.indicator.shadowOffset
 		width: Theme.geometry.switch.indicator.width
 		height: Theme.geometry.switch.indicator.width
 		source: "qrc:/images/switch_indicator.png"
-		visible: root.showHandle
 	}
 }

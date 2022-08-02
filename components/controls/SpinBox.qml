@@ -41,8 +41,7 @@ CT.SpinBox {
 		implicitWidth: Theme.geometry.spinBox.indicator.width
 		implicitHeight: Theme.geometry.spinBox.indicator.height
 		radius: Theme.geometry.spinBox.indicator.radius
-		color: root.up.pressed ? Theme.color.spinbox.indicator.pressed.background
-			: Theme.color.spinbox.indicator.background
+		color: root.up.pressed ? Theme.color.darkOk : Theme.color.ok
 
 		Image {
 			anchors.centerIn: parent
@@ -56,8 +55,7 @@ CT.SpinBox {
 		implicitWidth: Theme.geometry.spinBox.indicator.width
 		implicitHeight: Theme.geometry.spinBox.indicator.height
 		radius: Theme.geometry.spinBox.indicator.radius
-		color: root.down.pressed ? Theme.color.spinbox.indicator.pressed.background
-			: Theme.color.spinbox.indicator.background
+		color: root.down.pressed ? Theme.color.darkOk : Theme.color.ok
 		Image {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'

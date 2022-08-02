@@ -33,7 +33,7 @@ C.Dialog {
 		implicitHeight: Theme.geometry.modalDialog.height
 		radius: Theme.geometry.modalDialog.radius
 		color: Theme.color.background.secondary
-		border.color: Theme.color.background.disabled
+		border.color: Theme.color.modalDialog.border
 
 		Rectangle {
 			// TODO: do this with shader, or with border image taking noise sample.

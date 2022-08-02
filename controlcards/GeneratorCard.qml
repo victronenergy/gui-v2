@@ -65,7 +65,7 @@ ControlCard {
 		}
 
 		color: root.state === VenusOS.Generators_State_Error ? Theme.color.critical
-			: Theme.color.font.tertiary
+			: Theme.color.font.secondary
 		text: root.state !== VenusOS.Generators_State_Running ?
 				"" // not running, empty substatus.
 			: root.runningBy === VenusOS.Generators_RunningBy_Manual ?
@@ -149,7 +149,7 @@ ControlCard {
 		Rectangle {
 			id: subcardBgRect
 			anchors.fill: parent
-			color: Theme.color.background.tertiary
+			color: Theme.color.card.panel.background
 			radius: Theme.geometry.panel.radius
 		}
 
@@ -168,7 +168,7 @@ ControlCard {
 			font.pixelSize: Theme.font.size.xs
 			//% "Manual control"
 			text: qsTrId("controlcard_generator_subcard_header_manualcontrol")
-			color: Theme.color.font.tertiary
+			color: Theme.color.font.secondary
 		}
 		SeparatorBar {
 			id: subcardHeaderSeparator

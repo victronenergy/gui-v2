@@ -21,7 +21,7 @@ Column {
 	Label {
 		id: day
 
-		color: Theme.color.font.tertiary
+		color: Theme.color.font.secondary
 		height: Theme.geometry.weatherDetails.day.height
 		anchors.left: parent.left
 		font.pixelSize: column.pixelsize

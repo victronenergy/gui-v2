@@ -19,7 +19,7 @@ T.ProgressBar {
 		implicitHeight: Theme.geometry.progressBar.height
 		implicitWidth: Theme.geometry.progressBar.height
 		radius: Theme.geometry.progressBar.radius
-		color: Theme.color.progressBar.background
+		color: Theme.color.darkOk
 	}
 
 	contentItem: Item {
@@ -56,7 +56,7 @@ T.ProgressBar {
 				}
 				height: parent.height
 				radius: Theme.geometry.progressBar.radius
-				color: Theme.color.progressBar.indicator
+				color: Theme.color.ok
 			}
 		}
 	}

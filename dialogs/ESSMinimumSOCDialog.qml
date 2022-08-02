@@ -33,7 +33,7 @@ ModalDialog {
 				top: label.bottom
 				horizontalCenter: parent.horizontalCenter
 			}
-			color: Theme.color.font.tertiary
+			color: Theme.color.font.secondary
 			//% "Unless grid fails"
 			text: qsTrId("ess_unless_grid_fails")
 		}
@@ -60,7 +60,7 @@ ModalDialog {
 				topMargin: 31
 				horizontalCenter: parent.horizontalCenter
 			}
-			color: Theme.color.font.tertiary
+			color: Theme.color.font.secondary
 			// TODO set this text depending on battery type?
 			//% "For xxx type batteries, below 10% is not recommended"
 			text: qsTrId("ess_recommended")
