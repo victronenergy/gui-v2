@@ -24,7 +24,6 @@ Column {
 				id: temperature
 
 				anchors.verticalCenter: parent.verticalCenter
-
 				font.pixelSize: Theme.font.size.body3
 				text: "10°"
 			}
@@ -41,9 +40,9 @@ Column {
 			}
 			Label {
 				anchors {
+					bottom: parent.bottom
 					verticalCenter: parent.verticalCenter
 					right: parent.right
-					rightMargin: Theme.geometry.briefPage.sidePanel.header.date.rightMargin
 				}
 				font.pixelSize: Theme.font.size.body2
 				text: "Sun 3 Oct"
@@ -52,6 +51,7 @@ Column {
 		SeparatorBar {
 			width: parent.width
 			height: Theme.geometry.briefPage.sidePanel.separatorBar.height
+			color: Theme.color.briefPage.sidePanel.forecast.separator
 		}
 		Row {
 			topPadding: Theme.geometry.briefPage.sidePanel.forecastRow.topPadding
