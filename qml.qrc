@@ -90,6 +90,7 @@
         <file>components/EnergyQuantityLabel.qml</file>
         <file>components/VenusFont.qml</file>
         <file>components/VerticalGauge.qml</file>
+        <file>components/ViewGradient.qml</file>
         <file>components/WeatherDetails.qml</file>
         <file>components/Utils.js</file>
         <file>components/Gauges.js</file>

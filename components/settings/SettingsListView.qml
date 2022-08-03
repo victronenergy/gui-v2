@@ -15,26 +15,11 @@ ListView {
 	bottomMargin: Theme.geometry.settingsPage.settingsList.bottomMargin
 	rightMargin: Theme.geometry.page.content.horizontalMargin
 
-	Rectangle {
+	ViewGradient {
 		anchors {
 			bottom: root.bottom
 			left: root.left
 			right: root.right
-		}
-		height: Theme.geometry.settingsPage.settingsList.gradient.height
-		gradient: Gradient {
-			GradientStop {
-				position: Theme.geometry.settingsPage.settingsList.gradient.position1
-				color: Theme.color.settingsPage.settingsList.gradient.color1
-			}
-			GradientStop {
-				position: Theme.geometry.settingsPage.settingsList.gradient.position2
-				color: Theme.color.settingsPage.settingsList.gradient.color2
-			}
-			GradientStop {
-				position: Theme.geometry.settingsPage.settingsList.gradient.position3
-				color: Theme.color.settingsPage.settingsList.gradient.color3
-			}
 		}
 	}
 

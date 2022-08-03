@@ -101,6 +101,10 @@
 
     "color.page.background": "color.black",
 
+    "color.viewGradient.color1": "transparent",
+    "color.viewGradient.color2": "#66000000",
+    "color.viewGradient.color3": "color.black",
+
     "color.overviewPage.widget.background": "color.darkBlue",
     "color.overviewPage.widget.border": "color.ok",
     "color.overviewPage.widget.sideGauge.background": "color.darkBlue",
@@ -133,11 +137,5 @@
     "color.levelsPage.environment.panel.border.color": "color.gray2",
     "color.levelsPage.environment.gauge.zeroMarker": "color.white",
 
-    "color.settingsPage.settingsList.gradient.color1": "transparent",
-    "color.settingsPage.settingsList.gradient.color2": "#66000000",
-    "color.settingsPage.settingsList.gradient.color3": "color.black",
-
-    "color.notificationsPage.gradient.topColor": "transparent",
-    "color.notificationsPage.gradient.bottomColor": "black",
     "color.notificationsPage.text.color": "color.font.secondary"
 }

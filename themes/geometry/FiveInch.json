@@ -107,7 +107,6 @@
     "geometry.notificationsPage.snoozeButton.radius" : 8,
     "geometry.notificationsPage.snoozeButton.image.leftMargin" : 16,
     "geometry.notificationsPage.snoozeButton.spacing" : 7,
-    "geometry.notificationsPage.gradient.height" : 28,
     "geometry.notificationsPage.history.bottomPadding" : 3,
 
     "geometry.textField.height": 40,
@@ -371,8 +370,8 @@
     "geometry.settingsPage.settingsList.topMargin": 6,
     "geometry.settingsPage.settingsList.bottomMargin": 16,
     "geometry.settingsPage.settingsList.spacing": 4,
-    "geometry.settingsPage.settingsList.gradient.height": 28,
-    "geometry.settingsPage.settingsList.gradient.position1": 0,
-    "geometry.settingsPage.settingsList.gradient.position2": 0.55,
-    "geometry.settingsPage.settingsList.gradient.position3": 1
+    "geometry.viewGradient.height": 28,
+    "geometry.viewGradient.position1": 0,
+    "geometry.viewGradient.position2": 0.55,
+    "geometry.viewGradient.position3": 1
 }
