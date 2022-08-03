@@ -141,7 +141,7 @@ Page {
 				NumberAnimation {
 					target: navBar
 					property: "y"
-					from: root.height - navBar.height + Theme.animation.navBar.initialize.margin
+					from: root.height - navBar.height + Theme.geometry.navigationBar.initialize.margin
 					to: root.height - navBar.height
 					duration: Theme.animation.navBar.initialize.fade.duration
 				}
