@@ -242,6 +242,7 @@
         <file>images/widget_connector_nub_horizontal.svg</file>
         <file>images/widget_connector_nub_vertical.svg</file>
         <file>images/wind.svg</file>
+        <file>themes/animation/Animation.json</file>
         <file>themes/geometry/FiveInch.json</file>
         <file>themes/geometry/SevenInch.json</file>
         <file>themes/color/Light.json</file>

@@ -10,8 +10,8 @@ import "/components/Gauges.js" as Gauges
 Page {
 	id: root
 
-	property real _gaugeArcMargin: Theme.animation.briefPage.gaugeArc.initialize.margin
-	property real _gaugeLabelMargin: Theme.animation.briefPage.gaugeLabel.initialize.margin
+	property real _gaugeArcMargin: Theme.geometry.briefPage.edgeGauge.initialize.margin
+	property real _gaugeLabelMargin: Theme.geometry.briefPage.edgeGauge.label.initialize.margin
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
 	property bool _animationEnabled
