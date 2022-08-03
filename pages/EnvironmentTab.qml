@@ -19,6 +19,7 @@ Flickable {
 	leftMargin: contentRow.width > width
 			? Theme.geometry.levelsPage.environment.minimumHorizontalMargin
 			: (width - contentRow.width) / 2
+	rightMargin: Theme.geometry.levelsPage.environment.minimumHorizontalMargin
 	boundsBehavior: Flickable.StopAtBounds
 
 	Row {
