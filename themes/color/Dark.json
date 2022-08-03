@@ -15,6 +15,7 @@
     "color.gray1": "#141414",
     "color.gray2": "#272622",
     "color.dimGray2": "#99272622",
+    "color.darkGray2": "#4D272622",
     "color.gray3": "#504F4B",
     "color.gray4": "#64635F",
     "color.gray5": "#969591",
@@ -108,6 +109,7 @@
 
     "color.briefPage.background": "color.black",
     "color.briefPage.circularGauge.shine": "#BBFFFFFF",
+    "color.briefPage.sidePanel.forecast.separator": "color.darkWhite",
     "color.briefPage.sidePanel.loadGraph.dotColor": "color.gray3",
     "color.briefPage.sidePanel.loadGraph.backgroundColor": "black",
     "color.briefPage.sidePanel.loadGraph.warning.strokeColor": "color.orange",

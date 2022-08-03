@@ -228,7 +228,6 @@
     "geometry.briefPage.sidePanel.columnSpacing": 56,
     "geometry.briefPage.sidePanel.header.height": 34,
     "geometry.briefPage.sidePanel.header.image.leftMargin": 5,
-    "geometry.briefPage.sidePanel.header.date.rightMargin": 4,
     "geometry.briefPage.sidePanel.separatorBar.height": 2,
     "geometry.briefPage.sidePanel.forecastRow.topPadding": 6,
     "geometry.briefPage.sidePanel.forecastRow.spacing": 44,
@@ -253,10 +252,7 @@
     "geometry.widgetHeader.icon.size": 24,
 
     "geometry.weatherDetails.width": 72,
-    "geometry.weatherDetails.day.height": 22,
-    "geometry.weatherDetails.row.topPadding": -2,
     "geometry.weatherDetails.row.spacing": 3,
-    "geometry.weatherDetails.pixelSize": 18,
 
     "geometry.splashView.logo.verticalCenterOffset": -25,
     "geometry.splashView.logo.horizontalCenterOffset": -2,
