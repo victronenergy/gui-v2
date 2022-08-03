@@ -50,11 +50,12 @@ Theme::ColorScheme Theme::colorScheme() const
 
 bool Theme::load(ScreenSize screenSize, ColorScheme colorScheme)
 {
+	// Load typography first, as its values are used in geometry definitions
+	bool typography = parseTheme(QStringLiteral(":/themes/typography/Typography.json"));
 	bool geometry = parseTheme(QStringLiteral(":/themes/geometry/%1.json")
 			.arg(QMetaEnum::fromType<Theme::ScreenSize>().valueToKey(screenSize)));
 	bool color = parseTheme(QStringLiteral(":/themes/color/%1.json")
 			.arg(QMetaEnum::fromType<Theme::ColorScheme>().valueToKey(colorScheme)));
-	bool typography = parseTheme(QStringLiteral(":/themes/typography/Typography.json"));
 	bool animation = parseTheme(QStringLiteral(":/themes/animation/Animation.json"));
 
 	if (m_screenSize != screenSize) {

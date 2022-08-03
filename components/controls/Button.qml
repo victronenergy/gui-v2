@@ -11,7 +11,9 @@ import Victron.VenusOS
 CT.Button {
 	id: root
 
-	property color color: enabled ? Theme.color.font.primary : Theme.color.font.disabled
+	property color color: !enabled ? Theme.color.font.disabled
+			: down ? Theme.color.button.down.text
+			: Theme.color.font.primary
 	property color backgroundColor: !enabled ? Theme.color.background.disabled
 			: down ? downColor
 			: flat ? "transparent"

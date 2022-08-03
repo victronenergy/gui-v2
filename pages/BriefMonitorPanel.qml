@@ -16,46 +16,43 @@ Column {
 	// TODO connect weather forecast to data backend
 	Column {
 		width: parent.width
+		spacing: Theme.geometry.briefPage.sidePanel.header.spacing
 
-		Item {
-			height: Theme.geometry.briefPage.sidePanel.header.height
+		Row {
 			width: parent.width
+
 			Label {
-				id: temperature
+				id: todayTemperature
 
 				anchors.verticalCenter: parent.verticalCenter
-				font.pixelSize: Theme.font.size.body3
+				font.pixelSize: Theme.geometry.briefPage.sidePanel.forecastRow.today.temperature.font.size
 				text: "10°"
 			}
 			CP.ColorImage {
-				id: image
+				id: todayIcon
 
-				anchors {
-					verticalCenter: parent.verticalCenter
-					left: temperature.right
-					leftMargin: Theme.geometry.briefPage.sidePanel.header.image.leftMargin
-				}
+				anchors.verticalCenter: parent.verticalCenter
 				source: "qrc:/images/cloud.svg"
 				color: Theme.color.font.primary
 			}
 			Label {
-				anchors {
-					bottom: parent.bottom
-					verticalCenter: parent.verticalCenter
-					right: parent.right
-				}
-				font.pixelSize: Theme.font.size.body2
+				anchors.baseline: todayTemperature.baseline
+				width: parent.width - todayTemperature.width - todayIcon.width
+				horizontalAlignment: Text.AlignRight
+				font.pixelSize: Theme.geometry.briefPage.sidePanel.forecastRow.today.date.font.size
 				text: "Sun 3 Oct"
 			}
 		}
+
 		SeparatorBar {
 			width: parent.width
 			height: Theme.geometry.briefPage.sidePanel.separatorBar.height
 			color: Theme.color.briefPage.sidePanel.forecast.separator
 		}
+
 		Row {
-			topPadding: Theme.geometry.briefPage.sidePanel.forecastRow.topPadding
 			spacing: Theme.geometry.briefPage.sidePanel.forecastRow.spacing
+
 			WeatherDetails {
 				day: "Mon"
 				temperature: "9°"
@@ -92,14 +89,15 @@ Column {
 
 			anchors.top: solarHeader.bottom
 			dataObject: Global.solarChargers
-			font.pixelSize: Theme.font.size.body3
+			font.pixelSize: Theme.geometry.briefPage.quantityLabel.font.size
 		}
 
 		SolarYieldGraph {
 			anchors {
 				right: parent.right
 				top: parent.top
-				bottom: parent.bottom
+				bottom: solarQuantityLabel.bottom
+				bottomMargin: solarQuantityLabel.bottomPadding
 			}
 			width: Theme.geometry.briefPage.sidePanel.solarYield.width
 		}
@@ -126,13 +124,14 @@ Column {
 
 				anchors.top: generatorHeader.bottom
 				dataObject: Global.acInputs.generatorInput
-				font.pixelSize: Theme.font.size.body3
+				font.pixelSize: Theme.geometry.briefPage.quantityLabel.font.size
 			}
 
 			GeneratorIconLabel {
 				anchors {
 					right: parent.right
 					bottom: generatorQuantityLabel.bottom
+					bottomMargin: generatorQuantityLabel.bottomPadding
 				}
 				// In most cases there is only 1 generator, so don't worry about other ones here.
 				state: Global.generators.first ? Global.generators.first.state : VenusOS.Generators_State_Stopped
@@ -173,7 +172,7 @@ Column {
 
 				anchors.top: loadsHeader.bottom
 				dataObject: Global.system.loads
-				font.pixelSize: Theme.font.size.body3
+				font.pixelSize: Theme.geometry.briefPage.quantityLabel.font.size
 			}
 
 			LoadGraph {
@@ -182,6 +181,7 @@ Column {
 				anchors {
 					right: parent.right
 					bottom: loadsQuantityLabel.bottom
+					bottomMargin: loadsQuantityLabel.bottomPadding
 				}
 				interval: timer.interval
 				enableAnimation: Global.pageManager.sidePanelActive

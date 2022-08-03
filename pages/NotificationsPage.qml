@@ -46,8 +46,6 @@ Page {
 				CP.ColorImage {
 					anchors.top: parent.top
 					source: "qrc:/images/icon_checkmark_48"
-					fillMode: Image.PreserveAspectFit
-					smooth: true
 				}
 				Label {
 					anchors.verticalCenter: parent.verticalCenter

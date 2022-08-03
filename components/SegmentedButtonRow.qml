@@ -52,7 +52,9 @@ Item {
 					anchors.centerIn: parent
 					font.pixelSize: root.fontPixelSize
 					text: modelData
-					color: Theme.color.font.primary
+					color: mouseArea.pressed || model.index === root.currentIndex
+						   ? Theme.color.button.down.text
+						   : Theme.color.font.primary
 				}
 
 				MouseArea {

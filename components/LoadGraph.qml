@@ -27,7 +27,7 @@ Item {
 
 	Rectangle {
 		anchors.fill: parent
-		color: Theme.color.briefPage.sidePanel.loadGraph.backgroundColor
+		color: Theme.color.briefPage.background
 
 		LoadGraphShapePath {
 			id: orangePath
@@ -50,7 +50,7 @@ Item {
 		width: parent.width
 		height: parent.height * warningThreshold
 		clip: true
-		color: Theme.color.briefPage.sidePanel.loadGraph.backgroundColor
+		color: Theme.color.briefPage.background
 
 		Row {
 			id: dottedLine
@@ -93,7 +93,7 @@ Item {
 		anchors.fill: parent
 		gradient: Gradient {
 			orientation: Gradient.Horizontal
-			GradientStop { position: 0; color: Theme.color.briefPage.sidePanel.loadGraph.backgroundColor }
+			GradientStop { position: 0; color: Theme.color.briefPage.background }
 			GradientStop {
 				position: Theme.geometry.briefPage.sidePanel.loadGraph.horizontalGradient.width/width
 				color: Theme.color.briefPage.sidePanel.loadGraph.horizontalGradient.color
@@ -102,7 +102,7 @@ Item {
 				position: 1 - Theme.geometry.briefPage.sidePanel.loadGraph.horizontalGradient.width/width
 				color: Theme.color.briefPage.sidePanel.loadGraph.horizontalGradient.color
 			}
-			GradientStop { position: 1; color: Theme.color.briefPage.sidePanel.loadGraph.backgroundColor }
+			GradientStop { position: 1; color: Theme.color.briefPage.background }
 		}
 	}
 }

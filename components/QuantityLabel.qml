@@ -13,6 +13,7 @@ Item {
 	property int unit: -1
 	property alias font: valueLabel.font
 	property alias valueColor: valueLabel.color
+	readonly property real bottomPadding: height - valueLabel.baselineOffset + Theme.geometry.quantityLabel.bottomMargin
 
 	readonly property var _quantity: unit < 0
 			? undefined
