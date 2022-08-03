@@ -58,6 +58,8 @@
     "color.background.secondary": "color.gray1",
     "color.background.disabled": "color.gray2",
 
+    "color.button.down.text": "color.white",
+
     "color.card.panel.background": "color.gray2",
     "color.card.separator": "color.gray2",
 
@@ -111,7 +113,6 @@
     "color.briefPage.circularGauge.shine": "#BBFFFFFF",
     "color.briefPage.sidePanel.forecast.separator": "color.darkWhite",
     "color.briefPage.sidePanel.loadGraph.dotColor": "color.gray3",
-    "color.briefPage.sidePanel.loadGraph.backgroundColor": "black",
     "color.briefPage.sidePanel.loadGraph.warning.strokeColor": "color.orange",
     "color.briefPage.sidePanel.loadGraph.warning.gradientColor1": "#F0952E",
     "color.briefPage.sidePanel.loadGraph.warning.gradientColor2": "transparent",

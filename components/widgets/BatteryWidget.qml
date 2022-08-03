@@ -196,7 +196,7 @@ OverviewWidget {
 		}
 
 		text: batteryData.timeToGo > 0 ? Utils.formatAsHHMM(batteryData.timeToGo, true) : ""
-		color: Theme.color.font.secondary
+		color: Theme.color.font.primary
 		font.pixelSize: Theme.font.size.body2
 	}
 

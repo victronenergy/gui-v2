@@ -34,6 +34,7 @@ Row {
 
 		width: Theme.geometry.widgetHeader.icon.width
 		fillMode: Image.Pad
+		color: Theme.color.font.primary
 	}
 
 	EnergyQuantityLabel {
@@ -41,6 +42,6 @@ Row {
 
 		height: icon.height
 		anchors.verticalCenter: icon.verticalCenter
-		font.pixelSize: Theme.geometry.briefPage.edgeGauge.font.size
+		font.pixelSize: Theme.geometry.briefPage.quantityLabel.font.size
 	}
 }

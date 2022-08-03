@@ -64,11 +64,11 @@ Rectangle {
 		CP.ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
 			fillMode: Image.PreserveAspectFit
-			smooth: true
-			opacity: root.alarmActive ? 1 : 0.3 // TODO - store opacity as a theme constant
 			color: root.category === VenusOS.Notification_Notification
-				   ? Theme.color.ok : root.category === VenusOS.Notification_Warning
-					 ? Theme.color.warning : Theme.color.critical
+				   ? (root.alarmActive ? Theme.color.ok : Theme.color.darkOk)
+				   : root.category === VenusOS.Notification_Warning
+					 ? (root.alarmActive ? Theme.color.warning : Theme.color.darkWarning)
+					 : (root.alarmActive ? Theme.color.critical : Theme.color.darkCritical)
 			source: root.category === VenusOS.Notification_Notification
 					? "qrc:/images/toast_icon_info.svg" : "qrc:/images/toast_icon_alarm.svg"
 		}
