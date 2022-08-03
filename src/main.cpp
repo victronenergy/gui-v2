@@ -209,6 +209,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ThreePhaseDisplay");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ToastNotification.qml")),
 		"Victron.VenusOS", 2, 0, "ToastNotification");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ViewGradient.qml")),
+		"Victron.VenusOS", 2, 0, "ViewGradient");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
 

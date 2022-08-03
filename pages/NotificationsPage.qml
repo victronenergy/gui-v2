@@ -88,18 +88,13 @@ Page {
 			anchors.right: parent.right
 		}
 	}
-	Rectangle {
+
+	ViewGradient{
 		anchors {
 			bottom: parent.bottom
 			left: parent.left
 			right: parent.right
 			rightMargin: Theme.geometry.notificationsPage.delegate.rightMargin
-		}
-		height: Theme.geometry.notificationsPage.gradient.height
-		gradient: Gradient {
-			orientation: Gradient.Vertical
-			GradientStop { position: 0; color: Theme.color.notificationsPage.gradient.topColor }
-			GradientStop { position: 1; color: Theme.color.notificationsPage.gradient.bottomColor }
 		}
 	}
 }
