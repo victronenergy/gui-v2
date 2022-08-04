@@ -246,6 +246,7 @@
         <file>themes/animation/Animation.json</file>
         <file>themes/geometry/FiveInch.json</file>
         <file>themes/geometry/SevenInch.json</file>
+        <file>themes/color/ColorDesign.json</file>
         <file>themes/color/Light.json</file>
         <file>themes/color/Dark.json</file>
         <file>themes/typography/Typography.json</file>
