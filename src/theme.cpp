@@ -54,8 +54,11 @@ bool Theme::load(ScreenSize screenSize, ColorScheme colorScheme)
 	bool typography = parseTheme(QStringLiteral(":/themes/typography/Typography.json"));
 	bool geometry = parseTheme(QStringLiteral(":/themes/geometry/%1.json")
 			.arg(QMetaEnum::fromType<Theme::ScreenSize>().valueToKey(screenSize)));
+
+	bool colorDesign = parseTheme(QStringLiteral(":/themes/color/ColorDesign.json"));
 	bool color = parseTheme(QStringLiteral(":/themes/color/%1.json")
 			.arg(QMetaEnum::fromType<Theme::ColorScheme>().valueToKey(colorScheme)));
+
 	bool animation = parseTheme(QStringLiteral(":/themes/animation/Animation.json"));
 
 	if (m_screenSize != screenSize) {
@@ -68,7 +71,7 @@ bool Theme::load(ScreenSize screenSize, ColorScheme colorScheme)
 		emit colorSchemeChanged();
 	}
 
-	return geometry && color && typography && animation;
+	return geometry && colorDesign && color && typography && animation;
 }
 
 QVariant Theme::resolvedValue(const QString &key, bool *found, bool warnOnFailure) const
