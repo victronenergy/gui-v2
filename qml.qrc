@@ -249,6 +249,8 @@
         <file>themes/color/ColorDesign.json</file>
         <file>themes/color/Light.json</file>
         <file>themes/color/Dark.json</file>
-        <file>themes/typography/Typography.json</file>
+        <file>themes/typography/TypographyDesign.json</file>
+        <file>themes/typography/FiveInch.json</file>
+        <file>themes/typography/SevenInch.json</file>
     </qresource>
 </RCC>

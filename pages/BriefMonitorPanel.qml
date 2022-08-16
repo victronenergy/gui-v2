@@ -25,7 +25,7 @@ Column {
 				id: todayTemperature
 
 				anchors.verticalCenter: parent.verticalCenter
-				font.pixelSize: Theme.geometry.briefPage.sidePanel.forecastRow.today.temperature.font.size
+				font.pixelSize: Theme.font.briefPage.sidePanel.forecastRow.today.temperature.size
 				text: "10°"
 			}
 			CP.ColorImage {
@@ -39,7 +39,7 @@ Column {
 				anchors.baseline: todayTemperature.baseline
 				width: parent.width - todayTemperature.width - todayIcon.width
 				horizontalAlignment: Text.AlignRight
-				font.pixelSize: Theme.geometry.briefPage.sidePanel.forecastRow.today.date.font.size
+				font.pixelSize: Theme.font.briefPage.sidePanel.forecastRow.today.date.size
 				text: "Sun 3 Oct"
 			}
 		}
@@ -89,7 +89,7 @@ Column {
 
 			anchors.top: solarHeader.bottom
 			dataObject: Global.solarChargers
-			font.pixelSize: Theme.geometry.briefPage.quantityLabel.font.size
+			font.pixelSize: Theme.font.briefPage.quantityLabel.size
 		}
 
 		SolarYieldGraph {
@@ -124,7 +124,7 @@ Column {
 
 				anchors.top: generatorHeader.bottom
 				dataObject: Global.acInputs.generatorInput
-				font.pixelSize: Theme.geometry.briefPage.quantityLabel.font.size
+				font.pixelSize: Theme.font.briefPage.quantityLabel.size
 			}
 
 			GeneratorIconLabel {
@@ -172,7 +172,7 @@ Column {
 
 				anchors.top: loadsHeader.bottom
 				dataObject: Global.system.loads
-				font.pixelSize: Theme.geometry.briefPage.quantityLabel.font.size
+				font.pixelSize: Theme.font.briefPage.quantityLabel.size
 			}
 
 			LoadGraph {
