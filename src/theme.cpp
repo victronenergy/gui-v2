@@ -50,8 +50,10 @@ Theme::ColorScheme Theme::colorScheme() const
 
 bool Theme::load(ScreenSize screenSize, ColorScheme colorScheme)
 {
-	// Load typography first, as its values are used in geometry definitions
-	bool typography = parseTheme(QStringLiteral(":/themes/typography/Typography.json"));
+	bool typographyDesign = parseTheme(QStringLiteral(":/themes/typography/TypographyDesign.json"));
+	bool typography = parseTheme(QStringLiteral(":/themes/typography/%1.json")
+			.arg(QMetaEnum::fromType<Theme::ScreenSize>().valueToKey(screenSize)));
+
 	bool geometry = parseTheme(QStringLiteral(":/themes/geometry/%1.json")
 			.arg(QMetaEnum::fromType<Theme::ScreenSize>().valueToKey(screenSize)));
 
@@ -71,7 +73,7 @@ bool Theme::load(ScreenSize screenSize, ColorScheme colorScheme)
 		emit colorSchemeChanged();
 	}
 
-	return geometry && colorDesign && color && typography && animation;
+	return typographyDesign && typography && geometry && colorDesign && color && animation;
 }
 
 QVariant Theme::resolvedValue(const QString &key, bool *found, bool warnOnFailure) const

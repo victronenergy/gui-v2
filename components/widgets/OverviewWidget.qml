@@ -122,8 +122,8 @@ Rectangle {
 				topMargin: Theme.geometry.overviewPage.widget.header.spacing
 			}
 			font.pixelSize: root.size === VenusOS.OverviewWidget_Size_XS
-					  ? Theme.geometry.overviewPage.widget.value.minimumFontSize
-					  : Theme.geometry.overviewPage.widget.value.maximumFontSize
+					  ? Theme.font.overviewPage.widget.quantityLabel.minimumSize
+					  : Theme.font.overviewPage.widget.quantityLabel.maximumSize
 		}
 	}
 

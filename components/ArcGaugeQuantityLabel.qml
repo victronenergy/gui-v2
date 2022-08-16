@@ -42,6 +42,6 @@ Row {
 
 		height: icon.height
 		anchors.verticalCenter: icon.verticalCenter
-		font.pixelSize: Theme.geometry.briefPage.quantityLabel.font.size
+		font.pixelSize: Theme.font.briefPage.quantityLabel.size
 	}
 }
