@@ -187,6 +187,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),
 		"Victron.VenusOS", 2, 0, "SeparatorBar");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ShinyProgressArc.qml")),
+		"Victron.VenusOS", 2, 0, "ShinyProgressArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SideGauge.qml")),
 		"Victron.VenusOS", 2, 0, "SideGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarYieldGauge.qml")),

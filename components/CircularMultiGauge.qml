@@ -30,21 +30,44 @@ Item {
 		Repeater {
 			id: arcRepeater
 			width: parent.width
-			delegate: ProgressArc {
+			delegate: Loader {
+				id: loader
 				property int status: Gauges.getValueStatus(model.value, model.valueType)
+				property real value: model.value
 				width: parent.width - (index*_stepSize)
 				height: width
 				anchors.centerIn: parent
-				radius: width/2
-				startAngle: 0
-				endAngle: 270
-				value: model.value
-				progressColor: Theme.statusColorValue(status)
-				remainderColor: Theme.statusColorValue(status, true)
-				strokeWidth: gauges.strokeWidth
 				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
-				animationEnabled: gauges.animationEnabled
-				shineAnimationEnabled: model.tankType === VenusOS.Tank_Type_Battery && Global.battery.mode === VenusOS.Battery_Mode_Charging
+				sourceComponent: model.tankType === VenusOS.Tank_Type_Battery ? shinyProgressArc : progressArc
+
+				Component {
+					id: shinyProgressArc
+					ShinyProgressArc {
+						radius: width/2
+						startAngle: 0
+						endAngle: 270
+						value: loader.value
+						progressColor: Theme.statusColorValue(loader.status)
+						remainderColor: Theme.statusColorValue(loader.status, true)
+						strokeWidth: gauges.strokeWidth
+						animationEnabled: gauges.animationEnabled
+						shineAnimationEnabled: Global.battery.mode === VenusOS.Battery_Mode_Charging
+					}
+				}
+
+				Component {
+					id: progressArc
+					ProgressArc {
+						radius: width/2
+						startAngle: 0
+						endAngle: 270
+						value: loader.value
+						progressColor: Theme.statusColorValue(loader.status)
+						remainderColor: Theme.statusColorValue(loader.status, true)
+						strokeWidth: gauges.strokeWidth
+						animationEnabled: gauges.animationEnabled
+					}
+				}
 			}
 		}
 	}

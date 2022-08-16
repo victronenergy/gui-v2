@@ -80,6 +80,7 @@
         <file>components/SideGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
+        <file>components/ShinyProgressArc.qml</file>
         <file>components/SolarYieldGraph.qml</file>
         <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
