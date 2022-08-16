@@ -26,7 +26,8 @@ Item {
 		layer.enabled: true
 		layer.samples: 4
 
-		ProgressArc {
+		// The single circular gauge is always the battery gauge :. shiny.
+		ShinyProgressArc {
 			id: arc
 
 			width: gauges.width
