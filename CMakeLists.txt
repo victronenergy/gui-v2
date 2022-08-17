@@ -42,22 +42,25 @@ qt_add_resources(QML_RESOURCES
     qml.qrc)
 
 
-include_directories(src/velib/inc src)
+include_directories(src/velib/inc src .)
 
 set(VELIB_SOURCES
     src/velib/inc/velib/qt/bms_error.hpp
     src/velib/inc/velib/qt/charger_error.hpp
+    src/velib/inc/velib/qt/unit_conversion.hpp
     src/velib/inc/velib/qt/ve_qitem_dbus_publisher.hpp
     src/velib/inc/velib/qt/ve_qitems_dbus.hpp
     src/velib/inc/velib/qt/ve_qitem.hpp
     src/velib/inc/velib/qt/ve_qitem_loader.hpp
     src/velib/inc/velib/qt/ve_qitem_table_model.hpp
     src/velib/inc/velib/qt/ve_qitem_tree_model.hpp
+    src/velib/inc/velib/qt/ve_quick_item.hpp
     src/velib/inc/velib/qt/v_busitems.h
     src/velib/inc/velib/qt/vebus_error.hpp
     src/velib/inc/velib/velib_config.h
     src/velib/src/qt/bms_error.cpp
     src/velib/src/qt/charger_error.cpp
+    src/velib/src/qt/unit_conversion.cpp
     src/velib/src/qt/v_busitem_proxy.cpp
     src/velib/src/qt/v_busitem_proxy.cpp
     src/velib/src/qt/ve_qitem_dbus_virtual_object.hpp
@@ -68,6 +71,7 @@ set(VELIB_SOURCES
     src/velib/src/qt/ve_qitem_loader.cpp
     src/velib/src/qt/ve_qitem_table_model.cpp
     src/velib/src/qt/ve_qitem_tree_model.cpp
+    src/velib/src/qt/ve_quick_item.cpp
     src/velib/src/qt/v_busitems.cpp
     src/velib/src/qt/vebus_error.cpp
     src/gui-v1/alarmbusitem.h

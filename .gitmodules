@@ -1,0 +1,3 @@
+[submodule "src/velib"]
+	path = src/velib
+	url = git@github.com:victronenergy/velib.git
