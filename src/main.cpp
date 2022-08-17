@@ -15,6 +15,7 @@
 #include "velib/qt/v_busitems.h"
 #include "velib/qt/ve_qitems_dbus.hpp"
 #include "velib/qt/ve_qitem.hpp"
+#include "velib/qt/ve_quick_item.hpp"
 #include "gui-v1/dbus_services.h"
 #include "gui-v1/alarmbusitem.h"
 #endif
