@@ -12,24 +12,17 @@ QtObject {
 	// Model of all solar chargers
 	property ListModel model: ListModel {}
 
-	property ListModel yieldHistory: ListModel {
-		property real today: 0
-		property real maximum: 0
+	property var yieldHistory: []
 
-		// yieldValue in kwh
-		function setYield(day, yieldValue) {
-			if (day < count) {
-				set(day, "value", yieldValue)
-			} else if (day === yieldHistory.count) {
-				append({ "value": yieldValue })
-			} else {
-				console.warn("setYield(): bad day index", day, "model only has",
-						count, "items")
-				return
-			}
-			if (day === 0) {
-				today = yieldValue
-			}
+	function updateYieldHistory(day, yieldValueKwh) {
+		if (day < yieldHistory.length) {
+			yieldHistory[day] = yieldValueKwh
+		} else if (day === yieldHistory.length) {
+			yieldHistory.push(yieldValueKwh)
+		} else {
+			console.warn("setYield(): bad day index", day, "model only has",
+					yieldHistory.length, "items")
+			return
 		}
 	}
 
@@ -61,8 +54,7 @@ QtObject {
 		acCurrent = NaN
 		dcCurrent = NaN
 		model.clear()
-		yieldHistory.clear()
-		yieldHistory.maximum = 0
+		yieldHistory = []
 	}
 
 	Component.onCompleted: Global.solarChargers = root

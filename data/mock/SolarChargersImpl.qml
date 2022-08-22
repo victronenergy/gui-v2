@@ -52,13 +52,7 @@ QtObject {
 	function populateYieldHistory() {
 		for (let day = 0; day < 30; day++) {
 			const dailyYield = 50 + (Math.random() * 100)    // kwh
-			if (day == 0) {
-				Global.solarChargers.yieldHistory.maximum = dailyYield
-			} else {
-				Global.solarChargers.yieldHistory.maximum = Math.max(
-						Global.solarChargers.yieldHistory.maximum, dailyYield)
-			}
-			Global.solarChargers.yieldHistory.setYield(day, dailyYield)
+			Global.solarChargers.updateYieldHistory(day, dailyYield)
 		}
 	}
 

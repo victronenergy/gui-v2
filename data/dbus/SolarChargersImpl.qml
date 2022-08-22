@@ -30,14 +30,10 @@ QtObject {
 		}
 	}
 
-	function _updateYieldHistory(dayToUpdate) {
-		let modelWasEmpty = Global.solarChargers.yieldHistory.count === 0
-
+	function _populateYieldHistory() {
 		let maxHistoryCount = 0
-		let charger
-		let i
-		for (i = 0; i < chargerObjects.count; ++i) {
-			charger = chargerObjects.objectAt(i)
+		for (let i = 0; i < chargerObjects.count; ++i) {
+			const charger = chargerObjects.objectAt(i)
 			if (charger) {
 				maxHistoryCount = Math.max(maxHistoryCount, charger.yieldHistoryObjects.count)
 			}
@@ -45,26 +41,24 @@ QtObject {
 
 		// day 0 = today, day 1 = one day ago, etc.
 		for (let day = 0; day < maxHistoryCount; ++day) {
-			let dailyYield = 0
-			for (i = 0; i < chargerObjects.count; ++i) {
-				charger = chargerObjects.objectAt(i)
-				if (charger) {
-					const historyObject = charger.yieldHistoryObjects.objectAt(day)
-					if (historyObject) {
-						dailyYield += (historyObject.value || 0)
-					}
+			_updateYieldHistory(day)
+		}
+	}
+
+	function _updateYieldHistory(dayToUpdate) {
+		// Find the yield for this day across all chargers.
+		let dailyYield = 0
+		for (let i = 0; i < chargerObjects.count; ++i) {
+			const charger = chargerObjects.objectAt(i)
+			if (charger) {
+				const historyObject = charger.yieldHistoryObjects.objectAt(dayToUpdate)
+				if (historyObject) {
+					dailyYield += (historyObject.value || 0)
 				}
 			}
-			if (day == 0) {
-				Global.solarChargers.yieldHistory.maximum = dailyYield
-			} else {
-				Global.solarChargers.yieldHistory.maximum = Math.max(
-						Global.solarChargers.yieldHistory.maximum, dailyYield)
-			}
-			if (modelWasEmpty || day === dayToUpdate) {
-				Global.solarChargers.yieldHistory.setYield(day, dailyYield)
-			}
 		}
+
+		Global.solarChargers.updateYieldHistory(dayToUpdate, dailyYield)
 	}
 
 	// AC power is the total power from Ac/PvOnGrid, Ac/PvOnGenset and Ac/PvOnOutput.
@@ -189,10 +183,20 @@ QtObject {
 
 			property Instantiator yieldHistoryObjects: Instantiator {
 				// Yield for each previous day, in kwh
+				model: undefined    // ensure delegates are not created before history model is set
 				delegate: VeQuickItem {
 					// uid is e.g. com.victronenergy.solarcharger.tty0/History/Daily/<day>/Yield
 					uid: _dbusUid ? "dbus/" + _dbusUid + "/History/Daily/" + model.index + "/Yield" : ""
-					onValueChanged: Qt.callLater(root._updateYieldHistory, model.index)
+					onValueChanged: {
+						if (value === undefined) {
+							return
+						}
+						if (Global.solarChargers.yieldHistory.length < _veHistoryCount.value) {
+							Qt.callLater(root._populateYieldHistory)    // batch the initial calls to populate the model
+						} else {
+							root._updateYieldHistory(model.index)
+						}
+					}
 				}
 			}
 			property var _veHistoryCount: VeQuickItem {
