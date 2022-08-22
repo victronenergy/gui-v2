@@ -27,7 +27,7 @@ OverviewWidget {
 			}
 			//: Today's solar yield, in kwh
 			//% "Today: %1kwh"
-			text: qsTrId("overview_widget_solaryield_today").arg(Math.floor(Global.solarChargers.yieldHistory.today || 0))
+			text: qsTrId("overview_widget_solaryield_today").arg(Math.floor(Global.solarChargers.yieldHistory[0] || 0))
 			color: Theme.color.font.secondary
 			visible: root.size >= VenusOS.OverviewWidget_Size_M
 		},

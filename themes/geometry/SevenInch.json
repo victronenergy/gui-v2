@@ -188,6 +188,7 @@
     "geometry.briefPage.largeEdgeGauge.height": 320,
     "geometry.briefPage.largeEdgeGauge.maxAngle": 51,
     "geometry.briefPage.lowerGauge.topMargin": 32,
+    "geometry.briefPage.solarHistoryGauge.maximumGaugeCount": 3,
 
     "geometry.briefPage.sidePanel.verticalCenterOffset": -18,
     "geometry.briefPage.sidePanel.width": 304,

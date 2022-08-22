@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 Item {
 	id: root
@@ -23,14 +24,21 @@ Item {
 		Repeater {
 			id: dayRepeater
 
-			model: Global.solarChargers.yieldHistory
+			property real maximumYieldValue
+			property int maximumYieldIndex: -1
+
+			model: Global.solarChargers.yieldHistory.slice(0, root._maxBars)
+
 			delegate: Rectangle {
+				readonly property real yieldValue: modelData
+
 				anchors.bottom: parent.bottom
-				height: visible ? root.height * (model.value / Math.max(1, Global.solarChargers.yieldHistory.maximum)) : 0
+				height: root.height * (yieldValue / Math.max(1, dayRepeater.maximumYieldValue))
 				width: Theme.geometry.overviewPage.widget.solar.graph.bar.width
 				radius: Theme.geometry.overviewPage.widget.solar.graph.bar.radius
 				color: Theme.color.overviewPage.widget.solar.graph.bar
-				visible: model.index < root._maxBars
+
+				onYieldValueChanged: Utils.updateMaximumYield(dayRepeater, model.index, yieldValue)
 			}
 		}
 	}
