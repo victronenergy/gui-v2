@@ -9,8 +9,6 @@ import Victron.Velib
 QtObject {
 	id: root
 
-	property var veSettings
-
 	property Connections sysSettingsConn: Connections {
 		target: Global.systemSettings
 
@@ -63,8 +61,9 @@ QtObject {
 	property Instantiator briefViewLevels: Instantiator {
 		model: 4
 		delegate: VeQuickItem {
-			uid: veSettings.childUId("/Settings/Gui/BriefView/Level/" + (model.index + 1))
+			uid: "dbus/com.victronenergy.settings/Settings/Gui/BriefView/Level/" + (model.index + 1)
 
+			Component.onCompleted: valueChanged(this, value)
 			onValueChanged: {
 				if (value !== undefined) {
 					const v = value === -1 ? VenusOS.Tank_Type_Battery : value
@@ -75,17 +74,20 @@ QtObject {
 	}
 
 	property VeQuickItem veShowPercentages: VeQuickItem {
-		uid: veSettings.childUId("/Settings/Gui/BriefView/ShowPercentages")
+		uid: "dbus/com.victronenergy.settings/Settings/Gui/BriefView/ShowPercentages"
+		Component.onCompleted: valueChanged(this, value)
 		onValueChanged: if (value !== undefined) Global.systemSettings.briefView.showPercentages = value === 1
 	}
 
 	property VeQuickItem veAccessLevel: VeQuickItem {
-		uid: veSettings.childUId("/Settings/System/AccessLevel")
+		uid: "dbus/com.victronenergy.settings/Settings/System/AccessLevel"
+		Component.onCompleted: valueChanged(this, value)
 		onValueChanged: if (value !== undefined) Global.systemSettings.accessLevel = value
 	}
 
 	property VeQuickItem veColorScheme: VeQuickItem {
-		uid: veSettings.childUId("/Settings/Gui/ColorScheme")
+		uid: "dbus/com.victronenergy.settings/Settings/Gui/ColorScheme"
+		Component.onCompleted: valueChanged(this, value)
 		onValueChanged: {
 			if (value !== undefined) {
 				if (value === Theme.Dark) {
@@ -99,17 +101,20 @@ QtObject {
 	}
 
 	property VeQuickItem veEnergyUnit: VeQuickItem {
-		uid: veSettings.childUId("/Settings/Gui/Units/Energy")
+		uid: "dbus/com.victronenergy.settings/Settings/Gui/Units/Energy"
+		Component.onCompleted: valueChanged(this, value)
 		onValueChanged: if (value !== undefined) Global.systemSettings.energyUnit = value
 	}
 
 	property VeQuickItem veTemperatureUnit: VeQuickItem {
-		uid: veSettings.childUId("/Settings/Gui/Units/Temperature")
+		uid: "dbus/com.victronenergy.settings/Settings/Gui/Units/Temperature"
+		Component.onCompleted: valueChanged(this, value)
 		onValueChanged: if (value !== undefined) Global.systemSettings.temperatureUnit = value
 	}
 
 	property VeQuickItem veVolumeUnit: VeQuickItem {
-		uid: veSettings.childUId("/Settings/Gui/Units/Volume")
+		uid: "dbus/com.victronenergy.settings/Settings/Gui/Units/Volume"
+		Component.onCompleted: valueChanged(this, value)
 		onValueChanged: if (value !== undefined) Global.systemSettings.volumeUnit = value
 	}
 }
