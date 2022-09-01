@@ -40,19 +40,19 @@ QtObject {
 			property real current: NaN
 
 			property VeQuickItem vePower: VeQuickItem {
-				uid: veDBus.childUId("/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Power")
+				uid: veSystem.childUId("/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Power")
 				onValueChanged: {
 					consumptionInput.power = value === undefined ? NaN : value
-					Qt.callLater(root._updateConsumptionModel, model.index)
+					Qt.callLater(root._updateConsumptionModel)
 				}
 			}
 			// TODO this path doesn't exist in dbus yet but should be provided at a later stage.
 			// Verify when it is added.
 			property VeQuickItem veCurrent: VeQuickItem {
-				uid: veDBus.childUId("/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Current")
+				uid: veSystem.childUId("/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Current")
 				onValueChanged: {
 					consumptionInput.current = value === undefined ? NaN : value
-					Qt.callLater(root._updateConsumptionModel, model.index)
+					Qt.callLater(root._updateConsumptionModel)
 				}
 			}
 		}
@@ -67,35 +67,37 @@ QtObject {
 			property real current: NaN
 
 			property VeQuickItem vePower: VeQuickItem {
-				uid: veDBus.childUId("/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Power")
+				uid: veSystem.childUId("/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Power")
 				onValueChanged: {
 					consumptionOutput.power = value === undefined ? NaN : value
-					Qt.callLater(root._updateConsumptionModel, model.index)
+					Qt.callLater(root._updateConsumptionModel)
 				}
 			}
 			property VeQuickItem veCurrent: VeQuickItem {
-				uid: veDBus.childUId("/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Current")
+				uid: veSystem.childUId("/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Current")
 				onValueChanged: {
 					consumptionOutput.current = value === undefined ? NaN : value
-					Qt.callLater(root._updateConsumptionModel, model.index)
+					Qt.callLater(root._updateConsumptionModel)
 				}
 			}
 		}
 	}
 
-	function _updateConsumptionModel(index) {
-		const inputConsumption = consumptionInputObjects.objectAt(index)
-		const inputPower = inputConsumption ? inputConsumption.power : NaN
-		const inputCurrent = inputConsumption ? inputConsumption.current : NaN
+	function _updateConsumptionModel() {
+		for (let i = 0; i < consumptionInputObjects.count; ++i) {
+			const inputConsumption = consumptionInputObjects.objectAt(i)
+			const inputPower = inputConsumption ? inputConsumption.power : NaN
+			const inputCurrent = inputConsumption ? inputConsumption.current : NaN
 
-		const outputConsumption = consumptionOutputObjects.objectAt(index)
-		const outputPower = outputConsumption ? outputConsumption.power : NaN
-		const outputCurrent = outputConsumption ? outputConsumption.current : NaN
+			const outputConsumption = consumptionOutputObjects.objectAt(i)
+			const outputPower = outputConsumption ? outputConsumption.power : NaN
+			const outputCurrent = outputConsumption ? outputConsumption.current : NaN
 
-		Global.system.ac.consumption.setPhaseData(index, {
-			power: Utils.sumRealNumbers(inputPower, outputPower),
-			current: Utils.sumRealNumbers(inputCurrent, outputCurrent)
-		})
+			Global.system.ac.consumption.setPhaseData(i, {
+				power: Utils.sumRealNumbers(inputPower, outputPower),
+				current: Utils.sumRealNumbers(inputCurrent, outputCurrent)
+			})
+		}
 	}
 
 	//--- DC data ---
