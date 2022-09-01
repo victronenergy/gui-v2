@@ -10,16 +10,15 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veDBus
+	property var veServiceIds
+	onVeServiceIdsChanged: Qt.callLater(_getEnvironmentInputs)
 
 	property var _environmentInputs: []
 
 	function _getEnvironmentInputs() {
-		const childIds = veDBus.childIds
-
 		let environmentInputIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let id = childIds[i]
+		for (let i = 0; i < veServiceIds.length; ++i) {
+			let id = veServiceIds[i]
 			if (id.startsWith("com.victronenergy.temperature.")) {
 				environmentInputIds.push(id)
 			}
@@ -28,11 +27,6 @@ QtObject {
 		if (Utils.arrayCompare(_environmentInputs, environmentInputIds) !== 0) {
 			_environmentInputs = environmentInputIds
 		}
-	}
-
-	property Connections veDBusConn: Connections {
-		target: veDBus
-		function onChildIdsChanged() { Qt.callLater(_getEnvironmentInputs) }
 	}
 
 	property Instantiator inputObjects: Instantiator {
@@ -73,10 +67,5 @@ QtObject {
 				}
 			}
 		}
-	}
-
-
-	Component.onCompleted: {
-		_getEnvironmentInputs()
 	}
 }

@@ -10,16 +10,15 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veDBus
+	property var veServiceIds
+	onVeServiceIdsChanged: Qt.callLater(_getInverters)
 
 	property var _inverters: []
 
 	function _getInverters() {
-		const childIds = veDBus.childIds
-
 		let inverterIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let id = childIds[i]
+		for (let i = 0; i < veServiceIds.length; ++i) {
+			let id = veServiceIds[i]
 			if (id.startsWith("com.victronenergy.vebus.")) {
 				inverterIds.push(id)
 			}
@@ -28,11 +27,6 @@ QtObject {
 		if (Utils.arrayCompare(_inverters, inverterIds) !== 0) {
 			_inverters = inverterIds
 		}
-	}
-
-	property Connections veDBusConn: Connections {
-		target: veDBus
-		function onChildIdsChanged() { Qt.callLater(_getInverters) }
 	}
 
 	property Instantiator inverterObjects: Instantiator {
@@ -144,9 +138,5 @@ QtObject {
 				onValueChanged: inverter.currentLimit2Adjustable = value === undefined ? false : (value > 0)
 			}
 		}
-	}
-
-	Component.onCompleted: {
-		_getInverters()
 	}
 }

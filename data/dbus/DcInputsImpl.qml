@@ -10,7 +10,8 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veDBus
+	property var veServiceIds
+	onVeServiceIdsChanged: Qt.callLater(_getInputs)
 
 	property var _monitorModes: ({
 		"-1": VenusOS.DcInputs_InputType_DcGenerator,
@@ -25,11 +26,9 @@ QtObject {
 	property var _inputs: []
 
 	function _getInputs() {
-		const childIds = veDBus.childIds
-
 		let inputIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let id = childIds[i]
+		for (let i = 0; i < veServiceIds.length; ++i) {
+			let id = veServiceIds[i]
 			if (id.startsWith("com.victronenergy.alternator.")
 					|| id.startsWith("com.victronenergy.fuelcell.")
 					|| id.startsWith("com.victronenergy.dcsource.")) {
@@ -40,11 +39,6 @@ QtObject {
 		if (Utils.arrayCompare(_inputs, inputIds) !== 0) {
 			_inputs = inputIds
 		}
-	}
-
-	property Connections veDBusConnection: Connections {
-		target: veDBus
-		function onChildIdsChanged() { Qt.callLater(_getInputs) }
 	}
 
 	property Instantiator inputObjects: Instantiator {
@@ -110,9 +104,5 @@ QtObject {
 				onValueChanged: input.monitorMode = value === undefined ? NaN : value
 			}
 		}
-	}
-
-	Component.onCompleted: {
-		_getInputs()
 	}
 }

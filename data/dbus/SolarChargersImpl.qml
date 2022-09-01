@@ -10,16 +10,15 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veDBus
+	property var veServiceIds
+	onVeServiceIdsChanged: Qt.callLater(_getSolarChargers)
 
 	property var _solarChargers: []
 
 	function _getSolarChargers() {
-		const childIds = veDBus.childIds
-
 		let solarChargerIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let id = childIds[i]
+		for (let i = 0; i < veServiceIds.length; ++i) {
+			let id = veServiceIds[i]
 			if (id.startsWith('com.victronenergy.solarcharger.')) {
 				solarChargerIds.push(id)
 			}
@@ -148,11 +147,6 @@ QtObject {
 		onValueChanged: Global.solarChargers.dcCurrent = value === undefined ? NaN : value
 	}
 
-	property Connections veDBusConn: Connections {
-		target: veDBus
-		function onChildIdsChanged() { Qt.callLater(_getSolarChargers) }
-	}
-
 	property Instantiator chargerObjects: Instantiator {
 		model: _solarChargers
 
@@ -268,9 +262,5 @@ QtObject {
 				}
 			}
 		}
-	}
-
-	Component.onCompleted: {
-		_getSolarChargers()
 	}
 }

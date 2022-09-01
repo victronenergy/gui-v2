@@ -10,16 +10,15 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veDBus
+	property var veServiceIds
+	onVeServiceIdsChanged: Qt.callLater(_getTanks)
 
 	property var _tanks: []
 
 	function _getTanks() {
-		const childIds = veDBus.childIds
-
 		let tankIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let id = childIds[i]
+		for (let i = 0; i < veServiceIds.length; ++i) {
+			let id = veServiceIds[i]
 			if (id.startsWith('com.victronenergy.tank.')) {
 				tankIds.push(id)
 			}
@@ -28,11 +27,6 @@ QtObject {
 		if (Utils.arrayCompare(_tanks, tankIds)) {
 			_tanks = tankIds
 		}
-	}
-
-	property Connections veDBusConn: Connections {
-		target: veDBus
-		function onChildIdsChanged() { Qt.callLater(_getTanks) }
 	}
 
 	property Instantiator tankObjects: Instantiator {
@@ -96,9 +90,5 @@ QtObject {
 				}
 			}
 		}
-	}
-
-	Component.onCompleted: {
-		_getTanks()
 	}
 }

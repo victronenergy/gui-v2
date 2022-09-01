@@ -10,29 +10,23 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veDBus
+	property var veServiceIds
+	onVeServiceIdsChanged: Qt.callLater(_getGenerators)
 
 	property var _generators: []
 
 	function _getGenerators() {
-		const childIds = veDBus.childIds
-
 		let generatorIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let id = childIds[i]
+		for (let i = 0; i < veServiceIds.length; ++i) {
+			let id = veServiceIds[i]
 			if (id.startsWith("com.victronenergy.generator.")) {
-				generatorIds.push(childIds[i])
+				generatorIds.push(veServiceIds[i])
 			}
 		}
 
 		if (Utils.arrayCompare(_generators, generatorIds) !== 0) {
 			_generators = generatorIds
 		}
-	}
-
-	property Connections veDBusConnection: Connections {
-		target: veDBus
-		function onChildIdsChanged() { Qt.callLater(_getGenerators) }
 	}
 
 	property Instantiator generatorObjects: Instantiator {
@@ -113,9 +107,5 @@ QtObject {
 				}
 			}
 		}
-	}
-
-	Component.onCompleted: {
-		_getGenerators()
 	}
 }
