@@ -10,8 +10,6 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veSettings
-
 	readonly property int state: _getState()
 	onStateChanged: Global.ess.state = state
 
@@ -88,18 +86,18 @@ QtObject {
 	}
 
 	property VeQuickItem veState: VeQuickItem {
-		uid: veSettings.childUId("/Settings/CGwacs/BatteryLife/State")
+		uid: "dbus/com.victronenergy.settings/Settings/CGwacs/BatteryLife/State"
 	}
 
 	property VeQuickItem veHub4Mode: VeQuickItem {
-		uid: veSettings.childUId("/Settings/CGwacs/Hub4Mode")
+		uid: "dbus/com.victronenergy.settings/Settings/CGwacs/Hub4Mode"
 	}
 
 	property VeQuickItem veMinimumSocLimit: VeQuickItem {
-		uid: veSettings.childUId("/Settings/CGwacs/BatteryLife/MinimumSocLimit")
+		uid: "dbus/com.victronenergy.settings/Settings/CGwacs/BatteryLife/MinimumSocLimit"
 	}
 
 	property VeQuickItem veSocLimit: VeQuickItem {
-		uid: veSettings.childUId("/Settings/CGwacs/BatteryLife/SocLimit")
+		uid: "dbus/com.victronenergy.settings/Settings/CGwacs/BatteryLife/SocLimit"
 	}
 }

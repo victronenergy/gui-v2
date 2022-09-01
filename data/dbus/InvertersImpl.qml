@@ -11,7 +11,6 @@ QtObject {
 	id: root
 
 	property var veDBus
-	property var veSettings
 
 	property var _inverters: []
 
@@ -120,7 +119,7 @@ QtObject {
 			}
 
 			property VeQuickItem _acInput1: VeQuickItem {
-				uid: veSettings.uid + "/Settings/SystemSetup/AcInput1"
+				uid: "dbus/com.victronenergy.settings/Settings/SystemSetup/AcInput1"
 				onValueChanged: inverter.input1Type = value === undefined ? -1 : value
 			}
 			property VeQuickItem _currentLimit1: VeQuickItem {
@@ -133,7 +132,7 @@ QtObject {
 			}
 
 			property VeQuickItem _acInput2: VeQuickItem {
-				uid: veSettings.uid + "/Settings/SystemSetup/AcInput2"
+				uid: "dbus/com.victronenergy.settings/Settings/SystemSetup/AcInput2"
 				onValueChanged: inverter.input2Type = value === undefined ? -1 : value
 			}
 			property VeQuickItem _currentLimit2: VeQuickItem {
