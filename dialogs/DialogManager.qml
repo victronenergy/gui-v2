@@ -37,4 +37,6 @@ Item {
 		id: toaster
 		ToastNotification { }
 	}
+
+	Component.onCompleted: Global.dialogManager = root
 }

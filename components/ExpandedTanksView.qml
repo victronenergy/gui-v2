@@ -16,7 +16,7 @@ Rectangle {
 	readonly property var _tankProperties: Gauges.tankProperties(tankModel.type)
 	property bool animationEnabled: true
 
-	parent: dialogManager
+	parent: Global.dialogManager
 	anchors.fill: parent
 	color: Theme.color.levelsPage.tankGroupData.background.color
 	opacity: active ? 1 : 0

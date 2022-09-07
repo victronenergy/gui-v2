@@ -17,6 +17,7 @@ import QtQml
 QtObject {
 	property var pageManager
 	property var demoManager    // only valid when demo mode is active
+	property var dialogManager
 	property var inputPanel
 
 	// data sources

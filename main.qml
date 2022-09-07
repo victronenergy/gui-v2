@@ -9,8 +9,6 @@ import Victron.VenusOS
 Window {
 	id: root
 
-	property alias dialogManager: content.dialogManager
-
 	//: Application title
 	//% "Venus OS GUI"
 	//~ Context only shown on desktop systems
