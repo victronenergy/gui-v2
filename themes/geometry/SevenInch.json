@@ -112,7 +112,8 @@
     "geometry.textField.height": 40,
     "geometry.textField.horizontalMargin": 16,
 
-    "geometry.toastNotification.margins" : 24,
+    "geometry.toastNotification.horizontalMargin" : 24,
+    "geometry.toastNotification.bottomMargin" : 8,
     "geometry.toastNotification.radius" : 8,
     "geometry.toastNotification.minHeight": 64,
     "geometry.toastNotification.icon.width": 28,

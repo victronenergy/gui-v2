@@ -9,13 +9,6 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	anchors {
-		left: parent.left
-		right: parent.right
-		bottom: parent.bottom
-		margins: Theme.geometry.toastNotification.margins
-	}
-
 	property int category: VenusOS.ToastNotification_Category_None
 	property alias backgroundColor: background.color
 	property alias highlightColor: highlight.color
@@ -24,6 +17,7 @@ Item {
 
 	signal dismissed()
 
+	implicitWidth: parent ? parent.width : 0
 	implicitHeight: Math.max(Theme.geometry.toastNotification.minHeight,
 			label.implicitHeight + 2*Theme.geometry.toastNotification.label.padding)
 

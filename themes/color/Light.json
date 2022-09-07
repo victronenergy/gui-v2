@@ -51,7 +51,7 @@
     "color.navigationBar.button.on": "color.blue",
     "color.navigationBar.button.off": "color.gray4",
 
-    "color.toastNotification.foreground": "color.font.primary",
+    "color.toastNotification.foreground": "color.white",
     "color.toastNotification.background.none": "color.gray3",
     "color.toastNotification.background.informative": "#295C91",
     "color.toastNotification.background.confirmation": "#5C9C39",
