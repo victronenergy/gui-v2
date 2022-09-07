@@ -103,7 +103,7 @@ Item {
 					horizontalAlignment: Text.AlignRight
 					font.pixelSize: Theme.font.size.body2
 					color: Theme.color.font.primary
-					visible: Global.systemSettings.briefView.showPercentages
+					visible: Global.systemSettings.briefView.showPercentages.value
 					//% "%1%"
 					text: qsTrId("%1%").arg(Math.round(model.value))
 				}

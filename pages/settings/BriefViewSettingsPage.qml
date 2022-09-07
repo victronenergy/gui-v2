@@ -45,8 +45,8 @@ Page {
 				//: Show percentage values in Brief view
 				//% "Show %"
 				text: qsTrId("settings_briefview_show_percentage")
-				checked: Global.systemSettings.briefView.showPercentages
-				onClicked: Global.systemSettings.briefView.setShowPercentages(checked)
+				checked: Global.systemSettings.briefView.showPercentages.value
+				onClicked: Global.systemSettings.briefView.showPercentages.setValue(checked)
 			}
 		}
 	}

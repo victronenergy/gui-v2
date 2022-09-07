@@ -8,19 +8,36 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property int accessLevel: -1
-	property int demoMode: -1
-	property int colorScheme: -1
-	property int energyUnit: -1
-	property int temperatureUnit: -1
-	property int volumeUnit: -1
+	property DataPoint accessLevel: DataPoint {
+		 source: "com.victronenergy.settings/Settings/System/AccessLevel"
+	}
 
-	signal setDemoModeRequested(demoMode: int)
-	signal setAccessLevelRequested(accessLevel: int)
-	signal setColorSchemeRequested(colorScheme: int)
-	signal setEnergyUnitRequested(energyUnit: int)
-	signal setTemperatureUnitRequested(temperatureUnit: int)
-	signal setVolumeUnitRequested(volumeUnit: int)
+	property DataPoint demoMode: DataPoint {
+		 source: "com.victronenergy.settings/Settings/Gui/DemoMode"
+	}
+
+	property DataPoint colorScheme: DataPoint {
+		 source: "com.victronenergy.settings/Settings/Gui/ColorScheme"
+		 onValueChanged: {
+			 if (value === Theme.Dark) {
+				Theme.load(Theme.screenSize, Theme.Dark)
+			 } else if (value === Theme.Light) {
+				Theme.load(Theme.screenSize, Theme.Light)
+			 }
+		 }
+	}
+
+	property DataPoint energyUnit: DataPoint {
+		 source: "com.victronenergy.settings/Settings/Gui/Units/Energy"
+	}
+
+	property DataPoint temperatureUnit: DataPoint {
+		 source: "com.victronenergy.settings/Settings/Gui/Units/Temperature"
+	}
+
+	property DataPoint volumeUnit: DataPoint {
+		source: "com.victronenergy.settings/Settings/Gui/Units/Volume"
+	}
 
 	property QtObject briefView: QtObject {
 		// Default settings
@@ -30,10 +47,12 @@ QtObject {
 			ListElement { value: VenusOS.Tank_Type_FreshWater }
 			ListElement { value: VenusOS.Tank_Type_BlackWater }
 		}
-		property bool showPercentages
+
+		property DataPoint showPercentages: DataPoint {
+			 source: "com.victronenergy.settings/Settings/Gui/BriefView/ShowPercentages"
+		}
 
 		signal setGaugeRequested(index: int, value: var)
-		signal setShowPercentagesRequested(value: bool)
 
 		function setGauge(index, value) {
 			gauges.setProperty(index, "value", value)

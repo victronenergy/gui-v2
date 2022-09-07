@@ -14,6 +14,7 @@
         <file>components/controls/TextField.qml</file>
         <file>components/datapoints/DataPoint.qml</file>
         <file>components/datapoints/DataPointDBusImpl.qml</file>
+        <file>components/datapoints/DataPointMockImpl.qml</file>
         <file>components/datapoints/DemoModeDataPoint.qml</file>
         <file>components/settings/SettingsListButton.qml</file>
         <file>components/settings/SettingsListView.qml</file>

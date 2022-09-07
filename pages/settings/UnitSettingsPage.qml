@@ -24,10 +24,10 @@ Page {
 					//% "Amps"
 					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Energy_Amp },
 				]
-				currentIndex: Global.systemSettings.energyUnit === VenusOS.Units_Energy_Amp ? 1 : 0
+				currentIndex: Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Amp ? 1 : 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.setEnergyUnitRequested(model[index].value)
+					Global.systemSettings.energyUnit.setValue(model[index].value)
 				}
 			}
 
@@ -41,10 +41,10 @@ Page {
 					//% "Fahrenheit"
 					{ display: qsTrId("settings_units_fahrenheit"), value: VenusOS.Units_Temperature_Fahrenheit },
 				]
-				currentIndex: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
+				currentIndex: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.setTemperatureUnitRequested(model[index].value)
+					Global.systemSettings.temperatureUnit.setValue(model[index].value)
 				}
 			}
 
@@ -62,16 +62,16 @@ Page {
 					//% "Gallons (Imperial)"
 					{ display: qsTrId("settings_units_gallons_imperial"), value: VenusOS.Units_Volume_GallonImperial },
 				]
-				currentIndex: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Liter
+				currentIndex: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_Liter
 						? 1
-						: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
+						: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_GallonUS
 						  ? 2
-						  : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonImperial
+						  : Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_GallonImperial
 							? 3
 							: 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.setVolumeUnitRequested(model[index].value)
+					Global.systemSettings.volumeUnit.setValue(model[index].value)
 				}
 			}
 		}

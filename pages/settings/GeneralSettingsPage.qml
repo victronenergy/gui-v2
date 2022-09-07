@@ -86,9 +86,9 @@ Page {
 			SettingsListSwitch {
 				//% "Demo mode"
 				text: qsTrId("settings_demo_mode")
-				checked: Global.systemSettings.demoMode == VenusOS.SystemSettings_DemoModeActive
+				checked: Global.systemSettings.demoMode.value === VenusOS.SystemSettings_DemoModeActive
 				onClicked: {
-					Global.systemSettings.setDemoModeRequested(
+					Global.systemSettings.demoMode.setValue(
 						checked ? VenusOS.SystemSettings_DemoModeActive : VenusOS.SystemSettings_DemoModeInactive)
 				}
 			}

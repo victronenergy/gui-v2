@@ -77,7 +77,7 @@ Flickable {
 						? VenusOS.EnvironmentGaugePanel_Size_Expanded
 						: VenusOS.EnvironmentGaugePanel_Size_Compact
 				title: model.input.customName || model.input.productName || ""
-				temperature: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit
+				temperature: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit
 						? Units.celsiusToFahrenheit(model.input.temperature_celsius)
 						: model.input.temperature_celsius
 				humidity: model.input.humidity

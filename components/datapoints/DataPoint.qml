@@ -10,9 +10,7 @@ QtObject {
 
 	property string source
 	property var sourceObject
-	property int sourceType: dbusConnected && Global.demoManager == null
-			? VenusOS.DataPoint_DBusSource
-			: VenusOS.DataPoint_MockSource
+	property int sourceType: dbusConnected ? VenusOS.DataPoint_DBusSource : VenusOS.DataPoint_MockSource
 
 	property var value: sourceObject ? sourceObject.value : undefined
 	property var min: sourceObject ? sourceObject.min : undefined
@@ -35,11 +33,11 @@ QtObject {
 		if (_dbusImpl.status === Component.Error) {
 			console.warn("Unable to load DataPointDBusImpl.qml", _dbusImpl.errorString())
 		} else if (_dbusImpl.status === Component.Ready) {
-			_createImpl()
+			_createDBusImpl()
 		}
 	}
 
-	function _createImpl() {
+	function _createDBusImpl() {
 		if (!_dbusImpl || _dbusImpl.status !== Component.Ready) {
 			console.warn("Cannot create object from component", _dbusImpl ? _dbusImpl.url : "")
 			return
@@ -66,11 +64,13 @@ QtObject {
 						Component.Asynchronous)
 				_dbusImpl.statusChanged.connect(_dbusImplStatusChanged)
 			} else if (_dbusImpl.status === Component.Ready) {
-				_createImpl()
+				_createDBusImpl()
 			}
 
 			break
 		case VenusOS.DataPoint_MockSource:
+			const comp = Qt.createComponent(Qt.resolvedUrl("DataPointMockImpl.qml"))
+			sourceObject = comp.createObject()
 			break
 		default:
 			console.warn("Unknown DataPoint source type:", sourceType)
