@@ -255,10 +255,10 @@ OverviewWidget {
 			QuantityLabel {
 				id: batteryTempDisplay
 
-				value: Math.round(Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+				value: Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 					   ? batteryData.temperature_celsius
 					   : Units.celsiusToFahrenheit(batteryData.temperature_celsius))
-				unit: Global.systemSettings.temperatureUnit
+				unit: Global.systemSettings.temperatureUnit.value
 				font.pixelSize: Theme.font.size.body2
 			}
 		}

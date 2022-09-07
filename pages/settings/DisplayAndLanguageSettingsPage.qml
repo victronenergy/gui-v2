@@ -69,9 +69,9 @@ Page {
 
 				onOptionClicked: function(index) {
 					if (index === 0) {
-						Global.systemSettings.setColorSchemeRequested(Theme.Dark)
+						Global.systemSettings.colorScheme.setValue(Theme.Dark)
 					} else if (index === 1) {
-						Global.systemSettings.setColorSchemeRequested(Theme.Light)
+						Global.systemSettings.colorScheme.setValue(Theme.Light)
 					} else {
 						// TODO set auto mode
 					}

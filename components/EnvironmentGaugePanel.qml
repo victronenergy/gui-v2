@@ -82,15 +82,15 @@ Rectangle {
 		zeroMarkerVisible: true
 		reduceFontSize: root._twoGauges && root.horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Compact
 
-		text: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? "F" : "C"
+		text: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? "F" : "C"
 		value: Math.round(root.temperature)
-		unit: Global.systemSettings.temperatureUnit
+		unit: Global.systemSettings.temperatureUnit.value
 
 		// TODO min and max need to come from dbus backend, but not yet available.
-		minimumValue: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+		minimumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 				? Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue
 				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue)
-		maximumValue: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+		maximumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 				? Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue
 				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
 		gradient: root.temperatureGaugeGradient

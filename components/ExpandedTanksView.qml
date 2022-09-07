@@ -119,7 +119,7 @@ Rectangle {
 					fontSizeMode: Text.HorizontalFit
 					font.pixelSize: Theme.font.size.caption
 					color: Theme.color.font.secondary
-					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
+					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit.value,
 							model.tank.capacity,
 							model.tank.remaining,
 							Theme.geometry.quantityLabel.valueLength)

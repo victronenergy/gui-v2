@@ -129,35 +129,35 @@ Item {
 			event.accepted = true
 			break
 		case Qt.Key_U:
-			Global.systemSettings.setEnergyUnitRequested(
-					Global.systemSettings.energyUnit === VenusOS.Units_Energy_Watt
+			Global.systemSettings.energyUnit.setValue(
+					Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Watt
 					? VenusOS.Units_Energy_Amp
 					: VenusOS.Units_Energy_Watt)
-			Global.systemSettings.setTemperatureUnitRequested(
-					Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+			Global.systemSettings.temperatureUnit.setValue(
+					Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 					? VenusOS.Units_Temperature_Fahrenheit
 					: VenusOS.Units_Temperature_Celsius)
-			Global.systemSettings.setVolumeUnitRequested(
-					Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMeter
+			Global.systemSettings.volumeUnit.setValue(
+					Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_CubicMeter
 					? VenusOS.Units_Volume_Liter
-					: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Liter
+					: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_Liter
 					  ? VenusOS.Units_Volume_GallonUS
-					  : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
+					  : Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_GallonUS
 						? VenusOS.Units_Volume_GallonImperial
 						: VenusOS.Units_Volume_CubicMeter)
 
 			demoConfigTitle.text = "Units: "
-					+ (Global.systemSettings.energyUnit === VenusOS.Units_Energy_Watt
+					+ (Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Watt
 					   ? "Watts"
 					   : "Amps") + " | "
-					+ (Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+					+ (Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 					   ? "Celsius"
 					   : "Fahrenheit") + " | "
-					+ (Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMeter
+					+ (Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_CubicMeter
 					   ? "Cubic meters"
-					   : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Liter
+					   : Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_Liter
 						 ? "Liters"
-						 : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
+						 : Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_GallonUS
 						   ? "Gallons (US)"
 						   : "Gallons (Imperial)")
 			event.accepted = true
