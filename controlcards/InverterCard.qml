@@ -91,16 +91,16 @@ ControlCard {
 				delegate: ButtonControlValue {
 					visible: label.text !== ""
 					value: modelData.currentLimit
-					label.text: dialogManager.inputCurrentLimitDialog.currentLimitText(modelData.inputType)
+					label.text: Global.dialogManager.inputCurrentLimitDialog.currentLimitText(modelData.inputType)
 					enabled: modelData.currentLimitAdjustable
 					//% "%1 A"
 					button.text: qsTrId("amps").arg(value / 1000)
 					onClicked: {
-						dialogManager.inputCurrentLimitDialog.inputIndex = model.index
-						dialogManager.inputCurrentLimitDialog.inputType = modelData.inputType
-						dialogManager.inputCurrentLimitDialog.currentLimit = modelData.currentLimit
-						dialogManager.inputCurrentLimitDialog.ampOptions = root.ampOptions
-						dialogManager.inputCurrentLimitDialog.open()
+						Global.dialogManager.inputCurrentLimitDialog.inputIndex = model.index
+						Global.dialogManager.inputCurrentLimitDialog.inputType = modelData.inputType
+						Global.dialogManager.inputCurrentLimitDialog.currentLimit = modelData.currentLimit
+						Global.dialogManager.inputCurrentLimitDialog.ampOptions = root.ampOptions
+						Global.dialogManager.inputCurrentLimitDialog.open()
 					}
 				}
 			}
@@ -110,31 +110,31 @@ ControlCard {
 			button.width: Math.max(button.implicitWidth, 180)
 			//% "Mode"
 			label.text: qsTrId("controlcard_mode")
-			button.text: dialogManager.inverterChargerModeDialog.modeText(root.mode)
+			button.text: Global.dialogManager.inverterChargerModeDialog.modeText(root.mode)
 			enabled: root.modeAdjustable
 
 			onClicked: {
-				dialogManager.inverterChargerModeDialog.mode = root.mode
-				dialogManager.inverterChargerModeDialog.open()
+				Global.dialogManager.inverterChargerModeDialog.mode = root.mode
+				Global.dialogManager.inverterChargerModeDialog.open()
 			}
 		}
 	}
 	Connections {
-		target: dialogManager.inputCurrentLimitDialog
+		target: Global.dialogManager.inputCurrentLimitDialog
 		function onAccepted() {
-			var inverter = currentLimitRepeater.itemAt(dialogManager.inputCurrentLimitDialog.inputIndex)
+			var inverter = currentLimitRepeater.itemAt(Global.dialogManager.inputCurrentLimitDialog.inputIndex)
 			if (inverter != null
-					&& inverter.currentLimit !== dialogManager.inputCurrentLimitDialog.currentLimit) {
-				root.changeCurrentLimit(dialogManager.inputCurrentLimitDialog.inputIndex,
-						dialogManager.inputCurrentLimitDialog.currentLimit)
+					&& inverter.currentLimit !== Global.dialogManager.inputCurrentLimitDialog.currentLimit) {
+				root.changeCurrentLimit(Global.dialogManager.inputCurrentLimitDialog.inputIndex,
+						Global.dialogManager.inputCurrentLimitDialog.currentLimit)
 			}
 		}
 	}
 	Connections {
-		target: dialogManager.inverterChargerModeDialog
+		target: Global.dialogManager.inverterChargerModeDialog
 		function onAccepted() {
-			if (root.mode !== dialogManager.inverterChargerModeDialog.mode) {
-				root.changeMode(dialogManager.inverterChargerModeDialog.mode)
+			if (root.mode !== Global.dialogManager.inverterChargerModeDialog.mode) {
+				root.changeMode(Global.dialogManager.inverterChargerModeDialog.mode)
 			}
 		}
 	}

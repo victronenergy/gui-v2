@@ -11,7 +11,6 @@ import "demo" as Demo
 Item {
 	id: root
 
-	property alias dialogManager: dialogManager
 	property alias mainView: mainView
 
 	property var _inputComponent
@@ -88,7 +87,6 @@ Item {
 
 	DialogManager {
 		// we rely on the implicit Z ordering, so must be declared after the other views.
-		id: dialogManager
 	}
 
 	// Create the InputPanel dynamically in case QtQuick.VirtualKeyboard is not available (e.g. on

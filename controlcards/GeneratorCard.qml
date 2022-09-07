@@ -120,13 +120,13 @@ ControlCard {
 		onClicked: {
 			if (root.autostart) {
 				// check if they really want to disable
-				dialogManager.generatorDisableAutostartDialog.open()
+				Global.dialogManager.generatorDisableAutostartDialog.open()
 			} else {
 				root.changeAutoStart(true)
 			}
 		}
 		Connections {
-			target: dialogManager.generatorDisableAutostartDialog
+			target: Global.dialogManager.generatorDisableAutostartDialog
 			function onAccepted() {
 				root.changeAutoStart(false)
 			}
@@ -201,12 +201,12 @@ ControlCard {
 					&& root.state !== VenusOS.Generators_State_Running
 			button.text: Utils.formatAsHHMM(durationButton.duration)
 
-			onClicked: dialogManager.generatorDurationSelectorDialog.open()
+			onClicked: Global.dialogManager.generatorDurationSelectorDialog.open()
 
 			Connections {
-				target: dialogManager.generatorDurationSelectorDialog
+				target: Global.dialogManager.generatorDurationSelectorDialog
 				function onDurationChanged() {
-					durationButton.duration = dialogManager.generatorDurationSelectorDialog.duration
+					durationButton.duration = Global.dialogManager.generatorDurationSelectorDialog.duration
 				}
 			}
 		}

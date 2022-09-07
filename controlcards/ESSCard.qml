@@ -66,8 +66,8 @@ ControlCard {
 			label.text: qsTrId("ess_card_minimum_soc")
 			button.text: qsTrId("%1%").arg(root.minimumStateOfCharge)
 			onClicked: {
-				dialogManager.essMinimumSOCDialog.minimumStateOfCharge = root.minimumStateOfCharge
-				dialogManager.essMinimumSOCDialog.open()
+				Global.dialogManager.essMinimumSOCDialog.minimumStateOfCharge = root.minimumStateOfCharge
+				Global.dialogManager.essMinimumSOCDialog.open()
 			}
 		}
 
@@ -105,9 +105,9 @@ ControlCard {
 	}
 
 	Connections {
-		target: dialogManager.essMinimumSOCDialog
+		target: Global.dialogManager.essMinimumSOCDialog
 		function onAccepted() {
-			root.changeMinimumStateOfCharge(dialogManager.essMinimumSOCDialog.minimumStateOfCharge)
+			root.changeMinimumStateOfCharge(Global.dialogManager.essMinimumSOCDialog.minimumStateOfCharge)
 		}
 	}
 }

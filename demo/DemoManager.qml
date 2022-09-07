@@ -120,7 +120,7 @@ Item {
 			event.accepted = true
 			break
 		case Qt.Key_P:
-			dialogManager.showWarning(notificationsConfig.warningNotificationTitle, notificationsConfig.warningNotificationDescription)
+			Global.dialogManager.showWarning(notificationsConfig.warningNotificationTitle, notificationsConfig.warningNotificationDescription)
 			event.accepted = true
 			break
 		case Qt.Key_T:
