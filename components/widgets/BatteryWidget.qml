@@ -13,32 +13,8 @@ OverviewWidget {
 	property var batteryData
 	property alias animationPaused: barAnimation.paused
 
-	property var _evenAnimationTargets: []
-	property var _oddAnimationTargets: []
 	readonly property int _normalizedStateOfCharge: isNaN(batteryData.stateOfCharge) ? 0 : Math.round(batteryData.stateOfCharge)
 	readonly property bool _animationReady: animationEnabled && !isNaN(batteryData.stateOfCharge)
-
-	function _updateBarAnimation() {
-		let evenTargets = []
-		let oddTargets = []
-		for (let i = 0; i < animatedBarsRepeater.count; ++i) {
-			const animationTarget = animatedBarsRepeater.itemAt(i)
-			if (!animationTarget) {
-				// Don't set animation targets until all bar delegates have been initialized
-				return
-			}
-			if (i % 2 == 0) {
-				evenTargets.push(animationTarget)
-			} else {
-				oddTargets.push(animationTarget)
-			}
-		}
-		root._evenAnimationTargets = evenTargets
-		root._oddAnimationTargets = oddTargets
-		if (root._animationReady) {
-			barAnimation.restart()
-		}
-	}
 
 	//% "Battery"
 	title: qsTrId("overview_widget_battery_title")
@@ -124,7 +100,7 @@ OverviewWidget {
 						radius: height
 					}
 
-					Component.onCompleted: Qt.callLater(root._updateBarAnimation)
+					Component.onCompleted: Qt.callLater(barAnimation.update)
 				}
 			}
 		}
@@ -142,12 +118,37 @@ OverviewWidget {
 	SequentialAnimation {
 		id: barAnimation
 
+		property var _evenAnimationTargets: []
+		property var _oddAnimationTargets: []
+
+		function update() {
+			let evenTargets = []
+			let oddTargets = []
+			for (let i = 0; i < animatedBarsRepeater.count; ++i) {
+				const animationTarget = animatedBarsRepeater.itemAt(i)
+				if (!animationTarget) {
+					// Don't set animation targets until all bar delegates have been initialized
+					return
+				}
+				if (i % 2 == 0) {
+					evenTargets.push(animationTarget)
+				} else {
+					oddTargets.push(animationTarget)
+				}
+			}
+			barAnimation._evenAnimationTargets = evenTargets
+			barAnimation._oddAnimationTargets = oddTargets
+			if (root._animationReady) {
+				barAnimation.restart()
+			}
+		}
+
 		loops: Animation.Infinite
 		running: root._animationReady
 
 		ParallelAnimation {
 			NumberAnimation {
-				targets: root._evenAnimationTargets
+				targets: barAnimation._evenAnimationTargets
 				property: "barWidth"
 				from: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
 				to: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
@@ -155,7 +156,7 @@ OverviewWidget {
 				alwaysRunToEnd: true
 			}
 			NumberAnimation {
-				targets: root._oddAnimationTargets
+				targets: barAnimation._oddAnimationTargets
 				property: "barWidth"
 				from: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
 				to: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
@@ -168,7 +169,7 @@ OverviewWidget {
 		}
 		ParallelAnimation {
 			NumberAnimation {
-				targets: root._evenAnimationTargets
+				targets: barAnimation._evenAnimationTargets
 				property: "barWidth"
 				from: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
 				to: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
@@ -176,7 +177,7 @@ OverviewWidget {
 				alwaysRunToEnd: true
 			}
 			NumberAnimation {
-				targets: root._oddAnimationTargets
+				targets: barAnimation._oddAnimationTargets
 				property: "barWidth"
 				from: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
 				to: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
