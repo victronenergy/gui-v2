@@ -15,6 +15,8 @@ OverviewWidget {
 
 	property var _evenAnimationTargets: []
 	property var _oddAnimationTargets: []
+	readonly property int _normalizedStateOfCharge: isNaN(batteryData.stateOfCharge) ? 0 : Math.round(batteryData.stateOfCharge)
+	readonly property bool _animationReady: animationEnabled && !isNaN(batteryData.stateOfCharge)
 
 	function _updateBarAnimation() {
 		let evenTargets = []
@@ -33,7 +35,7 @@ OverviewWidget {
 		}
 		root._evenAnimationTargets = evenTargets
 		root._oddAnimationTargets = oddTargets
-		if (root.animationEnabled) {
+		if (root._animationReady) {
 			barAnimation.restart()
 		}
 	}
@@ -59,8 +61,8 @@ OverviewWidget {
 
 		gradient: Gradient {
 			GradientStop { position: 0.0; color: Theme.color.overviewPage.widget.background }
-			GradientStop { position: Math.min(0.999999, (1.0 - root.quantityLabel.value/100)); color: Theme.color.overviewPage.widget.background }
-			GradientStop { position: Math.min(1.0, (1.0 - root.quantityLabel.value/100) + 0.001); color: Theme.color.overviewPage.widget.battery.background }
+			GradientStop { position: Math.min(0.999999, (1.0 - _normalizedStateOfCharge/100)); color: Theme.color.overviewPage.widget.background }
+			GradientStop { position: Math.min(1.0, (1.0 - _normalizedStateOfCharge/100) + 0.001); color: Theme.color.overviewPage.widget.battery.background }
 			GradientStop { position: 1.0; color: Theme.color.overviewPage.widget.battery.background }
 		}
 
@@ -68,7 +70,7 @@ OverviewWidget {
 			id: animationGrid
 			anchors {
 				top: parent.top
-				topMargin: parent.height - Math.floor(parent.height * root.quantityLabel.value/100) - root.border.width*2
+				topMargin: parent.height - Math.floor(parent.height * _normalizedStateOfCharge/100) - root.border.width*2
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
 			}
@@ -91,7 +93,7 @@ OverviewWidget {
 				model: {
 					// Always use the compactHeight to calculate the model, to avoid changing the
 					// model when switching between expanded and compact height.
-					const compactAnimatingAreaHeight = Math.floor(root.compactHeight * root.quantityLabel.value/100) - root.border.width*2
+					const compactAnimatingAreaHeight = Math.floor(root.compactHeight * _normalizedStateOfCharge/100) - root.border.width*2
 					const maxHeight = compactAnimatingAreaHeight - Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2
 					const maxRows = maxHeight / (Theme.geometry.overviewPage.widget.battery.animatedBar.height
 						+ Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2)
@@ -141,7 +143,7 @@ OverviewWidget {
 		id: barAnimation
 
 		loops: Animation.Infinite
-		running: root.animationEnabled
+		running: root._animationReady
 
 		ParallelAnimation {
 			NumberAnimation {
