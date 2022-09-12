@@ -157,12 +157,12 @@
         <file>pages/PageManager.qml</file>
         <file>pages/SettingsPage.qml</file>
         <file>pages/TanksTab.qml</file>
-        <file>pages/settings/BriefViewSettingsPage.qml</file>
-        <file>pages/settings/DemoSettingsPage.qml</file>
-        <file>pages/settings/DisplayAndLanguageSettingsPage.qml</file>
-        <file>pages/settings/GeneralSettingsPage.qml</file>
         <file>pages/settings/AccessLevelRadioButtonGroup.qml</file>
-        <file>pages/settings/UnitSettingsPage.qml</file>
+        <file>pages/settings/PageSettingsDemo.qml</file>
+        <file>pages/settings/PageSettingsDisplay.qml</file>
+        <file>pages/settings/PageSettingsDisplayBrief.qml</file>
+        <file>pages/settings/PageSettingsDisplayUnits.qml</file>
+        <file>pages/settings/PageSettingsGeneral.qml</file>
         <file>dialogs/DialogManager.qml</file>
         <file>dialogs/ModalDialog.qml</file>
         <file>dialogs/ModalWarningDialog.qml</file>

@@ -82,7 +82,7 @@ Page {
 				//% "Brief view levels"
 				text: qsTrId("settings_brief_view_levels")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/BriefViewSettingsPage.qml", {"title": text})
+					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayBrief.qml", {"title": text})
 				}
 			}
 
@@ -103,7 +103,7 @@ Page {
 				//% "Units"
 				text: qsTrId("settings_units")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/UnitSettingsPage.qml", {"title": text})
+					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
 				}
 			}
 		}
