@@ -13,24 +13,30 @@ QtObject {
 	property var _inputs: []
 
 	function _getInputs() {
-		const childIds = veSystemAcIn.childIds
-
 		let inputIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let id = childIds[i]
+		for (let i = 0; i < veSystemAcIn.count; ++i) {
+			const uid = veSystemAcIn.objectAt(i).uid
+			const id = uid.substring(uid.lastIndexOf('/') + 1)
 			if (!isNaN(parseInt(id))) {
-				inputIds.push(id)
+				inputIds.push(uid)
 			}
 		}
-
 		if (Utils.arrayCompare(_inputs, inputIds) !== 0) {
 			_inputs = inputIds
 		}
 	}
 
-	property VeQuickItem veSystemAcIn: VeQuickItem {
-		uid: "dbus/com.victronenergy.system/Ac/In"
-		onChildIdsChanged: Qt.callLater(_getInputs)
+	property Instantiator veSystemAcIn: Instantiator {
+		model: VeQItemTableModel {
+			uids: ["dbus/com.victronenergy.system/Ac/In"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: QtObject {
+			property var uid: model.uid
+		}
+
+		onCountChanged: Qt.callLater(root._getInputs)
 	}
 
 	/*
@@ -49,8 +55,7 @@ QtObject {
 		delegate: QtObject {
 			id: input
 
-			property string uid: modelData
-			property string configUid: veSystemAcIn.uid + "/" + input.uid
+			property string configUid: modelData
 
 			property string serviceType     // e.g. "vebus"
 			property string serviceName     // e.g. "com.victronenergy.vebus.ttyO1"
@@ -133,9 +138,5 @@ QtObject {
 				valid: serviceType == "vebus" ? input.connected : true
 			}
 		}
-	}
-
-	Component.onCompleted: {
-		_getInputs()
 	}
 }

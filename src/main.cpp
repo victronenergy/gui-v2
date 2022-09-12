@@ -16,6 +16,7 @@
 #include "velib/qt/ve_qitems_dbus.hpp"
 #include "velib/qt/ve_qitem.hpp"
 #include "velib/qt/ve_quick_item.hpp"
+#include "velib/qt/ve_qitem_table_model.hpp"
 #include "gui-v1/dbus_services.h"
 #include "gui-v1/alarmbusitem.h"
 #endif
@@ -338,6 +339,7 @@ int main(int argc, char *argv[])
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
 	qmlRegisterType<VeQItem>("Victron.Velib", 1, 0, "VeQItem");
+	qmlRegisterType<VeQItemTableModel>("Victron.Velib", 1, 0, "VeQItemTableModel");
 #endif
 
 	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");
