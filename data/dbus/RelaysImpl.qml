@@ -13,24 +13,30 @@ QtObject {
 	property var _relays: []
 
 	function _getRelays() {
-		const childIds = veRelay.childIds
-
 		let relayIds = []
-		for (let i = 0; i < childIds.length; ++i) {
-			let id = childIds[i]
+		for (let i = 0; i < veRelay.count; ++i) {
+			const uid = veRelay.objectAt(i).uid
+			const id = uid.substring(uid.lastIndexOf('/') + 1)
 			if (!isNaN(parseInt(id))) {
-				relayIds.push(id)
+				relayIds.push(uid)
 			}
 		}
-
 		if (Utils.arrayCompare(_relays, relayIds) !== 0) {
 			_relays = relayIds
 		}
 	}
 
-	property VeQuickItem veRelay: VeQuickItem {
-		uid: "dbus/com.victronenergy.system/Relay"
-		onChildIdsChanged: Qt.callLater(_getRelays)
+	property Instantiator veRelay:  Instantiator {
+		model: VeQItemTableModel {
+			uids: ["dbus/com.victronenergy.system/Relay"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: QtObject {
+			property var uid: model.uid
+		}
+
+		onCountChanged: Qt.callLater(root._getRelays)
 	}
 
 	property Instantiator relayObjects: Instantiator {
@@ -56,13 +62,9 @@ QtObject {
 			}
 
 			property VeQuickItem _state: VeQuickItem {
-				uid: veRelay.uid + "/" + relay.uid + "/State"
+				uid: relay.uid + "/State"
 				onValueChanged: relay.state = value === undefined ? -1 : value
 			}
 		}
-	}
-
-	Component.onCompleted: {
-		_getRelays()
 	}
 }

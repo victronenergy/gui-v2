@@ -23,5 +23,28 @@ QtObject {
 	property var systemSettings: SystemSettingsImpl { }
 	property var tanks: TanksImpl { veServiceIds: veDBus.childIds }
 
-	property var veDBus: VeQuickItem { uid: "dbus" }
+	property Instantiator veDBus:  Instantiator {
+		property var childIds: []
+
+		function _reloadChildIds() {
+			let _childIds = []
+			for (let i = 0; i < count; ++i) {
+				const child = objectAt(i)
+				const uid = child.uid.substring(5)    // remove 'dbus/' from start of string
+				_childIds.push(uid)
+			}
+			childIds = _childIds
+		}
+
+		model: VeQItemTableModel {
+			uids: ["dbus"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: QtObject {
+			property var uid: model.uid
+		}
+
+		onCountChanged: Qt.callLater(_reloadChildIds)
+	}
 }
