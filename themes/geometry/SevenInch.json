@@ -29,9 +29,8 @@
 
     "geometry.settingsListItem.height": 64,
     "geometry.settingsListItem.radius": 8,
-    "geometry.settingsListItem.content.leftMargin": 24,
-    "geometry.settingsListItem.content.rightMargin": 18,
-    "geometry.settingsListItem.content.verticalMargin": 12,
+    "geometry.settingsListItem.content.horizontalMargin": 24,
+    "geometry.settingsListItem.content.verticalMargin": 20,
     "geometry.settingsListItem.content.spacing": 17,
     "geometry.settingsListItem.separator.width": 1,
     "geometry.settingsListItem.slider.width": 560,

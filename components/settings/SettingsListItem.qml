@@ -22,8 +22,11 @@ Item {
 	readonly property bool defaultVisible: Global.systemSettings.accessLevel.value !== undefined
 			&& Global.systemSettings.accessLevel.value >= showAccessLevel
 
-	width: parent ? parent.width : 0
-	implicitHeight: visible ? backgroundRect.height + spacing : 0
+	implicitWidth: parent ? parent.width : 0
+	implicitHeight: visible
+		? Math.max(primaryLabel.implicitHeight + Theme.geometry.settingsListItem.content.verticalMargin * 2,
+				   Theme.geometry.settingsListItem.height)
+		: 0
 	visible: defaultVisible
 	enabled: userHasWriteAccess
 
@@ -31,8 +34,7 @@ Item {
 		id: backgroundRect
 
 		width: root.width
-		height: Math.max(primaryLabel.height + Theme.geometry.settingsListItem.content.verticalMargin * 2,
-				Theme.geometry.settingsListItem.height)
+		height: root.height - root.spacing
 		radius: Theme.geometry.settingsListItem.radius
 		color: root.down ? Theme.color.settingsListItem.down.background : Theme.color.settingsListItem.background
 	}
@@ -42,11 +44,11 @@ Item {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry.settingsListItem.content.leftMargin
+			leftMargin: Theme.geometry.settingsListItem.content.horizontalMargin
 			right: content.left
 			rightMargin: Theme.geometry.settingsListItem.content.spacing
-			verticalCenter: parent.verticalCenter
-			verticalCenterOffset: -root.spacing/2
+			top: parent.top
+			topMargin: Theme.geometry.settingsListItem.content.verticalMargin - root.spacing/2
 		}
 		font.pixelSize: Theme.font.size.body2
 		wrapMode: Text.Wrap
@@ -57,9 +59,8 @@ Item {
 
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry.settingsListItem.content.rightMargin
-			verticalCenter: parent.verticalCenter
-			verticalCenterOffset: -root.spacing/2
+			rightMargin: Theme.geometry.settingsListItem.content.horizontalMargin
+			verticalCenter: primaryLabel.verticalCenter
 		}
 		spacing: Theme.geometry.settingsListItem.content.spacing
 	}
