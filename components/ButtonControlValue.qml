@@ -14,16 +14,10 @@ ControlValue {
 
 	implicitHeight: Theme.geometry.controlCard.largeItem.height
 
-	contentRow.children: Button {
+	contentRow.children: ListItemButton {
 		id: button
 
 		anchors.verticalCenter: parent.verticalCenter
-		height: Theme.geometry.buttonControlValue.height
-		width: Theme.geometry.buttonControlValue.width
-
-		flat: !enabled
-		border.color: Theme.color.ok
-		font.pixelSize: Theme.font.size.body2
 
 		onClicked: root.clicked()
 	}

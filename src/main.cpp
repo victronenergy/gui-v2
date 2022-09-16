@@ -103,6 +103,8 @@ int main(int argc, char *argv[])
 	/* controls */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Button.qml")),
 		"Victron.VenusOS", 2, 0, "Button");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ListItemButton.qml")),
+		"Victron.VenusOS", 2, 0, "ListItemButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Label.qml")),
 		"Victron.VenusOS", 2, 0, "Label");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ProgressBar.qml")),

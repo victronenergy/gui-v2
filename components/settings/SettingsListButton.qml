@@ -14,13 +14,9 @@ SettingsListItem {
 	signal clicked()
 
 	content.children: [
-		Button {
+		ListItemButton {
 			id: button
 
-			width: implicitWidth + 2*Theme.geometry.settingsListButton.contents.horizontalMargin
-			height: Theme.geometry.settingsListButton.height
-			radius: Theme.geometry.settingsListButton.radius
-			flat: false
 			enabled: root.userHasWriteAccess
 
 			onClicked: root.clicked()
