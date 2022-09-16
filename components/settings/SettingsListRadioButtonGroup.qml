@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -21,22 +21,27 @@ SettingsListNavigationItem {
 	property var model: []
 	property int currentIndex
 
+	property int defaultIndex: -1
+
+	//% "Unknown"
+	property string defaultSecondaryText: qsTrId("settings_list_radio_button_group_unknown")
+
 	signal optionClicked(index: int)
 
 	secondaryText: currentIndex >= 0 && model.length !== undefined && currentIndex < model.length
 			? model[currentIndex].display
-			: ""
+			: defaultSecondaryText
 
 	currentIndex: {
 		if (!model || model.length === undefined || source.length === 0 || dataPoint.value === undefined) {
-			return -1
+			return defaultIndex
 		}
 		for (let i = 0; i < model.length; ++i) {
 			if (model[i].value === dataPoint.value) {
 				return i
 			}
 		}
-		return -1
+		return defaultIndex
 	}
 
 	onClicked: {
@@ -72,7 +77,7 @@ SettingsListNavigationItem {
 					}
 				}
 
-				ButtonGroup {
+				C.ButtonGroup {
 					id: radioButtonGroup
 				}
 			}

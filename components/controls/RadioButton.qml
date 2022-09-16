@@ -51,5 +51,6 @@ CT.RadioButton {
 		font.pixelSize: Theme.font.size.body2
 		text: root.text
 		verticalAlignment: Text.AlignVCenter
+		color: root.enabled ? Theme.color.font.primary : Theme.color.font.disabled
 	}
 }

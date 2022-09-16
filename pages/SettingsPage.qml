@@ -23,6 +23,11 @@ Page {
 				page: "/pages/settings/PageSettingsRemoteConsole.qml"
 			},
 			{
+				//% "System setup"
+				text: qsTrId("settings_system_setup"),
+				page: "/pages/settings/PageSettingsSystem.qml"
+			},
+			{
 				//% "Display & Language"
 				text: qsTrId("settings_display_and_language"),
 				page: "/pages/settings/PageSettingsDisplay.qml"
