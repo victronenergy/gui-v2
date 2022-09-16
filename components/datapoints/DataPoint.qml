@@ -70,7 +70,7 @@ QtObject {
 			break
 		case VenusOS.DataPoint_MockSource:
 			const comp = Qt.createComponent(Qt.resolvedUrl("DataPointMockImpl.qml"))
-			sourceObject = comp.createObject()
+			sourceObject = comp.createObject(root, { "source": root.source })
 			break
 		default:
 			console.warn("Unknown DataPoint source type:", sourceType)
