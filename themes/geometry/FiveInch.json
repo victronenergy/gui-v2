@@ -8,8 +8,9 @@
     "geometry.button.radius": 6,
     "geometry.button.border.width": 2,
 
-    "geometry.buttonControlValue.height": 40,
-    "geometry.buttonControlValue.width": 112,
+    "geometry.listItemButton.horizontalPadding": 16,
+    "geometry.listItemButton.maximumWidth": 180,
+    "geometry.listItemButton.height": 40,
 
     "geometry.panel.radius": 8,
 
@@ -25,10 +26,6 @@
     "geometry.scrollBar.horizontalMargin": 8,
 
     "geometry.segmentedButtonRow.height": 48,
-
-    "geometry.settingsListButton.height": 34,
-    "geometry.settingsListButton.radius": 6,
-    "geometry.settingsListButton.contents.horizontalMargin": 16,
 
     "geometry.settingsListItem.height": 48,
     "geometry.settingsListItem.radius": 8,
