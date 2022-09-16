@@ -52,6 +52,9 @@ CT.Switch {
 		source: "qrc:/images/switch_indicator.png"
 
 		Behavior on x {
+			id: valueChangeBehavior
+			enabled: false
+
 			NumberAnimation {
 				duration: 200
 				easing.type: Easing.InOutQuad
@@ -65,4 +68,7 @@ CT.Switch {
 		color: Theme.color.font.primary
 		verticalAlignment: Text.AlignVCenter
 	}
+
+	// Don't animate the value change when setting the value on initial load
+	Component.onCompleted: valueChangeBehavior.enabled = true
 }
