@@ -17,6 +17,7 @@
         <file>components/datapoints/DataPointDBusImpl.qml</file>
         <file>components/datapoints/DataPointMockImpl.qml</file>
         <file>components/datapoints/DemoModeDataPoint.qml</file>
+        <file>components/settings/SettingsLabel.qml</file>
         <file>components/settings/SettingsListButton.qml</file>
         <file>components/settings/SettingsListView.qml</file>
         <file>components/settings/SettingsListNavigationItem.qml</file>
