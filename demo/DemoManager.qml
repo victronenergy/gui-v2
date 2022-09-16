@@ -10,6 +10,7 @@ Item {
 	id: root
 
 	property bool timersActive: !Global.splashScreenVisible
+	property var mockDataValues: ({})
 
 	signal setBatteryRequested(var config)
 	signal setAcInputsRequested(var config)
