@@ -37,6 +37,7 @@ Item {
 		height: root.height - root.spacing
 		radius: Theme.geometry.settingsListItem.radius
 		color: root.down ? Theme.color.settingsListItem.down.background : Theme.color.settingsListItem.background
+		// TODO how to indicate read-only setting?
 	}
 
 	Label {

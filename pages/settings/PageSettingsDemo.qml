@@ -56,6 +56,7 @@ Page {
 					ListElement { display: "Option C"; value: 3 }
 				}
 				currentIndex: 2
+				secondaryText: model.get(2).display
 
 				onOptionClicked: function(index) {
 					console.log("Radio button clicked at index", index)

@@ -40,6 +40,8 @@ QtObject {
 		setMockSettingValue("SystemSetup/Batteries/Configuration/com_victronenergy_battery/0/Name", "My battery")
 		setMockSettingValue("SystemSetup/Batteries/Configuration/com_victronenergy_vebus/257/Enabled", 1)
 		setMockSettingValue("SystemSetup/Batteries/Configuration/com_victronenergy_vebus/257/Name", "")
+		setMockSettingValue("SystemSetup/BatteryService", "default")
+		setMockSettingValue("Alarm/System/GridLost", 1)
 	}
 
 	property Connections briefSettingsConn: Connections {

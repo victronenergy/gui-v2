@@ -10,6 +10,7 @@ SettingsListItem {
 
 	property alias secondaryText: secondaryLabel.text
 	property alias source: dataPoint.source
+	property alias dataPoint: dataPoint
 
 	content.children: [
 		Label {

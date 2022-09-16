@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls as C
 import Victron.VenusOS
 
 SettingsListItem {
@@ -21,7 +21,7 @@ SettingsListItem {
 		RadioButton {
 			id: radioButton
 
-			ButtonGroup.group: root.buttonGroup
+			C.ButtonGroup.group: root.buttonGroup
 			onClicked: root.clicked()
 		}
 	]

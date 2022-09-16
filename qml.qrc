@@ -166,6 +166,9 @@
         <file>pages/settings/PageSettingsDisplayUnits.qml</file>
         <file>pages/settings/PageSettingsGeneral.qml</file>
         <file>pages/settings/PageSettingsRemoteConsole.qml</file>
+        <file>pages/settings/PageSettingsBatteries.qml</file>
+        <file>pages/settings/PageSettingsSystem.qml</file>
+        <file>pages/settings/PageSettingsSystemStatus.qml</file>
         <file>dialogs/DialogManager.qml</file>
         <file>dialogs/ModalDialog.qml</file>
         <file>dialogs/ModalWarningDialog.qml</file>
