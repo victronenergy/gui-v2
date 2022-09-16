@@ -3,7 +3,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls
 import Victron.VenusOS
 
 import "/components/Gauges.js" as Gauges

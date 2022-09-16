@@ -4,7 +4,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls
 import QtQuick.Controls.impl as CP
 
 ControlCard {
