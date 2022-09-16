@@ -227,6 +227,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "DemoModeDataPoint");
 
 	/* settings list items */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsLabel.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListButton.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListItem.qml")),

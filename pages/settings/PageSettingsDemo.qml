@@ -13,6 +13,9 @@ Page {
 		id: settingsListView
 
 		model: ObjectModel {
+			SettingsLabel {
+				text: "This page demonstrates the components that can be used to build settings pages."
+			}
 
 			SettingsListNavigationItem {
 				text: "Page launch"
@@ -78,7 +81,6 @@ Page {
 
 			SettingsListSlider {
 				text: "Slider"
-
 				slider.from: 1
 				slider.to: 100
 				slider.stepSize: 10
