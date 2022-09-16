@@ -13,8 +13,11 @@ QtObject {
 	property int sourceType: dbusConnected ? VenusOS.DataPoint_DBusSource : VenusOS.DataPoint_MockSource
 
 	property var value: sourceObject ? sourceObject.value : undefined
-	property var min: sourceObject ? sourceObject.min : undefined
-	property var max: sourceObject ? sourceObject.max : undefined
+
+	property bool hasMin
+	property bool hasMax
+	property var min: hasMin && sourceObject ? sourceObject.min : undefined
+	property var max: hasMax && sourceObject ? sourceObject.max : undefined
 
 	property var _dbusImpl
 
