@@ -205,7 +205,7 @@ ControlCard {
 
 			Connections {
 				target: Global.dialogManager.generatorDurationSelectorDialog
-				function onDurationChanged() {
+				function onAccepted() {
 					durationButton.duration = Global.dialogManager.generatorDurationSelectorDialog.duration
 				}
 			}
