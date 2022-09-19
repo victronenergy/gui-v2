@@ -89,6 +89,7 @@
         <file>components/StatusBar.qml</file>
         <file>components/TankGauge.qml</file>
         <file>components/ThreePhaseDisplay.qml</file>
+        <file>components/TimeSelector.qml</file>
         <file>components/ToastNotification.qml</file>
         <file>components/QuantityLabel.qml</file>
         <file>components/EnergyQuantityLabel.qml</file>

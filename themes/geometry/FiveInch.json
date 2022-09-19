@@ -68,6 +68,11 @@
     "geometry.tabBar.width": 368,
     "geometry.tabBar.height": 40,
 
+    "geometry.timeSelector.spinBox.width": 238,
+    "geometry.timeSelector.spinBox.height": 72,
+    "geometry.timeSelector.spacing": 24,
+    "geometry.timeSelector.timeLabel.spacing": 10,
+
     "geometry.navigationBar.initialize.margin": 12,
     "geometry.navigationBar.height": 72,
     "geometry.navigationBar.spacing": 8,
@@ -114,6 +119,8 @@
     "geometry.toastNotification.minHeight": 64,
     "geometry.toastNotification.icon.width": 28,
     "geometry.toastNotification.label.padding": 16,
+
+    "geometry.generatorDurationSelectorDialog.content.topMargin": 100,
 
     "geometry.controlCard.minimumWidth": 352,
     "geometry.controlCard.maximumWidth": 368,
