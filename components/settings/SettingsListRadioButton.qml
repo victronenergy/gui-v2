@@ -11,7 +11,6 @@ SettingsListItem {
 
 	property alias checked: radioButton.checked
 	property alias radioButton: radioButton
-	property var buttonGroup: QtObject {}
 
 	signal clicked()
 
@@ -21,7 +20,6 @@ SettingsListItem {
 		RadioButton {
 			id: radioButton
 
-			C.ButtonGroup.group: root.buttonGroup
 			onClicked: root.clicked()
 		}
 	]

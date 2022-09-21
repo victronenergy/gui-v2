@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Controls as C
 
 import "/components/Gauges.js" as Gauges
 
@@ -71,14 +72,14 @@ Page {
 				delegate: SettingsListRadioButton {
 					text: Gauges.tankProperties(modelData).name || ""
 					checked: tankType === modelData
-					buttonGroup: radioButtonGroup
+					C.ButtonGroup.group: radioButtonGroup
 
 					onClicked: {
 						Global.systemSettings.briefView.setGauge(levelIndex, modelData)
 					}
 				}
 
-				ButtonGroup {
+				C.ButtonGroup {
 					id: radioButtonGroup
 				}
 			}

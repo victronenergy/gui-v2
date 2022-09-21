@@ -67,7 +67,7 @@ SettingsListNavigationItem {
 						  ? modelData.display || ""
 						  : model.display || ""
 					checked: root.currentIndex === model.index
-					buttonGroup: radioButtonGroup
+					C.ButtonGroup.group: radioButtonGroup
 
 					onClicked: {
 						if (root.updateOnClick) {
