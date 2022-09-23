@@ -87,7 +87,13 @@ Page {
 				//% "Demo mode"
 				text: qsTrId("settings_demo_mode")
 				checked: Global.systemSettings.demoMode.value === VenusOS.SystemSettings_DemoModeActive
+				checkWhenClicked: false
 				onClicked: {
+					if (checked && !dbusConnected) {
+						//% "No backend source available. Demo mode cannot be deactivated!"
+						Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, qsTrId("settings_general_no_backend_source"))
+						return
+					}
 					Global.systemSettings.demoMode.setValue(
 						checked ? VenusOS.SystemSettings_DemoModeActive : VenusOS.SystemSettings_DemoModeInactive)
 				}
