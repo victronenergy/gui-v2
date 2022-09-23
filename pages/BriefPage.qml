@@ -124,7 +124,7 @@ Page {
 
 		anchors {
 			top: leftEdge.bottom
-			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
+			topMargin: leftEdge.active ? Theme.geometry.briefPage.lowerGauge.topMargin : 0
 			left: parent.left
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			right: mainGauge.left
@@ -132,7 +132,7 @@ Page {
 		active: Global.solarChargers.model.count > 0
 
 		sourceComponent: SolarYieldGauge {
-			gaugeAlignmentY: Qt.AlignBottom
+			gaugeAlignmentY: leftEdge.active ? Qt.AlignBottom : Qt.AlignVCenter
 
 			x: root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity

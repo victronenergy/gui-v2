@@ -40,7 +40,7 @@ Item {
 			strokeWidth: Theme.geometry.arc.strokeWidth
 			arcY: root.gaugeAlignmentY === Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
 
-			value: Utils.scaleToRange(yieldValue, 0, gaugeRepeater.maximumYieldValue, 0, 100)
+			value: gaugeRepeater.maximumYieldIndex < 0 ? NaN : Utils.scaleToRange(yieldValue, 0, gaugeRepeater.maximumYieldValue, 0, 100)
 			onYieldValueChanged: Utils.updateMaximumYield(gaugeRepeater, model.index, yieldValue)
 		}
 	}

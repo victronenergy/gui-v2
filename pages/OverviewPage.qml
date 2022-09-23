@@ -33,6 +33,7 @@ Page {
 			+ (isNaN(Global.system.loads.dcPower) ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
 	on_ShouldResetWidgetsChanged: Qt.callLater(_resetWidgets)
+	Component.onCompleted: Qt.callLater(_resetWidgets)
 
 	property var _createdWidgets: ({})
 
