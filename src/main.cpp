@@ -380,26 +380,23 @@ int main(int argc, char *argv[])
 		// Default to the session bus on the pc
 		VBusItems::setConnectionType(QDBusConnection::SessionBus);
 		VBusItems::setDBusAddress(parser.value(parser.isSet(dbusAddress) ? dbusAddress : dbusDefault));
-
-		QDBusConnection dbus = VBusItems::getConnection();
-		if (dbus.isConnected()) {
-			producer->open(dbus);
-			services.reset(new DBusServices(producer->services()));
-			alarmBusItem.reset(new AlarmBusitem(services.get(), Victron::VenusOS::ActiveNotificationsModel::instance()));
-			services->initialScan();
-			settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
-			VeQItemSettingsInfo settingsInfo;
-			addSettings(&settingsInfo);
-			if (!settings->addSettings(settingsInfo)) {
-				qCritical() << "Adding settings failed, localsettings not running?";
-				exit(EXIT_FAILURE);
-			}
-		} else {
-			qCritical() << "DBus connection failed.";
-			exit(EXIT_FAILURE);
-		}
 	} else {
-		producer->open(VBusItems::getConnection());
+		VBusItems::setConnectionType(QDBusConnection::SystemBus);
+	}
+
+	QDBusConnection dbus = VBusItems::getConnection();
+	if (dbus.isConnected()) {
+		producer->open(dbus);
+		services.reset(new DBusServices(producer->services()));
+		alarmBusItem.reset(new AlarmBusitem(services.get(), Victron::VenusOS::ActiveNotificationsModel::instance()));
+		services->initialScan();
+		settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
+		VeQItemSettingsInfo settingsInfo;
+		addSettings(&settingsInfo);
+		if (!settings->addSettings(settingsInfo)) {
+			qCritical() << "Adding settings failed, localsettings not running?";
+			return EXIT_FAILURE;
+		}
 	}
 #endif
 
