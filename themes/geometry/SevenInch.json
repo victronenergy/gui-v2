@@ -182,7 +182,7 @@
     "geometry.briefPage.edgeGauge.quantityLabel.spacing": 4,
     "geometry.briefPage.smallEdgeGauge.height": 184,
     "geometry.briefPage.smallEdgeGauge.maxAngle": 22,
-    "geometry.briefPage.largeEdgeGauge.height": 320,
+    "geometry.briefPage.largeEdgeGauge.height": 400,
     "geometry.briefPage.largeEdgeGauge.maxAngle": 51,
     "geometry.briefPage.lowerGauge.topMargin": 32,
     "geometry.briefPage.solarHistoryGauge.maximumGaugeCount": 3,
