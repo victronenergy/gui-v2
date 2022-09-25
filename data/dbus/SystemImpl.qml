@@ -13,23 +13,25 @@ QtObject {
 	property var veSystem
 
 	property VeQuickItem systemState: VeQuickItem {
-		uid: "dbus/com.victronenergy.systemSystemState/State"
-		Component.onCompleted: valueChanged(this, value)
-		onValueChanged: Global.system.state = value || VenusOS.System_State_Off
+		function _update() {
+			Global.system.state = value || VenusOS.System_State_Off
+		}
+		uid: "dbus/com.victronenergy.system/SystemState/State"
+		Component.onCompleted: _update()
+		onValueChanged: _update()
 	}
 
 	//--- AC data ---
 
 	property VeQuickItem consumptionPhaseCount: VeQuickItem {
-		uid: "dbus/com.victronenergy.system/Ac/Consumption/NumberOfPhases"
-		Component.onCompleted: valueChanged(this, value)
-		onValueChanged: {
-			if (value !== undefined) {
-				Global.system.ac.consumption.setPhaseCount(value)
-				consumptionInputObjects.model = value
-				consumptionOutputObjects.model = value
-			}
+		function _update() {
+			Global.system.ac.consumption.setPhaseCount(value)
+			consumptionInputObjects.model = value
+			consumptionOutputObjects.model = value
 		}
+		uid: "dbus/com.victronenergy.system/Ac/Consumption/NumberOfPhases"
+		Component.onCompleted: _update()
+		onValueChanged: _update()
 	}
 
 	property Instantiator consumptionInputObjects: Instantiator {
@@ -41,24 +43,24 @@ QtObject {
 			property real current: NaN
 
 			property VeQuickItem vePower: VeQuickItem {
-				uid: "dbus/com.victronenergy.system/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Power"
-
-				Component.onCompleted: valueChanged(this, value)
-				onValueChanged: {
+				function _update() {
 					consumptionInput.power = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
+				uid: "dbus/com.victronenergy.system/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Power"
+				Component.onCompleted: _update()
+				onValueChanged: _update()
 			}
 			// TODO this path doesn't exist in dbus yet but should be provided at a later stage.
 			// Verify when it is added.
 			property VeQuickItem veCurrent: VeQuickItem {
-				uid: "dbus/com.victronenergy.system/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Current"
-
-				Component.onCompleted: valueChanged(this, value)
-				onValueChanged: {
+				function _update() {
 					consumptionInput.current = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
+				uid: "dbus/com.victronenergy.system/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Current"
+				Component.onCompleted: _update()
+				onValueChanged: _update()
 			}
 		}
 	}
@@ -72,22 +74,22 @@ QtObject {
 			property real current: NaN
 
 			property VeQuickItem vePower: VeQuickItem {
-				uid: "dbus/com.victronenergy.system/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Power"
-
-				Component.onCompleted: valueChanged(this, value)
-				onValueChanged: {
+				function _update() {
 					consumptionOutput.power = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
+				uid: "dbus/com.victronenergy.system/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Power"
+				Component.onCompleted: _update()
+				onValueChanged: _update()
 			}
 			property VeQuickItem veCurrent: VeQuickItem {
-				uid: "dbus/com.victronenergy.system/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Current"
-
-				Component.onCompleted: valueChanged(this, value)
-				onValueChanged: {
+				function _update() {
 					consumptionOutput.current = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
+				uid: "dbus/com.victronenergy.system/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Current"
+				Component.onCompleted: _update()
+				onValueChanged: _update()
 			}
 		}
 	}
@@ -112,14 +114,20 @@ QtObject {
 	//--- DC data ---
 
 	property VeQuickItem veSystemPower: VeQuickItem {
+		function _update() {
+			Global.system.dc.power = value === undefined ? NaN : value
+		}
 		uid: "dbus/com.victronenergy.system/Dc/System/Power"
-		Component.onCompleted: valueChanged(this, value)
-		onValueChanged: Global.system.dc.power = value === undefined ? NaN : value
+		Component.onCompleted: _update()
+		onValueChanged: _update()
 	}
 
 	property VeQuickItem veBatteryVoltage: VeQuickItem {
+		function _update() {
+			Global.system.dc.voltage = value === undefined ? NaN : value
+		}
 		uid: "dbus/com.victronenergy.system/Dc/Battery/Voltage"
-		Component.onCompleted: valueChanged(this, value)
-		onValueChanged: Global.system.dc.voltage = value === undefined ? NaN : value
+		Component.onCompleted: _update()
+		onValueChanged: _update()
 	}
 }
