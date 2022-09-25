@@ -25,15 +25,15 @@ QtObject {
 	property Instantiator briefViewLevels: Instantiator {
 		model: 4
 		delegate: VeQuickItem {
-			uid: "dbus/com.victronenergy.settings/Settings/Gui/BriefView/Level/" + (model.index + 1)
-
-			Component.onCompleted: valueChanged(this, value)
-			onValueChanged: {
+			function _update() {
 				if (value !== undefined) {
 					const v = value === -1 ? VenusOS.Tank_Type_Battery : value
 					Global.systemSettings.briefView.setGauge(model.index, v)
 				}
 			}
+			uid: "dbus/com.victronenergy.settings/Settings/Gui/BriefView/Level/" + (model.index + 1)
+			Component.onCompleted: _update()
+			onValueChanged: _update()
 		}
 	}
 }
