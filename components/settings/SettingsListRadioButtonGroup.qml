@@ -20,6 +20,7 @@ SettingsListNavigationItem {
 	property alias source: dataPoint.source
 	property var model: []
 	property int currentIndex
+	property bool updateOnClick: true
 
 	property int defaultIndex: -1
 
@@ -69,10 +70,12 @@ SettingsListNavigationItem {
 					buttonGroup: radioButtonGroup
 
 					onClicked: {
-						if (source.length > 0) {
-							dataPoint.setValue(Array.isArray(root.model) ? modelData.value : model.value)
+						if (root.updateOnClick) {
+							if (source.length > 0) {
+								dataPoint.setValue(Array.isArray(root.model) ? modelData.value : model.value)
+							}
+							root.currentIndex = model.index
 						}
-						root.currentIndex = model.index
 						root.optionClicked(model.index)
 					}
 				}
