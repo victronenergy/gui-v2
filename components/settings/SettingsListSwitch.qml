@@ -11,14 +11,17 @@ SettingsListItem {
 
 	property alias checked: switchItem.checked
 	property alias source: dataPoint.source
+	property bool updateOnClick: true
 
 	signal clicked()
 
 	function _setChecked(c) {
-		if (root.source.length > 0) {
-			dataPoint.setValue(c ? 1 : 0)  // set dbus value instead of breaking Switch "checked" binding
-		} else {
-			switchItem.checked = c
+		if (updateOnClick) {
+			if (root.source.length > 0) {
+				dataPoint.setValue(c ? 1 : 0)  // set dbus value instead of breaking Switch "checked" binding
+			} else {
+				switchItem.checked = c
+			}
 		}
 		clicked()
 	}
