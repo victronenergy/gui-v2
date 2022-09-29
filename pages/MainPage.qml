@@ -47,8 +47,8 @@ Page {
 			navStack.push(obj, properties)
 		}
 
-		function onPagePopRequested() {
-			navStack.pop()
+		function onPagePopRequested(toPage) {
+			navStack.pop(toPage)
 		}
 	}
 

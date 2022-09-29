@@ -10,7 +10,7 @@ QtObject {
 
 	property QtObject emitter: QtObject {
 		signal pagePushRequested(var obj, var properties)
-		signal pagePopRequested()
+		signal pagePopRequested(var toPage)
 		signal layerPushRequested(var obj, var properties)
 		signal layerPopRequested()
 	}
@@ -43,8 +43,8 @@ QtObject {
 		emitter.pagePushRequested(obj, properties)
 	}
 
-	function popPage() {
-		emitter.pagePopRequested()
+	function popPage(toPage) {
+		emitter.pagePopRequested(toPage)
 	}
 
 	function pushLayer(obj, properties) {
