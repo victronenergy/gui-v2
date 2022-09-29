@@ -42,6 +42,8 @@ QtObject {
 		setMockSettingValue("SystemSetup/Batteries/Configuration/com_victronenergy_vebus/257/Name", "")
 		setMockSettingValue("SystemSetup/BatteryService", "default")
 		setMockSettingValue("Alarm/System/GridLost", 1)
+
+		setMockSettingValue("System/TimeZone", "Europe/Berlin")
 	}
 
 	property Connections briefSettingsConn: Connections {

@@ -1,0 +1,8 @@
+import QtQuick
+
+ListModel {
+	id: tzCity
+	ListElement { display: QT_TR_NOOP("Greenwich Standard Time"); city: "Atlantic/Reykjavik"; caption: "(GMT) Monrovia, Reykjavik" }
+	ListElement { display: QT_TR_NOOP("Azores Standard Time"); city: "Atlantic/Azores"; caption: "(GMT -01:00) Azores" }
+	ListElement { display: QT_TR_NOOP("Cape Verde Standard Time"); city: "Atlantic/Cape_Verde"; caption: "(GMT -01:00) Cape Verde Is." }
+}

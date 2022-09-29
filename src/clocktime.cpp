@@ -21,8 +21,11 @@ void ClockTime::timerEvent(QTimerEvent *)
 void ClockTime::updateTime()
 {
 	m_currentDateTime = QDateTime::currentDateTime();
+	m_currentDateTimeUtc = m_currentDateTime.toUTC();
 	m_currentTimeText = m_currentDateTime.toString("hh:mm");
+
 	emit currentDateTimeChanged();
+	emit currentDateTimeUtcChanged();
 	emit currentTimeTextChanged();
 }
 

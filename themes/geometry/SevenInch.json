@@ -121,6 +121,7 @@
     "geometry.toastNotification.label.padding": 16,
 
     "geometry.generatorDurationSelectorDialog.content.topMargin": 100,
+    "geometry.timeSelectorDialog.content.topMargin": 100,
 
     "geometry.controlCard.minimumWidth": 428,
     "geometry.controlCard.maximumWidth": 448,

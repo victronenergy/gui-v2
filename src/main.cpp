@@ -213,6 +213,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "TankGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ThreePhaseDisplay.qml")),
 		"Victron.VenusOS", 2, 0, "ThreePhaseDisplay");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/TimeSelector.qml")),
+		"Victron.VenusOS", 2, 0, "TimeSelector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ToastNotification.qml")),
 		"Victron.VenusOS", 2, 0, "ToastNotification");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ViewGradient.qml")),
@@ -315,6 +317,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "GeneratorDisableAutostartDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDurationSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/TimeSelectorDialog.qml")),
+		"Victron.VenusOS", 2, 0, "TimeSelectorDialog");
 
 	/* pages */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/PageManager.qml")),
@@ -339,6 +343,28 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "BriefPage");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/NotificationsPage.qml")),
 		"Victron.VenusOS", 2, 0, "NotificationsPage");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAfricaData.qml")),
+		"Victron.VenusOS", 2, 0, "TzAfricaData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAmericaData.qml")),
+		"Victron.VenusOS", 2, 0, "TzAmericaData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAntarcticaData.qml")),
+		"Victron.VenusOS", 2, 0, "TzAntarcticaData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzArcticData.qml")),
+		"Victron.VenusOS", 2, 0, "TzArcticData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAsiaData.qml")),
+		"Victron.VenusOS", 2, 0, "TzAsiaData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAtlanticData.qml")),
+		"Victron.VenusOS", 2, 0, "TzAtlanticData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAustraliaData.qml")),
+		"Victron.VenusOS", 2, 0, "TzAustraliaData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzEtcData.qml")),
+		"Victron.VenusOS", 2, 0, "TzEtcData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzEuropeData.qml")),
+		"Victron.VenusOS", 2, 0, "TzEuropeData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzIndianData.qml")),
+		"Victron.VenusOS", 2, 0, "TzIndianData");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzPacificData.qml")),
+		"Victron.VenusOS", 2, 0, "TzPacificData");
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");

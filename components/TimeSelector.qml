@@ -13,6 +13,7 @@ Item {
 	property alias minute: minSpinbox.value
 
 	property int maximumHour: 23
+	property int maximumMinute: 59
 
 	implicitWidth: minSpinbox.x + minSpinbox.width
 	implicitHeight: hrSpinbox.y + hrSpinbox.height
@@ -75,6 +76,7 @@ Item {
 		width: Theme.geometry.timeSelector.spinBox.width
 		height: Theme.geometry.timeSelector.spinBox.height
 		from: 0
+		to: root.maximumMinute
 		to: 59
 		label.text: Utils.pad(value, 2)
 	}

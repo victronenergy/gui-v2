@@ -23,7 +23,6 @@ SettingsListNavigationItem {
 	property bool updateOnClick: true
 
 	property int defaultIndex: -1
-
 	//% "Unknown"
 	property string defaultSecondaryText: qsTrId("settings_list_radio_button_group_unknown")
 
@@ -66,7 +65,12 @@ SettingsListNavigationItem {
 					text: Array.isArray(root.model)
 						  ? modelData.display || ""
 						  : model.display || ""
+					caption.text: Array.isArray(root.model)
+						  ? modelData.caption || ""
+						  : model.caption || ""
 					checked: root.currentIndex === model.index
+					showAccessLevel: root.showAccessLevel
+					writeAccessLevel: root.showAccessLevel
 					C.ButtonGroup.group: radioButtonGroup
 
 					onClicked: {

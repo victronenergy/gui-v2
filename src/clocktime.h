@@ -13,6 +13,7 @@ class ClockTime : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QDateTime currentDateTime MEMBER m_currentDateTime NOTIFY currentDateTimeChanged)
+	Q_PROPERTY(QDateTime currentDateTimeUtc MEMBER m_currentDateTimeUtc NOTIFY currentDateTimeUtcChanged)
 	Q_PROPERTY(QString currentTimeText MEMBER m_currentTimeText NOTIFY currentTimeTextChanged)
 
 public:
@@ -22,6 +23,7 @@ public:
 
 signals:
 	void currentDateTimeChanged();
+	void currentDateTimeUtcChanged();
 	void currentTimeTextChanged();
 
 protected:
@@ -32,6 +34,7 @@ private:
 	void scheduleNextTimeCheck(const QTime &now);
 
 	QDateTime m_currentDateTime;
+	QDateTime m_currentDateTimeUtc;
 	QString m_currentTimeText;
 	int m_timerId = 0;
 };
