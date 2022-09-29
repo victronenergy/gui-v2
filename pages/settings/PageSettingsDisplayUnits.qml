@@ -27,6 +27,7 @@ Page {
 
 				onOptionClicked: function(index) {
 					Global.systemSettings.energyUnit.setValue(model[index].value)
+					Global.pageManager.popPage()
 				}
 			}
 
@@ -44,6 +45,7 @@ Page {
 
 				onOptionClicked: function(index) {
 					Global.systemSettings.temperatureUnit.setValue(model[index].value)
+					Global.pageManager.popPage()
 				}
 			}
 
@@ -71,6 +73,7 @@ Page {
 
 				onOptionClicked: function(index) {
 					Global.systemSettings.volumeUnit.setValue(model[index].value)
+					Global.pageManager.popPage()
 				}
 			}
 		}
