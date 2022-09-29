@@ -18,6 +18,11 @@ Page {
 				page: "/pages/settings/PageSettingsGeneral.qml"
 			},
 			{
+				//% "Date & Time"
+				text: qsTrId("settings_date_and_time"),
+				page: "/pages/settings/PageTzInfo.qml"
+			},
+			{
 				//% "Remote Console"
 				text: qsTrId("settings_remote_console"),
 				page: "/pages/settings/PageSettingsRemoteConsole.qml"

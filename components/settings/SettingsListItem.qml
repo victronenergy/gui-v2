@@ -21,12 +21,13 @@ Item {
 
 	readonly property bool defaultVisible: Global.systemSettings.accessLevel.value !== undefined
 			&& Global.systemSettings.accessLevel.value >= showAccessLevel
-
-	implicitWidth: parent ? parent.width : 0
-	implicitHeight: visible
+	readonly property int defaultImplicitHeight: visible
 		? Math.max(primaryLabel.implicitHeight + Theme.geometry.settingsListItem.content.verticalMargin * 2,
 				   Theme.geometry.settingsListItem.height)
 		: 0
+
+	implicitWidth: parent ? parent.width : 0
+	implicitHeight: defaultImplicitHeight
 	visible: defaultVisible
 	enabled: userHasWriteAccess
 
