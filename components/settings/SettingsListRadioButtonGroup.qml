@@ -24,7 +24,7 @@ SettingsListNavigationItem {
 
 	property int defaultIndex: -1
 	//% "Unknown"
-	property string defaultSecondaryText: qsTrId("settings_list_radio_button_group_unknown")
+	property string defaultSecondaryText: qsTrId("settings_radio_button_group_unknown")
 
 	signal optionClicked(index: int)
 

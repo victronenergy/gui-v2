@@ -31,6 +31,7 @@ SettingsListItem {
 			rotation: 180
 			color: root.containsPress ? Theme.color.settingsListItem.down.forwardIcon : Theme.color.settingsListItem.forwardIcon
 			fillMode: Image.PreserveAspectFit
+			visible: root.enabled
 		}
 	]
 

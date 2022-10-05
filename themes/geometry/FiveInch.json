@@ -43,7 +43,8 @@
     "geometry.slider.groove.height": 8,
     "geometry.slider.groove.radius": 8,
 
-    "geometry.spinBox.indicator.width": 64,
+    "geometry.spinBox.indicator.minimumWidth": 64,
+    "geometry.spinBox.indicator.maximumWidth": 136,
     "geometry.spinBox.indicator.height": 72,
     "geometry.spinBox.indicator.radius": 6,
     "geometry.spinBox.spacing": "geometry.button.spacing",

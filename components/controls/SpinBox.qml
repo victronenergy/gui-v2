@@ -12,6 +12,7 @@ CT.SpinBox {
 	id: root
 
 	property alias label: label
+	property int indicatorImplicitWidth: Theme.geometry.spinBox.indicator.minimumWidth
 
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
@@ -28,7 +29,8 @@ CT.SpinBox {
 
 	contentItem: Label {
 		id: label
-		text: root.value
+
+		text: root.textFromValue(root.value, root.locale)
 		color: Theme.color.font.primary
 		font.pixelSize: Theme.font.size.h3
 		horizontalAlignment: Qt.AlignHCenter
@@ -38,7 +40,7 @@ CT.SpinBox {
 	up.indicator: Rectangle {
 		x: root.mirrored ? 0 : parent.width - width
 		height: parent.height
-		implicitWidth: Theme.geometry.spinBox.indicator.width
+		implicitWidth: root.indicatorImplicitWidth
 		implicitHeight: Theme.geometry.spinBox.indicator.height
 		radius: Theme.geometry.spinBox.indicator.radius
 		color: root.up.pressed ? Theme.color.darkOk : Theme.color.ok
@@ -52,7 +54,7 @@ CT.SpinBox {
 	down.indicator: Rectangle {
 		x: root.mirrored ? parent.width - width : 0
 		height: parent.height
-		implicitWidth: Theme.geometry.spinBox.indicator.width
+		implicitWidth: root.indicatorImplicitWidth
 		implicitHeight: Theme.geometry.spinBox.indicator.height
 		radius: Theme.geometry.spinBox.indicator.radius
 		color: root.down.pressed ? Theme.color.darkOk : Theme.color.ok
@@ -63,7 +65,7 @@ CT.SpinBox {
 	}
 
 	background: Item {
-		implicitWidth: 2*Theme.geometry.spinBox.indicator.width + 2*Theme.geometry.spinBox.spacing
+		implicitWidth: 2*Theme.geometry.spinBox.indicator.minimumWidth + 2*Theme.geometry.spinBox.spacing
 		implicitHeight: Theme.geometry.spinBox.indicator.height
 	}
 }

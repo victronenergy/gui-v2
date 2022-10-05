@@ -3,15 +3,17 @@
 */
 
 import QtQuick
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 SettingsListItem {
 	id: root
 
 	property alias checked: switchItem.checked
-	property alias source: dataPoint.source
+	property alias secondaryText: secondaryLabel.text
 	property bool updateOnClick: true
+
+	property alias source: dataPoint.source
+	property alias dataPoint: dataPoint
 
 	signal clicked()
 
@@ -29,6 +31,12 @@ SettingsListItem {
 	down: mouseArea.containsPress
 
 	content.children: [
+		Label {
+			id: secondaryLabel
+			anchors.verticalCenter: switchItem.verticalCenter
+			color: Theme.color.font.secondary
+			font.pixelSize: Theme.font.size.body2
+		},
 		Switch {
 			id: switchItem
 			checked: dataPoint.value === 1

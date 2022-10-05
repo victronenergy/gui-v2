@@ -16,8 +16,8 @@ QtObject {
 			? Global.demoManager.mockDataValues[source]
 			: undefined
 
-	property var min
-	property var max
+	property real min: 0
+	property real max: 100
 
 	function setValue(v) {
 		value = v

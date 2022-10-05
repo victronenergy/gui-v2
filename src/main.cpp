@@ -247,8 +247,12 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SettingsListRadioButtonGroup");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListSlider.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListSlider");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListSpinBox.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListSpinBox");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListSwitch.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListSwitch");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListDvccSwitch.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListDvccSwitch");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextField.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListTextField");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextGroup.qml")),
@@ -317,6 +321,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "GeneratorDisableAutostartDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDurationSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/NumberSelectorDialog.qml")),
+		"Victron.VenusOS", 2, 0, "NumberSelectorDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/TimeSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "TimeSelectorDialog");
 

@@ -44,6 +44,16 @@ QtObject {
 		setMockSettingValue("Alarm/System/GridLost", 1)
 
 		setMockSettingValue("System/TimeZone", "Europe/Berlin")
+
+		setMockSettingValue("Services/Bol", 1)
+		setMockSettingValue("SystemSetup/MaxChargeCurrent", -1)
+		setMockSettingValue("SystemSetup/MaxChargeVoltage", 0)
+		setMockSettingValue("SystemSetup/SharedVoltageSense", 3)
+		setMockSettingValue("SystemSetup/TemperatureService", "default")
+		setMockSystemValue("AvailableTemperatureServices", '{"com.victronenergy.vebus/257/Dc/0/Temperature": "Quattro 24/3000/70-2x50 on VE.Bus","default": "Automatic","nosensor": "No sensor"}')
+		setMockSystemValue("AutoSelectedTemperatureService", "-")
+		setMockSettingValue("SystemSetup/SharedTemperatureSense", 2)
+		setMockSystemValue("Control/BatteryCurrentSense", 0)
 	}
 
 	property Connections briefSettingsConn: Connections {
