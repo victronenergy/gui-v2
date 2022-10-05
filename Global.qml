@@ -19,6 +19,7 @@ QtObject {
 	property var demoManager    // only valid when demo mode is active
 	property var dialogManager
 	property var inputPanel
+	property var locale: Qt.locale()
 
 	// data sources
 	property var acInputs

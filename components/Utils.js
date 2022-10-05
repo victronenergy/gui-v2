@@ -182,3 +182,29 @@ function updateMaximumYield(repeater, changedIndex, changedYieldValue) {
 		repeater.maximumYieldValue = changedYieldValue
 	}
 }
+
+function jsonSettingsToModel(json) {
+	let jsonObject
+	if (typeof(json) === "string") {
+		try {
+			jsonObject = JSON.parse(json)
+		} catch (e) {
+			console.warn("Unable to parse JSON:", json, "exception:", e)
+			return null
+		}
+	} else {
+		jsonObject = json
+	}
+
+	let keys = Object.keys(jsonObject)
+	let modelArray = []
+	for (let i = 0; i < keys.length; i++) {
+		modelArray.push({ display: jsonObject[keys[i]], value: keys[i] })
+	}
+	return modelArray
+}
+
+function toFloat(value, precision) {
+	const factor = Math.pow(10, precision)
+	return Math.round(value * factor) / factor
+}

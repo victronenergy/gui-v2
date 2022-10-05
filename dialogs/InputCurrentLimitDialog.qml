@@ -45,13 +45,9 @@ ModalDialog {
 			anchors.horizontalCenter: parent.horizontalCenter
 			stepSize: 100 // mA
 			to: 1000000 // mA
-			contentItem: Label {
-				//% "%1 A"
-				text: qsTrId("%1 A").arg(spinbox.value/1000)
-				font.pixelSize: Theme.font.size.h3
-				horizontalAlignment: Qt.AlignHCenter
-				verticalAlignment: Qt.AlignVCenter
-			}
+			indicatorImplicitWidth: Theme.geometry.spinBox.indicator.maximumWidth
+			//% "%1 A"
+			label.text: qsTrId("inverter_current_limit_value").arg(spinbox.value/1000)
 			value: root.currentLimit
 			onValueChanged: root.currentLimit = value
 		}

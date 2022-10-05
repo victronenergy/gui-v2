@@ -291,6 +291,12 @@ public:
 	};
 	Q_ENUM(SystemSettings_DemoMode)
 
+	enum DVCC_Mode {
+		DVCC_ForcedOff = 2,
+		DVCC_ForcedOn = 3
+	};
+	Q_ENUM(DVCC_Mode)
+
 	enum Notification_Type {
 		Notification_Inactive,
 		Notification_Warning,

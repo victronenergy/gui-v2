@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 Page {
 	id: root
@@ -114,19 +115,15 @@ Page {
 
 					source: "com.victronenergy.system/AvailableBatteryServices"
 					onValueChanged: {
-						let jsonObject
-						try {
-							jsonObject = JSON.parse(value)
-						} catch (e) {
-							console.warn("Unable to parse data from", source)
+						if (value === undefined) {
 							return
 						}
-						let keys = Object.keys(jsonObject)
-						let modelArray = []
-						for (let i = 0; i < keys.length; i++) {
-							modelArray.push({ display: jsonObject[keys[i]], value: keys[i] })
+						const modelArray = Utils.jsonSettingsToModel(value)
+						if (modelArray) {
+							batteryMonitorRadioButtons.model = modelArray
+						} else {
+							console.warn("Unable to parse data from", source)
 						}
-						batteryMonitorRadioButtons.model = modelArray
 					}
 				}
 			}

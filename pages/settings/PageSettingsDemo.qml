@@ -102,6 +102,14 @@ Page {
 				placeholderText: "Enter text"
 			}
 
+			SettingsListSpinBox {
+				text: "Spin box"
+				value: 5.789
+				decimals: 2
+				from: 5
+				to: 10
+			}
+
 			SettingsListItem {
 				text: "Custom item"
 
