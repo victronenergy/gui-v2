@@ -16,7 +16,6 @@ Item {
 	property InverterChargerModeDialog inverterChargerModeDialog: InverterChargerModeDialog {}
 	property GeneratorDisableAutostartDialog generatorDisableAutostartDialog: GeneratorDisableAutostartDialog {}
 	property GeneratorDurationSelectorDialog generatorDurationSelectorDialog: GeneratorDurationSelectorDialog {}
-	property TimeSelectorDialog timeSelectorDialog: TimeSelectorDialog {}
 
 	function showWarning(title, description) {
 		warningNotification.title = title

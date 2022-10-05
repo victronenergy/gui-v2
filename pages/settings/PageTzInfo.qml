@@ -10,6 +10,7 @@ Page {
 	id: root
 
 	property var _timeZoneModels: [ tzAfrica, tzAmerica, tzAntartica, tzArtic, tzAsia, tzAtlantic, tzAustralia, tzEurope, tzIndian, tzPacific, tzEtc ]
+	property var _timeSelector
 
 	function _findTimeZoneName(region, city) {
 		if (city === "UTC") {
@@ -30,6 +31,32 @@ Page {
 		return ""
 	}
 
+	function _openTimeSelector() {
+		if (!_timeSelector) {
+			_timeSelector = timeSelectorComponent.createObject(root)
+		}
+		const dt = ClockTime.currentDateTime
+		_timeSelector.hour = dt.getHours()
+		_timeSelector.minute = dt.getMinutes()
+		_timeSelector.open()
+	}
+
+	Component {
+		id: timeSelectorComponent
+
+		TimeSelectorDialog {
+			parent: Global.dialogManager
+
+			onAccepted: {
+				let dt = ClockTime.currentDateTime
+				dt.setHours(hour)
+				dt.setMinutes(minute)
+				// TODO set system date time to 'dt' using venus-platform or such
+				Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, "TODO not yet implemented")
+			}
+		}
+	}
+
 	SettingsListView {
 		model: ObjectModel {
 
@@ -46,22 +73,7 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 
 				onClicked: {
-					const dt = ClockTime.currentDateTime
-					Global.dialogManager.timeSelectorDialog.hour = dt.getHours()
-					Global.dialogManager.timeSelectorDialog.minute = dt.getMinutes()
-					Global.dialogManager.timeSelectorDialog.open()
-				}
-
-				Connections {
-					target: Global.dialogManager.timeSelectorDialog
-					function onAccepted() {
-						let dt = ClockTime.currentDateTime
-						dt.setHours(Global.dialogManager.timeSelectorDialog.hour)
-						dt.setMinutes(Global.dialogManager.timeSelectorDialog.minute)
-
-						// TODO set system date time to 'dt' using venus-platform or such
-						Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, "TODO not yet implemented")
-					}
+					root._openTimeSelector()
 				}
 			}
 
