@@ -82,7 +82,7 @@ Page {
 				text: qsTrId("settings_tz_time_zone")
 				secondaryText: root._findTimeZoneName(tzData.region, tzData.city)
 
-				onClicked: Global.pageManager.pushPage(pageTzMenuComponent)
+				onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: text })
 
 				DataPoint {
 					id: tzData

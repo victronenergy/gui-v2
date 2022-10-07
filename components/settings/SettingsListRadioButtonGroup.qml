@@ -45,7 +45,7 @@ SettingsListNavigationItem {
 	}
 
 	onClicked: {
-		Global.pageManager.pushPage(optionsPageComponent)
+		Global.pageManager.pushPage(optionsPageComponent, { title: text })
 	}
 
 	DataPoint {
