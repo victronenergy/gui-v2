@@ -146,14 +146,14 @@ Page {
 			SettingsListNavigationItem {
 				//% "Battery Measurements"
 				text: qsTrId("settings_system_battery_measurements")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteries.qml")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteries.qml", { title: text })
 			}
 
 			SettingsListNavigationItem {
 				//% "System Status"
 				text: qsTrId("settings_system_system_status")
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSystemStatus.qml")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSystemStatus.qml", { title: text })
 			}
 		}
 	}

@@ -19,7 +19,7 @@ Page {
 			SettingsListNavigationItem {
 				text: "Page launch"
 				secondaryText: "Secondary text"
-				onClicked: Global.pageManager.pushPage(newPageComponent)
+				onClicked: Global.pageManager.pushPage(newPageComponent, { title: "Page name" })
 			}
 
 			SettingsListSwitch {
