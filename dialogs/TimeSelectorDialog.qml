@@ -12,6 +12,9 @@ ModalDialog {
 	property alias hour: timeSelector.hour
 	property alias minute: timeSelector.minute
 
+	property alias maximumHour: timeSelector.maximumHour
+	property alias maximumMinute: timeSelector.maximumMinute
+
 	//% "Set time"
 	title: qsTrId("timeselectordialog_set_time")
 

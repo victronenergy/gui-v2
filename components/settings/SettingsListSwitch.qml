@@ -11,6 +11,7 @@ SettingsListItem {
 	property alias checked: switchItem.checked
 	property alias secondaryText: secondaryLabel.text
 	property bool updateOnClick: true
+	property bool invertSourceValue
 
 	property alias source: dataPoint.source
 	property alias dataPoint: dataPoint
@@ -20,7 +21,11 @@ SettingsListItem {
 	function _setChecked(c) {
 		if (updateOnClick) {
 			if (root.source.length > 0) {
-				dataPoint.setValue(c ? 1 : 0)  // set dbus value instead of breaking Switch "checked" binding
+				if (invertSourceValue) {
+					dataPoint.setValue(c ? 0 : 1)
+				} else {
+					dataPoint.setValue(c ? 1 : 0)
+				}
 			} else {
 				switchItem.checked = c
 			}
@@ -39,7 +44,7 @@ SettingsListItem {
 		},
 		Switch {
 			id: switchItem
-			checked: dataPoint.value === 1
+			checked: invertSourceValue ? dataPoint.value === 0 : dataPoint.value === 1
 			onClicked: root._setChecked(!checked)
 		}
 	]

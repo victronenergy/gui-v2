@@ -103,16 +103,6 @@ Page {
 
 			ESSCard {
 				width: root.cardWidth
-				state: Global.ess.state
-				minimumStateOfCharge: Global.ess.minimumStateOfCharge
-				stateOfChargeLimit: Global.ess.stateOfChargeLimit
-
-				onChangeState: function(newState) {
-					Global.ess.setStateRequested(newState)
-				}
-				onChangeMinimumStateOfCharge: function(newMinSoc) {
-					Global.ess.setMinimumStateOfChargeRequested(newMinSoc)
-				}
 			}
 
 			SwitchesCard {

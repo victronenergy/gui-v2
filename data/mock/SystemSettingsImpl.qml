@@ -54,6 +54,23 @@ QtObject {
 		setMockSystemValue("AutoSelectedTemperatureService", "-")
 		setMockSettingValue("SystemSetup/SharedTemperatureSense", 2)
 		setMockSystemValue("Control/BatteryCurrentSense", 0)
+
+		setMockSystemValue("SystemType", "ESS")
+		setMockSettingValue("CGwacs/AcPowerSetPoint", 50)
+		setMockSettingValue("CGwacs/BatteryLife/DischargedTime", 0)
+		setMockSettingValue("CGwacs/BatteryLife/Flags", 0)
+		setMockSettingValue("CGwacs/BatteryLife/MinimumSocLimit", 10)
+		setMockSettingValue("CGwacs/BatteryLife/Schedule/Charge/0/Day", -1)
+		setMockSettingValue("CGwacs/BatteryLife/Schedule/Charge/0/Duration", -1)
+		setMockSettingValue("CGwacs/BatteryLife/Schedule/Charge/0/Soc", 100)
+		setMockSettingValue("CGwacs/BatteryLife/Schedule/Charge/0/Start", 0)
+		setMockSettingValue("CGwacs/BatteryLife/SocLimit", 10)
+		setMockSettingValue("CGwacs/BatteryLife/State", 4)
+		setMockSettingValue("CGwacs/Hub4Mode", 2)
+		setMockSettingValue("CGwacs/MaxChargePower", -1)
+		setMockSettingValue("CGwacs/MaxDischargePower", -1)
+		setMockSettingValue("CGwacs/RunWithoutGridMeter", 0)
+		setMockSettingValue("CGwacs/PreventFeedback", 0)
 	}
 
 	property Connections briefSettingsConn: Connections {

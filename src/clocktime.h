@@ -21,7 +21,10 @@ public:
 
 	static ClockTime* instance(QObject* parent = nullptr);
 
-signals:
+public Q_SLOTS:
+	QString formatTime(int hour, int minute);
+
+Q_SIGNALS:
 	void currentDateTimeChanged();
 	void currentDateTimeUtcChanged();
 	void currentTimeTextChanged();

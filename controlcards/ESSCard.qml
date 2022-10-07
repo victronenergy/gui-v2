@@ -9,13 +9,6 @@ import QtQuick.Controls.impl as CP
 ControlCard {
 	id: root
 
-	property int state
-	property int minimumStateOfCharge
-	property int stateOfChargeLimit
-
-	signal changeState(newState: int)
-	signal changeMinimumStateOfCharge(newMinSoc: int)
-
 	title.icon.source: "qrc:/images/ess.svg"
 	//% "ESS"
 	title.text: qsTrId("controlcard_ess")
@@ -31,30 +24,12 @@ ControlCard {
 			id: repeater
 
 			width: parent.width
-			model: [
-				VenusOS.Ess_State_KeepBatteriesCharged,
-				VenusOS.Ess_State_OptimizedWithBatteryLife,
-				VenusOS.Ess_State_OptimizedWithoutBatteryLife,
-			]
+			model: Global.ess.stateModel
 			delegate: RadioButtonControlValue {
-				button.checked: root.state === modelData
-				label.text: {
-					switch (modelData) {
-					case VenusOS.Ess_State_OptimizedWithBatteryLife:
-						//% "Optimized with battery life"
-						return qsTrId('ess_card_optimized_with_battery_life')
-					case VenusOS.Ess_State_KeepBatteriesCharged:
-						//% "Keep batteries charged"
-						return qsTrId('ess_card_keep_batteries_charged')
-					case VenusOS.Ess_State_OptimizedWithoutBatteryLife:
-						//% "Optimized without battery life"
-						return qsTrId('ess_card_optimized_without_battery_life')
-					default:
-						return ""
-					}
-				}
+				button.checked: Global.ess.state === modelData.value
+				label.text: modelData.display
 
-				onClicked: root.changeState(modelData)
+				onClicked: Global.ess.setStateRequested(modelData)
 			}
 		}
 
@@ -63,9 +38,10 @@ ControlCard {
 
 			//% "Minimum SOC"
 			label.text: qsTrId("ess_card_minimum_soc")
-			button.text: qsTrId("%1%").arg(root.minimumStateOfCharge)
+			//: State of charge as a percentage value
+			//% "%1%"
+			button.text: qsTrId("ess_card_minimum_soc_value").arg(Global.ess.minimumStateOfCharge)
 			onClicked: {
-				Global.dialogManager.essMinimumSOCDialog.minimumStateOfCharge = root.minimumStateOfCharge
 				Global.dialogManager.essMinimumSOCDialog.open()
 			}
 		}
@@ -82,12 +58,12 @@ ControlCard {
 					leftMargin: Theme.geometry.controlCard.contentMargins
 					verticalCenter: parent.verticalCenter
 				}
-				visible: root.state === VenusOS.Ess_State_OptimizedWithBatteryLife
+				visible: Global.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
 				color: Theme.color.font.secondary
 				font.family: VenusFont.normal.name
 				font.pixelSize: Theme.font.size.body1
 				//% "Battery life limit: %1%"
-				text: qsTrId("ess_battery_life_limit").arg(root.stateOfChargeLimit)
+				text: qsTrId("ess_battery_life_limit").arg(Global.ess.stateOfChargeLimit)
 			}
 
 			CP.IconImage {
@@ -100,13 +76,6 @@ ControlCard {
 				source: "qrc:/images/information.svg"
 				color: Theme.color.ok
 			}
-		}
-	}
-
-	Connections {
-		target: Global.dialogManager.essMinimumSOCDialog
-		function onAccepted() {
-			root.changeMinimumStateOfCharge(Global.dialogManager.essMinimumSOCDialog.minimumStateOfCharge)
 		}
 	}
 }

@@ -233,6 +233,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SettingsLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListButton.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListCGwacsBatterySchedule.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListCGwacsBatterySchedule");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListItem.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextItem.qml")),
@@ -257,6 +259,10 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SettingsListTextField");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextGroup.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListTextGroup");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTimeSelector.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListTimeSelector");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsSlider.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsSlider");
 
 	/* widgets */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/OverviewWidget.qml")),

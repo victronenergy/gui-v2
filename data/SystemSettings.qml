@@ -8,6 +8,10 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	function canAccess(level) {
+		return accessLevel.value !== undefined && accessLevel.value >= level
+	}
+
 	property DataPoint accessLevel: DataPoint {
 		 source: "com.victronenergy.settings/Settings/System/AccessLevel"
 	}

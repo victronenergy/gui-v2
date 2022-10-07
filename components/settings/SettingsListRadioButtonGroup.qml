@@ -18,6 +18,7 @@ SettingsListNavigationItem {
 	id: root
 
 	property alias source: dataPoint.source
+	property alias dataPoint: dataPoint
 	property var model: []
 	property int currentIndex
 	property bool updateOnClick: true
