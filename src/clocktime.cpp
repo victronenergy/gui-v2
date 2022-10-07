@@ -9,6 +9,12 @@ ClockTime::ClockTime(QObject *parent)
 	scheduleNextTimeCheck(m_currentDateTime.time());
 }
 
+QString ClockTime::formatTime(int hour, int minute)
+{
+	QTime t(hour, minute);
+	return t.toString("hh:mm");
+}
+
 void ClockTime::timerEvent(QTimerEvent *)
 {
 	const QTime currentTime = QTime::currentTime();

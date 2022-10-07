@@ -16,11 +16,9 @@ Item {
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_User
-	readonly property bool userHasWriteAccess: Global.systemSettings.accessLevel.value !== undefined
-			&& Global.systemSettings.accessLevel.value >= writeAccessLevel
+	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 
-	readonly property bool defaultVisible: Global.systemSettings.accessLevel.value !== undefined
-			&& Global.systemSettings.accessLevel.value >= showAccessLevel
+	readonly property bool defaultVisible: Global.systemSettings.canAccess(showAccessLevel)
 	readonly property int defaultImplicitHeight: visible
 		? Math.max(primaryLabel.implicitHeight + Theme.geometry.settingsListItem.content.verticalMargin * 2,
 				   Theme.geometry.settingsListItem.height)

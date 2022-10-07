@@ -43,6 +43,11 @@ Page {
 				page: "/pages/settings/PageSettingsDisplay.qml"
 			},
 			{
+				//% "ESS"
+				text: systemType.value === "Hub-4" ? systemType.value : qsTrId("settings_ess"),
+				page: "/pages/settings/PageSettingsHub4.qml"
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"
@@ -55,5 +60,11 @@ Page {
 				Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
 			}
 		}
+	}
+
+	DataPoint {
+		id: systemType
+
+		source: "com.victronenergy.system/SystemType"
 	}
 }

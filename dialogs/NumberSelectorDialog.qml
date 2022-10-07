@@ -21,6 +21,10 @@ ModalDialog {
 		return Math.pow(10, decimals)
 	}
 
+	onAboutToShow: {
+		spinBox.value = value * _multiplier()
+	}
+
 	contentItem: Item {
 		anchors {
 			top: parent.header.bottom
@@ -38,13 +42,11 @@ ModalDialog {
 			}
 			width: parent.width - 2*Theme.geometry.modalDialog.content.horizontalMargin
 			height: Theme.geometry.timeSelector.spinBox.height
-			indicatorImplicitWidth: Theme.geometry.spinBox.indicator.maximumWidth
 			textFromValue: function(value, locale) {
 				return Number(value / root._multiplier()).toLocaleString(locale, 'f', root.decimals) + root.suffix
 			}
 			from: root.from * root._multiplier()
 			to: root.to * root._multiplier()
-			value: root.value * root._multiplier()
 
 			onValueChanged: {
 				root.value = Number(value / root._multiplier())

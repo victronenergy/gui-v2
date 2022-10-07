@@ -34,6 +34,7 @@ QtObject {
 				_childIds.push(uid)
 			}
 			childIds = _childIds
+			Global.dataServices = childIds
 		}
 
 		model: VeQItemTableModel {
