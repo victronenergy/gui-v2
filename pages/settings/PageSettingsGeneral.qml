@@ -22,6 +22,11 @@ Page {
 				text: qsTrId("settings_set_root_password")
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 				placeholderText: "* * * * * *"
+
+				onAccepted: {
+					// TODO implement via platform helpers
+					Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, "not yet implemented!")
+				}
 			}
 
 			SettingsListSwitch {
@@ -89,6 +94,7 @@ Page {
 				checked: Global.systemSettings.demoMode.value === VenusOS.SystemSettings_DemoModeActive
 				updateOnClick: false
 				onClicked: {
+					// TODO clarify - do we need same demo modes as gui-v1? Those trigger demos via scripts in dbus-recorder/.
 					if (checked && !dbusConnected) {
 						//% "No backend source available. Demo mode cannot be deactivated!"
 						Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, qsTrId("settings_general_no_backend_source"))
