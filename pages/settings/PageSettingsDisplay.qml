@@ -14,9 +14,11 @@ Page {
 		model: ObjectModel {
 
 			SettingsListSwitch {
+				id: autoBrightness
 				//% "Adaptive brightness"
 				text: qsTrId("settings_adaptive_brightness")
 				source: "com.victronenergy.settings/Settings/Gui/AutoBrightness"
+				// TODO will this also need bindings similar to gui-v1 vePlatform.hasAutoBrightness?
 			}
 
 			SettingsListSlider {
@@ -24,6 +26,8 @@ Page {
 				text: qsTrId("settings_brightness")
 				source: "com.victronenergy.settings/Settings/Gui/Brightness"
 				writeAccessLevel: VenusOS.User_AccessType_User
+				visible: defaultVisible && !autoBrightness.checked
+				// TODO will this also need bindings similar to gui-v1 vePlatform.hasBacklight and vePlatform.brightness?
 			}
 
 			SettingsListRadioButtonGroup {
