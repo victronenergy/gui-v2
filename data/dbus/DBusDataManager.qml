@@ -38,8 +38,12 @@ QtObject {
 		}
 
 		model: VeQItemTableModel {
+			id: servicesTableModel
+
 			uids: ["dbus"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+
+			Component.onCompleted: Global.dataServiceModel = servicesTableModel
 		}
 
 		delegate: QtObject {

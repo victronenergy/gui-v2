@@ -44,34 +44,43 @@ qt_add_resources(QML_RESOURCES
 
 include_directories(src/velib/inc src .)
 
-set(VELIB_SOURCES
-    src/velib/inc/velib/qt/bms_error.hpp
-    src/velib/inc/velib/qt/charger_error.hpp
+set(VELIB_CORE_SOURCES
     src/velib/inc/velib/qt/unit_conversion.hpp
-    src/velib/inc/velib/qt/ve_qitem_dbus_publisher.hpp
-    src/velib/inc/velib/qt/ve_qitems_dbus.hpp
     src/velib/inc/velib/qt/ve_qitem.hpp
+    src/velib/inc/velib/qt/ve_quick_item.hpp
+    src/velib/inc/velib/qt/ve_qitem_child_model.hpp
     src/velib/inc/velib/qt/ve_qitem_loader.hpp
+    src/velib/inc/velib/qt/ve_qitem_sort_table_model.hpp
     src/velib/inc/velib/qt/ve_qitem_table_model.hpp
     src/velib/inc/velib/qt/ve_qitem_tree_model.hpp
-    src/velib/inc/velib/qt/ve_quick_item.hpp
+    src/velib/inc/velib/velib_config.h
+
+    src/velib/src/qt/unit_conversion.cpp
+    src/velib/src/qt/ve_qitem.cpp
+    src/velib/src/qt/ve_quick_item.cpp
+    src/velib/src/qt/ve_qitem_child_model.cpp
+    src/velib/src/qt/ve_qitem_loader.cpp
+    src/velib/src/qt/ve_qitem_sort_table_model.cpp
+    src/velib/src/qt/ve_qitem_table_model.cpp
+    src/velib/src/qt/ve_qitem_tree_model.cpp
+)
+
+set(VELIB_DBUS_SOURCES
+    src/velib/inc/velib/qt/bms_error.hpp
+    src/velib/inc/velib/qt/charger_error.hpp
+    src/velib/inc/velib/qt/ve_qitem_dbus_publisher.hpp
+    src/velib/inc/velib/qt/ve_qitems_dbus.hpp
     src/velib/inc/velib/qt/v_busitems.h
     src/velib/inc/velib/qt/vebus_error.hpp
-    src/velib/inc/velib/velib_config.h
     src/velib/src/qt/bms_error.cpp
     src/velib/src/qt/charger_error.cpp
-    src/velib/src/qt/unit_conversion.cpp
     src/velib/src/qt/v_busitem_proxy.cpp
     src/velib/src/qt/v_busitem_proxy.cpp
     src/velib/src/qt/ve_qitem_dbus_virtual_object.hpp
     src/velib/src/qt/ve_qitem_dbus_virtual_object.cpp
     src/velib/src/qt/ve_qitems_dbus.cpp
     src/velib/src/qt/ve_qitem_dbus_publisher.cpp
-    src/velib/src/qt/ve_qitem.cpp
-    src/velib/src/qt/ve_qitem_loader.cpp
-    src/velib/src/qt/ve_qitem_table_model.cpp
-    src/velib/src/qt/ve_qitem_tree_model.cpp
-    src/velib/src/qt/ve_quick_item.cpp
+
     src/velib/src/qt/v_busitems.cpp
     src/velib/src/qt/vebus_error.cpp
     src/gui-v1/alarmbusitem.h
@@ -102,12 +111,14 @@ set(VENUS_SOURCES
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     list(APPEND SOURCES
+        ${VELIB_CORE_SOURCES}
         ${VENUS_SOURCES}
         ${QML_RESOURCES}
     )
 else()
     list(APPEND SOURCES
-        ${VELIB_SOURCES}
+        ${VELIB_CORE_SOURCES}
+        ${VELIB_DBUS_SOURCES}
         ${VENUS_SOURCES}
         ${QML_RESOURCES}
     )

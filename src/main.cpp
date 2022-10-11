@@ -2,7 +2,6 @@
 ** Copyright (C) 2021 Victron Energy B.V.
 */
 
-#include "gui-v1/dbus_service.h"
 #include "src/language.h"
 #include "src/logging.h"
 #include "src/theme.h"
@@ -11,12 +10,15 @@
 #include "src/clocktime.h"
 #include <math.h>
 
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
-#include "velib/qt/v_busitems.h"
-#include "velib/qt/ve_qitems_dbus.hpp"
 #include "velib/qt/ve_qitem.hpp"
 #include "velib/qt/ve_quick_item.hpp"
 #include "velib/qt/ve_qitem_table_model.hpp"
+#include "velib/qt/ve_qitem_sort_table_model.hpp"
+#include "velib/qt/ve_qitem_child_model.hpp"
+
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
+#include "velib/qt/v_busitems.h"
+#include "velib/qt/ve_qitems_dbus.hpp"
 #include "gui-v1/dbus_services.h"
 #include "gui-v1/alarmbusitem.h"
 #endif
@@ -34,7 +36,7 @@
 Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 namespace {
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
+
 void addSettings(VeQItemSettingsInfo *info)
 {
 	// 0=Dark, 1=Light, 2=Auto
@@ -52,7 +54,7 @@ void addSettings(VeQItemSettingsInfo *info)
 	info->add("Gui/BriefView/Level/4", 5, -1, 6);    // Black water
 	info->add("Gui/BriefView/ShowPercentages", 0, 0, 1);
 }
-#endif
+
 }
 
 int main(int argc, char *argv[])
@@ -378,11 +380,13 @@ int main(int argc, char *argv[])
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzPacificData.qml")),
 		"Victron.VenusOS", 2, 0, "TzPacificData");
 
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
+	// These types do not use dbus, so are safe to import even in the Qt Wasm build.
 	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
 	qmlRegisterType<VeQItem>("Victron.Velib", 1, 0, "VeQItem");
+	qmlRegisterType<VeQItemChildModel>("Victron.Velib", 1, 0, "VeQItemChildModel");
+	qmlRegisterType<VeQItemSortDelegate>("Victron.Velib", 1, 0, "VeQItemSortDelegate");
+	qmlRegisterType<VeQItemSortTableModel>("Victron.Velib", 1, 0, "VeQItemSortTableModel");
 	qmlRegisterType<VeQItemTableModel>("Victron.Velib", 1, 0, "VeQItemTableModel");
-#endif
 
 	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");
 
