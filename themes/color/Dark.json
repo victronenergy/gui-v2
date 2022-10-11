@@ -37,6 +37,7 @@
     "color.settingsListItem.down.forwardIcon": "color.gray5",
     "color.settingsListItem.separator": "color.gray4",
     "color.settingsListItem.secondaryText": "color.gray5",
+    "color.settingsListItem.highAccessLevel": "color.darkOrange",
 
     "color.scrollBar.bar": "color.gray2",
 

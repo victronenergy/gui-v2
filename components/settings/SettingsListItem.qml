@@ -37,6 +37,22 @@ Item {
 		radius: Theme.geometry.settingsListItem.radius
 		color: root.down ? Theme.color.settingsListItem.down.background : Theme.color.settingsListItem.background
 		// TODO how to indicate read-only setting?
+
+		// Show thin colored indicator on left side if settings is only visible to super/service users
+		Rectangle {
+			visible: root.showAccessLevel >= VenusOS.User_AccessType_SuperUser
+			width: Theme.geometry.settingsListItem.radius * 2
+			height: parent.height
+			color: Theme.color.settingsListItem.highAccessLevel
+			radius: Theme.geometry.settingsListItem.radius
+
+			Rectangle {
+				x: Theme.geometry.settingsListItem.radius
+				width: Theme.geometry.settingsListItem.radius
+				height: parent.height
+				color: backgroundRect.color
+			}
+		}
 	}
 
 	Label {
