@@ -21,6 +21,7 @@ QtObject {
 	property var inputPanel
 	property var locale: Qt.locale()
 	property var dataServices: []
+	property var dataServiceModel: null
 
 	// data sources
 	property var acInputs
