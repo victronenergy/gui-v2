@@ -2,12 +2,10 @@
 #define CMMANAGER_H
 
 #include <QObject>
-#include <QtDeclarative>
 #include "cmmananger_interface.h"
 #include "cmtechnology.h"
 #include "cmservice.h"
 #include "cmagent.h"
-#include "clockmodel.h"
 
 class CmManager : public QObject
 {

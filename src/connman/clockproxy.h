@@ -45,7 +45,7 @@ public Q_SLOTS: // METHODS
 	inline QDBusPendingReply<> SetProperty(const QString &in0, const QDBusVariant &in1)
 	{
 		QList<QVariant> argumentList;
-        argumentList << qVariantFromValue(in0) << qVariantFromValue(in1);
+        argumentList << QVariant::fromValue(in0) << QVariant::fromValue(in1);
 		return asyncCallWithArgumentList(QLatin1String("SetProperty"), argumentList);
 	}
 

@@ -1,5 +1,4 @@
 #include <velib/qt/v_busitems.h>
-#include <QDeclarativeContext>
 
 #include "cmmanager.h"
 

@@ -12,13 +12,14 @@
 
 #include "clockproxy.h"
 
-class ClockModel : public QObject {
-	Q_OBJECT;
+class ClockModel : public QObject
+{
+    Q_OBJECT
 
-	Q_PROPERTY(QString timezone READ timezone WRITE setTimezone NOTIFY timezoneChanged);
-	Q_PROPERTY(QString timezoneUpdates READ timezoneUpdates WRITE setTimezoneUpdates NOTIFY timezoneUpdatesChanged);
-	Q_PROPERTY(QString timeUpdates READ timeUpdates WRITE setTimeUpdates NOTIFY timeUpdatesChanged);
-	Q_PROPERTY(QStringList timeservers READ timeservers WRITE setTimeservers NOTIFY timeserversChanged);
+    Q_PROPERTY(QString timezone READ timezone WRITE setTimezone NOTIFY timezoneChanged)
+    Q_PROPERTY(QString timezoneUpdates READ timezoneUpdates WRITE setTimezoneUpdates NOTIFY timezoneUpdatesChanged)
+    Q_PROPERTY(QString timeUpdates READ timeUpdates WRITE setTimeUpdates NOTIFY timeUpdatesChanged)
+    Q_PROPERTY(QStringList timeservers READ timeservers WRITE setTimeservers NOTIFY timeserversChanged)
 
 public:
 	ClockModel();
@@ -64,7 +65,7 @@ private:
 	QString mTimeUpdates;
 	QStringList mTimeservers;
 
-	Q_DISABLE_COPY(ClockModel);
+    Q_DISABLE_COPY(ClockModel)
 };
 
 #endif
