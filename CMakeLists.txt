@@ -44,6 +44,31 @@ qt_add_resources(QML_RESOURCES
 
 include_directories(src/velib/inc src .)
 
+set(CONNMAN_SOURCES
+    src/connman/cmmanager.h 
+    src/connman/cmmananger_interface.h 
+    src/connman/cmtechnology.h 
+    src/connman/cmtechnology_interface.h 
+    src/connman/cmservice_interface.h 
+    src/connman/cmservice.h 
+    src/connman/cmagent.h 
+    src/connman/cmagent_adaptor.h 
+    src/connman/clockmodel.h 
+    src/connman/clockproxy.h
+    src/connman/connmandbustypes.cpp 
+    src/connman/cmmanager.cpp 
+    src/connman/cmmananger_interface.cpp 
+    src/connman/cmtechnology.cpp 
+    src/connman/cmtechnology_interface.cpp 
+    src/connman/cmservice_interface.cpp 
+    src/connman/cmservice.cpp 
+    src/connman/cmagent.cpp 
+    src/connman/cmagent_adaptor.cpp 
+    src/connman/clockmodel.cpp 
+    src/connman/clockproxy.cpp
+    src/connman/connmandbustypes.h 
+)
+
 set(VELIB_CORE_SOURCES
     src/velib/inc/velib/qt/unit_conversion.hpp
     src/velib/inc/velib/qt/ve_qitem.hpp
@@ -111,12 +136,14 @@ set(VENUS_SOURCES
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     list(APPEND SOURCES
+        ${CONNMAN_SOURCES}
         ${VELIB_CORE_SOURCES}
         ${VENUS_SOURCES}
         ${QML_RESOURCES}
     )
 else()
     list(APPEND SOURCES
+        ${CONNMAN_SOURCES}
         ${VELIB_CORE_SOURCES}
         ${VELIB_DBUS_SOURCES}
         ${VENUS_SOURCES}
