@@ -136,7 +136,6 @@ set(VENUS_SOURCES
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     list(APPEND SOURCES
-        ${CONNMAN_SOURCES}
         ${VELIB_CORE_SOURCES}
         ${VENUS_SOURCES}
         ${QML_RESOURCES}

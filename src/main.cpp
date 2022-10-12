@@ -23,6 +23,14 @@
 #include "gui-v1/alarmbusitem.h"
 #endif
 
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
+#include "src/connman/cmtechnology.h"
+#include "src/connman/cmservice.h"
+#include "src/connman/cmagent.h"
+#include "src/connman/clockmodel.h"
+#include "src/connman/cmmanager.h"
+#endif
+
 #include <QGuiApplication>
 #include <QQuickView>
 #include <QQmlComponent>
@@ -53,6 +61,11 @@ void addSettings(VeQItemSettingsInfo *info)
 	info->add("Gui/BriefView/Level/3", 1, -1, 6);    // Fresh water
 	info->add("Gui/BriefView/Level/4", 5, -1, 6);    // Black water
 	info->add("Gui/BriefView/ShowPercentages", 0, 0, 1);
+}
+
+static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
+{
+	return CmManager::instance();
 }
 
 }
@@ -389,6 +402,14 @@ int main(int argc, char *argv[])
 	qmlRegisterType<VeQItemTableModel>("Victron.Velib", 1, 0, "VeQItemTableModel");
 
 	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");
+
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
+	qmlRegisterType<CmTechnology>("net.connman", 0, 1, "CmTechnology");
+	qmlRegisterType<CmService>("net.connman", 0, 1, "CmService");
+	qmlRegisterType<CmAgent>("net.connman", 0, 1, "CmAgent");
+	qmlRegisterType<ClockModel>("net.connman", 0, 1, "ClockModel");
+	qmlRegisterSingletonType<CmManager>("net.connman", 0, 1, "Connman", &connmanInstance);
+#endif
 
 	QGuiApplication app(argc, argv);
 	QGuiApplication::setApplicationName("Venus");
