@@ -4,6 +4,8 @@
 
 import QtQuick
 import Victron.VenusOS
+import "../../components/Utils.js" as Utils
+
 
 SettingsListNavigationItem {
 	id: root
@@ -61,7 +63,7 @@ SettingsListNavigationItem {
 			const day = dayNameForValue(itemDay.value)
 			const startTimeSeconds = startTime.value || 0
 			const start = ClockTime.formatTime(Math.floor(startTimeSeconds / 3600), Math.floor(startTimeSeconds % 3600 / 60))
-			const durationSecs = duration.value === undefined ? "--" : Global.secondsToString(duration.value)
+			const durationSecs = duration.value === undefined ? "--" : Utils.secondsToString(duration.value)
 			if (socLimit.value === undefined || socLimit.value >= 100) {
 				//% "%1 %2 (%3)"
 				return qsTrId("cgwacs_battery_schedule_format_no_soc").arg(day).arg(start).arg(durationSecs)

@@ -45,29 +45,5 @@ QtObject {
 
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 
-	function secondsToString(secs)
-	{
-		if (secs === undefined) {
-			return "---"
-		}
-		const days = Math.floor(secs / 86400);
-		const hours = Math.floor((secs - (days * 86400)) / 3600);
-		const minutes = Math.floor((secs - (hours * 3600)) / 60);
-		const seconds = Math.floor(secs - (minutes * 60));
-		if (days > 0) {
-			//% "%1d %2h"
-			return qsTrId("global_format_days_hours").arg(days).arg(hours);
-		}
-		if (hours) {
-			//% "%1h %2m"
-			return qsTrId("global_format_hours_min").arg(hours).arg(minutes);
-		}
-		if (minutes) {
-			//% "%1m %2s"
-			return qsTrId("global_format_min_sec").arg(minutes).arg(seconds);
-		}
-		//% "%1s"
-		return qsTrId("global_format_sec").arg(seconds);
-	}
 }
 

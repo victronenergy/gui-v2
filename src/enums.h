@@ -305,6 +305,14 @@ public:
 	};
 	Q_ENUM(Notification_Type)
 
+	enum PageSettingsLogger_MountState {
+		PageSettingsLogger_NotMounted,
+		PageSettingsLogger_Mounted,
+		PageSettingsLogger_UnmountRequested,
+		PageSettingsLogger_UnmountBusy
+	};
+	Q_ENUM(PageSettingsLogger_MountState)
+
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };

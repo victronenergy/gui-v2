@@ -177,6 +177,7 @@
         <file>pages/settings/PageSettingsGeneral.qml</file>
         <file>pages/settings/PageSettingsHub4.qml</file>
         <file>pages/settings/PageSettingsHub4Feedin.qml</file>
+        <file>pages/settings/PageSettingsLogger.qml</file>
         <file>pages/settings/PageSettingsRemoteConsole.qml</file>
         <file>pages/settings/PageSettingsBatteries.qml</file>
         <file>pages/settings/PageSettingsSystem.qml</file>

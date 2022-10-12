@@ -43,6 +43,11 @@ Page {
 				page: "/pages/settings/PageSettingsDisplay.qml"
 			},
 			{
+				//% "VRM online portal"
+				text: qsTrId("settings_vrm_online_portal"),
+				page: "/pages/settings/PageSettingsLogger.qml"
+			},
+			{
 				//% "ESS"
 				text: systemType.value === "Hub-4" ? systemType.value : qsTrId("settings_ess"),
 				page: "/pages/settings/PageSettingsHub4.qml"

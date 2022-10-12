@@ -67,8 +67,9 @@ function pad(val, length, char) {
 	const str = '' + val
 	const n = str.length
 	let diff = length - n
-	if (diff < 1)
+	if (diff < 1) {
 		return str
+	}
 
 	let rv = ''
 	char = char === undefined ? '0' : char
@@ -80,8 +81,9 @@ function pad(val, length, char) {
 }
 
 function formatAsHHMM(seconds, showUnits) {
-	if (Number.isNaN(seconds) || seconds < 0)
+	if (Number.isNaN(seconds) || seconds < 0) {
 		return "--:--"
+	}
 
 	const duration = decomposeDuration(seconds)
 	return pad(duration.h, 2)
@@ -91,8 +93,9 @@ function formatAsHHMM(seconds, showUnits) {
 }
 
 function formatAsHHMMSS(seconds, showUnits) {
-	if (Number.isNaN(seconds) || seconds < 0)
+	if (Number.isNaN(seconds) || seconds < 0) {
 		return "--:--"
+	}
 
 	const duration = decomposeDuration(seconds)
 
@@ -207,4 +210,59 @@ function jsonSettingsToModel(json) {
 function toFloat(value, precision) {
 	const factor = Math.pow(10, precision)
 	return Math.round(value * factor) / factor
+}
+
+// Convert number of seconds into readable string
+function secondsToString(secs)
+{
+	if (secs === undefined) {
+		return "---"
+	}
+	const days = Math.floor(secs / 86400)
+	const hours = Math.floor((secs - (days * 86400)) / 3600)
+	const minutes = Math.floor((secs - (hours * 3600)) / 60)
+	const seconds = Math.floor(secs - (minutes * 60))
+	if (days > 0) {
+		//% "%1d %2h"
+		return qsTrId("utils_format_days_hours").arg(days).arg(hours)
+	}
+	if (hours) {
+		//% "%1h %2m"
+		return qsTrId("utils_format_hours_min").arg(hours).arg(minutes)
+	}
+	if (minutes) {
+		//% "%1m %2s"
+		return qsTrId("utils_format_min_sec").arg(minutes).arg(seconds)
+	}
+	//% "%1s"
+	return qsTrId("utils_format_sec").arg(seconds)
+}
+
+// Convert a timestamp into a relative readable string, for example '1d 2h'
+function timeAgo(timestamp)
+{
+	var timeNow = Math.round(Date.now() / 1000)
+	var timeAgo = "---"
+	if (timestamp !== undefined && timestamp > 0) {
+		timeAgo = secondsToString(timeNow - timestamp)
+	}
+	return timeAgo;
+}
+
+// Convert 1000000 to '10M items' or '1 file', etc.
+// TODO - this matches the old gui implementation, but is unusual in that it returns eg. "1127.96M bytes"
+// instead of the more familiar "1127.96MB". Check with victron.
+function qtyToString(qty, unitSingle, unitMultiple)
+{
+	if (qty > 1000000) {
+		return "%1M %2".arg(Math.round((qty * 100) / 1000000) / 100).arg(unitMultiple)
+	} else if (qty > 1000) {
+		return "%1k %2".arg(Math.round((qty * 100) / 1000) / 100).arg(unitMultiple)
+	} else if (qty > 1 || qty === 0) {
+		return "%1 %2".arg(qty).arg(unitMultiple)
+	} else if (qty === 1) {
+		return "1 %1".arg(unitSingle)
+	} else {
+		return "---"
+	}
 }
