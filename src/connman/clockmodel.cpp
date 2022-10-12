@@ -64,22 +64,22 @@ void ClockModel::getPropertiesFinished(QDBusPendingCallWatcher *call)
 		QVariantMap properties = reply.value();
 
 		Q_ASSERT(properties.contains("Timezone"));
-		Q_ASSERT(properties.value("Timezone").type() == QVariant::String);
+        Q_ASSERT(properties.value("Timezone").typeId() == QMetaType::QString);
 		mTimezone = properties.value("Timezone").toString();
 		emit timezoneChanged();
 
 		Q_ASSERT(properties.contains("TimezoneUpdates"));
-		Q_ASSERT(properties.value("TimezoneUpdates").type() == QVariant::String);
+        Q_ASSERT(properties.value("TimezoneUpdates").typeId() == QMetaType::QString);
 		mTimezoneUpdates = properties.value("TimezoneUpdates").toString();
 		emit timezoneUpdatesChanged();
 
 		Q_ASSERT(properties.contains("TimeUpdates"));
-		Q_ASSERT(properties.value("TimeUpdates").type() == QVariant::String);
+        Q_ASSERT(properties.value("TimeUpdates").typeId() == QMetaType::QString);
 		mTimeUpdates = properties.value("TimeUpdates").toString();
 		emit timeUpdatesChanged();
 
 		Q_ASSERT(properties.contains("Timeservers"));
-		Q_ASSERT(properties.value("Timeservers").type() == QVariant::StringList);
+        Q_ASSERT(properties.value("Timeservers").typeId() == QMetaType::QStringList);
 		mTimeservers = properties.value("Timeservers").toStringList();
 		emit timeserversChanged();
 	}
@@ -98,19 +98,19 @@ void ClockModel::setPropertyFinished(QDBusPendingCallWatcher *call)
 void ClockModel::propertyChanged(const QString &name, const QDBusVariant &value)
 {
 	if (name == "Timezone") {
-		Q_ASSERT(value.variant().type() == QVariant::String);
+        Q_ASSERT(value.variant().typeId() == QMetaType::QString);
 		mTimezone = value.variant().toString();
 		emit timezoneChanged();
 	} else if (name == "TimezoneUpdates") {
-		Q_ASSERT(value.variant().type() == QVariant::String);
+        Q_ASSERT(value.variant().typeId() == QMetaType::QString);
 		mTimezoneUpdates = value.variant().toString();
 		emit timezoneUpdatesChanged();
 	} else if (name == "TimeUpdates") {
-		Q_ASSERT(value.variant().type() == QVariant::String);
+        Q_ASSERT(value.variant().typeId() == QMetaType::QString);
 		mTimeUpdates = value.variant().toString();
 		emit timeUpdatesChanged();
 	} else if (name == "Timeservers") {
-		Q_ASSERT(value.variant().type() == QVariant::StringList);
+        Q_ASSERT(value.variant().typeId() == QMetaType::QStringList);
 		mTimeservers = value.variant().toStringList();
 		emit timeserversChanged();
 	}
@@ -163,27 +163,27 @@ void ClockModel::setTimeservers(const QStringList &val)
 void ClockModel::setDate(QDate date)
 {
 	QDateTime toDate(date, QTime::currentTime());
-	quint64 secsSinceEpoch = (quint64)toDate.toTime_t();
+    quint64 secsSinceEpoch = toDate.toSecsSinceEpoch();
 	SET_CONNMAN_PROPERTY("Time", secsSinceEpoch);
 }
 
 void ClockModel::setTime(QTime time)
 {
 	QDateTime toDate(QDate::currentDate(), time);
-	quint64 secsSinceEpoch = (quint64)toDate.toTime_t();
+    quint64 secsSinceEpoch = toDate.toSecsSinceEpoch();
 	SET_CONNMAN_PROPERTY("Time", secsSinceEpoch);
 }
 
 void ClockModel::setDateTime(QDateTime dateTime)
 {
-	quint64 secsSinceEpoch = (quint64)dateTime.toTime_t();
+    quint64 secsSinceEpoch = dateTime.toSecsSinceEpoch();
 	SET_CONNMAN_PROPERTY("Time", secsSinceEpoch);
 }
 
 void ClockModel::setDateTimeFromString(QString dateTime, QString format)
 {
 	QDateTime toDate = QDateTime::fromString(dateTime, format);
-	quint64 secsSinceEpoch = (quint64)toDate.toTime_t();
+    quint64 secsSinceEpoch = toDate.toSecsSinceEpoch();
 	SET_CONNMAN_PROPERTY("Time", secsSinceEpoch);
 }
 
@@ -196,5 +196,5 @@ bool ClockModel::checkDateTime(QString dateTime, QString format)
 quint64 ClockModel::secondsFromString(QString dateTime, QString format)
 {
 	QDateTime toDate = QDateTime::fromString(dateTime, format);
-	return (quint64)toDate.toTime_t();
+    return toDate.toSecsSinceEpoch();
 }
