@@ -19,6 +19,7 @@ Item {
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 
 	readonly property bool defaultVisible: Global.systemSettings.canAccess(showAccessLevel)
+	readonly property alias primaryLabel: primaryLabel
 	readonly property int defaultImplicitHeight: visible
 		? Math.max(primaryLabel.implicitHeight + Theme.geometry.settingsListItem.content.verticalMargin * 2,
 				   Theme.geometry.settingsListItem.height)

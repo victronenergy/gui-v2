@@ -10,7 +10,7 @@ SettingsListItem {
 
 	property alias secondaryText: secondaryLabel.text
 	property alias source: dataPoint.source
-	property alias dataPoint: dataPoint
+	readonly property alias dataPoint: dataPoint
 
 	content.children: [
 		Label {
@@ -21,6 +21,7 @@ SettingsListItem {
 			text: dataPoint.value || ""
 			font.pixelSize: Theme.font.size.body2
 			color: Theme.color.settingsListItem.secondaryText
+			wrapMode: Text.Wrap
 		}
 	]
 
