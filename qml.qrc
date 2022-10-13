@@ -15,6 +15,7 @@
         <file>components/controls/TextField.qml</file>
         <file>components/datapoints/DataPoint.qml</file>
         <file>components/datapoints/DataPointDBusImpl.qml</file>
+        <file>components/datapoints/DataPointMqttImpl.qml</file>
         <file>components/datapoints/DataPointMockImpl.qml</file>
         <file>components/datapoints/DemoModeDataPoint.qml</file>
         <file>components/settings/SettingsLabel.qml</file>
@@ -116,35 +117,50 @@
         <file>data/Ess.qml</file>
         <file>data/Generators.qml</file>
         <file>data/Notifications.qml</file>
-        <file>data/dbus/NotificationsImpl.qml</file>
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
         <file>data/System.qml</file>
         <file>data/SystemSettings.qml</file>
         <file>data/SystemAc.qml</file>
         <file>data/SystemDc.qml</file>
+        <file>data/mqtt/MqttDataManager.qml</file>
+        <file>data/mqtt/AcInputServiceLoader.qml</file>
+        <file>data/mqtt/AcInputsImpl.qml</file>
+        <file>data/mqtt/BatteryImpl.qml</file>
+        <file>data/mqtt/DcInputsImpl.qml</file>
+        <file>data/mqtt/EnvironmentInputsImpl.qml</file>
+        <file>data/mqtt/EssImpl.qml</file>
+        <file>data/mqtt/GeneratorsImpl.qml</file>
+        <file>data/mqtt/InvertersImpl.qml</file>
+        <file>data/mqtt/NotificationsImpl.qml</file>
+        <file>data/mqtt/RelaysImpl.qml</file>
+        <file>data/mqtt/SolarChargersImpl.qml</file>
+        <file>data/mqtt/SystemImpl.qml</file>
+        <file>data/mqtt/SystemSettingsImpl.qml</file>
+        <file>data/mqtt/TanksImpl.qml</file>
+        <file>data/dbus/DBusDataManager.qml</file>
         <file>data/dbus/AcInputServiceLoader.qml</file>
         <file>data/dbus/AcInputsImpl.qml</file>
+        <file>data/dbus/BatteryImpl.qml</file>
         <file>data/dbus/DcInputsImpl.qml</file>
-        <file>data/dbus/DBusDataManager.qml</file>
+        <file>data/dbus/EnvironmentInputsImpl.qml</file>
         <file>data/dbus/EssImpl.qml</file>
         <file>data/dbus/GeneratorsImpl.qml</file>
         <file>data/dbus/InvertersImpl.qml</file>
-        <file>data/dbus/BatteryImpl.qml</file>
-        <file>data/dbus/EnvironmentInputsImpl.qml</file>
+        <file>data/dbus/NotificationsImpl.qml</file>
         <file>data/dbus/RelaysImpl.qml</file>
         <file>data/dbus/SolarChargersImpl.qml</file>
         <file>data/dbus/SystemImpl.qml</file>
         <file>data/dbus/SystemSettingsImpl.qml</file>
         <file>data/dbus/TanksImpl.qml</file>
+        <file>data/mock/MockDataManager.qml</file>
         <file>data/mock/AcInputsImpl.qml</file>
-        <file>data/mock/DcInputsImpl.qml</file>
         <file>data/mock/BatteryImpl.qml</file>
+        <file>data/mock/DcInputsImpl.qml</file>
         <file>data/mock/EnvironmentInputsImpl.qml</file>
         <file>data/mock/EssImpl.qml</file>
         <file>data/mock/GeneratorsImpl.qml</file>
         <file>data/mock/InvertersImpl.qml</file>
-        <file>data/mock/MockDataManager.qml</file>
         <file>data/mock/NotificationsImpl.qml</file>
         <file>data/mock/RelaysImpl.qml</file>
         <file>data/mock/SolarChargersImpl.qml</file>

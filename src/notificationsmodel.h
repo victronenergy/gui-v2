@@ -8,14 +8,14 @@
 #include <QVariantList>
 #include "enums.h"
 
+class QQmlEngine;
+class QJSEngine;
+
 class AlarmMonitor;
 
 namespace Victron {
 
 namespace VenusOS {
-
-class QQmlEngine;
-class QJSEngine;
 
 struct Notification
 {

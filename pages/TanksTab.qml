@@ -156,5 +156,6 @@ ListView {
 			tankModel: expandedTanksLoader.tankModel
 			animationEnabled: root.animationEnabled
 		}
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load expanded tanks view:", errorString())
 	}
 }
