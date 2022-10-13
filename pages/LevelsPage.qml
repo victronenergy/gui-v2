@@ -123,5 +123,6 @@ Page {
 		sourceComponent: EnvironmentTab {
 			animationEnabled: root.isCurrentPage
 		}
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load environments tab:", errorString())
 	}
 }

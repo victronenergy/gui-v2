@@ -123,5 +123,6 @@ Rectangle {
 			maximumValue: Theme.geometry.levelsPage.environment.humidityGauge.maximumValue
 			gradient: root.humidityGaugeGradient
 		}
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load himidity environment gauge:", errorString())
 	}
 }

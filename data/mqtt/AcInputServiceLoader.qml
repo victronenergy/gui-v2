@@ -66,7 +66,7 @@ Loader {
 			return null
 		}
 	}
-	onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dbus ac input service:", errorString())
+	onStatusChanged: if (status === Loader.Error) console.warn("Unable to load mqtt ac input service:", errorString())
 
 	ListModel {
 		id: validPhases

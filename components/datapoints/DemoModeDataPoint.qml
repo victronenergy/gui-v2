@@ -8,9 +8,9 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	readonly property int demoMode: dbusConnected && Global.systemSettings.demoMode.value === undefined && !forceValidDemoMode
+	readonly property int demoMode: (mqttConnecting || mqttConnected || dbusConnected) && Global.systemSettings.demoMode.value === undefined && !forceValidDemoMode
 			? VenusOS.SystemSettings_DemoModeUnknown
-			: Global.systemSettings.demoMode.value === 1 || !dbusConnected
+			: Global.systemSettings.demoMode.value === 1 || (!dbusConnected && !mqttConnected && !mqttConnecting)
 			  ? VenusOS.SystemSettings_DemoModeActive
 			  : VenusOS.SystemSettings_DemoModeInactive
 

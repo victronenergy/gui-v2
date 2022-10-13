@@ -31,6 +31,7 @@ Page {
 		height: width
 		x: sidePanel.x/2 - width/2
 		sourceComponent: Global.tanks.totalTankCount <= 1 ? singleGauge : multiGauge
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge:", errorString())
 	}
 
 	Component {
@@ -117,6 +118,7 @@ Page {
 					  : Global.acInputs.current
 					: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
 		}
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left edge:", errorString())
 	}
 
 	Loader {
@@ -139,6 +141,7 @@ Page {
 			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
 			label.opacity: root._gaugeLabelOpacity
 		}
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left lower:", errorString())
 	}
 
 	Loader {
@@ -164,6 +167,7 @@ Page {
 			label.leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
 			label.opacity: root._gaugeLabelOpacity
 		}
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right edge:", errorString())
 	}
 
 	Loader {
@@ -189,6 +193,7 @@ Page {
 			label.leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
 			label.opacity: root._gaugeLabelOpacity
 		}
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right lower:", errorString())
 	}
 
 	BriefMonitorPanel {

@@ -118,6 +118,7 @@ Rectangle {
 					value: (root.mergeTanks ? model.tank.level : root.level) / 100
 					isGrouped: root.mergeTanks
 				}
+				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load tank levels gauge:", errorString())
 			}
 		}
 	}
