@@ -66,6 +66,7 @@ Item {
 			target: Global
 			function onReadyChanged() {
 				if (Global.ready && pageStack.depth === 0) {
+					console.warn("Data sources ready, creating MainPage.qml")
 					pageStack.push("qrc:/pages/MainPage.qml")
 				}
 			}

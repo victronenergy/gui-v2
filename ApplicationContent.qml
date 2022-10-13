@@ -30,7 +30,7 @@ Item {
 					console.warn("Global.demoManager is already set, overwriting")
 				}
 				Global.demoManager = item
-			} else if (status === Loader.Ready) {
+			} else if (status === Loader.Error) {
 				console.warn("Unable to load DemoManager:", errorString())
 			}
 		}
@@ -38,14 +38,23 @@ Item {
 
 	DemoModeDataPoint {
 		forceValidDemoMode: !splashView.enabled
-		onDemoModeChanged: {
+		onDemoModeChanged: _initializeDataSourceType()
+		Component.onCompleted: _initializeDataSourceType()
+		function _initializeDataSourceType() {
 			if (demoMode === VenusOS.SystemSettings_DemoModeActive) {
 				// Ensure Global.demoManager is set before initializing the DataManager.
+				console.warn("Demo mode is active, setting mock data source")
 				demoManagerLoader.active = true
 				dataManager.dataSourceType = VenusOS.DataPoint_MockSource
 			} else if (demoMode === VenusOS.SystemSettings_DemoModeInactive) {
 				demoManagerLoader.active = false
-				dataManager.dataSourceType = VenusOS.DataPoint_DBusSource
+				if (dbusConnected) {
+					console.warn("Demo mode is inactive, setting DBus data source type")
+					dataManager.dataSourceType = VenusOS.DataPoint_DBusSource
+				} else {
+					console.warn("Demo mode is inactive, setting MQTT data source type")
+					dataManager.dataSourceType = VenusOS.DataPoint_MqttSource
+				}
 			}
 		}
 	}

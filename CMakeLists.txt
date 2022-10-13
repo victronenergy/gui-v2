@@ -17,18 +17,20 @@ message("Building VenusOS for ${CMAKE_SYSTEM_NAME}")
 
 option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD=ON" OFF) # Disabled by default
 option(VENUS_WEBASSEMBLY_BUILD "enable webassembly build via cmake -DVENUS_WEBASSEMBLY_BUILD=ON" OFF) # Disabled by default
+option(MQTT_WEBSOCKETS_ENABLED "enable websockets build via cmake -DMQTT_WEBSOCKETS_ENABLED=ON" OFF) # Disabled by default
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml VirtualKeyboard LinguistTools REQUIRED)
+    add_compile_definitions(MQTT_WEBSOCKETS_ENABLED)
+    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets REQUIRED)
 else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools)
+    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt)
     if (NOT ${Qt6_FOUND})
         # cmake can't automatically find Qt 6.2 on Ubuntu Linux, give it a hint:
         if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
@@ -119,6 +121,11 @@ set(VELIB_DBUS_SOURCES
     src/gui-v1/wakespeed_error.cpp
 )
 
+set(VELIB_MQTT_SOURCES
+    src/velib/inc/velib/qt/ve_qitems_mqtt.hpp
+    src/velib/src/qt/ve_qitems_mqtt.cpp
+)
+
 set(VENUS_SOURCES
     src/main.cpp
     src/clocktime.h
@@ -132,11 +139,14 @@ set(VENUS_SOURCES
     src/enums.cpp
     src/notificationsmodel.h
     src/notificationsmodel.cpp
+    src/uidhelper.h
+    src/uidhelper.cpp
 )
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     list(APPEND SOURCES
         ${VELIB_CORE_SOURCES}
+        ${VELIB_MQTT_SOURCES}
         ${VENUS_SOURCES}
         ${QML_RESOURCES}
     )
@@ -145,6 +155,7 @@ else()
         ${CONNMAN_SOURCES}
         ${VELIB_CORE_SOURCES}
         ${VELIB_DBUS_SOURCES}
+        ${VELIB_MQTT_SOURCES}
         ${VENUS_SOURCES}
         ${QML_RESOURCES}
     )
@@ -239,7 +250,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
         Qt6::Quick
         Qt6::Svg
         Qt6::Xml
-        Qt6::VirtualKeyboard
+        Qt6::Mqtt
+        Qt6::WebSockets
     )
 else()
     target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -249,6 +261,7 @@ else()
         Qt6::Svg
         Qt6::Xml
         Qt6::DBus
+        Qt6::Mqtt
     )
 endif()
 

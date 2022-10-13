@@ -14,6 +14,7 @@ Item {
 
 	property bool _ready
 	readonly property bool _shouldInitialize: _ready && dataSourceType != VenusOS.DataPoint_UnknownSource
+			&& (dataSourceType != VenusOS.DataPoint_MqttSource || mqttConnected) // not ready to initialize if still mqttConnecting
 
 	function _setBackendSource() {
 		if (!_shouldInitialize) {
@@ -24,6 +25,11 @@ Item {
 			demoDataLoader.active = false
 			_resetData()
 			dbusDataLoader.active = true
+		} else if (dataSourceType == VenusOS.DataPoint_MqttSource && mqttConnected) {
+			console.warn("Loading MQTT data backend...")
+			demoDataLoader.active = false
+			_resetData()
+			mqttDataLoader.active = true
 		} else {
 			console.warn("Loading mock data backend...")
 			dbusDataLoader.active = false
@@ -78,6 +84,17 @@ Item {
 		active: false
 		source: active ? "qrc:/data/dbus/DBusDataManager.qml" : ""
 
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dbus data manager:", errorString())
+		onLoaded: Global.dataBackendLoaded = true
+	}
+
+	Loader {
+		id: mqttDataLoader
+
+		active: false
+		source: active ? "qrc:/data/mqtt/MqttDataManager.qml" : ""
+
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load mqtt data manager:", errorString())
 		onLoaded: Global.dataBackendLoaded = true
 	}
 
@@ -87,6 +104,7 @@ Item {
 		active: false
 		sourceComponent: MockData.MockDataManager {}
 
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load mock data manager:", errorString())
 		onLoaded: Global.dataBackendLoaded = true
 	}
 }

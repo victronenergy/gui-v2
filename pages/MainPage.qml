@@ -28,13 +28,19 @@ Page {
 			y: root.height
 			asynchronous: true
 			source: url
-			onStatusChanged: if (status === Loader.Ready) {
-				if (index === 0) {
-					navStack.push(item)
-				}
-				_loadedPages++
-				if (_loadedPages === navBar.model.count) {
-					Global.allPagesLoaded = true
+			onStatusChanged: {
+				if (status === Loader.Ready) {
+					if (index === 0) {
+						navStack.push(item)
+					}
+					_loadedPages++
+					if (_loadedPages === navBar.model.count) {
+						Global.allPagesLoaded = true
+					}
+				} else if (status === Loader.Error) {
+					console.warn("Error preloading page: " + source.toString() + ", " + errorString())
+				} else {
+					console.log("Preloading page: " + source.toString())
 				}
 			}
 		}

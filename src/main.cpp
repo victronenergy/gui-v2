@@ -8,10 +8,12 @@
 #include "src/enums.h"
 #include "src/notificationsmodel.h"
 #include "src/clocktime.h"
+#include "src/uidhelper.h"
 #include <math.h>
 
 #include "velib/qt/ve_qitem.hpp"
 #include "velib/qt/ve_quick_item.hpp"
+#include "velib/qt/ve_qitems_mqtt.hpp"
 #include "velib/qt/ve_qitem_table_model.hpp"
 #include "velib/qt/ve_qitem_sort_table_model.hpp"
 #include "velib/qt/ve_qitem_child_model.hpp"
@@ -29,6 +31,13 @@
 #include "src/connman/cmagent.h"
 #include "src/connman/clockmodel.h"
 #include "src/connman/cmmanager.h"
+#endif
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+#include <emscripten/val.h>
+#include <emscripten.h>
+#include <QUrl>
+#include <QUrlQuery>
 #endif
 
 #include <QGuiApplication>
@@ -63,10 +72,12 @@ void addSettings(VeQItemSettingsInfo *info)
 	info->add("Gui/BriefView/ShowPercentages", 0, 0, 1);
 }
 
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
 static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
 {
 	return CmManager::instance();
 }
+#endif
 
 }
 
@@ -106,6 +117,9 @@ int main(int argc, char *argv[])
 		[](QQmlEngine *, QJSEngine *) -> QObject * {
 		return Victron::VenusOS::ClockTime::instance();
 	});
+	const int uidHelperSingletonId = qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
+		"Victron.VenusOS", 2, 0, "UidHelper",
+		&Victron::VenusOS::UidHelper::instance);
 
 	/* main content */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/ApplicationContent.qml")),
@@ -403,6 +417,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<VeQItemSortTableModel>("Victron.Velib", 1, 0, "VeQItemSortTableModel");
 	qmlRegisterType<VeQItemTableModel>("Victron.Velib", 1, 0, "VeQItemTableModel");
 
+	qmlRegisterType<Victron::VenusOS::SingleUidHelper>("Victron.VenusOS", 2, 0, "SingleUidHelper");
 	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
@@ -416,6 +431,13 @@ int main(int argc, char *argv[])
 	QGuiApplication app(argc, argv);
 	QGuiApplication::setApplicationName("Venus");
 	QGuiApplication::setApplicationVersion("2.0");
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	emscripten::val webLocation = emscripten::val::global("location");
+	const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
+	const QUrlQuery query(webLocationUrl);
+	const QString mqttUrl(query.queryItemValue("mqtt")); // e.g.: "ws://192.168.5.96:9001/"
+#endif
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	QCommandLineParser parser;
@@ -433,6 +455,11 @@ int main(int argc, char *argv[])
 		QString(),
 		QString("tcp:host=localhost,port=3000"));
 	parser.addOption(dbusDefault);
+
+	QCommandLineOption mqttAddress({ "m",  "mqtt" },
+		QGuiApplication::tr("main", "Specify the MQTT broker address to connect to"),
+		QGuiApplication::tr("main", "mqtt"));
+	parser.addOption(mqttAddress);
 
 	parser.process(app);
 
@@ -465,11 +492,38 @@ int main(int argc, char *argv[])
 	}
 #endif
 
+	QScopedPointer<VeQItemMqttProducer> mqttProducer(new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt"));
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	mqttProducer->open(QUrl(mqttUrl), QMqttClient::MQTT_3_1);
+#else
+	mqttProducer->open(parser.isSet(mqttAddress) ? QHostAddress(parser.value(mqttAddress)) : QHostAddress::LocalHost, 1883);
+#endif
+
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
 
-	/* Force construction of translator */
+	/* Force construction of translator and uid helper */
 	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
+	Victron::VenusOS::UidHelper* uidHelper = engine.singletonInstance<Victron::VenusOS::UidHelper*>(uidHelperSingletonId);
+	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::activeTopicsChanged,
+			uidHelper, [&mqttProducer, &uidHelper] {
+				uidHelper->setActiveTopics(mqttProducer->activeTopics());
+			});
+
+	engine.rootContext()->setContextProperty("mqttConnecting", true);
+	engine.rootContext()->setContextProperty("mqttConnected", mqttProducer->ready());
+	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::errorChanged,
+			&engine, [&engine] {
+				engine.rootContext()->setContextProperty("mqttConnecting", false);
+			});
+	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::readyChanged,
+			&engine, [&mqttProducer, &engine] {
+				// TODO: for performance reasons, we should use a singleton rather than context property.
+				//       the same applies to the dbusConnected property.
+				qWarning() << "MQTT producer ready changed, now:" << mqttProducer->ready();
+				engine.rootContext()->setContextProperty("mqttConnected", mqttProducer->ready());
+				engine.rootContext()->setContextProperty("mqttConnecting", false);
+			});
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();

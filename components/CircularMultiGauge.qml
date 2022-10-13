@@ -34,13 +34,14 @@ Item {
 			width: parent.width
 			delegate: Loader {
 				id: loader
-				property int status: Gauges.getValueStatus(model.value, model.valueType)
+				property int gaugeStatus: Gauges.getValueStatus(model.value, model.valueType)
 				property real value: model.value
 				width: parent.width - (index*_stepSize)
 				height: width
 				anchors.centerIn: parent
 				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
 				sourceComponent: model.tankType === VenusOS.Tank_Type_Battery ? shinyProgressArc : progressArc
+				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load circular multi gauge progress arc:", errorString())
 
 				Component {
 					id: shinyProgressArc
@@ -49,8 +50,8 @@ Item {
 						startAngle: 0
 						endAngle: 270
 						value: loader.value
-						progressColor: Theme.statusColorValue(loader.status)
-						remainderColor: Theme.statusColorValue(loader.status, true)
+						progressColor: Theme.statusColorValue(loader.gaugeStatus)
+						remainderColor: Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
 						shineAnimationEnabled: Global.battery.mode === VenusOS.Battery_Mode_Charging

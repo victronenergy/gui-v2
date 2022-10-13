@@ -280,6 +280,7 @@ public:
 	enum DataPoint_SourceType {
 		DataPoint_UnknownSource,
 		DataPoint_DBusSource,
+		DataPoint_MqttSource,
 		DataPoint_MockSource
 	};
 	Q_ENUM(DataPoint_SourceType)
