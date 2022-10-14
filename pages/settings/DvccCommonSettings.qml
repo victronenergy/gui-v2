@@ -19,7 +19,7 @@ Column {
 		onCheckedChanged: {
 			if (dataPoint.value !== undefined && !checked) {
 				//% "Make sure to also reset the VE.Bus system after disabling DVCC"
-				Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, qsTrId("settings_dvcc_switch_reset_vebus_after_disabling_dvcc"))
+				Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_dvcc_switch_reset_vebus_after_disabling_dvcc"))
 			}
 		}
 	}

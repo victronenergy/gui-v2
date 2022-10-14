@@ -33,7 +33,7 @@ QtObject {
 		{
 			acknowledged: false,
 			active: true,
-			type: VenusOS.Notification_Notification,
+			type: VenusOS.Notification_Info,
 			dateTime: root.date2h10mAgo,
 			deviceName: "System",
 			description: "Software update available",
@@ -41,7 +41,7 @@ QtObject {
 		{
 			acknowledged: false,
 			active: true,
-			type: VenusOS.Notification_Notification,
+			type: VenusOS.Notification_Info,
 			dateTime: root.date26MinutesAgo,
 			deviceName: "System",
 			description: "Software update available"

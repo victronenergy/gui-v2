@@ -301,7 +301,7 @@ public:
 		Notification_Inactive,
 		Notification_Warning,
 		Notification_Alarm,
-		Notification_Notification
+		Notification_Info
 	};
 	Q_ENUM(Notification_Type)
 

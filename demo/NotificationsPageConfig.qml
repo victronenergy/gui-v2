@@ -53,7 +53,7 @@ QtObject {
 		{
 			acknowledged: false,
 			active: true,
-			type: VenusOS.Notification_Notification,
+			type: VenusOS.Notification_Info,
 			dateTime: root.date,
 			deviceName: "System",
 			description: "Software update available"
@@ -69,7 +69,7 @@ QtObject {
 
 	function showToastNotification() {
 		currentType = (currentType + 1)
-		if (currentType > VenusOS.Notification_Notification) {
+		if (currentType > VenusOS.Notification_Info) {
 			currentType = VenusOS.Notification_Warning
 			useShortText = !useShortText
 		}

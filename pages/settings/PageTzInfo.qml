@@ -52,7 +52,7 @@ Page {
 				dt.setHours(hour)
 				dt.setMinutes(minute)
 				// TODO set system date time to 'dt' using venus-platform or such
-				Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, "TODO not yet implemented")
+				Global.dialogManager.showToastNotification(VenusOS.Notification_Info, "TODO not yet implemented")
 			}
 		}
 	}

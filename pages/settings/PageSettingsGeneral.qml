@@ -25,7 +25,7 @@ Page {
 
 				onAccepted: {
 					// TODO implement via platform helpers
-					Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, "not yet implemented!")
+					Global.dialogManager.showToastNotification(VenusOS.Notification_Info, "not yet implemented!")
 				}
 			}
 
@@ -97,7 +97,7 @@ Page {
 					// TODO clarify - do we need same demo modes as gui-v1? Those trigger demos via scripts in dbus-recorder/.
 					if (checked && !dbusConnected) {
 						//% "No backend source available. Demo mode cannot be deactivated!"
-						Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, qsTrId("settings_general_no_backend_source"))
+						Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_general_no_backend_source"))
 						return
 					}
 					Global.systemSettings.demoMode.setValue(
