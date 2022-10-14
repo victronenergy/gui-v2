@@ -84,10 +84,10 @@ Page {
 				const newValue = model[index].value
 				if (newValue === VenusOS.Ess_Hub4ModeState_PhaseSplit) {
 					//% "Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).\n\nCAUTION: Use only if required by the utility provider."
-					Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, qsTrId("settings_ess_multiphase_split_notif"))
+					Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_multiphase_split_notif"))
 				} else if (newValue === VenusOS.Ess_Hub4ModeState_PhaseCompensation ) {
 					//% "The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).\n\nUse unless prohibited by the utility provider."
-					Global.dialogManager.showToastNotification(VenusOS.Notification_Notification, qsTrId("settings_ess_multiphase_total_notif"))
+					Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_multiphase_total_notif"))
 				}
 			}
 		}
