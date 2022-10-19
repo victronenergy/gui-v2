@@ -71,6 +71,7 @@ Page {
 				text: qsTrId("settings_reboot")
 				//% "Reboot now"
 				button.text: qsTrId("settings_reboot_now")
+				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: {
 					console.log("TODO implement reboot")
 				}

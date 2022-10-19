@@ -81,6 +81,7 @@ Page {
 				//% "Time zone"
 				text: qsTrId("settings_tz_time_zone")
 				secondaryText: root._findTimeZoneName(tzData.region, tzData.city)
+				writeAccessLevel: VenusOS.User_AccessType_User
 
 				onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: text })
 
