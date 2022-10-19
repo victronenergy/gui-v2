@@ -21,9 +21,7 @@ SettingsListButton {
 
 	property var _numberSelector
 
-	button.text: value === undefined
-		 ? "--"
-		 : Number(value / Math.pow(10, decimals)).toLocaleString(Global.locale, 'f', root.decimals) + root.suffix
+	button.text: value === undefined ? "--" : Utils.toFloat(value, decimals) + root.suffix
 
 	onClicked: {
 		if (!_numberSelector) {
