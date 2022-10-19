@@ -31,8 +31,9 @@ CT.RadioButton {
 		implicitHeight: implicitWidth
 		radius: implicitWidth/2
 		border.width: Theme.geometry.radioButton.border.width
-		border.color: (root.down || root.checked) ? Theme.color.radioButton.indicator.on
-				: Theme.color.radioButton.indicator.off
+		border.color: root.enabled
+			? ((root.down || root.checked) ? Theme.color.radioButton.indicator.on : Theme.color.radioButton.indicator.off)
+			: Theme.color.radioButton.indicator.disabled
 		color: 'transparent'
 
 		Rectangle {
@@ -40,7 +41,7 @@ CT.RadioButton {
 			implicitWidth: Theme.geometry.radioButton.indicator.dot.width
 			implicitHeight: implicitWidth
 			radius: implicitWidth/2
-			color: Theme.color.radioButton.indicator.on
+			color: root.enabled ? Theme.color.radioButton.indicator.on : Theme.color.radioButton.indicator.disabled
 			visible: root.down || root.checked
 		}
 	}

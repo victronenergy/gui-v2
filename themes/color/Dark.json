@@ -30,6 +30,7 @@
 
     "color.radioButton.indicator.on": "color.ok",
     "color.radioButton.indicator.off": "color.gray3",
+    "color.radioButton.indicator.disabled": "color.gray2",
 
     "color.settingsListItem.background": "color.background.secondary",
     "color.settingsListItem.down.background": "color.gray2",

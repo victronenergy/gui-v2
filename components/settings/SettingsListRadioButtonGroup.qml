@@ -69,6 +69,9 @@ SettingsListNavigationItem {
 					caption.text: Array.isArray(root.model)
 						  ? modelData.caption || ""
 						  : model.caption || ""
+					enabled: Array.isArray(root.model)
+						  ? !modelData.readOnly
+						  : !model.readOnly
 					checked: root.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel
 					writeAccessLevel: root.showAccessLevel
