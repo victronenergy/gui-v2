@@ -15,7 +15,7 @@ Item {
 	property int spacing: Theme.geometry.settingsPage.settingsList.spacing
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
-	property int writeAccessLevel: VenusOS.User_AccessType_User
+	property int writeAccessLevel: VenusOS.User_AccessType_Installer
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 
 	readonly property bool defaultVisible: Global.systemSettings.canAccess(showAccessLevel)
