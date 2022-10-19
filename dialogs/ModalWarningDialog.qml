@@ -31,8 +31,9 @@ ModalDialog {
 			}
 
 			width: Theme.geometry.modalWarningDialog.alarmIcon.width
-			height: width
+			height: Theme.geometry.modalWarningDialog.alarmIcon.width
 			source: "qrc:/images/icon_alarm_48.svg"
+			color: Theme.color.red
 		}
 
 		Label {
@@ -45,12 +46,12 @@ ModalDialog {
 				right: parent.right
 				rightMargin: Theme.geometry.modalWarningDialog.title.horizontalMargin
 			}
-			height: Theme.geometry.modalWarningDialog.title.height
 
 			text: root.title
 			font.pixelSize: Theme.font.size.h1
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
+			wrapMode: Text.Wrap
 		}
 
 		Label {

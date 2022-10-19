@@ -281,3 +281,28 @@ function qsTrIdServiceType(serviceType) {
 		return '--'
 	}
 }
+
+function connmanServiceState(service) {
+	if (service) {
+		switch (service.state) {
+		case "failure":
+			//% "Failure"
+			return qsTrId("utils_connman_failure")
+		case "association":
+			//% "Connecting"
+			return qsTrId("utils_connman_connecting")
+		case "configuration":
+			//% "Retrieving IP address"
+			return qsTrId("utils_connman_retrieving_ip_address")
+		case "ready":
+		case "online":
+			//% "Connected"
+			return qsTrId("utils_connman_connected")
+		case "disconnect":
+			//% "Disconnect"
+			return qsTrId("utils_connman_disconnect")
+		}
+	}
+	//% "Disconnected"
+	return qsTrId("utils_connman_disconnected")
+}

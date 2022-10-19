@@ -58,6 +58,11 @@ Page {
 				page: "/pages/settings/PageSettingsCGwacsOverview.qml"
 			},
 			{
+				//% "Ethernet"
+				text: qsTrId("settings_ethernet"),
+				page: "/pages/settings/PageSettingsTcpIp.qml"
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"

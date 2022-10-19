@@ -272,6 +272,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "SettingsListDvccSwitch");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextField.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListTextField");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListIpAddressField.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListIpAddressField");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextGroup.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListTextGroup");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTimeSelector.qml")),
