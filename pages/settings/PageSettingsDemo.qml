@@ -36,7 +36,7 @@ Page {
 				text: "Radio buttons with array model"
 				model: [
 					{ display: "Option A", value: 1 },
-					{ display: "Option B", value: 2 },
+					{ display: "Option B", value: 2, readOnly: true },
 					{ display: "Option C", value: 3 },
 				]
 				currentIndex: 1
@@ -51,7 +51,7 @@ Page {
 				text: "Radio buttons with complex model"
 				model: ListModel {
 					ListElement { display: "Option A"; value: 1 }
-					ListElement { display: "Option B"; value: 2 }
+					ListElement { display: "Option B"; value: 2; readOnly: true }
 					ListElement { display: "Option C"; value: 3 }
 				}
 				currentIndex: 2
