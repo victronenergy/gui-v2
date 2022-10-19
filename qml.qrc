@@ -169,6 +169,8 @@
         <file>pages/settings/DvccCommonSettings.qml</file>
         <file>pages/settings/PageChargeCurrentLimits.qml</file>
         <file>pages/settings/PageHub4Debug.qml</file>
+        <file>pages/settings/PageSettingsCGwacs.qml</file>
+        <file>pages/settings/PageSettingsCGwacsOverview.qml</file>
         <file>pages/settings/PageSettingsDemo.qml</file>
         <file>pages/settings/PageSettingsDisplay.qml</file>
         <file>pages/settings/PageSettingsDisplayBrief.qml</file>

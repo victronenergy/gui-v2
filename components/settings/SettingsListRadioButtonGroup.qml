@@ -20,7 +20,18 @@ SettingsListNavigationItem {
 	property alias source: dataPoint.source
 	readonly property alias dataPoint: dataPoint
 	property var model: []
-	property int currentIndex
+	property int currentIndex: {
+		if (!model || model.length === undefined || source.length === 0 || dataPoint.value === undefined) {
+			return defaultIndex
+		}
+		for (let i = 0; i < model.length; ++i) {
+			if (model[i].value === dataPoint.value) {
+				return i
+			}
+		}
+		return defaultIndex
+	}
+
 	property bool updateOnClick: true
 
 	property int defaultIndex: -1
@@ -32,18 +43,6 @@ SettingsListNavigationItem {
 	secondaryText: currentIndex >= 0 && model.length !== undefined && currentIndex < model.length
 			? model[currentIndex].display
 			: defaultSecondaryText
-
-	currentIndex: {
-		if (!model || model.length === undefined || source.length === 0 || dataPoint.value === undefined) {
-			return defaultIndex
-		}
-		for (let i = 0; i < model.length; ++i) {
-			if (model[i].value === dataPoint.value) {
-				return i
-			}
-		}
-		return defaultIndex
-	}
 
 	onClicked: {
 		Global.pageManager.pushPage(optionsPageComponent, { title: text })

@@ -266,3 +266,15 @@ function qtyToString(qty, unitSingle, unitMultiple)
 		return "---"
 	}
 }
+
+function stringToArray(commaSeparatedString)
+{
+	var ret = []
+	if (commaSeparatedString !== undefined && commaSeparatedString.length > 0) {
+		var split = commaSeparatedString.split(',')
+		for (var i = 0; i < split.length; i++) {
+			ret.push(split[i]);
+		}
+	}
+	return ret
+}
