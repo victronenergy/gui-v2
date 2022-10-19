@@ -108,6 +108,10 @@ Page {
 				to: 10
 			}
 
+			SettingsListTimeSelector {
+				text: "Time selection"
+			}
+
 			SettingsListItem {
 				text: "Custom item"
 
