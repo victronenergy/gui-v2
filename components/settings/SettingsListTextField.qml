@@ -46,7 +46,9 @@ SettingsListItem {
 
 			EnterKeyAction.actionId: EnterKeyAction.Done
 			onAccepted: {
-				dataPoint.setValue(text)
+				if (dataPoint.source) {
+					dataPoint.setValue(text)
+				}
 				textField.focus = false
 				root.accepted()
 			}

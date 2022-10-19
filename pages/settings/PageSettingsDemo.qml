@@ -100,6 +100,10 @@ Page {
 				placeholderText: "Enter text"
 			}
 
+			SettingsListIpAddressField {
+				text: "IP address"
+			}
+
 			SettingsListSpinBox {
 				text: "Spin box"
 				value: 5.789

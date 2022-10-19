@@ -22,6 +22,7 @@
         <file>components/settings/SettingsListCGwacsBatterySchedule.qml</file>
         <file>components/settings/SettingsListDvccSwitch.qml</file>
         <file>components/settings/SettingsListView.qml</file>
+        <file>components/settings/SettingsListIpAddressField.qml</file>
         <file>components/settings/SettingsListNavigationItem.qml</file>
         <file>components/settings/SettingsListRadioButton.qml</file>
         <file>components/settings/SettingsListRadioButtonGroup.qml</file>
@@ -169,6 +170,7 @@
         <file>pages/settings/DvccCommonSettings.qml</file>
         <file>pages/settings/PageChargeCurrentLimits.qml</file>
         <file>pages/settings/PageHub4Debug.qml</file>
+        <file>pages/settings/PageSettingsBatteries.qml</file>
         <file>pages/settings/PageSettingsCGwacs.qml</file>
         <file>pages/settings/PageSettingsCGwacsOverview.qml</file>
         <file>pages/settings/PageSettingsDemo.qml</file>
@@ -181,9 +183,9 @@
         <file>pages/settings/PageSettingsHub4Feedin.qml</file>
         <file>pages/settings/PageSettingsLogger.qml</file>
         <file>pages/settings/PageSettingsRemoteConsole.qml</file>
-        <file>pages/settings/PageSettingsBatteries.qml</file>
         <file>pages/settings/PageSettingsSystem.qml</file>
         <file>pages/settings/PageSettingsSystemStatus.qml</file>
+        <file>pages/settings/PageSettingsTcpIp.qml</file>
         <file>pages/settings/PageTzInfo.qml</file>
         <file>pages/settings/tz/TzAfricaData.qml</file>
         <file>pages/settings/tz/TzAmericaData.qml</file>

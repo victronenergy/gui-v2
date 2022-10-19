@@ -155,7 +155,6 @@
     "geometry.modalWarningDialog.alarmIcon.width": 48,
     "geometry.modalWarningDialog.title.spacing": 32,
     "geometry.modalWarningDialog.title.horizontalMargin": "geometry.page.content.horizontalMargin",
-    "geometry.modalWarningDialog.title.height": 24,
     "geometry.modalWarningDialog.description.spacing": 12,
     "geometry.modalWarningDialog.description.horizontalMargin": "geometry.page.content.horizontalMargin",
 

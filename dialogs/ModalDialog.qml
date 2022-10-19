@@ -55,12 +55,13 @@ C.Dialog {
 			anchors {
 				top: parent.top
 				topMargin: Theme.geometry.modalDialog.header.title.topMargin
-				horizontalCenter: parent.horizontalCenter
 			}
+			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
 			color: Theme.color.font.primary
 			font.pixelSize: Theme.font.size.body3
 			text: root.title
+			wrapMode: Text.Wrap
 		}
 	}
 
