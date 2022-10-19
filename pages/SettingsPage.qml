@@ -53,6 +53,11 @@ Page {
 				page: "/pages/settings/PageSettingsHub4.qml"
 			},
 			{
+				//% "Energy meters"
+				text: qsTrId("settings_energy_meters"),
+				page: "/pages/settings/PageSettingsCGwacsOverview.qml"
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"
