@@ -9,7 +9,7 @@ SettingsListItem {
 	id: root
 
 	property alias source: slider.source
-	property alias dataPoint: slider.dataPoint
+	readonly property alias dataPoint: slider.dataPoint
 	readonly property alias slider: slider
 
 	signal valueChanged(value: real)
