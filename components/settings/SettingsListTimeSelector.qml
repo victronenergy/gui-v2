@@ -10,7 +10,7 @@ SettingsListButton {
 	id: root
 
 	property alias source: dataPoint.source
-	property alias dataPoint: dataPoint     // value is assumed to be in seconds
+	readonly property alias dataPoint: dataPoint     // value is assumed to be in seconds
 
 	property int hour: Math.floor(value / 3600)
 	property int minute: Math.floor(value % 3600 / 60)

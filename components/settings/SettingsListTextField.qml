@@ -11,7 +11,7 @@ SettingsListItem {
 	id: root
 
 	property alias source: dataPoint.source
-	property alias dataPoint: dataPoint
+	readonly property alias dataPoint: dataPoint
 	property alias textField: textField
 	property alias placeholderText: textField.placeholderText
 	readonly property bool hasActiveFocus: textField.activeFocus

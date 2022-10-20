@@ -14,7 +14,7 @@ SettingsListItem {
 	property bool invertSourceValue
 
 	property alias source: dataPoint.source
-	property alias dataPoint: dataPoint
+	readonly property alias dataPoint: dataPoint
 
 	signal clicked()
 

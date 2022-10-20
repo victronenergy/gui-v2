@@ -10,7 +10,7 @@ SettingsListButton {
 	id: root
 
 	property alias source: dataPoint.source
-	property alias dataPoint: dataPoint
+	readonly property alias dataPoint: dataPoint
 
 	property real value: dataPoint.value === undefined ? 0 : dataPoint.value
 	property string suffix
