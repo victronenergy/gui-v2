@@ -63,6 +63,13 @@ Page {
 				page: "/pages/settings/PageSettingsTcpIp.qml"
 			},
 			{
+				//% "Wi-Fi"
+				text: qsTrId("settings_wifi"),
+				page: accessPoint.value !== undefined
+					? "/pages/settings/PageSettingsWifiWithAccessPoint.qml"
+					: "/pages/settings/PageSettingsWifi.qml"
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"
@@ -79,7 +86,11 @@ Page {
 
 	DataPoint {
 		id: systemType
-
 		source: "com.victronenergy.system/SystemType"
+	}
+
+	DataPoint {
+		id: accessPoint
+		source: "com.victronenergy.platform/Services/AccessPoint/Enabled"
 	}
 }
