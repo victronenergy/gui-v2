@@ -9,7 +9,7 @@ QtObject {
 	id: root
 
 	function canAccess(level) {
-		return accessLevel.value !== undefined && accessLevel.value >= level
+		return accessLevel.valid && accessLevel.value >= level
 	}
 
 	property DataPoint accessLevel: DataPoint {

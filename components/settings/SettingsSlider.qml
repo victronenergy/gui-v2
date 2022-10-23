@@ -21,7 +21,7 @@ Slider {
 	from: dataPoint.min !== undefined ? dataPoint.min : 0
 	to: dataPoint.max !== undefined ? dataPoint.max : 1
 	stepSize: (to-from) / Theme.geometry.settingsListItem.slider.stepDivsion
-	value: to > from && dataPoint.value !== undefined ? dataPoint.value : 0
+	value: to > from && dataPoint.valid ? dataPoint.value : 0
 
 	onPressedChanged: {
 		if (root.value !== root._emittedValue) {

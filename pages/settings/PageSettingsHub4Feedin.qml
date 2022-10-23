@@ -30,7 +30,7 @@ Page {
 				source: "com.victronenergy.settings/Settings/CGwacs/OvervoltageFeedIn"
 				visible: defaultVisible
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
-					&& doNotFeedInvOvervoltage.value !== undefined
+					&& doNotFeedInvOvervoltage.valid
 
 				DataPoint {
 					id: vebusPath
@@ -38,7 +38,7 @@ Page {
 				}
 				DataPoint {
 					id: doNotFeedInvOvervoltage
-					source: vebusPath.value === undefined ? "" : (vebusPath.value + "/Hub4/DoNotFeedInOvervoltage")
+					source: !vebusPath.valid ? "" : (vebusPath.value + "/Hub4/DoNotFeedInOvervoltage")
 				}
 			}
 
@@ -74,7 +74,7 @@ Page {
 				text: qsTrId("settings_ess_feed_in_limiting_active")
 				visible: defaultVisible
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
-					&& dataPoint.value !== undefined
+					&& dataPoint.valid
 				source: "com.victronenergy.hub4/PvPowerLimiterActive"
 				secondaryText: dataPoint.value === 0
 					  //% "No"

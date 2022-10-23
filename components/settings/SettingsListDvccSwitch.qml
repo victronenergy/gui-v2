@@ -11,7 +11,7 @@ SettingsListSwitch {
 	readonly property bool _forced: dataPoint.value === VenusOS.DVCC_ForcedOff || dataPoint.value === VenusOS.DVCC_ForcedOn
 
 	checked: dataPoint.value === 1 || dataPoint.value === VenusOS.DVCC_ForcedOn
-	enabled: dataPoint.value !== undefined && userHasWriteAccess && !_forced
+	enabled: dataPoint.valid && userHasWriteAccess && !_forced
 
 	secondaryText: _forced && checked
 		  //% "Forced on"

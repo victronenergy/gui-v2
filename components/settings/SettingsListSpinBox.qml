@@ -12,7 +12,7 @@ SettingsListButton {
 	property alias source: dataPoint.source
 	readonly property alias dataPoint: dataPoint
 
-	property real value: dataPoint.value === undefined ? 0 : dataPoint.value
+	property real value: !dataPoint.valid ? 0 : dataPoint.value
 	property string suffix
 	property int decimals
 	property int from: dataPoint.hasMin ? dataPoint.min || 0 : 0

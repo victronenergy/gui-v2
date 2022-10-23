@@ -17,7 +17,7 @@ Column {
 		source: "com.victronenergy.settings/Settings/Services/Bol"
 
 		onCheckedChanged: {
-			if (dataPoint.value !== undefined && !checked) {
+			if (dataPoint.valid && !checked) {
 				//% "Make sure to also reset the VE.Bus system after disabling DVCC"
 				Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_dvcc_switch_reset_vebus_after_disabling_dvcc"))
 			}
@@ -30,7 +30,7 @@ Column {
 		//% "Limit charge current"
 		text: qsTrId("settings_dvcc_limit_charge_current")
 		updateOnClick: false
-		checked: maxChargeCurrent.dataPoint.value !== undefined && maxChargeCurrent.dataPoint.value >= 0
+		checked: maxChargeCurrent.dataPoint.valid && maxChargeCurrent.dataPoint.value >= 0
 		visible: defaultVisible && dvccSwitch.checked
 		onClicked: {
 			maxChargeCurrent.dataPoint.setValue(maxChargeCurrent.dataPoint.value < 0 ? 50 : -1)

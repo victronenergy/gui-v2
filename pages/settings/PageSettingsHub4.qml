@@ -149,7 +149,7 @@ Page {
 			checked: maxChargePower.value >= 0
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& maxChargeCurrentControl.value === undefined
+				&& !maxChargeCurrentControl.valid
 
 			onCheckedChanged: {
 				if (checked && maxChargePower.value < 0) {

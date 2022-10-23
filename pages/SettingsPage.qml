@@ -65,7 +65,7 @@ Page {
 			{
 				//% "Wi-Fi"
 				text: qsTrId("settings_wifi"),
-				page: accessPoint.value !== undefined
+				page: accessPoint.valid
 					? "/pages/settings/PageSettingsWifiWithAccessPoint.qml"
 					: "/pages/settings/PageSettingsWifi.qml"
 			},

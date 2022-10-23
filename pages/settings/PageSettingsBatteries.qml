@@ -64,7 +64,7 @@ Page {
 				}
 				return battery.name
 			}
-			secondaryText: batteryEnabled.value !== undefined
+			secondaryText: batteryEnabled.valid
 				? (batteryEnabled.value === 1 || activeBattery ? root._visibleText : root._hiddenText)
 				: "--"
 
@@ -100,7 +100,7 @@ Page {
 								//% "Enter name"
 								placeholderText: qsTrId("settings_batteries_enter_name")
 								source: "com.victronenergy.settings/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
-								visible: dataPoint.value !== undefined
+								visible: dataPoint.valid
 								textField.maximumLength: 32 // TODO can the max be fetched from dbus?
 							}
 						}
