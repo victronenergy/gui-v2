@@ -18,7 +18,7 @@ SettingsListButton {
 	property int maximumMinute: 59
 
 	// total value, in seconds
-	property real value: dataPoint.value === undefined ? 0 : dataPoint.value
+	property real value: !dataPoint.valid ? 0 : dataPoint.value
 
 	property var _timeSelector
 

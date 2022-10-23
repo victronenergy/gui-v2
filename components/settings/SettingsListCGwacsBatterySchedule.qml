@@ -59,12 +59,12 @@ SettingsListNavigationItem {
 
 	function getItemText()
 	{
-		if (itemDay.value !== undefined && itemDay.value >= 0) {
+		if (itemDay.valid && itemDay.value >= 0) {
 			const day = dayNameForValue(itemDay.value)
 			const startTimeSeconds = startTime.value || 0
 			const start = ClockTime.formatTime(Math.floor(startTimeSeconds / 3600), Math.floor(startTimeSeconds % 3600 / 60))
-			const durationSecs = duration.value === undefined ? "--" : Utils.secondsToString(duration.value)
-			if (socLimit.value === undefined || socLimit.value >= 100) {
+			const durationSecs = !duration.valid ? "--" : Utils.secondsToString(duration.value)
+			if (!socLimit.valid || socLimit.value >= 100) {
 				//% "%1 %2 (%3)"
 				return qsTrId("cgwacs_battery_schedule_format_no_soc").arg(day).arg(start).arg(durationSecs)
 			}
@@ -116,7 +116,7 @@ SettingsListNavigationItem {
 
 						//% "Enabled"
 						text: qsTrId("cgwacs_battery_schedule_enabled")
-						checked: itemDay.value !== undefined && itemDay.value >= 0
+						checked: itemDay.valid && itemDay.value >= 0
 						onCheckedChanged: {
 							if (checked ^ itemDay.value >= 0) {
 								itemDay.setValue(toggleDay(itemDay.value))

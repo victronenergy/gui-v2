@@ -81,7 +81,7 @@ Page {
 				//% "Audible alarm"
 				text: qsTrId("settings_audible_alarm")
 				source: "com.victronenergy.settings/Settings/Alarm/Audible"
-				visible: defaultVisible && buzzerStateDataPoint.value !== undefined
+				visible: defaultVisible && buzzerStateDataPoint.valid
 
 				DataPoint {
 					id: buzzerStateDataPoint

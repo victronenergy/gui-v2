@@ -39,7 +39,7 @@ Page {
 				//% "Limit managed battery charge voltage"
 				text: qsTrId("settings_dvcc_limit_managed_battery_charge_voltage")
 				updateOnClick: false
-				checked: maxChargeVoltage.dataPoint.value !== undefined && maxChargeVoltage.dataPoint.value > 0
+				checked: maxChargeVoltage.dataPoint.valid && maxChargeVoltage.dataPoint.value > 0
 				visible: defaultVisible && commonSettings.dvccActive
 				onClicked: {
 					maxChargeVoltage.dataPoint.setValue(maxChargeVoltage.dataPoint.value === 0.0 ? 55.0 : 0.0)

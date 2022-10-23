@@ -65,7 +65,7 @@ Page {
 				//% "Remote Console on VRM - status"
 				text: qsTrId("settings_remoteconsole_vrm_status")
 				secondaryText: vncInternet.checked
-						&& remoteSupportIpAndPort.value !== undefined
+						&& remoteSupportIpAndPort.valid
 						&& remoteSupportIpAndPort.value !== 0
 					  //% "Online"
 					? qsTrId("settings_remoteconsole_vrm_online")

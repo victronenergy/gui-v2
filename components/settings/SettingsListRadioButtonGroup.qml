@@ -21,7 +21,7 @@ SettingsListNavigationItem {
 	readonly property alias dataPoint: dataPoint
 	property var model: []
 	property int currentIndex: {
-		if (!model || model.length === undefined || source.length === 0 || dataPoint.value === undefined) {
+		if (!model || model.length === undefined || source.length === 0 || !dataPoint.valid) {
 			return defaultIndex
 		}
 		for (let i = 0; i < model.length; ++i) {

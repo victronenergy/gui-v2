@@ -42,7 +42,7 @@ SettingsListItem {
 					Theme.geometry.settingsListItem.textField.minimumWidth,
 					Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry.settingsListItem.textField.maximumWidth))
 			enabled: root.userHasWriteAccess
-			text: dataPoint.value !== undefined ? dataPoint.value : ""
+			text: dataPoint.valid ? dataPoint.value : ""
 
 			EnterKeyAction.actionId: EnterKeyAction.Done
 			onAccepted: {
