@@ -43,7 +43,6 @@ Page {
 
 				onOptionClicked: function(index) {
 					console.log("Radio button clicked at index", index)
-					Global.pageManager.popPage()
 				}
 			}
 
@@ -60,7 +59,6 @@ Page {
 				onOptionClicked: function(index) {
 					console.log("Radio button clicked at index", index)
 					secondaryText = model.get(index).display
-					Global.pageManager.popPage()
 				}
 			}
 

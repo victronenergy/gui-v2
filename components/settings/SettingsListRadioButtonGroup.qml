@@ -82,6 +82,10 @@ SettingsListNavigationItem {
 								dataPoint.setValue(Array.isArray(root.model) ? modelData.value : model.value)
 							}
 							root.currentIndex = model.index
+
+							// TODO should we auto-pop to the parent page when an option is selected,
+							// to mimic the behavior in gui-v1? How to do that without creating an
+							// abrupt and unexpected page change?
 						}
 						root.optionClicked(model.index)
 					}

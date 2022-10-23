@@ -132,10 +132,6 @@ SettingsListNavigationItem {
 						//% "Not set"
 						defaultSecondaryText: qsTrId("cgwacs_battery_schedule_day_not_set")
 						model: root._dayModel
-
-						onOptionClicked: function(index) {
-							Global.pageManager.popPage(scheduledOptionsPage)
-						}
 					}
 
 					SettingsListTimeSelector {

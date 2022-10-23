@@ -122,7 +122,6 @@ Page {
 								updateOnClick: false
 								onClicked: {
 									tzData.saveTimeZone("", text)
-									Global.pageManager.popPage(root)
 								}
 							}
 							model: root._timeZoneModels
@@ -146,7 +145,6 @@ Page {
 
 								onOptionClicked: function(index) {
 									tzData.saveTimeZone(modelData.region, modelData.get(index).city)
-									Global.pageManager.popPage(root)
 								}
 							}
 						}
