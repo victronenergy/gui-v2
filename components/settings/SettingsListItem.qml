@@ -25,6 +25,8 @@ Item {
 				   Theme.geometry.settingsListItem.height)
 		: 0
 
+	readonly property int _availableWidth: width - primaryLabel.anchors.leftMargin - content.anchors.rightMargin - content.spacing
+
 	implicitWidth: parent ? parent.width : 0
 	implicitHeight: defaultImplicitHeight
 	visible: defaultVisible
@@ -62,13 +64,12 @@ Item {
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry.settingsListItem.content.horizontalMargin
-			right: content.left
-			rightMargin: Theme.geometry.settingsListItem.content.spacing
 			top: parent.top
 			topMargin: Theme.geometry.settingsListItem.content.verticalMargin - root.spacing/2
 		}
 		font.pixelSize: Theme.font.size.body2
 		wrapMode: Text.Wrap
+		width: Math.min(implicitWidth, root._availableWidth, root._availableWidth - content.width)
 	}
 
 	Row {
@@ -80,5 +81,6 @@ Item {
 			verticalCenter: primaryLabel.verticalCenter
 		}
 		spacing: Theme.geometry.settingsListItem.content.spacing
+		width: Math.min(implicitWidth, root._availableWidth)
 	}
 }

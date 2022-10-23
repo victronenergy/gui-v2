@@ -22,6 +22,7 @@ SettingsListItem {
 			font.pixelSize: Theme.font.size.body2
 			color: Theme.color.settingsListItem.secondaryText
 			wrapMode: Text.Wrap
+			horizontalAlignment: Text.AlignRight
 		}
 	]
 
