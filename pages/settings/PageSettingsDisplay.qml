@@ -78,7 +78,6 @@ Page {
 					} else {
 						// TODO set auto mode
 					}
-					Global.pageManager.popPage()
 				}
 			}
 
@@ -100,7 +99,6 @@ Page {
 
 				onOptionClicked: function(index) {
 					Language.current = model.languageAt(index)
-					Global.pageManager.popPage()
 				}
 			}
 

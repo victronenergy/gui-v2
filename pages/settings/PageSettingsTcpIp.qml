@@ -237,7 +237,6 @@ Page {
 			}
 			onOptionClicked: function(index) {
 				root._setMethod(model[index].value)
-				Global.pageManager.popPage()
 			}
 		}
 

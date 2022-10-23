@@ -40,7 +40,6 @@ SettingsListRadioButtonGroup {
 
 	onOptionClicked: function(index) {
 		Global.systemSettings.accessLevel.setValue(model[index].value)
-		Global.pageManager.popPage()
 	}
 
 	// touch version to get super user
