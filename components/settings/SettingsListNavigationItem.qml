@@ -9,7 +9,7 @@ import Victron.VenusOS
 SettingsListItem {
 	id: root
 
-	property string secondaryText
+	property alias secondaryText: secondaryLabel.text
 
 	signal clicked()
 
@@ -17,14 +17,18 @@ SettingsListItem {
 
 	content.children: [
 		Label {
+			id: secondaryLabel
+
 			anchors.verticalCenter: parent.verticalCenter
-			visible: root.secondaryText.length > 0
-			text: root.secondaryText
+			visible: text.length > 0
 			font.pixelSize: Theme.font.size.body2
 			color: Theme.color.settingsListItem.secondaryText
+			wrapMode: Text.Wrap
+			horizontalAlignment: Text.AlignRight
 		},
 
 		CP.ColorImage {
+			anchors.verticalCenter: parent.verticalCenter
 			source: "/images/icon_back_32.svg"
 			width: Theme.geometry.statusBar.button.icon.width
 			height: Theme.geometry.statusBar.button.icon.height
