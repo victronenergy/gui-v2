@@ -10,12 +10,8 @@ Page {
 	id: root
 
 	property string devicePath
-	readonly property string serviceType: typeof(classAndVrmInstanceItem.value) !== undefined ? classAndVrmInstanceItem.value.split(":")[0] : ""
-	readonly property int deviceInstance: typeof(classAndVrmInstanceItem.value) !== undefined ? classAndVrmInstanceItem.value.split(":")[1] : 0
-
-	function updateRole(role) {
-		classAndVrmInstanceItem.setValue(role + ":" + deviceInstance)
-	}
+	readonly property string serviceType: classAndVrmInstanceItem.value !== undefined ? classAndVrmInstanceItem.value.split(":")[0] : ""
+	readonly property int deviceInstance: classAndVrmInstanceItem.value !== undefined ? classAndVrmInstanceItem.value.split(":")[1] : 0
 
 	DataPoint {
 		id: classAndVrmInstanceItem
@@ -33,39 +29,37 @@ Page {
 	}
 
 	SettingsListView {
-		model: 	ObjectModel {
+		model: ObjectModel {
 			SettingsListRadioButtonGroup {
-				id: settingsListRadioButtonGroup
-
 				//% "Role"
 				text: qsTrId("settings_cgwacs_role")
 				updateOnClick: false
 				model: [
-					{ display: qsTrId("settings_grid_meter"), value: "grid" },
-					{ display: qsTrId("settings_pv_inverter"), value: "pvinverter" },
-					{ display: qsTrId("settings_generator"), value: "genset" },
+					{ display: Utils.qsTrIdServiceType("grid"), value: "grid" },
+					{ display: Utils.qsTrIdServiceType("pvinverter"), value: "pvinverter" },
+					{ display: Utils.qsTrIdServiceType("genset"), value: "genset" },
 					//% "AC meter"
-					{ display: qsTrId("settings_ac_meter"), value: "acload" }
+					{ display: qsTrId("settings_ac_meter"), value: "acload" } // TODO - in the old gui, a service type of 'acload' is translated differently here compared to PageSettingsCGwacsOverview. Confirm with victron that this is what they want.
 				]
-				dataPoint.value: root.serviceType
 				currentIndex: {
 					if (!model || model.length === undefined) {
 						return defaultIndex
 					}
 					for (let i = 0; i < model.length; ++i) {
-						if (dataPoint.value.split(":")[0] === model[i].value) {
+						if (root.serviceType.split(":")[0] === model[i].value) {
 							return i
 						}
 					}
 					return defaultIndex
 				}
 				onOptionClicked: function(index) {
-					settingsListRadioButtonGroup.currentIndex = index
-					updateRole(root.serviceType)
+					currentIndex = index
+					classAndVrmInstanceItem.setValue(model[index].value + ":" + deviceInstance)
 				}
 			}
 
 			SettingsListRadioButtonGroup {
+				id: positions
 				//% "Position"
 				text: qsTrId("settings_position")
 				source: root.devicePath + "/Position"
@@ -84,7 +78,7 @@ Page {
 				//% "Phase type"
 				text: qsTrId("settings_cgwacs_phase_type")
 				source: root.devicePath + "/IsMultiphase"
-				enabled: userHasWriteAccess && dataPoint.value !== undefined
+				enabled: userHasWriteAccess && multiPhaseSupport.value !== undefined
 				model: [
 					//% "Single phase"
 					{ display: qsTrId("settings_single_phase"), value: 0},
@@ -98,11 +92,10 @@ Page {
 				//% "PV inverter on phase 2"
 				text: qsTrId("settings_pv_inverter_on_phase_2")
 				source: root.devicePath + "_S/Enabled"
-				visible: (typeof multiPhaseSupport.value !== undefined) &&
-						 multiPhaseSupport.value &&
-						 (typeof isMultiPhaseItem.value !== undefined) &&
-						 !isMultiPhaseItem.value &&
-						 root.serviceType === "grid"
+				visible: multiPhaseSupport.value
+						 && isMultiPhaseItem.value !== undefined
+						 && !isMultiPhaseItem.value
+						 && root.serviceType === "grid"
 			}
 
 			SettingsListRadioButtonGroup {
@@ -110,11 +103,7 @@ Page {
 				text: qsTrId("settings_cgwacs_pv_inverter_l2_position")
 				source: root.devicePath + "_S/Position"
 				visible: pvOnL2.checked
-				model: [
-					{ display: qsTrId("settings_ac_input_1"), value: 0 },
-					{ display: qsTrId("settings_ac_input_2"), value: 2 },
-					{ display: qsTrId("settings_ac_output"), value: 1 },
-				]
+				model: positions.model
 			}
 		}
 	}

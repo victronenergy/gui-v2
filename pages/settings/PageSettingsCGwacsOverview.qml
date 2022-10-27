@@ -10,40 +10,13 @@ Page {
 	id: root
 
 	function getDescription(customName, productName) {
-		if (customName !== undefined && customName.length > 0) {
-			return customName
-		}
-		if (productName !== undefined && productName.length > 0) {
-			return productName
-		}
-		return '--'
+		return customName || productName || "--"
 	}
 
-	function getModeName(serviceType) {
-		switch (serviceType)
-		{
-		case "grid":
-			//% "Grid meter"
-			return qsTrId("settings_grid_meter")
-		case "pvinverter":
-			//% "PV inverter"
-			return qsTrId("settings_pv_inverter")
-		case "genset":
-			//% "Generator"
-			return qsTrId("settings_generator")
-		case "acload":
-			//% "AC load"
-			return qsTrId("settings_ac_load")
-		default:
-			return '--'
-		}
-	}
-
-	function getMenuName(serviceType, l2ServiceType)
-	{
-		var result = getModeName(serviceType)
+	function getMenuName(serviceType, l2ServiceType) {
+		let result = Utils.qsTrIdServiceType(serviceType)
 		if (l2ServiceType !== undefined && l2ServiceType.length > 0) {
-			result += " + " + getModeName(l2ServiceType)
+			result += " + " + Utils.qsTrIdServiceType(l2ServiceType)
 		}
 		return result
 	}
@@ -54,9 +27,8 @@ Page {
 	}
 
 	SettingsListView {
-		model: Utils.stringToArray(deviceIds.value)
+		model: deviceIds.value ? deviceIds.value.split(',') : []
 		delegate: SettingsListNavigationItem {
-
 			readonly property string devicePath: "com.victronenergy.settings/Settings/Devices/cgwacs_" + modelData
 
 			text: getDescription(customNameItem.value, modelData)
@@ -65,17 +37,17 @@ Page {
 
 			DataPoint {
 				id: customNameItem
-				source: (devicePath + "/CustomName")
+				source: devicePath + "/CustomName"
 			}
 
 			DataPoint {
 				id: serviceType
-				source: (devicePath + "/ServiceType")
+				source: devicePath + "/ServiceType"
 			}
 
 			DataPoint {
 				id: l2ServiceType
-				source: (devicePath + "/L2/ServiceType")
+				source: devicePath + "/L2/ServiceType"
 			}
 		}
 	}
