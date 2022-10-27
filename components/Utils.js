@@ -131,8 +131,7 @@ function maximumValue(key) {
 	return maxValues[key] || 1  // use default=1 to avoid zero division for ratio calc
 }
 
-function scaleToRange(value, valueMin, valueMax, scaledMin, scaledMax)
-{
+function scaleToRange(value, valueMin, valueMax, scaledMin, scaledMax) {
 	if (valueMin >= valueMax) {
 		console.warn("scaleToRange() failed, valueMin", valueMin, ">= valueMax", valueMax)
 		return value
@@ -213,8 +212,7 @@ function toFloat(value, precision) {
 }
 
 // Convert number of seconds into readable string
-function secondsToString(secs)
-{
+function secondsToString(secs) {
 	if (secs === undefined) {
 		return "---"
 	}
@@ -239,8 +237,7 @@ function secondsToString(secs)
 }
 
 // Convert a timestamp into a relative readable string, for example '1d 2h'
-function timeAgo(timestamp)
-{
+function timeAgo(timestamp) {
 	var timeNow = Math.round(Date.now() / 1000)
 	var timeAgo = "---"
 	if (timestamp !== undefined && timestamp > 0) {
@@ -252,8 +249,7 @@ function timeAgo(timestamp)
 // Convert 1000000 to '10M items' or '1 file', etc.
 // TODO - this matches the old gui implementation, but is unusual in that it returns eg. "1127.96M bytes"
 // instead of the more familiar "1127.96MB". Check with victron.
-function qtyToString(qty, unitSingle, unitMultiple)
-{
+function qtyToString(qty, unitSingle, unitMultiple) {
 	if (qty > 1000000) {
 		return "%1M %2".arg(Math.round((qty * 100) / 1000000) / 100).arg(unitMultiple)
 	} else if (qty > 1000) {
@@ -267,14 +263,21 @@ function qtyToString(qty, unitSingle, unitMultiple)
 	}
 }
 
-function stringToArray(commaSeparatedString)
-{
-	var ret = []
-	if (commaSeparatedString !== undefined && commaSeparatedString.length > 0) {
-		var split = commaSeparatedString.split(',')
-		for (var i = 0; i < split.length; i++) {
-			ret.push(split[i]);
-		}
+function qsTrIdServiceType(serviceType) {
+	switch (serviceType) {
+	case "grid":
+		//% "Grid meter"
+		return qsTrId("settings_grid_meter")
+	case "pvinverter":
+		//% "PV inverter"
+		return qsTrId("settings_pv_inverter")
+	case "genset":
+		//% "Generator"
+		return qsTrId("settings_generator")
+	case "acload":
+		//% "AC load"
+		return qsTrId("settings_ac_load")
+	default:
+		return '--'
 	}
-	return ret
 }
