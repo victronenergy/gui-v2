@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 ModalDialog {
 	id: root
@@ -13,8 +14,7 @@ ModalDialog {
 	function modeText(m) {
 		switch (m) {
 		case VenusOS.Inverters_Mode_On:
-			//% "On"
-			return qsTrId("inverter_charger_mode_charger_on")
+			return Utils.qsTrIdOnOff(1)
 		case VenusOS.Inverters_Mode_ChargerOnly:
 			//% "Charger only"
 			return qsTrId("inverter_charger_mode_charger_only")
@@ -22,8 +22,7 @@ ModalDialog {
 			//% "Inverter only"
 			return qsTrId("inverter_charger_mode_inverter_only")
 		case VenusOS.Inverters_Mode_Off:
-			//% "Off"
-			return qsTrId("inverter_charger_mode_off")
+			return Utils.qsTrIdOnOff(0)
 		default:
 			return ""
 		}
