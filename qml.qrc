@@ -185,6 +185,7 @@
         <file>pages/settings/PageSettingsRemoteConsole.qml</file>
         <file>pages/settings/PageSettingsSystem.qml</file>
         <file>pages/settings/PageSettingsSystemStatus.qml</file>
+        <file>pages/settings/PageSettingsTankPump.qml</file>
         <file>pages/settings/PageSettingsTcpIp.qml</file>
         <file>pages/settings/PageSettingsWifi.qml</file>
         <file>pages/settings/PageSettingsWifiWithAccessPoint.qml</file>

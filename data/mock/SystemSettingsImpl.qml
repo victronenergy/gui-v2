@@ -12,6 +12,10 @@ QtObject {
 		Global.demoManager.mockDataValues["com.victronenergy.settings/Settings/" + settingId] = value
 	}
 
+	function setMockPumpValue(settingId, value) {
+		Global.demoManager.mockDataValues["com.victronenergy.pump.startstop0/" + settingId] = value
+	}
+
 	function setMockSystemValue(key, value) {
 		Global.demoManager.mockDataValues["com.victronenergy.system/" + key] = value
 	}
@@ -123,6 +127,13 @@ QtObject {
 		setMockSettingValue("Devices/cgwacs_4_S/Position", 0)
 		setMockSettingValue("Devices/cgwacs_5_S/Position", 1)
 		setMockSettingValue("Devices/cgwacs_6_S/Position", 2)
+
+		setMockSettingValue("Relay/Function", 3)
+		setMockPumpValue("State", 0)
+		setMockSettingValue("Pump0/Mode", 2)
+		setMockPumpValue("AvailableTankServices", "{'notanksensor': No tank sensor}")
+		setMockSettingValue("Pump0/StartValue", 50)
+		setMockSettingValue("Pump0/StopValue", 80)
 	}
 
 	property Connections briefSettingsConn: Connections {

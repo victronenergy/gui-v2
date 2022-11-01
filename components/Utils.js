@@ -306,3 +306,16 @@ function connmanServiceState(service) {
 	//% "Disconnected"
 	return qsTrId("utils_connman_disconnected")
 }
+
+function qsTrIdOnOff(value) {
+	if (value === 0) {
+		//% "Off"
+		return qsTrId("utils_off")
+	} else if (value === 1) {
+		//% "On"
+		return qsTrId("utils_on")
+	} else {
+		//% "Unknown"
+		return qsTrId("utils_unknown")
+	}
+}

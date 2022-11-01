@@ -70,6 +70,11 @@ Page {
 					: "/pages/settings/PageSettingsWifi.qml"
 			},
 			{
+				//% "Tank pump"
+				text: qsTrId("settings_tank_pump"),
+				page: "/pages/settings/PageSettingsTankPump.qml"
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"
