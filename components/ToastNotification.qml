@@ -14,6 +14,7 @@ Item {
 	property alias highlightColor: highlight.color
 	property alias icon: icon
 	property alias text: label.text
+	property alias autoCloseInterval: timer.interval
 
 	signal dismissed()
 
@@ -107,6 +108,17 @@ Item {
 				width: Theme.geometry.toastNotification.icon.width
 				color: Theme.color.toastNotification.foreground
 				source: "qrc:/images/toast_icon_close.svg"
+			}
+		}
+	}
+
+	Timer {
+		id: timer
+
+		onTriggered: root.dismissed()
+		onIntervalChanged: {
+			if (interval !== 0) {
+				start()
 			}
 		}
 	}

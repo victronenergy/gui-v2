@@ -71,8 +71,7 @@ SettingsListNavigationItem {
 			//% "%1 %2 (%3 or %4%)"
 			return qsTrId("cgwacs_battery_schedule_format_soc").arg(day).arg(start).arg(durationSecs).arg("" + socLimit.value)
 		}
-		//% "Disabled"
-		return qsTrId("cgwacs_battery_schedule_disabled")
+		return Global.commonWords.disabled
 	}
 
 	//% "Schedule %1"
@@ -114,8 +113,7 @@ SettingsListNavigationItem {
 					SettingsListSwitch {
 						id: itemEnabled
 
-						//% "Enabled"
-						text: qsTrId("cgwacs_battery_schedule_enabled")
+						text: Global.commonWords.enabled
 						checked: itemDay.valid && itemDay.value >= 0
 						onCheckedChanged: {
 							if (checked ^ itemDay.value >= 0) {

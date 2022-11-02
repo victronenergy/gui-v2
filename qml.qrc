@@ -63,6 +63,7 @@
         <file>components/AsymmetricRoundedRectangle.qml</file>
         <file>components/CircularMultiGauge.qml</file>
         <file>components/CircularSingleGauge.qml</file>
+        <file>components/CommonWords.qml</file>
         <file>components/ControlCard.qml</file>
         <file>components/ControlValue.qml</file>
         <file>components/EnvironmentGauge.qml</file>
@@ -185,8 +186,13 @@
         <file>pages/TanksTab.qml</file>
         <file>pages/settings/AccessLevelRadioButtonGroup.qml</file>
         <file>pages/settings/DvccCommonSettings.qml</file>
+        <file>pages/settings/GeneratorCondition.qml</file>
+        <file>pages/settings/PageGeneratorConditions.qml</file>
         <file>pages/settings/PageChargeCurrentLimits.qml</file>
+        <file>pages/settings/PageGenerator.qml</file>
+        <file>pages/settings/PageGeneratorAcLoad.qml</file>
         <file>pages/settings/PageHub4Debug.qml</file>
+        <file>pages/settings/PageRelayGenerator.qml</file>
         <file>pages/settings/PageSettingsBatteries.qml</file>
         <file>pages/settings/PageSettingsCGwacs.qml</file>
         <file>pages/settings/PageSettingsCGwacsOverview.qml</file>
@@ -196,6 +202,7 @@
         <file>pages/settings/PageSettingsDisplayUnits.qml</file>
         <file>pages/settings/PageSettingsDvcc.qml</file>
         <file>pages/settings/PageSettingsGeneral.qml</file>
+        <file>pages/settings/PageSettingsGenerator.qml</file>
         <file>pages/settings/PageSettingsHub4.qml</file>
         <file>pages/settings/PageSettingsHub4Feedin.qml</file>
         <file>pages/settings/PageSettingsLogger.qml</file>

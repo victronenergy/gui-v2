@@ -20,6 +20,14 @@ QtObject {
 		Global.demoManager.mockDataValues["com.victronenergy.system/" + key] = value
 	}
 
+	function setMockGenerator0Value(key, value) {
+		Global.demoManager.mockDataValues["com.victronenergy.settings/Settings/Generator0/" + key] = value
+	}
+
+	function setMockGeneratorStartStopValue(key, value) {
+		Global.demoManager.mockDataValues["com.victronenergy.generator.startstop0/" + key] = value
+	}
+
 	Component.onCompleted: {
 		// Settings that are converted for convenient UI access
 		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
@@ -134,6 +142,21 @@ QtObject {
 		setMockPumpValue("AvailableTankServices", "{'notanksensor': No tank sensor}")
 		setMockSettingValue("Pump0/StartValue", 50)
 		setMockSettingValue("Pump0/StopValue", 80)
+		setMockGeneratorStartStopValue('State', 'soc')
+		setMockGeneratorStartStopValue('RunningByCondition', 'soc')
+		setMockGeneratorStartStopValue('Error', 1)
+		setMockGeneratorStartStopValue('Runtime', 1234)
+		setMockGeneratorStartStopValue('AccumulatedTotal', 3600)
+		setMockGeneratorStartStopValue('TestRunIntervalRuntime', 5678)
+		setMockGeneratorStartStopValue('NextTestRun', Date.now() / 1000 + 80)
+		setMockGenerator0Value('AutoStartEnabled', 1)
+		setMockGeneratorStartStopValue('ManualStartTimer', 3700)
+		setMockGenerator0Value('AccumulatedDaily', '{"1667347200": 60, "1667433600": 120, "1667520000": 1800}')
+		setMockGenerator0Value('BatteryService', "default")
+		setMockGenerator0Value('OnLossCommunication', 2)
+		setMockGenerator0Value('StopWhenAc1Available', 0)
+		setMockGenerator0Value('Soc', 1)
+
 	}
 
 	property Connections briefSettingsConn: Connections {

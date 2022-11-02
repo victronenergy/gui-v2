@@ -49,6 +49,11 @@ Item {
 		// we rely on the implicit Z ordering, so must be declared after the other views.
 	}
 
+	CommonWords {
+		id: commonWords
+		Component.onCompleted: Global.commonWords = commonWords
+	}
+
 	// Create the InputPanel dynamically in case QtQuick.VirtualKeyboard is not available (e.g. on
 	// Qt for WebAssembly due to QTBUG-104109).
 	// Note the VKB layer is the top-most layer, to allow the idleModeMouseArea beneath to call

@@ -174,6 +174,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularSingleGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularSingleGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CommonWords.qml")),
+		"Victron.VenusOS", 2, 0, "CommonWords");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlCard.qml")),
 		"Victron.VenusOS", 2, 0, "ControlCard");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlValue.qml")),

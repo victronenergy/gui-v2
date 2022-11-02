@@ -15,6 +15,7 @@ SettingsListItem {
 
 	property alias source: dataPoint.source
 	readonly property alias dataPoint: dataPoint
+	readonly property alias valid: dataPoint.valid
 
 	signal clicked()
 

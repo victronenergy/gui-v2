@@ -14,6 +14,9 @@ CT.SpinBox {
 	property alias label: label
 	property int indicatorImplicitWidth: Theme.geometry.spinBox.indicator.minimumWidth
 
+	signal maxValueReached()
+	signal minValueReached()
+
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
 		contentItem.implicitWidth + leftPadding + rightPadding,
@@ -67,5 +70,25 @@ CT.SpinBox {
 	background: Item {
 		implicitWidth: 2*Theme.geometry.spinBox.indicator.minimumWidth + 2*Theme.geometry.spinBox.spacing
 		implicitHeight: Theme.geometry.spinBox.indicator.height
+	}
+
+	MouseArea {
+		anchors.fill: up.indicator
+		onClicked: {
+			if ((value + stepSize) > to ) {
+				root.maxValueReached()
+			}
+			root.increase()
+		}
+	}
+
+	MouseArea {
+		anchors.fill: down.indicator
+		onClicked: {
+			if ((value - stepSize) < from ) {
+				root.minValueReached()
+			}
+			root.decrease()
+		}
 	}
 }

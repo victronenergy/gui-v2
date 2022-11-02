@@ -126,8 +126,7 @@ Page {
 				enabled: false
 
 				model: [
-					//% "Disabled"
-					{ display: qsTrId("settings_dvcc_scs_disabled"), value: 0 },
+					{ display: Global.commonWords.disabled, value: 0 },
 					//% "Disabled (external control)"
 					{ display: qsTrId("settings_dvcc_scs_disabled_external_control"), value: 1 },
 					//% "Disabled (no chargers)"

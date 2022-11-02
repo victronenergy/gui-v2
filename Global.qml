@@ -46,6 +46,8 @@ QtObject {
 	property bool guiLoaded
 	property bool allPagesLoaded
 
+	property var commonWords
+
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 }
 

@@ -17,6 +17,9 @@ ModalDialog {
 	property int to
 	property alias stepSize: spinBox.stepSize
 
+	signal maxValueReached()
+	signal minValueReached()
+
 	function _multiplier() {
 		return Math.pow(10, decimals)
 	}
@@ -51,6 +54,9 @@ ModalDialog {
 			onValueChanged: {
 				root.value = Number(value / root._multiplier())
 			}
+
+			onMinValueReached: root.minValueReached()
+			onMaxValueReached: root.maxValueReached()
 		}
 	}
 }

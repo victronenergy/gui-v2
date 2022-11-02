@@ -75,6 +75,11 @@ Page {
 				page: "/pages/settings/PageSettingsTankPump.qml"
 			},
 			{
+				//% "Generator start/stop"
+				text: qsTrId("settings_generator_start_stop"),
+				page: "/pages/settings/PageRelayGenerator.qml"
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"
