@@ -23,8 +23,8 @@ Item {
 		warningNotification.open()
 	}
 
-	function showToastNotification(category, text) {
-		var toast = toaster.createObject(this, { "category": category, "text": text })
+	function showToastNotification(category, text, autoCloseInterval = 0) {
+		var toast = toaster.createObject(this, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
 		toastItemsModel.append(toast)
 	}
 

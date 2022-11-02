@@ -87,8 +87,7 @@ ControlCard {
 				//% "State of charge"
 				return qsTrId("controlcard_generator_substatus_stateofcharge")
 			case VenusOS.Generators_RunningBy_Acload:
-				//% "AC load"
-				return qsTrId("controlcard_generator_substatus_acload")
+				return Global.commonWords.ac_load
 			case VenusOS.Generators_RunningBy_BatteryCurrent:
 				//% "Battery current"
 				return qsTrId("controlcard_generator_substatus_batterycurrent")

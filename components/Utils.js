@@ -213,8 +213,18 @@ function toFloat(value, precision) {
 	return Math.round(value * factor) / factor
 }
 
+function formatDaysHours(days, hours) {
+	//% "%1d %2h"
+	return qsTrId("utils_format_days_hours").arg(days).arg(hours)
+}
+
+function formatHoursMinutes(hours, minutes) {
+	//% "%1h %2m"
+	return qsTrId("utils_format_hours_min").arg(hours).arg(minutes)
+}
+
 // Convert number of seconds into readable string
-function secondsToString(secs) {
+function secondsToString(secs, showSeconds = true) {
 	if (secs === undefined) {
 		return "---"
 	}
@@ -223,29 +233,23 @@ function secondsToString(secs) {
 	const minutes = Math.floor((secs - (hours * 3600)) / 60)
 	const seconds = Math.floor(secs - (minutes * 60))
 	if (days > 0) {
-		//% "%1d %2h"
-		return qsTrId("utils_format_days_hours").arg(days).arg(hours)
+		return formatDaysHours(days, hours)
 	}
 	if (hours) {
-		//% "%1h %2m"
-		return qsTrId("utils_format_hours_min").arg(hours).arg(minutes)
+		return formatHoursMinutes(hours, minutes)
 	}
 	if (minutes) {
-		//% "%1m %2s"
-		return qsTrId("utils_format_min_sec").arg(minutes).arg(seconds)
+		return showSeconds ?
+					//% "%1m %2s"
+					qsTrId("utils_format_min_sec").arg(minutes).arg(seconds) :
+					//% "%1m"
+					qsTrId("utils_format_min").arg(minutes)
 	}
-	//% "%1s"
-	return qsTrId("utils_format_sec").arg(seconds)
-}
-
-// Convert a timestamp into a relative readable string, for example '1d 2h'
-function timeAgo(timestamp) {
-	var timeNow = Math.round(Date.now() / 1000)
-	var timeAgo = "---"
-	if (timestamp !== undefined && timestamp > 0) {
-		timeAgo = secondsToString(timeNow - timestamp)
-	}
-	return timeAgo;
+	return showSeconds ?
+				//% "%1s"
+				qsTrId("utils_format_sec").arg(seconds) :
+				//% "0m"
+				qsTrId("utils_zero_minutes")
 }
 
 // Convert 1000000 to '10M items' or '1 file', etc.
