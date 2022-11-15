@@ -21,7 +21,7 @@ QtObject {
 	property var solarChargers: SolarChargersImpl { veServiceIds: veMqtt.childIds }
 	property var system: SystemImpl { }
 	property var systemSettings: SystemSettingsImpl { }
-	property var tanks: TanksImpl { veServiceIds: veMqtt.childIds }
+	property var tanks: TanksImpl { }
 
 	property Instantiator veMqtt:  Instantiator {
 		property var childIds: []
