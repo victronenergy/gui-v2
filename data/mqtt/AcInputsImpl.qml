@@ -12,26 +12,29 @@ QtObject {
 
 	property var _inputs: []
 
-	function _getInputs() {
-		let inputIds = []
-		for (let i = 0; i < veSystemAcIn.count; ++i) {
-			const uid = veSystemAcIn.objectAt(i).uid
-			const id = uid.substring(uid.lastIndexOf('/') + 1)
-			if (!isNaN(parseInt(id))) {
-				inputIds.push(uid)
-			}
-		}
-		if (Utils.arrayCompare(_inputs, inputIds) !== 0) {
-			_inputs = inputIds
-		}
-	}
-
 	property Instantiator veSystemAcIn: Instantiator {
-		model: VeQItemTableModel {
-			property SingleUidHelper uidHelper: SingleUidHelper {
-				dbusUid: "dbus/com.victronenergy.system/Dc/Battery/Power"
+		property var childIds: []
+
+		function _getInputs() {
+			let _childIds = []
+			for (let i = 0; i < count; ++i) {
+				const uid = objectAt(i).uid
+				if (Utils.uidEndsWithANumber(uid)) {
+					_childIds.push(uid)
+				}
 			}
-			uids: [uidHelper.mqttUid]
+			if (Utils.arrayCompare(_inputs, _childIds)) {
+				_inputs = _childIds
+			}
+		}
+
+		model: VeQItemTableModel {
+			/* child ids will look like this:
+				uid: mqtt/system/0/Ac/In/0					// we want this one
+				uid: mqtt/system/0/Ac/In/1					// we want this one
+				uid: mqtt/system/0/Ac/In/NumberOfAcInputs	// we don't want this one
+			*/
+			uids: ["mqtt/system/0/Ac/In"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
@@ -39,18 +42,19 @@ QtObject {
 			property var uid: model.uid
 		}
 
-		onCountChanged: Qt.callLater(root._getInputs)
+		onCountChanged: Qt.callLater(_getInputs)
 	}
 
 	/*
 	Each AC input has basic config details at com.victronenergy.system /Ac/In/x. E.g. for Input 0:
-		/Ac/In/0/Connected: 			1
-		/Ac/In/0/ServiceName: 		'com.victronenergy.grid.smappee_5400001427'
-		/Ac/In/0/ServiceType: 		'grid'
+		/Ac/In/0/Connected {"value": 0}
+		/Ac/In/0/DeviceInstance {"value": 289}
+		/Ac/In/0/ServiceName {"value": "com.victronenergy.vebus.ttyUSB1"}
+		/Ac/In/0/ServiceType {"value": "vebus"}
+		/Ac/In/0/Source {"value": 3}
 
 	The ServiceName points to the service that provides more details for the input, e.g.
-	com.victronenergy.vebus, com.victronenergy.grid, com.victronenergy.genset, which provides
-	voltage, current, power etc. for the inputs.
+	vebus, grid, genset, which provides voltage, current, power etc. for the inputs.
 	*/
 	property Instantiator inputObjects: Instantiator {
 		model: _inputs || null
@@ -60,11 +64,11 @@ QtObject {
 
 			property string configUid: modelData
 
-			property string serviceType     // e.g. "vebus"
-			property string serviceName     // e.g. "vebus.ttyO1"
-			property int source
-			property bool connected
-			property int productId: -1
+			property string serviceType: _serviceType.value ? _serviceType.value : ''	// e.g. "vebus"
+			property int source: (_source.value === undefined || _source.value === '') ? -1 : parseInt(_source.value)
+			property bool connected: _connected.value === 1
+			property int productId: _productId.value ? _productId.value : -1
+			property int deviceInstance: _deviceInstance.value ? _deviceInstance.value : -1
 
 			// Detailed readings
 			readonly property alias frequency: _serviceLoader.frequency
@@ -103,44 +107,28 @@ QtObject {
 
 			property VeQuickItem _serviceType: VeQuickItem {
 				uid: configUid + "/ServiceType"
-				onValueChanged: input.serviceType = value === undefined ? '' : value
-			}
-			property VeQuickItem _serviceName: VeQuickItem {
-				uid: configUid + "/ServiceName"
-				onValueChanged: input.serviceName = value === undefined ? '' : value
 			}
 			property VeQuickItem _source: VeQuickItem {
 				uid: configUid + "/Source"
-				onValueChanged: input.source = (value === undefined || value === '')
-								? -1
-								: parseInt(value)
 			}
 			property VeQuickItem _connected: VeQuickItem {
 				uid: configUid + "/Connected"
-				onValueChanged: input.connected = value === 1
+			}
+			property VeQuickItem _deviceInstance: VeQuickItem {
+				uid: configUid + "/DeviceInstance"
 			}
 
-			// --- Further input details fetched from the service specific to this input. ---
-			// e.g. from com.victronenergy.vebus, com.victronenergy.grid, etc.
-
-			property string _serviceUid: serviceName ? 'dbus/com.victronenergy.' + serviceName : ''
+			// this looks like: 'mqtt/vebus/289/'
+			property string _serviceUid: serviceType !== '' && deviceInstance !== '' ? 'mqtt/' + serviceType + '/' + deviceInstance : ''
 
 			property VeQuickItem _productId: VeQuickItem {
-				property SingleUidHelper uidHelper: SingleUidHelper {
-					dbusUid: input._serviceUid ? input._serviceUid + "/ProductId" : ''
-				}
-				uid: uidHelper.mqttUid
-				onValueChanged: input.productId = value === undefined ? false : value
+				uid: _serviceUid === '' ? '' : _serviceUid + '/ProductId'
 			}
 
 			property AcInputServiceLoader _serviceLoader: AcInputServiceLoader {
 				id: _serviceLoader
 
-				property SingleUidHelper uidHelper: SingleUidHelper {
-					dbusUid: input.serviceName ? 'mqtt/' + input.serviceName : ''
-				}
-
-				serviceUid: uidHelper.mqttUid
+				serviceUid: input._serviceUid
 				serviceType: input.serviceType
 
 				// For vebus inputs, only the currently-active input has valid measurements, so
