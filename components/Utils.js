@@ -319,3 +319,8 @@ function qsTrIdOnOff(value) {
 		return qsTrId("utils_unknown")
 	}
 }
+
+function uidEndsWithANumber(uid) {
+	var array = uid.split('/')
+	return( !Number.isNaN(parseInt(array[array.length - 1])))
+}
