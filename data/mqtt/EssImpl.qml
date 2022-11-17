@@ -86,30 +86,24 @@ QtObject {
 	}
 
 	property VeQuickItem veState: VeQuickItem {
-		property SingleUidHelper uidHelper: SingleUidHelper {
-			dbusUid: "dbus/com.victronenergy.settings/Settings/CGwacs/BatteryLife/State"
-		}
-		uid: uidHelper.mqttUid
+		uid: "mqtt/settings/0/Settings/CGwacs/BatteryLife/State"
+		Component.onCompleted: valueChanged(null, value)// For some reason, 'onValueChanged' doesn't get called at startup
 	}
 
 	property VeQuickItem veHub4Mode: VeQuickItem {
-		property SingleUidHelper uidHelper: SingleUidHelper {
-			dbusUid: "dbus/com.victronenergy.settings/Settings/CGwacs/Hub4Mode"
-		}
-		uid: uidHelper.mqttUid
+		uid: "mqtt/settings/0/Settings/CGwacs/Hub4Mode"
+		Component.onCompleted: valueChanged(null, value)// For some reason, 'onValueChanged' doesn't get called at startup
 	}
 
 	property VeQuickItem veMinimumSocLimit: VeQuickItem {
-		property SingleUidHelper uidHelper: SingleUidHelper {
-			dbusUid: "dbus/com.victronenergy.settings/Settings/CGwacs/BatteryLife/MinimumSocLimit"
-		}
-		uid: uidHelper.mqttUid
+		uid: "mqtt/settings/0/Settings/CGwacs/BatteryLife/MinimumSocLimit"
+		onValueChanged: Global.ess.minimumStateOfCharge = value || 0
+		Component.onCompleted: valueChanged(null, value)// For some reason, 'onValueChanged' doesn't get called at startup
 	}
 
 	property VeQuickItem veSocLimit: VeQuickItem {
-		property SingleUidHelper uidHelper: SingleUidHelper {
-			dbusUid: "dbus/com.victronenergy.settings/Settings/CGwacs/BatteryLife/SocLimit"
-		}
-		uid: uidHelper.mqttUid
+		uid: "mqtt/settings/0/Settings/CGwacs/BatteryLife/SocLimit"
+		onValueChanged: Global.ess.stateOfChargeLimit = value || 0
+		Component.onCompleted: valueChanged(null, value)// For some reason, 'onValueChanged' doesn't get called at startup
 	}
 }
