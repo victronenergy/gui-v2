@@ -15,13 +15,36 @@ QtObject {
 
 	property var _solarChargers: []
 
+	readonly property Instantiator _uids: Instantiator {
+		property var childIds: []
+
+		onCountChanged: Qt.callLater(_reloadChildIds)
+
+		function _reloadChildIds() {
+			let _childIds = []
+			for (let i = 0; i < count; ++i) {
+				const child = objectAt(i)
+				const uid = child.uid
+				_childIds.push(uid)
+			}
+			veServiceIds = _childIds
+		}
+
+		model: VeQItemTableModel {
+			uids: ["mqtt/solarcharger"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: QtObject {
+			property var uid: model.uid
+		}
+	}
+
 	function _getSolarChargers() {
 		let solarChargerIds = []
 		for (let i = 0; i < veServiceIds.length; ++i) {
 			let id = veServiceIds[i]
-			if (id.startsWith('solarcharger.')) {
-				solarChargerIds.push(id)
-			}
+			solarChargerIds.push(id)
 		}
 
 		if (Utils.arrayCompare(_solarChargers, solarChargerIds) !== 0) {
@@ -97,10 +120,10 @@ QtObject {
 		delegate: QtObject {
 			id: acPvDelegate
 
-			readonly property string dbusUid: modelData
+			readonly property string uid: modelData
 
 			property var vePhaseCount: VeQuickItem {
-				uid: acPvDelegate.dbusUid + "/NumberOfPhases"
+				uid: acPvDelegate.uid + "/NumberOfPhases"
 				onValueChanged: {
 					const phaseCount = value === undefined ? 0 : value
 					if (pvPhases.count !== phaseCount) {
@@ -119,14 +142,14 @@ QtObject {
 					property real current
 
 					property VeQuickItem vePower: VeQuickItem {
-						uid: acPvDelegate.dbusUid + "/L" + (model.index + 1) + "/Power"
+						uid: acPvDelegate.uid + "/L" + (model.index + 1) + "/Power"
 						onValueChanged: {
 							phase.power = value === undefined ? NaN : value
 							Qt.callLater(acPvMonitor.updateAcTotals)
 						}
 					}
 					property VeQuickItem veCurrent: VeQuickItem {
-						uid: acPvDelegate.dbusUid + "/L" + (model.index + 1) + "/Current"
+						uid: acPvDelegate.uid + "/L" + (model.index + 1) + "/Current"
 						onValueChanged: {
 							phase.current = value === undefined ? NaN : value
 							Qt.callLater(acPvMonitor.updateAcTotals)
@@ -180,7 +203,7 @@ QtObject {
 				model: undefined    // ensure delegates are not created before history model is set
 				delegate: VeQuickItem {
 					// uid is e.g. mqtt/solarcharger.tty0/History/Daily/<day>/Yield
-					uid: _mqttUid ? "mqtt/" + _mqttUid + "/History/Daily/" + model.index + "/Yield" : ""
+					uid: _mqttUid ? _mqttUid + "/History/Daily/" + model.index + "/Yield" : ""
 					onValueChanged: {
 						if (value === undefined) {
 							return
@@ -194,7 +217,7 @@ QtObject {
 				}
 			}
 			property var _veHistoryCount: VeQuickItem {
-				uid: _mqttUid ? "mqtt/" + _mqttUid + "/History/Overall/DaysAvailable" : ""
+				uid: _mqttUid ? _mqttUid + "/History/Overall/DaysAvailable" : ""
 				onValueChanged: {
 					if (value !== undefined) {
 						yieldHistoryObjects.model = value
@@ -203,7 +226,7 @@ QtObject {
 			}
 
 			property var _veNrOfTrackers: VeQuickItem {
-				uid: _mqttUid ? "mqtt/" + _mqttUid + "/NrOfTrackers" : ""
+				uid: _mqttUid ? _mqttUid + "/NrOfTrackers" : ""
 				onValueChanged: {
 					if (value !== undefined) {
 						_trackerObjects.model = value
@@ -224,16 +247,16 @@ QtObject {
 					property var vePower: VeQuickItem {
 						uid: _mqttUid
 							 ? _trackerObjects.count === 1
-							   ? "mqtt/" + _mqttUid + "/Yield/Power"
-							   : "mqtt/" + _mqttUid + "/Pv/" + model.index + "/P"
+							   ? _mqttUid + "/Yield/Power"
+							   : _mqttUid + "/Pv/" + model.index + "/P"
 							 : ""
 						onValueChanged: solarCharger._updateTotal("power", "vePower")
 					}
 					property var veVoltage: VeQuickItem {
 						uid: _mqttUid
 							 ? _trackerObjects.count === 1
-							   ? "mqtt/" + _mqttUid + "/Pv/V"
-							   : "mqtt/" + _mqttUid + "/Pv/" + model.index + "/V"
+							   ? _mqttUid + "/Pv/V"
+							   : _mqttUid + "/Pv/" + model.index + "/V"
 							 : ""
 						onValueChanged: solarCharger._updateTotal("voltage", "veVoltage")
 					}
