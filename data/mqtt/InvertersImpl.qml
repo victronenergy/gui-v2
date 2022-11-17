@@ -19,13 +19,36 @@ QtObject {
 		let inverterIds = []
 		for (let i = 0; i < veServiceIds.length; ++i) {
 			let id = veServiceIds[i]
-			if (id.startsWith("vebus.")) {
-				inverterIds.push(id)
-			}
+			inverterIds.push(id)
 		}
 
 		if (Utils.arrayCompare(_inverters, inverterIds) !== 0) {
 			_inverters = inverterIds
+		}
+	}
+
+	readonly property Instantiator _uids: Instantiator {
+		property var childIds: []
+
+		onCountChanged: Qt.callLater(_reloadChildIds)
+
+		function _reloadChildIds() {
+			let _childIds = []
+			for (let i = 0; i < count; ++i) {
+				const child = objectAt(i)
+				const uid = child.uid
+				_childIds.push(uid)
+			}
+			veServiceIds = _childIds
+		}
+
+		model: VeQItemTableModel {
+			uids: ["mqtt/vebus"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: QtObject {
+			property var uid: model.uid
 		}
 	}
 
@@ -35,7 +58,7 @@ QtObject {
 			id: inverter
 
 			property string uid: modelData
-			property string serviceUid: "mqtt/" + inverter.uid
+			property string serviceUid: inverter.uid
 
 			property int productId: -1
 			property string productName
@@ -112,11 +135,8 @@ QtObject {
 				onValueChanged: inverter.modeAdjustable = value === undefined ? false : (value > 0)
 			}
 
-			property VeQuickItem _acInput1: VeQuickItem {
-				property SingleUidHelper uidHelper: SingleUidHelper {
-					dbusUid: "dbus/com.victronenergy.settings/Settings/SystemSetup/AcInput1"
-				}
-				uid: uidHelper.mqttUid
+			property DataPoint _acInput1: DataPoint {
+				source: "settings/0/Settings/SystemSetup/AcInput1"
 				onValueChanged: inverter.input1Type = value === undefined ? -1 : value
 			}
 			property VeQuickItem _currentLimit1: VeQuickItem {
@@ -128,11 +148,8 @@ QtObject {
 				onValueChanged: inverter.currentLimit1Adjustable = value === undefined ? false : (value > 0)
 			}
 
-			property VeQuickItem _acInput2: VeQuickItem {
-				property SingleUidHelper uidHelper: SingleUidHelper {
-					dbusUid: "dbus/com.victronenergy.settings/Settings/SystemSetup/AcInput2"
-				}
-				uid: uidHelper.mqttUid
+			property DataPoint _acInput2: DataPoint {
+				source: "settings/0/Settings/SystemSetup/AcInput2"
 				onValueChanged: inverter.input2Type = value === undefined ? -1 : value
 			}
 			property VeQuickItem _currentLimit2: VeQuickItem {
