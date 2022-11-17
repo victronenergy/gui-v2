@@ -15,17 +15,28 @@ QtObject {
 
 	property var _environmentInputs: []
 
-	function _getEnvironmentInputs() {
-		let environmentInputIds = []
-		for (let i = 0; i < veServiceIds.length; ++i) {
-			let id = veServiceIds[i]
-			if (id.startsWith("temperature")) {
-				environmentInputIds.push(id)
+	readonly property Instantiator _veMqttEnvironmentInputs: Instantiator {
+		property var childIds: []
+
+		onCountChanged: Qt.callLater(_reloadChildIds)
+
+		function _reloadChildIds() {
+			let _childIds = []
+			for (let i = 0; i < count; ++i) {
+				const child = objectAt(i)
+				const uid = child.uid.substring(5)    // remove 'mqtt/' from start of string
+				_childIds.push(uid)
 			}
+			veServiceIds = _childIds
 		}
 
-		if (Utils.arrayCompare(_environmentInputs, environmentInputIds) !== 0) {
-			_environmentInputs = environmentInputIds
+		model: VeQItemTableModel {
+			uids: ["mqtt/temperature"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: QtObject {
+			property var uid: model.uid
 		}
 	}
 
@@ -66,6 +77,20 @@ QtObject {
 					Global.environmentInputs.removeInput(index)
 				}
 			}
+		}
+	}
+
+	function _getEnvironmentInputs() {
+		let environmentInputIds = []
+		for (let i = 0; i < veServiceIds.length; ++i) {
+			let id = veServiceIds[i]
+			if (id.startsWith("temperature")) {
+				environmentInputIds.push(id)
+			}
+		}
+
+		if (Utils.arrayCompare(_environmentInputs, environmentInputIds) !== 0) {
+			_environmentInputs = environmentInputIds
 		}
 	}
 }
