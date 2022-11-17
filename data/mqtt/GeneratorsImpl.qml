@@ -18,14 +18,36 @@ QtObject {
 	function _getGenerators() {
 		let generatorIds = []
 		for (let i = 0; i < veServiceIds.length; ++i) {
-			let id = veServiceIds[i]
-			if (id.startsWith("generator.")) {
-				generatorIds.push(veServiceIds[i])
-			}
+			generatorIds.push(veServiceIds[i])
 		}
 
 		if (Utils.arrayCompare(_generators, generatorIds) !== 0) {
 			_generators = generatorIds
+		}
+	}
+
+	readonly property Instantiator _uids: Instantiator {
+		property var childIds: []
+
+		onCountChanged: Qt.callLater(_reloadChildIds)
+
+		function _reloadChildIds() {
+			let _childIds = []
+			for (let i = 0; i < count; ++i) {
+				const child = objectAt(i)
+				const uid = child.uid
+				_childIds.push(uid)
+			}
+			veServiceIds = _childIds
+		}
+
+		model: VeQItemTableModel {
+			uids: ["mqtt/generator"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: QtObject {
+			property var uid: model.uid
 		}
 	}
 
@@ -35,7 +57,7 @@ QtObject {
 			id: generator
 
 			property string uid: modelData
-			property string mqttUid: "mqtt/" + uid
+			property string mqttUid: uid
 
 			property int state: -1
 			property int manualStartTimer
