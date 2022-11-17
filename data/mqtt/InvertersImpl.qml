@@ -135,9 +135,10 @@ QtObject {
 				onValueChanged: inverter.modeAdjustable = value === undefined ? false : (value > 0)
 			}
 
-			property DataPoint _acInput1: DataPoint {
-				source: "settings/0/Settings/SystemSetup/AcInput1"
+			property VeQuickItem _acInput1: VeQuickItem {
+				uid: "mqtt/settings/0/Settings/SystemSetup/AcInput1"
 				onValueChanged: inverter.input1Type = value === undefined ? -1 : value
+				Component.onCompleted: onValueChanged(null, value)
 			}
 			property VeQuickItem _currentLimit1: VeQuickItem {
 				uid: inverter.serviceUid + "/Ac/In/1/CurrentLimit"
@@ -148,9 +149,10 @@ QtObject {
 				onValueChanged: inverter.currentLimit1Adjustable = value === undefined ? false : (value > 0)
 			}
 
-			property DataPoint _acInput2: DataPoint {
-				source: "settings/0/Settings/SystemSetup/AcInput2"
+			property VeQuickItem _acInput2: VeQuickItem {
+				uid: "mqtt/settings/0/Settings/SystemSetup/AcInput2"
 				onValueChanged: inverter.input2Type = value === undefined ? -1 : value
+				Component.onCompleted: onValueChanged(null, value)
 			}
 			property VeQuickItem _currentLimit2: VeQuickItem {
 				uid: inverter.serviceUid + "/Ac/In/2/CurrentLimit"
