@@ -14,7 +14,7 @@ QtObject {
 	property var dcInputs: DcInputsImpl { veServiceIds: veMqtt.childIds }
 	property var environmentInputs: EnvironmentInputsImpl { }
 	property var ess: EssImpl { }
-	property var generators: GeneratorsImpl { veServiceIds: veMqtt.childIds }
+	property var generators: GeneratorsImpl { }
 	property var inverters: InvertersImpl { veServiceIds: veMqtt.childIds }
 	property var notifications: NotificationsImpl {}
 	property var relays: RelaysImpl {}
