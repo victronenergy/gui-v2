@@ -38,7 +38,7 @@ Item {
 
 		anchors.verticalCenter: parent.verticalCenter
 		x: valueLabel.width + Theme.geometry.quantityLabel.spacing
-		text: root._quantity === undefined ? "" : root._quantity.unit
+		text: root._quantity === undefined || root._quantity.unit === undefined ? "" : root._quantity.unit
 		font: valueLabel.font
 		color: Theme.color.font.secondary
 	}
