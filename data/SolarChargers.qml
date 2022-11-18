@@ -15,15 +15,16 @@ QtObject {
 	property var yieldHistory: []
 
 	function updateYieldHistory(day, yieldValueKwh) {
+		var _yieldHistory = yieldHistory
 		if (day < yieldHistory.length) {
-			yieldHistory[day] = yieldValueKwh
+			_yieldHistory[day] = yieldValueKwh
 		} else if (day === yieldHistory.length) {
-			yieldHistory.push(yieldValueKwh)
+			_yieldHistory.push(yieldValueKwh)
 		} else {
 			console.warn("setYield(): bad day index", day, "model only has",
-					yieldHistory.length, "items")
-			return
+					_yieldHistory.length, "items")
 		}
+		yieldHistory = _yieldHistory
 	}
 
 	readonly property real power: isNaN(acPower) && isNaN(dcPower)
