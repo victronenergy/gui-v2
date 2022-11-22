@@ -95,7 +95,7 @@ Rectangle {
 
 			onRunningChanged: {
 				logoIconFadeOutAnim.running = true
-				animatedLogo.playing = true
+				animatedLogo.playing = BackendConnection.state == BackendConnection.Ready
 			}
 		}
 	}
@@ -103,7 +103,7 @@ Rectangle {
 	SequentialAnimation {
 		id: initialFadeAnimation
 
-		running: Global.allPagesLoaded
+		running: BackendConnection.state === BackendConnection.Ready || BackendConnection.state === BackendConnection.Failed
 
 		NumberAnimation {
 			target: loadingProgress
@@ -136,5 +136,13 @@ Rectangle {
 		}
 		width: Theme.geometry.splashView.progressBar.width
 		indeterminate: visible
+	}
+
+	Label {
+		anchors.centerIn: parent
+		font.pixelSize: Theme.font.overviewPage.widget.quantityLabel.maximumSize
+		visible: BackendConnection.state === BackendConnection.Failed && logoIcon.opacity === 0
+		//% "Unable to connect to device"
+		text: qsTrId("splash_view_unable_to_connect_to_device")
 	}
 }

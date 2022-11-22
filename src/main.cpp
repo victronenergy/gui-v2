@@ -9,6 +9,7 @@
 #include "src/notificationsmodel.h"
 #include "src/clocktime.h"
 #include "src/uidhelper.h"
+#include "src/backendconnection.h"
 #include <math.h>
 
 #include "velib/qt/ve_qitem.hpp"
@@ -90,6 +91,9 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
 		"Victron.VenusOS", 2, 0, "Theme",
 		&Victron::VenusOS::Theme::instance);
+	qmlRegisterSingletonType<Victron::VenusOS::BackendConnection>(
+		"Victron.VenusOS", 2, 0, "BackendConnection",
+		&Victron::VenusOS::BackendConnection::instance);
 	const int languageSingletonId = qmlRegisterSingletonType<Victron::VenusOS::Language>(
 		"Victron.VenusOS", 2, 0, "Language",
 		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
@@ -476,18 +480,20 @@ int main(int argc, char *argv[])
 		VBusItems::setConnectionType(QDBusConnection::SystemBus);
 	}
 
-	QDBusConnection dbus = VBusItems::getConnection();
-	if (dbus.isConnected()) {
-		producer->open(dbus);
-		services.reset(new DBusServices(producer->services()));
-		alarmBusItem.reset(new AlarmBusitem(services.get(), Victron::VenusOS::ActiveNotificationsModel::instance()));
-		services->initialScan();
-		settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
-		VeQItemSettingsInfo settingsInfo;
-		addSettings(&settingsInfo);
-		if (!settings->addSettings(settingsInfo)) {
-			qCritical() << "Adding settings failed, localsettings not running?";
-			return EXIT_FAILURE;
+	if (!parser.isSet(mqttAddress)) { // assume a dbus connection type
+		QDBusConnection dbus = VBusItems::getConnection();
+		if (dbus.isConnected()) {
+			producer->open(dbus);
+			services.reset(new DBusServices(producer->services()));
+			alarmBusItem.reset(new AlarmBusitem(services.get(), Victron::VenusOS::ActiveNotificationsModel::instance()));
+			services->initialScan();
+			settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
+			VeQItemSettingsInfo settingsInfo;
+			addSettings(&settingsInfo);
+			if (!settings->addSettings(settingsInfo)) {
+				qCritical() << "Adding settings failed, localsettings not running?";
+				return EXIT_FAILURE;
+			}
 		}
 	}
 #endif
@@ -496,7 +502,10 @@ int main(int argc, char *argv[])
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	mqttProducer->open(QUrl(mqttUrl), QMqttClient::MQTT_3_1);
 #else
-	mqttProducer->open(parser.isSet(mqttAddress) ? QHostAddress(parser.value(mqttAddress)) : QHostAddress::LocalHost, 1883);
+	if (parser.isSet(mqttAddress)) {
+		qDebug() << "parser.value(mqttAddress): " << parser.value(mqttAddress);
+		mqttProducer->open(QHostAddress(parser.value(mqttAddress)), 1883);
+	}
 #endif
 
 	QQmlEngine engine;
@@ -510,19 +519,10 @@ int main(int argc, char *argv[])
 				uidHelper->setActiveTopics(mqttProducer->activeTopics());
 			});
 
-	engine.rootContext()->setContextProperty("mqttConnecting", true);
-	engine.rootContext()->setContextProperty("mqttConnected", mqttProducer->ready());
-	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::errorChanged,
-			&engine, [&engine] {
-				engine.rootContext()->setContextProperty("mqttConnecting", false);
-			});
-	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::readyChanged,
+	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::connectionStateChanged,
 			&engine, [&mqttProducer, &engine] {
-				// TODO: for performance reasons, we should use a singleton rather than context property.
-				//       the same applies to the dbusConnected property.
-				qWarning() << "MQTT producer ready changed, now:" << mqttProducer->ready();
-				engine.rootContext()->setContextProperty("mqttConnected", mqttProducer->ready());
-				engine.rootContext()->setContextProperty("mqttConnecting", false);
+				qWarning() << "MQTT producer connection state changed, now:" << QVariant::fromValue(mqttProducer->connectionState()).toString();
+				Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_MqttSource, mqttProducer->connectionState());
 			});
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
@@ -532,10 +532,11 @@ int main(int argc, char *argv[])
 	engine.setProperty("screenSize", (round(screenDiagonalMm / 10 / 2.5) == 7)
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
-	engine.rootContext()->setContextProperty("dbusConnected", VBusItems::getConnection().isConnected());
+	if (!parser.isSet(mqttAddress)) {
+		Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_DBusSource, VBusItems::getConnection().isConnected());
+	}
 #else
 	engine.setProperty("screenSize", Victron::VenusOS::Theme::SevenInch);
-	engine.rootContext()->setContextProperty("dbusConnected", false); // TODO: MQTT instead.
 #endif
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
