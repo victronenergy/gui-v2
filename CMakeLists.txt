@@ -128,6 +128,8 @@ set(VELIB_MQTT_SOURCES
 
 set(VENUS_SOURCES
     src/main.cpp
+    src/backendconnection.h
+    src/backendconnection.cpp
     src/clocktime.h
     src/clocktime.cpp
     src/theme.h

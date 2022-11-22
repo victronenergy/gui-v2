@@ -96,7 +96,7 @@ Page {
 				updateOnClick: false
 				onClicked: {
 					// TODO clarify - do we need same demo modes as gui-v1? Those trigger demos via scripts in dbus-recorder/.
-					if (checked && !dbusConnected && !mqttConnected && !mqttConnecting) {
+					if (checked && BackendConnection.state !== BackendConnection.Ready && BackendConnection.state !== BackendConnection.Connecting) {
 						//% "No backend source available. Demo mode cannot be deactivated!"
 						Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_general_no_backend_source"))
 						return

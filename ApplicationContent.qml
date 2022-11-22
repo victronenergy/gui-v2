@@ -37,7 +37,8 @@ Item {
 	}
 
 	DemoModeDataPoint {
-		forceValidDemoMode: !splashView.enabled
+		id: demoModeDataPoint
+		forceValidDemoMode: true
 		onDemoModeChanged: _initializeDataSourceType()
 		Component.onCompleted: _initializeDataSourceType()
 		function _initializeDataSourceType() {
@@ -48,7 +49,7 @@ Item {
 				dataManager.dataSourceType = VenusOS.DataPoint_MockSource
 			} else if (demoMode === VenusOS.SystemSettings_DemoModeInactive) {
 				demoManagerLoader.active = false
-				if (dbusConnected) {
+				if (BackendConnection.type === VenusOS.DataPoint_DBusSource && BackendConnection.state === BackendConnection.Ready) {
 					console.warn("Demo mode is inactive, setting DBus data source type")
 					dataManager.dataSourceType = VenusOS.DataPoint_DBusSource
 				} else {
@@ -68,11 +69,6 @@ Item {
 		id: mainView
 		anchors.fill: parent
 		pageManager: pageManager
-	}
-
-	SplashView {
-		id: splashView
-		anchors.fill: parent
 	}
 
 	MouseArea {

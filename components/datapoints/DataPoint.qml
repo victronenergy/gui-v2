@@ -10,9 +10,7 @@ QtObject {
 
 	property string source
 	property var sourceObject
-	property int sourceType: dbusConnected ? VenusOS.DataPoint_DBusSource
-			: (mqttConnecting || mqttConnected) ? VenusOS.DataPoint_MqttSource
-			: VenusOS.DataPoint_MockSource
+	property int sourceType: BackendConnection.type
 
 	property var value: sourceObject ? sourceObject.value : undefined
 	readonly property bool valid: value !== undefined

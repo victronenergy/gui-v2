@@ -14,18 +14,18 @@ Item {
 
 	property bool _ready
 	readonly property bool _shouldInitialize: _ready && dataSourceType != VenusOS.DataPoint_UnknownSource
-			&& (dataSourceType != VenusOS.DataPoint_MqttSource || mqttConnected) // not ready to initialize if still mqttConnecting
+			&& (dataSourceType != VenusOS.DataPoint_MqttSource || BackendConnection.state === BackendConnection.Ready) // not ready to initialize if mqtt is still connecting
 
 	function _setBackendSource() {
 		if (!_shouldInitialize) {
 			return
 		}
-		if (dataSourceType == VenusOS.DataPoint_DBusSource && dbusConnected) {
+		if (dataSourceType == VenusOS.DataPoint_DBusSource && BackendConnection.state === BackendConnection.Ready) {
 			console.warn("Loading D-Bus data backend...")
 			demoDataLoader.active = false
 			_resetData()
 			dbusDataLoader.active = true
-		} else if (dataSourceType == VenusOS.DataPoint_MqttSource && mqttConnected) {
+		} else if (dataSourceType == VenusOS.DataPoint_MqttSource && BackendConnection.state === BackendConnection.Ready) {
 			console.warn("Loading MQTT data backend...")
 			demoDataLoader.active = false
 			_resetData()
