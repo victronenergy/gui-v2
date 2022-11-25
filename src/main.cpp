@@ -130,6 +130,8 @@ int main(int argc, char *argv[])
 		"Victron.VenusOS", 2, 0, "ApplicationContent");
 
 	/* data sources */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/DataLoader.qml")),
+		"Victron.VenusOS", 2, 0, "DataLoader");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DataManager.qml")),
 		"Victron.VenusOS", 2, 0, "DataManager");
 
@@ -436,13 +438,6 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationName("Venus");
 	QGuiApplication::setApplicationVersion("2.0");
 
-#if defined(VENUS_WEBASSEMBLY_BUILD)
-	emscripten::val webLocation = emscripten::val::global("location");
-	const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
-	const QUrlQuery query(webLocationUrl);
-	const QString mqttUrl(query.queryItemValue("mqtt")); // e.g.: "ws://192.168.5.96:9001/"
-#endif
-
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	QCommandLineParser parser;
 	parser.setApplicationDescription("Venus GUI");
@@ -480,8 +475,8 @@ int main(int argc, char *argv[])
 		VBusItems::setConnectionType(QDBusConnection::SystemBus);
 	}
 
+	QDBusConnection dbus = VBusItems::getConnection();
 	if (!parser.isSet(mqttAddress)) { // assume a dbus connection type
-		QDBusConnection dbus = VBusItems::getConnection();
 		if (dbus.isConnected()) {
 			producer->open(dbus);
 			services.reset(new DBusServices(producer->services()));
@@ -498,32 +493,38 @@ int main(int argc, char *argv[])
 	}
 #endif
 
-	QScopedPointer<VeQItemMqttProducer> mqttProducer(new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt"));
-#if defined(VENUS_WEBASSEMBLY_BUILD)
-	mqttProducer->open(QUrl(mqttUrl), QMqttClient::MQTT_3_1);
-#else
-	if (parser.isSet(mqttAddress)) {
-		qDebug() << "parser.value(mqttAddress): " << parser.value(mqttAddress);
-		mqttProducer->open(QHostAddress(parser.value(mqttAddress)), 1883);
-	}
-#endif
-
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
 
-	/* Force construction of translator and uid helper */
-	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
+	QScopedPointer<VeQItemMqttProducer> mqttProducer(new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt"));
 	Victron::VenusOS::UidHelper* uidHelper = engine.singletonInstance<Victron::VenusOS::UidHelper*>(uidHelperSingletonId);
 	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::activeTopicsChanged,
 			uidHelper, [&mqttProducer, &uidHelper] {
 				uidHelper->setActiveTopics(mqttProducer->activeTopics());
 			});
-
 	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::connectionStateChanged,
 			&engine, [&mqttProducer, &engine] {
 				qWarning() << "MQTT producer connection state changed, now:" << QVariant::fromValue(mqttProducer->connectionState()).toString();
 				Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_MqttSource, mqttProducer->connectionState());
 			});
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	emscripten::val webLocation = emscripten::val::global("location");
+	const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
+	const QUrlQuery query(webLocationUrl);
+	const QString mqttUrl(query.queryItemValue("mqtt")); // e.g.: "ws://192.168.5.96:9001/"
+	mqttProducer->open(QUrl(mqttUrl), QMqttClient::MQTT_3_1);
+	Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_MqttSource, mqttProducer->connectionState());
+#else
+	if (parser.isSet(mqttAddress)) {
+		qDebug() << "parser.value(mqttAddress): " << parser.value(mqttAddress);
+		mqttProducer->open(QHostAddress(parser.value(mqttAddress)), 1883);
+		Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_MqttSource, mqttProducer->connectionState());
+	}
+#endif
+
+	/* Force construction of translator */
+	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
@@ -533,7 +534,11 @@ int main(int argc, char *argv[])
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
 	if (!parser.isSet(mqttAddress)) {
-		Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_DBusSource, VBusItems::getConnection().isConnected());
+		if (dbus.isConnected()) {
+			Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_DBusSource, VBusItems::getConnection().isConnected());
+		} else {
+			Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_MockSource, true);
+		}
 	}
 #else
 	engine.setProperty("screenSize", Victron::VenusOS::Theme::SevenInch);

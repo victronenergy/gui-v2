@@ -12,25 +12,37 @@ Item {
 
 	property int dataSourceType: VenusOS.DataPoint_UnknownSource
 
-	property bool _ready
+	property bool _ready: !!Global.acInputs
+			&& !!Global.battery
+			&& !!Global.dcInputs
+			&& !!Global.environmentInputs
+			&& !!Global.ess
+			&& !!Global.generators
+			&& !!Global.inverters
+			&& !!Global.notifications
+			&& !!Global.relays
+			&& !!Global.solarChargers
+			&& !!Global.system
+			&& !!Global.systemSettings
+			&& !!Global.tanks
 	readonly property bool _shouldInitialize: _ready && dataSourceType != VenusOS.DataPoint_UnknownSource
-			&& (dataSourceType != VenusOS.DataPoint_MqttSource || BackendConnection.state === BackendConnection.Ready) // not ready to initialize if mqtt is still connecting
+			&& (dataSourceType != VenusOS.DataPoint_MqttSource || Global.backendConnectionReady)
 
 	function _setBackendSource() {
 		if (!_shouldInitialize) {
 			return
 		}
-		if (dataSourceType == VenusOS.DataPoint_DBusSource && BackendConnection.state === BackendConnection.Ready) {
+		if (dataSourceType == VenusOS.DataPoint_DBusSource && Global.backendConnectionReady) {
 			console.warn("Loading D-Bus data backend...")
 			demoDataLoader.active = false
 			_resetData()
 			dbusDataLoader.active = true
-		} else if (dataSourceType == VenusOS.DataPoint_MqttSource && BackendConnection.state === BackendConnection.Ready) {
+		} else if (dataSourceType == VenusOS.DataPoint_MqttSource && Global.backendConnectionReady) {
 			console.warn("Loading MQTT data backend...")
 			demoDataLoader.active = false
 			_resetData()
 			mqttDataLoader.active = true
-		} else {
+		} else if (dataSourceType == VenusOS.DataPoint_MockSource) {
 			console.warn("Loading mock data backend...")
 			dbusDataLoader.active = false
 			_resetData()
@@ -56,12 +68,6 @@ Item {
 
 	on_ShouldInitializeChanged: _setBackendSource()
 	onDataSourceTypeChanged: _setBackendSource()
-
-	Component.onCompleted: {
-		// Delay the call to ensure all Global data property types (Global.tanks, Global.acInputs
-		// etc.) have been set, as they are required by the impl types.
-		Qt.callLater(function() { root._ready = true })
-	}
 
 	// Global data types
 	AcInputs {}

@@ -13,34 +13,66 @@ Window {
 	//% "Venus OS GUI"
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
-	color: loader.sourceComponent === applicationContent && loader.status === Loader.Ready ? loader.item.mainView.backgroundColor : Theme.color.page.background
+	color: Global.guiLoaded ? guiLoader.item.mainView.backgroundColor : Theme.color.page.background
 
 	width: Theme.geometry.screen.width
 	height: Theme.geometry.screen.height
 
 	Loader {
-		id: loader
-		anchors.fill: parent
-		sourceComponent: Global.splashScreenVisible ? splashView : applicationContent
-	}
+		id: dataManagerLoader
 
-	Component {
-		id: splashView
+		asynchronous: true
+		active: Global.backendConnectionReady
+		sourceComponent: dataLoader
 
-		SplashView {
-			anchors.fill: parent
+		Component {
+			id: dataLoader
+			DataLoader { }
 		}
 	}
 
-	Component {
-		id: applicationContent
+	Loader {
+		id: guiLoader
 
-		ApplicationContent {
-			id: content
-			anchors.centerIn: parent
-			width: Theme.geometry.screen.width
-			height: Theme.geometry.screen.height
-			clip: Qt.platform.os == "wasm"
+		anchors.centerIn: parent
+		width: Theme.geometry.screen.width
+		height: Theme.geometry.screen.height
+		clip: Qt.platform.os == "wasm"
+		asynchronous: true
+
+		active: Global.dataBackendLoaded
+		sourceComponent: applicationContent
+		onLoaded: Global.guiLoaded = true
+
+		Component {
+			id: applicationContent
+
+			ApplicationContent {
+				id: content
+				anchors.centerIn: parent
+			}
+		}
+	}
+
+	Loader {
+		id: splashLoader
+
+		anchors.centerIn: parent
+		width: Theme.geometry.screen.width
+		height: Theme.geometry.screen.height
+		clip: Qt.platform.os == "wasm"
+
+		active: Global.splashScreenVisible
+		sourceComponent: splashView
+
+		Component {
+			id: splashView
+			SplashView {
+				anchors.centerIn: parent
+				// Latch the Ready state so that it doesn't change if we later get disconnected.
+				property bool connectionReady: BackendConnection.state == BackendConnection.Ready
+				onConnectionReadyChanged: if (connectionReady) Global.backendConnectionReady = true
+			}
 		}
 	}
 }

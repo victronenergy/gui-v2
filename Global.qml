@@ -17,6 +17,7 @@ import QtQml
 QtObject {
 	property var pageManager
 	property var demoManager    // only valid when demo mode is active
+	property var dataManager
 	property var dialogManager
 	property var inputPanel
 	property var locale: Qt.locale()
@@ -40,10 +41,11 @@ QtObject {
 
 	readonly property bool ready: pageManager != null && dataBackendLoaded
 	property bool splashScreenVisible: true
+	property bool backendConnectionReady
 	property bool dataBackendLoaded
+	property bool guiLoaded
 	property bool allPagesLoaded
 
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
-
 }
 
