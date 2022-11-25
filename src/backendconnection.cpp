@@ -62,13 +62,18 @@ void BackendConnection::setState(const Enums::DataPoint_SourceType type, const V
 		setState(BackendConnection::State::Disconnected);
 		break;
 	}
+	case VeQItemMqttProducer::Reconnecting:
+	{
+		setState(BackendConnection::State::Disconnected);
+		break;
+	}
 	case VeQItemMqttProducer::Failed:
 	{
 		setState(BackendConnection::State::Failed);
 		break;
 	}
 	default: {
-		qWarning() << "Attempted to set an unknown backend connection type";
+		qWarning() << "Attempted to set an unknown backend connection state";
 	}
 	}
 }
