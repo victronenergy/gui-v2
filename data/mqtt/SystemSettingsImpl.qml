@@ -36,4 +36,41 @@ QtObject {
 			onValueChanged: _update()
 		}
 	}
+
+	property VeQuickItem accessLevel: VeQuickItem {
+		 uid: "mqtt/settings/0/Settings/System/AccessLevel"
+	}
+
+	property VeQuickItem demoMode: VeQuickItem {
+		uid: "mqtt/settings/0/Settings/Gui/DemoMode"
+	}
+
+	property VeQuickItem colorScheme: VeQuickItem {
+		uid: "mqtt/settings/0/Settings/Gui/ColorScheme"
+		 onValueChanged: {
+			 if (value === Theme.Dark) {
+				Theme.load(Theme.screenSize, Theme.Dark)
+			 } else if (value === Theme.Light) {
+				Theme.load(Theme.screenSize, Theme.Light)
+			 }
+		 }
+	}
+
+	property VeQuickItem energyUnit: VeQuickItem {
+		uid: "mqtt/settings/0/Settings/Gui/Units/Energy"
+	}
+
+	property VeQuickItem temperatureUnit: VeQuickItem {
+		uid: "mqtt/settings/0/Settings/Gui/Units/Temperature"
+	}
+
+	property VeQuickItem volumeUnit: VeQuickItem {
+		uid: "mqtt/settings/0/Settings/Gui/Units/Volume"
+	}
+
+	property VeQuickItem showPercentages: VeQuickItem {
+		uid: "mqtt/settings/0/Settings/Gui/BriefView/ShowPercentages"
+	}
+
+	Component.onCompleted: Global.systemSettings.setDataSource(root)
 }

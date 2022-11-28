@@ -36,4 +36,41 @@ QtObject {
 			onValueChanged: _update()
 		}
 	}
+
+	property DataPoint accessLevel: DataPoint {
+		 source: "com.victronenergy.settings/Settings/System/AccessLevel"
+	}
+
+	property DataPoint demoMode: DataPoint {
+		 source: "com.victronenergy.settings/Settings/Gui/DemoMode"
+	}
+
+	property DataPoint colorScheme: DataPoint {
+		 source: "com.victronenergy.settings/Settings/Gui/ColorScheme"
+		 onValueChanged: {
+			 if (value === Theme.Dark) {
+				Theme.load(Theme.screenSize, Theme.Dark)
+			 } else if (value === Theme.Light) {
+				Theme.load(Theme.screenSize, Theme.Light)
+			 }
+		 }
+	}
+
+	property DataPoint energyUnit: DataPoint {
+		 source: "com.victronenergy.settings/Settings/Gui/Units/Energy"
+	}
+
+	property DataPoint temperatureUnit: DataPoint {
+		 source: "com.victronenergy.settings/Settings/Gui/Units/Temperature"
+	}
+
+	property DataPoint volumeUnit: DataPoint {
+		source: "com.victronenergy.settings/Settings/Gui/Units/Volume"
+	}
+
+	property DataPoint showPercentages: DataPoint {
+		 source: "com.victronenergy.settings/Settings/Gui/BriefView/ShowPercentages"
+	}
+
+	Component.onCompleted: Global.systemSettings.setDataSource(root)
 }

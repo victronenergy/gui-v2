@@ -67,8 +67,8 @@ QtObject {
 			property string serviceType: _serviceType.value ? _serviceType.value : ''	// e.g. "vebus"
 			property int source: (_source.value === undefined || _source.value === '') ? -1 : parseInt(_source.value)
 			property bool connected: _connected.value === 1
-			property int productId: _productId.value ? _productId.value : -1
-			property int deviceInstance: _deviceInstance.value ? _deviceInstance.value : -1
+			property string productId: _productId.value ? _productId.value : ''
+			property string deviceInstance: _deviceInstance.value ? _deviceInstance.value : ''
 
 			// Detailed readings
 			readonly property alias frequency: _serviceLoader.frequency
@@ -76,8 +76,8 @@ QtObject {
 			readonly property alias power: _serviceLoader.power
 			readonly property alias voltage: _serviceLoader.voltage
 			readonly property alias phases: _serviceLoader.phases
+			property bool _valid: productId != ''
 
-			property bool _valid: productId != -1
 			on_ValidChanged: {
 				const index = Utils.findIndex(Global.acInputs.model, input)
 				if (_valid && index < 0) {
@@ -102,8 +102,6 @@ QtObject {
 					Global.acInputs.generatorInput = null
 				}
 			}
-
-			// --- General config details about the input, from com.victronenergy.system ---
 
 			property VeQuickItem _serviceType: VeQuickItem {
 				uid: configUid + "/ServiceType"
