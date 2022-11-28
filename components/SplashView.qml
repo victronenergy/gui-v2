@@ -95,7 +95,7 @@ Rectangle {
 
 			onRunningChanged: {
 				logoIconFadeOutAnim.running = true
-				animatedLogo.playing = true
+				animatedLogo.playing = Global.backendConnectionReady
 			}
 		}
 	}
@@ -103,7 +103,7 @@ Rectangle {
 	SequentialAnimation {
 		id: initialFadeAnimation
 
-		running: Global.guiLoaded
+		running: Global.guiLoaded || BackendConnection.state === BackendConnection.Failed
 
 		NumberAnimation {
 			target: loadingProgress
