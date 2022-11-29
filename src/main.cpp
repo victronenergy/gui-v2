@@ -514,12 +514,10 @@ int main(int argc, char *argv[])
 	const QUrlQuery query(webLocationUrl);
 	const QString mqttUrl(query.queryItemValue("mqtt")); // e.g.: "ws://192.168.5.96:9001/"
 	mqttProducer->open(QUrl(mqttUrl), QMqttClient::MQTT_3_1);
-	Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_MqttSource, mqttProducer->connectionState());
 #else
 	if (parser.isSet(mqttAddress)) {
 		qDebug() << "parser.value(mqttAddress): " << parser.value(mqttAddress);
 		mqttProducer->open(QHostAddress(parser.value(mqttAddress)), 1883);
-		Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_MqttSource, mqttProducer->connectionState());
 	}
 #endif
 
