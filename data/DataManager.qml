@@ -101,7 +101,13 @@ Item {
 		source: active ? "qrc:/data/mqtt/MqttDataManager.qml" : ""
 
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load mqtt data manager:", errorString())
-		onLoaded: Global.dataBackendLoaded = true
+		onLoaded: timer.running = true // delay construction of the ui to give the uid mapper time to receive all topics. This prevents spammy error messages at startup.
+
+		Timer {
+			id: timer
+			interval: 3000
+			onTriggered: Global.dataBackendLoaded = true
+		}
 	}
 
 	Loader {
