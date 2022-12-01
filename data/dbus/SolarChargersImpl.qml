@@ -68,19 +68,21 @@ QtObject {
 
 			for (let i = 0; i < count; ++i) {
 				const acPv = objectAt(i)
-				for (let j = 0; j < acPv.pvPhases.count; ++j) {
-					const phase = acPv.pvPhases.objectAt(j)
-					if (!isNaN(phase.power)) {
-						if (isNaN(totalPower)) {
-							totalPower = 0
+				if (!!acPv) {
+					for (let j = 0; j < acPv.pvPhases.count; ++j) {
+						const phase = acPv.pvPhases.objectAt(j)
+						if (!isNaN(phase.power)) {
+							if (isNaN(totalPower)) {
+								totalPower = 0
+							}
+							totalPower += phase.power
 						}
-						totalPower += phase.power
-					}
-					if (!isNaN(phase.current)) {
-						if (isNaN(totalCurrent)) {
-							totalCurrent = 0
+						if (!isNaN(phase.current)) {
+							if (isNaN(totalCurrent)) {
+								totalCurrent = 0
+							}
+							totalCurrent += phase.current
 						}
-						totalCurrent += phase.current
 					}
 				}
 			}
