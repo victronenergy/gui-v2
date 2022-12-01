@@ -173,7 +173,7 @@ function sumRealNumbers(a, b) {
 function updateMaximumYield(repeater, changedIndex, changedYieldValue) {
 	if (repeater.maximumYieldIndex === changedIndex) {
 		for (let i = 0; i < repeater.count; ++i) {
-			if (repeater.itemAt(i)) {
+			if (!!repeater.itemAt(i)) {
 				const v = repeater.itemAt(i).yieldValue
 				if (v > repeater.maximumYieldValue) {
 					repeater.maximumYieldIndex = changedIndex
