@@ -20,7 +20,7 @@ Shape {
 	property int direction: PathArc.Clockwise
 	property color fillColor: "transparent"
 
-	property real transitionAngle: startAngle + ((endAngle - startAngle) * Math.min(Math.max(control.value, 0.0), 100.0) / 100.0)
+	property real transitionAngle: startAngle + ((endAngle - startAngle) * Math.min(Math.max((isNaN(control.value) ? 0 : control.value), 0.0), 100.0) / 100.0)
 	Behavior on transitionAngle {
 		enabled: control.animationEnabled
 		NumberAnimation {
