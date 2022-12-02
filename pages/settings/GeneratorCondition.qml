@@ -116,7 +116,7 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: stopTime
-						text: Global.commonWords.stopAfterTheConditionIsReachedFor
+						text: Global.commonWords.stop_after_the_condition_is_reached_for
 						visible: valid
 						source: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit
