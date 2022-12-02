@@ -69,7 +69,10 @@ void SingleUidHelper::recalculateMqttUid()
 
 	// step one, decompose the dbus uid into <service> + <path>
 	static const qsizetype dbusUidPrefixLength = QStringLiteral("dbus/com.victronenergy.").size();
-	const QString dbusServiceAndPath = m_dbusUid.mid(dbusUidPrefixLength);
+	QString dbusServiceAndPath = m_dbusUid.mid(dbusUidPrefixLength);
+	if (dbusServiceAndPath.startsWith("generator.startstop0")) {
+		dbusServiceAndPath.remove(".startstop0"); // TODO: handle multiple generators
+	}
 	const QString dbusService = dbusServiceAndPath.indexOf('/') > 0 ? dbusServiceAndPath.split('/').first() : QString();
 	const QString dbusPath = dbusServiceAndPath.mid(dbusService.size() + 1);
 

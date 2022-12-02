@@ -42,5 +42,5 @@ QtObject {
 	readonly property string stop_value_during_quiet_hours: qsTrId("common_words_stop_value_during_quiet_hours");
 
 	//% "Stop after the condition is reached for"
-	readonly property string stopAfterTheConditionIsReachedFor: qsTrId("common_words_stop_after_the_condition_is_reached_for")
+	readonly property string stop_after_the_condition_is_reached_for: qsTrId("common_words_stop_after_the_condition_is_reached_for")
 }
