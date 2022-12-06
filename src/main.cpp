@@ -80,12 +80,8 @@ static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
 }
 #endif
 
-}
-
-int main(int argc, char *argv[])
+void registerQmlTypes()
 {
-	qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
-
 	/* QML type registrations.  As we (currently) don't create an installed module,
 	   we need to register them into the appropriate type namespace manually. */
 	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
@@ -94,7 +90,7 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<Victron::VenusOS::BackendConnection>(
 		"Victron.VenusOS", 2, 0, "BackendConnection",
 		&Victron::VenusOS::BackendConnection::instance);
-	const int languageSingletonId = qmlRegisterSingletonType<Victron::VenusOS::Language>(
+	qmlRegisterSingletonType<Victron::VenusOS::Language>(
 		"Victron.VenusOS", 2, 0, "Language",
 		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
 			return new Victron::VenusOS::Language(engine);
@@ -121,7 +117,7 @@ int main(int argc, char *argv[])
 		[](QQmlEngine *, QJSEngine *) -> QObject * {
 		return Victron::VenusOS::ClockTime::instance();
 	});
-	const int uidHelperSingletonId = qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
+	qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
 		"Victron.VenusOS", 2, 0, "UidHelper",
 		&Victron::VenusOS::UidHelper::instance);
 
@@ -433,6 +429,16 @@ int main(int argc, char *argv[])
 	qmlRegisterType<ClockModel>("net.connman", 0, 1, "ClockModel");
 	qmlRegisterSingletonType<CmManager>("net.connman", 0, 1, "Connman", &connmanInstance);
 #endif
+}
+
+} // namespace
+
+
+int main(int argc, char *argv[])
+{
+	qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+
+	registerQmlTypes();
 
 	QGuiApplication app(argc, argv);
 	QGuiApplication::setApplicationName("Venus");
@@ -497,6 +503,8 @@ int main(int argc, char *argv[])
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
 
 	QScopedPointer<VeQItemMqttProducer> mqttProducer(new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt"));
+	int uidHelperSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "UidHelper");
+	Q_ASSERT(uidHelperSingletonId);
 	Victron::VenusOS::UidHelper* uidHelper = engine.singletonInstance<Victron::VenusOS::UidHelper*>(uidHelperSingletonId);
 	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::activeTopicsChanged,
 			uidHelper, [&mqttProducer, &uidHelper] {
@@ -522,6 +530,8 @@ int main(int argc, char *argv[])
 #endif
 
 	/* Force construction of translator */
+	int languageSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "Language");
+	Q_ASSERT(languageSingletonId);
 	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
