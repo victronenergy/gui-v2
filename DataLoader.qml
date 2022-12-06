@@ -39,17 +39,17 @@ QtObject {
 				// Ensure Global.demoManager is set before initializing the DataManager.
 				console.warn("Demo mode is active, setting mock data source")
 				root.demoManagerLoader.active = true
-				root.dataManager.dataSourceType = VenusOS.DataPoint_MockSource
+				root.dataManager.dataSourceType = BackendConnection.MockSource
 			} else if (demoMode === VenusOS.SystemSettings_DemoModeInactive) {
-				if (BackendConnection.type === VenusOS.DataPoint_DBusSource && Global.backendConnectionReady) {
+				if (BackendConnection.type === BackendConnection.DBusSource && Global.backendConnectionReady) {
 					console.warn("Demo mode is inactive, setting DBus data source type")
 					root.demoManagerLoader.active = false
-					root.dataManager.dataSourceType = VenusOS.DataPoint_DBusSource
+					root.dataManager.dataSourceType = BackendConnection.DBusSource
 					Global.dataManager = root.dataManager
-				} else if (BackendConnection.type === VenusOS.DataPoint_MqttSource && Global.backendConnectionReady) {
+				} else if (BackendConnection.type === BackendConnection.MqttSource && Global.backendConnectionReady) {
 					console.warn("Demo mode is inactive, setting MQTT data source type")
 					root.demoManagerLoader.active = false
-					root.dataManager.dataSourceType = VenusOS.DataPoint_MqttSource
+					root.dataManager.dataSourceType = BackendConnection.MqttSource
 					Global.dataManager = root.dataManager
 				}
 			}

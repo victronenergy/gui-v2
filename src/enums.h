@@ -277,14 +277,6 @@ public:
 	};
 	Q_ENUM(PageManager_InteractionMode)
 
-	enum DataPoint_SourceType {
-		DataPoint_UnknownSource,
-		DataPoint_DBusSource,
-		DataPoint_MqttSource,
-		DataPoint_MockSource
-	};
-	Q_ENUM(DataPoint_SourceType)
-
 	enum SystemSettings_DemoMode {
 		SystemSettings_DemoModeInactive,
 		SystemSettings_DemoModeActive,

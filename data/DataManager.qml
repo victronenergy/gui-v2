@@ -10,7 +10,7 @@ import "mock" as MockData
 Item {
 	id: root
 
-	property int dataSourceType: VenusOS.DataPoint_UnknownSource
+	property int dataSourceType: BackendConnection.UnknownSource
 
 	property bool _ready: !!Global.acInputs
 			&& !!Global.battery
@@ -25,24 +25,24 @@ Item {
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.tanks
-	readonly property bool _shouldInitialize: _ready && dataSourceType != VenusOS.DataPoint_UnknownSource
-			&& (dataSourceType != VenusOS.DataPoint_MqttSource || Global.backendConnectionReady)
+	readonly property bool _shouldInitialize: _ready && dataSourceType != BackendConnection.UnknownSource
+			&& (dataSourceType != BackendConnection.MqttSource || Global.backendConnectionReady)
 
 	function _setBackendSource() {
 		if (!_shouldInitialize) {
 			return
 		}
-		if (dataSourceType == VenusOS.DataPoint_DBusSource && Global.backendConnectionReady) {
+		if (dataSourceType == BackendConnection.DBusSource && Global.backendConnectionReady) {
 			console.warn("Loading D-Bus data backend...")
 			demoDataLoader.active = false
 			_resetData()
 			dbusDataLoader.active = true
-		} else if (dataSourceType == VenusOS.DataPoint_MqttSource && Global.backendConnectionReady) {
+		} else if (dataSourceType == BackendConnection.MqttSource && Global.backendConnectionReady) {
 			console.warn("Loading MQTT data backend...")
 			demoDataLoader.active = false
 			_resetData()
 			mqttDataLoader.active = true
-		} else if (dataSourceType == VenusOS.DataPoint_MockSource) {
+		} else if (dataSourceType == BackendConnection.MockSource) {
 			console.warn("Loading mock data backend...")
 			dbusDataLoader.active = false
 			_resetData()

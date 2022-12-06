@@ -32,7 +32,7 @@ void BackendConnection::setState(const State backendConnectionState)
 	}
 }
 
-void BackendConnection::setState(const Enums::DataPoint_SourceType type, const VeQItemMqttProducer::ConnectionState backendConnectionState)
+void BackendConnection::setState(const SourceType type, const VeQItemMqttProducer::ConnectionState backendConnectionState)
 {
 	qDebug() << "BackendConnection::setState()" << backendConnectionState;
 	setType(type);
@@ -78,18 +78,18 @@ void BackendConnection::setState(const Enums::DataPoint_SourceType type, const V
 	}
 }
 
-void BackendConnection::setState(const Enums::DataPoint_SourceType type, const bool connected)
+void BackendConnection::setState(const SourceType type, const bool connected)
 {
 	setType(type);
 	setState(connected ? Ready : Disconnected);
 }
 
-Enums::DataPoint_SourceType BackendConnection::type() const
+BackendConnection::SourceType BackendConnection::type() const
 {
 	return m_type;
 }
 
-void BackendConnection::setType(const Enums::DataPoint_SourceType type)
+void BackendConnection::setType(const SourceType type)
 {
 	if (m_type != type) {
 		m_type = type;

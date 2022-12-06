@@ -96,7 +96,7 @@ QtObject {
 			return
 		}
 		switch (sourceType) {
-		case VenusOS.DataPoint_DBusSource:
+		case BackendConnection.DBusSource:
 			if (!_dbusImpl) {
 				_dbusImpl = Qt.createComponent(Qt.resolvedUrl("DataPointDBusImpl.qml"),
 						Component.Asynchronous)
@@ -105,7 +105,7 @@ QtObject {
 				_createDBusImpl()
 			}
 			break
-		case VenusOS.DataPoint_MqttSource:
+		case BackendConnection.MqttSource:
 			if (!_mqttImpl) {
 				_mqttUidHelper = _mqttUidHelperComponent.createObject()
 				_mqttImpl = Qt.createComponent(Qt.resolvedUrl("DataPointMqttImpl.qml"),
@@ -115,7 +115,7 @@ QtObject {
 				_createMqttImpl()
 			}
 			break
-		case VenusOS.DataPoint_MockSource:
+		case BackendConnection.MockSource:
 			const comp = Qt.createComponent(Qt.resolvedUrl("DataPointMockImpl.qml"))
 			sourceObject = comp.createObject(root, { "source": root.source })
 			break
