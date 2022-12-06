@@ -14,9 +14,17 @@ class BackendConnection : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(State state READ state NOTIFY stateChanged)
-	Q_PROPERTY(Victron::VenusOS::Enums::DataPoint_SourceType type READ type NOTIFY typeChanged)
+	Q_PROPERTY(SourceType type READ type NOTIFY typeChanged)
 
 public:
+	enum SourceType {
+		UnknownSource,
+		DBusSource,
+		MqttSource,
+		MockSource
+	};
+	Q_ENUM(SourceType)
+
 	enum State {
 		Idle,
 		Connecting,
@@ -31,11 +39,11 @@ public:
 
 
 	State state() const;
-	void setState(const Enums::DataPoint_SourceType type, const VeQItemMqttProducer::ConnectionState backendConnectionState);
-	void setState(const Enums::DataPoint_SourceType type, const bool connected);
+	void setState(const SourceType type, const VeQItemMqttProducer::ConnectionState backendConnectionState);
+	void setState(const SourceType type, const bool connected);
 
-	Enums::DataPoint_SourceType type() const;
-	void setType(const Enums::DataPoint_SourceType type);
+	SourceType type() const;
+	void setType(const SourceType type);
 
 Q_SIGNALS:
 	void stateChanged();
@@ -45,7 +53,7 @@ private:
 	explicit BackendConnection(QObject *parent = nullptr);
 	void setState(const State backendConnectionState);
 	State m_state = BackendConnection::State::Idle;
-	Enums::DataPoint_SourceType m_type = Enums::DataPoint_SourceType::DataPoint_UnknownSource;
+	SourceType m_type = UnknownSource;
 };
 
 }

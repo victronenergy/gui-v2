@@ -513,7 +513,7 @@ int main(int argc, char *argv[])
 	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::connectionStateChanged,
 			&engine, [&mqttProducer, &engine] {
 				qWarning() << "MQTT producer connection state changed, now:" << QVariant::fromValue(mqttProducer->connectionState()).toString();
-				Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_MqttSource, mqttProducer->connectionState());
+				Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::BackendConnection::MqttSource, mqttProducer->connectionState());
 			});
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
@@ -543,9 +543,9 @@ int main(int argc, char *argv[])
 			: Victron::VenusOS::Theme::FiveInch);
 	if (!parser.isSet(mqttAddress)) {
 		if (dbus.isConnected()) {
-			Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_DBusSource, VBusItems::getConnection().isConnected());
+			Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::BackendConnection::DBusSource, VBusItems::getConnection().isConnected());
 		} else {
-			Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::Enums::DataPoint_SourceType::DataPoint_MockSource, true);
+			Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::BackendConnection::MockSource, true);
 		}
 	}
 #else
