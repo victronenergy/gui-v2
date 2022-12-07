@@ -5,6 +5,7 @@
 import QtQuick
 import QtQuick.Window
 import Victron.VenusOS
+import "data" as Data
 
 Window {
 	id: root
@@ -27,7 +28,7 @@ Window {
 
 		Component {
 			id: dataLoader
-			DataLoader { }
+			Data.DataManager { }
 		}
 	}
 
@@ -39,6 +40,7 @@ Window {
 		height: Theme.geometry.screen.height
 		clip: Qt.platform.os == "wasm"
 		asynchronous: true
+		focus: true
 
 		active: Global.dataBackendLoaded
 		sourceComponent: applicationContent

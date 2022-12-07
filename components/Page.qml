@@ -20,10 +20,4 @@ FocusScope {
 	height: parent ? parent.height : 0
 
 	C.StackView.onActivated: Global.pageManager.currentPage = root
-
-	Keys.onPressed: function(event) {
-		if (Global.demoManager) {
-			Global.demoManager.keyPressed(event)
-		}
-	}
 }

@@ -5,8 +5,6 @@
 import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
-import "data" as Data
-import "demo" as Demo
 
 Item {
 	id: root
@@ -14,6 +12,12 @@ Item {
 	property alias mainView: mainView
 
 	property var _inputComponent
+
+	Keys.onPressed: function(event) {
+		if (Global.demoManager) {
+			Global.demoManager.keyPressed(event)
+		}
+	}
 
 	PageManager {
 		id: pageManager
