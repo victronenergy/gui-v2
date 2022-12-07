@@ -14,6 +14,14 @@ Item {
 
 	property var pageManager
 
+	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded
+	on_ReadyToInitChanged: {
+		if (_readyToInit && pageStack.depth === 0) {
+			console.warn("Data sources ready, creating MainPage.qml")
+			pageStack.push("qrc:/pages/MainPage.qml")
+		}
+	}
+
 	StatusBar {
 		id: statusBar
 
@@ -61,16 +69,6 @@ Item {
 		}
 
 		focus: true
-
-		Connections {
-			target: Global
-			function onReadyChanged() {
-				if (Global.ready && pageStack.depth === 0) {
-					console.warn("Data sources ready, creating MainPage.qml")
-					pageStack.push("qrc:/pages/MainPage.qml")
-				}
-			}
-		}
 
 		Connections {
 			target: pageManager.emitter

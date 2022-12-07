@@ -41,7 +41,6 @@ QtObject {
 
 	readonly property bool ready: pageManager != null && dataBackendLoaded
 	property bool splashScreenVisible: true
-	property bool backendConnectionReady
 	property bool dataBackendLoaded
 	property bool allPagesLoaded
 

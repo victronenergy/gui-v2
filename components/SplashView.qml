@@ -94,8 +94,11 @@ Rectangle {
 			duration: Theme.animation.splash.logoText.fade.duration
 
 			onRunningChanged: {
-				logoIconFadeOutAnim.running = true
-				animatedLogo.playing = Global.backendConnectionReady
+				if (running) {
+					logoIconFadeOutAnim.running = true
+				} else if (BackendConnection.state === BackendConnection.Ready) {
+					animatedLogo.playing = true
+				}
 			}
 		}
 	}

@@ -20,14 +20,13 @@ Window {
 	height: Theme.geometry.screen.height
 
 	Loader {
-		id: dataManagerLoader
+		// Latch the Ready state so that it doesn't change if we later get disconnected.
+		readonly property bool connectionReady: BackendConnection.state === BackendConnection.Ready
+		onConnectionReadyChanged: if (connectionReady) active = true
 
 		asynchronous: true
-		active: Global.backendConnectionReady
-		sourceComponent: dataLoader
-
-		Component {
-			id: dataLoader
+		active: false
+		sourceComponent: Component {
 			Data.DataManager { }
 		}
 	}
@@ -43,13 +42,8 @@ Window {
 		focus: true
 
 		active: Global.dataBackendLoaded
-		sourceComponent: applicationContent
-
-		Component {
-			id: applicationContent
-
+		sourceComponent: Component {
 			ApplicationContent {
-				id: content
 				anchors.centerIn: parent
 			}
 		}
@@ -64,15 +58,9 @@ Window {
 		clip: Qt.platform.os == "wasm"
 
 		active: Global.splashScreenVisible
-		sourceComponent: splashView
-
-		Component {
-			id: splashView
+		sourceComponent: Component {
 			SplashView {
 				anchors.centerIn: parent
-				// Latch the Ready state so that it doesn't change if we later get disconnected.
-				property bool connectionReady: BackendConnection.state == BackendConnection.Ready
-				onConnectionReadyChanged: if (connectionReady) Global.backendConnectionReady = true
 			}
 		}
 	}

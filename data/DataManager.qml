@@ -25,7 +25,7 @@ Item {
 			&& !!Global.tanks
 	readonly property bool _shouldInitialize: _dataObjectsReady
 			&& BackendConnection.type !== BackendConnection.UnknownSource
-			&& Global.backendConnectionReady
+			&& BackendConnection.state === BackendConnection.Ready
 
 	function _setBackendSource() {
 		if (!_shouldInitialize) {
