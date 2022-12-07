@@ -72,8 +72,8 @@ QtObject {
 		}
 	}
 
-	property Connections demoConn: Connections {
-		target: Global.demoManager || null
+	property Connections mockConn: Connections {
+		target: Global.mockDataSimulator || null
 
 		function onSetSolarChargersRequested(config) {
 			Global.solarChargers.reset()

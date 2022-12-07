@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Item {
+QtObject {
 	id: root
 
 	property bool timersActive: !Global.splashScreenVisible
@@ -21,33 +21,33 @@ Item {
 	signal setTanksRequested(var config)
 	signal deactivateSingleAlarm()
 
-	readonly property var _demoConfigConfigs: ({
+	readonly property var _configs: ({
 		"qrc:/pages/BriefPage.qml": briefAndOverviewConfig,
 		"qrc:/pages/OverviewPage.qml": briefAndOverviewConfig,
 		"qrc:/pages/LevelsPage.qml": levelsConfig,
 	})
 
-	function setConfigIndex(demoConfig, configIndex) {
-		let config = demoConfig.configs[configIndex]
-		demoConfig.configIndex = configIndex
+	function setConfigIndex(pageConfig, configIndex) {
+		let config = pageConfig.configs[configIndex]
+		pageConfig.configIndex = configIndex
 		if (config) {
-			demoConfig.loadConfig(config)
-			demoConfigTitle.text = configIndex+1 + ". " + config.name || ""
+			pageConfig.loadConfig(config)
+			pageConfigTitle.text = configIndex+1 + ". " + config.name || ""
 		} else {
-			demoConfigTitle.text = ""
+			pageConfigTitle.text = ""
 		}
 	}
 
 	function nextConfig() {
-		const demoConfig = _demoConfigConfigs[Global.pageManager.navBar.currentUrl]
-		const nextIndex = demoConfig.configIndex === demoConfig.configs.length-1 ? 0 : demoConfig.configIndex+1
-		setConfigIndex(demoConfig, nextIndex)
+		const pageConfig = _configs[Global.pageManager.navBar.currentUrl]
+		const nextIndex = pageConfig.configIndex === pageConfig.configs.length-1 ? 0 : pageConfig.configIndex+1
+		setConfigIndex(pageConfig, nextIndex)
 	}
 
 	function previousConfig() {
-		const demoConfig = _demoConfigConfigs[Global.pageManager.navBar.currentUrl]
-		const prevIndex = demoConfig.configIndex <= 0 ? demoConfig.configs.length-1 : demoConfig.configIndex-1
-		setConfigIndex(demoConfig, prevIndex)
+		const pageConfig = _configs[Global.pageManager.navBar.currentUrl]
+		const prevIndex = pageConfig.configIndex <= 0 ? pageConfig.configs.length-1 : pageConfig.configIndex-1
+		setConfigIndex(pageConfig, prevIndex)
 	}
 
 	function indexOfPage(url) {
@@ -71,13 +71,13 @@ Item {
 			event.accepted = true
 			break
 		case Qt.Key_Left:
-			if (Global.pageManager.navBar.currentUrl in root._demoConfigConfigs) {
+			if (Global.pageManager.navBar.currentUrl in root._configs) {
 				previousConfig()
 				event.accepted = true
 			}
 			break
 		case Qt.Key_Right:
-			if (Global.pageManager.navBar.currentUrl in root._demoConfigConfigs) {
+			if (Global.pageManager.navBar.currentUrl in root._configs) {
 				nextConfig()
 				event.accepted = true
 			}
@@ -104,7 +104,7 @@ Item {
 			break
 		case Qt.Key_L:
 			Language.current = (Language.current === Language.English ? Language.French : Language.English)
-			demoConfigTitle.text = "Language: " + Language.toString(Language.current)
+			pageConfigTitle.text = "Language: " + Language.toString(Language.current)
 			event.accepted = true
 			break
 		case Qt.Key_N:
@@ -126,7 +126,7 @@ Item {
 			break
 		case Qt.Key_T:
 			root.timersActive = !root.timersActive
-			demoConfigTitle.text = "Timers on: " + root.timersActive
+			pageConfigTitle.text = "Timers on: " + root.timersActive
 			event.accepted = true
 			break
 		case Qt.Key_U:
@@ -147,7 +147,7 @@ Item {
 						? VenusOS.Units_Volume_GallonImperial
 						: VenusOS.Units_Volume_CubicMeter)
 
-			demoConfigTitle.text = "Units: "
+			pageConfigTitle.text = "Units: "
 					+ (Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Watt
 					   ? "Watts"
 					   : "Amps") + " | "
@@ -173,43 +173,36 @@ Item {
 		}
 	}
 
-	anchors.fill: parent
-
-	Rectangle {
-		id: demoConfigTitleBackground
-
-		width: demoConfigTitle.width * 1.1
-		height: demoConfigTitle.height * 1.1
+	property Rectangle _configLabel: Rectangle {
+		parent: Global.pageManager.statusBar
+		width: pageConfigTitle.width * 1.1
+		height: pageConfigTitle.height * 1.1
 		color: "white"
 		opacity: 0.9
-		visible: demoConfigTitleTimer.running
+		visible: pageConfigTitleTimer.running
 
 		Label {
-			id: demoConfigTitle
+			id: pageConfigTitle
 			anchors.centerIn: parent
 			color: "black"
-			onTextChanged: demoConfigTitleTimer.restart()
+			onTextChanged: pageConfigTitleTimer.restart()
 		}
 
 		Timer {
-			id: demoConfigTitleTimer
+			id: pageConfigTitleTimer
 			interval: 3000
 		}
 	}
 
-	BriefAndOverviewPageConfig {
-		id: briefAndOverviewConfig
-
+	property BriefAndOverviewPageConfig briefAndOverviewConfig: BriefAndOverviewPageConfig {
 		property int configIndex: -1
 	}
 
-	LevelsPageConfig {
-		id: levelsConfig
-
+	property LevelsPageConfig levelsConfig: LevelsPageConfig {
 		property int configIndex: -1
 	}
 
-	NotificationsPageConfig {
+	property NotificationsPageConfig notificationsConfig: NotificationsPageConfig {
 		id: notificationsConfig
 	}
 }

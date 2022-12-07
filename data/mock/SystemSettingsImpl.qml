@@ -9,15 +9,15 @@ QtObject {
 	id: root
 
 	function setMockSettingValue(settingId, value) {
-		Global.demoManager.mockDataValues["com.victronenergy.settings/Settings/" + settingId] = value
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.settings/Settings/" + settingId] = value
 	}
 
 	function setMockPumpValue(settingId, value) {
-		Global.demoManager.mockDataValues["com.victronenergy.pump.startstop0/" + settingId] = value
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.pump.startstop0/" + settingId] = value
 	}
 
 	function setMockSystemValue(key, value) {
-		Global.demoManager.mockDataValues["com.victronenergy.system/" + key] = value
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.system/" + key] = value
 	}
 
 	Component.onCompleted: {

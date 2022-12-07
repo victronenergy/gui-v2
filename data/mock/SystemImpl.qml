@@ -13,8 +13,8 @@ QtObject {
 		Global.system.ac.consumption.setPhaseCount(_phaseCount)
 	}
 
-	property Connections demoConn: Connections {
-		target: Global.demoManager || null
+	property Connections mockConn: Connections {
+		target: Global.mockDataSimulator || null
 
 		function onSetSystemRequested(config) {
 			Global.system.state = VenusOS.System_State_Off
@@ -44,7 +44,7 @@ QtObject {
 	readonly property int _phaseCount: 1 + Math.floor(Math.random() * 3)
 
 	property Timer randomizeAcValues: Timer {
-		running: Global.demoManager.timersActive
+		running: Global.mockDataSimulator.timersActive
 		interval: 2000
 		repeat: true
 		triggeredOnStart: true
@@ -60,7 +60,7 @@ QtObject {
 	//--- DC data ---
 
 	property Timer randomizeDcValues: Timer {
-		running: Global.demoManager.timersActive
+		running: Global.mockDataSimulator.timersActive
 		interval: 1000
 		repeat: true
 		triggeredOnStart: true

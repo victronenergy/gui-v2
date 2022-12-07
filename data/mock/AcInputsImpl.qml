@@ -22,8 +22,8 @@ QtObject {
 		}
 	}
 
-	property Connections demoConn: Connections {
-		target: Global.demoManager || null
+	property Connections mockConn: Connections {
+		target: Global.mockDataSimulator || null
 
 		function onSetAcInputsRequested(config) {
 			Global.acInputs.reset()
@@ -59,7 +59,7 @@ QtObject {
 	}
 
 	property Timer _dummyConnected: Timer {
-		running: Global.demoManager.timersActive && !_disableAutoConnectedChanges.running
+		running: Global.mockDataSimulator.timersActive && !_disableAutoConnectedChanges.running
 		repeat: true
 		interval: 10000 + (Math.random() * 10000)
 		triggeredOnStart: true
@@ -106,7 +106,7 @@ QtObject {
 			property int phaseCount: 1
 
 			property Timer _dummyValues: Timer {
-				running: Global.demoManager.timersActive
+				running: Global.mockDataSimulator.timersActive
 				repeat: true
 				interval: 10000 + (Math.random() * 10000)
 				triggeredOnStart: true

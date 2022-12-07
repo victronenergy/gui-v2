@@ -14,8 +14,8 @@ Item {
 	property var _inputComponent
 
 	Keys.onPressed: function(event) {
-		if (Global.demoManager) {
-			Global.demoManager.keyPressed(event)
+		if (Global.mockDataSimulator) {
+			Global.mockDataSimulator.keyPressed(event)
 		}
 	}
 

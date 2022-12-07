@@ -16,7 +16,7 @@ import QtQml
 
 QtObject {
 	property var pageManager
-	property var demoManager    // only valid when demo mode is active
+	property var mockDataSimulator    // only valid when mock mode is active
 	property var dataManager
 	property var dialogManager
 	property var inputPanel

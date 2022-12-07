@@ -56,22 +56,6 @@ Item {
 		dataManagerLoader.active = true
 	}
 
-	function _resetData() {
-		Global.acInputs.reset()
-		Global.battery.reset()
-		Global.dcInputs.reset()
-		Global.environmentInputs.reset()
-		Global.ess.reset()
-		Global.generators.reset()
-		Global.inverters.reset()
-		Global.notifications.reset()
-		Global.relays.reset()
-		Global.solarChargers.reset()
-		Global.system.reset()
-		Global.systemSettings.reset()
-		Global.tanks.reset()
-	}
-
 	on_ShouldInitializeChanged: _setBackendSource()
 
 	Connections {
