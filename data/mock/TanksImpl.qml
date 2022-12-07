@@ -41,8 +41,8 @@ QtObject {
 		}
 	}
 
-	property Connections demoConn: Connections {
-		target: Global.demoManager || null
+	property Connections mockConn: Connections {
+		target: Global.mockDataSimulator || null
 
 		function onSetTanksRequested(config) {
 			Global.tanks.reset()
@@ -65,7 +65,7 @@ QtObject {
 	}
 
 	property Timer randomizeTankLevels: Timer {
-		running: Global.demoManager.timersActive
+		running: Global.mockDataSimulator.timersActive
 		interval: 5000
 		repeat: true
 		onTriggered: {
@@ -83,7 +83,7 @@ QtObject {
 	}
 
 	property Timer randomizeTanks: Timer {
-		running: Global.demoManager.timersActive
+		running: Global.mockDataSimulator.timersActive
 		interval: 20 * 1000
 		repeat: true
 		onTriggered: {

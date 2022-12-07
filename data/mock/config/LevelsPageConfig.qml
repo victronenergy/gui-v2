@@ -231,7 +231,7 @@ QtObject {
 	]
 
 	function loadConfig(config) {
-		Global.demoManager.setTanksRequested(config.tanks)
-		Global.demoManager.setEnvironmentInputsRequested(config.inputs)
+		Global.mockDataSimulator.setTanksRequested(config.tanks)
+		Global.mockDataSimulator.setEnvironmentInputsRequested(config.inputs)
 	}
 }

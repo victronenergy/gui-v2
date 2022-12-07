@@ -26,8 +26,8 @@ QtObject {
 		}
 	}
 
-	property Connections demoConn: Connections {
-		target: Global.demoManager || null
+	property Connections mockConn: Connections {
+		target: Global.mockDataSimulator || null
 
 		function onSetDcInputsRequested(config) {
 			Global.dcInputs.reset()
@@ -57,7 +57,7 @@ QtObject {
 			property real temperature_celsius
 
 			property Timer _dummyValues: Timer {
-				running: Global.demoManager.timersActive
+				running: Global.mockDataSimulator.timersActive
 				repeat: true
 				interval: 10000 + (Math.random() * 10000)
 				triggeredOnStart: true

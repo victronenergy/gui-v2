@@ -35,8 +35,8 @@ Item {
 		}
 	}
 
-	property Connections demoConn: Connections {
-		target: Global.demoManager || null
+	property Connections mockConn: Connections {
+		target: Global.mockDataSimulator || null
 
 		function onSetEnvironmentInputsRequested(config) {
 			Global.environmentInputs.model.clear()
@@ -54,7 +54,7 @@ Item {
 		model: Global.environmentInputs.model
 
 		delegate: Timer {
-			running: Global.demoManager.timersActive
+			running: Global.mockDataSimulator.timersActive
 			repeat: true
 			interval: 10 * 1000
 			onTriggered: {

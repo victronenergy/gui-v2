@@ -4,16 +4,16 @@
 
 import QtQuick
 import Victron.VenusOS
-import "../../demo" as Demo
+import "config"
 
 QtObject {
 	id: root
 
 	property var _mockDataSources
 
-	property Demo.DemoManager demoManager: Demo.DemoManager {
+	property MockDataSimulator mockDataSimulator: MockDataSimulator {
 		Component.onCompleted: {
-			Global.demoManager = demoManager
+			Global.mockDataSimulator = mockDataSimulator
 			_mockDataSources = mockDataSourceComponent.createObject(root)
 		}
 	}

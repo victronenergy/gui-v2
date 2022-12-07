@@ -21,7 +21,7 @@ QtObject {
 	property bool _initialized
 
 	property Connections batteryConn: Connections {
-		target: Global.demoManager || null
+		target: Global.mockDataSimulator || null
 
 		function onSetBatteryRequested(config) {
 			if (config) {
@@ -33,7 +33,7 @@ QtObject {
 	}
 
 	property SequentialAnimation socAnimation: SequentialAnimation {
-		running: Global.demoManager.timersActive && _initialized
+		running: Global.mockDataSimulator.timersActive && _initialized
 		loops: Animation.Infinite
 
 		ScriptAction {

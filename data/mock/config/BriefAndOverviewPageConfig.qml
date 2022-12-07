@@ -96,10 +96,10 @@ QtObject {
 	]
 
 	function loadConfig(config) {
-		Global.demoManager.setAcInputsRequested(config.acInputs)
-		Global.demoManager.setDcInputsRequested(config.dcInputs)
-		Global.demoManager.setSolarChargersRequested(config.solar)
-		Global.demoManager.setSystemRequested(config.system)
-		Global.demoManager.setBatteryRequested(config.battery)
+		Global.mockDataSimulator.setAcInputsRequested(config.acInputs)
+		Global.mockDataSimulator.setDcInputsRequested(config.dcInputs)
+		Global.mockDataSimulator.setSolarChargersRequested(config.solar)
+		Global.mockDataSimulator.setSystemRequested(config.system)
+		Global.mockDataSimulator.setBatteryRequested(config.battery)
 	}
 }
