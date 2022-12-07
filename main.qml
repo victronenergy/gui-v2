@@ -41,7 +41,7 @@ Window {
 		asynchronous: true
 		focus: true
 
-		active: Global.dataBackendLoaded
+		active: Global.dataManagerLoaded
 		sourceComponent: Component {
 			ApplicationContent {
 				anchors.centerIn: parent
