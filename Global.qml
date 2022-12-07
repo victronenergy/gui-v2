@@ -39,9 +39,8 @@ QtObject {
 	property var systemSettings
 	property var tanks
 
-	readonly property bool ready: pageManager != null && dataBackendLoaded
 	property bool splashScreenVisible: true
-	property bool dataBackendLoaded
+	property bool dataManagerLoaded
 	property bool allPagesLoaded
 
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
