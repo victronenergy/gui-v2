@@ -43,7 +43,6 @@ QtObject {
 	property bool splashScreenVisible: true
 	property bool backendConnectionReady
 	property bool dataBackendLoaded
-	property bool guiLoaded
 	property bool allPagesLoaded
 
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
