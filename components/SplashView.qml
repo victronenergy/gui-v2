@@ -103,7 +103,7 @@ Rectangle {
 	SequentialAnimation {
 		id: initialFadeAnimation
 
-		running: Global.guiLoaded || BackendConnection.state === BackendConnection.Failed
+		running: Global.allPagesLoaded || BackendConnection.state === BackendConnection.Failed
 
 		NumberAnimation {
 			target: loadingProgress

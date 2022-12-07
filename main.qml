@@ -14,7 +14,7 @@ Window {
 	//% "Venus OS GUI"
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
-	color: Global.guiLoaded ? guiLoader.item.mainView.backgroundColor : Theme.color.page.background
+	color: Global.allPagesLoaded ? guiLoader.item.mainView.backgroundColor : Theme.color.page.background
 
 	width: Theme.geometry.screen.width
 	height: Theme.geometry.screen.height
@@ -44,7 +44,6 @@ Window {
 
 		active: Global.dataBackendLoaded
 		sourceComponent: applicationContent
-		onLoaded: Global.guiLoaded = true
 
 		Component {
 			id: applicationContent
