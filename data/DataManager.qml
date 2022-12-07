@@ -10,9 +10,7 @@ import "mock" as MockData
 Item {
 	id: root
 
-	property int dataSourceType: BackendConnection.UnknownSource
-
-	property bool _ready: !!Global.acInputs
+	readonly property bool _dataObjectsReady: !!Global.acInputs
 			&& !!Global.battery
 			&& !!Global.dcInputs
 			&& !!Global.environmentInputs
@@ -25,29 +23,37 @@ Item {
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.tanks
-	readonly property bool _shouldInitialize: _ready && dataSourceType != BackendConnection.UnknownSource
-			&& (dataSourceType != BackendConnection.MqttSource || Global.backendConnectionReady)
+	readonly property bool _shouldInitialize: _dataObjectsReady
+			&& BackendConnection.type !== BackendConnection.UnknownSource
+			&& Global.backendConnectionReady
 
 	function _setBackendSource() {
 		if (!_shouldInitialize) {
 			return
 		}
-		if (dataSourceType == BackendConnection.DBusSource && Global.backendConnectionReady) {
-			console.warn("Loading D-Bus data backend...")
-			demoDataLoader.active = false
-			_resetData()
-			dbusDataLoader.active = true
-		} else if (dataSourceType == BackendConnection.MqttSource && Global.backendConnectionReady) {
-			console.warn("Loading MQTT data backend...")
-			demoDataLoader.active = false
-			_resetData()
-			mqttDataLoader.active = true
-		} else if (dataSourceType == BackendConnection.MockSource) {
-			console.warn("Loading mock data backend...")
-			dbusDataLoader.active = false
-			_resetData()
-			demoDataLoader.active = true
+		if (dataManagerLoader.active) {
+			console.warn("Data manager source is already set to", dataManagerLoader.source,
+				"cannot be changed after initialization")
+			return
 		}
+		switch (BackendConnection.type) {
+		case BackendConnection.DBusSource:
+			console.warn("Loading D-Bus data backend...")
+			dataManagerLoader.source = "qrc:/data/dbus/DBusDataManager.qml"
+			break
+		case BackendConnection.MqttSource:
+			console.warn("Loading MQTT data backend...")
+			dataManagerLoader.source = "qrc:/data/mqtt/MqttDataManager.qml"
+			break
+		case BackendConnection.MockSource:
+			console.warn("Loading mock data backend...")
+			dataManagerLoader.source = "qrc:/data/mock/MockDataManager.qml"
+			break
+		default:
+			console.warn("Unsupported data backend!", BackendConnection.type)
+			return
+		}
+		dataManagerLoader.active = true
 	}
 
 	function _resetData() {
@@ -67,7 +73,14 @@ Item {
 	}
 
 	on_ShouldInitializeChanged: _setBackendSource()
-	onDataSourceTypeChanged: _setBackendSource()
+
+	Connections {
+		target: BackendConnection
+
+		function onTypeChanged() {
+			_setBackendSource()
+		}
+	}
 
 	// Global data types
 	AcInputs {}
@@ -85,32 +98,11 @@ Item {
 	Tanks {}
 
 	Loader {
-		id: dbusDataLoader
+		id: dataManagerLoader
 
 		active: false
-		source: active ? "qrc:/data/dbus/DBusDataManager.qml" : ""
-
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dbus data manager:", errorString())
-		onLoaded: Global.dataBackendLoaded = true
-	}
-
-	Loader {
-		id: mqttDataLoader
-
-		active: false
-		source: active ? "qrc:/data/mqtt/MqttDataManager.qml" : ""
-
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load mqtt data manager:", errorString())
-		onLoaded: Global.dataBackendLoaded = true
-	}
-
-	Loader {
-		id: demoDataLoader
-
-		active: false
-		sourceComponent: MockData.MockDataManager {}
-
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load mock data manager:", errorString())
+		asynchronous: true
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load data manager:", errorString())
 		onLoaded: Global.dataBackendLoaded = true
 	}
 }

@@ -22,18 +22,18 @@ QSet<QString> UidHelper::activeTopics() const
 	return m_activeTopics;
 }
 
-QObject* UidHelper::instance(QQmlEngine *, QJSEngine *)
+UidHelper* UidHelper::instance(QQmlEngine *, QJSEngine *)
 {
 	// only construct one.  the QML engine will take ownership of it.
 	static QPointer<UidHelper> ret(new UidHelper);
-	return ret.data();
+	return qobject_cast<UidHelper *>(ret.data());
 }
 
 //--
 
 SingleUidHelper::SingleUidHelper(QObject *parent)
 	: QObject(parent)
-	, m_uidHelper(qobject_cast<UidHelper*>(UidHelper::instance(nullptr, nullptr)))
+	, m_uidHelper(UidHelper::instance())
 {
 	if (m_uidHelper.data()) {
 		connect(m_uidHelper.data(), &UidHelper::activeTopicsChanged,

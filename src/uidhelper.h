@@ -23,17 +23,17 @@ class UidHelper : public QObject
 	Q_PROPERTY(QSet<QString> activeTopics READ activeTopics NOTIFY activeTopicsChanged)
 
 public:
-	UidHelper(QObject *parent = nullptr);
-
 	void setActiveTopics(const QSet<QString> &topics);
 	QSet<QString> activeTopics() const;
 
-	static QObject* instance(QQmlEngine *engine, QJSEngine *);
+	static UidHelper* instance(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 Q_SIGNALS:
 	void activeTopicsChanged();
 
 private:
+	UidHelper(QObject *parent = nullptr);
+
 	QSet<QString> m_activeTopics;
 };
 

@@ -10,7 +10,6 @@
 #include "src/clocktime.h"
 #include "src/uidhelper.h"
 #include "src/backendconnection.h"
-#include <math.h>
 
 #include "velib/qt/ve_qitem.hpp"
 #include "velib/qt/ve_quick_item.hpp"
@@ -18,13 +17,6 @@
 #include "velib/qt/ve_qitem_table_model.hpp"
 #include "velib/qt/ve_qitem_sort_table_model.hpp"
 #include "velib/qt/ve_qitem_child_model.hpp"
-
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
-#include "velib/qt/v_busitems.h"
-#include "velib/qt/ve_qitems_dbus.hpp"
-#include "gui-v1/dbus_services.h"
-#include "gui-v1/alarmbusitem.h"
-#endif
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 #include "src/connman/cmtechnology.h"
@@ -44,7 +36,6 @@
 #include <QGuiApplication>
 #include <QQuickView>
 #include <QQmlComponent>
-#include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QScreen>
@@ -55,30 +46,59 @@ Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 namespace {
 
-void addSettings(VeQItemSettingsInfo *info)
-{
-	// 0=Dark, 1=Light, 2=Auto
-	info->add("Gui/ColorScheme", 0, 0, 2);
-
-	// see enum.h Units_Type for enum values
-	info->add("Gui/Units/Energy", 2); // watt, amp
-	info->add("Gui/Units/Temperature", 4);  // celsius, fahrenheit
-	info->add("Gui/Units/Volume", 6);  // cubic meter, liter, gallon US, gallon imperial
-
-	// Brief settings levels are 0-6 (Fuel - Gasoline) or -1 for Battery.
-	info->add("Gui/BriefView/Level/1", -1, -1, 6);     // Battery
-	info->add("Gui/BriefView/Level/2", 0, -1, 6);    // Fuel
-	info->add("Gui/BriefView/Level/3", 1, -1, 6);    // Fresh water
-	info->add("Gui/BriefView/Level/4", 5, -1, 6);    // Black water
-	info->add("Gui/BriefView/ShowPercentages", 0, 0, 1);
-}
-
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
 {
 	return CmManager::instance();
 }
 #endif
+
+void initBackend()
+{
+	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::instance();
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	emscripten::val webLocation = emscripten::val::global("location");
+	const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
+	const QUrlQuery query(webLocationUrl);
+	const QString mqttUrl(query.queryItemValue("mqtt")); // e.g.: "ws://192.168.5.96:9001/"
+	backend->setType(Victron::VenusOS::BackendConnection::MqttSource, mqttUrl);
+#else
+	QCommandLineParser parser;
+	parser.setApplicationDescription("Venus GUI");
+	parser.addHelpOption();
+	parser.addVersionOption();
+
+	QCommandLineOption dbusAddress({ "d",  "dbus" },
+		QGuiApplication::tr("main", "Use D-Bus data source: connect to the specified D-Bus address"),
+		QGuiApplication::tr("main", "dbus"));
+	parser.addOption(dbusAddress);
+
+	QCommandLineOption dbusDefault(QStringLiteral("dbus-default"),
+		QGuiApplication::tr("main", "Use D-Bus data source: connect to the default D-Bus address"));
+	parser.addOption(dbusDefault);
+
+	QCommandLineOption mqttAddress({ "m",  "mqtt" },
+		QGuiApplication::tr("main", "Use MQTT data source: connect to the specified MQTT broker address"),
+		QGuiApplication::tr("main", "mqtt"));
+	parser.addOption(mqttAddress);
+
+	QCommandLineOption mockMode(QStringLiteral("mock"),
+		QGuiApplication::tr("main", "Use mock data source for testing"));
+	parser.addOption(mockMode);
+
+	parser.process(*QCoreApplication::instance());
+
+	if (parser.isSet(mqttAddress)) {
+		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, parser.value(mqttAddress));
+	} else if (parser.isSet(mockMode)) {
+		backend->setType(Victron::VenusOS::BackendConnection::MockSource);
+	} else {
+		const QString address = parser.isSet(dbusDefault) ? QStringLiteral("tcp:host=localhost,port=3000") : parser.value(dbusAddress);
+		backend->setType(Victron::VenusOS::BackendConnection::DBusSource, address);
+	}
+#endif
+}
 
 void registerQmlTypes()
 {
@@ -126,8 +146,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ApplicationContent");
 
 	/* data sources */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/DataLoader.qml")),
-		"Victron.VenusOS", 2, 0, "DataLoader");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DataManager.qml")),
 		"Victron.VenusOS", 2, 0, "DataManager");
 
@@ -256,8 +274,6 @@ void registerQmlTypes()
 	/* data points */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/datapoints/DataPoint.qml")),
 		"Victron.VenusOS", 2, 0, "DataPoint");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/datapoints/DemoModeDataPoint.qml")),
-		"Victron.VenusOS", 2, 0, "DemoModeDataPoint");
 
 	/* settings list items */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsLabel.qml")),
@@ -444,90 +460,10 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationName("Venus");
 	QGuiApplication::setApplicationVersion("2.0");
 
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
-	QCommandLineParser parser;
-	parser.setApplicationDescription("Venus GUI");
-	parser.addHelpOption();
-	parser.addVersionOption();
-
-	QCommandLineOption dbusAddress({ "d",  "dbus" },
-		QGuiApplication::tr("main", "Specify the D-Bus address to connect to"),
-		QGuiApplication::tr("main", "dbus"));
-	parser.addOption(dbusAddress);
-
-	QCommandLineOption dbusDefault(QString("dbus-default"),
-		QGuiApplication::tr("main", "Use the default D-Bus address to connect to"),
-		QString(),
-		QString("tcp:host=localhost,port=3000"));
-	parser.addOption(dbusDefault);
-
-	QCommandLineOption mqttAddress({ "m",  "mqtt" },
-		QGuiApplication::tr("main", "Specify the MQTT broker address to connect to"),
-		QGuiApplication::tr("main", "mqtt"));
-	parser.addOption(mqttAddress);
-
-	parser.process(app);
-
-	QScopedPointer<VeQItemDbusProducer> producer(new VeQItemDbusProducer(VeQItems::getRoot(), "dbus"));
-	QScopedPointer<VeQItemSettings> settings;
-	QScopedPointer<DBusServices> services;
-	QScopedPointer<AlarmBusitem> alarmBusItem;
-
-	if (parser.isSet(dbusAddress) || parser.isSet(dbusDefault)) {
-		// Default to the session bus on the pc
-		VBusItems::setConnectionType(QDBusConnection::SessionBus);
-		VBusItems::setDBusAddress(parser.value(parser.isSet(dbusAddress) ? dbusAddress : dbusDefault));
-	} else {
-		VBusItems::setConnectionType(QDBusConnection::SystemBus);
-	}
-
-	QDBusConnection dbus = VBusItems::getConnection();
-	if (!parser.isSet(mqttAddress)) { // assume a dbus connection type
-		if (dbus.isConnected()) {
-			producer->open(dbus);
-			services.reset(new DBusServices(producer->services()));
-			alarmBusItem.reset(new AlarmBusitem(services.get(), Victron::VenusOS::ActiveNotificationsModel::instance()));
-			services->initialScan();
-			settings.reset(new VeQItemDbusSettings(producer->services(), QString("com.victronenergy.settings")));
-			VeQItemSettingsInfo settingsInfo;
-			addSettings(&settingsInfo);
-			if (!settings->addSettings(settingsInfo)) {
-				qCritical() << "Adding settings failed, localsettings not running?";
-				return EXIT_FAILURE;
-			}
-		}
-	}
-#endif
+	initBackend();
 
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
-
-	QScopedPointer<VeQItemMqttProducer> mqttProducer(new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt"));
-	int uidHelperSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "UidHelper");
-	Q_ASSERT(uidHelperSingletonId);
-	Victron::VenusOS::UidHelper* uidHelper = engine.singletonInstance<Victron::VenusOS::UidHelper*>(uidHelperSingletonId);
-	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::activeTopicsChanged,
-			uidHelper, [&mqttProducer, &uidHelper] {
-				uidHelper->setActiveTopics(mqttProducer->activeTopics());
-			});
-	QObject::connect(mqttProducer.data(), &VeQItemMqttProducer::connectionStateChanged,
-			&engine, [&mqttProducer, &engine] {
-				qWarning() << "MQTT producer connection state changed, now:" << QVariant::fromValue(mqttProducer->connectionState()).toString();
-				Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::BackendConnection::MqttSource, mqttProducer->connectionState());
-			});
-
-#if defined(VENUS_WEBASSEMBLY_BUILD)
-	emscripten::val webLocation = emscripten::val::global("location");
-	const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
-	const QUrlQuery query(webLocationUrl);
-	const QString mqttUrl(query.queryItemValue("mqtt")); // e.g.: "ws://192.168.5.96:9001/"
-	mqttProducer->open(QUrl(mqttUrl), QMqttClient::MQTT_3_1);
-#else
-	if (parser.isSet(mqttAddress)) {
-		qDebug() << "parser.value(mqttAddress): " << parser.value(mqttAddress);
-		mqttProducer->open(QHostAddress(parser.value(mqttAddress)), 1883);
-	}
-#endif
 
 	/* Force construction of translator */
 	int languageSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "Language");
@@ -541,13 +477,6 @@ int main(int argc, char *argv[])
 	engine.setProperty("screenSize", (round(screenDiagonalMm / 10 / 2.5) == 7)
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
-	if (!parser.isSet(mqttAddress)) {
-		if (dbus.isConnected()) {
-			Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::BackendConnection::DBusSource, VBusItems::getConnection().isConnected());
-		} else {
-			Victron::VenusOS::BackendConnection::instance(&engine, &engine)->setState(Victron::VenusOS::BackendConnection::MockSource, true);
-		}
-	}
 #else
 	engine.setProperty("screenSize", Victron::VenusOS::Theme::SevenInch);
 #endif

@@ -1,5 +1,34 @@
 #include "backendconnection.h"
+#include "uidhelper.h"
 
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
+#include "velib/qt/v_busitems.h"
+#include "velib/qt/ve_qitems_dbus.hpp"
+#include "gui-v1/dbus_services.h"
+#include "gui-v1/alarmbusitem.h"
+#endif
+
+namespace {
+
+void addSettings(VeQItemSettingsInfo *info)
+{
+	// 0=Dark, 1=Light, 2=Auto
+	info->add("Gui/ColorScheme", 0, 0, 2);
+
+	// see enum.h Units_Type for enum values
+	info->add("Gui/Units/Energy", 2); // watt, amp
+	info->add("Gui/Units/Temperature", 4);  // celsius, fahrenheit
+	info->add("Gui/Units/Volume", 6);  // cubic meter, liter, gallon US, gallon imperial
+
+	// Brief settings levels are 0-6 (Fuel - Gasoline) or -1 for Battery.
+	info->add("Gui/BriefView/Level/1", -1, -1, 6);     // Battery
+	info->add("Gui/BriefView/Level/2", 0, -1, 6);    // Fuel
+	info->add("Gui/BriefView/Level/3", 1, -1, 6);    // Fresh water
+	info->add("Gui/BriefView/Level/4", 5, -1, 6);    // Black water
+	info->add("Gui/BriefView/ShowPercentages", 0, 0, 1);
+}
+
+}
 
 namespace Victron {
 namespace VenusOS {
@@ -24,18 +53,18 @@ BackendConnection::State BackendConnection::state() const
 	return m_state;
 }
 
-void BackendConnection::setState(const State backendConnectionState)
+void BackendConnection::setState(State backendConnectionState)
 {
+	qDebug() << "BackendConnection state:" << backendConnectionState;
+
 	if (m_state != backendConnectionState) {
 		m_state = backendConnectionState;
 		emit stateChanged();
 	}
 }
 
-void BackendConnection::setState(const SourceType type, const VeQItemMqttProducer::ConnectionState backendConnectionState)
+void BackendConnection::setState(VeQItemMqttProducer::ConnectionState backendConnectionState)
 {
-	qDebug() << "BackendConnection::setState()" << backendConnectionState;
-	setType(type);
 	switch(backendConnectionState) {
 	case VeQItemMqttProducer::Idle:
 	{
@@ -78,9 +107,8 @@ void BackendConnection::setState(const SourceType type, const VeQItemMqttProduce
 	}
 }
 
-void BackendConnection::setState(const SourceType type, const bool connected)
+void BackendConnection::setState(bool connected)
 {
-	setType(type);
 	setState(connected ? Ready : Disconnected);
 }
 
@@ -89,12 +117,99 @@ BackendConnection::SourceType BackendConnection::type() const
 	return m_type;
 }
 
-void BackendConnection::setType(const SourceType type)
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
+void BackendConnection::initDBusConnection(const QString &address)
 {
-	if (m_type != type) {
-		m_type = type;
-		emit typeChanged();
+	m_dbusProducer = new VeQItemDbusProducer(VeQItems::getRoot(), "dbus");
+
+	if (address.isEmpty()) {
+		qWarning() << "Connecting to system bus...";
+		VBusItems::setConnectionType(QDBusConnection::SystemBus);
+	} else {
+		qWarning() << "Connecting to session bus...";
+		// Default to the session bus on the pc
+		VBusItems::setConnectionType(QDBusConnection::SessionBus);
+		VBusItems::setDBusAddress(address);
 	}
+
+	QDBusConnection dbus = VBusItems::getConnection();
+	if (!dbus.isConnected()) {
+		qWarning() << "D-Bus connection failed!";
+		setState(Failed);
+		return;
+	}
+
+	m_dbusProducer->open(dbus);
+	DBusServices *alarmServices = new DBusServices(m_dbusProducer->services(), this);
+	m_alarmBusItem = new AlarmBusitem(alarmServices, ActiveNotificationsModel::instance());
+	alarmServices->initialScan();
+
+	VeQItemSettings *settings = new VeQItemDbusSettings(m_dbusProducer->services(), QString("com.victronenergy.settings"));
+	VeQItemSettingsInfo settingsInfo;
+	addSettings(&settingsInfo);
+	if (!settings->addSettings(settingsInfo)) {
+		qCritical() << "Adding settings failed, localsettings not running?";
+		return;
+	}
+
+	setState(VBusItems::getConnection().isConnected());
+}
+#endif
+
+void BackendConnection::initMqttConnection(const QString &address)
+{
+	qWarning() << "Connecting to MQTT source at" << address << "...";
+
+	if (address.isEmpty()) {
+		qCritical("No MQTT address specified!");
+		return;
+	}
+	if (m_mqttProducer) {
+		m_mqttProducer->deleteLater();
+		m_mqttProducer = nullptr;
+	}
+
+	m_mqttProducer = new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt");
+	connect(m_mqttProducer, &VeQItemMqttProducer::activeTopicsChanged, UidHelper::instance(), [=] {
+		UidHelper::instance()->setActiveTopics(m_mqttProducer->activeTopics());
+	});
+	connect(m_mqttProducer, &VeQItemMqttProducer::connectionStateChanged, this, [=] {
+		setState(m_mqttProducer->connectionState());
+	});
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	m_mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);
+#else
+	m_mqttProducer->open(QHostAddress(address), 1883);
+#endif
+}
+
+void BackendConnection::setType(const SourceType type, const QString &address)
+{
+	if (m_type == type) {
+		return;
+	}
+	m_type = type;
+
+	switch (type) {
+	case DBusSource:
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+		qWarning() << "D-Bus connection not supported in WebAssembly!";
+#else
+		initDBusConnection(address);
+#endif
+		break;
+	case MqttSource:
+		initMqttConnection(address);
+		break;
+	case MockSource:
+		setState(true);
+		break;
+	default:
+		qWarning() << "Unsupported backend source type!" << type;
+	}
+
+	emit typeChanged();
 }
 }
 }

@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>ApplicationContent.qml</file>
-        <file>DataLoader.qml</file>
         <file>Global.qml</file>
         <file>components/controls/Button.qml</file>
         <file>components/controls/Label.qml</file>
@@ -18,7 +17,6 @@
         <file>components/datapoints/DataPointDBusImpl.qml</file>
         <file>components/datapoints/DataPointMqttImpl.qml</file>
         <file>components/datapoints/DataPointMockImpl.qml</file>
-        <file>components/datapoints/DemoModeDataPoint.qml</file>
         <file>components/settings/SettingsLabel.qml</file>
         <file>components/settings/SettingsListButton.qml</file>
         <file>components/settings/SettingsListCGwacsBatterySchedule.qml</file>

@@ -5,7 +5,9 @@
 #include <QQmlEngine>
 
 #include "velib/qt/ve_qitems_mqtt.hpp"
-#include "src/enums.h"
+
+class VeQItemDbusProducer;
+class AlarmBusitem;
 
 namespace Victron {
 namespace VenusOS {
@@ -35,15 +37,14 @@ public:
 	};
 	Q_ENUM(State)
 
-	static BackendConnection* instance(QQmlEngine *, QJSEngine *);
-
+	static BackendConnection* instance(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 	State state() const;
-	void setState(const SourceType type, const VeQItemMqttProducer::ConnectionState backendConnectionState);
-	void setState(const SourceType type, const bool connected);
+
+	void loadConfiguration();
 
 	SourceType type() const;
-	void setType(const SourceType type);
+	void setType(SourceType type, const QString &address = QString());
 
 Q_SIGNALS:
 	void stateChanged();
@@ -51,9 +52,23 @@ Q_SIGNALS:
 
 private:
 	explicit BackendConnection(QObject *parent = nullptr);
-	void setState(const State backendConnectionState);
+	void setState(State backendConnectionState);
+	void setState(VeQItemMqttProducer::ConnectionState backendConnectionState);
+	void setState(bool connected);
+
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
+	void initDBusConnection(const QString &address);
+#endif
+	void initMqttConnection(const QString &address);
+
 	State m_state = BackendConnection::State::Idle;
 	SourceType m_type = UnknownSource;
+
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
+	VeQItemDbusProducer *m_dbusProducer = nullptr;
+	AlarmBusitem *m_alarmBusItem = nullptr;
+#endif
+	VeQItemMqttProducer *m_mqttProducer = nullptr;
 };
 
 }
