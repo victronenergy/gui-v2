@@ -21,7 +21,7 @@ Page {
 	function getState()
 	{
 		if (generatorState.value === 10) {
-			return Global.commonWords.error
+			return CommonWords.error
 		}
 
 		switch(activeCondition.value) {
@@ -53,7 +53,7 @@ Page {
 			//% "Manually started"
 			return qsTrId("settings_manually_started")
 		default:
-			return Global.commonWords.stopped
+			return CommonWords.stopped
 		}
 	}
 
@@ -94,15 +94,15 @@ Page {
 		SettingsListTextItem {
 			id: state
 
-			text: Global.commonWords.state
+			text: CommonWords.state
 			secondaryText: activeCondition.valid ? getState() : '---'
 			enabled: false
 		}
 
 		SettingsListRadioButtonGroup {
-			text: Global.commonWords.error
+			text: CommonWords.error
 			model: [
-				{ display: Global.commonWords.no_error, value: 0 },
+				{ display: CommonWords.no_error, value: 0 },
 				//% "Remote switch control disabled"
 				{ display: qsTrId("settings_remote_switch_control_disabled"), value: 1 },
 				//% "Generator in fault condition"

@@ -80,7 +80,7 @@ Page {
 			}
 
 			GeneratorCondition {
-				text: Global.commonWords.battery_voltage
+				text: CommonWords.battery_voltage
 				bindPrefix: root.bindPrefix + "/BatteryVoltage"
 				startValueIsGreater: false
 				unit: "V"

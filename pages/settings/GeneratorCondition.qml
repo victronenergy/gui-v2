@@ -38,7 +38,7 @@ SettingsListNavigationItem {
 	// Autocalculate step size based on number of decimals
 	readonly property real stepSize: Math.pow(10, -decimals)
 
-	secondaryText: dataPoint.value === 1 ? Global.commonWords.enabled : Global.commonWords.disabled
+	secondaryText: dataPoint.value === 1 ? CommonWords.enabled : CommonWords.disabled
 	onClicked: Global.pageManager.pushPage(subpage)
 
 	DataPoint {
@@ -75,7 +75,7 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: quietHoursStartValue
-						text: Global.commonWords.start_value_during_quiet_hours
+						text: CommonWords.start_value_during_quiet_hours
 						visible: valid
 						source: bindPrefix + "/QuietHoursStartValue"
 						suffix: root.unit
@@ -86,7 +86,7 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: startTime
-						text: Global.commonWords.start_after_the_condition_is_reached_for
+						text: CommonWords.start_after_the_condition_is_reached_for
 						visible: valid
 						source: bindPrefix + "/StartTimer"
 						suffix: root.timeUnit
@@ -105,7 +105,7 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: quietHoursStopValue
-						text: Global.commonWords.stop_value_during_quiet_hours
+						text: CommonWords.stop_value_during_quiet_hours
 						visible: valid
 						source: bindPrefix + "/QuietHoursStopValue"
 						suffix: root.unit
@@ -116,7 +116,7 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: stopTime
-						text: Global.commonWords.stop_after_the_condition_is_reached_for
+						text: CommonWords.stop_after_the_condition_is_reached_for
 						visible: valid
 						source: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit

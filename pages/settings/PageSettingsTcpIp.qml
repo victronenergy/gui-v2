@@ -111,7 +111,7 @@ Page {
 		id: disconnectedModel
 
 		SettingsListTextItem {
-			text: Global.commonWords.state
+			text: CommonWords.state
 			secondaryText: root._wifi
 					 //% "Connection lost"
 					? qsTrId("settings_tcpip_connection_lost")
@@ -124,7 +124,7 @@ Page {
 		id: connectedModel
 
 		SettingsListTextItem {
-			text: Global.commonWords.state
+			text: CommonWords.state
 			secondaryText: Utils.connmanServiceState(root.service)
 		}
 

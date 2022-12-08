@@ -120,6 +120,8 @@ void registerQmlTypes()
 		&Victron::VenusOS::Enums::instance);
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
 		"Victron.VenusOS", 2, 0, "VenusFont");
+	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/CommonWords.qml")),
+		"Victron.VenusOS", 2, 0, "CommonWords");
 	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/Global.qml")),
 		"Victron.VenusOS", 2, 0, "Global");
 	qmlRegisterSingletonType<Victron::VenusOS::ActiveNotificationsModel>(
@@ -188,8 +190,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularSingleGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularSingleGauge");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CommonWords.qml")),
-		"Victron.VenusOS", 2, 0, "CommonWords");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlCard.qml")),
 		"Victron.VenusOS", 2, 0, "ControlCard");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlValue.qml")),
