@@ -71,7 +71,7 @@ SettingsListNavigationItem {
 			//% "%1 %2 (%3 or %4%)"
 			return qsTrId("cgwacs_battery_schedule_format_soc").arg(day).arg(start).arg(durationSecs).arg("" + socLimit.value)
 		}
-		return Global.commonWords.disabled
+		return CommonWords.disabled
 	}
 
 	//% "Schedule %1"
@@ -113,7 +113,7 @@ SettingsListNavigationItem {
 					SettingsListSwitch {
 						id: itemEnabled
 
-						text: Global.commonWords.enabled
+						text: CommonWords.enabled
 						checked: itemDay.valid && itemDay.value >= 0
 						onCheckedChanged: {
 							if (checked ^ itemDay.value >= 0) {

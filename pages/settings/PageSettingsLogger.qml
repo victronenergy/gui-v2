@@ -20,8 +20,8 @@ Page {
 				text: qsTrId("settings_logging_enabled")
 				source: "com.victronenergy.settings/Settings/Vrmlogger/Logmode"
 				model: [
-					{ display: Global.commonWords.disabled, value: 0 },
-					{ display: Global.commonWords.enabled,	value: 1 },
+					{ display: CommonWords.disabled, value: 0 },
+					{ display: CommonWords.enabled,	value: 1 },
 				]
 			}
 
@@ -85,7 +85,7 @@ Page {
 				function stringForErrorCode(errorCode) {
 					switch (errorCode) {
 					case 0:
-						return Global.commonWords.no_error
+						return CommonWords.no_error
 					case 150:
 						//% "#150 Unexpected response text"
 						return qsTrId("settings_connection_error_150")
@@ -171,7 +171,7 @@ Page {
 			}
 
 			SettingsListRadioButtonGroup {
-				text: Global.commonWords.error
+				text: CommonWords.error
 				//% "Unknown error"
 				defaultSecondaryText: qsTrId("settings_vrm_unknown_error")
 				model: [

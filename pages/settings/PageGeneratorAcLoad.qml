@@ -81,7 +81,7 @@ Page {
 
 			SettingsListSpinBox {
 				id: startTime
-				text: Global.commonWords.start_after_the_condition_is_reached_for
+				text: CommonWords.start_after_the_condition_is_reached_for
 				visible: valid
 				source: bindPrefix + "/StartTimer"
 				suffix: "s"
@@ -115,7 +115,7 @@ Page {
 
 			SettingsListSpinBox {
 				id: stopTime
-				text: Global.commonWords.stop_after_the_condition_is_reached_for
+				text: CommonWords.stop_after_the_condition_is_reached_for
 				visible: valid
 				source: bindPrefix + "/StopTimer"
 				suffix: "s"

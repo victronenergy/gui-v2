@@ -94,8 +94,8 @@ Page {
 				visible: root._isGrid || root._isShore
 				source: "com.victronenergy.settings/Settings/Alarm/System/GridLost"
 				model: [
-					{ display: Global.commonWords.disabled, value: 0 },
-					{ display: Global.commonWords.enabled, value: 1 },
+					{ display: CommonWords.disabled, value: 0 },
+					{ display: CommonWords.enabled, value: 1 },
 				]
 			}
 
