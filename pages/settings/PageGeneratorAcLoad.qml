@@ -38,7 +38,6 @@ Page {
 				//% "Use AC Load to start/stop"
 				text: qsTrId("page_generator_ac_load_use_ac_load")
 				source: bindPrefix + "/Enabled"
-				enabled: valid
 			}
 
 			SettingsListRadioButtonGroup {
