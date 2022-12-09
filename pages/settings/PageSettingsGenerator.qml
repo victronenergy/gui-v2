@@ -22,6 +22,13 @@ Page {
 				text: qsTrId("page_settings_generator_conditions")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorConditions.qml", { title: text, bindPrefix: root.settingsBindPrefix })
 			}
+			// TODO: "Minimum run time"
+			// TODO: "Detect generator at AC input"
+			// TODO: "Quiet hours"
+			// TODO: "Quiet hours start time"
+			// TODO: "Quiet hours end time"
+			// TODO: "Reset daily run time counters"
+			// TODO: "Generator total run time (hours)"
 		}
 	}
 }
