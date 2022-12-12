@@ -92,9 +92,9 @@ Page {
 				const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
 						+ Global.dcInputs.model.count
 				if (totalInputs <= 1) {
-					if (Global.acInputs.connectedInput !== null) {
+					if (Global.acInputs.connectedInput != null) {
 						return VenusOS.acInputIcon(Global.acInputs.connectedInput.source)
-					} else if (Global.acInputs.generatorInput !== null) {
+					} else if (Global.acInputs.generatorInput != null) {
 						return VenusOS.acInputIcon(Global.acInputs.generatorInput.source)
 					} else if (Global.dcInputs.model.count > 0) {
 						return VenusOS.dcInputIcon(Global.dcInputs.model.get(0).source)
