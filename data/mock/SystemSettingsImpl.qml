@@ -21,11 +21,11 @@ QtObject {
 	}
 
 	function setMockGenerator0Value(key, value) {
-		Global.demoManager.mockDataValues["com.victronenergy.settings/Settings/Generator0/" + key] = value
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.settings/Settings/Generator0/" + key] = value
 	}
 
 	function setMockGeneratorStartStopValue(key, value) {
-		Global.demoManager.mockDataValues["com.victronenergy.generator.startstop0/" + key] = value
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.generator.startstop0/" + key] = value
 	}
 
 	Component.onCompleted: {
