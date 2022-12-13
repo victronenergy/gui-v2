@@ -306,6 +306,7 @@ public:
 	};
 	Q_ENUM(PageSettingsLogger_MountState)
 
+<<<<<<< HEAD
 	enum CanBusProfile_Type {
 		CanBusProfile_Disabled,
 		CanBusProfile_Vecan,
@@ -324,6 +325,21 @@ public:
 	};
 	Q_ENUM(CanBusConfig_Type)
 
+	enum Relay_Function {
+		Relay_Function_Alarm = 0,
+		Relay_Function_GeneratorStartStop,
+		Relay_Function_Manual,
+		Relay_Function_Tank_Pump,
+		Relay_Function_Temperature
+	};
+	Q_ENUM(Relay_Function)
+
+	enum Temperature_DeviceType {
+		Temperature_DeviceType_Battery = 0,
+		Temperature_DeviceType_Fridge,
+		Temperature_DeviceType_Generic
+	};
+	Q_ENUM(Temperature_DeviceType)
 
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);

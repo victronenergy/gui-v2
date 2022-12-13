@@ -70,14 +70,20 @@ Page {
 					: "/pages/settings/PageSettingsWifi.qml"
 			},
 			{
+				//% "Generator start/stop"
+				text: qsTrId("settings_generator_start_stop"),
+				page: "/pages/settings/PageRelayGenerator.qml"
+			},
+			{
 				//% "Tank pump"
 				text: qsTrId("settings_tank_pump"),
 				page: "/pages/settings/PageSettingsTankPump.qml"
 			},
 			{
-				//% "Generator start/stop"
-				text: qsTrId("settings_generator_start_stop"),
-				page: "/pages/settings/PageRelayGenerator.qml"
+				//% "Relay"
+				text: qsTrId("settings_relay"),
+				page: "/pages/settings/PageSettingsRelay.qml",
+				visible: relay0.valid
 			},
 			{
 				//% "Services"
@@ -107,5 +113,10 @@ Page {
 	DataPoint {
 		id: accessPoint
 		source: "com.victronenergy.platform/Services/AccessPoint/Enabled"
+	}
+
+	DataPoint {
+		id: relay0
+		source: "com.victronenergy.system/Relay/0/State"
 	}
 }
