@@ -314,6 +314,10 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "SettingsListTimeSelector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsSlider.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsSlider");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/TemperatureRelayNavigationItem.qml")),
+		"Victron.VenusOS", 2, 0, "TemperatureRelayNavigationItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/TemperatureRelaySettings.qml")),
+		"Victron.VenusOS", 2, 0, "TemperatureRelaySettings");
 
 	/* widgets */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/OverviewWidget.qml")),

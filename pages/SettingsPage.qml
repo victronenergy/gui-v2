@@ -80,6 +80,12 @@ Page {
 				page: "/pages/settings/PageRelayGenerator.qml"
 			},
 			{
+				//% "Relay"
+				text: qsTrId("settings_relay"),
+				page: "/pages/settings/PageSettingsRelay.qml",
+				visible: relay0.valid
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"
@@ -102,5 +108,10 @@ Page {
 	DataPoint {
 		id: accessPoint
 		source: "com.victronenergy.platform/Services/AccessPoint/Enabled"
+	}
+
+	DataPoint {
+		id: relay0
+		source: "com.victronenergy.system/Relay/0/State"
 	}
 }

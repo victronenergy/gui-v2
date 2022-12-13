@@ -136,7 +136,6 @@ QtObject {
 		setMockSettingValue("Devices/cgwacs_5_S/Position", 1)
 		setMockSettingValue("Devices/cgwacs_6_S/Position", 2)
 
-		setMockSettingValue("Relay/Function", 3)
 		setMockPumpValue("State", 0)
 		setMockSettingValue("Pump0/Mode", 2)
 		setMockPumpValue("AvailableTankServices", "{'notanksensor': No tank sensor}")
@@ -157,6 +156,12 @@ QtObject {
 		setMockGenerator0Value('StopWhenAc1Available', 0)
 		setMockGenerator0Value('Soc', 1)
 
+		setMockSettingValue("Relay/Function", 0) // Alarm
+		setMockSettingValue("Relay/Polarity", 0)
+		setMockSettingValue("Relay/1/Function", 4) // Temperature
+		setMockSettingValue("Relay/1/Polarity", 0)
+		setMockSystemValue("Relay/0/State", 1)
+		setMockSystemValue("Relay/1/State", 1)
 	}
 
 	property Connections briefSettingsConn: Connections {

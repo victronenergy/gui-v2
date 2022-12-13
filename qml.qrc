@@ -35,6 +35,8 @@
         <file>components/settings/SettingsListTextGroup.qml</file>
         <file>components/settings/SettingsListTimeSelector.qml</file>
         <file>components/settings/SettingsSlider.qml</file>
+        <file>components/settings/TemperatureRelayNavigationItem.qml</file>
+        <file>components/settings/TemperatureRelaySettings.qml</file>
         <file>components/widgets/AcInputWidget.qml</file>
         <file>components/widgets/DcInputWidget.qml</file>
         <file>components/widgets/OverviewWidget.qml</file>
@@ -205,6 +207,8 @@
         <file>pages/settings/PageSettingsHub4Feedin.qml</file>
         <file>pages/settings/PageSettingsLogger.qml</file>
         <file>pages/settings/PageSettingsRemoteConsole.qml</file>
+        <file>pages/settings/PageSettingsRelay.qml</file>
+        <file>pages/settings/PageSettingsRelayTempSensors.qml</file>
         <file>pages/settings/PageSettingsSystem.qml</file>
         <file>pages/settings/PageSettingsSystemStatus.qml</file>
         <file>pages/settings/PageSettingsTankPump.qml</file>
