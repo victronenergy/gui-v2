@@ -10,41 +10,16 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var _relays: []
-
-	function _getRelays() {
-		let relayIds = []
-		for (let i = 0; i < veRelay.count; ++i) {
-			const uid = veRelay.objectAt(i).uid
-			const id = uid.substring(uid.lastIndexOf('/') + 1)
-			if (!isNaN(parseInt(id))) {
-				relayIds.push(uid)
-			}
-		}
-		if (Utils.arrayCompare(_relays, relayIds) !== 0) {
-			_relays = relayIds
-		}
-	}
-
-	property Instantiator veRelay:  Instantiator {
+	property Instantiator relayObjects: Instantiator {
 		model: VeQItemTableModel {
 			uids: ["dbus/com.victronenergy.system/Relay"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
 		delegate: QtObject {
-			property var uid: model.uid
-		}
-
-		onCountChanged: Qt.callLater(root._getRelays)
-	}
-
-	property Instantiator relayObjects: Instantiator {
-		model: _relays
-		delegate: QtObject {
 			id: relay
 
-			property string uid: modelData
+			property string uid: model.uid
 			property int state: -1
 
 			function setState(newState) {
