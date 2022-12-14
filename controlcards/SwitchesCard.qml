@@ -23,9 +23,7 @@ ControlCard {
 			bottom: parent.bottom
 		}
 		delegate: SwitchControlValue {
-			//: Relay number
-			//% "Relay %1"
-			label.text: qsTrId("controlcard_relay_name").arg(model.index + 1)
+			label.text: model.relay.name
 			button.checked: model.relay.state === VenusOS.Relays_State_Active
 			onClicked: {
 				var newState = model.relay.state === VenusOS.Relays_State_Active
