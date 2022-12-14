@@ -19,8 +19,10 @@ QtObject {
 		delegate: QtObject {
 			id: relay
 
-			property string uid: model.uid
-			property int state: -1
+			readonly property string uid: model.uid
+			readonly property int state: _state.value === undefined ? -1 : _state.value
+			readonly property int relayFunction: _relayFunction.value === undefined ? -1 : _relayFunction.value
+			readonly property string name: Global.relays.relayName(model.index)
 
 			function setState(newState) {
 				_state.setValue(newState)
@@ -36,9 +38,18 @@ QtObject {
 				}
 			}
 
+			onRelayFunctionChanged: {
+				Global.relays.relayFunctionChanged(relay)
+			}
+
 			property VeQuickItem _state: VeQuickItem {
 				uid: relay.uid + "/State"
-				onValueChanged: relay.state = value === undefined ? -1 : value
+			}
+
+			property VeQuickItem _relayFunction: VeQuickItem {
+				uid: model.index === 0
+					 ? "mqtt/settings/0/Settings/Relay/Function"
+					 : "mqtt/settings/0/Settings/Relay/%1/Function".arg(model.index)
 			}
 		}
 	}
