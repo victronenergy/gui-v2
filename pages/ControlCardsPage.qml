@@ -106,8 +106,9 @@ Page {
 			}
 
 			SwitchesCard {
-				width: root.cardWidth
-				model: Global.relays.model
+				width: visible ? root.cardWidth : 0
+				model: Global.relays.manualRelays
+				visible: model.count > 0
 			}
 		}
 	}

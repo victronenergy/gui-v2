@@ -306,7 +306,6 @@ public:
 	};
 	Q_ENUM(PageSettingsLogger_MountState)
 
-<<<<<<< HEAD
 	enum CanBusProfile_Type {
 		CanBusProfile_Disabled,
 		CanBusProfile_Vecan,
