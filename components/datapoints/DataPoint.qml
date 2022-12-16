@@ -84,7 +84,7 @@ QtObject {
 			sourceObject.destroy()
 			sourceObject = null
 		}
-		sourceObject = _mqttImpl.createObject(root, { uid: _mqttUidHelper.mqttUid })
+		sourceObject = _mqttImpl.createObject(root, { uid: Qt.binding(function() { return _mqttUidHelper.mqttUid }) })
 		if (!sourceObject) {
 			console.warn("Failed to create object from DataPointMqttImpl.qml", _mqttImpl.errorString())
 			return

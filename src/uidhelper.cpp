@@ -9,17 +9,44 @@ UidHelper::UidHelper(QObject *parent)
 {
 }
 
-void UidHelper::setActiveTopics(const QSet<QString> &topics)
+QHash<QString, QString> UidHelper::serviceNamesToPaths() const
 {
-	if (m_activeTopics != topics) {
-		m_activeTopics = topics;
-		emit activeTopicsChanged();
+	return m_serviceNamesToPaths;
+}
+
+void UidHelper::setServiceNamesToPaths(const QHash<QString, QString> &hash)
+{
+	if (m_serviceNamesToPaths != hash) {
+		m_serviceNamesToPaths = hash;
+		emit serviceNamesToPathsChanged();
 	}
 }
 
-QSet<QString> UidHelper::activeTopics() const
+void UidHelper::onMessageReceived(const QString &path, const QVariant &message)
 {
-	return m_activeTopics;
+	static const QString serviceNameSuffix(QStringLiteral("/ServiceName"));
+	if (path.endsWith(serviceNameSuffix)) {
+		const QString serviceName = message.toString();
+		m_pathToServiceName.insert(path, serviceName);
+		const QString devicePath = path.mid(0, path.length() - (serviceNameSuffix.length()-1));
+		m_serviceNamesToPaths.insert(serviceName, devicePath);
+		Q_EMIT pathForServiceNameChanged(serviceName, devicePath);
+	}
+}
+
+void UidHelper::onNullMessageReceived(const QString &path)
+{
+	if (m_pathToServiceName.contains(path)) {
+		const QString serviceName = m_pathToServiceName.value(path);
+		m_pathToServiceName.remove(path);
+		m_serviceNamesToPaths.remove(serviceName);
+		Q_EMIT pathForServiceNameChanged(serviceName, QString());
+	}
+}
+
+QString UidHelper::pathForServiceName(const QString &serviceName) const
+{
+	return m_serviceNamesToPaths.value(serviceName);
 }
 
 UidHelper* UidHelper::instance(QQmlEngine *, QJSEngine *)
@@ -36,24 +63,60 @@ SingleUidHelper::SingleUidHelper(QObject *parent)
 	, m_uidHelper(UidHelper::instance())
 {
 	if (m_uidHelper.data()) {
-		connect(m_uidHelper.data(), &UidHelper::activeTopicsChanged,
-				this, &SingleUidHelper::recalculateMqttUid);
+		connect(m_uidHelper.data(), &UidHelper::pathForServiceNameChanged,
+				this, &SingleUidHelper::onPathForServiceNameChanged);
 	}
 }
 
 void SingleUidHelper::setDBusUid(const QString &uid)
 {
+	if (uid.isEmpty()) {
+		m_dbusUid = uid;
+		m_mqttUid.clear();
+		Q_EMIT mqttUidChanged();
+		Q_EMIT dbusUidChanged();
+		return;
+	}
+
+	// the dbus uid will be of the form:
+	// "dbus/<service>/<path>"
+	// whereas the mqtt uid will be of the form:
+	// "mqtt/<service>/<deviceInstance>/<path>"
 	if (m_dbusUid != uid) {
 		m_dbusUid = uid;
 
-		if (uid.isEmpty()) {
-			m_mqttUid.clear();
-			m_uidIsFallback = true;
-			emit mqttUidChanged();
-		} else {
-			recalculateMqttUid();
+		// calculate the MQTT device path based on the service name
+		const QStringList parts = m_dbusUid.split('/');
+		if (parts.length() < 2) {
+			qWarning() << "Malformed DBus uid, no service name:" << uid;
+			Q_EMIT dbusUidChanged();
+			return;
 		}
-		emit dbusUidChanged();
+
+		const QString prefix = QStringLiteral("%1/%2").arg(parts[0], parts[1]);
+		m_remainderPath = uid.mid(prefix.length() + 1);
+		m_serviceName = parts[1];
+		m_mqttDevicePath = m_uidHelper.data()->pathForServiceName(m_serviceName);
+		if (m_mqttDevicePath.endsWith(QChar('/'))) {
+			m_mqttDevicePath.chop(1);
+		}
+		if (m_mqttDevicePath.isEmpty() || m_mqttDevicePath.startsWith(QStringLiteral("modbustcp"))) {
+			// try to guess it.  we will receive a signal from the provider, later.
+			const QStringList dotParts = parts[1].split('.');
+			if (dotParts.size() == 3) {
+				// the guess should succeed, as it's of the form com.victronenergy.xyz
+				// rather than of the form com.victronenergy.xyz.abc
+				m_mqttDevicePath = QStringLiteral("%1/0").arg(dotParts[2]);
+			}
+		}
+		if (!m_mqttDevicePath.isEmpty()) {
+			// we are able to construct an MQTT uid that we're confident is correct.
+			m_mqttUid = QStringLiteral("%1/%2/%3").arg(QStringLiteral("mqtt"), m_mqttDevicePath, m_remainderPath);
+			Q_EMIT dbusUidChanged();
+			Q_EMIT mqttUidChanged();
+		} else {
+			Q_EMIT dbusUidChanged();
+		}
 	}
 }
 
@@ -67,59 +130,12 @@ QString SingleUidHelper::mqttUid() const
 	return m_mqttUid;
 }
 
-void SingleUidHelper::recalculateMqttUid()
+void SingleUidHelper::onPathForServiceNameChanged(const QString &serviceName, const QString &path)
 {
-	// the dbus uid will be of the form:
-	// "dbus/com.victronenergy.<service>/<path>"
-	// whereas the mqtt uid will be of the form:
-	// "mqtt/<service>/<deviceId>/<path>"
-
-	// step one, decompose the dbus uid into <service> + <path>
-	static const qsizetype dbusUidPrefixLength = QStringLiteral("dbus/com.victronenergy.").size();
-	QString dbusServiceAndPath = m_dbusUid.mid(dbusUidPrefixLength);
-	if (dbusServiceAndPath.startsWith("generator.startstop0")) {
-		dbusServiceAndPath.remove(".startstop0"); // TODO: handle multiple generators
-	}
-	const QString dbusService = dbusServiceAndPath.indexOf('/') > 0 ? dbusServiceAndPath.split('/').first() : QString();
-	const QString dbusPath = dbusServiceAndPath.mid(dbusService.size() + 1);
-
-	if (dbusService.isEmpty() || dbusPath.isEmpty()) {
-		qWarning() << "Invalid DBus uid specified: " << m_dbusUid;
-		return;
-	}
-
-	// step two, look for any active topics which match
-	QSet<QString> matchingTopics;
-	QString smallestMatchingTopic;
-	const QSet<QString> activeTopics = m_uidHelper.data() ? m_uidHelper->activeTopics() : QSet<QString>();
-	for (const QString &topic : activeTopics) {
-		// each active topic is of the form <service>/<deviceId>/<path>
-		if (topic.startsWith(dbusService) && (topic.endsWith(dbusPath) || topic.endsWith(QStringLiteral("%1/").arg(dbusPath)))) {
-			matchingTopics.insert(topic);
-			if (smallestMatchingTopic.isEmpty() || (topic.size() < smallestMatchingTopic.size())) {
-				smallestMatchingTopic = topic;
-			}
-		}
-	}
-
-	// step three, build a fallback uid with a "default assumption" of deviceId = 0.
-	const QString fallbackUid = QStringLiteral("mqtt/%1/0/%2").arg(dbusService, dbusPath);
-
-	// step four, check to see if the "new" uid differs from the "old" uid and update if necessary.
-	// -> if the old uid was a fallback or empty, and we have a matching new topic, use that new one.
-	// -> if the old uid was empty, and we have no matching new topic, use the fallback.
-	// -> otherwise, keep the old uid as the one we use.
-	// TODO: what about the case where: the old uid was not a fallback, but it no longer exists in the matching topics?
-	const bool hasMatchingTopic = !smallestMatchingTopic.isEmpty();
-	if (m_uidIsFallback && hasMatchingTopic) {
-		m_mqttUid = QStringLiteral("mqtt/%1").arg(smallestMatchingTopic);
-		m_uidIsFallback = false;
-//qWarning() << "XXXXXXXXXXXXXXXXX calculated mqtt uid:" << m_mqttUid << "from dbus service: " << dbusService << ", path: " << dbusPath << "; matches: " << matchingTopics;
-		emit mqttUidChanged();
-	} else if (m_mqttUid.isEmpty()) {
-		m_mqttUid = fallbackUid;
-//qWarning() << "XXXXXXXXXXXXXXXXX fallback mqtt uid:" << m_mqttUid << "from dbus service: " << dbusService << ", path: " << dbusPath;
-		emit mqttUidChanged();
+	if (m_serviceName == serviceName && !path.startsWith(QStringLiteral("modbustcp"))) {
+		m_mqttDevicePath = path;
+		m_mqttUid = QStringLiteral("%1/%2/%3").arg(QStringLiteral("mqtt"), m_mqttDevicePath, m_remainderPath);
+		Q_EMIT mqttUidChanged();
 	}
 }
 
