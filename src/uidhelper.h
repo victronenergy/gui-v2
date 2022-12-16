@@ -8,6 +8,7 @@
 #include <QtCore/QPointer>
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QHash>
 #include <QtCore/QSet>
 
 #include <QtQml/QQmlEngine>
@@ -20,21 +21,28 @@ namespace VenusOS {
 class UidHelper : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QSet<QString> activeTopics READ activeTopics NOTIFY activeTopicsChanged)
+	Q_PROPERTY(QHash<QString, QString> serviceNamesToPaths READ serviceNamesToPaths WRITE setServiceNamesToPaths NOTIFY serviceNamesToPathsChanged)
 
 public:
-	void setActiveTopics(const QSet<QString> &topics);
-	QSet<QString> activeTopics() const;
+	QHash<QString, QString> serviceNamesToPaths() const;
+	void setServiceNamesToPaths(const QHash<QString, QString> &hash);
+	Q_INVOKABLE QString pathForServiceName(const QString &serviceName) const;
 
 	static UidHelper* instance(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 Q_SIGNALS:
-	void activeTopicsChanged();
+	void serviceNamesToPathsChanged();
+	void pathForServiceNameChanged(const QString &serviceName, const QString &path);
+
+public Q_SLOTS:
+	void onMessageReceived(const QString &path, const QVariant &message);
+	void onNullMessageReceived(const QString &path);
 
 private:
 	UidHelper(QObject *parent = nullptr);
 
-	QSet<QString> m_activeTopics;
+	QHash<QString, QString> m_serviceNamesToPaths;
+	QHash<QString, QString> m_pathToServiceName;
 };
 
 class SingleUidHelper : public QObject
@@ -52,7 +60,7 @@ public:
 	QString mqttUid() const;
 
 public Q_SLOTS:
-	void recalculateMqttUid(); // triggered by activeTopicsChanged() and dbusUidChanged()
+	void onPathForServiceNameChanged(const QString &serviceName, const QString &path);
 
 Q_SIGNALS:
 	void dbusUidChanged();
@@ -62,7 +70,9 @@ private:
 	QPointer<UidHelper> m_uidHelper;
 	QString m_dbusUid;
 	QString m_mqttUid;
-	bool m_uidIsFallback = true;
+	QString m_serviceName;
+	QString m_mqttDevicePath;
+	QString m_remainderPath;
 };
 
 } /* VenusOS */

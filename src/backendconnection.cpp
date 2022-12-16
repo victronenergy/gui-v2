@@ -170,9 +170,11 @@ void BackendConnection::initMqttConnection(const QString &address)
 	}
 
 	m_mqttProducer = new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt");
-	connect(m_mqttProducer, &VeQItemMqttProducer::activeTopicsChanged, UidHelper::instance(), [=] {
-		UidHelper::instance()->setActiveTopics(m_mqttProducer->activeTopics());
-	});
+	m_uidHelper = UidHelper::instance();
+	connect(m_mqttProducer, &VeQItemMqttProducer::messageReceived,
+		m_uidHelper, &UidHelper::onMessageReceived);
+	connect(m_mqttProducer, &VeQItemMqttProducer::nullMessageReceived,
+		m_uidHelper, &UidHelper::onNullMessageReceived);
 	connect(m_mqttProducer, &VeQItemMqttProducer::connectionStateChanged, this, [=] {
 		setState(m_mqttProducer->connectionState());
 	});
