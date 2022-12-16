@@ -45,7 +45,14 @@ void SingleUidHelper::setDBusUid(const QString &uid)
 {
 	if (m_dbusUid != uid) {
 		m_dbusUid = uid;
-		recalculateMqttUid();
+
+		if (uid.isEmpty()) {
+			m_mqttUid.clear();
+			m_uidIsFallback = true;
+			emit mqttUidChanged();
+		} else {
+			recalculateMqttUid();
+		}
 		emit dbusUidChanged();
 	}
 }

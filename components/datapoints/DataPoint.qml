@@ -25,7 +25,7 @@ QtObject {
 	property SingleUidHelper _mqttUidHelper
 	property Component _mqttUidHelperComponent: Component {
 		SingleUidHelper {
-			dbusUid: "dbus/" + root.source
+			dbusUid: root.source ? "dbus/" + root.source : ""
 		}
 	}
 
@@ -107,7 +107,7 @@ QtObject {
 			break
 		case BackendConnection.MqttSource:
 			if (!_mqttImpl) {
-				_mqttUidHelper = _mqttUidHelperComponent.createObject()
+				_mqttUidHelper = _mqttUidHelperComponent.createObject(root)
 				_mqttImpl = Qt.createComponent(Qt.resolvedUrl("DataPointMqttImpl.qml"),
 						Component.Asynchronous)
 				_mqttImpl.statusChanged.connect(_mqttImplStatusChanged)
@@ -125,6 +125,7 @@ QtObject {
 		}
 	}
 
+	onSourceChanged: _reset()
 	onSourceTypeChanged: _reset()
 	Component.onCompleted: _reset()
 	Component.onDestruction: {
