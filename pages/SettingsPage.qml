@@ -80,6 +80,11 @@ Page {
 				page: "/pages/settings/PageRelayGenerator.qml"
 			},
 			{
+				//% "Services"
+				text: qsTrId("settings_services"),
+				page: "/pages/settings/PageSettingsServices.qml"
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"

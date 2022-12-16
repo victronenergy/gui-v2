@@ -16,7 +16,7 @@ SettingsListButton {
 	property string suffix
 	property int decimals
 	property int from: dataPoint.hasMin ? dataPoint.min || 0 : 0
-	property int to: dataPoint.hasMax ? dataPoint.max || 100 : 100
+	property int to: dataPoint.hasMax ? dataPoint.max || 1000 : 1000
 	property real stepSize: 1
 	readonly property alias valid: dataPoint.valid
 
@@ -24,6 +24,7 @@ SettingsListButton {
 
 	signal maxValueReached()
 	signal minValueReached()
+	signal selectorAccepted(newValue: var)
 
 	button.text: value === undefined ? "--" : Utils.toFloat(value, decimals) + root.suffix
 	enabled: source === "" || dataPoint.valid
@@ -54,6 +55,7 @@ SettingsListButton {
 				} else {
 					root.value = value
 				}
+				root.selectorAccepted(value)
 			}
 			onMinValueReached: root.minValueReached()
 			onMaxValueReached: root.maxValueReached()

@@ -306,6 +306,25 @@ public:
 	};
 	Q_ENUM(PageSettingsLogger_MountState)
 
+	enum CanBusProfile_Type {
+		CanBusProfile_Disabled,
+		CanBusProfile_Vecan,
+		CanBusProfile_VecanAndCanBms,
+		CanBusProfile_CanBms500,
+		CanBusProfile_Oceanvolt,
+		CanBusProfile_None250,
+		CanBusProfile_RvC
+	};
+	Q_ENUM(CanBusProfile_Type)
+
+	enum CanBusConfig_Type {
+		CanBusConfig_AnyBus,
+		CanBusConfig_ForcedCanBusBms,
+		CanBusConfig_ForcedVeCan
+	};
+	Q_ENUM(CanBusConfig_Type)
+
+
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };
