@@ -186,12 +186,14 @@
         <file>pages/settings/DvccCommonSettings.qml</file>
         <file>pages/settings/GeneratorCondition.qml</file>
         <file>pages/settings/PageGeneratorConditions.qml</file>
+        <file>pages/settings/PageCanbusStatus.qml</file>
         <file>pages/settings/PageChargeCurrentLimits.qml</file>
         <file>pages/settings/PageGenerator.qml</file>
         <file>pages/settings/PageGeneratorAcLoad.qml</file>
         <file>pages/settings/PageHub4Debug.qml</file>
         <file>pages/settings/PageRelayGenerator.qml</file>
         <file>pages/settings/PageSettingsBatteries.qml</file>
+        <file>pages/settings/PageSettingsCanbus.qml</file>
         <file>pages/settings/PageSettingsCGwacs.qml</file>
         <file>pages/settings/PageSettingsCGwacsOverview.qml</file>
         <file>pages/settings/PageSettingsDemo.qml</file>
@@ -204,11 +206,16 @@
         <file>pages/settings/PageSettingsHub4.qml</file>
         <file>pages/settings/PageSettingsHub4Feedin.qml</file>
         <file>pages/settings/PageSettingsLogger.qml</file>
+        <file>pages/settings/PageSettingsModbusTcp.qml</file>
+        <file>pages/settings/PageSettingsModbusTcpServices.qml</file>
         <file>pages/settings/PageSettingsRemoteConsole.qml</file>
+        <file>pages/settings/PageSettingsServices.qml</file>
         <file>pages/settings/PageSettingsSystem.qml</file>
         <file>pages/settings/PageSettingsSystemStatus.qml</file>
         <file>pages/settings/PageSettingsTankPump.qml</file>
         <file>pages/settings/PageSettingsTcpIp.qml</file>
+        <file>pages/settings/PageSettingsVecanDevice.qml</file>
+        <file>pages/settings/PageSettingsVecanDevices.qml</file>
         <file>pages/settings/PageSettingsWifi.qml</file>
         <file>pages/settings/PageSettingsWifiWithAccessPoint.qml</file>
         <file>pages/settings/PageTzInfo.qml</file>

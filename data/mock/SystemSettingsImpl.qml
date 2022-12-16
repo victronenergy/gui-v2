@@ -28,6 +28,18 @@ QtObject {
 		Global.mockDataSimulator.mockDataValues["com.victronenergy.generator.startstop0/" + key] = value
 	}
 
+	function setMockModbusTcpValue(key, value) {
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.modbustcp/" + key] = value
+	}
+
+	function setMockPlatformValue(key, value) {
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.platform/" + key] = value
+	}
+
+	function setMockVecanValue(gateway, key, value) {
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.vecan." + gateway + "/" + key] = value
+	}
+
 	Component.onCompleted: {
 		// Settings that are converted for convenient UI access
 		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
@@ -142,6 +154,7 @@ QtObject {
 		setMockPumpValue("AvailableTankServices", "{'notanksensor': No tank sensor}")
 		setMockSettingValue("Pump0/StartValue", 50)
 		setMockSettingValue("Pump0/StopValue", 80)
+
 		setMockGeneratorStartStopValue('State', 'soc')
 		setMockGeneratorStartStopValue('RunningByCondition', 'soc')
 		setMockGeneratorStartStopValue('Error', 1)
@@ -156,6 +169,33 @@ QtObject {
 		setMockGenerator0Value('OnLossCommunication', 2)
 		setMockGenerator0Value('StopWhenAc1Available', 0)
 		setMockGenerator0Value('Soc', 1)
+
+		setMockSettingValue("Services/Modbus", 0)
+		setMockModbusTcpValue("Services/Count", 2)
+		setMockModbusTcpValue("Services/0/ServiceName", "com.victronenergy.battery.ttyUSB0")
+		setMockModbusTcpValue("Services/0/UnitId", 288)
+		setMockModbusTcpValue("Services/1/ServiceName", "com.victronenergy.solarcharger.ttyUSB1")
+		setMockModbusTcpValue("Services/1/UnitId", 289)
+
+		setMockSettingValue("Services/MqttLocal", 0)
+		setMockSettingValue("Services/MqttLocalInsecure", 0)
+		setMockPlatformValue("CanBus/Interfaces", [{'config': 1, 'interface': 'can1', 'name': 'BMS-Can port'}, {'config': 0, 'interface': 'can0', 'name': 'VE.Can port'}])
+		setMockSettingValue("Canbus/can0/Profile", 1)
+		setMockSettingValue("Canbus/can1/Profile", 3)
+		setMockSettingValue("Vecan/can0/N2kGatewayEnabled", 0)
+		setMockSettingValue("Vecan/can0/VenusUniqueId", 1)
+
+		setMockVecanValue("can0", "Devices/0/ModelName", "BlueSolar Charger MPTT 150/70")
+		setMockVecanValue("can0", "Devices/0/CustomName", "Some custom name")
+		setMockVecanValue("can0", "Devices/0/N2kUniqueNumber", 15965)
+		setMockVecanValue("can0", "Devices/0/DeviceInstance", 255)
+		setMockVecanValue("can0", "Devices/0/Manufacturer", "Widgets Inc")
+		setMockVecanValue("can0", "Devices/0/Nad", "161")
+		setMockVecanValue("can0", "Devices/0/FirmwareVersion", "34.2.1")
+		setMockVecanValue("can0", "Devices/0/Serial", "12345")
+
+		// equivalent of "ip -json -details -statistics link show can0" as per vePlatform::canBusStats()
+		Global.systemSettings._canBusStats["can0"] = '[{"ifindex":3,"ifname":"can0","flags":["NOARP","UP","LOWER_UP","ECHO"],"mtu":16,"qdisc":"pfifo_fast","operstate":"UP","linkmode":"DEFAULT","group":"default","txqlen":100,"link_type":"can","promiscuity":0,"min_mtu":0,"max_mtu":0,"linkinfo":{"info_kind":"can","info_data":{"state":"ERROR-PASSIVE","berr_counter":{"tx":0,"rx":135},"restart_ms":100,"bittiming":{"bitrate":250000,"sample_point":0.875,"tq":250,"prop_seg":6,"phase_seg1":7,"phase_seg2":2,"sjw":1},"bittiming_const":{"name":"sun4i_can","tseg1":{"min":1,"max":16},"tseg2":{"min":1,"max":8},"sjw":{"min":1,"max":4},"brp":{"min":1,"max":64},"brp_inc":1},"clock":24000000},"info_xstats":{"restarts":0,"bus_error":2,"arbitration_lost":0,"error_warning":1,"error_passive":1,"bus_off":0}},"num_tx_queues":1,"num_rx_queues":1,"gso_max_size":65536,"gso_max_segs":65535,"stats64":{"rx":{"bytes":16,"packets":2,"errors":2,"dropped":0,"over_errors":0,"multicast":0},"tx":{"bytes":0,"packets":0,"errors":0,"dropped":0,"carrier_errors":0,"collisions":0}}}]'
 
 	}
 
