@@ -56,7 +56,7 @@ Page {
 			SettingsListTextGroup {
 				//% "Battery"
 				text: qsTrId("settings_ess_debug_battery")
-				model: [
+				textModel: [
 					//% "Current: %1"
 					qsTrId("settings_ess_debug_battery_current").arg(batteryCurrent.value || "--"),
 					//% "Voltage: %1"
@@ -77,7 +77,7 @@ Page {
 			SettingsListTextGroup {
 				//% "Limits (I)"
 				text: qsTrId("settings_ess_debug_limits_i")
-				model: [
+				textModel: [
 					//% "Charge: %1"
 					qsTrId("settings_ess_debug_battery_charge").arg(batteryChargeCurrent.value || "--"),
 					//% "Discharge: %1"
@@ -98,7 +98,7 @@ Page {
 			SettingsListTextGroup {
 				//% "Limits (P)"
 				text: qsTrId("settings_ess_debug_limits_p")
-				model: [
+				textModel: [
 					//% "Charge: %1"
 					qsTrId("settings_ess_debug_battery_charge").arg(batteryChargePower.value || "--"),
 					//% "Discharge: %1"
