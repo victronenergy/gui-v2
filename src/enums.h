@@ -340,6 +340,20 @@ public:
 	};
 	Q_ENUM(Temperature_DeviceType)
 
+	enum DigitalInput_Type {
+		DigitalInput_Disabled,
+		DigitalInput_PulseMeter,
+		DigitalInput_DoorAlarm,
+		DigitalInput_BilgePump,
+		DigitalInput_BilgeAlarm,
+		DigitalInput_BurglarAlarm,
+		DigitalInput_SmokeAlarm,
+		DigitalInput_FireAlarm,
+		DigitalInput_CO2Alarm,
+		DigitalInput_Generator
+	};
+	Q_ENUM(DigitalInput_Type)
+
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };
