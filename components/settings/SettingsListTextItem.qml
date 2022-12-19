@@ -12,6 +12,7 @@ SettingsListItem {
 	property alias source: dataPoint.source
 	readonly property alias dataPoint: dataPoint
 
+	enabled: source === "" || dataPoint.valid
 	content.children: [
 		Label {
 			id: secondaryLabel

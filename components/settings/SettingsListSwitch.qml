@@ -35,7 +35,7 @@ SettingsListItem {
 	}
 
 	down: mouseArea.containsPress
-	enabled: dataPoint.valid
+	enabled: source === "" || dataPoint.valid
 
 	content.children: [
 		Label {

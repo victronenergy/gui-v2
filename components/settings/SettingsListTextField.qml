@@ -34,6 +34,7 @@ SettingsListItem {
 				root.ListView ? root.ListView.view : null)
 	}
 
+	enabled: source === "" || dataPoint.valid
 	content.children: [
 		TextField {
 			id: textField

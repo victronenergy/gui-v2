@@ -26,6 +26,7 @@ SettingsListButton {
 	signal minValueReached()
 
 	button.text: value === undefined ? "--" : Utils.toFloat(value, decimals) + root.suffix
+	enabled: source === "" || dataPoint.valid
 
 	onClicked: {
 		if (!_numberSelector) {
