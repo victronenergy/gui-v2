@@ -9,7 +9,7 @@ import Victron.VenusOS
 SettingsListItem {
 	id: root
 
-	property alias model: repeater.model
+	property alias textModel: repeater.model
 
 	enabled: false
 

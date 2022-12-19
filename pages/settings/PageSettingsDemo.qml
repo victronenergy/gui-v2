@@ -74,7 +74,7 @@ Page {
 
 			SettingsListTextGroup {
 				text: "Text groups"
-				model: ["204.07V", "4.7A", "950W"]
+				textModel: ["204.07V", "4.7A", "950W"]
 			}
 
 			SettingsListSlider {

@@ -64,7 +64,7 @@ Page {
 
 			width: parent.width
 			text: "[" + (n2kDeviceInstance.value || 0) + "] " + (customName.value || productName.value || "")
-			model: [ dcCurrentText, maxValueText ]
+			textModel: [ dcCurrentText, maxValueText ]
 
 			DataPoint {
 				id: n2kDeviceInstance
