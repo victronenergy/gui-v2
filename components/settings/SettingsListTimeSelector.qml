@@ -23,6 +23,7 @@ SettingsListButton {
 	property var _timeSelector
 
 	button.text: hour < 0 || minute < 0 ? "--" : ClockTime.formatTime(hour, minute)
+	enabled: source === "" || dataPoint.valid
 
 	onClicked: {
 		if (!_timeSelector) {
