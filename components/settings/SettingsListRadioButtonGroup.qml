@@ -32,6 +32,10 @@ SettingsListNavigationItem {
 		return defaultIndex
 	}
 
+	readonly property var currentValue: currentIndex >= 0 && model.length !== undefined && currentIndex < model.length
+			? model[currentIndex].value
+			: undefined
+
 	property bool updateOnClick: true
 
 	property int defaultIndex: -1
