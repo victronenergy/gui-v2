@@ -13,7 +13,7 @@ SettingsListRadioButtonGroup {
 	source: "com.victronenergy.settings/Settings/System/AccessLevel"
 	writeAccessLevel: VenusOS.User_AccessType_User
 
-	model: [
+	optionModel: [
 		//% "User"
 		{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User },
 		//% "User & Installer"
@@ -39,7 +39,7 @@ SettingsListRadioButtonGroup {
 	}
 
 	onOptionClicked: function(index) {
-		Global.systemSettings.accessLevel.setValue(model[index].value)
+		Global.systemSettings.accessLevel.setValue(optionModel[index].value)
 	}
 
 	// touch version to get super user

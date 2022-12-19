@@ -128,7 +128,7 @@ Page {
 
 							delegate: SettingsListRadioButtonGroup {
 								text: modelData.name
-								model: modelData
+								optionModel: modelData
 								secondaryText: ""
 								writeAccessLevel: VenusOS.User_AccessType_User
 								updateOnClick: false

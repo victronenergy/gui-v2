@@ -46,7 +46,7 @@ Page {
 		SettingsListRadioButtonGroup {
 			//% "Mode"
 			text: qsTrId("settings_pump_mode")
-			model: [
+			optionModel: [
 				//% "Auto"
 				{ display: qsTrId("settings_pump_auto"), value: 0 },
 				{ display: Utils.qsTrIdOnOff(1), value: 1 },

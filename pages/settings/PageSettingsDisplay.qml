@@ -36,7 +36,7 @@ Page {
 				source: "com.victronenergy.settings/Settings/Gui/DisplayOff"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
-				model: [
+				optionModel: [
 					//% "10 sec"
 					{ display: qsTrId("settings_displayoff_10sec"), value: 10 },
 					//% "30 sec"
@@ -56,7 +56,7 @@ Page {
 				//% "Display mode"
 				text: qsTrId("settings_display_color_mode")
 
-				model: [
+				optionModel: [
 					//: Dark colors mode
 					//% "Dark"
 					{ display: qsTrId("settings_display_dark_mode") },
@@ -93,12 +93,12 @@ Page {
 				//% "Language"
 				text: qsTrId("settings_language")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				model: LanguageModel { currentLanguage: Language.current }
-				currentIndex: model.currentIndex
-				secondaryText: model.currentDisplayText
+				optionModel: LanguageModel { currentLanguage: Language.current }
+				currentIndex: optionModel.currentIndex
+				secondaryText: optionModel.currentDisplayText
 
 				onOptionClicked: function(index) {
-					Language.current = model.languageAt(index)
+					Language.current = optionModel.languageAt(index)
 				}
 			}
 

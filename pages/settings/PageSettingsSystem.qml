@@ -34,14 +34,14 @@ Page {
 				//% "Boat"
 				readonly property string systemNameBoat: qsTrId("settings_system_name_boat")
 
-				readonly property int customValueIndex: model.length - 1
+				readonly property int customValueIndex: optionModel.length - 1
 
 				//% "System name"
 				text: qsTrId("settings_system_name")
 				source: "com.victronenergy.settings/Settings/SystemSetup/SystemName"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
-				model: [
+				optionModel: [
 					//% "Automatic"
 					{ display: qsTrId("settings_system_name_auto"), value: "" },
 					{ display: "Hub-1", value: "Hub-1" },
@@ -73,7 +73,7 @@ Page {
 				//% "AC input 1"
 				text: qsTrId("settings_system_ac_input_1")
 				source: "com.victronenergy.settings/Settings/SystemSetup/AcInput1"
-				model: root._acInputsModel
+				optionModel: root._acInputsModel
 			}
 
 			SettingsListRadioButtonGroup {
@@ -82,7 +82,7 @@ Page {
 				//% "AC input 2"
 				text: qsTrId("settings_system_ac_input_2")
 				source: "com.victronenergy.settings/Settings/SystemSetup/AcInput2"
-				model: root._acInputsModel
+				optionModel: root._acInputsModel
 			}
 
 			SettingsListRadioButtonGroup {
@@ -93,7 +93,7 @@ Page {
 					: qsTrId("settings_system_monitor_for_shore_disconnect")
 				visible: root._isGrid || root._isShore
 				source: "com.victronenergy.settings/Settings/Alarm/System/GridLost"
-				model: [
+				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled, value: 1 },
 				]
@@ -118,7 +118,7 @@ Page {
 						}
 						const modelArray = Utils.jsonSettingsToModel(value)
 						if (modelArray) {
-							batteryMonitorRadioButtons.model = modelArray
+							batteryMonitorRadioButtons.optionModel = modelArray
 						} else {
 							console.warn("Unable to parse data from", source)
 						}
@@ -130,9 +130,9 @@ Page {
 				//% "Auto-selected"
 				text: qsTrId("settings_system_auto_selected")
 				source: "com.victronenergy.system/AutoSelectedBatteryService"
-				visible: batteryMonitorRadioButtons.model !== undefined
+				visible: batteryMonitorRadioButtons.optionModel !== undefined
 					&& batteryMonitorRadioButtons.currentIndex >= 0
-					&& batteryMonitorRadioButtons.model[batteryMonitorRadioButtons.currentIndex].value === "default"
+					&& batteryMonitorRadioButtons.optionModel[batteryMonitorRadioButtons.currentIndex].value === "default"
 			}
 
 			SettingsListSwitch {

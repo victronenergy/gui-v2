@@ -91,7 +91,7 @@ Page {
 						}
 						const modelArray = Utils.jsonSettingsToModel(value)
 						if (modelArray) {
-							temperatureServiceRadioButtons.model = modelArray
+							temperatureServiceRadioButtons.optionModel = modelArray
 						} else {
 							console.warn("Unable to parse data from", source)
 						}
@@ -125,7 +125,7 @@ Page {
 				visible: defaultVisible && commonSettings.dvccActive && sharedCurrentSense.checked
 				enabled: false
 
-				model: [
+				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					//% "Disabled (external control)"
 					{ display: qsTrId("settings_dvcc_scs_disabled_external_control"), value: 1 },

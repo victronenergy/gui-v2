@@ -34,7 +34,7 @@ Page {
 				//% "Role"
 				text: qsTrId("settings_cgwacs_role")
 				updateOnClick: false
-				model: [
+				optionModel: [
 					{ display: Utils.qsTrIdServiceType("grid"), value: "grid" },
 					{ display: Utils.qsTrIdServiceType("pvinverter"), value: "pvinverter" },
 					{ display: Utils.qsTrIdServiceType("genset"), value: "genset" },
@@ -42,11 +42,11 @@ Page {
 					{ display: qsTrId("settings_ac_meter"), value: "acload" } // TODO - in the old gui, a service type of 'acload' is translated differently here compared to PageSettingsCGwacsOverview. Confirm with victron that this is what they want.
 				]
 				currentIndex: {
-					if (!model || model.length === undefined) {
+					if (!optionModel || optionModel.length === undefined) {
 						return defaultIndex
 					}
-					for (let i = 0; i < model.length; ++i) {
-						if (root.serviceType.split(":")[0] === model[i].value) {
+					for (let i = 0; i < optionModel.length; ++i) {
+						if (root.serviceType.split(":")[0] === optionModel[i].value) {
 							return i
 						}
 					}
@@ -64,7 +64,7 @@ Page {
 				text: qsTrId("settings_position")
 				source: root.devicePath + "/Position"
 				visible: root.serviceType === "pvinverter"
-				model: [
+				optionModel: [
 					//% "AC Input 1"
 					{ display: qsTrId("settings_ac_input_1"), value: 0 },
 					//% "AC Input 2"
@@ -79,7 +79,7 @@ Page {
 				text: qsTrId("settings_cgwacs_phase_type")
 				source: root.devicePath + "/IsMultiphase"
 				enabled: userHasWriteAccess && multiPhaseSupport.value !== undefined
-				model: [
+				optionModel: [
 					//% "Single phase"
 					{ display: qsTrId("settings_single_phase"), value: 0},
 					//% "Multi phase"
@@ -103,7 +103,7 @@ Page {
 				text: qsTrId("settings_cgwacs_pv_inverter_l2_position")
 				source: root.devicePath + "_S/Position"
 				visible: pvOnL2.checked
-				model: positions.model
+				optionModel: positions.optionModel
 			}
 		}
 	}

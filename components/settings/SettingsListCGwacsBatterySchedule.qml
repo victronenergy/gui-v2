@@ -129,7 +129,7 @@ SettingsListNavigationItem {
 						visible: defaultVisible && itemEnabled.checked
 						//% "Not set"
 						defaultSecondaryText: qsTrId("cgwacs_battery_schedule_day_not_set")
-						model: root._dayModel
+						optionModel: root._dayModel
 					}
 
 					SettingsListTimeSelector {
