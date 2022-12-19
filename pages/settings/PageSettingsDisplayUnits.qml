@@ -17,7 +17,7 @@ Page {
 				//% "Energy"
 				text: qsTrId("settings_units_energy")
 
-				model: [
+				optionModel: [
 					//% "Watts"
 					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Energy_Watt },
 					//% "Amps"
@@ -26,7 +26,7 @@ Page {
 				currentIndex: Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Amp ? 1 : 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.energyUnit.setValue(model[index].value)
+					Global.systemSettings.energyUnit.setValue(optionModel[index].value)
 				}
 			}
 
@@ -34,7 +34,7 @@ Page {
 				//% "Temperature"
 				text: qsTrId("settings_units_temperature")
 
-				model: [
+				optionModel: [
 					//% "Celsius"
 					{ display: qsTrId("settings_units_celsius"), value: VenusOS.Units_Temperature_Celsius },
 					//% "Fahrenheit"
@@ -43,7 +43,7 @@ Page {
 				currentIndex: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.temperatureUnit.setValue(model[index].value)
+					Global.systemSettings.temperatureUnit.setValue(optionModel[index].value)
 				}
 			}
 
@@ -51,7 +51,7 @@ Page {
 				//% "Volume"
 				text: qsTrId("settings_units_volume")
 
-				model: [
+				optionModel: [
 					//% "m3"
 					{ display: qsTrId("settings_units_m3"), value: VenusOS.Units_Volume_CubicMeter },
 					//% "Liters"
@@ -70,7 +70,7 @@ Page {
 							: 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.volumeUnit.setValue(model[index].value)
+					Global.systemSettings.volumeUnit.setValue(optionModel[index].value)
 				}
 			}
 		}

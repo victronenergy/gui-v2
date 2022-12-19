@@ -28,10 +28,10 @@ Page {
 		SettingsListRadioButtonGroup {
 			//% "Mode"
 			text: qsTrId("settings_ess_mode")
-			model: Global.ess.stateModel
+			optionModel: Global.ess.stateModel
 			currentIndex: {
-				for (let i = 0; i < model.length; ++i) {
-					if (model[i].value === Global.ess.state) {
+				for (let i = 0; i < optionModel.length; ++i) {
+					if (optionModel[i].value === Global.ess.state) {
 						return i
 					}
 				}
@@ -40,7 +40,7 @@ Page {
 			updateOnClick: false
 
 			onOptionClicked: function(index) {
-				Global.ess.setStateRequested(model[index].value)
+				Global.ess.setStateRequested(optionModel[index].value)
 			}
 		}
 
@@ -51,7 +51,7 @@ Page {
 			text: qsTrId("settings_ess_grid_metering")
 			source: "com.victronenergy.settings/Settings/CGwacs/RunWithoutGridMeter"
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-			model: [
+			optionModel: [
 				//% "External meter"
 				{ display: qsTrId("settings_ess_external_meter"), value: 0 },
 				//% "Inverter/Charger"
@@ -74,14 +74,14 @@ Page {
 				 && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				 && batteryLifeState.dataPoint.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			defaultSecondaryText: ""
-			model: [
+			optionModel: [
 				//% "Total of all phases"
 				{ display: qsTrId("settings_ess_phase_compensation"), value: VenusOS.Ess_Hub4ModeState_PhaseCompensation },
 				//% "Individual phase"
 				{ display: qsTrId("settings_ess_individual_phase"), value: VenusOS.Ess_Hub4ModeState_PhaseSplit },
 			]
 			onOptionClicked: function(index) {
-				const newValue = model[index].value
+				const newValue = optionModel[index].value
 				if (newValue === VenusOS.Ess_Hub4ModeState_PhaseSplit) {
 					//% "Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).\n\nCAUTION: Use only if required by the utility provider."
 					Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_multiphase_split_notif"))
@@ -125,7 +125,7 @@ Page {
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& Global.ess.isBatteryLifeActive(dataPoint.value)
 			enabled: false
-			model: [
+			optionModel: [
 				// Values below taken from MaintenanceState enum in dbus-cgwacs
 				{ display: root._selfConsumptionText, value: 2 },
 				{ display: root._selfConsumptionText, value: 3 },

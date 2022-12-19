@@ -34,7 +34,7 @@ Page {
 
 			SettingsListRadioButtonGroup {
 				text: "Radio buttons with array model"
-				model: [
+				optionModel: [
 					{ display: "Option A", value: 1 },
 					{ display: "Option B", value: 2, readOnly: true },
 					{ display: "Option C", value: 3 },
@@ -48,17 +48,17 @@ Page {
 
 			SettingsListRadioButtonGroup {
 				text: "Radio buttons with complex model"
-				model: ListModel {
+				optionModel: ListModel {
 					ListElement { display: "Option A"; value: 1 }
 					ListElement { display: "Option B"; value: 2; readOnly: true }
 					ListElement { display: "Option C"; value: 3 }
 				}
 				currentIndex: 2
-				secondaryText: model.get(2).display
+				secondaryText: optionModel.get(2).display
 
 				onOptionClicked: function(index) {
 					console.log("Radio button clicked at index", index)
-					secondaryText = model.get(index).display
+					secondaryText = optionModel.get(index).display
 				}
 			}
 

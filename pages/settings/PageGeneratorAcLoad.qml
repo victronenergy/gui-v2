@@ -44,7 +44,7 @@ Page {
 				//% "Measurement"
 				text: qsTrId("page_generator_ac_load_measurement")
 				source: bindPrefix + "/Measurement"
-				model: [
+				optionModel: [
 					//% "Total consumption"
 					{ display: qsTrId("total_consumption"), value: 0 },
 					//% "Inverter total AC out"

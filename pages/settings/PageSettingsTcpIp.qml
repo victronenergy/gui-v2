@@ -215,7 +215,7 @@ Page {
 			//% "IP configuration"
 			text: qsTrId("settings_tcpip_ip_config")
 			writeAccessLevel: VenusOS.User_AccessType_User
-			model: [
+			optionModel: [
 				//% "Automatic"
 				{ display: qsTrId("settings_tcpip_auto"), value: "dhcp" },
 				//% "Manual"

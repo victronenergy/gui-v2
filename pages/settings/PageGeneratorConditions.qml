@@ -37,7 +37,7 @@ Page {
 				//% "On loss of communication"
 				text: qsTrId("page_generator_conditions_on_loss_of_communication")
 				source: bindPrefix + "/OnLossCommunication"
-				model: [
+				optionModel: [
 					//% "Stop generator"
 					{ display: qsTrId("page_generator_conditions_stop_generator"), value: 0 },
 					//% "Start generator"

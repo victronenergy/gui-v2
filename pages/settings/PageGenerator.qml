@@ -101,7 +101,7 @@ Page {
 
 		SettingsListRadioButtonGroup {
 			text: CommonWords.error
-			model: [
+			optionModel: [
 				{ display: CommonWords.no_error, value: 0 },
 				//% "Remote switch control disabled"
 				{ display: qsTrId("settings_remote_switch_control_disabled"), value: 1 },

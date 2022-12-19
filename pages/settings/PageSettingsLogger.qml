@@ -19,7 +19,7 @@ Page {
 				//% "Logging enabled"
 				text: qsTrId("settings_logging_enabled")
 				source: "com.victronenergy.settings/Settings/Vrmlogger/Logmode"
-				model: [
+				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled,	value: 1 },
 				]
@@ -34,7 +34,7 @@ Page {
 			SettingsListRadioButtonGroup {
 				//% "Log interval"
 				text: qsTrId("settings_log_interval")
-				model: [
+				optionModel: [
 					//% "1 min"
 					{ display: qsTrId("settings_1_min"), value: 60 },
 					//% "5 min"
@@ -158,7 +158,7 @@ Page {
 				text: qsTrId("settings_vrm_storage_location")
 				//% "No buffer active"
 				defaultSecondaryText: qsTrId("settings_vrm_no_buffer_active")
-				model: [
+				optionModel: [
 					//% "Internal storage"
 					{ display: qsTrId("settings_vrm_internal_storage"), value: 0 },
 					//% "Transferring"
@@ -174,7 +174,7 @@ Page {
 				text: CommonWords.error
 				//% "Unknown error"
 				defaultSecondaryText: qsTrId("settings_vrm_unknown_error")
-				model: [
+				optionModel: [
 					//% "No Error"
 					{ display: qsTrId("settings_vrm_no_error"), value: 0 },
 					//% "No space left on storage"

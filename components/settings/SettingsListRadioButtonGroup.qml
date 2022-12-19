@@ -19,21 +19,21 @@ SettingsListNavigationItem {
 
 	property alias source: dataPoint.source
 	readonly property alias dataPoint: dataPoint
-	property var model: []
+	property var optionModel: []
 	property int currentIndex: {
-		if (!model || model.length === undefined || source.length === 0 || !dataPoint.valid) {
+		if (!optionModel || optionModel.length === undefined || source.length === 0 || !dataPoint.valid) {
 			return defaultIndex
 		}
-		for (let i = 0; i < model.length; ++i) {
-			if (model[i].value === dataPoint.value) {
+		for (let i = 0; i < optionModel.length; ++i) {
+			if (optionModel[i].value === dataPoint.value) {
 				return i
 			}
 		}
 		return defaultIndex
 	}
 
-	readonly property var currentValue: currentIndex >= 0 && model.length !== undefined && currentIndex < model.length
-			? model[currentIndex].value
+	readonly property var currentValue: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
+			? optionModel[currentIndex].value
 			: undefined
 
 	property bool updateOnClick: true
@@ -44,8 +44,8 @@ SettingsListNavigationItem {
 
 	signal optionClicked(index: int)
 
-	secondaryText: currentIndex >= 0 && model.length !== undefined && currentIndex < model.length
-			? model[currentIndex].display
+	secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
+			? optionModel[currentIndex].display
 			: defaultSecondaryText
 
 	onClicked: {
@@ -61,18 +61,18 @@ SettingsListNavigationItem {
 
 		Page {
 			SettingsListView {
-				model: root.model
+				model: root.optionModel
 
 				delegate: SettingsListRadioButton {
 					id: radioButton
 
-					text: Array.isArray(root.model)
+					text: Array.isArray(root.optionModel)
 						  ? modelData.display || ""
 						  : model.display || ""
-					caption.text: Array.isArray(root.model)
+					caption.text: Array.isArray(root.optionModel)
 						  ? modelData.caption || ""
 						  : model.caption || ""
-					enabled: Array.isArray(root.model)
+					enabled: Array.isArray(root.optionModel)
 						  ? !modelData.readOnly
 						  : !model.readOnly
 					checked: root.currentIndex === model.index
@@ -83,7 +83,7 @@ SettingsListNavigationItem {
 					onClicked: {
 						if (root.updateOnClick) {
 							if (source.length > 0) {
-								dataPoint.setValue(Array.isArray(root.model) ? modelData.value : model.value)
+								dataPoint.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
 							}
 							root.currentIndex = model.index
 
