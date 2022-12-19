@@ -196,6 +196,7 @@
         <file>pages/settings/PageRelayGenerator.qml</file>
         <file>pages/settings/PageSettingsBatteries.qml</file>
         <file>pages/settings/PageSettingsCanbus.qml</file>
+        <file>pages/settings/PageSettingsBleSensors.qml</file>
         <file>pages/settings/PageSettingsCGwacs.qml</file>
         <file>pages/settings/PageSettingsCGwacsOverview.qml</file>
         <file>pages/settings/PageSettingsDemo.qml</file>
@@ -207,6 +208,7 @@
         <file>pages/settings/PageSettingsGenerator.qml</file>
         <file>pages/settings/PageSettingsHub4.qml</file>
         <file>pages/settings/PageSettingsHub4Feedin.qml</file>
+        <file>pages/settings/PageSettingsIo.qml</file>
         <file>pages/settings/PageSettingsLogger.qml</file>
         <file>pages/settings/PageSettingsModbusTcp.qml</file>
         <file>pages/settings/PageSettingsModbusTcpServices.qml</file>

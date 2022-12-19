@@ -91,6 +91,11 @@ Page {
 				page: "/pages/settings/PageSettingsServices.qml"
 			},
 			{
+				//% "I/O"
+				text: qsTrId("settings_io"),
+				page: "/pages/settings/PageSettingsIo.qml"
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"
