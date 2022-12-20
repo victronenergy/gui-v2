@@ -129,14 +129,16 @@ Page {
 				visible: signalK.valid || nodeRed.valid
 			},
 			{
-				// TODO remove this temporary page that demonstrates the settings UI
-				text: "Demo settings page",
-				page: "/pages/settings/PageSettingsDemo.qml"
+				text: "Debug",
+				page: "/pages/settings/debug/PageDebug.qml",
+				showAccessLevel: VenusOS.User_AccessType_Service
 			},
 		]
 
 		delegate: SettingsListNavigationItem {
 			text: modelData.text
+			showAccessLevel: modelData.showAccessLevel || VenusOS.User_AccessType_User
+			visible: modelData.visible === undefined || modelData.visible === true
 			onClicked: {
 				Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
 			}
