@@ -42,10 +42,6 @@ SettingsListNavigationItem {
 	//% "Unknown"
 	property string defaultSecondaryText: qsTrId("settings_radio_button_group_unknown")
 
-	readonly property var currentValue: currentIndex >= 0 && model.length !== undefined && currentIndex < model.length
-			? model[currentIndex].value
-			: undefined
-
 	signal optionClicked(index: int)
 
 	secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
