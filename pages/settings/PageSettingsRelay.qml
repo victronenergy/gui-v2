@@ -22,7 +22,7 @@ Page {
 					  //% "Function"
 					: qsTrId("settings_relay_function")
 				source: "com.victronenergy.settings/Settings/Relay/Function"
-				model: [
+				optionModel: [
 					//% "Alarm relay"
 					{ display: qsTrId("settings_relay_alarm_relay"), value: VenusOS.Relay_Function_Alarm },
 					//% "Generator start/stop"
@@ -43,7 +43,7 @@ Page {
 				text: qsTrId("settings_relay_alarm_polarity")
 				source: "com.victronenergy.settings/Settings/Relay/Polarity"
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Alarm
-				model: [
+				optionModel: [
 					//% "Normally open"
 					{ display: qsTrId("settings_relay_normally_open"), value: 0 },
 					//% "Normally closed"
@@ -87,7 +87,7 @@ Page {
 				text: qsTrId("settings_relay_function_relay2")
 				source: "com.victronenergy.settings/Settings/Relay/1/Function"
 				visible: relay1State.valid
-				model: [
+				optionModel: [
 					//% "Manual"
 					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
 					//% "Temperature"
