@@ -51,7 +51,7 @@ Page {
 				//% "CAN-bus profile"
 				text: qsTrId("settings_canbus_profile")
 				source: "com.victronenergy.settings/Settings/Canbus/" + root.gateway + "/Profile"
-				model: [
+				optionModel: [
 					{
 						//% "Disabled"
 						display: qsTrId("settings_disabled"),

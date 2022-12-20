@@ -49,7 +49,7 @@ Column {
 		//% "Relay"
 		text: qsTrId("settings_relay")
 		source: "%1/%2/Relay".arg(root.settingsBindPrefix).arg(root.relayNumber)
-		model: [
+		optionModel: [
 			//% "None (Disable)"
 			{ display: qsTrId("settings_relay_none"), value: -1 },
 			//% "Relay 1"
