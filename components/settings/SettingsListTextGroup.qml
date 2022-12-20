@@ -10,6 +10,7 @@ SettingsListItem {
 	id: root
 
 	property alias textModel: repeater.model
+	property int itemWidth
 
 	enabled: false
 
@@ -20,17 +21,21 @@ SettingsListItem {
 			delegate: Label {
 				id: label
 				anchors.verticalCenter: parent.verticalCenter
-				width: separator.visible
-					   ? implicitWidth + Theme.geometry.settingsListItem.content.spacing
-					   : implicitWidth
+				width: root.itemWidth
+					   || (separator.visible ? implicitWidth + root.content.spacing : implicitWidth)
 				font.pixelSize: Theme.font.size.body2
 				color: Theme.color.settingsListItem.secondaryText
 				text: modelData
+				horizontalAlignment: Text.AlignHCenter
+				elide: Text.ElideRight
 
 				Rectangle {
 					id: separator
 
-					x: label.implicitWidth + Theme.geometry.settingsListItem.content.spacing
+					anchors {
+						right: parent.right
+						rightMargin: -root.content.spacing / 2
+					}
 					width: Theme.geometry.settingsListItem.separator.width
 					height: parent.implicitHeight
 					color: Theme.color.settingsListItem.separator
