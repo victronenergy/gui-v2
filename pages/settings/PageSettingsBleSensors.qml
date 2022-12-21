@@ -13,9 +13,12 @@ Page {
 	VeQItemSortTableModel {
 		id: sensors
 
-		// TODO fix this model for MQTT
 		model: VeQItemTableModel {
-			uids: ["dbus/com.victronenergy.ble/Devices"]
+			uids: BackendConnection.type === BackendConnection.DBusSource
+				  ? ["dbus/com.victronenergy.ble/Devices"]
+				  : BackendConnection.type === BackendConnection.MqttSource
+					? ["mqtt/ble/0/Devices"]
+					: []
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 		dynamicSortFilter: true
@@ -25,7 +28,11 @@ Page {
 	VeQItemSortTableModel {
 		id: interfaces
 		model: VeQItemTableModel {
-			uids: ["dbus/com.victronenergy.ble/Interfaces"]
+			uids: BackendConnection.type === BackendConnection.DBusSource
+				  ? ["dbus/com.victronenergy.ble/Interfaces"]
+				  : BackendConnection.type === BackendConnection.MqttSource
+					? ["mqtt/ble/0/Interfaces"]
+					: []
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 		dynamicSortFilter: true
