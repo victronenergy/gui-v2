@@ -11,17 +11,23 @@ import "/components/Utils.js" as Utils
 Page {
 	id: root
 
-	// TODO fix this model for MQTT
 	VeQItemTableModel {
 		id: analogModel
-		uids: ["dbus/com.victronenergy.adc/Devices"]
+		uids: BackendConnection.type === BackendConnection.DBusSource
+			  ? ["dbus/com.victronenergy.adc/Devices"]
+			  : BackendConnection.type === BackendConnection.MqttSource
+				? ["mqtt/adc/0/Devices"]
+				: []
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 
-	// TODO fix this model for MQTT
 	VeQItemTableModel {
 		id: digitalModel
-		uids: ["dbus/com.victronenergy.settings/Settings/DigitalInput"]
+		uids: BackendConnection.type === BackendConnection.DBusSource
+			  ? ["dbus/com.victronenergy.settings/Settings/DigitalInput"]
+			  : BackendConnection.type === BackendConnection.MqttSource
+				? ["mqtt/settings/0/Settings/DigitalInput"]
+				: []
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 
