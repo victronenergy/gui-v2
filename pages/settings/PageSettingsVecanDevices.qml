@@ -20,6 +20,7 @@ Page {
 			filterFlags: VeQItemSortTableModel.FilterOffline
 			dynamicSortFilter: true
 			model: VeQItemTableModel {
+				// TODO fix this 'uids' for MQTT, else will crash in MQTT mode
 				uids: ["dbus/com.victronenergy.vecan." + root.gateway + "/Devices"]
 				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 			}
