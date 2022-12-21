@@ -11,45 +11,22 @@ QtObject {
 
 	property var acInputs: AcInputsImpl { }
 	property var battery: BatteryImpl { }
-	property var dcInputs: DcInputsImpl { veServiceIds: veDBus.childIds }
-	property var environmentInputs: EnvironmentInputsImpl { veServiceIds: veDBus.childIds }
+	property var dcInputs: DcInputsImpl { }
+	property var environmentInputs: EnvironmentInputsImpl { }
 	property var ess: EssImpl { }
-	property var generators: GeneratorsImpl { veServiceIds: veDBus.childIds }
-	property var inverters: InvertersImpl { veServiceIds: veDBus.childIds }
+	property var generators: GeneratorsImpl { }
+	property var inverters: InvertersImpl { }
 	property var notifications: NotificationsImpl {}
 	property var relays: RelaysImpl {}
-	property var solarChargers: SolarChargersImpl { veServiceIds: veDBus.childIds }
+	property var solarChargers: SolarChargersImpl { }
 	property var system: SystemImpl { }
 	property var systemSettings: SystemSettingsImpl { }
-	property var tanks: TanksImpl { veServiceIds: veDBus.childIds }
+	property var tanks: TanksImpl { }
 
-	property Instantiator veDBus:  Instantiator {
-		property var childIds: []
+	property VeQItemTableModel servicesTableModel: VeQItemTableModel {
+		uids: ["dbus"]
+		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 
-		function _reloadChildIds() {
-			let _childIds = []
-			for (let i = 0; i < count; ++i) {
-				const child = objectAt(i)
-				const uid = child.uid.substring(5)    // remove 'dbus/' from start of string
-				_childIds.push(uid)
-			}
-			childIds = _childIds
-			Global.dataServices = childIds
-		}
-
-		model: VeQItemTableModel {
-			id: servicesTableModel
-
-			uids: ["dbus"]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-
-			Component.onCompleted: Global.dataServiceModel = servicesTableModel
-		}
-
-		delegate: QtObject {
-			property var uid: model.uid
-		}
-
-		onCountChanged: Qt.callLater(_reloadChildIds)
+		Component.onCompleted: Global.dataServiceModel = servicesTableModel
 	}
 }

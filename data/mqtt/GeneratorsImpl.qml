@@ -10,54 +10,16 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veServiceIds
-	onVeServiceIdsChanged: Qt.callLater(_getGenerators)
-
-	property var _generators: []
-
-	function _getGenerators() {
-		let generatorIds = []
-		for (let i = 0; i < veServiceIds.length; ++i) {
-			generatorIds.push(veServiceIds[i])
-		}
-
-		if (Utils.arrayCompare(_generators, generatorIds) !== 0) {
-			_generators = generatorIds
-		}
-	}
-
-	readonly property Instantiator _uids: Instantiator {
-		property var childIds: []
-
-		onCountChanged: Qt.callLater(_reloadChildIds)
-
-		function _reloadChildIds() {
-			let _childIds = []
-			for (let i = 0; i < count; ++i) {
-				const child = objectAt(i)
-				const uid = child.uid
-				_childIds.push(uid)
-			}
-			veServiceIds = _childIds
-		}
-
+	property Instantiator generatorObjects: Instantiator {
 		model: VeQItemTableModel {
 			uids: ["mqtt/generator"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
 		delegate: QtObject {
-			property var uid: model.uid
-		}
-	}
-
-	property Instantiator generatorObjects: Instantiator {
-		model: _generators
-		delegate: QtObject {
 			id: generator
 
-			property string uid: modelData
-			property string mqttUid: uid
+			property string mqttUid: model.uid
 
 			property int state: -1
 			property int manualStartTimer
@@ -79,15 +41,10 @@ QtObject {
 				const index = Utils.findIndex(Global.generators.model, generator)
 				if (_valid && index < 0) {
 					Global.generators.addGenerator(generator)
-					if (!Global.generators.first) {
-						Global.generators.first = generator
-					}
 				} else if (!_valid && index >= 0) {
 					Global.generators.removeGenerator(index)
-					if (Global.generators.first == generator) {
-						Global.generators.first = null
-					}
 				}
+				Global.generators.refreshFirstGenerator()
 			}
 
 			property VeQuickItem _state: VeQuickItem {
@@ -114,18 +71,7 @@ QtObject {
 				uid: mqttUid + "/DeviceInstance"
 				onValueChanged: {
 					generator.deviceInstance = value === undefined ? -1 : value
-
-					// Set first to the one with the lowest DeviceInstance
-					if (!Global.generators.first && generator.deviceInstance >= 0) {
-						Global.generators.first = generator
-					}
-					for (let i = 0; i < generatorObjects.count; ++i) {
-						const currentGenerator = generatorObjects.objectAt(i)
-						if (currentGenerator.deviceInstance >= 0
-								&& currentGenerator.deviceInstance < Global.generators.first.deviceInstance) {
-							rootGlobal.generatorsgenerator0 = currentGenerator
-						}
-					}
+					Global.generators.refreshFirstGenerator()
 				}
 			}
 		}

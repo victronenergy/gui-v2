@@ -10,35 +10,6 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var _inputs: []
-
-	function _getInputs() {
-		let inputIds = []
-		for (let i = 0; i < veSystemAcIn.count; ++i) {
-			const uid = veSystemAcIn.objectAt(i).uid
-			const id = uid.substring(uid.lastIndexOf('/') + 1)
-			if (!isNaN(parseInt(id))) {
-				inputIds.push(uid)
-			}
-		}
-		if (Utils.arrayCompare(_inputs, inputIds) !== 0) {
-			_inputs = inputIds
-		}
-	}
-
-	property Instantiator veSystemAcIn: Instantiator {
-		model: VeQItemTableModel {
-			uids: ["dbus/com.victronenergy.system/Ac/In"]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-		}
-
-		delegate: QtObject {
-			property var uid: model.uid
-		}
-
-		onCountChanged: Qt.callLater(root._getInputs)
-	}
-
 	/*
 	Each AC input has basic config details at com.victronenergy.system /Ac/In/x. E.g. for Input 0:
 		/Ac/In/0/Connected: 			1
@@ -50,12 +21,21 @@ QtObject {
 	voltage, current, power etc. for the inputs.
 	*/
 	property Instantiator inputObjects: Instantiator {
-		model: _inputs || null
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.IdRole
+			filterRegExp: "[0-9]+"
+
+			model: VeQItemTableModel {
+				uids: ["dbus/com.victronenergy.system/Ac/In"]
+				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+			}
+		}
 
 		delegate: QtObject {
 			id: input
 
-			property string configUid: modelData
+			property string configUid: model.uid
 
 			property string serviceType     // e.g. "vebus"
 			property string serviceName     // e.g. "com.victronenergy.vebus.ttyO1"

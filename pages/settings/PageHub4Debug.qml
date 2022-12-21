@@ -4,18 +4,12 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Velib
 
 Page {
 	id: root
 
-	readonly property string batteryService: {
-		for (let i = 0; i < Global.dataServices.length; ++i) {
-			if (Global.dataServices[i].startsWith("com.victronenergy.battery.")) {
-				return Global.dataServices[i]
-			}
-		}
-		return ""
-	}
+	property string batteryService
 
 	//% "Grid Setpoint"
 	title: qsTrId("settings_ess_debug_grid_setpoint")
@@ -113,6 +107,37 @@ Page {
 				DataPoint {
 					id: batteryDischargePower
 					source: "com.victronenergy.settings/Settings/CGwacs/MaxDischargePower"
+				}
+			}
+		}
+	}
+
+	Instantiator {
+		active: BackendConnection.type === BackendConnection.DBusSource
+		model: VeQItemSortTableModel {
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.battery\."
+			model: Global.dataServiceModel
+		}
+		delegate: QtObject {
+			Component.onCompleted: {
+				if (root.batteryService === "") {
+					root.batteryService = model.uid
+				}
+			}
+		}
+	}
+
+	Instantiator {
+		active: BackendConnection.type === BackendConnection.MqttSource
+		model: VeQItemTableModel {
+			uids: ["mqtt/battery"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+		delegate: QtObject {
+			Component.onCompleted: {
+				if (root.batteryService === "") {
+					root.batteryService = model.uid
 				}
 			}
 		}

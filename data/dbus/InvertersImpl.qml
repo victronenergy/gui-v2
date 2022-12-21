@@ -10,32 +10,18 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veServiceIds
-	onVeServiceIdsChanged: Qt.callLater(_getInverters)
-
-	property var _inverters: []
-
-	function _getInverters() {
-		let inverterIds = []
-		for (let i = 0; i < veServiceIds.length; ++i) {
-			let id = veServiceIds[i]
-			if (id.startsWith("com.victronenergy.vebus.")) {
-				inverterIds.push(id)
-			}
-		}
-
-		if (Utils.arrayCompare(_inverters, inverterIds) !== 0) {
-			_inverters = inverterIds
-		}
-	}
-
 	property Instantiator inverterObjects: Instantiator {
-		model: _inverters
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.vebus\."
+			model: Global.dataServiceModel
+		}
+
 		delegate: QtObject {
 			id: inverter
 
-			property string uid: modelData
-			property string serviceUid: "dbus/" + inverter.uid
+			readonly property string serviceUid: model.uid
 
 			property int productId: -1
 			property string productName

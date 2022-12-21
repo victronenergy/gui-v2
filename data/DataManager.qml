@@ -86,7 +86,7 @@ Item {
 
 		active: false
 		asynchronous: true
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load data manager:", errorString())
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load data manager:", source)
 		onLoaded: Global.dataManagerLoaded = true
 	}
 }

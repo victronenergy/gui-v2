@@ -45,7 +45,11 @@ Loader {
 		let total = 0
 		let foundValidValue = false
 		for (let i = 0; i < instantiator.count; ++i) {
-			let veItemValue = instantiator.objectAt(i)["_" + propertyName]["value"]
+			const obj = instantiator.objectAt(i)
+			if (!obj) {
+				continue
+			}
+			const veItemValue = obj["_" + propertyName]["value"]
 			if (veItemValue !== undefined) {
 				foundValidValue = true
 			}
@@ -55,14 +59,14 @@ Loader {
 	}
 
 	sourceComponent: {
-		if (serviceUid == "") {
+		if (serviceUid == "" || serviceType == "") {
 			return null
 		} else if (serviceType == "vebus") {
 			return vebusComponent
 		} else if (serviceType == "grid" || serviceType == "genset") {
 			return gridOrGensetComponent
 		} else {
-			console.warn("Unsupported AC input service:", serviceType)
+			console.warn("Unsupported AC input service:", serviceType, "for uid:", serviceUid)
 			return null
 		}
 	}
