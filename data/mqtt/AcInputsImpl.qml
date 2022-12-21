@@ -10,41 +10,6 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var _inputs: []
-
-	property Instantiator veSystemAcIn: Instantiator {
-		property var childIds: []
-
-		function _getInputs() {
-			let _childIds = []
-			for (let i = 0; i < count; ++i) {
-				const uid = objectAt(i).uid
-				if (Utils.uidEndsWithANumber(uid)) {
-					_childIds.push(uid)
-				}
-			}
-			if (Utils.arrayCompare(_inputs, _childIds)) {
-				_inputs = _childIds
-			}
-		}
-
-		model: VeQItemTableModel {
-			/* child ids will look like this:
-				uid: mqtt/system/0/Ac/In/0					// we want this one
-				uid: mqtt/system/0/Ac/In/1					// we want this one
-				uid: mqtt/system/0/Ac/In/NumberOfAcInputs	// we don't want this one
-			*/
-			uids: ["mqtt/system/0/Ac/In"]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-		}
-
-		delegate: QtObject {
-			property var uid: model.uid
-		}
-
-		onCountChanged: Qt.callLater(_getInputs)
-	}
-
 	/*
 	Each AC input has basic config details at com.victronenergy.system /Ac/In/x. E.g. for Input 0:
 		/Ac/In/0/Connected {"value": 0}
@@ -57,12 +22,27 @@ QtObject {
 	vebus, grid, genset, which provides voltage, current, power etc. for the inputs.
 	*/
 	property Instantiator inputObjects: Instantiator {
-		model: _inputs || null
+
+		/* model uids will look like this:
+			uid: mqtt/system/0/Ac/In/0					// we want this one
+			uid: mqtt/system/0/Ac/In/1					// we want this one
+			uid: mqtt/system/0/Ac/In/NumberOfAcInputs	// we don't want this one
+		*/
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.IdRole
+			filterRegExp: "[0-9]+"
+
+			model: VeQItemTableModel {
+				uids: ["mqtt/system/0/Ac/In"]
+				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+			}
+		}
 
 		delegate: QtObject {
 			id: input
 
-			property string configUid: modelData
+			property string configUid: model.uid
 
 			property string serviceType: _serviceType.value ? _serviceType.value : ''	// e.g. "vebus"
 			property int source: (_source.value === undefined || _source.value === '') ? -1 : parseInt(_source.value)

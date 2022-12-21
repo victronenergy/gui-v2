@@ -10,55 +10,15 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veServiceIds
-	onVeServiceIdsChanged: Qt.callLater(_getInverters)
-
-	property var _inverters: []
-
-	function _getInverters() {
-		let inverterIds = []
-		for (let i = 0; i < veServiceIds.length; ++i) {
-			let id = veServiceIds[i]
-			inverterIds.push(id)
-		}
-
-		if (Utils.arrayCompare(_inverters, inverterIds) !== 0) {
-			_inverters = inverterIds
-		}
-	}
-
-	readonly property Instantiator _uids: Instantiator {
-		property var childIds: []
-
-		onCountChanged: Qt.callLater(_reloadChildIds)
-
-		function _reloadChildIds() {
-			let _childIds = []
-			for (let i = 0; i < count; ++i) {
-				const child = objectAt(i)
-				const uid = child.uid
-				_childIds.push(uid)
-			}
-			veServiceIds = _childIds
-		}
-
+	property Instantiator inverterObjects: Instantiator {
 		model: VeQItemTableModel {
 			uids: ["mqtt/vebus"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
-
-		delegate: QtObject {
-			property var uid: model.uid
-		}
-	}
-
-	property Instantiator inverterObjects: Instantiator {
-		model: _inverters
 		delegate: QtObject {
 			id: inverter
 
-			property string uid: modelData
-			property string serviceUid: inverter.uid
+			readonly property string serviceUid: model.uid
 
 			property int productId: -1
 			property string productName

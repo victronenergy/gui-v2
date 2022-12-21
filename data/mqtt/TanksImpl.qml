@@ -10,55 +10,15 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var _tanks: []
-
-	readonly property Instantiator _veMqttTanks: Instantiator {
-		property var childIds: []
-
-		onCountChanged: Qt.callLater(_reloadChildIds)
-		onChildIdsChanged: Qt.callLater(_getTanks)
-
-		function _reloadChildIds() {
-			let _childIds = []
-			for (let i = 0; i < count; ++i) {
-				const child = objectAt(i)
-				const uid = child.uid.substring(5)    // remove 'mqtt/' from start of string
-				_childIds.push(uid)
-			}
-			childIds = _childIds
-		}
-
-		function _getTanks() {
-			let tankIds = []
-			for (let i = 0; i < childIds.length; ++i) {
-				let id = childIds[i]
-				if (id.startsWith('tank')) {
-					tankIds.push(id)
-				}
-			}
-
-			if (Utils.arrayCompare(_tanks, tankIds)) {
-				_tanks = tankIds
-			}
-		}
-
+	readonly property Instantiator tankObjects: Instantiator {
 		model: VeQItemTableModel {
 			uids: ["mqtt/tank"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
-
-		delegate: QtObject {
-			property var uid: model.uid
-		}
-	}
-
-	readonly property Instantiator tankObjects: Instantiator {
-		model: _tanks
 		delegate: QtObject {
 			id: tank
 
-			property string uid: modelData
-			property string mqttUid: "mqtt/" + tank.uid
+			property string mqttUid: model.uid
 
 			property int status: -1
 			property int type: -1

@@ -10,32 +10,18 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veServiceIds
-	onVeServiceIdsChanged: Qt.callLater(_getGenerators)
-
-	property var _generators: []
-
-	function _getGenerators() {
-		let generatorIds = []
-		for (let i = 0; i < veServiceIds.length; ++i) {
-			let id = veServiceIds[i]
-			if (id.startsWith("com.victronenergy.generator.")) {
-				generatorIds.push(veServiceIds[i])
-			}
-		}
-
-		if (Utils.arrayCompare(_generators, generatorIds) !== 0) {
-			_generators = generatorIds
-		}
-	}
-
 	property Instantiator generatorObjects: Instantiator {
-		model: _generators
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.generator\."
+			model: Global.dataServiceModel
+		}
+
 		delegate: QtObject {
 			id: generator
 
-			property string uid: modelData
-			property string dbusUid: "dbus/" + uid
+			property string dbusUid: model.uid
 
 			property int state: -1
 			property int manualStartTimer
@@ -57,15 +43,10 @@ QtObject {
 				const index = Utils.findIndex(Global.generators.model, generator)
 				if (_valid && index < 0) {
 					Global.generators.addGenerator(generator)
-					if (!Global.generators.first) {
-						Global.generators.first = generator
-					}
 				} else if (!_valid && index >= 0) {
 					Global.generators.removeGenerator(index)
-					if (Global.generators.first == generator) {
-						Global.generators.first = null
-					}
 				}
+				Global.generators.refreshFirstGenerator()
 			}
 
 			property VeQuickItem _state: VeQuickItem {
@@ -92,18 +73,7 @@ QtObject {
 				uid: dbusUid + "/DeviceInstance"
 				onValueChanged: {
 					generator.deviceInstance = value === undefined ? -1 : value
-
-					// Set first to the one with the lowest DeviceInstance
-					if (!Global.generators.first && generator.deviceInstance >= 0) {
-						Global.generators.first = generator
-					}
-					for (let i = 0; i < generatorObjects.count; ++i) {
-						const currentGenerator = generatorObjects.objectAt(i)
-						if (currentGenerator.deviceInstance >= 0
-								&& currentGenerator.deviceInstance < Global.generators.first.deviceInstance) {
-							rootGlobal.generatorsgenerator0 = currentGenerator
-						}
-					}
+					Global.generators.refreshFirstGenerator()
 				}
 			}
 		}

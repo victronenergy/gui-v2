@@ -10,25 +10,6 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veServiceIds
-	onVeServiceIdsChanged: Qt.callLater(_getSolarChargers)
-
-	property var _solarChargers: []
-
-	function _getSolarChargers() {
-		let solarChargerIds = []
-		for (let i = 0; i < veServiceIds.length; ++i) {
-			let id = veServiceIds[i]
-			if (id.startsWith('com.victronenergy.solarcharger.')) {
-				solarChargerIds.push(id)
-			}
-		}
-
-		if (Utils.arrayCompare(_solarChargers, solarChargerIds) !== 0) {
-			_solarChargers = solarChargerIds
-		}
-	}
-
 	function _populateYieldHistory() {
 		let maxHistoryCount = 0
 		for (let i = 0; i < chargerObjects.count; ++i) {
@@ -150,7 +131,12 @@ QtObject {
 	}
 
 	property Instantiator chargerObjects: Instantiator {
-		model: _solarChargers
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.solarcharger\."
+			model: Global.dataServiceModel
+		}
 
 		delegate: QtObject {
 			id: solarCharger
@@ -160,7 +146,7 @@ QtObject {
 
 			property ListModel trackers: ListModel {}
 
-			property string _dbusUid: modelData
+			readonly property string _dbusUid: model.uid
 
 			function _updateTotal(chargerProperty, trackerProperty) {
 				let total = NaN
@@ -182,7 +168,7 @@ QtObject {
 				model: undefined    // ensure delegates are not created before history model is set
 				delegate: VeQuickItem {
 					// uid is e.g. com.victronenergy.solarcharger.tty0/History/Daily/<day>/Yield
-					uid: _dbusUid ? "dbus/" + _dbusUid + "/History/Daily/" + model.index + "/Yield" : ""
+					uid: _dbusUid + "/History/Daily/" + model.index + "/Yield"
 					onValueChanged: {
 						if (value === undefined) {
 							return
@@ -196,7 +182,7 @@ QtObject {
 				}
 			}
 			property var _veHistoryCount: VeQuickItem {
-				uid: _dbusUid ? "dbus/" + _dbusUid + "/History/Overall/DaysAvailable" : ""
+				uid: _dbusUid + "/History/Overall/DaysAvailable"
 				onValueChanged: {
 					if (value !== undefined) {
 						yieldHistoryObjects.model = value
@@ -205,7 +191,7 @@ QtObject {
 			}
 
 			property var _veNrOfTrackers: VeQuickItem {
-				uid: _dbusUid ? "dbus/" + _dbusUid + "/NrOfTrackers" : ""
+				uid: _dbusUid + "/NrOfTrackers"
 				onValueChanged: {
 					if (value !== undefined) {
 						_trackerObjects.model = value
@@ -224,19 +210,15 @@ QtObject {
 					// /Pv/x/P           <- PV array power from tracker no. x+1.
 					// /Pv/x/V           <- PV array voltage from tracker x+1
 					property var vePower: VeQuickItem {
-						uid: _dbusUid
-							 ? _trackerObjects.count === 1
-							   ? "dbus/" + _dbusUid + "/Yield/Power"
-							   : "dbus/" + _dbusUid + "/Pv/" + model.index + "/P"
-							 : ""
+						uid: _trackerObjects.count === 1
+							   ? _dbusUid + "/Yield/Power"
+							   : _dbusUid + "/Pv/" + model.index + "/P"
 						onValueChanged: solarCharger._updateTotal("power", "vePower")
 					}
 					property var veVoltage: VeQuickItem {
-						uid: _dbusUid
-							 ? _trackerObjects.count === 1
-							   ? "dbus/" + _dbusUid + "/Pv/V"
-							   : "dbus/" + _dbusUid + "/Pv/" + model.index + "/V"
-							 : ""
+						uid: _trackerObjects.count === 1
+							   ? _dbusUid + "/Pv/V"
+							   : _dbusUid + "/Pv/" + model.index + "/V"
 						onValueChanged: solarCharger._updateTotal("voltage", "veVoltage")
 					}
 

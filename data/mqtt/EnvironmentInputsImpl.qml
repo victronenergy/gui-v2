@@ -10,38 +10,11 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veServiceIds
-	onVeServiceIdsChanged: Qt.callLater(_getEnvironmentInputs)
-
-	property var _environmentInputs: []
-
-	readonly property Instantiator _veMqttEnvironmentInputs: Instantiator {
-		property var childIds: []
-
-		onCountChanged: Qt.callLater(_reloadChildIds)
-
-		function _reloadChildIds() {
-			let _childIds = []
-			for (let i = 0; i < count; ++i) {
-				const child = objectAt(i)
-				const uid = child.uid.substring(5)    // remove 'mqtt/' from start of string
-				_childIds.push(uid)
-			}
-			veServiceIds = _childIds
-		}
-
+	property Instantiator inputObjects: Instantiator {
 		model: VeQItemTableModel {
 			uids: ["mqtt/temperature"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
-
-		delegate: QtObject {
-			property var uid: model.uid
-		}
-	}
-
-	property Instantiator inputObjects: Instantiator {
-		model: root._environmentInputs
 
 		delegate: QtObject {
 			id: input
@@ -51,20 +24,20 @@ QtObject {
 			property real temperature_celsius
 			property real humidity
 
-			property string _mqttUid: modelData
+			property string _mqttUid: model.uid
 
 			property var _veCustomName: VeQuickItem {
-				uid: _mqttUid ? "mqtt/" + _mqttUid + "/CustomName" : ""
+				uid: _mqttUid + "/CustomName"
 			}
 			property var _veProductName: VeQuickItem {
-				uid: _mqttUid ? "mqtt/" + _mqttUid + "/ProductName" : ""
+				uid: _mqttUid + "/ProductName"
 			}
 			property var _veTemperature: VeQuickItem {
-				uid: _mqttUid ? "mqtt/" + _mqttUid + "/Temperature" : ""
+				uid: _mqttUid + "/Temperature"
 				onValueChanged: input.temperature_celsius = value === undefined ? NaN : value
 			}
 			property var _veHumidity: VeQuickItem {
-				uid: _mqttUid ? "mqtt/" + _mqttUid + "/Humidity" : ""
+				uid: _mqttUid + "/Humidity"
 				onValueChanged: input.humidity = value === undefined ? NaN : value
 			}
 
@@ -77,20 +50,6 @@ QtObject {
 					Global.environmentInputs.removeInput(index)
 				}
 			}
-		}
-	}
-
-	function _getEnvironmentInputs() {
-		let environmentInputIds = []
-		for (let i = 0; i < veServiceIds.length; ++i) {
-			let id = veServiceIds[i]
-			if (id.startsWith("temperature")) {
-				environmentInputIds.push(id)
-			}
-		}
-
-		if (Utils.arrayCompare(_environmentInputs, environmentInputIds) !== 0) {
-			_environmentInputs = environmentInputIds
 		}
 	}
 }

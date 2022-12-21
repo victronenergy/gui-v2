@@ -10,9 +10,6 @@ import "/components/Utils.js" as Utils
 QtObject {
 	id: root
 
-	property var veServiceIds
-	onVeServiceIdsChanged: Qt.callLater(_getInputs)
-
 	property var _monitorModes: ({
 		"-1": VenusOS.DcInputs_InputType_DcGenerator,
 		// -2 AC charger
@@ -23,43 +20,30 @@ QtObject {
 		"-8": VenusOS.DcInputs_InputType_Wind,
 	})
 
-	property var _inputs: []
-
-	function _getInputs() {
-		let inputIds = []
-		for (let i = 0; i < veServiceIds.length; ++i) {
-			let id = veServiceIds[i]
-			if (id.startsWith("com.victronenergy.alternator.")
-					|| id.startsWith("com.victronenergy.fuelcell.")
-					|| id.startsWith("com.victronenergy.dcsource.")) {
-				inputIds.push(id)
-			}
-		}
-
-		if (Utils.arrayCompare(_inputs, inputIds) !== 0) {
-			_inputs = inputIds
-		}
-	}
-
 	property Instantiator inputObjects: Instantiator {
-		model: _inputs || null
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.(alternator|fuelcell|dcsource)\."
+			model: Global.dataServiceModel
+		}
 
 		delegate: QtObject {
 			id: input
 
-			property string uid: modelData
-			property string serviceUid: "dbus/" + modelData
+			property string serviceUid: model.uid
 
 			property int source: {
-				if (uid.startsWith("com.victronenergy.alternator.")) {
+				if (model.uid.startsWith("dbus/com.victronenergy.alternator.")) {
 					return VenusOS.DcInputs_InputType_Alternator
-				} else if (uid.startsWith("com.victronenergy.fuelcell.")) {
+				} else if (model.uid.startsWith("dbus/com.victronenergy.fuelcell.")) {
 					return VenusOS.DcInputs_InputType_FuelCell
-				} if (uid.startsWith("com.victronenergy.dcsource.")) {
+				} else if (model.uid.startsWith("dbus/com.victronenergy.dcsource.")) {
 					// Use DC Generator as the catch-all type for any DC power source that isn't
 					// specifically handled.
 					return root._monitorModes[monitorMode.toString()] || VenusOS.DcInputs_InputType_DcGenerator
 				}
+				return VenusOS.DcInputs_InputType_Unknown
 			}
 
 			property real voltage: NaN
