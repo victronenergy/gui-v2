@@ -48,7 +48,7 @@ QtObject {
 			property int source: (_source.value === undefined || _source.value === '') ? -1 : parseInt(_source.value)
 			property bool connected: _connected.value === 1
 			property int productId: _productId.value ? _productId.value : -1
-			property int deviceInstance: _deviceInstance.value ? _deviceInstance.value : -1
+			property int deviceInstance: _deviceInstance.value !== undefined ? _deviceInstance.value : -1
 
 			// Detailed readings
 			readonly property alias frequency: _serviceLoader.frequency
