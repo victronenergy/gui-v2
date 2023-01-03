@@ -43,8 +43,7 @@ Page {
 		model: ObjectModel {
 			SettingsListSwitch {
 				id: enable
-				//% "Enable"
-				text: qsTrId("settings_bluetooth_enable")
+				text: CommonWords.enable
 				source: "com.victronenergy.settings/Settings/Services/BleSensors"
 			}
 

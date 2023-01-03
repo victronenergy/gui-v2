@@ -10,6 +10,7 @@ SettingsListItem {
 	id: root
 
 	readonly property alias button: button
+	property alias secondaryText: button.text
 
 	signal clicked()
 
