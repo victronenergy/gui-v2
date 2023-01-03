@@ -18,7 +18,7 @@ SettingsListItem {
 		ListItemButton {
 			id: button
 
-			enabled: root.userHasWriteAccess
+			enabled: root.enabled
 
 			onClicked: root.clicked()
 		}
