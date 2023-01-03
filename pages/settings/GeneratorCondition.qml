@@ -17,7 +17,7 @@ SettingsListNavigationItem {
 	property string name: text
 
 	//% "Use %1 value to start/stop"
-	readonly property string enableDescription: qsTrId("generator_condition_use_value_to_start_stop").arg(name)
+	property string enableDescription: qsTrId("generator_condition_use_value_to_start_stop").arg(name)
 
 	//% "Start when %1 is higher than"
 	readonly property string startValueDescriptionHigher: qsTrId("generator_condition_start_when_property_is_higher_than").arg(root.name)
@@ -25,6 +25,7 @@ SettingsListNavigationItem {
 	//% "Start when %1 is lower than"
 	readonly property string startValueDescriptionLower: qsTrId("generator_condition_start_when_property_is_lower_than").arg(root.name)
 	readonly property string startValueDescription: startValueIsGreater ? startValueDescriptionHigher : startValueDescriptionLower
+	property string startTimeDescription: CommonWords.start_after_the_condition_is_reached_for
 
 	//% "Stop when %1 is higher than"
 	readonly property string stopValueDescriptionHigher: qsTrId("generator_condition_stop_when_property_is_higher_than").arg(root.name)
@@ -32,7 +33,7 @@ SettingsListNavigationItem {
 	//% "Stop when %1 is lower than"
 	readonly property string stopValueDescriptionLower: qsTrId("generator_condition_stop_when_property_is_lower_than").arg(root.name)
 	readonly property string stopValueDescription: !startValueIsGreater ? stopValueDescriptionHigher : stopValueDescriptionLower
-
+	property string stopTimeDescription: CommonWords.stop_after_the_condition_is_reached_for
 	readonly property alias value: dataPoint.value
 
 	// Autocalculate step size based on number of decimals
@@ -64,6 +65,7 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: startValue
+
 						text: startValueDescription
 						visible: valid
 						source: bindPrefix + "/StartValue"
@@ -75,6 +77,7 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: quietHoursStartValue
+
 						text: CommonWords.start_value_during_quiet_hours
 						visible: valid
 						source: bindPrefix + "/QuietHoursStartValue"
@@ -86,7 +89,8 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: startTime
-						text: CommonWords.start_after_the_condition_is_reached_for
+
+						text: startTimeDescription
 						visible: valid
 						source: bindPrefix + "/StartTimer"
 						suffix: root.timeUnit
@@ -94,6 +98,7 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: stopValue
+
 						text: stopValueDescription
 						visible: valid
 						source: bindPrefix + "/StopValue"
@@ -105,6 +110,7 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: quietHoursStopValue
+
 						text: CommonWords.stop_value_during_quiet_hours
 						visible: valid
 						source: bindPrefix + "/QuietHoursStopValue"
@@ -116,7 +122,8 @@ SettingsListNavigationItem {
 
 					SettingsListSpinBox {
 						id: stopTime
-						text: CommonWords.stop_after_the_condition_is_reached_for
+
+						text: stopTimeDescription
 						visible: valid
 						source: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit

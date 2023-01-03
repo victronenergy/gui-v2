@@ -11,8 +11,10 @@ SettingsListItem {
 	id: root
 
 	property alias source: dataPoint.source
+	property alias value: dataPoint.value
 	readonly property alias dataPoint: dataPoint
 	property alias textField: textField
+	property alias secondaryText: textField.text
 	property alias placeholderText: textField.placeholderText
 	readonly property bool hasActiveFocus: textField.activeFocus
 
@@ -34,6 +36,14 @@ SettingsListItem {
 				root.ListView ? root.ListView.view : null)
 	}
 
+	function onAccepted(text) {
+		if (dataPoint.source) {
+			dataPoint.setValue(text)
+		}
+		textField.focus = false
+		root.accepted()
+	}
+
 	enabled: source === "" || dataPoint.valid
 	content.children: [
 		TextField {
@@ -46,13 +56,7 @@ SettingsListItem {
 			text: dataPoint.valid ? dataPoint.value : ""
 
 			EnterKeyAction.actionId: EnterKeyAction.Done
-			onAccepted: {
-				if (dataPoint.source) {
-					dataPoint.setValue(text)
-				}
-				textField.focus = false
-				root.accepted()
-			}
+			onAccepted: root.onAccepted(text)
 			onEditingFinished: root.editingFinished()
 
 			MouseArea {

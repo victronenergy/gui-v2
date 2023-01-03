@@ -14,6 +14,7 @@ Page {
 
 	DataPoint {
 		id: availableBatteryServices
+
 		source: "com.victronenergy.system/AvailableBatteryMeasurements"
 	}
 
@@ -72,8 +73,7 @@ Page {
 			}
 
 			GeneratorCondition {
-				//% "Battery current"
-				text: qsTrId("page_generator_conditions_battery_current")
+				text: CommonWords.battery_current
 				bindPrefix: root.bindPrefix + "/BatteryCurrent"
 				unit: "A"
 			}
@@ -92,13 +92,42 @@ Page {
 
 				DataPoint {
 					id: acLoadEnabled
+
 					source: root.bindPrefix + "/AcLoad/Enabled"
 				}
 			}
-			// TODO: Inverter high temperature
-			// TODO: Inverter overload
-			// TODO: Periodic run
+
+			GeneratorCondition {
+				//% "Inverter high temperature"
+				text: qsTrId("page_generator_conditions_inverter_high_temperature")
+				//% "Start on high temperature warning"
+				enableDescription: qsTrId("page_generator_conditions_start_on_high_temperature_warning")
+				startTimeDescription: CommonWords.start_when_warning_is_active_for
+				stopTimeDescription: CommonWords.when_warning_is_cleared_stop_after
+				bindPrefix: root.bindPrefix + "/InverterHighTemp"
+			}
+
+			GeneratorCondition {
+				text: CommonWords.inverter_overload
+				//% "Start on overload warning"
+				enableDescription: qsTrId("page_generator_conditions_start_on_overload_warning")
+				startTimeDescription: CommonWords.start_when_warning_is_active_for
+				stopTimeDescription: CommonWords.when_warning_is_cleared_stop_after
+				bindPrefix: root.bindPrefix + "/InverterOverload"
+			}
+
+			SettingsListNavigationItem {
+				//% "Periodic run"
+				text: qsTrId("page_generator_conditions_periodic_run")
+				secondaryText: testRunEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorTestRun.qml", { title: text, bindPrefix: root.bindPrefix })
+
+				DataPoint {
+					id: testRunEnabled
+
+					source: root.bindPrefix + "/TestRun/Enabled"
+				}
+			}
 		}
 	}
 }
-

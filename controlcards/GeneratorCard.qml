@@ -89,17 +89,14 @@ ControlCard {
 			case VenusOS.Generators_RunningBy_Acload:
 				return CommonWords.ac_load
 			case VenusOS.Generators_RunningBy_BatteryCurrent:
-				//% "Battery current"
-				return qsTrId("controlcard_generator_substatus_batterycurrent")
+				return CommonWords.battery_current
 			case VenusOS.Generators_RunningBy_BatteryVoltage:
-				//% "Battery voltage"
-				return qsTrId("controlcard_generator_substatus_batteryvoltage")
+				return CommonWords.battery_voltage
 			case VenusOS.Generators_RunningBy_InverterHighTemp:
 				//% "Inverter high temp"
 				return qsTrId("controlcard_generator_substatus_inverterhigh_temp")
 			case VenusOS.Generators_RunningBy_InverterOverload:
-				//% "Inverter overload"
-				return qsTrId("controlcard_generator_substatus_inverteroverload")
+				return CommonWords.inverter_overload
 			default: return "" // unknown substatus.
 			}
 		}

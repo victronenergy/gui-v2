@@ -133,8 +133,7 @@ SettingsListNavigationItem {
 					}
 
 					SettingsListTimeSelector {
-						//% "Start time"
-						text: qsTrId("cgwacs_battery_schedule_start_time")
+						text: CommonWords.start_time
 						source: root._scheduleSource + "/Start"
 						visible: defaultVisible && itemEnabled.checked
 					}

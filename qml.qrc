@@ -192,6 +192,7 @@
         <file>pages/settings/PageChargeCurrentLimits.qml</file>
         <file>pages/settings/PageGenerator.qml</file>
         <file>pages/settings/PageGeneratorAcLoad.qml</file>
+        <file>pages/settings/PageGeneratorTestRun.qml</file>
         <file>pages/settings/PageHub4Debug.qml</file>
         <file>pages/settings/PageRelayGenerator.qml</file>
         <file>pages/settings/PageSettingsBatteries.qml</file>
