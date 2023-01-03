@@ -288,6 +288,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "DataPoint");
 
 	/* settings list items */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/MountStateListButton.qml")),
+		"Victron.VenusOS", 2, 0, "MountStateListButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsLabel.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListButton.qml")),

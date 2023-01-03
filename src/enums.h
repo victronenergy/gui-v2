@@ -298,13 +298,13 @@ public:
 	};
 	Q_ENUM(Notification_Type)
 
-	enum PageSettingsLogger_MountState {
-		PageSettingsLogger_NotMounted,
-		PageSettingsLogger_Mounted,
-		PageSettingsLogger_UnmountRequested,
-		PageSettingsLogger_UnmountBusy
+	enum Storage_MountState {
+		Storage_NotMounted,
+		Storage_Mounted,
+		Storage_UnmountRequested,
+		Storage_UnmountBusy
 	};
-	Q_ENUM(PageSettingsLogger_MountState)
+	Q_ENUM(Storage_MountState)
 
 	enum CanBusProfile_Type {
 		CanBusProfile_Disabled,
