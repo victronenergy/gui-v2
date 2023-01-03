@@ -204,34 +204,7 @@ Page {
 				source: "com.victronenergy.logger/Buffer/FreeDiskSpace"
 			}
 
-			SettingsListButton {
-				function mountStateToText(s)
-				{
-					switch (s) {
-					case VenusOS.PageSettingsLogger_Mounted:
-						//% "Press to eject"
-						return qsTrId("settings_vrm_press_to_eject")
-					case VenusOS.PageSettingsLogger_UnmountRequested:
-					case VenusOS.PageSettingsLogger_UnmountBusy:
-						//% "Ejecting, please wait"
-						return qsTrId("settings_vrm_ejecting")
-					default:
-						//% "No storage found"
-						return qsTrId("settings_vrm_no_storage_found");
-					}
-				}
-
-				//% "microSD / USB"
-				text: qsTrId("settings_vrm_microsd_usb")
-				button.text: mountStateToText(mountState.value)
-				button.enabled: mountState.value === VenusOS.PageSettingsLogger_Mounted
-				onClicked: mountState.setValue(VenusOS.PageSettingsLogger_UnmountRequested)
-
-				DataPoint {
-					id: mountState
-					source: "com.victronenergy.logger/Storage/MountState"
-				}
-			}
+			MountStateListButton {}
 
 			SettingsListTextItem {
 				//% "Stored records"
