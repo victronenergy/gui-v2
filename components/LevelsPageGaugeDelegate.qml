@@ -131,6 +131,7 @@ Rectangle {
 			bottom: valueText.top
 			bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
 		}
+		width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
 		font.pixelSize: Theme.font.size.h1
 		unit: VenusOS.Units_Percentage
 		value: Math.round(root.level)
