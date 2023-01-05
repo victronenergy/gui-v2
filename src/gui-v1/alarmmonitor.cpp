@@ -4,7 +4,7 @@
 
 #include <velib/qt/charger_error.hpp>
 #include <velib/qt/bms_error.hpp>
-#include <velib/qt/vebus_error.hpp>
+#include <veutil/qt/vebus_error.hpp>
 
 AlarmMonitor::AlarmMonitor(DBusService *service, Type type, const QString &busitemPathAlarm,
 			const QString &description, const QString &alarmEnablePath,
@@ -17,7 +17,7 @@ AlarmMonitor::AlarmMonitor(DBusService *service, Type type, const QString &busit
 		mEnabledNotifications = NO_ALARM;
 		// FIXME: get this from the settings provider
 		QString id("dbus/com.victronenergy.settings/Settings/Alarm" + alarmEnablePath);
-		VeQItems::getRoot()->itemGetOrCreate(id)->getValueAndChanges(this, SLOT(settingChanged(VeQItem *, QVariant)));
+		VeQItems::getRoot()->itemGetOrCreate(id)->getValueAndChanges(this, SLOT(settingChanged(QVariant)));
 	} else {
 		mEnabledNotifications = ALARM_AND_WARNING;
 	}
@@ -33,7 +33,7 @@ AlarmMonitor::AlarmMonitor(DBusService *service, Type type, const QString &busit
 
 	// The actual trigger of the alarm, see Type for the supported formats.
 	mAlarmTrigger = service->item(busitemPathAlarm);
-	mAlarmTrigger->getValueAndChanges(this, SLOT(updateAlarm(VeQItem *, QVariant)));
+	mAlarmTrigger->getValueAndChanges(this, SLOT(updateAlarm(QVariant)));
 }
 
 AlarmMonitor::~AlarmMonitor()
@@ -51,10 +51,8 @@ bool AlarmMonitor::mustBeShown(DbusAlarm alarm)
 	return true;
 }
 
-void AlarmMonitor::updateAlarm(VeQItem *item, QVariant var)
+void AlarmMonitor::updateAlarm(QVariant var)
 {
-	Q_UNUSED(item)
-
 	if (!var.isValid() || mEnabledNotifications == NO_ALARM)
 		return;
 
@@ -119,11 +117,11 @@ void AlarmMonitor::updateAlarm(VeQItem *item, QVariant var)
 }
 
 // Copied to mEnabledNotifications since having the enabled as a setting is optional
-void AlarmMonitor::settingChanged(VeQItem *item, QVariant var)
+void AlarmMonitor::settingChanged(QVariant var)
 {
 	mEnabledNotifications = static_cast<Enabled>(var.toInt());
 	if (mAlarmTrigger)
-		updateAlarm(item, mAlarmTrigger->getValue());
+		updateAlarm(mAlarmTrigger->getValue());
 }
 
 void AlarmMonitor::addOrUpdateNotification(Victron::VenusOS::Enums::Notification_Type type)

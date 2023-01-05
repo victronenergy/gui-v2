@@ -4,7 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
+import Victron.Veutil
 import net.connman 0.1
 import "/components/Utils.js" as Utils
 

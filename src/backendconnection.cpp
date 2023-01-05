@@ -2,8 +2,8 @@
 #include "uidhelper.h"
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
-#include "velib/qt/v_busitems.h"
-#include "velib/qt/ve_qitems_dbus.hpp"
+#include "veutil/qt/ve_dbus_connection.hpp"
+#include "veutil/qt/ve_qitems_dbus.hpp"
 #include "gui-v1/dbus_services.h"
 #include "gui-v1/alarmbusitem.h"
 #endif
@@ -124,15 +124,15 @@ void BackendConnection::initDBusConnection(const QString &address)
 
 	if (address.isEmpty()) {
 		qWarning() << "Connecting to system bus...";
-		VBusItems::setConnectionType(QDBusConnection::SystemBus);
+		VeDbusConnection::setConnectionType(QDBusConnection::SystemBus);
 	} else {
 		qWarning() << "Connecting to session bus...";
 		// Default to the session bus on the pc
-		VBusItems::setConnectionType(QDBusConnection::SessionBus);
-		VBusItems::setDBusAddress(address);
+		VeDbusConnection::setConnectionType(QDBusConnection::SessionBus);
+		VeDbusConnection::setDBusAddress(address);
 	}
 
-	QDBusConnection dbus = VBusItems::getConnection();
+	QDBusConnection dbus = VeDbusConnection::getConnection();
 	if (!dbus.isConnected()) {
 		qWarning() << "D-Bus connection failed!";
 		setState(Failed);
@@ -152,7 +152,7 @@ void BackendConnection::initDBusConnection(const QString &address)
 		return;
 	}
 
-	setState(VBusItems::getConnection().isConnected());
+	setState(VeDbusConnection::getConnection().isConnected());
 }
 #endif
 

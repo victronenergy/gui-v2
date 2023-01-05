@@ -133,7 +133,7 @@ Rectangle {
 		}
 		font.pixelSize: Theme.font.size.h1
 		unit: VenusOS.Units_Percentage
-		value: Math.round(root.level)
+		value: (isNaN(root.level) || root.level < 0) ? 0 : Math.round(root.level)
 	}
 
 	Label {
@@ -150,8 +150,8 @@ Rectangle {
 		font.pixelSize: Theme.font.size.caption
 		color: Theme.color.font.secondary
 		text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit.value,
-				root.totalCapacity,
-				root.totalRemaining,
+				isNaN(root.totalCapacity) ? 0 : root.totalCapacity,
+				isNaN(root.totalRemaining) ? 0 : root.totalRemaining,
 				Theme.geometry.quantityLabel.valueLength)
 	}
 }

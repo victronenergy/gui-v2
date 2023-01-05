@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include <velib/qt/ve_qitem.hpp>
-#include <velib/qt/ve_qitem_table_model.hpp>
+#include <veutil/qt/ve_qitem.hpp>
+#include <veutil/qt/ve_qitem_table_model.hpp>
 
 class DBusService;
 

@@ -11,12 +11,12 @@
 #include "src/uidhelper.h"
 #include "src/backendconnection.h"
 
-#include "velib/qt/ve_qitem.hpp"
-#include "velib/qt/ve_quick_item.hpp"
-#include "velib/qt/ve_qitems_mqtt.hpp"
-#include "velib/qt/ve_qitem_table_model.hpp"
-#include "velib/qt/ve_qitem_sort_table_model.hpp"
-#include "velib/qt/ve_qitem_child_model.hpp"
+#include "veutil/qt/ve_qitem.hpp"
+#include "veutil/qt/ve_quick_item.hpp"
+#include "veutil/qt/ve_qitems_mqtt.hpp"
+#include "veutil/qt/ve_qitem_table_model.hpp"
+#include "veutil/qt/ve_qitem_sort_table_model.hpp"
+#include "veutil/qt/ve_qitem_child_model.hpp"
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 #include "src/connman/cmtechnology.h"
@@ -434,12 +434,12 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "TzPacificData");
 
 	// These types do not use dbus, so are safe to import even in the Qt Wasm build.
-	qmlRegisterType<VeQuickItem>("Victron.Velib", 1, 0, "VeQuickItem");
-	qmlRegisterType<VeQItem>("Victron.Velib", 1, 0, "VeQItem");
-	qmlRegisterType<VeQItemChildModel>("Victron.Velib", 1, 0, "VeQItemChildModel");
-	qmlRegisterType<VeQItemSortDelegate>("Victron.Velib", 1, 0, "VeQItemSortDelegate");
-	qmlRegisterType<VeQItemSortTableModel>("Victron.Velib", 1, 0, "VeQItemSortTableModel");
-	qmlRegisterType<VeQItemTableModel>("Victron.Velib", 1, 0, "VeQItemTableModel");
+	qmlRegisterType<VeQuickItem>("Victron.Veutil", 1, 0, "VeQuickItem");
+	qmlRegisterType<VeQItem>("Victron.Veutil", 1, 0, "VeQItem");
+	qmlRegisterType<VeQItemChildModel>("Victron.Veutil", 1, 0, "VeQItemChildModel");
+	qmlRegisterType<VeQItemSortDelegate>("Victron.Veutil", 1, 0, "VeQItemSortDelegate");
+	qmlRegisterType<VeQItemSortTableModel>("Victron.Veutil", 1, 0, "VeQItemSortTableModel");
+	qmlRegisterType<VeQItemTableModel>("Victron.Veutil", 1, 0, "VeQItemTableModel");
 
 	qmlRegisterType<Victron::VenusOS::SingleUidHelper>("Victron.VenusOS", 2, 0, "SingleUidHelper");
 	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");

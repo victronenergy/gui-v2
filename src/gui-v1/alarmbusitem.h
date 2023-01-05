@@ -4,7 +4,7 @@
 #include <QObject>
 #include <list>
 
-#include <velib/qt/ve_qitem.hpp>
+#include <veutil/qt/ve_qitem.hpp>
 
 #include "alarmmonitor.h"
 #include <gui-v1/dbus_services.h>
@@ -104,7 +104,7 @@ public:
 	BatteryAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter);
 
 private slots:
-	void numberOfDistributorsChanged(VeQItem *item, QVariant value);
+	void numberOfDistributorsChanged(QVariant value);
 
 private:
 	VeQItem *mNrOfDistributors;

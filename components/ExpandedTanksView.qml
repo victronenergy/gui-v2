@@ -104,7 +104,7 @@ Rectangle {
 					}
 					font.pixelSize: Theme.font.size.h1
 					unit: VenusOS.Units_Percentage
-					value: Math.round(model.tank.level)
+					value: (isNaN(model.tank.level) || model.tank.level < 0) ? 0 : Math.round(model.tank.level)
 				}
 				Label {
 					id: valueText

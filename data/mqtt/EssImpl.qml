@@ -4,7 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Velib
+import Victron.Veutil
 import "/components/Utils.js" as Utils
 
 QtObject {
@@ -87,23 +87,21 @@ QtObject {
 
 	property VeQuickItem veState: VeQuickItem {
 		uid: "mqtt/settings/0/Settings/CGwacs/BatteryLife/State"
-		Component.onCompleted: valueChanged(null, value)// For some reason, 'onValueChanged' doesn't get called at startup
 	}
 
 	property VeQuickItem veHub4Mode: VeQuickItem {
 		uid: "mqtt/settings/0/Settings/CGwacs/Hub4Mode"
-		Component.onCompleted: valueChanged(null, value)// For some reason, 'onValueChanged' doesn't get called at startup
 	}
 
 	property VeQuickItem veMinimumSocLimit: VeQuickItem {
 		uid: "mqtt/settings/0/Settings/CGwacs/BatteryLife/MinimumSocLimit"
 		onValueChanged: Global.ess.minimumStateOfCharge = value || 0
-		Component.onCompleted: valueChanged(null, value)// For some reason, 'onValueChanged' doesn't get called at startup
+		Component.onCompleted: Global.ess.minimumStateOfCharge = value || 0 // For some reason, 'onValueChanged' doesn't get called at startup
 	}
 
 	property VeQuickItem veSocLimit: VeQuickItem {
 		uid: "mqtt/settings/0/Settings/CGwacs/BatteryLife/SocLimit"
 		onValueChanged: Global.ess.stateOfChargeLimit = value || 0
-		Component.onCompleted: valueChanged(null, value)// For some reason, 'onValueChanged' doesn't get called at startup
+		Component.onCompleted: Global.ess.stateOfChargeLimit = value || 0 // For some reason, 'onValueChanged' doesn't get called at startup
 	}
 }

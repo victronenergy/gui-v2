@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QQmlEngine>
 
-#include "velib/qt/ve_qitems_mqtt.hpp"
+#include "veutil/qt/ve_qitems_mqtt.hpp"
 
 class VeQItemDbusProducer;
 class AlarmBusitem;

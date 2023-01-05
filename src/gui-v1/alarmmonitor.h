@@ -2,7 +2,7 @@
 #define ALARMMONITOR_H
 
 #include <QObject>
-#include <velib/qt/ve_qitem.hpp>
+#include <veutil/qt/ve_qitem.hpp>
 
 #include <gui-v1/dbus_service.h>
 #include <src/notificationsmodel.h>
@@ -43,8 +43,8 @@ public:
 
 private slots:
 	void notificationDestroyed();
-	void settingChanged(VeQItem * item, QVariant var);
-	void updateAlarm(VeQItem *item, QVariant var);
+	void settingChanged(QVariant var);
+	void updateAlarm(QVariant var);
 
 private:
 	DBusService *mService;
