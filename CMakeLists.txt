@@ -44,7 +44,7 @@ qt_add_resources(QML_RESOURCES
     qml.qrc)
 
 
-include_directories(src/velib/inc src .)
+include_directories(src/velib/inc src/veutil/inc src .)
 
 set(CONNMAN_SOURCES
     src/connman/cmmanager.h 
@@ -71,45 +71,52 @@ set(CONNMAN_SOURCES
     src/connman/connmandbustypes.h 
 )
 
-set(VELIB_CORE_SOURCES
-    src/velib/inc/velib/qt/unit_conversion.hpp
-    src/velib/inc/velib/qt/ve_qitem.hpp
-    src/velib/inc/velib/qt/ve_quick_item.hpp
-    src/velib/inc/velib/qt/ve_qitem_child_model.hpp
-    src/velib/inc/velib/qt/ve_qitem_loader.hpp
-    src/velib/inc/velib/qt/ve_qitem_sort_table_model.hpp
-    src/velib/inc/velib/qt/ve_qitem_table_model.hpp
-    src/velib/inc/velib/qt/ve_qitem_tree_model.hpp
-    src/velib/inc/velib/velib_config.h
+set(VEUTIL_CORE_SOURCES
+    src/veutil/inc/veutil/qt/unit_conversion.hpp
+    src/veutil/inc/veutil/qt/ve_qitem.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_child_model.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_loader.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_sort_table_model.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_table_model.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_tree_model.hpp
+    src/veutil/inc/veutil/qt/ve_quick_item.hpp
 
-    src/velib/src/qt/unit_conversion.cpp
-    src/velib/src/qt/ve_qitem.cpp
-    src/velib/src/qt/ve_quick_item.cpp
-    src/velib/src/qt/ve_qitem_child_model.cpp
-    src/velib/src/qt/ve_qitem_loader.cpp
-    src/velib/src/qt/ve_qitem_sort_table_model.cpp
-    src/velib/src/qt/ve_qitem_table_model.cpp
-    src/velib/src/qt/ve_qitem_tree_model.cpp
+    src/veutil/src/qt/unit_conversion.cpp
+    src/veutil/src/qt/ve_qitem.cpp
+    src/veutil/src/qt/ve_qitem_child_model.cpp
+    src/veutil/src/qt/ve_qitem_loader.cpp
+    src/veutil/src/qt/ve_qitem_sort_table_model.cpp
+    src/veutil/src/qt/ve_qitem_table_model.cpp
+    src/veutil/src/qt/ve_qitem_tree_model.cpp
+    src/veutil/src/qt/ve_quick_item.cpp
+)
+
+SET(VEUTIL_DBUS_SOURCES
+    src/veutil/inc/veutil/qt/ve_dbus_connection.hpp
+    src/veutil/inc/veutil/qt/ve_qitems_dbus.hpp
+    src/veutil/inc/veutil/qt/vebus_error.hpp
+
+    src/veutil/src/qt/ve_dbus_connection.cpp
+    src/veutil/src/qt/ve_qitems_dbus.cpp
+    src/veutil/src/qt/vebus_error.cpp
+)
+
+set(VEUTIL_MQTT_SOURCES
+    src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
+    src/veutil/src/qt/ve_qitems_mqtt.cpp
+)
+
+set(VELIB_CORE_SOURCES
+    src/velib/inc/velib/velib_config.h
 )
 
 set(VELIB_DBUS_SOURCES
     src/velib/inc/velib/qt/bms_error.hpp
     src/velib/inc/velib/qt/charger_error.hpp
-    src/velib/inc/velib/qt/ve_qitem_dbus_publisher.hpp
-    src/velib/inc/velib/qt/ve_qitems_dbus.hpp
-    src/velib/inc/velib/qt/v_busitems.h
-    src/velib/inc/velib/qt/vebus_error.hpp
+
     src/velib/src/qt/bms_error.cpp
     src/velib/src/qt/charger_error.cpp
-    src/velib/src/qt/v_busitem_proxy.cpp
-    src/velib/src/qt/v_busitem_proxy.cpp
-    src/velib/src/qt/ve_qitem_dbus_virtual_object.hpp
-    src/velib/src/qt/ve_qitem_dbus_virtual_object.cpp
-    src/velib/src/qt/ve_qitems_dbus.cpp
-    src/velib/src/qt/ve_qitem_dbus_publisher.cpp
 
-    src/velib/src/qt/v_busitems.cpp
-    src/velib/src/qt/vebus_error.cpp
     src/gui-v1/alarmbusitem.h
     src/gui-v1/alarmbusitem.cpp
     src/gui-v1/alarmmonitor.h
@@ -119,11 +126,6 @@ set(VELIB_DBUS_SOURCES
     src/gui-v1/dbus_services.h
     src/gui-v1/dbus_services.cpp
     src/gui-v1/wakespeed_error.cpp
-)
-
-set(VELIB_MQTT_SOURCES
-    src/velib/inc/velib/qt/ve_qitems_mqtt.hpp
-    src/velib/src/qt/ve_qitems_mqtt.cpp
 )
 
 set(VENUS_SOURCES
@@ -148,7 +150,8 @@ set(VENUS_SOURCES
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     list(APPEND SOURCES
         ${VELIB_CORE_SOURCES}
-        ${VELIB_MQTT_SOURCES}
+        ${VEUTIL_CORE_SOURCES}
+        ${VEUTIL_MQTT_SOURCES}
         ${VENUS_SOURCES}
         ${QML_RESOURCES}
     )
@@ -157,7 +160,9 @@ else()
         ${CONNMAN_SOURCES}
         ${VELIB_CORE_SOURCES}
         ${VELIB_DBUS_SOURCES}
-        ${VELIB_MQTT_SOURCES}
+        ${VEUTIL_CORE_SOURCES}
+        ${VEUTIL_DBUS_SOURCES}
+        ${VEUTIL_MQTT_SOURCES}
         ${VENUS_SOURCES}
         ${QML_RESOURCES}
     )

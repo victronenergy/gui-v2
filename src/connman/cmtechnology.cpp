@@ -1,6 +1,6 @@
 #include <QDebug>
 
-#include <velib/qt/v_busitems.h>
+#include <veutil/qt/ve_dbus_connection.hpp>
 #include "cmtechnology.h"
 
 const QString CmTechnology::Powered("Powered");
@@ -11,13 +11,13 @@ const QString CmTechnology::Tethering("Tethering");
 
 CmTechnology::CmTechnology(QObject *parent) :
 	QObject(parent),
-	mTechnology("net.connman", "/", VBusItems::getConnection())
+	mTechnology("net.connman", "/", VeDbusConnection::getConnection())
 {
 }
 
 CmTechnology::CmTechnology(const QString& path, const QVariantMap& properties, QObject *parent) :
 	QObject(parent),
-	mTechnology("net.connman", path, VBusItems::getConnection())
+	mTechnology("net.connman", path, VeDbusConnection::getConnection())
 {
 	mPath = path;
 	mProperties = properties;

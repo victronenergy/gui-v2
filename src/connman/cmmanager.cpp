@@ -1,4 +1,4 @@
-#include <velib/qt/v_busitems.h>
+#include <veutil/qt/ve_dbus_connection.hpp>
 
 #include "cmmanager.h"
 
@@ -15,8 +15,8 @@ CmManager* CmManager::instance(QObject *parent)
 CmManager::CmManager(QObject *parent) :
 	QObject(parent),
 	connected(false),
-	mManager("net.connman", "/", VBusItems::getConnection()),
-	mWatcher("net.connman", VBusItems::getConnection(),
+	mManager("net.connman", "/", VeDbusConnection::getConnection()),
+	mWatcher("net.connman", VeDbusConnection::getConnection(),
 			 QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration),
 	mAgent(parent)
 {

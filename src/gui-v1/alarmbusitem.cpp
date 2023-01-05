@@ -315,7 +315,7 @@ BatteryAlarms::BatteryAlarms(DBusService *service, Victron::VenusOS::ActiveNotif
 	DeviceAlarms(service, noticationCenter), mDistributorAlarmsAdded(false)
 {
 	mNrOfDistributors = service->item("/NrOfDistributors");
-	mNrOfDistributors->getValueAndChanges(this, SLOT(numberOfDistributorsChanged(VeQItem *, QVariant)));
+	mNrOfDistributors->getValueAndChanges(this, SLOT(numberOfDistributorsChanged(QVariant)));
 
 	addTripplet(tr("Low voltage"),				"/Alarms/LowVoltage",			"",		"/Dc/0/Voltage");
 	addTripplet(tr("High voltage"),				"/Alarms/HighVoltage",			"",		"/Dc/0/Voltage");
@@ -344,10 +344,8 @@ BatteryAlarms::BatteryAlarms(DBusService *service, Victron::VenusOS::ActiveNotif
 	addBmsError("/ErrorCode");
 }
 
-void BatteryAlarms::numberOfDistributorsChanged(VeQItem *item, QVariant value)
+void BatteryAlarms::numberOfDistributorsChanged(QVariant value)
 {
-	Q_UNUSED(item);
-
 	if (!value.isValid() || value.toInt() <= 0 || mDistributorAlarmsAdded)
 		return;
 

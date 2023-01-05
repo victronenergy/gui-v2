@@ -269,7 +269,7 @@ OverviewWidget {
 				value: Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 					   ? batteryData.temperature_celsius
 					   : Units.celsiusToFahrenheit(batteryData.temperature_celsius))
-				unit: Global.systemSettings.temperatureUnit.value
+				unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : VenusOS.Units_Temperature_Celsius
 				font.pixelSize: Theme.font.size.body2
 			}
 		}

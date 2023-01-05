@@ -13,12 +13,12 @@ DBusService::DBusService(VeQItem *serviceItem, DbusServiceType serviceType, QObj
 	// Note: to support service without a CustomName item at all, also the state changes need
 	// to be connected to, since there won't be any valueChange if the CustomName is not supported
 	// at all!
-	connect(item("CustomName"), SIGNAL(stateChanged(VeQItem*,State)), SLOT(updateDescription()));
-	connect(item("ProductName"), SIGNAL(stateChanged(VeQItem*,State)), SLOT(updateDescription()));
-	item("ProductName")->getValueAndChanges(this, SLOT(updateDescription(VeQItem*,QVariant)), true, true);
-	item("CustomName")->getValueAndChanges(this, SLOT(updateDescription(VeQItem*,QVariant)), true, true);
-	connect(serviceItem, SIGNAL(stateChanged(VeQItem*,State)), SIGNAL(connectedChanged()));
-	connect(serviceItem, SIGNAL(stateChanged(VeQItem*,State)), SLOT(updateDescription()));
+	connect(item("CustomName"), SIGNAL(stateChanged(VeQItem::State)), SLOT(updateDescription()));
+	connect(item("ProductName"), SIGNAL(stateChanged(VeQItem::State)), SLOT(updateDescription()));
+	item("ProductName")->getValueAndChanges(this, SLOT(updateDescription(QVariant)), true, true);
+	item("CustomName")->getValueAndChanges(this, SLOT(updateDescription(QVariant)), true, true);
+	connect(serviceItem, SIGNAL(stateChanged(VeQItem::State)), SIGNAL(connectedChanged()));
+	connect(serviceItem, SIGNAL(stateChanged(VeQItem::State)), SLOT(updateDescription()));
 }
 
 DBusService::~DBusService()
@@ -27,7 +27,7 @@ DBusService::~DBusService()
 	mServiceItem->itemDelete();
 }
 
-void DBusService::updateDescription(VeQItem *, QVariant)
+void DBusService::updateDescription(QVariant)
 {
 	VeQItem *productNameItem = item("ProductName");
 	VeQItem *customNameItem = item("CustomName");
@@ -53,7 +53,7 @@ void DBusService::updateDescription(VeQItem *, QVariant)
 
 void DBusService::updateDescription()
 {
-	updateDescription(nullptr, QVariant());
+	updateDescription(QVariant());
 }
 
 void DBusService::setDescription(const QString &description)
@@ -204,14 +204,14 @@ DBusTankService::DBusTankService(VeQItem *serviceItem, QObject *parent) :
 	DBusService(serviceItem, DBUS_SERVICE_TANK, parent)
 {
 	// MIND IT! since bulk init might be active here, the state can bounch a bit.
-	connect(item("DeviceInstance"), SIGNAL(stateChanged(VeQItem*,State)), SLOT(updateDescription()));
-	connect(item("FluidType"), SIGNAL(stateChanged(VeQItem*,State)), SLOT(updateDescription()));
+	connect(item("DeviceInstance"), SIGNAL(stateChanged(VeQItem::State)), SLOT(updateDescription()));
+	connect(item("FluidType"), SIGNAL(stateChanged(VeQItem::State)), SLOT(updateDescription()));
 
-	item("DeviceInstance")->getValueAndChanges(this, SLOT(updateDescription(VeQItem*,QVariant)), true, true);
-	item("FluidType")->getValueAndChanges(this, SLOT(updateDescription(VeQItem*,QVariant)), true, true);
+	item("DeviceInstance")->getValueAndChanges(this, SLOT(updateDescription(QVariant)), true, true);
+	item("FluidType")->getValueAndChanges(this, SLOT(updateDescription(QVariant)), true, true);
 }
 
-void DBusTankService::updateDescription(VeQItem *, QVariant)
+void DBusTankService::updateDescription(QVariant)
 {
 	VeQItem *customNameItem = item("CustomName");
 	QString customName = customNameItem->getValue().toString();

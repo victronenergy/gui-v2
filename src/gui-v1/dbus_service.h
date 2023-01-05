@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QString>
 
-#include <velib/qt/ve_qitem.hpp>
+#include <veutil/qt/ve_qitem.hpp>
 
 class DBusService : public QObject
 {
@@ -79,7 +79,7 @@ signals:
 	void initialized();
 
 private slots:
-	virtual void updateDescription(VeQItem*,QVariant);
+	virtual void updateDescription(QVariant);
 	void updateDescription();
 
 protected:
@@ -101,7 +101,7 @@ class DBusTankService : public DBusService
 public:
 	DBusTankService(VeQItem *serviceItem, QObject *parent = 0);
 
-	void updateDescription(VeQItem*,QVariant);
+	void updateDescription(QVariant);
 
 private:
 	static const std::vector<QString> &knownFluidTypes();

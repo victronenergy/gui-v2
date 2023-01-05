@@ -1,4 +1,4 @@
-#include <velib/qt/v_busitems.h>
+#include <veutil/qt/ve_dbus_connection.hpp>
 #include <QtNetwork/QHostAddress>
 
 #include "cmservice.h"
@@ -31,14 +31,14 @@ const QString CmService::Ethernet("Ethernet");
 CmService::CmService(QObject *parent) :
 	QObject(parent),
 	connected(false),
-	mService("net.connman", "/", VBusItems::getConnection())
+	mService("net.connman", "/", VeDbusConnection::getConnection())
 {
 }
 
 CmService::CmService(const QString& path, const QVariantMap& properties, QObject *parent) :
 	QObject(parent),
 	connected(false),
-	mService("net.connman", path, VBusItems::getConnection())
+	mService("net.connman", path, VeDbusConnection::getConnection())
 {
 	mPath = path;
 	mProperties = properties;

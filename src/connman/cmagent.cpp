@@ -1,6 +1,6 @@
 #include <QDebug>
 
-#include <velib/qt/v_busitems.h>
+#include <veutil/qt/ve_dbus_connection.hpp>
 #include "cmagent.h"
 
 CmAgent::CmAgent(QObject *parent) :
@@ -19,13 +19,13 @@ CmAgent::CmAgent(const QString &objectPath, QObject *parent) :
 CmAgent::~CmAgent()
 {
 	if (!mPath.isEmpty())
-		VBusItems::getConnection().unregisterObject(mPath);
+		VeDbusConnection::getConnection().unregisterObject(mPath);
 }
 
 void CmAgent::path(const QString &objectPath)
 {
 	mPath = objectPath;
-	VBusItems::getConnection().registerObject(objectPath,this);
+	VeDbusConnection::getConnection().registerObject(objectPath,this);
 }
 
 void CmAgent::release()
