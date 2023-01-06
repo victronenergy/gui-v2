@@ -137,8 +137,7 @@ Page {
 		}
 
 		SettingsListTextField {
-			//% "Password"
-			text: qsTrId("settings_tcpip_password")
+			text: CommonWords.password
 			textField.maximumLength: 35
 			visible: root.service && root._wifi
 					 && (root.service.state === "idle" || root.service.state === "failure")
@@ -197,8 +196,7 @@ Page {
 		}
 
 		SettingsListTextItem {
-			//% "Signal strength"
-			text: qsTrId("settings_tcpip_signal_strength")
+			text: CommonWords.signal_strength
 			secondaryText: root.service ? service.strength + "%" : ""
 			visible: root._wifi
 		}
@@ -239,8 +237,7 @@ Page {
 		}
 
 		SettingsListIpAddressField {
-			//% "IP address"
-			text: qsTrId("settings_tcpip_ip_address")
+			text: CommonWords.ip_address
 			enabled: method.userHasWriteAccess && !root._readOnlySettings
 			textField.text: root._getIpv4Property("Address")
 			onAccepted: root._setIpv4Property("Address", textField.text)

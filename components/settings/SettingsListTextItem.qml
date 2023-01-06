@@ -12,6 +12,7 @@ SettingsListItem {
 	property alias source: dataPoint.source
 	readonly property alias dataPoint: dataPoint
 	readonly property alias value: dataPoint.value
+	readonly property alias valid: dataPoint.valid
 
 	enabled: source === "" || dataPoint.valid
 	content.children: [

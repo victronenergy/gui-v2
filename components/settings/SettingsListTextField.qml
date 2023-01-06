@@ -13,6 +13,7 @@ SettingsListItem {
 	property alias source: dataPoint.source
 	property alias value: dataPoint.value
 	readonly property alias dataPoint: dataPoint
+	readonly property alias valid: dataPoint.valid
 	property alias textField: textField
 	property alias secondaryText: textField.text
 	property alias placeholderText: textField.placeholderText

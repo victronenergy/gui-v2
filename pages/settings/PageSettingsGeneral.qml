@@ -49,11 +49,7 @@ Page {
 			SettingsListTextItem {
 				//% "Remote support tunnel"
 				text: qsTrId("settings_remote_support_tunnel")
-				secondaryText: remotePort.secondaryText.length > 0
-						 //% "Online"
-						? qsTrId("settings_remote_support_online")
-						 //% "Offline"
-						: qsTrId("settings_remote_support_offline")
+				secondaryText: remotePort.secondaryText.length > 0 ? CommonWords.online : CommonWords.offline
 				visible: defaultVisible && remoteSupportOnOff.checked
 			}
 

@@ -335,3 +335,41 @@ function normalizedSource(s) {
 	// strip '/dbus' prefix
 	return s.startsWith("dbus/") ? s.substr(5) : s
 }
+
+function simplifiedNetworkType(t)
+{
+	if (!t) {
+		return ""
+	}
+	switch (t) {
+	case "NONE":
+		return ""
+	case "GPRS":
+	case "GSM":
+		return "G"
+	case "EDGE":
+		return "E"
+	case "CDMA":
+	case "1xRTT":
+	case "IDEN":
+		return "2G";
+	case "UMTS":
+	case "EVDO_0":
+	case "EVDO_A":
+	case "HSDPA":
+	case "HSUPA":
+	case "HSPA":
+	case "EVDO_B":
+	case "EHRPD":
+	case "HSPAP":
+		return "3G";
+	case "LTE":
+		return "4G";
+	default:
+		return t;
+	}
+}
+
+function between(x, min, max) {
+	return x >= min && x <= max;
+}
