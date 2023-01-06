@@ -70,6 +70,11 @@ Page {
 					: "/pages/settings/PageSettingsWifi.qml"
 			},
 			{
+				//% "GSM modem"
+				text: qsTrId("settings_gsm_modem"),
+				page: "/pages/settings/PageSettingsGsm.qml"
+			},
+			{
 				//% "Generator start/stop"
 				text: qsTrId("settings_generator_start_stop"),
 				page: "/pages/settings/PageRelayGenerator.qml"

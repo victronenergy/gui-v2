@@ -207,6 +207,7 @@
         <file>pages/settings/PageSettingsDvcc.qml</file>
         <file>pages/settings/PageSettingsGeneral.qml</file>
         <file>pages/settings/PageSettingsGenerator.qml</file>
+        <file>pages/settings/PageSettingsGsm.qml</file>
         <file>pages/settings/PageSettingsHub4.qml</file>
         <file>pages/settings/PageSettingsHub4Feedin.qml</file>
         <file>pages/settings/PageSettingsIo.qml</file>
@@ -303,6 +304,7 @@
         <file>images/freshWater.svg</file>
         <file>images/tank.svg</file>
         <file>images/dropdown.svg</file>
+        <file>images/icon-statusbar-sim-locked.svg</file>
         <file>images/inverter.svg</file>
         <file>images/ess.svg</file>
         <file>images/information.svg</file>
@@ -330,5 +332,6 @@
         <file>themes/typography/TypographyDesign.json</file>
         <file>themes/typography/FiveInch.json</file>
         <file>themes/typography/SevenInch.json</file>
+        <file>components/GsmStatusIcon.qml</file>
     </qresource>
 </RCC>

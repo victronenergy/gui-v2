@@ -66,11 +66,7 @@ Page {
 				text: qsTrId("settings_remoteconsole_vrm_status")
 				secondaryText: vncInternet.checked
 						&& remoteSupportIpAndPort.valid
-						&& remoteSupportIpAndPort.value !== 0
-					  //% "Online"
-					? qsTrId("settings_remoteconsole_vrm_online")
-					  //% "Offline"
-					: qsTrId("settings_remoteconsole_vrm_offline")
+						&& remoteSupportIpAndPort.value !== 0 ? CommonWords.online : CommonWords.offline
 
 				DataPoint {
 					id: remoteSupportIpAndPort

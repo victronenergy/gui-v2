@@ -35,11 +35,26 @@ QtObject {
 	//% "Inverter overload"
 	readonly property string inverter_overload: qsTrId("common_words_inverter_overload")
 
+	//% "IP address"
+	readonly property string ip_address: qsTrId("common_words_ip_address")
+
 	//% "No error"
 	readonly property string no_error: qsTrId("common_words_no_error");
 
+	//% "Offline"
+	readonly property string offline: qsTrId("common_words_offline");
+
+	//% "Online"
+	readonly property string online: qsTrId("common_words_online");
+
+	//% "Password"
+	readonly property string password: qsTrId("common_words_password")
+
 	//% "Quiet hours"
 	readonly property string quiet_hours: qsTrId("common_words_quiet_hours");
+
+	//% "Signal strength"
+	readonly property string signal_strength: qsTrId("common_words_signal_strength");
 
 	//% "Start after the condition is reached for"
 	readonly property string start_after_the_condition_is_reached_for: qsTrId("common_words_start_after_condition_reached_for");

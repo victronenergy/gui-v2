@@ -19,6 +19,7 @@ SettingsListNavigationItem {
 
 	property alias source: dataPoint.source
 	readonly property alias dataPoint: dataPoint
+	readonly property alias value: dataPoint.value
 	property var optionModel: []
 	property int currentIndex: {
 		if (!optionModel || optionModel.length === undefined || source.length === 0 || !dataPoint.valid) {
