@@ -54,7 +54,7 @@ Page {
 				}
 				onOptionClicked: function(index) {
 					currentIndex = index
-					classAndVrmInstanceItem.setValue(model[index].value + ":" + deviceInstance)
+					classAndVrmInstanceItem.setValue(optionModel[index].value + ":" + deviceInstance)
 				}
 			}
 
