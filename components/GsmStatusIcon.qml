@@ -10,23 +10,27 @@ import "/components/Utils.js" as Utils
 Row { // TODO: update this when we get a design
 	id: root
 
-	property bool showNetworkType: activeNetworkConnection.value === 3
+	property bool showNetworkType: activeNetworkConnection.value === VenusOS.NetworkConnection_GSM
 	property bool showRoamingIcon: true
 	property string color: "#FFFFFF"
 	property bool valid: strength.valid
 
 	function getScaledStrength(strength) {
-		if (Utils.between(strength, 0, 3 ))
+		if (strength <= 3) {
 			return 0
-		if (Utils.between(strength, 4, 9))
+		}
+		if (strength <= 9) {
 			return 1
-		if (Utils.between(strength, 10, 14))
+		}
+		if (strength <= 14) {
 			return 2
-		if (Utils.between(strength, 15, 19) )
+		}
+		if (strength <= 19) {
 			return 3
-		if (Utils.between(strength, 20, 31))
+		}
+		if (strength <= 31) {
 			return 4
-
+		}
 		return 0
 	}
 

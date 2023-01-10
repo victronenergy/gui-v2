@@ -40,6 +40,14 @@ QtObject {
 		Global.mockDataSimulator.mockDataValues["com.victronenergy.vecan." + gateway + "/" + key] = value
 	}
 
+	function setMockModemValue(key, value) {
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.modem" + key] = value
+	}
+
+	function setMockModemSetting(key, value) {
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.settings/Settings/Modem" + key] = value
+	}
+
 	Component.onCompleted: {
 		// Settings that are converted for convenient UI access
 		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
@@ -202,6 +210,24 @@ QtObject {
 		setMockSettingValue("Relay/1/Polarity", 0)
 		setMockSystemValue("Relay/0/State", 1)
 		setMockSystemValue("Relay/1/State", 1)
+
+		// GSM modem
+		setMockModemValue("/Connected", 1)
+		setMockModemValue("/IMEI", "863427041986440")
+		setMockModemValue("/IP", "1.2.3.4")
+		setMockModemValue("/Model", "SIMCOM_SIM7600SA")
+		setMockModemValue("/NetworkName", "Telstra")
+		setMockModemValue("/NetworkType", "LTE")
+		setMockModemValue("/RegStatus", 1)
+		setMockModemValue("/Roaming", 1)
+		setMockModemValue("/SignalStrength", 17)
+		setMockModemValue("/SimStatus", 1000)
+		setMockModemSetting("/APN", "")
+		setMockModemSetting("/Connect", 1)
+		setMockModemSetting("/PIN", "1234")
+		setMockModemSetting("/Password", "tinyurl.com/msvnbd3r")
+		setMockModemSetting("/RoamingPermitted", 0)
+		setMockModemSetting("/User", "Rick")
 	}
 
 	property Connections briefSettingsConn: Connections {

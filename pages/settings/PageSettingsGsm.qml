@@ -12,25 +12,6 @@ Page {
 	property string bindPrefix: "com.victronenergy.modem"
 	property string settingsBindPrefix: "com.victronenergy.settings/Settings/Modem"
 
-	function getScaledStrength(strength) {
-		if (Utils.between(strength, 0, 3)) {
-			return 0
-		}
-		if (Utils.between(strength, 4, 9)) {
-			return 1
-		}
-		if (Utils.between(strength, 10, 14)) {
-			return 2
-		}
-		if (Utils.between(strength, 15, 19) ) {
-			return 3
-		}
-		if (Utils.between(strength, 21, 31)) {
-			return 4
-		}
-		return 0
-	}
-
 	DataPoint {
 		id: simStatus
 		source: bindPrefix + "/SimStatus"
@@ -63,16 +44,13 @@ Page {
 		ObjectModel {
 			id: modemConnected
 
-			SettingsListRadioButtonGroup {
+			SettingsListTextItem {
 				id: status
 
 				//% "Internet"
 				text: qsTrId("page_settings_gsm_internet")
+				secondaryText: value === 1 ? CommonWords.online : CommonWords.offline
 				source: bindPrefix + "/Connected"
-				optionModel: [
-					{ display: CommonWords.offline, value: 0 },
-					{ display: CommonWords.online, value: 1 }
-				]
 			}
 
 			SettingsListTextItem {
@@ -119,32 +97,42 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
-			SettingsListRadioButtonGroup {
+			SettingsListTextItem {
 				//% "Sim status"
 				text: qsTrId("page_settings_gsm_sim_status")
 				//% "Unknown"
-				defaultSecondaryText: qsTrId("page_settings_gsm_unknown")
-				optionModel: [
-					//% "SIM not inserted"
-					{ display: qsTrId("page_settings_gsm_sim_not_inserted"), value: 10},
-					//% "PIN required"
-					{ display: qsTrId("page_settings_gsm_pin_required"), value: 11},
-					//% "PUK required"
-					{ display: qsTrId("page_settings_gsm_puk_required"), value: 12},
-					//% "SIM failure"
-					{ display: qsTrId("page_settings_gsm_sim_failure"), value: 13},
-					//% "SIM busy"
-					{ display: qsTrId("page_settings_gsm_sim_busy"), value: 14},
-					//% "Wrong SIM"
-					{ display: qsTrId("page_settings_gsm_wrong_sim"), value: 15},
-					//% "Wrong PIN"
-					{ display: qsTrId("page_settings_gsm_wrong_pin"), value: 16},
-					//% "Ready"
-					{ display: qsTrId("page_settings_gsm_ready"), value: 1000},
-					//% "Unknown error"
-					{ display: qsTrId("page_settings_gsm_unknown_error"), value: 1001},
-				]
-				enabled: false
+				//defaultSecondaryText: qsTrId("page_settings_gsm_unknown")
+				secondaryText: {
+					switch (value) {
+					case 10:
+						//% "SIM not inserted"
+						return qsTrId("page_settings_gsm_sim_not_inserted")
+					case 11:
+						//% "PIN required"
+						return qsTrId("page_settings_gsm_pin_required")
+					case 12:
+						//% "PUK required"
+						return qsTrId("page_settings_gsm_puk_required")
+					case 13:
+						//% "SIM failure"
+						return qsTrId("page_settings_gsm_sim_failure")
+					case 14:
+						//% "SIM busy"
+						return qsTrId("page_settings_gsm_sim_busy")
+					case 15:
+						//% "Wrong SIM"
+						return qsTrId("page_settings_gsm_wrong_sim")
+					case 16:
+						//% "Wrong PIN"
+						return qsTrId("page_settings_gsm_wrong_pin")
+					case 1000:
+						//% "Ready"
+						return qsTrId("page_settings_gsm_ready")
+					default:
+						//% "Unknown error"
+						return qsTrId("page_settings_gsm_unknown_error")
+					}
+				}
 				source: bindPrefix + "/SimStatus"
 			}
 
@@ -185,8 +173,9 @@ Page {
 									text: qsTrId("page_settings_gsm_use_default_apn")
 									checked: apnSetting.value === ""
 									onCheckedChanged: {
-										if (apnSetting.valid && checked)
+										if (apnSetting.valid && checked) {
 											apnSetting.setValue("")
+										}
 									}
 								}
 
