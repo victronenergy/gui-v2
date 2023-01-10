@@ -354,6 +354,16 @@ public:
 	};
 	Q_ENUM(DigitalInput_Type)
 
+	// These values are defined on the cerbo in /usr/sbin/resolv-watch script
+	// that monitors which connection is the one active from all the avaiable ones.
+	enum NetworkConnection_Type {
+		NetworkConnection_None,
+		NetworkConnection_Ethernet,
+		NetworkConnection_WiFi,
+		NetworkConnection_GSM
+	};
+	Q_ENUM(NetworkConnection_Type)
+
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };
