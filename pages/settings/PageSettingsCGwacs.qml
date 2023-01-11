@@ -60,17 +60,13 @@ Page {
 
 			SettingsListRadioButtonGroup {
 				id: positions
-				//% "Position"
-				text: qsTrId("settings_position")
+				text: CommonWords.position
 				source: root.devicePath + "/Position"
 				visible: root.serviceType === "pvinverter"
 				optionModel: [
-					//% "AC Input 1"
-					{ display: qsTrId("settings_ac_input_1"), value: 0 },
-					//% "AC Input 2"
-					{ display: qsTrId("settings_ac_input_2"), value: 2 },
-					//% "AC Output"
-					{ display: qsTrId("settings_ac_output"), value: 1 },
+					{ display: CommonWords.ac_input_1, value: 0 },
+					{ display: CommonWords.ac_input_2, value: 2 },
+					{ display: CommonWords.ac_output, value: 1 },
 				]
 			}
 

@@ -57,6 +57,11 @@ Page {
 				text: qsTrId("settings_energy_meters"),
 				page: "/pages/settings/PageSettingsCGwacsOverview.qml"
 			},
+			//% "PV inverters"
+			{
+				text: qsTrId("settings_pv_inverters"),
+				page: "/pages/settings/PageSettingsFronius.qml"
+			},
 			{
 				//% "Ethernet"
 				text: qsTrId("settings_ethernet"),

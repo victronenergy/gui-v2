@@ -1,12 +1,14 @@
 /*
-** Copyright (C) 2021 Victron Energy B.V.
+** Copyright (C) 2022 Victron Energy B.V.
+*
+* A check box with the same styling as RadioButton
 */
 
 import QtQuick
-import QtQuick.Templates as CT
+import QtQuick.Controls as C
 import Victron.VenusOS
 
-CT.RadioButton {
+C.CheckBox {
 	id: root
 
 	property alias label: label
@@ -20,10 +22,7 @@ CT.RadioButton {
 		implicitContentHeight + topPadding + bottomPadding,
 		implicitIndicatorHeight + topPadding + bottomPadding)
 	indicator: RadioButtonIndicator {
-		anchors {
-			right: parent.right
-			verticalCenter: parent.verticalCenter
-		}
+		anchors.verticalCenter: root.verticalCenter
 		down: root.down
 		checked: root.checked
 	}

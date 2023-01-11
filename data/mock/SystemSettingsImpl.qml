@@ -48,6 +48,10 @@ QtObject {
 		Global.mockDataSimulator.mockDataValues["com.victronenergy.settings/Settings/Modem" + key] = value
 	}
 
+	function setMockFroniusValue(key, value) {
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.fronius" + "/" + key] = value
+	}
+
 	Component.onCompleted: {
 		// Settings that are converted for convenient UI access
 		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
@@ -228,6 +232,25 @@ QtObject {
 		setMockModemSetting("/Password", "tinyurl.com/msvnbd3r")
 		setMockModemSetting("/RoamingPermitted", 0)
 		setMockModemSetting("/User", "Rick")
+
+		// Fronius PV Inverter settings
+		setMockSettingValue("Fronius/AutoScan", 0)
+		setMockSettingValue("Fronius/IPAddresses", "2.2.2.2,2.2.2.3")
+		setMockSettingValue("Fronius/InverterIds", "Inverter1,Inverter2")
+		setMockSettingValue("Fronius/Inverters/Inverter1/CustomName", "customName1")
+		setMockSettingValue("Fronius/Inverters/Inverter1/IsActive", 1)
+		setMockSettingValue("Fronius/Inverters/Inverter1/Phase", 1)
+		setMockSettingValue("Fronius/Inverters/Inverter1/Position", 0)
+		setMockSettingValue("Fronius/Inverters/Inverter1/SerialNumber", 1234)
+		setMockSettingValue("Fronius/Inverters/Inverter2/CustomName", "customName2")
+		setMockSettingValue("Fronius/Inverters/Inverter2/IsActive", 1)
+		setMockSettingValue("Fronius/Inverters/Inverter2/Phase", 1)
+		setMockSettingValue("Fronius/Inverters/Inverter2/Position", 1)
+		setMockSettingValue("Fronius/Inverters/Inverter2/SerialNumber", 5678)
+		setMockSettingValue("Fronius/KnownIPAddresses", "1.2.3.4,1.2.3.5")
+		setMockSettingValue("Fronius/PortNumber", 81)
+		setMockFroniusValue("AutoDetect", 0)
+		setMockFroniusValue("ScanProgress", 0)
 	}
 
 	property Connections briefSettingsConn: Connections {

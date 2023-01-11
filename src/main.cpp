@@ -154,6 +154,8 @@ void registerQmlTypes()
 	/* controls */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Button.qml")),
 		"Victron.VenusOS", 2, 0, "Button");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/CheckBox.qml")),
+		"Victron.VenusOS", 2, 0, "CheckBox");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ListItemButton.qml")),
 		"Victron.VenusOS", 2, 0, "ListItemButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Label.qml")),
@@ -162,6 +164,10 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ProgressBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButton.qml")),
 		"Victron.VenusOS", 2, 0, "RadioButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButtonIndicator.qml")),
+		"Victron.VenusOS", 2, 0, "RadioButtonIndicator");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButtonLabel.qml")),
+		"Victron.VenusOS", 2, 0, "RadioButtonLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ScrollBar.qml")),
 		"Victron.VenusOS", 2, 0, "ScrollBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Slider.qml")),
@@ -206,6 +212,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "InputPanel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GeneratorIconLabel.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorIconLabel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/IpAddressButtonGroup.qml")),
+		"Victron.VenusOS", 2, 0, "IpAddressButtonGroup");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LevelsPageGaugeDelegate.qml")),
 		"Victron.VenusOS", 2, 0, "LevelsPageGaugeDelegate");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LoadGraph.qml")),
@@ -294,6 +302,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "SettingsListView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListNavigationItem.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListNavigationItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListPortField.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListPortField");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListRadioButton.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListRadioButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListRadioButtonGroup.qml")),

@@ -19,7 +19,7 @@ SettingsListItem {
 	property alias placeholderText: textField.placeholderText
 	readonly property bool hasActiveFocus: textField.activeFocus
 
-	signal accepted()
+	signal accepted(text: string)
 	signal editingFinished()
 
 	function forceActiveFocus() {
@@ -42,32 +42,34 @@ SettingsListItem {
 			dataPoint.setValue(text)
 		}
 		textField.focus = false
-		root.accepted()
+		root.accepted(text)
+	}
+
+	property TextField defaultContent: TextField {
+		id: textField
+
+		width: Math.max(
+				Theme.geometry.settingsListItem.textField.minimumWidth,
+				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry.settingsListItem.textField.maximumWidth))
+		enabled: root.userHasWriteAccess
+		text: dataPoint.valid ? dataPoint.value : ""
+
+		EnterKeyAction.actionId: EnterKeyAction.Done
+		onAccepted: root.onAccepted(text)
+		onEditingFinished: root.editingFinished()
+
+		MouseArea {
+			anchors.fill: parent
+			onPressed: function(mouse) {
+				root._aboutToFocus()
+				mouse.accepted = false
+			}
+		}
 	}
 
 	enabled: source === "" || dataPoint.valid
 	content.children: [
-		TextField {
-			id: textField
-
-			width: Math.max(
-					Theme.geometry.settingsListItem.textField.minimumWidth,
-					Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry.settingsListItem.textField.maximumWidth))
-			enabled: root.userHasWriteAccess
-			text: dataPoint.valid ? dataPoint.value : ""
-
-			EnterKeyAction.actionId: EnterKeyAction.Done
-			onAccepted: root.onAccepted(text)
-			onEditingFinished: root.editingFinished()
-
-			MouseArea {
-				anchors.fill: parent
-				onPressed: function(mouse) {
-					root._aboutToFocus()
-					mouse.accepted = false
-				}
-			}
-		}
+		defaultContent
 	]
 
 	DataPoint {
