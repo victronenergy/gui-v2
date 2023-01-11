@@ -72,6 +72,7 @@ set(CONNMAN_SOURCES
 )
 
 set(VEUTIL_CORE_SOURCES
+    src/veutil/inc/veutil/qt/firmware_updater_data.hpp
     src/veutil/inc/veutil/qt/unit_conversion.hpp
     src/veutil/inc/veutil/qt/ve_qitem.hpp
     src/veutil/inc/veutil/qt/ve_qitem_child_model.hpp

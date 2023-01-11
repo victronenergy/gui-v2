@@ -28,12 +28,12 @@ SettingsListButton {
 	button.text: _mountStateToText(mountState.value)
 	button.enabled: mountState.value === VenusOS.Storage_Mounted
 	writeAccessLevel: VenusOS.User_AccessType_User
-	onClicked: {
-		mountState.setValue(VenusOS.Storage_UnmountRequested)
-	}
+
+	onClicked: mountState.setValue(VenusOS.Storage_UnmountRequested)
 
 	DataPoint {
 		id: mountState
+
 		source: "com.victronenergy.logger/Storage/MountState"
 	}
 }

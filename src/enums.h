@@ -340,6 +340,20 @@ public:
 	};
 	Q_ENUM(Temperature_DeviceType)
 
+	enum Firmware_AutoUpdate {
+		Firmware_AutoUpdate_Disabled,
+		Firmware_AutoUpdate_CheckAndUpdate,
+		Firmware_AutoUpdate_CheckOnly,
+		Firmware_AutoUpdate_CheckAndDownloadOnly
+	};
+	Q_ENUM(Firmware_AutoUpdate)
+
+	enum Firmware_UpdateType {
+		Firmware_UpdateType_Online,
+		Firmware_UpdateType_Offline
+	};
+	Q_ENUM(Firmware_UpdateType)
+
 	enum DigitalInput_Type {
 		DigitalInput_Disabled,
 		DigitalInput_PulseMeter,
