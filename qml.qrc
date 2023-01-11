@@ -4,6 +4,9 @@
         <file>ApplicationContent.qml</file>
         <file>Global.qml</file>
         <file>components/controls/Button.qml</file>
+        <file>components/controls/CheckBox.qml</file>
+        <file>components/controls/RadioButtonIndicator.qml</file>
+        <file>components/controls/RadioButtonLabel.qml</file>
         <file>components/controls/Label.qml</file>
         <file>components/controls/ListItemButton.qml</file>
         <file>components/controls/ProgressBar.qml</file>
@@ -21,6 +24,7 @@
         <file>components/settings/SettingsListButton.qml</file>
         <file>components/settings/SettingsListCGwacsBatterySchedule.qml</file>
         <file>components/settings/SettingsListDvccSwitch.qml</file>
+        <file>components/settings/SettingsListPortField.qml</file>
         <file>components/settings/SettingsListView.qml</file>
         <file>components/settings/SettingsListIpAddressField.qml</file>
         <file>components/settings/SettingsListNavigationItem.qml</file>
@@ -76,6 +80,7 @@
         <file>components/GeneratorIconLabel.qml</file>
         <file>components/SolarYieldGauge.qml</file>
         <file>components/TabBar.qml</file>
+        <file>components/IpAddressButtonGroup.qml</file>
         <file>components/LevelsPageGaugeDelegate.qml</file>
         <file>components/MainView.qml</file>
         <file>components/LoadGraph.qml</file>
@@ -205,6 +210,11 @@
         <file>pages/settings/PageSettingsDisplayBrief.qml</file>
         <file>pages/settings/PageSettingsDisplayUnits.qml</file>
         <file>pages/settings/PageSettingsDvcc.qml</file>
+        <file>pages/settings/PageSettingsFronius.qml</file>
+        <file>pages/settings/PageSettingsFroniusInverter.qml</file>
+        <file>pages/settings/PageSettingsFroniusInverters.qml</file>
+        <file>pages/settings/PageSettingsFroniusSetIpAddresses.qml</file>
+        <file>pages/settings/PageSettingsFroniusShowIpAddresses.qml</file>
         <file>pages/settings/PageSettingsGeneral.qml</file>
         <file>pages/settings/PageSettingsGenerator.qml</file>
         <file>pages/settings/PageSettingsGsm.qml</file>
