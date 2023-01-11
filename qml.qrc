@@ -17,6 +17,7 @@
         <file>components/datapoints/DataPointDBusImpl.qml</file>
         <file>components/datapoints/DataPointMqttImpl.qml</file>
         <file>components/datapoints/DataPointMockImpl.qml</file>
+        <file>components/settings/FirmwareCheckListButton.qml</file>
         <file>components/settings/MountStateListButton.qml</file>
         <file>components/settings/SettingsLabel.qml</file>
         <file>components/settings/SettingsListButton.qml</file>
@@ -71,6 +72,7 @@
         <file>components/EnvironmentGauge.qml</file>
         <file>components/EnvironmentGaugePanel.qml</file>
         <file>components/ExpandedTanksView.qml</file>
+        <file>components/FirmwareUpdate.qml</file>
         <file>components/InputPanel.qml</file>
         <file>components/ButtonControlValue.qml</file>
         <file>components/RadioButtonControlValue.qml</file>
@@ -225,6 +227,9 @@
         <file>pages/settings/PageSettingsFroniusInverters.qml</file>
         <file>pages/settings/PageSettingsFroniusSetIpAddresses.qml</file>
         <file>pages/settings/PageSettingsFroniusShowIpAddresses.qml</file>
+        <file>pages/settings/PageSettingsFirmware.qml</file>
+        <file>pages/settings/PageSettingsFirmwareOnline.qml</file>
+        <file>pages/settings/PageSettingsFirmwareOffline.qml</file>
         <file>pages/settings/PageSettingsGeneral.qml</file>
         <file>pages/settings/PageSettingsGenerator.qml</file>
         <file>pages/settings/PageSettingsGsm.qml</file>
@@ -238,6 +243,7 @@
         <file>pages/settings/PageSettingsServices.qml</file>
         <file>pages/settings/PageSettingsRelay.qml</file>
         <file>pages/settings/PageSettingsRelayTempSensors.qml</file>
+        <file>pages/settings/PageSettingsRootfsSelect.qml</file>
         <file>pages/settings/PageSettingsSystem.qml</file>
         <file>pages/settings/PageSettingsSystemStatus.qml</file>
         <file>pages/settings/PageSettingsTankPump.qml</file>

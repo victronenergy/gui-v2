@@ -30,6 +30,11 @@ Item {
 		pageManager: pageManager
 	}
 
+	FirmwareUpdate {
+		id: firmwareUpdate
+		Component.onCompleted: Global.firmwareUpdate = firmwareUpdate
+	}
+
 	MouseArea {
 		id: idleModeMouseArea
 		anchors.fill: parent

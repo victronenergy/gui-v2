@@ -18,6 +18,11 @@ Page {
 				page: "/pages/settings/PageSettingsGeneral.qml"
 			},
 			{
+				//% "Firmware"
+				text: qsTrId("settings_firmware"),
+				page: "/pages/settings/PageSettingsFirmware.qml"
+			},
+			{
 				//% "Date & Time"
 				text: qsTrId("settings_date_and_time"),
 				page: "/pages/settings/PageTzInfo.qml"

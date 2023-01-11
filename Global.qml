@@ -23,6 +23,7 @@ QtObject {
 	property var locale: Qt.locale()
 	property var dataServices: []
 	property var dataServiceModel: null
+	property var firmwareUpdate
 
 	// data sources
 	property var acInputs

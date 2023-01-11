@@ -1,0 +1,58 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+*/
+
+import QtQuick
+import Victron.VenusOS
+import Victron.Veutil
+
+Page {
+	id: root
+
+	SettingsListView {
+		id: settingsListView
+
+		model: ObjectModel {
+
+			FirmwareCheckListButton {
+				//% "Check for updates on SD/USB"
+				text: qsTrId("settings_firmware_check_for_updates_on_sd_usb")
+				updateType: VenusOS.Firmware_UpdateType_Offline
+			}
+
+			SettingsListButton {
+				id: installUpdate
+
+				//% "Firmware found"
+				text: qsTrId("settings_firmware_found")
+				button.text: {
+					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
+						//: %1 = firmware version
+						//% "Installing %1"
+						return qsTrId("settings_firmware_offline_installing").arg(Global.firmwareUpdate.offlineAvailableVersion)
+					} else {
+						//: %1 = firmware version
+						//% "Press to update to %1"
+						return qsTrId("settings_firmware_offline_press_to_install").arg(Global.firmwareUpdate.offlineAvailableVersion)
+					}
+				}
+
+				enabled: !Global.firmwareUpdate.busy
+				writeAccessLevel: VenusOS.User_AccessType_User
+				visible: !!Global.firmwareUpdate.offlineAvailableVersion
+				onClicked: {
+					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Offline)
+				}
+			}
+
+			SettingsListTextItem {
+				//% "Firmware build date/time"
+				text: qsTrId("settings_firmware_build_date_time")
+				source: "com.victronenergy.platform/Firmware/Offline/AvailableBuild"
+				visible: installUpdate.visible && Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
+			}
+
+			MountStateListButton {}
+		}
+	}
+}

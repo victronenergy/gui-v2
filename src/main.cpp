@@ -17,6 +17,7 @@
 #include "veutil/qt/ve_qitem_table_model.hpp"
 #include "veutil/qt/ve_qitem_sort_table_model.hpp"
 #include "veutil/qt/ve_qitem_child_model.hpp"
+#include "veutil/qt/firmware_updater_data.hpp"
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 #include "src/connman/cmtechnology.h"
@@ -210,6 +211,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "GsmStatusIcon");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/InputPanel.qml")),
 		"Victron.VenusOS", 2, 0, "InputPanel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/FirmwareUpdate.qml")),
+		"Victron.VenusOS", 2, 0, "FirmwareUpdate");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GeneratorIconLabel.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorIconLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/IpAddressButtonGroup.qml")),
@@ -288,6 +291,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "DataPoint");
 
 	/* settings list items */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/FirmwareCheckListButton.qml")),
+		"Victron.VenusOS", 2, 0, "FirmwareCheckListButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/MountStateListButton.qml")),
 		"Victron.VenusOS", 2, 0, "MountStateListButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsLabel.qml")),
@@ -454,6 +459,8 @@ void registerQmlTypes()
 	qmlRegisterType<VeQItemSortDelegate>("Victron.Veutil", 1, 0, "VeQItemSortDelegate");
 	qmlRegisterType<VeQItemSortTableModel>("Victron.Veutil", 1, 0, "VeQItemSortTableModel");
 	qmlRegisterType<VeQItemTableModel>("Victron.Veutil", 1, 0, "VeQItemTableModel");
+
+	qmlRegisterUncreatableType<FirmwareUpdaterData>("Victron.Veutil", 1, 0, "FirmwareUpdater", "FirmwareUpdater cannot be created");
 
 	qmlRegisterType<Victron::VenusOS::SingleUidHelper>("Victron.VenusOS", 2, 0, "SingleUidHelper");
 	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");
