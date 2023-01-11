@@ -21,7 +21,15 @@ OverviewWidget {
 	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
 
-	quantityLabel.value: Math.round(batteryData.stateOfCharge)
+	quantityLabel.value: {
+		// Show 2 decimal places if available
+		const fixed = batteryData.stateOfCharge.toFixed(2)
+		const floored = Math.floor(batteryData.stateOfCharge)
+		if (fixed === floored) {
+			return floored
+		}
+		return fixed
+	}
 	quantityLabel.unit: VenusOS.Units_Percentage
 
 	color: "transparent"
