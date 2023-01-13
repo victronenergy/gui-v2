@@ -31,36 +31,73 @@ Window {
 		}
 	}
 
-	Loader {
-		id: guiLoader
-
+	Item {
 		anchors.centerIn: parent
-		width: Theme.geometry.screen.width
-		height: Theme.geometry.screen.height
 		clip: Qt.platform.os == "wasm"
-		asynchronous: true
-		focus: true
+		width: Theme.geometry.screen.width + wasmPadding
+		height: Theme.geometry.screen.height
 
-		active: Global.dataManagerLoaded
-		sourceComponent: Component {
-			ApplicationContent {
-				anchors.centerIn: parent
+		// In WebAssembly builds, if we are displaying on a phone device,
+		// the aspect ratio of the screen may not match the aspect ratio
+		// expected on a CerboGX etc.
+		// The phone web browser will auto zoom to horizontal-fill,
+		// meaning that the vertical content may extend below the screen,
+		// requiring vertical scroll to see.  This is suboptimal.
+		// To fix, we need to add horizontal padding to match aspect.
+		property real wasmPadding: {
+			// no padding required if not on wasm
+			if (Qt.platform.os != "wasm") {
+				return 0
+			}
+			// no padding required if in portrait mode
+			if (Screen.height > Screen.width) {
+				return 0
+			}
+			// no padding required if the aspect ratio matches
+			if ((Screen.height / Theme.geometry.screen.height)
+					== (Screen.width / Theme.geometry.screen.width)) {
+				return 0
+			}
+			// fix aspect ratio
+			var verticalRatio = Screen.height / Theme.geometry.screen.height
+			var expectedWidth = Theme.geometry.screen.width * verticalRatio
+			var delta = Screen.width - expectedWidth
+			if (delta < 0) {
+				return 0
+			}
+			return delta
+		}
+
+		Loader {
+			id: guiLoader
+
+			anchors.centerIn: parent
+
+			width: Theme.geometry.screen.width
+			height: Theme.geometry.screen.height
+			asynchronous: true
+			focus: true
+
+			active: Global.dataManagerLoaded
+			sourceComponent: Component {
+				ApplicationContent {
+					anchors.centerIn: parent
+				}
 			}
 		}
-	}
 
-	Loader {
-		id: splashLoader
+		Loader {
+			id: splashLoader
 
-		anchors.centerIn: parent
-		width: Theme.geometry.screen.width
-		height: Theme.geometry.screen.height
-		clip: Qt.platform.os == "wasm"
+			anchors.centerIn: parent
+			width: Theme.geometry.screen.width
+			height: Theme.geometry.screen.height
 
-		active: Global.splashScreenVisible
-		sourceComponent: Component {
-			SplashView {
-				anchors.centerIn: parent
+			active: Global.splashScreenVisible
+			sourceComponent: Component {
+				SplashView {
+					anchors.centerIn: parent
+				}
 			}
 		}
 	}
