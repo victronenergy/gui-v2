@@ -29,7 +29,7 @@ ControlCard {
 				button.checked: Global.ess.state === modelData.value
 				label.text: modelData.display
 
-				onClicked: Global.ess.setStateRequested(modelData)
+				onClicked: Global.ess.setStateRequested(modelData.value)
 			}
 		}
 
