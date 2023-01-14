@@ -127,8 +127,21 @@
         <file>data/SystemSettings.qml</file>
         <file>data/SystemAc.qml</file>
         <file>data/SystemDc.qml</file>
+        <file>data/common/Inverter.qml</file>
+        <file>data/common/AcInput.qml</file>
+        <file>data/common/AcInputServiceLoader.qml</file>
+        <file>data/common/BatteryData.qml</file>
+        <file>data/common/DcInput.qml</file>
+        <file>data/common/EnvironmentInput.qml</file>
+        <file>data/common/EssData.qml</file>
+        <file>data/common/Generator.qml</file>
+        <file>data/common/PvMonitor.qml</file>
+        <file>data/common/Relay.qml</file>
+        <file>data/common/SolarCharger.qml</file>
+        <file>data/common/SystemData.qml</file>
+        <file>data/common/SystemSettingsData.qml</file>
+        <file>data/common/Tank.qml</file>
         <file>data/mqtt/MqttDataManager.qml</file>
-        <file>data/mqtt/AcInputServiceLoader.qml</file>
         <file>data/mqtt/AcInputsImpl.qml</file>
         <file>data/mqtt/BatteryImpl.qml</file>
         <file>data/mqtt/DcInputsImpl.qml</file>
@@ -143,7 +156,6 @@
         <file>data/mqtt/SystemSettingsImpl.qml</file>
         <file>data/mqtt/TanksImpl.qml</file>
         <file>data/dbus/DBusDataManager.qml</file>
-        <file>data/dbus/AcInputServiceLoader.qml</file>
         <file>data/dbus/AcInputsImpl.qml</file>
         <file>data/dbus/BatteryImpl.qml</file>
         <file>data/dbus/DcInputsImpl.qml</file>

@@ -70,7 +70,7 @@ Loader {
 			return null
 		}
 	}
-	onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dbus ac input service:", errorString())
+	onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac input service:", errorString())
 
 	ListModel {
 		id: validPhases
@@ -116,19 +116,19 @@ Loader {
 
 				readonly property string phasePath: root.serviceUid + "/Ac/ActiveIn/L" + (index + 1)
 
-				property VeQuickItem _frequency: VeQuickItem {
+				readonly property VeQuickItem _frequency: VeQuickItem {
 					uid: phase.phasePath + "/F"
 					onValueChanged: root._updateValue(instantiator, model.index, "frequency", value)
 				}
-				property VeQuickItem _current: VeQuickItem {
+				readonly property VeQuickItem _current: VeQuickItem {
 					uid: phase.phasePath + "/I"
 					onValueChanged: root._updateValue(instantiator, model.index, "current", value)
 				}
-				property VeQuickItem _power: VeQuickItem {
+				readonly property VeQuickItem _power: VeQuickItem {
 					uid: phase.phasePath + "/P"
 					onValueChanged: root._updateValue(instantiator, model.index, "power", value)
 				}
-				property VeQuickItem _voltage: VeQuickItem {
+				readonly property VeQuickItem _voltage: VeQuickItem {
 					uid: phase.phasePath + "/V"
 					onValueChanged: root._updateValue(instantiator, model.index, "voltage", value)
 				}
@@ -151,19 +151,19 @@ Loader {
 
 				readonly property string phasePath: root.serviceUid + "/Ac/L" + (index + 1)
 
-				property VeQuickItem _frequency: VeQuickItem {
+				readonly property VeQuickItem _frequency: VeQuickItem {
 					uid: phase.phasePath + "/Frequency"
 					onValueChanged: root._updateValue(instantiator, model.index, "frequency", value)
 				}
-				property VeQuickItem _current: VeQuickItem {
+				readonly property VeQuickItem _current: VeQuickItem {
 					uid: phase.phasePath + "/Current"
 					onValueChanged: root._updateValue(instantiator, model.index, "current", value)
 				}
-				property VeQuickItem _power: VeQuickItem {
+				readonly property VeQuickItem _power: VeQuickItem {
 					uid: phase.phasePath + "/Power"
 					onValueChanged: root._updateValue(instantiator, model.index, "power", value)
 				}
-				property VeQuickItem _voltage: VeQuickItem {
+				readonly property VeQuickItem _voltage: VeQuickItem {
 					uid: phase.phasePath + "/Voltage"
 					onValueChanged: root._updateValue(instantiator, model.index, "voltage", value)
 				}
