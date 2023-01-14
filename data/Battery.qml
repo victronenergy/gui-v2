@@ -14,7 +14,7 @@ QtObject {
 	property real current
 	property real temperature_celsius
 	property real timeToGo      // in seconds
-	property string icon: (power === 0 || power === NaN)
+	readonly property string icon: (power === 0 || power === NaN)
 			? "/images/battery.svg"
 			: power > 0
 			  ? "/images/battery_charging.svg"

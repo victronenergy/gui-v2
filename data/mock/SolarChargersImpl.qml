@@ -34,25 +34,9 @@ QtObject {
 				power: chargerPower,
 				voltage: 10 + Math.random() * 5
 			})
-			// assume one tracker for now
-			const trackerObj = chargerComponent.createObject(root, {
-				power: chargerObj.power,
-				voltage: chargerObj.voltage
-			})
-			chargerObj.trackers.append({ solarTracker: trackerObj })
-			_createdObjects.push(trackerObj)
 			_createdObjects.push(chargerObj)
 
 			Global.solarChargers.addCharger(chargerObj)
-		}
-
-		populateYieldHistory()
-	}
-
-	function populateYieldHistory() {
-		for (let day = 0; day < 30; day++) {
-			const dailyYield = 50 + (Math.random() * 100)    // kwh
-			Global.solarChargers.updateYieldHistory(day, dailyYield)
 		}
 	}
 
@@ -60,15 +44,24 @@ QtObject {
 		QtObject {
 			property real power
 			property real voltage
+			readonly property bool yieldHistoriesReady: _completedCount > 0
+					&& yieldHistories.count === _completedCount
 
-			property ListModel trackers: ListModel {}
-		}
-	}
+			onYieldHistoriesReadyChanged: {
+				if (yieldHistoriesReady) {
+					Qt.callLater(Global.solarChargers.initializeYieldHistory)
+				}
+			}
 
-	property Component trackerComponent: Component {
-		QtObject {
-			property real power
-			property real voltage
+			property int _completedCount
+
+			readonly property Instantiator yieldHistories: Instantiator {
+				model: 31
+				delegate: QtObject {
+					readonly property int yieldKwH: 50 + (Math.random() * 100)    // kwh
+					Component.onCompleted: _completedCount++
+				}
+			}
 		}
 	}
 
@@ -104,19 +97,10 @@ QtObject {
 						power: (config.chargers[i].acPower || 0) + (config.chargers[i].dcPower || 0),
 						voltage: 10 + Math.random() * 5
 					})
-					// assume one tracker for now
-					const trackerObj = chargerComponent.createObject(root, {
-						power: chargerObj.power,
-						voltage: chargerObj.voltage
-					})
-					_createdObjects.push(trackerObj)
 					_createdObjects.push(chargerObj)
-					chargerObj.trackers.append({ solarTracker: trackerObj })
 
 					Global.solarChargers.addCharger(chargerObj)
 				}
-
-				populateYieldHistory()
 			}
 		}
 	}

@@ -4,7 +4,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
 
 QtObject {
 	id: root
@@ -13,19 +12,6 @@ QtObject {
 	property ListModel model: ListModel {}
 
 	property var yieldHistory: []
-
-	function updateYieldHistory(day, yieldValueKwh) {
-		var _yieldHistory = yieldHistory
-		if (day < yieldHistory.length) {
-			_yieldHistory[day] = yieldValueKwh
-		} else if (day === yieldHistory.length) {
-			_yieldHistory.push(yieldValueKwh)
-		} else {
-			console.warn("setYield(): bad day index", day, "model only has",
-					_yieldHistory.length, "items")
-		}
-		yieldHistory = _yieldHistory
-	}
 
 	readonly property real power: isNaN(acPower) && isNaN(dcPower)
 			? NaN
@@ -56,6 +42,54 @@ QtObject {
 		dcCurrent = NaN
 		model.clear()
 		yieldHistory = []
+	}
+
+	function initializeYieldHistory() {
+		let historyDaysAvailable = 0
+		let i = 0
+		for (i = 0; i < model.count; i++) {
+			const charger = model.get(i).solarCharger
+			if (!charger.yieldHistoriesReady) {
+				return
+			}
+			historyDaysAvailable = Math.max(historyDaysAvailable, charger.yieldHistories.count)
+		}
+		if (historyDaysAvailable === 0) {
+			return
+		}
+		var _yieldHistory = []
+		for (i = 0; i < historyDaysAvailable; ++i) {
+			_yieldHistory.push(_yieldHistoryForDay(i) || 0)
+		}
+		yieldHistory = _yieldHistory
+	}
+
+	function refreshYieldHistoryForDay(day) {
+		if (yieldHistory.length === 0) {
+			// not yet initialized
+			return
+		}
+
+		if (day >= 0 && day < yieldHistory.length) {
+			yieldHistory[day] = _yieldHistoryForDay(day)
+		} else {
+			console.warn("refreshYieldHistoryForDay(): invalid day:", day, "from available days:", yieldHistory.length)
+		}
+	}
+
+	function _yieldHistoryForDay(day) {
+		let totalYieldKwH = 0
+		for (let i = 0; i < model.count; i++) {
+			const charger = model.get(i).solarCharger
+			const history = charger.yieldHistories.objectAt(day)
+			if (history) {
+				totalYieldKwH += history.yieldKwH || 0
+			} else {
+				console.warn("_yieldHistoryForDay(): charger", charger.serviceUid,
+					"does not have history for day:", day, "total count:", charger.yieldHistories.count)
+			}
+		}
+		return totalYieldKwH
 	}
 
 	Component.onCompleted: Global.solarChargers = root

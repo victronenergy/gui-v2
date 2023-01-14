@@ -15,6 +15,7 @@ QtObject {
 
 	function addInput(input) {
 		model.append({ input: input })
+		updateTotals()
 	}
 
 	function removeInput(index) {
