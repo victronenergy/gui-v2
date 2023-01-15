@@ -33,7 +33,7 @@ Item {
 				readonly property real yieldValue: modelData
 
 				anchors.bottom: parent.bottom
-				height: root.height * (yieldValue / Math.max(1, dayRepeater.maximumYieldValue))
+				height: Math.max(1, root.height * (yieldValue / Math.max(1, dayRepeater.maximumYieldValue)))
 				width: Theme.geometry.overviewPage.widget.solar.graph.bar.width
 				radius: Theme.geometry.overviewPage.widget.solar.graph.bar.radius
 				color: Theme.color.overviewPage.widget.solar.graph.bar
