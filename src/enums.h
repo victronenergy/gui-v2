@@ -385,6 +385,13 @@ public:
 	};
 	Q_ENUM(NetworkConnection_Type)
 
+	enum NodeRed_Mode {
+		NodeRed_Mode_Disabled,
+		NodeRed_Mode_Enabled,
+		NodeRed_Mode_EnabledWithSafeMode
+	};
+	Q_ENUM(NodeRed_Mode)
+
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };

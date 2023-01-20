@@ -264,6 +264,10 @@ QtObject {
 		setMockGpsValue("/Fix", 1)
 		setMockGpsValue("/NrOfSatellites", 1)
 		setMockGpsValue("/Altitude", 10)
+
+		// Large features
+		setMockPlatformValue("Services/SignalK/Enabled", 1)
+		setMockPlatformValue("Services/NodeRed/Mode", 1)
 	}
 
 	property Connections briefSettingsConn: Connections {
