@@ -52,6 +52,10 @@ QtObject {
 		Global.mockDataSimulator.mockDataValues["com.victronenergy.fronius" + "/" + key] = value
 	}
 
+	function setMockGpsValue(key, value) {
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.gps" + key] = value
+	}
+
 	Component.onCompleted: {
 		// Settings that are converted for convenient UI access
 		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
@@ -251,6 +255,15 @@ QtObject {
 		setMockSettingValue("Fronius/PortNumber", 81)
 		setMockFroniusValue("AutoDetect", 0)
 		setMockFroniusValue("ScanProgress", 0)
+
+		// GPS settings
+		setMockGpsValue("/Position/Latitude", -25.734968)
+		setMockGpsValue("/Position/Longitude", 134.489563)
+		setMockGpsValue("/Speed", 100)
+		setMockGpsValue("/Course", 100)
+		setMockGpsValue("/Fix", 1)
+		setMockGpsValue("/NrOfSatellites", 1)
+		setMockGpsValue("/Altitude", 10)
 	}
 
 	property Connections briefSettingsConn: Connections {

@@ -29,6 +29,9 @@ QtObject {
 	//% "Battery voltage"
 	readonly property string battery_voltage: qsTrId("common_words_battery_voltage")
 
+	//% "Connected"
+	readonly property string connected: qsTrId("common_words_connected");
+
 	//% "Disabled"
 	readonly property string disabled: qsTrId("common_words_disabled")
 
@@ -100,6 +103,9 @@ QtObject {
 
 	//% "State"
 	readonly property string state: qsTrId("common_words_state")
+
+	//% "Status"
+	readonly property string status: qsTrId("common_words_status")
 
 	//% "Stop value during quiet hours"
 	readonly property string stop_value_during_quiet_hours: qsTrId("common_words_stop_value_during_quiet_hours")

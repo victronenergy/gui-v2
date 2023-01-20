@@ -80,6 +80,11 @@ Page {
 				page: "/pages/settings/PageSettingsGsm.qml"
 			},
 			{
+				//% "GPS"
+				text: qsTrId("settings_gps"),
+				page: "/pages/settings/PageSettingsGpsList.qml"
+			},
+			{
 				//% "Generator start/stop"
 				text: qsTrId("settings_generator_start_stop"),
 				page: "/pages/settings/PageRelayGenerator.qml"
