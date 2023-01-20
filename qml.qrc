@@ -204,12 +204,14 @@
         <file>pages/settings/AccessLevelRadioButtonGroup.qml</file>
         <file>pages/settings/DvccCommonSettings.qml</file>
         <file>pages/settings/GeneratorCondition.qml</file>
+        <file>pages/settings/PageDeviceInfo.qml</file>
         <file>pages/settings/PageGeneratorConditions.qml</file>
         <file>pages/settings/PageCanbusStatus.qml</file>
         <file>pages/settings/PageChargeCurrentLimits.qml</file>
         <file>pages/settings/PageGenerator.qml</file>
         <file>pages/settings/PageGeneratorAcLoad.qml</file>
         <file>pages/settings/PageGeneratorTestRun.qml</file>
+        <file>pages/settings/PageGps.qml</file>
         <file>pages/settings/PageHub4Debug.qml</file>
         <file>pages/settings/PageRelayGenerator.qml</file>
         <file>pages/settings/PageSettingsBatteries.qml</file>
@@ -232,6 +234,7 @@
         <file>pages/settings/PageSettingsFirmwareOffline.qml</file>
         <file>pages/settings/PageSettingsGeneral.qml</file>
         <file>pages/settings/PageSettingsGenerator.qml</file>
+        <file>pages/settings/PageSettingsGpsList.qml</file>
         <file>pages/settings/PageSettingsGsm.qml</file>
         <file>pages/settings/PageSettingsHub4.qml</file>
         <file>pages/settings/PageSettingsHub4Feedin.qml</file>

@@ -368,6 +368,13 @@ public:
 	};
 	Q_ENUM(DigitalInput_Type)
 
+	enum GpsData_Format {
+		GpsData_Format_DegreesMinutesSeconds,
+		GpsData_Format_DecimalDegrees,
+		GpsData_Format_DegreesMinutes
+	};
+	Q_ENUM(GpsData_Format)
+
 	// These values are defined on the cerbo in /usr/sbin/resolv-watch script
 	// that monitors which connection is the one active from all the avaiable ones.
 	enum NetworkConnection_Type {
