@@ -116,6 +116,12 @@ Page {
 				page: "/pages/settings/PageSettingsIo.qml"
 			},
 			{
+				//% "Venus OS Large features"
+				text: qsTrId("settings_venus_os_large_features"),
+				page: "/pages/settings/PageSettingsLarge.qml",
+				visible: signalK.valid || nodeRed.valid
+			},
+			{
 				// TODO remove this temporary page that demonstrates the settings UI
 				text: "Demo settings page",
 				page: "/pages/settings/PageSettingsDemo.qml"
@@ -143,5 +149,15 @@ Page {
 	DataPoint {
 		id: relay0
 		source: "com.victronenergy.system/Relay/0/State"
+	}
+
+	DataPoint {
+		id: signalK
+		source: "com.victronenergy.platform/Services/SignalK/Enabled"
+	}
+
+	DataPoint {
+		id: nodeRed
+		source: "com.victronenergy.platform/Services/NodeRed/Mode"
 	}
 }

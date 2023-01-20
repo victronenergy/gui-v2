@@ -239,6 +239,7 @@
         <file>pages/settings/PageSettingsHub4.qml</file>
         <file>pages/settings/PageSettingsHub4Feedin.qml</file>
         <file>pages/settings/PageSettingsIo.qml</file>
+        <file>pages/settings/PageSettingsLarge.qml</file>
         <file>pages/settings/PageSettingsLogger.qml</file>
         <file>pages/settings/PageSettingsModbusTcp.qml</file>
         <file>pages/settings/PageSettingsModbusTcpServices.qml</file>
