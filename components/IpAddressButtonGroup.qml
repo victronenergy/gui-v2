@@ -14,9 +14,7 @@ DataPoint {
 
 	readonly property var valuesAsArray: value ? value.split(',') : []
 
-	property C.ButtonGroup group: C.ButtonGroup{
-		exclusive: false
-	}
+	property C.ButtonGroup group: C.ButtonGroup { }
 
 	function push(element) {
 		var _values = valuesAsArray

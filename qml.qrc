@@ -4,9 +4,6 @@
         <file>ApplicationContent.qml</file>
         <file>Global.qml</file>
         <file>components/controls/Button.qml</file>
-        <file>components/controls/CheckBox.qml</file>
-        <file>components/controls/RadioButtonIndicator.qml</file>
-        <file>components/controls/RadioButtonLabel.qml</file>
         <file>components/controls/Label.qml</file>
         <file>components/controls/ListItemButton.qml</file>
         <file>components/controls/ProgressBar.qml</file>

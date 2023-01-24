@@ -32,14 +32,14 @@ Page {
 
 						content.children: [
 							defaultContent,
-							checkBox
+							radioButton
 						]
 
 						text: CommonWords.ip_address.arg(index + 1)
 						secondaryText: modelData
 
-						CheckBox {
-							id: checkBox
+						RadioButton {
+							id: radioButton
 
 							C.ButtonGroup.group: ipAddresses.group
 						}
