@@ -35,17 +35,11 @@ Page {
 						//% "AC-In1 MP"
 						return qsTrId("page_setting_fronius_inverters_ac_in1_mp")
 					}
-					case 1: {
-						//% "AC-In1 L1"
-						return qsTrId("page_setting_fronius_inverters_ac_in1_l1")
-					}
-					case 2: {
-						//% "AC-In1 L2"
-						return qsTrId("page_setting_fronius_inverters_ac_in1_l2")
-					}
+					case 1:
+					case 2:
 					case 3: {
-						//% "AC-In1 L3"
-						return qsTrId("page_setting_fronius_inverters_ac_in1_l3")
+						//% "AC-In1 L%1"
+						return qsTrId("page_setting_fronius_inverters_ac_in1_l").arg(phaseItem.value)
 					}
 					default: {
 						//% "AC-In1 --"
@@ -59,17 +53,11 @@ Page {
 						//% "AC-Out MP"
 						return qsTrId("page_setting_fronius_inverters_ac_out_mp")
 					}
-					case 1: {
-						//% "AC-Out L1"
-						return qsTrId("page_setting_fronius_inverters_ac_out_l1")
-					}
-					case 2: {
-						//% "AC-Out L2"
-						return qsTrId("page_setting_fronius_inverters_ac_out_l2")
-					}
+					case 1:
+					case 2:
 					case 3: {
-						//% "AC-Out L3"
-						return qsTrId("page_setting_fronius_inverters_ac_out_l3")
+						//% "AC-Out L%1"
+						return qsTrId("page_setting_fronius_inverters_ac_out_l").arg(phaseItem.value)
 					}
 					default: {
 						//% "AC-Out --"
@@ -84,22 +72,15 @@ Page {
 						//% "AC-In2 MP"
 						return qsTrId("page_setting_fronius_inverters_ac_in2_mp")
 					}
-					case 1: {
-						//% "AC-In2 L1"
-						return qsTrId("page_setting_fronius_inverters_ac_in2_l1")
-					}
-					case 2: {
-						//% "AC-In2 L2"
-						return qsTrId("page_setting_fronius_inverters_ac_in2_l2")
-					}
+					case 1:
+					case 2:
 					case 3: {
-						//% "AC-In2 L3"
-						return qsTrId("page_setting_fronius_inverters_ac_in2_l3")
+						//% "AC-In2 L%1"
+						return qsTrId("page_setting_fronius_inverters_ac_in2_l1").arg(phaseItem.value)
 					}
 					default: {
 						//% "AC-In2 --"
 						return qsTrId("page_setting_fronius_inverters_ac_in2_phase_unknown")
-
 					}
 					}
 				}
@@ -110,17 +91,11 @@ Page {
 						//% "AC-In1 MP"
 						return qsTrId("page_setting_fronius_inverters_ac_in1_mp")
 					}
-					case 1: {
-						//% "AC-In1 L1"
-						return qsTrId("page_setting_fronius_inverters_ac_in1_l1")
-					}
-					case 2: {
-						//% "AC-In1 L2"
-						return qsTrId("page_setting_fronius_inverters_ac_in1_l2")
-					}
+					case 1:
+					case 2:
 					case 3: {
-						//% "AC-In1 L3"
-						return qsTrId("page_setting_fronius_inverters_ac_in1_l3")
+						//% "AC-In1 L%1"
+						return qsTrId("page_setting_fronius_inverters_ac_in1_l1").arg(phaseItem.value)
 					}
 					default: {
 						//% "AC-In1 --"

@@ -33,11 +33,11 @@ Page {
 			secondaryText: modelData
 			content.children: [
 				defaultContent,
-				checkBox
+				radioButton
 			]
 
-			CheckBox {
-				id: checkBox
+			RadioButton {
+				id: radioButton
 
 				C.ButtonGroup.group: knownIpAddresses.group
 			}
