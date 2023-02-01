@@ -1,6 +1,3 @@
-[submodule "src/velib"]
-	path = src/velib
-	url = git@github.com:victronenergy/velib.git
 [submodule "veutil"]
 	path = src/veutil
 	url = git@github.com:victronenergy/veutil.git
