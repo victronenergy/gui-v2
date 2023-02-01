@@ -1,0 +1,85 @@
+name: build-wasm
+run-name: ${{ github.actor }} is building wasm file
+on: [push]
+jobs:
+  build-wasm-file:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Install dependencies
+      run: |
+       sudo apt-get update -yq &&
+       sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
+                                wget lsb libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
+    - name: Install yaqti
+      run: |
+        pip install yaqti
+        Y="$(pip show yaqti | sed -n 's/Location: \(.*\)/\1/p')/yaqti"
+        echo "Add support for 6.2.4"
+        sed -i -e 's/"6.2.0"/"6.2.4"/' "${Y}/fetchers.py"
+    - name: Install Qt 6.2.4
+      run: |
+        python -m yaqti install --version 6.2.4 --platform desktop --os linux --output /opt/hostedtoolcache/Qt --modules qt5compat --modules qtwebsockets
+    - name: Patch Yacti for wasm
+      run: |
+        Y="$(pip show yaqti | sed -n 's/Location: \(.*\)/\1/p')/yaqti"
+        cp .github/patches/yacti/helpers-wasm.py "${Y}/helpers.py"
+        cp .github/patches/yacti/fetchers-wasm.py "${Y}/fetchers.py"
+        cp .github/patches/yacti/packages-wasm.py "${Y}/packages.py"
+    - name: Install Qt 6.2.4 WASM
+      run: |
+        python -m yaqti install --version 6.2.4_wasm --platform desktop --os linux --output /opt/hostedtoolcache/Qt --modules qt5compat --modules qtwebsockets
+        echo "Patch toolchain to contain correct path"
+        sed -i -e 's%/home/qt/work/install%/opt/hostedtoolcache/Qt/6.2.4/gcc_64%' /opt/hostedtoolcache/Qt/6.2.4/wasm_32/lib/cmake/Qt6/qt.toolchain.cmake
+    - name: Install CMake
+      run: |
+        wget https://download.qt.io/online/qtsdkrepository/linux_x64/desktop/tools_cmake/qt.tools.cmake/3.24.2-202210260922linux64_x86_cmake_tools.7z
+        7z x -o/opt/hostedtoolcache/Qt 3.24.2-202210260922linux64_x86_cmake_tools.7z
+        rm -f 3.24.2-202210260922linux64_x86_cmake_tools.7z
+    - name: Install emscripten
+      run: |
+        echo installing emscripten
+        git clone https://github.com/emscripten-core/emsdk.git
+        cd emsdk
+        ./emsdk install 2.0.14
+        ./emsdk activate 2.0.14
+    - name: Install QtMQTT
+      run: |
+        echo installing QtMQTT
+        source "/home/runner/work/gui-v2/gui-v2/emsdk/emsdk_env.sh"
+        git clone https://github.com/qt/qtmqtt.git
+        cd qtmqtt
+        git checkout 6.2.4
+        mkdir build-qtmqtt && cd build-qtmqtt
+        export PATH=$PATH:/opt/hostedtoolcache/Qt/Tools/CMake/bin
+        /opt/hostedtoolcache/Qt/6.2.4/wasm_32/bin/qt-cmake ..
+        cmake --build .
+        cmake --install . --prefix /opt/hostedtoolcache/Qt/6.2.4/wasm_32 --verbose
+    - name: Build webassembly GUI
+      run: |
+        source "/home/runner/work/gui-v2/gui-v2/emsdk/emsdk_env.sh"
+        export PATH=$PATH:/opt/hostedtoolcache/Qt/Tools/CMake/bin
+        mkdir build-wasm && cd build-wasm
+        /opt/hostedtoolcache/Qt/6.2.4/wasm_32/bin/qt-cmake ..
+        cmake --build .
+        sed -i "/^var Module/a Module.arguments = [ '--mqtt', 'ws://'+document.location.host+':9001/' ];" venus-gui-v2.js
+        sed -i "s/qtlogo.svg/victronenergy.svg/" venus-gui-v2.html
+        sed -i "s/background-color: white;/background-color: #4790d0;/" venus-gui-v2.html
+        sed -i "s/\(, body {\)/\1 background-color: #4790d0;/" venus-gui-v2.html
+        sed -i "s/ contenteditable=\"true\"//" venus-gui-v2.html
+        cd -
+        mkdir -p artifacts/wasm
+        mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
+        mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
+    - name: Upload wasm files
+      uses: actions/upload-artifact@v3
+      with:
+        name: venus-webassembly
+        path: artifacts

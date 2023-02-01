@@ -44,7 +44,7 @@ qt_add_resources(QML_RESOURCES
     qml.qrc)
 
 
-include_directories(src/velib/inc src/veutil/inc src .)
+include_directories(src/veutil/inc src .)
 
 set(CONNMAN_SOURCES_MOCK
     src/connman-api.h
@@ -111,10 +111,6 @@ set(VEUTIL_MQTT_SOURCES
     src/veutil/src/qt/ve_qitems_mqtt.cpp
 )
 
-set(VELIB_CORE_SOURCES
-    src/velib/inc/velib/velib_config.h
-)
-
 set(VELIB_DBUS_SOURCES
     src/velib/inc/velib/qt/bms_error.hpp
     src/velib/inc/velib/qt/charger_error.hpp
@@ -155,7 +151,6 @@ set(VENUS_SOURCES
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     list(APPEND SOURCES
         ${CONNMAN_SOURCES_MOCK}
-        ${VELIB_CORE_SOURCES}
         ${VEUTIL_CORE_SOURCES}
         ${VEUTIL_MQTT_SOURCES}
         ${VENUS_SOURCES}
@@ -164,7 +159,6 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
 else()
     list(APPEND SOURCES
         ${CONNMAN_SOURCES}
-        ${VELIB_CORE_SOURCES}
         ${VELIB_DBUS_SOURCES}
         ${VEUTIL_CORE_SOURCES}
         ${VEUTIL_DBUS_SOURCES}
