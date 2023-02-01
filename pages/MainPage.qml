@@ -38,7 +38,7 @@ Page {
 						Global.allPagesLoaded = true
 					}
 				} else if (status === Loader.Error) {
-					console.warn("Error preloading page: " + source.toString() + ", " + errorString())
+					console.warn("Error preloading page: " + source.toString())
 				} else {
 					console.log("Preloading page: " + source.toString())
 				}
