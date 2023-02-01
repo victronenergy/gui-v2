@@ -215,6 +215,7 @@
         <file>pages/settings/PageHub4Debug.qml</file>
         <file>pages/settings/PageRelayGenerator.qml</file>
         <file>pages/settings/PageSettingsBatteries.qml</file>
+        <file>pages/settings/PageSettingsBluetooth.qml</file>
         <file>pages/settings/PageSettingsCanbus.qml</file>
         <file>pages/settings/PageSettingsBleSensors.qml</file>
         <file>pages/settings/PageSettingsCGwacs.qml</file>

@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import net.connman 0.1
 
 Page {
 	id: root
@@ -12,6 +13,12 @@ Page {
 		id: settingsListView
 
 		model: [
+			{
+				//% "Bluetooth"
+				text: qsTrId("settings_bluetooth"),
+				page: "/pages/settings/PageSettingsBluetooth.qml",
+				show: Connman.technologyList.indexOf("bluetooth") !== -1
+			},
 			{
 				//% "General"
 				text: qsTrId("settings_general"),
