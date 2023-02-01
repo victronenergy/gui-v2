@@ -224,15 +224,15 @@ Page {
 				{ display: qsTrId("settings_tcpip_fixed"), value: "fixed", readOnly: true },
 			]
 			currentIndex: {
-				for (let i = 0; i < model.length; ++i) {
-					if (model[i].value === root._serviceMethod) {
+				for (let i = 0; i < optionModel.length; ++i) {
+					if (optionModel[i].value === root._serviceMethod) {
 						return i
 					}
 				}
 				return -1
 			}
 			onOptionClicked: function(index) {
-				root._setMethod(model[index].value)
+				root._setMethod(optionModel[index].value)
 			}
 		}
 
