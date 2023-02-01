@@ -46,6 +46,10 @@ qt_add_resources(QML_RESOURCES
 
 include_directories(src/velib/inc src .)
 
+set(CONNMAN_SOURCES_MOCK
+    src/connman-api.h
+)
+
 set(CONNMAN_SOURCES
     src/connman/cmmanager.h 
     src/connman/cmmananger_interface.h 
@@ -147,6 +151,7 @@ set(VENUS_SOURCES
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     list(APPEND SOURCES
+        ${CONNMAN_SOURCES_MOCK}
         ${VELIB_CORE_SOURCES}
         ${VELIB_MQTT_SOURCES}
         ${VENUS_SOURCES}
