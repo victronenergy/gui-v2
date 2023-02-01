@@ -233,6 +233,9 @@ QtObject {
 		setMockModemSetting("/RoamingPermitted", 0)
 		setMockModemSetting("/User", "Rick")
 
+		setMockSettingValue("Services/Bluetooth", 1)
+		setMockSettingValue("Ble/Service/Pincode", "12345")
+
 		// Fronius PV Inverter settings
 		setMockSettingValue("Fronius/AutoScan", 0)
 		setMockSettingValue("Fronius/IPAddresses", "2.2.2.2,2.2.2.3")

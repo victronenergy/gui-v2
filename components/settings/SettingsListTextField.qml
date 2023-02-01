@@ -67,7 +67,7 @@ SettingsListItem {
 		}
 	}
 
-	enabled: source === "" || dataPoint.valid
+	enabled: userHasWriteAccess && (source === "" || dataPoint.valid)
 	content.children: [
 		defaultContent
 	]
