@@ -19,11 +19,12 @@
 #include "veutil/qt/ve_qitem_child_model.hpp"
 #include "veutil/qt/firmware_updater_data.hpp"
 
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+#include "src/connman-api.h"
+#else
 #include "src/connman/cmtechnology.h"
 #include "src/connman/cmservice.h"
 #include "src/connman/cmagent.h"
-#include "src/connman/clockmodel.h"
 #include "src/connman/cmmanager.h"
 #endif
 
@@ -40,6 +41,7 @@
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QScreen>
+#include <QCommandLineParser>
 
 #include <QtDebug>
 
@@ -47,12 +49,10 @@ Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 namespace {
 
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
 static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
 {
 	return CmManager::instance();
 }
-#endif
 
 void initBackend()
 {
@@ -465,13 +465,10 @@ void registerQmlTypes()
 	qmlRegisterType<Victron::VenusOS::SingleUidHelper>("Victron.VenusOS", 2, 0, "SingleUidHelper");
 	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");
 
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
 	qmlRegisterType<CmTechnology>("net.connman", 0, 1, "CmTechnology");
 	qmlRegisterType<CmService>("net.connman", 0, 1, "CmService");
 	qmlRegisterType<CmAgent>("net.connman", 0, 1, "CmAgent");
-	qmlRegisterType<ClockModel>("net.connman", 0, 1, "ClockModel");
 	qmlRegisterSingletonType<CmManager>("net.connman", 0, 1, "Connman", &connmanInstance);
-#endif
 }
 
 } // namespace
