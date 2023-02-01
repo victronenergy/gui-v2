@@ -87,8 +87,8 @@ public:
 	void update(bool single);
 
 private slots:
-	void numberOfPhasesChanged(VeQItem *item, QVariant value);
-	void connectionTypeChanged(VeQItem *item, QVariant value);
+	void numberOfPhasesChanged(QVariant value);
+	void connectionTypeChanged(QVariant value);
 
 private:
 	VeQItem *mNumberOfPhases;

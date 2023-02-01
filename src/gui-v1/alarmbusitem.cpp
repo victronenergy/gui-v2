@@ -236,9 +236,9 @@ void AlarmBusitem::dbusServiceFound(DBusService *service)
 VebusAlarms::VebusAlarms(DBusService *service, Victron::VenusOS::ActiveNotificationsModel *noticationCenter) : DeviceAlarms(service, noticationCenter)
 {
 	mNumberOfPhases = service->item("/Ac/NumberOfPhases");
-	mNumberOfPhases->getValueAndChanges(this, SLOT(numberOfPhasesChanged(VeQItem *, QVariant)));
+	mNumberOfPhases->getValueAndChanges(this, SLOT(numberOfPhasesChanged(QVariant)));
 	mConnectionType = service->item("/Mgmt/Connection");
-	mConnectionType->getValueAndChanges(this, SLOT(connectionTypeChanged(VeQItem*,QVariant)));
+	mConnectionType->getValueAndChanges(this, SLOT(connectionTypeChanged(QVariant)));
 }
 
 void VebusAlarms::init(bool single)
@@ -275,10 +275,8 @@ void VebusAlarms::update(bool single)
 	inverterOverloadTextL1Alarm->setDescription(inverterOverloadTextL1(single));
 }
 
-void VebusAlarms::connectionTypeChanged(VeQItem *item, QVariant value)
+void VebusAlarms::connectionTypeChanged(QVariant value)
 {
-	Q_UNUSED(item);
-
 	if (value.isValid() && value.value<QString>() == "VE.Can") {
 		// backwards compatible, the CAN-bus sends these e.g.
 		addTripplet(tr("High Temperature"),			"/Alarms/HighTemperature",		"/Vebus/HighTemperature");
@@ -287,10 +285,8 @@ void VebusAlarms::connectionTypeChanged(VeQItem *item, QVariant value)
 	}
 }
 
-void VebusAlarms::numberOfPhasesChanged(VeQItem *item, QVariant value)
+void VebusAlarms::numberOfPhasesChanged(QVariant value)
 {
-	Q_UNUSED(item);
-
 	if (!value.isValid())
 		return;
 
