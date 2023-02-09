@@ -44,6 +44,7 @@ QtObject {
 		if (_dbusImpl.status === Component.Error) {
 			console.warn("Unable to load DataPointDBusImpl.qml", _dbusImpl.errorString())
 		} else if (_dbusImpl.status === Component.Ready) {
+			_dbusImpl.statusChanged.disconnect(_dbusImplStatusChanged)
 			_createDBusImpl()
 		}
 	}
@@ -55,6 +56,7 @@ QtObject {
 		if (_mqttImpl.status === Component.Error) {
 			console.warn("Unable to load DataPointMqttImpl.qml", _mqttImpl.errorString())
 		} else if (_mqttImpl.status === Component.Ready) {
+			_mqttImpl.statusChanged.disconnect(_mqttImplStatusChanged)
 			_createMqttImpl()
 		}
 	}
@@ -100,6 +102,8 @@ QtObject {
 			if (!_dbusImpl) {
 				_dbusImpl = Qt.createComponent(Qt.resolvedUrl("DataPointDBusImpl.qml"),
 						Component.Asynchronous)
+			}
+			if (_dbusImpl.status === Component.Loading) {
 				_dbusImpl.statusChanged.connect(_dbusImplStatusChanged)
 			} else if (_dbusImpl.status === Component.Ready) {
 				_createDBusImpl()
@@ -110,6 +114,8 @@ QtObject {
 				_mqttUidHelper = _mqttUidHelperComponent.createObject(root)
 				_mqttImpl = Qt.createComponent(Qt.resolvedUrl("DataPointMqttImpl.qml"),
 						Component.Asynchronous)
+			}
+			if (_mqttImpl.status === Component.Loading) {
 				_mqttImpl.statusChanged.connect(_mqttImplStatusChanged)
 			} else if (_mqttImpl.status === Component.Ready) {
 				_createMqttImpl()
@@ -129,13 +135,13 @@ QtObject {
 	onSourceTypeChanged: _reset()
 	Component.onCompleted: _reset()
 	Component.onDestruction: {
+		// As a precaution, if asynchronous component creation finishes after object destruction,
+		// ensure the statusChanged() handlers are not called.
 		if (_dbusImpl) {
-			// Precaution for if asynchronous component creation finishes after object destruction.
 			_dbusImpl.statusChanged.disconnect(_dbusImplStatusChanged)
 			_dbusImpl = null
 		}
 		if (_mqttImpl) {
-			// Precaution for if asynchronous component creation finishes after object destruction.
 			_mqttImpl.statusChanged.disconnect(_mqttImplStatusChanged)
 			_mqttImpl = null
 		}
