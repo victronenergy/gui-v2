@@ -105,6 +105,8 @@ ControlCard {
 	SwitchControlValue {
 		id: autostartSwitch
 
+		property var _confirmationDialog
+
 		anchors.top: substatus.bottom
 
 		//% "Autostart"
@@ -116,15 +118,29 @@ ControlCard {
 		onClicked: {
 			if (root.autostart) {
 				// check if they really want to disable
-				Global.dialogManager.generatorDisableAutostartDialog.open()
+				if (!_confirmationDialog) {
+					_confirmationDialog = confirmationDialogComponent.createObject(Global.dialogLayer)
+				}
+				_confirmationDialog.open()
 			} else {
 				root.changeAutoStart(true)
 			}
 		}
-		Connections {
-			target: Global.dialogManager.generatorDisableAutostartDialog
-			function onAccepted() {
-				root.changeAutoStart(false)
+
+		Component {
+			id: confirmationDialogComponent
+
+			ModalWarningDialog {
+				dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+
+				//% "Disable Autostart?"
+				title: qsTrId("controlcard_generator_disableautostartdialog_title")
+
+				// TODO set text to something meaningful
+				//% "Consequences description..."
+				description: qsTrId("controlcard_generator_disableautostartdialog_consequences")
+
+				onAccepted: root.changeAutoStart(false)
 			}
 		}
 	}
@@ -186,6 +202,7 @@ ControlCard {
 			id: durationButton
 
 			property int duration: root.manualStartTimer
+			property var _durationDialog
 
 			anchors.top: timedRunSwitch.bottom
 			//% "Duration"
@@ -197,12 +214,19 @@ ControlCard {
 					&& root.state !== VenusOS.Generators_State_Running
 			button.text: Utils.formatAsHHMM(durationButton.duration)
 
-			onClicked: Global.dialogManager.generatorDurationSelectorDialog.open()
+			onClicked: {
+				if (!_durationDialog) {
+					_durationDialog = durationSelectorComponent.createObject(Global.dialogLayer)
+				}
+				_durationDialog.duration = duration
+				_durationDialog.open()
+			}
 
-			Connections {
-				target: Global.dialogManager.generatorDurationSelectorDialog
-				function onAccepted() {
-					durationButton.duration = Global.dialogManager.generatorDurationSelectorDialog.duration
+			Component {
+				id: durationSelectorComponent
+
+				GeneratorDurationSelectorDialog {
+					onAccepted: durationButton.duration = duration
 				}
 			}
 		}

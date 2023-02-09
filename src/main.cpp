@@ -393,12 +393,12 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ModalDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/ModalWarningDialog.qml")),
 		"Victron.VenusOS", 2, 0, "ModalWarningDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InputCurrentLimitDialog.qml")),
-		"Victron.VenusOS", 2, 0, "InputCurrentLimitDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDurationSelectorDialog.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/ESSMinimumSOCDialog.qml")),
+		"Victron.VenusOS", 2, 0, "ESSMinimumSOCDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InverterChargerModeDialog.qml")),
 		"Victron.VenusOS", 2, 0, "InverterChargerModeDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDisableAutostartDialog.qml")),
-		"Victron.VenusOS", 2, 0, "GeneratorDisableAutostartDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDurationSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/NumberSelectorDialog.qml")),

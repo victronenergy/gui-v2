@@ -95,6 +95,8 @@ Page {
 		SettingsListButton {
 			id: minSocLimit
 
+			property var _minSocDialog
+
 			//% "Minimum SOC (unless grid fails)"
 			text: qsTrId("settings_ess_min_soc")
 			button.text: Global.ess.minimumStateOfCharge + "%"
@@ -102,7 +104,16 @@ Page {
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataPoint.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: {
-				Global.dialogManager.essMinimumSOCDialog.open()
+				if (!_minSocDialog) {
+					_minSocDialog = minSocDialogComponent.createObject(Global.dialogLayer)
+				}
+				_minSocDialog.open()
+			}
+
+			Component {
+				id: minSocDialogComponent
+
+				ESSMinimumSOCDialog { }
 			}
 		}
 

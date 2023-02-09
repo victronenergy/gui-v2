@@ -11,11 +11,6 @@ Item {
 	anchors.fill: parent
 
 	property ModalWarningDialog warningNotification: ModalWarningDialog {}
-	property ESSMinimumSOCDialog essMinimumSOCDialog: ESSMinimumSOCDialog {}
-	property InputCurrentLimitDialog inputCurrentLimitDialog: InputCurrentLimitDialog {}
-	property InverterChargerModeDialog inverterChargerModeDialog: InverterChargerModeDialog {}
-	property GeneratorDisableAutostartDialog generatorDisableAutostartDialog: GeneratorDisableAutostartDialog {}
-	property GeneratorDurationSelectorDialog generatorDurationSelectorDialog: GeneratorDurationSelectorDialog {}
 
 	function showWarning(title, description) {
 		warningNotification.title = title

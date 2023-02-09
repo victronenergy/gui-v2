@@ -14,6 +14,8 @@ ControlCard {
 	property var ampOptions: []
 	property alias currentLimits: currentLimitRepeater.model
 
+	property var _currentLimitDialog
+
 	signal changeMode(newMode: int)
 	signal changeCurrentLimit(index: int, newCurrentLimit: int)
 
@@ -76,6 +78,23 @@ ControlCard {
 		return ""
 	}
 
+	Component {
+		id: currentLimitDialogComponent
+
+		InputCurrentLimitDialog {
+			property int inputIndex
+
+			ampOptions: root.ampOptions
+
+			onAccepted: {
+				const inverter = currentLimitRepeater.itemAt(inputIndex)
+				if (inverter != null && inverter.currentLimit !== currentLimit) {
+					root.changeCurrentLimit(inputIndex, currentLimit)
+				}
+			}
+		}
+	}
+
 	Column {
 		anchors {
 			top: parent.status.bottom
@@ -91,50 +110,50 @@ ControlCard {
 				delegate: ButtonControlValue {
 					visible: label.text !== ""
 					value: modelData.currentLimit
-					label.text: Global.dialogManager.inputCurrentLimitDialog.currentLimitText(modelData.inputType)
+					label.text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
 					enabled: modelData.currentLimitAdjustable
 					//% "%1 A"
 					button.text: qsTrId("amps").arg(value / 1000)
 					onClicked: {
-						Global.dialogManager.inputCurrentLimitDialog.inputIndex = model.index
-						Global.dialogManager.inputCurrentLimitDialog.inputType = modelData.inputType
-						Global.dialogManager.inputCurrentLimitDialog.currentLimit = modelData.currentLimit
-						Global.dialogManager.inputCurrentLimitDialog.ampOptions = root.ampOptions
-						Global.dialogManager.inputCurrentLimitDialog.open()
+						if (!root._currentLimitDialog) {
+							root._currentLimitDialog = currentLimitDialogComponent.createObject(Global.dialogLayer)
+						}
+						root._currentLimitDialog.inputIndex = model.index
+						root._currentLimitDialog.inputType = modelData.inputType
+						root._currentLimitDialog.currentLimit = modelData.currentLimit
+						root._currentLimitDialog.open()
 					}
 				}
 			}
 		}
 		ButtonControlValue {
+			property var _modeDialog
+
 			width: parent.width
 			button.width: Math.max(button.implicitWidth, 180)
 			//% "Mode"
 			label.text: qsTrId("controlcard_mode")
-			button.text: Global.dialogManager.inverterChargerModeDialog.modeText(root.mode)
+			button.text: Global.inverters.inverterModeToText(root.mode)
 			enabled: root.modeAdjustable
 
 			onClicked: {
-				Global.dialogManager.inverterChargerModeDialog.mode = root.mode
-				Global.dialogManager.inverterChargerModeDialog.open()
+				if (!_modeDialog) {
+					_modeDialog = modeDialogComponent.createObject(Global.dialogLayer)
+				}
+				_modeDialog.mode = root.mode
+				_modeDialog.open()
 			}
-		}
-	}
-	Connections {
-		target: Global.dialogManager.inputCurrentLimitDialog
-		function onAccepted() {
-			var inverter = currentLimitRepeater.itemAt(Global.dialogManager.inputCurrentLimitDialog.inputIndex)
-			if (inverter != null
-					&& inverter.currentLimit !== Global.dialogManager.inputCurrentLimitDialog.currentLimit) {
-				root.changeCurrentLimit(Global.dialogManager.inputCurrentLimitDialog.inputIndex,
-						Global.dialogManager.inputCurrentLimitDialog.currentLimit)
-			}
-		}
-	}
-	Connections {
-		target: Global.dialogManager.inverterChargerModeDialog
-		function onAccepted() {
-			if (root.mode !== Global.dialogManager.inverterChargerModeDialog.mode) {
-				root.changeMode(Global.dialogManager.inverterChargerModeDialog.mode)
+
+			Component {
+				id: modeDialogComponent
+
+				InverterChargerModeDialog {
+					onAccepted: {
+						if (root.mode !== mode) {
+							root.changeMode(mode)
+						}
+					}
+				}
 			}
 		}
 	}
