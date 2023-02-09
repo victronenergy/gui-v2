@@ -38,6 +38,7 @@ SettingsListNavigationItem {
 			: undefined
 
 	property bool updateOnClick: true
+	property var popDestination: null   // if undefined, will not automatically pop page when value is selected
 
 	property int defaultIndex: -1
 	//% "Unknown"
@@ -63,6 +64,8 @@ SettingsListNavigationItem {
 		id: optionsPageComponent
 
 		Page {
+			id: optionsPage
+
 			SettingsListView {
 				model: root.optionModel
 
@@ -89,17 +92,36 @@ SettingsListNavigationItem {
 								dataPoint.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
 							}
 							root.currentIndex = model.index
-
-							// TODO should we auto-pop to the parent page when an option is selected,
-							// to mimic the behavior in gui-v1? How to do that without creating an
-							// abrupt and unexpected page change?
 						}
 						root.optionClicked(model.index)
+
+						if (root.popDestination !== undefined) {
+							popTimer.restart()
+						}
 					}
 				}
 
 				C.ButtonGroup {
 					id: radioButtonGroup
+				}
+			}
+
+			onIsCurrentPageChanged: {
+				if (!isCurrentPage) {
+					popTimer.stop()
+				}
+			}
+
+			Timer {
+				id: popTimer
+
+				interval: Theme.animation.settings.radioButtonPage.autoClose.duration
+				onTriggered: {
+					if (root.popDestination) {
+						Global.pageManager.popPage(root.popDestination)
+					} else {
+						Global.pageManager.popPage()
+					}
 				}
 			}
 		}

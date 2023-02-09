@@ -115,13 +115,24 @@ Page {
 					Page {
 						SettingsListView {
 							id: tzListView
+
 							header: SettingsListSwitch {
 								text: "UTC"
 								writeAccessLevel: VenusOS.User_AccessType_User
 								checked: tzData.city === text
 								updateOnClick: false
 								onClicked: {
-									tzData.saveTimeZone("", text)
+									if (!checked) {
+										tzData.saveTimeZone("", text)
+										popTimer.start()
+									}
+								}
+
+								Timer {
+									id: popTimer
+
+									interval: Theme.animation.settings.radioButtonPage.autoClose.duration
+									onTriggered: Global.pageManager.popPage(root)
 								}
 							}
 							model: root._timeZoneModels
@@ -132,6 +143,7 @@ Page {
 								secondaryText: ""
 								writeAccessLevel: VenusOS.User_AccessType_User
 								updateOnClick: false
+								popDestination: root
 								currentIndex: {
 									if (tzData.region === modelData.region) {
 										for (let i = 0; i < modelData.count; ++i) {
