@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
@@ -70,7 +71,12 @@ Loader {
 			return null
 		}
 	}
-	onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac input service:", errorString())
+
+	onStatusChanged: {
+		if (status === Loader.Error) {
+			console.warn("Unable to load AC input service:", serviceUid)
+		}
+	}
 
 	ListModel {
 		id: validPhases
@@ -80,14 +86,21 @@ Loader {
 		id: invalidPhases
 	}
 
-	VeQuickItem {
-		uid: {
-			if (!root.item) {
-				return null
+	DataPoint {
+		id: numberOfPhases
+
+		source: {
+			if (root.status !== Loader.Ready) {
+				return ""
 			} else if (serviceType == "vebus") {
-				return root.serviceUid + "/Ac/NumberOfPhases"
-			} else if (serviceType == "grid" || serviceType == "genset") {
-				return root.serviceUid + "/NrOfPhases"
+				const prefix = root.serviceUid.startsWith('dbus/') || root.serviceUid.startsWith('mqtt/')
+						? root.serviceUid.substring(5)
+						: root.serviceUid
+				return prefix + "/Ac/NumberOfPhases"
+			} else if (serviceType == "grid") {
+				return "com.victronenergy.system/Ac/Grid/NumberOfPhases"
+			} else if (serviceType == "genset") {
+				return "com.victronenergy.system/Ac/Genset/NumberOfPhases"
 			} else {
 				console.warn("Unsupported AC input service:", serviceType)
 				return ""
