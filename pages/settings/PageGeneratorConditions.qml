@@ -57,7 +57,7 @@ Page {
 				onClicked: {
 					if (!checked) {
 						//% "Make sure that the generator is not connected to the inverter AC input 1 when using this option."
-						Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("page_generator_conditions_make_sure_generator_is_not_connected"),
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_generator_conditions_make_sure_generator_is_not_connected"),
 																   Theme.animation.generator.stopWhenAc1Available.toastNotification.autoClose.duration)
 					}
 				}

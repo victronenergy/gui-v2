@@ -41,11 +41,11 @@ Page {
 					if (!checked) {
 						if (!generatorIsSet) {
 							//% "None of the AC inputs is set to generator. Go to the system setup page and set the correct AC input to generator in order to enable this functionality."
-							Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_not_set"),
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_not_set"),
 																	   Theme.animation.generator.detectGeneratorNotSet.toastNotification.autoClose.duration)
 						} else {
 							//% "An alarm will be triggered when no power from the generator is detected at the inverter AC input. Make sure that the correct AC input is set to generator on the system setup page."
-							Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_set"),
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_set"),
 																	   Theme.animation.generator.detectGeneratorSet.toastNotification.autoClose.duration)
 						}
 					}
@@ -102,10 +102,10 @@ Page {
 						var todayInSeconds = today.getTime() / 1000
 						resetDaily.setValue('{"%1" : 0}'.arg(todayInSeconds.toString()))
 						//% "The daily runtime counter has been reset"
-						Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_runtime_counter_reset"))
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_runtime_counter_reset"))
 					} else if (state.value === 1) {
 						//% "It is not possible to modify the counters while the generator is running"
-						Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_runtime_counter_cant_reset_while_running"))
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_runtime_counter_cant_reset_while_running"))
 					}
 				}
 				DataPoint {

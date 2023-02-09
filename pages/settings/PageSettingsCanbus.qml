@@ -122,7 +122,7 @@ Page {
 
 				onSelectorAccepted: {
 					//% "Please wait, changing and checking the unique number takes a while"
-					Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_canbus_unique_id_wait"), 5000)
+					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_canbus_unique_id_wait"), 5000)
 					uniqueCheck.startCheck(3)
 				}
 

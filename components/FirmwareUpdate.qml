@@ -70,7 +70,7 @@ QtObject {
 			}
 			if (msg) {
 				// TODO confirm whether we need to show "icon-firmwareupdate-active" instead of the normal notification icon
-				Global.dialogManager.showToastNotification(VenusOS.Notification_Info, msg, 10000)
+				Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
 			}
 		}
 	}

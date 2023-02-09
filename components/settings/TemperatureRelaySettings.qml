@@ -19,7 +19,7 @@ Column {
 
 	function showEqualValuesWarningToast() {
 		//% "Warning: Activation and deactivation temperatures are set to the same value. This will lead the condition to be ignored."
-		Global.dialogManager.showToastNotification(VenusOS.Notification_Warning, qsTrId("settings_relay_equal_values_warning"))
+		Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("settings_relay_equal_values_warning"))
 	}
 
 	width: parent ? parent.width : 0

@@ -18,7 +18,6 @@ QtObject {
 	property var pageManager
 	property var mockDataSimulator    // only valid when mock mode is active
 	property var dataManager
-	property var dialogManager
 	property var locale: Qt.locale()
 	property var dataServices: []
 	property var dataServiceModel: null
@@ -26,6 +25,7 @@ QtObject {
 
 	property var inputPanel
 	property var dialogLayer
+	property var notificationLayer
 
 	// data sources
 	property var acInputs
@@ -47,5 +47,9 @@ QtObject {
 	property bool allPagesLoaded
 
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
+
+	function showToastNotification(category, text, autoCloseInterval = 0) {
+		notificationLayer.showToastNotification(category, text, autoCloseInterval)
+	}
 }
 

@@ -88,6 +88,7 @@
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
         <file>components/NotificationDelegate.qml</file>
+        <file>components/NotificationLayer.qml</file>
         <file>components/NotificationsView.qml</file>
         <file>components/Page.qml</file>
         <file>components/PageStack.qml</file>
@@ -275,7 +276,6 @@
         <file>pages/settings/tz/TzEuropeData.qml</file>
         <file>pages/settings/tz/TzIndianData.qml</file>
         <file>pages/settings/tz/TzPacificData.qml</file>
-        <file>dialogs/DialogManager.qml</file>
         <file>dialogs/ModalDialog.qml</file>
         <file>dialogs/ModalWarningDialog.qml</file>
         <file>dialogs/ESSMinimumSOCDialog.qml</file>
