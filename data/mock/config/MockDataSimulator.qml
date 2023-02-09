@@ -120,10 +120,6 @@ QtObject {
 			notificationsConfig.showToastNotification()
 			event.accepted = true
 			break
-		case Qt.Key_P:
-			Global.dialogManager.showWarning(notificationsConfig.warningNotificationTitle, notificationsConfig.warningNotificationDescription)
-			event.accepted = true
-			break
 		case Qt.Key_T:
 			root.timersActive = !root.timersActive
 			pageConfigTitle.text = "Timers on: " + root.timersActive
