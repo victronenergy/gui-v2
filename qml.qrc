@@ -17,6 +17,14 @@
         <file>components/datapoints/DataPointDBusImpl.qml</file>
         <file>components/datapoints/DataPointMqttImpl.qml</file>
         <file>components/datapoints/DataPointMockImpl.qml</file>
+        <file>components/dialogs/ModalDialog.qml</file>
+        <file>components/dialogs/ModalWarningDialog.qml</file>
+        <file>components/dialogs/ESSMinimumSOCDialog.qml</file>
+        <file>components/dialogs/InputCurrentLimitDialog.qml</file>
+        <file>components/dialogs/InverterChargerModeDialog.qml</file>
+        <file>components/dialogs/GeneratorDurationSelectorDialog.qml</file>
+        <file>components/dialogs/NumberSelectorDialog.qml</file>
+        <file>components/dialogs/TimeSelectorDialog.qml</file>
         <file>components/settings/FirmwareCheckListButton.qml</file>
         <file>components/settings/MountStateListButton.qml</file>
         <file>components/settings/SettingsLabel.qml</file>
@@ -276,14 +284,6 @@
         <file>pages/settings/tz/TzEuropeData.qml</file>
         <file>pages/settings/tz/TzIndianData.qml</file>
         <file>pages/settings/tz/TzPacificData.qml</file>
-        <file>dialogs/ModalDialog.qml</file>
-        <file>dialogs/ModalWarningDialog.qml</file>
-        <file>dialogs/ESSMinimumSOCDialog.qml</file>
-        <file>dialogs/InputCurrentLimitDialog.qml</file>
-        <file>dialogs/InverterChargerModeDialog.qml</file>
-        <file>dialogs/GeneratorDurationSelectorDialog.qml</file>
-        <file>dialogs/NumberSelectorDialog.qml</file>
-        <file>dialogs/TimeSelectorDialog.qml</file>
         <file>controlcards/ESSCard.qml</file>
         <file>controlcards/GeneratorCard.qml</file>
         <file>controlcards/InverterCard.qml</file>
