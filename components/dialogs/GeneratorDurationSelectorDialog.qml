@@ -9,7 +9,7 @@ import "/components/Utils.js" as Utils
 ModalDialog {
 	id: root
 
-	property int duration: Utils.composeDuration(timeSelector.hour, timeSelector.minute)
+	property int duration
 
 	//% "Duration"
 	title: qsTrId("controlcard_generator_durationselectordialog_title")
@@ -23,5 +23,8 @@ ModalDialog {
 			bottom: parent.footer.top
 		}
 		maximumHour: 59
+
+		onHourChanged: root.duration = Utils.composeDuration(hour, minute)
+		onMinuteChanged: root.duration = Utils.composeDuration(hour, minute)
 	}
 }
