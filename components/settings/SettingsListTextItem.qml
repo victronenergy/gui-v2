@@ -26,7 +26,6 @@ SettingsListItem {
 		horizontalAlignment: Text.AlignRight
 	}
 
-	enabled: source === "" || dataPoint.valid
 	content.children: [
 		defaultContent
 	]

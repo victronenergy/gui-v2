@@ -14,7 +14,8 @@ SettingsListItem {
 
 	signal valueChanged(value: real)
 
-	enabled: source === "" || dataPoint.valid
+	enabled: userHasWriteAccess && (source === "" || dataPoint.valid)
+
 	content.anchors.rightMargin: 0
 	content.children: [
 		SettingsSlider {

@@ -138,7 +138,7 @@ Page {
 		delegate: SettingsListNavigationItem {
 			text: modelData.text
 			showAccessLevel: modelData.showAccessLevel || VenusOS.User_AccessType_User
-			visible: modelData.visible === undefined || modelData.visible === true
+			visible: defaultVisible && (modelData.visible === undefined || modelData.visible === true)
 			onClicked: {
 				Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
 			}

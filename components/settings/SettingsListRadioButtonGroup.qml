@@ -49,7 +49,7 @@ SettingsListNavigationItem {
 			? optionModel[currentIndex].display
 			: defaultSecondaryText
 
-	enabled: source === "" || dataPoint.valid
+	enabled: userHasReadAccess && (source === "" || dataPoint.valid)
 
 	onClicked: {
 		Global.pageManager.pushPage(optionsPageComponent, { title: text })

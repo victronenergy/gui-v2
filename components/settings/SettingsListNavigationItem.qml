@@ -14,6 +14,7 @@ SettingsListItem {
 	signal clicked()
 
 	down: mouseArea.containsPress
+	enabled: userHasReadAccess
 
 	content.children: [
 		Label {

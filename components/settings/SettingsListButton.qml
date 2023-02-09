@@ -14,6 +14,8 @@ SettingsListItem {
 
 	signal clicked()
 
+	enabled: userHasWriteAccess
+
 	content.children: [
 		ListItemButton {
 			id: button

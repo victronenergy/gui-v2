@@ -17,8 +17,9 @@ Item {
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
+	readonly property bool userHasReadAccess: Global.systemSettings.canAccess(showAccessLevel)
 
-	readonly property bool defaultVisible: Global.systemSettings.canAccess(showAccessLevel)
+	readonly property bool defaultVisible: userHasReadAccess
 	readonly property alias primaryLabel: primaryLabel
 	readonly property int defaultImplicitHeight: visible
 		? Math.max(primaryLabel.implicitHeight + Theme.geometry.settingsListItem.content.verticalMargin * 2,
@@ -30,7 +31,6 @@ Item {
 	implicitWidth: parent ? parent.width : 0
 	implicitHeight: defaultImplicitHeight
 	visible: defaultVisible
-	enabled: userHasWriteAccess
 
 	Rectangle {
 		id: backgroundRect
