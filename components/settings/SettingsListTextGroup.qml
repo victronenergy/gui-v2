@@ -12,8 +12,6 @@ SettingsListItem {
 	property alias textModel: repeater.model
 	property int itemWidth
 
-	enabled: false
-
 	content.children: [
 		Repeater {
 			id: repeater

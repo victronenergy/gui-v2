@@ -17,6 +17,7 @@ SettingsListItem {
 
 	implicitHeight: visible ? defaultImplicitHeight + (caption.text.length ? caption.implicitHeight : 0)  : 0
 	down: mouseArea.containsPress
+	enabled: userHasWriteAccess
 
 	content.children: [
 		RadioButton {
