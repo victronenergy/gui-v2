@@ -33,7 +33,7 @@ Page {
 
 	function _openTimeSelector() {
 		if (!_timeSelector) {
-			_timeSelector = timeSelectorComponent.createObject(root)
+			_timeSelector = timeSelectorComponent.createObject(Global.dialogLayer)
 		}
 		const dt = ClockTime.currentDateTime
 		_timeSelector.hour = dt.getHours()
@@ -45,8 +45,6 @@ Page {
 		id: timeSelectorComponent
 
 		TimeSelectorDialog {
-			parent: Global.dialogManager
-
 			onAccepted: {
 				let dt = ClockTime.currentDateTime
 				dt.setHours(hour)
