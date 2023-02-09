@@ -36,5 +36,6 @@
     "animation.statusBar.initialize.delayedStart.duration": 350,
     "animation.statusBar.initialize.fade.duration": 400,
     "animation.navBar.initialize.delayedStart.duration": 350,
-    "animation.navBar.initialize.fade.duration": 400
+    "animation.navBar.initialize.fade.duration": 400,
+    "animation.settings.radioButtonPage.autoClose.duration": 600
 }
