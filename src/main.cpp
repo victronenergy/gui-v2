@@ -389,21 +389,23 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "SwitchesCard");
 
 	/* dialogs */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/ModalDialog.qml")),
-		"Victron.VenusOS", 2, 0, "ModalDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/ModalWarningDialog.qml")),
-		"Victron.VenusOS", 2, 0, "ModalWarningDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDurationSelectorDialog.qml")),
-		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/ESSMinimumSOCDialog.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ESSMinimumSOCDialog.qml")),
 		"Victron.VenusOS", 2, 0, "ESSMinimumSOCDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/InverterChargerModeDialog.qml")),
-		"Victron.VenusOS", 2, 0, "InverterChargerModeDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/GeneratorDurationSelectorDialog.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorDisableAutostartDialog.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorDisableAutostartDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorDurationSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/NumberSelectorDialog.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/InverterChargerModeDialog.qml")),
+		"Victron.VenusOS", 2, 0, "InverterChargerModeDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/InputCurrentLimitDialog.qml")),
+		"Victron.VenusOS", 2, 0, "InputCurrentLimitDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ModalDialog.qml")),
+		"Victron.VenusOS", 2, 0, "ModalDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ModalWarningDialog.qml")),
+		"Victron.VenusOS", 2, 0, "ModalWarningDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/NumberSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "NumberSelectorDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/TimeSelectorDialog.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/TimeSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "TimeSelectorDialog");
 
 	/* pages */
