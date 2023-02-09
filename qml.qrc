@@ -281,7 +281,6 @@
         <file>dialogs/ESSMinimumSOCDialog.qml</file>
         <file>dialogs/InputCurrentLimitDialog.qml</file>
         <file>dialogs/InverterChargerModeDialog.qml</file>
-        <file>dialogs/GeneratorDisableAutostartDialog.qml</file>
         <file>dialogs/GeneratorDurationSelectorDialog.qml</file>
         <file>dialogs/NumberSelectorDialog.qml</file>
         <file>dialogs/TimeSelectorDialog.qml</file>

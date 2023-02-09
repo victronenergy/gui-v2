@@ -11,23 +11,6 @@ ModalDialog {
 
 	property int mode
 
-	function modeText(m) {
-		switch (m) {
-		case VenusOS.Inverters_Mode_On:
-			return Utils.qsTrIdOnOff(1)
-		case VenusOS.Inverters_Mode_ChargerOnly:
-			//% "Charger only"
-			return qsTrId("inverter_charger_mode_charger_only")
-		case VenusOS.Inverters_Mode_InverterOnly:
-			//% "Inverter only"
-			return qsTrId("inverter_charger_mode_inverter_only")
-		case VenusOS.Inverters_Mode_Off:
-			return Utils.qsTrIdOnOff(0)
-		default:
-			return ""
-		}
-	}
-
 	//% "Inverter / Charger mode"
 	title: qsTrId("controlcard_inverter_charger_mode")
 
@@ -57,7 +40,7 @@ ModalDialog {
 
 		RadioButtonControlValue {
 			button.checked: modelData === root.mode
-			label.text: root.modeText(modelData)
+			label.text: Global.inverters.inverterModeToText(modelData)
 			onClicked: root.mode = modelData
 		}
 	}
