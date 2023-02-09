@@ -25,7 +25,7 @@ Page {
 				onClicked: {
 					if (checked) {
 						if (!root._confirmApDialog) {
-							root._confirmApDialog = confirmApDialogComponent.createObject(root)
+							root._confirmApDialog = confirmApDialogComponent.createObject(Global.dialogLayer)
 						}
 						root._confirmApDialog.open()
 					} else {
@@ -46,7 +46,6 @@ Page {
 		id: confirmApDialogComponent
 
 		ModalWarningDialog {
-			parent: Global.dialogManager
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 			//% "Disable Access Point"
 			title: qsTrId("settings_wifi_disable_ap")

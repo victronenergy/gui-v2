@@ -31,7 +31,7 @@ SettingsListButton {
 
 	onClicked: {
 		if (!_numberSelector) {
-			_numberSelector = numberSelectorComponent.createObject(root)
+			_numberSelector = numberSelectorComponent.createObject(Global.dialogLayer)
 		}
 		_numberSelector.value = value
 		_numberSelector.open()
@@ -41,7 +41,6 @@ SettingsListButton {
 		id: numberSelectorComponent
 
 		NumberSelectorDialog {
-			parent: Global.dialogManager
 			title: root.text
 			suffix: root.suffix
 			decimals: root.decimals

@@ -27,7 +27,7 @@ SettingsListButton {
 
 	onClicked: {
 		if (!_timeSelector) {
-			_timeSelector = timeSelectorComponent.createObject(root)
+			_timeSelector = timeSelectorComponent.createObject(Global.dialogLayer)
 		}
 		_timeSelector.hour = hour
 		_timeSelector.minute = minute
@@ -38,7 +38,6 @@ SettingsListButton {
 		id: timeSelectorComponent
 
 		TimeSelectorDialog {
-			parent: Global.dialogManager
 			maximumHour: root.maximumHour
 			maximumMinute: root.maximumMinute
 

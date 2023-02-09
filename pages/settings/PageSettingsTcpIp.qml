@@ -174,7 +174,7 @@ Page {
 			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: {
 				if (!root._forgetNetworkDialog) {
-					root._forgetNetworkDialog = forgetNetworkDialogComponent.createObject(root)
+					root._forgetNetworkDialog = forgetNetworkDialogComponent.createObject(Global.dialogLayer)
 				}
 				root._forgetNetworkDialog.open()
 			}
@@ -183,7 +183,6 @@ Page {
 				id: forgetNetworkDialogComponent
 
 				ModalWarningDialog {
-					parent: Global.dialogManager
 					dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 					title: forgetNetworkButton.text
 					//% "Are you sure that you want to forget this network?"
