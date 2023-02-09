@@ -192,17 +192,17 @@ Page {
 								onClicked: {
 									if (checked) {
 										//% "Stopping, generator will continue running if other conditions are reached"
-										Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_stopping"),
+										Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_stopping"),
 																				   Theme.animation.generator.stopping.toastNotification.autoClose.duration)
 									}
 									if (!checked && stopTimer.value === 0) {
 										//% "Starting, generator won't stop till user intervention"
-										Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_starting_wont_stop"),
+										Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_starting_wont_stop"),
 																				   Theme.animation.generator.starting.toastNotification.autoClose.duration)
 									}
 									if (!checked && stopTimer.value > 0) {
 										//% "Starting. The generator will stop in %1, unless other conditions keep it running"
-										Global.dialogManager.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_starting_will_stop").arg(Utils.secondsToString(stopTimer.value)),
+										Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_starting_will_stop").arg(Utils.secondsToString(stopTimer.value)),
 																				   Theme.animation.generator.starting.toastNotification.autoClose.duration)
 									}
 								}

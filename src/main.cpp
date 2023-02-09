@@ -233,6 +233,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "NavButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NotificationDelegate.qml")),
 		"Victron.VenusOS", 2, 0, "NotificationDelegate");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NotificationLayer.qml")),
+		"Victron.VenusOS", 2, 0, "NotificationLayer");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NotificationsView.qml")),
 		"Victron.VenusOS", 2, 0, "NotificationsView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Page.qml")),
@@ -387,8 +389,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "SwitchesCard");
 
 	/* dialogs */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/DialogManager.qml")),
-		"Victron.VenusOS", 2, 0, "DialogManager");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/ModalDialog.qml")),
 		"Victron.VenusOS", 2, 0, "ModalDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/dialogs/ModalWarningDialog.qml")),

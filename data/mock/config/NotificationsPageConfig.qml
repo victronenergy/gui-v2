@@ -73,6 +73,6 @@ QtObject {
 			currentType = VenusOS.Notification_Warning
 			useShortText = !useShortText
 		}
-		Global.dialogManager.showToastNotification(currentType, useShortText ? shortText : longText)
+		Global.showToastNotification(currentType, useShortText ? shortText : longText)
 	}
 }

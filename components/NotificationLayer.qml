@@ -55,6 +55,4 @@ Item {
 			onDismissed: Qt.callLater(_cleanUp)
 		}
 	}
-
-	Component.onCompleted: Global.dialogManager = root
 }

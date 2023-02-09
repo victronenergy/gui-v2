@@ -54,15 +54,19 @@ Item {
 		}
 	}
 
-	DialogManager {
-		// we rely on the implicit Z ordering, so must be declared after the other views.
-	}
-
+	// We rely on the implicit Z ordering, so dialog/notification layers be declared after the other views.
 	Item {
 		id: dialogLayer
 
 		anchors.fill: parent
 		Component.onCompleted: Global.dialogLayer = dialogLayer
+	}
+
+	NotificationLayer {
+		id: notificationLayer
+
+		anchors.fill: parent
+		Component.onCompleted: Global.notificationLayer = notificationLayer
 	}
 
 	// Create the InputPanel dynamically in case QtQuick.VirtualKeyboard is not available (e.g. on
