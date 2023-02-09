@@ -8,15 +8,8 @@ import "/components/Utils.js" as Utils
 
 Item {
 	id: root
+
 	anchors.fill: parent
-
-	property ModalWarningDialog warningNotification: ModalWarningDialog {}
-
-	function showWarning(title, description) {
-		warningNotification.title = title
-		warningNotification.description = description
-		warningNotification.open()
-	}
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
 		var toast = toaster.createObject(this, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
