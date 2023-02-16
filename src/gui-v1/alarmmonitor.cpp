@@ -2,8 +2,6 @@
 #include "alarmbusitem.h"
 #include "wakespeed_error.hpp"
 
-#include <velib/qt/charger_error.hpp>
-#include <velib/qt/bms_error.hpp>
 #include <veutil/qt/vebus_error.hpp>
 
 AlarmMonitor::AlarmMonitor(DBusService *service, Type type, const QString &busitemPathAlarm,
@@ -80,7 +78,9 @@ void AlarmMonitor::updateAlarm(QVariant var)
 			alarm = DBUS_NO_ERROR;
 		} else {
 			alarm = DBUS_ERROR;
-			mDescription = BmsError::getDescription(error);
+			//FIXME: get from veutil when BmsError is ported there
+			//mDescription = BmsError::getDescription(error);
+			mDescription = "BMS error";
 		}
 		break;
 	}
@@ -90,8 +90,11 @@ void AlarmMonitor::updateAlarm(QVariant var)
 		if (error == 0) {
 			alarm = DBUS_NO_ERROR;
 		} else {
-			alarm = ChargerError::isWarning(error) ? DBUS_WARNING : DBUS_ERROR;
-			mDescription = ChargerError::getDescription(error);
+			//FIXME: get from veutil when ChargerError is ported there
+			//alarm = ChargerError::isWarning(error) ? DBUS_WARNING : DBUS_ERROR;
+			//mDescription = ChargerError::getDescription(error);
+			alarm = DBUS_ERROR;
+			mDescription = "Charger error";
 		}
 		break;
 	}

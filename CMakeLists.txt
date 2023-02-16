@@ -111,13 +111,7 @@ set(VEUTIL_MQTT_SOURCES
     src/veutil/src/qt/ve_qitems_mqtt.cpp
 )
 
-set(VELIB_DBUS_SOURCES
-    src/velib/inc/velib/qt/bms_error.hpp
-    src/velib/inc/velib/qt/charger_error.hpp
-
-    src/velib/src/qt/bms_error.cpp
-    src/velib/src/qt/charger_error.cpp
-
+set(GUIv1_DBUS_SOURCES
     src/gui-v1/alarmbusitem.h
     src/gui-v1/alarmbusitem.cpp
     src/gui-v1/alarmmonitor.h
@@ -159,7 +153,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
 else()
     list(APPEND SOURCES
         ${CONNMAN_SOURCES}
-        ${VELIB_DBUS_SOURCES}
+        ${GUIv1_DBUS_SOURCES}
         ${VEUTIL_CORE_SOURCES}
         ${VEUTIL_DBUS_SOURCES}
         ${VEUTIL_MQTT_SOURCES}
