@@ -169,8 +169,10 @@ void BackendConnection::initMqttConnection(const QString &address)
 		m_mqttProducer = nullptr;
 	}
 
-	m_mqttProducer = new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt");
+	m_mqttProducer = new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt", "gui-v2");
 	m_uidHelper = UidHelper::instance();
+	connect(m_mqttProducer, &VeQItemMqttProducer::aboutToConnect,
+		m_mqttProducer, &VeQItemMqttProducer::continueConnect); // TODO: setCredentials().
 	connect(m_mqttProducer, &VeQItemMqttProducer::messageReceived,
 		m_uidHelper, &UidHelper::onMessageReceived);
 	connect(m_mqttProducer, &VeQItemMqttProducer::nullMessageReceived,
