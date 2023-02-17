@@ -4,6 +4,8 @@ on: [push]
 jobs:
   build-wasm-file:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Checkout repository and submodules
       uses: actions/checkout@v3
@@ -78,8 +80,15 @@ jobs:
         mkdir -p artifacts/wasm
         mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
         mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
+        cd artifacts
+        zip ../venus-webassembly.zip wasm/
     - name: Upload wasm files
       uses: actions/upload-artifact@v3
       with:
         name: venus-webassembly
         path: artifacts
+    - name: Release tagged wasm files
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: venus-webassembly.zip
