@@ -81,7 +81,7 @@ jobs:
         mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
         mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
         cd artifacts
-        zip ../venus-webassembly.zip wasm/
+        zip -r ../venus-webassembly.zip wasm
     - name: Upload wasm files
       uses: actions/upload-artifact@v3
       with:
