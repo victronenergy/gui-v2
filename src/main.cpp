@@ -88,8 +88,16 @@ void initBackend()
 	} else if (parser.isSet(mockMode)) {
 		backend->setType(Victron::VenusOS::BackendConnection::MockSource);
 	} else {
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+		emscripten::val webLocation = emscripten::val::global("location");
+		const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
+		const QUrlQuery query(webLocationUrl);
+		const QString mqttUrl(query.queryItemValue("mqtt")); // e.g.: "ws://192.168.5.96:9001/"
+		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, mqttUrl);
+#else
 		const QString address = parser.isSet(dbusDefault) ? QStringLiteral("tcp:host=localhost,port=3000") : parser.value(dbusAddress);
 		backend->setType(Victron::VenusOS::BackendConnection::DBusSource, address);
+#endif
 	}
 }
 
