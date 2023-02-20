@@ -11,6 +11,23 @@ ModalDialog {
 
 	property int duration
 
+	property bool _updating
+
+	function _update(hour, minute) {
+		_updating = true
+		duration = Utils.composeDuration(hour, minute)
+		_updating = false
+	}
+
+	onDurationChanged: {
+		if (_updating) {
+			return
+		}
+		const parts = Utils.decomposeDuration(duration)
+		timeSelector.hour = parts.h
+		timeSelector.minute = parts.m
+	}
+
 	//% "Duration"
 	title: qsTrId("controlcard_generator_durationselectordialog_title")
 
@@ -24,7 +41,7 @@ ModalDialog {
 		}
 		maximumHour: 59
 
-		onHourChanged: root.duration = Utils.composeDuration(hour, minute)
-		onMinuteChanged: root.duration = Utils.composeDuration(hour, minute)
+		onHourChanged: root._update(hour, minute)
+		onMinuteChanged: root._update(hour, minute)
 	}
 }
