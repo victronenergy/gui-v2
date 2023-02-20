@@ -22,7 +22,6 @@ QtObject {
 	//% "Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur."
 	property string longText: qsTrId("notifications_toast_long_text")
 
-	property int currentType: VenusOS.Notification_Warning
 	property bool useShortText: false
 
 	property var dummyAlarms: [
@@ -67,12 +66,10 @@ QtObject {
 		return alarm
 	}
 
-	function showToastNotification() {
-		currentType = (currentType + 1)
-		if (currentType > VenusOS.Notification_Info) {
-			currentType = VenusOS.Notification_Warning
+	function showToastNotification(notifType) {
+		if (notifType > VenusOS.Notification_Info) {
 			useShortText = !useShortText
 		}
-		Global.showToastNotification(currentType, useShortText ? shortText : longText)
+		Global.showToastNotification(notifType, useShortText ? shortText : longText)
 	}
 }

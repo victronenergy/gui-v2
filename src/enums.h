@@ -54,15 +54,6 @@ public:
 	};
 	Q_ENUM(StatusBar_NavigationButtonStyle)
 
-	enum ToastNotification_Category {
-		ToastNotification_Category_None,
-		ToastNotification_Category_Informative,
-		ToastNotification_Category_Confirmation,
-		ToastNotification_Category_Warning,
-		ToastNotification_Category_Error
-	};
-	Q_ENUM(ToastNotification_Category)
-
 	enum Units_Type {
 		Units_Percentage,
 		Units_Potential_Volt,
@@ -292,9 +283,10 @@ public:
 
 	enum Notification_Type {
 		Notification_Inactive,
+		Notification_Info,
+		Notification_Confirm,
 		Notification_Warning,
-		Notification_Alarm,
-		Notification_Info
+		Notification_Alarm
 	};
 	Q_ENUM(Notification_Type)
 
