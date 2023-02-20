@@ -21,14 +21,19 @@ Item {
 
 		width: Theme.geometry.generatorIconLabel.icon.width
 		height: Theme.geometry.generatorIconLabel.icon.width
-		source: !!root.generator
-			? root.generator.state !== VenusOS.Generators_State_Running ? ""
-				: root.generator.runningBy === VenusOS.Generators_RunningBy_Manual
-					? root.generator.runtime > 0
-						? "qrc:/images/icon_manualstart_timer_24.svg"
-						: "qrc:/images/icon_manualstart_24.svg"
-				: "qrc:/images/icon_autostart_24.svg"
-			: ""
+		source: {
+			if (!root.generator || root.generator.state === VenusOS.Generators_RunningBy_NotRunning) {
+				return ""
+			}
+			if (root.generator.runningBy === VenusOS.Generators_RunningBy_Manual) {
+				if (root.generator.manualStartTimer > 0) {
+					return "qrc:/images/icon_manualstart_timer_24.svg"
+				} else {
+					return "qrc:/images/icon_manualstart_24.svg"
+				}
+			}
+			return "qrc:/images/icon_autostart_24.svg"
+		}
 	}
 
 	Label {
@@ -40,7 +45,11 @@ Item {
 		}
 		// set a fixed width to prevent the label from resizing when the runtime changes
 		width: Theme.geometry.generatorIconLabel.label.width
-		text: root.generator ? Utils.formatAsHHMMSS(root.generator.runtime) : ""
+		text: root.generator
+			  ? root.generator.state !== VenusOS.Generators_State_Running
+				? "--:--"
+				: Utils.formatAsHHMMSS(root.generator.runtime)
+			  : ""
 		font.pixelSize: Theme.font.size.body2
 		color: root.generator && root.generator.runtime > 0 ? Theme.color.font.primary : Theme.color.font.secondary
 	}
