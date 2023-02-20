@@ -42,8 +42,6 @@ ControlCard {
 			bottom: parent.status.bottom
 			bottomMargin: parent.status.bottomMargin
 		}
-
-		visible: root.generator.state === VenusOS.Generators_State_Running
 		generator: root.generator
 	}
 
@@ -245,8 +243,22 @@ ControlCard {
 
 			onClicked: {
 				if (root.generator.state === VenusOS.Generators_State_Running) {
+					//% "Stopping; the generator will continue to run if other conditions are reached."
+					Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
+							qsTrId("controlcard_generator_manual_stop_notice"))
 					root.generator.stop()
+					durationButton.duration = 0
 				} else {
+					if (durationButton.duration > 0) {
+						//% "Starting; the generator will stop in %1, unless other conditions keep it running."
+						Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
+								qsTrId("controlcard_generator_manual_start_notice").arg(Utils.formatAsHHMM(durationButton.duration, true)))
+					} else {
+						root.generator.start(durationButton.duration)
+						//% "Starting; the generator will not stop until user intervention."
+						Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
+								qsTrId("controlcard_generator_manual_start_with_duration_notice"))
+					}
 					root.generator.start(durationButton.duration)
 				}
 			}
