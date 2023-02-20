@@ -190,21 +190,7 @@ Page {
 								source: root.startStopBindPrefix + "/ManualStart"
 								writeAccessLevel: VenusOS.User_AccessType_User
 								onClicked: {
-									if (checked) {
-										//% "Stopping, generator will continue running if other conditions are reached"
-										Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_stopping"),
-																				   Theme.animation.generator.stopping.toastNotification.autoClose.duration)
-									}
-									if (!checked && stopTimer.value === 0) {
-										//% "Starting, generator won't stop till user intervention"
-										Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_starting_wont_stop"),
-																				   Theme.animation.generator.starting.toastNotification.autoClose.duration)
-									}
-									if (!checked && stopTimer.value > 0) {
-										//% "Starting. The generator will stop in %1, unless other conditions keep it running"
-										Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_starting_will_stop").arg(Utils.secondsToString(stopTimer.value)),
-																				   Theme.animation.generator.starting.toastNotification.autoClose.duration)
-									}
+									Global.generators.manualRunningNotification(!checked, stopTimer.value)
 								}
 							}
 
