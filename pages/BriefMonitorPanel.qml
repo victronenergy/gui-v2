@@ -134,9 +134,7 @@ Column {
 					bottomMargin: generatorQuantityLabel.bottomPadding
 				}
 				// In most cases there is only 1 generator, so don't worry about other ones here.
-				state: Global.generators.first ? Global.generators.first.state : VenusOS.Generators_State_Stopped
-				runtime: Global.generators.first ? Global.generators.first.runtime : 0
-				runningBy: Global.generators.first ? Global.generators.first.runningBy : VenusOS.Generators_RunningBy_NotRunning
+				generator: Global.generators.first
 			}
 		}
 

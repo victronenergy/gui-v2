@@ -11,15 +11,8 @@ import "/components/Utils.js" as Utils
 ControlCard {
 	id: root
 
-	property int state: VenusOS.Generators_State_Stopped
-	property int runtime
-	property int runningBy: VenusOS.Generators_RunningBy_NotRunning
-	property int manualStartTimer
+	property var generator
 	property bool autostart
-
-	signal manualStart(durationSecs: int)
-	signal manualStop()
-	signal changeAutoStart(newAutoStart: bool)
 
 	title.icon.source: "qrc:/images/generator.svg"
 	//% "Generator"
@@ -50,10 +43,8 @@ ControlCard {
 			bottomMargin: parent.status.bottomMargin
 		}
 
-		visible: root.state === VenusOS.Generators_State_Running
-		state: root.state
-		runtime: root.runtime
-		runningBy: root.runningBy
+		visible: root.generator.state === VenusOS.Generators_State_Running
+		generator: root.generator
 	}
 
 	Label {
@@ -64,22 +55,22 @@ ControlCard {
 			leftMargin: Theme.geometry.controlCard.contentMargins
 		}
 
-		color: root.state === VenusOS.Generators_State_Error ? Theme.color.critical
+		color: root.generator.state === VenusOS.Generators_State_Error ? Theme.color.critical
 			: Theme.color.font.secondary
-		text: root.state !== VenusOS.Generators_State_Running ?
+		text: root.generator.state !== VenusOS.Generators_State_Running ?
 				"" // not running, empty substatus.
-			: root.runningBy === VenusOS.Generators_RunningBy_Manual ?
+			: root.generator.runningBy === VenusOS.Generators_RunningBy_Manual ?
 				//% "Manual started"
 				qsTrId("controlcard_generator_substatus_manualstarted")
-			: root.runningBy === VenusOS.Generators_RunningBy_TestRun ?
+			: root.generator.runningBy === VenusOS.Generators_RunningBy_TestRun ?
 				//% "Test run"
 				qsTrId("controlcard_generator_substatus_testrun")
 			: ( //% "Auto-started"
 				qsTrId("controlcard_generator_substatus_autostarted")
-				+ " \u2022 " + substatusForRunningBy(root.runningBy))
+				+ " \u2022 " + substatusForRunningBy(root.generator.runningBy))
 
 		function substatusForRunningBy(runningBy) {
-			switch (root.runningBy) {
+			switch (root.generator.runningBy) {
 			case VenusOS.Generators_RunningBy_LossOfCommunication:
 				//% "Loss of comm"
 				return qsTrId("controlcard_generator_substatus_lossofcomm")
@@ -113,7 +104,7 @@ ControlCard {
 		label.text: qsTrId("controlcard_generator_label_autostart")
 		button.checked: root.autostart
 		separator.visible: false
-		enabled: root.state !== VenusOS.Generators_State_Running
+		enabled: root.generator.state !== VenusOS.Generators_State_Running
 
 		onClicked: {
 			if (root.autostart) {
@@ -123,7 +114,7 @@ ControlCard {
 				}
 				_confirmationDialog.open()
 			} else {
-				root.changeAutoStart(true)
+				// TODO when autostart stop is supported
 			}
 		}
 
@@ -140,7 +131,8 @@ ControlCard {
 				//% "Consequences description..."
 				description: qsTrId("controlcard_generator_disableautostartdialog_consequences")
 
-				onAccepted: root.changeAutoStart(false)
+				// TODO when autostart enabling is supported
+//                onAccepted: {}
 			}
 		}
 	}
@@ -196,12 +188,12 @@ ControlCard {
 			anchors.top: subcardHeaderSeparator.bottom
 			//% "Timed run"
 			label.text: qsTrId("controlcard_generator_subcard_label_timedrun")
-			enabled: root.state !== VenusOS.Generators_State_Running
+			enabled: root.generator.state !== VenusOS.Generators_State_Running
 		}
 		ButtonControlValue {
 			id: durationButton
 
-			property int duration: root.manualStartTimer
+			property int duration: root.generator.manualStartTimer
 			property var _durationDialog
 
 			anchors.top: timedRunSwitch.bottom
@@ -211,7 +203,7 @@ ControlCard {
 			button.height: Theme.geometry.generatorCard.durationButton.height
 			button.width: Theme.geometry.generatorCard.durationButton.width
 			button.enabled: timedRunSwitch.button.checked
-					&& root.state !== VenusOS.Generators_State_Running
+					&& root.generator.state !== VenusOS.Generators_State_Running
 			button.text: Utils.formatAsHHMM(durationButton.duration)
 
 			onClicked: {
@@ -240,22 +232,22 @@ ControlCard {
 			}
 			height: Theme.geometry.generatorCard.startButton.height
 
-			enabled: root.state !== VenusOS.Generators_State_Error
+			enabled: root.generator.state !== VenusOS.Generators_State_Error
 
-			text: root.state === VenusOS.Generators_State_Running ?
+			text: root.generator.state === VenusOS.Generators_State_Running ?
 					//% "Stop"
 					qsTrId("controlcard_generator_subcard_button_stop")
 				: /* stopped */
 					//% "Start"
 					qsTrId("controlcard_generator_subcard_button_start")
 
-			checked: root.state === VenusOS.Generators_State_Running
+			checked: root.generator.state === VenusOS.Generators_State_Running
 
 			onClicked: {
-				if (root.state === VenusOS.Generators_State_Running) {
-					root.manualStop()
+				if (root.generator.state === VenusOS.Generators_State_Running) {
+					root.generator.stop()
 				} else {
-					root.manualStart(durationButton.duration)
+					root.generator.start(durationButton.duration)
 				}
 			}
 		}

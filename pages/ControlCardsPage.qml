@@ -41,20 +41,7 @@ Page {
 
 					GeneratorCard {
 						width: root.cardWidth
-						state: model.generator.state
-						runtime: model.generator.runtime
-						runningBy: model.generator.runningBy
-						manualStartTimer: model.generator.manualStartTimer
-
-						// TODO bind 'autostart' property to dbus backend value (not yet available)
-						// and add changeAutoStart() handler to update when autostart switch is toggled.
-
-						onManualStart: function(durationSecs) {
-							model.generator.start(durationSecs)
-						}
-						onManualStop: {
-							model.generator.stop()
-						}
+						generator: model.generator
 					}
 				}
 			}

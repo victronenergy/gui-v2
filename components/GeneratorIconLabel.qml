@@ -11,9 +11,7 @@ import "/components/Utils.js" as Utils
 Item {
 	id: root
 
-	property int state
-	property int runtime
-	property int runningBy
+	property var generator
 
 	implicitHeight: icon.height
 	implicitWidth: label.x + label.width
@@ -23,12 +21,14 @@ Item {
 
 		width: Theme.geometry.generatorIconLabel.icon.width
 		height: Theme.geometry.generatorIconLabel.icon.width
-		source: root.state !== VenusOS.Generators_State_Running ? ""
-			: root.runningBy === VenusOS.Generators_RunningBy_Manual
-				? root.runtime > 0
-					? "qrc:/images/icon_manualstart_timer_24.svg"
-					: "qrc:/images/icon_manualstart_24.svg"
-			: "qrc:/images/icon_autostart_24.svg"
+		source: !!root.generator
+			? root.generator.state !== VenusOS.Generators_State_Running ? ""
+				: root.generator.runningBy === VenusOS.Generators_RunningBy_Manual
+					? root.generator.runtime > 0
+						? "qrc:/images/icon_manualstart_timer_24.svg"
+						: "qrc:/images/icon_manualstart_24.svg"
+				: "qrc:/images/icon_autostart_24.svg"
+			: ""
 	}
 
 	Label {
@@ -40,8 +40,8 @@ Item {
 		}
 		// set a fixed width to prevent the label from resizing when the runtime changes
 		width: Theme.geometry.generatorIconLabel.label.width
-		text: Utils.formatAsHHMMSS(root.runtime)
+		text: root.generator ? Utils.formatAsHHMMSS(root.generator.runtime) : ""
 		font.pixelSize: Theme.font.size.body2
-		color: root.runtime > 0 ? Theme.color.font.primary : Theme.color.font.secondary
+		color: root.generator && root.generator.runtime > 0 ? Theme.color.font.primary : Theme.color.font.secondary
 	}
 }

@@ -8,15 +8,13 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	function populate() {
-		for (let i = 0; i < generatorObjects.count; ++i) {
-			Global.generators.addGenerator(generatorObjects.objectAt(i))
-		}
-		Global.generators.first = generatorObjects.objectAt(0)
-	}
-
 	property Instantiator generatorObjects: Instantiator {
 		model: 1    // TODO randomly generate multiple generators sometimes
+
+		onObjectAdded: function(index, object) {
+			Global.generators.addGenerator(object)
+			Global.generators.refreshFirstGenerator()
+		}
 
 		QtObject {
 			id: generator
@@ -45,9 +43,5 @@ QtObject {
 				onTriggered: generator.runtime += 1
 			}
 		}
-	}
-
-	Component.onCompleted: {
-		populate()
 	}
 }
