@@ -147,7 +147,6 @@
     "geometry.modalDialog.footer.height": 64,
     "geometry.modalDialog.footer.midSeparator.width": 1,
     "geometry.modalDialog.footer.midSeparator.margins": 8,
-    "geometry.modalDialog.content.topMargin": 32,
     "geometry.modalDialog.content.spacing": 40,
     "geometry.modalDialog.content.horizontalMargin": 64,
 

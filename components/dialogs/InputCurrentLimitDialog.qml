@@ -14,36 +14,46 @@ ModalDialog {
 
 	title: Global.acInputs.currentLimitTypeToText(inputType)
 
-	contentItem: Column {
-		id: contentColumn
-
-		anchors.topMargin: Theme.geometry.modalDialog.content.topMargin
-		anchors.top: root.header.bottom
-		spacing: Theme.geometry.modalDialog.content.spacing
-
-		SpinBox {
-			id: spinbox
-
-			width: parent.width - 2*Theme.geometry.modalDialog.content.horizontalMargin
-			anchors.horizontalCenter: parent.horizontalCenter
-			stepSize: 100 // mA
-			to: 1000000 // mA
-			indicatorImplicitWidth: Theme.geometry.spinBox.indicator.maximumWidth
-			//% "%1 A"
-			label.text: qsTrId("inverter_current_limit_value").arg(spinbox.value/1000)
-			value: root.currentLimit
-			onValueChanged: root.currentLimit = value
+	contentItem: Item {
+		anchors {
+			left: parent.left
+			right: parent.right
+			top: parent.header.bottom
+			bottom: parent.footer.top
 		}
 
-		SegmentedButtonRow {
-			id: buttonRow
+		Column {
+			id: contentColumn
 
-			width: spinbox.width
-			anchors.horizontalCenter: parent.horizontalCenter
-			onButtonClicked: function (buttonIndex){
-				currentIndex = buttonIndex
-				root.currentLimit = model[currentIndex] * 1000 // mA
-				spinbox.value = model[currentIndex] * 1000 // mA
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width
+
+			spacing: Theme.geometry.modalDialog.content.spacing
+
+			SpinBox {
+				id: spinbox
+
+				width: parent.width - 2*Theme.geometry.modalDialog.content.horizontalMargin
+				anchors.horizontalCenter: parent.horizontalCenter
+				stepSize: 100 // mA
+				to: 1000000 // mA
+				indicatorImplicitWidth: Theme.geometry.spinBox.indicator.maximumWidth
+				//% "%1 A"
+				label.text: qsTrId("inverter_current_limit_value").arg(spinbox.value/1000)
+				value: root.currentLimit
+				onValueChanged: root.currentLimit = value
+			}
+
+			SegmentedButtonRow {
+				id: buttonRow
+
+				width: spinbox.width
+				anchors.horizontalCenter: parent.horizontalCenter
+				onButtonClicked: function (buttonIndex){
+					currentIndex = buttonIndex
+					root.currentLimit = model[currentIndex] * 1000 // mA
+					spinbox.value = model[currentIndex] * 1000 // mA
+				}
 			}
 		}
 	}
