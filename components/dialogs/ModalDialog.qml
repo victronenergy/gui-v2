@@ -10,6 +10,7 @@ C.Dialog {
 	id: root
 
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndClose
+	property alias canAccept: doneButton.enabled
 
 	modal: true
 
@@ -49,9 +50,11 @@ C.Dialog {
 
 	header: Item {
 		width: parent ? parent.width : 0
-		height: root.title.length ? Theme.geometry.modalDialog.header.height : 0
+		height: headerLabel.y + (root.title.length ? headerLabel.implicitHeight : 0)
 
 		Label {
+			id: headerLabel
+
 			anchors {
 				top: parent.top
 				topMargin: Theme.geometry.modalDialog.header.title.topMargin
@@ -111,6 +114,7 @@ C.Dialog {
 			width: Theme.geometry.modalDialog.footer.midSeparator.width
 		}
 		Button {
+			id: doneButton
 			anchors {
 				left: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly ? parent.left : footerMidSeparator.right
 				right: parent.right

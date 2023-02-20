@@ -37,14 +37,6 @@ SettingsListItem {
 				root.ListView ? root.ListView.view : null)
 	}
 
-	function onAccepted(text) {
-		if (dataPoint.source) {
-			dataPoint.setValue(text)
-		}
-		textField.focus = false
-		root.accepted(text)
-	}
-
 	property TextField defaultContent: TextField {
 		id: textField
 
@@ -55,7 +47,14 @@ SettingsListItem {
 		text: dataPoint.valid ? dataPoint.value : ""
 
 		EnterKeyAction.actionId: EnterKeyAction.Done
-		onAccepted: root.onAccepted(text)
+		onAccepted: {
+			if (dataPoint.source) {
+				dataPoint.setValue(text)
+			}
+			textField.focus = false
+			root.accepted(text)
+		}
+
 		onEditingFinished: root.editingFinished()
 
 		MouseArea {

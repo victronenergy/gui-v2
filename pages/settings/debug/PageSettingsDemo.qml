@@ -110,6 +110,10 @@ Page {
 				to: 10
 			}
 
+			SettingsListDateSelector {
+				text: "Date selection"
+			}
+
 			SettingsListTimeSelector {
 				text: "Time selection"
 			}

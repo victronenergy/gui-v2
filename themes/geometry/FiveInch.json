@@ -45,7 +45,8 @@
 
     "geometry.spinBox.indicator.minimumWidth": 64,
     "geometry.spinBox.indicator.maximumWidth": 136,
-    "geometry.spinBox.indicator.height": 72,
+    "geometry.spinBox.indicator.horizontalOrientation.height": 72,
+    "geometry.spinBox.indicator.verticalOrientation.height": 56,
     "geometry.spinBox.indicator.radius": 6,
     "geometry.spinBox.spacing": "geometry.button.spacing",
 
@@ -142,7 +143,6 @@
     "geometry.modalDialog.width": 624,
     "geometry.modalDialog.height": 368,
     "geometry.modalDialog.radius": 8,
-    "geometry.modalDialog.header.height": 64,
     "geometry.modalDialog.header.title.topMargin": 21,
     "geometry.modalDialog.footer.height": 64,
     "geometry.modalDialog.footer.midSeparator.width": 1,
