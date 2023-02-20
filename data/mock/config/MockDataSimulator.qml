@@ -117,7 +117,14 @@ QtObject {
 			event.accepted = true
 			break
 		case Qt.Key_O:
-			notificationsConfig.showToastNotification()
+			const notifType = (event.modifiers & Qt.ShiftModifier)
+				? VenusOS.Notification_Confirm
+				: (event.modifiers & Qt.AltModifier)
+				  ? VenusOS.Notification_Warning
+				  : (event.modifiers & Qt.ControlModifier)
+					? VenusOS.Notification_Alarm
+					: VenusOS.Notification_Info
+			notificationsConfig.showToastNotification(notifType)
 			event.accepted = true
 			break
 		case Qt.Key_T:
