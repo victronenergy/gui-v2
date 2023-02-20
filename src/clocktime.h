@@ -22,7 +22,8 @@ public:
 	static ClockTime* instance(QObject* parent = nullptr);
 
 public Q_SLOTS:
-	QString formatTime(int hour, int minute);
+	QString formatTime(int hour, int minute) const;
+	bool isDateValid(int year, int month, int day) const; // month is 1-12
 
 Q_SIGNALS:
 	void currentDateTimeChanged();

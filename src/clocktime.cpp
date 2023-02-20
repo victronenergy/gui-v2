@@ -9,10 +9,16 @@ ClockTime::ClockTime(QObject *parent)
 	scheduleNextTimeCheck(m_currentDateTime.time());
 }
 
-QString ClockTime::formatTime(int hour, int minute)
+QString ClockTime::formatTime(int hour, int minute) const
 {
 	QTime t(hour, minute);
 	return t.toString("hh:mm");
+}
+
+bool ClockTime::isDateValid(int year, int month, int day) const
+{
+	static const QCalendar calendar;
+	return calendar.isDateValid(year, month, day);
 }
 
 void ClockTime::timerEvent(QTimerEvent *)

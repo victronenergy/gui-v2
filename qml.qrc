@@ -17,6 +17,7 @@
         <file>components/datapoints/DataPointDBusImpl.qml</file>
         <file>components/datapoints/DataPointMqttImpl.qml</file>
         <file>components/datapoints/DataPointMockImpl.qml</file>
+        <file>components/dialogs/DateSelectorDialog.qml</file>
         <file>components/dialogs/ModalDialog.qml</file>
         <file>components/dialogs/ModalWarningDialog.qml</file>
         <file>components/dialogs/ESSMinimumSOCDialog.qml</file>
@@ -30,6 +31,7 @@
         <file>components/settings/SettingsLabel.qml</file>
         <file>components/settings/SettingsListButton.qml</file>
         <file>components/settings/SettingsListCGwacsBatterySchedule.qml</file>
+        <file>components/settings/SettingsListDateSelector.qml</file>
         <file>components/settings/SettingsListDvccSwitch.qml</file>
         <file>components/settings/SettingsListPortField.qml</file>
         <file>components/settings/SettingsListView.qml</file>

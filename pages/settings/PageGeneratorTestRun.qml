@@ -46,20 +46,9 @@ Page {
 				]
 			}
 
-			SettingsListTextField { // TODO: this will need changing when Serj provides a design for a calendar
-				function onAccepted(text) {
-					var newDate = Date.parse(text)/1000
-					console.log("PageGeneratorTest: onAccepted", text, newDate)
-					if ((newDate !== NaN) && (dataPoint.source)) {
-						dataPoint.setValue(newDate)
-					}
-					textField.focus = false
-					accepted()
-				}
-
+			SettingsListDateSelector {
 				//% "Run interval start date"
 				text: qsTrId("page_generator_test_run_run_interval_start_date")
-				secondaryText: Qt.formatDateTime(new Date(value * 1000), "yyyy-MM-dd")
 				source: bindPrefix + "/TestRun/StartDate"
 			}
 

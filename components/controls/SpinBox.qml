@@ -13,6 +13,7 @@ CT.SpinBox {
 
 	property alias label: label
 	property int indicatorImplicitWidth: Theme.geometry.spinBox.indicator.minimumWidth
+	property int orientation: Qt.Horizontal
 
 	signal maxValueReached()
 	signal minValueReached()
@@ -23,11 +24,15 @@ CT.SpinBox {
 			+ 2*spacing
 			+ up.implicitIndicatorWidth
 			+ down.implicitIndicatorWidth)
-	implicitHeight: Math.max(
-		implicitContentHeight + topPadding + bottomPadding,
-		implicitBackgroundHeight,
-		up.implicitIndicatorHeight,
-		down.implicitIndicatorHeight)
+	implicitHeight: orientation === Qt.Horizontal
+		? Math.max(implicitContentHeight + topPadding + bottomPadding,
+			implicitBackgroundHeight,
+			up.implicitIndicatorHeight,
+			down.implicitIndicatorHeight)
+		: Math.max(implicitContentHeight + topPadding + bottomPadding,
+			implicitBackgroundHeight,
+			label.implicitHeight)
+
 	spacing: Theme.geometry.spinBox.spacing
 
 	contentItem: Label {
@@ -41,10 +46,16 @@ CT.SpinBox {
 	}
 
 	up.indicator: Rectangle {
-		x: root.mirrored ? 0 : parent.width - width
-		height: parent.height
+		x: orientation === Qt.Horizontal
+		   ? root.mirrored ? 0 : parent.width - width
+		   : label.x + (label.width / 2) - (width / 2)
+		y: orientation === Qt.Horizontal
+		   ? label.y + (label.height / 2) - (height / 2)
+		   : label.y - Theme.geometry.spinBox.spacing - height
 		implicitWidth: root.indicatorImplicitWidth
-		implicitHeight: Theme.geometry.spinBox.indicator.height
+		implicitHeight: orientation === Qt.Horizontal
+			? Theme.geometry.spinBox.indicator.horizontalOrientation.height
+			: Theme.geometry.spinBox.indicator.verticalOrientation.height
 		radius: Theme.geometry.spinBox.indicator.radius
 		color: root.up.pressed ? Theme.color.darkOk : Theme.color.ok
 
@@ -55,10 +66,16 @@ CT.SpinBox {
 	}
 
 	down.indicator: Rectangle {
-		x: root.mirrored ? parent.width - width : 0
-		height: parent.height
+		x: orientation === Qt.Horizontal
+		   ? root.mirrored ? parent.width - width : 0
+		   : label.x + (label.width / 2) - (width / 2)
+		y: orientation === Qt.Horizontal
+		   ? label.y + (label.height / 2) - (height / 2)
+		   : label.y + label.height + Theme.geometry.spinBox.spacing
 		implicitWidth: root.indicatorImplicitWidth
-		implicitHeight: Theme.geometry.spinBox.indicator.height
+		implicitHeight: orientation === Qt.Horizontal
+			? Theme.geometry.spinBox.indicator.horizontalOrientation.height
+			: Theme.geometry.spinBox.indicator.verticalOrientation.height
 		radius: Theme.geometry.spinBox.indicator.radius
 		color: root.down.pressed ? Theme.color.darkOk : Theme.color.ok
 		Image {
@@ -69,7 +86,9 @@ CT.SpinBox {
 
 	background: Item {
 		implicitWidth: 2*Theme.geometry.spinBox.indicator.minimumWidth + 2*Theme.geometry.spinBox.spacing
-		implicitHeight: Theme.geometry.spinBox.indicator.height
+		implicitHeight: orientation === Qt.Horizontal
+			? Theme.geometry.spinBox.indicator.horizontalOrientation.height
+			: Theme.geometry.spinBox.indicator.verticalOrientation.height
 	}
 
 	MouseArea {

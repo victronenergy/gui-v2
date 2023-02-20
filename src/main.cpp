@@ -305,6 +305,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "SettingsListButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListCGwacsBatterySchedule.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListCGwacsBatterySchedule");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListDateSelector.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsListDateSelector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListItem.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsListItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextItem.qml")),
@@ -391,6 +393,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "SwitchesCard");
 
 	/* dialogs */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DateSelectorDialog.qml")),
+		"Victron.VenusOS", 2, 0, "DateSelectorDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ESSMinimumSOCDialog.qml")),
 		"Victron.VenusOS", 2, 0, "ESSMinimumSOCDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorDisableAutostartDialog.qml")),
