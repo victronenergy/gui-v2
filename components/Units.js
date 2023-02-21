@@ -71,7 +71,7 @@ function _scaledQuantity(value, unitMatchValue, length, baseUnit, scaledUnit) {
 		quantity.unit = baseUnit
 	} else {
 		if (scaledUnit !== undefined && Math.abs(unitMatchValue) >= 10000) {
-			quantity.units = scaledUnit
+			quantity.unit = scaledUnit
 			value = value / 1000
 		} else {
 			quantity.unit = baseUnit
