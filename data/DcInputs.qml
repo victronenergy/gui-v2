@@ -18,6 +18,10 @@ QtObject {
 		updateTotals()
 	}
 
+	function insertInput(index, input) {
+		model.insert(index >= 0 && index < model.count ? index : model.count, { input: input })
+	}
+
 	function removeInput(index) {
 		model.remove(index)
 		updateTotals()

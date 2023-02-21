@@ -31,8 +31,12 @@ QtObject {
 		model.append({ solarCharger: charger })
 	}
 
-	function removeCharger(day) {
-		model.remove(day)
+	function insertCharger(index, charger) {
+		model.insert(index >= 0 && index < model.count ? index : model.count, { solarCharger: charger })
+	}
+
+	function removeCharger(index) {
+		model.remove(index)
 	}
 
 	function reset() {

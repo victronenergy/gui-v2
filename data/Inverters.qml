@@ -15,6 +15,10 @@ QtObject {
 		model.append({ inverter: data })
 	}
 
+	function insertInverter(index, inverter) {
+		model.insert(index >= 0 && index < model.count ? index : model.count, { inverter: inverter })
+	}
+
 	function removeInverter(index) {
 		model.remove(index)
 	}

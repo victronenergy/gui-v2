@@ -15,6 +15,10 @@ QtObject {
 		model.append({ relay: relay })
 	}
 
+	function insertRelay(index, relay) {
+		model.insert(index >= 0 && index < model.count ? index : model.count, { relay: relay })
+	}
+
 	function removeRelay(index) {
 		model.remove(index)
 

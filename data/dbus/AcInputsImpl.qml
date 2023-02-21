@@ -42,5 +42,13 @@ QtObject {
 				uid: model.uid + "/ServiceName"
 			}
 		}
+
+		onObjectAdded: function(index, object) {
+			Global.acInputs.insertInput(index, object)
+		}
+
+		onObjectRemoved: function(index, object) {
+			Global.acInputs.removeInput(index)
+		}
 	}
 }

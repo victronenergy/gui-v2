@@ -106,7 +106,7 @@ QtObject {
 					model = Global.tanks.tankModel(Global.tanks.tankTypes[i])
 					if (model.count > 0) {
 						const index = Math.floor(Math.random(model.count))
-						Global.tanks.removeTank(Global.tanks.tankTypes[i], index)
+						Global.tanks.removeTank(model, model.get(index).tank)
 						break
 					}
 				}

@@ -52,15 +52,4 @@ QtObject {
 			}
 		}
 	}
-
-	Component.onCompleted: {
-		Global.solarChargers.addCharger(solarCharger)
-	}
-
-	Component.onDestruction: {
-		const index = Utils.findIndex(Global.solarChargers.model, solarCharger)
-		if (index >= 0) {
-			Global.solarChargers.removeCharger(index)
-		}
-	}
 }

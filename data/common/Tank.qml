@@ -19,14 +19,15 @@ QtObject {
 	property real remaining: NaN
 	property real capacity: NaN
 
-	property bool _valid: type >= 0
-	on_ValidChanged: {
-		const model = Global.tanks.tankModel(type)
-		const index = Utils.findIndex(model, tank)
-		if (_valid && index < 0) {
+	property var _tankModel
+	onTypeChanged: {
+		if (_tankModel) {
+			Global.tanks.removeTank(_tankModel, tank)
+			_tankModel = null
+		}
+		if (type >= 0) {
 			Global.tanks.addTank(tank)
-		} else if (!_valid && index >= 0) {
-			Global.tanks.removeTank(type, index)
+			_tankModel = Global.tanks.tankModel(type)
 		}
 	}
 
