@@ -21,5 +21,13 @@ QtObject {
 		delegate: Generator {
 			serviceUid: model.uid
 		}
+
+		onObjectAdded: function(index, object) {
+			Global.generators.insertGenerator(index, object)
+		}
+
+		onObjectRemoved: function(index, object) {
+			Global.generators.removeGenerator(index)
+		}
 	}
 }

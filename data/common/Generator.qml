@@ -19,17 +19,6 @@ QtObject {
 	readonly property int runningBy: _runningBy.value === undefined ? -1 : _runningBy.value
 	readonly property int deviceInstance: _deviceInstance.value === undefined ? -1 : _deviceInstance.value
 
-	readonly property bool _valid: state >= 0
-	on_ValidChanged: {
-		const index = Utils.findIndex(Global.generators.model, generator)
-		if (_valid && index < 0) {
-			Global.generators.addGenerator(generator)
-		} else if (!_valid && index >= 0) {
-			Global.generators.removeGenerator(index)
-		}
-		Global.generators.refreshFirstGenerator()
-	}
-
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: serviceUid + "/State"
 	}

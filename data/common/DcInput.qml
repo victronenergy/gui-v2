@@ -59,12 +59,5 @@ QtObject {
 
 	Component.onCompleted: {
 		_completed = true
-		Global.dcInputs.addInput(input)
-	}
-	Component.onDestruction: {
-		const index = Utils.findIndex(Global.dcInputs.model, input)
-		if (index >= 0) {
-			Global.dcInputs.removeInput(index)
-		}
 	}
 }

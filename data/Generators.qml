@@ -13,10 +13,17 @@ QtObject {
 
 	function addGenerator(generator) {
 		model.append({ generator: generator })
+		refreshFirstGenerator()
+	}
+
+	function insertGenerator(index, generator) {
+		model.insert(index >= 0 && index < model.count ? index : model.count, { generator: generator })
+		refreshFirstGenerator()
 	}
 
 	function removeGenerator(index) {
 		model.remove(index)
+		refreshFirstGenerator()
 	}
 
 	function reset() {
@@ -25,6 +32,7 @@ QtObject {
 
 	function refreshFirstGenerator() {
 		if (model.count === 0) {
+			Global.generators.first = null
 			return
 		}
 		let candidate = model.get(0).generator

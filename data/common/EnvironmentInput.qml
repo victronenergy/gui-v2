@@ -29,14 +29,4 @@ QtObject {
 	readonly property VeQuickItem _veHumidity: VeQuickItem {
 		uid: serviceUid + "/Humidity"
 	}
-
-	Component.onCompleted: {
-		Global.environmentInputs.addInput(input)
-	}
-	Component.onDestruction: {
-		const index = Utils.findIndex(Global.environmentInputs.model, input)
-		if (index >= 0) {
-			Global.environmentInputs.removeInput(index)
-		}
-	}
 }

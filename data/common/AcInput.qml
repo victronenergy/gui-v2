@@ -26,16 +26,6 @@ QtObject {
 	readonly property alias voltage: _serviceLoader.voltage
 	readonly property alias phases: _serviceLoader.phases
 
-	property bool _valid: productId != -1
-	on_ValidChanged: {
-		const index = Utils.findIndex(Global.acInputs.model, input)
-		if (_valid && index < 0) {
-			Global.acInputs.addInput(input)
-		} else if (!_valid && index >= 0) {
-			Global.acInputs.removeInput(index)
-		}
-	}
-
 	onConnectedChanged: {
 		if (connected) {
 			Global.acInputs.connectedInput = input

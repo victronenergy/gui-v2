@@ -13,7 +13,6 @@ QtObject {
 
 		onObjectAdded: function(index, object) {
 			Global.generators.addGenerator(object)
-			Global.generators.refreshFirstGenerator()
 		}
 
 		QtObject {

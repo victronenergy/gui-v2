@@ -20,5 +20,13 @@ QtObject {
 			serviceUid: model.uid
 			relayIndex: model.index
 		}
+
+		onObjectAdded: function(index, object) {
+			Global.relays.insertRelay(index, object)
+		}
+
+		onObjectRemoved: function(index, object) {
+			Global.relays.removeRelay(index)
+		}
 	}
 }

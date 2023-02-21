@@ -52,16 +52,6 @@ QtObject {
 		_currentLimit2.setValue(newLimit)
 	}
 
-	property bool _valid: productType != -1
-	on_ValidChanged: {
-		const index = Utils.findIndex(Global.inverters.model, inverter)
-		if (_valid && index < 0) {
-			Global.inverters.addInverter(inverter)
-		} else if (!_valid && index >= 0) {
-			Global.inverters.remove(index)
-		}
-	}
-
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: inverter.serviceUid + "/State"
 	}

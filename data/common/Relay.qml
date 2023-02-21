@@ -21,16 +21,6 @@ QtObject {
 		_veState.setValue(newState)
 	}
 
-	readonly property bool _valid: state >= 0
-	on_ValidChanged: {
-		const index = Utils.findIndex(Global.relays.model, relay)
-		if (_valid && index < 0) {
-			Global.relays.addRelay(relay)
-		} else if (!_valid && index >= 0) {
-			Global.relays.removeRelay(index)
-		}
-	}
-
 	onRelayFunctionChanged: {
 		Global.relays.relayFunctionChanged(relay)
 	}
