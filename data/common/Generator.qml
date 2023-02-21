@@ -13,6 +13,7 @@ QtObject {
 	property string serviceUid
 
 	readonly property int state: _state.value === undefined ? -1 : _state.value
+	readonly property bool autoStart: _autoStart.value === 1
 	readonly property int manualStartTimer: _manualStartTimer.value === undefined ? -1 : _manualStartTimer.value
 	readonly property int runtime: _runtime.value === undefined ? -1 : _runtime.value
 	readonly property int runningBy: _runningBy.value === undefined ? -1 : _runningBy.value
@@ -54,6 +55,10 @@ QtObject {
 		onValueChanged: Global.generators.refreshFirstGenerator()
 	}
 
+	readonly property VeQuickItem _autoStart: VeQuickItem {
+		uid: serviceUid + "/AutoStartEnabled"
+	}
+
 	function start(durationSecs) {
 		_manualStartTimer.setValue(durationSecs)
 		_manualStart.setValue(1)
@@ -61,5 +66,9 @@ QtObject {
 
 	function stop() {
 		_manualStart.setValue(0)
+	}
+
+	function setAutoStart(auto) {
+		_autoStart.setValue(auto ? 1 : 0)
 	}
 }

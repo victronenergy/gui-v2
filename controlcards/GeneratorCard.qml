@@ -12,7 +12,6 @@ ControlCard {
 	id: root
 
 	property var generator
-	property bool autostart
 
 	title.icon.source: "qrc:/images/generator.svg"
 	//% "Generator"
@@ -98,21 +97,24 @@ ControlCard {
 
 		anchors.top: substatus.bottom
 
-		//% "Autostart"
+		//% "Auto-start"
 		label.text: qsTrId("controlcard_generator_label_autostart")
-		button.checked: root.autostart
+		button.checked: root.generator.autoStart
+		button.checkable: false     // user might not be allowed to change this setting
 		separator.visible: false
+
+		// TODO should also disable if user is not allowed to change autostart property
 		enabled: root.generator.state !== VenusOS.Generators_State_Running
 
 		onClicked: {
-			if (root.autostart) {
+			if (root.generator.autoStart) {
 				// check if they really want to disable
 				if (!_confirmationDialog) {
 					_confirmationDialog = confirmationDialogComponent.createObject(Global.dialogLayer)
 				}
 				_confirmationDialog.open()
 			} else {
-				// TODO when autostart stop is supported
+				root.generator.setAutoStart(false)
 			}
 		}
 
@@ -122,15 +124,10 @@ ControlCard {
 			ModalWarningDialog {
 				dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 
-				//% "Disable Autostart?"
+				//% "Disable auto-start?"
 				title: qsTrId("controlcard_generator_disableautostartdialog_title")
 
-				// TODO set text to something meaningful
-				//% "Consequences description..."
-				description: qsTrId("controlcard_generator_disableautostartdialog_consequences")
-
-				// TODO when autostart enabling is supported
-//                onAccepted: {}
+				onAccepted: root.generator.setAutoStart(true)
 			}
 		}
 	}
