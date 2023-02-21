@@ -38,6 +38,12 @@ Loader {
 		}
 	}
 
+	function _setPhaseCount(phaseCount) {
+		_resetModel(validPhases, phaseCount)
+		_resetModel(invalidPhases, phaseCount)
+		item.model = phaseCount
+	}
+
 	function _updateValue(instantiator, index, propertyName, value) {
 		// update phase model value
 		validPhases.setProperty(index, propertyName, value === undefined ? NaN : value)
@@ -86,32 +92,37 @@ Loader {
 		id: invalidPhases
 	}
 
+	VeQuickItem {
+		id: vebusPhaseCount
+
+		uid: root.status === Loader.Ready && serviceType == "vebus"
+			 ? root.serviceUid + "/Ac/NumberOfPhases"
+			 : ""
+
+		onValueChanged: {
+			if (value !== undefined) {
+				root._setPhaseCount(value)
+			}
+		}
+	}
+
 	DataPoint {
-		id: numberOfPhases
+		id: gridOrGensetPhaseCount
 
 		source: {
-			if (root.status !== Loader.Ready) {
-				return ""
-			} else if (serviceType == "vebus") {
-				const prefix = root.serviceUid.startsWith('dbus/') || root.serviceUid.startsWith('mqtt/')
-						? root.serviceUid.substring(5)
-						: root.serviceUid
-				return prefix + "/Ac/NumberOfPhases"
-			} else if (serviceType == "grid") {
-				return "com.victronenergy.system/Ac/Grid/NumberOfPhases"
-			} else if (serviceType == "genset") {
-				return "com.victronenergy.system/Ac/Genset/NumberOfPhases"
-			} else {
-				console.warn("Unsupported AC input service:", serviceType)
-				return ""
+			if (root.status === Loader.Ready) {
+				if (serviceType == "grid") {
+					return "com.victronenergy.system/Ac/Grid/NumberOfPhases"
+				} else if (serviceType == "genset") {
+					return "com.victronenergy.system/Ac/Genset/NumberOfPhases"
+				}
 			}
+			return ""
 		}
 
 		onValueChanged: {
 			if (value !== undefined) {
-				root._resetModel(validPhases, value)
-				root._resetModel(invalidPhases, value)
-				root.item.model = value
+				root._setPhaseCount(value)
 			}
 		}
 	}
