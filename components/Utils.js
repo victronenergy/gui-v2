@@ -118,19 +118,6 @@ function reactToSignalOnce(sig, slot) {
 	sig.connect(f)
 }
 
-function updateMaximumValue(key, value) {
-	// Set a max value slightly larger than previously known highest value
-	if (isNaN(value)) {
-		return
-	}
-	maxValues[key] = Math.max(maxValues[key] || 0, value * 1.2)
-}
-
-function maximumValue(key) {
-	// TODO should we fetch a max from some data storage preset instead?
-	return maxValues[key] || 1  // use default=1 to avoid zero division for ratio calc
-}
-
 function scaleToRange(value, valueMin, valueMax, scaledMin, scaledMax) {
 	if (valueMin >= valueMax) {
 		console.warn("scaleToRange() failed, valueMin", valueMin, ">= valueMax", valueMax)

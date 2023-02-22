@@ -11,7 +11,8 @@ import "/components/Gauges.js" as Gauges
 Item {
 	id: gauge
 
-	property real value
+	property alias value: arc.value
+
 	property int valueType: VenusOS.Gauges_ValueType_FallingPercentage
 	property alias startAngle: arc.startAngle
 	property alias endAngle: arc.endAngle
@@ -35,14 +36,12 @@ Item {
 		ProgressArc {
 			id: arc
 
-			property int status: Gauges.getValueStatus(gauge.value, gauge.valueType)
+			readonly property int status: Gauges.getValueStatus(gauge.value * 100, gauge.valueType)
 
 			width: radius*2
 			height: width
 			x: arcX !== undefined ? arcX : (gauge.alignment & Qt.AlignRight ? (gauge.width - 2*radius) : 0)
 			y: arcY !== undefined ? arcY : ((gauge.height - height) / 2)
-			radius: gauge.radius
-			value: gauge.value
 			progressColor: Theme.statusColorValue(status)
 			remainderColor: Theme.statusColorValue(status, true)
 		}

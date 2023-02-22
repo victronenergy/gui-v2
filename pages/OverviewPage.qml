@@ -362,7 +362,6 @@ Page {
 			animateGeometry: Global.pageManager.animatingIdleResize
 			animationEnabled: root.isCurrentPage
 			isSegment: segmentedBackground.visible
-			sideGaugeValue: quantityLabel.value / Utils.maximumValue("grid.power")    // TODO when max available
 			connectors: [ gridWidgetConnector ]
 
 			WidgetConnectorAnchor {
@@ -394,7 +393,6 @@ Page {
 
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-			sideGaugeValue: 0.5 // TODO when max available
 			connectors: [ shoreWidgetConnector ]
 
 			WidgetConnectorAnchor {

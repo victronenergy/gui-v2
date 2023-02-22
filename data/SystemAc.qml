@@ -10,10 +10,7 @@ QtObject {
 
 	property QtObject consumption: QtObject {
 		property real power: NaN
-		onPowerChanged: Utils.updateMaximumValue("system.ac.consumption.power", power)
-
 		property real current: NaN
-		onCurrentChanged: Utils.updateMaximumValue("system.ac.consumption.current", current)
 
 		property ListModel phases: ListModel {}
 
