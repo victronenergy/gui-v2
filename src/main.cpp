@@ -275,6 +275,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "TimeSelector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ToastNotification.qml")),
 		"Victron.VenusOS", 2, 0, "ToastNotification");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ValueRange.qml")),
+		"Victron.VenusOS", 2, 0, "ValueRange");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ViewGradient.qml")),
 		"Victron.VenusOS", 2, 0, "ViewGradient");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),

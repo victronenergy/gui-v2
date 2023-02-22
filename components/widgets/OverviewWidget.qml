@@ -15,9 +15,7 @@ Rectangle {
 	property alias title: widgetHeader.title
 	property alias quantityLabel: quantityLabel
 
-	property alias sideGaugeVisible: sideGauge.visible
-	property alias sideGaugeValue: sideGauge.value
-
+	property int rightPadding
 	property alias extraContent: extraContent
 	property bool isSegment
 	property var connectors: []
@@ -81,23 +79,6 @@ Rectangle {
 		}
 	}
 
-	VerticalGauge {
-		id: sideGauge
-
-		anchors {
-			top: parent.top
-			bottom: parent.bottom
-			right: parent.right
-			margins: Theme.geometry.overviewPage.widget.sideGauge.margins
-		}
-		width: Theme.geometry.overviewPage.widget.sideGauge.width
-		radius: Theme.geometry.overviewPage.widget.sideGauge.radius
-		backgroundColor: Theme.color.overviewPage.widget.sideGauge.background
-		foregroundColor: Theme.color.overviewPage.widget.sideGauge.highlight
-		visible: false
-		animationEnabled: root.animationEnabled
-	}
-
 	Item {
 		id: header
 
@@ -131,8 +112,8 @@ Rectangle {
 		id: extraContent
 		anchors {
 			left: parent.left
-			right: sideGauge.visible ? sideGauge.left : parent.right
-			rightMargin: sideGauge.visible ? sideGauge.anchors.margins : 0
+			right: parent.right
+			rightMargin: root.rightPadding
 			top: header.bottom
 			bottom: parent.bottom
 		}

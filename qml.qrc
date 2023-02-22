@@ -116,6 +116,7 @@
         <file>components/ToastNotification.qml</file>
         <file>components/QuantityLabel.qml</file>
         <file>components/EnergyQuantityLabel.qml</file>
+        <file>components/ValueRange.qml</file>
         <file>components/VenusFont.qml</file>
         <file>components/VerticalGauge.qml</file>
         <file>components/ViewGradient.qml</file>

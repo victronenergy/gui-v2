@@ -15,8 +15,6 @@ OverviewWidget {
 	icon.source: "qrc:/images/inverter_charger.svg"
 	type: VenusOS.OverviewWidget_Type_Inverter
 
-	sideGaugeVisible: true
-	sideGaugeValue: 0.7 // TODO: data model
 	quantityLabel.visible: false
 
 	extraContent.children: [

@@ -188,13 +188,11 @@ Column {
 
 				Timer {
 					id: timer
+
 					interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
 					running: Global.pageManager.sidePanelActive
 					repeat: true
-					onTriggered: {
-						let loadValue = Global.system.loads.power / Utils.maximumValue("system.loads.power")
-						loadGraph.addValue(loadValue)
-					}
+					onTriggered: loadGraph.addValue(loadsPower.valueAsRatio)
 				}
 			}
 		}
@@ -203,12 +201,18 @@ Column {
 			enabled: false // not interactive
 			width: parent.width
 			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
-			value: Global.system.loads.power / Utils.maximumValue("system.loads.power")
+			value: loadsPower.valueAsRatio
 			highlightColor: Theme.color.warning
 			grooveColor: Theme.color.darkWarning
 			showHandle: false
 
 			Behavior on value { NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration } }
 		}
+	}
+
+	ValueRange {
+		id: loadsPower
+
+		value: Global.system.loads.power
 	}
 }

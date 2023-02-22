@@ -31,7 +31,7 @@ Page {
 		height: width
 		x: sidePanel.x/2 - width/2
 		sourceComponent: Global.tanks.totalTankCount <= 1 ? singleGauge : multiGauge
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge:", errorString())
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge")
 	}
 
 	Component {
@@ -102,10 +102,6 @@ Page {
 				return "qrc:/images/icon_input_24.svg"
 			}
 
-			value: ((Global.acInputs.power || 0) + (Global.dcInputs.power || 0))
-					/ Utils.maximumValue("briefPage.inputsPower")
-			onValueChanged: Utils.updateMaximumValue("briefPage.inputsPower", value)
-
 			// AC and DC amp values cannot be combined. If there are both AC and DC values, show
 			// Watts even if Amps is preferred.
 			quantityLabel.unit: Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Amp
@@ -117,8 +113,16 @@ Page {
 					  ? Global.dcInputs.current
 					  : Global.acInputs.current
 					: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
+
+			// Gauge always shows the watts value, and ignores the current.
+			value: inputPowerRange.valueAsRatio * 100
+
+			ValueRange {
+				id: inputPowerRange
+				value: (Global.acInputs.power || 0) + (Global.dcInputs.power || 0)
+			}
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left edge:", errorString())
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left edge")
 	}
 
 	Loader {
@@ -140,7 +144,7 @@ Page {
 			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
 			label.opacity: root._gaugeLabelOpacity
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left lower:", errorString())
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left lower")
 	}
 
 	Loader {
@@ -158,15 +162,20 @@ Page {
 			alignment: Qt.AlignRight | (rightLower.active ? Qt.AlignTop : Qt.AlignVCenter)
 			animationEnabled: root._animationEnabled
 			icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
-			value: (Global.system.loads.acPower || 0) / Utils.maximumValue("system.loads.acPower") * 100
+			value: acLoadsRange.valueAsRatio * 100
 			quantityLabel.dataObject: Global.system.ac.consumption
 
 			x: -root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
 			label.leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
 			label.opacity: root._gaugeLabelOpacity
+
+			ValueRange {
+				id: acLoadsRange
+				value: Global.system.loads.acPower || 0
+			}
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right edge:", errorString())
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right edge")
 	}
 
 	Loader {
@@ -184,15 +193,20 @@ Page {
 			alignment: Qt.AlignRight | Qt.AlignBottom
 			animationEnabled: root._animationEnabled
 			icon.source: "qrc:/images/dcloads.svg"
-			value: (Global.system.loads.dcPower || 0) / Utils.maximumValue("system.loads.dcPower") * 100
+			value: dcLoadsRange.valueAsRatio * 100
 			quantityLabel.dataObject: Global.system.dc
 
 			x: -root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
 			label.leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
 			label.opacity: root._gaugeLabelOpacity
+
+			ValueRange {
+				id: dcLoadsRange
+				value: Global.system.loads.dcPower || 0
+			}
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right lower:", errorString())
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right lower")
 	}
 
 	BriefMonitorPanel {
