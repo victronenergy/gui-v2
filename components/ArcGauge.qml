@@ -39,7 +39,7 @@ Item {
 
 			width: radius*2
 			height: width
-			x: arcX !== undefined ? arcX : (gauge.alignment === Qt.AlignRight ? (gauge.width - 2*radius) : 0)
+			x: arcX !== undefined ? arcX : (gauge.alignment & Qt.AlignRight ? (gauge.width - 2*radius) : 0)
 			y: arcY !== undefined ? arcY : ((gauge.height - height) / 2)
 			radius: gauge.radius
 			value: gauge.value
