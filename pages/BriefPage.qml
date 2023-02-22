@@ -76,8 +76,7 @@ Page {
 		active: Global.acInputs.model.count > 0 || Global.dcInputs.model.count > 0
 
 		sourceComponent: SideGauge {
-			gaugeAlignmentX: Qt.AlignLeft
-			gaugeAlignmentY: leftLower.active ? Qt.AlignTop : Qt.AlignVCenter
+			alignment: Qt.AlignLeft | (leftLower.active ? Qt.AlignTop : Qt.AlignVCenter)
 			arcX: leftLower.active ? undefined : 10
 			direction: PathArc.Clockwise
 			startAngle: leftLower.active ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)
@@ -102,6 +101,7 @@ Page {
 				}
 				return "qrc:/images/icon_input_24.svg"
 			}
+
 			value: ((Global.acInputs.power || 0) + (Global.dcInputs.power || 0))
 					/ Utils.maximumValue("briefPage.inputsPower")
 			onValueChanged: Utils.updateMaximumValue("briefPage.inputsPower", value)
@@ -134,8 +134,7 @@ Page {
 		active: Global.solarChargers.model.count > 0
 
 		sourceComponent: SolarYieldGauge {
-			gaugeAlignmentY: leftEdge.active ? Qt.AlignBottom : Qt.AlignVCenter
-
+			alignment: Qt.AlignLeft | (leftEdge.active ? Qt.AlignBottom : Qt.AlignVCenter)
 			x: root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
 			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
@@ -156,7 +155,7 @@ Page {
 		}
 		active: !isNaN(Global.system.loads.acPower) || rightLower.active
 		sourceComponent: SideGauge {
-			gaugeAlignmentY: rightLower.active ? Qt.AlignTop : Qt.AlignVCenter
+			alignment: Qt.AlignRight | (rightLower.active ? Qt.AlignTop : Qt.AlignVCenter)
 			animationEnabled: root._animationEnabled
 			icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 			value: (Global.system.loads.acPower || 0) / Utils.maximumValue("system.loads.acPower") * 100
@@ -182,7 +181,7 @@ Page {
 		}
 		active: !isNaN(Global.system.loads.dcPower)
 		sourceComponent: SideGauge {
-			gaugeAlignmentY: Qt.AlignBottom
+			alignment: Qt.AlignRight | Qt.AlignBottom
 			animationEnabled: root._animationEnabled
 			icon.source: "qrc:/images/dcloads.svg"
 			value: (Global.system.loads.dcPower || 0) / Utils.maximumValue("system.loads.dcPower") * 100
