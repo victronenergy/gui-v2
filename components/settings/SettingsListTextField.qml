@@ -40,6 +40,9 @@ SettingsListItem {
 	property TextField defaultContent: TextField {
 		id: textField
 
+		property string _textWhenFocused
+		property bool _accepted
+
 		width: Math.max(
 				Theme.geometry.settingsListItem.textField.minimumWidth,
 				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry.settingsListItem.textField.maximumWidth))
@@ -48,6 +51,7 @@ SettingsListItem {
 
 		EnterKeyAction.actionId: EnterKeyAction.Done
 		onAccepted: {
+			_accepted = true
 			if (dataPoint.source) {
 				dataPoint.setValue(text)
 			}
@@ -56,6 +60,24 @@ SettingsListItem {
 		}
 
 		onEditingFinished: root.editingFinished()
+
+		onActiveFocusChanged: {
+			if (activeFocus) {
+				_textWhenFocused = text
+				_accepted = false
+			} else if (!_accepted && _textWhenFocused !== text) {
+				text = _textWhenFocused
+				revertedAnimation.to = textField.color
+				revertedAnimation.start()
+			}
+		}
+
+		ColorAnimation on color {
+			id: revertedAnimation
+
+			from: Theme.color.orange
+			duration: 400
+		}
 
 		MouseArea {
 			anchors.fill: parent
