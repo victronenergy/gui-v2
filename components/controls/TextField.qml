@@ -10,7 +10,7 @@ CT.TextField {
 	id: root
 
 	font.family: VenusFont.normal.name
-	font.pixelSize: Theme.font.size.body1
+	font.pixelSize: Theme.font.size.body2
 
 	leftPadding: Theme.geometry.textField.horizontalMargin
 	rightPadding: Theme.geometry.textField.horizontalMargin
@@ -25,6 +25,7 @@ CT.TextField {
 	background: Rectangle {
 		color: "transparent"
 		border.color: Theme.color.ok
+		border.width: Theme.geometry.button.border.width
 		radius: Theme.geometry.button.radius
 
 		// QTBUG-100490 placeholderText doesn't appear in TextField if inside StackView, so
