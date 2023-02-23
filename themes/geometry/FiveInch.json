@@ -37,7 +37,7 @@
     "geometry.settingsListItem.slider.button.size": 24,
     "geometry.settingsListItem.slider.spacing": 14,
     "geometry.settingsListItem.slider.stepDivsion": 10,
-    "geometry.settingsListItem.textField.minimumWidth": 188,
+    "geometry.settingsListItem.textField.minimumWidth": 200,
     "geometry.settingsListItem.textField.maximumWidth": 376,
 
     "geometry.slider.groove.height": 8,
