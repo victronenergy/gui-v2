@@ -26,35 +26,25 @@ Item {
 		id: statusBar
 
 		title: !!pageStack.currentItem ? pageStack.currentItem.title || "" : ""
-
-		navigationButton: !!pageStack.currentItem
-				? pageStack.currentItem.navigationButton
-				: VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive
-		navigationButtonEnabled: pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-		sidePanelButtonEnabled: pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				&& !!pageStack.currentItem && pageStack.currentItem.hasSidePanel
+		leftButton: !!pageStack.currentItem ? pageStack.currentItem.topLeftButton : VenusOS.StatusBar_LeftButton_None
+		rightButton: !!pageStack.currentItem ? pageStack.currentItem.topRightButton : VenusOS.StatusBar_RightButton_None
 
 		Component.onCompleted: pageManager.statusBar = statusBar
 
-		onNavigationButtonClicked: {
-			switch (navigationButton) {
-			case VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive:
+		onLeftButtonClicked: {
+			switch (leftButton) {
+			case VenusOS.StatusBar_LeftButton_ControlsInactive:
 				pageManager.pushLayer("qrc:/pages/ControlCardsPage.qml")
 				break
-			case VenusOS.StatusBar_NavigationButtonStyle_ControlsActive:
+			case VenusOS.StatusBar_LeftButton_ControlsActive:
 				pageManager.popLayer()
 				break
-			case VenusOS.StatusBar_NavigationButtonStyle_Back:
+			case VenusOS.StatusBar_LeftButton_Back:
 				pageManager.popPage()
 				break
 			default:
-				console.warn("Unrecognised navigation button", navigationButton)
 				break
 			}
-		}
-
-		onSidePanelActiveChanged: {
-			pageManager.sidePanelActive = sidePanelActive
 		}
 	}
 

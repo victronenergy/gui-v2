@@ -47,12 +47,20 @@ public:
 	};
 	Q_ENUM(Gauges_ValueType)
 
-	enum StatusBar_NavigationButtonStyle {
-		StatusBar_NavigationButtonStyle_ControlsInactive,
-		StatusBar_NavigationButtonStyle_ControlsActive,
-		StatusBar_NavigationButtonStyle_Back
+	enum StatusBar_LeftButton {
+		StatusBar_LeftButton_None,
+		StatusBar_LeftButton_ControlsInactive,
+		StatusBar_LeftButton_ControlsActive,
+		StatusBar_LeftButton_Back
 	};
-	Q_ENUM(StatusBar_NavigationButtonStyle)
+	Q_ENUM(StatusBar_LeftButton)
+
+	enum StatusBar_RightButton {
+		StatusBar_RightButton_None,
+		StatusBar_RightButton_SidePanelInactive,
+		StatusBar_RightButton_SidePanelActive
+	};
+	Q_ENUM(StatusBar_RightButton)
 
 	enum Units_Type {
 		Units_Percentage,

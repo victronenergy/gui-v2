@@ -13,10 +13,12 @@ Page {
 	property int _loadedPages: 0
 
 	title: navStack.currentItem ? navStack.currentItem.title : ""
-	navigationButton: navStack.depth > 1
-			? VenusOS.StatusBar_NavigationButtonStyle_Back
-			: VenusOS.StatusBar_NavigationButtonStyle_ControlsInactive
-	hasSidePanel: navStack.currentItem ? navStack.currentItem.hasSidePanel : false
+	topLeftButton: navStack.depth > 1
+			? VenusOS.StatusBar_LeftButton_Back
+			: VenusOS.StatusBar_LeftButton_ControlsInactive
+	topRightButton: navStack.currentItem
+			? navStack.currentItem.topRightButton
+			: VenusOS.StatusBar_RightButton_None
 	backgroundColor: navStack.currentItem ? navStack.currentItem.backgroundColor : Theme.color.page.background
 	fullScreenWhenIdle: navStack.currentItem ? navStack.currentItem.fullScreenWhenIdle : false
 
