@@ -13,7 +13,7 @@ Page {
 			? Theme.geometry.controlCard.minimumWidth
 			: Theme.geometry.controlCard.maximumWidth
 
-	navigationButton: VenusOS.StatusBar_NavigationButtonStyle_ControlsActive
+	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
 
 	ListView {
 		id: cardsView

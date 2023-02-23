@@ -17,7 +17,6 @@ QtObject {
 
 	// Ugly hack, but ...
 	property var currentPage
-	property bool sidePanelActive
 	property var navBar
 	property var statusBar
 	property int levelsTabIndex

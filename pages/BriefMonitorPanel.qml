@@ -182,13 +182,13 @@ Column {
 					bottomMargin: loadsQuantityLabel.bottomPadding
 				}
 				interval: timer.interval
-				enableAnimation: Global.pageManager.sidePanelActive
+				enableAnimation: root.opacity > 0
 
 				Timer {
 					id: timer
 
 					interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-					running: Global.pageManager.sidePanelActive
+					running: root.opacity > 0
 					repeat: true
 					onTriggered: loadGraph.addValue(loadsPower.valueAsRatio)
 				}
