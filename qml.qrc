@@ -90,7 +90,6 @@
         <file>components/GeneratorIconLabel.qml</file>
         <file>components/SolarYieldGauge.qml</file>
         <file>components/TabBar.qml</file>
-        <file>components/IpAddressButtonGroup.qml</file>
         <file>components/LevelsPageGaugeDelegate.qml</file>
         <file>components/MainView.qml</file>
         <file>components/LoadGraph.qml</file>
@@ -216,6 +215,7 @@
         <file>pages/settings/AccessLevelRadioButtonGroup.qml</file>
         <file>pages/settings/DvccCommonSettings.qml</file>
         <file>pages/settings/GeneratorCondition.qml</file>
+        <file>pages/settings/IpAddressListView.qml</file>
         <file>pages/settings/PageDeviceInfo.qml</file>
         <file>pages/settings/PageCanbusStatus.qml</file>
         <file>pages/settings/PageChargeCurrentLimits.qml</file>
@@ -348,6 +348,7 @@
         <file>images/ess.svg</file>
         <file>images/information.svg</file>
         <file>images/shore.svg</file>
+        <file>images/icon_refresh_32.svg</file>
         <file>images/switch_indicator.png</file>
         <file>images/switches.svg</file>
         <file>images/splash-logo-icon-5inch.svg</file>

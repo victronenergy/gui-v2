@@ -143,7 +143,11 @@ Item {
 				? "qrc:/images/icon_sidepanel_on_32.svg"
 				: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive
 					? "qrc:/images/icon_sidepanel_off_32.svg"
-					: ""
+					: root.rightButton === VenusOS.StatusBar_RightButton_Add
+					  ? "qrc:/images/icon_plus.svg"
+					  : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
+						? "qrc:/images/icon_refresh_32.svg"
+						: ""
 
 		onClicked: root.rightButtonClicked()
 	}

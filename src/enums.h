@@ -58,7 +58,9 @@ public:
 	enum StatusBar_RightButton {
 		StatusBar_RightButton_None,
 		StatusBar_RightButton_SidePanelInactive,
-		StatusBar_RightButton_SidePanelActive
+		StatusBar_RightButton_SidePanelActive,
+		StatusBar_RightButton_Add,
+		StatusBar_RightButton_Refresh
 	};
 	Q_ENUM(StatusBar_RightButton)
 
