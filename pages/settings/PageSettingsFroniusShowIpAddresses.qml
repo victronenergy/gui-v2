@@ -10,56 +10,50 @@ import "/components/Utils.js" as Utils
 Page {
 	id: root
 
-	property string settingsPrefix: "com.victronenergy.settings"
+	property var _rescanDialog
 
-	property DataPoint scanItem: DataPoint { source: "com.victronenergy.fronius/AutoDetect" }
+	topRightButton: VenusOS.StatusBar_RightButton_Refresh
 
-	property IpAddressButtonGroup knownIpAddresses: IpAddressButtonGroup {
-		source: settingsPrefix + "/Settings/Fronius/KnownIPAddresses"
+	IpAddressListView {
+		id: settingsListView
+
+		ipAddresses.source: "com.victronenergy.settings/Settings/Fronius/KnownIPAddresses"
 	}
 
-	function rescan()
-	{
-		knownIpAddresses.setValue('')
-		scanItem.setValue(1)
+	Connections {
+		target: Global.pageManager.statusBar
+		enabled: root.isCurrentPage
+
+		function onRightButtonClicked() {
+			if (!root._rescanDialog) {
+				root._rescanDialog = rescanDialogComponent.createObject(root)
+			}
+			root._rescanDialog.open()
+		}
 	}
 
-	SettingsListView {
-		id: view
+	Component {
+		id: rescanDialogComponent
 
-		model: knownIpAddresses.valuesAsArray
-		delegate: SettingsListTextItem {
-			text: CommonWords.ip_address.arg(index + 1)
-			secondaryText: modelData
-			content.children: [
-				defaultContent,
-				radioButton
-			]
+		ModalWarningDialog {
+			//% "Rescan for IP addresses?"
+			title: qsTrId("settings_fronius_rescan_title")
+			//% "Rescan"
+			acceptText: qsTrId("settings_fronius_rescan")
+			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+			icon.color: Theme.color.ok
+			icon.source: "/images/toast_icon_info.svg"
 
-			RadioButton {
-				id: radioButton
-
-				C.ButtonGroup.group: knownIpAddresses.group
+			onAccepted: {
+				settingsListView.ipAddresses.setValue('')
+				scanItem.setValue(1)
 			}
 		}
 	}
 
-	Row {
-		anchors {
-			bottom: parent.bottom
-			horizontalCenter: parent.horizontalCenter
-		}
-		spacing: parent.width / 4
+	DataPoint {
+		id: scanItem
 
-		ListItemButton {
-			//% "Rescan"
-			text: qsTrId("page_settings_fronius_show_ip_addresses_rescan")
-			onClicked: rescan()
-		}
-
-		ListItemButton {
-			text: CommonWords.remove
-			onClicked: knownIpAddresses.deleteCheckedButtons()
-		}
+		source: "com.victronenergy.fronius/AutoDetect"
 	}
 }

@@ -12,6 +12,20 @@ C.Dialog {
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndClose
 	property alias canAccept: doneButton.enabled
 
+	property string acceptText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndClose
+			  //% "Set"
+			? qsTrId("controlcard_set")
+			  //% "Ok"
+			: qsTrId("controlcard_ok")
+
+	property string rejectText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly
+			? ""
+			: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel
+				//% "Cancel"
+				? qsTrId("controlcard_cancel")
+				//% "Close"
+				: qsTrId("controlcard_close")
+
 	modal: true
 
 	verticalPadding: 0
@@ -125,11 +139,7 @@ C.Dialog {
 			font.pixelSize: Theme.font.size.body2
 			color: Theme.color.font.primary
 			spacing: 0
-			text: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndClose ?
-					//% "Set"
-					qsTrId("controlcard_set")
-				:   //% "Ok"
-					qsTrId("controlcard_ok")
+			text: root.acceptText
 			onClicked: root.accept()
 		}
 	}

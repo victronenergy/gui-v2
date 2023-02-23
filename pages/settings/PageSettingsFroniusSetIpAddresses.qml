@@ -10,58 +10,25 @@ import "/components/Utils.js" as Utils
 Page {
 	id: root
 
-	property IpAddressButtonGroup ipAddresses: IpAddressButtonGroup {
-		source: "com.victronenergy.settings/Settings/Fronius/IPAddresses"
+	property var _addDialog
+
+	topRightButton: VenusOS.StatusBar_RightButton_Add
+
+	IpAddressListView {
+		id: settingsListView
+
+		ipAddresses.source: "com.victronenergy.settings/Settings/Fronius/IPAddresses"
 	}
 
-	SettingsListView {
-		id: view
+	Connections {
+		target: Global.pageManager.statusBar
+		enabled: root.isCurrentPage
 
-		model: ObjectModel {
-			Column {
-				width: view.width
-
-				Repeater {
-					model: ipAddresses.valuesAsArray
-					delegate: SettingsListIpAddressField {
-						onAccepted: function(text) {
-							var addrs = ipAddresses.valuesAsArray
-							addrs[index] = text
-							ipAddresses.setValue(addrs.join(','))
-						}
-
-						content.children: [
-							defaultContent,
-							radioButton
-						]
-
-						text: CommonWords.ip_address.arg(index + 1)
-						secondaryText: modelData
-
-						RadioButton {
-							id: radioButton
-
-							C.ButtonGroup.group: ipAddresses.group
-						}
-					}
-				}
-
-				SettingsListNavigationItem {
-					anchors.horizontalCenter: parent.horizontalCenter
-					text: "Add new address"
-					onClicked: ipAddresses.push("192.168.1.1")
-				}
-			}
+		function onRightButtonClicked() {
+			const addresses = settingsListView.ipAddresses.value ? settingsListView.ipAddresses.value.split(',') : []
+			addresses.push("192.168.1.1")
+			settingsListView.ipAddresses.setValue(addresses.join(','))
 		}
-	}
-
-	ListItemButton {
-		anchors {
-			horizontalCenter: parent.horizontalCenter
-			bottom: parent.bottom
-		}
-		text: CommonWords.remove
-		onClicked: ipAddresses.deleteCheckedButtons()
 	}
 }
 

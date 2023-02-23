@@ -10,6 +10,7 @@ ModalDialog {
 	id: root
 
 	property string description
+	property alias icon: alarmIcon
 
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
 	header: null
@@ -30,8 +31,8 @@ ModalDialog {
 				horizontalCenter: parent.horizontalCenter
 			}
 
-			width: Theme.geometry.modalWarningDialog.alarmIcon.width
-			height: Theme.geometry.modalWarningDialog.alarmIcon.width
+			sourceSize.width: Theme.geometry.modalWarningDialog.alarmIcon.width
+			sourceSize.height: Theme.geometry.modalWarningDialog.alarmIcon.width
 			source: "qrc:/images/icon_alarm_48.svg"
 			color: Theme.color.red
 		}
