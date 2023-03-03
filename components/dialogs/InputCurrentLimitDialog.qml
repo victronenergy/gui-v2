@@ -39,7 +39,7 @@ ModalDialog {
 				to: 1000000 // mA
 				indicatorImplicitWidth: Theme.geometry.spinBox.indicator.maximumWidth
 				//% "%1 A"
-				label.text: qsTrId("inverter_current_limit_value").arg(spinbox.value/1000)
+				label.text: qsTrId("inverter_current_limit_value").arg(spinbox.value/1000)  // TODO use UnitConverter.convertToString() or unitToString() instead
 				value: root.currentLimit
 				onValueChanged: root.currentLimit = value
 			}
