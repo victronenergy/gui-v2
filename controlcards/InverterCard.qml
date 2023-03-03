@@ -113,7 +113,7 @@ ControlCard {
 					label.text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
 					enabled: modelData.currentLimitAdjustable
 					//% "%1 A"
-					button.text: qsTrId("amps").arg(value / 1000)
+					button.text: qsTrId("amps").arg(value / 1000)   // TODO use UnitConverter.convertToString() or unitToString() instead
 					onClicked: {
 						if (!root._currentLimitDialog) {
 							root._currentLimitDialog = currentLimitDialogComponent.createObject(Global.dialogLayer)
