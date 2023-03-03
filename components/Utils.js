@@ -300,19 +300,6 @@ function connmanServiceState(service) {
 	return qsTrId("utils_connman_disconnected")
 }
 
-function qsTrIdOnOff(value) {
-	if (value === 0) {
-		//% "Off"
-		return qsTrId("utils_off")
-	} else if (value === 1) {
-		//% "On"
-		return qsTrId("utils_on")
-	} else {
-		//% "Unknown"
-		return qsTrId("utils_unknown")
-	}
-}
-
 function uidEndsWithANumber(uid) {
 	var array = uid.split('/')
 	return( !Number.isNaN(parseInt(array[array.length - 1])))

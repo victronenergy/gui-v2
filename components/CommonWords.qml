@@ -68,8 +68,14 @@ QtObject {
 	//% "Press to scan"
 	readonly property string press_to_scan: qsTrId("common_words_press_to_scan")
 
+	//% "Off"
+	readonly property string off: qsTrId("common_words_off");
+
 	//% "Offline"
 	readonly property string offline: qsTrId("common_words_offline");
+
+	//% "On"
+	readonly property string on: qsTrId("common_words_on");
 
 	//% "Online"
 	readonly property string online: qsTrId("common_words_online");
@@ -121,4 +127,15 @@ QtObject {
 
 	//% "Yes"
 	readonly property string yes: qsTrId("common_words_yes")
+
+	function onOrOff(value) {
+		if (value === 0) {
+			return off
+		} else if (value === 1) {
+			return on
+		} else {
+			//% "Unknown"
+			return qsTrId("utils_unknown")
+		}
+	}
 }

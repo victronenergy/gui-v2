@@ -4,7 +4,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
 
 Page {
 	id: root
@@ -40,7 +39,7 @@ Page {
 			//% "Pump state"
 			text: qsTrId("settings_pump_state")
 			source: root.pumpBindPrefix + "/State"
-			secondaryText: Utils.qsTrIdOnOff(dataPoint.value)
+			secondaryText: CommonWords.onOrOff(dataPoint.value)
 		}
 
 		SettingsListRadioButtonGroup {
@@ -49,8 +48,8 @@ Page {
 			optionModel: [
 				//% "Auto"
 				{ display: qsTrId("settings_pump_auto"), value: 0 },
-				{ display: Utils.qsTrIdOnOff(1), value: 1 },
-				{ display: Utils.qsTrIdOnOff(0), value: 2 },
+				{ display: CommonWords.onOrOff(1), value: 1 },
+				{ display: CommonWords.onOrOff(0), value: 2 },
 			]
 			source: root.settingsBindPrefix + "/Settings/Pump0/Mode"
 		}
