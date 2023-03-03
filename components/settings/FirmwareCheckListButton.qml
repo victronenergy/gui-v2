@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 
-SettingsListButton {
+ListButton {
 	id: root
 
 	property int updateType

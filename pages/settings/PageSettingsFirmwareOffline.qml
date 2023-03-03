@@ -9,7 +9,7 @@ import Victron.Veutil
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
@@ -20,7 +20,7 @@ Page {
 				updateType: VenusOS.Firmware_UpdateType_Offline
 			}
 
-			SettingsListButton {
+			ListButton {
 				id: installUpdate
 
 				//% "Firmware found"
@@ -45,7 +45,7 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Firmware build date/time"
 				text: qsTrId("settings_firmware_build_date_time")
 				source: "com.victronenergy.platform/Firmware/Offline/AvailableBuild"

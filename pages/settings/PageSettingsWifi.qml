@@ -22,10 +22,10 @@ Page {
 
 	C.StackView.onActivated: _reload()
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
-		header: SettingsListTextItem {
+		header: ListTextItem {
 			visible: settingsListView.count === 0
 			text: {
 				if (root._tech) {
@@ -43,14 +43,14 @@ Page {
 
 		model: Connman.getServiceList("wifi")
 
-		delegate: SettingsListNavigationItem {
+		delegate: ListNavigationItem {
 			id: wifiPoint
 
 			property CmService service: Connman.getService(modelData)
 
 			text: service ? (service.name ? service.name : "[" + service.ethernet["Address"] + "]") : ""
 			secondaryText: Utils.connmanServiceState(service)
-			primaryLabel.leftPadding: Theme.geometry.statusBar.button.icon.width + Theme.geometry.settingsListItem.content.spacing
+			primaryLabel.leftPadding: Theme.geometry.statusBar.button.icon.width + Theme.geometry.listItem.content.spacing
 
 			CP.ColorImage {
 				anchors {

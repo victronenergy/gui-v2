@@ -10,57 +10,57 @@ Page {
 
 	property string bindPrefix
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Model name"
 				text: qsTrId("settings_vecan_model_name")
 				source: root.bindPrefix + "/ModelName"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Custom name"
 				text: qsTrId("settings_vecan_custom_name")
 				source: root.bindPrefix + "/CustomName"
 			}
 
-			SettingsLabel {
+			ListLabel {
 				//% "Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information."
 				text: qsTrId("settings_vecan_instance_zero_warning")
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				//% "Device Instance"
 				text: qsTrId("settings_vecan_device_instance")
 				source: root.bindPrefix + "/DeviceInstance"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Manufacturer"
 				text: qsTrId("settings_vecan_manufacturer")
 				source: root.bindPrefix + "/Manufacturer"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Network Address"
 				text: qsTrId("settings_vecan_nad")
 				source: root.bindPrefix + "/Nad"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Firmware Version"
 				text: qsTrId("settings_vecan_firmware_version")
 				source: root.bindPrefix + "/FirmwareVersion"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Serial Number"
 				text: qsTrId("settings_vecan_serial")
 				source: root.bindPrefix + "/Serial"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Unique Identity Number"
 				text: qsTrId("settings_vecan_uid")
 				source: root.bindPrefix + "/N2kUniqueNumber"

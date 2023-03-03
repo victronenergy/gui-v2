@@ -247,6 +247,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "QuantityLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/EnergyQuantityLabel.qml")),
 		"Victron.VenusOS", 2, 0, "EnergyQuantityLabel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GradientListView.qml")),
+		"Victron.VenusOS", 2, 0, "GradientListView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/RadioButtonControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "RadioButtonControlValue");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArc.qml")),
@@ -294,49 +296,49 @@ void registerQmlTypes()
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/datapoints/DataPoint.qml")),
 		"Victron.VenusOS", 2, 0, "DataPoint");
 
-	/* settings list items */
+	/* list items */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListLabel.qml")),
+		"Victron.VenusOS", 2, 0, "ListLabel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListButton.qml")),
+		"Victron.VenusOS", 2, 0, "ListButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListDateSelector.qml")),
+		"Victron.VenusOS", 2, 0, "ListDateSelector");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListItem.qml")),
+		"Victron.VenusOS", 2, 0, "ListItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListTextItem.qml")),
+		"Victron.VenusOS", 2, 0, "ListTextItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListNavigationItem.qml")),
+		"Victron.VenusOS", 2, 0, "ListNavigationItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListPortField.qml")),
+		"Victron.VenusOS", 2, 0, "ListPortField");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListRadioButton.qml")),
+		"Victron.VenusOS", 2, 0, "ListRadioButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListRadioButtonGroup.qml")),
+		"Victron.VenusOS", 2, 0, "ListRadioButtonGroup");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSlider.qml")),
+		"Victron.VenusOS", 2, 0, "ListSlider");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSpinBox.qml")),
+		"Victron.VenusOS", 2, 0, "ListSpinBox");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSwitch.qml")),
+		"Victron.VenusOS", 2, 0, "ListSwitch");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListTextField.qml")),
+		"Victron.VenusOS", 2, 0, "ListTextField");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListIpAddressField.qml")),
+		"Victron.VenusOS", 2, 0, "ListIpAddressField");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListTextGroup.qml")),
+		"Victron.VenusOS", 2, 0, "ListTextGroup");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListTimeSelector.qml")),
+		"Victron.VenusOS", 2, 0, "ListTimeSelector");
+
+	/* settings */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/CGwacsBatteryScheduleNavigationItem.qml")),
+		"Victron.VenusOS", 2, 0, "CGwacsBatteryScheduleNavigationItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/FirmwareCheckListButton.qml")),
 		"Victron.VenusOS", 2, 0, "FirmwareCheckListButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListDvccSwitch.qml")),
+		"Victron.VenusOS", 2, 0, "ListDvccSwitch");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/MountStateListButton.qml")),
 		"Victron.VenusOS", 2, 0, "MountStateListButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsLabel.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsLabel");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListButton.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListCGwacsBatterySchedule.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListCGwacsBatterySchedule");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListDateSelector.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListDateSelector");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListItem.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextItem.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListTextItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListView.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListView");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListNavigationItem.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListNavigationItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListPortField.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListPortField");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListRadioButton.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListRadioButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListRadioButtonGroup.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListRadioButtonGroup");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListSlider.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListSlider");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListSpinBox.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListSpinBox");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListSwitch.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListSwitch");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListDvccSwitch.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListDvccSwitch");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextField.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListTextField");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListIpAddressField.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListIpAddressField");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTextGroup.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListTextGroup");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsListTimeSelector.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsListTimeSelector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsSlider.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsSlider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/TemperatureRelayNavigationItem.qml")),

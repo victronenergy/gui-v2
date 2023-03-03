@@ -32,13 +32,13 @@
     "color.radioButton.indicator.off": "color.gray3",
     "color.radioButton.indicator.disabled": "color.gray2",
 
-    "color.settingsListItem.background": "color.background.secondary",
-    "color.settingsListItem.down.background": "color.gray2",
-    "color.settingsListItem.forwardIcon": "color.gray4",
-    "color.settingsListItem.down.forwardIcon": "color.gray5",
-    "color.settingsListItem.separator": "color.gray4",
-    "color.settingsListItem.secondaryText": "color.gray5",
-    "color.settingsListItem.highAccessLevel": "color.darkOrange",
+    "color.listItem.background": "color.background.secondary",
+    "color.listItem.down.background": "color.gray2",
+    "color.listItem.forwardIcon": "color.gray4",
+    "color.listItem.down.forwardIcon": "color.gray5",
+    "color.listItem.separator": "color.gray4",
+    "color.listItem.secondaryText": "color.gray5",
+    "color.listItem.highAccessLevel": "color.darkOrange",
 
     "color.scrollBar.bar": "color.gray2",
 

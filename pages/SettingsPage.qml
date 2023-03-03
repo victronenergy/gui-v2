@@ -9,7 +9,7 @@ import net.connman 0.1
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: [
@@ -135,7 +135,7 @@ Page {
 			},
 		]
 
-		delegate: SettingsListNavigationItem {
+		delegate: ListNavigationItem {
 			text: modelData.text
 			showAccessLevel: modelData.showAccessLevel || VenusOS.User_AccessType_User
 			visible: defaultVisible && (modelData.visible === undefined || modelData.visible === true)

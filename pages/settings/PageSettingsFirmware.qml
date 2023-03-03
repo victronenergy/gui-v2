@@ -8,12 +8,12 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
 
-			SettingsListTextItem {
+			ListTextItem {
 				id: remotePort
 
 				//% "Firmware version"
@@ -21,13 +21,13 @@ Page {
 				source: "com.victronenergy.platform/Firmware/Installed/Version"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Build date/time"
 				text: qsTrId("settings_build_date_time")
 				source: "com.victronenergy.platform/Firmware/Installed/Build"
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Online updates"
 				text: qsTrId("settings_online_updates")
 				onClicked: {
@@ -35,7 +35,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Install firmware from SD/USB"
 				text: qsTrId("settings_install_firmware_from_sd_usb")
 				onClicked: {
@@ -43,7 +43,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Stored backup firmware"
 				text: qsTrId("settings_stored_backup_firmware")
 				onClicked: {

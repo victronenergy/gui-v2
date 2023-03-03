@@ -55,16 +55,16 @@ Page {
 		}
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Date/Time UTC"
 				text: qsTrId("settings_tz_date_time_utc")
 				secondaryText: Qt.formatDateTime(ClockTime.currentDateTimeUtc, "yyyy-MM-dd hh:mm")
 			}
 
-			SettingsListButton {
+			ListButton {
 				//% "Date/Time local"
 				text: qsTrId("settings_tz_date_time_local")
 				button.text: ClockTime.currentTimeText
@@ -75,7 +75,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Time zone"
 				text: qsTrId("settings_tz_time_zone")
 				secondaryText: root._findTimeZoneName(tzData.region, tzData.city)
@@ -111,10 +111,10 @@ Page {
 					id: pageTzMenuComponent
 
 					Page {
-						SettingsListView {
+						GradientListView {
 							id: tzListView
 
-							header: SettingsListSwitch {
+							header: ListSwitch {
 								text: "UTC"
 								writeAccessLevel: VenusOS.User_AccessType_User
 								checked: tzData.city === text
@@ -135,7 +135,7 @@ Page {
 							}
 							model: root._timeZoneModels
 
-							delegate: SettingsListRadioButtonGroup {
+							delegate: ListRadioButtonGroup {
 								text: modelData.name
 								optionModel: modelData
 								secondaryText: ""

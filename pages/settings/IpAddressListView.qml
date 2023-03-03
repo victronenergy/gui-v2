@@ -8,7 +8,7 @@ import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-SettingsListView {
+GradientListView {
 	id: root
 
 	property alias ipAddresses: ipAddresses
@@ -17,7 +17,7 @@ SettingsListView {
 
 	model: ipAddresses.value ? ipAddresses.value.split(',') : []
 
-	delegate: SettingsListIpAddressField {
+	delegate: ListIpAddressField {
 		id: ipAddressDelegate
 
 		property CP.ColorImage removalButton: CP.ColorImage {

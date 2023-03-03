@@ -23,10 +23,10 @@ Page {
 		{ display: qsTrId("settings_system_shore_power"), value: 3 },
 	]
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: systemNameRadioButtons
 
 				//% "Vehicle"
@@ -57,7 +57,7 @@ Page {
 				defaultIndex: customValueIndex
 			}
 
-			SettingsListTextField {
+			ListTextField {
 				//% "User-defined name"
 				text: qsTrId("settings_system_user_defined_name")
 				//% "Enter name"
@@ -67,7 +67,7 @@ Page {
 				source: "com.victronenergy.settings/Settings/SystemSetup/SystemName"
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: acInput1
 
 				//% "AC input 1"
@@ -76,7 +76,7 @@ Page {
 				optionModel: root._acInputsModel
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: acInput2
 
 				//% "AC input 2"
@@ -85,7 +85,7 @@ Page {
 				optionModel: root._acInputsModel
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				text: root._isGrid
 					  //% "Monitor for grid failure"
 					? qsTrId("settings_system_monitor_for_grid_failure")
@@ -99,7 +99,7 @@ Page {
 				]
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: batteryMonitorRadioButtons
 
 				//% "Battery monitor"
@@ -126,7 +126,7 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Auto-selected"
 				text: qsTrId("settings_system_auto_selected")
 				source: "com.victronenergy.system/AutoSelectedBatteryService"
@@ -135,19 +135,19 @@ Page {
 					&& batteryMonitorRadioButtons.optionModel[batteryMonitorRadioButtons.currentIndex].value === "default"
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "Has DC system"
 				text: qsTrId("settings_system_has_dc_system")
 				source: "com.victronenergy.settings/Settings/SystemSetup/HasDcSystem"
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Battery Measurements"
 				text: qsTrId("settings_system_battery_measurements")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteries.qml", { title: text })
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "System Status"
 				text: qsTrId("settings_system_system_status")
 				showAccessLevel: VenusOS.User_AccessType_SuperUser

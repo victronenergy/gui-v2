@@ -8,14 +8,14 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsLabel {
+			ListLabel {
 				//% "Manually reboot the GX device after changing these settings.\n\nFirst time use? Make sure to either set or disable the password check."
 				text: qsTrId("settings_remoteconsole_reboot_warning")
 			}
 
-			SettingsListButton {
+			ListButton {
 				//% "Disable password check"
 				text: qsTrId("settings_remoteconsole_password_disable_password_check")
 				//% "Disable"
@@ -28,7 +28,7 @@ Page {
 				}
 			}
 
-			SettingsListTextField {
+			ListTextField {
 				id: enablePasswordField
 
 				//% "Enable password check"
@@ -53,7 +53,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: vncInternet
 
 				//% "Enable on VRM"
@@ -61,7 +61,7 @@ Page {
 				source: "com.victronenergy.settings/Settings/System/VncInternet"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Remote Console on VRM - status"
 				text: qsTrId("settings_remoteconsole_vrm_status")
 				secondaryText: vncInternet.checked
@@ -74,7 +74,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: vncOnLan
 
 				//% "Enable on LAN"
@@ -82,12 +82,12 @@ Page {
 				source: "com.victronenergy.settings/Settings/System/VncLocal"
 				height: implicitHeight + vncOnLanCaption.height
 
-				SettingsLabel {
+				ListLabel {
 					id: vncOnLanCaption
 
 					anchors {
 						bottom: parent.bottom
-						bottomMargin: Theme.geometry.settingsListItem.content.verticalMargin
+						bottomMargin: Theme.geometry.listItem.content.verticalMargin
 					}
 					//% "Security warning: only enable the console on LAN when the GX device is connected to a trusted network."
 					text: qsTrId("settings_remoteconsole_enable_on_lan_warning")

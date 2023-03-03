@@ -8,31 +8,31 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
-			SettingsLabel {
+			ListLabel {
 				text: "This page demonstrates the components that can be used to build settings pages."
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				text: "Page launch"
 				secondaryText: "Secondary text"
 				onClicked: Global.pageManager.pushPage(newPageComponent, { title: "Page name" })
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				text: "Switch"
 				onClicked: console.log("Switch now checked?", checked)
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				text: "Toggle setting: /Settings/Alarm/Audible"
 				source: "com.victronenergy.settings/Settings/Alarm/Audible"
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				text: "Radio buttons with array model"
 				optionModel: [
 					{ display: "Option A", value: 1 },
@@ -46,7 +46,7 @@ Page {
 				}
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				text: "Radio buttons with complex model"
 				optionModel: ListModel {
 					ListElement { display: "Option A"; value: 1 }
@@ -62,22 +62,22 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				text: "Text only"
 				secondaryText: "Status text"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				text: "Text only, from dbus source"
 				source: "com.victronenergy.system/FirmwareBuild"
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				text: "Text groups"
 				textModel: ["204.07V", "4.7A", "950W"]
 			}
 
-			SettingsListSlider {
+			ListSlider {
 				text: "Slider"
 				slider.from: 1
 				slider.to: 100
@@ -87,22 +87,22 @@ Page {
 				}
 			}
 
-			SettingsListButton {
+			ListButton {
 				text: "Button"
 				button.text: "Click this"
 				onClicked: console.log("Button was clicked")
 			}
 
-			SettingsListTextField {
+			ListTextField {
 				text: "Text input"
 				placeholderText: "Enter text"
 			}
 
-			SettingsListIpAddressField {
+			ListIpAddressField {
 				text: "IP address"
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				text: "Spin box"
 				value: 5.789
 				decimals: 2
@@ -110,15 +110,15 @@ Page {
 				to: 10
 			}
 
-			SettingsListDateSelector {
+			ListDateSelector {
 				text: "Date selection"
 			}
 
-			SettingsListTimeSelector {
+			ListTimeSelector {
 				text: "Time selection"
 			}
 
-			SettingsListItem {
+			ListItem {
 				text: "Custom item"
 
 				content.children: [
@@ -138,7 +138,7 @@ Page {
 				]
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum occaecat cupidatat"
 				secondaryText: "Occaecat cupidatat"
 			}
@@ -149,9 +149,9 @@ Page {
 		id: newPageComponent
 
 		Page {
-			SettingsListView {
+			GradientListView {
 				model: ObjectModel {
-					SettingsListItem {
+					ListItem {
 						text: "New page item"
 					}
 				}

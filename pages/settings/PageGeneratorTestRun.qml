@@ -8,18 +8,18 @@ import Victron.VenusOS
 Page {
 	property string bindPrefix
 
-	SettingsListView {
+	GradientListView {
 
 		model: ObjectModel {
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: enableSwitch
 
 				text: CommonWords.enable
 				source: bindPrefix + "/TestRun/Enabled"
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				//% "Run interval"
 				text: qsTrId("run_interval")
 				source: bindPrefix + "/TestRun/Interval"
@@ -30,7 +30,7 @@ Page {
 				to: 30
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Skip run if has been running for"
 				text: qsTrId("page_generator_test_run_skip_run")
 				source: bindPrefix + "/TestRun/SkipRuntime"
@@ -46,25 +46,25 @@ Page {
 				]
 			}
 
-			SettingsListDateSelector {
+			ListDateSelector {
 				//% "Run interval start date"
 				text: qsTrId("page_generator_test_run_run_interval_start_date")
 				source: bindPrefix + "/TestRun/StartDate"
 			}
 
-			SettingsListTimeSelector {
+			ListTimeSelector {
 				text: CommonWords.start_time
 				source: bindPrefix + "/TestRun/StartTime"
 			}
 
-			SettingsListTimeSelector {
+			ListTimeSelector {
 				//% "Run duration (hh:mm)"
 				text: qsTrId("page_generator_test_run_run_duration")
 				source: bindPrefix + "/TestRun/Duration"
 				visible: !runTillBatteryFull.checked
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: runTillBatteryFull
 
 				//% "Run until battery is fully charged"

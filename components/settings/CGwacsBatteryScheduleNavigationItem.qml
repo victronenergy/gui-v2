@@ -7,7 +7,7 @@ import Victron.VenusOS
 import "../../components/Utils.js" as Utils
 
 
-SettingsListNavigationItem {
+ListNavigationItem {
 	id: root
 
 	property int scheduleNumber
@@ -108,9 +108,9 @@ SettingsListNavigationItem {
 		Page {
 			id: scheduledOptionsPage
 
-			SettingsListView {
+			GradientListView {
 				model: ObjectModel {
-					SettingsListSwitch {
+					ListSwitch {
 						id: itemEnabled
 
 						text: CommonWords.enabled
@@ -122,7 +122,7 @@ SettingsListNavigationItem {
 						}
 					}
 
-					SettingsListRadioButtonGroup {
+					ListRadioButtonGroup {
 						//% "Day"
 						text: qsTrId("cgwacs_battery_schedule_day")
 						source: root._scheduleSource + "/Day"
@@ -132,13 +132,13 @@ SettingsListNavigationItem {
 						optionModel: root._dayModel
 					}
 
-					SettingsListTimeSelector {
+					ListTimeSelector {
 						text: CommonWords.start_time
 						source: root._scheduleSource + "/Start"
 						visible: defaultVisible && itemEnabled.checked
 					}
 
-					SettingsListTimeSelector {
+					ListTimeSelector {
 						//% "Duration (hh:mm)"
 						text: qsTrId("cgwacs_battery_schedule_duration")
 						source: root._scheduleSource + "/Duration"
@@ -146,7 +146,7 @@ SettingsListNavigationItem {
 						maximumHour: 9999
 					}
 
-					SettingsListSwitch {
+					ListSwitch {
 						id: socLimitEnabled
 
 						//% "Stop on SOC"
@@ -163,7 +163,7 @@ SettingsListNavigationItem {
 						}
 					}
 
-					SettingsListSpinBox {
+					ListSpinBox {
 						id: socLimitSpinBox
 
 						//% "SOC limit"

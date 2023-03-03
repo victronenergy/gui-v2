@@ -77,7 +77,7 @@ Page {
 		source: root.settingsBindPrefix + "/AccumulatedDaily"
 	}
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: startStopModel
@@ -91,7 +91,7 @@ Page {
 	ObjectModel {
 		id: startStopModel
 
-		SettingsListTextItem {
+		ListTextItem {
 			id: state
 
 			text: CommonWords.state
@@ -99,7 +99,7 @@ Page {
 			enabled: false
 		}
 
-		SettingsListRadioButtonGroup {
+		ListRadioButtonGroup {
 			text: CommonWords.error
 			optionModel: [
 				{ display: CommonWords.no_error, value: 0 },
@@ -114,7 +114,7 @@ Page {
 			source: root.startStopBindPrefix + "/Error"
 		}
 
-		SettingsListTextItem {
+		ListTextItem {
 			//% "Run time"
 			text: qsTrId("settings_page_relay_generator_run_time")
 			secondaryText: dataPoint.valid ? Utils.secondsToString(dataPoint.value, false) : "0"
@@ -122,14 +122,14 @@ Page {
 			visible: generatorState.value === 1
 		}
 
-		SettingsListTextItem {
+		ListTextItem {
 			//% "Total run time"
 			text: qsTrId("settings_page_relay_generator_total_run_time")
 			secondaryText: Utils.secondsToString(dataPoint.value, false)
 			source: root.settingsBindPrefix + "/AccumulatedTotal"
 		}
 
-		SettingsListTextItem {
+		ListTextItem {
 			//% "Accumulated running time since last test run"
 			text: qsTrId("settings_page_relay_generator_accumulated_running_time")
 			showAccessLevel: VenusOS.User_AccessType_Service
@@ -138,7 +138,7 @@ Page {
 			source: root.startStopBindPrefix + "/TestRunIntervalRuntime"
 		}
 
-		SettingsListTextItem {
+		ListTextItem {
 			id: nextTestRun
 			//% "Time to next test run"
 			text: qsTrId("settings_page_relay_generator_time_to_next_test_run")
@@ -163,14 +163,14 @@ Page {
 			}
 		}
 
-		SettingsListSwitch {
+		ListSwitch {
 			//% "Auto start functionality"
 			text: qsTrId("settings_page_relay_generator_auto_start_enabled")
 			source: root.settingsBindPrefix + "/AutoStartEnabled"
 			visible: allowDisableAutostart
 		}
 
-		SettingsListNavigationItem {
+		ListNavigationItem {
 			//% "Manual start"
 			text: qsTrId("settings_page_relay_generator_manual_start")
 			onClicked: Global.pageManager.pushPage(manualStartPage, { title: text })
@@ -179,11 +179,11 @@ Page {
 				id: manualStartPage
 
 				Page {
-					SettingsListView {
+					GradientListView {
 
 						model: ObjectModel {
 
-							SettingsListSwitch {
+							ListSwitch {
 								id: manualSwitch
 								//% "Start generator"
 								text: qsTrId("settings_page_relay_generator_start_generator")
@@ -194,7 +194,7 @@ Page {
 								}
 							}
 
-							SettingsListTimeSelector {
+							ListTimeSelector {
 								//% "Run for (hh:mm)"
 								text: qsTrId("settings_page_relay_generator_run_for_hh_mm")
 								enabled: !manualSwitch.checked
@@ -207,7 +207,7 @@ Page {
 			}
 		}
 
-		SettingsListNavigationItem {
+		ListNavigationItem {
 			//% "Daily run time"
 			text: qsTrId("settings_page_relay_generator_daily_run_time")
 			onClicked: Global.pageManager.pushPage(dailyRunTimePage, { title: text })
@@ -216,9 +216,9 @@ Page {
 				id: dailyRunTimePage
 
 				Page {
-					SettingsListView {
+					GradientListView {
 						model: _dates
-						delegate: SettingsListTextItem {
+						delegate: ListTextItem {
 							text: Qt.formatDate(new Date(parseInt(_dates[index]) * 1000), "dd-MM-yyyy") // TODO: locale-specific date format?
 							secondaryText: Utils.secondsToString(JSON.parse(historicalData.value)[_dates[index]], false)
 						}
@@ -227,7 +227,7 @@ Page {
 			}
 		}
 
-		SettingsListNavigationItem {
+		ListNavigationItem {
 			//% "Settings"
 			text: qsTrId("settings_page_relay_generator_settings")
 			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml", { title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })

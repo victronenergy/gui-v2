@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-SettingsListItem {
+ListItem {
 	id: root
 
 	property alias secondaryText: secondaryLabel.text
@@ -21,7 +21,7 @@ SettingsListItem {
 		visible: root.secondaryText.length > 0
 		text: dataPoint.value || ""
 		font.pixelSize: Theme.font.size.body2
-		color: Theme.color.settingsListItem.secondaryText
+		color: Theme.color.listItem.secondaryText
 		wrapMode: Text.Wrap
 		horizontalAlignment: Text.AlignRight
 	}

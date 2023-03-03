@@ -14,7 +14,7 @@ import Victron.VenusOS
 // The default behaviour supports a simple array-based model. When using a ListModel or C++ model,
 // set the currentIndex and secondaryText properties manually.
 
-SettingsListNavigationItem {
+ListNavigationItem {
 	id: root
 
 	property alias source: dataPoint.source
@@ -66,10 +66,10 @@ SettingsListNavigationItem {
 		Page {
 			id: optionsPage
 
-			SettingsListView {
+			GradientListView {
 				model: root.optionModel
 
-				delegate: SettingsListRadioButton {
+				delegate: ListRadioButton {
 					id: radioButton
 
 					text: Array.isArray(root.optionModel)

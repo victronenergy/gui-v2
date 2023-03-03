@@ -39,15 +39,15 @@ Page {
 		filterFlags: VeQItemSortTableModel.FilterOffline
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListSwitch {
+			ListSwitch {
 				id: enable
 				text: CommonWords.enable
 				source: "com.victronenergy.settings/Settings/Services/BleSensors"
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: contScan
 				//% "Continuous scanning"
 				text: qsTrId("settings_continuous_scan")
@@ -55,13 +55,13 @@ Page {
 				visible: enable.checked
 			}
 
-			SettingsLabel {
+			ListLabel {
 				//% "Continuous scanning may interfere with Wi-Fi operation"
 				text: qsTrId("settings_continuous_scan_may_interfere")
 				visible: contScan.checked
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Bluetooth adapters"
 				text: qsTrId("settings_io_bluetooth_adapters")
 				visible: enable.checked
@@ -73,7 +73,7 @@ Page {
 					id: bluetoothAdaptersComponent
 
 					Page {
-						SettingsListView {
+						GradientListView {
 							model: VeQItemSortTableModel {
 								model: VeQItemChildModel {
 									model: interfaces
@@ -82,7 +82,7 @@ Page {
 								dynamicSortFilter: true
 								filterFlags: VeQItemSortTableModel.FilterInvalid
 							}
-							delegate: SettingsListTextItem {
+							delegate: ListTextItem {
 								text: model.item.itemParent().id
 								source: Utils.normalizedSource(model.item.uid)
 							}
@@ -104,7 +104,7 @@ Page {
 						filterFlags: VeQItemSortTableModel.FilterInvalid
 					}
 
-					delegate: SettingsListSwitch {
+					delegate: ListSwitch {
 						text: model.item.value
 						source: Utils.normalizedSource(model.item.itemParent().uid) + "/Enabled"
 					}

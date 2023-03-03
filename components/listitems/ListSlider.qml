@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-SettingsListItem {
+ListItem {
 	id: root
 
 	property alias source: slider.source
@@ -21,7 +21,7 @@ SettingsListItem {
 		SettingsSlider {
 			id: slider
 
-			width: Theme.geometry.settingsListItem.slider.width
+			width: Theme.geometry.listItem.slider.width
 
 			onValueChanged: function(value) {
 				root.valueChanged(value)

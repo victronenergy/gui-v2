@@ -9,12 +9,12 @@ import "/components/Utils.js" as Utils
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: loggerMode
 				//% "Logging enabled"
 				text: qsTrId("settings_logging_enabled")
@@ -25,13 +25,13 @@ Page {
 				]
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "VRM Portal ID"
 				text: qsTrId("settings_vrm_portal_id")
 				secondaryText: "TODO" // this depends on VePlatform, it returns the first line of /etc/venus/unique-id. Not sure how to handle it yet.
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Log interval"
 				text: qsTrId("settings_log_interval")
 				optionModel: [
@@ -60,13 +60,13 @@ Page {
 				visible: !!loggerMode.dataPoint.value && loggerMode.dataPoint.value > 0
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "Use secure connection (HTTPS)"
 				text: qsTrId("settings_https_enabled")
 				source: "com.victronenergy.settings/Settings/Vrmlogger/HttpsEnabled"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Last contact"
 				text: qsTrId("settings_last_contact")
 				source: "com.victronenergy.logger/Vrm/TimeLastContact"
@@ -81,7 +81,7 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				function stringForErrorCode(errorCode) {
 					switch (errorCode) {
 					case 0:
@@ -120,7 +120,7 @@ Page {
 				source: "com.victronenergy.logger/Vrm/ConnectionError"
 			}
 
-			SettingsListItem {
+			ListItem {
 				//% "Error message: \n%1"
 				text: qsTrId("settings_vrm_error_message").arg(errorMessage.value)
 				visible: !!errorMessage.value
@@ -131,13 +131,13 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "VRM two-way communication"
 				text: qsTrId("settings_vrm_communication")
 				source: "com.victronenergy.settings/Settings/Services/MqttVrm"
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "Reboot device when no contact"
 				text: qsTrId("settings_no_contact_reboot")
 				source: "com.victronenergy.settings/Settings/Watchdog/VrmTimeout"
@@ -146,14 +146,14 @@ Page {
 				onClicked: dataPoint.setValue(checked ? 0 : 3600)
 			}
 
-			SettingsListTimeSelector {
+			ListTimeSelector {
 				source: "com.victronenergy.settings/Settings/Watchdog/VrmTimeout"
 				//% "No contact reset delay (hh:mm)"
 				text: qsTrId("settings_vrm_no_contact_reset_delay")
 				visible: !!dataPoint.value && dataPoint.value > 0
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Storage location"
 				text: qsTrId("settings_vrm_storage_location")
 				//% "No buffer active"
@@ -170,7 +170,7 @@ Page {
 				enabled: dataPoint.value !== undefined
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				text: CommonWords.error
 				//% "Unknown error"
 				defaultSecondaryText: qsTrId("settings_vrm_unknown_error")
@@ -193,7 +193,7 @@ Page {
 				visible: !!dataPoint.value
 			}
 
-			SettingsListTextItem { // This 'flickers' between values for ~30s after inserting a usb stick. Dbus-spy shows that the underlying data point flickers also. Old gui also flickers.
+			ListTextItem { // This 'flickers' between values for ~30s after inserting a usb stick. Dbus-spy shows that the underlying data point flickers also. Old gui also flickers.
 				//% "Free disk space"
 				text: qsTrId("settings_vrm_free_disk_space")
 				secondaryText: Utils.qtyToString(dataPoint.value,
@@ -206,7 +206,7 @@ Page {
 
 			MountStateListButton {}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Stored records"
 				text: qsTrId("settings_vrm_stored_records")
 				source: "com.victronenergy.logger/Buffer/Count"
@@ -214,7 +214,7 @@ Page {
 				secondaryText: qsTrId("settings_vrm_records_count").arg(dataPoint.value ? dataPoint.value : 0)
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				id: oldestBacklogItemAge
 
 				property var timeNow: Math.round(new Date() / 1000)

@@ -26,9 +26,9 @@ Page {
 		source: "com.victronenergy.settings/Settings/CGwacs/DeviceIds"
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: deviceIds.value ? deviceIds.value.split(',') : []
-		delegate: SettingsListNavigationItem {
+		delegate: ListNavigationItem {
 			readonly property string devicePath: "com.victronenergy.settings/Settings/Devices/cgwacs_" + modelData
 
 			text: getDescription(customNameItem.value, modelData)

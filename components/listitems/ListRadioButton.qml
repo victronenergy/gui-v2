@@ -6,7 +6,7 @@ import QtQuick
 import QtQuick.Controls as C
 import Victron.VenusOS
 
-SettingsListItem {
+ListItem {
 	id: root
 
 	property alias checked: radioButton.checked
@@ -27,12 +27,12 @@ SettingsListItem {
 		}
 	]
 
-	SettingsLabel {
+	ListLabel {
 		id: caption
 
 		anchors {
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.settingsListItem.content.verticalMargin
+			bottomMargin: Theme.geometry.listItem.content.verticalMargin
 		}
 		topPadding: 0
 		bottomPadding: 0

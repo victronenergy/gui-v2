@@ -27,7 +27,7 @@ Page {
 		source: bindPrefix + "/NetworkType"
 	}
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: simStatus.valid ? modemConnected : notConnected
@@ -35,7 +35,7 @@ Page {
 		ObjectModel {
 			id: notConnected
 
-			SettingsListItem {
+			ListItem {
 				//% "No GSM modem connected"
 				text: qsTrId("page_settings_no_gsm_modem_connected")
 			}
@@ -44,7 +44,7 @@ Page {
 		ObjectModel {
 			id: modemConnected
 
-			SettingsListTextItem {
+			ListTextItem {
 				id: status
 
 				//% "Internet"
@@ -53,7 +53,7 @@ Page {
 				source: bindPrefix + "/Connected"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				id: carrier
 
 				//% "Carrier"
@@ -62,7 +62,7 @@ Page {
 				source: bindPrefix + "/NetworkName"
 			}
 
-			SettingsListItem {
+			ListItem {
 				text: CommonWords.signal_strength
 
 				content.children: [
@@ -84,20 +84,20 @@ Page {
 				visible: gsmStatusIcon.valid
 			}
 
-			SettingsListItem {
+			ListItem {
 				//% "It may be necessary to configure the APN settings below in this page, contact your operator for details.\nIf that doesn't work, check sim-card in a phone to make sure that there is credit and/or it is registered to be used for data."
 				text: qsTrId("page_settings_gsm_error_message")
 				visible: status.value === 0 && carrier.valid && simStatus.value === 1000
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "Allow roaming"
 				text: qsTrId("page_settings_gsm_allow_roaming")
 				source: settingsBindPrefix + "/RoamingPermitted"
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Sim status"
 				text: qsTrId("page_settings_gsm_sim_status")
 				//% "Unknown"
@@ -136,7 +136,7 @@ Page {
 				source: bindPrefix + "/SimStatus"
 			}
 
-			SettingsListTextField {
+			ListTextField {
 				//% "PIN"
 				text: qsTrId("page_settings_gsm_pin")
 				textField.maximumLength: 35
@@ -146,13 +146,13 @@ Page {
 				visible: valid && [11, 16].indexOf(simStatus.value)  > -1
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				text: CommonWords.ip_address
 				source: bindPrefix + "/IP"
 				visible: status.value === 1
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "APN"
 				text: qsTrId("page_settings_gsm_apn")
 				//% "Default"
@@ -163,11 +163,11 @@ Page {
 
 					Page {
 
-						SettingsListView {
+						GradientListView {
 
 							model: ObjectModel {
 
-								SettingsListSwitch {
+								ListSwitch {
 									id: useDefaultApn
 									//% "Use default APN"
 									text: qsTrId("page_settings_gsm_use_default_apn")
@@ -179,7 +179,7 @@ Page {
 									}
 								}
 
-								SettingsListTextField {
+								ListTextField {
 									//% "APN name"
 									text: qsTrId("page_settings_gsm_apn_name")
 									source: root.settingsBindPrefix + "/APN"
@@ -192,7 +192,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: useAuth
 				//% "Use authentication"
 				text: qsTrId("page_settings_gsm_use_authentication")
@@ -205,7 +205,7 @@ Page {
 				}
 			}
 
-			SettingsListTextField {
+			ListTextField {
 				id: authUser
 
 				//% "User name"
@@ -214,7 +214,7 @@ Page {
 				visible: useAuth.checked
 			}
 
-			SettingsListTextField {
+			ListTextField {
 				id: authPass
 
 				text: CommonWords.password
@@ -222,7 +222,7 @@ Page {
 				visible: useAuth.checked
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "IMEI"
 				text: qsTrId("page_settings_gsm_imei")
 				source: bindPrefix + "/IMEI"

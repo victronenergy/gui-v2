@@ -15,8 +15,8 @@ Page {
 		x: Theme.geometry.page.content.horizontalMargin
 		width: parent.width - 2*Theme.geometry.page.content.horizontalMargin
 		height: parent.height
-		topMargin: Theme.geometry.settingsPage.settingsList.topMargin
-		bottomMargin: Theme.geometry.settingsPage.settingsList.bottomMargin
+		topMargin: Theme.geometry.gradientList.topMargin
+		bottomMargin: Theme.geometry.gradientList.bottomMargin
 
 		Column {
 			id: contentColumn
@@ -26,7 +26,7 @@ Page {
 			Repeater {
 				model: Global.systemSettings.briefView.gauges
 
-				delegate: SettingsListNavigationItem {
+				delegate: ListNavigationItem {
 					//: Level number
 					//% "Level %1"
 					text: qsTrId("settings_briefview_level").arg(model.index + 1)
@@ -41,7 +41,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//: Show percentage values in Brief view
 				//% "Show %"
 				text: qsTrId("settings_briefview_show_percentage")
@@ -58,7 +58,7 @@ Page {
 			property int tankType
 			property int levelIndex
 
-			SettingsListView {
+			GradientListView {
 				model: [
 					VenusOS.Tank_Type_Battery,
 					VenusOS.Tank_Type_Fuel,
@@ -69,7 +69,7 @@ Page {
 					VenusOS.Tank_Type_BlackWater,
 					VenusOS.Tank_Type_Gasoline
 				]
-				delegate: SettingsListRadioButton {
+				delegate: ListRadioButton {
 					text: Gauges.tankProperties(modelData).name || ""
 					checked: tankType === modelData
 					C.ButtonGroup.group: radioButtonGroup

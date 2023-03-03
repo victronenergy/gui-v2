@@ -14,9 +14,9 @@ Page {
 	//% "Grid Setpoint"
 	title: qsTrId("settings_ess_debug_grid_setpoint")
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListSpinBox {
+			ListSpinBox {
 				id: gridSetpoint
 
 				height: implicitHeight + gridSetpointSlider.height
@@ -32,7 +32,7 @@ Page {
 
 					anchors {
 						bottom: parent.bottom
-						bottomMargin: Theme.geometry.settingsListItem.content.verticalMargin
+						bottomMargin: Theme.geometry.listItem.content.verticalMargin
 					}
 					source: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
 					from: -15000
@@ -41,13 +41,13 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "AC-In setpoint"
 				text: qsTrId("settings_ess_debug_ac_in_setpoint")
 				source: "com.victronenergy.vebus.ttyO1/Hub4/L1/AcPowerSetpoint"
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				//% "Battery"
 				text: qsTrId("settings_ess_debug_battery")
 				textModel: [
@@ -68,7 +68,7 @@ Page {
 				}
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				//% "Limits (I)"
 				text: qsTrId("settings_ess_debug_limits_i")
 				textModel: [
@@ -89,7 +89,7 @@ Page {
 				}
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				//% "Limits (P)"
 				text: qsTrId("settings_ess_debug_limits_p")
 				textModel: [

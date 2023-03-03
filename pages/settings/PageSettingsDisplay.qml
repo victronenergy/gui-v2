@@ -8,12 +8,12 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: autoBrightness
 				//% "Adaptive brightness"
 				text: qsTrId("settings_adaptive_brightness")
@@ -21,7 +21,7 @@ Page {
 				// TODO will this also need bindings similar to gui-v1 vePlatform.hasAutoBrightness?
 			}
 
-			SettingsListSlider {
+			ListSlider {
 				//% "Brightness"
 				text: qsTrId("settings_brightness")
 				source: "com.victronenergy.settings/Settings/Gui/Brightness"
@@ -30,7 +30,7 @@ Page {
 				// TODO will this also need bindings similar to gui-v1 vePlatform.hasBacklight and vePlatform.brightness?
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Display off time"
 				text: qsTrId("settings_display_off_time")
 				source: "com.victronenergy.settings/Settings/Gui/DisplayOff"
@@ -52,7 +52,7 @@ Page {
 				]
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Display mode"
 				text: qsTrId("settings_display_color_mode")
 
@@ -81,7 +81,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Brief view levels"
 				text: qsTrId("settings_brief_view_levels")
 				onClicked: {
@@ -89,7 +89,7 @@ Page {
 				}
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Language"
 				text: qsTrId("settings_language")
 				writeAccessLevel: VenusOS.User_AccessType_User
@@ -102,7 +102,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Units"
 				text: qsTrId("settings_units")
 				onClicked: {

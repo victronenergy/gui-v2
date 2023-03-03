@@ -7,7 +7,7 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-SettingsListNavigationItem {
+ListNavigationItem {
 	id: root
 
 	property string bindPrefix

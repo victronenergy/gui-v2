@@ -37,16 +37,16 @@ Page {
 		source: "com.victronenergy.platform/Firmware/Backup/Activate"
 	}
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
-			SettingsLabel {
+			ListLabel {
 				//% "This option allows you to switch between the current and the previous firmware version. No internet or sdcard needed."
 				text: qsTrId("settings_firmware_version_switch_option")
 			}
 
-			SettingsListButton {
+			ListButton {
 				id: backupVersion
 
 				//: %1 = backup version, %2 = backup version build number
@@ -75,7 +75,7 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				id: currentVersion
 
 				//: %1 = current firmware version, %2 = current firmware build number
@@ -86,7 +86,7 @@ Page {
 				visible: currentVersionItem.valid && root._switchingEnabled
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Backup firmware not available"
 				text: qsTrId("settings_firmware_backup_not_available")
 				visible: !currentVersion.visible && !backupVersion.visible && !root._rebooting

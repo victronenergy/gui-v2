@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-SettingsListButton {
+ListButton {
 	id: root
 
 	property alias source: dataPoint.source

@@ -11,8 +11,8 @@ ListView {
 	x: Theme.geometry.page.content.horizontalMargin
 	width: parent.width - Theme.geometry.page.content.horizontalMargin
 	height: parent.height
-	topMargin: Theme.geometry.settingsPage.settingsList.topMargin
-	bottomMargin: Theme.geometry.settingsPage.settingsList.bottomMargin
+	topMargin: Theme.geometry.gradientList.topMargin
+	bottomMargin: Theme.geometry.gradientList.bottomMargin
 	rightMargin: Theme.geometry.page.content.horizontalMargin
 
 	ViewGradient {
@@ -24,7 +24,7 @@ ListView {
 	}
 
 	ScrollBar.vertical: ScrollBar {
-		topPadding: Theme.geometry.settingsPage.settingsList.topMargin
-		bottomPadding: Theme.geometry.settingsPage.settingsList.bottomMargin
+		topPadding: Theme.geometry.gradientList.topMargin
+		bottomPadding: Theme.geometry.gradientList.bottomMargin
 	}
 }

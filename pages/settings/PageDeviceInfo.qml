@@ -10,66 +10,66 @@ Page {
 
 	property string bindPrefix
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListTextItem {
+			ListTextItem {
 				text: CommonWords.connected
 				source: root.bindPrefix + "/Connected"
 				secondaryText: dataPoint.value === 1 ? CommonWords.yes : CommonWords.no
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Connection"
 				text: qsTrId("settings_deviceinfo_connection")
 				source: root.bindPrefix + "/Mgmt/Connection"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Product"
 				text: qsTrId("settings_deviceinfo_product")
 				source: root.bindPrefix + "/ProductName"
 			}
 
-			SettingsListTextField {
+			ListTextField {
 				//% "Name"
 				text: qsTrId("settings_deviceinfo_name")
 				source: root.bindPrefix + "/CustomName"
 				textField.maximumLength: 32
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Product ID"
 				text: qsTrId("settings_deviceinfo_product_id")
 				source: root.bindPrefix + "/ProductId"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Firmware version"
 				text: qsTrId("settings_deviceinfo_firmware_version")
 				source: root.bindPrefix + "/FirmwareVersion"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Hardware version"
 				text: qsTrId("settings_deviceinfo_hardware_version")
 				source: root.bindPrefix + "/HardwareVersion"
 				visible: dataPoint.valid
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "VRM instance"
 				text: qsTrId("settings_deviceinfo_vrm_instance")
 				source: root.bindPrefix + "/DeviceInstance"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Serial number"
 				text: qsTrId("settings_deviceinfo_serial")
 				source: root.bindPrefix + "/Serial"
 				visible: dataPoint.valid
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Device name"
 				text: qsTrId("settings_deviceinfo_device_name")
 				source: root.bindPrefix + "/DeviceName"

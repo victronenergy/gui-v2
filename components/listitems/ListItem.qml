@@ -12,7 +12,7 @@ Item {
 	property alias content: content
 	property bool down
 	property alias backgroundRect: backgroundRect
-	property int spacing: Theme.geometry.settingsPage.settingsList.spacing
+	property int spacing: Theme.geometry.gradientList.spacing
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer
@@ -22,8 +22,8 @@ Item {
 	readonly property bool defaultVisible: userHasReadAccess
 	readonly property alias primaryLabel: primaryLabel
 	readonly property int defaultImplicitHeight: visible
-		? Math.max(primaryLabel.implicitHeight + Theme.geometry.settingsListItem.content.verticalMargin * 2,
-				   Theme.geometry.settingsListItem.height)
+		? Math.max(primaryLabel.implicitHeight + Theme.geometry.listItem.content.verticalMargin * 2,
+				   Theme.geometry.listItem.height)
 		: 0
 
 	readonly property int availableWidth: width - primaryLabel.anchors.leftMargin - content.anchors.rightMargin - content.spacing
@@ -37,21 +37,21 @@ Item {
 
 		width: root.width
 		height: root.height - root.spacing
-		radius: Theme.geometry.settingsListItem.radius
-		color: root.down ? Theme.color.settingsListItem.down.background : Theme.color.settingsListItem.background
+		radius: Theme.geometry.listItem.radius
+		color: root.down ? Theme.color.listItem.down.background : Theme.color.listItem.background
 		// TODO how to indicate read-only setting?
 
 		// Show thin colored indicator on left side if settings is only visible to super/service users
 		Rectangle {
 			visible: root.showAccessLevel >= VenusOS.User_AccessType_SuperUser
-			width: Theme.geometry.settingsListItem.radius * 2
+			width: Theme.geometry.listItem.radius * 2
 			height: parent.height
-			color: Theme.color.settingsListItem.highAccessLevel
-			radius: Theme.geometry.settingsListItem.radius
+			color: Theme.color.listItem.highAccessLevel
+			radius: Theme.geometry.listItem.radius
 
 			Rectangle {
-				x: Theme.geometry.settingsListItem.radius
-				width: Theme.geometry.settingsListItem.radius
+				x: Theme.geometry.listItem.radius
+				width: Theme.geometry.listItem.radius
 				height: parent.height
 				color: backgroundRect.color
 			}
@@ -63,9 +63,9 @@ Item {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry.settingsListItem.content.horizontalMargin
+			leftMargin: Theme.geometry.listItem.content.horizontalMargin
 			top: parent.top
-			topMargin: Theme.geometry.settingsListItem.content.verticalMargin - root.spacing/2
+			topMargin: Theme.geometry.listItem.content.verticalMargin - root.spacing/2
 		}
 		font.pixelSize: Theme.font.size.body2
 		wrapMode: Text.Wrap
@@ -77,10 +77,10 @@ Item {
 
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry.settingsListItem.content.horizontalMargin
+			rightMargin: Theme.geometry.listItem.content.horizontalMargin
 			verticalCenter: primaryLabel.verticalCenter
 		}
-		spacing: Theme.geometry.settingsListItem.content.spacing
+		spacing: Theme.geometry.listItem.content.spacing
 		width: Math.min(implicitWidth, root.availableWidth)
 	}
 }

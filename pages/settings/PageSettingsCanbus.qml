@@ -34,9 +34,9 @@ Page {
 		onValueChanged: if (value === 1) timer.running = false
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				function isReadOnly(profile) {
 					switch (root.canConfig) {
 					case VenusOS.CanBusConfig_ForcedVeCan:
@@ -96,7 +96,7 @@ Page {
 				]
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Devices"
 				text: qsTrId("settings_devices")
 				visible: root._isVecan
@@ -106,14 +106,14 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "NMEA2000-out"
 				text: qsTrId("settings_canbus_nmea2000out")
 				source: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
 				visible: root._isVecan
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				//% "Unique identity number selector"
 				text: qsTrId("settings_canbus_unique_id_select")
 				visible: root._isVecan || root._isRvc
@@ -126,12 +126,12 @@ Page {
 					uniqueCheck.startCheck(3)
 				}
 
-				SettingsLabel {
+				ListLabel {
 					id: uniqueIdDescriptionLabel
 
 					anchors {
 						bottom: parent.bottom
-						bottomMargin: Theme.geometry.settingsListItem.content.verticalMargin
+						bottomMargin: Theme.geometry.listItem.content.verticalMargin
 					}
 					text: root._isVecan
 						  //% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
@@ -142,7 +142,7 @@ Page {
 				}
 			}
 
-			SettingsListButton {
+			ListButton {
 				id: uniqueCheck
 
 				property bool testDone
@@ -190,24 +190,24 @@ Page {
 					}
 				}
 
-				SettingsLabel {
+				ListLabel {
 					id: uniqueIdConflictLabel
 
 					anchors {
 						bottom: parent.bottom
-						bottomMargin: Theme.geometry.settingsListItem.content.verticalMargin
+						bottomMargin: Theme.geometry.listItem.content.verticalMargin
 					}
 					//% "There is another device connected with this unique number, please select a new number."
 					text: qsTrId("settings_canbus_unique_id_conflict")
 					visible: vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1
 				}
 
-				SettingsLabel {
+				ListLabel {
 					id: uniqueIdOkLabel
 
 					anchors {
 						bottom: parent.bottom
-						bottomMargin: Theme.geometry.settingsListItem.content.verticalMargin
+						bottomMargin: Theme.geometry.listItem.content.verticalMargin
 					}
 					//% "OK: No other device is connected with this unique number."
 					text: qsTrId("settings_canbus_unique_id_ok")
@@ -215,7 +215,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Network status"
 				text: qsTrId("settings_network_status")
 				onClicked: {

@@ -29,7 +29,7 @@ Column {
 		source: "com.victronenergy.system/Relay/1/State"
 	}
 
-	SettingsListTextItem {
+	ListTextItem {
 		//% "Condition %1"
 		text: qsTrId("settings_relay_condition").arg(root.relayNumber + 1)
 		secondaryText: root.relayActivateOnTemperature
@@ -43,7 +43,7 @@ Column {
 		source: "%1/%2/State".arg(root.tempRelayPrefix).arg(root.relayNumber)
 	}
 
-	SettingsListRadioButtonGroup {
+	ListRadioButtonGroup {
 		id: cRelay
 
 		//% "Relay"
@@ -58,14 +58,14 @@ Column {
 			{ display: qsTrId("settings_relay2"), value: 1, readOnly: !relay1Item.valid },
 		]
 
-		SettingsLabel {
+		ListLabel {
 			//% "Warning: The above selected relay is not configured for temperature, this condition will be ignored."
 			text: qsTrId("settings_relay_invalid_temp_config_warning")
 			visible: root.hasInvalidRelayTempConfig
 		}
 	}
 
-	SettingsListSpinBox {
+	ListSpinBox {
 		id: cSet
 
 		//% "Activation value"
@@ -84,7 +84,7 @@ Column {
 		}
 	}
 
-	SettingsListSpinBox {
+	ListSpinBox {
 		id: cClear
 
 		//% "Deativation value"

@@ -10,10 +10,10 @@ Page {
 
 	readonly property var _relay0Object: Global.relays.model.count > 0 ? Global.relays.model.get(0).relay : null
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: relayFunction
 
 				text: relay1State.valid
@@ -36,7 +36,7 @@ Page {
 				]
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: alarmPolaritySwitch
 
 				//% "Alarm relay polarity"
@@ -51,7 +51,7 @@ Page {
 				]
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: relaySwitch
 
 				//% "Alarm relay on"
@@ -68,7 +68,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: manualSwitch
 
 				text: relay1State.valid
@@ -80,7 +80,7 @@ Page {
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Manual
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: relay1Function
 
 				//% "Function (Relay 2)"
@@ -95,7 +95,7 @@ Page {
 				]
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: manualSwitch1
 
 				//% "Relay 2 on"
@@ -104,7 +104,7 @@ Page {
 				visible: relay1State.valid && relay1Function.currentValue === VenusOS.Relay_Function_Manual
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Temperature control rules"
 				text: qsTrId("settings_relay_temp_control_rules")
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Temperature

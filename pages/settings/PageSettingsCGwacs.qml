@@ -28,9 +28,9 @@ Page {
 		source: devicePath + "/SupportMultiphase"
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Role"
 				text: qsTrId("settings_cgwacs_role")
 				updateOnClick: false
@@ -58,7 +58,7 @@ Page {
 				}
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: positions
 				text: CommonWords.position
 				source: root.devicePath + "/Position"
@@ -70,7 +70,7 @@ Page {
 				]
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Phase type"
 				text: qsTrId("settings_cgwacs_phase_type")
 				source: root.devicePath + "/IsMultiphase"
@@ -83,7 +83,7 @@ Page {
 				]
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: pvOnL2
 				//% "PV inverter on phase 2"
 				text: qsTrId("settings_pv_inverter_on_phase_2")
@@ -94,7 +94,7 @@ Page {
 						 && root.serviceType === "grid"
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "PV inverter on phase 2 Position"
 				text: qsTrId("settings_cgwacs_pv_inverter_l2_position")
 				source: root.devicePath + "_S/Position"

@@ -34,7 +34,7 @@ Page {
 		}
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: services
 
 		delegate: TemperatureRelayNavigationItem {
@@ -79,7 +79,7 @@ Page {
 						source: "com.victronenergy.settings/Settings/Relay/1/Function"
 					}
 
-					SettingsListView {
+					GradientListView {
 						model: relay0FunctionItem.value === VenusOS.Relay_Function_Temperature || relay1FunctionItem.value === VenusOS.Relay_Function_Temperature
 							   ? tempRelayModel
 							   : disabledModel
@@ -87,7 +87,7 @@ Page {
 						ObjectModel {
 							id: tempRelayModel
 
-							SettingsListSwitch {
+							ListSwitch {
 								id: functionEnabledSwitch
 
 								//% "Relay activation on temperature"
@@ -113,7 +113,7 @@ Page {
 						ObjectModel {
 							id: disabledModel
 
-							SettingsLabel {
+							ListLabel {
 								//% "No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to \"Temperature\"."
 								text: qsTrId("settings_relay_no_temperature_relay")
 							}

@@ -9,7 +9,7 @@ Column {
 	property alias dvccActive: dvccSwitch.checked
 	readonly property alias userHasWriteAccess: dvccSwitch.userHasWriteAccess
 
-	SettingsListDvccSwitch {
+	ListDvccSwitch {
 		id: dvccSwitch
 
 		//% "DVCC"
@@ -24,7 +24,7 @@ Column {
 		}
 	}
 
-	SettingsListSwitch {
+	ListSwitch {
 		id: maxChargeCurrentSwitch
 
 		//% "Limit charge current"
@@ -37,7 +37,7 @@ Column {
 		}
 	}
 
-	SettingsListSpinBox {
+	ListSpinBox {
 		id: maxChargeCurrent
 
 		//% "Maximum charge current"

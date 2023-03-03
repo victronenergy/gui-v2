@@ -6,7 +6,7 @@ import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-SettingsListItem {
+ListItem {
 	id: root
 
 	property alias textModel: repeater.model
@@ -22,7 +22,7 @@ SettingsListItem {
 				width: root.itemWidth
 					   || (separator.visible ? implicitWidth + root.content.spacing : implicitWidth)
 				font.pixelSize: Theme.font.size.body2
-				color: Theme.color.settingsListItem.secondaryText
+				color: Theme.color.listItem.secondaryText
 				text: modelData
 				horizontalAlignment: Text.AlignHCenter
 				elide: Text.ElideRight
@@ -34,9 +34,9 @@ SettingsListItem {
 						right: parent.right
 						rightMargin: -root.content.spacing / 2
 					}
-					width: Theme.geometry.settingsListItem.separator.width
+					width: Theme.geometry.listItem.separator.width
 					height: parent.implicitHeight
-					color: Theme.color.settingsListItem.separator
+					color: Theme.color.listItem.separator
 					visible: model.index !== repeater.count - 1
 				}
 			}

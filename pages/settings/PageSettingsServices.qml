@@ -8,9 +8,9 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Modbus TCP"
 				text: qsTrId("settings_services_modbus_tcp")
 				secondaryText: modbus.value === 1 ? CommonWords.enabled : CommonWords.disabled
@@ -25,7 +25,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: mqtt
 
 				//% "MQTT on LAN (SSL)"
@@ -33,7 +33,7 @@ Page {
 				source: "com.victronenergy.settings/Settings/Services/MqttLocal"
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: mqttLocalInsecure
 
 				//% "MQTT on LAN (Plain-text)"
@@ -42,7 +42,7 @@ Page {
 				visible: mqtt.checked
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "Console on VE.Direct 1"
 				text: qsTrId("settings_services_console_on_vedirect1")
 				source: "com.victronenergy.platform/Services/Console/Enabled"
@@ -54,7 +54,7 @@ Page {
 
 				Repeater {
 					model: canInterface.value || []
-					delegate: SettingsListNavigationItem {
+					delegate: ListNavigationItem {
 						text: modelData["name"] || ""
 						onClicked: Global.pageManager.pushPage(canBusComponent, { title: text })
 
@@ -75,7 +75,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "CAN-bus over TCP/IP (Debug)"
 				text: qsTrId("settings_services_canbus_over_tcpip_debug")
 				source: "com.victronenergy.settings/Settings/Services/Socketcand"

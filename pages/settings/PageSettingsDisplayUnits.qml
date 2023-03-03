@@ -8,12 +8,12 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Energy"
 				text: qsTrId("settings_units_energy")
 
@@ -30,7 +30,7 @@ Page {
 				}
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Temperature"
 				text: qsTrId("settings_units_temperature")
 
@@ -47,7 +47,7 @@ Page {
 				}
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Volume"
 				text: qsTrId("settings_units_volume")
 

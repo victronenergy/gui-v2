@@ -38,7 +38,7 @@ Rectangle {
 	width: Theme.geometry.notificationsPage.delegate.width
 	height: Theme.geometry.notificationsPage.delegate.height
 	radius: Theme.geometry.toastNotification.radius
-	color: mouseArea.containsPress ? Theme.color.settingsListItem.down.background : Theme.color.background.secondary
+	color: mouseArea.containsPress ? Theme.color.listItem.down.background : Theme.color.background.secondary
 
 	Row {
 		anchors {
@@ -81,7 +81,7 @@ Rectangle {
 			spacing: Theme.geometry.notificationsPage.delegate.description.spacing.vertical
 
 			Label {
-				color: Theme.color.settingsListItem.secondaryText
+				color: Theme.color.listItem.secondaryText
 				text: root.source
 			}
 			Label {

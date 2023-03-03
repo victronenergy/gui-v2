@@ -10,7 +10,7 @@ import "/components/Utils.js" as Utils
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		header: DvccCommonSettings {
 			width: parent.width
 		}
@@ -53,7 +53,7 @@ Page {
 			}
 		}
 
-		delegate: SettingsListTextGroup {
+		delegate: ListTextGroup {
 			readonly property string dcCurrentText: dcCurrent.value === undefined
 				? "--"
 				: Utils.toFloat(dcCurrent.value, 3) + "A"

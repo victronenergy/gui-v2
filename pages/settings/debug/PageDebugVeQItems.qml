@@ -15,14 +15,14 @@ Page {
 		  ? "mqtt"
 		  : ""
 
-	SettingsListView {
+	GradientListView {
 		model: VeQItemTableModel {
 			id: uidModel
 			uids: [bindPrefix]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
-		delegate: SettingsListNavigationItem {
+		delegate: ListNavigationItem {
 			text: model.id
 			secondaryText: enabled ? "" : (model.value || "--")
 			enabled: subModel.rowCount > 0

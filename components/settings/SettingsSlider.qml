@@ -16,11 +16,11 @@ Slider {
 	signal valueChanged(value: real)
 
 	implicitWidth: parent ? parent.width : 0
-	implicitHeight: Theme.geometry.settingsListItem.height
+	implicitHeight: Theme.geometry.listItem.height
 	live: false
 	from: dataPoint.min !== undefined ? dataPoint.min : 0
 	to: dataPoint.max !== undefined ? dataPoint.max : 1
-	stepSize: (to-from) / Theme.geometry.settingsListItem.slider.stepDivsion
+	stepSize: (to-from) / Theme.geometry.listItem.slider.stepDivsion
 	value: to > from && dataPoint.valid ? dataPoint.value : 0
 	enabled: source === "" || dataPoint.valid
 
@@ -37,22 +37,22 @@ Slider {
 		}
 	}
 
-	leftPadding: Theme.geometry.settingsListItem.content.horizontalMargin
-		+ Theme.geometry.settingsListItem.slider.button.size
-		+ Theme.geometry.settingsListItem.slider.spacing
-	rightPadding: Theme.geometry.settingsListItem.content.horizontalMargin
-		+ Theme.geometry.settingsListItem.slider.button.size
-		+ Theme.geometry.settingsListItem.slider.spacing
+	leftPadding: Theme.geometry.listItem.content.horizontalMargin
+		+ Theme.geometry.listItem.slider.button.size
+		+ Theme.geometry.listItem.slider.spacing
+	rightPadding: Theme.geometry.listItem.content.horizontalMargin
+		+ Theme.geometry.listItem.slider.button.size
+		+ Theme.geometry.listItem.slider.spacing
 
 	Button {
 		id: minusButton
 		anchors {
 			verticalCenter: parent.verticalCenter
 			left: parent.left
-			leftMargin: Theme.geometry.settingsListItem.content.horizontalMargin
+			leftMargin: Theme.geometry.listItem.content.horizontalMargin
 		}
-		icon.width: Theme.geometry.settingsListItem.slider.button.size
-		icon.height: Theme.geometry.settingsListItem.slider.button.size
+		icon.width: Theme.geometry.listItem.slider.button.size
+		icon.height: Theme.geometry.listItem.slider.button.size
 		icon.source: "/images/icon_minus.svg"
 
 		onClicked: {
@@ -68,10 +68,10 @@ Slider {
 		anchors {
 			verticalCenter: parent.verticalCenter
 			right: parent.right
-			rightMargin: Theme.geometry.settingsListItem.content.horizontalMargin
+			rightMargin: Theme.geometry.listItem.content.horizontalMargin
 		}
-		icon.width: Theme.geometry.settingsListItem.slider.button.size
-		icon.height: Theme.geometry.settingsListItem.slider.button.size
+		icon.width: Theme.geometry.listItem.slider.button.size
+		icon.height: Theme.geometry.listItem.slider.button.size
 		icon.source: "/images/icon_plus.svg"
 
 		onClicked: {

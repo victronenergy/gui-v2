@@ -12,7 +12,7 @@ Page {
 	readonly property string settingsBindPrefix: "com.victronenergy.settings"
 	readonly property string pumpBindPrefix: "com.victronenergy.pump.startstop0"
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: relayFunction.value === undefined
@@ -28,7 +28,7 @@ Page {
 	ObjectModel {
 		id: disabledModel
 
-		SettingsLabel {
+		ListLabel {
 			horizontalAlignment: Text.AlignHCenter
 			//% "Tank pump start/stop function is not enabled. Go to relay settings and set function to \"Tank pump\"."
 			text: qsTrId("settings_pump_function_not_enabled" )
@@ -38,14 +38,14 @@ Page {
 	ObjectModel {
 		id: startStopModel
 
-		SettingsListTextItem {
+		ListTextItem {
 			//% "Pump state"
 			text: qsTrId("settings_pump_state")
 			source: root.pumpBindPrefix + "/State"
 			secondaryText: CommonWords.onOrOff(dataPoint.value)
 		}
 
-		SettingsListRadioButtonGroup {
+		ListRadioButtonGroup {
 			//% "Mode"
 			text: qsTrId("settings_pump_mode")
 			optionModel: [
@@ -57,7 +57,7 @@ Page {
 			source: root.settingsBindPrefix + "/Settings/Pump0/Mode"
 		}
 
-		SettingsListRadioButtonGroup {
+		ListRadioButtonGroup {
 			id: tankSensor
 
 			//% "Tank sensor"
@@ -84,7 +84,7 @@ Page {
 			}
 		}
 
-		SettingsListSpinBox {
+		ListSpinBox {
 			//% "Start level"
 			text: qsTrId("settings_tank_start_level")
 			source: root.settingsBindPrefix + "/Settings/Pump0/StartValue"
@@ -93,7 +93,7 @@ Page {
 			suffix: "%"
 		}
 
-		SettingsListSpinBox {
+		ListSpinBox {
 			//% "Stop level"
 			text: qsTrId("settings_tank_stop_level")
 			source: root.settingsBindPrefix + "/Settings/Pump0/StopValue"
