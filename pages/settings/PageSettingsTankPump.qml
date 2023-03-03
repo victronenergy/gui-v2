@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 
 Page {
 	id: root
@@ -14,7 +15,9 @@ Page {
 	SettingsListView {
 		id: settingsListView
 
-		model: relayFunction.value === undefined ? startStopModel : relayFunction.value  === 3 ? startStopModel : disabledModel
+		model: relayFunction.value === undefined
+			   ? startStopModel
+			   : relayFunction.value === VenusOS.Relay_Function_Tank_Pump ? startStopModel : disabledModel
 
 		DataPoint {
 			id: relayFunction
@@ -25,9 +28,9 @@ Page {
 	ObjectModel {
 		id: disabledModel
 
-		SettingsListItem {
-			primaryLabel.horizontalAlignment: Text.AlignHCenter
-			//% "Tank pump start/stop function is not enabled, go to relay settings and set function to \"Tank pump\""
+		SettingsLabel {
+			horizontalAlignment: Text.AlignHCenter
+			//% "Tank pump start/stop function is not enabled. Go to relay settings and set function to \"Tank pump\"."
 			text: qsTrId("settings_pump_function_not_enabled" )
 		}
 	}
@@ -55,12 +58,30 @@ Page {
 		}
 
 		SettingsListRadioButtonGroup {
-			id: monitorService
+			id: tankSensor
 
 			//% "Tank sensor"
 			text: qsTrId("settings_tank_sensor")
-			defaultSecondaryText: "TODO" // TODO - finish this when tank sensors arrive. The dbus schema for this is complex and dynamic.
-			enabled: false
+			source: root.settingsBindPrefix + "/Settings/Pump0/TankService"
+			//% "Unavailable sensor, set another"
+			defaultSecondaryText: qsTrId("settings_tank_unavailable_sensor")
+
+			DataPoint {
+				id: availableTankServices
+
+				source: root.pumpBindPrefix + "/AvailableTankServices"
+				onValueChanged: {
+					if (value === undefined) {
+						return
+					}
+					const modelArray = Utils.jsonSettingsToModel(value)
+					if (modelArray) {
+						tankSensor.optionModel = modelArray
+					} else {
+						console.warn("Unable to parse data from", source)
+					}
+				}
+			}
 		}
 
 		SettingsListSpinBox {
