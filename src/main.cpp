@@ -54,46 +54,108 @@ static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
 	return CmManager::instance();
 }
 
+QString calculateMqttAddressFromPortalId(const QString &portalId)
+{
+	int shard = 0;
+	const QString lower = portalId.toLower().trimmed();
+	for (const QChar &ch : lower) {
+		shard += ch.toLatin1();
+	}
+	return shard > 0 ? QStringLiteral("wss://webmqtt%1.victronenergy.com/mqtt").arg(shard % 128) : QString();
+}
+
 void initBackend()
 {
 	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::instance();
+
+	QString queryMqttAddress, queryMqttPortalId, queryMqttUser, queryMqttPass;
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	emscripten::val webLocation = emscripten::val::global("location");
+	const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
+	const QUrlQuery query(webLocationUrl);
+	if (query.hasQueryItem("mqtt")) {
+		queryMqttAddress = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("mqtt").toUtf8())); // e.g.: "ws://192.168.5.96:9001/"
+	}
+	if (query.hasQueryItem("id")) {
+		queryMqttPortalId = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("id").toUtf8())); // e.g.: some cerbogx portal id.
+	}
+	if (query.hasQueryItem("user")) {
+		queryMqttUser = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("user").toUtf8())); // e.g.: vrmlogin_live_user.name@example.com
+	}
+	if (query.hasQueryItem("pass")) {
+		queryMqttPass = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("pass").toUtf8())); // e.g.: some JWT token from VRM.
+	}
+#endif
 
 	QCommandLineParser parser;
 	parser.setApplicationDescription("Venus GUI");
 	parser.addHelpOption();
 	parser.addVersionOption();
 
-	QCommandLineOption dbusAddress({ "d",  "dbus" },
-		QGuiApplication::tr("main", "Use D-Bus data source: connect to the specified D-Bus address"),
-		QGuiApplication::tr("main", "dbus"));
+	QCommandLineOption dbusAddress({ "d", "dbus" },
+		QGuiApplication::tr("Use D-Bus data source: connect to the specified D-Bus address."),
+		QGuiApplication::tr("address", "D-Bus address"));
 	parser.addOption(dbusAddress);
 
-	QCommandLineOption dbusDefault(QStringLiteral("dbus-default"),
-		QGuiApplication::tr("main", "Use D-Bus data source: connect to the default D-Bus address"));
+	QCommandLineOption dbusDefault("dbus-default",
+		QGuiApplication::tr("Use D-Bus data source: connect to the default D-Bus address"));
 	parser.addOption(dbusDefault);
 
-	QCommandLineOption mqttAddress({ "m",  "mqtt" },
-		QGuiApplication::tr("main", "Use MQTT data source: connect to the specified MQTT broker address"),
-		QGuiApplication::tr("main", "mqtt"));
+	// If the MQTT Address is provided, then it's a local LAN MQTT broker (e.g. the CerboGX address).
+	QCommandLineOption mqttAddress({ "m", "mqtt" },
+		QGuiApplication::tr("Use MQTT data source: connect to the specified MQTT broker address."),
+		QGuiApplication::tr("address", "MQTT broker address"));
 	parser.addOption(mqttAddress);
 
-	QCommandLineOption mockMode(QStringLiteral("mock"),
-		QGuiApplication::tr("main", "Use mock data source for testing"));
+	// Otherwise, we need to calculate the VRM broker shard address from the portal id.
+	QCommandLineOption mqttPortalId({ "i", "id" },
+		QGuiApplication::tr("MQTT data source device portal id."),
+		QGuiApplication::tr("portalId"));
+	parser.addOption(mqttPortalId);
+
+	QCommandLineOption mqttUser(QStringList() << "u" << "user",
+		QGuiApplication::tr("MQTT data source username"),
+		QGuiApplication::tr("user", "MQTT broker username."));
+	parser.addOption(mqttUser);
+
+	QCommandLineOption mqttPass({ "p", "pass" },
+		QGuiApplication::tr("MQTT data source password"),
+		QGuiApplication::tr("pass", "MQTT broker password."));
+	parser.addOption(mqttPass);
+
+	QCommandLineOption mockMode({ "k", "mock" },
+		QGuiApplication::tr("Use mock data source for testing."));
 	parser.addOption(mockMode);
 
 	parser.process(*QCoreApplication::instance());
 
+	if (parser.isSet(mqttAddress) || parser.isSet(mqttPortalId)) {
+		if (parser.isSet(mqttUser)) {
+			backend->setUsername(parser.value(mqttUser));
+		}
+		if (parser.isSet(mqttPass)) {
+			backend->setPassword(parser.value(mqttPass));
+		}
+		if (parser.isSet(mqttPortalId)) {
+			backend->setPortalId(parser.value(mqttPortalId));
+		}
+	}
 	if (parser.isSet(mqttAddress)) {
 		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, parser.value(mqttAddress));
+	} else if (parser.isSet(mqttPortalId)) {
+		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, calculateMqttAddressFromPortalId(parser.value(mqttPortalId)));
 	} else if (parser.isSet(mockMode)) {
 		backend->setType(Victron::VenusOS::BackendConnection::MockSource);
 	} else {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-		emscripten::val webLocation = emscripten::val::global("location");
-		const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
-		const QUrlQuery query(webLocationUrl);
-		const QString mqttUrl(query.queryItemValue("mqtt")); // e.g.: "ws://192.168.5.96:9001/"
-		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, mqttUrl);
+		backend->setUsername(queryMqttUser);
+		backend->setPassword(queryMqttPass);
+		backend->setPortalId(queryMqttPortalId);
+		if (!queryMqttPortalId.isEmpty()) {
+			backend->setType(Victron::VenusOS::BackendConnection::MqttSource, calculateMqttAddressFromPortalId(queryMqttPortalId));
+		} else {
+			backend->setType(Victron::VenusOS::BackendConnection::MqttSource, queryMqttAddress);
+		}
 #else
 		const QString address = parser.isSet(dbusDefault) ? QStringLiteral("tcp:host=localhost,port=3000") : parser.value(dbusAddress);
 		backend->setType(Victron::VenusOS::BackendConnection::DBusSource, address);

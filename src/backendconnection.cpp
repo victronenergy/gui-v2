@@ -172,7 +172,14 @@ void BackendConnection::initMqttConnection(const QString &address)
 	m_mqttProducer = new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt", "gui-v2");
 	m_uidHelper = UidHelper::instance();
 	connect(m_mqttProducer, &VeQItemMqttProducer::aboutToConnect,
-		m_mqttProducer, &VeQItemMqttProducer::continueConnect); // TODO: setCredentials().
+		m_mqttProducer, [this] {
+			// TODO: fetch updated credentials via VRM API if required...
+			if (!m_username.isEmpty() || !m_password.isEmpty()) {
+				m_mqttProducer->setCredentials(m_username, m_password);
+			}
+			m_mqttProducer->setPortalId(m_portalId);
+			m_mqttProducer->continueConnect();
+		});
 	connect(m_mqttProducer, &VeQItemMqttProducer::messageReceived,
 		m_uidHelper, &UidHelper::onMessageReceived);
 	connect(m_mqttProducer, &VeQItemMqttProducer::nullMessageReceived,
@@ -215,5 +222,45 @@ void BackendConnection::setType(const SourceType type, const QString &address)
 
 	emit typeChanged();
 }
+
+QString BackendConnection::username() const
+{
+	return m_username;
+}
+
+void BackendConnection::setUsername(const QString &username)
+{
+	if (m_username != username) {
+		m_username = username;
+		emit usernameChanged();
+	}
+}
+
+QString BackendConnection::password() const
+{
+	return m_password;
+}
+
+void BackendConnection::setPassword(const QString &password)
+{
+	if (m_password != password) {
+		m_password = password;
+		emit passwordChanged();
+	}
+}
+
+QString BackendConnection::portalId() const
+{
+	return m_portalId;
+}
+
+void BackendConnection::setPortalId(const QString &portalId)
+{
+	if (m_portalId != portalId) {
+		m_portalId = portalId;
+		emit portalIdChanged();
+	}
+}
+
 }
 }

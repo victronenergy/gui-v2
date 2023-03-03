@@ -19,6 +19,9 @@ class BackendConnection : public QObject
 	Q_OBJECT
 	Q_PROPERTY(State state READ state NOTIFY stateChanged)
 	Q_PROPERTY(SourceType type READ type NOTIFY typeChanged)
+	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
+	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
+	Q_PROPERTY(QString portalId READ portalId WRITE setPortalId NOTIFY portalIdChanged)
 
 public:
 	enum SourceType {
@@ -48,9 +51,21 @@ public:
 	SourceType type() const;
 	void setType(SourceType type, const QString &address = QString());
 
+	QString username() const;
+	void setUsername(const QString &username);
+
+	QString password() const;
+	void setPassword(const QString &password);
+
+	QString portalId() const;
+	void setPortalId(const QString &portalId);
+
 Q_SIGNALS:
 	void stateChanged();
 	void typeChanged();
+	void usernameChanged();
+	void passwordChanged();
+	void portalIdChanged();
 
 private:
 	explicit BackendConnection(QObject *parent = nullptr);
@@ -62,6 +77,10 @@ private:
 	void initDBusConnection(const QString &address);
 #endif
 	void initMqttConnection(const QString &address);
+
+	QString m_username;
+	QString m_password;
+	QString m_portalId;
 
 	State m_state = BackendConnection::State::Idle;
 	SourceType m_type = UnknownSource;
