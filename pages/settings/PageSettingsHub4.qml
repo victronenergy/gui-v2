@@ -16,7 +16,7 @@ Page {
 	Component {
 		id: noEssHeader
 
-		SettingsLabel {
+		ListLabel {
 			//% "No ESS Assistant found"
 			text: qsTrId("settings_ess_no_ess_assistant")
 		}
@@ -25,7 +25,7 @@ Page {
 	ObjectModel {
 		id: essSettings
 
-		SettingsListRadioButtonGroup {
+		ListRadioButtonGroup {
 			//% "Mode"
 			text: qsTrId("settings_ess_mode")
 			optionModel: Global.ess.stateModel
@@ -44,7 +44,7 @@ Page {
 			}
 		}
 
-		SettingsListRadioButtonGroup {
+		ListRadioButtonGroup {
 			id: withoutGridMeter
 
 			//% "Grid metering"
@@ -59,14 +59,14 @@ Page {
 			]
 		}
 
-		SettingsListSwitch {
+		ListSwitch {
 			//% "Inverter AC output in use"
 			text: qsTrId("settings_ess_inverter_ac_output_in_use")
 			source: "com.victronenergy.settings/Settings/SystemSetup/HasAcOutSystem"
 			visible: defaultVisible && withoutGridMeter.currentIndex === 0
 		}
 
-		SettingsListRadioButtonGroup {
+		ListRadioButtonGroup {
 			//% "Multiphase regulation"
 			text: qsTrId("settings_ess_multiphase_regulation")
 			source: essMode.source
@@ -92,7 +92,7 @@ Page {
 			}
 		}
 
-		SettingsListButton {
+		ListButton {
 			id: minSocLimit
 
 			property var _minSocDialog
@@ -117,7 +117,7 @@ Page {
 			}
 		}
 
-		SettingsListTextItem {
+		ListTextItem {
 			//% "Active SOC limit"
 			text: qsTrId("settings_ess_active_soc_limit")
 			visible: defaultVisible
@@ -126,7 +126,7 @@ Page {
 			secondaryText: Math.max(Global.ess.minimumStateOfCharge.value || 0, socLimit.value || 0) + "%"
 		}
 
-		SettingsListRadioButtonGroup {
+		ListRadioButtonGroup {
 			id: batteryLifeState
 
 			//% "BatteryLife state"
@@ -152,7 +152,7 @@ Page {
 			]
 		}
 
-		SettingsListSwitch {
+		ListSwitch {
 			id: maxChargePowerSwitch
 
 			//% "Limit charge power"
@@ -171,7 +171,7 @@ Page {
 			}
 		}
 
-		SettingsListSpinBox {
+		ListSpinBox {
 			id: maxChargePower
 
 			//% "Maximum charge power"
@@ -183,7 +183,7 @@ Page {
 			stepSize: 50
 		}
 
-		SettingsListSwitch {
+		ListSwitch {
 			id: maxInverterPowerSwitch
 
 			//% "Limit inverter power"
@@ -202,7 +202,7 @@ Page {
 			}
 		}
 
-		SettingsListSpinBox {
+		ListSpinBox {
 			id: maxDischargePower
 
 			//% "Maximum inverter power"
@@ -214,7 +214,7 @@ Page {
 			stepSize: 50
 		}
 
-		SettingsListSpinBox {
+		ListSpinBox {
 			//% "Grid setpoint"
 			text: qsTrId("settings_ess_grid_setpoint")
 			visible: defaultVisible
@@ -225,7 +225,7 @@ Page {
 			stepSize: 10
 		}
 
-		SettingsListNavigationItem {
+		ListNavigationItem {
 			//% "Grid feed-in"
 			text: qsTrId("settings_ess_grid_feed_in")
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
@@ -236,7 +236,7 @@ Page {
 			}
 		}
 
-		SettingsListNavigationItem {
+		ListNavigationItem {
 			//% "Scheduled charging"
 			text: qsTrId("settings_ess_scheduled_charging")
 			visible: defaultVisible
@@ -251,9 +251,9 @@ Page {
 				id: scheduledChargeComponent
 
 				Page {
-					SettingsListView {
+					GradientListView {
 						model: 5
-						delegate: SettingsListCGwacsBatterySchedule {
+						delegate: CGwacsBatteryScheduleNavigationItem {
 							scheduleNumber: modelData
 						}
 					}
@@ -261,7 +261,7 @@ Page {
 			}
 		}
 
-		SettingsListNavigationItem {
+		ListNavigationItem {
 			//% "Debug"
 			text: qsTrId("settings_ess_debug")
 			visible: defaultVisible
@@ -274,7 +274,7 @@ Page {
 		}
 	}
 
-	SettingsListView {
+	GradientListView {
 		header: root._valid ? null : noEssHeader
 		model: root._valid ? essSettings : null
 	}

@@ -6,7 +6,7 @@ import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-SettingsListItem {
+ListItem {
 	id: root
 
 	readonly property alias button: button

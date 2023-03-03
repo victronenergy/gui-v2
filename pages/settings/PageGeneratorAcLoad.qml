@@ -28,11 +28,11 @@ Page {
 	//% "AC output"
 	title: qsTrId("ac_output")
 
-	SettingsListView {
+	GradientListView {
 
 		model: ObjectModel {
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: enableSwitch
 
 				//% "Use AC Load to start/stop"
@@ -40,7 +40,7 @@ Page {
 				source: bindPrefix + "/Enabled"
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Measurement"
 				text: qsTrId("page_generator_ac_load_measurement")
 				source: bindPrefix + "/Measurement"
@@ -54,7 +54,7 @@ Page {
 				]
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				id: startValue
 				//% "Start when power is higher than"
 				text: qsTrId("start_when_power_is_higher_than")
@@ -67,7 +67,7 @@ Page {
 				to: 1602
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				id: quietHoursStartValue
 				text: CommonWords.start_value_during_quiet_hours
 				onMinValueReached: minValueWarning()
@@ -78,7 +78,7 @@ Page {
 				from: quietHoursStopValue.value + stepSize
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				id: startTime
 				text: CommonWords.start_after_the_condition_is_reached_for
 				visible: valid
@@ -87,7 +87,7 @@ Page {
 				stepSize: 1
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				id: stopValue
 				//% "Stop when power is lower than"
 				text: qsTrId("stop_when_power_is_lower_than")
@@ -100,7 +100,7 @@ Page {
 				to: startValue.valid ? startValue.value - stepSize : 1000000
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				id: quietHoursStopValue
 				text: CommonWords.stop_value_during_quiet_hours
 				onMaxValueReached: maxValueWarning()
@@ -112,7 +112,7 @@ Page {
 				from: 0
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				id: stopTime
 				text: CommonWords.stop_after_the_condition_is_reached_for
 				visible: valid

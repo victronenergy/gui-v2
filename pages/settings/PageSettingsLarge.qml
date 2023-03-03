@@ -8,14 +8,14 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsLabel {
+			ListLabel {
 				//% "Note that these features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.\n\nDocumentation at https://ve3.nl/vol"
 				text: qsTrId("settings_large_features_not_offically_supported")
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: signalk
 
 				//% "Signal K"
@@ -25,13 +25,13 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_Installer
 			}
 
-			SettingsLabel {
+			ListLabel {
 				//% "Access Signal K at http://venus.local:3000 and via VRM"
 				text: qsTrId("settings_large_access_signal_k")
 				visible: signalk.checked
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: nodered
 
 				//% "Node-RED"
@@ -47,7 +47,7 @@ Page {
 				]
 			}
 
-			SettingsLabel {
+			ListLabel {
 				//% "Access Node-RED at https://venus.local:1881 and via VRM"
 				text: qsTrId("settings_large_access_node_red")
 				visible: nodered.currentValue > 0

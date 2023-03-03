@@ -42,7 +42,7 @@ CT.TextField {
 			text: root.placeholderText
 			font: root.font
 			visible: root.text.length === 0 && !root.activeFocus
-			color: Theme.color.settingsListItem.secondaryText
+			color: Theme.color.listItem.secondaryText
 		}
 	}
 }

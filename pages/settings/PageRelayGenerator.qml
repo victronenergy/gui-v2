@@ -19,7 +19,7 @@ PageGenerator {
 	ObjectModel {
 		id: disabledModel
 
-		SettingsListItem {
+		ListItem {
 			primaryLabel.horizontalAlignment: Text.AlignHCenter
 			//% "Generator start/stop function is not enabled, go to relay settings and set function to \"Generator start/stop\""
 			text: qsTrId("settings_generator_function_not_enabled" )

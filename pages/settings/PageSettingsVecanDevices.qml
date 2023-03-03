@@ -15,7 +15,7 @@ Page {
 	//% "VE.CAN devices"
 	title: qsTrId("settings_vecan_devices")
 
-	SettingsListView {
+	GradientListView {
 		model: VeQItemSortTableModel {
 			filterFlags: VeQItemSortTableModel.FilterOffline
 			dynamicSortFilter: true
@@ -26,7 +26,7 @@ Page {
 			}
 		}
 
-		delegate: SettingsListNavigationItem {
+		delegate: ListNavigationItem {
 			text: "%1 [%2]".arg(customName.value || modelName.value).arg(uniqueNumber.value)
 			//% "Device# %1"
 			secondaryText: qsTrId("settings_vecan_device_number").arg(deviceInstance.value)

@@ -6,7 +6,7 @@ import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-SettingsListItem {
+ListItem {
 	id: root
 
 	property alias secondaryText: secondaryLabel.text
@@ -23,7 +23,7 @@ SettingsListItem {
 			anchors.verticalCenter: parent.verticalCenter
 			visible: text.length > 0
 			font.pixelSize: Theme.font.size.body2
-			color: Theme.color.settingsListItem.secondaryText
+			color: Theme.color.listItem.secondaryText
 			wrapMode: Text.Wrap
 			horizontalAlignment: Text.AlignRight
 		},
@@ -34,7 +34,7 @@ SettingsListItem {
 			width: Theme.geometry.statusBar.button.icon.width
 			height: Theme.geometry.statusBar.button.icon.height
 			rotation: 180
-			color: root.containsPress ? Theme.color.settingsListItem.down.forwardIcon : Theme.color.settingsListItem.forwardIcon
+			color: root.containsPress ? Theme.color.listItem.down.forwardIcon : Theme.color.listItem.forwardIcon
 			fillMode: Image.PreserveAspectFit
 			visible: root.enabled
 		}

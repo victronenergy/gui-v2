@@ -34,14 +34,14 @@ Page {
 		}
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: BackendConnection.type === BackendConnection.DBusSource
 			   ? dbusGpsModel
 			   : BackendConnection.type === BackendConnection.MqttSource
 				 ? mqttGpsModel
 				 : mockGpsModelComponent.createObject(root)
 
-		delegate: SettingsListNavigationItem {
+		delegate: ListNavigationItem {
 			text: (productName.valid && vrmInstance.valid)
 				  ? "%1 [2]".arg(productName.value).arg(vrmInstance.value)
 				  : "--"
@@ -62,7 +62,7 @@ Page {
 			}
 		}
 
-		footer: SettingsListNavigationItem {
+		footer: ListNavigationItem {
 			//% "GPS Settings"
 			text: qsTrId("settings_gps_settings")
 			onClicked: {
@@ -73,9 +73,9 @@ Page {
 				id: gpsFormatSettingsComponent
 
 				Page {
-					SettingsListView {
+					GradientListView {
 						model: ObjectModel {
-							SettingsListRadioButtonGroup {
+							ListRadioButtonGroup {
 								//: Format of reported GPS data
 								//% "Format"
 								text: qsTrId("settings_gps_format")
@@ -93,7 +93,7 @@ Page {
 								]
 							}
 
-							SettingsListRadioButtonGroup {
+							ListRadioButtonGroup {
 								//: Speed unit for reported GPS data
 								//% "Speed Unit"
 								text: qsTrId("settings_gps_speed_unit")

@@ -36,15 +36,15 @@ Page {
 		source: "com.victronenergy.system/ActiveBatteryService"
 	}
 
-	SettingsListView {
+	GradientListView {
 		id: batteryListView
 
-		header: SettingsLabel {
+		header: ListLabel {
 			//% "Use this menu to define which battery measurements to see on the VRM Portal and the MFD HTML5 App."
 			text: qsTrId("settings_batteries_intro")
 		}
 
-		delegate: SettingsListNavigationItem {
+		delegate: ListNavigationItem {
 			id: batteryMenuItem
 
 			readonly property string configId: modelData.replace(/\./g, "_")
@@ -79,22 +79,22 @@ Page {
 				id: batterySettingsComponent
 
 				Page {
-					SettingsListView {
+					GradientListView {
 						model: ObjectModel {
-							SettingsListTextItem {
+							ListTextItem {
 								text: root._visibleText
 								//% "Active battery monitor"
 								secondaryText: qsTrId("settings_batteries_active_battery_monitor")
 								visible: batteryMenuItem.activeBattery
 							}
 
-							SettingsListSwitch {
+							ListSwitch {
 								text: root._visibleText
 								visible: !batteryMenuItem.activeBattery
 								source: batteryEnabled.source
 							}
 
-							SettingsListTextField {
+							ListTextField {
 								//% "Name"
 								text: qsTrId("settings_batteries_name")
 								//% "Enter name"

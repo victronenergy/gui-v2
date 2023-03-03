@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-SettingsListItem {
+ListItem {
 	id: root
 
 	property alias checked: switchItem.checked

@@ -20,9 +20,9 @@ Page {
 		id: data
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListTextGroup {
+			ListTextGroup {
 				text: "PV On ACIn1"
 				textModel: [
 					_formatPowerValue(data.pvOnAcIn1.power),
@@ -32,7 +32,7 @@ Page {
 				]
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				text: "PV On ACIn2"
 				textModel: [
 					_formatPowerValue(data.pvOnAcIn2.power),
@@ -42,7 +42,7 @@ Page {
 				]
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				text: "PV On AC Out"
 				textModel: [
 					_formatPowerValue(data.pvOnAcOut.power),
@@ -52,7 +52,7 @@ Page {
 				]
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				text: "VE.Bus AC out"
 				textModel: [
 					_formatPowerValue(data.vebusAcOut.power),
@@ -62,7 +62,7 @@ Page {
 				]
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				text: "AC loads"
 				textModel: [
 					_formatPowerValue(data.acLoad.power),
@@ -72,7 +72,7 @@ Page {
 				]
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				text: "Battery"
 				textModel: [
 					_formatPowerValue(Global.battery.power),
@@ -81,7 +81,7 @@ Page {
 				]
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				text: "PV Charger"
 				textModel: [
 					_formatPowerValue(data.pvCharger.power.value),

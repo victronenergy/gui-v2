@@ -102,7 +102,7 @@ Page {
 		}
 	}
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 		model: root.service ? connectedModel : disconnectedModel
 	}
@@ -110,7 +110,7 @@ Page {
 	ObjectModel {
 		id: disconnectedModel
 
-		SettingsListTextItem {
+		ListTextItem {
 			text: CommonWords.state
 			secondaryText: root._wifi
 					 //% "Connection lost"
@@ -123,12 +123,12 @@ Page {
 	ObjectModel {
 		id: connectedModel
 
-		SettingsListTextItem {
+		ListTextItem {
 			text: CommonWords.state
 			secondaryText: Utils.connmanServiceState(root.service)
 		}
 
-		SettingsListTextItem {
+		ListTextItem {
 			//% "Name"
 			text: qsTrId("settings_tcpip_name")
 			//% "[Hidden]"
@@ -136,7 +136,7 @@ Page {
 			visible: root._wifi
 		}
 
-		SettingsListTextField {
+		ListTextField {
 			text: CommonWords.password
 			textField.maximumLength: 35
 			visible: root.service && root._wifi
@@ -149,7 +149,7 @@ Page {
 			}
 		}
 
-		SettingsListButton {
+		ListButton {
 			//% "Connect to network?"
 			text: qsTrId("settings_tcpip_connect_to_network")
 			//% "Connect"
@@ -163,7 +163,7 @@ Page {
 			}
 		}
 
-		SettingsListButton {
+		ListButton {
 			id: forgetNetworkButton
 
 			//% "Forget network?"
@@ -194,19 +194,19 @@ Page {
 			}
 		}
 
-		SettingsListTextItem {
+		ListTextItem {
 			text: CommonWords.signal_strength
 			secondaryText: root.service ? service.strength + "%" : ""
 			visible: root._wifi
 		}
 
-		SettingsListTextItem {
+		ListTextItem {
 			//% "MAC address"
 			text: qsTrId("settings_tcpip_mac_address")
 			secondaryText: root.service ? service.ethernet["Address"] : ""
 		}
 
-		SettingsListRadioButtonGroup {
+		ListRadioButtonGroup {
 			id: method
 
 			//% "IP configuration"
@@ -235,14 +235,14 @@ Page {
 			}
 		}
 
-		SettingsListIpAddressField {
+		ListIpAddressField {
 			text: CommonWords.ip_address
 			enabled: method.userHasWriteAccess && !root._readOnlySettings
 			textField.text: root._getIpv4Property("Address")
 			onAccepted: root._setIpv4Property("Address", textField.text)
 		}
 
-		SettingsListIpAddressField {
+		ListIpAddressField {
 			//% "Netmask"
 			text: qsTrId("settings_tcpip_netmask")
 			enabled: method.userHasWriteAccess && !root._readOnlySettings
@@ -250,7 +250,7 @@ Page {
 			onAccepted: root._setIpv4Property("Netmask", textField.text)
 		}
 
-		SettingsListIpAddressField {
+		ListIpAddressField {
 			//% "Gateway"
 			text: qsTrId("settings_tcpip_gateway")
 			enabled: method.userHasWriteAccess && !root._readOnlySettings
@@ -258,7 +258,7 @@ Page {
 			onAccepted: root._setIpv4Property("Gateway", textField.text)
 		}
 
-		SettingsListIpAddressField {
+		ListIpAddressField {
 			//% "DNS server"
 			text: qsTrId("settings_tcpip_dns_server")
 			enabled: method.userHasWriteAccess && !root._readOnlySettings
@@ -266,7 +266,7 @@ Page {
 			onAccepted: root.service.nameserversConfig = textField.text
 		}
 
-		SettingsListIpAddressField {
+		ListIpAddressField {
 			id: linklocal
 
 			//% "Link-local IP address"

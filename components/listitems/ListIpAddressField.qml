@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-SettingsListTextField {
+ListTextField {
 	id: root
 
 	placeholderText: "000.000.000.000"

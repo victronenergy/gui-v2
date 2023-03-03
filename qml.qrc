@@ -26,27 +26,26 @@
         <file>components/dialogs/GeneratorDurationSelectorDialog.qml</file>
         <file>components/dialogs/NumberSelectorDialog.qml</file>
         <file>components/dialogs/TimeSelectorDialog.qml</file>
+        <file>components/listitems/ListLabel.qml</file>
+        <file>components/listitems/ListButton.qml</file>
+        <file>components/listitems/ListDateSelector.qml</file>
+        <file>components/listitems/ListPortField.qml</file>
+        <file>components/listitems/ListIpAddressField.qml</file>
+        <file>components/listitems/ListNavigationItem.qml</file>
+        <file>components/listitems/ListRadioButton.qml</file>
+        <file>components/listitems/ListRadioButtonGroup.qml</file>
+        <file>components/listitems/ListSlider.qml</file>
+        <file>components/listitems/ListSpinBox.qml</file>
+        <file>components/listitems/ListSwitch.qml</file>
+        <file>components/listitems/ListItem.qml</file>
+        <file>components/listitems/ListTextItem.qml</file>
+        <file>components/listitems/ListTextField.qml</file>
+        <file>components/listitems/ListTextGroup.qml</file>
+        <file>components/listitems/ListTimeSelector.qml</file>
+        <file>components/settings/CGwacsBatteryScheduleNavigationItem.qml</file>
         <file>components/settings/FirmwareCheckListButton.qml</file>
+        <file>components/settings/ListDvccSwitch.qml</file>
         <file>components/settings/MountStateListButton.qml</file>
-        <file>components/settings/SettingsLabel.qml</file>
-        <file>components/settings/SettingsListButton.qml</file>
-        <file>components/settings/SettingsListCGwacsBatterySchedule.qml</file>
-        <file>components/settings/SettingsListDateSelector.qml</file>
-        <file>components/settings/SettingsListDvccSwitch.qml</file>
-        <file>components/settings/SettingsListPortField.qml</file>
-        <file>components/settings/SettingsListView.qml</file>
-        <file>components/settings/SettingsListIpAddressField.qml</file>
-        <file>components/settings/SettingsListNavigationItem.qml</file>
-        <file>components/settings/SettingsListRadioButton.qml</file>
-        <file>components/settings/SettingsListRadioButtonGroup.qml</file>
-        <file>components/settings/SettingsListSlider.qml</file>
-        <file>components/settings/SettingsListSpinBox.qml</file>
-        <file>components/settings/SettingsListSwitch.qml</file>
-        <file>components/settings/SettingsListItem.qml</file>
-        <file>components/settings/SettingsListTextItem.qml</file>
-        <file>components/settings/SettingsListTextField.qml</file>
-        <file>components/settings/SettingsListTextGroup.qml</file>
-        <file>components/settings/SettingsListTimeSelector.qml</file>
         <file>components/settings/SettingsSlider.qml</file>
         <file>components/settings/TemperatureRelayNavigationItem.qml</file>
         <file>components/settings/TemperatureRelaySettings.qml</file>
@@ -83,6 +82,7 @@
         <file>components/EnvironmentGaugePanel.qml</file>
         <file>components/ExpandedTanksView.qml</file>
         <file>components/FirmwareUpdate.qml</file>
+        <file>components/GradientListView.qml</file>
         <file>components/InputPanel.qml</file>
         <file>components/ButtonControlValue.qml</file>
         <file>components/RadioButtonControlValue.qml</file>

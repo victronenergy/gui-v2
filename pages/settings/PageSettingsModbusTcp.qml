@@ -18,9 +18,9 @@ Page {
 		source: "com.victronenergy.modbustcp/LastError/Timestamp"
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListSwitch {
+			ListSwitch {
 				id: enableModbusTcp
 
 				//% "Enable Modbus/TCP"
@@ -28,21 +28,21 @@ Page {
 				source: "com.victronenergy.settings/Settings/Services/Modbus"
 			}
 
-			SettingsLabel {
+			ListLabel {
 				//% "No errors reported"
 				text: lastError.valid ? lastError.value : qsTrId("settings_modbus_no_errors")
 				visible: enableModbusTcp.checked
 				horizontalAlignment: Text.AlignHCenter
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Time of last error"
 				text: qsTrId("settings_modbus_time_of_last_error")
 				secondaryText: timestamp.valid ? Qt.formatDateTime(new Date(timestamp.value * 1000), "yyyy-MM-dd hh:mm:ss") : ""
 				visible: enableModbusTcp.checked && lastError.valid
 			}
 
-			SettingsListButton {
+			ListButton {
 				//% "Clear error"
 				text: qsTrId("settings_modbus_clear_error")
 				//% "Press to clear"
@@ -54,7 +54,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Available services"
 				text: qsTrId("settings_modbus_available_services")
 				visible: enableModbusTcp.checked

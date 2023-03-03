@@ -8,18 +8,18 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 
 		model: ObjectModel {
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: bluetoothEnabled
 
 				text: CommonWords.enabled
 				source: "com.victronenergy.settings/Settings/Services/Bluetooth"
 			}
 
-			SettingsListTextField {
+			ListTextField {
 				//% "Pincode"
 				text: qsTrId("settings_pincode")
 				visible: bluetoothEnabled.checked

@@ -18,12 +18,12 @@ Page {
 		source: "com.victronenergy.system/AvailableBatteryMeasurements"
 	}
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: monitorService
 
 				//% "Battery monitor"
@@ -34,7 +34,7 @@ Page {
 				visible: dataPoint.value !== "default"
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "On loss of communication"
 				text: qsTrId("page_generator_conditions_on_loss_of_communication")
 				source: bindPrefix + "/OnLossCommunication"
@@ -48,7 +48,7 @@ Page {
 				]
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: enableSwitch
 
 				//% "Do not run generator when AC1 is in use"
@@ -85,7 +85,7 @@ Page {
 				unit: "V"
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				text: CommonWords.ac_load
 				secondaryText: acLoadEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorAcLoad.qml", { bindPrefix: root.bindPrefix + "/AcLoad"})
@@ -116,7 +116,7 @@ Page {
 				bindPrefix: root.bindPrefix + "/InverterOverload"
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Periodic run"
 				text: qsTrId("page_generator_conditions_periodic_run")
 				secondaryText: testRunEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled

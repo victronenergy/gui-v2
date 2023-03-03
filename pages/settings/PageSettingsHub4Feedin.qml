@@ -10,9 +10,9 @@ Page {
 
 	property int hub4Mode
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListSwitch {
+			ListSwitch {
 				id: acFeedin
 
 				//% "AC-coupled PV - feed in excess"
@@ -22,7 +22,7 @@ Page {
 				invertSourceValue: true
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: feedInDc
 
 				//% "DC-coupled PV - feed in excess"
@@ -42,7 +42,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: restrictFeedIn
 
 				//% "Limit system feed-in"
@@ -57,7 +57,7 @@ Page {
 				}
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				id: maxFeedInPower
 
 				//% "Maximum feed-in"
@@ -69,7 +69,7 @@ Page {
 				stepSize: 100
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Feed-in limiting active"
 				text: qsTrId("settings_ess_feed_in_limiting_active")
 				visible: defaultVisible

@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-SettingsListRadioButtonGroup {
+ListRadioButtonGroup {
 	id: accessLevelButtons
 
 	//% "Access level"

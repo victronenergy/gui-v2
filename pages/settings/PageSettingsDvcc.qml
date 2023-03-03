@@ -10,11 +10,11 @@ import "/components/Utils.js" as Utils
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: dvccSettings
 
 		model: ObjectModel {
-			SettingsLabel {
+			ListLabel {
 				//% "<b>CAUTION:</b> Read the manual before adjusting."
 				text: qsTrId("settings_dvcc_instructions")
 				visible: commonSettings.userHasWriteAccess
@@ -26,14 +26,14 @@ Page {
 				width: parent ? parent.width : 0
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Charge Current limits"
 				text: qsTrId("settings_dvcc_charge_current_limits")
 				showAccessLevel: VenusOS.User_AccessType_Service
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageChargeCurrentLimits.qml", { title: text })
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: maxChargeVoltageSwitch
 
 				//% "Limit managed battery charge voltage"
@@ -46,7 +46,7 @@ Page {
 				}
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				id: maxChargeVoltage
 
 				//% "Maximum charge voltage"
@@ -57,14 +57,14 @@ Page {
 				decimals: 1
 			}
 
-			SettingsListDvccSwitch {
+			ListDvccSwitch {
 				//% "SVS - Shared voltage sense"
 				text: qsTrId("settings_dvcc_shared_voltage_sense")
 				source: "com.victronenergy.settings/Settings/SystemSetup/SharedVoltageSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
-			SettingsListDvccSwitch {
+			ListDvccSwitch {
 				id: sharedTempSense
 
 				//% "STS - Shared temperature sense"
@@ -73,7 +73,7 @@ Page {
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				id: temperatureServiceRadioButtons
 
 				//% "Temperature sensor"
@@ -99,7 +99,7 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Used sensor"
 				text: qsTrId("settings_dvcc_used_sensor")
 				source: "com.victronenergy.system/AutoSelectedTemperatureService"
@@ -109,7 +109,7 @@ Page {
 					&& temperatureServiceRadioButtons.secondaryText === "default"
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: sharedCurrentSense
 
 				//% "SCS - Shared current sense"
@@ -118,7 +118,7 @@ Page {
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "SCS status"
 				text: qsTrId("settings_dvcc_scs_status")
 				source: "com.victronenergy.system/Control/BatteryCurrentSense"

@@ -137,39 +137,39 @@ Page {
 		}
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListTextGroup {
+			ListTextGroup {
 				id: stateGroup
 
 				//% "State"
 				text: qsTrId("settings_state")
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				id: busOffCounters
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				id: rxGroup
 
 				text: "RX"
 				height: implicitHeight + rxErrorGroup.height
 
-				SettingsListTextGroup {
+				ListTextGroup {
 					id: rxErrorGroup
 
 					anchors.bottom: parent.bottom
 				}
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				id: txGroup
 
 				text: "TX"
 				height: implicitHeight + txErrorGroup.height
 
-				SettingsListTextGroup {
+				ListTextGroup {
 					id: txErrorGroup
 
 					anchors.bottom: parent.bottom

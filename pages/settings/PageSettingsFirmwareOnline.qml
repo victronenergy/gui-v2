@@ -9,12 +9,12 @@ import Victron.Veutil
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Auto update"
 				text: qsTrId("settings_auto_update")
 				source: "com.victronenergy.settings/Settings/System/AutoUpdate"
@@ -30,7 +30,7 @@ Page {
 				]
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Update feed"
 				text: qsTrId("settings_update_feed")
 				source: "com.victronenergy.settings/Settings/System/ReleaseType"
@@ -49,7 +49,7 @@ Page {
 				]
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Image type"
 				text: qsTrId("settings_firmware_image_type")
 				source: "com.victronenergy.settings/Settings/System/ImageType"
@@ -73,7 +73,7 @@ Page {
 				updateType: VenusOS.Firmware_UpdateType_Online
 			}
 
-			SettingsListButton {
+			ListButton {
 				id: installUpdate
 
 				//% "Update available"
@@ -108,7 +108,7 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Update build date/time"
 				text: qsTrId("settings_firmware_update_build_date_time")
 				source: "com.victronenergy.platform/Firmware/Online/AvailableBuild"

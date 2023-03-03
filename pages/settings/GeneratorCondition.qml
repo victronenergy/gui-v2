@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-SettingsListNavigationItem {
+ListNavigationItem {
 	id: root
 
 	property string bindPrefix
@@ -54,16 +54,16 @@ SettingsListNavigationItem {
 		Page {
 			title: root.text
 
-			SettingsListView {
+			GradientListView {
 
 				model: ObjectModel {
 
-					SettingsListSwitch {
+					ListSwitch {
 						text: root.enableDescription
 						source: bindPrefix + "/Enabled"
 					}
 
-					SettingsListSpinBox {
+					ListSpinBox {
 						id: startValue
 
 						text: startValueDescription
@@ -75,7 +75,7 @@ SettingsListNavigationItem {
 						to: stopValue.valid && !root.startValueIsGreater ? stopValue.value - stepSize : 100
 					}
 
-					SettingsListSpinBox {
+					ListSpinBox {
 						id: quietHoursStartValue
 
 						text: CommonWords.start_value_during_quiet_hours
@@ -87,7 +87,7 @@ SettingsListNavigationItem {
 						to: quietHoursStopValue.valid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : 100
 					}
 
-					SettingsListSpinBox {
+					ListSpinBox {
 						id: startTime
 
 						text: startTimeDescription
@@ -96,7 +96,7 @@ SettingsListNavigationItem {
 						suffix: root.timeUnit
 					}
 
-					SettingsListSpinBox {
+					ListSpinBox {
 						id: stopValue
 
 						text: stopValueDescription
@@ -108,7 +108,7 @@ SettingsListNavigationItem {
 						from: startValue.valid && !root.startValueIsGreater ? startValue.value + stepSize : 0
 					}
 
-					SettingsListSpinBox {
+					ListSpinBox {
 						id: quietHoursStopValue
 
 						text: CommonWords.stop_value_during_quiet_hours
@@ -120,7 +120,7 @@ SettingsListNavigationItem {
 						from: quietHoursStartValue.valid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : 1
 					}
 
-					SettingsListSpinBox {
+					ListSpinBox {
 						id: stopTime
 
 						text: stopTimeDescription

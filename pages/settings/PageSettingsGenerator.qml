@@ -12,18 +12,18 @@ Page {
 	property string settingsBindPrefix
 	property string startStopBindPrefix
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Conditions"
 				text: qsTrId("page_settings_generator_conditions")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorConditions.qml", { title: text, bindPrefix: root.settingsBindPrefix })
 			}
 
-			SettingsListSpinBox {
+			ListSpinBox {
 				//% "Minimum run time"
 				text: qsTrId("page_settings_generator_minimum_run_time")
 				source: settingsBindPrefix + "/MinimumRuntime"
@@ -31,7 +31,7 @@ Page {
 				decimals: 0
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				property bool generatorIsSet: acIn1Source.value === 2 || acIn2Source.value === 2
 				//% "Detect generator at AC input"
 				text: qsTrId("page_settings_generator_detect_generator_at_ac_input")
@@ -64,7 +64,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: timeZones
 
 				text: CommonWords.quiet_hours
@@ -72,7 +72,7 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
-			SettingsListTimeSelector {
+			ListTimeSelector {
 				//% "Quiet hours start time"
 				text: qsTrId("page_settings_generator_quiet_hours_start_time")
 				source: settingsBindPrefix + "/QuietHours/StartTime"
@@ -80,7 +80,7 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
-			SettingsListTimeSelector {
+			ListTimeSelector {
 				//% "Quiet hours end time"
 				text: qsTrId("page_settings_generator_quiet_hours_end_time")
 				source: settingsBindPrefix + "/QuietHours/EndTime"
@@ -88,7 +88,7 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
-			SettingsListButton {
+			ListButton {
 				//% "Reset daily run time counters"
 				text: qsTrId("page_settings_generator_reset_daily_run_time_counters")
 				//% "Press to reset"
@@ -115,7 +115,7 @@ Page {
 				}
 			}
 
-			SettingsListTimeSelector {
+			ListTimeSelector {
 				id: setTotalRunTime
 
 				//% "Generator total run time (hours)"

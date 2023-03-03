@@ -13,9 +13,9 @@ Page {
 	property DataPoint inverterIdsItem: DataPoint { source: bindPrefix + "/InverterIds" }
 
 
-	SettingsListView {
+	GradientListView {
 		model: inverterIdsItem.value ? inverterIdsItem.value.split(',') : []
-		delegate: SettingsListNavigationItem {
+		delegate: ListNavigationItem {
 			id: menu
 
 			property string uniqueId: modelData

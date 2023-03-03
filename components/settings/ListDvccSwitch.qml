@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-SettingsListSwitch {
+ListSwitch {
 	id: root
 
 	readonly property bool _forced: dataPoint.value === VenusOS.DVCC_ForcedOff || dataPoint.value === VenusOS.DVCC_ForcedOn

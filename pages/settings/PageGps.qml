@@ -30,9 +30,9 @@ Page {
 		}
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListTextItem {
+			ListTextItem {
 				text: CommonWords.status
 				secondaryText: {
 					if (connected.valid && connected.value) {
@@ -48,21 +48,21 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Latitude"
 				text: qsTrId("settings_gps_latitude")
 				source: bindPrefix + "/Position/Latitude"
 				secondaryText: dataPoint.valid ? root.formatCoord(dataPoint.value, ["N","S"], format.value) : "--"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Longitude"
 				text: qsTrId("settings_gps_longitude")
 				source: bindPrefix + "/Position/Longitude"
 				secondaryText: dataPoint.valid ? root.formatCoord(dataPoint.value, ["E","W"], format.value) : "--"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Speed"
 				text: qsTrId("settings_gps_speed")
 				source: bindPrefix + "/Speed"
@@ -90,26 +90,26 @@ Page {
 				}
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Course"
 				text: qsTrId("settings_gps_course")
 				source: bindPrefix + "/Course"
 				secondaryText: dataPoint.valid ? "%1°".arg(dataPoint.value.toFixed(1)) : ""
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Altitude"
 				text: qsTrId("settings_gps_altitude")
 				source: bindPrefix + "/Altitude"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Number of satellites"
 				text: qsTrId("settings_gps_num_satellites")
 				source: bindPrefix + "/NrOfSatellites"
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Device"
 				text: qsTrId("settings_gps_device")
 

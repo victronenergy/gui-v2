@@ -24,41 +24,41 @@ Page {
 		source: gateway + "/ScanProgress"
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Inverters"
 				text: qsTrId("page_settings_fronius_inverters")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverters.qml", {"title": text})
 			}
 
-			SettingsListButton {
+			ListButton {
 				//% "Find PV inverters"
 				text: qsTrId("page_settings_fronius_find_pv_inverters")
 				secondaryText: autoDetectItem.value ? CommonWords.scanning.arg(scanProgressItem.value) : CommonWords.press_to_scan
 				onClicked: autoDetectItem.setValue(autoDetectItem.value === 0 ? 1 : 0)
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Detected IP addresses"
 				text: qsTrId("page_settings_fronius_detected_ip_addresses")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": text})
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Add IP address manually"
 				text: qsTrId("page_settings_fronius_add_ip_address_manually")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": text})
 			}
 
-			SettingsListPortField {
+			ListPortField {
 				//% "TCP port"
 				text: qsTrId("page_settings_fronius_tcp_port")
 				visible: value !== 80
 				source: settings + "/Settings/Fronius/PortNumber"
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				text: CommonWords.automatic_scanning
 				source: settings + "/Settings/Fronius/AutoScan"
 			}

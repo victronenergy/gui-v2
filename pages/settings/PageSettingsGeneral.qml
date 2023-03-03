@@ -8,7 +8,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		// Allow AccessLevelRadioButtonGroup to get key events
@@ -17,7 +17,7 @@ Page {
 		model: ObjectModel {
 			AccessLevelRadioButtonGroup {}
 
-			SettingsListTextField {
+			ListTextField {
 				//% "Set root password"
 				text: qsTrId("settings_set_root_password")
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
@@ -29,7 +29,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: sshOnLan
 
 				//% "SSH on LAN"
@@ -38,7 +38,7 @@ Page {
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				id: remoteSupportOnOff
 
 				//% "Remote support"
@@ -46,14 +46,14 @@ Page {
 				source: "com.victronenergy.settings/Settings/System/RemoteSupport"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				//% "Remote support tunnel"
 				text: qsTrId("settings_remote_support_tunnel")
 				secondaryText: remotePort.secondaryText.length > 0 ? CommonWords.online : CommonWords.offline
 				visible: defaultVisible && remoteSupportOnOff.checked
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				id: remotePort
 
 				//% "Remote support IP and port"
@@ -62,7 +62,7 @@ Page {
 				visible: defaultVisible && remoteSupportOnOff.checked
 			}
 
-			SettingsListButton {
+			ListButton {
 				//% "Reboot"
 				text: qsTrId("settings_reboot")
 				//% "Reboot now"
@@ -73,7 +73,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "Audible alarm"
 				text: qsTrId("settings_audible_alarm")
 				source: "com.victronenergy.settings/Settings/Alarm/Audible"
@@ -85,7 +85,7 @@ Page {
 				}
 			}
 
-			SettingsListSwitch {
+			ListSwitch {
 				//% "Demo mode"
 				text: qsTrId("settings_demo_mode")
 				checked: Global.systemSettings.demoMode.value === VenusOS.SystemSettings_DemoModeActive

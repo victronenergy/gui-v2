@@ -25,9 +25,9 @@ Page {
 		source: bindPrefix + "/Phase"
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				text: CommonWords.position
 				source: bindPrefix + "/Position"
 				optionModel: [
@@ -37,14 +37,14 @@ Page {
 				]
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				text: CommonWords.phase
 				//% "Multiphase"
 				secondaryText: qsTrId("page_settings_fronius_inverter_multiphase")
 				visible: phaseCount > 1
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				text: CommonWords.phase
 				source: bindPrefix + "/Phase"
 				visible: phaseCount === 1
@@ -60,7 +60,7 @@ Page {
 				]
 			}
 
-			SettingsListRadioButtonGroup {
+			ListRadioButtonGroup {
 				//% "Show"
 				text: qsTrId("page_settings_fronius_inverter_show")
 				source: bindPrefix + "/IsActive"

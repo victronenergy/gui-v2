@@ -12,11 +12,11 @@ Page {
 	property CmTechnology _tech: Connman.getTechnology("wifi")
 	property var _confirmApDialog
 
-	SettingsListView {
+	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
-			SettingsListSwitch {
+			ListSwitch {
 				//% "Create access point"
 				text: qsTrId("settings_wifi_create_ap")
 				checked: accessPoint.value === 1
@@ -34,7 +34,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Wi-Fi networks"
 				text: qsTrId("settings_wifi_networks")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", { title: text })

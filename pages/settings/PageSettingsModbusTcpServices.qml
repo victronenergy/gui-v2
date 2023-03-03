@@ -30,10 +30,10 @@ Page {
 		source: "com.victronenergy.modbustcp/Services/Count"
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: serviceCount.value || 0
 
-		delegate: SettingsListItem {
+		delegate: ListItem {
 			id: serviceDelegate
 
 			readonly property string servicePath: "com.victronenergy.modbustcp/Services/" + model.index
@@ -57,7 +57,7 @@ Page {
 				source: serviceDelegate.servicePath + "/UnitId"
 			}
 
-			SettingsListTextItem {
+			ListTextItem {
 				id: serviceDetails
 
 				anchors.bottom: parent.bottom

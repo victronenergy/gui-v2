@@ -66,10 +66,10 @@ Page {
 		property DataPoint apparentL3: DataPoint { source: vebusPrefix + "/Ac/Out/L3/S" }
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				id: groupP
 
 				itemWidth: root.groupItemWidth(groupP)
@@ -77,7 +77,7 @@ Page {
 				textModel: [ "AC Out", "AC Out", "Qwacs", "Qwacs", "Sensors", "Diff" ]
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				id: groupL1
 
 				text: "L1"
@@ -92,7 +92,7 @@ Page {
 				]
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				id: groupL2
 
 				text: "L2"
@@ -107,7 +107,7 @@ Page {
 				]
 			}
 
-			SettingsListTextGroup {
+			ListTextGroup {
 				id: groupL3
 
 				text: "L3"

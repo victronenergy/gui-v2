@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-SettingsListButton {
+ListButton {
 	id: root
 
 	function _mountStateToText(s) {

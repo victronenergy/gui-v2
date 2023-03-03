@@ -31,10 +31,10 @@ Page {
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 
-	SettingsListView {
+	GradientListView {
 		model: ObjectModel {
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Analog inputs"
 				text: qsTrId("settings_io_analog_inputs")
 				visible: defaultVisible && analogModel.rowCount > 0
@@ -46,9 +46,9 @@ Page {
 					id: analogInputsComponent
 
 					Page {
-						SettingsListView {
+						GradientListView {
 							model: analogModel
-							delegate: SettingsListSwitch {
+							delegate: ListSwitch {
 								text: switchLabel.value || ""
 								source: Utils.normalizedSource(model.uid) + "/Function"
 
@@ -62,7 +62,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Digital inputs"
 				text: qsTrId("settings_io_digital_inputs")
 				visible: defaultVisible && digitalModel.rowCount > 0
@@ -74,10 +74,10 @@ Page {
 					id: digitalInputsComponent
 
 					Page {
-						SettingsListView {
+						GradientListView {
 							model: digitalModel
 
-							delegate: SettingsListRadioButtonGroup {
+							delegate: ListRadioButtonGroup {
 								//: %1 = number of the digital input
 								//% "Digital input %1"
 								text: qsTrId("settings_io_digital_input").arg(model.uid.split('/').pop())
@@ -109,7 +109,7 @@ Page {
 				}
 			}
 
-			SettingsListNavigationItem {
+			ListNavigationItem {
 				//% "Bluetooth sensors"
 				text: qsTrId("settings_io_bt_sensors")
 				visible: Connman.technologyList.indexOf("bluetooth") !== -1

@@ -7,7 +7,7 @@ import QtQuick.Controls.impl as CP
 import QtQuick.VirtualKeyboard
 import Victron.VenusOS
 
-SettingsListItem {
+ListItem {
 	id: root
 
 	property alias source: dataPoint.source
@@ -44,8 +44,8 @@ SettingsListItem {
 		property bool _accepted
 
 		width: Math.max(
-				Theme.geometry.settingsListItem.textField.minimumWidth,
-				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry.settingsListItem.textField.maximumWidth))
+				Theme.geometry.listItem.textField.minimumWidth,
+				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry.listItem.textField.maximumWidth))
 		enabled: root.enabled
 		text: dataPoint.valid ? dataPoint.value : ""
 
