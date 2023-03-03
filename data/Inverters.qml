@@ -4,7 +4,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
 
 QtObject {
 	id: root
@@ -30,7 +29,7 @@ QtObject {
 	function inverterModeToText(m) {
 		switch (m) {
 		case VenusOS.Inverters_Mode_On:
-			return Utils.qsTrIdOnOff(1)
+			return CommonWords.onOrOff(1)
 		case VenusOS.Inverters_Mode_ChargerOnly:
 			//% "Charger only"
 			return qsTrId("inverter_charger_mode_charger_only")
@@ -38,7 +37,7 @@ QtObject {
 			//% "Inverter only"
 			return qsTrId("inverter_charger_mode_inverter_only")
 		case VenusOS.Inverters_Mode_Off:
-			return Utils.qsTrIdOnOff(0)
+			return CommonWords.onOrOff(0)
 		default:
 			return ""
 		}
