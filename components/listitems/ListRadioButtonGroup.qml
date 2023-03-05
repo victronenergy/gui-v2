@@ -83,15 +83,16 @@ ListNavigationItem {
 						  : !model.readOnly
 					checked: root.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel
-					writeAccessLevel: root.showAccessLevel
+					writeAccessLevel: root.writeAccessLevel
 					C.ButtonGroup.group: radioButtonGroup
 
 					onClicked: {
 						if (root.updateOnClick) {
 							if (source.length > 0) {
 								dataPoint.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
+							} else {
+								root.currentIndex = model.index
 							}
-							root.currentIndex = model.index
 						}
 						root.optionClicked(model.index)
 
