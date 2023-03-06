@@ -37,9 +37,7 @@ SettingsListView {
 			}
 		}
 
-		//: %1 = Number of this IP address within the list
-		//% "IP address %1"
-		text: qsTrId("settings_fronius_ip_address").arg(model.index + 1)
+		text: CommonWords.ip_address + ' ' + (model.index + 1)
 		secondaryText: modelData
 
 		content.children: [
