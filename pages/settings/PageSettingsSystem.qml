@@ -38,7 +38,7 @@ Page {
 
 				//% "System name"
 				text: qsTrId("settings_system_name")
-				source: "com.victronenergy.settings/Settings/SystemSetup/SystemName"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/SystemName"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
 				optionModel: [
@@ -64,7 +64,7 @@ Page {
 				placeholderText: qsTrId("settings_system_enter_user_defined_name")
 				writeAccessLevel: VenusOS.User_AccessType_User
 				visible: systemNameRadioButtons.currentIndex === systemNameRadioButtons.customValueIndex
-				source: "com.victronenergy.settings/Settings/SystemSetup/SystemName"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/SystemName"
 			}
 
 			ListRadioButtonGroup {
@@ -72,7 +72,7 @@ Page {
 
 				//% "AC input 1"
 				text: qsTrId("settings_system_ac_input_1")
-				source: "com.victronenergy.settings/Settings/SystemSetup/AcInput1"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/AcInput1"
 				optionModel: root._acInputsModel
 			}
 
@@ -81,7 +81,7 @@ Page {
 
 				//% "AC input 2"
 				text: qsTrId("settings_system_ac_input_2")
-				source: "com.victronenergy.settings/Settings/SystemSetup/AcInput2"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/AcInput2"
 				optionModel: root._acInputsModel
 			}
 
@@ -92,7 +92,7 @@ Page {
 					  //% "Monitor for shore disconnect"
 					: qsTrId("settings_system_monitor_for_shore_disconnect")
 				visible: root._isGrid || root._isShore
-				source: "com.victronenergy.settings/Settings/Alarm/System/GridLost"
+				dataSource: "com.victronenergy.settings/Settings/Alarm/System/GridLost"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled, value: 1 },
@@ -104,7 +104,7 @@ Page {
 
 				//% "Battery monitor"
 				text: qsTrId("settings_system_battery_monitor")
-				source: "com.victronenergy.settings/Settings/SystemSetup/BatteryService"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/BatteryService"
 				//% "Unavailable monitor, set another"
 				defaultSecondaryText: qsTrId("settings_system_unavailable_monitor")
 
@@ -129,7 +129,7 @@ Page {
 			ListTextItem {
 				//% "Auto-selected"
 				text: qsTrId("settings_system_auto_selected")
-				source: "com.victronenergy.system/AutoSelectedBatteryService"
+				dataSource: "com.victronenergy.system/AutoSelectedBatteryService"
 				visible: batteryMonitorRadioButtons.optionModel !== undefined
 					&& batteryMonitorRadioButtons.currentIndex >= 0
 					&& batteryMonitorRadioButtons.optionModel[batteryMonitorRadioButtons.currentIndex].value === "default"
@@ -138,7 +138,7 @@ Page {
 			ListSwitch {
 				//% "Has DC system"
 				text: qsTrId("settings_system_has_dc_system")
-				source: "com.victronenergy.settings/Settings/SystemSetup/HasDcSystem"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/HasDcSystem"
 			}
 
 			ListNavigationItem {

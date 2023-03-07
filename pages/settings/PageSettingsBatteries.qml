@@ -91,7 +91,7 @@ Page {
 							ListSwitch {
 								text: root._visibleText
 								visible: !batteryMenuItem.activeBattery
-								source: batteryEnabled.source
+								dataSource: batteryEnabled.source
 							}
 
 							ListTextField {
@@ -99,8 +99,8 @@ Page {
 								text: qsTrId("settings_batteries_name")
 								//% "Enter name"
 								placeholderText: qsTrId("settings_batteries_enter_name")
-								source: "com.victronenergy.settings/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
-								visible: dataPoint.valid
+								dataSource: "com.victronenergy.settings/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
+								visible: dataValid
 								textField.maximumLength: 32 // TODO can the max be fetched from dbus?
 							}
 						}

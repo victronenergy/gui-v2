@@ -39,10 +39,10 @@ Page {
 				//% "Limit managed battery charge voltage"
 				text: qsTrId("settings_dvcc_limit_managed_battery_charge_voltage")
 				updateOnClick: false
-				checked: maxChargeVoltage.dataPoint.valid && maxChargeVoltage.dataPoint.value > 0
+				checked: maxChargeVoltage.dataValid && maxChargeVoltage.dataValue > 0
 				visible: defaultVisible && commonSettings.dvccActive
 				onClicked: {
-					maxChargeVoltage.dataPoint.setValue(maxChargeVoltage.dataPoint.value === 0.0 ? 55.0 : 0.0)
+					maxChargeVoltage.setDataValue(maxChargeVoltage.dataValue === 0.0 ? 55.0 : 0.0)
 				}
 			}
 
@@ -52,7 +52,7 @@ Page {
 				//% "Maximum charge voltage"
 				text: qsTrId("settings_dvcc_max_charge_voltage")
 				visible: defaultVisible && maxChargeVoltageSwitch.visible && maxChargeVoltageSwitch.checked
-				source: "com.victronenergy.settings/Settings/SystemSetup/MaxChargeVoltage"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/MaxChargeVoltage"
 				suffix: "V"
 				decimals: 1
 			}
@@ -60,7 +60,7 @@ Page {
 			ListDvccSwitch {
 				//% "SVS - Shared voltage sense"
 				text: qsTrId("settings_dvcc_shared_voltage_sense")
-				source: "com.victronenergy.settings/Settings/SystemSetup/SharedVoltageSense"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/SharedVoltageSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
@@ -69,7 +69,7 @@ Page {
 
 				//% "STS - Shared temperature sense"
 				text: qsTrId("settings_dvcc_shared_temp_sense")
-				source: "com.victronenergy.settings/Settings/SystemSetup/SharedTemperatureSense"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/SharedTemperatureSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
@@ -78,7 +78,7 @@ Page {
 
 				//% "Temperature sensor"
 				text: qsTrId("settings_dvcc_temp_sensor")
-				source: "com.victronenergy.settings/Settings/SystemSetup/TemperatureService"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/TemperatureService"
 				//% "Unavailable sensor, set another"
 				defaultSecondaryText: qsTrId("settings_system_unavailable_sensor")
 				visible: defaultVisible && commonSettings.dvccActive && sharedTempSense.checked
@@ -102,7 +102,7 @@ Page {
 			ListTextItem {
 				//% "Used sensor"
 				text: qsTrId("settings_dvcc_used_sensor")
-				source: "com.victronenergy.system/AutoSelectedTemperatureService"
+				dataSource: "com.victronenergy.system/AutoSelectedTemperatureService"
 				visible: defaultVisible
 					&& sharedTempSense.checked
 					&& commonSettings.dvccActive
@@ -114,14 +114,14 @@ Page {
 
 				//% "SCS - Shared current sense"
 				text: qsTrId("settings_dvcc_shared_current_sense")
-				source: "com.victronenergy.settings/Settings/SystemSetup/BatteryCurrentSense"
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/BatteryCurrentSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
 			ListRadioButtonGroup {
 				//% "SCS status"
 				text: qsTrId("settings_dvcc_scs_status")
-				source: "com.victronenergy.system/Control/BatteryCurrentSense"
+				dataSource: "com.victronenergy.system/Control/BatteryCurrentSense"
 				visible: defaultVisible && commonSettings.dvccActive && sharedCurrentSense.checked
 				enabled: false
 

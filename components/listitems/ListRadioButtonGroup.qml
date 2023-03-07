@@ -17,16 +17,18 @@ import Victron.VenusOS
 ListNavigationItem {
 	id: root
 
-	property alias source: dataPoint.source
-	readonly property alias dataPoint: dataPoint
-	readonly property alias value: dataPoint.value
+	property alias dataSource: dataPoint.source
+	readonly property alias dataValue: dataPoint.value
+	readonly property alias dataValid: dataPoint.valid
+	function setDataValue(v) { dataPoint.setValue(v) }
+
 	property var optionModel: []
 	property int currentIndex: {
-		if (!optionModel || optionModel.length === undefined || source.length === 0 || !dataPoint.valid) {
+		if (!optionModel || optionModel.length === undefined || source.length === 0 || !dataValid) {
 			return defaultIndex
 		}
 		for (let i = 0; i < optionModel.length; ++i) {
-			if (optionModel[i].value === dataPoint.value) {
+			if (optionModel[i].value === dataValue) {
 				return i
 			}
 		}
@@ -50,7 +52,7 @@ ListNavigationItem {
 			? optionModel[currentIndex].display
 			: defaultSecondaryText
 
-	enabled: userHasReadAccess && (source === "" || dataPoint.valid)
+	enabled: userHasReadAccess && (dataSource === "" || dataValid)
 
 	onClicked: {
 		Global.pageManager.pushPage(optionsPageComponent, { title: text })

@@ -54,13 +54,13 @@ Page {
 			ListPortField {
 				//% "TCP port"
 				text: qsTrId("page_settings_fronius_tcp_port")
-				visible: value !== 80
-				source: settings + "/Settings/Fronius/PortNumber"
+				visible: dataValue !== 80
+				dataSource: settings + "/Settings/Fronius/PortNumber"
 			}
 
 			ListSwitch {
 				text: CommonWords.automatic_scanning
-				source: settings + "/Settings/Fronius/AutoScan"
+				dataSource: settings + "/Settings/Fronius/AutoScan"
 			}
 		}
 	}

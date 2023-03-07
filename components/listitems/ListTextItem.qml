@@ -8,18 +8,19 @@ import Victron.VenusOS
 ListItem {
 	id: root
 
+	property alias dataSource: dataPoint.source
+	readonly property alias dataValue: dataPoint.value
+	readonly property alias dataValid: dataPoint.valid
+	function setDataValue(v) { dataPoint.setValue(v) }
+
 	property alias secondaryText: secondaryLabel.text
-	property alias source: dataPoint.source
-	readonly property alias dataPoint: dataPoint
-	readonly property alias value: dataPoint.value
-	readonly property alias valid: dataPoint.valid
 
 	property Label defaultContent: Label {
 		id: secondaryLabel
 
 		anchors.verticalCenter: parent.verticalCenter
 		visible: root.secondaryText.length > 0
-		text: dataPoint.value || ""
+		text: dataValue || ""
 		font.pixelSize: Theme.font.size.body2
 		color: Theme.color.listItem.secondaryText
 		wrapMode: Text.Wrap

@@ -41,8 +41,8 @@ Page {
 		ListTextItem {
 			//% "Pump state"
 			text: qsTrId("settings_pump_state")
-			source: root.pumpBindPrefix + "/State"
-			secondaryText: CommonWords.onOrOff(dataPoint.value)
+			dataSource: root.pumpBindPrefix + "/State"
+			secondaryText: CommonWords.onOrOff(dataValue)
 		}
 
 		ListRadioButtonGroup {
@@ -54,7 +54,7 @@ Page {
 				{ display: CommonWords.onOrOff(1), value: 1 },
 				{ display: CommonWords.onOrOff(0), value: 2 },
 			]
-			source: root.settingsBindPrefix + "/Settings/Pump0/Mode"
+			dataSource: root.settingsBindPrefix + "/Settings/Pump0/Mode"
 		}
 
 		ListRadioButtonGroup {
@@ -62,7 +62,7 @@ Page {
 
 			//% "Tank sensor"
 			text: qsTrId("settings_tank_sensor")
-			source: root.settingsBindPrefix + "/Settings/Pump0/TankService"
+			dataSource: root.settingsBindPrefix + "/Settings/Pump0/TankService"
 			//% "Unavailable sensor, set another"
 			defaultSecondaryText: qsTrId("settings_tank_unavailable_sensor")
 
@@ -87,7 +87,7 @@ Page {
 		ListSpinBox {
 			//% "Start level"
 			text: qsTrId("settings_tank_start_level")
-			source: root.settingsBindPrefix + "/Settings/Pump0/StartValue"
+			dataSource: root.settingsBindPrefix + "/Settings/Pump0/StartValue"
 			from: 0
 			to: 100
 			suffix: "%"
@@ -96,7 +96,7 @@ Page {
 		ListSpinBox {
 			//% "Stop level"
 			text: qsTrId("settings_tank_stop_level")
-			source: root.settingsBindPrefix + "/Settings/Pump0/StopValue"
+			dataSource: root.settingsBindPrefix + "/Settings/Pump0/StopValue"
 			from: 0
 			to: 100
 			suffix: "%"

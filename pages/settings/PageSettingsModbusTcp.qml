@@ -25,7 +25,7 @@ Page {
 
 				//% "Enable Modbus/TCP"
 				text: qsTrId("settings_modbus_enable_modbus_tcp")
-				source: "com.victronenergy.settings/Settings/Services/Modbus"
+				dataSource: "com.victronenergy.settings/Settings/Services/Modbus"
 			}
 
 			ListLabel {

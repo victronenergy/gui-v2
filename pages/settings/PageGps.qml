@@ -51,41 +51,41 @@ Page {
 			ListTextItem {
 				//% "Latitude"
 				text: qsTrId("settings_gps_latitude")
-				source: bindPrefix + "/Position/Latitude"
-				secondaryText: dataPoint.valid ? root.formatCoord(dataPoint.value, ["N","S"], format.value) : "--"
+				dataSource: bindPrefix + "/Position/Latitude"
+				secondaryText: dataValid ? root.formatCoord(dataValue, ["N","S"], format.value) : "--"
 			}
 
 			ListTextItem {
 				//% "Longitude"
 				text: qsTrId("settings_gps_longitude")
-				source: bindPrefix + "/Position/Longitude"
-				secondaryText: dataPoint.valid ? root.formatCoord(dataPoint.value, ["E","W"], format.value) : "--"
+				dataSource: bindPrefix + "/Position/Longitude"
+				secondaryText: dataValid ? root.formatCoord(dataValue, ["E","W"], format.value) : "--"
 			}
 
 			ListTextItem {
 				//% "Speed"
 				text: qsTrId("settings_gps_speed")
-				source: bindPrefix + "/Speed"
+				dataSource: bindPrefix + "/Speed"
 				secondaryText: {
-					if (!dataPoint.valid) {
+					if (!dataValid) {
 						return "--"
 					}
 					if (speedUnit.value === "km/h") {
 						//: GPS speed data, in kilometers per hour
 						//% "%1 km/h"
-						return qsTrId("settings_gps_speed_kmh").arg((dataPoint.value * 3.6).toFixed(1))
+						return qsTrId("settings_gps_speed_kmh").arg((dataValue * 3.6).toFixed(1))
 					} else if (speedUnit.value === "mph") {
 						//: GPS speed data, in miles per hour
 						//% "%1 mph"
-						return qsTrId("settings_gps_speed_mph").arg((dataPoint.value * 2.236936).toFixed(1))
+						return qsTrId("settings_gps_speed_mph").arg((dataValue * 2.236936).toFixed(1))
 					} else if (speedUnit.value === "kt") {
 						//: GPS speed data, in knots
 						//% "%1 kt"
-						return qsTrId("settings_gps_speed_kt").arg((dataPoint.value * (3600/1852)).toFixed(1))
+						return qsTrId("settings_gps_speed_kt").arg((dataValue * (3600/1852)).toFixed(1))
 					} else {
 						//: GPS speed data, in meters per second
 						//% "%1 m/s"
-						return qsTrId("settings_gps_speed_ms").arg(dataPoint.value.toFixed(2))
+						return qsTrId("settings_gps_speed_ms").arg(dataValue.toFixed(2))
 					}
 				}
 			}
@@ -93,20 +93,20 @@ Page {
 			ListTextItem {
 				//% "Course"
 				text: qsTrId("settings_gps_course")
-				source: bindPrefix + "/Course"
-				secondaryText: dataPoint.valid ? "%1°".arg(dataPoint.value.toFixed(1)) : ""
+				dataSource: bindPrefix + "/Course"
+				secondaryText: dataValid ? "%1°".arg(dataValue.toFixed(1)) : ""
 			}
 
 			ListTextItem {
 				//% "Altitude"
 				text: qsTrId("settings_gps_altitude")
-				source: bindPrefix + "/Altitude"
+				dataSource: bindPrefix + "/Altitude"
 			}
 
 			ListTextItem {
 				//% "Number of satellites"
 				text: qsTrId("settings_gps_num_satellites")
-				source: bindPrefix + "/NrOfSatellites"
+				dataSource: bindPrefix + "/NrOfSatellites"
 			}
 
 			ListNavigationItem {

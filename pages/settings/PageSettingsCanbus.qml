@@ -50,7 +50,7 @@ Page {
 
 				//% "CAN-bus profile"
 				text: qsTrId("settings_canbus_profile")
-				source: "com.victronenergy.settings/Settings/Canbus/" + root.gateway + "/Profile"
+				dataSource: "com.victronenergy.settings/Settings/Canbus/" + root.gateway + "/Profile"
 				optionModel: [
 					{
 						//% "Disabled"
@@ -109,7 +109,7 @@ Page {
 			ListSwitch {
 				//% "NMEA2000-out"
 				text: qsTrId("settings_canbus_nmea2000out")
-				source: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
+				dataSource: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
 				visible: root._isVecan
 			}
 
@@ -117,7 +117,7 @@ Page {
 				//% "Unique identity number selector"
 				text: qsTrId("settings_canbus_unique_id_select")
 				visible: root._isVecan || root._isRvc
-				source: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
+				dataSource: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
 				height: visible ? (implicitHeight + uniqueIdDescriptionLabel.height) : 0
 
 				onSelectorAccepted: {

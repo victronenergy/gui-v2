@@ -17,7 +17,7 @@ Page {
 
 				//% "AC-coupled PV - feed in excess"
 				text: qsTrId("settings_ess_ac_coupled_pv")
-				source: "com.victronenergy.settings/Settings/CGwacs/PreventFeedback"
+				dataSource: "com.victronenergy.settings/Settings/CGwacs/PreventFeedback"
 				visible: defaultVisible && hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 				invertSourceValue: true
 			}
@@ -27,7 +27,7 @@ Page {
 
 				//% "DC-coupled PV - feed in excess"
 				text: qsTrId("settings_ess_dc_coupled_pv")
-				source: "com.victronenergy.settings/Settings/CGwacs/OvervoltageFeedIn"
+				dataSource: "com.victronenergy.settings/Settings/CGwacs/OvervoltageFeedIn"
 				visible: defaultVisible
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& doNotFeedInvOvervoltage.valid
@@ -51,9 +51,9 @@ Page {
 				checked: maxFeedInPower.value >= 0
 				onCheckedChanged: {
 					if (checked && maxFeedInPower.value < 0)
-						maxFeedInPower.dataPoint.setValue(1000)
+						maxFeedInPower.setDataValue(1000)
 					else if (!checked && maxFeedInPower.value >= 0)
-						maxFeedInPower.dataPoint.setValue(-1)
+						maxFeedInPower.setDataValue(-1)
 				}
 			}
 
@@ -63,7 +63,7 @@ Page {
 				//% "Maximum feed-in"
 				text: qsTrId("settings_ess_max_feed_in")
 				visible: defaultVisible && restrictFeedIn.visible && restrictFeedIn.checked
-				source: "com.victronenergy.settings/Settings/CGwacs/MaxFeedInPower"
+				dataSource: "com.victronenergy.settings/Settings/CGwacs/MaxFeedInPower"
 				suffix: "W"
 				to: 300000
 				stepSize: 100
@@ -74,9 +74,9 @@ Page {
 				text: qsTrId("settings_ess_feed_in_limiting_active")
 				visible: defaultVisible
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
-					&& dataPoint.valid
-				source: "com.victronenergy.hub4/PvPowerLimiterActive"
-				secondaryText: dataPoint.value === 0 ? CommonWords.no : CommonWords.yes
+					&& dataValid
+				dataSource: "com.victronenergy.hub4/PvPowerLimiterActive"
+				secondaryText: dataValue === 0 ? CommonWords.no : CommonWords.yes
 			}
 		}
 	}

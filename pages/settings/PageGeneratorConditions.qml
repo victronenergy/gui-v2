@@ -31,7 +31,7 @@ Page {
 				//% "Unavailable monitor, set another"
 				defaultSecondaryText: qsTrId("page_generator_conditions_unavailable_monitor_set_another")
 				source: bindPrefix + "/BatteryService"
-				visible: dataPoint.value !== "default"
+				visible: dataValue !== "default"
 			}
 
 			ListRadioButtonGroup {
@@ -53,7 +53,7 @@ Page {
 
 				//% "Do not run generator when AC1 is in use"
 				text: qsTrId("page_generator_conditions_do_not_run_generator_when_ac1_is_in_use")
-				source: bindPrefix + "/StopWhenAc1Available"
+				dataSource: bindPrefix + "/StopWhenAc1Available"
 				onClicked: {
 					if (!checked) {
 						//% "Make sure that the generator is not connected to the inverter AC input 1 when using this option."

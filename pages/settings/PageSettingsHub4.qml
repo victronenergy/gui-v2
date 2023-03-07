@@ -49,7 +49,7 @@ Page {
 
 			//% "Grid metering"
 			text: qsTrId("settings_ess_grid_metering")
-			source: "com.victronenergy.settings/Settings/CGwacs/RunWithoutGridMeter"
+			dataSource: "com.victronenergy.settings/Settings/CGwacs/RunWithoutGridMeter"
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			optionModel: [
 				//% "External meter"
@@ -62,17 +62,17 @@ Page {
 		ListSwitch {
 			//% "Inverter AC output in use"
 			text: qsTrId("settings_ess_inverter_ac_output_in_use")
-			source: "com.victronenergy.settings/Settings/SystemSetup/HasAcOutSystem"
+			dataSource: "com.victronenergy.settings/Settings/SystemSetup/HasAcOutSystem"
 			visible: defaultVisible && withoutGridMeter.currentIndex === 0
 		}
 
 		ListRadioButtonGroup {
 			//% "Multiphase regulation"
 			text: qsTrId("settings_ess_multiphase_regulation")
-			source: essMode.source
+			dataSource: essMode.source
 			visible: defaultVisible
 				 && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				 && batteryLifeState.dataPoint.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				 && batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			defaultSecondaryText: ""
 			optionModel: [
 				//% "Total of all phases"
@@ -102,7 +102,7 @@ Page {
 			button.text: Global.ess.minimumStateOfCharge + "%"
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataPoint.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: {
 				if (!_minSocDialog) {
 					_minSocDialog = minSocDialogComponent.createObject(Global.dialogLayer)
@@ -122,7 +122,7 @@ Page {
 			text: qsTrId("settings_ess_active_soc_limit")
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataPoint.value)
+				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataValue)
 			secondaryText: Math.max(Global.ess.minimumStateOfCharge.value || 0, socLimit.value || 0) + "%"
 		}
 
@@ -131,10 +131,10 @@ Page {
 
 			//% "BatteryLife state"
 			text: qsTrId("settings_ess_batteryLife_state")
-			source: "com.victronenergy.settings/Settings/CGwacs/BatteryLife/State"
+			dataSource: "com.victronenergy.settings/Settings/CGwacs/BatteryLife/State"
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.ess.isBatteryLifeActive(dataPoint.value)
+				&& Global.ess.isBatteryLifeActive(dataValue)
 			enabled: false
 			optionModel: [
 				// Values below taken from MaintenanceState enum in dbus-cgwacs
@@ -164,9 +164,9 @@ Page {
 
 			onCheckedChanged: {
 				if (checked && maxChargePower.value < 0) {
-					maxChargePower.dataPoint.setValue(1000)
+					maxChargePower.setDataValue(1000)
 				} else if (!checked && maxChargePower.value >= 0) {
-					maxChargePower.dataPoint.setValue(-1)
+					maxChargePower.setDataValue(-1)
 				}
 			}
 		}
@@ -177,7 +177,7 @@ Page {
 			//% "Maximum charge power"
 			text: qsTrId("settings_ess_max_charge_power")
 			visible: defaultVisible && maxChargePowerSwitch.visible && maxChargePowerSwitch.checked
-			source: "com.victronenergy.settings/Settings/CGwacs/MaxChargePower"
+			dataSource: "com.victronenergy.settings/Settings/CGwacs/MaxChargePower"
 			suffix: "W"
 			to: 200000
 			stepSize: 50
@@ -191,13 +191,13 @@ Page {
 			checked: maxDischargePower.value >= 0
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataPoint.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 			onCheckedChanged: {
 				if (checked && maxDischargePower.value < 0) {
-					maxDischargePower.dataPoint.setValue(1000)
+					maxDischargePower.setDataValue(1000)
 				} else if (!checked && maxDischargePower.value >= 0) {
-					maxDischargePower.dataPoint.setValue(-1)
+					maxDischargePower.setDataValue(-1)
 				}
 			}
 		}
@@ -208,7 +208,7 @@ Page {
 			//% "Maximum inverter power"
 			text: qsTrId("settings_ess_max_inverter_power")
 			visible: defaultVisible && maxInverterPowerSwitch.visible && maxInverterPowerSwitch.checked
-			source: "com.victronenergy.settings/Settings/CGwacs/MaxDischargePower"
+			dataSource: "com.victronenergy.settings/Settings/CGwacs/MaxDischargePower"
 			suffix: "W"
 			to: 300000
 			stepSize: 50
@@ -219,8 +219,8 @@ Page {
 			text: qsTrId("settings_ess_grid_setpoint")
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataPoint.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
-			source: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
+				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+			dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
 			suffix: "W"
 			stepSize: 10
 		}
@@ -241,7 +241,7 @@ Page {
 			text: qsTrId("settings_ess_scheduled_charging")
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataPoint.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 			onClicked: {
 				Global.pageManager.pushPage(scheduledChargeComponent, { title: text })

@@ -9,21 +9,23 @@ import "/components/Utils.js" as Utils
 ListButton {
 	id: root
 
-	property alias source: dataPoint.source
-	readonly property alias dataPoint: dataPoint     // value is assumed to be in seconds
+	property alias dataSource: dataPoint.source
+	readonly property alias dataValue: dataPoint.value
+	readonly property alias dataValid: dataPoint.valid
+	function setDataValue(v) { dataPoint.setValue(v) }
 
 	property int hour: Math.floor(value / 3600)
 	property int minute: Math.floor(value % 3600 / 60)
 	property int maximumHour: 23
 	property int maximumMinute: 59
 
-	// total value, in seconds
-	property real value: !dataPoint.valid ? 0 : dataPoint.value
+	// total value, in seconds (data value is assumed to be in seconds)
+	property real value: !dataValid ? 0 : dataValue
 
 	property var _timeSelector
 
 	button.text: hour < 0 || minute < 0 ? "--" : ClockTime.formatTime(hour, minute)
-	enabled: source === "" || dataPoint.valid
+	enabled: source === "" || dataValid
 
 	onClicked: {
 		if (!_timeSelector) {

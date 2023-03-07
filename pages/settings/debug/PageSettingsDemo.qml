@@ -29,7 +29,7 @@ Page {
 
 			ListSwitch {
 				text: "Toggle setting: /Settings/Alarm/Audible"
-				source: "com.victronenergy.settings/Settings/Alarm/Audible"
+				dataSource: "com.victronenergy.settings/Settings/Alarm/Audible"
 			}
 
 			ListRadioButtonGroup {
@@ -69,7 +69,7 @@ Page {
 
 			ListTextItem {
 				text: "Text only, from dbus source"
-				source: "com.victronenergy.system/FirmwareBuild"
+				dataSource: "com.victronenergy.system/FirmwareBuild"
 			}
 
 			ListTextGroup {

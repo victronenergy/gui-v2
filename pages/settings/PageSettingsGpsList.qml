@@ -79,7 +79,7 @@ Page {
 								//: Format of reported GPS data
 								//% "Format"
 								text: qsTrId("settings_gps_format")
-								source: "com.victronenergy.settings/Settings/Gps/Format"
+								dataSource: "com.victronenergy.settings/Settings/Gps/Format"
 								optionModel: [
 									//: Example of GPS data in the 'Degrees, Minutes, Seconds' format
 									//% "52° 20' 41.6\" N, 5° 13' 12.3\" E"
@@ -97,7 +97,7 @@ Page {
 								//: Speed unit for reported GPS data
 								//% "Speed Unit"
 								text: qsTrId("settings_gps_speed_unit")
-								source: "com.victronenergy.settings/Settings/Gps/SpeedUnit"
+								dataSource: "com.victronenergy.settings/Settings/Gps/SpeedUnit"
 								optionModel: [
 									//% "Kilometers per hour"
 									{ display: qsTrId("settings_gps_format_kmh"), value: "km/h" },

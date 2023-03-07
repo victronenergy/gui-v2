@@ -10,7 +10,7 @@ ListRadioButtonGroup {
 
 	//% "Access level"
 	text: qsTrId("settings_access_level")
-	source: "com.victronenergy.settings/Settings/System/AccessLevel"
+	dataSource: "com.victronenergy.settings/Settings/System/AccessLevel"
 	writeAccessLevel: VenusOS.User_AccessType_User
 
 	optionModel: [

@@ -18,13 +18,13 @@ Page {
 
 				//% "Firmware version"
 				text: qsTrId("settings_firmware_version")
-				source: "com.victronenergy.platform/Firmware/Installed/Version"
+				dataSource: "com.victronenergy.platform/Firmware/Installed/Version"
 			}
 
 			ListTextItem {
 				//% "Build date/time"
 				text: qsTrId("settings_build_date_time")
-				source: "com.victronenergy.platform/Firmware/Installed/Build"
+				dataSource: "com.victronenergy.platform/Firmware/Installed/Build"
 			}
 
 			ListNavigationItem {

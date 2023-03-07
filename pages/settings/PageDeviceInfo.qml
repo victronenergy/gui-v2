@@ -14,66 +14,66 @@ Page {
 		model: ObjectModel {
 			ListTextItem {
 				text: CommonWords.connected
-				source: root.bindPrefix + "/Connected"
-				secondaryText: dataPoint.value === 1 ? CommonWords.yes : CommonWords.no
+				dataSource: root.bindPrefix + "/Connected"
+				secondaryText: dataValue === 1 ? CommonWords.yes : CommonWords.no
 			}
 
 			ListTextItem {
 				//% "Connection"
 				text: qsTrId("settings_deviceinfo_connection")
-				source: root.bindPrefix + "/Mgmt/Connection"
+				dataSource: root.bindPrefix + "/Mgmt/Connection"
 			}
 
 			ListTextItem {
 				//% "Product"
 				text: qsTrId("settings_deviceinfo_product")
-				source: root.bindPrefix + "/ProductName"
+				dataSource: root.bindPrefix + "/ProductName"
 			}
 
 			ListTextField {
 				//% "Name"
 				text: qsTrId("settings_deviceinfo_name")
-				source: root.bindPrefix + "/CustomName"
+				dataSource: root.bindPrefix + "/CustomName"
 				textField.maximumLength: 32
 			}
 
 			ListTextItem {
 				//% "Product ID"
 				text: qsTrId("settings_deviceinfo_product_id")
-				source: root.bindPrefix + "/ProductId"
+				dataSource: root.bindPrefix + "/ProductId"
 			}
 
 			ListTextItem {
 				//% "Firmware version"
 				text: qsTrId("settings_deviceinfo_firmware_version")
-				source: root.bindPrefix + "/FirmwareVersion"
+				dataSource: root.bindPrefix + "/FirmwareVersion"
 			}
 
 			ListTextItem {
 				//% "Hardware version"
 				text: qsTrId("settings_deviceinfo_hardware_version")
-				source: root.bindPrefix + "/HardwareVersion"
-				visible: dataPoint.valid
+				dataSource: root.bindPrefix + "/HardwareVersion"
+				visible: dataValid
 			}
 
 			ListTextItem {
 				//% "VRM instance"
 				text: qsTrId("settings_deviceinfo_vrm_instance")
-				source: root.bindPrefix + "/DeviceInstance"
+				dataSource: root.bindPrefix + "/DeviceInstance"
 			}
 
 			ListTextItem {
 				//% "Serial number"
 				text: qsTrId("settings_deviceinfo_serial")
-				source: root.bindPrefix + "/Serial"
-				visible: dataPoint.valid
+				dataSource: root.bindPrefix + "/Serial"
+				visible: dataValid
 			}
 
 			ListTextItem {
 				//% "Device name"
 				text: qsTrId("settings_deviceinfo_device_name")
-				source: root.bindPrefix + "/DeviceName"
-				visible: dataPoint.valid
+				datadataSource: root.bindPrefix + "/DeviceName"
+				visible: dataValid
 			}
 		}
 	}

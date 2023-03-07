@@ -37,13 +37,13 @@ Page {
 
 				//% "Use AC Load to start/stop"
 				text: qsTrId("page_generator_ac_load_use_ac_load")
-				source: bindPrefix + "/Enabled"
+				dataSource: bindPrefix + "/Enabled"
 			}
 
 			ListRadioButtonGroup {
 				//% "Measurement"
 				text: qsTrId("page_generator_ac_load_measurement")
-				source: bindPrefix + "/Measurement"
+				dataSource: bindPrefix + "/Measurement"
 				optionModel: [
 					//% "Total consumption"
 					{ display: qsTrId("total_consumption"), value: 0 },
@@ -59,8 +59,8 @@ Page {
 				//% "Start when power is higher than"
 				text: qsTrId("start_when_power_is_higher_than")
 				onMinValueReached: minValueWarning()
-				visible: valid
-				source: bindPrefix + "/StartValue"
+				visible: dataValid
+				dataSource: bindPrefix + "/StartValue"
 				suffix: "W"
 				stepSize: 5
 				from: stopValue.value + stepSize
@@ -71,8 +71,8 @@ Page {
 				id: quietHoursStartValue
 				text: CommonWords.start_value_during_quiet_hours
 				onMinValueReached: minValueWarning()
-				visible: valid
-				source: bindPrefix + "/QuietHoursStartValue"
+				visible: dataValid
+				dataSource: bindPrefix + "/QuietHoursStartValue"
 				suffix: "W"
 				stepSize: 5
 				from: quietHoursStopValue.value + stepSize
@@ -81,8 +81,8 @@ Page {
 			ListSpinBox {
 				id: startTime
 				text: CommonWords.start_after_the_condition_is_reached_for
-				visible: valid
-				source: bindPrefix + "/StartTimer"
+				visible: dataValid
+				dataSource: bindPrefix + "/StartTimer"
 				suffix: "s"
 				stepSize: 1
 			}
@@ -92,31 +92,31 @@ Page {
 				//% "Stop when power is lower than"
 				text: qsTrId("stop_when_power_is_lower_than")
 				onMaxValueReached: maxValueWarning()
-				visible: valid
-				source: bindPrefix + "/StopValue"
+				visible: dataValid
+				dataSource: bindPrefix + "/StopValue"
 				suffix: "W"
 				stepSize: 5
 				from: 0
-				to: startValue.valid ? startValue.value - stepSize : 1000000
+				to: startValue.dataValid ? startValue.value - stepSize : 1000000
 			}
 
 			ListSpinBox {
 				id: quietHoursStopValue
 				text: CommonWords.stop_value_during_quiet_hours
 				onMaxValueReached: maxValueWarning()
-				visible: valid
-				source: bindPrefix + "/QuietHoursStopValue"
+				visible: dataValid
+				dataSource: bindPrefix + "/QuietHoursStopValue"
 				suffix: "W"
 				stepSize: 5
-				to: quietHoursStartValue.valid ? quietHoursStartValue.value - stepSize : 1000000
+				to: quietHoursStartValue.dataValid ? quietHoursStartValue.value - stepSize : 1000000
 				from: 0
 			}
 
 			ListSpinBox {
 				id: stopTime
 				text: CommonWords.stop_after_the_condition_is_reached_for
-				visible: valid
-				source: bindPrefix + "/StopTimer"
+				visible: dataValid
+				dataSource: bindPrefix + "/StopTimer"
 				suffix: "s"
 				stepSize: 1
 			}

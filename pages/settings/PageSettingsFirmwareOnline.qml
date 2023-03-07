@@ -17,7 +17,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Auto update"
 				text: qsTrId("settings_auto_update")
-				source: "com.victronenergy.settings/Settings/System/AutoUpdate"
+				dataSource: "com.victronenergy.settings/Settings/System/AutoUpdate"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.Firmware_AutoUpdate_Disabled },
@@ -33,7 +33,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Update feed"
 				text: qsTrId("settings_update_feed")
-				source: "com.victronenergy.settings/Settings/System/ReleaseType"
+				dataSource: "com.victronenergy.settings/Settings/System/ReleaseType"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Latest release"
@@ -52,7 +52,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Image type"
 				text: qsTrId("settings_firmware_image_type")
-				source: "com.victronenergy.settings/Settings/System/ImageType"
+				dataSource: "com.victronenergy.settings/Settings/System/ImageType"
 				visible: largeImageSupport.value === 1
 				optionModel: [
 					//% "Normal"
@@ -111,7 +111,7 @@ Page {
 			ListTextItem {
 				//% "Update build date/time"
 				text: qsTrId("settings_firmware_update_build_date_time")
-				source: "com.victronenergy.platform/Firmware/Online/AvailableBuild"
+				dataSource: "com.victronenergy.platform/Firmware/Online/AvailableBuild"
 				visible: installUpdate.visible && Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 		}

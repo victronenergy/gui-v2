@@ -49,8 +49,8 @@ Page {
 
 				//% "Internet"
 				text: qsTrId("page_settings_gsm_internet")
-				secondaryText: value === 1 ? CommonWords.online : CommonWords.offline
-				source: bindPrefix + "/Connected"
+				secondaryText: dataValue === 1 ? CommonWords.online : CommonWords.offline
+				dataSource: bindPrefix + "/Connected"
 			}
 
 			ListTextItem {
@@ -58,8 +58,8 @@ Page {
 
 				//% "Carrier"
 				text: qsTrId("page_settings_gsm_carrier")
-				secondaryText: valid ? value + " " + Utils.simplifiedNetworkType(networkType.value) : "--"
-				source: bindPrefix + "/NetworkName"
+				secondaryText: dataValid ? dataValue + " " + Utils.simplifiedNetworkType(networkType.value) : "--"
+				dataSource: bindPrefix + "/NetworkName"
 			}
 
 			ListItem {
@@ -87,13 +87,13 @@ Page {
 			ListItem {
 				//% "It may be necessary to configure the APN settings below in this page, contact your operator for details.\nIf that doesn't work, check sim-card in a phone to make sure that there is credit and/or it is registered to be used for data."
 				text: qsTrId("page_settings_gsm_error_message")
-				visible: status.value === 0 && carrier.valid && simStatus.value === 1000
+				visible: status.dataValue === 0 && carrier.dataValid && simStatus.value === 1000
 			}
 
 			ListSwitch {
 				//% "Allow roaming"
 				text: qsTrId("page_settings_gsm_allow_roaming")
-				source: settingsBindPrefix + "/RoamingPermitted"
+				dataSource: settingsBindPrefix + "/RoamingPermitted"
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
@@ -103,7 +103,7 @@ Page {
 				//% "Unknown"
 				//defaultSecondaryText: qsTrId("page_settings_gsm_unknown")
 				secondaryText: {
-					switch (value) {
+					switch (dataValue) {
 					case 10:
 						//% "SIM not inserted"
 						return qsTrId("page_settings_gsm_sim_not_inserted")
@@ -133,23 +133,23 @@ Page {
 						return qsTrId("page_settings_gsm_unknown_error")
 					}
 				}
-				source: bindPrefix + "/SimStatus"
+				dataSource: bindPrefix + "/SimStatus"
 			}
 
 			ListTextField {
 				//% "PIN"
 				text: qsTrId("page_settings_gsm_pin")
 				textField.maximumLength: 35
-				source: settingsBindPrefix + "/PIN"
+				dataSource: settingsBindPrefix + "/PIN"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				// Show only when PIN required
-				visible: valid && [11, 16].indexOf(simStatus.value)  > -1
+				visible: dataValid && [11, 16].indexOf(simStatus.value)  > -1
 			}
 
 			ListTextItem {
 				text: CommonWords.ip_address
-				source: bindPrefix + "/IP"
-				visible: status.value === 1
+				dataSource: bindPrefix + "/IP"
+				visible: status.dataValue === 1
 			}
 
 			ListNavigationItem {
@@ -182,7 +182,7 @@ Page {
 								ListTextField {
 									//% "APN name"
 									text: qsTrId("page_settings_gsm_apn_name")
-									source: root.settingsBindPrefix + "/APN"
+									dataSource: root.settingsBindPrefix + "/APN"
 									visible: !useDefaultApn.checked
 									textField.maximumLength: 50
 								}
@@ -199,8 +199,8 @@ Page {
 				checked: authUser.value !== "" && authPass.value !== ""
 				onCheckedChanged: {
 					if (!checked) {
-						authUser.item.setValue("")
-						authPass.item.setValue("")
+						authUser.setDataValue("")
+						authPass.setDataValue("")
 					}
 				}
 			}
@@ -210,7 +210,7 @@ Page {
 
 				//% "User name"
 				text: qsTrId("page_settings_gsm_user_name")
-				source: settingsBindPrefix + "/User"
+				dataSource: settingsBindPrefix + "/User"
 				visible: useAuth.checked
 			}
 
@@ -218,15 +218,15 @@ Page {
 				id: authPass
 
 				text: CommonWords.password
-				source: settingsBindPrefix + "/Password"
+				dataSource: settingsBindPrefix + "/Password"
 				visible: useAuth.checked
 			}
 
 			ListTextItem {
 				//% "IMEI"
 				text: qsTrId("page_settings_gsm_imei")
-				source: bindPrefix + "/IMEI"
-				visible: valid
+				dataSource: bindPrefix + "/IMEI"
+				visible: dataValid
 			}
 		}
 	}

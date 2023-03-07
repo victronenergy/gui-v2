@@ -9,16 +9,17 @@ import "/components/Utils.js" as Utils
 ListButton {
 	id: root
 
-	property alias source: dataPoint.source
-	readonly property alias dataPoint: dataPoint
+	property alias dataSource: dataPoint.source
+	readonly property alias dataValue: dataPoint.value
+	readonly property alias dataValid: dataPoint.valid
+	function setDataValue(v) { dataPoint.setValue(v) }
 
-	property real value: !dataPoint.valid ? 0 : dataPoint.value
+	property real value: !dataValid ? 0 : dataValue
 	property string suffix
 	property int decimals
 	property int from: dataPoint.hasMin ? dataPoint.min || 0 : 0
 	property int to: dataPoint.hasMax ? dataPoint.max || 1000 : 1000
 	property real stepSize: 1
-	readonly property alias valid: dataPoint.valid
 
 	property var _numberSelector
 
@@ -27,7 +28,7 @@ ListButton {
 	signal selectorAccepted(newValue: var)
 
 	button.text: value === undefined ? "--" : Utils.toFloat(value, decimals) + root.suffix
-	enabled: source === "" || dataPoint.valid
+	enabled: source === "" || dataValid
 
 	onClicked: {
 		if (!_numberSelector) {

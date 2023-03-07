@@ -21,7 +21,7 @@ Page {
 					? qsTrId("settings_relay_function_relay1")
 					  //% "Function"
 					: qsTrId("settings_relay_function")
-				source: "com.victronenergy.settings/Settings/Relay/Function"
+				dataSource: "com.victronenergy.settings/Settings/Relay/Function"
 				optionModel: [
 					//% "Alarm relay"
 					{ display: qsTrId("settings_relay_alarm_relay"), value: VenusOS.Relay_Function_Alarm },
@@ -41,7 +41,7 @@ Page {
 
 				//% "Alarm relay polarity"
 				text: qsTrId("settings_relay_alarm_polarity")
-				source: "com.victronenergy.settings/Settings/Relay/Polarity"
+				dataSource: "com.victronenergy.settings/Settings/Relay/Polarity"
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Alarm
 				optionModel: [
 					//% "Normally open"
@@ -76,7 +76,7 @@ Page {
 					? qsTrId("settings_relay_relay1on")
 					  //% "Relay on"
 					: qsTrId("settings_relay_on")
-				source: "com.victronenergy.system/Relay/0/State"
+				dataSource: "com.victronenergy.system/Relay/0/State"
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Manual
 			}
 
@@ -85,7 +85,7 @@ Page {
 
 				//% "Function (Relay 2)"
 				text: qsTrId("settings_relay_function_relay2")
-				source: "com.victronenergy.settings/Settings/Relay/1/Function"
+				dataSource: "com.victronenergy.settings/Settings/Relay/1/Function"
 				visible: relay1State.valid
 				optionModel: [
 					//% "Manual"
@@ -100,7 +100,7 @@ Page {
 
 				//% "Relay 2 on"
 				text: qsTrId("settings_relay_relay2on")
-				source: "com.victronenergy.system/Relay/1/State"
+				dataSource: "com.victronenergy.system/Relay/1/State"
 				visible: relay1State.valid && relay1Function.currentValue === VenusOS.Relay_Function_Manual
 			}
 

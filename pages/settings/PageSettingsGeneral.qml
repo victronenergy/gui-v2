@@ -34,7 +34,7 @@ Page {
 
 				//% "SSH on LAN"
 				text: qsTrId("settings_ssh_on_lan")
-				source: "com.victronenergy.settings/Settings/System/SSHLocal"
+				dataSource: "com.victronenergy.settings/Settings/System/SSHLocal"
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 
@@ -43,7 +43,7 @@ Page {
 
 				//% "Remote support"
 				text: qsTrId("settings_remote_support")
-				source: "com.victronenergy.settings/Settings/System/RemoteSupport"
+				dataSource: "com.victronenergy.settings/Settings/System/RemoteSupport"
 			}
 
 			ListTextItem {
@@ -58,7 +58,7 @@ Page {
 
 				//% "Remote support IP and port"
 				text: qsTrId("settings_remote_ip_and_support")
-				source: "com.victronenergy.settings/Settings/System/RemoteSupportIpAndPort"
+				dataSource: "com.victronenergy.settings/Settings/System/RemoteSupportIpAndPort"
 				visible: defaultVisible && remoteSupportOnOff.checked
 			}
 
@@ -76,7 +76,7 @@ Page {
 			ListSwitch {
 				//% "Audible alarm"
 				text: qsTrId("settings_audible_alarm")
-				source: "com.victronenergy.settings/Settings/Alarm/Audible"
+				dataSource: "com.victronenergy.settings/Settings/Alarm/Audible"
 				visible: defaultVisible && buzzerStateDataPoint.valid
 
 				DataPoint {

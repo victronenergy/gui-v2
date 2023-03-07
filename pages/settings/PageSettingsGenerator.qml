@@ -26,7 +26,7 @@ Page {
 			ListSpinBox {
 				//% "Minimum run time"
 				text: qsTrId("page_settings_generator_minimum_run_time")
-				source: settingsBindPrefix + "/MinimumRuntime"
+				dataSource: settingsBindPrefix + "/MinimumRuntime"
 				suffix: "m"
 				decimals: 0
 			}
@@ -35,7 +35,7 @@ Page {
 				property bool generatorIsSet: acIn1Source.value === 2 || acIn2Source.value === 2
 				//% "Detect generator at AC input"
 				text: qsTrId("page_settings_generator_detect_generator_at_ac_input")
-				source: settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
+				dataSource: settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
 				enabled: valid && (generatorIsSet || checked)
 				onClicked: {
 					if (!checked) {
@@ -68,14 +68,14 @@ Page {
 				id: timeZones
 
 				text: CommonWords.quiet_hours
-				source: settingsBindPrefix + "/QuietHours/Enabled"
+				dataSource: settingsBindPrefix + "/QuietHours/Enabled"
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListTimeSelector {
 				//% "Quiet hours start time"
 				text: qsTrId("page_settings_generator_quiet_hours_start_time")
-				source: settingsBindPrefix + "/QuietHours/StartTime"
+				dataSource: settingsBindPrefix + "/QuietHours/StartTime"
 				visible: defaultVisible && timeZones.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
@@ -83,7 +83,7 @@ Page {
 			ListTimeSelector {
 				//% "Quiet hours end time"
 				text: qsTrId("page_settings_generator_quiet_hours_end_time")
-				source: settingsBindPrefix + "/QuietHours/EndTime"
+				dataSource: settingsBindPrefix + "/QuietHours/EndTime"
 				visible: defaultVisible && timeZones.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
@@ -120,7 +120,7 @@ Page {
 
 				//% "Generator total run time (hours)"
 				text: qsTrId("page_settings_generator_total_run_time")
-				source: settingsBindPrefix + "/AccumulatedTotal"
+				dataSource: settingsBindPrefix + "/AccumulatedTotal"
 				secondaryText: Math.round(value / 60 / 60)
 				maximumHour: 999999
 				enabled: userHasWriteAccess && state.value === 0

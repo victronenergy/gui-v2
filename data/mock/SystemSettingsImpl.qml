@@ -60,7 +60,7 @@ QtObject {
 		// Settings that are converted for convenient UI access
 		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
 		Global.systemSettings.demoMode.setValue(VenusOS.SystemSettings_DemoModeActive)
-		Global.systemSettings.colorScheme.setValue(Theme.Dark)
+		Global.systemSettings.colorScheme.setValue(Theme.Light)
 		Global.systemSettings.energyUnit.setValue(VenusOS.Units_Energy_Watt)
 		Global.systemSettings.temperatureUnit.setValue(VenusOS.Units_Temperature_Celsius)
 		Global.systemSettings.volumeUnit.setValue(VenusOS.Units_Volume_CubicMeter)
