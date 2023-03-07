@@ -238,5 +238,6 @@ QtObject {
 		const config = configs[configIndex]
 		Global.mockDataSimulator.setTanksRequested(config.tanks)
 		Global.mockDataSimulator.setEnvironmentInputsRequested(config.inputs)
+		return config.name
 	}
 }
