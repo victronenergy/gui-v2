@@ -55,6 +55,7 @@ Slider {
 		icon.width: Theme.geometry.listItem.slider.button.size
 		icon.height: Theme.geometry.listItem.slider.button.size
 		icon.source: "/images/icon_minus.svg"
+		backgroundColor: "transparent"
 
 		onClicked: {
 			if (root.value > root.from) {
@@ -74,6 +75,7 @@ Slider {
 		icon.width: Theme.geometry.listItem.slider.button.size
 		icon.height: Theme.geometry.listItem.slider.button.size
 		icon.source: "/images/icon_plus.svg"
+		backgroundColor: "transparent"
 
 		onClicked: {
 			if (root.value < root.to) {
