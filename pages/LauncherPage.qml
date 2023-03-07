@@ -95,7 +95,6 @@ Page {
 		}
 	}
 
-
 	NavBar {
 		id: navBar
 

@@ -17,8 +17,8 @@ Item {
 	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded
 	on_ReadyToInitChanged: {
 		if (_readyToInit && pageStack.depth === 0) {
-			console.warn("Data sources ready, creating MainPage.qml")
-			pageStack.push("qrc:/pages/MainPage.qml")
+			console.warn("Data sources ready, creating LauncherPage.qml")
+			pageStack.push("qrc:/pages/LauncherPage.qml")
 		}
 	}
 
