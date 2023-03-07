@@ -26,11 +26,9 @@
         <file>components/InputPanel.qml</file>
         <file>components/LoadGraph.qml</file>
         <file>components/LoadGraphShapePath.qml</file>
-        <file>components/MainView.qml</file>
         <file>components/NavBar.qml</file>
         <file>components/NavButton.qml</file>
         <file>components/NotificationDelegate.qml</file>
-        <file>components/NotificationLayer.qml</file>
         <file>components/NotificationsView.qml</file>
         <file>components/Page.qml</file>
         <file>components/PageStack.qml</file>
@@ -279,8 +277,10 @@
         <file>pages/BriefPage.qml</file>
         <file>pages/ControlCardsPage.qml</file>
         <file>pages/EnvironmentTab.qml</file>
-        <file>pages/LevelsPage.qml</file>
         <file>pages/LauncherPage.qml</file>
+        <file>pages/LevelsPage.qml</file>
+        <file>pages/MainView.qml</file>
+        <file>pages/NotificationLayer.qml</file>
         <file>pages/NotificationsPage.qml</file>
         <file>pages/OverviewPage.qml</file>
         <file>pages/PageManager.qml</file>
