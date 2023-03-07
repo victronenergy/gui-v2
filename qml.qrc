@@ -280,7 +280,7 @@
         <file>pages/ControlCardsPage.qml</file>
         <file>pages/EnvironmentTab.qml</file>
         <file>pages/LevelsPage.qml</file>
-        <file>pages/MainPage.qml</file>
+        <file>pages/LauncherPage.qml</file>
         <file>pages/NotificationsPage.qml</file>
         <file>pages/OverviewPage.qml</file>
         <file>pages/PageManager.qml</file>

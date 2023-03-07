@@ -489,8 +489,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "EnvironmentTab");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/LevelsPage.qml")),
 		"Victron.VenusOS", 2, 0, "LevelsPage");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/MainPage.qml")),
-		"Victron.VenusOS", 2, 0, "MainPage");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/LauncherPage.qml")),
+		"Victron.VenusOS", 2, 0, "LauncherPage");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/OverviewPage.qml")),
 		"Victron.VenusOS", 2, 0, "OverviewPage");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/SettingsPage.qml")),
