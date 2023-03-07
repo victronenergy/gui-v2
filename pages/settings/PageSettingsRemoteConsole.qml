@@ -81,6 +81,7 @@ Page {
 				text: qsTrId("settings_remoteconsole_enable_on_lan")
 				dataSource: "com.victronenergy.settings/Settings/System/VncLocal"
 				height: implicitHeight + vncOnLanCaption.height
+				primaryLabel.anchors.verticalCenterOffset: -(vncOnLanCaption.height / 2)
 
 				ListLabel {
 					id: vncOnLanCaption
