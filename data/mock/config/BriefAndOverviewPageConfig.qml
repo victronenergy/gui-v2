@@ -106,5 +106,6 @@ QtObject {
 		Global.mockDataSimulator.setSolarChargersRequested(config.solar)
 		Global.mockDataSimulator.setSystemRequested(config.system)
 		Global.mockDataSimulator.setBatteryRequested(config.battery)
+		return config.name
 	}
 }
