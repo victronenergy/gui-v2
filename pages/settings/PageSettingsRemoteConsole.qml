@@ -58,7 +58,7 @@ Page {
 
 				//% "Enable on VRM"
 				text: qsTrId("settings_remoteconsole_enable_on_vrm")
-				source: "com.victronenergy.settings/Settings/System/VncInternet"
+				dataSource: "com.victronenergy.settings/Settings/System/VncInternet"
 			}
 
 			ListTextItem {
@@ -79,7 +79,7 @@ Page {
 
 				//% "Enable on LAN"
 				text: qsTrId("settings_remoteconsole_enable_on_lan")
-				source: "com.victronenergy.settings/Settings/System/VncLocal"
+				dataSource: "com.victronenergy.settings/Settings/System/VncLocal"
 				height: implicitHeight + vncOnLanCaption.height
 
 				ListLabel {

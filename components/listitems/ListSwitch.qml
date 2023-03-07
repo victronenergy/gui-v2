@@ -8,14 +8,15 @@ import Victron.VenusOS
 ListItem {
 	id: root
 
+	property alias dataSource: dataPoint.source
+	readonly property alias dataValue: dataPoint.value
+	readonly property alias dataValid: dataPoint.valid
+	function setDataValue(v) { dataPoint.setValue(v) }
+
 	property alias checked: switchItem.checked
 	property alias secondaryText: secondaryLabel.text
 	property bool updateOnClick: true
 	property bool invertSourceValue
-
-	property alias source: dataPoint.source
-	readonly property alias dataPoint: dataPoint
-	readonly property alias valid: dataPoint.valid
 
 	signal clicked()
 
@@ -35,7 +36,7 @@ ListItem {
 	}
 
 	down: mouseArea.containsPress
-	enabled: userHasWriteAccess && (source === "" || dataPoint.valid)
+	enabled: userHasWriteAccess && (dataSource === "" || dataValid)
 
 	content.children: [
 		Label {
@@ -46,7 +47,7 @@ ListItem {
 		},
 		Switch {
 			id: switchItem
-			checked: invertSourceValue ? dataPoint.value === 0 : dataPoint.value === 1
+			checked: invertSourceValue ? dataValue === 0 : dataValue === 1
 			onClicked: root._setChecked(!checked)
 		}
 	]

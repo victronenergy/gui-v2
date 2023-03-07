@@ -16,13 +16,13 @@ Page {
 			ListTextItem {
 				//% "Model name"
 				text: qsTrId("settings_vecan_model_name")
-				source: root.bindPrefix + "/ModelName"
+				dataSource: root.bindPrefix + "/ModelName"
 			}
 
 			ListTextItem {
 				//% "Custom name"
 				text: qsTrId("settings_vecan_custom_name")
-				source: root.bindPrefix + "/CustomName"
+				dataSource: root.bindPrefix + "/CustomName"
 			}
 
 			ListLabel {
@@ -33,37 +33,37 @@ Page {
 			ListSpinBox {
 				//% "Device Instance"
 				text: qsTrId("settings_vecan_device_instance")
-				source: root.bindPrefix + "/DeviceInstance"
+				dataSource: root.bindPrefix + "/DeviceInstance"
 			}
 
 			ListTextItem {
 				//% "Manufacturer"
 				text: qsTrId("settings_vecan_manufacturer")
-				source: root.bindPrefix + "/Manufacturer"
+				dataSource: root.bindPrefix + "/Manufacturer"
 			}
 
 			ListTextItem {
 				//% "Network Address"
 				text: qsTrId("settings_vecan_nad")
-				source: root.bindPrefix + "/Nad"
+				dataSource: root.bindPrefix + "/Nad"
 			}
 
 			ListTextItem {
 				//% "Firmware Version"
 				text: qsTrId("settings_vecan_firmware_version")
-				source: root.bindPrefix + "/FirmwareVersion"
+				dataSource: root.bindPrefix + "/FirmwareVersion"
 			}
 
 			ListTextItem {
 				//% "Serial Number"
 				text: qsTrId("settings_vecan_serial")
-				source: root.bindPrefix + "/Serial"
+				dataSource: root.bindPrefix + "/Serial"
 			}
 
 			ListTextItem {
 				//% "Unique Identity Number"
 				text: qsTrId("settings_vecan_uid")
-				source: root.bindPrefix + "/N2kUniqueNumber"
+				dataSource: root.bindPrefix + "/N2kUniqueNumber"
 			}
 		}
 	}

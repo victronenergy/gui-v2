@@ -9,15 +9,18 @@ import "/components/Utils.js" as Utils
 ListButton {
 	id: root
 
-	property alias source: dataPoint.source
-	readonly property alias dataPoint: dataPoint     // value is assumed to be in seconds
+	property alias dataSource: dataPoint.source
+	readonly property alias dataValue: dataPoint.value
+	readonly property alias dataValid: dataPoint.valid
+	function setDataValue(v) { dataPoint.setValue(v) }
 
-	property var date: dataPoint.valid ? new Date(dataPoint.value * 1000) : null
+	// data value is assumed to be in seconds
+	property var date: dataValid ? new Date(dataValue * 1000) : null
 
 	property var _dateSelector
 
 	button.text: date == null ? "--" : Qt.formatDate(date, "yyyy-MM-dd")
-	enabled: source === "" || dataPoint.valid
+	enabled: source === "" || dataValid
 
 	onClicked: {
 		if (!_dateSelector) {

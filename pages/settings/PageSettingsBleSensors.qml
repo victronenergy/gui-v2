@@ -44,14 +44,14 @@ Page {
 			ListSwitch {
 				id: enable
 				text: CommonWords.enable
-				source: "com.victronenergy.settings/Settings/Services/BleSensors"
+				dataSource: "com.victronenergy.settings/Settings/Services/BleSensors"
 			}
 
 			ListSwitch {
 				id: contScan
 				//% "Continuous scanning"
 				text: qsTrId("settings_continuous_scan")
-				source: "com.victronenergy.ble/ContinuousScan"
+				dataSource: "com.victronenergy.ble/ContinuousScan"
 				visible: enable.checked
 			}
 
@@ -84,7 +84,7 @@ Page {
 							}
 							delegate: ListTextItem {
 								text: model.item.itemParent().id
-								source: Utils.normalizedSource(model.item.uid)
+								dataSource: Utils.normalizedSource(model.item.uid)
 							}
 						}
 					}
@@ -106,7 +106,7 @@ Page {
 
 					delegate: ListSwitch {
 						text: model.item.value
-						source: Utils.normalizedSource(model.item.itemParent().uid) + "/Enabled"
+						dataSource: Utils.normalizedSource(model.item.itemParent().uid) + "/Enabled"
 					}
 				}
 			}

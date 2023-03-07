@@ -92,7 +92,7 @@ Page {
 
 								//% "Relay activation on temperature"
 								text: qsTrId("settings_relay_activate_on_temp")
-								source: relayDelegate.tempRelayPrefix + "/Enabled"
+								dataSource: relayDelegate.tempRelayPrefix + "/Enabled"
 							}
 
 							TemperatureRelaySettings {

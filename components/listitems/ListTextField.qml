@@ -10,10 +10,11 @@ import Victron.VenusOS
 ListItem {
 	id: root
 
-	property alias source: dataPoint.source
-	property alias value: dataPoint.value
-	readonly property alias dataPoint: dataPoint
-	readonly property alias valid: dataPoint.valid
+	property alias dataSource: dataPoint.source
+	readonly property alias dataValue: dataPoint.value
+	readonly property alias dataValid: dataPoint.valid
+	function setDataValue(v) { dataPoint.setValue(v) }
+
 	property alias textField: textField
 	property alias secondaryText: textField.text
 	property alias placeholderText: textField.placeholderText
@@ -47,7 +48,7 @@ ListItem {
 				Theme.geometry.listItem.textField.minimumWidth,
 				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry.listItem.textField.maximumWidth))
 		enabled: root.enabled
-		text: dataPoint.valid ? dataPoint.value : ""
+		text: dataValid ? dataValue : ""
 
 		EnterKeyAction.actionId: EnterKeyAction.Done
 		onAccepted: {
@@ -88,7 +89,7 @@ ListItem {
 		}
 	}
 
-	enabled: userHasWriteAccess && (source === "" || dataPoint.valid)
+	enabled: userHasWriteAccess && (dataSource === "" || dataValid)
 	content.children: [
 		defaultContent
 	]

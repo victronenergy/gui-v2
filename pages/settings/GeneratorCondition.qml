@@ -34,12 +34,11 @@ ListNavigationItem {
 	readonly property string stopValueDescriptionLower: qsTrId("generator_condition_stop_when_property_is_lower_than").arg(root.name)
 	readonly property string stopValueDescription: !startValueIsGreater ? stopValueDescriptionHigher : stopValueDescriptionLower
 	property string stopTimeDescription: CommonWords.stop_after_the_condition_is_reached_for
-	readonly property alias value: dataPoint.value
 
 	// Autocalculate step size based on number of decimals
 	readonly property real stepSize: Math.pow(10, -decimals)
 
-	secondaryText: dataPoint.value === 1 ? CommonWords.enabled : CommonWords.disabled
+	secondaryText: dataValue === 1 ? CommonWords.enabled : CommonWords.disabled
 	onClicked: Global.pageManager.pushPage(subpage)
 
 	DataPoint {
@@ -60,39 +59,39 @@ ListNavigationItem {
 
 					ListSwitch {
 						text: root.enableDescription
-						source: bindPrefix + "/Enabled"
+						dataSource: bindPrefix + "/Enabled"
 					}
 
 					ListSpinBox {
 						id: startValue
 
 						text: startValueDescription
-						visible: valid
-						source: bindPrefix + "/StartValue"
+						visible: dataValid
+						dataSource: bindPrefix + "/StartValue"
 						suffix: root.unit
 						decimals: root.decimals
-						from: stopValue.valid && root.startValueIsGreater ? stopValue.value + stepSize : 0
-						to: stopValue.valid && !root.startValueIsGreater ? stopValue.value - stepSize : 100
+						from: stopValue.dataValid && root.startValueIsGreater ? stopValue.value + stepSize : 0
+						to: stopValue.dataValid && !root.startValueIsGreater ? stopValue.value - stepSize : 100
 					}
 
 					ListSpinBox {
 						id: quietHoursStartValue
 
 						text: CommonWords.start_value_during_quiet_hours
-						visible: valid
-						source: bindPrefix + "/QuietHoursStartValue"
+						visible: dataValid
+						dataSource: bindPrefix + "/QuietHoursStartValue"
 						suffix: root.unit
 						decimals: root.decimals
-						from: quietHoursStopValue.valid && root.startValueIsGreater ? quietHoursStopValue.value + stepSize : 0
-						to: quietHoursStopValue.valid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : 100
+						from: quietHoursStopValue.dataValid && root.startValueIsGreater ? quietHoursStopValue.value + stepSize : 0
+						to: quietHoursStopValue.dataValid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : 100
 					}
 
 					ListSpinBox {
 						id: startTime
 
 						text: startTimeDescription
-						visible: valid
-						source: bindPrefix + "/StartTimer"
+						visible: dataValid
+						dataSource: bindPrefix + "/StartTimer"
 						suffix: root.timeUnit
 					}
 
@@ -100,32 +99,32 @@ ListNavigationItem {
 						id: stopValue
 
 						text: stopValueDescription
-						visible: valid
-						source: bindPrefix + "/StopValue"
+						visible: dataValid
+						dataSource: bindPrefix + "/StopValue"
 						suffix: root.unit
 						decimals: root.decimals
-						to: startValue.valid && root.startValueIsGreater ? startValue.value - stepSize : 100
-						from: startValue.valid && !root.startValueIsGreater ? startValue.value + stepSize : 0
+						to: startValue.dataValid && root.startValueIsGreater ? startValue.value - stepSize : 100
+						from: startValue.dataValid && !root.startValueIsGreater ? startValue.value + stepSize : 0
 					}
 
 					ListSpinBox {
 						id: quietHoursStopValue
 
 						text: CommonWords.stop_value_during_quiet_hours
-						visible: valid
-						source: bindPrefix + "/QuietHoursStopValue"
+						visible: dataValid
+						dataSource: bindPrefix + "/QuietHoursStopValue"
 						suffix: root.unit
 						decimals: root.decimals
-						to: quietHoursStartValue.valid && root.startValueIsGreater ? quietHoursStartValue.value - stepSize : 100
-						from: quietHoursStartValue.valid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : 1
+						to: quietHoursStartValue.dataValid && root.startValueIsGreater ? quietHoursStartValue.value - stepSize : 100
+						from: quietHoursStartValue.dataValid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : 1
 					}
 
 					ListSpinBox {
 						id: stopTime
 
 						text: stopTimeDescription
-						visible: valid
-						source: bindPrefix + "/StopTimer"
+						visible: dataValid
+						dataSource: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit
 					}
 				}

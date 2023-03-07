@@ -33,14 +33,14 @@ Column {
 		//% "Condition %1"
 		text: qsTrId("settings_relay_condition").arg(root.relayNumber + 1)
 		secondaryText: root.relayActivateOnTemperature
-			? dataPoint.value
+			? dataValue
 				  //% "Active"
 				? qsTrId("settings_relay_active")
 				  //% "Inactive"
 				: qsTrId("settings_relay_inactive")
 			  //% "Function disabled"
 			: qsTrId("settings_relay_function_disabled")
-		source: "%1/%2/State".arg(root.tempRelayPrefix).arg(root.relayNumber)
+		dataSource: "%1/%2/State".arg(root.tempRelayPrefix).arg(root.relayNumber)
 	}
 
 	ListRadioButtonGroup {
@@ -48,7 +48,7 @@ Column {
 
 		//% "Relay"
 		text: qsTrId("settings_relay")
-		source: "%1/%2/Relay".arg(root.settingsBindPrefix).arg(root.relayNumber)
+		dataSource: "%1/%2/Relay".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		optionModel: [
 			//% "None (Disable)"
 			{ display: qsTrId("settings_relay_none"), value: -1 },
@@ -70,7 +70,7 @@ Column {
 
 		//% "Activation value"
 		text: qsTrId("settings_relay_activation_value")
-		source: "%1/%2/SetValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
+		dataSource: "%1/%2/SetValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		from: -50
 		to: 100
 
@@ -89,7 +89,7 @@ Column {
 
 		//% "Deativation value"
 		text: qsTrId("settings_relay_deactivation_value")
-		source: "%1/%2/ClearValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
+		dataSource: "%1/%2/ClearValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		from: cSet.from
 		to: cSet.to
 		suffix: cSet.suffix

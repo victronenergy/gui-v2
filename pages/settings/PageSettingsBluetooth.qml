@@ -16,14 +16,14 @@ Page {
 				id: bluetoothEnabled
 
 				text: CommonWords.enabled
-				source: "com.victronenergy.settings/Settings/Services/Bluetooth"
+				dataSource: "com.victronenergy.settings/Settings/Services/Bluetooth"
 			}
 
 			ListTextField {
 				//% "Pincode"
 				text: qsTrId("settings_pincode")
 				visible: bluetoothEnabled.checked
-				source: "com.victronenergy.settings/Settings/Ble/Service/Pincode"
+				dataSource: "com.victronenergy.settings/Settings/Ble/Service/Pincode"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				textField.maximumLength: 6
 				textField.inputMethodHints: Qt.ImhDigitsOnly

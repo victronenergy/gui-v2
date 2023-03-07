@@ -111,22 +111,22 @@ Page {
 				{ display: qsTrId("settings_generator_not_detected"), value: 3 },
 			]
 			enabled: false
-			source: root.startStopBindPrefix + "/Error"
+			dataSource: root.startStopBindPrefix + "/Error"
 		}
 
 		ListTextItem {
 			//% "Run time"
 			text: qsTrId("settings_page_relay_generator_run_time")
-			secondaryText: dataPoint.valid ? Utils.secondsToString(dataPoint.value, false) : "0"
-			source: root.startStopBindPrefix + "/Runtime"
+			secondaryText: dataValid ? Utils.secondsToString(dataValue, false) : "0"
+			dataSource: root.startStopBindPrefix + "/Runtime"
 			visible: generatorState.value === 1
 		}
 
 		ListTextItem {
 			//% "Total run time"
 			text: qsTrId("settings_page_relay_generator_total_run_time")
-			secondaryText: Utils.secondsToString(dataPoint.value, false)
-			source: root.settingsBindPrefix + "/AccumulatedTotal"
+			secondaryText: Utils.secondsToString(dataValue, false)
+			dataSource: root.settingsBindPrefix + "/AccumulatedTotal"
 		}
 
 		ListTextItem {
@@ -134,8 +134,8 @@ Page {
 			text: qsTrId("settings_page_relay_generator_accumulated_running_time")
 			showAccessLevel: VenusOS.User_AccessType_Service
 			visible: defaultVisible && nextTestRun.visible
-			secondaryText: Utils.secondsToString(dataPoint.value, false)
-			source: root.startStopBindPrefix + "/TestRunIntervalRuntime"
+			secondaryText: Utils.secondsToString(dataValue, false)
+			dataSource: root.startStopBindPrefix + "/TestRunIntervalRuntime"
 		}
 
 		ListTextItem {
@@ -143,8 +143,8 @@ Page {
 			//% "Time to next test run"
 			text: qsTrId("settings_page_relay_generator_time_to_next_test_run")
 			secondaryText: ""
-			source: root.startStopBindPrefix + "/NextTestRun"
-			visible: dataPoint.valid && dataPoint.value > 0
+			dataSource: root.startStopBindPrefix + "/NextTestRun"
+			visible: dataValid && dataValue > 0
 
 			Timer {
 				running: parent.visible
@@ -152,7 +152,7 @@ Page {
 				interval: 1000
 				onTriggered: {
 					var now = new Date().getTime() / 1000
-					var remainingTime = parent.dataPoint.value - now
+					var remainingTime = parent.dataValue - now
 					if (remainingTime > 0) {
 						parent.secondaryText = Utils.secondsToString(remainingTime, false)
 						return
@@ -166,7 +166,7 @@ Page {
 		ListSwitch {
 			//% "Auto start functionality"
 			text: qsTrId("settings_page_relay_generator_auto_start_enabled")
-			source: root.settingsBindPrefix + "/AutoStartEnabled"
+			dataSource: root.settingsBindPrefix + "/AutoStartEnabled"
 			visible: allowDisableAutostart
 		}
 
@@ -187,7 +187,7 @@ Page {
 								id: manualSwitch
 								//% "Start generator"
 								text: qsTrId("settings_page_relay_generator_start_generator")
-								source: root.startStopBindPrefix + "/ManualStart"
+								dataSource: root.startStopBindPrefix + "/ManualStart"
 								writeAccessLevel: VenusOS.User_AccessType_User
 								onClicked: {
 									Global.generators.manualRunningNotification(!checked, stopTimer.value)
@@ -198,7 +198,7 @@ Page {
 								//% "Run for (hh:mm)"
 								text: qsTrId("settings_page_relay_generator_run_for_hh_mm")
 								enabled: !manualSwitch.checked
-								source: root.startStopBindPrefix + "/ManualStartTimer"
+								dataSource: root.startStopBindPrefix + "/ManualStartTimer"
 								writeAccessLevel: VenusOS.User_AccessType_User
 							}
 						}

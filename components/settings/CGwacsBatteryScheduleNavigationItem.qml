@@ -125,7 +125,7 @@ ListNavigationItem {
 					ListRadioButtonGroup {
 						//% "Day"
 						text: qsTrId("cgwacs_battery_schedule_day")
-						source: root._scheduleSource + "/Day"
+						dataSource: root._scheduleSource + "/Day"
 						visible: defaultVisible && itemEnabled.checked
 						//% "Not set"
 						defaultSecondaryText: qsTrId("cgwacs_battery_schedule_day_not_set")
@@ -134,14 +134,14 @@ ListNavigationItem {
 
 					ListTimeSelector {
 						text: CommonWords.start_time
-						source: root._scheduleSource + "/Start"
+						dataSource: root._scheduleSource + "/Start"
 						visible: defaultVisible && itemEnabled.checked
 					}
 
 					ListTimeSelector {
 						//% "Duration (hh:mm)"
 						text: qsTrId("cgwacs_battery_schedule_duration")
-						source: root._scheduleSource + "/Duration"
+						dataSource: root._scheduleSource + "/Duration"
 						visible: defaultVisible && itemEnabled.checked
 						maximumHour: 9999
 					}
@@ -169,7 +169,7 @@ ListNavigationItem {
 						//% "SOC limit"
 						text: qsTrId("cgwacs_battery_schedule_soc_limit")
 						visible: defaultVisible && socLimitEnabled.checked
-						source: root._scheduleSource + "/Soc"
+						dataSource: root._scheduleSource + "/Soc"
 						suffix: "%"
 						from: 5
 						to: 95

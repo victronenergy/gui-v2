@@ -8,8 +8,9 @@ import Victron.VenusOS
 Slider {
 	id: root
 
-	property alias source: dataPoint.source
-	property alias dataPoint: dataPoint
+	property alias dataSource: dataPoint.source
+	readonly property alias dataValue: dataPoint.value
+	readonly property alias dataValid: dataPoint.valid
 
 	property real _emittedValue
 
@@ -21,8 +22,8 @@ Slider {
 	from: dataPoint.min !== undefined ? dataPoint.min : 0
 	to: dataPoint.max !== undefined ? dataPoint.max : 1
 	stepSize: (to-from) / Theme.geometry.listItem.slider.stepDivsion
-	value: to > from && dataPoint.valid ? dataPoint.value : 0
-	enabled: source === "" || dataPoint.valid
+	value: to > from && dataValid ? dataValue : 0
+	enabled: source === "" || dataValid
 
 	onPressedChanged: {
 		if (root.value !== root._emittedValue) {

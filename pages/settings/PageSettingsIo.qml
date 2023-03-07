@@ -50,7 +50,7 @@ Page {
 							model: analogModel
 							delegate: ListSwitch {
 								text: switchLabel.value || ""
-								source: Utils.normalizedSource(model.uid) + "/Function"
+								dataSource: Utils.normalizedSource(model.uid) + "/Function"
 
 								DataPoint {
 									id: switchLabel
@@ -81,7 +81,7 @@ Page {
 								//: %1 = number of the digital input
 								//% "Digital input %1"
 								text: qsTrId("settings_io_digital_input").arg(model.uid.split('/').pop())
-								source: Utils.normalizedSource(model.uid) + "/Type"
+								dataSource: Utils.normalizedSource(model.uid) + "/Type"
 								optionModel: [
 									{ display: CommonWords.disabled, value: VenusOS.DigitalInput_Disabled },
 									//% "Pulse meter"

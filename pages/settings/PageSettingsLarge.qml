@@ -20,8 +20,8 @@ Page {
 
 				//% "Signal K"
 				text: qsTrId("settings_large_signal_k")
-				source: "com.victronenergy.platform/Services/SignalK/Enabled"
-				visible: dataPoint.valid
+				dataSource: "com.victronenergy.platform/Services/SignalK/Enabled"
+				visible: dataValid
 				writeAccessLevel: VenusOS.User_AccessType_Installer
 			}
 
@@ -36,8 +36,8 @@ Page {
 
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
-				source: "com.victronenergy.platform/Services/NodeRed/Mode"
-				visible: dataPoint.valid
+				dataSource: "com.victronenergy.platform/Services/NodeRed/Mode"
+				visible: dataValid
 				writeAccessLevel: VenusOS.User_AccessType_Installer
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },

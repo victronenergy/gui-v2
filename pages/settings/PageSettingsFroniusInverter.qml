@@ -29,7 +29,7 @@ Page {
 		model: ObjectModel {
 			ListRadioButtonGroup {
 				text: CommonWords.position
-				source: bindPrefix + "/Position"
+				dataSource: bindPrefix + "/Position"
 				optionModel: [
 					{ display: CommonWords.ac_input_1, value: 0 },
 					{ display: CommonWords.ac_input_2, value: 2 },
@@ -46,7 +46,7 @@ Page {
 
 			ListRadioButtonGroup {
 				text: CommonWords.phase
-				source: bindPrefix + "/Phase"
+				dataSource: bindPrefix + "/Phase"
 				visible: phaseCount === 1
 				optionModel: [
 					//% "L1"
@@ -63,7 +63,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Show"
 				text: qsTrId("page_settings_fronius_inverter_show")
-				source: bindPrefix + "/IsActive"
+				dataSource: bindPrefix + "/IsActive"
 				optionModel: [
 					{ display: CommonWords.no, value: 0 },
 					{ display: CommonWords.yes, value: 1 }

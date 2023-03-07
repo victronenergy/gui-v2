@@ -48,7 +48,7 @@ Page {
 			ListTextItem {
 				//% "Firmware build date/time"
 				text: qsTrId("settings_firmware_build_date_time")
-				source: "com.victronenergy.platform/Firmware/Offline/AvailableBuild"
+				dataSource: "com.victronenergy.platform/Firmware/Offline/AvailableBuild"
 				visible: installUpdate.visible && Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 

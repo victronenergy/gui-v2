@@ -61,7 +61,7 @@ Page {
 			ListRadioButtonGroup {
 				id: positions
 				text: CommonWords.position
-				source: root.devicePath + "/Position"
+				dataSource: root.devicePath + "/Position"
 				visible: root.serviceType === "pvinverter"
 				optionModel: [
 					{ display: CommonWords.ac_input_1, value: 0 },
@@ -73,7 +73,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Phase type"
 				text: qsTrId("settings_cgwacs_phase_type")
-				source: root.devicePath + "/IsMultiphase"
+				dataSource: root.devicePath + "/IsMultiphase"
 				enabled: userHasWriteAccess && multiPhaseSupport.value !== undefined
 				optionModel: [
 					//% "Single phase"
@@ -87,7 +87,7 @@ Page {
 				id: pvOnL2
 				//% "PV inverter on phase 2"
 				text: qsTrId("settings_pv_inverter_on_phase_2")
-				source: root.devicePath + "_S/Enabled"
+				dataSource: root.devicePath + "_S/Enabled"
 				visible: multiPhaseSupport.value
 						 && isMultiPhaseItem.value !== undefined
 						 && !isMultiPhaseItem.value
@@ -97,7 +97,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "PV inverter on phase 2 Position"
 				text: qsTrId("settings_cgwacs_pv_inverter_l2_position")
-				source: root.devicePath + "_S/Position"
+				dataSource: root.devicePath + "_S/Position"
 				visible: pvOnL2.checked
 				optionModel: positions.optionModel
 			}

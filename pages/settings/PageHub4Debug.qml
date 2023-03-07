@@ -21,7 +21,7 @@ Page {
 
 				height: implicitHeight + gridSetpointSlider.height
 				text: root.title
-				source: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
+				dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
 				suffix: "W"
 				from: -15000
 				to: 15000
@@ -34,7 +34,7 @@ Page {
 						bottom: parent.bottom
 						bottomMargin: Theme.geometry.listItem.content.verticalMargin
 					}
-					source: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
+					dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
 					from: -15000
 					to: 15000
 					stepSize: 50
@@ -44,7 +44,7 @@ Page {
 			ListTextItem {
 				//% "AC-In setpoint"
 				text: qsTrId("settings_ess_debug_ac_in_setpoint")
-				source: "com.victronenergy.vebus.ttyO1/Hub4/L1/AcPowerSetpoint"
+				dataSource: "com.victronenergy.vebus.ttyO1/Hub4/L1/AcPowerSetpoint"
 			}
 
 			ListTextGroup {

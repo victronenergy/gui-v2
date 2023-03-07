@@ -18,7 +18,7 @@ Page {
 				id: loggerMode
 				//% "Logging enabled"
 				text: qsTrId("settings_logging_enabled")
-				source: "com.victronenergy.settings/Settings/Vrmlogger/Logmode"
+				dataSource: "com.victronenergy.settings/Settings/Vrmlogger/Logmode"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled,	value: 1 },
@@ -56,28 +56,28 @@ Page {
 					//% "1 day"
 					{ display: qsTrId("settings_1_day"), value: 86400 },
 				]
-				source: "com.victronenergy.settings/Settings/Vrmlogger/LogInterval"
-				visible: !!loggerMode.dataPoint.value && loggerMode.dataPoint.value > 0
+				dataSource: "com.victronenergy.settings/Settings/Vrmlogger/LogInterval"
+				visible: !!loggerMode.dataValue && loggerMode.dataValue > 0
 			}
 
 			ListSwitch {
 				//% "Use secure connection (HTTPS)"
 				text: qsTrId("settings_https_enabled")
-				source: "com.victronenergy.settings/Settings/Vrmlogger/HttpsEnabled"
+				dataSource: "com.victronenergy.settings/Settings/Vrmlogger/HttpsEnabled"
 			}
 
 			ListTextItem {
 				//% "Last contact"
 				text: qsTrId("settings_last_contact")
-				source: "com.victronenergy.logger/Vrm/TimeLastContact"
-				visible: !!loggerMode.dataPoint.value && loggerMode.dataPoint.value > 0
+				dataSource: "com.victronenergy.logger/Vrm/TimeLastContact"
+				visible: !!loggerMode.dataValue && loggerMode.dataValue > 0
 
 				Timer {
 					interval: 1000
 					running: parent.visible
 					repeat: true
 					triggeredOnStart: true
-					onTriggered: parent.secondaryText = Utils.timeAgo(parent.dataPoint.value)
+					onTriggered: parent.secondaryText = Utils.timeAgo(parent.dataValue)
 				}
 			}
 
@@ -116,8 +116,8 @@ Page {
 				}
 				//% "Connection error"
 				text: qsTrId("settings_connection_error")
-				secondaryText: stringForErrorCode(dataPoint.value)
-				source: "com.victronenergy.logger/Vrm/ConnectionError"
+				secondaryText: stringForErrorCode(dataValue)
+				dataSource: "com.victronenergy.logger/Vrm/ConnectionError"
 			}
 
 			ListItem {
@@ -134,23 +134,23 @@ Page {
 			ListSwitch {
 				//% "VRM two-way communication"
 				text: qsTrId("settings_vrm_communication")
-				source: "com.victronenergy.settings/Settings/Services/MqttVrm"
+				dataSource: "com.victronenergy.settings/Settings/Services/MqttVrm"
 			}
 
 			ListSwitch {
 				//% "Reboot device when no contact"
 				text: qsTrId("settings_no_contact_reboot")
-				source: "com.victronenergy.settings/Settings/Watchdog/VrmTimeout"
+				dataSource: "com.victronenergy.settings/Settings/Watchdog/VrmTimeout"
 				updateOnClick: false
-				checked: dataPoint.value !== 0
-				onClicked: dataPoint.setValue(checked ? 0 : 3600)
+				checked: dataValue !== 0
+				onClicked: setDataValue(checked ? 0 : 3600)
 			}
 
 			ListTimeSelector {
-				source: "com.victronenergy.settings/Settings/Watchdog/VrmTimeout"
+				dataSource: "com.victronenergy.settings/Settings/Watchdog/VrmTimeout"
 				//% "No contact reset delay (hh:mm)"
 				text: qsTrId("settings_vrm_no_contact_reset_delay")
-				visible: !!dataPoint.value && dataPoint.value > 0
+				visible: !!dataValue && dataValue > 0
 			}
 
 			ListRadioButtonGroup {
@@ -166,8 +166,8 @@ Page {
 					//% "External storage"
 					{ display: qsTrId("settings_vrm_external_storage"), value: 2 },
 				]
-				source: "com.victronenergy.logger/Buffer/Location"
-				enabled: dataPoint.value !== undefined
+				dataSource: "com.victronenergy.logger/Buffer/Location"
+				enabled: dataValue !== undefined
 			}
 
 			ListRadioButtonGroup {
@@ -189,19 +189,19 @@ Page {
 					{ display: qsTrId("settings_vrm_storage_not_writable_error"), value: 5 },
 				]
 				enabled: false
-				source: "com.victronenergy.logger/Buffer/ErrorState"
-				visible: !!dataPoint.value
+				dataSource: "com.victronenergy.logger/Buffer/ErrorState"
+				visible: !!dataValue
 			}
 
 			ListTextItem { // This 'flickers' between values for ~30s after inserting a usb stick. Dbus-spy shows that the underlying data point flickers also. Old gui also flickers.
 				//% "Free disk space"
 				text: qsTrId("settings_vrm_free_disk_space")
-				secondaryText: Utils.qtyToString(dataPoint.value,
+				secondaryText: Utils.qtyToString(dataValue,
 												 //% "byte"
 												 qsTrId("settings_vrm_byte"),
 												 //% "bytes"
 												 qsTrId("settings_vrm_bytes"))
-				source: "com.victronenergy.logger/Buffer/FreeDiskSpace"
+				dataSource: "com.victronenergy.logger/Buffer/FreeDiskSpace"
 			}
 
 			MountStateListButton {}
@@ -209,9 +209,9 @@ Page {
 			ListTextItem {
 				//% "Stored records"
 				text: qsTrId("settings_vrm_stored_records")
-				source: "com.victronenergy.logger/Buffer/Count"
+				dataSource: "com.victronenergy.logger/Buffer/Count"
 				//% "%1 records"
-				secondaryText: qsTrId("settings_vrm_records_count").arg(dataPoint.value ? dataPoint.value : 0)
+				secondaryText: qsTrId("settings_vrm_records_count").arg(dataValue ? dataValue : 0)
 			}
 
 			ListTextItem {
@@ -220,14 +220,14 @@ Page {
 				property var timeNow: Math.round(new Date() / 1000)
 				//% "Oldest record age"
 				text: qsTrId("settings_vrm_oldest_record_age")
-				source: "com.victronenergy.logger/Buffer/OldestTimestamp"
+				dataSource: "com.victronenergy.logger/Buffer/OldestTimestamp"
 
 				Timer {
 					interval: 1000
-					running: !!parent.dataPoint.value
+					running: !!parent.dataValue
 					repeat: true
 					triggeredOnStart: true
-					onTriggered: parent.secondaryText = Utils.timeAgo(parent.dataPoint.value)
+					onTriggered: parent.secondaryText = Utils.timeAgo(parent.dataValue)
 				}
 			}
 		}

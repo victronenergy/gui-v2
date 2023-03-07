@@ -8,13 +8,16 @@ import Victron.VenusOS
 ListItem {
 	id: root
 
-	property alias source: slider.source
-	readonly property alias dataPoint: slider.dataPoint
+	property alias dataSource: slider.dataSource
+	readonly property alias dataValue: slider.dataValue
+	readonly property alias dataValid: slider.dataValid
+	function setDataValue(v) { dataPoint.setValue(v) }
+
 	readonly property alias slider: slider
 
 	signal valueChanged(value: real)
 
-	enabled: userHasWriteAccess && (source === "" || dataPoint.valid)
+	enabled: userHasWriteAccess && (dataSource === "" || dataValid)
 
 	content.anchors.rightMargin: 0
 	content.children: [
