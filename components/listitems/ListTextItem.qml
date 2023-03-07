@@ -15,20 +15,18 @@ ListItem {
 
 	property alias secondaryText: secondaryLabel.text
 
-	property Label defaultContent: Label {
-		id: secondaryLabel
-
-		anchors.verticalCenter: parent.verticalCenter
-		visible: root.secondaryText.length > 0
-		text: dataValue || ""
-		font.pixelSize: Theme.font.size.body2
-		color: Theme.color.listItem.secondaryText
-		wrapMode: Text.Wrap
-		horizontalAlignment: Text.AlignRight
-	}
-
 	content.children: [
-		defaultContent
+		Label {
+			id: secondaryLabel
+
+			anchors.verticalCenter: parent.verticalCenter
+			visible: root.secondaryText.length > 0
+			text: dataValue || ""
+			font.pixelSize: Theme.font.size.body2
+			color: Theme.color.listItem.secondaryText
+			wrapMode: Text.Wrap
+			horizontalAlignment: Text.AlignRight
+		}
 	]
 
 	DataPoint {
