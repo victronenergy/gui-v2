@@ -385,13 +385,13 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "WidgetHeader");
 
 	/* control cards */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/ESSCard.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/ESSCard.qml")),
 		"Victron.VenusOS", 2, 0, "ESSCard");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/GeneratorCard.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/GeneratorCard.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorCard");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/InverterCard.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/InverterCard.qml")),
 		"Victron.VenusOS", 2, 0, "InverterCard");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/controlcards/SwitchesCard.qml")),
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/SwitchesCard.qml")),
 		"Victron.VenusOS", 2, 0, "SwitchesCard");
 
 	/* dialogs */
