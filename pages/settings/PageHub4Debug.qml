@@ -20,6 +20,7 @@ Page {
 				id: gridSetpoint
 
 				height: implicitHeight + gridSetpointSlider.height
+				primaryLabel.anchors.verticalCenterOffset: -(gridSetpointSlider.height / 2)
 				text: root.title
 				dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
 				suffix: "W"

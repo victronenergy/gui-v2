@@ -119,6 +119,7 @@ Page {
 				visible: root._isVecan || root._isRvc
 				dataSource: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
 				height: visible ? (implicitHeight + uniqueIdDescriptionLabel.height) : 0
+				primaryLabel.anchors.verticalCenterOffset: -(uniqueIdDescriptionLabel.height / 2)
 
 				onSelectorAccepted: {
 					//% "Please wait, changing and checking the unique number takes a while"

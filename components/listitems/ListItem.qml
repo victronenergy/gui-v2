@@ -64,8 +64,8 @@ Item {
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry.listItem.content.horizontalMargin
-			top: parent.top
-			topMargin: Theme.geometry.listItem.content.verticalMargin - root.spacing/2
+			verticalCenter: parent.verticalCenter
+			verticalCenterOffset: -root.spacing/2
 		}
 		font.pixelSize: Theme.font.size.body2
 		wrapMode: Text.Wrap
