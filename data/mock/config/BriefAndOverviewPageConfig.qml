@@ -95,7 +95,12 @@ QtObject {
 		},
 	]
 
-	function loadConfig(config) {
+	function configCount() {
+		return configs.length
+	}
+
+	function loadConfig(configIndex) {
+		const config = configs[configIndex]
 		Global.mockDataSimulator.setAcInputsRequested(config.acInputs)
 		Global.mockDataSimulator.setDcInputsRequested(config.dcInputs)
 		Global.mockDataSimulator.setSolarChargersRequested(config.solar)

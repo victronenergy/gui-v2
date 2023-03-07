@@ -25,14 +25,14 @@ QtObject {
 		"qrc:/pages/BriefPage.qml": briefAndOverviewConfig,
 		"qrc:/pages/OverviewPage.qml": briefAndOverviewConfig,
 		"qrc:/pages/LevelsPage.qml": levelsConfig,
+		"qrc:/pages/SettingsPage.qml": settingsConfig,
 	})
 
 	function setConfigIndex(pageConfig, configIndex) {
-		let config = pageConfig.configs[configIndex]
-		pageConfig.configIndex = configIndex
-		if (config) {
-			pageConfig.loadConfig(config)
-			pageConfigTitle.text = configIndex+1 + ". " + config.name || ""
+		const configName = pageConfig.loadConfig(configIndex)
+		if (configName) {
+			pageConfig.configIndex = configIndex
+			pageConfigTitle.text = configIndex+1 + ". " + configName || ""
 		} else {
 			pageConfigTitle.text = ""
 		}
@@ -40,28 +40,21 @@ QtObject {
 
 	function nextConfig() {
 		const pageConfig = _configs[Global.pageManager.navBar.currentUrl]
-		const nextIndex = pageConfig.configIndex === pageConfig.configs.length-1 ? 0 : pageConfig.configIndex+1
+		const nextIndex = Utils.modulo(pageConfig.configIndex + 1, pageConfig.configCount())
 		setConfigIndex(pageConfig, nextIndex)
 	}
 
 	function previousConfig() {
 		const pageConfig = _configs[Global.pageManager.navBar.currentUrl]
-		const prevIndex = pageConfig.configIndex <= 0 ? pageConfig.configs.length-1 : pageConfig.configIndex-1
+		const prevIndex = Utils.modulo(pageConfig.configIndex - 1, pageConfig.configCount())
 		setConfigIndex(pageConfig, prevIndex)
-	}
-
-	function indexOfPage(url) {
-		for (let i = 0; i < Global.pageManager.navBar.model.count; ++i) {
-			if (Global.pageManager.navBar.model.get(i).url === url) {
-				return i
-			}
-		}
-		console.warn('Cannot find url', url, 'in navBar.model')
-		return -1
 	}
 
 	function keyPressed(event) {
 		switch (event.key) {
+		case Qt.Key_Escape:
+			Global.pageManager.popPage()
+			break
 		case Qt.Key_1:
 		case Qt.Key_2:
 		case Qt.Key_3:
@@ -207,5 +200,9 @@ QtObject {
 
 	property NotificationsPageConfig notificationsConfig: NotificationsPageConfig {
 		id: notificationsConfig
+	}
+
+	property SettingsPageConfig settingsConfig: SettingsPageConfig {
+		property int configIndex: -1
 	}
 }

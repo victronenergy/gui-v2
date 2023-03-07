@@ -9,6 +9,9 @@ import net.connman 0.1
 Page {
 	id: root
 
+	// for mock simulator
+	property alias settingsListView: settingsListView
+
 	GradientListView {
 		id: settingsListView
 
