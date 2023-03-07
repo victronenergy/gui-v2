@@ -10,14 +10,34 @@ import "/components/Utils.js" as Utils
 Page {
 	id: root
 
+	VeQItemSortTableModel {
+		id: dbusModel
+
+		filterFlags: VeQItemSortTableModel.FilterOffline
+		dynamicSortFilter: true
+		filterRole: VeQItemTableModel.UniqueIdRole
+		filterRegExp: "^dbus/com\.victronenergy\.(inverter|solarcharger)\."
+		model: BackendConnection.type === BackendConnection.DBusSource ? Global.dataServiceModel : null
+	}
+
+	VeQItemSortTableModel {
+		id: mqttModel
+
+		filterFlags: VeQItemSortTableModel.FilterOffline
+		dynamicSortFilter: true
+		filterRole: VeQItemTableModel.UniqueIdRole
+		model: VeQItemTableModel {
+			uids: BackendConnection.type === BackendConnection.MqttSource ? ["mqtt/inverter","mqtt/solarcharger"] : []
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+	}
+
 	GradientListView {
 		header: DvccCommonSettings {
 			width: parent.width
 		}
 
 		model: VeQItemSortTableModel {
-			property alias all: childValues
-
 			filterRole: VeQItemTableModel.ValueRole
 			sortColumn: childValues.sortValueColumn
 			dynamicSortFilter: true
@@ -26,29 +46,28 @@ Page {
 				id: childValues
 
 				childId: "Link/ChargeCurrent"
-				model: VeQItemSortTableModel {
-					filterFlags: VeQItemSortTableModel.FilterOffline
-					dynamicSortFilter: true
-					filterRole: VeQItemTableModel.UniqueIdRole
-					filterRegExp: "^dbus/com\.victronenergy\.(inverter|solarcharger)\."
-					model: Global.dataServiceModel
-				}
+				model: BackendConnection.type === BackendConnection.DBusSource
+					   ? dbusModel
+					   : BackendConnection.type === BackendConnection.MqttSource
+						 ? mqttModel
+						 : null
 
 				// And sort them by n2kInstance, description
 				sortDelegate: VeQItemSortDelegate {
-					DataPoint {
-						id: n2kDeviceInstance
-						source: buddy.id + "/N2kDeviceInstance"
+
+					VeQuickItem {
+						id: n2kDeviceInstanceChild
+						uid: buddy.uid + "/N2kDeviceInstance"
 					}
-					DataPoint {
-						id: productName
-						source: buddy.id + "/ProductName"
+					VeQuickItem {
+						id: productNameChild
+						uid: buddy.uid + "/ProductName"
 					}
-					DataPoint {
-						id: customName
-						source: buddy.id + "/CustomName"
+					VeQuickItem {
+						id: customNameChild
+						uid: buddy.uid + "/CustomName"
 					}
-					sortValue: (n2kDeviceInstance.value || 0) + (customName.value || productName.value || "")
+					sortValue: (n2kDeviceInstanceChild.value || 0) + (customNameChild.value || productNameChild.value || "")
 				}
 			}
 		}
@@ -66,28 +85,28 @@ Page {
 			text: "[" + (n2kDeviceInstance.value || 0) + "] " + (customName.value || productName.value || "")
 			textModel: [ dcCurrentText, maxValueText ]
 
-			DataPoint {
+			VeQuickItem {
 				id: n2kDeviceInstance
-				source: buddy.id + "/N2kDeviceInstance"
+				uid: buddy.uid + "/N2kDeviceInstance"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: dcCurrent
-				source: buddy.id + "/Dc/0/Current"
+				uid: buddy.uid + "/Dc/0/Current"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: maxValue
-				source: buddy.id + "/Link/ChargeCurrent"
+				uid: buddy.uid + "/Link/ChargeCurrent"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: productName
-				source: buddy.id + "/ProductName"
+				uid: buddy.uid + "/ProductName"
 			}
-			DataPoint {
+			VeQuickItem {
 				id: customName
-				source: buddy.id + "/CustomName"
+				uid: buddy.uid + "/CustomName"
 			}
 		}
 	}
