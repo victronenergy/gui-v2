@@ -95,11 +95,11 @@ ListView {
 
 			delegate: Item {
 				// Add spacing between this tank and the next (if there is more than one of this type)
-				width: gaugeDelegate.width + (model.index === gaugeRepeater.count - 1 ? 0 : root._spacing())
+				width: gaugeGroup.width + (model.index === gaugeRepeater.count - 1 ? 0 : root._spacing())
 				height: 1
 
-				LevelsPageGaugeDelegate {
-					id: gaugeDelegate
+				TankGaugeGroup {
+					id: gaugeGroup
 
 					animationEnabled: root.animationEnabled
 					tankType: tankTypeDelegate.tankType
