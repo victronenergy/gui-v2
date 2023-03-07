@@ -279,8 +279,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "GeneratorIconLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/IpAddressButtonGroup.qml")),
 		"Victron.VenusOS", 2, 0, "IpAddressButtonGroup");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LevelsPageGaugeDelegate.qml")),
-		"Victron.VenusOS", 2, 0, "LevelsPageGaugeDelegate");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/TankGaugeGroup.qml")),
+		"Victron.VenusOS", 2, 0, "TankGaugeGroup");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LoadGraph.qml")),
 		"Victron.VenusOS", 2, 0, "LoadGraph");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LoadGraphShapePath.qml")),

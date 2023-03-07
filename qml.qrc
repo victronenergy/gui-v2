@@ -90,7 +90,7 @@
         <file>components/GeneratorIconLabel.qml</file>
         <file>components/SolarYieldGauge.qml</file>
         <file>components/TabBar.qml</file>
-        <file>components/LevelsPageGaugeDelegate.qml</file>
+        <file>components/TankGaugeGroup.qml</file>
         <file>components/MainView.qml</file>
         <file>components/LoadGraph.qml</file>
         <file>components/LoadGraphShapePath.qml</file>
