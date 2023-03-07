@@ -201,6 +201,7 @@
         <file>data/mock/config/LevelsPageConfig.qml</file>
         <file>data/mock/config/BriefAndOverviewPageConfig.qml</file>
         <file>data/mock/config/NotificationsPageConfig.qml</file>
+        <file>data/mock/config/SettingsPageConfig.qml</file>
         <file>pages/BriefMonitorPanel.qml</file>
         <file>pages/BriefPage.qml</file>
         <file>pages/ControlCardsPage.qml</file>
