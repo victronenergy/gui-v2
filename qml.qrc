@@ -288,10 +288,10 @@
         <file>pages/settings/tz/TzEuropeData.qml</file>
         <file>pages/settings/tz/TzIndianData.qml</file>
         <file>pages/settings/tz/TzPacificData.qml</file>
-        <file>controlcards/ESSCard.qml</file>
-        <file>controlcards/GeneratorCard.qml</file>
-        <file>controlcards/InverterCard.qml</file>
-        <file>controlcards/SwitchesCard.qml</file>
+        <file>pages/controlcards/ESSCard.qml</file>
+        <file>pages/controlcards/GeneratorCard.qml</file>
+        <file>pages/controlcards/InverterCard.qml</file>
+        <file>pages/controlcards/SwitchesCard.qml</file>
         <file>fonts/MuseoSans-500.otf</file>
         <file>images/acloads.svg</file>
         <file>images/alternator.svg</file>
