@@ -223,8 +223,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "LoadGraph");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/LoadGraphShapePath.qml")),
 		"Victron.VenusOS", 2, 0, "LoadGraphShapePath");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/MainView.qml")),
-		"Victron.VenusOS", 2, 0, "MainView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ModalDialog.qml")),
 		"Victron.VenusOS", 2, 0, "ModalDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NavBar.qml")),
@@ -233,8 +231,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "NavButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NotificationDelegate.qml")),
 		"Victron.VenusOS", 2, 0, "NotificationDelegate");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NotificationLayer.qml")),
-		"Victron.VenusOS", 2, 0, "NotificationLayer");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/NotificationsView.qml")),
 		"Victron.VenusOS", 2, 0, "NotificationsView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Page.qml")),
@@ -417,6 +413,10 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "TimeSelectorDialog");
 
 	/* pages */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/NotificationLayer.qml")),
+		"Victron.VenusOS", 2, 0, "NotificationLayer");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/MainView.qml")),
+		"Victron.VenusOS", 2, 0, "MainView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/PageManager.qml")),
 		"Victron.VenusOS", 2, 0, "PageManager");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/BriefMonitorPanel.qml")),
