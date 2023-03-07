@@ -23,10 +23,12 @@ Item {
 	readonly property alias primaryLabel: primaryLabel
 	readonly property int defaultImplicitHeight: visible
 		? Math.max(primaryLabel.implicitHeight + Theme.geometry.listItem.content.verticalMargin * 2,
+				   content.height,
 				   Theme.geometry.listItem.height)
 		: 0
 
 	readonly property int availableWidth: width - primaryLabel.anchors.leftMargin - content.anchors.rightMargin - content.spacing
+	property int maximumContentWidth: availableWidth * 0.7
 
 	implicitWidth: parent ? parent.width : 0
 	implicitHeight: defaultImplicitHeight
@@ -81,6 +83,6 @@ Item {
 			verticalCenter: primaryLabel.verticalCenter
 		}
 		spacing: Theme.geometry.listItem.content.spacing
-		width: Math.min(implicitWidth, root.availableWidth)
+		width: Math.min(implicitWidth, root.maximumContentWidth)
 	}
 }
