@@ -73,7 +73,7 @@ ControlCard {
 				color: Theme.color.font.secondary
 				font.pixelSize: Theme.font.size.body1
 				//% "Battery life limit: %1%"
-				text: qsTrId("ess_battery_life_limit").arg(Global.ess.stateOfChargeLimit)
+				text: qsTrId("ess_battery_life_limit").arg(Math.max(Global.ess.minimumStateOfCharge, Global.ess.stateOfChargeLimit))
 			}
 
 			CP.IconImage {
