@@ -76,12 +76,17 @@ function _scaledQuantity(value, unitMatchValue, length, baseUnit, scaledUnit) {
 		} else {
 			quantity.unit = baseUnit
 		}
-		if (value < 1) {
-			value = parseFloat(value.toFixed(length - 1))
-		}
-		if (length > 0) {
-			// use parseFloat() to remove trailing zeros
-			value = parseFloat(value.toPrecision(length))
+		if (quantity.unit === "W") {
+			// Don't use decimals for watt values
+			value = Math.round(value)
+		} else {
+			if (value < 1) {
+				value = parseFloat(value.toFixed(length - 1))
+			}
+			if (length > 0) {
+				// use parseFloat() to remove trailing zeros
+				value = parseFloat(value.toPrecision(length))
+			}
 		}
 		quantity.number = value
 	}
