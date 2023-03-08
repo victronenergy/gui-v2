@@ -46,7 +46,7 @@ QtObject {
 	readonly property VeQuickItem _remaining: VeQuickItem {
 		function _update() {
 			tank.remaining = value === undefined ? NaN : value
-			if (tank._valid) {
+			if (tank.type >= 0) {
 				Global.tanks.updateTankModelTotals(tank.type)
 			}
 		}
@@ -57,7 +57,7 @@ QtObject {
 	readonly property VeQuickItem _capacity: VeQuickItem {
 		function _update() {
 			tank.capacity = value === undefined ? NaN : value
-			if (tank._valid) {
+			if (tank.type >= 0) {
 				Global.tanks.updateTankModelTotals(tank.type)
 			}
 		}
