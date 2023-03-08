@@ -17,7 +17,7 @@ ControlCard {
 	property var _currentLimitDialog
 
 	signal changeMode(newMode: int)
-	signal changeCurrentLimit(index: int, newCurrentLimit: int)
+	signal changeCurrentLimit(index: int, newCurrentLimit: real)
 
 	title.icon.source: "qrc:/images/inverter_charger.svg"
 	//% "Inverter / Charger"
@@ -113,7 +113,7 @@ ControlCard {
 					label.text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
 					enabled: modelData.currentLimitAdjustable
 					//% "%1 A"
-					button.text: qsTrId("amps").arg(value / 1000)   // TODO use UnitConverter.convertToString() or unitToString() instead
+					button.text: qsTrId("amps").arg(value)   // TODO use UnitConverter.convertToString() or unitToString() instead
 					onClicked: {
 						if (!root._currentLimitDialog) {
 							root._currentLimitDialog = currentLimitDialogComponent.createObject(Global.dialogLayer)

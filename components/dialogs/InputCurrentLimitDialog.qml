@@ -8,7 +8,7 @@ import Victron.VenusOS
 ModalDialog {
 	id: root
 
-	property int currentLimit
+	property real currentLimit  // in amps
 	property int inputType
 	property alias ampOptions: buttonRow.model
 
@@ -40,8 +40,8 @@ ModalDialog {
 				indicatorImplicitWidth: Theme.geometry.spinBox.indicator.maximumWidth
 				//% "%1 A"
 				label.text: qsTrId("inverter_current_limit_value").arg(spinbox.value/1000)  // TODO use UnitConverter.convertToString() or unitToString() instead
-				value: root.currentLimit
-				onValueChanged: root.currentLimit = value
+				value: root.currentLimit * 1000     // A -> mA
+				onValueChanged: root.currentLimit = value / 1000    // mA -> A
 			}
 
 			SegmentedButtonRow {
@@ -51,8 +51,7 @@ ModalDialog {
 				anchors.horizontalCenter: parent.horizontalCenter
 				onButtonClicked: function (buttonIndex){
 					currentIndex = buttonIndex
-					root.currentLimit = model[currentIndex] * 1000 // mA
-					spinbox.value = model[currentIndex] * 1000 // mA
+					spinbox.value = model[currentIndex] * 1000 // A -> ma
 				}
 			}
 		}
