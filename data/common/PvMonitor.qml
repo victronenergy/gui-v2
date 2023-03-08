@@ -4,13 +4,15 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Instantiator {
 	id: root
 
 	// --- AC values ---
 
-	// AC power is the total power from Ac/PvOnGrid, Ac/PvOnGenset and Ac/PvOnOutput.
+	// AC power is the total power from Ac/PvOnGrid/L*/Power, Ac/PvOnGenset/L*/Power
+	// and Ac/PvOnOutput/L*/Power.
 	function updateAcTotals() {
 		let totalPower = NaN
 		let totalCurrent = NaN
@@ -44,8 +46,8 @@ Instantiator {
 
 		readonly property string serviceUid: modelData
 
-		readonly property DataPoint vePhaseCount: DataPoint {
-			source: acPvDelegate.serviceUid + "/NumberOfPhases"
+		readonly property VeQuickItem vePhaseCount: VeQuickItem {
+			uid: acPvDelegate.serviceUid + "/NumberOfPhases"
 			onValueChanged: {
 				const phaseCount = value === undefined ? 0 : value
 				if (pvPhases.count !== phaseCount) {
@@ -63,15 +65,15 @@ Instantiator {
 				property real power
 				property real current
 
-				readonly property DataPoint vePower: DataPoint {
-					source: acPvDelegate.serviceUid + "/L" + (model.index + 1) + "/Power"
+				readonly property VeQuickItem vePower: VeQuickItem {
+					uid: acPvDelegate.serviceUid + "/L" + (model.index + 1) + "/Power"
 					onValueChanged: {
 						phase.power = value === undefined ? NaN : value
 						Qt.callLater(root.updateAcTotals)
 					}
 				}
-				readonly property DataPoint veCurrent: DataPoint {
-					source: acPvDelegate.serviceUid + "/L" + (model.index + 1) + "/Current"
+				readonly property VeQuickItem veCurrent: VeQuickItem {
+					uid: acPvDelegate.serviceUid + "/L" + (model.index + 1) + "/Current"
 					onValueChanged: {
 						phase.current = value === undefined ? NaN : value
 						Qt.callLater(root.updateAcTotals)
