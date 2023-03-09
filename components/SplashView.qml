@@ -153,6 +153,8 @@ Rectangle {
 		text: //% "Unable to connect"
 			 ((BackendConnection.state === BackendConnection.Failed ? qsTrId("splash_view_unable_to_connect")
 			  //% "Disconnected, attempting to reconnect"
+			: BackendConnection.state === BackendConnection.Reconnecting ? qsTrId("splash_view_reconnecting")
+			   //% "Disconnected"
 			: BackendConnection.state === BackendConnection.Disconnected ? qsTrId("splash_view_disconnected")
 			  //% "Connecting"
 			: BackendConnection.state === BackendConnection.Connecting ? qsTrId("splash_view_connecting")

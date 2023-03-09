@@ -29,12 +29,14 @@ public:
 	};
 	Q_ENUM(SourceType)
 
+	// Same as VeQItemMqttProducer::ConnectionState
 	enum State {
 		Idle,
 		Connecting,
 		Connected,
 		Ready,
 		Disconnected,
+		Reconnecting,
 		Failed
 	};
 	Q_ENUM(State)

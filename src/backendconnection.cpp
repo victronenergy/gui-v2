@@ -93,7 +93,7 @@ void BackendConnection::setState(VeQItemMqttProducer::ConnectionState backendCon
 	}
 	case VeQItemMqttProducer::Reconnecting:
 	{
-		setState(BackendConnection::State::Disconnected);
+		setState(BackendConnection::State::Reconnecting);
 		break;
 	}
 	case VeQItemMqttProducer::Failed:
