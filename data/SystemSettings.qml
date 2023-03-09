@@ -35,8 +35,16 @@ QtObject {
 		 source: "com.victronenergy.settings/Settings/Gui/Units/Energy"
 	}
 
-	property DataPoint temperatureUnit: DataPoint {
-		 source: "com.victronenergy.settings/Settings/Gui/Units/Temperature"
+	property QtObject temperatureUnit: QtObject {
+		// translate /System/Units/Temperature from string to enum value
+		readonly property var value: _unitDataPoint.value === "fahrenheit"
+				? VenusOS.Units_Temperature_Fahrenheit
+				: VenusOS.Units_Temperature_Celsius
+
+		readonly property DataPoint _unitDataPoint: DataPoint {
+			id: _unitDataPoint
+			source: "com.victronenergy.settings/Settings/System/Units/Temperature"
+		}
 	}
 
 	property DataPoint volumeUnit: DataPoint {
