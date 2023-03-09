@@ -227,7 +227,7 @@
     "geometry.splashView.logo.verticalCenterOffset": -25,
     "geometry.splashView.logo.horizontalCenterOffset": -2,
     "geometry.splashView.gaugeAnimation.verticalCenterOffset": 0,
-    "geometry.splashView.progressBar.bottomMargin": 224,
+    "geometry.splashView.progressBar.bottomMargin": 244,
     "geometry.splashView.progressBar.width": 464,
 
     "geometry.generatorCard.durationButton.height": 40,

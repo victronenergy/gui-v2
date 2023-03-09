@@ -148,20 +148,19 @@ Rectangle {
 			topMargin: Theme.geometry.progressBar.height
 		}
 		opacity: BackendConnection.state === BackendConnection.Failed ? 1.0 : loadingProgress.opacity
-		font.pixelSize: Theme.font.size.body1
+		font.pixelSize: Theme.font.size.caption
 		color: Theme.color.font.secondary
-		text: "(" + BackendConnection.state + ") " +
-		      //% "Unable to connect to device"
-		     (BackendConnection.state === BackendConnection.Failed ? qsTrId("splash_view_unable_to_connect_to_device")
-		      //% "Disconnected from device, attempting to reconnect"
-		    : BackendConnection.state === BackendConnection.Disconnected ? qsTrId("splash_view_disconnected")
-		      //% "Connecting to device"
-		    : BackendConnection.state === BackendConnection.Connecting ? qsTrId("splash_view_connecting")
-		      //% "Connected to device, awaiting portal ID"
-		    : BackendConnection.state === BackendConnection.Connected ? qsTrId("splash_view_connected")
-		      //% "Connected to device, loading user interface"
-		    : BackendConnection.state === BackendConnection.Ready ? qsTrId("splash_view_ready")
-		      //% "Idle"
-		    : qsTrId("splash_view_idle"))
+		text: //% "Unable to connect"
+			 ((BackendConnection.state === BackendConnection.Failed ? qsTrId("splash_view_unable_to_connect")
+			  //% "Disconnected, attempting to reconnect"
+			: BackendConnection.state === BackendConnection.Disconnected ? qsTrId("splash_view_disconnected")
+			  //% "Connecting"
+			: BackendConnection.state === BackendConnection.Connecting ? qsTrId("splash_view_connecting")
+			  //% "Connected, awaiting broker messages"
+			: BackendConnection.state === BackendConnection.Connected ? qsTrId("splash_view_connected")
+			  //% "Connected, loading user interface"
+			: BackendConnection.state === BackendConnection.Ready ? qsTrId("splash_view_ready")
+			  //% "Idle"
+			: qsTrId("splash_view_idle")) + " [" + BackendConnection.state) + "]"
 	}
 }
