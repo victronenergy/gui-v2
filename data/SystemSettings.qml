@@ -41,6 +41,16 @@ QtObject {
 				? VenusOS.Units_Temperature_Fahrenheit
 				: VenusOS.Units_Temperature_Celsius
 
+		function setValue(v) {
+			if (v === VenusOS.Units_Temperature_Celsius) {
+				_unitDataPoint.setValue("celsius")
+			} else if (v === VenusOS.Units_Temperature_Fahrenheit) {
+				_unitDataPoint.setValue("fahrenheit")
+			} else {
+				console.warn("Unsupported temperature unit:", v)
+			}
+		}
+
 		readonly property DataPoint _unitDataPoint: DataPoint {
 			id: _unitDataPoint
 			source: "com.victronenergy.settings/Settings/System/Units/Temperature"
