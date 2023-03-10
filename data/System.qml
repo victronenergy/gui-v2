@@ -29,6 +29,11 @@ QtObject {
 	property SystemAc ac: SystemAc {}
 	property SystemDc dc: SystemDc {}
 
+	property QtObject veBus: QtObject {
+		property string serviceUid
+		property real power
+	}
+
 	function reset() {
 		ac.reset()
 		dc.reset()

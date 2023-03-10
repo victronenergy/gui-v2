@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import "/components/Utils.js" as Utils
 
 QtObject {
@@ -122,6 +123,22 @@ QtObject {
 		source: "com.victronenergy.system/Dc/Battery/Voltage"
 		Component.onCompleted: {
 			Global.system.dc.voltage = Qt.binding(function() { return value === undefined ? NaN : value })
+		}
+	}
+
+	//--- veBus ---
+
+	readonly property DataPoint veBusService: DataPoint {
+		source: "com.victronenergy.system/VebusService"
+		Component.onCompleted: {
+			Global.system.veBus.serviceUid = Qt.binding(function() { return value || "" })
+		}
+	}
+
+	readonly property DataPoint veBusDcPower: DataPoint {
+		source: veBusService.value ? veBusService.value + "/Dc/0/Power" : ""
+		Component.onCompleted: {
+			Global.system.veBus.power = Qt.binding(function() { return value === undefined ? NaN : value })
 		}
 	}
 }
