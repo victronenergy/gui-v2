@@ -653,11 +653,12 @@ Page {
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 
-		// If battery power is positive, energy flows to battery, else flows to inverter/charger.
+		// If vebus power is positive: battery is charging, so energy flows to battery.
+		// If vebus power is negative: battery is discharging, so energy flows to inverter/charger.
 		animationMode: root.isCurrentPage
-				&& !isNaN(Global.battery.power)
-				&& Math.abs(Global.battery.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-						? (Global.battery.power > 0
+				&& !isNaN(Global.system.veBus.power)
+				&& Math.abs(Global.system.veBus.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+						? (Global.system.veBus.power > 0
 								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
 						: VenusOS.WidgetConnector_AnimationMode_NotAnimated

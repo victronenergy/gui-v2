@@ -71,6 +71,19 @@ QtObject {
 		}
 	}
 
+	//--- veBus ---
+
+	property Timer randomizeVeBusValues: Timer {
+		running: Global.mockDataSimulator.timersActive
+		interval: 1000
+		repeat: true
+		triggeredOnStart: true
+
+		onTriggered: {
+			Global.system.veBus.power = 500 + Math.floor(Math.random() * 100)
+		}
+	}
+
 	Component.onCompleted: {
 		populate()
 	}
