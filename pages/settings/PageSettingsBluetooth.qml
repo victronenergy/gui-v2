@@ -5,10 +5,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 
 		model: ObjectModel {
 

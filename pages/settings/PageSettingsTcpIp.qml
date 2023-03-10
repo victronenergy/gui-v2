@@ -7,7 +7,7 @@ import Victron.VenusOS
 import net.connman 0.1
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property string technologyType: "ethernet"
@@ -102,7 +102,7 @@ Page {
 		}
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 		model: root.service ? connectedModel : disconnectedModel
 	}
@@ -222,6 +222,8 @@ Page {
 				//% "Fixed"
 				{ display: qsTrId("settings_tcpip_fixed"), value: "fixed", readOnly: true },
 			]
+			listPage: root
+			listIndex: ObjectModel.index
 			currentIndex: {
 				for (let i = 0; i < optionModel.length; ++i) {
 					if (optionModel[i].value === root._serviceMethod) {

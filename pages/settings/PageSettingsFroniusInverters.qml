@@ -6,14 +6,14 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property string bindPrefix: "com.victronenergy.settings/Settings/Fronius"
 	property DataPoint inverterIdsItem: DataPoint { source: bindPrefix + "/InverterIds" }
 
 
-	GradientListView {
+	listView: GradientListView {
 		model: inverterIdsItem.value ? inverterIdsItem.value.split(',') : []
 		delegate: ListNavigationItem {
 			id: menu
@@ -25,7 +25,9 @@ Page {
 			property DataPoint positionItem: DataPoint { source: inverterPath + "/Position" }
 			property DataPoint serialNumberItem: DataPoint { source: inverterPath + "/SerialNumber" }
 
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverter.qml", {"title": menu.text, "uniqueId": menu.uniqueId})
+			listPage: root
+			listIndex: model.index
+			onClicked: listPage.navigateTo("/pages/settings/PageSettingsFroniusInverter.qml", {"title": menu.text, "uniqueId": menu.uniqueId}, listIndex)
 			text: customNameItem.value || serialNumberItem.value || '--'
 			secondaryText: {
 				switch (positionItem.value) {

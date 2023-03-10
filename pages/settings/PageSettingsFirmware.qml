@@ -5,10 +5,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
@@ -30,24 +30,30 @@ Page {
 			ListNavigationItem {
 				//% "Online updates"
 				text: qsTrId("settings_online_updates")
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
+					listPage.navigateTo("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text }, listIndex)
 				}
 			}
 
 			ListNavigationItem {
 				//% "Install firmware from SD/USB"
 				text: qsTrId("settings_install_firmware_from_sd_usb")
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
+					listPage.navigateTo("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text }, listIndex)
 				}
 			}
 
 			ListNavigationItem {
 				//% "Stored backup firmware"
 				text: qsTrId("settings_stored_backup_firmware")
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRootfsSelect.qml", { title: text })
+					listPage.navigateTo("/pages/settings/PageSettingsRootfsSelect.qml", { title: text }, listIndex)
 				}
 			}
 		}

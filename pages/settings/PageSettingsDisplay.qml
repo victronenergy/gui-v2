@@ -5,10 +5,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
@@ -50,6 +50,9 @@ Page {
 					//% "Never"
 					{ display: qsTrId("settings_displayoff_never"), value: 0 },
 				]
+
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -67,6 +70,10 @@ Page {
 					//% "Auto"
 					{ display: qsTrId("settings_display_auto_mode") },
 				]
+
+				listPage: root
+				listIndex: ObjectModel.index
+
 				// TODO detect auto mode
 				currentIndex: Theme.colorScheme === Theme.Dark ? 0 : 1
 
@@ -84,8 +91,10 @@ Page {
 			ListNavigationItem {
 				//% "Brief view levels"
 				text: qsTrId("settings_brief_view_levels")
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayBrief.qml", {"title": text})
+					listPage.navigateTo("/pages/settings/PageSettingsDisplayBrief.qml", {"title": text}, listIndex)
 				}
 			}
 
@@ -96,6 +105,8 @@ Page {
 				optionModel: LanguageModel { currentLanguage: Language.current }
 				currentIndex: optionModel.currentIndex
 				secondaryText: optionModel.currentDisplayText
+				listPage: root
+				listIndex: ObjectModel.index
 
 				onOptionClicked: function(index) {
 					Language.current = optionModel.languageAt(index)
@@ -105,8 +116,10 @@ Page {
 			ListNavigationItem {
 				//% "Units"
 				text: qsTrId("settings_units")
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
+					listPage.navigateTo("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text}, listIndex)
 				}
 			}
 		}

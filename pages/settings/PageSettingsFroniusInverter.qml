@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property string uniqueId
@@ -25,7 +25,7 @@ Page {
 		source: bindPrefix + "/Phase"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
 				text: CommonWords.position
@@ -35,6 +35,8 @@ Page {
 					{ display: CommonWords.ac_input_2, value: 2 },
 					{ display: CommonWords.ac_output, value: 1 },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListTextItem {
@@ -58,6 +60,8 @@ Page {
 					//% "Split-phase (L1+L2)"
 					{ display: qsTrId("page_settings_fronius_inverter_split_phase"), value: 0 }
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -68,6 +72,8 @@ Page {
 					{ display: CommonWords.no, value: 0 },
 					{ display: CommonWords.yes, value: 1 }
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 		}
 	}

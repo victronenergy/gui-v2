@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property string gateway
@@ -34,7 +34,7 @@ Page {
 		onValueChanged: if (value === 1) timer.running = false
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
 				function isReadOnly(profile) {
@@ -94,15 +94,20 @@ Page {
 						readOnly: true
 					}
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListNavigationItem {
 				//% "Devices"
 				text: qsTrId("settings_devices")
 				visible: root._isVecan
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevices.qml",
-						{ gateway: root.gateway })
+					listPage.navigateTo("/pages/settings/PageSettingsVecanDevices.qml",
+						{ gateway: root.gateway },
+						listIndex)
 				}
 			}
 
@@ -219,9 +224,12 @@ Page {
 			ListNavigationItem {
 				//% "Network status"
 				text: qsTrId("settings_network_status")
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageCanbusStatus.qml",
-						{ gateway: root.gateway, title: root.title })
+					listPage.navigateTo("/pages/settings/PageCanbusStatus.qml",
+						{ gateway: root.gateway, title: root.title },
+						listIndex)
 				}
 			}
 		}

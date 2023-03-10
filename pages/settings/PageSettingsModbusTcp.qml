@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	DataPoint {
@@ -18,7 +18,7 @@ Page {
 		source: "com.victronenergy.modbustcp/LastError/Timestamp"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListSwitch {
 				id: enableModbusTcp
@@ -58,7 +58,9 @@ Page {
 				//% "Available services"
 				text: qsTrId("settings_modbus_available_services")
 				visible: enableModbusTcp.checked
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcpServices.qml", { title: text })
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageSettingsModbusTcpServices.qml", { title: text }, listIndex)
 			}
 		}
 	}

@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	function getDescription(customName, productName) {
@@ -26,14 +26,16 @@ Page {
 		source: "com.victronenergy.settings/Settings/CGwacs/DeviceIds"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: deviceIds.value ? deviceIds.value.split(',') : []
 		delegate: ListNavigationItem {
 			readonly property string devicePath: "com.victronenergy.settings/Settings/Devices/cgwacs_" + modelData
 
 			text: getDescription(customNameItem.value, modelData)
 			secondaryText: getMenuName(serviceType.value, l2ServiceType.value)
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacs.qml", { title: text, devicePath: devicePath })
+			listPage: root
+			listIndex: model.index
+			onClicked: listPage.navigateTo("/pages/settings/PageSettingsCGwacs.qml", { title: text, devicePath: devicePath }, listIndex)
 
 			DataPoint {
 				id: customNameItem

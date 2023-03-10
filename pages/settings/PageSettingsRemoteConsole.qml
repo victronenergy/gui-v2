@@ -5,10 +5,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListLabel {
 				//% "Manually reboot the GX device after changing these settings.\n\nFirst time use? Make sure to either set or disable the password check."

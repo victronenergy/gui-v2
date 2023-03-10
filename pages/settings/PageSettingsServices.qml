@@ -5,18 +5,20 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListNavigationItem {
 				//% "Modbus TCP"
 				text: qsTrId("settings_services_modbus_tcp")
 				secondaryText: modbus.value === 1 ? CommonWords.enabled : CommonWords.disabled
 				showAccessLevel: VenusOS.User_AccessType_Installer
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", { title: text })
+					listPage.navigateTo("/pages/settings/PageSettingsModbusTcp.qml", { title: text }, listIndex)
 				}
 
 				DataPoint {
@@ -50,13 +52,17 @@ Page {
 			}
 
 			Column {
+				id: interfacesColumn
 				width: parent ? parent.width : 0
+				property int modelIdx: ObjectModel.index
 
 				Repeater {
 					model: canInterface.value || []
 					delegate: ListNavigationItem {
 						text: modelData["name"] || ""
-						onClicked: Global.pageManager.pushPage(canBusComponent, { title: text })
+						listPage: root
+						listIndex: interfacesColumn.modelIdx
+						onClicked: listPage.navigateTo(canBusComponent, { title: text }, listIndex)
 
 						Component {
 							id: canBusComponent

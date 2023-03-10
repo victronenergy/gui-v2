@@ -8,9 +8,11 @@ import Victron.VenusOS
 ListView {
 	id: root
 
+	property var listPage
+
 	x: Theme.geometry.page.content.horizontalMargin
-	width: parent.width - Theme.geometry.page.content.horizontalMargin
-	height: parent.height
+	width: !!parent ? parent.width - Theme.geometry.page.content.horizontalMargin : 0
+	height: !!parent ? parent.height : 0
 	topMargin: Theme.geometry.gradientList.topMargin
 	bottomMargin: Theme.geometry.gradientList.bottomMargin
 	rightMargin: Theme.geometry.page.content.horizontalMargin

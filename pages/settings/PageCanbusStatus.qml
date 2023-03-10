@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	property string gateway: "can0"
@@ -137,7 +137,8 @@ Page {
 		}
 	}
 
-	GradientListView {
+	listView: GradientListView {
+
 		model: ObjectModel {
 			ListTextGroup {
 				id: stateGroup

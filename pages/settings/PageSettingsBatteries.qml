@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	property var _batteries: ({})
@@ -36,7 +36,7 @@ Page {
 		source: "com.victronenergy.system/ActiveBatteryService"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		id: batteryListView
 
 		header: ListLabel {
@@ -68,7 +68,9 @@ Page {
 				? (batteryEnabled.value === 1 || activeBattery ? root._visibleText : root._hiddenText)
 				: "--"
 
-			onClicked: Global.pageManager.pushPage(batterySettingsComponent, {"title": text})
+			listPage: root
+			listIndex: model.index
+			onClicked: listPage.navigateTo(batterySettingsComponent, {"title": text}, listIndex)
 
 			DataPoint {
 				id: batteryEnabled
@@ -78,8 +80,8 @@ Page {
 			Component {
 				id: batterySettingsComponent
 
-				Page {
-					GradientListView {
+				ListPage {
+					listView: GradientListView {
 						model: ObjectModel {
 							ListTextItem {
 								text: root._visibleText

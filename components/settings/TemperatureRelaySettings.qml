@@ -8,6 +8,9 @@ import Victron.VenusOS
 Column {
 	id: root
 
+	property var listPage
+	property int listIndex
+
 	property int relayNumber
 	property string sensorId
 	property bool relayActivateOnTemperature
@@ -57,6 +60,9 @@ Column {
 			//% "Relay 2"
 			{ display: qsTrId("settings_relay2"), value: 1, readOnly: !relay1Item.valid },
 		]
+
+		listPage: root.listPage
+		listIndex: root.listIndex
 
 		ListLabel {
 			//% "Warning: The above selected relay is not configured for temperature, this condition will be ignored."

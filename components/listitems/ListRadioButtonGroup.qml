@@ -55,7 +55,7 @@ ListNavigationItem {
 	enabled: userHasReadAccess && (dataSource === "" || dataValid)
 
 	onClicked: {
-		Global.pageManager.pushPage(optionsPageComponent, { title: text })
+		listPage.navigateTo(optionsPageComponent, { title: text }, listIndex)
 	}
 
 	DataPoint {
@@ -65,10 +65,11 @@ ListNavigationItem {
 	Component {
 		id: optionsPageComponent
 
-		Page {
+		ListPage {
 			id: optionsPage
 
-			GradientListView {
+			listView: GradientListView {
+
 				model: root.optionModel
 
 				delegate: ListRadioButton {

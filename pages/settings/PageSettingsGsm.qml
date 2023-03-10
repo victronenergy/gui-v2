@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property string bindPrefix: "com.victronenergy.modem"
@@ -27,7 +27,7 @@ Page {
 		source: bindPrefix + "/NetworkType"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: simStatus.valid ? modemConnected : notConnected
@@ -161,9 +161,9 @@ Page {
 				Component {
 					id: apnPage
 
-					Page {
+					ListPage {
 
-						GradientListView {
+						listView: GradientListView {
 
 							model: ObjectModel {
 

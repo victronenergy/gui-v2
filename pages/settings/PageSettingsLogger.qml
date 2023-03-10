@@ -6,10 +6,10 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
@@ -23,6 +23,8 @@ Page {
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled,	value: 1 },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListTextItem {
@@ -58,6 +60,8 @@ Page {
 				]
 				dataSource: "com.victronenergy.settings/Settings/Vrmlogger/LogInterval"
 				visible: !!loggerMode.dataValue && loggerMode.dataValue > 0
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListSwitch {
@@ -168,6 +172,8 @@ Page {
 				]
 				dataSource: "com.victronenergy.logger/Buffer/Location"
 				enabled: dataValue !== undefined
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -191,6 +197,8 @@ Page {
 				enabled: false
 				dataSource: "com.victronenergy.logger/Buffer/ErrorState"
 				visible: !!dataValue
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListTextItem { // This 'flickers' between values for ~30s after inserting a usb stick. Dbus-spy shows that the underlying data point flickers also. Old gui also flickers.

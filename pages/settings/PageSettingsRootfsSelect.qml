@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	property bool _autoUpdateDisabled: autoUpdate.value !== 1
@@ -37,7 +37,7 @@ Page {
 		source: "com.victronenergy.platform/Firmware/Backup/Activate"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {

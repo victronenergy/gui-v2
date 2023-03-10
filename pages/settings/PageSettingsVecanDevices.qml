@@ -7,7 +7,7 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property string gateway
@@ -15,7 +15,7 @@ Page {
 	//% "VE.CAN devices"
 	title: qsTrId("settings_vecan_devices")
 
-	GradientListView {
+	listView: GradientListView {
 		model: VeQItemSortTableModel {
 			filterFlags: VeQItemSortTableModel.FilterOffline
 			dynamicSortFilter: true
@@ -51,9 +51,11 @@ Page {
 				source: model.uid + "/DeviceInstance"
 			}
 
+			listPage: root
+			listIndex: model.index
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
-					{ bindPrefix: Utils.normalizedSource(model.uid), title: text })
+				listPage.navigateTo("/pages/settings/PageSettingsVecanDevice.qml",
+					{ bindPrefix: Utils.normalizedSource(model.uid), title: text }, listIndex)
 			}
 		}
 	}

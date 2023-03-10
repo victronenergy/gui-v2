@@ -7,7 +7,7 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	// Model with the supported sensors for the relays, when available.
@@ -34,7 +34,7 @@ Page {
 		}
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: services
 
 		delegate: TemperatureRelayNavigationItem {
@@ -57,7 +57,8 @@ Page {
 			Component {
 				id: sensorRelayComponent
 
-				Page {
+				ListPage {
+					id: subListPage
 					function _hasInvalidRelayTempConfig(relayNr) {
 						if (relayNr === 0) {
 							return relay0FunctionItem.value !== VenusOS.Relay_Function_Temperature
@@ -79,7 +80,7 @@ Page {
 						source: "com.victronenergy.settings/Settings/Relay/1/Function"
 					}
 
-					GradientListView {
+					listView: GradientListView {
 						model: relay0FunctionItem.value === VenusOS.Relay_Function_Temperature || relay1FunctionItem.value === VenusOS.Relay_Function_Temperature
 							   ? tempRelayModel
 							   : disabledModel
@@ -96,6 +97,8 @@ Page {
 							}
 
 							TemperatureRelaySettings {
+								listPage: subListPage
+								listIndex: ObjectModel.index
 								relayNumber: 0
 								sensorId: relayDelegate.getIdFromService(relayDelegate.bindPrefix)
 								relayActivateOnTemperature: functionEnabledSwitch.checked
@@ -103,6 +106,8 @@ Page {
 							}
 
 							TemperatureRelaySettings {
+								listPage: subListPage
+								listIndex: ObjectModel.index
 								relayNumber: 1
 								sensorId: relayDelegate.getIdFromService(relayDelegate.bindPrefix)
 								relayActivateOnTemperature: functionEnabledSwitch.checked

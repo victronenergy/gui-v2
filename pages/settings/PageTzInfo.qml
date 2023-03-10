@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "tz"
 
-Page {
+ListPage {
 	id: root
 
 	property var _timeZoneModels: [ tzAfrica, tzAmerica, tzAntartica, tzArtic, tzAsia, tzAtlantic, tzAustralia, tzEurope, tzIndian, tzPacific, tzEtc ]
@@ -55,7 +55,7 @@ Page {
 		}
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 
 			ListTextItem {
@@ -81,7 +81,9 @@ Page {
 				secondaryText: root._findTimeZoneName(tzData.region, tzData.city)
 				writeAccessLevel: VenusOS.User_AccessType_User
 
-				onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: text })
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo(pageTzMenuComponent, { title: text }, listIndex)
 
 				DataPoint {
 					id: tzData
@@ -110,8 +112,9 @@ Page {
 				Component {
 					id: pageTzMenuComponent
 
-					Page {
-						GradientListView {
+					ListPage {
+						id: subListPage
+						listView: GradientListView {
 							id: tzListView
 
 							header: ListSwitch {
@@ -138,6 +141,8 @@ Page {
 							delegate: ListRadioButtonGroup {
 								text: modelData.name
 								optionModel: modelData
+								listPage: subListPage
+								listIndex: model.index
 								secondaryText: ""
 								writeAccessLevel: VenusOS.User_AccessType_User
 								updateOnClick: false

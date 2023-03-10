@@ -79,7 +79,7 @@ ListNavigationItem {
 	secondaryText: getItemText()
 
 	onClicked: {
-		Global.pageManager.pushPage(scheduledOptionsComponent, { title: text })
+		listPage.navigateTo(scheduledOptionsComponent, { title: text }, listIndex)
 	}
 
 	DataPoint {
@@ -105,10 +105,11 @@ ListNavigationItem {
 	Component {
 		id: scheduledOptionsComponent
 
-		Page {
+		ListPage {
 			id: scheduledOptionsPage
 
-			GradientListView {
+			listView: GradientListView {
+
 				model: ObjectModel {
 					ListSwitch {
 						id: itemEnabled
@@ -130,6 +131,8 @@ ListNavigationItem {
 						//% "Not set"
 						defaultSecondaryText: qsTrId("cgwacs_battery_schedule_day_not_set")
 						optionModel: root._dayModel
+						listPage: scheduledOptionsPage
+						listIndex: ObjectModel.index
 					}
 
 					ListTimeSelector {

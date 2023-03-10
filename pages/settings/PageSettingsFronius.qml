@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root // TODO: update this UI when a design is available
 
 	property string settings: "com.victronenergy.settings"
@@ -24,12 +24,14 @@ Page {
 		source: gateway + "/ScanProgress"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListNavigationItem {
 				//% "Inverters"
 				text: qsTrId("page_settings_fronius_inverters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverters.qml", {"title": text})
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageSettingsFroniusInverters.qml", {"title": text}, listIndex)
 			}
 
 			ListButton {
@@ -42,13 +44,17 @@ Page {
 			ListNavigationItem {
 				//% "Detected IP addresses"
 				text: qsTrId("page_settings_fronius_detected_ip_addresses")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": text})
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": text}, listIndex)
 			}
 
 			ListNavigationItem {
 				//% "Add IP address manually"
 				text: qsTrId("page_settings_fronius_add_ip_address_manually")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": text})
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": text}, listIndex)
 			}
 
 			ListPortField {

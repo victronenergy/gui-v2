@@ -5,10 +5,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
@@ -19,7 +19,9 @@ Page {
 			ListNavigationItem {
 				text: "Page launch"
 				secondaryText: "Secondary text"
-				onClicked: Global.pageManager.pushPage(newPageComponent, { title: "Page name" })
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo(newPageComponent, { title: "Page name" }, listIndex)
 			}
 
 			ListSwitch {
@@ -40,6 +42,8 @@ Page {
 					{ display: "Option C", value: 3 },
 				]
 				currentIndex: 1
+				listPage: root
+				listIndex: ObjectModel.index
 
 				onOptionClicked: function(index) {
 					console.log("Radio button clicked at index", index)
@@ -55,6 +59,8 @@ Page {
 				}
 				currentIndex: 2
 				secondaryText: optionModel.get(2).display
+				listPage: root
+				listIndex: ObjectModel.index
 
 				onOptionClicked: function(index) {
 					console.log("Radio button clicked at index", index)
@@ -148,8 +154,8 @@ Page {
 	Component {
 		id: newPageComponent
 
-		Page {
-			GradientListView {
+		ListPage {
+			listView: GradientListView {
 				model: ObjectModel {
 					ListItem {
 						text: "New page item"

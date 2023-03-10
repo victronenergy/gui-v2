@@ -5,12 +5,13 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	property string bindPrefix
 
-	GradientListView {
+	listView: GradientListView {
+
 		model: ObjectModel {
 			ListTextItem {
 				text: CommonWords.connected

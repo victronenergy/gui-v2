@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 
-Page {
+ListPage {
 	id: root
 
 	VeQItemSortTableModel {
@@ -34,7 +34,7 @@ Page {
 		}
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: BackendConnection.type === BackendConnection.DBusSource
 			   ? dbusGpsModel
 			   : BackendConnection.type === BackendConnection.MqttSource
@@ -46,6 +46,8 @@ Page {
 				  ? "%1 [2]".arg(productName.value).arg(vrmInstance.value)
 				  : "--"
 
+			listPage: root
+			listIndex: model.index
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageGps.qml",
 						{"title": text, bindPrefix: model.uid })
@@ -65,15 +67,18 @@ Page {
 		footer: ListNavigationItem {
 			//% "GPS Settings"
 			text: qsTrId("settings_gps_settings")
+			listPage: root
+			listIndex: listView.count-1 // footer, so last item
 			onClicked: {
-				Global.pageManager.pushPage(gpsFormatSettingsComponent, {"title": text})
+				listPage.navigateTo(gpsFormatSettingsComponent, {"title": text}, listIndex)
 			}
 
 			Component {
 				id: gpsFormatSettingsComponent
 
-				Page {
-					GradientListView {
+				ListPage {
+					id: subListPage
+					listView: GradientListView {
 						model: ObjectModel {
 							ListRadioButtonGroup {
 								//: Format of reported GPS data
@@ -91,6 +96,8 @@ Page {
 									//% "52° 20.693 N, 5° 13.205 E"
 									{ display: qsTrId("settings_gps_format_dm_example"), value: VenusOS.GpsData_Format_DegreesMinutes },
 								]
+								listPage: subListPage
+								listIndex: ObjectModel.index
 							}
 
 							ListRadioButtonGroup {
@@ -108,6 +115,8 @@ Page {
 									//% "Knots"
 									{ display: qsTrId("settings_gps_format_kt"), value: "kt" },
 								]
+								listPage: subListPage
+								listIndex: ObjectModel.index
 							}
 						}
 					}

@@ -6,10 +6,10 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListTextItem {
 				//% "Synchronize VE.Bus SOC with battery"

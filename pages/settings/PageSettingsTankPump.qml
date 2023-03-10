@@ -6,13 +6,13 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	readonly property string settingsBindPrefix: "com.victronenergy.settings"
 	readonly property string pumpBindPrefix: "com.victronenergy.pump.startstop0"
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: relayFunction.value === undefined
@@ -55,6 +55,8 @@ Page {
 				{ display: CommonWords.onOrOff(0), value: 2 },
 			]
 			dataSource: root.settingsBindPrefix + "/Settings/Pump0/Mode"
+			listPage: root
+			listIndex: ObjectModel.index
 		}
 
 		ListRadioButtonGroup {
@@ -65,6 +67,8 @@ Page {
 			dataSource: root.settingsBindPrefix + "/Settings/Pump0/TankService"
 			//% "Unavailable sensor, set another"
 			defaultSecondaryText: qsTrId("settings_tank_unavailable_sensor")
+			listPage: root
+			listIndex: ObjectModel.index
 
 			DataPoint {
 				id: availableTankServices

@@ -6,13 +6,13 @@ import QtQuick
 import Victron.VenusOS
 import net.connman 0.1
 
-Page {
+ListPage {
 	id: root
 
 	// for mock simulator
 	property alias settingsListView: settingsListView
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: [
@@ -142,9 +142,9 @@ Page {
 			text: modelData.text
 			showAccessLevel: modelData.showAccessLevel || VenusOS.User_AccessType_User
 			visible: defaultVisible && (modelData.visible === undefined || modelData.visible === true)
-			onClicked: {
-				Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
-			}
+			listPage: root
+			listIndex: model.index
+			onClicked: listPage.navigateTo(modelData.page, {"title": modelData.text}, listIndex)
 		}
 	}
 

@@ -273,6 +273,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "GsmStatusIcon");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/InputPanel.qml")),
 		"Victron.VenusOS", 2, 0, "InputPanel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ListPage.qml")),
+		"Victron.VenusOS", 2, 0, "ListPage");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/FirmwareUpdate.qml")),
 		"Victron.VenusOS", 2, 0, "FirmwareUpdate");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GeneratorIconLabel.qml")),

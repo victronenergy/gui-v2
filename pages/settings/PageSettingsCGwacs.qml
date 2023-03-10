@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property string devicePath
@@ -28,7 +28,7 @@ Page {
 		source: devicePath + "/SupportMultiphase"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
 				//% "Role"
@@ -41,6 +41,8 @@ Page {
 					//% "AC meter"
 					{ display: qsTrId("settings_ac_meter"), value: "acload" } // TODO - in the old gui, a service type of 'acload' is translated differently here compared to PageSettingsCGwacsOverview. Confirm with victron that this is what they want.
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 				currentIndex: {
 					if (!optionModel || optionModel.length === undefined) {
 						return defaultIndex
@@ -68,6 +70,8 @@ Page {
 					{ display: CommonWords.ac_input_2, value: 2 },
 					{ display: CommonWords.ac_output, value: 1 },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -81,6 +85,8 @@ Page {
 					//% "Multi phase"
 					{ display: qsTrId("settings_multi_phase"), value: 1},
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListSwitch {
@@ -100,6 +106,8 @@ Page {
 				dataSource: root.devicePath + "_S/Position"
 				visible: pvOnL2.checked
 				optionModel: positions.optionModel
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 		}
 	}

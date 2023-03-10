@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	// TODO make this works for MQTT
@@ -66,7 +66,7 @@ Page {
 		property DataPoint apparentL3: DataPoint { source: vebusPrefix + "/Ac/Out/L3/S" }
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 
 			ListTextGroup {

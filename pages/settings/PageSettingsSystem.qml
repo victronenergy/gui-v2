@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property bool _isGrid: acInput1.currentIndex === 1 || acInput2.currentIndex === 1
@@ -23,7 +23,7 @@ Page {
 		{ display: qsTrId("settings_system_shore_power"), value: 3 },
 	]
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 
 			ListRadioButtonGroup {
@@ -55,6 +55,8 @@ Page {
 					{ display: qsTrId("settings_system_name_user_defined"), value: "custom" },
 				]
 				defaultIndex: customValueIndex
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListTextField {
@@ -74,6 +76,8 @@ Page {
 				text: qsTrId("settings_system_ac_input_1")
 				dataSource: "com.victronenergy.settings/Settings/SystemSetup/AcInput1"
 				optionModel: root._acInputsModel
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -83,6 +87,8 @@ Page {
 				text: qsTrId("settings_system_ac_input_2")
 				dataSource: "com.victronenergy.settings/Settings/SystemSetup/AcInput2"
 				optionModel: root._acInputsModel
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -97,6 +103,8 @@ Page {
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled, value: 1 },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -107,6 +115,8 @@ Page {
 				dataSource: "com.victronenergy.settings/Settings/SystemSetup/BatteryService"
 				//% "Unavailable monitor, set another"
 				defaultSecondaryText: qsTrId("settings_system_unavailable_monitor")
+				listPage: root
+				listIndex: ObjectModel.index
 
 				DataPoint {
 					id: availableBatteryServices
@@ -144,14 +154,18 @@ Page {
 			ListNavigationItem {
 				//% "Battery Measurements"
 				text: qsTrId("settings_system_battery_measurements")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteries.qml", { title: text })
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageSettingsBatteries.qml", { title: text }, listIndex)
 			}
 
 			ListNavigationItem {
 				//% "System Status"
 				text: qsTrId("settings_system_system_status")
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSystemStatus.qml", { title: text })
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageSettingsSystemStatus.qml", { title: text }, listIndex)
 			}
 		}
 	}

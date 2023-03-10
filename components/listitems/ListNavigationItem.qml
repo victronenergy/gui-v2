@@ -9,6 +9,9 @@ import Victron.VenusOS
 ListItem {
 	id: root
 
+	property ListPage listPage
+	property int listIndex
+
 	property alias secondaryText: secondaryLabel.text
 
 	signal clicked()

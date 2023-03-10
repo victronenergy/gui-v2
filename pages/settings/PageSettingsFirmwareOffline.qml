@@ -6,10 +6,10 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {

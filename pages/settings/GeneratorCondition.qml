@@ -39,7 +39,7 @@ ListNavigationItem {
 	readonly property real stepSize: Math.pow(10, -decimals)
 
 	secondaryText: dataValue === 1 ? CommonWords.enabled : CommonWords.disabled
-	onClicked: Global.pageManager.pushPage(subpage)
+	onClicked: listPage.navigateTo(subpage, {}, listIndex)
 
 	DataPoint {
 		id: dataPoint
@@ -50,10 +50,10 @@ ListNavigationItem {
 	Component {
 		id: subpage
 
-		Page {
+		ListPage {
 			title: root.text
 
-			GradientListView {
+			listView: GradientListView {
 
 				model: ObjectModel {
 

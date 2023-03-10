@@ -24,6 +24,7 @@
         <file>components/GradientListView.qml</file>
         <file>components/GsmStatusIcon.qml</file>
         <file>components/InputPanel.qml</file>
+        <file>components/ListPage.qml</file>
         <file>components/LoadGraph.qml</file>
         <file>components/LoadGraphShapePath.qml</file>
         <file>components/NavBar.qml</file>

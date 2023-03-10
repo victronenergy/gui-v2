@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 
-Page {
+ListPage {
 	id: root
 
 	property string batteryService
@@ -14,7 +14,7 @@ Page {
 	//% "Grid Setpoint"
 	title: qsTrId("settings_ess_debug_grid_setpoint")
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListSpinBox {
 				id: gridSetpoint

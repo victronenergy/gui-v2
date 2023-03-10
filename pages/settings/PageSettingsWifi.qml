@@ -9,7 +9,7 @@ import Victron.VenusOS
 import net.connman 0.1
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property CmTechnology _tech: Connman.getTechnology("wifi")
@@ -22,7 +22,7 @@ Page {
 
 	C.StackView.onActivated: _reload()
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		header: ListTextItem {
@@ -64,8 +64,10 @@ Page {
 				visible: wifiPoint.service && wifiPoint.service.favorite
 			}
 
+			listPage: root
+			listIndex: model.index
 			onClicked: {
-				Global.pageManager.pushPage(wifiPointComponent, { title: service.name })
+				listPage.navigateTo(wifiPointComponent, { title: service.name }, listIndex)
 			}
 
 			Component {

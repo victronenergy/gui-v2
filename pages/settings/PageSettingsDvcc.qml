@@ -7,10 +7,10 @@ import Victron.VenusOS
 import QtQuick.Controls as C
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		id: dvccSettings
 
 		model: ObjectModel {
@@ -30,7 +30,9 @@ Page {
 				//% "Charge Current limits"
 				text: qsTrId("settings_dvcc_charge_current_limits")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageChargeCurrentLimits.qml", { title: text })
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageChargeCurrentLimits.qml", { title: text }, listIndex)
 			}
 
 			ListSwitch {
@@ -75,6 +77,9 @@ Page {
 
 			ListRadioButtonGroup {
 				id: temperatureServiceRadioButtons
+
+				listPage: root
+				listIndex: ObjectModel.index
 
 				//% "Temperature sensor"
 				text: qsTrId("settings_dvcc_temp_sensor")
@@ -124,6 +129,8 @@ Page {
 				dataSource: "com.victronenergy.system/Control/BatteryCurrentSense"
 				visible: defaultVisible && commonSettings.dvccActive && sharedCurrentSense.checked
 				enabled: false
+				listPage: root
+				listIndex: ObjectModel.index
 
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },

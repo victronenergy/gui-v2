@@ -5,17 +5,20 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		// Allow AccessLevelRadioButtonGroup to get key events
 		focus: true
 
 		model: ObjectModel {
-			AccessLevelRadioButtonGroup {}
+			AccessLevelRadioButtonGroup {
+				listPage: root
+				listIndex: ObjectModel.index
+			}
 
 			ListTextField {
 				//% "Set root password"

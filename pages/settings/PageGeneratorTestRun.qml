@@ -5,10 +5,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	property string bindPrefix
 
-	GradientListView {
+	listView: GradientListView {
 
 		model: ObjectModel {
 
@@ -44,6 +44,8 @@ Page {
 					{ display: CommonWords.x_hours.arg(8), value: 28800 },
 					{ display: CommonWords.x_hours.arg(10), value: 36000 },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListDateSelector {

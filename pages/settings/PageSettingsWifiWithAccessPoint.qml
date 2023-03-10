@@ -6,13 +6,13 @@ import QtQuick
 import Victron.VenusOS
 import net.connman 0.1
 
-Page {
+ListPage {
 	id: root
 
 	property CmTechnology _tech: Connman.getTechnology("wifi")
 	property var _confirmApDialog
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
@@ -37,7 +37,9 @@ Page {
 			ListNavigationItem {
 				//% "Wi-Fi networks"
 				text: qsTrId("settings_wifi_networks")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", { title: text })
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageSettingsWifi.qml", { title: text }, listIndex)
 			}
 		}
 	}

@@ -7,16 +7,15 @@ import QtQuick.Controls as C
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property var _rescanDialog
 
 	topRightButton: VenusOS.StatusBar_RightButton_Refresh
 
-	IpAddressListView {
+	listView: IpAddressListView {
 		id: settingsListView
-
 		ipAddresses.source: "com.victronenergy.settings/Settings/Fronius/KnownIPAddresses"
 	}
 

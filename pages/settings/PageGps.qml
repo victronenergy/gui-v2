@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	property string bindPrefix
@@ -30,7 +30,7 @@ Page {
 		}
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListTextItem {
 				text: CommonWords.status
@@ -113,9 +113,12 @@ Page {
 				//% "Device"
 				text: qsTrId("settings_gps_device")
 
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+					listPage.navigateTo("/pages/settings/PageDeviceInfo.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix },
+							listIndex)
 				}
 			}
 		}

@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	function _formatValue(value, unit) {
@@ -20,7 +20,7 @@ Page {
 		id: data
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListTextGroup {
 				text: "PV On ACIn1"

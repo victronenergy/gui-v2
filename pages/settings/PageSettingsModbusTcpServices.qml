@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	function _shortServiceName(serviceName) {
@@ -30,7 +30,7 @@ Page {
 		source: "com.victronenergy.modbustcp/Services/Count"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: serviceCount.value || 0
 
 		delegate: ListItem {

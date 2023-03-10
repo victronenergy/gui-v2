@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 
-Page {
+ListPage {
 	id: root
 
 	property string bindPrefix: BackendConnection.type === BackendConnection.DBusSource
@@ -15,7 +15,7 @@ Page {
 		  ? "mqtt"
 		  : ""
 
-	GradientListView {
+	listView: GradientListView {
 		model: VeQItemTableModel {
 			id: uidModel
 			uids: [bindPrefix]
@@ -27,9 +27,11 @@ Page {
 			secondaryText: enabled ? "" : (model.value || "--")
 			enabled: subModel.rowCount > 0
 
+			listPage: root
+			listIndex: model.index
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml",
-						{ title: text, bindPrefix: model.uid })
+				listPage.navigateTo("/pages/settings/debug/PageDebugVeQItems.qml",
+						{ title: text, bindPrefix: model.uid }, listIndex)
 			}
 
 			VeQItemTableModel {

@@ -7,7 +7,7 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	VeQItemSortTableModel {
@@ -32,7 +32,8 @@ Page {
 		}
 	}
 
-	GradientListView {
+	listView: GradientListView {
+
 		header: DvccCommonSettings {
 			width: parent.width
 		}

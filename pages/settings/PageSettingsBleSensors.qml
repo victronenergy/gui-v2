@@ -7,7 +7,7 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	VeQItemSortTableModel {
@@ -39,7 +39,7 @@ Page {
 		filterFlags: VeQItemSortTableModel.FilterOffline
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListSwitch {
 				id: enable
@@ -65,15 +65,15 @@ Page {
 				//% "Bluetooth adapters"
 				text: qsTrId("settings_io_bluetooth_adapters")
 				visible: enable.checked
-				onClicked: {
-					Global.pageManager.pushPage(bluetoothAdaptersComponent, {"title": text})
-				}
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo(bluetoothAdaptersComponent, {"title": text}, listIndex)
 
 				Component {
 					id: bluetoothAdaptersComponent
 
-					Page {
-						GradientListView {
+					ListPage {
+						listView: GradientListView {
 							model: VeQItemSortTableModel {
 								model: VeQItemChildModel {
 									model: interfaces

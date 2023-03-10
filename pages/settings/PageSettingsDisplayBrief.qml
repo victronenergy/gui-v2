@@ -8,7 +8,7 @@ import QtQuick.Controls as C
 
 import "/components/Gauges.js" as Gauges
 
-Page {
+ListPage {
 	id: root
 
 	Flickable {
@@ -31,12 +31,13 @@ Page {
 					//% "Level %1"
 					text: qsTrId("settings_briefview_level").arg(model.index + 1)
 					secondaryText: Gauges.tankProperties(model.value).name || ""
-
+					listPage: root
+					listIndex: model.index
 					onClicked: {
-						Global.pageManager.pushPage(briefLevelComponent, {
+						listPage.navigateTo(briefLevelComponent, {
 							tankType: Qt.binding(function() { return model.value }),
 							levelIndex: model.index
-						})
+						}, listIndex)
 					}
 				}
 			}
@@ -54,11 +55,11 @@ Page {
 	Component {
 		id: briefLevelComponent
 
-		Page {
+		ListPage {
 			property int tankType
 			property int levelIndex
 
-			GradientListView {
+			listView: GradientListView {
 				model: [
 					VenusOS.Tank_Type_Battery,
 					VenusOS.Tank_Type_Fuel,

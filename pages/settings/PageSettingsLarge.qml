@@ -5,10 +5,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListLabel {
 				//% "Note that these features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.\n\nDocumentation at https://ve3.nl/vol"
@@ -45,6 +45,8 @@ Page {
 					//% "Enabled (safe mode)"
 					{ display: qsTrId("settings_large_enabled_safe_mode"), value: VenusOS.NodeRed_Mode_EnabledWithSafeMode },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListLabel {

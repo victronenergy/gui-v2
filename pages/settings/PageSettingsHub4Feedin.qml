@@ -5,12 +5,12 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	property int hub4Mode
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 			ListSwitch {
 				id: acFeedin

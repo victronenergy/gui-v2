@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property bool allowDisableAutostart: true
@@ -77,7 +77,7 @@ Page {
 		source: root.settingsBindPrefix + "/AccumulatedDaily"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: startStopModel
@@ -110,6 +110,8 @@ Page {
 				//% "Generator not detected at AC input"
 				{ display: qsTrId("settings_generator_not_detected"), value: 3 },
 			]
+			listPage: root
+			listIndex: ObjectModel.index
 			enabled: false
 			dataSource: root.startStopBindPrefix + "/Error"
 		}
@@ -173,16 +175,17 @@ Page {
 		ListNavigationItem {
 			//% "Manual start"
 			text: qsTrId("settings_page_relay_generator_manual_start")
-			onClicked: Global.pageManager.pushPage(manualStartPage, { title: text })
+			listPage: root
+			listIndex: ObjectModel.index
+			onClicked: listPage.navigateTo(manualStartPage, { title: text }, listIndex)
 
 			Component {
 				id: manualStartPage
 
-				Page {
-					GradientListView {
+				ListPage {
+					listView: GradientListView {
 
 						model: ObjectModel {
-
 							ListSwitch {
 								id: manualSwitch
 								//% "Start generator"
@@ -210,13 +213,15 @@ Page {
 		ListNavigationItem {
 			//% "Daily run time"
 			text: qsTrId("settings_page_relay_generator_daily_run_time")
-			onClicked: Global.pageManager.pushPage(dailyRunTimePage, { title: text })
+			listPage: root
+			listIndex: ObjectModel.index
+			onClicked: listPage.navigateTo(dailyRunTimePage, { title: text }, listIndex)
 
 			Component {
 				id: dailyRunTimePage
 
-				Page {
-					GradientListView {
+				ListPage {
+					listView: GradientListView {
 						model: _dates
 						delegate: ListTextItem {
 							text: Qt.formatDate(new Date(parseInt(_dates[index]) * 1000), "dd-MM-yyyy") // TODO: locale-specific date format?
@@ -230,7 +235,9 @@ Page {
 		ListNavigationItem {
 			//% "Settings"
 			text: qsTrId("settings_page_relay_generator_settings")
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml", { title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+			listPage: root
+			listIndex: ObjectModel.index
+			onClicked: listPage.navigateTo("/pages/settings/PageSettingsGenerator.qml", { title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix }, listIndex)
 		}
 	}
 }

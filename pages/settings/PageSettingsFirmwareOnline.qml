@@ -6,10 +6,10 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
@@ -28,6 +28,8 @@ Page {
 					//% "Check and update"
 					{ display: qsTrId("settings_firmware_check_and_update"), value: VenusOS.Firmware_AutoUpdate_CheckAndUpdate }
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -47,6 +49,8 @@ Page {
 					//% "Develop"
 					{ display: qsTrId("settings_firmware_develop"), value: FirmwareUpdater.FirmwareDevelop, readOnly: true },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -60,6 +64,8 @@ Page {
 					//% "Large"
 					{ display: qsTrId("settings_firmware_large"), value: FirmwareUpdater.ImageTypeLarge },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 
 				DataPoint {
 					id: largeImageSupport

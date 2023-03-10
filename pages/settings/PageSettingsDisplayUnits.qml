@@ -5,10 +5,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
@@ -23,6 +23,8 @@ Page {
 					//% "Amps"
 					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Energy_Amp },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 				currentIndex: Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Amp ? 1 : 0
 
 				onOptionClicked: function(index) {
@@ -40,6 +42,8 @@ Page {
 					//% "Fahrenheit"
 					{ display: qsTrId("settings_units_fahrenheit"), value: VenusOS.Units_Temperature_Fahrenheit },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 				currentIndex: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
 
 				onOptionClicked: function(index) {
@@ -61,6 +65,8 @@ Page {
 					//% "Gallons (Imperial)"
 					{ display: qsTrId("settings_units_gallons_imperial"), value: VenusOS.Units_Volume_GallonImperial },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 				currentIndex: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_Liter
 						? 1
 						: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_GallonUS

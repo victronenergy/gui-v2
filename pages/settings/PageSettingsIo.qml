@@ -8,7 +8,7 @@ import Victron.Veutil
 import net.connman 0.1
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	VeQItemTableModel {
@@ -31,22 +31,24 @@ Page {
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 
 			ListNavigationItem {
 				//% "Analog inputs"
 				text: qsTrId("settings_io_analog_inputs")
 				visible: defaultVisible && analogModel.rowCount > 0
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage(analogInputsComponent, {"title": text})
+					listPage.navigateTo(analogInputsComponent, {"title": text}, listIndex)
 				}
 
 				Component {
 					id: analogInputsComponent
 
-					Page {
-						GradientListView {
+					ListPage {
+						listView: GradientListView {
 							model: analogModel
 							delegate: ListSwitch {
 								text: switchLabel.value || ""
@@ -66,15 +68,18 @@ Page {
 				//% "Digital inputs"
 				text: qsTrId("settings_io_digital_inputs")
 				visible: defaultVisible && digitalModel.rowCount > 0
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
+					listPage.navigateTo(digitalInputsComponent, {"title": text}, listIndex)
 				}
 
 				Component {
 					id: digitalInputsComponent
 
-					Page {
-						GradientListView {
+					ListPage {
+						id: subListPage
+						listView: GradientListView {
 							model: digitalModel
 
 							delegate: ListRadioButtonGroup {
@@ -103,6 +108,8 @@ Page {
 									//% "Generator"
 									{ display: qsTrId("settings_io_digital_input_generator"), value: VenusOS.DigitalInput_Generator },
 								]
+								listPage: subListPage
+								listIndex: model.index
 							}
 						}
 					}
@@ -113,8 +120,10 @@ Page {
 				//% "Bluetooth sensors"
 				text: qsTrId("settings_io_bt_sensors")
 				visible: Connman.technologyList.indexOf("bluetooth") !== -1
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
+					listPage.navigateTo("/pages/settings/PageSettingsBleSensors.qml", {"title": text}, listIndex)
 				}
 			}
 		}

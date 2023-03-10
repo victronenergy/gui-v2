@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property string bindPrefix
@@ -18,7 +18,7 @@ Page {
 		source: "com.victronenergy.system/AvailableBatteryMeasurements"
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
@@ -32,6 +32,8 @@ Page {
 				defaultSecondaryText: qsTrId("page_generator_conditions_unavailable_monitor_set_another")
 				source: bindPrefix + "/BatteryService"
 				visible: dataValue !== "default"
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -46,6 +48,8 @@ Page {
 					//% "Keep generator running"
 					{ display: qsTrId("page_generator_conditions_keep_generator_running"), value: 2 },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListSwitch {
@@ -88,7 +92,9 @@ Page {
 			ListNavigationItem {
 				text: CommonWords.ac_load
 				secondaryText: acLoadEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorAcLoad.qml", { bindPrefix: root.bindPrefix + "/AcLoad"})
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageGeneratorAcLoad.qml", { bindPrefix: root.bindPrefix + "/AcLoad"}, listIndex)
 
 				DataPoint {
 					id: acLoadEnabled
@@ -120,7 +126,9 @@ Page {
 				//% "Periodic run"
 				text: qsTrId("page_generator_conditions_periodic_run")
 				secondaryText: testRunEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorTestRun.qml", { title: text, bindPrefix: root.bindPrefix })
+				listPage: root
+				listIndex: ObjectModel.index
+				onClicked: listPage.navigateTo("/pages/settings/PageGeneratorTestRun.qml", { title: text, bindPrefix: root.bindPrefix }, listIndex)
 
 				DataPoint {
 					id: testRunEnabled

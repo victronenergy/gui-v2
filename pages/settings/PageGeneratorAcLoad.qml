@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Page {
+ListPage {
 	id: root
 
 	property string bindPrefix
@@ -28,7 +28,7 @@ Page {
 	//% "AC output"
 	title: qsTrId("ac_output")
 
-	GradientListView {
+	listView: GradientListView {
 
 		model: ObjectModel {
 
@@ -52,6 +52,8 @@ Page {
 					//% "Inverter AC out highest phase"
 					{ display: qsTrId("ac_out_highest_phase"), value: 2 },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListSpinBox {

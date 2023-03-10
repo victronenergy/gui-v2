@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	readonly property bool _valid: systemType.value === "ESS" || systemType.value === "Hub-4"
@@ -29,6 +29,8 @@ Page {
 			//% "Mode"
 			text: qsTrId("settings_ess_mode")
 			optionModel: Global.ess.stateModel
+			listPage: root
+			listIndex: ObjectModel.index
 			currentIndex: {
 				for (let i = 0; i < optionModel.length; ++i) {
 					if (optionModel[i].value === Global.ess.state) {
@@ -57,6 +59,8 @@ Page {
 				//% "Inverter/Charger"
 				{ display: qsTrId("settings_ess_inverter_charger"), value: 1 },
 			]
+			listPage: root
+			listIndex: ObjectModel.index
 		}
 
 		ListSwitch {
@@ -74,6 +78,8 @@ Page {
 				 && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				 && batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			defaultSecondaryText: ""
+			listPage: root
+			listIndex: ObjectModel.index
 			optionModel: [
 				//% "Total of all phases"
 				{ display: qsTrId("settings_ess_phase_compensation"), value: VenusOS.Ess_Hub4ModeState_PhaseCompensation },
@@ -150,6 +156,8 @@ Page {
 				//% "Recharge"
 				{ display: qsTrId("settings_ess_battery_life_recharge"), value: 8 },
 			]
+			listPage: root
+			listIndex: ObjectModel.index
 		}
 
 		ListSwitch {
@@ -230,9 +238,12 @@ Page {
 			text: qsTrId("settings_ess_grid_feed_in")
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 
+			listPage: root
+			listIndex: ObjectModel.index
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Feedin.qml",
-					{ title: text, hub4Mode: Qt.binding(function() { return essMode.value }) })
+				listPage.navigateTo("/pages/settings/PageSettingsHub4Feedin.qml",
+					{ title: text, hub4Mode: Qt.binding(function() { return essMode.value }) },
+					listIndex)
 			}
 		}
 
@@ -243,17 +254,22 @@ Page {
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
+			listPage: root
+			listIndex: ObjectModel.index
 			onClicked: {
-				Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
+				listPage.navigateTo(scheduledChargeComponent, { title: text }, listIndex)
 			}
 
 			Component {
 				id: scheduledChargeComponent
 
-				Page {
-					GradientListView {
+				ListPage {
+					id: subListPage
+					listView: GradientListView {
 						model: 5
 						delegate: CGwacsBatteryScheduleNavigationItem {
+							listPage: subListPage
+							listIndex: model.index
 							scheduleNumber: modelData
 						}
 					}
@@ -268,13 +284,15 @@ Page {
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
 
+			listPage: root
+			listIndex: ObjectModel.index
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageHub4Debug.qml")
+				listPage.navigateTo("/pages/settings/PageHub4Debug.qml", {}, listIndex)
 			}
 		}
 	}
 
-	GradientListView {
+	listView: GradientListView {
 		header: root._valid ? null : noEssHeader
 		model: root._valid ? essSettings : null
 	}

@@ -5,12 +5,12 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+ListPage {
 	id: root
 
 	readonly property var _relay0Object: Global.relays.model.count > 0 ? Global.relays.model.get(0).relay : null
 
-	GradientListView {
+	listView: GradientListView {
 		model: ObjectModel {
 
 			ListRadioButtonGroup {
@@ -34,6 +34,8 @@ Page {
 					//% "Temperature"
 					{ display: qsTrId("settings_relay_temp"), value: VenusOS.Relay_Function_Temperature },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListRadioButtonGroup {
@@ -49,6 +51,8 @@ Page {
 					//% "Normally closed"
 					{ display: qsTrId("settings_relay_normally_closed"), value: 1 },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListSwitch {
@@ -93,6 +97,8 @@ Page {
 					//% "Temperature"
 					{ display: qsTrId("settings_relay_temp"), value: VenusOS.Relay_Function_Temperature },
 				]
+				listPage: root
+				listIndex: ObjectModel.index
 			}
 
 			ListSwitch {
@@ -109,8 +115,10 @@ Page {
 				text: qsTrId("settings_relay_temp_control_rules")
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Temperature
 					|| relay1Function.currentValue === VenusOS.Relay_Function_Temperature
+				listPage: root
+				listIndex: ObjectModel.index
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRelayTempSensors.qml", { title: text })
+					listPage.navigateTo("/pages/settings/PageSettingsRelayTempSensors.qml", { title: text }, listIndex)
 				}
 			}
 		}
