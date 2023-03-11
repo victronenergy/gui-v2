@@ -87,6 +87,7 @@ jobs:
       with:
         name: venus-webassembly
         path: artifacts
+        retention-days: 5
     - name: Release tagged wasm files
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
