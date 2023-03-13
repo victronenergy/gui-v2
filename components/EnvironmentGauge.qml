@@ -73,6 +73,7 @@ Item {
 		Rectangle {
 			id: valueMarker
 
+			visible: !isNaN(root.value)
 			y: root._barYPosForValue(Math.max(root.minimumValue, Math.min(root.maximumValue, root.value))) - height/2
 			width: Theme.geometry.levelsPage.environment.gauge.valueMarker.width
 			height: Theme.geometry.levelsPage.environment.gauge.valueMarker.background.height
