@@ -39,8 +39,8 @@ QtObject {
 				}
 				break
 			case FirmwareUpdater.ErrorDuringChecking:
-				//% "Error during checking"
-				msg = qsTrId("settings_firmware_error_during_checking")
+				//% "Error while checking for firmware updates"
+				msg = qsTrId("settings_firmware_error_during_checking_for_updates")
 				break
 			case FirmwareUpdater.Checking:
 				root._wasChecking = true
@@ -60,7 +60,7 @@ QtObject {
 				}
 				break
 			case FirmwareUpdater.ErrorDuringUpdating:
-				//% "Error during installation"
+				//% "Error during firmware installation"
 				msg = qsTrId("settings_firmware_error_during_installation")
 				break
 			case FirmwareUpdater.Rebooting:
