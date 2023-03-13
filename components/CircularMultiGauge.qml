@@ -108,7 +108,7 @@ Item {
 					color: Theme.color.font.primary
 					visible: Global.systemSettings.briefView.showPercentages.value
 					//% "%1%"
-					text: qsTrId("%1%").arg(Math.round(model.value))
+					text: qsTrId("%1%").arg(isNaN(model.value) ? 0 : Math.round(model.value))
 				}
 				CP.ColorImage {
 					id: iconImage
