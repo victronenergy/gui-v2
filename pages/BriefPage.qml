@@ -315,7 +315,7 @@ Page {
 			PropertyChanges {
 				target: root
 				_gaugeArcOpacity: 0
-				_gaugeLabelOpacity: 0
+				_gaugeLabelOpacity: 1
 			}
 		}
 	]
