@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 cmake_policy(SET CMP0079 NEW)
 
-project(venus-gui-v2 LANGUAGES CXX)
+project(venus-gui-v2 LANGUAGES CXX VERSION 0.01.02)
+add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR} -DPROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH} )
 set(TRANSLATIONS_TS_TARGET venus-gui-v2-translations-ts)
 set(TRANSLATIONS_QM_TARGET venus-gui-v2-translations-qm)
 
