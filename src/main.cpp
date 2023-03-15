@@ -548,6 +548,7 @@ void registerQmlTypes()
 
 int main(int argc, char *argv[])
 {
+	qInfo("Victron gui version: v%d.%d.%d", PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
 	qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
 	registerQmlTypes();
