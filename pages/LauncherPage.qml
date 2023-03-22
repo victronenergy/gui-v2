@@ -60,6 +60,20 @@ Page {
 		}
 	}
 
+	/*
+	There are 2 StackViews in the app.
+	There is a StackView in MainView.qml that always contains this page, plus sometimes the ControlCardsPage.
+	There is also a StackView in this page, which contains one of the top level pages (Brief, Overview, Levels etc),
+	as well as whatever pages the top level page pushes onto the stack.
+	When the ControlCardsPage gets popped off, LauncherPage becomes the Global.pageManager.currentPage,
+	and we need to restore whatever is the top page of our own navStack, to Global.pageManager.currentPage.
+	*/
+	onIsCurrentPageChanged: {
+		if (isCurrentPage && navStack.depth) {
+			Global.pageManager.currentPage = navStack.get(navStack.depth - 1)
+		}
+	}
+
 	C.StackView {
 		id: navStack
 		clip: true
