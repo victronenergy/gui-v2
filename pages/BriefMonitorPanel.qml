@@ -104,8 +104,11 @@ Column {
 	}
 
 	Column {
+		id: generator
+
 		width: parent.width
 		spacing: Theme.geometry.briefPage.sidePanel.generator.columnSpacing
+		visible: !!generatorQuantityLabel.dataObject
 
 		Item {
 			width: parent.width
@@ -137,12 +140,87 @@ Column {
 				generator: Global.generators.first
 			}
 		}
-
 		Slider {
 			enabled: false // not interactive
 			width: parent.width
 			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
 			value: Global.acInputs.generatorInput ? Global.acInputs.generatorInput.power : 0
+			showHandle: false
+
+			Behavior on value { NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration } }
+		}
+	}
+
+	Column {
+		width: parent.width
+		spacing: Theme.geometry.briefPage.sidePanel.generator.columnSpacing
+		visible: !generator.visible && (!!Global.acInputs.power || !!Global.dcInputs.power)
+
+		Item {
+			width: parent.width
+			height: gridQuantityLabel.y + gridQuantityLabel.height
+
+			WidgetHeader {
+				id: gridHeader
+
+				//% "Power"
+				title: qsTrId("power")
+				icon.source: {
+					const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
+									  + Global.dcInputs.model.count
+					if (totalInputs <= 1) {
+						if (Global.acInputs.connectedInput != null) {
+							return VenusOS.acInputIcon(Global.acInputs.connectedInput.source)
+						} else if (Global.acInputs.generatorInput != null) {
+							return VenusOS.acInputIcon(Global.acInputs.generatorInput.source)
+						} else if (Global.dcInputs.model.count > 0) {
+							return VenusOS.dcInputIcon(Global.dcInputs.model.get(0).source)
+						}
+					}
+					return "qrc:/images/icon_input_24.svg"
+				}
+			}
+
+			EnergyQuantityLabel {
+				id: gridQuantityLabel
+
+				anchors.top: gridHeader.bottom
+				value: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
+				font.pixelSize: Theme.font.briefPage.quantityLabel.size
+			}
+
+			LoadGraph {
+				id: gridGraph
+
+				anchors {
+					right: parent.right
+					bottom: gridQuantityLabel.bottom
+					bottomMargin: gridQuantityLabel.bottomPadding
+				}
+				initialModelValue: 0.5
+				interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
+				enableAnimation: root.opacity > 0
+				warningThreshold: 0.5
+				belowThresholdFillColor1: Theme.color.briefPage.background
+				belowThresholdFillColor2: Theme.color.briefPage.background
+				belowThresholdBackgroundColor1: Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor1
+				belowThresholdBackgroundColor2: Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor2
+				horizontalGradientColor1: Theme.color.briefPage.background
+				horizontalGradientColor2: "transparent"
+
+				Timer {
+					interval: parent.interval
+					running: root.opacity > 0
+					repeat: true
+					onTriggered: gridGraph.addValue(gridPower.normalizedValueAsRatio)
+				}
+			}
+		}
+		Slider {
+			enabled: false // not interactive
+			width: parent.width
+			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
+			value: gridPower.normalizedValueAsRatio
 			showHandle: false
 
 			Behavior on value { NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration } }
@@ -181,11 +259,11 @@ Column {
 					bottom: loadsQuantityLabel.bottom
 					bottomMargin: loadsQuantityLabel.bottomPadding
 				}
-				interval: timer.interval
+				interval: loadGraphTimer.interval
 				enableAnimation: root.opacity > 0
 
 				Timer {
-					id: timer
+					id: loadGraphTimer
 
 					interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
 					running: root.opacity > 0
@@ -212,5 +290,19 @@ Column {
 		id: loadsPower
 
 		value: Global.system.loads.power
+	}
+
+	ValueRange {
+		id: gridPower
+
+		// If the current grid power is 0W, normalizedValueAsRatio equals 0.5, regardless of maximum / minimum seen power.
+		// If the maximum seen power is 20W, and the minimum seen power is 10W, and the current power is 10W,
+		// normalizedValueAsRatio equals 0.75.
+		// If the maximum seen power is -10W, and the minimum seen power is -100W, and the current power is -20W,
+		// normalizedValueAsRatio equals 0.4.
+		readonly property real normalizedValueAsRatio: 0.5 + (value / normalizedRange)
+		readonly property real normalizedRange: Math.abs(_max) > Math.abs(_min) ? 2*Math.abs(_max) : 2*Math.abs(_min)
+
+		value: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
 	}
 }
