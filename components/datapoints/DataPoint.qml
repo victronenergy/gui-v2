@@ -8,7 +8,15 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	// Valid 'source' values are:
+	// - dbus paths, e.g. 'com.victronenergy.blah/path/to/value'
+	// - as above, but with as full dbus uid, e.g. 'dbus/com.victronenergy.blah/path/to/value'
+	// - full mqtt uid, e.g. 'mqtt/blah/device-id/path/to/value'
+	// Note that dbus and mqtt uids should only be used when the application is using their
+	// respective backend connection types. If a mqtt uid is used on a dbus connection, for
+	// example, the DataPoint would not produce a valid value.
 	property string source
+
 	property var sourceObject
 	property int sourceType: BackendConnection.type
 
@@ -22,10 +30,16 @@ QtObject {
 
 	property var _dbusImpl
 	property var _mqttImpl
-	property SingleUidHelper _mqttUidHelper
+	property var _mqttUidHelper
 	property Component _mqttUidHelperComponent: Component {
-		SingleUidHelper {
-			dbusUid: root.source ? "dbus/" + root.source : ""
+		QtObject {
+			readonly property string mqttUid: root.source.startsWith("mqtt/") ? root.source : _uidConverter.mqttUid
+
+			readonly property SingleUidHelper _uidConverter: SingleUidHelper {
+				dbusUid: root.source.length === 0 || root.source.startsWith("mqtt/")
+						 ? ""
+						 : (root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source)
+			}
 		}
 	}
 
@@ -70,7 +84,7 @@ QtObject {
 			sourceObject.destroy()
 			sourceObject = null
 		}
-		sourceObject = _dbusImpl.createObject(root, { uid: "dbus/" + root.source })
+		sourceObject = _dbusImpl.createObject(root, { uid: Qt.binding(function() { return root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source }) })
 		if (!sourceObject) {
 			console.warn("Failed to create object from DataPointDBusImpl.qml", _dbusImpl.errorString())
 			return
