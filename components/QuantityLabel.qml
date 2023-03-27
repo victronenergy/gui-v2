@@ -13,7 +13,8 @@ Item {
 	property int unit: -1
 	property alias font: valueLabel.font
 	property alias valueColor: valueLabel.color
-	readonly property real bottomPadding: height - valueLabel.baselineOffset + Theme.geometry.quantityLabel.bottomMargin
+	property alias unitColor: unitLabel.color
+	property int alignment: Qt.AlignHCenter
 
 	readonly property var _quantity: Units.getDisplayText(unit, value, Theme.geometry.quantityLabel.valueLength)
 
@@ -28,8 +29,11 @@ Item {
 
 		anchors {
 			verticalCenter: parent.verticalCenter
-			horizontalCenter: parent.horizontalCenter
+			horizontalCenter: root.alignment === Qt.AlignHCenter ? parent.horizontalCenter : undefined
 			horizontalCenterOffset: -(unitLabel.width + Theme.geometry.quantityLabel.spacing)/2
+			left: root.alignment === Qt.AlignLeft ? parent.left : undefined
+			right: root.alignment === Qt.AlignRight ? parent.right : undefined
+			rightMargin: unitLabel.width
 		}
 		color: Theme.color.font.primary
 		text: root._quantity === undefined ? "" : root._quantity.number
