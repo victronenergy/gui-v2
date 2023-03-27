@@ -310,8 +310,7 @@ function normalizedSource(s) {
 	return s.startsWith("dbus/") ? s.substr(5) : s
 }
 
-function simplifiedNetworkType(t)
-{
+function simplifiedNetworkType(t) {
 	if (!t) {
 		return ""
 	}

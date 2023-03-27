@@ -16,6 +16,20 @@ Page {
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
 	property bool _animationEnabled
+	readonly property string _gridIcon: {
+		const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
+				+ Global.dcInputs.model.count
+		if (totalInputs <= 1) {
+			if (Global.acInputs.connectedInput != null) {
+				return VenusOS.acInputIcon(Global.acInputs.connectedInput.source)
+			} else if (Global.acInputs.generatorInput != null) {
+				return VenusOS.acInputIcon(Global.acInputs.generatorInput.source)
+			} else if (Global.dcInputs.model.count > 0) {
+				return VenusOS.dcInputIcon(Global.dcInputs.model.get(0).source)
+			}
+		}
+		return "qrc:/images/icon_input_24.svg"
+	}
 
 	backgroundColor: Theme.color.briefPage.background
 	fullScreenWhenIdle: true
@@ -98,20 +112,7 @@ Page {
 			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
 			label.opacity: root._gaugeLabelOpacity
 
-			icon.source: {
-				const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
-						+ Global.dcInputs.model.count
-				if (totalInputs <= 1) {
-					if (Global.acInputs.connectedInput != null) {
-						return VenusOS.acInputIcon(Global.acInputs.connectedInput.source)
-					} else if (Global.acInputs.generatorInput != null) {
-						return VenusOS.acInputIcon(Global.acInputs.generatorInput.source)
-					} else if (Global.dcInputs.model.count > 0) {
-						return VenusOS.dcInputIcon(Global.dcInputs.model.get(0).source)
-					}
-				}
-				return "qrc:/images/icon_input_24.svg"
-			}
+			icon.source: root._gridIcon
 
 			// AC and DC amp values cannot be combined. If there are both AC and DC values, show
 			// Watts even if Amps is preferred.
@@ -234,6 +235,7 @@ Page {
 			verticalCenterOffset: Theme.geometry.briefPage.sidePanel.verticalCenterOffset
 		}
 		width: Theme.geometry.briefPage.sidePanel.width
+		gridIcon: root._gridIcon
 
 		// hidden by default.
 		x: root.width

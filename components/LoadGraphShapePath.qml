@@ -10,7 +10,7 @@ Shape {
 	id: root
 
 	property var model: []
-	property int segWidth: width / (model.length - 2)
+	readonly property int segWidth: width / (model.length - 2)
 	readonly property int rc1x: 0.5*segWidth
 	readonly property int rc2x: 0.5*segWidth
 	property bool enableAnimation: false
