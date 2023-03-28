@@ -365,6 +365,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ListDateSelector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListItem.qml")),
 		"Victron.VenusOS", 2, 0, "ListItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListItemBackground.qml")),
+		"Victron.VenusOS", 2, 0, "ListItemBackground");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListTextItem.qml")),
 		"Victron.VenusOS", 2, 0, "ListTextItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListNavigationItem.qml")),

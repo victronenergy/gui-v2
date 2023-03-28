@@ -15,6 +15,9 @@ ListView {
 	bottomMargin: Theme.geometry.gradientList.bottomMargin
 	rightMargin: Theme.geometry.page.content.horizontalMargin
 
+	// Note: do not set spacing here, as it creates extra spacing if an item has visible=false.
+	// Instead, the spacing is added visually within ListItem's ListItemBackground.
+
 	ViewGradient {
 		anchors {
 			bottom: root.bottom
