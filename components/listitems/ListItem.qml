@@ -34,12 +34,10 @@ Item {
 	implicitHeight: defaultImplicitHeight
 	visible: defaultVisible
 
-	Rectangle {
+	ListItemBackground {
 		id: backgroundRect
 
-		width: root.width
 		height: root.height - root.spacing
-		radius: Theme.geometry.listItem.radius
 		color: root.down ? Theme.color.listItem.down.background : Theme.color.listItem.background
 		// TODO how to indicate read-only setting?
 

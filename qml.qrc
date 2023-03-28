@@ -87,6 +87,7 @@
         <file>components/listitems/ListDateSelector.qml</file>
         <file>components/listitems/ListIpAddressField.qml</file>
         <file>components/listitems/ListItem.qml</file>
+        <file>components/listitems/ListItemBackground.qml</file>
         <file>components/listitems/ListLabel.qml</file>
         <file>components/listitems/ListNavigationItem.qml</file>
         <file>components/listitems/ListPortField.qml</file>
