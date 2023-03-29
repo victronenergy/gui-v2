@@ -38,8 +38,8 @@ function getDisplayText(unit, value, length, unitMatchValue = undefined) {
 		// \u2113 = l, \u3398 = kl
 		return _scaledQuantity(value, unitMatchValue, length, "\u2113", "\u3398")
 	case V.VenusOS.Units_Volume_CubicMeter:
-		// \u33A5 = m3
-		return _scaledQuantity(value, unitMatchValue, length, "\u33A5")
+		// \u33A5 is not supported by the font, so use two characters \u006D\u00B3 instead.
+		return _scaledQuantity(value, unitMatchValue, length, "m³")
 	case V.VenusOS.Units_Volume_GallonUS:
 	case V.VenusOS.Units_Volume_GallonImperial:
 		return _scaledQuantity(value, unitMatchValue, length, "gal")

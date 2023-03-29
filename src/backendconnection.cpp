@@ -17,7 +17,6 @@ void addSettings(VeQItemSettingsInfo *info)
 
 	// see enum.h Units_Type for enum values
 	info->add("Gui/Units/Energy", 2); // watt, amp
-	info->add("Gui/Units/Volume", 6);  // cubic meter, liter, gallon US, gallon imperial
 
 	// Brief settings levels are 0-6 (Fuel - Gasoline) or -1 for Battery.
 	info->add("Gui/BriefView/Level/1", -1, -1, 6);     // Battery
