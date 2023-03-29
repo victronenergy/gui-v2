@@ -52,8 +52,8 @@ Page {
 				text: qsTrId("settings_units_volume")
 
 				optionModel: [
-					//% "m3"
-					{ display: qsTrId("settings_units_m3"), value: VenusOS.Units_Volume_CubicMeter },
+					//% "Cubic meters"
+					{ display: qsTrId("settings_units_cubic_meters"), value: VenusOS.Units_Volume_CubicMeter },
 					//% "Liters"
 					{ display: qsTrId("settings_units_liters"), value: VenusOS.Units_Volume_Liter },
 					//% "Gallons (US)"
