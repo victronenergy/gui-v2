@@ -58,7 +58,7 @@ QtObject {
 	}
 
 	property DataPoint volumeUnit: DataPoint {
-		source: "com.victronenergy.settings/Settings/Gui/Units/Volume"
+		source: "com.victronenergy.settings/Settings/System/VolumeUnit"
 	}
 
 	property QtObject briefView: QtObject {
