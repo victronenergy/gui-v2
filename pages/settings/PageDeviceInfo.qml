@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Controls.impl as CP
 
 Page {
 	id: root
@@ -13,15 +14,29 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 			ListTextItem {
-				text: CommonWords.connected
-				dataSource: root.bindPrefix + "/Connected"
-				secondaryText: dataValue === 1 ? CommonWords.yes : CommonWords.no
-			}
-
-			ListTextItem {
 				//% "Connection"
 				text: qsTrId("settings_deviceinfo_connection")
 				dataSource: root.bindPrefix + "/Mgmt/Connection"
+				secondaryLabel.rightPadding: connectedIcon.visible ? connectedIcon.width + Theme.geometry.listItem.content.spacing : 0
+
+				CP.ColorImage {
+					id: connectedIcon
+
+					anchors {
+						right: parent.right
+						rightMargin: Theme.geometry.listItem.content.horizontalMargin
+						verticalCenter: parent.primaryLabel.verticalCenter
+					}
+					color: Theme.color.font.primary
+					source: "/images/icon_checkmark_32.svg"
+					visible: connectedDataPoint.value === 1
+				}
+
+				DataPoint {
+					id: connectedDataPoint
+
+					source: root.bindPrefix + "/Connected"
+				}
 			}
 
 			ListTextItem {
@@ -35,6 +50,8 @@ Page {
 				text: qsTrId("settings_deviceinfo_name")
 				dataSource: root.bindPrefix + "/CustomName"
 				textField.maximumLength: 32
+				//% "Custom name"
+				placeholderText: qsTrId("settings_deviceinfo_custom_name")
 			}
 
 			ListTextItem {
@@ -72,7 +89,7 @@ Page {
 			ListTextItem {
 				//% "Device name"
 				text: qsTrId("settings_deviceinfo_device_name")
-				datadataSource: root.bindPrefix + "/DeviceName"
+				dataSource: root.bindPrefix + "/DeviceName"
 				visible: dataValid
 			}
 		}
