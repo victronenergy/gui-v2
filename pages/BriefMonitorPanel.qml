@@ -40,7 +40,7 @@ Column {
 				width: parent.width - todayTemperature.width - todayIcon.width
 				horizontalAlignment: Text.AlignRight
 				font.pixelSize: Theme.font.briefPage.sidePanel.forecastRow.today.date.size
-				text: "Sun 3 Oct"
+				text: Qt.formatDate(ClockTime.currentDateTime, "ddd d MMM")
 			}
 		}
 
