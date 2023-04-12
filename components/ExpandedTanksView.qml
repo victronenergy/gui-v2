@@ -77,7 +77,10 @@ Rectangle {
 					}
 					width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
 					font.pixelSize: Theme.font.size.body1
+					minimumPixelSize: Theme.font.size.caption
+					fontSizeMode: Text.HorizontalFit
 					horizontalAlignment: Text.AlignHCenter
+					verticalAlignment: Text.AlignBottom
 					elide: Text.ElideRight
 					text: model.tank.name || root._tankProperties.name
 				}
