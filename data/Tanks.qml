@@ -117,47 +117,43 @@ QtObject {
 		model.totalCapacity = totalCapacity
 	}
 
-	function findTank(model, data) {
+	function findTank(model, serviceUid) {
 		for (let i = 0; i < model.count; ++i) {
-			if (model.get(i).tank === data) {
+			if (model.get(i).tank.serviceUid === serviceUid) {
 				return i
 			}
 		}
 		return -1
 	}
 
-	function addTank(data) {
-		const model = tankModel(data.type)
+	function addTank(tank) {
+		const model = tankModel(tank.type)
 		if (!model) {
-			console.warn("addTank(): Unknown tank type", data.type)
+			console.warn("addTank(): Unknown tank type", tank.type)
 			return
 		}
-		model.append({'tank': data })
-		updateTankModelTotals(data.type)
+		const index = findTank(model, tank.serviceUid)
+		if (index >= 0) {
+			console.warn("tank already added:", tank.serviceUid)
+			return
+		}
+		model.append({'tank': tank })
+		updateTankModelTotals(tank.type)
 	}
 
-	function removeTank(model, data) {
+	function removeTank(tank) {
+		const model = tankModel(tank.type)
 		if (!model) {
-			console.warn("removeTank(): no model specified")
+			console.warn("removeTank(): Unknown tank type", tank.type)
 			return
 		}
-		const index = findTank(model, data)
-		if (index < 0 || index >= model.count) {
-			console.warn("removeTank(): cannot find tank", data.name)
-			return
+		const index = findTank(model, tank.serviceUid)
+		if (index >= 0) {
+			model.remove(index)
+			updateTankModelTotals(tank.type)
+			return true
 		}
-		model.remove(index)
-		updateTankModelTotals(data.type)
-	}
-
-	function setTankData(index, data) {
-		const model = tankModel(data.type)
-		if (!model) {
-			console.warn("setTankData(): Unknown tank type", data.type)
-			return
-		}
-		model.set(index, {"tank": data})
-		updateTankModelTotals(data.type)
+		return false
 	}
 
 	function reset() {

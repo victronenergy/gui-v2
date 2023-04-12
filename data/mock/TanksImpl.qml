@@ -22,6 +22,7 @@ QtObject {
 			const level = Math.random()
 			const capacity = 1  // m3
 			const tankObj = tankComponent.createObject(root, {
+				serviceUid: "tank-" + _createdTankCount++,
 				type: tankType,
 				level: level * 100,
 				remaining: capacity * level,
@@ -32,8 +33,10 @@ QtObject {
 		}
 	}
 
+	property int _createdTankCount
 	property Component tankComponent: Component {
 		QtObject {
+			property string serviceUid
 			property int type
 			property real level
 			property real remaining
@@ -57,6 +60,7 @@ QtObject {
 						props.remaining = props.capacity * (props.level / 100)
 					}
 					const tankObj = tankComponent.createObject(root, props)
+					tankObj.serviceUid = "tank-" + root._createdTankCount++
 					Global.tanks.addTank(tankObj)
 					_createdObjects.push(tankObj)
 				}
@@ -72,11 +76,11 @@ QtObject {
 			for (let i = 0; i < Global.tanks.tankTypes.length; ++i) {
 				const model = Global.tanks.tankModel(Global.tanks.tankTypes[i])
 				for (let j = 0; j < model.count; ++j) {
-					let properties = model.get(j).tank
+					let tank = model.get(j).tank
 					const randomLevel = Math.random()
-					properties.level = randomLevel * 100
-					properties.remaining = properties.capacity * randomLevel
-					Global.tanks.setTankData(j, properties)
+					tank.level = randomLevel * 100
+					tank.remaining = tank.capacity * randomLevel
+					Global.tanks.updateTankModelTotals(tank.type)
 				}
 			}
 		}
@@ -94,6 +98,7 @@ QtObject {
 				const randomLevel = Math.random()
 				const capacity = 1  // m3
 				const tankObj = tankComponent.createObject(root, {
+					serviceUid: "tank-" + root._createdTankCount++,
 					type: model.type,
 					level: randomLevel * 100,
 					capacity: capacity,
@@ -106,7 +111,7 @@ QtObject {
 					model = Global.tanks.tankModel(Global.tanks.tankTypes[i])
 					if (model.count > 0) {
 						const index = Math.floor(Math.random(model.count))
-						Global.tanks.removeTank(model, model.get(index).tank)
+						Global.tanks.removeTank(model.get(index).tank)
 						break
 					}
 				}

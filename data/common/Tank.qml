@@ -12,30 +12,19 @@ QtObject {
 
 	property string serviceUid
 
-	readonly property int status: _status.value === undefined ? -1 : _status.value
 	readonly property int type: _type.value === undefined ? -1 : _type.value
 	readonly property string name: _customName.value || ""
 	readonly property int level: _level.value === undefined ? 0 : _level.value
 	property real remaining: NaN
 	property real capacity: NaN
 
-	property var _tankModel
-	onTypeChanged: {
-		if (_tankModel) {
-			Global.tanks.removeTank(_tankModel, tank)
-			_tankModel = null
-		}
-		if (type >= 0) {
-			Global.tanks.addTank(tank)
-			_tankModel = Global.tanks.tankModel(type)
-		}
-	}
-
 	readonly property VeQuickItem _status: VeQuickItem {
 		uid: serviceUid + "/Status"
+		onValueChanged: Qt.callLater(tank._reset)
 	}
 	readonly property VeQuickItem _type: VeQuickItem {
 		uid: serviceUid + "/FluidType"
+		onValueChanged: Qt.callLater(tank._reset)
 	}
 	readonly property VeQuickItem _customName: VeQuickItem {
 		uid: serviceUid + "/CustomName"
@@ -64,5 +53,15 @@ QtObject {
 		uid: serviceUid + "/Capacity"
 		onValueChanged: _update()
 		Component.onCompleted: _update()
+	}
+
+	function _reset() {
+		const hasType = _type.value !== undefined && _type.value >= 0
+		const valid = hasType && _status.value === VenusOS.Tank_Status_Ok
+		if (valid) {
+			Global.tanks.addTank(tank)
+		} else if (hasType) {
+			Global.tanks.removeTank(tank)
+		}
 	}
 }
