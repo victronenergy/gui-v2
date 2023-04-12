@@ -92,26 +92,12 @@ Loader {
 		id: invalidPhases
 	}
 
-	VeQuickItem {
-		id: vebusPhaseCount
-
-		uid: root.status === Loader.Ready && serviceType == "vebus"
-			 ? root.serviceUid + "/Ac/NumberOfPhases"
-			 : ""
-
-		onValueChanged: {
-			if (value !== undefined) {
-				root._setPhaseCount(value)
-			}
-		}
-	}
-
 	DataPoint {
-		id: gridOrGensetPhaseCount
-
 		source: {
 			if (root.status === Loader.Ready) {
-				if (serviceType == "grid") {
+				if (serviceType == "vebus") {
+					return root.serviceUid + "/Ac/NumberOfPhases"
+				} else if (serviceType == "grid") {
 					return "com.victronenergy.system/Ac/Grid/NumberOfPhases"
 				} else if (serviceType == "genset") {
 					return "com.victronenergy.system/Ac/Genset/NumberOfPhases"
@@ -119,7 +105,6 @@ Loader {
 			}
 			return ""
 		}
-
 		onValueChanged: {
 			if (value !== undefined) {
 				root._setPhaseCount(value)
