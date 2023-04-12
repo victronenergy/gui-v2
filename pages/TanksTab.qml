@@ -103,9 +103,7 @@ ListView {
 
 					animationEnabled: root.animationEnabled
 					tankType: tankTypeDelegate.tankType
-					title: mergeTanks
-						   ? tankProperties.name
-						   : model.tank.name || tankProperties.name
+					title: tankProperties.name
 					expanded: Global.pageManager.expandLayout
 
 					level: mergeTanks
