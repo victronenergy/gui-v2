@@ -164,68 +164,79 @@ Page {
 		}
 	}
 
-	TzAfricaData {
+	TimezoneModel {
 		id: tzAfrica
+		prefix: "Africa"
 		//% "Africa"
 		readonly property string name: qsTrId("settings_tz_africa")
 		readonly property string region: "Africa"
 	}
-	TzAmericaData {
+	TimezoneModel {
 		id: tzAmerica
+		prefix: "America"
 		//% "America"
 		readonly property string name: qsTrId("settings_tz_america")
 		readonly property string region: "America"
 	}
-	TzAntarcticaData {
+	TimezoneModel {
 		id: tzAntartica
+		prefix: "Antarctica"
 		//% "Antartica"
 		readonly property string name: qsTrId("settings_tz_antartica")
 		readonly property string region: "Antartica"
 	}
-	TzArcticData {
+	TimezoneModel {
 		id: tzArtic
+		prefix: "Arctic"
 		//% "Artic"
 		readonly property string name: qsTrId("settings_tz_artic")
 		readonly property string region: "Artic"
 	}
-	TzAsiaData {
+	TimezoneModel {
 		id: tzAsia
+		prefix: "Asia"
 		//% "Asia"
 		readonly property string name: qsTrId("settings_tz_asia")
 		readonly property string region: "Asia"
 	}
-	TzAtlanticData {
+	TimezoneModel {
 		id: tzAtlantic
+		prefix: "Atlantic"
 		//% "Atlantic"
 		readonly property string name: qsTrId("settings_tz_atlantic")
 		readonly property string region: "Atlantic"
 	}
-	TzAustraliaData {
+	TimezoneModel {
 		id: tzAustralia
+		prefix: "Australia"
 		//% "Australia"
 		readonly property string name: qsTrId("settings_tz_ustralia")
 		readonly property string region: "Australia"
 	}
-	TzEuropeData {
+	TimezoneModel {
 		id: tzEurope
+		prefix: "Europe"
 		//% "Europe"
 		readonly property string name: qsTrId("settings_tz_europe")
 		readonly property string region: "Europe"
 	}
-	TzIndianData {
+	TimezoneModel {
 		id: tzIndian
+		prefix: "Indian"
 		//% "Indian"
 		readonly property string name: qsTrId("settings_tz_indian")
 		readonly property string region: "Indian"
 	}
-	TzPacificData {
+	TimezoneModel {
 		id: tzPacific
+		prefix: "Pacific"
 		//% "Pacific"
 		readonly property string name: qsTrId("settings_tz_pacific")
 		readonly property string region: "Pacific"
 	}
-	TzEtcData {
+	TimezoneModel {
 		id: tzEtc
+		prefix: "Etc"
 		//% "Etc"
 		readonly property string name: qsTrId("settings_tz_etc")
 		readonly property string region: "Etc"

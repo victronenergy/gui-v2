@@ -139,6 +139,8 @@ set(VENUS_SOURCES
     src/enums.cpp
     src/notificationsmodel.h
     src/notificationsmodel.cpp
+    src/timezonemodel.h
+    src/timezonemodel.cpp
     src/uidhelper.h
     src/uidhelper.cpp
 )

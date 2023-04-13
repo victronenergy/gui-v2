@@ -9,6 +9,7 @@
 #include "src/notificationsmodel.h"
 #include "src/clocktime.h"
 #include "src/uidhelper.h"
+#include "src/timezonemodel.h"
 #include "src/backendconnection.h"
 
 #include "veutil/qt/ve_qitem.hpp"
@@ -205,6 +206,8 @@ void registerQmlTypes()
 	qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
 		"Victron.VenusOS", 2, 0, "UidHelper",
 		&Victron::VenusOS::UidHelper::instance);
+	qmlRegisterType<Victron::VenusOS::TimezoneModel>(
+		"Victron.VenusOS", 2, 0, "TimezoneModel");
 
 	/* main content */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/ApplicationContent.qml")),
