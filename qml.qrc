@@ -20,6 +20,7 @@
         <file>components/ExpandedTanksView.qml</file>
         <file>components/FirmwareUpdate.qml</file>
         <file>components/Gauges.js</file>
+        <file>components/GaugeModel.qml</file>
         <file>components/GeneratorIconLabel.qml</file>
         <file>components/GradientListView.qml</file>
         <file>components/GsmStatusIcon.qml</file>
@@ -152,7 +153,6 @@
         <file>data/common/Relay.qml</file>
         <file>data/common/SolarCharger.qml</file>
         <file>data/common/SystemData.qml</file>
-        <file>data/common/SystemSettingsData.qml</file>
         <file>data/common/Tank.qml</file>
         <file>data/dbus/AcInputsImpl.qml</file>
         <file>data/dbus/BatteryImpl.qml</file>

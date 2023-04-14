@@ -244,6 +244,7 @@ public:
 	Q_ENUM(System_State)
 
 	enum Tank_Type {
+		// These values align with tank types from dbus
 		Tank_Type_Fuel = 0,
 		Tank_Type_FreshWater,
 		Tank_Type_WasteWater,
@@ -251,7 +252,9 @@ public:
 		Tank_Type_Oil,
 		Tank_Type_BlackWater,
 		Tank_Type_Gasoline,
-		Tank_Type_Battery = 255
+
+		// Added for convenience as battery is combined with tanks on Brief page
+		Tank_Type_Battery = 1000
 	};
 	Q_ENUM(Tank_Type)
 

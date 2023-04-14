@@ -64,6 +64,7 @@ QtObject {
 		Global.systemSettings.energyUnit.setValue(VenusOS.Units_Energy_Watt)
 		Global.systemSettings.temperatureUnit.setValue(VenusOS.Units_Temperature_Celsius)
 		Global.systemSettings.volumeUnit.setValue(VenusOS.Units_Volume_CubicMeter)
+		Global.systemSettings.briefView.centralGauges.setValue([VenusOS.Tank_Type_Battery, VenusOS.Tank_Type_Fuel, VenusOS.Tank_Type_FreshWater, VenusOS.Tank_Type_BlackWater])
 		Global.systemSettings.briefView.showPercentages.setValue(false)
 
 		// Other system settings
@@ -271,13 +272,5 @@ QtObject {
 		// Large features
 		setMockPlatformValue("Services/SignalK/Enabled", 1)
 		setMockPlatformValue("Services/NodeRed/Mode", 1)
-	}
-
-	property Connections briefSettingsConn: Connections {
-		target: Global.systemSettings.briefView
-
-		function onSetGaugeRequested(index, value) {
-			Global.systemSettings.briefView.setGauge(index, value)
-		}
 	}
 }

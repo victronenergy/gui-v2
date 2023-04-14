@@ -269,6 +269,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "EnvironmentGaugePanel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ExpandedTanksView.qml")),
 		"Victron.VenusOS", 2, 0, "ExpandedTanksView");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GaugeModel.qml")),
+		"Victron.VenusOS", 2, 0, "GaugeModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GsmStatusIcon.qml")),
 		"Victron.VenusOS", 2, 0, "GsmStatusIcon");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/InputPanel.qml")),

@@ -74,6 +74,7 @@ private:
 	void setState(State backendConnectionState);
 	void setState(VeQItemMqttProducer::ConnectionState backendConnectionState);
 	void setState(bool connected);
+	void addSettings(VeQItemSettingsInfo *info);
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	void initDBusConnection(const QString &address);

@@ -33,7 +33,7 @@ Page {
 		width: Theme.geometry.mainGauge.size
 		height: width
 		x: sidePanel.x/2 - width/2
-		sourceComponent: Global.tanks.totalTankCount <= 1 ? singleGauge : multiGauge
+		sourceComponent: Global.tanks.totalTankCount === 0 ? singleGauge : multiGauge
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge")
 	}
 
@@ -41,7 +41,10 @@ Page {
 		id: multiGauge
 
 		CircularMultiGauge {
-			model: gaugeData.model
+			model: GaugeModel {
+				sourceModel: Gauges.briefCentralGauges
+				maximumGaugeCount: Theme.geometry.briefPage.centerGauge.maximumGaugeCount
+			}
 			animationEnabled: root._animationEnabled
 			labelOpacity: root._gaugeLabelOpacity
 			labelMargin: root._gaugeLabelMargin
@@ -224,61 +227,6 @@ Page {
 		// hidden by default.
 		x: root.width
 		opacity: 0.0
-	}
-
-	Item {
-		id: gaugeData
-
-		property ListModel model: ListModel {
-			Component.onCompleted: {
-				for (let i = 0; i < Global.systemSettings.briefView.gauges.count; ++i) {
-					const tankType = Global.systemSettings.briefView.gauges.get(i).value
-					append(Object.assign({},
-						   Gauges.tankProperties(tankType),
-						   { tankType: tankType, value: 0 }))
-				}
-			}
-		}
-
-		Instantiator {
-			id: gaugeObjects
-
-			model: Global.systemSettings.briefView.gauges
-
-			delegate: QtObject {
-				readonly property int tankType: model.value
-				readonly property bool isBattery: tankType === VenusOS.Tank_Type_Battery
-				readonly property string tankName: _tankProperties.name
-				readonly property string tankIcon: isBattery ? Global.battery.icon : _tankProperties.icon
-				readonly property var tankModel: isBattery ? 1 : Global.tanks.tankModel(tankType)
-				property bool deleted
-
-				readonly property real tankLevel: isBattery
-						? Math.round(Global.battery.stateOfCharge || 0)
-						: (tankModel.count === 0 || tankModel.totalCapacity === 0
-						   ? 0
-						   : (tankModel.totalRemaining / tankModel.totalCapacity) * 100)
-
-				readonly property var _tankProperties: Gauges.tankProperties(tankType)
-
-				function updateGaugeModel() {
-					if (deleted) {
-						return
-					}
-					if (model.index < gaugeData.model.count) {
-						gaugeData.model.set(model.index, { name: tankName, icon: tankIcon, value: tankLevel })
-					}
-				}
-
-				// If tank data changes, update the model at the end of the event loop to avoid
-				// excess updates if multiple values change simultaneously for the same tank.
-				onTankNameChanged: Qt.callLater(updateGaugeModel)
-				onTankIconChanged: Qt.callLater(updateGaugeModel)
-				onTankLevelChanged: Qt.callLater(updateGaugeModel)
-
-				Component.onDestruction: deleted = true
-			}
-		}
 	}
 
 	Connections {

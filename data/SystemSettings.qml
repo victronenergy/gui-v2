@@ -62,22 +62,47 @@ QtObject {
 	}
 
 	property QtObject briefView: QtObject {
-		// Default settings
-		property ListModel gauges: ListModel {
-			ListElement { value: VenusOS.Tank_Type_Battery }
-			ListElement { value: VenusOS.Tank_Type_Fuel }
-			ListElement { value: VenusOS.Tank_Type_FreshWater }
-			ListElement { value: VenusOS.Tank_Type_BlackWater }
+		property QtObject centralGauges: QtObject {
+			property var value: []
+
+			function setValue(gaugeTypesArray) {
+				if (gaugeTypesArray.length !== _savedLevels.count) {
+					console.warn("Cannot change central gauges, got gauge array length",
+							gaugeTypesArray.length, "expected", _savedLevels.count)
+					return
+				}
+				for (let i = 0; i < _savedLevels.count; ++i) {
+					const obj = _savedLevels.objectAt(i)
+					if (obj.value !== gaugeTypesArray[i]) {
+						obj.setValue(gaugeTypesArray[i])
+					}
+				}
+			}
+
+			function _refresh() {
+				let levels = []
+				for (let i = 0; i < _savedLevels.count; ++i) {
+					const obj = _savedLevels.objectAt(i)
+					levels.push(obj && obj.value !== undefined ? obj.value : VenusOS.Tank_Type_Battery)
+				}
+				value = levels
+			}
+
+			property Instantiator _savedLevels: Instantiator {
+				model: Theme.geometry.briefPage.centerGauge.maximumGaugeCount
+				delegate: DataPoint {
+					source: "com.victronenergy.settings/Settings/Gui/BriefView/Level/" + (model.index + 1)
+					onValueChanged: {
+						if (value !== undefined) {
+							Qt.callLater(briefView.centralGauges._refresh)
+						}
+					}
+				}
+			}
 		}
 
 		property DataPoint showPercentages: DataPoint {
 			 source: "com.victronenergy.settings/Settings/Gui/BriefView/ShowPercentages"
-		}
-
-		signal setGaugeRequested(index: int, value: var)
-
-		function setGauge(index, value) {
-			gauges.setProperty(index, "value", value)
 		}
 	}
 
