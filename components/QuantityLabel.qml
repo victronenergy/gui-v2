@@ -15,9 +15,7 @@ Item {
 	property alias valueColor: valueLabel.color
 	readonly property real bottomPadding: height - valueLabel.baselineOffset + Theme.geometry.quantityLabel.bottomMargin
 
-	readonly property var _quantity: unit < 0
-			? undefined
-			: Units.getDisplayText(unit, value, Theme.geometry.quantityLabel.valueLength)
+	readonly property var _quantity: Units.getDisplayText(unit, value, Theme.geometry.quantityLabel.valueLength)
 
 	// Restrict the height to the baseline to help align the baseline of labels in different
 	// QuantityLabel items with different font sizes. E.g. Environments tab may have multiple gauges
