@@ -5,84 +5,52 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls as C
-
 import "/components/Gauges.js" as Gauges
 
 Page {
 	id: root
 
-	Flickable {
-		x: Theme.geometry.page.content.horizontalMargin
-		width: parent.width - 2*Theme.geometry.page.content.horizontalMargin
-		height: parent.height
-		topMargin: Theme.geometry.gradientList.topMargin
-		bottomMargin: Theme.geometry.gradientList.bottomMargin
+	property var _gaugeOptionsModel: Gauges.briefCentralGauges.map(function(gaugeType) {
+		const name = Gauges.tankProperties(gaugeType).name || ""
+		return { display: name, value: gaugeType }
+	})
 
-		Column {
-			id: contentColumn
-
-			width: parent.width
-
-			Repeater {
-				model: Global.systemSettings.briefView.gauges
-
-				delegate: ListNavigationItem {
-					//: Level number
-					//% "Level %1"
-					text: qsTrId("settings_briefview_level").arg(model.index + 1)
-					secondaryText: Gauges.tankProperties(model.value).name || ""
-
-					onClicked: {
-						Global.pageManager.pushPage(briefLevelComponent, {
-							tankType: Qt.binding(function() { return model.value }),
-							levelIndex: model.index
-						})
-					}
-				}
-			}
-
-			ListSwitch {
-				//: Show percentage values in Brief view
-				//% "Show %"
-				text: qsTrId("settings_briefview_show_percentage")
-				checked: Global.systemSettings.briefView.showPercentages.value
-				onClicked: Global.systemSettings.briefView.showPercentages.setValue(checked)
-			}
-		}
+	// Use this intermediate model that is built when the page loads, to avoid changing the model
+	// while the radio button group sub-page is shown, as that causes the group options to be rebuilt.
+	property var _gaugesModel
+	C.StackView.onActivating: {
+		_gaugesModel = Global.systemSettings.briefView.centralGauges.value || []
 	}
 
-	Component {
-		id: briefLevelComponent
+	GradientListView {
+		model: root._gaugesModel
 
-		Page {
-			property int tankType
-			property int levelIndex
+		delegate: ListRadioButtonGroup {
+			//: Level number
+			//% "Level %1"
+			text: qsTrId("settings_briefview_level").arg(model.index + 1)
+			optionModel: root._gaugeOptionsModel
+			currentIndex: {
+				const savedGaugePrefs = Global.systemSettings.briefView.centralGauges.value || []
+				const preferredGaugeForLevel = savedGaugePrefs[model.index]
+				return Gauges.briefCentralGauges.indexOf(preferredGaugeForLevel)
+			}
 
-			GradientListView {
-				model: [
-					VenusOS.Tank_Type_Battery,
-					VenusOS.Tank_Type_Fuel,
-					VenusOS.Tank_Type_FreshWater,
-					VenusOS.Tank_Type_WasteWater,
-					VenusOS.Tank_Type_LiveWell,
-					VenusOS.Tank_Type_Oil,
-					VenusOS.Tank_Type_BlackWater,
-					VenusOS.Tank_Type_Gasoline
-				]
-				delegate: ListRadioButton {
-					text: Gauges.tankProperties(modelData).name || ""
-					checked: tankType === modelData
-					C.ButtonGroup.group: radioButtonGroup
-
-					onClicked: {
-						Global.systemSettings.briefView.setGauge(levelIndex, modelData)
-					}
-				}
-
-				C.ButtonGroup {
-					id: radioButtonGroup
+			onOptionClicked: function(index) {
+				let savedGaugePrefs = Global.systemSettings.briefView.centralGauges.value
+				if (savedGaugePrefs.length) {
+					savedGaugePrefs[model.index] = optionModel[index].value
+					Global.systemSettings.briefView.centralGauges.setValue(savedGaugePrefs)
 				}
 			}
+		}
+
+		footer: ListSwitch {
+			//: Show percentage values in Brief view
+			//% "Show %"
+			text: qsTrId("settings_briefview_show_percentage")
+			checked: Global.systemSettings.briefView.showPercentages.value
+			onClicked: Global.systemSettings.briefView.showPercentages.setValue(checked)
 		}
 	}
 }

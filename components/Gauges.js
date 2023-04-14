@@ -5,6 +5,8 @@
 .pragma library
 .import Victron.VenusOS as V
 
+const briefCentralGauges = [V.VenusOS.Tank_Type_Battery].concat(V.Global.tanks.tankTypes)
+
 function statusFromRisingValue(value) {
 	if (value >= 85) return V.Theme.Critical
 	if (value >= 60) return V.Theme.Warning

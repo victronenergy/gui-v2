@@ -2,7 +2,8 @@
 ** Copyright (C) 2021 Victron Energy B.V.
 */
 
-import QtQuick
-import "../common"
+import QtQml
 
-SystemSettingsData {}
+QtObject {
+	// No custom settings implementation required, for now.
+}
