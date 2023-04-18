@@ -36,7 +36,7 @@ Item {
 		ProgressArc {
 			id: arc
 
-			readonly property int status: Gauges.getValueStatus(gauge.value * 100, gauge.valueType)
+			readonly property int status: Gauges.getValueStatus(gauge.value, gauge.valueType)
 
 			width: radius*2
 			height: width
