@@ -9,7 +9,7 @@ import Victron.VenusOS
 Shape {
 	id: control
 
-	property real value
+	property real value // 0 - 100
 	property real radius
 	property bool animationEnabled: true
 	property real strokeWidth: Theme.geometry.progressArc.strokeWidth
