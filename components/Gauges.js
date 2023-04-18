@@ -8,14 +8,14 @@
 const briefCentralGauges = [V.VenusOS.Tank_Type_Battery].concat(V.Global.tanks.tankTypes)
 
 function statusFromRisingValue(value) {
-	if (value >= 85) return V.Theme.Critical
-	if (value >= 60) return V.Theme.Warning
+	if (value >= 90) return V.Theme.Critical
+	if (value >= 80) return V.Theme.Warning
 	return V.Theme.Ok
 }
 
 function statusFromFallingValue(value) {
-	if (value <= 15) return V.Theme.Critical
-	if (value <= 40) return V.Theme.Warning
+	if (value <= 10) return V.Theme.Critical
+	if (value <= 20) return V.Theme.Warning
 	return V.Theme.Ok
 }
 
