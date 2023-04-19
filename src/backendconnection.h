@@ -19,6 +19,7 @@ class BackendConnection : public QObject
 	Q_OBJECT
 	Q_PROPERTY(State state READ state NOTIFY stateChanged)
 	Q_PROPERTY(SourceType type READ type NOTIFY typeChanged)
+	Q_PROPERTY(MqttClientError mqttClientError READ mqttClientError NOTIFY mqttClientErrorChanged)
 	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 	Q_PROPERTY(QString portalId READ portalId WRITE setPortalId NOTIFY portalIdChanged)
@@ -44,9 +45,24 @@ public:
 	};
 	Q_ENUM(State)
 
+	enum MqttClientError {
+		MqttClient_NoError = QMqttClient::NoError,
+		MqttClient_InvalidProtocolVersion = QMqttClient::InvalidProtocolVersion,
+		MqttClient_IdRejected = QMqttClient::IdRejected,
+		MqttClient_ServerUnavailable = QMqttClient::ServerUnavailable,
+		MqttClient_BadUsernameOrPassword = QMqttClient::BadUsernameOrPassword,
+		MqttClient_NotAuthorized = QMqttClient::NotAuthorized,
+		MqttClient_TransportInvalid = QMqttClient::TransportInvalid,
+		MqttClient_ProtocolViolation = QMqttClient::ProtocolViolation,
+		MqttClient_UnknownError = QMqttClient::UnknownError,
+		MqttClient_Mqtt5SpecificError = QMqttClient::Mqtt5SpecificError
+	};
+	Q_ENUM(MqttClientError)
+
 	static BackendConnection* instance(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 	State state() const;
+	MqttClientError mqttClientError() const;
 
 	void loadConfiguration();
 
@@ -65,6 +81,7 @@ public:
 Q_SIGNALS:
 	void stateChanged();
 	void typeChanged();
+	void mqttClientErrorChanged();
 	void usernameChanged();
 	void passwordChanged();
 	void portalIdChanged();
@@ -74,6 +91,7 @@ private:
 	void setState(State backendConnectionState);
 	void setState(VeQItemMqttProducer::ConnectionState backendConnectionState);
 	void setState(bool connected);
+	void mqttErrorChanged();
 	void addSettings(VeQItemSettingsInfo *info);
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
@@ -87,6 +105,7 @@ private:
 
 	State m_state = BackendConnection::State::Idle;
 	SourceType m_type = UnknownSource;
+	QMqttClient::ClientError m_mqttClientError = QMqttClient::NoError;
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	VeQItemDbusProducer *m_dbusProducer = nullptr;
