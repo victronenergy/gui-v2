@@ -13,6 +13,7 @@ QtObject {
 
 	property real power: connectedInput != null ? connectedInput.power : NaN
 	property real current: connectedInput != null ? connectedInput.current : NaN
+	property real currentLimit: connectedInput != null ? connectedInput.currentLimit : NaN
 
 	property ListModel model: ListModel {}
 

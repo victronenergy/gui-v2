@@ -85,6 +85,11 @@ Page {
 			startAngle: leftLower.active ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)
 			animationEnabled: root._animationEnabled
 
+			// Gauge color changes only apply when there is a maximum value.
+			valueType: isNaN(inputsRange.maximumValue)
+					   ? VenusOS.Gauges_ValueType_NeutralPercentage
+					   : VenusOS.Gauges_ValueType_RisingPercentage
+
 			x: root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
 			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
@@ -117,12 +122,18 @@ Page {
 					  : Global.acInputs.current
 					: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
 
-			// Gauge always shows the watts value, and ignores the current.
-			value: inputPowerRange.valueAsRatio * 100
+			value: inputsRange.valueAsRatio * 100
 
 			ValueRange {
-				id: inputPowerRange
-				value: (Global.acInputs.power || 0) + (Global.dcInputs.power || 0)
+				id: inputsRange
+
+				value: quantityLabel.value
+
+				// When showing current instead of power, set a max value to change the gauge colors
+				// when the value approaches the currentLimit.
+				maximumValue: quantityLabel.unit === VenusOS.Units_Energy_Amp
+					? Global.acInputs.currentLimit
+					: NaN
 			}
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left edge")

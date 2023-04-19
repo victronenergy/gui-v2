@@ -93,6 +93,7 @@ QtObject {
 
 			property real frequency
 			property real current
+			property real currentLimit: NaN
 			property real power
 			property real voltage
 			property ListModel phases: ListModel {

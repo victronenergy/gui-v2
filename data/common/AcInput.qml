@@ -22,6 +22,7 @@ QtObject {
 	// Detailed readings
 	readonly property alias frequency: _serviceLoader.frequency
 	readonly property alias current: _serviceLoader.current
+	readonly property alias currentLimit: _serviceLoader.currentLimit
 	readonly property alias power: _serviceLoader.power
 	readonly property alias voltage: _serviceLoader.voltage
 	readonly property alias phases: _serviceLoader.phases
