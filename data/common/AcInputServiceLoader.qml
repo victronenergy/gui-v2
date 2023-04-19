@@ -22,6 +22,7 @@ Loader {
 
 	property real frequency: valid ? _frequency : NaN
 	property real current: valid ? _current : NaN
+	property real currentLimit: item ? item.currentLimit : NaN
 	property real power: valid ? _power : NaN
 	property real voltage: valid ? _voltage : NaN
 	readonly property ListModel phases: valid ? validPhases : invalidPhases
@@ -118,12 +119,21 @@ Loader {
 		Instantiator {
 			id: instantiator
 
+			property real currentLimit
+
 			model: null
 
 			delegate: QtObject {
 				id: phase
 
 				readonly property string phasePath: root.serviceUid + "/Ac/ActiveIn/L" + (index + 1)
+
+				function _updateCurrentLimit() {
+					const veItem = _activeInput.value === 0
+							? _currentLimit1
+							: (_activeInput.value === 1 ? _currentLimit2 : null)
+					instantiator.currentLimit = veItem && veItem.value !== undefined ? veItem.value : NaN
+				}
 
 				readonly property VeQuickItem _frequency: VeQuickItem {
 					uid: phase.phasePath + "/F"
@@ -141,6 +151,20 @@ Loader {
 					uid: phase.phasePath + "/V"
 					onValueChanged: root._updateValue(instantiator, model.index, "voltage", value)
 				}
+
+				// Values for calculating the current limit
+				readonly property VeQuickItem _activeInput: VeQuickItem {
+					uid: root.serviceUid + "/Ac/ActiveIn/ActiveInput"
+					onValueChanged: Qt.callLater(_updateCurrentLimit)
+				}
+				readonly property VeQuickItem _currentLimit1: VeQuickItem {
+					uid: _activeInput.value === 0 ? root.serviceUid + "/Ac/In/1/CurrentLimit" : null
+					onValueChanged: Qt.callLater(_updateCurrentLimit)
+				}
+				readonly property VeQuickItem _currentLimit2: VeQuickItem {
+					uid: _activeInput.value === 1 ? root.serviceUid + "/Ac/In/2/CurrentLimit" : null
+					onValueChanged: Qt.callLater(_updateCurrentLimit)
+				}
 			}
 		}
 	}
@@ -152,6 +176,9 @@ Loader {
 
 		Instantiator {
 			id: instantiator
+
+			// For these devices, there is no current limit.
+			property real currentLimit
 
 			model: null
 

@@ -42,6 +42,7 @@ public:
 	Q_ENUM(EnvironmentGaugePanel_Size)
 
 	enum Gauges_ValueType {
+		Gauges_ValueType_NeutralPercentage,
 		Gauges_ValueType_RisingPercentage,
 		Gauges_ValueType_FallingPercentage
 	};
