@@ -91,6 +91,20 @@ void BackendConnection::setState(bool connected)
 	setState(connected ? Ready : Disconnected);
 }
 
+BackendConnection::MqttClientError BackendConnection::mqttClientError() const
+{
+	return MqttClientError(m_mqttClientError);
+}
+
+void BackendConnection::mqttErrorChanged()
+{
+	qWarning() << "MQTT client error:" << m_mqttProducer->error();
+	if (m_mqttProducer->error() != m_mqttClientError) {
+		m_mqttClientError = m_mqttProducer->error();
+		emit mqttClientErrorChanged();
+	}
+}
+
 BackendConnection::SourceType BackendConnection::type() const
 {
 	return m_type;
@@ -166,6 +180,8 @@ void BackendConnection::initMqttConnection(const QString &address)
 	connect(m_mqttProducer, &VeQItemMqttProducer::connectionStateChanged, this, [=] {
 		setState(m_mqttProducer->connectionState());
 	});
+	connect(m_mqttProducer, &VeQItemMqttProducer::errorChanged,
+		this, &BackendConnection::mqttErrorChanged);
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	m_mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);

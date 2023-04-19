@@ -228,6 +228,9 @@
     "geometry.splashView.gaugeAnimation.verticalCenterOffset": 0,
     "geometry.splashView.progressBar.bottomMargin": 244,
     "geometry.splashView.progressBar.width": 464,
+    "geometry.splashView.progressText.topMargin": 12,
+    "geometry.splashView.progressText.spacing": 4,
+    "geometry.splashView.progressIconContainer.size": 46,
 
     "geometry.generatorCard.durationButton.height": 40,
     "geometry.generatorCard.durationButton.width": 112,

@@ -141,28 +141,100 @@ Rectangle {
 		indeterminate: visible
 	}
 
-	Label {
+	Column {
 		anchors {
-			horizontalCenter: parent.horizontalCenter
 			top: loadingProgress.bottom
-			topMargin: Theme.geometry.progressBar.height
+			topMargin: Theme.geometry.splashView.progressText.topMargin
+			left: parent.left
+			leftMargin: Theme.geometry.page.content.horizontalMargin
+			right: parent.right
+			rightMargin: Theme.geometry.page.content.horizontalMargin
 		}
 		opacity: BackendConnection.state === BackendConnection.Failed ? 1.0 : loadingProgress.opacity
-		font.pixelSize: Theme.font.size.caption
-		color: Theme.color.font.secondary
-		text: //% "Unable to connect"
-			 ((BackendConnection.state === BackendConnection.Failed ? qsTrId("splash_view_unable_to_connect")
-			  //% "Disconnected, attempting to reconnect"
-			: BackendConnection.state === BackendConnection.Reconnecting ? qsTrId("splash_view_reconnecting")
-			   //% "Disconnected"
-			: BackendConnection.state === BackendConnection.Disconnected ? qsTrId("splash_view_disconnected")
-			  //% "Connecting"
-			: BackendConnection.state === BackendConnection.Connecting ? qsTrId("splash_view_connecting")
-			  //% "Connected, awaiting broker messages"
-			: BackendConnection.state === BackendConnection.Connected ? qsTrId("splash_view_connected")
-			  //% "Connected, loading user interface"
-			: BackendConnection.state === BackendConnection.Ready ? qsTrId("splash_view_ready")
-			  //% "Idle"
-			: qsTrId("splash_view_idle")) + " [" + BackendConnection.state) + "]"
+		visible: BackendConnection.type === BackendConnection.MqttSource
+
+		Item {
+			id: alarmIconContainer
+
+			width: parent.width
+			height: 0
+			opacity: 0
+
+			ParallelAnimation {
+				running: BackendConnection.state >= BackendConnection.Disconnected
+
+				NumberAnimation {
+					target: alarmIconContainer
+					property: "opacity"
+					to: 1
+				}
+				NumberAnimation {
+					target: alarmIconContainer
+					property: "height"
+					to: Theme.geometry.splashView.progressIconContainer.size
+				}
+			}
+
+			CP.ColorImage {
+				anchors.centerIn: parent
+				sourceSize.width: 24
+				sourceSize.height: 24
+				source: "qrc:/images/icon_alarm_48.svg"
+				color: Theme.color.red
+			}
+		}
+
+		Label {
+			width: parent.width
+			horizontalAlignment: Text.AlignHCenter
+			height: implicitHeight + Theme.geometry.splashView.progressText.spacing
+			font.pixelSize: Theme.font.splashView.progressText.size
+			color: Theme.color.font.secondary
+			wrapMode: Text.Wrap
+			text: "[" + BackendConnection.state + "] "
+				  //% "Unable to connect"
+				+ (BackendConnection.state === BackendConnection.Failed ? qsTrId("splash_view_unable_to_connect")
+				  //% "Disconnected, attempting to reconnect"
+				: BackendConnection.state === BackendConnection.Reconnecting ? qsTrId("splash_view_reconnecting")
+				   //% "Disconnected"
+				: BackendConnection.state === BackendConnection.Disconnected ? qsTrId("splash_view_disconnected")
+				  //% "Connecting"
+				: BackendConnection.state === BackendConnection.Connecting ? qsTrId("splash_view_connecting")
+				  //% "Connected, awaiting broker messages"
+				: BackendConnection.state === BackendConnection.Connected ? qsTrId("splash_view_connected")
+				  //% "Connected, loading user interface"
+				: BackendConnection.state === BackendConnection.Ready ? qsTrId("splash_view_ready")
+				  //% "Idle"
+				: qsTrId("splash_view_idle"))
+		}
+
+		Label {
+			width: parent.width
+			horizontalAlignment: Text.AlignHCenter
+			font.pixelSize: Theme.font.splashView.progressText.size
+			color: Theme.color.font.secondary
+			wrapMode: Text.Wrap
+			text: (BackendConnection.mqttClientError !== BackendConnection.MqttClient_NoError
+				  ? "[" + BackendConnection.mqttClientError + "] " : "")
+				  //% "Invalid protocol version"
+				+ (BackendConnection.mqttClientError === BackendConnection.MqttClient_InvalidProtocolVersion ? qsTrId("splash_view_invalid_protocol_version")
+				  //% "Client ID rejected"
+				: BackendConnection.mqttClientError === BackendConnection.MqttClient_IdRejected ? qsTrId("splash_view_client_id_rejected")
+				   //% "Broker service not available"
+				: BackendConnection.mqttClientError === BackendConnection.MqttClient_ServerUnavailable ? qsTrId("splash_view_server_unavailable")
+				  //% "Bad username or password"
+				: BackendConnection.mqttClientError === BackendConnection.MqttClient_BadUsernameOrPassword ? qsTrId("splash_view_bad_username_or_password")
+				  //% "Client not authorized"
+				: BackendConnection.mqttClientError === BackendConnection.MqttClient_NotAuthorized ? qsTrId("splash_view_not_authorized")
+				  //% "Transport connection error"
+				: BackendConnection.mqttClientError === BackendConnection.MqttClient_TransportInvalid ? qsTrId("splash_view_transport_invalid")
+				  //% "Protocol violation error"
+				: BackendConnection.mqttClientError === BackendConnection.MqttClient_ProtocolViolation ? qsTrId("splash_view_protocol_violation")
+				  //% "Unknown error"
+				: BackendConnection.mqttClientError === BackendConnection.MqttClient_UnknownError ? qsTrId("splash_view_unknown_error")
+				  //% "MQTT protocol level 5 error"
+				: BackendConnection.mqttClientError === BackendConnection.MqttClient_Mqtt5SpecificError ? qsTrId("splash_view_mqtt5_error")
+				: "")
+		}
 	}
 }

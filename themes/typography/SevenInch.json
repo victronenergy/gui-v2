@@ -3,5 +3,6 @@
     "font.briefPage.sidePanel.forecastRow.today.temperature.size": "font.size.h2",
     "font.briefPage.sidePanel.forecastRow.today.date.size": "font.size.body3",
     "font.overviewPage.widget.quantityLabel.minimumSize": "font.size.h2",
-    "font.overviewPage.widget.quantityLabel.maximumSize": "font.size.h2"
+    "font.overviewPage.widget.quantityLabel.maximumSize": "font.size.h2",
+    "font.splashView.progressText.size": "font.size.body1"
 }
