@@ -106,7 +106,7 @@ Rectangle {
 	SequentialAnimation {
 		id: initialFadeAnimation
 
-		running: Global.allPagesLoaded || BackendConnection.state === BackendConnection.Failed
+		running: Global.allPagesLoaded
 
 		NumberAnimation {
 			target: loadingProgress
@@ -138,7 +138,7 @@ Rectangle {
 			horizontalCenter: parent.horizontalCenter
 		}
 		width: Theme.geometry.splashView.progressBar.width
-		indeterminate: visible
+		indeterminate: visible && BackendConnection.state !== BackendConnection.Failed
 	}
 
 	Column {
@@ -160,19 +160,18 @@ Rectangle {
 			height: 0
 			opacity: 0
 
-			ParallelAnimation {
-				running: BackendConnection.state >= BackendConnection.Disconnected
-
-				NumberAnimation {
+			states: State {
+				name: "alarm"
+				when: BackendConnection.state >= BackendConnection.Disconnected || mqttErrorLabel.text.length > 0
+				PropertyChanges {
 					target: alarmIconContainer
-					property: "opacity"
-					to: 1
+					opacity: 1.0
+					height: Theme.geometry.splashView.progressIconContainer.size
 				}
-				NumberAnimation {
-					target: alarmIconContainer
-					property: "height"
-					to: Theme.geometry.splashView.progressIconContainer.size
-				}
+			}
+			transitions: Transition {
+				from: ""; to: "alarm"
+				NumberAnimation { properties: "opacity,height" }
 			}
 
 			CP.ColorImage {
@@ -209,6 +208,8 @@ Rectangle {
 		}
 
 		Label {
+			id: mqttErrorLabel
+
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
 			font.pixelSize: Theme.font.splashView.progressText.size
