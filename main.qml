@@ -134,4 +134,6 @@ Window {
 			}
 		}
 	}
+
+	FrameRateVisualizer {}
 }
