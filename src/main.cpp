@@ -10,6 +10,7 @@
 #include "src/clocktime.h"
 #include "src/uidhelper.h"
 #include "src/backendconnection.h"
+#include "src/frameratemodel.h"
 
 #include "veutil/qt/ve_qitem.hpp"
 #include "veutil/qt/ve_quick_item.hpp"
@@ -64,11 +65,11 @@ QString calculateMqttAddressFromPortalId(const QString &portalId)
 	return shard > 0 ? QStringLiteral("wss://webmqtt%1.victronenergy.com/mqtt").arg(shard % 128) : QString();
 }
 
-void initBackend()
+void initBackend(bool *enableFpsCounter)
 {
 	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::instance();
 
-	QString queryMqttAddress, queryMqttPortalId, queryMqttUser, queryMqttPass;
+	QString queryMqttAddress, queryMqttPortalId, queryMqttUser, queryMqttPass, queryFpsCounter;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	emscripten::val webLocation = emscripten::val::global("location");
 	const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
@@ -84,6 +85,9 @@ void initBackend()
 	}
 	if (query.hasQueryItem("pass")) {
 		queryMqttPass = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("pass").toUtf8())); // e.g.: some JWT token from VRM.
+	}
+	if (query.hasQueryItem("fpsCounter")) {
+		queryFpsCounter = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("fpsCounter").toUtf8())); // e.g.: enabled
 	}
 #endif
 
@@ -123,6 +127,10 @@ void initBackend()
 		QGuiApplication::tr("pass", "MQTT broker password."));
 	parser.addOption(mqttPass);
 
+	QCommandLineOption fpsCounter({ "f", "fpsCounter" },
+		QGuiApplication::tr("Enable FPS counter"));
+	parser.addOption(fpsCounter);
+
 	QCommandLineOption mockMode({ "k", "mock" },
 		QGuiApplication::tr("Use mock data source for testing."));
 	parser.addOption(mockMode);
@@ -160,6 +168,10 @@ void initBackend()
 		const QString address = parser.isSet(dbusDefault) ? QStringLiteral("tcp:host=localhost,port=3000") : parser.value(dbusAddress);
 		backend->setType(Victron::VenusOS::BackendConnection::DBusSource, address);
 #endif
+	}
+
+	if (parser.isSet(fpsCounter) || queryFpsCounter.contains(QStringLiteral("enable"))) {
+		*enableFpsCounter = true;
 	}
 }
 
@@ -205,6 +217,9 @@ void registerQmlTypes()
 	qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
 		"Victron.VenusOS", 2, 0, "UidHelper",
 		&Victron::VenusOS::UidHelper::instance);
+	qmlRegisterSingletonType<Victron::VenusOS::FrameRateModel>(
+		"Victron.VenusOS", 2, 0, "FrameRateModel",
+		&Victron::VenusOS::FrameRateModel::instance);
 
 	/* main content */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/ApplicationContent.qml")),
@@ -591,7 +606,8 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationName("Venus");
 	QGuiApplication::setApplicationVersion("2.0");
 
-	initBackend();
+	bool enableFpsCounter = false;
+	initBackend(&enableFpsCounter);
 
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
@@ -600,6 +616,11 @@ int main(int argc, char *argv[])
 	int languageSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "Language");
 	Q_ASSERT(languageSingletonId);
 	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
+
+	/* Force construction of fps counter */
+	int fpsCounterSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "FrameRateModel");
+	Q_ASSERT(fpsCounterSingletonId);
+	Victron::VenusOS::FrameRateModel* fpsCounter = engine.singletonInstance<Victron::VenusOS::FrameRateModel*>(fpsCounterSingletonId);
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
@@ -625,6 +646,9 @@ int main(int argc, char *argv[])
 		qWarning() << "The scene root item is not a window." << object.data();
 		return EXIT_FAILURE;
 	}
+
+	fpsCounter->setWindow(window);
+	fpsCounter->setEnabled(enableFpsCounter);
 
 #if defined(VENUS_DESKTOP_BUILD)
 	QSurfaceFormat format = window->format();

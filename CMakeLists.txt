@@ -141,6 +141,8 @@ set(VENUS_SOURCES
     src/notificationsmodel.cpp
     src/uidhelper.h
     src/uidhelper.cpp
+    src/frameratemodel.h
+    src/frameratemodel.cpp
 )
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
