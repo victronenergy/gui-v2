@@ -226,6 +226,5 @@ QColor Theme::statusColorValue(StatusLevel level, bool darkColor) const
 	return c.typeId() == QMetaType::QColor ? c.value<QColor>() : QColor(c.value<QString>());
 }
 
-}
-}
-
+} // VenusOS
+} // Victron

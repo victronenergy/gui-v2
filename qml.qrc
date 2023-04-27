@@ -2,6 +2,7 @@
         <file>main.qml</file>
         <file>ApplicationContent.qml</file>
         <file>Global.qml</file>
+        <file>FrameRateVisualizer.qml</file>
         <file>components/ActionButton.qml</file>
         <file>components/Arc.qml</file>
         <file>components/ArcGauge.qml</file>
