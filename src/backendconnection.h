@@ -38,6 +38,7 @@ public:
 		Idle,
 		Connecting,
 		Connected,
+		Initializing,
 		Ready,
 		Disconnected,
 		Reconnecting,
