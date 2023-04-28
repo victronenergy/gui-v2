@@ -201,6 +201,8 @@ Rectangle {
 				: BackendConnection.state === BackendConnection.Connecting ? qsTrId("splash_view_connecting")
 				  //% "Connected, awaiting broker messages"
 				: BackendConnection.state === BackendConnection.Connected ? qsTrId("splash_view_connected")
+				  //% "Connected, receiving broker messages"
+				: BackendConnection.state === BackendConnection.Initializing ? qsTrId("splash_view_initializing")
 				  //% "Connected, loading user interface"
 				: BackendConnection.state === BackendConnection.Ready ? qsTrId("splash_view_ready")
 				  //% "Idle"

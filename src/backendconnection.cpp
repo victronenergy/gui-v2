@@ -60,6 +60,11 @@ void BackendConnection::setState(VeQItemMqttProducer::ConnectionState backendCon
 		setState(BackendConnection::State::Connected);
 		break;
 	}
+	case VeQItemMqttProducer::Initializing:
+	{
+		setState(BackendConnection::State::Initializing);
+		break;
+	}
 	case VeQItemMqttProducer::Ready:
 	{
 		setState(BackendConnection::State::Ready);
