@@ -20,14 +20,12 @@ Item {
 	Repeater {
 		id: gaugeRepeater
 
-		property real maximumYieldValue
-		property int maximumYieldIndex: -1
-
-		model: Global.solarChargers.yieldHistory.slice(0, Theme.geometry.briefPage.solarHistoryGauge.maximumGaugeCount)
+		model: SolarYieldModel {
+			id: yieldModel
+			dayRange: [0, Theme.geometry.briefPage.solarHistoryGauge.maximumGaugeCount + 1]
+		}
 
 		delegate: ScaledArcGauge {
-			readonly property real yieldValue: modelData
-
 			width: Theme.geometry.briefPage.edgeGauge.width
 			x: index*strokeWidth
 			opacity: 1.0 - index * 0.3
@@ -38,11 +36,10 @@ Item {
 			direction: PathArc.Counterclockwise
 			strokeWidth: Theme.geometry.arc.strokeWidth
 			arcY: root.alignment & Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
-
-			value: gaugeRepeater.maximumYieldIndex < 0 ? NaN : Utils.scaleToRange(yieldValue, 0, gaugeRepeater.maximumYieldValue, 0, 100)
-			onYieldValueChanged: Utils.updateMaximumYield(gaugeRepeater, model.index, yieldValue)
+			value: isNaN(yieldModel.maximumYield) ? NaN : Utils.scaleToRange(model.yieldKwh, 0, yieldModel.maximumYield, 0, 100)
 		}
 	}
+
 	ArcGaugeQuantityLabel {
 		id: quantityLabel
 
