@@ -12,7 +12,7 @@ QtObject {
 		let quattro = {
 			state: 9,   // Inverting
 			productId: 9816,
-			productName: "Quattro 48/5000/70-2x100",
+			name: "Quattro 48/5000/70-2x100",
 			ampOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ].map(function(v) { return { value: v } }),   // EU amp options
 			mode: VenusOS.Inverters_Mode_On,
 			modeAdjustable: true,
@@ -27,12 +27,12 @@ QtObject {
 		Global.inverters.addInverter(inverter)
 	}
 
+	property int _objectId
 	property Component inverterComponent: Component {
-		QtObject {
+		MockDevice {
 			id: inverter
 
 			property int productId
-			property string productName
 			property int productType
 			property var ampOptions
 
@@ -59,6 +59,9 @@ QtObject {
 			function setCurrentLimit2(newLimit) {
 				currentLimit2 = newLimit
 			}
+
+			name: "Inverter" + deviceInstance.value
+			Component.onCompleted: deviceInstance.value = root._objectId++
 		}
 	}
 

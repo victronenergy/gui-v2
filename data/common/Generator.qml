@@ -7,17 +7,14 @@ import Victron.Veutil
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-QtObject {
+Device {
 	id: generator
-
-	property string serviceUid
 
 	readonly property int state: _state.value === undefined ? -1 : _state.value
 	readonly property bool autoStart: _autoStart.value === 1
 	readonly property int manualStartTimer: _manualStartTimer.value === undefined ? -1 : _manualStartTimer.value
 	readonly property int runtime: _runtime.value === undefined ? -1 : _runtime.value
 	readonly property int runningBy: _runningBy.value === undefined ? -1 : _runningBy.value
-	readonly property int deviceInstance: _deviceInstance.value === undefined ? -1 : _deviceInstance.value
 
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: serviceUid + "/State"
@@ -39,13 +36,17 @@ QtObject {
 		uid: serviceUid + "/RunningByConditionCode"
 	}
 
-	readonly property VeQuickItem _deviceInstance: VeQuickItem {
-		uid: serviceUid + "/DeviceInstance"
-		onValueChanged: Global.generators.refreshFirstGenerator()
-	}
-
 	readonly property VeQuickItem _autoStart: VeQuickItem {
 		uid: serviceUid + "/AutoStartEnabled"
+	}
+
+	property bool _valid: deviceInstance.value !== undefined
+	on_ValidChanged: {
+		if (_valid) {
+			Global.generators.addGenerator(generator)
+		} else {
+			Global.generators.removeGenerator(generator)
+		}
 	}
 
 	function start(durationSecs) {

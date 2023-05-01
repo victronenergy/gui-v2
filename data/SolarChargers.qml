@@ -4,12 +4,15 @@
 
 import QtQuick
 import Victron.VenusOS
+import "common"
 
 QtObject {
 	id: root
 
 	// Model of all solar chargers
-	property ListModel model: ListModel {}
+	property DeviceModel model: DeviceModel {
+		objectProperty: "solarCharger"
+	}
 
 	readonly property real power: isNaN(acPower) && isNaN(dcPower)
 			? NaN
@@ -26,15 +29,11 @@ QtObject {
 	property real dcCurrent: NaN
 
 	function addCharger(charger) {
-		model.append({ solarCharger: charger })
+		model.addObject(charger)
 	}
 
-	function insertCharger(index, charger) {
-		model.insert(index >= 0 && index < model.count ? index : model.count, { solarCharger: charger })
-	}
-
-	function removeCharger(index) {
-		model.remove(index)
+	function removeCharger(charger) {
+		model.removeObject(charger.serviceUid)
 	}
 
 	function reset() {

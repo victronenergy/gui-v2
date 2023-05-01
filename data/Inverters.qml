@@ -4,22 +4,21 @@
 
 import QtQuick
 import Victron.VenusOS
+import "common"
 
 QtObject {
 	id: root
 
-	property ListModel model: ListModel {}
-
-	function addInverter(data) {
-		model.append({ inverter: data })
+	property DeviceModel model: DeviceModel {
+		objectProperty: "inverter"
 	}
 
-	function insertInverter(index, inverter) {
-		model.insert(index >= 0 && index < model.count ? index : model.count, { inverter: inverter })
+	function addInverter(inverter) {
+		model.addObject(inverter)
 	}
 
-	function removeInverter(index) {
-		model.remove(index)
+	function removeInverter(inverter) {
+		model.removeObject(inverter.serviceUid)
 	}
 
 	function reset() {

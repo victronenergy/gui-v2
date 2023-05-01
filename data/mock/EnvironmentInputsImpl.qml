@@ -12,7 +12,7 @@ Item {
 		const inputCount = _rand(1, 8)
 		for (let i = 0; i < inputCount; ++i) {
 			const inputObj = inputComponent.createObject(root, {
-				customName: "Sensor " + (i + 1),
+				name: "Sensor " + (i + 1),
 				temperature_celsius: _rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
 						Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue),
 				humidity: _rand(Theme.geometry.levelsPage.environment.humidityGauge.minimumValue,
@@ -27,11 +27,15 @@ Item {
 		return (Math.random() * range) + min
 	}
 
+	property int _objectId
 	property Component inputComponent: Component {
-		QtObject {
-			property string customName
+		MockDevice {
+			property string name
 			property real temperature_celsius
 			property real humidity
+
+			name: "EnvironmentInput" + deviceInstance.value
+			Component.onCompleted: deviceInstance.value = root._objectId++
 		}
 	}
 

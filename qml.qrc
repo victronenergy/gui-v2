@@ -14,6 +14,7 @@
         <file>components/CommonWords.qml</file>
         <file>components/ControlCard.qml</file>
         <file>components/ControlValue.qml</file>
+        <file>components/Device.qml</file>
         <file>components/EnergyQuantityLabel.qml</file>
         <file>components/EnvironmentGauge.qml</file>
         <file>components/EnvironmentGaugePanel.qml</file>
@@ -158,6 +159,7 @@
         <file>data/common/AcInputServiceLoader.qml</file>
         <file>data/common/BatteryData.qml</file>
         <file>data/common/DcInput.qml</file>
+        <file>data/common/DeviceModel.qml</file>
         <file>data/common/EnvironmentInput.qml</file>
         <file>data/common/EssData.qml</file>
         <file>data/common/Generator.qml</file>
@@ -190,6 +192,7 @@
         <file>data/mock/EssImpl.qml</file>
         <file>data/mock/GeneratorsImpl.qml</file>
         <file>data/mock/InvertersImpl.qml</file>
+        <file>data/mock/MockDevice.qml</file>
         <file>data/mock/MockDataManager.qml</file>
         <file>data/mock/NotificationsImpl.qml</file>
         <file>data/mock/RelaysImpl.qml</file>

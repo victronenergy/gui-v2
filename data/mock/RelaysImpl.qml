@@ -8,16 +8,11 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	function populate() {
-		for (let i = 0; i < relayObjects.count; ++i) {
-			Global.relays.addRelay(relayObjects.objectAt(i))
-		}
-	}
-
+	property int _objectId
 	property Instantiator relayObjects: Instantiator {
 		model: 3
 
-		delegate: QtObject {
+		delegate: MockDevice {
 			id: relay
 
 			function _reloadRelayFunction() {
@@ -29,7 +24,7 @@ QtObject {
 
 			property int state: model.index % 2 == 0 ? VenusOS.Relays_State_Inactive : VenusOS.Relays_State_Active
 			property int relayFunction
-			readonly property string name: Global.relays.relayName(model.index)
+			name: Global.relays.relayName(model.index)
 
 			readonly property Timer _functionUpdater: Timer {
 				running: Global.mockDataSimulator.timersActive
@@ -41,13 +36,11 @@ QtObject {
 				state = s
 			}
 
-			onRelayFunctionChanged: {
-				Global.relays.relayFunctionChanged(relay)
-			}
+			Component.onCompleted: deviceInstance.value = root._objectId++
 		}
-	}
 
-	Component.onCompleted: {
-		populate()
+		onObjectAdded: function(index, object) {
+			Global.relays.addRelay(object)
+		}
 	}
 }

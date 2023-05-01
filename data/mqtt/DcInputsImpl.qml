@@ -31,13 +31,5 @@ QtObject {
 				return VenusOS.DcInputs_InputType_Unknown
 			}
 		}
-
-		onObjectAdded: function(index, object) {
-			Global.dcInputs.insertInput(index, object)
-		}
-
-		onObjectRemoved: function(index, object) {
-			Global.dcInputs.removeInput(index)
-		}
 	}
 }

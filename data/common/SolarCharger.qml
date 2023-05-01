@@ -7,12 +7,9 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-QtObject {
+Device {
 	id: solarCharger
 
-	property string serviceUid
-
-	readonly property string name: _customName.value || _productName.value || ""
 	property int state: _state.value === undefined ? -1 : _state.value
 	readonly property ListModel trackers: ListModel {}
 
@@ -20,7 +17,6 @@ QtObject {
 	readonly property real current: isNaN(voltage) || isNaN(power) ? NaN : (!voltage || !power ? 0 : power / voltage)
 	readonly property real power: _totalPower.value === undefined ? NaN : _totalPower.value
 
-	// xxx should this be QtObject?
 	readonly property real batteryVoltage: _batteryVoltage.value == undefined ? NaN : _batteryVoltage.value
 	readonly property real batteryCurrent: _batteryCurrent.value == undefined ? NaN : _batteryCurrent.value
 	readonly property real batteryTemperature: _batteryTemperature.value == undefined ? NaN : _batteryTemperature.value
@@ -64,14 +60,6 @@ QtObject {
 
 	readonly property VeQuickItem _relay: VeQuickItem {
 		uid: solarCharger.serviceUid + "/Relay/0/State"
-	}
-
-	readonly property VeQuickItem _customName: VeQuickItem {
-		uid: solarCharger.serviceUid + "/CustomName"
-	}
-
-	readonly property VeQuickItem _productName: VeQuickItem {
-		uid: solarCharger.serviceUid + "/ProductName"
 	}
 
 	// --- history ---
@@ -153,10 +141,9 @@ QtObject {
 			solarCharger.voltage = totalVoltage
 		}
 
-		delegate: QtObject {
+		delegate: Device {
 			id: tracker
 
-			readonly property string name: _customName.value || _productName.value || ""
 			readonly property real current: isNaN(voltage) || isNaN(power) ? NaN : (!voltage || !power ? 0 : power / voltage)
 			readonly property real power: _trackerObjects.count <= 1 ? solarCharger.power : _power.value || 0
 			readonly property real voltage: _voltage.value || 0
@@ -178,15 +165,9 @@ QtObject {
 					 : solarCharger.serviceUid + "/Pv/" + model.index + "/P"
 			}
 
-			readonly property VeQuickItem _customName: VeQuickItem {
-				uid: solarCharger.serviceUid + "/Devices/" + (model.index) + "/CustomName"
-			}
-
-			readonly property VeQuickItem _productName: VeQuickItem {
-				uid: solarCharger.serviceUid + "/Devices/" + (model.index) + "/ProductName"
-			}
-
 			property bool _completed
+
+			serviceUid: solarCharger.serviceUid + "/Devices/" + (model.index)
 
 			Component.onCompleted: _completed = true
 		}
@@ -197,6 +178,15 @@ QtObject {
 
 		onObjectRemoved: function(index, object) {
 			solarCharger.trackers.remove(index)
+		}
+	}
+
+	property bool _valid: deviceInstance.value !== undefined
+	on_ValidChanged: {
+		if (_valid) {
+			Global.solarChargers.addCharger(solarCharger)
+		} else {
+			Global.solarChargers.removeCharger(solarCharger)
 		}
 	}
 }

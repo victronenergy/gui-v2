@@ -148,6 +148,15 @@ public:
 	};
 	Q_ENUM(DcInputs_InputType)
 
+	enum EnvironmentInput_Status {
+		EnvironmentInput_Status_Ok = 0,
+		EnvironmentInput_Status_Disconnected,
+		EnvironmentInput_Status_ShortCircuited,
+		EnvironmentInput_Status_ReversePolarity,
+		EnvironmentInput_Status_Unknown
+	};
+	Q_ENUM(EnvironmentInput_Status)
+
 	enum Battery_Mode {
 		Battery_Mode_Idle,
 		Battery_Mode_Charging,

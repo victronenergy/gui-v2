@@ -7,27 +7,19 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-QtObject {
+Device {
 	id: tank
 
-	property string serviceUid
-
 	readonly property int type: _type.value === undefined ? -1 : _type.value
-	readonly property string name: _customName.value || ""
 	readonly property int level: _level.value === undefined ? 0 : _level.value
 	property real remaining: NaN
 	property real capacity: NaN
 
 	readonly property VeQuickItem _status: VeQuickItem {
 		uid: serviceUid + "/Status"
-		onValueChanged: Qt.callLater(tank._reset)
 	}
 	readonly property VeQuickItem _type: VeQuickItem {
 		uid: serviceUid + "/FluidType"
-		onValueChanged: Qt.callLater(tank._reset)
-	}
-	readonly property VeQuickItem _customName: VeQuickItem {
-		uid: serviceUid + "/CustomName"
 	}
 	readonly property VeQuickItem _level: VeQuickItem {
 		uid: serviceUid + "/Level"
@@ -55,12 +47,11 @@ QtObject {
 		Component.onCompleted: _update()
 	}
 
-	function _reset() {
-		const hasType = _type.value !== undefined && _type.value >= 0
-		const valid = hasType && _status.value === VenusOS.Tank_Status_Ok
-		if (valid) {
+	property bool _valid: deviceInstance.value !== undefined && type >= 0
+	on_ValidChanged: {
+		if (_valid) {
 			Global.tanks.addTank(tank)
-		} else if (hasType) {
+		} else if (tank.type >= 0) {
 			Global.tanks.removeTank(tank)
 		}
 	}

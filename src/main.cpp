@@ -263,6 +263,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ControlCard");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "ControlValue");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Device.qml")),
+		"Victron.VenusOS", 2, 0, "Device");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/EnvironmentGauge.qml")),
 		"Victron.VenusOS", 2, 0, "EnvironmentGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/EnvironmentGaugePanel.qml")),

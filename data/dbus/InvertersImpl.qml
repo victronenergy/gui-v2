@@ -21,13 +21,5 @@ QtObject {
 		delegate: Inverter {
 			serviceUid: model.uid
 		}
-
-		onObjectAdded: function(index, object) {
-			Global.inverters.insertInverter(index, object)
-		}
-
-		onObjectRemoved: function(index, object) {
-			Global.inverters.removeInverter(index)
-		}
 	}
 }

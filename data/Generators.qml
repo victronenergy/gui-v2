@@ -4,46 +4,26 @@
 
 import QtQuick
 import Victron.VenusOS
+import "common"
 
 QtObject {
 	id: root
 
-	property ListModel model: ListModel {}
-	property var first  // the generator with the lowest DeviceInstance
+	property DeviceModel model: DeviceModel {
+		objectProperty: "generator"
+	}
+	property var first: model.firstObject
 
 	function addGenerator(generator) {
-		model.append({ generator: generator })
-		refreshFirstGenerator()
+		model.addObject(generator)
 	}
 
-	function insertGenerator(index, generator) {
-		model.insert(index >= 0 && index < model.count ? index : model.count, { generator: generator })
-		refreshFirstGenerator()
-	}
-
-	function removeGenerator(index) {
-		model.remove(index)
-		refreshFirstGenerator()
+	function removeGenerator(generator) {
+		model.removeObject(generator.serviceUid)
 	}
 
 	function reset() {
 		model.clear()
-	}
-
-	function refreshFirstGenerator() {
-		if (model.count === 0) {
-			Global.generators.first = null
-			return
-		}
-		let candidate = model.get(0).generator
-		for (let i = 1; i < model.count; ++i) {
-			const currentGenerator = model.get(i).generator
-			if (currentGenerator.deviceInstance >= 0
-					&& currentGenerator.deviceInstance < candidate.deviceInstance) {
-				candidate = currentGenerator
-			}
-		}
-		Global.generators.first = candidate
 	}
 
 	function manualRunningNotification(start, startDuration = 0) {

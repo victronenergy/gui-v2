@@ -7,13 +7,10 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-QtObject {
+Device {
 	id: inverter
 
-	property string serviceUid
-
 	readonly property int productId: _productId.value === undefined ? -1 : _productId.value
-	readonly property string productName: _productName.value || ""
 	readonly property int productType: _productUpperByte === 0x19 || _productUpperByte === 0x26
 			? VenusOS.Inverters_ProductType_EuProduct
 			: (_productUpperByte === 0x20 || _productUpperByte === 0x27 ? VenusOS.Inverters_ProductType_UsProduct : -1)
@@ -60,10 +57,6 @@ QtObject {
 		uid: inverter.serviceUid + "/ProductId"
 	}
 
-	readonly property VeQuickItem _productName: VeQuickItem {
-		uid: inverter.serviceUid + "/ProductName"
-	}
-
 	readonly property VeQuickItem _mode: VeQuickItem {
 		uid: inverter.serviceUid + "/Mode"
 	}
@@ -90,5 +83,14 @@ QtObject {
 	}
 	readonly property VeQuickItem _currentLimit2Adjustable: VeQuickItem {
 		uid: inverter.serviceUid + "/Ac/In/2/CurrentLimitIsAdjustable"
+	}
+
+	property bool _valid: deviceInstance.value !== undefined
+	on_ValidChanged: {
+		if (_valid) {
+			Global.inverters.addInverter(inverter)
+		} else {
+			Global.inverters.removeInverter(inverter)
+		}
 	}
 }

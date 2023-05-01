@@ -33,22 +33,14 @@ QtObject {
 		}
 
 		delegate: AcInput {
-			systemServiceUid: model.uid
+			serviceUid: model.uid
 
 			// this looks like: "dbus/com.victronenergy.vebus.ttyO1"
-			serviceUid: _serviceName.value ? 'dbus/' + _serviceName.value : ''
+			inputServiceUid: _serviceName.value ? 'dbus/' + _serviceName.value : ''
 
 			readonly property VeQuickItem _serviceName: VeQuickItem {
 				uid: model.uid + "/ServiceName"
 			}
-		}
-
-		onObjectAdded: function(index, object) {
-			Global.acInputs.insertInput(index, object)
-		}
-
-		onObjectRemoved: function(index, object) {
-			Global.acInputs.removeInput(index)
 		}
 	}
 }

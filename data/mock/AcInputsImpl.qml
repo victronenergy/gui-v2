@@ -81,8 +81,9 @@ QtObject {
 		}
 	}
 
+	property int _objectId
 	property Component inputComponent: Component {
-		QtObject {
+		MockDevice {
 			id: input
 
 			property string serviceType
@@ -137,6 +138,8 @@ QtObject {
 				}
 			}
 
+			name: "ACInput" + deviceInstance.value
+
 			onConnectedChanged: {
 				if (connected) {
 					Global.acInputs.connectedInput = input
@@ -146,6 +149,7 @@ QtObject {
 			}
 
 			Component.onCompleted: {
+				deviceInstance.value = root._objectId++
 				if (source === VenusOS.AcInputs_InputType_Generator) {
 					Global.acInputs.generatorInput = input
 				}
