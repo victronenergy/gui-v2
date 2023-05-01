@@ -37,11 +37,13 @@ Item {
 
 				width: root.width / buttonRepeater.count
 				height: parent.height
-				color: mouseArea.pressed || model.index === root.currentIndex
-					   ? Theme.color.ok
-					   : Theme.color.darkOk
+				color: modelData.enabled === false
+					   ? Theme.color.background.disabled
+					   : (mouseArea.pressed || model.index === root.currentIndex
+						  ? Theme.color.ok
+						  : Theme.color.darkOk)
 				border.width: Theme.geometry.button.border.width
-				border.color: Theme.color.ok
+				border.color: modelData.enabled === false ? color : Theme.color.ok
 				radius: Theme.geometry.button.radius
 
 				roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
@@ -51,16 +53,19 @@ Item {
 				Label {
 					anchors.centerIn: parent
 					font.pixelSize: root.fontPixelSize
-					text: modelData
-					color: mouseArea.pressed || model.index === root.currentIndex
-						   ? Theme.color.button.down.text
-						   : Theme.color.font.primary
+					text: modelData.value
+					color: modelData.enabled === false
+						   ? Theme.color.font.disabled
+						   : (mouseArea.pressed || model.index === root.currentIndex
+							  ? Theme.color.button.down.text
+							  : Theme.color.font.primary)
 				}
 
 				MouseArea {
 					id: mouseArea
 
 					anchors.fill: parent
+					enabled: modelData.enabled !== false
 
 					onClicked: {
 						root.buttonClicked(model.index)

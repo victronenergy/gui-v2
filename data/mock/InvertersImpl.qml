@@ -13,7 +13,7 @@ QtObject {
 			state: 9,   // Inverting
 			productId: 9816,
 			productName: "Quattro 48/5000/70-2x100",
-			ampOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ],   // EU amp options
+			ampOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ].map(function(v) { return { value: v } }),   // EU amp options
 			mode: VenusOS.Inverters_Mode_On,
 			modeAdjustable: true,
 			input1Type: VenusOS.AcInputs_InputType_Generator,
