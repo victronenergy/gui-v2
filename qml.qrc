@@ -44,6 +44,7 @@
         <file>components/SideGauge.qml</file>
         <file>components/SolarYieldGauge.qml</file>
         <file>components/SolarYieldGraph.qml</file>
+        <file>components/SolarYieldModel.qml</file>
         <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
         <file>components/SwitchControlValue.qml</file>
@@ -153,6 +154,8 @@
         <file>data/common/PvMonitor.qml</file>
         <file>data/common/Relay.qml</file>
         <file>data/common/SolarCharger.qml</file>
+        <file>data/common/SolarDailyHistory.qml</file>
+        <file>data/common/SolarHistoryErrorModel.qml</file>
         <file>data/common/SystemData.qml</file>
         <file>data/common/Tank.qml</file>
         <file>data/dbus/AcInputsImpl.qml</file>

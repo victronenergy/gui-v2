@@ -24,21 +24,19 @@ Item {
 		Repeater {
 			id: dayRepeater
 
-			property real maximumYieldValue
-			property int maximumYieldIndex: -1
-
-			model: Global.solarChargers.yieldHistory.slice(0, root._maxBars)
+			model: SolarYieldModel {
+				id: yieldModel
+				dayRange: [0, root._maxBars]
+			}
 
 			delegate: Rectangle {
-				readonly property real yieldValue: modelData
-
 				anchors.bottom: parent.bottom
-				height: Math.max(1, root.height * (yieldValue / Math.max(1, dayRepeater.maximumYieldValue)))
+				height: yieldModel.maximumYield > 0
+						? root.height * (model.yieldKwh / yieldModel.maximumYield)
+						: 0
 				width: Theme.geometry.overviewPage.widget.solar.graph.bar.width
 				radius: Theme.geometry.overviewPage.widget.solar.graph.bar.radius
 				color: Theme.color.overviewPage.widget.solar.graph.bar
-
-				onYieldValueChanged: Utils.updateMaximumYield(dayRepeater, model.index, yieldValue)
 			}
 		}
 	}
