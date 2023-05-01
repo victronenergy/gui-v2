@@ -37,9 +37,9 @@ Page {
 
 		model: [
 			//% "Tanks"
-			qsTrId("levels_page_tanks"),
+			{ value: qsTrId("levels_page_tanks") },
 			//% "Environment"
-			qsTrId("levels_page_environment")
+			{ value: qsTrId("levels_page_environment") }
 		]
 
 		// Remember currentIndex when returning to the Levels page

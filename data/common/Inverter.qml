@@ -38,8 +38,8 @@ QtObject {
 	 * - If the result is `0x2000` or `0x2700` it is an US model (120VAC)
 	 */
 	readonly property int _productUpperByte: productId > 0 ? productId / 0x100 : 0
-	readonly property var _euAmpOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ]
-	readonly property var _usAmpOptions: [ 10.0, 15.0, 20.0, 30.0, 50.0, 100.0 ]
+	readonly property var _euAmpOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ].map(function(v) { return { value: v } })
+	readonly property var _usAmpOptions: [ 10.0, 15.0, 20.0, 30.0, 50.0, 100.0 ].map(function(v) { return { value: v } })
 
 	function setMode(newMode) {
 		_mode.setValue(newMode)
