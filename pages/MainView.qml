@@ -26,7 +26,12 @@ Item {
 		id: statusBar
 
 		title: !!pageStack.currentItem ? pageStack.currentItem.title || "" : ""
-		leftButton: !!pageStack.currentItem ? pageStack.currentItem.topLeftButton : VenusOS.StatusBar_LeftButton_None
+
+		leftButton: pageStack.depth > 1
+				? pageStack.currentItem.topLeftButton === VenusOS.StatusBar_LeftButton_ControlsActive
+				  ? VenusOS.StatusBar_LeftButton_ControlsActive
+				  : VenusOS.StatusBar_LeftButton_Back
+				: (!!pageStack.currentItem ? pageStack.currentItem.topLeftButton : VenusOS.StatusBar_LeftButton_None)
 		rightButton: !!pageStack.currentItem ? pageStack.currentItem.topRightButton : VenusOS.StatusBar_RightButton_None
 
 		Component.onCompleted: pageManager.statusBar = statusBar
@@ -40,7 +45,11 @@ Item {
 				pageManager.popLayer()
 				break
 			case VenusOS.StatusBar_LeftButton_Back:
-				pageManager.popPage()
+				if (pageStack.depth > 1) {
+					pageManager.popLayer()
+				} else {
+					pageManager.popPage()
+				}
 				break
 			default:
 				break

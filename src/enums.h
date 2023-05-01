@@ -76,6 +76,7 @@ public:
 		Units_Potential_Volt,
 		Units_Energy_Watt,
 		Units_Energy_Amp,
+		Units_Energy_KiloWattHour,
 		Units_Temperature_Celsius,
 		Units_Temperature_Fahrenheit,
 	};
@@ -399,6 +400,35 @@ public:
 		NodeRed_Mode_EnabledWithSafeMode
 	};
 	Q_ENUM(NodeRed_Mode)
+
+	enum SolarCharger_State {
+		SolarCharger_State_Off,
+		SolarCharger_State_Fault,
+		SolarCharger_State_Buik,
+		SolarCharger_State_Absorption,
+		SolarCharger_State_Float,
+		SolarCharger_State_Storage,
+		SolarCharger_State_Equalize,
+		SolarCharger_State_ExternalControl = 252,
+	};
+	Q_ENUM(SolarCharger_State)
+
+	enum SolarCharger_AlarmType {
+		SolarCharger_AlarmType_OK,
+		SolarCharger_AlarmType_Warning,
+		SolarCharger_AlarmType_Alarm
+	};
+	Q_ENUM(SolarCharger_AlarmType)
+
+	enum SolarCharger_NetworkStatus {
+		SolarCharger_NetworkStatus_Slave,
+		SolarCharger_NetworkStatus_GroupMaster,
+		SolarCharger_NetworkStatus_InstanceMaster,
+		SolarCharger_NetworkStatus_GroupAndInstanceMaster,
+		SolarCharger_NetworkStatus_Standalone,
+		SolarCharger_NetworkStatus_StandaloneAndInstanceMaster
+	};
+	Q_ENUM(SolarCharger_NetworkStatus)
 
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);

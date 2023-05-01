@@ -52,10 +52,10 @@ OverviewWidget {
 		enabled: Global.solarChargers.model.count > 0
 		onClicked: {
 			if (Global.solarChargers.model.count === 1) {
-				Global.pageManager.pushLayer("/pages/solaryield/SolarChargerPage.qml",
+				Global.pageManager.pushLayer("/pages/solar/SolarChargerPage.qml",
 						{ "solarCharger": Global.solarChargers.model.get(0).solarCharger })
 			} else {
-				Global.pageManager.pushLayer("/pages/solaryield/SolarChargerListPage.qml", { "title": root.title })
+				Global.pageManager.pushLayer("/pages/solar/SolarChargerListPage.qml", { "title": root.title })
 			}
 		}
 	}

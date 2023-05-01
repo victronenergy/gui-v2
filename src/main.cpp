@@ -217,8 +217,8 @@ void registerQmlTypes()
 	/* controls */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Button.qml")),
 		"Victron.VenusOS", 2, 0, "Button");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/CheckBox.qml")),
-		"Victron.VenusOS", 2, 0, "CheckBox");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ComboBox.qml")),
+		"Victron.VenusOS", 2, 0, "ComboBox");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ListItemButton.qml")),
 		"Victron.VenusOS", 2, 0, "ListItemButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Label.qml")),
@@ -273,6 +273,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "GaugeModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GsmStatusIcon.qml")),
 		"Victron.VenusOS", 2, 0, "GsmStatusIcon");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/IconButton.qml")),
+		"Victron.VenusOS", 2, 0, "IconButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/InputPanel.qml")),
 		"Victron.VenusOS", 2, 0, "InputPanel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/FirmwareUpdate.qml")),
@@ -305,6 +307,10 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ProgressArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityLabel.qml")),
 		"Victron.VenusOS", 2, 0, "QuantityLabel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityTableSummary.qml")),
+		"Victron.VenusOS", 2, 0, "QuantityTableSummary");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityTable.qml")),
+		"Victron.VenusOS", 2, 0, "QuantityTable");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/EnergyQuantityLabel.qml")),
 		"Victron.VenusOS", 2, 0, "EnergyQuantityLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GradientListView.qml")),
@@ -323,10 +329,20 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ShinyProgressArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SideGauge.qml")),
 		"Victron.VenusOS", 2, 0, "SideGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarDetailBox.qml")),
+		"Victron.VenusOS", 2, 0, "SolarDetailBox");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarHistoryChart.qml")),
+		"Victron.VenusOS", 2, 0, "SolarHistoryChart");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarHistoryErrorView.qml")),
+		"Victron.VenusOS", 2, 0, "SolarHistoryErrorView");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarHistoryTableView.qml")),
+		"Victron.VenusOS", 2, 0, "SolarHistoryTableView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarYieldGauge.qml")),
 		"Victron.VenusOS", 2, 0, "SolarYieldGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarYieldGraph.qml")),
 		"Victron.VenusOS", 2, 0, "SolarYieldGraph");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SolarYieldModel.qml")),
+		"Victron.VenusOS", 2, 0, "SolarYieldModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Spacer.qml")),
 		"Victron.VenusOS", 2, 0, "Spacer");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SplashView.qml")),
@@ -377,6 +393,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ListRadioButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListRadioButtonGroup.qml")),
 		"Victron.VenusOS", 2, 0, "ListRadioButtonGroup");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListQuantityGroup.qml")),
+		"Victron.VenusOS", 2, 0, "ListQuantityGroup");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSlider.qml")),
 		"Victron.VenusOS", 2, 0, "ListSlider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSpinBox.qml")),
@@ -459,6 +477,8 @@ void registerQmlTypes()
 	/* dialogs */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DateSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "DateSelectorDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DialogShadow.qml")),
+		"Victron.VenusOS", 2, 0, "DialogShadow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ESSMinimumSOCDialog.qml")),
 		"Victron.VenusOS", 2, 0, "ESSMinimumSOCDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorDisableAutostartDialog.qml")),
@@ -475,6 +495,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ModalWarningDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/NumberSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "NumberSelectorDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/SolarDailyHistoryDialog.qml")),
+		"Victron.VenusOS", 2, 0, "SolarDailyHistoryDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/TimeSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "TimeSelectorDialog");
 

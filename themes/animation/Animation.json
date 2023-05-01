@@ -38,5 +38,6 @@
     "animation.navBar.initialize.delayedStart.duration": 350,
     "animation.navBar.initialize.fade.duration": 400,
     "animation.settings.radioButtonPage.autoClose.duration": 600,
-    "animation.loadGraph.model.length": 12
+    "animation.loadGraph.model.length": 12,
+    "animation.solarHistoryErrorView.expand.duration": 100
 }

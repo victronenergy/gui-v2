@@ -46,8 +46,7 @@ Column {
 	ListRadioButtonGroup {
 		id: cRelay
 
-		//% "Relay"
-		text: qsTrId("settings_relay")
+		text: CommonWords.relay
 		dataSource: "%1/%2/Relay".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		optionModel: [
 			//% "None (Disable)"

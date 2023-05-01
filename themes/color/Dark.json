@@ -70,6 +70,17 @@
     "color.viewGradient.color2": "#66000000",
     "color.viewGradient.color3": "color.black",
 
+    "color.quantityTable.quantityValue": "color.gray5",
+    "color.quantityTable.quantityUnit": "color.gray4",
+    "color.quantityTable.row.background": "color.gray1",
+    "color.quantityTable.row.alternateBackground": "color.gray2",
+
+    "color.solarDetailBox.border": "color.gray4",
+    "color.solarDetailBox.quantityTitle": "color.gray5",
+    "color.solarDetailBox.columnTitle": "color.gray6",
+
+    "color.solarListPage.header.text": "color.gray4",
+
     "color.overviewPage.widget.background": "color.darkBlue",
     "color.overviewPage.widget.border": "color.ok",
     "color.overviewPage.widget.sideGauge.background": "color.darkBlue",
@@ -101,6 +112,9 @@
     "color.levelsPage.environment.panel.background": "color.gray1",
     "color.levelsPage.environment.panel.border.color": "color.gray2",
     "color.levelsPage.environment.gauge.zeroMarker": "color.white",
+
+    "color.solarHistoryErrorView.primaryText": "color.font.primary",
+    "color.solarHistoryErrorView.secondaryText": "color.font.secondary",
 
     "color.notificationsPage.text.color": "color.font.secondary"
 }

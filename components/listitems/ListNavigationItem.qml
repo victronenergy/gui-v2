@@ -10,6 +10,7 @@ ListItem {
 	id: root
 
 	property alias secondaryText: secondaryLabel.text
+	property alias secondaryLabel: secondaryLabel
 
 	signal clicked()
 

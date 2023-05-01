@@ -24,6 +24,7 @@
         <file>components/GeneratorIconLabel.qml</file>
         <file>components/GradientListView.qml</file>
         <file>components/GsmStatusIcon.qml</file>
+        <file>components/IconButton.qml</file>
         <file>components/InputPanel.qml</file>
         <file>components/LoadGraph.qml</file>
         <file>components/LoadGraphShapePath.qml</file>
@@ -35,6 +36,8 @@
         <file>components/PageStack.qml</file>
         <file>components/ProgressArc.qml</file>
         <file>components/QuantityLabel.qml</file>
+        <file>components/QuantityTableSummary.qml</file>
+        <file>components/QuantityTable.qml</file>
         <file>components/RadioButtonControlValue.qml</file>
         <file>components/ScaledArc.qml</file>
         <file>components/ScaledArcGauge.qml</file>
@@ -45,6 +48,10 @@
         <file>components/SolarYieldGauge.qml</file>
         <file>components/SolarYieldGraph.qml</file>
         <file>components/SolarYieldModel.qml</file>
+        <file>components/SolarDetailBox.qml</file>
+        <file>components/SolarHistoryChart.qml</file>
+        <file>components/SolarHistoryErrorView.qml</file>
+        <file>components/SolarHistoryTableView.qml</file>
         <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
         <file>components/SwitchControlValue.qml</file>
@@ -62,6 +69,7 @@
         <file>components/ViewGradient.qml</file>
         <file>components/WeatherDetails.qml</file>
         <file>components/controls/Button.qml</file>
+        <file>components/controls/ComboBox.qml</file>
         <file>components/controls/Label.qml</file>
         <file>components/controls/ListItemButton.qml</file>
         <file>components/controls/ProgressBar.qml</file>
@@ -76,6 +84,7 @@
         <file>components/datapoints/DataPointMockImpl.qml</file>
         <file>components/datapoints/DataPointMqttImpl.qml</file>
         <file>components/dialogs/DateSelectorDialog.qml</file>
+        <file>components/dialogs/DialogShadow.qml</file>
         <file>components/dialogs/ESSMinimumSOCDialog.qml</file>
         <file>components/dialogs/GeneratorDurationSelectorDialog.qml</file>
         <file>components/dialogs/InputCurrentLimitDialog.qml</file>
@@ -83,6 +92,7 @@
         <file>components/dialogs/ModalDialog.qml</file>
         <file>components/dialogs/ModalWarningDialog.qml</file>
         <file>components/dialogs/NumberSelectorDialog.qml</file>
+        <file>components/dialogs/SolarDailyHistoryDialog.qml</file>
         <file>components/dialogs/TimeSelectorDialog.qml</file>
         <file>components/listitems/ListButton.qml</file>
         <file>components/listitems/ListDateSelector.qml</file>
@@ -94,6 +104,7 @@
         <file>components/listitems/ListPortField.qml</file>
         <file>components/listitems/ListRadioButton.qml</file>
         <file>components/listitems/ListRadioButtonGroup.qml</file>
+        <file>components/listitems/ListQuantityGroup.qml</file>
         <file>components/listitems/ListSlider.qml</file>
         <file>components/listitems/ListSpinBox.qml</file>
         <file>components/listitems/ListSwitch.qml</file>
@@ -370,6 +381,11 @@
         <file>pages/settings/tz/TzEuropeData.qml</file>
         <file>pages/settings/tz/TzIndianData.qml</file>
         <file>pages/settings/tz/TzPacificData.qml</file>
+        <file>pages/solar/SolarChargerAlarmsAndErrorsPage.qml</file>
+        <file>pages/solar/SolarChargerNetworkedOperationPage.qml</file>
+        <file>pages/solar/SolarChargerPage.qml</file>
+        <file>pages/solar/SolarChargerHistoryPage.qml</file>
+        <file>pages/solar/SolarChargerListPage.qml</file>
         <file>themes/animation/Animation.json</file>
         <file>themes/color/ColorDesign.json</file>
         <file>themes/color/Dark.json</file>

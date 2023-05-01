@@ -19,8 +19,7 @@ ListNavigationItem {
 	function temperatureTypeText(value) {
 		switch (value) {
 		case VenusOS.Temperature_DeviceType_Battery:
-			//% "Battery"
-			return qsTrId("settings_relay_device_battery")
+			return CommonWords.battery
 		case VenusOS.Temperature_DeviceType_Fridge:
 			//% "Fridge"
 			return qsTrId("settings_relay_device_fridge")

@@ -49,11 +49,12 @@ Page {
 			}
 
 			ListTextGroup {
-				//% "Battery"
-				text: qsTrId("settings_ess_debug_battery")
+				text: CommonWords.battery
 				textModel: [
+					//: Battery current, in amps
 					//% "Current: %1"
 					qsTrId("settings_ess_debug_battery_current").arg(batteryCurrent.value || "--"),
+					//: Battery voltage, in volts
 					//% "Voltage: %1"
 					qsTrId("settings_ess_debug_battery_voltage").arg(batteryVoltage.value || "--"),
 				]

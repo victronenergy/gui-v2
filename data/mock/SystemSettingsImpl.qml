@@ -56,6 +56,10 @@ QtObject {
 		Global.mockDataSimulator.mockDataValues["com.victronenergy.gps" + key] = value
 	}
 
+	function setMockSolarChargerValue(key, value) {
+		Global.mockDataSimulator.mockDataValues["com.victronenergy.solarcharger.ttyUSB1" + key] = value
+	}
+
 	Component.onCompleted: {
 		// Settings that are converted for convenient UI access
 		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
@@ -272,5 +276,11 @@ QtObject {
 		// Large features
 		setMockPlatformValue("Services/SignalK/Enabled", 1)
 		setMockPlatformValue("Services/NodeRed/Mode", 1)
+
+		// Solar charger
+		setMockSolarChargerValue("/Link/NetworkStatus", 1)
+		setMockSolarChargerValue("/Settings/BmsPresent", 1)
+		setMockSolarChargerValue("/Alarms/LowVoltage", VenusOS.SolarCharger_AlarmType_Warning)
+		setMockSolarChargerValue("/Alarms/HighVoltage", VenusOS.SolarCharger_AlarmType_OK)
 	}
 }

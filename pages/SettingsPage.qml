@@ -110,8 +110,7 @@ Page {
 				page: "/pages/settings/PageSettingsTankPump.qml"
 			},
 			{
-				//% "Relay"
-				text: qsTrId("settings_relay"),
+				text: CommonWords.relay,
 				page: "/pages/settings/PageSettingsRelay.qml",
 				visible: relay0.valid
 			},

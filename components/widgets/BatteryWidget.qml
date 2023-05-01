@@ -16,8 +16,7 @@ OverviewWidget {
 	readonly property int _normalizedStateOfCharge: isNaN(batteryData.stateOfCharge) ? 0 : Math.round(batteryData.stateOfCharge)
 	readonly property bool _animationReady: animationEnabled && !isNaN(batteryData.stateOfCharge)
 
-	//% "Battery"
-	title: qsTrId("overview_widget_battery_title")
+	title: CommonWords.battery
 	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
 

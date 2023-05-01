@@ -76,7 +76,7 @@ Page {
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& dataValid
 				dataSource: "com.victronenergy.hub4/PvPowerLimiterActive"
-				secondaryText: dataValue === 0 ? CommonWords.no : CommonWords.yes
+				secondaryText: CommonWords.yesOrNo(dataValue)
 			}
 		}
 	}
