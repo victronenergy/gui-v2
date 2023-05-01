@@ -75,9 +75,9 @@ Page {
 			ListTextGroup {
 				text: "Battery"
 				textModel: [
-					_formatPowerValue(Global.battery.power),
-					_formatValue(Global.battery.voltage, "V"),
-					_formatValue(Global.battery.current, "A"),
+					_formatPowerValue(Global.batteries.first.power),
+					_formatValue(Global.batteries.first.voltage, "V"),
+					_formatValue(Global.batteries.first.current, "A"),
 				]
 			}
 

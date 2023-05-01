@@ -29,7 +29,7 @@ QtObject {
 
 	// data sources
 	property var acInputs
-	property var battery
+	property var batteries
 	property var dcInputs
 	property var environmentInputs
 	property var ess

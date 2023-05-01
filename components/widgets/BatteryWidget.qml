@@ -10,18 +10,22 @@ import "../Units.js" as Units
 OverviewWidget {
 	id: root
 
-	property var batteryData
 	property alias animationPaused: barAnimation.paused
+	readonly property var batteryData: Global.batteries.first
 
-	readonly property int _normalizedStateOfCharge: isNaN(batteryData.stateOfCharge) ? 0 : Math.round(batteryData.stateOfCharge)
-	readonly property bool _animationReady: animationEnabled && !isNaN(batteryData.stateOfCharge)
+	readonly property int _normalizedStateOfCharge: batteryData
+			&& !isNaN(batteryData.stateOfCharge) ? Math.round(batteryData.stateOfCharge) : 0
+	readonly property bool _animationReady: animationEnabled && batteryData && !isNaN(batteryData.stateOfCharge)
 
 	title: CommonWords.battery
-	icon.source: batteryData.icon
+	icon.source: batteryData ? batteryData.icon : ""
 	type: VenusOS.OverviewWidget_Type_Battery
 
 	quantityLabel.value: {
 		// Show 2 decimal places if available
+		if (!batteryData) {
+			return NaN
+		}
 		const fixed = batteryData.stateOfCharge.toFixed(2)
 		const floored = Math.floor(batteryData.stateOfCharge)
 		if (fixed === floored) {
@@ -60,7 +64,7 @@ OverviewWidget {
 
 			topPadding: Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing / 2
 			horizontalItemAlignment: Grid.AlignHCenter
-			visible: batteryData.mode === VenusOS.Battery_Mode_Charging
+			visible: !!batteryData && batteryData.mode === VenusOS.Battery_Mode_Charging
 
 			columns: {
 				const maxWidth = parent.width - Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*4
@@ -205,7 +209,7 @@ OverviewWidget {
 			rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 		}
 
-		text: batteryData.timeToGo > 0 ? Utils.formatAsHHMM(batteryData.timeToGo, true) : ""
+		text: batteryData && batteryData.timeToGo > 0 ? Utils.formatAsHHMM(batteryData.timeToGo, true) : ""
 		color: Theme.color.font.primary
 		font.pixelSize: Theme.font.size.body2
 	}
@@ -219,10 +223,10 @@ OverviewWidget {
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
 
-			text: batteryData.mode === VenusOS.Battery_Mode_Idle
+			text: batteryData && batteryData.mode === VenusOS.Battery_Mode_Idle
 					//% "Idle"
 				  ? qsTrId("overview_widget_battery_idle")
-				  : (batteryData.mode === VenusOS.Battery_Mode_Charging
+				  : (batteryData && batteryData.mode === VenusOS.Battery_Mode_Charging
 					  //% "Charging"
 					? qsTrId("overview_widget_battery_charging")
 					  //% "Discharging"
@@ -243,7 +247,7 @@ OverviewWidget {
 			QuantityLabel {
 				id: batteryPowerDisplay
 
-				value: batteryData.voltage
+				value: batteryData ? batteryData.voltage : NaN
 				unit: VenusOS.Units_Potential_Volt
 				font.pixelSize: Theme.font.size.body2
 			}
@@ -256,7 +260,7 @@ OverviewWidget {
 					id: batteryCurrentDisplay
 
 					anchors.horizontalCenter: parent.horizontalCenter
-					value: batteryData.current
+					value: batteryData ? batteryData.current : NaN
 					unit: VenusOS.Units_Energy_Amp
 					font.pixelSize: Theme.font.size.body2
 				}
@@ -265,9 +269,11 @@ OverviewWidget {
 			QuantityLabel {
 				id: batteryTempDisplay
 
-				value: Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-					   ? batteryData.temperature_celsius
-					   : Units.celsiusToFahrenheit(batteryData.temperature_celsius))
+				value: batteryData
+					? Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+						? batteryData.temperature_celsius
+						: Units.celsiusToFahrenheit(batteryData.temperature_celsius))
+					: NaN
 				unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : VenusOS.Units_Temperature_Celsius
 				font.pixelSize: Theme.font.size.body2
 			}

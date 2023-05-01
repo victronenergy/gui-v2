@@ -80,12 +80,13 @@ ListModel {
 
 			readonly property int tankType: modelData
 			readonly property bool isBattery: tankType === VenusOS.Tank_Type_Battery
+			readonly property var battery: Global.batteries.first
 
 			readonly property string tankName: _tankProperties.name
-			readonly property string tankIcon: isBattery ? Global.battery.icon : _tankProperties.icon
+			readonly property string tankIcon: isBattery ? (battery ? battery.icon : "") : _tankProperties.icon
 			readonly property var tankModel: isBattery ? null : Global.tanks.tankModel(tankType)
 			readonly property real tankLevel: isBattery
-					? Math.round(Global.battery.stateOfCharge || 0)
+					? Math.round(battery ? battery.stateOfCharge || 0 : 0)
 					: (tankModel.count === 0 || tankModel.totalCapacity === 0
 					   ? 0
 					   : (tankModel.totalRemaining / tankModel.totalCapacity) * 100)

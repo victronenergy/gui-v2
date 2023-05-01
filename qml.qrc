@@ -140,7 +140,7 @@
         <file>components/widgets/WidgetHeader.qml</file>
         <file>components/widgets/WindWidget.qml</file>
         <file>data/AcInputs.qml</file>
-        <file>data/Battery.qml</file>
+        <file>data/Batteries.qml</file>
         <file>data/DataManager.qml</file>
         <file>data/DcInputs.qml</file>
         <file>data/EnvironmentInputs.qml</file>
@@ -157,7 +157,7 @@
         <file>data/Tanks.qml</file>
         <file>data/common/AcInput.qml</file>
         <file>data/common/AcInputServiceLoader.qml</file>
-        <file>data/common/BatteryData.qml</file>
+        <file>data/common/Battery.qml</file>
         <file>data/common/DcInput.qml</file>
         <file>data/common/DeviceModel.qml</file>
         <file>data/common/EnvironmentInput.qml</file>
@@ -172,7 +172,7 @@
         <file>data/common/SystemData.qml</file>
         <file>data/common/Tank.qml</file>
         <file>data/dbus/AcInputsImpl.qml</file>
-        <file>data/dbus/BatteryImpl.qml</file>
+        <file>data/dbus/BatteriesImpl.qml</file>
         <file>data/dbus/DBusDataManager.qml</file>
         <file>data/dbus/DcInputsImpl.qml</file>
         <file>data/dbus/EnvironmentInputsImpl.qml</file>
@@ -186,7 +186,7 @@
         <file>data/dbus/SystemSettingsImpl.qml</file>
         <file>data/dbus/TanksImpl.qml</file>
         <file>data/mock/AcInputsImpl.qml</file>
-        <file>data/mock/BatteryImpl.qml</file>
+        <file>data/mock/BatteriesImpl.qml</file>
         <file>data/mock/DcInputsImpl.qml</file>
         <file>data/mock/EnvironmentInputsImpl.qml</file>
         <file>data/mock/EssImpl.qml</file>
@@ -206,7 +206,7 @@
         <file>data/mock/config/NotificationsPageConfig.qml</file>
         <file>data/mock/config/SettingsPageConfig.qml</file>
         <file>data/mqtt/AcInputsImpl.qml</file>
-        <file>data/mqtt/BatteryImpl.qml</file>
+        <file>data/mqtt/BatteriesImpl.qml</file>
         <file>data/mqtt/DcInputsImpl.qml</file>
         <file>data/mqtt/EnvironmentInputsImpl.qml</file>
         <file>data/mqtt/EssImpl.qml</file>
