@@ -4,28 +4,25 @@
 
 import QtQuick
 import Victron.VenusOS
+import "common"
 
 QtObject {
 	id: root
 
-	property ListModel model: ListModel {}
-	property ListModel manualRelays: ListModel {}
+	property DeviceModel model: DeviceModel {
+		objectProperty: "relay"
+	}
+	property DeviceModel manualRelays: DeviceModel {
+		objectProperty: "relay"
+	}
 
 	function addRelay(relay) {
-		model.append({ relay: relay })
+		model.addObject(relay)
 	}
 
-	function insertRelay(index, relay) {
-		model.insert(index >= 0 && index < model.count ? index : model.count, { relay: relay })
-	}
-
-	function removeRelay(index) {
-		model.remove(index)
-
-		let manualRelayIndex = _manualRelayIndex(relay)
-		if (manualRelayIndex >= 0) {
-			manualRelays.remove(manualRelayIndex)
-		}
+	function removeRelay(relay) {
+		model.removeObject(relay.serviceUid)
+		manualRelays.removeObject(relay.serviceUid)
 	}
 
 	function reset() {
@@ -37,25 +34,22 @@ QtObject {
 		//: %1 = Relay number
 		//% "Relay %1"
 		return qsTrId("relay_name").arg(index + 1)
-
 	}
 
-	function relayFunctionChanged(relay) {
-		let relayIndex = _manualRelayIndex(relay)
-		if (relayIndex < 0 && relay.relayFunction === VenusOS.Relay_Function_Manual) {
-			manualRelays.append({ relay: relay })
-		} else if (relayIndex >= 0 && relay.relayFunction !== VenusOS.Relay_Function_Manual) {
-			manualRelays.remove(relayIndex)
-		}
-	}
+	readonly property var _relayFunctionWatcher: Instantiator {
+		model: root.model
+		delegate: Connections {
+			target: modelData
 
-	function _manualRelayIndex(relay) {
-		for (let i = 0; i < manualRelays.count; ++i) {
-			if (manualRelays.get(i).relay === relay) {
-				return i
+			function onRelayFunctionChanged() {
+				const relayIndex = manualRelays.indexOf(target.serviceUid)
+				if (relayIndex < 0 && target.relayFunction === VenusOS.Relay_Function_Manual) {
+					manualRelays.addObject(relay)
+				} else if (relayIndex >= 0 && target.relayFunction !== VenusOS.Relay_Function_Manual) {
+					manualRelays.removeObject(target.serviceUid)
+				}
 			}
 		}
-		return -1
 	}
 
 	Component.onCompleted: Global.relays = root

@@ -76,7 +76,7 @@ Flickable {
 				verticalSize: Global.pageManager.expandLayout
 						? VenusOS.EnvironmentGaugePanel_Size_Expanded
 						: VenusOS.EnvironmentGaugePanel_Size_Compact
-				title: model.input.customName || model.input.productName || ""
+				title: model.input.name
 				temperature: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit
 						? Units.celsiusToFahrenheit(model.input.temperature_celsius)
 						: model.input.temperature_celsius

@@ -7,10 +7,9 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-QtObject {
+Device {
 	id: input
 
-	property string serviceUid
 	property int source: VenusOS.DcInputs_InputType_DcGenerator
 
 	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
@@ -45,6 +44,15 @@ QtObject {
 
 	readonly property VeQuickItem _monitorMode: VeQuickItem {
 		uid: input.serviceUid + "/Settings/MonitorMode"
+	}
+
+	property bool _valid: deviceInstance.value !== undefined
+	on_ValidChanged: {
+		if (_valid) {
+			Global.dcInputs.addInput(input)
+		} else {
+			Global.dcInputs.removeInput(input)
+		}
 	}
 
 	function _updateTotals() {

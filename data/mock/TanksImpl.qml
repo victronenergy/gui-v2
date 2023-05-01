@@ -22,7 +22,6 @@ QtObject {
 			const level = Math.random()
 			const capacity = 1  // m3
 			const tankObj = tankComponent.createObject(root, {
-				serviceUid: "tank-" + _createdTankCount++,
 				type: tankType,
 				level: level * 100,
 				remaining: capacity * level,
@@ -33,14 +32,16 @@ QtObject {
 		}
 	}
 
-	property int _createdTankCount
+	property int _objectId
 	property Component tankComponent: Component {
-		QtObject {
-			property string serviceUid
+		MockDevice {
 			property int type
 			property real level
 			property real remaining
 			property real capacity
+
+			name: "Tank" + deviceInstance.value
+			Component.onCompleted: deviceInstance.value = root._objectId++
 		}
 	}
 
@@ -60,7 +61,6 @@ QtObject {
 						props.remaining = props.capacity * (props.level / 100)
 					}
 					const tankObj = tankComponent.createObject(root, props)
-					tankObj.serviceUid = "tank-" + root._createdTankCount++
 					Global.tanks.addTank(tankObj)
 					_createdObjects.push(tankObj)
 				}
@@ -98,7 +98,6 @@ QtObject {
 				const randomLevel = Math.random()
 				const capacity = 1  // m3
 				const tankObj = tankComponent.createObject(root, {
-					serviceUid: "tank-" + root._createdTankCount++,
 					type: model.type,
 					level: randomLevel * 100,
 					capacity: capacity,

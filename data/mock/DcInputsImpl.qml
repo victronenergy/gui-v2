@@ -45,8 +45,9 @@ QtObject {
 		}
 	}
 
+	property int _objectId
 	property Component inputComponent: Component {
-		QtObject {
+		MockDevice {
 			id: input
 
 			property int source
@@ -83,6 +84,9 @@ QtObject {
 					Global.dcInputs.updateTotals()
 				}
 			}
+
+			name: "DCInput" + deviceInstance.value
+			Component.onCompleted: deviceInstance.value = root._objectId++
 		}
 	}
 

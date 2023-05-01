@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "common"
 
 QtObject {
 	id: root
@@ -15,29 +16,23 @@ QtObject {
 	property real current: connectedInput != null ? connectedInput.current : NaN
 	property real currentLimit: connectedInput != null ? connectedInput.currentLimit : NaN
 
-	property ListModel model: ListModel {}
+	property DeviceModel model: DeviceModel {
+		objectProperty: "input"
+	}
 
 	function addInput(input) {
-		model.append({ input: input })
+		model.addObject(input)
 	}
 
-	function insertInput(index, input) {
-		model.insert(index >= 0 && index < model.count ? index : model.count, { input: input })
-	}
-
-	function removeInput(index) {
-		if (index < 0 || index >= model.count) {
-			console.warn("removeInput(): bad index", index)
-			return
+	function removeInput(input) {
+		if (model.removeObject(input.serviceUid)) {
+			if (input === connectedInput) {
+				connectedInput = null
+			}
+			if (input === generatorInput) {
+				generatorInput = null
+			}
 		}
-		const input = get(index).input
-		if (input === connectedInput) {
-			connectedInput = null
-		}
-		if (input === generatorInput) {
-			generatorInput = null
-		}
-		model.remove(index)
 	}
 
 	function reset() {

@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "common"
 
 QtObject {
 	id: root
@@ -11,20 +12,20 @@ QtObject {
 	property real power: NaN
 	property real current: NaN
 
-	property ListModel model: ListModel {}
+	property DeviceModel model: DeviceModel {
+		objectProperty: "input"
+	}
 
 	function addInput(input) {
-		model.append({ input: input })
-		updateTotals()
+		if (model.addObject(input)) {
+			updateTotals()
+		}
 	}
 
-	function insertInput(index, input) {
-		model.insert(index >= 0 && index < model.count ? index : model.count, { input: input })
-	}
-
-	function removeInput(index) {
-		model.remove(index)
-		updateTotals()
+	function removeInput(input) {
+		if (model.removeObject(input.serviceUid)) {
+			updateTotals()
+		}
 	}
 
 	function updateTotals() {

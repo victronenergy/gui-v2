@@ -40,18 +40,12 @@ QtObject {
 		}
 
 		delegate: AcInput {
-			systemServiceUid: model.uid
+			serviceUid: model.uid
 
 			// this looks like: 'mqtt/vebus/289/'
-			serviceUid: serviceType !== '' && deviceInstance !== '' ? 'mqtt/' + serviceType + '/' + deviceInstance : ''
-		}
-
-		onObjectAdded: function(index, object) {
-			Global.acInputs.insertInput(index, object)
-		}
-
-		onObjectRemoved: function(index, object) {
-			Global.acInputs.removeInput(index)
+			inputServiceUid: serviceType.length && deviceInstance.value !== undefined
+					? "mqtt/" + serviceType + "/" + deviceInstance.value
+					: ""
 		}
 	}
 }

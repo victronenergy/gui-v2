@@ -20,13 +20,5 @@ QtObject {
 		delegate: EnvironmentInput {
 			serviceUid: model.uid
 		}
-
-		onObjectAdded: function(index, object) {
-			Global.environmentInputs.insertInput(index, object)
-		}
-
-		onObjectRemoved: function(index, object) {
-			Global.environmentInputs.removeInput(index)
-		}
 	}
 }

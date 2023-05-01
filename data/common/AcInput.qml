@@ -7,17 +7,14 @@ import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
 
-QtObject {
+Device {
 	id: input
 
-	property string systemServiceUid
-	property string serviceUid
+	property string inputServiceUid
 
 	readonly property string serviceType: _serviceType.value ? _serviceType.value : ''	// e.g. "vebus"
 	readonly property int source: (_source.value === undefined || _source.value === '') ? -1 : parseInt(_source.value)
 	readonly property bool connected: _connected.value === 1
-	readonly property int productId: _productId.value ? _productId.value : -1
-	readonly property int deviceInstance: _deviceInstance.value !== undefined ? _deviceInstance.value : -1
 
 	// Detailed readings
 	readonly property alias frequency: _serviceLoader.frequency
@@ -46,30 +43,32 @@ QtObject {
 	// --- General config details about the input, from com.victronenergy.system ---
 
 	readonly property VeQuickItem _serviceType: VeQuickItem {
-		uid: systemServiceUid + "/ServiceType"
+		uid: input.serviceUid + "/ServiceType"
 	}
 	readonly property VeQuickItem _source: VeQuickItem {
-		uid: systemServiceUid + "/Source"
+		uid: input.serviceUid + "/Source"
 	}
 	readonly property VeQuickItem _connected: VeQuickItem {
-		uid: systemServiceUid + "/Connected"
-	}
-	readonly property VeQuickItem _deviceInstance: VeQuickItem {
-		uid: systemServiceUid + "/DeviceInstance"
-	}
-
-	readonly property VeQuickItem _productId: VeQuickItem {
-		uid: serviceUid === '' ? '' : (serviceUid + '/ProductId')
+		uid: input.serviceUid + "/Connected"
 	}
 
 	property AcInputServiceLoader _serviceLoader: AcInputServiceLoader {
 		id: _serviceLoader
 
-		serviceUid: input.serviceUid
+		serviceUid: input.inputServiceUid
 		serviceType: input.serviceType
 
 		// For vebus inputs, only the currently-active input has valid measurements, so
 		// non-connected inputs should not show data.
 		valid: serviceType == "vebus" ? input.connected : true
+	}
+
+	property bool _valid: deviceInstance.value !== undefined
+	on_ValidChanged: {
+		if (_valid) {
+			Global.acInputs.addInput(input)
+		} else {
+			Global.acInputs.removeInput(input)
+		}
 	}
 }

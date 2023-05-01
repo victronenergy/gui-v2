@@ -28,13 +28,5 @@ QtObject {
 		delegate: SolarCharger {
 			serviceUid: model.uid
 		}
-
-		onObjectAdded: function(index, object) {
-			Global.solarChargers.insertCharger(index, object)
-		}
-
-		onObjectRemoved: function(index, object) {
-			Global.solarChargers.removeCharger(index)
-		}
 	}
 }

@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "common"
 
 QtObject {
 	id: root
@@ -18,46 +19,53 @@ QtObject {
 		VenusOS.Tank_Type_Gasoline
 	]
 
-	readonly property ListModel fuelTanks: ListModel {
+	readonly property DeviceModel fuelTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Fuel
 		property real totalCapacity
 		property real totalRemaining
+		objectProperty: "tank"
 		objectName: "Fuel"
 	}
-	readonly property ListModel freshWaterTanks: ListModel {
+	readonly property DeviceModel freshWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_FreshWater
 		property real totalCapacity
 		property real totalRemaining
+		objectProperty: "tank"
 		objectName: "FreshWater"
 	}
-	readonly property ListModel wasteWaterTanks: ListModel {
+	readonly property DeviceModel wasteWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_WasteWater
 		property real totalCapacity
 		property real totalRemaining
+		objectProperty: "tank"
 		objectName: "WasteWater"
 	}
-	readonly property ListModel liveWellTanks: ListModel {
+	readonly property DeviceModel liveWellTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_LiveWell
 		property real totalCapacity
 		property real totalRemaining
+		objectProperty: "tank"
 		objectName: "LiveWell"
 	}
-	readonly property ListModel oilTanks: ListModel {
+	readonly property DeviceModel oilTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Oil
 		property real totalCapacity
 		property real totalRemaining
+		objectProperty: "tank"
 		objectName: "Oil"
 	}
-	readonly property ListModel blackWaterTanks: ListModel {
+	readonly property DeviceModel blackWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_BlackWater
 		property real totalCapacity
 		property real totalRemaining
+		objectProperty: "tank"
 		objectName: "BlackWater"
 	}
-	readonly property ListModel gasolineTanks: ListModel {
+	readonly property DeviceModel gasolineTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Gasoline
 		property real totalCapacity
 		property real totalRemaining
+		objectProperty: "tank"
 		objectName: "Gasoline"
 	}
 
@@ -117,28 +125,15 @@ QtObject {
 		model.totalCapacity = totalCapacity
 	}
 
-	function findTank(model, serviceUid) {
-		for (let i = 0; i < model.count; ++i) {
-			if (model.get(i).tank.serviceUid === serviceUid) {
-				return i
-			}
-		}
-		return -1
-	}
-
 	function addTank(tank) {
 		const model = tankModel(tank.type)
 		if (!model) {
 			console.warn("addTank(): Unknown tank type", tank.type)
-			return
+			return false
 		}
-		const index = findTank(model, tank.serviceUid)
-		if (index >= 0) {
-			console.warn("tank already added:", tank.serviceUid)
-			return
-		}
-		model.append({'tank': tank })
+		model.addObject(tank)
 		updateTankModelTotals(tank.type)
+		return true
 	}
 
 	function removeTank(tank) {
@@ -147,9 +142,7 @@ QtObject {
 			console.warn("removeTank(): Unknown tank type", tank.type)
 			return
 		}
-		const index = findTank(model, tank.serviceUid)
-		if (index >= 0) {
-			model.remove(index)
+		if (model.removeObject(tank.serviceUid)) {
 			updateTankModelTotals(tank.type)
 			return true
 		}

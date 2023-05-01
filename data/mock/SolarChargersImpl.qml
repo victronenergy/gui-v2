@@ -57,12 +57,12 @@ QtObject {
 		ListModel {}
 	}
 
+	property int _objectId
 	property Component chargerComponent: Component {
-		QtObject {
+		MockDevice {
 			id: solarCharger
 
 			readonly property string serviceUid: "com.victronenergy.solarcharger.ttyUSB1"
-			property string name
 			property int state: VenusOS.SolarCharger_State_ExternalControl
 
 			readonly property ListModel trackers: ListModel {}
@@ -167,6 +167,9 @@ QtObject {
 					solarCharger.power += tracker.power
 				}
 			}
+
+			name: "SolarCharger" + deviceInstance.value
+			Component.onCompleted: deviceInstance.value = root._objectId++
 		}
 	}
 
