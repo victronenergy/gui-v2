@@ -671,7 +671,6 @@ Page {
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 		animationEnabled: root.isCurrentPage
-		batteryData: Global.battery
 		connectors: [ batteryToDcLoadsConnector ]
 
 		WidgetConnectorAnchor {

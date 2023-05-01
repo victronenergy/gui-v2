@@ -11,7 +11,8 @@ Item {
 	id: root
 
 	readonly property bool _dataObjectsReady: !!Global.acInputs
-			&& !!Global.battery
+			&& !!Global.acInputs
+			&& !!Global.batteries
 			&& !!Global.dcInputs
 			&& !!Global.environmentInputs
 			&& !!Global.ess
@@ -23,6 +24,7 @@ Item {
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.tanks
+
 	readonly property bool _shouldInitialize: _dataObjectsReady
 			&& BackendConnection.type !== BackendConnection.UnknownSource
 			&& BackendConnection.state === BackendConnection.Ready
@@ -68,7 +70,7 @@ Item {
 
 	// Global data types
 	AcInputs {}
-	Battery {}
+	Batteries {}
 	DcInputs {}
 	EnvironmentInputs {}
 	Ess {}

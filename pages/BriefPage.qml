@@ -70,14 +70,15 @@ Page {
 
 		CircularSingleGauge {
 			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
+			readonly property var battery: Global.batteries.first
 
 			name: properties.name
-			icon.source: Global.battery.icon
-			value: Math.round(Global.battery.stateOfCharge || 0)
+			icon.source: battery ? battery.icon : ""
+			value: battery ? Math.round(battery.stateOfCharge || 0) : 0
 			status: Gauges.getValueStatus(value, properties.valueType)
-			caption: Global.battery.timeToGo > 0 ? Utils.formatAsHHMM(Global.battery.timeToGo, true) : ""
+			caption: battery && battery.timeToGo > 0 ? Utils.formatAsHHMM(battery.timeToGo, true) : ""
 			animationEnabled: root._animationEnabled
-			shineAnimationEnabled: Global.battery.mode === VenusOS.Battery_Mode_Charging
+			shineAnimationEnabled: battery && battery.mode === VenusOS.Battery_Mode_Charging
 		}
 	}
 

@@ -30,7 +30,6 @@ Item {
 	property int _objectId
 	property Component inputComponent: Component {
 		MockDevice {
-			property string name
 			property real temperature_celsius
 			property real humidity
 
