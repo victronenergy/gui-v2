@@ -1,0 +1,22 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+*/
+
+import QtQuick
+import QtQuick.Controls.impl as CP
+
+MouseArea {
+	id: root
+
+	property alias icon: icon
+
+	width: icon.width
+	height: icon.height
+
+	CP.ColorImage {
+		id: icon
+
+		anchors.centerIn: parent
+		fillMode: Image.PreserveAspectFit
+	}
+}

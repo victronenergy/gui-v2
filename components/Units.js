@@ -28,6 +28,8 @@ function getDisplayText(unit, value, length, unitMatchValue = undefined) {
 		return _scaledQuantity(value, unitMatchValue, length, "V", "kV")
 	case V.VenusOS.Units_Energy_Amp:
 		return _scaledQuantity(value, unitMatchValue, length, "A", "kA")
+	case V.VenusOS.Units_Energy_KiloWattHour:
+		return _scaledQuantity(value, unitMatchValue, length, "kWh")
 	case V.VenusOS.Units_Percentage:
 		return _scaledQuantity(value, unitMatchValue, length, "%")
 	case V.VenusOS.Units_Temperature_Celsius:

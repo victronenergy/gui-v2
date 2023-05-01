@@ -3,6 +3,7 @@
     "geometry.screen.height": 600,
 
     "geometry.page.content.horizontalMargin": 40,
+    "geometry.page.content.verticalMargin": 40,
 
     "geometry.button.spacing": 7,
     "geometry.button.radius": 6,
@@ -328,7 +329,7 @@
     "geometry.levelsPage.gaugeDelegate.contentWidth": 112,
     "geometry.levelsPage.tankMergeThreshold": 8,
     "geometry.levelsPage.tankGauge.radius": 7,
-    "geometry.levelsPage.tankGauge.alarmIcon.height": 26,
+    "geometry.levelsPage.tankGauge.alarmIcon.height": 32,
 
     "geometry.levelsPage.environment.minimumSpacing": 16,
     "geometry.levelsPage.environment.maximumSpacing": 176,
@@ -375,5 +376,57 @@
     "geometry.viewGradient.height": 28,
     "geometry.viewGradient.position1": 0,
     "geometry.viewGradient.position2": 0.55,
-    "geometry.viewGradient.position3": 1
+    "geometry.viewGradient.position3": 1,
+
+    "geometry.quantityTable.row.height": 30,
+    "geometry.quantityTable.bottomMargin": 14,
+    "geometry.quantityTable.header.widthBoost": 120,
+
+    "geometry.quantityTableSummary.verticalMargin": 8,
+    "geometry.quantityTableSummary.verticalSpacing": 4,
+
+    "geometry.solarListPage.quantityRow.width": 480,
+
+    "geometry.solarHistoryPage.tabBar.width": 260,
+
+    "geometry.solarDetailBox.radius": 10,
+    "geometry.solarDetailBox.horizontalMargin": 8,
+    "geometry.solarDetailBox.verticalMargin": 8,
+    "geometry.solarDetailBox.content.spacing": 10,
+    "geometry.solarDetailBox.leftColumn.proportionateWidth": 0.55,
+
+    "geometry.solarChart.bar.spacing.sevenDays": 8,
+    "geometry.solarChart.bar.spacing.fourteenDays": 6,
+    "geometry.solarChart.bar.spacing.thirtyDays": 4,
+    "geometry.solarChart.bar.radius": 8,
+    "geometry.solarChart.tickLine.height": 1,
+    "geometry.solarChart.tickLabel.width": 32,
+    "geometry.solarChart.horizontalMargin": 18,
+    "geometry.solarChart.bottomMargin": 28,
+
+    "geometry.solarDailyHistoryDialog.minimumHeight": 222,
+    "geometry.solarDailyHistoryDialog.header.height": 50,
+    "geometry.solarDailyHistoryDialog.closeButton.icon.size": 24,
+    "geometry.solarDailyHistoryDialog.closeButton.icon.margins": 12,
+    "geometry.solarDailyHistoryDialog.content.horizontalMargin": 16,
+    "geometry.solarDayView.content.bottomMargin": 24,
+    "geometry.solarDailyHistoryDialog.arrow.icon.size": 72,
+    "geometry.solarDailyHistoryDialog.arrow.horizontalMargin": 18,
+
+    "geometry.solarHistoryErrorView.radius": 6,
+    "geometry.solarHistoryErrorView.itemHeight": 40,
+    "geometry.solarHistoryErrorView.alarmIcon.size": 18,
+    "geometry.solarHistoryErrorView.expandIcon.size": 32,
+    "geometry.solarHistoryErrorView.expandIcon.horizontalMargin": 8,
+    "geometry.solarHistoryErrorView.iconBackground.width": 56,
+    "geometry.solarHistoryErrorView.textBackground.horizontalMargin": 16,
+    "geometry.solarHistoryErrorView.textBackground.bottomMargin": 10,
+
+    "geometry.comboBox.width": 172,
+    "geometry.comboBox.height": 40,
+    "geometry.comboBox.leftPadding": 18,
+    "geometry.comboBox.rightPadding": 10,
+    "geometry.comboBox.verticalPadding": 10,
+    "geometry.comboBox.spacing": 8,
+    "geometry.comboBox.indicator.height": 24
 }

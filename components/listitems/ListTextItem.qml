@@ -14,6 +14,7 @@ ListItem {
 	function setDataValue(v) { dataPoint.setValue(v) }
 
 	property alias secondaryText: secondaryLabel.text
+	property alias secondaryLabel: secondaryLabel
 
 	content.children: [
 		Label {

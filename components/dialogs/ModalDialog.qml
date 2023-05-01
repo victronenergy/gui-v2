@@ -26,15 +26,12 @@ C.Dialog {
 				//% "Close"
 				: qsTrId("controlcard_close")
 
-	modal: true
-
-	verticalPadding: 0
-	horizontalPadding: 0
-
+	anchors.centerIn: parent
 	implicitWidth: background.implicitWidth
 	implicitHeight: background.implicitHeight
-
-	anchors.centerIn: parent
+	verticalPadding: 0
+	horizontalPadding: 0
+	modal: true
 
 	enter: Transition {
 		NumberAnimation { properties: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
@@ -50,15 +47,9 @@ C.Dialog {
 		color: Theme.color.background.secondary
 		border.color: Theme.color.modalDialog.border
 
-		Rectangle {
-			// TODO: do this with shader, or with border image taking noise sample.
-			id: dropshadowRect
-			anchors.fill: parent
-			anchors.margins: -dropshadowRect.border.width
-			color: "transparent"
-			border.color: Qt.rgba(0.0, 0.0, 0.0, 0.7)
-			border.width: Math.max(root.parent.width - parent.width, root.parent.height - parent.height)
-			radius: parent.radius + dropshadowRect.border.width
+		DialogShadow {
+			backgroundRect: parent
+			dialog: root
 		}
 	}
 

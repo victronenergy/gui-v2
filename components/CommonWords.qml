@@ -23,6 +23,9 @@ QtObject {
 	//% "Automatic scanning"
 	readonly property string automatic_scanning: qsTrId("common_words_automatic_scanning")
 
+	//% "Battery"
+	readonly property string battery: qsTrId("common_words_battery")
+
 	//% "Battery current"
 	readonly property string battery_current: qsTrId("common_words_battery_current")
 
@@ -31,6 +34,10 @@ QtObject {
 
 	//% "Connected"
 	readonly property string connected: qsTrId("common_words_connected");
+
+	//: Electric current, as measured in Amps
+	//% "Current"
+	readonly property string current_amps: qsTrId("common_words_current_amps")
 
 	//% "Disabled"
 	readonly property string disabled: qsTrId("common_words_disabled")
@@ -59,6 +66,10 @@ QtObject {
 	//% "No error"
 	readonly property string no_error: qsTrId("common_words_no_error")
 
+	//: Electric power, as measured in Watts
+	//% "Power"
+	readonly property string power_watts: qsTrId("common_words_power_watts")
+
 	//% "Phase"
 	readonly property string phase: qsTrId("common_words_phase")
 
@@ -67,6 +78,10 @@ QtObject {
 
 	//% "Press to scan"
 	readonly property string press_to_scan: qsTrId("common_words_press_to_scan")
+
+	//: Photovoltaic power (for a solar charger or tracker)
+	//% "PV Power"
+	readonly property string pv_power: qsTrId("common_words_pv_power")
 
 	//% "Off"
 	readonly property string off: qsTrId("common_words_off");
@@ -85,6 +100,10 @@ QtObject {
 
 	//% "Quiet hours"
 	readonly property string quiet_hours: qsTrId("common_words_quiet_hours")
+
+	//: Relay switch
+	//% "Relay"
+	readonly property string relay: qsTrId("common_words_relay")
 
 	//% "Remove"
 	readonly property string remove: qsTrId("common_words_remove")
@@ -113,6 +132,16 @@ QtObject {
 	//% "Status"
 	readonly property string status: qsTrId("common_words_status")
 
+	//% "Today"
+	readonly property string today: qsTrId("common_words_today")
+
+	//% "Total"
+	readonly property string total: qsTrId("common_words_total")
+
+	//: Solar tracker
+	//% "Tracker"
+	readonly property string tracker: qsTrId("common_words_tracker")
+
 	//% "Stop value during quiet hours"
 	readonly property string stop_value_during_quiet_hours: qsTrId("common_words_stop_value_during_quiet_hours")
 
@@ -122,11 +151,25 @@ QtObject {
 	//% "Stopped"
 	readonly property string stopped: qsTrId("common_words_stopped")
 
+	//% "Voltage"
+	readonly property string voltage: qsTrId("common_words_voltage")
+
 	//% "When warning is cleared stop after"
 	readonly property string when_warning_is_cleared_stop_after: qsTrId("common_words_when_warning_is_cleared_stop_after")
 
 	//% "Yes"
 	readonly property string yes: qsTrId("common_words_yes")
+
+	//% "Yesterday"
+	readonly property string yesterday: qsTrId("common_words_yesterday")
+
+	//: Solar charger yield, in kWh (kilowatt hours)
+	//% "Yield"
+	readonly property string yield_kwh: qsTrId("common_words_yield_kwh")
+
+	//: Solar charger yield for today, in kWh (kilowatt hours)
+	//% "Yield today"
+	readonly property string yield_today: qsTrId("common_words_yield_today")
 
 	function onOrOff(value) {
 		if (value === 0) {
@@ -137,5 +180,9 @@ QtObject {
 			//% "Unknown"
 			return qsTrId("utils_unknown")
 		}
+	}
+
+	function yesOrNo(value) {
+		return value === 1 ? yes : no
 	}
 }

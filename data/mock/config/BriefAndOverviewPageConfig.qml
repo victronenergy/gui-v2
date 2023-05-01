@@ -93,6 +93,10 @@ QtObject {
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
+		{
+			name: "Multiple solar chargers",
+			solar: { chargers: [ { acPower: 123 }, { dcPower: 456 }, { acPower: 234 } ] },
+		},
 	]
 
 	function configCount() {
