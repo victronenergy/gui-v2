@@ -4,7 +4,6 @@
 
 import QtQuick
 import QtQuick.Controls.impl as CP
-import QtQuick.VirtualKeyboard
 import Victron.VenusOS
 
 ListItem {
@@ -50,7 +49,6 @@ ListItem {
 		enabled: root.enabled
 		text: dataValid ? dataValue : ""
 
-		EnterKeyAction.actionId: EnterKeyAction.Done
 		onAccepted: {
 			_accepted = true
 			if (dataPoint.source) {
