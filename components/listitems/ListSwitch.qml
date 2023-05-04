@@ -22,7 +22,7 @@ ListItem {
 
 	function _setChecked(c) {
 		if (updateOnClick) {
-			if (root.source.length > 0) {
+			if (root.dataSource.length > 0) {
 				if (invertSourceValue) {
 					dataPoint.setValue(c ? 0 : 1)
 				} else {
