@@ -24,6 +24,7 @@ Item {
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.tanks
+			&& !!Global.venusPlatform
 
 	readonly property bool _shouldInitialize: _dataObjectsReady
 			&& BackendConnection.type !== BackendConnection.UnknownSource
@@ -82,6 +83,7 @@ Item {
 	System {}
 	SystemSettings {}
 	Tanks {}
+	VenusPlatform {}
 
 	Loader {
 		id: dataManagerLoader

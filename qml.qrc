@@ -156,6 +156,7 @@
         <file>data/SystemDc.qml</file>
         <file>data/SystemSettings.qml</file>
         <file>data/Tanks.qml</file>
+        <file>data/VenusPlatform.qml</file>
         <file>data/common/AcInput.qml</file>
         <file>data/common/AcInputServiceLoader.qml</file>
         <file>data/common/Battery.qml</file>
