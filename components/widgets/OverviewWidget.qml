@@ -95,7 +95,7 @@ Rectangle {
 			width: parent.width
 		}
 
-		EnergyQuantityLabel {
+		ElectricalQuantityLabel {
 			id: quantityLabel
 
 			anchors {

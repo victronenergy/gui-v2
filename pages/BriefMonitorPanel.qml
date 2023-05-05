@@ -86,7 +86,7 @@ Column {
 			icon.source: "qrc:/images/solaryield.svg"
 		}
 
-		EnergyQuantityLabel {
+		ElectricalQuantityLabel {
 			id: solarQuantityLabel
 
 			anchors.top: solarHeader.bottom
@@ -124,7 +124,7 @@ Column {
 				icon.source: "qrc:/images/generator.svg"
 			}
 
-			EnergyQuantityLabel {
+			ElectricalQuantityLabel {
 				id: generatorQuantityLabel
 
 				anchors.top: generatorHeader.bottom
@@ -170,7 +170,7 @@ Column {
 				icon.source: root.gridIcon
 			}
 
-			EnergyQuantityLabel {
+			ElectricalQuantityLabel {
 				id: gridQuantityLabel
 
 				anchors.top: gridHeader.bottom
@@ -232,7 +232,7 @@ Column {
 				icon.source: "qrc:/images/consumption.svg"
 			}
 
-			EnergyQuantityLabel {
+			ElectricalQuantityLabel {
 				id: loadsQuantityLabel
 
 				anchors.top: loadsHeader.bottom

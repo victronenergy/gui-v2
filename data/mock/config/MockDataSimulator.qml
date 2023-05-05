@@ -126,10 +126,10 @@ QtObject {
 			event.accepted = true
 			break
 		case Qt.Key_U:
-			Global.systemSettings.energyUnit.setValue(
-					Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Watt
-					? VenusOS.Units_Energy_Amp
-					: VenusOS.Units_Energy_Watt)
+			Global.systemSettings.electricalQuantity.setValue(
+					Global.systemSettings.electricalQuantity.value === VenusOS.Units_Watt
+					? VenusOS.Units_Amp
+					: VenusOS.Units_Watt)
 			Global.systemSettings.temperatureUnit.setValue(
 					Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 					? VenusOS.Units_Temperature_Fahrenheit
@@ -144,7 +144,7 @@ QtObject {
 						: VenusOS.Units_Volume_CubicMeter)
 
 			pageConfigTitle.text = "Units: "
-					+ (Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Watt
+					+ (Global.systemSettings.electricalQuantity.value === VenusOS.Units_Watt
 					   ? "Watts"
 					   : "Amps") + " | "
 					+ (Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius

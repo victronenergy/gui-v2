@@ -22,11 +22,11 @@
 */
 function getDisplayText(unit, value, length, unitMatchValue = undefined) {
 	switch (unit) {
-	case V.VenusOS.Units_Energy_Watt:
+	case V.VenusOS.Units_Watt:
 		return _scaledQuantity(value, unitMatchValue, length, "W", "kW")
-	case V.VenusOS.Units_Potential_Volt:
+	case V.VenusOS.Units_Volt:
 		return _scaledQuantity(value, unitMatchValue, length, "V", "kV")
-	case V.VenusOS.Units_Energy_Amp:
+	case V.VenusOS.Units_Amp:
 		return _scaledQuantity(value, unitMatchValue, length, "A", "kA")
 	case V.VenusOS.Units_Energy_KiloWattHour:
 		return _scaledQuantity(value, unitMatchValue, length, "kWh")

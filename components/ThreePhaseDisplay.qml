@@ -24,7 +24,7 @@ Column {
 				color: Theme.color.font.secondary
 			}
 
-			EnergyQuantityLabel {
+			ElectricalQuantityLabel {
 				anchors.right: parent.right
 				dataObject: model
 				valueColor: Theme.color.font.secondary

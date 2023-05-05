@@ -73,9 +73,9 @@ public:
 		Units_Volume_GallonUS = 3,
 
 		Units_Percentage,
-		Units_Potential_Volt,
-		Units_Energy_Watt,
-		Units_Energy_Amp,
+		Units_Volt,
+		Units_Watt,
+		Units_Amp,
 		Units_Energy_KiloWattHour,
 		Units_Temperature_Celsius,
 		Units_Temperature_Fahrenheit,

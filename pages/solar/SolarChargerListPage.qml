@@ -66,15 +66,15 @@ Page {
 						},
 						{
 							value: solarCharger.voltage,
-							unit: VenusOS.Units_Potential_Volt
+							unit: VenusOS.Units_Volt
 						},
 						{
 							value: solarCharger.current,
-							unit: VenusOS.Units_Energy_Amp
+							unit: VenusOS.Units_Amp
 						},
 						{
 							value: solarCharger.power,
-							unit: VenusOS.Units_Energy_Watt
+							unit: VenusOS.Units_Watt
 						},
 					]
 

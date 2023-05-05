@@ -248,7 +248,7 @@ OverviewWidget {
 				id: batteryPowerDisplay
 
 				value: batteryData ? batteryData.voltage : NaN
-				unit: VenusOS.Units_Potential_Volt
+				unit: VenusOS.Units_Volt
 				font.pixelSize: Theme.font.size.body2
 			}
 
@@ -261,7 +261,7 @@ OverviewWidget {
 
 					anchors.horizontalCenter: parent.horizontalCenter
 					value: batteryData ? batteryData.current : NaN
-					unit: VenusOS.Units_Energy_Amp
+					unit: VenusOS.Units_Amp
 					font.pixelSize: Theme.font.size.body2
 				}
 			}

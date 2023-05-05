@@ -31,7 +31,7 @@ QtObject {
 		 }
 	}
 
-	property DataPoint energyUnit: DataPoint {
+	property DataPoint electricalQuantity: DataPoint {
 		 source: "com.victronenergy.settings/Settings/Gui/ElectricalPowerIndicator"
 	}
 
