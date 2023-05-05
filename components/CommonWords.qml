@@ -108,6 +108,9 @@ QtObject {
 	//% "Relay"
 	readonly property string relay: qsTrId("common_words_relay")
 
+	//% "Reboot"
+	readonly property string reboot: qsTrId("common_words_reboot")
+
 	//% "Remove"
 	readonly property string remove: qsTrId("common_words_remove")
 
