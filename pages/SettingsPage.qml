@@ -131,6 +131,11 @@ Page {
 				visible: signalK.valid || nodeRed.valid
 			},
 			{
+				//% "VRM Device Instances"
+				text: qsTrId("settings_vrm_device_instances"),
+				page: "/pages/settings/PageVrmDeviceInstances.qml",
+			},
+			{
 				text: "Debug",
 				page: "/pages/settings/debug/PageDebug.qml",
 				showAccessLevel: VenusOS.User_AccessType_Service

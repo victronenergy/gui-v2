@@ -19,6 +19,10 @@ QtObject {
 		VenusOS.Tank_Type_Gasoline
 	]
 
+	readonly property var allTankModels: tankTypes.map(function(tankType) {
+		return root.tankModel(tankType)
+	})
+
 	readonly property DeviceModel fuelTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Fuel
 		property real totalCapacity

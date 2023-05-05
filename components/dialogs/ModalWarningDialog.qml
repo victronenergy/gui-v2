@@ -20,7 +20,7 @@ ModalDialog {
 			top: parent.top
 			left: parent.left
 			right: parent.right
-			bottom: parent.footer.bottom
+			bottom: parent.footer.top
 		}
 
 		CP.IconImage {
@@ -72,6 +72,7 @@ ModalDialog {
 			text: root.description
 			font.pixelSize: Theme.font.size.body2
 			wrapMode: Text.Wrap
+			fontSizeMode: Text.Fit
 		}
 	}
 }

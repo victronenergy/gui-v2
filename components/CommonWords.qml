@@ -89,6 +89,9 @@ QtObject {
 	//% "Offline"
 	readonly property string offline: qsTrId("common_words_offline");
 
+	//% "OK"
+	readonly property string ok: qsTrId("common_words_ok");
+
 	//% "On"
 	readonly property string on: qsTrId("common_words_on");
 

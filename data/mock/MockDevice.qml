@@ -11,6 +11,10 @@ QtObject {
 	readonly property string serviceUid: "MockDevice-" + name
 	property var deviceInstance: QtObject {
 		property int value
+
+		function setValue(v) {
+			value = v
+		}
 	}
 
 	property string name
