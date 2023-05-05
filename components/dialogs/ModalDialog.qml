@@ -11,12 +11,12 @@ C.Dialog {
 
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndClose
 	property alias canAccept: doneButton.enabled
+	property var tryAccept  // optional function: called when accept is attempted, return true if can accept.
 
 	property string acceptText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndClose
 			  //% "Set"
 			? qsTrId("controlcard_set")
-			  //% "Ok"
-			: qsTrId("controlcard_ok")
+			: CommonWords.ok
 
 	property string rejectText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly
 			? ""
@@ -131,7 +131,12 @@ C.Dialog {
 			color: Theme.color.font.primary
 			spacing: 0
 			text: root.acceptText
-			onClicked: root.accept()
+			onClicked: {
+				if (!!root.tryAccept && !root.tryAccept()) {
+					return
+				}
+				root.accept()
+			}
 		}
 	}
 }

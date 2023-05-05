@@ -50,5 +50,16 @@ QtObject {
 	function showToastNotification(category, text, autoCloseInterval = 0) {
 		notificationLayer.showToastNotification(category, text, autoCloseInterval)
 	}
+
+	function deviceModelsForClass(deviceClass) {
+		if (deviceClass === "com.victronenergy.battery") {
+			return [batteries.model]
+		} else if (deviceClass === "com.victronenergy.solarcharger" || deviceClass === "solarcharger") {
+			return [solarChargers.model]
+		} else if (deviceClass === "analog") {
+			return Global.tanks.allTankModels.concat([Global.environmentInputs.model])
+		}
+		return []
+	}
 }
 

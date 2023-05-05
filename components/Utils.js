@@ -3,7 +3,26 @@
 */
 .pragma library
 
-var maxValues = {}
+
+var deviceIds = []  // map of of { deviceId : {deviceInstance, vrmInstance} } mappings
+
+function updateOrInitDeviceVrmInstance(deviceId, vrmInstance) {
+	if (!deviceId || vrmInstance < 0) {
+		console.warn("Instance update/init failed: bad device id or instance", deviceId, vrmInstance)
+		return
+	}
+	if (deviceId in deviceIds) {
+		deviceIds[deviceId].vrmInstance = vrmInstance
+	} else {
+		deviceIds[deviceId] = { deviceInstance: vrmInstance, vrmInstance: vrmInstance }
+	}
+}
+
+function deviceInstanceForDeviceId(deviceId) {
+	const data = deviceIds[deviceId]
+	return data === undefined ? -1 : data.deviceInstance
+}
+
 
 function arrayCompare(lhs, rhs) {
 	if (!Array.isArray(lhs)) {

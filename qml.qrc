@@ -1,5 +1,4 @@
-<RCC>
-    <qresource prefix="/">
+<RCC> <qresource prefix="/">
         <file>main.qml</file>
         <file>ApplicationContent.qml</file>
         <file>Global.qml</file>
@@ -68,6 +67,7 @@
         <file>components/VenusFont.qml</file>
         <file>components/VerticalGauge.qml</file>
         <file>components/ViewGradient.qml</file>
+        <file>components/ClassAndVrmInstance.qml</file>
         <file>components/WeatherDetails.qml</file>
         <file>components/controls/Button.qml</file>
         <file>components/controls/ComboBox.qml</file>
@@ -86,6 +86,7 @@
         <file>components/datapoints/DataPointMqttImpl.qml</file>
         <file>components/dialogs/DateSelectorDialog.qml</file>
         <file>components/dialogs/DialogShadow.qml</file>
+        <file>components/dialogs/VrmInstanceSwapDialog.qml</file>
         <file>components/dialogs/ESSMinimumSOCDialog.qml</file>
         <file>components/dialogs/GeneratorDurationSelectorDialog.qml</file>
         <file>components/dialogs/InputCurrentLimitDialog.qml</file>
@@ -366,6 +367,7 @@
         <file>pages/settings/PageSettingsWifi.qml</file>
         <file>pages/settings/PageSettingsWifiWithAccessPoint.qml</file>
         <file>pages/settings/PageTzInfo.qml</file>
+        <file>pages/settings/PageVrmDeviceInstances.qml</file>
         <file>pages/settings/debug/HubData.qml</file>
         <file>pages/settings/debug/ObjectAcConnection.qml</file>
         <file>pages/settings/debug/PageDebug.qml</file>

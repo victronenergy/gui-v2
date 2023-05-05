@@ -259,6 +259,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularSingleGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularSingleGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ClassAndVrmInstance.qml")),
+		"Victron.VenusOS", 2, 0, "ClassAndVrmInstance");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlCard.qml")),
 		"Victron.VenusOS", 2, 0, "ControlCard");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ControlValue.qml")),
@@ -481,6 +483,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "DateSelectorDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DialogShadow.qml")),
 		"Victron.VenusOS", 2, 0, "DialogShadow");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DeviceInstanceSwapDialog.qml")),
+		"Victron.VenusOS", 2, 0, "DeviceInstanceSwapDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ESSMinimumSOCDialog.qml")),
 		"Victron.VenusOS", 2, 0, "ESSMinimumSOCDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorDisableAutostartDialog.qml")),
@@ -501,6 +505,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "SolarDailyHistoryDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/TimeSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "TimeSelectorDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/VrmInstanceSwapDialog.qml")),
+		"Victron.VenusOS", 2, 0, "VrmInstanceSwapDialog");
 
 	/* pages */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/NotificationLayer.qml")),
