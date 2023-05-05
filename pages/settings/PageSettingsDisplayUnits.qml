@@ -12,24 +12,6 @@ Page {
 		id: settingsListView
 
 		model: ObjectModel {
-
-			ListRadioButtonGroup {
-				//% "Energy"
-				text: qsTrId("settings_units_energy")
-
-				optionModel: [
-					//% "Watts"
-					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Energy_Watt },
-					//% "Amps"
-					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Energy_Amp },
-				]
-				currentIndex: Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Amp ? 1 : 0
-
-				onOptionClicked: function(index) {
-					Global.systemSettings.energyUnit.setValue(optionModel[index].value)
-				}
-			}
-
 			ListRadioButtonGroup {
 				//% "Temperature"
 				text: qsTrId("settings_units_temperature")

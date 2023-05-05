@@ -32,7 +32,7 @@ QtObject {
 	}
 
 	property DataPoint energyUnit: DataPoint {
-		 source: "com.victronenergy.settings/Settings/Gui/Units/Energy"
+		 source: "com.victronenergy.settings/Settings/Gui/ElectricalPowerIndicator"
 	}
 
 	property QtObject temperatureUnit: QtObject {
