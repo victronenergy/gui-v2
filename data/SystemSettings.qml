@@ -91,7 +91,7 @@ QtObject {
 			property Instantiator _savedLevels: Instantiator {
 				model: Theme.geometry.briefPage.centerGauge.maximumGaugeCount
 				delegate: DataPoint {
-					source: "com.victronenergy.settings/Settings/Gui/BriefView/Level/" + (model.index + 1)
+					source: "com.victronenergy.settings/Settings/Gui/BriefView/Level/" + model.index
 					onValueChanged: {
 						if (value !== undefined) {
 							Qt.callLater(briefView.centralGauges._refresh)
