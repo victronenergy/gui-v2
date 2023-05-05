@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls as C
 import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
@@ -36,6 +37,7 @@ Page {
 	id: root
 
 	property var _swapDialog
+	property var _rebootDialog
 
 	function _changeVrmInstance(index, newVrmInstance, errorFunc) {
 		// See if another device of this class already has this VRM instance.
@@ -56,6 +58,7 @@ Page {
 		} else {
 			// No conflicts; just set the new VRM instance.
 			classAndVrmInstanceObjects.objectAt(index).setVrmInstance(newVrmInstance)
+			_setConfirmRebootOnPop()
 		}
 	}
 
@@ -71,6 +74,19 @@ Page {
 			}
 		}
 		return null
+	}
+
+	function _confirmStackPop() {
+		if (!_rebootDialog) {
+			_rebootDialog = rebootDialogComponent.createObject(root)
+		}
+		_rebootDialog.open()
+		return false
+	}
+
+	function _setConfirmRebootOnPop() {
+		// If user changes the VRM instance, ask whether reboot should be done when page is popped.
+		tryPop = _confirmStackPop
 	}
 
 	// Creates an object for each /Devices/.../ClassAndVrmInstance entry, and populates
@@ -291,8 +307,61 @@ Page {
 				errorFunc = null
 			}
 
+			onAccepted: root._setConfirmRebootOnPop()
 			onRejected: _callErrorFunc()
 			onSwapFailed: _callErrorFunc()
+		}
+	}
+
+	Component {
+		id: rebootDialogComponent
+
+		ModalWarningDialog {
+			//% "Reboot now?"
+			title: qsTrId("settings_vrm_device_instances_reboot_now")
+
+			//% "VRM instance changes will not be applied until the device is rebooted."
+			description: qsTrId("settings_vrm_device_instances_reboot_now_description")
+
+			onAboutToShow: {
+				dialogDoneOptions = VenusOS.ModalDialog_DoneOptions_SetAndClose
+				acceptText = CommonWords.reboot
+			}
+
+			tryAccept: function() {
+				if (dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly
+						&& BackendConnection.type !== BackendConnection.DBusSource) {
+					// In mqtt mode, user rebooted, and now clicked 'OK', so accept the dialog.
+					return true
+				}
+
+				Global.venusPlatform.reboot()
+
+				if (BackendConnection.type === BackendConnection.DBusSource) {
+					//% "Device is rebooting..."
+					description = qsTrId("settings_vrm_device_instances_rebooting")
+				} else {
+					//% "Device has been rebooted."
+					description = qsTrId("settings_vrm_device_instances_rebooted")
+				}
+
+				root.tryPop = undefined
+				dialogDoneOptions = VenusOS.ModalDialog_DoneOptions_OkOnly
+				acceptText = CommonWords.ok
+
+				if (BackendConnection.type === BackendConnection.DBusSource) {
+					// Reboot takes a while to execute, so prevent any user activity until that happens.
+					closePolicy = C.Popup.NoAutoClose
+					footer.enabled = false
+					footer.opacity = 0
+				}
+				return false
+			}
+
+			onRejected: {
+				root.tryPop = undefined     // allow the next pop to proceed
+				Global.pageManager.popPage()
+			}
 		}
 	}
 }

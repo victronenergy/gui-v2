@@ -56,6 +56,9 @@ Page {
 		}
 
 		function onPagePopRequested(toPage) {
+			if (!!navStack.currentItem.tryPop && !navStack.currentItem.tryPop()) {
+				return
+			}
 			navStack.pop(toPage)
 		}
 	}
