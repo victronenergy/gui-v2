@@ -137,14 +137,6 @@ void BackendConnection::initDBusConnection(const QString &address)
 	m_alarmBusItem = new AlarmBusitem(alarmServices, ActiveNotificationsModel::instance());
 	alarmServices->initialScan();
 
-	VeQItemSettings *settings = new VeQItemDbusSettings(m_dbusProducer->services(), QString("com.victronenergy.settings"));
-	VeQItemSettingsInfo settingsInfo;
-	addSettings(&settingsInfo);
-	if (!settings->addSettings(settingsInfo)) {
-		qCritical() << "Adding settings failed, localsettings not running?";
-		return;
-	}
-
 	setState(VeDbusConnection::getConnection().isConnected());
 }
 #endif
@@ -256,24 +248,6 @@ void BackendConnection::setPortalId(const QString &portalId)
 		emit portalIdChanged();
 	}
 }
-
-void BackendConnection::addSettings(VeQItemSettingsInfo *info)
-{
-	// 0=Dark, 1=Light, 2=Auto
-	info->add("Gui/ColorScheme", 0, 0, 2);
-
-	// see enum.h Units_Type for enum values
-	info->add("Gui/Units/Energy", 2); // watt, amp
-
-	// Configures the central gauges on the Brief page.
-	// For all gauges, min value = Tank_Type_Fuel, max value = Tank_Type_Battery.
-	info->add("Gui/BriefView/Level/1", Enums::Tank_Type_Battery, Enums::Tank_Type_Fuel, Enums::Tank_Type_Battery);
-	info->add("Gui/BriefView/Level/2", Enums::Tank_Type_Fuel, Enums::Tank_Type_Fuel, Enums::Tank_Type_Battery);
-	info->add("Gui/BriefView/Level/3", Enums::Tank_Type_FreshWater, Enums::Tank_Type_Fuel, Enums::Tank_Type_Battery);
-	info->add("Gui/BriefView/Level/4", Enums::Tank_Type_BlackWater, Enums::Tank_Type_Fuel, Enums::Tank_Type_Battery);
-	info->add("Gui/BriefView/ShowPercentages", 0, 0, 1);
-}
-
 
 }
 }
