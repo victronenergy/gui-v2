@@ -40,6 +40,7 @@ QtObject {
 	property var system
 	property var systemSettings
 	property var tanks
+	property var venusPlatform
 
 	property bool splashScreenVisible: true
 	property bool dataManagerLoaded
