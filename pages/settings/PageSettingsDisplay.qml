@@ -108,14 +108,14 @@ Page {
 
 				optionModel: [
 					//% "Power (W)"
-					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Energy_Watt },
+					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Watt },
 					//% "Current (A)"
-					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Energy_Amp },
+					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Amp },
 				]
-				currentIndex: Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Amp ? 1 : 0
+				currentIndex: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp ? 1 : 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.energyUnit.setValue(optionModel[index].value)
+					Global.systemSettings.electricalQuantity.setValue(optionModel[index].value)
 				}
 			}
 

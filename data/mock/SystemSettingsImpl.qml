@@ -65,7 +65,7 @@ QtObject {
 		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
 		Global.systemSettings.demoMode.setValue(VenusOS.SystemSettings_DemoModeActive)
 		Global.systemSettings.colorScheme.setValue(Theme.Light)
-		Global.systemSettings.energyUnit.setValue(VenusOS.Units_Energy_Watt)
+		Global.systemSettings.electricalQuantity.setValue(VenusOS.Units_Watt)
 		Global.systemSettings.temperatureUnit.setValue(VenusOS.Units_Temperature_Celsius)
 		Global.systemSettings.volumeUnit.setValue(VenusOS.Units_Volume_CubicMeter)
 		Global.systemSettings.briefView.centralGauges.setValue([VenusOS.Tank_Type_Battery, VenusOS.Tank_Type_Fuel, VenusOS.Tank_Type_FreshWater, VenusOS.Tank_Type_BlackWater])

@@ -315,8 +315,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "QuantityTableSummary");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityTable.qml")),
 		"Victron.VenusOS", 2, 0, "QuantityTable");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/EnergyQuantityLabel.qml")),
-		"Victron.VenusOS", 2, 0, "EnergyQuantityLabel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ElectricalQuantityLabel.qml")),
+		"Victron.VenusOS", 2, 0, "ElectricalQuantityLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GradientListView.qml")),
 		"Victron.VenusOS", 2, 0, "GradientListView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/RadioButtonControlValue.qml")),

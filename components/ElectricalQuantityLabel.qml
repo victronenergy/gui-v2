@@ -13,12 +13,12 @@ QuantityLabel {
 
 	value: dataObject == null
 			? NaN
-			: Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Amp
+			: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp
 				&& !isNaN(dataObject.current)
 			  ? dataObject.current
 			  : dataObject.power
-	unit: Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Amp
+	unit: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp
 			&& dataObject != null && !isNaN(dataObject.current)
-		  ? VenusOS.Units_Energy_Amp
-		  : VenusOS.Units_Energy_Watt
+		  ? VenusOS.Units_Amp
+		  : VenusOS.Units_Watt
 }

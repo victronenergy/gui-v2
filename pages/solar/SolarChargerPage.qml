@@ -37,17 +37,17 @@ Page {
 						{
 							title: CommonWords.voltage,
 							value: root.solarCharger.voltage,
-							unit: VenusOS.Units_Potential_Volt
+							unit: VenusOS.Units_Volt
 						},
 						{
 							title: CommonWords.current_amps,
 							value: root.solarCharger.current,
-							unit: VenusOS.Units_Energy_Amp
+							unit: VenusOS.Units_Amp
 						},
 						{
 							title: CommonWords.pv_power,
 							value: root.solarCharger.power,
-							unit: VenusOS.Units_Energy_Watt
+							unit: VenusOS.Units_Watt
 						},
 					]
 				}
@@ -63,9 +63,9 @@ Page {
 					units: [
 						{ title: CommonWords.tracker, unit: -1 },
 						{ title: trackerSummary.model[1].title, unit: VenusOS.Units_Energy_KiloWattHour },
-						{ title: CommonWords.voltage, unit: VenusOS.Units_Potential_Volt },
-						{ title: CommonWords.current_amps, unit: VenusOS.Units_Energy_Amp },
-						{ title: CommonWords.power_watts, unit: VenusOS.Units_Energy_Watt }
+						{ title: CommonWords.voltage, unit: VenusOS.Units_Volt },
+						{ title: CommonWords.current_amps, unit: VenusOS.Units_Amp },
+						{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 					]
 					valueForModelIndex: function(trackerIndex, column) {
 						const tracker = root.solarCharger.trackers.get(trackerIndex).solarTracker
@@ -96,11 +96,11 @@ Page {
 				textModel: [
 					{
 						value: root.solarCharger.batteryVoltage,
-						unit: VenusOS.Units_Potential_Volt
+						unit: VenusOS.Units_Volt
 					},
 					{
 						value: root.solarCharger.batteryCurrent,
-						unit: VenusOS.Units_Energy_Amp
+						unit: VenusOS.Units_Amp
 					},
 				]
 			}

@@ -36,7 +36,7 @@ Row {
 		color: Theme.color.font.primary
 	}
 
-	EnergyQuantityLabel {
+	ElectricalQuantityLabel {
 		id: quantityLabel
 
 		height: icon.height

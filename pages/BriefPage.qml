@@ -117,11 +117,11 @@ Page {
 
 			// AC and DC amp values cannot be combined. If there are both AC and DC values, show
 			// Watts even if Amps is preferred.
-			quantityLabel.unit: Global.systemSettings.energyUnit.value === VenusOS.Units_Energy_Amp
+			quantityLabel.unit: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp
 					&& ((Global.acInputs.current || 0) === 0 || (Global.dcInputs.current || 0) === 0)
-					   ? VenusOS.Units_Energy_Amp
-					   : VenusOS.Units_Energy_Watt
-			quantityLabel.value: quantityLabel.unit === VenusOS.Units_Energy_Amp
+					   ? VenusOS.Units_Amp
+					   : VenusOS.Units_Watt
+			quantityLabel.value: quantityLabel.unit === VenusOS.Units_Amp
 					? (Global.acInputs.current || 0) === 0
 					  ? Global.dcInputs.current
 					  : Global.acInputs.current
@@ -136,7 +136,7 @@ Page {
 
 				// When showing current instead of power, set a max value to change the gauge colors
 				// when the value approaches the currentLimit.
-				maximumValue: quantityLabel.unit === VenusOS.Units_Energy_Amp
+				maximumValue: quantityLabel.unit === VenusOS.Units_Amp
 					? Global.acInputs.currentLimit
 					: NaN
 			}
