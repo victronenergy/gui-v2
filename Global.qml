@@ -19,7 +19,6 @@ QtObject {
 	property var mockDataSimulator    // only valid when mock mode is active
 	property var dataManager
 	property var locale: Qt.locale()
-	property var dataServices: []
 	property var dataServiceModel: null
 	property var firmwareUpdate
 
