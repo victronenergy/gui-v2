@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls as C
 import Victron.VenusOS
 
 ListView {
@@ -30,4 +31,46 @@ ListView {
 		topPadding: Theme.geometry.gradientList.topMargin
 		bottomPadding: Theme.geometry.gradientList.bottomMargin
 	}
+
+	// When the ListView becomes invisible (e.g. if another page is pushed on top) the contentHeight
+	// becomes 0 and contentY is reset; so, when the page above is popped and the ListView becomes
+	// visible again, the list has unexpectedly returned to the top. To avoid this visual jump, save
+	// the contentY when the ListView becomes invisible, then restore that contentY when the view is
+	// visible again and the contentHeight is fixed up.
+	property real _previousContentY: NaN
+	onVisibleChanged: {
+		if (!visible) {
+			_previousContentY = contentY - originY
+		}
+	}
+	onContentHeightChanged: {
+		// Restore the contentY. This may be triggered multiple times after the view reappears: if
+		// _restoreContentY() moves the contentY beyond the last created delegate, more delegates
+		// will be created, which will trigger another contentHeight change.
+		if (visible && contentHeight > 0 && !isNaN(_previousContentY)) {
+			// Delay the call so that originY has been fixed up by the time _restoreContent() occurs.
+			Qt.callLater(_restoreContentY)
+		}
+	}
+	function _restoreContentY() {
+		if (!isNaN(_previousContentY)) {
+			forceLayout()   // ensure geometry is correct before updating contentY
+			contentY = _previousContentY + originY
+		}
+	}
+	Connections {
+		target: {
+			// Find the parent item that is on a StackView (i.e. a Page)
+			let p = root.parent
+			while (p.C.StackView.activated === undefined) {
+				p = p.parent
+			}
+			return p.C.StackView.activated === undefined ? null : p.C.StackView
+		}
+		function onActivated() {
+			// Once the parent page is activated, stop auto-adjustments of contentY.
+			root._previousContentY = NaN
+		}
+	}
+
 }
