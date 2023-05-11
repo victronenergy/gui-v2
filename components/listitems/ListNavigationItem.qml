@@ -43,8 +43,19 @@ ListItem {
 
 	MouseArea {
 		id: mouseArea
-
 		anchors.fill: parent
-		onClicked: root.clicked()
+		onClicked: {
+			// find the gradient list view parent, and triggers its index restoration code.
+			var p = root.parent
+			while (p) {
+				if (p.hasOwnProperty("_gradientListView_clickedIndex")) {
+					p.childDelegateClicked(root)
+					break
+				}
+				p = p.parent
+			}
+			// and then emit clicked as per normal
+			root.clicked()
+		}
 	}
 }
