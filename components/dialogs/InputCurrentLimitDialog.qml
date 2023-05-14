@@ -9,10 +9,20 @@ ModalDialog {
 	id: root
 
 	property real currentLimit  // in amps
-	property int inputType
 	property alias ampOptions: buttonRow.model
 
-	title: Global.acInputs.currentLimitTypeToText(inputType)
+	onAboutToShow: {
+		spinbox.value = currentLimit * 1000 // A -> mA
+
+		let ampOptionsIndex = -1
+		for (let i = 0; i < ampOptions.length; ++i) {
+			if (ampOptions[i].value === currentLimit) {
+				ampOptionsIndex = i
+				break
+			}
+		}
+		buttonRow.currentIndex = ampOptionsIndex
+	}
 
 	contentItem: Item {
 		anchors {
@@ -40,7 +50,6 @@ ModalDialog {
 				indicatorImplicitWidth: Theme.geometry.spinBox.indicator.maximumWidth
 				//% "%1 A"
 				label.text: qsTrId("inverter_current_limit_value").arg(spinbox.value/1000)  // TODO use UnitConverter.convertToString() or unitToString() instead
-				value: root.currentLimit * 1000     // A -> mA
 				onValueChanged: root.currentLimit = value / 1000    // mA -> A
 			}
 
@@ -51,7 +60,7 @@ ModalDialog {
 				anchors.horizontalCenter: parent.horizontalCenter
 				onButtonClicked: function (buttonIndex){
 					currentIndex = buttonIndex
-					spinbox.value = model[currentIndex] * 1000 // A -> ma
+					spinbox.value = model[buttonIndex].value * 1000 // A -> ma
 				}
 			}
 		}
