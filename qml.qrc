@@ -158,6 +158,7 @@
         <file>data/Tanks.qml</file>
         <file>data/VenusPlatform.qml</file>
         <file>data/common/AcInput.qml</file>
+        <file>data/common/AcInputSettings.qml</file>
         <file>data/common/AcInputServiceLoader.qml</file>
         <file>data/common/Battery.qml</file>
         <file>data/common/DcInput.qml</file>

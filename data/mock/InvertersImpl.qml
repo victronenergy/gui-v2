@@ -16,15 +16,33 @@ QtObject {
 			ampOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ].map(function(v) { return { value: v } }),   // EU amp options
 			mode: VenusOS.Inverters_Mode_On,
 			modeAdjustable: true,
-			input1Type: VenusOS.AcInputs_InputType_Generator,
-			currentLimit1: 50,
-			currentLimit1Adjustable: true,
-			input2Type: VenusOS.AcInputs_InputType_Shore,
-			currentLimit2: 16,
-			currentLimit2Adjustable: false,
 		}
 		let inverter = inverterComponent.createObject(root, quattro)
 		Global.inverters.addInverter(inverter)
+
+		for (let i = 0; i < 2; ++i) {
+			const settingData = {
+				inputNumber: i+1,
+				inputType: i === 0 ? VenusOS.AcInputs_InputType_Generator : VenusOS.AcInputs_InputType_Shore,
+				currentLimit: i === 0 ? 50 : 16,
+				currentLimitAdjustable: i === 0,
+			}
+			let settings = acInputSettingsComponent.createObject(root, settingData)
+			inverter.inputSettings.append({ inputSettings: settings })
+		}
+	}
+
+	property Component acInputSettingsComponent: Component {
+		QtObject {
+			property int inputNumber
+			property int inputType
+			property real currentLimit
+			property bool currentLimitAdjustable
+
+			function setCurrentLimit(limit) {
+				currentLimit = limit
+			}
+		}
 	}
 
 	property int _objectId
@@ -32,32 +50,22 @@ QtObject {
 		MockDevice {
 			id: inverter
 
-			property int productId
-			property int productType
-			property var ampOptions
-
 			property int state
 			property int mode: -1
 			property bool modeAdjustable
 
-			property int input1Type: -1
-			property real currentLimit1: -1.0
-			property bool currentLimit1Adjustable
+			property ListModel inputSettings: ListModel {}
 
-			property int input2Type: -1
-			property real currentLimit2: -1.0
-			property bool currentLimit2Adjustable
+			property int productId
+			property int productType
+			property var ampOptions
 
 			function setMode(newMode) {
 				mode = newMode
 			}
 
-			function setCurrentLimit1(newLimit) {
-				currentLimit1 = newLimit
-			}
-
-			function setCurrentLimit2(newLimit) {
-				currentLimit2 = newLimit
+			function setCurrentLimit(inputIndex, currentLimit) {
+				inputSettings.get(inputIndex).inputSettings.setCurrentLimit(currentLimit)
 			}
 
 			name: "Inverter" + deviceInstance.value

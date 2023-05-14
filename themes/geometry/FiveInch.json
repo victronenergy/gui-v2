@@ -241,6 +241,8 @@
     "geometry.generatorIconLabel.icon.width": 24,
     "geometry.generatorIconLabel.label.width": 62,
 
+    "geometry.inverterCard.modeButton.maximumWidth": 180,
+
     "geometry.overviewPage.widget.radius": 8,
     "geometry.overviewPage.widget.border.width": 2,
     "geometry.overviewPage.widget.content.verticalMargin": 8,

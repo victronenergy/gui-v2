@@ -54,36 +54,7 @@ Page {
 
 					InverterCard {
 						width: root.cardWidth
-						state: model.inverter.state
-						ampOptions: model.inverter.ampOptions
-						mode: model.inverter.mode
-						modeAdjustable: model.inverter.modeAdjustable
-						currentLimits: [
-							{
-								inputType: model.inverter.input1Type,
-								currentLimit: model.inverter.currentLimit1,
-								currentLimitAdjustable: model.inverter.currentLimit1Adjustable,
-							},
-							{
-								inputType: model.inverter.input2Type,
-								currentLimit: model.inverter.currentLimit2,
-								currentLimitAdjustable: model.inverter.currentLimit2Adjustable,
-							},
-						]
-
-						onChangeMode: function (newMode) {
-							model.inverter.setMode(newMode)
-						}
-
-						onChangeCurrentLimit: function (inputIndex, newCurrentLimit) {
-							if (inputIndex === 0) {
-								model.inverter.setCurrentLimit1(newCurrentLimit)
-							} else if (inputIndex === 1) {
-								model.inverter.setCurrentLimit2(newCurrentLimit)
-							} else {
-								console.warn('Unknown input index', inputIndex)
-							}
-						}
+						inverter: model.inverter
 					}
 				}
 			}
