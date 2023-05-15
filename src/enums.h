@@ -145,7 +145,6 @@ public:
 		DcInputs_InputType_Alternator,
 		DcInputs_InputType_DcGenerator,
 		DcInputs_InputType_Wind
-		// DcInputs_InputType_Solar ?
 	};
 	Q_ENUM(DcInputs_InputType)
 

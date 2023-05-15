@@ -164,6 +164,18 @@ QtObject {
 			notificationsConfig.showToastNotification(notifType)
 			event.accepted = true
 			break
+		case Qt.Key_P:
+			Global.dcInputs.power = 0
+			Global.acInputs.generatorInput = null
+			if (event.modifiers & Qt.ControlModifier) {
+				Global.acInputs.power = 0
+			} else if (event.modifiers & Qt.ShiftModifier) {
+				Global.acInputs.power += 200
+			} else {
+				Global.acInputs.power -= 200
+			}
+			event.accepted = true
+			break
 		case Qt.Key_T:
 			root.timersActive = !root.timersActive
 			pageConfigTitle.text = "Timers on: " + root.timersActive
