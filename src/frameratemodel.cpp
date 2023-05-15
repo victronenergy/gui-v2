@@ -1,5 +1,8 @@
 #include "frameratemodel.h"
 
+#include <QDateTime>
+#include <QQuickWindow>
+
 namespace Victron {
 namespace VenusOS {
 

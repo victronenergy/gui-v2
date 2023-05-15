@@ -5,16 +5,14 @@
 #ifndef VICTRON_VENUSOS_GUI_V2_FRAMERATEMODEL_H
 #define VICTRON_VENUSOS_GUI_V2_FRAMERATEMODEL_H
 
-#include <QQuickWindow>
-#include <QQmlEngine>
-#include <QObject>
-#include <QString>
-#include <QColor>
-#include <QDateTime>
 #include <QTimer>
 #include <QElapsedTimer>
 #include <QAbstractListModel>
 #include <QMutex>
+
+class QQuickWindow;
+class QQmlEngine;
+class QJSEngine;
 
 namespace Victron {
 namespace VenusOS {
