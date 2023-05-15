@@ -8,11 +8,14 @@ import "/components/Utils.js" as Utils
 QtObject {
 	property real value: NaN
 	readonly property real valueAsRatio: _valueAsRatio
-	property real maximumValue: NaN  // if NaN, the max is dynamically adjusted to the maximum encountered value
+	property real maximumValue: NaN  // if NaN, _max is dynamically adjusted to the maximum encountered value
+	readonly property real maximumSeen: isNaN(maximumValue) ? _max : _actualMaximum
+	readonly property real minimumSeen: _min
 
 	property real _valueAsRatio: 0
 	property real _min: NaN
 	property real _max: isNaN(maximumValue) ? NaN : maximumValue
+	property real _actualMaximum: NaN
 
 	onValueChanged: {
 		// If value=NaN, or if only one value has been received, the min/max cannot yet be
@@ -27,7 +30,14 @@ QtObject {
 			return
 		}
 		_min = Math.min(_min, value)
-		_max = isNaN(maximumValue) ? Math.max(_max, value) : maximumValue
+
+		if (isNaN(maximumValue)) {
+			_max = Math.max(_max, value)
+		} else {
+			_max = maximumValue
+			_actualMaximum = Math.max(_actualMaximum, value)
+		}
+
 		if (!isNaN(_max) && value >= _max) {
 			_valueAsRatio = 1
 			return

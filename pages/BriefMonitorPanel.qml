@@ -156,7 +156,7 @@ Column {
 	Column {
 		width: parent.width
 		spacing: Theme.geometry.briefPage.sidePanel.generator.columnSpacing
-		visible: !generatorColumn.visible && (!!Global.acInputs.power || !!Global.dcInputs.power)
+		visible: !generatorColumn.visible && !(isNaN(Global.acInputs.power) && isNaN(Global.dcInputs.power))
 
 		Item {
 			width: parent.width
@@ -181,19 +181,123 @@ Column {
 			LoadGraph {
 				id: gridGraph
 
+				/*
+				   Graph A
+				   <Power>
+		1000W     1.0 |
+				  0.9 |
+				  0.8 |
+				  0.7 |
+				  0.6 |
+				  0.5 |
+				  0.4 |      ___________
+				  0.3 |     /           \_________        (only shows imported power. 'graphShowsExportPower' is false)
+				  0.2 |____/
+imported power ^  0.1 |
+			 0W   0.0 |---------------------------> <Time>
+
+
+
+				   Graph B
+				   <Power>
+		1000 W	  1.0 |
+				  0.9 |
+				  0.8 |       ___________ (e.g. +600W)
+				  0.7 |      /           \_______
+imported power ^  0.6 |     /
+			  0W  0.5 |..../.......................       (shows imported and exported power. 'graphShowsExportPower' is true)
+exported power v  0.4 |   /
+				  0.3 |__/  (e.g. -400W)
+				  0.2 |
+				  0.1 |
+		-1000W	  0.0 |----------------------------> <Time>
+
+				  */
+
+				// If we have ever seen power exported to the grid, the graph shows imported and exported power, as in Graph B.
+				// Otherwise, we only show imported power, as in Graph A.
+				property bool graphShowsExportPower: false
+
+				property real _oldGraphPowerRange: NaN
+
+				function addNewValue() {
+					graphShowsExportPower = inputsPower.minimumSeen < 0
+
+					// If we show export power, the minimum scale of the y axis goes from -1000W to +1000W
+					// If we don't show export power, the minimum scale of the y axis goes from 0W to +1000W
+					const minimumRangeWatts = graphShowsExportPower
+							? Theme.animation.loadGraph.minimumRange.watts * 2
+							: Theme.animation.loadGraph.minimumRange.watts
+					const peakPowerImportedOrExported = Math.max(Math.abs(inputsPower.maximumSeen), Math.abs(inputsPower.minimumSeen))
+					const graphPowerRange =  graphShowsExportPower // This represents the difference in power between y=0 and y=1 on the graph
+							? Math.max(2 * peakPowerImportedOrExported, minimumRangeWatts)
+							: Math.max(inputsPower.maximumSeen, minimumRangeWatts)
+
+					// in Graph A, when the graph is at y=0.0, power is zero.
+					// in Graph B, when the graph is at y=0.5, power is zero.
+					const normalizedZeroPowerPoint = graphShowsExportPower ? 0.5 : 0.0
+					const normalizedPower = (inputsPower.value / graphPowerRange) + normalizedZeroPowerPoint
+
+					if (_oldGraphPowerRange != graphPowerRange) {
+						if (!isNaN(_oldGraphPowerRange)) {
+							const scalingFactor = graphPowerRange / _oldGraphPowerRange
+							scaleHistoricalData(scalingFactor, normalizedZeroPowerPoint)
+						}
+						_oldGraphPowerRange = graphPowerRange
+					}
+					addValue(normalizedPower)
+					normalizedPowerSlider.value = normalizedPower
+				}
+
+				function scaleHistoricalData(scalingFactor, normalizedZeroPowerPoint) {
+					// If our historical power data was like this: [-1000, 1000, -1000, 1000, ...], and inputsPower.minimumSeen === -1000,
+					// and inputsPower.maximumSeen === 1000, our graph 'y' values would be like this: [-1, 0, -1, 1, ...]
+					// If we then got a new power import reading of 5000W, we need to scale down all of the historical data by
+					// a factor of 5, eg. [-0.2, 0.2, -0.2, 0.2, ...]
+					for (let i = 0; i < model.length; ++i) {
+						model[i] = normalizedZeroPowerPoint + (model[i] - normalizedZeroPowerPoint) / scalingFactor
+					}
+				}
+
+				onGraphShowsExportPowerChanged: {
+					// This can only ever change from false to true.
+					// If the system has never exported power, the graph values start at 0 (importing 0 power)
+					// and go to 1 (peak power import).
+					// The first time the system exports power, we need to scale and offset the historical power values.
+					// E.g. An old value of 0 (meaning importing 0 power) has to be changed to 0.5
+					// An old value of 0.2 (meaning importing 20% of peak power) has to be changed to 0.6,
+					// as the range has doubled, and the zero-point has changed from 0 to 0.5.
+					for (let i = 0; i < model.length; ++i) {
+						if (model[i] < 0.5) {
+							model[i] = model[i]/2 + 0.5
+						}
+					}
+				}
+
 				anchors {
 					right: parent.right
 					bottom: gridQuantityLabel.bottom
 					bottomMargin: gridQuantityLabel.bottomPadding
 				}
-				initialModelValue: 0.5
+
+				// For a system that sometimes exports power, 0.5 represents 0 power.
+				// For a system that only imports power, 0 represents 0 power.
+				initialModelValue: graphShowsExportPower ? 0.5 : 0.0
 				interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
 				enableAnimation: root.opacity > 0 && BackendConnection.applicationVisible
 				warningThreshold: 0.5
-				belowThresholdFillColor1: Theme.color.briefPage.background
-				belowThresholdFillColor2: Theme.color.briefPage.background
-				belowThresholdBackgroundColor1: Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor1
-				belowThresholdBackgroundColor2: Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor2
+				belowThresholdFillColor1: graphShowsExportPower
+										  ? Theme.color.briefPage.background
+										  : Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor1
+				belowThresholdFillColor2: graphShowsExportPower
+										  ? Theme.color.briefPage.background
+										  : Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor2
+				belowThresholdBackgroundColor1: graphShowsExportPower
+												? Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor1
+												: Theme.color.briefPage.background
+				belowThresholdBackgroundColor2: graphShowsExportPower
+												? Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor2
+												: Theme.color.briefPage.background
 				horizontalGradientColor1: Theme.color.briefPage.background
 				horizontalGradientColor2: "transparent"
 
@@ -201,15 +305,17 @@ Column {
 					interval: parent.interval
 					running: root.opacity > 0 && BackendConnection.applicationVisible
 					repeat: true
-					onTriggered: gridGraph.addValue(gridPower.normalizedValueAsRatio)
+					onTriggered: parent.addNewValue()
 				}
 			}
 		}
 		Slider {
+			id: normalizedPowerSlider
+
 			enabled: false // not interactive
 			width: parent.width
 			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
-			value: gridPower.normalizedValueAsRatio
+			value: gridGraph.normalizedPower || 0
 			showHandle: false
 
 			Behavior on value { NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration } }
@@ -282,15 +388,7 @@ Column {
 	}
 
 	ValueRange {
-		id: gridPower
-
-		// If the current grid power is 0W, normalizedValueAsRatio equals 0.5, regardless of maximum / minimum seen power.
-		// If the maximum seen power is 20W, and the minimum seen power is 10W, and the current power is 10W,
-		// normalizedValueAsRatio equals 0.75.
-		// If the maximum seen power is -10W, and the minimum seen power is -100W, and the current power is -20W,
-		// normalizedValueAsRatio equals 0.4.
-		readonly property real normalizedValueAsRatio: 0.5 + (value / normalizedRange)
-		readonly property real normalizedRange: Math.abs(_max) > Math.abs(_min) ? 2*Math.abs(_max) : 2*Math.abs(_min)
+		id: inputsPower
 
 		value: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
 	}
