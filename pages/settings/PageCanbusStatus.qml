@@ -59,7 +59,7 @@ Page {
 
 	Timer {
 		interval: 1000
-		running: root.isCurrentPage
+		running: root.animationEnabled
 		repeat: true
 		triggeredOnStart: true
 

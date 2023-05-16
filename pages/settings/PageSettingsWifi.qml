@@ -92,7 +92,7 @@ Page {
 	Timer {
 		id: scanTimer
 		interval: 10000
-		running: Global.pageManager.currentPage === root
+		running: root.animationEnabled
 		repeat: true
 		triggeredOnStart: true
 		onTriggered: {

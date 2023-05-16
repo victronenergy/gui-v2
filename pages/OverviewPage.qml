@@ -359,8 +359,8 @@ Page {
 			id: gridWidget
 
 			expanded: Global.pageManager.expandLayout
-			animateGeometry: Global.pageManager.animatingIdleResize
-			animationEnabled: root.isCurrentPage
+			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			animationEnabled: root.animationEnabled
 			isSegment: segmentedBackground.visible
 			connectors: [ gridWidgetConnector ]
 
@@ -380,6 +380,7 @@ Page {
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(gridWidgetConnector)
 			}
 		}
@@ -393,6 +394,7 @@ Page {
 
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			animationEnabled: root.animationEnabled
 			connectors: [ shoreWidgetConnector ]
 
 			WidgetConnectorAnchor {
@@ -411,6 +413,7 @@ Page {
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(shoreWidgetConnector)
 			}
 		}
@@ -424,6 +427,7 @@ Page {
 
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			animationEnabled: root.animationEnabled
 			isSegment: segmentedBackground.visible
 			connectors: [ acGeneratorConnector ]
 
@@ -443,6 +447,7 @@ Page {
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(acGeneratorConnector)
 			}
 		}
@@ -456,6 +461,7 @@ Page {
 
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			animationEnabled: root.animationEnabled
 			isSegment: segmentedBackground.visible
 			connectors: [ dcGeneratorConnector ]
 
@@ -475,6 +481,7 @@ Page {
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(dcGeneratorConnector)
 			}
 		}
@@ -488,6 +495,7 @@ Page {
 
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			animationEnabled: root.animationEnabled
 			isSegment: segmentedBackground.visible
 			connectors: [ alternatorConnector ]
 
@@ -506,6 +514,7 @@ Page {
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(alternatorConnector)
 			}
 		}
@@ -519,6 +528,7 @@ Page {
 
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			animationEnabled: root.animationEnabled
 			isSegment: segmentedBackground.visible
 			connectors: [ windConnector ]
 
@@ -537,6 +547,7 @@ Page {
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(windConnector)
 			}
 		}
@@ -550,6 +561,7 @@ Page {
 
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			animationEnabled: root.animationEnabled
 			isSegment: segmentedBackground.visible
 			connectors: [ acSolarConnector, dcSolarConnector ]
 
@@ -569,6 +581,7 @@ Page {
 				visible: defaultVisible && !isNaN(Global.solarChargers.acPower)
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				animationEnabled: root.animationEnabled
 
 				// Energy always flows towards inverter/charger, never towards solar charger.
 				animationMode: root.isCurrentPage
@@ -588,6 +601,7 @@ Page {
 				visible: !isNaN(Global.solarChargers.dcPower)
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				animationEnabled: root.animationEnabled
 
 				// Energy always flows towards battery, never towards solar charger.
 				animationMode: root.isCurrentPage
@@ -606,6 +620,7 @@ Page {
 		size: VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		animationEnabled: root.animationEnabled
 		systemState: Global.system.state
 		connectors: [ inverterToAcLoadsConnector, inverterToBatteryConnector ]
 
@@ -633,6 +648,7 @@ Page {
 		endLocation: VenusOS.WidgetConnector_Location_Left
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		animationEnabled: root.animationEnabled
 		straight: true
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
@@ -652,6 +668,7 @@ Page {
 		endLocation: VenusOS.WidgetConnector_Location_Top
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		animationEnabled: root.animationEnabled
 
 		// If vebus power is positive: battery is charging, so energy flows to battery.
 		// If vebus power is negative: battery is discharging, so energy flows to inverter/charger.
@@ -670,7 +687,7 @@ Page {
 		size: VenusOS.OverviewWidget_Size_L
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
-		animationEnabled: root.isCurrentPage
+		animationEnabled: root.animationEnabled
 		connectors: [ batteryToDcLoadsConnector ]
 
 		WidgetConnectorAnchor {
@@ -694,6 +711,7 @@ Page {
 		endLocation: VenusOS.WidgetConnector_Location_Left
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		animationEnabled: root.animationEnabled
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
@@ -710,6 +728,7 @@ Page {
 
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		animationEnabled: root.animationEnabled
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
@@ -722,6 +741,7 @@ Page {
 
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		animationEnabled: root.animationEnabled
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left

@@ -7,11 +7,23 @@ import QtQuick.Window
 import Victron.VenusOS
 
 Loader {
-	active: FrameRateModel.enabled
 	anchors {
 		left: parent.left
 		right: parent.right
 		bottom: parent.bottom
+	}
+
+	// Disable the visualizer and the model while the application isn't visible
+	active: FrameRateModel.enabled
+	property bool frameRateModelWasEnabled: false
+	property bool applicationVisible: BackendConnection.applicationVisible
+	onApplicationVisibleChanged: {
+		if (!applicationVisible) {
+			frameRateModelWasEnabled = FrameRateModel.enabled
+			FrameRateModel.enabled = false
+		} else if (frameRateModelWasEnabled) {
+			FrameRateModel.enabled = true
+		}
 	}
 
 	sourceComponent: Component {

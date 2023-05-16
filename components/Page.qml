@@ -13,6 +13,7 @@ FocusScope {
 	property color backgroundColor: Theme.color.page.background
 	property bool fullScreenWhenIdle
 	readonly property bool isCurrentPage: Global.pageManager.currentPage === root
+	property bool animationEnabled: isCurrentPage && BackendConnection.applicationVisible
 
 	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None

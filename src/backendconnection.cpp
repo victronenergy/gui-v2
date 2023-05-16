@@ -254,5 +254,18 @@ void BackendConnection::setPortalId(const QString &portalId)
 	}
 }
 
+bool BackendConnection::isApplicationVisible() const
+{
+	return m_applicationVisible;
+}
+
+void BackendConnection::setApplicationVisible(bool v)
+{
+	if (m_applicationVisible != v) {
+		m_applicationVisible = v;
+		emit applicationVisibleChanged();
+	}
+}
+
 }
 }

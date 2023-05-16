@@ -12,7 +12,7 @@ Shape {
 	property real value
 	property real startAngle
 	property real endAngle
-	property bool animationEnabled: true
+	property bool animationEnabled
 	property alias radius: arc.radius
 	property alias strokeWidth: arc.strokeWidth
 	property alias strokeColor: arc.strokeColor

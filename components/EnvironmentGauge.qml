@@ -15,7 +15,7 @@ Item {
 	property alias zeroMarkerVisible: zeroMarker.visible
 	property bool reduceFontSize
 	property alias gradient: gaugeBar.gradient
-	property bool animationEnabled: true
+	property bool animationEnabled
 
 	function _barYPosForValue(v) {
 		const range = maximumValue - minimumValue

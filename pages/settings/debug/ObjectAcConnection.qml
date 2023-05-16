@@ -23,7 +23,7 @@ QtObject {
 	// changes too often on system with more than one phase
 	property Timer timer: Timer {
 		interval: 1000
-		running: true
+		running: BackendConnection.applicationVisible
 		repeat: true
 		onTriggered: {
 			power = powerL1.valid || powerL2.valid || powerL3.valid

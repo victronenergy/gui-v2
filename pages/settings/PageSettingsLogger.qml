@@ -74,7 +74,7 @@ Page {
 
 				Timer {
 					interval: 1000
-					running: parent.visible
+					running: parent.visible && root.animationEnabled
 					repeat: true
 					triggeredOnStart: true
 					onTriggered: parent.secondaryText = Utils.timeAgo(parent.dataValue)
@@ -224,7 +224,7 @@ Page {
 
 				Timer {
 					interval: 1000
-					running: !!parent.dataValue
+					running: !!parent.dataValue && root.animationEnabled
 					repeat: true
 					triggeredOnStart: true
 					onTriggered: parent.secondaryText = Utils.timeAgo(parent.dataValue)

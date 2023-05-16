@@ -74,7 +74,7 @@ Page {
 		rightMargin: contentWidth > width
 					 ? 2*Theme.geometry.levelsPage.gaugesView.horizontalMargin
 					 : 0
-		animationEnabled: root.isCurrentPage
+		animationEnabled: root.animationEnabled
 
 		Behavior on x {
 			enabled: root.isCurrentPage && tanksTab.animateModelChanges
@@ -121,7 +121,7 @@ Page {
 		}
 
 		sourceComponent: EnvironmentTab {
-			animationEnabled: root.isCurrentPage
+			animationEnabled: root.animationEnabled
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load environments tab:", errorString())
 	}

@@ -34,6 +34,7 @@ QtObject {
 		running: root.currentPage !== null && root.currentPage !== undefined
 			&& root.currentPage.fullScreenWhenIdle
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			&& BackendConnection.applicationVisible
 		interval: Theme.animation.page.idleResize.timeout
 		onTriggered: root.interactivity = VenusOS.PageManager_InteractionMode_EnterIdleMode
 	}
