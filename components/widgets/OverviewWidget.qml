@@ -58,8 +58,6 @@ Rectangle {
 	height: compactHeight
 	visible: size !== VenusOS.OverviewWidget_Size_Zero
 	radius: isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
-	border.width: enabled && !isSegment ? Theme.geometry.overviewPage.widget.border.width : 0
-	border.color: Theme.color.overviewPage.widget.border
 	color: isSegment ? "transparent" : Theme.color.overviewPage.widget.background
 
 	states: State {

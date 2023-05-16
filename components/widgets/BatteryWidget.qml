@@ -52,6 +52,7 @@ OverviewWidget {
 			GradientStop { position: Math.min(1.0, (1.0 - _normalizedStateOfCharge/100) + 0.001); color: Theme.color.overviewPage.widget.battery.background }
 			GradientStop { position: 1.0; color: Theme.color.overviewPage.widget.battery.background }
 		}
+		radius: parent.radius
 
 		Grid {
 			id: animationGrid
