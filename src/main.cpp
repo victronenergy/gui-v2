@@ -459,8 +459,6 @@ void registerQmlTypes()
 	/* widgets */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/OverviewWidget.qml")),
 		"Victron.VenusOS", 2, 0, "OverviewWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/SegmentedWidgetBackground.qml")),
-		"Victron.VenusOS", 2, 0, "SegmentedWidgetBackground");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AlternatorWidget.qml")),
 		"Victron.VenusOS", 2, 0, "AlternatorWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AcGeneratorWidget.qml")),

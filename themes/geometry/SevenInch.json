@@ -285,7 +285,6 @@
     "geometry.overviewPage.layout.compact.bottomMargin": 8,
     "geometry.overviewPage.layout.expanded.topMargin": 0,
     "geometry.overviewPage.layout.expanded.bottomMargin": 32,
-    "geometry.overviewPage.layout.segmentedWidgetThreshold": 5,
 
     "geometry.overviewPage.widget.solar.graph.bar.width": 8,
     "geometry.overviewPage.widget.solar.graph.bar.radius": 8,

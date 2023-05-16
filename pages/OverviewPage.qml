@@ -134,23 +134,13 @@ Page {
 				- Theme.geometry.navigationBar.height
 				- Theme.geometry.overviewPage.layout.compact.topMargin
 				- Theme.geometry.overviewPage.layout.compact.bottomMargin
-		let compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
+		const compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
 
 		const expandedPageHeight = Theme.geometry.screen.height
 				- Theme.geometry.statusBar.height
 				- Theme.geometry.overviewPage.layout.expanded.topMargin
 				- Theme.geometry.overviewPage.layout.expanded.bottomMargin
-		let expandedWidgetsTopMargin = Math.max(0, (expandedPageHeight - expandedWidgetHeights) / Math.max(1, widgets.length - 1))
-
-		if (widgets === _leftWidgets
-				&& widgets.length >= Theme.geometry.overviewPage.layout.segmentedWidgetThreshold) {
-			// For a segmented widget layout, increase the widget height by a proportion of the
-			// margin (so the increase is spread out over all of the widgets).
-			const reductionRatio = (Theme.geometry.overviewPage.layout.segmentedWidgetThreshold - 1)
-					/ Theme.geometry.overviewPage.layout.segmentedWidgetThreshold
-			compactWidgetsTopMargin = compactWidgetsTopMargin * reductionRatio
-			expandedWidgetsTopMargin = expandedWidgetsTopMargin * reductionRatio
-		}
+		const expandedWidgetsTopMargin = Math.max(0, (expandedPageHeight - expandedWidgetHeights) / Math.max(1, widgets.length - 1))
 
 		// Set widget y and height
 		let prevWidget = null
@@ -290,11 +280,6 @@ Page {
 					0, _createWidget(VenusOS.OverviewWidget_Type_Solar))
 		}
 		_leftWidgets = widgetCandidates
-
-		segmentedBackground.visible = _leftWidgets.length >= Theme.geometry.overviewPage.layout.segmentedWidgetThreshold
-		for (i = 0; i < _leftWidgets.length; ++i) {
-			_leftWidgets[i].isSegment = segmentedBackground.visible
-		}
 	}
 
 	function _leftWidgetInsertionIndex(widgetType, candidateArray) {
@@ -341,18 +326,6 @@ Page {
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
 
-	SegmentedWidgetBackground {
-		id: segmentedBackground
-
-		anchors {
-			top: parent.top
-			left: parent.left
-			leftMargin: Theme.geometry.page.content.horizontalMargin
-		}
-		visible: false
-		segments: _leftWidgets
-	}
-
 	Component {
 		id: gridComponent
 
@@ -362,7 +335,6 @@ Page {
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			animationEnabled: root.animationEnabled
-			isSegment: segmentedBackground.visible
 			connectors: [ gridWidgetConnector ]
 
 			WidgetConnectorAnchor {
@@ -429,7 +401,6 @@ Page {
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			animationEnabled: root.animationEnabled
-			isSegment: segmentedBackground.visible
 			connectors: [ acGeneratorConnector ]
 
 			WidgetConnectorAnchor {
@@ -463,7 +434,6 @@ Page {
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			animationEnabled: root.animationEnabled
-			isSegment: segmentedBackground.visible
 			connectors: [ dcGeneratorConnector ]
 
 			WidgetConnectorAnchor {
@@ -497,7 +467,6 @@ Page {
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			animationEnabled: root.animationEnabled
-			isSegment: segmentedBackground.visible
 			connectors: [ alternatorConnector ]
 
 			WidgetConnectorAnchor {
@@ -530,7 +499,6 @@ Page {
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			animationEnabled: root.animationEnabled
-			isSegment: segmentedBackground.visible
 			connectors: [ windConnector ]
 
 			WidgetConnectorAnchor {
@@ -563,7 +531,6 @@ Page {
 			expanded: Global.pageManager.expandLayout
 			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 			animationEnabled: root.animationEnabled
-			isSegment: segmentedBackground.visible
 			connectors: [ acSolarConnector, dcSolarConnector ]
 
 			WidgetConnectorAnchor {

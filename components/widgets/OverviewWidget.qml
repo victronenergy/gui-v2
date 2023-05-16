@@ -17,13 +17,12 @@ Rectangle {
 
 	property int rightPadding
 	property alias extraContent: extraContent
-	property bool isSegment
 	property var connectors: []
 
 	property real compactY
 	property real expandedY
-	readonly property int compactHeight: getCompactHeight(size) + (isSegment ? segmentCompactMargin : 0)
-	readonly property int expandedHeight: getExpandedHeight(size) + (isSegment ? segmentExpandedMargin : 0)
+	readonly property int compactHeight: getCompactHeight(size)
+	readonly property int expandedHeight: getExpandedHeight(size)
 	property real segmentCompactMargin
 	property real segmentExpandedMargin
 	property bool expanded
@@ -57,8 +56,8 @@ Rectangle {
 	y: compactY
 	height: compactHeight
 	visible: size !== VenusOS.OverviewWidget_Size_Zero
-	radius: isSegment ? 0 : Theme.geometry.overviewPage.widget.radius
-	color: isSegment ? "transparent" : Theme.color.overviewPage.widget.background
+	radius: Theme.geometry.overviewPage.widget.radius
+	color: Theme.color.overviewPage.widget.background
 
 	states: State {
 		name: "expanded"
