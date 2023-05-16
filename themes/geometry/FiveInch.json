@@ -265,9 +265,9 @@
 
     "geometry.overviewPage.widget.compact.xl.height": 352,
     "geometry.overviewPage.widget.compact.l.height": 152,
-    "geometry.overviewPage.widget.compact.m.height": 100,
-    "geometry.overviewPage.widget.compact.s.height": 82,
-    "geometry.overviewPage.widget.compact.xs.height": 66,
+    "geometry.overviewPage.widget.compact.m.height": 88,
+    "geometry.overviewPage.widget.compact.s.height": 80,
+    "geometry.overviewPage.widget.compact.xs.height": 64,
     "geometry.overviewPage.widget.expanded.xl.height": 400,
     "geometry.overviewPage.widget.expanded.l.height": 176,
     "geometry.overviewPage.widget.expanded.m.height": 104,
@@ -285,7 +285,6 @@
     "geometry.overviewPage.layout.compact.bottomMargin": 8,
     "geometry.overviewPage.layout.expanded.topMargin": 0,
     "geometry.overviewPage.layout.expanded.bottomMargin": 32,
-    "geometry.overviewPage.layout.segmentedWidgetThreshold": 5,
 
     "geometry.overviewPage.widget.solar.graph.bar.width": 8,
     "geometry.overviewPage.widget.solar.graph.bar.radius": 8,

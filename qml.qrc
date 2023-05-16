@@ -133,7 +133,6 @@
         <file>components/widgets/GridWidget.qml</file>
         <file>components/widgets/InverterWidget.qml</file>
         <file>components/widgets/OverviewWidget.qml</file>
-        <file>components/widgets/SegmentedWidgetBackground.qml</file>
         <file>components/widgets/ShoreWidget.qml</file>
         <file>components/widgets/SolarYieldWidget.qml</file>
         <file>components/widgets/WidgetConnector.qml</file>
