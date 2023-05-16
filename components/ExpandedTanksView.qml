@@ -14,7 +14,7 @@ Rectangle {
 	property bool active
 	property alias tankModel: groupedSubgaugesRepeater.model
 	readonly property var _tankProperties: Gauges.tankProperties(tankModel.type)
-	property bool animationEnabled: true
+	property bool animationEnabled
 
 	parent: Global.dialogLayer
 	anchors.fill: parent

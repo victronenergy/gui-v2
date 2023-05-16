@@ -13,7 +13,7 @@ Item {
 
 	property alias model: arcRepeater.model
 	readonly property real strokeWidth: Theme.geometry.circularMultiGauge.strokeWidth
-	property bool animationEnabled: true
+	property bool animationEnabled
 	property real labelMargin
 	property alias labelOpacity: textCol.opacity
 

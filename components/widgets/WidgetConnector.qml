@@ -18,12 +18,13 @@ Item {
 	property int animationMode: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	property alias expanded: connectorPath.expanded
 	property bool animateGeometry
+	property bool animationEnabled
 	readonly property bool defaultVisible: startWidget.visible && endWidget.visible && _initialized
 
 	// Forces a straight line by aligning the anchor points using the centre of the smaller widget
 	property bool straight
 
-	readonly property bool _animated: _initialized && visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated
+	readonly property bool _animated: _initialized && visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated && animationEnabled
 	property real _animationProgress
 
 	property real _electronTravelDistance

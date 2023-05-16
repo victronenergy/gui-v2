@@ -28,7 +28,7 @@ Rectangle {
 	property real segmentExpandedMargin
 	property bool expanded
 	property bool animateGeometry
-	property bool animationEnabled: true
+	property bool animationEnabled
 
 	function getCompactHeight(s) {
 		return s === VenusOS.OverviewWidget_Size_XL

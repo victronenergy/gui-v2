@@ -23,6 +23,7 @@ class BackendConnection : public QObject
 	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 	Q_PROPERTY(QString portalId READ portalId WRITE setPortalId NOTIFY portalIdChanged)
+	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged)
 
 public:
 	enum SourceType {
@@ -79,6 +80,9 @@ public:
 	QString portalId() const;
 	void setPortalId(const QString &portalId);
 
+	bool isApplicationVisible() const;
+	void setApplicationVisible(bool v);
+
 Q_SIGNALS:
 	void stateChanged();
 	void typeChanged();
@@ -86,6 +90,7 @@ Q_SIGNALS:
 	void usernameChanged();
 	void passwordChanged();
 	void portalIdChanged();
+	void applicationVisibleChanged();
 
 private:
 	explicit BackendConnection(QObject *parent = nullptr);
@@ -103,6 +108,8 @@ private:
 	QString m_username;
 	QString m_password;
 	QString m_portalId;
+
+	bool m_applicationVisible = true;
 
 	State m_state = BackendConnection::State::Idle;
 	SourceType m_type = UnknownSource;

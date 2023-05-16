@@ -30,6 +30,7 @@
 #endif
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
+#include <emscripten/html5.h>
 #include <emscripten/val.h>
 #include <emscripten.h>
 #include <QUrl>
@@ -49,6 +50,15 @@
 Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 namespace {
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+EM_BOOL visibilitychange_callback(int /* eventType */, const EmscriptenVisibilityChangeEvent *e, void *userData)
+{
+	Victron::VenusOS::BackendConnection *backend = static_cast<Victron::VenusOS::BackendConnection*>(userData);
+	backend->setApplicationVisible(!e->hidden);
+	return 0;
+}
+#endif // VENUS_WEBASSEMBLY_BUILD
 
 static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
 {
@@ -71,6 +81,7 @@ void initBackend(bool *enableFpsCounter)
 
 	QString queryMqttAddress, queryMqttPortalId, queryMqttUser, queryMqttPass, queryFpsCounter;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
+	emscripten_set_visibilitychange_callback(static_cast<void*>(backend), 1, visibilitychange_callback);
 	emscripten::val webLocation = emscripten::val::global("location");
 	const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
 	const QUrlQuery query(webLocationUrl);

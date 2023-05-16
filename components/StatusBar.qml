@@ -15,7 +15,7 @@ Item {
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
 
-	property bool animationEnabled: true
+	property bool animationEnabled
 
 	signal leftButtonClicked()
 	signal rightButtonClicked()
@@ -25,7 +25,7 @@ Item {
 	opacity: 0
 
 	SequentialAnimation {
-		running: !Global.splashScreenVisible
+		running: !Global.splashScreenVisible && animationEnabled
 
 		PauseAnimation {
 			duration: Theme.animation.statusBar.initialize.delayedStart.duration

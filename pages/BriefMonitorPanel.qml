@@ -188,7 +188,7 @@ Column {
 				}
 				initialModelValue: 0.5
 				interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-				enableAnimation: root.opacity > 0
+				enableAnimation: root.opacity > 0 && BackendConnection.applicationVisible
 				warningThreshold: 0.5
 				belowThresholdFillColor1: Theme.color.briefPage.background
 				belowThresholdFillColor2: Theme.color.briefPage.background
@@ -199,7 +199,7 @@ Column {
 
 				Timer {
 					interval: parent.interval
-					running: root.opacity > 0
+					running: root.opacity > 0 && BackendConnection.applicationVisible
 					repeat: true
 					onTriggered: gridGraph.addValue(gridPower.normalizedValueAsRatio)
 				}
@@ -249,13 +249,13 @@ Column {
 					bottomMargin: loadsQuantityLabel.bottomPadding
 				}
 				interval: loadGraphTimer.interval
-				enableAnimation: root.opacity > 0
+				enableAnimation: root.opacity > 0 && BackendConnection.applicationVisible
 
 				Timer {
 					id: loadGraphTimer
 
 					interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-					running: root.opacity > 0
+					running: root.opacity > 0 && BackendConnection.applicationVisible
 					repeat: true
 					onTriggered: loadGraph.addValue(loadsPower.valueAsRatio)
 				}

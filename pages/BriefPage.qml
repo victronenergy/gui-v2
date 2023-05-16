@@ -15,7 +15,6 @@ Page {
 	property real _gaugeLabelMargin: Theme.geometry.briefPage.edgeGauge.label.initialize.margin
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
-	property bool _animationEnabled
 	readonly property string _gridIcon: {
 		const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
 				+ Global.dcInputs.model.count
@@ -33,6 +32,7 @@ Page {
 
 	backgroundColor: Theme.color.briefPage.background
 	fullScreenWhenIdle: true
+	animationEnabled: root.isCurrentPage && BackendConnection.applicationVisible && !Global.splashScreenVisible
 	topRightButton: _sidePanelActive
 			? VenusOS.StatusBar_RightButton_SidePanelActive
 			: VenusOS.StatusBar_RightButton_SidePanelInactive
@@ -59,7 +59,7 @@ Page {
 				sourceModel: Gauges.briefCentralGauges
 				maximumGaugeCount: Theme.geometry.briefPage.centerGauge.maximumGaugeCount
 			}
-			animationEnabled: root._animationEnabled
+			animationEnabled: root.animationEnabled
 			labelOpacity: root._gaugeLabelOpacity
 			labelMargin: root._gaugeLabelMargin
 		}
@@ -77,8 +77,8 @@ Page {
 			value: battery ? Math.round(battery.stateOfCharge || 0) : 0
 			status: Gauges.getValueStatus(value, properties.valueType)
 			caption: battery && battery.timeToGo > 0 ? Utils.formatAsHHMM(battery.timeToGo, true) : ""
-			animationEnabled: root._animationEnabled
-			shineAnimationEnabled: battery && battery.mode === VenusOS.Battery_Mode_Charging
+			animationEnabled: root.animationEnabled
+			shineAnimationEnabled: battery && battery.mode === VenusOS.Battery_Mode_Charging && root.animationEnabled
 		}
 	}
 
@@ -101,7 +101,7 @@ Page {
 			arcX: leftLower.active ? undefined : 10
 			direction: PathArc.Clockwise
 			startAngle: leftLower.active ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)
-			animationEnabled: root._animationEnabled
+			animationEnabled: root.animationEnabled
 
 			// Gauge color changes only apply when there is a maximum value.
 			valueType: isNaN(inputsRange.maximumValue)
@@ -179,7 +179,7 @@ Page {
 		active: !isNaN(Global.system.loads.acPower) || rightLower.active
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignRight | (rightLower.active ? Qt.AlignTop : Qt.AlignVCenter)
-			animationEnabled: root._animationEnabled
+			animationEnabled: root.animationEnabled
 			icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 			value: acLoadsRange.valueAsRatio * 100
 			quantityLabel.dataObject: Global.system.ac.consumption
@@ -210,7 +210,7 @@ Page {
 		active: !isNaN(Global.system.loads.dcPower)
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignRight | Qt.AlignBottom
-			animationEnabled: root._animationEnabled
+			animationEnabled: root.animationEnabled
 			icon.source: "qrc:/images/dcloads.svg"
 			value: dcLoadsRange.valueAsRatio * 100
 			quantityLabel.dataObject: Global.system.dc
@@ -262,7 +262,6 @@ Page {
 				_gaugeLabelMargin: 0
 				_gaugeArcOpacity: 1
 				_gaugeLabelOpacity: 1
-				_animationEnabled: root.isCurrentPage
 			}
 		},
 		State {

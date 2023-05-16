@@ -12,8 +12,8 @@ Item {
 
 	property real value
 	property real radius
-	property bool animationEnabled: true
-	property bool shineAnimationEnabled: false
+	property bool animationEnabled
+	property bool shineAnimationEnabled
 	property real strokeWidth: Theme.geometry.progressArc.strokeWidth
 	property alias progressColor: progress.strokeColor
 	property alias remainderColor: remainder.strokeColor

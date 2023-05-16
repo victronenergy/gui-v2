@@ -34,6 +34,8 @@ Item {
 				: (!!pageStack.currentItem ? pageStack.currentItem.topLeftButton : VenusOS.StatusBar_LeftButton_None)
 		rightButton: !!pageStack.currentItem ? pageStack.currentItem.topRightButton : VenusOS.StatusBar_RightButton_None
 
+		animationEnabled: BackendConnection.applicationVisible
+
 		Component.onCompleted: pageManager.statusBar = statusBar
 
 		onLeftButtonClicked: {

@@ -147,7 +147,7 @@ Page {
 			visible: dataValid && dataValue > 0
 
 			Timer {
-				running: parent.visible
+				running: parent.visible && root.animationEnabled
 				repeat: true
 				interval: 1000
 				onTriggered: {
