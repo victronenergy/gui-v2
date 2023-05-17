@@ -338,6 +338,7 @@ Page {
 		}
 	}
 
+	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
 
 	SegmentedWidgetBackground {

@@ -46,12 +46,4 @@ QtObject {
 	function popPage(toPage) {
 		emitter.pagePopRequested(toPage)
 	}
-
-	function pushLayer(obj, properties) {
-		emitter.layerPushRequested(obj, properties)
-	}
-
-	function popLayer() {
-		emitter.layerPopRequested()
-	}
 }
