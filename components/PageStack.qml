@@ -42,4 +42,24 @@ C.StackView {
 			easing.type: Easing.InOutQuad
 		}
 	}
+	replaceEnter: Transition {
+		enabled: Global.allPagesLoaded
+
+		OpacityAnimator {
+			from: 0.0
+			to: 1.0
+			duration: Theme.animation.page.slide.duration
+			easing.type: Easing.InOutQuad
+		}
+	}
+	replaceExit: Transition {
+		enabled: Global.allPagesLoaded
+
+		OpacityAnimator {
+			from: 1.0
+			to: 0.0
+			duration: Theme.animation.page.slide.duration
+			easing.type: Easing.InOutQuad
+		}
+	}
 }

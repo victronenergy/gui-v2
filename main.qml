@@ -33,7 +33,6 @@ Window {
 
 	Item {
 		anchors.horizontalCenter: parent.horizontalCenter
-		clip: Qt.platform.os == "wasm"
 		width: Theme.geometry.screen.width + wasmPadding
 		height: Theme.geometry.screen.height
 
@@ -110,6 +109,7 @@ Window {
 			height: Theme.geometry.screen.height
 			asynchronous: true
 			focus: true
+			clip: Qt.platform.os == "wasm"
 
 			active: Global.dataManagerLoaded
 			sourceComponent: Component {
@@ -125,6 +125,7 @@ Window {
 			anchors.centerIn: parent
 			width: Theme.geometry.screen.width
 			height: Theme.geometry.screen.height
+			clip: Qt.platform.os == "wasm"
 
 			active: Global.splashScreenVisible
 			sourceComponent: Component {

@@ -134,7 +134,7 @@ Page {
 						 || root.solarCharger.errorModel.count
 
 				onClicked: {
-					Global.pageManager.pushLayer("/pages/solar/SolarChargerAlarmsAndErrorsPage.qml",
+					Global.pageManager.pushPage("/pages/solar/SolarChargerAlarmsAndErrorsPage.qml",
 							{ "title": text, "solarCharger": root.solarCharger })
 				}
 
@@ -156,7 +156,7 @@ Page {
 					//: Solar charger historic data information. %1 = charger name
 					//% "%1 History"
 					const title = qsTrId("charger_history_name").arg(root.solarCharger.name)
-					Global.pageManager.pushLayer("/pages/solar/SolarChargerHistoryPage.qml",
+					Global.pageManager.pushPage("/pages/solar/SolarChargerHistoryPage.qml",
 							{ "title": title, "solarCharger": root.solarCharger })
 				}
 			}
@@ -165,7 +165,7 @@ Page {
 				//% "Networked operation"
 				text: qsTrId("charger_networked_operation")
 				onClicked: {
-					Global.pageManager.pushLayer("/pages/solar/SolarChargerNetworkedOperationPage.qml",
+					Global.pageManager.pushPage("/pages/solar/SolarChargerNetworkedOperationPage.qml",
 							{ "title": text, "solarCharger": root.solarCharger })
 				}
 			}
@@ -174,7 +174,7 @@ Page {
 				//% "Device info"
 				text: qsTrId("charger_device_info")
 				onClicked: {
-					Global.pageManager.pushLayer("/pages/settings/PageDeviceInfo.qml",
+					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
 							{ "title": text, "bindPrefix": root.solarCharger.serviceUid })
 				}
 			}

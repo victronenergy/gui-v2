@@ -60,6 +60,7 @@ Item {
 
 		enabled: Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				&& root.leftButton != VenusOS.StatusBar_LeftButton_None
+		backgroundColor: "transparent"  // don't show background when disabled
 		opacity: enabled ? 1.0 : 0.0
 		Behavior on opacity {
 			enabled: root.animationEnabled

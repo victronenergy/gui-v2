@@ -46,7 +46,7 @@ Page {
 			text: solarCharger.name
 			primaryLabel.width: availableWidth - Theme.geometry.solarListPage.quantityRow.width - Theme.geometry.listItem.content.horizontalMargin
 
-			onClicked: Global.pageManager.pushLayer("/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
+			onClicked: Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
 
 			Row {
 				anchors {

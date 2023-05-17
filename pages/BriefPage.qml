@@ -33,6 +33,7 @@ Page {
 	backgroundColor: Theme.color.briefPage.background
 	fullScreenWhenIdle: true
 	animationEnabled: root.isCurrentPage && BackendConnection.applicationVisible && !Global.splashScreenVisible
+	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	topRightButton: _sidePanelActive
 			? VenusOS.StatusBar_RightButton_SidePanelActive
 			: VenusOS.StatusBar_RightButton_SidePanelInactive

@@ -299,7 +299,6 @@
         <file>pages/BriefPage.qml</file>
         <file>pages/ControlCardsPage.qml</file>
         <file>pages/EnvironmentTab.qml</file>
-        <file>pages/LauncherPage.qml</file>
         <file>pages/LevelsPage.qml</file>
         <file>pages/MainView.qml</file>
         <file>pages/NotificationLayer.qml</file>

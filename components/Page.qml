@@ -15,13 +15,13 @@ FocusScope {
 	readonly property bool isCurrentPage: Global.pageManager.currentPage === root
 	property bool animationEnabled: isCurrentPage && BackendConnection.applicationVisible
 
-	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
+	property int topLeftButton: C.StackView.view && C.StackView.view.depth > 1 ? VenusOS.StatusBar_LeftButton_Back : VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None
 
 	property var tryPop // optional function: returns whether the page can be poppped
 
-	width: parent ? parent.width : 0
-	height: parent ? parent.height : 0
+	implicitWidth: C.StackView.view ? C.StackView.view.width : 0
+	implicitHeight: C.StackView.view ? C.StackView.view.height : 0
 
 	C.StackView.onActivated: Global.pageManager.currentPage = root
 }

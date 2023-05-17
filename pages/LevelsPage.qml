@@ -9,6 +9,7 @@ import QtQuick.Controls.impl as CP
 Page {
 	id: root
 
+	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
 
 	TabBar {
