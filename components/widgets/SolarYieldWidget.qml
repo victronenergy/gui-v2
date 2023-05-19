@@ -68,7 +68,9 @@ OverviewWidget {
 		}
 		delegate: QtObject {
 			readonly property real yieldKwh: model.yieldKwh
-			onYieldKwhChanged: root._yieldToday = yieldKwh
+			Component.onCompleted: {
+				root._yieldToday = Qt.binding(function() { return yieldKwh })
+			}
 		}
 	}
 }
