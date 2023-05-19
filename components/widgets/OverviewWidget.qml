@@ -84,7 +84,7 @@ Rectangle {
 		   ? Theme.geometry.overviewPage.widget.content.verticalMargin
 		   : parent.height/2 - height/2
 		width: parent.width - 2*Theme.geometry.overviewPage.widget.content.horizontalMargin
-		height: widgetHeader.height + (quantityLabel.visible ? quantityLabel.height : 0)
+		height: widgetHeader.height + (quantityLabel.visible ? quantityLabel.anchors.topMargin + quantityLabel.height : 0)
 
 		WidgetHeader {
 			id: widgetHeader
