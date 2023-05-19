@@ -26,12 +26,16 @@
     "color.white": "#FFFFFF",
     "color.dimWhite": "#99FFFFFF",
     "color.darkWhite": "#4DFFFFFF",
-
     "color.fuel": "#76832C",
     "color.oil": "#856B5D",
     "color.gasoline": "#9B8A45",
     "color.freshWater": "#84CBF8",
     "color.wasteWater": "#30B9D3",
     "color.liveWell": "#249989",
-    "color.blackWater": "#6B4AB3"
+    "color.blackWater": "#6B4AB3",
+    "color.diesel": "#9B8A45",
+    "color.lpg": "#B98CDD",
+    "color.lng": "#919AE7",
+    "color.hydraulicOil": "#B56847",
+    "color.rawWater": "#4B93B2"
 }

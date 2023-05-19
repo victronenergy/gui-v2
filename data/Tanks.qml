@@ -16,7 +16,12 @@ QtObject {
 		VenusOS.Tank_Type_LiveWell,
 		VenusOS.Tank_Type_Oil,
 		VenusOS.Tank_Type_BlackWater,
-		VenusOS.Tank_Type_Gasoline
+		VenusOS.Tank_Type_Gasoline,
+		VenusOS.Tank_Type_Diesel,
+		VenusOS.Tank_Type_LPG,
+		VenusOS.Tank_Type_LNG,
+		VenusOS.Tank_Type_HydraulicOil,
+		VenusOS.Tank_Type_RawWater
 	]
 
 	readonly property var allTankModels: tankTypes.map(function(tankType) {
@@ -72,6 +77,41 @@ QtObject {
 		objectProperty: "tank"
 		objectName: "Gasoline"
 	}
+	readonly property DeviceModel dieselTanks: DeviceModel {
+		readonly property int type: VenusOS.Tank_Type_Diesel
+		property real totalCapacity
+		property real totalRemaining
+		objectProperty: "tank"
+		objectName: "Diesel"
+	}
+	readonly property DeviceModel lpgTanks: DeviceModel {
+		readonly property int type: VenusOS.Tank_Type_LPG
+		property real totalCapacity
+		property real totalRemaining
+		objectProperty: "tank"
+		objectName: "LPG"
+	}
+	readonly property DeviceModel lngTanks: DeviceModel {
+		readonly property int type: VenusOS.Tank_Type_LNG
+		property real totalCapacity
+		property real totalRemaining
+		objectProperty: "tank"
+		objectName: "LNG"
+	}
+	readonly property DeviceModel hydraulicOilTanks: DeviceModel {
+		readonly property int type: VenusOS.Tank_Type_HydraulicOil
+		property real totalCapacity
+		property real totalRemaining
+		objectProperty: "tank"
+		objectName: "HydraulicOil"
+	}
+	readonly property DeviceModel rawWaterTanks: DeviceModel {
+		readonly property int type: VenusOS.Tank_Type_RawWater
+		property real totalCapacity
+		property real totalRemaining
+		objectProperty: "tank"
+		objectName: "RawWater"
+	}
 
 	readonly property int totalTankCount: fuelTanks.count
 			+ freshWaterTanks.count
@@ -80,6 +120,11 @@ QtObject {
 			+ oilTanks.count
 			+ blackWaterTanks.count
 			+ gasolineTanks.count
+			+ dieselTanks.count
+			+ lpgTanks.count
+			+ lngTanks.count
+			+ hydraulicOilTanks.count
+			+ rawWaterTanks.count
 
 	function tankModel(type) {
 		switch (type) {
@@ -97,6 +142,16 @@ QtObject {
 			return blackWaterTanks
 		case VenusOS.Tank_Type_Gasoline:
 			return gasolineTanks
+		case VenusOS.Tank_Type_Diesel:
+			return dieselTanks
+		case VenusOS.Tank_Type_LPG:
+			return lpgTanks
+		case VenusOS.Tank_Type_LNG:
+			return lngTanks
+		case VenusOS.Tank_Type_HydraulicOil:
+			return hydraulicOilTanks
+		case VenusOS.Tank_Type_RawWater:
+			return rawWaterTanks
 		}
 		console.warn("tankModel(): Unknown tank type", type)
 		return null
