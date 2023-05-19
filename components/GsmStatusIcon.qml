@@ -7,13 +7,10 @@ import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import "/components/Utils.js" as Utils
 
-Row { // TODO: update this when we get a design
+Row {
 	id: root
 
-	property bool showNetworkType: activeNetworkConnection.value === VenusOS.NetworkConnection_GSM
-	property bool showRoamingIcon: true
-	property string color: "#FFFFFF"
-	property bool valid: strength.valid
+	readonly property bool valid: strength.valid
 
 	function getScaledStrength(strength) {
 		if (strength <= 3) {
@@ -34,52 +31,34 @@ Row { // TODO: update this when we get a design
 		return 0
 	}
 
-	height: 16
 	visible: simStatus.valid
 
-	Row {
-		spacing: 4
-		height: parent.height
-		visible: showNetworkType || showRoamingIcon
+	Text {
+		id: gsmStatusText
 
-		Text {
-			id: netType
-
-			height: 16
-			text: Utils.simplifiedNetworkType(networkType.value)
-			color: root.color
-			verticalAlignment: Text.AlignVCenter
-			visible: showNetworkType && (connected.valid && connected.value)
-			font {
-				bold: true
-				pixelSize: 10
-			}
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry.settingspage.gsmModem.icon.statusText.topMargin
 		}
-
-		Text {
-			id: roamingIndicator
-
-			height: 16
-			text: "R"
-			color: root.color
-			verticalAlignment: Text.AlignVCenter
-			visible: showRoamingIcon && roaming.valid ? roaming.value : false
-			font {
-				bold: true
-				pixelSize: 10
-			}
+		text: (roaming.valid && roaming.value) ? "R" : Utils.simplifiedNetworkType(networkType.value)
+		color: Theme.color.settings.gsmmodem.signalstrength.active
+		verticalAlignment: Text.AlignTop
+		visible: !simLockedIcon.visible && ((roaming.valid && roaming.value) || (connected.valid && connected.value))
+		font {
+			pixelSize: Theme.font.size.gsm.icon.caption
 		}
 	}
 
 	Row {
 		id: gsmRow
 
-		spacing: 1
+		spacing: Theme.geometry.settingspage.gsmModem.signalStrengthBars.spacing
 		visible: !simLockedIcon.visible
 
 		anchors {
-			top: parent.top; topMargin: 2
-			bottom: parent.bottom; bottomMargin: 0
+			top: parent.top
+			topMargin: Theme.geometry.settingspage.gsmModem.signalStrengthBars.topMargin
+			bottom: parent.bottom
 		}
 
 		Repeater {
@@ -89,10 +68,11 @@ Row { // TODO: update this when we get a design
 
 			Rectangle {
 				y: parent.height - height
-				height: (index + 1) * parent.height / signalRepeater.model
-				width: 3
-				color: root.color
-				opacity: getScaledStrength(strength.value) >= (index + 1) ? 1 : 0.2
+				height: (index + 1) * Theme.geometry.settingspage.gsmModem.signalStrengthBars.bar.incremental.height
+				width: Theme.geometry.settingspage.gsmModem.signalStrengthBars.bar.width
+				radius: width / 2
+				color: getScaledStrength(strength.value) >= (index + 1) ?
+						   Theme.color.settings.gsmmodem.signalstrength.active : Theme.color.settings.gsmmodem.signalstrength.inactive
 			}
 		}
 	}
@@ -100,10 +80,9 @@ Row { // TODO: update this when we get a design
 	CP.IconImage {
 		id: simLockedIcon
 
-		anchors.centerIn: parent
-		width: Theme.geometry.modalWarningDialog.alarmIcon.width
-		height: Theme.geometry.modalWarningDialog.alarmIcon.width
-		source: "qrc:/images/icon-statusbar-sim-locked.svg"
+		anchors.verticalCenter: parent.verticalCenter
+		color: Theme.color.settings.gsmmodem.signalstrength.active
+		source: "qrc:/images/icon_simlocked_32.svg"
 		visible: [11, 16].indexOf(simStatus.value) > -1
 	}
 
@@ -136,11 +115,4 @@ Row { // TODO: update this when we get a design
 
 		source: "com.victronenergy.modem/Connected"
 	}
-
-	DataPoint {
-		id: activeNetworkConnection
-
-		source: "com.victronenergy.settings/Settings/System/ActiveNetworkConnection"
-	}
-
 }

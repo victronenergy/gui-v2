@@ -236,7 +236,7 @@ QtObject {
 		setMockModemValue("/SignalStrength", 17)
 		setMockModemValue("/SimStatus", 1000)
 		setMockModemSetting("/APN", "")
-		setMockModemSetting("/Connect", 1)
+		setMockModemSetting("/Connected", 1)
 		setMockModemSetting("/PIN", "1234")
 		setMockModemSetting("/Password", "tinyurl.com/msvnbd3r")
 		setMockModemSetting("/RoamingPermitted", 0)

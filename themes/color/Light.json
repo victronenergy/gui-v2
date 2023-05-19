@@ -116,5 +116,8 @@
     "color.solarHistoryErrorView.primaryText": "color.white",
     "color.solarHistoryErrorView.secondaryText": "color.dimWhite",
 
-    "color.notificationsPage.text.color": "color.gray4"
+    "color.notificationsPage.text.color": "color.gray4",
+
+    "color.settings.gsmmodem.signalstrength.inactive": "color.darkGray2",
+    "color.settings.gsmmodem.signalstrength.active": "color.gray2"
 }

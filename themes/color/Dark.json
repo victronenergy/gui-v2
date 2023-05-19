@@ -116,5 +116,8 @@
     "color.solarHistoryErrorView.primaryText": "color.font.primary",
     "color.solarHistoryErrorView.secondaryText": "color.font.secondary",
 
-    "color.notificationsPage.text.color": "color.font.secondary"
+    "color.notificationsPage.text.color": "color.font.secondary",
+
+    "color.settings.gsmmodem.signalstrength.active": "color.white",
+    "color.settings.gsmmodem.signalstrength.inactive": "color.darkWhite"
 }
