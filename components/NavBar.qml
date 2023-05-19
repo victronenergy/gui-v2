@@ -12,7 +12,7 @@ Row {
 	property int currentIndex
 	property url currentUrl
 
-	width: parent.width
+	width: parent.width - 2*Theme.geometry.page.content.horizontalMargin
 	height: Theme.geometry.navigationBar.height
 	spacing: Theme.geometry.navigationBar.spacing
 
