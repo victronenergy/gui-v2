@@ -95,6 +95,47 @@ QtObject {
 			}
 			event.accepted = true
 			break
+		case Qt.Key_G:
+			if (event.modifiers & Qt.ShiftModifier) {
+				let newValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SignalStrength"] + 5
+				if (newValue > 25) {
+					newValue = 0
+				}
+				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SignalStrength"] = newValue
+			}
+			else if (event.modifiers & Qt.ControlModifier) {
+				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Roaming"]
+				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Roaming"] = !oldValue
+			}
+			else if (event.modifiers & Qt.AltModifier) {
+				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/NetworkType"]
+				var newValue
+				switch (oldValue) {
+				case "NONE": newValue = "GSM"
+					break
+				case "GSM": newValue = "EDGE"
+					break
+				case "EDGE": newValue = "CDMA"
+					break
+				case "CDMA": newValue = "HSPAP"
+					break
+				case "HSPAP": newValue = "LTE"
+					break
+				case "LTE": newValue = "NONE"
+					break
+				}
+				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/NetworkType"] = newValue
+			}
+			else if (event.modifiers & Qt.MetaModifier) {
+				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SimStatus"]
+				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SimStatus"] = oldValue === 1000 ? 11 : 1000
+			}
+			else {
+				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Connected"]
+				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Connected"] = oldValue === 1 ? 0 : 1
+			}
+			event.accepted = true
+			break
 		case Qt.Key_L:
 			Language.current = (Language.current === Language.English ? Language.French : Language.English)
 			pageConfigTitle.text = "Language: " + Language.toString(Language.current)

@@ -66,17 +66,14 @@ Page {
 				text: CommonWords.signal_strength
 
 				content.children: [
-					Rectangle { // TODO: update this when we get a design
+					Item {
 						anchors.verticalCenter: parent.verticalCenter
-						width: 32
-						height: 28
-						color: "#ddd"
+						width: Theme.geometry.settingspage.gsmModem.icon.container.width
+						height: Theme.geometry.settingspage.gsmModem.icon.container.height
 
 						GsmStatusIcon {
 							id: gsmStatusIcon
-							height: 18
-							color: "#000000"
-							showNetworkType: false
+							height: Theme.geometry.settingspage.gsmModem.icon.height
 							anchors.centerIn: parent
 						}
 					}
