@@ -16,7 +16,7 @@ QtObject {
 		}
 
 		// Add 3 tanks of random types
-		const maxTankType = VenusOS.Tank_Type_Gasoline
+		const maxTankType = VenusOS.Tank_Type_RawWater
 		for (let i = 0; i < 3; ++i) {
 			const tankType = Math.floor(Math.random() * maxTankType + 1)
 			const level = Math.random()

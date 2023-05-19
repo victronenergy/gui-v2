@@ -256,6 +256,7 @@ public:
 
 	enum Tank_Type {
 		// These values align with tank types from dbus
+		// see: https://github.com/victronenergy/venus/wiki/dbus#tank-levels
 		Tank_Type_Fuel = 0,
 		Tank_Type_FreshWater,
 		Tank_Type_WasteWater,
@@ -263,6 +264,11 @@ public:
 		Tank_Type_Oil,
 		Tank_Type_BlackWater,
 		Tank_Type_Gasoline,
+		Tank_Type_Diesel,
+		Tank_Type_LPG,
+		Tank_Type_LNG,
+		Tank_Type_HydraulicOil,
+		Tank_Type_RawWater,
 
 		// Added for convenience as battery is combined with tanks on Brief page
 		Tank_Type_Battery = 1000

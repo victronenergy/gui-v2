@@ -95,6 +95,46 @@ function tankProperties(type) {
 			//% "Gasoline"
 			name: qsTrId("gauges_gasoline")
 		}
+	case V.VenusOS.Tank_Type_Diesel:
+		return {
+			icon: "/images/tank.svg", // same as "Fuel"
+			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
+			borderColor: V.Theme.color.diesel,
+			//% "Diesel"
+			name: qsTrId("gauges_diesel")
+		}
+	case V.VenusOS.Tank_Type_LPG:
+		return {
+			icon: "/images/icon_lpg_32.svg",
+			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
+			borderColor: V.Theme.color.lpg,
+			//% "LPG"
+			name: qsTrId("gauges_lpg")
+		}
+	case V.VenusOS.Tank_Type_LNG:
+		return {
+			icon: "/images/icon_lng_32.svg",
+			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
+			borderColor: V.Theme.color.lng,
+			//% "LNG"
+			name: qsTrId("gauges_lng")
+		}
+	case V.VenusOS.Tank_Type_HydraulicOil:
+		return {
+			icon: "/images/icon_hydraulic_oil_32.svg",
+			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
+			borderColor: V.Theme.color.hydraulicOil,
+			//% "Hydraulic"
+			name: qsTrId("gauges_hydraulic")
+		}
+	case V.VenusOS.Tank_Type_RawWater:
+		return {
+			icon: "/images/icon_raw_water_32.svg",
+			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
+			borderColor: V.Theme.color.rawWater,
+			//% "Raw water"
+			name: qsTrId("gauges_raw_water")
+		}
 	}
 	console.warn("Unknown tank type", type)
 	return {}

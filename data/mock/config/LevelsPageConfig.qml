@@ -125,6 +125,26 @@ QtObject {
 				{ type: VenusOS.Tank_Type_Gasoline, level: 75, capacity: .2 },
 			]
 		},
+		{
+			name: "15 tanks (merge 3 Fuel tanks and 2 WasteWater tanks)",
+			tanks: [
+				{ type: VenusOS.Tank_Type_Fuel, level: 46.34, capacity: 1 },
+				{ type: VenusOS.Tank_Type_Fuel, level: 75.334, capacity: 1 },
+				{ type: VenusOS.Tank_Type_Fuel, level: 75.334, capacity: 1 },
+				{ type: VenusOS.Tank_Type_FreshWater, level: 10, capacity: 2 },
+				{ type: VenusOS.Tank_Type_WasteWater, level: 75.334, capacity: 1 },
+				{ type: VenusOS.Tank_Type_WasteWater, level: 75.334, capacity: 1 },
+				{ type: VenusOS.Tank_Type_LiveWell, level: 20, capacity: 1 },
+				{ type: VenusOS.Tank_Type_Oil, level: 80.2, capacity: .1 },
+				{ type: VenusOS.Tank_Type_BlackWater, level: 25, capacity: .2 },
+				{ type: VenusOS.Tank_Type_Gasoline, level: 75, capacity: .2 },
+				{ type: VenusOS.Tank_Type_Diesel, level: 75, capacity: .25 },
+				{ type: VenusOS.Tank_Type_LPG, level: 80, capacity: .3 },
+				{ type: VenusOS.Tank_Type_LNG, level: 85, capacity: .4 },
+				{ type: VenusOS.Tank_Type_HydraulicOil, level: 90, capacity: .5 },
+				{ type: VenusOS.Tank_Type_RawWater, level: 95, capacity: .6 },
+			]
+		},
 
 	]
 
