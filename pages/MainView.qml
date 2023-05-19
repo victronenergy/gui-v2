@@ -234,7 +234,7 @@ Item {
 		model: null
 
 		Loader {
-			y: root.height
+			y: root.height + 4 // avoid fractional scaling smearing a row of pixels into visible area
 			asynchronous: true
 			source: url
 
