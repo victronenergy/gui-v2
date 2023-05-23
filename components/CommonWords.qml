@@ -57,7 +57,7 @@ QtObject {
 	//% "Inverter overload"
 	readonly property string inverter_overload: qsTrId("common_words_inverter_overload")
 
-	//% "IP address %1"
+	//% "IP address"
 	readonly property string ip_address: qsTrId("common_words_ip_address")
 
 	//% "No"

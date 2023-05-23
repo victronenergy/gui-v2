@@ -102,35 +102,37 @@ QtObject {
 					newValue = 0
 				}
 				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SignalStrength"] = newValue
-			}
-			else if (event.modifiers & Qt.ControlModifier) {
-				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Roaming"]
+			} else if (event.modifiers & Qt.ControlModifier) {
+				let oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Roaming"]
 				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Roaming"] = !oldValue
-			}
-			else if (event.modifiers & Qt.AltModifier) {
-				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/NetworkType"]
-				var newValue
+			} else if (event.modifiers & Qt.AltModifier) {
+				let oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/NetworkType"]
+				let newValue
 				switch (oldValue) {
-				case "NONE": newValue = "GSM"
+				case "NONE":
+					newValue = "GSM"
 					break
-				case "GSM": newValue = "EDGE"
+				case "GSM":
+					newValue = "EDGE"
 					break
-				case "EDGE": newValue = "CDMA"
+				case "EDGE":
+					newValue = "CDMA"
 					break
-				case "CDMA": newValue = "HSPAP"
+				case "CDMA":
+					newValue = "HSPAP"
 					break
-				case "HSPAP": newValue = "LTE"
+				case "HSPAP":
+					newValue = "LTE"
 					break
-				case "LTE": newValue = "NONE"
+				case "LTE":
+					newValue = "NONE"
 					break
 				}
 				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/NetworkType"] = newValue
-			}
-			else if (event.modifiers & Qt.MetaModifier) {
+			} else if (event.modifiers & Qt.MetaModifier) {
 				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SimStatus"]
 				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SimStatus"] = oldValue === 1000 ? 11 : 1000
-			}
-			else {
+			} else {
 				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Connected"]
 				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Connected"] = oldValue === 1 ? 0 : 1
 			}

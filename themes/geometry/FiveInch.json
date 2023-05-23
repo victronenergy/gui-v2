@@ -431,13 +431,13 @@
     "geometry.comboBox.spacing": 8,
     "geometry.comboBox.indicator.height": 24,
 
-    "geometry.settingspage.gsmModem.icon.container.width": 28,
-    "geometry.settingspage.gsmModem.icon.container.height": 28,
-    "geometry.settingspage.gsmModem.icon.height": 26,
-    "geometry.settingspage.gsmModem.icon.statusText.topMargin": -2,
-    "geometry.settingspage.gsmModem.signalStrengthBars.spacing": 2,
-    "geometry.settingspage.gsmModem.signalStrengthBars.topMargin": 2,
-    "geometry.settingspage.gsmModem.signalStrengthBars.bar.width": 4,
-    "geometry.settingspage.gsmModem.signalStrengthBars.bar.incremental.height": 6
+    "geometry.settings.gsmModem.icon.container.width": 28,
+    "geometry.settings.gsmModem.icon.container.height": 28,
+    "geometry.settings.gsmModem.icon.height": 26,
+    "geometry.settings.gsmModem.icon.statusText.topMargin": -2,
+    "geometry.settings.gsmModem.signalStrengthBars.spacing": 2,
+    "geometry.settings.gsmModem.signalStrengthBars.topMargin": 2,
+    "geometry.settings.gsmModem.signalStrengthBars.bar.width": 4,
+    "geometry.settings.gsmModem.signalStrengthBars.bar.incremental.height": 6
 
 }
