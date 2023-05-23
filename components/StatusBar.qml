@@ -7,7 +7,7 @@ import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-Item {
+Rectangle {
 	id: root
 
 	property string title

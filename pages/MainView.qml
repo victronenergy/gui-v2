@@ -74,14 +74,12 @@ Item {
 		}
 	}
 
-	// Opaque backgrounds, so that page contents disappear behind the status bar and nav bar when scrolled.
-	Rectangle {
-		anchors.fill: statusBar
-		color: root.backgroundColor
-	}
+	// Opaque background, so that page contents disappear behind the status bar when scrolled.
 	Rectangle {
 		anchors.fill: navBar
 		color: root.backgroundColor
+		opacity: navBar.opacity
+		visible: navBar.visible
 	}
 
 	StatusBar {
@@ -91,6 +89,7 @@ Item {
 		leftButton: !!pageStack.currentItem ? pageStack.currentItem.topLeftButton : VenusOS.StatusBar_LeftButton_None
 		rightButton: !!pageStack.currentItem ? pageStack.currentItem.topRightButton : VenusOS.StatusBar_RightButton_None
 		animationEnabled: BackendConnection.applicationVisible
+		color: root.backgroundColor
 
 		onLeftButtonClicked: {
 			switch (leftButton) {
