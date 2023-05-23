@@ -134,12 +134,18 @@ Page {
 				- Theme.geometry.navigationBar.height
 				- Theme.geometry.overviewPage.layout.compact.topMargin
 				- Theme.geometry.overviewPage.layout.compact.bottomMargin
+		if (compactPageHeight !== Theme.geometry.overviewPage.widget.compact.xl.height) {
+			console.log("Warning: theme constants need to be updated.")
+		}
 		const compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
 
 		const expandedPageHeight = Theme.geometry.screen.height
 				- Theme.geometry.statusBar.height
 				- Theme.geometry.overviewPage.layout.expanded.topMargin
 				- Theme.geometry.overviewPage.layout.expanded.bottomMargin
+		if (expandedPageHeight !== Theme.geometry.overviewPage.widget.expanded.xl.height) {
+			console.log("Warning: theme constants need to be updated.")
+		}
 		const expandedWidgetsTopMargin = Math.max(0, (expandedPageHeight - expandedWidgetHeights) / Math.max(1, widgets.length - 1))
 
 		// Set widget y and height
