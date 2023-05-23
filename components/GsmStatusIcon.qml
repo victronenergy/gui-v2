@@ -33,15 +33,15 @@ Row {
 
 	visible: simStatus.valid
 
-	Text {
+	Label {
 		id: gsmStatusText
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.settingspage.gsmModem.icon.statusText.topMargin
+			topMargin: Theme.geometry.settings.gsmModem.icon.statusText.topMargin
 		}
 		text: (roaming.valid && roaming.value) ? "R" : Utils.simplifiedNetworkType(networkType.value)
-		color: Theme.color.settings.gsmmodem.signalstrength.active
+		color: Theme.color.settings.gsmModem.signalStrength.active
 		verticalAlignment: Text.AlignTop
 		visible: !simLockedIcon.visible && ((roaming.valid && roaming.value) || (connected.valid && connected.value))
 		font {
@@ -52,12 +52,12 @@ Row {
 	Row {
 		id: gsmRow
 
-		spacing: Theme.geometry.settingspage.gsmModem.signalStrengthBars.spacing
+		spacing: Theme.geometry.settings.gsmModem.signalStrengthBars.spacing
 		visible: !simLockedIcon.visible
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.settingspage.gsmModem.signalStrengthBars.topMargin
+			topMargin: Theme.geometry.settings.gsmModem.signalStrengthBars.topMargin
 			bottom: parent.bottom
 		}
 
@@ -68,11 +68,11 @@ Row {
 
 			Rectangle {
 				y: parent.height - height
-				height: (index + 1) * Theme.geometry.settingspage.gsmModem.signalStrengthBars.bar.incremental.height
-				width: Theme.geometry.settingspage.gsmModem.signalStrengthBars.bar.width
+				height: (index + 1) * Theme.geometry.settings.gsmModem.signalStrengthBars.bar.incremental.height
+				width: Theme.geometry.settings.gsmModem.signalStrengthBars.bar.width
 				radius: width / 2
 				color: getScaledStrength(strength.value) >= (index + 1) ?
-						   Theme.color.settings.gsmmodem.signalstrength.active : Theme.color.settings.gsmmodem.signalstrength.inactive
+						   Theme.color.settings.gsmModem.signalStrength.active : Theme.color.settings.gsmModem.signalStrength.inactive
 			}
 		}
 	}
@@ -81,7 +81,7 @@ Row {
 		id: simLockedIcon
 
 		anchors.verticalCenter: parent.verticalCenter
-		color: Theme.color.settings.gsmmodem.signalstrength.active
+		color: Theme.color.settings.gsmModem.signalStrength.active
 		source: "qrc:/images/icon_simlocked_32.svg"
 		visible: [11, 16].indexOf(simStatus.value) > -1
 	}

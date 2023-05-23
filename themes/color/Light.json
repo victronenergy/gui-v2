@@ -118,6 +118,6 @@
 
     "color.notificationsPage.text.color": "color.gray4",
 
-    "color.settings.gsmmodem.signalstrength.inactive": "color.darkGray2",
-    "color.settings.gsmmodem.signalstrength.active": "color.gray2"
+    "color.settings.gsmModem.signalStrength.inactive": "color.darkGray2",
+    "color.settings.gsmModem.signalStrength.active": "color.gray2"
 }

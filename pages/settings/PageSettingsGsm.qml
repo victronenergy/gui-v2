@@ -68,12 +68,12 @@ Page {
 				content.children: [
 					Item {
 						anchors.verticalCenter: parent.verticalCenter
-						width: Theme.geometry.settingspage.gsmModem.icon.container.width
-						height: Theme.geometry.settingspage.gsmModem.icon.container.height
+						width: Theme.geometry.settings.gsmModem.icon.container.width
+						height: Theme.geometry.settings.gsmModem.icon.container.height
 
 						GsmStatusIcon {
 							id: gsmStatusIcon
-							height: Theme.geometry.settingspage.gsmModem.icon.height
+							height: Theme.geometry.settings.gsmModem.icon.height
 							anchors.centerIn: parent
 						}
 					}
