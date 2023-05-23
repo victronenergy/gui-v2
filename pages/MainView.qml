@@ -127,7 +127,7 @@ Item {
 		}
 
 		y: root.height + 4  // nudge below the visible area for wasm
-		width: parent.width - (2 * x)
+		width: parent.width - (2 * Theme.geometry.page.content.horizontalMargin)
 		opacity: 0
 
 		onCurrentIndexChanged: {
