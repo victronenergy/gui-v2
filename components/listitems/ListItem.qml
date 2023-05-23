@@ -13,6 +13,7 @@ Item {
 	property bool down
 	property alias backgroundRect: backgroundRect
 	property int spacing: Theme.geometry.gradientList.spacing
+	property real textOffset: 0
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer
@@ -65,7 +66,7 @@ Item {
 			left: parent.left
 			leftMargin: Theme.geometry.listItem.content.horizontalMargin
 			verticalCenter: parent.verticalCenter
-			verticalCenterOffset: -root.spacing/2
+			verticalCenterOffset: -root.spacing/2 - root.textOffset
 		}
 		font.pixelSize: Theme.font.size.body2
 		wrapMode: Text.Wrap
@@ -78,7 +79,8 @@ Item {
 		anchors {
 			right: parent.right
 			rightMargin: Theme.geometry.listItem.content.horizontalMargin
-			verticalCenter: primaryLabel.verticalCenter
+			verticalCenter: parent.verticalCenter
+			verticalCenterOffset: -root.spacing/2
 		}
 		spacing: Theme.geometry.listItem.content.spacing
 		width: Math.min(implicitWidth, root.maximumContentWidth)
