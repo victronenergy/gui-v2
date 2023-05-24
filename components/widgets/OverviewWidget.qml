@@ -23,8 +23,6 @@ Rectangle {
 	property real expandedY
 	readonly property int compactHeight: getCompactHeight(size)
 	readonly property int expandedHeight: getExpandedHeight(size)
-	property real segmentCompactMargin
-	property real segmentExpandedMargin
 	property bool expanded
 	property bool animateGeometry
 	property bool animationEnabled
