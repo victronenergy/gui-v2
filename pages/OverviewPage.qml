@@ -161,10 +161,6 @@ Page {
 				widget.compactY = 0
 				widget.expandedY = 0
 			}
-
-			// Position the segment border correctly when showing as segments.
-			widget.segmentCompactMargin = compactWidgetsTopMargin
-			widget.segmentExpandedMargin = expandedWidgetsTopMargin
 		}
 
 		// Set widget x and width
