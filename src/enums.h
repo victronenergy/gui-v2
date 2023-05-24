@@ -300,13 +300,6 @@ public:
 	};
 	Q_ENUM(PageManager_InteractionMode)
 
-	enum SystemSettings_DemoMode {
-		SystemSettings_DemoModeInactive,
-		SystemSettings_DemoModeActive,
-		SystemSettings_DemoModeUnknown = 255
-	};
-	Q_ENUM(SystemSettings_DemoMode)
-
 	enum DVCC_Mode {
 		DVCC_ForcedOff = 2,
 		DVCC_ForcedOn = 3

@@ -16,10 +16,6 @@ QtObject {
 		 source: "com.victronenergy.settings/Settings/System/AccessLevel"
 	}
 
-	property DataPoint demoMode: DataPoint {
-		 source: "com.victronenergy.settings/Settings/Gui/DemoMode"
-	}
-
 	property DataPoint colorScheme: DataPoint {
 		 source: "com.victronenergy.settings/Settings/Gui/ColorScheme"
 		 onValueChanged: {

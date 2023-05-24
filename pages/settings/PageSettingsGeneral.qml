@@ -81,21 +81,30 @@ Page {
 					source: "com.victronenergy.system/Buzzer/State"
 				}
 			}
-
-			ListSwitch {
+			ListRadioButtonGroup {
 				//% "Demo mode"
 				text: qsTrId("settings_demo_mode")
-				checked: Global.systemSettings.demoMode.value === VenusOS.SystemSettings_DemoModeActive
-				updateOnClick: false
-				onClicked: {
-					// TODO clarify - do we need same demo modes as gui-v1? Those trigger demos via scripts in dbus-recorder/.
-					if (checked && BackendConnection.state !== BackendConnection.Ready && BackendConnection.state !== BackendConnection.Connecting) {
-						//% "No backend source available. Demo mode cannot be deactivated!"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_general_no_backend_source"))
-						return
+				height: implicitHeight + demoModeCaption.height
+				primaryLabel.anchors.verticalCenterOffset: -(demoModeCaption.height / 2)
+				dataSource: "com.victronenergy.settings/Settings/Gui/DemoMode"
+				optionModel: [
+					{ display: CommonWords.disabled, value: 0 },
+					//% "ESS demo"
+					{ display: qsTrId("page_settings_demo_ess"), value: 1 },
+					//% "Boat/Motorhome demo 1"
+					{ display: qsTrId("page_settings_demo_1"), value: 2 },
+					//% "Boat/Motorhome demo 2"
+					{ display: qsTrId("page_settings_demo_2"), value: 3 },
+				]
+				ListLabel {
+					id: demoModeCaption
+
+					anchors {
+						bottom: parent.bottom
+						bottomMargin: Theme.geometry.listItem.content.verticalMargin
 					}
-					Global.systemSettings.demoMode.setValue(
-						checked ? VenusOS.SystemSettings_DemoModeInactive : VenusOS.SystemSettings_DemoModeActive)
+					//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
+					text: qsTrId("settings_demo_mode_caption")
 				}
 			}
 		}
