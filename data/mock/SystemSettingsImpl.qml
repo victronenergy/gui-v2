@@ -63,7 +63,6 @@ QtObject {
 	Component.onCompleted: {
 		// Settings that are converted for convenient UI access
 		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
-		Global.systemSettings.demoMode.setValue(VenusOS.SystemSettings_DemoModeActive)
 		Global.systemSettings.colorScheme.setValue(Theme.Light)
 		Global.systemSettings.electricalQuantity.setValue(VenusOS.Units_Watt)
 		Global.systemSettings.temperatureUnit.setValue(VenusOS.Units_Temperature_Celsius)
@@ -76,6 +75,7 @@ QtObject {
 		setMockSettingValue("System/VncLocal", 1)
 		setMockSettingValue("SystemSetup/AcInput1", 2)
 		setMockSettingValue("SystemSetup/AcInput2", 3)
+		setMockSettingValue("Gui/DemoMode", 1)
 
 		setMockSystemValue("AvailableBatteryServices", '{"default": "Automatic", "nobattery": "No battery monitor", "com.victronenergy.vebus/257": "Quattro 24/3000/70-2x50 on VE.Bus", "com.victronenergy.battery/0": "Lynx Smart BMS 500 on VE.Can"}')
 		setMockSystemValue("AutoSelectedBatteryService", "Lynx Smart BMS 500 on VE.Can")
