@@ -9,6 +9,23 @@ import "/components/Utils.js" as Utils
 Page {
 	id: root
 
+	function timeAgo(timestamp) {
+		const timeNow = Math.round(new Date() / 1000)
+		let timeAgo = "--"
+		if (timestamp !== undefined && timestamp > 0) {
+			const point = timeNow - timestamp
+			if (point < 0) {
+				//: %1 = number of seconds
+				//% "Deferred by %1s"
+				timeAgo = qsTrId("settings_logging_time_ago_deferred").arg(Math.abs(point))
+			} else {
+				timeAgo = Utils.secondsToString(point)
+			}
+		}
+		return timeAgo
+
+	}
+
 	GradientListView {
 		id: settingsListView
 
@@ -77,7 +94,7 @@ Page {
 					running: parent.visible && root.animationEnabled
 					repeat: true
 					triggeredOnStart: true
-					onTriggered: parent.secondaryText = Utils.timeAgo(parent.dataValue)
+					onTriggered: parent.secondaryText = root.timeAgo(parent.dataValue)
 				}
 			}
 
@@ -227,7 +244,7 @@ Page {
 					running: !!parent.dataValue && root.animationEnabled
 					repeat: true
 					triggeredOnStart: true
-					onTriggered: parent.secondaryText = Utils.timeAgo(parent.dataValue)
+					onTriggered: parent.secondaryText = root.timeAgo(parent.dataValue)
 				}
 			}
 		}
