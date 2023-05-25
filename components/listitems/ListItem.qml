@@ -10,10 +10,11 @@ Item {
 
 	property alias text: primaryLabel.text
 	property alias content: content
+	property alias bottomContent: bottomContent
 	property bool down
 	property alias backgroundRect: backgroundRect
 	property int spacing: Theme.geometry.gradientList.spacing
-	property real textOffset: 0
+	property int bottomContentMargin: Theme.geometry.listItem.content.spacing
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer
@@ -23,8 +24,10 @@ Item {
 	readonly property bool defaultVisible: userHasReadAccess
 	readonly property alias primaryLabel: primaryLabel
 	readonly property int defaultImplicitHeight: visible
-		? Math.max(primaryLabel.implicitHeight + Theme.geometry.listItem.content.verticalMargin * 2,
-				   content.height,
+		? Math.max(Math.max(primaryLabel.implicitHeight + Theme.geometry.listItem.content.verticalMargin*2, content.height)
+					+ (bottomContent.height > 0
+							? bottomContent.height + bottomContentMargin
+							: 0),
 				   Theme.geometry.listItem.height)
 		: 0
 
@@ -32,7 +35,7 @@ Item {
 	property int maximumContentWidth: availableWidth * 0.7
 
 	implicitWidth: parent ? parent.width : 0
-	implicitHeight: defaultImplicitHeight
+	implicitHeight: visible ? defaultImplicitHeight : 0
 	visible: defaultVisible
 
 	ListItemBackground {
@@ -66,11 +69,14 @@ Item {
 			left: parent.left
 			leftMargin: Theme.geometry.listItem.content.horizontalMargin
 			verticalCenter: parent.verticalCenter
-			verticalCenterOffset: -root.spacing/2 - root.textOffset
+			verticalCenterOffset: -root.spacing/2
+				- (bottomContent.height > 0
+						? bottomContent.height/2 + bottomContentMargin/2
+						: 0)
 		}
 		font.pixelSize: Theme.font.size.body2
 		wrapMode: Text.Wrap
-		width: Math.min(implicitWidth, root.availableWidth, root.availableWidth - content.width)
+		width: root.availableWidth - content.width
 	}
 
 	Row {
@@ -79,10 +85,16 @@ Item {
 		anchors {
 			right: parent.right
 			rightMargin: Theme.geometry.listItem.content.horizontalMargin
-			verticalCenter: parent.verticalCenter
-			verticalCenterOffset: -root.spacing/2
+			verticalCenter: primaryLabel.verticalCenter
 		}
 		spacing: Theme.geometry.listItem.content.spacing
 		width: Math.min(implicitWidth, root.maximumContentWidth)
+	}
+
+	Column {
+		id: bottomContent
+		y: Math.max(primaryLabel.y + primaryLabel.height + bottomContentMargin,
+			content.y + content.height + bottomContentMargin)
+		width: parent.width
 	}
 }

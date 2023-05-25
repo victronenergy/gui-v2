@@ -138,6 +138,19 @@ Page {
 				]
 			}
 
+			ListItem {
+				text: "Custom bottom content item"
+
+				bottomContent.children: [
+					ListLabel {
+						topPadding: 0
+						bottomPadding: 0
+						color: Theme.color.font.secondary
+						text: "Custom text label"
+					}
+				]
+			}
+
 			ListTextItem {
 				text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum occaecat cupidatat"
 				secondaryText: "Occaecat cupidatat"

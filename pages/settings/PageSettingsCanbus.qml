@@ -118,28 +118,23 @@ Page {
 				text: qsTrId("settings_canbus_unique_id_select")
 				visible: root._isVecan || root._isRvc
 				dataSource: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
-				height: visible ? (implicitHeight + uniqueIdDescriptionLabel.height) : 0
-				primaryLabel.anchors.verticalCenterOffset: -(uniqueIdDescriptionLabel.height / 2)
+
+				bottomContent.children: ListLabel {
+					visible: text.length > 0
+					color: Theme.color.font.secondary
+					text: root._isVecan
+						//% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
+						? qsTrId("settings_canbus_unique_id_vecan_description")
+						: root._isRvc
+							//% "Above selector sets which block of unique identity numbers to use for the Serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network."
+							? qsTrId("settings_canbus_unique_id_rvc_description")
+							: ""
+				}
 
 				onSelectorAccepted: {
 					//% "Please wait, changing and checking the unique number takes a while"
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_canbus_unique_id_wait"), 5000)
 					uniqueCheck.startCheck(3)
-				}
-
-				ListLabel {
-					id: uniqueIdDescriptionLabel
-
-					anchors {
-						bottom: parent.bottom
-						bottomMargin: Theme.geometry.listItem.content.verticalMargin
-					}
-					text: root._isVecan
-						  //% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
-						? qsTrId("settings_canbus_unique_id_vecan_description")
-						  //% "Above selector sets which block of unique identity numbers to use for the Serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network."
-						: qsTrId("settings_canbus_unique_id_rvc_description")
-					visible: root._isVecan || root._isRvc
 				}
 			}
 
@@ -167,6 +162,25 @@ Page {
 							+ (uniqueIdOkLabel.visible ? uniqueIdOkLabel.height : 0))
 						: 0
 
+				bottomContent.children: [
+					ListLabel {
+						id: uniqueIdConflictLabel
+						topPadding: 0
+						bottomPadding: 0
+						//% "There is another device connected with this unique number, please select a new number."
+						text: qsTrId("settings_canbus_unique_id_conflict")
+						visible: vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1
+					},
+					ListLabel {
+						id: uniqueIdOkLabel
+						topPadding: 0
+						bottomPadding: 0
+						//% "OK: No other device is connected with this unique number."
+						text: qsTrId("settings_canbus_unique_id_ok")
+						visible: (vecanSameUniqueNameUsed.value === 0 || rvcSameUniqueNameUsed.value === 0) && uniqueCheck.testDone
+					}
+				]
+
 				onClicked: {
 					if (root._isRvc) {
 						rvcSameUniqueNameUsed.setValue(0)
@@ -189,30 +203,6 @@ Page {
 							uniqueCheck.testDone = true
 						}
 					}
-				}
-
-				ListLabel {
-					id: uniqueIdConflictLabel
-
-					anchors {
-						bottom: parent.bottom
-						bottomMargin: Theme.geometry.listItem.content.verticalMargin
-					}
-					//% "There is another device connected with this unique number, please select a new number."
-					text: qsTrId("settings_canbus_unique_id_conflict")
-					visible: vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1
-				}
-
-				ListLabel {
-					id: uniqueIdOkLabel
-
-					anchors {
-						bottom: parent.bottom
-						bottomMargin: Theme.geometry.listItem.content.verticalMargin
-					}
-					//% "OK: No other device is connected with this unique number."
-					text: qsTrId("settings_canbus_unique_id_ok")
-					visible: (vecanSameUniqueNameUsed.value === 0 || rvcSameUniqueNameUsed.value === 0) && uniqueCheck.testDone
 				}
 			}
 

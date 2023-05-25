@@ -80,16 +80,12 @@ Page {
 				//% "Enable on LAN"
 				text: qsTrId("settings_remoteconsole_enable_on_lan")
 				dataSource: "com.victronenergy.settings/Settings/System/VncLocal"
-				height: implicitHeight + vncOnLanCaption.height
-				primaryLabel.anchors.verticalCenterOffset: -(vncOnLanCaption.height / 2)
 
-				ListLabel {
-					id: vncOnLanCaption
-
-					anchors {
-						bottom: parent.bottom
-						bottomMargin: Theme.geometry.listItem.content.verticalMargin
-					}
+				bottomContent.children: ListLabel {
+					visible: text.length > 0
+					topPadding: 0
+					bottomPadding: 0
+					color: Theme.color.font.secondary
 					//% "Security warning: only enable the console on LAN when the GX device is connected to a trusted network."
 					text: qsTrId("settings_remoteconsole_enable_on_lan_warning")
 				}

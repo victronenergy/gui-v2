@@ -38,8 +38,17 @@ Page {
 
 			readonly property string servicePath: "com.victronenergy.modbustcp/Services/" + model.index
 
-			height: implicitHeight + serviceDetails.height
 			text: root._formatName(productName.value, serviceName.value)
+
+			bottomContent.children: [
+				ListTextItem {
+					id: serviceDetails
+					implicitHeight: serviceDetails.primaryLabel.height
+					text: root._shortServiceName(serviceName.value)
+					//% "Unit ID: %1"
+					secondaryText: qsTrId("settings_modbus_unit_id").arg(unitId.value)
+				}
+			]
 
 			DataPoint {
 				id: serviceName
@@ -55,15 +64,6 @@ Page {
 			DataPoint {
 				id: unitId
 				source: serviceDelegate.servicePath + "/UnitId"
-			}
-
-			ListTextItem {
-				id: serviceDetails
-
-				anchors.bottom: parent.bottom
-				text: root._shortServiceName(serviceName.value)
-				//% "Unit ID: %1"
-				secondaryText: qsTrId("settings_modbus_unit_id").arg(unitId.value)
 			}
 		}
 	}
