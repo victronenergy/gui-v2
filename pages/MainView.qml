@@ -76,7 +76,12 @@ Item {
 
 	// Opaque background, so that page contents disappear behind the status bar when scrolled.
 	Rectangle {
-		anchors.fill: navBar
+		anchors {
+			bottom: parent.bottom
+			left: parent.left
+			right: parent.right
+			top: navBar.top
+		}
 		color: root.backgroundColor
 		opacity: navBar.opacity
 		visible: navBar.visible
