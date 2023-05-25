@@ -156,10 +156,8 @@ Page {
 				text: "RX"
 				height: implicitHeight + rxErrorGroup.height
 
-				ListTextGroup {
+				bottomContent.children: ListTextGroup {
 					id: rxErrorGroup
-
-					anchors.bottom: parent.bottom
 				}
 			}
 
@@ -169,10 +167,8 @@ Page {
 				text: "TX"
 				height: implicitHeight + txErrorGroup.height
 
-				ListTextGroup {
+				bottomContent.children: ListTextGroup {
 					id: txErrorGroup
-
-					anchors.bottom: parent.bottom
 				}
 			}
 		}

@@ -19,8 +19,6 @@ Page {
 			ListSpinBox {
 				id: gridSetpoint
 
-				height: implicitHeight + gridSetpointSlider.height
-				primaryLabel.anchors.verticalCenterOffset: -(gridSetpointSlider.height / 2)
 				text: root.title
 				dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
 				suffix: "W"
@@ -28,18 +26,17 @@ Page {
 				to: 15000
 				stepSize: 10
 
-				SettingsSlider {
-					id: gridSetpointSlider
+				bottomContent.children: [
+					SettingsSlider {
+						id: gridSetpointSlider
 
-					anchors {
-						bottom: parent.bottom
-						bottomMargin: Theme.geometry.listItem.content.verticalMargin
+						width: parent.width
+						dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
+						from: -15000
+						to: 15000
+						stepSize: 50
 					}
-					dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
-					from: -15000
-					to: 15000
-					stepSize: 50
-				}
+				]
 			}
 
 			ListTextItem {

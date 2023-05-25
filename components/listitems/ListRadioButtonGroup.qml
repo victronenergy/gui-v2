@@ -77,9 +77,6 @@ ListNavigationItem {
 					text: Array.isArray(root.optionModel)
 						  ? modelData.display || ""
 						  : model.display || ""
-					caption.text: Array.isArray(root.optionModel)
-						  ? modelData.caption || ""
-						  : model.caption || ""
 					enabled: Array.isArray(root.optionModel)
 						  ? !modelData.readOnly
 						  : !model.readOnly
@@ -87,6 +84,16 @@ ListNavigationItem {
 					showAccessLevel: root.showAccessLevel
 					writeAccessLevel: root.writeAccessLevel
 					C.ButtonGroup.group: radioButtonGroup
+
+					bottomContent.children: ListLabel {
+						visible: text.length > 0
+						topPadding: 0
+						bottomPadding: 0
+						color: Theme.color.font.secondary
+						text: Array.isArray(root.optionModel)
+								? modelData.caption || ""
+								: model.caption || ""
+					}
 
 					onClicked: {
 						if (root.updateOnClick) {
