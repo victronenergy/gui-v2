@@ -17,4 +17,15 @@ QtObject {
 			serviceUid: model.uid
 		}
 	}
+
+	property Instantiator multiRsBatteryObjects: Instantiator {
+		model: VeQItemTableModel {
+			uids: ["mqtt/multi"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: Battery {
+			serviceUid: model.uid
+		}
+	}
 }

@@ -20,4 +20,17 @@ QtObject {
 			serviceUid: model.uid
 		}
 	}
+
+	property Instantiator multiRsBatteryObjects: Instantiator {
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.multi\."
+			model: Global.dataServiceModel
+		}
+
+		delegate: Battery {
+			serviceUid: model.uid
+		}
+	}
 }
