@@ -8,8 +8,6 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
-	property int systemState
-
 	//% "Inverter / Charger"
 	title: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
@@ -19,14 +17,15 @@ OverviewWidget {
 
 	extraContent.children: [
 		Label {
-			id: statusLabel
 			anchors {
 				left: parent.left
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				right: parent.right
+				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
 			font.pixelSize: Theme.font.overviewPage.widget.quantityLabel.maximumSize
-
-			text: Global.inverters.inverterStateToText(root.systemState)
+			text: Global.system.systemStateToText(Global.system.state)
+			wrapMode: Text.Wrap
 		}
 	]
 }
