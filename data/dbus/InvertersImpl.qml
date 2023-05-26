@@ -10,11 +10,24 @@ import "../common"
 QtObject {
 	id: root
 
-	property Instantiator inverterObjects: Instantiator {
+	property Instantiator vebusInverterObjects: Instantiator {
 		model: VeQItemSortTableModel {
 			dynamicSortFilter: true
 			filterRole: VeQItemTableModel.UniqueIdRole
 			filterRegExp: "^dbus/com\.victronenergy\.vebus\."
+			model: Global.dataServiceModel
+		}
+
+		delegate: Inverter {
+			serviceUid: model.uid
+		}
+	}
+
+	property Instantiator multiRsInverterObjects: Instantiator {
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.multi\."
 			model: Global.dataServiceModel
 		}
 
