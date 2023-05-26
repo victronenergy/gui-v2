@@ -24,7 +24,7 @@ ListNavigationItem {
 
 	property var optionModel: []
 	property int currentIndex: {
-		if (!optionModel || optionModel.length === undefined || source.length === 0 || !dataValid) {
+		if (!optionModel || optionModel.length === undefined || dataSource.length === 0 || !dataValid) {
 			return defaultIndex
 		}
 		for (let i = 0; i < optionModel.length; ++i) {
@@ -90,7 +90,7 @@ ListNavigationItem {
 
 					onClicked: {
 						if (root.updateOnClick) {
-							if (source.length > 0) {
+							if (dataSource.length > 0) {
 								dataPoint.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
 							} else {
 								root.currentIndex = model.index
