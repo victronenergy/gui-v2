@@ -237,20 +237,34 @@ public:
 	};
 	Q_ENUM(Relays_State)
 
+	// Values are from gui-v1 SystemState.qml
 	enum System_State {
-		System_State_Off = 0,
-		System_State_LowPower,
-		System_State_FaultCondition,
-		System_State_BulkCharging,
-		System_State_AbsorptionCharging,
-		System_State_FloatCharging,
-		System_State_StorageMode,
-		System_State_EqualizationCharging,
-		System_State_PassThrough,
-		System_State_Inverting,
-		System_State_Assisting,
-		System_State_Discharging = 256,
-		System_State_Sustain = 257
+		System_State_Off = 0x00,
+		System_State_LowPower = 0x01,
+		System_State_FaultCondition = 0x02,
+		System_State_BulkCharging = 0x03,
+		System_State_AbsorptionCharging = 0x04,
+		System_State_FloatCharging = 0x05,
+		System_State_StorageMode = 0x06,
+		System_State_EqualizationCharging = 0x07,
+		System_State_PassThrough = 0x08,
+		System_State_Inverting = 0x09,
+		System_State_Assisting = 0x0A,
+		System_State_PowerSupplyMode = 0x0B,
+
+		System_State_Wakeup = 0xF5,
+		System_State_RepeatedAbsorption = 0xF6,
+		System_State_AutoEqualize = 0xF7,
+		System_State_BatterySafe = 0xF8,
+		System_State_LoadDetect = 0xF9,
+		System_State_Blocked = 0xFA,
+		System_State_Test = 0xFB,
+		System_State_ExternalControl = 0xFC,
+
+		System_State_Discharging = 0x100,
+		System_State_Sustain = 0x101,
+		System_State_Recharge = 0x102,
+		SystemState_ScheduledCharge = 0x103
 	};
 	Q_ENUM(System_State)
 

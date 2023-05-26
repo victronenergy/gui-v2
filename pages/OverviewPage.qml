@@ -591,7 +591,6 @@ Page {
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 		animationEnabled: root.animationEnabled
-		systemState: Global.system.state
 		connectors: [ inverterToAcLoadsConnector, inverterToBatteryConnector ]
 
 		WidgetConnectorAnchor {

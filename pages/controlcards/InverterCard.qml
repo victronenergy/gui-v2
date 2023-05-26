@@ -15,7 +15,10 @@ ControlCard {
 	title.icon.source: "qrc:/images/inverter_charger.svg"
 	//% "Inverter / Charger"
 	title.text: qsTrId("controlcard_inverter_charger")
-	status.text: Global.inverters.inverterStateToText(inverter.state)
+
+	// VE.Bus state is a subset of the aggregated system state, so use the same systemStateToText()
+	// function to get a text description.
+	status.text: Global.system.systemStateToText(inverter.state)
 
 	Component {
 		id: currentLimitDialogComponent
