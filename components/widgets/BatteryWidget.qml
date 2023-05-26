@@ -15,7 +15,7 @@ OverviewWidget {
 
 	readonly property int _normalizedStateOfCharge: batteryData
 			&& !isNaN(batteryData.stateOfCharge) ? Math.round(batteryData.stateOfCharge) : 0
-	readonly property bool _animationReady: animationEnabled && batteryData && !isNaN(batteryData.stateOfCharge)
+	readonly property bool _animationReady: animationEnabled && !!batteryData && !isNaN(batteryData.stateOfCharge)
 
 	title: CommonWords.battery
 	icon.source: batteryData ? batteryData.icon : ""

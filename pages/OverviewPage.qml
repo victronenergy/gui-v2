@@ -572,7 +572,7 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				visible: !isNaN(Global.solarChargers.dcPower)
+				visible: defaultVisible && !isNaN(Global.solarChargers.dcPower)
 				expanded: Global.pageManager.expandLayout
 				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 				animationEnabled: root.animationEnabled
@@ -587,7 +587,7 @@ Page {
 		}
 	}
 
-	// the two central widgets are always present
+	// the two central widgets are always laid out, even if they are not visible
 	InverterWidget {
 		id: inverterWidget
 
@@ -611,6 +611,7 @@ Page {
 		}
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Bottom
+			visible: inverterToBatteryConnector.visible
 		}
 	}
 	WidgetConnector {
@@ -663,6 +664,7 @@ Page {
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 		animationEnabled: root.animationEnabled
 		connectors: [ batteryToDcLoadsConnector ]
+		visible: !!Global.batteries.first
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
