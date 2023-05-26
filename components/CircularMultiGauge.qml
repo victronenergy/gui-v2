@@ -106,7 +106,7 @@ Item {
 					horizontalAlignment: Text.AlignRight
 					font.pixelSize: Theme.font.size.body2
 					color: Theme.color.font.primary
-					visible: Global.systemSettings.briefView.showPercentages.value
+					visible: Global.systemSettings.briefView.showPercentages.value === true
 					//% "%1%"
 					text: qsTrId("%1%").arg(isNaN(model.value) ? 0 : Math.round(model.value))
 				}

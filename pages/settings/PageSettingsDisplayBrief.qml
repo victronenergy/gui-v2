@@ -49,7 +49,7 @@ Page {
 			//: Show percentage values in Brief view
 			//% "Show %"
 			text: qsTrId("settings_briefview_show_percentage")
-			checked: Global.systemSettings.briefView.showPercentages.value
+			checked: Global.systemSettings.briefView.showPercentages.value === true
 			onClicked: Global.systemSettings.briefView.showPercentages.setValue(checked)
 		}
 	}
