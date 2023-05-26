@@ -20,11 +20,22 @@ QtObject {
 
 	property Instantiator chargerObjects: Instantiator {
 		model: VeQItemSortTableModel {
-			id: solarChargerModel
-
 			dynamicSortFilter: true
 			filterRole: VeQItemTableModel.UniqueIdRole
 			filterRegExp: "^dbus/com\.victronenergy\.solarcharger\."
+			model: Global.dataServiceModel
+		}
+
+		delegate: SolarCharger {
+			serviceUid: model.uid
+		}
+	}
+
+	property Instantiator multiRsChargerObjects: Instantiator {
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.multi\."
 			model: Global.dataServiceModel
 		}
 

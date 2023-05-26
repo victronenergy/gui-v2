@@ -29,4 +29,15 @@ QtObject {
 			serviceUid: model.uid
 		}
 	}
+
+	property Instantiator multiRsChargerObjects: Instantiator {
+		model: VeQItemTableModel {
+			uids: ["mqtt/multi"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: SolarCharger {
+			serviceUid: model.uid
+		}
+	}
 }
