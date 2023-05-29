@@ -1,4 +1,7 @@
 {
+    "font.briefPage.battery.percentage.pixelSize": "font.size.h5",
+    "font.briefPage.battery.timeToGo.pixelSize": "font.size.body2",
+    "font.briefPage.battery.voltage.pixelSize": "font.size.h1",
     "font.briefPage.quantityLabel.size": "font.size.h2",
     "font.briefPage.sidePanel.forecastRow.today.temperature.size": "font.size.h2",
     "font.briefPage.sidePanel.forecastRow.today.date.size": "font.size.body3",

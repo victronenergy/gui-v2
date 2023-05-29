@@ -68,6 +68,23 @@ function findIndex(container, value) {
 	return -1
 }
 
+function decomposeDurationDaysHoursMinutes(seconds) {
+	const secondsPerDay = (24 * 60 * 60)
+
+	const d = Math.floor(seconds / secondsPerDay)
+	seconds = seconds - (d * secondsPerDay)
+
+	const h = Math.floor(seconds / 3600)
+	seconds = seconds - (h * 3600)
+
+	const m = Math.floor(seconds / 60)
+	return {
+		d: d,
+		h: h,
+		m: m
+	}
+}
+
 function decomposeDuration(seconds) {
 	const h = Math.floor(seconds / 3600)
 	const m = Math.floor((seconds - (h * 3600)) / 60)

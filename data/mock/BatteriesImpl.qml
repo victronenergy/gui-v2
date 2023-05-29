@@ -14,7 +14,7 @@ QtObject {
 		property real power: voltage * current
 		property real current: 14.243
 		property real temperature_celsius: 28.33
-		property real timeToGo: 190 * 60
+		property real timeToGo: (24 * 60 * 60) + 190 * 60 // 1d 3h 10m
 		readonly property string icon: (power === 0 || power === NaN)
 				? "/images/battery.svg"
 				: power > 0
