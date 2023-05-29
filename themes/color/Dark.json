@@ -90,6 +90,8 @@
     "color.overviewPage.widget.battery.animatedBar": "#7394bd",
 
     "color.briefPage.background": "color.black",
+    "color.briefPage.battery.value.text.color": "color.gray5",
+    "color.briefPage.battery.unit.text.color": "color.gray4",
     "color.briefPage.circularGauge.shine": "#BBFFFFFF",
     "color.briefPage.sidePanel.forecast.separator": "color.darkWhite",
     "color.briefPage.sidePanel.loadGraph.dotColor": "color.gray3",

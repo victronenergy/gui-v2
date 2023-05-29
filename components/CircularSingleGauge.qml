@@ -13,6 +13,8 @@ Item {
 
 	property alias icon: icon
 	property alias name: nameLabel.text
+	property alias voltage: voltageLabel.value
+	property alias current: currentLabel.value
 	property alias value: arc.value
 	property int status
 	property alias caption: captionLabel.text
@@ -45,7 +47,11 @@ Item {
 	}
 
 	Column {
-		anchors.centerIn: parent
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry.briefPage.centerGauge.centerText.topMargin
+			horizontalCenter: parent.horizontalCenter
+		}
 		spacing: Theme.geometry.briefPage.centerGauge.centerTextSpacing
 
 		Row {
@@ -70,17 +76,40 @@ Item {
 
 		QuantityLabel {
 			anchors.horizontalCenter: parent.horizontalCenter
-			font.pixelSize: Theme.font.size.h5
+			font.pixelSize: Theme.font.briefPage.battery.percentage.pixelSize
 			unit: VenusOS.Units_Percentage
 			value: gauges.value
+		}
+
+		Row {
+			topPadding: Theme.geometry.briefPage.centerGauge.centerText.topPadding
+			anchors.horizontalCenter: parent.horizontalCenter
+			spacing: Theme.geometry.briefPage.centerGauge.centerText.horizontalSpacing
+
+			QuantityLabel {
+				id: voltageLabel
+
+				valueColor: Theme.color.briefPage.battery.value.text.color
+				unitColor: Theme.color.briefPage.battery.unit.text.color
+				font.pixelSize: Theme.font.briefPage.battery.voltage.pixelSize
+				unit: VenusOS.Units_Volt
+			}
+			QuantityLabel {
+				id: currentLabel
+
+				valueColor: Theme.color.briefPage.battery.value.text.color
+				unitColor: Theme.color.briefPage.battery.unit.text.color
+				font.pixelSize: Theme.font.briefPage.battery.voltage.pixelSize
+				unit: VenusOS.Units_Amp
+			}
 		}
 
 		Label {
 			id: captionLabel
 
 			anchors.horizontalCenter: parent.horizontalCenter
-			font.pixelSize: Theme.font.size.body1
-			color: Theme.color.font.secondary
+			font.pixelSize: Theme.font.briefPage.battery.timeToGo.pixelSize
+			color: Theme.color.briefPage.battery.value.text.color
 		}
 	}
 }
