@@ -109,7 +109,7 @@ protected:
 
 private:
 	void setHasNewNotifications(const bool hasNewNotifications);
-	bool m_hasNewNotifications;
+	bool m_hasNewNotifications = false;
 };
 
 class HistoricalNotificationsModel : public NotificationsModel
