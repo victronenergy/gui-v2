@@ -16,7 +16,7 @@ Page {
 				id: enableSwitch
 
 				text: CommonWords.enable
-				datadataSource: bindPrefix + "/TestRun/Enabled"
+				dataSource: bindPrefix + "/TestRun/Enabled"
 			}
 
 			ListSpinBox {
