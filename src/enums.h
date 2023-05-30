@@ -264,7 +264,7 @@ public:
 		System_State_Discharging = 0x100,
 		System_State_Sustain = 0x101,
 		System_State_Recharge = 0x102,
-		SystemState_ScheduledCharge = 0x103
+		System_State_ScheduledRecharge = 0x103
 	};
 	Q_ENUM(System_State)
 
