@@ -266,7 +266,9 @@
     "geometry.overviewPage.widget.battery.animatedBar.height": 4,
     "geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing": 4,
     "geometry.overviewPage.widget.battery.animatedBar.verticalSpacing": 4,
-    "geometry.overviewPage.widget.battery.bottomRow.bottomMargin": 8,
+    "geometry.overviewPage.widget.battery.bottomRow.bottomMargin": 9,
+    "geometry.overviewPage.widget.battery.temperature.topMargin": 10,
+    "geometry.overviewPage.widget.battery.temperature.rightMargin": 16,
 
     "geometry.overviewPage.widget.compact.xl.height": 472,
     "geometry.overviewPage.widget.compact.l.height": 192,

@@ -72,7 +72,7 @@ Page {
 		CircularSingleGauge {
 			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
 			readonly property var battery: Global.batteries.first
-			readonly property var timeToGo: Utils.decomposeDurationDaysHoursMinutes(battery.timeToGo)
+			readonly property var timeToGo: Global.batteries.daysHoursMinutesToGo
 
 			name: properties.name
 			icon.source: battery ? battery.icon : ""

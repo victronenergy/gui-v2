@@ -5,6 +5,7 @@
     "font.briefPage.quantityLabel.size": "font.size.body3",
     "font.briefPage.sidePanel.forecastRow.today.temperature.size": "font.size.body3",
     "font.briefPage.sidePanel.forecastRow.today.date.size": "font.size.body2",
+    "font.overviewPage.battery.timeToGo.pixelSize": "font.size.body1",
     "font.overviewPage.widget.quantityLabel.minimumSize": "font.size.body3",
     "font.overviewPage.widget.quantityLabel.maximumSize": "font.size.h1",
     "font.splashView.progressText.size": "font.size.caption"
