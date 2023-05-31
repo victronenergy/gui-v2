@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Utils.js" as Utils
 import "common"
 
 QtObject {
@@ -13,6 +14,8 @@ QtObject {
 		objectProperty: "battery"
 	}
 	property var first: model.firstObject
+
+	readonly property var daysHoursMinutesToGo: !!first && first.timeToGo ? Utils.decomposeDurationDaysHoursMinutes(first.timeToGo) : NaN
 
 	function addBattery(battery) {
 		model.addObject(battery)

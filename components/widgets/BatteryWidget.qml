@@ -202,82 +202,105 @@ OverviewWidget {
 		}
 	}
 
-	Label {
+	QuantityLabel {
+		id: batteryTempDisplay
+
 		anchors {
-			bottom: extraContent.top
-			bottomMargin: 2
+			top: parent.top
+			topMargin: Theme.geometry.overviewPage.widget.battery.temperature.topMargin
 			right: parent.right
-			rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+			rightMargin: Theme.geometry.overviewPage.widget.battery.temperature.rightMargin
 		}
 
-		text: batteryData && batteryData.timeToGo > 0 ? Utils.formatAsHHMM(batteryData.timeToGo, true) : ""
-		color: Theme.color.font.primary
+		value: batteryData
+			? Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+				? batteryData.temperature_celsius
+				: Units.celsiusToFahrenheit(batteryData.temperature_celsius))
+			: NaN
+		unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : VenusOS.Units_Temperature_Celsius
 		font.pixelSize: Theme.font.size.body2
 	}
 
 	extraContent.children: [
-		Label {
+		Column {
 			anchors {
 				top: parent.top
-				topMargin: Theme.geometry.overviewPage.widget.extraContent.topMargin
 				left: parent.left
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
-
-			text: batteryData && batteryData.mode === VenusOS.Battery_Mode_Idle
-					//% "Idle"
-				  ? qsTrId("overview_widget_battery_idle")
-				  : (batteryData && batteryData.mode === VenusOS.Battery_Mode_Charging
-					  //% "Charging"
-					? qsTrId("overview_widget_battery_charging")
-					  //% "Discharging"
-					: qsTrId("overview_widget_battery_discharging"))
-			font.pixelSize: Theme.font.size.body1
-			color: Theme.color.font.secondary
+			Label {
+				text: batteryData && batteryData.mode === VenusOS.Battery_Mode_Idle
+						//% "Idle"
+					  ? qsTrId("overview_widget_battery_idle")
+					  : (batteryData && batteryData.mode === VenusOS.Battery_Mode_Charging
+						  //% "Charging"
+						? qsTrId("overview_widget_battery_charging")
+						  //% "Discharging"
+						: qsTrId("overview_widget_battery_discharging"))
+				font.pixelSize: Theme.font.size.body1
+				color: Theme.color.font.secondary
+			}
+			Label {
+				readonly property var timeToGo: Global.batteries.daysHoursMinutesToGo
+				text: {
+					if (!Global.batteries.first || !Global.batteries.first.timeToGo || Global.batteries.first.timeToGo < 0) {
+						return ""
+					} else if (timeToGo.d > 0) {
+						//% "%1d %2h %3m"
+						return qsTrId("battery_widget_time_to_go_days_hours_minutes").arg(timeToGo.d).arg(timeToGo.h).arg(timeToGo.m)
+					} else if (timeToGo.h > 0) {
+						//% "%2h %3m"
+						return qsTrId("battery_widget_time_to_go_hours_minutes").arg(timeToGo.h).arg(timeToGo.m)
+					} else {
+						//% "%3m"
+						return qsTrId("battery_widget_time_to_go_minutes").arg(timeToGo.m)
+					}
+				}
+				color: Theme.color.font.primary
+				font.pixelSize: Theme.font.overviewPage.battery.timeToGo.pixelSize
+			}
 		},
 
-		Row {
+		QuantityLabel {
+			id: batteryVoltageDisplay
+
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				bottom: parent.bottom
+				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
+			}
+
+			value: batteryData ? batteryData.voltage.toFixed(1) : NaN
+			unit: VenusOS.Units_Volt
+			font.pixelSize: Theme.font.size.body2
+		},
+
+		QuantityLabel {
+			id: batteryCurrentDisplay
+
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
+			value: batteryData ? batteryData.current.toFixed(1) : NaN
+			unit: VenusOS.Units_Amp
+			font.pixelSize: Theme.font.size.body2
+		},
 
-			width: root.width - Theme.geometry.overviewPage.widget.content.horizontalMargin*2
+		QuantityLabel {
+			id: batteryPowerDisplay
 
-			QuantityLabel {
-				id: batteryPowerDisplay
-
-				value: batteryData ? batteryData.voltage : NaN
-				unit: VenusOS.Units_Volt
-				font.pixelSize: Theme.font.size.body2
+			anchors {
+				right: parent.right
+				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				bottom: parent.bottom
+				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
-
-			Item {
-				height: batteryCurrentDisplay.height
-				width: parent.width - batteryPowerDisplay.width - batteryTempDisplay.width
-
-				QuantityLabel {
-					id: batteryCurrentDisplay
-
-					anchors.horizontalCenter: parent.horizontalCenter
-					value: batteryData ? batteryData.current : NaN
-					unit: VenusOS.Units_Amp
-					font.pixelSize: Theme.font.size.body2
-				}
-			}
-
-			QuantityLabel {
-				id: batteryTempDisplay
-
-				value: batteryData
-					? Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-						? batteryData.temperature_celsius
-						: Units.celsiusToFahrenheit(batteryData.temperature_celsius))
-					: NaN
-				unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : VenusOS.Units_Temperature_Celsius
-				font.pixelSize: Theme.font.size.body2
-			}
+			value: batteryData ? batteryData.power.toFixed(1) : NaN
+			unit: VenusOS.Units_Watt
+			font.pixelSize: Theme.font.size.body2
 		}
 	]
 }
