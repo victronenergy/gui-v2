@@ -33,7 +33,7 @@ Slider {
 	}
 
 	onValueChanged: function(value) {
-		if (source.length > 0) {
+		if (dataSource.length > 0) {
 			dataPoint.setValue(value)
 		}
 	}
