@@ -35,7 +35,7 @@ ListButton {
 
 		DateSelectorDialog {
 			onAccepted: {
-				if (source.length > 0) {
+				if (dataSource.length > 0) {
 					const seconds = date.getTime() / 1000
 					dataPoint.setValue(seconds)
 				} else {

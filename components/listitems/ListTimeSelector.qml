@@ -44,7 +44,7 @@ ListButton {
 			maximumMinute: root.maximumMinute
 
 			onAccepted: {
-				if (source.length > 0) {
+				if (dataSource.length > 0) {
 					const seconds = (minute * 60) + (hour * 60 * 60)
 					dataPoint.setValue(seconds)
 				} else {
