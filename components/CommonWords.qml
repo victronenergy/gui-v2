@@ -20,6 +20,9 @@ QtObject {
 	//% "AC Output"
 	readonly property string ac_output: qsTrId("common_words_ac_output")
 
+	//% "Auto"
+	readonly property string auto: qsTrId("common_words_auto")
+
 	//% "Automatic scanning"
 	readonly property string automatic_scanning: qsTrId("common_words_automatic_scanning")
 
@@ -39,6 +42,10 @@ QtObject {
 	//% "Current"
 	readonly property string current_amps: qsTrId("common_words_current_amps")
 
+	//: Title for device information
+	//% "Device"
+	readonly property string device_info_title: qsTrId("common_words_device")
+
 	//% "Disabled"
 	readonly property string disabled: qsTrId("common_words_disabled")
 
@@ -47,6 +54,10 @@ QtObject {
 
 	//% "Enabled"
 	readonly property string enabled: qsTrId("common_words_enabled")
+
+	//: Amount of charged energy for an EV charger
+	//% "Energy"
+	readonly property string energy_evcs: qsTrId("common_words_energy_evcs")
 
 	//% "Error"
 	readonly property string error: qsTrId("common_words_error")
@@ -60,28 +71,17 @@ QtObject {
 	//% "IP address"
 	readonly property string ip_address: qsTrId("common_words_ip_address")
 
+	//% "Manual"
+	readonly property string manual: qsTrId("common_words_manual")
+
+	//% "Mode"
+	readonly property string mode: qsTrId("common_words_mode")
+
 	//% "No"
 	readonly property string no: qsTrId("common_words_no")
 
 	//% "No error"
 	readonly property string no_error: qsTrId("common_words_no_error")
-
-	//: Electric power, as measured in Watts
-	//% "Power"
-	readonly property string power_watts: qsTrId("common_words_power_watts")
-
-	//% "Phase"
-	readonly property string phase: qsTrId("common_words_phase")
-
-	//% "Position"
-	readonly property string position: qsTrId("common_words_position")
-
-	//% "Press to scan"
-	readonly property string press_to_scan: qsTrId("common_words_press_to_scan")
-
-	//: Photovoltaic power (for a solar charger or tracker)
-	//% "PV Power"
-	readonly property string pv_power: qsTrId("common_words_pv_power")
 
 	//% "Off"
 	readonly property string off: qsTrId("common_words_off");
@@ -100,6 +100,23 @@ QtObject {
 
 	//% "Password"
 	readonly property string password: qsTrId("common_words_password")
+
+	//: Electric power, as measured in Watts
+	//% "Power"
+	readonly property string power_watts: qsTrId("common_words_power_watts")
+
+	//% "Phase"
+	readonly property string phase: qsTrId("common_words_phase")
+
+	//% "Position"
+	readonly property string position: qsTrId("common_words_position")
+
+	//% "Press to scan"
+	readonly property string press_to_scan: qsTrId("common_words_press_to_scan")
+
+	//: Photovoltaic power (for a solar charger or tracker)
+	//% "PV Power"
+	readonly property string pv_power: qsTrId("common_words_pv_power")
 
 	//% "Quiet hours"
 	readonly property string quiet_hours: qsTrId("common_words_quiet_hours")

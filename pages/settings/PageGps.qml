@@ -110,9 +110,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				//% "Device"
-				text: qsTrId("settings_gps_device")
-
+				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })

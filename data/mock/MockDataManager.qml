@@ -25,6 +25,7 @@ QtObject {
 			property var dcInputs: DcInputsImpl {}
 			property var environmentInputs: EnvironmentInputsImpl {}
 			property var ess: EssImpl {}
+			property var evChargers: EvChargersImpl {}
 			property var generators: GeneratorsImpl {}
 			property var inverters: InvertersImpl {}
 			property var notifications: NotificationsImpl {}

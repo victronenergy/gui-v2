@@ -16,6 +16,7 @@ Item {
 			&& !!Global.dcInputs
 			&& !!Global.environmentInputs
 			&& !!Global.ess
+			&& !!Global.evChargers
 			&& !!Global.generators
 			&& !!Global.inverters
 			&& !!Global.notifications
@@ -75,6 +76,7 @@ Item {
 	DcInputs {}
 	EnvironmentInputs {}
 	Ess {}
+	EvChargers {}
 	Generators {}
 	Inverters {}
 	Notifications {}

@@ -28,27 +28,21 @@ Rectangle {
 	property bool animationEnabled
 
 	function getCompactHeight(s) {
-		return s === VenusOS.OverviewWidget_Size_XL
-		  ? Theme.geometry.overviewPage.widget.compact.xl.height
-		  : s === VenusOS.OverviewWidget_Size_L
-			? Theme.geometry.overviewPage.widget.compact.l.height
-			: s === VenusOS.OverviewWidget_Size_M
-			  ? Theme.geometry.overviewPage.widget.compact.m.height
-			  : s === VenusOS.OverviewWidget_Size_S
-			  ? Theme.geometry.overviewPage.widget.compact.s.height
-			  : Theme.geometry.overviewPage.widget.compact.xs.height
+		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry.overviewPage.widget.compact.xl.height
+			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry.overviewPage.widget.compact.l.height
+			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry.overviewPage.widget.compact.m.height
+			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry.overviewPage.widget.compact.s.height
+			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry.overviewPage.widget.compact.xs.height
+			: 0
 	}
 
 	function getExpandedHeight(s) {
-		return s === VenusOS.OverviewWidget_Size_XL
-			? Theme.geometry.overviewPage.widget.expanded.xl.height
-			: s === VenusOS.OverviewWidget_Size_L
-			  ? Theme.geometry.overviewPage.widget.expanded.l.height
-			  : s === VenusOS.OverviewWidget_Size_M
-				? Theme.geometry.overviewPage.widget.expanded.m.height
-				: s === VenusOS.OverviewWidget_Size_S
-				? Theme.geometry.overviewPage.widget.expanded.s.height
-				: Theme.geometry.overviewPage.widget.expanded.xs.height
+		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry.overviewPage.widget.expanded.xl.height
+			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry.overviewPage.widget.expanded.l.height
+			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry.overviewPage.widget.expanded.m.height
+			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry.overviewPage.widget.expanded.s.height
+			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry.overviewPage.widget.expanded.xs.height
+			: 0
 	}
 
 	y: compactY

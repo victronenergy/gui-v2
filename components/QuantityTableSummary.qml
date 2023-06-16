@@ -10,8 +10,12 @@ Row {
 
 	property var model: []
 	property bool smallTextMode
+	property bool equalWidthColumns
 
 	function _quantityColumnWidth(unit) {
+		if (equalWidthColumns) {
+			return width / model.length
+		}
 		// "kWh" unit name is longer, so give that column more space.
 		const widthMultiplier = (unit === VenusOS.Units_Energy_KiloWattHour) ? 1.2 : 1
 		return ((width - Theme.geometry.quantityTable.header.widthBoost) / model.length) * widthMultiplier
@@ -21,6 +25,8 @@ Row {
 	height: quantityRow.height + (2 * Theme.geometry.quantityTableSummary.verticalMargin)
 
 	Item {
+		id: firstColumn
+
 		anchors.verticalCenter: parent.verticalCenter
 		width: root.width - quantityRow.width
 		height: firstColumnSubLabel.y + firstColumnSubLabel.height
@@ -60,7 +66,7 @@ Row {
 			width: parent.width
 			elide: Text.ElideRight
 			rightPadding: Theme.geometry.listItem.content.spacing
-			font.pixelSize: root.smallTextMode ? Theme.font.size.h1 : Theme.font.size.h2
+			font.pixelSize: Theme.font.size.h1
 			text: firstColumnSubLabel.text
 			color: firstColumnSubLabel.color
 			opacity: firstColumnTitleLabel.text.length ? 0 : 1
@@ -89,15 +95,45 @@ Row {
 					color: Theme.color.quantityTable.quantityValue
 				}
 
-				QuantityLabel {
+				Loader {
 					width: parent.width
-					alignment: Qt.AlignLeft
-					font.pixelSize: root.smallTextMode ? Theme.font.size.body2 : Theme.font.size.body3
-					value: root.model[model.index + 1].value
-					unit: root.model[model.index + 1].unit
+					sourceComponent: root.model[model.index + 1].text !== undefined ? textValueComponent : quantityValueComponent
+
+					Component {
+						id: textValueComponent
+
+						Row {
+							width: parent.width
+							spacing: Theme.geometry.quantityLabel.spacing
+
+							Label {
+								font.pixelSize: firstColumnSubLabel.font.pixelSize
+								text: root.model[model.index + 1].text
+							}
+
+							Label {
+								font.pixelSize: firstColumnSubLabel.font.pixelSize
+								text: root.model[model.index + 1].secondaryText
+								color: Theme.color.font.secondary
+
+							}
+						}
+					}
+
+					Component {
+						id: quantityValueComponent
+
+						QuantityLabel {
+							width: parent.width
+							height: firstColumnSubLabel.height  // align QuantityLabel with other labels
+							alignment: Qt.AlignLeft
+							font.pixelSize: firstColumnSubLabel.font.pixelSize
+							value: root.model[model.index + 1].value
+							unit: root.model[model.index + 1].unit
+						}
+					}
 				}
 			}
-
 		}
 	}
 }

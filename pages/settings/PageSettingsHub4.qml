@@ -26,8 +26,7 @@ Page {
 		id: essSettings
 
 		ListRadioButtonGroup {
-			//% "Mode"
-			text: qsTrId("settings_ess_mode")
+			text: CommonWords.mode
 			optionModel: Global.ess.stateModel
 			currentIndex: {
 				for (let i = 0; i < optionModel.length; ++i) {

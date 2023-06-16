@@ -307,6 +307,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "IconButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/InputPanel.qml")),
 		"Victron.VenusOS", 2, 0, "InputPanel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/EvChargerStatusModel.qml")),
+		"Victron.VenusOS", 2, 0, "EvChargerStatusModel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/FirmwareUpdate.qml")),
 		"Victron.VenusOS", 2, 0, "FirmwareUpdate");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/GeneratorIconLabel.qml")),
@@ -493,6 +495,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "WidgetConnectorPath");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetHeader.qml")),
 		"Victron.VenusOS", 2, 0, "WidgetHeader");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/EvcsWidget.qml")),
+		"Victron.VenusOS", 2, 0, "EvcsWidget");
 
 	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/ESSCard.qml")),

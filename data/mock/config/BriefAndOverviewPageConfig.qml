@@ -97,6 +97,21 @@ QtObject {
 			name: "Multiple solar chargers",
 			solar: { chargers: [ { acPower: 123 }, { dcPower: 456 }, { acPower: 234 } ] },
 		},
+		{
+			name: "AC Loads + 1 EVCS + DC Loads",
+			acInputs: { type: VenusOS.AcInputs_InputType_Grid, phaseCount: 1, connected: true },
+			system: { state: VenusOS.System_State_FloatCharging, ac: {}, dc: {} },
+			battery: { stateOfCharge: 100, current: 0 },
+			evcs: { chargers: [ { status: VenusOS.Evcs_Status_Charging, mode: VenusOS.Evcs_Mode_Auto } ] }
+		},
+		{
+			name: "AC Loads + 3 EVCS",
+			acInputs: { type: VenusOS.AcInputs_InputType_Grid, phaseCount: 1, connected: true },
+			system: { state: VenusOS.System_State_FloatCharging, ac: {} },
+			battery: { stateOfCharge: 100, current: 0 },
+			evcs: { chargers: [ { status: VenusOS.Evcs_Status_Charging }, { status: VenusOS.Evcs_Status_Charging }, { status: VenusOS.Evcs_Status_Disconnected } ] },
+		}
+
 	]
 
 	function configCount() {
@@ -110,6 +125,7 @@ QtObject {
 		Global.mockDataSimulator.setSolarChargersRequested(config.solar)
 		Global.mockDataSimulator.setSystemRequested(config.system)
 		Global.mockDataSimulator.setBatteryRequested(config.battery)
+		Global.mockDataSimulator.setEvChargersRequested(config.evcs)
 		return config.name
 	}
 }

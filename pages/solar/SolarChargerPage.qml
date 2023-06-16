@@ -169,8 +169,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				//% "Device info"
-				text: qsTrId("charger_device_info")
+				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
 							{ "title": text, "bindPrefix": root.solarCharger.serviceUid })
