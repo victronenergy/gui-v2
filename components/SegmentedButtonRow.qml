@@ -32,6 +32,8 @@ Item {
 		Repeater {
 			id: buttonRepeater
 
+			model: null
+
 			delegate: AsymmetricRoundedRectangle {
 				id: buttonDelegate
 

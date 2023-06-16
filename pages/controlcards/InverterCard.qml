@@ -23,14 +23,18 @@ ControlCard {
 	Component {
 		id: currentLimitDialogComponent
 
-		InputCurrentLimitDialog {
+		NumberSelectorDialog {
 			property var inputSettings
 			property int inputIndex
 
 			title: Global.acInputs.currentLimitTypeToText(inputSettings ? inputSettings.inputType : 0)
-			ampOptions: root.inverter.ampOptions
+			suffix: "A"
+			stepSize: 1
+			to: 1000
+			decimals: 1
+			presets: root.inverter.ampOptions
 
-			onAccepted: root.inverter.setCurrentLimit(inputIndex, currentLimit)
+			onAccepted: root.inverter.setCurrentLimit(inputIndex, value)
 		}
 	}
 
@@ -61,7 +65,7 @@ ControlCard {
 						}
 						root._currentLimitDialog.inputSettings = modelData
 						root._currentLimitDialog.inputIndex = model.index
-						root._currentLimitDialog.currentLimit = modelData.currentLimit
+						root._currentLimitDialog.value = modelData.currentLimit
 						root._currentLimitDialog.open()
 					}
 				}
