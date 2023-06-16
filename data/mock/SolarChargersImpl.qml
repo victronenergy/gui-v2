@@ -17,7 +17,8 @@ QtObject {
 		Global.solarChargers.acCurrent = 0
 		Global.solarChargers.dcCurrent = 0
 
-		const chargerCount = Math.floor(Math.random() * 4) + 2
+		// Add 4 chargers, each with an increasing number of trackers (max 4 trackers)
+		const chargerCount = 4
 		for (let i = 0; i < chargerCount; ++i) {
 			// Randomly distribute the charger power to AC/DC output
 			let chargerPower = 50 + Math.floor(Math.random() * 200)
@@ -62,7 +63,7 @@ QtObject {
 		MockDevice {
 			id: solarCharger
 
-			readonly property string serviceUid: "com.victronenergy.solarcharger.ttyUSB1"
+			readonly property string serviceUid: "com.victronenergy.solarcharger.ttyUSB" + deviceInstance.value
 			property int state: VenusOS.SolarCharger_State_ExternalControl
 
 			readonly property ListModel trackers: ListModel {}
