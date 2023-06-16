@@ -240,9 +240,7 @@
     "geometry.generatorCard.durationButton.width": 112,
     "geometry.generatorCard.startButton.height": 48,
 
-    "geometry.generatorIconLabel.spacing": 5,
     "geometry.generatorIconLabel.icon.width": 24,
-    "geometry.generatorIconLabel.label.width": 62,
 
     "geometry.inverterCard.modeButton.maximumWidth": 180,
 

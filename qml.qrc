@@ -20,6 +20,7 @@
         <file>components/EnvironmentGaugePanel.qml</file>
         <file>components/ExpandedTanksView.qml</file>
         <file>components/FirmwareUpdate.qml</file>
+        <file>components/FixedWidthLabel.qml</file>
         <file>components/Gauges.js</file>
         <file>components/GaugeModel.qml</file>
         <file>components/GeneratorIconLabel.qml</file>
