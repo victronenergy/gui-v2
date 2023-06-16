@@ -91,7 +91,6 @@
         <file>components/dialogs/VrmInstanceSwapDialog.qml</file>
         <file>components/dialogs/ESSMinimumSOCDialog.qml</file>
         <file>components/dialogs/GeneratorDurationSelectorDialog.qml</file>
-        <file>components/dialogs/InputCurrentLimitDialog.qml</file>
         <file>components/dialogs/InverterChargerModeDialog.qml</file>
         <file>components/dialogs/ModalDialog.qml</file>
         <file>components/dialogs/ModalWarningDialog.qml</file>
