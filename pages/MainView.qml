@@ -74,19 +74,6 @@ Item {
 		}
 	}
 
-	// Opaque background, so that page contents disappear behind the status bar when scrolled.
-	Rectangle {
-		anchors {
-			bottom: parent.bottom
-			left: parent.left
-			right: parent.right
-			top: navBar.top
-		}
-		color: root.backgroundColor
-		opacity: navBar.opacity
-		visible: navBar.visible
-	}
-
 	StatusBar {
 		id: statusBar
 
@@ -118,20 +105,20 @@ Item {
 
 		x: {
 			if (!pageStack.currentItem || pageStack.depth < 1) {
-				return Theme.geometry.page.content.horizontalMargin
+				return 0
 			}
 			if (currentIndex === model.count - 1
 					&& pageStack.currentItem.topLeftButton !== VenusOS.StatusBar_LeftButton_ControlsActive
 					&& (!pageStack.previousItem || pageStack.previousItem.topLeftButton !== VenusOS.StatusBar_LeftButton_ControlsActive)) {
 				// Stack is showing a settings sub-page, so keep the nav bar visible.
-				return Theme.geometry.page.content.horizontalMargin
+				return 0
 			}
 			// Make the nav bar slide in/out along with the bottom page in the stack.
-			return pageStack.get(0).x + Theme.geometry.page.content.horizontalMargin
+			return pageStack.get(0).x
 		}
 
 		y: root.height + 4  // nudge below the visible area for wasm
-		width: parent.width - (2 * Theme.geometry.page.content.horizontalMargin)
+		color: root.backgroundColor
 		opacity: 0
 
 		onCurrentIndexChanged: {
