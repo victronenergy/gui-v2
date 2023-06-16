@@ -83,4 +83,23 @@ Item {
 			}
 		})
 	}
+
+	Gradient {
+		id: viewGradient
+
+		GradientStop {
+			position: Theme.geometry.viewGradient.position1
+			color: Theme.color.viewGradient.color1
+		}
+		GradientStop {
+			position: Theme.geometry.viewGradient.position2
+			color: Theme.color.viewGradient.color2
+		}
+		GradientStop {
+			position: Theme.geometry.viewGradient.position3
+			color: Theme.color.viewGradient.color3
+		}
+
+		Component.onCompleted: Global.viewGradient = viewGradient
+	}
 }

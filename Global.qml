@@ -22,6 +22,7 @@ QtObject {
 	property var dataServiceModel: null
 	property var firmwareUpdate
 
+	property var viewGradient
 	property var inputPanel
 	property var dialogLayer
 	property var notificationLayer
