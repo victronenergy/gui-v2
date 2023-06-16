@@ -36,15 +36,10 @@ Item {
 		}
 	}
 
-	Label {
+	FixedWidthLabel {
 		id: label
 
-		anchors {
-			left: icon.right
-			leftMargin: Theme.geometry.generatorIconLabel.spacing
-		}
-		// set a fixed width to prevent the label from resizing when the runtime changes
-		width: Theme.geometry.generatorIconLabel.label.width
+		anchors.left: icon.right
 		text: root.generator
 			  ? root.generator.state !== VenusOS.Generators_State_Running
 				? "--:--"
