@@ -16,7 +16,7 @@ Item {
 	property alias unitColor: unitLabel.color
 	property int alignment: Qt.AlignHCenter
 
-	readonly property var _quantity: unit === undefined
+	readonly property var _quantity: unit === undefined || unit < 0
 		 ? undefined
 		 : Units.getDisplayText(unit, value, Theme.geometry.quantityLabel.valueLength)
 

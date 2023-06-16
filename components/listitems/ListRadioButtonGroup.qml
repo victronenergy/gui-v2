@@ -93,6 +93,7 @@ ListNavigationItem {
 						text: Array.isArray(root.optionModel)
 								? modelData.caption || ""
 								: model.caption || ""
+						font.pixelSize: Theme.font.size.caption
 					}
 
 					onClicked: {

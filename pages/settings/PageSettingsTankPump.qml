@@ -46,8 +46,7 @@ Page {
 		}
 
 		ListRadioButtonGroup {
-			//% "Mode"
-			text: qsTrId("settings_pump_mode")
+			text: CommonWords.mode
 			optionModel: [
 				//% "Auto"
 				{ display: qsTrId("settings_pump_auto"), value: 0 },

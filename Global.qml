@@ -32,6 +32,7 @@ QtObject {
 	property var dcInputs
 	property var environmentInputs
 	property var ess
+	property var evChargers
 	property var generators
 	property var inverters
 	property var notifications

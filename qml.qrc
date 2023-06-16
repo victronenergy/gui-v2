@@ -23,6 +23,7 @@
         <file>components/FixedWidthLabel.qml</file>
         <file>components/Gauges.js</file>
         <file>components/GaugeModel.qml</file>
+        <file>components/EvChargerStatusModel.qml</file>
         <file>components/GeneratorIconLabel.qml</file>
         <file>components/GradientListView.qml</file>
         <file>components/GsmStatusIcon.qml</file>
@@ -130,6 +131,7 @@
         <file>components/widgets/DcGeneratorWidget.qml</file>
         <file>components/widgets/DcInputWidget.qml</file>
         <file>components/widgets/DcLoadsWidget.qml</file>
+        <file>components/widgets/EvcsWidget.qml</file>
         <file>components/widgets/GridWidget.qml</file>
         <file>components/widgets/InverterWidget.qml</file>
         <file>components/widgets/OverviewWidget.qml</file>
@@ -146,6 +148,7 @@
         <file>data/DcInputs.qml</file>
         <file>data/EnvironmentInputs.qml</file>
         <file>data/Ess.qml</file>
+        <file>data/EvChargers.qml</file>
         <file>data/Generators.qml</file>
         <file>data/Inverters.qml</file>
         <file>data/Notifications.qml</file>
@@ -165,6 +168,7 @@
         <file>data/common/DeviceModel.qml</file>
         <file>data/common/EnvironmentInput.qml</file>
         <file>data/common/EssData.qml</file>
+        <file>data/common/EvCharger.qml</file>
         <file>data/common/Generator.qml</file>
         <file>data/common/Inverter.qml</file>
         <file>data/common/PvMonitor.qml</file>
@@ -180,6 +184,7 @@
         <file>data/dbus/DcInputsImpl.qml</file>
         <file>data/dbus/EnvironmentInputsImpl.qml</file>
         <file>data/dbus/EssImpl.qml</file>
+        <file>data/dbus/EvChargersImpl.qml</file>
         <file>data/dbus/GeneratorsImpl.qml</file>
         <file>data/dbus/InvertersImpl.qml</file>
         <file>data/dbus/NotificationsImpl.qml</file>
@@ -193,6 +198,7 @@
         <file>data/mock/DcInputsImpl.qml</file>
         <file>data/mock/EnvironmentInputsImpl.qml</file>
         <file>data/mock/EssImpl.qml</file>
+        <file>data/mock/EvChargersImpl.qml</file>
         <file>data/mock/GeneratorsImpl.qml</file>
         <file>data/mock/InvertersImpl.qml</file>
         <file>data/mock/MockDevice.qml</file>
@@ -213,6 +219,7 @@
         <file>data/mqtt/DcInputsImpl.qml</file>
         <file>data/mqtt/EnvironmentInputsImpl.qml</file>
         <file>data/mqtt/EssImpl.qml</file>
+        <file>data/mqtt/EvChargersImpl.qml</file>
         <file>data/mqtt/GeneratorsImpl.qml</file>
         <file>data/mqtt/InvertersImpl.qml</file>
         <file>data/mqtt/MqttDataManager.qml</file>
@@ -235,6 +242,7 @@
         <file>images/dcloads.svg</file>
         <file>images/dropdown.svg</file>
         <file>images/electron.svg</file>
+        <file>images/evcs.svg</file>
         <file>images/ess.svg</file>
         <file>images/freshWater.svg</file>
         <file>images/freshWater20x27.svg</file>
@@ -315,6 +323,9 @@
         <file>pages/controlcards/GeneratorCard.qml</file>
         <file>pages/controlcards/InverterCard.qml</file>
         <file>pages/controlcards/SwitchesCard.qml</file>
+        <file>pages/evcs/EvChargerListPage.qml</file>
+        <file>pages/evcs/EvChargerPage.qml</file>
+        <file>pages/evcs/EvChargerSetupPage.qml</file>
         <file>pages/settings/AccessLevelRadioButtonGroup.qml</file>
         <file>pages/settings/DvccCommonSettings.qml</file>
         <file>pages/settings/GeneratorCondition.qml</file>

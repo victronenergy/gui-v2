@@ -102,7 +102,8 @@ public:
 		OverviewWidget_Type_Inverter,
 		OverviewWidget_Type_Battery,
 		OverviewWidget_Type_AcLoads,
-		OverviewWidget_Type_DcLoads
+		OverviewWidget_Type_DcLoads,
+		OverviewWidget_Type_Evcs
 	};
 	Q_ENUM(OverviewWidget_Type)
 
@@ -451,6 +452,42 @@ public:
 		SolarCharger_NetworkStatus_StandaloneAndInstanceMaster
 	};
 	Q_ENUM(SolarCharger_NetworkStatus)
+
+	enum Evcs_Status {
+		Evcs_Status_Disconnected,
+		Evcs_Status_Connected,
+		Evcs_Status_Charging,
+		Evcs_Status_Charged,
+		Evcs_Status_WaitingForSun,
+		Evcs_Status_WaitingForRFID,
+		Evcs_Status_WaitingForStart,
+		Evcs_Status_LowStateOfCharge,
+		Evcs_Status_GroundTestError,
+		Evcs_Status_WeldedContactsError,
+		Evcs_Status_CpInputTestError,
+		Evcs_Status_ResidualCurrentDetected,
+		Evcs_Status_UndervoltageDetected,
+		Evcs_Status_OvervoltageDetected,
+		Evcs_Status_OverheatingDetected,
+		Evcs_Status_ChargingLimit = 20,
+		Evcs_Status_StartCharging,
+		Evcs_Status_SwitchingToThreePhase,
+		Evcs_Status_SwitchingToSinglePhase
+	};
+	Q_ENUM(Evcs_Status)
+
+	enum Evcs_Mode {
+		Evcs_Mode_Manual,
+		Evcs_Mode_Auto,
+		Evcs_Mode_Scheduled
+	};
+	Q_ENUM(Evcs_Mode)
+
+	enum Evcs_Position {
+		Evcs_Position_ACOutput,
+		Evcs_Position_ACInput
+	};
+	Q_ENUM(Evcs_Position)
 
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);

@@ -27,7 +27,7 @@ Page {
 						rightMargin: Theme.geometry.listItem.content.horizontalMargin
 						verticalCenter: parent.primaryLabel.verticalCenter
 					}
-					color: Theme.color.font.primary
+					color: Theme.color.green
 					source: "/images/icon_checkmark_32.svg"
 					visible: connectedDataPoint.value === 1
 				}

@@ -76,8 +76,7 @@ ControlCard {
 
 			width: parent.width
 			button.width: Math.max(button.implicitWidth, Theme.geometry.inverterCard.modeButton.maximumWidth)
-			//% "Mode"
-			label.text: qsTrId("controlcard_mode")
+			label.text: CommonWords.mode
 			button.text: Global.inverters.inverterModeToText(root.inverter.mode)
 			enabled: root.inverter.modeAdjustable
 

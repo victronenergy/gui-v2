@@ -20,6 +20,7 @@ ListButton {
 	property int from: dataPoint.hasMin ? dataPoint.min || 0 : 0
 	property int to: dataPoint.hasMax ? dataPoint.max || 1000 : 1000
 	property real stepSize: 1
+	property var presets: []
 
 	property var _numberSelector
 
@@ -48,6 +49,7 @@ ListButton {
 			from: root.from
 			to: root.to
 			stepSize: root.stepSize
+			presets: root.presets
 
 			onAccepted: {
 				if (dataSource.length > 0) {

@@ -12,10 +12,14 @@ Column {
 	property int rowCount
 	property var valueForModelIndex  // function(row,column) -> data value for this row/column
 	property alias headerVisible: headerRow.visible
+	property bool equalWidthColumns
 
 	readonly property real _availableWidth: width - headerRow.leftPadding
 
 	function _quantityColumnWidth(unit) {
+		if (equalWidthColumns) {
+			return _availableWidth / units.length
+		}
 		// "kWh" unit name is longer, so give that column more space.
 		const widthMultiplier = (unit === VenusOS.Units_Energy_KiloWattHour) ? 1.2 : 1
 		return ((_availableWidth - Theme.geometry.quantityTable.header.widthBoost) / units.length) * widthMultiplier

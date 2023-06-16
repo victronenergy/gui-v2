@@ -11,7 +11,7 @@ Page {
 
 	property var _leftWidgets: []
 	readonly property var _centerWidgets: [inverterWidget, batteryWidget]
-	readonly property var _rightWidgets: [acLoadsWidget, dcLoadsWidget]
+	property var _rightWidgets: []
 
 	// Preferred order for the input widgets on the left hand side
 	readonly property var _leftWidgetOrder: [
@@ -32,6 +32,7 @@ Page {
 			+ (Global.acInputs.generatorInput ? 1 : 0)
 			+ (isNaN(Global.system.loads.dcPower) ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
+			+ (Global.evChargers.model.count === 0 ? 0 : 1)
 	on_ShouldResetWidgetsChanged: Qt.callLater(_resetWidgets)
 	Component.onCompleted: Qt.callLater(_resetWidgets)
 
@@ -43,7 +44,13 @@ Page {
 	//  and path animations is very expensive and creates jerky animations on device.
 	function _resetWidgets() {
 		width = Theme.geometry.screen.width
+
+		// Reset the left/right widgets that should be shown
+		for (let widgetType in _createdWidgets) {
+			_createdWidgets[widgetType].size = VenusOS.OverviewWidget_Size_Zero
+		}
 		_resetLeftWidgets()
+		_resetRightWidgets()
 
 		let i = 0
 		let firstLargeWidget = null
@@ -84,13 +91,18 @@ Page {
 			}
 		}
 
-		// Set AC and DC load widget sizes
+		// Set right widget sizes. AC Loads is always present; AC & DC Loads are sized depending on
+		// whether EVCS is visible.
+		const evChargerWidget = _findWidget(_rightWidgets, VenusOS.OverviewWidget_Type_Evcs)
+		if (!!evChargerWidget) {
+			evChargerWidget.size = VenusOS.OverviewWidget_Size_L
+		}
 		dcLoadsWidget.size = !isNaN(Global.system.loads.dcPower)
-				? VenusOS.OverviewWidget_Size_L
+				? (!!evChargerWidget ? VenusOS.OverviewWidget_Size_XS : VenusOS.OverviewWidget_Size_L)
 				: VenusOS.OverviewWidget_Size_Zero
 		acLoadsWidget.size = dcLoadsWidget.size === VenusOS.OverviewWidget_Size_Zero
-				? VenusOS.OverviewWidget_Size_XL
-				: VenusOS.OverviewWidget_Size_L
+				? (!!evChargerWidget ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_XL)
+				: (!!evChargerWidget ? VenusOS.OverviewWidget_Size_XS : VenusOS.OverviewWidget_Size_L)
 
 		// Set the widget positions
 		resetWidgetPositions(_leftWidgets)
@@ -186,26 +198,29 @@ Page {
 		args = args || {}
 		let widget = null
 		switch (type) {
+		case VenusOS.OverviewWidget_Type_AcGenerator:
+			widget = acGeneratorComponent.createObject(root, args)
+			break
+		case VenusOS.OverviewWidget_Type_Alternator:
+			widget = alternatorComponent.createObject(root, args)
+			break
+		case VenusOS.OverviewWidget_Type_DcGenerator:
+			widget = dcGeneratorComponent.createObject(root, args)
+			break
+		case VenusOS.OverviewWidget_Type_Evcs:
+			widget = evcsComponent.createObject(root, args)
+			break
 		case VenusOS.OverviewWidget_Type_Grid:
 			widget = gridComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_Shore:
 			widget = shoreComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_AcGenerator:
-			widget = acGeneratorComponent.createObject(root, args)
-			break
-		case VenusOS.OverviewWidget_Type_DcGenerator:
-			widget = dcGeneratorComponent.createObject(root, args)
-			break
-		case VenusOS.OverviewWidget_Type_Alternator:
-			widget = alternatorComponent.createObject(root, args)
+		case VenusOS.OverviewWidget_Type_Solar:
+			widget = solarComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_Wind:
 			widget = windComponent.createObject(root, args)
-			break
-		case VenusOS.OverviewWidget_Type_Solar:
-			widget = solarComponent.createObject(root, args)
 			break
 		default:
 			console.warn('Cannot create widget of unsupported type:', type)
@@ -216,13 +231,9 @@ Page {
 	}
 
 	function _resetLeftWidgets() {
-		let widgetType = -1
-		for (widgetType in _createdWidgets) {
-			_createdWidgets[widgetType].size = VenusOS.OverviewWidget_Size_Zero
-		}
-
 		// Add AC widget. Only the connected AC input is relevant. If none are connected, use the
 		// generator if available.
+		let widgetType = -1
 		let widgetCandidates = []
 		let widget
 		if (Global.acInputs.connectedInput != null) {
@@ -292,6 +303,26 @@ Page {
 			}
 		}
 		return candidateArray.length
+	}
+
+	function _resetRightWidgets() {
+		let widgets = [acLoadsWidget]
+		if (Global.evChargers.model.count > 0) {
+			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
+		}
+		if (!isNaN(Global.system.loads.dcPower)) {
+			widgets.push(dcLoadsWidget)
+		}
+		_rightWidgets = widgets
+	}
+
+	function _findWidget(widgets, widgetType) {
+		for (let i = 0; i < widgets.length; ++i) {
+			if (widgets[i].type === widgetType) {
+				return widgets[i]
+			}
+		}
+		return null
 	}
 
 	function _inputConnectorAnimationMode(connectorWidget) {
@@ -619,7 +650,7 @@ Page {
 		expanded: Global.pageManager.expandLayout
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 		animationEnabled: root.animationEnabled
-		straight: true
+		straight: _rightWidgets.length <= 2   // straight if only AC Loads is present, or AC Loads plus EVCS or DC Loads
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
@@ -703,7 +734,12 @@ Page {
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
-			y: inverterLeftConnectorAnchor.y
+			y: root._rightWidgets.length <= 2 ? inverterLeftConnectorAnchor.y : defaultY
+		}
+
+		WidgetConnectorAnchor {
+			location: VenusOS.WidgetConnector_Location_Bottom
+			visible: Global.evChargers.model.count > 0
 		}
 	}
 
@@ -718,4 +754,40 @@ Page {
 			location: VenusOS.WidgetConnector_Location_Left
 		}
 	}
+
+	Component {
+		id: evcsComponent
+
+		EvcsWidget {
+			id: evcsWidget
+
+			expanded: Global.pageManager.expandLayout
+			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			animationEnabled: root.animationEnabled
+			connectors: [ evcsConnector ]
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Top
+			}
+
+			WidgetConnector {
+				id: evcsConnector
+
+				parent: root
+				startWidget: acLoadsWidget
+				startLocation: VenusOS.WidgetConnector_Location_Bottom
+				endWidget: evcsWidget
+				endLocation: VenusOS.WidgetConnector_Location_Top
+				expanded: Global.pageManager.expandLayout
+				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				animationEnabled: root.animationEnabled
+				animationMode: root.isCurrentPage
+					? Global.evChargers.power > Theme.geometry.overviewPage.connector.animationPowerThreshold
+					  ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+					  : VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			}
+		}
+	}
+
 }

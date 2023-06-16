@@ -57,7 +57,10 @@ Item {
 		}
 
 		// Sets the distance between electrons (i.e. how often to spawn a new electron)
-		const electronTravelDistance = _animated ? _electronTravelDistance : 0
+		const electronTravelDistance = _animated
+				// Use a min value to ensure at least one electron is shown for short connectors
+				? Math.max(Theme.geometry.overviewPage.connector.electron.interval, _electronTravelDistance)
+				: 0
 		const modelCount = Math.floor(electronTravelDistance / Theme.geometry.overviewPage.connector.electron.interval)
 
 		if (electronRepeater.count !== modelCount) {
