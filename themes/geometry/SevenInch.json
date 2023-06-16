@@ -384,7 +384,7 @@
     "geometry.viewGradient.position2": 0.55,
     "geometry.viewGradient.position3": 1,
 
-    "geometry.quantityTable.row.height": 30,
+    "geometry.quantityTable.row.height": 32,
     "geometry.quantityTable.bottomMargin": 14,
     "geometry.quantityTable.header.widthBoost": 120,
 

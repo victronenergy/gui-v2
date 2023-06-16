@@ -57,7 +57,6 @@ Page {
 
 					anchors.top: trackerSummary.bottom
 					visible: root.solarCharger.trackers.count > 1
-					bottomPadding: Theme.geometry.listItem.content.verticalMargin
 
 					rowCount: root.solarCharger.trackers.count
 					units: [
@@ -85,10 +84,9 @@ Page {
 				}
 			}
 
-			Rectangle {
+			Item {
 				width: 1
 				height: Theme.geometry.gradientList.spacing
-				color: "transparent"
 			}
 
 			ListQuantityGroup {
