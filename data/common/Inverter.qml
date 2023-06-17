@@ -13,6 +13,7 @@ Device {
 	readonly property int state: _state.value === undefined ? -1 : _state.value
 	readonly property int mode: _mode.value === undefined ? -1 : _mode.value
 	readonly property bool modeAdjustable: _modeAdjustable.value !== undefined && _modeAdjustable.value > 0
+	readonly property real nominalInverterPower: _nominalInverterPower.value === undefined ? NaN : _nominalInverterPower.value
 
 	property ListModel inputSettings: ListModel {}
 
@@ -38,6 +39,11 @@ Device {
 
 	readonly property VeQuickItem _productId: VeQuickItem {
 		uid: inverter.serviceUid + "/ProductId"
+	}
+
+	readonly property VeQuickItem _nominalInverterPower: VeQuickItem {
+		uid: inverter.serviceUid + "/Ac/Out/NominalInverterPower"
+		onValueChanged: Global.inverters.refreshNominalInverterPower()
 	}
 
 	readonly property VeQuickItem _mode: VeQuickItem {

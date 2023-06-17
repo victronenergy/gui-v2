@@ -209,6 +209,7 @@ Page {
 			ValueRange {
 				id: acLoadsRange
 				value: Global.system.loads.acPower || 0
+				maximumValue: Global.system.loads.maximumAcPower
 			}
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right edge")

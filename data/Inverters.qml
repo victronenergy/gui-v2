@@ -13,12 +13,28 @@ QtObject {
 		objectProperty: "inverter"
 	}
 
+	property real totalNominalInverterPower: NaN
+
 	function addInverter(inverter) {
-		model.addObject(inverter)
+		if (model.addObject(inverter)) {
+			refreshNominalInverterPower()
+		}
 	}
 
 	function removeInverter(inverter) {
-		model.removeObject(inverter.serviceUid)
+		return model.removeObject(inverter.serviceUid)
+	}
+
+	function refreshNominalInverterPower() {
+		let total = NaN
+		for (let i = 0; i < model.count; ++i) {
+			const inverter = model.objectAt(i)
+			const value = inverter.nominalInverterPower
+			if (!isNaN(value)) {
+				total = isNaN(total) ? value : total + value
+			}
+		}
+		totalNominalInverterPower = total
 	}
 
 	function reset() {

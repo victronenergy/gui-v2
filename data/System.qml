@@ -24,6 +24,11 @@ QtObject {
 				: (acCurrent || 0) === 0 ? dcCurrent : acCurrent
 		readonly property real acCurrent: ac.consumption.current
 		readonly property real dcCurrent: dc.current
+
+		// Max AC power is calculated using com.victronenergy.vebus/Ac/Out/NominalInverterPower.
+		// Assume NominalInverterPower = 80% of max AC load power.
+		readonly property real maximumAcPower: isNaN(Global.inverters.totalNominalInverterPower) ? NaN
+				: Global.inverters.totalNominalInverterPower * (100 / 80)
 	}
 
 	property SystemAc ac: SystemAc {}
