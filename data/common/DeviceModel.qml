@@ -53,6 +53,7 @@ ListModel {
 		data[objectProperty] = object
 		insert(insertionIndex, data)
 		_refreshFirstObject()
+		return true
 	}
 
 	function removeObject(serviceUid) {
