@@ -77,8 +77,8 @@ Page {
 			name: properties.name
 			icon.source: battery ? battery.icon : ""
 			value: battery ? Math.round(battery.stateOfCharge || 0) : 0
-			voltage: battery.voltage.toFixed(1)
-			current: battery.current.toFixed(1)
+			voltage: battery ? battery.voltage.toFixed(1) : NaN
+			current: battery ? battery.current.toFixed(1) : NaN
 			status: Gauges.getValueStatus(value, properties.valueType)
 			caption: {
 				if (!battery || !battery.timeToGo || battery.timeToGo < 0) {
