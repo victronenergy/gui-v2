@@ -123,7 +123,6 @@ Device {
 
 	readonly property VeQuickItem _trackerCount: VeQuickItem {
 		uid: solarCharger.serviceUid + "/NrOfTrackers"
-		onValueChanged: _trackerObjects.model = value || 0
 	}
 
 	readonly property Instantiator _trackerObjects: Instantiator {
@@ -141,9 +140,11 @@ Device {
 			solarCharger.voltage = totalVoltage
 		}
 
+		model: _trackerCount.value || 0
 		delegate: Device {
 			id: tracker
 
+			readonly property int modelIndex: model.index
 			readonly property real current: isNaN(voltage) || isNaN(power) ? NaN : (!voltage || !power ? 0 : power / voltage)
 			readonly property real power: _trackerObjects.count <= 1 ? solarCharger.power : _power.value || 0
 			readonly property real voltage: _voltage.value || 0
@@ -173,11 +174,24 @@ Device {
 		}
 
 		onObjectAdded: function(index, object) {
-			solarCharger.trackers.insert(index, {"solarTracker": object})
+			let insertionIndex = solarCharger.trackers.count
+			for (let i = 0; i < solarCharger.trackers.count; ++i) {
+				const sortIndex = solarCharger.trackers.get(i).solarTracker.modelIndex
+				if (index < sortIndex) {
+					insertionIndex = i
+					break
+				}
+			}
+			solarCharger.trackers.insert(insertionIndex, {"solarTracker": object})
 		}
 
 		onObjectRemoved: function(index, object) {
-			solarCharger.trackers.remove(index)
+			for (let i = 0; i < solarCharger.trackers.count; ++i) {
+				if (solarCharger.trackers.get(i).solarTracker.serviceUid === object.serviceUid) {
+					solarCharger.trackers.remove(i)
+					break
+				}
+			}
 		}
 	}
 
