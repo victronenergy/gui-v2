@@ -36,7 +36,7 @@ Item {
 			direction: PathArc.Counterclockwise
 			strokeWidth: Theme.geometry.arc.strokeWidth
 			arcY: root.alignment & Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
-			value: isNaN(yieldModel.maximumYield) ? NaN : Utils.scaleToRange(model.yieldKwh, 0, yieldModel.maximumYield, 0, 100)
+			value: yieldModel.maximumYield ? Utils.scaleToRange(model.yieldKwh, 0, yieldModel.maximumYield, 0, 100) : 100
 		}
 	}
 
