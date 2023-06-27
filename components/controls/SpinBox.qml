@@ -57,7 +57,7 @@ CT.SpinBox {
 			? Theme.geometry.spinBox.indicator.horizontalOrientation.height
 			: Theme.geometry.spinBox.indicator.verticalOrientation.height
 		radius: Theme.geometry.spinBox.indicator.radius
-		color: root.up.pressed ? Theme.color.darkOk : Theme.color.ok
+		color: root.up.pressed ? Theme.color.darkOk : Theme.color.dimBlue
 
 		Image {
 			anchors.centerIn: parent
@@ -77,7 +77,7 @@ CT.SpinBox {
 			? Theme.geometry.spinBox.indicator.horizontalOrientation.height
 			: Theme.geometry.spinBox.indicator.verticalOrientation.height
 		radius: Theme.geometry.spinBox.indicator.radius
-		color: root.down.pressed ? Theme.color.darkOk : Theme.color.ok
+		color: root.down.pressed ? Theme.color.darkOk : Theme.color.dimBlue
 		Image {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'
@@ -91,9 +91,9 @@ CT.SpinBox {
 			: Theme.geometry.spinBox.indicator.verticalOrientation.height
 	}
 
-	MouseArea {
-		anchors.fill: up.indicator
-		onClicked: {
+	readonly property bool _upPressed: up.pressed
+	on_UpPressed: {
+		if (_upPressed) {
 			if ((value + stepSize) > to ) {
 				root.maxValueReached()
 			}
@@ -101,9 +101,9 @@ CT.SpinBox {
 		}
 	}
 
-	MouseArea {
-		anchors.fill: down.indicator
-		onClicked: {
+	readonly property bool _downPressed: down.pressed
+	on_DownPressed: {
+		if (_downPressed) {
 			if ((value - stepSize) < from ) {
 				root.minValueReached()
 			}
