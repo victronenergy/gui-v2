@@ -165,8 +165,8 @@ Page {
 		id: leftLower
 
 		anchors {
-			top: leftEdge.bottom
-			topMargin: leftEdge.active ? Theme.geometry.briefPage.lowerGauge.topMargin : 0
+			top: leftEdge.active ? leftEdge.bottom : parent.top
+			topMargin: leftEdge.active ? Theme.geometry.briefPage.lowerGauge.topMargin : Theme.geometry.briefPage.edgeGauge.topMargin
 			left: parent.left
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			right: mainGauge.left
