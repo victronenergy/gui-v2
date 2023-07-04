@@ -101,48 +101,16 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
-			ListButton {
-				//% "Reset daily run time counters"
-				text: qsTrId("page_settings_generator_reset_daily_run_time_counters")
-				//% "Press to reset"
-				button.text: qsTrId("page_settings_generator_press_to_reset")
-				onClicked: {
-					if (state.value === 0) {
-						var now = new Date()
-						var today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) /* ignore the 'M306' warning for this line.
-							QtCreator thinks that functions that start with an uppercase letter are constructor functions that should only be used with new.
-							'Date.UTC(...)' is a static method, not a constructor, this is fine. */
-						var todayInSeconds = today.getTime() / 1000
-						resetDaily.setValue('{"%1" : 0}'.arg(todayInSeconds.toString()))
-						//% "The daily runtime counter has been reset"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_runtime_counter_reset"))
-					} else if (state.value === 1) {
-						//% "It is not possible to modify the counters while the generator is running"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_runtime_counter_cant_reset_while_running"))
-					}
-				}
-				DataPoint {
-					id: resetDaily
-
-					source: settingsBindPrefix + "/AccumulatedDaily"
-				}
+			ListNavigationItem {
+				//% "Run time and service"
+				text: qsTrId("page_settings_generator_run_time_and_service")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
+													   {
+														   title: text,
+														   settingsBindPrefix: root.settingsBindPrefix,
+														   startStopBindPrefix: root.startStopBindPrefix
+													   })
 			}
-
-			ListTimeSelector {
-				id: setTotalRunTime
-
-				//% "Generator total run time (hours)"
-				text: qsTrId("page_settings_generator_total_run_time")
-				dataSource: settingsBindPrefix + "/AccumulatedTotal"
-				secondaryText: Math.round(value / 60 / 60)
-				maximumHour: 999999
-				enabled: userHasWriteAccess && state.value === 0
-			}
-		}
-		DataPoint {
-			id: state
-
-			source: startStopBindPrefix + "/State"
 		}
 	}
 }
