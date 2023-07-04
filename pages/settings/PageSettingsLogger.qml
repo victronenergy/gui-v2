@@ -45,7 +45,7 @@ Page {
 			ListTextItem {
 				//% "VRM Portal ID"
 				text: qsTrId("settings_vrm_portal_id")
-				secondaryText: "TODO" // this depends on VePlatform, it returns the first line of /etc/venus/unique-id. Not sure how to handle it yet.
+				dataSource: "com.victronenergy.platform/Device/UniqueId" // this doesn't work with mqtt yet, see: https://github.com/victronenergy/gui-v2/issues/385
 			}
 
 			ListRadioButtonGroup {
