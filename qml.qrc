@@ -407,7 +407,7 @@
         <file>pages/solar/SolarChargerNetworkedOperationPage.qml</file>
         <file>pages/solar/SolarChargerPage.qml</file>
         <file>pages/solar/SolarChargerHistoryPage.qml</file>
-        <file>pages/solar/SolarChargerListPage.qml</file>
+        <file>pages/solar/SolarDeviceListPage.qml</file>
         <file>themes/animation/Animation.json</file>
         <file>themes/color/ColorDesign.json</file>
         <file>themes/color/Dark.json</file>
