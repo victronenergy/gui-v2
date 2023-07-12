@@ -50,12 +50,13 @@ ListItem {
 		text: dataValid ? dataValue : ""
 
 		onAccepted: {
+			let newValue = text
 			_accepted = true
 			if (dataPoint.source) {
-				dataPoint.setValue(text)
+				dataPoint.setValue(newValue)
 			}
 			textField.focus = false
-			root.accepted(text)
+			root.accepted(newValue)
 		}
 
 		onEditingFinished: root.editingFinished()

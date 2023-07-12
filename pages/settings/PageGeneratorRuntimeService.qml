@@ -56,6 +56,7 @@ Page {
 				textField.inputMethodHints: Qt.ImhDigitsOnly
 				dataSource: settingsBindPrefix + "/AccumulatedTotalOffset"
 				enabled: userHasWriteAccess && state.value === 0
+				visible: dataValid
 				textField.maximumLength: 6
 				onAccepted: function(hours) {
 					setDataValue(accumulatedTotalItem.value - hours * 60 * 60)
