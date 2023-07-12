@@ -29,7 +29,7 @@ Page {
 						{
 							title: "",
 							text: CommonWords.total,
-							unit: -1
+							unit: VenusOS.Units_None
 						},
 						{
 							title: CommonWords.power_watts,
@@ -45,7 +45,7 @@ Page {
 							// Extra empty column to create spacing
 							title: "",
 							value: NaN,
-							unit: -1
+							unit: VenusOS.Units_None
 						},
 					]
 				}

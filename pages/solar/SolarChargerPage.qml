@@ -27,7 +27,7 @@ Page {
 						{
 							title: CommonWords.state,
 							text: Global.solarChargers.chargerStateToText(root.solarCharger.state),
-							unit: -1,
+							unit: VenusOS.Units_None,
 						},
 						{
 							title: CommonWords.yield_today,
@@ -60,7 +60,7 @@ Page {
 
 					rowCount: root.solarCharger.trackers.count
 					units: [
-						{ title: CommonWords.tracker, unit: -1 },
+						{ title: CommonWords.tracker, unit: VenusOS.Units_None },
 						{ title: trackerSummary.model[1].title, unit: VenusOS.Units_Energy_KiloWattHour },
 						{ title: CommonWords.voltage, unit: VenusOS.Units_Volt },
 						{ title: CommonWords.current_amps, unit: VenusOS.Units_Amp },

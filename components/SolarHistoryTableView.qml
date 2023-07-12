@@ -73,7 +73,7 @@ Column {
 			{
 				title: "",
 				text: CommonWords.total,
-				unit: -1,
+				unit: VenusOS.Units_None,
 			},
 			{
 				title: CommonWords.yield_kwh,
@@ -106,7 +106,7 @@ Column {
 		rowCount: root.solarCharger.trackers.count
 		units: [
 			// No 'title' property is specified, since these are same as summary headers.
-			{ unit: -1 },
+			{ unit: VenusOS.Units_None },
 			{ unit: VenusOS.Units_Energy_KiloWattHour },
 			{ unit: VenusOS.Units_Volt },
 			{ unit: VenusOS.Units_Watt },

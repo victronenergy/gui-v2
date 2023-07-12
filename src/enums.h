@@ -79,6 +79,8 @@ public:
 		Units_Energy_KiloWattHour,
 		Units_Temperature_Celsius,
 		Units_Temperature_Fahrenheit,
+
+		Units_None = 1000
 	};
 	Q_ENUM(Units_Type)
 	
