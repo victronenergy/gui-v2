@@ -36,7 +36,7 @@ Page {
 							//% "Session"
 							title: qsTrId("evcs_session"),
 							text: CommonWords.total,
-							unit: -1,
+							unit: VenusOS.Units_None,
 						},
 						{
 							title: CommonWords.power_watts,
@@ -73,11 +73,11 @@ Page {
 
 					rowCount: root.evCharger.phases.count
 					units: [
-						{ title: "", unit: -1 },
+						{ title: "", unit: VenusOS.Units_None },
 						{ title: "", unit: VenusOS.Units_Watt },
-						{ title: "", unit: -1 },
-						{ title: "", unit: -1 },
-						{ title: "", unit: -1 },
+						{ title: "", unit: VenusOS.Units_None },
+						{ title: "", unit: VenusOS.Units_None },
+						{ title: "", unit: VenusOS.Units_None },
 					]
 					valueForModelIndex: function(phaseIndex, column) {
 						const phase = root.evCharger.phases.get(phaseIndex)
