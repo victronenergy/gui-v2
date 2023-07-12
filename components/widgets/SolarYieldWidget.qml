@@ -36,7 +36,7 @@ OverviewWidget {
 				Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml",
 						{ "solarCharger": Global.solarChargers.model.get(0).solarCharger })
 			} else {
-				Global.pageManager.pushPage("/pages/solar/SolarChargerListPage.qml", { "title": root.title })
+				Global.pageManager.pushPage("/pages/solar/SolarDeviceListPage.qml", { "title": root.title })
 			}
 		}
 	}
