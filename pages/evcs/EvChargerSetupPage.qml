@@ -22,7 +22,9 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				text: CommonWords.mode
+				//: EVCS AC input/output position
+				//% "Position"
+				text: qsTrId("evcs_ac_position")
 				optionModel: [
 					{
 						//% "AC Input"
