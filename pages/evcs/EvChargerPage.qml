@@ -49,7 +49,7 @@ Page {
 							secondaryText: "A"
 						},
 						{
-							title: CommonWords.energy_evcs,
+							title: CommonWords.energy,
 							value: root.evCharger.energy,
 							unit: VenusOS.Units_Energy_KiloWattHour
 						},
@@ -66,7 +66,10 @@ Page {
 				QuantityTable {
 					id: phaseTable
 
-					anchors.top: chargerSummary.bottom
+					anchors {
+						top: chargerSummary.bottom
+						topMargin: Theme.geometry.gradientList.spacing
+					}
 					visible: root.evCharger.phases.count > 1
 					equalWidthColumns: true
 					headerVisible: false

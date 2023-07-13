@@ -55,9 +55,9 @@ QtObject {
 	//% "Enabled"
 	readonly property string enabled: qsTrId("common_words_enabled")
 
-	//: Amount of charged energy for an EV charger
+	//: Amount of charged energy
 	//% "Energy"
-	readonly property string energy_evcs: qsTrId("common_words_energy_evcs")
+	readonly property string energy: qsTrId("common_words_energy")
 
 	//% "Error"
 	readonly property string error: qsTrId("common_words_error")
