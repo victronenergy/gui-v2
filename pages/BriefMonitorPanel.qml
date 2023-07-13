@@ -76,7 +76,7 @@ Column {
 	Item {
 		width: parent.width
 		height: solarQuantityLabel.y + solarQuantityLabel.height
-		visible: Global.solarChargers.model.count > 0
+		visible: Global.solarChargers.model.count || Global.pvInverters.model.count
 
 		WidgetHeader {
 			id: solarHeader
@@ -90,18 +90,20 @@ Column {
 			id: solarQuantityLabel
 
 			anchors.top: solarHeader.bottom
-			dataObject: Global.solarChargers
+			dataObject: Global.system.solar
 			font.pixelSize: Theme.font.briefPage.quantityLabel.size
 		}
 
-		SolarYieldGraph {
+		Loader {
 			anchors {
 				right: parent.right
 				top: parent.top
 				bottom: solarQuantityLabel.bottom
 				bottomMargin: solarQuantityLabel.bottomPadding
 			}
+			active: Global.solarChargers.model.count > 0 && Global.pvInverters.model.count === 0
 			width: Theme.geometry.briefPage.sidePanel.solarYield.width
+			sourceComponent: SolarYieldGraph {}
 		}
 	}
 

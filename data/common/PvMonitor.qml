@@ -22,6 +22,9 @@ Instantiator {
 			if (!!acPv) {
 				for (let j = 0; j < acPv.pvPhases.count; ++j) {
 					const phase = acPv.pvPhases.objectAt(j)
+					if (!phase) {
+						continue
+					}
 					if (!isNaN(phase.power)) {
 						if (isNaN(totalPower)) {
 							totalPower = 0
@@ -37,8 +40,8 @@ Instantiator {
 				}
 			}
 		}
-		Global.solarChargers.acPower = totalPower
-		Global.solarChargers.acCurrent = totalCurrent
+		Global.system.solar.acPower = totalPower
+		Global.system.solar.acCurrent = totalCurrent
 	}
 
 	delegate: QtObject {
@@ -88,11 +91,11 @@ Instantiator {
 
 	readonly property DataPoint veDcPower: DataPoint {
 		source: "com.victronenergy.system/Dc/Pv/Power"
-		onValueChanged: Global.solarChargers.dcPower = value === undefined ? NaN : value
+		onValueChanged: Global.system.solar.dcPower = value === undefined ? NaN : value
 	}
 
 	readonly property DataPoint veDcCurrent: DataPoint {
 		source: "com.victronenergy.system/Dc/Pv/Current"
-		onValueChanged: Global.solarChargers.dcCurrent = value === undefined ? NaN : value
+		onValueChanged: Global.system.solar.dcCurrent = value === undefined ? NaN : value
 	}
 }

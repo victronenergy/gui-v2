@@ -8,6 +8,9 @@ import QtQml
 QtObject {
 	id: root
 
+	//% "AC Input"
+	readonly property string ac_input: qsTrId("common_words_ac_input")
+
 	//% "AC Input 1"
 	readonly property string ac_input_1: qsTrId("common_words_ac_input_1")
 
@@ -83,6 +86,10 @@ QtObject {
 	//% "No error"
 	readonly property string no_error: qsTrId("common_words_no_error")
 
+	//: Indicates there are no errors
+	//% "None"
+	readonly property string none_errors: qsTrId("common_words_none_errors")
+
 	//% "Off"
 	readonly property string off: qsTrId("common_words_off");
 
@@ -108,8 +115,9 @@ QtObject {
 	//% "Phase"
 	readonly property string phase: qsTrId("common_words_phase")
 
+	//: AC input or output position
 	//% "Position"
-	readonly property string position: qsTrId("common_words_position")
+	readonly property string position_ac: qsTrId("common_words_position_ac")
 
 	//% "Press to reset"
 	readonly property string press_to_reset: qsTrId("common_words_press_to_reset")

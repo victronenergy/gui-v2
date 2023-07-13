@@ -36,6 +36,7 @@ QtObject {
 	property var generators
 	property var inverters
 	property var notifications
+	property var pvInverters
 	property var relays
 	property var solarChargers
 	property var system

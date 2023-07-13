@@ -84,6 +84,62 @@ QtObject {
 		}
 	}
 
+	//--- PV data ---
+
+	function _updatePvTotals() {
+		let i
+		if (pvInverters.count) {
+			let acPower = 0
+			for (i = 0; i < pvInverters.count; ++i) {
+				const inverter = pvInverters.objectAt(i)
+				if (inverter) {
+					acPower += inverter.power
+				}
+			}
+			Global.system.solar.acPower = acPower
+			Global.system.solar.acCurrent = acPower * 0.01
+		}
+		if (solarChargers.count) {
+			let dcPower = 0
+			for (i = 0; i < solarChargers.count; ++i) {
+				const charger = solarChargers.objectAt(i)
+				if (charger) {
+					dcPower += charger.power
+				}
+			}
+			Global.system.solar.dcPower = dcPower
+			Global.system.solar.dcCurrent = dcPower * 0.01
+		}
+	}
+
+	property Instantiator solarChargers: Instantiator {
+		model: Global.solarChargers.model
+		delegate: QtObject {
+			readonly property real power: modelData.power
+			onPowerChanged: root._updatePvTotals()
+		}
+		onCountChanged: {
+			if (count === 0) {
+				Global.system.solar.dcPower = NaN
+			}
+		}
+	}
+
+	property Instantiator pvInverters: Instantiator {
+		model: Global.pvInverters.model
+		delegate: QtObject {
+			readonly property real power: modelData.power
+			onPowerChanged: root._updatePvTotals()
+		}
+		onCountChanged: {
+			if (count === 0) {
+				Global.system.solar.acPower = NaN
+			}
+		}
+	}
+
+	//---
+
 	Component.onCompleted: {
 		populate()
 	}

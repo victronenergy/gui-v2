@@ -20,6 +20,7 @@ Item {
 			&& !!Global.generators
 			&& !!Global.inverters
 			&& !!Global.notifications
+			&& !!Global.pvInverters
 			&& !!Global.relays
 			&& !!Global.solarChargers
 			&& !!Global.system
@@ -80,6 +81,7 @@ Item {
 	Generators {}
 	Inverters {}
 	Notifications {}
+	PvInverters {}
 	Relays {}
 	SolarChargers {}
 	System {}

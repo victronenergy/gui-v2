@@ -120,9 +120,7 @@ Page {
 						  //% "%1 found"
 						? qsTrId("charger_history_found_with_count").arg(root.solarCharger.errorModel.count)
 						: "")
-					  //: Indicates there are no alarms/errors present
-					  //% "None"
-					: qsTrId("charger_alarms_none")
+					: CommonWords.none_errors
 				secondaryLabel.color: root.solarCharger.errorModel.count ? Theme.color.critical : Theme.color.font.secondary
 
 				// Only enable if there is content on the alarms/errors page.

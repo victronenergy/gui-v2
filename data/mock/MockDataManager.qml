@@ -29,6 +29,7 @@ QtObject {
 			property var generators: GeneratorsImpl {}
 			property var inverters: InvertersImpl {}
 			property var notifications: NotificationsImpl {}
+			property var pvInverters: PvInvertersImpl {}
 			property var relays: RelaysImpl {}
 			property var solarChargers: SolarChargersImpl {}
 			property var system: SystemImpl {}

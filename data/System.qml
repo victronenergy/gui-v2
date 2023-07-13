@@ -31,6 +31,29 @@ QtObject {
 				: Global.inverters.totalNominalInverterPower * (100 / 80)
 	}
 
+	property QtObject solar: QtObject {
+		readonly property real power: isNaN(acPower) && isNaN(dcPower)
+				? NaN
+				: (isNaN(acPower) ? 0 : acPower) + (isNaN(dcPower) ? 0 : dcPower)
+		property real acPower: NaN
+		property real dcPower: NaN
+
+		// Unlike for power, the AC and DC currents cannot be combined because amps for AC and DC
+		// sources are on different scales. So if they are both present, the total is NaN.
+		readonly property real current: (acCurrent || 0) !== 0 && (dcCurrent || 0) !== 0
+				? NaN
+				: (acCurrent || 0) === 0 ? dcCurrent : acCurrent
+		property real acCurrent: NaN
+		property real dcCurrent: NaN
+
+		function reset() {
+			acPower = NaN
+			dcPower = NaN
+			acCurrent = NaN
+			dcCurrent = NaN
+		}
+	}
+
 	property SystemAc ac: SystemAc {}
 	property SystemDc dc: SystemDc {}
 
@@ -40,6 +63,7 @@ QtObject {
 	}
 
 	function reset() {
+		solar.reset()
 		ac.reset()
 		dc.reset()
 	}

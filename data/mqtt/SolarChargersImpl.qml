@@ -11,14 +11,6 @@ import "../common"
 QtObject {
 	id: root
 
-	property PvMonitor pvMonitor: PvMonitor {
-		model: [
-			"mqtt/system/0/Ac/PvOnGrid",
-			"mqtt/system/0/Ac/PvOnGenset",
-			"mqtt/system/0/Ac/PvOnOutput"
-		]
-	}
-
 	property Instantiator chargerObjects: Instantiator {
 		model: VeQItemTableModel {
 			uids: ["mqtt/solarcharger"]
