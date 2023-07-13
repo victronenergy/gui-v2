@@ -37,7 +37,7 @@ Page {
 							unit: VenusOS.Units_Watt
 						},
 						{
-							title: CommonWords.energy_evcs,
+							title: CommonWords.energy,
 							value: Global.evChargers.energy,
 							unit: VenusOS.Units_Energy_KiloWattHour
 						},
