@@ -98,6 +98,28 @@ ListModel {
 		return get(index)[objectProperty]
 	}
 
+	function totalValues(propertyNames) {
+		let totals = {}
+		let propertyIndex
+		for (propertyIndex = 0; propertyIndex < propertyNames.length; ++propertyIndex) {
+			totals[propertyNames[propertyIndex]] = NaN
+		}
+		for (let i = 0; i < count; ++i) {
+			const object = objectAt(i)
+			for (propertyIndex = 0; propertyIndex < propertyNames.length; ++propertyIndex) {
+				const propertyName = propertyNames[propertyIndex]
+				const value = object[propertyName]
+				if (!isNaN(value)) {
+					if (isNaN(totals[propertyName])) {
+						totals[propertyName] = 0
+					}
+					totals[propertyName] += value
+				}
+			}
+		}
+		return totals
+	}
+
 	function _refreshFirstObject() {
 		firstObject = count === 0 ? null : objectAt(0)
 	}

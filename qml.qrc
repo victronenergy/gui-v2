@@ -48,13 +48,13 @@
         <file>components/SeparatorBar.qml</file>
         <file>components/ShinyProgressArc.qml</file>
         <file>components/SideGauge.qml</file>
-        <file>components/SolarYieldGauge.qml</file>
-        <file>components/SolarYieldGraph.qml</file>
-        <file>components/SolarYieldModel.qml</file>
         <file>components/SolarDetailBox.qml</file>
         <file>components/SolarHistoryChart.qml</file>
         <file>components/SolarHistoryErrorView.qml</file>
         <file>components/SolarHistoryTableView.qml</file>
+        <file>components/SolarYieldGauge.qml</file>
+        <file>components/SolarYieldGraph.qml</file>
+        <file>components/SolarYieldModel.qml</file>
         <file>components/SplashView.qml</file>
         <file>components/StatusBar.qml</file>
         <file>components/SwitchControlValue.qml</file>
@@ -152,6 +152,7 @@
         <file>data/Generators.qml</file>
         <file>data/Inverters.qml</file>
         <file>data/Notifications.qml</file>
+        <file>data/PvInverters.qml</file>
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
         <file>data/System.qml</file>
@@ -171,6 +172,7 @@
         <file>data/common/EvCharger.qml</file>
         <file>data/common/Generator.qml</file>
         <file>data/common/Inverter.qml</file>
+        <file>data/common/PvInverter.qml</file>
         <file>data/common/PvMonitor.qml</file>
         <file>data/common/Relay.qml</file>
         <file>data/common/SolarCharger.qml</file>
@@ -188,6 +190,7 @@
         <file>data/dbus/GeneratorsImpl.qml</file>
         <file>data/dbus/InvertersImpl.qml</file>
         <file>data/dbus/NotificationsImpl.qml</file>
+        <file>data/dbus/PvInvertersImpl.qml</file>
         <file>data/dbus/RelaysImpl.qml</file>
         <file>data/dbus/SolarChargersImpl.qml</file>
         <file>data/dbus/SystemImpl.qml</file>
@@ -204,6 +207,7 @@
         <file>data/mock/MockDevice.qml</file>
         <file>data/mock/MockDataManager.qml</file>
         <file>data/mock/NotificationsImpl.qml</file>
+        <file>data/mock/PvInvertersImpl.qml</file>
         <file>data/mock/RelaysImpl.qml</file>
         <file>data/mock/SolarChargersImpl.qml</file>
         <file>data/mock/SystemImpl.qml</file>
@@ -224,6 +228,7 @@
         <file>data/mqtt/InvertersImpl.qml</file>
         <file>data/mqtt/MqttDataManager.qml</file>
         <file>data/mqtt/NotificationsImpl.qml</file>
+        <file>data/mqtt/PvInvertersImpl.qml</file>
         <file>data/mqtt/RelaysImpl.qml</file>
         <file>data/mqtt/SolarChargersImpl.qml</file>
         <file>data/mqtt/SystemImpl.qml</file>
@@ -403,6 +408,7 @@
         <file>pages/settings/tz/TzEuropeData.qml</file>
         <file>pages/settings/tz/TzIndianData.qml</file>
         <file>pages/settings/tz/TzPacificData.qml</file>
+        <file>pages/solar/PvInverterPage.qml</file>
         <file>pages/solar/SolarChargerAlarmsAndErrorsPage.qml</file>
         <file>pages/solar/SolarChargerNetworkedOperationPage.qml</file>
         <file>pages/solar/SolarChargerPage.qml</file>

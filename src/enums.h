@@ -490,6 +490,30 @@ public:
 	};
 	Q_ENUM(Evcs_Position)
 
+	enum PvInverter_StatusCode {
+		PvInverter_StatusCode_Startup0,
+		PvInverter_StatusCode_Startup1,
+		PvInverter_StatusCode_Startup2,
+		PvInverter_StatusCode_Startup3,
+		PvInverter_StatusCode_Startup4,
+		PvInverter_StatusCode_Startup5,
+		PvInverter_StatusCode_Startup6,
+		PvInverter_StatusCode_Running,
+		PvInverter_StatusCode_Standby,
+		PvInverter_StatusCode_BootLoading,
+		PvInverter_StatusCode_Error,
+		PvInverter_StatusCode_RunningMPPT,
+		PvInverter_StatusCode_RunningThrottled
+	};
+	Q_ENUM(PvInverter_StatusCode)
+
+	enum PvInverter_Position {
+		PvInverter_Position_ACInput,
+		PvInverter_Position_ACOutput,
+		PvInverter_Position_ACInput2,
+	};
+	Q_ENUM(PvInverter_Position)
+
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };

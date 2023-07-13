@@ -60,13 +60,13 @@ Page {
 
 			ListRadioButtonGroup {
 				id: positions
-				text: CommonWords.position
+				text: CommonWords.position_ac
 				dataSource: root.devicePath + "/Position"
 				visible: root.serviceType === "pvinverter"
 				optionModel: [
-					{ display: CommonWords.ac_input_1, value: 0 },
-					{ display: CommonWords.ac_input_2, value: 2 },
-					{ display: CommonWords.ac_output, value: 1 },
+					{ display: CommonWords.ac_input_1, value: VenusOS.PvInverter_Position_ACInput },
+					{ display: CommonWords.ac_input_2, value: VenusOS.PvInverter_Position_ACInput2 },
+					{ display: CommonWords.ac_output, value: VenusOS.PvInverter_Position_Output },
 				]
 			}
 

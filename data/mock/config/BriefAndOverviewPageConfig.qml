@@ -12,14 +12,14 @@ QtObject {
 		{
 			name: "ESS - AC & DC coupled.  PV Inverter on AC Bus + AC output",
 			acInputs: { type: VenusOS.AcInputs_InputType_Grid, phaseCount: 3, connected: true },
-			solar: { chargers: [ { acPower: 123, dcPower: 456 } ] },
+			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
 			system: { state: VenusOS.System_State_Inverting, ac: {}, dc: {} },
 			battery: { stateOfCharge: 64, current: 1 },
 		},
 		{
 			name: "ESS - AC & DC coupled. PV Inverter on AC Out",
 			acInputs: { type: VenusOS.AcInputs_InputType_Grid, phaseCount: 3, connected: true },
-			solar: { chargers: [ { acPower: 123, dcPower: 456 } ] },
+			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 73, current: -1 },
 		},
@@ -27,21 +27,21 @@ QtObject {
 		{
 			name: "Phase self consumption",
 			acInputs: { type: VenusOS.AcInputs_InputType_Generator, phaseCount: 3, connected: true },
-			solar: { chargers: [ { acPower: 123, dcPower: 456 } ] },
+			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
 			system: { state: VenusOS.System_State_PassThrough, ac: {} },
 			battery: { stateOfCharge: 29, current: 1 },
 		},
 		{
 			name: "Off grid",
 			acInputs: { type: VenusOS.AcInputs_InputType_Generator, phaseCount: 3, connected: false },
-			solar: { chargers: [ { acPower: 123, dcPower: 456 } ] },
+			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 95, current: 1 },
 		},
 		{
 			name: "ESS - AC coupled on AC Output",
 			acInputs: { type: VenusOS.AcInputs_InputType_Grid, phaseCount: 1, connected: true },
-			solar: { chargers: [ { acPower: 123 } ] },
+			solar: { inverters: [ { power: 1000 } ] },
 			system: { state: VenusOS.System_State_FloatCharging, ac: {} },
 			battery: { stateOfCharge: 100, current: 0 },
 		},
@@ -56,7 +56,7 @@ QtObject {
 			name: "Combo one (amps): Shore / DC Generator / Left & Right Alternator / Solar",
 			acInputs: { type: VenusOS.AcInputs_InputType_Shore, phaseCount: 3, connected: true },
 			dcInputs: { types: [ VenusOS.DcInputs_InputType_DcGenerator, VenusOS.DcInputs_InputType_Alternator ] },
-			solar: { chargers: [ { dcPower: 456 } ] },
+			solar: { chargers: [ { power: 300 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 		},
 		{
@@ -67,21 +67,21 @@ QtObject {
 		{
 			name: "Single phase + solar",
 			acInputs: { type: VenusOS.AcInputs_InputType_Shore, phaseCount: 1, connected: true },
-			solar: { chargers: [ { dcPower: 456 } ] },
+			solar: { chargers: [ { power: 456 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 		},
 		{
 			name: "Small RV with alternator or small boat",
 			acInputs: { type: VenusOS.AcInputs_InputType_Shore, phaseCount: 1, connected: true },
 			dcInputs: { types: [ VenusOS.DcInputs_InputType_Alternator ] },
-			solar: { chargers: [ { dcPower: 456 } ] },
+			solar: { chargers: [ { power: 456 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 		},
 		{
 			name: "Catamaran with wind: Shore / Solar / Left alternator / Right alternator / Wind",
 			acInputs: { type: VenusOS.AcInputs_InputType_Shore, phaseCount: 1, connected: true },
 			dcInputs: { types: [ VenusOS.DcInputs_InputType_Alternator, VenusOS.DcInputs_InputType_Wind ] },
-			solar: { chargers: [ { dcPower: 456 } ] },
+			solar: { chargers: [ { power: 456 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
@@ -89,13 +89,13 @@ QtObject {
 			name: "Boat with DC generator",
 			acInputs: { type: VenusOS.AcInputs_InputType_Shore, phaseCount: 1, connected: true },
 			dcInputs: { types: [ VenusOS.DcInputs_InputType_DcGenerator, VenusOS.DcInputs_InputType_Alternator, VenusOS.DcInputs_InputType_Wind ] },
-			solar: { chargers: [ { dcPower: 456 } ] },
+			solar: { chargers: [ { power: 456 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
 		{
 			name: "Multiple solar chargers",
-			solar: { chargers: [ { acPower: 123 }, { dcPower: 456 }, { acPower: 234 } ] },
+			solar: { chargers: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
 		},
 		{
 			name: "AC Loads + 1 EVCS + DC Loads",
@@ -110,8 +110,15 @@ QtObject {
 			system: { state: VenusOS.System_State_FloatCharging, ac: {} },
 			battery: { stateOfCharge: 100, current: 0 },
 			evcs: { chargers: [ { status: VenusOS.Evcs_Status_Charging }, { status: VenusOS.Evcs_Status_Charging }, { status: VenusOS.Evcs_Status_Disconnected } ] },
-		}
-
+		},
+		{
+			name: "Single PV inverter",
+			solar: { inverters: [ { power: 123 } ] },
+		},
+		{
+			name: "Multiple PV inverters",
+			solar: { inverters: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
+		},
 	]
 
 	function configCount() {
@@ -122,7 +129,7 @@ QtObject {
 		const config = configs[configIndex]
 		Global.mockDataSimulator.setAcInputsRequested(config.acInputs)
 		Global.mockDataSimulator.setDcInputsRequested(config.dcInputs)
-		Global.mockDataSimulator.setSolarChargersRequested(config.solar)
+		Global.mockDataSimulator.setSolarRequested(config.solar)
 		Global.mockDataSimulator.setSystemRequested(config.system)
 		Global.mockDataSimulator.setBatteryRequested(config.battery)
 		Global.mockDataSimulator.setEvChargersRequested(config.evcs)

@@ -13,28 +13,65 @@ OverviewWidget {
 	icon.source: "qrc:/images/solaryield.svg"
 	type: VenusOS.OverviewWidget_Type_Solar
 	enabled: true
-	quantityLabel.dataObject: Global.solarChargers
+	quantityLabel.dataObject: Global.system.solar
 
+	// Solar yield history is only available for PV chargers, and phase data is only available for
+	// PV inverters. So, if there are only solar chargers, show the solar history; otherwise if
+	// there is a single PV inverter, show its phase data.
 	extraContent.children: [
-		SolarYieldGraph {
+		Loader {
+			readonly property int margin: sourceComponent === historyComponent
+				  ? Theme.geometry.overviewPage.widget.solar.graph.margins
+				  : Theme.geometry.overviewPage.widget.extraContent.bottomMargin
+
 			anchors {
-				horizontalCenter: parent.horizontalCenter
+				left: parent.left
+				leftMargin: margin
+				right: parent.right
+				rightMargin: margin
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry.overviewPage.widget.solar.graph.margins
+				bottomMargin: margin
 			}
-			visible: root.size >= VenusOS.OverviewWidget_Size_L
-			width: parent.width - Theme.geometry.overviewPage.widget.solar.graph.margins*2
-			height: parent.height - (2 * Theme.geometry.overviewPage.widget.solar.graph.margins)
+			sourceComponent: {
+				if (root.size >= VenusOS.OverviewWidget_Size_L) {
+					if (Global.pvInverters.model.count === 1 && Global.solarChargers.model.count === 0) {
+						return phaseComponent
+					} else if (Global.pvInverters.model.count === 0) {
+						return historyComponent
+					}
+				}
+				return null
+			}
 		}
 	]
 
+	Component {
+		id: phaseComponent
+
+		ThreePhaseDisplay {
+			model: Global.pvInverters.model.objectAt(0).phases
+			visible: model.count > 1
+		}
+	}
+
+	Component {
+		id: historyComponent
+
+		SolarYieldGraph {
+			height: root.extraContent.height - (2 * Theme.geometry.overviewPage.widget.solar.graph.margins)
+		}
+	}
+
 	MouseArea {
 		anchors.fill: parent
-		enabled: Global.solarChargers.model.count > 0
 		onClicked: {
-			if (Global.solarChargers.model.count === 1) {
+			const singleDeviceOnly = (Global.solarChargers.model.count + Global.pvInverters.model.count) === 1
+			if (singleDeviceOnly && Global.solarChargers.model.count === 1) {
 				Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml",
-						{ "solarCharger": Global.solarChargers.model.get(0).solarCharger })
+						{ "solarCharger": Global.solarChargers.model.objectAt(0) })
+			} else if (singleDeviceOnly && Global.pvInverters.model === 1) {
+				Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
+						{ "pvInverter": Global.pvInverters.model.objectAt(0) })
 			} else {
 				Global.pageManager.pushPage("/pages/solar/SolarDeviceListPage.qml", { "title": root.title })
 			}

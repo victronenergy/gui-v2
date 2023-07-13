@@ -27,13 +27,11 @@ Page {
 				text: qsTrId("evcs_ac_position")
 				optionModel: [
 					{
-						//% "AC Input"
-						display: qsTrId("evcs_position_ac_input"),
+						display: CommonWords.ac_input,
 						value: VenusOS.Evcs_Position_ACInput
 					},
 					{
-						//% "AC Output"
-						display: qsTrId("evcs_position_ac_output"),
+						display: CommonWords.ac_output,
 						value: VenusOS.Evcs_Position_ACOutput
 					}
 				]

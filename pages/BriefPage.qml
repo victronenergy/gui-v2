@@ -171,7 +171,7 @@ Page {
 			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
 			right: mainGauge.left
 		}
-		active: Global.solarChargers.model.count > 0
+		active: Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0
 
 		sourceComponent: SolarYieldGauge {
 			alignment: Qt.AlignLeft | (leftEdge.active ? Qt.AlignBottom : Qt.AlignVCenter)

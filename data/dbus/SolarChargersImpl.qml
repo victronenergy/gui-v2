@@ -10,14 +10,6 @@ import "../common"
 QtObject {
 	id: root
 
-	property PvMonitor pvMonitor: PvMonitor {
-		model: [
-			"dbus/com.victronenergy.system/Ac/PvOnGrid",
-			"dbus/com.victronenergy.system/Ac/PvOnGenset",
-			"dbus/com.victronenergy.system/Ac/PvOnOutput"
-		]
-	}
-
 	property Instantiator chargerObjects: Instantiator {
 		model: VeQItemSortTableModel {
 			dynamicSortFilter: true
