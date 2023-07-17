@@ -14,8 +14,7 @@ OverviewWidget {
 	title: qsTrId("overview_widget_evcs_title")
 	icon.source: "qrc:/images/icon_charging_station_24.svg"
 	type: VenusOS.OverviewWidget_Type_Evcs
-	border.width: Theme.geometry.overviewPage.widget.border.width
-	border.color: Theme.color.overviewPage.widget.border
+	enabled: true
 	quantityLabel.dataObject: { "power": Global.evChargers.power, "current": NaN }
 
 	extraContent.children: [

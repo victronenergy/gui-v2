@@ -51,6 +51,10 @@ Rectangle {
 	radius: Theme.geometry.overviewPage.widget.radius
 	color: Theme.color.overviewPage.widget.background
 
+	border.width: enabled ? Theme.geometry.overviewPage.widget.border.width : 0
+	border.color: Theme.color.overviewPage.widget.border
+	enabled: false
+
 	states: State {
 		name: "expanded"
 		when: root.expanded
