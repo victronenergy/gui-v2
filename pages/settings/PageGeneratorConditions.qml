@@ -30,14 +30,14 @@ Page {
 				text: qsTrId("page_generator_conditions_battery_monitor")
 				//% "Unavailable monitor, set another"
 				defaultSecondaryText: qsTrId("page_generator_conditions_unavailable_monitor_set_another")
-				source: bindPrefix + "/BatteryService"
+				dataSource: bindPrefix + "/BatteryService"
 				visible: dataValue !== "default"
 			}
 
 			ListRadioButtonGroup {
 				//% "On loss of communication"
 				text: qsTrId("page_generator_conditions_on_loss_of_communication")
-				source: bindPrefix + "/OnLossCommunication"
+				dataSource: bindPrefix + "/OnLossCommunication"
 				optionModel: [
 					//% "Stop generator"
 					{ display: qsTrId("page_generator_conditions_stop_generator"), value: 0 },

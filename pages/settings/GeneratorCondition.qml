@@ -38,7 +38,7 @@ ListNavigationItem {
 	// Autocalculate step size based on number of decimals
 	readonly property real stepSize: Math.pow(10, -decimals)
 
-	secondaryText: dataValue === 1 ? CommonWords.enabled : CommonWords.disabled
+	secondaryText: dataPoint.value === 1 ? CommonWords.enabled : CommonWords.disabled
 	onClicked: Global.pageManager.pushPage(subpage)
 
 	DataPoint {
