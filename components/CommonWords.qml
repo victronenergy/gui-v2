@@ -111,9 +111,6 @@ QtObject {
 	//% "Position"
 	readonly property string position: qsTrId("common_words_position")
 
-	//% "Press to reset"
-	readonly property string press_to_reset: qsTrId("common_words_press_to_reset")
-
 	//% "Press to scan"
 	readonly property string press_to_scan: qsTrId("common_words_press_to_scan")
 

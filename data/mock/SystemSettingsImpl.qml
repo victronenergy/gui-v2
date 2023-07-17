@@ -175,24 +175,20 @@ QtObject {
 		setMockSettingValue("Pump0/StartValue", 50)
 		setMockSettingValue("Pump0/StopValue", 80)
 
-		setMockGeneratorStartStopValue('AccumulatedTotal', 3600)
-		setMockGeneratorStartStopValue('Error', 1)
-		setMockGeneratorStartStopValue('ManualStartTimer', 3700)
-		setMockGeneratorStartStopValue('NextTestRun', Date.now() / 1000 + 80)
+		setMockGeneratorStartStopValue('State', 'soc')
 		setMockGeneratorStartStopValue('RunningByCondition', 'soc')
+		setMockGeneratorStartStopValue('Error', 1)
 		setMockGeneratorStartStopValue('Runtime', 1234)
-		setMockGeneratorStartStopValue('ServiceCounterReset', 0)
-		setMockGeneratorStartStopValue('State', 0)
+		setMockGeneratorStartStopValue('AccumulatedTotal', 3600)
 		setMockGeneratorStartStopValue('TestRunIntervalRuntime', 5678)
-
-		setMockGenerator0Value('AccumulatedTotal', 3780849)
+		setMockGeneratorStartStopValue('NextTestRun', Date.now() / 1000 + 80)
 		setMockGenerator0Value('AutoStartEnabled', 1)
+		setMockGeneratorStartStopValue('ManualStartTimer', 3700)
 		setMockGenerator0Value('AccumulatedDaily', '{"1667347200": 60, "1667433600": 120, "1667520000": 1800}')
 		setMockGenerator0Value('BatteryService', "default")
 		setMockGenerator0Value('OnLossCommunication', 2)
-		setMockGenerator0Value('ServiceInterval', 159984000)
-		setMockGenerator0Value('Soc', 1)
 		setMockGenerator0Value('StopWhenAc1Available', 0)
+		setMockGenerator0Value('Soc', 1)
 
 		setMockSettingValue("Services/Modbus", 0)
 		setMockModbusTcpValue("Services/Count", 2)
@@ -221,7 +217,7 @@ QtObject {
 		// equivalent of "ip -json -details -statistics link show can0" as per vePlatform::canBusStats()
 		Global.systemSettings._canBusStats["can0"] = '[{"ifindex":3,"ifname":"can0","flags":["NOARP","UP","LOWER_UP","ECHO"],"mtu":16,"qdisc":"pfifo_fast","operstate":"UP","linkmode":"DEFAULT","group":"default","txqlen":100,"link_type":"can","promiscuity":0,"min_mtu":0,"max_mtu":0,"linkinfo":{"info_kind":"can","info_data":{"state":"ERROR-PASSIVE","berr_counter":{"tx":0,"rx":135},"restart_ms":100,"bittiming":{"bitrate":250000,"sample_point":0.875,"tq":250,"prop_seg":6,"phase_seg1":7,"phase_seg2":2,"sjw":1},"bittiming_const":{"name":"sun4i_can","tseg1":{"min":1,"max":16},"tseg2":{"min":1,"max":8},"sjw":{"min":1,"max":4},"brp":{"min":1,"max":64},"brp_inc":1},"clock":24000000},"info_xstats":{"restarts":0,"bus_error":2,"arbitration_lost":0,"error_warning":1,"error_passive":1,"bus_off":0}},"num_tx_queues":1,"num_rx_queues":1,"gso_max_size":65536,"gso_max_segs":65535,"stats64":{"rx":{"bytes":16,"packets":2,"errors":2,"dropped":0,"over_errors":0,"multicast":0},"tx":{"bytes":0,"packets":0,"errors":0,"dropped":0,"carrier_errors":0,"collisions":0}}}]'
 
-		setMockSettingValue("Relay/Function", 1)
+		setMockSettingValue("Relay/Function", 0) // Alarm
 		setMockSettingValue("Relay/Polarity", 0)
 		setMockSettingValue("Relay/1/Function", 4) // Temperature
 		setMockSettingValue("Relay/1/Polarity", 0)
