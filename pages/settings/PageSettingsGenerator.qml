@@ -36,7 +36,7 @@ Page {
 				//% "Detect generator at AC input"
 				text: qsTrId("page_settings_generator_detect_generator_at_ac_input")
 				dataSource: settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
-				enabled: dataValid && (generatorIsSet || checked)
+				enabled: valid && (generatorIsSet || checked)
 				onClicked: {
 					if (!checked) {
 						if (!generatorIsSet) {
