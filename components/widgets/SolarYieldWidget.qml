@@ -12,9 +12,7 @@ OverviewWidget {
 	title: qsTrId("overview_widget_solaryield_title")
 	icon.source: "qrc:/images/solaryield.svg"
 	type: VenusOS.OverviewWidget_Type_Solar
-	border.width: enabled ? Theme.geometry.overviewPage.widget.border.width : 0
-	border.color: Theme.color.overviewPage.widget.border
-
+	enabled: true
 	quantityLabel.dataObject: Global.solarChargers
 
 	extraContent.children: [
