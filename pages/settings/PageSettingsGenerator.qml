@@ -65,20 +65,7 @@ Page {
 			}
 
 			ListSwitch {
-				//% "Alarm when generator is not in auto start mode"
-				text: qsTrId("page_settings_generator_alarm_when_not_in_auto_start")
-				dataSource: settingsBindPrefix + "/Alarms/AutoStartDisabled"
-				onClicked: {
-					if (!checked) {
-						//% "An alarm will be triggered when auto start function is left disabled for more than 10 minutes."
-						Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
-								qsTrId("page_settings_generator_alarm_info"), 12000)
-					}
-				}
-			}
-
-			ListSwitch {
-				id: quietHours
+				id: timeZones
 
 				text: CommonWords.quiet_hours
 				dataSource: settingsBindPrefix + "/QuietHours/Enabled"
@@ -89,7 +76,7 @@ Page {
 				//% "Quiet hours start time"
 				text: qsTrId("page_settings_generator_quiet_hours_start_time")
 				dataSource: settingsBindPrefix + "/QuietHours/StartTime"
-				visible: defaultVisible && quietHours.checked
+				visible: defaultVisible && timeZones.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
@@ -97,7 +84,7 @@ Page {
 				//% "Quiet hours end time"
 				text: qsTrId("page_settings_generator_quiet_hours_end_time")
 				dataSource: settingsBindPrefix + "/QuietHours/EndTime"
-				visible: defaultVisible && quietHours.checked
+				visible: defaultVisible && timeZones.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
