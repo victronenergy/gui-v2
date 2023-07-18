@@ -15,7 +15,7 @@ Page {
 	property real _gaugeLabelMargin: Theme.geometry.briefPage.edgeGauge.label.initialize.margin
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
-	readonly property string _gridIcon: {
+	readonly property string _inputsIconSource: {
 		const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
 				+ Global.dcInputs.model.count
 		if (totalInputs <= 1) {
@@ -130,7 +130,7 @@ Page {
 			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
 			label.opacity: root._gaugeLabelOpacity
 
-			icon.source: root._gridIcon
+			icon.source: root._inputsIconSource
 
 			// AC and DC amp values cannot be combined. If there are both AC and DC values, show
 			// Watts even if Amps is preferred.
@@ -254,7 +254,7 @@ Page {
 			verticalCenterOffset: Theme.geometry.briefPage.sidePanel.verticalCenterOffset
 		}
 		width: Theme.geometry.briefPage.sidePanel.width
-		gridIcon: root._gridIcon
+		inputsIconSource: root._inputsIconSource
 
 		// hidden by default.
 		x: root.width
