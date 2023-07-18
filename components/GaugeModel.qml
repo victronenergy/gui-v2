@@ -103,8 +103,10 @@ ListModel {
 
 			function refresh() {
 				const gaugeIndex = root.findGauge(gaugeObject)
-				if (isBattery && gaugeIndex < 0) {
-					root.addGauge(gaugeObject)
+				if (isBattery) {
+					if (gaugeIndex < 0) {
+						root.addGauge(gaugeObject)
+					}
 				} else if (gaugeIndex >= 0 && tankModel.count === 0) {
 					root.remove(gaugeIndex)
 				} else if (gaugeIndex < 0 && tankModel.count > 0) {
