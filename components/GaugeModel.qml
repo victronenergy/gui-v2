@@ -38,7 +38,7 @@ ListModel {
 			}
 		}
 		insert(_insertionIndex(gauge.tankType, sortedGaugeTypes),
-			   Object.assign({}, Gauges.tankProperties(gauge.tankType), { tankType: gauge.tankType, value: 0 }))
+			   Object.assign({}, Gauges.tankProperties(gauge.tankType), { tankType: gauge.tankType, value: gauge.tankLevel }))
 	}
 
 	function findGauge(gauge) {
