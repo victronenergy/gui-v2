@@ -10,12 +10,31 @@ Page {
 	id: root
 
 	property string bindPrefix
+	property string startStopBindPrefix
 	property variant availableBatteryMonitors: availableBatteryServices.valid ? availableBatteryServices.value : ""
 
 	DataPoint {
 		id: availableBatteryServices
 
 		source: "com.victronenergy.system/AvailableBatteryMeasurements"
+	}
+
+	DataPoint {
+		id: stopOnAc1Item
+
+		source: bindPrefix + "/StopWhenAc1Available"
+	}
+
+	DataPoint {
+		id: stopOnAc2Item
+
+		source: bindPrefix + "/StopWhenAc2Available"
+	}
+
+	DataPoint {
+		id: capabilities
+
+		source: startStopBindPrefix + "/Capabilities"
 	}
 
 	GradientListView {
@@ -48,16 +67,25 @@ Page {
 				]
 			}
 
-			ListSwitch {
-				id: enableSwitch
+			ListRadioButtonGroup {
+				//% "Stop generator when AC-input is available"
+				text: qsTrId("page_generator_conditions_stop_generator_when_ac_input_available")
+				currentIndex: stopOnAc1Item.value === 1
+					   ? 1 : stopOnAc2Item.value === 1
+							  ? 2 : 0
+				updateOnClick: false
+				optionModel: [
+					{ display: CommonWords.disabled, value: 0 },
+					{ display: CommonWords.ac_input_1, value: 1 },
+					{ display: CommonWords.ac_input_2, value: 2, readOnly: !(capabilities.value & 1) },
+				]
 
-				//% "Do not run generator when AC1 is in use"
-				text: qsTrId("page_generator_conditions_do_not_run_generator_when_ac1_is_in_use")
-				dataSource: bindPrefix + "/StopWhenAc1Available"
-				onClicked: {
-					if (!checked) {
-						//% "Make sure that the generator is not connected to the inverter AC input 1 when using this option."
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_generator_conditions_make_sure_generator_is_not_connected"),
+				onOptionClicked: function(index) {
+					stopOnAc1Item.setValue(index & 1)
+					stopOnAc2Item.setValue((index & 2) >> 1)
+					if (index > 0) {
+						//% "Make sure that the generator is not connected to AC input %1 when using this option."
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_generator_conditions_make_sure_generator_is_not_connected").arg(index),
 																   Theme.animation.generator.stopWhenAc1Available.toastNotification.autoClose.duration)
 					}
 				}

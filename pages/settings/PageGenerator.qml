@@ -20,7 +20,17 @@ Page {
 
 	function getState()
 	{
-		if (generatorState.value === 10) {
+		switch (generatorState.value) {
+		case 2:
+			//% "Warm-up"
+			return qsTrId("page_generator_warm_up")
+		case 3:
+			//% "Cool-down"
+			return qsTrId("page_generator_cool_down")
+		case 4:
+			//% "Stopping"
+			return qsTrId("page_generator_stopping")
+		case 10:
 			return CommonWords.error
 		}
 
@@ -119,7 +129,7 @@ Page {
 			text: qsTrId("settings_page_relay_generator_run_time")
 			secondaryText: dataValid ? Utils.secondsToString(dataValue, false) : "0"
 			dataSource: root.startStopBindPrefix + "/Runtime"
-			visible: generatorState.value === 1
+			visible: generatorState.value in [1, 2, 3] // Running, Warm-up, Cool-down
 		}
 
 		ListTextItem {

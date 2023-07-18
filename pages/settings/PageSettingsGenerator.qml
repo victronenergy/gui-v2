@@ -11,6 +11,13 @@ Page {
 
 	property string settingsBindPrefix
 	property string startStopBindPrefix
+	property int warmupCapability: 1
+
+	DataPoint {
+		id: capabilities
+
+		source: startStopBindPrefix + "/Capabilities"
+	}
 
 	GradientListView {
 		id: settingsListView
@@ -20,7 +27,7 @@ Page {
 			ListNavigationItem {
 				//% "Conditions"
 				text: qsTrId("page_settings_generator_conditions")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorConditions.qml", { title: text, bindPrefix: root.settingsBindPrefix })
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorConditions.qml", { title: text, bindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 			}
 
 			ListSpinBox {
@@ -29,6 +36,26 @@ Page {
 				dataSource: settingsBindPrefix + "/MinimumRuntime"
 				suffix: "m"
 				decimals: 0
+			}
+
+			ListSpinBox {
+				//% "Warm-up time"
+				text: qsTrId("page_settings_generator_warm_up_time")
+				visible: capabilities.value & warmupCapability
+				dataSource: settingsBindPrefix + "/WarmUpTime"
+				suffix: "s"
+				decimals: 0
+				stepSize: 10
+			}
+
+			ListSpinBox {
+				//% "Cool-down time"
+				text: qsTrId("page_settings_generator_cool_down_time")
+				visible: capabilities.value & warmupCapability
+				dataSource: settingsBindPrefix + "/CoolDownTime"
+				suffix: "s"
+				decimals: 0
+				stepSize: 10
 			}
 
 			ListSwitch {
