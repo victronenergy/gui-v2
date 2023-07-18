@@ -11,7 +11,7 @@ import "/components/Utils.js" as Utils
 Column {
 	id: root
 
-	property string gridIcon
+	property string inputsIconSource
 
 	spacing: Theme.geometry.briefPage.sidePanel.columnSpacing
 
@@ -167,7 +167,7 @@ Column {
 
 				//% "Power"
 				title: qsTrId("power")
-				icon.source: root.gridIcon
+				icon.source: root.inputsIconSource
 			}
 
 			ElectricalQuantityLabel {
