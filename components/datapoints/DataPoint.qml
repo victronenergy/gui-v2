@@ -27,6 +27,7 @@ QtObject {
 	property bool hasMax
 	property var min: hasMin && sourceObject ? sourceObject.min : undefined
 	property var max: hasMax && sourceObject ? sourceObject.max : undefined
+	property bool invalidate: true
 
 	property var _dbusImpl
 	property var _mqttImpl
@@ -84,11 +85,17 @@ QtObject {
 			sourceObject.destroy()
 			sourceObject = null
 		}
-		sourceObject = _dbusImpl.createObject(root, { uid: Qt.binding(function() { return root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source }) })
+		sourceObject = _dbusImpl.createObject(root,
+											  {
+												  uid: Qt.binding(function() { return root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source }),
+												  invalidate: Qt.binding(function() { return root.invalidate })
+											  }
+											  )
 		if (!sourceObject) {
 			console.warn("Failed to create object from DataPointDBusImpl.qml", _dbusImpl.errorString())
 			return
 		}
+		sourceObject.onInvalidateChanged.connect(function() { root.invalidate = sourceObject.invalidate })
 	}
 
 	function _createMqttImpl() {
@@ -100,11 +107,17 @@ QtObject {
 			sourceObject.destroy()
 			sourceObject = null
 		}
-		sourceObject = _mqttImpl.createObject(root, { uid: Qt.binding(function() { return _mqttUidHelper.mqttUid }) })
+		sourceObject = _mqttImpl.createObject(root,
+											  {
+												  uid: Qt.binding(function() { return _mqttUidHelper.mqttUid }),
+												  invalidate: Qt.binding(function() { return root.invalidate })
+											  }
+											  )
 		if (!sourceObject) {
 			console.warn("Failed to create object from DataPointMqttImpl.qml", _mqttImpl.errorString())
 			return
 		}
+		sourceObject.onInvalidateChanged.connect(function() { root.invalidate = sourceObject.invalidate })
 	}
 
 	function _reset() {
@@ -137,7 +150,13 @@ QtObject {
 			break
 		case BackendConnection.MockSource:
 			const comp = Qt.createComponent(Qt.resolvedUrl("DataPointMockImpl.qml"))
-			sourceObject = comp.createObject(root, { "source": root.source })
+			sourceObject = comp.createObject(root,
+											 {
+												 "source": root.source,
+												 "invalidate": Qt.binding(function() { return root.invalidate })
+											 }
+											 )
+			sourceObject.onInvalidateChanged.connect(function() { root.invalidate = sourceObject.invalidate })
 			break
 		default:
 			console.warn("Unknown DataPoint source type:", sourceType)
