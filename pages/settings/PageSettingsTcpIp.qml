@@ -138,7 +138,7 @@ Page {
 
 		ListTextField {
 			text: CommonWords.password
-			textField.maximumLength: 35
+			textField.maximumLength: 63
 			visible: root.service && root._wifi
 					 && (root.service.state === "idle" || root.service.state === "failure")
 					 && !root.service.favorite && root._secured
