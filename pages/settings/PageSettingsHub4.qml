@@ -126,6 +126,37 @@ Page {
 		}
 
 		ListRadioButtonGroup {
+			//% "Peak shaving"
+			text: qsTrId("settings_ess_peak_shaving")
+			currentIndex: batteryLifeState.dataValue === VenusOS.Ess_BatteryLifeState_KeepCharged ? 1 : peakshaveItem.value
+			updateOnClick: false
+			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			enabled: batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+			optionModel: [
+				//% "Above minimum SOC only"
+				{ display: qsTrId("settings_ess_above_minimum_soc_only"), value: 0 },
+				//% "Always"
+				{ display: qsTrId("settings_ess_always"), value: 1 }
+			]
+			onOptionClicked: function(index) {
+				peakshaveItem.setValue(index)
+				if (index === 1) {
+					//% "Use this option for peak shaving.\n\nThe peak shaving threshold is set using the AC input current limit setting.\n\nSee documentation for further information."
+					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_use_this_option_for_peak_shaving"))
+				} else {
+					//% "Use this option in systems that do not perform peak shaving."
+					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_do_not_perform_peak_shaving"))
+				}
+			}
+
+			DataPoint {
+				id: peakshaveItem
+
+				source:"com.victronenergy.settings/Settings/CGwacs/AlwaysPeakShave"
+			}
+		}
+
+		ListRadioButtonGroup {
 			id: batteryLifeState
 
 			//% "BatteryLife state"
