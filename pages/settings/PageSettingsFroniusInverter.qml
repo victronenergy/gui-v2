@@ -9,8 +9,7 @@ import "/components/Utils.js" as Utils
 Page {
 	id: root
 
-	property string uniqueId
-	readonly property string bindPrefix: "com.victronenergy.settings/Settings/Fronius/Inverters/" + uniqueId
+	property string bindPrefix
 	readonly property int phaseCount: phaseCountItem.valid ? phaseCountItem.value : 1
 
 	DataPoint {
