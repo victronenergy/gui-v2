@@ -27,8 +27,24 @@ QtObject {
 		 }
 	}
 
-	property DataPoint electricalQuantity: DataPoint {
-		 source: "com.victronenergy.settings/Settings/Gui/ElectricalPowerIndicator"
+	property QtObject electricalQuantity: QtObject {
+		// Values for /Settings/Gui/ElectricalPowerIndicator: 0 = watts, 1 = amps
+		readonly property var value: _electricalQuantityDataPoint.value === 1 ? VenusOS.Units_Amp : VenusOS.Units_Watt
+
+		function setValue(v) {
+			if (v === VenusOS.Units_Watt) {
+				_electricalQuantityDataPoint.setValue(0)
+			} else if (v === VenusOS.Units_Amp) {
+				_electricalQuantityDataPoint.setValue(1)
+			} else {
+				console.warn("Unsupported electrical quantity:", v)
+			}
+		}
+
+		readonly property DataPoint _electricalQuantityDataPoint: DataPoint {
+			id: _electricalQuantityDataPoint
+			source: "com.victronenergy.settings/Settings/Gui/ElectricalPowerIndicator"
+		}
 	}
 
 	property QtObject temperatureUnit: QtObject {
