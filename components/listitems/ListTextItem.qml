@@ -11,6 +11,7 @@ ListItem {
 	property alias dataSource: dataPoint.source
 	readonly property alias dataValue: dataPoint.value
 	readonly property alias dataValid: dataPoint.valid
+	property alias dataInvalidate: dataPoint.invalidate
 	function setDataValue(v) { dataPoint.setValue(v) }
 
 	property alias secondaryText: secondaryLabel.text
