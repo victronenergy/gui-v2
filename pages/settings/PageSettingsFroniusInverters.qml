@@ -4,28 +4,36 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import "/components/Utils.js" as Utils
 
 Page {
 	id: root
 
 	property string bindPrefix: "com.victronenergy.settings/Settings/Fronius"
-	property DataPoint inverterIdsItem: DataPoint { source: bindPrefix + "/InverterIds" }
-
 
 	GradientListView {
-		model: inverterIdsItem.value ? inverterIdsItem.value.split(',') : []
+		model: VeQItemTableModel {
+			uids: BackendConnection.type === BackendConnection.DBusSource
+				  ? ["dbus/" + bindPrefix + "/Inverters"]
+				  : BackendConnection.type === BackendConnection.MqttSource
+					? ["mqtt/settings/0/Settings/Fronius/Inverters"]
+					: []
+
+			flags: VeQItemTableModel.AddChildren |
+				   VeQItemTableModel.AddNonLeaves |
+				   VeQItemTableModel.DontAddItem
+		}
 		delegate: ListNavigationItem {
 			id: menu
 
-			property string uniqueId: modelData
-			property string inverterPath: bindPrefix + "/Inverters/" + uniqueId
+			property string inverterPath: model.uid
 			property DataPoint customNameItem: DataPoint { source: inverterPath + "/CustomName" }
 			property DataPoint phaseItem: DataPoint { source: inverterPath + "/Phase" }
 			property DataPoint positionItem: DataPoint { source: inverterPath + "/Position" }
 			property DataPoint serialNumberItem: DataPoint { source: inverterPath + "/SerialNumber" }
 
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverter.qml", {"title": menu.text, "uniqueId": menu.uniqueId})
+			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverter.qml", {"title": menu.text, "bindPrefix": menu.inverterPath})
 			text: customNameItem.value || serialNumberItem.value || '--'
 			secondaryText: {
 				switch (positionItem.value) {
