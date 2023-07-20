@@ -65,8 +65,8 @@ Item {
 						startAngle: 0
 						endAngle: 270
 						value: loader.value
-						progressColor: Theme.statusColorValue(loader.status)
-						remainderColor: Theme.statusColorValue(loader.status, true)
+						progressColor: Theme.statusColorValue(loader.gaugeStatus)
+						remainderColor: Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
 					}
