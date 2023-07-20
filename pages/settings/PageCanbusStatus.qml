@@ -28,15 +28,11 @@ Page {
 			if (!root.gateway) {
 				return
 			}
-			const statsText = Global.systemSettings.canBusStatistics(root.gateway)
 			let stats
 			try {
-				stats = JSON.parse(statsText)[0]
+				stats = JSON.parse(canBusStats.value)[0]
 			} catch (e) {
-				console.warn("Unable to parse JSON:", statsText, "exception:", e)
-
-				// TODO requires venus-platform backend
-				console.warn("TODO Global.systemSettings.canBusStatistics() not yet implemented!!")
+				console.warn("Unable to parse JSON:", canBusStats.value, "exception:", e)
 				return
 			}
 			if (!stats) {
@@ -118,5 +114,10 @@ Page {
 				}
 			}
 		}
+	}
+
+	DataPoint {
+		id: canBusStats
+		source: "com.victronenergy.platform/CanBus/Interface/" + gateway + "/Statistics"
 	}
 }
