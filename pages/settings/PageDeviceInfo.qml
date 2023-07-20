@@ -58,6 +58,10 @@ Page {
 				//% "Product ID"
 				text: qsTrId("settings_deviceinfo_product_id")
 				dataSource: root.bindPrefix + "/ProductId"
+
+				// Value should be shown in hex. TODO can use VeQuickItem::text instead to auto
+				// show the hex text value from the backend, when that is available via MQTT.
+				secondaryText: dataValue ? "0x" + dataValue.toString(16).toUpperCase() : ""
 			}
 
 			ListTextItem {
