@@ -118,12 +118,6 @@ QtObject {
 		}
 	}
 
-	// TODO get canBusStats from venus-platform when available, as equivalent of vePlatform.canBusStats(gateway)
-	property var _canBusStats: ({})
-	function canBusStatistics(gateway) {
-		return _canBusStats[gateway] || ""
-	}
-
 	function reset() {
 		// no-op
 	}
