@@ -137,6 +137,71 @@ Page {
 					{ display: qsTrId("settings_dvcc_scs_active"), value: 4 },
 				]
 			}
+
+			ListRadioButtonGroup {
+				id: bmsOptions
+
+				readonly property var defaultOptionModel: [
+					//% "Automatic selection"
+					{ display: qsTrId("settings_dvcc_auto_selection"), value: -1 },
+					//% "No BMS control"
+					{ display: qsTrId("settings_dvcc_no_bms_control"), value: -255 },
+				]
+
+				//% "Controlling BMS"
+				text: qsTrId("settings_dvcc_controlling_bms")
+				dataSource: "com.victronenergy.settings/Settings/SystemSetup/BmsInstance"
+				optionModel: defaultOptionModel
+
+				//: Shown when BMS instance is invalid
+				//% "Unavailable, set another"
+				defaultSecondaryText: qsTrId("settings_dvcc_unavailable_bms")
+
+
+				DataPoint {
+					source: "com.victronenergy.system/AvailableBmsServices"
+					onValueChanged: {
+						if (value === undefined) {
+							return
+						}
+						let options = bmsOptions.optionModel.slice(0, defaultOptionModel.length)
+						const bmses = value
+						for (let i = 0; i < bmses.length; i++) {
+							options.push({
+								"display": bmses[i].name,
+								"value": bmses[i].instance
+							})
+						}
+						bmsOptions.optionModel = options
+					}
+				}
+			}
+
+			ListTextItem {
+				//% "Auto selected"
+				text: qsTrId("settings_dvcc_auto_selected")
+				visible: defaultVisible && bmsOptions.currentValue === -1
+				secondaryText: bmsService.valid
+							   ? bmsProductName.value || bmsCustomName.value
+								 //: Indicates no option is selected
+								 //% "None"
+							   : qsTrId("settings_dvcc_auto_selected_none")
+
+				DataPoint {
+					id: bmsService
+					source: "com.victronenergy.system/ActiveBmsService"
+				}
+
+				DataPoint {
+					id: bmsProductName
+					source: bmsService.valid ? bmsService.value + "/ProductName" : ""
+				}
+
+				DataPoint {
+					id: bmsCustomName
+					source: bmsService.valid ? bmsService.value + "/CustomName" : ""
+				}
+			}
 		}
 	}
 }
