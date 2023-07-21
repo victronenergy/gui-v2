@@ -68,6 +68,7 @@ Page {
 
 					text: solarCharger ? solarCharger.name : pvInverter.name
 					primaryLabel.width: availableWidth - Theme.geometry.solarListPage.quantityRow.width - Theme.geometry.listItem.content.horizontalMargin
+					enabled: !!solarCharger || !!pvInverter
 
 					onClicked: {
 						if (solarCharger) {
