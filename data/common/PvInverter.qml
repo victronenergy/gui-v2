@@ -35,6 +35,7 @@ Device {
 		}
 
 		readonly property Instantiator _phaseObjects: Instantiator {
+			model: null
 			delegate: QtObject {
 				readonly property VeQuickItem _phaseEnergy: VeQuickItem {
 					uid: pvInverter.serviceUid + "/Ac/L" + (model.index + 1) + "/Energy/Forward"
