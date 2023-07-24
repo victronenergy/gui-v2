@@ -157,7 +157,7 @@ QtObject {
 			name: "Double gauge x 2",
 			inputs: [
 				{ name: "Refrigerator", temperature_celsius: 4.4, humidity: 32.6075 },
-				{ name: "Freezer", temperature_celsius: -18.2, humidity: 28.921 },
+				{ name: "Freezer", temperature_celsius: -48.2, humidity: 28.921 },
 			]
 		},
 		{
@@ -181,7 +181,7 @@ QtObject {
 			name: "Mix single/double gauge layouts",
 			inputs: [
 				{ name: "Refrigerator", temperature_celsius: 4.4, humidity: 32.6075 },
-				{ name: "Freezer", temperature_celsius: -18.2, humidity: 28.921 },
+				{ name: "Freezer", temperature_celsius: 100, humidity: 100 },
 				{ name: "Sensor A", temperature_celsius: 12, humidity: NaN },
 				{ name: "Sensor B", temperature_celsius: 52, humidity: NaN },
 				{ name: "Sensor C", temperature_celsius: 72, humidity: NaN },

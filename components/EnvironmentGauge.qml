@@ -10,10 +10,13 @@ Item {
 	property alias value: quantityLabel.value
 	property alias unit: quantityLabel.unit
 
-	property real minimumValue: 0
-	property real maximumValue: 100
-	property alias zeroMarkerVisible: zeroMarker.visible
-	property bool reduceFontSize
+	property int minimumValue: 0
+	property int maximumValue: 100
+	property int highlightedValue: 0
+	property color minimumValueColor
+	property color maximumValueColor
+	property color highlightedValueColor
+
 	property alias gradient: gaugeBar.gradient
 	property bool animationEnabled
 
@@ -23,9 +26,11 @@ Item {
 			console.warn("Ignoring zero range! Min:", minimumValue, "Max:", maximumValue)
 			return 0
 		}
-		const unitsPerPixel = gaugeBar.height / range
+		const tickHeight = Theme.geometry.levelsPage.environment.gauge.tick.size
+		const unitsPerPixel = (gaugeTicks.height - tickHeight) / range
 		const unitCount = v - minimumValue
-		return Math.round(gaugeBar.height - (unitsPerPixel * unitCount))
+		const pos = gaugeBar.height - (gaugeTicks.anchors.bottomMargin + (unitsPerPixel * unitCount)) - tickHeight/2
+		return Math.max(0, Math.min(pos, gaugeBar.height))
 	}
 
 	width: Theme.geometry.levelsPage.environment.gauge.width
@@ -53,8 +58,60 @@ Item {
 			topMargin: Theme.geometry.levelsPage.environment.gauge.typeLabel.topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		font.pixelSize: Theme.font.size.body1
+		font.pixelSize: Theme.font.size.caption
 		color: Theme.color.font.primary
+	}
+
+	Column {
+		id: gaugeTicks
+
+		anchors {
+			top: gaugeBar.top
+			bottom: gaugeBar.bottom
+			topMargin: Theme.geometry.levelsPage.environment.gauge.bar.padding
+			bottomMargin: Theme.geometry.levelsPage.environment.gauge.bar.padding
+			horizontalCenter: parent.horizontalCenter
+		}
+		spacing: (height - (tickRepeater.count * Theme.geometry.levelsPage.environment.gauge.tick.size)) / (tickRepeater.count - 1)
+
+		Repeater {
+			id: tickRepeater
+
+			model: (root.maximumValue + Theme.geometry.levelsPage.environment.gauge.tick.step - root.minimumValue) / Theme.geometry.levelsPage.environment.gauge.tick.step
+			delegate: Item {
+				readonly property int tickValue: {
+					const invertedIndex = tickRepeater.count - index - 1
+					return minimumValue + (Theme.geometry.levelsPage.environment.gauge.tick.step * invertedIndex)
+				}
+
+				width: Theme.geometry.levelsPage.environment.gauge.tick.size
+				height: Theme.geometry.levelsPage.environment.gauge.tick.size
+
+				Label {
+					id: tickLabel
+
+					anchors.verticalCenter: parent.verticalCenter
+					leftPadding: Theme.geometry.levelsPage.environment.gauge.tick.margin
+					text: model.index === 0 ? root.maximumValue
+						: model.index === tickRepeater.count - 1 ? root.minimumValue
+						: tickValue === root.highlightedValue ? tickValue
+						: ""
+					color: Theme.color.levelsPage.environment.gauge.tickText
+					font.pixelSize: Theme.font.size.caption
+				}
+
+				Rectangle {
+					anchors.verticalCenter: parent.verticalCenter
+					width: Theme.geometry.levelsPage.environment.gauge.tick.size
+					height: Theme.geometry.levelsPage.environment.gauge.tick.size
+					radius: Theme.geometry.levelsPage.environment.gauge.tick.size
+					color: model.index === 0 ? root.maximumValueColor
+						 : model.index === tickRepeater.count - 1 ? root.minimumValueColor
+						 : tickValue === root.highlightedValue ? root.highlightedValueColor
+						 : Theme.color.levelsPage.environment.gauge.tick
+				}
+			}
+		}
 	}
 
 	Rectangle {
@@ -63,9 +120,10 @@ Item {
 		anchors {
 			top: typeLabel.bottom
 			topMargin: Theme.geometry.levelsPage.environment.gauge.bar.topMargin
-			bottom: quantityLabel.top
+			bottom: quantitySeparator.top
 			bottomMargin: Theme.geometry.levelsPage.environment.gauge.bar.bottomMargin
-			horizontalCenter: parent.horizontalCenter
+			right: gaugeTicks.left
+			rightMargin: Theme.geometry.levelsPage.environment.gauge.tick.margin
 		}
 		width: Theme.geometry.levelsPage.environment.gauge.bar.width
 		radius: Theme.geometry.levelsPage.environment.gauge.bar.radius
@@ -74,7 +132,7 @@ Item {
 			id: valueMarker
 
 			visible: !isNaN(root.value)
-			y: root._barYPosForValue(Math.max(root.minimumValue, Math.min(root.maximumValue, root.value))) - height/2
+			y: root._barYPosForValue(root.value) - height/2
 			width: Theme.geometry.levelsPage.environment.gauge.valueMarker.width
 			height: Theme.geometry.levelsPage.environment.gauge.valueMarker.background.height
 			color: Theme.color.levelsPage.environment.panel.background
@@ -92,41 +150,17 @@ Item {
 				color: Theme.color.font.primary
 			}
 		}
+	}
 
-		// Short line to left of '0' text
-		Rectangle {
-			anchors {
-				verticalCenter: zeroMarker.verticalCenter
-				right: parent.left
-				rightMargin: width
-			}
-			width: Theme.geometry.levelsPage.environment.gauge.zeroMarker.width
-			height: Theme.geometry.levelsPage.environment.gauge.zeroMarker.height
-			visible: zeroMarker.visible
-			color: Theme.color.font.secondary
-		}
+	SeparatorBar {
+		id: quantitySeparator
 
-		Label {
-			id: zeroMarker
-
-			x: parent.width/2 - width/2
-			y: visible ? root._barYPosForValue(0) - height/2 : 0
-			text: "0"
-			font.pixelSize: Theme.font.size.body1
-			color: Theme.color.levelsPage.environment.gauge.zeroMarker
-		}
-
-		// Short line to right of '0' text
-		Rectangle {
-			anchors {
-				verticalCenter: zeroMarker.verticalCenter
-				left: parent.right
-				leftMargin: width
-			}
-			width: Theme.geometry.levelsPage.environment.gauge.zeroMarker.width
-			height: Theme.geometry.levelsPage.environment.gauge.zeroMarker.height
-			visible: zeroMarker.visible
-			color: Theme.color.font.secondary
+		anchors {
+			left: parent.left
+			leftMargin: Theme.geometry.levelsPage.environment.gauge.separator.horizontalMargin
+			right: parent.right
+			rightMargin: Theme.geometry.levelsPage.environment.gauge.separator.horizontalMargin
+			bottom: quantityLabel.top
 		}
 	}
 
@@ -135,9 +169,9 @@ Item {
 
 		anchors {
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.levelsPage.environment.gauge.quantityLabel.bottomMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		font.pixelSize: root.reduceFontSize ? Theme.font.size.body2 : Theme.font.size.h1
+		font.pixelSize: Theme.font.size.h1
+		height: Theme.geometry.levelsPage.environment.gauge.quantityLabel.height
 	}
 }

@@ -113,7 +113,9 @@
     "color.levelsPage.environment.panel.title": "color.white",
     "color.levelsPage.environment.panel.background": "color.white",
     "color.levelsPage.environment.panel.border.color": "color.gray5",
-    "color.levelsPage.environment.gauge.zeroMarker": "color.white",
+    "color.levelsPage.environment.gauge.tick": "color.gray5",
+    "color.levelsPage.environment.gauge.tickText": "color.gray3",
+    "color.levelsPage.environment.temperatureGauge.highlightValue": "color.gray3",
 
     "color.solarHistoryErrorView.primaryText": "color.white",
     "color.solarHistoryErrorView.secondaryText": "color.dimWhite",

@@ -21,6 +21,7 @@ Flickable {
 			: (width - contentRow.width) / 2
 	rightMargin: Theme.geometry.levelsPage.environment.minimumHorizontalMargin
 	boundsBehavior: Flickable.StopAtBounds
+	contentX: -leftMargin   // shouldn't be needed, but initial value may be incorrect due to delegate resizing
 
 	Row {
 		id: contentRow
@@ -35,7 +36,10 @@ Flickable {
 			const availableWidth = root.width - Theme.geometry.levelsPage.environment.minimumHorizontalMargin*2
 			let panelWidths = 0
 			for (let i = 0; i < levelsRepeater.count; ++i) {
-				panelWidths += levelsRepeater.itemAt(i).width
+				const item = levelsRepeater.itemAt(i)
+				if (item) {
+					panelWidths += item.width
+				}
 			}
 			let candidateSpacing = Math.max(Theme.geometry.levelsPage.environment.minimumSpacing,
 					Math.min(Theme.geometry.levelsPage.environment.maximumSpacing, (availableWidth - panelWidths) / (levelsRepeater.count-1)))
@@ -65,7 +69,10 @@ Flickable {
 					const availableAreaWidth = root.width - Theme.geometry.levelsPage.environment.minimumHorizontalMargin*2
 					let panelWidths = 0
 					for (let i = 0; i < levelsRepeater.count; ++i) {
-						panelWidths += levelsRepeater.itemAt(i).expandedWidth
+						const item = levelsRepeater.itemAt(i)
+						if (item) {
+							panelWidths += item.expandedWidth
+						}
 					}
 					const requiredAreaWidth = panelWidths + ((levelsRepeater.count-1) * Theme.geometry.levelsPage.environment.minimumSpacing)
 					return requiredAreaWidth > availableAreaWidth
