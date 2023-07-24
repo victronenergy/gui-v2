@@ -25,6 +25,9 @@ Rectangle {
 	readonly property int expandedHeight: Theme.geometry.levelsPage.environment.gaugePanel.expanded.height
 
 	readonly property int _twoGauges: !isNaN(temperature) && !isNaN(humidity)
+	readonly property int _gaugeWidth: _twoGauges
+			? (width - (2 * Theme.geometry.levelsPage.environment.gaugePanel.border.width)) / 2
+			: Theme.geometry.levelsPage.environment.gauge.width
 
 	width: horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedWidth : compactWidth
 	height: verticalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedHeight : compactHeight
@@ -48,7 +51,7 @@ Rectangle {
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry.levelsPage.environment.gaugePanel.border.width
 		}
-		radius: Theme.geometry.levelsPage.environment.gaugePanel.radius
+		radius: Theme.geometry.levelsPage.environment.gaugePanel.innerRadius
 		color: Theme.color.levelsPage.environment.panel.background
 	}
 
@@ -77,22 +80,25 @@ Rectangle {
 			bottom: parent.bottom
 			horizontalCenter: humidityGaugeLoader.active ? undefined : parent.horizontalCenter
 		}
+		width: root._gaugeWidth
 		animationEnabled: root.animationEnabled
 		icon.source: "qrc:/images/icon_temp_32.svg"
-		zeroMarkerVisible: true
-		reduceFontSize: root._twoGauges && root.horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Compact
 
 		text: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? "F" : "C"
 		value: Math.round(root.temperature)
 		unit: Global.systemSettings.temperatureUnit.value
 
-		// TODO min and max need to come from dbus backend, but not yet available.
+		// TODO min, max and highlight need to come from dbus backend, but not yet available.
 		minimumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 				? Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue
 				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue)
 		maximumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 				? Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue
 				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
+		highlightedValue: Theme.geometry.levelsPage.environment.temperatureGauge.highlightedValue
+		minimumValueColor: Theme.color.blue
+		maximumValueColor: Theme.color.red
+		highlightedValueColor: Theme.color.levelsPage.environment.temperatureGauge.highlightValue
 		gradient: root.temperatureGaugeGradient
 	}
 
@@ -110,6 +116,7 @@ Rectangle {
 		sourceComponent: EnvironmentGauge {
 			id: humidityGauge
 
+			width: root._gaugeWidth
 			icon.source: "qrc:/images/icon_humidity_32.svg"
 			//: Abbreviation of "Room Humidity"
 			//% "RH"
@@ -117,10 +124,12 @@ Rectangle {
 			animationEnabled: root.animationEnabled
 			unit: VenusOS.Units_Percentage
 			value: Math.round(root.humidity)
-			zeroMarkerVisible: false
-			reduceFontSize: root._twoGauges && root.horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Compact
 			minimumValue: Theme.geometry.levelsPage.environment.humidityGauge.minimumValue
 			maximumValue: Theme.geometry.levelsPage.environment.humidityGauge.maximumValue
+			highlightedValue: Theme.geometry.levelsPage.environment.humidityGauge.highlightedValue
+			minimumValueColor: Theme.color.orange
+			maximumValueColor: Theme.color.blue
+			highlightedValueColor: Theme.color.green
 			gradient: root.humidityGaugeGradient
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load himidity environment gauge:", errorString())
