@@ -112,7 +112,7 @@ QtObject {
 			//% "Start charging"
 			return qsTrId("evchargers_status_start_charging")
 		case VenusOS.Evcs_status_SwitchingToThreePhase:
-			//% "Switching to 3=phase"
+			//% "Switching to 3-phase"
 			return qsTrId("evchargers_status_switching_to_three_phase")
 		case VenusOS.Evcs_status_SwitchingToSinglePhase:
 			//% "Switching to single phase"
