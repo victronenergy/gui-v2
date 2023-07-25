@@ -1,5 +1,8 @@
 /*
 ** Copyright (C) 2021 Victron Energy B.V.
+*
+* These settings are regularly brought up to date with the settings from gui-v1.
+* Currently up to date with gui-v1 v5.6.6.
 */
 
 import QtQuick
