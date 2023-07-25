@@ -11,6 +11,24 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
+			ListItem {
+				id: frameRateSwitch
+				//% "Enable frame-rate visualizer"
+				text: qsTrId("settings_page_debug_enable_fps_visualizer")
+				content.children: [
+					Switch {
+						id: switchItem
+						checked: FrameRateModel.enabled
+						onClicked: FrameRateModel.enabled = !FrameRateModel.enabled
+					}
+				]
+
+				MouseArea {
+					anchors.fill: parent
+					onClicked: FrameRateModel.enabled = !FrameRateModel.enabled
+				}
+			}
+
 			ListNavigationItem {
 				text: "Power"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PagePowerDebug.qml", { title: text })
