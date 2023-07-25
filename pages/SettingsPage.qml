@@ -140,7 +140,7 @@ Page {
 			{
 				text: "Debug",
 				page: "/pages/settings/debug/PageDebug.qml",
-				showAccessLevel: VenusOS.User_AccessType_Service
+				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			},
 		]
 
