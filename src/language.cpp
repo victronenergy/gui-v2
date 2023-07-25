@@ -21,6 +21,7 @@ LanguageModel::LanguageModel(QObject *parent)
 	m_languages.append({ "Français", "fr", QLocale::French });
 	m_languages.append({ "Italiano", "it", QLocale::Italian });
 	m_languages.append({ "Nederlands", "nl", QLocale::Dutch });
+	m_languages.append({ "Polski", "pl", QLocale::Polish });
 	m_languages.append({ "Русский", "ru", QLocale::Russian });
 	m_languages.append({ "Română", "ro", QLocale::Romanian });
 	m_languages.append({ "Svenska", "se", QLocale::NorthernSami });
