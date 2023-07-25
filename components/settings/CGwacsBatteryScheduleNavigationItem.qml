@@ -146,34 +146,30 @@ ListNavigationItem {
 						maximumHour: 9999
 					}
 
-					ListSwitch {
-						id: socLimitEnabled
-
-						//% "Stop on SOC"
-						text: qsTrId("cgwacs_battery_schedule_stop_on_soc")
-						checked: socLimitSpinBox.value < 100
-						visible: defaultVisible && itemEnabled.checked
-
-						onCheckedChanged: {
-							if (checked && socLimitSpinBox.value >= 100) {
-								socLimitSpinBox.dataPoint.setValue(95)
-							} else if (!checked && socLimitSpinBox.value < 100) {
-								socLimitSpinBox.dataPoint.setValue(100)
-							}
-						}
-					}
-
 					ListSpinBox {
 						id: socLimitSpinBox
 
 						//% "SOC limit"
 						text: qsTrId("cgwacs_battery_schedule_soc_limit")
-						visible: defaultVisible && socLimitEnabled.checked
+						visible: defaultVisible
 						dataSource: root._scheduleSource + "/Soc"
 						suffix: "%"
 						from: 5
 						to: 95
 						stepSize: 5
+					}
+
+					ListRadioButtonGroup {
+						//% "Self-consumption above limit"
+						text: qsTrId("cgwacs_battery_schedule_self_consumption_above_limit")
+						dataSource: root._scheduleSource + "/AllowDischarge"
+						visible: defaultVisible && itemEnabled.checked && socLimit.value < 100
+						optionModel: [
+							//% "PV"
+							{ display: qsTrId("cgwacs_battery_schedule_pv"), value: 0 },
+							//% "PV & Battery"
+							{ display: qsTrId("cgwacs_battery_schedule_pv_and_battery"), value: 1 }
+						]
 					}
 				}
 			}
