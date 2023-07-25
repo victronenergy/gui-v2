@@ -228,7 +228,7 @@ QtObject {
 	property Rectangle _configLabel: Rectangle {
 		parent: Global.pageManager.statusBar
 		width: pageConfigTitle.width * 1.1
-		height: pageConfigTitle.height * 1.1
+		height: pageConfigTitle.implicitHeight * 1.1
 		color: "white"
 		opacity: 0.9
 		visible: pageConfigTitleTimer.running
