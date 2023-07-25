@@ -328,7 +328,7 @@
     "geometry.levelsPage.subgauge.width3": 24,
     "geometry.levelsPage.subgauge.width4": 16,
     "geometry.levelsPage.gaugeDelegate.compact.height": 296,
-    "geometry.levelsPage.gaugeDelegate.expanded.height": 384,
+    "geometry.levelsPage.gaugeDelegate.expanded.height": 408,
     "geometry.levelsPage.gaugeDelegate.width": 128,
     "geometry.levelsPage.gaugeDelegate.contentWidth": 112,
     "geometry.levelsPage.tankMergeThreshold": 6,
