@@ -15,6 +15,9 @@ Page {
 	TabBar {
 		id: tabBar
 
+		// Prefer a tab that is enabled.
+		property int _preferredIndex: model[0].enabled || !model[1].enabled ? 0 : 1
+
 		anchors {
 			top: parent.top
 			topMargin: Global.pageManager.expandLayout ? -tabBar.height : 0
@@ -38,21 +41,13 @@ Page {
 
 		model: [
 			//% "Tanks"
-			{ value: qsTrId("levels_page_tanks") },
+			{ value: qsTrId("levels_page_tanks"), enabled: Global.tanks.totalTankCount > 0 },
 			//% "Environment"
-			{ value: qsTrId("levels_page_environment") }
+			{ value: qsTrId("levels_page_environment"), enabled: Global.environmentInputs.model.count > 0 }
 		]
 
-		// Remember currentIndex when returning to the Levels page
-		currentIndex: Global.pageManager.levelsTabIndex
-
-		onCurrentIndexChanged: {
-			// Load the Environments tab the first time it is required
-			if (currentIndex === 1 && !environmentsTabLoader.active) {
-				environmentsTabLoader.active = true
-			}
-			Global.pageManager.levelsTabIndex = currentIndex
-		}
+		currentIndex: _preferredIndex
+		onCurrentIndexChanged: _preferredIndex = currentIndex   // once user selects a tab, don't use the default index anymore
 	}
 
 	TanksTab {

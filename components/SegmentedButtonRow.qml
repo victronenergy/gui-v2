@@ -39,13 +39,13 @@ Item {
 
 				width: root.width / buttonRepeater.count
 				height: parent.height
-				color: modelData.enabled === false
+				color: modelData.enabled === false && model.index !== root.currentIndex
 					   ? Theme.color.background.disabled
 					   : (mouseArea.pressed || model.index === root.currentIndex
 						  ? Theme.color.ok
 						  : Theme.color.darkOk)
 				border.width: Theme.geometry.button.border.width
-				border.color: modelData.enabled === false ? color : Theme.color.ok
+				border.color: modelData.enabled === false && model.index !== root.currentIndex ? color : Theme.color.ok
 				radius: Theme.geometry.button.radius
 
 				roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
@@ -56,7 +56,7 @@ Item {
 					anchors.centerIn: parent
 					font.pixelSize: root.fontPixelSize
 					text: modelData.value
-					color: modelData.enabled === false
+					color: modelData.enabled === false && model.index !== root.currentIndex
 						   ? Theme.color.font.disabled
 						   : (mouseArea.pressed || model.index === root.currentIndex
 							  ? Theme.color.button.down.text
