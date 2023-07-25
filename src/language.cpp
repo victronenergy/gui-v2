@@ -16,6 +16,7 @@ LanguageModel::LanguageModel(QObject *parent)
 {
 	m_languages.append({ "English", "en", QLocale::English });
 	m_languages.append({ "Čeština", "cs", QLocale::Czech });
+	m_languages.append({ "Dansk", "de", QLocale::Danish });
 	m_languages.append({ "Deutsch", "de", QLocale::German });
 	m_languages.append({ "Español", "es", QLocale::Spanish });
 	m_languages.append({ "Français", "fr", QLocale::French });
