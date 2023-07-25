@@ -93,11 +93,8 @@ Page {
 		visible: tabBar.currentIndex === 0
 	}
 
-	Loader {
-		id: environmentsTabLoader
-
-		active: false
-		visible: tabBar.currentIndex === 1
+	EnvironmentTab {
+		id: environmentTab
 
 		anchors {
 			top: tabBar.bottom
@@ -111,6 +108,7 @@ Page {
 			left: parent.left
 			right: parent.right
 		}
+		animationEnabled: root.animationEnabled
 
 		Behavior on anchors.topMargin {
 			enabled: root.isCurrentPage
@@ -121,9 +119,6 @@ Page {
 			NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
 		}
 
-		sourceComponent: EnvironmentTab {
-			animationEnabled: root.animationEnabled
-		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load environments tab:", errorString())
+		visible: tabBar.currentIndex === 1
 	}
 }

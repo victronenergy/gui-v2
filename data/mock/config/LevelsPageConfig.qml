@@ -8,10 +8,6 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property var configs: Global.pageManager.levelsTabIndex === 0
-			? tankConfigs
-			: environmentConfigs
-
 	property var tankConfigs: [
 		{
 			name: "Check Fuel colors",
@@ -145,7 +141,6 @@ QtObject {
 				{ type: VenusOS.Tank_Type_RawWater, level: 95, capacity: .6 },
 			]
 		},
-
 	]
 
 	property var environmentConfigs: [
@@ -248,16 +243,34 @@ QtObject {
 				{ name: "Sensor G", temperature_celsius: 23.35, humidity: NaN },     // scrolls off screen
 			]
 		},
+		{
+			name: "Single gauge x 8",
+			inputs: [
+				{ name: "Sensor A", temperature_celsius: 64.12 , humidity: NaN },
+				{ name: "Sensor B", temperature_celsius: 45.3234 , humidity: NaN },
+				{ name: "Sensor C", temperature_celsius: 23.1123 , humidity: NaN },
+				{ name: "Sensor D", temperature_celsius: 100, humidity: NaN },
+				{ name: "Sensor E", temperature_celsius: 0, humidity: NaN },
+				{ name: "Sensor F", temperature_celsius: 43.35, humidity: NaN },
+				{ name: "Sensor G", temperature_celsius: 23.35, humidity: NaN },     // scrolls off screen
+			]
+		},
 	]
 
 	function configCount() {
-		return configs.length
+		return Math.max(tankConfigs.length, environmentConfigs.length)
 	}
 
 	function loadConfig(configIndex) {
-		const config = configs[configIndex]
-		Global.mockDataSimulator.setTanksRequested(config.tanks)
-		Global.mockDataSimulator.setEnvironmentInputsRequested(config.inputs)
-		return config.name
+		let configName = ""
+		if (configIndex < tankConfigs.length) {
+			configName = "TANKS: " + tankConfigs[configIndex].name
+			Global.mockDataSimulator.setTanksRequested(tankConfigs[configIndex].tanks)
+		}
+		if (configIndex < environmentConfigs.length) {
+			configName += "\nTEMPS: " + environmentConfigs[configIndex].name
+			Global.mockDataSimulator.setEnvironmentInputsRequested(environmentConfigs[configIndex].inputs)
+		}
+		return configName
 	}
 }

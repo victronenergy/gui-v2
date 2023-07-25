@@ -19,7 +19,6 @@ QtObject {
 	property var currentPage
 	property var navBar
 	property var statusBar
-	property int levelsTabIndex
 
 	property int interactivity: VenusOS.PageManager_InteractionMode_Interactive
 
