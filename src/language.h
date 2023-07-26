@@ -71,6 +71,7 @@ public:
 	Q_INVOKABLE QString toString(QLocale::Language language) const;
 	QLocale::Language getCurrentLanguage() const;
 	void setCurrentLanguage(QLocale::Language language);
+	Q_INVOKABLE void setCurrentLanguage(const QString &language);
 
 Q_SIGNALS:
 	void currentLanguageChanged();

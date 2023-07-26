@@ -118,6 +118,24 @@ QtObject {
 		}
 	}
 
+	property DataPoint timeZone: DataPoint {
+		source: "com.victronenergy.settings/Settings/System/TimeZone"
+		onValueChanged: {
+			if (value !== undefined) {
+				ClockTime.systemTimeZone = value
+			}
+		}
+	}
+
+	property DataPoint language: DataPoint {
+		source: "com.victronenergy.settings/Settings/Gui/Language"
+		onValueChanged: {
+			if (value !== undefined) {
+				Language.setCurrentLanguage(value)
+			}
+		}
+	}
+
 	function reset() {
 		// no-op
 	}

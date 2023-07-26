@@ -99,6 +99,11 @@ Page {
 
 				onOptionClicked: function(index) {
 					Language.current = optionModel.languageAt(index)
+					languageDataPoint.setValue(Language.toString(Language.current))
+				}
+
+				property DataPoint languageDataPoint: DataPoint {
+					source: "com.victronenergy.settings/Settings/Gui/Language"
 				}
 			}
 

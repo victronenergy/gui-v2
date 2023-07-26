@@ -117,6 +117,16 @@ void Language::setCurrentLanguage(QLocale::Language language)
 	}
 }
 
+void Language::setCurrentLanguage(const QString &language)
+{
+	const QLocale::Language lang = QLocale::codeToLanguage(language);
+	if (lang != QLocale::AnyLanguage) {
+		setCurrentLanguage(lang);
+	} else {
+		qCWarning(venusGui) << "Unknown language code specified:" << language;
+	}
+}
+
 bool Language::installTranslatorForLanguage(QLocale::Language language)
 {
 	const bool alreadyLoaded = m_loadedTranslators.contains(language);
