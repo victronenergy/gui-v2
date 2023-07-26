@@ -118,6 +118,15 @@ QtObject {
 		}
 	}
 
+	property DataPoint timeZone: DataPoint {
+		source: "com.victronenergy.settings/Settings/System/TimeZone"
+		onValueChanged: {
+			if (value !== undefined) {
+				ClockTime.systemTimeZone = value
+			}
+		}
+	}
+
 	function reset() {
 		// no-op
 	}

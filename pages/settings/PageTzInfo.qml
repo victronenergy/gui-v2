@@ -61,7 +61,7 @@ Page {
 			ListTextItem {
 				//% "Date/Time UTC"
 				text: qsTrId("settings_tz_date_time_utc")
-				secondaryText: Qt.formatDateTime(ClockTime.currentDateTimeUtc, "yyyy-MM-dd hh:mm")
+				secondaryText: ClockTime.currentTimeUtcText
 			}
 
 			ListButton {
