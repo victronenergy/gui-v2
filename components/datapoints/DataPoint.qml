@@ -18,15 +18,15 @@ QtObject {
 	property string source
 
 	property var sourceObject
-	property int sourceType: BackendConnection.type
+	readonly property int sourceType: BackendConnection.type
 
-	property var value: sourceObject ? sourceObject.value : undefined
+	readonly property var value: sourceObject ? sourceObject.value : undefined
 	readonly property bool valid: value !== undefined
 
 	property bool hasMin
 	property bool hasMax
-	property var min: hasMin && sourceObject ? sourceObject.min : undefined
-	property var max: hasMax && sourceObject ? sourceObject.max : undefined
+	readonly property var min: hasMin && sourceObject ? sourceObject.min : undefined
+	readonly property var max: hasMax && sourceObject ? sourceObject.max : undefined
 	property bool invalidate: true
 
 	property var _dbusImpl
