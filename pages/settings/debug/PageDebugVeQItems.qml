@@ -19,12 +19,18 @@ Page {
 		model: VeQItemTableModel {
 			id: uidModel
 			uids: [bindPrefix]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem | VeQItemTableModel.UseLocalValues
 		}
 
 		delegate: ListNavigationItem {
 			text: model.id
-			secondaryText: enabled ? "" : (model.value || "--")
+			secondaryText: {
+				if (enabled) {
+					return ""
+				}
+				return model.value !== undefined ? model.value : "--"
+			}
+
 			enabled: subModel.rowCount > 0
 
 			onClicked: {
@@ -35,7 +41,7 @@ Page {
 			VeQItemTableModel {
 				id: subModel
 				uids: [model.uid]
-				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem | VeQItemTableModel.UseLocalValues
 			}
 		}
 	}
