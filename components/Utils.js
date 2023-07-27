@@ -361,3 +361,9 @@ function simplifiedNetworkType(t) {
 		return t;
 	}
 }
+
+// TODO for ListTextItem use, preferably use VeQuickItem::text instead to auto show the hex text
+// value from the backend, when that becomes available via MQTT.
+function toHexFormat(n) {
+	return n ? "0x" + n.toString(16).toUpperCase() : ""
+}

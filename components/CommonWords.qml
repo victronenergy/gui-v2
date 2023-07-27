@@ -45,6 +45,9 @@ QtObject {
 	//% "Current"
 	readonly property string current_amps: qsTrId("common_words_current_amps")
 
+	//% "Custom name"
+	readonly property string custom_name: qsTrId("common_words_custom_name")
+
 	//: Title for device information
 	//% "Device"
 	readonly property string device_info_title: qsTrId("common_words_device")
@@ -65,6 +68,9 @@ QtObject {
 	//% "Error"
 	readonly property string error: qsTrId("common_words_error")
 
+	//% "Firmware version"
+	readonly property string firmware_version: qsTrId("common_words_firmware_version")
+
 	//% "%1 Hour(s)"
 	readonly property string x_hours: qsTrId("common_words_x_hours")
 
@@ -77,8 +83,14 @@ QtObject {
 	//% "Manual"
 	readonly property string manual: qsTrId("common_words_manual")
 
+	//% "Manufacturer"
+	readonly property string manufacturer: qsTrId("common_words_manufacturer")
+
 	//% "Mode"
 	readonly property string mode: qsTrId("common_words_mode")
+
+	//% "Model name"
+	readonly property string model_name: qsTrId("common_words_model_name")
 
 	//% "No"
 	readonly property string no: qsTrId("common_words_no")
@@ -145,6 +157,9 @@ QtObject {
 	//% "Scanning %1%"
 	readonly property string scanning: qsTrId("common_words_scanning")
 
+	//% "Serial number"
+	readonly property string serial_number: qsTrId("common_words_serial_number")
+
 	//% "Signal strength"
 	readonly property string signal_strength: qsTrId("common_words_signal_strength");
 
@@ -176,6 +191,9 @@ QtObject {
 	//% "Tracker"
 	readonly property string tracker: qsTrId("common_words_tracker")
 
+	//% "Unique Identity Number"
+	readonly property string unique_identity_number: qsTrId("common_words_unique_id_number")
+
 	//% "Stop value during quiet hours"
 	readonly property string stop_value_during_quiet_hours: qsTrId("common_words_stop_value_during_quiet_hours")
 
@@ -187,6 +205,9 @@ QtObject {
 
 	//% "Voltage"
 	readonly property string voltage: qsTrId("common_words_voltage")
+
+	//% "VRM instance"
+	readonly property string vrm_instance: qsTrId("common_words_vrm_instance")
 
 	//% "When warning is cleared stop after"
 	readonly property string when_warning_is_cleared_stop_after: qsTrId("common_words_when_warning_is_cleared_stop_after")

@@ -379,6 +379,9 @@
         <file>pages/settings/PageSettingsRelayTempSensors.qml</file>
         <file>pages/settings/PageSettingsRemoteConsole.qml</file>
         <file>pages/settings/PageSettingsRootfsSelect.qml</file>
+        <file>pages/settings/PageSettingsRvcDevice.qml</file>
+        <file>pages/settings/PageSettingsRvcDeviceConfiguration.qml</file>
+        <file>pages/settings/PageSettingsRvcDevices.qml</file>
         <file>pages/settings/PageSettingsServices.qml</file>
         <file>pages/settings/PageSettingsSystem.qml</file>
         <file>pages/settings/PageSettingsSystemStatus.qml</file>
