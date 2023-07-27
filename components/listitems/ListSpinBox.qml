@@ -29,7 +29,7 @@ ListButton {
 	signal selectorAccepted(newValue: var)
 
 	button.text: value === undefined ? "--" : Utils.toFloat(value, decimals) + root.suffix
-	enabled: source === "" || dataValid
+	enabled: dataSource === "" || dataValid
 
 	onClicked: {
 		if (!_numberSelector) {
