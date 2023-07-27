@@ -99,10 +99,12 @@ Page {
 			ListNavigationItem {
 				//% "Devices"
 				text: qsTrId("settings_devices")
-				visible: root._isVecan
+				visible: root._isVecan || root._isRvc
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevices.qml",
-						{ gateway: root.gateway })
+					const url = root._isVecan
+							  ? "/pages/settings/PageSettingsVecanDevices.qml"
+							  : "/pages/settings/PageSettingsRvcDevices.qml"
+					Global.pageManager.pushPage(url, { gateway: root.gateway })
 				}
 			}
 

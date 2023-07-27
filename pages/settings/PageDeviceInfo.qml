@@ -5,6 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
+import "/components/Utils.js" as Utils
 
 Page {
 	id: root
@@ -53,24 +54,19 @@ Page {
 				dataSource: root.bindPrefix + "/CustomName"
 				dataInvalidate: false
 				textField.maximumLength: 32
-				//% "Custom name"
-				placeholderText: qsTrId("settings_deviceinfo_custom_name")
+				placeholderText: CommonWords.custom_name
 			}
 
 			ListTextItem {
 				//% "Product ID"
 				text: qsTrId("settings_deviceinfo_product_id")
+				secondaryText: Utils.toHexFormat(dataValue)
 				dataSource: root.bindPrefix + "/ProductId"
-
-				// Value should be shown in hex. TODO can use VeQuickItem::text instead to auto
-				// show the hex text value from the backend, when that is available via MQTT.
-				secondaryText: dataValue ? "0x" + dataValue.toString(16).toUpperCase() : ""
 				dataInvalidate: false
 			}
 
 			ListTextItem {
-				//% "Firmware version"
-				text: qsTrId("settings_deviceinfo_firmware_version")
+				text: CommonWords.firmware_version
 				dataSource: root.bindPrefix + "/FirmwareVersion"
 				dataInvalidate: false
 			}
@@ -84,15 +80,13 @@ Page {
 			}
 
 			ListTextItem {
-				//% "VRM instance"
-				text: qsTrId("settings_deviceinfo_vrm_instance")
+				text: CommonWords.vrm_instance
 				dataSource: root.bindPrefix + "/DeviceInstance"
 				dataInvalidate: false
 			}
 
 			ListTextItem {
-				//% "Serial number"
-				text: qsTrId("settings_deviceinfo_serial")
+				text: CommonWords.serialNumber
 				dataSource: root.bindPrefix + "/Serial"
 				dataInvalidate: false
 				visible: dataValid
