@@ -343,6 +343,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "QuantityTableSummary");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityTable.qml")),
 		"Victron.VenusOS", 2, 0, "QuantityTable");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/DataPoint.qml")),
+		"Victron.VenusOS", 2, 0, "DataPoint");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ElectricalQuantityLabel.qml")),
 		"Victron.VenusOS", 2, 0, "ElectricalQuantityLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/FixedWidthLabel.qml")),
@@ -401,10 +403,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ViewGradient");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/WeatherDetails.qml")),
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
-
-	/* data points */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/datapoints/DataPoint.qml")),
-		"Victron.VenusOS", 2, 0, "DataPoint");
 
 	/* list items */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListLabel.qml")),
