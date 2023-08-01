@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
@@ -20,40 +21,55 @@ Page {
 			filterFlags: VeQItemSortTableModel.FilterOffline
 			dynamicSortFilter: true
 			model: VeQItemTableModel {
-				// TODO fix this 'uids' for MQTT, else will crash in MQTT mode
-				uids: ["dbus/com.victronenergy.vecan." + root.gateway + "/Devices"]
+				uids: BackendConnection.type === BackendConnection.DBusSource
+					  ? ["dbus/com.victronenergy.vecan." + root.gateway + "/Devices"]
+					  : BackendConnection.type === BackendConnection.MqttSource
+						? ["mqtt/vecan/0/Devices"]    // TODO this should change depending on the gateway!
+						: ""
 				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 			}
 		}
 
-		delegate: ListNavigationItem {
+		delegate: ListSpinBox {
+			id: listDelegate
+
 			text: "%1 [%2]".arg(customName.value || modelName.value).arg(uniqueNumber.value)
 			//% "Device# %1"
-			secondaryText: qsTrId("settings_vecan_device_number").arg(deviceInstance.value)
+			secondaryText: qsTrId("settings_vecan_device_number").arg(dataValue)
+			dataSource: model.uid + "/DeviceInstance"
 
-			DataPoint {
+			CP.ColorImage {
+				parent: listDelegate.content
+				anchors.verticalCenter: parent.verticalCenter
+				source: "/images/icon_back_32.svg"
+				rotation: 180
+				color: listDelegate.containsPress ? Theme.color.listItem.down.forwardIcon : Theme.color.listItem.forwardIcon
+			}
+
+			MouseArea {
+				id: mouseArea
+
+				parent: listDelegate.backgroundRect
+				anchors.fill: parent
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
+						{ bindPrefix: model.uid, title: text })
+				}
+			}
+
+			VeQuickItem {
 				id: modelName
-				source: Utils.normalizedSource(model.uid) + "/ModelName"
+				uid: model.uid + "/ModelName"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: customName
-				source: Utils.normalizedSource(model.uid) + "/CustomName"
+				uid: model.uid + "/CustomName"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: uniqueNumber
-				source: Utils.normalizedSource(model.uid) + "/N2kUniqueNumber"
-			}
-
-			DataPoint {
-				id: deviceInstance
-				source: model.uid + "/DeviceInstance"
-			}
-
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
-					{ bindPrefix: Utils.normalizedSource(model.uid), title: text })
+				uid: model.uid + "/N2kUniqueNumber"
 			}
 		}
 	}
