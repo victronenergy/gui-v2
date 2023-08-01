@@ -57,9 +57,10 @@ Device {
 		}
 
 		readonly property VeQItemSortTableModel _phaseSources: VeQItemSortTableModel {
-			filterRole: VeQItemTableModel.UniqueIdRole
-			filterRegExp: "L[0-9]+"
-			onRowCountChanged: phases.setPhaseCount(rowCount)
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.IdRole
+			filterRegExp: "^L[0-9]+"
+			onRowCountChanged: Qt.callLater(phases.setPhaseCount, rowCount)
 
 			model: VeQItemTableModel {
 				uids: [pvInverter.serviceUid + "/Ac"]
