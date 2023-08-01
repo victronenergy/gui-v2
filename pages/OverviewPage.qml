@@ -691,7 +691,6 @@ Page {
 		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
 		animationEnabled: root.animationEnabled
 		connectors: [ batteryToDcLoadsConnector ]
-		visible: !!Global.batteries.first
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left

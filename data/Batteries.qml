@@ -13,9 +13,10 @@ QtObject {
 	property DeviceModel model: DeviceModel {
 		objectProperty: "battery"
 	}
-	property var first: model.firstObject
 
-	readonly property var daysHoursMinutesToGo: !!first && first.timeToGo ? Utils.decomposeDurationDaysHoursMinutes(first.timeToGo) : NaN
+	property var system: SystemBattery {}
+
+	readonly property var daysHoursMinutesToGo: system.timeToGo ? Utils.decomposeDurationDaysHoursMinutes(system.timeToGo) : NaN
 
 	function addBattery(battery) {
 		model.addObject(battery)
@@ -27,6 +28,16 @@ QtObject {
 
 	function reset() {
 		model.clear()
+	}
+
+	function batteryIcon(battery) {
+		return isNaN(battery.power) || battery.power === 0 ? "/images/battery.svg"
+			: (battery.power > 0 ? "/images/battery_charging.svg" : "/images/battery_discharging.svg")
+	}
+
+	function batteryMode(battery) {
+		return isNaN(battery.power) || battery.power === 0 ? VenusOS.Battery_Mode_Idle
+			: (battery.power > 0 ? VenusOS.Battery_Mode_Charging : VenusOS.Battery_Mode_Discharging)
 	}
 
 	Component.onCompleted: Global.batteries = root

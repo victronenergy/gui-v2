@@ -175,6 +175,7 @@
         <file>data/common/SolarCharger.qml</file>
         <file>data/common/SolarDailyHistory.qml</file>
         <file>data/common/SolarHistoryErrorModel.qml</file>
+        <file>data/common/SystemBattery.qml</file>
         <file>data/common/SystemData.qml</file>
         <file>data/common/Tank.qml</file>
         <file>data/dbus/AcInputsImpl.qml</file>
