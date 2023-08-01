@@ -72,7 +72,6 @@ Page {
 		CircularSingleGauge {
 			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
 			readonly property var battery: Global.batteries.system
-			readonly property var timeToGo: Global.batteries.daysHoursMinutesToGo
 
 			name: properties.name
 			icon.source: battery.icon
@@ -81,18 +80,10 @@ Page {
 			current: isNaN(battery.current) ? NaN : battery.current.toFixed(1)
 			status: Gauges.getValueStatus(value, properties.valueType)
 			caption: {
-				if (!battery.timeToGo || battery.timeToGo < 0) {
-					return ""
-				} else if (timeToGo.d > 0) {
-					//% "%1d %2h %3m to go"
-					return qsTrId("brief_battery_time_to_go_days_hours_minutes").arg(timeToGo.d).arg(timeToGo.h).arg(timeToGo.m)
-				} else if (timeToGo.h > 0) {
-					//% "%2h %3m to go"
-					return qsTrId("brief_battery_time_to_go_hours_minutes").arg(timeToGo.h).arg(timeToGo.m)
-				} else {
-					//% "%3m to go"
-					return qsTrId("brief_battery_time_to_go_minutes").arg(timeToGo.m)
-				}
+				const timeToGo = Global.batteries.timeToGoText(battery)
+				//: %1 = time remaining, e.g. '3h 2m'
+				//% "%1 to go"
+				return timeToGo ? qsTrId("brief_battery_time_to_go").arg(timeToGo) : ""
 			}
 			animationEnabled: root.animationEnabled
 			shineAnimationEnabled: battery.mode === VenusOS.Battery_Mode_Charging && root.animationEnabled
