@@ -11,19 +11,18 @@ OverviewWidget {
 	id: root
 
 	property alias animationPaused: barAnimation.paused
-	readonly property var batteryData: Global.batteries.first
+	readonly property var batteryData: Global.batteries.system
 
-	readonly property int _normalizedStateOfCharge: batteryData
-			&& !isNaN(batteryData.stateOfCharge) ? Math.round(batteryData.stateOfCharge) : 0
-	readonly property bool _animationReady: animationEnabled && !!batteryData && !isNaN(batteryData.stateOfCharge)
+	readonly property int _normalizedStateOfCharge: Math.round(batteryData.stateOfCharge || 0)
+	readonly property bool _animationReady: animationEnabled && !isNaN(batteryData.stateOfCharge)
 
 	title: CommonWords.battery
-	icon.source: batteryData ? batteryData.icon : ""
+	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
 
 	quantityLabel.value: {
 		// Show 2 decimal places if available
-		if (!batteryData) {
+		if (isNaN(batteryData.stateOfCharge)) {
 			return NaN
 		}
 		const fixed = batteryData.stateOfCharge.toFixed(2)
@@ -65,7 +64,7 @@ OverviewWidget {
 
 			topPadding: Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing / 2
 			horizontalItemAlignment: Grid.AlignHCenter
-			visible: !!batteryData && batteryData.mode === VenusOS.Battery_Mode_Charging
+			visible: batteryData.mode === VenusOS.Battery_Mode_Charging
 
 			columns: {
 				const maxWidth = parent.width - Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*4
@@ -212,11 +211,9 @@ OverviewWidget {
 			rightMargin: Theme.geometry.overviewPage.widget.battery.temperature.rightMargin
 		}
 
-		value: batteryData
-			? Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+		value: Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 				? batteryData.temperature_celsius
 				: Units.celsiusToFahrenheit(batteryData.temperature_celsius))
-			: NaN
 		unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : VenusOS.Units_Temperature_Celsius
 		font.pixelSize: Theme.font.size.body2
 	}
@@ -229,10 +226,10 @@ OverviewWidget {
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
 			Label {
-				text: batteryData && batteryData.mode === VenusOS.Battery_Mode_Idle
+				text: batteryData.mode === VenusOS.Battery_Mode_Idle
 						//% "Idle"
 					  ? qsTrId("overview_widget_battery_idle")
-					  : (batteryData && batteryData.mode === VenusOS.Battery_Mode_Charging
+					  : (batteryData.mode === VenusOS.Battery_Mode_Charging
 						  //% "Charging"
 						? qsTrId("overview_widget_battery_charging")
 						  //% "Discharging"
@@ -243,7 +240,7 @@ OverviewWidget {
 			Label {
 				readonly property var timeToGo: Global.batteries.daysHoursMinutesToGo
 				text: {
-					if (!Global.batteries.first || !Global.batteries.first.timeToGo || Global.batteries.first.timeToGo < 0) {
+					if (!Global.batteries.system || !Global.batteries.system.timeToGo || Global.batteries.system.timeToGo < 0) {
 						return ""
 					} else if (timeToGo.d > 0) {
 						//% "%1d %2h %3m"
@@ -271,7 +268,7 @@ OverviewWidget {
 				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
 
-			value: batteryData ? batteryData.voltage.toFixed(1) : NaN
+			value: batteryData.voltage.toFixed(1)
 			unit: VenusOS.Units_Volt
 			font.pixelSize: Theme.font.size.body2
 		},
@@ -284,7 +281,7 @@ OverviewWidget {
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
-			value: batteryData ? batteryData.current.toFixed(1) : NaN
+			value: batteryData.current.toFixed(1)
 			unit: VenusOS.Units_Amp
 			font.pixelSize: Theme.font.size.body2
 		},
@@ -298,7 +295,7 @@ OverviewWidget {
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
-			value: batteryData ? batteryData.power.toFixed(1) : NaN
+			value: batteryData.power.toFixed(1)
 			unit: VenusOS.Units_Watt
 			font.pixelSize: Theme.font.size.body2
 		}

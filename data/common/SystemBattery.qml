@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Device {
+QtObject {
 	id: battery
 
 	readonly property real stateOfCharge: _stateOfCharge.value === undefined ? NaN : _stateOfCharge.value
@@ -13,40 +13,31 @@ Device {
 	readonly property real power: _power.value === undefined ? NaN : _power.value
 	readonly property real current: _current.value === undefined ? NaN : _current.value
 	readonly property real temperature_celsius: _temperature.value === undefined ? NaN : _temperature.value
-	readonly property real timeToGo: _timeToGo.value === undefined ? NaN : _timeToGo.value  // in seconds
+	readonly property real timeToGo: _timeToGo.value === undefined ? NaN : _timeToGo.value
 	readonly property string icon: Global.batteries.batteryIcon(battery)
 	readonly property int mode: Global.batteries.batteryMode(battery)
 
 	readonly property DataPoint _stateOfCharge: DataPoint {
-		source: battery.serviceUid + "/Soc"
+		source: "com.victronenergy.system/Dc/Battery/Soc"
 	}
 
 	readonly property DataPoint _voltage: DataPoint {
-		source: battery.serviceUid + "/Dc/0/Voltage"
+		source: "com.victronenergy.system/Dc/Battery/Voltage"
 	}
 
 	readonly property DataPoint _power: DataPoint {
-		source: battery.serviceUid + "/Dc/0/Power"
+		source: "com.victronenergy.system/Dc/Battery/Power"
 	}
 
 	readonly property DataPoint _current: DataPoint {
-		source: battery.serviceUid + "/Dc/0/Current"
+		source: "com.victronenergy.system/Dc/Battery/Current"
 	}
 
 	readonly property DataPoint _temperature: DataPoint {
-		source: battery.serviceUid + "/Dc/0/Temperature"
+		source: "com.victronenergy.system/Dc/Battery/Temperature"
 	}
 
 	readonly property DataPoint _timeToGo: DataPoint {
-		source: battery.serviceUid + "/TimeToGo"
-	}
-
-	property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
-		if (_valid) {
-			Global.batteries.addBattery(battery)
-		} else {
-			Global.batteries.removeBattery(battery)
-		}
+		source: "com.victronenergy.system/Dc/Battery/TimeToGo"
 	}
 }
