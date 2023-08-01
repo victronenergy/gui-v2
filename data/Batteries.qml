@@ -16,8 +16,6 @@ QtObject {
 
 	property var system: SystemBattery {}
 
-	readonly property var daysHoursMinutesToGo: system.timeToGo ? Utils.decomposeDurationDaysHoursMinutes(system.timeToGo) : NaN
-
 	function addBattery(battery) {
 		model.addObject(battery)
 	}
@@ -28,6 +26,23 @@ QtObject {
 
 	function reset() {
 		model.clear()
+	}
+
+	function timeToGoText(battery) {
+		if ((battery.timeToGo || 0) <= 0) {
+			return ""
+		}
+		const timeToGo = Utils.decomposeDurationDaysHoursMinutes(battery.timeToGo)
+		if (timeToGo.d > 0) {
+			//% "%1d %2h %3m"
+			return qsTrId("batteries_time_to_go_days_hours_minutes").arg(timeToGo.d).arg(timeToGo.h).arg(timeToGo.m)
+		} else if (timeToGo.h > 0) {
+			//% "%2h %3m"
+			return qsTrId("batteries_time_to_go_hours_minutes").arg(timeToGo.h).arg(timeToGo.m)
+		} else {
+			//% "%3m"
+			return qsTrId("batteries_time_to_go_minutes").arg(timeToGo.m)
+		}
 	}
 
 	function batteryIcon(battery) {

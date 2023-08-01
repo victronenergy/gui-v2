@@ -238,21 +238,7 @@ OverviewWidget {
 				color: Theme.color.font.secondary
 			}
 			Label {
-				readonly property var timeToGo: Global.batteries.daysHoursMinutesToGo
-				text: {
-					if (!Global.batteries.system || !Global.batteries.system.timeToGo || Global.batteries.system.timeToGo < 0) {
-						return ""
-					} else if (timeToGo.d > 0) {
-						//% "%1d %2h %3m"
-						return qsTrId("battery_widget_time_to_go_days_hours_minutes").arg(timeToGo.d).arg(timeToGo.h).arg(timeToGo.m)
-					} else if (timeToGo.h > 0) {
-						//% "%2h %3m"
-						return qsTrId("battery_widget_time_to_go_hours_minutes").arg(timeToGo.h).arg(timeToGo.m)
-					} else {
-						//% "%3m"
-						return qsTrId("battery_widget_time_to_go_minutes").arg(timeToGo.m)
-					}
-				}
+				text: Global.batteries.timeToGoText(Global.batteries.system)
 				color: Theme.color.font.primary
 				font.pixelSize: Theme.font.overviewPage.battery.timeToGo.pixelSize
 			}
