@@ -78,9 +78,7 @@ ListNavigationItem {
 	text: qsTrId("cgwacs_battery_schedule_name").arg(scheduleNumber + 1)
 	secondaryText: getItemText()
 
-	onClicked: {
-		Global.pageManager.pushPage(scheduledOptionsComponent, { title: text })
-	}
+	onClicked: Global.pageManager.pushPage(scheduledOptionsComponent, { title: text })
 
 	DataPoint {
 		id: itemDay

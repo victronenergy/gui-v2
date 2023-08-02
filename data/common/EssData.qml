@@ -11,12 +11,12 @@ QtObject {
 	id: root
 
 	readonly property int state: _getState()
-	onStateChanged: Global.ess.state = state
+	onStateChanged: if (!!Global.ess) Global.ess.state = state
 
 	function _getState() {
 		let hub4Mode = veHub4Mode.value
 		let currentState = veBatteryLifeState.value
-		if (hub4Mode === undefined || currentState === undefined) {
+		if (!Global.ess || hub4Mode === undefined || currentState === undefined) {
 			return -1
 		}
 
@@ -53,7 +53,7 @@ QtObject {
 			let batteryLifeState = null
 			switch (essState) {
 			case VenusOS.Ess_State_OptimizedWithBatteryLife:
-				if (!Global.ess.isBatteryLifeActive(veBatteryLifeState.value)) {
+				if (!!Global.ess && !Global.ess.isBatteryLifeActive(veBatteryLifeState.value)) {
 					batteryLifeState = VenusOS.Ess_BatteryLifeState_Restart
 				}
 				break
@@ -99,11 +99,13 @@ QtObject {
 	}
 
 	Component.onCompleted: {
-		Global.ess.minimumStateOfCharge = Qt.binding(function() {
-			return veMinimumSocLimit.value || 0
-		})
-		Global.ess.stateOfChargeLimit = Qt.binding(function() {
-			return veSocLimit.value || 0
-		})
+		if (!!Global.ess) {
+			Global.ess.minimumStateOfCharge = Qt.binding(function() {
+				return veMinimumSocLimit.value || 0
+			})
+			Global.ess.stateOfChargeLimit = Qt.binding(function() {
+				return veSocLimit.value || 0
+			})
+		}
 	}
 }

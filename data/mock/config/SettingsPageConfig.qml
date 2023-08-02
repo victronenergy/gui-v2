@@ -10,7 +10,8 @@ QtObject {
 
 	function configCount() {
 		if (!_settingsListView) {
-			_settingsListView = Global.pageManager.currentPage.settingsListView
+			_settingsListView = (!!Global.pageManager && !!Global.pageManager.currentPage)
+					? Global.pageManager.currentPage.settingsListView : null
 			if (!_settingsListView) {
 				console.warn("Cannot find settingsListView!")
 				return 0

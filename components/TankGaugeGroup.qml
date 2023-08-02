@@ -56,7 +56,7 @@ Rectangle {
 	border.color: tankProperties.borderColor
 
 	Behavior on height {
-		enabled: root.animationEnabled && Global.pageManager.animatingIdleResize
+		enabled: root.animationEnabled && !!Global.pageManager && Global.pageManager.animatingIdleResize
 		NumberAnimation {
 			duration: Theme.animation.page.idleResize.duration
 			easing.type: Easing.InOutQuad

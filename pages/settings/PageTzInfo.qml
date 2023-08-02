@@ -130,7 +130,7 @@ Page {
 									id: popTimer
 
 									interval: Theme.animation.settings.radioButtonPage.autoClose.duration
-									onTriggered: Global.pageManager.popPage(root)
+									onTriggered: if (!!Global.pageManager) Global.pageManager.popPage(root)
 								}
 							}
 							model: root._timeZoneModels

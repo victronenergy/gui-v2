@@ -14,8 +14,8 @@ Device {
 	readonly property real current: _current.value === undefined ? NaN : _current.value
 	readonly property real temperature_celsius: _temperature.value === undefined ? NaN : _temperature.value
 	readonly property real timeToGo: _timeToGo.value === undefined ? NaN : _timeToGo.value  // in seconds
-	readonly property string icon: Global.batteries.batteryIcon(battery)
-	readonly property int mode: Global.batteries.batteryMode(battery)
+	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(battery) : ""
+	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
 
 	readonly property DataPoint _stateOfCharge: DataPoint {
 		source: battery.serviceUid + "/Soc"
@@ -43,10 +43,12 @@ Device {
 
 	property bool _valid: deviceInstance.value !== undefined
 	on_ValidChanged: {
-		if (_valid) {
-			Global.batteries.addBattery(battery)
-		} else {
-			Global.batteries.removeBattery(battery)
+		if (!!Global.batteries) {
+			if (_valid) {
+				Global.batteries.addBattery(battery)
+			} else {
+				Global.batteries.removeBattery(battery)
+			}
 		}
 	}
 }

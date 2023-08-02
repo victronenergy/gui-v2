@@ -42,10 +42,12 @@ Device {
 
 	property bool _valid: deviceInstance.value !== undefined
 	on_ValidChanged: {
-		if (_valid) {
-			Global.generators.addGenerator(generator)
-		} else {
-			Global.generators.removeGenerator(generator)
+		if (!!Global.generators) {
+			if (_valid) {
+				Global.generators.addGenerator(generator)
+			} else {
+				Global.generators.removeGenerator(generator)
+			}
 		}
 	}
 

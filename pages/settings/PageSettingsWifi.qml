@@ -83,7 +83,7 @@ Page {
 	Connections {
 		target: Connman
 		function onServiceListChanged() {
-			if (Global.pageManager.currentPage === root) {
+			if (!!Global.pageManager && Global.pageManager.currentPage === root) {
 				root._reload()
 			}
 		}

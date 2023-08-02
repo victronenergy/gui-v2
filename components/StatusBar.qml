@@ -58,7 +58,8 @@ Rectangle {
 					   ? "qrc:/images/icon_controls_on_32.svg"
 					   : "qrc:/images/icon_back_32.svg"
 
-		enabled: Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+		enabled: !!Global.pageManager
+				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				&& root.leftButton != VenusOS.StatusBar_LeftButton_None
 		backgroundColor: "transparent"  // don't show background when disabled
 		opacity: enabled ? 1.0 : 0.0
@@ -84,7 +85,8 @@ Rectangle {
 			right: parent.right
 			rightMargin: Theme.geometry.notificationsPage.snoozeButton.rightMargin
 		}
-		enabled: !!Global.pageManager.navBar
+		enabled: !!Global.pageManager
+					&& !!Global.pageManager.navBar
 					&& Global.pageManager.navBar.currentUrl === "qrc:/pages/NotificationsPage.qml"
 					&& Global.notifications.audibleAlarmActive
 					&& !Global.notifications.snoozeAudibleAlarmActive
@@ -123,7 +125,8 @@ Rectangle {
 			verticalCenter: parent.verticalCenter
 		}
 
-		enabled: Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+		enabled: !!Global.pageManager
+				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				&& root.rightButton != VenusOS.StatusBar_RightButton_None
 		opacity: enabled ? 1.0 : 0.0
 		Behavior on opacity {

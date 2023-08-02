@@ -151,9 +151,7 @@ Page {
 			text: modelData.text
 			showAccessLevel: modelData.showAccessLevel || VenusOS.User_AccessType_User
 			visible: defaultVisible && (modelData.visible === undefined || modelData.visible === true)
-			onClicked: {
-				Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
-			}
+			onClicked: Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
 		}
 	}
 

@@ -21,7 +21,7 @@ Page {
 	}
 
 	Connections {
-		target: Global.pageManager.statusBar
+		target: !!Global.pageManager ? Global.pageManager.statusBar : null
 		enabled: root.isCurrentPage
 
 		function onRightButtonClicked() {

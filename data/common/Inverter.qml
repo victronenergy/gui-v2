@@ -43,7 +43,7 @@ Device {
 
 	readonly property VeQuickItem _nominalInverterPower: VeQuickItem {
 		uid: inverter.serviceUid + "/Ac/Out/NominalInverterPower"
-		onValueChanged: Global.inverters.refreshNominalInverterPower()
+		onValueChanged: if (!!Global.inverters) Global.inverters.refreshNominalInverterPower()
 	}
 
 	readonly property VeQuickItem _mode: VeQuickItem {
@@ -60,10 +60,12 @@ Device {
 
 	property bool _valid: deviceInstance.value !== undefined
 	on_ValidChanged: {
-		if (_valid) {
-			Global.inverters.addInverter(inverter)
-		} else {
-			Global.inverters.removeInverter(inverter)
+		if (!!Global.inverters) {
+			if (_valid) {
+				Global.inverters.addInverter(inverter)
+			} else {
+				Global.inverters.removeInverter(inverter)
+			}
 		}
 	}
 

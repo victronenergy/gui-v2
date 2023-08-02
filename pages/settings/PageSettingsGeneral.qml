@@ -87,6 +87,8 @@ Page {
 				height: implicitHeight + demoModeCaption.height
 				primaryLabel.anchors.verticalCenterOffset: -(demoModeCaption.height / 2)
 				dataSource: "com.victronenergy.settings/Settings/Gui/DemoMode"
+				popDestination: undefined // don't pop page automatically.
+				updateOnClick: false // handle option clicked manually.
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					//% "ESS demo"
@@ -105,6 +107,10 @@ Page {
 					}
 					//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
 					text: qsTrId("settings_demo_mode_caption")
+				}
+				onOptionClicked: function(index) {
+					Qt.callLater(Global.main.rebuildUi)
+					setDataValue(index)
 				}
 			}
 		}

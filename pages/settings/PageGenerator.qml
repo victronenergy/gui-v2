@@ -240,7 +240,10 @@ Page {
 		ListNavigationItem {
 			//% "Settings"
 			text: qsTrId("settings_page_relay_generator_settings")
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml", { title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
+					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+			}
 		}
 	}
 }

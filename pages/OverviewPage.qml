@@ -39,6 +39,9 @@ Page {
 
 	property var _createdWidgets: ({})
 
+	property bool _expandLayout: !!Global.pageManager && Global.pageManager.expandLayout
+	property bool _animateGeometry: root.isCurrentPage && !!Global.pageManager && Global.pageManager.animatingIdleResize
+
 	// Resets the layout, setting the y pos and height for all overview widgets. This is done once
 	// imperatively, instead of using anchors or y/height bindings, so that widget connector path
 	// calculations are also only done once; otherwise, the recalculation/repainting of the paths
@@ -366,8 +369,8 @@ Page {
 		GridWidget {
 			id: gridWidget
 
-			expanded: Global.pageManager.expandLayout
-			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ gridWidgetConnector ]
 
@@ -385,8 +388,8 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: Global.pageManager.expandLayout
-				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(gridWidgetConnector)
 			}
@@ -399,8 +402,8 @@ Page {
 		ShoreWidget {
 			id: shoreWidget
 
-			expanded: Global.pageManager.expandLayout
-			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ shoreWidgetConnector ]
 
@@ -418,8 +421,8 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: Global.pageManager.expandLayout
-				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(shoreWidgetConnector)
 			}
@@ -432,8 +435,8 @@ Page {
 		AcGeneratorWidget {
 			id: acGeneratorWidget
 
-			expanded: Global.pageManager.expandLayout
-			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ acGeneratorConnector ]
 
@@ -451,8 +454,8 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: Global.pageManager.expandLayout
-				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(acGeneratorConnector)
 			}
@@ -465,8 +468,8 @@ Page {
 		DcGeneratorWidget {
 			id: dcGeneratorWidget
 
-			expanded: Global.pageManager.expandLayout
-			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ dcGeneratorConnector ]
 
@@ -484,8 +487,8 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: Global.pageManager.expandLayout
-				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(dcGeneratorConnector)
 			}
@@ -498,8 +501,8 @@ Page {
 		AlternatorWidget {
 			id: alternatorWidget
 
-			expanded: Global.pageManager.expandLayout
-			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ alternatorConnector ]
 
@@ -516,8 +519,8 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: Global.pageManager.expandLayout
-				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(alternatorConnector)
 			}
@@ -530,8 +533,8 @@ Page {
 		WindWidget {
 			id: windWidget
 
-			expanded: Global.pageManager.expandLayout
-			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ windConnector ]
 
@@ -548,8 +551,8 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: Global.pageManager.expandLayout
-				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(windConnector)
 			}
@@ -562,8 +565,8 @@ Page {
 		SolarYieldWidget {
 			id: solarWidget
 
-			expanded: Global.pageManager.expandLayout
-			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ acSolarConnector, dcSolarConnector ]
 
@@ -581,8 +584,8 @@ Page {
 				endWidget: inverterWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				visible: defaultVisible && Global.pvInverters.model.count > 0
-				expanded: Global.pageManager.expandLayout
-				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 
 				// Energy flows to Inverter/Charger if there is any PV Inverter power (i.e. AC)
@@ -601,8 +604,8 @@ Page {
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				visible: defaultVisible && Global.solarChargers.model.count > 0
-				expanded: Global.pageManager.expandLayout
-				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 
 				// Energy flows to battery if there is any PV Charger power (i.e. DC, so solar is charging battery)
@@ -620,8 +623,8 @@ Page {
 		id: inverterWidget
 
 		size: VenusOS.OverviewWidget_Size_L
-		expanded: Global.pageManager.expandLayout
-		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		expanded: root._expandLayout
+		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 		connectors: [ inverterToAcLoadsConnector, inverterToBatteryConnector ]
 
@@ -648,8 +651,8 @@ Page {
 		startLocation: VenusOS.WidgetConnector_Location_Right
 		endWidget: acLoadsWidget
 		endLocation: VenusOS.WidgetConnector_Location_Left
-		expanded: Global.pageManager.expandLayout
-		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		expanded: root._expandLayout
+		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 		straight: _rightWidgets.length <= 2   // straight if only AC Loads is present, or AC Loads plus EVCS or DC Loads
 
@@ -668,8 +671,8 @@ Page {
 		startLocation: VenusOS.WidgetConnector_Location_Bottom
 		endWidget: batteryWidget
 		endLocation: VenusOS.WidgetConnector_Location_Top
-		expanded: Global.pageManager.expandLayout
-		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		expanded: root._expandLayout
+		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 
 		// If vebus power is positive: battery is charging, so energy flows to battery.
@@ -687,8 +690,8 @@ Page {
 		id: batteryWidget
 
 		size: VenusOS.OverviewWidget_Size_L
-		expanded: Global.pageManager.expandLayout
-		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		expanded: root._expandLayout
+		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 		connectors: [ batteryToDcLoadsConnector ]
 
@@ -711,8 +714,8 @@ Page {
 		startLocation: VenusOS.WidgetConnector_Location_Right
 		endWidget: dcLoadsWidget
 		endLocation: VenusOS.WidgetConnector_Location_Left
-		expanded: Global.pageManager.expandLayout
-		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		expanded: root._expandLayout
+		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
@@ -728,8 +731,8 @@ Page {
 	AcLoadsWidget {
 		id: acLoadsWidget
 
-		expanded: Global.pageManager.expandLayout
-		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		expanded: root._expandLayout
+		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 
 		WidgetConnectorAnchor {
@@ -746,8 +749,8 @@ Page {
 	DcLoadsWidget {
 		id: dcLoadsWidget
 
-		expanded: Global.pageManager.expandLayout
-		animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+		expanded: root._expandLayout
+		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 
 		WidgetConnectorAnchor {
@@ -761,8 +764,8 @@ Page {
 		EvcsWidget {
 			id: evcsWidget
 
-			expanded: Global.pageManager.expandLayout
-			animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ evcsConnector ]
 
@@ -778,8 +781,8 @@ Page {
 				startLocation: VenusOS.WidgetConnector_Location_Bottom
 				endWidget: evcsWidget
 				endLocation: VenusOS.WidgetConnector_Location_Top
-				expanded: Global.pageManager.expandLayout
-				animateGeometry: root.isCurrentPage && Global.pageManager.animatingIdleResize
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
 					? Global.evChargers.power > Theme.geometry.overviewPage.connector.animationPowerThreshold

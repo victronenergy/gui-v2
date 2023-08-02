@@ -75,7 +75,8 @@ QtVirtualKeyboard.InputPanel {
 				if (flickable.contentY + delta + flickable.height > flickable.contentHeight) {
 					// Item is too close to bottom of flickable, so it will still be hidden after
 					// scrolling upwards. Reduce the flickable height so that item can be seen.
-					root.toHeight = flickable.height - inputPanelY + Global.pageManager.navBar.height
+					root.toHeight = flickable.height - inputPanelY
+						+ ((!!Global.pageManager && !!Global.pageManager.navBar) ? Global.pageManager.navBar.height : 0)
 				} else {
 					// No flickable height changes required.
 					root.toHeight = flickable.height

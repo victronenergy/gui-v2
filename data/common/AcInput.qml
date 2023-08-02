@@ -25,18 +25,22 @@ Device {
 	readonly property alias phases: _serviceLoader.phases
 
 	onConnectedChanged: {
-		if (connected) {
-			Global.acInputs.connectedInput = input
-		} else if (!connected && Global.acInputs.connectedInput === input) {
-			Global.acInputs.connectedInput = null
+		if (!!Global.acInputs) {
+			if (connected) {
+				Global.acInputs.connectedInput = input
+			} else if (!connected && Global.acInputs.connectedInput === input) {
+				Global.acInputs.connectedInput = null
+			}
 		}
 	}
 
 	onSourceChanged: {
-		if (source === VenusOS.AcInputs_InputType_Generator) {
-			Global.acInputs.generatorInput = input
-		} else if (Global.acInputs.generatorInput === input) {
-			Global.acInputs.generatorInput = null
+		if (!!Global.acInputs) {
+			if (source === VenusOS.AcInputs_InputType_Generator) {
+				Global.acInputs.generatorInput = input
+			} else if (Global.acInputs.generatorInput === input) {
+				Global.acInputs.generatorInput = null
+			}
 		}
 	}
 
@@ -65,10 +69,12 @@ Device {
 
 	property bool _valid: deviceInstance.value !== undefined
 	on_ValidChanged: {
-		if (_valid) {
-			Global.acInputs.addInput(input)
-		} else {
-			Global.acInputs.removeInput(input)
+		if (!!Global.acInputs) {
+			if (_valid) {
+				Global.acInputs.addInput(input)
+			} else {
+				Global.acInputs.removeInput(input)
+			}
 		}
 	}
 }

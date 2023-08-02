@@ -80,7 +80,7 @@ Flickable {
 							: VenusOS.EnvironmentGaugePanel_Size_Expanded
 				}
 
-				verticalSize: Global.pageManager.expandLayout
+				verticalSize: (!!Global.pageManager && Global.pageManager.expandLayout)
 						? VenusOS.EnvironmentGaugePanel_Size_Expanded
 						: VenusOS.EnvironmentGaugePanel_Size_Compact
 				title: model.input.name
