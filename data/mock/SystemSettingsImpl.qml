@@ -289,5 +289,7 @@ QtObject {
 		setMockSolarChargerValue("/Settings/BmsPresent", 1)
 		setMockSolarChargerValue("/Alarms/LowVoltage", VenusOS.SolarCharger_AlarmType_Warning)
 		setMockSolarChargerValue("/Alarms/HighVoltage", VenusOS.SolarCharger_AlarmType_OK)
+
+		ClockTime.setClockTime(new Date().getTime() / 1000)
 	}
 }

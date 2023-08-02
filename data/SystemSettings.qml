@@ -118,11 +118,30 @@ QtObject {
 		}
 	}
 
+	property DataPoint time: DataPoint {
+		source: "com.victronenergy.platform/Device/Time"
+		onValueChanged: {
+			if (value !== undefined) {
+				ClockTime.setClockTime(value)
+			}
+		}
+
+		// Periodically ensure system time is up-to-date.
+		property Timer _updateTime: Timer {
+			interval: 60000
+			repeat: true
+			triggeredOnStart: true
+			running: BackendConnection.applicationVisible
+			onTriggered: root.time.refresh()
+		}
+	}
+
 	property DataPoint timeZone: DataPoint {
 		source: "com.victronenergy.settings/Settings/System/TimeZone"
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.systemTimeZone = value
+				root.time.refresh() // ensure the time value is the latest one from the server
 			}
 		}
 	}

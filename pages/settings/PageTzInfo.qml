@@ -41,6 +41,15 @@ Page {
 		_timeSelector.open()
 	}
 
+	// Ensure time is up-to-date while this page is open.
+	Timer {
+		interval: 10000
+		repeat: true
+		triggeredOnStart: true
+		running: BackendConnection.applicationVisible
+		onTriggered: Global.systemSettings.time.refresh()
+	}
+
 	Component {
 		id: timeSelectorComponent
 
@@ -49,8 +58,7 @@ Page {
 				let dt = ClockTime.currentDateTime
 				dt.setHours(hour)
 				dt.setMinutes(minute)
-				// TODO set system date time to 'dt' using venus-platform or such
-				Global.showToastNotification(VenusOS.Notification_Info, "TODO not yet implemented")
+				Global.systemSettings.time.setValue(dt.getTime() / 1000)
 			}
 		}
 	}
@@ -69,6 +77,7 @@ Page {
 				text: qsTrId("settings_tz_date_time_local")
 				button.text: ClockTime.currentTimeText
 				writeAccessLevel: VenusOS.User_AccessType_User
+				enabled: Global.systemSettings.time.valid
 
 				onClicked: {
 					root._openTimeSelector()

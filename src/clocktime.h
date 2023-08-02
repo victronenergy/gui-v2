@@ -29,6 +29,7 @@ public:
 public Q_SLOTS:
 	QString formatTime(int hour, int minute) const;
 	bool isDateValid(int year, int month, int day) const; // month is 1-12
+	void setClockTime(qint64 secondsSinceEpoch);
 
 Q_SIGNALS:
 	void currentDateTimeChanged();
@@ -42,13 +43,15 @@ protected:
 
 private:
 	void updateTime();
-	void scheduleNextTimeCheck(const QTime &now);
+	void scheduleNextTimeCheck(int interval);
 
 	QDateTime m_currentDateTime;
 	QDateTime m_currentDateTimeUtc;
 	QString m_currentTimeText;
 	QString m_currentTimeUtcText;
 	QString m_systemTimeZone;
+	qint64 m_secondsSinceEpoch = 0;
+	int m_timerInterval = 0;
 	int m_timerId = 0;
 };
 

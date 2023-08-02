@@ -9,8 +9,6 @@ using namespace Victron::VenusOS;
 ClockTime::ClockTime(QObject *parent)
 	: QObject(parent)
 {
-	updateTime();
-	scheduleNextTimeCheck(m_currentDateTime.time());
 }
 
 QString ClockTime::formatTime(int hour, int minute) const
@@ -25,31 +23,51 @@ bool ClockTime::isDateValid(int year, int month, int day) const
 	return calendar.isDateValid(year, month, day);
 }
 
+void ClockTime::setClockTime(qint64 secondsSinceEpoch)
+{
+	if (m_secondsSinceEpoch == secondsSinceEpoch) {
+		return;
+	}
+	m_secondsSinceEpoch = secondsSinceEpoch;
+	updateTime();
+
+	// Wait until just after the next clock minute, then update the time properties.
+	const int secsUntilNextMin = 60 - m_currentDateTime.time().second();
+	scheduleNextTimeCheck((secsUntilNextMin + 1) * 1000);
+}
+
 void ClockTime::timerEvent(QTimerEvent *)
 {
-	const QTime currentTime = QTime::currentTime();
-	if (currentTime.minute() != m_currentDateTime.time().minute()) {
-		updateTime();
+	if (m_secondsSinceEpoch <= 0) {
+		return;
 	}
-	scheduleNextTimeCheck(currentTime);
+	m_secondsSinceEpoch += (m_timerInterval / 1000);
+	updateTime();
+	scheduleNextTimeCheck(60 * 1000);
 }
 
 void ClockTime::updateTime()
 {
+	if (m_secondsSinceEpoch <= 0) {
+		return;
+	}
+
+	m_currentDateTimeUtc = QDateTime::fromSecsSinceEpoch(m_secondsSinceEpoch, Qt::UTC);
+
 	if (m_systemTimeZone.compare(QStringLiteral("/UTC"), Qt::CaseInsensitive) == 0
 			|| m_systemTimeZone.compare(QStringLiteral("UTC"), Qt::CaseInsensitive) == 0) {
-		m_currentDateTime = QDateTime::currentDateTimeUtc();
+		m_currentDateTime = m_currentDateTimeUtc;
 	} else {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 		// Cannot use QTimeZone in Emscripten builds.
 		// We thus cannot convert to the specified timezone offset.
 		// The local time will be the local time of the browser.
-		m_currentDateTime = QDateTime::currentDateTime();
+		m_currentDateTime = m_currentDateTimeUtc.toLocalTime();
 #else
-		m_currentDateTime = QDateTime::currentDateTime().toTimeZone(QTimeZone(m_systemTimeZone.toUtf8()));
+		m_currentDateTime = m_currentDateTimeUtc.toTimeZone(QTimeZone(m_systemTimeZone.toUtf8()));
 #endif
 	}
-	m_currentDateTimeUtc = QDateTime::currentDateTimeUtc();
+
 	m_currentTimeText = m_currentDateTime.toString("hh:mm");
 	m_currentTimeUtcText = m_currentDateTimeUtc.toString("yyyy-MM-dd hh:mm");
 
@@ -59,15 +77,13 @@ void ClockTime::updateTime()
 	emit currentTimeUtcTextChanged();
 }
 
-void ClockTime::scheduleNextTimeCheck(const QTime &now)
+void ClockTime::scheduleNextTimeCheck(int interval)
 {
 	if (m_timerId > 0) {
 		killTimer(m_timerId);
 	}
-
-	// Wait until just after the next clock minute, then update the time properties.
-	const int secsUntilNextMin = 60 - now.second();
-	m_timerId = startTimer((secsUntilNextMin + 1) * 1000);
+	m_timerInterval = interval;
+	m_timerId = startTimer(interval);
 }
 
 ClockTime* ClockTime::instance(QObject* parent)
