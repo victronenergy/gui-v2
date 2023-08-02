@@ -18,26 +18,24 @@ Page {
 		return " (" + perc.toFixed(2) + "%)"
 	}
 
-	Timer {
-		interval: 1000
-		running: root.animationEnabled
-		repeat: true
-		triggeredOnStart: true
-
-		onTriggered: {
-			if (!root.gateway) {
+	DataPoint {
+		id: canStats
+		source: "com.victronenergy.platform/CanBus/Interface/" + gateway + "/Statistics"
+		onValueChanged: {
+			if (value === undefined) {
 				return
 			}
-			let stats
+			let json
 			try {
-				stats = JSON.parse(canBusStats.value)[0]
+				json = JSON.parse(value)
 			} catch (e) {
-				console.warn("Unable to parse JSON:", canBusStats.value, "exception:", e)
+				console.warn("Unable to parse JSON:", value, "exception:", e)
 				return
 			}
-			if (!stats) {
+			if (json.length < 1) {
 				return
 			}
+			const stats = json[0]
 
 			stateGroup.visible = stats.linkinfo !== undefined
 			if (stats.linkinfo) {
@@ -84,6 +82,15 @@ Page {
 		}
 	}
 
+	Timer {
+		interval: 1000
+		running: root.animationEnabled
+		repeat: true
+		triggeredOnStart: true
+
+		onTriggered: canStats.refresh()
+	}
+
 	GradientListView {
 		model: ObjectModel {
 			ListTextGroup {
@@ -114,10 +121,5 @@ Page {
 				}
 			}
 		}
-	}
-
-	DataPoint {
-		id: canBusStats
-		source: "com.victronenergy.platform/CanBus/Interface/" + gateway + "/Statistics"
 	}
 }
