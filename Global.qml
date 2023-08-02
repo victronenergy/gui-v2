@@ -15,10 +15,12 @@ import QtQml
 //   instance objects declared in main, in onCompleted or similar.
 
 QtObject {
+	property var main
 	property var pageManager
+	property var mainView
 	property var mockDataSimulator    // only valid when mock mode is active
 	property var dataManager
-	property var locale: Qt.locale()
+	property var locale: Qt.locale()  // TODO: read from settings
 	property var dataServiceModel: null
 	property var firmwareUpdate
 
@@ -48,6 +50,8 @@ QtObject {
 	property bool dataManagerLoaded
 	property bool allPagesLoaded
 
+	property bool changingLanguage
+
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
@@ -63,6 +67,43 @@ QtObject {
 			return Global.tanks.allTankModels.concat([Global.environmentInputs.model])
 		}
 		return []
+	}
+
+	function reset() {
+		// note: we don't reset `main` or `changingLanguage`
+		// as main will never be destroyed during rebuild ui,
+		// and we handle changingLanguage specially.
+
+		allPagesLoaded = false
+		dataManagerLoaded = false
+		venusPlatform = null
+		tanks = null
+		systemSettings = null
+		system = null
+		solarChargers = null
+		relays = null
+		pvInverters = null
+		notifications = null
+		inverters = null
+		generators = null
+		evChargers = null
+		ess = null
+		environmentInputs = null
+		dcInputs = null
+		batteries = null
+		acInputs = null
+		notificationLayer = null
+		dialogLayer = null
+		inputPanel = null
+		firmwareUpdate = null
+		dataServiceModel = null
+		locale = Qt.locale()
+		dataManager = null
+		mockDataSimulator = null
+		mainView = null
+		pageManager = null
+
+		splashScreenVisible = true
 	}
 }
 

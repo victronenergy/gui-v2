@@ -28,6 +28,7 @@ Item {
 		id: mainView
 		anchors.fill: parent
 		pageManager: pageManager
+		Component.onCompleted: Global.mainView = mainView
 	}
 
 	FirmwareUpdate {

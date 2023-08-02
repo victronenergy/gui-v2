@@ -127,6 +127,20 @@ QtObject {
 		}
 	}
 
+	property DataPoint language: DataPoint {
+		source: "com.victronenergy.settings/Settings/Gui/Language"
+		onValueChanged: {
+			if (value !== undefined && !Global.changingLanguage) {
+				Global.changingLanguage = true
+				if (Language.fromCode(value) != Language.current) {
+					// not set by our UI, but instead by backend change.
+					Language.setCurrentLanguageCode(value)
+				}
+				Qt.callLater(Global.main.retranslateUi)
+			}
+		}
+	}
+
 	function reset() {
 		// no-op
 	}

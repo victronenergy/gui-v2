@@ -68,7 +68,13 @@ public:
 
 	Q_ENUM(QLocale::Language)
 
+	Q_INVOKABLE void retranslate(); // triggers world binding re-evaluation
+
 	Q_INVOKABLE QString toString(QLocale::Language language) const;
+	Q_INVOKABLE QString toCode(QLocale::Language language) const;
+	Q_INVOKABLE void setCurrentLanguageCode(const QString &code);
+	Q_INVOKABLE QLocale::Language fromCode(const QString &code);
+
 	QLocale::Language getCurrentLanguage() const;
 	void setCurrentLanguage(QLocale::Language language);
 

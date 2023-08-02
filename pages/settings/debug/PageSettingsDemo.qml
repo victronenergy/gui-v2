@@ -38,6 +38,24 @@ Page {
 					{ display: "Option A", value: 1 },
 					{ display: "Option B", value: 2, readOnly: true },
 					{ display: "Option C", value: 3 },
+					{ display: "Option D", value: 4 },
+					{ display: "Option E", value: 5 },
+					{ display: "Option F", value: 6 },
+					{ display: "Option G", value: 7 },
+					{ display: "Option H", value: 8 },
+					{ display: "Option I", value: 9 },
+					{ display: "Option J", value: 10 },
+					{ display: "Option K", value: 11 },
+					{ display: "Option L", value: 12 },
+					{ display: "Option M", value: 13 },
+					{ display: "Option N", value: 14 },
+					{ display: "Option O", value: 15 },
+					{ display: "Option P", value: 16 },
+					{ display: "Option Q", value: 17 },
+					{ display: "Option R", value: 18 },
+					{ display: "Option S", value: 19 },
+					{ display: "Option T", value: 20 },
+					{ display: "Option U", value: 21 },
 				]
 				currentIndex: 1
 
@@ -52,6 +70,24 @@ Page {
 					ListElement { display: "Option A"; value: 1 }
 					ListElement { display: "Option B"; value: 2; readOnly: true }
 					ListElement { display: "Option C"; value: 3 }
+					ListElement { display: "Option D"; value: 4 }
+					ListElement { display: "Option E"; value: 5 }
+					ListElement { display: "Option F"; value: 6 }
+					ListElement { display: "Option G"; value: 7 }
+					ListElement { display: "Option H"; value: 8 }
+					ListElement { display: "Option I"; value: 9 }
+					ListElement { display: "Option J"; value: 10 }
+					ListElement { display: "Option K"; value: 11 }
+					ListElement { display: "Option L"; value: 12 }
+					ListElement { display: "Option M"; value: 13 }
+					ListElement { display: "Option N"; value: 14 }
+					ListElement { display: "Option O"; value: 15 }
+					ListElement { display: "Option P"; value: 16 }
+					ListElement { display: "Option Q"; value: 17 }
+					ListElement { display: "Option R"; value: 18 }
+					ListElement { display: "Option S"; value: 19 }
+					ListElement { display: "Option T"; value: 20 }
+					ListElement { display: "Option U"; value: 21 }
 				}
 				currentIndex: 2
 				secondaryText: optionModel.get(2).display

@@ -45,6 +45,7 @@ ListNavigationItem {
 	property int defaultIndex: -1
 	//% "Unknown"
 	property string defaultSecondaryText: qsTrId("settings_radio_button_group_unknown")
+	property string clickedDelegateOverrideText
 
 	signal optionClicked(index: int)
 
@@ -105,6 +106,9 @@ ListNavigationItem {
 							}
 						}
 						root.optionClicked(model.index)
+						if (root.clickedDelegateOverrideText.length) {
+							text = root.clickedDelegateOverrideText
+						}
 
 						if (root.popDestination !== undefined) {
 							popTimer.restart()

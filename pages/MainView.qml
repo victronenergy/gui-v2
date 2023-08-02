@@ -20,9 +20,20 @@ Item {
 	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded
 	on_ReadyToInitChanged: {
 		if (_readyToInit && pageStack.depth === 0) {
-			console.warn("Data sources ready, loading pages")
-			preloader.model = navBar.model
+			loadUi()
 		}
+	}
+
+	function clearUi() {
+		pageStack.clear()
+		preloader.model = null
+		_loadedPages = 0
+	}
+
+	function loadUi() {
+		console.warn("Data sources ready, loading pages")
+		preloader.model = navBar.model
+		navBar.currentIndex = 0
 	}
 
 	PageStack {

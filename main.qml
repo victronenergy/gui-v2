@@ -19,10 +19,60 @@ Window {
 	width: Qt.platform.os != "wasm" ? Theme.geometry.screen.width : Screen.width
 	height: Qt.platform.os != "wasm" ? Theme.geometry.screen.height : Screen.height
 
+	function retranslateUi() {
+		console.warn("retranslateUi() triggered")
+		if (!Global.mainView) {
+			// if we have to retranslate at startup prior to instantiating mainView
+			// (because we load settings from the backend and discover that the
+			//  device language is something other than "en_US")
+			// then we don't need to tear down the UI before retranslating.
+			Language.retranslate()
+		} else {
+			console.warn("retranslateUi() reloading entire ui")
+			Global.mainView.clearUi()
+			Global.reset()
+			// we haven't lost backend connection.
+			// we are rebuilding UI due to language change.
+			// manually cycle the data manager loader.
+			dataManagerLoader.active = false
+			dataManagerLoader.active = true
+			gc()
+		}
+		Global.changingLanguage = false
+		console.warn("retranslateUi() finished")
+	}
+
+	function rebuildUi() {
+		console.warn("rebuildUi() triggered")
+		if (Global.mainView) {
+			console.warn("rebuildUi() resetting entire ui")
+			Global.mainView.clearUi()
+		}
+		Global.reset()
+		if (dataManagerLoader.active && dataManagerLoader.connectionReady) {
+			// we haven't lost backend connection.
+			// we must be rebuilding UI due to demo mode change.
+			// manually cycle the data manager loader.
+			dataManagerLoader.active = false
+			dataManagerLoader.active = true
+		}
+		gc()
+		console.warn("rebuildUi() complete")
+	}
+
+	Component.onCompleted: Global.main = root
+
 	Loader {
-		// Latch the Ready state so that it doesn't change if we later get disconnected.
+		id: dataManagerLoader
 		readonly property bool connectionReady: BackendConnection.state === BackendConnection.Ready
-		onConnectionReadyChanged: if (connectionReady) active = true
+		onConnectionReadyChanged: {
+			if (connectionReady) {
+				active = true
+			} else if (active) {
+				root.rebuildUi()
+				active = false
+			}
+		}
 
 		asynchronous: true
 		active: false
