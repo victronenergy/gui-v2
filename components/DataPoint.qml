@@ -68,6 +68,10 @@ QtObject {
 				value = v
 			}
 
+			function getValue(force) {
+				// no-op
+			}
+
 			onInvalidateChanged: root.invalidate = invalidate
 		}
 	}
@@ -76,7 +80,15 @@ QtObject {
 		if (sourceObject) {
 			sourceObject.setValue(v)
 		} else {
-			console.warn("Set value() failed, no sourceObject for source", source)
+			console.warn("setValue() failed, no sourceObject for source", source)
+		}
+	}
+
+	function refresh() {
+		if (sourceObject) {
+			sourceObject.getValue(true)
+		} else {
+			console.warn("refresh() failed, no sourceObject for source", source)
 		}
 	}
 
