@@ -19,10 +19,52 @@ Window {
 	width: Qt.platform.os != "wasm" ? Theme.geometry.screen.width : Screen.width
 	height: Qt.platform.os != "wasm" ? Theme.geometry.screen.height : Screen.height
 
+	function retranslateUi() {
+		console.warn("Retranslating UI")
+		// If we have to retranslate at startup prior to instantiating mainView
+		// (because we load settings from the backend and discover that the
+		//  device language is something other than "en_US")
+		// then we don't need to tear down the UI before retranslating.
+		// Otherwise, we have to rebuild the entire UI.
+		if (Global.mainView) {
+			console.warn("Retranslating requires rebuilding UI")
+			rebuildUi()
+		}
+		Language.retranslate()
+		Global.changingLanguage = false
+		console.warn("Retranslating complete")
+	}
+
+	function rebuildUi() {
+		console.warn("Rebuilding UI")
+		if (Global.mainView) {
+			Global.mainView.clearUi()
+		}
+		Global.reset()
+		if (Global.changingLanguage || (dataManagerLoader.active && dataManagerLoader.connectionReady)) {
+			// we haven't lost backend connection.
+			// we must be rebuilding UI due to language or demo mode change.
+			// manually cycle the data manager loader.
+			dataManagerLoader.active = false
+			dataManagerLoader.active = true
+		}
+		gc()
+		console.warn("Rebuilding complete")
+	}
+
+	Component.onCompleted: Global.main = root
+
 	Loader {
-		// Latch the Ready state so that it doesn't change if we later get disconnected.
+		id: dataManagerLoader
 		readonly property bool connectionReady: BackendConnection.state === BackendConnection.Ready
-		onConnectionReadyChanged: if (connectionReady) active = true
+		onConnectionReadyChanged: {
+			if (connectionReady) {
+				active = true
+			} else if (active) {
+				root.rebuildUi()
+				active = false
+			}
+		}
 
 		asynchronous: true
 		active: false

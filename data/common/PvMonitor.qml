@@ -40,8 +40,10 @@ Instantiator {
 				}
 			}
 		}
-		Global.system.solar.acPower = totalPower
-		Global.system.solar.acCurrent = totalCurrent
+		if (!!Global.system) {
+			Global.system.solar.acPower = totalPower
+			Global.system.solar.acCurrent = totalCurrent
+		}
 	}
 
 	delegate: QtObject {
@@ -91,11 +93,11 @@ Instantiator {
 
 	readonly property DataPoint veDcPower: DataPoint {
 		source: "com.victronenergy.system/Dc/Pv/Power"
-		onValueChanged: Global.system.solar.dcPower = value === undefined ? NaN : value
+		onValueChanged: if (!!Global.system) Global.system.solar.dcPower = value === undefined ? NaN : value
 	}
 
 	readonly property DataPoint veDcCurrent: DataPoint {
 		source: "com.victronenergy.system/Dc/Pv/Current"
-		onValueChanged: Global.system.solar.dcCurrent = value === undefined ? NaN : value
+		onValueChanged: if (!!Global.system) Global.system.solar.dcCurrent = value === undefined ? NaN : value
 	}
 }

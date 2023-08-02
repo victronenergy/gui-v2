@@ -20,12 +20,12 @@ Page {
 
 		anchors {
 			top: parent.top
-			topMargin: Global.pageManager.expandLayout ? -tabBar.height : 0
+			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout) ? -tabBar.height : 0
 			horizontalCenter: parent.horizontalCenter
 		}
 
-		opacity: Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
+		opacity: (!!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+				 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode))
 				 ? 1.0
 				 : 0.0
 
@@ -55,11 +55,11 @@ Page {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: Global.pageManager.expandLayout
+			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
 					   ? Theme.geometry.levelsPage.gaugesView.expanded.topMargin
 					   : Theme.geometry.levelsPage.gaugesView.compact.topMargin
 			bottom: parent.bottom
-			bottomMargin: Global.pageManager.expandLayout
+			bottomMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
 						  ? Theme.geometry.levelsPage.gaugesView.expanded.bottomMargin
 						  : Theme.geometry.levelsPage.gaugesView.compact.bottomMargin
 		}
@@ -93,11 +93,11 @@ Page {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: Global.pageManager.expandLayout
+			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
 					   ? Theme.geometry.levelsPage.gaugesView.expanded.topMargin
 					   : Theme.geometry.levelsPage.gaugesView.compact.topMargin
 			bottom: parent.bottom
-			bottomMargin: Global.pageManager.expandLayout
+			bottomMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
 						  ? Theme.geometry.levelsPage.gaugesView.expanded.bottomMargin
 						  : Theme.geometry.levelsPage.gaugesView.compact.bottomMargin
 			left: parent.left

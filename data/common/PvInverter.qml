@@ -95,10 +95,12 @@ Device {
 
 	property bool _valid: deviceInstance.value !== undefined
 	on_ValidChanged: {
-		if (_valid) {
-			Global.pvInverters.addInverter(pvInverter)
-		} else {
-			Global.pvInverters.removeInverter(pvInverter)
+		if (!!Global.pvInverters) {
+			if (_valid) {
+				Global.pvInverters.addInverter(pvInverter)
+			} else {
+				Global.pvInverters.removeInverter(pvInverter)
+			}
 		}
 	}
 }

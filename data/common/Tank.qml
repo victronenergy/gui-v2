@@ -27,7 +27,7 @@ Device {
 	readonly property VeQuickItem _remaining: VeQuickItem {
 		function _update() {
 			tank.remaining = value === undefined ? NaN : value
-			if (tank.type >= 0) {
+			if (tank.type >= 0 && !!Global.tanks) {
 				Global.tanks.updateTankModelTotals(tank.type)
 			}
 		}
@@ -38,7 +38,7 @@ Device {
 	readonly property VeQuickItem _capacity: VeQuickItem {
 		function _update() {
 			tank.capacity = value === undefined ? NaN : value
-			if (tank.type >= 0) {
+			if (tank.type >= 0 && !!Global.tanks) {
 				Global.tanks.updateTankModelTotals(tank.type)
 			}
 		}
@@ -49,10 +49,12 @@ Device {
 
 	property bool _valid: deviceInstance.value !== undefined && type >= 0
 	on_ValidChanged: {
-		if (_valid) {
-			Global.tanks.addTank(tank)
-		} else if (tank.type >= 0) {
-			Global.tanks.removeTank(tank)
+		if (!!Global.tanks) {
+			if (_valid) {
+				Global.tanks.addTank(tank)
+			} else if (tank.type >= 0) {
+				Global.tanks.removeTank(tank)
+			}
 		}
 	}
 }

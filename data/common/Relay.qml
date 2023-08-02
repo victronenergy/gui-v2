@@ -14,7 +14,7 @@ Device {
 	readonly property int relayFunction: _relayFunction.value === undefined ? -1 : _relayFunction.value
 	readonly property int state: _veState.value === undefined ? -1 : _veState.value
 
-	name: Global.relays.relayName(relayIndex)
+	name: !!Global.relays ? Global.relays.relayName(relayIndex) : ""
 
 	function setState(newState) {
 		_veState.setValue(newState)
@@ -32,10 +32,12 @@ Device {
 
 	readonly property bool _valid: deviceInstance.value !== undefined
 	on_ValidChanged: {
-		if (_valid) {
-			Global.relays.addRelay(relay)
-		} else {
-			Global.relays.removeRelay(relay)
+		if (!!Global.relays) {
+			if (_valid) {
+				Global.relays.addRelay(relay)
+			} else {
+				Global.relays.removeRelay(relay)
+			}
 		}
 	}
 }

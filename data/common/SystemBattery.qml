@@ -14,8 +14,8 @@ QtObject {
 	readonly property real current: _current.value === undefined ? NaN : _current.value
 	readonly property real temperature_celsius: _temperature.value === undefined ? NaN : _temperature.value
 	readonly property real timeToGo: _timeToGo.value === undefined ? NaN : _timeToGo.value
-	readonly property string icon: Global.batteries.batteryIcon(battery)
-	readonly property int mode: Global.batteries.batteryMode(battery)
+	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(battery) : ""
+	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
 
 	readonly property DataPoint _stateOfCharge: DataPoint {
 		source: "com.victronenergy.system/Dc/Battery/Soc"

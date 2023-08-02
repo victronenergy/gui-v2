@@ -101,10 +101,12 @@ Page {
 				text: qsTrId("settings_devices")
 				visible: root._isVecan || root._isRvc
 				onClicked: {
-					const url = root._isVecan
-							  ? "/pages/settings/PageSettingsVecanDevices.qml"
-							  : "/pages/settings/PageSettingsRvcDevices.qml"
-					Global.pageManager.pushPage(url, { gateway: root.gateway })
+					if (!!Global.pageManager) {
+						const url = root._isVecan
+								  ? "/pages/settings/PageSettingsVecanDevices.qml"
+								  : "/pages/settings/PageSettingsRvcDevices.qml"
+						Global.pageManager.pushPage(url, { gateway: root.gateway })
+					}
 				}
 			}
 

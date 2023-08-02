@@ -104,7 +104,7 @@ ListView {
 					animationEnabled: root.animationEnabled
 					tankType: tankTypeDelegate.tankType
 					title: tankProperties.name
-					expanded: Global.pageManager.expandLayout
+					expanded: !!Global.pageManager && Global.pageManager.expandLayout
 
 					level: mergeTanks
 							? (gaugeTanks.totalCapacity === 0

@@ -55,7 +55,7 @@ Device {
 
 	readonly property VeQuickItem _power: VeQuickItem {
 		uid: evCharger.serviceUid + "/Ac/Power"
-		onValueChanged: Global.evChargers.updateTotals()
+		onValueChanged: if (!!Global.evChargers) Global.evChargers.updateTotals()
 	}
 
 	readonly property VeQuickItem _chargingTime: VeQuickItem {
@@ -84,10 +84,12 @@ Device {
 
 	property bool _valid: deviceInstance.value !== undefined
 	on_ValidChanged: {
-		if (_valid) {
-			Global.evChargers.addCharger(evCharger)
-		} else {
-			Global.evChargers.removeCharger(evCharger)
+		if (!!Global.evChargers) {
+			if (_valid) {
+				Global.evChargers.addCharger(evCharger)
+			} else {
+				Global.evChargers.removeCharger(evCharger)
+			}
 		}
 	}
 }

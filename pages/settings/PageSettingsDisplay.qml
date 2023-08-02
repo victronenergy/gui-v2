@@ -92,13 +92,40 @@ Page {
 			ListRadioButtonGroup {
 				//% "Language"
 				text: qsTrId("settings_language")
+
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: LanguageModel { currentLanguage: Language.current }
 				currentIndex: optionModel.currentIndex
 				secondaryText: optionModel.currentDisplayText
+				popDestination: undefined // don't pop page automatically.
+				updateOnClick: false // handle option clicked manually.
+
+				property var pleaseWaitDialog
 
 				onOptionClicked: function(index) {
-					Language.current = optionModel.languageAt(index)
+					// The SystemSettings data point listener will trigger retranslateUi()
+					// It may take a few seconds for the backend to deliver the value
+					// change to the other data point.  So, display a message to the user.
+					languageDataPoint.setValue(Language.toCode(optionModel.languageAt(index)))
+					pleaseWaitDialog = changingLanguageDialog.createObject(Global.dialogLayer)
+					pleaseWaitDialog.open()
+				}
+
+				DataPoint {
+					id: languageDataPoint
+					source: "com.victronenergy.settings/Settings/Gui/Language"
+				}
+
+				Component {
+					id: changingLanguageDialog
+
+					ModalWarningDialog {
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
+						//% "Changing language"
+						title: qsTrId("settings_language_changing_language")
+						//% "Please wait while the language is changed"
+						description: qsTrId("settings_language_please_wait")
+					}
 				}
 			}
 

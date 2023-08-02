@@ -74,7 +74,8 @@ C.Dialog {
 	}
 
 	footer: Item {
-		height: Theme.geometry.modalDialog.footer.height
+		visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_NoOptions
+		height: visible ? Theme.geometry.modalDialog.footer.height : 0
 		SeparatorBar {
 			id: footerTopSeparator
 			anchors {

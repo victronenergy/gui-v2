@@ -40,13 +40,13 @@ QtObject {
 	}
 
 	function nextConfig() {
-		const pageConfig = _configs[Global.pageManager.navBar.currentUrl]
+		const pageConfig = _configs[!!Global.pageManager ? Global.pageManager.navBar.currentUrl : 0]
 		const nextIndex = Utils.modulo(pageConfig.configIndex + 1, pageConfig.configCount())
 		setConfigIndex(pageConfig, nextIndex)
 	}
 
 	function previousConfig() {
-		const pageConfig = _configs[Global.pageManager.navBar.currentUrl]
+		const pageConfig = _configs[!!Global.pageManager ? Global.pageManager.navBar.currentUrl : 0]
 		const prevIndex = Utils.modulo(pageConfig.configIndex - 1, pageConfig.configCount())
 		setConfigIndex(pageConfig, prevIndex)
 	}
@@ -54,24 +54,28 @@ QtObject {
 	function keyPressed(event) {
 		switch (event.key) {
 		case Qt.Key_Escape:
-			Global.pageManager.popPage()
+			if (!!Global.pageManager) {
+				Global.pageManager.popPage()
+			}
 			break
 		case Qt.Key_1:
 		case Qt.Key_2:
 		case Qt.Key_3:
 		case Qt.Key_4:
 		case Qt.Key_5:
-			Global.pageManager.navBar.currentIndex = event.key - Qt.Key_1
-			event.accepted = true
+			if (!!Global.pageManager) {
+				Global.pageManager.navBar.currentIndex = event.key - Qt.Key_1
+				event.accepted = true
+			}
 			break
 		case Qt.Key_Left:
-			if (Global.pageManager.navBar.currentUrl in root._configs) {
+			if (!!Global.pageManager && (Global.pageManager.navBar.currentUrl in root._configs)) {
 				previousConfig()
 				event.accepted = true
 			}
 			break
 		case Qt.Key_Right:
-			if (Global.pageManager.navBar.currentUrl in root._configs) {
+			if (!!Global.pageManager && (Global.pageManager.navBar.currentUrl in root._configs)) {
 				nextConfig()
 				event.accepted = true
 			}
@@ -226,7 +230,7 @@ QtObject {
 	}
 
 	property Rectangle _configLabel: Rectangle {
-		parent: Global.pageManager.statusBar
+		parent: !!Global.pageManager ? Global.pageManager.statusBar : null
 		width: pageConfigTitle.width * 1.1
 		height: pageConfigTitle.implicitHeight * 1.1
 		color: "white"

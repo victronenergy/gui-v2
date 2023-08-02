@@ -15,10 +15,12 @@ import QtQml
 //   instance objects declared in main, in onCompleted or similar.
 
 QtObject {
+	property var main
 	property var pageManager
+	property var mainView
 	property var mockDataSimulator    // only valid when mock mode is active
 	property var dataManager
-	property var locale: Qt.locale()
+	property var locale: Qt.locale()  // TODO: read from settings
 	property var dataServiceModel: null
 	property var firmwareUpdate
 
@@ -47,6 +49,7 @@ QtObject {
 	property bool splashScreenVisible: true
 	property bool dataManagerLoaded
 	property bool allPagesLoaded
+	property bool changingLanguage
 
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 
@@ -63,6 +66,43 @@ QtObject {
 			return Global.tanks.allTankModels.concat([Global.environmentInputs.model])
 		}
 		return []
+	}
+
+	function reset() {
+		// note: we don't reset `main` or `changingLanguage`
+		// as main will never be destroyed during the ui rebuild,
+		// and we handle changingLanguage specially.
+		pageManager = null
+		mainView = null
+		mockDataSimulator = null
+		dataManager = null
+		locale = Qt.locale()
+		dataServiceModel = null
+		firmwareUpdate = null
+		inputPanel = null
+		dialogLayer = null
+		notificationLayer = null
+		acInputs = null
+		batteries = null
+		dcInputs = null
+		environmentInputs = null
+		ess = null
+		evChargers = null
+		generators = null
+		inverters = null
+		notifications = null
+		pvInverters = null
+		relays = null
+		solarChargers = null
+		system = null
+		systemSettings = null
+		tanks = null
+		venusPlatform = null
+
+		// The last thing we do is set the splash screen visible.
+		allPagesLoaded = false
+		dataManagerLoaded = false
+		splashScreenVisible = true
 	}
 }
 

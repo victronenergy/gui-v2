@@ -197,10 +197,12 @@ Device {
 
 	property bool _valid: deviceInstance.value !== undefined
 	on_ValidChanged: {
-		if (_valid) {
-			Global.solarChargers.addCharger(solarCharger)
-		} else {
-			Global.solarChargers.removeCharger(solarCharger)
+		if (!!Global.solarChargers) {
+			if (_valid) {
+				Global.solarChargers.addCharger(solarCharger)
+			} else {
+				Global.solarChargers.removeCharger(solarCharger)
+			}
 		}
 	}
 }

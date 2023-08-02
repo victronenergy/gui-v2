@@ -12,7 +12,7 @@ FocusScope {
 	property string title
 	property color backgroundColor: Theme.color.page.background
 	property bool fullScreenWhenIdle
-	readonly property bool isCurrentPage: Global.pageManager.currentPage === root
+	readonly property bool isCurrentPage: !!Global.pageManager && Global.pageManager.currentPage === root
 	property bool animationEnabled: isCurrentPage && BackendConnection.applicationVisible
 
 	property int topLeftButton: C.StackView.view && C.StackView.view.depth > 1 ? VenusOS.StatusBar_LeftButton_Back : VenusOS.StatusBar_LeftButton_None
@@ -23,5 +23,5 @@ FocusScope {
 	implicitWidth: C.StackView.view ? C.StackView.view.width : 0
 	implicitHeight: C.StackView.view ? C.StackView.view.height : 0
 
-	C.StackView.onActivated: Global.pageManager.currentPage = root
+	C.StackView.onActivated: if (!!Global.pageManager) Global.pageManager.currentPage = root
 }

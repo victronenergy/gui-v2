@@ -16,7 +16,7 @@ LanguageModel::LanguageModel(QObject *parent)
 {
 	m_languages.append({ "English", "en", QLocale::English });
 	m_languages.append({ "Čeština", "cs", QLocale::Czech });
-	m_languages.append({ "Dansk", "de", QLocale::Danish });
+	m_languages.append({ "Dansk", "da", QLocale::Danish });
 	m_languages.append({ "Deutsch", "de", QLocale::German });
 	m_languages.append({ "Español", "es", QLocale::Spanish });
 	m_languages.append({ "Français", "fr", QLocale::French });
@@ -26,7 +26,9 @@ LanguageModel::LanguageModel(QObject *parent)
 	m_languages.append({ "Русский", "ru", QLocale::Russian });
 	m_languages.append({ "Română", "ro", QLocale::Romanian });
 	m_languages.append({ "Svenska", "se", QLocale::NorthernSami });
-	m_languages.append({ "ไทย", "th", QLocale::Thai });
+#if not defined(VENUS_WEBASSEMBLY_BUILD)
+	m_languages.append({ "ไทย", "th", QLocale::Thai }); // crashes WebAssembly.
+#endif
 	m_languages.append({ "Türkçe", "tr", QLocale::Turkish });
 	m_languages.append({ "中文", "zh", QLocale::Chinese });
 	m_languages.append({ "العربية", "ar", QLocale::Arabic });
@@ -110,13 +112,33 @@ QLocale::Language Language::getCurrentLanguage() const
 
 QString Language::toString(QLocale::Language language) const
 {
-	return QVariant::fromValue(language).toString();
+	return QLocale::languageToString(language);
+}
+
+QString Language::toCode(QLocale::Language language) const
+{
+	return QLocale::languageToCode(language);
+}
+
+QLocale::Language Language::fromCode(const QString &code)
+{
+	return QLocale::codeToLanguage(code);
 }
 
 void Language::setCurrentLanguage(QLocale::Language language)
 {
 	if (language != m_currentLanguage && installTranslatorForLanguage(language)) {
 		emit currentLanguageChanged();
+	}
+}
+
+void Language::setCurrentLanguageCode(const QString &code)
+{
+	const QLocale::Language lang = QLocale::codeToLanguage(code);
+	if (lang != QLocale::AnyLanguage) {
+		setCurrentLanguage(lang);
+	} else {
+		qCWarning(venusGui) << "Unknown language code specified:" << code;
 	}
 }
 
@@ -155,12 +177,15 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 
 	m_currentLanguage = language;
 
+	return true;
+}
+
+void Language::retranslate()
+{
 	if (m_qmlEngine) {
 		m_qmlEngine->retranslate();
 	} else {
 		qCWarning(venusGui) << "Unable to retranslate";
-		return false;
 	}
-
-	return true;
 }
+

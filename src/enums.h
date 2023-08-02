@@ -300,6 +300,7 @@ public:
 	Q_ENUM(Tank_Status)
 
 	enum ModalDialog_DoneOptions {
+		ModalDialog_DoneOptions_NoOptions,
 		ModalDialog_DoneOptions_OkOnly,
 		ModalDialog_DoneOptions_OkAndCancel,
 		ModalDialog_DoneOptions_SetAndClose

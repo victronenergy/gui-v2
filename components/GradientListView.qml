@@ -62,10 +62,10 @@ ListView {
 		target: {
 			// Find the parent item that is on a StackView (i.e. a Page)
 			let p = root.parent
-			while (p.C.StackView.activated === undefined) {
+			while (p && p.C.StackView.activated === undefined) {
 				p = p.parent
 			}
-			return p.C.StackView.activated === undefined ? null : p.C.StackView
+			return (!p || (p.C.StackView.activated === undefined)) ? null : p.C.StackView
 		}
 		function onActivated() {
 			// Once the parent page is activated, stop auto-adjustments of contentY.

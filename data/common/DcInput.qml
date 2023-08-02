@@ -48,15 +48,17 @@ Device {
 
 	property bool _valid: deviceInstance.value !== undefined
 	on_ValidChanged: {
-		if (_valid) {
-			Global.dcInputs.addInput(input)
-		} else {
-			Global.dcInputs.removeInput(input)
+		if (!!Global.dcInputs) {
+			if (_valid) {
+				Global.dcInputs.addInput(input)
+			} else {
+				Global.dcInputs.removeInput(input)
+			}
 		}
 	}
 
 	function _updateTotals() {
-		if (_completed) {
+		if (_completed && !!Global.dcInputs) {
 			Qt.callLater(Global.dcInputs.updateTotals)
 		}
 	}

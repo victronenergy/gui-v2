@@ -54,9 +54,7 @@ ListNavigationItem {
 
 	enabled: userHasReadAccess && (dataSource === "" || dataValid)
 
-	onClicked: {
-		Global.pageManager.pushPage(optionsPageComponent, { title: text })
-	}
+	onClicked: Global.pageManager.pushPage(optionsPageComponent, { title: text })
 
 	DataPoint {
 		id: dataPoint
@@ -128,10 +126,12 @@ ListNavigationItem {
 
 				interval: Theme.animation.settings.radioButtonPage.autoClose.duration
 				onTriggered: {
-					if (root.popDestination) {
-						Global.pageManager.popPage(root.popDestination)
-					} else {
-						Global.pageManager.popPage()
+					if (!!Global.pageManager) {
+						if (root.popDestination) {
+							Global.pageManager.popPage(root.popDestination)
+						} else {
+							Global.pageManager.popPage()
+						}
 					}
 				}
 			}
