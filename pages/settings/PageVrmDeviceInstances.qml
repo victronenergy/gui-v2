@@ -154,6 +154,7 @@ Page {
 				const modelIndex = classAndVrmInstanceModel.findByDataSource(dataSource)
 				if (modelIndex >= 0) {
 					classAndVrmInstanceModel.set(modelIndex, { deviceClass: deviceClass, vrmInstance: vrmInstance })
+					classAndVrmInstanceModel.updateSortOrder(modelIndex)
 				}
 				Utils.updateOrInitDeviceVrmInstance(deviceId, vrmInstance)
 
@@ -171,12 +172,14 @@ Page {
 				const modelIndex = classAndVrmInstanceModel.findByDataSource(dataSource)
 				if (modelIndex >= 0) {
 					classAndVrmInstanceModel.setProperty(modelIndex, "name", name)
+					classAndVrmInstanceModel.updateSortOrder(modelIndex)
 				}
 			}
 		}
 
 		onObjectAdded: function(index, object) {
-			classAndVrmInstanceModel.append({
+			const insertionIndex = classAndVrmInstanceModel.findInsertionIndex(object.deviceClass, object.name, object.vrmInstance)
+			classAndVrmInstanceModel.insert(insertionIndex, {
 				dataSource: object.dataSource,
 				deviceClass: object.deviceClass,
 				vrmInstance: object.vrmInstance,
@@ -207,6 +210,44 @@ Page {
 				}
 			}
 			return -1
+		}
+
+		function findInsertionIndex(deviceClass, name, vrmInstance) {
+			// Sort by connected devices first (i.e. those with a name), then by device class, then
+			// by name or VRM instance.
+			const deviceConnected = name.length > 0
+			for (let i = 0; i < count; ++i) {
+				const data = get(i)
+				const currentDeviceConnected = data.name.length > 0
+				if (deviceConnected) {
+					if (!currentDeviceConnected) {
+						return i
+					}
+					if (data.deviceClass > deviceClass) {
+						return i
+					} else if (data.deviceClass === deviceClass && data.name.localeCompare(name) > 0) {
+						return i
+					}
+				} else {
+					if (currentDeviceConnected) {
+						continue
+					}
+					if (data.deviceClass > deviceClass) {
+						return i
+					} else if (data.deviceClass === deviceClass && data.vrmInstance > vrmInstance) {
+						return i
+					}
+				}
+			}
+			return count
+		}
+
+		function updateSortOrder(index) {
+			const data = get(index)
+			const insertionIndex = findInsertionIndex(data.deviceClass, data.name, data.vrmInstance)
+			if (insertionIndex !== modelIndex) {
+				move(index, insertionIndex, 1)
+			}
 		}
 
 		function maximumVrmInstance(deviceClass) {
