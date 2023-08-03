@@ -105,6 +105,10 @@ QtObject {
 			break
 		}
 	}
+	   onValueChanged: {
+			   var date = new Date()
+			   console.log(date.getHours(), date.getMinutes(), date.getSeconds(), "DataPoint: onValueChanged:", source, value)
+	   }
 
 	onSourceChanged: _reset()
 	Component.onCompleted: _reset()

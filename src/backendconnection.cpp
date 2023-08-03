@@ -1,4 +1,7 @@
 #include "backendconnection.h"
+
+#include <QTime>
+
 #include "uidhelper.h"
 #include "enums.h"
 
@@ -34,7 +37,7 @@ BackendConnection::State BackendConnection::state() const
 
 void BackendConnection::setState(State backendConnectionState)
 {
-	qDebug() << "BackendConnection state:" << backendConnectionState;
+	qDebug() << QTime::currentTime().toString() << " BackendConnection state:" << backendConnectionState;
 
 	if (m_state != backendConnectionState) {
 		m_state = backendConnectionState;
@@ -103,7 +106,7 @@ BackendConnection::MqttClientError BackendConnection::mqttClientError() const
 
 void BackendConnection::mqttErrorChanged()
 {
-	qWarning() << "MQTT client error:" << m_mqttProducer->error();
+	qWarning() << QTime::currentTime().toString() << "MQTT client error:" << m_mqttProducer->error();
 	if (m_mqttProducer->error() != m_mqttClientError) {
 		m_mqttClientError = m_mqttProducer->error();
 		emit mqttClientErrorChanged();
