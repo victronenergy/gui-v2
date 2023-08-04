@@ -51,8 +51,23 @@ Device {
 	on_ValidChanged: {
 		if (!!Global.tanks) {
 			if (_valid) {
-				Global.tanks.addTank(tank)
-			} else if (tank.type >= 0) {
+				if (!_invalidationTimer.running) {
+					Global.tanks.addTank(tank)
+				} else {
+					_remaining._update()
+					_capacity._update()
+				}
+			} else {
+				_invalidationTimer.start()
+			}
+		}
+	}
+
+	// If the tank remains invalid for more than 5 seconds, remove it.
+	property Timer _invalidationTimer: Timer {
+		interval: 5000
+		onTriggered: {
+			if (!_valid && tank.type >= 0) {
 				Global.tanks.removeTank(tank)
 			}
 		}
