@@ -54,7 +54,14 @@ ListNavigationItem {
 
 	enabled: userHasReadAccess && (dataSource === "" || dataValid)
 
-	onClicked: Global.pageManager.pushPage(optionsPageComponent, { title: text })
+	onClicked: {
+		if (userHasWriteAccess) {
+			Global.pageManager.pushPage(optionsPageComponent, { title: text })
+		} else {
+			//% "Setting locked for access level"
+			Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_radio_button_group_no_access"))
+		}
+	}
 
 	DataPoint {
 		id: dataPoint
