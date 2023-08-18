@@ -65,6 +65,11 @@ static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
 	return CmManager::instance();
 }
 
+QString calculateMqttAddressFromShard(const QString &shard)
+{
+	return QStringLiteral("wss://webmqtt%1.victronenergy.com/mqtt").arg(shard);
+}
+
 QString calculateMqttAddressFromPortalId(const QString &portalId)
 {
 	int shard = 0;
@@ -72,14 +77,15 @@ QString calculateMqttAddressFromPortalId(const QString &portalId)
 	for (const QChar &ch : lower) {
 		shard += ch.toLatin1();
 	}
-	return shard > 0 ? QStringLiteral("wss://webmqtt%1.victronenergy.com/mqtt").arg(shard % 128) : QString();
+	const QString shardStr = shard > 0 ? QStringLiteral("%1").arg(shard % 128) : QString();
+	return calculateMqttAddressFromShard(shardStr);
 }
 
 void initBackend(bool *enableFpsCounter)
 {
 	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::instance();
 
-	QString queryMqttAddress, queryMqttPortalId, queryMqttUser, queryMqttPass, queryFpsCounter;
+	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	emscripten_set_visibilitychange_callback(static_cast<void*>(backend), 1, visibilitychange_callback);
 	emscripten::val webLocation = emscripten::val::global("location");
@@ -91,11 +97,17 @@ void initBackend(bool *enableFpsCounter)
 	if (query.hasQueryItem("id")) {
 		queryMqttPortalId = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("id").toUtf8())); // e.g.: some cerbogx portal id.
 	}
+	if (query.hasQueryItem("shard")) {
+		queryMqttShard = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("shard").toUtf8())); // e.g.: "114" (or "vrm" for API)
+	}
 	if (query.hasQueryItem("user")) {
 		queryMqttUser = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("user").toUtf8())); // e.g.: vrmlogin_live_user.name@example.com
 	}
 	if (query.hasQueryItem("pass")) {
-		queryMqttPass = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("pass").toUtf8())); // e.g.: some JWT token from VRM.
+		queryMqttPass = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("pass").toUtf8())); // e.g.: some password
+	}
+	if (query.hasQueryItem("token")) {
+		queryMqttToken = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("token").toUtf8())); // e.g.: some JWT token from VRM.
 	}
 	if (query.hasQueryItem("fpsCounter")) {
 		queryFpsCounter = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("fpsCounter").toUtf8())); // e.g.: enabled
@@ -128,7 +140,12 @@ void initBackend(bool *enableFpsCounter)
 		QGuiApplication::tr("portalId"));
 	parser.addOption(mqttPortalId);
 
-	QCommandLineOption mqttUser(QStringList() << "u" << "user",
+	QCommandLineOption mqttShard({ "s", "shard" },
+		QGuiApplication::tr("MQTT VRM webhost shard"),
+		QGuiApplication::tr("shard", "MQTT VRM webhost shard"));
+	parser.addOption(mqttShard);
+
+	QCommandLineOption mqttUser({ "u", "user" },
 		QGuiApplication::tr("MQTT data source username"),
 		QGuiApplication::tr("user", "MQTT broker username."));
 	parser.addOption(mqttUser);
@@ -137,6 +154,11 @@ void initBackend(bool *enableFpsCounter)
 		QGuiApplication::tr("MQTT data source password"),
 		QGuiApplication::tr("pass", "MQTT broker password."));
 	parser.addOption(mqttPass);
+
+	QCommandLineOption mqttToken({ "t", "token" },
+		QGuiApplication::tr("MQTT data source token"),
+		QGuiApplication::tr("token", "MQTT broker auth token."));
+	parser.addOption(mqttToken);
 
 	QCommandLineOption fpsCounter({ "f", "fpsCounter" },
 		QGuiApplication::tr("Enable FPS counter"));
@@ -155,12 +177,27 @@ void initBackend(bool *enableFpsCounter)
 		if (parser.isSet(mqttPass)) {
 			backend->setPassword(parser.value(mqttPass));
 		}
+		if (parser.isSet(mqttToken)) {
+			backend->setToken(parser.value(mqttToken));
+		}
 		if (parser.isSet(mqttPortalId)) {
 			backend->setPortalId(parser.value(mqttPortalId));
+		}
+		if (parser.isSet(mqttShard)) {
+			backend->setShard(parser.value(mqttShard));
 		}
 	}
 	if (parser.isSet(mqttAddress)) {
 		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, parser.value(mqttAddress));
+	} else if (parser.isSet(mqttShard)) {
+		const QString shard = parser.value(mqttShard);
+		if (shard.compare(QStringLiteral("vrm"), Qt::CaseInsensitive) == 0) {
+			// use the VRM API to determine the shard / address
+			backend->loginVrmApi();
+		} else {
+			// append the provided string directly as the shard value
+			backend->setType(Victron::VenusOS::BackendConnection::MqttSource, calculateMqttAddressFromShard(shard));
+		}
 	} else if (parser.isSet(mqttPortalId)) {
 		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, calculateMqttAddressFromPortalId(parser.value(mqttPortalId)));
 	} else if (parser.isSet(mockMode)) {
@@ -169,8 +206,18 @@ void initBackend(bool *enableFpsCounter)
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 		backend->setUsername(queryMqttUser);
 		backend->setPassword(queryMqttPass);
+		backend->setToken(queryMqttToken);
 		backend->setPortalId(queryMqttPortalId);
-		if (!queryMqttPortalId.isEmpty()) {
+		backend->setShard(queryMqttShard);
+		if (!queryMqttShard.isEmpty()) {
+			if (queryMqttShard.compare(QStringLiteral("vrm"), Qt::CaseInsensitive) == 0) {
+				// use the VRM API to determine the shard / address
+				backend->loginVrmApi();
+			} else {
+				// append the provided string directly as the shard value
+				backend->setType(Victron::VenusOS::BackendConnection::MqttSource, calculateMqttAddressFromShard(queryMqttShard));
+			}
+		} else if (!queryMqttPortalId.isEmpty()) {
 			backend->setType(Victron::VenusOS::BackendConnection::MqttSource, calculateMqttAddressFromPortalId(queryMqttPortalId));
 		} else {
 			backend->setType(Victron::VenusOS::BackendConnection::MqttSource, queryMqttAddress);

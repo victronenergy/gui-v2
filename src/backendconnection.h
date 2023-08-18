@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQmlEngine>
+#include <QNetworkAccessManager>
 
 #include "veutil/qt/ve_qitems_mqtt.hpp"
 
@@ -23,6 +24,9 @@ class BackendConnection : public QObject
 	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 	Q_PROPERTY(QString portalId READ portalId WRITE setPortalId NOTIFY portalIdChanged)
+	Q_PROPERTY(QString shard READ shard WRITE setShard NOTIFY shardChanged)
+	Q_PROPERTY(QString token READ token WRITE setToken NOTIFY tokenChanged)
+	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged)
 	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged)
 
 public:
@@ -80,6 +84,18 @@ public:
 	QString portalId() const;
 	void setPortalId(const QString &portalId);
 
+	QString shard() const;
+	void setShard(const QString &shard);
+
+	QString token() const;
+	void setToken(const QString &tok);
+
+	int idUser() const;
+	void setIdUser(int id);
+
+	void loginVrmApi();
+	void requestShardFromVrmApi();
+
 	bool isApplicationVisible() const;
 	void setApplicationVisible(bool v);
 
@@ -90,6 +106,9 @@ Q_SIGNALS:
 	void usernameChanged();
 	void passwordChanged();
 	void portalIdChanged();
+	void shardChanged();
+	void tokenChanged();
+	void idUserChanged();
 	void applicationVisibleChanged();
 
 private:
@@ -109,6 +128,10 @@ private:
 	QString m_password;
 	QString m_portalId;
 
+	QString m_shard;
+	QString m_token;
+	int m_idUser = -1;
+
 	bool m_applicationVisible = true;
 
 	State m_state = BackendConnection::State::Idle;
@@ -121,6 +144,7 @@ private:
 #endif
 	VeQItemMqttProducer *m_mqttProducer = nullptr;
 	UidHelper *m_uidHelper = nullptr;
+	QNetworkAccessManager *m_network = nullptr;
 };
 
 }
