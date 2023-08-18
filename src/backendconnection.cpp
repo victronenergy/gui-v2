@@ -9,6 +9,13 @@
 #include "gui-v1/alarmbusitem.h"
 #endif
 
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonObject>
+#include <QtCore/QJsonValue>
+#include <QtCore/QJsonArray>
+
 namespace Victron {
 namespace VenusOS {
 
@@ -163,8 +170,10 @@ void BackendConnection::initMqttConnection(const QString &address)
 	m_uidHelper = UidHelper::instance();
 	connect(m_mqttProducer, &VeQItemMqttProducer::aboutToConnect,
 		m_mqttProducer, [this] {
-			// TODO: fetch updated credentials via VRM API if required...
-			if (!m_username.isEmpty() || !m_password.isEmpty()) {
+			if (!m_token.isEmpty()) {
+				m_mqttProducer->setCredentials(m_username, m_token);
+			} else if (!m_username.isEmpty() || !m_password.isEmpty()) {
+				// TODO: fetch updated credentials via VRM API if required...
 				m_mqttProducer->setCredentials(m_username, m_password);
 			}
 			m_mqttProducer->setPortalId(m_portalId);
@@ -252,6 +261,168 @@ void BackendConnection::setPortalId(const QString &portalId)
 		m_portalId = portalId;
 		emit portalIdChanged();
 	}
+}
+
+QString BackendConnection::shard() const
+{
+	return m_shard;
+}
+
+void BackendConnection::setShard(const QString &shard)
+{
+	if (m_shard != shard) {
+		m_shard = shard;
+		emit shardChanged();
+	}
+}
+
+QString BackendConnection::token() const
+{
+	return m_token;
+}
+
+void BackendConnection::setToken(const QString &tok)
+{
+	if (m_token != tok) {
+		m_token = tok;
+		emit tokenChanged();
+	}
+}
+
+int BackendConnection::idUser() const
+{
+	return m_idUser;
+}
+
+void BackendConnection::setIdUser(int id)
+{
+	if (m_idUser != id) {
+		m_idUser = id;
+		emit idUserChanged();
+	}
+}
+
+void BackendConnection::loginVrmApi()
+{
+	if (m_username.isEmpty() || m_password.isEmpty()) {
+		qWarning() << "Unable to login to VRM API: invalid credentials supplied";
+		return;
+	}
+
+	if (m_network == nullptr) {
+		m_network = new QNetworkAccessManager(this);
+	}
+
+	const QByteArray loginData = QStringLiteral("{ \"username\": \"%1\", \"password\": \"%2\" }")
+			.arg(m_username.startsWith(QStringLiteral("vrmlogin_live_"), Qt::CaseInsensitive)
+					? m_username.mid(QStringLiteral("vrmlogin_live_").length())
+					: m_username,
+				m_password).toUtf8();
+	QNetworkRequest loginRequest(QUrl(QStringLiteral("https://vrmapi.victronenergy.com/v2/auth/login")));
+	loginRequest.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/json").toUtf8());
+	loginRequest.setHeader(QNetworkRequest::ContentLengthHeader, loginData.size());
+	QNetworkReply *loginReply = m_network->post(loginRequest, loginData);
+
+	connect(loginReply, &QNetworkReply::finished,
+		this, [this, loginReply] {
+			loginReply->deleteLater();
+			if (loginReply->error() != QNetworkReply::NoError) {
+				qWarning() << "VRM API login failed: " << loginReply->errorString();
+				return;
+			}
+
+			const QByteArray response = loginReply->readAll();
+			const QJsonDocument doc = QJsonDocument::fromJson(response);
+			if (!doc.isObject()) {
+				qWarning() << "VRM API login failed: not valid JSON object: " << QString::fromUtf8(response);
+				return;
+			}
+
+			const QJsonObject obj = doc.object();
+			const int idUser = obj.value(QStringLiteral("idUser")).toInt(-1);
+			const QString token = obj.value(QStringLiteral("token")).toString();
+			if (idUser < 0 || token.isEmpty()) {
+				qWarning() << "VRM API login failed: invalid idUser or token: " << idUser << ", " << token;
+				return;
+			}
+
+			setIdUser(idUser);
+			setToken(token);
+			requestShardFromVrmApi();
+		});
+}
+
+
+void BackendConnection::requestShardFromVrmApi()
+{
+	if (m_token.isEmpty() || m_idUser < 0) {
+		qWarning() << "Unable to request installation info from VRM API: invalid token or idUser";
+		return;
+	}
+
+	if (m_portalId.isEmpty()) {
+		qWarning() << "Unable to determine installation info from VRM API: no portalId specified";
+		return;
+	}
+
+	if (m_network == nullptr) {
+		m_network = new QNetworkAccessManager(this);
+	}
+
+	QNetworkRequest installationsRequest(QUrl(QStringLiteral("https://vrmapi.victronenergy.com/v2/users/%1/installations?extended=1").arg(m_idUser)));
+	installationsRequest.setRawHeader(QStringLiteral("x-authorization").toUtf8(),
+			QStringLiteral("Bearer %1").arg(m_token).toUtf8());
+	QNetworkReply *installationsReply = m_network->get(installationsRequest);
+
+	connect(installationsReply, &QNetworkReply::finished,
+		this, [this, installationsReply] {
+			installationsReply->deleteLater();
+			if (installationsReply->error() != QNetworkReply::NoError) {
+				qWarning() << "VRM API request failed: " << installationsReply->errorString();
+				return;
+			}
+
+			const QByteArray response = installationsReply->readAll();
+			const QJsonDocument doc = QJsonDocument::fromJson(response);
+			if (!doc.isObject()) {
+				qWarning() << "VRM API request failed: not a valid JSON object: " << QString::fromUtf8(response);
+				return;
+			}
+
+			const QJsonObject obj = doc.object();
+			const QJsonArray records = obj.value(QStringLiteral("records")).toArray();
+			if (records.size() == 0) {
+				qWarning() << "VRM API request failed: no valid installation records: " << QString::fromUtf8(response);
+				return;
+			}
+
+			for (QJsonArray::const_iterator it = records.constBegin(); it != records.constEnd(); ++it) {
+				const QJsonObject record = it->toObject();
+				const QString identifier = record.value(QStringLiteral("identifier")).toString();
+				if (identifier.compare(m_portalId, Qt::CaseInsensitive) == 0) {
+					const QString mqtt_webhost = record.value(QStringLiteral("mqtt_webhost")).toString();
+					const QString webhost = mqtt_webhost.startsWith(QStringLiteral("wss://"), Qt::CaseInsensitive)
+							? mqtt_webhost : QStringLiteral("wss://%1").arg(mqtt_webhost);
+					const int prefixLength = QStringLiteral("wss://webmqtt").length();
+					const QString shard = webhost.mid(prefixLength, webhost.indexOf('.') - prefixLength);
+					if (shard.isEmpty()) {
+						qWarning() << "Unable to determine shard from mqtt_webhost " << mqtt_webhost << " in record " << record.toVariantMap();
+						qWarning() << "Original response was: " << response;
+						return;
+					}
+
+					qDebug() << "Calculated shard: " << shard << " from webhost: " << webhost;
+					setShard(shard);
+					if (!m_username.startsWith(QStringLiteral("vrmlogin_live_"), Qt::CaseInsensitive)) {
+						setUsername(QStringLiteral("vrmlogin_live_%1").arg(m_username));
+					}
+					setType(MqttSource, webhost);
+					return;
+				}
+			}
+
+			qWarning() << "Unable to find record matching portal id: " << m_portalId;
+		});
 }
 
 bool BackendConnection::isApplicationVisible() const
