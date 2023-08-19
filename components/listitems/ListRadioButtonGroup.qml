@@ -74,10 +74,27 @@ ListNavigationItem {
 			id: optionsPage
 
 			GradientListView {
+				id: optionsListView
+
 				model: root.optionModel
 
 				delegate: ListRadioButton {
 					id: radioButton
+
+					function select() {
+						if (root.updateOnClick) {
+							if (dataSource.length > 0) {
+								dataPoint.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
+							} else {
+								root.currentIndex = model.index
+							}
+						}
+						root.optionClicked(model.index)
+
+						if (root.popDestination !== undefined) {
+							popTimer.restart()
+						}
+					}
 
 					text: Array.isArray(root.optionModel)
 						  ? modelData.display || ""
@@ -91,29 +108,87 @@ ListNavigationItem {
 					writeAccessLevel: root.writeAccessLevel
 					C.ButtonGroup.group: radioButtonGroup
 
-					bottomContent.children: ListLabel {
-						visible: text.length > 0
-						topPadding: 0
-						bottomPadding: 0
-						color: Theme.color.font.secondary
-						text: Array.isArray(root.optionModel)
-								? modelData.caption || ""
-								: model.caption || ""
-						font.pixelSize: Theme.font.size.caption
+					bottomContent.children: Loader {
+						id: bottomContentLoader
+
+						readonly property string caption: Array.isArray(root.optionModel)
+							  ? modelData.caption || ""
+							  : model.caption || ""
+						readonly property string password: Array.isArray(root.optionModel)
+							  ? modelData.password || ""
+							  : model.password || ""
+
+						width: parent.width
+						sourceComponent: password ? passwordComponent : caption ? captionComponent : null
+					}
+
+					Component {
+						id: passwordComponent
+
+						Column {
+							function showPasswordInput() {
+								passwordField.visible = true
+								passwordField.forceActiveFocus()
+							}
+
+							width: parent.width
+
+							ListTextField {
+								id: passwordField
+
+								//% "Enter password"
+								text: qsTrId("settings_radio_button_enter_password")
+								flickable: optionsListView
+								primaryLabel.color: Theme.color.font.secondary
+								textField.echoMode: TextInput.Password
+								enabled: radioButton.enabled
+								visible: false
+
+								onAccepted: function(text) {
+									if (text === bottomContentLoader.password) {
+										radioButton.select()
+									} else {
+										//% "Incorrect password"
+										Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
+												qsTrId("settings_radio_button_incorrect_password"))
+									}
+								}
+								onHasActiveFocusChanged: {
+									if (!hasActiveFocus) {
+										textField.text = ""
+										visible = false
+									}
+								}
+							}
+
+							ListLabel {
+								topPadding: 0
+								bottomPadding: 0
+								color: Theme.color.font.secondary
+								text: bottomContentLoader.caption
+								font.pixelSize: Theme.font.size.caption
+								visible: bottomContentLoader.caption.length > 0
+							}
+						}
+					}
+
+					Component {
+						id: captionComponent
+
+						ListLabel {
+							topPadding: 0
+							bottomPadding: 0
+							color: Theme.color.font.secondary
+							text: bottomContentLoader.caption
+							font.pixelSize: Theme.font.size.caption
+						}
 					}
 
 					onClicked: {
-						if (root.updateOnClick) {
-							if (dataSource.length > 0) {
-								dataPoint.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
-							} else {
-								root.currentIndex = model.index
-							}
-						}
-						root.optionClicked(model.index)
-
-						if (root.popDestination !== undefined) {
-							popTimer.restart()
+						if (bottomContentLoader.sourceComponent === passwordComponent) {
+							bottomContentLoader.item.showPasswordInput()
+						} else {
+							radioButton.select()
 						}
 					}
 				}
