@@ -82,9 +82,9 @@ ListNavigationItem {
 					text: Array.isArray(root.optionModel)
 						  ? modelData.display || ""
 						  : model.display || ""
-					enabled: Array.isArray(root.optionModel)
+					enabled: !checked && (Array.isArray(root.optionModel)
 						  ? !modelData.readOnly
-						  : !model.readOnly
+						  : !model.readOnly)
 					visible: (userHasWriteAccess && enabled) || checked
 					checked: root.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel
