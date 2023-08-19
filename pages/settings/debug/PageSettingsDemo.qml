@@ -37,9 +37,9 @@ Page {
 				optionModel: [
 					{ display: "Option A", value: 1 },
 					{ display: "Option B", value: 2, readOnly: true },
-					{ display: "Option C", value: 3 },
-					{ display: "Option D", value: 4 },
-					{ display: "Option E", value: 5 },
+					{ display: "Option C", value: 3, caption: "Some extra description below" },
+					{ display: "Option D", value: 4, password: "123" },
+					{ display: "Option E", value: 5, password: "456", caption: "This needs a password" },
 					{ display: "Option F", value: 6 },
 					{ display: "Option G", value: 7 },
 					{ display: "Option H", value: 8 },

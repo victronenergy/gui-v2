@@ -18,6 +18,7 @@ ListItem {
 	property alias textField: textField
 	property alias secondaryText: textField.text
 	property alias placeholderText: textField.placeholderText
+	property var flickable: root.ListView ? root.ListView.view : null
 	readonly property bool hasActiveFocus: textField.activeFocus
 
 	signal accepted(text: string)
@@ -35,7 +36,7 @@ ListItem {
 		const textFieldBottom = root.height - textFieldVerticalMargin/2
 		Global.aboutToFocusTextField(textField,
 				textFieldBottom,
-				root.ListView ? root.ListView.view : null)
+				root.flickable)
 	}
 
 	property TextField defaultContent: TextField {

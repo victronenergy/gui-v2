@@ -6,7 +6,7 @@ import QtQuick
 import Victron.VenusOS
 
 ListRadioButtonGroup {
-	id: accessLevelButtons
+	id: root
 
 	//% "Access level"
 	text: qsTrId("settings_access_level")
@@ -15,32 +15,14 @@ ListRadioButtonGroup {
 
 	optionModel: [
 		//% "User"
-		{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User },
+		{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User, password: "ZZZ" },
 		//% "User & Installer"
-		{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer },
+		{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer, password: "ZZZ" },
 		//% "Superuser"
-		{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser },
+		{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser, readOnly: true },
 		//% "Service"
-		{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service },
+		{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service, readOnly: true },
 	]
-	currentIndex: {
-		switch (Global.systemSettings.accessLevel.value) {
-		case VenusOS.User_AccessType_User:
-			return 0
-		case VenusOS.User_AccessType_Installer:
-			return 1
-		case VenusOS.User_AccessType_SuperUser:
-			return 2
-		case VenusOS.User_AccessType_Service:
-			return 3
-		default:
-			return -1
-		}
-	}
-
-	onOptionClicked: function(index) {
-		Global.systemSettings.accessLevel.setValue(optionModel[index].value)
-	}
 
 	// touch version to get super user
 	property bool pulledDown: ListView.view.contentY < -60
