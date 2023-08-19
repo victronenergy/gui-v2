@@ -34,7 +34,6 @@ Page {
 				//% "Update feed"
 				text: qsTrId("settings_update_feed")
 				dataSource: "com.victronenergy.settings/Settings/System/ReleaseType"
-				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Latest release"
 					{ display: qsTrId("settings_firmware_latest_release"), value: FirmwareUpdater.FirmwareRelease },
@@ -42,7 +41,7 @@ Page {
 					{ display: qsTrId("settings_firmware_latest_release_candidate"), value: FirmwareUpdater.FirmwareCandidate },
 					//: Select the 'Testing' update feed
 					//% "Testing"
-					{ display: qsTrId("settings_firmware_testing"), value: FirmwareUpdater.FirmwareRelease, readOnly: !Global.systemSettings.canAccess(VenusOS.User_AccessType_Service) },
+					{ display: qsTrId("settings_firmware_testing"), value: FirmwareUpdater.FirmwareTesting, readOnly: !Global.systemSettings.canAccess(VenusOS.User_AccessType_Service) },
 					//: Select the 'Develop' update feed
 					//% "Develop"
 					{ display: qsTrId("settings_firmware_develop"), value: FirmwareUpdater.FirmwareDevelop, readOnly: true },
