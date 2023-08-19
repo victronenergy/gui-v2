@@ -85,6 +85,7 @@ ListNavigationItem {
 					enabled: Array.isArray(root.optionModel)
 						  ? !modelData.readOnly
 						  : !model.readOnly
+					visible: (userHasWriteAccess && enabled) || checked
 					checked: root.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel
 					writeAccessLevel: root.writeAccessLevel
