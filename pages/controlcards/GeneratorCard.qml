@@ -18,7 +18,7 @@ ControlCard {
 	title.text: qsTrId("controlcard_generator")
 
 	status.text: {
-		switch (state) {
+		switch (root.generator.state) {
 		case VenusOS.Generators_State_Running:
 			//% "Running"
 			return qsTrId("controlcard_generator_status_running")
@@ -127,7 +127,7 @@ ControlCard {
 				//% "Disable auto-start?"
 				title: qsTrId("controlcard_generator_disableautostartdialog_title")
 
-				onAccepted: root.generator.setAutoStart(true)
+				onAccepted: root.generator.setAutoStart(false)
 			}
 		}
 	}
