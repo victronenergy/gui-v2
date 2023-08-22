@@ -64,7 +64,9 @@ QtObject {
 		case Qt.Key_4:
 		case Qt.Key_5:
 			if (!!Global.pageManager) {
-				Global.pageManager.navBar.currentIndex = event.key - Qt.Key_1
+				const newIndex = event.key - Qt.Key_1
+				Global.pageManager.navBar.currentIndex = newIndex
+				Global.pageManager.navBar.currentUrl = Global.pageManager.navBar.model.get(newIndex).url
 				event.accepted = true
 			}
 			break
@@ -264,5 +266,12 @@ QtObject {
 
 	property SettingsPageConfig settingsConfig: SettingsPageConfig {
 		property int configIndex: -1
+	}
+
+	property Connections _globalConn: Connections {
+		target: Global
+		function onKeyPressed(event) {
+			root.keyPressed(event)
+		}
 	}
 }

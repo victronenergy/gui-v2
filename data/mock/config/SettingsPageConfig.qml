@@ -9,21 +9,17 @@ QtObject {
 	id: root
 
 	function configCount() {
-		if (!_settingsListView) {
-			_settingsListView = (!!Global.pageManager && !!Global.pageManager.currentPage)
-					? Global.pageManager.currentPage.settingsListView : null
-			if (!_settingsListView) {
-				console.warn("Cannot find settingsListView!")
-				return 0
-			}
-		}
-		return _settingsListView.model.length
+		const settingsListView = Global.pageManager.currentPage.settingsListView
+		return settingsListView ? settingsListView.model.length : 0
 	}
 
-	property var _settingsListView
-
 	function loadConfig(configIndex) {
-		const modelData = _settingsListView.model[configIndex]
+		const settingsListView = Global.pageManager.currentPage.settingsListView
+		if (!settingsListView) {
+			return
+		}
+
+		const modelData = settingsListView.model[configIndex]
 		if (!modelData) {
 			console.warn("Bad settings index", configIndex)
 			return

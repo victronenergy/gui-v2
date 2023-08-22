@@ -329,7 +329,6 @@
         <file>pages/evcs/EvChargerListPage.qml</file>
         <file>pages/evcs/EvChargerPage.qml</file>
         <file>pages/evcs/EvChargerSetupPage.qml</file>
-        <file>pages/settings/AccessLevelRadioButtonGroup.qml</file>
         <file>pages/settings/DvccCommonSettings.qml</file>
         <file>pages/settings/GeneratorCondition.qml</file>
         <file>pages/settings/IpAddressListView.qml</file>

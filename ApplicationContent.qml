@@ -13,12 +13,6 @@ Item {
 
 	property var _inputComponent
 
-	Keys.onPressed: function(event) {
-		if (Global.mockDataSimulator) {
-			Global.mockDataSimulator.keyPressed(event)
-		}
-	}
-
 	PageManager {
 		id: pageManager
 		Component.onCompleted: Global.pageManager = pageManager
