@@ -48,8 +48,6 @@ Item {
 			bottom: parent.bottom
 		}
 
-		focus: true
-
 		Connections {
 			target: !!pageStack.currentItem ? pageStack.currentItem.C.StackView : null
 

@@ -142,6 +142,14 @@ Window {
 			return Math.ceil(delta)
 		}
 
+		// Ideally each item would use focus handling to get its own key events, but in wasm the
+		// pagestack's pages do not reliably receive key events even when focused.
+		focus: true
+		Keys.onPressed: function(event) {
+			Global.keyPressed(event)
+			event.accepted = false
+		}
+
 		Loader {
 			id: guiLoader
 
@@ -150,7 +158,6 @@ Window {
 			width: Theme.geometry.screen.width
 			height: Theme.geometry.screen.height
 			asynchronous: true
-			focus: true
 			clip: Qt.platform.os == "wasm"
 
 			active: Global.dataManagerLoaded

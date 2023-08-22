@@ -52,6 +52,7 @@ QtObject {
 	property bool changingLanguage
 
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
+	signal keyPressed(var event)
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
 		notificationLayer.showToastNotification(category, text, autoCloseInterval)

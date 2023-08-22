@@ -8,14 +8,81 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property bool pulledDown: settingsListView.contentY < -60
+
+	onIsCurrentPageChanged: {
+		if (isCurrentPage) {
+			keyEvents.repeatCount = 0
+			keyEvents.upCount = 0
+			keyEvents.downCount = 0
+		}
+	}
+
+	Connections {
+		id: keyEvents
+
+		property int repeatCount
+		property int upCount
+		property int downCount
+
+		target: Global
+
+		function onKeyPressed(event) {
+			if (!root.isCurrentPage) {
+				repeatCount = 0
+				return
+			}
+			if (event.key === Qt.Key_Right) {
+				// change to super user mode if the right button is pressed for a while
+				if (Global.systemSettings.accessLevel.value !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
+					Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_SuperUser)
+					repeatCount = 0
+				}
+			} else if (event.key === Qt.Key_Up) {
+				if (upCount < 5) ++upCount
+				if (downCount > 0) upCount = 0
+				downCount = 0
+			} else if (event.key === Qt.Key_Down) {
+				if (downCount < 5) ++downCount;
+				if (upCount === 5 && downCount === 5) {
+					Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
+					upCount = 0
+				}
+			}
+		}
+	}
+
+	Timer {
+		running: root.pulledDown
+		interval: 5000
+		onTriggered: {
+			if (Global.systemSettings.accessLevel.value >= VenusOS.User_AccessType_Installer) {
+				Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_SuperUser)
+			}
+		}
+	}
+
 	GradientListView {
 		id: settingsListView
 
-		// Allow AccessLevelRadioButtonGroup to get key events
-		focus: true
-
 		model: ObjectModel {
-			AccessLevelRadioButtonGroup {}
+			ListRadioButtonGroup {
+				//% "Access level"
+				text: qsTrId("settings_access_level")
+				dataSource: "com.victronenergy.settings/Settings/System/AccessLevel"
+				writeAccessLevel: VenusOS.User_AccessType_User
+
+				optionModel: [
+					//% "User"
+					{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User, password: "ZZZ" },
+					//% "User & Installer"
+					{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer, password: "ZZZ" },
+					//% "Superuser"
+					{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser, readOnly: true },
+					//% "Service"
+					{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service, readOnly: true },
+				]
+			}
 
 			ListTextField {
 				//% "Set root password"
