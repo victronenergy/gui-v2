@@ -18,53 +18,61 @@ Device {
 	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
 
 	readonly property ListModel phases: ListModel {
-		function setPhaseProperty(index, propertyName, value) {
-			if (index >= 0 && index < count) {
-				setProperty(index, propertyName, value === undefined ? NaN : value)
+		function setPhaseProperty(phaseName, propertyName, value) {
+			let index = count
+			let needsInsert = true
+			for (let i = 0; i < count; ++i) {
+				const currName = get(i).name
+				if (currName === phaseName) {
+					needsInsert = false
+					index = i
+					break
+				} else if (currName > phaseName) {
+					// Do an ordered insertion.
+					index = i
+					break
+				}
+			}
+			if (value === undefined) {
+				value = NaN
+			}
+			if (needsInsert) {
+				if (isNaN(value)) {
+					// Wait until we have a valid value for this phase before adding it to the model
+					return
+				}
+				let data = { name: phaseName, energy: NaN, power: NaN, current: NaN, voltage: NaN }
+				data[propertyName] = value
+				insert(index, data)
+			} else if (index >= 0 && index < count) {
+				setProperty(index, propertyName, value)
 			} else {
 				console.warn("setPhaseProperty(): bad index", index, "count is", count)
 			}
 		}
 
-		function setPhaseCount(phaseCount) {
-			clear()
-			for (let i = 0; i < phaseCount; ++i) {
-				append({ name: "L" + (i + 1), energy: NaN, power: NaN, current: NaN, voltage: NaN })
-			}
-			_phaseObjects.model = phaseCount
-		}
-
 		readonly property Instantiator _phaseObjects: Instantiator {
-			model: null
+			model: 3
 			delegate: QtObject {
+				readonly property string phaseName: "L" + (model.index + 1)
+				readonly property string phaseUid: pvInverter.serviceUid + "/Ac/" + phaseName
+
 				readonly property VeQuickItem _phaseEnergy: VeQuickItem {
-					uid: pvInverter.serviceUid + "/Ac/L" + (model.index + 1) + "/Energy/Forward"
-					onValueChanged: phases.setPhaseProperty(model.index, "energy", value)
+					uid: phaseUid + "/Energy/Forward"
+					onValueChanged: phases.setPhaseProperty(phaseName, "energy", value)
 				}
 				readonly property VeQuickItem _phasePower: VeQuickItem {
-					uid: pvInverter.serviceUid + "/Ac/L" + (model.index + 1) + "/Power"
-					onValueChanged: phases.setPhaseProperty(model.index, "power", value)
+					uid: phaseUid + "/Power"
+					onValueChanged: phases.setPhaseProperty(phaseName, "power", value)
 				}
 				readonly property VeQuickItem _phaseCurrent: VeQuickItem {
-					uid: pvInverter.serviceUid + "/Ac/L" + (model.index + 1) + "/Current"
-					onValueChanged: phases.setPhaseProperty(model.index, "current", value)
+					uid: phaseUid + "/Current"
+					onValueChanged: phases.setPhaseProperty(phaseName, "current", value)
 				}
 				readonly property VeQuickItem _phaseVoltage: VeQuickItem {
-					uid: pvInverter.serviceUid + "/Ac/L" + (model.index + 1) + "/Voltage"
-					onValueChanged: phases.setPhaseProperty(model.index, "voltage", value)
+					uid: phaseUid + "/Voltage"
+					onValueChanged: phases.setPhaseProperty(phaseName, "voltage", value)
 				}
-			}
-		}
-
-		readonly property VeQItemSortTableModel _phaseSources: VeQItemSortTableModel {
-			dynamicSortFilter: true
-			filterRole: VeQItemTableModel.IdRole
-			filterRegExp: "^L[0-9]+"
-			onRowCountChanged: Qt.callLater(phases.setPhaseCount, rowCount)
-
-			model: VeQItemTableModel {
-				uids: [pvInverter.serviceUid + "/Ac"]
-				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 			}
 		}
 	}
