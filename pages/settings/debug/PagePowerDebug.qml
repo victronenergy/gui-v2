@@ -10,7 +10,7 @@ Page {
 
 	property string qwacsPvInverterPrefix: "com.victronenergy.pvinverter.qwacs_di1"
 	property string sensorsPvInverterPrefix: "com.victronenergy.pvinverter.vebusacsensor_output"
-	property string vebusPrefix: "com.victronenergy.vebus.ttyO1"
+	property string vebusPrefix: Global.system.veBus.serviceUid
 
 	function powerDiff(a, b) {
 		if (!a.valid || !b.valid)
