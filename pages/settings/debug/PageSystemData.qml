@@ -53,16 +53,6 @@ Page {
 			}
 
 			ListTextGroup {
-				text: "VE.Bus AC out"
-				textModel: [
-					_formatPowerValue(data.vebusAcOut.power),
-					_formatPowerValue(data.vebusAcOut.powerL1.value),
-					_formatPowerValue(data.vebusAcOut.powerL2.value),
-					_formatPowerValue(data.vebusAcOut.powerL3.value),
-				]
-			}
-
-			ListTextGroup {
 				text: "AC loads"
 				textModel: [
 					_formatPowerValue(data.acLoad.power),
