@@ -12,8 +12,15 @@ Page {
 
 	property string gateway
 
+	readonly property string _dbusDevicesUid: "dbus/com.victronenergy.rvc." + gateway + "/Devices"
+
 	//% "RV-C devices"
 	title: qsTrId("settings_rvc_devices")
+
+	SingleUidHelper {
+		id: rvcUidHelper
+		dbusUid: root._dbusDevicesUid
+	}
 
 	GradientListView {
 		model: VeQItemSortTableModel {
@@ -21,9 +28,9 @@ Page {
 			filterFlags: VeQItemSortTableModel.FilterOffline
 			model: VeQItemTableModel {
 				uids: BackendConnection.type === BackendConnection.DBusSource
-					  ? ["dbus/com.victronenergy.rvc." + root.gateway + "/Devices"]
+					  ? [root._dbusDevicesUid]
 					  : BackendConnection.type === BackendConnection.MqttSource
-						? ["mqtt/rvc/0/Devices"]    // TODO this should change depending on the gateway!
+						? [rvcUidHelper.mqttUid]
 						: ""
 				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 			}

@@ -1,5 +1,12 @@
 #include "uidhelper.h"
 
+namespace {
+
+static const QString ServiceMappingPath = QStringLiteral("system/0/ServiceMapping");
+static const QString ServiceMappingPathWithPath = ServiceMappingPath + '/';
+
+}
+
 namespace Victron {
 
 namespace VenusOS {
@@ -9,44 +16,79 @@ UidHelper::UidHelper(QObject *parent)
 {
 }
 
-QHash<QString, QString> UidHelper::serviceNamesToPaths() const
+int UidHelper::deviceInstanceForService(const QString &service) const
 {
-	return m_serviceNamesToPaths;
+	auto it = m_serviceDeviceInstances.constFind(service);
+	return it == m_serviceDeviceInstances.constEnd() ? -1 : it.value();
 }
 
-void UidHelper::setServiceNamesToPaths(const QHash<QString, QString> &hash)
+void UidHelper::addServiceMapping(const QString &serviceMappingKey, const QString &service)
 {
-	if (m_serviceNamesToPaths != hash) {
-		m_serviceNamesToPaths = hash;
-		emit serviceNamesToPathsChanged();
+	const qsizetype lastSepIndex = serviceMappingKey.lastIndexOf('_');
+	if (lastSepIndex < 0) {
+		qWarning() << "Malformed ServiceMapping key:" << serviceMappingKey;
+		return;
 	}
+	bool ok = false;
+	const int deviceInstance = serviceMappingKey.mid(lastSepIndex + 1).toInt(&ok);
+	if (!ok) {
+		qWarning() << "ServiceMapping key does not end with device instance:" << serviceMappingKey;
+		return;
+	}
+	m_serviceMappings.insert(serviceMappingKey, service);
+	m_serviceDeviceInstances.insert(service, deviceInstance);
+	emit serviceRegistered(service, deviceInstance);
+}
+
+void UidHelper::removeServiceMapping(const QString &serviceMappingKey)
+{
+	auto mapping = m_serviceMappings.constFind(serviceMappingKey);
+	if (mapping == m_serviceMappings.constEnd()) {
+		qWarning() << "Cannot remove ServiceMapping" << serviceMappingKey << ", no previous entry found";
+		return;
+	}
+	const QString &service = mapping.value();
+	m_serviceDeviceInstances.remove(service);
+	m_serviceMappings.erase(mapping);
+	Q_EMIT serviceUnregistered(service);
 }
 
 void UidHelper::onMessageReceived(const QString &path, const QVariant &message)
 {
-	static const QString serviceNameSuffix(QStringLiteral("/ServiceName"));
-	if (path.endsWith(serviceNameSuffix)) {
-		const QString serviceName = message.toString();
-		m_pathToServiceName.insert(path, serviceName);
-		const QString devicePath = path.mid(0, path.length() - (serviceNameSuffix.length()-1));
-		m_serviceNamesToPaths.insert(serviceName, devicePath);
-		Q_EMIT pathForServiceNameChanged(serviceName, devicePath);
+	static const QString ServiceMappingPath = QStringLiteral("system/0/ServiceMapping");
+	static const QString ServiceMappingPathWithPath = ServiceMappingPath + '/';
+
+	if (path == ServiceMappingPath) {
+		if (message.metaType() != QMetaType::fromType<QVariantMap>()) {
+			qWarning() << "Error: expected ServiceMapping QVariantMap but type was" << message.metaType().name();
+		} else {
+			// The Map contains entries like this:
+			//    "com_victronenergy_battery_288" -> QVariant(QString, "com.victronenergy.battery.ttyUSB0")
+			//    "com_victronenergy_dcsystem_40" -> QVariant(QString, "com.victronenergy.dcsystem.ttyS5")
+			//    "com_victronenergy_generator_0" -> QVariant(QString, "com.victronenergy.generator.startstop0")
+			//    "com_victronenergy_temperature_28" -> QVariant(QString, "com.victronenergy.temperature.ruuvi_f00f00d00001")
+
+			const QVariantMap newMappings = message.toMap();
+			for (auto it = m_serviceMappings.constBegin(); it != m_serviceMappings.constEnd(); ++it) {
+				if (!newMappings.contains(it.key())) {
+					removeServiceMapping(it.key());
+				}
+			}
+			for (auto it = newMappings.constBegin(); it != newMappings.constEnd(); ++it) {
+				addServiceMapping(it.key(), it.value().toString());
+			}
+
+		}
+	} else if (path.startsWith(ServiceMappingPathWithPath)) {
+		addServiceMapping(path.mid(ServiceMappingPathWithPath.length()), message.toString());
 	}
 }
 
 void UidHelper::onNullMessageReceived(const QString &path)
 {
-	if (m_pathToServiceName.contains(path)) {
-		const QString serviceName = m_pathToServiceName.value(path);
-		m_pathToServiceName.remove(path);
-		m_serviceNamesToPaths.remove(serviceName);
-		Q_EMIT pathForServiceNameChanged(serviceName, QString());
+	if (path.startsWith(ServiceMappingPathWithPath)) {
+		removeServiceMapping(path.mid(ServiceMappingPathWithPath.length()));
 	}
-}
-
-QString UidHelper::pathForServiceName(const QString &serviceName) const
-{
-	return m_serviceNamesToPaths.value(serviceName);
 }
 
 UidHelper* UidHelper::instance(QQmlEngine *, QJSEngine *)
@@ -63,27 +105,30 @@ SingleUidHelper::SingleUidHelper(QObject *parent)
 	, m_uidHelper(UidHelper::instance())
 {
 	if (m_uidHelper.data()) {
-		connect(m_uidHelper.data(), &UidHelper::pathForServiceNameChanged,
-				this, &SingleUidHelper::onPathForServiceNameChanged);
+		connect(m_uidHelper.data(), &UidHelper::serviceRegistered,
+				this, &SingleUidHelper::onServiceRegistered);
+		connect(m_uidHelper.data(), &UidHelper::serviceUnregistered,
+				this, &SingleUidHelper::onServiceUnregistered);
 	}
 }
 
 void SingleUidHelper::setDBusUid(const QString &uid)
 {
-	if (uid.isEmpty()) {
-		m_dbusUid = uid;
-		m_mqttUid.clear();
-		Q_EMIT mqttUidChanged();
-		Q_EMIT dbusUidChanged();
-		return;
-	}
-
 	// the dbus uid will be of the form:
 	// "dbus/<service>/<path>"
 	// whereas the mqtt uid will be of the form:
 	// "mqtt/<service>/<deviceInstance>/<path>"
 	if (m_dbusUid != uid) {
 		m_dbusUid = uid;
+		m_serviceName.clear();
+		m_remainderPath.clear();
+		m_deviceInstance = -1;
+
+		if (uid.isEmpty()) {
+			m_mqttUid.clear();
+			Q_EMIT mqttUidChanged();
+			return;
+		}
 
 		// calculate the MQTT device path based on the service name
 		const QStringList parts = m_dbusUid.split('/');
@@ -94,29 +139,25 @@ void SingleUidHelper::setDBusUid(const QString &uid)
 		}
 
 		const QString prefix = QStringLiteral("%1/%2").arg(parts[0], parts[1]);
-		m_remainderPath = uid.mid(prefix.length() + 1);
 		m_serviceName = parts[1];
-		m_mqttDevicePath = m_uidHelper.data()->pathForServiceName(m_serviceName);
-		if (m_mqttDevicePath.endsWith(QChar('/'))) {
-			m_mqttDevicePath.chop(1);
-		}
-		if (m_mqttDevicePath.isEmpty() || m_mqttDevicePath.startsWith(QStringLiteral("modbustcp"))) {
-			// try to guess it.  we will receive a signal from the provider, later.
-			const QStringList dotParts = parts[1].split('.');
-			if (dotParts.size() == 3) {
-				// the guess should succeed, as it's of the form com.victronenergy.xyz
-				// rather than of the form com.victronenergy.xyz.abc
-				m_mqttDevicePath = QStringLiteral("%1/0").arg(dotParts[2]);
+		m_remainderPath = uid.mid(prefix.length() + 1);
+
+		if (m_serviceName.split('.').size() == 3) {
+			// Service name is of the form com.victronenergy.xyz rather than
+			// com.victronenergy.xyz.abc, so we can assume the device instance is 0.
+			m_deviceInstance = 0;
+		} else {
+			const int deviceInstance = m_uidHelper.data()->deviceInstanceForService(m_serviceName);
+			if (deviceInstance >= 0) {
+				m_deviceInstance = deviceInstance;
+			} else {
+				// No ServiceMapping available yet for this service, wait for the UidHelper signal.
+				m_deviceInstance = -1;
 			}
 		}
-		if (!m_mqttDevicePath.isEmpty()) {
-			// we are able to construct an MQTT uid that we're confident is correct.
-			m_mqttUid = QStringLiteral("%1/%2/%3").arg(QStringLiteral("mqtt"), m_mqttDevicePath, m_remainderPath);
-			Q_EMIT dbusUidChanged();
-			Q_EMIT mqttUidChanged();
-		} else {
-			Q_EMIT dbusUidChanged();
-		}
+
+		updateMqttUid();
+		Q_EMIT dbusUidChanged();
 	}
 }
 
@@ -130,14 +171,42 @@ QString SingleUidHelper::mqttUid() const
 	return m_mqttUid;
 }
 
-void SingleUidHelper::onPathForServiceNameChanged(const QString &serviceName, const QString &path)
+void SingleUidHelper::updateMqttUid()
 {
-	if (m_serviceName == serviceName && !path.startsWith(QStringLiteral("modbustcp"))) {
-		m_mqttDevicePath = path;
-		m_mqttUid = QStringLiteral("%1/%2/%3").arg(QStringLiteral("mqtt"), m_mqttDevicePath, m_remainderPath);
+	QString mqttUid;
+
+	if (m_deviceInstance >= 0) {
+		// m_serviceName is com.victronenergy.abc[.xyz] where <abc> is the service type to be extracted.
+		const QStringList dotParts = m_serviceName.split('.');
+		if (dotParts.size() < 3) {
+			qWarning() << "updateMqttUid() failed, malformed service name!" << m_serviceName;
+		} else {
+			mqttUid = QStringLiteral("mqtt/%1/%2/%3").arg(dotParts.at(2), QString::number(m_deviceInstance), m_remainderPath);
+		}
+	}
+
+	if (mqttUid != m_mqttUid) {
+		m_mqttUid = mqttUid;
 		Q_EMIT mqttUidChanged();
 	}
 }
+
+void SingleUidHelper::onServiceRegistered(const QString &service, int deviceInstance)
+{
+	if (service == m_serviceName && deviceInstance != m_deviceInstance) {
+		m_deviceInstance = deviceInstance;
+		updateMqttUid();
+	}
+}
+
+void SingleUidHelper::onServiceUnregistered(const QString &service)
+{
+	if (service == m_serviceName) {
+		m_deviceInstance = -1;
+		updateMqttUid();
+	}
+}
+
 
 } /* VenusOS */
 

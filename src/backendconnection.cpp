@@ -63,6 +63,9 @@ void BackendConnection::setState(VeQItemMqttProducer::ConnectionState backendCon
 	case VeQItemMqttProducer::Initializing:
 	{
 		setState(BackendConnection::State::Initializing);
+
+		// Ensure that UidHelper receives the com.victronenergy.system/ServiceMapping value.
+		m_mqttProducer->requestValue("mqtt/system/0/ServiceMapping");
 		break;
 	}
 	case VeQItemMqttProducer::Ready:

@@ -8,7 +8,6 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	// TODO make this works for MQTT
 	property string qwacsPvInverterPrefix: "com.victronenergy.pvinverter.qwacs_di1"
 	property string sensorsPvInverterPrefix: "com.victronenergy.pvinverter.vebusacsensor_output"
 	property string vebusPrefix: "com.victronenergy.vebus.ttyO1"

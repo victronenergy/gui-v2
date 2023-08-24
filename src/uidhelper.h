@@ -9,10 +9,11 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QHash>
-#include <QtCore/QSet>
 
 #include <QtQml/QQmlEngine>
 #include <QtQml/QJSEngine>
+
+class VeQItemMqttProducer;
 
 namespace Victron {
 
@@ -21,18 +22,15 @@ namespace VenusOS {
 class UidHelper : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QHash<QString, QString> serviceNamesToPaths READ serviceNamesToPaths WRITE setServiceNamesToPaths NOTIFY serviceNamesToPathsChanged)
 
 public:
-	QHash<QString, QString> serviceNamesToPaths() const;
-	void setServiceNamesToPaths(const QHash<QString, QString> &hash);
-	Q_INVOKABLE QString pathForServiceName(const QString &serviceName) const;
+	int deviceInstanceForService(const QString &service) const;
 
 	static UidHelper* instance(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 Q_SIGNALS:
-	void serviceNamesToPathsChanged();
-	void pathForServiceNameChanged(const QString &serviceName, const QString &path);
+	void serviceRegistered(const QString &service, int deviceInstance);
+	void serviceUnregistered(const QString &service);
 
 public Q_SLOTS:
 	void onMessageReceived(const QString &path, const QVariant &message);
@@ -41,8 +39,11 @@ public Q_SLOTS:
 private:
 	UidHelper(QObject *parent = nullptr);
 
-	QHash<QString, QString> m_serviceNamesToPaths;
-	QHash<QString, QString> m_pathToServiceName;
+	void addServiceMapping(const QString &serviceMappingKey, const QString &service);
+	void removeServiceMapping(const QString &serviceMappingKey);
+
+	QHash<QString, QString> m_serviceMappings;
+	QHash<QString, int> m_serviceDeviceInstances;
 };
 
 class SingleUidHelper : public QObject
@@ -59,20 +60,21 @@ public:
 
 	QString mqttUid() const;
 
-public Q_SLOTS:
-	void onPathForServiceNameChanged(const QString &serviceName, const QString &path);
-
 Q_SIGNALS:
 	void dbusUidChanged();
 	void mqttUidChanged();
 
 private:
+	void updateMqttUid();
+	void onServiceRegistered(const QString &service, int deviceInstance);
+	void onServiceUnregistered(const QString &service);
+
 	QPointer<UidHelper> m_uidHelper;
 	QString m_dbusUid;
 	QString m_mqttUid;
 	QString m_serviceName;
-	QString m_mqttDevicePath;
 	QString m_remainderPath;
+	int m_deviceInstance = -1;
 };
 
 } /* VenusOS */
