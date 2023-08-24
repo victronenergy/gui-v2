@@ -15,11 +15,6 @@ Page {
 	property alias vebusAcOut: _vebusAcOut
 	property alias acLoad: _acLoad
 
-	DataPoint {
-		id: _vebusService
-		source: "com.victronenergy.system/VebusService"
-	}
-
 	QtObject {
 		id: _pvCharger
 		property DataPoint power: DataPoint { source: "com.victronenergy.system/Dc/Pv/Power" }
@@ -40,10 +35,9 @@ Page {
 		bindPrefix: "com.victronenergy.system/Ac/PvOnGrid"
 	}
 
-	// TODO this currently does not work for MQTT as com.victronenergy.vebus.tty01 is not converted correctly to MQTT path
 	ObjectAcConnection {
 		id: _vebusAcOut
-		bindPrefix: "com.victronenergy.vebus.ttyO1/Ac/Out"
+		bindPrefix: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Ac/Out" : ""
 		powerKey: "P"
 	}
 
@@ -59,7 +53,7 @@ Page {
 
 	DataPoint {
 		id: _splitPhaseL2Passthru
-		source: _vebusService.valid ? _vebusService.value + "/Ac/State/SplitPhaseL2Passthru" : ""
+		source: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Ac/State/SplitPhaseL2Passthru" : ""
 	}
 
 	ObjectAcConnection {
