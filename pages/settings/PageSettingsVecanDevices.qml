@@ -13,8 +13,15 @@ Page {
 
 	property string gateway
 
+	readonly property string _dbusDevicesUid: "dbus/com.victronenergy.vecan." + gateway + "/Devices"
+
 	//% "VE.CAN devices"
 	title: qsTrId("settings_vecan_devices")
+
+	SingleUidHelper {
+		id: vecanUidHelper
+		dbusUid: root._dbusDevicesUid
+	}
 
 	GradientListView {
 		model: VeQItemSortTableModel {
@@ -22,9 +29,9 @@ Page {
 			dynamicSortFilter: true
 			model: VeQItemTableModel {
 				uids: BackendConnection.type === BackendConnection.DBusSource
-					  ? ["dbus/com.victronenergy.vecan." + root.gateway + "/Devices"]
+					  ? [root._dbusDevicesUid]
 					  : BackendConnection.type === BackendConnection.MqttSource
-						? ["mqtt/vecan/0/Devices"]    // TODO this should change depending on the gateway!
+						? [vecanUidHelper.mqttUid]
 						: ""
 				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 			}

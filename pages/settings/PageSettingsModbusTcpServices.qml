@@ -55,7 +55,6 @@ Page {
 				source: serviceDelegate.servicePath + "/ServiceName"
 			}
 
-			// TODO this currently does not work with MQTT, see Issue ##235
 			DataPoint {
 				id: productName
 				source: serviceName.value ? serviceName.value + "/ProductName" : ""
