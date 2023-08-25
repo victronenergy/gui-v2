@@ -406,7 +406,7 @@ void BackendConnection::requestShardFromVrmApi()
 					const QString mqtt_webhost = record.value(QStringLiteral("mqtt_webhost")).toString();
 					const QString webhost = mqtt_webhost.startsWith(QStringLiteral("wss://"), Qt::CaseInsensitive)
 							? mqtt_webhost : QStringLiteral("wss://%1").arg(mqtt_webhost);
-					const int prefixLength = QStringLiteral("wss://webmqtt").length();
+					const qsizetype prefixLength = QStringLiteral("wss://webmqtt").length();
 					const QString shard = webhost.mid(prefixLength, webhost.indexOf('.') - prefixLength);
 					if (shard.isEmpty()) {
 						qWarning() << "Unable to determine shard from mqtt_webhost " << mqtt_webhost << " in record " << record.toVariantMap();
