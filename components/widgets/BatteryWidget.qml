@@ -20,18 +20,7 @@ OverviewWidget {
 	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
 
-	quantityLabel.value: {
-		// Show 2 decimal places if available
-		if (isNaN(batteryData.stateOfCharge)) {
-			return NaN
-		}
-		const fixed = batteryData.stateOfCharge.toFixed(2)
-		const floored = Math.floor(batteryData.stateOfCharge)
-		if (fixed === floored) {
-			return floored
-		}
-		return fixed
-	}
+	quantityLabel.value: batteryData.stateOfCharge
 	quantityLabel.unit: VenusOS.Units_Percentage
 
 	color: "transparent"
@@ -254,7 +243,7 @@ OverviewWidget {
 				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
 
-			value: batteryData.voltage.toFixed(1)
+			value: batteryData.voltage
 			unit: VenusOS.Units_Volt
 			font.pixelSize: Theme.font.size.body2
 		},
@@ -267,7 +256,7 @@ OverviewWidget {
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
-			value: batteryData.current.toFixed(1)
+			value: batteryData.current
 			unit: VenusOS.Units_Amp
 			font.pixelSize: Theme.font.size.body2
 		},
@@ -281,7 +270,7 @@ OverviewWidget {
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
-			value: batteryData.power.toFixed(1)
+			value: batteryData.power
 			unit: VenusOS.Units_Watt
 			font.pixelSize: Theme.font.size.body2
 		}

@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Units.js" as Units
 
 Page {
 	id: root
@@ -58,8 +59,10 @@ Page {
 			secondaryText: {
 				const statusText = Global.evChargers.chargerStatusToText(model.evCharger.status)
 				if (model.evCharger.status === VenusOS.Evcs_Status_Charging) {
-					const energy = isNaN(model.evCharger.energy) ? "--" : model.evCharger.energy.toFixed(1)
-					return energy + "kWh | " + statusText
+					const quantity = Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour,
+							model.evCharger.energy,
+							Units.defaultUnitPrecision(VenusOS.Units_Energy_KiloWattHour))
+					return quantity.number + quantity.unit + " | " + statusText
 				}
 				return statusText
 			}

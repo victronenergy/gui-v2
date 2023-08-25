@@ -6,65 +6,65 @@
 .import Victron.VenusOS as V
 .import "/components/Utils.js" as Utils
 
+function defaultUnitPrecision(unit) {
+	return unit === V.VenusOS.Units_Energy_KiloWattHour ? 2
+			: (unit === V.VenusOS.Units_Percentage
+			   || unit === V.VenusOS.Units_Watt
+			   || unit === V.VenusOS.Units_Temperature_Celsius
+			   || unit === V.VenusOS.Units_Temperature_Fahrenheit) ? 0
+			: 1
+}
+
 /*
 	Returns the physical quantity in a map of { number, unit }.
 
-	The number is scaled if the absolute value is >= 10,000 (e.g. 10000 W = 10kW) and the
-	precision and decimal places are adjusted according to the specified length.
-
-	E.g. if length=4:
-
-	0.0345 W => 0.035 W
-	10.0345 W => 10.03 W
-	100.345 W => 100.3 W
-	1000.345 W => 1000 W
-	10000.345 W => 10 kW
+	The number is scaled if the absolute value is >= 10,000 (e.g. 10000 W = 10kW).
 */
-function getDisplayText(unit, value, length, unitMatchValue = undefined) {
+function getDisplayText(unit, value, precision, unitMatchValue = undefined) {
 	switch (unit) {
 	case V.VenusOS.Units_Watt:
-		return _scaledQuantity(value, unitMatchValue, length, "W", "kW")
+		return _scaledQuantity(value, unitMatchValue, precision, "W", "kW")
 	case V.VenusOS.Units_Volt:
-		return _scaledQuantity(value, unitMatchValue, length, "V", "kV")
+		return _scaledQuantity(value, unitMatchValue, precision, "V", "kV")
 	case V.VenusOS.Units_Amp:
-		return _scaledQuantity(value, unitMatchValue, length, "A", "kA")
+		return _scaledQuantity(value, unitMatchValue, precision, "A", "kA")
 	case V.VenusOS.Units_Energy_KiloWattHour:
-		return _scaledQuantity(value, unitMatchValue, length, "kWh")
+		return _scaledQuantity(value, unitMatchValue, precision, "kWh")
 	case V.VenusOS.Units_Percentage:
-		return _scaledQuantity(value, unitMatchValue, length, "%")
+		return _scaledQuantity(value, unitMatchValue, precision, "%")
 	case V.VenusOS.Units_Temperature_Celsius:
 	case V.VenusOS.Units_Temperature_Fahrenheit:
 		// \u00b0 = degrees symbol
-		return _scaledQuantity(value, unitMatchValue, length, "\u00b0")
+		return _scaledQuantity(value, unitMatchValue, precision, "\u00b0")
 	case V.VenusOS.Units_Volume_Liter:
 		// \u2113 = l, \u3398 = kl
-		return _scaledQuantity(value, unitMatchValue, length, "\u2113", "\u3398")
+		return _scaledQuantity(value, unitMatchValue, precision, "\u2113", "\u3398")
 	case V.VenusOS.Units_Volume_CubicMeter:
 		// \u33A5 is not supported by the font, so use two characters \u006D\u00B3 instead.
-		return _scaledQuantity(value, unitMatchValue, length, "m³")
+		return _scaledQuantity(value, unitMatchValue, precision, "m³")
 	case V.VenusOS.Units_Volume_GallonUS:
 	case V.VenusOS.Units_Volume_GallonImperial:
-		return _scaledQuantity(value, unitMatchValue, length, "gal")
+		return _scaledQuantity(value, unitMatchValue, precision, "gal")
 	default:
 		console.warn("getDisplayText(): unknown unit", unit, "with value", value)
 		return { number: "--", unit: "" }
 	}
 }
 
-function getCapacityDisplayText(unit, capacity_m3, remaining_m3, length) {
+function getCapacityDisplayText(unit, capacity_m3, remaining_m3, precision) {
 	const capacity = convertVolumeForUnit(capacity_m3, unit)
 	const remaining = convertVolumeForUnit(remaining_m3, unit)
 
 	// Use the capacity to determine the unit to be displayed for both 'remaining' and 'capacity'
-	const remainingDisplay = getDisplayText(unit, remaining, length, capacity)
-	const capacityDisplay = getDisplayText(unit, capacity, length)
+	const remainingDisplay = getDisplayText(unit, remaining, precision, capacity)
+	const capacityDisplay = getDisplayText(unit, capacity, precision)
 	return ("%1/%2%3")
 			.arg(remainingDisplay.number)
 			.arg(capacityDisplay.number)
 			.arg(capacityDisplay.unit)
 }
 
-function _scaledQuantity(value, unitMatchValue, length, baseUnit, scaledUnit) {
+function _scaledQuantity(value, unitMatchValue, precision, baseUnit, scaledUnit) {
 	unitMatchValue = unitMatchValue === undefined ? value : unitMatchValue
 
 	let quantity = {}
@@ -78,17 +78,14 @@ function _scaledQuantity(value, unitMatchValue, length, baseUnit, scaledUnit) {
 		} else {
 			quantity.unit = baseUnit
 		}
-		if (quantity.unit === "W") {
-			// Don't use decimals for watt values
-			value = Math.round(value)
+		// If value is between -1 and 1, but is not zero, show one decimal precision regardless of
+		// precision parameter, to avoid showing just '0'.
+		// And if showing percentages, avoid showing '100%' if value is between 99-100.
+		if ((precision === 0 && value !== 0 && Math.abs(value) < 1)
+				|| (quantity.unit === "%" && value > 99 && value < 100)) {
+			value = value.toFixed(1)
 		} else {
-			if (value < 1) {
-				value = parseFloat(value.toFixed(length - 1))
-			}
-			if (length > 0) {
-				// use parseFloat() to remove trailing zeros
-				value = parseFloat(value.toPrecision(length))
-			}
+			value = value.toFixed(precision)
 		}
 		quantity.number = value
 	}
