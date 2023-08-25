@@ -15,10 +15,11 @@ Item {
 	property alias valueColor: valueLabel.color
 	property alias unitColor: unitLabel.color
 	property int alignment: Qt.AlignHCenter
+	property int precision: Units.defaultUnitPrecision(unit)
 
 	readonly property var _quantity: unit === VenusOS.Units_None
 		 ? undefined
-		 : Units.getDisplayText(unit, value, Theme.geometry.quantityLabel.valueLength)
+		 : Units.getDisplayText(unit, value, precision)
 
 	// Restrict the height to the baseline to help align the baseline of labels in different
 	// QuantityLabel items with different font sizes. E.g. Environments tab may have multiple gauges

@@ -76,8 +76,8 @@ Page {
 			name: properties.name
 			icon.source: battery.icon
 			value: isNaN(battery.stateOfCharge) ? 0 : Math.round(battery.stateOfCharge)
-			voltage: isNaN(battery.voltage) ? NaN : battery.voltage.toFixed(1)
-			current: isNaN(battery.current) ? NaN : battery.current.toFixed(1)
+			voltage: battery.voltage
+			current: battery.current
 			status: Gauges.getValueStatus(value, properties.valueType)
 			caption: {
 				const timeToGo = Global.batteries.timeToGoText(battery)

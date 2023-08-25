@@ -44,7 +44,7 @@ QtObject {
 
 			readonly property string serviceUid: "com.victronenergy.evcharger.ttyUSB" + deviceInstance.value
 
-			property int status: Math.random() * VenusOS.Evcs_Status_OverheatingDetected
+			property int status: VenusOS.Evcs_Status_Charging
 			property int mode: Math.random() * VenusOS.Evcs_Mode_Scheduled
 			property bool connected
 			property int chargingTime: 100000
