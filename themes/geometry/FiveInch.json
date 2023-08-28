@@ -219,7 +219,6 @@
 
     "geometry.quantityLabel.spacing": 2,
     "geometry.quantityLabel.bottomMargin": 2,
-    "geometry.quantityLabel.valueLength": 4,
 
     "geometry.widgetHeader.spacing": 4,
     "geometry.widgetHeader.icon.size": 24,
