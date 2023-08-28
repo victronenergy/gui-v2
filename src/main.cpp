@@ -654,7 +654,13 @@ void registerQmlTypes()
 int main(int argc, char *argv[])
 {
 	qInfo("Victron gui version: v%d.%d.%d", PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
+
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
+	// The qt vkb behaves in an annoying manner in qt6.5.2 wasm builds (but not other versions).
+	// It pops up every time you tap the screen, making landscape mode unusable.
+	// The native vkb gets used instead, so a keyboard is still available when required.
 	qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+#endif
 
 	registerQmlTypes();
 
