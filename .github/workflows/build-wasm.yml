@@ -3,6 +3,9 @@ run-name: ${{ github.actor }} is building wasm file
 on: [push]
 jobs:
   build-wasm-file:
+    env:
+      EMSCRIPTEN: 3.1.25
+      QT_VERSION: 6.5.2
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -21,47 +24,47 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.x
-    - name: Install Qt 6.5.2 linux desktop
+    - name: Install Qt ${{env.QT_VERSION}} linux desktop
       uses: jurplel/install-qt-action@v3
       with:
         aqtversion: '==3.1.*'
-        version: '6.5.2'
+        version: "${{env.QT_VERSION}}"
         host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
         modules: 'qtwebsockets qt5compat qtshadertools'
         dir: '/opt/hostedtoolcache'
-    - name: Install QT 6.5.2 linux wasm and cmake
+    - name: Install QT ${{env.QT_VERSION}} linux wasm and cmake
       uses: jurplel/install-qt-action@v3
       with:
         aqtversion: '==3.1.*'
-        version: '6.5.2'
+        version: "${{env.QT_VERSION}}"
         host: 'linux'
         target: 'desktop'
         arch: 'wasm_singlethread'
         modules: 'qtwebsockets qt5compat qtshadertools'
         tools: 'tools_cmake'
         dir: '/opt/hostedtoolcache'
-    - name: patch Qt 6.5.2
+    - name: patch Qt ${{env.QT_VERSION}}
       run: |
         echo patch Qt
         ./.github/patches/qt-fixes.sh
-    - name: Install emscripten
+    - name: Install emscripten ${{env.EMSCRIPTEN}}
       run: |
-        echo installing emscripten
+        echo installing emscripten ${EMSCRIPTEN}
         git clone https://github.com/emscripten-core/emsdk.git
         cd emsdk
-        ./emsdk install 2.0.14
-        ./emsdk activate 2.0.14
+        ./emsdk install ${EMSCRIPTEN}
+        ./emsdk activate ${EMSCRIPTEN}
     - name: Install QtMQTT
       run: |
         echo installing QtMQTT
         source "/home/runner/work/gui-v2/gui-v2/emsdk/emsdk_env.sh"
         git clone https://github.com/qt/qtmqtt.git
         cd qtmqtt
-        git checkout 6.5.2
+        git checkout $QT_VERSION
         mkdir build-qtmqtt && cd build-qtmqtt
-        export QTDIR=/opt/hostedtoolcache/Qt/6.5.2/wasm_singlethread
+        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
         export PATH=$PATH:/opt/hostedtoolcache/Qt/Tools/CMake/bin
         ${QTDIR}/bin/qt-configure-module ..
         cmake --build .
@@ -69,7 +72,7 @@ jobs:
     - name: Build webassembly GUI
       run: |
         source "/home/runner/work/gui-v2/gui-v2/emsdk/emsdk_env.sh"
-        export QTDIR=/opt/hostedtoolcache/Qt/6.5.2/wasm_singlethread
+        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
         export PATH=$PATH:/opt/hostedtoolcache/Qt/Tools/CMake/bin
         mkdir build-wasm && cd build-wasm
         ${QTDIR}/bin/qt-cmake ..
