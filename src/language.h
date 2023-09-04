@@ -61,6 +61,8 @@ class Language : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged FINAL)
+	Q_PROPERTY(bool needSettingUpdate READ needSettingUpdate WRITE setNeedSettingUpdate NOTIFY needSettingUpdateChanged)
+
 public:
 	explicit Language(QQmlEngine* engine);
 	Language(const Victron::VenusOS::Language&) = delete;
@@ -78,13 +80,18 @@ public:
 	QLocale::Language getCurrentLanguage() const;
 	void setCurrentLanguage(QLocale::Language language);
 
+	bool needSettingUpdate() const;
+	void setNeedSettingUpdate(bool v);
+
 Q_SIGNALS:
 	void currentLanguageChanged();
+	void needSettingUpdateChanged();
 
 private:
 	bool installTranslatorForLanguage(QLocale::Language language);
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
 	QQmlEngine* m_qmlEngine = nullptr;
+	bool m_needSettingUpdate = false;
 	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
 };
 

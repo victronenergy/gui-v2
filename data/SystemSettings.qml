@@ -149,11 +149,19 @@ QtObject {
 	property DataPoint language: DataPoint {
 		source: "com.victronenergy.settings/Settings/Gui/Language"
 		onValueChanged: {
-			if (value !== undefined && !Global.changingLanguage
-					&& value != Language.toCode(Language.current)) {
-				Global.changingLanguage = true
-				Language.setCurrentLanguageCode(value)
-				Qt.callLater(Global.main.retranslateUi)
+			if (value !== undefined && !Global.changingLanguage) {
+				if (Language.needSettingUpdate) {
+					// a language was set via startup parameter, so update the setting value.
+					if (value != Language.toCode(Language.current)) {
+						Qt.callLater(setValue, Language.toCode(Language.current))
+					}
+					Language.needSettingUpdate = false
+				} else if (value != Language.toCode(Language.current)) {
+					// the setting value changed, and we need to reload the ui
+					Global.changingLanguage = true
+					Language.setCurrentLanguageCode(value)
+					Qt.callLater(Global.main.retranslateUi)
+				}
 			}
 		}
 	}

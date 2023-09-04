@@ -189,3 +189,16 @@ void Language::retranslate()
 	}
 }
 
+bool Language::needSettingUpdate() const
+{
+	return m_needSettingUpdate;
+}
+
+void Language::setNeedSettingUpdate(bool v)
+{
+	if (m_needSettingUpdate != v) {
+		m_needSettingUpdate = v;
+		emit needSettingUpdateChanged();
+	}
+}
+
