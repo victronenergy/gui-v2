@@ -122,13 +122,18 @@ Page {
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataValue)
-			secondaryText: Math.max(Global.ess.minimumStateOfCharge.value || 0, socLimit.value || 0) + "%"
+			secondaryText: Math.max(Global.ess.minimumStateOfCharge || 0, socLimit.value || 0) + "%"
 		}
 
 		ListRadioButtonGroup {
 			//% "Peak shaving"
 			text: qsTrId("settings_ess_peak_shaving")
-			currentIndex: batteryLifeState.dataValue === VenusOS.Ess_BatteryLifeState_KeepCharged ? 1 : peakshaveItem.value
+			currentIndex: {
+				if (batteryLifeState.dataValue === VenusOS.Ess_BatteryLifeState_KeepCharged) {
+					return 1
+				}
+				return peakshaveItem.value === 1 ? 1 : 0
+			}
 			updateOnClick: false
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			enabled: batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged

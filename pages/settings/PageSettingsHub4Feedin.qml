@@ -33,12 +33,8 @@ Page {
 					&& doNotFeedInvOvervoltage.valid
 
 				DataPoint {
-					id: vebusPath
-					source: "com.victronenergy.system/VebusService"
-				}
-				DataPoint {
 					id: doNotFeedInvOvervoltage
-					source: !vebusPath.valid ? "" : (vebusPath.value + "/Hub4/DoNotFeedInOvervoltage")
+					source: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/DoNotFeedInOvervoltage" : ""
 				}
 			}
 
