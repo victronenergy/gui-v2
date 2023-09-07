@@ -13,9 +13,7 @@ QtObject {
 	readonly property DataPoint systemState: DataPoint {
 		source: "com.victronenergy.system/SystemState/State"
 		Component.onCompleted: {
-			if (!!Global.system) {
-				Global.system.state = Qt.binding(function() { return value || VenusOS.System_State_Off })
-			}
+			Global.system.state = Qt.binding(function() { return value || VenusOS.System_State_Off })
 		}
 	}
 
@@ -118,23 +116,14 @@ QtObject {
 	readonly property DataPoint veSystemPower: DataPoint {
 		source: "com.victronenergy.system/Dc/System/Power"
 		Component.onCompleted: {
-			if (!!Global.system) {
-				Global.system.dc.power = Qt.binding(function() { return value === undefined ? NaN : value })
-			}
+			Global.system.dc.power = Qt.binding(function() { return value === undefined ? NaN : value })
 		}
 	}
 
 	readonly property DataPoint veBatteryVoltage: DataPoint {
-		function _update() {
-			if (!!Global.system) {
-				Global.system.dc.voltage = value === undefined ? NaN : value
-			}
-		}
 		source: "com.victronenergy.system/Dc/Battery/Voltage"
 		Component.onCompleted: {
-			if (!!Global.system) {
-				Global.system.dc.voltage = Qt.binding(function() { return value === undefined ? NaN : value })
-			}
+			Global.system.dc.voltage = Qt.binding(function() { return value === undefined ? NaN : value })
 		}
 	}
 
@@ -143,18 +132,14 @@ QtObject {
 	readonly property DataPoint veBusService: DataPoint {
 		source: "com.victronenergy.system/VebusService"
 		Component.onCompleted: {
-			if (!!Global.system) {
-				Global.system.veBus.serviceUid = Qt.binding(function() { return value || "" })
-			}
+			Global.system.veBus.serviceUid = Qt.binding(function() { return value || "" })
 		}
 	}
 
 	readonly property DataPoint veBusDcPower: DataPoint {
 		source: veBusService.value ? veBusService.value + "/Dc/0/Power" : ""
 		Component.onCompleted: {
-			if (!!Global.system) {
-				Global.system.veBus.power = Qt.binding(function() { return value === undefined ? NaN : value })
-			}
+			Global.system.veBus.power = Qt.binding(function() { return value === undefined ? NaN : value })
 		}
 	}
 }
