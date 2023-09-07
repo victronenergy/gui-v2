@@ -99,13 +99,11 @@ QtObject {
 	}
 
 	Component.onCompleted: {
-		if (!!Global.ess) {
-			Global.ess.minimumStateOfCharge = Qt.binding(function() {
-				return veMinimumSocLimit.value || 0
-			})
-			Global.ess.stateOfChargeLimit = Qt.binding(function() {
-				return veSocLimit.value || 0
-			})
-		}
+		Global.ess.minimumStateOfCharge = Qt.binding(function() {
+			return veMinimumSocLimit.value || 0
+		})
+		Global.ess.stateOfChargeLimit = Qt.binding(function() {
+			return veSocLimit.value || 0
+		})
 	}
 }
