@@ -5,8 +5,6 @@ cmake_policy(SET CMP0079 NEW)
 
 project(venus-gui-v2 LANGUAGES CXX VERSION 0.01.20)
 add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR} -DPROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH} )
-set(TRANSLATIONS_TS_TARGET venus-gui-v2-translations-ts)
-set(TRANSLATIONS_QM_TARGET venus-gui-v2-translations-qm)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -747,49 +745,6 @@ list(APPEND TRANSLATION_SOURCES
     ${QML_MODULE_SOURCES}
 )
 
-# translations support.
-# note: the base venus-gui-v2.ts was generated with:
-# lupdate.exe qml.qrc -ts i18n/venus-gui-v2.ts)
-set(TRANSLATIONS_TS_FILES
-        "i18n/venus-gui-v2.ts"
-	"i18n/venus-gui-v2_en.ts"
-	"i18n/venus-gui-v2_fr.ts")
-set(TRANSLATIONS_QM_FILES
-        "i18n/venus-gui-v2.qm"
-	"i18n/venus-gui-v2_en.qm"
-	"i18n/venus-gui-v2_fr.qm")
-# manually generate .ts files via a custom command.
-# it would be good if we could do this via qt6_add_lupdate
-# instead, but that macro is broken, so do it ourselves.
-add_custom_target(${TRANSLATIONS_TS_TARGET}
-    SOURCES ${TRANSLATION_SOURCES})
-add_custom_command(
-    TARGET ${TRANSLATIONS_TS_TARGET}
-    BYPRODUCTS ${TRANSLATIONS_TS_FILES}
-    COMMENT "Manually updating translations files"
-    COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lupdate
-        ARGS
-            ${TRANSLATION_SOURCES}
-            src
-        -ts ${TRANSLATIONS_TS_FILES}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-# add a custom target to generate the .qm files via qt6_add_lrelease().
-# force the .qm generation step to depend on the .ts generation step.
-set_source_files_properties(${TRANSLATIONS_TS_FILES}
-    PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/i18n")
-add_custom_target(${TRANSLATIONS_QM_TARGET}
-    SOURCES ${TRANSLATIONS_TS_FILES})
-add_dependencies(${TRANSLATIONS_QM_TARGET} ${TRANSLATIONS_TS_TARGET})
-# generate .qm files
-add_custom_command(
-    TARGET ${TRANSLATIONS_QM_TARGET}
-    COMMENT "Manually releasing translations files"
-    COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lrelease
-        ARGS ${TRANSLATIONS_TS_FILES} -idbased
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-
-set(UNIX_COMPILE_FLAGS "-Wall" "-Wextra" "-Werror" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
-
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
@@ -918,11 +873,17 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         themes/typography/TypographyDesign.json
 )
 
-add_dependencies(${PROJECT_NAME} ${TRANSLATIONS_QM_TARGET})
-qt_add_resources(${PROJECT_NAME} "i18n"
-    PREFIX "/i18n"
-    BASE "i18n"
-    FILES ${TRANSLATIONS_QM_FILES})
+# This adds 2 new targets, venus-gui-v2_lupdate and venus-gui-v2_lrelease. Parallel builds (eg. 'make -j') do not rebuild venus-gui-v2_lrelease correctly without further 'add_dependencies' hackery
+qt_add_translations( ${PROJECT_NAME}
+    TS_FILES
+    "i18n/${PROJECT_NAME}.ts"
+    "i18n/${PROJECT_NAME}_en.ts"
+    "i18n/${PROJECT_NAME}_fr.ts"
+    SOURCES "${TRANSLATION_SOURCES}"
+    LRELEASE_OPTIONS -idbased
+)
+
+add_dependencies(${PROJECT_NAME}_lrelease ${PROJECT_NAME}_lupdate) # We shouldn't need this line, but without it, parallel builds (eg. 'make -j') do not generate translations correctly
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
@@ -961,7 +922,7 @@ endif()
 
 # see if the dependency graph is correct, for translations support...
 add_custom_target(graphviz
-                 "${CMAKE_COMMAND}" "--graphviz=venus" .
+                 "${CMAKE_COMMAND}" "--graphviz=${PROJECT_NAME}.dot" .
                   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 # disable it for now, can re-enable for future analysis when required.
 #add_dependencies(${PROJECT_NAME} graphviz)
