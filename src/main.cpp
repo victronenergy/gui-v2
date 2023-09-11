@@ -81,11 +81,11 @@ QString calculateMqttAddressFromPortalId(const QString &portalId)
 	return calculateMqttAddressFromShard(shardStr);
 }
 
-void initBackend(bool *enableFpsCounter)
+void initBackend(QString *language, bool *enableFpsCounter)
 {
 	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::instance();
 
-	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter;
+	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryLang, queryFpsCounter;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	emscripten_set_visibilitychange_callback(static_cast<void*>(backend), 1, visibilitychange_callback);
 	emscripten::val webLocation = emscripten::val::global("location");
@@ -108,6 +108,9 @@ void initBackend(bool *enableFpsCounter)
 	}
 	if (query.hasQueryItem("token")) {
 		queryMqttToken = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("token").toUtf8())); // e.g.: some JWT token from VRM.
+	}
+	if (query.hasQueryItem("lang")) {
+		queryLang = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("lang").toUtf8())); // e.g.: "en" or "fr" etc
 	}
 	if (query.hasQueryItem("fpsCounter")) {
 		queryFpsCounter = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("fpsCounter").toUtf8())); // e.g.: enabled
@@ -159,6 +162,11 @@ void initBackend(bool *enableFpsCounter)
 		QGuiApplication::tr("MQTT data source token"),
 		QGuiApplication::tr("token", "MQTT broker auth token."));
 	parser.addOption(mqttToken);
+
+	QCommandLineOption lang({ "l", "lang" },
+		QGuiApplication::tr("UI language"),
+		QGuiApplication::tr("lang", "UI language code"));
+	parser.addOption(lang);
 
 	QCommandLineOption fpsCounter({ "f", "fpsCounter" },
 		QGuiApplication::tr("Enable FPS counter"));
@@ -228,7 +236,15 @@ void initBackend(bool *enableFpsCounter)
 #endif
 	}
 
-	if (parser.isSet(fpsCounter) || queryFpsCounter.contains(QStringLiteral("enable"))) {
+	if (language) {
+		if (parser.isSet(lang)) {
+			*language = parser.value(lang);
+		} else if (!queryLang.isEmpty()) {
+			*language = queryLang;
+		}
+	}
+
+	if (enableFpsCounter && (parser.isSet(fpsCounter) || queryFpsCounter.contains(QStringLiteral("enable")))) {
 		*enableFpsCounter = true;
 	}
 }
@@ -669,7 +685,8 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationVersion("2.0");
 
 	bool enableFpsCounter = false;
-	initBackend(&enableFpsCounter);
+	QString languageCode;
+	initBackend(&languageCode, &enableFpsCounter);
 
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
@@ -677,7 +694,11 @@ int main(int argc, char *argv[])
 	/* Force construction of translator */
 	int languageSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "Language");
 	Q_ASSERT(languageSingletonId);
-	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
+	Victron::VenusOS::Language* language = engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
+	if (!languageCode.isEmpty() && languageCode.compare(QStringLiteral("C"), Qt::CaseInsensitive) != 0) {
+		language->setCurrentLanguageCode(languageCode);
+		language->setNeedSettingUpdate(true);
+	}
 
 	/* Force construction of fps counter */
 	int fpsCounterSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "FrameRateModel");
