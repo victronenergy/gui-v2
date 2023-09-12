@@ -163,7 +163,6 @@
         <file>data/common/AcInputServiceLoader.qml</file>
         <file>data/common/Battery.qml</file>
         <file>data/common/DcInput.qml</file>
-        <file>data/common/DeviceModel.qml</file>
         <file>data/common/EnvironmentInput.qml</file>
         <file>data/common/EssData.qml</file>
         <file>data/common/EvCharger.qml</file>

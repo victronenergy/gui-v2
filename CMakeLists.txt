@@ -41,11 +41,27 @@ else()
     endif()
 endif()
 
+################ policies
+# These have to go after find_package(Qt6 COMPONENTS Core), and before qt_add_qml_module(... QML_FILES ${VENUS_QML_FILES})
+cmake_policy(SET CMP0071 OLD)
+qt_policy(SET QTP0001 NEW) # Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
+################ end policies
+
 qt_add_resources(QML_RESOURCES
     qml.qrc)
 
 
 include_directories(src/veutil/inc src .)
+
+set (VENUS_QML_SINGLETONS # All qml singletons have to be added here
+)
+
+set_source_files_properties( ${VENUS_QML_SINGLETONS} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )
+
+set (VENUS_QML_FILES
+    ${VENUS_QML_SINGLETONS}
+    data/common/DeviceModel.qml
+)
 
 set(CONNMAN_SOURCES_MOCK
     src/connman-api.h
@@ -272,6 +288,7 @@ endif()
 qt_add_qml_module(${PROJECT_NAME}
     URI Victron.VenusOS
     VERSION 2.0
+    QML_FILES ${VENUS_QML_FILES}
 )
 
 # see if the dependency graph is correct, for translations support...
