@@ -75,7 +75,7 @@ jobs:
         export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
         export PATH=$PATH:/opt/hostedtoolcache/Qt/Tools/CMake/bin
         mkdir build-wasm && cd build-wasm
-        ${QTDIR}/bin/qt-cmake ..
+        ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
         cmake --build .
         sed -i "/^var Module/a Module.arguments = [ '--mqtt', 'ws://'+document.location.host+':9001/' ];" venus-gui-v2.js
         sed -i "s/qtlogo.svg/victronenergy.svg/" venus-gui-v2.html
