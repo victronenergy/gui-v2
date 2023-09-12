@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root
@@ -34,7 +34,7 @@ Page {
 			property DataPoint positionItem: DataPoint { source: inverterPath + "/Position" }
 			property DataPoint serialNumberItem: DataPoint { source: inverterPath + "/SerialNumber" }
 
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverter.qml", {"title": menu.text, "bindPrefix": menu.inverterPath})
+			onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsFroniusInverter.qml", {"title": menu.text, "bindPrefix": menu.inverterPath})
 			text: customNameItem.value || serialNumberItem.value || '--'
 			secondaryText: {
 				switch (positionItem.value) {

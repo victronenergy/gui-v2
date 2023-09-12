@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root
@@ -48,7 +48,7 @@ Page {
 			secondaryText: Utils.toHexFormat(nad.value)
 
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDevice.qml",
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsRvcDevice.qml",
 					{ bindPrefix: model.uid, title: modelName.value || "" })
 			}
 

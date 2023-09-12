@@ -11,7 +11,7 @@
 import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import "/components/Units.js" as Units
+import Victron.Units
 
 Page {
 	id: root
@@ -29,7 +29,7 @@ Page {
 			summary = [ Global.system.systemStateToText(device.state) ]
 
 		} else if (serviceType === "multi") {
-			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
+			url = "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/PageNotYetImplemented.qml"
 			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Global.system.systemStateToText(device.state) ]
 
@@ -43,7 +43,7 @@ Page {
 			]
 
 		} else if (serviceType === "solarcharger") {
-			url = "/pages/solar/SolarChargerPage.qml"
+			url = "qrc:/qt/qml/Victron/VenusOS/pages/solar/SolarChargerPage.qml"
 			params = { "solarCharger" : device }
 			summary = [
 				device.errorCode <= 0
@@ -53,12 +53,12 @@ Page {
 			]
 
 		} else if (serviceType === "charger") {
-			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
+			url = "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/PageNotYetImplemented.qml"
 			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Global.system.systemStateToText(device.state) ]
 
 		} else if (serviceType === "tank") {
-			url = "/pages/settings/devicelist/tank/PageTankSensor.qml"
+			url = "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/tank/PageTankSensor.qml"
 			params = { "title": device.name, "bindPrefix" : device.serviceUid }
 
 			if (device.status === VenusOS.Tank_Status_Ok) {
@@ -93,7 +93,7 @@ Page {
 			}
 
 		} else if (serviceType === "motordrive") {
-			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
+			url = "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/PageNotYetImplemented.qml"
 			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(VenusOS.Units_RevolutionsPerMinute, device.motorRpm) ]
 
@@ -119,7 +119,7 @@ Page {
 			summary = [ Global.digitalInputs.inputStateToText(device.state) ]
 
 		} else if (serviceType === "evcharger") {
-			url = "/pages/evcs/EvChargerPage.qml"
+			url = "qrc:/qt/qml/Victron/VenusOS/pages/evcs/EvChargerPage.qml"
 			params = { "evCharger" : device }
 
 			const evChargerModeText = Global.evChargers.chargerModeToText(device.mode)
@@ -150,7 +150,7 @@ Page {
 			//: Device is not supported
 			//% "Unsupported"
 			summary = [ qsTrId("devicelist_unsupported") ]
-			url = "/pages/settings/devicelist/PageUnsupportedDevice.qml"
+			url = "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/PageUnsupportedDevice.qml"
 			params = { "bindPrefix": device.serviceUid }
 
 		} else if (serviceType === "meteo") {

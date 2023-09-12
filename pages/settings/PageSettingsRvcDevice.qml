@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root
@@ -67,7 +67,7 @@ Page {
 				visible: root.isLocalSender && userHasWriteAccess
 
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDeviceConfiguration.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsRvcDeviceConfiguration.qml",
 						{ bindPrefix: root.bindPrefix, title: text })
 				}
 			}

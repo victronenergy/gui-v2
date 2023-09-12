@@ -6,7 +6,7 @@
 import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Row {
 	id: root

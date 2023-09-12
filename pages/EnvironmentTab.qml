@@ -6,8 +6,8 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
-import "/components/Utils.js" as Utils
-import "/components/Units.js" as Units
+import Victron.Utils
+import Victron.Units
 
 Flickable {
 	id: root

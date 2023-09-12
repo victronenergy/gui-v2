@@ -87,7 +87,7 @@ Page {
 				//% "Brief view levels"
 				text: qsTrId("settings_brief_view_levels")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayBrief.qml", {"title": text})
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsDisplayBrief.qml", {"title": text})
 				}
 			}
 
@@ -135,7 +135,7 @@ Page {
 				//% "Units"
 				text: qsTrId("settings_units")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
 				}
 			}
 		}

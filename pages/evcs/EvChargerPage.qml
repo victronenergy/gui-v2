@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root
@@ -144,7 +144,7 @@ Page {
 			ListNavigationItem {
 				text: CommonWords.setup
 				onClicked: {
-					Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/evcs/EvChargerSetupPage.qml",
 							{ "title": text, "evCharger": root.evCharger })
 				}
 			}
@@ -152,7 +152,7 @@ Page {
 			ListNavigationItem {
 				text: CommonWords.device_info_title
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageDeviceInfo.qml",
 							{ "title": text, "bindPrefix": root.evCharger.serviceUid })
 				}
 			}

@@ -6,8 +6,8 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
-import "/components/Utils.js" as Utils
-import "/components/Gauges.js" as Gauges
+import Victron.Utils
+import Victron.Gauges
 
 Device {
 	id: tank

@@ -5,7 +5,7 @@
 
 .pragma library
 .import Victron.VenusOS as V
-.import "/components/Utils.js" as Utils
+.import Victron.Utils as Utils
 
 function defaultUnitPrecision(unit) {
 	if (unit === V.VenusOS.Units_Energy_KiloWattHour) {

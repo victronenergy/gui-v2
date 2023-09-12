@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 QtObject {
 	id: root

@@ -6,8 +6,8 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
-import "/components/Units.js" as Units
-import "/components/Gauges.js" as Gauges
+import Victron.Units
+import Victron.Gauges
 
 Page {
 	id: root
@@ -122,7 +122,7 @@ Page {
 				visible: shape.seen
 
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankShape.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/tank/PageTankShape.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 
@@ -154,7 +154,7 @@ Page {
 				visible: low.seen
 
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankAlarm.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/tank/PageTankAlarm.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix + "/Alarms/Low" })
 				}
 
@@ -169,7 +169,7 @@ Page {
 				visible: high.seen
 
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankAlarm.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/tank/PageTankAlarm.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix + "/Alarms/High" })
 				}
 

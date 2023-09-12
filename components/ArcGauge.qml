@@ -6,7 +6,7 @@
 import QtQuick
 import QtQuick.Window
 import Victron.VenusOS
-import "/components/Gauges.js" as Gauges
+import Victron.Gauges
 
 // A progress gauge running an on arc, where 0° is at the top, and positive is clockwise
 Item {

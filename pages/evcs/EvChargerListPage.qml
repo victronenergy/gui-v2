@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Units.js" as Units
+import Victron.Units
 
 Page {
 	id: root
@@ -68,7 +68,7 @@ Page {
 				return statusText
 			}
 
-			onClicked: Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", { "evCharger": model.device })
+			onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/evcs/EvChargerPage.qml", { "evCharger": model.device })
 		}
 	}
 }

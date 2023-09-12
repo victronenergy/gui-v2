@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root
@@ -28,7 +28,7 @@ Page {
 			ListNavigationItem {
 				//% "Conditions"
 				text: qsTrId("page_settings_generator_conditions")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorConditions.qml", { title: text, bindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+				onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageGeneratorConditions.qml", { title: text, bindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 			}
 
 			ListSpinBox {
@@ -132,7 +132,7 @@ Page {
 			ListNavigationItem {
 				//% "Run time and service"
 				text: qsTrId("page_settings_generator_run_time_and_service")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
+				onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageGeneratorRuntimeService.qml",
 													   {
 														   title: text,
 														   settingsBindPrefix: root.settingsBindPrefix,

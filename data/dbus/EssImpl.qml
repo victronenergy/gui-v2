@@ -4,6 +4,6 @@
 */
 
 import QtQuick
-import "../common"
+import Victron.VenusOS
 
 EssData {}

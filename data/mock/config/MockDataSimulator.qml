@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 QtObject {
 	id: root
@@ -25,10 +25,10 @@ QtObject {
 	signal deactivateSingleAlarm()
 
 	readonly property var _configs: ({
-		"qrc:/pages/BriefPage.qml": briefAndOverviewConfig,
-		"qrc:/pages/OverviewPage.qml": briefAndOverviewConfig,
-		"qrc:/pages/LevelsPage.qml": levelsConfig,
-		"qrc:/pages/SettingsPage.qml": settingsConfig,
+		"qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml": briefAndOverviewConfig,
+		"qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml": briefAndOverviewConfig,
+		"qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml": levelsConfig,
+		"qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml": settingsConfig,
 	})
 
 	function setConfigIndex(pageConfig, configIndex) {

@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 import net.connman 0.1
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root

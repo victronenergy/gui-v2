@@ -73,9 +73,9 @@ Page {
 
 					onClicked: {
 						if (solarCharger) {
-							Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
+							Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
 						} else {
-							Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml", { "pvInverter": pvInverter })
+							Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/solar/PvInverterPage.qml", { "pvInverter": pvInverter })
 						}
 					}
 
