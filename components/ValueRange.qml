@@ -4,7 +4,7 @@
 */
 
 import QtQml
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 QtObject {
 	property real value: NaN

@@ -7,7 +7,7 @@ import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import Victron.Veutil
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root
@@ -60,7 +60,7 @@ Page {
 				parent: listDelegate.backgroundRect
 				anchors.fill: parent
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsVecanDevice.qml",
 						{ bindPrefix: model.uid, title: text })
 				}
 			}

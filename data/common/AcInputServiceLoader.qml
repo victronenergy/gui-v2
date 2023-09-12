@@ -6,8 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
-import "/components/Utils.js" as Utils
-
+import Victron.Utils
 
 /*
   Provides frequency/current/power/voltage readings for an AC input, including each phase

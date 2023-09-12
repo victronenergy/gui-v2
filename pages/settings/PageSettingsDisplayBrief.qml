@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls as C
-import "/components/Gauges.js" as Gauges
+import Victron.Gauges
 
 Page {
 	id: root

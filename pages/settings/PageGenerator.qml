@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root
@@ -241,7 +241,7 @@ Page {
 		ListNavigationItem {
 			text: CommonWords.settings
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsGenerator.qml",
 					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 			}
 		}

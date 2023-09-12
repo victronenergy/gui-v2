@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'qt_add_qml_module' properly, you get errors at runtime like: "qrc:/main.qml:164 ApplicationContent is not a type\n"
 
+cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
 
 project(venus-gui-v2 LANGUAGES CXX VERSION 0.01.20)
@@ -26,26 +27,444 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
     add_compile_definitions(MQTT_WEBSOCKETS_ENABLED)
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets REQUIRED)
+    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
 else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt)
-    if (NOT ${Qt6_FOUND})
-        # cmake can't automatically find Qt 6.2 on Ubuntu Linux, give it a hint:
-        if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-            list(APPEND CMAKE_PREFIX_PATH "/opt/Qt/6.2.0/gcc_64/lib/cmake/")
-        endif()
-        find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools REQUIRED)
-    endif()
+    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
 endif()
 
-qt_add_resources(QML_RESOURCES
-    qml.qrc)
-
+# This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_MODULE_SOURCES})'
+if(QT_KNOWN_POLICY_QTP0001)
+    qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
+endif()
 
 include_directories(src/veutil/inc src .)
+
+set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added here
+    components/CommonWords.qml
+    components/VenusFont.qml
+    Global.qml
+)
+set_source_files_properties( ${VENUS_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )
+
+set (VENUS_QML_MODULE_SOURCES
+    ${VENUS_QML_MODULE_SINGLETON_SOURCES}
+
+    ApplicationContent.qml
+    FrameRateVisualizer.qml
+
+    components/AcceptButtonBackground.qml
+    components/Arc.qml
+    components/ArcGauge.qml
+    components/ArcGaugeQuantityLabel.qml
+    components/AsymmetricRoundedRectangle.qml
+    components/ButtonControlValue.qml
+    components/CircularMultiGauge.qml
+    components/CircularSingleGauge.qml
+    components/ControlCard.qml
+    components/ControlValue.qml
+    components/DataPoint.qml
+    components/Device.qml
+    components/ElectricalQuantityLabel.qml
+    components/EnvironmentGauge.qml
+    components/EnvironmentGaugePanel.qml
+    components/ExpandedTanksView.qml
+    components/FirmwareUpdate.qml
+    components/FixedWidthLabel.qml
+    components/GaugeModel.qml
+    components/EvChargerStatusModel.qml
+    components/GeneratorIconLabel.qml
+    components/GradientListView.qml
+    components/GsmStatusIcon.qml
+    components/IconButton.qml
+    components/InputPanel.qml
+    components/LoadGraph.qml
+    components/LoadGraphShapePath.qml
+    components/NavBar.qml
+    components/NavButton.qml
+    components/NotificationDelegate.qml
+    components/NotificationsView.qml
+    components/Page.qml
+    components/PageStack.qml
+    components/ProgressArc.qml
+    components/QuantityLabel.qml
+    components/QuantityTableSummary.qml
+    components/QuantityTable.qml
+    components/RadioButtonControlValue.qml
+    components/ScaledArc.qml
+    components/ScaledArcGauge.qml
+    components/SegmentedButtonRow.qml
+    components/SeparatorBar.qml
+    components/ShinyProgressArc.qml
+    components/SideGauge.qml
+    components/SolarDetailBox.qml
+    components/SolarHistoryChart.qml
+    components/SolarHistoryErrorView.qml
+    components/SolarHistoryTableView.qml
+    components/SolarYieldGauge.qml
+    components/SolarYieldGraph.qml
+    components/SolarYieldModel.qml
+    components/SplashView.qml
+    components/StatusBar.qml
+    components/SwitchControlValue.qml
+    components/TabBar.qml
+    components/TankGauge.qml
+    components/TankGaugeGroup.qml
+    components/ThreePhaseDisplay.qml
+    components/TimeSelector.qml
+    components/ToastNotification.qml
+    components/ValueRange.qml
+    components/VerticalGauge.qml
+    components/ViewGradient.qml
+    components/ClassAndVrmInstance.qml
+    components/WeatherDetails.qml
+
+    components/controls/Button.qml
+    components/controls/ComboBox.qml
+    components/controls/Label.qml
+    components/controls/ListItemButton.qml
+    components/controls/ProgressBar.qml
+    components/controls/RadioButton.qml
+    components/controls/ScrollBar.qml
+    components/controls/Slider.qml
+    components/controls/SpinBox.qml
+    components/controls/Switch.qml
+    components/controls/TextField.qml
+
+    components/dialogs/DateSelectorDialog.qml
+    components/dialogs/DialogShadow.qml
+    components/dialogs/VrmInstanceSwapDialog.qml
+    components/dialogs/ESSMinimumSOCDialog.qml
+    components/dialogs/GeneratorStartDialog.qml
+    components/dialogs/GeneratorStopDialog.qml
+    components/dialogs/InverterChargerModeDialog.qml
+    components/dialogs/ModalDialog.qml
+    components/dialogs/ModalWarningDialog.qml
+    components/dialogs/NumberSelectorDialog.qml
+    components/dialogs/SolarDailyHistoryDialog.qml
+    components/dialogs/TimeSelectorDialog.qml
+
+    components/listitems/ListAlarm.qml
+    components/listitems/ListButton.qml
+    components/listitems/ListDateSelector.qml
+    components/listitems/ListIpAddressField.qml
+    components/listitems/ListItem.qml
+    components/listitems/ListItemBackground.qml
+    components/listitems/ListLabel.qml
+    components/listitems/ListNavigationItem.qml
+    components/listitems/ListPortField.qml
+    components/listitems/ListRadioButton.qml
+    components/listitems/ListRadioButtonGroup.qml
+    components/listitems/ListQuantityGroup.qml
+    components/listitems/ListQuantityItem.qml
+    components/listitems/ListSlider.qml
+    components/listitems/ListSpinBox.qml
+    components/listitems/ListSwitch.qml
+    components/listitems/ListTextField.qml
+    components/listitems/ListTextGroup.qml
+    components/listitems/ListTextItem.qml
+    components/listitems/ListTimeSelector.qml
+
+    components/settings/CGwacsBatteryScheduleNavigationItem.qml
+    components/settings/FirmwareCheckListButton.qml
+    components/settings/ListDvccSwitch.qml
+    components/settings/MountStateListButton.qml
+    components/settings/SettingsSlider.qml
+    components/settings/TemperatureRelayNavigationItem.qml
+    components/settings/TemperatureRelaySettings.qml
+    components/settings/VolumeUnitRadioButtonGroup.qml
+
+    components/widgets/AcGeneratorWidget.qml
+    components/widgets/AcInputWidget.qml
+    components/widgets/AcLoadsWidget.qml
+    components/widgets/AlternatorWidget.qml
+    components/widgets/BatteryWidget.qml
+    components/widgets/DcGeneratorWidget.qml
+    components/widgets/DcInputWidget.qml
+    components/widgets/DcLoadsWidget.qml
+    components/widgets/EvcsWidget.qml
+    components/widgets/GridWidget.qml
+    components/widgets/OverviewWidget.qml
+    components/widgets/ShoreWidget.qml
+    components/widgets/SolarYieldWidget.qml
+    components/widgets/VeBusDeviceWidget.qml
+    components/widgets/WidgetConnector.qml
+    components/widgets/WidgetConnectorAnchor.qml
+    components/widgets/WidgetConnectorPath.qml
+    components/widgets/WidgetHeader.qml
+    components/widgets/WindWidget.qml
+
+    data/AcInputs.qml
+    data/Chargers.qml
+    data/Batteries.qml
+    data/DataManager.qml
+    data/DcInputs.qml
+    data/DigitalInputs.qml
+    data/EnvironmentInputs.qml
+    data/Ess.qml
+    data/EvChargers.qml
+    data/Generators.qml
+    data/Inverters.qml
+    data/MeteoDevices.qml
+    data/MotorDrives.qml
+    data/MultiRsDevices.qml
+    data/Notifications.qml
+    data/PulseMeters.qml
+    data/PvInverters.qml
+    data/Relays.qml
+    data/SolarChargers.qml
+    data/System.qml
+    data/SystemAc.qml
+    data/SystemDc.qml
+    data/SystemSettings.qml
+    data/Tanks.qml
+    data/UnsupportedDevices.qml
+    data/VeBusDevices.qml
+    data/VenusPlatform.qml
+
+    data/common/AcData.qml
+    data/common/AcInput.qml
+    data/common/AcInputServiceLoader.qml
+    data/common/AcInputSettings.qml
+    data/common/Battery.qml
+    data/common/Charger.qml
+    data/common/DcInput.qml
+    data/common/DigitalInput.qml
+    data/common/DeviceModel.qml
+    data/common/EnvironmentInput.qml
+    data/common/EssData.qml
+    data/common/EvCharger.qml
+    data/common/Generator.qml
+    data/common/Inverter.qml
+    data/common/MeteoDevice.qml
+    data/common/MotorDrive.qml
+    data/common/MultiRsDevice.qml
+    data/common/PulseMeter.qml
+    data/common/PvInverter.qml
+    data/common/PvMonitor.qml
+    data/common/Relay.qml
+    data/common/SolarCharger.qml
+    data/common/SolarDailyHistory.qml
+    data/common/SolarHistoryErrorModel.qml
+    data/common/SystemBattery.qml
+    data/common/SystemData.qml
+    data/common/Tank.qml
+    data/common/UnsupportedDevice.qml
+    data/common/VeBusDevice.qml
+
+    pages/BriefMonitorPanel.qml
+    pages/BriefPage.qml
+    pages/ControlCardsPage.qml
+    pages/EnvironmentTab.qml
+    pages/LevelsPage.qml
+    pages/MainView.qml
+    pages/NotificationLayer.qml
+    pages/NotificationsPage.qml
+    pages/OverviewPage.qml
+    pages/PageManager.qml
+    pages/SettingsPage.qml
+    pages/TanksTab.qml
+    pages/controlcards/ESSCard.qml
+    pages/controlcards/GeneratorCard.qml
+    pages/controlcards/SwitchesCard.qml
+    pages/controlcards/VeBusDeviceCard.qml
+    pages/evcs/EvChargerListPage.qml
+    pages/evcs/EvChargerPage.qml
+    pages/evcs/EvChargerSetupPage.qml
+    pages/settings/DvccCommonSettings.qml
+    pages/settings/GeneratorCondition.qml
+    pages/settings/IpAddressListView.qml
+    pages/settings/PageCanbusStatus.qml
+    pages/settings/PageChargeCurrentLimits.qml
+    pages/settings/PageDeviceInfo.qml
+    pages/settings/PageGenerator.qml
+    pages/settings/PageGeneratorAcLoad.qml
+    pages/settings/PageGeneratorConditions.qml
+    pages/settings/PageGeneratorRuntimeService.qml
+    pages/settings/PageGeneratorTestRun.qml
+    pages/settings/PageGps.qml
+    pages/settings/PageHub4Debug.qml
+    pages/settings/PageRelayGenerator.qml
+    pages/settings/PageSettingsBatteries.qml
+    pages/settings/PageSettingsBleSensors.qml
+    pages/settings/PageSettingsBluetooth.qml
+    pages/settings/PageSettingsCGwacs.qml
+    pages/settings/PageSettingsCGwacsOverview.qml
+    pages/settings/PageSettingsCanbus.qml
+    pages/settings/PageSettingsDisplay.qml
+    pages/settings/PageSettingsDisplayBrief.qml
+    pages/settings/PageSettingsDisplayUnits.qml
+    pages/settings/PageSettingsDvcc.qml
+    pages/settings/PageSettingsFirmware.qml
+    pages/settings/PageSettingsFirmwareOffline.qml
+    pages/settings/PageSettingsFirmwareOnline.qml
+    pages/settings/PageSettingsFronius.qml
+    pages/settings/PageSettingsFroniusInverter.qml
+    pages/settings/PageSettingsFroniusInverters.qml
+    pages/settings/PageSettingsFroniusSetIpAddresses.qml
+    pages/settings/PageSettingsFroniusShowIpAddresses.qml
+    pages/settings/PageSettingsGeneral.qml
+    pages/settings/PageSettingsGenerator.qml
+    pages/settings/PageSettingsGpsList.qml
+    pages/settings/PageSettingsGsm.qml
+    pages/settings/PageSettingsHub4.qml
+    pages/settings/PageSettingsHub4Feedin.qml
+    pages/settings/PageSettingsIo.qml
+    pages/settings/PageSettingsLarge.qml
+    pages/settings/PageSettingsLogger.qml
+    pages/settings/PageSettingsModbusTcp.qml
+    pages/settings/PageSettingsModbusTcpServices.qml
+    pages/settings/PageSettingsRelay.qml
+    pages/settings/PageSettingsRelayTempSensors.qml
+    pages/settings/PageSettingsRemoteConsole.qml
+    pages/settings/PageSettingsRootfsSelect.qml
+    pages/settings/PageSettingsRvcDevice.qml
+    pages/settings/PageSettingsRvcDeviceConfiguration.qml
+    pages/settings/PageSettingsRvcDevices.qml
+    pages/settings/PageSettingsServices.qml
+    pages/settings/PageSettingsSystem.qml
+    pages/settings/PageSettingsSystemStatus.qml
+    pages/settings/PageSettingsTankPump.qml
+    pages/settings/PageSettingsTcpIp.qml
+    pages/settings/PageSettingsVecanDevice.qml
+    pages/settings/PageSettingsVecanDevices.qml
+    pages/settings/PageSettingsWifi.qml
+    pages/settings/PageSettingsWifiWithAccessPoint.qml
+    pages/settings/PageTzInfo.qml
+    pages/settings/PageVrmDeviceInstances.qml
+    pages/settings/debug/HubData.qml
+    pages/settings/debug/ObjectAcConnection.qml
+    pages/settings/debug/PageDebug.qml
+    pages/settings/debug/PageDebugVeQItems.qml
+    pages/settings/debug/PagePowerDebug.qml
+    pages/settings/debug/PageSettingsDemo.qml
+    pages/settings/debug/PageSystemData.qml
+    pages/settings/devicelist/DeviceListPage.qml
+    pages/settings/devicelist/PageNotYetImplemented.qml
+    pages/settings/devicelist/PageUnsupportedDevice.qml
+    pages/settings/devicelist/tank/PageTankAlarm.qml
+    pages/settings/devicelist/tank/PageTankSensor.qml
+    pages/settings/devicelist/tank/PageTankSetup.qml
+    pages/settings/devicelist/tank/PageTankShape.qml
+    pages/settings/tz/TzAfricaData.qml
+    pages/settings/tz/TzAmericaData.qml
+    pages/settings/tz/TzAntarcticaData.qml
+    pages/settings/tz/TzArcticData.qml
+    pages/settings/tz/TzAsiaData.qml
+    pages/settings/tz/TzAtlanticData.qml
+    pages/settings/tz/TzAustraliaData.qml
+    pages/settings/tz/TzEtcData.qml
+    pages/settings/tz/TzEuropeData.qml
+    pages/settings/tz/TzIndianData.qml
+    pages/settings/tz/TzPacificData.qml
+    pages/solar/PvInverterPage.qml
+    pages/solar/SolarChargerAlarmsAndErrorsPage.qml
+    pages/solar/SolarChargerNetworkedOperationPage.qml
+    pages/solar/SolarChargerPage.qml
+    pages/solar/SolarChargerHistoryPage.qml
+    pages/solar/SolarDeviceListPage.qml
+)
+
+set(Dbus_MODULE_SOURCES
+    data/dbus/AcInputsImpl.qml
+    data/dbus/BatteriesImpl.qml
+    data/dbus/ChargersImpl.qml
+    data/dbus/DBusDataManager.qml
+    data/dbus/DcInputsImpl.qml
+    data/dbus/DigitalInputsImpl.qml
+    data/dbus/EnvironmentInputsImpl.qml
+    data/dbus/EssImpl.qml
+    data/dbus/EvChargersImpl.qml
+    data/dbus/GeneratorsImpl.qml
+    data/dbus/InvertersImpl.qml
+    data/dbus/MeteoDevicesImpl.qml
+    data/dbus/MotorDrivesImpl.qml
+    data/dbus/MultiRsDevicesImpl.qml
+    data/dbus/NotificationsImpl.qml
+    data/dbus/PulseMetersImpl.qml
+    data/dbus/PvInvertersImpl.qml
+    data/dbus/RelaysImpl.qml
+    data/dbus/SolarChargersImpl.qml
+    data/dbus/SystemImpl.qml
+    data/dbus/SystemSettingsImpl.qml
+    data/dbus/TanksImpl.qml
+    data/dbus/UnsupportedDevicesImpl.qml
+    data/dbus/VeBusDevicesImpl.qml
+)
+
+set(Mock_MODULE_SOURCES
+    data/mock/AcInputsImpl.qml
+    data/mock/BatteriesImpl.qml
+    data/mock/ChargersImpl.qml
+    data/mock/DcInputsImpl.qml
+    data/mock/DigitalInputsImpl.qml
+    data/mock/EnvironmentInputsImpl.qml
+    data/mock/EssImpl.qml
+    data/mock/EvChargersImpl.qml
+    data/mock/GeneratorsImpl.qml
+    data/mock/InvertersImpl.qml
+    data/mock/MeteoDevicesImpl.qml
+    data/mock/MockDevice.qml
+    data/mock/MockDataManager.qml
+    data/mock/MotorDrivesImpl.qml
+    data/mock/MultiRsDevicesImpl.qml
+    data/mock/NotificationsImpl.qml
+    data/mock/PulseMetersImpl.qml
+    data/mock/PvInvertersImpl.qml
+    data/mock/RelaysImpl.qml
+    data/mock/SolarChargersImpl.qml
+    data/mock/SystemImpl.qml
+    data/mock/SystemSettingsImpl.qml
+    data/mock/TanksImpl.qml
+    data/mock/UnsupportedDevicesImpl.qml
+    data/mock/VeBusDevicesImpl.qml
+    data/mock/config/BriefAndOverviewPageConfig.qml
+    data/mock/config/LevelsPageConfig.qml
+    data/mock/config/MockDataSimulator.qml
+    data/mock/config/NotificationsPageConfig.qml
+    data/mock/config/SettingsPageConfig.qml
+)
+
+set(Units_MODULE_SOURCES
+    components/Units.js
+)
+
+set(Utils_MODULE_SOURCES
+    components/Utils.js
+)
+
+set(Gauges_MODULE_SOURCES
+    components/Gauges.js
+)
+
+set(Mqtt_MODULE_SOURCES
+    data/mqtt/AcInputsImpl.qml
+    data/mqtt/BatteriesImpl.qml
+    data/mqtt/ChargersImpl.qml
+    data/mqtt/DcInputsImpl.qml
+    data/mqtt/DigitalInputsImpl.qml
+    data/mqtt/EnvironmentInputsImpl.qml
+    data/mqtt/EssImpl.qml
+    data/mqtt/EvChargersImpl.qml
+    data/mqtt/GeneratorsImpl.qml
+    data/mqtt/InvertersImpl.qml
+    data/mqtt/MeteoDevicesImpl.qml
+    data/mqtt/MotorDrivesImpl.qml
+    data/mqtt/MqttDataManager.qml
+    data/mqtt/MultiRsDevicesImpl.qml
+    data/mqtt/NotificationsImpl.qml
+    data/mqtt/PulseMetersImpl.qml
+    data/mqtt/PvInvertersImpl.qml
+    data/mqtt/RelaysImpl.qml
+    data/mqtt/SolarChargersImpl.qml
+    data/mqtt/SystemImpl.qml
+    data/mqtt/SystemSettingsImpl.qml
+    data/mqtt/TanksImpl.qml
+    data/mqtt/UnsupportedDevicesImpl.qml
+    data/mqtt/VeBusDevicesImpl.qml
+)
 
 set(CONNMAN_SOURCES_MOCK
     src/connman-api.h
@@ -124,7 +543,7 @@ set(GUIv1_DBUS_SOURCES
     src/gui-v1/wakespeed_error.cpp
 )
 
-set(VENUS_SOURCES
+set(VENUS_CPP_SOURCES
     src/main.cpp
     src/basedevicemodel.h
     src/basedevicemodel.cpp
@@ -149,23 +568,29 @@ set(VENUS_SOURCES
     src/frameratemodel.cpp
 )
 
+list(APPEND SOURCES
+    ${VEUTIL_CORE_SOURCES}
+    ${VENUS_CPP_SOURCES}
+    ${VEUTIL_MQTT_SOURCES}
+    ${QML_QRC_RESOURCES}
+    ${VENUS_QML_MODULE_SOURCES}
+    ${Dbus_MODULE_SOURCES}
+    ${Mock_MODULE_SOURCES}
+    ${Mqtt_MODULE_SOURCES}
+    ${Gauges_MODULE_SOURCES}
+    ${Units_MODULE_SOURCES}
+    ${Utils_MODULE_SOURCES}
+)
+
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     list(APPEND SOURCES
         ${CONNMAN_SOURCES_MOCK}
-        ${VEUTIL_CORE_SOURCES}
-        ${VEUTIL_MQTT_SOURCES}
-        ${VENUS_SOURCES}
-        ${QML_RESOURCES}
     )
 else()
     list(APPEND SOURCES
         ${CONNMAN_SOURCES}
         ${GUIv1_DBUS_SOURCES}
-        ${VEUTIL_CORE_SOURCES}
         ${VEUTIL_DBUS_SOURCES}
-        ${VEUTIL_MQTT_SOURCES}
-        ${VENUS_SOURCES}
-        ${QML_RESOURCES}
     )
 endif()
 
@@ -184,14 +609,16 @@ set(TRANSLATIONS_QM_FILES
 # it would be good if we could do this via qt6_add_lupdate
 # instead, but that macro is broken, so do it ourselves.
 add_custom_target(${TRANSLATIONS_TS_TARGET}
-    SOURCES ${QML_RESOURCES} ${SOURCES})
+    SOURCES ${SOURCES})
 add_custom_command(
     TARGET ${TRANSLATIONS_TS_TARGET}
     BYPRODUCTS ${TRANSLATIONS_TS_FILES}
     COMMENT "Manually updating translations files"
     COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lupdate
-        ARGS "${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc" src
-	     -ts ${TRANSLATIONS_TS_FILES}
+        ARGS
+            ${SOURCES}
+            src
+        -ts ${TRANSLATIONS_TS_FILES}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 # add a custom target to generate the .qm files via qt6_add_lrelease().
 # force the .qm generation step to depend on the .ts generation step.
@@ -236,6 +663,155 @@ else()
     )
 endif()
 
+qt_add_qml_module( ${PROJECT_NAME}
+    URI ${PROJECT_NAME}
+    VERSION 1.0
+    RESOURCE_PREFIX /
+    QML_FILES Main.qml
+)
+
+qt_add_qml_module(VenusQMLModule
+    URI Victron.VenusOS
+    VERSION 2.0
+    STATIC
+    OUTPUT_DIRECTORY Victron/VenusOS
+    QML_FILES ${VENUS_QML_MODULE_SOURCES}
+)
+
+qt_add_qml_module(Gauges
+    URI Victron.Gauges
+    STATIC
+    OUTPUT_DIRECTORY Victron/Gauges
+    QML_FILES ${Gauges_MODULE_SOURCES}
+)
+
+qt_add_qml_module(Units
+    URI Victron.Units
+    STATIC
+    OUTPUT_DIRECTORY Victron/Units
+    QML_FILES ${Units_MODULE_SOURCES}
+)
+
+qt_add_qml_module(Utils
+    URI Victron.Utils
+    STATIC
+    OUTPUT_DIRECTORY Victron/Utils
+    QML_FILES ${Utils_MODULE_SOURCES}
+)
+
+qt_add_qml_module(Dbus
+    URI Victron.Dbus
+    STATIC
+    OUTPUT_DIRECTORY Victron/Dbus
+    QML_FILES ${Dbus_MODULE_SOURCES}
+)
+
+qt_add_qml_module(Mock
+    URI Victron.Mock
+    STATIC
+    OUTPUT_DIRECTORY Victron/Mock
+    QML_FILES ${Mock_MODULE_SOURCES}
+)
+
+qt_add_qml_module(Mqtt
+    URI Victron.Mqtt
+    STATIC
+    OUTPUT_DIRECTORY Victron/Mqtt
+    QML_FILES ${Mqtt_MODULE_SOURCES}
+)
+
+qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
+    BIG_RESOURCES
+    FILES
+        fonts/MuseoSans-500.otf
+        images/acloads.svg
+        images/alternator.svg
+        images/battery.svg
+        images/battery_charging.svg
+        images/battery_discharging.svg
+        images/blackWater.svg
+        images/brief.svg
+        images/cloud.svg
+        images/consumption.svg
+        images/dcloads.svg
+        images/dropdown.svg
+        images/electron.svg
+        images/ess.svg
+        images/freshWater.svg
+        images/freshWater20x27.svg
+        images/fuel.svg
+        images/fueltank.svg
+        images/gauge_intro_5_matte_black.gif
+        images/gauge_intro_5_matte_white.gif
+        images/gauge_intro_7_matte_black.gif
+        images/gauge_intro_7_matte_white.gif
+        images/generator.svg
+        images/grid.svg
+        images/icon_simlocked_32.svg
+        images/icon_alarm_48.svg
+        images/icon_alarm_snooze_24
+        images/icon_autostart_24.svg
+        images/icon_back_32.svg
+        images/icon_charging_station_24.svg
+        images/icon_checkmark_32.svg
+        images/icon_checkmark_48.svg
+        images/icon_controls_off_32.svg
+        images/icon_controls_on_32.svg
+        images/icon_humidity_32.svg
+        images/icon_hydraulic_oil_32.svg
+        images/icon_input_24.svg
+        images/icon_lng_32.svg
+        images/icon_lpg_32.svg
+        images/icon_manualstart_24.svg
+        images/icon_manualstart_timer_24.svg
+        images/icon_minus.svg
+        images/icon_plus.svg
+        images/icon_raw_water_32.svg
+        images/icon_refresh_32.svg
+        images/icon_sidepanel_off_32.svg
+        images/icon_sidepanel_on_32.svg
+        images/icon_temp_32.svg
+        images/information.svg
+        images/inverter.svg
+        images/inverter_charger.svg
+        images/levels.svg
+        images/liveWell.svg
+        images/notifications.svg
+        images/oil.svg
+        images/overview.svg
+        images/rain.svg
+        images/scatteredcloud.svg
+        images/settings.png
+        images/settings.svg
+        images/shore.svg
+        images/solaryield.svg
+        images/splash-logo-icon-5inch.svg
+        images/splash-logo-icon-7inch.svg
+        images/splash-logo-text-5inch.svg
+        images/splash-logo-text-7inch.svg
+        images/sunny.svg
+        images/switch_indicator.png
+        images/switches.svg
+        images/tank.svg
+        images/toast_icon_alarm.svg
+        images/toast_icon_checkmark.svg
+        images/toast_icon_close.svg
+        images/toast_icon_info.svg
+        images/wasteWater.svg
+        images/widget_connector_nub_horizontal.svg
+        images/widget_connector_nub_vertical.svg
+        images/wind.svg
+        themes/animation/Animation.json
+        themes/color/ColorDesign.json
+        themes/color/Dark.json
+        themes/color/Light.json
+        themes/geometry/FiveInch.json
+        themes/geometry/SevenInch.json
+        themes/typography/FiveInch.json
+        themes/typography/SevenInch.json
+        themes/typography/TypographyDesign.json
+)
+
 add_dependencies(${PROJECT_NAME} ${TRANSLATIONS_QM_TARGET})
 qt_add_resources(${PROJECT_NAME} "i18n"
     PREFIX "/i18n"
@@ -243,7 +819,7 @@ qt_add_resources(${PROJECT_NAME} "i18n"
     FILES ${TRANSLATIONS_QM_FILES})
 
 set_source_files_properties(
-    ${VENUS_SOURCES}
+    ${VENUS_CPP_SOURCES}
     PROPERTIES
     COMPILE_OPTIONS "${venusCompileFlags}"
 )
@@ -251,32 +827,31 @@ set_source_files_properties(
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    Qt6::Core
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Svg
+    Qt6::Xml
+    Qt6::Mqtt
+    VenusQMLModuleplugin
+    Gaugesplugin
+    Unitsplugin
+    Utilsplugin
+    Dbusplugin
+    Mockplugin
+    Mqttplugin
+)
+
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        Qt6::Core
-        Qt6::Qml
-        Qt6::Quick
-        Qt6::Svg
-        Qt6::Xml
-        Qt6::Mqtt
         Qt6::WebSockets
     )
 else()
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        Qt6::Core
-        Qt6::Qml
-        Qt6::Quick
-        Qt6::Svg
-        Qt6::Xml
         Qt6::DBus
-        Qt6::Mqtt
     )
 endif()
-
-qt_add_qml_module(${PROJECT_NAME}
-    URI Victron.VenusOS
-    VERSION 2.0
-)
 
 # see if the dependency graph is correct, for translations support...
 add_custom_target(graphviz

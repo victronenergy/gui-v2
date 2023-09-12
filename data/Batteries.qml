@@ -5,8 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
-import "common"
+import Victron.Utils
 
 QtObject {
 	id: root

@@ -65,16 +65,17 @@ OverviewWidget {
 
 	MouseArea {
 		anchors.fill: parent
+
 		onClicked: {
 			const singleDeviceOnly = (Global.solarChargers.model.count + Global.pvInverters.model.count) === 1
 			if (singleDeviceOnly && Global.solarChargers.model.count === 1) {
-				Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml",
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/solar/SolarChargerPage.qml",
 						{ "solarCharger": Global.solarChargers.model.deviceAt(0) })
 			} else if (singleDeviceOnly && Global.pvInverters.model === 1) {
-				Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/solar/PvInverterPage.qml",
 						{ "pvInverter": Global.pvInverters.model.deviceAt(0) })
 			} else {
-				Global.pageManager.pushPage("/pages/solar/SolarDeviceListPage.qml", { "title": root.title })
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/solar/SolarDeviceListPage.qml", { "title": root.title })
 			}
 		}
 	}

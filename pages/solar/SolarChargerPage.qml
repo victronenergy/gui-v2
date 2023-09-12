@@ -150,7 +150,7 @@ Page {
 						 || root.solarCharger.errorModel.count
 
 				onClicked: {
-					Global.pageManager.pushPage("/pages/solar/SolarChargerAlarmsAndErrorsPage.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/solar/SolarChargerAlarmsAndErrorsPage.qml",
 							{ "title": text, "solarCharger": root.solarCharger })
 				}
 
@@ -170,7 +170,7 @@ Page {
 					//: Solar charger historic data information. %1 = charger name
 					//% "%1 History"
 					const title = qsTrId("charger_history_name").arg(root.solarCharger.name)
-					Global.pageManager.pushPage("/pages/solar/SolarChargerHistoryPage.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/solar/SolarChargerHistoryPage.qml",
 							{ "title": title, "solarCharger": root.solarCharger })
 				}
 			}
@@ -179,7 +179,7 @@ Page {
 				//% "Networked operation"
 				text: qsTrId("charger_networked_operation")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/solar/SolarChargerNetworkedOperationPage.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/solar/SolarChargerNetworkedOperationPage.qml",
 							{ "title": text, "solarCharger": root.solarCharger })
 				}
 			}
@@ -187,7 +187,7 @@ Page {
 			ListNavigationItem {
 				text: CommonWords.device_info_title
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageDeviceInfo.qml",
 							{ "title": text, "bindPrefix": root.solarCharger.serviceUid })
 				}
 			}

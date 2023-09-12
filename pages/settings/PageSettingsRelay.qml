@@ -109,7 +109,7 @@ Page {
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Temperature
 					|| relay1Function.currentValue === VenusOS.Relay_Function_Temperature
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRelayTempSensors.qml", { title: text })
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsRelayTempSensors.qml", { title: text })
 				}
 			}
 		}

@@ -57,7 +57,7 @@ Page {
 				//% "Available services"
 				text: qsTrId("settings_modbus_available_services")
 				visible: enableModbusTcp.checked
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcpServices.qml", { title: text })
+				onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsModbusTcpServices.qml", { title: text })
 			}
 		}
 	}
