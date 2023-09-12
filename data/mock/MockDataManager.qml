@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "config"
+import Victron.Mock
 
 QtObject {
 	id: root

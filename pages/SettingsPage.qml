@@ -27,84 +27,84 @@ Page {
 			{
 				//% "Device List"
 				text: qsTrId("settings_device_list"),
-				page: "/pages/settings/devicelist/DeviceListPage.qml",
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/DeviceListPage.qml",
 			},
 			{
 				//% "General"
 				text: qsTrId("settings_general"),
-				page: "/pages/settings/PageSettingsGeneral.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsGeneral.qml"
 			},
 			{
 				//% "Firmware"
 				text: qsTrId("settings_firmware"),
-				page: "/pages/settings/PageSettingsFirmware.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsFirmware.qml"
 			},
 			{
 				//% "Date & Time"
 				text: qsTrId("settings_date_and_time"),
-				page: "/pages/settings/PageTzInfo.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageTzInfo.qml"
 			},
 			{
 				//% "Remote Console"
 				text: qsTrId("settings_remote_console"),
-				page: "/pages/settings/PageSettingsRemoteConsole.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsRemoteConsole.qml"
 			},
 			{
 				//% "System setup"
 				text: qsTrId("settings_system_setup"),
-				page: "/pages/settings/PageSettingsSystem.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsSystem.qml"
 			},
 			{
 				//% "DVCC"
 				text: qsTrId("settings_system_dvcc"),
-				page: "/pages/settings/PageSettingsDvcc.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsDvcc.qml"
 			},
 			{
 				//% "Display & Language"
 				text: qsTrId("settings_display_and_language"),
-				page: "/pages/settings/PageSettingsDisplay.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsDisplay.qml"
 			},
 			{
 				//% "VRM online portal"
 				text: qsTrId("settings_vrm_online_portal"),
-				page: "/pages/settings/PageSettingsLogger.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsLogger.qml"
 			},
 			{
 				//% "ESS"
 				text: systemType.value === "Hub-4" ? systemType.value : qsTrId("settings_ess"),
-				page: "/pages/settings/PageSettingsHub4.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsHub4.qml"
 			},
 			{
 				//% "Energy meters"
 				text: qsTrId("settings_energy_meters"),
-				page: "/pages/settings/PageSettingsCGwacsOverview.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsCGwacsOverview.qml"
 			},
 			{
 				//% "PV inverters"
 				text: qsTrId("settings_pv_inverters"),
-				page: "/pages/settings/PageSettingsFronius.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsFronius.qml"
 			},
 			{
 				//% "Ethernet"
 				text: qsTrId("settings_ethernet"),
-				page: "/pages/settings/PageSettingsTcpIp.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsTcpIp.qml"
 			},
 			{
 				//% "Wi-Fi"
 				text: qsTrId("settings_wifi"),
 				page: accessPoint.valid
-					? "/pages/settings/PageSettingsWifiWithAccessPoint.qml"
-					: "/pages/settings/PageSettingsWifi.qml"
+					? "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsWifiWithAccessPoint.qml"
+					: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsWifi.qml"
 			},
 			{
 				//% "GSM modem"
 				text: qsTrId("settings_gsm_modem"),
-				page: "/pages/settings/PageSettingsGsm.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsGsm.qml"
 			},
 			{
 				//% "GPS"
 				text: qsTrId("settings_gps"),
-				page: "/pages/settings/PageSettingsGpsList.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsGpsList.qml"
 			},
 			{
 				//% "Bluetooth"
@@ -115,42 +115,42 @@ Page {
 			{
 				//% "Generator start/stop"
 				text: qsTrId("settings_generator_start_stop"),
-				page: "/pages/settings/PageRelayGenerator.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageRelayGenerator.qml"
 			},
 			{
 				//% "Tank pump"
 				text: qsTrId("settings_tank_pump"),
-				page: "/pages/settings/PageSettingsTankPump.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsTankPump.qml"
 			},
 			{
 				text: CommonWords.relay,
-				page: "/pages/settings/PageSettingsRelay.qml",
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsRelay.qml",
 				visible: relay0.valid
 			},
 			{
 				//% "Services"
 				text: qsTrId("settings_services"),
-				page: "/pages/settings/PageSettingsServices.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsServices.qml"
 			},
 			{
 				//% "I/O"
 				text: qsTrId("settings_io"),
-				page: "/pages/settings/PageSettingsIo.qml"
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsIo.qml"
 			},
 			{
 				//% "Venus OS Large features"
 				text: qsTrId("settings_venus_os_large_features"),
-				page: "/pages/settings/PageSettingsLarge.qml",
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsLarge.qml",
 				visible: signalK.valid || nodeRed.valid
 			},
 			{
 				//% "VRM Device Instances"
 				text: qsTrId("settings_vrm_device_instances"),
-				page: "/pages/settings/PageVrmDeviceInstances.qml",
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageVrmDeviceInstances.qml",
 			},
 			{
 				text: "Debug",
-				page: "/pages/settings/debug/PageDebug.qml",
+				page: "qrc:/qt/qml/Victron/VenusOS/pages/settings/debug/PageDebug.qml",
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			},
 		]

@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root
@@ -34,7 +34,7 @@ Page {
 
 			text: getDescription(customNameItem.value, modelData)
 			secondaryText: getMenuName(serviceType.value, l2ServiceType.value)
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacs.qml", { title: text, devicePath: devicePath })
+			onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsCGwacs.qml", { title: text, devicePath: devicePath })
 
 			DataPoint {
 				id: customNameItem

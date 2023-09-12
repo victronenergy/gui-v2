@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import "../common"
 
 Item {
 	id: root

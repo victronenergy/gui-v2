@@ -267,7 +267,7 @@ Page {
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Feedin.qml",
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsHub4Feedin.qml",
 					{ title: text, hub4Mode: Qt.binding(function() { return essMode.value }) })
 			}
 		}
@@ -305,7 +305,7 @@ Page {
 				&& Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
 
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageHub4Debug.qml")
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageHub4Debug.qml")
 			}
 		}
 	}

@@ -5,8 +5,9 @@
 
 import QtQuick
 import Victron.VenusOS
-
-import "mock" as MockData
+import Victron.Dbus
+import Victron.Mqtt
+import Victron.Mock
 
 Item {
 	id: root
@@ -53,15 +54,15 @@ Item {
 		switch (BackendConnection.type) {
 		case BackendConnection.DBusSource:
 			console.warn("Loading D-Bus data backend...")
-			dataManagerLoader.source = "qrc:/data/dbus/DBusDataManager.qml"
+			dataManagerLoader.source = "qrc:/qt/qml/Victron/Dbus/data/dbus/DBusDataManager.qml"
 			break
 		case BackendConnection.MqttSource:
 			console.warn("Loading MQTT data backend...")
-			dataManagerLoader.source = "qrc:/data/mqtt/MqttDataManager.qml"
+			dataManagerLoader.source = "qrc:/qt/qml/Victron/Mqtt/data/mqtt/MqttDataManager.qml"
 			break
 		case BackendConnection.MockSource:
 			console.warn("Loading mock data backend...")
-			dataManagerLoader.source = "qrc:/data/mock/MockDataManager.qml"
+			dataManagerLoader.source = "qrc:/qt/qml/Victron/Mock/data/mock/MockDataManager.qml"
 			break
 		default:
 			console.warn("Unsupported data backend!", BackendConnection.type)

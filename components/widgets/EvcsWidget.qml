@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 OverviewWidget {
 	id: root
@@ -38,10 +38,10 @@ OverviewWidget {
 		anchors.fill: parent
 		onClicked: {
 			if (Global.evChargers.model.count === 1) {
-				Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml",
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/evcs/EvChargerPage.qml",
 						{ "evCharger": Global.evChargers.model.deviceAt(0) })
 			} else {
-				Global.pageManager.pushPage("/pages/evcs/EvChargerListPage.qml")
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/evcs/EvChargerListPage.qml")
 			}
 		}
 	}

@@ -35,7 +35,7 @@ Page {
 			enabled: subModel.rowCount > 0
 
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml",
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/debug/PageDebugVeQItems.qml",
 						{ title: text, bindPrefix: model.uid })
 			}
 

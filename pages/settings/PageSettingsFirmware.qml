@@ -31,7 +31,7 @@ Page {
 				//% "Online updates"
 				text: qsTrId("settings_online_updates")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
 				}
 			}
 
@@ -39,7 +39,7 @@ Page {
 				//% "Install firmware from SD/USB"
 				text: qsTrId("settings_install_firmware_from_sd_usb")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
 				}
 			}
 
@@ -47,7 +47,7 @@ Page {
 				//% "Stored backup firmware"
 				text: qsTrId("settings_stored_backup_firmware")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRootfsSelect.qml", { title: text })
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsRootfsSelect.qml", { title: text })
 				}
 			}
 		}

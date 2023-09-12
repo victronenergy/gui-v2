@@ -7,7 +7,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 import net.connman 0.1
-import "/components/Utils.js" as Utils
+import Victron.Utils
 
 Page {
 	id: root
@@ -114,7 +114,7 @@ Page {
 				text: qsTrId("settings_io_bt_sensors")
 				visible: Connman.technologyList.indexOf("bluetooth") !== -1
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
+					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsBleSensors.qml", {"title": text})
 				}
 			}
 		}
