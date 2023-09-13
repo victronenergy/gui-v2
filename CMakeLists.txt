@@ -58,7 +58,27 @@ set_source_files_properties( ${VENUS_QML_SINGLETONS} PROPERTIES QT_QML_SINGLETON
 
 set (VENUS_QML_FILES
     ${VENUS_QML_SINGLETONS}
+
+    data/common/AcInput.qml
+    data/common/AcInputServiceLoader.qml
+    data/common/AcInputSettings.qml
+    data/common/Battery.qml
+    data/common/DcInput.qml
     data/common/DeviceModel.qml
+    data/common/EnvironmentInput.qml
+    data/common/EssData.qml
+    data/common/EvCharger.qml
+    data/common/Generator.qml
+    data/common/Inverter.qml
+    data/common/PvInverter.qml
+    data/common/PvMonitor.qml
+    data/common/Relay.qml
+    data/common/SolarCharger.qml
+    data/common/SolarDailyHistory.qml
+    data/common/SolarHistoryErrorModel.qml
+    data/common/SystemBattery.qml
+    data/common/SystemData.qml
+    data/common/Tank.qml
 )
 
 set(CONNMAN_SOURCES_MOCK

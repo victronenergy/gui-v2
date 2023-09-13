@@ -4,7 +4,6 @@
 
 import QtQuick
 import Victron.Veutil
-import "../common"
 
 QtObject {
 	property Instantiator batteryObjects: Instantiator {

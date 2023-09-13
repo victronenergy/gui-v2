@@ -155,25 +155,6 @@
         <file>data/SystemSettings.qml</file>
         <file>data/Tanks.qml</file>
         <file>data/VenusPlatform.qml</file>
-        <file>data/common/AcInput.qml</file>
-        <file>data/common/AcInputSettings.qml</file>
-        <file>data/common/AcInputServiceLoader.qml</file>
-        <file>data/common/Battery.qml</file>
-        <file>data/common/DcInput.qml</file>
-        <file>data/common/EnvironmentInput.qml</file>
-        <file>data/common/EssData.qml</file>
-        <file>data/common/EvCharger.qml</file>
-        <file>data/common/Generator.qml</file>
-        <file>data/common/Inverter.qml</file>
-        <file>data/common/PvInverter.qml</file>
-        <file>data/common/PvMonitor.qml</file>
-        <file>data/common/Relay.qml</file>
-        <file>data/common/SolarCharger.qml</file>
-        <file>data/common/SolarDailyHistory.qml</file>
-        <file>data/common/SolarHistoryErrorModel.qml</file>
-        <file>data/common/SystemBattery.qml</file>
-        <file>data/common/SystemData.qml</file>
-        <file>data/common/Tank.qml</file>
         <file>data/dbus/AcInputsImpl.qml</file>
         <file>data/dbus/BatteriesImpl.qml</file>
         <file>data/dbus/DBusDataManager.qml</file>

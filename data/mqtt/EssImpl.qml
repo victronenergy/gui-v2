@@ -3,6 +3,5 @@
 */
 
 import QtQuick
-import "../common"
 
 EssData {}

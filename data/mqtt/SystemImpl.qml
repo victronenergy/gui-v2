@@ -3,7 +3,6 @@
 */
 
 import QtQuick
-import "../common"
 
 QtObject {
 	id: root
