@@ -197,6 +197,26 @@ set (VENUS_QML_FILES
     components/widgets/WidgetHeader.qml
     components/widgets/WindWidget.qml
 
+    data/AcInputs.qml
+    data/Batteries.qml
+    data/DataManager.qml
+    data/DcInputs.qml
+    data/EnvironmentInputs.qml
+    data/Ess.qml
+    data/EvChargers.qml
+    data/Generators.qml
+    data/Inverters.qml
+    data/Notifications.qml
+    data/PvInverters.qml
+    data/Relays.qml
+    data/SolarChargers.qml
+    data/System.qml
+    data/SystemAc.qml
+    data/SystemDc.qml
+    data/SystemSettings.qml
+    data/Tanks.qml
+    data/VenusPlatform.qml
+
     data/common/AcInput.qml
     data/common/AcInputServiceLoader.qml
     data/common/AcInputSettings.qml
