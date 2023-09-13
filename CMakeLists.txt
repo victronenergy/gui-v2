@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
+cmake_policy(SET CMP0071 NEW) # ignore GENERATED source files in AUTOMOC and AUTOUIC.
 cmake_policy(SET CMP0079 NEW)
 
 project(venus-gui-v2 LANGUAGES CXX VERSION 0.01.13)
@@ -42,8 +43,7 @@ else()
 endif()
 
 ################ policies
-# These have to go after find_package(Qt6 COMPONENTS Core), and before qt_add_qml_module(... QML_FILES ${VENUS_QML_FILES})
-cmake_policy(SET CMP0071 OLD)
+# This has to go after find_package(Qt6 COMPONENTS Core), and before qt_add_qml_module(... QML_FILES ${VENUS_QML_FILES})
 qt_policy(SET QTP0001 NEW) # Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
 ################ end policies
 
@@ -248,6 +248,12 @@ else()
     )
 endif()
 
+qt_add_qml_module(${PROJECT_NAME}
+    URI Victron.VenusOS
+    VERSION 2.0
+    QML_FILES ${VENUS_QML_FILES}
+)
+
 add_dependencies(${PROJECT_NAME} ${TRANSLATIONS_QM_TARGET})
 qt_add_resources(${PROJECT_NAME} "i18n"
     PREFIX "/i18n"
@@ -284,12 +290,6 @@ else()
         Qt6::Mqtt
     )
 endif()
-
-qt_add_qml_module(${PROJECT_NAME}
-    URI Victron.VenusOS
-    VERSION 2.0
-    QML_FILES ${VENUS_QML_FILES}
-)
 
 # see if the dependency graph is correct, for translations support...
 add_custom_target(graphviz
