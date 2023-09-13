@@ -1,7 +1,6 @@
 <RCC> <qresource prefix="/">
         <file>main.qml</file>
         <file>ApplicationContent.qml</file>
-        <file>Global.qml</file>
         <file>FrameRateVisualizer.qml</file>
         <file>components/ActionButton.qml</file>
         <file>components/Arc.qml</file>
@@ -11,7 +10,6 @@
         <file>components/ButtonControlValue.qml</file>
         <file>components/CircularMultiGauge.qml</file>
         <file>components/CircularSingleGauge.qml</file>
-        <file>components/CommonWords.qml</file>
         <file>components/ControlCard.qml</file>
         <file>components/ControlValue.qml</file>
         <file>components/DataPoint.qml</file>
@@ -68,7 +66,6 @@
         <file>components/Units.js</file>
         <file>components/Utils.js</file>
         <file>components/ValueRange.qml</file>
-        <file>components/VenusFont.qml</file>
         <file>components/VerticalGauge.qml</file>
         <file>components/ViewGradient.qml</file>
         <file>components/ClassAndVrmInstance.qml</file>

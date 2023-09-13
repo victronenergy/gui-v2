@@ -27,24 +27,19 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
     add_compile_definitions(MQTT_WEBSOCKETS_ENABLED)
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets REQUIRED)
+    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets REQUIRED)
 else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt)
-    if (NOT ${Qt6_FOUND})
-        # cmake can't automatically find Qt 6.2 on Ubuntu Linux, give it a hint:
-        if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-            list(APPEND CMAKE_PREFIX_PATH "/opt/Qt/6.2.0/gcc_64/lib/cmake/")
-        endif()
-        find_package(Qt6 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools REQUIRED)
-    endif()
+    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
 endif()
 
 ################ policies
-# This has to go after find_package(Qt6 COMPONENTS Core), and before qt_add_qml_module(... QML_FILES ${VENUS_QML_FILES})
-qt_policy(SET QTP0001 NEW) # Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
+# This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_FILES})'
+if(QT_KNOWN_POLICY_QTP0001)
+    qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
+endif()
 ################ end policies
 
 qt_add_resources(QML_RESOURCES
@@ -54,6 +49,9 @@ qt_add_resources(QML_RESOURCES
 include_directories(src/veutil/inc src .)
 
 set (VENUS_QML_SINGLETONS # All qml singletons have to be added here
+    components/CommonWords.qml
+    components/VenusFont.qml
+    Global.qml
 )
 
 set_source_files_properties( ${VENUS_QML_SINGLETONS} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )

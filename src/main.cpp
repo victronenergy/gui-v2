@@ -251,12 +251,7 @@ void registerQmlTypes()
 	qmlRegisterSingletonType<Victron::VenusOS::Enums>(
 		"Victron.VenusOS", 2, 0, "VenusOS",
 		&Victron::VenusOS::Enums::instance);
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/VenusFont.qml")),
-		"Victron.VenusOS", 2, 0, "VenusFont");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/components/CommonWords.qml")),
-		"Victron.VenusOS", 2, 0, "CommonWords");
-	qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/Global.qml")),
-		"Victron.VenusOS", 2, 0, "Global");
+
 	qmlRegisterSingletonType<Victron::VenusOS::ActiveNotificationsModel>(
 		"Victron.VenusOS", 2, 0, "ActiveNotificationsModel",
 		[](QQmlEngine *, QJSEngine *) -> QObject * {
