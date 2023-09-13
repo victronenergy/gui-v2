@@ -4,7 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import DbusTypes
+import Dbus
 import Mqtt
 import Mock
 

@@ -453,10 +453,10 @@ qt_add_qml_module(Utils
     QML_FILES components/Utils.js
 )
 
-qt_add_library(DbusTypes STATIC)
-qt_add_qml_module(DbusTypes
-    URI DbusTypes
-    OUTPUT_DIRECTORY DbusTypes
+qt_add_library(Dbus STATIC)
+qt_add_qml_module(Dbus
+    URI Dbus
+    OUTPUT_DIRECTORY Dbus
     QML_FILES
         data/dbus/AcInputsImpl.qml
         data/dbus/BatteriesImpl.qml
@@ -558,7 +558,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
         Gaugesplugin
         Unitsplugin
         Utilsplugin
-        DbusTypesplugin
+        Dbusplugin
         Mockplugin
         Mqttplugin
     )
@@ -575,7 +575,7 @@ else()
         Gaugesplugin
         Unitsplugin
         Utilsplugin
-        DbusTypesplugin
+        Dbusplugin
         Mockplugin
         Mqttplugin
     )
