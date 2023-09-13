@@ -278,58 +278,6 @@ void registerQmlTypes()
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DataManager.qml")),
 		"Victron.VenusOS", 2, 0, "DataManager");
 
-	/* settings */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/CGwacsBatteryScheduleNavigationItem.qml")),
-		"Victron.VenusOS", 2, 0, "CGwacsBatteryScheduleNavigationItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/FirmwareCheckListButton.qml")),
-		"Victron.VenusOS", 2, 0, "FirmwareCheckListButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListDvccSwitch.qml")),
-		"Victron.VenusOS", 2, 0, "ListDvccSwitch");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/MountStateListButton.qml")),
-		"Victron.VenusOS", 2, 0, "MountStateListButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsSlider.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsSlider");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/TemperatureRelayNavigationItem.qml")),
-		"Victron.VenusOS", 2, 0, "TemperatureRelayNavigationItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/TemperatureRelaySettings.qml")),
-		"Victron.VenusOS", 2, 0, "TemperatureRelaySettings");
-
-	/* widgets */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/OverviewWidget.qml")),
-		"Victron.VenusOS", 2, 0, "OverviewWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AlternatorWidget.qml")),
-		"Victron.VenusOS", 2, 0, "AlternatorWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AcGeneratorWidget.qml")),
-		"Victron.VenusOS", 2, 0, "AcGeneratorWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/DcGeneratorWidget.qml")),
-		"Victron.VenusOS", 2, 0, "DcGeneratorWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/GridWidget.qml")),
-		"Victron.VenusOS", 2, 0, "GridWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/ShoreWidget.qml")),
-		"Victron.VenusOS", 2, 0, "ShoreWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/SolarYieldWidget.qml")),
-		"Victron.VenusOS", 2, 0, "SolarYieldWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WindWidget.qml")),
-		"Victron.VenusOS", 2, 0, "WindWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/InverterWidget.qml")),
-		"Victron.VenusOS", 2, 0, "InverterWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/BatteryWidget.qml")),
-		"Victron.VenusOS", 2, 0, "BatteryWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AcLoadsWidget.qml")),
-		"Victron.VenusOS", 2, 0, "AcLoadsWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/DcLoadsWidget.qml")),
-		"Victron.VenusOS", 2, 0, "DcLoadsWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnector.qml")),
-		"Victron.VenusOS", 2, 0, "WidgetConnector");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorAnchor.qml")),
-		"Victron.VenusOS", 2, 0, "WidgetConnectorAnchor");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorPath.qml")),
-		"Victron.VenusOS", 2, 0, "WidgetConnectorPath");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetHeader.qml")),
-		"Victron.VenusOS", 2, 0, "WidgetHeader");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/EvcsWidget.qml")),
-		"Victron.VenusOS", 2, 0, "EvcsWidget");
-
 	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/ESSCard.qml")),
 		"Victron.VenusOS", 2, 0, "ESSCard");

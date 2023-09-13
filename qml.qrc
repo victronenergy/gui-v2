@@ -1,31 +1,5 @@
 <RCC> <qresource prefix="/">
         <file>main.qml</file>
-        <file>components/settings/CGwacsBatteryScheduleNavigationItem.qml</file>
-        <file>components/settings/FirmwareCheckListButton.qml</file>
-        <file>components/settings/ListDvccSwitch.qml</file>
-        <file>components/settings/MountStateListButton.qml</file>
-        <file>components/settings/SettingsSlider.qml</file>
-        <file>components/settings/TemperatureRelayNavigationItem.qml</file>
-        <file>components/settings/TemperatureRelaySettings.qml</file>
-        <file>components/widgets/AcGeneratorWidget.qml</file>
-        <file>components/widgets/AcInputWidget.qml</file>
-        <file>components/widgets/AcLoadsWidget.qml</file>
-        <file>components/widgets/AlternatorWidget.qml</file>
-        <file>components/widgets/BatteryWidget.qml</file>
-        <file>components/widgets/DcGeneratorWidget.qml</file>
-        <file>components/widgets/DcInputWidget.qml</file>
-        <file>components/widgets/DcLoadsWidget.qml</file>
-        <file>components/widgets/EvcsWidget.qml</file>
-        <file>components/widgets/GridWidget.qml</file>
-        <file>components/widgets/InverterWidget.qml</file>
-        <file>components/widgets/OverviewWidget.qml</file>
-        <file>components/widgets/ShoreWidget.qml</file>
-        <file>components/widgets/SolarYieldWidget.qml</file>
-        <file>components/widgets/WidgetConnector.qml</file>
-        <file>components/widgets/WidgetConnectorAnchor.qml</file>
-        <file>components/widgets/WidgetConnectorPath.qml</file>
-        <file>components/widgets/WidgetHeader.qml</file>
-        <file>components/widgets/WindWidget.qml</file>
         <file>data/AcInputs.qml</file>
         <file>data/Batteries.qml</file>
         <file>data/DataManager.qml</file>

@@ -170,6 +170,33 @@ set (VENUS_QML_FILES
     components/listitems/ListTextItem.qml
     components/listitems/ListTimeSelector.qml
 
+    components/settings/FirmwareCheckListButton.qml
+    components/settings/ListDvccSwitch.qml
+    components/settings/MountStateListButton.qml
+    components/settings/SettingsSlider.qml
+    components/settings/TemperatureRelayNavigationItem.qml
+    components/settings/TemperatureRelaySettings.qml
+
+    components/widgets/AcGeneratorWidget.qml
+    components/widgets/AcInputWidget.qml
+    components/widgets/AcLoadsWidget.qml
+    components/widgets/AlternatorWidget.qml
+    components/widgets/BatteryWidget.qml
+    components/widgets/DcGeneratorWidget.qml
+    components/widgets/DcInputWidget.qml
+    components/widgets/DcLoadsWidget.qml
+    components/widgets/EvcsWidget.qml
+    components/widgets/GridWidget.qml
+    components/widgets/InverterWidget.qml
+    components/widgets/OverviewWidget.qml
+    components/widgets/ShoreWidget.qml
+    components/widgets/SolarYieldWidget.qml
+    components/widgets/WidgetConnector.qml
+    components/widgets/WidgetConnectorAnchor.qml
+    components/widgets/WidgetConnectorPath.qml
+    components/widgets/WidgetHeader.qml
+    components/widgets/WindWidget.qml
+
     data/common/AcInput.qml
     data/common/AcInputServiceLoader.qml
     data/common/AcInputSettings.qml
