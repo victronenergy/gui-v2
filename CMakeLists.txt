@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-cmake_policy(SET CMP0071 NEW) # ignore GENERATED source files in AUTOMOC and AUTOUIC.
+cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
 
 project(venus-gui-v2 LANGUAGES CXX VERSION 0.01.13)
@@ -27,7 +27,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
     add_compile_definitions(MQTT_WEBSOCKETS_ENABLED)
-    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets REQUIRED)
+    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
 else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -246,7 +246,9 @@ else()
     )
 endif()
 
-qt_add_qml_module(${PROJECT_NAME}
+qt_add_library(VenusQMLModule STATIC)
+
+qt_add_qml_module(VenusQMLModule
     URI Victron.VenusOS
     VERSION 2.0
     QML_FILES ${VENUS_QML_FILES}
@@ -286,6 +288,7 @@ else()
         Qt6::Xml
         Qt6::DBus
         Qt6::Mqtt
+        VenusQMLModuleplugin
     )
 endif()
 
