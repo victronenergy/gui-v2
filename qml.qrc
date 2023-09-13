@@ -1,35 +1,5 @@
 <RCC> <qresource prefix="/">
         <file>main.qml</file>
-        <file>components/controls/TextField.qml</file>
-        <file>components/dialogs/DateSelectorDialog.qml</file>
-        <file>components/dialogs/DialogShadow.qml</file>
-        <file>components/dialogs/VrmInstanceSwapDialog.qml</file>
-        <file>components/dialogs/ESSMinimumSOCDialog.qml</file>
-        <file>components/dialogs/GeneratorDurationSelectorDialog.qml</file>
-        <file>components/dialogs/InverterChargerModeDialog.qml</file>
-        <file>components/dialogs/ModalDialog.qml</file>
-        <file>components/dialogs/ModalWarningDialog.qml</file>
-        <file>components/dialogs/NumberSelectorDialog.qml</file>
-        <file>components/dialogs/SolarDailyHistoryDialog.qml</file>
-        <file>components/dialogs/TimeSelectorDialog.qml</file>
-        <file>components/listitems/ListButton.qml</file>
-        <file>components/listitems/ListDateSelector.qml</file>
-        <file>components/listitems/ListIpAddressField.qml</file>
-        <file>components/listitems/ListItem.qml</file>
-        <file>components/listitems/ListItemBackground.qml</file>
-        <file>components/listitems/ListLabel.qml</file>
-        <file>components/listitems/ListNavigationItem.qml</file>
-        <file>components/listitems/ListPortField.qml</file>
-        <file>components/listitems/ListRadioButton.qml</file>
-        <file>components/listitems/ListRadioButtonGroup.qml</file>
-        <file>components/listitems/ListQuantityGroup.qml</file>
-        <file>components/listitems/ListSlider.qml</file>
-        <file>components/listitems/ListSpinBox.qml</file>
-        <file>components/listitems/ListSwitch.qml</file>
-        <file>components/listitems/ListTextField.qml</file>
-        <file>components/listitems/ListTextGroup.qml</file>
-        <file>components/listitems/ListTextItem.qml</file>
-        <file>components/listitems/ListTimeSelector.qml</file>
         <file>components/settings/CGwacsBatteryScheduleNavigationItem.qml</file>
         <file>components/settings/FirmwareCheckListButton.qml</file>
         <file>components/settings/ListDvccSwitch.qml</file>

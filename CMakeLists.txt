@@ -139,6 +139,37 @@ set (VENUS_QML_FILES
     components/controls/Switch.qml
     components/controls/TextField.qml
 
+    components/dialogs/DateSelectorDialog.qml
+    components/dialogs/DialogShadow.qml
+    components/dialogs/VrmInstanceSwapDialog.qml
+    components/dialogs/ESSMinimumSOCDialog.qml
+    components/dialogs/GeneratorDurationSelectorDialog.qml
+    components/dialogs/InverterChargerModeDialog.qml
+    components/dialogs/ModalDialog.qml
+    components/dialogs/ModalWarningDialog.qml
+    components/dialogs/NumberSelectorDialog.qml
+    components/dialogs/SolarDailyHistoryDialog.qml
+    components/dialogs/TimeSelectorDialog.qml
+
+    components/listitems/ListButton.qml
+    components/listitems/ListDateSelector.qml
+    components/listitems/ListIpAddressField.qml
+    components/listitems/ListItem.qml
+    components/listitems/ListItemBackground.qml
+    components/listitems/ListLabel.qml
+    components/listitems/ListNavigationItem.qml
+    components/listitems/ListPortField.qml
+    components/listitems/ListRadioButton.qml
+    components/listitems/ListRadioButtonGroup.qml
+    components/listitems/ListQuantityGroup.qml
+    components/listitems/ListSlider.qml
+    components/listitems/ListSpinBox.qml
+    components/listitems/ListSwitch.qml
+    components/listitems/ListTextField.qml
+    components/listitems/ListTextGroup.qml
+    components/listitems/ListTextItem.qml
+    components/listitems/ListTimeSelector.qml
+
     data/common/AcInput.qml
     data/common/AcInputServiceLoader.qml
     data/common/AcInputSettings.qml

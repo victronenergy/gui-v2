@@ -278,44 +278,6 @@ void registerQmlTypes()
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DataManager.qml")),
 		"Victron.VenusOS", 2, 0, "DataManager");
 
-	/* list items */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListLabel.qml")),
-		"Victron.VenusOS", 2, 0, "ListLabel");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListButton.qml")),
-		"Victron.VenusOS", 2, 0, "ListButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListDateSelector.qml")),
-		"Victron.VenusOS", 2, 0, "ListDateSelector");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListItem.qml")),
-		"Victron.VenusOS", 2, 0, "ListItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListItemBackground.qml")),
-		"Victron.VenusOS", 2, 0, "ListItemBackground");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListTextItem.qml")),
-		"Victron.VenusOS", 2, 0, "ListTextItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListNavigationItem.qml")),
-		"Victron.VenusOS", 2, 0, "ListNavigationItem");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListPortField.qml")),
-		"Victron.VenusOS", 2, 0, "ListPortField");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListRadioButton.qml")),
-		"Victron.VenusOS", 2, 0, "ListRadioButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListRadioButtonGroup.qml")),
-		"Victron.VenusOS", 2, 0, "ListRadioButtonGroup");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListQuantityGroup.qml")),
-		"Victron.VenusOS", 2, 0, "ListQuantityGroup");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSlider.qml")),
-		"Victron.VenusOS", 2, 0, "ListSlider");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSpinBox.qml")),
-		"Victron.VenusOS", 2, 0, "ListSpinBox");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSwitch.qml")),
-		"Victron.VenusOS", 2, 0, "ListSwitch");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListTextField.qml")),
-		"Victron.VenusOS", 2, 0, "ListTextField");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListIpAddressField.qml")),
-		"Victron.VenusOS", 2, 0, "ListIpAddressField");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListTextGroup.qml")),
-		"Victron.VenusOS", 2, 0, "ListTextGroup");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListTimeSelector.qml")),
-		"Victron.VenusOS", 2, 0, "ListTimeSelector");
-
 	/* settings */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/CGwacsBatteryScheduleNavigationItem.qml")),
 		"Victron.VenusOS", 2, 0, "CGwacsBatteryScheduleNavigationItem");
@@ -377,34 +339,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "InverterCard");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/SwitchesCard.qml")),
 		"Victron.VenusOS", 2, 0, "SwitchesCard");
-
-	/* dialogs */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DateSelectorDialog.qml")),
-		"Victron.VenusOS", 2, 0, "DateSelectorDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DialogShadow.qml")),
-		"Victron.VenusOS", 2, 0, "DialogShadow");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DeviceInstanceSwapDialog.qml")),
-		"Victron.VenusOS", 2, 0, "DeviceInstanceSwapDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ESSMinimumSOCDialog.qml")),
-		"Victron.VenusOS", 2, 0, "ESSMinimumSOCDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorDisableAutostartDialog.qml")),
-		"Victron.VenusOS", 2, 0, "GeneratorDisableAutostartDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorDurationSelectorDialog.qml")),
-		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/InverterChargerModeDialog.qml")),
-		"Victron.VenusOS", 2, 0, "InverterChargerModeDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ModalDialog.qml")),
-		"Victron.VenusOS", 2, 0, "ModalDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ModalWarningDialog.qml")),
-		"Victron.VenusOS", 2, 0, "ModalWarningDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/NumberSelectorDialog.qml")),
-		"Victron.VenusOS", 2, 0, "NumberSelectorDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/SolarDailyHistoryDialog.qml")),
-		"Victron.VenusOS", 2, 0, "SolarDailyHistoryDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/TimeSelectorDialog.qml")),
-		"Victron.VenusOS", 2, 0, "TimeSelectorDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/VrmInstanceSwapDialog.qml")),
-		"Victron.VenusOS", 2, 0, "VrmInstanceSwapDialog");
 
 	/* pages */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/NotificationLayer.qml")),
