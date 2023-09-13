@@ -1,6 +1,6 @@
 import QtQuick
 import Victron.VenusOS
-import "/components/Units.js" as Units
+import Units
 
 Rectangle {
 	id: root

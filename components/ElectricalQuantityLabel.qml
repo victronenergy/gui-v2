@@ -4,7 +4,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Units.js" as Units
 
 QuantityLabel {
 	id: root

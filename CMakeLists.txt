@@ -127,6 +127,18 @@ set (VENUS_QML_FILES
     components/ClassAndVrmInstance.qml
     components/WeatherDetails.qml
 
+    components/controls/Button.qml
+    components/controls/ComboBox.qml
+    components/controls/Label.qml
+    components/controls/ListItemButton.qml
+    components/controls/ProgressBar.qml
+    components/controls/RadioButton.qml
+    components/controls/ScrollBar.qml
+    components/controls/Slider.qml
+    components/controls/SpinBox.qml
+    components/controls/Switch.qml
+    components/controls/TextField.qml
+
     data/common/AcInput.qml
     data/common/AcInputServiceLoader.qml
     data/common/AcInputSettings.qml

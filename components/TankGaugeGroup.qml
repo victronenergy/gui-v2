@@ -5,8 +5,8 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
-import "/components/Gauges.js" as Gauges
-import "/components/Units.js" as Units
+import Gauges
+import Units
 
 Rectangle {
 	id: root

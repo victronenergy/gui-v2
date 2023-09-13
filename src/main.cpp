@@ -274,41 +274,9 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "FrameRateModel",
 		&Victron::VenusOS::FrameRateModel::instance);
 
-	/* main content */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/ApplicationContent.qml")),
-		"Victron.VenusOS", 2, 0, "ApplicationContent");
-
 	/* data sources */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DataManager.qml")),
 		"Victron.VenusOS", 2, 0, "DataManager");
-
-	/* controls */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Button.qml")),
-		"Victron.VenusOS", 2, 0, "Button");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ComboBox.qml")),
-		"Victron.VenusOS", 2, 0, "ComboBox");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ListItemButton.qml")),
-		"Victron.VenusOS", 2, 0, "ListItemButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Label.qml")),
-		"Victron.VenusOS", 2, 0, "Label");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ProgressBar.qml")),
-		"Victron.VenusOS", 2, 0, "ProgressBar");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButton.qml")),
-		"Victron.VenusOS", 2, 0, "RadioButton");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButtonIndicator.qml")),
-		"Victron.VenusOS", 2, 0, "RadioButtonIndicator");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButtonLabel.qml")),
-		"Victron.VenusOS", 2, 0, "RadioButtonLabel");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ScrollBar.qml")),
-		"Victron.VenusOS", 2, 0, "ScrollBar");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Slider.qml")),
-		"Victron.VenusOS", 2, 0, "Slider");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/SpinBox.qml")),
-		"Victron.VenusOS", 2, 0, "SpinBox");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Switch.qml")),
-		"Victron.VenusOS", 2, 0, "Switch");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/TextField.qml")),
-		"Victron.VenusOS", 2, 0, "TextField");
 
 	/* list items */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListLabel.qml")),
@@ -389,8 +357,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "AcLoadsWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/DcLoadsWidget.qml")),
 		"Victron.VenusOS", 2, 0, "DcLoadsWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/VerticalGauge.qml")),
-		"Victron.VenusOS", 2, 0, "VerticalGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnector.qml")),
 		"Victron.VenusOS", 2, 0, "WidgetConnector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorAnchor.qml")),
