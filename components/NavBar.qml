@@ -29,31 +29,31 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 					//% "Brief"
 					text: qsTrId("nav_brief")
 					icon: "qrc:/images/brief.svg"
-					url: "qrc:/pages/BriefPage.qml"
+					url: "pages/BriefPage.qml"
 				}
 				ListElement {
 					//% "Overview"
 					text: qsTrId("nav_overview")
 					icon: "qrc:/images/overview.svg"
-					url: "qrc:/pages/OverviewPage.qml"
+					url: "pages/OverviewPage.qml"
 				}
 				ListElement {
 					//% "Levels"
 					text: qsTrId("nav_levels")
 					icon: "qrc:/images/levels.svg"
-					url: "qrc:/pages/LevelsPage.qml"
+					url: "pages/LevelsPage.qml"
 				}
 				ListElement {
 					//% "Notifications"
 					text: qsTrId("nav_notifications")
 					icon: "qrc:/images/notifications.svg"
-					url: "qrc:/pages/NotificationsPage.qml"
+					url: "pages/NotificationsPage.qml"
 				}
 				ListElement {
 					//% "Settings"
 					text: qsTrId("nav_settings")
 					icon: "qrc:/images/settings.png"
-					url: "qrc:/pages/SettingsPage.qml"
+					url: "pages/SettingsPage.qml"
 				}
 			}
 
@@ -88,7 +88,7 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 					height: width
 					radius: Theme.geometry.notificationsPage.delegate.marker.radius
 					color: Theme.color.critical
-					visible: model.url === "qrc:/pages/NotificationsPage.qml" && !!Global.notifications && Global.notifications.activeModel.hasNewNotifications
+					visible: model.url === "pages/NotificationsPage.qml" && !!Global.notifications && Global.notifications.activeModel.hasNewNotifications
 				}
 			}
 		}

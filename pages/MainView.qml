@@ -242,9 +242,26 @@ Item {
 		model: null
 
 		Loader {
+			function urlToComponent(url) {
+				switch (url) {
+				case "pages/BriefPage.qml":
+					return briefPage
+				case "pages/OverviewPage.qml":
+					return overviewPage
+				case "pages/LevelsPage.qml":
+					return levelsPage
+				case "pages/NotificationsPage.qml":
+					return notificationsPage
+				case "pages/SettingsPage.qml":
+					return settingsPage
+				default:
+					console.warn("MainView: cannot load unknown page", url)
+				}
+			}
+
 			y: root.height + 4 // avoid fractional scaling smearing a row of pixels into visible area
 			asynchronous: true
-			source: url
+			sourceComponent: urlToComponent(url)
 
 			onStatusChanged: {
 				if (status === Loader.Ready) {
@@ -256,11 +273,34 @@ Item {
 						Global.allPagesLoaded = true
 					}
 				} else if (status === Loader.Error) {
-					console.warn("Error preloading page: " + source.toString())
 				} else {
-					console.log("Preloading page: " + source.toString())
 				}
 			}
 		}
+	}
+	Component {
+		id: briefPage
+
+		BriefPage {}
+	}
+	Component {
+		id: overviewPage
+
+		OverviewPage {}
+	}
+	Component {
+		id: notificationsPage
+
+		NotificationsPage {}
+	}
+	Component {
+		id: levelsPage
+
+		LevelsPage {}
+	}
+	Component {
+		id: settingsPage
+
+		SettingsPage {}
 	}
 }

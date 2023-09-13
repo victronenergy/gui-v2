@@ -23,10 +23,10 @@ QtObject {
 	signal deactivateSingleAlarm()
 
 	readonly property var _configs: ({
-		"qrc:/pages/BriefPage.qml": briefAndOverviewConfig,
-		"qrc:/pages/OverviewPage.qml": briefAndOverviewConfig,
-		"qrc:/pages/LevelsPage.qml": levelsConfig,
-		"qrc:/pages/SettingsPage.qml": settingsConfig,
+		"pages/BriefPage.qml": briefAndOverviewConfig,
+		"pages/OverviewPage.qml": briefAndOverviewConfig,
+		"pages/LevelsPage.qml": levelsConfig,
+		"pages/SettingsPage.qml": settingsConfig,
 	})
 
 	function setConfigIndex(pageConfig, configIndex) {

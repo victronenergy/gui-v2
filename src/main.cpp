@@ -274,64 +274,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "FrameRateModel",
 		&Victron::VenusOS::FrameRateModel::instance);
 
-	/* control cards */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/ESSCard.qml")),
-		"Victron.VenusOS", 2, 0, "ESSCard");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/GeneratorCard.qml")),
-		"Victron.VenusOS", 2, 0, "GeneratorCard");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/InverterCard.qml")),
-		"Victron.VenusOS", 2, 0, "InverterCard");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/SwitchesCard.qml")),
-		"Victron.VenusOS", 2, 0, "SwitchesCard");
-
-	/* pages */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/NotificationLayer.qml")),
-		"Victron.VenusOS", 2, 0, "NotificationLayer");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/MainView.qml")),
-		"Victron.VenusOS", 2, 0, "MainView");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/PageManager.qml")),
-		"Victron.VenusOS", 2, 0, "PageManager");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/BriefMonitorPanel.qml")),
-		"Victron.VenusOS", 2, 0, "BriefMonitorPanel");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/ControlCardsPage.qml")),
-		"Victron.VenusOS", 2, 0, "ControlCardsPage");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/EnvironmentTab.qml")),
-		"Victron.VenusOS", 2, 0, "EnvironmentTab");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/LevelsPage.qml")),
-		"Victron.VenusOS", 2, 0, "LevelsPage");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/OverviewPage.qml")),
-		"Victron.VenusOS", 2, 0, "OverviewPage");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/SettingsPage.qml")),
-		"Victron.VenusOS", 2, 0, "SettingsPage");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/TanksTab.qml")),
-		"Victron.VenusOS", 2, 0, "TanksTab");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/BriefPage.qml")),
-		"Victron.VenusOS", 2, 0, "BriefPage");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/NotificationsPage.qml")),
-		"Victron.VenusOS", 2, 0, "NotificationsPage");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAfricaData.qml")),
-		"Victron.VenusOS", 2, 0, "TzAfricaData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAmericaData.qml")),
-		"Victron.VenusOS", 2, 0, "TzAmericaData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAntarcticaData.qml")),
-		"Victron.VenusOS", 2, 0, "TzAntarcticaData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzArcticData.qml")),
-		"Victron.VenusOS", 2, 0, "TzArcticData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAsiaData.qml")),
-		"Victron.VenusOS", 2, 0, "TzAsiaData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAtlanticData.qml")),
-		"Victron.VenusOS", 2, 0, "TzAtlanticData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzAustraliaData.qml")),
-		"Victron.VenusOS", 2, 0, "TzAustraliaData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzEtcData.qml")),
-		"Victron.VenusOS", 2, 0, "TzEtcData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzEuropeData.qml")),
-		"Victron.VenusOS", 2, 0, "TzEuropeData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzIndianData.qml")),
-		"Victron.VenusOS", 2, 0, "TzIndianData");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/settings/tz/TzPacificData.qml")),
-		"Victron.VenusOS", 2, 0, "TzPacificData");
-
 	// These types do not use dbus, so are safe to import even in the Qt Wasm build.
 	qmlRegisterType<VeQuickItem>("Victron.Veutil", 1, 0, "VeQuickItem");
 	qmlRegisterType<VeQItem>("Victron.Veutil", 1, 0, "VeQItem");
