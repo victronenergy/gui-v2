@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.Veutil
 import Victron.VenusOS
-import Dbus
+import DbusTypes
 
 QtObject {
 	id: root

@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import Victron.VenusOS
 
 QtObject {
 	id: root

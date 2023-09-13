@@ -274,10 +274,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "FrameRateModel",
 		&Victron::VenusOS::FrameRateModel::instance);
 
-	/* data sources */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/data/DataManager.qml")),
-		"Victron.VenusOS", 2, 0, "DataManager");
-
 	/* control cards */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/ESSCard.qml")),
 		"Victron.VenusOS", 2, 0, "ESSCard");

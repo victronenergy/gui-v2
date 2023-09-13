@@ -4,6 +4,9 @@
 
 import QtQuick
 import Victron.VenusOS
+import DbusTypes
+import Mqtt
+import Mock
 
 Item {
 	id: root
@@ -42,15 +45,15 @@ Item {
 		switch (BackendConnection.type) {
 		case BackendConnection.DBusSource:
 			console.warn("Loading D-Bus data backend...")
-			dataManagerLoader.source = "qrc:/data/dbus/DBusDataManager.qml"
+			dataManagerLoader.sourceComponent = dbusDataManager
 			break
 		case BackendConnection.MqttSource:
 			console.warn("Loading MQTT data backend...")
-			dataManagerLoader.source = "qrc:/data/mqtt/MqttDataManager.qml"
+			dataManagerLoader.sourceComponent = mqttDataManager
 			break
 		case BackendConnection.MockSource:
 			console.warn("Loading mock data backend...")
-			dataManagerLoader.source = "qrc:/data/mock/MockDataManager.qml"
+			dataManagerLoader.sourceComponent = mockDataManager
 			break
 		default:
 			console.warn("Unsupported data backend!", BackendConnection.type)
@@ -94,5 +97,23 @@ Item {
 		asynchronous: true
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load data manager:", source)
 		onLoaded: Global.dataManagerLoaded = true
+	}
+
+	Component{
+		id: dbusDataManager
+
+		DBusDataManager{}
+	}
+
+	Component{
+		id: mqttDataManager
+
+		MqttDataManager{}
+	}
+
+	Component{
+		id: mockDataManager
+
+		MockDataManager{}
 	}
 }

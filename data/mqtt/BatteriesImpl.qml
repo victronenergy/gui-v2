@@ -4,6 +4,7 @@
 
 import QtQuick
 import Victron.Veutil
+import Victron.VenusOS
 
 QtObject {
 	property Instantiator batteryObjects: Instantiator {

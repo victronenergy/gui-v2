@@ -3,5 +3,6 @@
 */
 
 import QtQuick
+import Victron.VenusOS
 
 EssData {}
