@@ -453,6 +453,83 @@ qt_add_qml_module(Utils
     QML_FILES components/Utils.js
 )
 
+qt_add_library(Dbus STATIC)
+qt_add_qml_module(Dbus
+    URI Dbus
+    OUTPUT_DIRECTORY Dbus
+    QML_FILES
+        data/dbus/AcInputsImpl.qml
+        data/dbus/BatteriesImpl.qml
+        data/dbus/DBusDataManager.qml
+        data/dbus/DcInputsImpl.qml
+        data/dbus/EnvironmentInputsImpl.qml
+        data/dbus/EssImpl.qml
+        data/dbus/EvChargersImpl.qml
+        data/dbus/GeneratorsImpl.qml
+        data/dbus/InvertersImpl.qml
+        data/dbus/NotificationsImpl.qml
+        data/dbus/PvInvertersImpl.qml
+        data/dbus/RelaysImpl.qml
+        data/dbus/SolarChargersImpl.qml
+        data/dbus/SystemImpl.qml
+        data/dbus/SystemSettingsImpl.qml
+        data/dbus/TanksImpl.qml
+)
+
+qt_add_library(Mock STATIC)
+qt_add_qml_module(Mock
+    URI Mock
+    OUTPUT_DIRECTORY Mock
+    QML_FILES
+        data/mock/AcInputsImpl.qml
+        data/mock/BatteriesImpl.qml
+        data/mock/DcInputsImpl.qml
+        data/mock/EnvironmentInputsImpl.qml
+        data/mock/EssImpl.qml
+        data/mock/EvChargersImpl.qml
+        data/mock/GeneratorsImpl.qml
+        data/mock/InvertersImpl.qml
+        data/mock/MockDevice.qml
+        data/mock/MockDataManager.qml
+        data/mock/NotificationsImpl.qml
+        data/mock/PvInvertersImpl.qml
+        data/mock/RelaysImpl.qml
+        data/mock/SolarChargersImpl.qml
+        data/mock/SystemImpl.qml
+        data/mock/SystemSettingsImpl.qml
+        data/mock/TanksImpl.qml
+        data/mock/config/BriefAndOverviewPageConfig.qml
+        data/mock/config/LevelsPageConfig.qml
+        data/mock/config/MockDataSimulator.qml
+        data/mock/config/NotificationsPageConfig.qml
+        data/mock/config/SettingsPageConfig.qml
+)
+
+qt_add_library(Mqtt STATIC)
+qt_add_qml_module(Mqtt
+    URI Mqtt
+    OUTPUT_DIRECTORY Mqtt
+    QML_FILES
+        data/mqtt/AcInputsImpl.qml
+        data/mqtt/BatteriesImpl.qml
+        data/mqtt/DcInputsImpl.qml
+        data/mqtt/EnvironmentInputsImpl.qml
+        data/mqtt/EssImpl.qml
+        data/mqtt/EvChargersImpl.qml
+        data/mqtt/GeneratorsImpl.qml
+        data/mqtt/InvertersImpl.qml
+        data/mqtt/MqttDataManager.qml
+        data/mqtt/NotificationsImpl.qml
+        data/mqtt/PvInvertersImpl.qml
+        data/mqtt/RelaysImpl.qml
+        data/mqtt/SolarChargersImpl.qml
+        data/mqtt/SystemImpl.qml
+        data/mqtt/SystemSettingsImpl.qml
+        data/mqtt/TanksImpl.qml
+)
+
+
+
 add_dependencies(${PROJECT_NAME} ${TRANSLATIONS_QM_TARGET})
 qt_add_resources(${PROJECT_NAME} "i18n"
     PREFIX "/i18n"
@@ -481,6 +558,9 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
         Gaugesplugin
         Unitsplugin
         Utilsplugin
+        Dbusplugin
+        Mockplugin
+        Mqttplugin
     )
 else()
     target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -495,6 +575,9 @@ else()
         Gaugesplugin
         Unitsplugin
         Utilsplugin
+        Dbusplugin
+        Mockplugin
+        Mqttplugin
     )
 endif()
 

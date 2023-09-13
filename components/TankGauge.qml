@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
-import Gauges as Gauges
+import Gauges
 
 VerticalGauge {
 	id: root

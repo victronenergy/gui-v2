@@ -5,7 +5,6 @@
 import QtQuick
 import QtQuick.Window
 import Victron.VenusOS
-import "data" as Data
 
 Window {
 	id: root
@@ -69,7 +68,7 @@ Window {
 		asynchronous: true
 		active: false
 		sourceComponent: Component {
-			Data.DataManager { }
+			DataManager { }
 		}
 	}
 

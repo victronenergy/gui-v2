@@ -5,6 +5,7 @@
 import QtQuick
 import Victron.Veutil
 import Victron.VenusOS
+import Mqtt
 
 QtObject {
 	id: root

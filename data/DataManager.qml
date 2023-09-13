@@ -5,8 +5,6 @@
 import QtQuick
 import Victron.VenusOS
 
-import "mock" as MockData
-
 Item {
 	id: root
 
