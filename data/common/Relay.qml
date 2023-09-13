@@ -5,7 +5,7 @@
 import QtQuick
 import Victron.Veutil
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Utils
 
 Device {
 	id: relay

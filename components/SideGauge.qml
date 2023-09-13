@@ -4,7 +4,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "Utils.js" as Utils
+import Utils
 
 ArcGauge {
 	id: root

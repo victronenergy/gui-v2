@@ -4,8 +4,8 @@
 
 import QtQuick
 import Victron.VenusOS
-import "../Utils.js" as Utils
-import "../Units.js" as Units
+import Utils
+import Units
 
 OverviewWidget {
 	id: root

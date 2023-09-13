@@ -6,7 +6,7 @@ import QtQuick
 import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Utils
 
 GradientListView {
 	id: root

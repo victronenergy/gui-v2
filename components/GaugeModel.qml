@@ -5,8 +5,8 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
-import "/components/Utils.js" as Utils
-import "/components/Gauges.js" as Gauges
+import Utils
+import Gauges
 
 /*
   A model of gauge data, sorted according to the preferred order from system settings.

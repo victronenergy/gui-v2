@@ -7,7 +7,7 @@ import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import net.connman 0.1
-import "/components/Utils.js" as Utils
+import Utils
 
 Page {
 	id: root

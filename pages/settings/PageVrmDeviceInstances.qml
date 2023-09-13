@@ -6,7 +6,7 @@ import QtQuick
 import QtQuick.Controls as C
 import Victron.VenusOS
 import Victron.Veutil
-import "/components/Utils.js" as Utils
+import Utils
 
 // Allows VRM instances to be changed for devices on the system.
 //

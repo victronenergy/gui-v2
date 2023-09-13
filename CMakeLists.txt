@@ -58,6 +58,74 @@ set_source_files_properties( ${VENUS_QML_SINGLETONS} PROPERTIES QT_QML_SINGLETON
 
 set (VENUS_QML_FILES
     ${VENUS_QML_SINGLETONS}
+    ApplicationContent.qml
+    FrameRateVisualizer.qml
+
+    components/ActionButton.qml
+    components/Arc.qml
+    components/ArcGauge.qml
+    components/ArcGaugeQuantityLabel.qml
+    components/AsymmetricRoundedRectangle.qml
+    components/ButtonControlValue.qml
+    components/CircularMultiGauge.qml
+    components/CircularSingleGauge.qml
+    components/ControlCard.qml
+    components/ControlValue.qml
+    components/DataPoint.qml
+    components/Device.qml
+    components/ElectricalQuantityLabel.qml
+    components/EnvironmentGauge.qml
+    components/EnvironmentGaugePanel.qml
+    components/ExpandedTanksView.qml
+    components/FirmwareUpdate.qml
+    components/FixedWidthLabel.qml
+    components/GaugeModel.qml
+    components/EvChargerStatusModel.qml
+    components/GeneratorIconLabel.qml
+    components/GradientListView.qml
+    components/GsmStatusIcon.qml
+    components/IconButton.qml
+    components/InputPanel.qml
+    components/LoadGraph.qml
+    components/LoadGraphShapePath.qml
+    components/NavBar.qml
+    components/NavButton.qml
+    components/NotificationDelegate.qml
+    components/NotificationsView.qml
+    components/Page.qml
+    components/PageStack.qml
+    components/ProgressArc.qml
+    components/QuantityLabel.qml
+    components/QuantityTableSummary.qml
+    components/QuantityTable.qml
+    components/RadioButtonControlValue.qml
+    components/ScaledArc.qml
+    components/ScaledArcGauge.qml
+    components/SegmentedButtonRow.qml
+    components/SeparatorBar.qml
+    components/ShinyProgressArc.qml
+    components/SideGauge.qml
+    components/SolarDetailBox.qml
+    components/SolarHistoryChart.qml
+    components/SolarHistoryErrorView.qml
+    components/SolarHistoryTableView.qml
+    components/SolarYieldGauge.qml
+    components/SolarYieldGraph.qml
+    components/SolarYieldModel.qml
+    components/SplashView.qml
+    components/StatusBar.qml
+    components/SwitchControlValue.qml
+    components/TabBar.qml
+    components/TankGauge.qml
+    components/TankGaugeGroup.qml
+    components/ThreePhaseDisplay.qml
+    components/TimeSelector.qml
+    components/ToastNotification.qml
+    components/ValueRange.qml
+    components/VerticalGauge.qml
+    components/ViewGradient.qml
+    components/ClassAndVrmInstance.qml
+    components/WeatherDetails.qml
 
     data/common/AcInput.qml
     data/common/AcInputServiceLoader.qml
@@ -274,6 +342,27 @@ qt_add_qml_module(VenusQMLModule
     QML_FILES ${VENUS_QML_FILES}
 )
 
+qt_add_library(Gauges STATIC)
+qt_add_qml_module(Gauges
+    URI Gauges
+    OUTPUT_DIRECTORY Gauges
+    QML_FILES components/Gauges.js
+)
+
+qt_add_library(Units STATIC)
+qt_add_qml_module(Units
+    URI Units
+    OUTPUT_DIRECTORY Units
+    QML_FILES components/Units.js
+)
+
+qt_add_library(Utils STATIC)
+qt_add_qml_module(Utils
+    URI Utils
+    OUTPUT_DIRECTORY Utils
+    QML_FILES components/Utils.js
+)
+
 add_dependencies(${PROJECT_NAME} ${TRANSLATIONS_QM_TARGET})
 qt_add_resources(${PROJECT_NAME} "i18n"
     PREFIX "/i18n"
@@ -298,6 +387,10 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
         Qt6::Xml
         Qt6::Mqtt
         Qt6::WebSockets
+        VenusQMLModuleplugin
+        Gaugesplugin
+        Unitsplugin
+        Utilsplugin
     )
 else()
     target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -309,6 +402,9 @@ else()
         Qt6::DBus
         Qt6::Mqtt
         VenusQMLModuleplugin
+        Gaugesplugin
+        Unitsplugin
+        Utilsplugin
     )
 endif()
 

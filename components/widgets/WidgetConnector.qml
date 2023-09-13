@@ -5,7 +5,7 @@
 import QtQuick
 import QtQuick.Shapes
 import Victron.VenusOS
-import "/components/Utils.js" as Utils
+import Utils
 
 Item {
 	id: root

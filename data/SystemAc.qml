@@ -3,7 +3,7 @@
 */
 
 import QtQuick
-import "/components/Utils.js" as Utils
+import Utils
 
 QtObject {
 	id: root

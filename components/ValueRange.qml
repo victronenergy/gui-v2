@@ -3,7 +3,7 @@
 */
 
 import QtQml
-import "/components/Utils.js" as Utils
+import Utils
 
 QtObject {
 	property real value: NaN
