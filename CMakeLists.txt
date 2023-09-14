@@ -35,26 +35,27 @@ else()
     find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
 endif()
 
-# This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_FILES})'
+# This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_MODULE_SOURCES})'
 if(QT_KNOWN_POLICY_QTP0001)
     qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
 endif()
 
-qt_add_resources(QML_RESOURCES
-    qml.qrc)
+qt_add_resources(QML_QRC_RESOURCES
+    qml.qrc
+)
 
 include_directories(src/veutil/inc src .)
 
-set (VENUS_QML_SINGLETONS # All qml singletons have to be added here
+set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added here
     components/CommonWords.qml
     components/VenusFont.qml
     Global.qml
 )
+set_source_files_properties( ${VENUS_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )
 
-set_source_files_properties( ${VENUS_QML_SINGLETONS} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )
+set (VENUS_QML_MODULE_SOURCES
+    ${VENUS_QML_MODULE_SINGLETON_SOURCES}
 
-set (VENUS_QML_FILES
-    ${VENUS_QML_SINGLETONS}
     ApplicationContent.qml
     FrameRateVisualizer.qml
 
@@ -341,6 +342,81 @@ set (VENUS_QML_FILES
     pages/solar/SolarDeviceListPage.qml
 )
 
+set(Dbus_MODULE_SOURCES
+    data/dbus/AcInputsImpl.qml
+    data/dbus/BatteriesImpl.qml
+    data/dbus/DBusDataManager.qml
+    data/dbus/DcInputsImpl.qml
+    data/dbus/EnvironmentInputsImpl.qml
+    data/dbus/EssImpl.qml
+    data/dbus/EvChargersImpl.qml
+    data/dbus/GeneratorsImpl.qml
+    data/dbus/InvertersImpl.qml
+    data/dbus/NotificationsImpl.qml
+    data/dbus/PvInvertersImpl.qml
+    data/dbus/RelaysImpl.qml
+    data/dbus/SolarChargersImpl.qml
+    data/dbus/SystemImpl.qml
+    data/dbus/SystemSettingsImpl.qml
+    data/dbus/TanksImpl.qml
+)
+
+set(Mock_MODULE_SOURCES
+    data/mock/AcInputsImpl.qml
+    data/mock/BatteriesImpl.qml
+    data/mock/DcInputsImpl.qml
+    data/mock/EnvironmentInputsImpl.qml
+    data/mock/EssImpl.qml
+    data/mock/EvChargersImpl.qml
+    data/mock/GeneratorsImpl.qml
+    data/mock/InvertersImpl.qml
+    data/mock/MockDevice.qml
+    data/mock/MockDataManager.qml
+    data/mock/NotificationsImpl.qml
+    data/mock/PvInvertersImpl.qml
+    data/mock/RelaysImpl.qml
+    data/mock/SolarChargersImpl.qml
+    data/mock/SystemImpl.qml
+    data/mock/SystemSettingsImpl.qml
+    data/mock/TanksImpl.qml
+    data/mock/config/BriefAndOverviewPageConfig.qml
+    data/mock/config/LevelsPageConfig.qml
+    data/mock/config/MockDataSimulator.qml
+    data/mock/config/NotificationsPageConfig.qml
+    data/mock/config/SettingsPageConfig.qml
+)
+
+set(Units_MODULE_SOURCES
+    components/Units.js
+)
+
+set(Utils_MODULE_SOURCES
+    components/Utils.js
+)
+
+set(Gauges_MODULE_SOURCES
+    components/Gauges.js
+)
+
+set(Mqtt_MODULE_SOURCES
+    data/mqtt/AcInputsImpl.qml
+    data/mqtt/BatteriesImpl.qml
+    data/mqtt/DcInputsImpl.qml
+    data/mqtt/EnvironmentInputsImpl.qml
+    data/mqtt/EssImpl.qml
+    data/mqtt/EvChargersImpl.qml
+    data/mqtt/GeneratorsImpl.qml
+    data/mqtt/InvertersImpl.qml
+    data/mqtt/MqttDataManager.qml
+    data/mqtt/NotificationsImpl.qml
+    data/mqtt/PvInvertersImpl.qml
+    data/mqtt/RelaysImpl.qml
+    data/mqtt/SolarChargersImpl.qml
+    data/mqtt/SystemImpl.qml
+    data/mqtt/SystemSettingsImpl.qml
+    data/mqtt/TanksImpl.qml
+)
+
 set(CONNMAN_SOURCES_MOCK
     src/connman-api.h
 )
@@ -418,7 +494,7 @@ set(GUIv1_DBUS_SOURCES
     src/gui-v1/wakespeed_error.cpp
 )
 
-set(VENUS_SOURCES
+set(VENUS_CPP_SOURCES
     src/main.cpp
     src/backendconnection.h
     src/backendconnection.cpp
@@ -441,13 +517,16 @@ set(VENUS_SOURCES
 
 list(APPEND SOURCES
     ${VEUTIL_CORE_SOURCES}
-    ${VENUS_SOURCES}
+    ${VENUS_CPP_SOURCES}
     ${VEUTIL_MQTT_SOURCES}
-    ${QML_RESOURCES}
-    ${VENUS_QML_FILES}
-    components/Gauges.js
-    components/Units.js
-    components/Utils.js
+    ${QML_QRC_RESOURCES}
+    ${VENUS_QML_MODULE_SOURCES}
+    ${Dbus_MODULE_SOURCES}
+    ${Mock_MODULE_SOURCES}
+    ${Mqtt_MODULE_SOURCES}
+    ${Gauges_MODULE_SOURCES}
+    ${Units_MODULE_SOURCES}
+    ${Utils_MODULE_SOURCES}
 )
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
@@ -477,7 +556,7 @@ set(TRANSLATIONS_QM_FILES
 # it would be good if we could do this via qt6_add_lupdate
 # instead, but that macro is broken, so do it ourselves.
 add_custom_target(${TRANSLATIONS_TS_TARGET}
-    SOURCES ${QML_RESOURCES} ${SOURCES})
+    SOURCES ${SOURCES})
 add_custom_command(
     TARGET ${TRANSLATIONS_TS_TARGET}
     BYPRODUCTS ${TRANSLATIONS_TS_FILES}
@@ -532,108 +611,53 @@ else()
     )
 endif()
 
-qt_add_library(VenusQMLModule STATIC)
-
 qt_add_qml_module(VenusQMLModule
     URI Victron.VenusOS
     VERSION 2.0
-    QML_FILES ${VENUS_QML_FILES}
+    STATIC
+    QML_FILES ${VENUS_QML_MODULE_SOURCES}
 )
 
-qt_add_library(Gauges STATIC)
 qt_add_qml_module(Gauges
     URI Gauges
+    STATIC
     OUTPUT_DIRECTORY Gauges
-    QML_FILES components/Gauges.js
+    QML_FILES ${Gauges_MODULE_SOURCES}
 )
 
-qt_add_library(Units STATIC)
 qt_add_qml_module(Units
     URI Units
+    STATIC
     OUTPUT_DIRECTORY Units
-    QML_FILES components/Units.js
+    QML_FILES ${Units_MODULE_SOURCES}
 )
 
-qt_add_library(Utils STATIC)
 qt_add_qml_module(Utils
     URI Utils
+    STATIC
     OUTPUT_DIRECTORY Utils
-    QML_FILES components/Utils.js
+    QML_FILES ${Utils_MODULE_SOURCES}
 )
 
-qt_add_library(Dbus STATIC)
 qt_add_qml_module(Dbus
     URI Dbus
+    STATIC
     OUTPUT_DIRECTORY Dbus
-    QML_FILES
-        data/dbus/AcInputsImpl.qml
-        data/dbus/BatteriesImpl.qml
-        data/dbus/DBusDataManager.qml
-        data/dbus/DcInputsImpl.qml
-        data/dbus/EnvironmentInputsImpl.qml
-        data/dbus/EssImpl.qml
-        data/dbus/EvChargersImpl.qml
-        data/dbus/GeneratorsImpl.qml
-        data/dbus/InvertersImpl.qml
-        data/dbus/NotificationsImpl.qml
-        data/dbus/PvInvertersImpl.qml
-        data/dbus/RelaysImpl.qml
-        data/dbus/SolarChargersImpl.qml
-        data/dbus/SystemImpl.qml
-        data/dbus/SystemSettingsImpl.qml
-        data/dbus/TanksImpl.qml
+    QML_FILES ${Dbus_MODULE_SOURCES}
 )
 
-qt_add_library(Mock STATIC)
 qt_add_qml_module(Mock
     URI Mock
+    STATIC
     OUTPUT_DIRECTORY Mock
-    QML_FILES
-        data/mock/AcInputsImpl.qml
-        data/mock/BatteriesImpl.qml
-        data/mock/DcInputsImpl.qml
-        data/mock/EnvironmentInputsImpl.qml
-        data/mock/EssImpl.qml
-        data/mock/EvChargersImpl.qml
-        data/mock/GeneratorsImpl.qml
-        data/mock/InvertersImpl.qml
-        data/mock/MockDevice.qml
-        data/mock/MockDataManager.qml
-        data/mock/NotificationsImpl.qml
-        data/mock/PvInvertersImpl.qml
-        data/mock/RelaysImpl.qml
-        data/mock/SolarChargersImpl.qml
-        data/mock/SystemImpl.qml
-        data/mock/SystemSettingsImpl.qml
-        data/mock/TanksImpl.qml
-        data/mock/config/BriefAndOverviewPageConfig.qml
-        data/mock/config/LevelsPageConfig.qml
-        data/mock/config/MockDataSimulator.qml
-        data/mock/config/NotificationsPageConfig.qml
-        data/mock/config/SettingsPageConfig.qml
+    QML_FILES ${Mock_MODULE_SOURCES}
 )
 
-qt_add_library(Mqtt STATIC)
 qt_add_qml_module(Mqtt
     URI Mqtt
+    STATIC
     OUTPUT_DIRECTORY Mqtt
-    QML_FILES
-        data/mqtt/AcInputsImpl.qml
-        data/mqtt/BatteriesImpl.qml
-        data/mqtt/DcInputsImpl.qml
-        data/mqtt/EnvironmentInputsImpl.qml
-        data/mqtt/EssImpl.qml
-        data/mqtt/EvChargersImpl.qml
-        data/mqtt/GeneratorsImpl.qml
-        data/mqtt/InvertersImpl.qml
-        data/mqtt/MqttDataManager.qml
-        data/mqtt/NotificationsImpl.qml
-        data/mqtt/PvInvertersImpl.qml
-        data/mqtt/RelaysImpl.qml
-        data/mqtt/SolarChargersImpl.qml
-        data/mqtt/SystemImpl.qml
-        data/mqtt/SystemSettingsImpl.qml
-        data/mqtt/TanksImpl.qml
+    QML_FILES ${Mqtt_MODULE_SOURCES}
 )
 
 qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
@@ -735,7 +759,7 @@ qt_add_resources(${PROJECT_NAME} "i18n"
     FILES ${TRANSLATIONS_QM_FILES})
 
 set_source_files_properties(
-    ${VENUS_SOURCES}
+    ${VENUS_CPP_SOURCES}
     PROPERTIES
     COMPILE_OPTIONS "${venusCompileFlags}"
 )
@@ -743,39 +767,29 @@ set_source_files_properties(
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    Qt6::Core
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Svg
+    Qt6::Xml
+    Qt6::Mqtt
+    VenusQMLModuleplugin
+    Gaugesplugin
+    Unitsplugin
+    Utilsplugin
+    Dbusplugin
+    Mockplugin
+    Mqttplugin
+)
+
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        Qt6::Core
-        Qt6::Qml
-        Qt6::Quick
-        Qt6::Svg
-        Qt6::Xml
-        Qt6::Mqtt
         Qt6::WebSockets
-        VenusQMLModuleplugin
-        Gaugesplugin
-        Unitsplugin
-        Utilsplugin
-        Dbusplugin
-        Mockplugin
-        Mqttplugin
     )
 else()
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        Qt6::Core
-        Qt6::Qml
-        Qt6::Quick
-        Qt6::Svg
-        Qt6::Xml
         Qt6::DBus
-        Qt6::Mqtt
-        VenusQMLModuleplugin
-        Gaugesplugin
-        Unitsplugin
-        Utilsplugin
-        Dbusplugin
-        Mockplugin
-        Mqttplugin
     )
 endif()
 
@@ -784,4 +798,4 @@ add_custom_target(graphviz
                  "${CMAKE_COMMAND}" "--graphviz=venus" .
                   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 # disable it for now, can re-enable for future analysis when required.
-#add_dependencies(${PROJECT_NAME} graphviz)
+add_dependencies(${PROJECT_NAME} graphviz)
