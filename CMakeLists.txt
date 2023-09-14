@@ -35,16 +35,13 @@ else()
     find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
 endif()
 
-################ policies
 # This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_FILES})'
 if(QT_KNOWN_POLICY_QTP0001)
     qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
 endif()
-################ end policies
 
 qt_add_resources(QML_RESOURCES
     qml.qrc)
-
 
 include_directories(src/veutil/inc src .)
 
@@ -442,23 +439,26 @@ set(VENUS_SOURCES
     src/frameratemodel.cpp
 )
 
+list(APPEND SOURCES
+    ${VEUTIL_CORE_SOURCES}
+    ${VENUS_SOURCES}
+    ${VEUTIL_MQTT_SOURCES}
+    ${QML_RESOURCES}
+    ${VENUS_QML_FILES}
+    components/Gauges.js
+    components/Units.js
+    components/Utils.js
+)
+
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     list(APPEND SOURCES
         ${CONNMAN_SOURCES_MOCK}
-        ${VEUTIL_CORE_SOURCES}
-        ${VEUTIL_MQTT_SOURCES}
-        ${VENUS_SOURCES}
-        ${QML_RESOURCES}
     )
 else()
     list(APPEND SOURCES
         ${CONNMAN_SOURCES}
         ${GUIv1_DBUS_SOURCES}
-        ${VEUTIL_CORE_SOURCES}
         ${VEUTIL_DBUS_SOURCES}
-        ${VEUTIL_MQTT_SOURCES}
-        ${VENUS_SOURCES}
-        ${QML_RESOURCES}
     )
 endif()
 
@@ -483,8 +483,11 @@ add_custom_command(
     BYPRODUCTS ${TRANSLATIONS_TS_FILES}
     COMMENT "Manually updating translations files"
     COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lupdate
-        ARGS "${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc" src
-	     -ts ${TRANSLATIONS_TS_FILES}
+        ARGS
+            ${CMAKE_CURRENT_SOURCE_DIR}/qml.qrc
+            ${SOURCES}
+            src
+        -ts ${TRANSLATIONS_TS_FILES}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 # add a custom target to generate the .qm files via qt6_add_lrelease().
 # force the .qm generation step to depend on the .ts generation step.
