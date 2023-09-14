@@ -104,13 +104,19 @@ Page {
 				visible: relay1State.valid && relay1Function.currentValue === VenusOS.Relay_Function_Manual
 			}
 
+			Component {
+				id: pageSettingsRelayTempSensors
+
+				PageSettingsRelayTempSensors { }
+			}
+
 			ListNavigationItem {
 				//% "Temperature control rules"
 				text: qsTrId("settings_relay_temp_control_rules")
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Temperature
 					|| relay1Function.currentValue === VenusOS.Relay_Function_Temperature
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRelayTempSensors.qml", { title: text })
+					Global.pageManager.pushPage(pageSettingsRelayTempSensors, { title: text })
 				}
 			}
 		}

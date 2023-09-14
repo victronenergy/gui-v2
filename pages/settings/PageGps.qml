@@ -112,11 +112,17 @@ Page {
 			ListNavigationItem {
 				text: CommonWords.device_info_title
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
+					Global.pageManager.pushPage(pageDeviceInfo,
 							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}
 		}
+	}
+
+	Component {
+		id: pageDeviceInfo
+
+		PageDeviceInfo { }
 	}
 
 	DataPoint {

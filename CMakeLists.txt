@@ -168,6 +168,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListTextItem.qml
     components/listitems/ListTimeSelector.qml
 
+    components/settings/CGwacsBatteryScheduleNavigationItem.qml
     components/settings/FirmwareCheckListButton.qml
     components/settings/ListDvccSwitch.qml
     components/settings/MountStateListButton.qml
@@ -615,6 +616,7 @@ qt_add_qml_module(VenusQMLModule
     URI Victron.VenusOS
     VERSION 2.0
     STATIC
+    OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
 )
 

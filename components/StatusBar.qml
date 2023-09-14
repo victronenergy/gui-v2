@@ -87,7 +87,7 @@ Rectangle {
 		}
 		enabled: !!Global.pageManager
 					&& !!Global.pageManager.navBar
-					&& Global.pageManager.navBar.currentUrl === "qrc:/pages/NotificationsPage.qml"
+					&& Global.pageManager.navBar.currentUrl === "pages/NotificationsPage.qml"
 					&& Global.notifications.audibleAlarmActive
 					&& !Global.notifications.snoozeAudibleAlarmActive
 		opacity: enabled ? 1 : 0

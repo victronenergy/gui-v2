@@ -62,12 +62,18 @@ Page {
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageSettingsRvcDeviceConfiguration
+
+					PageSettingsRvcDeviceConfiguration { }
+				}
+
 				//% "Configuration"
 				text: qsTrId("settings_rvc_configuration")
 				visible: root.isLocalSender && userHasWriteAccess
 
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDeviceConfiguration.qml",
+					Global.pageManager.pushPage(pageSettingsRvcDeviceConfiguration,
 						{ bindPrefix: root.bindPrefix, title: text })
 				}
 			}

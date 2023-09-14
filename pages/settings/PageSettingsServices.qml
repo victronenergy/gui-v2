@@ -11,12 +11,17 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 			ListNavigationItem {
+				Component {
+					id: pageSettingsModbusTcp
+
+					PageSettingsModbusTcp { }
+				}
 				//% "Modbus TCP"
 				text: qsTrId("settings_services_modbus_tcp")
 				secondaryText: modbus.value === 1 ? CommonWords.enabled : CommonWords.disabled
 				showAccessLevel: VenusOS.User_AccessType_Installer
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", { title: text })
+					Global.pageManager.pushPage(pageSettingsModbusTcp, { title: text })
 				}
 
 				DataPoint {

@@ -56,10 +56,16 @@ Page {
 			MouseArea {
 				id: mouseArea
 
+				Component {
+					id: pageSettingsVecanDevice
+
+					PageSettingsVecanDevice { }
+				}
+
 				parent: listDelegate.backgroundRect
 				anchors.fill: parent
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
+					Global.pageManager.pushPage(pageSettingsVecanDevice,
 						{ bindPrefix: model.uid, title: text })
 				}
 			}

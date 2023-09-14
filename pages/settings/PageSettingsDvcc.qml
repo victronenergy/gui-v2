@@ -2,6 +2,7 @@
 ** Copyright (C) 2022 Victron Energy B.V.
 */
 
+import QtQml
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls as C
@@ -27,10 +28,15 @@ Page {
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageChargeCurrentLimits
+
+					PageChargeCurrentLimits { }
+				}
 				//% "Charge Current limits"
 				text: qsTrId("settings_dvcc_charge_current_limits")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageChargeCurrentLimits.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageChargeCurrentLimits, { title: text })
 			}
 
 			ListSwitch {

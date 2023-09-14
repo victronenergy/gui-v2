@@ -145,7 +145,7 @@ Page {
 				//% "Setup"
 				text: qsTrId("evcs_setup")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
+					Global.pageManager.pushPage(evChargerSetupPage,
 							{ "title": text, "evCharger": root.evCharger })
 				}
 			}
@@ -153,10 +153,22 @@ Page {
 			ListNavigationItem {
 				text: CommonWords.device_info_title
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
+					Global.pageManager.pushPage(pageDeviceInfo,
 							{ "title": text, "bindPrefix": root.evCharger.serviceUid })
 				}
 			}
 		}
+	}
+
+	Component {
+		id: evChargerSetupPage
+
+		EvChargerSetupPage { }
+	}
+
+	Component {
+		id: pageDeviceInfo
+
+		PageDeviceInfo { }
 	}
 }

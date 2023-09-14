@@ -2,6 +2,7 @@
 ** Copyright (C) 2021 Victron Energy B.V.
 */
 
+import QtQml
 import QtQuick
 import Victron.VenusOS
 
@@ -81,11 +82,17 @@ Page {
 				}
 			}
 
+			Component {
+				id: pageSettingsDisplayBrief
+
+				PageSettingsDisplayBrief { }
+			}
+
 			ListNavigationItem {
 				//% "Brief view levels"
 				text: qsTrId("settings_brief_view_levels")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayBrief.qml", {"title": text})
+					Global.pageManager.pushPage(pageSettingsDisplayBrief, {"title": text})
 				}
 			}
 
@@ -146,11 +153,17 @@ Page {
 				}
 			}
 
+			Component {
+				id: pageSettingsDisplayUnits
+
+				PageSettingsDisplayUnits { }
+			}
+
 			ListNavigationItem {
 				//% "Units"
 				text: qsTrId("settings_units")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
+					Global.pageManager.pushPage(pageSettingsDisplayUnits, {"title": text})
 				}
 			}
 		}

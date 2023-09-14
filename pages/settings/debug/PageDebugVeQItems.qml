@@ -23,6 +23,12 @@ Page {
 		}
 
 		delegate: ListNavigationItem {
+/* TODO: PageDebugVeQItems is instantiated recursively
+			Component {
+				id: pageDebugVeQItems
+
+				PageDebugVeQItems { }
+			}
 			text: model.id
 			secondaryText: {
 				if (enabled) {
@@ -34,7 +40,7 @@ Page {
 			enabled: subModel.rowCount > 0
 
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml",
+				Global.pageManager.pushPage(pageDebugVeQItems,
 						{ title: text, bindPrefix: model.uid })
 			}
 
@@ -43,6 +49,7 @@ Page {
 				uids: [model.uid]
 				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem | VeQItemTableModel.UseLocalValues
 			}
+*/
 		}
 	}
 }

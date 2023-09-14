@@ -64,16 +64,35 @@ OverviewWidget {
 
 	MouseArea {
 		anchors.fill: parent
+
+		Component {
+			id: solarChargerPage
+
+			SolarChargerPage { }
+		}
+
+		Component {
+			id: pvInverterPage
+
+			PvInverterPage { }
+		}
+
+		Component {
+			id: solarDeviceListPage
+
+			SolarDeviceListPage { }
+		}
+
 		onClicked: {
 			const singleDeviceOnly = (Global.solarChargers.model.count + Global.pvInverters.model.count) === 1
 			if (singleDeviceOnly && Global.solarChargers.model.count === 1) {
-				Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml",
+				Global.pageManager.pushPage(solarChargerPage,
 						{ "solarCharger": Global.solarChargers.model.objectAt(0) })
 			} else if (singleDeviceOnly && Global.pvInverters.model === 1) {
-				Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
+				Global.pageManager.pushPage(pvInverterPage,
 						{ "pvInverter": Global.pvInverters.model.objectAt(0) })
 			} else {
-				Global.pageManager.pushPage("/pages/solar/SolarDeviceListPage.qml", { "title": root.title })
+				Global.pageManager.pushPage(solarDeviceListPage, { "title": root.title })
 			}
 		}
 	}

@@ -26,6 +26,12 @@ Page {
 		source: "com.victronenergy.settings/Settings/CGwacs/DeviceIds"
 	}
 
+	Component {
+		id: pageSettingsCGwacs
+
+		PageSettingsCGwacs { }
+	}
+
 	GradientListView {
 		model: deviceIds.value ? deviceIds.value.split(',') : []
 		delegate: ListNavigationItem {
@@ -33,7 +39,7 @@ Page {
 
 			text: getDescription(customNameItem.value, modelData)
 			secondaryText: getMenuName(serviceType.value, l2ServiceType.value)
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacs.qml", { title: text, devicePath: devicePath })
+			onClicked: Global.pageManager.pushPage(pageSettingsCGwacs, { title: text, devicePath: devicePath })
 
 			DataPoint {
 				id: customNameItem

@@ -261,12 +261,18 @@ Page {
 		}
 
 		ListNavigationItem {
+			Component {
+				id: pageSettingsHub4Feedin
+
+				PageSettingsHub4Feedin { }
+			}
+
 			//% "Grid feed-in"
 			text: qsTrId("settings_ess_grid_feed_in")
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Feedin.qml",
+				Global.pageManager.pushPage(pageSettingsHub4Feedin,
 					{ title: text, hub4Mode: Qt.binding(function() { return essMode.value }) })
 			}
 		}
@@ -297,6 +303,12 @@ Page {
 		}
 
 		ListNavigationItem {
+			Component {
+				id: pageHub4Debug
+
+				PageHub4Debug { }
+			}
+
 			//% "Debug"
 			text: qsTrId("settings_ess_debug")
 			visible: defaultVisible
@@ -304,7 +316,7 @@ Page {
 				&& Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
 
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageHub4Debug.qml")
+				Global.pageManager.pushPage(pageHub4Debug)
 			}
 		}
 	}

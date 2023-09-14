@@ -37,6 +37,12 @@ Page {
 		}
 
 		delegate: ListNavigationItem {
+			Component {
+				id: pageSettingsRvcDevice
+
+				PageSettingsRvcDevice { }
+			}
+
 			text: {
 				let name = modelName.value || ""
 				if (vrmInstance.value) {
@@ -47,7 +53,7 @@ Page {
 			secondaryText: Utils.toHexFormat(nad.value)
 
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDevice.qml",
+				Global.pageManager.pushPage(pageSettingsRvcDevice,
 					{ bindPrefix: model.uid, title: modelName.value || "" })
 			}
 

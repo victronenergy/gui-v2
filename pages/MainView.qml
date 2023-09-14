@@ -66,7 +66,7 @@ Item {
 					return
 				}
 				// When pushing a settings sub-page, ensure nav bar is visible.
-				if (navBar.currentIndex === navBar.model.count - 1 && obj !== "qrc:/pages/ControlCardsPage.qml") {
+				if (navBar.currentIndex === navBar.model.count - 1 && obj !== "pages/ControlCardsPage.qml") {
 					properties = properties || {}
 					properties.height = pageStack.height - navBar.height
 				}
@@ -95,7 +95,7 @@ Item {
 		onLeftButtonClicked: {
 			switch (leftButton) {
 			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				pageManager.pushPage("qrc:/pages/ControlCardsPage.qml")
+				pageManager.pushPage(controlCardsPage)
 				break
 			case VenusOS.StatusBar_LeftButton_ControlsActive:   // fall through
 			case VenusOS.StatusBar_LeftButton_Back:
@@ -104,6 +104,12 @@ Item {
 			default:
 				break
 			}
+		}
+
+		Component {
+			id: controlCardsPage
+
+			ControlCardsPage { }
 		}
 
 		Component.onCompleted: pageManager.statusBar = statusBar

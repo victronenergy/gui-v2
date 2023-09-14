@@ -116,9 +116,14 @@ Page {
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageDeviceInfo
+
+					PageDeviceInfo { }
+				}
 				text: CommonWords.device_info_title
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
+					Global.pageManager.pushPage(pageDeviceInfo,
 							{ "title": text, "bindPrefix": root.pvInverter.serviceUid })
 				}
 			}

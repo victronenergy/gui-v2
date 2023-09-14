@@ -112,6 +112,11 @@ Page {
 			}
 
 			ListNavigationItem {
+				Component {
+					id: solarChargerAlarmsAndErrorsPage
+
+					SolarChargerAlarmsAndErrorsPage { }
+				}
 				//% "Alarms and Errors"
 				text: qsTrId("charger_alarms_alarms_and_errors")
 				secondaryText: enabled
@@ -130,7 +135,7 @@ Page {
 						 || root.solarCharger.errorModel.count
 
 				onClicked: {
-					Global.pageManager.pushPage("/pages/solar/SolarChargerAlarmsAndErrorsPage.qml",
+					Global.pageManager.pushPage(solarChargerAlarmsAndErrorsPage,
 							{ "title": text, "solarCharger": root.solarCharger })
 				}
 
@@ -145,6 +150,11 @@ Page {
 			}
 
 			ListNavigationItem {
+				Component {
+					id: solarChargerHistoryPage
+
+					SolarChargerHistoryPage { }
+				}
 				//: View solar charger yield history
 				//% "History"
 				text: qsTrId("charger_history")
@@ -152,24 +162,34 @@ Page {
 					//: Solar charger historic data information. %1 = charger name
 					//% "%1 History"
 					const title = qsTrId("charger_history_name").arg(root.solarCharger.name)
-					Global.pageManager.pushPage("/pages/solar/SolarChargerHistoryPage.qml",
+					Global.pageManager.pushPage(solarChargerHistoryPage,
 							{ "title": title, "solarCharger": root.solarCharger })
 				}
 			}
 
 			ListNavigationItem {
+				Component {
+					id: solarChargerNetworkedOperationPage
+
+					SolarChargerNetworkedOperationPage { }
+				}
 				//% "Networked operation"
 				text: qsTrId("charger_networked_operation")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/solar/SolarChargerNetworkedOperationPage.qml",
+					Global.pageManager.pushPage(solarChargerNetworkedOperationPage,
 							{ "title": text, "solarCharger": root.solarCharger })
 				}
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageDeviceInfo
+
+					PageDeviceInfo { }
+				}
 				text: CommonWords.device_info_title
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
+					Global.pageManager.pushPage(pageDeviceInfo,
 							{ "title": text, "bindPrefix": root.solarCharger.serviceUid })
 				}
 			}

@@ -2,6 +2,7 @@
 ** Copyright (C) 2023 Victron Energy B.V.
 */
 
+import QtQml
 import QtQuick
 import Victron.VenusOS
 
@@ -66,15 +67,27 @@ Page {
 						return Global.pvInverters.model.objectAt(pvInverterIndex)
 					}
 
+					Component {
+						id: solarChargerPage
+
+						SolarChargerPage { }
+					}
+
+					Component {
+						id: pvInverterPage
+
+						PvInverterPage{ }
+					}
+
 					text: solarCharger ? solarCharger.name : pvInverter.name
 					primaryLabel.width: availableWidth - Theme.geometry.solarListPage.quantityRow.width - Theme.geometry.listItem.content.horizontalMargin
 					enabled: !!solarCharger || !!pvInverter
 
 					onClicked: {
 						if (solarCharger) {
-							Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
+							Global.pageManager.pushPage(solarChargerPage, { "solarCharger": solarCharger })
 						} else {
-							Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml", { "pvInverter": pvInverter })
+							Global.pageManager.pushPage(pvInverterPage, { "pvInverter": pvInverter })
 						}
 					}
 

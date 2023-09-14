@@ -35,9 +35,15 @@ Page {
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageSettingsWifi
+
+					PageSettingsWifi { }
+				}
+
 				//% "Wi-Fi networks"
 				text: qsTrId("settings_wifi_networks")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageSettingsWifi, { title: text })
 			}
 		}
 	}

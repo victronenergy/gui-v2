@@ -109,12 +109,18 @@ Page {
 				}
 			}
 
+			Component {
+				id: pageSettingsBleSensors
+
+				PageSettingsBleSensors { }
+			}
+
 			ListNavigationItem {
 				//% "Bluetooth sensors"
 				text: qsTrId("settings_io_bt_sensors")
 				visible: Connman.technologyList.indexOf("bluetooth") !== -1
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
+					Global.pageManager.pushPage(pageSettingsBleSensors, {"title": text})
 				}
 			}
 		}

@@ -67,7 +67,12 @@ Page {
 				return statusText
 			}
 
-			onClicked: Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", { "evCharger": model.evCharger })
+			onClicked: Global.pageManager.pushPage(evChargerPage, { "evCharger": model.evCharger })
 		}
+	}
+	Component {
+		id: evChargerPage
+
+		EvChargerPage { }
 	}
 }

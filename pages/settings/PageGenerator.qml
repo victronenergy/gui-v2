@@ -241,9 +241,15 @@ Page {
 			//% "Settings"
 			text: qsTrId("settings_page_relay_generator_settings")
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
+				Global.pageManager.pushPage(pageSettingsGenerator,
 					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 			}
 		}
+	}
+
+	Component {
+		id: pageSettingsGenerator
+
+		PageSettingsGenerator { }
 	}
 }

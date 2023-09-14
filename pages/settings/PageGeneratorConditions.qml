@@ -113,10 +113,16 @@ Page {
 				unit: "V"
 			}
 
+			Component {
+				id: pageGeneratorAcLoad
+
+				PageGeneratorAcLoad { }
+			}
+
 			ListNavigationItem {
 				text: CommonWords.ac_load
 				secondaryText: acLoadEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorAcLoad.qml", { bindPrefix: root.bindPrefix + "/AcLoad"})
+				onClicked: Global.pageManager.pushPage(pageGeneratorAcLoad, { bindPrefix: root.bindPrefix + "/AcLoad"})
 
 				DataPoint {
 					id: acLoadEnabled
@@ -148,7 +154,7 @@ Page {
 				//% "Periodic run"
 				text: qsTrId("page_generator_conditions_periodic_run")
 				secondaryText: testRunEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorTestRun.qml", { title: text, bindPrefix: root.bindPrefix })
+				onClicked: Global.pageManager.pushPage(pageGeneratorTestRun, { title: text, bindPrefix: root.bindPrefix })
 
 				DataPoint {
 					id: testRunEnabled
@@ -157,5 +163,11 @@ Page {
 				}
 			}
 		}
+	}
+
+	Component {
+		id: pageGeneratorTestRun
+
+		PageGeneratorTestRun { }
 	}
 }

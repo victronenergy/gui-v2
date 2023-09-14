@@ -42,12 +42,18 @@ Page {
 				 : mockGpsModelComponent.createObject(root)
 
 		delegate: ListNavigationItem {
+			Component {
+				id: pageGps
+
+				PageGps { }
+			}
+
 			text: (productName.valid && vrmInstance.valid)
 				  ? "%1 [2]".arg(productName.value).arg(vrmInstance.value)
 				  : "--"
 
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageGps.qml",
+				Global.pageManager.pushPage(pageGps,
 						{"title": text, bindPrefix: model.uid })
 			}
 

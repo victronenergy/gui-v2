@@ -142,16 +142,26 @@ Page {
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageSettingsBatteries
+
+					PageSettingsBatteries { }
+				}
 				//% "Battery Measurements"
 				text: qsTrId("settings_system_battery_measurements")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteries.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageSettingsBatteries, { title: text })
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageSettingsSystemStatus
+
+					PageSettingsSystemStatus { }
+				}
 				//% "System Status"
 				text: qsTrId("settings_system_system_status")
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSystemStatus.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageSettingsSystemStatus, { title: text })
 			}
 		}
 	}

@@ -3,6 +3,7 @@
 */
 
 import QtQuick
+import QtQml
 import Victron.VenusOS
 import Utils
 
@@ -35,12 +36,25 @@ OverviewWidget {
 
 	MouseArea {
 		anchors.fill: parent
+
+		Component {
+			id: evChargerPage
+			EvChargerPage { }
+		}
+
+		Component {
+			id: evChargerListPage
+
+			EvChargerListPage { }
+		}
+
+
 		onClicked: {
 			if (Global.evChargers.model.count === 1) {
-				Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml",
+				Global.pageManager.pushPage(evChargerPage,
 						{ "evCharger": Global.evChargers.model.get(0).evCharger })
 			} else {
-				Global.pageManager.pushPage("/pages/evcs/EvChargerListPage.qml")
+				Global.pageManager.pushPage(evChargerListPage)
 			}
 		}
 	}

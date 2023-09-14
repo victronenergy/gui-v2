@@ -2,9 +2,10 @@
 ** Copyright (C) 2022 Victron Energy B.V.
 */
 
+import QtQml
 import QtQuick
-import Victron.VenusOS
 import Utils
+import Victron.VenusOS
 
 Page {
 	id: root // TODO: update this UI when a design is available
@@ -27,9 +28,15 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 			ListNavigationItem {
+				Component {
+					id: pageSettingsFroniusInverters
+
+					PageSettingsFroniusInverters { }
+				}
+
 				//% "Inverters"
 				text: qsTrId("page_settings_fronius_inverters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverters.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageSettingsFroniusInverters, {"title": text})
 			}
 
 			ListButton {
@@ -40,15 +47,27 @@ Page {
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageSettingsFroniusShowIpAddresses
+
+					PageSettingsFroniusShowIpAddresses { }
+				}
+
 				//% "Detected IP addresses"
 				text: qsTrId("page_settings_fronius_detected_ip_addresses")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageSettingsFroniusShowIpAddresses, {"title": text})
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageSettingsFroniusSetIpAddresses
+
+					PageSettingsFroniusSetIpAddresses { }
+				}
+
 				//% "Add IP address manually"
 				text: qsTrId("page_settings_fronius_add_ip_address_manually")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageSettingsFroniusSetIpAddresses, {"title": text})
 			}
 
 			ListPortField {

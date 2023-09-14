@@ -2,6 +2,7 @@
 ** Copyright (C) 2023 Victron Energy B.V.
 */
 
+import QtQml
 import QtQuick
 import Victron.VenusOS
 
@@ -28,26 +29,44 @@ Page {
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageSettingsFirmwareOnline
+
+					PageSettingsFirmwareOnline { }
+				}
+
 				//% "Online updates"
 				text: qsTrId("settings_online_updates")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
+					Global.pageManager.pushPage(pageSettingsFirmwareOnline, { title: text })
 				}
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageSettingsFirmwareOffline
+
+					PageSettingsFirmwareOffline { }
+				}
+
 				//% "Install firmware from SD/USB"
 				text: qsTrId("settings_install_firmware_from_sd_usb")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
+					Global.pageManager.pushPage(pageSettingsFirmwareOffline, { title: text })
 				}
 			}
 
 			ListNavigationItem {
+				Component {
+					id: pageSettingsRootfsSelect
+
+					PageSettingsRootfsSelect { }
+				}
+
 				//% "Stored backup firmware"
 				text: qsTrId("settings_stored_backup_firmware")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRootfsSelect.qml", { title: text })
+					Global.pageManager.pushPage(pageSettingsRootfsSelect, { title: text })
 				}
 			}
 		}

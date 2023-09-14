@@ -33,7 +33,13 @@ Page {
 			property DataPoint positionItem: DataPoint { source: inverterPath + "/Position" }
 			property DataPoint serialNumberItem: DataPoint { source: inverterPath + "/SerialNumber" }
 
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverter.qml", {"title": menu.text, "bindPrefix": menu.inverterPath})
+			Component {
+				id: pageSettingsFroniusInverter
+
+				PageSettingsFroniusInverter { }
+			}
+
+			onClicked: Global.pageManager.pushPage(pageSettingsFroniusInverter, {"title": menu.text, "bindPrefix": menu.inverterPath})
 			text: customNameItem.value || serialNumberItem.value || '--'
 			secondaryText: {
 				switch (positionItem.value) {

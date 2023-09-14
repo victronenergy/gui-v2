@@ -6,7 +6,7 @@
 */
 
 import QtQuick
-import Victron.VenusOS
+import Victron.VenusOS 2.0
 import net.connman 0.1
 
 Page {
@@ -17,6 +17,156 @@ Page {
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 
+	Component {
+		id: pageSettingsBluetooth
+
+		PageSettingsBluetooth { }
+	}
+
+	Component {
+		id: pageSettingsGeneral
+
+		PageSettingsGeneral { }
+	}
+
+	Component {
+		id: pageSettingsFirmware
+
+		PageSettingsFirmware { }
+	}
+
+	Component {
+		id: pageTzInfo
+
+		PageTzInfo { }
+	}
+
+	Component {
+		id: pageSettingsRemoteConsole
+
+		PageSettingsRemoteConsole { }
+	}
+
+	Component {
+		id: pageSettingsSystem
+
+		PageSettingsSystem { }
+	}
+
+	Component {
+		id: pageSettingsDvcc
+
+		PageSettingsDvcc { }
+	}
+
+	Component {
+		id: pageSettingsDisplay
+
+		PageSettingsDisplay { }
+	}
+
+	Component {
+		id: pageSettingsLogger
+
+		PageSettingsLogger { }
+	}
+
+	Component {
+		id: pageSettingsHub4
+
+		PageSettingsHub4 { }
+	}
+
+	Component {
+		id: pageSettingsCGwacsOverview
+
+		PageSettingsCGwacsOverview { }
+	}
+
+	Component {
+		id: pageSettingsFronius
+
+		PageSettingsFronius{ }
+	}
+
+	Component {
+		id: pageSettingsTcpIp
+
+		PageSettingsTcpIp { }
+	}
+
+	Component {
+		id: pageSettingsWifi
+
+		PageSettingsWifi { }
+	}
+
+	Component {
+		id: pageSettingsGsm
+
+		PageSettingsGsm { }
+	}
+
+	Component {
+		id: pageSettingsGpsList
+
+		PageSettingsGpsList { }
+	}
+
+	Component {
+		id: pageRelayGenerator
+
+		PageRelayGenerator { }
+	}
+
+	Component {
+		id: pageSettingsTankPump
+
+		PageSettingsTankPump { }
+	}
+
+	Component {
+		id: pageSettingsRelay
+
+		PageSettingsRelay { }
+	}
+
+	Component {
+		id: pageSettingsServices
+
+		PageSettingsServices { }
+	}
+
+	Component {
+		id: pageSettingsIo
+
+		PageSettingsIo { }
+	}
+
+	Component {
+		id: pageSettingsLarge
+
+		PageSettingsLarge { }
+	}
+
+	Component {
+		id: pageVrmDeviceInstances
+
+		PageVrmDeviceInstances { }
+	}
+
+	Component {
+		id: pageDebug
+
+		PageDebug { }
+	}
+
+	Component {
+		id: pageSettingsWifiWithAccessPoint
+
+		PageSettingsWifiWithAccessPoint { }
+	}
+
 	GradientListView {
 		id: settingsListView
 
@@ -24,125 +174,125 @@ Page {
 			{
 				//% "Bluetooth"
 				text: qsTrId("settings_bluetooth"),
-				page: "/pages/settings/PageSettingsBluetooth.qml",
+				page: pageSettingsBluetooth,
 				show: Connman.technologyList.indexOf("bluetooth") !== -1
 			},
 			{
 				//% "General"
 				text: qsTrId("settings_general"),
-				page: "/pages/settings/PageSettingsGeneral.qml"
+				page: pageSettingsGeneral
 			},
 			{
 				//% "Firmware"
 				text: qsTrId("settings_firmware"),
-				page: "/pages/settings/PageSettingsFirmware.qml"
+				page: pageSettingsFirmware
 			},
 			{
 				//% "Date & Time"
 				text: qsTrId("settings_date_and_time"),
-				page: "/pages/settings/PageTzInfo.qml"
+				page: pageTzInfo
 			},
 			{
 				//% "Remote Console"
 				text: qsTrId("settings_remote_console"),
-				page: "/pages/settings/PageSettingsRemoteConsole.qml"
+				page: pageSettingsRemoteConsole
 			},
 			{
 				//% "System setup"
 				text: qsTrId("settings_system_setup"),
-				page: "/pages/settings/PageSettingsSystem.qml"
+				page: pageSettingsSystem
 			},
 			{
 				//% "DVCC"
 				text: qsTrId("settings_system_dvcc"),
-				page: "/pages/settings/PageSettingsDvcc.qml"
+				page: pageSettingsDvcc
 			},
 			{
 				//% "Display & Language"
 				text: qsTrId("settings_display_and_language"),
-				page: "/pages/settings/PageSettingsDisplay.qml"
+				page: pageSettingsDisplay
 			},
 			{
 				//% "VRM online portal"
 				text: qsTrId("settings_vrm_online_portal"),
-				page: "/pages/settings/PageSettingsLogger.qml"
+				page: pageSettingsLogger
 			},
 			{
 				//% "ESS"
 				text: systemType.value === "Hub-4" ? systemType.value : qsTrId("settings_ess"),
-				page: "/pages/settings/PageSettingsHub4.qml"
+				page: pageSettingsHub4
 			},
 			{
 				//% "Energy meters"
 				text: qsTrId("settings_energy_meters"),
-				page: "/pages/settings/PageSettingsCGwacsOverview.qml"
+				page: pageSettingsCGwacsOverview
 			},
 			//% "PV inverters"
 			{
 				text: qsTrId("settings_pv_inverters"),
-				page: "/pages/settings/PageSettingsFronius.qml"
+				page: pageSettingsFronius
 			},
 			{
 				//% "Ethernet"
 				text: qsTrId("settings_ethernet"),
-				page: "/pages/settings/PageSettingsTcpIp.qml"
+				page: pageSettingsTcpIp
 			},
 			{
 				//% "Wi-Fi"
 				text: qsTrId("settings_wifi"),
 				page: accessPoint.valid
-					? "/pages/settings/PageSettingsWifiWithAccessPoint.qml"
-					: "/pages/settings/PageSettingsWifi.qml"
+					? pageSettingsWifiWithAccessPoint
+					: pageSettingsWifi
 			},
 			{
 				//% "GSM modem"
 				text: qsTrId("settings_gsm_modem"),
-				page: "/pages/settings/PageSettingsGsm.qml"
+				page: pageSettingsGsm
 			},
 			{
 				//% "GPS"
 				text: qsTrId("settings_gps"),
-				page: "/pages/settings/PageSettingsGpsList.qml"
+				page: pageSettingsGpsList
 			},
 			{
 				//% "Generator start/stop"
 				text: qsTrId("settings_generator_start_stop"),
-				page: "/pages/settings/PageRelayGenerator.qml"
+				page: pageRelayGenerator
 			},
 			{
 				//% "Tank pump"
 				text: qsTrId("settings_tank_pump"),
-				page: "/pages/settings/PageSettingsTankPump.qml"
+				page: pageSettingsTankPump
 			},
 			{
 				text: CommonWords.relay,
-				page: "/pages/settings/PageSettingsRelay.qml",
+				page: pageSettingsRelay,
 				visible: relay0.valid
 			},
 			{
 				//% "Services"
 				text: qsTrId("settings_services"),
-				page: "/pages/settings/PageSettingsServices.qml"
+				page: pageSettingsServices
 			},
 			{
 				//% "I/O"
 				text: qsTrId("settings_io"),
-				page: "/pages/settings/PageSettingsIo.qml"
+				page: pageSettingsIo
 			},
 			{
 				//% "Venus OS Large features"
 				text: qsTrId("settings_venus_os_large_features"),
-				page: "/pages/settings/PageSettingsLarge.qml",
+				page: pageSettingsLarge,
 				visible: signalK.valid || nodeRed.valid
 			},
 			{
 				//% "VRM Device Instances"
 				text: qsTrId("settings_vrm_device_instances"),
-				page: "/pages/settings/PageVrmDeviceInstances.qml",
+				page: pageVrmDeviceInstances
 			},
 			{
 				text: "Debug",
-				page: "/pages/settings/debug/PageDebug.qml",
+				page: pageDebug,
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			},
 		]

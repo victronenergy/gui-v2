@@ -96,16 +96,28 @@ Page {
 				]
 			}
 
+			Component {
+				id: pageSettingsVecanDevices
+
+				PageSettingsVecanDevices { }
+			}
+
+			Component {
+				id: pageSettingsRvcDevices
+
+				PageSettingsRvcDevices { }
+			}
+
 			ListNavigationItem {
 				//% "Devices"
 				text: qsTrId("settings_devices")
 				visible: root._isVecan || root._isRvc
 				onClicked: {
 					if (!!Global.pageManager) {
-						const url = root._isVecan
-								  ? "/pages/settings/PageSettingsVecanDevices.qml"
-								  : "/pages/settings/PageSettingsRvcDevices.qml"
-						Global.pageManager.pushPage(url, { gateway: root.gateway })
+						const page = root._isVecan
+								  ? pageSettingsVecanDevices
+								  : pageSettingsRvcDevices
+						Global.pageManager.pushPage(page, { gateway: root.gateway })
 					}
 				}
 			}
@@ -210,11 +222,17 @@ Page {
 				}
 			}
 
+			Component {
+				id: pageCanbusStatus
+
+				PageCanbusStatus { }
+			}
+
 			ListNavigationItem {
 				//% "Network status"
 				text: qsTrId("settings_network_status")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageCanbusStatus.qml",
+					Global.pageManager.pushPage(pageCanbusStatus,
 						{ gateway: root.gateway, title: root.title })
 				}
 			}
