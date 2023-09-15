@@ -77,7 +77,8 @@ jobs:
         mkdir build-wasm && cd build-wasm
         ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
         cmake --build .
-        sed -i "/^var Module/a Module.arguments = [ '--mqtt', 'ws://'+document.location.host+':9001/' ];" venus-gui-v2.js
+        grep -q -E '^var Module=[^;]*;' venus-gui-v2.js
+        sed -i "s%^\(var Module=[^;]*;\)%\1Module.arguments=['--mqtt','ws://'+document.location.host+':9001/'];%" venus-gui-v2.js
         sed -i "s/qtlogo.svg/victronenergy.svg/" venus-gui-v2.html
         sed -i "s/background-color: white;/background-color: #4790d0;/" venus-gui-v2.html
         sed -i "s/\(, body {\)/\1 background-color: #4790d0;/" venus-gui-v2.html
