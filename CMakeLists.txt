@@ -800,4 +800,4 @@ add_custom_target(graphviz
                  "${CMAKE_COMMAND}" "--graphviz=venus" .
                   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 # disable it for now, can re-enable for future analysis when required.
-add_dependencies(${PROJECT_NAME} graphviz)
+#add_dependencies(${PROJECT_NAME} graphviz)
