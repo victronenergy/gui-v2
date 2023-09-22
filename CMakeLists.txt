@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'qt_add_qml_module' properly, you get errors at runtime like: "qrc:/main.qml:164 ApplicationContent is not a type\n"
 
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
