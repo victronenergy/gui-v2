@@ -40,7 +40,7 @@ Item {
 			anchors.centerIn: parent
 			radius: width/2
 			startAngle: 0
-			endAngle: 360
+			endAngle: 359 // "Note that a single PathArc cannot be used to specify a circle."
 			progressColor: Theme.statusColorValue(gauges.status)
 			remainderColor: Theme.statusColorValue(gauges.status, true)
 			strokeWidth: Theme.geometry.circularSingularGauge.strokeWidth
