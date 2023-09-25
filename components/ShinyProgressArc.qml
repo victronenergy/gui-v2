@@ -6,7 +6,7 @@
 import QtQuick
 import QtQuick.Shapes
 import Victron.VenusOS
-import Qt5Compat.GraphicalEffects as Effects
+import QtQuick.Effects as Effects
 
 Item {
 	id: control
@@ -41,12 +41,13 @@ Item {
 	}
 
 	// Unfortunately, we need two separate Shape items in the shine animation case,
-	// as we need to use an Item-derived type as the maskSource of the OpacityMask,
+	// as we need to use a layer-enabled Item-derived type as the maskSource of the MultiEffect,
 	// and thus a ShapePath cannot be used as the maskSource
 	// (and we only want the shine over the "progress" area, not "remainder").
 	Shape {
 		id: progressShape
 		anchors.fill: parent
+		layer.enabled: true
 
 		Arc {
 			id: progress
@@ -65,62 +66,97 @@ Item {
 	Item {
 		id: shineItem
 		anchors.fill: progressShape
-		visible: false
+		visible: false // set this to true, and disable the maskEffect, to see the basic shine in action.
 
-		Rectangle {
-			id: shineRect
+		Item {
+			id: shineBar
 
-			y: parent.height/2 - height*Theme.geometry.briefPage.centerGauge.shine.highlightPosition
-			x: parent.width/2
-			width: parent.width/2 + 3*control.strokeWidth
-			height: Theme.geometry.briefPage.centerGauge.shine.widthRatio * shineItem.height
+			height: parent.height
+			width: 10*control.strokeWidth // this defines the length of the shine effect, basically, as it will be half this width.
+			x: (parent.width-width)/2
 
-			gradient: Gradient {
-				GradientStop { position: 0; color: "transparent" }
-				GradientStop { position: Theme.geometry.briefPage.centerGauge.shine.highlightPosition; color: Theme.color.briefPage.circularGauge.shine }
-				GradientStop { position: 1.0; color: "transparent" }
+			Rectangle {
+				id: shineRect
+
+				// the length of the shine.
+				width: parent.width/2
+
+				// raise up and allow enough overlap to ensure that there are no pixels "missed" during the rotation.
+				height: width
+				y: -height/3
+
+				// the highlight position of the shine must line up with the horizontal centre of the parent to ensure that it is always perpendicular to the arc direction as it rotates.
+				x: (parent.width-width)/2 - (width*Theme.geometry.briefPage.centerGauge.shine.highlightPosition)/2
+
+				opacity: 1.0
+
+				gradient: Gradient {
+					orientation: Gradient.Horizontal
+					GradientStop { position: 0; color: "transparent" }
+					GradientStop { position: Theme.geometry.briefPage.centerGauge.shine.highlightPosition; color: Theme.color.briefPage.circularGauge.shine }
+					GradientStop { position: 1.0; color: "transparent" }
+				}
 			}
 
-			opacity: 0.0
-			Behavior on opacity { OpacityAnimator { duration: Theme.animation.page.fade.duration } }
-
-			transform: Rotation {
-				id: rot
-				origin.x: 0
-				origin.y: shineRect.height*Theme.geometry.briefPage.centerGauge.shine.highlightPosition
-				angle: -60
-			}
-
-			SequentialAnimation {
-				running: control.animationEnabled && control.shineAnimationEnabled
+			ParallelAnimation {
+				running: maskEffect.visible
 				loops: Animation.Infinite
-				ScriptAction {
-					script: { shineRect.opacity = 1.0; opacityTimer.start() }
+				SequentialAnimation {
+					OpacityAnimator {
+						id: fadeInAnimator
+						target: shineBar
+						from: 0.0
+						to: 0.998
+						duration: 2*Theme.animation.page.fade.duration
+					}
+					OpacityAnimator {
+						id: brightPauseAnimator // effectively a pause animation, but need it to be an animator...
+						target: shineBar
+						from: 0.998
+						to: 1.0
+						duration: rotationAnimator.duration - fadeInAnimator.duration - fadeOutAnimator.duration
+					}
+					OpacityAnimator {
+						id: fadeOutAnimator
+						target: shineBar
+						from: 1.0
+						to: 0.002
+						duration: Theme.animation.page.fade.duration
+					}
+					OpacityAnimator {
+						id: waitPauseAnimator // effectively a pause animation, but need it to be an animator...
+						target: shineBar
+						from: 0.002
+						to: 0.0
+						duration: pauseAnimator.duration
+					}
 				}
-				NumberAnimation {
-					target: rot
-					property: "angle"
-					easing { type: Easing.InOutQuad }
-					from: -80 // not -90, as we want to avoid overspill from the trailing edge.
-					to:   260 // not 270, as we want to avoid overspill from the leading edge.
-					duration: Theme.animation.briefPage.centerGauge.shine.duration
-				}
-				PauseAnimation {
-					duration: Theme.animation.briefPage.centerGauge.shine.duration * Theme.animation.briefPage.centerGauge.shine.pauseRatio
+				SequentialAnimation {
+					RotationAnimator {
+						id: rotationAnimator
+						target: shineBar
+						easing { type: Easing.InOutCubic }
+						from: -2 // avoid overspill from the trailing edge.
+						to:   349 // avoid overspill from the leading edge.
+						duration: Theme.animation.briefPage.centerGauge.shine.duration
+					}
+					RotationAnimator {
+						id: pauseAnimator // effectively a pause animation, but need it to be an animator...
+						target: shineBar
+						from: 349
+						to:   350
+						duration: Theme.animation.briefPage.centerGauge.shine.duration * Theme.animation.briefPage.centerGauge.shine.pauseRatio
+					}
 				}
 			}
-		}
-
-		Timer {
-			id: opacityTimer
-			interval: Theme.animation.briefPage.centerGauge.shine.duration - Theme.animation.page.fade.duration
-			onTriggered: shineRect.opacity = 0.0
 		}
 	}
 
-	Effects.OpacityMask {
+	Effects.MultiEffect {
+		id: maskEffect
 		visible: control.animationEnabled && control.shineAnimationEnabled
-		anchors.fill: control
+		anchors.fill: progressShape
+		maskEnabled: true
 		maskSource: progressShape
 		source: shineItem
 	}
