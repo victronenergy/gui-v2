@@ -14,6 +14,7 @@ CT.SpinBox {
 	property alias label: label
 	property int indicatorImplicitWidth: Theme.geometry.spinBox.indicator.minimumWidth
 	property int orientation: Qt.Horizontal
+	property int _scalingFactor: 1
 
 	signal maxValueReached()
 	signal minValueReached()
@@ -34,6 +35,13 @@ CT.SpinBox {
 			label.implicitHeight)
 
 	spacing: Theme.geometry.spinBox.spacing
+	onValueModified: {
+		if (value === to) {
+			root.maxValueReached()
+		} else if (value === from) {
+			root.minValueReached()
+		}
+	}
 
 	contentItem: Label {
 		id: label
@@ -91,23 +99,27 @@ CT.SpinBox {
 			: Theme.geometry.spinBox.indicator.verticalOrientation.height
 	}
 
-	readonly property bool _upPressed: up.pressed
-	on_UpPressed: {
-		if (_upPressed) {
-			if ((value + stepSize) > to ) {
-				root.maxValueReached()
+	Timer {
+		id: timer
+
+		interval: 1000
+		repeat: true
+		running: up.pressed || down.pressed
+		onTriggered: _scalingFactor *= 2
+		onRunningChanged: {
+			if (!running) {
+				_scalingFactor = 1
 			}
-			root.increase()
 		}
 	}
-
-	readonly property bool _downPressed: down.pressed
-	on_DownPressed: {
-		if (_downPressed) {
-			if ((value - stepSize) < from ) {
-				root.minValueReached()
+	Timer {
+		interval: 100
+		repeat: true
+		running: timer.running
+		onTriggered: {
+			for (let i = 0; i < _scalingFactor; ++i) {
+				up.pressed ? root.increase() : root.decrease()
 			}
-			root.decrease()
 		}
 	}
 }
