@@ -30,7 +30,9 @@ CT.Switch {
 		anchors.verticalCenter: parent.verticalCenter
 
 		Rectangle {
-			anchors.centerIn: parent
+			id: indicatorBackground
+
+			anchors.right: parent.right
 			width: Theme.geometry.switch.groove.width
 			height: Theme.geometry.switch.groove.height
 			radius: Theme.geometry.switch.indicator.width
@@ -45,8 +47,10 @@ CT.Switch {
 	}
 
 	indicator: Image {
-		x: root.checked ? parent.width - width : 0
-		y: parent.height/2 - height/2 + Theme.geometry.switch.indicator.shadowOffset
+		x: root.checked
+		   ? parent.width - width + Theme.geometry.switch.indicator.shadowOffset
+		   : parent.width - indicatorBackground.width - Theme.geometry.switch.indicator.shadowOffset
+		y: parent.height/2 - height/2
 		width: Theme.geometry.switch.indicator.width
 		height: Theme.geometry.switch.indicator.width
 		source: "qrc:/images/switch_indicator.png"
