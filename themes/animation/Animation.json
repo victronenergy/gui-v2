@@ -40,5 +40,6 @@
     "animation.settings.radioButtonPage.autoClose.duration": 600,
     "animation.loadGraph.model.length": 12,
     "animation.loadGraph.minimumRange.watts": 1000,
-    "animation.solarHistoryErrorView.expand.duration": 100
+    "animation.solarHistoryErrorView.expand.duration": 100,
+    "animation.acceptButtonBackground.expand.duration": 2000
 }

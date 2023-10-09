@@ -9,10 +9,12 @@ import Victron.VenusOS
 C.Dialog {
 	id: root
 
+	property string secondaryTitle
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndClose
 	property alias canAccept: doneButton.enabled
 	property var tryAccept  // optional function: called when accept is attempted, return true if can accept.
 
+	readonly property alias acceptButton: doneButton
 	property string acceptText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndClose
 			  //% "Set"
 			? qsTrId("controlcard_set")
@@ -54,21 +56,33 @@ C.Dialog {
 	}
 
 	header: Item {
-		width: parent ? parent.width : 0
-		height: headerLabel.y + (root.title.length ? headerLabel.implicitHeight : 0)
+		width: root.width
+		height: Theme.geometry.modalDialog.header.height
 
 		Label {
 			id: headerLabel
 
 			anchors {
-				top: parent.top
-				topMargin: Theme.geometry.modalDialog.header.title.topMargin
+				verticalCenter: parent.verticalCenter
+				verticalCenterOffset: secondaryHeaderLabel.text.length ? -secondaryHeaderLabel.height / 2 : 0
 			}
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
 			color: Theme.color.font.primary
-			font.pixelSize: Theme.font.size.body3
+			font.pixelSize: root.secondaryTitle.length ? Theme.font.size.body1 : Theme.font.size.body3
 			text: root.title
+			wrapMode: Text.Wrap
+		}
+
+		Label {
+			id: secondaryHeaderLabel
+
+			anchors.top: headerLabel.bottom
+			width: parent.width
+			horizontalAlignment: Text.AlignHCenter
+			color: Theme.color.font.primary
+			font.pixelSize: Theme.font.size.body2
+			text: root.secondaryTitle
 			wrapMode: Text.Wrap
 		}
 	}
@@ -81,7 +95,9 @@ C.Dialog {
 			anchors {
 				top: parent.top
 				left: parent.left
+				leftMargin: root.background.border.width
 				right: parent.right
+				rightMargin: root.background.border.width
 			}
 		}
 		Button {
@@ -91,6 +107,7 @@ C.Dialog {
 				right: footerMidSeparator.left
 				top: footerTopSeparator.bottom
 				bottom: parent.bottom
+				bottomMargin: root.background.border.width
 			}
 
 			font.pixelSize: Theme.font.size.body2
@@ -113,9 +130,8 @@ C.Dialog {
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry.modalDialog.footer.midSeparator.margins
-				top: parent.top
-				topMargin: Theme.geometry.modalDialog.footer.midSeparator.margins
+				bottomMargin: root.background.border.width
+				top: footerTopSeparator.bottom
 			}
 			width: Theme.geometry.modalDialog.footer.midSeparator.width
 		}
@@ -124,8 +140,10 @@ C.Dialog {
 			anchors {
 				left: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly ? parent.left : footerMidSeparator.right
 				right: parent.right
-				top: parent.top
+				rightMargin: root.background.border.width
+				top: footerTopSeparator.bottom
 				bottom: parent.bottom
+				bottomMargin: root.background.border.width
 			}
 
 			font.pixelSize: Theme.font.size.body2

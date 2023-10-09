@@ -3,7 +3,7 @@
         <file>ApplicationContent.qml</file>
         <file>Global.qml</file>
         <file>FrameRateVisualizer.qml</file>
-        <file>components/ActionButton.qml</file>
+        <file>components/AcceptButtonBackground.qml</file>
         <file>components/Arc.qml</file>
         <file>components/ArcGauge.qml</file>
         <file>components/ArcGaugeQuantityLabel.qml</file>
@@ -88,7 +88,8 @@
         <file>components/dialogs/DialogShadow.qml</file>
         <file>components/dialogs/VrmInstanceSwapDialog.qml</file>
         <file>components/dialogs/ESSMinimumSOCDialog.qml</file>
-        <file>components/dialogs/GeneratorDurationSelectorDialog.qml</file>
+        <file>components/dialogs/GeneratorStartDialog.qml</file>
+        <file>components/dialogs/GeneratorStopDialog.qml</file>
         <file>components/dialogs/InverterChargerModeDialog.qml</file>
         <file>components/dialogs/ModalDialog.qml</file>
         <file>components/dialogs/ModalWarningDialog.qml</file>
