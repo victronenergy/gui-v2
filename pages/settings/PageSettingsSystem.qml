@@ -17,8 +17,7 @@ Page {
 		{ display: qsTrId("settings_system_not_available"), value: 0 },
 		//% "Grid"
 		{ display: qsTrId("settings_system_grid"), value: 1 },
-		//% "Generator"
-		{ display: qsTrId("settings_system_generator"), value: 2 },
+		{ display: CommonWords.generator, value: 2 },
 		//% "Shore power"
 		{ display: qsTrId("settings_system_shore_power"), value: 3 },
 	]

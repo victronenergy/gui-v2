@@ -71,6 +71,9 @@ QtObject {
 	//% "Firmware version"
 	readonly property string firmware_version: qsTrId("common_words_firmware_version")
 
+	//% "Generator"
+	readonly property string generator: qsTrId("common_words_generator")
+
 	//% "%1 Hour(s)"
 	readonly property string x_hours: qsTrId("common_words_x_hours")
 

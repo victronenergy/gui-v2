@@ -9,8 +9,7 @@ import "/components/Utils.js" as Utils
 AcInputWidget {
 	id: root
 
-	//% "Generator"
-	title: qsTrId("overview_widget_generator_title")
+	title: CommonWords.generator
 	icon.source: "qrc:/images/generator.svg"
 	type: VenusOS.OverviewWidget_Type_AcGenerator
 	input: Global.acInputs.generatorInput
