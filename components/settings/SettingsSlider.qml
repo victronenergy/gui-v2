@@ -23,7 +23,7 @@ Slider {
 	to: dataPoint.max !== undefined ? dataPoint.max : 1
 	stepSize: (to-from) / Theme.geometry.listItem.slider.stepDivsion
 	value: to > from && dataValid ? dataValue : 0
-	enabled: source === "" || dataValid
+	enabled: dataSource === "" || dataValid
 
 	onPressedChanged: {
 		if (root.value !== root._emittedValue) {
