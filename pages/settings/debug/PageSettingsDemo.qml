@@ -148,6 +148,7 @@ Page {
 
 			ListDateSelector {
 				text: "Date selection"
+				date: new Date()
 			}
 
 			ListTimeSelector {
