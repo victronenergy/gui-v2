@@ -121,8 +121,7 @@ Column {
 			WidgetHeader {
 				id: generatorHeader
 
-				//% "Generator"
-				title: qsTrId("brief_generator")
+				title: CommonWords.generator
 				icon.source: "qrc:/images/generator.svg"
 			}
 

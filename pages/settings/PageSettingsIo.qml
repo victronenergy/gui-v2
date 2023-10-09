@@ -100,8 +100,7 @@ Page {
 									{ display: qsTrId("settings_io_digital_input_bilge_fire"), value: VenusOS.DigitalInput_FireAlarm },
 									//% "CO2 alarm"
 									{ display: qsTrId("settings_io_digital_input_co2_alarm"), value: VenusOS.DigitalInput_CO2Alarm },
-									//% "Generator"
-									{ display: qsTrId("settings_io_digital_input_generator"), value: VenusOS.DigitalInput_Generator },
+									{ display: CommonWords.generator, value: VenusOS.DigitalInput_Generator },
 								]
 							}
 						}
