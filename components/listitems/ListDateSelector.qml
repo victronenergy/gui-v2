@@ -20,7 +20,7 @@ ListButton {
 	property var _dateSelector
 
 	button.text: date == null ? "--" : Qt.formatDate(date, "yyyy-MM-dd")
-	enabled: source === "" || dataValid
+	enabled: dataSource === "" || dataValid
 
 	onClicked: {
 		if (!_dateSelector) {
