@@ -18,13 +18,14 @@ ModalDialog {
 	//% "Set time"
 	title: qsTrId("timeselectordialog_set_time")
 
-	contentItem: TimeSelector {
-		id: timeSelector
+	contentItem: Item {
+		TimeSelector {
+			id: timeSelector
 
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry.timeSelectorDialog.content.topMargin
-			bottom: parent.footer.top
+			anchors {
+				centerIn: parent
+				verticalCenterOffset: -Theme.geometry.modalDialog.content.margins
+			}
 		}
 	}
 }

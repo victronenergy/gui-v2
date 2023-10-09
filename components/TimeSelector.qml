@@ -15,33 +15,13 @@ Item {
 	property int maximumHour: 23
 	property int maximumMinute: 59
 
-	implicitWidth: minSpinbox.x + minSpinbox.width
+	implicitWidth: hrSpinbox.width + colonLabel.width + minSpinbox.width + (2 * Theme.geometry.timeSelector.spacing)
 	implicitHeight: hrSpinbox.y + hrSpinbox.height
-
-	Label {
-		id: hrLabel
-		anchors.horizontalCenter: hrSpinbox.horizontalCenter
-
-		//% "hr"
-		text: qsTrId("timeselector_hr")
-		color: Theme.color.font.secondary
-	}
-
-	Label {
-		id: minLabel
-		anchors.horizontalCenter: minSpinbox.horizontalCenter
-
-		//% "min"
-		text: qsTrId("timeselector_min")
-		color: Theme.color.font.secondary
-	}
 
 	SpinBox {
 		id: hrSpinbox
 		anchors {
-			top: hrLabel.bottom
-			topMargin: Theme.geometry.timeSelector.timeLabel.spacing
-			right: parent.horizontalCenter
+			right: colonLabel.left
 			rightMargin: Theme.geometry.timeSelector.spacing
 		}
 
@@ -50,6 +30,8 @@ Item {
 		from: 0
 		to: root.maximumHour
 		label.text: Utils.pad(value, 2)
+		//% "hr"
+		secondaryText: qsTrId("timeselector_hr")
 	}
 
 	Label {
@@ -67,9 +49,7 @@ Item {
 	SpinBox {
 		id: minSpinbox
 		anchors {
-			top: minLabel.bottom
-			topMargin: Theme.geometry.timeSelector.timeLabel.spacing
-			left: parent.horizontalCenter
+			left: colonLabel.right
 			leftMargin: Theme.geometry.timeSelector.spacing
 		}
 
@@ -78,5 +58,7 @@ Item {
 		from: 0
 		to: root.maximumMinute
 		label.text: Utils.pad(value, 2)
+		//% "min"
+		secondaryText: qsTrId("timeselector_min")
 	}
 }

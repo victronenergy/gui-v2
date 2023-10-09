@@ -41,15 +41,11 @@ ModalDialog {
 	}
 
 	contentItem: Item {
-		anchors {
-			top: parent.header.bottom
-			bottom: parent.footer.top
-			left: parent.left
-			right: parent.right
-		}
-
 		Column {
-			anchors.verticalCenter: parent.verticalCenter
+			anchors {
+				verticalCenter: parent.verticalCenter
+				verticalCenterOffset: -Theme.geometry.modalDialog.content.margins
+			}
 			width: parent.width
 			spacing: Theme.geometry.modalDialog.content.spacing
 

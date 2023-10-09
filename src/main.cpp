@@ -316,8 +316,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "TextField");
 
 	/* components */
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ActionButton.qml")),
-		"Victron.VenusOS", 2, 0, "ActionButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AcceptButtonBackground.qml")),
+		"Victron.VenusOS", 2, 0, "AcceptButtonBackground");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Arc.qml")),
 		"Victron.VenusOS", 2, 0, "Arc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGauge.qml")),
@@ -564,8 +564,10 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ESSMinimumSOCDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorDisableAutostartDialog.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorDisableAutostartDialog");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorDurationSelectorDialog.qml")),
-		"Victron.VenusOS", 2, 0, "GeneratorDurationSelectorDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorStartDialog.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorStartDialog");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/GeneratorStopDialog.qml")),
+		"Victron.VenusOS", 2, 0, "GeneratorStopDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/InverterChargerModeDialog.qml")),
 		"Victron.VenusOS", 2, 0, "InverterChargerModeDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/ModalDialog.qml")),

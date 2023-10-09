@@ -12,6 +12,7 @@ CT.SpinBox {
 	id: root
 
 	property alias label: primaryLabel
+	property string secondaryText
 	property int indicatorImplicitWidth: Theme.geometry.spinBox.indicator.minimumWidth
 	property int orientation: Qt.Horizontal
 	property int _scalingFactor: 1
@@ -21,12 +22,12 @@ CT.SpinBox {
 
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 		orientation === Qt.Horizontal
-			? primaryLabel.width + up.indicator.width + down.indicator.width + (2 * Theme.geometry.spinBox.spacing) + leftPadding + rightPadding
-			: primaryLabel.width + leftPadding + rightPadding)
+			? valueColumn.width + up.indicator.width + down.indicator.width + (2 * Theme.geometry.spinBox.spacing) + leftPadding + rightPadding
+			: valueColumn.width + leftPadding + rightPadding)
 	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
 		orientation === Qt.Horizontal
-			? Math.max(primaryLabel.implicitHeight, up.indicator.height, down.indicator.height) + topPadding + bottomPadding
-			: primaryLabel.implicitHeight + up.indicator.height + down.indicator.height + (2 * Theme.geometry.spinBox.spacing) + topPadding + bottomPadding)
+			? Math.max(valueColumn.height, up.indicator.height, down.indicator.height) + topPadding + bottomPadding
+			: valueColumn.height + up.indicator.height + down.indicator.height + (2 * Theme.geometry.spinBox.spacing) + topPadding + bottomPadding)
 
 	spacing: Theme.geometry.spinBox.spacing
 	onValueModified: {
@@ -38,16 +39,33 @@ CT.SpinBox {
 	}
 
 	contentItem: Item {
-		Label {
-			id: primaryLabel
+		Column {
+			id: valueColumn
 
+			width: Math.max(primaryLabel.implicitWidth, secondaryLabel.implicitWidth)
 			anchors.centerIn: parent
-			width: parent.width
-			text: root.textFromValue(root.value, root.locale)
-			color: root.enabled ? Theme.color.font.primary : Theme.color.font.disabled
-			font.pixelSize: Theme.font.size.h3
-			horizontalAlignment: Qt.AlignHCenter
-			verticalAlignment: Qt.AlignVCenter
+
+			Label {
+				id: primaryLabel
+
+				width: parent.width
+				text: root.textFromValue(root.value, root.locale)
+				color: root.enabled ? Theme.color.font.primary : Theme.color.font.disabled
+				font.pixelSize: root.secondaryText.length ? Theme.font.size.h2 : Theme.font.size.h3
+				horizontalAlignment: Qt.AlignHCenter
+				verticalAlignment: Qt.AlignVCenter
+			}
+
+			Label {
+				id: secondaryLabel
+
+				width: primaryLabel.width
+				height: text.length ? implicitHeight : 0
+				text: root.secondaryText
+				color: Theme.color.font.secondary
+				font.pixelSize: Theme.font.size.caption
+				horizontalAlignment: Qt.AlignHCenter
+			}
 		}
 	}
 

@@ -46,8 +46,7 @@
 
     "geometry.spinBox.indicator.minimumWidth": 64,
     "geometry.spinBox.indicator.maximumWidth": 136,
-    "geometry.spinBox.indicator.horizontalOrientation.height": 72,
-    "geometry.spinBox.indicator.verticalOrientation.height": 56,
+    "geometry.spinBox.indicator.height": 64,
     "geometry.spinBox.indicator.radius": 6,
     "geometry.spinBox.spacing": "geometry.button.spacing",
 
@@ -73,8 +72,7 @@
 
     "geometry.timeSelector.spinBox.width": 238,
     "geometry.timeSelector.spinBox.height": 72,
-    "geometry.timeSelector.spacing": 24,
-    "geometry.timeSelector.timeLabel.spacing": 10,
+    "geometry.timeSelector.spacing": 16,
 
     "geometry.navigationBar.initialize.margin": 12,
     "geometry.navigationBar.height": 72,
@@ -123,9 +121,6 @@
     "geometry.toastNotification.icon.width": 28,
     "geometry.toastNotification.label.padding": 16,
 
-    "geometry.generatorDurationSelectorDialog.content.topMargin": 100,
-    "geometry.timeSelectorDialog.content.topMargin": 100,
-
     "geometry.controlCard.minimumWidth": 352,
     "geometry.controlCard.maximumWidth": 368,
     "geometry.controlCard.contentMargins": 16,
@@ -134,20 +129,17 @@
     "geometry.controlCard.title.topMargin": 12,
     "geometry.controlCard.title.leftPadding" : 4,
     "geometry.controlCard.title.icon.height" : 24,
-    "geometry.controlCard.subCard.header.height": 40,
     "geometry.controlCard.mediumItem.height" : 56,
     "geometry.controlCard.largeItem.height" : 72,
     "geometry.controlCard.itemSeparator.margins": 8,
-    "geometry.controlCard.subCard.margins": 8,
-    "geometry.controlCard.subCard.header.height": 40,
 
     "geometry.modalDialog.width": 624,
     "geometry.modalDialog.height": 368,
     "geometry.modalDialog.radius": 8,
-    "geometry.modalDialog.header.title.topMargin": 21,
+    "geometry.modalDialog.header.height": 78,
     "geometry.modalDialog.footer.height": 64,
     "geometry.modalDialog.footer.midSeparator.width": 1,
-    "geometry.modalDialog.footer.midSeparator.margins": 8,
+    "geometry.modalDialog.content.margins": 20,
     "geometry.modalDialog.content.spacing": 40,
     "geometry.modalDialog.content.horizontalMargin": 64,
 
@@ -235,8 +227,6 @@
     "geometry.splashView.progressText.spacing": 4,
     "geometry.splashView.progressIconContainer.size": 46,
 
-    "geometry.generatorCard.durationButton.height": 40,
-    "geometry.generatorCard.durationButton.width": 112,
     "geometry.generatorCard.startButton.height": 48,
 
     "geometry.generatorIconLabel.icon.width": 24,

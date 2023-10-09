@@ -20,8 +20,8 @@ QtObject {
 			id: generator
 
 			property int state: VenusOS.Generators_State_Running
-			property bool autoStart
-			property int manualStartTimer
+			property bool autoStart: true
+			property int manualStartTimer: 60 * 60
 			property int runtime: 35
 			property int runningBy: VenusOS.Generators_RunningBy_Soc
 
@@ -39,7 +39,7 @@ QtObject {
 			}
 
 			function setAutoStart(auto) {
-				_autoStart = auto ? 1 : 0
+				autoStart = auto ? 1 : 0
 			}
 
 			property Timer runTimerTimer: Timer {
