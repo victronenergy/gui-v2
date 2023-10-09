@@ -135,12 +135,12 @@ function formatAsHHMMSS(seconds, showUnits) {
 
 	const duration = decomposeDuration(seconds)
 
-	// If more than 60 minutes, show hours as well
+	// If hour is present, show it
 	let s = pad(duration.m, 2)
 		+ (showUnits ? "m " : ":")
 		+ pad(duration.s, 2)
 		+ (showUnits ? "s" : "")
-	if (duration.m > 60) {
+	if (duration.h > 0) {
 		s = pad(duration.h, 2) + (showUnits ? "h:" : ":") + s
 	}
 	return s
