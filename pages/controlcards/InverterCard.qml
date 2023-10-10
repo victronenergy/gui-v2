@@ -41,6 +41,7 @@ ControlCard {
 	Column {
 		anchors {
 			top: parent.status.bottom
+			topMargin: Theme.geometry.controlCard.status.bottomMargin
 			left: parent.left
 			right: parent.right
 		}
@@ -79,6 +80,7 @@ ControlCard {
 			label.text: CommonWords.mode
 			button.text: Global.inverters.inverterModeToText(root.inverter.mode)
 			enabled: root.inverter.modeAdjustable
+			separator.visible: false
 
 			onClicked: {
 				if (!_modeDialog) {
