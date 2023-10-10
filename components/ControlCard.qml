@@ -22,13 +22,10 @@ Rectangle {
 			top: parent.top
 			topMargin: Theme.geometry.controlCard.title.topMargin
 			left: parent.left
-			leftMargin: Theme.geometry.controlCard.title.leftMargin
+			leftMargin: Theme.geometry.controlCard.contentMargins
 		}
-
-		leftPadding: Theme.geometry.controlCard.title.leftPadding
 		spacing: Theme.geometry.controlCard.title.spacing
 		display: C.AbstractButton.TextBesideIcon
-		icon.height: Theme.geometry.controlCard.title.icon.height
 		icon.color: Theme.color.font.primary
 
 		font.family: VenusFont.normal.name
@@ -41,8 +38,7 @@ Rectangle {
 
 		anchors {
 			top: title.bottom
-			left: parent.left
-			leftMargin: Theme.geometry.controlCard.title.leftMargin
+			left: title.left
 		}
 		font.pixelSize: Theme.font.size.body3
 	}

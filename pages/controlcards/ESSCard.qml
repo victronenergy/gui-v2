@@ -43,6 +43,8 @@ ControlCard {
 			//: State of charge as a percentage value
 			//% "%1%"
 			button.text: qsTrId("ess_card_minimum_soc_value").arg(Global.ess.minimumStateOfCharge)
+			separator.visible: warningRow.visible
+
 			onClicked: {
 				if (!_minSocDialog) {
 					_minSocDialog = minSocDialogComponent.createObject(Global.dialogLayer)
@@ -61,6 +63,7 @@ ControlCard {
 			id: warningRow
 			height: Theme.geometry.controlCard.mediumItem.height
 			width: parent.width
+			visible: Global.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
 
 			Label {
 				id: warning
@@ -69,7 +72,6 @@ ControlCard {
 					leftMargin: Theme.geometry.controlCard.contentMargins
 					verticalCenter: parent.verticalCenter
 				}
-				visible: Global.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
 				color: Theme.color.font.secondary
 				font.pixelSize: Theme.font.size.body1
 				//% "Battery life limit: %1%"
@@ -77,14 +79,13 @@ ControlCard {
 			}
 
 			CP.IconImage {
-				visible: warning.visible
 				anchors {
 					right: parent.right
 					rightMargin: Theme.geometry.controlCard.contentMargins
 					verticalCenter: parent.verticalCenter
 				}
 				source: "qrc:/images/information.svg"
-				color: Theme.color.ok
+				color: Theme.color.font.primary
 			}
 		}
 	}

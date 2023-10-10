@@ -94,7 +94,10 @@ ControlCard {
 
 		property var _confirmationDialog
 
-		anchors.top: substatus.bottom
+		anchors {
+			top: root.status.bottom
+			topMargin: Theme.geometry.controlCard.status.bottomMargin
+		}
 
 		//% "Autostart"
 		label.text: qsTrId("controlcard_generator_label_autostart")
@@ -158,7 +161,7 @@ ControlCard {
 		property int _generatorStateBeforeDialogOpen: -1
 
 		anchors {
-			margins: Theme.geometry.controlCard.contentMargins
+			margins: Theme.geometry.controlCard.button.margins
 			bottom: parent.bottom
 			left: parent.left
 			right: parent.right
