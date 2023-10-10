@@ -22,56 +22,53 @@ ModalDialog {
 	title: qsTrId("ess_card_minimum_soc")
 
 	contentItem: Item {
-		width: parent.width
-		Label {
-			id: label
+		Column {
+			width: parent.width
 
-			anchors {
-				top: parent.top
-				topMargin: 27
-				horizontalCenter: parent.horizontalCenter
+			Label {
+				anchors.horizontalCenter: parent.horizontalCenter
+				font.pixelSize: Theme.font.size.h3
+				text: qsTrId("%1%").arg(root.minimumStateOfCharge)
 			}
-			font.pixelSize: Theme.font.size.h3
-			text: qsTrId("%1%").arg(root.minimumStateOfCharge)
-		}
-		Label {
-			id: label2
 
-			anchors {
-				top: label.bottom
-				horizontalCenter: parent.horizontalCenter
+			Label {
+				anchors.horizontalCenter: parent.horizontalCenter
+				color: Theme.color.font.secondary
+				//: Shown below the minimum state of charge, as configured by the user
+				//% "Unless grid fails"
+				text: qsTrId("ess_unless_grid_fails")
 			}
-			color: Theme.color.font.secondary
-			//% "Unless grid fails"
-			text: qsTrId("ess_unless_grid_fails")
-		}
-		Slider {
-			id: slider
 
-			anchors {
-				top: label2.bottom
-				topMargin: 19
-				horizontalCenter: parent.horizontalCenter
+			Item {
+				width: 1
+				height: Theme.geometry.modalDialog.content.margins / 2
 			}
-			from: 0
-			to: 100
-			width: parent.width - 128
-			height: 24
-			value: root.minimumStateOfCharge
-			onMoved: root.minimumStateOfCharge = value
-		}
-		Label {
-			id: recommendation
 
-			anchors {
-				top: slider.bottom
-				topMargin: 31
-				horizontalCenter: parent.horizontalCenter
+			Slider {
+				anchors.horizontalCenter: parent.horizontalCenter
+				width: parent.width - (2 * Theme.geometry.modalDialog.content.horizontalMargin)
+				value: root.minimumStateOfCharge
+				from: 0
+				to: 100
+				onMoved: root.minimumStateOfCharge = value
 			}
-			color: Theme.color.font.secondary
-			// TODO set this text depending on battery type?
-			//% "For xxx type batteries, below 10% is not recommended"
-			text: qsTrId("ess_recommended")
+
+			Item {
+				width: 1
+				height: Theme.geometry.modalDialog.content.margins
+			}
+
+			Label {
+				anchors.horizontalCenter: parent.horizontalCenter
+				width: parent.width - (2 * Theme.geometry.page.content.horizontalMargin)
+				wrapMode: Text.Wrap
+				color: Theme.color.font.secondary
+				horizontalAlignment: Text.AlignHCenter
+				font.pixelSize: Theme.font.size.caption
+
+				//% "For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum."
+				text: qsTrId("ess_recommended")
+			}
 		}
 	}
 }
