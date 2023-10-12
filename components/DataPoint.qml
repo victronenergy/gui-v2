@@ -56,8 +56,6 @@ QtObject {
 
 	property Component _mockComponent : Component {
 		QtObject {
-			id: root
-
 			property string source: root.source
 			property var value: Global.mockDataSimulator ? Global.mockDataSimulator.mockDataValues[source] : undefined
 			property real min: 0
