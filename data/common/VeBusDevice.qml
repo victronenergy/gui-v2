@@ -58,10 +58,9 @@ Device {
 		uid: inverter.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
-	property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
+	onValidChanged: {
 		if (!!Global.veBusDevices) {
-			if (_valid) {
+			if (valid) {
 				Global.veBusDevices.addVeBusDevice(inverter)
 			} else {
 				Global.veBusDevices.removeVeBusDevice(inverter)

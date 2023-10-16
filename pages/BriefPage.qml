@@ -24,7 +24,7 @@ Page {
 			} else if (Global.acInputs.generatorInput != null) {
 				return VenusOS.acInputIcon(Global.acInputs.generatorInput.source)
 			} else if (Global.dcInputs.model.count > 0) {
-				return VenusOS.dcInputIcon(Global.dcInputs.model.objectAt(0).source)
+				return VenusOS.dcInputIcon(Global.dcInputs.model.deviceAt(0).source)
 			}
 		}
 		return "qrc:/images/icon_input_24.svg"

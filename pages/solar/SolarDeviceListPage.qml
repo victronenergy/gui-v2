@@ -50,7 +50,7 @@ Page {
 
 				ListNavigationItem {
 					readonly property var solarCharger: model.index < Global.solarChargers.model.count
-							? Global.solarChargers.model.objectAt(model.index)
+							? Global.solarChargers.model.deviceAt(model.index)
 							: null
 					readonly property var pvInverter: {
 						let pvInverterIndex = model.index
@@ -63,7 +63,7 @@ Page {
 							// Offset the index by the number of items above it in the list
 							pvInverterIndex = model.index - Global.solarChargers.model.count - chargerListView.extraHeaderCount
 						}
-						return Global.pvInverters.model.objectAt(pvInverterIndex)
+						return Global.pvInverters.model.deviceAt(pvInverterIndex)
 					}
 
 					text: solarCharger ? solarCharger.name : pvInverter.name

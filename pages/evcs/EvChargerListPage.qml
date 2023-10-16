@@ -55,19 +55,19 @@ Page {
 
 		model: Global.evChargers.model
 		delegate: ListNavigationItem {
-			text: model.evCharger.name
+			text: model.device.name
 			secondaryText: {
-				const statusText = Global.evChargers.chargerStatusToText(model.evCharger.status)
-				if (model.evCharger.status === VenusOS.Evcs_Status_Charging) {
+				const statusText = Global.evChargers.chargerStatusToText(model.device.status)
+				if (model.device.status === VenusOS.Evcs_Status_Charging) {
 					const quantity = Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour,
-							model.evCharger.energy,
+							model.device.energy,
 							Units.defaultUnitPrecision(VenusOS.Units_Energy_KiloWattHour))
 					return quantity.number + quantity.unit + " | " + statusText
 				}
 				return statusText
 			}
 
-			onClicked: Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", { "evCharger": model.evCharger })
+			onClicked: Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", { "evCharger": model.device })
 		}
 	}
 }

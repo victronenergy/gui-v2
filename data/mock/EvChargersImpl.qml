@@ -37,12 +37,9 @@ QtObject {
 		}
 	}
 
-	property int _objectId
 	property Component chargerComponent: Component {
 		MockDevice {
 			id: evCharger
-
-			readonly property string serviceUid: "com.victronenergy.evcharger.ttyUSB" + deviceInstance.value
 
 			property int status: VenusOS.Evcs_Status_Charging
 			property int mode: Math.random() * VenusOS.Evcs_Mode_Scheduled
@@ -92,10 +89,9 @@ QtObject {
 				}
 			}
 
-			name: "EVCharger" + deviceInstance.value
+			serviceUid: "com.victronenergy.evcharger.ttyUSB" + deviceInstance
+			name: "EVCharger" + deviceInstance
 			Component.onCompleted: {
-				deviceInstance.value = root._objectId++
-
 				Global.mockDataSimulator.mockDataValues[serviceUid + "/Mode"] = mode
 				Global.mockDataSimulator.mockDataValues[serviceUid + "/Position"] = 1
 				Global.mockDataSimulator.mockDataValues[serviceUid + "/StartStop"] = 1

@@ -13,17 +13,17 @@ QtObject {
 	property real current: NaN
 
 	property DeviceModel model: DeviceModel {
-		objectProperty: "input"
+		objectName: "dcInputs"
 	}
 
 	function addInput(input) {
-		if (model.addObject(input)) {
+		if (model.addDevice(input)) {
 			updateTotals()
 		}
 	}
 
 	function removeInput(input) {
-		if (model.removeObject(input.serviceUid)) {
+		if (model.removeDevice(input.serviceUid)) {
 			updateTotals()
 		}
 	}
@@ -32,14 +32,15 @@ QtObject {
 		let totalPower = NaN
 		let totalCurrent = NaN
 		for (let i = 0; i < model.count; ++i) {
-			const p = model.get(i).input.power
+			const input = model.deviceAt(i)
+			const p = input.power
 			if (!isNaN(p)) {
 				if (isNaN(totalPower)) {
 					totalPower = 0
 				}
 				totalPower += p
 			}
-			const c = model.get(i).input.current
+			const c = input.current
 			if (!isNaN(c)) {
 				if (isNaN(totalCurrent)) {
 					totalCurrent = 0

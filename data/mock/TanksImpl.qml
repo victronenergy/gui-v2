@@ -32,7 +32,6 @@ QtObject {
 		}
 	}
 
-	property int _objectId
 	property Component tankComponent: Component {
 		MockDevice {
 			property int type
@@ -40,8 +39,8 @@ QtObject {
 			property real remaining
 			property real capacity
 
-			name: "Tank" + deviceInstance.value
-			Component.onCompleted: deviceInstance.value = root._objectId++
+			serviceUid: "com.victronenergy.tank.ttyUSB" + deviceInstance
+			name: "Tank" + deviceInstance
 		}
 	}
 
@@ -76,7 +75,7 @@ QtObject {
 			for (let i = 0; i < Global.tanks.tankTypes.length; ++i) {
 				const model = Global.tanks.tankModel(Global.tanks.tankTypes[i])
 				for (let j = 0; j < model.count; ++j) {
-					let tank = model.get(j).tank
+					let tank = model.deviceAt(j)
 					const randomLevel = Math.random()
 					tank.level = randomLevel * 100
 					tank.remaining = tank.capacity * randomLevel
@@ -110,7 +109,7 @@ QtObject {
 					model = Global.tanks.tankModel(Global.tanks.tankTypes[i])
 					if (model.count > 0) {
 						const index = Math.floor(Math.random(model.count))
-						Global.tanks.removeTank(model.get(index).tank)
+						Global.tanks.removeTank(model.deviceAt(index))
 						break
 					}
 				}

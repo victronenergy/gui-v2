@@ -49,7 +49,7 @@ OverviewWidget {
 		id: phaseComponent
 
 		ThreePhaseDisplay {
-			model: Global.pvInverters.model.objectAt(0).phases
+			model: Global.pvInverters.model.deviceAt(0).phases
 			visible: model.count > 1
 		}
 	}
@@ -68,10 +68,10 @@ OverviewWidget {
 			const singleDeviceOnly = (Global.solarChargers.model.count + Global.pvInverters.model.count) === 1
 			if (singleDeviceOnly && Global.solarChargers.model.count === 1) {
 				Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml",
-						{ "solarCharger": Global.solarChargers.model.objectAt(0) })
+						{ "solarCharger": Global.solarChargers.model.deviceAt(0) })
 			} else if (singleDeviceOnly && Global.pvInverters.model === 1) {
 				Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
-						{ "pvInverter": Global.pvInverters.model.objectAt(0) })
+						{ "pvInverter": Global.pvInverters.model.deviceAt(0) })
 			} else {
 				Global.pageManager.pushPage("/pages/solar/SolarDeviceListPage.qml", { "title": root.title })
 			}

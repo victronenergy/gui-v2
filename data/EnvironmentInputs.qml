@@ -10,15 +10,15 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectProperty: "input"
+		objectName: "environmentInputs"
 	}
 
 	function addInput(input) {
-		model.addObject(input)
+		model.addDevice(input)
 	}
 
 	function removeInput(input) {
-		model.removeObject(input.serviceUid)
+		model.removeDevice(input.serviceUid)
 	}
 
 	function reset() {

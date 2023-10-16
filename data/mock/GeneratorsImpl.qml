@@ -8,7 +8,6 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property int _objectId
 	property Instantiator generatorObjects: Instantiator {
 		model: 1    // TODO randomly generate multiple generators sometimes
 
@@ -48,8 +47,8 @@ QtObject {
 				onTriggered: generator.runtime += 1
 			}
 
-			name: "Generator" + deviceInstance.value
-			Component.onCompleted: deviceInstance.value = root._objectId++
+			serviceUid: "com.victronenergy.generator.ttyUSB" + deviceInstance
+			name: "Generator" + deviceInstance
 		}
 	}
 }

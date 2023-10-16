@@ -47,10 +47,10 @@ Device {
 		Component.onCompleted: _update()
 	}
 
-	property bool _valid: deviceInstance.value !== undefined && type >= 0
-	on_ValidChanged: {
+	valid: deviceInstance >= 0 && type >= 0
+	onValidChanged: {
 		if (!!Global.tanks) {
-			if (_valid) {
+			if (valid) {
 				if (!_invalidationTimer.running) {
 					Global.tanks.addTank(tank)
 				} else {
@@ -67,7 +67,7 @@ Device {
 	property Timer _invalidationTimer: Timer {
 		interval: 5000
 		onTriggered: {
-			if (!_valid && tank.type >= 0) {
+			if (!tank.valid && tank.type >= 0) {
 				Global.tanks.removeTank(tank)
 			}
 		}

@@ -43,12 +43,10 @@ QtObject {
 		ListModel {}
 	}
 
-	property int _objectId
 	property Component chargerComponent: Component {
 		MockDevice {
 			id: solarCharger
 
-			readonly property string serviceUid: "com.victronenergy.solarcharger.ttyUSB" + deviceInstance.value
 			property int state: VenusOS.SolarCharger_State_ExternalControl
 
 			readonly property ListModel trackers: ListModel {}
@@ -154,8 +152,8 @@ QtObject {
 				}
 			}
 
-			name: "SolarCharger" + deviceInstance.value
-			Component.onCompleted: deviceInstance.value = root._objectId++
+			serviceUid: "com.victronenergy.solarcharger.ttyUSB" + deviceInstance
+			name: "SolarCharger" + deviceInstance
 		}
 	}
 
@@ -201,7 +199,8 @@ QtObject {
 					const chargerObj = chargerComponent.createObject(root, {
 						power: config.chargers[i].power,
 						current: config.chargers[i].power * 0.01,
-						voltage: 10 + Math.random() * 5
+						voltage: 10 + Math.random() * 5,
+						errorModel: createErrorModel(Math.floor(Math.random() * 4))
 					})
 					chargerObj.initTrackers(Global.solarChargers.model.count + 1)
 					_createdObjects.push(chargerObj)

@@ -82,7 +82,7 @@ Rectangle {
 					horizontalAlignment: Text.AlignHCenter
 					verticalAlignment: Text.AlignBottom
 					elide: Text.ElideRight
-					text: model.tank.name || root._tankProperties.name
+					text: model.device.name || root._tankProperties.name
 				}
 				TankGauge {
 					anchors {
@@ -95,7 +95,7 @@ Rectangle {
 					height: groupedSubgauges.height
 					gaugeValueType: root._tankProperties.valueType
 					animationEnabled: root.animationEnabled
-					value: model.tank.level / 100
+					value: model.device.level / 100
 				}
 				QuantityLabel {
 					id: percentageText
@@ -107,7 +107,7 @@ Rectangle {
 					}
 					font.pixelSize: Theme.font.size.h1
 					unit: VenusOS.Units_Percentage
-					value: (isNaN(model.tank.level) || model.tank.level < 0) ? 0 : Math.round(model.tank.level)
+					value: (isNaN(model.device.level) || model.device.level < 0) ? 0 : Math.round(model.device.level)
 				}
 				Label {
 					id: valueText
@@ -123,8 +123,8 @@ Rectangle {
 					font.pixelSize: Theme.font.size.caption
 					color: Theme.color.font.secondary
 					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit.value,
-							model.tank.capacity,
-							model.tank.remaining,
+							model.device.capacity,
+							model.device.remaining,
 							Theme.geometry.quantityLabel.valueLength)
 				}
 			}

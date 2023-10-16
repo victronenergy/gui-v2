@@ -10,15 +10,15 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectProperty: "pvInverter"
+		objectName: "pvInverters"
 	}
 
 	function addInverter(inverter) {
-		model.addObject(inverter)
+		model.addDevice(inverter)
 	}
 
 	function removeInverter(inverter) {
-		model.removeObject(inverter.serviceUid)
+		model.removeDevice(inverter.serviceUid)
 	}
 
 	function reset() {

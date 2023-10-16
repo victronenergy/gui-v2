@@ -8,7 +8,6 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property int _objectId
 	property Instantiator relayObjects: Instantiator {
 		model: 3
 
@@ -24,6 +23,8 @@ QtObject {
 
 			property int state: model.index % 2 == 0 ? VenusOS.Relays_State_Inactive : VenusOS.Relays_State_Active
 			property int relayFunction
+
+			serviceUid: "com.victronenergy.system/Relay" + deviceInstance
 			name: Global.relays.relayName(model.index)
 
 			readonly property Timer _functionUpdater: Timer {
@@ -35,8 +36,6 @@ QtObject {
 			function setState(s) {
 				state = s
 			}
-
-			Component.onCompleted: deviceInstance.value = root._objectId++
 		}
 
 		onObjectAdded: function(index, object) {

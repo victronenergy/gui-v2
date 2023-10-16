@@ -23,13 +23,13 @@ ControlCard {
 			bottom: parent.bottom
 		}
 		delegate: SwitchControlValue {
-			label.text: model.relay.name
-			button.checked: model.relay.state === VenusOS.Relays_State_Active
+			label.text: model.device.name
+			button.checked: model.device.state === VenusOS.Relays_State_Active
 			onClicked: {
-				var newState = model.relay.state === VenusOS.Relays_State_Active
+				var newState = model.device.state === VenusOS.Relays_State_Active
 						? VenusOS.Relays_State_Inactive
 						: VenusOS.Relays_State_Active
-				model.relay.setState(newState)
+				model.device.setState(newState)
 			}
 		}
 	}

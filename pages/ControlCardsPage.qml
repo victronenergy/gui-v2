@@ -41,7 +41,7 @@ Page {
 
 					GeneratorCard {
 						width: root.cardWidth
-						generator: model.generator
+						generator: model.device
 					}
 				}
 			}
@@ -54,7 +54,7 @@ Page {
 
 					VeBusDeviceCard {
 						width: root.cardWidth
-						inverter: model.inverter
+						inverter: model.device
 					}
 				}
 			}
