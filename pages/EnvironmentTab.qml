@@ -83,11 +83,11 @@ Flickable {
 				verticalSize: (!!Global.pageManager && Global.pageManager.expandLayout)
 						? VenusOS.EnvironmentGaugePanel_Size_Expanded
 						: VenusOS.EnvironmentGaugePanel_Size_Compact
-				title: model.input.name
+				title: model.device.name
 				temperature: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit
-						? Units.celsiusToFahrenheit(model.input.temperature_celsius)
-						: model.input.temperature_celsius
-				humidity: model.input.humidity
+						? Units.celsiusToFahrenheit(model.device.temperature_celsius)
+						: model.device.temperature_celsius
+				humidity: model.device.humidity
 				temperatureGaugeGradient: temperatureGradient
 				humidityGaugeGradient: humidityGradient
 			}

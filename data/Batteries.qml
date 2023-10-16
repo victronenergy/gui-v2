@@ -11,17 +11,17 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectProperty: "battery"
+		objectName: "batteries"
 	}
 
 	property var system: SystemBattery {}
 
 	function addBattery(battery) {
-		model.addObject(battery)
+		model.addDevice(battery)
 	}
 
 	function removeBattery(battery) {
-		model.removeObject(battery.serviceUid)
+		model.removeDevice(battery.serviceUid)
 	}
 
 	function reset() {

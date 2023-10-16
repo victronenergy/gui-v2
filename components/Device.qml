@@ -3,24 +3,29 @@
 */
 
 import QtQml
+import Victron.VenusOS
 import Victron.Veutil
 
-QtObject {
+BaseDevice {
 	id: root
 
-	property string serviceUid
+	property bool valid: deviceInstance >= 0
 
-	property string name: customName.value || productName.value || ""
+	readonly property string customName: _customName.value || ""
+	readonly property string productName: _productName.value || ""
 
-	readonly property VeQuickItem deviceInstance: VeQuickItem {
+	readonly property VeQuickItem _deviceInstance: VeQuickItem {
 		uid: root.serviceUid ? root.serviceUid + "/DeviceInstance" : ""
 	}
 
-	readonly property VeQuickItem customName: VeQuickItem {
+	readonly property VeQuickItem _customName: VeQuickItem {
 		uid: root.serviceUid ? root.serviceUid + "/CustomName" : ""
 	}
 
-	readonly property VeQuickItem productName: VeQuickItem {
+	readonly property VeQuickItem _productName: VeQuickItem {
 		uid: root.serviceUid ? root.serviceUid + "/ProductName" : ""
 	}
+
+	deviceInstance: _deviceInstance.value === undefined ? -1 : _deviceInstance.value
+	name: _customName.value || _productName.value || ""
 }

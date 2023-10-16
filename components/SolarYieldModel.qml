@@ -18,7 +18,7 @@ ListModel {
 		model: Global.solarChargers.model
 
 		delegate: Connections {
-			target: model.solarCharger
+			target: model.device
 			enabled: !root._resetting
 
 			function onYieldUpdatedForDay(day, yieldKwh) {
@@ -37,7 +37,7 @@ ListModel {
 		let i = 0
 		let yieldForDay = 0
 		for (i = 0; i < Global.solarChargers.model.count; ++i) {
-			const solarCharger = Global.solarChargers.model.get(i).solarCharger
+			const solarCharger = Global.solarChargers.model.deviceAt(i)
 			if (!targetSolarCharger || solarCharger === targetSolarCharger) {
 				const history = solarCharger.dailyHistory(day)
 				if (history) {

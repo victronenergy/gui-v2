@@ -30,10 +30,9 @@ Device {
 			 : "com.victronenergy.settings/Settings/Relay/%1/Function".arg(model.index)
 	}
 
-	readonly property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
+	onValidChanged: {
 		if (!!Global.relays) {
-			if (_valid) {
+			if (valid) {
 				Global.relays.addRelay(relay)
 			} else {
 				Global.relays.removeRelay(relay)

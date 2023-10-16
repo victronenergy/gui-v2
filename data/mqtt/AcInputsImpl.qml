@@ -43,8 +43,8 @@ QtObject {
 			serviceUid: model.uid
 
 			// this looks like: 'mqtt/vebus/289/'
-			inputServiceUid: serviceType.length && deviceInstance.value !== undefined
-					? "mqtt/" + serviceType + "/" + deviceInstance.value
+			inputServiceUid: serviceType.length && deviceInstance >= 0
+					? "mqtt/" + serviceType + "/" + deviceInstance
 					: ""
 		}
 	}

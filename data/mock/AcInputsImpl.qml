@@ -71,7 +71,7 @@ QtObject {
 				randomIndex = -1    // sometimes, just disconnect all inputs
 			}
 			for (let i = 0; i < Global.acInputs.model.count; ++i) {
-				const currInput = Global.acInputs.model.get(i).input
+				const currInput = Global.acInputs.model.deviceAt(0)
 				if (i === randomIndex) {
 					currInput.connected = true
 				} else {
@@ -81,7 +81,6 @@ QtObject {
 		}
 	}
 
-	property int _objectId
 	property Component inputComponent: Component {
 		MockDevice {
 			id: input
@@ -138,7 +137,8 @@ QtObject {
 				}
 			}
 
-			name: "ACInput" + deviceInstance.value
+			serviceUid: "com.victronenergy.system/Ac/In" + deviceInstance
+			name: "ACInput" + deviceInstance
 
 			onConnectedChanged: {
 				if (connected) {
@@ -149,7 +149,6 @@ QtObject {
 			}
 
 			Component.onCompleted: {
-				deviceInstance.value = root._objectId++
 				if (source === VenusOS.AcInputs_InputType_Generator) {
 					Global.acInputs.generatorInput = input
 				}

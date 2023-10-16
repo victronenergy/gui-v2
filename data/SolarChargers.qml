@@ -11,15 +11,15 @@ QtObject {
 
 	// Model of all solar chargers
 	property DeviceModel model: DeviceModel {
-		objectProperty: "solarCharger"
+		objectName: "solarChargers"
 	}
 
 	function addCharger(charger) {
-		model.addObject(charger)
+		model.addDevice(charger)
 	}
 
 	function removeCharger(charger) {
-		model.removeObject(charger.serviceUid)
+		model.removeDevice(charger.serviceUid)
 	}
 
 	function reset() {

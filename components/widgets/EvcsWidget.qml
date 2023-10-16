@@ -38,7 +38,7 @@ OverviewWidget {
 		onClicked: {
 			if (Global.evChargers.model.count === 1) {
 				Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml",
-						{ "evCharger": Global.evChargers.model.get(0).evCharger })
+						{ "evCharger": Global.evChargers.model.deviceAt(0) })
 			} else {
 				Global.pageManager.pushPage("/pages/evcs/EvChargerListPage.qml")
 			}
@@ -49,7 +49,7 @@ OverviewWidget {
 		id: singleEvChargerComponent
 
 		Column {
-			readonly property var evCharger: Global.evChargers.model.objectAt(0)
+			readonly property var evCharger: Global.evChargers.model.deviceAt(0)
 
 			width: parent.width
 

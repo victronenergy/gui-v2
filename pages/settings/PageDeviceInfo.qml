@@ -86,7 +86,7 @@ Page {
 			}
 
 			ListTextItem {
-				text: CommonWords.serialNumber
+				text: CommonWords.serial_number
 				dataSource: root.bindPrefix + "/Serial"
 				dataInvalidate: false
 				visible: dataValid

@@ -13,19 +13,19 @@ QtObject {
 	property real energy: NaN
 
 	property DeviceModel model: DeviceModel {
-		objectProperty: "evCharger"
+		objectName: "evChargers"
 	}
 
 	readonly property var maxCurrentPresets: [6, 8, 10, 14, 16, 24, 32].map(function(v) { return { value: v } })
 
 	function addCharger(evCharger) {
-		if (model.addObject(evCharger)) {
+		if (model.addDevice(evCharger)) {
 			updateTotals()
 		}
 	}
 
 	function removeCharger(evCharger) {
-		if (model.removeObject(evCharger.serviceUid)) {
+		if (model.removeDevice(evCharger.serviceUid)) {
 			updateTotals()
 		}
 	}
@@ -34,14 +34,15 @@ QtObject {
 		let totalPower = NaN
 		let totalEnergy = NaN
 		for (let i = 0; i < model.count; ++i) {
-			const p = model.get(i).evCharger.power
+			const evCharger = model.deviceAt(i)
+			const p = evCharger.power
 			if (!isNaN(p)) {
 				if (isNaN(totalPower)) {
 					totalPower = 0
 				}
 				totalPower += p
 			}
-			const e = model.get(i).evCharger.energy
+			const e = evCharger.energy
 			if (!isNaN(e)) {
 				if (isNaN(totalEnergy)) {
 					totalEnergy = 0

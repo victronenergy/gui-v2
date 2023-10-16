@@ -17,15 +17,15 @@ QtObject {
 	property real currentLimit: connectedInput != null ? connectedInput.currentLimit : NaN
 
 	property DeviceModel model: DeviceModel {
-		objectProperty: "input"
+		objectName: "acInputs"
 	}
 
 	function addInput(input) {
-		model.addObject(input)
+		model.addDevice(input)
 	}
 
 	function removeInput(input) {
-		if (model.removeObject(input.serviceUid)) {
+		if (model.removeDevice(input.serviceUid)) {
 			if (input === connectedInput) {
 				connectedInput = null
 			}

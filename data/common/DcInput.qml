@@ -46,10 +46,9 @@ Device {
 		uid: input.serviceUid + "/Settings/MonitorMode"
 	}
 
-	property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
+	onValidChanged: {
 		if (!!Global.dcInputs) {
-			if (_valid) {
+			if (valid) {
 				Global.dcInputs.addInput(input)
 			} else {
 				Global.dcInputs.removeInput(input)

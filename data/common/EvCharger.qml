@@ -82,10 +82,9 @@ Device {
 		uid: evCharger.serviceUid + "/Status"
 	}
 
-	property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
+	onValidChanged: {
 		if (!!Global.evChargers) {
-			if (_valid) {
+			if (valid) {
 				Global.evChargers.addCharger(evCharger)
 			} else {
 				Global.evChargers.removeCharger(evCharger)

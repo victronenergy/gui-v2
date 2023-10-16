@@ -7,6 +7,7 @@
 #include "src/theme.h"
 #include "src/enums.h"
 #include "src/notificationsmodel.h"
+#include "src/basedevicemodel.h"
 #include "src/clocktime.h"
 #include "src/uidhelper.h"
 #include "src/backendconnection.h"
@@ -278,6 +279,8 @@ void registerQmlTypes()
 	qmlRegisterSingletonType<Victron::VenusOS::FrameRateModel>(
 		"Victron.VenusOS", 2, 0, "FrameRateModel",
 		&Victron::VenusOS::FrameRateModel::instance);
+	qmlRegisterType<Victron::VenusOS::BaseDevice>("Victron.VenusOS", 2, 0, "BaseDevice");
+	qmlRegisterType<Victron::VenusOS::BaseDeviceModel>("Victron.VenusOS", 2, 0, "BaseDeviceModel");
 
 	/* main content */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/ApplicationContent.qml")),

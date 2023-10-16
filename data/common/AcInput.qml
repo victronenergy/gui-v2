@@ -67,10 +67,9 @@ Device {
 		valid: serviceType == "vebus" ? input.connected : true
 	}
 
-	property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
+	onValidChanged: {
 		if (!!Global.acInputs) {
-			if (_valid) {
+			if (valid) {
 				Global.acInputs.addInput(input)
 			} else {
 				Global.acInputs.removeInput(input)

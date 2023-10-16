@@ -268,7 +268,7 @@ Page {
 		// Add DC widgets
 		let i
 		for (i = 0; i < Global.dcInputs.model.count; ++i) {
-			const dcInput = Global.dcInputs.model.get(i).input
+			const dcInput = Global.dcInputs.model.deviceAt(i)
 			switch (dcInput.source) {
 			case VenusOS.DcInputs_InputType_Alternator:
 				widgetType = VenusOS.OverviewWidget_Type_Alternator
