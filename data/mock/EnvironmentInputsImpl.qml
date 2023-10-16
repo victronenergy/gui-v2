@@ -27,14 +27,13 @@ Item {
 		return (Math.random() * range) + min
 	}
 
-	property int _objectId
 	property Component inputComponent: Component {
 		MockDevice {
 			property real temperature_celsius
 			property real humidity
 
-			name: "EnvironmentInput" + deviceInstance.value
-			Component.onCompleted: deviceInstance.value = root._objectId++
+			serviceUid: "com.victronenergy.temperature.ttyUSB" + deviceInstance
+			name: "EnvironmentInput" + deviceInstance
 		}
 	}
 
@@ -61,14 +60,13 @@ Item {
 			repeat: true
 			interval: 10 * 1000
 			onTriggered: {
-				let data = Global.environmentInputs.model.get(model.index)
-				data.temperature_celsius = root._rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
+				const input = model.device
+				input.temperature_celsius = root._rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
 						Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
-				if (!isNaN(model.humidity)) {
-					data.humidity = root._rand(Theme.geometry.levelsPage.environment.humidityGauge.minimumValue,
+				if (!isNaN(input.humidity)) {
+					input.humidity = root._rand(Theme.geometry.levelsPage.environment.humidityGauge.minimumValue,
 							Theme.geometry.levelsPage.environment.humidityGauge.maximumValue)
 				}
-				Global.environmentInputs.model.set(model.index, data)
 			}
 		}
 	}

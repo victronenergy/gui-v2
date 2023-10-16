@@ -23,12 +23,10 @@ QtObject {
 		}
 	}
 
-	property int _objectId
 	property Component inverterComponent: Component {
 		MockDevice {
 			id: pvInverter
 
-			readonly property string serviceUid: "com.victronenergy.pvinverter.ttyUSB" + deviceInstance.value
 			property int statusCode: Math.random() * VenusOS.PvInverter_StatusCode_Error
 
 			readonly property ListModel phases: ListModel {
@@ -59,8 +57,8 @@ QtObject {
 				}
 			}
 
-			name: "PV Inverter " + deviceInstance.value
-			Component.onCompleted: deviceInstance.value = root._objectId++
+			serviceUid: "com.victronenergy.pvinverters.ttyUSB" + deviceInstance
+			name: "PV Inverter " + deviceInstance
 		}
 	}
 

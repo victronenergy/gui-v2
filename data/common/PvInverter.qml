@@ -101,10 +101,9 @@ Device {
 		uid: pvInverter.serviceUid + "/Ac/Voltage"
 	}
 
-	property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
+	onValidChanged: {
 		if (!!Global.pvInverters) {
-			if (_valid) {
+			if (valid) {
 				Global.pvInverters.addInverter(pvInverter)
 			} else {
 				Global.pvInverters.removeInverter(pvInverter)

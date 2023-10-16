@@ -45,7 +45,6 @@ QtObject {
 		}
 	}
 
-	property int _objectId
 	property Component inputComponent: Component {
 		MockDevice {
 			id: input
@@ -85,8 +84,8 @@ QtObject {
 				}
 			}
 
-			name: "DCInput" + deviceInstance.value
-			Component.onCompleted: deviceInstance.value = root._objectId++
+			serviceUid: "com.victronenergy.dcsource.ttyUSB" + deviceInstance
+			name: "DCInput" + deviceInstance
 		}
 	}
 

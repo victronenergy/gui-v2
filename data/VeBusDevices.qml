@@ -10,25 +10,25 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectProperty: "veBusDevices"
+		objectName: "veBusDevices"
 	}
 
 	property real totalNominalInverterPower: NaN
 
 	function addVeBusDevice(veBusDevice) {
-		if (model.addObject(veBusDevice)) {
+		if (model.addDevice(veBusDevice)) {
 			refreshNominalInverterPower()
 		}
 	}
 
 	function removeVeBusDevice(veBusDevice) {
-		return model.removeObject(veBusDevice.serviceUid)
+		return model.removeDevice(veBusDevice.serviceUid)
 	}
 
 	function refreshNominalInverterPower() {
 		let total = NaN
 		for (let i = 0; i < model.count; ++i) {
-			const veBusDevice = model.objectAt(i)
+			const veBusDevice = model.deviceAt(i)
 			const value = veBusDevice.nominalInverterPower
 			if (!isNaN(value)) {
 				total = isNaN(total) ? value : total + value

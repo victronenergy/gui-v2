@@ -45,7 +45,6 @@ QtObject {
 		}
 	}
 
-	property int _objectId
 	property Component veBusDeviceComponent: Component {
 		MockDevice {
 			id: inverter
@@ -68,8 +67,8 @@ QtObject {
 				inputSettings.get(inputIndex).inputSettings.setCurrentLimit(currentLimit)
 			}
 
-			name: "VeBusDevice" + deviceInstance.value
-			Component.onCompleted: deviceInstance.value = root._objectId++
+			serviceUid: "com.victronenergy.vebus.ttyUSB" + deviceInstance
+			name: "VeBusDevice" + deviceInstance
 		}
 	}
 

@@ -41,10 +41,9 @@ Device {
 		source: battery.serviceUid + "/TimeToGo"
 	}
 
-	property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
+	onValidChanged: {
 		if (!!Global.batteries) {
-			if (_valid) {
+			if (valid) {
 				Global.batteries.addBattery(battery)
 			} else {
 				Global.batteries.removeBattery(battery)

@@ -68,7 +68,7 @@ Page {
 			return null
 		}
 		for (let i = 0; i < deviceModels.length; ++i) {
-			const device = deviceModels[i].objectForDeviceInstance(deviceInstance)
+			const device = deviceModels[i].deviceForDeviceInstance(deviceInstance)
 			if (device) {
 				return device
 			}
@@ -309,7 +309,7 @@ Page {
 			for (let i = 0; i < count; ++i) {
 				const data = get(i)
 				if (data.serviceUid.startsWith(serviceUidPrefix)
-						&& data.device.deviceInstance.value === deviceInstance) {
+						&& data.device.deviceInstance === deviceInstance) {
 					return data.device
 				}
 			}

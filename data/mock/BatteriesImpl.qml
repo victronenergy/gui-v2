@@ -18,6 +18,7 @@ QtObject {
 		readonly property string icon: Global.batteries.batteryIcon(dummyBattery)
 		readonly property int mode: Global.batteries.batteryMode(dummyBattery)
 
+		serviceUid: "com.victronenergy.battery.ttyUSB" + deviceInstance
 		name: "Fake battery"
 
 		Component.onCompleted: {

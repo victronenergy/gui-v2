@@ -10,19 +10,19 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectProperty: "relay"
+		objectName: "relays"
 	}
 	property DeviceModel manualRelays: DeviceModel {
-		objectProperty: "relay"
+		objectName: "manualRelays"
 	}
 
 	function addRelay(relay) {
-		model.addObject(relay)
+		model.addDevice(relay)
 	}
 
 	function removeRelay(relay) {
-		model.removeObject(relay.serviceUid)
-		manualRelays.removeObject(relay.serviceUid)
+		model.removeDevice(relay.serviceUid)
+		manualRelays.removeDevice(relay.serviceUid)
 	}
 
 	function reset() {
@@ -44,9 +44,9 @@ QtObject {
 			function onRelayFunctionChanged() {
 				const relayIndex = manualRelays.indexOf(target.serviceUid)
 				if (relayIndex < 0 && target.relayFunction === VenusOS.Relay_Function_Manual) {
-					manualRelays.addObject(relay)
+					manualRelays.addDevice(relay)
 				} else if (relayIndex >= 0 && target.relayFunction !== VenusOS.Relay_Function_Manual) {
-					manualRelays.removeObject(target.serviceUid)
+					manualRelays.removeDevice(target.serviceUid)
 				}
 			}
 		}

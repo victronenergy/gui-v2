@@ -11,6 +11,7 @@ QtObject {
 
 	property bool timersActive: !Global.splashScreenVisible
 	property var mockDataValues: ({})
+	property int deviceCount
 
 	signal setBatteryRequested(var config)
 	signal setAcInputsRequested(var config)

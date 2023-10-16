@@ -23,10 +23,9 @@ Device {
 		uid: serviceUid + "/Status"
 	}
 
-	property bool _valid: deviceInstance.value !== undefined
-			&& _status.value === VenusOS.EnvironmentInput_Status_Ok
-	on_ValidChanged: {
-		if (_valid) {
+	valid: deviceInstance >= 0 && _status.value === VenusOS.EnvironmentInput_Status_Ok
+	onValidChanged: {
+		if (valid) {
 			Global.environmentInputs.addInput(input)
 		} else {
 			Global.environmentInputs.removeInput(input)

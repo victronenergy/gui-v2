@@ -14,7 +14,7 @@ ListModel {
 		model: Global.evChargers.model
 		asynchronous: true
 		delegate: Connections {
-			target: evCharger
+			target: model.device
 			function onStatusChanged() { Qt.callLater(root._reloadCounts) }
 			Component.onCompleted: Qt.callLater(root._reloadCounts)
 		}
@@ -24,7 +24,7 @@ ListModel {
 		let totals = monitoredStatuses.map(function(status) { return 0 })
 		let i
 		for (i = 0; i < Global.evChargers.model.count; ++i) {
-			const charger = Global.evChargers.model.objectAt(i)
+			const charger = Global.evChargers.model.deviceAt(i)
 			const statusIndex = monitoredStatuses.indexOf(charger.status)
 			if (statusIndex >= 0) {
 				totals[statusIndex] += 1

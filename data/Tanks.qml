@@ -32,84 +32,72 @@ QtObject {
 		readonly property int type: VenusOS.Tank_Type_Fuel
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "Fuel"
 	}
 	readonly property DeviceModel freshWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_FreshWater
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "FreshWater"
 	}
 	readonly property DeviceModel wasteWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_WasteWater
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "WasteWater"
 	}
 	readonly property DeviceModel liveWellTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_LiveWell
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "LiveWell"
 	}
 	readonly property DeviceModel oilTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Oil
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "Oil"
 	}
 	readonly property DeviceModel blackWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_BlackWater
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "BlackWater"
 	}
 	readonly property DeviceModel gasolineTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Gasoline
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "Gasoline"
 	}
 	readonly property DeviceModel dieselTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Diesel
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "Diesel"
 	}
 	readonly property DeviceModel lpgTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_LPG
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "LPG"
 	}
 	readonly property DeviceModel lngTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_LNG
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "LNG"
 	}
 	readonly property DeviceModel hydraulicOilTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_HydraulicOil
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "HydraulicOil"
 	}
 	readonly property DeviceModel rawWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_RawWater
 		property real totalCapacity
 		property real totalRemaining
-		objectProperty: "tank"
 		objectName: "RawWater"
 	}
 
@@ -166,7 +154,7 @@ QtObject {
 		let totalRemaining = NaN
 		let totalCapacity = NaN
 		for (let i = 0; i < model.count; ++i) {
-			const tank = model.get(i).tank
+			const tank = model.deviceAt(i)
 			if (!isNaN(tank.remaining)) {
 				if (isNaN(totalRemaining)) {
 					totalRemaining = 0
@@ -190,7 +178,7 @@ QtObject {
 			console.warn("addTank(): Unknown tank type", tank.type)
 			return false
 		}
-		model.addObject(tank)
+		model.addDevice(tank)
 		updateTankModelTotals(tank.type)
 		return true
 	}
@@ -201,7 +189,7 @@ QtObject {
 			console.warn("removeTank(): Unknown tank type", tank.type)
 			return
 		}
-		if (model.removeObject(tank.serviceUid)) {
+		if (model.removeDevice(tank.serviceUid)) {
 			updateTankModelTotals(tank.type)
 			return true
 		}

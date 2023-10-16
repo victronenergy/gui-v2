@@ -21,7 +21,7 @@ Rectangle {
 	property real totalRemaining
 	property real totalCapacity
 
-	property ListModel gaugeTanks
+	property BaseDeviceModel gaugeTanks
 	property bool mergeTanks
 
 	readonly property var tankProperties: Gauges.tankProperties(tankType)
@@ -118,7 +118,7 @@ Rectangle {
 					width: root._gaugeDelegateWidth
 					height: subgauges.height
 					gaugeValueType: root.tankProperties.valueType
-					value: (root.mergeTanks ? model.tank.level : root.level) / 100
+					value: (root.mergeTanks ? model.device.level : root.level) / 100
 					isGrouped: root.mergeTanks
 				}
 				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load tank levels gauge:", errorString())

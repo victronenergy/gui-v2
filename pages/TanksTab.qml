@@ -110,9 +110,9 @@ ListView {
 							? (gaugeTanks.totalCapacity === 0
 							   ? 0
 							   : (gaugeTanks.totalRemaining / gaugeTanks.totalCapacity) * 100)
-							: model.tank.level
-					totalRemaining: mergeTanks ? gaugeTanks.totalRemaining : model.tank.remaining
-					totalCapacity: mergeTanks ? gaugeTanks.totalCapacity : model.tank.capacity
+							: model.device.level
+					totalRemaining: mergeTanks ? gaugeTanks.totalRemaining : model.device.remaining
+					totalCapacity: mergeTanks ? gaugeTanks.totalCapacity : model.device.capacity
 
 					gaugeTanks: tankTypeDelegate.tankModel
 					mergeTanks: tankTypeDelegate.mergeTanks

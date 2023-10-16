@@ -10,16 +10,16 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectProperty: "generator"
+		objectName: "generators"
 	}
 	property var first: model.firstObject
 
 	function addGenerator(generator) {
-		model.addObject(generator)
+		model.addDevice(generator)
 	}
 
 	function removeGenerator(generator) {
-		model.removeObject(generator.serviceUid)
+		model.removeDevice(generator.serviceUid)
 	}
 
 	function reset() {

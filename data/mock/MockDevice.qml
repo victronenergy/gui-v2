@@ -3,19 +3,10 @@
 */
 
 import QtQml
-import Victron.Veutil
+import Victron.VenusOS
 
-QtObject {
+BaseDevice {
 	id: root
 
-	readonly property string serviceUid: "MockDevice-" + name
-	property var deviceInstance: QtObject {
-		property int value
-
-		function setValue(v) {
-			value = v
-		}
-	}
-
-	property string name
+	Component.onCompleted: deviceInstance = Global.mockDataSimulator.deviceCount++
 }

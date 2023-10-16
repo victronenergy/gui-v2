@@ -40,10 +40,9 @@ Device {
 		uid: serviceUid + "/AutoStartEnabled"
 	}
 
-	property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
+	onValidChanged: {
 		if (!!Global.generators) {
-			if (_valid) {
+			if (valid) {
 				Global.generators.addGenerator(generator)
 			} else {
 				Global.generators.removeGenerator(generator)
