@@ -18,7 +18,6 @@ Item {
 			&& !!Global.ess
 			&& !!Global.evChargers
 			&& !!Global.generators
-			&& !!Global.inverters
 			&& !!Global.notifications
 			&& !!Global.pvInverters
 			&& !!Global.relays
@@ -26,6 +25,7 @@ Item {
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.tanks
+			&& !!Global.veBusDevices
 			&& !!Global.venusPlatform
 
 	readonly property bool _shouldInitialize: _dataObjectsReady
@@ -79,7 +79,6 @@ Item {
 	Ess {}
 	EvChargers {}
 	Generators {}
-	Inverters {}
 	Notifications {}
 	PvInverters {}
 	Relays {}
@@ -87,6 +86,7 @@ Item {
 	System {}
 	SystemSettings {}
 	Tanks {}
+	VeBusDevices {}
 	VenusPlatform {}
 
 	Loader {

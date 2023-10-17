@@ -101,7 +101,7 @@ public:
 		OverviewWidget_Type_Alternator,
 		OverviewWidget_Type_Wind,
 		OverviewWidget_Type_Solar,
-		OverviewWidget_Type_Inverter,
+		OverviewWidget_Type_VeBusDevice,
 		OverviewWidget_Type_Battery,
 		OverviewWidget_Type_AcLoads,
 		OverviewWidget_Type_DcLoads,
@@ -219,19 +219,19 @@ public:
 	};
 	Q_ENUM(Generators_RunningBy)
 
-	enum Inverters_ProductType {
-		Inverters_ProductType_EuProduct = 0,
-		Inverters_ProductType_UsProduct
+	enum VeBusDevice_ProductType {
+		VeBusDevice_ProductType_EuProduct = 0,
+		VeBusDevice_ProductType_UsProduct
 	};
-	Q_ENUM(Inverters_ProductType)
+	Q_ENUM(VeBusDevice_ProductType)
 
-	enum Inverters_Mode {
-		Inverters_Mode_ChargerOnly = 1,
-		Inverters_Mode_InverterOnly,
-		Inverters_Mode_On,
-		Inverters_Mode_Off
+	enum VeBusDevice_Mode {
+		VeBusDevice_Mode_ChargerOnly = 1,
+		VeBusDevice_Mode_InverterOnly,
+		VeBusDevice_Mode_On,
+		VeBusDevice_Mode_Off
 	};
-	Q_ENUM(Inverters_Mode)
+	Q_ENUM(VeBusDevice_Mode)
 
 	enum Relays_State {
 		Relays_State_Inactive = 0,

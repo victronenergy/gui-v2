@@ -18,7 +18,7 @@ QtObject {
 			model: Global.dataServiceModel
 		}
 
-		delegate: Inverter {
+		delegate: VeBusDevice {
 			serviceUid: model.uid
 		}
 	}
@@ -31,7 +31,7 @@ QtObject {
 			model: Global.dataServiceModel
 		}
 
-		delegate: Inverter {
+		delegate: VeBusDevice {
 			serviceUid: model.uid
 		}
 	}
