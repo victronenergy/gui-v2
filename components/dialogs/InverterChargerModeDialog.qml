@@ -26,10 +26,10 @@ ModalDialog {
 			id: repeater
 			width: parent.width
 			model: [
-				VenusOS.Inverters_Mode_On,
-				VenusOS.Inverters_Mode_ChargerOnly,
-				VenusOS.Inverters_Mode_InverterOnly,
-				VenusOS.Inverters_Mode_Off,
+				VenusOS.VeBusDevice_Mode_On,
+				VenusOS.VeBusDevice_Mode_ChargerOnly,
+				VenusOS.VeBusDevice_Mode_InverterOnly,
+				VenusOS.VeBusDevice_Mode_Off,
 			]
 			delegate: buttonStyling
 		}
@@ -40,7 +40,7 @@ ModalDialog {
 
 		RadioButtonControlValue {
 			button.checked: modelData === root.mode
-			label.text: Global.inverters.inverterModeToText(modelData)
+			label.text: Global.veBusDevices.modeToText(modelData)
 			onClicked: root.mode = modelData
 		}
 	}

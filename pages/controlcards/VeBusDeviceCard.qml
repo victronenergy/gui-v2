@@ -114,9 +114,9 @@ ControlCard {
 			property var _modeDialog
 
 			width: parent.width
-			button.width: Math.max(button.implicitWidth, Theme.geometry.inverterCard.modeButton.maximumWidth)
+			button.width: Math.max(button.implicitWidth, Theme.geometry.veBusDeviceCard.modeButton.maximumWidth)
 			label.text: CommonWords.mode
-			button.text: Global.inverters.inverterModeToText(root.inverter.mode)
+			button.text: Global.veBusDevices.modeToText(root.inverter.mode)
 			enabled: root.inverter.modeAdjustable
 
 			onClicked: {

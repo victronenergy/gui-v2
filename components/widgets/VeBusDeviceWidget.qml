@@ -11,7 +11,7 @@ OverviewWidget {
 	//% "Inverter / Charger"
 	title: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
-	type: VenusOS.OverviewWidget_Type_Inverter
+	type: VenusOS.OverviewWidget_Type_VeBusDevice
 
 	quantityLabel.visible: false
 

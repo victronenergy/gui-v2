@@ -16,7 +16,7 @@ QtObject {
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
-		delegate: Inverter {
+		delegate: VeBusDevice {
 			serviceUid: model.uid
 		}
 	}
@@ -27,7 +27,7 @@ QtObject {
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
-		delegate: Inverter {
+		delegate: VeBusDevice {
 			serviceUid: model.uid
 		}
 	}

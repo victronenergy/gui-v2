@@ -19,11 +19,11 @@ Device {
 
 	readonly property int productId: _productId.value === undefined ? -1 : _productId.value
 	readonly property int productType: _productUpperByte === 0x19 || _productUpperByte === 0x26
-			? VenusOS.Inverters_ProductType_EuProduct
-			: (_productUpperByte === 0x20 || _productUpperByte === 0x27 ? VenusOS.Inverters_ProductType_UsProduct : -1)
-	readonly property var ampOptions: productType === VenusOS.Inverters_ProductType_EuProduct
+			? VenusOS.VeBusDevice_ProductType_EuProduct
+			: (_productUpperByte === 0x20 || _productUpperByte === 0x27 ? VenusOS.VeBusDevice_ProductType_UsProduct : -1)
+	readonly property var ampOptions: productType === VenusOS.VeBusDevice_ProductType_EuProduct
 			? _euAmpOptions
-			: (productType === VenusOS.Inverters_ProductType_UsProduct ? _usAmpOptions : [])
+			: (productType === VenusOS.VeBusDevice_ProductType_UsProduct ? _usAmpOptions : [])
 
 	/* - Mask the Product id with `0xFF00`
 	 * - If the result is `0x1900` or `0x2600` it is an EU model (230VAC)
@@ -43,7 +43,7 @@ Device {
 
 	readonly property VeQuickItem _nominalInverterPower: VeQuickItem {
 		uid: inverter.serviceUid + "/Ac/Out/NominalInverterPower"
-		onValueChanged: if (!!Global.inverters) Global.inverters.refreshNominalInverterPower()
+		onValueChanged: if (!!Global.veBusDevices) Global.veBusDevices.refreshNominalInverterPower()
 	}
 
 	readonly property VeQuickItem _mode: VeQuickItem {
@@ -59,20 +59,12 @@ Device {
 	}
 
 	property bool _valid: deviceInstance.value !== undefined
-
-	on_ValidChanged: addRemoveInverter()
-
-	property DataPoint _backuprestoreState: DataPoint {
-		source: "com.victronenergy.backuprestore/Quattromulti/State"
-		onValueChanged: addRemoveInverter()
-	}
-
-	function addRemoveInverter() {
-		if (!!Global.inverters) {
-			if (_valid || _backuprestoreState.value !== 0) {
-				Global.inverters.addInverter(inverter)
-			} else if (!_valid && _backuprestoreState.value === 0) {
-				Global.inverters.removeInverter(inverter)
+	on_ValidChanged: {
+		if (!!Global.veBusDevices) {
+			if (_valid) {
+				Global.veBusDevices.addVeBusDevice(inverter)
+			} else {
+				Global.veBusDevices.removeVeBusDevice(inverter)
 			}
 		}
 	}
