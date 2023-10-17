@@ -131,10 +131,10 @@
         <file>components/widgets/DcLoadsWidget.qml</file>
         <file>components/widgets/EvcsWidget.qml</file>
         <file>components/widgets/GridWidget.qml</file>
-        <file>components/widgets/InverterWidget.qml</file>
         <file>components/widgets/OverviewWidget.qml</file>
         <file>components/widgets/ShoreWidget.qml</file>
         <file>components/widgets/SolarYieldWidget.qml</file>
+        <file>components/widgets/VeBusDeviceWidget.qml</file>
         <file>components/widgets/WidgetConnector.qml</file>
         <file>components/widgets/WidgetConnectorAnchor.qml</file>
         <file>components/widgets/WidgetConnectorPath.qml</file>
@@ -148,7 +148,6 @@
         <file>data/Ess.qml</file>
         <file>data/EvChargers.qml</file>
         <file>data/Generators.qml</file>
-        <file>data/Inverters.qml</file>
         <file>data/Notifications.qml</file>
         <file>data/PvInverters.qml</file>
         <file>data/Relays.qml</file>
@@ -158,6 +157,7 @@
         <file>data/SystemDc.qml</file>
         <file>data/SystemSettings.qml</file>
         <file>data/Tanks.qml</file>
+        <file>data/VeBusDevices.qml</file>
         <file>data/VenusPlatform.qml</file>
         <file>data/common/AcInput.qml</file>
         <file>data/common/AcInputSettings.qml</file>
@@ -169,7 +169,6 @@
         <file>data/common/EssData.qml</file>
         <file>data/common/EvCharger.qml</file>
         <file>data/common/Generator.qml</file>
-        <file>data/common/Inverter.qml</file>
         <file>data/common/PvInverter.qml</file>
         <file>data/common/PvMonitor.qml</file>
         <file>data/common/Relay.qml</file>
@@ -179,6 +178,7 @@
         <file>data/common/SystemBattery.qml</file>
         <file>data/common/SystemData.qml</file>
         <file>data/common/Tank.qml</file>
+        <file>data/common/VeBusDevice.qml</file>
         <file>data/dbus/AcInputsImpl.qml</file>
         <file>data/dbus/BatteriesImpl.qml</file>
         <file>data/dbus/DBusDataManager.qml</file>
@@ -187,7 +187,6 @@
         <file>data/dbus/EssImpl.qml</file>
         <file>data/dbus/EvChargersImpl.qml</file>
         <file>data/dbus/GeneratorsImpl.qml</file>
-        <file>data/dbus/InvertersImpl.qml</file>
         <file>data/dbus/NotificationsImpl.qml</file>
         <file>data/dbus/PvInvertersImpl.qml</file>
         <file>data/dbus/RelaysImpl.qml</file>
@@ -195,6 +194,7 @@
         <file>data/dbus/SystemImpl.qml</file>
         <file>data/dbus/SystemSettingsImpl.qml</file>
         <file>data/dbus/TanksImpl.qml</file>
+        <file>data/dbus/VeBusDevicesImpl.qml</file>
         <file>data/mock/AcInputsImpl.qml</file>
         <file>data/mock/BatteriesImpl.qml</file>
         <file>data/mock/DcInputsImpl.qml</file>
@@ -202,7 +202,6 @@
         <file>data/mock/EssImpl.qml</file>
         <file>data/mock/EvChargersImpl.qml</file>
         <file>data/mock/GeneratorsImpl.qml</file>
-        <file>data/mock/InvertersImpl.qml</file>
         <file>data/mock/MockDevice.qml</file>
         <file>data/mock/MockDataManager.qml</file>
         <file>data/mock/NotificationsImpl.qml</file>
@@ -212,6 +211,7 @@
         <file>data/mock/SystemImpl.qml</file>
         <file>data/mock/SystemSettingsImpl.qml</file>
         <file>data/mock/TanksImpl.qml</file>
+        <file>data/mock/VeBusDevicesImpl.qml</file>
         <file>data/mock/config/BriefAndOverviewPageConfig.qml</file>
         <file>data/mock/config/LevelsPageConfig.qml</file>
         <file>data/mock/config/MockDataSimulator.qml</file>
@@ -224,7 +224,6 @@
         <file>data/mqtt/EssImpl.qml</file>
         <file>data/mqtt/EvChargersImpl.qml</file>
         <file>data/mqtt/GeneratorsImpl.qml</file>
-        <file>data/mqtt/InvertersImpl.qml</file>
         <file>data/mqtt/MqttDataManager.qml</file>
         <file>data/mqtt/NotificationsImpl.qml</file>
         <file>data/mqtt/PvInvertersImpl.qml</file>
@@ -233,6 +232,7 @@
         <file>data/mqtt/SystemImpl.qml</file>
         <file>data/mqtt/SystemSettingsImpl.qml</file>
         <file>data/mqtt/TanksImpl.qml</file>
+        <file>data/mqtt/VeBusDevicesImpl.qml</file>
         <file>fonts/MuseoSans-500.otf</file>
         <file>images/acloads.svg</file>
         <file>images/alternator.svg</file>
@@ -325,8 +325,8 @@
         <file>pages/TanksTab.qml</file>
         <file>pages/controlcards/ESSCard.qml</file>
         <file>pages/controlcards/GeneratorCard.qml</file>
-        <file>pages/controlcards/InverterCard.qml</file>
         <file>pages/controlcards/SwitchesCard.qml</file>
+        <file>pages/controlcards/VeBusDeviceCard.qml</file>
         <file>pages/evcs/EvChargerListPage.qml</file>
         <file>pages/evcs/EvChargerPage.qml</file>
         <file>pages/evcs/EvChargerSetupPage.qml</file>

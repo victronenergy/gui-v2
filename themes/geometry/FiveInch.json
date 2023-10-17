@@ -230,7 +230,7 @@
 
     "geometry.generatorIconLabel.icon.width": 24,
 
-    "geometry.inverterCard.modeButton.maximumWidth": 180,
+    "geometry.veBusDeviceCard.modeButton.maximumWidth": 180,
 
     "geometry.overviewPage.widget.radius": 8,
     "geometry.overviewPage.widget.border.width": 2,

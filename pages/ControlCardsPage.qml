@@ -50,9 +50,9 @@ Page {
 				height: cardsView.height
 
 				Repeater {
-					model: Global.inverters.model
+					model: Global.veBusDevices.model
 
-					InverterCard {
+					VeBusDeviceCard {
 						width: root.cardWidth
 						inverter: model.inverter
 					}

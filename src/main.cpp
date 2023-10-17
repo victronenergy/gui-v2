@@ -522,8 +522,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "SolarYieldWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WindWidget.qml")),
 		"Victron.VenusOS", 2, 0, "WindWidget");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/InverterWidget.qml")),
-		"Victron.VenusOS", 2, 0, "InverterWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/BatteryWidget.qml")),
 		"Victron.VenusOS", 2, 0, "BatteryWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/AcLoadsWidget.qml")),
@@ -532,6 +530,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "DcLoadsWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/VerticalGauge.qml")),
 		"Victron.VenusOS", 2, 0, "VerticalGauge");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/VeBusDeviceWidget.qml")),
+		"Victron.VenusOS", 2, 0, "VeBusDeviceWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnector.qml")),
 		"Victron.VenusOS", 2, 0, "WidgetConnector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/WidgetConnectorAnchor.qml")),
@@ -548,10 +548,10 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ESSCard");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/GeneratorCard.qml")),
 		"Victron.VenusOS", 2, 0, "GeneratorCard");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/InverterCard.qml")),
-		"Victron.VenusOS", 2, 0, "InverterCard");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/SwitchesCard.qml")),
 		"Victron.VenusOS", 2, 0, "SwitchesCard");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/pages/controlcards/VeBusDeviceCard.qml")),
+		"Victron.VenusOS", 2, 0, "VeBusDeviceCard");
 
 	/* dialogs */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DateSelectorDialog.qml")),
