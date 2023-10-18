@@ -41,5 +41,6 @@
     "animation.loadGraph.model.length": 12,
     "animation.loadGraph.minimumRange.watts": 1000,
     "animation.solarHistoryErrorView.expand.duration": 100,
-    "animation.acceptButtonBackground.expand.duration": 2000
+    "animation.acceptButtonBackground.expand.duration": 2000,
+    "animation.veBusDeviceModeNotAdjustable.toastNotication.duration": 5000
 }

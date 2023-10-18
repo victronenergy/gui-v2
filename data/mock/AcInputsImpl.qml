@@ -99,12 +99,12 @@ QtObject {
 			property ListModel phases: ListModel {
 				Component.onCompleted: {
 					for (let i = 0; i < phaseCount; ++i) {
-						append({ name: "L" + (i+1), frequency: NaN, current: NaN, power: NaN, voltage: NaN })
+						append({ name: "L" + (i+1), frequency: 50.1, current: 2, power: 200, voltage: 235 })
 					}
 				}
 			}
 
-			property int phaseCount: 1
+			property int phaseCount: 3
 
 			property Timer _dummyValues: Timer {
 				running: Global.mockDataSimulator.timersActive

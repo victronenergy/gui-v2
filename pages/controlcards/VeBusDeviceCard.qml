@@ -8,7 +8,7 @@ import Victron.VenusOS
 ControlCard {
 	id: root
 
-	property var inverter
+	property var veBusDevice
 
 	property var _currentLimitDialog
 
@@ -57,23 +57,14 @@ ControlCard {
 
 	// VE.Bus state is a subset of the aggregated system state, so use the same systemStateToText()
 	// function to get a text description.
-	status.text: Global.system.systemStateToText(inverter.state)
+	status.text: Global.system.systemStateToText(veBusDevice.state)
 
 	Component {
 		id: currentLimitDialogComponent
 
-		NumberSelectorDialog {
-			property var inputSettings
-			property int inputIndex
-
-			title: Global.acInputs.currentLimitTypeToText(inputSettings ? inputSettings.inputType : 0)
-			suffix: "A"
-			stepSize: 1
-			to: 1000
-			decimals: 1
-			presets: root.inverter.ampOptions
-
-			onAccepted: root.inverter.setCurrentLimit(inputIndex, value)
+		CurrentLimitDialog {
+			presets: root.veBusDevice.ampOptions
+			onAccepted: root.veBusDevice.setCurrentLimit(inputIndex, value)
 		}
 	}
 
@@ -89,7 +80,7 @@ ControlCard {
 			Repeater {
 				id: currentLimitRepeater
 
-				model: root.inverter.inputSettings
+				model: root.veBusDevice.inputSettings
 
 				delegate: ButtonControlValue {
 					visible: label.text !== ""
@@ -116,14 +107,15 @@ ControlCard {
 			width: parent.width
 			button.width: Math.max(button.implicitWidth, Theme.geometry.veBusDeviceCard.modeButton.maximumWidth)
 			label.text: CommonWords.mode
-			button.text: Global.veBusDevices.modeToText(root.inverter.mode)
-			enabled: root.inverter.modeAdjustable
+			button.text: Global.veBusDevices.modeToText(root.veBusDevice.mode)
+			enabled: root.veBusDevice.modeAdjustable
+			separator.visible: false
 
 			onClicked: {
 				if (!_modeDialog) {
 					_modeDialog = modeDialogComponent.createObject(Global.dialogLayer)
 				}
-				_modeDialog.mode = root.inverter.mode
+				_modeDialog.mode = root.veBusDevice.mode
 				_modeDialog.open()
 			}
 
@@ -131,9 +123,10 @@ ControlCard {
 				id: modeDialogComponent
 
 				InverterChargerModeDialog {
+					isMulti: root.veBusDevice.isMulti
 					onAccepted: {
-						if (root.inverter.mode !== mode) {
-							root.inverter.setMode(mode)
+						if (root.veBusDevice.mode !== mode) {
+							root.veBusDevice.setMode(mode)
 						}
 					}
 				}

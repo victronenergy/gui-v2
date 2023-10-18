@@ -36,7 +36,11 @@ function defaultUnitPrecision(unit) {
 
 	The number is scaled if the absolute value is >= 10,000 (e.g. 10000 W = 10kW).
 */
-function getDisplayText(unit, value, precision, unitMatchValue = undefined) {
+function getDisplayText(unit, value, precision = undefined, unitMatchValue = undefined) {
+	if (precision === undefined) {
+		precision = defaultUnitPrecision(unit)
+	}
+
 	switch (unit) {
 	case V.VenusOS.Units_Watt:
 		return _scaledQuantity(value, unitMatchValue, precision, "W", "kW")
