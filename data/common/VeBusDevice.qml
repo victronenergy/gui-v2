@@ -8,14 +8,18 @@ import Victron.Veutil
 import "/components/Utils.js" as Utils
 
 Device {
-	id: inverter
+	id: veBusDevice
 
 	readonly property int state: _state.value === undefined ? -1 : _state.value
 	readonly property int mode: _mode.value === undefined ? -1 : _mode.value
 	readonly property bool modeAdjustable: _modeAdjustable.value !== undefined && _modeAdjustable.value > 0
 	readonly property real nominalInverterPower: _nominalInverterPower.value === undefined ? NaN : _nominalInverterPower.value
 
+	readonly property int numberOfAcInputs: _numberOfAcInputs.value === undefined ? NaN : _numberOfAcInputs.value
+	readonly property bool isMulti: !isNaN(numberOfAcInputs) && numberOfAcInputs !== 0
+
 	property ListModel inputSettings: ListModel {}
+
 
 	readonly property int productId: _productId.value === undefined ? -1 : _productId.value
 	readonly property int productType: _productUpperByte === 0x19 || _productUpperByte === 0x26
@@ -34,36 +38,37 @@ Device {
 	readonly property var _usAmpOptions: [ 10.0, 15.0, 20.0, 30.0, 50.0, 100.0 ].map(function(v) { return { value: v } })
 
 	readonly property VeQuickItem _state: VeQuickItem {
-		uid: inverter.serviceUid + "/State"
+		uid: veBusDevice.serviceUid + "/State"
 	}
 
 	readonly property VeQuickItem _productId: VeQuickItem {
-		uid: inverter.serviceUid + "/ProductId"
+		uid: veBusDevice.serviceUid + "/ProductId"
 	}
 
 	readonly property VeQuickItem _nominalInverterPower: VeQuickItem {
-		uid: inverter.serviceUid + "/Ac/Out/NominalInverterPower"
+		uid: veBusDevice.serviceUid + "/Ac/Out/NominalInverterPower"
 		onValueChanged: if (!!Global.veBusDevices) Global.veBusDevices.refreshNominalInverterPower()
 	}
 
 	readonly property VeQuickItem _mode: VeQuickItem {
-		uid: inverter.serviceUid + "/Mode"
+		uid: veBusDevice.serviceUid + "/Mode"
 	}
 
 	readonly property VeQuickItem _modeAdjustable: VeQuickItem {
-		uid: inverter.serviceUid + "/ModeIsAdjustable"
+		uid: veBusDevice.serviceUid + "/ModeIsAdjustable"
 	}
 
 	readonly property VeQuickItem _numberOfAcInputs: VeQuickItem {
-		uid: inverter.serviceUid + "/Ac/NumberOfAcInputs"
+		uid: veBusDevice.serviceUid + "/Ac/NumberOfAcInputs"
 	}
+
 
 	onValidChanged: {
 		if (!!Global.veBusDevices) {
 			if (valid) {
-				Global.veBusDevices.addVeBusDevice(inverter)
+				Global.veBusDevices.addVeBusDevice(veBusDevice)
 			} else {
-				Global.veBusDevices.removeVeBusDevice(inverter)
+				Global.veBusDevices.removeVeBusDevice(veBusDevice)
 			}
 		}
 	}
@@ -104,14 +109,15 @@ Device {
 	property Instantiator _acInputSettingsObjects: Instantiator {
 		model: _numberOfAcInputs.value || null
 		delegate: AcInputSettings {
+			serviceUid: veBusDevice.serviceUid
 			inputNumber: model.index + 1
 		}
 
 		onObjectAdded: function(index, object) {
-			inverter._addInputSettings(object)
+			veBusDevice._addInputSettings(object)
 		}
 		onObjectRemoved: function(index, object) {
-			inverter._removeInputSettings(object)
+			veBusDevice._removeInputSettings(object)
 		}
 	}
 }

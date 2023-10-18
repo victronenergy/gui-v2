@@ -52,12 +52,46 @@ QtObject {
 			property int state
 			property int mode: -1
 			property bool modeAdjustable
+			property int numberOfPhases: 3
 
 			property ListModel inputSettings: ListModel {}
 
 			property int productId
 			property int productType
 			property var ampOptions
+
+			property int acOutputPower: 100
+			property int dcPower: 101
+			property int dcVoltage: 102
+			property int dcCurrent: 103
+			property int stateOfCharge: 77
+
+			property int acActiveInput: 1
+			property int acActiveInputPower: 555
+			property int bmsMode: 0
+			property bool modeIsAdjustable: true
+			property bool isMulti: false
+
+			property var acOutput: {
+				"phase1" : {
+					"frequency" : 50.1,
+					"current" : 20,
+					"voltage" : 235,
+					"power" : 4700
+				},
+				"phase2" : {
+					"frequency" : 50.2,
+					"current" : 20,
+					"voltage" : 235,
+					"power" : 4700
+				},
+				"phase3" : {
+					"frequency" : 50.3,
+					"current" : 20,
+					"voltage" : 235,
+					"power" : 4700
+				}
+			}
 
 			function setMode(newMode) {
 				mode = newMode

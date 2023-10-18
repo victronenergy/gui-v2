@@ -440,6 +440,11 @@
     "geometry.settings.gsmModem.signalStrengthBars.bar.width": 4,
     "geometry.settings.gsmModem.signalStrengthBars.bar.incremental.height": 6,
 
+    "geometry.vebusDeviceListPage.quantityTable.row.spacing": 4,
+    "geometry.vebusDeviceListPage.quantityTable.firstColumn.width": 39,
+    "geometry.vebusDeviceListPage.quantityTable.header.height": 58,
+    "geometry.vebusDeviceListPage.currentLimit.button.width": 180,
+
     "geometry.batteryListPage.item.height": 84,
     "geometry.batteryListPage.item.verticalSpacing": 2,
 

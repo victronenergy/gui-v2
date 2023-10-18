@@ -325,6 +325,10 @@ void registerQmlTypes()
 	/* components */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AcceptButtonBackground.qml")),
 		"Victron.VenusOS", 2, 0, "AcceptButtonBackground");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AcOutput.qml")),
+		"Victron.VenusOS", 2, 0, "AcOutput");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/AcPhase.qml")),
+		"Victron.VenusOS", 2, 0, "AcPhase");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/Arc.qml")),
 		"Victron.VenusOS", 2, 0, "Arc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ArcGauge.qml")),
@@ -449,6 +453,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "TankGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ThreePhaseDisplay.qml")),
 		"Victron.VenusOS", 2, 0, "ThreePhaseDisplay");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ThreePhaseQuantityTable.qml")),
+		"Victron.VenusOS", 2, 0, "ThreePhaseQuantityTable");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/TimeSelector.qml")),
 		"Victron.VenusOS", 2, 0, "TimeSelector");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ToastNotification.qml")),
@@ -581,6 +587,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "VeBusDeviceCard");
 
 	/* dialogs */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/CurrentLimitDialog.qml")),
+		"Victron.VenusOS", 2, 0, "CurrentLimitDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DateSelectorDialog.qml")),
 		"Victron.VenusOS", 2, 0, "DateSelectorDialog");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/dialogs/DialogShadow.qml")),

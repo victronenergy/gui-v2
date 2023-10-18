@@ -7,6 +7,9 @@ import Victron.VenusOS
 import Victron.Veutil
 
 QtObject {
+	id: root
+
+	property string serviceUid
 	property int inputNumber: model.index + 1
 	readonly property int inputType: isNaN(_type.value) ? -1 : _type.value
 	readonly property real currentLimit: _currentLimit.value === undefined ? -1 : _currentLimit.value
@@ -17,11 +20,11 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _currentLimit: VeQuickItem {
-		uid: inverter.serviceUid + "/Ac/In/" + inputNumber + "/CurrentLimit"
+		uid: root.serviceUid + "/Ac/In/" + inputNumber + "/CurrentLimit"
 	}
 
 	readonly property VeQuickItem _currentLimitAdjustable: VeQuickItem {
-		uid: inverter.serviceUid + "/Ac/In/" + inputNumber + "/CurrentLimitIsAdjustable"
+		uid: root.serviceUid + "/Ac/In/" + inputNumber + "/CurrentLimitIsAdjustable"
 	}
 
 	function setCurrentLimit(currentLimit) {
