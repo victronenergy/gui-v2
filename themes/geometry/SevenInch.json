@@ -443,5 +443,11 @@
     "geometry.batteryListPage.item.height": 84,
     "geometry.batteryListPage.item.verticalSpacing": 2,
 
-    "geometry.settings.battery.rangeSlider.labelWidth": 120
+    "geometry.settings.battery.rangeSlider.labelWidth": 120,
+
+    "geometry.vebusDeviceListPage.quantityTable.row.spacing": 4,
+    "geometry.vebusDeviceListPage.quantityTable.firstColumn.width": 39,
+    "geometry.vebusDeviceListPage.quantityTable.header.height": 58,
+    "geometry.vebusDeviceListPage.currentLimit.button.width": 180
+
 }

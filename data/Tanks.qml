@@ -150,8 +150,7 @@ QtObject {
 		case VenusOS.Tank_Status_Ok:
 			return CommonWords.ok
 		case VenusOS.Tank_Status_Disconnected:
-			//% "Disconnected"
-			return qsTrId("tank_status_disconnected")
+			return CommonWords.disconnected
 		case VenusOS.Tank_Status_ShortCircuited:
 			//% "Short circuited"
 			return qsTrId("tank_status_short_circuited")

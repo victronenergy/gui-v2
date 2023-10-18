@@ -10,6 +10,7 @@ ModalDialog {
 	id: root
 
 	property int mode
+	property bool isMulti
 
 	//% "Inverter / Charger mode"
 	title: qsTrId("controlcard_inverter_charger_mode")
@@ -26,10 +27,10 @@ ModalDialog {
 			id: repeater
 			width: parent.width
 			model: [
-				VenusOS.VeBusDevice_Mode_On,
-				VenusOS.VeBusDevice_Mode_ChargerOnly,
-				VenusOS.VeBusDevice_Mode_InverterOnly,
-				VenusOS.VeBusDevice_Mode_Off,
+				{ value: VenusOS.VeBusDevice_Mode_On, enabled: true },
+				{ value: VenusOS.VeBusDevice_Mode_ChargerOnly, enabled: root.isMulti },
+				{ value: VenusOS.VeBusDevice_Mode_InverterOnly, enabled: root.isMulti },
+				{ value: VenusOS.VeBusDevice_Mode_Off, enabled: true },
 			]
 			delegate: buttonStyling
 		}
@@ -39,9 +40,10 @@ ModalDialog {
 		id: buttonStyling
 
 		RadioButtonControlValue {
-			button.checked: modelData === root.mode
-			label.text: Global.veBusDevices.modeToText(modelData)
-			onClicked: root.mode = modelData
+			enabled: modelData.enabled
+			button.checked: modelData.value === root.mode
+			label.text: Global.veBusDevices.modeToText(modelData.value)
+			onClicked: root.mode = modelData.value
 		}
 	}
 }

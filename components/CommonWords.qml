@@ -8,6 +8,9 @@ import QtQml
 QtObject {
 	id: root
 
+	//% "AC In"
+	readonly property string ac_in: qsTrId("common_words_ac_in")
+
 	//% "AC Input"
 	readonly property string ac_input: qsTrId("common_words_ac_input")
 
@@ -19,6 +22,9 @@ QtObject {
 
 	//% "AC load"
 	readonly property string ac_load: qsTrId("common_words_ac_load")
+
+	//% "AC Out"
+	readonly property string ac_out: qsTrId("common_words_ac_out")
 
 	//% "AC Output"
 	readonly property string ac_output: qsTrId("common_words_ac_output")
@@ -76,6 +82,9 @@ QtObject {
 	//% "Discharging"
 	readonly property string discharging: qsTrId("common_words_discharging")
 
+	//% "Disconnected"
+	readonly property string disconnected: qsTrId("common_words_disconnected")
+
 	//% "Enable"
 	readonly property string enable: qsTrId("common_words_enable")
 
@@ -120,6 +129,9 @@ QtObject {
 	//: Status is 'inactive'
 	//% "Inactive"
 	readonly property string inactive_status: qsTrId("common_words_inactive_status")
+
+	//% "Inverter / Charger"
+	readonly property string inverter_charger: qsTrId("common_words_inverter_charger")
 
 	//% "Inverter overload"
 	readonly property string inverter_overload: qsTrId("common_words_inverter_overload")

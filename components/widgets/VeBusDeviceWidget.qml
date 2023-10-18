@@ -12,9 +12,8 @@ OverviewWidget {
 	title: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
-
+	enabled: Global.veBusDevices.model.count > 0
 	quantityLabel.visible: false
-
 	extraContent.children: [
 		Label {
 			anchors {
@@ -28,4 +27,8 @@ OverviewWidget {
 			wrapMode: Text.Wrap
 		}
 	]
+	MouseArea {
+		anchors.fill: parent
+		onClicked: Global.pageManager.pushPage("/pages/vebusdevice/VeBusDeviceListPage.qml")
+	}
 }

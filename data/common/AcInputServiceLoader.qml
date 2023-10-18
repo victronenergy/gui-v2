@@ -134,7 +134,7 @@ Loader {
 
 			model: null
 
-			delegate: QtObject {
+			delegate: AcPhase {
 				id: phase
 
 				// Phase paths for vebus:
@@ -149,22 +149,11 @@ Loader {
 							? (root.serviceUid + "/Ac/In/" + acInputs.activeInput + "/L" + (index + 1))
 							: ""
 
-				readonly property VeQuickItem _frequency: VeQuickItem {
-					uid: !!phase.phasePath ? phase.phasePath + "/F" : ""
-					onValueChanged: root._updateValue(acInputs, model.index, "frequency", value)
-				}
-				readonly property VeQuickItem _current: VeQuickItem {
-					uid: !!phase.phasePath ? phase.phasePath + "/I" : ""
-					onValueChanged: root._updateValue(acInputs, model.index, "current", value)
-				}
-				readonly property VeQuickItem _power: VeQuickItem {
-					uid: !!phase.phasePath ? phase.phasePath + "/P" : ""
-					onValueChanged: root._updateValue(acInputs, model.index, "power", value)
-				}
-				readonly property VeQuickItem _voltage: VeQuickItem {
-					uid: !!phase.phasePath ? phase.phasePath + "/V" : ""
-					onValueChanged: root._updateValue(acInputs, model.index, "voltage", value)
-				}
+				serviceUid: !!phase.phasePath ? phase.phasePath : ""
+				onFrequencyChanged: root._updateValue(acInputs, model.index, "frequency", frequency)
+				onCurrentChanged: root._updateValue(acInputs, model.index, "current", current)
+				onPowerChanged: root._updateValue(acInputs, model.index, "power", power)
+				onVoltageChanged: root._updateValue(acInputs, model.index, "voltage", voltage)
 			}
 		}
 	}

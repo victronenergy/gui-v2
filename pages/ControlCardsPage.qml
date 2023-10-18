@@ -54,7 +54,7 @@ Page {
 
 					VeBusDeviceCard {
 						width: root.cardWidth
-						inverter: model.device
+						veBusDevice: model.device
 					}
 				}
 			}
