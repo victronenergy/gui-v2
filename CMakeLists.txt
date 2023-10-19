@@ -128,6 +128,8 @@ set(VENUS_SOURCES
     src/main.cpp
     src/basedevicemodel.h
     src/basedevicemodel.cpp
+    src/aggregatedevicemodel.h
+    src/aggregatedevicemodel.cpp
     src/backendconnection.h
     src/backendconnection.cpp
     src/clocktime.h
