@@ -10,7 +10,8 @@ import "/components/Utils.js" as Utils
 Device {
 	id: input
 
-	property string inputServiceUid
+	// dbus/com.victronenergy.system/Ac/In/<x> or mqtt/system/Ac/In/<x>
+	property string systemServicePrefix
 
 	readonly property string serviceType: _serviceType.value ? _serviceType.value : ''	// e.g. "vebus"
 	readonly property int source: (_source.value === undefined || _source.value === '') ? -1 : parseInt(_source.value)
@@ -47,19 +48,19 @@ Device {
 	// --- General config details about the input, from com.victronenergy.system ---
 
 	readonly property VeQuickItem _serviceType: VeQuickItem {
-		uid: input.serviceUid + "/ServiceType"
+		uid: input.systemServicePrefix + "/ServiceType"
 	}
 	readonly property VeQuickItem _source: VeQuickItem {
-		uid: input.serviceUid + "/Source"
+		uid: input.systemServicePrefix + "/Source"
 	}
 	readonly property VeQuickItem _connected: VeQuickItem {
-		uid: input.serviceUid + "/Connected"
+		uid: input.systemServicePrefix + "/Connected"
 	}
 
 	property AcInputServiceLoader _serviceLoader: AcInputServiceLoader {
 		id: _serviceLoader
 
-		serviceUid: input.inputServiceUid
+		serviceUid: input.serviceUid
 		serviceType: input.serviceType
 
 		// For vebus inputs, only the currently-active input has valid measurements, so
