@@ -57,5 +57,10 @@ QtObject {
 		}
 	}
 
+	function chargerErrorToText(errorCode) {
+		// TODO when BMS and charger errors are available in veutil
+		return ""
+	}
+
 	Component.onCompleted: Global.solarChargers = root
 }

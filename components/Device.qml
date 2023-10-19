@@ -28,4 +28,5 @@ BaseDevice {
 
 	deviceInstance: _deviceInstance.value === undefined ? -1 : _deviceInstance.value
 	name: _customName.value || _productName.value || ""
+	description: name
 }

@@ -22,6 +22,11 @@ Page {
 
 		model: [
 			{
+				//% "Device List"
+				text: qsTrId("settings_device_list"),
+				page: "/pages/settings/devicelist/DeviceListPage.qml",
+			},
+			{
 				//% "Bluetooth"
 				text: qsTrId("settings_bluetooth"),
 				page: "/pages/settings/PageSettingsBluetooth.qml",

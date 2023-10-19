@@ -6,6 +6,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 import "/components/Utils.js" as Utils
+import "/components/Gauges.js" as Gauges
 
 Device {
 	id: tank
@@ -76,5 +77,18 @@ Device {
 				Global.tanks.removeTank(tank)
 			}
 		}
+	}
+
+	description: {
+		if (customName.length > 0) {
+			return customName
+		}
+		if (type >= 0 && deviceInstance >= 0) {
+			const fluidType = Gauges.tankProperties(type).name
+			//: Tank desription. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)
+			//% "%1 tank (%2)"
+			return qsTrId("tank_description").arg(fluidType).arg(deviceInstance)
+		}
+		return name
 	}
 }
