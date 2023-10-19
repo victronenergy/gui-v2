@@ -26,8 +26,12 @@ function getDisplayText(unit, value, precision, unitMatchValue = undefined) {
 		return _scaledQuantity(value, unitMatchValue, precision, "W", "kW")
 	case V.VenusOS.Units_Volt:
 		return _scaledQuantity(value, unitMatchValue, precision, "V", "kV")
+	case V.VenusOS.Units_VoltAmpere:
+		return _scaledQuantity(value, unitMatchValue, precision, "VA", "kVA")
 	case V.VenusOS.Units_Amp:
 		return _scaledQuantity(value, unitMatchValue, precision, "A", "kA")
+	case V.VenusOS.Units_Hertz:
+		return _scaledQuantity(value, unitMatchValue, precision, "Hz", "kHz")
 	case V.VenusOS.Units_Energy_KiloWattHour:
 		return _scaledQuantity(value, unitMatchValue, precision, "kWh")
 	case V.VenusOS.Units_Percentage:
