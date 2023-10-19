@@ -1,4 +1,5 @@
-<RCC> <qresource prefix="/">
+<RCC>
+    <qresource prefix="/">
         <file>main.qml</file>
         <file>ApplicationContent.qml</file>
         <file>Global.qml</file>
@@ -144,6 +145,7 @@
         <file>data/Batteries.qml</file>
         <file>data/DataManager.qml</file>
         <file>data/DcInputs.qml</file>
+        <file>data/DigitalInputs.qml</file>
         <file>data/EnvironmentInputs.qml</file>
         <file>data/Ess.qml</file>
         <file>data/EvChargers.qml</file>
@@ -164,6 +166,7 @@
         <file>data/common/AcInputServiceLoader.qml</file>
         <file>data/common/Battery.qml</file>
         <file>data/common/DcInput.qml</file>
+        <file>data/common/DigitalInput.qml</file>
         <file>data/common/DeviceModel.qml</file>
         <file>data/common/EnvironmentInput.qml</file>
         <file>data/common/EssData.qml</file>
@@ -183,6 +186,7 @@
         <file>data/dbus/BatteriesImpl.qml</file>
         <file>data/dbus/DBusDataManager.qml</file>
         <file>data/dbus/DcInputsImpl.qml</file>
+        <file>data/dbus/DigitalInputsImpl.qml</file>
         <file>data/dbus/EnvironmentInputsImpl.qml</file>
         <file>data/dbus/EssImpl.qml</file>
         <file>data/dbus/EvChargersImpl.qml</file>
@@ -198,6 +202,7 @@
         <file>data/mock/AcInputsImpl.qml</file>
         <file>data/mock/BatteriesImpl.qml</file>
         <file>data/mock/DcInputsImpl.qml</file>
+        <file>data/mock/DigitalInputsImpl.qml</file>
         <file>data/mock/EnvironmentInputsImpl.qml</file>
         <file>data/mock/EssImpl.qml</file>
         <file>data/mock/EvChargersImpl.qml</file>
@@ -220,6 +225,7 @@
         <file>data/mqtt/AcInputsImpl.qml</file>
         <file>data/mqtt/BatteriesImpl.qml</file>
         <file>data/mqtt/DcInputsImpl.qml</file>
+        <file>data/mqtt/DigitalInputsImpl.qml</file>
         <file>data/mqtt/EnvironmentInputsImpl.qml</file>
         <file>data/mqtt/EssImpl.qml</file>
         <file>data/mqtt/EvChargersImpl.qml</file>
