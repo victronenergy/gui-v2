@@ -23,6 +23,7 @@ QtObject {
 			const capacity = 1  // m3
 			const tankObj = tankComponent.createObject(root, {
 				type: tankType,
+				temperature: Math.random() * 100,
 				level: level * 100,
 				remaining: capacity * level,
 				capacity: capacity
@@ -35,6 +36,8 @@ QtObject {
 	property Component tankComponent: Component {
 		MockDevice {
 			property int type
+			property int status: VenusOS.Tank_Status_Ok
+			property real temperature
 			property real level
 			property real remaining
 			property real capacity
@@ -98,6 +101,7 @@ QtObject {
 				const capacity = 1  // m3
 				const tankObj = tankComponent.createObject(root, {
 					type: model.type,
+					temperature: Math.random() * 100,
 					level: randomLevel * 100,
 					capacity: capacity,
 					remaining: capacity * randomLevel,

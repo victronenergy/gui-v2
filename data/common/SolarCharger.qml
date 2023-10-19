@@ -10,7 +10,8 @@ import "/components/Utils.js" as Utils
 Device {
 	id: solarCharger
 
-	property int state: _state.value === undefined ? -1 : _state.value
+	readonly property int state: _state.value === undefined ? -1 : _state.value
+	readonly property int errorCode: _errorCode.value === undefined ? -1 : _errorCode.value
 	readonly property ListModel trackers: ListModel {}
 
 	property real voltage: NaN
@@ -60,6 +61,10 @@ Device {
 
 	readonly property VeQuickItem _relay: VeQuickItem {
 		uid: solarCharger.serviceUid + "/Relay/0/State"
+	}
+
+	readonly property VeQuickItem _errorCode: VeQuickItem {
+		uid: solarCharger.serviceUid + "/ErrorCode"
 	}
 
 	// --- history ---
