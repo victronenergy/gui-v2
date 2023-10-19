@@ -10,6 +10,7 @@ QtObject {
 	id: root
 
 	property var acInputs: AcInputsImpl { }
+	property var chargers: ChargersImpl { }
 	property var batteries: BatteriesImpl { }
 	property var dcInputs: DcInputsImpl { }
 	property var digitalInputs: DigitalInputsImpl {}

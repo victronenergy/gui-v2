@@ -1,0 +1,27 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+*/
+
+import QtQuick
+import Victron.VenusOS
+import Victron.Veutil
+
+Device {
+	id: charger
+
+	readonly property int state: _state.value === undefined ? -1 : _state.value
+
+	readonly property VeQuickItem _state: VeQuickItem {
+		uid: charger.serviceUid + "/State"
+	}
+
+	onValidChanged: {
+		if (!!Global.chargers) {
+			if (valid) {
+				Global.chargers.model.addDevice(charger)
+			} else {
+				Global.chargers.model.removeDevice(charger)
+			}
+		}
+	}
+}
