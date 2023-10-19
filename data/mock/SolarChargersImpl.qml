@@ -48,6 +48,7 @@ QtObject {
 			id: solarCharger
 
 			property int state: VenusOS.SolarCharger_State_ExternalControl
+			property int errorCode: -1
 
 			readonly property ListModel trackers: ListModel {}
 

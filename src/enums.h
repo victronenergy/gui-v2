@@ -295,7 +295,9 @@ public:
 		Tank_Status_Ok = 0,
 		Tank_Status_Disconnected,
 		Tank_Status_ShortCircuited,
-		Tank_Status_Unknown
+		Tank_Status_ReversePolarity,
+		Tank_Status_Unknown,
+		Tank_Status_Error
 	};
 	Q_ENUM(Tank_Status)
 
@@ -514,6 +516,21 @@ public:
 		PvInverter_Position_ACInput2,
 	};
 	Q_ENUM(PvInverter_Position)
+
+	enum Genset_StatusCode {
+		Genset_StatusCode_Startup0,
+		Genset_StatusCode_Startup1,
+		Genset_StatusCode_Startup2,
+		Genset_StatusCode_Startup3,
+		Genset_StatusCode_Startup4,
+		Genset_StatusCode_Startup5,
+		Genset_StatusCode_Startup6,
+		Genset_StatusCode_Startup7,
+		Genset_StatusCode_Running,
+		Genset_StatusCode_Stopping,
+		Genset_StatusCode_Error,
+	};
+	Q_ENUM(Genset_StatusCode)
 
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);

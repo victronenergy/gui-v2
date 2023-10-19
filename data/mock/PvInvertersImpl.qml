@@ -28,6 +28,7 @@ QtObject {
 			id: pvInverter
 
 			property int statusCode: Math.random() * VenusOS.PvInverter_StatusCode_Error
+			property int errorCode: -1
 
 			readonly property ListModel phases: ListModel {
 				ListElement { name: "L1"; energy: 1.5; power: 20; current: 5; voltage: 10 }

@@ -89,7 +89,7 @@ QtObject {
 			property string serviceName
 			property int source
 			property bool connected
-			property int productId: -1
+			readonly property int gensetStatusCode: -1
 
 			property real frequency
 			property real current
