@@ -97,6 +97,9 @@ Page {
 				]
 			}
 
+		} else if (serviceType === "digitalinput") {
+			summary = [ Global.digitalInputs.inputStateToText(device.state) ]
+
 		} else if (serviceType === "evcharger") {
 			url = "/pages/evcs/EvChargerPage.qml"
 			params = { "evCharger" : device }
@@ -128,6 +131,7 @@ Page {
 				Global.acInputs.model,
 				Global.batteries.model,
 				Global.dcInputs.model,
+				Global.digitalInputs.model,
 				Global.environmentInputs.model,
 				Global.evChargers.model,
 				Global.pvInverters.model,
