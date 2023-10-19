@@ -20,6 +20,7 @@ Item {
 			&& !!Global.ess
 			&& !!Global.evChargers
 			&& !!Global.generators
+			&& !!Global.inverters
 			&& !!Global.notifications
 			&& !!Global.pvInverters
 			&& !!Global.relays
@@ -83,6 +84,7 @@ Item {
 	Ess {}
 	EvChargers {}
 	Generators {}
+	Inverters {}
 	Notifications {}
 	PvInverters {}
 	Relays {}

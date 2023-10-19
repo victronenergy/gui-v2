@@ -151,6 +151,7 @@
         <file>data/Ess.qml</file>
         <file>data/EvChargers.qml</file>
         <file>data/Generators.qml</file>
+        <file>data/Inverters.qml</file>
         <file>data/Notifications.qml</file>
         <file>data/PvInverters.qml</file>
         <file>data/Relays.qml</file>
@@ -162,6 +163,7 @@
         <file>data/Tanks.qml</file>
         <file>data/VeBusDevices.qml</file>
         <file>data/VenusPlatform.qml</file>
+        <file>data/common/AcData.qml</file>
         <file>data/common/AcInput.qml</file>
         <file>data/common/AcInputSettings.qml</file>
         <file>data/common/AcInputServiceLoader.qml</file>
@@ -174,6 +176,7 @@
         <file>data/common/EssData.qml</file>
         <file>data/common/EvCharger.qml</file>
         <file>data/common/Generator.qml</file>
+        <file>data/common/Inverter.qml</file>
         <file>data/common/PvInverter.qml</file>
         <file>data/common/PvMonitor.qml</file>
         <file>data/common/Relay.qml</file>
@@ -194,6 +197,7 @@
         <file>data/dbus/EssImpl.qml</file>
         <file>data/dbus/EvChargersImpl.qml</file>
         <file>data/dbus/GeneratorsImpl.qml</file>
+        <file>data/dbus/InvertersImpl.qml</file>
         <file>data/dbus/NotificationsImpl.qml</file>
         <file>data/dbus/PvInvertersImpl.qml</file>
         <file>data/dbus/RelaysImpl.qml</file>
@@ -211,6 +215,7 @@
         <file>data/mock/EssImpl.qml</file>
         <file>data/mock/EvChargersImpl.qml</file>
         <file>data/mock/GeneratorsImpl.qml</file>
+        <file>data/mock/InvertersImpl.qml</file>
         <file>data/mock/MockDevice.qml</file>
         <file>data/mock/MockDataManager.qml</file>
         <file>data/mock/NotificationsImpl.qml</file>
@@ -235,6 +240,7 @@
         <file>data/mqtt/EssImpl.qml</file>
         <file>data/mqtt/EvChargersImpl.qml</file>
         <file>data/mqtt/GeneratorsImpl.qml</file>
+        <file>data/mqtt/InvertersImpl.qml</file>
         <file>data/mqtt/MqttDataManager.qml</file>
         <file>data/mqtt/NotificationsImpl.qml</file>
         <file>data/mqtt/PvInvertersImpl.qml</file>

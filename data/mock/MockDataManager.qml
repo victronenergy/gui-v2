@@ -29,6 +29,7 @@ QtObject {
 			property var ess: EssImpl {}
 			property var evChargers: EvChargersImpl {}
 			property var generators: GeneratorsImpl {}
+			property var inverters: InvertersImpl { }
 			property var veBusDevices: VeBusDevicesImpl {}
 			property var notifications: NotificationsImpl {}
 			property var pvInverters: PvInvertersImpl {}

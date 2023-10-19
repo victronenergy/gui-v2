@@ -38,6 +38,7 @@ QtObject {
 	property var ess
 	property var evChargers
 	property var generators
+	property var inverters
 	property var notifications
 	property var pvInverters
 	property var relays
@@ -95,6 +96,7 @@ QtObject {
 		ess = null
 		evChargers = null
 		generators = null
+		inverters = null
 		notifications = null
 		pvInverters = null
 		relays = null
