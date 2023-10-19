@@ -145,6 +145,28 @@ QtObject {
 		return null
 	}
 
+	function statusToText(status) {
+		switch (status) {
+		case VenusOS.Tank_Status_Ok:
+			return CommonWords.ok
+		case VenusOS.Tank_Status_Disconnected:
+			//% "Disconnected"
+			return qsTrId("tank_status_disconnected")
+		case VenusOS.Tank_Status_ShortCircuited:
+			//% "Short circuited"
+			return qsTrId("tank_status_short_circuited")
+		case VenusOS.Tank_Status_ReversePolarity:
+			//% "Reverse polarity"
+			return qsTrId("tank_status_reverse_polarity")
+		case VenusOS.Tank_Status_Unknown:
+			return CommonWords.unknown_status
+		case VenusOS.Tank_Status_Error:
+			return CommonWords.error
+		default:
+			return ""
+		}
+	}
+
 	function updateTankModelTotals(tankType) {
 		const model = tankModel(tankType)
 		if (!model) {

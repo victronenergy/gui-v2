@@ -11,12 +11,17 @@ Device {
 	id: tank
 
 	readonly property int type: _type.value === undefined ? -1 : _type.value
+	readonly property int status: _status.value === undefined ? VenusOS.Tank_Status_Unknown : _status.value
+	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
 	readonly property int level: _level.value === undefined ? 0 : _level.value
 	property real remaining: NaN
 	property real capacity: NaN
 
 	readonly property VeQuickItem _status: VeQuickItem {
 		uid: serviceUid + "/Status"
+	}
+	readonly property VeQuickItem _temperature: VeQuickItem {
+		uid: serviceUid + "/Temperature"
 	}
 	readonly property VeQuickItem _type: VeQuickItem {
 		uid: serviceUid + "/FluidType"

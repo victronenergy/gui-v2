@@ -28,29 +28,15 @@ QtObject {
 	function statusCodeToText(statusCode) {
 		switch (statusCode) {
 		case VenusOS.PvInverter_StatusCode_Startup0:
-			//% "Startup 0"
-			return qsTrId("pvinverters_statusCode_startup_0")
 		case VenusOS.PvInverter_StatusCode_Startup1:
-			//% "Startup 1"
-			return qsTrId("pvinverters_statusCode_startup_1")
 		case VenusOS.PvInverter_StatusCode_Startup2:
-			//% "Startup 2"
-			return qsTrId("pvinverters_statusCode_startup_2")
 		case VenusOS.PvInverter_StatusCode_Startup3:
-			//% "Startup 3"
-			return qsTrId("pvinverters_statusCode_startup_3")
 		case VenusOS.PvInverter_StatusCode_Startup4:
-			//% "Startup 4"
-			return qsTrId("pvinverters_statusCode_startup_4")
 		case VenusOS.PvInverter_StatusCode_Startup5:
-			//% "Startup 5"
-			return qsTrId("pvinverters_statusCode_startup_5")
 		case VenusOS.PvInverter_StatusCode_Startup6:
-			//% "Startup 6"
-			return qsTrId("pvinverters_statusCode_startup_6")
+			return CommonWords.startup_status.arg(statusCode)
 		case VenusOS.PvInverter_StatusCode_Running:
-			//% "Running"
-			return qsTrId("pvinverters_statusCode_running")
+			return CommonWords.running_status
 		case VenusOS.PvInverter_StatusCode_Standby:
 			//% "Standby"
 			return qsTrId("pvinverters_statusCode_standby")
@@ -58,8 +44,7 @@ QtObject {
 			//% "Boot loading"
 			return qsTrId("pvinverters_statusCode_boot_loading")
 		case VenusOS.PvInverter_StatusCode_Error:
-			//% "Error"
-			return qsTrId("pvinverters_statusCode_error")
+			return CommonWords.error
 		case VenusOS.PvInverter_StatusCode_RunningMPPT:
 			//% "Running (MPPT)"
 			return qsTrId("pvinverters_statusCode_running_mppt")

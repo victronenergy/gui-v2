@@ -5,7 +5,6 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
-import "/components/Utils.js" as Utils
 
 Device {
 	id: input

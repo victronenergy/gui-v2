@@ -16,6 +16,7 @@ Device {
 	readonly property string serviceType: _serviceType.value ? _serviceType.value : ''	// e.g. "vebus"
 	readonly property int source: (_source.value === undefined || _source.value === '') ? -1 : parseInt(_source.value)
 	readonly property bool connected: _connected.value === 1
+	readonly property int gensetStatusCode: _gensetStatusCode.value === undefined ? -1 : _gensetStatusCode.value
 
 	// Detailed readings
 	readonly property alias frequency: _serviceLoader.frequency
@@ -55,6 +56,11 @@ Device {
 	}
 	readonly property VeQuickItem _connected: VeQuickItem {
 		uid: input.systemServicePrefix + "/Connected"
+	}
+
+	// StatusCode is only valid for genset devices
+	readonly property VeQuickItem _gensetStatusCode: VeQuickItem {
+		uid: input.serviceType === "genset" ? input.serviceUid + "/StatusCode" : ""
 	}
 
 	property AcInputServiceLoader _serviceLoader: AcInputServiceLoader {

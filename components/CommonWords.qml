@@ -105,6 +105,9 @@ QtObject {
 	//% "None"
 	readonly property string none_errors: qsTrId("common_words_none_errors")
 
+	//% "Not connected"
+	readonly property string not_connected: qsTrId("common_words_not_connected")
+
 	//% "Off"
 	readonly property string off: qsTrId("common_words_off");
 
@@ -157,6 +160,10 @@ QtObject {
 	//% "Remove"
 	readonly property string remove: qsTrId("common_words_remove")
 
+	//: Status = "running"
+	//% "Running"
+	readonly property string running_status: qsTrId("common_words_running_status")
+
 	//% "Scanning %1%"
 	readonly property string scanning: qsTrId("common_words_scanning")
 
@@ -184,6 +191,19 @@ QtObject {
 	//% "Status"
 	readonly property string status: qsTrId("common_words_status")
 
+	//: Status = "start up". %1 = the startup status number
+	//% "Startup (%1)"
+	readonly property string startup_status: qsTrId("common_words_startup_status")
+
+	//% "Stop value during quiet hours"
+	readonly property string stop_value_during_quiet_hours: qsTrId("common_words_stop_value_during_quiet_hours")
+
+	//% "Stop after the condition is reached for"
+	readonly property string stop_after_the_condition_is_reached_for: qsTrId("common_words_stop_after_the_condition_is_reached_for")
+
+	//% "Stopped"
+	readonly property string stopped: qsTrId("common_words_stopped")
+
 	//% "Today"
 	readonly property string today: qsTrId("common_words_today")
 
@@ -197,14 +217,9 @@ QtObject {
 	//% "Unique Identity Number"
 	readonly property string unique_identity_number: qsTrId("common_words_unique_id_number")
 
-	//% "Stop value during quiet hours"
-	readonly property string stop_value_during_quiet_hours: qsTrId("common_words_stop_value_during_quiet_hours")
-
-	//% "Stop after the condition is reached for"
-	readonly property string stop_after_the_condition_is_reached_for: qsTrId("common_words_stop_after_the_condition_is_reached_for")
-
-	//% "Stopped"
-	readonly property string stopped: qsTrId("common_words_stopped")
+	//: Status = "unknown"
+	//% "Unknown"
+	readonly property string unknown_status: qsTrId("common_words_unknown_status")
 
 	//% "Voltage"
 	readonly property string voltage: qsTrId("common_words_voltage")
@@ -235,8 +250,7 @@ QtObject {
 		} else if (value === 1) {
 			return on
 		} else {
-			//% "Unknown"
-			return qsTrId("utils_unknown")
+			return unknown_status
 		}
 	}
 
