@@ -74,8 +74,10 @@ public:
 
 		Units_Percentage,
 		Units_Volt,
+		Units_VoltAmpere,
 		Units_Watt,
 		Units_Amp,
+		Units_Hertz,
 		Units_Energy_KiloWattHour,
 		Units_Temperature_Celsius,
 		Units_Temperature_Fahrenheit,

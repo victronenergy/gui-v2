@@ -87,6 +87,9 @@ Page {
 				summary = [ CommonWords.not_connected ]
 			}
 
+		} else if (serviceType === "inverter") {
+			summary = [ Units.getCombinedDisplayText(device.currentPhase.powerUnit, device.currentPhase.power) ]
+
 		} else if (serviceType === "temperature") {
 			const inputTemp = Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 					? device.temperature_celsius
@@ -140,6 +143,7 @@ Page {
 				Global.digitalInputs.model,
 				Global.environmentInputs.model,
 				Global.evChargers.model,
+				Global.inverters.model,
 				Global.pvInverters.model,
 				Global.solarChargers.model,
 				Global.veBusDevices.model,
