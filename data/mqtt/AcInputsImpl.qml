@@ -40,12 +40,17 @@ QtObject {
 		}
 
 		delegate: AcInput {
-			serviceUid: model.uid
+			systemServicePrefix: model.uid
 
 			// this looks like: 'mqtt/vebus/289/'
-			inputServiceUid: serviceType.length && deviceInstance >= 0
-					? "mqtt/" + serviceType + "/" + deviceInstance
+			serviceUid: serviceType.length && _deviceInstanceOnSystemService.value !== undefined
+					? "mqtt/" + serviceType + "/" + _deviceInstanceOnSystemService.value
 					: ""
+
+			// Get the value of mqtt/system/Ac/In/<x>/DeviceInstance, to assemble the serviceUid
+			readonly property VeQuickItem _deviceInstanceOnSystemService: VeQuickItem {
+				uid: model.uid + "/DeviceInstance"
+			}
 		}
 	}
 }

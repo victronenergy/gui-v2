@@ -33,11 +33,12 @@ QtObject {
 		}
 
 		delegate: AcInput {
-			serviceUid: model.uid
+			systemServicePrefix: model.uid
 
 			// this looks like: "dbus/com.victronenergy.vebus.ttyO1"
-			inputServiceUid: _serviceName.value ? 'dbus/' + _serviceName.value : ''
+			serviceUid: _serviceName.value ? 'dbus/' + _serviceName.value : ''
 
+			// e.g. com.victronenergy.vebus.ttyO, com.victronenergy.grid.ttyO
 			readonly property VeQuickItem _serviceName: VeQuickItem {
 				uid: model.uid + "/ServiceName"
 			}
