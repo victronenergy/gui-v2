@@ -15,6 +15,7 @@ class BaseDevice : public QObject
 	Q_PROPERTY(QString serviceUid READ serviceUid WRITE setServiceUid NOTIFY serviceUidChanged)
 	Q_PROPERTY(int deviceInstance READ deviceInstance WRITE setDeviceInstance NOTIFY deviceInstanceChanged)
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 
 public:
 	explicit BaseDevice(QObject *parent = nullptr);
@@ -28,14 +29,19 @@ public:
 	QString name() const;
 	void setName(const QString &name);
 
+	QString description() const;
+	void setDescription(const QString &description);
+
 Q_SIGNALS:
 	void serviceUidChanged();
 	void deviceInstanceChanged();
 	void nameChanged();
+	void descriptionChanged();
 
 private:
 	QString m_serviceUid;
 	QString m_name;
+	QString m_description;
 	int m_deviceInstance = -1;
 };
 

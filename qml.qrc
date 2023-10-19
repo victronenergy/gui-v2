@@ -398,6 +398,7 @@
         <file>pages/settings/debug/PagePowerDebug.qml</file>
         <file>pages/settings/debug/PageSettingsDemo.qml</file>
         <file>pages/settings/debug/PageSystemData.qml</file>
+        <file>pages/settings/devicelist/DeviceListPage.qml</file>
         <file>pages/settings/tz/TzAfricaData.qml</file>
         <file>pages/settings/tz/TzAmericaData.qml</file>
         <file>pages/settings/tz/TzAntarcticaData.qml</file>

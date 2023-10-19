@@ -92,6 +92,14 @@ function _scaledQuantity(value, unitMatchValue, precision, baseUnit, scaledUnit)
 	return quantity
 }
 
+function getCombinedDisplayText(unit, value) {
+	const obj = getDisplayText(unit, value, defaultUnitPrecision(unit))
+	if (obj.number === "--") {
+		return obj.number
+	}
+	return obj.number + obj.unit
+}
+
 function celsiusToFahrenheit(celsius) {
 	return isNaN(celsius) ? celsius: (celsius * 9/5) + 32
 }

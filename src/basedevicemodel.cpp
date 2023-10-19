@@ -49,6 +49,19 @@ void BaseDevice::setName(const QString &name)
 	}
 }
 
+QString BaseDevice::description() const
+{
+	return m_description;
+}
+
+void BaseDevice::setDescription(const QString &description)
+{
+	if (m_description != description) {
+		m_description = description;
+		emit descriptionChanged();
+	}
+}
+
 
 BaseDeviceModel::BaseDeviceModel(QObject *parent)
 	: QAbstractListModel(parent)
