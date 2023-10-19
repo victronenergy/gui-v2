@@ -97,8 +97,6 @@ Page {
 			ListTextItem {
 				//% "Sim status"
 				text: qsTrId("page_settings_gsm_sim_status")
-				//% "Unknown"
-				//defaultSecondaryText: qsTrId("page_settings_gsm_unknown")
 				secondaryText: {
 					switch (dataValue) {
 					case 10:
