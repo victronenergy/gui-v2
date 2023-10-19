@@ -30,6 +30,7 @@ QtObject {
 
 	// data sources
 	property var acInputs
+	property var chargers
 	property var batteries
 	property var dcInputs
 	property var digitalInputs
@@ -84,7 +85,9 @@ QtObject {
 		inputPanel = null
 		dialogLayer = null
 		notificationLayer = null
+
 		acInputs = null
+		chargers = null
 		batteries = null
 		dcInputs = null
 		digitalInputs = null

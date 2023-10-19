@@ -50,6 +50,11 @@ Page {
 			params = { "pvInverter" : device }
 			summary = [ Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power) ]
 
+		} else if (serviceType === "charger") {
+			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
+			params = { "bindPrefix" : device.serviceUid }
+			summary = [ Global.system.systemStateToText(device.state) ]
+
 		} else if (serviceType === "tank") {
 			if (device.status === VenusOS.Tank_Status_Ok) {
 				const levelText = Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.level)
@@ -130,6 +135,7 @@ Page {
 			sourceModels: [
 				Global.acInputs.model,
 				Global.batteries.model,
+				Global.chargers.model,
 				Global.dcInputs.model,
 				Global.digitalInputs.model,
 				Global.environmentInputs.model,
