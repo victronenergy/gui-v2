@@ -1,0 +1,27 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+*/
+
+import QtQuick
+import Victron.VenusOS
+
+Item {
+	id: root
+
+	function populate() {
+		Global.motorDrives.model.addDevice(motorDriveComponent.createObject(root))
+	}
+
+	property Component motorDriveComponent: Component {
+		MockDevice {
+			property real motorRpm: 9000
+
+			serviceUid: "com.victronenergy.motordrive.ttyUSB" + deviceInstance
+			name: "MotorDrive" + deviceInstance
+		}
+	}
+
+	Component.onCompleted: {
+		populate()
+	}
+}

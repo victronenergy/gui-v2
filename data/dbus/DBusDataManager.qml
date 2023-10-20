@@ -20,6 +20,7 @@ QtObject {
 	property var generators: GeneratorsImpl { }
 	property var inverters: InvertersImpl { }
 	property var meteoDevices: MeteoDevicesImpl { }
+	property var motorDrives: MotorDrivesImpl { }
 	property var notifications: NotificationsImpl {}
 	property var pvInverters: PvInvertersImpl { }
 	property var relays: RelaysImpl {}

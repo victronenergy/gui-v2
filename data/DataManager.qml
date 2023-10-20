@@ -22,6 +22,7 @@ Item {
 			&& !!Global.generators
 			&& !!Global.inverters
 			&& !!Global.meteoDevices
+			&& !!Global.motorDrives
 			&& !!Global.notifications
 			&& !!Global.pvInverters
 			&& !!Global.relays
@@ -88,6 +89,7 @@ Item {
 	Generators {}
 	Inverters {}
 	MeteoDevices {}
+	MotorDrives {}
 	Notifications {}
 	PvInverters {}
 	Relays {}
