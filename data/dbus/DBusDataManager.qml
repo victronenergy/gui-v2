@@ -26,6 +26,7 @@ QtObject {
 	property var system: SystemImpl { }
 	property var systemSettings: SystemSettingsImpl { }
 	property var tanks: TanksImpl { }
+	property var unsupportedDevices: UnsupportedDevicesImpl { }
 	property var veBusDevices: VeBusDevicesImpl {}
 
 	property VeQItemTableModel servicesTableModel: VeQItemTableModel {

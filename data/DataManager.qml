@@ -28,6 +28,7 @@ Item {
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.tanks
+			&& !!Global.unsupportedDevices
 			&& !!Global.veBusDevices
 			&& !!Global.venusPlatform
 
@@ -92,6 +93,7 @@ Item {
 	System {}
 	SystemSettings {}
 	Tanks {}
+	UnsupportedDevices {}
 	VeBusDevices {}
 	VenusPlatform {}
 
