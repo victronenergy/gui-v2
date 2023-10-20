@@ -21,6 +21,7 @@ Item {
 			&& !!Global.evChargers
 			&& !!Global.generators
 			&& !!Global.inverters
+			&& !!Global.meteoDevices
 			&& !!Global.notifications
 			&& !!Global.pvInverters
 			&& !!Global.relays
@@ -86,6 +87,7 @@ Item {
 	EvChargers {}
 	Generators {}
 	Inverters {}
+	MeteoDevices {}
 	Notifications {}
 	PvInverters {}
 	Relays {}
