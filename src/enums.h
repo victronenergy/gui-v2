@@ -79,6 +79,7 @@ public:
 		Units_Amp,
 		Units_Hertz,
 		Units_Energy_KiloWattHour,
+		Units_WattsPerSquareMeter,
 		Units_Temperature_Celsius,
 		Units_Temperature_Fahrenheit,
 

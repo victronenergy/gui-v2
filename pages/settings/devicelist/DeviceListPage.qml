@@ -133,6 +133,9 @@ Page {
 			url = "/pages/settings/devicelist/PageUnsupportedDevice.qml"
 			params = { "bindPrefix": device.serviceUid }
 
+		} else if (serviceType === "meteo") {
+			summary = [ Units.getCombinedDisplayText(VenusOS.Units_WattsPerSquareMeter, device.irradiance) ]
+
 		} else {
 			return null
 		}
@@ -151,6 +154,7 @@ Page {
 				Global.environmentInputs.model,
 				Global.evChargers.model,
 				Global.inverters.model,
+				Global.meteoDevices.model,
 				Global.pvInverters.model,
 				Global.solarChargers.model,
 				Global.veBusDevices.model,

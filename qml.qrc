@@ -152,6 +152,7 @@
         <file>data/EvChargers.qml</file>
         <file>data/Generators.qml</file>
         <file>data/Inverters.qml</file>
+        <file>data/MeteoDevices.qml</file>
         <file>data/Notifications.qml</file>
         <file>data/PvInverters.qml</file>
         <file>data/Relays.qml</file>
@@ -178,6 +179,7 @@
         <file>data/common/EvCharger.qml</file>
         <file>data/common/Generator.qml</file>
         <file>data/common/Inverter.qml</file>
+        <file>data/common/MeteoDevice.qml</file>
         <file>data/common/PvInverter.qml</file>
         <file>data/common/PvMonitor.qml</file>
         <file>data/common/Relay.qml</file>
@@ -200,6 +202,7 @@
         <file>data/dbus/EvChargersImpl.qml</file>
         <file>data/dbus/GeneratorsImpl.qml</file>
         <file>data/dbus/InvertersImpl.qml</file>
+        <file>data/dbus/MeteoDevicesImpl.qml</file>
         <file>data/dbus/NotificationsImpl.qml</file>
         <file>data/dbus/PvInvertersImpl.qml</file>
         <file>data/dbus/RelaysImpl.qml</file>
@@ -219,6 +222,7 @@
         <file>data/mock/EvChargersImpl.qml</file>
         <file>data/mock/GeneratorsImpl.qml</file>
         <file>data/mock/InvertersImpl.qml</file>
+        <file>data/mock/MeteoDevicesImpl.qml</file>
         <file>data/mock/MockDevice.qml</file>
         <file>data/mock/MockDataManager.qml</file>
         <file>data/mock/NotificationsImpl.qml</file>
@@ -245,6 +249,7 @@
         <file>data/mqtt/EvChargersImpl.qml</file>
         <file>data/mqtt/GeneratorsImpl.qml</file>
         <file>data/mqtt/InvertersImpl.qml</file>
+        <file>data/mqtt/MeteoDevicesImpl.qml</file>
         <file>data/mqtt/MqttDataManager.qml</file>
         <file>data/mqtt/NotificationsImpl.qml</file>
         <file>data/mqtt/PvInvertersImpl.qml</file>

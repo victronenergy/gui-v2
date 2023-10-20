@@ -10,6 +10,7 @@ function defaultUnitPrecision(unit) {
 	return unit === V.VenusOS.Units_Energy_KiloWattHour ? 2
 			: (unit === V.VenusOS.Units_Percentage
 			   || unit === V.VenusOS.Units_Watt
+			   || unit === V.VenusOS.Units_WattsPerSquareMeter
 			   || unit === V.VenusOS.Units_Temperature_Celsius
 			   || unit === V.VenusOS.Units_Temperature_Fahrenheit) ? 0
 			: 1
@@ -34,6 +35,8 @@ function getDisplayText(unit, value, precision, unitMatchValue = undefined) {
 		return _scaledQuantity(value, unitMatchValue, precision, "Hz", "kHz")
 	case V.VenusOS.Units_Energy_KiloWattHour:
 		return _scaledQuantity(value, unitMatchValue, precision, "kWh")
+	case V.VenusOS.Units_WattsPerSquareMeter:
+		return _scaledQuantity(value, unitMatchValue, precision, "W/m2")
 	case V.VenusOS.Units_Percentage:
 		return _scaledQuantity(value, unitMatchValue, precision, "%")
 	case V.VenusOS.Units_Temperature_Celsius:
