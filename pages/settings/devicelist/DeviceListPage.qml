@@ -126,6 +126,13 @@ Page {
 				Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
 			]
 
+		} else if (serviceType === "unsupported") {
+			//: Device is not supported
+			//% "Unsupported"
+			summary = [ qsTrId("devicelist_unsupported") ]
+			url = "/pages/settings/devicelist/PageUnsupportedDevice.qml"
+			params = { "bindPrefix": device.serviceUid }
+
 		} else {
 			return null
 		}
@@ -147,6 +154,7 @@ Page {
 				Global.pvInverters.model,
 				Global.solarChargers.model,
 				Global.veBusDevices.model,
+				Global.unsupportedDevices.model,
 			].concat(Global.tanks.allTankModels)
 		}
 		delegate: ListTextGroup {

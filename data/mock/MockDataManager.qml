@@ -30,7 +30,6 @@ QtObject {
 			property var evChargers: EvChargersImpl {}
 			property var generators: GeneratorsImpl {}
 			property var inverters: InvertersImpl { }
-			property var veBusDevices: VeBusDevicesImpl {}
 			property var notifications: NotificationsImpl {}
 			property var pvInverters: PvInvertersImpl {}
 			property var relays: RelaysImpl {}
@@ -38,6 +37,8 @@ QtObject {
 			property var system: SystemImpl {}
 			property var systemSettings: SystemSettingsImpl {}
 			property var tanks: TanksImpl {}
+			property var unsupportedDevices: UnsupportedDevicesImpl { }
+			property var veBusDevices: VeBusDevicesImpl {}
 		}
 	}
 }

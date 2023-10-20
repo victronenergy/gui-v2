@@ -47,8 +47,9 @@ QtObject {
 	property var systemSettings
 	property var tanks
 	property var veBusDevices
-	property var venusPlatform
+	property var unsupportedDevices
 
+	property var venusPlatform
 	property bool splashScreenVisible: true
 	property bool dataManagerLoaded
 	property bool allPagesLoaded
@@ -104,6 +105,7 @@ QtObject {
 		system = null
 		systemSettings = null
 		tanks = null
+		unsupportedDevices = null
 		veBusDevices = null
 		venusPlatform = null
 
