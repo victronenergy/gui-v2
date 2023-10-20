@@ -12,7 +12,8 @@ function defaultUnitPrecision(unit) {
 			   || unit === V.VenusOS.Units_Watt
 			   || unit === V.VenusOS.Units_WattsPerSquareMeter
 			   || unit === V.VenusOS.Units_Temperature_Celsius
-			   || unit === V.VenusOS.Units_Temperature_Fahrenheit) ? 0
+			   || unit === V.VenusOS.Units_Temperature_Fahrenheit
+			   || unit === V.VenusOS.Units_RevolutionsPerMinute) ? 0
 			: 1
 }
 
@@ -52,6 +53,8 @@ function getDisplayText(unit, value, precision, unitMatchValue = undefined) {
 	case V.VenusOS.Units_Volume_GallonUS:
 	case V.VenusOS.Units_Volume_GallonImperial:
 		return _scaledQuantity(value, unitMatchValue, precision, "gal")
+	case V.VenusOS.Units_RevolutionsPerMinute:
+		return _scaledQuantity(value, unitMatchValue, precision, "RPM")
 	default:
 		console.warn("getDisplayText(): unknown unit", unit, "with value", value)
 		return { number: "--", unit: "" }

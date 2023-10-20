@@ -82,6 +82,7 @@ public:
 		Units_WattsPerSquareMeter,
 		Units_Temperature_Celsius,
 		Units_Temperature_Fahrenheit,
+		Units_RevolutionsPerMinute,
 
 		Units_None = 1000
 	};

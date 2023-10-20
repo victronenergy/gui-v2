@@ -87,6 +87,11 @@ Page {
 				summary = [ CommonWords.not_connected ]
 			}
 
+		} else if (serviceType === "motordrive") {
+			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
+			params = { "bindPrefix" : device.serviceUid }
+			summary = [ Units.getCombinedDisplayText(VenusOS.Units_RevolutionsPerMinute, device.motorRpm) ]
+
 		} else if (serviceType === "inverter") {
 			summary = [ Units.getCombinedDisplayText(device.currentPhase.powerUnit, device.currentPhase.power) ]
 
@@ -155,6 +160,7 @@ Page {
 				Global.evChargers.model,
 				Global.inverters.model,
 				Global.meteoDevices.model,
+				Global.motorDrives.model,
 				Global.pvInverters.model,
 				Global.solarChargers.model,
 				Global.veBusDevices.model,
