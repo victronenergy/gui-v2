@@ -23,6 +23,7 @@ Item {
 			&& !!Global.inverters
 			&& !!Global.meteoDevices
 			&& !!Global.motorDrives
+			&& !!Global.multiRsDevices
 			&& !!Global.notifications
 			&& !!Global.pulseMeters
 			&& !!Global.pvInverters
@@ -91,6 +92,7 @@ Item {
 	Inverters {}
 	MeteoDevices {}
 	MotorDrives {}
+	MultiRsDevices {}
 	Notifications {}
 	PulseMeters {}
 	PvInverters {}

@@ -105,6 +105,9 @@ QtObject {
 		case VenusOS.System_State_PowerSupplyMode:
 			//% "Power supply mode"
 			return qsTrId("inverters_state_powersupplymode")
+		case VenusOS.System_State_Sustain:
+			//% "Sustain"
+			return qsTrId("inverters_state_sustain")
 
 		case VenusOS.System_State_Wakeup:
 			//% "Wake up"
@@ -134,15 +137,18 @@ QtObject {
 		case VenusOS.System_State_Discharging:
 			//% "Discharging"
 			return qsTrId("inverters_state_discharging")
-		case VenusOS.System_State_Sustain:
+		case VenusOS.System_State_SystemSustain:
 			//% "Sustain"
-			return qsTrId("inverters_state_sustain")
+			return qsTrId("inverters_state_system_sustain")
 		case VenusOS.System_State_Recharge:
 			//% "Recharge"
 			return qsTrId("inverters_state_recharge")
 		case VenusOS.System_State_ScheduledRecharge:
 			//% "Scheduled recharge"
 			return qsTrId("inverters_state_scheduledrecharge")
+		case VenusOS.System_State_DynamicESS:
+			//% "Dynamic ESS"
+			return qsTrId("inverters_state_dynamic_ess")
 		}
 		return ""
 	}

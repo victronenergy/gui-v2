@@ -28,6 +28,11 @@ Page {
 				&& sourceModel !== Global.acInputs.model) {
 			summary = [ Global.system.systemStateToText(device.state) ]
 
+		} else if (serviceType === "multi") {
+			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
+			params = { "bindPrefix" : device.serviceUid }
+			summary = [ Global.system.systemStateToText(device.state) ]
+
 		} else if (serviceType === "battery") {
 			summary = [
 				Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.stateOfCharge),
@@ -164,6 +169,7 @@ Page {
 				Global.inverters.model,
 				Global.meteoDevices.model,
 				Global.motorDrives.model,
+				Global.multiRsDevices.model,
 				Global.pulseMeters.model,
 				Global.pvInverters.model,
 				Global.solarChargers.model,

@@ -257,6 +257,7 @@ public:
 		System_State_Inverting = 0x09,
 		System_State_Assisting = 0x0A,
 		System_State_PowerSupplyMode = 0x0B,
+		System_State_Sustain = 0xF4,
 
 		System_State_Wakeup = 0xF5,
 		System_State_RepeatedAbsorption = 0xF6,
@@ -267,10 +268,12 @@ public:
 		System_State_Test = 0xFB,
 		System_State_ExternalControl = 0xFC,
 
+		// These are not VEBUS states, they are system states used with ESS
 		System_State_Discharging = 0x100,
-		System_State_Sustain = 0x101,
+		System_State_SystemSustain = 0x101,
 		System_State_Recharge = 0x102,
-		System_State_ScheduledRecharge = 0x103
+		System_State_ScheduledRecharge = 0x103,
+		System_State_DynamicESS = 0x104
 	};
 	Q_ENUM(System_State)
 
