@@ -155,6 +155,7 @@
         <file>data/MeteoDevices.qml</file>
         <file>data/MotorDrives.qml</file>
         <file>data/Notifications.qml</file>
+        <file>data/PulseMeters.qml</file>
         <file>data/PvInverters.qml</file>
         <file>data/Relays.qml</file>
         <file>data/SolarChargers.qml</file>
@@ -182,6 +183,7 @@
         <file>data/common/Inverter.qml</file>
         <file>data/common/MeteoDevice.qml</file>
         <file>data/common/MotorDrive.qml</file>
+        <file>data/common/PulseMeter.qml</file>
         <file>data/common/PvInverter.qml</file>
         <file>data/common/PvMonitor.qml</file>
         <file>data/common/Relay.qml</file>
@@ -207,6 +209,7 @@
         <file>data/dbus/MeteoDevicesImpl.qml</file>
         <file>data/dbus/MotorDrivesImpl.qml</file>
         <file>data/dbus/NotificationsImpl.qml</file>
+        <file>data/dbus/PulseMetersImpl.qml</file>
         <file>data/dbus/PvInvertersImpl.qml</file>
         <file>data/dbus/RelaysImpl.qml</file>
         <file>data/dbus/SolarChargersImpl.qml</file>
@@ -230,6 +233,7 @@
         <file>data/mock/MockDataManager.qml</file>
         <file>data/mock/MotorDrivesImpl.qml</file>
         <file>data/mock/NotificationsImpl.qml</file>
+        <file>data/mock/PulseMetersImpl.qml</file>
         <file>data/mock/PvInvertersImpl.qml</file>
         <file>data/mock/RelaysImpl.qml</file>
         <file>data/mock/SolarChargersImpl.qml</file>
@@ -257,6 +261,7 @@
         <file>data/mqtt/MotorDrivesImpl.qml</file>
         <file>data/mqtt/MqttDataManager.qml</file>
         <file>data/mqtt/NotificationsImpl.qml</file>
+        <file>data/mqtt/PulseMetersImpl.qml</file>
         <file>data/mqtt/PvInvertersImpl.qml</file>
         <file>data/mqtt/RelaysImpl.qml</file>
         <file>data/mqtt/SolarChargersImpl.qml</file>
