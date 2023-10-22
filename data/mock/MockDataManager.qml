@@ -32,6 +32,7 @@ QtObject {
 			property var inverters: InvertersImpl { }
 			property var meteoDevices: MeteoDevicesImpl { }
 			property var motorDrives: MotorDrivesImpl { }
+			property var multiRsDevices: MultiRsDevicesImpl { }
 			property var notifications: NotificationsImpl {}
 			property var pulseMeters: PulseMetersImpl { }
 			property var pvInverters: PvInvertersImpl {}
