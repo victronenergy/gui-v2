@@ -33,6 +33,7 @@ QtObject {
 			property var meteoDevices: MeteoDevicesImpl { }
 			property var motorDrives: MotorDrivesImpl { }
 			property var notifications: NotificationsImpl {}
+			property var pulseMeters: PulseMetersImpl { }
 			property var pvInverters: PvInvertersImpl {}
 			property var relays: RelaysImpl {}
 			property var solarChargers: SolarChargersImpl {}

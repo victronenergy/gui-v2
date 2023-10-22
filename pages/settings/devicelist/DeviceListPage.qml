@@ -131,6 +131,9 @@ Page {
 				Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
 			]
 
+		} else if (serviceType === "pulsemeter") {
+			summary = [ Units.getCombinedDisplayText(Global.systemSettings.volumeUnit.value, device.aggregate) ]
+
 		} else if (serviceType === "unsupported") {
 			//: Device is not supported
 			//% "Unsupported"
@@ -161,6 +164,7 @@ Page {
 				Global.inverters.model,
 				Global.meteoDevices.model,
 				Global.motorDrives.model,
+				Global.pulseMeters.model,
 				Global.pvInverters.model,
 				Global.solarChargers.model,
 				Global.veBusDevices.model,
