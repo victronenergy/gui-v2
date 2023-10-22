@@ -41,6 +41,7 @@ QtObject {
 	property var inverters
 	property var meteoDevices
 	property var motorDrives
+	property var multiRsDevices
 	property var notifications
 	property var pulseMeters
 	property var pvInverters
@@ -103,6 +104,7 @@ QtObject {
 		inverters = null
 		meteoDevices = null
 		motorDrives = null
+		multiRsDevices = null
 		notifications = null
 		pulseMeters = null
 		pvInverters = null
