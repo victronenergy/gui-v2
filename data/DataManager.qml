@@ -24,6 +24,7 @@ Item {
 			&& !!Global.meteoDevices
 			&& !!Global.motorDrives
 			&& !!Global.notifications
+			&& !!Global.pulseMeters
 			&& !!Global.pvInverters
 			&& !!Global.relays
 			&& !!Global.solarChargers
@@ -91,6 +92,7 @@ Item {
 	MeteoDevices {}
 	MotorDrives {}
 	Notifications {}
+	PulseMeters {}
 	PvInverters {}
 	Relays {}
 	SolarChargers {}

@@ -8,12 +8,20 @@
 
 function defaultUnitPrecision(unit) {
 	return unit === V.VenusOS.Units_Energy_KiloWattHour ? 2
-			: (unit === V.VenusOS.Units_Percentage
+			: (unit === V.VenusOS.Units_Volume_CubicMeter
+			   || unit === V.VenusOS.Units_Volume_Liter
+			   || unit === V.VenusOS.Units_Volume_GallonImperial
+			   || unit === V.VenusOS.Units_Volume_GallonUS
+			   || unit === V.VenusOS.Units_Percentage
 			   || unit === V.VenusOS.Units_Watt
 			   || unit === V.VenusOS.Units_WattsPerSquareMeter
 			   || unit === V.VenusOS.Units_Temperature_Celsius
 			   || unit === V.VenusOS.Units_Temperature_Fahrenheit
 			   || unit === V.VenusOS.Units_RevolutionsPerMinute) ? 0
+			// Volt
+			// VoltAmpere
+			// Amp
+			// Hertz
 			: 1
 }
 
