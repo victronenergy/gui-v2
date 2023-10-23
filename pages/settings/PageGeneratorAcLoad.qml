@@ -64,7 +64,6 @@ Page {
 				suffix: "W"
 				stepSize: 5
 				from: stopValue.value + stepSize
-				to: 1602
 			}
 
 			ListSpinBox {
