@@ -158,6 +158,8 @@ Page {
 
 	GradientListView {
 		model: AggregateDeviceModel {
+			id: aggregateModel
+
 			sourceModels: [
 				Global.acInputs.model,
 				Global.batteries.model,
@@ -177,6 +179,17 @@ Page {
 				Global.unsupportedDevices.model,
 			].concat(Global.tanks.allTankModels)
 		}
+
+		footer: ListButton {
+			//% "Remove disconnected devices"
+			text: qsTrId("devicelist_remove_disconnected_devices")
+			secondaryText: CommonWords.remove
+			visible: aggregateModel.disconnectedDeviceCount > 0
+			onClicked: {
+				aggregateModel.removeDisconnectedDevices()
+			}
+		}
+
 		delegate: ListTextGroup {
 			id: deviceDelegate
 
@@ -185,11 +198,12 @@ Page {
 						? model.device.serviceUid.split("/")[1] || ""    // serviceUid = mqtt/<serviceType>/<path>
 						: model.device.serviceUid.split(".")[2] || ""    // serviceUid = dbus/com.victronenergy.<serviceType>[.suffix]/<path>
 					: ""
-			readonly property var _displayInfo: root._deviceDisplayInfo(_serviceType, model.device, model.sourceModel)
+			readonly property var _displayInfo: model.connected
+					? root._deviceDisplayInfo(_serviceType, model.device, model.sourceModel)
+					: null
 
-			text: model.device ? model.device.description : ""
-			textModel: _displayInfo ? _displayInfo.summary || [] : []
-			visible: !!_displayInfo
+			text: model.cachedDeviceDescription
+			textModel: _displayInfo ? _displayInfo.summary || [] : [ CommonWords.not_connected ]
 
 			CP.ColorImage {
 				parent: deviceDelegate.content
