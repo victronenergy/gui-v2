@@ -17,7 +17,7 @@ QtObject {
 	property real currentLimit: connectedInput != null ? connectedInput.currentLimit : NaN
 
 	property DeviceModel model: DeviceModel {
-		objectName: "acInputs"
+		modelId: "acInputs"
 	}
 
 	function addInput(input) {

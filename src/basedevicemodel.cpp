@@ -79,6 +79,19 @@ int BaseDeviceModel::count() const
 	return static_cast<int>(m_devices.count());
 }
 
+QString BaseDeviceModel::modelId() const
+{
+	return m_modelId;
+}
+
+void BaseDeviceModel::setModelId(const QString &modelId)
+{
+	if (m_modelId != modelId) {
+		m_modelId = modelId;
+		emit modelIdChanged();
+	}
+}
+
 QVariant BaseDeviceModel::data(const QModelIndex &index, int role) const
 {
 	const int row = index.row();

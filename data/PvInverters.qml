@@ -10,7 +10,7 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectName: "pvInverters"
+		modelId: "pvInverters"
 	}
 
 	function addInverter(inverter) {
