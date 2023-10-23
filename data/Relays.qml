@@ -10,10 +10,10 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectName: "relays"
+		modelId: "relays"
 	}
 	property DeviceModel manualRelays: DeviceModel {
-		objectName: "manualRelays"
+		modelId: "relays-manual"
 	}
 
 	function addRelay(relay) {

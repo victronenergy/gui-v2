@@ -32,73 +32,73 @@ QtObject {
 		readonly property int type: VenusOS.Tank_Type_Fuel
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "Fuel"
+		modelId: "tanks-Fuel"
 	}
 	readonly property DeviceModel freshWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_FreshWater
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "FreshWater"
+		modelId: "tanks-FreshWater"
 	}
 	readonly property DeviceModel wasteWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_WasteWater
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "WasteWater"
+		modelId: "tanks-WasteWater"
 	}
 	readonly property DeviceModel liveWellTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_LiveWell
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "LiveWell"
+		modelId: "tanks-LiveWell"
 	}
 	readonly property DeviceModel oilTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Oil
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "Oil"
+		modelId: "tanks-Oil"
 	}
 	readonly property DeviceModel blackWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_BlackWater
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "BlackWater"
+		modelId: "tanks-BlackWater"
 	}
 	readonly property DeviceModel gasolineTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Gasoline
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "Gasoline"
+		modelId: "tanks-Gasoline"
 	}
 	readonly property DeviceModel dieselTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_Diesel
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "Diesel"
+		modelId: "tanks-Diesel"
 	}
 	readonly property DeviceModel lpgTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_LPG
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "LPG"
+		modelId: "tanks-LPG"
 	}
 	readonly property DeviceModel lngTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_LNG
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "LNG"
+		modelId: "tanks-LNG"
 	}
 	readonly property DeviceModel hydraulicOilTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_HydraulicOil
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "HydraulicOil"
+		modelId: "tanks-HydraulicOil"
 	}
 	readonly property DeviceModel rawWaterTanks: DeviceModel {
 		readonly property int type: VenusOS.Tank_Type_RawWater
 		property real totalCapacity
 		property real totalRemaining
-		objectName: "RawWater"
+		modelId: "tanks-RawWater"
 	}
 
 	readonly property int totalTankCount: fuelTanks.count

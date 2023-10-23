@@ -11,7 +11,7 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectName: "batteries"
+		modelId: "batteries"
 	}
 
 	property var system: SystemBattery {}

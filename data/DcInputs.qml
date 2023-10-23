@@ -13,7 +13,7 @@ QtObject {
 	property real current: NaN
 
 	property DeviceModel model: DeviceModel {
-		objectName: "dcInputs"
+		modelId: "dcInputs"
 	}
 
 	function addInput(input) {
