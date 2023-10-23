@@ -10,7 +10,7 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectName: "veBusDevices"
+		modelId: "veBusDevices"
 	}
 
 	property real totalNominalInverterPower: NaN

@@ -13,7 +13,7 @@ QtObject {
 	property real energy: NaN
 
 	property DeviceModel model: DeviceModel {
-		objectName: "evChargers"
+		modelId: "evChargers"
 	}
 
 	readonly property var maxCurrentPresets: [6, 8, 10, 14, 16, 24, 32].map(function(v) { return { value: v } })

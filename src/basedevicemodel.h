@@ -50,6 +50,7 @@ class BaseDeviceModel : public QAbstractListModel
 {
 	Q_OBJECT
 	Q_PROPERTY(int count READ count NOTIFY countChanged)
+	Q_PROPERTY(QString modelId READ modelId WRITE setModelId NOTIFY modelIdChanged)
 	Q_PROPERTY(BaseDevice *firstObject READ firstObject NOTIFY firstObjectChanged)
 
 public:
@@ -61,6 +62,9 @@ public:
 
 	BaseDevice *firstObject() const;    // the object with the lowest DeviceInstance
 	int count() const;
+
+	QString modelId() const;    // must be unique across all BaseDeviceModel instances
+	void setModelId(const QString &modelId);
 
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
@@ -76,6 +80,7 @@ public:
 Q_SIGNALS:
 	void countChanged();
 	void firstObjectChanged();
+	void modelIdChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -87,6 +92,7 @@ private:
 	QHash<int, QByteArray> m_roleNames;
 	QVector<QPointer<BaseDevice> > m_devices;
 	QPointer<BaseDevice> m_firstObject;
+	QString m_modelId;
 };
 
 } /* VenusOS */

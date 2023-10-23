@@ -10,7 +10,7 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectName: "generators"
+		modelId: "generators"
 	}
 	property var first: model.firstObject
 

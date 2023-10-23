@@ -10,7 +10,7 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		objectName: "environmentInputs"
+		modelId: "environmentInputs"
 	}
 
 	function addInput(input) {

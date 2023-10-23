@@ -11,7 +11,7 @@ QtObject {
 
 	// Model of all solar chargers
 	property DeviceModel model: DeviceModel {
-		objectName: "solarChargers"
+		modelId: "solarChargers"
 	}
 
 	function addCharger(charger) {
