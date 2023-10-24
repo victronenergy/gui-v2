@@ -74,6 +74,10 @@ QtObject {
 	//% "Generator"
 	readonly property string generator: qsTrId("common_words_generator")
 
+	//: An alarm that triggers when the level is too high
+	//% "High level alarm"
+	readonly property string high_level_alarm: qsTrId("common_words_high_level_alarm")
+
 	//% "%1 Hour(s)"
 	readonly property string x_hours: qsTrId("common_words_x_hours")
 
@@ -82,6 +86,10 @@ QtObject {
 
 	//% "IP address"
 	readonly property string ip_address: qsTrId("common_words_ip_address")
+
+	//: An alarm that triggers when the level is too low
+	//% "Low level alarm"
+	readonly property string low_level_alarm: qsTrId("common_words_low_level_alarm")
 
 	//% "Manual"
 	readonly property string manual: qsTrId("common_words_manual")
@@ -170,6 +178,9 @@ QtObject {
 	//% "Serial number"
 	readonly property string serial_number: qsTrId("common_words_serial_number")
 
+	//% "Setup"
+	readonly property string setup: qsTrId("common_words_setup")
+
 	//% "Signal strength"
 	readonly property string signal_strength: qsTrId("common_words_signal_strength");
 
@@ -203,6 +214,9 @@ QtObject {
 
 	//% "Stopped"
 	readonly property string stopped: qsTrId("common_words_stopped")
+
+	//% "Temperature"
+	readonly property string temperature: qsTrId("common_words_temperature")
 
 	//% "Today"
 	readonly property string today: qsTrId("common_words_today")

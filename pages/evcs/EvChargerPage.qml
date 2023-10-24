@@ -142,8 +142,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				//% "Setup"
-				text: qsTrId("evcs_setup")
+				text: CommonWords.setup
 				onClicked: {
 					Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
 							{ "title": text, "evCharger": root.evCharger })
