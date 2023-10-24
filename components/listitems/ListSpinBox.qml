@@ -66,7 +66,7 @@ ListButton {
 
 	DataPoint {
 		id: dataPoint
-		hasMin: true
-		hasMax: true
+		hasMin: valid
+		hasMax: valid
 	}
 }
