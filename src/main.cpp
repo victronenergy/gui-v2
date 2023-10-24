@@ -513,6 +513,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "TemperatureRelayNavigationItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/TemperatureRelaySettings.qml")),
 		"Victron.VenusOS", 2, 0, "TemperatureRelaySettings");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/VolumeUnitRadioButtonGroup.qml")),
+		"Victron.VenusOS", 2, 0, "VolumeUnitRadioButtonGroup");
 
 	/* widgets */
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/OverviewWidget.qml")),
