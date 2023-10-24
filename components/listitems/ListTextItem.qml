@@ -25,7 +25,7 @@ ListItem {
 			anchors.verticalCenter: parent.verticalCenter
 			width: Math.min(implicitWidth, root.maximumContentWidth)
 			visible: root.secondaryText.length > 0
-			text: dataValue || ""
+			text: dataValue === undefined ? "" : dataValue
 			font.pixelSize: Theme.font.size.body2
 			color: Theme.color.listItem.secondaryText
 			wrapMode: Text.Wrap
