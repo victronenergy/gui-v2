@@ -21,6 +21,9 @@ QtObject {
 
 	readonly property var value: sourceObject ? sourceObject.value : undefined
 	readonly property bool valid: value !== undefined
+	readonly property bool seen: BackendConnection.type === BackendConnection.DBusSource
+			? !!sourceObject && sourceObject.seen
+			: true // TODO 'seen' not yet supported by MQTT backend, so make it true by default
 
 	property bool hasMin
 	property bool hasMax
@@ -58,6 +61,7 @@ QtObject {
 		QtObject {
 			property string source: root.source
 			property var value: Global.mockDataSimulator ? Global.mockDataSimulator.mockDataValues[source] : undefined
+			property bool seen: true
 			property real min: 0
 			property real max: 100
 			property bool invalidate: root.invalidate

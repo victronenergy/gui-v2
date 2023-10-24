@@ -12,6 +12,8 @@ ListButton {
 	property alias dataSource: dataPoint.source
 	readonly property alias dataValue: dataPoint.value
 	readonly property alias dataValid: dataPoint.valid
+	readonly property alias dataSeen: dataPoint.seen
+	property alias dataInvalidate: dataPoint.invalidate
 	function setDataValue(v) { dataPoint.setValue(v) }
 
 	// data value is assumed to be in seconds
