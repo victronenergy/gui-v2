@@ -457,6 +457,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "WeatherDetails");
 
 	/* list items */
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListAlarm.qml")),
+		"Victron.VenusOS", 2, 0, "ListAlarm");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListLabel.qml")),
 		"Victron.VenusOS", 2, 0, "ListLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListButton.qml")),
@@ -479,6 +481,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ListRadioButtonGroup");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListQuantityGroup.qml")),
 		"Victron.VenusOS", 2, 0, "ListQuantityGroup");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListQuantityItem.qml")),
+		"Victron.VenusOS", 2, 0, "ListQuantityItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSlider.qml")),
 		"Victron.VenusOS", 2, 0, "ListSlider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSpinBox.qml")),

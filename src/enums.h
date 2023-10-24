@@ -555,6 +555,13 @@ public:
 	};
 	Q_ENUM(Genset_StatusCode)
 
+	enum Alarm_Level {
+		Alarm_Level_OK,
+		Alarm_Level_Warning,
+		Alarm_Level_Alarm
+	};
+	Q_ENUM(Alarm_Level)
+
 	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };
