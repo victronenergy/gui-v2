@@ -23,7 +23,7 @@ ListItem {
 					   || (separator.visible ? implicitWidth + root.content.spacing : implicitWidth)
 				font.pixelSize: Theme.font.size.body2
 				color: Theme.color.listItem.secondaryText
-				text: modelData
+				text: modelData === undefined ? "" : modelData
 				horizontalAlignment: Text.AlignHCenter
 				elide: Text.ElideRight
 
