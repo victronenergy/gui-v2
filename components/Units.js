@@ -7,22 +7,27 @@
 .import "/components/Utils.js" as Utils
 
 function defaultUnitPrecision(unit) {
-	return unit === V.VenusOS.Units_Energy_KiloWattHour ? 2
-			: (unit === V.VenusOS.Units_Volume_CubicMeter
-			   || unit === V.VenusOS.Units_Volume_Liter
-			   || unit === V.VenusOS.Units_Volume_GallonImperial
-			   || unit === V.VenusOS.Units_Volume_GallonUS
-			   || unit === V.VenusOS.Units_Percentage
-			   || unit === V.VenusOS.Units_Watt
-			   || unit === V.VenusOS.Units_WattsPerSquareMeter
-			   || unit === V.VenusOS.Units_Temperature_Celsius
-			   || unit === V.VenusOS.Units_Temperature_Fahrenheit
-			   || unit === V.VenusOS.Units_RevolutionsPerMinute) ? 0
-			// Volt
-			// VoltAmpere
-			// Amp
-			// Hertz
-			: 1
+	if (unit === V.VenusOS.Units_Energy_KiloWattHour) {
+		return 2
+	} else if (unit === V.VenusOS.Units_Volume_CubicMeter) {
+		return 3
+	} else if (unit === V.VenusOS.Units_Volume_Liter
+			|| unit === V.VenusOS.Units_Volume_GallonImperial
+			|| unit === V.VenusOS.Units_Volume_GallonUS
+			|| unit === V.VenusOS.Units_Percentage
+			|| unit === V.VenusOS.Units_Watt
+			|| unit === V.VenusOS.Units_WattsPerSquareMeter
+			|| unit === V.VenusOS.Units_Temperature_Celsius
+			|| unit === V.VenusOS.Units_Temperature_Fahrenheit
+			|| unit === V.VenusOS.Units_RevolutionsPerMinute) {
+		return 0
+	} else {
+		// Volt
+		// VoltAmpere
+		// Amp
+		// Hertz
+		return 1
+	}
 }
 
 /*
@@ -123,6 +128,9 @@ function celsiusToFahrenheit(celsius) {
 }
 
 function convertVolumeForUnit(value_m3, toUnit) {
+	if (value_m3 === undefined) {
+		return NaN
+	}
 	if (toUnit === V.VenusOS.Units_Volume_CubicMeter) {
 		return value_m3
 	} else if (toUnit === V.VenusOS.Units_Volume_Liter) {
