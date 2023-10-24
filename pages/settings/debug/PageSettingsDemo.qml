@@ -109,8 +109,22 @@ Page {
 			}
 
 			ListTextGroup {
-				text: "Text groups"
+				text: "Multiple texts"
 				textModel: ["204.07V", "4.7A", "950W"]
+			}
+
+			ListQuantityItem {
+				text: "Quantity"
+				value: 33.5
+				unit: VenusOS.Units_Temperature_Celsius
+			}
+
+			ListQuantityGroup {
+				text: "Multiple quantities"
+				textModel: [
+					{ value: 5.1, unit: VenusOS.Units_Volt },
+					{ value: 48, unit: VenusOS.Units_Watt }
+				]
 			}
 
 			ListSlider {
