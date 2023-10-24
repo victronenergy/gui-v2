@@ -31,8 +31,7 @@ Page {
 					{ display: qsTrId("settings_relay_tank_pump"), value: VenusOS.Relay_Function_Tank_Pump },
 					//% "Manual"
 					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
-					//% "Temperature"
-					{ display: qsTrId("settings_relay_temp"), value: VenusOS.Relay_Function_Temperature },
+					{ display: CommonWords.temperature, value: VenusOS.Relay_Function_Temperature },
 				]
 			}
 
@@ -90,8 +89,7 @@ Page {
 				optionModel: [
 					//% "Manual"
 					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
-					//% "Temperature"
-					{ display: qsTrId("settings_relay_temp"), value: VenusOS.Relay_Function_Temperature },
+					{ display: CommonWords.temperature, value: VenusOS.Relay_Function_Temperature },
 				]
 			}
 

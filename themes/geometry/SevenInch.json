@@ -73,6 +73,8 @@
     "geometry.timeSelector.spinBox.width": 238,
     "geometry.timeSelector.spinBox.height": 72,
     "geometry.timeSelector.spacing": 16,
+    "geometry.tankShapeSelector.spinBox.width": 262,
+    "geometry.tankShapeSelector.spinBox.height": 72,
 
     "geometry.navigationBar.initialize.margin": 12,
     "geometry.navigationBar.height": 72,
