@@ -11,7 +11,9 @@ ListItem {
 	property alias dataSource: slider.dataSource
 	readonly property alias dataValue: slider.dataValue
 	readonly property alias dataValid: slider.dataValid
-	function setDataValue(v) { dataPoint.setValue(v) }
+	readonly property alias dataSeen: slider.dataSeen
+	property alias dataInvalidate: slider.dataInvalidate
+	function setDataValue(v) { slider.setDataValue(v) }
 
 	readonly property alias slider: slider
 
