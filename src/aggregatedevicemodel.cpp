@@ -341,14 +341,16 @@ void AggregateDeviceModel::deviceDescriptionChanged()
 				// the correct index.
 				return;
 			}
-			toIndex = i;
+			// Move the entry to be immediately before this item.
+			toIndex = i > fromIndex ? i - 1 : i;
 			break;
 		}
 	}
 
 	if (fromIndex != toIndex) {
-		beginMoveRows(QModelIndex(), fromIndex, fromIndex, QModelIndex(), toIndex);
-		m_deviceInfos.swapItemsAt(fromIndex, toIndex);
+		const int destIndex = toIndex > fromIndex ? toIndex + 1 : toIndex;
+		beginMoveRows(QModelIndex(), fromIndex, fromIndex, QModelIndex(), destIndex);
+		m_deviceInfos.move(fromIndex, toIndex);
 		endMoveRows();
 	}
 }
