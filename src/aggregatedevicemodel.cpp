@@ -10,6 +10,9 @@ AggregateDeviceModel::DeviceInfo::DeviceInfo(BaseDevice *d, BaseDeviceModel *m)
 	, sourceModel(m)
 	, cachedDeviceDescription(d ? d->description() : QString())
 {
+	if (device && cachedDeviceDescription.isEmpty()) {
+		cachedDeviceDescription = device->serviceUid();
+	}
 }
 
 AggregateDeviceModel::DeviceInfo::~DeviceInfo()
