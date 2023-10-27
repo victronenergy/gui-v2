@@ -195,7 +195,21 @@ void BackendConnection::initMqttConnection(const QString &address)
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	m_mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);
 #else
-	m_mqttProducer->open(QHostAddress(address), 1883);
+	const QStringList parts = address.split(':');
+	if (parts.size() >= 2) {
+		bool ok = true;
+		const int port = parts[1].toInt(&ok);
+		if (ok) {
+			qDebug() << "connecting to: " << parts[0] << ":" << port;
+			m_mqttProducer->open(QHostAddress(parts[0]), port);
+		} else {
+			qWarning() << "Unable to parse port. Using default MQTT port: 1883";
+			m_mqttProducer->open(QHostAddress(parts[0]), 1883);
+		}
+	} else {
+		qDebug() << "Using default MQTT port: 1883";
+		m_mqttProducer->open(QHostAddress(address), 1883);
+	}
 #endif
 }
 
