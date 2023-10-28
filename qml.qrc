@@ -121,6 +121,7 @@
         <file>components/listitems/ListTimeSelector.qml</file>
         <file>components/settings/CGwacsBatteryScheduleNavigationItem.qml</file>
         <file>components/settings/FirmwareCheckListButton.qml</file>
+        <file>components/settings/Led.qml</file>
         <file>components/settings/ListDvccSwitch.qml</file>
         <file>components/settings/ListFirmwareVersionItem.qml</file>
         <file>components/settings/MountStateListButton.qml</file>
@@ -450,6 +451,23 @@
         <file>pages/settings/devicelist/DeviceListPage.qml</file>
         <file>pages/settings/devicelist/PageNotYetImplemented.qml</file>
         <file>pages/settings/devicelist/PageUnsupportedDevice.qml</file>
+        <file>pages/settings/devicelist/battery/BatteryDetails.qml</file>
+        <file>pages/settings/devicelist/battery/BatterySettingsAlarmModel.qml</file>
+        <file>pages/settings/devicelist/battery/BatterySettingsRelayModel.qml</file>
+        <file>pages/settings/devicelist/battery/FuseInfo.qml</file>
+        <file>pages/settings/devicelist/battery/Page48TlDiagnostics.qml</file>
+        <file>pages/settings/devicelist/battery/PageBattery.qml</file>
+        <file>pages/settings/devicelist/battery/PageBatteryAlarms.qml</file>
+        <file>pages/settings/devicelist/battery/PageBatteryDetails.qml</file>
+        <file>pages/settings/devicelist/battery/PageBatteryHistory.qml</file>
+        <file>pages/settings/devicelist/battery/PageBatteryModuleAlarms.qml</file>
+        <file>pages/settings/devicelist/battery/PageBatteryParameters.qml</file>
+        <file>pages/settings/devicelist/battery/PageBatterySettings.qml</file>
+        <file>pages/settings/devicelist/battery/PageBatterySettingsBattery.qml</file>
+        <file>pages/settings/devicelist/battery/PageLynxDistributorList.qml</file>
+        <file>pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml</file>
+        <file>pages/settings/devicelist/battery/PageLynxIonIo.qml</file>
+        <file>pages/settings/devicelist/battery/PageLynxIonSystem.qml</file>
         <file>pages/settings/devicelist/tank/PageTankAlarm.qml</file>
         <file>pages/settings/devicelist/tank/PageTankSensor.qml</file>
         <file>pages/settings/devicelist/tank/PageTankSetup.qml</file>

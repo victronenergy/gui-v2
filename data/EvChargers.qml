@@ -68,8 +68,7 @@ QtObject {
 			//% "Connected"
 			return qsTrId("evchargers_status_connected")
 		case VenusOS.Evcs_Status_Charging:
-			//% "Charging"
-			return qsTrId("evchargers_status_charging")
+			return CommonWords.charging
 		case VenusOS.Evcs_Status_Charged:
 			//% "Charged"
 			return qsTrId("evchargers_status_charged")

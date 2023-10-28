@@ -231,8 +231,8 @@ function formatHoursMinutes(hours, minutes) {
 
 // Convert number of seconds into readable string
 function secondsToString(secs, showSeconds = true) {
-	if (secs === undefined) {
-		return "---"
+	if (isNaN(secs)) {
+		return "--"
 	}
 	const days = Math.floor(secs / 86400)
 	const hours = Math.floor((secs - (days * 86400)) / 3600)

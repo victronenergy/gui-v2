@@ -205,8 +205,7 @@ Rectangle {
 				: BackendConnection.state === BackendConnection.Initializing ? qsTrId("splash_view_initializing")
 				  //% "Connected, loading user interface"
 				: BackendConnection.state === BackendConnection.Ready ? qsTrId("splash_view_ready")
-				  //% "Idle"
-				: qsTrId("splash_view_idle"))
+				: CommonWords.idle)
 		}
 
 		Label {

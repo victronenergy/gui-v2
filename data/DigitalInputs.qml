@@ -66,21 +66,19 @@ QtObject {
 		case VenusOS.DigitalInput_State_Yes:
 			return CommonWords.yes
 		case VenusOS.DigitalInput_State_Open:
-			//% "Open"
-			return qsTrId("digitalinputs_state_open")
+			return CommonWords.open_status
 		case VenusOS.DigitalInput_State_Closed:
-			//% "Closed"
-			return qsTrId("digitalinputs_state_closed")
+			return CommonWords.closed_status
 		case VenusOS.DigitalInput_State_OK:
 			return CommonWords.ok
 		case VenusOS.DigitalInput_State_Alarm:
+			//: Digital input is in 'alarm' state
 			//% "Alarm"
 			return qsTrId("digitalinputs_state_alarm")
 		case VenusOS.DigitalInput_State_Running:
-			//% "Running"
-			return qsTrId("digitalinputs_state_running")
+			return CommonWords.running_status
 		case VenusOS.DigitalInput_State_Stopped:
-			return CommonWords.stopped
+			return CommonWords.stopped_status
 		default:
 			return ""
 		}

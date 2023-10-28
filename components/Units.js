@@ -26,6 +26,7 @@ function defaultUnitPrecision(unit) {
 		// VoltAmpere
 		// Amp
 		// Hertz
+		// AmpHour
 		return 1
 	}
 }
@@ -49,6 +50,8 @@ function getDisplayText(unit, value, precision, unitMatchValue = undefined) {
 		return _scaledQuantity(value, unitMatchValue, precision, "Hz", "kHz")
 	case V.VenusOS.Units_Energy_KiloWattHour:
 		return _scaledQuantity(value, unitMatchValue, precision, "kWh")
+	case V.VenusOS.Units_AmpHour:
+		return _scaledQuantity(value, unitMatchValue, precision, "Ah")
 	case V.VenusOS.Units_WattsPerSquareMeter:
 		return _scaledQuantity(value, unitMatchValue, precision, "W/m2")
 	case V.VenusOS.Units_Percentage:
@@ -125,6 +128,35 @@ function getCombinedDisplayText(unit, value) {
 
 function celsiusToFahrenheit(celsius) {
 	return isNaN(celsius) ? celsius: (celsius * 9/5) + 32
+}
+
+function fromKelvin(value, toUnit) {
+	if (toUnit === V.VenusOS.Units_Temperature_Kelvin) {
+		return value
+	}
+	const celsiusValue = value - 273.15
+	if (toUnit === V.VenusOS.Units_Temperature_Celsius) {
+		return celsiusValue
+	}
+	if (toUnit === V.VenusOS.Units_Temperature_Fahrenheit) {
+		return celsiusToFahrenheit(celsiusValue)
+	}
+	console.warn("Invalid temperature unit:", toUnit)
+	return value
+}
+
+function toKelvin(value, fromUnit) {
+	if (fromUnit === V.VenusOS.Units_Temperature_Kelvin) {
+		return value
+	}
+	if (fromUnit === V.VenusOS.Units_Temperature_Celsius) {
+		return value + 273.15
+	}
+	if (fromUnit === V.VenusOS.Units_Temperature_Fahrenheit) {
+		return (value + 459.67) * 5/9
+	}
+	console.warn("Invalid temperature unit:", fromUnit)
+	return value
 }
 
 function convertVolumeForUnit(value_m3, toUnit) {

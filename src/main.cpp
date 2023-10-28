@@ -477,6 +477,10 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ListNavigationItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListPortField.qml")),
 		"Victron.VenusOS", 2, 0, "ListPortField");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListQuantityGroup.qml")),
+		"Victron.VenusOS", 2, 0, "ListQuantityGroup");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListQuantityItem.qml")),
+		"Victron.VenusOS", 2, 0, "ListQuantityItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListRadioButton.qml")),
 		"Victron.VenusOS", 2, 0, "ListRadioButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListRadioButtonGroup.qml")),
@@ -507,6 +511,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "CGwacsBatteryScheduleNavigationItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/FirmwareCheckListButton.qml")),
 		"Victron.VenusOS", 2, 0, "FirmwareCheckListButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/Led.qml")),
+		"Victron.VenusOS", 2, 0, "Led");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListDvccSwitch.qml")),
 		"Victron.VenusOS", 2, 0, "ListDvccSwitch");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListFirmwareVersionItem.qml")),

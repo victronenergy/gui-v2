@@ -164,9 +164,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				//: View solar charger yield history
-				//% "History"
-				text: qsTrId("charger_history")
+				text: CommonWords.history
 				onClicked: {
 					//: Solar charger historic data information. %1 = charger name
 					//% "%1 History"
