@@ -11,25 +11,6 @@ Page {
 
 	property var solarCharger
 
-	function _alarmTypeToText(alarmType) {
-		switch (alarmType) {
-		case VenusOS.SolarCharger_AlarmType_OK:
-			//: Voltage alarm is at "OK" level
-			//% "OK"
-			return qsTrId("charger_alarms_level_ok")
-		case VenusOS.SolarCharger_AlarmType_Warning:
-			//: Voltage alarm is at "Warning" level
-			//% "Warning"
-			return qsTrId("charger_alarms_level_warning")
-		case VenusOS.SolarCharger_AlarmType_Alarm:
-			//: Voltage alarm is at "Alarm" level
-			//% "Alarm"
-			return qsTrId("charger_alarms_level_alarm")
-		default:
-			return ""
-		}
-	}
-
 	GradientListView {
 		id: chargerListView
 
