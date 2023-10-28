@@ -11,6 +11,7 @@ ListItem {
 
 	property alias textModel: repeater.model
 	property int itemWidth
+	property string invalidText: "--"
 
 	content.children: [
 		Repeater {
@@ -23,7 +24,7 @@ ListItem {
 					   || (separator.visible ? implicitWidth + root.content.spacing : implicitWidth)
 				font.pixelSize: Theme.font.size.body2
 				color: Theme.color.listItem.secondaryText
-				text: modelData === undefined ? "" : modelData
+				text: modelData === undefined ? root.invalidText : modelData
 				horizontalAlignment: Text.AlignHCenter
 				elide: Text.ElideRight
 
