@@ -4,12 +4,19 @@
 
 import QtQuick
 import Victron.VenusOS
+import "/components/Units.js" as Units
 
 QtObject {
 	id: root
 
 	function canAccess(level) {
 		return accessLevel.valid && accessLevel.value >= level
+	}
+
+	function convertTemperature(celsius_value) {
+		return temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+				? celsius_value
+				: Units.celsiusToFahrenheit(celsius_value)
 	}
 
 	property DataPoint accessLevel: DataPoint {

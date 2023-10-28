@@ -19,7 +19,7 @@ QtObject {
 		readonly property int mode: Global.batteries.batteryMode(dummyBattery)
 
 		serviceUid: "com.victronenergy.battery.ttyUSB" + deviceInstance
-		name: "Fake battery"
+		name: "Battery" + deviceInstance
 
 		Component.onCompleted: {
 			Global.batteries.addBattery(dummyBattery)

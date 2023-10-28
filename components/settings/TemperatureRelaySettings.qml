@@ -34,10 +34,8 @@ Column {
 		text: qsTrId("settings_relay_condition").arg(root.relayNumber + 1)
 		secondaryText: root.relayActivateOnTemperature
 			? dataValue
-				  //% "Active"
-				? qsTrId("settings_relay_active")
-				  //% "Inactive"
-				: qsTrId("settings_relay_inactive")
+				? CommonWords.active_status
+				: CommonWords.inactive_status
 			  //% "Function disabled"
 			: qsTrId("settings_relay_function_disabled")
 		dataSource: "%1/%2/State".arg(root.tempRelayPrefix).arg(root.relayNumber)

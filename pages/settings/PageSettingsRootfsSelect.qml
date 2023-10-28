@@ -81,8 +81,7 @@ Page {
 				//: %1 = current firmware version, %2 = current firmware build number
 				//% "Firmware %1 (%2)"
 				text: qsTrId("settings_firmware_current_version").arg(currentVersionItem.value).arg(currentBuildItem.value)
-				//% "Running"
-				secondaryText: qsTrId("settings_firmware_running")
+				secondaryText: CommonWords.running_status
 				visible: currentVersionItem.valid && root._switchingEnabled
 			}
 

@@ -63,7 +63,7 @@ Page {
 			//% "Manually started"
 			return qsTrId("settings_manually_started")
 		default:
-			return CommonWords.stopped
+			return CommonWords.stopped_status
 		}
 	}
 
@@ -238,8 +238,7 @@ Page {
 		}
 
 		ListNavigationItem {
-			//% "Settings"
-			text: qsTrId("settings_page_relay_generator_settings")
+			text: CommonWords.settings
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
 					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })

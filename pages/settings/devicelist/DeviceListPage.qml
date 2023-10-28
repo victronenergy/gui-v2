@@ -34,6 +34,8 @@ Page {
 			summary = [ Global.system.systemStateToText(device.state) ]
 
 		} else if (serviceType === "battery") {
+			url = "/pages/settings/devicelist/battery/PageBattery.qml"
+			params = { "battery" : device }
 			summary = [
 				Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.stateOfCharge),
 				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
