@@ -309,6 +309,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "RadioButtonIndicator");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RadioButtonLabel.qml")),
 		"Victron.VenusOS", 2, 0, "RadioButtonLabel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/RangeSlider.qml")),
+		"Victron.VenusOS", 2, 0, "RangeSlider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/ScrollBar.qml")),
 		"Victron.VenusOS", 2, 0, "ScrollBar");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/controls/Slider.qml")),
@@ -483,6 +485,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ListQuantityGroup");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListQuantityItem.qml")),
 		"Victron.VenusOS", 2, 0, "ListQuantityItem");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListRangeSlider.qml")),
+		"Victron.VenusOS", 2, 0, "ListRangeSlider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSlider.qml")),
 		"Victron.VenusOS", 2, 0, "ListSlider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/listitems/ListSpinBox.qml")),
@@ -509,6 +513,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ListFirmwareVersionItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/MountStateListButton.qml")),
 		"Victron.VenusOS", 2, 0, "MountStateListButton");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsRangeSlider.qml")),
+		"Victron.VenusOS", 2, 0, "SettingsRangeSlider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsSlider.qml")),
 		"Victron.VenusOS", 2, 0, "SettingsSlider");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/TemperatureRelayNavigationItem.qml")),
