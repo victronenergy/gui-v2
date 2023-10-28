@@ -133,8 +133,7 @@ Page {
 					{ display: qsTrId("settings_dvcc_scs_disabled_no_chargers"), value: 2 },
 					//% "Disabled (no battery monitor)"
 					{ display: qsTrId("settings_dvcc_scs_disabled_no_battery_monitor"), value: 3 },
-					//% "Active"
-					{ display: qsTrId("settings_dvcc_scs_active"), value: 4 },
+					{ display: CommonWords.active_status, value: 4 },
 				]
 			}
 

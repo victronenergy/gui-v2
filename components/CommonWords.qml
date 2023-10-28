@@ -23,6 +23,13 @@ QtObject {
 	//% "AC Output"
 	readonly property string ac_output: qsTrId("common_words_ac_output")
 
+	//: Status is 'active'
+	//% "Active"
+	readonly property string active_status: qsTrId("common_words_active")
+
+	//% "Alarms"
+	readonly property string alarms: qsTrId("common_words_alarms")
+
 	//% "Auto"
 	readonly property string auto: qsTrId("common_words_auto")
 
@@ -41,6 +48,14 @@ QtObject {
 	//% "Charge current"
 	readonly property string charge_current: qsTrId("common_words_charge_current")
 
+	//: "Charging" state
+	//% "Charging"
+	readonly property string charging: qsTrId("common_words_charging")
+
+	//: Status is 'closed'
+	//% "Closed"
+	readonly property string closed_status: qsTrId("common_words_closed_status");
+
 	//% "Connected"
 	readonly property string connected: qsTrId("common_words_connected");
 
@@ -57,6 +72,9 @@ QtObject {
 
 	//% "Disabled"
 	readonly property string disabled: qsTrId("common_words_disabled")
+
+	//% "Discharging"
+	readonly property string discharging: qsTrId("common_words_discharging")
 
 	//% "Enable"
 	readonly property string enable: qsTrId("common_words_enable")
@@ -77,12 +95,31 @@ QtObject {
 	//% "Generator"
 	readonly property string generator: qsTrId("common_words_generator")
 
+	//% "High battery temperature"
+	readonly property string high_battery_temperature: qsTrId("common_words_high_battery_temperature")
+
+	//% "High battery voltage"
+	readonly property string high_battery_voltage: qsTrId("common_words_high_battery_voltage")
+
 	//: An alarm that triggers when the level is too high
 	//% "High level alarm"
 	readonly property string high_level_alarm: qsTrId("common_words_high_level_alarm")
 
+	//% "High starter battery voltage"
+	readonly property string high_starter_battery_voltage: qsTrId("common_words_high_starter_battery_voltage")
+
+	//% "History"
+	readonly property string history: qsTrId("common_words_history")
+
 	//% "%1 Hour(s)"
 	readonly property string x_hours: qsTrId("common_words_x_hours")
+
+	//% "Idle"
+	readonly property string idle: qsTrId("common_words_idle")
+
+	//: Status is 'inactive'
+	//% "Inactive"
+	readonly property string inactive_status: qsTrId("common_words_inactive_status")
 
 	//% "Inverter overload"
 	readonly property string inverter_overload: qsTrId("common_words_inverter_overload")
@@ -90,9 +127,21 @@ QtObject {
 	//% "IP address"
 	readonly property string ip_address: qsTrId("common_words_ip_address")
 
+	//% "Low battery temperature"
+	readonly property string low_battery_temperature: qsTrId("common_words_low_battery_temperature")
+
+	//% "Low battery voltage"
+	readonly property string low_battery_voltage: qsTrId("common_words_low_battery_voltage")
+
 	//: An alarm that triggers when the level is too low
 	//% "Low level alarm"
 	readonly property string low_level_alarm: qsTrId("common_words_low_level_alarm")
+
+	//% "Low starter battery voltage"
+	readonly property string low_starter_battery_voltage: qsTrId("common_words_low_starter_battery_voltage")
+
+	//% "Low state-of-charge"
+	readonly property string low_state_of_charge: qsTrId("common_words_low_state_of_charge")
 
 	//% "Manual"
 	readonly property string manual: qsTrId("common_words_manual")
@@ -116,6 +165,9 @@ QtObject {
 	//% "None"
 	readonly property string none_errors: qsTrId("common_words_none_errors")
 
+	//% "Not available"
+	readonly property string not_available: qsTrId("common_words_not_available")
+
 	//% "Not connected"
 	readonly property string not_connected: qsTrId("common_words_not_connected")
 
@@ -133,6 +185,10 @@ QtObject {
 
 	//% "Online"
 	readonly property string online: qsTrId("common_words_online");
+
+	//: Status is 'open'
+	//% "Open"
+	readonly property string open_status: qsTrId("common_words_open_status");
 
 	//% "Password"
 	readonly property string password: qsTrId("common_words_password")
@@ -181,11 +237,17 @@ QtObject {
 	//% "Serial number"
 	readonly property string serial_number: qsTrId("common_words_serial_number")
 
+	//% "Settings"
+	readonly property string settings: qsTrId("common_words_settings")
+
 	//% "Setup"
 	readonly property string setup: qsTrId("common_words_setup")
 
 	//% "Signal strength"
 	readonly property string signal_strength: qsTrId("common_words_signal_strength");
+
+	//% "Standby"
+	readonly property string standby: qsTrId("common_words_standby")
 
 	//% "Start after the condition is reached for"
 	readonly property string start_after_the_condition_is_reached_for: qsTrId("common_words_start_after_condition_reached_for")
@@ -201,6 +263,9 @@ QtObject {
 
 	//% "State"
 	readonly property string state: qsTrId("common_words_state")
+
+	//% "State of charge"
+	readonly property string state_of_charge: qsTrId("common_words_state_of_charge")
 
 	//% "Status"
 	readonly property string status: qsTrId("common_words_status")
@@ -262,9 +327,9 @@ QtObject {
 	readonly property string yield_today: qsTrId("common_words_yield_today")
 
 	function onOrOff(value) {
-		if (value === 0) {
+		if (value === 0 || value === false) {
 			return off
-		} else if (value === 1) {
+		} else if (value === 1 || value === true) {
 			return on
 		} else {
 			return unknown_status
@@ -272,6 +337,14 @@ QtObject {
 	}
 
 	function yesOrNo(value) {
-		return value === 1 ? yes : no
+		return value === 1 || value === true ? yes : no
+	}
+
+	function enabledOrDisabled(value) {
+		return value === 1 || value === true ? enabled : disabled
+	}
+
+	function activeOrInactive(value) {
+		return value === 1 || value === true ? active_status : inactive_status
 	}
 }

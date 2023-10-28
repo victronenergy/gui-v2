@@ -135,8 +135,7 @@ QtObject {
 			return qsTrId("inverters_state_externalccontrol")
 
 		case VenusOS.System_State_Discharging:
-			//% "Discharging"
-			return qsTrId("inverters_state_discharging")
+			return CommonWords.discharging
 		case VenusOS.System_State_SystemSustain:
 			//% "Sustain"
 			return qsTrId("inverters_state_system_sustain")

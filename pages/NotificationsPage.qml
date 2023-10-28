@@ -72,8 +72,7 @@ Page {
 
 				visible: historicalNotificationsView.count !== 0
 				color: Theme.color.notificationsPage.text.color
-				//% "History"
-				text: qsTrId("notifications_history")
+				text: CommonWords.history
 			}
 		}
 		model: Global.notifications.historicalModel

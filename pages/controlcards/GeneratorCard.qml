@@ -19,8 +19,7 @@ ControlCard {
 	status.text: {
 		switch (root.generator.state) {
 		case VenusOS.Generators_State_Running:
-			//% "Running"
-			return qsTrId("controlcard_generator_status_running")
+			return CommonWords.running_status
 		case VenusOS.Generators_State_Error:
 			//% "ERROR"
 			return qsTrId("controlcard_generator_status_error")
@@ -71,8 +70,7 @@ ControlCard {
 				//% "Loss of comm"
 				return qsTrId("controlcard_generator_substatus_lossofcomm")
 			case VenusOS.Generators_RunningBy_Soc:
-				//% "State of charge"
-				return qsTrId("controlcard_generator_substatus_stateofcharge")
+				return CommonWords.state_of_charge
 			case VenusOS.Generators_RunningBy_Acload:
 				return CommonWords.ac_load
 			case VenusOS.Generators_RunningBy_BatteryCurrent:

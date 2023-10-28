@@ -13,8 +13,7 @@ Page {
 	property bool _isShore: acInput1.currentIndex === 3 || acInput2.currentIndex === 3
 
 	property var _acInputsModel: [
-		//% "Not available"
-		{ display: qsTrId("settings_system_not_available"), value: 0 },
+		{ display: CommonWords.not_available, value: 0 },
 		//% "Grid"
 		{ display: qsTrId("settings_system_grid"), value: 1 },
 		{ display: CommonWords.generator, value: 2 },

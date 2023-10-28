@@ -437,5 +437,7 @@
     "geometry.settings.gsmModem.signalStrengthBars.spacing": 2,
     "geometry.settings.gsmModem.signalStrengthBars.topMargin": 2,
     "geometry.settings.gsmModem.signalStrengthBars.bar.width": 4,
-    "geometry.settings.gsmModem.signalStrengthBars.bar.incremental.height": 6
+    "geometry.settings.gsmModem.signalStrengthBars.bar.incremental.height": 6,
+
+    "geometry.settings.battery.rangeSlider.labelWidth": 120
 }
