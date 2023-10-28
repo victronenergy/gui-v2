@@ -19,8 +19,8 @@ ListItem {
 				id: label
 				anchors.verticalCenter: parent.verticalCenter
 				font.pixelSize: Theme.font.size.body2
-				value: modelData.value
-				unit: modelData.unit
+				value: isNaN(modelData.value) ? NaN : modelData.value
+				unit: isNaN(modelData.unit) ? VenusOS.Units_None : modelData.unit
 				valueColor: Theme.color.quantityTable.quantityValue
 				unitColor: Theme.color.quantityTable.quantityUnit
 
