@@ -137,6 +137,15 @@ Page {
 				}
 			}
 
+			ListRangeSlider {
+				text: "Range slider"
+				slider.from: 0
+				slider.to: 100
+				slider.first.value: 25
+				slider.second.value: 75
+				slider.suffix: "%"
+			}
+
 			ListButton {
 				text: "Button"
 				button.text: "Click this"

@@ -80,6 +80,7 @@
         <file>components/controls/ListItemButton.qml</file>
         <file>components/controls/ProgressBar.qml</file>
         <file>components/controls/RadioButton.qml</file>
+        <file>components/controls/RangeSlider.qml</file>
         <file>components/controls/ScrollBar.qml</file>
         <file>components/controls/Slider.qml</file>
         <file>components/controls/SpinBox.qml</file>
@@ -110,6 +111,7 @@
         <file>components/listitems/ListRadioButtonGroup.qml</file>
         <file>components/listitems/ListQuantityGroup.qml</file>
         <file>components/listitems/ListQuantityItem.qml</file>
+        <file>components/listitems/ListRangeSlider.qml</file>
         <file>components/listitems/ListSlider.qml</file>
         <file>components/listitems/ListSpinBox.qml</file>
         <file>components/listitems/ListSwitch.qml</file>
@@ -122,6 +124,7 @@
         <file>components/settings/ListDvccSwitch.qml</file>
         <file>components/settings/ListFirmwareVersionItem.qml</file>
         <file>components/settings/MountStateListButton.qml</file>
+        <file>components/settings/SettingsRangeSlider.qml</file>
         <file>components/settings/SettingsSlider.qml</file>
         <file>components/settings/TemperatureRelayNavigationItem.qml</file>
         <file>components/settings/TemperatureRelaySettings.qml</file>
