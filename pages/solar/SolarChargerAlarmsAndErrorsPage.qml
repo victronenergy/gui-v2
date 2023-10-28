@@ -11,25 +11,6 @@ Page {
 
 	property var solarCharger
 
-	function _alarmTypeToText(alarmType) {
-		switch (alarmType) {
-		case VenusOS.SolarCharger_AlarmType_OK:
-			//: Voltage alarm is at "OK" level
-			//% "OK"
-			return qsTrId("charger_alarms_level_ok")
-		case VenusOS.SolarCharger_AlarmType_Warning:
-			//: Voltage alarm is at "Warning" level
-			//% "Warning"
-			return qsTrId("charger_alarms_level_warning")
-		case VenusOS.SolarCharger_AlarmType_Alarm:
-			//: Voltage alarm is at "Alarm" level
-			//% "Alarm"
-			return qsTrId("charger_alarms_level_alarm")
-		default:
-			console.log("Unknown alarm type:", alarmType)
-		}
-	}
-
 	GradientListView {
 		id: chargerListView
 
@@ -45,22 +26,20 @@ Page {
 				text: qsTrId("charger_alarms_header_status")
 			}
 
-			ListTextItem {
+			ListAlarm {
 				id: lowBatteryAlarm
 
 				//% "Low battery voltage alarm"
 				text: qsTrId("charger_alarms_low_battery_voltage_alarm")
-				secondaryText: dataValid ? root._alarmTypeToText(dataValue) : ""
 				dataSource: root.solarCharger.serviceUid + "/Alarms/LowVoltage"
 				visible: dataValid
 			}
 
-			ListTextItem {
+			ListAlarm {
 				id: highBatteryAlarm
 
 				//% "High battery voltage alarm"
 				text: qsTrId("charger_alarms_high_battery_voltage_alarm")
-				secondaryText: dataValid ? root._alarmTypeToText(dataValue) : ""
 				dataSource: root.solarCharger.serviceUid + "/Alarms/HighVoltage"
 				visible: dataValid
 			}

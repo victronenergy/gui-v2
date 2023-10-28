@@ -463,13 +463,6 @@ public:
 	};
 	Q_ENUM(SolarCharger_State)
 
-	enum SolarCharger_AlarmType {
-		SolarCharger_AlarmType_OK,
-		SolarCharger_AlarmType_Warning,
-		SolarCharger_AlarmType_Alarm
-	};
-	Q_ENUM(SolarCharger_AlarmType)
-
 	enum SolarCharger_NetworkStatus {
 		SolarCharger_NetworkStatus_Slave,
 		SolarCharger_NetworkStatus_GroupMaster,
