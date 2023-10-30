@@ -106,8 +106,8 @@ Page {
 			break;
 
 		case "motordrive":
-			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
-			params = { "bindPrefix" : device.serviceUid }
+			url = "/pages/settings/devicelist/PageMotorDrive.qml"
+			params = { "title": device.name, "bindPrefix" : device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(VenusOS.Units_RevolutionsPerMinute, device.motorRpm) ]
 			break;
 
