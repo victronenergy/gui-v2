@@ -79,12 +79,7 @@ Page {
 			voltage: battery.voltage
 			current: battery.current
 			status: Gauges.getValueStatus(value, properties.valueType)
-			caption: {
-				const timeToGo = Global.batteries.timeToGoText(battery)
-				//: %1 = time remaining, e.g. '3h 2m'
-				//% "%1 to go"
-				return timeToGo ? qsTrId("brief_battery_time_to_go").arg(timeToGo) : ""
-			}
+			caption: Global.batteries.timeToGoText(battery, VenusOS.Battery_TimeToGo_LongFormat)
 			animationEnabled: root.animationEnabled
 			shineAnimationEnabled: battery.mode === VenusOS.Battery_Mode_Charging && root.animationEnabled
 		}
