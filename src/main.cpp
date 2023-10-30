@@ -393,6 +393,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ProgressArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityLabel.qml")),
 		"Victron.VenusOS", 2, 0, "QuantityLabel");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityRepeater.qml")),
+		"Victron.VenusOS", 2, 0, "QuantityRepeater");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityTableSummary.qml")),
 		"Victron.VenusOS", 2, 0, "QuantityTableSummary");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/QuantityTable.qml")),

@@ -19,6 +19,7 @@ OverviewWidget {
 	title: CommonWords.battery
 	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
+	enabled: Global.batteries.model.count > 0
 
 	quantityLabel.value: batteryData.stateOfCharge
 	quantityLabel.unit: VenusOS.Units_Percentage
@@ -40,7 +41,7 @@ OverviewWidget {
 			GradientStop { position: Math.min(1.0, (1.0 - _normalizedStateOfCharge/100) + 0.001); color: Theme.color.overviewPage.widget.battery.background }
 			GradientStop { position: 1.0; color: Theme.color.overviewPage.widget.battery.background }
 		}
-		radius: parent.radius
+		radius: Theme.geometry.overviewPage.widget.battery.background.radius
 
 		Grid {
 			id: animationGrid
@@ -215,19 +216,12 @@ OverviewWidget {
 				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
 			}
 			Label {
-				text: batteryData.mode === VenusOS.Battery_Mode_Idle
-						//% "Idle"
-					  ? qsTrId("overview_widget_battery_idle")
-					  : (batteryData.mode === VenusOS.Battery_Mode_Charging
-						  //% "Charging"
-						? qsTrId("overview_widget_battery_charging")
-						  //% "Discharging"
-						: qsTrId("overview_widget_battery_discharging"))
+				text: Global.batteries.modeToText(batteryData.mode)
 				font.pixelSize: Theme.font.size.body1
 				color: Theme.color.font.secondary
 			}
 			Label {
-				text: Global.batteries.timeToGoText(Global.batteries.system)
+				text: Global.batteries.timeToGoText(Global.batteries.system, VenusOS.Battery_TimeToGo_ShortFormat)
 				color: Theme.color.font.primary
 				font.pixelSize: Theme.font.overviewPage.battery.timeToGo.pixelSize
 			}
@@ -275,4 +269,17 @@ OverviewWidget {
 			font.pixelSize: Theme.font.size.body2
 		}
 	]
+
+	MouseArea {
+		anchors.fill: parent
+		onClicked: {
+			if (Global.batteries.model.count === 1) {
+				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
+						{ "battery": Global.batteries.model.deviceAt(0) })
+			} else {
+				Global.pageManager.pushPage("/pages/battery/BatteryListPage.qml")
+			}
+		}
+	}
+
 }

@@ -41,6 +41,7 @@
         <file>components/PageStack.qml</file>
         <file>components/ProgressArc.qml</file>
         <file>components/QuantityLabel.qml</file>
+        <file>components/QuantityRepeater.qml</file>
         <file>components/QuantityTableSummary.qml</file>
         <file>components/QuantityTable.qml</file>
         <file>components/RadioButtonControlValue.qml</file>
@@ -483,6 +484,7 @@
         <file>pages/settings/tz/TzEuropeData.qml</file>
         <file>pages/settings/tz/TzIndianData.qml</file>
         <file>pages/settings/tz/TzPacificData.qml</file>
+        <file>pages/battery/BatteryListPage.qml</file>
         <file>pages/solar/PvInverterPage.qml</file>
         <file>pages/solar/SolarChargerAlarmsAndErrorsPage.qml</file>
         <file>pages/solar/SolarChargerNetworkedOperationPage.qml</file>

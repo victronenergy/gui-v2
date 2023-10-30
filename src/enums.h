@@ -172,6 +172,12 @@ public:
 	};
 	Q_ENUM(Battery_Mode)
 
+	enum Battery_TimeToGo_Format {
+		Battery_TimeToGo_ShortFormat,
+		Battery_TimeToGo_LongFormat
+	};
+	Q_ENUM(Battery_TimeToGo_Format)
+
 	enum Ess_State {
 		Ess_State_OptimizedWithBatteryLife,
 		Ess_State_OptimizedWithoutBatteryLife,

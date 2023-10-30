@@ -248,6 +248,7 @@
     "geometry.overviewPage.widget.centerWidgetWidth": 304,
     "geometry.overviewPage.widget.rightWidgetWidth": 224,
 
+    "geometry.overviewPage.widget.battery.background.radius": 4,
     "geometry.overviewPage.widget.battery.animatedBar.minimumWidth": 4,
     "geometry.overviewPage.widget.battery.animatedBar.maximumWidth": 22,
     "geometry.overviewPage.widget.battery.animatedBar.minimumWidth": 4,
@@ -438,6 +439,9 @@
     "geometry.settings.gsmModem.signalStrengthBars.topMargin": 2,
     "geometry.settings.gsmModem.signalStrengthBars.bar.width": 4,
     "geometry.settings.gsmModem.signalStrengthBars.bar.incremental.height": 6,
+
+    "geometry.batteryListPage.item.height": 84,
+    "geometry.batteryListPage.item.verticalSpacing": 2,
 
     "geometry.settings.battery.rangeSlider.labelWidth": 120
 }
