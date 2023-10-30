@@ -498,6 +498,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/PageDigitalInput.qml
     pages/settings/devicelist/PageMeteo.qml
     pages/settings/devicelist/PageMeteoSettings.qml
+    pages/settings/devicelist/PageMotorDrive.qml
     pages/settings/devicelist/PageNotYetImplemented.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
