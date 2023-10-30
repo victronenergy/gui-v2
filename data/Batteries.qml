@@ -28,20 +28,17 @@ QtObject {
 		model.clear()
 	}
 
-	function timeToGoText(battery) {
+	function timeToGoText(battery, format) {
 		if ((battery.timeToGo || 0) <= 0) {
 			return ""
 		}
-		const timeToGo = Utils.decomposeDurationDaysHoursMinutes(battery.timeToGo)
-		if (timeToGo.d > 0) {
-			//% "%1d %2h %3m"
-			return qsTrId("batteries_time_to_go_days_hours_minutes").arg(timeToGo.d).arg(timeToGo.h).arg(timeToGo.m)
-		} else if (timeToGo.h > 0) {
-			//% "%2h %3m"
-			return qsTrId("batteries_time_to_go_hours_minutes").arg(timeToGo.h).arg(timeToGo.m)
+		const text = Utils.secondsToString(battery.timeToGo)
+		if (format === VenusOS.Battery_TimeToGo_LongFormat) {
+			//: %1 = time remaining, e.g. '3h 2m'
+			//% "%1 to go"
+			return qsTrId("brief_battery_time_to_go").arg(text)
 		} else {
-			//% "%3m"
-			return qsTrId("batteries_time_to_go_minutes").arg(timeToGo.m)
+			return text
 		}
 	}
 
@@ -53,6 +50,19 @@ QtObject {
 	function batteryMode(battery) {
 		return isNaN(battery.power) || battery.power === 0 ? VenusOS.Battery_Mode_Idle
 			: (battery.power > 0 ? VenusOS.Battery_Mode_Charging : VenusOS.Battery_Mode_Discharging)
+	}
+
+	function modeToText(mode) {
+		switch (mode) {
+		case VenusOS.Battery_Mode_Idle:
+			return CommonWords.idle
+		case VenusOS.Battery_Mode_Charging:
+			return CommonWords.charging
+		case VenusOS.Battery_Mode_Discharging:
+			return CommonWords.discharging
+		default:
+			return ""
+		}
 	}
 
 	Component.onCompleted: Global.batteries = root
