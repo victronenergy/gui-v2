@@ -21,9 +21,7 @@ QtObject {
 
 	readonly property var value: sourceObject ? sourceObject.value : undefined
 	readonly property bool valid: value !== undefined
-	readonly property bool seen: BackendConnection.type === BackendConnection.DBusSource
-			? !!sourceObject && sourceObject.seen
-			: true // TODO 'seen' not yet supported by MQTT backend, so make it true by default
+	readonly property bool seen: !!sourceObject && sourceObject.seen
 
 	property bool hasMin
 	property bool hasMax
