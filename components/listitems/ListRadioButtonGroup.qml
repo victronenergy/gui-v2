@@ -50,6 +50,7 @@ ListNavigationItem {
 	property string defaultSecondaryText: qsTrId("settings_radio_button_group_unknown")
 
 	signal optionClicked(index: int)
+	signal aboutToPop()
 
 	secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
 			? optionModel[currentIndex].display
@@ -213,6 +214,7 @@ ListNavigationItem {
 				interval: Theme.animation.settings.radioButtonPage.autoClose.duration
 				onTriggered: {
 					if (!!Global.pageManager) {
+						root.aboutToPop()
 						if (root.popDestination) {
 							Global.pageManager.popPage(root.popDestination)
 						} else {

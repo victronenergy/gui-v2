@@ -54,14 +54,10 @@ Page {
 				]
 			}
 
-			ListRadioButtonGroup {
+			ListRadioButtonGroupNoYes {
 				//% "Show"
 				text: qsTrId("page_settings_fronius_inverter_show")
 				dataSource: bindPrefix + "/IsActive"
-				optionModel: [
-					{ display: CommonWords.no, value: 0 },
-					{ display: CommonWords.yes, value: 1 }
-				]
 			}
 		}
 	}

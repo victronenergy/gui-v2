@@ -39,12 +39,31 @@ QtObject {
 	//% "AC Phase L%1"
 	readonly property string ac_phase_x: qsTrId("common_words_ac_phase_x")
 
+	//% "AC Sensor %1"
+	property string ac_sensor_x: qsTrId("common_words_ac_sensor_x")
+
+	//% "AC Sensors"
+	property string ac_sensors: qsTrId("common_words_ac_sensor")
+
 	//: Status is 'active'
 	//% "Active"
 	readonly property string active_status: qsTrId("common_words_active")
 
+	//: Voltage alarm is at "Alarm" level
+	//% "Alarm"
+	readonly property string alarm: qsTrId("common_words_alarm")
+
+	//% "Alarm status"
+	readonly property string alarm_status: qsTrId("common_words_alarm_status")
+
 	//% "Alarms"
 	readonly property string alarms: qsTrId("common_words_alarms")
+
+	//% "Allow to charge"
+	readonly property string allow_to_charge: qsTrId("common_words_allow_to_charge")
+
+	//% "Allow to discharge"
+	readonly property string allow_to_discharge: qsTrId("common_words_allow_to_discharge")
 
 	//% "Auto"
 	readonly property string auto: qsTrId("common_words_auto")
@@ -89,6 +108,10 @@ QtObject {
 	//% "Custom name"
 	readonly property string custom_name: qsTrId("common_words_custom_name")
 
+	//: Title for a menu item which displays debugging information
+	//% "Debug"
+	readonly property string debug: qsTrId("common_words_debug")
+
 	//: Title for device information
 	//% "Device"
 	readonly property string device_info_title: qsTrId("common_words_device")
@@ -114,6 +137,9 @@ QtObject {
 
 	//% "Error"
 	readonly property string error: qsTrId("common_words_error")
+
+	//% "Error:"
+	readonly property string error_colon: qsTrId("common_words_error_colon")
 
 	//% "Error code"
 	readonly property string error_code: qsTrId("common_words_error_code")
@@ -216,6 +242,12 @@ QtObject {
 
 	//% "No"
 	readonly property string no: qsTrId("common_words_no")
+
+	//% "This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu."
+	readonly property string noAdjustableByDmc: qsTrId("common_words_setting_disabled_when_dmc_connected")
+
+	//% "This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu."
+	readonly property string noAdjustableByBms: qsTrId("common_words_setting_disabled_when_bms_connected")
 
 	//% "No error"
 	readonly property string no_error: qsTrId("common_words_no_error")
@@ -355,6 +387,9 @@ QtObject {
 	//% "Temperature"
 	readonly property string temperature: qsTrId("common_words_temperature")
 
+	//% "Temperature sensor"
+	readonly property string temperature_sensor: qsTrId("common_words_temperature_sensor")
+
 	//% "Today"
 	readonly property string today: qsTrId("common_words_today")
 
@@ -374,6 +409,9 @@ QtObject {
 	//: Status = "unknown"
 	//% "Unknown"
 	readonly property string unknown_status: qsTrId("common_words_unknown_status")
+
+	//% "VE.Bus Error"
+	readonly property string vebus_error: qsTrId("common_words_vebus_error")
 
 	//% "Voltage"
 	readonly property string voltage: qsTrId("common_words_voltage")

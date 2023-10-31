@@ -21,15 +21,13 @@ Page {
 			}
 
 			ListTextItem {
-				//% "Allow to charge"
-				text: qsTrId("lynxionio_allow_to_charge")
+				text: CommonWords.allow_to_charge
 				dataSource: root.bindPrefix + "/Io/AllowToCharge"
 				secondaryText: CommonWords.yesOrNo(dataValue)
 			}
 
 			ListTextItem {
-				//% "Allow to discharge"
-				text: qsTrId("lynxionio_allow_to_discharge")
+				text: CommonWords.allow_to_discharge
 				dataSource: root.bindPrefix + "/Io/AllowToDischarge"
 				secondaryText: CommonWords.yesOrNo(dataValue)
 			}

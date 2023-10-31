@@ -52,8 +52,7 @@ ListNavigationItem {
 		}
 
 		if (inputNumber === "") {
-			//% "Temperature sensor"
-			return qsTrId("settings_relay_title_default")
+			return CommonWords.temperature_sensor
 		} else {
 			//: %1 = input number of the sensor
 			//% "Temperature sensor (%1)"

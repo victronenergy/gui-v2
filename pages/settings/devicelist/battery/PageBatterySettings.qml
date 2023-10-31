@@ -119,13 +119,9 @@ Page {
 				}
 			}
 
-			ListRadioButtonGroup {
+			ListRadioButtonGroupNoYes {
 				//% "Bluetooth Enabled"
 				text: qsTrId("batterysettings_bluetooth_enabled")
-				optionModel: [
-					{ display: CommonWords.no, value: 0 },
-					{ display: CommonWords.yes, value: 1 },
-				]
 				dataSource: root.bindPrefix + "/Settings/BluetoothMode"
 				visible: defaultVisible && dataValid
 			}

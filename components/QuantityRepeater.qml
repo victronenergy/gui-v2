@@ -9,8 +9,11 @@ import Victron.VenusOS
 Repeater {
 	id: root
 
+	property int minimumDelegateWidth
+
 	delegate: QuantityLabel {
 		anchors.verticalCenter: parent.verticalCenter
+		width: Math.max(implicitWidth, minimumDelegateWidth)
 		font.pixelSize: Theme.font.size.body2
 		value: isNaN(modelData.value) ? NaN : modelData.value
 		unit: isNaN(modelData.unit) ? VenusOS.Units_None : modelData.unit

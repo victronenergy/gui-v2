@@ -21,19 +21,19 @@ QtObject {
 								  && !isNaN(voltage)
 								  && !isNaN(power)
 
-	property DataPoint _frequency: DataPoint {
+	readonly property DataPoint _frequency: DataPoint {
 		source: serviceUid + "/F"
 	}
 
-	property DataPoint _current: DataPoint {
+	readonly property DataPoint _current: DataPoint {
 		source: serviceUid + "/I"
 	}
 
-	property DataPoint _voltage: DataPoint {
+	readonly property DataPoint _voltage: DataPoint {
 		source: serviceUid + "/V"
 	}
 
-	property DataPoint _power: DataPoint {
+	readonly property DataPoint _power: DataPoint {
 		source: serviceUid + "/P"
 	}
 }

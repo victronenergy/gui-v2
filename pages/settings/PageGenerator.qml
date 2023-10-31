@@ -17,7 +17,7 @@ Page {
 	readonly property alias activeCondition: _activeCondition
 	property alias startStopModel: startStopModel
 	property alias model: settingsListView.model
-	readonly property variant _dates: historicalData.valid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
+	readonly property var _dates: historicalData.valid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
 
 	function getState()
 	{

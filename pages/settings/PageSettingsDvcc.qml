@@ -77,8 +77,7 @@ Page {
 			ListRadioButtonGroup {
 				id: temperatureServiceRadioButtons
 
-				//% "Temperature sensor"
-				text: qsTrId("settings_dvcc_temp_sensor")
+				text: CommonWords.temperature_sensor
 				dataSource: "com.victronenergy.settings/Settings/SystemSetup/TemperatureService"
 				//% "Unavailable sensor, set another"
 				defaultSecondaryText: qsTrId("settings_system_unavailable_sensor")
