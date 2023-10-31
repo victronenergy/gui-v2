@@ -25,7 +25,12 @@ Page {
 			return null
 		}
 
-		if (serviceType === "vebus") {
+		if (serviceType === "vebus"
+				// vebus devices may also show up as AC inputs, so ensure they do not appear twice
+				// in the list.
+				&& sourceModel !== Global.acInputs.model) {
+			url = "/pages/vebusdevice/PageVeBus.qml"
+			params = { "veBusDevice" : device }
 			summary = [ Global.system.systemStateToText(device.state) ]
 
 		} else if (serviceType === "multi") {

@@ -443,5 +443,9 @@
     "geometry.batteryListPage.item.height": 84,
     "geometry.batteryListPage.item.verticalSpacing": 2,
 
-    "geometry.settings.battery.rangeSlider.labelWidth": 70
+    "geometry.settings.battery.rangeSlider.labelWidth": 70,
+
+    "geometry.veBusDevice.PVCFListQuantityGroup.minimumDelegateWidth": 100,
+    "geometry.veBusAlarm.minimumDelegateWidth": 120
+
 }

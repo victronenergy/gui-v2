@@ -14,8 +14,7 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 			ListAlarm {
-				//% "Low battery voltage"
-				text: qsTrId("battery_low_battery_voltage")
+				text: CommonWords.low_battery_voltage
 				dataSource: root.bindPrefix + "/Alarms/LowVoltage"
 				visible: defaultVisible && dataValid
 			}

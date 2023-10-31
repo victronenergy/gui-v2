@@ -12,7 +12,7 @@ Page {
 
 	property string bindPrefix
 	property string startStopBindPrefix
-	property variant availableBatteryMonitors: availableBatteryServices.valid ? availableBatteryServices.value : ""
+	property var availableBatteryMonitors: availableBatteryServices.valid ? availableBatteryServices.value : ""
 
 	DataPoint {
 		id: availableBatteryServices

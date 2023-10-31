@@ -443,6 +443,9 @@
     "geometry.vebusDeviceListPage.quantityTable.row.spacing": 4,
     "geometry.vebusDeviceListPage.quantityTable.firstColumn.width": 39,
     "geometry.vebusDeviceListPage.quantityTable.header.height": 58,
-    "geometry.vebusDeviceListPage.currentLimit.button.width": 180
+    "geometry.vebusDeviceListPage.currentLimit.button.width": 180,
+
+    "geometry.veBusDevice.PVCFListQuantityGroup.minimumDelegateWidth": 100,
+    "geometry.veBusAlarm.minimumDelegateWidth": 120
 
 }

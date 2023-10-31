@@ -1,3 +1,7 @@
+#
+# Copyright (C) 2023 Victron Energy B.V.
+# See LICENSE.txt for license information.
+#
 cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'qt_add_qml_module' properly, you get errors at runtime like: "qrc:/main.qml:164 ApplicationContent is not a type\n"
 
 # CMAKE HINTS
@@ -79,6 +83,7 @@ set (VENUS_QML_MODULE_SOURCES
     FrameRateVisualizer.qml
 
     components/AcceptButtonBackground.qml
+    components/AcInputsCurrentLimits.qml
     components/AcOutput.qml
     components/AcPhase.qml
     components/Arc.qml
@@ -184,6 +189,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListPortField.qml
     components/listitems/ListRadioButton.qml
     components/listitems/ListRadioButtonGroup.qml
+    components/listitems/ListRadioButtonGroupNoYes.qml
     components/listitems/ListQuantityGroup.qml
     components/listitems/ListQuantityItem.qml
     components/listitems/ListRangeSlider.qml
@@ -441,7 +447,32 @@ set (VENUS_QML_MODULE_SOURCES
     pages/solar/SolarDeviceListPage.qml
     pages/solar/SolarDeviceNavigationItem.qml
 
-    pages/vebusdevice/VeBusDeviceListPage.qml
+    pages/vebusdevice/OverviewVeBusDevicePage.qml
+    pages/vebusdevice/PageAcSensor.qml
+    pages/vebusdevice/PageAcSensors.qml
+    pages/vebusdevice/PageVeBusAdvanced.qml
+    pages/vebusdevice/PageVeBusAlarms.qml
+    pages/vebusdevice/PageVeBusAlarmSettings.qml
+    pages/vebusdevice/PageVeBusBms.qml
+    pages/vebusdevice/PageVeBusDebug.qml
+    pages/vebusdevice/PageVeBusDeviceInfo.qml
+    pages/vebusdevice/PageVeBusError11Device.qml
+    pages/vebusdevice/PageVeBusError11Menu.qml
+    pages/vebusdevice/PageVeBusError11View.qml
+    pages/vebusdevice/PageVeBusKwhCounters.qml
+    pages/vebusdevice/PageVeBusSerialNumbers.qml
+    pages/vebusdevice/PVCFListQuantityGroup.qml
+    pages/vebusdevice/ThreePhaseIOTable.qml
+    pages/vebusdevice/VeBusAcSensorModel.qml
+    pages/vebusdevice/PageVeBus.qml
+    pages/vebusdevice/VeBusAlarm.qml
+    pages/vebusdevice/VeBusDeviceActiveAcInputTextItem.qml
+    pages/vebusdevice/VeBusDeviceAlarmGroup.qml
+    pages/vebusdevice/VeBusDeviceAlarmSettingsModel.qml
+    pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml
+    pages/vebusdevice/VeBusDeviceInfoModel.qml
+    pages/vebusdevice/VeBusDeviceKwhCountersModel.qml
+    pages/vebusdevice/VeBusDeviceModeButton.qml
 )
 
 list(APPEND QML_MODULE_SOURCES ${VENUS_QML_MODULE_SOURCES})
