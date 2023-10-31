@@ -23,8 +23,7 @@ Page {
 				leftPadding: 0
 				color: Theme.color.listItem.secondaryText
 				font.pixelSize: Theme.font.size.caption
-				//% "Alarm Status"
-				text: qsTrId("charger_alarms_header_status")
+				text: CommonWords.alarm_status
 			}
 
 			ListAlarm {

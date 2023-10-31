@@ -12,6 +12,33 @@ QuantityTable {
 
 	property var totalPower
 	property string labelText
+	property int numberOfPhases
+	property var acPhases
+
+	valueForModelIndex: function(phaseIndex, column) {
+		if (column === 0) {
+			return "L%1".arg(phaseIndex + 1)
+		}
+
+		if (!numberOfPhases || !acPhases || acPhases.length < phaseIndex + 1) {
+			return NaN
+		}
+
+		let phase = root.acPhases[phaseIndex]
+		if (phase) {
+			switch(column) {
+			case 1:
+				return phase.power
+			case 2:
+				return phase.voltage
+			case 3:
+				return phase.current
+			case 4:
+				return phase.frequency
+			}
+		}
+		return NaN
+	}
 
 	availableWidth: width - 2*Theme.geometry.listItem.content.horizontalMargin
 	firstColumnWidth: Theme.geometry.vebusDeviceListPage.quantityTable.firstColumn.width

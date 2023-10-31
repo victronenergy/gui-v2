@@ -298,8 +298,7 @@ Page {
 		}
 
 		ListNavigationItem {
-			//% "Debug"
-			text: qsTrId("settings_ess_debug")
+			text: CommonWords.debug
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)

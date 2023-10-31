@@ -94,42 +94,21 @@ ControlCard {
 						if (!root._currentLimitDialog) {
 							root._currentLimitDialog = currentLimitDialogComponent.createObject(Global.dialogLayer)
 						}
-						root._currentLimitDialog.inputSettings = modelData
-						root._currentLimitDialog.inputIndex = model.index
-						root._currentLimitDialog.value = modelData.currentLimit
-						root._currentLimitDialog.open()
+						root._currentLimitDialog.openDialog(modelData, model.index)
 					}
 				}
 			}
 		}
-		ButtonControlValue {
-			property var _modeDialog
 
-			width: parent.width
-			button.width: Math.max(button.implicitWidth, Theme.geometry.veBusDeviceCard.modeButton.maximumWidth)
-			label.text: CommonWords.mode
-			button.text: Global.veBusDevices.modeToText(root.veBusDevice.mode)
-			enabled: root.veBusDevice.modeAdjustable
-			separator.visible: false
-
-			onClicked: {
-				if (!_modeDialog) {
-					_modeDialog = modeDialogComponent.createObject(Global.dialogLayer)
-				}
-				_modeDialog.mode = root.veBusDevice.mode
-				_modeDialog.open()
-			}
-
-			Component {
-				id: modeDialogComponent
-
-				InverterChargerModeDialog {
-					isMulti: root.veBusDevice.isMulti
-					onAccepted: {
-						if (root.veBusDevice.mode !== mode) {
-							root.veBusDevice.setMode(mode)
-						}
-					}
+		VeBusDeviceModeButton {
+			veBusDevice: root.veBusDevice
+			sourceComponent: Component {
+				ButtonControlValue {
+					width: parent.width
+					button.width: Math.max(button.implicitWidth, Theme.geometry.veBusDeviceCard.modeButton.maximumWidth)
+					label.text: CommonWords.mode
+					button.text: Global.veBusDevices.modeToText(root.veBusDevice.mode)
+					separator.visible: false
 				}
 			}
 		}

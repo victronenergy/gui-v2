@@ -62,7 +62,6 @@ Device {
 		uid: veBusDevice.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
-
 	onValidChanged: {
 		if (!!Global.veBusDevices) {
 			if (valid) {

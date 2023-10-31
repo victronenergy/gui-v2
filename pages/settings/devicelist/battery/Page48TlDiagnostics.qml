@@ -34,8 +34,7 @@ Page {
 			}
 
 			ListTextItem {
-				//% "Alarm"
-				text: qsTrId("batterydiagnostics_alarm")
+				text: CommonWords.alarm
 				dataSource: root.bindPrefix + "/Diagnostics/IoStatus/AlarmOutActive"
 				secondaryText: dataValue
 						 //: Indicates no alarm is set

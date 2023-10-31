@@ -251,6 +251,25 @@ public:
 	};
 	Q_ENUM(VeBusDevice_Mode)
 
+	enum VeBusDevice_ChargeState {
+		VeBusDevice_ChargeState_InitializingCharger,
+		VeBusDevice_ChargeState_Bulk,
+		VeBusDevice_ChargeState_Absorption,
+		VeBusDevice_ChargeState_Float,
+		VeBusDevice_ChargeState_Storage,
+		VeBusDevice_ChargeState_AbsorbRepeat,
+		VeBusDevice_ChargeState_ForcedAbsorb,
+		VeBusDevice_ChargeState_Equalize,
+		VeBusDevice_ChargeState_BulkStopped,
+		VeBusDevice_ChargeState_Unknown
+	};
+	Q_ENUM(VeBusDevice_ChargeState)
+
+	enum VeBusDevice_Bms_Type { // TODO: this is not documented, it is hard coded in gui-v1. Update when doco becomes available
+		VeBusDevice_Bms_Type_VeBus = 2
+	};
+	Q_ENUM(VeBusDevice_Bms_Type)
+
 	enum Relays_State {
 		Relays_State_Inactive = 0,
 		Relays_State_Active
