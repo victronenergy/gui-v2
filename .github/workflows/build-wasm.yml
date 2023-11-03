@@ -19,7 +19,7 @@ jobs:
        sudo apt-get update -yq &&
        sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
                                 wget lsb libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
-                                ninja-build
+                                ninja-build dos2unix
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
@@ -48,7 +48,11 @@ jobs:
     - name: patch Qt ${{env.QT_VERSION}}
       run: |
         echo patch Qt
+        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
         ./.github/patches/qt-fixes.sh
+        dos2unix ${QTDIR}/plugins/platforms/{qtloader.js,wasm_shell.html}
+        patch ${QTDIR}/plugins/platforms/qtloader.js < ./.github/patches/qtloader.js.patch
+        patch ${QTDIR}/plugins/platforms/wasm_shell.html < ./.github/patches/wasm_shell.html.patch
     - name: Install emscripten ${{env.EMSCRIPTEN}}
       run: |
         echo installing emscripten ${EMSCRIPTEN}
@@ -64,8 +68,8 @@ jobs:
         cd qtmqtt
         git checkout $QT_VERSION
         mkdir build-qtmqtt && cd build-qtmqtt
-        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
         export PATH=$PATH:/opt/hostedtoolcache/Qt/Tools/CMake/bin
+        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
         ${QTDIR}/bin/qt-configure-module ..
         cmake --build .
         cmake --install . --prefix ${QTDIR} --verbose
@@ -77,16 +81,13 @@ jobs:
         mkdir build-wasm && cd build-wasm
         ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
         cmake --build .
-        grep -q -E '^var Module=[^;]*;' venus-gui-v2.js
-        sed -i "s%^\(var Module=[^;]*;\)%\1Module.arguments=['--mqtt','ws://'+document.location.host+':9001/'];%" venus-gui-v2.js
-        sed -i "s/qtlogo.svg/victronenergy.svg/" venus-gui-v2.html
-        sed -i "s/background-color: white;/background-color: #4790d0;/" venus-gui-v2.html
-        sed -i "s/\(, body {\)/\1 background-color: #4790d0;/" venus-gui-v2.html
-        sed -i "s/ contenteditable=\"true\"//" venus-gui-v2.html
+        grep -q -E '^var createQtAppInstance' venus-gui-v2.js
+        sed -i "s%^var \(createQtAppInstance\)%window.\1%" venus-gui-v2.js
         cd -
         mkdir -p artifacts/wasm
         mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
         mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
+        cp .github/patches/qtloader-controller.js artifacts/wasm/
         cd artifacts
         zip -r ../venus-webassembly.zip wasm
     - name: Upload wasm files
