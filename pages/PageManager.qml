@@ -30,7 +30,8 @@ QtObject {
 			|| root.interactivity === VenusOS.PageManager_InteractionMode_Idle
 
 	property Timer idleModeTimer: Timer {
-		running: root.currentPage !== null && root.currentPage !== undefined
+		running: !Global.splashScreenVisible
+			&& root.currentPage !== null && root.currentPage !== undefined
 			&& root.currentPage.fullScreenWhenIdle
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			&& BackendConnection.applicationVisible
