@@ -22,7 +22,6 @@ QtObject {
 	property var dataManager
 	property var locale: Qt.locale()  // TODO: read from settings
 	property var dataServiceModel: null
-	property var firmwareUpdate
 
 	property var inputPanel
 	property var dialogLayer
@@ -87,7 +86,6 @@ QtObject {
 		dataManager = null
 		locale = Qt.locale()
 		dataServiceModel = null
-		firmwareUpdate = null
 		inputPanel = null
 		dialogLayer = null
 		notificationLayer = null

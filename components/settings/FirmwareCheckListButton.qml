@@ -10,16 +10,17 @@ ListButton {
 	id: root
 
 	property int updateType
+	property FirmwareUpdate firmwareUpdate
 
-	button.text: Global.firmwareUpdate.state === FirmwareUpdater.Checking
+	button.text: firmwareUpdate.state === FirmwareUpdater.Checking
 			 //% "Checking..."
 		   ? qsTrId("settings_firmware_checking")
 			 //% "Press to check"
 		   : qsTrId("settings_firmware_press_to_check")
-	enabled: !Global.firmwareUpdate.busy
+	enabled: !firmwareUpdate.busy
 	writeAccessLevel: VenusOS.User_AccessType_User
 
 	onClicked: {
-		Global.firmwareUpdate.checkForUpdate(updateType)
+		firmwareUpdate.checkForUpdate(updateType)
 	}
 }
