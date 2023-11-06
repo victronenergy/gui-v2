@@ -9,6 +9,8 @@ import Victron.Veutil
 Page {
 	id: root
 
+	property FirmwareUpdate firmwareUpdate: FirmwareUpdate {}
+
 	GradientListView {
 		id: settingsListView
 
@@ -70,6 +72,7 @@ Page {
 				//% "Check for updates"
 				text: qsTrId("settings_firmware_check_for_updates")
 				updateType: VenusOS.Firmware_UpdateType_Online
+				firmwareUpdate: root.firmwareUpdate
 			}
 
 			ListButton {
@@ -78,27 +81,27 @@ Page {
 				//% "Update available"
 				text: qsTrId("settings_firmware_update_available")
 				button.text: {
-					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
+					if (root.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
 						if (progress.value) {
 							//: Firmware update progress. %1 = firmware version, %2 = current update progress
 							//% "Installing %1 %2%"
-							return qsTrId("settings_firmware_online_installing_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(progress.value)
+							return qsTrId("settings_firmware_online_installing_progress").arg(root.firmwareUpdate.onlineAvailableVersion).arg(progress.value)
 						}
 						//: %1 = firmware version
 						//% "Installing %1..."
-						return qsTrId("settings_firmware_online_installing").arg(Global.firmwareUpdate.onlineAvailableVersion)
+						return qsTrId("settings_firmware_online_installing").arg(root.firmwareUpdate.onlineAvailableVersion)
 					} else {
 						//: %1 = firmware version
 						//% "Press to update to %1"
-						return qsTrId("settings_firmware_online_press_to_update_to").arg(Global.firmwareUpdate.onlineAvailableVersion)
+						return qsTrId("settings_firmware_online_press_to_update_to").arg(root.firmwareUpdate.onlineAvailableVersion)
 					}
 				}
 
-				enabled: !Global.firmwareUpdate.busy
+				enabled: !root.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
-				visible: Global.firmwareUpdate.onlineAvailableVersion && Global.firmwareUpdate.state !== FirmwareUpdater.Checking
+				visible: root.firmwareUpdate.onlineAvailableVersion && root.firmwareUpdate.state !== FirmwareUpdater.Checking
 				onClicked: {
-					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
+					root.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
 				}
 
 				DataPoint {

@@ -9,6 +9,8 @@ import Victron.Veutil
 Page {
 	id: root
 
+	property FirmwareUpdate firmwareUpdate: FirmwareUpdate {}
+
 	GradientListView {
 		id: settingsListView
 
@@ -18,6 +20,7 @@ Page {
 				//% "Check for updates on SD/USB"
 				text: qsTrId("settings_firmware_check_for_updates_on_sd_usb")
 				updateType: VenusOS.Firmware_UpdateType_Offline
+				firmwareUpdate: root.firmwareUpdate
 			}
 
 			ListButton {
@@ -26,22 +29,22 @@ Page {
 				//% "Firmware found"
 				text: qsTrId("settings_firmware_found")
 				button.text: {
-					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
+					if (root.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
 						//: %1 = firmware version
 						//% "Installing %1"
-						return qsTrId("settings_firmware_offline_installing").arg(Global.firmwareUpdate.offlineAvailableVersion)
+						return qsTrId("settings_firmware_offline_installing").arg(root.firmwareUpdate.offlineAvailableVersion)
 					} else {
 						//: %1 = firmware version
 						//% "Press to update to %1"
-						return qsTrId("settings_firmware_offline_press_to_install").arg(Global.firmwareUpdate.offlineAvailableVersion)
+						return qsTrId("settings_firmware_offline_press_to_install").arg(root.firmwareUpdate.offlineAvailableVersion)
 					}
 				}
 
-				enabled: !Global.firmwareUpdate.busy
+				enabled: !root.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
-				visible: !!Global.firmwareUpdate.offlineAvailableVersion
+				visible: !!root.firmwareUpdate.offlineAvailableVersion
 				onClicked: {
-					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Offline)
+					root.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Offline)
 				}
 			}
 
