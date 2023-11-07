@@ -16,8 +16,7 @@ Page {
 			ListTextItem {
 				id: remotePort
 
-				//% "Firmware version"
-				text: qsTrId("settings_firmware_version")
+				text: CommonWords.firmware_version
 				dataSource: "com.victronenergy.platform/Firmware/Installed/Version"
 			}
 
