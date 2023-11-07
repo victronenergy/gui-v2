@@ -65,8 +65,7 @@ Page {
 				dataInvalidate: false
 			}
 
-			ListTextItem {
-				text: CommonWords.firmware_version
+			ListFirmwareVersionItem {
 				dataSource: root.bindPrefix + "/FirmwareVersion"
 				dataInvalidate: false
 			}
