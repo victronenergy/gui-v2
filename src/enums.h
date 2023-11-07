@@ -476,7 +476,7 @@ public:
 		SolarCharger_NetworkStatus_InstanceMaster,
 		SolarCharger_NetworkStatus_GroupAndInstanceMaster,
 		SolarCharger_NetworkStatus_Standalone,
-		SolarCharger_NetworkStatus_StandaloneAndInstanceMaster
+		SolarCharger_NetworkStatus_StandaloneAndGroupMaster
 	};
 	Q_ENUM(SolarCharger_NetworkStatus)
 

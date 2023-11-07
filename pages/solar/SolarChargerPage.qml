@@ -103,6 +103,25 @@ Page {
 				]
 			}
 
+			/* Only available on 15A chargers */
+			ListTextItem {
+				//% "Load"
+				text: qsTrId("charger_load")
+				dataSource: root.solarCharger.serviceUid + "/Load/State"
+				visible: defaultVisible && dataValid
+
+				/* If load is on and current present, show current.
+				 * Otherwise show the state of the load output. */
+				secondaryText: dataValid && dataValue && loadCurrent.valid
+						? loadCurrent.value
+						: CommonWords.yesOrNo(dataValue)
+
+				DataPoint {
+					id: loadCurrent
+					source: root.solarCharger.serviceUid + "/Load/I"
+				}
+			}
+
 			ListSwitch {
 				text: CommonWords.relay
 				checked: root.solarCharger.relayOn
