@@ -11,6 +11,7 @@ import "/components/Utils.js" as Utils
 Column {
 	id: root
 
+	property bool animationEnabled
 	property string inputsIconSource
 
 	spacing: Theme.geometry.briefPage.sidePanel.columnSpacing
@@ -150,7 +151,10 @@ Column {
 			value: Global.acInputs.generatorInput ? Global.acInputs.generatorInput.power : 0
 			showHandle: false
 
-			Behavior on value { NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration } }
+			Behavior on value {
+				enabled: root.animationEnabled
+				NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration }
+			}
 		}
 	}
 
@@ -285,7 +289,7 @@ exported power v  0.4 |   /
 				// For a system that only imports power, 0 represents 0 power.
 				initialModelValue: graphShowsExportPower ? 0.5 : 0.0
 				interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-				enableAnimation: root.opacity > 0 && BackendConnection.applicationVisible
+				enableAnimation: root.animationEnabled
 				warningThreshold: 0.5
 				belowThresholdFillColor1: graphShowsExportPower
 										  ? Theme.color.briefPage.background
@@ -304,7 +308,7 @@ exported power v  0.4 |   /
 
 				Timer {
 					interval: parent.interval
-					running: root.opacity > 0 && BackendConnection.applicationVisible
+					running: root.animationEnabled
 					repeat: true
 					onTriggered: parent.addNewValue()
 				}
@@ -319,7 +323,10 @@ exported power v  0.4 |   /
 			value: gridGraph.normalizedPower || 0
 			showHandle: false
 
-			Behavior on value { NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration } }
+			Behavior on value {
+				enabled: root.animationEnabled
+				NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration }
+			}
 		}
 	}
 
@@ -356,13 +363,13 @@ exported power v  0.4 |   /
 					bottomMargin: loadsQuantityLabel.bottomPadding
 				}
 				interval: loadGraphTimer.interval
-				enableAnimation: root.opacity > 0 && BackendConnection.applicationVisible
+				enableAnimation: root.animationEnabled
 
 				Timer {
 					id: loadGraphTimer
 
 					interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-					running: root.opacity > 0 && BackendConnection.applicationVisible
+					running: root.animationEnabled
 					repeat: true
 					onTriggered: loadGraph.addValue(loadsPower.valueAsRatio)
 				}
@@ -378,7 +385,10 @@ exported power v  0.4 |   /
 			grooveColor: Theme.color.darkWarning
 			showHandle: false
 
-			Behavior on value { NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration } }
+			Behavior on value {
+				enabled: root.animationEnabled
+				NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration }
+			}
 		}
 	}
 
