@@ -120,6 +120,7 @@
         <file>components/settings/CGwacsBatteryScheduleNavigationItem.qml</file>
         <file>components/settings/FirmwareCheckListButton.qml</file>
         <file>components/settings/ListDvccSwitch.qml</file>
+        <file>components/settings/ListFirmwareVersionItem.qml</file>
         <file>components/settings/MountStateListButton.qml</file>
         <file>components/settings/SettingsSlider.qml</file>
         <file>components/settings/TemperatureRelayNavigationItem.qml</file>

@@ -505,6 +505,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "FirmwareCheckListButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListDvccSwitch.qml")),
 		"Victron.VenusOS", 2, 0, "ListDvccSwitch");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListFirmwareVersionItem.qml")),
+		"Victron.VenusOS", 2, 0, "ListFirmwareVersionItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/MountStateListButton.qml")),
 		"Victron.VenusOS", 2, 0, "MountStateListButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/SettingsSlider.qml")),

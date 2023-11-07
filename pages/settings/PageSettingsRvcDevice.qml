@@ -38,8 +38,7 @@ Page {
 				dataSource: root.bindPrefix + "/Nad"
 			}
 
-			ListTextItem {
-				text: CommonWords.firmware_version
+			ListFirmwareVersionItem {
 				dataSource: root.bindPrefix + "/FirmwareVersion"
 			}
 
