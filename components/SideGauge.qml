@@ -24,6 +24,7 @@ ArcGauge {
 	startAngle: alignment & Qt.AlignTop ? 90 : alignment & Qt.AlignVCenter ? 90 + _maxAngle/2 : 90 + _maxAngle
 	endAngle: direction === PathArc.Counterclockwise ? startAngle - _maxAngle : startAngle + _maxAngle
 	radius: Theme.geometry.briefPage.edgeGauge.radius
+	useLargeArc: false
 	strokeWidth: Theme.geometry.arc.strokeWidth
 	arcY: alignment & Qt.AlignTop ? _arcOffset : alignment & Qt.AlignVCenter ? undefined : _arcOffset - _maxArcHeight
 

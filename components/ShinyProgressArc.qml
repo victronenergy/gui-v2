@@ -17,19 +17,12 @@ Item {
 	property real strokeWidth: Theme.geometry.progressArc.strokeWidth
 	property alias progressColor: progress.strokeColor
 	property alias remainderColor: remainder.strokeColor
-	property alias startAngle: progress.startAngle
+	property alias startAngle: remainder.startAngle
 	property alias endAngle: remainder.endAngle
 	property int direction: PathArc.Clockwise
 	property color fillColor: "transparent"
 
 	property real transitionAngle: startAngle + ((endAngle - startAngle) * Math.min(Math.max(control.value, 0.0), 100.0) / 100.0)
-	Behavior on transitionAngle {
-		enabled: control.animationEnabled
-		NumberAnimation {
-			duration: Theme.animation.progressArc.duration
-			easing.type: Easing.InOutQuad
-		}
-	}
 
 	Shape {
 		anchors.fill: parent
@@ -57,7 +50,9 @@ Item {
 		Arc {
 			id: progress
 
+			animationEnabled: control.animationEnabled
 			radius: control.radius
+			startAngle: remainder.startAngle
 			endAngle: control.transitionAngle
 			direction: control.direction
 			strokeWidth: control.strokeWidth
