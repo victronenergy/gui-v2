@@ -11,29 +11,22 @@ Shape {
 
 	property real value // 0 - 100
 	property real radius
-	property bool animationEnabled
 	property real strokeWidth: Theme.geometry.progressArc.strokeWidth
+	property alias useLargeArc: progress.useLargeArc
+	property alias animationEnabled: progress.animationEnabled
 	property alias progressColor: progress.strokeColor
 	property alias remainderColor: remainder.strokeColor
-	property alias startAngle: progress.startAngle
+	property alias startAngle: remainder.startAngle
 	property alias endAngle: remainder.endAngle
 	property int direction: PathArc.Clockwise
 	property color fillColor: "transparent"
 
 	property real transitionAngle: startAngle + ((endAngle - startAngle) * Math.min(Math.max((isNaN(control.value) ? 0 : control.value), 0.0), 100.0) / 100.0)
-	Behavior on transitionAngle {
-		enabled: control.animationEnabled
-		NumberAnimation {
-			duration: Theme.animation.progressArc.duration
-			easing.type: Easing.InOutQuad
-		}
-	}
 
 	Arc {
 		id: remainder
 
 		radius: control.radius
-		startAngle: control.transitionAngle
 		direction: control.direction
 		strokeWidth: control.strokeWidth
 		strokeColor: Theme.color.darkOk
@@ -44,6 +37,7 @@ Shape {
 		id: progress
 
 		radius: control.radius
+		startAngle: remainder.startAngle
 		endAngle: control.transitionAngle
 		direction: control.direction
 		strokeWidth: control.strokeWidth

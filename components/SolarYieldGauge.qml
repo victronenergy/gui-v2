@@ -27,9 +27,10 @@ Item {
 			x: index*strokeWidth
 			opacity: 1.0 - index * 0.3
 			height: root.height
-			startAngle: root.alignment & Qt.AlignVCenter ? 270 + _maxAngle / 2 : 270
+			startAngle: root.alignment & Qt.AlignVCenter ? 270 + _maxAngle/2 : 270
 			endAngle: startAngle - _maxAngle
 			radius: Theme.geometry.briefPage.edgeGauge.radius - index*strokeWidth
+			useLargeArc: false
 			direction: PathArc.Counterclockwise
 			strokeWidth: Theme.geometry.arc.strokeWidth
 			arcY: root.alignment & Qt.AlignVCenter ? undefined : -radius + strokeWidth/2

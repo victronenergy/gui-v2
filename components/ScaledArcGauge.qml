@@ -15,6 +15,7 @@ Item {
 	property alias startAngle: arc.startAngle
 	property alias endAngle: arc.endAngle
 	property alias radius: arc.radius
+	property alias useLargeArc: arc.useLargeArc
 	property alias strokeWidth: arc.strokeWidth
 	property alias direction: arc.direction
 	property int alignment: Qt.AlignLeft
