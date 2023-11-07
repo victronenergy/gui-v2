@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls as C
 import Victron.VenusOS
+import QtQuick.Effects as Effects
 
 T.ProgressBar {
 	id: root
@@ -27,38 +28,54 @@ T.ProgressBar {
 		implicitHeight: Theme.geometry.progressBar.height
 		implicitWidth: Theme.geometry.progressBar.height
 
+		Rectangle {
+			id: mask
+			layer.enabled: true
+			visible: false
+			height: parent.height
+			width: parent.width
+			radius: Theme.geometry.progressBar.radius
+			color: "black"
+		}
+
 		Item {
 			id: container
-			height: parent.height
-			width: root.indeterminate ? (root.width/3) : root.width
-			x: isMirrored ? (root.width - width - startX) : startX
-			readonly property bool isMirrored: root.position !== root.visualPosition
-			property int startX: 0
-
-			SequentialAnimation on startX {
-				loops: Animation.Infinite
-				running: root.indeterminate
-				NumberAnimation {
-					from: -container.width
-					to: root.width
-					duration: Theme.animation.progressBar.duration
-				}
-			}
+			width: parent.width   // can't use anchors here or the XAnimator breaks
+			height: parent.height // see QTBUG-118848
+			visible: false
+			layer.enabled: true
 
 			Rectangle {
 				id: highlightRect
-				anchors {
-					left: parent.left
-					right: parent.right
-					leftMargin: root.indeterminate ? (parent.x < 0 ? -parent.x : 0)
-							: (parent.isMirrored ? (parent.width - parent.width*root.position) : 0)
-					rightMargin: root.indeterminate ? ((root.width - (parent.x + parent.width) < 0) ? (-(root.width - (parent.x + parent.width))) : 0)
-							: (parent.isMirrored ? 0 : (parent.width - parent.width*root.position))
-				}
-				height: parent.height
-				radius: Theme.geometry.progressBar.radius
+				readonly property bool isMirrored: root.position !== root.visualPosition
 				color: Theme.color.ok
+				height: container.height
+				width: root.indeterminate ? (container.width/3) : (container.width * root.position)
+				x: root.indeterminate
+					? (highlightRect.isMirrored ? container.width : -highlightRect.width)
+					: (highlightRect.isMirrored ? container.width - highlightRect.width : 0)
+				radius: Theme.geometry.progressBar.radius
+
+				XAnimator on x {
+					running: root.indeterminate
+					loops: Animation.Infinite
+					duration: Theme.animation.progressBar.duration
+					from: root.indeterminate
+						? (highlightRect.isMirrored ? container.width : -highlightRect.width)
+						: (highlightRect.isMirrored ? container.width - highlightRect.width : 0)
+					to: root.indeterminate
+						? (highlightRect.isMirrored ? -highlightRect.width : container.width)
+						: (highlightRect.isMirrored ? container.width - highlightRect.width : 0) // x only animates for indeterminate bars.
+				}
 			}
+		}
+
+		Effects.MultiEffect {
+			visible: true
+			anchors.fill: parent
+			maskEnabled: true
+			maskSource: mask
+			source: container
 		}
 	}
 }
