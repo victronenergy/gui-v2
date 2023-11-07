@@ -38,6 +38,9 @@ QtObject {
 	//% "Battery voltage"
 	readonly property string battery_voltage: qsTrId("common_words_battery_voltage")
 
+	//% "Charge current"
+	readonly property string charge_current: qsTrId("common_words_charge_current")
+
 	//% "Connected"
 	readonly property string connected: qsTrId("common_words_connected");
 

@@ -35,6 +35,15 @@ Page {
 
 		model: ObjectModel {
 			ListTextItem {
+				id: networkModeEnabled
+				//% "Networked"
+				text: qsTrId("charger_networked")
+				dataSource: root.solarCharger.serviceUid + "/Link/NetworkMode"
+				visible: dataValid
+				secondaryText: dataValue === undefined ? "" : CommonWords.yesOrNo(dataValue & 1)
+			}
+
+			ListTextItem {
 				//% "Network status"
 				text: qsTrId("charger_network_status")
 				secondaryText: {
@@ -59,10 +68,10 @@ Page {
 						//: Network status: Standalone
 						//% "Standalone"
 						return qsTrId("charger_network_status_standalone")
-					case VenusOS.SolarCharger_NetworkStatus_StandaloneAndInstanceMaster:
-						//: Network status: Standalone & Instance Master
-						//% "Standalone & Instance Master"
-						return qsTrId("charger_network_status_standalone_and_instance_master")
+					case VenusOS.SolarCharger_NetworkStatus_StandaloneAndGroupMaster:
+						//: Network status: Standalone & Group Master
+						//% "Standalone & Group Master"
+						return qsTrId("charger_network_status_standalone_and_group_master")
 					default:
 						return ""
 					}
@@ -71,6 +80,90 @@ Page {
 			}
 
 			ListTextItem {
+				id: networkModeMode
+				//% "Mode setting"
+				text: qsTrId("charger_mode_setting")
+				secondaryText: {
+					if (dataValue === undefined) {
+						return ""
+					}
+					switch (dataValue & 0xE) {
+					case 0:
+						//% "Standalone"
+						return qsTrId("charger_standalone")
+					case 2:
+						//% "Charge"
+						return qsTrId("charger_charge")
+					case 4:
+						//% "External control"
+						return qsTrId("charger_external_control")
+					case 6:
+						//% "Charge & HUB-1"
+						return qsTrId("charger_charge_hub_1")
+					case 8:
+						//% "BMS"
+						return qsTrId("charger_bms")
+					case 0xA:
+						//% "Charge & BMS"
+						return qsTrId("charger_charge_bms")
+					case 0xC:
+						//% "Ext. Control & BMS"
+						return qsTrId("charger_ext_control_bms")
+					case 0xE:
+						//% "Charge, Hub-1 & BMS"
+						return qsTrId("charger_charge_hub_1_bms")
+					default:
+						return ""
+					}
+				}
+				dataSource: root.solarCharger.serviceUid + "/Link/NetworkMode"
+				visible: dataValid && networkModeEnabled.dataValue
+			}
+
+			ListTextItem {
+				//% "Master setting"
+				text: qsTrId("charger_master_setting")
+				secondaryText: {
+					if (dataValue === undefined) {
+						return ""
+					}
+					switch (dataValue & 0x30) {
+					case 0x00:
+						//% "Slave"
+						return qsTrId("charger_slave")
+					case 0x10:
+						//% "Group master"
+						return qsTrId("charger_group_master")
+					case 0x20:
+						//% "Charge master"
+						return qsTrId("charger_charge_master")
+					case 0x30:
+						//% "Group & Charge master"
+						return qsTrId("charger_group_charge_master")
+					default:
+						return ""
+					}
+				}
+				dataSource: root.solarCharger.serviceUid + "/Link/NetworkMode"
+				visible: dataValid && networkModeEnabled.dataValue && ((dataValue & 0x30) > 0x00)
+			}
+
+			ListQuantityItem {
+				//% "Charge voltage"
+				text: qsTrId("charger_charge_voltage")
+				dataSource: root.solarCharger.serviceUid + "/Link/ChargeVoltage"
+				visible: dataValid && networkModeEnabled.dataValue > 0 && (networkModeMode.dataValue & 0x04)
+				unit: VenusOS.Units_Volt
+			}
+
+			ListTextItem {
+				text: CommonWords.charge_current
+				dataSource: root.solarCharger.serviceUid + "/Link/ChargeCurrent"
+				visible: dataValid && networkModeEnabled.dataValue > 0 && (networkModeMode.dataValue & 0x08)
+			}
+
+			ListTextItem {
+				id: bmsControlled
 				//% "BMS Controlled"
 				text: qsTrId("charger_network_bms_controlled")
 				secondaryText: CommonWords.yesOrNo(dataValue)
@@ -84,15 +177,9 @@ Page {
 				//: Reset the BMS control
 				//% "Reset"
 				button.text: qsTrId("charger_network_bms_control_reset")
-				visible: bmsPresent.value === 1
+				visible: bmsControlled.dataValue === 1
 				onClicked: {
-					bmsPresent.setValue(0)
-				}
-
-				DataPoint {
-					id: bmsPresent
-
-					source: root.solarCharger.serviceUid + "/Settings/BmsPresent"
+					bmsControlled.setDataValue(0)
 				}
 			}
 
@@ -104,6 +191,7 @@ Page {
 				font.pixelSize: Theme.font.size.caption
 				color: Theme.color.font.secondary
 				leftPadding: infoIcon.x + infoIcon.width + infoIcon.x/2
+				visible: bmsControlled.dataValue === 1
 
 				CP.IconImage {
 					id: infoIcon

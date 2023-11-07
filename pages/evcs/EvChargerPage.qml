@@ -127,8 +127,7 @@ Page {
 			}
 
 			ListSpinBox {
-				//% "Charge current"
-				text: qsTrId("evcs_charge_current")
+				text: CommonWords.charge_current
 				suffix: "A"
 				from: 0
 				to: root.evCharger.maxCurrent
