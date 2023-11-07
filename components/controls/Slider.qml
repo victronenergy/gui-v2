@@ -47,8 +47,8 @@ C.Slider {
 	handle: Image {
 		id: handleImg
 
-		x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
-		y: root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry.switch.indicator.shadowOffset
+		x: visible ? root.leftPadding + root.visualPosition * (root.availableWidth - width) : 0
+		y: visible ? root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry.switch.indicator.shadowOffset : 0
 		width: Theme.geometry.switch.indicator.width
 		height: Theme.geometry.switch.indicator.width
 		source: "qrc:/images/switch_indicator.png"

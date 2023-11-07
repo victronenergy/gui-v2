@@ -10,7 +10,6 @@ import "/components/Gauges.js" as Gauges
 Page {
 	id: root
 
-	property bool _sidePanelActive
 	property real _gaugeArcMargin: Theme.geometry.briefPage.edgeGauge.initialize.margin
 	property real _gaugeLabelMargin: Theme.geometry.briefPage.edgeGauge.label.initialize.margin
 	property real _gaugeArcOpacity: 0
@@ -34,7 +33,7 @@ Page {
 	fullScreenWhenIdle: true
 	animationEnabled: root.isCurrentPage && BackendConnection.applicationVisible && !Global.splashScreenVisible
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-	topRightButton: _sidePanelActive
+	topRightButton: sidePanel.active
 			? VenusOS.StatusBar_RightButton_SidePanelActive
 			: VenusOS.StatusBar_RightButton_SidePanelInactive
 
@@ -241,8 +240,10 @@ Page {
 		}
 		width: Theme.geometry.briefPage.sidePanel.width
 		inputsIconSource: root._inputsIconSource
+		animationEnabled: root.animationEnabled && sidePanel.active
 
 		// hidden by default.
+		property bool active: false
 		x: root.width
 		opacity: 0.0
 	}
@@ -252,14 +253,14 @@ Page {
 		enabled: root.isCurrentPage
 
 		function onRightButtonClicked() {
-			root._sidePanelActive = !root._sidePanelActive
+			sidePanel.active = !sidePanel.active
 		}
 	}
 
 	states: [
 		State {
 			name: "initialized"
-			when: !Global.splashScreenVisible && !root._sidePanelActive
+			when: !Global.splashScreenVisible && !sidePanel.active
 			PropertyChanges {
 				target: root
 				_gaugeArcMargin: 0
@@ -271,7 +272,7 @@ Page {
 		State {
 			name: "panelOpen"
 			extend: "initialized"
-			when: root._sidePanelActive
+			when: sidePanel.active
 			PropertyChanges {
 				target: sidePanel
 				x: root.width - sidePanel.width - Theme.geometry.page.content.horizontalMargin
