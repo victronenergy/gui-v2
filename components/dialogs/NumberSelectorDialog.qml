@@ -55,7 +55,9 @@ ModalDialog {
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - 2*Theme.geometry.modalDialog.content.horizontalMargin
 				height: Theme.geometry.timeSelector.spinBox.height
-				indicatorImplicitWidth: Theme.geometry.spinBox.indicator.maximumWidth
+				indicatorImplicitWidth: root.decimals > 0
+						? Theme.geometry.spinBox.indicator.minimumWidth
+						: Theme.geometry.spinBox.indicator.maximumWidth
 				textFromValue: function(value, locale) {
 					return Number(value / root._multiplier()).toLocaleString(locale, 'f', root.decimals) + root.suffix
 				}
