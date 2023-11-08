@@ -47,13 +47,11 @@ QtObject {
 			script: {
 				Global.batteries.system.power = Math.abs(Global.batteries.system.power)
 				Global.batteries.system.current = Math.abs(Global.batteries.system.current)
+				root.chargeTimer.beginCharging()
 			}
 		}
-		NumberAnimation {
-			target: Global.batteries.system
-			property: "stateOfCharge"
-			to: 100
-			duration: 2 * 60 * 1000
+		PauseAnimation {
+			duration: 2 * 60 * 1000 // wait for charge
 		}
 		PauseAnimation {
 			duration: 10 * 1000
@@ -63,13 +61,29 @@ QtObject {
 				// negative value == discharging
 				Global.batteries.system.power *= -1
 				Global.batteries.system.current *= -1
+				root.chargeTimer.beginDischarging()
 			}
 		}
-		NumberAnimation {
-			target: Global.batteries.system
-			property: "stateOfCharge"
-			to: 0
-			duration: 2 * 60 * 1000
+		PauseAnimation {
+			duration: 2 * 60 * 1000 // wait for discharge
+		}
+	}
+
+	// Use a Timer rather than NumberAnimations because otherwise we get
+	// a heap of animated property value updates showing up in the profiler.
+	property Timer chargeTimer: Timer {
+		running: false
+		repeat: true
+		interval: 1000
+		property real stepSize: 1.0 // will take 100 steps to charge to 100% from 0%.
+		function beginCharging() { stepSize = 1.0; start() }
+		function beginDischarging() { stepSize = -1.0; start() }
+		onTriggered: {
+			var newSoc = Global.batteries.system.stateOfCharge + stepSize
+			if (newSoc >= 0 && newSoc <= 100) { Global.batteries.system.stateOfCharge = newSoc }
+			else if (newSoc > 100) { Global.batteries.system.stateOfCharge = 100; stop() }
+			else if (newSoc < 0) { Global.batteries.system.stateOfCharge = 0; stop() }
+			else { stop() }
 		}
 	}
 }
