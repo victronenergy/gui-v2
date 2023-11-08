@@ -11,10 +11,9 @@ Item {
 
 	property var model: [] // contains 12 values that define the shape of our bendy graph
 	property real initialModelValue: 0.0
+	property real offsetFraction
 	property real warningThreshold: Theme.geometry.briefPage.sidePanel.loadGraph.warningThreshold
 	property int dotSize: Theme.geometry.briefPage.sidePanel.loadGraph.dotSize
-	property int interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-	property bool enableAnimation: false
 	property color belowThresholdFillColor1: Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor1
 	property color belowThresholdFillColor2: Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor2
 	property color belowThresholdBackgroundColor1: Theme.color.briefPage.background
@@ -42,8 +41,7 @@ Item {
 			anchors.fill: parent
 			model: root.model
 			strokeColor: Theme.color.briefPage.sidePanel.loadGraph.warning.strokeColor
-			interval: root.interval
-			enableAnimation: root.enableAnimation
+			offsetFraction: root.offsetFraction
 			fillGradient: LinearGradient {
 				x1: 0; y1: 0
 				x2: 0; y2: height
@@ -70,8 +68,7 @@ Item {
 			height: root.height + 2*strokeWidth
 			width: parent.width + 2*strokeWidth
 			anchors.bottom: parent.bottom
-			interval: root.interval
-			enableAnimation: root.enableAnimation
+			offsetFraction: root.offsetFraction
 			fillGradient: LinearGradient {
 				x1: 0; y1: 0
 				x2: 0; y2: height

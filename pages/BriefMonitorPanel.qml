@@ -288,8 +288,6 @@ exported power v  0.4 |   /
 				// For a system that sometimes exports power, 0.5 represents 0 power.
 				// For a system that only imports power, 0 represents 0 power.
 				initialModelValue: graphShowsExportPower ? 0.5 : 0.0
-				interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-				enableAnimation: root.animationEnabled
 				warningThreshold: 0.5
 				belowThresholdFillColor1: graphShowsExportPower
 										  ? Theme.color.briefPage.background
@@ -306,11 +304,19 @@ exported power v  0.4 |   /
 				horizontalGradientColor1: Theme.color.briefPage.background
 				horizontalGradientColor2: "transparent"
 
-				Timer {
-					interval: parent.interval
+				SequentialAnimation {
+					loops: Animation.Infinite
 					running: root.animationEnabled
-					repeat: true
-					onTriggered: parent.addNewValue()
+					NumberAnimation {
+						target: gridGraph
+						property: "offsetFraction"
+						from: 0.0
+						to: 1.0
+						duration: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
+					}
+					ScriptAction {
+						script: gridGraph.addNewValue()
+					}
 				}
 			}
 		}
@@ -362,16 +368,20 @@ exported power v  0.4 |   /
 					bottom: loadsQuantityLabel.bottom
 					bottomMargin: loadsQuantityLabel.bottomPadding
 				}
-				interval: loadGraphTimer.interval
-				enableAnimation: root.animationEnabled
 
-				Timer {
-					id: loadGraphTimer
-
-					interval: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
+				SequentialAnimation {
+					loops: Animation.Infinite
 					running: root.animationEnabled
-					repeat: true
-					onTriggered: loadGraph.addValue(loadsPower.valueAsRatio)
+					NumberAnimation {
+						target: loadGraph
+						property: "offsetFraction"
+						from: 0.0
+						to: 1.0
+						duration: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
+					}
+					ScriptAction {
+						script: loadGraph.addValue(loadsPower.valueAsRatio)
+					}
 				}
 			}
 		}
