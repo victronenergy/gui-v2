@@ -44,7 +44,7 @@ Page {
 				dataSource: root.bindPrefix + "/Delay"
 				from: 0
 				to: 100
-				suffix: "%"
+				suffix: "s"
 			}
 		}
 	}

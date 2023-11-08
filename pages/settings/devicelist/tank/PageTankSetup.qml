@@ -20,40 +20,28 @@ Page {
 
 				readonly property var _quantityInfo: Units.getDisplayText(Global.systemSettings.volumeUnit.value)
 
-				function _stepSize() {
-					switch (Global.systemSettings.volumeUnit.value) {
-					case VenusOS.Units_Volume_Liter:
-					case VenusOS.Units_Volume_GallonImperial:
-					case VenusOS.Units_Volume_GallonUS:
-						return 1
-					default:    // Units_Volume_CubicMeter
-						return 0.005
-					}
-				}
-
 				//% "Capacity"
 				text: qsTrId("devicelist_tanksetup_capacity")
 				suffix: _quantityInfo.unit
-				stepSize: _stepSize()
+				stepSize: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_CubicMeter
+						  ? 5   // Cubic meters (this becomes 0.005 when ListSpinBox adjusts it for decimals)
+						  : 1   // Liters, Gallons
 				decimals: Units.defaultUnitPrecision(Global.systemSettings.volumeUnit.value)
 				from: Units.convertVolumeForUnit(capacity.min, Global.systemSettings.volumeUnit.value)
 				to: Units.convertVolumeForUnit(capacity.max, Global.systemSettings.volumeUnit.value)
+				value: capacity.value === undefined ? 0
+					 : Units.convertVolumeForUnit(capacity.value, Global.systemSettings.volumeUnit.value)
 
 				onSelectorAccepted: function(newValue) {
-					capacity.value = Units.convertVolumeForUnit(newValue, VenusOS.Units_Volume_CubicMeter)
+					capacity.setValue(Units.convertVolumeForUnit(newValue, VenusOS.Units_Volume_CubicMeter))
 				}
 
 				DataPoint {
 					id: capacity
 
 					source: root.bindPrefix + "/Capacity"
-					onValueChanged: {
-						if (valid) {
-							capacitySpinBox.value = Units.convertVolumeForUnit(value, Global.systemSettings.volumeUnit.value)
-						} else {
-							capacitySpinBox.value = 0
-						}
-					}
+					hasMin: true
+					hasMax: true
 				}
 			}
 
@@ -91,6 +79,7 @@ Page {
 				visible: dataSeen && (!standard.dataValid || standard.currentValue === 2)
 				dataSource: root.bindPrefix + "/RawValueEmpty"
 				suffix: rawUnit.value || ""
+				decimals: 1
 				stepSize: 0.1
 			}
 
@@ -100,6 +89,7 @@ Page {
 				visible: dataSeen && (!standard.dataValid || standard.currentValue === 2)
 				dataSource: root.bindPrefix + "/RawValueFull"
 				suffix: rawUnit.value || ""
+				decimals: 1
 				stepSize: 0.1
 			}
 
