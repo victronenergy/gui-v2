@@ -58,7 +58,7 @@ QtObject {
 				}
 			}
 
-			serviceUid: "com.victronenergy.pvinverters.ttyUSB" + deviceInstance
+			serviceUid: "com.victronenergy.pvinverter.ttyUSB" + deviceInstance
 			name: "PV Inverter " + deviceInstance
 		}
 	}

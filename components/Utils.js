@@ -176,7 +176,11 @@ function sumRealNumbers(a, b) {
 			: a + b
 }
 
-function jsonSettingsToModel(json) {
+function jsonSettingsToModel(json, expectNumber) {
+	if (json === undefined) {
+		return []
+	}
+
 	let jsonObject
 	if (typeof(json) === "string") {
 		try {
@@ -190,11 +194,15 @@ function jsonSettingsToModel(json) {
 	}
 
 	let keys = Object.keys(jsonObject)
-	let modelArray = []
-	for (let i = 0; i < keys.length; i++) {
-		modelArray.push({ display: jsonObject[keys[i]], value: keys[i] })
-	}
-	return modelArray
+	return keys.map(function(value) {
+		let formatted = value
+		if (expectNumber) {
+			try {
+				formatted = parseInt(value)
+			} catch (e) {}
+		}
+		return { display: jsonObject[value], value: formatted }
+	})
 }
 
 function toFloat(value, precision) {
@@ -255,25 +263,6 @@ function qtyToString(qty, unitSingle, unitMultiple) {
 		return "1 %1".arg(unitSingle)
 	} else {
 		return "---"
-	}
-}
-
-function qsTrIdServiceType(serviceType) {
-	switch (serviceType) {
-	case "grid":
-		//% "Grid meter"
-		return qsTrId("settings_grid_meter")
-	case "pvinverter":
-		//% "PV inverter"
-		return qsTrId("settings_pv_inverter")
-	case "genset":
-		//% "Generator"
-		return qsTrId("settings_generator")
-	case "acload":
-		//% "AC load"
-		return qsTrId("settings_ac_load")
-	default:
-		return '--'
 	}
 }
 

@@ -213,8 +213,7 @@ Page {
 				//% "Clear History"
 				text: qsTrId("batteryhistory_clear_history")
 				secondaryText: enabled
-						 //% "Press to clear"
-					   ? qsTrId("batteryhistory_press_to_clear")
+					   ? CommonWords.press_to_clear
 						 //% "Clearing"
 					   : qsTrId("batteryhistory_clearing")
 

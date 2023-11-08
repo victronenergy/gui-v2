@@ -22,10 +22,7 @@ Page {
 			return null
 		}
 
-		if (serviceType === "vebus"
-				// vebus devices may also show up as AC inputs, so ensure they do not appear twice
-				// in the list.
-				&& sourceModel !== Global.acInputs.model) {
+		if (serviceType === "vebus") {
 			summary = [ Global.system.systemStateToText(device.state) ]
 
 		} else if (serviceType === "multi") {
@@ -51,11 +48,6 @@ Page {
 						  //% "Error: %1"
 						: qsTrId("devicelist_solarcharger_error").arg(Global.solarChargers.chargerErrorToText(device.errorCode))
 			]
-
-		} else if (serviceType === "pvinverter") {
-			url = "/pages/solar/PvInverterPage.qml"
-			params = { "pvInverter" : device }
-			summary = [ Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power) ]
 
 		} else if (serviceType === "charger") {
 			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
@@ -83,18 +75,18 @@ Page {
 				summary = [ device.status >= 0 ? Global.tanks.statusToText(device.status) : "--" ]
 			}
 
-		} else if (serviceType === "grid"
+		} else if (serviceType === "pvinverter"
+				   || serviceType === "grid"
 				   || serviceType === "genset"
 				   || serviceType === "acload") {
-			if (device.connected) {
-				const acInputPowerText = Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power)
-				if (device.gensetStatusCode >= 0) {
-					summary = [ Global.acInputs.gensetStatusCodeToText(device.gensetStatusCode), acInputPowerText ]
-				} else {
-					summary = [ acInputPowerText ]
-				}
+			url = "/pages/settings/devicelist/ac-in/PageAcIn.qml"
+			params = { "bindPrefix": device.serviceUid, "title": device.name }
+
+			const acInputPowerText = Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power)
+			if (device.gensetStatusCode >= 0) {
+				summary = [ Global.acInputs.gensetStatusCodeToText(device.gensetStatusCode), acInputPowerText ]
 			} else {
-				summary = [ CommonWords.not_connected ]
+				summary = [ acInputPowerText ]
 			}
 
 		} else if (serviceType === "motordrive") {
@@ -166,7 +158,6 @@ Page {
 			id: aggregateModel
 
 			sourceModels: [
-				Global.acInputs.model,
 				Global.batteries.model,
 				Global.chargers.model,
 				Global.dcInputs.model,
@@ -182,6 +173,14 @@ Page {
 				Global.solarChargers.model,
 				Global.veBusDevices.model,
 				Global.unsupportedDevices.model,
+
+				// For AC inputs, add service-specific models instead of Global.acInputs.model,
+				// because the latter looks for devices under com.victronenergy.system/Ac/In, which
+				// only has one device per type (one grid, one genset etc) instead of all devices.
+				gridDeviceModel,
+				gensetDeviceModel,
+				acLoadDeviceModel,
+
 			].concat(Global.tanks.allTankModels)
 		}
 
@@ -230,6 +229,21 @@ Page {
 				}
 			}
 		}
+	}
+
+	AcInDeviceModel {
+		id: gridDeviceModel
+		serviceType: "grid"
+	}
+
+	AcInDeviceModel {
+		id: gensetDeviceModel
+		serviceType: "genset"
+	}
+
+	AcInDeviceModel {
+		id: acLoadDeviceModel
+		serviceType: "acload"
 	}
 }
 

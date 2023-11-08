@@ -17,11 +17,19 @@ QtObject {
 	//% "AC Input 2"
 	readonly property string ac_input_2: qsTrId("common_words_ac_input_2")
 
+	//: The role for an AC input (grid meter, genset, acload, etc.)
+	//% "Role"
+	readonly property string ac_input_role: qsTrId("common_words_ac_input_role")
+
 	//% "AC load"
 	readonly property string ac_load: qsTrId("common_words_ac_load")
 
 	//% "AC Output"
 	readonly property string ac_output: qsTrId("common_words_ac_output")
+
+	//: %1 = phase number (1-3)
+	//% "AC Phase L%1"
+	readonly property string ac_phase_x: qsTrId("common_words_ac_phase_x")
 
 	//: Status is 'active'
 	//% "Active"
@@ -52,9 +60,13 @@ QtObject {
 	//% "Charging"
 	readonly property string charging: qsTrId("common_words_charging")
 
+	//: Action to clear an error state
+	//% "Clear error"
+	readonly property string clear_error_action: qsTrId("common_words_clear_error_action")
+
 	//: Status is 'closed'
 	//% "Closed"
-	readonly property string closed_status: qsTrId("common_words_closed_status");
+	readonly property string closed_status: qsTrId("common_words_closed_status")
 
 	//% "Connected"
 	readonly property string connected: qsTrId("common_words_connected");
@@ -62,6 +74,9 @@ QtObject {
 	//: Electric current, as measured in Amps
 	//% "Current"
 	readonly property string current_amps: qsTrId("common_words_current_amps")
+
+	//% "Current transformers"
+	readonly property string current_transformers: qsTrId("common_words_current_transformers")
 
 	//% "Custom name"
 	readonly property string custom_name: qsTrId("common_words_custom_name")
@@ -89,11 +104,17 @@ QtObject {
 	//% "Error"
 	readonly property string error: qsTrId("common_words_error")
 
+	//% "Error code"
+	readonly property string error_code: qsTrId("common_words_error_code")
+
 	//% "Firmware version"
 	readonly property string firmware_version: qsTrId("common_words_firmware_version")
 
 	//% "Generator"
 	readonly property string generator: qsTrId("common_words_generator")
+
+	//% "Grid meter"
+	readonly property string grid_meter: qsTrId("common_words_grid_meter")
 
 	//% "High battery temperature"
 	readonly property string high_battery_temperature: qsTrId("common_words_high_battery_temperature")
@@ -204,11 +225,17 @@ QtObject {
 	//% "Position"
 	readonly property string position_ac: qsTrId("common_words_position_ac")
 
+	//% "Press to clear"
+	readonly property string press_to_clear: qsTrId("common_words_press_to_clear")
+
 	//% "Press to reset"
 	readonly property string press_to_reset: qsTrId("common_words_press_to_reset")
 
 	//% "Press to scan"
 	readonly property string press_to_scan: qsTrId("common_words_press_to_scan")
+
+	//% "PV Inverter"
+	readonly property string pv_inverter: qsTrId("common_words_pv_inverter")
 
 	//: Photovoltaic power (for a solar charger or tracker)
 	//% "PV Power"
@@ -296,6 +323,9 @@ QtObject {
 	//% "Tracker"
 	readonly property string tracker: qsTrId("common_words_tracker")
 
+	//% "Type"
+	readonly property string type: qsTrId("common_words_type")
+
 	//% "Unique Identity Number"
 	readonly property string unique_identity_number: qsTrId("common_words_unique_id_number")
 
@@ -325,6 +355,9 @@ QtObject {
 	//: Solar charger yield for today, in kWh (kilowatt hours)
 	//% "Yield today"
 	readonly property string yield_today: qsTrId("common_words_yield_today")
+
+	//% "Zero feed-in power limit"
+	readonly property string zero_feed_in_power_limit: qsTrId("common_words_zero_feed_in_power_limit")
 
 	function onOrOff(value) {
 		if (value === 0 || value === false) {

@@ -159,6 +159,13 @@ function toKelvin(value, fromUnit) {
 	return value
 }
 
+function convertFromCelsius(celsius, unit) {
+	// TODO support conversion to Kelvin
+	return unit === V.VenusOS.Units_Temperature_Fahrenheit
+			? celsiusToFahrenheit(celsius)
+			: celsius
+}
+
 function convertVolumeForUnit(value_m3, toUnit) {
 	if (value_m3 === undefined) {
 		return NaN

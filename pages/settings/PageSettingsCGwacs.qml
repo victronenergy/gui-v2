@@ -31,16 +31,11 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
-				//% "Role"
-				text: qsTrId("settings_cgwacs_role")
+				text: CommonWords.ac_input_role
 				updateOnClick: false
-				optionModel: [
-					{ display: Utils.qsTrIdServiceType("grid"), value: "grid" },
-					{ display: Utils.qsTrIdServiceType("pvinverter"), value: "pvinverter" },
-					{ display: Utils.qsTrIdServiceType("genset"), value: "genset" },
-					//% "AC meter"
-					{ display: qsTrId("settings_ac_meter"), value: "acload" } // TODO - in the old gui, a service type of 'acload' is translated differently here compared to PageSettingsCGwacsOverview. Confirm with victron that this is what they want.
-				]
+				optionModel: Global.acInputs.roles.map(function(role) {
+					return { display: role.name, value: role.role }
+				})
 				currentIndex: {
 					if (!optionModel || optionModel.length === undefined) {
 						return defaultIndex
@@ -58,16 +53,10 @@ Page {
 				}
 			}
 
-			ListRadioButtonGroup {
+			PvInverterPositionRadioButtonGroup {
 				id: positions
-				text: CommonWords.position_ac
 				dataSource: root.devicePath + "/Position"
 				visible: root.serviceType === "pvinverter"
-				optionModel: [
-					{ display: CommonWords.ac_input_1, value: VenusOS.PvInverter_Position_ACInput },
-					{ display: CommonWords.ac_input_2, value: VenusOS.PvInverter_Position_ACInput2 },
-					{ display: CommonWords.ac_output, value: VenusOS.PvInverter_Position_Output },
-				]
 			}
 
 			ListRadioButtonGroup {
