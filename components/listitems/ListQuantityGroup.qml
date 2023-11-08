@@ -15,6 +15,5 @@ ListItem {
 		QuantityRepeater {
 			id: repeater
 		}
-
 	]
 }

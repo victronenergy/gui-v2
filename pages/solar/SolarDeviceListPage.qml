@@ -148,8 +148,7 @@ Page {
 				text: chargerMode
 						//% "PV Charger"
 					  ? qsTrId("solardevices_pv_charger")
-						//% "PV Inverter"
-					  : qsTrId("solardevices_pv_inverter")
+					  : CommonWords.pv_inverter
 				font.pixelSize: Theme.font.size.caption
 				color: Theme.color.solarListPage.header.text
 				elide: Text.ElideRight

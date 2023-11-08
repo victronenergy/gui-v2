@@ -83,28 +83,12 @@ Page {
 				height: Theme.geometry.gradientList.spacing
 			}
 
-			ListRadioButtonGroup {
-				text: CommonWords.position_ac
-				optionModel: [
-					{
-						display: CommonWords.ac_input_1,
-						value: VenusOS.PvInverter_Position_ACInput
-					},
-					{
-						display: CommonWords.ac_input_2,
-						value: VenusOS.PvInverter_Position_ACInput2
-					},
-					{
-						display: CommonWords.ac_output,
-						value: VenusOS.PvInverter_Position_ACOutput
-					}
-				]
+			PvInverterPositionRadioButtonGroup {
 				dataSource: root.pvInverter.serviceUid + "/Position"
 			}
 
 			ListTextItem {
-				//% "Zero feed-in power limit"
-				text: qsTrId("pvinverters_power_limit")
+				text: CommonWords.zero_feed_in_power_limit
 				dataSource: root.pvInverter.serviceUid + "/Ac/PowerLimit"
 				visible: dataValid
 			}
