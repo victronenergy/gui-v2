@@ -164,7 +164,7 @@ Page {
 						if (value === undefined) {
 							return
 						}
-						let options = bmsOptions.optionModel.slice(0, defaultOptionModel.length)
+						let options = bmsOptions.optionModel.slice(0, bmsOptions.defaultOptionModel.length)
 						const bmses = value
 						for (let i = 0; i < bmses.length; i++) {
 							options.push({
