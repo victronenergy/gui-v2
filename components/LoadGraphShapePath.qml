@@ -10,17 +10,16 @@ Shape {
 	id: root
 
 	property var model: []
-	readonly property int segWidth: width / (model.length - 2)
+	readonly property int segWidth: width / Math.max((model.length - 2), 1)
 	readonly property int rc1x: 0.5*segWidth
 	readonly property int rc2x: 0.5*segWidth
-	property bool enableAnimation: false
-	property real offset: 0.0
+	property real offsetFraction: 0.0
+	property real offset: segWidth * offsetFraction
 	property alias strokeColor: shapePath.strokeColor
 	property alias strokeWidth: shapePath.strokeWidth
 	property alias fillGradient: shapePath.fillGradient
-	property alias interval: animation.duration
 
-	function calcY(data) { return (1 - data) * height }
+	function calcY(data) { return (1 - (data || 0)) * height }
 
 	smooth: true
 
@@ -29,15 +28,6 @@ Shape {
 	layer.smooth: true
 	layer.textureSize: Qt.size(root.width*2, root.height*2)
 
-	NumberAnimation on offset {
-		id: animation
-
-		from: 0
-		to: root.segWidth
-		duration: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
-		loops: Animation.Infinite
-		running: root.enableAnimation
-	}
 	ShapePath {
 		id: shapePath
 
