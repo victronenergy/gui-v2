@@ -11,8 +11,11 @@ Page {
 	id: root
 
 	property string bindPrefix
+	property alias settingsListView: settingsListView
 
 	GradientListView {
+		id: settingsListView
+
 		model: ObjectModel {
 			ListTextItem {
 				//% "Connection"

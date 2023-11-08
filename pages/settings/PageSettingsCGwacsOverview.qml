@@ -14,9 +14,9 @@ Page {
 	}
 
 	function getMenuName(serviceType, l2ServiceType) {
-		let result = Utils.qsTrIdServiceType(serviceType)
+		let result = Global.acInputs.roleName(serviceType)
 		if (l2ServiceType !== undefined && l2ServiceType.length > 0) {
-			result += " + " + Utils.qsTrIdServiceType(l2ServiceType)
+			result += " + " + Global.acInputs.roleName(l2ServiceType)
 		}
 		return result
 	}

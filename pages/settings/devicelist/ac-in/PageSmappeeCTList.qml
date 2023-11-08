@@ -1,0 +1,69 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+*/
+
+import QtQuick
+import Victron.VenusOS
+import Victron.Veutil
+import "/components/Utils.js" as Utils
+
+Page {
+	id: root
+
+	property string bindPrefix
+
+	title: CommonWords.current_transformers
+
+	GradientListView {
+		model: VeQItemTableModel {
+			uids: [ root.bindPrefix + "/CT" ]
+			flags: VeQItemTableModel.AddChildren
+				   | VeQItemTableModel.AddNonLeaves
+				   | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: ListNavigationItem {
+			id: menu
+
+			readonly property int ctIndex: model.id
+
+			//: %1 = device number, %2 = device type
+			//% "%1: %2"
+			text: qsTrId("smappee_ct_list_type").arg(ctIndex + 1).arg(typeLookup.typeName)
+			secondaryText: phase.value === undefined ? "" : "L%1".arg(phase.value + 1)
+			visible: type.valid
+			onClicked: {
+				Global.pageManager.pushPage(Qt.resolvedUrl("PageSmappeeCTSetup.qml"),
+						{ "bindPrefix": root.bindPrefix, ctIndex: menu.ctIndex })
+			}
+
+			DataPoint {
+				id: type
+				source: model.uid + "/Type"
+			}
+
+			DataPoint {
+				id: phase
+				source: model.uid + "/Phase"
+			}
+
+			DataPoint {
+				id: typeLookup
+
+				property string typeName
+
+				source: type.value === undefined ? "" : root.bindPrefix + "/CTTypes"
+
+				onValueChanged: {
+					if (isNaN(type.value)) {
+						typeName = ""
+						return
+					}
+					const typeModel = Utils.jsonSettingsToModel(value, true)
+					const match = typeModel.find(function(obj) { return obj.value === type.value })
+					typeName = match ? match.display : ""
+				}
+			}
+		}
+	}
+}

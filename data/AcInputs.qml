@@ -20,6 +20,13 @@ QtObject {
 		modelId: "acInputs"
 	}
 
+	readonly property var roles: [
+		{ role: "grid", name: CommonWords.grid_meter },
+		{ role: "pvinverter", name: CommonWords.pv_inverter },
+		{ role: "genset", name: CommonWords.generator },
+		{ role: "acload", name: CommonWords.ac_load },
+	]
+
 	function addInput(input) {
 		model.addDevice(input)
 	}
@@ -80,6 +87,11 @@ QtObject {
 		default:
 			return ""
 		}
+	}
+
+	function roleName(role) {
+		const match = roles.find(function(r) { return r.role === role })
+		return match ? match.name : "--"
 	}
 
 	Component.onCompleted: Global.acInputs = root

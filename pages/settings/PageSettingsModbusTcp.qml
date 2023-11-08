@@ -43,10 +43,8 @@ Page {
 			}
 
 			ListButton {
-				//% "Clear error"
-				text: qsTrId("settings_modbus_clear_error")
-				//% "Press to clear"
-				button.text: qsTrId("settings_modbus_press_to_clear")
+				text: CommonWords.clear_error_action
+				secondaryText: CommonWords.press_to_clear
 				visible: enableModbusTcp.checked && lastError.valid
 				onClicked: {
 					lastError.setValue(undefined)
