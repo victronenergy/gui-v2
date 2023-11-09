@@ -34,7 +34,7 @@
     "geometry.listItem.content.verticalMargin": 20,
     "geometry.listItem.content.spacing": 17,
     "geometry.listItem.separator.width": 1,
-    "geometry.listItem.slider.width": 680,
+    "geometry.listItem.slider.width": 630,
     "geometry.listItem.slider.button.size": 24,
     "geometry.listItem.slider.spacing": 14,
     "geometry.listItem.slider.stepDivsion": 10,
