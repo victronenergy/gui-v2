@@ -99,7 +99,7 @@
 +        return fetch(cdnUri); // returns response
 +    }
 +
-+    function loadEmscriptenModule(applicationName, ApiService, stateParams, guiHash, isRanRemotelly) {
++    function loadEmscriptenModule(applicationName, ApiService, stateParams, guiHash, isRanRemotely) {
  
          // Loading in qtloader.js goes through four steps:
          // 1) Check prerequisites
@@ -115,7 +115,7 @@
 -            wasmModule = module;
 -        });
 +
-+        if(isRanRemotelly){
++        if(isRanRemotely){
 +            wasmModulePromise = fetchThenCompileWasmWithCredentials(ApiService, stateParams, guiHash).then(function (module) {
 +                wasmModule = module;
 +            });
@@ -129,7 +129,7 @@
          // Wait for all resources ready
          Promise.all([emscriptenModuleSourcePromise, wasmModulePromise]).then(function(){
 -            completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule);
-+            completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule, isRanRemotelly);
++            completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule, isRanRemotely);
          }).catch(function(error) {
              handleError(error);
              // An error here is fatal, abort
@@ -138,9 +138,9 @@
      }
  
 -    function completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule) {
-+    function completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule, isRanRemotelly) {
++    function completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule, isRanRemotely) {
  
-+        if(isRanRemotelly){
++        if(isRanRemotely){
 +            self.moduleConfig.arguments = config.arguments;
 +        }
 +        else{
