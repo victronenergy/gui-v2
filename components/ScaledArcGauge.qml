@@ -12,6 +12,7 @@ Item {
 
 	property real value
 	property int valueType: VenusOS.Gauges_ValueType_FallingPercentage
+	property alias animationEnabled: arc.animationEnabled
 	property alias startAngle: arc.startAngle
 	property alias endAngle: arc.endAngle
 	property alias radius: arc.radius
