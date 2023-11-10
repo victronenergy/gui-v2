@@ -164,6 +164,7 @@ Page {
 			opacity: root._gaugeArcOpacity
 			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
 			label.opacity: root._gaugeLabelOpacity
+			animationEnabled: root.animationEnabled
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left lower")
 	}
