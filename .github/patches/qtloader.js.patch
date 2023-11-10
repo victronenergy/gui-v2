@@ -1,0 +1,180 @@
+--- /opt/Qt/6.5.2/wasm_singlethread/plugins/platforms/qtloader.js	2023-11-03 11:14:28.443228026 +0100
++++ qtloader.js	2023-11-08 13:12:28.876147175 +0100
+@@ -126,7 +126,7 @@
+     return new _QtLoader(config);
+ }
+ 
+-function _QtLoader(config)
++export function _QtLoader(config)
+ {
+     const self = this;
+ 
+@@ -283,6 +283,10 @@
+             self.loaderSubState = "Compiling";
+             setStatus("Loading") // trigger loaderSubState update
+             return WebAssembly.compile(data);
++        }).catch((err) =>{
++            console.log(err);
++            self.error = "Error: Could not compile WebAssembly";
++            setStatus("Error");
+         });
+     }
+ 
+@@ -304,7 +308,81 @@
+         });
+     }
+ 
+-    function loadEmscriptenModule(applicationName) {
++    function fetchThenCompileWasmWithCredentials(ApiService, stateParams, guiHash) {
++
++  
++        // get the hash from the installation
++        // fetchFromCdn
++        // https://updates.victronenergy.com/venus-gui/<hash>.wasm
++
++        // refactor so we use try catch everywhere
++
++        return fetchBinaryFromCDN(guiHash).then((wasmFromCdn) => {
++            console.log(wasmFromCdn);
++
++            if(wasmFromCdn.status == 200){
++                self.loaderSubState = "Downloading WASM file from CDN";
++                if (typeof WebAssembly.compileStreaming !== "undefined") {
++                    setStatus("Loading");
++                    return WebAssembly.compileStreaming(wasmFromCdn).catch(function(error) {
++                        // compileStreaming may/will fail if the server does not set the correct
++                        // mime type (application/wasm) for the wasm file. Fall back to fetch,
++                        // then compile in this case.
++                        return fetchThenCompileWasm(wasmFromCdn);
++                    });
++                } else {
++                    // Fall back to fetch, then compile if compileStreaming is not supported
++                    return fetchThenCompileWasm(wasmFromCdn);
++                }
++            }
++            else{
++                throw new Error('Error fetching from CDN');
++            }
++            
++        }).catch(async (err) =>{
++            console.log(err);
++            //failed so we need to fetch from proxy
++            self.loaderSubState = "Downloading WASM file from PROXY";
++            setStatus("Loading");
++            // get nodeRed token and according proxy
++            const nodeRedResponse = await ApiService.call('/installations/' + stateParams.id + '/proxy-relay/nodered').catch(err => { return null; });
++
++            if(!nodeRedResponse || !nodeRedResponse.data){
++                return null;
++            }
++            const nodeRedToken = nodeRedResponse.data.token;
++            const nodeRedProxy = nodeRedResponse.data.proxy_relay;
++            const wasmBinaryUri = 'https://' + nodeRedProxy.replace('*', stateParams.id + '-gui') + '/proxyauthorize?proxytoken=' + nodeRedToken + "&next=/gui-beta/venus-gui-v2.wasm";
++
++            return fetch(wasmBinaryUri, {credentials: 'include'}).then(function(response) {
++                if (typeof WebAssembly.compileStreaming !== "undefined") {
++                    self.loaderSubState = "Compiling";
++                    setStatus("Loading");
++                    return WebAssembly.compileStreaming(response).catch(function(error) {
++                        // compileStreaming may/will fail if the server does not set the correct
++                        // mime type (application/wasm) for the wasm file. Fall back to fetch,
++                        // then compile in this case.
++                        return fetchThenCompileWasm(response);
++                    });
++                } else {
++                    // Fall back to fetch, then compile if compileStreaming is not supported
++                    return fetchThenCompileWasm(response);
++                }
++            }).catch((err)=>{
++                console.log(err, 'could not fetch');
++                self.error = "Error: Could not fetch WebAssembly";
++                setStatus("Error");
++                return null;
++            })
++        });
++    }
++
++    function fetchBinaryFromCDN(hash){
++        const cdnUri = `https://updates.victronenergy.com/venus-gui/${hash}/venus-gui-v2.wasm`
++        return fetch(cdnUri); // returns response
++    }
++
++    function loadEmscriptenModule(applicationName, ApiService, stateParams, guiHash, isRanRemotely) {
+ 
+         // Loading in qtloader.js goes through four steps:
+         // 1) Check prerequisites
+@@ -334,15 +412,24 @@
+             emscriptenModuleSource = source
+         });
+ 
+-        // Fetch and compile wasm module
++
++        var wasmModulePromise = undefined;
+         var wasmModule = undefined;
+-        var wasmModulePromise = fetchCompileWasm(applicationName + ".wasm").then(function (module) {
+-            wasmModule = module;
+-        });
++
++        if(isRanRemotely){
++            wasmModulePromise = fetchThenCompileWasmWithCredentials(ApiService, stateParams, guiHash).then(function (module) {
++                wasmModule = module;
++            });
++        }
++        else{
++            wasmModulePromise = fetchCompileWasm(applicationName + ".wasm").then(function (module) { 
++                wasmModule = module;
++            })
++        }
+ 
+         // Wait for all resources ready
+         Promise.all([emscriptenModuleSourcePromise, wasmModulePromise]).then(function(){
+-            completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule);
++            completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule, isRanRemotely);
+         }).catch(function(error) {
+             handleError(error);
+             // An error here is fatal, abort
+@@ -350,11 +437,18 @@
+         });
+     }
+ 
+-    function completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule) {
++    function completeLoadEmscriptenModule(applicationName, emscriptenModuleSource, wasmModule, isRanRemotely) {
+ 
++        if(isRanRemotely){
++            self.moduleConfig.arguments = config.arguments;
++        }
++        else{
++            self.moduleConfig.arguments = ['--mqtt', 'ws://' + document.location.host + ':9001/'];
++        }
+         // The wasm binary has been compiled into a module during resource download,
+         // and is ready to be instantiated. Define the instantiateWasm callback which
+         // emscripten will call to create the instance.
++
+         self.moduleConfig.instantiateWasm = function(imports, successCallback) {
+             WebAssembly.instantiate(wasmModule, imports).then(function(instance) {
+                 successCallback(instance, wasmModule);
+@@ -455,13 +549,15 @@
+         publicAPI.exitText = undefined;
+         publicAPI.crashed = false;
+ 
++        eval(emscriptenModuleSource)
++        
+         // Load the Emscripten application module. This is done by eval()'ing the
+         // javascript runtime generated by Emscripten, and then calling
+         // createQtAppInstance(), which was added to the global scope.
+-        eval(emscriptenModuleSource);
++     
+         createQtAppInstance(self.moduleConfig).then(function(module) {
+             self.module = module;
+-        });
++        })
+     }
+ 
+     function setErrorContent() {
+@@ -599,4 +695,4 @@
+     setStatus("Created");
+ 
+     return publicAPI;
+-}
++}
+\ No newline at end of file
