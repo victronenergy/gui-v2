@@ -12,7 +12,7 @@ Item {
 
 	property alias alignment: quantityLabel.alignment
 	property alias label: quantityLabel
-
+	property bool animationEnabled
 	readonly property int _maxAngle: alignment & Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.maxAngle : Theme.geometry.briefPage.smallEdgeGauge.maxAngle
 
 	implicitHeight: alignment & Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.height : Theme.geometry.briefPage.smallEdgeGauge.height
@@ -23,6 +23,7 @@ Item {
 		model: powerSampler.sampledAverages.length + 1
 
 		delegate: ScaledArcGauge {
+			animationEnabled: root.animationEnabled
 			width: Theme.geometry.briefPage.edgeGauge.width
 			x: index*strokeWidth
 			opacity: 1.0 - index * 0.3
