@@ -339,6 +339,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "AsymmetricRoundedRectangle");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ButtonControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "ButtonControlValue");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CheapProgressArc.qml")),
+		"Victron.VenusOS", 2, 0, "CheapProgressArc");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularMultiGauge.qml")),
 		"Victron.VenusOS", 2, 0, "CircularMultiGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/CircularSingleGauge.qml")),

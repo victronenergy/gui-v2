@@ -6,8 +6,13 @@ import QtQuick
 import QtQuick.Shapes
 import Victron.VenusOS
 
-Shape {
+Item {
 	id: control
+
+	property real arcX
+	property real arcY
+	property real arcWidth
+	property real arcHeight
 
 	property real value // 0 - 100
 	property real radius
@@ -23,25 +28,34 @@ Shape {
 
 	property real transitionAngle: startAngle + ((endAngle - startAngle) * Math.min(Math.max((isNaN(control.value) ? 0 : control.value), 0.0), 100.0) / 100.0)
 
-	Arc {
-		id: remainder
+	Shape {
+		// The arc shape bounds are defined by the radius of the curve, not the parent bounds.
+		// Thus, it will likely be very large.  Don't enable a layer on it.
+		width: control.arcWidth
+		height: control.arcHeight
+		x: control.arcX
+		y: control.arcY
 
-		radius: control.radius
-		direction: control.direction
-		strokeWidth: control.strokeWidth
-		strokeColor: Theme.color.darkOk
-		fillColor: control.fillColor
-	}
+		Arc {
+			id: remainder
 
-	Arc {
-		id: progress
+			radius: control.radius
+			direction: control.direction
+			strokeWidth: control.strokeWidth
+			strokeColor: Theme.color.darkOk
+			fillColor: control.fillColor
+		}
 
-		radius: control.radius
-		startAngle: remainder.startAngle
-		endAngle: control.transitionAngle
-		direction: control.direction
-		strokeWidth: control.strokeWidth
-		strokeColor: Theme.color.ok
-		fillColor: control.fillColor
+		Arc {
+			id: progress
+
+			radius: control.radius
+			startAngle: remainder.startAngle
+			endAngle: control.transitionAngle
+			direction: control.direction
+			strokeWidth: control.strokeWidth
+			strokeColor: Theme.color.ok
+			fillColor: control.fillColor
+		}
 	}
 }

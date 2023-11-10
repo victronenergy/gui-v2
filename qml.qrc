@@ -12,6 +12,7 @@
         <file>components/ArcGaugeQuantityLabel.qml</file>
         <file>components/AsymmetricRoundedRectangle.qml</file>
         <file>components/ButtonControlValue.qml</file>
+        <file>components/CheapProgressArc.qml</file>
         <file>components/CircularMultiGauge.qml</file>
         <file>components/CircularSingleGauge.qml</file>
         <file>components/CommonWords.qml</file>

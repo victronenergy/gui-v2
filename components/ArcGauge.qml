@@ -34,15 +34,16 @@ Item {
 		layer.smooth: true
 		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
 
-		ProgressArc {
+		CheapProgressArc {
 			id: arc
 
 			readonly property int status: Gauges.getValueStatus(gauge.value, gauge.valueType)
 
-			width: radius*2
-			height: width
-			x: arcX !== undefined ? arcX : (gauge.alignment & Qt.AlignRight ? (gauge.width - 2*radius) : 0)
-			y: arcY !== undefined ? arcY : ((gauge.height - height) / 2)
+			anchors.fill: parent
+			arcWidth: radius*2
+			arcHeight: arcWidth
+			arcX: gauge.arcX !== undefined ? gauge.arcX : (gauge.alignment & Qt.AlignRight ? (gauge.width - arc.arcWidth) : 0)
+			arcY: gauge.arcY !== undefined ? gauge.arcY : ((gauge.height - arc.arcHeight) / 2)
 			progressColor: Theme.statusColorValue(status)
 			remainderColor: Theme.statusColorValue(status, true)
 		}

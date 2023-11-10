@@ -26,7 +26,9 @@ ArcGauge {
 	radius: Theme.geometry.briefPage.edgeGauge.radius
 	useLargeArc: false
 	strokeWidth: Theme.geometry.arc.strokeWidth
-	arcY: alignment & Qt.AlignTop ? _arcOffset : alignment & Qt.AlignVCenter ? undefined : _arcOffset - _maxArcHeight
+	arcY: alignment & Qt.AlignTop ? _arcOffset
+		: alignment & Qt.AlignVCenter ? undefined
+		: _arcOffset - _maxArcHeight
 
 	ArcGaugeQuantityLabel {
 		id: quantityLabel

@@ -23,7 +23,7 @@ Item {
 		model: powerSampler.sampledAverages.length + 1
 
 		delegate: ScaledArcGauge {
-			animationEnabled: root.animationEnabled
+			animationEnabled: false // never animate the solar gauge.  It's too expensive.
 			width: Theme.geometry.briefPage.edgeGauge.width
 			x: index*strokeWidth
 			opacity: 1.0 - index * 0.3
