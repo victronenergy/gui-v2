@@ -9,7 +9,10 @@ import Victron.Veutil
 Device {
 	id: input
 
-	property int source: VenusOS.DcInputs_InputType_DcGenerator
+	readonly property int inputType: Global.dcInputs.inputType(serviceType, monitorMode)
+	readonly property string serviceType: BackendConnection.type === BackendConnection.MqttSource
+				? serviceUid.split("/")[1] || ""
+				: serviceUid.split(".")[2] || ""
 
 	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
 	readonly property real current: _current.value === undefined ? NaN : _current.value
@@ -18,16 +21,6 @@ Device {
 	readonly property int monitorMode: _monitorMode.value === undefined ? -1 : _monitorMode.value
 
 	property bool _completed
-
-	readonly property var allMonitorModes: ({
-		"-1": VenusOS.DcInputs_InputType_DcGenerator,
-		// -2 AC charger
-		// -3 DC charger
-		// -4 Water generator
-		// -7 Shaft generator
-		// -8 Wind charger
-		"-8": VenusOS.DcInputs_InputType_Wind,
-	})
 
 	readonly property VeQuickItem _voltage: VeQuickItem {
 		uid: input.serviceUid + "/Dc/0/Voltage"

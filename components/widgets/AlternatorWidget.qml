@@ -8,8 +8,6 @@ import Victron.VenusOS
 DcInputWidget {
 	id: root
 
-	//% "Alternator"
-	title: qsTrId("overview_widget_alternator_title")
 	icon.source: "qrc:/images/alternator.svg"
 	type: VenusOS.OverviewWidget_Type_Alternator
 }

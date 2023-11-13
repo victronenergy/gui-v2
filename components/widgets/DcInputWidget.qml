@@ -10,5 +10,7 @@ OverviewWidget {
 
 	property var input
 
+	title: input ? Global.dcInputs.inputTypeToText(Global.dcInputs.inputType(input.serviceType, input.monitorMode)) : ""
 	quantityLabel.dataObject: input
+	icon.source: "qrc:/images/icon_dc_24.svg"
 }

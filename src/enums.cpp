@@ -37,8 +37,6 @@ QString Enums::acInputIcon(AcInputs_InputType type)
 QString Enums::dcInputIcon(DcInputs_InputType type)
 {
 	switch (type) {
-	case DcInputs_InputType_Unknown:
-		return "";
 	case DcInputs_InputType_Alternator:
 		return "qrc:/images/alternator.svg";
 	case DcInputs_InputType_DcGenerator:
@@ -46,9 +44,8 @@ QString Enums::dcInputIcon(DcInputs_InputType type)
 	case DcInputs_InputType_Wind:
 		return "qrc:/images/wind.svg";
 	default:
-		break;
+		return "qrc:/images/icon_dc_24.svg";
 	}
-	return QString();
 }
 
 }
