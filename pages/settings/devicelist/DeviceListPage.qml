@@ -129,18 +129,11 @@ Page {
 		} else if (serviceType === "fuelcell"
 				   || serviceType === "dcsource"
 				   || serviceType === "dcload"
-				   || serviceType === "dcsystem") {
-			url = "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
-			params = { "title": device.name, "bindPrefix": device.serviceUid, "serviceType": device.serviceType }
-			summary = [
-				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
-				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
-				Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
-			]
-
-		} else if (serviceType === "alternator") {
-			url = "/pages/settings/devicelist/dc-in/PageAlternator.qml"
-			params = { "title": device.name, "bindPrefix": device.serviceUid, "serviceType": device.serviceType }
+				   || serviceType === "dcsystem"
+				   || serviceType === "alternator") {
+			url = serviceType === "alternator" ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
+					: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
+			params = { "title": device.name, "bindPrefix": device.serviceUid, "serviceType": serviceType }
 			summary = [
 				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
 				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),

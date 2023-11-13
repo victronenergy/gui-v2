@@ -14,6 +14,7 @@ OverviewWidget {
 	rightPadding: sideGauge.visible ? Theme.geometry.overviewPage.widget.sideGauge.margins : 0
 	quantityLabel.dataObject: input && input.connected ? input : null
 	extraContent.children: phaseModel && phaseModel.count > 1 ? phaseDisplay : []
+	enabled: true
 
 	VerticalGauge {
 		id: sideGauge
@@ -57,4 +58,14 @@ OverviewWidget {
 			model: root.phaseModel && root.phaseModel.count > 1 ? root.phaseModel : null
 		}
 	]
+
+	MouseArea {
+		anchors.fill: parent
+		onClicked: {
+			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
+				"title": root.input.name,
+				"bindPrefix": root.input.serviceUid
+			})
+		}
+	}
 }
