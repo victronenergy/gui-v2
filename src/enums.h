@@ -105,6 +105,9 @@ public:
 		OverviewWidget_Type_AcGenerator,
 		OverviewWidget_Type_DcGenerator,
 		OverviewWidget_Type_Alternator,
+		OverviewWidget_Type_FuelCell,
+		OverviewWidget_Type_DcLoad,
+		OverviewWidget_Type_DcSystem,
 		OverviewWidget_Type_Wind,
 		OverviewWidget_Type_Solar,
 		OverviewWidget_Type_VeBusDevice,
@@ -149,9 +152,15 @@ public:
 	Q_ENUM(AcInputs_InputType)
 
 	enum DcInputs_InputType {
-		DcInputs_InputType_Unknown = 0,
+		DcInputs_InputType_AcCharger,
 		DcInputs_InputType_Alternator,
+		DcInputs_InputType_DcCharger,
 		DcInputs_InputType_DcGenerator,
+		DcInputs_InputType_DcLoad,
+		DcInputs_InputType_DcSystem,
+		DcInputs_InputType_FuelCell,
+		DcInputs_InputType_ShaftGenerator,
+		DcInputs_InputType_WaterGenerator,
 		DcInputs_InputType_Wind
 	};
 	Q_ENUM(DcInputs_InputType)

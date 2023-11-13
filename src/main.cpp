@@ -549,6 +549,8 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "AcGeneratorWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/DcGeneratorWidget.qml")),
 		"Victron.VenusOS", 2, 0, "DcGeneratorWidget");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/DcInputWidget.qml")),
+		"Victron.VenusOS", 2, 0, "DcInputWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/GridWidget.qml")),
 		"Victron.VenusOS", 2, 0, "GridWidget");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/widgets/ShoreWidget.qml")),
