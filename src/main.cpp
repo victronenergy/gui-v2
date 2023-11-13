@@ -521,8 +521,16 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "FirmwareCheckListButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/Led.qml")),
 		"Victron.VenusOS", 2, 0, "Led");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListAlarmState.qml")),
+		"Victron.VenusOS", 2, 0, "ListAlarmState");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListClearHistoryButton.qml")),
+		"Victron.VenusOS", 2, 0, "ListClearHistoryButton");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListDvccSwitch.qml")),
 		"Victron.VenusOS", 2, 0, "ListDvccSwitch");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListRelayState.qml")),
+		"Victron.VenusOS", 2, 0, "ListRelayState");
+	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListResetHistoryLabel.qml")),
+		"Victron.VenusOS", 2, 0, "ListResetHistoryLabel");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/ListFirmwareVersionItem.qml")),
 		"Victron.VenusOS", 2, 0, "ListFirmwareVersionItem");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/settings/MountStateListButton.qml")),

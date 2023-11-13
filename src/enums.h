@@ -480,15 +480,15 @@ public:
 	};
 	Q_ENUM(SolarCharger_State)
 
-	enum SolarCharger_NetworkStatus {
-		SolarCharger_NetworkStatus_Slave,
-		SolarCharger_NetworkStatus_GroupMaster,
-		SolarCharger_NetworkStatus_InstanceMaster,
-		SolarCharger_NetworkStatus_GroupAndInstanceMaster,
-		SolarCharger_NetworkStatus_Standalone,
-		SolarCharger_NetworkStatus_StandaloneAndGroupMaster
+	enum Link_NetworkStatus {
+		Link_NetworkStatus_Slave,
+		Link_NetworkStatus_GroupMaster,
+		Link_NetworkStatus_InstanceMaster,
+		Link_NetworkStatus_GroupAndInstanceMaster,
+		Link_NetworkStatus_Standalone,
+		Link_NetworkStatus_StandaloneAndGroupMaster
 	};
-	Q_ENUM(SolarCharger_NetworkStatus)
+	Q_ENUM(Link_NetworkStatus)
 
 	enum Evcs_Status {
 		Evcs_Status_Disconnected,

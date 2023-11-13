@@ -138,6 +138,12 @@ QtObject {
 	//% "High starter battery voltage"
 	readonly property string high_starter_battery_voltage: qsTrId("common_words_high_starter_battery_voltage")
 
+	//% "High temperature"
+	readonly property string high_temperature: qsTrId("common_words_high_temperature")
+
+	//% "High voltage alarms"
+	readonly property string high_voltage_alarms: qsTrId("common_words_high_voltage_alarms")
+
 	//% "History"
 	readonly property string history: qsTrId("common_words_history")
 
@@ -176,11 +182,29 @@ QtObject {
 	//% "Low state-of-charge"
 	readonly property string low_state_of_charge: qsTrId("common_words_low_state_of_charge")
 
+	//% "Low temperature"
+	readonly property string low_temperature: qsTrId("common_words_low_temperature")
+
+	//% "Low voltage alarms"
+	readonly property string low_voltage_alarms: qsTrId("common_words_low_voltage_alarms")
+
 	//% "Manual"
 	readonly property string manual: qsTrId("common_words_manual")
 
 	//% "Manufacturer"
 	readonly property string manufacturer: qsTrId("common_words_manufacturer")
+
+	//% "Maximum temperature"
+	readonly property string maximum_temperature: qsTrId("common_words_maximum_temperature")
+
+	//% "Maximum voltage"
+	readonly property string maximum_voltage: qsTrId("common_words_maximum_voltage")
+
+	//% "Minimum temperature"
+	readonly property string minimum_temperature: qsTrId("common_words_minimum_temperature")
+
+	//% "Minimum voltage"
+	readonly property string minimum_voltage: qsTrId("common_words_minimum_voltage")
 
 	//% "Mode"
 	readonly property string mode: qsTrId("common_words_mode")
@@ -284,6 +308,10 @@ QtObject {
 
 	//% "Signal strength"
 	readonly property string signal_strength: qsTrId("common_words_signal_strength");
+
+	//: A speed measurement value
+	//% "Speed"
+	readonly property string speed: qsTrId("common_words_speed")
 
 	//% "Standby"
 	readonly property string standby: qsTrId("common_words_standby")

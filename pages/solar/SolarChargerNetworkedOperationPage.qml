@@ -27,36 +27,7 @@ Page {
 			ListTextItem {
 				//% "Network status"
 				text: qsTrId("charger_network_status")
-				secondaryText: {
-					switch (dataValue) {
-					case VenusOS.SolarCharger_NetworkStatus_Slave:
-						//: Network status: Slave
-						//% "Slave"
-						return qsTrId("charger_network_status_slave")
-					case VenusOS.SolarCharger_NetworkStatus_GroupMaster:
-						//: Network status: Group Master
-						//% "Group Master"
-						return qsTrId("charger_network_status_group_master")
-					case VenusOS.SolarCharger_NetworkStatus_InstanceMaster:
-						//: Network status: Instance Master
-						//% "Instance Master"
-						return qsTrId("charger_network_status_instance_master")
-					case VenusOS.SolarCharger_NetworkStatus_GroupAndInstanceMaster:
-						//: Network status: Group & Instance Master
-						//% "Group & Instance Master"
-						return qsTrId("charger_network_status_group_and_instance_master")
-					case VenusOS.SolarCharger_NetworkStatus_Standalone:
-						//: Network status: Standalone
-						//% "Standalone"
-						return qsTrId("charger_network_status_standalone")
-					case VenusOS.SolarCharger_NetworkStatus_StandaloneAndGroupMaster:
-						//: Network status: Standalone & Group Master
-						//% "Standalone & Group Master"
-						return qsTrId("charger_network_status_standalone_and_group_master")
-					default:
-						return ""
-					}
-				}
+				secondaryText: Global.systemSettings.networkStatusToText(dataValue)
 				dataSource: root.solarCharger.serviceUid + "/Link/NetworkStatus"
 			}
 
