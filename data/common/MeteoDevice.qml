@@ -17,7 +17,7 @@ Device {
 
 	onValidChanged: {
 		if (!!Global.meteoDevices) {
-			if (_valid) {
+			if (valid) {
 				Global.meteoDevices.model.addDevice(meteoDevice)
 			} else {
 				Global.meteoDevices.model.removeDevice(meteoDevice)
