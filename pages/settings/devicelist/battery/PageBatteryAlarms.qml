@@ -69,15 +69,13 @@ Page {
 			}
 
 			ListAlarm {
-				//% "Low temperature"
-				text: qsTrId("batteryalarms_low_temperature")
+				text: CommonWords.low_temperature
 				dataSource: root.bindPrefix + "/Alarms/LowTemperature"
 				visible: defaultVisible && dataValid
 			}
 
 			ListAlarm {
-				//% "High temperature"
-				text: qsTrId("batteryalarms_high_temperature")
+				text: CommonWords.high_temperature
 				dataSource: root.bindPrefix + "/Alarms/HighTemperature"
 				visible: defaultVisible && dataValid
 			}

@@ -127,8 +127,12 @@
         <file>components/settings/CGwacsBatteryScheduleNavigationItem.qml</file>
         <file>components/settings/FirmwareCheckListButton.qml</file>
         <file>components/settings/Led.qml</file>
+        <file>components/settings/ListAlarmState.qml</file>
+        <file>components/settings/ListClearHistoryButton.qml</file>
         <file>components/settings/ListDvccSwitch.qml</file>
         <file>components/settings/ListFirmwareVersionItem.qml</file>
+        <file>components/settings/ListRelayState.qml</file>
+        <file>components/settings/ListResetHistoryLabel.qml</file>
         <file>components/settings/MountStateListButton.qml</file>
         <file>components/settings/PvInverterPositionRadioButtonGroup.qml</file>
         <file>components/settings/SettingsRangeSlider.qml</file>
@@ -476,6 +480,12 @@
         <file>pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml</file>
         <file>pages/settings/devicelist/battery/PageLynxIonIo.qml</file>
         <file>pages/settings/devicelist/battery/PageLynxIonSystem.qml</file>
+        <file>pages/settings/devicelist/dc-in/PageAlternator.qml</file>
+        <file>pages/settings/devicelist/dc-in/PageAlternatorModelWakespeed.qml</file>
+        <file>pages/settings/devicelist/dc-in/PageDcMeter.qml</file>
+        <file>pages/settings/devicelist/dc-in/PageDcMeterModel.qml</file>
+        <file>pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml</file>
+        <file>pages/settings/devicelist/dc-in/PageDcMeterHistory.qml</file>
         <file>pages/settings/devicelist/tank/PageTankAlarm.qml</file>
         <file>pages/settings/devicelist/tank/PageTankSensor.qml</file>
         <file>pages/settings/devicelist/tank/PageTankSetup.qml</file>

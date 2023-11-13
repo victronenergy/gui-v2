@@ -60,8 +60,7 @@ Page {
 			}
 
 			ListQuantityItem {
-				//% "Minimum voltage"
-				text: qsTrId("batteryhistory_minimum_voltage")
+				text: CommonWords.minimum_voltage
 				dataSource: root.bindPrefix + "/History/MinimumVoltage"
 				visible: defaultVisible && dataValid
 				unit: VenusOS.Units_Volt
@@ -69,8 +68,7 @@ Page {
 			}
 
 			ListQuantityItem {
-				//% "Maximum voltage"
-				text: qsTrId("batteryhistory_maximum_voltage")
+				text: CommonWords.maximum_voltage
 				dataSource: root.bindPrefix + "/History/MaximumVoltage"
 				visible: defaultVisible && dataValid
 				unit: VenusOS.Units_Volt
@@ -111,15 +109,13 @@ Page {
 			}
 
 			ListTextItem {
-				//% "Low voltage alarms"
-				text: qsTrId("batteryhistory_low_voltage_alarms")
+				text: CommonWords.low_voltage_alarms
 				dataSource: root.bindPrefix + "/History/LowVoltageAlarms"
 				visible: defaultVisible && dataValid
 			}
 
 			ListTextItem {
-				//% "High voltage alarms"
-				text: qsTrId("batteryhistory_high_voltage_alarms")
+				text: CommonWords.high_voltage_alarms
 				dataSource: root.bindPrefix + "/History/HighVoltageAlarms"
 				visible: defaultVisible && dataValid
 			}
@@ -164,8 +160,7 @@ Page {
 			}
 
 			ListQuantityItem {
-				//% "Minimum temperature"
-				text: qsTrId("batteryhistory_minimum_temperature")
+				text: CommonWords.minimum_temperature
 				visible: defaultVisible && hasTemperature.value === 1 && dataValid
 				dataSource: root.bindPrefix + "/History/MinimumTemperature"
 				unit: Global.systemSettings.temperatureUnit.value
@@ -177,8 +172,7 @@ Page {
 			}
 
 			ListQuantityItem {
-				//% "Maximum temperature"
-				text: qsTrId("batteryhistory_maximum_temperature")
+				text: CommonWords.maximum_temperature
 				visible: defaultVisible && hasTemperature.value === 1 && dataValid
 				dataSource: root.bindPrefix + "/History/MaximumTemperature"
 				unit: Global.systemSettings.temperatureUnit.value
@@ -200,55 +194,13 @@ Page {
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 
-			ListLabel {
-				//% "Info: Reset history on the monitor itself"
-				text: qsTrId("batteryhistory_info_reset_history_on_the_monitor_itself")
+			ListResetHistoryLabel {
 				visible: !clearHistory.visible
-				horizontalAlignment: Text.AlignHCenter
 			}
 
-			ListButton {
+			ListClearHistoryButton {
 				id: clearHistory
-
-				//% "Clear History"
-				text: qsTrId("batteryhistory_clear_history")
-				secondaryText: enabled
-					   ? CommonWords.press_to_clear
-						 //% "Clearing"
-					   : qsTrId("batteryhistory_clearing")
-
-				DataPoint {
-					id: clear
-					source: root.bindPrefix + "/History/Clear"
-				}
-
-				DataPoint {
-					id: canBeCleared
-					source: root.bindPrefix + "/History/CanBeCleared"
-				}
-
-				DataPoint {
-					id: connected
-					source: root.bindPrefix + "/Connected"
-				}
-
-				Timer {
-					id: timer
-					interval: 2000
-				}
-				enabled: !timer.running
-
-				onClicked: {
-					/*
-					 * Write some value to the item as the clear command does not need
-					 * to have a value. Do make sure to only write the value when the
-					 * button is pressed and not when released.
-					 */
-					clear.setValue(1)
-					timer.start()
-				}
-
-				visible: connected.value === 1 && canBeCleared.value === 1
+				bindPrefix: root.bindPrefix
 			}
 		}
 	}
