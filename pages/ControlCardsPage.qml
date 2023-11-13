@@ -59,14 +59,24 @@ Page {
 				}
 			}
 
-			ESSCard {
-				width: root.cardWidth
+			Loader {
+				active: systemType.value === "ESS" || systemType.value === "Hub-4"
+				sourceComponent: ESSCard {
+					width: root.cardWidth
+				}
+
+				DataPoint {
+					id: systemType
+					source: "com.victronenergy.system/SystemType"
+				}
 			}
 
-			SwitchesCard {
-				width: visible ? root.cardWidth : 0
-				model: Global.relays.manualRelays
-				visible: model.count > 0
+			Loader {
+				active: Global.relays.manualRelays.count > 0
+				sourceComponent: SwitchesCard {
+					width: visible ? root.cardWidth : 0
+					model: Global.relays.manualRelays
+				}
 			}
 		}
 	}
