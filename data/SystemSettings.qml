@@ -19,6 +19,37 @@ QtObject {
 				: Units.celsiusToFahrenheit(celsius_value)
 	}
 
+	function networkStatusToText(status) {
+		switch (status) {
+		case VenusOS.Link_NetworkStatus_Slave:
+			//: Network status: Slave
+			//% "Slave"
+			return qsTrId("systemsettings_networkstatus_slave")
+		case VenusOS.Link_NetworkStatus_GroupMaster:
+			//: Network status: Group Master
+			//% "Group Master"
+			return qsTrId("systemsettings_networkstatus_group_master")
+		case VenusOS.Link_NetworkStatus_InstanceMaster:
+			//: Network status: Instance Master
+			//% "Instance Master"
+			return qsTrId("systemsettings_networkstatus_instance_master")
+		case VenusOS.Link_NetworkStatus_GroupAndInstanceMaster:
+			//: Network status: Group & Instance Master
+			//% "Group & Instance Master"
+			return qsTrId("systemsettings_networkstatus_group_and_instance_master")
+		case VenusOS.Link_NetworkStatus_Standalone:
+			//: Network status: Standalone
+			//% "Standalone"
+			return qsTrId("systemsettings_networkstatus_standalone")
+		case VenusOS.Link_NetworkStatus_StandaloneAndGroupMaster:
+			//: Network status: Standalone & Group Master
+			//% "Standalone & Group Master"
+			return qsTrId("systemsettings_networkstatus_standalone_and_group_master")
+		default:
+			return ""
+		}
+	}
+
 	property DataPoint accessLevel: DataPoint {
 		 source: "com.victronenergy.settings/Settings/System/AccessLevel"
 	}

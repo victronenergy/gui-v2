@@ -193,30 +193,12 @@ Page {
 				secondaryText: Utils.secondsToString(root.battery.timeToGo)
 			}
 
-			ListTextItem {
-				//% "Relay state"
-				text: qsTrId("battery_relay_state")
+			ListRelayState {
 				dataSource: root.battery.serviceUid + "/Relay/0/State"
-				visible: defaultVisible && dataValid
-				secondaryText: CommonWords.onOrOff(dataValue)
 			}
 
-			ListTextItem {
-				//% "Alarm state"
-				text: qsTrId("battery_alarm_state")
+			ListAlarmState {
 				dataSource: root.battery.serviceUid + "/Alarms/Alarm"
-				visible: defaultVisible && dataValid
-				secondaryText: {
-					if (dataValue === 0) {
-						return CommonWords.ok
-					} else if (dataValue === 1) {
-						//: Alarm state is active
-						//% "Alarm"
-						return qsTrId("devicelist_battery_alarm_state")
-					} else {
-						return ""
-					}
-				}
 			}
 
 			ListNavigationItem {

@@ -63,8 +63,7 @@ Page {
 			}
 
 			ListTextItem {
-				//% "Speed"
-				text: qsTrId("settings_gps_speed")
+				text: CommonWords.speed
 				dataSource: bindPrefix + "/Speed"
 				secondaryText: {
 					if (!dataValid) {
