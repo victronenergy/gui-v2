@@ -74,7 +74,7 @@ Page {
 			Loader {
 				active: Global.relays.manualRelays.count > 0
 				sourceComponent: SwitchesCard {
-					width: visible ? root.cardWidth : 0
+					width: root.cardWidth
 					model: Global.relays.manualRelays
 				}
 			}
