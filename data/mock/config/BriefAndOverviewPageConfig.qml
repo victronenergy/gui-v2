@@ -55,7 +55,7 @@ QtObject {
 		{
 			name: "Combo one (amps): Shore / DC Generator / Left & Right Alternator / Solar",
 			acInputs: { type: VenusOS.AcInputs_InputType_Shore, phaseCount: 3, connected: true },
-			dcInputs: { types: [ VenusOS.DcInputs_InputType_DcGenerator, VenusOS.DcInputs_InputType_Alternator ] },
+			dcInputs: {  types: [ { serviceType: "dcsource", monitorMode: -1 }, { serviceType: "alternator", monitorMode: -1 } ] },
 			solar: { chargers: [ { power: 300 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 		},
@@ -73,14 +73,14 @@ QtObject {
 		{
 			name: "Small RV with alternator or small boat",
 			acInputs: { type: VenusOS.AcInputs_InputType_Shore, phaseCount: 1, connected: true },
-			dcInputs: { types: [ VenusOS.DcInputs_InputType_Alternator ] },
+			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 } ] },
 			solar: { chargers: [ { power: 456 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 		},
 		{
 			name: "Catamaran with wind: Shore / Solar / Left alternator / Right alternator / Wind",
 			acInputs: { type: VenusOS.AcInputs_InputType_Shore, phaseCount: 1, connected: true },
-			dcInputs: { types: [ VenusOS.DcInputs_InputType_Alternator, VenusOS.DcInputs_InputType_Wind ] },
+			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			solar: { chargers: [ { power: 456 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 43, current: 1 },
@@ -88,7 +88,7 @@ QtObject {
 		{
 			name: "Boat with DC generator",
 			acInputs: { type: VenusOS.AcInputs_InputType_Shore, phaseCount: 1, connected: true },
-			dcInputs: { types: [ VenusOS.DcInputs_InputType_DcGenerator, VenusOS.DcInputs_InputType_Alternator, VenusOS.DcInputs_InputType_Wind ] },
+			dcInputs: {  types: [ { serviceType: "dcsource", monitorMode: -1 }, { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			solar: { chargers: [ { power: 456 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 43, current: 1 },

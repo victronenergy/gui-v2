@@ -20,6 +20,9 @@ Page {
 		VenusOS.OverviewWidget_Type_AcGenerator,
 		VenusOS.OverviewWidget_Type_DcGenerator,
 		VenusOS.OverviewWidget_Type_Alternator,
+		VenusOS.OverviewWidget_Type_FuelCell,
+		VenusOS.OverviewWidget_Type_DcLoad,
+		VenusOS.OverviewWidget_Type_DcSystem,
 		VenusOS.OverviewWidget_Type_Wind,
 		VenusOS.OverviewWidget_Type_Solar
 	]
@@ -211,6 +214,12 @@ Page {
 		case VenusOS.OverviewWidget_Type_DcGenerator:
 			widget = dcGeneratorComponent.createObject(root, args)
 			break
+		case VenusOS.OverviewWidget_Type_FuelCell:
+		case VenusOS.OverviewWidget_Type_DcLoad:
+		case VenusOS.OverviewWidget_Type_DcSystem:
+			widget = dcInputComponent.createObject(root, args)
+			widget.type = type
+			break
 		case VenusOS.OverviewWidget_Type_Evcs:
 			widget = evcsComponent.createObject(root, args)
 			break
@@ -269,21 +278,30 @@ Page {
 		let i
 		for (i = 0; i < Global.dcInputs.model.count; ++i) {
 			const dcInput = Global.dcInputs.model.deviceAt(i)
-			switch (dcInput.source) {
+			switch (dcInput.inputType) {
 			case VenusOS.DcInputs_InputType_Alternator:
 				widgetType = VenusOS.OverviewWidget_Type_Alternator
 				break
-			case VenusOS.DcInputs_InputType_DcGenerator:
-				widgetType = VenusOS.OverviewWidget_Type_DcGenerator
+			case VenusOS.DcInputs_InputType_FuelCell:
+				widgetType = VenusOS.OverviewWidget_Type_FuelCell
+				break
+			case VenusOS.DcInputs_InputType_DcLoad:
+				widgetType = VenusOS.OverviewWidget_Type_DcLoad
+				break
+			case VenusOS.DcInputs_InputType_DcSystem:
+				widgetType = VenusOS.OverviewWidget_Type_DcSystem
 				break
 			case VenusOS.DcInputs_InputType_Wind:
 				widgetType = VenusOS.OverviewWidget_Type_Wind
 				break
 			default:
+				// Use DC Generator as the catch-all type for any DC power source that isn't
+				// specifically handled.
+				widgetType = VenusOS.OverviewWidget_Type_DcGenerator
 				break
 			}
 			if (widgetType < 0) {
-				console.warn("Unknown DC input type:", dcInput.source)
+				console.warn("Unknown DC input type:", dcInput.inputType)
 				return
 			}
 			widget = _createWidget(widgetType)
@@ -491,6 +509,39 @@ Page {
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(dcGeneratorConnector)
+			}
+		}
+	}
+
+	Component {
+		id: dcInputComponent
+
+		DcInputWidget {
+			id: dcInputWidget
+
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
+			animationEnabled: root.animationEnabled
+			connectors: [ dcInputConnector ]
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Right
+				y: dcInputConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
+				visible: dcInputConnector.visible
+			}
+
+			WidgetConnector {
+				id: dcInputConnector
+
+				parent: root
+				startWidget: dcInputWidget
+				startLocation: VenusOS.WidgetConnector_Location_Right
+				endWidget: batteryWidget
+				endLocation: VenusOS.WidgetConnector_Location_Left
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
+				animationEnabled: root.animationEnabled
+				animationMode: root._inputConnectorAnimationMode(dcInputConnector)
 			}
 		}
 	}

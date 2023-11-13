@@ -10,19 +10,14 @@ QtObject {
 
 	function populate() {
 		// Add a random set of DC inputs.
-		let types = [
-				VenusOS.DcInputs_InputType_Alternator,
-				VenusOS.DcInputs_InputType_DcGenerator,
-				VenusOS.DcInputs_InputType_Wind,
-			]
 		// Have 2 inputs at most, to leave some space for AC inputs in overview page
+		const serviceTypes = ["alternator", "fuelcell", "dcload", "dcsource", "dcsystem"]
 		const modelCount = Math.floor(Math.random() * 2) + 1
 		for (let i = 0; i < modelCount; ++i) {
-			const index = Math.floor(Math.random() * types.length)
-			const input = inputComponent.createObject(root, { "source": types[index] })
+			const type = Math.floor(Math.random() * serviceTypes.length)
+			const input = inputComponent.createObject(root, { "serviceType": serviceTypes[i] })
 			_createdObjects.push(input)
 			Global.dcInputs.addInput(input)
-			types.splice(index, 1)
 		}
 	}
 
@@ -37,7 +32,11 @@ QtObject {
 
 			if (config) {
 				for (let i = 0; i < config.types.length; ++i) {
-					const input = inputComponent.createObject(root, { source: config.types[i] })
+					const inputConfig = config.types[i]
+					const input = inputComponent.createObject(root, {
+						serviceType: inputConfig.serviceType,
+						monitorMode: inputConfig.monitorMode
+					})
 					_createdObjects.push(input)
 					Global.dcInputs.addInput(input)
 				}
@@ -49,7 +48,9 @@ QtObject {
 		MockDevice {
 			id: input
 
-			property int source
+			readonly property int inputType: Global.dcInputs.inputType(serviceType, monitorMode)
+			property string serviceType
+			property int monitorMode: -1    // generic DC source
 
 			property real voltage
 			property real current
@@ -84,7 +85,7 @@ QtObject {
 				}
 			}
 
-			serviceUid: "com.victronenergy.dcsource.ttyUSB" + deviceInstance
+			serviceUid: "com.victronenergy." + serviceType + ".ttyUSB" + deviceInstance
 			name: "DCInput" + deviceInstance
 		}
 	}
