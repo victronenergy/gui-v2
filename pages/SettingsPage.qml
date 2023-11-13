@@ -27,12 +27,6 @@ Page {
 				page: "/pages/settings/devicelist/DeviceListPage.qml",
 			},
 			{
-				//% "Bluetooth"
-				text: qsTrId("settings_bluetooth"),
-				page: "/pages/settings/PageSettingsBluetooth.qml",
-				show: Connman.technologyList.indexOf("bluetooth") !== -1
-			},
-			{
 				//% "General"
 				text: qsTrId("settings_general"),
 				page: "/pages/settings/PageSettingsGeneral.qml"
@@ -82,8 +76,8 @@ Page {
 				text: qsTrId("settings_energy_meters"),
 				page: "/pages/settings/PageSettingsCGwacsOverview.qml"
 			},
-			//% "PV inverters"
 			{
+				//% "PV inverters"
 				text: qsTrId("settings_pv_inverters"),
 				page: "/pages/settings/PageSettingsFronius.qml"
 			},
@@ -108,6 +102,12 @@ Page {
 				//% "GPS"
 				text: qsTrId("settings_gps"),
 				page: "/pages/settings/PageSettingsGpsList.qml"
+			},
+			{
+				//% "Bluetooth"
+				text: qsTrId("settings_bluetooth"),
+				page: "/pages/settings/PageSettingsBluetooth.qml",
+				show: Connman.technologyList.indexOf("bluetooth") !== -1
 			},
 			{
 				//% "Generator start/stop"
