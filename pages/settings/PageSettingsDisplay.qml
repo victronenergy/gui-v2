@@ -129,23 +129,6 @@ Page {
 				}
 			}
 
-			ListRadioButtonGroup {
-				//% "Electrical power display"
-				text: qsTrId("settings_units_energy")
-
-				optionModel: [
-					//% "Power (W)"
-					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Watt },
-					//% "Current (A)"
-					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Amp },
-				]
-				currentIndex: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp ? 1 : 0
-
-				onOptionClicked: function(index) {
-					Global.systemSettings.electricalQuantity.setValue(optionModel[index].value)
-				}
-			}
-
 			ListNavigationItem {
 				//% "Units"
 				text: qsTrId("settings_units")

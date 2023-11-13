@@ -13,6 +13,23 @@ Page {
 
 		model: ObjectModel {
 			ListRadioButtonGroup {
+				//% "Electrical power display"
+				text: qsTrId("settings_units_energy")
+
+				optionModel: [
+					//% "Power (Watts)"
+					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Watt },
+					//% "Current (Amps)"
+					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Amp },
+				]
+				currentIndex: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp ? 1 : 0
+
+				onOptionClicked: function(index) {
+					Global.systemSettings.electricalQuantity.setValue(optionModel[index].value)
+				}
+			}
+
+			ListRadioButtonGroup {
 				text: CommonWords.temperature
 				optionModel: [
 					//% "Celsius"
