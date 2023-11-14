@@ -1,3 +1,8 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
 #ifndef NOTIFICATIONSMODEL_H
 #define NOTIFICATIONSMODEL_H
 

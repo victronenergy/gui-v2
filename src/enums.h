@@ -1,5 +1,6 @@
 /*
-** Copyright (C) 2022 Victron Energy B.V.
+** Copyright (C) 2023 Victron Energy B.V.
+** See LICENSE.txt for license information.
 */
 
 #ifndef VICTRON_VENUSOS_GUI_V2_ENUMS_H
