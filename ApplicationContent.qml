@@ -25,6 +25,11 @@ Item {
 		Component.onCompleted: Global.mainView = mainView
 	}
 
+	FirmwareUpdate {
+		id: firmwareUpdate
+		Component.onCompleted: Global.firmwareUpdate = firmwareUpdate
+	}
+
 	MouseArea {
 		id: idleModeMouseArea
 		anchors.fill: parent
