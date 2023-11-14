@@ -124,8 +124,8 @@ function tankProperties(type) {
 			icon: "/images/icon_hydraulic_oil_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color.hydraulicOil,
-			//% "Hydraulic"
-			name: qsTrId("gauges_hydraulic")
+			//% "Hydraulic oil"
+			name: qsTrId("gauges_hydraulic_oil")
 		}
 	case V.VenusOS.Tank_Type_RawWater:
 		return {
