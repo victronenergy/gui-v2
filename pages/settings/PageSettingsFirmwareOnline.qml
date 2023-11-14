@@ -96,7 +96,7 @@ Page {
 
 				enabled: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
-				visible: Global.firmwareUpdate.onlineAvailableVersion && Global.firmwareUpdate.state !== FirmwareUpdater.Checking
+				visible: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {
 					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
 				}

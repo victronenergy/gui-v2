@@ -13,8 +13,8 @@ QtObject {
 	readonly property string offlineAvailableVersion: _offlineVersion.value || ""
 	readonly property bool busy: state > FirmwareUpdater.Idle
 	readonly property var state: _stateItem.value
+	property bool checkingForUpdate
 
-	property bool _wasChecking
 	property int _updateType
 
 	property DataPoint _stateItem: DataPoint {
@@ -24,19 +24,15 @@ QtObject {
 			let msg = ""
 			switch (value) {
 			case FirmwareUpdater.Idle:
-			case FirmwareUpdater.UpdateFileNotFound:
-				if (root._wasChecking) {
-					root._wasChecking = false
-					if (root._updateType === VenusOS.Firmware_UpdateType_Online
-							&& !_onlineVersion.valid) {
-						//% "No newer version available"
-						msg = qsTrId("settings_firmware_no_newer_version_available")
-					} else if (root._updateType === VenusOS.Firmware_UpdateType_Offline
-							&& !_offlineVersion.valid) {
-						//% "No firmware found"
-						msg = qsTrId("settings_firmware_no_firmware_found")
-					}
+				// If a new version is available, the online/offline version value will be set
+				// shortly after the state becomes Idle. So, wait briefly to see if that version
+				// is set, else this may prematurely report that there is no update available.
+				if (root.checkingForUpdate) {
+					_updateCheckTimer.start()
 				}
+				break
+			case FirmwareUpdater.UpdateFileNotFound:
+				root._finishUpdateCheck()
 				break
 			case FirmwareUpdater.ErrorDuringChecking:
 				//% "Error while checking for firmware updates"
@@ -96,9 +92,14 @@ QtObject {
 		source: "com.victronenergy.platform/Firmware/Offline/Install"
 	}
 
+	property var _updateCheckTimer: Timer {
+		interval: 500
+		onTriggered: _finishUpdateCheck()
+	}
+
 	function checkForUpdate(updateType) {
 		_updateType = updateType
-		_wasChecking = true
+		checkingForUpdate = true
 		if (updateType === VenusOS.Firmware_UpdateType_Online) {
 			_onlineCheckUpdate.setValue(1)
 		} else if (updateType === VenusOS.Firmware_UpdateType_Offline) {
@@ -109,7 +110,7 @@ QtObject {
 	}
 
 	function installUpdate(updateType) {
-		_wasChecking = true
+		checkingForUpdate = true
 		_updateType = updateType
 		if (updateType === VenusOS.Firmware_UpdateType_Online) {
 			_onlineInstallUpdate.setValue(1)
@@ -117,6 +118,24 @@ QtObject {
 			_offlineInstallUpdate.setValue(1)
 		} else {
 			console.warn("installUpdate(): unknown firmware update type:", updateType)
+		}
+	}
+
+	function _finishUpdateCheck() {
+		if (!checkingForUpdate) {
+			return
+		}
+		let msg = ""
+		checkingForUpdate = false
+		if (_updateType === VenusOS.Firmware_UpdateType_Online && !_onlineVersion.valid) {
+			//% "No newer version available"
+			msg = qsTrId("settings_firmware_no_newer_version_available")
+		} else if (_updateType === VenusOS.Firmware_UpdateType_Offline && !_offlineVersion.valid) {
+			//% "No firmware found"
+			msg = qsTrId("settings_firmware_no_firmware_found")
+		}
+		if (msg) {
+			Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
 		}
 	}
 }
