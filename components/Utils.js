@@ -1,8 +1,9 @@
 /*
-** Copyright (C) 2021 Victron Energy B.V.
+** Copyright (C) 2023 Victron Energy B.V.
+** See LICENSE.txt for license information.
 */
-.pragma library
 
+.pragma library
 
 var deviceIds = []  // map of of { deviceId : {deviceInstance, vrmInstance} } mappings
 

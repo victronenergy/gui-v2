@@ -1,9 +1,12 @@
 /*
-** Copyright (C) 2021 Victron Energy B.V.
-*
-* These settings are regularly brought up to date with the settings from gui-v1.
-* Currently up to date with gui-v1 v5.6.6.
+** Copyright (C) 2023 Victron Energy B.V.
+** See LICENSE.txt for license information.
 */
+
+/*
+ * These settings are regularly brought up to date with the settings from gui-v1.
+ * Currently up to date with gui-v1 v5.6.6.
+ */
 
 import QtQuick
 import Victron.VenusOS
