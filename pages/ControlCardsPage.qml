@@ -63,6 +63,7 @@ Page {
 				active: systemType.value === "ESS" || systemType.value === "Hub-4"
 				sourceComponent: ESSCard {
 					width: root.cardWidth
+					height: cardsView.height
 				}
 
 				DataPoint {
@@ -75,6 +76,7 @@ Page {
 				active: Global.relays.manualRelays.count > 0
 				sourceComponent: SwitchesCard {
 					width: root.cardWidth
+					height: cardsView.height
 					model: Global.relays.manualRelays
 				}
 			}
