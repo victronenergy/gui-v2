@@ -1,6 +1,9 @@
-/*!
-** Copyright (C) 2022 Victron Energy B.V.
-**
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+/*
 ** If there are too many gauges to fit on the screen, gauges of the same type (eg. Fuel) will be merged into a single gauge, containing several tanks.
 ** The user may click on a merged gauge, which will give an expanded view containing separate gauges, each containing a single tank.
 ** If tanks are removed, merged tanks will be split back into individual tanks if there is enough space to display them.
