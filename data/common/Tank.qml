@@ -14,7 +14,7 @@ Device {
 	readonly property int type: _type.value === undefined ? -1 : _type.value
 	readonly property int status: _status.value === undefined ? VenusOS.Tank_Status_Unknown : _status.value
 	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
-	readonly property int level: _level.value === undefined ? 0 : _level.value
+	property int level
 	property real remaining: NaN
 	property real capacity: NaN
 
@@ -29,28 +29,18 @@ Device {
 	}
 	readonly property VeQuickItem _level: VeQuickItem {
 		uid: serviceUid + "/Level"
+		onValueChanged: Qt.callLater(tank._updateMeasurements)
+		Component.onCompleted: Qt.callLater(tank._updateMeasurements)
 	}
 	readonly property VeQuickItem _remaining: VeQuickItem {
-		function _update() {
-			tank.remaining = value === undefined ? NaN : value
-			if (tank.type >= 0 && !!Global.tanks) {
-				Global.tanks.updateTankModelTotals(tank.type)
-			}
-		}
 		uid: serviceUid + "/Remaining"
-		onValueChanged: _update()
-		Component.onCompleted: _update()
+		onValueChanged: Qt.callLater(tank._updateMeasurements)
+		Component.onCompleted: Qt.callLater(tank._updateMeasurements)
 	}
 	readonly property VeQuickItem _capacity: VeQuickItem {
-		function _update() {
-			tank.capacity = value === undefined ? NaN : value
-			if (tank.type >= 0 && !!Global.tanks) {
-				Global.tanks.updateTankModelTotals(tank.type)
-			}
-		}
 		uid: serviceUid + "/Capacity"
-		onValueChanged: _update()
-		Component.onCompleted: _update()
+		onValueChanged: Qt.callLater(tank._updateMeasurements)
+		Component.onCompleted: Qt.callLater(tank._updateMeasurements)
 	}
 
 	valid: deviceInstance >= 0 && type >= 0
@@ -76,6 +66,25 @@ Device {
 			if (!tank.valid && tank.type >= 0) {
 				Global.tanks.removeTank(tank)
 			}
+		}
+	}
+
+	function _updateMeasurements() {
+		let remainingValue = _remaining.value === undefined ? NaN : _remaining.value
+		let levelValue = _level.value === undefined ? NaN : _level.value    // 0 - 100
+		let capacityValue = _capacity.value === undefined ? NaN : _capacity.value
+		if ( (isNaN(remainingValue) || isNaN(levelValue)) && !isNaN(capacityValue) ) {
+			if (isNaN(remainingValue)) {
+				remainingValue = capacityValue * (levelValue / 100)
+			} else if (isNaN(levelValue)) {
+				levelValue = remainingValue / capacityValue * 100
+			}
+		}
+		capacity = capacityValue
+		remaining = remainingValue
+		level = levelValue
+		if (tank.type >= 0 && !!Global.tanks) {
+			Global.tanks.updateTankModelTotals(tank.type)
 		}
 	}
 
