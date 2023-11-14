@@ -43,7 +43,6 @@ QtObject {
 				msg = qsTrId("settings_firmware_error_during_checking_for_updates")
 				break
 			case FirmwareUpdater.Checking:
-				root._wasChecking = true
 				break
 			case FirmwareUpdater.DownloadingAndInstalling:
 				if (_onlineVersion.valid) {
@@ -99,6 +98,7 @@ QtObject {
 
 	function checkForUpdate(updateType) {
 		_updateType = updateType
+		_wasChecking = true
 		if (updateType === VenusOS.Firmware_UpdateType_Online) {
 			_onlineCheckUpdate.setValue(1)
 		} else if (updateType === VenusOS.Firmware_UpdateType_Offline) {
@@ -109,6 +109,7 @@ QtObject {
 	}
 
 	function installUpdate(updateType) {
+		_wasChecking = true
 		_updateType = updateType
 		if (updateType === VenusOS.Firmware_UpdateType_Online) {
 			_onlineInstallUpdate.setValue(1)
