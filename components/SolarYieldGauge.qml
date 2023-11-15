@@ -23,7 +23,7 @@ Item {
 
 		model: powerSampler.sampledAverages.length + 1
 
-		delegate: ScaledArcGauge {
+		delegate: ArcGauge {
 			animationEnabled: root.animationEnabled
 			width: Theme.geometry.briefPage.edgeGauge.width
 			x: index*strokeWidth
