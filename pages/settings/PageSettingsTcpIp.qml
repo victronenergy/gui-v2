@@ -145,7 +145,7 @@ Page {
 					 && !root.service.favorite && root._secured
 			writeAccessLevel: VenusOS.User_AccessType_User
 			onAccepted: {
-				root.agent.passphrase = textField.text
+				root._agent.passphrase = textField.text
 				root.service.connect()
 			}
 		}
