@@ -414,10 +414,6 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "GradientListView");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/RadioButtonControlValue.qml")),
 		"Victron.VenusOS", 2, 0, "RadioButtonControlValue");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArc.qml")),
-		"Victron.VenusOS", 2, 0, "ScaledArc");
-	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/ScaledArcGauge.qml")),
-		"Victron.VenusOS", 2, 0, "ScaledArcGauge");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SegmentedButtonRow.qml")),
 		"Victron.VenusOS", 2, 0, "SegmentedButtonRow");
 	qmlRegisterType(QUrl(QStringLiteral("qrc:/components/SeparatorBar.qml")),

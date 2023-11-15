@@ -47,8 +47,6 @@
         <file>components/QuantityTableSummary.qml</file>
         <file>components/QuantityTable.qml</file>
         <file>components/RadioButtonControlValue.qml</file>
-        <file>components/ScaledArc.qml</file>
-        <file>components/ScaledArcGauge.qml</file>
         <file>components/SegmentedButtonRow.qml</file>
         <file>components/SeparatorBar.qml</file>
         <file>components/ShinyProgressArc.qml</file>
