@@ -25,15 +25,11 @@ QtObject {
 			let msg = ""
 			switch (value) {
 			case FirmwareUpdater.Idle:
-				// If a new version is available, the online/offline version value will be set
-				// shortly after the state becomes Idle. So, wait briefly to see if that version
-				// is set, else this may prematurely report that there is no update available.
-				if (root.checkingForUpdate) {
-					_updateCheckTimer.start()
-				}
-				break
 			case FirmwareUpdater.UpdateFileNotFound:
-				root._finishUpdateCheck()
+				// If a new version is available, the online/offline version value will be available
+				// together with the new state value, but the version may not be deserialized and
+				// set until after the state change. So, wait until the next event loop to be sure.
+				Qt.callLater(root._finishUpdateCheck)
 				break
 			case FirmwareUpdater.ErrorDuringChecking:
 				//% "Error while checking for firmware updates"
@@ -93,11 +89,6 @@ QtObject {
 		source: "com.victronenergy.platform/Firmware/Offline/Install"
 	}
 
-	property var _updateCheckTimer: Timer {
-		interval: 500
-		onTriggered: _finishUpdateCheck()
-	}
-
 	function checkForUpdate(updateType) {
 		_updateType = updateType
 		checkingForUpdate = true
@@ -111,7 +102,6 @@ QtObject {
 	}
 
 	function installUpdate(updateType) {
-		checkingForUpdate = true
 		_updateType = updateType
 		if (updateType === VenusOS.Firmware_UpdateType_Online) {
 			_onlineInstallUpdate.setValue(1)
