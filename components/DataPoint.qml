@@ -120,5 +120,4 @@ QtObject {
 	}
 
 	onSourceChanged: _reset()
-	Component.onCompleted: _reset()
 }
