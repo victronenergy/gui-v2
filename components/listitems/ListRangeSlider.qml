@@ -83,15 +83,9 @@ ListItem {
 
 	DataPoint {
 		id: firstDataPoint
-
-		hasMin: valid
-		hasMax: valid
 	}
 
 	DataPoint {
 		id: secondDataPoint
-
-		hasMin: valid
-		hasMax: valid
 	}
 }
