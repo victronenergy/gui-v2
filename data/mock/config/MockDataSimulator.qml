@@ -11,7 +11,6 @@ QtObject {
 	id: root
 
 	property bool timersActive: !Global.splashScreenVisible
-	property var mockDataValues: ({})
 	property int deviceCount
 
 	signal setBatteryRequested(var config)
@@ -30,6 +29,14 @@ QtObject {
 		"qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml": levelsConfig,
 		"qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml": settingsConfig,
 	})
+
+	function setMockValue(uid, value) {
+		BackendConnection.setMockValue(uid, value)
+	}
+
+	function mockValue(uid) {
+		return BackendConnection.mockValue(uid)
+	}
 
 	function setConfigIndex(pageConfig, configIndex) {
 		const configName = pageConfig.loadConfig(configIndex)
@@ -105,18 +112,19 @@ QtObject {
 			event.accepted = true
 			break
 		case Qt.Key_G:
+			let oldValue
+			let newValue
 			if (event.modifiers & Qt.ShiftModifier) {
-				let newValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SignalStrength"] + 5
+				newValue = root.mockValue("com.victronenergy.modem/SignalStrength") + 5
 				if (newValue > 25) {
 					newValue = 0
 				}
-				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SignalStrength"] = newValue
+				root.setMockValue("com.victronenergy.modem/SignalStrength", newValue)
 			} else if (event.modifiers & Qt.ControlModifier) {
-				let oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Roaming"]
-				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Roaming"] = !oldValue
+				oldValue = root.mockValue("com.victronenergy.modem/Roaming")
+				root.setMockValue("com.victronenergy.modem/Roaming", !oldValue)
 			} else if (event.modifiers & Qt.AltModifier) {
-				let oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/NetworkType"]
-				let newValue
+				oldValue = root.mockValue("com.victronenergy.modem/NetworkType")
 				switch (oldValue) {
 				case "NONE":
 					newValue = "GSM"
@@ -137,13 +145,13 @@ QtObject {
 					newValue = "NONE"
 					break
 				}
-				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/NetworkType"] = newValue
+				root.setMockValue("com.victronenergy.modem/NetworkType", newValue)
 			} else if (event.modifiers & Qt.MetaModifier) {
-				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SimStatus"]
-				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/SimStatus"] = oldValue === 1000 ? 11 : 1000
+				oldValue = root.mockValue("com.victronenergy.modem/SimStatus")
+				root.setMockValue("com.victronenergy.modem/SimStatus", oldValue === 1000 ? 11 : 1000)
 			} else {
-				var oldValue = Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Connected"]
-				Global.mockDataSimulator.mockDataValues["com.victronenergy.modem/Connected"] = oldValue === 1 ? 0 : 1
+				oldValue = root.mockValue("com.victronenergy.modem/Connected")
+				root.setMockValue("com.victronenergy.modem/Connected", oldValue === 1 ? 0 : 1)
 			}
 			event.accepted = true
 			break

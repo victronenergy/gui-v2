@@ -5,6 +5,7 @@
 
 #include "backendconnection.h"
 #include "uidhelper.h"
+#include "veqitemmockproducer.h"
 #include "enums.h"
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
@@ -223,6 +224,14 @@ void BackendConnection::initMqttConnection(const QString &address)
 #endif
 }
 
+void BackendConnection::initMockConnection()
+{
+	VeQItemMockProducer *producer = new VeQItemMockProducer(VeQItems::getRoot(), "mock");
+	m_producer = producer;
+	producer->initialize();
+	setState(true);
+}
+
 void BackendConnection::setType(const SourceType type, const QString &address)
 {
 	if (m_type == type) {
@@ -247,7 +256,7 @@ void BackendConnection::setType(const SourceType type, const QString &address)
 		initMqttConnection(address);
 		break;
 	case MockSource:
-		setState(true);
+		initMockConnection();
 		break;
 	default:
 		qWarning() << "Unsupported backend source type!" << type;
@@ -468,6 +477,21 @@ void BackendConnection::setApplicationVisible(bool v)
 		m_applicationVisible = v;
 		emit applicationVisibleChanged();
 	}
+}
+
+void BackendConnection::setMockValue(const QString &uid, const QVariant &value)
+{
+	if (VeQItemMockProducer *producer = qobject_cast<VeQItemMockProducer *>(m_producer)) {
+		producer->setValue(uid, value);
+	}
+}
+
+QVariant BackendConnection::mockValue(const QString &uid) const
+{
+	if (VeQItemMockProducer *producer = qobject_cast<VeQItemMockProducer *>(m_producer)) {
+		return producer->value(uid);
+	}
+	return QVariant();
 }
 
 }

@@ -10,67 +10,58 @@ QtObject {
 	id: root
 
 	function setMockSettingValue(settingId, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.settings/Settings/" + settingId] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.settings/Settings/" + settingId, value)
 	}
 
 	function setMockPumpValue(settingId, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.pump.startstop0/" + settingId] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.pump.startstop0/" + settingId, value)
 	}
 
 	function setMockSystemValue(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.system/" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.system/" + key, value)
 	}
 
 	function setMockGenerator0Value(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.settings/Settings/Generator0/" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.settings/Settings/Generator0/" + key, value)
 	}
 
 	function setMockGeneratorStartStopValue(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.generator.startstop0/" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.generator.startstop0/" + key, value)
 	}
 
 	function setMockModbusTcpValue(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.modbustcp/" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.modbustcp/" + key, value)
 	}
 
 	function setMockPlatformValue(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.platform/" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.platform/" + key, value)
 	}
 
 	function setMockVecanValue(gateway, key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.vecan." + gateway + "/" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.vecan." + gateway + "/" + key, value)
 	}
 
 	function setMockModemValue(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.modem" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.modem" + key, value)
 	}
 
 	function setMockModemSetting(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.settings/Settings/Modem" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.settings/Settings/Modem" + key, value)
 	}
 
 	function setMockFroniusValue(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.fronius" + "/" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.fronius" + "/" + key, value)
 	}
 
 	function setMockGpsValue(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.gps" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.gps" + key, value)
 	}
 
 	function setMockSolarChargerValue(key, value) {
-		Global.mockDataSimulator.mockDataValues["com.victronenergy.solarcharger.ttyUSB1" + key] = value
+		Global.mockDataSimulator.setMockValue("com.victronenergy.solarcharger.ttyUSB1" + key, value)
 	}
 
 	Component.onCompleted: {
-		// Settings that are converted for convenient UI access
-		Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
-		Global.systemSettings.colorScheme.setValue(Theme.Light)
-		Global.systemSettings.electricalQuantity.setValue(VenusOS.Units_Watt)
-		Global.systemSettings.temperatureUnit.setValue(VenusOS.Units_Temperature_Celsius)
-		Global.systemSettings.volumeUnit.setValue(VenusOS.Units_Volume_CubicMeter)
-		Global.systemSettings.briefView.centralGauges.setValue([VenusOS.Tank_Type_Battery, VenusOS.Tank_Type_Fuel, VenusOS.Tank_Type_FreshWater, VenusOS.Tank_Type_BlackWater])
-		Global.systemSettings.briefView.showPercentages.setValue(0)
-
 		// Other system settings
 		setMockSettingValue("System/VncInternet", 1)
 		setMockSettingValue("System/VncLocal", 1)

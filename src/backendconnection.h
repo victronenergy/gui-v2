@@ -104,6 +104,10 @@ public:
 	bool isApplicationVisible() const;
 	void setApplicationVisible(bool v);
 
+	// Move this to some mock data manager when available
+	Q_INVOKABLE void setMockValue(const QString &uid, const QVariant &value);
+	Q_INVOKABLE QVariant mockValue(const QString &uid) const;
+
 Q_SIGNALS:
 	void stateChanged();
 	void typeChanged();
@@ -128,6 +132,7 @@ private:
 	void initDBusConnection(const QString &address);
 #endif
 	void initMqttConnection(const QString &address);
+	void initMockConnection();
 
 	QString m_username;
 	QString m_password;
