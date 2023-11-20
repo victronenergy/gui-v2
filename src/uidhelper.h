@@ -14,8 +14,6 @@
 #include <QtQml/QQmlEngine>
 #include <QtQml/QJSEngine>
 
-class VeQItemMqttProducer;
-
 namespace Victron {
 
 namespace VenusOS {
