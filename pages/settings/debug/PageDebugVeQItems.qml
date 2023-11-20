@@ -14,7 +14,7 @@ Page {
 		? "dbus"
 		: BackendConnection.type === BackendConnection.MqttSource
 		  ? "mqtt"
-		  : ""
+		  : "mock"
 
 	GradientListView {
 		model: VeQItemTableModel {

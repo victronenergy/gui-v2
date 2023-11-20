@@ -76,7 +76,7 @@ QtObject {
 					Global.evChargers.updateTotals()
 					evCharger.chargingTime += 60
 
-					Global.mockDataSimulator.mockDataValues[serviceUid + "/Current"] = current
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Current", current)
 				}
 			}
 
@@ -93,18 +93,18 @@ QtObject {
 			serviceUid: "com.victronenergy.evcharger.ttyUSB" + deviceInstance
 			name: "EVCharger" + deviceInstance
 			Component.onCompleted: {
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/Mode"] = mode
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/Position"] = 1
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/StartStop"] = 1
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/AutoStart"] = 1
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/EnableDisplay"] = 1
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/MaxCurrent"] = maxCurrent
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Mode", mode)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Position", 1)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/StartStop", 1)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/AutoStart", 1)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/EnableDisplay", 1)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/MaxCurrent", maxCurrent)
 
 				// Device info
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/Mgmt/Connection"] = serviceUid
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/Connected"] = 1
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/ProductName"] = name
-				Global.mockDataSimulator.mockDataValues[serviceUid + "/ProductId"] = "0xC025"
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Mgmt/Connection", serviceUid)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Connected", 1)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/ProductName", name)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/ProductId", "0xC025")
 			}
 		}
 	}

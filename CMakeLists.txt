@@ -145,6 +145,8 @@ set(VENUS_SOURCES
     src/notificationsmodel.cpp
     src/uidhelper.h
     src/uidhelper.cpp
+    src/veqitemmockproducer.h
+    src/veqitemmockproducer.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
 )
