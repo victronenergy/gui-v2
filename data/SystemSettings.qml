@@ -171,7 +171,7 @@ QtObject {
 			repeat: true
 			triggeredOnStart: true
 			running: BackendConnection.applicationVisible
-			onTriggered: root.time.refresh()
+			onTriggered: root.time.getValue(true)   // force value refresh
 		}
 	}
 
@@ -180,7 +180,7 @@ QtObject {
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.systemTimeZone = value
-				root.time.refresh() // ensure the time value is the latest one from the server
+				root.time.getValue(true)    // ensure the time value is the latest one from the server
 			}
 		}
 	}

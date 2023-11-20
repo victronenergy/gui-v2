@@ -89,7 +89,7 @@ Page {
 		repeat: true
 		triggeredOnStart: true
 
-		onTriggered: canStats.refresh()
+		onTriggered: canStats.getValue(true)
 	}
 
 	GradientListView {

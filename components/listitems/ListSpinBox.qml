@@ -20,8 +20,8 @@ ListButton {
 	property real value: !dataValid ? 0 : dataValue
 	property string suffix
 	property int decimals
-	property int from: dataPoint.hasMin ? dataPoint.min || 0 : 0
-	property int to: dataPoint.hasMax ? dataPoint.max || 1000 : 1000
+	property int from: !isNaN(dataPoint.min) ? dataPoint.min : 0
+	property int to: !isNaN(dataPoint.max) ? dataPoint.max : 1000
 	property real stepSize: 1
 	property var presets: []
 
@@ -69,7 +69,5 @@ ListButton {
 
 	DataPoint {
 		id: dataPoint
-		hasMin: valid
-		hasMax: valid
 	}
 }

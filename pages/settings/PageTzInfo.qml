@@ -48,7 +48,7 @@ Page {
 		repeat: true
 		triggeredOnStart: true
 		running: BackendConnection.applicationVisible
-		onTriggered: Global.systemSettings.time.refresh()
+		onTriggered: Global.systemSettings.time.getValue(true)
 	}
 
 	Component {

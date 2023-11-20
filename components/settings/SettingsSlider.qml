@@ -92,8 +92,5 @@ Slider {
 
 	DataPoint {
 		id: dataPoint
-
-		hasMin: true
-		hasMax: true
 	}
 }
