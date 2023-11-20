@@ -19,7 +19,8 @@ QtObject {
 				const uid = model.index === 0
 						  ? "com.victronenergy.settings/Settings/Relay/Function"
 						  : "com.victronenergy.settings/Settings/Relay/%1/Function".arg(model.index)
-				relayFunction = Global.mockDataSimulator.mockDataValues[uid] || -1
+				const value = Global.mockDataSimulator.mockValue(uid)
+				relayFunction = value === undefined ? -1 : value
 			}
 
 			property int state: model.index % 2 == 0 ? VenusOS.Relays_State_Inactive : VenusOS.Relays_State_Active
