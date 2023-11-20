@@ -143,11 +143,10 @@ private:
 	SourceType m_type = UnknownSource;
 	QMqttClient::ClientError m_mqttClientError = QMqttClient::NoError;
 
+	VeQItemProducer *m_producer = nullptr;
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
-	VeQItemDbusProducer *m_dbusProducer = nullptr;
 	AlarmBusitem *m_alarmBusItem = nullptr;
 #endif
-	VeQItemMqttProducer *m_mqttProducer = nullptr;
 	UidHelper *m_uidHelper = nullptr;
 	QNetworkAccessManager *m_network = nullptr;
 };

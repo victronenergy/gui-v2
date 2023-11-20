@@ -77,7 +77,9 @@ void BackendConnection::setState(VeQItemMqttProducer::ConnectionState backendCon
 		setState(BackendConnection::State::Initializing);
 
 		// Ensure that UidHelper receives the com.victronenergy.system/ServiceMapping value.
-		m_mqttProducer->requestValue("mqtt/system/0/ServiceMapping");
+		if (VeQItemMqttProducer *mqttProducer = qobject_cast<VeQItemMqttProducer *>(m_producer)) {
+			mqttProducer->requestValue("mqtt/system/0/ServiceMapping");
+		}
 		break;
 	}
 	case VeQItemMqttProducer::Ready:
@@ -118,10 +120,12 @@ BackendConnection::MqttClientError BackendConnection::mqttClientError() const
 
 void BackendConnection::mqttErrorChanged()
 {
-	qWarning() << "MQTT client error:" << m_mqttProducer->error();
-	if (m_mqttProducer->error() != m_mqttClientError) {
-		m_mqttClientError = m_mqttProducer->error();
-		emit mqttClientErrorChanged();
+	if (VeQItemMqttProducer *mqttProducer = qobject_cast<VeQItemMqttProducer *>(m_producer)) {
+		qWarning() << "MQTT client error:" << mqttProducer->error();
+		if (mqttProducer->error() != m_mqttClientError) {
+			m_mqttClientError = mqttProducer->error();
+			emit mqttClientErrorChanged();
+		}
 	}
 }
 
@@ -133,7 +137,8 @@ BackendConnection::SourceType BackendConnection::type() const
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 void BackendConnection::initDBusConnection(const QString &address)
 {
-	m_dbusProducer = new VeQItemDbusProducer(VeQItems::getRoot(), "dbus");
+	VeQItemDbusProducer *dbusProducer = new VeQItemDbusProducer(VeQItems::getRoot(), "dbus");
+	m_producer = dbusProducer;
 
 	if (address.isEmpty()) {
 		qWarning() << "Connecting to system bus...";
@@ -152,8 +157,8 @@ void BackendConnection::initDBusConnection(const QString &address)
 		return;
 	}
 
-	m_dbusProducer->open(dbus);
-	DBusServices *alarmServices = new DBusServices(m_dbusProducer->services(), this);
+	dbusProducer->open(dbus);
+	DBusServices *alarmServices = new DBusServices(dbusProducer->services(), this);
 	m_alarmBusItem = new AlarmBusitem(alarmServices, ActiveNotificationsModel::instance());
 	alarmServices->initialScan();
 
@@ -169,36 +174,36 @@ void BackendConnection::initMqttConnection(const QString &address)
 		qCritical("No MQTT address specified!");
 		return;
 	}
-	if (m_mqttProducer) {
-		m_mqttProducer->deleteLater();
-		m_mqttProducer = nullptr;
-	}
 
-	m_mqttProducer = new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt", "gui-v2");
+	VeQItemMqttProducer *mqttProducer = new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt", "gui-v2");
+	m_producer = mqttProducer;
+
 	m_uidHelper = UidHelper::instance();
-	connect(m_mqttProducer, &VeQItemMqttProducer::aboutToConnect,
-		m_mqttProducer, [this] {
+	connect(mqttProducer, &VeQItemMqttProducer::aboutToConnect,
+			mqttProducer, [this] {
+		if (VeQItemMqttProducer *producer = qobject_cast<VeQItemMqttProducer *>(m_producer)) {
 			if (!m_token.isEmpty()) {
-				m_mqttProducer->setCredentials(m_username, m_token);
+				producer->setCredentials(m_username, m_token);
 			} else if (!m_username.isEmpty() || !m_password.isEmpty()) {
 				// TODO: fetch updated credentials via VRM API if required...
-				m_mqttProducer->setCredentials(m_username, m_password);
+				producer->setCredentials(m_username, m_password);
 			}
-			m_mqttProducer->setPortalId(m_portalId);
-			m_mqttProducer->continueConnect();
-		});
-	connect(m_mqttProducer, &VeQItemMqttProducer::messageReceived,
-		m_uidHelper, &UidHelper::onMessageReceived);
-	connect(m_mqttProducer, &VeQItemMqttProducer::nullMessageReceived,
-		m_uidHelper, &UidHelper::onNullMessageReceived);
-	connect(m_mqttProducer, &VeQItemMqttProducer::connectionStateChanged, this, [=] {
-		setState(m_mqttProducer->connectionState());
+			producer->setPortalId(m_portalId);
+			producer->continueConnect();
+		}
 	});
-	connect(m_mqttProducer, &VeQItemMqttProducer::errorChanged,
+	connect(mqttProducer, &VeQItemMqttProducer::messageReceived,
+		m_uidHelper, &UidHelper::onMessageReceived);
+	connect(mqttProducer, &VeQItemMqttProducer::nullMessageReceived,
+		m_uidHelper, &UidHelper::onNullMessageReceived);
+	connect(mqttProducer, &VeQItemMqttProducer::connectionStateChanged, this, [=] {
+		setState(mqttProducer->connectionState());
+	});
+	connect(mqttProducer, &VeQItemMqttProducer::errorChanged,
 		this, &BackendConnection::mqttErrorChanged);
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-	m_mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);
+	mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);
 #else
 	const QStringList parts = address.split(':');
 	if (parts.size() >= 2) {
@@ -206,14 +211,14 @@ void BackendConnection::initMqttConnection(const QString &address)
 		const int port = parts[1].toInt(&ok);
 		if (ok) {
 			qDebug() << "connecting to: " << parts[0] << ":" << port;
-			m_mqttProducer->open(QHostAddress(parts[0]), port);
+			mqttProducer->open(QHostAddress(parts[0]), port);
 		} else {
 			qWarning() << "Unable to parse port. Using default MQTT port: 1883";
-			m_mqttProducer->open(QHostAddress(parts[0]), 1883);
+			mqttProducer->open(QHostAddress(parts[0]), 1883);
 		}
 	} else {
 		qDebug() << "Using default MQTT port: 1883";
-		m_mqttProducer->open(QHostAddress(address), 1883);
+		mqttProducer->open(QHostAddress(address), 1883);
 	}
 #endif
 }
@@ -224,6 +229,11 @@ void BackendConnection::setType(const SourceType type, const QString &address)
 		return;
 	}
 	m_type = type;
+
+	if (m_producer) {
+		m_producer->deleteLater();
+		m_producer = nullptr;
+	}
 
 	switch (type) {
 	case DBusSource:
