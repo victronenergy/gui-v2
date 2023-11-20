@@ -41,8 +41,6 @@ Page {
 					id: capacity
 
 					source: root.bindPrefix + "/Capacity"
-					hasMin: true
-					hasMax: true
 				}
 			}
 

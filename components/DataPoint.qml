@@ -7,7 +7,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 
-QtObject {
+VeQuickItem {
 	id: root
 
 	// Valid 'source' values are:
@@ -18,107 +18,35 @@ QtObject {
 	// respective backend connection types. If a mqtt uid is used on a dbus connection, for
 	// example, the DataPoint would not produce a valid value.
 	property string source
-	property var sourceObject
 
-	readonly property var value: sourceObject ? sourceObject.value : undefined
-	readonly property bool valid: value !== undefined
-	readonly property bool seen: !!sourceObject && sourceObject.seen
+	// Using 'valid' to be more aligned with other QML APIs
+	readonly property alias valid: root.isValid
 
-	property bool hasMin
-	property bool hasMax
-	readonly property var min: hasMin && sourceObject ? sourceObject.min : undefined
-	readonly property var max: hasMax && sourceObject ? sourceObject.max : undefined
-	property bool invalidate: true
+	readonly property SingleUidHelper _uidConverter: BackendConnection.type === BackendConnection.MqttSource
+			? _uidConverterComponent.createObject(root)
+			: null
 
-	property Component _dbusComponent : Component {
-		VeQuickItem {
-			uid: root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source
-			invalidate: root.invalidate
-
-			onInvalidateChanged: root.invalidate = invalidate
+	readonly property Component _uidConverterComponent: Component {
+		SingleUidHelper {
+			dbusUid: root.source.length === 0 || root.source.startsWith("mqtt/") ? ""
+				   : (root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source)
 		}
 	}
 
-	property Component _mqttComponent : Component {
-		VeQuickItem {
-			readonly property string mqttUid: root.source.startsWith("mqtt/") ? root.source : _uidConverter.mqttUid
-
-			readonly property SingleUidHelper _uidConverter: SingleUidHelper {
-				dbusUid: root.source.length === 0 || root.source.startsWith("mqtt/")
-						 ? ""
-						 : (root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source)
-			}
-
-			uid: mqttUid
-			invalidate: root.invalidate
-
-			onInvalidateChanged: root.invalidate = invalidate
-		}
-	}
-
-	property Component _mockComponent : Component {
-		QtObject {
-			property string source: root.source
-			property var value: Global.mockDataSimulator ? Global.mockDataSimulator.mockDataValues[source] : undefined
-			property bool seen: true
-			property real min: 0
-			property real max: 100
-			property bool invalidate: root.invalidate
-
-			function setValue(v) {
-				value = v
-			}
-
-			function getValue(force) {
-				// no-op
-			}
-
-			onInvalidateChanged: root.invalidate = invalidate
-		}
-	}
-
-	function setValue(v) {
-		if (sourceObject) {
-			sourceObject.setValue(v)
-		} else {
-			console.warn("setValue() failed, no sourceObject for source", source)
-		}
-	}
-
-	function refresh() {
-		if (sourceObject) {
-			sourceObject.getValue(true)
-		} else {
-			console.warn("refresh() failed, no sourceObject for source", source)
-		}
-	}
-
-	function _reset() {
+	uid: {
 		if (source.length === 0) {
-			return
+			return ""
 		}
-		if (sourceObject) {
-			sourceObject.destroy()
-			sourceObject = null
-		}
-		// TODO: maybe use incubateObject() in future if synchronous construction of sourceObject
-		// takes too long.
 		switch (BackendConnection.type) {
 		case BackendConnection.DBusSource:
-			sourceObject = _dbusComponent.createObject(root)
-			break
+			return root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source
 		case BackendConnection.MqttSource:
-			sourceObject = _mqttComponent.createObject(root)
-			break
+			return root.source.startsWith("mqtt/") ? root.source : _uidConverter.mqttUid
 		case BackendConnection.MockSource:
-			sourceObject = _mockComponent.createObject(root)
-			break
+			return "mock/" + source
 		default:
 			console.warn("Unknown DataPoint source type:", BackendConnection.type)
 			break
 		}
 	}
-
-	onSourceChanged: _reset()
-	Component.onCompleted: _reset()
 }
