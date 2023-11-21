@@ -12,7 +12,7 @@ QtObject {
 	function populate() {
 		// Add a random set of DC inputs.
 		// Have 2 inputs at most, to leave some space for AC inputs in overview page
-		const serviceTypes = ["alternator", "fuelcell", "dcload", "dcsource", "dcsystem"]
+		const serviceTypes = ["alternator", "fuelcell", "dcsource"]
 		const modelCount = Math.floor(Math.random() * 2) + 1
 		for (let i = 0; i < modelCount; ++i) {
 			const type = Math.floor(Math.random() * serviceTypes.length)
@@ -49,7 +49,7 @@ QtObject {
 		MockDevice {
 			id: input
 
-			readonly property int inputType: Global.dcInputs.inputType(serviceType, monitorMode)
+			readonly property int inputType: Global.dcInputs.inputType(serviceUid, monitorMode)
 			property string serviceType
 			property int monitorMode: -1    // generic DC source
 
