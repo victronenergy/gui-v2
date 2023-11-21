@@ -86,7 +86,8 @@
     "color.overviewPage.widget.sideGauge.highlight": "color.ok",
     "color.overviewPage.widget.solar.graph.bar": "color.ok",
     "color.overviewPage.widget.battery.background": "color.blue",
-    "color.overviewPage.widget.battery.animatedBar": "#7394bd",
+    "color.overviewPage.widget.battery.bubble.background": "#7394bd",
+    "color.overviewPage.widget.battery.bubble.border": "#FFFFFF",
 
     "color.briefPage.background": "color.gray9",
     "color.briefPage.battery.value.text.color": "color.gray2",

@@ -11,7 +11,6 @@ import Victron.Units
 OverviewWidget {
 	id: root
 
-	property alias animationPaused: barAnimation.paused
 	readonly property var batteryData: Global.batteries.system
 
 	readonly property int _normalizedStateOfCharge: Math.round(batteryData.stateOfCharge || 0)
@@ -44,151 +43,110 @@ OverviewWidget {
 		}
 		radius: Theme.geometry.overviewPage.widget.battery.background.radius
 
-		Grid {
-			id: animationGrid
-			anchors {
-				top: parent.top
-				topMargin: parent.height - Math.floor(parent.height * _normalizedStateOfCharge/100) - root.border.width*2
-				horizontalCenter: parent.horizontalCenter
-				bottom: parent.bottom
-			}
+		Item {
+			id: animationClip
 
-			topPadding: Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing / 2
-			horizontalItemAlignment: Grid.AlignHCenter
-			visible: batteryData.mode === VenusOS.Battery_Mode_Charging
+			width: parent.width
+			height: parent.height * (_normalizedStateOfCharge/100)
+			y: parent.height - height
+			visible: batteryData.mode === VenusOS.Battery_Mode_Charging && root._animationReady
+			clip: true
 
-			columns: {
-				const maxWidth = parent.width - Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*4
-				const maxColumns = Math.floor(maxWidth / (Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
-					+ Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*2))
-				// Ensure an odd column count so that bars animate differently in alternate rows
-				return Math.max(0, maxColumns % 2 ? maxColumns : maxColumns - 1)
-			}
+			Timer {
+				id: delayedStartTimer
+				property int count: 0
+				property bool startRunning: root._animationReady
+				interval: Theme.animation.overviewPage.widget.battery.bubble.duration / Theme.animation.overviewPage.widget.battery.bubbles
+				repeat: true
 
-			Repeater {
-				id: animatedBarsRepeater
-
-				model: {
-					// Always use the compactHeight to calculate the model, to avoid changing the
-					// model when switching between expanded and compact height.
-					const compactAnimatingAreaHeight = Math.floor(root.compactHeight * _normalizedStateOfCharge/100) - root.border.width*2
-					const maxHeight = compactAnimatingAreaHeight - Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2
-					const maxRows = maxHeight / (Theme.geometry.overviewPage.widget.battery.animatedBar.height
-						+ Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2)
-					const rows = Math.max(0, Math.floor(maxRows))
-
-					// Ensure an odd row count so that the animation does not jump (due to changes
-					// in the alternate-row pattern of animations) when the model changes.
-					const oddRowCount = Math.max(0, rows % 2 ? rows : rows - 1)
-					return animationGrid.columns * oddRowCount
-				}
-
-				delegate: Item {
-					id: animatedBar
-
-					property alias barWidth: bar.width
-
-					width: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
-						   + Theme.geometry.overviewPage.widget.battery.animatedBar.horizontalSpacing*2
-					height: Theme.geometry.overviewPage.widget.battery.animatedBar.height
-							+ Theme.geometry.overviewPage.widget.battery.animatedBar.verticalSpacing*2
-
-					Rectangle {
-						id: bar
-
-						anchors.centerIn: parent
-						height: Theme.geometry.overviewPage.widget.battery.animatedBar.height
-						color: Theme.color.overviewPage.widget.battery.animatedBar
-						radius: height
+				onStartRunningChanged: {
+					if (startRunning) {
+						count = 0
+						running = true
 					}
+				}
 
-					Component.onCompleted: Qt.callLater(barAnimation.update)
+				onTriggered: {
+					if (count++ > Theme.animation.overviewPage.widget.battery.bubbles) {
+						running = false
+					}
 				}
 			}
-		}
 
-		Rectangle {
-			anchors.fill: animationGrid
+			Row {
+				id: chimneysRow
 
-			gradient: Gradient {
-				GradientStop { position: 0.0; color: "transparent" }
-				GradientStop { position: 1.0; color: Theme.color.overviewPage.widget.battery.background }
-			}
-		}
-	}
+				height: parent.height
 
-	SequentialAnimation {
-		id: barAnimation
+				Repeater {
+					id: chimneyRepeater
 
-		property var _evenAnimationTargets: []
-		property var _oddAnimationTargets: []
+					model: Theme.animation.overviewPage.widget.battery.chimneys
 
-		function update() {
-			let evenTargets = []
-			let oddTargets = []
-			for (let i = 0; i < animatedBarsRepeater.count; ++i) {
-				const animationTarget = animatedBarsRepeater.itemAt(i)
-				if (!animationTarget) {
-					// Don't set animation targets until all bar delegates have been initialized
-					return
+					delegate: Item {
+						id: chimney // a "chimney" which the bubbles rise up within.
+
+						required property int index
+
+						width: animationClip.width / Theme.animation.overviewPage.widget.battery.chimneys
+						height: root.expandedHeight // always full height, the clip item will clip it.
+						y: -(height - animationClip.height)
+
+						Repeater {
+							model: Theme.animation.overviewPage.widget.battery.bubbles
+							delegate: Rectangle {
+								id: bubble
+								required property int index
+								y: chimney.height
+								width: Theme.geometry.overviewPage.widget.battery.bubble.width
+								height: width
+								color: Theme.color.overviewPage.widget.battery.bubble.background
+								radius: height/2
+								border.width: 1
+								border.color: Theme.color.overviewPage.widget.battery.bubble.border
+
+								YAnimator {
+									id: yanimator
+									target: bubble
+									from: chimney.height
+									to: 0
+									duration: Theme.animation.overviewPage.widget.battery.bubble.duration + 100*Math.random()*bubble.index
+									easing.type: Easing.InOutQuad
+									loops: Animation.Infinite
+									running: root._animationReady && delayedStartTimer.count >= bubble.index
+								}
+
+								XAnimator {
+									target: bubble
+									// define three slightly different paths for bubbles.
+									from: bubble.index % 3 === 0 ? chimney.width/2 - bubble.width
+									    : bubble.index % 2 === 0 ? chimney.width - 3*bubble.width
+									    : (3*bubble.width)
+									to: bubble.index % 3 === 0 ? chimney.width/2 + bubble.width
+									  : bubble.index % 2 === 0 ? 3*bubble.width
+									  : (chimney.width - 3*bubble.width)
+									duration: yanimator.duration
+									easing.type: Easing.InBack
+									easing.overshoot: Math.max(2.0, (0.8 + Math.random() * bubble.index))
+									loops: Animation.Infinite
+									running: yanimator.running
+								}
+
+								OpacityAnimator {
+									target: bubble
+									from: Theme.animation.overviewPage.widget.battery.bubble.opacity
+									to: 0.0
+									easing.type: Easing.InQuad
+									duration: yanimator.duration
+									loops: Animation.Infinite
+									running: yanimator.running
+									onRunningChanged: if (!running) bubble.opacity = 0
+								}
+							}
+						}
+					}
 				}
-				if (i % 2 == 0) {
-					evenTargets.push(animationTarget)
-				} else {
-					oddTargets.push(animationTarget)
-				}
 			}
-			barAnimation._evenAnimationTargets = evenTargets
-			barAnimation._oddAnimationTargets = oddTargets
-			if (root._animationReady) {
-				barAnimation.restart()
-			}
-		}
-
-		loops: Animation.Infinite
-		running: root._animationReady
-
-		ParallelAnimation {
-			NumberAnimation {
-				targets: barAnimation._evenAnimationTargets
-				property: "barWidth"
-				from: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
-				to: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
-				duration: 800
-				alwaysRunToEnd: true
-			}
-			NumberAnimation {
-				targets: barAnimation._oddAnimationTargets
-				property: "barWidth"
-				from: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
-				to: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
-				duration: 800
-				alwaysRunToEnd: true
-			}
-		}
-		PauseAnimation {
-			duration: 200
-		}
-		ParallelAnimation {
-			NumberAnimation {
-				targets: barAnimation._evenAnimationTargets
-				property: "barWidth"
-				from: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
-				to: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
-				duration: 800
-				alwaysRunToEnd: true
-			}
-			NumberAnimation {
-				targets: barAnimation._oddAnimationTargets
-				property: "barWidth"
-				from: Theme.geometry.overviewPage.widget.battery.animatedBar.maximumWidth
-				to: Theme.geometry.overviewPage.widget.battery.animatedBar.minimumWidth
-				duration: 800
-				alwaysRunToEnd: true
-			}
-		}
-		PauseAnimation {
-			duration: 200
 		}
 	}
 
