@@ -1,8 +1,3 @@
-# stripped, no debug:   9,393,720
-# unstripped, no debug: 9,393,272
-# stripped, debug:     19,242,656
-# unstripped, debug:  220,765,388
-
 cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'qt_add_qml_module' properly, you get errors at runtime like: "qrc:/main.qml:164 ApplicationContent is not a type\n"
 
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
@@ -23,23 +18,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 message("Building VenusOS for ${CMAKE_SYSTEM_NAME}")
 message("CXXFLAGS: ${CXXFLAGS}")
 message("CFLAGS: ${CFLAGS}")
-message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
-message("CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
-message("CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
-message("CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
-message("CONFIG: ${CONFIG}")
-message("CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
-message("CMAKE_C_COMPILER: " ${CMAKE_C_COMPILER})
-message("CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER})
-message("COMPILE_OPTIONS: " ${COMPILE_OPTIONS})
-message("COMPILE_DEFINITIONS: " ${COMPILE_DEFINITIONS})
-message("CMAKE_SYSROOT: " ${CMAKE_SYSROOT})
-message("CMAKE_SYSTEM: " ${CMAKE_SYSTEM})
-message("CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR})
 
 option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD=ON" OFF) # Disabled by default
 option(VENUS_WEBASSEMBLY_BUILD "enable webassembly build via cmake -DVENUS_WEBASSEMBLY_BUILD=ON" OFF) # Disabled by default
 option(MQTT_WEBSOCKETS_ENABLED "enable websockets build via cmake -DMQTT_WEBSOCKETS_ENABLED=ON" OFF) # Disabled by default
+
+# If we want a release build, and the '-g' debug compiler flag is set by the environment setup script, remove it.
+# Otherwise, our executable size ballons from ~10MB to ~220MB.
+string(FIND CMAKE_CXX_FLAGS " -g " FOUND_DEBUG_COMPILER_FLAG)
+if((${CMAKE_BUILD_TYPE} STREQUAL "Release" OR ${CMAKE_BUILD_TYPE} STREQUAL "MinSizeRel") AND NOT(FOUND_DEBUG_COMPILER_FLAG EQUAL -1))
+    message("Removing '-g' debug flag set by /opt/venus/dunfell-arm-cortexa7hf-neon-vfpv4/environment-setup-cortexa7hf-neon-vfpv4-ve-linux-gnueabi")
+    string(REPLACE " -g " " " CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+    message("new CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS} ")
+endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
