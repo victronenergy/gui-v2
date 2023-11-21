@@ -134,8 +134,8 @@ Page {
 				   || serviceType === "dcload"
 				   || serviceType === "dcsystem"
 				   || serviceType === "alternator") {
-			url = serviceType === "alternator" ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
-					: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
+			url = serviceType === "alternator" ? "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/dc-in/PageAlternator.qml"
+					: "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 			params = { "title": device.name, "bindPrefix": device.serviceUid }
 			summary = [
 				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
@@ -171,6 +171,8 @@ Page {
 				Global.batteries.model,
 				Global.chargers.model,
 				Global.dcInputs.model,
+				Global.dcLoads.model,
+				Global.dcSystems.model,
 				Global.digitalInputs.model,
 				Global.environmentInputs.model,
 				Global.evChargers.model,
