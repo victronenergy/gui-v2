@@ -17,6 +17,8 @@ Item {
 			&& !!Global.chargers
 			&& !!Global.batteries
 			&& !!Global.dcInputs
+			&& !!Global.dcLoads
+			&& !!Global.dcSystems
 			&& !!Global.digitalInputs
 			&& !!Global.environmentInputs
 			&& !!Global.ess
@@ -86,6 +88,8 @@ Item {
 	Chargers {}
 	Batteries {}
 	DcInputs {}
+	DcLoads {}
+	DcSystems {}
 	DigitalInputs {}
 	EnvironmentInputs {}
 	Ess {}

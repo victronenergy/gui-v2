@@ -226,6 +226,8 @@ set (VENUS_QML_MODULE_SOURCES
     data/Batteries.qml
     data/DataManager.qml
     data/DcInputs.qml
+    data/DcLoads.qml
+    data/DcSystems.qml
     data/DigitalInputs.qml
     data/EnvironmentInputs.qml
     data/Ess.qml
@@ -255,7 +257,10 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/AcInputSettings.qml
     data/common/Battery.qml
     data/common/Charger.qml
+    data/common/DcDevice.qml
     data/common/DcInput.qml
+    data/common/DcLoad.qml
+    data/common/DcSystem.qml
     data/common/DigitalInput.qml
     data/common/DeviceModel.qml
     data/common/EnvironmentInput.qml
@@ -445,6 +450,8 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/ChargersImpl.qml
     data/dbus/DBusDataManager.qml
     data/dbus/DcInputsImpl.qml
+    data/dbus/DcLoadsImpl.qml
+    data/dbus/DcSystemsImpl.qml
     data/dbus/DigitalInputsImpl.qml
     data/dbus/EnvironmentInputsImpl.qml
     data/dbus/EssImpl.qml
@@ -482,6 +489,8 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/BatteriesImpl.qml
     data/mock/ChargersImpl.qml
     data/mock/DcInputsImpl.qml
+    data/mock/DcLoadsImpl.qml
+    data/mock/DcSystemsImpl.qml
     data/mock/DigitalInputsImpl.qml
     data/mock/EnvironmentInputsImpl.qml
     data/mock/EssImpl.qml
@@ -569,6 +578,8 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/BatteriesImpl.qml
     data/mqtt/ChargersImpl.qml
     data/mqtt/DcInputsImpl.qml
+    data/mqtt/DcLoadsImpl.qml
+    data/mqtt/DcSystemsImpl.qml
     data/mqtt/DigitalInputsImpl.qml
     data/mqtt/EnvironmentInputsImpl.qml
     data/mqtt/EssImpl.qml
