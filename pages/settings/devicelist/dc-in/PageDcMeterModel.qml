@@ -72,7 +72,7 @@ ObjectModel {
 		text: CommonWords.alarms
 		visible: !isSssDcEnergyMeter
 		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml",
+			Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 	}
@@ -81,7 +81,7 @@ ObjectModel {
 		text: CommonWords.history
 		visible: !isSssDcEnergyMeter
 		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeterHistory.qml",
+			Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/dc-in/PageDcMeterHistory.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 	}
@@ -89,7 +89,7 @@ ObjectModel {
 	ListNavigationItem {
 		text: CommonWords.device_info_title
 		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
+			Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageDeviceInfo.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 	}

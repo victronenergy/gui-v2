@@ -5,8 +5,8 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Units.js" as Units
-import "/components/Utils.js" as Utils
+import Victron.Units
+import Victron.Utils
 
 ObjectModel {
 	id: root
@@ -236,7 +236,7 @@ ObjectModel {
 	ListNavigationItem {
 		text: CommonWords.device_info_title
 		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
+			Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageDeviceInfo.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 	}

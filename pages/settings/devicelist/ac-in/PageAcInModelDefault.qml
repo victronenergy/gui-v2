@@ -5,8 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import "/components/Units.js" as Units
-import "../../" as SettingsPages
+import Victron.Units
 
 ObjectModel {
 	id: root
@@ -142,7 +141,7 @@ ObjectModel {
 		text: CommonWords.setup
 		visible: allowedRoles.valid
 		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
+			Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 
@@ -161,7 +160,7 @@ ObjectModel {
 		Component {
 			id: deviceInfoComponent
 
-			SettingsPages.PageDeviceInfo {
+			PageDeviceInfo {
 				id: deviceInfoPage
 
 				bindPrefix: root.bindPrefix
