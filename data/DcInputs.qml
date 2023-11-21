@@ -58,16 +58,15 @@ QtObject {
 		current = NaN
 	}
 
-	function inputType(serviceType, monitorMode) {
+	function inputType(serviceUid, monitorMode) {
+		const serviceType = BackendConnection.type === BackendConnection.MqttSource
+					? serviceUid.split("/")[1] || ""
+					: serviceUid.split(".")[2] || ""
 		switch (serviceType) {
 		case "alternator":
 			return VenusOS.DcInputs_InputType_Alternator
 		case "fuelcell":
 			return VenusOS.DcInputs_InputType_FuelCell
-		case "dcload":
-			return VenusOS.DcInputs_InputType_DcLoad
-		case "dcsystem":
-			return VenusOS.DcInputs_InputType_DcSystem
 		case "dcsource":
 			// use the monitor mode to determine a sub-type
 			break
@@ -96,7 +95,8 @@ QtObject {
 		case -8:
 			return VenusOS.DcInputs_InputType_Wind
 		default:
-			return VenusOS.DcInputs_InputType_DcLoad
+			// Generic DC input = DC generator
+			return VenusOS.DcInputs_InputType_DcGenerator
 		}
 	}
 
@@ -114,13 +114,6 @@ QtObject {
 		case VenusOS.DcInputs_InputType_DcGenerator:
 			//% "DC generator"
 			return qsTrId("dcInputs_dc_generator")
-		case VenusOS.DcInputs_InputType_DcLoad:
-			//: A generic DC load device
-			//% "DC load"
-			return qsTrId("dcInputs_dc_load")
-		case VenusOS.DcInputs_InputType_DcSystem:
-			//% "DC system"
-			return qsTrId("dcInputs_dc_system")
 		case VenusOS.DcInputs_InputType_FuelCell:
 			//% "Fuel cell"
 			return qsTrId("dcInputs_fuelcell")

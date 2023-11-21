@@ -11,7 +11,6 @@ Page {
 	id: root
 
 	property alias bindPrefix: dcMeterMode.bindPrefix
-	property alias serviceType: dcMeterMode.serviceType
 
 	GradientListView {
 		model: PageDcMeterModel {

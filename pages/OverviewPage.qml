@@ -22,8 +22,6 @@ Page {
 		VenusOS.OverviewWidget_Type_DcGenerator,
 		VenusOS.OverviewWidget_Type_Alternator,
 		VenusOS.OverviewWidget_Type_FuelCell,
-		VenusOS.OverviewWidget_Type_DcLoad,
-		VenusOS.OverviewWidget_Type_DcSystem,
 		VenusOS.OverviewWidget_Type_Wind,
 		VenusOS.OverviewWidget_Type_Solar
 	]
@@ -216,10 +214,7 @@ Page {
 			widget = dcGeneratorComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_FuelCell:
-		case VenusOS.OverviewWidget_Type_DcLoad:
-		case VenusOS.OverviewWidget_Type_DcSystem:
 			widget = dcInputComponent.createObject(root, args)
-			widget.type = type
 			break
 		case VenusOS.OverviewWidget_Type_Evcs:
 			widget = evcsComponent.createObject(root, args)
@@ -285,12 +280,6 @@ Page {
 				break
 			case VenusOS.DcInputs_InputType_FuelCell:
 				widgetType = VenusOS.OverviewWidget_Type_FuelCell
-				break
-			case VenusOS.DcInputs_InputType_DcLoad:
-				widgetType = VenusOS.OverviewWidget_Type_DcLoad
-				break
-			case VenusOS.DcInputs_InputType_DcSystem:
-				widgetType = VenusOS.OverviewWidget_Type_DcSystem
 				break
 			case VenusOS.DcInputs_InputType_Wind:
 				widgetType = VenusOS.OverviewWidget_Type_Wind
