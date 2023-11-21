@@ -136,7 +136,7 @@ Page {
 				   || serviceType === "alternator") {
 			url = serviceType === "alternator" ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
 					: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
-			params = { "title": device.name, "bindPrefix": device.serviceUid, "serviceType": serviceType }
+			params = { "title": device.name, "bindPrefix": device.serviceUid }
 			summary = [
 				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
 				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),

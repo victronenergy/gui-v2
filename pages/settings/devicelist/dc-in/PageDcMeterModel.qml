@@ -10,7 +10,6 @@ ObjectModel {
 	id: root
 
 	property string bindPrefix
-	property string serviceType
 
 	readonly property bool isSssDcEnergyMeter: productId.value === 0xB013
 
@@ -23,7 +22,7 @@ ObjectModel {
 	}
 
 	ListQuantityGroup {
-		text: Global.dcInputs.inputTypeToText(Global.dcInputs.inputType(root.serviceType, monitorMode.value))
+		text: Global.dcInputs.inputTypeToText(Global.dcInputs.inputType(root.bindPrefix, monitorMode.value))
 		textModel: [
 			{ value: dcVoltage.value, unit: VenusOS.Units_Volt },
 			{ value: dcCurrent.value, unit: VenusOS.Units_Amp },

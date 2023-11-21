@@ -9,7 +9,6 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string serviceType
 	property string bindPrefix
 
 	// wakespeedProductId should always be equal to VE_PROD_ID_WAKESPEED_WS500
@@ -53,7 +52,6 @@ Page {
 
 		PageDcMeterModel {
 			bindPrefix: root.bindPrefix
-			serviceType: root.serviceType
 		}
 	}
 }

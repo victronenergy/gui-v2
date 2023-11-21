@@ -15,9 +15,7 @@ QtObject {
 			uids: [
 				"mqtt/alternator",
 				"mqtt/fuelcell",
-				"mqtt/dcload",
 				"mqtt/dcsource",
-				"mqtt/dcsystem",
 			]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
