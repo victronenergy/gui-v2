@@ -68,6 +68,8 @@ set (VENUS_QML_MODULE_SOURCES
     FrameRateVisualizer.qml
 
     components/AcceptButtonBackground.qml
+    components/AcOutput.qml
+    components/AcPhase.qml
     components/Arc.qml
     components/ArcGauge.qml
     components/ArcGaugeQuantityLabel.qml
@@ -102,11 +104,10 @@ set (VENUS_QML_MODULE_SOURCES
     components/PageStack.qml
     components/ProgressArc.qml
     components/QuantityLabel.qml
+    components/QuantityRepeater.qml
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
     components/RadioButtonControlValue.qml
-    components/ScaledArc.qml
-    components/ScaledArcGauge.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ShinyProgressArc.qml
@@ -125,6 +126,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/TankGauge.qml
     components/TankGaugeGroup.qml
     components/ThreePhaseDisplay.qml
+    components/ThreePhaseQuantityTable.qml
     components/TimeSelector.qml
     components/ToastNotification.qml
     components/ValueRange.qml
@@ -139,12 +141,14 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ListItemButton.qml
     components/controls/ProgressBar.qml
     components/controls/RadioButton.qml
+    components/controls/RangeSlider.qml
     components/controls/ScrollBar.qml
     components/controls/Slider.qml
     components/controls/SpinBox.qml
     components/controls/Switch.qml
     components/controls/TextField.qml
 
+    components/dialogs/CurrentLimitDialog.qml
     components/dialogs/DateSelectorDialog.qml
     components/dialogs/DialogShadow.qml
     components/dialogs/VrmInstanceSwapDialog.qml
@@ -171,6 +175,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListRadioButtonGroup.qml
     components/listitems/ListQuantityGroup.qml
     components/listitems/ListQuantityItem.qml
+    components/listitems/ListRangeSlider.qml
     components/listitems/ListSlider.qml
     components/listitems/ListSpinBox.qml
     components/listitems/ListSwitch.qml
@@ -181,8 +186,16 @@ set (VENUS_QML_MODULE_SOURCES
 
     components/settings/CGwacsBatteryScheduleNavigationItem.qml
     components/settings/FirmwareCheckListButton.qml
+    components/settings/Led.qml
+    components/settings/ListAlarmState.qml
+    components/settings/ListClearHistoryButton.qml
     components/settings/ListDvccSwitch.qml
+    components/settings/ListFirmwareVersionItem.qml
+    components/settings/ListRelayState.qml
+    components/settings/ListResetHistoryLabel.qml
     components/settings/MountStateListButton.qml
+    components/settings/PvInverterPositionRadioButtonGroup.qml
+    components/settings/SettingsRangeSlider.qml
     components/settings/SettingsSlider.qml
     components/settings/TemperatureRelayNavigationItem.qml
     components/settings/TemperatureRelaySettings.qml
@@ -354,12 +367,44 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/debug/PageSettingsDemo.qml
     pages/settings/debug/PageSystemData.qml
     pages/settings/devicelist/DeviceListPage.qml
+    pages/settings/devicelist/AcInDeviceModel.qml
     pages/settings/devicelist/PageNotYetImplemented.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
+    pages/settings/devicelist/battery/BatteryDetails.qml
+    pages/settings/devicelist/battery/BatterySettingsAlarmModel.qml
+    pages/settings/devicelist/battery/BatterySettingsRelayModel.qml
+    pages/settings/devicelist/battery/FuseInfo.qml
+    pages/settings/devicelist/battery/Page48TlDiagnostics.qml
+    pages/settings/devicelist/battery/PageBattery.qml
+    pages/settings/devicelist/battery/PageBatteryAlarms.qml
+    pages/settings/devicelist/battery/PageBatteryDetails.qml
+    pages/settings/devicelist/battery/PageBatteryHistory.qml
+    pages/settings/devicelist/battery/PageBatteryModuleAlarms.qml
+    pages/settings/devicelist/battery/PageBatteryParameters.qml
+    pages/settings/devicelist/battery/PageBatterySettings.qml
+    pages/settings/devicelist/battery/PageBatterySettingsBattery.qml
+    pages/settings/devicelist/battery/PageLynxDistributorList.qml
+    pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml
+    pages/settings/devicelist/battery/PageLynxIonIo.qml
+    pages/settings/devicelist/battery/PageLynxIonSystem.qml
+    pages/settings/devicelist/dc-in/PageAlternator.qml
+    pages/settings/devicelist/dc-in/PageAlternatorModelWakespeed.qml
+    pages/settings/devicelist/dc-in/PageDcMeter.qml
+    pages/settings/devicelist/dc-in/PageDcMeterModel.qml
+    pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml
+    pages/settings/devicelist/dc-in/PageDcMeterHistory.qml
     pages/settings/devicelist/tank/PageTankAlarm.qml
     pages/settings/devicelist/tank/PageTankSensor.qml
     pages/settings/devicelist/tank/PageTankSetup.qml
     pages/settings/devicelist/tank/PageTankShape.qml
+    pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml
+    pages/settings/devicelist/ac-in/PageAcIn.qml
+    pages/settings/devicelist/ac-in/PageAcInSetup.qml
+    pages/settings/devicelist/ac-in/PageAcInModelGenset.qml
+    pages/settings/devicelist/ac-in/PageAcInModelDefault.qml
+    pages/settings/devicelist/ac-in/PageSmappeeCTList.qml
+    pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml
+    pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml
     pages/settings/tz/TzAfricaData.qml
     pages/settings/tz/TzAmericaData.qml
     pages/settings/tz/TzAntarcticaData.qml
@@ -371,12 +416,15 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/tz/TzEuropeData.qml
     pages/settings/tz/TzIndianData.qml
     pages/settings/tz/TzPacificData.qml
+    pages/battery/BatteryListPage.qml
     pages/solar/PvInverterPage.qml
     pages/solar/SolarChargerAlarmsAndErrorsPage.qml
     pages/solar/SolarChargerNetworkedOperationPage.qml
     pages/solar/SolarChargerPage.qml
     pages/solar/SolarChargerHistoryPage.qml
     pages/solar/SolarDeviceListPage.qml
+
+    pages/vebusdevice/VeBusDeviceListPage.qml
 )
 
 list(APPEND QML_MODULE_SOURCES ${VENUS_QML_MODULE_SOURCES})
@@ -801,6 +849,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_checkmark_48.svg
         images/icon_controls_off_32.svg
         images/icon_controls_on_32.svg
+        images/icon_dc_24.svg
         images/icon_humidity_32.svg
         images/icon_hydraulic_oil_32.svg
         images/icon_input_24.svg

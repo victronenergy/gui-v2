@@ -63,7 +63,7 @@ OverviewWidget {
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
+			Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/ac-in/PageAcIn.qml", {
 				"title": root.input.name,
 				"bindPrefix": root.input.serviceUid
 			})

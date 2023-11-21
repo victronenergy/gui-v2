@@ -275,10 +275,10 @@ OverviewWidget {
 		anchors.fill: parent
 		onClicked: {
 			if (Global.batteries.model.count === 1) {
-				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBattery.qml",
 						{ "battery": Global.batteries.model.deviceAt(0) })
 			} else {
-				Global.pageManager.pushPage("/pages/battery/BatteryListPage.qml")
+				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/battery/BatteryListPage.qml")
 			}
 		}
 	}

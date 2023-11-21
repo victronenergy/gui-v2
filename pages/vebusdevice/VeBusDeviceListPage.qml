@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
-import "/components/Units.js" as Units
+import Victron.Units
 
 Page {
 	id: root
