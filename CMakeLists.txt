@@ -1,3 +1,8 @@
+# stripped, no debug:   9,393,720
+# unstripped, no debug: 9,393,272
+# stripped, debug:     19,242,656
+# unstripped, debug:  220,765,388
+
 cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'qt_add_qml_module' properly, you get errors at runtime like: "qrc:/main.qml:164 ApplicationContent is not a type\n"
 
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
@@ -16,6 +21,21 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 message("Building VenusOS for ${CMAKE_SYSTEM_NAME}")
+message("CXXFLAGS: ${CXXFLAGS}")
+message("CFLAGS: ${CFLAGS}")
+message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+message("CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
+message("CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
+message("CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
+message("CONFIG: ${CONFIG}")
+message("CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+message("CMAKE_C_COMPILER: " ${CMAKE_C_COMPILER})
+message("CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER})
+message("COMPILE_OPTIONS: " ${COMPILE_OPTIONS})
+message("COMPILE_DEFINITIONS: " ${COMPILE_DEFINITIONS})
+message("CMAKE_SYSROOT: " ${CMAKE_SYSROOT})
+message("CMAKE_SYSTEM: " ${CMAKE_SYSTEM})
+message("CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR})
 
 option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD=ON" OFF) # Disabled by default
 option(VENUS_WEBASSEMBLY_BUILD "enable webassembly build via cmake -DVENUS_WEBASSEMBLY_BUILD=ON" OFF) # Disabled by default
@@ -49,6 +69,7 @@ set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added he
 )
 set_source_files_properties( ${VENUS_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )
 
+# VENUS_QML_MODULE
 set (VENUS_QML_MODULE_SOURCES
     ${VENUS_QML_MODULE_SINGLETON_SOURCES}
 
@@ -367,7 +388,19 @@ set (VENUS_QML_MODULE_SOURCES
     pages/solar/SolarDeviceListPage.qml
 )
 
-set(Dbus_MODULE_SOURCES
+list(APPEND QML_MODULE_SOURCES ${VENUS_QML_MODULE_SOURCES})
+
+qt_add_qml_module(VenusQMLModule
+    URI Victron.VenusOS
+    VERSION 2.0
+    STATIC
+    OUTPUT_DIRECTORY Victron/VenusOS
+    QML_FILES ${VENUS_QML_MODULE_SOURCES}
+)
+# end VENUS_QML_MODULE
+
+# Dbus_QML_MODULE
+set(Dbus_QML_MODULE_SOURCES
     data/dbus/AcInputsImpl.qml
     data/dbus/BatteriesImpl.qml
     data/dbus/ChargersImpl.qml
@@ -394,7 +427,18 @@ set(Dbus_MODULE_SOURCES
     data/dbus/VeBusDevicesImpl.qml
 )
 
-set(Mock_MODULE_SOURCES
+list(APPEND QML_MODULE_SOURCES ${Dbus_QML_MODULE_SOURCES})
+
+qt_add_qml_module(Dbus
+    URI Victron.Dbus
+    STATIC
+    OUTPUT_DIRECTORY Victron/Dbus
+    QML_FILES ${Dbus_QML_MODULE_SOURCES}
+)
+# end Dbus_QML_MODULE
+
+# Mock_QML_MODULE
+set(Mock_QML_MODULE_SOURCES
     data/mock/AcInputsImpl.qml
     data/mock/BatteriesImpl.qml
     data/mock/ChargersImpl.qml
@@ -427,19 +471,61 @@ set(Mock_MODULE_SOURCES
     data/mock/config/SettingsPageConfig.qml
 )
 
-set(Units_MODULE_SOURCES
+list(APPEND QML_MODULE_SOURCES ${Mock_QML_MODULE_SOURCES})
+
+qt_add_qml_module(Mock
+    URI Victron.Mock
+    STATIC
+    OUTPUT_DIRECTORY Victron/Mock
+    QML_FILES ${Mock_QML_MODULE_SOURCES}
+)
+# end Mock_QML_MODULE
+
+# Units_QML_MODULE
+set(Units_QML_MODULE_SOURCES
     components/Units.js
 )
+list(APPEND QML_MODULE_SOURCES ${Units_QML_MODULE_SOURCES})
+qt_add_qml_module(Units
+    URI Victron.Units
+    STATIC
+    OUTPUT_DIRECTORY Victron/Units
+    QML_FILES ${Units_QML_MODULE_SOURCES}
+)
+# end Units_QML_MODULE
 
-set(Utils_MODULE_SOURCES
+# Utils_QML_MODULE
+set(Utils_QML_MODULE_SOURCES
     components/Utils.js
 )
 
-set(Gauges_MODULE_SOURCES
+list(APPEND QML_MODULE_SOURCES ${Utils_QML_MODULE_SOURCES})
+
+qt_add_qml_module(Utils
+    URI Victron.Utils
+    STATIC
+    OUTPUT_DIRECTORY Victron/Utils
+    QML_FILES ${Utils_QML_MODULE_SOURCES}
+)
+# end Utils_QML_MODULE
+
+# Gauges_QML_MODULE
+set(Gauges_QML_MODULE_SOURCES
     components/Gauges.js
 )
 
-set(Mqtt_MODULE_SOURCES
+list(APPEND QML_MODULE_SOURCES ${Gauges_QML_MODULE_SOURCES})
+
+qt_add_qml_module(Gauges
+    URI Victron.Gauges
+    STATIC
+    OUTPUT_DIRECTORY Victron/Gauges
+    QML_FILES ${Gauges_QML_MODULE_SOURCES}
+)
+# end Gauges_QML_MODULE
+
+# Mqtt_QML_MODULE
+set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/AcInputsImpl.qml
     data/mqtt/BatteriesImpl.qml
     data/mqtt/ChargersImpl.qml
@@ -466,9 +552,22 @@ set(Mqtt_MODULE_SOURCES
     data/mqtt/VeBusDevicesImpl.qml
 )
 
+list(APPEND QML_MODULE_SOURCES ${Mqtt_QML_MODULE_SOURCES} )
+
+qt_add_qml_module(Mqtt
+    URI Victron.Mqtt
+    STATIC
+    OUTPUT_DIRECTORY Victron/Mqtt
+    QML_FILES ${Mqtt_QML_MODULE_SOURCES}
+)
+# end Mqtt_QML_MODULE
+
 set(CONNMAN_SOURCES_MOCK
     src/connman-api.h
 )
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+    list(APPEND SOURCES ${CONNMAN_SOURCES_MOCK} )
+endif()
 
 set(CONNMAN_SOURCES
     src/connman/cmmanager.h 
@@ -494,6 +593,9 @@ set(CONNMAN_SOURCES
     src/connman/clockproxy.cpp
     src/connman/connmandbustypes.h 
 )
+if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+    list(APPEND SOURCES ${CONNMAN_SOURCES} )
+endif()
 
 set(VEUTIL_CORE_SOURCES
     src/veutil/inc/veutil/qt/firmware_updater_data.hpp
@@ -515,6 +617,7 @@ set(VEUTIL_CORE_SOURCES
     src/veutil/src/qt/ve_qitem_tree_model.cpp
     src/veutil/src/qt/ve_quick_item.cpp
 )
+list(APPEND SOURCES ${VEUTIL_CORE_SOURCES})
 
 SET(VEUTIL_DBUS_SOURCES
     src/veutil/inc/veutil/qt/ve_dbus_connection.hpp
@@ -525,10 +628,16 @@ SET(VEUTIL_DBUS_SOURCES
     src/veutil/src/qt/ve_qitems_dbus.cpp
     src/veutil/src/qt/vebus_error.cpp
 )
+if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+    list(APPEND SOURCES ${VEUTIL_DBUS_SOURCES} )
+endif()
 
 set(VEUTIL_MQTT_SOURCES
     src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
     src/veutil/src/qt/ve_qitems_mqtt.cpp
+)
+list(APPEND SOURCES
+    ${VEUTIL_MQTT_SOURCES}
 )
 
 set(GUIv1_DBUS_SOURCES
@@ -542,6 +651,9 @@ set(GUIv1_DBUS_SOURCES
     src/gui-v1/dbus_services.cpp
     src/gui-v1/wakespeed_error.cpp
 )
+if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+    list(APPEND SOURCES ${GUIv1_DBUS_SOURCES})
+endif()
 
 set(VENUS_CPP_SOURCES
     src/main.cpp
@@ -568,31 +680,20 @@ set(VENUS_CPP_SOURCES
     src/frameratemodel.cpp
 )
 
-list(APPEND SOURCES
-    ${VEUTIL_CORE_SOURCES}
+set_source_files_properties(
     ${VENUS_CPP_SOURCES}
-    ${VEUTIL_MQTT_SOURCES}
-    ${QML_QRC_RESOURCES}
-    ${VENUS_QML_MODULE_SOURCES}
-    ${Dbus_MODULE_SOURCES}
-    ${Mock_MODULE_SOURCES}
-    ${Mqtt_MODULE_SOURCES}
-    ${Gauges_MODULE_SOURCES}
-    ${Units_MODULE_SOURCES}
-    ${Utils_MODULE_SOURCES}
+    PROPERTIES
+    COMPILE_OPTIONS "${venusCompileFlags}"
 )
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
-    list(APPEND SOURCES
-        ${CONNMAN_SOURCES_MOCK}
-    )
-else()
-    list(APPEND SOURCES
-        ${CONNMAN_SOURCES}
-        ${GUIv1_DBUS_SOURCES}
-        ${VEUTIL_DBUS_SOURCES}
-    )
-endif()
+list(APPEND SOURCES
+    ${VENUS_CPP_SOURCES}
+)
+
+list(APPEND TRANSLATION_SOURCES
+    ${SOURCES}
+    ${QML_MODULE_SOURCES}
+)
 
 # translations support.
 # note: the base venus-gui-v2.ts was generated with:
@@ -609,14 +710,14 @@ set(TRANSLATIONS_QM_FILES
 # it would be good if we could do this via qt6_add_lupdate
 # instead, but that macro is broken, so do it ourselves.
 add_custom_target(${TRANSLATIONS_TS_TARGET}
-    SOURCES ${SOURCES})
+    SOURCES ${TRANSLATION_SOURCES})
 add_custom_command(
     TARGET ${TRANSLATIONS_TS_TARGET}
     BYPRODUCTS ${TRANSLATIONS_TS_FILES}
     COMMENT "Manually updating translations files"
     COMMAND ${QT_CMAKE_EXPORT_NAMESPACE}::lupdate
         ARGS
-            ${SOURCES}
+            ${TRANSLATION_SOURCES}
             src
         -ts ${TRANSLATIONS_TS_FILES}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
@@ -635,12 +736,14 @@ add_custom_command(
         ARGS ${TRANSLATIONS_TS_FILES} -idbased
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
+set(UNIX_COMPILE_FLAGS "-Wall" "-Wextra" "-Werror" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
+
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-    list(APPEND venusCompileFlags "-Wall" "-Wextra" "-Werror" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
+    list(APPEND venusCompileFlags  ${UNIX_COMPILE_FLAGS})
     add_compile_definitions(VENUS_DESKTOP_BUILD)
     qt_add_executable(${PROJECT_NAME}
       MACOSX_BUNDLE
@@ -657,7 +760,7 @@ elseif(VENUS_DESKTOP_BUILD)
         ${SOURCES}
     )
 else()
-    list(APPEND venusCompileFlags "-Wall" "-Wextra" "-Werror" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
+    list(APPEND venusCompileFlags ${UNIX_COMPILE_FLAGS})
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
@@ -668,56 +771,6 @@ qt_add_qml_module( ${PROJECT_NAME}
     VERSION 1.0
     RESOURCE_PREFIX /
     QML_FILES Main.qml
-)
-
-qt_add_qml_module(VenusQMLModule
-    URI Victron.VenusOS
-    VERSION 2.0
-    STATIC
-    OUTPUT_DIRECTORY Victron/VenusOS
-    QML_FILES ${VENUS_QML_MODULE_SOURCES}
-)
-
-qt_add_qml_module(Gauges
-    URI Victron.Gauges
-    STATIC
-    OUTPUT_DIRECTORY Victron/Gauges
-    QML_FILES ${Gauges_MODULE_SOURCES}
-)
-
-qt_add_qml_module(Units
-    URI Victron.Units
-    STATIC
-    OUTPUT_DIRECTORY Victron/Units
-    QML_FILES ${Units_MODULE_SOURCES}
-)
-
-qt_add_qml_module(Utils
-    URI Victron.Utils
-    STATIC
-    OUTPUT_DIRECTORY Victron/Utils
-    QML_FILES ${Utils_MODULE_SOURCES}
-)
-
-qt_add_qml_module(Dbus
-    URI Victron.Dbus
-    STATIC
-    OUTPUT_DIRECTORY Victron/Dbus
-    QML_FILES ${Dbus_MODULE_SOURCES}
-)
-
-qt_add_qml_module(Mock
-    URI Victron.Mock
-    STATIC
-    OUTPUT_DIRECTORY Victron/Mock
-    QML_FILES ${Mock_MODULE_SOURCES}
-)
-
-qt_add_qml_module(Mqtt
-    URI Victron.Mqtt
-    STATIC
-    OUTPUT_DIRECTORY Victron/Mqtt
-    QML_FILES ${Mqtt_MODULE_SOURCES}
 )
 
 qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
@@ -818,14 +871,14 @@ qt_add_resources(${PROJECT_NAME} "i18n"
     BASE "i18n"
     FILES ${TRANSLATIONS_QM_FILES})
 
-set_source_files_properties(
-    ${VENUS_CPP_SOURCES}
-    PROPERTIES
-    COMPILE_OPTIONS "${venusCompileFlags}"
-)
-
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+
+
+add_link_options(
+    $<$<CONFIG:RELEASE>:-s>     # strip the binary for Release builds
+    $<$<CONFIG:MINSIZEREL>:-s>  # strip the binary for MinSizeRel builds
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Core
