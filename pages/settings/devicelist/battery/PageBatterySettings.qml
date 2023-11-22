@@ -61,7 +61,7 @@ Page {
 				//% "Battery bank"
 				text: qsTrId("batterysettings_battery_bank")
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBatterySettingsBattery.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatterySettingsBattery.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}

@@ -147,7 +147,7 @@ Page {
 				text: CommonWords.current_transformers
 				visible: productId.value == smappeeProductId
 				onClicked: {
-					Global.pageManager.pushPage(Qt.resolvedUrl("PageSmappeeCTList.qml"),
+					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeCTList.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}
@@ -157,7 +157,7 @@ Page {
 				text: qsTrId("ac-in-setup_devices")
 				visible: productId.value == smappeeProductId
 				onClicked: {
-					Global.pageManager.pushPage(Qt.resolvedUrl("PageSmappeeDeviceList.qml"),
+					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml",
 							{ "bindPrefix": root.bindPrefix })
 				}
 			}

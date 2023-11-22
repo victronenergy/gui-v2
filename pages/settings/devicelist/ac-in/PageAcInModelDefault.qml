@@ -141,7 +141,7 @@ ObjectModel {
 		text: CommonWords.setup
 		visible: allowedRoles.valid
 		onClicked: {
-			Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
+			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 

@@ -241,7 +241,7 @@ Page {
 		ListNavigationItem {
 			text: CommonWords.settings
 			onClicked: {
-				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsGenerator.qml",
+				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
 					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 			}
 		}

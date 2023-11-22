@@ -207,7 +207,7 @@ Page {
 				text: qsTrId("battery_details")
 				visible: defaultVisible && batteryDetails.anyItemValid
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBatteryDetails.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDetails.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid, "details": batteryDetails })
 				}
 
@@ -220,7 +220,7 @@ Page {
 			ListNavigationItem {
 				text: CommonWords.alarms
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBatteryAlarms.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryAlarms.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 			}
@@ -230,7 +230,7 @@ Page {
 				text: qsTrId("battery_module_level_alarms")
 				visible: moduleAlarmModel.rowCount > 0
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBatteryModuleAlarms.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryModuleAlarms.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid, alarmModel: moduleAlarmModel })
 				}
 			}
@@ -239,7 +239,7 @@ Page {
 				text: CommonWords.history
 				visible: !isFiamm48TL
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBatteryHistory.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryHistory.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 			}
@@ -248,7 +248,7 @@ Page {
 				text: CommonWords.settings
 				visible: hasSettings.value === 1
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBatterySettings.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatterySettings.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 			}
@@ -260,7 +260,7 @@ Page {
 				text: qsTrId("battery_settings_diagnostics")
 				visible: lastError.valid
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 
@@ -275,7 +275,7 @@ Page {
 				visible: isFiamm48TL
 
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/Page48TlDiagnostics.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/Page48TlDiagnostics.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 			}
@@ -286,7 +286,7 @@ Page {
 				visible: nrOfDistributors.valid && nrOfDistributors.value > 0
 
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageLynxDistributorList.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxDistributorList.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 
@@ -301,7 +301,7 @@ Page {
 				text: qsTrId("battery_settings_io")
 				visible: allowToCharge.valid
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageLynxIonIo.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonIo.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 
@@ -316,7 +316,7 @@ Page {
 				text: qsTrId("battery_settings_system")
 				visible: nrOfBatteries.valid
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageLynxIonSystem.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonSystem.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 
@@ -329,7 +329,7 @@ Page {
 			ListNavigationItem {
 				text: CommonWords.device_info_title
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageDeviceInfo.qml",
+					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 			}
@@ -339,7 +339,7 @@ Page {
 				text: qsTrId("battery_settings_parameters")
 				visible: cvl.valid || ccl.valid || dcl.valid
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBatteryParameters.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryParameters.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 

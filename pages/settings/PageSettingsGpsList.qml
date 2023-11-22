@@ -48,7 +48,7 @@ Page {
 				  : "--"
 
 			onClicked: {
-				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageGps.qml",
+				Global.pageManager.pushPage("/pages/settings/PageGps.qml",
 						{"title": text, bindPrefix: model.uid })
 			}
 

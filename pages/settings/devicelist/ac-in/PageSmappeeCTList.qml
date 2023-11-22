@@ -34,7 +34,7 @@ Page {
 			secondaryText: phase.value === undefined ? "" : "L%1".arg(phase.value + 1)
 			visible: type.valid
 			onClicked: {
-				Global.pageManager.pushPage(Qt.resolvedUrl("PageSmappeeCTSetup.qml"),
+				Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml",
 						{ "bindPrefix": root.bindPrefix, ctIndex: menu.ctIndex })
 			}
 
