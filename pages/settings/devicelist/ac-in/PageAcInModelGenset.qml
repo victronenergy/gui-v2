@@ -141,7 +141,7 @@ ObjectModel {
 				"startStopBindPrefix": "com.victronenergy.generator.startstop1",
 				"allowDisableAutostart": false,
 			}
-			Global.pageManager.pushPage(Qt.resolvedUrl("PageGenerator.qml"), props)
+			Global.pageManager.pushPage("/pages/settings/PageGenerator.qml", props)
 		}
 	}
 
@@ -236,7 +236,7 @@ ObjectModel {
 	ListNavigationItem {
 		text: CommonWords.device_info_title
 		onClicked: {
-			Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageDeviceInfo.qml",
+			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 	}

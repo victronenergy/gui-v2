@@ -98,7 +98,7 @@ Item {
 		onLeftButtonClicked: {
 			switch (leftButton) {
 			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/ControlCardsPage.qml")
+				pageManager.pushPage("/pages/ControlCardsPage.qml")
 				break
 			case VenusOS.StatusBar_LeftButton_ControlsActive:   // fall through
 			case VenusOS.StatusBar_LeftButton_Back:

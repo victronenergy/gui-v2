@@ -111,7 +111,7 @@ Page {
 
 				anchors.fill: parent
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBattery.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
 							{ "title": text, "bindPrefix": modelData })
 				}
 			}
