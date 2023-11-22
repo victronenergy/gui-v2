@@ -64,6 +64,18 @@ QtObject {
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 	signal keyPressed(var event)
 
+	function appUrl(urlPath) {
+		let url = urlPath
+		if (!url.startsWith("qrc:")) {
+			if (url.startsWith("/")) {
+				url = "qrc:/qt/qml/Victron/VenusOS" + url
+			} else {
+				console.warn("appUrl(): relative paths are not supported!")
+			}
+		}
+		return url
+	}
+
 	function showToastNotification(category, text, autoCloseInterval = 0) {
 		notificationLayer.showToastNotification(category, text, autoCloseInterval)
 	}
