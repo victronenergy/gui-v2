@@ -31,7 +31,7 @@ Page {
 				//% "Charge Current limits"
 				text: qsTrId("settings_dvcc_charge_current_limits")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageChargeCurrentLimits.qml", { title: text })
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageChargeCurrentLimits.qml", { title: text })
 			}
 
 			ListSwitch {

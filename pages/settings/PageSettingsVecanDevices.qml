@@ -60,7 +60,7 @@ Page {
 				parent: listDelegate.backgroundRect
 				anchors.fill: parent
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsVecanDevice.qml",
+					Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
 						{ bindPrefix: model.uid, title: text })
 				}
 			}

@@ -48,7 +48,7 @@ Page {
 			secondaryText: Utils.toHexFormat(nad.value)
 
 			onClicked: {
-				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsRvcDevice.qml",
+				Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDevice.qml",
 					{ bindPrefix: model.uid, title: modelName.value || "" })
 			}
 

@@ -21,7 +21,7 @@ Page {
 
 			text: moduleRoot.value || ""
 			onClicked: {
-				Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/battery/PageBatteryAlarms.qml",
+				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryAlarms.qml",
 						{ "title": text, "bindPrefix": modulePath })
 			}
 

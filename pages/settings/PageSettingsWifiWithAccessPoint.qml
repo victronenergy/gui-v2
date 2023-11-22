@@ -38,7 +38,7 @@ Page {
 			ListNavigationItem {
 				//% "Wi-Fi networks"
 				text: qsTrId("settings_wifi_networks")
-				onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsWifi.qml", { title: text })
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", { title: text })
 			}
 		}
 	}

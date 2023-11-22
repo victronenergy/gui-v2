@@ -30,6 +30,6 @@ OverviewWidget {
 	]
 	MouseArea {
 		anchors.fill: parent
-		onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/vebusdevice/VeBusDeviceListPage.qml")
+		onClicked: Global.pageManager.pushPage("/pages/vebusdevice/VeBusDeviceListPage.qml")
 	}
 }

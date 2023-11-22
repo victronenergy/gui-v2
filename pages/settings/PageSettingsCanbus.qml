@@ -104,8 +104,8 @@ Page {
 				onClicked: {
 					if (!!Global.pageManager) {
 						const url = root._isVecan
-								  ? "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsVecanDevices.qml"
-								  : "qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsRvcDevices.qml"
+								  ? "/pages/settings/PageSettingsVecanDevices.qml"
+								  : "/pages/settings/PageSettingsRvcDevices.qml"
 						Global.pageManager.pushPage(url, { gateway: root.gateway })
 					}
 				}
@@ -215,7 +215,7 @@ Page {
 				//% "Network status"
 				text: qsTrId("settings_network_status")
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageCanbusStatus.qml",
+					Global.pageManager.pushPage("/pages/settings/PageCanbusStatus.qml",
 						{ gateway: root.gateway, title: root.title })
 				}
 			}

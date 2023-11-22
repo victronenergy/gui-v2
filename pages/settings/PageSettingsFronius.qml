@@ -30,7 +30,7 @@ Page {
 			ListNavigationItem {
 				//% "Inverters"
 				text: qsTrId("page_settings_fronius_inverters")
-				onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsFroniusInverters.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverters.qml", {"title": text})
 			}
 
 			ListButton {
@@ -43,13 +43,13 @@ Page {
 			ListNavigationItem {
 				//% "Detected IP addresses"
 				text: qsTrId("page_settings_fronius_detected_ip_addresses")
-				onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": text})
 			}
 
 			ListNavigationItem {
 				//% "Add IP address manually"
 				text: qsTrId("page_settings_fronius_add_ip_address_manually")
-				onClicked: Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": text})
 			}
 
 			ListPortField {

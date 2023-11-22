@@ -17,7 +17,7 @@ Page {
 				secondaryText: modbus.value === 1 ? CommonWords.enabled : CommonWords.disabled
 				showAccessLevel: VenusOS.User_AccessType_Installer
 				onClicked: {
-					Global.pageManager.pushPage("qrc:/qt/qml/Victron/VenusOS/pages/settings/PageSettingsModbusTcp.qml", { title: text })
+					Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", { title: text })
 				}
 
 				DataPoint {
