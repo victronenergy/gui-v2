@@ -66,12 +66,14 @@ Item {
 				if (pageStack.busy) {
 					return
 				}
+				let objectOrUrl = typeof(obj) === "string" ? Global.appUrl(obj) : obj
+
 				// When pushing a settings sub-page, ensure nav bar is visible.
-				if (navBar.currentIndex === navBar.model.count - 1 && obj !== "qrc:/qt/qml/Victron/VenusOS/pages/ControlCardsPage.qml") {
+				if (navBar.currentIndex === navBar.model.count - 1 && objectOrUrl !== Global.appUrl("/pages/ControlCardsPage.qml")) {
 					properties = properties || {}
 					properties.height = pageStack.height - navBar.height
 				}
-				pageStack.push(obj, properties)
+				pageStack.push(objectOrUrl, properties)
 			}
 
 			function onPagePopRequested(toPage) {
