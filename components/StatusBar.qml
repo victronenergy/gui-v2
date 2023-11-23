@@ -31,10 +31,10 @@ Rectangle {
 		PauseAnimation {
 			duration: Theme.animation.statusBar.initialize.delayedStart.duration
 		}
-		NumberAnimation {
+		OpacityAnimator {
 			target: root
-			property: "opacity"
-			to: 1
+			from: 0.0
+			to: 1.0
 			duration: Theme.animation.statusBar.initialize.fade.duration
 		}
 	}

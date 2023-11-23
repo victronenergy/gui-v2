@@ -243,7 +243,7 @@ Item {
 					opacity: progress > _electronFadeEnd ? 0 : 1
 					Behavior on opacity {
 						enabled: root._animated
-						NumberAnimation {
+						OpacityAnimator {
 							duration: Theme.animation.overviewPage.connector.fade.duration
 						}
 					}
