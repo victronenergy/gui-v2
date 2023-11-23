@@ -10,10 +10,12 @@ import Victron.VenusOS
 C.StackView {
 	id: pageStack
 
+	// the x position that the navbar should follow.
+	property real navbarX
+
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {
-		NumberAnimation {
-			property: "x"
+		XAnimator {
 			from: width
 			to: 0
 			duration: Theme.animation.page.slide.duration
@@ -21,8 +23,8 @@ C.StackView {
 		}
 	}
 	pushExit: Transition {
-		NumberAnimation {
-			property: "x"
+		ScriptAction { script: if (pageStack.depth === 2) pageStack.navbarX = -width }
+		XAnimator {
 			from: 0
 			to: -width
 			duration: Theme.animation.page.slide.duration
@@ -30,8 +32,8 @@ C.StackView {
 		}
 	}
 	popEnter: Transition {
-		NumberAnimation {
-			property: "x"
+		ScriptAction { script: if (pageStack.depth === 1) pageStack.navbarX = 0 }
+		XAnimator {
 			from: -width
 			to: 0
 			duration: Theme.animation.page.slide.duration
@@ -39,8 +41,7 @@ C.StackView {
 		}
 	}
 	popExit: Transition {
-		NumberAnimation {
-			property: "x"
+		XAnimator {
 			from: 0
 			to: width
 			duration: Theme.animation.page.slide.duration

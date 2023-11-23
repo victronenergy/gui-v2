@@ -98,9 +98,13 @@ Item {
 		onLeftButtonClicked: {
 			switch (leftButton) {
 			case VenusOS.StatusBar_LeftButton_ControlsInactive:
+				navBar.activatingControls = true
 				pageManager.pushPage("/pages/ControlCardsPage.qml")
 				break
-			case VenusOS.StatusBar_LeftButton_ControlsActive:   // fall through
+			case VenusOS.StatusBar_LeftButton_ControlsActive:
+				navBar.activatingControls = true
+				pageManager.popPage()
+				break;
 			case VenusOS.StatusBar_LeftButton_Back:
 				pageManager.popPage()
 				break
@@ -115,18 +119,32 @@ Item {
 	NavBar {
 		id: navBar
 
-		x: {
+		property bool activatingControls: false
+		property real navbarX: pageStack.navbarX
+		onNavbarXChanged: {
 			if (!pageStack.currentItem || pageStack.depth < 1) {
-				return 0
+				return
 			}
-			if (currentIndex === model.count - 1
-					&& pageStack.currentItem.topLeftButton !== VenusOS.StatusBar_LeftButton_ControlsActive
-					&& (!pageStack.previousItem || pageStack.previousItem.topLeftButton !== VenusOS.StatusBar_LeftButton_ControlsActive)) {
-				// Stack is showing a settings sub-page, so keep the nav bar visible.
-				return 0
+
+			// If the settings page is active, and we are pushing a settings drill down
+			// (rather than activating/deactivating the controls panel)
+			// then don't allow the movement, i.e. keep navbar visible.
+			if (currentIndex === (model.count -1)
+					&& pageStack.currentItem.topLeftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
+					&& !activatingControls) {
+				return
 			}
+
 			// Make the nav bar slide in/out along with the bottom page in the stack.
-			return pageStack.get(0).x
+			activatingControls = false
+			x = navbarX
+		}
+
+		Behavior on x {
+			XAnimator {
+				duration: Theme.animation.page.slide.duration
+				easing.type: Easing.InOutQuad
+			}
 		}
 
 		y: root.height + 4  // nudge below the visible area for wasm
