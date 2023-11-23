@@ -4,18 +4,21 @@
 */
 
 import QtQuick
+import QtQuick.Templates as T
 import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
+import QtQuick.Effects as Effects
 
-C.Slider {
+T.Slider {
 	id: root
 
 	property alias grooveColor: backgroundRect.color
 	property alias highlightColor: highlightRect.color
 	property alias showHandle: handleImg.visible
+	property bool animationEnabled
 
-	implicitHeight: Math.max(background.implicitHeight, handle.implicitHeight)
+	implicitHeight: Math.max(implicitBackgroundHeight, implicitHandleHeight)
 
 	background: Rectangle {
 		id: backgroundRect
@@ -36,12 +39,61 @@ C.Slider {
 		color: Theme.color.darkOk
 
 		Rectangle {
-			id: highlightRect
+			id: maskRect
+			layer.enabled: true
+			visible: false
+			width: backgroundRect.width
+			height: backgroundRect.height
+			radius: backgroundRect.radius
+			color: "black" // opacity mask, not visible.
+		}
 
-			width: root.visualPosition * parent.width
-			height: Theme.geometry.slider.groove.height
-			color: Theme.color.ok
-			radius: Theme.geometry.slider.groove.radius
+		Item {
+			id: sourceItem
+			visible: false
+			width: parent.width
+			height: parent.height
+
+			Rectangle {
+				id: highlightRect
+
+				width: parent.width
+				height: parent.height
+				radius: backgroundRect.radius
+				color: Theme.color.ok
+				x: nextX
+
+				// don't use a behavior on x
+				// otherwise there can be a "jump" we receive receive two value updates in close succession.
+				readonly property real nextX: root.mirrored ? (backgroundRect.width - width*root.visualPosition)
+					: (-backgroundRect.width + width*root.visualPosition)
+
+				onNextXChanged: {
+					if (!anim.running && root.animationEnabled) {
+						anim.from = highlightRect.x
+						// do a little dance to break any x binding...
+						highlightRect.x = 0
+						highlightRect.x = anim.from
+						anim.to = highlightRect.nextX
+						anim.start()
+					}
+				}
+
+				XAnimator {
+					id: anim
+					target: highlightRect
+					easing.type: Easing.InOutQuad
+					duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration
+				}
+			}
+		}
+
+		Effects.MultiEffect {
+			visible: true
+			anchors.fill: parent
+			maskEnabled: true
+			maskSource: maskRect
+			source: sourceItem
 		}
 	}
 
