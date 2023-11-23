@@ -166,17 +166,16 @@ Item {
 				duration: Theme.animation.navBar.initialize.delayedStart.duration
 			}
 			ParallelAnimation {
-				NumberAnimation {
+				YAnimator {
 					target: navBar
-					property: "y"
 					from: root.height - navBar.height + Theme.geometry.navigationBar.initialize.margin
 					to: root.height - navBar.height
 					duration: Theme.animation.navBar.initialize.fade.duration
 				}
-				NumberAnimation {
+				OpacityAnimator {
 					target: navBar
-					property: "opacity"
-					to: 1
+					from: 0.0
+					to: 1.0
 					duration: Theme.animation.navBar.initialize.fade.duration
 				}
 			}
@@ -188,9 +187,8 @@ Item {
 			running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
 					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)
 
-			NumberAnimation {
+			YAnimator {
 				target: navBar
-				property: "y"
 				from: root.height
 				to: root.height - navBar.height
 				duration: Theme.animation.page.idleResize.duration
@@ -239,9 +237,8 @@ Item {
 					}
 				}
 			}
-			NumberAnimation {
+			YAnimator {
 				target: navBar
-				property: "y"
 				from: root.height - navBar.height
 				to: root.height
 				duration: Theme.animation.page.idleResize.duration

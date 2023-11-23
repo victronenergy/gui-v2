@@ -22,6 +22,12 @@ Rectangle {
 		onRunningChanged: {
 			if (!running) {
 				Global.splashScreenVisible = false
+				// reset the state variables we animated.
+				logoIcon.opacity = 1.0
+				logoText.opacity = 1.0
+				extraInfoColumn.nextOpacity = 1.0
+				loadingProgress.opacity = 1.0
+				loadingProgress.visible = true
 			}
 		}
 	}
@@ -109,11 +115,15 @@ Rectangle {
 
 		running: Global.allPagesLoaded
 
-		NumberAnimation {
+		PropertyAction {
+			target: extraInfoColumn
+			property: "nextOpacity"
+			value: 0
+		}
+		PropertyAction {
 			target: loadingProgress
 			property: "opacity"
-			from: 1; to: 0
-			duration: Theme.animation.splash.progressBar.fade.duration
+			value: 0
 		}
 		PropertyAction {
 			target: loadingProgress
@@ -140,9 +150,16 @@ Rectangle {
 		}
 		width: Theme.geometry.splashView.progressBar.width
 		indeterminate: visible && BackendConnection.state !== BackendConnection.Failed
+		opacity: 1.0
+		Behavior on opacity {
+			OpacityAnimator {
+				duration: Theme.animation.splash.progressBar.fade.duration
+			}
+		}
 	}
 
 	Column {
+		id: extraInfoColumn
 		anchors {
 			top: loadingProgress.bottom
 			topMargin: Theme.geometry.splashView.progressText.topMargin
@@ -151,8 +168,14 @@ Rectangle {
 			right: parent.right
 			rightMargin: Theme.geometry.page.content.horizontalMargin
 		}
-		opacity: BackendConnection.state === BackendConnection.Failed ? 1.0 : loadingProgress.opacity
 		visible: BackendConnection.type === BackendConnection.MqttSource
+		property real nextOpacity: 1.0
+		opacity: BackendConnection.state === BackendConnection.Failed ? 1.0 : nextOpacity
+		Behavior on opacity {
+			OpacityAnimator {
+				duration: Theme.animation.splash.progressBar.fade.duration
+			}
+		}
 
 		Item {
 			id: alarmIconContainer
