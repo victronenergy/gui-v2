@@ -151,11 +151,7 @@ Column {
 			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
 			value: Global.acInputs.generatorInput ? Global.acInputs.generatorInput.power : 0
 			showHandle: false
-
-			Behavior on value {
-				enabled: root.animationEnabled
-				NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration }
-			}
+			animationEnabled: root.animationEnabled
 		}
 	}
 
@@ -329,11 +325,7 @@ exported power v  0.4 |   /
 			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
 			value: gridGraph.normalizedPower || 0
 			showHandle: false
-
-			Behavior on value {
-				enabled: root.animationEnabled
-				NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration }
-			}
+			animationEnabled: root.animationEnabled
 		}
 	}
 
@@ -395,11 +387,7 @@ exported power v  0.4 |   /
 			highlightColor: Theme.color.warning
 			grooveColor: Theme.color.darkWarning
 			showHandle: false
-
-			Behavior on value {
-				enabled: root.animationEnabled
-				NumberAnimation { duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration }
-			}
+			animationEnabled: root.animationEnabled
 		}
 	}
 
