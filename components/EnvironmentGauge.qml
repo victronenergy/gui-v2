@@ -145,7 +145,7 @@ Item {
 			Behavior on y {
 				// Only animate when the value has changed, and not when the page is resizing
 				enabled: root.animationEnabled && (!!Global.pageManager && !Global.pageManager.animatingIdleResize)
-				NumberAnimation {}
+				YAnimator {}
 			}
 
 			Rectangle {

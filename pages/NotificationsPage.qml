@@ -81,11 +81,14 @@ Page {
 			SequentialAnimation {
 				PropertyAction { property: "opacity"; value: 0}
 				PauseAnimation { duration: Theme.animation.notificationsPage.delegate.displaced.duration }
-				NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: Theme.animation.notificationsPage.delegate.opacity.duration }
+				OpacityAnimator { from: 0; to: 1.0; duration: Theme.animation.notificationsPage.delegate.opacity.duration }
 			}
 		}
 		displaced: Transition {
-			NumberAnimation { properties: "x,y"; duration: Theme.animation.notificationsPage.delegate.displaced.duration }
+			ParallelAnimation {
+				XAnimator { duration: Theme.animation.notificationsPage.delegate.displaced.duration }
+				YAnimator { duration: Theme.animation.notificationsPage.delegate.displaced.duration }
+			}
 		}
 		ScrollBar.vertical: ScrollBar {
 			anchors.right: parent.right

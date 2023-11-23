@@ -58,11 +58,11 @@ C.Dialog {
 					root._refresh()
 				}
 			}
-			NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
+			OpacityAnimator { from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
 		}
 	}
 	exit: Transition {
-		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration }
+		OpacityAnimator { from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration }
 	}
 
 	background: Rectangle {

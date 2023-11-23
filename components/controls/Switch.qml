@@ -60,7 +60,7 @@ CT.Switch {
 			id: valueChangeBehavior
 			enabled: false
 
-			NumberAnimation {
+			XAnimator {
 				duration: 200
 				easing.type: Easing.InOutQuad
 			}
