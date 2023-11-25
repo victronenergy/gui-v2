@@ -25,7 +25,7 @@ option(MQTT_WEBSOCKETS_ENABLED "enable websockets build via cmake -DMQTT_WEBSOCK
 
 # If we want a release build, and the '-g' debug compiler flag is set by the environment setup script, remove it.
 # Otherwise, our executable size ballons from ~10MB to ~220MB.
-string(FIND CMAKE_CXX_FLAGS " -g " FOUND_DEBUG_COMPILER_FLAG)
+string(FIND "${CMAKE_CXX_FLAGS}" " -g " FOUND_DEBUG_COMPILER_FLAG)
 if((${CMAKE_BUILD_TYPE} STREQUAL "Release" OR ${CMAKE_BUILD_TYPE} STREQUAL "MinSizeRel") AND NOT(FOUND_DEBUG_COMPILER_FLAG EQUAL -1))
     message("Removing '-g' debug flag set by /opt/venus/dunfell-arm-cortexa7hf-neon-vfpv4/environment-setup-cortexa7hf-neon-vfpv4-ve-linux-gnueabi")
     string(REPLACE " -g " " " CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
