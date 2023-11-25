@@ -2,15 +2,18 @@
 
 ![image](https://github.com/victronenergy/gui-v2/assets/5200296/cbf9b7c0-6d8f-4bef-82c5-ec74230e4f87)
 
-gui-v2 is the next generation UI for Venus OS. For onscreen display on a GX Touch 50, 70 and Ekrano GX. And also to be used
-remotely in a webbrowser, aka the Victron Remote Console feature.
+Venus OS is the software that runs on the Victron family of [GX monitoring devices](https://www.victronenergy.com/communication-centres), as well as RaspberryPis. gui-v2 is the next generation UI for Venus OS.
 
-## Main differences with gui-v1"
+gui-v2 is for the on-screen display on a GX Touch 50, 70 and Ekrano GX. And also to be used remotely in a webbrowser, aka the Victron Remote Console feature.
+
+For more technical information on Venus OS, see the [Venus OS wiki](https://github.com/victronenergy/venus/wiki).
+
+## Main differences between gui-v1 and gui-v2
 
 - Touch oriented, rather than button oriented.
 - New looks
 - Based on Qt6 instead of Qt4
-- Remote Console is done by running a Webassembly (WASM) build in the browser, and data over MQTT, rather than VNC
+- Remote Console is done by running a Webassembly (WASM) build in the browser, and data over MQTT, rather than (browser based-) VNC
 - Besides being a UI, gui-v1 also took care of various more core tasks, like starting stopping services; those have all been moved to the venus-platform repo.
 - Because gui-v2 is can also run remotely (WASM), it can no longer issue commands directly to Venus OS. The only data path is MQTT (for WASM) and D-Bus (when
 - running locally on the GX). For that, various features have been added to venus-platform (like starting a reboot, or starting a firmware update) so that the
