@@ -33,11 +33,13 @@ The prime reason to share this source code publicly is to allow for modification
 
 While all the sources of gui-v1 were not open source, all the visible elements were taken care of in QML, of which are non-compiled files that could be edited after obtaining root access to the GX device. This allowed for modifications. Small ones, but also large projects like Kevin Windrems [gui-mods](https://github.com/kwindrem/GuiMods).
 
-In gui-v2 this is a bit different. While the QML files are still on the rootfs and can be edited, doing so wononly changes the version you see on screen. It won't affect the version used remotely, ie the WASM version. That is a compiled single binary blob, which can't be rebuild on the GX itself.
+In gui-v2 this is a bit different. The QML files are still on the rootfs and can be edited, but doing so only changes the version you see on screen. It won't change the version used remotely in a browser, ie. the WASM version. That is a compiled single binary blob, which can't be rebuild on the GX itself.
 
-Building the WASM requires lots of tooling installed (Qt6, emscriptem), and then takes a while. To learn more, see the guiv-2 [automated build](https://github.com/victronenergy/gui-v2/blob/main/.github/workflows/build-wasm.yml), a Github Action workflow in this repo.
+Building the WASM requires lots of tooling installed (Qt6, emscriptem), and then takes a while. To learn more, see the guiv-2 [automated build](https://github.com/victronenergy/gui-v2/blob/main/.github/workflows/build-wasm.yml), a Github Action workflow in this repo, as well as the [[how to build page in the gui-v2 wiki](https://github.com/victronenergy/gui-v2/wiki/How-to-build-venus-gui-v2).
 
 Concluding, we'll need a different solution to allow modifications. Preferably one that, like gui-v2, has a low barrier to get started. Publishing these sources is a first step.
+
+To discuss this, see https://community.victronenergy.com/questions/245056/venus-os-modifying-gui-v2.html.
 
 ## Building
 
@@ -45,5 +47,5 @@ See the wiki page: https://github.com/victronenergy/gui-v2/wiki/How-to-build-ven
 
 ## License
 
-See license.txt in the repo
+See license file in the repo.
 
