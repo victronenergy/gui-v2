@@ -16,19 +16,19 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 message("Building VenusOS for ${CMAKE_SYSTEM_NAME}")
-message("CXXFLAGS: ${CXXFLAGS}")
-message("CFLAGS: ${CFLAGS}")
+message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+message("CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
 
 option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD=ON" OFF) # Disabled by default
 option(VENUS_WEBASSEMBLY_BUILD "enable webassembly build via cmake -DVENUS_WEBASSEMBLY_BUILD=ON" OFF) # Disabled by default
 option(MQTT_WEBSOCKETS_ENABLED "enable websockets build via cmake -DMQTT_WEBSOCKETS_ENABLED=ON" OFF) # Disabled by default
 
-# If we want a release build, and the '-g' debug compiler flag is set by the environment setup script, remove it.
+# If we want a release build, remove the '-g' debug compiler flag set by the environment setup script.
 # Otherwise, our executable size ballons from ~10MB to ~220MB.
-string(FIND CMAKE_CXX_FLAGS " -g " FOUND_DEBUG_COMPILER_FLAG)
-if((${CMAKE_BUILD_TYPE} STREQUAL "Release" OR ${CMAKE_BUILD_TYPE} STREQUAL "MinSizeRel") AND NOT(FOUND_DEBUG_COMPILER_FLAG EQUAL -1))
+if((${CMAKE_BUILD_TYPE} STREQUAL "Release" OR ${CMAKE_BUILD_TYPE} STREQUAL "MinSizeRel"))
     message("Removing '-g' debug flag set by /opt/venus/dunfell-arm-cortexa7hf-neon-vfpv4/environment-setup-cortexa7hf-neon-vfpv4-ve-linux-gnueabi")
-    string(REPLACE " -g " " " CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+    # Match all instances of " -g " in the input "${CMAKE_CXX_FLAGS}" and replace it with a single space " " and store the result into the output variable CMAKE_CXX_FLAGS
+    string(REPLACE " -g " " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
     message("new CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS} ")
 endif()
 
