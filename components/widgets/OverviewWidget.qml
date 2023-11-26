@@ -9,7 +9,7 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	property int type: VenusOS.OverviewWidget_Type_UnknownType
+	property int type: VenusOS.OverviewWidget_Type_Unknown
 	property int size: VenusOS.OverviewWidget_Size_M
 
 	property alias icon: widgetHeader.icon
