@@ -25,14 +25,14 @@ option(MQTT_WEBSOCKETS_ENABLED "enable websockets build via cmake -DMQTT_WEBSOCK
 
 # If we want a release build, remove the '-g' debug compiler flag set by the environment setup script.
 # Otherwise, our executable size ballons from ~10MB to ~220MB.
-if((${CMAKE_BUILD_TYPE} STREQUAL "Release" OR ${CMAKE_BUILD_TYPE} STREQUAL "MinSizeRel"))
+if(("${CMAKE_BUILD_TYPE}" STREQUAL "Release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "MinSizeRel"))
     message("Removing '-g' debug flag set by /opt/venus/dunfell-arm-cortexa7hf-neon-vfpv4/environment-setup-cortexa7hf-neon-vfpv4-ve-linux-gnueabi")
     # Match all instances of " -g " in the input "${CMAKE_CXX_FLAGS}" and replace it with a single space " " and store the result into the output variable CMAKE_CXX_FLAGS
     string(REPLACE " -g " " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
     message("new CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS} ")
 endif()
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -604,7 +604,7 @@ qt_add_qml_module(Mqtt
 set(CONNMAN_SOURCES_MOCK
     src/connman-api.h
 )
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     list(APPEND SOURCES ${CONNMAN_SOURCES_MOCK} )
 endif()
 
@@ -632,7 +632,7 @@ set(CONNMAN_SOURCES
     src/connman/clockproxy.cpp
     src/connman/connmandbustypes.h 
 )
-if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     list(APPEND SOURCES ${CONNMAN_SOURCES} )
 endif()
 
@@ -667,7 +667,7 @@ SET(VEUTIL_DBUS_SOURCES
     src/veutil/src/qt/ve_qitems_dbus.cpp
     src/veutil/src/qt/vebus_error.cpp
 )
-if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     list(APPEND SOURCES ${VEUTIL_DBUS_SOURCES} )
 endif()
 
@@ -690,7 +690,7 @@ set(GUIv1_DBUS_SOURCES
     src/gui-v1/dbus_services.cpp
     src/gui-v1/wakespeed_error.cpp
 )
-if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     list(APPEND SOURCES ${GUIv1_DBUS_SOURCES})
 endif()
 
@@ -779,18 +779,18 @@ add_custom_command(
 
 set(UNIX_COMPILE_FLAGS "-Wall" "-Wextra" "-Werror" "-Wconversion" "-Wno-exceptions" "-Wextra-semi" "-Wno-inaccessible-base" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wformat=2" "-Winit-self" "-Wmissing-declarations" "-Wmissing-include-dirs" "-Wold-style-cast" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-conversion" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef")
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
-elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
     list(APPEND venusCompileFlags  ${UNIX_COMPILE_FLAGS})
     add_compile_definitions(VENUS_DESKTOP_BUILD)
     qt_add_executable(${PROJECT_NAME}
       MACOSX_BUNDLE
       ${SOURCES}
     )
-elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
     add_compile_definitions(VENUS_DESKTOP_BUILD)
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
@@ -938,7 +938,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Mqttplugin
 )
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt6::WebSockets
     )
