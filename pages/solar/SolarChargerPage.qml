@@ -9,7 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var solarCharger
+	property QtObject solarCharger
+	readonly property QtObject singleTracker: solarCharger.trackers.count === 1 ? solarCharger.trackers.get(0).solarTracker : null
 
 	title: solarCharger.name
 
@@ -36,17 +37,20 @@ Page {
 							unit: VenusOS.Units_Energy_KiloWattHour
 						},
 						{
-							title: CommonWords.voltage,
-							value: root.solarCharger.voltage,
-							unit: VenusOS.Units_Volt
+							title: root.singleTracker ? CommonWords.voltage : "",
+							value: root.singleTracker ? root.singleTracker.voltage : NaN,
+							unit: root.singleTracker ? VenusOS.Units_Volt : VenusOS.Units_None
 						},
 						{
-							title: CommonWords.current_amps,
-							value: root.solarCharger.current,
-							unit: VenusOS.Units_Amp
+							title: root.singleTracker ? CommonWords.current_amps : "",
+							value: root.singleTracker ? root.singleTracker.current : NaN,
+							unit: root.singleTracker ? VenusOS.Units_Amp : VenusOS.Units_None
 						},
 						{
-							title: CommonWords.pv_power,
+							title: root.singleTracker
+								   ? CommonWords.pv_power
+									 //% "Total PV Power"
+								   : qsTrId("charger_total_pv_power"),
 							value: root.solarCharger.power,
 							unit: VenusOS.Units_Watt
 						},

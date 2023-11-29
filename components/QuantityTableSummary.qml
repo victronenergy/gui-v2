@@ -131,6 +131,7 @@ Row {
 							font.pixelSize: firstColumnSubLabel.font.pixelSize
 							value: root.model[model.index + 1].value
 							unit: root.model[model.index + 1].unit
+							visible: unit !== VenusOS.Units_None
 						}
 					}
 				}
