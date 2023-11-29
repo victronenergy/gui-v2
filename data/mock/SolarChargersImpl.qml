@@ -20,7 +20,6 @@ QtObject {
 			const chargerObj = chargerComponent.createObject(root, {
 				name: "My charger " + i,
 				power: chargerPower,
-				voltage: 10 + Math.random() * 5,
 				errorModel: createErrorModel(Math.floor(Math.random() * 4))
 			})
 			chargerObj.initTrackers(i + 1)
@@ -49,11 +48,7 @@ QtObject {
 
 			property int state: VenusOS.SolarCharger_State_ExternalControl
 			property int errorCode: -1
-
 			readonly property ListModel trackers: ListModel {}
-
-			property real voltage: power / 5
-			property real current: !voltage || !power ? NaN : power / voltage
 			property real power
 
 			readonly property real batteryVoltage: 43.21
@@ -100,7 +95,8 @@ QtObject {
 
 			function initTrackers(trackerCount) {
 				for (let i = 0; i < trackerCount; ++i) {
-					let tracker = trackerComponent.createObject(root, {"name": "My tracker " + i})
+					const trackerName = "%1 (#%2)".arg(solarCharger.name).arg(i+1)
+					let tracker = trackerComponent.createObject(root, {"name": trackerName})
 					tracker.power = (i + 1) * 100
 					trackers.append({"solarTracker": tracker })
 				}
@@ -178,10 +174,10 @@ QtObject {
 
 	property Component trackerComponent: Component {
 		QtObject {
-			property string name
-			property real current: isNaN(voltage) || isNaN(power) ? NaN : (!voltage || !power ? 0 : power / voltage)
-			property real power: 0
+			property real power: Math.random() * 10
 			property real voltage: power / 5
+			readonly property real current: isNaN(power) || isNaN(voltage) || voltage === 0 ? NaN : power / voltage
+			property string name
 		}
 	}
 
@@ -199,8 +195,6 @@ QtObject {
 				for (let i = 0; i < config.chargers.length; ++i) {
 					const chargerObj = chargerComponent.createObject(root, {
 						power: config.chargers[i].power,
-						current: config.chargers[i].power * 0.01,
-						voltage: 10 + Math.random() * 5,
 						errorModel: createErrorModel(Math.floor(Math.random() * 4))
 					})
 					chargerObj.initTrackers(Global.solarChargers.model.count + 1)

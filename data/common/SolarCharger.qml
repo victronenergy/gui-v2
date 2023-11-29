@@ -14,9 +14,6 @@ Device {
 	readonly property int state: _state.value === undefined ? -1 : _state.value
 	readonly property int errorCode: _errorCode.value === undefined ? -1 : _errorCode.value
 	readonly property ListModel trackers: ListModel {}
-
-	property real voltage: NaN
-	readonly property real current: isNaN(voltage) || isNaN(power) ? NaN : (!voltage || !power ? 0 : power / voltage)
 	readonly property real power: _totalPower.value === undefined ? NaN : _totalPower.value
 
 	readonly property real batteryVoltage: _batteryVoltage.value == undefined ? NaN : _batteryVoltage.value
@@ -132,38 +129,25 @@ Device {
 	}
 
 	readonly property Instantiator _trackerObjects: Instantiator {
-		function _updateTotalVoltage() {
-			let totalVoltage = NaN
-			for (let i = 0; i < count; ++i) {
-				const obj = objectAt(i)
-				if (obj && !isNaN(obj.voltage)) {
-					if (isNaN(totalVoltage)) {
-						totalVoltage = 0
-					}
-					totalVoltage += obj.voltage
-				}
-			}
-			solarCharger.voltage = totalVoltage
-		}
-
-		model: _trackerCount.value || 0
-		delegate: Device {
+		model: _trackerCount.value || 1     // there is always at least one tracker, even if NrOfTrackers is not set
+		delegate: QtObject {
 			id: tracker
 
 			readonly property int modelIndex: model.index
-			readonly property real current: isNaN(voltage) || isNaN(power) ? NaN : (!voltage || !power ? 0 : power / voltage)
 			readonly property real power: _trackerObjects.count <= 1 ? solarCharger.power : _power.value || 0
 			readonly property real voltage: _voltage.value || 0
+			readonly property real current: isNaN(power) || isNaN(voltage) || voltage === 0 ? NaN : power / voltage
+
+			readonly property string name: solarCharger.trackers.count > 1
+					  //: Name for a tracker of a solar charger. %1 = solar charger name, %2 = the number of this tracker for the charger
+					  //% "%1 (#%2)"
+					? qsTrId("solarcharger_tracker_title").arg(solarCharger.name).arg(model.index + 1)
+					: solarCharger.name
 
 			readonly property VeQuickItem _voltage: VeQuickItem {
 				uid: _trackerObjects.count <= 1
 					 ? solarCharger.serviceUid + "/Pv/V"
 					 : solarCharger.serviceUid + "/Pv/" + model.index + "/V"
-				onValueChanged: {
-					if (_completed) {
-						_trackerObjects._updateTotalVoltage()
-					}
-				}
 			}
 
 			readonly property VeQuickItem _power: VeQuickItem {
@@ -171,12 +155,6 @@ Device {
 					 ? ""   // only 1 tracker, use solarCharger.power instead (i.e. same as /Yield/Power)
 					 : solarCharger.serviceUid + "/Pv/" + model.index + "/P"
 			}
-
-			property bool _completed
-
-			serviceUid: solarCharger.serviceUid + "/Devices/" + (model.index)
-
-			Component.onCompleted: _completed = true
 		}
 
 		onObjectAdded: function(index, object) {
