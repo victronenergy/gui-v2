@@ -160,6 +160,9 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 		} else {
 			qCWarning(venusGui) << "Unable to load translations for locale" << QLocale(language).name();
 			translator->deleteLater();
+			if (m_loadedTranslators.value(language) == translator) {
+				m_loadedTranslators.remove(language);
+			}
 			return false;
 		}
 	}
@@ -167,6 +170,9 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 	if (!QCoreApplication::installTranslator(translator)) {
 		qCWarning(venusGui) << "Unable to install translator for locale" << QLocale(language).name();
 		translator->deleteLater();
+		if (m_loadedTranslators.value(language) == translator) {
+			m_loadedTranslators.remove(language);
+		}
 		return false;
 	}
 
