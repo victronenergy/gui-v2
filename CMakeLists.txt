@@ -873,13 +873,22 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         themes/typography/TypographyDesign.json
 )
 
+# Copy the input .ts files to the build directory before running lupdate on the copies.
+# That way if new entries are added in code, the updates don't pollute the git diff.
+file(COPY
+      "i18n/${PROJECT_NAME}.ts"
+      "i18n/${PROJECT_NAME}_en.ts"
+      "i18n/${PROJECT_NAME}_fr.ts"
+    DESTINATION "i18n") # build directory
+
 # This adds 2 new targets, venus-gui-v2_lupdate and venus-gui-v2_lrelease. Parallel builds (eg. 'make -j') do not rebuild venus-gui-v2_lrelease correctly without further 'add_dependencies' hackery
 qt_add_translations( ${PROJECT_NAME}
     TS_FILES
-    "i18n/${PROJECT_NAME}.ts"
-    "i18n/${PROJECT_NAME}_en.ts"
-    "i18n/${PROJECT_NAME}_fr.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_fr.ts"
     SOURCES "${TRANSLATION_SOURCES}"
+    LUPDATE_OPTIONS -no-obsolete
     LRELEASE_OPTIONS -idbased
 )
 
