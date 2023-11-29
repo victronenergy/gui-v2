@@ -15,7 +15,8 @@ QtObject {
 		const inverterCount = 3
 		for (let i = 0; i < inverterCount; ++i) {
 			const inverterObj = inverterComponent.createObject(root, {
-				name: "My PV inverter " + i
+				name: "My PV inverter " + i,
+				phaseCount: i + 1,
 			})
 			_createdObjects.push(inverterObj)
 
@@ -29,11 +30,16 @@ QtObject {
 
 			property int statusCode: Math.random() * VenusOS.PvInverter_StatusCode_Error
 			property int errorCode: -1
+			property int phaseCount
 
 			readonly property ListModel phases: ListModel {
-				ListElement { name: "L1"; energy: 1.5; power: 20; current: 5; voltage: 10 }
-				ListElement { name: "L2"; energy: 3; power: 30; current: 10; voltage: 15 }
-				ListElement { name: "L3"; energy: 4.5; power: 40; current: 15; voltage: 20 }
+				Component.onCompleted: {
+					for (let i = 0; i < phaseCount; ++i) {
+						let phaseData = { name: "L"+(i+1), energy: Math.random() * 1000, power: Math.random() * 100, voltage: 1 + (Math.random() * 5)}
+						phaseData.current = phaseData.power / phaseData.voltage
+						append(phaseData)
+					}
+				}
 			}
 
 			property real energy: Math.random() * 10
@@ -46,6 +52,9 @@ QtObject {
 				repeat: true
 				interval: 1000
 				onTriggered: {
+					if (phases.count === 0) {
+						return
+					}
 					const phaseIndex = Math.floor(Math.random() * phases.count)
 					const phase = phases.get(phaseIndex)
 					const delta = Math.random() > 0.5 ? 1 : -1 // power may fluctuate up or down
