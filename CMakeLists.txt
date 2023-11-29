@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'qt_add_qml_module' properly, you get errors at runtime like: "qrc:/main.qml:164 ApplicationContent is not a type\n"
 
+# CMAKE HINTS
+#
+# Different build types:
+#   cmake -DCMAKE_BUILD_TYPE=[Debug|Release|RelWithDebInfo|MinSizeRelease]
+#
+# Faster builds, for use in development. This stops qml code from being compiled into C++ at build time. Will run slower on the target.
+#   cmake -DNO_CACHEGEN=true
+
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
 
@@ -28,6 +36,11 @@ if(("${CMAKE_BUILD_TYPE}" STREQUAL "Release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "
     # Match all instances of " -g " in the input "${CMAKE_CXX_FLAGS}" and replace it with a single space " " and store the result into the output variable CMAKE_CXX_FLAGS
     string(REPLACE " -g " " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
     message("new CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS} ")
+endif()
+
+if ("${NO_CACHEGEN}")
+    message("Disabling cache generation for faster builds")
+    set (QML_MODULE_OPTARGS ${QML_MODULE_OPTARGS} "NO_CACHEGEN")
 endif()
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
@@ -433,6 +446,7 @@ set (VENUS_QML_MODULE_SOURCES
 list(APPEND QML_MODULE_SOURCES ${VENUS_QML_MODULE_SOURCES})
 
 qt_add_qml_module(VenusQMLModule
+    ${QML_MODULE_OPTARGS}
     URI Victron.VenusOS
     VERSION 2.0
     STATIC
@@ -478,6 +492,7 @@ qt_add_qml_module(Dbus
     STATIC
     OUTPUT_DIRECTORY Victron/Dbus
     QML_FILES ${Dbus_QML_MODULE_SOURCES}
+    ${QML_MODULE_OPTARGS}
 )
 # end Dbus_QML_MODULE
 
@@ -524,6 +539,7 @@ qt_add_qml_module(Mock
     STATIC
     OUTPUT_DIRECTORY Victron/Mock
     QML_FILES ${Mock_QML_MODULE_SOURCES}
+    ${QML_MODULE_OPTARGS}
 )
 # end Mock_QML_MODULE
 
@@ -537,6 +553,7 @@ qt_add_qml_module(Units
     STATIC
     OUTPUT_DIRECTORY Victron/Units
     QML_FILES ${Units_QML_MODULE_SOURCES}
+    ${QML_MODULE_OPTARGS}
 )
 # end Units_QML_MODULE
 
@@ -552,6 +569,7 @@ qt_add_qml_module(Utils
     STATIC
     OUTPUT_DIRECTORY Victron/Utils
     QML_FILES ${Utils_QML_MODULE_SOURCES}
+    ${QML_MODULE_OPTARGS}
 )
 # end Utils_QML_MODULE
 
@@ -567,6 +585,7 @@ qt_add_qml_module(Gauges
     STATIC
     OUTPUT_DIRECTORY Victron/Gauges
     QML_FILES ${Gauges_QML_MODULE_SOURCES}
+    ${QML_MODULE_OPTARGS}
 )
 # end Gauges_QML_MODULE
 
@@ -607,6 +626,7 @@ qt_add_qml_module(Mqtt
     STATIC
     OUTPUT_DIRECTORY Victron/Mqtt
     QML_FILES ${Mqtt_QML_MODULE_SOURCES}
+    ${QML_MODULE_OPTARGS}
 )
 # end Mqtt_QML_MODULE
 
