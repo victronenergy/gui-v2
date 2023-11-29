@@ -9,15 +9,9 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	function _yieldToday(charger) {
-		const history = charger.dailyHistory(0)
-		if (history && !isNaN(history.yieldKwh)) {
-			return history.yieldKwh
-		}
-		return NaN
-	}
-
-	// A list of the quantity measurements for all PV chargers, followed by all PV inverters.
+	// A list of all PV arrays. For solar chargers, each tracker for the charger is an individual
+	// entry in the list. For PV inverters, each inverter is an entry in the list, since inverters
+	// do not have multiple trackers.
 	GradientListView {
 		id: chargerListView
 
@@ -34,11 +28,17 @@ Page {
 		delegate: Loader {
 			width: parent ? parent.width : 0
 			height: Math.max(item ? item.implicitHeight : 0, Theme.geometry.listItem.height)
-			sourceComponent: Global.solarChargers.model.count > 0
-							 && Global.pvInverters.model.count > 0
-							 && model.index === Global.solarChargers.model.count
-							 ? listHeaderComponent
-							 : contentRowComponent
+			sourceComponent: {
+				if (Global.solarChargers.model.count > 0
+						&& Global.pvInverters.model.count > 0
+						&& model.index === Global.solarChargers.model.count) {
+					return listHeaderComponent
+				}
+				if (model.index < Global.solarChargers.model.count) {
+					return solarChargerRowComponent
+				}
+				return pvInverterRowComponent
+			}
 
 			onLoaded: {
 				if (sourceComponent === listHeaderComponent) {
@@ -47,81 +47,49 @@ Page {
 			}
 
 			Component {
-				id: contentRowComponent
+				id: solarChargerRowComponent
 
-				ListNavigationItem {
-					readonly property var solarCharger: model.index < Global.solarChargers.model.count
-							? Global.solarChargers.model.deviceAt(model.index)
-							: null
-					readonly property var pvInverter: {
-						let pvInverterIndex = model.index
-						if (Global.solarChargers.model.count > 0) {
-							if (model.index <= Global.solarChargers.model.count) {
-								// This is a row for a charger or for the 'PV inverters' header, not for
-								// an inverter
-								return null
+				Column {
+					readonly property QtObject solarCharger: Global.solarChargers.model.deviceAt(model.index)
+
+					width: parent.width
+
+					Repeater {
+						model: solarCharger.trackers
+						delegate: SolarDeviceNavigationItem {
+							readonly property var historyToday: solarCharger.dailyHistory(0, model.index)
+
+							text: modelData.name
+							energy: historyToday ? historyToday.yieldKwh : NaN
+							current: modelData.current
+							power: solarCharger.power
+							voltage: modelData.voltage
+
+							onClicked: {
+								Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
 							}
-							// Offset the index by the number of items above it in the list
-							pvInverterIndex = model.index - Global.solarChargers.model.count - chargerListView.extraHeaderCount
 						}
+					}
+				}
+			}
+
+			Component {
+				id: pvInverterRowComponent
+
+				SolarDeviceNavigationItem {
+					readonly property QtObject pvInverter: {
+						let pvInverterIndex = model.index - Global.solarChargers.model.count - chargerListView.extraHeaderCount
 						return Global.pvInverters.model.deviceAt(pvInverterIndex)
 					}
 
-					text: solarCharger ? solarCharger.name : pvInverter.name
-					primaryLabel.width: availableWidth - Theme.geometry.solarListPage.quantityRow.width - Theme.geometry.listItem.content.horizontalMargin
-					enabled: !!solarCharger || !!pvInverter
+					text: pvInverter.name
+					energy: pvInverter.energy
+					current: pvInverter.current
+					power: pvInverter.power
+					voltage: pvInverter.voltage
 
 					onClicked: {
-						if (solarCharger) {
-							Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
-						} else {
-							Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml", { "pvInverter": pvInverter })
-						}
-					}
-
-					Row {
-						id: quantityRow
-
-						anchors {
-							right: parent.right
-							rightMargin: Theme.geometry.listItem.content.horizontalMargin + Theme.geometry.statusBar.button.icon.width
-						}
-						width: Theme.geometry.solarListPage.quantityRow.width
-						height: parent.height - parent.spacing
-
-						Repeater {
-							id: quantityRepeater
-
-							model: [
-								{
-									value: !!solarCharger ? root._yieldToday(solarCharger) : pvInverter.energy,
-									unit: VenusOS.Units_Energy_KiloWattHour
-								},
-								{
-									value: (solarCharger || pvInverter).voltage,
-									unit: VenusOS.Units_Volt
-								},
-								{
-									value: (solarCharger || pvInverter).current,
-									unit: VenusOS.Units_Amp
-								},
-								{
-									value: (solarCharger || pvInverter).power,
-									unit: VenusOS.Units_Watt
-								},
-							]
-
-							delegate: QuantityLabel {
-								width: (quantityRow.width / quantityRepeater.count) * (model.index === 0 ? 1.2 : 1)
-								height: quantityRow.height
-								value: modelData.value
-								unit: modelData.unit
-								alignment: Qt.AlignLeft
-								font.pixelSize: Theme.font.size.body2
-								valueColor: Theme.color.quantityTable.quantityValue
-								unitColor: Theme.color.quantityTable.quantityUnit
-							}
-						}
+						Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml", { "pvInverter": pvInverter })
 					}
 				}
 			}
