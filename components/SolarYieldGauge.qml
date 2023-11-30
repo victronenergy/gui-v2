@@ -37,7 +37,7 @@ Item {
 			strokeWidth: Theme.geometry.arc.strokeWidth
 			arcY: root.alignment & Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
 			value: {
-				if (solarMeasurements.maxPower == 0) {
+				if (!visible || solarMeasurements.maxPower == 0) {
 					// No useful max yet, so show a full gauge
 					return 100
 				}
