@@ -324,6 +324,7 @@ int main(int argc, char *argv[])
 
 	QQmlEngine engine;
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
+	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
 	/* Force construction of translator */
 	int languageSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "Language");
