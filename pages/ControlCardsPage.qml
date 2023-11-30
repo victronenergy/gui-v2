@@ -36,6 +36,7 @@ Page {
 		model: ObjectModel {
 			Row {
 				height: cardsView.height
+				spacing: Theme.geometry.controlCardsPage.spacing
 
 				Repeater {
 					model: Global.generators.model
@@ -49,6 +50,7 @@ Page {
 
 			Row {
 				height: cardsView.height
+				spacing: Theme.geometry.controlCardsPage.spacing
 
 				Repeater {
 					model: Global.veBusDevices.model
