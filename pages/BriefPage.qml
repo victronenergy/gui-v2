@@ -75,7 +75,7 @@ Page {
 
 			name: properties.name
 			icon.source: battery.icon
-			value: isNaN(battery.stateOfCharge) ? 0 : Math.round(battery.stateOfCharge)
+			value: (!visible || isNaN(battery.stateOfCharge)) ? 0 : Math.round(battery.stateOfCharge)
 			voltage: battery.voltage
 			current: battery.current
 			status: Gauges.getValueStatus(value, properties.valueType)
@@ -130,7 +130,7 @@ Page {
 					  : Global.acInputs.current
 					: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
 
-			value: inputsRange.valueAsRatio * 100
+			value: !visible ? 0 : inputsRange.valueAsRatio * 100
 
 			ValueRange {
 				id: inputsRange
@@ -185,7 +185,7 @@ Page {
 			alignment: Qt.AlignRight | (rightLower.active ? Qt.AlignTop : Qt.AlignVCenter)
 			animationEnabled: root.animationEnabled
 			icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
-			value: acLoadsRange.valueAsRatio * 100
+			value: !visible ? 0 : acLoadsRange.valueAsRatio * 100
 			quantityLabel.dataObject: Global.system.ac.consumption
 
 			x: -root._gaugeArcMargin
@@ -195,7 +195,7 @@ Page {
 
 			ValueRange {
 				id: acLoadsRange
-				value: Global.system.loads.acPower || 0
+				value: root.visible ? Global.system.loads.acPower || 0 : 0
 				maximumValue: Global.system.loads.maximumAcPower
 			}
 		}
@@ -217,7 +217,7 @@ Page {
 			alignment: Qt.AlignRight | Qt.AlignBottom
 			animationEnabled: root.animationEnabled
 			icon.source: "qrc:/images/dcloads.svg"
-			value: dcLoadsRange.valueAsRatio * 100
+			value: visible ? dcLoadsRange.valueAsRatio * 100 : 0
 			quantityLabel.dataObject: Global.system.dc
 
 			x: -root._gaugeArcMargin
@@ -227,7 +227,7 @@ Page {
 
 			ValueRange {
 				id: dcLoadsRange
-				value: Global.system.loads.dcPower || 0
+				value: root.visible ? Global.system.loads.dcPower || 0 : 0
 			}
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right lower")
@@ -248,6 +248,7 @@ Page {
 		property bool active: false
 		x: root.width
 		opacity: 0.0
+		visible: false
 	}
 
 	Connections {
@@ -321,6 +322,7 @@ Page {
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
 					duration: Theme.animation.briefPage.edgeGauge.fade.duration
 				}
+				ScriptAction { script: sidePanel.visible = true }
 				NumberAnimation {
 					target: sidePanel
 					properties: 'x,opacity'
@@ -339,6 +341,7 @@ Page {
 					duration: Theme.animation.briefPage.sidePanel.slide.duration
 					easing.type: Easing.InQuad
 				}
+				ScriptAction { script: sidePanel.visible = false }
 				NumberAnimation {
 					target: root
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
