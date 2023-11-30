@@ -176,7 +176,7 @@ Column {
 				id: gridQuantityLabel
 
 				anchors.top: gridHeader.bottom
-				value: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
+				value: root.visible ? Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : 0
 				font.pixelSize: Theme.font.briefPage.quantityLabel.size
 			}
 
@@ -394,12 +394,12 @@ exported power v  0.4 |   /
 	ValueRange {
 		id: loadsPower
 
-		value: Global.system.loads.power
+		value: root.visible ? Global.system.loads.power : NaN
 	}
 
 	ValueRange {
 		id: inputsPower
 
-		value: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
+		value: root.visible ? Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : NaN
 	}
 }
