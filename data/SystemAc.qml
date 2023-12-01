@@ -11,15 +11,13 @@ QtObject {
 
 	property QtObject consumption: QtObject {
 		property real power: NaN
-		property real current: NaN
+		readonly property real current: phases.count === 1 ? _firstPhaseCurrent : NaN // multi-phase systems don't have a total current
+		property real _firstPhaseCurrent: NaN
 
 		property ListModel phases: ListModel {}
 
 		function setPhaseCount(phaseCount) {
-			phases.clear()
-			power = NaN
-			current = NaN
-
+			reset()
 			for (let i = 0; i < phaseCount; ++i) {
 				phases.append({
 					name: "L" + (i + 1),
@@ -34,33 +32,27 @@ QtObject {
 
 			// Update totals for the model.
 			let totalPower = NaN
-			let totalCurrent = NaN
 			for (let i = 0; i < consumption.phases.count; ++i) {
 				const phaseData = i === index ? data : consumption.phases.get(i)
 				if (!phaseData) {
 					continue
 				}
-				if (!isNaN(phaseData.power)) {
-					if (isNaN(totalPower)) {
-						totalPower = 0
-					}
-					totalPower += phaseData.power
-				}
-				if (!isNaN(phaseData.current)) {
-					if (isNaN(totalCurrent)) {
-						totalCurrent = 0
-					}
-					totalCurrent += phaseData.current
-				}
+				totalPower = Utils.sumRealNumbers(totalPower, phaseData.power)
 			}
 			power = totalPower
-			current = totalCurrent
+			if (index === 0) {
+				_firstPhaseCurrent = Utils.sumRealNumbers(_firstPhaseCurrent, data.current)
+			}
+		}
+
+		function reset() {
+			phases.clear()
+			power = NaN
+			_firstPhaseCurrent = NaN
 		}
 	}
 
 	function reset() {
-		root.consumption.phases.clear()
-		root.consumption.power = NaN
-		root.consumption.current = NaN
+		root.consumption.reset()
 	}
 }
