@@ -20,22 +20,28 @@ Loader {
 	property string serviceType
 	property bool valid
 
-	property real frequency: valid ? _frequency : NaN
-	property real current: valid ? _current : NaN
+	readonly property real current: phases.count === 1 ? _firstPhaseCurrent : NaN // multi-phase systems don't have a total current
 	property real currentLimit: item ? item.currentLimit : NaN
-	property real power: valid ? _power : NaN
-	property real voltage: valid ? _voltage : NaN
+	property real power: valid && item ? item.power : NaN
 	readonly property ListModel phases: valid ? validPhases : invalidPhases
 
-	property real _frequency: NaN
-	property real _current: NaN
-	property real _power: NaN
-	property real _voltage: NaN
+	property real _firstPhaseCurrent: NaN
 
 	function _resetModel(model, count) {
 		model.clear()
+		_firstPhaseCurrent = NaN
 		for (let i = 0; i < count; ++i) {
 			model.append({ name: "L" + (i+1), frequency: NaN, current: NaN, power: NaN, voltage: NaN })
+		}
+	}
+
+	function _updatePhaseValue(phaseIndex, propertyName, propertyValue) {
+		if (phaseIndex < 0) {
+			return
+		}
+		validPhases.setProperty(phaseIndex, propertyName, propertyValue === undefined ? NaN : propertyValue)
+		if (phaseIndex === 0 && propertyName === "current") {
+			_firstPhaseCurrent = propertyValue
 		}
 	}
 
@@ -45,32 +51,13 @@ Loader {
 		item.model = phaseCount
 	}
 
-	function _updateValue(instantiator, index, propertyName, value) {
-		// update phase model value
-		validPhases.setProperty(index, propertyName, value === undefined ? NaN : value)
-
-		// update total value
-		let total = 0
-		let foundValidValue = false
-		for (let i = 0; i < instantiator.count; ++i) {
-			const obj = instantiator.objectAt(i)
-			if (!obj) {
-				continue
-			}
-			const veItemValue = obj["_" + propertyName]["value"]
-			if (veItemValue !== undefined) {
-				foundValidValue = true
-			}
-			total += veItemValue || 0
-		}
-		root["_" + propertyName] = foundValidValue ? total : NaN
-	}
-
 	sourceComponent: {
 		if (serviceUid == "" || serviceType == "") {
 			return null
-		} else if (serviceType == "vebus" || serviceType == "multi") {
-			return vebusOrMultiComponent
+		} else if (serviceType == "vebus") {
+			return vebusComponent
+		} else if (serviceType == "multi") {
+			return multiComponent
 		} else if (serviceType == "grid" || serviceType == "genset") {
 			return gridOrGensetComponent
 		} else {
@@ -114,22 +101,25 @@ Loader {
 	}
 
 	Component {
-		id: vebusOrMultiComponent
+		id: vebusComponent
 
 		Instantiator {
-			id: acInputs
+			id: phaseObjects
 
+			readonly property real power: _power.value === undefined ? NaN : _power.value
 			readonly property real currentLimit: _currentLimit.value === undefined ? NaN : _currentLimit.value
-			readonly property int activeInput: _activeInput.value === undefined ? -1 : _activeInput.value + 1
+
+			readonly property VeQuickItem _power: VeQuickItem {
+				uid: root.serviceUid + "/Ac/ActiveIn/P"
+			}
 
 			readonly property VeQuickItem _activeInput: VeQuickItem {
 				uid: root.serviceUid + "/Ac/ActiveIn/ActiveInput"
 			}
 			// Current limit for each AC input: /Ac/In/<1+>/CurrentLimit
 			readonly property VeQuickItem _currentLimit: VeQuickItem {
-				uid: acInputs.activeInput >= 0
-					 ? root.serviceUid + "/Ac/In/" + acInputs.activeInput + "/CurrentLimit"
-					 : ""
+				uid: _activeInput.value === undefined ? ""
+				   : root.serviceUid + "/Ac/In/" + (_activeInput.value + 1) + "/CurrentLimit"
 			}
 
 			model: null
@@ -140,20 +130,65 @@ Loader {
 				// Phase paths for vebus:
 				//      dbus/com.victronenergy.vebus.*/Ac/ActiveIn/L<1-3>
 				//      mqtt/vebus/<instance>/Ac/ActiveIn/L<1-3>
+				readonly property string phasePath: root.serviceUid + "/Ac/ActiveIn/L" + (index + 1)
+
+				serviceUid: !!phase.phasePath ? phase.phasePath : ""
+				onFrequencyChanged: root._updatePhaseValue(model.index, "frequency", frequency)
+				onCurrentChanged: root._updatePhaseValue(model.index, "current", current)
+				onPowerChanged: root._updatePhaseValue(model.index, "power", power)
+				onVoltageChanged: root._updatePhaseValue(model.index, "voltage", voltage)
+			}
+		}
+	}
+
+
+	Component {
+		id: multiComponent
+
+		Instantiator {
+			id: phaseObjects
+
+			property real power: NaN
+			readonly property real currentLimit: _currentLimit.value === undefined ? NaN : _currentLimit.value
+
+			readonly property VeQuickItem _activeInput: VeQuickItem {
+				uid: root.serviceUid + "/Ac/ActiveIn/ActiveInput"
+			}
+			readonly property VeQuickItem _currentLimit: VeQuickItem {
+				uid: _activeInput.value === undefined ? ""
+				   : root.serviceUid + "/Ac/In/" + (_activeInput.value + 1) + "/CurrentLimit"
+			}
+
+			function _updateTotalPower() {
+				let totalPower = NaN
+				for (let i = 0; i < count; ++i) {
+					const phaseObject = objectAt(i)
+					if (phaseObject) {
+						totalPower = Utils.sumRealNumbers(totalPower, phaseObject.power)
+					}
+				}
+				power = totalPower
+			}
+
+			model: null
+
+			delegate: AcPhase {
+				id: phase
+
 				// Phase paths for multi (only need to monitor one input, i.e. the current actively one):
 				//      dbus/com.victronenergy.multi.*/Ac/In/<1+>/L<1-3>
 				//      mqtt/vebus/<instance>/Ac/In/<1+>/L<1-3>
-				readonly property string phasePath: root.serviceType === "vebus"
-						? (root.serviceUid + "/Ac/ActiveIn/L" + (index + 1))
-						: acInputs.activeInput >= 0
-							? (root.serviceUid + "/Ac/In/" + acInputs.activeInput + "/L" + (index + 1))
-							: ""
+				readonly property string phasePath: _activeInput.value === undefined ? ""
+						: (root.serviceUid + "/Ac/In/" + (_activeInput.value + 1) + "/L" + (index + 1))
 
 				serviceUid: !!phase.phasePath ? phase.phasePath : ""
-				onFrequencyChanged: root._updateValue(acInputs, model.index, "frequency", frequency)
-				onCurrentChanged: root._updateValue(acInputs, model.index, "current", current)
-				onPowerChanged: root._updateValue(acInputs, model.index, "power", power)
-				onVoltageChanged: root._updateValue(acInputs, model.index, "voltage", voltage)
+				onFrequencyChanged: root._updatePhaseValue(model.index, "frequency", frequency)
+				onCurrentChanged: root._updatePhaseValue(model.index, "current", current)
+				onPowerChanged: {
+					root._updatePhaseValue(model.index, "power", power)
+					Qt.callLater(phaseObjects._updateTotalPower)
+				}
+				onVoltageChanged: root._updatePhaseValue(model.index, "voltage", voltage)
 			}
 		}
 	}
@@ -164,10 +199,16 @@ Loader {
 		id: gridOrGensetComponent
 
 		Instantiator {
-			id: acInputs
+			id: phaseObjects
+
+			readonly property real power: _power.value === undefined ? NaN : _power.value
 
 			// For these devices, there is no current limit.
 			readonly property real currentLimit: NaN
+
+			readonly property VeQuickItem _power: VeQuickItem {
+				uid: root.serviceUid + "/Ac/Power"
+			}
 
 			model: null
 
@@ -178,19 +219,19 @@ Loader {
 
 				readonly property VeQuickItem _frequency: VeQuickItem {
 					uid: phase.phasePath + "/Frequency"
-					onValueChanged: root._updateValue(acInputs, model.index, "frequency", value)
+					onValueChanged: root._updatePhaseValue(model.index, "frequency", value)
 				}
 				readonly property VeQuickItem _current: VeQuickItem {
 					uid: phase.phasePath + "/Current"
-					onValueChanged: root._updateValue(acInputs, model.index, "current", value)
+					onValueChanged: root._updatePhaseValue(model.index, "current", value)
 				}
 				readonly property VeQuickItem _power: VeQuickItem {
 					uid: phase.phasePath + "/Power"
-					onValueChanged: root._updateValue(acInputs, model.index, "power", value)
+					onValueChanged: root._updatePhaseValue(model.index, "power", value)
 				}
 				readonly property VeQuickItem _voltage: VeQuickItem {
 					uid: phase.phasePath + "/Voltage"
-					onValueChanged: root._updateValue(acInputs, model.index, "voltage", value)
+					onValueChanged: root._updatePhaseValue(model.index, "voltage", value)
 				}
 			}
 		}
