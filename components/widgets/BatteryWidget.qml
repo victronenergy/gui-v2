@@ -120,8 +120,8 @@ OverviewWidget {
 									target: bubble
 									// define three slightly different paths for bubbles.
 									from: bubble.index % 3 === 0 ? chimney.width/2 - bubble.width
-									    : bubble.index % 2 === 0 ? chimney.width - 3*bubble.width
-									    : (3*bubble.width)
+										: bubble.index % 2 === 0 ? chimney.width - 3*bubble.width
+										: (3*bubble.width)
 									to: bubble.index % 3 === 0 ? chimney.width/2 + bubble.width
 									  : bubble.index % 2 === 0 ? 3*bubble.width
 									  : (chimney.width - 3*bubble.width)
