@@ -5,10 +5,28 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Utils
 import Victron.Veutil
 
 Instantiator {
 	id: root
+
+	property int acSourceCount
+	property real acCurrent: NaN
+
+	function updateOverallCurrent() {
+		if (!Global.system) {
+			return
+		}
+		// Current values cannot be summed, so if there is more than one current measurement from
+		// AC and DC sources combined, set the overall current to NaN.
+		const totalSourceCount = acSourceCount + (veDcCurrent.value === undefined ? 0 : 1)
+		if (totalSourceCount === 1) {
+			Global.system.solar.current = acSourceCount === 1 ? acCurrent : veDcCurrent.value
+		} else {
+			Global.system.solar.current = NaN
+		}
+	}
 
 	// --- AC values ---
 
@@ -16,7 +34,8 @@ Instantiator {
 	// and Ac/PvOnOutput/L*/Power.
 	function updateAcTotals() {
 		let totalPower = NaN
-		let totalCurrent = NaN
+		let totalPhaseCount = 0
+		let lastPhaseObject = null
 
 		for (let i = 0; i < count; ++i) {
 			const acPv = objectAt(i)
@@ -26,24 +45,21 @@ Instantiator {
 					if (!phase) {
 						continue
 					}
-					if (!isNaN(phase.power)) {
-						if (isNaN(totalPower)) {
-							totalPower = 0
-						}
-						totalPower += phase.power
-					}
-					if (!isNaN(phase.current)) {
-						if (isNaN(totalCurrent)) {
-							totalCurrent = 0
-						}
-						totalCurrent += phase.current
-					}
+					totalPower = Utils.sumRealNumbers(totalPower, phase.power)
+					lastPhaseObject = phase
+					totalPhaseCount++
 				}
 			}
 		}
+		acSourceCount = totalPhaseCount
+
+		// Current values cannot be summed, so if there is more than one current measurement
+		// found in any AC PV source, set acCurrent=NaN.
+		acCurrent = totalPhaseCount === 1 ? lastPhaseObject.current : NaN
+
 		if (!!Global.system) {
 			Global.system.solar.acPower = totalPower
-			Global.system.solar.acCurrent = totalCurrent
+			updateOverallCurrent()
 		}
 	}
 
@@ -68,8 +84,8 @@ Instantiator {
 			delegate: QtObject {
 				id: phase
 
-				property real power
-				property real current
+				property real power: NaN
+				property real current: NaN
 
 				readonly property VeQuickItem vePower: VeQuickItem {
 					uid: acPvDelegate.serviceUid + "/L" + (model.index + 1) + "/Power"
@@ -99,6 +115,6 @@ Instantiator {
 
 	readonly property DataPoint veDcCurrent: DataPoint {
 		source: "com.victronenergy.system/Dc/Pv/Current"
-		onValueChanged: if (!!Global.system) Global.system.solar.dcCurrent = value === undefined ? NaN : value
+		onValueChanged: root.updateOverallCurrent()
 	}
 }

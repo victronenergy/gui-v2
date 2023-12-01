@@ -98,7 +98,6 @@ QtObject {
 				}
 			}
 			Global.system.solar.acPower = acPower
-			Global.system.solar.acCurrent = acPower * 0.01
 		}
 		if (solarChargers.count) {
 			let dcPower = 0
@@ -109,8 +108,8 @@ QtObject {
 				}
 			}
 			Global.system.solar.dcPower = dcPower
-			Global.system.solar.dcCurrent = dcPower * 0.01
 		}
+		Global.system.solar.current = NaN
 	}
 
 	property Instantiator solarChargers: Instantiator {
