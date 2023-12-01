@@ -92,11 +92,10 @@ QtObject {
 			property bool connected
 			readonly property int gensetStatusCode: -1
 
-			property real frequency
-			property real current
+			readonly property real current: phases.count === 1 ? _current : NaN // multi-phase systems don't have a total current
+			property real _current: NaN
 			property real currentLimit: NaN
-			property real power
-			property real voltage
+			property real power: Math.random() * 100
 			property ListModel phases: ListModel {
 				Component.onCompleted: {
 					for (let i = 0; i < phaseCount; ++i) {
@@ -118,23 +117,20 @@ QtObject {
 					// Negative energy value = exported energy, flowing towards grid.
 					const negativeEnergyFlow = Math.random() > 0.5
 					const zeroEnergyFlow = Math.random() > 0.8
-					let properties = ["frequency", "current", "power", "voltage"]
-					for (let propIndex = 0; propIndex < properties.length; ++propIndex) {
-						let propTotal = 0
-						const propName = properties[propIndex]
-						for (let i = 0; i < input.phaseCount; ++i) {
-							if (zeroEnergyFlow) {
-								input.phases.setProperty(i, propName, NaN)
-							} else {
-								const value = negativeEnergyFlow && (propName === "power" || propName === "current")
-											? (Math.random() * 300) * -1
-											: Math.random() * 300
-								input.phases.setProperty(i, propName, value)
-								propTotal += value
-							}
+					let totalPower = 0
+					for (let i = 0; i < input.phaseCount; ++i) {
+						if (zeroEnergyFlow) {
+							input.phases.setProperty(i, "power", NaN)
+						} else {
+							const value = negativeEnergyFlow
+										? (Math.random() * 300) * -1
+										: Math.random() * 300
+							input.phases.setProperty(i, "power", value)
+							totalPower += value
 						}
-						input[propName] = propTotal
 					}
+					input.power = totalPower
+					input._current = Math.random() * 10
 				}
 			}
 
