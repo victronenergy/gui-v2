@@ -37,7 +37,7 @@ QtObject {
 			}
 
 			property real energy: Math.random() * 10
-			property real current: Math.random() * 20
+			readonly property real current: NaN // multi-phase systems don't have a total current
 			property real power: Math.random() * 50
 			property real voltage: Math.random() * 30
 
@@ -53,7 +53,6 @@ QtObject {
 					phase.power = Math.max(0, phase.power + (1 + (Math.random() * 10)) * delta)
 					pvInverter.power += phase.power
 					pvInverter.energy = Math.random() * 10
-					pvInverter.current = Math.random() * 20
 					pvInverter.voltage = Math.random() * 30
 				}
 			}

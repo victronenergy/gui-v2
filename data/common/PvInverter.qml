@@ -15,8 +15,10 @@ Device {
 
 	readonly property real energy: _energy.value === undefined ? NaN : _energy.value
 	readonly property real power: _power.value === undefined ? NaN : _power.value
-	readonly property real current: _current.value === undefined ? NaN : _current.value
+	readonly property real current: phases.count === 1 ? _firstPhaseCurrent : NaN // multi-phase systems don't have a total current
 	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
+
+	property real _firstPhaseCurrent: NaN
 
 	readonly property ListModel phases: ListModel {
 		function setPhaseProperty(phaseName, propertyName, value) {
@@ -49,6 +51,9 @@ Device {
 				setProperty(index, propertyName, value)
 			} else {
 				console.warn("setPhaseProperty(): bad index", index, "count is", count)
+			}
+			if (index === 0 && propertyName === "current") {
+				_firstPhaseCurrent = value
 			}
 		}
 
