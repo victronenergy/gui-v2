@@ -9,8 +9,9 @@ import Victron.Veutil
 import Victron.Utils
 
 /*
-  Provides frequency/current/power/voltage readings for an AC input, including each phase
-  (if applicable). These come from the input-specific service, e.g. com.victronenergy.vebus,
+  Provides measurements for an AC input, including each phase (if applicable).
+
+  These come from the input-specific service, e.g. com.victronenergy.vebus,
   com.victronenergy.genset for generator inputs and com.victronenergy.grid.
 */
 Loader {
@@ -31,7 +32,7 @@ Loader {
 		model.clear()
 		_firstPhaseCurrent = NaN
 		for (let i = 0; i < count; ++i) {
-			model.append({ name: "L" + (i+1), frequency: NaN, current: NaN, power: NaN, voltage: NaN })
+			model.append({ name: "L" + (i+1), current: NaN, power: NaN })
 		}
 	}
 
@@ -133,10 +134,8 @@ Loader {
 				readonly property string phasePath: root.serviceUid + "/Ac/ActiveIn/L" + (index + 1)
 
 				serviceUid: !!phase.phasePath ? phase.phasePath : ""
-				onFrequencyChanged: root._updatePhaseValue(model.index, "frequency", frequency)
 				onCurrentChanged: root._updatePhaseValue(model.index, "current", current)
 				onPowerChanged: root._updatePhaseValue(model.index, "power", power)
-				onVoltageChanged: root._updatePhaseValue(model.index, "voltage", voltage)
 			}
 		}
 	}
@@ -182,13 +181,11 @@ Loader {
 						: (root.serviceUid + "/Ac/In/" + (_activeInput.value + 1) + "/L" + (index + 1))
 
 				serviceUid: !!phase.phasePath ? phase.phasePath : ""
-				onFrequencyChanged: root._updatePhaseValue(model.index, "frequency", frequency)
 				onCurrentChanged: root._updatePhaseValue(model.index, "current", current)
 				onPowerChanged: {
 					root._updatePhaseValue(model.index, "power", power)
 					Qt.callLater(phaseObjects._updateTotalPower)
 				}
-				onVoltageChanged: root._updatePhaseValue(model.index, "voltage", voltage)
 			}
 		}
 	}
@@ -217,10 +214,6 @@ Loader {
 
 				readonly property string phasePath: root.serviceUid + "/Ac/L" + (index + 1)
 
-				readonly property VeQuickItem _frequency: VeQuickItem {
-					uid: phase.phasePath + "/Frequency"
-					onValueChanged: root._updatePhaseValue(model.index, "frequency", value)
-				}
 				readonly property VeQuickItem _current: VeQuickItem {
 					uid: phase.phasePath + "/Current"
 					onValueChanged: root._updatePhaseValue(model.index, "current", value)
@@ -228,10 +221,6 @@ Loader {
 				readonly property VeQuickItem _power: VeQuickItem {
 					uid: phase.phasePath + "/Power"
 					onValueChanged: root._updatePhaseValue(model.index, "power", value)
-				}
-				readonly property VeQuickItem _voltage: VeQuickItem {
-					uid: phase.phasePath + "/Voltage"
-					onValueChanged: root._updatePhaseValue(model.index, "voltage", value)
 				}
 			}
 		}
