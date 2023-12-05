@@ -6,6 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Utils
+import Victron.Units
 import Victron.Veutil
 
 Instantiator {
@@ -45,7 +46,7 @@ Instantiator {
 					if (!phase) {
 						continue
 					}
-					totalPower = Utils.sumRealNumbers(totalPower, phase.power)
+					totalPower = Units.sumRealNumbers(totalPower, phase.power)
 					lastPhaseObject = phase
 					totalPhaseCount++
 				}

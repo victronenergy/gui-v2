@@ -166,17 +166,6 @@ function degreesToRadians(degrees) {
 	return (degrees * Math.PI / 180)
 }
 
-// This considers whether the values are NaN. If both are NaN, the result is NaN.
-function sumRealNumbers(a, b) {
-	return isNaN(a) && isNaN(b)
-		? NaN
-		: isNaN(a)
-		  ? b
-		  : isNaN(b)
-			? a
-			: a + b
-}
-
 function jsonSettingsToModel(json, expectNumber) {
 	if (json === undefined) {
 		return []

@@ -7,6 +7,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 import Victron.Utils
+import Victron.Units
 
 QtObject {
 	id: root
@@ -105,8 +106,8 @@ QtObject {
 				const outputCurrent = outputConsumption ? outputConsumption.current : NaN
 
 				Global.system.ac.consumption.setPhaseData(i, {
-					power: Utils.sumRealNumbers(inputPower, outputPower),
-					current: Utils.sumRealNumbers(inputCurrent, outputCurrent)
+					power: Units.sumRealNumbers(inputPower, outputPower),
+					current: Units.sumRealNumbers(inputCurrent, outputCurrent)
 				})
 			}
 		}
