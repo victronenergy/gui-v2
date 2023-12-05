@@ -7,6 +7,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 import Victron.Utils
+import Victron.Units
 
 /*
   Provides measurements for an AC input, including each phase (if applicable).
@@ -163,7 +164,7 @@ Loader {
 				for (let i = 0; i < count; ++i) {
 					const phaseObject = objectAt(i)
 					if (phaseObject) {
-						totalPower = Utils.sumRealNumbers(totalPower, phaseObject.power)
+						totalPower = Units.sumRealNumbers(totalPower, phaseObject.power)
 					}
 				}
 				power = totalPower

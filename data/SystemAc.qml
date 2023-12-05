@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.Utils
+import Victron.Units
 
 QtObject {
 	id: root
@@ -37,11 +38,11 @@ QtObject {
 				if (!phaseData) {
 					continue
 				}
-				totalPower = Utils.sumRealNumbers(totalPower, phaseData.power)
+				totalPower = Units.sumRealNumbers(totalPower, phaseData.power)
 			}
 			power = totalPower
 			if (index === 0) {
-				_firstPhaseCurrent = Utils.sumRealNumbers(_firstPhaseCurrent, data.current)
+				_firstPhaseCurrent = Units.sumRealNumbers(_firstPhaseCurrent, data.current)
 			}
 		}
 

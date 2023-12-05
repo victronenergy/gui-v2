@@ -6,6 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Utils
+import Victron.Units
 import Victron.Gauges
 
 Page {
@@ -128,7 +129,7 @@ Page {
 					? (Global.acInputs.current || 0) === 0
 					  ? Global.dcInputs.current
 					  : Global.acInputs.current
-					: Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
+					: Units.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
 
 			value: !visible ? 0 : inputsRange.valueAsRatio * 100
 

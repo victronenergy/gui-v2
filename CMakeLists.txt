@@ -545,14 +545,15 @@ qt_add_qml_module(Mock
 
 # Units_QML_MODULE
 set(Units_QML_MODULE_SOURCES
-    components/Units.js
+    src/units.h
+    src/units.cpp
 )
 list(APPEND QML_MODULE_SOURCES ${Units_QML_MODULE_SOURCES})
 qt_add_qml_module(Units
     URI Victron.Units
     STATIC
     OUTPUT_DIRECTORY Victron/Units
-    QML_FILES ${Units_QML_MODULE_SOURCES}
+    SOURCES ${Units_QML_MODULE_SOURCES}
     ${QML_MODULE_OPTARGS}
 )
 # end Units_QML_MODULE
