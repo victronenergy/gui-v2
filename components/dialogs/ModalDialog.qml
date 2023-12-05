@@ -4,10 +4,10 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 
-C.Dialog {
+T.Dialog {
 	id: root
 
 	property string secondaryTitle
@@ -37,10 +37,10 @@ C.Dialog {
 	modal: true
 
 	enter: Transition {
-		OpacityAnimator { from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
+		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
 	}
 	exit: Transition {
-		OpacityAnimator { from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration }
+		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration }
 	}
 
 	background: Rectangle {
