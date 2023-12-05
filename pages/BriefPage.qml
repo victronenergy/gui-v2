@@ -33,7 +33,7 @@ Page {
 	fullScreenWhenIdle: true
 	animationEnabled: root.isCurrentPage && BackendConnection.applicationVisible && !Global.splashScreenVisible
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-	topRightButton: sidePanel.active
+	topRightButton: sidePanel.showing
 			? VenusOS.StatusBar_RightButton_SidePanelActive
 			: VenusOS.StatusBar_RightButton_SidePanelInactive
 
@@ -96,7 +96,7 @@ Page {
 		}
 		// Show gauge even if there are no active AC inputs, so that the gauge visibility doesn't
 		// jump on/off when inputs are connected/disconnected
-		active: !!Global.acInputs.activeInput || Global.dcInputs.model.count > 0
+		active: visible && (!!Global.acInputs.activeInput || Global.dcInputs.model.count > 0)
 
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignLeft | (leftLower.active ? Qt.AlignTop : Qt.AlignVCenter)
@@ -156,7 +156,7 @@ Page {
 			leftMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			right: mainGauge.left
 		}
-		active: Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0
+		active: visible && (Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0)
 
 		sourceComponent: SolarYieldGauge {
 			alignment: Qt.AlignLeft | (leftEdge.active ? Qt.AlignBottom : Qt.AlignVCenter)
@@ -179,7 +179,7 @@ Page {
 			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			left: mainGauge.right
 		}
-		active: !isNaN(Global.system.loads.acPower) || rightLower.active
+		active: visible && (!isNaN(Global.system.loads.acPower) || rightLower.active)
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignRight | (rightLower.active ? Qt.AlignTop : Qt.AlignVCenter)
 			animationEnabled: root.animationEnabled
@@ -211,7 +211,7 @@ Page {
 			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			left: mainGauge.right
 		}
-		active: !isNaN(Global.system.loads.dcPower)
+		active: visible && !isNaN(Global.system.loads.dcPower)
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignRight | Qt.AlignBottom
 			animationEnabled: root.animationEnabled
@@ -232,22 +232,29 @@ Page {
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right lower")
 	}
 
-	BriefMonitorPanel {
+	Loader {
 		id: sidePanel
-
 		anchors {
 			verticalCenter: mainGauge.verticalCenter
 			verticalCenterOffset: Theme.geometry_briefPage_sidePanel_verticalCenterOffset
 		}
 		width: Theme.geometry_briefPage_sidePanel_width
-		inputsIconSource: root._inputsIconSource
-		animationEnabled: root.animationEnabled && sidePanel.active
+		sourceComponent: BriefMonitorPanel {
+			inputsIconSource: root._inputsIconSource
+			animationEnabled: root.animationEnabled
+		}
+
+		// the brief monitor panel has animations which mess with the asynchronous heuristic
+		// and cause the object hierarchy to take multiple seconds to load.
+		asynchronous: false
 
 		// hidden by default.
-		property bool active: false
+		active: false
 		x: root.width
 		opacity: 0.0
-		visible: false
+		property bool showing // intermediate, used only to trigger loading.
+		property bool showingAndLoaded: showing && active && status == Loader.Ready
+		onShowingChanged: if (showing) active = true // trigger creation.
 	}
 
 	Connections {
@@ -255,14 +262,14 @@ Page {
 		enabled: root.isCurrentPage
 
 		function onRightButtonClicked() {
-			sidePanel.active = !sidePanel.active
+			sidePanel.showing = !sidePanel.showing
 		}
 	}
 
 	states: [
 		State {
 			name: "initialized"
-			when: !Global.splashScreenVisible && !sidePanel.active
+			when: !Global.splashScreenVisible && !sidePanel.showingAndLoaded
 			PropertyChanges {
 				target: root
 				_gaugeArcMargin: 0
@@ -274,7 +281,7 @@ Page {
 		State {
 			name: "panelOpen"
 			extend: "initialized"
-			when: sidePanel.active
+			when: sidePanel.showingAndLoaded
 			PropertyChanges {
 				target: sidePanel
 				x: root.width - sidePanel.width - Theme.geometry_page_content_horizontalMargin
@@ -321,7 +328,6 @@ Page {
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
 					duration: Theme.animation_briefPage_edgeGauge_fade_duration
 				}
-				ScriptAction { script: sidePanel.visible = true }
 				NumberAnimation {
 					target: sidePanel
 					properties: 'x,opacity'
@@ -340,12 +346,12 @@ Page {
 					duration: Theme.animation_briefPage_sidePanel_slide_duration
 					easing.type: Easing.InQuad
 				}
-				ScriptAction { script: sidePanel.visible = false }
 				NumberAnimation {
 					target: root
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
 					duration: Theme.animation_briefPage_edgeGauge_fade_duration
 				}
+				ScriptAction { script: sidePanel.active = false }
 			}
 		}
 	]
