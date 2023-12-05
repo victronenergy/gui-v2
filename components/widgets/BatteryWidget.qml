@@ -163,6 +163,7 @@ OverviewWidget {
 				: Units.celsiusToFahrenheit(batteryData.temperature_celsius))
 		unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : VenusOS.Units_Temperature_Celsius
 		font.pixelSize: Theme.font_size_body2
+		alignment: Qt.AlignRight
 	}
 
 	extraContent.children: [
@@ -197,6 +198,7 @@ OverviewWidget {
 			value: batteryData.voltage
 			unit: VenusOS.Units_Volt
 			font.pixelSize: Theme.font_size_body2
+			alignment: Qt.AlignLeft
 		},
 
 		QuantityLabel {
@@ -224,6 +226,7 @@ OverviewWidget {
 			value: batteryData.power
 			unit: VenusOS.Units_Watt
 			font.pixelSize: Theme.font_size_body2
+			alignment: Qt.AlignRight
 		}
 	]
 

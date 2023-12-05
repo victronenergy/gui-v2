@@ -179,14 +179,14 @@ qreal Units::convertFromCelsius(qreal celsius, Victron::VenusOS::Enums::Units_Ty
 		: (celsius + 273.15);
 }
 
-Victron::Units::Quantity Units::scaledQuantity(
+Victron::Units::quantityInfo Units::scaledQuantity(
 	qreal value,
 	qreal unitMatchValue,
 	int precision,
 	const QString &baseUnit,
 	const QString &scaledUnit) const
 {
-	Victron::Units::Quantity quantity;
+	Victron::Units::quantityInfo quantity;
 	qreal v = value;
 	const qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : value;
 	if (!scaledUnit.isEmpty() && (qAbs(scaleMatch) >= 10000)) {
@@ -203,19 +203,19 @@ Victron::Units::Quantity Units::scaledQuantity(
 			|| (quantity.unit.compare(QStringLiteral("%")) == 0 && v > 99 && v < 100)) {
 		int vFixed = v * 10;
 		v = (1.0*vFixed) / 10.0;
-		quantity.number = QStringLiteral("%L1").arg(v, 0, 'f', 1);
+		quantity.number = QString::number(v, 'f', 1);
 	} else {
 		const qreal vFixedMultiplier = std::pow(10, precision);
 		int vFixed = v * vFixedMultiplier;
 		v = (1.0*vFixed) / vFixedMultiplier;
-		quantity.number = QStringLiteral("%L1").arg(v, 0, 'f', precision);
+		quantity.number = QString::number(v, 'f', precision);
 	}
 	return quantity;
 }
 
 // Returns the physical quantity as a tuple of strings: { number, unit }.
 // The number is scaled if the absolute value is >= 10,000 (e.g. 10000 W = 10kW)
-Quantity Units::getDisplayText(
+Victron::Units::quantityInfo Units::getDisplayText(
 	Victron::VenusOS::Enums::Units_Type unit,
 	qreal value,
 	int precision,
@@ -223,13 +223,13 @@ Quantity Units::getDisplayText(
 {
 	if (unit == Victron::VenusOS::Enums::Units_None) {
 		//qWarning() << "getDisplayText(): unknown unit " << unit << " with value " << value;
-		Quantity qty;
+		Victron::Units::quantityInfo qty;
 		qty.number = QStringLiteral("--");
 		return qty;
 	}
 
 	if (qIsNaN(value)) {
-		Quantity qty;
+		Victron::Units::quantityInfo qty;
 		qty.number = QStringLiteral("--");
 		qty.unit = defaultUnitString(unit);
 		return qty;
@@ -244,7 +244,7 @@ Quantity Units::getDisplayText(
 QString Units::getCombinedDisplayText(Victron::VenusOS::Enums::Units_Type unit, qreal value, int precision) const
 {
 	const int p = precision < 0 ? defaultUnitPrecision(unit) : precision;
-	const Quantity qty = getDisplayText(unit, value, p);
+	const Victron::Units::quantityInfo qty = getDisplayText(unit, value, p);
 	if (qty.number.compare(QStringLiteral("--")) == 0) {
 		return qty.number;
 	}
@@ -259,8 +259,8 @@ QString Units::getCapacityDisplayText(
 {
 	const qreal capacity = convertVolumeForUnit(capacity_m3, unit);
 	const qreal remaining = convertVolumeForUnit(remaining_m3, unit);
-	const Quantity c = getDisplayText(unit, capacity, precision);
-	const Quantity r = getDisplayText(unit, remaining, precision, capacity);
+	const Victron::Units::quantityInfo c = getDisplayText(unit, capacity, precision);
+	const Victron::Units::quantityInfo r = getDisplayText(unit, remaining, precision, capacity);
 	return QStringLiteral("%1/%2%3").arg(r.number, c.number, c.unit);
 }
 

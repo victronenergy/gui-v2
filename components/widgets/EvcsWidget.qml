@@ -58,6 +58,7 @@ OverviewWidget {
 				height: chargingTimeLabel.height // use normal label height, instead of default baseline calculation
 				value: evCharger.energy
 				valueColor: unitColor
+				alignment: Qt.AlignLeft
 			}
 
 			Label {
