@@ -19,11 +19,9 @@ Page {
 			ListSpinBox {
 				id: capacitySpinBox
 
-				readonly property var _quantityInfo: Units.getDisplayText(Global.systemSettings.volumeUnit.value)
-
 				//% "Capacity"
 				text: qsTrId("devicelist_tanksetup_capacity")
-				suffix: _quantityInfo.unit
+				suffix: Units.defaultUnitString(Global.systemSettings.volumeUnit.value)
 				stepSize: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_CubicMeter
 						  ? 5   // Cubic meters (this becomes 0.005 when ListSpinBox adjusts it for decimals)
 						  : 1   // Liters, Gallons
