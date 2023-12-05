@@ -10,10 +10,23 @@
 #include <QScreen>
 #include <QObject>
 #include <QSizeF>
+#include <QFont>
+#include <QHash>
 #include <qqmlintegration.h>
 
 namespace Victron {
 namespace VenusOS {
+
+struct FontInfo
+{
+	QFont font;
+	qreal numberWidth = 0;
+	qreal alphaWidth = 0;
+	qreal advanceWidth = 0;
+	qreal dotDeltaWidth = 0;
+	qreal minusDeltaWidth = 0;
+	qreal oneHundredWidth = 0;
+};
 
 class Theme : public QObject
 {
@@ -72,6 +85,13 @@ public:
 		}
 	}
 
+	Q_INVOKABLE qreal characterWidthNumber(const QFont &font) const;
+	Q_INVOKABLE qreal characterWidthAlpha(const QFont &font) const;
+	Q_INVOKABLE qreal characterAdvanceWidth(const QFont &font) const;
+	Q_INVOKABLE qreal characterDotDeltaWidth(const QFont &font) const;
+	Q_INVOKABLE qreal characterMinusDeltaWidth(const QFont &font) const;
+	Q_INVOKABLE qreal charactersOneHundredWidth(const QFont &font) const;
+
 Q_SIGNALS:
 	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
 	void screenSizeChanged_parameterless();
@@ -79,8 +99,10 @@ Q_SIGNALS:
 	void colorSchemeChanged_parameterless();
 
 protected:
+	const FontInfo& fontInfo(const QFont &font) const;
 	ScreenSize m_screenSize = SevenInch;
 	ColorScheme m_colorScheme = Dark;
+	mutable QVector<FontInfo> m_fontInfo;
 };
 
 }

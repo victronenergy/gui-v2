@@ -15,9 +15,10 @@
 namespace Victron {
 namespace Units {
 
-class Quantity
+class quantityInfo
 {
 	Q_GADGET
+	QML_ELEMENT
 	Q_PROPERTY(QString number MEMBER number)
 	Q_PROPERTY(QString unit MEMBER unit)
 
@@ -51,14 +52,14 @@ public:
 	Q_INVOKABLE qreal toKelvin(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit) const;
 	Q_INVOKABLE qreal convertFromCelsius(qreal celsius, Victron::VenusOS::Enums::Units_Type unit) const;
 
-	Q_INVOKABLE Victron::Units::Quantity scaledQuantity(
+	Q_INVOKABLE Victron::Units::quantityInfo scaledQuantity(
 		qreal value,
 		qreal unitMatchValue,
 		int precision,
 		const QString &baseUnit,
 		const QString &scaledUnit = QString()) const;
 
-	Q_INVOKABLE Victron::Units::Quantity getDisplayText(
+	Q_INVOKABLE Victron::Units::quantityInfo getDisplayText(
 		Victron::VenusOS::Enums::Units_Type unit,
 		qreal value,
 		int precision = -1,
@@ -81,6 +82,6 @@ public:
 }
 }
 
-Q_DECLARE_METATYPE(Victron::Units::Quantity)
+Q_DECLARE_METATYPE(Victron::Units::quantityInfo)
 
 #endif // VICTRON_VENUSOS_GUI_V2_UNITS_H

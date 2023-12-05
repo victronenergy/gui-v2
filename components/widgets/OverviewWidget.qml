@@ -99,6 +99,7 @@ Rectangle {
 			font.pixelSize: root.size === VenusOS.OverviewWidget_Size_XS
 					  ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
 					  : Theme.font_overviewPage_widget_quantityLabel_maximumSize
+			alignment: Qt.AlignLeft
 		}
 	}
 
