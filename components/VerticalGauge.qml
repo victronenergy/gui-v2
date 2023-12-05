@@ -4,29 +4,82 @@
 */
 
 import QtQuick
+import QtQuick.Effects as Effects
 import Victron.VenusOS
-import QtQuick.Controls.impl as CP
 
 Rectangle {
-	id: root
+	id: bgRect
 
+	property alias backgroundColor: bgRect.color
+	property alias foregroundColor: fgRect.color
 	property real value: 0.0
 	property real _value: isNaN(value) || value < 0 ? 0 : Math.min(1.0, value)
+	property bool animationEnabled
 
-	property color backgroundColor
-	property color foregroundColor
-	property alias animationEnabled: animation.enabled
+	onAnimationEnabledChanged: fgRect.resetYBinding()
 
-	gradient: Gradient { // Take care if modifying this; be sure to test the edge cases of _value == 0.0 and _value == 1.0
-		GradientStop { position: 0.0; color: root._value >= 1.0 ? root.foregroundColor : root.backgroundColor }
-		GradientStop { position: Math.min(0.999999, (1.0 - root._value)); color: root._value >= 1.0 ? root.foregroundColor : root.backgroundColor }
-		GradientStop { position: Math.min(1.0, (1.0 - root._value) + 0.001); color: root._value <= 0.0 ? root.backgroundColor : root.foregroundColor }
-		GradientStop { position: 1.0; color: root._value <= 0.0 ? root.backgroundColor : root.foregroundColor }
+	Rectangle {
+		id: maskRect
+		layer.enabled: true
+		visible: false
+		width: bgRect.width
+		height: bgRect.height
+		radius: bgRect.radius
+		color: "black" // opacity mask, not visible.
 	}
 
-	Behavior on _value {
-		id: animation
+	Item {
+		id: sourceItem
+		visible: false
+		width: parent.width
+		height: parent.height
 
-		NumberAnimation {}
+		Rectangle {
+			id: fgRect
+
+			width: parent.width
+			height: parent.height
+			color: Theme.color.ok
+			y: nextY
+
+			// don't use a behavior on Y
+			// otherwise there can be a "jump" we receive receive two value updates in close succession.
+			readonly property real nextY: maskRect.height - (fgRect.height*bgRect._value)
+
+			// when the animation isn't handling y changes, we need to reassign
+			// the initial binding, to ensure the value is correct when not animating.
+			function resetYBinding() {
+				if (!bgRect.animationEnabled && !anim.running) {
+					y = Qt.binding(function() { return fgRect.nextY })
+				}
+			}
+
+			onNextYChanged: {
+				if (!anim.running && bgRect.animationEnabled) {
+					anim.from = fgRect.y
+					// do a little dance to break the y binding...
+					fgRect.y = 0
+					fgRect.y = anim.from
+					anim.to = fgRect.nextY
+					anim.start()
+				}
+			}
+
+			YAnimator {
+				id: anim
+				target: fgRect
+				easing.type: Easing.InOutQuad
+				duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration
+				onRunningChanged: fgRect.resetYBinding()
+			}
+		}
+	}
+
+	Effects.MultiEffect {
+		visible: true
+		anchors.fill: parent
+		maskEnabled: true
+		maskSource: maskRect
+		source: sourceItem
 	}
 }
