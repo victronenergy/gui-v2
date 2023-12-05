@@ -6,6 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Utils
+import Victron.Units
 
 QtObject {
 	id: root
@@ -14,7 +15,7 @@ QtObject {
 
 	// Provides convenience properties for total AC/DC loads.
 	property QtObject loads: QtObject {
-		readonly property real power: Utils.sumRealNumbers(acPower, dcPower)
+		readonly property real power: Units.sumRealNumbers(acPower, dcPower)
 		readonly property real acPower: ac.consumption.power
 		readonly property real dcPower: dc.power
 

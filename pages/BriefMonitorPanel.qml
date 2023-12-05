@@ -8,6 +8,7 @@ import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import Victron.Utils
+import Victron.Units
 
 Column {
 	id: root
@@ -176,7 +177,7 @@ Column {
 				id: gridQuantityLabel
 
 				anchors.top: gridHeader.bottom
-				value: root.visible ? Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : 0
+				value: root.visible ? Units.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : 0
 				font.pixelSize: Theme.font.briefPage.quantityLabel.size
 			}
 
@@ -400,6 +401,6 @@ exported power v  0.4 |   /
 	ValueRange {
 		id: inputsPower
 
-		value: root.visible ? Utils.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : NaN
+		value: root.visible ? Units.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : NaN
 	}
 }
