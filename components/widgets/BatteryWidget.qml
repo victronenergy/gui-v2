@@ -26,7 +26,7 @@ OverviewWidget {
 
 	color: "transparent"
 
-	Rectangle {
+	VerticalGauge {
 		id: animationRect
 		z: -1
 
@@ -35,19 +35,17 @@ OverviewWidget {
 			margins: root.border.width
 		}
 
-		gradient: Gradient {
-			GradientStop { position: 0.0; color: Theme.color.overviewPage.widget.background }
-			GradientStop { position: Math.min(0.999999, (1.0 - _normalizedStateOfCharge/100)); color: Theme.color.overviewPage.widget.background }
-			GradientStop { position: Math.min(1.0, (1.0 - _normalizedStateOfCharge/100) + 0.001); color: Theme.color.overviewPage.widget.battery.background }
-			GradientStop { position: 1.0; color: Theme.color.overviewPage.widget.battery.background }
-		}
+		animationEnabled: root.animationEnabled // Note: don't use _animationReady here.
+		value: _normalizedStateOfCharge/100
+		backgroundColor: Theme.color.overviewPage.widget.background
+		foregroundColor: Theme.color.overviewPage.widget.battery.background
 		radius: Theme.geometry.overviewPage.widget.battery.background.radius
 
 		Item {
 			id: animationClip
 
 			width: parent.width
-			height: parent.height * (_normalizedStateOfCharge/100)
+			height: parent.height * (animationRect.value)
 			y: parent.height - height
 			visible: batteryData.mode === VenusOS.Battery_Mode_Charging && root._animationReady
 			clip: true
