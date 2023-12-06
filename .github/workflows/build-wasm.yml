@@ -2,8 +2,6 @@ name: build-wasm
 run-name: ${{ github.actor }} is building wasm file
 on:
   push:
-    branches:
-      - '**'
     paths-ignore:
       - '**/README.md'
 jobs:
