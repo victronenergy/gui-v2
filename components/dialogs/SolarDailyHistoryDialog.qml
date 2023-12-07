@@ -4,12 +4,12 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 
 // This doesn't extend ModalDialog, due to the custom background layering required to show the
 // selected bar from the bar chart with full opacity (undimmed) behind the dialog.
-C.Dialog {
+T.Dialog {
 	id: root
 
 	property alias solarCharger: tableView.solarCharger
@@ -58,11 +58,11 @@ C.Dialog {
 					root._refresh()
 				}
 			}
-			OpacityAnimator { from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
+			NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
 		}
 	}
 	exit: Transition {
-		OpacityAnimator { from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration }
+		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration }
 	}
 
 	background: Rectangle {
