@@ -21,56 +21,46 @@ Item {
 	// Step change in the size of the bounding boxes of successive gauges
 	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry.circularMultiGauge.spacing)
 
-	Item {
-		id: antialiased
-		anchors.fill: parent
 
-		// Antialiasing without requiring multisample framebuffers.
-		layer.enabled: true
-		layer.smooth: true
-		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
+	Repeater {
+		id: arcRepeater
+		width: parent.width
+		delegate: Loader {
+			id: loader
+			property int gaugeStatus: Gauges.getValueStatus(model.value, model.valueType)
+			property real value: model.value
+			width: parent.width - (index*_stepSize)
+			height: width
+			anchors.centerIn: parent
+			visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
+			sourceComponent: model.tankType === VenusOS.Tank_Type_Battery ? shinyProgressArc : progressArc
+			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load circular multi gauge progress arc:", errorString())
 
-		Repeater {
-			id: arcRepeater
-			width: parent.width
-			delegate: Loader {
-				id: loader
-				property int gaugeStatus: Gauges.getValueStatus(model.value, model.valueType)
-				property real value: model.value
-				width: parent.width - (index*_stepSize)
-				height: width
-				anchors.centerIn: parent
-				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
-				sourceComponent: model.tankType === VenusOS.Tank_Type_Battery ? shinyProgressArc : progressArc
-				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load circular multi gauge progress arc:", errorString())
-
-				Component {
-					id: shinyProgressArc
-					ShinyProgressArc {
-						radius: width/2
-						startAngle: 0
-						endAngle: 270
-						value: loader.value
-						progressColor: Theme.statusColorValue(loader.gaugeStatus)
-						remainderColor: Theme.statusColorValue(loader.gaugeStatus, true)
-						strokeWidth: gauges.strokeWidth
-						animationEnabled: gauges.animationEnabled
-						shineAnimationEnabled: Global.batteries.system.mode === VenusOS.Battery_Mode_Charging
-					}
+			Component {
+				id: shinyProgressArc
+				ShaderCircularGauge {
+					startAngle: 0
+					endAngle: 270
+					value: loader.value
+					progressColor: Theme.statusColorValue(loader.gaugeStatus)
+					remainderColor: Theme.statusColorValue(loader.gaugeStatus, true)
+					strokeWidth: gauges.strokeWidth
+					animationEnabled: gauges.animationEnabled
+					shineAnimationEnabled: Global.batteries.system.mode === VenusOS.Battery_Mode_Charging
 				}
+			}
 
-				Component {
-					id: progressArc
-					ProgressArc {
-						radius: width/2
-						startAngle: 0
-						endAngle: 270
-						value: loader.value
-						progressColor: Theme.statusColorValue(loader.gaugeStatus)
-						remainderColor: Theme.statusColorValue(loader.gaugeStatus, true)
-						strokeWidth: gauges.strokeWidth
-						animationEnabled: gauges.animationEnabled
-					}
+			Component {
+				id: progressArc
+				ShaderCircularGauge {
+					startAngle: 0
+					endAngle: 270
+					value: loader.value
+					progressColor: Theme.statusColorValue(loader.gaugeStatus)
+					remainderColor: Theme.statusColorValue(loader.gaugeStatus, true)
+					strokeWidth: gauges.strokeWidth
+					animationEnabled: gauges.animationEnabled
+					shineAnimationEnabled: false
 				}
 			}
 		}

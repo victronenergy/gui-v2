@@ -4,7 +4,7 @@
     "animation.progressArc.duration": 600,
     "animation.progressBar.duration": 1000,
     "animation.briefPage.centerGauge.shine.pauseRatio": 2.0,
-    "animation.briefPage.centerGauge.shine.duration": 1500,
+    "animation.briefPage.centerGauge.shine.duration": 1200,
     "animation.briefPage.edgeGauge.fade.duration": 200,
     "animation.briefPage.sidePanel.slide.duration": 350,
     "animation.briefPage.sidePanel.sliderValueChange.duration": 200,

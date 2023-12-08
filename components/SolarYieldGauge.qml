@@ -14,7 +14,6 @@ Item {
 	property alias alignment: quantityLabel.alignment
 	property alias label: quantityLabel
 	property bool animationEnabled
-	readonly property int _maxAngle: alignment & Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.maxAngle : Theme.geometry.briefPage.smallEdgeGauge.maxAngle
 
 	implicitHeight: alignment & Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.height : Theme.geometry.briefPage.smallEdgeGauge.height
 
@@ -26,16 +25,12 @@ Item {
 		delegate: ArcGauge {
 			animationEnabled: root.animationEnabled
 			width: Theme.geometry.briefPage.edgeGauge.width
-			x: index*strokeWidth
+			arcX: index*strokeWidth
+			//arcY: (root.alignment & Qt.AlignVCenter) ? 0 : (-radius + strokeWidth/2)
 			opacity: 1.0 - index * 0.3
 			height: root.height
-			startAngle: root.alignment & Qt.AlignVCenter ? 270 + _maxAngle/2 : 270
-			endAngle: startAngle - _maxAngle
+			alignment: root.alignment
 			radius: Theme.geometry.briefPage.edgeGauge.radius - index*strokeWidth
-			useLargeArc: false
-			direction: PathArc.Counterclockwise
-			strokeWidth: Theme.geometry.arc.strokeWidth
-			arcY: root.alignment & Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
 			value: {
 				if (!visible || solarMeasurements.maxPower == 0) {
 					// No useful max yet, so show a full gauge
