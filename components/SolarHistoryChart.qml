@@ -29,36 +29,53 @@ Item {
 	}
 
 	function _fitChartToMaxYield() {
+		if (gridLinesColumn.height <= 0) {
+			return;
+		}
+
 		// maxForDigit is the yield rounded up to the digit for the nearest place value.
 		// E.g. maximumYield=0.7 -> maxForDigit=1, 8.5 -> 10, 23.8 -> 100, 175.5 -> 1000
 		let maxForDigit = Math.pow(10, _numberOfDigits(yieldModel.maximumYield))
+		let tickCount = 0
+		let maxTickValue = 0
 
 		if (yieldModel.maximumYield > 1) {
 			if (yieldModel.maximumYield < maxForDigit * 0.15) {
 				// ticks = [1.5, 1, 0.5, 0] or equivalent.
-				_maxTickValue = maxForDigit * 0.15
-				_tickCount = 4
-				return
+				maxTickValue = maxForDigit * 0.15
+				tickCount = 4
 			} else if (yieldModel.maximumYield < maxForDigit * 0.25) {
 				// ticks = [2.5, 2, 1.5, 1, 0.5, 0] or equivalent.
-				_maxTickValue = maxForDigit * 0.25
-				_tickCount = 6
-				return
+				maxTickValue = maxForDigit * 0.25
+				tickCount = 6
 			} else if (yieldModel.maximumYield < maxForDigit * 0.5) {
 				// ticks = [5, 4, 3, 2, 1, 0] or equivalent.
-				_maxTickValue = maxForDigit * 0.5
-				_tickCount = 6
-				return
+				maxTickValue = maxForDigit * 0.5
+				tickCount = 6
 			} else if (yieldModel.maximumYield < maxForDigit * 0.75) {
 				// ticks = [7.5, 5, 2.5, 0] or equivalent.
-				_maxTickValue = maxForDigit * 0.75
-				_tickCount = 4
-				return
+				maxTickValue = maxForDigit * 0.75
+				tickCount = 4
 			}
 		}
-		// ticks = [10, 7.5, 5, 2.5, 0] or equivalent.
-		_maxTickValue = maxForDigit
-		_tickCount = 5
+		if (tickCount === 0) {
+			// ticks = [10, 7.5, 5, 2.5, 0] or equivalent.
+			maxTickValue = maxForDigit
+			tickCount = 5
+		}
+
+		_maxTickValue = maxTickValue
+		_tickCount = tickCount
+
+		// Now update the bar heights. Do this imperatively instead of via a height binding in the
+		// bar, so that the bar height is only changed after all relevant values are updated, else
+		// the bar may jump in height multiple times before settling in place.
+		for (let i = 0; i < barRepeater.count; ++i) {
+			const bar = barRepeater.itemAt(i)
+			if (bar) {
+				bar.updateHeight()
+			}
+		}
 	}
 
 	width: parent.width
@@ -90,6 +107,8 @@ Item {
 			bottomMargin: Theme.geometry.solarChart.bottomMargin
 		}
 		spacing: (height - (root._tickCount * Theme.geometry.solarChart.tickLine.height)) / (root._tickCount - 1)
+
+		onHeightChanged: Qt.callLater(root._fitChartToMaxYield)
 
 		Repeater {
 			id: gridLinesRepeater
@@ -161,6 +180,10 @@ Item {
 
 				property alias coloredBar: coloredBar
 
+				function updateHeight() {
+					coloredBar.height = (model.yieldKwh || 0) * (gridLinesColumn.height / root._maxTickValue)
+				}
+
 				width: (barRow.width - (barRow.spacing * (barRepeater.count - 1))) / barRepeater.count
 				height: parent.height
 
@@ -180,7 +203,6 @@ Item {
 						bottomMargin: Theme.geometry.solarChart.tickLine.height
 					}
 					width: parent.width
-					height: (model.yieldKwh || 0) * (gridLinesColumn.height / root._maxTickValue)
 					radius: Theme.geometry.solarChart.bar.radius
 
 					// This base rectangle ensures the bar is not transparent when pressed
