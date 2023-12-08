@@ -101,21 +101,21 @@ ControlCard {
 		//% "Autostart"
 		label.text: qsTrId("controlcard_generator_label_autostart")
 		button.checked: root.generator.autoStart
-		button.checkable: false     // user might not be allowed to change this setting
+		button.enabled: root.generator.state !== VenusOS.Generators_State_Running
 		separator.visible: false
 
-		// TODO should also disable if user is not allowed to change autostart property
-		enabled: root.generator.state !== VenusOS.Generators_State_Running
-
-		onClicked: {
-			if (root.generator.autoStart) {
-				// check if they really want to disable
-				if (!_confirmationDialog) {
-					_confirmationDialog = confirmationDialogComponent.createObject(Global.dialogLayer)
+		Connections {
+			target: autostartSwitch.button
+			function onToggled() {
+				if (autostartSwitch.button.checked) {
+					root.generator.setAutoStart(false)
+				} else {
+					// check if they really want to disable
+					if (!autostartSwitch._confirmationDialog) {
+						autostartSwitch._confirmationDialog = confirmationDialogComponent.createObject(Global.dialogLayer)
+					}
+					autostartSwitch._confirmationDialog.open()
 				}
-				_confirmationDialog.open()
-			} else {
-				root.generator.setAutoStart(false)
 			}
 		}
 
@@ -132,6 +132,7 @@ ControlCard {
 				description: qsTrId("controlcard_generator_disableautostartdialog_description")
 
 				onAccepted: root.generator.setAutoStart(false)
+				onRejected: root.generator.setAutoStart(true)
 			}
 		}
 	}
