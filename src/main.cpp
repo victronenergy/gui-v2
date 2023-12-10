@@ -240,9 +240,9 @@ void registerQmlTypes()
 {
 	/* QML type registrations.  As we (currently) don't create an installed module,
 	   we need to register them into the appropriate type namespace manually. */
-	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
+/*	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
 		"Victron.VenusOS", 2, 0, "Theme",
-		&Victron::VenusOS::Theme::instance);
+		&Victron::VenusOS::Theme::instance);*/
 	qmlRegisterSingletonType<Victron::VenusOS::BackendConnection>(
 		"Victron.VenusOS", 2, 0, "BackendConnection",
 		&Victron::VenusOS::BackendConnection::instance);
@@ -323,6 +323,7 @@ int main(int argc, char *argv[])
 	initBackend(&enableFpsCounter);
 
 	QQmlEngine engine;
+	Victron::VenusOS::Theme::instance(&engine, &engine);
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
