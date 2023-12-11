@@ -13,21 +13,29 @@ T.Dialog {
 	property string secondaryTitle
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndClose
 	property alias canAccept: doneButton.enabled
-	property var tryAccept  // optional function: called when accept is attempted, return true if can accept.
+
+	// Optional functions: called when accept/reject is attempted.
+	// These should return true if the accept/reject can be executed, and false otherwise.
+	property var tryAccept
+	property var tryReject
 
 	readonly property alias acceptButton: doneButton
 	property string acceptText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndClose
 			  //% "Set"
-			? qsTrId("controlcard_set")
+			? qsTrId("modaldialog_set")
 			: CommonWords.ok
 
+	readonly property alias rejectButton: rejectButton
 	property string rejectText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly
 			? ""
 			: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel
-				//% "Cancel"
-				? qsTrId("controlcard_cancel")
-				//% "Close"
-				: qsTrId("controlcard_close")
+				? rejectTextCancel
+				: rejectTextClose
+
+	//% "Cancel"
+	readonly property string rejectTextCancel: qsTrId("modaldialog_cancel")
+	//% "Close"
+	readonly property string rejectTextClose: qsTrId("modaldialog_close")
 
 	anchors.centerIn: parent
 	implicitWidth: background.implicitWidth
@@ -102,6 +110,7 @@ T.Dialog {
 			}
 		}
 		Button {
+			id: rejectButton
 			visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
 			anchors {
 				left: parent.left
@@ -115,16 +124,15 @@ T.Dialog {
 			color: Theme.color_font_primary
 			spacing: 0
 			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
-			text: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly ?
-					""
-				: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel ?
-					//% "Cancel"
-					qsTrId("controlcard_cancel")
-				: /* SetAndClose */
-					//% "Close"
-					qsTrId("controlcard_close")
-			onClicked: root.reject()
+			text: root.rejectText
+			onClicked: {
+				if (!!root.tryReject && !root.tryReject()) {
+					return
+				}
+				root.reject()
+			}
 		}
+
 		SeparatorBar {
 			id: footerMidSeparator
 			visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
