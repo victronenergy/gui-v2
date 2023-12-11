@@ -16,7 +16,6 @@
 
 #include "veutil/qt/ve_qitem.hpp"
 #include "veutil/qt/ve_quick_item.hpp"
-#include "veutil/qt/ve_qitems_mqtt.hpp"
 #include "veutil/qt/ve_qitem_table_model.hpp"
 #include "veutil/qt/ve_qitem_sort_table_model.hpp"
 #include "veutil/qt/ve_qitem_child_model.hpp"
@@ -84,7 +83,7 @@ QString calculateMqttAddressFromPortalId(const QString &portalId)
 
 void initBackend(bool *enableFpsCounter)
 {
-	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::instance();
+	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::create();
 
 	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
@@ -236,9 +235,6 @@ void initBackend(bool *enableFpsCounter)
 
 void registerQmlTypes()
 {
-	qmlRegisterSingletonType<Victron::VenusOS::BackendConnection>(
-		"Victron.VenusOS", 2, 0, "BackendConnection",
-		&Victron::VenusOS::BackendConnection::instance);
 	qmlRegisterSingletonType<Victron::VenusOS::Language>(
 		"Victron.VenusOS", 2, 0, "Language",
 		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
@@ -313,9 +309,9 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationVersion("2.0");
 
 	bool enableFpsCounter = false;
-	initBackend(&enableFpsCounter);
 
 	QQmlEngine engine;
+	initBackend(&enableFpsCounter);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
 	/* Force construction of translator */
