@@ -456,9 +456,22 @@ qt_add_qml_module(VenusQMLModule
     STATIC
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
-    SOURCES src/theme.h src/theme.cpp
+    SOURCES
+        src/theme.h
+        src/theme.cpp
+        src/backendconnection.h
+        src/backendconnection.cpp
 )
-target_link_libraries(VenusQMLModule PRIVATE Qt6::Gui)
+target_link_libraries(VenusQMLModule PRIVATE Qt6::Gui Qt6::Mqtt)
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+    target_link_libraries(VenusQMLModule PRIVATE
+        Qt6::WebSockets
+    )
+else()
+    target_link_libraries(VenusQMLModule PRIVATE
+        Qt6::DBus
+    )
+endif()
 
 # end VENUS_QML_MODULE
 
@@ -737,8 +750,6 @@ set(VENUS_CPP_SOURCES
     src/basedevicemodel.cpp
     src/aggregatedevicemodel.h
     src/aggregatedevicemodel.cpp
-    src/backendconnection.h
-    src/backendconnection.cpp
     src/clocktime.h
     src/clocktime.cpp
     src/language.h

@@ -25,7 +25,7 @@
 namespace Victron {
 namespace VenusOS {
 
-BackendConnection* BackendConnection::instance(QQmlEngine *, QJSEngine *)
+BackendConnection* BackendConnection::create(QQmlEngine *, QJSEngine *)
 {
 	static BackendConnection* connection = nullptr;
 

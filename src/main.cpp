@@ -85,7 +85,7 @@ QString calculateMqttAddressFromPortalId(const QString &portalId)
 
 void initBackend(bool *enableFpsCounter)
 {
-	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::instance();
+	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::create();
 
 	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
@@ -241,10 +241,10 @@ void registerQmlTypes()
 	   we need to register them into the appropriate type namespace manually. */
 /*	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
 		"Victron.VenusOS", 2, 0, "Theme",
-		&Victron::VenusOS::Theme::instance);*/
+		&Victron::VenusOS::Theme::instance);
 	qmlRegisterSingletonType<Victron::VenusOS::BackendConnection>(
 		"Victron.VenusOS", 2, 0, "BackendConnection",
-		&Victron::VenusOS::BackendConnection::instance);
+		&Victron::VenusOS::BackendConnection::create);*/
 	qmlRegisterSingletonType<Victron::VenusOS::Language>(
 		"Victron.VenusOS", 2, 0, "Language",
 		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
@@ -319,16 +319,18 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationVersion("2.0");
 
 	bool enableFpsCounter = false;
-	initBackend(&enableFpsCounter);
 
 	QQmlEngine engine;
+	initBackend(&enableFpsCounter);
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
 	/* Force construction of translator */
+	/*
 	int languageSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "Language");
 	Q_ASSERT(languageSingletonId);
 	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
+	*/
 
 	/* Force construction of fps counter */
 	int fpsCounterSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "FrameRateModel");
