@@ -11,9 +11,10 @@
 #include <QString>
 #include <QHash>
 #include <QAbstractListModel>
+#include <qqmlintegration.h>
 
 class QTranslator;
-
+class QJSEngine;
 class QQmlEngine;
 
 namespace Victron {
@@ -61,9 +62,11 @@ private:
 class Language : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
 	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged FINAL)
 public:
-	explicit Language(QQmlEngine* engine);
+	static Language* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 	Language(const Victron::VenusOS::Language&) = delete;
 	Language& operator=(const Victron::VenusOS::Language&) = delete;
 
@@ -83,9 +86,9 @@ Q_SIGNALS:
 	void currentLanguageChanged();
 
 private:
+	explicit Language(QQmlEngine* engine);
 	bool installTranslatorForLanguage(QLocale::Language language);
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
-	QQmlEngine* m_qmlEngine = nullptr;
 	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
 };
 

@@ -8,6 +8,7 @@
 
 #include <QCoreApplication>
 #include <QQmlEngine>
+#include <QQmlContext>
 #include <QTranslator>
 
 using namespace Victron::VenusOS;
@@ -96,8 +97,13 @@ QVariant LanguageModel::data(const QModelIndex &index, int role) const
 }
 
 
-Language::Language(QQmlEngine* engine) : QObject(nullptr),
-	m_qmlEngine(engine)
+Language* Language::create(QQmlEngine *, QJSEngine *)
+{
+	static Language* language = new Language(nullptr);
+	return language;
+}
+
+Language::Language(QQmlEngine* engine) : QObject(nullptr)
 {
 	/* Load appropriate translations for current locale, e.g. :/i18n/venus-gui-v2_fr.qm */
 	if (!installTranslatorForLanguage(QLocale().language())) {
@@ -189,8 +195,15 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 
 void Language::retranslate()
 {
-	if (m_qmlEngine) {
-		m_qmlEngine->retranslate();
+	QQmlEngine* engine = nullptr;
+	QQmlContext* context = QQmlEngine::contextForObject(this);
+
+	if (context) {
+		engine = QQmlEngine::contextForObject(this)->engine();
+	}
+
+	if (engine) {
+		engine->retranslate();
 	} else {
 		qCWarning(venusGui) << "Unable to retranslate";
 	}
