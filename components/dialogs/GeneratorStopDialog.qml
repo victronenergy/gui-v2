@@ -64,6 +64,7 @@ ModalDialog {
 			wrapMode: Text.Wrap
 			color: Theme.color_font_primary
 			horizontalAlignment: Text.AlignHCenter
+			visible: root.generator.autoStart
 
 			//% "Generator will keep running if an autostart condition is met."
 			text: qsTrId("controlcard_generator_stopdialog_description")
