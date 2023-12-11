@@ -235,11 +235,6 @@ void initBackend(bool *enableFpsCounter)
 
 void registerQmlTypes()
 {
-	qmlRegisterSingletonType<Victron::VenusOS::Language>(
-		"Victron.VenusOS", 2, 0, "Language",
-		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
-			return new Victron::VenusOS::Language(engine);
-		});
 	qmlRegisterSingletonType<Victron::VenusOS::Enums>(
 		"Victron.VenusOS", 2, 0, "VenusOS",
 		&Victron::VenusOS::Enums::instance);
@@ -315,9 +310,7 @@ int main(int argc, char *argv[])
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
 	/* Force construction of translator */
-	int languageSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "Language");
-	Q_ASSERT(languageSingletonId);
-	(void)engine.singletonInstance<Victron::VenusOS::Language*>(languageSingletonId);
+	Victron::VenusOS::Language::create();
 
 	/* Force construction of fps counter */
 	int fpsCounterSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "FrameRateModel");
