@@ -45,7 +45,6 @@
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QQuickWindow>
-#include <QScreen>
 #include <QCommandLineParser>
 
 #include <QtDebug>
@@ -323,7 +322,6 @@ int main(int argc, char *argv[])
 	initBackend(&enableFpsCounter);
 
 	QQmlEngine engine;
-	Victron::VenusOS::Theme::instance(&engine, &engine);
 	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
@@ -336,17 +334,6 @@ int main(int argc, char *argv[])
 	int fpsCounterSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "FrameRateModel");
 	Q_ASSERT(fpsCounterSingletonId);
 	Victron::VenusOS::FrameRateModel* fpsCounter = engine.singletonInstance<Victron::VenusOS::FrameRateModel*>(fpsCounterSingletonId);
-
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
-	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
-	const int screenDiagonalMm = static_cast<int>(sqrt((physicalScreenSize.width() * physicalScreenSize.width())
-			+ (physicalScreenSize.height() * physicalScreenSize.height())));
-	engine.setProperty("screenSize", (round(screenDiagonalMm / 10 / 2.5) == 7)
-			? Victron::VenusOS::Theme::SevenInch
-			: Victron::VenusOS::Theme::FiveInch);
-#else
-	engine.setProperty("screenSize", Victron::VenusOS::Theme::SevenInch);
-#endif
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/venus-gui-v2/Main.qml")));
 	if (component.isError()) {

@@ -43,18 +43,21 @@ if ("${NO_CACHEGEN}")
     set (QML_MODULE_OPTARGS ${QML_MODULE_OPTARGS} "NO_CACHEGEN")
 endif()
 
+set(REQUIRED_QT_VERSION 6.5.2) # require at least qt 6.5.2 for qt_add_qml_module to work properly
+find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt Gui REQUIRED)
+
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
     add_compile_definitions(MQTT_WEBSOCKETS_ENABLED)
-    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets Gui REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
+    find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS WebSockets REQUIRED)
 else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt Gui REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
+    find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS DBus REQUIRED)
 endif()
 
 # This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_MODULE_SOURCES})'

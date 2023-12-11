@@ -9,13 +9,13 @@
 #include <QObject>
 #include <QtQml/qqml.h>
 
+#include <QColor>
 #include <QQmlEngine>
 #include <QQmlPropertyMap>
 #include <QObject>
 #include <QJsonValue>
 #include <QHash>
 #include <QString>
-#include <QColor>
 
 #include <deque>
 
@@ -57,7 +57,6 @@ public:
 	ColorScheme colorScheme() const;
 
 	Q_INVOKABLE bool load(ScreenSize screenSize, ColorScheme colorScheme);
-	static QObject* instance(QQmlEngine *engine, QJSEngine *);
 
 	Q_INVOKABLE QColor statusColorValue(StatusLevel level, bool darkColor = false) const;
 
