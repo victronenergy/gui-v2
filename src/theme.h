@@ -6,13 +6,16 @@
 #ifndef VICTRON_VENUSOS_GUI_V2_THEME_H
 #define VICTRON_VENUSOS_GUI_V2_THEME_H
 
+#include <QObject>
+#include <QtQml/qqml.h>
+
+#include <QColor>
 #include <QQmlEngine>
 #include <QQmlPropertyMap>
 #include <QObject>
 #include <QJsonValue>
 #include <QHash>
 #include <QString>
-#include <QColor>
 
 #include <deque>
 
@@ -22,6 +25,8 @@ namespace VenusOS {
 class Theme : public QQmlPropertyMap
 {
 	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
 	Q_PROPERTY(ScreenSize screenSize READ screenSize NOTIFY screenSizeChanged)
 	Q_PROPERTY(ColorScheme colorScheme READ colorScheme NOTIFY colorSchemeChanged)
 
@@ -52,7 +57,6 @@ public:
 	ColorScheme colorScheme() const;
 
 	Q_INVOKABLE bool load(ScreenSize screenSize, ColorScheme colorScheme);
-	static QObject* instance(QQmlEngine *engine, QJSEngine *);
 
 	Q_INVOKABLE QColor statusColorValue(StatusLevel level, bool darkColor = false) const;
 
