@@ -463,16 +463,10 @@ qt_add_qml_module(VenusQMLModule
         src/backendconnection.cpp
 )
 target_link_libraries(VenusQMLModule PRIVATE Qt6::Gui Qt6::Mqtt)
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    target_link_libraries(VenusQMLModule PRIVATE
-        Qt6::WebSockets
-    )
-else()
-    target_link_libraries(VenusQMLModule PRIVATE
-        Qt6::DBus
-    )
-endif()
 
+target_link_libraries(VenusQMLModule PRIVATE
+    $<IF:$<STREQUAL:"${CMAKE_SYSTEM_NAME}","Emscripten">,Qt6::WebSockets,Qt6::DBus> # i.e. (CMAKE_SYSTEM_NAME === "Emscripten" ? Qt6::WebSockets : Qt6::DBus)
+)
 # end VENUS_QML_MODULE
 
 # Dbus_QML_MODULE
