@@ -23,6 +23,8 @@ class UidHelper;
 class BackendConnection : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
 	Q_PROPERTY(State state READ state NOTIFY stateChanged)
 	Q_PROPERTY(SourceType type READ type NOTIFY typeChanged)
 	Q_PROPERTY(MqttClientError mqttClientError READ mqttClientError NOTIFY mqttClientErrorChanged)
@@ -70,7 +72,7 @@ public:
 	};
 	Q_ENUM(MqttClientError)
 
-	static BackendConnection* instance(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
+	static BackendConnection* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 	State state() const;
 	MqttClientError mqttClientError() const;
