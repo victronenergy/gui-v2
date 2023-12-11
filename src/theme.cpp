@@ -12,6 +12,8 @@
 #include <QRegularExpression>
 #include <QVariant>
 #include <QColor>
+#include <QGuiApplication>
+#include <QScreen>
 
 namespace {
 	QRegularExpression optimizeExpression(const QString &expression)
@@ -25,18 +27,20 @@ namespace {
 namespace Victron {
 namespace VenusOS {
 
-QObject* Theme::instance(QQmlEngine *engine, QJSEngine *)
-{
-	Theme *theme = new Theme;
-	const Theme::ScreenSize screenSize = engine->property("screenSize").value<Theme::ScreenSize>();
-	const Theme::ColorScheme colorScheme = engine->property("colorScheme").value<Theme::ColorScheme>();
-	theme->load(screenSize, colorScheme);
-	return theme;
-}
-
 Theme::Theme(QObject *parent)
 	: QQmlPropertyMap(this, parent)
 {
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
+	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
+	const int screenDiagonalMm = static_cast<int>(sqrt((physicalScreenSize.width() * physicalScreenSize.width())
+			+ (physicalScreenSize.height() * physicalScreenSize.height())));
+	Theme::ScreenSize screenSize = (round(screenDiagonalMm / 10 / 2.5) == 7)
+			? Theme::SevenInch
+			: Theme::FiveInch;
+	load(screenSize, ColorScheme::Dark);
+#else
+	load(Theme::ScreenSize::SevenInch, ColorScheme::Dark);
+#endif
 }
 
 Theme::~Theme()

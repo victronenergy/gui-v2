@@ -5,7 +5,6 @@
 
 #include "src/language.h"
 #include "src/logging.h"
-#include "src/theme.h"
 #include "src/enums.h"
 #include "src/notificationsmodel.h"
 #include "src/basedevicemodel.h"
@@ -45,7 +44,6 @@
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QQuickWindow>
-#include <QScreen>
 #include <QCommandLineParser>
 
 #include <QtDebug>
@@ -238,11 +236,6 @@ void initBackend(bool *enableFpsCounter)
 
 void registerQmlTypes()
 {
-	/* QML type registrations.  As we (currently) don't create an installed module,
-	   we need to register them into the appropriate type namespace manually. */
-	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
-		"Victron.VenusOS", 2, 0, "Theme",
-		&Victron::VenusOS::Theme::instance);
 	qmlRegisterSingletonType<Victron::VenusOS::BackendConnection>(
 		"Victron.VenusOS", 2, 0, "BackendConnection",
 		&Victron::VenusOS::BackendConnection::instance);
@@ -323,7 +316,6 @@ int main(int argc, char *argv[])
 	initBackend(&enableFpsCounter);
 
 	QQmlEngine engine;
-	engine.setProperty("colorScheme", Victron::VenusOS::Theme::Dark);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
 	/* Force construction of translator */
@@ -335,17 +327,6 @@ int main(int argc, char *argv[])
 	int fpsCounterSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "FrameRateModel");
 	Q_ASSERT(fpsCounterSingletonId);
 	Victron::VenusOS::FrameRateModel* fpsCounter = engine.singletonInstance<Victron::VenusOS::FrameRateModel*>(fpsCounterSingletonId);
-
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
-	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
-	const int screenDiagonalMm = static_cast<int>(sqrt((physicalScreenSize.width() * physicalScreenSize.width())
-			+ (physicalScreenSize.height() * physicalScreenSize.height())));
-	engine.setProperty("screenSize", (round(screenDiagonalMm / 10 / 2.5) == 7)
-			? Victron::VenusOS::Theme::SevenInch
-			: Victron::VenusOS::Theme::FiveInch);
-#else
-	engine.setProperty("screenSize", Victron::VenusOS::Theme::SevenInch);
-#endif
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/venus-gui-v2/Main.qml")));
 	if (component.isError()) {
