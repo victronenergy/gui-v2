@@ -490,6 +490,8 @@ qt_add_qml_module(VenusQMLModule
     SOURCES
         src/theme.h
         src/theme.cpp
+        src/backendconnection.h
+        src/backendconnection.cpp
 )
 target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Core
@@ -498,6 +500,10 @@ target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Quick
     Qt6::Svg
     Qt6::Xml
+    Qt6::Mqtt
+)
+target_link_libraries(VenusQMLModule PRIVATE
+    $<IF:$<STREQUAL:"${CMAKE_SYSTEM_NAME}","Emscripten">,Qt6::WebSockets,Qt6::DBus> # i.e. (CMAKE_SYSTEM_NAME === "Emscripten" ? Qt6::WebSockets : Qt6::DBus)
 )
 # end VENUS_QML_MODULE
 
@@ -776,8 +782,6 @@ set(VENUS_CPP_SOURCES
     src/basedevicemodel.cpp
     src/aggregatedevicemodel.h
     src/aggregatedevicemodel.cpp
-    src/backendconnection.h
-    src/backendconnection.cpp
     src/clocktime.h
     src/clocktime.cpp
     src/language.h
