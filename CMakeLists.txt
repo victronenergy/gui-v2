@@ -226,6 +226,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/dialogs/DialogShadow.qml
     components/dialogs/VrmInstanceSwapDialog.qml
     components/dialogs/ESSMinimumSOCDialog.qml
+    components/dialogs/GeneratorDialog.qml
     components/dialogs/GeneratorStartDialog.qml
     components/dialogs/GeneratorStopDialog.qml
     components/dialogs/InverterChargerModeDialog.qml
