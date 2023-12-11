@@ -491,6 +491,8 @@ qt_add_qml_module(VenusQMLModule
         src/theme.cpp
         src/backendconnection.h
         src/backendconnection.cpp
+        src/language.h
+        src/language.cpp
 )
 target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Core
@@ -781,8 +783,6 @@ set(VENUS_CPP_SOURCES
     src/aggregatedevicemodel.cpp
     src/clocktime.h
     src/clocktime.cpp
-    src/language.h
-    src/language.cpp
     src/logging.h
     src/enums.h
     src/enums.cpp
