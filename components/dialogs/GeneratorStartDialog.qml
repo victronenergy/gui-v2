@@ -7,15 +7,15 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Utils
 
-ModalDialog {
+GeneratorDialog {
 	id: root
-
-	property var generator
-
-	title: CommonWords.generator
 
 	//% "Start Now"
 	acceptText: qsTrId("controlcard_generator_startdialog_start_now")
+	finalGeneratorState: VenusOS.Generators_State_Running
+	runGeneratorAction: function() {
+		root.generator.start(timedRunSwitch.checked ? Utils.composeDuration(timeSelector.hour, timeSelector.minute) : 0)
+	}
 
 	contentItem: Column {
 		anchors {
@@ -60,26 +60,6 @@ ModalDialog {
 			//% "Generator will stop after the set time, unless autostart condition is met, in which case it will keep running."
 			text: qsTrId("controlcard_generator_startdialog_description")
 		}
-	}
-
-	acceptButton.background: AcceptButtonBackground {
-		id: acceptButtonBackground
-
-		width: root.acceptButton.width
-		height: root.acceptButton.height
-		color: Theme.color_dimGreen
-
-		onSlidingAnimationFinished: {
-			root.canAccept = true
-			root.accept()
-		}
-	}
-
-	tryAccept: function() {
-		root.canAccept = false
-		root.generator.start(timedRunSwitch.checked ? Utils.composeDuration(timeSelector.hour, timeSelector.minute) : 0)
-		acceptButtonBackground.slidingAnimationTo(Theme.color_green)
-		return false
 	}
 
 	onAboutToShow: {

@@ -6,21 +6,17 @@
 import QtQuick
 import Victron.VenusOS
 
-// A rectangle with a rounded bottom-right corner.
+// A rectangle with a rounded bottom-right corner, with an ability to animate its color in a
+// progressive fashion.
 
 Item {
 	id: root
 
 	property color color: Theme.color_dimGreen
+	property alias secondaryColor: animatedRect.color
+	property alias animating: slidingAnimation.running
 
-	signal slidingAnimationFinished()
-
-	function slidingAnimationTo(endColor) {
-		animatedRect.color = endColor
-		animatedRect.width = 1
-		animatedRect.visible = true
-		slidingAnimation.start()
-	}
+	signal animationFinished()
 
 	width: parent.width
 	height: parent.height
@@ -40,8 +36,7 @@ Item {
 
 		ScriptAction {
 			script: {
-				animatedRect.visible = false
-				root.slidingAnimationFinished()
+				root.animationFinished()
 			}
 		}
 	}
@@ -64,7 +59,7 @@ Item {
 
 			width: 0
 			height: parent.height
-			visible: false
+			visible: slidingAnimation.running
 		}
 	}
 
