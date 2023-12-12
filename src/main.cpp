@@ -8,7 +8,6 @@
 #include "src/notificationsmodel.h"
 #include "src/basedevicemodel.h"
 #include "src/aggregatedevicemodel.h"
-#include "src/clocktime.h"
 #include "src/uidhelper.h"
 #include "src/backendconnection.h"
 #include "src/frameratemodel.h"
@@ -234,11 +233,6 @@ void initBackend(bool *enableFpsCounter)
 
 void registerQmlTypes()
 {
-	qmlRegisterSingletonType<Victron::VenusOS::ClockTime>(
-		"Victron.VenusOS", 2, 0, "ClockTime",
-		[](QQmlEngine *, QJSEngine *) -> QObject * {
-		return Victron::VenusOS::ClockTime::instance();
-	});
 	qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
 		"Victron.VenusOS", 2, 0, "UidHelper",
 		&Victron::VenusOS::UidHelper::instance);
