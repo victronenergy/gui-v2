@@ -31,7 +31,7 @@ Page {
 				text: CommonWords.minimum_voltage
 				dataSource: root.bindPrefix + "/History/MinimumVoltage"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -39,7 +39,7 @@ Page {
 				text: CommonWords.maximum_voltage
 				dataSource: root.bindPrefix + "/History/MaximumVoltage"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -74,7 +74,7 @@ Page {
 				text: qsTrId("dcmeter_history_minimum_aux_voltage")
 				dataSource: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
 				visible: defaultVisible && root.showStarterVoltage
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -83,7 +83,7 @@ Page {
 				text: qsTrId("dcmeter_history_maximum_aux_voltage")
 				dataSource: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
 				visible: defaultVisible && root.showStarterVoltage
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -106,7 +106,7 @@ Page {
 				text: qsTrId("dcmeter_history_produced_energy")
 				dataSource: root.bindPrefix + "/History/EnergyOut"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Energy_KiloWattHour
+				unit: Enums.Units_Energy_KiloWattHour
 			}
 
 			ListQuantityItem {
@@ -114,7 +114,7 @@ Page {
 				text: qsTrId("dcmeter_history_consumed_energy")
 				dataSource: root.bindPrefix + "/History/EnergyIn"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Energy_KiloWattHour
+				unit: Enums.Units_Energy_KiloWattHour
 			}
 
 			ListResetHistoryLabel {

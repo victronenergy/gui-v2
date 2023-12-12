@@ -12,5 +12,5 @@ AcInputWidget {
 	//% "Grid"
 	title: qsTrId("overview_widget_grid_title")
 	icon.source: "qrc:/images/grid.svg"
-	type: VenusOS.OverviewWidget_Type_Grid
+	type: Enums.OverviewWidget_Type_Grid
 }

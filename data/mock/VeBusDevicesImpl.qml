@@ -11,27 +11,27 @@ QtObject {
 
 	function populate() {
 		let quattro = {
-			state: VenusOS.System_State_Inverting,
+			state: Enums.System_State_Inverting,
 			productId: 9816,
 			name: "Quattro 48/5000/70-2x100",
 			ampOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ].map(function(v) { return { value: v } }),   // EU amp options
-			mode: VenusOS.VeBusDevice_Mode_On,
+			mode: Enums.VeBusDevice_Mode_On,
 			modeAdjustable: true,
 		}
 		let quattroDevice = veBusDeviceComponent.createObject(root, quattro)
-		addInputSettings(quattroDevice, [VenusOS.AcInputs_InputType_Generator, VenusOS.AcInputs_InputType_Shore])
+		addInputSettings(quattroDevice, [Enums.AcInputs_InputType_Generator, Enums.AcInputs_InputType_Shore])
 		Global.veBusDevices.addVeBusDevice(quattroDevice)
 
 		let multiPlus = {
-			state: VenusOS.System_State_AbsorptionCharging,
+			state: Enums.System_State_AbsorptionCharging,
 			productId: 9728,
 			name: "MultiPlus 12/3000/120-5",
 			ampOptions: [ 10.0, 15.0, 20.0, 30.0, 50.0, 100.0 ].map(function(v) { return { value: v } }),   // US amp options
-			mode: VenusOS.VeBusDevice_Mode_InverterOnly,
+			mode: Enums.VeBusDevice_Mode_InverterOnly,
 			modeAdjustable: true,
 		}
 		let multiPlusDevice = veBusDeviceComponent.createObject(root, multiPlus)
-		addInputSettings(multiPlusDevice, [VenusOS.AcInputs_InputType_Grid])
+		addInputSettings(multiPlusDevice, [Enums.AcInputs_InputType_Grid])
 		Global.veBusDevices.addVeBusDevice(multiPlusDevice)
 	}
 

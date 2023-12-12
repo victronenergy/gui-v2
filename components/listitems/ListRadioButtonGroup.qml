@@ -62,7 +62,7 @@ ListNavigationItem {
 			Global.pageManager.pushPage(optionsPageComponent, { title: text })
 		} else {
 			//% "Setting locked for access level"
-			Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_radio_button_group_no_access"))
+			Global.notificationLayer.showToastNotification(Enums.Notification_Info, qsTrId("settings_radio_button_group_no_access"))
 		}
 	}
 
@@ -152,7 +152,7 @@ ListNavigationItem {
 										radioButton.select()
 									} else {
 										//% "Incorrect password"
-										Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
+										Global.notificationLayer.showToastNotification(Enums.Notification_Info,
 												qsTrId("settings_radio_button_incorrect_password"))
 									}
 								}

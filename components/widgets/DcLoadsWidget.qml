@@ -14,7 +14,7 @@ OverviewWidget {
 	//% "DC Loads"
 	title: qsTrId("overview_widget_dcloads_title")
 	icon.source: "qrc:/images/dcloads.svg"
-	type: VenusOS.OverviewWidget_Type_DcLoads
+	type: Enums.OverviewWidget_Type_DcLoads
 	enabled: (Global.dcLoads.model.count + Global.dcSystems.model.count) > 0
 
 	quantityLabel.dataObject: Global.system.dc
@@ -42,9 +42,9 @@ OverviewWidget {
 
 					text: device.name
 					textModel: [
-						Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
-						Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
-						Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
+						Units.getCombinedDisplayText(Enums.Units_Volt, device.voltage),
+						Units.getCombinedDisplayText(Enums.Units_Amp, device.current),
+						Units.getCombinedDisplayText(Enums.Units_Watt, device.power),
 					]
 
 					MouseArea {

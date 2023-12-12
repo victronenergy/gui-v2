@@ -10,7 +10,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property int category: VenusOS.Notification_Info
+	property int category: Enums.Notification_Info
 	property alias backgroundColor: background.color
 	property alias highlightColor: highlight.color
 	property alias icon: icon
@@ -35,9 +35,9 @@ Item {
 		anchors.fill: parent
 
 		radius: Theme.geometry.toastNotification.radius
-		color: root.category === VenusOS.Notification_Confirm ? Theme.color.toastNotification.background.confirmation
-			 : root.category === VenusOS.Notification_Warning ? Theme.color.toastNotification.background.warning
-			 : root.category === VenusOS.Notification_Alarm ? Theme.color.toastNotification.background.error
+		color: root.category === Enums.Notification_Confirm ? Theme.color.toastNotification.background.confirmation
+			 : root.category === Enums.Notification_Warning ? Theme.color.toastNotification.background.warning
+			 : root.category === Enums.Notification_Alarm ? Theme.color.toastNotification.background.error
 			 : Theme.color.toastNotification.background.informative
 
 		AsymmetricRoundedRectangle {
@@ -53,9 +53,9 @@ Item {
 			radius: parent.radius
 			flat: true
 
-			color: root.category === VenusOS.Notification_Confirm ? Theme.color.toastNotification.highlight.confirmation
-				 : root.category === VenusOS.Notification_Warning ? Theme.color.toastNotification.highlight.warning
-				 : root.category === VenusOS.Notification_Alarm ? Theme.color.toastNotification.highlight.error
+			color: root.category === Enums.Notification_Confirm ? Theme.color.toastNotification.highlight.confirmation
+				 : root.category === Enums.Notification_Warning ? Theme.color.toastNotification.highlight.warning
+				 : root.category === Enums.Notification_Alarm ? Theme.color.toastNotification.highlight.error
 				 : Theme.color.toastNotification.highlight.informative
 
 			CP.IconImage {
@@ -64,9 +64,9 @@ Item {
 
 				width: Theme.geometry.toastNotification.icon.width
 				color: Theme.color.toastNotification.foreground
-				source: root.category === VenusOS.Notification_Confirm ? "qrc:/images/toast_icon_checkmark.svg"
-					  : root.category === VenusOS.Notification_Warning ? "qrc:/images/toast_icon_alarm.svg"
-					  : root.category === VenusOS.Notification_Alarm ? "qrc:/images/toast_icon_alarm.svg"
+				source: root.category === Enums.Notification_Confirm ? "qrc:/images/toast_icon_checkmark.svg"
+					  : root.category === Enums.Notification_Warning ? "qrc:/images/toast_icon_alarm.svg"
+					  : root.category === Enums.Notification_Alarm ? "qrc:/images/toast_icon_alarm.svg"
 					  : "qrc:/images/toast_icon_info.svg"
 			}
 		}

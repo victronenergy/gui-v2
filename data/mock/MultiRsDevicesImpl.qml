@@ -11,7 +11,7 @@ Item {
 
 	function populate() {
 		const multiRsDeviceObj = multiRsDeviceComponent.createObject(root, {
-			state: Math.random() * VenusOS.System_State_EqualizationCharging
+			state: Math.random() * Enums.System_State_EqualizationCharging
 		})
 		Global.multiRsDevices.model.addDevice(multiRsDeviceObj)
 	}

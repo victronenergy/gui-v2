@@ -366,12 +366,12 @@ Page {
 			description: qsTrId("settings_vrm_device_instances_reboot_now_description")
 
 			onAboutToShow: {
-				dialogDoneOptions = VenusOS.ModalDialog_DoneOptions_SetAndClose
+				dialogDoneOptions = Enums.ModalDialog_DoneOptions_SetAndClose
 				acceptText = CommonWords.reboot
 			}
 
 			tryAccept: function() {
-				if (dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly
+				if (dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkOnly
 						&& BackendConnection.type !== BackendConnection.DBusSource) {
 					// In mqtt mode, user rebooted, and now clicked 'OK', so accept the dialog.
 					return true
@@ -388,7 +388,7 @@ Page {
 				}
 
 				root.tryPop = undefined
-				dialogDoneOptions = VenusOS.ModalDialog_DoneOptions_OkOnly
+				dialogDoneOptions = Enums.ModalDialog_DoneOptions_OkOnly
 				acceptText = CommonWords.ok
 
 				if (BackendConnection.type === BackendConnection.DBusSource) {

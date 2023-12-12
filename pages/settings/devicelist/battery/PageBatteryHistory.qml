@@ -19,7 +19,7 @@ Page {
 				text: qsTrId("batteryalarms_deepest_discharge")
 				dataSource: root.bindPrefix + "/History/DeepestDischarge"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_AmpHour
+				unit: Enums.Units_AmpHour
 			}
 
 			ListQuantityItem {
@@ -27,7 +27,7 @@ Page {
 				text: qsTrId("batteryhistory_last_discharge")
 				dataSource: root.bindPrefix + "/History/LastDischarge"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_AmpHour
+				unit: Enums.Units_AmpHour
 			}
 
 			ListQuantityItem {
@@ -35,7 +35,7 @@ Page {
 				text: qsTrId("batteryhistory_average_discharge")
 				dataSource: root.bindPrefix + "/History/AverageDischarge"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_AmpHour
+				unit: Enums.Units_AmpHour
 			}
 
 			ListTextItem {
@@ -57,14 +57,14 @@ Page {
 				text: qsTrId("batteryhistory_cumulative_ah_drawn")
 				dataSource: root.bindPrefix + "/History/TotalAhDrawn"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_AmpHour
+				unit: Enums.Units_AmpHour
 			}
 
 			ListQuantityItem {
 				text: CommonWords.minimum_voltage
 				dataSource: root.bindPrefix + "/History/MinimumVoltage"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -72,7 +72,7 @@ Page {
 				text: CommonWords.maximum_voltage
 				dataSource: root.bindPrefix + "/History/MaximumVoltage"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -81,7 +81,7 @@ Page {
 				text: qsTrId("batteryhistory_minimum_cell_voltage")
 				dataSource: root.bindPrefix + "/History/MinimumCellVoltage"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -90,7 +90,7 @@ Page {
 				text: qsTrId("batteryhistory_maximum_cell_voltage")
 				dataSource: root.bindPrefix + "/History/MaximumCellVoltage"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -147,7 +147,7 @@ Page {
 				text: qsTrId("batteryhistory_minimum_starter_bat_voltage")
 				dataSource: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
 				visible: defaultVisible && lowStarterVoltageAlarm.visible
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -156,7 +156,7 @@ Page {
 				text: qsTrId("batteryhistory_maximum_starter_bat_voltage")
 				dataSource: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
 				visible: defaultVisible && lowStarterVoltageAlarm.visible
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -184,7 +184,7 @@ Page {
 				text: qsTrId("batteryhistory_discharged_energy")
 				dataSource: root.bindPrefix + "/History/DischargedEnergy"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Energy_KiloWattHour
+				unit: Enums.Units_Energy_KiloWattHour
 			}
 
 			ListQuantityItem {
@@ -192,7 +192,7 @@ Page {
 				text: qsTrId("batteryhistory_charged_energy")
 				dataSource: root.bindPrefix + "/History/ChargedEnergy"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Energy_KiloWattHour
+				unit: Enums.Units_Energy_KiloWattHour
 			}
 
 			ListResetHistoryLabel {

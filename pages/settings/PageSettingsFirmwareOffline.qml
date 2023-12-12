@@ -18,7 +18,7 @@ Page {
 			FirmwareCheckListButton {
 				//% "Check for updates on SD/USB"
 				text: qsTrId("settings_firmware_check_for_updates_on_sd_usb")
-				updateType: VenusOS.Firmware_UpdateType_Offline
+				updateType: Enums.Firmware_UpdateType_Offline
 			}
 
 			ListButton {
@@ -39,10 +39,10 @@ Page {
 				}
 
 				enabled: !Global.firmwareUpdate.busy
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				visible: !!Global.firmwareUpdate.offlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {
-					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Offline)
+					Global.firmwareUpdate.installUpdate(Enums.Firmware_UpdateType_Offline)
 				}
 			}
 
@@ -50,7 +50,7 @@ Page {
 				//% "Firmware build date/time"
 				text: qsTrId("settings_firmware_build_date_time")
 				dataSource: "com.victronenergy.platform/Firmware/Offline/AvailableBuild"
-				visible: installUpdate.visible && Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
+				visible: installUpdate.visible && Global.systemSettings.canAccess(Enums.User_AccessType_SuperUser)
 			}
 
 			MountStateListButton {}

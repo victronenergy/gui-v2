@@ -62,7 +62,7 @@ QtObject {
 			}
 			if (msg) {
 				// TODO confirm whether we need to show "icon-firmwareupdate-active" instead of the normal notification icon
-				Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
+				Global.showToastNotification(Enums.Notification_Info, msg, 10000)
 			}
 		}
 	}
@@ -92,9 +92,9 @@ QtObject {
 	function checkForUpdate(updateType) {
 		_updateType = updateType
 		checkingForUpdate = true
-		if (updateType === VenusOS.Firmware_UpdateType_Online) {
+		if (updateType === Enums.Firmware_UpdateType_Online) {
 			_onlineCheckUpdate.setValue(1)
-		} else if (updateType === VenusOS.Firmware_UpdateType_Offline) {
+		} else if (updateType === Enums.Firmware_UpdateType_Offline) {
 			_offlineCheckUpdate.setValue(1)
 		} else {
 			console.warn("checkForUpdate(): unknown firmware update type:", updateType)
@@ -103,9 +103,9 @@ QtObject {
 
 	function installUpdate(updateType) {
 		_updateType = updateType
-		if (updateType === VenusOS.Firmware_UpdateType_Online) {
+		if (updateType === Enums.Firmware_UpdateType_Online) {
 			_onlineInstallUpdate.setValue(1)
-		} else if (updateType === VenusOS.Firmware_UpdateType_Offline) {
+		} else if (updateType === Enums.Firmware_UpdateType_Offline) {
 			_offlineInstallUpdate.setValue(1)
 		} else {
 			console.warn("installUpdate(): unknown firmware update type:", updateType)
@@ -118,15 +118,15 @@ QtObject {
 		}
 		let msg = ""
 		checkingForUpdate = false
-		if (_updateType === VenusOS.Firmware_UpdateType_Online && !_onlineVersion.valid) {
+		if (_updateType === Enums.Firmware_UpdateType_Online && !_onlineVersion.valid) {
 			//% "No newer version available"
 			msg = qsTrId("settings_firmware_no_newer_version_available")
-		} else if (_updateType === VenusOS.Firmware_UpdateType_Offline && !_offlineVersion.valid) {
+		} else if (_updateType === Enums.Firmware_UpdateType_Offline && !_offlineVersion.valid) {
 			//% "No firmware found"
 			msg = qsTrId("settings_firmware_no_firmware_found")
 		}
 		if (msg) {
-			Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
+			Global.showToastNotification(Enums.Notification_Info, msg, 10000)
 		}
 	}
 }

@@ -13,8 +13,8 @@ Rectangle {
 
 	property string title
 
-	property int leftButton: VenusOS.StatusBar_LeftButton_None
-	property int rightButton: VenusOS.StatusBar_RightButton_None
+	property int leftButton: Enums.StatusBar_LeftButton_None
+	property int rightButton: Enums.StatusBar_RightButton_None
 
 	property bool animationEnabled
 
@@ -53,15 +53,15 @@ Rectangle {
 		icon.height: Theme.geometry.statusBar.button.icon.height
 		display: C.AbstractButton.IconOnly
 		color: Theme.color.ok
-		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
+		icon.source: root.leftButton === Enums.StatusBar_LeftButton_ControlsInactive
 					 ? "qrc:/images/icon_controls_off_32.svg"
-					 : root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive
+					 : root.leftButton === Enums.StatusBar_LeftButton_ControlsActive
 					   ? "qrc:/images/icon_controls_on_32.svg"
 					   : "qrc:/images/icon_back_32.svg"
 
 		enabled: !!Global.pageManager
-				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				&& root.leftButton != VenusOS.StatusBar_LeftButton_None
+				&& Global.pageManager.interactivity === Enums.PageManager_InteractionMode_Interactive
+				&& root.leftButton != Enums.StatusBar_LeftButton_None
 		backgroundColor: "transparent"  // don't show background when disabled
 		opacity: enabled ? 1.0 : 0.0
 		Behavior on opacity {
@@ -127,8 +127,8 @@ Rectangle {
 		}
 
 		enabled: !!Global.pageManager
-				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				&& root.rightButton != VenusOS.StatusBar_RightButton_None
+				&& Global.pageManager.interactivity === Enums.PageManager_InteractionMode_Interactive
+				&& root.rightButton != Enums.StatusBar_RightButton_None
 		opacity: enabled ? 1.0 : 0.0
 		Behavior on opacity {
 			enabled: root.animationEnabled
@@ -144,13 +144,13 @@ Rectangle {
 		display: C.AbstractButton.IconOnly
 		color: Theme.color.ok
 		backgroundColor: "transparent"
-		icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
+		icon.source: root.rightButton === Enums.StatusBar_RightButton_SidePanelActive
 				? "qrc:/images/icon_sidepanel_on_32.svg"
-				: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive
+				: root.rightButton === Enums.StatusBar_RightButton_SidePanelInactive
 					? "qrc:/images/icon_sidepanel_off_32.svg"
-					: root.rightButton === VenusOS.StatusBar_RightButton_Add
+					: root.rightButton === Enums.StatusBar_RightButton_Add
 					  ? "qrc:/images/icon_plus.svg"
-					  : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
+					  : root.rightButton === Enums.StatusBar_RightButton_Refresh
 						? "qrc:/images/icon_refresh_32.svg"
 						: ""
 

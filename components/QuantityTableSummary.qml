@@ -18,7 +18,7 @@ Row {
 			return width / model.length
 		}
 		// "kWh" unit name is longer, so give that column more space.
-		const widthMultiplier = (unit === VenusOS.Units_Energy_KiloWattHour) ? 1.2 : 1
+		const widthMultiplier = (unit === Enums.Units_Energy_KiloWattHour) ? 1.2 : 1
 		return ((width - Theme.geometry.quantityTable.header.widthBoost) / model.length) * widthMultiplier
 	}
 
@@ -131,7 +131,7 @@ Row {
 							font.pixelSize: firstColumnSubLabel.font.pixelSize
 							value: root.model[model.index + 1].value
 							unit: root.model[model.index + 1].unit
-							visible: unit !== VenusOS.Units_None
+							visible: unit !== Enums.Units_None
 						}
 					}
 				}

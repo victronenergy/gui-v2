@@ -16,18 +16,18 @@ QuantityTable {
 	availableWidth: width - 2*Theme.geometry.listItem.content.horizontalMargin
 	firstColumnWidth: Theme.geometry.vebusDeviceListPage.quantityTable.firstColumn.width
 	units: [
-		{ unit: VenusOS.Units_None },
-		{ unit: VenusOS.Units_Watt },
-		{ unit: VenusOS.Units_Volt },
-		{ unit: VenusOS.Units_Amp },
-		{ unit: VenusOS.Units_Hertz }
+		{ unit: Enums.Units_None },
+		{ unit: Enums.Units_Watt },
+		{ unit: Enums.Units_Volt },
+		{ unit: Enums.Units_Amp },
+		{ unit: Enums.Units_Hertz }
 	]
 	rowCount: 3
 	labelHorizontalAlignment: Qt.AlignRight
 	headerComponent: AsymmetricRoundedRectangle {
 		width: root.width
 		height: Theme.geometry.vebusDeviceListPage.quantityTable.header.height
-		roundedSide: VenusOS.AsymmetricRoundedRectangle_RoundedSide_Top
+		roundedSide: Enums.AsymmetricRoundedRectangle_RoundedSide_Top
 		flat: true
 		color: Theme.color.quantityTable.row.background
 

@@ -18,7 +18,7 @@ Page {
 	// for mock simulator
 	property alias settingsListView: settingsListView
 
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+	topLeftButton: Enums.StatusBar_LeftButton_ControlsInactive
 
 	GradientListView {
 		id: settingsListView
@@ -151,13 +151,13 @@ Page {
 			{
 				text: "Debug",
 				page: "/pages/settings/debug/PageDebug.qml",
-				showAccessLevel: VenusOS.User_AccessType_SuperUser
+				showAccessLevel: Enums.User_AccessType_SuperUser
 			},
 		]
 
 		delegate: ListNavigationItem {
 			text: modelData.text
-			showAccessLevel: modelData.showAccessLevel || VenusOS.User_AccessType_User
+			showAccessLevel: modelData.showAccessLevel || Enums.User_AccessType_User
 			visible: defaultVisible && (modelData.visible === undefined || modelData.visible === true)
 			onClicked: Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
 		}

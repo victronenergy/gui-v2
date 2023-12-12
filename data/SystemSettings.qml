@@ -15,34 +15,34 @@ QtObject {
 	}
 
 	function convertTemperature(celsius_value) {
-		return temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+		return temperatureUnit.value === Enums.Units_Temperature_Celsius
 				? celsius_value
 				: Units.celsiusToFahrenheit(celsius_value)
 	}
 
 	function networkStatusToText(status) {
 		switch (status) {
-		case VenusOS.Link_NetworkStatus_Slave:
+		case Enums.Link_NetworkStatus_Slave:
 			//: Network status: Slave
 			//% "Slave"
 			return qsTrId("systemsettings_networkstatus_slave")
-		case VenusOS.Link_NetworkStatus_GroupMaster:
+		case Enums.Link_NetworkStatus_GroupMaster:
 			//: Network status: Group Master
 			//% "Group Master"
 			return qsTrId("systemsettings_networkstatus_group_master")
-		case VenusOS.Link_NetworkStatus_InstanceMaster:
+		case Enums.Link_NetworkStatus_InstanceMaster:
 			//: Network status: Instance Master
 			//% "Instance Master"
 			return qsTrId("systemsettings_networkstatus_instance_master")
-		case VenusOS.Link_NetworkStatus_GroupAndInstanceMaster:
+		case Enums.Link_NetworkStatus_GroupAndInstanceMaster:
 			//: Network status: Group & Instance Master
 			//% "Group & Instance Master"
 			return qsTrId("systemsettings_networkstatus_group_and_instance_master")
-		case VenusOS.Link_NetworkStatus_Standalone:
+		case Enums.Link_NetworkStatus_Standalone:
 			//: Network status: Standalone
 			//% "Standalone"
 			return qsTrId("systemsettings_networkstatus_standalone")
-		case VenusOS.Link_NetworkStatus_StandaloneAndGroupMaster:
+		case Enums.Link_NetworkStatus_StandaloneAndGroupMaster:
 			//: Network status: Standalone & Group Master
 			//% "Standalone & Group Master"
 			return qsTrId("systemsettings_networkstatus_standalone_and_group_master")
@@ -68,12 +68,12 @@ QtObject {
 
 	property QtObject electricalQuantity: QtObject {
 		// Values for /Settings/Gui/ElectricalPowerIndicator: 0 = watts, 1 = amps
-		readonly property var value: _electricalQuantityDataPoint.value === 1 ? VenusOS.Units_Amp : VenusOS.Units_Watt
+		readonly property var value: _electricalQuantityDataPoint.value === 1 ? Enums.Units_Amp : Enums.Units_Watt
 
 		function setValue(v) {
-			if (v === VenusOS.Units_Watt) {
+			if (v === Enums.Units_Watt) {
 				_electricalQuantityDataPoint.setValue(0)
-			} else if (v === VenusOS.Units_Amp) {
+			} else if (v === Enums.Units_Amp) {
 				_electricalQuantityDataPoint.setValue(1)
 			} else {
 				console.warn("Unsupported electrical quantity:", v)
@@ -89,13 +89,13 @@ QtObject {
 	property QtObject temperatureUnit: QtObject {
 		// translate /System/Units/Temperature from string to enum value
 		readonly property var value: _unitDataPoint.value === "fahrenheit"
-				? VenusOS.Units_Temperature_Fahrenheit
-				: VenusOS.Units_Temperature_Celsius
+				? Enums.Units_Temperature_Fahrenheit
+				: Enums.Units_Temperature_Celsius
 
 		function setValue(v) {
-			if (v === VenusOS.Units_Temperature_Celsius) {
+			if (v === Enums.Units_Temperature_Celsius) {
 				_unitDataPoint.setValue("celsius")
-			} else if (v === VenusOS.Units_Temperature_Fahrenheit) {
+			} else if (v === Enums.Units_Temperature_Fahrenheit) {
 				_unitDataPoint.setValue("fahrenheit")
 			} else {
 				console.warn("Unsupported temperature unit:", v)
@@ -134,7 +134,7 @@ QtObject {
 				let levels = []
 				for (let i = 0; i < _savedLevels.count; ++i) {
 					const obj = _savedLevels.objectAt(i)
-					levels.push(obj && obj.value !== undefined ? obj.value : VenusOS.Tank_Type_Battery)
+					levels.push(obj && obj.value !== undefined ? obj.value : Enums.Tank_Type_Battery)
 				}
 				value = levels
 			}

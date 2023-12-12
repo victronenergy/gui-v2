@@ -30,10 +30,10 @@ ListNavigationItem {
 			id: quantityRepeater
 
 			model: [
-				{ value: root.energy, unit: VenusOS.Units_Energy_KiloWattHour },
-				{ value: root.voltage, unit: VenusOS.Units_Volt },
-				{ value: root.current, unit: VenusOS.Units_Amp },
-				{ value: root.power, unit: VenusOS.Units_Watt },
+				{ value: root.energy, unit: Enums.Units_Energy_KiloWattHour },
+				{ value: root.voltage, unit: Enums.Units_Volt },
+				{ value: root.current, unit: Enums.Units_Amp },
+				{ value: root.power, unit: Enums.Units_Watt },
 			]
 
 			delegate: QuantityLabel {

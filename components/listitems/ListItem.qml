@@ -17,8 +17,8 @@ Item {
 	property int spacing: Theme.geometry.gradientList.spacing
 	property int bottomContentMargin: Theme.geometry.listItem.content.spacing
 
-	property int showAccessLevel: VenusOS.User_AccessType_User
-	property int writeAccessLevel: VenusOS.User_AccessType_Installer
+	property int showAccessLevel: Enums.User_AccessType_User
+	property int writeAccessLevel: Enums.User_AccessType_Installer
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 	readonly property bool userHasReadAccess: Global.systemSettings.canAccess(showAccessLevel)
 
@@ -48,7 +48,7 @@ Item {
 
 		// Show thin colored indicator on left side if settings is only visible to super/service users
 		Rectangle {
-			visible: root.showAccessLevel >= VenusOS.User_AccessType_SuperUser
+			visible: root.showAccessLevel >= Enums.User_AccessType_SuperUser
 			width: Theme.geometry.listItem.radius * 2
 			height: parent.height
 			color: Theme.color.listItem.highAccessLevel

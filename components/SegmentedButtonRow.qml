@@ -49,9 +49,9 @@ Item {
 				border.color: modelData.enabled === false && model.index !== root.currentIndex ? color : Theme.color.ok
 				radius: Theme.geometry.button.radius
 
-				roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
-					: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
-					: VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
+				roundedSide: model.index === 0 ? Enums.AsymmetricRoundedRectangle_RoundedSide_Left
+					: model.index === (buttonRepeater.count-1) ? Enums.AsymmetricRoundedRectangle_RoundedSide_Right
+					: Enums.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
 
 				Label {
 					anchors.centerIn: parent

@@ -10,18 +10,18 @@ QtObject {
 	id: root
 
 	readonly property var tankTypes: [
-		VenusOS.Tank_Type_Fuel,
-		VenusOS.Tank_Type_FreshWater,
-		VenusOS.Tank_Type_WasteWater,
-		VenusOS.Tank_Type_LiveWell,
-		VenusOS.Tank_Type_Oil,
-		VenusOS.Tank_Type_BlackWater,
-		VenusOS.Tank_Type_Gasoline,
-		VenusOS.Tank_Type_Diesel,
-		VenusOS.Tank_Type_LPG,
-		VenusOS.Tank_Type_LNG,
-		VenusOS.Tank_Type_HydraulicOil,
-		VenusOS.Tank_Type_RawWater
+		Enums.Tank_Type_Fuel,
+		Enums.Tank_Type_FreshWater,
+		Enums.Tank_Type_WasteWater,
+		Enums.Tank_Type_LiveWell,
+		Enums.Tank_Type_Oil,
+		Enums.Tank_Type_BlackWater,
+		Enums.Tank_Type_Gasoline,
+		Enums.Tank_Type_Diesel,
+		Enums.Tank_Type_LPG,
+		Enums.Tank_Type_LNG,
+		Enums.Tank_Type_HydraulicOil,
+		Enums.Tank_Type_RawWater
 	]
 
 	readonly property var allTankModels: tankTypes.map(function(tankType) {
@@ -29,73 +29,73 @@ QtObject {
 	})
 
 	readonly property DeviceModel fuelTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_Fuel
+		readonly property int type: Enums.Tank_Type_Fuel
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-Fuel"
 	}
 	readonly property DeviceModel freshWaterTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_FreshWater
+		readonly property int type: Enums.Tank_Type_FreshWater
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-FreshWater"
 	}
 	readonly property DeviceModel wasteWaterTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_WasteWater
+		readonly property int type: Enums.Tank_Type_WasteWater
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-WasteWater"
 	}
 	readonly property DeviceModel liveWellTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_LiveWell
+		readonly property int type: Enums.Tank_Type_LiveWell
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-LiveWell"
 	}
 	readonly property DeviceModel oilTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_Oil
+		readonly property int type: Enums.Tank_Type_Oil
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-Oil"
 	}
 	readonly property DeviceModel blackWaterTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_BlackWater
+		readonly property int type: Enums.Tank_Type_BlackWater
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-BlackWater"
 	}
 	readonly property DeviceModel gasolineTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_Gasoline
+		readonly property int type: Enums.Tank_Type_Gasoline
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-Gasoline"
 	}
 	readonly property DeviceModel dieselTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_Diesel
+		readonly property int type: Enums.Tank_Type_Diesel
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-Diesel"
 	}
 	readonly property DeviceModel lpgTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_LPG
+		readonly property int type: Enums.Tank_Type_LPG
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-LPG"
 	}
 	readonly property DeviceModel lngTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_LNG
+		readonly property int type: Enums.Tank_Type_LNG
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-LNG"
 	}
 	readonly property DeviceModel hydraulicOilTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_HydraulicOil
+		readonly property int type: Enums.Tank_Type_HydraulicOil
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-HydraulicOil"
 	}
 	readonly property DeviceModel rawWaterTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_RawWater
+		readonly property int type: Enums.Tank_Type_RawWater
 		property real totalCapacity
 		property real totalRemaining
 		modelId: "tanks-RawWater"
@@ -116,29 +116,29 @@ QtObject {
 
 	function tankModel(type) {
 		switch (type) {
-		case VenusOS.Tank_Type_Fuel:
+		case Enums.Tank_Type_Fuel:
 			return fuelTanks
-		case VenusOS.Tank_Type_FreshWater:
+		case Enums.Tank_Type_FreshWater:
 			return freshWaterTanks
-		case VenusOS.Tank_Type_WasteWater:
+		case Enums.Tank_Type_WasteWater:
 			return wasteWaterTanks
-		case VenusOS.Tank_Type_LiveWell:
+		case Enums.Tank_Type_LiveWell:
 			return liveWellTanks
-		case VenusOS.Tank_Type_Oil:
+		case Enums.Tank_Type_Oil:
 			return oilTanks
-		case VenusOS.Tank_Type_BlackWater:
+		case Enums.Tank_Type_BlackWater:
 			return blackWaterTanks
-		case VenusOS.Tank_Type_Gasoline:
+		case Enums.Tank_Type_Gasoline:
 			return gasolineTanks
-		case VenusOS.Tank_Type_Diesel:
+		case Enums.Tank_Type_Diesel:
 			return dieselTanks
-		case VenusOS.Tank_Type_LPG:
+		case Enums.Tank_Type_LPG:
 			return lpgTanks
-		case VenusOS.Tank_Type_LNG:
+		case Enums.Tank_Type_LNG:
 			return lngTanks
-		case VenusOS.Tank_Type_HydraulicOil:
+		case Enums.Tank_Type_HydraulicOil:
 			return hydraulicOilTanks
-		case VenusOS.Tank_Type_RawWater:
+		case Enums.Tank_Type_RawWater:
 			return rawWaterTanks
 		}
 		console.warn("tankModel(): Unknown tank type", type)
@@ -147,19 +147,19 @@ QtObject {
 
 	function statusToText(status) {
 		switch (status) {
-		case VenusOS.Tank_Status_Ok:
+		case Enums.Tank_Status_Ok:
 			return CommonWords.ok
-		case VenusOS.Tank_Status_Disconnected:
+		case Enums.Tank_Status_Disconnected:
 			return CommonWords.disconnected
-		case VenusOS.Tank_Status_ShortCircuited:
+		case Enums.Tank_Status_ShortCircuited:
 			//% "Short circuited"
 			return qsTrId("tank_status_short_circuited")
-		case VenusOS.Tank_Status_ReversePolarity:
+		case Enums.Tank_Status_ReversePolarity:
 			//% "Reverse polarity"
 			return qsTrId("tank_status_reverse_polarity")
-		case VenusOS.Tank_Status_Unknown:
+		case Enums.Tank_Status_Unknown:
 			return CommonWords.unknown_status
-		case VenusOS.Tank_Status_Error:
+		case Enums.Tank_Status_Error:
 			return CommonWords.error
 		default:
 			return ""

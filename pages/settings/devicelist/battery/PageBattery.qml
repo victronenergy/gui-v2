@@ -89,16 +89,16 @@ Page {
 			ListQuantityGroup {
 				text: CommonWords.battery
 				textModel: [
-					{ value: root.battery.voltage, unit: VenusOS.Units_Volt },
-					{ value: root.battery.current, unit: VenusOS.Units_Amp },
-					{ value: root.battery.power, unit: VenusOS.Units_Watt }
+					{ value: root.battery.voltage, unit: Enums.Units_Volt },
+					{ value: root.battery.current, unit: Enums.Units_Amp },
+					{ value: root.battery.power, unit: Enums.Units_Watt }
 				]
 			}
 
 			ListQuantityItem {
 				text: CommonWords.state_of_charge
 				value: root.battery.stateOfCharge
-				unit: VenusOS.Units_Percentage
+				unit: Enums.Units_Percentage
 			}
 
 			ListQuantityItem {
@@ -106,7 +106,7 @@ Page {
 				text: qsTrId("battery_state_of_health")
 				dataSource: root.battery.serviceUid + "/Soh"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Percentage
+				unit: Enums.Units_Percentage
 			}
 
 			ListQuantityItem {
@@ -131,7 +131,7 @@ Page {
 				text: qsTrId("battery_starter_voltage")
 				dataSource: root.battery.serviceUid + "/Dc/1/Voltage"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -140,7 +140,7 @@ Page {
 				text: qsTrId("battery_bus_voltage")
 				dataSource: root.battery.serviceUid + "/BusVoltage"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -149,7 +149,7 @@ Page {
 				text: qsTrId("battery_top_section_voltage")
 				visible: midVoltage.valid
 				value: midVoltage.valid && !isNaN(root.battery.voltage) ? root.battery.voltage - midVoltage.value : NaN
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -158,7 +158,7 @@ Page {
 				text: qsTrId("battery_bottom_section_voltage")
 				value: midVoltage.value === undefined ? NaN : midVoltage.value
 				visible: midVoltage.valid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -167,7 +167,7 @@ Page {
 				text: qsTrId("battery_mid_point_deviation")
 				dataSource: root.battery.serviceUid + "/Dc/0/MidVoltageDeviation"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Percentage
+				unit: Enums.Units_Percentage
 			}
 
 			ListQuantityItem {
@@ -175,7 +175,7 @@ Page {
 				text: qsTrId("battery_consumed_amphours")
 				dataSource: root.battery.serviceUid + "/ConsumedAmphours"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_AmpHour
+				unit: Enums.Units_AmpHour
 			}
 
 			ListQuantityItem {
@@ -183,7 +183,7 @@ Page {
 				text: qsTrId("battery_buss_voltage")
 				dataSource: root.battery.serviceUid + "/BussVoltage"
 				visible: defaultVisible && dataValid
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 			}
 
@@ -366,11 +366,11 @@ Page {
 				secondaryText: qsTrId("battery_press_to_redetect")
 				enabled: redetect.value === 0
 				visible: redetect.valid
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				onClicked: {
 					redetect.setValue(1)
 					//% "Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("battery_redetecting_the_battery_note"), 10000)
+					Global.showToastNotification(Enums.Notification_Info, qsTrId("battery_redetecting_the_battery_note"), 10000)
 				}
 
 				DataPoint {

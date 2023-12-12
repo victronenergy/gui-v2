@@ -12,7 +12,7 @@ OverviewWidget {
 	//% "Solar yield"
 	title: qsTrId("overview_widget_solaryield_title")
 	icon.source: "qrc:/images/solaryield.svg"
-	type: VenusOS.OverviewWidget_Type_Solar
+	type: Enums.OverviewWidget_Type_Solar
 	enabled: true
 	quantityLabel.dataObject: Global.system.solar
 
@@ -34,7 +34,7 @@ OverviewWidget {
 				bottomMargin: margin
 			}
 			sourceComponent: {
-				if (root.size >= VenusOS.OverviewWidget_Size_L) {
+				if (root.size >= Enums.OverviewWidget_Size_L) {
 					if (Global.pvInverters.model.count === 1 && Global.solarChargers.model.count === 0) {
 						return phaseComponent
 					} else if (Global.pvInverters.model.count === 0) {

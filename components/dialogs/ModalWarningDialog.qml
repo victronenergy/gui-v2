@@ -13,7 +13,7 @@ ModalDialog {
 	property string description
 	property alias icon: alarmIcon
 
-	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
+	dialogDoneOptions: Enums.ModalDialog_DoneOptions_OkOnly
 	header: null
 
 	contentItem: Item {

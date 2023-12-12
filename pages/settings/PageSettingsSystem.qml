@@ -38,7 +38,7 @@ Page {
 				//% "System name"
 				text: qsTrId("settings_system_name")
 				dataSource: "com.victronenergy.settings/Settings/SystemSetup/SystemName"
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 
 				optionModel: [
 					//% "Automatic"
@@ -61,7 +61,7 @@ Page {
 				text: qsTrId("settings_system_user_defined_name")
 				//% "Enter name"
 				placeholderText: qsTrId("settings_system_enter_user_defined_name")
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				visible: systemNameRadioButtons.currentIndex === systemNameRadioButtons.customValueIndex
 				dataSource: "com.victronenergy.settings/Settings/SystemSetup/SystemName"
 			}
@@ -149,7 +149,7 @@ Page {
 			ListNavigationItem {
 				//% "System Status"
 				text: qsTrId("settings_system_system_status")
-				showAccessLevel: VenusOS.User_AccessType_SuperUser
+				showAccessLevel: Enums.User_AccessType_SuperUser
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSystemStatus.qml", { title: text })
 			}
 		}

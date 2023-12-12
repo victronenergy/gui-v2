@@ -107,7 +107,7 @@ Rectangle {
 						bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
 					}
 					font.pixelSize: Theme.font.size.h1
-					unit: VenusOS.Units_Percentage
+					unit: Enums.Units_Percentage
 					value: (isNaN(model.device.level) || model.device.level < 0) ? 0 : Math.round(model.device.level)
 				}
 				Label {

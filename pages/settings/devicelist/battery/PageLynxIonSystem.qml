@@ -42,8 +42,8 @@ Page {
 				//% "Min/max cell voltage"
 				text: qsTrId("lynxionsystem_min_max_cell_voltage")
 				textModel: [
-					{ value: minCellVoltage.value, unit: VenusOS.Units_Volt },
-					{ value: maxCellVoltage.value, unit: VenusOS.Units_Volt },
+					{ value: minCellVoltage.value, unit: Enums.Units_Volt },
+					{ value: maxCellVoltage.value, unit: Enums.Units_Volt },
 				]
 				visible: minCellVoltage.valid && maxCellVoltage.valid
 

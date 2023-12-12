@@ -18,11 +18,11 @@ Page {
 		const direction = val >= 0 ? dir[0] : dir[1]
 
 		switch (fmt) {
-		case VenusOS.GpsData_Format_DecimalDegrees: // e.g. 52.34489
+		case Enums.GpsData_Format_DecimalDegrees: // e.g. 52.34489
 			return val.toFixed(6)
-		case VenusOS.GpsData_Format_DegreesMinutes: // e.g. 52° 20.693 N
+		case Enums.GpsData_Format_DegreesMinutes: // e.g. 52° 20.693 N
 			return "%1° %2 %3".arg(Math.floor(degrees).toFixed()).arg(minutes.toFixed(4)).arg(direction)
-		default: // VenusOS.GpsData_Format_DegreesMinutesSeconds e.g. 52° 20' 41.6" N
+		default: // Enums.GpsData_Format_DegreesMinutesSeconds e.g. 52° 20' 41.6" N
 			return "%1° %2' %3\" %4"
 					.arg(Math.floor(degrees).toFixed())
 					.arg(Math.floor(minutes).toFixed())

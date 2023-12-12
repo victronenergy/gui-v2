@@ -32,13 +32,13 @@ OverviewWidget {
 		foregroundColor: Theme.color.overviewPage.widget.sideGauge.highlight
 		animationEnabled: visible && root.animationEnabled
 		value: valueRange.valueAsRatio
-		visible: root.type !== VenusOS.OverviewWidget_Type_AcGenerator
+		visible: root.type !== Enums.OverviewWidget_Type_AcGenerator
 
 		ValueRange {
 			id: valueRange
 
 			value: sideGauge.visible ? root.quantityLabel.value : NaN
-			maximumValue: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp
+			maximumValue: Global.systemSettings.electricalQuantity.value === Enums.Units_Amp
 				? Global.acInputs.currentLimit
 				: NaN
 		}
@@ -55,7 +55,7 @@ OverviewWidget {
 				bottomMargin: Theme.geometry.overviewPage.widget.extraContent.bottomMargin
 			}
 
-			visible: model != null && root.size >= VenusOS.OverviewWidget_Size_L
+			visible: model != null && root.size >= Enums.OverviewWidget_Size_L
 			model: root.phaseModel && root.phaseModel.count > 1 ? root.phaseModel : null
 		}
 	]

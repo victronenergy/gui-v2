@@ -28,10 +28,10 @@ ModalDialog {
 			id: repeater
 			width: parent.width
 			model: [
-				{ value: VenusOS.VeBusDevice_Mode_On, enabled: true },
-				{ value: VenusOS.VeBusDevice_Mode_ChargerOnly, enabled: root.isMulti },
-				{ value: VenusOS.VeBusDevice_Mode_InverterOnly, enabled: root.isMulti },
-				{ value: VenusOS.VeBusDevice_Mode_Off, enabled: true },
+				{ value: Enums.VeBusDevice_Mode_On, enabled: true },
+				{ value: Enums.VeBusDevice_Mode_ChargerOnly, enabled: root.isMulti },
+				{ value: Enums.VeBusDevice_Mode_InverterOnly, enabled: root.isMulti },
+				{ value: Enums.VeBusDevice_Mode_Off, enabled: true },
 			]
 			delegate: buttonStyling
 		}

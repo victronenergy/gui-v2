@@ -64,7 +64,7 @@ ControlCard {
 			id: warningRow
 			height: Theme.geometry.controlCard.mediumItem.height
 			width: parent.width
-			visible: Global.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
+			visible: Global.ess.state === Enums.Ess_State_OptimizedWithBatteryLife
 
 			Label {
 				id: warning

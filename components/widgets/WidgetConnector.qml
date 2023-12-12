@@ -16,7 +16,7 @@ Item {
 	property int startLocation
 	property int endLocation
 
-	property int animationMode: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+	property int animationMode: Enums.WidgetConnector_AnimationMode_NotAnimated
 	property alias expanded: connectorPath.expanded
 	property bool animateGeometry
 	property bool animationEnabled
@@ -25,7 +25,7 @@ Item {
 	// Forces a straight line by aligning the anchor points using the centre of the smaller widget
 	property bool straight
 
-	readonly property bool _animated: _initialized && visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated && animationEnabled
+	readonly property bool _animated: _initialized && visible && animationMode !== Enums.WidgetConnector_AnimationMode_NotAnimated && animationEnabled
 	property real _animationProgress
 
 	property real _electronTravelDistance
@@ -110,10 +110,10 @@ Item {
 		id: connectorPath
 
 		function widgetConnectorLayoutChanged() {
-			direction = (startLocation == VenusOS.WidgetConnector_Location_Left
-						|| startLocation == VenusOS.WidgetConnector_Location_Right)
-						&& (endLocation == VenusOS.WidgetConnector_Location_Left
-						|| endLocation == VenusOS.WidgetConnector_Location_Right)
+			direction = (startLocation == Enums.WidgetConnector_Location_Left
+						|| startLocation == Enums.WidgetConnector_Location_Right)
+						&& (endLocation == Enums.WidgetConnector_Location_Left
+						|| endLocation == Enums.WidgetConnector_Location_Right)
 					   ? Qt.Horizontal
 					   : Qt.Vertical
 
@@ -132,14 +132,14 @@ Item {
 					? Theme.geometry.overviewPage.connector.anchor.width
 					: Theme.geometry.overviewPage.connector.anchor.height
 
-			const _startX = startLocation === VenusOS.WidgetConnector_Location_Left
+			const _startX = startLocation === Enums.WidgetConnector_Location_Left
 				  ? startWidgetRect.x - anchorWidth
-				  : startLocation === VenusOS.WidgetConnector_Location_Right
+				  : startLocation === Enums.WidgetConnector_Location_Right
 					? startWidgetRect.x + startWidgetRect.width + anchorWidth
 					: startWidgetRect.x + startWidgetRect.width/2   // Top/Bottom location
-			const _endX = endLocation === VenusOS.WidgetConnector_Location_Left
+			const _endX = endLocation === Enums.WidgetConnector_Location_Left
 				  ? endWidgetRect.x - anchorWidth
-				  : endLocation === VenusOS.WidgetConnector_Location_Right
+				  : endLocation === Enums.WidgetConnector_Location_Right
 					? endWidgetRect.x + endWidgetRect.width + anchorWidth
 					: endWidgetRect.x + endWidgetRect.width/2 // Top/Bottom location
 			let startX = _startX
@@ -170,14 +170,14 @@ Item {
 					: Theme.geometry.overviewPage.connector.anchor.width
 
 			// Work out the start and end of the path depending on the direction and orientation.
-			const _startY = startLocation === VenusOS.WidgetConnector_Location_Top
+			const _startY = startLocation === Enums.WidgetConnector_Location_Top
 				  ? startWidgetRect.y - anchorHeight
-				  : startLocation === VenusOS.WidgetConnector_Location_Bottom
+				  : startLocation === Enums.WidgetConnector_Location_Bottom
 					? startWidgetRect.y + startWidgetRect.height + anchorHeight
 					: startWidgetRect.y + startWidgetRect.height/2  // Left/Right location
-			const _endY = endLocation === VenusOS.WidgetConnector_Location_Top
+			const _endY = endLocation === Enums.WidgetConnector_Location_Top
 				  ? endWidgetRect.y - anchorHeight
-				  : endLocation === VenusOS.WidgetConnector_Location_Bottom
+				  : endLocation === Enums.WidgetConnector_Location_Bottom
 					? endWidgetRect.y + endWidgetRect.height + anchorHeight
 					: endWidgetRect.y + endWidgetRect.height/2  // Left/Right location
 			let startY = _startY
@@ -227,14 +227,14 @@ Item {
 				delegate: Image {
 					id: electron
 
-					readonly property real progress: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
+					readonly property real progress: root.animationMode === Enums.WidgetConnector_AnimationMode_StartToEnd
 							? animPathInterpolator.progress
 							: 1 - animPathInterpolator.progress
 
 					x: animPathInterpolator.x - width/2
 					y: animPathInterpolator.y - height/2
 					source: "qrc:/images/electron.svg"
-					rotation: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
+					rotation: root.animationMode === Enums.WidgetConnector_AnimationMode_StartToEnd
 							  ? animPathInterpolator.angle
 							  : animPathInterpolator.angle + 180
 
@@ -277,10 +277,10 @@ Item {
 		target: root
 		property: "_animationProgress"
 
-		from: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
+		from: root.animationMode === Enums.WidgetConnector_AnimationMode_StartToEnd
 			  ? 0
 			  : 1
-		to: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
+		to: root.animationMode === Enums.WidgetConnector_AnimationMode_StartToEnd
 			? 1
 			: 0
 

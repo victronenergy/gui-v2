@@ -12,7 +12,7 @@ AcInputWidget {
 
 	title: CommonWords.generator
 	icon.source: "qrc:/images/generator.svg"
-	type: VenusOS.OverviewWidget_Type_AcGenerator
+	type: Enums.OverviewWidget_Type_AcGenerator
 	input: Global.acInputs.generatorInput
 	extraContent.children: input && input.connected
 			? phaseModel && phaseModel.count > 1 ? phaseDisplay : []

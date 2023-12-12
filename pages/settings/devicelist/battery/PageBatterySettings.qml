@@ -104,7 +104,7 @@ Page {
 					id: confirmationDialogComponent
 
 					ModalWarningDialog {
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						dialogDoneOptions: Enums.ModalDialog_DoneOptions_OkAndCancel
 
 						//% "Restore factory defaults?"
 						title: qsTrId("batterysettings_confirm_restore_factory_defaults")

@@ -13,7 +13,7 @@ Repeater {
 		anchors.verticalCenter: parent.verticalCenter
 		font.pixelSize: Theme.font.size.body2
 		value: isNaN(modelData.value) ? NaN : modelData.value
-		unit: isNaN(modelData.unit) ? VenusOS.Units_None : modelData.unit
+		unit: isNaN(modelData.unit) ? Enums.Units_None : modelData.unit
 		valueColor: Theme.color.quantityTable.quantityValue
 		unitColor: Theme.color.quantityTable.quantityUnit
 

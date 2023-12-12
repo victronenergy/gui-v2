@@ -19,12 +19,12 @@ namespace VenusOS {
 class Enums : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
 
 public:
 	explicit Enums(QObject *parent = nullptr);
 	~Enums() override;
-
-	static QObject* instance(QQmlEngine *engine, QJSEngine *);
 
 	enum AsymmetricRoundedRectangle_RoundedSide {
 		AsymmetricRoundedRectangle_RoundedSide_All,    // allow all sides to be rounded, show all borders

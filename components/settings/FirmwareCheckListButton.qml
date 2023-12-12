@@ -18,7 +18,7 @@ ListButton {
 			 //% "Press to check"
 		   : qsTrId("settings_firmware_press_to_check")
 	enabled: !Global.firmwareUpdate.busy
-	writeAccessLevel: VenusOS.User_AccessType_User
+	writeAccessLevel: Enums.User_AccessType_User
 
 	onClicked: {
 		Global.firmwareUpdate.checkForUpdate(updateType)

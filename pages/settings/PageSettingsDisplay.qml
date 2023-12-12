@@ -26,7 +26,7 @@ Page {
 				//% "Brightness"
 				text: qsTrId("settings_brightness")
 				dataSource: "com.victronenergy.settings/Settings/Gui/Brightness"
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				visible: defaultVisible && !autoBrightness.checked
 				// TODO will this also need bindings similar to gui-v1 vePlatform.hasBacklight and vePlatform.brightness?
 				slider.to: 15   // TODO replace with maxBrightness from venus-platform when available
@@ -36,7 +36,7 @@ Page {
 				//% "Display off time"
 				text: qsTrId("settings_display_off_time")
 				dataSource: "com.victronenergy.settings/Settings/Gui/DisplayOff"
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 
 				optionModel: [
 					//% "10 sec"
@@ -95,7 +95,7 @@ Page {
 				//% "Language"
 				text: qsTrId("settings_language")
 
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				optionModel: LanguageModel { currentLanguage: Language.current }
 				currentIndex: optionModel.currentIndex
 				secondaryText: optionModel.currentDisplayText
@@ -122,7 +122,7 @@ Page {
 					id: changingLanguageDialog
 
 					ModalWarningDialog {
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
+						dialogDoneOptions: Enums.ModalDialog_DoneOptions_NoOptions
 						//% "Changing language"
 						title: qsTrId("settings_language_changing_language")
 						//% "Please wait while the language is changed"

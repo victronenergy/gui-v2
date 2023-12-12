@@ -50,13 +50,13 @@ QtObject {
 
 	function currentLimitTypeToText(type) {
 		switch (type) {
-		case VenusOS.AcInputs_InputType_Grid:
+		case Enums.AcInputs_InputType_Grid:
 			//% "Grid current limit"
 			return qsTrId("acInputs_current_limit_grid")
-		case VenusOS.AcInputs_InputType_Generator:
+		case Enums.AcInputs_InputType_Generator:
 			//% "Generator current limit"
 			return qsTrId("acInputs_current_limit_generator")
-		case VenusOS.AcInputs_InputType_Shore:
+		case Enums.AcInputs_InputType_Shore:
 			//% "Shore current limit"
 			return qsTrId("acInputs_current_limit_shore")
 		default:
@@ -68,21 +68,21 @@ QtObject {
 
 	function gensetStatusCodeToText(statusCode) {
 		switch (statusCode) {
-		case VenusOS.Genset_StatusCode_Startup0:
-		case VenusOS.Genset_StatusCode_Startup1:
-		case VenusOS.Genset_StatusCode_Startup2:
-		case VenusOS.Genset_StatusCode_Startup3:
-		case VenusOS.Genset_StatusCode_Startup4:
-		case VenusOS.Genset_StatusCode_Startup5:
-		case VenusOS.Genset_StatusCode_Startup6:
-		case VenusOS.Genset_StatusCode_Startup7:
+		case Enums.Genset_StatusCode_Startup0:
+		case Enums.Genset_StatusCode_Startup1:
+		case Enums.Genset_StatusCode_Startup2:
+		case Enums.Genset_StatusCode_Startup3:
+		case Enums.Genset_StatusCode_Startup4:
+		case Enums.Genset_StatusCode_Startup5:
+		case Enums.Genset_StatusCode_Startup6:
+		case Enums.Genset_StatusCode_Startup7:
 			return CommonWords.startup_status.arg(statusCode)
-		case VenusOS.Genset_StatusCode_Running:
+		case Enums.Genset_StatusCode_Running:
 			return CommonWords.running_status
-		case VenusOS.Genset_StatusCode_Stopping:
+		case Enums.Genset_StatusCode_Stopping:
 			//% "Stopping"
 			return qsTrId("acInputs_statusCode_stopping")
-		case VenusOS.Genset_StatusCode_Error:
+		case Enums.Genset_StatusCode_Error:
 			return CommonWords.error
 		default:
 			return ""

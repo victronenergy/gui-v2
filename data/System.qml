@@ -56,82 +56,82 @@ QtObject {
 
 	function systemStateToText(s) {
 		switch (s) {
-		case VenusOS.System_State_Off:
+		case Enums.System_State_Off:
 			return CommonWords.off
-		case VenusOS.System_State_LowPower:
+		case Enums.System_State_LowPower:
 			//% "AES mode"
 			return qsTrId("inverters_state_aes_mode")
-		case VenusOS.System_State_FaultCondition:
+		case Enums.System_State_FaultCondition:
 			//% "Fault condition"
 			return qsTrId("inverters_state_faultcondition")
-		case VenusOS.System_State_BulkCharging:
+		case Enums.System_State_BulkCharging:
 			//% "Bulk charging"
 			return qsTrId("inverters_state_bulkcharging")
-		case VenusOS.System_State_AbsorptionCharging:
+		case Enums.System_State_AbsorptionCharging:
 			//% "Absorption charging"
 			return qsTrId("inverters_state_absorptioncharging")
-		case VenusOS.System_State_FloatCharging:
+		case Enums.System_State_FloatCharging:
 			//% "Float charging"
 			return qsTrId("inverters_state_floatcharging")
-		case VenusOS.System_State_StorageMode:
+		case Enums.System_State_StorageMode:
 			//% "Storage mode"
 			return qsTrId("inverters_state_storagemode")
-		case VenusOS.System_State_EqualizationCharging:
+		case Enums.System_State_EqualizationCharging:
 			//% "Equalization charging"
 			return qsTrId("inverters_state_equalisationcharging")
-		case VenusOS.System_State_PassThrough:
+		case Enums.System_State_PassThrough:
 			//% "Pass-thru"
 			return qsTrId("inverters_state_passthru")
-		case VenusOS.System_State_Inverting:
+		case Enums.System_State_Inverting:
 			//% "Inverting"
 			return qsTrId("inverters_state_inverting")
-		case VenusOS.System_State_Assisting:
+		case Enums.System_State_Assisting:
 			//% "Assisting"
 			return qsTrId("inverters_state_assisting")
-		case VenusOS.System_State_PowerSupplyMode:
+		case Enums.System_State_PowerSupplyMode:
 			//% "Power supply mode"
 			return qsTrId("inverters_state_powersupplymode")
-		case VenusOS.System_State_Sustain:
+		case Enums.System_State_Sustain:
 			//% "Sustain"
 			return qsTrId("inverters_state_sustain")
 
-		case VenusOS.System_State_Wakeup:
+		case Enums.System_State_Wakeup:
 			//% "Wake up"
 			return qsTrId("inverters_state_wakeup")
-		case VenusOS.System_State_RepeatedAbsorption:
+		case Enums.System_State_RepeatedAbsorption:
 			//% "Repeated absorption"
 			return qsTrId("inverters_state_repeatedabsorption")
-		case VenusOS.System_State_AutoEqualize:
+		case Enums.System_State_AutoEqualize:
 			//% "Auto equalize"
 			return qsTrId("inverters_state_autoequalize")
-		case VenusOS.System_State_BatterySafe:
+		case Enums.System_State_BatterySafe:
 			//% "Battery safe"
 			return qsTrId("inverters_state_battery_safe")
-		case VenusOS.System_State_LoadDetect:
+		case Enums.System_State_LoadDetect:
 			//% "Load detect"
 			return qsTrId("inverters_state_loaddetect")
-		case VenusOS.System_State_Blocked:
+		case Enums.System_State_Blocked:
 			//% "Blocked"
 			return qsTrId("inverters_state_blocked")
-		case VenusOS.System_State_Test:
+		case Enums.System_State_Test:
 			//% "Test"
 			return qsTrId("inverters_state_test")
-		case VenusOS.System_State_ExternalControl:
+		case Enums.System_State_ExternalControl:
 			//% "External control"
 			return qsTrId("inverters_state_externalccontrol")
 
-		case VenusOS.System_State_Discharging:
+		case Enums.System_State_Discharging:
 			return CommonWords.discharging
-		case VenusOS.System_State_SystemSustain:
+		case Enums.System_State_SystemSustain:
 			//% "Sustain"
 			return qsTrId("inverters_state_system_sustain")
-		case VenusOS.System_State_Recharge:
+		case Enums.System_State_Recharge:
 			//% "Recharge"
 			return qsTrId("inverters_state_recharge")
-		case VenusOS.System_State_ScheduledRecharge:
+		case Enums.System_State_ScheduledRecharge:
 			//% "Scheduled recharge"
 			return qsTrId("inverters_state_scheduledrecharge")
-		case VenusOS.System_State_DynamicESS:
+		case Enums.System_State_DynamicESS:
 			//% "Dynamic ESS"
 			return qsTrId("inverters_state_dynamic_ess")
 		}

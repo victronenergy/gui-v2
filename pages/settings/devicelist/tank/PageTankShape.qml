@@ -15,11 +15,11 @@ Page {
 	property string bindPrefix
 
 	property var _editPointDialog
-	readonly property bool _canEditPoints: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
+	readonly property bool _canEditPoints: Global.systemSettings.canAccess(Enums.User_AccessType_Installer)
 
 	topRightButton: _canEditPoints && pointsListView.count < 10
-			? VenusOS.StatusBar_RightButton_Add
-			: VenusOS.StatusBar_RightButton_None
+			? Enums.StatusBar_RightButton_Add
+			: Enums.StatusBar_RightButton_None
 
 	Connections {
 		target: !!Global.pageManager ? Global.pageManager.statusBar : null

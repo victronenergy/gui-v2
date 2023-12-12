@@ -43,9 +43,9 @@ QtObject {
 
 			function onRelayFunctionChanged() {
 				const relayIndex = manualRelays.indexOf(target.serviceUid)
-				if (relayIndex < 0 && target.relayFunction === VenusOS.Relay_Function_Manual) {
+				if (relayIndex < 0 && target.relayFunction === Enums.Relay_Function_Manual) {
 					manualRelays.addDevice(relay)
-				} else if (relayIndex >= 0 && target.relayFunction !== VenusOS.Relay_Function_Manual) {
+				} else if (relayIndex >= 0 && target.relayFunction !== Enums.Relay_Function_Manual) {
 					manualRelays.removeDevice(target.serviceUid)
 				}
 			}

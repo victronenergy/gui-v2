@@ -10,6 +10,6 @@ DcInputWidget {
 	id: root
 
 	icon.source: "qrc:/images/alternator.svg"
-	type: VenusOS.OverviewWidget_Type_Alternator
+	type: Enums.OverviewWidget_Type_Alternator
 	detailUrl: "/pages/settings/devicelist/dc-in/PageAlternator.qml"
 }

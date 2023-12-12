@@ -463,6 +463,8 @@ qt_add_qml_module(VenusQMLModule
         src/backendconnection.cpp
         src/language.h
         src/language.cpp
+        src/enums.h
+        src/enums.cpp
 )
 target_link_libraries(VenusQMLModule PRIVATE Qt6::Gui Qt6::Mqtt)
 
@@ -749,8 +751,6 @@ set(VENUS_CPP_SOURCES
     src/clocktime.h
     src/clocktime.cpp
     src/logging.h
-    src/enums.h
-    src/enums.cpp
     src/notificationsmodel.h
     src/notificationsmodel.cpp
     src/uidhelper.h

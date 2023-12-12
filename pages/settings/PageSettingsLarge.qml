@@ -23,7 +23,7 @@ Page {
 				text: qsTrId("settings_large_signal_k")
 				dataSource: "com.victronenergy.platform/Services/SignalK/Enabled"
 				visible: dataValid
-				writeAccessLevel: VenusOS.User_AccessType_Installer
+				writeAccessLevel: Enums.User_AccessType_Installer
 			}
 
 			ListLabel {
@@ -39,12 +39,12 @@ Page {
 				text: qsTrId("settings_large_node_red")
 				dataSource: "com.victronenergy.platform/Services/NodeRed/Mode"
 				visible: dataValid
-				writeAccessLevel: VenusOS.User_AccessType_Installer
+				writeAccessLevel: Enums.User_AccessType_Installer
 				optionModel: [
-					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
-					{ display: CommonWords.enabled, value: VenusOS.NodeRed_Mode_Enabled },
+					{ display: CommonWords.disabled, value: Enums.NodeRed_Mode_Disabled },
+					{ display: CommonWords.enabled, value: Enums.NodeRed_Mode_Enabled },
 					//% "Enabled (safe mode)"
-					{ display: qsTrId("settings_large_enabled_safe_mode"), value: VenusOS.NodeRed_Mode_EnabledWithSafeMode },
+					{ display: qsTrId("settings_large_enabled_safe_mode"), value: Enums.NodeRed_Mode_EnabledWithSafeMode },
 				]
 			}
 

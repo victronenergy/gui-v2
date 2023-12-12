@@ -15,9 +15,9 @@ ObjectModel {
 		//% "Output"
 		text: qsTrId("alternator_wakespeed_output")
 		textModel: [
-			{ value: dcVoltage.value, unit: VenusOS.Units_Volt },
-			{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
-			{ value: dcPower.value, unit: VenusOS.Units_Watt },
+			{ value: dcVoltage.value, unit: Enums.Units_Volt },
+			{ value: dcCurrent.value, unit: Enums.Units_Amp },
+			{ value: dcPower.value, unit: Enums.Units_Watt },
 		]
 
 		DataPoint {
@@ -60,20 +60,20 @@ ObjectModel {
 		//% "Field drive"
 		text: qsTrId("alternator_wakespeed_field_drive")
 		dataSource: root.bindPrefix + "/FieldDrive"
-		unit: VenusOS.Units_Percentage
+		unit: Enums.Units_Percentage
 	}
 
 	ListQuantityItem {
 		text: CommonWords.speed
 		dataSource: root.bindPrefix + "/Speed"
-		unit: VenusOS.Units_RevolutionsPerMinute
+		unit: Enums.Units_RevolutionsPerMinute
 	}
 
 	ListQuantityItem {
 		//% "Engine speed"
 		text: qsTrId("alternator_wakespeed_engine_speed")
 		dataSource: root.bindPrefix + "/Engine/Speed"
-		unit: VenusOS.Units_RevolutionsPerMinute
+		unit: Enums.Units_RevolutionsPerMinute
 	}
 
 	ListNavigationItem {

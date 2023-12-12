@@ -37,9 +37,9 @@ Page {
 			url = "/pages/settings/devicelist/battery/PageBattery.qml"
 			params = { "battery" : device }
 			summary = [
-				Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.stateOfCharge),
-				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
-				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
+				Units.getCombinedDisplayText(Enums.Units_Percentage, device.stateOfCharge),
+				Units.getCombinedDisplayText(Enums.Units_Volt, device.voltage),
+				Units.getCombinedDisplayText(Enums.Units_Amp, device.current),
 			]
 
 		} else if (serviceType === "solarcharger") {
@@ -47,7 +47,7 @@ Page {
 			params = { "solarCharger" : device }
 			summary = [
 				device.errorCode <= 0
-						? Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power)
+						? Units.getCombinedDisplayText(Enums.Units_Watt, device.power)
 						  //% "Error: %1"
 						: qsTrId("devicelist_solarcharger_error").arg(Global.solarChargers.chargerErrorToText(device.errorCode))
 			]
@@ -61,12 +61,12 @@ Page {
 			url = "/pages/settings/devicelist/tank/PageTankSensor.qml"
 			params = { "title": device.name, "bindPrefix" : device.serviceUid }
 
-			if (device.status === VenusOS.Tank_Status_Ok) {
-				const levelText = Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.level)
+			if (device.status === Enums.Tank_Status_Ok) {
+				const levelText = Units.getCombinedDisplayText(Enums.Units_Percentage, device.level)
 				if (isNaN(device.temperature)) {
 					summary = [ levelText ]
 				} else {
-					const tankTemp = Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+					const tankTemp = Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Celsius
 							? device.temperature
 							: Units.celsiusToFahrenheit(device.temperature)
 					summary = [
@@ -85,7 +85,7 @@ Page {
 			url = "/pages/settings/devicelist/ac-in/PageAcIn.qml"
 			params = { "bindPrefix": device.serviceUid, "title": device.name }
 
-			const acInputPowerText = Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power)
+			const acInputPowerText = Units.getCombinedDisplayText(Enums.Units_Watt, device.power)
 			if (device.gensetStatusCode >= 0) {
 				summary = [ Global.acInputs.gensetStatusCodeToText(device.gensetStatusCode), acInputPowerText ]
 			} else {
@@ -95,13 +95,13 @@ Page {
 		} else if (serviceType === "motordrive") {
 			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
 			params = { "bindPrefix" : device.serviceUid }
-			summary = [ Units.getCombinedDisplayText(VenusOS.Units_RevolutionsPerMinute, device.motorRpm) ]
+			summary = [ Units.getCombinedDisplayText(Enums.Units_RevolutionsPerMinute, device.motorRpm) ]
 
 		} else if (serviceType === "inverter") {
 			summary = [ Units.getCombinedDisplayText(device.currentPhase.powerUnit, device.currentPhase.power) ]
 
 		} else if (serviceType === "temperature") {
-			const inputTemp = Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+			const inputTemp = Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Celsius
 					? device.temperature_celsius
 					: Units.celsiusToFahrenheit(device.temperature_celsius)
 			if (isNaN(device.humidity)) {
@@ -111,7 +111,7 @@ Page {
 			} else {
 				summary = [
 					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit.value, inputTemp),
-					Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.humidity),
+					Units.getCombinedDisplayText(Enums.Units_Percentage, device.humidity),
 				]
 			}
 
@@ -123,8 +123,8 @@ Page {
 			params = { "evCharger" : device }
 
 			const evChargerModeText = Global.evChargers.chargerModeToText(device.mode)
-			if (device.status === VenusOS.Evcs_Status_Charging) {
-				summary = [ evChargerModeText, Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power) ]
+			if (device.status === Enums.Evcs_Status_Charging) {
+				summary = [ evChargerModeText, Units.getCombinedDisplayText(Enums.Units_Watt, device.power) ]
 			} else {
 				summary = [ evChargerModeText, Global.evChargers.chargerStatusToText(device.status) ]
 			}
@@ -138,9 +138,9 @@ Page {
 					: "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 			params = { "title": device.name, "bindPrefix": device.serviceUid }
 			summary = [
-				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
-				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
-				Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
+				Units.getCombinedDisplayText(Enums.Units_Volt, device.voltage),
+				Units.getCombinedDisplayText(Enums.Units_Amp, device.current),
+				Units.getCombinedDisplayText(Enums.Units_Watt, device.power),
 			]
 
 		} else if (serviceType === "pulsemeter") {
@@ -154,7 +154,7 @@ Page {
 			params = { "bindPrefix": device.serviceUid }
 
 		} else if (serviceType === "meteo") {
-			summary = [ Units.getCombinedDisplayText(VenusOS.Units_WattsPerSquareMeter, device.irradiance) ]
+			summary = [ Units.getCombinedDisplayText(Enums.Units_WattsPerSquareMeter, device.irradiance) ]
 
 		} else {
 			return null

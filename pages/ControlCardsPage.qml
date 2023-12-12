@@ -14,7 +14,7 @@ Page {
 			? Theme.geometry.controlCard.minimumWidth
 			: Theme.geometry.controlCard.maximumWidth
 
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
+	topLeftButton: Enums.StatusBar_LeftButton_ControlsActive
 
 	ListView {
 		id: cardsView

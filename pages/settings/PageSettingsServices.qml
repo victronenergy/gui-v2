@@ -15,7 +15,7 @@ Page {
 				//% "Modbus TCP"
 				text: qsTrId("settings_services_modbus_tcp")
 				secondaryText: modbus.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				showAccessLevel: VenusOS.User_AccessType_Installer
+				showAccessLevel: Enums.User_AccessType_Installer
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", { title: text })
 				}
@@ -47,7 +47,7 @@ Page {
 				//% "Console on VE.Direct 1"
 				text: qsTrId("settings_services_console_on_vedirect1")
 				dataSource: "com.victronenergy.platform/Services/Console/Enabled"
-				showAccessLevel: VenusOS.User_AccessType_SuperUser
+				showAccessLevel: Enums.User_AccessType_SuperUser
 			}
 
 			Column {
@@ -80,7 +80,7 @@ Page {
 				//% "CAN-bus over TCP/IP (Debug)"
 				text: qsTrId("settings_services_canbus_over_tcpip_debug")
 				dataSource: "com.victronenergy.settings/Settings/Services/Socketcand"
-				showAccessLevel: VenusOS.User_AccessType_Service
+				showAccessLevel: Enums.User_AccessType_Service
 			}
 		}
 	}

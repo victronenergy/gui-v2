@@ -25,11 +25,11 @@ ControlCard {
 		}
 		delegate: SwitchControlValue {
 			label.text: model.device.name
-			button.checked: model.device.state === VenusOS.Relays_State_Active
+			button.checked: model.device.state === Enums.Relays_State_Active
 			onClicked: {
-				var newState = model.device.state === VenusOS.Relays_State_Active
-						? VenusOS.Relays_State_Inactive
-						: VenusOS.Relays_State_Active
+				var newState = model.device.state === Enums.Relays_State_Active
+						? Enums.Relays_State_Inactive
+						: Enums.Relays_State_Active
 				model.device.setState(newState)
 			}
 		}

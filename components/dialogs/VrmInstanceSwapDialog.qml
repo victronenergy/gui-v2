@@ -60,7 +60,7 @@ ModalWarningDialog {
 	}
 
 	function _done(errorOccurred) {
-		dialogDoneOptions = VenusOS.ModalDialog_DoneOptions_OkOnly
+		dialogDoneOptions = Enums.ModalDialog_DoneOptions_OkOnly
 		_errorOccurred = errorOccurred
 		_busy = false
 		_instanceATargetInstance = -1
@@ -72,14 +72,14 @@ ModalWarningDialog {
 	}
 
 	function _reset() {
-		dialogDoneOptions = VenusOS.ModalDialog_DoneOptions_OkAndCancel
+		dialogDoneOptions = Enums.ModalDialog_DoneOptions_OkAndCancel
 		_errorOccurred = false
 		_busy = false
 		_instanceATargetInstance = -1
 		_instanceBTargetInstance = -1
 	}
 
-	title: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel
+	title: dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkAndCancel
 		  //% "Already in use"
 		? qsTrId("deviceinstanceswap_already_assigned")
 		: _errorOccurred
@@ -89,7 +89,7 @@ ModalWarningDialog {
 			: qsTrId("deviceinstanceswap_swap_completed")
 
 	description: {
-		if (dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel) {
+		if (dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkAndCancel) {
 			if (_busy) {
 				//% "Swapping device instances..."
 				return qsTrId("deviceinstanceswap_busy")
@@ -118,16 +118,16 @@ ModalWarningDialog {
 		}
 	}
 
-	acceptText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel
+	acceptText: dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkAndCancel
 		  //: Confirm that the two devices' instance number should be swapped.
 		  //% "Swap"
 		? qsTrId("deviceinstanceswap_swap")
 		: CommonWords.ok
 
-	icon.source: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel || _errorOccurred
+	icon.source: dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkAndCancel || _errorOccurred
 				 ? "qrc:/images/icon_alarm_48.svg"
 				 : "qrc:/images/icon_checkmark_48.svg"
-	icon.color: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel || _errorOccurred
+	icon.color: dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkAndCancel || _errorOccurred
 				? Theme.color.red
 				: Theme.color.green
 
@@ -136,7 +136,7 @@ ModalWarningDialog {
 	footer.opacity: _busy ? 0 : 1
 
 	tryAccept: function() {
-		if (dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly) {
+		if (dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkOnly) {
 			return true
 		} else {
 			_busy = true

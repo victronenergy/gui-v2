@@ -63,7 +63,7 @@ Flickable {
 				animationEnabled: root.animationEnabled
 				horizontalSize: {
 					if (levelsRepeater.count === 0) {
-						return VenusOS.EnvironmentGaugePanel_Size_Expanded
+						return Enums.EnvironmentGaugePanel_Size_Expanded
 					}
 					// If available area is not big enough to fit all the panels at their max width,
 					// use a compact (reduced) width for two-gauge panels.
@@ -77,15 +77,15 @@ Flickable {
 					}
 					const requiredAreaWidth = panelWidths + ((levelsRepeater.count-1) * Theme.geometry.levelsPage.environment.minimumSpacing)
 					return requiredAreaWidth > availableAreaWidth
-							? VenusOS.EnvironmentGaugePanel_Size_Compact
-							: VenusOS.EnvironmentGaugePanel_Size_Expanded
+							? Enums.EnvironmentGaugePanel_Size_Compact
+							: Enums.EnvironmentGaugePanel_Size_Expanded
 				}
 
 				verticalSize: (!!Global.pageManager && Global.pageManager.expandLayout)
-						? VenusOS.EnvironmentGaugePanel_Size_Expanded
-						: VenusOS.EnvironmentGaugePanel_Size_Compact
+						? Enums.EnvironmentGaugePanel_Size_Expanded
+						: Enums.EnvironmentGaugePanel_Size_Compact
 				title: model.device.name
-				temperature: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit
+				temperature: Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Fahrenheit
 						? Units.celsiusToFahrenheit(model.device.temperature_celsius)
 						: model.device.temperature_celsius
 				humidity: model.device.humidity

@@ -24,7 +24,7 @@ Page {
 				//% "Capacity"
 				text: qsTrId("devicelist_tanksetup_capacity")
 				suffix: _quantityInfo.unit
-				stepSize: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_CubicMeter
+				stepSize: Global.systemSettings.volumeUnit.value === Enums.Units_Volume_CubicMeter
 						  ? 5   // Cubic meters (this becomes 0.005 when ListSpinBox adjusts it for decimals)
 						  : 1   // Liters, Gallons
 				decimals: Units.defaultUnitPrecision(Global.systemSettings.volumeUnit.value)
@@ -34,7 +34,7 @@ Page {
 					 : Units.convertVolumeForUnit(capacity.value, Global.systemSettings.volumeUnit.value)
 
 				onSelectorAccepted: function(newValue) {
-					capacity.setValue(Units.convertVolumeForUnit(newValue, VenusOS.Units_Volume_CubicMeter))
+					capacity.setValue(Units.convertVolumeForUnit(newValue, Enums.Units_Volume_CubicMeter))
 				}
 
 				DataPoint {

@@ -19,11 +19,11 @@ Page {
 
 				optionModel: [
 					//% "Power (Watts)"
-					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Watt },
+					{ display: qsTrId("settings_units_watts"), value: Enums.Units_Watt },
 					//% "Current (Amps)"
-					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Amp },
+					{ display: qsTrId("settings_units_amps"), value: Enums.Units_Amp },
 				]
-				currentIndex: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp ? 1 : 0
+				currentIndex: Global.systemSettings.electricalQuantity.value === Enums.Units_Amp ? 1 : 0
 
 				onOptionClicked: function(index) {
 					Global.systemSettings.electricalQuantity.setValue(optionModel[index].value)
@@ -34,11 +34,11 @@ Page {
 				text: CommonWords.temperature
 				optionModel: [
 					//% "Celsius"
-					{ display: qsTrId("settings_units_celsius"), value: VenusOS.Units_Temperature_Celsius },
+					{ display: qsTrId("settings_units_celsius"), value: Enums.Units_Temperature_Celsius },
 					//% "Fahrenheit"
-					{ display: qsTrId("settings_units_fahrenheit"), value: VenusOS.Units_Temperature_Fahrenheit },
+					{ display: qsTrId("settings_units_fahrenheit"), value: Enums.Units_Temperature_Fahrenheit },
 				]
-				currentIndex: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
+				currentIndex: Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Fahrenheit ? 1 : 0
 
 				onOptionClicked: function(index) {
 					Global.systemSettings.temperatureUnit.setValue(optionModel[index].value)

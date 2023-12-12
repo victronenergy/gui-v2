@@ -40,7 +40,7 @@ ObjectModel {
 			} else if (index === index_on) {
 				if (autoStart.value === 0) {
 					//% "AutoStart functionality is currently disabled, enable it on the genset panel in order to start the genset from this menu."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("ac-in-genset_autostart_functionality_disabled"), 7000)
+					Global.showToastNotification(Enums.Notification_Info, qsTrId("ac-in-genset_autostart_functionality_disabled"), 7000)
 					return
 				}
 				autoStartStopItem.setValue(0)
@@ -108,9 +108,9 @@ ObjectModel {
 					  : CommonWords.ac_phase_x.arg(model.index + 1)
 
 				textModel: [
-					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt },
-					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
-					{ value: phasePower.value, unit: VenusOS.Units_Watt },
+					{ value: phaseVoltage.value, unit: Enums.Units_Volt },
+					{ value: phaseCurrent.value, unit: Enums.Units_Amp },
+					{ value: phasePower.value, unit: Enums.Units_Watt },
 				]
 
 				DataPoint {
@@ -218,7 +218,7 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_starter_battery_voltage")
 							dataSource: root.bindPrefix + "/StarterVoltage"
 							visible: defaultVisible && dataValid
-							unit: VenusOS.Units_Volt
+							unit: Enums.Units_Volt
 						}
 
 						ListTextItem {

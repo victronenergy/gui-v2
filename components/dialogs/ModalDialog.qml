@@ -11,19 +11,19 @@ T.Dialog {
 	id: root
 
 	property string secondaryTitle
-	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndClose
+	property int dialogDoneOptions: Enums.ModalDialog_DoneOptions_SetAndClose
 	property alias canAccept: doneButton.enabled
 	property var tryAccept  // optional function: called when accept is attempted, return true if can accept.
 
 	readonly property alias acceptButton: doneButton
-	property string acceptText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndClose
+	property string acceptText: dialogDoneOptions === Enums.ModalDialog_DoneOptions_SetAndClose
 			  //% "Set"
 			? qsTrId("controlcard_set")
 			: CommonWords.ok
 
-	property string rejectText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly
+	property string rejectText: dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkOnly
 			? ""
-			: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel
+			: dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkAndCancel
 				//% "Cancel"
 				? qsTrId("controlcard_cancel")
 				//% "Close"
@@ -89,7 +89,7 @@ T.Dialog {
 	}
 
 	footer: Item {
-		visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_NoOptions
+		visible: root.dialogDoneOptions !== Enums.ModalDialog_DoneOptions_NoOptions
 		height: visible ? Theme.geometry.modalDialog.footer.height : 0
 		SeparatorBar {
 			id: footerTopSeparator
@@ -102,7 +102,7 @@ T.Dialog {
 			}
 		}
 		Button {
-			visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
+			visible: root.dialogDoneOptions !== Enums.ModalDialog_DoneOptions_OkOnly
 			anchors {
 				left: parent.left
 				right: footerMidSeparator.left
@@ -114,10 +114,10 @@ T.Dialog {
 			font.pixelSize: Theme.font.size.body2
 			color: Theme.color.font.primary
 			spacing: 0
-			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
-			text: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly ?
+			enabled: root.dialogDoneOptions !== Enums.ModalDialog_DoneOptions_OkOnly
+			text: root.dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkOnly ?
 					""
-				: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel ?
+				: root.dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkAndCancel ?
 					//% "Cancel"
 					qsTrId("controlcard_cancel")
 				: /* SetAndClose */
@@ -127,7 +127,7 @@ T.Dialog {
 		}
 		SeparatorBar {
 			id: footerMidSeparator
-			visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
+			visible: root.dialogDoneOptions !== Enums.ModalDialog_DoneOptions_OkOnly
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
@@ -139,7 +139,7 @@ T.Dialog {
 		Button {
 			id: doneButton
 			anchors {
-				left: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly ? parent.left : footerMidSeparator.right
+				left: root.dialogDoneOptions === Enums.ModalDialog_DoneOptions_OkOnly ? parent.left : footerMidSeparator.right
 				right: parent.right
 				rightMargin: root.background.border.width
 				top: footerTopSeparator.bottom

@@ -43,7 +43,7 @@ Page {
 
 						height: nameLabel.height
 						value: modelData.stateOfCharge
-						unit: VenusOS.Units_Percentage
+						unit: Enums.Units_Percentage
 						font.pixelSize: Theme.font.size.body2
 					}
 				}
@@ -60,9 +60,9 @@ Page {
 
 						QuantityRepeater {
 							model: [
-								{ value: modelData.voltage, unit: VenusOS.Units_Volt },
-								{ value: modelData.current, unit: VenusOS.Units_Amp },
-								{ value: modelData.power, unit: VenusOS.Units_Watt },
+								{ value: modelData.voltage, unit: Enums.Units_Volt },
+								{ value: modelData.current, unit: Enums.Units_Amp },
+								{ value: modelData.power, unit: Enums.Units_Watt },
 								{
 									value: Global.systemSettings.convertTemperature(modelData.temperature_celsius),
 									unit: Global.systemSettings.temperatureUnit.value
@@ -79,8 +79,8 @@ Page {
 						color: Theme.color.listItem.secondaryText
 						text: {
 							const modeText = Global.batteries.modeToText(modelData.mode)
-							if (modelData.mode === VenusOS.Battery_Mode_Discharging) {
-								return modeText + " - " + Global.batteries.timeToGoText(modelData, VenusOS.Battery_TimeToGo_LongFormat)
+							if (modelData.mode === Enums.Battery_Mode_Discharging) {
+								return modeText + " - " + Global.batteries.timeToGoText(modelData, Enums.Battery_TimeToGo_LongFormat)
 							}
 							return modeText
 						}

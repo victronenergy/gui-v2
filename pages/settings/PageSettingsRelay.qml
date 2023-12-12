@@ -25,14 +25,14 @@ Page {
 				dataSource: "com.victronenergy.settings/Settings/Relay/Function"
 				optionModel: [
 					//% "Alarm relay"
-					{ display: qsTrId("settings_relay_alarm_relay"), value: VenusOS.Relay_Function_Alarm },
+					{ display: qsTrId("settings_relay_alarm_relay"), value: Enums.Relay_Function_Alarm },
 					//% "Generator start/stop"
-					{ display: qsTrId("settings_relay_generator_start_stop"), value: VenusOS.Relay_Function_GeneratorStartStop },
+					{ display: qsTrId("settings_relay_generator_start_stop"), value: Enums.Relay_Function_GeneratorStartStop },
 					//% "Tank pump"
-					{ display: qsTrId("settings_relay_tank_pump"), value: VenusOS.Relay_Function_Tank_Pump },
+					{ display: qsTrId("settings_relay_tank_pump"), value: Enums.Relay_Function_Tank_Pump },
 					//% "Manual"
-					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
-					{ display: CommonWords.temperature, value: VenusOS.Relay_Function_Temperature },
+					{ display: qsTrId("settings_relay_manual"), value: Enums.Relay_Function_Manual },
+					{ display: CommonWords.temperature, value: Enums.Relay_Function_Temperature },
 				]
 			}
 
@@ -42,7 +42,7 @@ Page {
 				//% "Alarm relay polarity"
 				text: qsTrId("settings_relay_alarm_polarity")
 				dataSource: "com.victronenergy.settings/Settings/Relay/Polarity"
-				visible: relayFunction.currentValue === VenusOS.Relay_Function_Alarm
+				visible: relayFunction.currentValue === Enums.Relay_Function_Alarm
 				optionModel: [
 					//% "Normally open"
 					{ display: qsTrId("settings_relay_normally_open"), value: 0 },
@@ -57,13 +57,13 @@ Page {
 				//% "Alarm relay on"
 				text: qsTrId("settings_relay_alarm_relay_on")
 				updateOnClick: false
-				checked: root._relay0Object && _relay0Object.state === VenusOS.Relays_State_Active
+				checked: root._relay0Object && _relay0Object.state === Enums.Relays_State_Active
 
-				visible: relayFunction.currentValue === VenusOS.Relay_Function_Alarm
+				visible: relayFunction.currentValue === Enums.Relay_Function_Alarm
 				onClicked: {
 					// TODO in gui-v1 the relay state change considers relay polarity and alarm status.
 					// In gui-v2 we will connect to venus-platform or some backend to do this.
-					const newState = checked ? VenusOS.Relays_State_Inactive : VenusOS.Relays_State_Active
+					const newState = checked ? Enums.Relays_State_Inactive : Enums.Relays_State_Active
 					root._relay0Object.setState(newState)
 				}
 			}
@@ -77,7 +77,7 @@ Page {
 					  //% "Relay on"
 					: qsTrId("settings_relay_on")
 				dataSource: "com.victronenergy.system/Relay/0/State"
-				visible: relayFunction.currentValue === VenusOS.Relay_Function_Manual
+				visible: relayFunction.currentValue === Enums.Relay_Function_Manual
 			}
 
 			ListRadioButtonGroup {
@@ -89,8 +89,8 @@ Page {
 				visible: relay1State.valid
 				optionModel: [
 					//% "Manual"
-					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
-					{ display: CommonWords.temperature, value: VenusOS.Relay_Function_Temperature },
+					{ display: qsTrId("settings_relay_manual"), value: Enums.Relay_Function_Manual },
+					{ display: CommonWords.temperature, value: Enums.Relay_Function_Temperature },
 				]
 			}
 
@@ -100,14 +100,14 @@ Page {
 				//% "Relay 2 on"
 				text: qsTrId("settings_relay_relay2on")
 				dataSource: "com.victronenergy.system/Relay/1/State"
-				visible: relay1State.valid && relay1Function.currentValue === VenusOS.Relay_Function_Manual
+				visible: relay1State.valid && relay1Function.currentValue === Enums.Relay_Function_Manual
 			}
 
 			ListNavigationItem {
 				//% "Temperature control rules"
 				text: qsTrId("settings_relay_temp_control_rules")
-				visible: relayFunction.currentValue === VenusOS.Relay_Function_Temperature
-					|| relay1Function.currentValue === VenusOS.Relay_Function_Temperature
+				visible: relayFunction.currentValue === Enums.Relay_Function_Temperature
+					|| relay1Function.currentValue === Enums.Relay_Function_Temperature
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsRelayTempSensors.qml", { title: text })
 				}

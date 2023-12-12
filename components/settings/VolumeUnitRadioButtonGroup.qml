@@ -13,19 +13,19 @@ ListRadioButtonGroup {
 
 	optionModel: [
 		//% "Cubic meters"
-		{ display: qsTrId("components_volumeunit_cubic_meters"), value: VenusOS.Units_Volume_CubicMeter },
+		{ display: qsTrId("components_volumeunit_cubic_meters"), value: Enums.Units_Volume_CubicMeter },
 		//% "Liters"
-		{ display: qsTrId("components_volumeunit_liters"), value: VenusOS.Units_Volume_Liter },
+		{ display: qsTrId("components_volumeunit_liters"), value: Enums.Units_Volume_Liter },
 		//% "Gallons (US)"
-		{ display: qsTrId("components_volumeunit_gallons_us"), value: VenusOS.Units_Volume_GallonUS },
+		{ display: qsTrId("components_volumeunit_gallons_us"), value: Enums.Units_Volume_GallonUS },
 		//% "Gallons (Imperial)"
-		{ display: qsTrId("components_volumeunit_gallons_imperial"), value: VenusOS.Units_Volume_GallonImperial },
+		{ display: qsTrId("components_volumeunit_gallons_imperial"), value: Enums.Units_Volume_GallonImperial },
 	]
-	currentIndex: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_Liter
+	currentIndex: Global.systemSettings.volumeUnit.value === Enums.Units_Volume_Liter
 			? 1
-			: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_GallonUS
+			: Global.systemSettings.volumeUnit.value === Enums.Units_Volume_GallonUS
 			  ? 2
-			  : Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_GallonImperial
+			  : Global.systemSettings.volumeUnit.value === Enums.Units_Volume_GallonImperial
 				? 3
 				: 0
 

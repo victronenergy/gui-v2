@@ -23,10 +23,10 @@ Item {
 		width: Theme.geometry.generatorIconLabel.icon.width
 		height: Theme.geometry.generatorIconLabel.icon.width
 		source: {
-			if (!root.generator || root.generator.state === VenusOS.Generators_RunningBy_NotRunning) {
+			if (!root.generator || root.generator.state === Enums.Generators_RunningBy_NotRunning) {
 				return ""
 			}
-			if (root.generator.runningBy === VenusOS.Generators_RunningBy_Manual) {
+			if (root.generator.runningBy === Enums.Generators_RunningBy_Manual) {
 				if (root.generator.manualStartTimer > 0) {
 					return "qrc:/images/icon_manualstart_timer_24.svg"
 				} else {
@@ -42,7 +42,7 @@ Item {
 
 		anchors.left: icon.right
 		text: root.generator
-			  ? root.generator.state !== VenusOS.Generators_State_Running
+			  ? root.generator.state !== Enums.Generators_State_Running
 				? "--:--"
 				: Utils.formatAsHHMMSS(root.generator.runtime)
 			  : ""

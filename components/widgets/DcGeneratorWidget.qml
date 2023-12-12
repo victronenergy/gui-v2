@@ -10,5 +10,5 @@ DcInputWidget {
 	id: root
 
 	icon.source: "qrc:/images/generator.svg"
-	type: VenusOS.OverviewWidget_Type_DcGenerator
+	type: Enums.OverviewWidget_Type_DcGenerator
 }

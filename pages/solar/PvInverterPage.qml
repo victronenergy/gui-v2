@@ -28,27 +28,27 @@ Page {
 						{
 							title: root.pvInverter.statusCode >= 0 ? CommonWords.status : "",
 							text: Global.pvInverters.statusCodeToText(root.pvInverter.statusCode),
-							unit: VenusOS.Units_None,
+							unit: Enums.Units_None,
 						},
 						{
 							title: CommonWords.energy,
 							value: root.pvInverter.energy,
-							unit: VenusOS.Units_Energy_KiloWattHour
+							unit: Enums.Units_Energy_KiloWattHour
 						},
 						{
 							title: CommonWords.voltage,
 							value: root.pvInverter.voltage,
-							unit: VenusOS.Units_Volt
+							unit: Enums.Units_Volt
 						},
 						{
 							title: CommonWords.current_amps,
 							value: root.pvInverter.current,
-							unit: VenusOS.Units_Amp
+							unit: Enums.Units_Amp
 						},
 						{
 							title: CommonWords.power_watts,
 							value: root.pvInverter.power,
-							unit: VenusOS.Units_Watt
+							unit: Enums.Units_Watt
 						},
 					]
 				}
@@ -65,11 +65,11 @@ Page {
 
 					rowCount: root.pvInverter.phases.count
 					units: [
-						{ title: CommonWords.phase, unit: VenusOS.Units_None },
-						{ title: CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
-						{ title: CommonWords.voltage, unit: VenusOS.Units_Volt },
-						{ title: CommonWords.current_amps, unit: VenusOS.Units_Amp },
-						{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
+						{ title: CommonWords.phase, unit: Enums.Units_None },
+						{ title: CommonWords.energy, unit: Enums.Units_Energy_KiloWattHour },
+						{ title: CommonWords.voltage, unit: Enums.Units_Volt },
+						{ title: CommonWords.current_amps, unit: Enums.Units_Amp },
+						{ title: CommonWords.power_watts, unit: Enums.Units_Watt }
 					]
 					valueForModelIndex: function(phaseIndex, column) {
 						const phase = root.pvInverter.phases.get(phaseIndex)

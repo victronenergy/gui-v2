@@ -61,60 +61,60 @@ QtObject {
 
 	function chargerStatusToText(status) {
 		switch (status) {
-		case VenusOS.Evcs_Status_Disconnected:
+		case Enums.Evcs_Status_Disconnected:
 			//% "Unplugged"
 			return qsTrId("evchargers_status_disconnected")
-		case VenusOS.Evcs_Status_Connected:
+		case Enums.Evcs_Status_Connected:
 			//% "Connected"
 			return qsTrId("evchargers_status_connected")
-		case VenusOS.Evcs_Status_Charging:
+		case Enums.Evcs_Status_Charging:
 			return CommonWords.charging
-		case VenusOS.Evcs_Status_Charged:
+		case Enums.Evcs_Status_Charged:
 			//% "Charged"
 			return qsTrId("evchargers_status_charged")
-		case VenusOS.Evcs_Status_WaitingForSun:
+		case Enums.Evcs_Status_WaitingForSun:
 			//% "Waiting for sun"
 			return qsTrId("evchargers_status_waiting_for_sun")
-		case VenusOS.Evcs_Status_WaitingForRFID:
+		case Enums.Evcs_Status_WaitingForRFID:
 			//% "Waiting for RFID"
 			return qsTrId("evchargers_status_waiting_for_rfid")
-		case VenusOS.Evcs_Status_WaitingForStart:
+		case Enums.Evcs_Status_WaitingForStart:
 			//% "Waiting for start"
 			return qsTrId("evchargers_status_waiting_for_start")
-		case VenusOS.Evcs_Status_LowStateOfCharge:
+		case Enums.Evcs_Status_LowStateOfCharge:
 			//% "Low state of charge"
 			return qsTrId("evchargers_status_low_status_of_charge")
-		case VenusOS.Evcs_Status_GroundTestError:
+		case Enums.Evcs_Status_GroundTestError:
 			//% "Ground test error"
 			return qsTrId("evchargers_status_ground_test_error")
-		case VenusOS.Evcs_Status_WeldedContactsError:
+		case Enums.Evcs_Status_WeldedContactsError:
 			//% "Welded contacts error"
 			return qsTrId("evchargers_status_welded_contacts_error")
-		case VenusOS.Evcs_Status_CpInputTestError:
+		case Enums.Evcs_Status_CpInputTestError:
 			//% "CP input test error"
 			return qsTrId("evchargers_status_cp_input_test_error")
-		case VenusOS.Evcs_Status_ResidualCurrentDetected:
+		case Enums.Evcs_Status_ResidualCurrentDetected:
 			//% "Residual current detected"
 			return qsTrId("evchargers_status_residual_current_detected")
-		case VenusOS.Evcs_Status_UndervoltageDetected:
+		case Enums.Evcs_Status_UndervoltageDetected:
 			//% "Undervoltage detected"
 			return qsTrId("evchargers_status_undervoltage_detected")
-		case VenusOS.Evcs_Status_OvervoltageDetected:
+		case Enums.Evcs_Status_OvervoltageDetected:
 			//% "Overvoltage detected"
 			return qsTrId("evchargers_status_overvoltage_detected")
-		case VenusOS.Evcs_Status_OverheatingDetected:
+		case Enums.Evcs_Status_OverheatingDetected:
 			//% "Overheating detected"
 			return qsTrId("evchargers_status_overheating_detected")
-		case VenusOS.Evcs_Status_ChargingLimit:
+		case Enums.Evcs_Status_ChargingLimit:
 			//% "Charging limit"
 			return qsTrId("evchargers_status_charging_limit")
-		case VenusOS.Evcs_status_StartCharging:
+		case Enums.Evcs_status_StartCharging:
 			//% "Start charging"
 			return qsTrId("evchargers_status_start_charging")
-		case VenusOS.Evcs_status_SwitchingToThreePhase:
+		case Enums.Evcs_status_SwitchingToThreePhase:
 			//% "Switching to 3-phase"
 			return qsTrId("evchargers_status_switching_to_three_phase")
-		case VenusOS.Evcs_status_SwitchingToSinglePhase:
+		case Enums.Evcs_status_SwitchingToSinglePhase:
 			//% "Switching to single phase"
 			return qsTrId("evchargers_status_switching_to_single_phase")
 		default:
@@ -124,11 +124,11 @@ QtObject {
 
 	function chargerModeToText(mode) {
 		switch (mode) {
-		case VenusOS.Evcs_Mode_Manual:
+		case Enums.Evcs_Mode_Manual:
 			return CommonWords.manual
-		case VenusOS.Evcs_Mode_Auto:
+		case Enums.Evcs_Mode_Auto:
 			return CommonWords.auto
-		case VenusOS.Evcs_Mode_Scheduled:
+		case Enums.Evcs_Mode_Scheduled:
 			//% "Scheduled"
 			return qsTrId("evchargers_mode_scheduled")
 		default:

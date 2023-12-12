@@ -66,11 +66,11 @@ Page {
 						// TODO confirm whether we need to show "icon-restart-active" instead of the normal notification icon
 						//: %1 = backup version
 						//% "Rebooting to %1"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_rebooting_to").arg(backupVersionItem.value), 50000)
+						Global.showToastNotification(Enums.Notification_Info, qsTrId("settings_firmware_rebooting_to").arg(backupVersionItem.value), 50000)
 						activateBackup.setValue(1)
 					} else {
 						//% "Switching firmware version is not possible when auto update is set to \"Check and update\". Set auto update to \"Disabled\" or \"Check only\" to enable this option."
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_switching_not_possible"), 10000)
+						Global.showToastNotification(Enums.Notification_Info, qsTrId("settings_firmware_switching_not_possible"), 10000)
 					}
 				}
 			}

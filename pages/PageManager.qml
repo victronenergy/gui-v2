@@ -21,23 +21,23 @@ QtObject {
 	property var navBar
 	property var statusBar
 
-	property int interactivity: VenusOS.PageManager_InteractionMode_Interactive
+	property int interactivity: Enums.PageManager_InteractionMode_Interactive
 
 	// True when the UI layout on a page should be resizing before/after idle/interactive mode changes.
-	readonly property bool animatingIdleResize: root.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
-			|| root.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
+	readonly property bool animatingIdleResize: root.interactivity === Enums.PageManager_InteractionMode_BeginFullScreen
+			|| root.interactivity === Enums.PageManager_InteractionMode_EndFullScreen
 
-	readonly property bool expandLayout: root.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
-			|| root.interactivity === VenusOS.PageManager_InteractionMode_Idle
+	readonly property bool expandLayout: root.interactivity === Enums.PageManager_InteractionMode_BeginFullScreen
+			|| root.interactivity === Enums.PageManager_InteractionMode_Idle
 
 	property Timer idleModeTimer: Timer {
 		running: !Global.splashScreenVisible
 			&& root.currentPage !== null && root.currentPage !== undefined
 			&& root.currentPage.fullScreenWhenIdle
-			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			&& root.interactivity === Enums.PageManager_InteractionMode_Interactive
 			&& BackendConnection.applicationVisible
 		interval: Theme.animation.page.idleResize.timeout
-		onTriggered: root.interactivity = VenusOS.PageManager_InteractionMode_EnterIdleMode
+		onTriggered: root.interactivity = Enums.PageManager_InteractionMode_EnterIdleMode
 	}
 
 	function pushPage(obj, properties) {

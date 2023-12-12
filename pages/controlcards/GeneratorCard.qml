@@ -19,9 +19,9 @@ ControlCard {
 
 	status.text: {
 		switch (root.generator.state) {
-		case VenusOS.Generators_State_Running:
+		case Enums.Generators_State_Running:
 			return CommonWords.running_status
-		case VenusOS.Generators_State_Error:
+		case Enums.Generators_State_Error:
 			//% "ERROR"
 			return qsTrId("controlcard_generator_status_error")
 		default:
@@ -51,14 +51,14 @@ ControlCard {
 			leftMargin: Theme.geometry.controlCard.contentMargins
 		}
 
-		color: root.generator.state === VenusOS.Generators_State_Error ? Theme.color.critical
+		color: root.generator.state === Enums.Generators_State_Error ? Theme.color.critical
 			: Theme.color.font.secondary
-		text: root.generator.state !== VenusOS.Generators_State_Running ?
+		text: root.generator.state !== Enums.Generators_State_Running ?
 				"" // not running, empty substatus.
-			: root.generator.runningBy === VenusOS.Generators_RunningBy_Manual ?
+			: root.generator.runningBy === Enums.Generators_RunningBy_Manual ?
 				//% "Manual started"
 				qsTrId("controlcard_generator_substatus_manualstarted")
-			: root.generator.runningBy === VenusOS.Generators_RunningBy_TestRun ?
+			: root.generator.runningBy === Enums.Generators_RunningBy_TestRun ?
 				//% "Test run"
 				qsTrId("controlcard_generator_substatus_testrun")
 			: ( //% "Autostarted"
@@ -67,21 +67,21 @@ ControlCard {
 
 		function substatusForRunningBy(runningBy) {
 			switch (root.generator.runningBy) {
-			case VenusOS.Generators_RunningBy_LossOfCommunication:
+			case Enums.Generators_RunningBy_LossOfCommunication:
 				//% "Loss of comm"
 				return qsTrId("controlcard_generator_substatus_lossofcomm")
-			case VenusOS.Generators_RunningBy_Soc:
+			case Enums.Generators_RunningBy_Soc:
 				return CommonWords.state_of_charge
-			case VenusOS.Generators_RunningBy_Acload:
+			case Enums.Generators_RunningBy_Acload:
 				return CommonWords.ac_load
-			case VenusOS.Generators_RunningBy_BatteryCurrent:
+			case Enums.Generators_RunningBy_BatteryCurrent:
 				return CommonWords.battery_current
-			case VenusOS.Generators_RunningBy_BatteryVoltage:
+			case Enums.Generators_RunningBy_BatteryVoltage:
 				return CommonWords.battery_voltage
-			case VenusOS.Generators_RunningBy_InverterHighTemp:
+			case Enums.Generators_RunningBy_InverterHighTemp:
 				//% "Inverter high temp"
 				return qsTrId("controlcard_generator_substatus_inverterhigh_temp")
-			case VenusOS.Generators_RunningBy_InverterOverload:
+			case Enums.Generators_RunningBy_InverterOverload:
 				return CommonWords.inverter_overload
 			default: return "" // unknown substatus.
 			}
@@ -105,7 +105,7 @@ ControlCard {
 		separator.visible: false
 
 		// TODO should also disable if user is not allowed to change autostart property
-		enabled: root.generator.state !== VenusOS.Generators_State_Running
+		enabled: root.generator.state !== Enums.Generators_State_Running
 
 		onClicked: {
 			if (root.generator.autoStart) {
@@ -123,7 +123,7 @@ ControlCard {
 			id: confirmationDialogComponent
 
 			ModalWarningDialog {
-				dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+				dialogDoneOptions: Enums.ModalDialog_DoneOptions_OkAndCancel
 
 				//% "Disable autostart?"
 				title: qsTrId("controlcard_generator_disableautostartdialog_title")
@@ -168,7 +168,7 @@ ControlCard {
 		height: Theme.geometry.generatorCard.startButton.height
 		radius: Theme.geometry.button.radius
 		flat: true
-		enabled: root.generator.state !== VenusOS.Generators_State_Error
+		enabled: root.generator.state !== Enums.Generators_State_Error
 		color: enabled ? Theme.color.font.primary : Theme.color.font.disabled
 		backgroundColor: checked ? Theme.color.dimRed : Theme.color.dimGreen
 
@@ -176,8 +176,8 @@ ControlCard {
 		// state at the time dialog was opened. This avoid changing the color of the button
 		// when it is visible below the open start/stop dialogs.
 		checked: _generatorStateBeforeDialogOpen < 0
-				 ? root.generator.state === VenusOS.Generators_State_Running
-				 : _generatorStateBeforeDialogOpen === VenusOS.Generators_State_Running
+				 ? root.generator.state === Enums.Generators_State_Running
+				 : _generatorStateBeforeDialogOpen === Enums.Generators_State_Running
 
 		text: checked
 				//% "Manual Stop"
@@ -188,7 +188,7 @@ ControlCard {
 
 		onClicked: {
 			_generatorStateBeforeDialogOpen = root.generator.state
-			if (root.generator.state === VenusOS.Generators_State_Running) {
+			if (root.generator.state === Enums.Generators_State_Running) {
 				if (!_stopDialog) {
 					_stopDialog = generatorStopDialogComponent.createObject(Global.dialogLayer)
 				}

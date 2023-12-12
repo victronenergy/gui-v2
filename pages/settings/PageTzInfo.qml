@@ -76,7 +76,7 @@ Page {
 				//% "Date/Time local"
 				text: qsTrId("settings_tz_date_time_local")
 				button.text: ClockTime.currentTimeText
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				enabled: Global.systemSettings.time.valid
 
 				onClicked: {
@@ -88,7 +88,7 @@ Page {
 				//% "Time zone"
 				text: qsTrId("settings_tz_time_zone")
 				secondaryText: root._findTimeZoneName(tzData.region, tzData.city)
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 
 				onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: text })
 
@@ -125,7 +125,7 @@ Page {
 
 							header: ListSwitch {
 								text: "UTC"
-								writeAccessLevel: VenusOS.User_AccessType_User
+								writeAccessLevel: Enums.User_AccessType_User
 								checked: tzData.city === text
 								updateOnClick: false
 								onClicked: {
@@ -148,7 +148,7 @@ Page {
 								text: modelData.name
 								optionModel: modelData
 								secondaryText: ""
-								writeAccessLevel: VenusOS.User_AccessType_User
+								writeAccessLevel: Enums.User_AccessType_User
 								updateOnClick: false
 								popDestination: root
 								currentIndex: {

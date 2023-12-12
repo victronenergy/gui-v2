@@ -31,23 +31,23 @@ Page {
 						{
 							title: "",
 							text: CommonWords.total,
-							unit: VenusOS.Units_None
+							unit: Enums.Units_None
 						},
 						{
 							title: CommonWords.power_watts,
 							value: Global.evChargers.power,
-							unit: VenusOS.Units_Watt
+							unit: Enums.Units_Watt
 						},
 						{
 							title: CommonWords.energy,
 							value: Global.evChargers.energy,
-							unit: VenusOS.Units_Energy_KiloWattHour
+							unit: Enums.Units_Energy_KiloWattHour
 						},
 						{
 							// Extra empty column to create spacing
 							title: "",
 							value: NaN,
-							unit: VenusOS.Units_None
+							unit: Enums.Units_None
 						},
 					]
 				}
@@ -59,10 +59,10 @@ Page {
 			text: model.device.name
 			secondaryText: {
 				const statusText = Global.evChargers.chargerStatusToText(model.device.status)
-				if (model.device.status === VenusOS.Evcs_Status_Charging) {
-					const quantity = Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour,
+				if (model.device.status === Enums.Evcs_Status_Charging) {
+					const quantity = Units.getDisplayText(Enums.Units_Energy_KiloWattHour,
 							model.device.energy,
-							Units.defaultUnitPrecision(VenusOS.Units_Energy_KiloWattHour))
+							Units.defaultUnitPrecision(Enums.Units_Energy_KiloWattHour))
 					return quantity.number + quantity.unit + " | " + statusText
 				}
 				return statusText

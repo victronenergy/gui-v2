@@ -62,9 +62,9 @@ ObjectModel {
 			delegate: ListQuantityGroup {
 				text: CommonWords.ac_phase_x.arg(model.index + 1)
 				textModel: [
-					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt },
-					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
-					{ value: phasePower.value, unit: VenusOS.Units_Watt },
+					{ value: phaseVoltage.value, unit: Enums.Units_Volt },
+					{ value: phaseCurrent.value, unit: Enums.Units_Amp },
+					{ value: phasePower.value, unit: Enums.Units_Watt },
 				]
 
 				DataPoint {
@@ -87,8 +87,8 @@ ObjectModel {
 		//% "AC Totals"
 		text: qsTrId("ac-in-modeldefault_ac_totals")
 		textModel: [
-			{ value: totalPower.value, unit: VenusOS.Units_Watt },
-			{ value: totalEnergy.value, unit: VenusOS.Units_Energy_KiloWattHour },
+			{ value: totalPower.value, unit: Enums.Units_Watt },
+			{ value: totalEnergy.value, unit: Enums.Units_Energy_KiloWattHour },
 		]
 
 		DataPoint {
@@ -112,7 +112,7 @@ ObjectModel {
 				//% "Energy L%1"
 				text: qsTrId("ac-in-modeldefault_energy_x").arg(model.index + 1)
 				dataSource: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(model.index + 1)
-				unit: VenusOS.Units_Energy_KiloWattHour
+				unit: Enums.Units_Energy_KiloWattHour
 			}
 		}
 	}

@@ -21,11 +21,11 @@ Page {
 				+ Global.dcInputs.model.count
 		if (totalInputs <= 1) {
 			if (Global.acInputs.connectedInput != null) {
-				return VenusOS.acInputIcon(Global.acInputs.connectedInput.source)
+				return Enums.acInputIcon(Global.acInputs.connectedInput.source)
 			} else if (Global.acInputs.generatorInput != null) {
-				return VenusOS.acInputIcon(Global.acInputs.generatorInput.source)
+				return Enums.acInputIcon(Global.acInputs.generatorInput.source)
 			} else if (Global.dcInputs.model.count > 0) {
-				return VenusOS.dcInputIcon(Global.dcInputs.model.deviceAt(0).source)
+				return Enums.dcInputIcon(Global.dcInputs.model.deviceAt(0).source)
 			}
 		}
 		return "qrc:/images/icon_input_24.svg"
@@ -34,10 +34,10 @@ Page {
 	backgroundColor: Theme.color.briefPage.background
 	fullScreenWhenIdle: true
 	animationEnabled: root.isCurrentPage && BackendConnection.applicationVisible && !Global.splashScreenVisible
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+	topLeftButton: Enums.StatusBar_LeftButton_ControlsInactive
 	topRightButton: sidePanel.active
-			? VenusOS.StatusBar_RightButton_SidePanelActive
-			: VenusOS.StatusBar_RightButton_SidePanelInactive
+			? Enums.StatusBar_RightButton_SidePanelActive
+			: Enums.StatusBar_RightButton_SidePanelInactive
 
 	Loader {
 		id: mainGauge
@@ -71,7 +71,7 @@ Page {
 		id: singleGauge
 
 		CircularSingleGauge {
-			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
+			readonly property var properties: Gauges.tankProperties(Enums.Tank_Type_Battery)
 			readonly property var battery: Global.batteries.system
 
 			name: properties.name
@@ -80,9 +80,9 @@ Page {
 			voltage: battery.voltage
 			current: battery.current
 			status: Gauges.getValueStatus(value, properties.valueType)
-			caption: Global.batteries.timeToGoText(battery, VenusOS.Battery_TimeToGo_LongFormat)
+			caption: Global.batteries.timeToGoText(battery, Enums.Battery_TimeToGo_LongFormat)
 			animationEnabled: root.animationEnabled
-			shineAnimationEnabled: battery.mode === VenusOS.Battery_Mode_Charging && root.animationEnabled
+			shineAnimationEnabled: battery.mode === Enums.Battery_Mode_Charging && root.animationEnabled
 		}
 	}
 
@@ -109,8 +109,8 @@ Page {
 
 			// Gauge color changes only apply when there is a maximum value.
 			valueType: isNaN(inputsRange.maximumValue)
-					   ? VenusOS.Gauges_ValueType_NeutralPercentage
-					   : VenusOS.Gauges_ValueType_RisingPercentage
+					   ? Enums.Gauges_ValueType_NeutralPercentage
+					   : Enums.Gauges_ValueType_RisingPercentage
 
 			x: root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
@@ -121,11 +121,11 @@ Page {
 
 			// AC and DC amp values cannot be combined. If there are both AC and DC values, show
 			// Watts even if Amps is preferred.
-			quantityLabel.unit: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp
+			quantityLabel.unit: Global.systemSettings.electricalQuantity.value === Enums.Units_Amp
 					&& ((Global.acInputs.current || 0) === 0 || (Global.dcInputs.current || 0) === 0)
-					   ? VenusOS.Units_Amp
-					   : VenusOS.Units_Watt
-			quantityLabel.value: quantityLabel.unit === VenusOS.Units_Amp
+					   ? Enums.Units_Amp
+					   : Enums.Units_Watt
+			quantityLabel.value: quantityLabel.unit === Enums.Units_Amp
 					? (Global.acInputs.current || 0) === 0
 					  ? Global.dcInputs.current
 					  : Global.acInputs.current
@@ -140,7 +140,7 @@ Page {
 
 				// When showing current instead of power, set a max value to change the gauge colors
 				// when the value approaches the currentLimit.
-				maximumValue: quantityLabel.unit === VenusOS.Units_Amp
+				maximumValue: quantityLabel.unit === Enums.Units_Amp
 					? Global.acInputs.currentLimit
 					: NaN
 			}

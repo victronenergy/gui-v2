@@ -47,9 +47,9 @@ VerticalGauge {
 		height: Theme.geometry.levelsPage.tankGauge.alarmIcon.height
 		fillMode: Image.PreserveAspectFit
 		visible: !root.isGrouped
-				 && ((gaugeValueType === VenusOS.Gauges_ValueType_FallingPercentage && value <= 0.05)
-					 || (gaugeValueType === VenusOS.Gauges_ValueType_RisingPercentage && value >= 0.95))
-		color: root.gaugeValueType === VenusOS.Gauges_ValueType_FallingPercentage
+				 && ((gaugeValueType === Enums.Gauges_ValueType_FallingPercentage && value <= 0.05)
+					 || (gaugeValueType === Enums.Gauges_ValueType_RisingPercentage && value >= 0.95))
+		color: root.gaugeValueType === Enums.Gauges_ValueType_FallingPercentage
 			   ? Theme.color.levelsPage.fallingGauge.alarmIcon
 			   : Theme.color.levelsPage.risingGauge.alarmIcon
 		source: "qrc:/images/icon_alarm_48.svg"

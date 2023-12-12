@@ -9,7 +9,7 @@ import Victron.VenusOS
 ListModel {
 	id: root
 
-	readonly property var monitoredStatuses: [ VenusOS.Evcs_Status_Charging, VenusOS.Evcs_Status_Charged, VenusOS.Evcs_Status_Disconnected ]
+	readonly property var monitoredStatuses: [ Enums.Evcs_Status_Charging, Enums.Evcs_Status_Charged, Enums.Evcs_Status_Disconnected ]
 
 	property var _statusConnections: Instantiator {
 		model: Global.evChargers.model

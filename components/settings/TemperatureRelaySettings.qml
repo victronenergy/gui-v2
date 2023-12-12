@@ -20,7 +20,7 @@ Column {
 
 	function showEqualValuesWarningToast() {
 		//% "Warning: Activation and deactivation temperatures are set to the same value. This will lead the condition to be ignored."
-		Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("settings_relay_equal_values_warning"))
+		Global.showToastNotification(Enums.Notification_Warning, qsTrId("settings_relay_equal_values_warning"))
 	}
 
 	width: parent ? parent.width : 0
@@ -73,7 +73,7 @@ Column {
 		to: 100
 
 		// TODO the unit string shouldn't be determined here. Fix when units are updated to use velib unit features.
-		suffix: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? "F" : "C"
+		suffix: Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Fahrenheit ? "F" : "C"
 
 		onValueChanged: {
 			if (value === cClear.value) {

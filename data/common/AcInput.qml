@@ -36,7 +36,7 @@ Device {
 
 	onSourceChanged: {
 		if (!!Global.acInputs) {
-			if (source === VenusOS.AcInputs_InputType_Generator) {
+			if (source === Enums.AcInputs_InputType_Generator) {
 				Global.acInputs.generatorInput = input
 			} else if (Global.acInputs.generatorInput === input) {
 				Global.acInputs.generatorInput = null

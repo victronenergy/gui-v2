@@ -13,8 +13,8 @@ Rectangle {
 	property alias title: titleLabel.text
 	property real temperature: NaN
 	property real humidity: NaN
-	property int horizontalSize: VenusOS.EnvironmentGaugePanel_Size_Expanded
-	property int verticalSize: VenusOS.EnvironmentGaugePanel_Size_Expanded
+	property int horizontalSize: Enums.EnvironmentGaugePanel_Size_Expanded
+	property int verticalSize: Enums.EnvironmentGaugePanel_Size_Expanded
 	property bool animationEnabled: true
 
 	property var temperatureGaugeGradient
@@ -34,8 +34,8 @@ Rectangle {
 			? (width - (2 * Theme.geometry.levelsPage.environment.gaugePanel.border.width)) / 2
 			: Theme.geometry.levelsPage.environment.gauge.width
 
-	width: horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedWidth : compactWidth
-	height: verticalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedHeight : compactHeight
+	width: horizontalSize === Enums.EnvironmentGaugePanel_Size_Expanded ? expandedWidth : compactWidth
+	height: verticalSize === Enums.EnvironmentGaugePanel_Size_Expanded ? expandedHeight : compactHeight
 
 	color: Theme.color.levelsPage.environment.panel.border.color
 	radius: Theme.geometry.levelsPage.environment.gaugePanel.radius
@@ -89,15 +89,15 @@ Rectangle {
 		animationEnabled: root.animationEnabled
 		icon.source: "qrc:/images/icon_temp_32.svg"
 
-		text: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? "F" : "C"
+		text: Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Fahrenheit ? "F" : "C"
 		value: Math.round(root.temperature)
 		unit: Global.systemSettings.temperatureUnit.value
 
 		// TODO min, max and highlight need to come from dbus backend, but not yet available.
-		minimumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+		minimumValue: Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Celsius
 				? Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue
 				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue)
-		maximumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+		maximumValue: Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Celsius
 				? Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue
 				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
 		highlightedValue: Theme.geometry.levelsPage.environment.temperatureGauge.highlightedValue
@@ -127,7 +127,7 @@ Rectangle {
 			//% "RH"
 			text: qsTrId("environment_gauge_humidity")
 			animationEnabled: root.animationEnabled
-			unit: VenusOS.Units_Percentage
+			unit: Enums.Units_Percentage
 			value: Math.round(root.humidity)
 			minimumValue: Theme.geometry.levelsPage.environment.humidityGauge.minimumValue
 			maximumValue: Theme.geometry.levelsPage.environment.humidityGauge.maximumValue

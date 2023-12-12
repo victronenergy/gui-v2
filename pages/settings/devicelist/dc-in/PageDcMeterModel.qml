@@ -24,9 +24,9 @@ ObjectModel {
 	ListQuantityGroup {
 		text: Global.dcInputs.inputTypeToText(Global.dcInputs.inputType(root.bindPrefix, monitorMode.value))
 		textModel: [
-			{ value: dcVoltage.value, unit: VenusOS.Units_Volt },
-			{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
-			{ value: dcPower.value, unit: VenusOS.Units_Watt },
+			{ value: dcVoltage.value, unit: Enums.Units_Volt },
+			{ value: dcCurrent.value, unit: Enums.Units_Amp },
+			{ value: dcPower.value, unit: Enums.Units_Watt },
 		]
 
 		DataPoint {
@@ -55,7 +55,7 @@ ObjectModel {
 		//% "Aux voltage"
 		text: qsTrId("dcmeter_aux_voltage")
 		dataSource: root.bindPrefix + "/Dc/1/Voltage"
-		unit: VenusOS.Units_Volt
+		unit: Enums.Units_Volt
 		visible: defaultVisible && dataValid
 	}
 

@@ -12,7 +12,7 @@ OverviewWidget {
 	//% "AC Loads"
 	title: qsTrId("overview_widget_acloads_title")
 	icon.source: "qrc:/images/acloads.svg"
-	type: VenusOS.OverviewWidget_Type_AcLoads
+	type: Enums.OverviewWidget_Type_AcLoads
 	enabled: false
 
 	quantityLabel.dataObject: Global.system.ac.consumption
@@ -28,7 +28,7 @@ OverviewWidget {
 				bottomMargin: Theme.geometry.overviewPage.widget.extraContent.bottomMargin
 			}
 
-			visible: model != null && root.size >= VenusOS.OverviewWidget_Size_L
+			visible: model != null && root.size >= Enums.OverviewWidget_Size_L
 			model: Global.system.ac.consumption.phases.count > 1 ? Global.system.ac.consumption.phases : null
 		}
 	]

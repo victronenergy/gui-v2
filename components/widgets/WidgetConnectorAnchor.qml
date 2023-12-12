@@ -12,24 +12,24 @@ Image {
 
 	property int location
 
-	property real defaultY: location === VenusOS.WidgetConnector_Location_Top
+	property real defaultY: location === Enums.WidgetConnector_Location_Top
 		? -height
-		: location === VenusOS.WidgetConnector_Location_Bottom
+		: location === Enums.WidgetConnector_Location_Bottom
 		  ? parent.height
 		  : parent.height/2 - height/2
 
-	x: location === VenusOS.WidgetConnector_Location_Left
+	x: location === Enums.WidgetConnector_Location_Left
 		? -width
-		: location === VenusOS.WidgetConnector_Location_Right
+		: location === Enums.WidgetConnector_Location_Right
 		  ? parent.width
 		  : parent.width/2 - width/2
 	y: defaultY
 
-	source: location === VenusOS.WidgetConnector_Location_Left
-			|| location === VenusOS.WidgetConnector_Location_Right
+	source: location === Enums.WidgetConnector_Location_Left
+			|| location === Enums.WidgetConnector_Location_Right
 			? "qrc:/images/widget_connector_nub_horizontal.svg"
 			: "qrc:/images/widget_connector_nub_vertical.svg"
-	rotation: location === VenusOS.WidgetConnector_Location_Top
-			|| location === VenusOS.WidgetConnector_Location_Left
+	rotation: location === Enums.WidgetConnector_Location_Top
+			|| location === Enums.WidgetConnector_Location_Left
 			? 180 : 0
 }

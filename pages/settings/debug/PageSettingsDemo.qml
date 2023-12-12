@@ -117,14 +117,14 @@ Page {
 			ListQuantityItem {
 				text: "Quantity"
 				value: 33.5
-				unit: VenusOS.Units_Temperature_Celsius
+				unit: Enums.Units_Temperature_Celsius
 			}
 
 			ListQuantityGroup {
 				text: "Multiple quantities"
 				textModel: [
-					{ value: 5.1, unit: VenusOS.Units_Volt },
-					{ value: 48, unit: VenusOS.Units_Watt }
+					{ value: 5.1, unit: Enums.Units_Volt },
+					{ value: 48, unit: Enums.Units_Watt }
 				]
 			}
 

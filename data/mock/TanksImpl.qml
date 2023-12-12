@@ -17,7 +17,7 @@ QtObject {
 		}
 
 		// Add 3 tanks of random types
-		const maxTankType = VenusOS.Tank_Type_RawWater
+		const maxTankType = Enums.Tank_Type_RawWater
 		for (let i = 0; i < 3; ++i) {
 			const tankType = Math.floor(Math.random() * maxTankType + 1)
 			const level = Math.random()
@@ -37,7 +37,7 @@ QtObject {
 	property Component tankComponent: Component {
 		MockDevice {
 			property int type
-			property int status: VenusOS.Tank_Status_Ok
+			property int status: Enums.Tank_Status_Ok
 			property real temperature
 			property real level
 			property real remaining

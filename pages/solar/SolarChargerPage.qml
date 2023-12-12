@@ -29,22 +29,22 @@ Page {
 						{
 							title: CommonWords.state,
 							text: Global.solarChargers.chargerStateToText(root.solarCharger.state),
-							unit: VenusOS.Units_None,
+							unit: Enums.Units_None,
 						},
 						{
 							title: CommonWords.yield_today,
 							value: root.solarCharger.dailyHistory(0).yieldKwh || 0,
-							unit: VenusOS.Units_Energy_KiloWattHour
+							unit: Enums.Units_Energy_KiloWattHour
 						},
 						{
 							title: root.singleTracker ? CommonWords.voltage : "",
 							value: root.singleTracker ? root.singleTracker.voltage : NaN,
-							unit: root.singleTracker ? VenusOS.Units_Volt : VenusOS.Units_None
+							unit: root.singleTracker ? Enums.Units_Volt : Enums.Units_None
 						},
 						{
 							title: root.singleTracker ? CommonWords.current_amps : "",
 							value: root.singleTracker ? root.singleTracker.current : NaN,
-							unit: root.singleTracker ? VenusOS.Units_Amp : VenusOS.Units_None
+							unit: root.singleTracker ? Enums.Units_Amp : Enums.Units_None
 						},
 						{
 							title: root.singleTracker
@@ -52,7 +52,7 @@ Page {
 									 //% "Total PV Power"
 								   : qsTrId("charger_total_pv_power"),
 							value: root.solarCharger.power,
-							unit: VenusOS.Units_Watt
+							unit: Enums.Units_Watt
 						},
 					]
 				}
@@ -65,11 +65,11 @@ Page {
 
 					rowCount: root.solarCharger.trackers.count
 					units: [
-						{ title: CommonWords.tracker, unit: VenusOS.Units_None },
-						{ title: trackerSummary.model[1].title, unit: VenusOS.Units_Energy_KiloWattHour },
-						{ title: CommonWords.voltage, unit: VenusOS.Units_Volt },
-						{ title: CommonWords.current_amps, unit: VenusOS.Units_Amp },
-						{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
+						{ title: CommonWords.tracker, unit: Enums.Units_None },
+						{ title: trackerSummary.model[1].title, unit: Enums.Units_Energy_KiloWattHour },
+						{ title: CommonWords.voltage, unit: Enums.Units_Volt },
+						{ title: CommonWords.current_amps, unit: Enums.Units_Amp },
+						{ title: CommonWords.power_watts, unit: Enums.Units_Watt }
 					]
 					valueForModelIndex: function(trackerIndex, column) {
 						const tracker = root.solarCharger.trackers.get(trackerIndex).solarTracker
@@ -99,11 +99,11 @@ Page {
 				textModel: [
 					{
 						value: root.solarCharger.batteryVoltage,
-						unit: VenusOS.Units_Volt
+						unit: Enums.Units_Volt
 					},
 					{
 						value: root.solarCharger.batteryCurrent,
-						unit: VenusOS.Units_Amp
+						unit: Enums.Units_Amp
 					},
 				]
 			}

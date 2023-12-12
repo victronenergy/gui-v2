@@ -13,7 +13,7 @@ Item {
 		const chargerCount = (Math.random() * 2) + 1
 		for (let i = 0; i < chargerCount; ++i) {
 			const chargerObj = chargerComponent.createObject(root, {
-				state: Math.random() * VenusOS.System_State_EqualizationCharging
+				state: Math.random() * Enums.System_State_EqualizationCharging
 			})
 			Global.chargers.model.addDevice(chargerObj)
 		}

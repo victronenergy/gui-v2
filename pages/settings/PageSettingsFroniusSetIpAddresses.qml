@@ -13,7 +13,7 @@ Page {
 
 	property var _addDialog
 
-	topRightButton: VenusOS.StatusBar_RightButton_Add
+	topRightButton: Enums.StatusBar_RightButton_Add
 
 	IpAddressListView {
 		id: settingsListView

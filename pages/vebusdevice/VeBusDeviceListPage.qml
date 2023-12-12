@@ -125,10 +125,10 @@ Page {
 				onClicked: {
 					if (!root.veBusDevice.modeIsAdjustable) {
 						if (dmc.valid)
-							Global.showToastNotification(VenusOS.Notification_Info, root.noAdjustableByDmc,
+							Global.showToastNotification(Enums.Notification_Info, root.noAdjustableByDmc,
 														 Theme.animation.veBusDeviceModeNotAdjustable.toastNotication.duration)
 						if (bmsMode.value !== undefined)
-							Global.showToastNotification(VenusOS.Notification_Info, root.noAdjustableByBms,
+							Global.showToastNotification(Enums.Notification_Info, root.noAdjustableByBms,
 														 Theme.animation.veBusDeviceModeNotAdjustable.toastNotication.duration)
 						return
 					}
@@ -153,7 +153,7 @@ Page {
 						enabled: modelData.currentLimitAdjustable
 						button.width: Theme.geometry.vebusDeviceListPage.currentLimit.button.width
 						button.text: {
-							const quantity = Units.getDisplayText(VenusOS.Units_Amp, modelData.currentLimit)
+							const quantity = Units.getDisplayText(Enums.Units_Amp, modelData.currentLimit)
 							return quantity.number + quantity.unit
 						}
 						onClicked: {
@@ -194,10 +194,10 @@ Page {
 			}
 
 			ListTextGroup {
-				readonly property var power: Units.getDisplayText(VenusOS.Units_Watt, dcPower.value)
-				readonly property var voltage: Units.getDisplayText(VenusOS.Units_Volt, dcVoltage.value)
-				readonly property var current: Units.getDisplayText(VenusOS.Units_Amp, dcCurrent.value)
-				readonly property var soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.value)
+				readonly property var power: Units.getDisplayText(Enums.Units_Watt, dcPower.value)
+				readonly property var voltage: Units.getDisplayText(Enums.Units_Volt, dcVoltage.value)
+				readonly property var current: Units.getDisplayText(Enums.Units_Amp, dcCurrent.value)
+				readonly property var soc: Units.getDisplayText(Enums.Units_Percentage, stateOfCharge.value)
 
 				//% "DC"
 				text: qsTrId("vebus_device_page_dc")
@@ -245,19 +245,19 @@ Page {
 				textModel: [
 					{
 						value: acActiveIn1.power,
-						unit: VenusOS.Units_Watt
+						unit: Enums.Units_Watt
 					},
 					{
 						value: acActiveIn1.voltage,
-						unit: VenusOS.Units_Volt
+						unit: Enums.Units_Volt
 					},
 					{
 						value: acActiveIn1.current,
-						unit: VenusOS.Units_Amp
+						unit: Enums.Units_Amp
 					},
 					{
 						value: acActiveIn1.frequency,
-						unit: VenusOS.Units_Hertz
+						unit: Enums.Units_Hertz
 					}
 				]
 			}
@@ -267,19 +267,19 @@ Page {
 				textModel: [
 					{
 						value: acOutput.phase1.power,
-						unit: VenusOS.Units_Watt
+						unit: Enums.Units_Watt
 					},
 					{
 						value: acOutput.phase1.voltage,
-						unit: VenusOS.Units_Volt
+						unit: Enums.Units_Volt
 					},
 					{
 						value: acOutput.phase1.current,
-						unit: VenusOS.Units_Amp
+						unit: Enums.Units_Amp
 					},
 					{
 						value: acOutput.phase1.frequency,
-						unit: VenusOS.Units_Hertz
+						unit: Enums.Units_Hertz
 					}
 				]
 			}
@@ -294,19 +294,19 @@ Page {
 			textModel: [
 				{
 					value: acOutput.phase1.power,
-					unit: VenusOS.Units_Watt
+					unit: Enums.Units_Watt
 				},
 				{
 					value: acOutput.phase1.voltage,
-					unit: VenusOS.Units_Volt
+					unit: Enums.Units_Volt
 				},
 				{
 					value: acOutput.phase1.current,
-					unit: VenusOS.Units_Amp
+					unit: Enums.Units_Amp
 				},
 				{
 					value: acOutput.phase1.frequency,
-					unit: VenusOS.Units_Hertz
+					unit: Enums.Units_Hertz
 				}
 			]
 		}
@@ -322,7 +322,7 @@ Page {
 			ThreePhaseQuantityTable {
 				width: (parent.width - parent.spacing) / 2
 				labelText: CommonWords.ac_in
-				totalPower: Units.getDisplayText(VenusOS.Units_Watt, acActiveInputPower.value)
+				totalPower: Units.getDisplayText(Enums.Units_Watt, acActiveInputPower.value)
 				valueForModelIndex: function(trackerIndex, column) {
 					if (column === 0) {
 						return "L%1".arg(trackerIndex + 1)
@@ -335,13 +335,13 @@ Page {
 					if (phase) {
 						switch(column) {
 						case 1:
-							return Units.getDisplayText(VenusOS.Units_Watt, phase.power).number
+							return Units.getDisplayText(Enums.Units_Watt, phase.power).number
 						case 2:
-							return Units.getDisplayText(VenusOS.Units_Volt, phase.voltage).number
+							return Units.getDisplayText(Enums.Units_Volt, phase.voltage).number
 						case 3:
-							return Units.getDisplayText(VenusOS.Units_Amp, phase.current).number
+							return Units.getDisplayText(Enums.Units_Amp, phase.current).number
 						case 4:
-							return Units.getDisplayText(VenusOS.Units_Hertz, phase.frequency).number
+							return Units.getDisplayText(Enums.Units_Hertz, phase.frequency).number
 						}
 						return "--"
 					}
@@ -353,7 +353,7 @@ Page {
 
 				width: (parent.width - parent.spacing) / 2
 				labelText: CommonWords.ac_out
-				totalPower: Units.getDisplayText(VenusOS.Units_Watt, acOutputPower.value)
+				totalPower: Units.getDisplayText(Enums.Units_Watt, acOutputPower.value)
 				valueForModelIndex: function(trackerIndex, column) {
 					if (column === 0) {
 						return "L%1".arg(trackerIndex + 1)

@@ -74,24 +74,24 @@ Column {
 			{
 				title: "",
 				text: CommonWords.total,
-				unit: VenusOS.Units_None,
+				unit: Enums.Units_None,
 			},
 			{
 				title: CommonWords.yield_kwh,
 				value: root._trackerHistoryTotal("yieldKwh"),
-				unit: VenusOS.Units_Energy_KiloWattHour
+				unit: Enums.Units_Energy_KiloWattHour
 			},
 			{
 				//% "Max Voltage"
 				title: qsTrId("charger_history_max_voltage"),
 				value: root._trackerHistoryMax("maxPvVoltage"),
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 			},
 			{
 				//% "Max Power"
 				title: qsTrId("charger_history_max_power"),
 				value: root._trackerHistoryMax("maxPower"),
-				unit: VenusOS.Units_Watt
+				unit: Enums.Units_Watt
 			},
 		]
 	}
@@ -107,10 +107,10 @@ Column {
 		rowCount: root.solarCharger.trackers.count
 		units: [
 			// No 'title' property is specified, since these are same as summary headers.
-			{ unit: VenusOS.Units_None },
-			{ unit: VenusOS.Units_Energy_KiloWattHour },
-			{ unit: VenusOS.Units_Volt },
-			{ unit: VenusOS.Units_Watt },
+			{ unit: Enums.Units_None },
+			{ unit: Enums.Units_Energy_KiloWattHour },
+			{ unit: Enums.Units_Volt },
+			{ unit: Enums.Units_Watt },
 		]
 		valueForModelIndex: function(trackerIndex, column) {
 			const tracker = root.solarCharger.trackers.get(trackerIndex).solarTracker

@@ -16,8 +16,8 @@ FocusScope {
 	readonly property bool isCurrentPage: !!Global.pageManager && Global.pageManager.currentPage === root
 	property bool animationEnabled: isCurrentPage && BackendConnection.applicationVisible
 
-	property int topLeftButton: C.StackView.view && C.StackView.view.depth > 1 ? VenusOS.StatusBar_LeftButton_Back : VenusOS.StatusBar_LeftButton_None
-	property int topRightButton: VenusOS.StatusBar_RightButton_None
+	property int topLeftButton: C.StackView.view && C.StackView.view.depth > 1 ? Enums.StatusBar_LeftButton_Back : Enums.StatusBar_LeftButton_None
+	property int topRightButton: Enums.StatusBar_RightButton_None
 
 	property var tryPop // optional function: returns whether the page can be poppped
 

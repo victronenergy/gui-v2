@@ -10,7 +10,7 @@ QtObject {
 	id: root
 
 	function populate() {
-		Global.system.state = VenusOS.System_State_AbsorptionCharging
+		Global.system.state = Enums.System_State_AbsorptionCharging
 		Global.system.ac.consumption.setPhaseCount(_phaseCount)
 	}
 
@@ -18,7 +18,7 @@ QtObject {
 		target: Global.mockDataSimulator || null
 
 		function onSetSystemRequested(config) {
-			Global.system.state = VenusOS.System_State_Off
+			Global.system.state = Enums.System_State_Off
 
 			if (config) {
 				Global.system.state = config.state

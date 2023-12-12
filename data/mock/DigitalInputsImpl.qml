@@ -13,8 +13,8 @@ Item {
 		const inputCount = (Math.random() * 3) + 1
 		for (let i = 0; i < inputCount; ++i) {
 			const inputObj = inputComponent.createObject(root, {
-				type: Math.random() * VenusOS.DigitalInput_Type_Generator,
-				state: Math.random() * VenusOS.DigitalInput_State_Stopped
+				type: Math.random() * Enums.DigitalInput_Type_Generator,
+				state: Math.random() * Enums.DigitalInput_State_Stopped
 			})
 			Global.digitalInputs.model.addDevice(inputObj)
 		}

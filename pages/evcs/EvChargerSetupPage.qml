@@ -29,11 +29,11 @@ Page {
 				optionModel: [
 					{
 						display: CommonWords.ac_input,
-						value: VenusOS.Evcs_Position_ACInput
+						value: Enums.Evcs_Position_ACInput
 					},
 					{
 						display: CommonWords.ac_output,
-						value: VenusOS.Evcs_Position_ACOutput
+						value: Enums.Evcs_Position_ACOutput
 					}
 				]
 				dataSource: root.evCharger.serviceUid + "/Position"

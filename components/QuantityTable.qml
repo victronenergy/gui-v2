@@ -25,7 +25,7 @@ Column {
 
 	function _quantityColumnWidth(unit) {
 		if (!!firstColumnWidth) {
-			if (unit === VenusOS.Units_None) {
+			if (unit === Enums.Units_None) {
 				return firstColumnWidth
 			}
 			return (availableWidth - firstColumnWidth) / (units.length - 1)
@@ -35,7 +35,7 @@ Column {
 			return availableWidth / units.length
 		}
 		// "kWh" unit name is longer, so give that column more space.
-		const widthMultiplier = (unit === VenusOS.Units_Energy_KiloWattHour) ? 1.2 : 1
+		const widthMultiplier = (unit === Enums.Units_Energy_KiloWattHour) ? 1.2 : 1
 		return ((availableWidth - Theme.geometry.quantityTable.header.widthBoost) / units.length) * widthMultiplier
 	}
 

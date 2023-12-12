@@ -80,7 +80,7 @@ ListModel {
 			id: gaugeObject
 
 			readonly property int tankType: modelData
-			readonly property bool isBattery: tankType === VenusOS.Tank_Type_Battery
+			readonly property bool isBattery: tankType === Enums.Tank_Type_Battery
 
 			readonly property string tankName: _tankProperties.name
 			readonly property string tankIcon: isBattery ? Global.batteries.system.icon : _tankProperties.icon

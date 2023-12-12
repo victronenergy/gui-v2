@@ -19,15 +19,15 @@ Page {
 				//% "Auto update"
 				text: qsTrId("settings_auto_update")
 				dataSource: "com.victronenergy.settings/Settings/System/AutoUpdate"
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				optionModel: [
-					{ display: CommonWords.disabled, value: VenusOS.Firmware_AutoUpdate_Disabled },
+					{ display: CommonWords.disabled, value: Enums.Firmware_AutoUpdate_Disabled },
 					//% "Check only"
-					{ display: qsTrId("settings_firmware_check_only"), value: VenusOS.Firmware_AutoUpdate_CheckOnly },
+					{ display: qsTrId("settings_firmware_check_only"), value: Enums.Firmware_AutoUpdate_CheckOnly },
 					//% "Check and download only"
-					{ display: qsTrId("settings_firmware_check_and_download_only"), value: VenusOS.Firmware_AutoUpdate_CheckAndDownloadOnly, readOnly: true },
+					{ display: qsTrId("settings_firmware_check_and_download_only"), value: Enums.Firmware_AutoUpdate_CheckAndDownloadOnly, readOnly: true },
 					//% "Check and update"
-					{ display: qsTrId("settings_firmware_check_and_update"), value: VenusOS.Firmware_AutoUpdate_CheckAndUpdate }
+					{ display: qsTrId("settings_firmware_check_and_update"), value: Enums.Firmware_AutoUpdate_CheckAndUpdate }
 				]
 			}
 
@@ -42,7 +42,7 @@ Page {
 					{ display: qsTrId("settings_firmware_latest_release_candidate"), value: FirmwareUpdater.FirmwareCandidate },
 					//: Select the 'Testing' update feed
 					//% "Testing"
-					{ display: qsTrId("settings_firmware_testing"), value: FirmwareUpdater.FirmwareTesting, readOnly: !Global.systemSettings.canAccess(VenusOS.User_AccessType_Service) },
+					{ display: qsTrId("settings_firmware_testing"), value: FirmwareUpdater.FirmwareTesting, readOnly: !Global.systemSettings.canAccess(Enums.User_AccessType_Service) },
 					//: Select the 'Develop' update feed
 					//% "Develop"
 					{ display: qsTrId("settings_firmware_develop"), value: FirmwareUpdater.FirmwareDevelop, readOnly: true },
@@ -70,7 +70,7 @@ Page {
 			FirmwareCheckListButton {
 				//% "Check for updates"
 				text: qsTrId("settings_firmware_check_for_updates")
-				updateType: VenusOS.Firmware_UpdateType_Online
+				updateType: Enums.Firmware_UpdateType_Online
 			}
 
 			ListButton {
@@ -96,10 +96,10 @@ Page {
 				}
 
 				enabled: !Global.firmwareUpdate.busy
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				visible: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {
-					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
+					Global.firmwareUpdate.installUpdate(Enums.Firmware_UpdateType_Online)
 				}
 
 				DataPoint {
@@ -112,7 +112,7 @@ Page {
 				//% "Update build date/time"
 				text: qsTrId("settings_firmware_update_build_date_time")
 				dataSource: "com.victronenergy.platform/Firmware/Online/AvailableBuild"
-				visible: installUpdate.visible && Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
+				visible: installUpdate.visible && Global.systemSettings.canAccess(Enums.User_AccessType_SuperUser)
 			}
 		}
 	}

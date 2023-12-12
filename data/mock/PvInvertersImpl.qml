@@ -28,7 +28,7 @@ QtObject {
 		MockDevice {
 			id: pvInverter
 
-			property int statusCode: Math.random() * VenusOS.PvInverter_StatusCode_Error
+			property int statusCode: Math.random() * Enums.PvInverter_StatusCode_Error
 			property int errorCode: -1
 			property int phaseCount
 
@@ -83,7 +83,7 @@ QtObject {
 			if (config && config.inverters) {
 				for (let i = 0; i < config.inverters.length; ++i) {
 					const inverterObj = inverterComponent.createObject(root, {
-						statusCode: config.inverters[i].statusCode || VenusOS.PvInverter_StatusCode_Running,
+						statusCode: config.inverters[i].statusCode || Enums.PvInverter_StatusCode_Running,
 						power: config.inverters[i].power,
 					})
 					_createdObjects.push(inverterObj)

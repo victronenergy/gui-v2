@@ -249,10 +249,10 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "Language",
 		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
 			return new Victron::VenusOS::Language(engine);
-		});*/
+		});
 	qmlRegisterSingletonType<Victron::VenusOS::Enums>(
 		"Victron.VenusOS", 2, 0, "VenusOS",
-		&Victron::VenusOS::Enums::instance);
+		&Victron::VenusOS::Enums::instance);*/
 
 	qmlRegisterSingletonType<Victron::VenusOS::ActiveNotificationsModel>(
 		"Victron.VenusOS", 2, 0, "ActiveNotificationsModel",

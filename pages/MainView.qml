@@ -90,22 +90,22 @@ Item {
 		id: statusBar
 
 		title: !!pageStack.currentItem ? pageStack.currentItem.title || "" : ""
-		leftButton: !!pageStack.currentItem ? pageStack.currentItem.topLeftButton : VenusOS.StatusBar_LeftButton_None
-		rightButton: !!pageStack.currentItem ? pageStack.currentItem.topRightButton : VenusOS.StatusBar_RightButton_None
+		leftButton: !!pageStack.currentItem ? pageStack.currentItem.topLeftButton : Enums.StatusBar_LeftButton_None
+		rightButton: !!pageStack.currentItem ? pageStack.currentItem.topRightButton : Enums.StatusBar_RightButton_None
 		animationEnabled: BackendConnection.applicationVisible
 		color: root.backgroundColor
 
 		onLeftButtonClicked: {
 			switch (leftButton) {
-			case VenusOS.StatusBar_LeftButton_ControlsInactive:
+			case Enums.StatusBar_LeftButton_ControlsInactive:
 				navBar.activatingControls = true
 				pageManager.pushPage("/pages/ControlCardsPage.qml")
 				break
-			case VenusOS.StatusBar_LeftButton_ControlsActive:
+			case Enums.StatusBar_LeftButton_ControlsActive:
 				navBar.activatingControls = true
 				pageManager.popPage()
 				break;
-			case VenusOS.StatusBar_LeftButton_Back:
+			case Enums.StatusBar_LeftButton_Back:
 				pageManager.popPage()
 				break
 			default:
@@ -130,7 +130,7 @@ Item {
 			// (rather than activating/deactivating the controls panel)
 			// then don't allow the movement, i.e. keep navbar visible.
 			if (currentIndex === (model.count -1)
-					&& pageStack.currentItem.topLeftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
+					&& pageStack.currentItem.topLeftButton === Enums.StatusBar_LeftButton_ControlsInactive
 					&& !activatingControls) {
 				return
 			}
@@ -184,8 +184,8 @@ Item {
 		SequentialAnimation {
 			id: animateNavBarIn
 
-			running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
-					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)
+			running: !!Global.pageManager && (Global.pageManager.interactivity === Enums.PageManager_InteractionMode_EndFullScreen
+					 || Global.pageManager.interactivity === Enums.PageManager_InteractionMode_ExitIdleMode)
 
 			YAnimator {
 				target: navBar
@@ -197,7 +197,7 @@ Item {
 			ScriptAction {
 				script: {
 					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
+						Global.pageManager.interactivity = Enums.PageManager_InteractionMode_ExitIdleMode
 					}
 				}
 			}
@@ -211,7 +211,7 @@ Item {
 			ScriptAction {
 				script: {
 					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
+						Global.pageManager.interactivity = Enums.PageManager_InteractionMode_Interactive
 					}
 				}
 			}
@@ -220,8 +220,8 @@ Item {
 		SequentialAnimation {
 			id: animateNavBarOut
 
-			running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
-					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen)
+			running: !!Global.pageManager && (Global.pageManager.interactivity === Enums.PageManager_InteractionMode_EnterIdleMode
+					 || Global.pageManager.interactivity === Enums.PageManager_InteractionMode_BeginFullScreen)
 
 			OpacityAnimator {
 				target: navBar
@@ -233,7 +233,7 @@ Item {
 			ScriptAction {
 				script: {
 					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
+						Global.pageManager.interactivity = Enums.PageManager_InteractionMode_BeginFullScreen
 					}
 				}
 			}
@@ -247,7 +247,7 @@ Item {
 			ScriptAction {
 				script: {
 					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
+						Global.pageManager.interactivity = Enums.PageManager_InteractionMode_Idle
 					}
 				}
 			}

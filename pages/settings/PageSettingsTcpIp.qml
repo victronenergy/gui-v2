@@ -143,7 +143,7 @@ Page {
 			visible: root.service && root._wifi
 					 && (root.service.state === "idle" || root.service.state === "failure")
 					 && !root.service.favorite && root._secured
-			writeAccessLevel: VenusOS.User_AccessType_User
+			writeAccessLevel: Enums.User_AccessType_User
 			onAccepted: {
 				root._agent.passphrase = textField.text
 				root.service.connect()
@@ -158,7 +158,7 @@ Page {
 			visible: root.service && root._wifi
 					 && (root.service.state === "idle" || root.service.state === "failure")
 					 && (root.service.favorite || !root._secured)
-			writeAccessLevel: VenusOS.User_AccessType_User
+			writeAccessLevel: Enums.User_AccessType_User
 			onClicked: {
 				root.service.connect()
 			}
@@ -172,7 +172,7 @@ Page {
 			//% "Forget"
 			button.text: qsTrId("settings_tcpip_forget")
 			visible: root.service && root._wifi && root.service.favorite
-			writeAccessLevel: VenusOS.User_AccessType_User
+			writeAccessLevel: Enums.User_AccessType_User
 			onClicked: {
 				if (!root._forgetNetworkDialog) {
 					root._forgetNetworkDialog = forgetNetworkDialogComponent.createObject(Global.dialogLayer)
@@ -184,7 +184,7 @@ Page {
 				id: forgetNetworkDialogComponent
 
 				ModalWarningDialog {
-					dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+					dialogDoneOptions: Enums.ModalDialog_DoneOptions_OkAndCancel
 					title: forgetNetworkButton.text
 					//% "Are you sure that you want to forget this network?"
 					description: qsTrId("settings_tcpip_forget_confirm")
@@ -212,7 +212,7 @@ Page {
 
 			//% "IP configuration"
 			text: qsTrId("settings_tcpip_ip_config")
-			writeAccessLevel: VenusOS.User_AccessType_User
+			writeAccessLevel: Enums.User_AccessType_User
 			optionModel: [
 				//% "Automatic"
 				{ display: qsTrId("settings_tcpip_auto"), value: "dhcp" },

@@ -11,7 +11,7 @@ QtObject {
 
 	function populate() {
 		for (let i = 0; i < 3; ++i) {
-			createCharger({ status: Math.random() * VenusOS.Evcs_Status_Charged })
+			createCharger({ status: Math.random() * Enums.Evcs_Status_Charged })
 		}
 	}
 
@@ -42,8 +42,8 @@ QtObject {
 		MockDevice {
 			id: evCharger
 
-			property int status: VenusOS.Evcs_Status_Charging
-			property int mode: Math.random() * VenusOS.Evcs_Mode_Scheduled
+			property int status: Enums.Evcs_Status_Charging
+			property int mode: Math.random() * Enums.Evcs_Mode_Scheduled
 			property bool connected
 			property int chargingTime: 100000
 
@@ -86,7 +86,7 @@ QtObject {
 				interval: 3000
 
 				onTriggered: {
-					evCharger.status = Math.random() * VenusOS.Evcs_Status_OverheatingDetected
+					evCharger.status = Math.random() * Enums.Evcs_Status_OverheatingDetected
 				}
 			}
 

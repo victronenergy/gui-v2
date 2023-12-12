@@ -11,14 +11,14 @@ Item {
 	id: root
 
 	property real value
-	property int unit: VenusOS.Units_None
+	property int unit: Enums.Units_None
 	property alias font: valueLabel.font
 	property alias valueColor: valueLabel.color
 	property alias unitColor: unitLabel.color
 	property int alignment: Qt.AlignHCenter
 	property int precision: Units.defaultUnitPrecision(unit)
 
-	readonly property var _quantity: unit === VenusOS.Units_None
+	readonly property var _quantity: unit === Enums.Units_None
 		 ? undefined
 		 : Units.getDisplayText(unit, value, precision)
 
@@ -53,7 +53,7 @@ Item {
 			left: valueLabel.right
 			leftMargin: Theme.geometry.quantityLabel.spacing
 		}
-		text: root.unit === VenusOS.Units_None ? "" : root._quantity.unit
+		text: root.unit === Enums.Units_None ? "" : root._quantity.unit
 		font: valueLabel.font
 		color: Theme.color.font.secondary
 	}

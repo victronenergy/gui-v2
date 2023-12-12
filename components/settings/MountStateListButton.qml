@@ -11,11 +11,11 @@ ListButton {
 
 	function _mountStateToText(s) {
 		switch (s) {
-		case VenusOS.Storage_Mounted:
+		case Enums.Storage_Mounted:
 			//% "Press to eject"
 			return qsTrId("components_mount_state_press_to_eject")
-		case VenusOS.Storage_UnmountRequested:
-		case VenusOS.Storage_UnmountBusy:
+		case Enums.Storage_UnmountRequested:
+		case Enums.Storage_UnmountBusy:
 			//% "Ejecting, please wait"
 			return qsTrId("components_mount_state_ejecting")
 		default:
@@ -27,10 +27,10 @@ ListButton {
 	//% "microSD / USB"
 	text: qsTrId("components_mount_state_microsd_usb")
 	button.text: _mountStateToText(mountState.value)
-	button.enabled: mountState.value === VenusOS.Storage_Mounted
-	writeAccessLevel: VenusOS.User_AccessType_User
+	button.enabled: mountState.value === Enums.Storage_Mounted
+	writeAccessLevel: Enums.User_AccessType_User
 
-	onClicked: mountState.setValue(VenusOS.Storage_UnmountRequested)
+	onClicked: mountState.setValue(Enums.Storage_UnmountRequested)
 
 	DataPoint {
 		id: mountState

@@ -10,7 +10,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+	topLeftButton: Enums.StatusBar_LeftButton_ControlsInactive
 
 	NotificationsView {
 		id: historicalNotificationsView

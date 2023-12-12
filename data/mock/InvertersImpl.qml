@@ -24,19 +24,19 @@ Item {
 				property real voltage: Math.random() * 10
 				property real current: Math.random() * 10
 				property real power: Math.random() * 10
-				property int powerUnit: VenusOS.Units_Watt
+				property int powerUnit: Enums.Units_Watt
 			}
 			property var acOutL2: QtObject {
 				property real voltage: Math.random() * 10
 				property real current: Math.random() * 10
 				property real power: Math.random() * 10
-				property int powerUnit: VenusOS.Units_Watt
+				property int powerUnit: Enums.Units_Watt
 			}
 			property var acOutL3: QtObject {
 				property real voltage: Math.random() * 10
 				property real current: Math.random() * 10
 				property real power: Math.random() * 10
-				property int powerUnit: VenusOS.Units_Watt
+				property int powerUnit: Enums.Units_Watt
 			}
 
 			serviceUid: "com.victronenergy.inverter.ttyUSB" + deviceInstance

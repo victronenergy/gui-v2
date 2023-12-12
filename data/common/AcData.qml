@@ -21,7 +21,7 @@ QtObject {
 			 : _apparentPower.value !== undefined ? _apparentPower.value
 			 : _voltage.value !== undefined && _current.value !== undefined ? _voltage.value * _current.value
 			 : NaN
-	readonly property int powerUnit: _reportedPower.value !== undefined ? VenusOS.Units_Watt : VenusOS.Units_VoltAmpere
+	readonly property int powerUnit: _reportedPower.value !== undefined ? Enums.Units_Watt : Enums.Units_VoltAmpere
 
 	property VeQuickItem _voltage: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/V" : ""

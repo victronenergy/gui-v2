@@ -18,11 +18,11 @@ OverviewWidget {
 
 	title: CommonWords.battery
 	icon.source: batteryData.icon
-	type: VenusOS.OverviewWidget_Type_Battery
+	type: Enums.OverviewWidget_Type_Battery
 	enabled: Global.batteries.model.count > 0
 
 	quantityLabel.value: batteryData.stateOfCharge
-	quantityLabel.unit: VenusOS.Units_Percentage
+	quantityLabel.unit: Enums.Units_Percentage
 
 	color: "transparent"
 
@@ -47,7 +47,7 @@ OverviewWidget {
 			width: parent.width
 			height: parent.height * (animationRect.value)
 			y: parent.height - height
-			visible: batteryData.mode === VenusOS.Battery_Mode_Charging && root._animationReady
+			visible: batteryData.mode === Enums.Battery_Mode_Charging && root._animationReady
 			clip: true
 
 			Timer {
@@ -158,10 +158,10 @@ OverviewWidget {
 			rightMargin: Theme.geometry.overviewPage.widget.battery.temperature.rightMargin
 		}
 
-		value: Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+		value: Math.round(Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Celsius
 				? batteryData.temperature_celsius
 				: Units.celsiusToFahrenheit(batteryData.temperature_celsius))
-		unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : VenusOS.Units_Temperature_Celsius
+		unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : Enums.Units_Temperature_Celsius
 		font.pixelSize: Theme.font.size.body2
 	}
 
@@ -178,7 +178,7 @@ OverviewWidget {
 				color: Theme.color.font.secondary
 			}
 			Label {
-				text: Global.batteries.timeToGoText(Global.batteries.system, VenusOS.Battery_TimeToGo_ShortFormat)
+				text: Global.batteries.timeToGoText(Global.batteries.system, Enums.Battery_TimeToGo_ShortFormat)
 				color: Theme.color.font.primary
 				font.pixelSize: Theme.font.overviewPage.battery.timeToGo.pixelSize
 			}
@@ -195,7 +195,7 @@ OverviewWidget {
 			}
 
 			value: batteryData.voltage
-			unit: VenusOS.Units_Volt
+			unit: Enums.Units_Volt
 			font.pixelSize: Theme.font.size.body2
 		},
 
@@ -208,7 +208,7 @@ OverviewWidget {
 				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
 			value: batteryData.current
-			unit: VenusOS.Units_Amp
+			unit: Enums.Units_Amp
 			font.pixelSize: Theme.font.size.body2
 		},
 
@@ -222,7 +222,7 @@ OverviewWidget {
 				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
 			}
 			value: batteryData.power
-			unit: VenusOS.Units_Watt
+			unit: Enums.Units_Watt
 			font.pixelSize: Theme.font.size.body2
 		}
 	]

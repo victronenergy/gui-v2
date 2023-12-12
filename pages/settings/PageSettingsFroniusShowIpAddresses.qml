@@ -13,7 +13,7 @@ Page {
 
 	property var _rescanDialog
 
-	topRightButton: VenusOS.StatusBar_RightButton_Refresh
+	topRightButton: Enums.StatusBar_RightButton_Refresh
 
 	IpAddressListView {
 		id: settingsListView
@@ -41,7 +41,7 @@ Page {
 			title: qsTrId("settings_fronius_rescan_title")
 			//% "Rescan"
 			acceptText: qsTrId("settings_fronius_rescan")
-			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+			dialogDoneOptions: Enums.ModalDialog_DoneOptions_OkAndCancel
 			icon.color: Theme.color.ok
 			icon.source: "/images/toast_icon_info.svg"
 

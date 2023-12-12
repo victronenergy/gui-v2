@@ -50,7 +50,7 @@ Page {
 			//% "Grid metering"
 			text: qsTrId("settings_ess_grid_metering")
 			dataSource: "com.victronenergy.settings/Settings/CGwacs/RunWithoutGridMeter"
-			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			visible: defaultVisible && essMode.value !== Enums.Ess_Hub4ModeState_Disabled
 			optionModel: [
 				//% "External meter"
 				{ display: qsTrId("settings_ess_external_meter"), value: 0 },
@@ -71,23 +71,23 @@ Page {
 			text: qsTrId("settings_ess_multiphase_regulation")
 			dataSource: essMode.source
 			visible: defaultVisible
-				 && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				 && batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				 && essMode.value !== Enums.Ess_Hub4ModeState_Disabled
+				 && batteryLifeState.dataValue !== Enums.Ess_BatteryLifeState_KeepCharged
 			defaultSecondaryText: ""
 			optionModel: [
 				//% "Total of all phases"
-				{ display: qsTrId("settings_ess_phase_compensation"), value: VenusOS.Ess_Hub4ModeState_PhaseCompensation },
+				{ display: qsTrId("settings_ess_phase_compensation"), value: Enums.Ess_Hub4ModeState_PhaseCompensation },
 				//% "Individual phase"
-				{ display: qsTrId("settings_ess_individual_phase"), value: VenusOS.Ess_Hub4ModeState_PhaseSplit },
+				{ display: qsTrId("settings_ess_individual_phase"), value: Enums.Ess_Hub4ModeState_PhaseSplit },
 			]
 			onOptionClicked: function(index) {
 				const newValue = optionModel[index].value
-				if (newValue === VenusOS.Ess_Hub4ModeState_PhaseSplit) {
+				if (newValue === Enums.Ess_Hub4ModeState_PhaseSplit) {
 					//% "Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).\n\nCAUTION: Use only if required by the utility provider."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_multiphase_split_notif"))
-				} else if (newValue === VenusOS.Ess_Hub4ModeState_PhaseCompensation ) {
+					Global.showToastNotification(Enums.Notification_Info, qsTrId("settings_ess_multiphase_split_notif"))
+				} else if (newValue === Enums.Ess_Hub4ModeState_PhaseCompensation ) {
 					//% "The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).\n\nUse unless prohibited by the utility provider."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_multiphase_total_notif"))
+					Global.showToastNotification(Enums.Notification_Info, qsTrId("settings_ess_multiphase_total_notif"))
 				}
 			}
 		}
@@ -101,8 +101,8 @@ Page {
 			text: qsTrId("settings_ess_min_soc")
 			button.text: Global.ess.minimumStateOfCharge + "%"
 			visible: defaultVisible
-				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& essMode.value !== Enums.Ess_Hub4ModeState_Disabled
+				&& batteryLifeState.dataValue !== Enums.Ess_BatteryLifeState_KeepCharged
 			onClicked: {
 				if (!_minSocDialog) {
 					_minSocDialog = minSocDialogComponent.createObject(Global.dialogLayer)
@@ -121,7 +121,7 @@ Page {
 			//% "Active SOC limit"
 			text: qsTrId("settings_ess_active_soc_limit")
 			visible: defaultVisible
-				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+				&& essMode.value !== Enums.Ess_Hub4ModeState_Disabled
 				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataValue)
 			secondaryText: Math.max(Global.ess.minimumStateOfCharge || 0, socLimit.value || 0) + "%"
 		}
@@ -130,14 +130,14 @@ Page {
 			//% "Peak shaving"
 			text: qsTrId("settings_ess_peak_shaving")
 			currentIndex: {
-				if (batteryLifeState.dataValue === VenusOS.Ess_BatteryLifeState_KeepCharged) {
+				if (batteryLifeState.dataValue === Enums.Ess_BatteryLifeState_KeepCharged) {
 					return 1
 				}
 				return peakshaveItem.value === 1 ? 1 : 0
 			}
 			updateOnClick: false
-			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-			enabled: batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+			visible: defaultVisible && essMode.value !== Enums.Ess_Hub4ModeState_Disabled
+			enabled: batteryLifeState.dataValue !== Enums.Ess_BatteryLifeState_KeepCharged
 			optionModel: [
 				//% "Above minimum SOC only"
 				{ display: qsTrId("settings_ess_above_minimum_soc_only"), value: 0 },
@@ -148,10 +148,10 @@ Page {
 				peakshaveItem.setValue(index)
 				if (index === 1) {
 					//% "Use this option for peak shaving.\n\nThe peak shaving threshold is set using the AC input current limit setting.\n\nSee documentation for further information."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_use_this_option_for_peak_shaving"))
+					Global.showToastNotification(Enums.Notification_Info, qsTrId("settings_ess_use_this_option_for_peak_shaving"))
 				} else {
 					//% "Use this option in systems that do not perform peak shaving."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_do_not_perform_peak_shaving"))
+					Global.showToastNotification(Enums.Notification_Info, qsTrId("settings_ess_do_not_perform_peak_shaving"))
 				}
 			}
 
@@ -169,7 +169,7 @@ Page {
 			text: qsTrId("settings_ess_batteryLife_state")
 			dataSource: "com.victronenergy.settings/Settings/CGwacs/BatteryLife/State"
 			visible: defaultVisible
-				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+				&& essMode.value !== Enums.Ess_Hub4ModeState_Disabled
 				&& Global.ess.isBatteryLifeActive(dataValue)
 			enabled: false
 			optionModel: [
@@ -195,7 +195,7 @@ Page {
 			text: qsTrId("settings_ess_limit_charge_power")
 			checked: maxChargePower.value >= 0
 			visible: defaultVisible
-				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+				&& essMode.value !== Enums.Ess_Hub4ModeState_Disabled
 				&& !maxChargeCurrentControl.valid
 
 			onCheckedChanged: {
@@ -226,8 +226,8 @@ Page {
 			text: qsTrId("settings_ess_limit_inverter_power")
 			checked: maxDischargePower.value >= 0
 			visible: defaultVisible
-				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& essMode.value !== Enums.Ess_Hub4ModeState_Disabled
+				&& batteryLifeState.dataValue !== Enums.Ess_BatteryLifeState_KeepCharged
 
 			onCheckedChanged: {
 				if (checked && maxDischargePower.value < 0) {
@@ -254,8 +254,8 @@ Page {
 			//% "Grid setpoint"
 			text: qsTrId("settings_ess_grid_setpoint")
 			visible: defaultVisible
-				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& essMode.value !== Enums.Ess_Hub4ModeState_Disabled
+				&& batteryLifeState.dataValue !== Enums.Ess_BatteryLifeState_KeepCharged
 			dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
 			suffix: "W"
 			stepSize: 10
@@ -264,7 +264,7 @@ Page {
 		ListNavigationItem {
 			//% "Grid feed-in"
 			text: qsTrId("settings_ess_grid_feed_in")
-			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			visible: defaultVisible && essMode.value !== Enums.Ess_Hub4ModeState_Disabled
 
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Feedin.qml",
@@ -276,8 +276,8 @@ Page {
 			//% "Scheduled charging"
 			text: qsTrId("settings_ess_scheduled_charging")
 			visible: defaultVisible
-				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& essMode.value !== Enums.Ess_Hub4ModeState_Disabled
+				&& batteryLifeState.dataValue !== Enums.Ess_BatteryLifeState_KeepCharged
 
 			onClicked: {
 				Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
@@ -301,8 +301,8 @@ Page {
 			//% "Debug"
 			text: qsTrId("settings_ess_debug")
 			visible: defaultVisible
-				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
+				&& essMode.value !== Enums.Ess_Hub4ModeState_Disabled
+				&& Global.systemSettings.canAccess(Enums.User_AccessType_Service)
 
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageHub4Debug.qml")

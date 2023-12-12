@@ -78,7 +78,7 @@ Item {
 		QuantityLabel {
 			anchors.horizontalCenter: parent.horizontalCenter
 			font.pixelSize: Theme.font.briefPage.battery.percentage.pixelSize
-			unit: VenusOS.Units_Percentage
+			unit: Enums.Units_Percentage
 			value: gauges.value
 		}
 
@@ -93,7 +93,7 @@ Item {
 				valueColor: Theme.color.briefPage.battery.value.text.color
 				unitColor: Theme.color.briefPage.battery.unit.text.color
 				font.pixelSize: Theme.font.briefPage.battery.voltage.pixelSize
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 			}
 			QuantityLabel {
 				id: currentLabel
@@ -101,7 +101,7 @@ Item {
 				valueColor: Theme.color.briefPage.battery.value.text.color
 				unitColor: Theme.color.briefPage.battery.unit.text.color
 				font.pixelSize: Theme.font.briefPage.battery.voltage.pixelSize
-				unit: VenusOS.Units_Amp
+				unit: Enums.Units_Amp
 			}
 		}
 

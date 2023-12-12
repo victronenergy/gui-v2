@@ -21,22 +21,22 @@ QtObject {
 			return -1
 		}
 
-		let essState = VenusOS.Ess_State_OptimizedWithBatteryLife
-		if (hub4Mode === VenusOS.Ess_Hub4ModeState_Disabled) {
-			essState = VenusOS.Ess_State_ExternalControl
+		let essState = Enums.Ess_State_OptimizedWithBatteryLife
+		if (hub4Mode === Enums.Ess_Hub4ModeState_Disabled) {
+			essState = Enums.Ess_State_ExternalControl
 		} else if (Global.ess.isBatteryLifeActive(currentState)) {
-			essState = VenusOS.Ess_State_OptimizedWithBatteryLife
+			essState = Enums.Ess_State_OptimizedWithBatteryLife
 		} else if (_isBatterySocGuardActive(currentState)) {
-			essState = VenusOS.Ess_State_OptimizedWithoutBatteryLife
-		} else if (currentState === VenusOS.Ess_BatteryLifeState_KeepCharged) {
-			essState = VenusOS.Ess_State_KeepBatteriesCharged
+			essState = Enums.Ess_State_OptimizedWithoutBatteryLife
+		} else if (currentState === Enums.Ess_BatteryLifeState_KeepCharged) {
+			essState = Enums.Ess_State_KeepBatteriesCharged
 		}
 		return essState
 	}
 
 	function _isBatterySocGuardActive(essState) {
-		return essState >= VenusOS.Ess_BatteryLifeState_SocGuardDefault
-				&& essState <= VenusOS.Ess_BatteryLifeState_SocGuardLowSocCharge
+		return essState >= Enums.Ess_BatteryLifeState_SocGuardDefault
+				&& essState <= Enums.Ess_BatteryLifeState_SocGuardLowSocCharge
 	}
 
 	property Connections essConn: Connections {
@@ -44,30 +44,30 @@ QtObject {
 
 		function onSetStateRequested(essState) {
 			// Hub 4 mode
-			if (essState === VenusOS.Ess_State_ExternalControl && veHub4Mode.value !== VenusOS.Ess_Hub4ModeState_Disabled) {
-				veHub4Mode.setValue(VenusOS.Ess_Hub4ModeState_Disabled)
-			} else if (essState !== VenusOS.Ess_State_ExternalControl && veHub4Mode.value === VenusOS.Ess_Hub4ModeState_Disabled) {
-				veHub4Mode.setValue(VenusOS.Ess_Hub4ModeState_PhaseCompensation)
+			if (essState === Enums.Ess_State_ExternalControl && veHub4Mode.value !== Enums.Ess_Hub4ModeState_Disabled) {
+				veHub4Mode.setValue(Enums.Ess_Hub4ModeState_Disabled)
+			} else if (essState !== Enums.Ess_State_ExternalControl && veHub4Mode.value === Enums.Ess_Hub4ModeState_Disabled) {
+				veHub4Mode.setValue(Enums.Ess_Hub4ModeState_PhaseCompensation)
 			}
 
 			// BatteryLife state
 			let batteryLifeState = null
 			switch (essState) {
-			case VenusOS.Ess_State_OptimizedWithBatteryLife:
+			case Enums.Ess_State_OptimizedWithBatteryLife:
 				if (!!Global.ess && !Global.ess.isBatteryLifeActive(veBatteryLifeState.value)) {
-					batteryLifeState = VenusOS.Ess_BatteryLifeState_Restart
+					batteryLifeState = Enums.Ess_BatteryLifeState_Restart
 				}
 				break
-			case VenusOS.Ess_State_OptimizedWithoutBatteryLife:
+			case Enums.Ess_State_OptimizedWithoutBatteryLife:
 				if (!_isBatterySocGuardActive(veBatteryLifeState.value)) {
-					batteryLifeState = VenusOS.Ess_BatteryLifeState_SocGuardDefault
+					batteryLifeState = Enums.Ess_BatteryLifeState_SocGuardDefault
 				}
 				break
-			case VenusOS.Ess_State_KeepBatteriesCharged:
-				batteryLifeState = VenusOS.Ess_BatteryLifeState_KeepCharged
+			case Enums.Ess_State_KeepBatteriesCharged:
+				batteryLifeState = Enums.Ess_BatteryLifeState_KeepCharged
 				break
-			case VenusOS.Ess_State_ExternalControl:
-				batteryLifeState = VenusOS.Ess_BatteryLifeState_Disabled
+			case Enums.Ess_State_ExternalControl:
+				batteryLifeState = Enums.Ess_BatteryLifeState_Disabled
 				break
 			default:
 				console.warn("Unrecognised ESS state:", essState)

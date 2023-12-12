@@ -57,7 +57,7 @@ GradientListView {
 		ModalWarningDialog {
 			//% "Remove IP address?"
 			title: qsTrId("settings_fronius_remove_ip_address")
-			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+			dialogDoneOptions: Enums.ModalDialog_DoneOptions_OkAndCancel
 			icon.color: Theme.color.orange
 			acceptText: CommonWords.remove
 

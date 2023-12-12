@@ -18,7 +18,7 @@ QtObject {
 		{
 			acknowledged: true,
 			active: true,
-			type: VenusOS.Notification_Warning,
+			type: Enums.Notification_Warning,
 			dateTime: root.date8dAgo,
 			deviceName: "RS 48/6000/100 HQ2050NMMEX",
 			description: "Low battery voltage 45V"
@@ -26,7 +26,7 @@ QtObject {
 		{
 			acknowledged: false,
 			active: false,
-			type: VenusOS.Notification_Alarm,
+			type: Enums.Notification_Alarm,
 			dateTime: root.date1dAgo,
 			deviceName: "Fuel tank custom name",
 			description: "Fuel level low 15%",
@@ -34,7 +34,7 @@ QtObject {
 		{
 			acknowledged: false,
 			active: true,
-			type: VenusOS.Notification_Info,
+			type: Enums.Notification_Info,
 			dateTime: root.date2h10mAgo,
 			deviceName: "System",
 			description: "Software update available",
@@ -42,7 +42,7 @@ QtObject {
 		{
 			acknowledged: false,
 			active: true,
-			type: VenusOS.Notification_Info,
+			type: Enums.Notification_Info,
 			dateTime: root.date26MinutesAgo,
 			deviceName: "System",
 			description: "Software update available"

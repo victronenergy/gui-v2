@@ -37,12 +37,12 @@ Page {
 							//% "Session"
 							title: qsTrId("evcs_session"),
 							text: CommonWords.total,
-							unit: VenusOS.Units_None,
+							unit: Enums.Units_None,
 						},
 						{
 							title: CommonWords.power_watts,
 							value: root.evCharger.power,
-							unit: VenusOS.Units_Watt
+							unit: Enums.Units_Watt
 						},
 						{
 							title: CommonWords.current_amps,
@@ -52,7 +52,7 @@ Page {
 						{
 							title: CommonWords.energy,
 							value: root.evCharger.energy,
-							unit: VenusOS.Units_Energy_KiloWattHour
+							unit: Enums.Units_Energy_KiloWattHour
 						},
 						{
 							//: Charging time for the EV charger
@@ -77,11 +77,11 @@ Page {
 
 					rowCount: root.evCharger.phases.count
 					units: [
-						{ title: "", unit: VenusOS.Units_None },
-						{ title: "", unit: VenusOS.Units_Watt },
-						{ title: "", unit: VenusOS.Units_None },
-						{ title: "", unit: VenusOS.Units_None },
-						{ title: "", unit: VenusOS.Units_None },
+						{ title: "", unit: Enums.Units_None },
+						{ title: "", unit: Enums.Units_Watt },
+						{ title: "", unit: Enums.Units_None },
+						{ title: "", unit: Enums.Units_None },
+						{ title: "", unit: Enums.Units_None },
 					]
 					valueForModelIndex: function(phaseIndex, column) {
 						const phase = root.evCharger.phases.get(phaseIndex)
@@ -107,20 +107,20 @@ Page {
 				dataSource: root.evCharger.serviceUid + "/Mode"
 				optionModel: [
 					{
-						display: Global.evChargers.chargerModeToText(VenusOS.Evcs_Mode_Manual),
-						value: VenusOS.Evcs_Mode_Manual,
+						display: Global.evChargers.chargerModeToText(Enums.Evcs_Mode_Manual),
+						value: Enums.Evcs_Mode_Manual,
 						//% "Start and stop the process yourself. Use this for quick charges and close monitoring."
 						caption: qsTrId("evcs_manual_caption")
 					},
 					{
-						display: Global.evChargers.chargerModeToText(VenusOS.Evcs_Mode_Auto),
-						value: VenusOS.Evcs_Mode_Auto,
+						display: Global.evChargers.chargerModeToText(Enums.Evcs_Mode_Auto),
+						value: Enums.Evcs_Mode_Auto,
 						//% "Starts and stops based on the battery charge level. Optimal for overnight and extended charges to avoid overcharging."
 						caption: qsTrId("evcs_auto_caption")
 					},
 					{
-						display: Global.evChargers.chargerModeToText(VenusOS.Evcs_Mode_Scheduled),
-						value: VenusOS.Evcs_Mode_Scheduled,
+						display: Global.evChargers.chargerModeToText(Enums.Evcs_Mode_Scheduled),
+						value: Enums.Evcs_Mode_Scheduled,
 						//% "Lower electricity rates during off-peak hours or if you want to ensure that your EV is fully charged and ready to go at a specific time."
 						caption: qsTrId("evcs_scheduled_caption")
 					},

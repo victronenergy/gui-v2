@@ -47,7 +47,7 @@ Page {
 		id: confirmApDialogComponent
 
 		ModalWarningDialog {
-			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+			dialogDoneOptions: Enums.ModalDialog_DoneOptions_OkAndCancel
 			//% "Disable Access Point"
 			title: qsTrId("settings_wifi_disable_ap")
 			//% "Are you sure that you want to disable the access point?"

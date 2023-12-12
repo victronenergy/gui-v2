@@ -15,7 +15,7 @@ QtObject {
 	readonly property DataPoint systemState: DataPoint {
 		source: "com.victronenergy.system/SystemState/State"
 		Component.onCompleted: {
-			Global.system.state = Qt.binding(function() { return value || VenusOS.System_State_Off })
+			Global.system.state = Qt.binding(function() { return value || Enums.System_State_Off })
 		}
 	}
 

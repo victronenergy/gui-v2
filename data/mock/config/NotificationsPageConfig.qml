@@ -29,7 +29,7 @@ QtObject {
 		{
 			acknowledged: true,
 			active: true,
-			type: VenusOS.Notification_Warning,
+			type: Enums.Notification_Warning,
 			dateTime: root.date,
 			deviceName: "RS 48/6000/100 HQ2050NMMEX",
 			description: "Low battery voltage 45V"
@@ -37,7 +37,7 @@ QtObject {
 		{
 			acknowledged: false,
 			active: true,
-			type: VenusOS.Notification_Alarm,
+			type: Enums.Notification_Alarm,
 			dateTime: root.date,
 			deviceName: "Fuel tank custom name",
 			description: "Fuel level low 15%"
@@ -45,7 +45,7 @@ QtObject {
 		{
 			acknowledged: false,
 			active: false,
-			type: VenusOS.Notification_Alarm,
+			type: Enums.Notification_Alarm,
 			dateTime: root.date,
 			deviceName: "Fuel tank custom name",
 			description: "Fuel level low 15%"
@@ -53,7 +53,7 @@ QtObject {
 		{
 			acknowledged: false,
 			active: true,
-			type: VenusOS.Notification_Info,
+			type: Enums.Notification_Info,
 			dateTime: root.date,
 			deviceName: "System",
 			description: "Software update available"
@@ -68,7 +68,7 @@ QtObject {
 	}
 
 	function showToastNotification(notifType) {
-		if (notifType > VenusOS.Notification_Info) {
+		if (notifType > Enums.Notification_Info) {
 			useShortText = !useShortText
 		}
 		Global.showToastNotification(notifType, useShortText ? shortText : longText)

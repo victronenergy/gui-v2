@@ -24,7 +24,7 @@ Page {
 				onClicked: {
 					// TODO vePlatform.setRemoteConsolePassword("")
 					//% "Password check has been disabled"
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_remoteconsole_password_check_disabled"))
+					Global.showToastNotification(Enums.Notification_Info, qsTrId("settings_remoteconsole_password_check_disabled"))
 					enablePasswordField.textField.text = ""
 				}
 			}
@@ -44,7 +44,7 @@ Page {
 						? qsTrId("settings_remoteconsole_password_check_is_disabled")
 						  //% "Password check enabled and the password is set"
 						: qsTrId("settings_remoteconsole_password_check_enabled")
-					Global.showToastNotification(VenusOS.Notification_Info, info)
+					Global.showToastNotification(Enums.Notification_Info, info)
 				}
 
 				onHasActiveFocusChanged: {

@@ -25,7 +25,7 @@ Page {
 				//% "Level"
 				text: qsTrId("devicelist_tanksensor_level")
 				dataSource: root.bindPrefix + "/Level"
-				unit: VenusOS.Units_Percentage
+				unit: Enums.Units_Percentage
 			}
 
 			ListQuantityItem {
@@ -40,7 +40,7 @@ Page {
 				text: CommonWords.temperature
 				dataSource: root.bindPrefix + "/Temperature"
 				value: dataValid
-					   ? Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
+					   ? Global.systemSettings.temperatureUnit.value === Enums.Units_Temperature_Celsius
 						   ? dataValue
 						   : Units.celsiusToFahrenheit(dataValue)
 					   : NaN
@@ -52,7 +52,7 @@ Page {
 				//% "Sensor battery"
 				text: qsTrId("devicelist_tanksensor_sensor_battery")
 				dataSource: root.bindPrefix + "/BatteryVoltage"
-				unit: VenusOS.Units_Volt
+				unit: Enums.Units_Volt
 				precision: 2
 				visible: defaultVisible && dataValid
 			}

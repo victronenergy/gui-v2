@@ -84,13 +84,13 @@ Page {
 								optionModel: [
 									//: Example of GPS data in the 'Degrees, Minutes, Seconds' format
 									//% "52° 20' 41.6\" N, 5° 13' 12.3\" E"
-									{ display: qsTrId("settings_gps_format_dms_example"), value: VenusOS.GpsData_Format_DegreesMinutesSeconds },
+									{ display: qsTrId("settings_gps_format_dms_example"), value: Enums.GpsData_Format_DegreesMinutesSeconds },
 									//: Example of GPS data in the 'Decimal Degrees' format
 									//% "52.34489, 5.22008"
-									{ display: qsTrId("settings_gps_format_dd_example"), value: VenusOS.GpsData_Format_DecimalDegrees },
+									{ display: qsTrId("settings_gps_format_dd_example"), value: Enums.GpsData_Format_DecimalDegrees },
 									//: Example of GPS data in the 'Degrees Minutes' format
 									//% "52° 20.693 N, 5° 13.205 E"
-									{ display: qsTrId("settings_gps_format_dm_example"), value: VenusOS.GpsData_Format_DegreesMinutes },
+									{ display: qsTrId("settings_gps_format_dm_example"), value: Enums.GpsData_Format_DegreesMinutes },
 								]
 							}
 

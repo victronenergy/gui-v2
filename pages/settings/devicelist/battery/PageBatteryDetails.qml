@@ -19,8 +19,8 @@ Page {
 				//% "Lowest cell voltage"
 				text: qsTrId("batterydetails_lowest_cell_voltage")
 				textModel: [
-					{ value: details.minVoltageCellId.value, unit: VenusOS.Units_Volt },
-					{ value: details.minCellVoltage.value, unit: VenusOS.Units_Volt },
+					{ value: details.minVoltageCellId.value, unit: Enums.Units_Volt },
+					{ value: details.minCellVoltage.value, unit: Enums.Units_Volt },
 				]
 			}
 
@@ -28,8 +28,8 @@ Page {
 				//% "Highest cell voltage"
 				text: qsTrId("batterydetails_highest_cell_voltage")
 				textModel: [
-					{ value: details.maxVoltageCellId.value, unit: VenusOS.Units_Volt },
-					{ value: details.maxCellVoltage.value, unit: VenusOS.Units_Volt },
+					{ value: details.maxVoltageCellId.value, unit: Enums.Units_Volt },
+					{ value: details.maxCellVoltage.value, unit: Enums.Units_Volt },
 				]
 			}
 

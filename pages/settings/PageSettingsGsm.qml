@@ -92,7 +92,7 @@ Page {
 				//% "Allow roaming"
 				text: qsTrId("page_settings_gsm_allow_roaming")
 				dataSource: settingsBindPrefix + "/RoamingPermitted"
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 			}
 
 			ListTextItem {
@@ -137,7 +137,7 @@ Page {
 				text: qsTrId("page_settings_gsm_pin")
 				textField.maximumLength: 35
 				dataSource: settingsBindPrefix + "/PIN"
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				// Show only when PIN required
 				visible: dataValid && [11, 16].indexOf(simStatus.value)  > -1
 			}

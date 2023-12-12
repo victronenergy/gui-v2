@@ -12,9 +12,9 @@ QtObject {
 	function populate() {
 		// Add all possible AC inputs (only one will be connected at any time)
 		let types = [
-				VenusOS.AcInputs_InputType_Grid,
-				VenusOS.AcInputs_InputType_Generator,
-				VenusOS.AcInputs_InputType_Shore,
+				Enums.AcInputs_InputType_Grid,
+				Enums.AcInputs_InputType_Generator,
+				Enums.AcInputs_InputType_Shore,
 			]
 		for (let i = 0; i < types.length; ++i) {
 			const input = inputComponent.createObject(root, { "source": types[i] })
@@ -146,7 +146,7 @@ QtObject {
 			}
 
 			Component.onCompleted: {
-				if (source === VenusOS.AcInputs_InputType_Generator) {
+				if (source === Enums.AcInputs_InputType_Generator) {
 					Global.acInputs.generatorInput = input
 				}
 			}

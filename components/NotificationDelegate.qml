@@ -69,12 +69,12 @@ Rectangle {
 		CP.ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
 			fillMode: Image.PreserveAspectFit
-			color: root.category === VenusOS.Notification_Info
+			color: root.category === Enums.Notification_Info
 				   ? (root.alarmActive ? Theme.color.ok : Theme.color.darkOk)
-				   : root.category === VenusOS.Notification_Warning
+				   : root.category === Enums.Notification_Warning
 					 ? (root.alarmActive ? Theme.color.warning : Theme.color.darkWarning)
 					 : (root.alarmActive ? Theme.color.critical : Theme.color.darkCritical)
-			source: root.category === VenusOS.Notification_Info
+			source: root.category === Enums.Notification_Info
 					? "qrc:/images/toast_icon_info.svg" : "qrc:/images/toast_icon_alarm.svg"
 		}
 		Item {

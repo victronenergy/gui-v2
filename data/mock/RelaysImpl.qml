@@ -23,7 +23,7 @@ QtObject {
 				relayFunction = value === undefined ? -1 : value
 			}
 
-			property int state: model.index % 2 == 0 ? VenusOS.Relays_State_Inactive : VenusOS.Relays_State_Active
+			property int state: model.index % 2 == 0 ? Enums.Relays_State_Inactive : Enums.Relays_State_Active
 			property int relayFunction
 
 			serviceUid: "com.victronenergy.system/Relay" + deviceInstance

@@ -43,15 +43,15 @@ QtObject {
 
 	function modeToText(m) {
 		switch (m) {
-		case VenusOS.VeBusDevice_Mode_On:
+		case Enums.VeBusDevice_Mode_On:
 			return CommonWords.onOrOff(1)
-		case VenusOS.VeBusDevice_Mode_ChargerOnly:
+		case Enums.VeBusDevice_Mode_ChargerOnly:
 			//% "Charger only"
 			return qsTrId("veBusDevices_mode_charger_only")
-		case VenusOS.VeBusDevice_Mode_InverterOnly:
+		case Enums.VeBusDevice_Mode_InverterOnly:
 			//% "Inverter only"
 			return qsTrId("veBusDevices_mode_inverter_only")
-		case VenusOS.VeBusDevice_Mode_Off:
+		case Enums.VeBusDevice_Mode_Off:
 			return CommonWords.onOrOff(0)
 		default:
 			return ""

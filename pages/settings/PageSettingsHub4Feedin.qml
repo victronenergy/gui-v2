@@ -19,7 +19,7 @@ Page {
 				//% "AC-coupled PV - feed in excess"
 				text: qsTrId("settings_ess_ac_coupled_pv")
 				dataSource: "com.victronenergy.settings/Settings/CGwacs/PreventFeedback"
-				visible: defaultVisible && hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
+				visible: defaultVisible && hub4Mode !== Enums.Ess_Hub4ModeState_Disabled
 				invertSourceValue: true
 			}
 
@@ -30,7 +30,7 @@ Page {
 				text: qsTrId("settings_ess_dc_coupled_pv")
 				dataSource: "com.victronenergy.settings/Settings/CGwacs/OvervoltageFeedIn"
 				visible: defaultVisible
-					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
+					&& hub4Mode !== Enums.Ess_Hub4ModeState_Disabled
 					&& doNotFeedInvOvervoltage.valid
 
 				DataPoint {
@@ -70,7 +70,7 @@ Page {
 				//% "Feed-in limiting active"
 				text: qsTrId("settings_ess_feed_in_limiting_active")
 				visible: defaultVisible
-					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
+					&& hub4Mode !== Enums.Ess_Hub4ModeState_Disabled
 					&& dataValid
 				dataSource: "com.victronenergy.hub4/PvPowerLimiterActive"
 				secondaryText: CommonWords.yesOrNo(dataValue)

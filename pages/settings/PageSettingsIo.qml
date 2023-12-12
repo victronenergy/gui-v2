@@ -84,24 +84,24 @@ Page {
 								text: qsTrId("settings_io_digital_input").arg(model.uid.split('/').pop())
 								dataSource: Utils.normalizedSource(model.uid) + "/Type"
 								optionModel: [
-									{ display: CommonWords.disabled, value: VenusOS.DigitalInput_Disabled },
+									{ display: CommonWords.disabled, value: Enums.DigitalInput_Disabled },
 									//% "Pulse meter"
-									{ display: qsTrId("settings_io_digital_input_pulse_meter"), value: VenusOS.DigitalInput_PulseMeter },
+									{ display: qsTrId("settings_io_digital_input_pulse_meter"), value: Enums.DigitalInput_PulseMeter },
 									//% "Door alarm"
-									{ display: qsTrId("settings_io_digital_input_door_alarm"), value: VenusOS.DigitalInput_DoorAlarm },
+									{ display: qsTrId("settings_io_digital_input_door_alarm"), value: Enums.DigitalInput_DoorAlarm },
 									//% "Bilge pump"
-									{ display: qsTrId("settings_io_digital_input_bilge_pump"), value: VenusOS.DigitalInput_BilgePump },
+									{ display: qsTrId("settings_io_digital_input_bilge_pump"), value: Enums.DigitalInput_BilgePump },
 									//% "Bilge alarm"
-									{ display: qsTrId("settings_io_digital_input_bilge_alarm"), value: VenusOS.DigitalInput_BilgeAlarm },
+									{ display: qsTrId("settings_io_digital_input_bilge_alarm"), value: Enums.DigitalInput_BilgeAlarm },
 									//% "Burglar alarm"
-									{ display: qsTrId("settings_io_digital_input_burglar_alarm"), value: VenusOS.DigitalInput_BurglarAlarm },
+									{ display: qsTrId("settings_io_digital_input_burglar_alarm"), value: Enums.DigitalInput_BurglarAlarm },
 									//% "Smoke alarm"
-									{ display: qsTrId("settings_io_digital_input_smoke_alarm"), value: VenusOS.DigitalInput_SmokeAlarm },
+									{ display: qsTrId("settings_io_digital_input_smoke_alarm"), value: Enums.DigitalInput_SmokeAlarm },
 									//% "Fire alarm"
-									{ display: qsTrId("settings_io_digital_input_bilge_fire"), value: VenusOS.DigitalInput_FireAlarm },
+									{ display: qsTrId("settings_io_digital_input_bilge_fire"), value: Enums.DigitalInput_FireAlarm },
 									//% "CO2 alarm"
-									{ display: qsTrId("settings_io_digital_input_co2_alarm"), value: VenusOS.DigitalInput_CO2Alarm },
-									{ display: CommonWords.generator, value: VenusOS.DigitalInput_Generator },
+									{ display: qsTrId("settings_io_digital_input_co2_alarm"), value: Enums.DigitalInput_CO2Alarm },
+									{ display: CommonWords.generator, value: Enums.DigitalInput_Generator },
 								]
 							}
 						}

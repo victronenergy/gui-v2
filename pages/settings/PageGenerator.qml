@@ -143,7 +143,7 @@ Page {
 		ListTextItem {
 			//% "Accumulated running time since last test run"
 			text: qsTrId("settings_page_relay_generator_accumulated_running_time")
-			showAccessLevel: VenusOS.User_AccessType_Service
+			showAccessLevel: Enums.User_AccessType_Service
 			visible: defaultVisible && nextTestRun.visible
 			secondaryText: Utils.secondsToString(dataValue, false)
 			dataSource: root.startStopBindPrefix + "/TestRunIntervalRuntime"
@@ -199,7 +199,7 @@ Page {
 								//% "Start generator"
 								text: qsTrId("settings_page_relay_generator_start_generator")
 								dataSource: root.startStopBindPrefix + "/ManualStart"
-								writeAccessLevel: VenusOS.User_AccessType_User
+								writeAccessLevel: Enums.User_AccessType_User
 								onClicked: {
 									Global.generators.manualRunningNotification(!checked, stopTimer.value)
 								}
@@ -210,7 +210,7 @@ Page {
 								text: qsTrId("settings_page_relay_generator_run_for_hh_mm")
 								enabled: !manualSwitch.checked
 								dataSource: root.startStopBindPrefix + "/ManualStartTimer"
-								writeAccessLevel: VenusOS.User_AccessType_User
+								writeAccessLevel: Enums.User_AccessType_User
 							}
 						}
 					}

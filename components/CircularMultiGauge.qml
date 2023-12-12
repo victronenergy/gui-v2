@@ -41,7 +41,7 @@ Item {
 				height: width
 				anchors.centerIn: parent
 				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
-				sourceComponent: model.tankType === VenusOS.Tank_Type_Battery ? shinyProgressArc : progressArc
+				sourceComponent: model.tankType === Enums.Tank_Type_Battery ? shinyProgressArc : progressArc
 				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load circular multi gauge progress arc:", errorString())
 
 				Component {
@@ -55,7 +55,7 @@ Item {
 						remainderColor: Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
-						shineAnimationEnabled: Global.batteries.system.mode === VenusOS.Battery_Mode_Charging
+						shineAnimationEnabled: Global.batteries.system.mode === Enums.Battery_Mode_Charging
 					}
 				}
 

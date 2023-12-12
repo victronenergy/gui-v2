@@ -9,8 +9,8 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	property int type: VenusOS.OverviewWidget_Type_Unknown
-	property int size: VenusOS.OverviewWidget_Size_M
+	property int type: Enums.OverviewWidget_Type_Unknown
+	property int size: Enums.OverviewWidget_Size_M
 
 	property alias icon: widgetHeader.icon
 	property alias title: widgetHeader.title
@@ -29,26 +29,26 @@ Rectangle {
 	property bool animationEnabled
 
 	function getCompactHeight(s) {
-		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry.overviewPage.widget.compact.xl.height
-			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry.overviewPage.widget.compact.l.height
-			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry.overviewPage.widget.compact.m.height
-			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry.overviewPage.widget.compact.s.height
-			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry.overviewPage.widget.compact.xs.height
+		return s === Enums.OverviewWidget_Size_XL ? Theme.geometry.overviewPage.widget.compact.xl.height
+			: s === Enums.OverviewWidget_Size_L ? Theme.geometry.overviewPage.widget.compact.l.height
+			: s === Enums.OverviewWidget_Size_M ? Theme.geometry.overviewPage.widget.compact.m.height
+			: s === Enums.OverviewWidget_Size_S ? Theme.geometry.overviewPage.widget.compact.s.height
+			: s === Enums.OverviewWidget_Size_XS ? Theme.geometry.overviewPage.widget.compact.xs.height
 			: 0
 	}
 
 	function getExpandedHeight(s) {
-		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry.overviewPage.widget.expanded.xl.height
-			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry.overviewPage.widget.expanded.l.height
-			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry.overviewPage.widget.expanded.m.height
-			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry.overviewPage.widget.expanded.s.height
-			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry.overviewPage.widget.expanded.xs.height
+		return s === Enums.OverviewWidget_Size_XL ? Theme.geometry.overviewPage.widget.expanded.xl.height
+			: s === Enums.OverviewWidget_Size_L ? Theme.geometry.overviewPage.widget.expanded.l.height
+			: s === Enums.OverviewWidget_Size_M ? Theme.geometry.overviewPage.widget.expanded.m.height
+			: s === Enums.OverviewWidget_Size_S ? Theme.geometry.overviewPage.widget.expanded.s.height
+			: s === Enums.OverviewWidget_Size_XS ? Theme.geometry.overviewPage.widget.expanded.xs.height
 			: 0
 	}
 
 	y: compactY
 	height: compactHeight
-	visible: size !== VenusOS.OverviewWidget_Size_Zero
+	visible: size !== Enums.OverviewWidget_Size_Zero
 	radius: Theme.geometry.overviewPage.widget.radius
 	color: Theme.color.overviewPage.widget.background
 
@@ -77,7 +77,7 @@ Rectangle {
 		id: header
 
 		x: Theme.geometry.overviewPage.widget.content.horizontalMargin
-		y: root.size > VenusOS.OverviewWidget_Size_S
+		y: root.size > Enums.OverviewWidget_Size_S
 		   ? Theme.geometry.overviewPage.widget.content.verticalMargin
 		   : parent.height/2 - height/2
 		width: parent.width - 2*Theme.geometry.overviewPage.widget.content.horizontalMargin
@@ -96,7 +96,7 @@ Rectangle {
 				top: widgetHeader.bottom
 				topMargin: Theme.geometry.overviewPage.widget.header.spacing
 			}
-			font.pixelSize: root.size === VenusOS.OverviewWidget_Size_XS
+			font.pixelSize: root.size === Enums.OverviewWidget_Size_XS
 					  ? Theme.font.overviewPage.widget.quantityLabel.minimumSize
 					  : Theme.font.overviewPage.widget.quantityLabel.maximumSize
 		}
@@ -111,6 +111,6 @@ Rectangle {
 			top: header.bottom
 			bottom: parent.bottom
 		}
-		visible: root.size >= VenusOS.OverviewWidget_Size_M
+		visible: root.size >= Enums.OverviewWidget_Size_M
 	}
 }

@@ -137,7 +137,7 @@ Rectangle {
 		}
 		width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
 		font.pixelSize: Theme.font.size.h1
-		unit: VenusOS.Units_Percentage
+		unit: Enums.Units_Percentage
 		value: (isNaN(root.level) || root.level < 0) ? 0 : Math.round(root.level)
 	}
 

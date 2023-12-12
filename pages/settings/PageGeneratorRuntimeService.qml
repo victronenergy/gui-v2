@@ -34,10 +34,10 @@ Page {
 						var todayInSeconds = today.getTime() / 1000
 						resetDaily.setValue('{"%1" : 0}'.arg(todayInSeconds.toString()))
 						//% "The daily runtime counter has been reset"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_runtime_counter_reset"))
+						Global.showToastNotification(Enums.Notification_Info, qsTrId("page_settings_generator_runtime_counter_reset"))
 					} else if (state.value === 1) {
 						//% "It is not possible to modify the counters while the generator is running"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_runtime_counter_cant_reset_while_running"))
+						Global.showToastNotification(Enums.Notification_Info, qsTrId("page_settings_generator_runtime_counter_cant_reset_while_running"))
 					}
 				}
 
@@ -81,7 +81,7 @@ Page {
 				onAccepted: function(hours) {
 					setDataValue(hours * 60 * 60)
 					//% "Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_service_time_interval").arg(hours))
+					Global.showToastNotification(Enums.Notification_Info, qsTrId("page_settings_generator_service_time_interval").arg(hours))
 				}
 			}
 
@@ -93,7 +93,7 @@ Page {
 				onClicked: {
 					serviceReset.setValue(1)
 					//% "The service timer has been reset."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_service_timer_has_been_reset"))
+					Global.showToastNotification(Enums.Notification_Info, qsTrId("page_settings_generator_service_timer_has_been_reset"))
 				}
 
 				DataPoint {

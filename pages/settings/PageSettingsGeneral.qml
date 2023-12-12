@@ -35,8 +35,8 @@ Page {
 			}
 			if (event.key === Qt.Key_Right) {
 				// change to super user mode if the right button is pressed for a while
-				if (Global.systemSettings.accessLevel.value !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
-					Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_SuperUser)
+				if (Global.systemSettings.accessLevel.value !== Enums.User_AccessType_SuperUser && ++repeatCount > 60) {
+					Global.systemSettings.accessLevel.setValue(Enums.User_AccessType_SuperUser)
 					repeatCount = 0
 				}
 			} else if (event.key === Qt.Key_Up) {
@@ -46,7 +46,7 @@ Page {
 			} else if (event.key === Qt.Key_Down) {
 				if (downCount < 5) ++downCount;
 				if (upCount === 5 && downCount === 5) {
-					Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
+					Global.systemSettings.accessLevel.setValue(Enums.User_AccessType_Service)
 					upCount = 0
 				}
 			}
@@ -57,8 +57,8 @@ Page {
 		running: root.pulledDown
 		interval: 5000
 		onTriggered: {
-			if (Global.systemSettings.accessLevel.value >= VenusOS.User_AccessType_Installer) {
-				Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_SuperUser)
+			if (Global.systemSettings.accessLevel.value >= Enums.User_AccessType_Installer) {
+				Global.systemSettings.accessLevel.setValue(Enums.User_AccessType_SuperUser)
 			}
 		}
 	}
@@ -71,29 +71,29 @@ Page {
 				//% "Access level"
 				text: qsTrId("settings_access_level")
 				dataSource: "com.victronenergy.settings/Settings/System/AccessLevel"
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 
 				optionModel: [
 					//% "User"
-					{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User, password: "ZZZ" },
+					{ display: qsTrId("settings_access_user"), value: Enums.User_AccessType_User, password: "ZZZ" },
 					//% "User & Installer"
-					{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer, password: "ZZZ" },
+					{ display: qsTrId("settings_access_user_installer"), value: Enums.User_AccessType_Installer, password: "ZZZ" },
 					//% "Superuser"
-					{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser, readOnly: true },
+					{ display: qsTrId("settings_access_superuser"), value: Enums.User_AccessType_SuperUser, readOnly: true },
 					//% "Service"
-					{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service, readOnly: true },
+					{ display: qsTrId("settings_access_service"), value: Enums.User_AccessType_Service, readOnly: true },
 				]
 			}
 
 			ListTextField {
 				//% "Set root password"
 				text: qsTrId("settings_set_root_password")
-				showAccessLevel: VenusOS.User_AccessType_SuperUser
+				showAccessLevel: Enums.User_AccessType_SuperUser
 				placeholderText: "* * * * * *"
 
 				onAccepted: {
 					// TODO implement via platform helpers
-					Global.showToastNotification(VenusOS.Notification_Info, "not yet implemented!")
+					Global.showToastNotification(Enums.Notification_Info, "not yet implemented!")
 				}
 			}
 
@@ -103,7 +103,7 @@ Page {
 				//% "SSH on LAN"
 				text: qsTrId("settings_ssh_on_lan")
 				dataSource: "com.victronenergy.settings/Settings/System/SSHLocal"
-				showAccessLevel: VenusOS.User_AccessType_SuperUser
+				showAccessLevel: Enums.User_AccessType_SuperUser
 			}
 
 			ListSwitch {
@@ -134,7 +134,7 @@ Page {
 				text: CommonWords.reboot
 				//% "Reboot now"
 				button.text: qsTrId("settings_reboot_now")
-				writeAccessLevel: VenusOS.User_AccessType_User
+				writeAccessLevel: Enums.User_AccessType_User
 				onClicked: Global.venusPlatform.reboot()
 			}
 

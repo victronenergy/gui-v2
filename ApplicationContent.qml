@@ -40,9 +40,9 @@ Item {
 			if (pageManager.idleModeTimer.running) {
 				pageManager.idleModeTimer.restart()
 			}
-			if (pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle) {
+			if (pageManager.interactivity === Enums.PageManager_InteractionMode_Idle) {
 				mouse.accepted = true
-				pageManager.interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
+				pageManager.interactivity = Enums.PageManager_InteractionMode_EndFullScreen
 			}
 			if (Global.inputPanel && Global.inputPanel.testCloseOnClick(idleModeMouseArea, mouse.x, mouse.y)) {
 				mouse.accepted = true

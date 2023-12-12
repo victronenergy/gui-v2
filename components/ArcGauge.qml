@@ -14,7 +14,7 @@ Item {
 
 	property alias value: arc.value
 
-	property int valueType: VenusOS.Gauges_ValueType_FallingPercentage
+	property int valueType: Enums.Gauges_ValueType_FallingPercentage
 	property alias startAngle: arc.startAngle
 	property alias endAngle: arc.endAngle
 	property alias radius: arc.radius

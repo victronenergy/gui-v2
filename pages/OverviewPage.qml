@@ -16,14 +16,14 @@ Page {
 
 	// Preferred order for the input widgets on the left hand side
 	readonly property var _leftWidgetOrder: [
-		VenusOS.OverviewWidget_Type_Grid,
-		VenusOS.OverviewWidget_Type_Shore,
-		VenusOS.OverviewWidget_Type_AcGenerator,
-		VenusOS.OverviewWidget_Type_DcGenerator,
-		VenusOS.OverviewWidget_Type_Alternator,
-		VenusOS.OverviewWidget_Type_FuelCell,
-		VenusOS.OverviewWidget_Type_Wind,
-		VenusOS.OverviewWidget_Type_Solar
+		Enums.OverviewWidget_Type_Grid,
+		Enums.OverviewWidget_Type_Shore,
+		Enums.OverviewWidget_Type_AcGenerator,
+		Enums.OverviewWidget_Type_DcGenerator,
+		Enums.OverviewWidget_Type_Alternator,
+		Enums.OverviewWidget_Type_FuelCell,
+		Enums.OverviewWidget_Type_Wind,
+		Enums.OverviewWidget_Type_Solar
 	]
 
 	// Set a counter that updates whenever the layout should change.
@@ -53,7 +53,7 @@ Page {
 
 		// Reset the left/right widgets that should be shown
 		for (let widgetType in _createdWidgets) {
-			_createdWidgets[widgetType].size = VenusOS.OverviewWidget_Size_Zero
+			_createdWidgets[widgetType].size = Enums.OverviewWidget_Size_Zero
 		}
 		_resetLeftWidgets()
 		_resetRightWidgets()
@@ -73,42 +73,42 @@ Page {
 			widget = _leftWidgets[i]
 			switch (_leftWidgets.length) {
 			case 1:
-				widget.size = VenusOS.OverviewWidget_Size_XL
+				widget.size = Enums.OverviewWidget_Size_XL
 				break
 			case 2:
-				widget.size = VenusOS.OverviewWidget_Size_L
+				widget.size = Enums.OverviewWidget_Size_L
 				break
 			case 3:
 			case 4:
 				// Only one of the widgets can have L size, and the other ones use a reduced size.
 				if (widget === firstLargeWidget) {
-					widget.size = VenusOS.OverviewWidget_Size_L
+					widget.size = Enums.OverviewWidget_Size_L
 				} else if (firstLargeWidget != null) {
 					// There is a large widget, so use M or XS size to fit around it
-					widget.size = _leftWidgets.length == 3 ? VenusOS.OverviewWidget_Size_M : VenusOS.OverviewWidget_Size_XS
+					widget.size = _leftWidgets.length == 3 ? Enums.OverviewWidget_Size_M : Enums.OverviewWidget_Size_XS
 				} else {
 					// There are no large widgets; use the same size for all left widgets
-					widget.size = _leftWidgets.length == 3 ? VenusOS.OverviewWidget_Size_M : VenusOS.OverviewWidget_Size_S
+					widget.size = _leftWidgets.length == 3 ? Enums.OverviewWidget_Size_M : Enums.OverviewWidget_Size_S
 				}
 				break
 			default:
-				widget.size = VenusOS.OverviewWidget_Size_XS
+				widget.size = Enums.OverviewWidget_Size_XS
 				break
 			}
 		}
 
 		// Set right widget sizes. AC Loads is always present; AC & DC Loads are sized depending on
 		// whether EVCS is visible.
-		const evChargerWidget = _findWidget(_rightWidgets, VenusOS.OverviewWidget_Type_Evcs)
+		const evChargerWidget = _findWidget(_rightWidgets, Enums.OverviewWidget_Type_Evcs)
 		if (!!evChargerWidget) {
-			evChargerWidget.size = VenusOS.OverviewWidget_Size_L
+			evChargerWidget.size = Enums.OverviewWidget_Size_L
 		}
 		dcLoadsWidget.size = !isNaN(Global.system.loads.dcPower)
-				? (!!evChargerWidget ? VenusOS.OverviewWidget_Size_XS : VenusOS.OverviewWidget_Size_L)
-				: VenusOS.OverviewWidget_Size_Zero
-		acLoadsWidget.size = dcLoadsWidget.size === VenusOS.OverviewWidget_Size_Zero
-				? (!!evChargerWidget ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_XL)
-				: (!!evChargerWidget ? VenusOS.OverviewWidget_Size_XS : VenusOS.OverviewWidget_Size_L)
+				? (!!evChargerWidget ? Enums.OverviewWidget_Size_XS : Enums.OverviewWidget_Size_L)
+				: Enums.OverviewWidget_Size_Zero
+		acLoadsWidget.size = dcLoadsWidget.size === Enums.OverviewWidget_Size_Zero
+				? (!!evChargerWidget ? Enums.OverviewWidget_Size_L : Enums.OverviewWidget_Size_XL)
+				: (!!evChargerWidget ? Enums.OverviewWidget_Size_XS : Enums.OverviewWidget_Size_L)
 
 		// Set the widget positions
 		resetWidgetPositions(_leftWidgets)
@@ -204,31 +204,31 @@ Page {
 		args = args || {}
 		let widget = null
 		switch (type) {
-		case VenusOS.OverviewWidget_Type_AcGenerator:
+		case Enums.OverviewWidget_Type_AcGenerator:
 			widget = acGeneratorComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_Alternator:
+		case Enums.OverviewWidget_Type_Alternator:
 			widget = alternatorComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_DcGenerator:
+		case Enums.OverviewWidget_Type_DcGenerator:
 			widget = dcGeneratorComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_FuelCell:
+		case Enums.OverviewWidget_Type_FuelCell:
 			widget = dcInputComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_Evcs:
+		case Enums.OverviewWidget_Type_Evcs:
 			widget = evcsComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_Grid:
+		case Enums.OverviewWidget_Type_Grid:
 			widget = gridComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_Shore:
+		case Enums.OverviewWidget_Type_Shore:
 			widget = shoreComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_Solar:
+		case Enums.OverviewWidget_Type_Solar:
 			widget = solarComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_Wind:
+		case Enums.OverviewWidget_Type_Wind:
 			widget = windComponent.createObject(root, args)
 			break
 		default:
@@ -247,14 +247,14 @@ Page {
 		let widget
 		if (Global.acInputs.connectedInput != null) {
 			switch (Global.acInputs.connectedInput.source) {
-			case VenusOS.AcInputs_InputType_Grid:
-				widgetType = VenusOS.OverviewWidget_Type_Grid
+			case Enums.AcInputs_InputType_Grid:
+				widgetType = Enums.OverviewWidget_Type_Grid
 				break
-			case VenusOS.AcInputs_InputType_Generator:
-				widgetType = VenusOS.OverviewWidget_Type_AcGenerator
+			case Enums.AcInputs_InputType_Generator:
+				widgetType = Enums.OverviewWidget_Type_AcGenerator
 				break
-			case VenusOS.AcInputs_InputType_Shore:
-				widgetType = VenusOS.OverviewWidget_Type_Shore
+			case Enums.AcInputs_InputType_Shore:
+				widgetType = Enums.OverviewWidget_Type_Shore
 				break
 			default:
 				break
@@ -266,8 +266,8 @@ Page {
 				widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
 			}
 		} else if (Global.acInputs.generatorInput != null) {
-			widget = _createWidget(VenusOS.OverviewWidget_Type_AcGenerator)
-			widgetCandidates.splice(_leftWidgetInsertionIndex(VenusOS.OverviewWidget_Type_AcGenerator, widgetCandidates), 0, widget)
+			widget = _createWidget(Enums.OverviewWidget_Type_AcGenerator)
+			widgetCandidates.splice(_leftWidgetInsertionIndex(Enums.OverviewWidget_Type_AcGenerator, widgetCandidates), 0, widget)
 		}
 
 		// Add DC widgets
@@ -275,19 +275,19 @@ Page {
 		for (i = 0; i < Global.dcInputs.model.count; ++i) {
 			const dcInput = Global.dcInputs.model.deviceAt(i)
 			switch (dcInput.inputType) {
-			case VenusOS.DcInputs_InputType_Alternator:
-				widgetType = VenusOS.OverviewWidget_Type_Alternator
+			case Enums.DcInputs_InputType_Alternator:
+				widgetType = Enums.OverviewWidget_Type_Alternator
 				break
-			case VenusOS.DcInputs_InputType_FuelCell:
-				widgetType = VenusOS.OverviewWidget_Type_FuelCell
+			case Enums.DcInputs_InputType_FuelCell:
+				widgetType = Enums.OverviewWidget_Type_FuelCell
 				break
-			case VenusOS.DcInputs_InputType_Wind:
-				widgetType = VenusOS.OverviewWidget_Type_Wind
+			case Enums.DcInputs_InputType_Wind:
+				widgetType = Enums.OverviewWidget_Type_Wind
 				break
 			default:
 				// Use DC Generator as the catch-all type for any DC power source that isn't
 				// specifically handled.
-				widgetType = VenusOS.OverviewWidget_Type_DcGenerator
+				widgetType = Enums.OverviewWidget_Type_DcGenerator
 				break
 			}
 			if (widgetType < 0) {
@@ -301,8 +301,8 @@ Page {
 
 		// Add solar widget
 		if (Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0) {
-			widgetCandidates.splice(_leftWidgetInsertionIndex(VenusOS.OverviewWidget_Type_Solar, widgetCandidates),
-					0, _createWidget(VenusOS.OverviewWidget_Type_Solar))
+			widgetCandidates.splice(_leftWidgetInsertionIndex(Enums.OverviewWidget_Type_Solar, widgetCandidates),
+					0, _createWidget(Enums.OverviewWidget_Type_Solar))
 		}
 		_leftWidgets = widgetCandidates
 	}
@@ -320,7 +320,7 @@ Page {
 	function _resetRightWidgets() {
 		let widgets = [acLoadsWidget]
 		if (Global.evChargers.model.count > 0) {
-			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
+			widgets.push(_createWidget(Enums.OverviewWidget_Type_Evcs))
 		}
 		if (!isNaN(Global.system.loads.dcPower)) {
 			widgets.push(dcLoadsWidget)
@@ -339,36 +339,36 @@ Page {
 
 	function _inputConnectorAnimationMode(connectorWidget) {
 		if (!isCurrentPage) {
-			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			return Enums.WidgetConnector_AnimationMode_NotAnimated
 		}
 		// Assumes startWidget is the AC/DC input widget.
 		if (!connectorWidget.startWidget.input) {
-			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			return Enums.WidgetConnector_AnimationMode_NotAnimated
 		}
 		const power = connectorWidget.startWidget.input.power
 		if (isNaN(power) || Math.abs(power) <= Theme.geometry.overviewPage.connector.animationPowerThreshold) {
-			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			return Enums.WidgetConnector_AnimationMode_NotAnimated
 		}
 
 		if (connectorWidget.endWidget === veBusDeviceWidget) {
 			// For AC inputs, positive power means energy is flowing towards inverter/charger,
 			// and negative power means energy is flowing towards the input.
 			return power > Theme.geometry.overviewPage.connector.animationPowerThreshold
-					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-					: VenusOS.WidgetConnector_AnimationMode_EndToStart
+					? Enums.WidgetConnector_AnimationMode_StartToEnd
+					: Enums.WidgetConnector_AnimationMode_EndToStart
 		} else if (connectorWidget.endWidget === batteryWidget) {
 			// For DC inputs, positive power means energy is flowing towards battery.
 			return power > Theme.geometry.overviewPage.connector.animationPowerThreshold
-					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					? Enums.WidgetConnector_AnimationMode_StartToEnd
+					: Enums.WidgetConnector_AnimationMode_NotAnimated
 		} else {
 			console.warn("Unrecognised connector end widget:",
 						 connectorWidget, connectorWidget.endWidget)
-			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			return Enums.WidgetConnector_AnimationMode_NotAnimated
 		}
 	}
 
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+	topLeftButton: Enums.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
 
 	Component {
@@ -383,7 +383,7 @@ Page {
 			connectors: [ gridWidgetConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
+				location: Enums.WidgetConnector_Location_Right
 				y: gridWidgetConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
 				visible: gridWidgetConnector.visible
 			}
@@ -393,9 +393,9 @@ Page {
 
 				parent: root
 				startWidget: gridWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
+				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: veBusDeviceWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
+				endLocation: Enums.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
@@ -416,7 +416,7 @@ Page {
 			connectors: [ shoreWidgetConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
+				location: Enums.WidgetConnector_Location_Right
 				y: shoreWidgetConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
 				visible: shoreWidgetConnector.visible
 			}
@@ -426,9 +426,9 @@ Page {
 
 				parent: root
 				startWidget: shoreWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
+				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: veBusDeviceWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
+				endLocation: Enums.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
@@ -449,7 +449,7 @@ Page {
 			connectors: [ acGeneratorConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
+				location: Enums.WidgetConnector_Location_Right
 				y: acGeneratorConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
 				visible: acGeneratorConnector.visible
 			}
@@ -459,9 +459,9 @@ Page {
 
 				parent: root
 				startWidget: acGeneratorWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
+				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: veBusDeviceWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
+				endLocation: Enums.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
@@ -482,7 +482,7 @@ Page {
 			connectors: [ dcGeneratorConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
+				location: Enums.WidgetConnector_Location_Right
 				y: dcGeneratorConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
 				visible: dcGeneratorConnector.visible
 			}
@@ -492,9 +492,9 @@ Page {
 
 				parent: root
 				startWidget: dcGeneratorWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
+				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: batteryWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
+				endLocation: Enums.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
@@ -515,7 +515,7 @@ Page {
 			connectors: [ dcInputConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
+				location: Enums.WidgetConnector_Location_Right
 				y: dcInputConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
 				visible: dcInputConnector.visible
 			}
@@ -525,9 +525,9 @@ Page {
 
 				parent: root
 				startWidget: dcInputWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
+				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: batteryWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
+				endLocation: Enums.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
@@ -548,7 +548,7 @@ Page {
 			connectors: [ alternatorConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
+				location: Enums.WidgetConnector_Location_Right
 				visible: alternatorConnector.visible
 			}
 
@@ -557,9 +557,9 @@ Page {
 
 				parent: root
 				startWidget: alternatorWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
+				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: batteryWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
+				endLocation: Enums.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
@@ -580,7 +580,7 @@ Page {
 			connectors: [ windConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
+				location: Enums.WidgetConnector_Location_Right
 				visible: windConnector.visible
 			}
 
@@ -589,9 +589,9 @@ Page {
 
 				parent: root
 				startWidget: windWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
+				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: batteryWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
+				endLocation: Enums.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
@@ -612,7 +612,7 @@ Page {
 			connectors: [ acSolarConnector, dcSolarConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
+				location: Enums.WidgetConnector_Location_Right
 				visible: acSolarConnector.visible || dcSolarConnector.visible
 			}
 
@@ -621,9 +621,9 @@ Page {
 
 				parent: root
 				startWidget: solarWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
+				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: veBusDeviceWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
+				endLocation: Enums.WidgetConnector_Location_Left
 				visible: defaultVisible && Global.pvInverters.model.count > 0
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
@@ -633,17 +633,17 @@ Page {
 				animationMode: root.isCurrentPage
 						&& !isNaN(Global.system.solar.acPower)
 						&& Math.abs(Global.system.solar.acPower || 0) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
+							   ? Enums.WidgetConnector_AnimationMode_StartToEnd
+							   : Enums.WidgetConnector_AnimationMode_NotAnimated
 			}
 			WidgetConnector {
 				id: dcSolarConnector
 
 				parent: root
 				startWidget: solarWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
+				startLocation: Enums.WidgetConnector_Location_Right
 				endWidget: batteryWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
+				endLocation: Enums.WidgetConnector_Location_Left
 				visible: defaultVisible && Global.solarChargers.model.count > 0
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
@@ -653,8 +653,8 @@ Page {
 				animationMode: root.isCurrentPage
 						&& !isNaN(Global.system.solar.dcPower)
 						&& Math.abs(Global.system.solar.dcPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
+							   ? Enums.WidgetConnector_AnimationMode_StartToEnd
+							   : Enums.WidgetConnector_AnimationMode_NotAnimated
 			}
 		}
 	}
@@ -663,7 +663,7 @@ Page {
 	VeBusDeviceWidget {
 		id: veBusDeviceWidget
 
-		size: VenusOS.OverviewWidget_Size_L
+		size: Enums.OverviewWidget_Size_L
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
@@ -671,17 +671,17 @@ Page {
 
 		WidgetConnectorAnchor {
 			id: inverterLeftConnectorAnchor
-			location: VenusOS.WidgetConnector_Location_Left
+			location: Enums.WidgetConnector_Location_Left
 			visible: Global.acInputs.connectedInput
 					|| Global.acInputs.generatorInput
 					|| Global.pvInverters.model.count > 0
 		}
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Right
+			location: Enums.WidgetConnector_Location_Right
 			visible: inverterToAcLoadsConnector.visible
 		}
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Bottom
+			location: Enums.WidgetConnector_Location_Bottom
 			visible: inverterToBatteryConnector.visible
 		}
 	}
@@ -689,9 +689,9 @@ Page {
 		id: inverterToAcLoadsConnector
 
 		startWidget: veBusDeviceWidget
-		startLocation: VenusOS.WidgetConnector_Location_Right
+		startLocation: Enums.WidgetConnector_Location_Right
 		endWidget: acLoadsWidget
-		endLocation: VenusOS.WidgetConnector_Location_Left
+		endLocation: Enums.WidgetConnector_Location_Left
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
@@ -702,16 +702,16 @@ Page {
 				&& !isNaN(Global.system.loads.acPower)
 				&& Global.system.loads.acPower > 0
 				&& Math.abs(Global.system.loads.acPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					? Enums.WidgetConnector_AnimationMode_StartToEnd
+					: Enums.WidgetConnector_AnimationMode_NotAnimated
 	}
 	WidgetConnector {
 		id: inverterToBatteryConnector
 
 		startWidget: veBusDeviceWidget
-		startLocation: VenusOS.WidgetConnector_Location_Bottom
+		startLocation: Enums.WidgetConnector_Location_Bottom
 		endWidget: batteryWidget
-		endLocation: VenusOS.WidgetConnector_Location_Top
+		endLocation: Enums.WidgetConnector_Location_Top
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
@@ -722,39 +722,39 @@ Page {
 				&& !isNaN(Global.system.veBus.power)
 				&& Math.abs(Global.system.veBus.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
 						? (Global.system.veBus.power > 0
-								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
-						: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+								? Enums.WidgetConnector_AnimationMode_StartToEnd
+								: Enums.WidgetConnector_AnimationMode_EndToStart)
+						: Enums.WidgetConnector_AnimationMode_NotAnimated
 	}
 
 	BatteryWidget {
 		id: batteryWidget
 
-		size: VenusOS.OverviewWidget_Size_L
+		size: Enums.OverviewWidget_Size_L
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 		connectors: [ batteryToDcLoadsConnector ]
 
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Left
+			location: Enums.WidgetConnector_Location_Left
 			visible: Global.dcInputs.model.count > 0 || Global.solarChargers.model.count > 0
 		}
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Right
+			location: Enums.WidgetConnector_Location_Right
 			visible: batteryToDcLoadsConnector.visible
 		}
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Top
+			location: Enums.WidgetConnector_Location_Top
 		}
 	}
 	WidgetConnector {
 		id: batteryToDcLoadsConnector
 
 		startWidget: batteryWidget
-		startLocation: VenusOS.WidgetConnector_Location_Right
+		startLocation: Enums.WidgetConnector_Location_Right
 		endWidget: dcLoadsWidget
-		endLocation: VenusOS.WidgetConnector_Location_Left
+		endLocation: Enums.WidgetConnector_Location_Left
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
@@ -764,8 +764,8 @@ Page {
 				&& !isNaN(Global.system.loads.dcPower)
 				&& Global.system.loads.dcPower > 0
 				&& Math.abs(Global.system.loads.dcPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
-					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					? Enums.WidgetConnector_AnimationMode_StartToEnd
+					: Enums.WidgetConnector_AnimationMode_NotAnimated
 	}
 
 	// the two output widgets are always present
@@ -777,12 +777,12 @@ Page {
 		animationEnabled: root.animationEnabled
 
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Left
+			location: Enums.WidgetConnector_Location_Left
 			y: root._rightWidgets.length <= 2 ? inverterLeftConnectorAnchor.y : defaultY
 		}
 
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Bottom
+			location: Enums.WidgetConnector_Location_Bottom
 			visible: Global.evChargers.model.count > 0
 		}
 	}
@@ -795,7 +795,7 @@ Page {
 		animationEnabled: root.animationEnabled
 
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Left
+			location: Enums.WidgetConnector_Location_Left
 		}
 	}
 
@@ -811,7 +811,7 @@ Page {
 			connectors: [ evcsConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Top
+				location: Enums.WidgetConnector_Location_Top
 			}
 
 			WidgetConnector {
@@ -819,17 +819,17 @@ Page {
 
 				parent: root
 				startWidget: acLoadsWidget
-				startLocation: VenusOS.WidgetConnector_Location_Bottom
+				startLocation: Enums.WidgetConnector_Location_Bottom
 				endWidget: evcsWidget
-				endLocation: VenusOS.WidgetConnector_Location_Top
+				endLocation: Enums.WidgetConnector_Location_Top
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
 					? Global.evChargers.power > Theme.geometry.overviewPage.connector.animationPowerThreshold
-					  ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-					  : VenusOS.WidgetConnector_AnimationMode_NotAnimated
-					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					  ? Enums.WidgetConnector_AnimationMode_StartToEnd
+					  : Enums.WidgetConnector_AnimationMode_NotAnimated
+					: Enums.WidgetConnector_AnimationMode_NotAnimated
 			}
 		}
 	}

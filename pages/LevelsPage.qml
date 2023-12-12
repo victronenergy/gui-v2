@@ -10,7 +10,7 @@ import QtQuick.Controls.impl as CP
 Page {
 	id: root
 
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+	topLeftButton: Enums.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
 
 	TabBar {
@@ -25,8 +25,8 @@ Page {
 			horizontalCenter: parent.horizontalCenter
 		}
 
-		opacity: (!!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode))
+		opacity: (!!Global.pageManager && (Global.pageManager.interactivity === Enums.PageManager_InteractionMode_Interactive
+				 || Global.pageManager.interactivity === Enums.PageManager_InteractionMode_ExitIdleMode))
 				 ? 1.0
 				 : 0.0
 
