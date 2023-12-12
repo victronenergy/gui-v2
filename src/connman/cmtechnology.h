@@ -4,11 +4,14 @@
 #include <QObject>
 #include <QDBusVariant>
 #include <QVariantMap>
+#include <qqmlintegration.h>
+
 #include "cmtechnology_interface.h"
 
 class CmTechnology : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString name READ name NOTIFY nameChanged)
 	Q_PROPERTY(QString type READ type NOTIFY typeChanged)
 	Q_PROPERTY(bool connected READ connected NOTIFY connectedChanged)

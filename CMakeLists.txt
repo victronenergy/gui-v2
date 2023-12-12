@@ -78,6 +78,54 @@ set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added he
 )
 set_source_files_properties( ${VENUS_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )
 
+# Connman module
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+    list(APPEND CONNMAN_SOURCES
+        src/connman-api.h # mock sources
+    )
+else()
+    list(APPEND CONNMAN_SOURCES
+        src/connman/cmmanager.h
+        src/connman/cmmananger_interface.h
+        src/connman/cmtechnology.h
+        src/connman/cmtechnology_interface.h
+        src/connman/cmservice_interface.h
+        src/connman/cmservice.h
+        src/connman/cmagent.h
+        src/connman/cmagent_adaptor.h
+        src/connman/clockmodel.h
+        src/connman/clockproxy.h
+        src/connman/connmandbustypes.cpp
+        src/connman/cmmanager.cpp
+        src/connman/cmmananger_interface.cpp
+        src/connman/cmtechnology.cpp
+        src/connman/cmtechnology_interface.cpp
+        src/connman/cmservice_interface.cpp
+        src/connman/cmservice.cpp
+        src/connman/cmagent.cpp
+        src/connman/cmagent_adaptor.cpp
+        src/connman/clockmodel.cpp
+        src/connman/clockproxy.cpp
+        src/connman/connmandbustypes.h
+    )
+endif()
+
+qt_add_qml_module(Connman
+    URI net.connman
+    VERSION 1.0
+    STATIC
+    OUTPUT_DIRECTORY net/connman
+    SOURCES ${CONNMAN_SOURCES}
+    ${QML_MODULE_OPTARGS}
+)
+
+if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+    target_include_directories(Connman PRIVATE src/connman)
+    target_link_libraries(Connman PRIVATE Qt6::DBus)
+endif()
+
+# end Connman module
+
 # VENUS_QML_MODULE
 set (VENUS_QML_MODULE_SOURCES
     ${VENUS_QML_MODULE_SINGLETON_SOURCES}
@@ -479,6 +527,29 @@ set (VENUS_QML_MODULE_SOURCES
 
 list(APPEND QML_MODULE_SOURCES ${VENUS_QML_MODULE_SOURCES})
 
+set(VenusQMLModule_CPP_SOURCES
+    src/aggregatedevicemodel.h
+    src/aggregatedevicemodel.cpp
+    src/basedevicemodel.h
+    src/basedevicemodel.cpp
+    src/theme.h
+    src/theme.cpp
+    src/backendconnection.h
+    src/backendconnection.cpp
+    src/language.h
+    src/language.cpp
+    src/enums.h
+    src/enums.cpp
+    src/notificationsmodel.h
+    src/notificationsmodel.cpp
+    src/clocktime.h
+    src/clocktime.cpp
+    src/uidhelper.h
+    src/uidhelper.cpp
+    src/frameratemodel.h
+    src/frameratemodel.cpp
+)
+
 qt_add_qml_module(VenusQMLModule
     ${QML_MODULE_OPTARGS}
     URI Victron.VenusOS
@@ -486,27 +557,8 @@ qt_add_qml_module(VenusQMLModule
     STATIC
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
-    SOURCES
-        src/aggregatedevicemodel.h
-        src/aggregatedevicemodel.cpp
-        src/basedevicemodel.h
-        src/basedevicemodel.cpp
-        src/theme.h
-        src/theme.cpp
-        src/backendconnection.h
-        src/backendconnection.cpp
-        src/language.h
-        src/language.cpp
-        src/enums.h
-        src/enums.cpp
-        src/notificationsmodel.h
-        src/notificationsmodel.cpp
-        src/clocktime.h
-        src/clocktime.cpp
-        src/uidhelper.h
-        src/uidhelper.cpp
-        src/frameratemodel.h
-        src/frameratemodel.cpp
+    SOURCES ${VenusQMLModule_CPP_SOURCES}
+    IMPORTS net.connman
 )
 target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Core
@@ -516,10 +568,14 @@ target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Svg
     Qt6::Xml
     Qt6::Mqtt
+    Connman
 )
-target_link_libraries(VenusQMLModule PRIVATE
-    $<IF:$<STREQUAL:"${CMAKE_SYSTEM_NAME}","Emscripten">,Qt6::WebSockets,Qt6::DBus> # i.e. (CMAKE_SYSTEM_NAME === "Emscripten" ? Qt6::WebSockets : Qt6::DBus)
-)
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+    target_link_libraries(VenusQMLModule PRIVATE Qt6::WebSockets)
+else()
+    target_include_directories(VenusQMLModule PRIVATE src/connman)
+    target_link_libraries(VenusQMLModule PRIVATE Qt6::DBus)
+endif()
 # end VENUS_QML_MODULE
 
 # Dbus_QML_MODULE
@@ -696,41 +752,6 @@ qt_add_qml_module(Mqtt
 )
 # end Mqtt_QML_MODULE
 
-set(CONNMAN_SOURCES_MOCK
-    src/connman-api.h
-)
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    list(APPEND SOURCES ${CONNMAN_SOURCES_MOCK} )
-endif()
-
-set(CONNMAN_SOURCES
-    src/connman/cmmanager.h 
-    src/connman/cmmananger_interface.h 
-    src/connman/cmtechnology.h 
-    src/connman/cmtechnology_interface.h 
-    src/connman/cmservice_interface.h 
-    src/connman/cmservice.h 
-    src/connman/cmagent.h 
-    src/connman/cmagent_adaptor.h 
-    src/connman/clockmodel.h 
-    src/connman/clockproxy.h
-    src/connman/connmandbustypes.cpp 
-    src/connman/cmmanager.cpp 
-    src/connman/cmmananger_interface.cpp 
-    src/connman/cmtechnology.cpp 
-    src/connman/cmtechnology_interface.cpp 
-    src/connman/cmservice_interface.cpp 
-    src/connman/cmservice.cpp 
-    src/connman/cmagent.cpp 
-    src/connman/cmagent_adaptor.cpp 
-    src/connman/clockmodel.cpp 
-    src/connman/clockproxy.cpp
-    src/connman/connmandbustypes.h 
-)
-if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    list(APPEND SOURCES ${CONNMAN_SOURCES} )
-endif()
-
 set(VEUTIL_CORE_SOURCES
     src/veutil/inc/veutil/qt/firmware_updater_data.hpp
     src/veutil/inc/veutil/qt/unit_conversion.hpp
@@ -844,6 +865,7 @@ qt_add_qml_module( ${PROJECT_NAME}
     VERSION 1.0
     RESOURCE_PREFIX /
     QML_FILES Main.qml
+    IMPORTS Victron.VenusOS
 )
 
 qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"

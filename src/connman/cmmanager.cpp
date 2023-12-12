@@ -6,9 +6,9 @@ const QString CmManager::State("State");
 const QString CmManager::OfflineMode("OfflineMode");
 const QString CmManager::SessionMode("SessionMode");
 
-CmManager* CmManager::instance(QObject *parent)
+CmManager* CmManager::create(QQmlEngine *, QJSEngine *)
 {
-	static CmManager *instance = new CmManager(parent);
+	static CmManager *instance = new CmManager(nullptr);
 	return instance;
 }
 
