@@ -42,7 +42,7 @@ class FrameRateModel : public QAbstractListModel
 	Q_PROPERTY(int frameRate READ frameRate NOTIFY frameRateChanged)
 
 public:
-	static QObject* instance(QQmlEngine *engine, QJSEngine *);
+	static QObject* instance(QQmlEngine *engine = nullptr, QJSEngine *j = nullptr);
 	explicit FrameRateModel(QObject *parent = nullptr);
 
 	bool isEnabled() const;

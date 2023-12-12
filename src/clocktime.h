@@ -9,6 +9,10 @@
 #include <QObject>
 #include <QDateTime>
 #include <QTime>
+#include <qqmlintegration.h>
+
+class QQmlEngine;
+class QJSEngine;
 
 namespace Victron {
 
@@ -17,6 +21,8 @@ namespace VenusOS {
 class ClockTime : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
 	Q_PROPERTY(QDateTime currentDateTime MEMBER m_currentDateTime NOTIFY currentDateTimeChanged)
 	Q_PROPERTY(QDateTime currentDateTimeUtc MEMBER m_currentDateTimeUtc NOTIFY currentDateTimeUtcChanged)
 	Q_PROPERTY(QString currentTimeText MEMBER m_currentTimeText NOTIFY currentTimeTextChanged)
@@ -24,9 +30,7 @@ class ClockTime : public QObject
 	Q_PROPERTY(QString systemTimeZone READ systemTimeZone WRITE setSystemTimeZone NOTIFY systemTimeZoneChanged)
 
 public:
-	ClockTime(QObject *parent);
-
-	static ClockTime* instance(QObject* parent = nullptr);
+	static ClockTime* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 	QString systemTimeZone() const;
 	void setSystemTimeZone(const QString &tz); // "region/city" format.
@@ -47,6 +51,7 @@ protected:
 	void timerEvent(QTimerEvent *) override;
 
 private:
+	ClockTime(QObject *parent);
 	void updateTime();
 	void scheduleNextTimeCheck(int interval);
 
