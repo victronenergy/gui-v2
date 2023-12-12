@@ -5,7 +5,6 @@
 
 #include "src/language.h"
 #include "src/logging.h"
-#include "src/enums.h"
 #include "src/notificationsmodel.h"
 #include "src/basedevicemodel.h"
 #include "src/aggregatedevicemodel.h"
@@ -235,10 +234,6 @@ void initBackend(bool *enableFpsCounter)
 
 void registerQmlTypes()
 {
-	qmlRegisterSingletonType<Victron::VenusOS::Enums>(
-		"Victron.VenusOS", 2, 0, "VenusOS",
-		&Victron::VenusOS::Enums::instance);
-
 	qmlRegisterSingletonType<Victron::VenusOS::ActiveNotificationsModel>(
 		"Victron.VenusOS", 2, 0, "ActiveNotificationsModel",
 		[](QQmlEngine *, QJSEngine *) -> QObject * {
