@@ -129,7 +129,7 @@ void AlarmMonitor::settingChanged(QVariant var)
 
 void AlarmMonitor::addOrUpdateNotification(Victron::VenusOS::Enums::Notification_Type type)
 {
-	Victron::VenusOS::ActiveNotificationsModel::instance()->addOrUpdateNotification(type, mService->getDescription(),
+	Victron::VenusOS::ActiveNotificationsModel::create()->addOrUpdateNotification(type, mService->getDescription(),
 														  mDescription, mBusitemValue->getText());
 }
 
