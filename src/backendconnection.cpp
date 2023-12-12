@@ -179,7 +179,7 @@ void BackendConnection::initMqttConnection(const QString &address)
 	VeQItemMqttProducer *mqttProducer = new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt", "gui-v2");
 	m_producer = mqttProducer;
 
-	m_uidHelper = UidHelper::instance();
+	m_uidHelper = UidHelper::create();
 	connect(mqttProducer, &VeQItemMqttProducer::aboutToConnect,
 			mqttProducer, [this] {
 		if (VeQItemMqttProducer *producer = qobject_cast<VeQItemMqttProducer *>(m_producer)) {

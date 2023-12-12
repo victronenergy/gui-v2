@@ -268,13 +268,13 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "ClockTime",
 		[](QQmlEngine *, QJSEngine *) -> QObject * {
 		return Victron::VenusOS::ClockTime::instance();
-	});*/
+	});
 	qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
 		"Victron.VenusOS", 2, 0, "UidHelper",
 		&Victron::VenusOS::UidHelper::instance);
 	qmlRegisterSingletonType<Victron::VenusOS::FrameRateModel>(
 		"Victron.VenusOS", 2, 0, "FrameRateModel",
-		&Victron::VenusOS::FrameRateModel::instance);
+		&Victron::VenusOS::FrameRateModel::instance);*/
 	qmlRegisterType<Victron::VenusOS::BaseDevice>("Victron.VenusOS", 2, 0, "BaseDevice");
 	qmlRegisterType<Victron::VenusOS::BaseDeviceModel>("Victron.VenusOS", 2, 0, "BaseDeviceModel");
 	qmlRegisterType<Victron::VenusOS::AggregateDeviceModel>("Victron.VenusOS", 2, 0, "AggregateDeviceModel");
@@ -333,9 +333,7 @@ int main(int argc, char *argv[])
 	*/
 
 	/* Force construction of fps counter */
-	int fpsCounterSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "FrameRateModel");
-	Q_ASSERT(fpsCounterSingletonId);
-	Victron::VenusOS::FrameRateModel* fpsCounter = engine.singletonInstance<Victron::VenusOS::FrameRateModel*>(fpsCounterSingletonId);
+	Victron::VenusOS::FrameRateModel* fpsCounter = Victron::VenusOS::FrameRateModel::create();
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/venus-gui-v2/Main.qml")));
 	if (component.isError()) {

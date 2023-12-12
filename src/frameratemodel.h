@@ -10,6 +10,7 @@
 #include <QElapsedTimer>
 #include <QAbstractListModel>
 #include <QMutex>
+#include <qqmlintegration.h>
 
 class QQuickWindow;
 class QQmlEngine;
@@ -32,6 +33,8 @@ namespace VenusOS {
 class FrameRateModel : public QAbstractListModel
 {
 	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
 	Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
 	Q_PROPERTY(int visualizationRate READ visualizationRate WRITE setVisualizationRate NOTIFY visualizationRateChanged)
 	Q_PROPERTY(int secondsToVisualize READ secondsToVisualize WRITE setSecondsToVisualize NOTIFY secondsToVisualizeChanged)
@@ -42,8 +45,8 @@ class FrameRateModel : public QAbstractListModel
 	Q_PROPERTY(int frameRate READ frameRate NOTIFY frameRateChanged)
 
 public:
-	static QObject* instance(QQmlEngine *engine = nullptr, QJSEngine *j = nullptr);
-	explicit FrameRateModel(QObject *parent = nullptr);
+	static FrameRateModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsengine = nullptr);
+	explicit FrameRateModel(QObject *parent);
 
 	bool isEnabled() const;
 	void setEnabled(bool enabled);
