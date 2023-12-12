@@ -245,7 +245,7 @@ bool ActiveNotificationsModel::setData(const QModelIndex &index, const QVariant 
 		notification.acknowledged = value.toBool();
 		if (notification.acknowledged && !notification.active)
 		{
-			HistoricalNotificationsModel::instance()->insertByDate(notification);
+			HistoricalNotificationsModel::create()->insertByDate(notification);
 			remove(index.row());
 		}
 		break;
@@ -253,7 +253,7 @@ bool ActiveNotificationsModel::setData(const QModelIndex &index, const QVariant 
 		notification.active = value.toBool();
 		if (notification.acknowledged && !notification.active)
 		{
-			HistoricalNotificationsModel::instance()->insertByDate(notification);
+			HistoricalNotificationsModel::create()->insertByDate(notification);
 			remove(index.row());
 		}
 		break;
@@ -306,12 +306,12 @@ HistoricalNotificationsModel::~HistoricalNotificationsModel()
 {
 }
 
-HistoricalNotificationsModel* HistoricalNotificationsModel::instance(QObject* parent)
+HistoricalNotificationsModel* HistoricalNotificationsModel::create(QQmlEngine *, QJSEngine *)
 {
 	static HistoricalNotificationsModel* model = nullptr;
 	if (model == nullptr)
 	{
-		model = new HistoricalNotificationsModel(parent);
+		model = new HistoricalNotificationsModel(nullptr);
 	}
 	return model;
 }
