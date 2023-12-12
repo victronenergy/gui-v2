@@ -221,12 +221,12 @@ void ActiveNotificationsModel::addOrUpdateNotification(Enums::Notification_Type 
 	}
 }
 
-ActiveNotificationsModel* ActiveNotificationsModel::instance(QObject* parent)
+ActiveNotificationsModel* ActiveNotificationsModel::create(QQmlEngine *, QJSEngine *)
 {
 	static ActiveNotificationsModel* model = nullptr;
 	if (model == nullptr)
 	{
-		model = new ActiveNotificationsModel(parent);
+		model = new ActiveNotificationsModel(nullptr);
 	}
 	return model;
 }

@@ -94,11 +94,13 @@ private:
 class ActiveNotificationsModel : public NotificationsModel
 {
 	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
 	Q_PROPERTY(bool hasNewNotifications READ hasNewNotifications NOTIFY hasNewNotificationsChanged) // when true, we display a red dot on the 'notifications' button in the nav bar
 public:
 
 	~ActiveNotificationsModel() override;
-	static ActiveNotificationsModel* instance(QObject* parent = nullptr);
+	static ActiveNotificationsModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 	bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 	bool hasNewNotifications() const;
 	void addOrUpdateNotification(Enums::Notification_Type type, const QString &devicename, const QString &description, const QString &value);
@@ -110,7 +112,7 @@ signals:
 	void hasNewNotificationsChanged();
 
 protected:
-	explicit ActiveNotificationsModel(QObject *parent = nullptr);
+	explicit ActiveNotificationsModel(QObject *parent);
 
 private:
 	void setHasNewNotifications(const bool hasNewNotifications);
