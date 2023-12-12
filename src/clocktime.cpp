@@ -91,9 +91,9 @@ void ClockTime::scheduleNextTimeCheck(int interval)
 	m_timerId = startTimer(interval);
 }
 
-ClockTime* ClockTime::instance(QObject* parent)
+ClockTime* ClockTime::create(QQmlEngine *engine, QJSEngine *)
 {
-	return new ClockTime(parent);
+	return new ClockTime(nullptr);
 }
 
 QString ClockTime::systemTimeZone() const

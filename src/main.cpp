@@ -263,12 +263,12 @@ void registerQmlTypes()
 		"Victron.VenusOS", 2, 0, "HistoricalNotificationsModel",
 		[](QQmlEngine *, QJSEngine *) -> QObject * {
 		return Victron::VenusOS::HistoricalNotificationsModel::instance();
-	});*/
+	});
 	qmlRegisterSingletonType<Victron::VenusOS::ClockTime>(
 		"Victron.VenusOS", 2, 0, "ClockTime",
 		[](QQmlEngine *, QJSEngine *) -> QObject * {
 		return Victron::VenusOS::ClockTime::instance();
-	});
+	});*/
 	qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
 		"Victron.VenusOS", 2, 0, "UidHelper",
 		&Victron::VenusOS::UidHelper::instance);
