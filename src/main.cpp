@@ -234,11 +234,6 @@ void initBackend(bool *enableFpsCounter)
 
 void registerQmlTypes()
 {
-	qmlRegisterSingletonType<Victron::VenusOS::ActiveNotificationsModel>(
-		"Victron.VenusOS", 2, 0, "ActiveNotificationsModel",
-		[](QQmlEngine *, QJSEngine *) -> QObject * {
-		return Victron::VenusOS::ActiveNotificationsModel::instance();
-	});
 	qmlRegisterSingletonType<Victron::VenusOS::HistoricalNotificationsModel>(
 		"Victron.VenusOS", 2, 0, "HistoricalNotificationsModel",
 		[](QQmlEngine *, QJSEngine *) -> QObject * {

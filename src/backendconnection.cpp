@@ -160,7 +160,7 @@ void BackendConnection::initDBusConnection(const QString &address)
 
 	dbusProducer->open(dbus);
 	DBusServices *alarmServices = new DBusServices(dbusProducer->services(), this);
-	m_alarmBusItem = new AlarmBusitem(alarmServices, ActiveNotificationsModel::instance());
+	m_alarmBusItem = new AlarmBusitem(alarmServices, ActiveNotificationsModel::create());
 	alarmServices->initialScan();
 
 	setState(VeDbusConnection::getConnection().isConnected());
