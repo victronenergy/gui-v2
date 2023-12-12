@@ -5,7 +5,6 @@
 
 #include "src/language.h"
 #include "src/logging.h"
-#include "src/notificationsmodel.h"
 #include "src/backendconnection.h"
 #include "src/frameratemodel.h"
 
@@ -15,15 +14,6 @@
 #include "veutil/qt/ve_qitem_sort_table_model.hpp"
 #include "veutil/qt/ve_qitem_child_model.hpp"
 #include "veutil/qt/firmware_updater_data.hpp"
-
-#if defined(VENUS_WEBASSEMBLY_BUILD)
-#include "src/connman-api.h"
-#else
-#include "src/connman/cmtechnology.h"
-#include "src/connman/cmservice.h"
-#include "src/connman/cmagent.h"
-#include "src/connman/cmmanager.h"
-#endif
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 #include <emscripten/html5.h>
@@ -54,11 +44,6 @@ EM_BOOL visibilitychange_callback(int /* eventType */, const EmscriptenVisibilit
 	return 0;
 }
 #endif // VENUS_WEBASSEMBLY_BUILD
-
-static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
-{
-	return CmManager::instance();
-}
 
 QString calculateMqttAddressFromShard(const QString &shard)
 {
@@ -239,11 +224,6 @@ void registerQmlTypes()
 	qmlRegisterType<VeQItemTableModel>("Victron.Veutil", 1, 0, "VeQItemTableModel");
 
 	qmlRegisterUncreatableType<FirmwareUpdaterData>("Victron.Veutil", 1, 0, "FirmwareUpdater", "FirmwareUpdater cannot be created");
-
-	qmlRegisterType<CmTechnology>("net.connman", 0, 1, "CmTechnology");
-	qmlRegisterType<CmService>("net.connman", 0, 1, "CmService");
-	qmlRegisterType<CmAgent>("net.connman", 0, 1, "CmAgent");
-	qmlRegisterSingletonType<CmManager>("net.connman", 0, 1, "Connman", &connmanInstance);
 }
 
 } // namespace

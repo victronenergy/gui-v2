@@ -2,11 +2,13 @@
 #define CMSERVICE_H
 
 #include <QObject>
+#include <qqmlintegration.h>
 #include "cmservice_interface.h"
 
 class CmService : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString state READ state NOTIFY stateChanged)
 	Q_PROPERTY(QString error READ error NOTIFY errorChanged)
 	Q_PROPERTY(QVariant name READ name NOTIFY nameChanged)

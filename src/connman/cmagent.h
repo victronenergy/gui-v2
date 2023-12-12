@@ -3,11 +3,13 @@
 
 #include <QObject>
 #include <QDBusConnection>
+#include <qqmlintegration.h>
 #include "cmagent_adaptor.h"
 
 class CmAgent : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString path READ path WRITE path)
 	Q_PROPERTY(QString passphrase READ passphrase WRITE passphrase)
 

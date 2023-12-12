@@ -10,7 +10,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import net.connman 0.1
+import net.connman
 
 Page {
 	id: root

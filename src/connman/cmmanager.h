@@ -2,20 +2,26 @@
 #define CMMANAGER_H
 
 #include <QObject>
+#include <qqmlintegration.h>
 #include "cmmananger_interface.h"
 #include "cmtechnology.h"
 #include "cmservice.h"
 #include "cmagent.h"
 
+class QQmlEngine;
+class QJSEngine;
+
 class CmManager : public QObject
 {
 	Q_OBJECT
+	QML_NAMED_ELEMENT(Connman)
+	QML_SINGLETON
 	Q_PROPERTY(QString state READ getState NOTIFY stateChanged)
 	Q_PROPERTY(QStringList technologyList READ getTechnologyList NOTIFY technologyListChanged)
 	Q_PROPERTY(QStringList serviceList READ getServiceList NOTIFY serviceListChanged)
 
 public:
-	static CmManager* instance(QObject *parent = 0);
+	static CmManager* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 	Q_INVOKABLE CmTechnology* getTechnology(const QString &type) const;
 	Q_INVOKABLE QStringList getServiceList(const QString &type) const;
@@ -48,7 +54,7 @@ signals:
 	void serviceRemoved(const QString &path);
 
 private:
-	CmManager(QObject *parent = 0);
+	CmManager(QObject *parent);
 	~CmManager();
 	void addTechnology(const QString &path, const QVariantMap &properties);
 	void addService(const QString &objectPath, const QVariantMap &properties);
