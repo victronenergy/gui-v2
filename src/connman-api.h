@@ -9,9 +9,13 @@
 #include <QObject>
 #include <QStringList>
 #include <QVariantMap>
+#include <qqmlintegration.h>
 
 // These are dummy classes that mimic the QML APIs provided by src/connman, so that the API is
 // available even when the connman backend is not.
+
+class QQmlEngine;
+class QJSEngine;
 
 class CmAgent : public QObject
 {
@@ -112,14 +116,21 @@ private:
 class CmManager : public QObject
 {
 	Q_OBJECT
+	QML_NAMED_ELEMENT(Connman)
+	QML_SINGLETON
 	Q_PROPERTY(QString state MEMBER m_state CONSTANT)
 	Q_PROPERTY(QStringList technologyList MEMBER m_technologyList CONSTANT)
 	Q_PROPERTY(QStringList serviceList MEMBER m_serviceList CONSTANT)
 
 public:
-	static CmManager* instance(QObject * = nullptr) {
-		static CmManager *obj = new CmManager();
+	static CmManager* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr) {
+		static CmManager *obj = new CmManager(nullptr);
 		return obj;
+	}
+
+	CmManager(QObject* parent)
+		: QObject(parent)
+	{
 	}
 
 	Q_INVOKABLE CmTechnology* getTechnology(const QString &) const { return nullptr; }
