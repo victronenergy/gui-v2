@@ -497,6 +497,8 @@ qt_add_qml_module(VenusQMLModule
         src/enums.cpp
         src/notificationsmodel.h
         src/notificationsmodel.cpp
+        src/clocktime.h
+        src/clocktime.cpp
 )
 target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Core
@@ -785,8 +787,6 @@ set(VENUS_CPP_SOURCES
     src/basedevicemodel.cpp
     src/aggregatedevicemodel.h
     src/aggregatedevicemodel.cpp
-    src/clocktime.h
-    src/clocktime.cpp
     src/logging.h
     src/uidhelper.h
     src/uidhelper.cpp
