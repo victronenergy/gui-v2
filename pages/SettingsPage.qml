@@ -110,7 +110,7 @@ Page {
 				//% "Bluetooth"
 				text: qsTrId("settings_bluetooth"),
 				page: "/pages/settings/PageSettingsBluetooth.qml",
-				show: Connman.technologyList.indexOf("bluetooth") !== -1
+				show: CmManager.technologyList.indexOf("bluetooth") !== -1
 			},
 			{
 				//% "Generator start/stop"

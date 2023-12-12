@@ -29,7 +29,6 @@
 #include "src/connman/cmtechnology.h"
 #include "src/connman/cmservice.h"
 #include "src/connman/cmagent.h"
-#include "src/connman/cmmanager.h"
 #endif
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
@@ -61,11 +60,6 @@ EM_BOOL visibilitychange_callback(int /* eventType */, const EmscriptenVisibilit
 	return 0;
 }
 #endif // VENUS_WEBASSEMBLY_BUILD
-
-static QObject* connmanInstance(QQmlEngine *, QJSEngine *)
-{
-	return CmManager::instance();
-}
 
 QString calculateMqttAddressFromShard(const QString &shard)
 {
@@ -239,42 +233,7 @@ void registerQmlTypes()
 {
 	/* QML type registrations.  As we (currently) don't create an installed module,
 	   we need to register them into the appropriate type namespace manually. */
-/*	qmlRegisterSingletonType<Victron::VenusOS::Theme>(
-		"Victron.VenusOS", 2, 0, "Theme",
-		&Victron::VenusOS::Theme::instance);
-	qmlRegisterSingletonType<Victron::VenusOS::BackendConnection>(
-		"Victron.VenusOS", 2, 0, "BackendConnection",
-		&Victron::VenusOS::BackendConnection::create);
-	qmlRegisterSingletonType<Victron::VenusOS::Language>(
-		"Victron.VenusOS", 2, 0, "Language",
-		[](QQmlEngine *engine, QJSEngine *) -> QObject* {
-			return new Victron::VenusOS::Language(engine);
-		});
-	qmlRegisterSingletonType<Victron::VenusOS::Enums>(
-		"Victron.VenusOS", 2, 0, "VenusOS",
-		&Victron::VenusOS::Enums::instance);
 
-	qmlRegisterSingletonType<Victron::VenusOS::ActiveNotificationsModel>(
-		"Victron.VenusOS", 2, 0, "ActiveNotificationsModel",
-		[](QQmlEngine *, QJSEngine *) -> QObject * {
-		return Victron::VenusOS::ActiveNotificationsModel::instance();
-	});
-	qmlRegisterSingletonType<Victron::VenusOS::HistoricalNotificationsModel>(
-		"Victron.VenusOS", 2, 0, "HistoricalNotificationsModel",
-		[](QQmlEngine *, QJSEngine *) -> QObject * {
-		return Victron::VenusOS::HistoricalNotificationsModel::instance();
-	});
-	qmlRegisterSingletonType<Victron::VenusOS::ClockTime>(
-		"Victron.VenusOS", 2, 0, "ClockTime",
-		[](QQmlEngine *, QJSEngine *) -> QObject * {
-		return Victron::VenusOS::ClockTime::instance();
-	});
-	qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
-		"Victron.VenusOS", 2, 0, "UidHelper",
-		&Victron::VenusOS::UidHelper::instance);
-	qmlRegisterSingletonType<Victron::VenusOS::FrameRateModel>(
-		"Victron.VenusOS", 2, 0, "FrameRateModel",
-		&Victron::VenusOS::FrameRateModel::instance);*/
 	qmlRegisterType<Victron::VenusOS::BaseDevice>("Victron.VenusOS", 2, 0, "BaseDevice");
 	qmlRegisterType<Victron::VenusOS::BaseDeviceModel>("Victron.VenusOS", 2, 0, "BaseDeviceModel");
 	qmlRegisterType<Victron::VenusOS::AggregateDeviceModel>("Victron.VenusOS", 2, 0, "AggregateDeviceModel");
@@ -295,7 +254,6 @@ void registerQmlTypes()
 	qmlRegisterType<CmTechnology>("net.connman", 0, 1, "CmTechnology");
 	qmlRegisterType<CmService>("net.connman", 0, 1, "CmService");
 	qmlRegisterType<CmAgent>("net.connman", 0, 1, "CmAgent");
-	qmlRegisterSingletonType<CmManager>("net.connman", 0, 1, "Connman", &connmanInstance);
 }
 
 } // namespace

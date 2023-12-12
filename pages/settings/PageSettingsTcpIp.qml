@@ -12,8 +12,8 @@ Page {
 	id: root
 
 	property string technologyType: "ethernet"
-	property string path: Connman.getServiceList(technologyType)[0] || ""
-	property CmService service: path ? Connman.getService(path) : null
+	property string path: CmManager.getServiceList(technologyType)[0] || ""
+	property CmService service: path ? CmManager.getService(path) : null
 
 	readonly property string _security: service ? service.security.toString() : ""
 	property bool _secured: _security.indexOf("none") === -1 && _security !== ""
@@ -80,18 +80,18 @@ Page {
 
 	Component.onCompleted: {
 		if (_wifi) {
-			_agent = Connman.registerAgent(_agentPath)
+			_agent = CmManager.registerAgent(_agentPath)
 		}
 	}
 
 	Component.onDestruction: {
 		if (_wifi) {
-			Connman.unRegisterAgent(_agentPath)
+			CmManager.unRegisterAgent(_agentPath)
 		}
 	}
 
 	Connections {
-		target: Connman
+		target: CmManager
 		function onServiceRemoved(path) {
 			if (path === root.path) {
 				root.path = ""
@@ -99,7 +99,7 @@ Page {
 		}
 		function onServiceAdded(path) {
 			// refresh the service, else we may have a stale service object
-			root.path = Connman.getServiceList(technologyType)[0]
+			root.path = CmManager.getServiceList(technologyType)[0]
 		}
 	}
 

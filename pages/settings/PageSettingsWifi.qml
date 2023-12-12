@@ -13,12 +13,12 @@ import Victron.Utils
 Page {
 	id: root
 
-	property CmTechnology _tech: Connman.getTechnology("wifi")
+	property CmTechnology _tech: CmManager.getTechnology("wifi")
 
 	function _reload() {
 		// TODO ideally this would be an QAbstractListModel that updates itself progressively,
 		// instead of needing to reload the whole model.
-		settingsListView.model = Connman.getServiceList("wifi")
+		settingsListView.model = CmManager.getServiceList("wifi")
 	}
 
 	C.StackView.onActivated: _reload()
@@ -42,12 +42,12 @@ Page {
 			}
 		}
 
-		model: Connman.getServiceList("wifi")
+		model: CmManager.getServiceList("wifi")
 
 		delegate: ListNavigationItem {
 			id: wifiPoint
 
-			property CmService service: Connman.getService(modelData)
+			property CmService service: CmManager.getService(modelData)
 
 			text: service ? (service.name ? service.name : "[" + service.ethernet["Address"] + "]") : ""
 			secondaryText: Utils.connmanServiceState(service)
@@ -82,7 +82,7 @@ Page {
 	}
 
 	Connections {
-		target: Connman
+		target: CmManager
 		function onServiceListChanged() {
 			if (!!Global.pageManager && Global.pageManager.currentPage === root) {
 				root._reload()

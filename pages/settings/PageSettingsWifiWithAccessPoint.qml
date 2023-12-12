@@ -10,7 +10,7 @@ import net.connman 0.1
 Page {
 	id: root
 
-	property CmTechnology _tech: Connman.getTechnology("wifi")
+	property CmTechnology _tech: CmManager.getTechnology("wifi")
 	property var _confirmApDialog
 
 	GradientListView {

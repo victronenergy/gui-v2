@@ -449,6 +449,34 @@ set (VENUS_QML_MODULE_SOURCES
 
 list(APPEND QML_MODULE_SOURCES ${VENUS_QML_MODULE_SOURCES})
 
+set(CPP_SINGLETON_SOURCES
+    src/theme.h
+    src/theme.cpp
+    src/backendconnection.h
+    src/backendconnection.cpp
+    src/language.h
+    src/language.cpp
+    src/enums.h
+    src/enums.cpp
+    src/notificationsmodel.h
+    src/notificationsmodel.cpp
+    src/clocktime.h
+    src/clocktime.cpp
+    src/uidhelper.h
+    src/uidhelper.cpp
+    src/frameratemodel.h
+    src/frameratemodel.cpp
+)
+
+set(CONNMAN_SOURCES_MOCK
+    src/connman-api.h
+)
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+    list(APPEND CPP_SINGLETON_SOURCES ${CONNMAN_SOURCES_MOCK} )
+else()
+    list(APPEND CPP_SINGLETON_SOURCES src/connman/cmmanager.h src/connman/cmmanager.cpp)
+endif()
+
 qt_add_qml_module(VenusQMLModule
     ${QML_MODULE_OPTARGS}
     URI Victron.VenusOS
@@ -456,24 +484,9 @@ qt_add_qml_module(VenusQMLModule
     STATIC
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
-    SOURCES
-        src/theme.h
-        src/theme.cpp
-        src/backendconnection.h
-        src/backendconnection.cpp
-        src/language.h
-        src/language.cpp
-        src/enums.h
-        src/enums.cpp
-        src/notificationsmodel.h
-        src/notificationsmodel.cpp
-        src/clocktime.h
-        src/clocktime.cpp
-        src/uidhelper.h
-        src/uidhelper.cpp
-        src/frameratemodel.h
-        src/frameratemodel.cpp
+    SOURCES ${CPP_SINGLETON_SOURCES}
 )
+target_include_directories(VenusQMLModule PRIVATE src/connman)
 target_link_libraries(VenusQMLModule PRIVATE Qt6::Gui Qt6::Mqtt Qt6::Quick)
 
 target_link_libraries(VenusQMLModule PRIVATE
@@ -657,15 +670,7 @@ qt_add_qml_module(Mqtt
 )
 # end Mqtt_QML_MODULE
 
-set(CONNMAN_SOURCES_MOCK
-    src/connman-api.h
-)
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    list(APPEND SOURCES ${CONNMAN_SOURCES_MOCK} )
-endif()
-
 set(CONNMAN_SOURCES
-    src/connman/cmmanager.h 
     src/connman/cmmananger_interface.h 
     src/connman/cmtechnology.h 
     src/connman/cmtechnology_interface.h 
@@ -676,7 +681,6 @@ set(CONNMAN_SOURCES
     src/connman/clockmodel.h 
     src/connman/clockproxy.h
     src/connman/connmandbustypes.cpp 
-    src/connman/cmmanager.cpp 
     src/connman/cmmananger_interface.cpp 
     src/connman/cmtechnology.cpp 
     src/connman/cmtechnology_interface.cpp 
