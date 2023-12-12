@@ -122,13 +122,15 @@ private:
 class HistoricalNotificationsModel : public NotificationsModel
 {
 	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
 public:
 	~HistoricalNotificationsModel() override;
-	static HistoricalNotificationsModel* instance(QObject* parent = nullptr);
+	static HistoricalNotificationsModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 	bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
 protected:
-	explicit HistoricalNotificationsModel(QObject *parent = nullptr);
+	explicit HistoricalNotificationsModel(QObject *parent);
 };
 
 } /* VenusOS */
