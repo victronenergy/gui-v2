@@ -44,7 +44,7 @@ if ("${NO_CACHEGEN}")
 endif()
 
 set(REQUIRED_QT_VERSION 6.5.2) # require at least qt 6.5.2 for qt_add_qml_module to work properly
-find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt Gui REQUIRED)
+find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt Gui QuickControls2 REQUIRED)
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -483,11 +483,25 @@ qt_add_qml_module(VenusQMLModule
     VERSION 2.0
     STATIC
     OUTPUT_DIRECTORY Victron/VenusOS
+    IMPORT_PATH Victron
+    IMPORTS
+        Qt6::QuickControls2
+        Victron.Utils
+        Victron.Units
+        Victron.Veutil
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
     SOURCES ${CPP_SINGLETON_SOURCES}
+        src/basedevicemodel.h
+        src/basedevicemodel.cpp
+        src/aggregatedevicemodel.h
+        src/aggregatedevicemodel.cpp
+    ENABLE_TYPE_COMPILER
+)
+set_target_properties(VenusQMLModule PROPERTIES
+    QT_QMLCACHEGEN_ARGUMENTS "--verbose"
 )
 target_include_directories(VenusQMLModule PRIVATE src/connman)
-target_link_libraries(VenusQMLModule PRIVATE Qt6::Gui Qt6::Mqtt Qt6::Quick)
+target_link_libraries(VenusQMLModule PRIVATE Utilsplugin Unitsplugin Veutilplugin Qt6::Core Qt6::Gui Qt6::Mqtt Qt6::Quick Qt6::QuickControls2)
 
 target_link_libraries(VenusQMLModule PRIVATE
     $<IF:$<STREQUAL:"${CMAKE_SYSTEM_NAME}","Emscripten">,Qt6::WebSockets,Qt6::DBus> # i.e. (CMAKE_SYSTEM_NAME === "Emscripten" ? Qt6::WebSockets : Qt6::DBus)
@@ -588,11 +602,14 @@ set(Units_QML_MODULE_SOURCES
     src/units.cpp
 )
 list(APPEND QML_MODULE_SOURCES ${Units_QML_MODULE_SOURCES})
+message("Units_QML_MODULE_SOURCES: ${Units_QML_MODULE_SOURCES}")
 qt_add_qml_module(Units
     URI Victron.Units
     STATIC
     OUTPUT_DIRECTORY Victron/Units
-    SOURCES ${Units_QML_MODULE_SOURCES}
+    SOURCES
+        src/units.h
+        src/units.cpp
     ${QML_MODULE_OPTARGS}
 )
 # end Units_QML_MODULE
@@ -608,8 +625,9 @@ qt_add_qml_module(Utils
     URI Victron.Utils
     STATIC
     OUTPUT_DIRECTORY Victron/Utils
-    QML_FILES ${Utils_QML_MODULE_SOURCES}
+    QML_FILES components/Utils.js
     ${QML_MODULE_OPTARGS}
+    ENABLE_TYPE_COMPILER
 )
 # end Utils_QML_MODULE
 
@@ -670,6 +688,35 @@ qt_add_qml_module(Mqtt
 )
 # end Mqtt_QML_MODULE
 
+
+qt_add_qml_module(Veutil
+    URI Victron.Veutil
+    STATIC
+    OUTPUT_DIRECTORY Victron/Veutil
+    SOURCES
+        src/veutil/inc/veutil/qt/ve_quick_item.hpp
+        src/veutil/inc/veutil/qt/firmware_updater_data.hpp
+        src/veutil/inc/veutil/qt/unit_conversion.hpp
+        src/veutil/inc/veutil/qt/ve_qitem.hpp
+        src/veutil/inc/veutil/qt/ve_qitem_child_model.hpp
+        src/veutil/inc/veutil/qt/ve_qitem_loader.hpp
+        src/veutil/inc/veutil/qt/ve_qitem_sort_table_model.hpp
+        src/veutil/inc/veutil/qt/ve_qitem_table_model.hpp
+        src/veutil/inc/veutil/qt/ve_qitem_tree_model.hpp
+
+        src/veutil/src/qt/ve_quick_item.cpp
+        src/veutil/src/qt/unit_conversion.cpp
+        src/veutil/src/qt/ve_qitem.cpp
+        src/veutil/src/qt/ve_qitem_child_model.cpp
+        src/veutil/src/qt/ve_qitem_loader.cpp
+        src/veutil/src/qt/ve_qitem_sort_table_model.cpp
+        src/veutil/src/qt/ve_qitem_table_model.cpp
+        src/veutil/src/qt/ve_qitem_tree_model.cpp
+    ${QML_MODULE_OPTARGS}
+)
+target_include_directories(Veutil PRIVATE src/veutil/inc/veutil/qt)
+target_link_libraries(Veutil PRIVATE Qt6::Core Qt6::Quick)
+
 set(CONNMAN_SOURCES
     src/connman/cmmananger_interface.h 
     src/connman/cmtechnology.h 
@@ -697,24 +744,6 @@ if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
 endif()
 
 set(VEUTIL_CORE_SOURCES
-    src/veutil/inc/veutil/qt/firmware_updater_data.hpp
-    src/veutil/inc/veutil/qt/unit_conversion.hpp
-    src/veutil/inc/veutil/qt/ve_qitem.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_child_model.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_loader.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_sort_table_model.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_table_model.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_tree_model.hpp
-    src/veutil/inc/veutil/qt/ve_quick_item.hpp
-
-    src/veutil/src/qt/unit_conversion.cpp
-    src/veutil/src/qt/ve_qitem.cpp
-    src/veutil/src/qt/ve_qitem_child_model.cpp
-    src/veutil/src/qt/ve_qitem_loader.cpp
-    src/veutil/src/qt/ve_qitem_sort_table_model.cpp
-    src/veutil/src/qt/ve_qitem_table_model.cpp
-    src/veutil/src/qt/ve_qitem_tree_model.cpp
-    src/veutil/src/qt/ve_quick_item.cpp
 )
 list(APPEND SOURCES ${VEUTIL_CORE_SOURCES})
 
@@ -756,10 +785,6 @@ endif()
 
 set(VENUS_CPP_SOURCES
     src/main.cpp
-    src/basedevicemodel.h
-    src/basedevicemodel.cpp
-    src/aggregatedevicemodel.h
-    src/aggregatedevicemodel.cpp
     src/logging.h
     src/veqitemmockproducer.h
     src/veqitemmockproducer.cpp
@@ -945,6 +970,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Svg
     Qt6::Xml
     Qt6::Mqtt
+    Qt6::QuickControls2
     VenusQMLModuleplugin
     Gaugesplugin
     Unitsplugin
@@ -952,6 +978,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Dbusplugin
     Mockplugin
     Mqttplugin
+    Veutilplugin
 )
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")

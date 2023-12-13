@@ -47,7 +47,7 @@ QtObject {
 	readonly property string alarms: qsTrId("common_words_alarms")
 
 	//% "Auto"
-	readonly property string auto: qsTrId("common_words_auto")
+	//readonly property string auto: qsTrId("common_words_auto")
 
 	//% "Automatic scanning"
 	readonly property string automatic_scanning: qsTrId("common_words_automatic_scanning")

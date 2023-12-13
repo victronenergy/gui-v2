@@ -50,6 +50,7 @@ private:
 class SingleUidHelper : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString dbusUid READ dbusUid WRITE setDBusUid NOTIFY dbusUidChanged)
 	Q_PROPERTY(QString mqttUid READ mqttUid NOTIFY mqttUidChanged)
 

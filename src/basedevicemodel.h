@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QPointer>
 #include <QAbstractListModel>
+#include <qqmlintegration.h>
 
 namespace Victron {
 
@@ -17,6 +18,7 @@ namespace VenusOS {
 class BaseDevice : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString serviceUid READ serviceUid WRITE setServiceUid NOTIFY serviceUidChanged)
 	Q_PROPERTY(int deviceInstance READ deviceInstance WRITE setDeviceInstance NOTIFY deviceInstanceChanged)
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
@@ -54,6 +56,7 @@ private:
 class BaseDeviceModel : public QAbstractListModel
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(int count READ count NOTIFY countChanged)
 	Q_PROPERTY(QString modelId READ modelId WRITE setModelId NOTIFY modelIdChanged)
 	Q_PROPERTY(BaseDevice *firstObject READ firstObject NOTIFY firstObjectChanged)

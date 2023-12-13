@@ -24,6 +24,7 @@ namespace VenusOS {
 class LanguageModel : public QAbstractListModel
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(int currentLanguage READ currentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged)
 	Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
 	Q_PROPERTY(QString currentDisplayText READ currentDisplayText NOTIFY currentDisplayTextChanged)
