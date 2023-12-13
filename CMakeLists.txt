@@ -485,6 +485,8 @@ qt_add_qml_module(VenusQMLModule
     OUTPUT_DIRECTORY Victron/VenusOS
     IMPORT_PATH ${CMAKE_CURRENT_BINARY_DIR}
     IMPORTS
+    Qt6::Core
+    Qt6::CorePrivate
         Qt6::QuickControls2
         Victron.Utils
         Victron.Units
@@ -498,7 +500,7 @@ qt_add_qml_module(VenusQMLModule
     ENABLE_TYPE_COMPILER
 )
 target_include_directories(VenusQMLModule PRIVATE src/connman)
-target_link_libraries(VenusQMLModule PRIVATE Utilsplugin Unitsplugin Veutilplugin Qt6::Core Qt6::Gui Qt6::Mqtt Qt6::Quick Qt6::QuickControls2)
+target_link_libraries(VenusQMLModule PRIVATE Utilsplugin Unitsplugin Veutilplugin Qt6::Core Qt6::CorePrivate Qt6::Gui Qt6::Mqtt Qt6::Quick Qt6::QuickControls2)
 
 target_link_libraries(VenusQMLModule PRIVATE
     $<IF:$<STREQUAL:"${CMAKE_SYSTEM_NAME}","Emscripten">,Qt6::WebSockets,Qt6::DBus> # i.e. (CMAKE_SYSTEM_NAME === "Emscripten" ? Qt6::WebSockets : Qt6::DBus)
@@ -712,7 +714,7 @@ qt_add_qml_module(Veutil
     ${QML_MODULE_OPTARGS}
 )
 target_include_directories(Veutil PRIVATE src/veutil/inc/veutil/qt)
-target_link_libraries(Veutil PRIVATE Qt6::Core Qt6::Quick)
+target_link_libraries(Veutil PRIVATE Qt6::Core Qt6::CorePrivate Qt6::Quick)
 
 set(CONNMAN_SOURCES
     src/connman/cmmananger_interface.h 
