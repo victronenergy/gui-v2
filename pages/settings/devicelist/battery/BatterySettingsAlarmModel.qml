@@ -14,7 +14,7 @@ ObjectModel {
 
 	ListRangeSlider {
 		text: CommonWords.low_state_of_charge
-		slider.suffix: "%"
+		sliderSuffix: "%"
 		slider.firstColor: Theme.color.red
 		slider.secondColor: Theme.color.green
 		firstDataSource: root.bindPrefix + "/Settings/Alarm/LowSoc"
@@ -24,7 +24,7 @@ ObjectModel {
 
 	ListRangeSlider {
 		text: CommonWords.low_battery_voltage
-		slider.suffix: "V"
+		sliderSuffix: "V"
 		slider.decimals: 1
 		slider.stepSize: 0.1
 		slider.firstColor: Theme.color.red
@@ -36,7 +36,7 @@ ObjectModel {
 
 	ListRangeSlider {
 		text: CommonWords.high_battery_voltage
-		slider.suffix: "V"
+		sliderSuffix: "V"
 		slider.decimals: 1
 		slider.stepSize: 0.1
 		slider.firstColor: Theme.color.green
@@ -48,7 +48,7 @@ ObjectModel {
 
 	ListRangeSlider {
 		text: CommonWords.low_starter_battery_voltage
-		slider.suffix: "V"
+		sliderSuffix: "V"
 		slider.decimals: 1
 		slider.stepSize: 0.1
 		slider.firstColor: Theme.color.red
@@ -60,7 +60,7 @@ ObjectModel {
 
 	ListRangeSlider {
 		text: CommonWords.high_starter_battery_voltage
-		slider.suffix: "V"
+		sliderSuffix: "V"
 		slider.decimals: 1
 		slider.stepSize: 0.1
 		slider.firstColor: Theme.color.green

@@ -17,7 +17,7 @@ Page {
 				//% "Status LEDs"
 				text: qsTrId("batterydiagnostics_status_leds")
 
-				content.children: [
+				contentChildren: [
 					Repeater {
 						model: [
 							{ servicePath: "/Diagnostics/LedStatus/Green", color: "#00FF00" },

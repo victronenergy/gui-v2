@@ -248,7 +248,7 @@ set (VENUS_QML_MODULE_SOURCES
     # TODO data/EvChargers.qml
     # TODO data/Generators.qml
     # TODO data/Inverters.qml
-    data/MeteoDevices.qml
+    # TODO data/MeteoDevices.qml
     data/MotorDrives.qml
     data/MultiRsDevices.qml
     data/Notifications.qml

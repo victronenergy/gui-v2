@@ -23,7 +23,7 @@ ListItem {
 	enabled: userHasWriteAccess && (dataSource === "" || dataValid)
 
 	content.anchors.rightMargin: 0
-	content.children: [
+	contentChildren: [
 		SettingsSlider {
 			id: slider
 

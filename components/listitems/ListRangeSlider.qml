@@ -9,6 +9,7 @@ import Victron.VenusOS
 ListItem {
 	id: root
 
+	property var sliderSuffix
 	property alias firstDataSource: firstDataPoint.source
 	readonly property alias firstDataValue: firstDataPoint.value
 	readonly property alias firstDataValid: firstDataPoint.valid
@@ -35,10 +36,11 @@ ListItem {
 			 && (secondDataSource === "" || secondDataValid)
 
 	content.anchors.rightMargin: 0
-	content.children: [
+	contentChildren: [
 		SettingsRangeSlider {
 			id: slider
 
+			suffix: sliderSuffix
 			width: Theme.geometry.listItem.slider.width
 			first.value: {
 				const v = isNaN(firstDataPoint.value) ? 0 : firstDataPoint.value

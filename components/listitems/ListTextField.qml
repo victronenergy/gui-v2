@@ -93,7 +93,7 @@ ListItem {
 	}
 
 	enabled: userHasWriteAccess && (dataSource === "" || dataValid)
-	content.children: [
+	contentChildren: [
 		defaultContent
 	]
 

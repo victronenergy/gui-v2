@@ -41,7 +41,7 @@ ListItem {
 	down: mouseArea.containsPress
 	enabled: userHasWriteAccess && (dataSource === "" || dataValid)
 
-	content.children: [
+	contentChildren: [
 		Label {
 			id: secondaryLabel
 			anchors.verticalCenter: switchItem.verticalCenter

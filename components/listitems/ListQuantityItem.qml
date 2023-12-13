@@ -20,7 +20,7 @@ ListItem {
 	property alias unit: quantityLabel.unit
 	property alias precision: quantityLabel.precision
 
-	content.children: [
+	contentChildren: [
 		QuantityLabel {
 			id: quantityLabel
 

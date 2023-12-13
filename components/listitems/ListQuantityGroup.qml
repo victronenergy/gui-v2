@@ -12,7 +12,7 @@ ListItem {
 	property alias textModel: repeater.model
 
 	content.spacing: Theme.geometry.listItem.content.spacing * 2
-	content.children: [
+	contentChildren: [
 		QuantityRepeater {
 			id: repeater
 		}

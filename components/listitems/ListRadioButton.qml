@@ -18,7 +18,7 @@ ListItem {
 	down: mouseArea.containsPress
 	enabled: userHasWriteAccess
 
-	content.children: [
+	contentChildren: [
 		RadioButton {
 			id: radioButton
 

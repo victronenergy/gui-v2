@@ -19,7 +19,7 @@ ListItem {
 	property alias secondaryText: secondaryLabel.text
 	property alias secondaryLabel: secondaryLabel
 
-	content.children: [
+	contentChildren: [
 		Label {
 			id: secondaryLabel
 

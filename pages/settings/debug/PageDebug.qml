@@ -16,7 +16,7 @@ Page {
 				id: frameRateSwitch
 				//% "Enable frame-rate visualizer"
 				text: qsTrId("settings_page_debug_enable_fps_visualizer")
-				content.children: [
+				contentChildren: [
 					Switch {
 						id: switchItem
 						checked: FrameRateModel.enabled
@@ -36,7 +36,7 @@ Page {
 				text: qsTrId("settings_page_debug_quit_application")
 				property bool isQuitting: false
 				onIsQuittingChanged: if (isQuitting) Qt.quit()
-				content.children: [
+				contentChildren: [
 					Switch {
 						checked: quitSwitch.isQuitting
 						onClicked: quitSwitch.isQuitting = !quitSwitch.isQuitting

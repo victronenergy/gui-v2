@@ -41,7 +41,7 @@ GradientListView {
 		text: CommonWords.ip_address + ' ' + (model.index + 1)
 		secondaryText: modelData
 
-		content.children: [
+		contentChildren: [
 			defaultContent,
 			removalButton
 		]

@@ -144,7 +144,7 @@ Page {
 				slider.to: 100
 				slider.first.value: 25
 				slider.second.value: 75
-				slider.suffix: "%"
+				sliderSuffix: "%"
 			}
 
 			ListButton {
@@ -182,7 +182,7 @@ Page {
 			ListItem {
 				text: "Custom item"
 
-				content.children: [
+				contentChildren: [
 					Rectangle {
 						anchors.verticalCenter: parent.verticalCenter
 						width: 30
@@ -202,7 +202,7 @@ Page {
 			ListItem {
 				text: "Custom bottom content item"
 
-				bottomContent.children: [
+				bottomcontentChildren: [
 					ListLabel {
 						topPadding: 0
 						bottomPadding: 0

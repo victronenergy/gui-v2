@@ -14,7 +14,7 @@ ListItem {
 	property int itemWidth
 	property string invalidText: "--"
 
-	content.children: [
+	contentChildren: [
 		Repeater {
 			id: repeater
 

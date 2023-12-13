@@ -66,7 +66,7 @@ Page {
 			ListItem {
 				text: CommonWords.signal_strength
 
-				content.children: [
+				contentChildren: [
 					Item {
 						anchors.verticalCenter: parent.verticalCenter
 						width: Theme.geometry.settings.gsmModem.icon.container.width

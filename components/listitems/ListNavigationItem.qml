@@ -18,7 +18,7 @@ ListItem {
 	down: mouseArea.containsPress
 	enabled: userHasReadAccess
 
-	content.children: [
+	contentChildren: [
 		Label {
 			id: secondaryLabel
 
