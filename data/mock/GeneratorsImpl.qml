@@ -19,11 +19,11 @@ QtObject {
 		MockDevice {
 			id: generator
 
-			property int state: VenusOS.Generators_State_Running
+			property int state: VenusOS.Generators_State_Stopped
 			property bool autoStart: true
 			property int manualStartTimer: 60 * 60
-			property int runtime: 35
-			property int runningBy: VenusOS.Generators_RunningBy_Soc
+			property int runtime
+			property int runningBy: VenusOS.Generators_RunningBy_NotRunning
 
 			function start(durationSecs) {
 				manualStartTimer = durationSecs
@@ -36,6 +36,7 @@ QtObject {
 				state = VenusOS.Generators_State_Stopped
 				runningBy = VenusOS.Generators_RunningBy_NotRunning
 				runTimerTimer.stop()
+				runtime = 0
 			}
 
 			function setAutoStart(auto) {

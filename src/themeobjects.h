@@ -136,12 +136,15 @@ class ThemeSingleton : public Theme
 	Q_PROPERTY(int geometry_controlCard_mediumItem_height READ geometry_controlCard_mediumItem_height NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_controlCard_minimumWidth READ geometry_controlCard_minimumWidth NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_controlCard_status_bottomMargin READ geometry_controlCard_status_bottomMargin NOTIFY screenSizeChanged_parameterless FINAL)
+	Q_PROPERTY(int geometry_controlCard_status_topMargin READ geometry_controlCard_status_topMargin NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_controlCard_title_spacing READ geometry_controlCard_title_spacing NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_controlCard_title_topMargin READ geometry_controlCard_title_topMargin NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_controlCardsPage_bottomMargin READ geometry_controlCardsPage_bottomMargin NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_controlCardsPage_horizontalMargin READ geometry_controlCardsPage_horizontalMargin NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_controlCardsPage_spacing READ geometry_controlCardsPage_spacing NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_generatorCard_startButton_height READ geometry_generatorCard_startButton_height NOTIFY screenSizeChanged_parameterless FINAL)
+	Q_PROPERTY(int geometry_generatorIconLabel_duration_width READ geometry_generatorIconLabel_duration_width NOTIFY screenSizeChanged_parameterless FINAL)
+	Q_PROPERTY(int geometry_generatorIconLabel_icon_margin READ geometry_generatorIconLabel_icon_margin NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_generatorIconLabel_icon_width READ geometry_generatorIconLabel_icon_width NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_gradientList_bottomMargin READ geometry_gradientList_bottomMargin NOTIFY screenSizeChanged_parameterless FINAL)
 	Q_PROPERTY(int geometry_gradientList_spacing READ geometry_gradientList_spacing NOTIFY screenSizeChanged_parameterless FINAL)
@@ -1074,13 +1077,18 @@ public:
 			: 28;
 	}
 
+	int geometry_controlCard_status_topMargin() const {
+		return m_screenSize == Theme::FiveInch ? 6
+			: 6;
+	}
+
 	int geometry_controlCard_title_spacing() const {
 		return m_screenSize == Theme::FiveInch ? 6
 			: 4;
 	}
 
 	int geometry_controlCard_title_topMargin() const {
-		return m_screenSize == Theme::FiveInch ? 12
+		return m_screenSize == Theme::FiveInch ? 16
 			: 16;
 	}
 
@@ -1102,6 +1110,16 @@ public:
 	int geometry_generatorCard_startButton_height() const {
 		return m_screenSize == Theme::FiveInch ? 48
 			: 48;
+	}
+
+	int geometry_generatorIconLabel_duration_width() const {
+		return m_screenSize == Theme::FiveInch ? 60
+			: 60;
+	}
+
+	int geometry_generatorIconLabel_icon_margin() const {
+		return m_screenSize == Theme::FiveInch ? 4
+			: 4;
 	}
 
 	int geometry_generatorIconLabel_icon_width() const {
@@ -3375,7 +3393,7 @@ public:
 	}
 
 	int animation_acceptButtonBackground_expand_duration() const {
-		return 2000;
+		return 1200;
 	}
 
 	int animation_briefPage_centerGauge_shine_duration() const {

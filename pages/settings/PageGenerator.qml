@@ -14,59 +14,9 @@ Page {
 	property string settingsBindPrefix: "com.victronenergy.settings/Settings/Generator0"
 	property string startStopBindPrefix: "com.victronenergy.generator.startstop0"
 	readonly property alias generatorState: _generatorState
-	readonly property alias activeCondition: _activeCondition
 	property alias startStopModel: startStopModel
 	property alias model: settingsListView.model
 	readonly property var _dates: historicalData.valid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
-
-	function getState()
-	{
-		switch (generatorState.value) {
-		case 2:
-			//% "Warm-up"
-			return qsTrId("page_generator_warm_up")
-		case 3:
-			//% "Cool-down"
-			return qsTrId("page_generator_cool_down")
-		case 4:
-			//% "Stopping"
-			return qsTrId("page_generator_stopping")
-		case 10:
-			return CommonWords.error
-		}
-
-		switch(activeCondition.value) {
-		case 'soc':
-			//% "Running by SOC condition"
-			return qsTrId("settings_running_by_soc_condition")
-		case 'acload':
-			//% "Running by AC Load condition"
-			return qsTrId("settings_running_by_ac_load_condition")
-		case 'batterycurrent':
-			//% "Running by battery current condition"
-			return qsTrId("settings_running_by_battery_current_condition")
-		case 'batteryvoltage':
-			//% "Running by battery voltage condition"
-			return qsTrId("settings_running_by_battery_voltage_condition")
-		case 'inverterhightemp':
-			//% "Running by inverter high temperature"
-			return qsTrId("settings_running_by_inverter_high_temperature")
-		case 'inverteroverload':
-			//% "Running by inverter overload"
-			return qsTrId("settings_running_by_inverter_overload")
-		case 'testrun':
-			//% "Test run"
-			return qsTrId("settings_running_by_test_run")
-		case 'lossofcommunication':
-			//% "Running by loss of communication"
-			return qsTrId("settings_running_by_loss_of_communication")
-		case 'manual':
-			//% "Manually started"
-			return qsTrId("settings_manually_started")
-		default:
-			return CommonWords.stopped_status
-		}
-	}
 
 	DataPoint {
 		id: _generatorState
@@ -74,8 +24,8 @@ Page {
 	}
 
 	DataPoint {
-		id: _activeCondition
-		source: root.startStopBindPrefix + "/RunningByCondition"
+		id: activeCondition
+		source: root.startStopBindPrefix + "/RunningByConditionCode"
 	}
 
 	DataPoint {
@@ -106,7 +56,7 @@ Page {
 			id: state
 
 			text: CommonWords.state
-			secondaryText: activeCondition.valid ? getState() : '---'
+			secondaryText: activeCondition.valid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : '---'
 			enabled: false
 		}
 
