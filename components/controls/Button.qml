@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Templates as CT
-import QtQuick.Templates as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -21,8 +20,8 @@ CT.Button {
 			: Theme.color.darkOk
 	property color downColor: flat ? "transparent"
 			: Theme.color.ok
-	property alias border: backgroundRect.border
-	property alias radius: backgroundRect.radius
+	property var border
+	property var radius
 
 	down: pressed || checked
 	spacing: Theme.geometry.button.spacing
@@ -39,7 +38,7 @@ CT.Button {
 	font.family: VenusFont.normal.name
 	font.pixelSize: Theme.font.size.body1
 	flat: true
-
+/*
 	background: Rectangle {
 		id: backgroundRect
 
@@ -48,7 +47,7 @@ CT.Button {
 		border.color: Theme.color.ok
 		radius: Theme.geometry.button.radius
 	}
-
+*/
 	contentItem: CP.IconLabel {
 		anchors.fill: parent
 

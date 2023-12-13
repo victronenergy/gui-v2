@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Utils
 import Victron.Units
 
 OverviewWidget {
@@ -165,7 +164,7 @@ OverviewWidget {
 		font.pixelSize: Theme.font.size.body2
 	}
 
-	extraContent.children: [
+	extraContent_children: [
 		Column {
 			anchors {
 				top: parent.top

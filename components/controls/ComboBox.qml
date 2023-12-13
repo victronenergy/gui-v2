@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Templates as CT
-import QtQuick.Templates as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -56,7 +55,7 @@ CT.ComboBox {
 			}
 		}
 	}
-
+/*
 	indicator: CP.ColorImage {
 		id: downIcon
 
@@ -69,7 +68,7 @@ CT.ComboBox {
 		color: root.pressed ? Theme.color.primary : Theme.color.ok
 		fillMode: Image.PreserveAspectFit
 	}
-
+*/
 	contentItem: Label {
 		leftPadding: 0
 		rightPadding: root.indicator.width + root.spacing

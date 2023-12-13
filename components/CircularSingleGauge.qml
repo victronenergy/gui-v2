@@ -7,7 +7,6 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import Victron.Gauges
 
 Item {
 	id: gauges

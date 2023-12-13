@@ -107,7 +107,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/GradientListView.qml
     components/GsmStatusIcon.qml
     components/IconButton.qml
-    components/InputPanel.qml
+    # TODO components/InputPanel.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
     components/NavBar.qml
@@ -235,19 +235,19 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/WidgetHeader.qml
     components/widgets/WindWidget.qml
 
-    data/AcInputs.qml
-    data/Chargers.qml
-    data/Batteries.qml
-    data/DataManager.qml
-    data/DcInputs.qml
-    data/DcLoads.qml
-    data/DcSystems.qml
-    data/DigitalInputs.qml
-    data/EnvironmentInputs.qml
+    # TODO data/AcInputs.qml
+    # TODO data/Chargers.qml
+    # TODO data/Batteries.qml
+    # TODO data/DataManager.qml
+    # TODO data/DcInputs.qml
+    # TODO data/DcLoads.qml
+    # TODO data/DcSystems.qml
+    # TODO data/DigitalInputs.qml
+    # TODO data/EnvironmentInputs.qml
     data/Ess.qml
-    data/EvChargers.qml
-    data/Generators.qml
-    data/Inverters.qml
+    # TODO data/EvChargers.qml
+    # TODO data/Generators.qml
+    # TODO data/Inverters.qml
     data/MeteoDevices.qml
     data/MotorDrives.qml
     data/MultiRsDevices.qml
@@ -276,7 +276,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/DcLoad.qml
     data/common/DcSystem.qml
     data/common/DigitalInput.qml
-    data/common/DeviceModel.qml
+    # TODO data/common/DeviceModel.qml
     data/common/EnvironmentInput.qml
     data/common/EssData.qml
     data/common/EvCharger.qml
@@ -385,8 +385,8 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/debug/PagePowerDebug.qml
     pages/settings/debug/PageSettingsDemo.qml
     pages/settings/debug/PageSystemData.qml
-    pages/settings/devicelist/DeviceListPage.qml
-    pages/settings/devicelist/AcInDeviceModel.qml
+    # TODO pages/settings/devicelist/DeviceListPage.qml
+    # TODO pages/settings/devicelist/AcInDeviceModel.qml
     pages/settings/devicelist/PageNotYetImplemented.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
@@ -482,11 +482,12 @@ qt_add_qml_module(VenusQMLModule
     URI Victron.VenusOS
     VERSION 2.0
     STATIC
+    RESOURCE_PREFIX /qt/qml
     OUTPUT_DIRECTORY Victron/VenusOS
     IMPORT_PATH ${CMAKE_CURRENT_BINARY_DIR}
     IMPORTS
-    Qt6::Core
-    Qt6::CorePrivate
+        Qt6::Core
+        Qt6::CorePrivate
         Qt6::QuickControls2
         Victron.Utils
         Victron.Units
@@ -500,7 +501,12 @@ qt_add_qml_module(VenusQMLModule
     ENABLE_TYPE_COMPILER
 )
 target_include_directories(VenusQMLModule PRIVATE src/connman)
-target_link_libraries(VenusQMLModule PRIVATE Utilsplugin Unitsplugin Veutilplugin Qt6::Core Qt6::CorePrivate Qt6::Gui Qt6::Mqtt Qt6::Quick Qt6::QuickControls2)
+target_link_libraries(VenusQMLModule
+    PRIVATE
+        Qt6::Core Qt6::CorePrivate Qt6::Gui Qt6::Mqtt Qt6::Quick
+        Qt6::QuickControls2
+        Utilsplugin Unitsplugin Veutilplugin
+)
 
 target_link_libraries(VenusQMLModule PRIVATE
     $<IF:$<STREQUAL:"${CMAKE_SYSTEM_NAME}","Emscripten">,Qt6::WebSockets,Qt6::DBus> # i.e. (CMAKE_SYSTEM_NAME === "Emscripten" ? Qt6::WebSockets : Qt6::DBus)
@@ -713,8 +719,8 @@ qt_add_qml_module(Veutil
         src/veutil/src/qt/ve_qitem_tree_model.cpp
     ${QML_MODULE_OPTARGS}
 )
-target_include_directories(Veutil PRIVATE src/veutil/inc/veutil/qt)
-target_link_libraries(Veutil PRIVATE Qt6::Core Qt6::CorePrivate Qt6::Quick)
+target_include_directories(Veutil PUBLIC src/veutil/inc/veutil/qt)
+target_link_libraries(Veutil PUBLIC Qt6::Core Qt6::CorePrivate Qt6::Quick)
 
 set(CONNMAN_SOURCES
     src/connman/cmmananger_interface.h 

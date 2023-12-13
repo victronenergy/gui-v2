@@ -5,8 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Veutil
-import Victron.Utils
 
 QtObject {
 	id: root

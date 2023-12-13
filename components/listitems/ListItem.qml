@@ -9,6 +9,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	property var contentChildren
 	property alias text: primaryLabel.text
 	property alias content: content
 	property alias bottomContent: bottomContent
@@ -90,6 +91,7 @@ Item {
 		}
 		spacing: Theme.geometry.listItem.content.spacing
 		width: Math.min(implicitWidth, root.maximumContentWidth)
+		children: contentChildren
 	}
 
 	Column {

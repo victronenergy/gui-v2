@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Shapes
 import Victron.VenusOS
 
 Item {

@@ -17,7 +17,7 @@ ModalDialog {
 	//% "Start Now"
 	acceptText: qsTrId("controlcard_generator_startdialog_start_now")
 
-	contentItem: Column {
+	_contentItem: Column {
 		anchors {
 			top: root.header.bottom
 			topMargin: Theme.geometry.modalDialog.content.margins
@@ -61,7 +61,7 @@ ModalDialog {
 		}
 	}
 
-	acceptButton.background: AcceptButtonBackground {
+	acceptButtonBackground: AcceptButtonBackground {
 		id: acceptButtonBackground
 
 		width: root.acceptButton.width

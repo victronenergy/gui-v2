@@ -16,7 +16,7 @@ ModalDialog {
 	//% "Inverter / Charger mode"
 	title: qsTrId("controlcard_inverter_charger_mode")
 
-	contentItem: Column {
+	_contentItem: Column {
 		anchors {
 			top: parent.top
 			left: parent.left

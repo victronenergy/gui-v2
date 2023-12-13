@@ -9,6 +9,7 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
+	property var extraContent_children
 	property int type: Enums.OverviewWidget_Type_Unknown
 	property int size: Enums.OverviewWidget_Size_M
 
@@ -112,5 +113,6 @@ Rectangle {
 			bottom: parent.bottom
 		}
 		visible: root.size >= Enums.OverviewWidget_Size_M
+		children: root.extraContent_children
 	}
 }

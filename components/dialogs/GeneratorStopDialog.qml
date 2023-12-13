@@ -70,7 +70,7 @@ ModalDialog {
 		}
 	}
 
-	acceptButton.background: AcceptButtonBackground {
+	acceptButtonBackground: AcceptButtonBackground {
 		id: acceptButtonBackground
 
 		width: root.acceptButton.width

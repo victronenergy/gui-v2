@@ -18,7 +18,7 @@ OverviewWidget {
 	enabled: true
 	quantityLabel.dataObject: { "power": Global.evChargers.power, "current": NaN }
 
-	extraContent.children: [
+	extraContent_children: [
 		Loader {
 			anchors {
 				left: parent.left

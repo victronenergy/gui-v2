@@ -60,7 +60,7 @@ Device {
 		_manualStart.setValue(0)
 	}
 
-	function setAutoStart(auto) {
-		_autoStart.setValue(auto ? 1 : 0)
+	function setAutoStart(value) {
+		_autoStart.setValue(value ? 1 : 0)
 	}
 }

@@ -3,7 +3,6 @@
 ** See LICENSE.txt for license information.
 */
 
-import QtQuick
 import Victron.VenusOS
 
 OverviewWidget {
@@ -17,7 +16,7 @@ OverviewWidget {
 
 	quantityLabel.dataObject: Global.system.ac.consumption
 
-	extraContent.children: [
+	extraContent_children: [
 		ThreePhaseDisplay {
 			anchors {
 				left: parent ? parent.left : undefined

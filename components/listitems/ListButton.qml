@@ -17,7 +17,7 @@ ListItem {
 
 	enabled: userHasWriteAccess
 
-	content.children: [
+	contentChildren: [
 		ListItemButton {
 			id: button
 

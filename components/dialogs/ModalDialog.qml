@@ -10,6 +10,8 @@ import Victron.VenusOS
 T.Dialog {
 	id: root
 
+	property var acceptButtonBackground
+	property var _contentItem
 	property string secondaryTitle
 	property int dialogDoneOptions: Enums.ModalDialog_DoneOptions_SetAndClose
 	property alias canAccept: doneButton.enabled
@@ -35,6 +37,9 @@ T.Dialog {
 	verticalPadding: 0
 	horizontalPadding: 0
 	modal: true
+
+	contentItem: _contentItem
+	acceptButton.Background: acceptButtonBackground
 
 	enter: Transition {
 		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }

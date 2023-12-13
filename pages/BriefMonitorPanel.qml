@@ -4,10 +4,8 @@
 */
 
 import QtQuick
-import QtQuick.Templates as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import Victron.Utils
 import Victron.Units
 
 Column {

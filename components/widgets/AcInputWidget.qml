@@ -14,7 +14,7 @@ OverviewWidget {
 
 	rightPadding: sideGauge.visible ? Theme.geometry.overviewPage.widget.sideGauge.margins : 0
 	quantityLabel.dataObject: input && input.connected ? input : null
-	extraContent.children: phaseModel && phaseModel.count > 1 ? phaseDisplay : []
+	extraContent_children: phaseModel && phaseModel.count > 1 ? phaseDisplay : []
 	enabled: true
 
 	VerticalGauge {
