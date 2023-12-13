@@ -78,7 +78,7 @@ QtObject {
 		case VenusOS.DigitalInput_State_Running:
 			return CommonWords.running_status
 		case VenusOS.DigitalInput_State_Stopped:
-			return CommonWords.stopped_status
+			return CommonWords.stopped
 		default:
 			return ""
 		}

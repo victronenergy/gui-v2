@@ -39,8 +39,13 @@ Rectangle {
 
 		anchors {
 			top: title.bottom
-			left: title.left
+			topMargin: Theme.geometry_controlCard_status_topMargin
+			left: parent.left
+			leftMargin: Theme.geometry_controlCard_contentMargins
+			right: parent.right
+			rightMargin: Theme.geometry_controlCard_contentMargins
 		}
 		font.pixelSize: Theme.font_size_body3
+		wrapMode: Text.Wrap
 	}
 }

@@ -14,7 +14,7 @@ Device {
 	readonly property int state: _state.value === undefined ? -1 : _state.value
 	readonly property bool autoStart: _autoStart.value === 1
 	readonly property int manualStartTimer: _manualStartTimer.value === undefined ? -1 : _manualStartTimer.value
-	readonly property int runtime: _runtime.value === undefined ? -1 : _runtime.value
+	readonly property int runtime: _runtime.value || 0
 	readonly property int runningBy: _runningBy.value === undefined ? -1 : _runningBy.value
 
 	readonly property VeQuickItem _state: VeQuickItem {

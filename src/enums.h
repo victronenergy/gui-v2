@@ -217,8 +217,11 @@ public:
 	Q_ENUM(Ess_BatteryLifeState)
 
 	enum Generators_State {
-		Generators_State_Stopped = 0, // Not 2 as documented?
+		Generators_State_Stopped = 0,
 		Generators_State_Running = 1,
+		Generators_State_WarmUp = 2,
+		Generators_State_CoolDown = 3,
+		Generators_State_Stopping = 4,
 		Generators_State_Error = 10
 	};
 	Q_ENUM(Generators_State)
@@ -232,7 +235,7 @@ public:
 		Generators_RunningBy_AcLoad,
 		Generators_RunningBy_BatteryCurrent,
 		Generators_RunningBy_BatteryVoltage,
-		Generators_RunningBy_InverterHighTemp,
+		Generators_RunningBy_InverterHighTemperature,
 		Generators_RunningBy_InverterOverload
 	};
 	Q_ENUM(Generators_RunningBy)
