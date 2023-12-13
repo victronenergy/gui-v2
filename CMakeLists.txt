@@ -483,7 +483,7 @@ qt_add_qml_module(VenusQMLModule
     VERSION 2.0
     STATIC
     OUTPUT_DIRECTORY Victron/VenusOS
-    IMPORT_PATH Victron
+    IMPORT_PATH ${CMAKE_CURRENT_BINARY_DIR}
     IMPORTS
         Qt6::QuickControls2
         Victron.Utils
