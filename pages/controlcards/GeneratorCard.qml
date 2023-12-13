@@ -12,23 +12,12 @@ import Victron.Utils
 ControlCard {
 	id: root
 
-	property var generator
+	property Generator generator
 
 	title.icon.source: "qrc:/images/generator.svg"
 	title.text: CommonWords.generator
-
-	status.text: {
-		switch (root.generator.state) {
-		case VenusOS.Generators_State_Running:
-			return CommonWords.running_status
-		case VenusOS.Generators_State_Error:
-			//% "ERROR"
-			return qsTrId("controlcard_generator_status_error")
-		default:
-			//% "Stopped"
-			return qsTrId("controlcard_generator_status_stopped")
-		}
-	}
+	status.text: Global.generators.stateToText(root.generator.state, root.generator.runningBy)
+	status.rightPadding: timerDisplay.width + Theme.geometry_controlCard_contentMargins
 
 	GeneratorIconLabel {
 		id: timerDisplay
@@ -36,62 +25,15 @@ ControlCard {
 			right: parent.right
 			rightMargin: Theme.geometry_controlCard_contentMargins
 			top: parent.status.top
-			topMargin: parent.status.topMargin
-			bottom: parent.status.bottom
-			bottomMargin: parent.status.bottomMargin
+			topMargin: parent.status.font.pixelSize - fontSize
 		}
 		generator: root.generator
-	}
-
-	Label {
-		id: substatus
-		anchors {
-			top: timerDisplay.bottom
-			left: parent.left
-			leftMargin: Theme.geometry_controlCard_contentMargins
-		}
-
-		color: root.generator.state === VenusOS.Generators_State_Error ? Theme.color_critical
-			: Theme.color_font_secondary
-		text: root.generator.state !== VenusOS.Generators_State_Running ?
-				"" // not running, empty substatus.
-			: root.generator.runningBy === VenusOS.Generators_RunningBy_Manual ?
-				//% "Manual started"
-				qsTrId("controlcard_generator_substatus_manualstarted")
-			: root.generator.runningBy === VenusOS.Generators_RunningBy_TestRun ?
-				//% "Test run"
-				qsTrId("controlcard_generator_substatus_testrun")
-			: ( //% "Autostarted"
-				qsTrId("controlcard_generator_substatus_autostarted")
-				+ " \u2022 " + substatusForRunningBy(root.generator.runningBy))
-
-		function substatusForRunningBy(runningBy) {
-			switch (root.generator.runningBy) {
-			case VenusOS.Generators_RunningBy_LossOfCommunication:
-				//% "Loss of comm"
-				return qsTrId("controlcard_generator_substatus_lossofcomm")
-			case VenusOS.Generators_RunningBy_Soc:
-				return CommonWords.state_of_charge
-			case VenusOS.Generators_RunningBy_Acload:
-				return CommonWords.ac_load
-			case VenusOS.Generators_RunningBy_BatteryCurrent:
-				return CommonWords.battery_current
-			case VenusOS.Generators_RunningBy_BatteryVoltage:
-				return CommonWords.battery_voltage
-			case VenusOS.Generators_RunningBy_InverterHighTemp:
-				//% "Inverter high temp"
-				return qsTrId("controlcard_generator_substatus_inverterhigh_temp")
-			case VenusOS.Generators_RunningBy_InverterOverload:
-				return CommonWords.inverter_overload
-			default: return "" // unknown substatus.
-			}
-		}
 	}
 
 	SwitchControlValue {
 		id: autostartSwitch
 
-		property var _confirmationDialog
+		property ModalWarningDialog _confirmationDialog
 
 		anchors {
 			top: root.status.bottom
@@ -156,8 +98,8 @@ ControlCard {
 	Button {
 		id: startStopButton
 
-		property var _startDialog
-		property var _stopDialog
+		property GeneratorStartDialog _startDialog
+		property GeneratorStopDialog _stopDialog
 		property int _generatorStateBeforeDialogOpen: -1
 
 		anchors {

@@ -128,7 +128,8 @@
     "geometry.controlCard.maximumWidth": 368,
     "geometry.controlCard.contentMargins": 16,
     "geometry.controlCard.title.spacing": 6,
-    "geometry.controlCard.title.topMargin": 12,
+    "geometry.controlCard.title.topMargin": 16,
+    "geometry.controlCard.status.topMargin": 6,
     "geometry.controlCard.status.bottomMargin": 28,
     "geometry.controlCard.button.margins": 24,
     "geometry.controlCard.mediumItem.height" : 56,
@@ -232,6 +233,8 @@
     "geometry.generatorCard.startButton.height": 48,
 
     "geometry.generatorIconLabel.icon.width": 24,
+    "geometry.generatorIconLabel.icon.margin": 4,
+    "geometry.generatorIconLabel.duration.width": 60,
 
     "geometry.veBusDeviceCard.modeButton.maximumWidth": 180,
 
