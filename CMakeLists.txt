@@ -497,9 +497,6 @@ qt_add_qml_module(VenusQMLModule
         src/aggregatedevicemodel.cpp
     ENABLE_TYPE_COMPILER
 )
-set_target_properties(VenusQMLModule PROPERTIES
-    QT_QMLCACHEGEN_ARGUMENTS "--verbose"
-)
 target_include_directories(VenusQMLModule PRIVATE src/connman)
 target_link_libraries(VenusQMLModule PRIVATE Utilsplugin Unitsplugin Veutilplugin Qt6::Core Qt6::Gui Qt6::Mqtt Qt6::Quick Qt6::QuickControls2)
 

@@ -5,7 +5,7 @@
 
 import QtQuick
 import QtQuick.Controls.impl as CP
-import QtQuick.Controls as C
+import QtQuick.Templates as C
 import Victron.VenusOS
 
 Rectangle {

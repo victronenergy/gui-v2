@@ -5,7 +5,7 @@
 
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls as C
+import QtQuick.Templates as C
 import Victron.VenusOS
 import QtQuick.Effects as Effects
 

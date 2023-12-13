@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as C
 import Victron.VenusOS
 
 // This doesn't extend ModalDialog, due to the custom background layering required to show the

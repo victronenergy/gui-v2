@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import net.connman 0.1
