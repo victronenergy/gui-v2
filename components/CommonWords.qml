@@ -66,7 +66,7 @@ QtObject {
 	readonly property string allow_to_discharge: qsTrId("common_words_allow_to_discharge")
 
 	//% "Auto"
-	readonly property string auto: qsTrId("common_words_auto")
+	readonly property string _auto: qsTrId("common_words_auto")
 
 	//% "Automatic scanning"
 	readonly property string automatic_scanning: qsTrId("common_words_automatic_scanning")

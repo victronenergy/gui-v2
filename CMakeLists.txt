@@ -558,7 +558,18 @@ qt_add_qml_module(VenusQMLModule
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
     SOURCES ${VenusQMLModule_CPP_SOURCES}
+    IMPORT_PATH ${CMAKE_CURRENT_BINARY_DIR}
     IMPORTS net.connman
+        Victron.Utils
+        Victron.Units
+        Victron.Veutil
+    ENABLE_TYPE_COMPILER
+)
+target_include_directories(VenusQMLModule PRIVATE src/connman)
+target_link_libraries(VenusQMLModule
+    PRIVATE
+        Qt6::Gui Qt6::Mqtt Qt6::Quick
+        Utilsplugin Unitsplugin Veutilplugin
 )
 target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Core

@@ -127,7 +127,7 @@ QtObject {
 		case VenusOS.Evcs_Mode_Manual:
 			return CommonWords.manual
 		case VenusOS.Evcs_Mode_Auto:
-			return CommonWords.auto
+			return CommonWords._auto
 		case VenusOS.Evcs_Mode_Scheduled:
 			//% "Scheduled"
 			return qsTrId("evchargers_mode_scheduled")

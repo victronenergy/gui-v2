@@ -5,6 +5,7 @@
 #include <QDBusConnection>
 #include <qqmlintegration.h>
 #include "cmagent_adaptor.h"
+#include <qqmlintegration.h>
 
 class CmAgent : public QObject
 {

@@ -7,6 +7,7 @@
 #include <qqmlintegration.h>
 
 #include "cmtechnology_interface.h"
+#include <qqmlintegration.h>
 
 class CmTechnology : public QObject
 {
