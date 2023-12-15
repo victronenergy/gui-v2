@@ -17,13 +17,11 @@ Page {
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
 	readonly property string _inputsIconSource: {
-		const totalInputs = (Global.acInputs.connectedInput != null ? 1 : 0)
+		const totalInputs = (Global.acInputs.activeInput != null ? 1 : 0)
 				+ Global.dcInputs.model.count
 		if (totalInputs <= 1) {
-			if (Global.acInputs.connectedInput != null) {
-				return VenusOS.acInputIcon(Global.acInputs.connectedInput.source)
-			} else if (Global.acInputs.generatorInput != null) {
-				return VenusOS.acInputIcon(Global.acInputs.generatorInput.source)
+			if (Global.acInputs.activeInput != null) {
+				return Global.acInputs.sourceIcon(Global.acInputs.activeInput.source)
 			} else if (Global.dcInputs.model.count > 0) {
 				return VenusOS.dcInputIcon(Global.dcInputs.model.deviceAt(0).source)
 			}
@@ -98,7 +96,7 @@ Page {
 		}
 		// Show gauge even if there are no active AC inputs, so that the gauge visibility doesn't
 		// jump on/off when inputs are connected/disconnected
-		active: Global.acInputs.model.count > 0 || Global.dcInputs.model.count > 0
+		active: !!Global.acInputs.activeInput || Global.dcInputs.model.count > 0
 
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignLeft | (leftLower.active ? Qt.AlignTop : Qt.AlignVCenter)

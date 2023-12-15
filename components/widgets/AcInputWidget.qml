@@ -9,8 +9,8 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
-	property var input: Global.acInputs.connectedInput
-	property var phaseModel: input && input.connected ? input.phases : null
+	property ActiveAcInput input: Global.acInputs.activeInput
+	property ListModel phaseModel: input && input.connected ? input.phases : null
 
 	rightPadding: sideGauge.visible ? Theme.geometry.overviewPage.widget.sideGauge.margins : 0
 	quantityLabel.dataObject: input && input.connected ? input : null
