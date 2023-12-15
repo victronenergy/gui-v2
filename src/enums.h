@@ -142,13 +142,14 @@ public:
 	};
 	Q_ENUM(WidgetConnector_AnimationMode)
 
-	enum AcInputs_InputType {
-		AcInputs_InputType_Unused = 0,
-		AcInputs_InputType_Grid,
-		AcInputs_InputType_Generator,
-		AcInputs_InputType_Shore
+	enum AcInputs_InputSource {
+		AcInputs_InputSource_NotAvailable = 0,
+		AcInputs_InputSource_Grid,
+		AcInputs_InputSource_Generator,
+		AcInputs_InputSource_Shore,
+		AcInputs_InputSource_Inverting = 240
 	};
-	Q_ENUM(AcInputs_InputType)
+	Q_ENUM(AcInputs_InputSource)
 
 	enum DcInputs_InputType {
 		DcInputs_InputType_AcCharger,
@@ -588,7 +589,6 @@ public:
 	};
 	Q_ENUM(Alarm_Level)
 
-	Q_INVOKABLE QString acInputIcon(AcInputs_InputType type);
 	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };
 

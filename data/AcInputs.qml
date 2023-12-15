@@ -5,20 +5,20 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 QtObject {
 	id: root
 
-	property var connectedInput // Only one AC input can be connected and active at any time.
-	property var generatorInput
+	readonly property ActiveAcInput activeInput: _activeInputLoader.item
+	readonly property ActiveAcInput generatorInput: activeInput && activeInput.source === VenusOS.AcInputs_InputSource_Generator ? activeInput : null
 
-	property real power: connectedInput != null ? connectedInput.power : NaN
-	property real current: connectedInput != null ? connectedInput.current : NaN
-	property real currentLimit: connectedInput != null ? connectedInput.currentLimit : NaN
+	// TODO remove this
+	readonly property ActiveAcInput connectedInput: activeInput
 
-	property DeviceModel model: DeviceModel {
-		modelId: "acInputs"
-	}
+	property real power: activeInput != null ? activeInput.power : NaN
+	property real current: activeInput != null ? activeInput.current : NaN
+	property real currentLimit: activeInput != null ? activeInput.currentLimit : NaN
 
 	readonly property var roles: [
 		{ role: "grid", name: CommonWords.grid_meter },
@@ -27,36 +27,57 @@ QtObject {
 		{ role: "acload", name: CommonWords.ac_load },
 	]
 
-	function addInput(input) {
-		model.addDevice(input)
-	}
+	// Set activeInput to a valid object when /Ac/ActiveIn/Source is set to a valid source.
+	readonly property VeQuickItem _activeInputSource: VeQuickItem {
+		readonly property int sourceAsInt: value === undefined ? VenusOS.AcInputs_InputSource_NotAvailable : parseInt(value)
 
-	function removeInput(input) {
-		if (model.removeDevice(input.serviceUid)) {
-			if (input === connectedInput) {
-				connectedInput = null
-			}
-			if (input === generatorInput) {
-				generatorInput = null
-			}
+		uid: Global.system.serviceUid + "/Ac/ActiveIn/Source"
+	}
+	readonly property Loader _activeInputLoader: Loader {
+		active: root._activeInputSource.sourceAsInt !== VenusOS.AcInputs_InputSource_NotAvailable
+				&& root._activeInputSource.sourceAsInt !== VenusOS.AcInputs_InputSource_Inverting
+		sourceComponent: ActiveAcInput {
+			source: root._activeInputSource.sourceAsInt
 		}
 	}
 
-	function reset() {
-		model.clear()
-		connectedInput = null
-		generatorInput = null
+	function sourceToText(source) {
+		switch (source) {
+		case VenusOS.AcInputs_InputSource_Grid:
+			return CommonWords.grid_meter
+		case VenusOS.AcInputs_InputSource_Generator:
+			return CommonWords.generator
+		case VenusOS.AcInputs_InputSource_Shore:
+			//% "Shore"
+			return qsTrId("acInputs_shore")
+		default:
+			return ""
+		}
+	}
+
+	function sourceIcon(source)
+	{
+		switch (source) {
+		case VenusOS.AcInputs_InputSource_Grid:
+			return "qrc:/images/grid.svg"
+		case VenusOS.AcInputs_InputSource_Generator:
+			return "qrc:/images/generator.svg"
+		case VenusOS.AcInputs_InputSource_Shore:
+			return "qrc:/images/shore.svg"
+		default:
+			return ""
+		}
 	}
 
 	function currentLimitTypeToText(type) {
 		switch (type) {
-		case VenusOS.AcInputs_InputType_Grid:
+		case VenusOS.AcInputs_InputSource_Grid:
 			//% "Grid current limit"
 			return qsTrId("acInputs_current_limit_grid")
-		case VenusOS.AcInputs_InputType_Generator:
+		case VenusOS.AcInputs_InputSource_Generator:
 			//% "Generator current limit"
 			return qsTrId("acInputs_current_limit_generator")
-		case VenusOS.AcInputs_InputType_Shore:
+		case VenusOS.AcInputs_InputSource_Shore:
 			//% "Shore current limit"
 			return qsTrId("acInputs_current_limit_shore")
 		default:

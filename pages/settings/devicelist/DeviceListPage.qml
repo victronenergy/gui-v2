@@ -191,9 +191,7 @@ Page {
 				Global.veBusDevices.model,
 				Global.unsupportedDevices.model,
 
-				// For AC inputs, add service-specific models instead of Global.acInputs.model,
-				// because the latter looks for devices under com.victronenergy.system/Ac/In, which
-				// only has one device per type (one grid, one genset etc) instead of all devices.
+				// AC input models
 				gridDeviceModel,
 				gensetDeviceModel,
 				acLoadDeviceModel,

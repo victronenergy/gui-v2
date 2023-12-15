@@ -269,9 +269,11 @@ set (VENUS_QML_MODULE_SOURCES
     data/VenusPlatform.qml
 
     data/common/AcData.qml
-    data/common/AcInput.qml
+    data/common/AcInputPhaseModel.qml
     data/common/AcInputServiceLoader.qml
     data/common/AcInputSettings.qml
+    data/common/AcInputSystemInfo.qml
+    data/common/ActiveAcInput.qml
     data/common/Battery.qml
     data/common/Charger.qml
     data/common/DcDevice.qml
@@ -489,7 +491,6 @@ qt_add_qml_module(VenusQMLModule
 
 # Dbus_QML_MODULE
 set(Dbus_QML_MODULE_SOURCES
-    data/dbus/AcInputsImpl.qml
     data/dbus/BatteriesImpl.qml
     data/dbus/ChargersImpl.qml
     data/dbus/DBusDataManager.qml
@@ -624,7 +625,6 @@ qt_add_qml_module(Gauges
 
 # Mqtt_QML_MODULE
 set(Mqtt_QML_MODULE_SOURCES
-    data/mqtt/AcInputsImpl.qml
     data/mqtt/BatteriesImpl.qml
     data/mqtt/ChargersImpl.qml
     data/mqtt/DcInputsImpl.qml

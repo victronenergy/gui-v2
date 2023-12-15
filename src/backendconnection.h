@@ -104,6 +104,8 @@ public:
 	bool isApplicationVisible() const;
 	void setApplicationVisible(bool v);
 
+	Q_INVOKABLE QString uidPrefix() const;
+
 	// Move this to some mock data manager when available
 	Q_INVOKABLE void setMockValue(const QString &uid, const QVariant &value);
 	Q_INVOKABLE QVariant mockValue(const QString &uid) const;

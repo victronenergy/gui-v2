@@ -479,6 +479,21 @@ void BackendConnection::setApplicationVisible(bool v)
 	}
 }
 
+QString BackendConnection::uidPrefix() const
+{
+	switch (type()) {
+	case UnknownSource:
+		break;
+	case DBusSource:
+		return QStringLiteral("dbus/");
+	case MqttSource:
+		return QStringLiteral("mqtt/");
+	case MockSource:
+		return QStringLiteral("mock/");
+	}
+	return QString();
+}
+
 void BackendConnection::setMockValue(const QString &uid, const QVariant &value)
 {
 	if (VeQItemMockProducer *producer = qobject_cast<VeQItemMockProducer *>(m_producer)) {
