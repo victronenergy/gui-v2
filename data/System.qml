@@ -13,6 +13,9 @@ QtObject {
 
 	property int state
 
+	readonly property string serviceUid: BackendConnection.type === BackendConnection.MqttSource ? "mqtt/system/0"
+		: BackendConnection.uidPrefix() + "com.victronenergy.system"
+
 	// Provides convenience properties for total AC/DC loads.
 	property QtObject loads: QtObject {
 		readonly property real power: Units.sumRealNumbers(acPower, dcPower)

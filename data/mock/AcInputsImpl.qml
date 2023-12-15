@@ -4,158 +4,133 @@
 */
 
 import QtQuick
+import Victron.Veutil
 import Victron.VenusOS
+import Victron.Units
+import Victron.Utils
 
 QtObject {
 	id: root
 
-	function populate() {
-		// Add all possible AC inputs (only one will be connected at any time)
-		let types = [
-				VenusOS.AcInputs_InputType_Grid,
-				VenusOS.AcInputs_InputType_Generator,
-				VenusOS.AcInputs_InputType_Shore,
-			]
-		for (let i = 0; i < types.length; ++i) {
-			const input = inputComponent.createObject(root, { "source": types[i] })
-			_createdObjects.push(input)
-			Global.acInputs.addInput(input)
-		}
-	}
+	property bool manualConfig
 
 	property Connections mockConn: Connections {
 		target: Global.mockDataSimulator || null
 
 		function onSetAcInputsRequested(config) {
-			Global.acInputs.reset()
-			while (_createdObjects.length > 0) {
-				_createdObjects.pop().destroy()
-			}
-
-			// disable connection changes temporarily so that the UI will show the
-			// connected input as requested
-			_disableAutoConnectedChanges.start()
-
 			if (config) {
-				const input = inputComponent.createObject(root, {
-					source: config.type,
-					phaseCount: config.phaseCount || 1
-				})
-				_createdObjects.push(input)
-				Global.acInputs.addInput(input)
-
-				for (let i = 0; i < Global.acInputs.model.count; ++i) {
-					if (input.source === config.type && config.connected) {
-						input.connected = true
-					} else {
-						input.connected = false
-					}
-				}
+				root.manualConfig = true
+				acSource.setValue(config.source)
+				_phaseModel._numberOfPhases.setValue(config.phaseCount || 1)
 			}
 		}
 	}
 
-	property Timer _disableAutoConnectedChanges: Timer {
-		interval: 5000
+	readonly property VeQuickItem acSource: VeQuickItem {
+		uid: Global.system.serviceUid + "/Ac/ActiveIn/Source"
+
+		// Every 10 seconds, switch to a different source
+		property Timer _sourceSwitchTimer: Timer {
+			readonly property var sources: [
+				VenusOS.AcInputs_InputSource_Grid,
+				VenusOS.AcInputs_InputSource_Generator,
+				VenusOS.AcInputs_InputSource_Shore,
+				VenusOS.AcInputs_InputSource_Inverting,
+			]
+			property int sourceIndex
+
+			running: Global.mockDataSimulator.timersActive && !root.manualConfig
+			repeat: true
+			interval: 10000
+			triggeredOnStart: true
+			onTriggered: {
+				if (acSource.value === undefined) {
+					acSource.setValue(sources[0])
+					return
+				}
+				const nextSource = Utils.modulo(sourceIndex + 1, sources.length)
+				acSource.setValue(nextSource)
+				sourceIndex++
+
+				// Reset number of phases
+				_phaseModel._numberOfPhases.setValue(1 + (Math.random() * 2))
+			}
+		}
 	}
 
-	property Timer _dummyConnected: Timer {
-		running: Global.mockDataSimulator.timersActive && !_disableAutoConnectedChanges.running
-		repeat: true
-		interval: 10000 + (Math.random() * 10000)
-		triggeredOnStart: true
-		onTriggered: {
-			// Only 1 AC input is connected at a time. Randomly select a different input
-			// as the connected one.
-			let randomIndex = Math.floor(Math.random() * Global.acInputs.model.count)
-			if (Math.random() < 0.2) {
-				randomIndex = -1    // sometimes, just disconnect all inputs
-			}
-			for (let i = 0; i < Global.acInputs.model.count; ++i) {
-				const currInput = Global.acInputs.model.deviceAt(0)
-				if (i === randomIndex) {
-					currInput.connected = true
+	readonly property AcInputSystemInfo inputSysInfo: AcInputSystemInfo {
+		bindPrefix: Global.system.serviceUid + "/Ac/In/0"
+		Component.onCompleted: {
+			_deviceInstance.setValue(300)
+			_serviceName.setValue("com.victronenergy.vebus.tty01")
+			_serviceType.setValue("vebus")
+			_connected.setValue(1)
+		}
+
+		// Disconnects every 15 seconds, for 3 seconds
+		property Timer _connectedTimer: Timer {
+			running: Global.mockDataSimulator.timersActive && !root.manualConfig
+			interval: 15000
+			onTriggered: {
+				if (inputSysInfo.connected) {
+					inputSysInfo._connected.setValue(0)
+					interval = 3000
+					restart()
 				} else {
-					currInput.connected = false
+					inputSysInfo._connected.setValue(1)
+					interval = 15000
+					restart()
 				}
 			}
 		}
 	}
 
-	property Component inputComponent: Component {
-		MockDevice {
-			id: input
+	readonly property AcInputPhaseModel _phaseModel: AcInputPhaseModel {
+		Component.onCompleted: {
+			_numberOfPhases.setValue(3)
+		}
 
-			property string serviceType
-			property string serviceName
-			property int source
-			property bool connected
-			readonly property int gensetStatusCode: -1
+		property Timer _measurementsTimer: Timer {
+			property int testEnergyCounter: -5
 
-			readonly property real current: phases.count === 1 ? _current : NaN // multi-phase systems don't have a total current
-			property real _current: NaN
-			property real currentLimit: NaN
-			property real power: Math.random() * 100
-			property ListModel phases: ListModel {
-				Component.onCompleted: {
-					for (let i = 0; i < phaseCount; ++i) {
-						append({ name: "L" + (i+1), frequency: 50.1, current: 2, power: 200, voltage: 235 })
+			running: true
+			repeat: true
+			interval: 3000
+			onTriggered: {
+				// Cycle between positive -> negative -> zero energy.
+				// Positive energy value = imported energy, flowing towards inverter/charger.
+				// Negative energy value = exported energy, flowing towards grid.
+				const negativeEnergyFlow = testEnergyCounter < 0
+				const zeroEnergyFlow = testEnergyCounter === 0
+
+				const phases = _phaseModel._phaseObjects
+				let totalPower = NaN
+				for (let i = 0; i < phases.count; ++i) {
+					const phase = phases.objectAt(i)
+					if (zeroEnergyFlow) {
+						phase._power.setValue(NaN)
+					} else {
+						const value = negativeEnergyFlow
+									? (Math.random() * 300) * -1
+									: Math.random() * 300
+						phase._power.setValue(value)
 					}
+					totalPower = Units.sumRealNumbers(totalPower, phase._power.value)
+					phase._current.setValue(Math.random() * 10)
 				}
-			}
-
-			property int phaseCount: 3
-
-			property Timer _dummyValues: Timer {
-				running: Global.mockDataSimulator.timersActive
-				repeat: true
-				interval: 10000 + (Math.random() * 10000)
-				triggeredOnStart: true
-
-				onTriggered: {
-					// Positive energy value = imported energy, flowing towards inverter/charger.
-					// Negative energy value = exported energy, flowing towards grid.
-					const negativeEnergyFlow = Math.random() > 0.5
-					const zeroEnergyFlow = Math.random() > 0.8
-					let totalPower = 0
-					for (let i = 0; i < input.phaseCount; ++i) {
-						if (zeroEnergyFlow) {
-							input.phases.setProperty(i, "power", NaN)
-						} else {
-							const value = negativeEnergyFlow
-										? (Math.random() * 300) * -1
-										: Math.random() * 300
-							input.phases.setProperty(i, "power", value)
-							totalPower += value
-						}
-					}
-					input.power = totalPower
-					input._current = Math.random() * 10
+				if (_inputService.serviceType === "vebus") {
+					_inputService.item._power.setValue(totalPower)
 				}
-			}
-
-			serviceUid: "com.victronenergy.system/Ac/In" + deviceInstance
-			name: "ACInput" + deviceInstance
-
-			onConnectedChanged: {
-				if (connected) {
-					Global.acInputs.connectedInput = input
-				} else if (!connected && Global.acInputs.connectedInput === input) {
-					Global.acInputs.connectedInput = null
-				}
-			}
-
-			Component.onCompleted: {
-				if (source === VenusOS.AcInputs_InputType_Generator) {
-					Global.acInputs.generatorInput = input
+				testEnergyCounter++
+				if (testEnergyCounter >= 5) {
+					testEnergyCounter = -5
 				}
 			}
 		}
 	}
 
-	property var _createdObjects: []
-
-	Component.onCompleted: {
-		populate()
+	property AcInputServiceLoader _inputService: AcInputServiceLoader {
+		serviceUid: "mock/" + inputSysInfo.serviceName
+		serviceType: inputSysInfo.serviceType
 	}
 }

@@ -28,9 +28,8 @@ Page {
 
 	// Set a counter that updates whenever the layout should change.
 	// Use a delayed binding to avoid repopulating the model unnecessarily.
-	readonly property int _shouldResetWidgets: Global.acInputs.model.count
-			+ Global.dcInputs.model.count
-			+ (Global.acInputs.connectedInput ? Global.acInputs.connectedInput.source : -1)
+	readonly property int _shouldResetWidgets: Global.dcInputs.model.count
+			+ (Global.acInputs.activeInput ? Global.acInputs.activeInput.source : -1)
 			+ (Global.acInputs.generatorInput ? 1 : 0)
 			+ (isNaN(Global.system.loads.dcPower) ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)

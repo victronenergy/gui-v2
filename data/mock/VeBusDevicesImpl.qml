@@ -19,7 +19,7 @@ QtObject {
 			modeAdjustable: true,
 		}
 		let quattroDevice = veBusDeviceComponent.createObject(root, quattro)
-		addInputSettings(quattroDevice, [VenusOS.AcInputs_InputType_Generator, VenusOS.AcInputs_InputType_Shore])
+		addInputSettings(quattroDevice, [VenusOS.AcInputs_InputSource_Generator, VenusOS.AcInputs_InputSource_Shore])
 		Global.veBusDevices.addVeBusDevice(quattroDevice)
 
 		let multiPlus = {
@@ -31,7 +31,7 @@ QtObject {
 			modeAdjustable: true,
 		}
 		let multiPlusDevice = veBusDeviceComponent.createObject(root, multiPlus)
-		addInputSettings(multiPlusDevice, [VenusOS.AcInputs_InputType_Grid])
+		addInputSettings(multiPlusDevice, [VenusOS.AcInputs_InputSource_Grid])
 		Global.veBusDevices.addVeBusDevice(multiPlusDevice)
 	}
 
