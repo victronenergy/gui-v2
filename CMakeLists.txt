@@ -218,7 +218,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/TemperatureRelaySettings.qml
     components/settings/VolumeUnitRadioButtonGroup.qml
 
-    components/widgets/AcGeneratorWidget.qml
     components/widgets/AcInputWidget.qml
     components/widgets/AcLoadsWidget.qml
     components/widgets/AlternatorWidget.qml
@@ -227,9 +226,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/DcInputWidget.qml
     components/widgets/DcLoadsWidget.qml
     components/widgets/EvcsWidget.qml
-    components/widgets/GridWidget.qml
     components/widgets/OverviewWidget.qml
-    components/widgets/ShoreWidget.qml
     components/widgets/SolarYieldWidget.qml
     components/widgets/VeBusDeviceWidget.qml
     components/widgets/WidgetConnector.qml

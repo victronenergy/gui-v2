@@ -101,9 +101,7 @@ public:
 
 	enum OverviewWidget_Type {
 		OverviewWidget_Type_Unknown,
-		OverviewWidget_Type_Grid,
-		OverviewWidget_Type_Shore,
-		OverviewWidget_Type_AcGenerator,
+		OverviewWidget_Type_AcInput,
 		OverviewWidget_Type_DcGenerator,
 		OverviewWidget_Type_Alternator,
 		OverviewWidget_Type_FuelCell,
