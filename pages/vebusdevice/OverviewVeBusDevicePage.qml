@@ -128,10 +128,10 @@ Page {
 			}
 
 			ListTextGroup {
-				readonly property var power: Units.getDisplayText(VenusOS.Units_Watt, dcPower.value)
-				readonly property var voltage: Units.getDisplayText(VenusOS.Units_Volt, dcVoltage.value)
-				readonly property var current: Units.getDisplayText(VenusOS.Units_Amp, dcCurrent.value)
-				readonly property var soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.value)
+				readonly property quantityInfo power: Units.getDisplayText(VenusOS.Units_Watt, dcPower.value)
+				readonly property quantityInfo voltage: Units.getDisplayText(VenusOS.Units_Volt, dcVoltage.value)
+				readonly property quantityInfo current: Units.getDisplayText(VenusOS.Units_Amp, dcCurrent.value)
+				readonly property quantityInfo soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.value)
 
 				//% "DC"
 				text: qsTrId("vebus_device_page_dc")
