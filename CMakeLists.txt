@@ -69,6 +69,12 @@ if(QT_KNOWN_POLICY_QTP0001)
     qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
 endif()
 
+# Not actually a subproject, but we need to build it somehow...
+# Eventually, we should implement the code generator as a python script
+# and invoke it directly via add_custom_command() + add_custom_target().
+# For now, we require the developer to run the code generator manually.
+#add_subdirectory("tools/themeparser")
+
 include_directories(src/veutil/inc src .)
 
 set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added here

@@ -77,9 +77,9 @@ private:
 	QColor resolvedColor(const QString &value) const;
 
 	QHash<QString, QQmlPropertyMap *> m_subTrees;
+	std::deque<std::pair<QString, QJsonValue>> m_deferred;
 	ScreenSize m_screenSize = FiveInch;
 	ColorScheme m_colorScheme = Dark;
-	std::deque<std::pair<QString, QJsonValue>> m_deferred;
 };
 
 }
