@@ -43,7 +43,7 @@ Page {
 
 					ListTextItem {
 
-						property var value: Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour, dataValue)
+						property quantityInfo value: Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour, dataValue)
 
 						text: displayText
 						secondaryText: value.number + value.unit

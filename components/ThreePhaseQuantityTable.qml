@@ -5,12 +5,12 @@
 
 import QtQuick
 import Victron.VenusOS
-
+import Victron.Units
 
 QuantityTable {
 	id: root
 
-	property var totalPower
+	property quantityInfo totalPower
 	property string labelText
 	property int numberOfPhases
 	property var acPhases
