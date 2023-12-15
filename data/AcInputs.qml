@@ -13,9 +13,6 @@ QtObject {
 	readonly property ActiveAcInput activeInput: _activeInputLoader.item
 	readonly property ActiveAcInput generatorInput: activeInput && activeInput.source === VenusOS.AcInputs_InputSource_Generator ? activeInput : null
 
-	// TODO remove this
-	readonly property ActiveAcInput connectedInput: activeInput
-
 	property real power: activeInput != null ? activeInput.power : NaN
 	property real current: activeInput != null ? activeInput.current : NaN
 	property real currentLimit: activeInput != null ? activeInput.currentLimit : NaN

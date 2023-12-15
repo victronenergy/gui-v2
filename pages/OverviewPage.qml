@@ -16,9 +16,7 @@ Page {
 
 	// Preferred order for the input widgets on the left hand side
 	readonly property var _leftWidgetOrder: [
-		VenusOS.OverviewWidget_Type_Grid,
-		VenusOS.OverviewWidget_Type_Shore,
-		VenusOS.OverviewWidget_Type_AcGenerator,
+		VenusOS.OverviewWidget_Type_AcInput,
 		VenusOS.OverviewWidget_Type_DcGenerator,
 		VenusOS.OverviewWidget_Type_Alternator,
 		VenusOS.OverviewWidget_Type_FuelCell,
@@ -203,8 +201,8 @@ Page {
 		args = args || {}
 		let widget = null
 		switch (type) {
-		case VenusOS.OverviewWidget_Type_AcGenerator:
-			widget = acGeneratorComponent.createObject(root, args)
+		case VenusOS.OverviewWidget_Type_AcInput:
+			widget = acInputComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_Alternator:
 			widget = alternatorComponent.createObject(root, args)
@@ -217,12 +215,6 @@ Page {
 			break
 		case VenusOS.OverviewWidget_Type_Evcs:
 			widget = evcsComponent.createObject(root, args)
-			break
-		case VenusOS.OverviewWidget_Type_Grid:
-			widget = gridComponent.createObject(root, args)
-			break
-		case VenusOS.OverviewWidget_Type_Shore:
-			widget = shoreComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_Solar:
 			widget = solarComponent.createObject(root, args)
@@ -239,34 +231,29 @@ Page {
 	}
 
 	function _resetLeftWidgets() {
-		// Add AC widget. Only the connected AC input is relevant. If none are connected, use the
-		// generator if available.
 		let widgetType = -1
 		let widgetCandidates = []
 		let widget
-		if (Global.acInputs.connectedInput != null) {
-			switch (Global.acInputs.connectedInput.source) {
-			case VenusOS.AcInputs_InputType_Grid:
-				widgetType = VenusOS.OverviewWidget_Type_Grid
+		if (Global.acInputs.activeInput != null) {
+			switch (Global.acInputs.activeInput.source) {
+			// Valid AC inputs:
+			case VenusOS.AcInputs_InputSource_Grid:
+			case VenusOS.AcInputs_InputSource_Generator:
+			case VenusOS.AcInputs_InputSource_Shore:
+				widgetType = VenusOS.OverviewWidget_Type_AcInput
 				break
-			case VenusOS.AcInputs_InputType_Generator:
-				widgetType = VenusOS.OverviewWidget_Type_AcGenerator
-				break
-			case VenusOS.AcInputs_InputType_Shore:
-				widgetType = VenusOS.OverviewWidget_Type_Shore
+			// Not a valid AC input:
+			case VenusOS.AcInputs_InputSource_NotAvailable:
+			case VenusOS.AcInputs_InputSource_Inverting:
 				break
 			default:
+				console.warn("Unknown AC input type:", Global.acInputs.activeInput.source)
 				break
 			}
-			if (widgetType < 0) {
-				console.warn("Unknown AC input type:", Global.acInputs.connectedInput.source)
-			} else {
+			if (widgetType >= 0) {
 				widget = _createWidget(widgetType)
 				widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
 			}
-		} else if (Global.acInputs.generatorInput != null) {
-			widget = _createWidget(VenusOS.OverviewWidget_Type_AcGenerator)
-			widgetCandidates.splice(_leftWidgetInsertionIndex(VenusOS.OverviewWidget_Type_AcGenerator, widgetCandidates), 0, widget)
 		}
 
 		// Add DC widgets
@@ -371,100 +358,34 @@ Page {
 	fullScreenWhenIdle: true
 
 	Component {
-		id: gridComponent
+		id: acInputComponent
 
-		GridWidget {
-			id: gridWidget
+		AcInputWidget {
+			id: acInputWidget
 
 			expanded: root._expandLayout
 			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
-			connectors: [ gridWidgetConnector ]
+			connectors: [ acInputWidgetConnector ]
 
 			WidgetConnectorAnchor {
 				location: VenusOS.WidgetConnector_Location_Right
-				y: gridWidgetConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
-				visible: gridWidgetConnector.visible
+				y: acInputWidgetConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
+				visible: acInputWidgetConnector.visible
 			}
 
 			WidgetConnector {
-				id: gridWidgetConnector
+				id: acInputWidgetConnector
 
 				parent: root
-				startWidget: gridWidget
+				startWidget: acInputWidget
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: veBusDeviceWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
-				animationMode: root._inputConnectorAnimationMode(gridWidgetConnector)
-			}
-		}
-	}
-
-	Component {
-		id: shoreComponent
-
-		ShoreWidget {
-			id: shoreWidget
-
-			expanded: root._expandLayout
-			animateGeometry: root._animateGeometry
-			animationEnabled: root.animationEnabled
-			connectors: [ shoreWidgetConnector ]
-
-			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
-				y: shoreWidgetConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
-				visible: shoreWidgetConnector.visible
-			}
-
-			WidgetConnector {
-				id: shoreWidgetConnector
-
-				parent: root
-				startWidget: shoreWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
-				endWidget: veBusDeviceWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: root._expandLayout
-				animateGeometry: root._animateGeometry
-				animationEnabled: root.animationEnabled
-				animationMode: root._inputConnectorAnimationMode(shoreWidgetConnector)
-			}
-		}
-	}
-
-	Component {
-		id: acGeneratorComponent
-
-		AcGeneratorWidget {
-			id: acGeneratorWidget
-
-			expanded: root._expandLayout
-			animateGeometry: root._animateGeometry
-			animationEnabled: root.animationEnabled
-			connectors: [ acGeneratorConnector ]
-
-			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
-				y: acGeneratorConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
-				visible: acGeneratorConnector.visible
-			}
-
-			WidgetConnector {
-				id: acGeneratorConnector
-
-				parent: root
-				startWidget: acGeneratorWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
-				endWidget: veBusDeviceWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: root._expandLayout
-				animateGeometry: root._animateGeometry
-				animationEnabled: root.animationEnabled
-				animationMode: root._inputConnectorAnimationMode(acGeneratorConnector)
+				animationMode: root._inputConnectorAnimationMode(acInputWidgetConnector)
 			}
 		}
 	}
@@ -671,7 +592,7 @@ Page {
 		WidgetConnectorAnchor {
 			id: inverterLeftConnectorAnchor
 			location: VenusOS.WidgetConnector_Location_Left
-			visible: Global.acInputs.connectedInput
+			visible: Global.acInputs.activeInput
 					|| Global.acInputs.generatorInput
 					|| Global.pvInverters.model.count > 0
 		}
