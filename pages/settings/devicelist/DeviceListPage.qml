@@ -25,20 +25,26 @@ Page {
 			return null
 		}
 
-		if (serviceType === "vebus"
-				// vebus devices may also show up as AC inputs, so ensure they do not appear twice
-				// in the list.
-				&& sourceModel !== Global.acInputs.model) {
-			url = "/pages/vebusdevice/PageVeBus.qml"
-			params = { "veBusDevice" : device }
-			summary = [ Global.system.systemStateToText(device.state) ]
+		switch(serviceType) {
+		case "vebus":
+			// vebus devices may also show up as AC inputs, so ensure they do not appear twice
+			// in the list.
+			if (sourceModel === Global.acInputs.model) {
+				return null
+			} else {
+				url = "/pages/vebusdevice/PageVeBus.qml"
+				params = { "veBusDevice" : device }
+				summary = [ Global.system.systemStateToText(device.state) ]
+			}
+			break;
 
-		} else if (serviceType === "multi") {
+		case "multi":
 			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
 			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Global.system.systemStateToText(device.state) ]
+			break;
 
-		} else if (serviceType === "battery") {
+		case "battery":
 			url = "/pages/settings/devicelist/battery/PageBattery.qml"
 			params = { "battery" : device }
 			summary = [
@@ -46,8 +52,9 @@ Page {
 				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
 				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
 			]
+			break;
 
-		} else if (serviceType === "solarcharger") {
+		case "solarcharger":
 			url = "/pages/solar/SolarChargerPage.qml"
 			params = { "solarCharger" : device }
 			summary = [
@@ -56,13 +63,15 @@ Page {
 						  //% "Error: %1"
 						: qsTrId("devicelist_solarcharger_error").arg(Global.solarChargers.chargerErrorToText(device.errorCode))
 			]
+			break;
 
-		} else if (serviceType === "charger") {
+		case "charger":
 			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
 			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Global.system.systemStateToText(device.state) ]
+			break;
 
-		} else if (serviceType === "tank") {
+		case "tank":
 			url = "/pages/settings/devicelist/tank/PageTankSensor.qml"
 			params = { "title": device.name, "bindPrefix" : device.serviceUid }
 
@@ -82,11 +91,12 @@ Page {
 			} else {
 				summary = [ device.status >= 0 ? Global.tanks.statusToText(device.status) : "--" ]
 			}
+			break;
 
-		} else if (serviceType === "pvinverter"
-				   || serviceType === "grid"
-				   || serviceType === "genset"
-				   || serviceType === "acload") {
+		case "pvinverter":	// deliberate fall through
+		case "grid":		// deliberate fall through
+		case "genset":		// deliberate fall through
+		case "acload":
 			url = "/pages/settings/devicelist/ac-in/PageAcIn.qml"
 			params = { "bindPrefix": device.serviceUid, "title": device.name }
 
@@ -96,16 +106,19 @@ Page {
 			} else {
 				summary = [ acInputPowerText ]
 			}
+			break;
 
-		} else if (serviceType === "motordrive") {
+		case "motordrive":
 			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
 			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(VenusOS.Units_RevolutionsPerMinute, device.motorRpm) ]
+			break;
 
-		} else if (serviceType === "inverter") {
+		case "inverter":
 			summary = [ Units.getCombinedDisplayText(device.currentPhase.powerUnit, device.currentPhase.power) ]
+			break;
 
-		} else if (serviceType === "temperature") {
+		case "temperature":
 			const inputTemp = Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 					? device.temperature_celsius
 					: Units.celsiusToFahrenheit(device.temperature_celsius)
@@ -119,11 +132,13 @@ Page {
 					Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.humidity),
 				]
 			}
+			break;
 
-		} else if (serviceType === "digitalinput") {
+		case "digitalinput":
 			summary = [ Global.digitalInputs.inputStateToText(device.state) ]
+			break;
 
-		} else if (serviceType === "evcharger") {
+		case "evcharger":
 			url = "/pages/evcs/EvChargerPage.qml"
 			params = { "evCharger" : device }
 
@@ -133,12 +148,13 @@ Page {
 			} else {
 				summary = [ evChargerModeText, Global.evChargers.chargerStatusToText(device.status) ]
 			}
+			break;
 
-		} else if (serviceType === "fuelcell"
-				   || serviceType === "dcsource"
-				   || serviceType === "dcload"
-				   || serviceType === "dcsystem"
-				   || serviceType === "alternator") {
+		case "fuelcell":	// deliberate fall through
+		case "dcsource":	// deliberate fall through
+		case "dcload":		// deliberate fall through
+		case "dcsystem":	// deliberate fall through
+		case "alternator":
 			url = serviceType === "alternator" ? "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/dc-in/PageAlternator.qml"
 					: "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 			params = { "title": device.name, "bindPrefix": device.serviceUid }
@@ -147,21 +163,25 @@ Page {
 				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
 				Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
 			]
+			break;
 
-		} else if (serviceType === "pulsemeter") {
+		case "pulsemeter":
 			summary = [ Units.getCombinedDisplayText(Global.systemSettings.volumeUnit.value, device.aggregate) ]
+			break;
 
-		} else if (serviceType === "unsupported") {
+		case "unsupported":
 			//: Device is not supported
 			//% "Unsupported"
 			summary = [ qsTrId("devicelist_unsupported") ]
 			url = "/pages/settings/devicelist/PageUnsupportedDevice.qml"
 			params = { "bindPrefix": device.serviceUid }
+			break;
 
-		} else if (serviceType === "meteo") {
+		case "meteo":
 			summary = [ Units.getCombinedDisplayText(VenusOS.Units_WattsPerSquareMeter, device.irradiance) ]
+			break;
 
-		} else {
+		default:
 			return null
 		}
 
