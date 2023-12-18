@@ -189,7 +189,7 @@ Victron::Units::Quantity Units::scaledQuantity(
 	const qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : value;
 	if (!scaledUnit.isEmpty() && (qAbs(scaleMatch) >= 10000)) {
 		quantity.unit = scaledUnit;
-		v /= 10000.0;
+		v /= 1000.0;
 	} else {
 		quantity.unit = baseUnit;
 	}
