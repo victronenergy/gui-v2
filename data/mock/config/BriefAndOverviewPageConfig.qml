@@ -28,6 +28,7 @@ QtObject {
 		{
 			name: "Phase self consumption",
 			acInputs: { source: VenusOS.AcInputs_InputSource_Generator, phaseCount: 3 },
+			generators: { running: true },
 			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
 			system: { state: VenusOS.System_State_PassThrough, ac: {} },
 			battery: { stateOfCharge: 29, current: 1 },
@@ -35,6 +36,7 @@ QtObject {
 		{
 			name: "Off grid",
 			acInputs: { source: VenusOS.AcInputs_InputSource_Generator, phaseCount: 3 },
+			generators: { running: false },
 			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
 			battery: { stateOfCharge: 95, current: 1 },
@@ -130,6 +132,7 @@ QtObject {
 		const config = configs[configIndex]
 		Global.mockDataSimulator.setAcInputsRequested(config.acInputs)
 		Global.mockDataSimulator.setDcInputsRequested(config.dcInputs)
+		Global.mockDataSimulator.setGeneratorsRequested(config.generators)
 		Global.mockDataSimulator.setSolarRequested(config.solar)
 		Global.mockDataSimulator.setSystemRequested(config.system)
 		Global.mockDataSimulator.setBatteryRequested(config.battery)
