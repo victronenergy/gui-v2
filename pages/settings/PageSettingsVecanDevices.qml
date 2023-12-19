@@ -51,7 +51,7 @@ Page {
 				anchors.verticalCenter: parent.verticalCenter
 				source: "/images/icon_back_32.svg"
 				rotation: 180
-				color: listDelegate.containsPress ? Theme.color.listItem.down.forwardIcon : Theme.color.listItem.forwardIcon
+				color: listDelegate.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			}
 
 			MouseArea {

@@ -14,16 +14,16 @@ ListNavigationItem {
 	property real current: NaN
 	property real power: NaN
 
-	primaryLabel.width: availableWidth - Theme.geometry.solarListPage.quantityRow.width - Theme.geometry.listItem.content.horizontalMargin
+	primaryLabel.width: availableWidth - Theme.geometry_solarListPage_quantityRow_width - Theme.geometry_listItem_content_horizontalMargin
 
 	Row {
 		id: quantityRow
 
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry.listItem.content.horizontalMargin + Theme.geometry.statusBar.button.icon.width
+			rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_statusBar_button_icon_width
 		}
-		width: Theme.geometry.solarListPage.quantityRow.width
+		width: Theme.geometry_solarListPage_quantityRow_width
 		height: parent.height - parent.spacing
 
 		Repeater {
@@ -42,9 +42,9 @@ ListNavigationItem {
 				value: modelData.value
 				unit: modelData.unit
 				alignment: Qt.AlignLeft
-				font.pixelSize: Theme.font.size.body2
-				valueColor: Theme.color.quantityTable.quantityValue
-				unitColor: Theme.color.quantityTable.quantityUnit
+				font.pixelSize: Theme.font_size_body2
+				valueColor: Theme.color_quantityTable_quantityValue
+				unitColor: Theme.color_quantityTable_quantityUnit
 			}
 		}
 	}

@@ -45,8 +45,8 @@ ListItem {
 		Label {
 			id: secondaryLabel
 			anchors.verticalCenter: switchItem.verticalCenter
-			color: Theme.color.font.secondary
-			font.pixelSize: Theme.font.size.body2
+			color: Theme.color_font_secondary
+			font.pixelSize: Theme.font_size_body2
 		},
 		Switch {
 			id: switchItem

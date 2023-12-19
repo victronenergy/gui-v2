@@ -22,8 +22,8 @@ Page {
 				QuantityTableSummary {
 					id: trackerSummary
 
-					x: Theme.geometry.listItem.content.horizontalMargin
-					width: parent.width - Theme.geometry.listItem.content.horizontalMargin
+					x: Theme.geometry_listItem_content_horizontalMargin
+					width: parent.width - Theme.geometry_listItem_content_horizontalMargin
 
 					model: [
 						{
@@ -91,7 +91,7 @@ Page {
 
 			Item {
 				width: 1
-				height: Theme.geometry.gradientList.spacing
+				height: Theme.geometry_gradientList_spacing
 			}
 
 			ListQuantityGroup {
@@ -145,7 +145,7 @@ Page {
 						? qsTrId("charger_history_found_with_count").arg(root.solarCharger.errorModel.count)
 						: "")
 					: CommonWords.none_errors
-				secondaryLabel.color: root.solarCharger.errorModel.count ? Theme.color.critical : Theme.color.font.secondary
+				secondaryLabel.color: root.solarCharger.errorModel.count ? Theme.color_critical : Theme.color_font_secondary
 
 				// Only enable if there is content on the alarms/errors page.
 				// TODO update this binding to consider 'active alarms' section when it is

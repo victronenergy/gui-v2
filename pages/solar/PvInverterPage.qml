@@ -21,8 +21,8 @@ Page {
 				QuantityTableSummary {
 					id: phaseSummary
 
-					x: Theme.geometry.listItem.content.horizontalMargin
-					width: parent.width - Theme.geometry.listItem.content.horizontalMargin
+					x: Theme.geometry_listItem_content_horizontalMargin
+					width: parent.width - Theme.geometry_listItem_content_horizontalMargin
 
 					model: [
 						{
@@ -58,7 +58,7 @@ Page {
 
 					anchors {
 						top: phaseSummary.bottom
-						topMargin: Theme.geometry.gradientList.spacing
+						topMargin: Theme.geometry_gradientList_spacing
 					}
 					visible: root.pvInverter.phases.count > 1
 					headerVisible: false
@@ -81,7 +81,7 @@ Page {
 
 			Item {
 				width: 1
-				height: Theme.geometry.gradientList.spacing
+				height: Theme.geometry_gradientList_spacing
 			}
 
 			PvInverterPositionRadioButtonGroup {
@@ -97,7 +97,7 @@ Page {
 			ListTextItem {
 				text: CommonWords.error
 				secondaryText: root.pvInverter.errorCode > 0 ? root.pvInverter.errorCode : CommonWords.none_errors
-				secondaryLabel.color: root.pvInverter.errorCode > 0 ? Theme.color.critical : Theme.color.font.secondary
+				secondaryLabel.color: root.pvInverter.errorCode > 0 ? Theme.color_critical : Theme.color_font_secondary
 			}
 
 			ListNavigationItem {

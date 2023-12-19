@@ -18,40 +18,40 @@ VerticalGauge {
 
 	backgroundColor: Theme.statusColorValue(root._gaugeStatus, true)
 	foregroundColor: Theme.statusColorValue(root._gaugeStatus)
-	radius: Theme.geometry.levelsPage.tankGauge.radius
+	radius: Theme.geometry_levelsPage_tankGauge_radius
 
 	Rectangle {
 		width: parent.width
 		height: 2
-		color: Theme.color.levelsPage.gauge.separatorBarColor
+		color: Theme.color_levelsPage_gauge_separatorBarColor
 		y: parent.height/4
 	}
 
 	Rectangle {
 		width: parent.width
 		height: 2
-		color: Theme.color.levelsPage.gauge.separatorBarColor
+		color: Theme.color_levelsPage_gauge_separatorBarColor
 		y: 2*parent.height/4
 	}
 
 	Rectangle {
 		width: parent.width
 		height: 2
-		color: Theme.color.levelsPage.gauge.separatorBarColor
+		color: Theme.color_levelsPage_gauge_separatorBarColor
 		y: 3*parent.height/4
 	}
 
 	CP.ColorImage {
 		anchors.horizontalCenter: parent.horizontalCenter
 		y: (root.height / 4 / 2) - (height / 2)
-		height: Theme.geometry.levelsPage.tankGauge.alarmIcon.height
+		height: Theme.geometry_levelsPage_tankGauge_alarmIcon_height
 		fillMode: Image.PreserveAspectFit
 		visible: !root.isGrouped
 				 && ((gaugeValueType === VenusOS.Gauges_ValueType_FallingPercentage && value <= 0.05)
 					 || (gaugeValueType === VenusOS.Gauges_ValueType_RisingPercentage && value >= 0.95))
 		color: root.gaugeValueType === VenusOS.Gauges_ValueType_FallingPercentage
-			   ? Theme.color.levelsPage.fallingGauge.alarmIcon
-			   : Theme.color.levelsPage.risingGauge.alarmIcon
+			   ? Theme.color_levelsPage_fallingGauge_alarmIcon
+			   : Theme.color_levelsPage_risingGauge_alarmIcon
 		source: "qrc:/images/icon_alarm_48.svg"
 	}
 }

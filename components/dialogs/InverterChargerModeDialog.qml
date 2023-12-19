@@ -21,7 +21,7 @@ ModalDialog {
 			top: parent.top
 			left: parent.left
 			right: parent.right
-			margins: Theme.geometry.modalDialog.content.horizontalMargin
+			margins: Theme.geometry_modalDialog_content_horizontalMargin
 		}
 
 		Repeater {

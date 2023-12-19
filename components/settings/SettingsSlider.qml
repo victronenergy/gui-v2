@@ -21,11 +21,11 @@ Slider {
 	signal valueChanged(value: real)
 
 	implicitWidth: parent ? parent.width : 0
-	implicitHeight: Theme.geometry.listItem.height
+	implicitHeight: Theme.geometry_listItem_height
 	live: false
 	from: dataPoint.min !== undefined ? dataPoint.min : 0
 	to: dataPoint.max !== undefined ? dataPoint.max : 1
-	stepSize: (to-from) / Theme.geometry.listItem.slider.stepDivsion
+	stepSize: (to-from) / Theme.geometry_listItem_slider_stepDivsion
 	value: to > from && dataValid ? dataValue : 0
 	enabled: dataSource === "" || dataValid
 
@@ -42,22 +42,22 @@ Slider {
 		}
 	}
 
-	leftPadding: Theme.geometry.listItem.content.horizontalMargin
-		+ Theme.geometry.listItem.slider.button.size
-		+ Theme.geometry.listItem.slider.spacing
-	rightPadding: Theme.geometry.listItem.content.horizontalMargin
-		+ Theme.geometry.listItem.slider.button.size
-		+ Theme.geometry.listItem.slider.spacing
+	leftPadding: Theme.geometry_listItem_content_horizontalMargin
+		+ Theme.geometry_listItem_slider_button_size
+		+ Theme.geometry_listItem_slider_spacing
+	rightPadding: Theme.geometry_listItem_content_horizontalMargin
+		+ Theme.geometry_listItem_slider_button_size
+		+ Theme.geometry_listItem_slider_spacing
 
 	Button {
 		id: minusButton
 		anchors {
 			verticalCenter: parent.verticalCenter
 			left: parent.left
-			leftMargin: Theme.geometry.listItem.content.horizontalMargin
+			leftMargin: Theme.geometry_listItem_content_horizontalMargin
 		}
-		icon.width: Theme.geometry.listItem.slider.button.size
-		icon.height: Theme.geometry.listItem.slider.button.size
+		icon.width: Theme.geometry_listItem_slider_button_size
+		icon.height: Theme.geometry_listItem_slider_button_size
 		icon.source: "/images/icon_minus.svg"
 		backgroundColor: "transparent"
 
@@ -74,10 +74,10 @@ Slider {
 		anchors {
 			verticalCenter: parent.verticalCenter
 			right: parent.right
-			rightMargin: Theme.geometry.listItem.content.horizontalMargin
+			rightMargin: Theme.geometry_listItem_content_horizontalMargin
 		}
-		icon.width: Theme.geometry.listItem.slider.button.size
-		icon.height: Theme.geometry.listItem.slider.button.size
+		icon.width: Theme.geometry_listItem_slider_button_size
+		icon.height: Theme.geometry_listItem_slider_button_size
 		icon.source: "/images/icon_plus.svg"
 		backgroundColor: "transparent"
 

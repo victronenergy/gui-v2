@@ -21,7 +21,7 @@ Column {
 	// Eg. label columns with cells like "L1", "L2" can be thinner to allow wider columns elsewhere.
 	property int firstColumnWidth
 
-	property real availableWidth: width - Theme.geometry.listItem.content.horizontalMargin
+	property real availableWidth: width - Theme.geometry_listItem_content_horizontalMargin
 
 	function _quantityColumnWidth(unit) {
 		if (!!firstColumnWidth) {
@@ -36,7 +36,7 @@ Column {
 		}
 		// "kWh" unit name is longer, so give that column more space.
 		const widthMultiplier = (unit === VenusOS.Units_Energy_KiloWattHour) ? 1.2 : 1
-		return ((availableWidth - Theme.geometry.quantityTable.header.widthBoost) / units.length) * widthMultiplier
+		return ((availableWidth - Theme.geometry_quantityTable_header_widthBoost) / units.length) * widthMultiplier
 	}
 
 	width: parent ? parent.width : 0
@@ -48,23 +48,23 @@ Column {
 		Rectangle {
 			width: root.width
 			height: headerRow.height
-			color: Theme.color.quantityTable.row.background
+			color: Theme.color_quantityTable_row_background
 
 			Row {
 				id: headerRow
 
 				// Omit rightPadding to give the table a little more space.
-				leftPadding: Theme.geometry.listItem.content.horizontalMargin
-				height: visible ? Theme.geometry.quantityTable.row.height : 0
+				leftPadding: Theme.geometry_listItem_content_horizontalMargin
+				height: visible ? Theme.geometry_quantityTable_row_height : 0
 
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					width: root.availableWidth - headerQuantityRow.width
-					rightPadding: Theme.geometry.listItem.content.spacing
-					font.pixelSize: Theme.font.size.caption
+					rightPadding: Theme.geometry_listItem_content_spacing
+					font.pixelSize: Theme.font_size_caption
 					elide: Text.ElideRight
 					text: root.units[0].title || ""
-					color: Theme.color.quantityTable.quantityValue
+					color: Theme.color_quantityTable_quantityValue
 				}
 
 				Row {
@@ -77,11 +77,11 @@ Column {
 						delegate: Label {
 							anchors.verticalCenter: parent.verticalCenter
 							width: root._quantityColumnWidth(root.units[model.index + 1].unit)
-							rightPadding: Theme.geometry.gradientList.spacing
-							font.pixelSize: Theme.font.size.caption
+							rightPadding: Theme.geometry_gradientList_spacing
+							font.pixelSize: Theme.font_size_caption
 							elide: Text.ElideRight
 							text: root.units[model.index + 1].title || ""
-							color: Theme.color.quantityTable.quantityValue
+							color: Theme.color_quantityTable_quantityValue
 						}
 					}
 				}
@@ -105,24 +105,24 @@ Column {
 			width: parent.width
 			height: valueRow.height
 			color: model.index % 2 === 0
-				   ? Theme.color.quantityTable.row.alternateBackground
-				   : Theme.color.quantityTable.row.background
+				   ? Theme.color_quantityTable_row_alternateBackground
+				   : Theme.color_quantityTable_row_background
 
 			Row {
 				id: valueRow
 
-				leftPadding: Theme.geometry.listItem.content.horizontalMargin
-				rightPadding: Theme.geometry.listItem.content.horizontalMargin
-				height: Theme.geometry.quantityTable.row.height
+				leftPadding: Theme.geometry_listItem_content_horizontalMargin
+				rightPadding: Theme.geometry_listItem_content_horizontalMargin
+				height: Theme.geometry_quantityTable_row_height
 
 				// Column 1: value is displayed by Label
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					width: root.availableWidth - quantityRow.width
-					rightPadding: Theme.geometry.listItem.content.spacing
+					rightPadding: Theme.geometry_listItem_content_spacing
 					elide: Text.ElideRight
 					text: root.valueForModelIndex(rowDelegate.rowIndex, 0) || ""
-					color: Theme.color.quantityTable.quantityValue
+					color: Theme.color_quantityTable_quantityValue
 				}
 
 				Row {
@@ -140,9 +140,9 @@ Column {
 							alignment: root.labelHorizontalAlignment
 							value: root.valueForModelIndex(rowDelegate.rowIndex, model.index + 1)
 							unit: root.units[model.index + 1].unit
-							font.pixelSize: Theme.font.size.body1
-							valueColor: Theme.color.quantityTable.quantityValue
-							unitColor: Theme.color.quantityTable.quantityUnit
+							font.pixelSize: Theme.font_size_body1
+							valueColor: Theme.color_quantityTable_quantityValue
+							unitColor: Theme.color_quantityTable_quantityUnit
 						}
 					}
 				}

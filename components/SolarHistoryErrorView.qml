@@ -12,7 +12,7 @@ MouseArea {
 
 	property var model
 	property bool expanded
-	readonly property int collapsedHeight: Theme.geometry.solarHistoryErrorView.itemHeight
+	readonly property int collapsedHeight: Theme.geometry_solarHistoryErrorView_itemHeight
 
 	property real _maxErrorTitleWidth
 
@@ -24,8 +24,8 @@ MouseArea {
 
 	Rectangle {
 		anchors.fill: parent
-		radius: Theme.geometry.solarHistoryErrorView.radius
-		color: Theme.color.toastNotification.background.error
+		radius: Theme.geometry_solarHistoryErrorView_radius
+		color: Theme.color_toastNotification_background_error
 
 		AsymmetricRoundedRectangle {
 			anchors {
@@ -33,20 +33,20 @@ MouseArea {
 				top: parent.top
 				bottom: parent.bottom
 			}
-			width: Theme.geometry.solarHistoryErrorView.iconBackground.width
-			radius: Theme.geometry.solarHistoryErrorView.radius
-			color: Theme.color.toastNotification.highlight.error
+			width: Theme.geometry_solarHistoryErrorView_iconBackground_width
+			radius: Theme.geometry_solarHistoryErrorView_radius
+			color: Theme.color_toastNotification_highlight_error
 			flat: true
 
 			CP.ColorImage {
 				anchors {
 					top: parent.top
-					topMargin: (Theme.geometry.solarHistoryErrorView.itemHeight - height) / 2
+					topMargin: (Theme.geometry_solarHistoryErrorView_itemHeight - height) / 2
 					horizontalCenter: parent.horizontalCenter
 				}
-				height: Theme.geometry.solarHistoryErrorView.alarmIcon.size
+				height: Theme.geometry_solarHistoryErrorView_alarmIcon_size
 				fillMode: Image.PreserveAspectFit
-				color: Theme.color.solarHistoryErrorView.primaryText
+				color: Theme.color_solarHistoryErrorView_primaryText
 				source: "qrc:/images/toast_icon_alarm.svg"
 			}
 		}
@@ -57,11 +57,11 @@ MouseArea {
 			top: parent.top
 			topMargin: root.expanded ? 0 : height / 5   // compensate for icon internal alignment
 			right: parent.right
-			rightMargin: Theme.geometry.solarHistoryErrorView.expandIcon.horizontalMargin
+			rightMargin: Theme.geometry_solarHistoryErrorView_expandIcon_horizontalMargin
 		}
-		height: Theme.geometry.solarHistoryErrorView.expandIcon.size
+		height: Theme.geometry_solarHistoryErrorView_expandIcon_size
 		fillMode: Image.PreserveAspectFit
-		color: Theme.color.solarHistoryErrorView.primaryText
+		color: Theme.color_solarHistoryErrorView_primaryText
 		source: "qrc:/images/icon_back_32.svg"
 		rotation: root.expanded ? 270 : 90
 	}
@@ -71,17 +71,17 @@ MouseArea {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry.solarHistoryErrorView.iconBackground.width
-					+ Theme.geometry.solarHistoryErrorView.textBackground.horizontalMargin
+			leftMargin: Theme.geometry_solarHistoryErrorView_iconBackground_width
+					+ Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
 			right: parent.right
-			rightMargin: Theme.geometry.solarHistoryErrorView.textBackground.horizontalMargin
+			rightMargin: Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
 		}
-		bottomPadding: root.expanded ? Theme.geometry.solarHistoryErrorView.textBackground.bottomMargin : 0
-		height: root.expanded ? implicitHeight : Theme.geometry.solarHistoryErrorView.itemHeight
+		bottomPadding: root.expanded ? Theme.geometry_solarHistoryErrorView_textBackground_bottomMargin : 0
+		height: root.expanded ? implicitHeight : Theme.geometry_solarHistoryErrorView_itemHeight
 
 		Behavior on height {
 			NumberAnimation {
-				duration: Theme.animation.solarHistoryErrorView.expand.duration
+				duration: Theme.animation_solarHistoryErrorView_expand_duration
 			}
 		}
 
@@ -89,11 +89,11 @@ MouseArea {
 			id: headerLabel
 
 			width: parent.width
-			height: Theme.geometry.solarHistoryErrorView.itemHeight
-			rightPadding: Theme.geometry.solarHistoryErrorView.expandIcon.size
+			height: Theme.geometry_solarHistoryErrorView_itemHeight
+			rightPadding: Theme.geometry_solarHistoryErrorView_expandIcon_size
 			elide: Text.ElideRight
 			verticalAlignment: Text.AlignVCenter
-			color: Theme.color.solarHistoryErrorView.primaryText
+			color: Theme.color_solarHistoryErrorView_primaryText
 			//% "%1 error(s) occurred"
 			text: qsTrId("charger_history_errors_occurred").arg(root.model ? root.model.count : 0)
 		}
@@ -107,8 +107,8 @@ MouseArea {
 				readonly property alias titleImplicitWidth: titleLabel.implicitWidth
 
 				width: parent.width
-				height: Theme.geometry.solarHistoryErrorView.itemHeight
-				spacing: Theme.geometry.solarHistoryErrorView.textBackground.horizontalMargin
+				height: Theme.geometry_solarHistoryErrorView_itemHeight
+				spacing: Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
 
 				Label {
 					id: titleLabel
@@ -116,7 +116,7 @@ MouseArea {
 					anchors.verticalCenter: parent.verticalCenter
 					width: root._maxErrorTitleWidth
 					visible: root.model.count > 1
-					color: Theme.color.solarHistoryErrorView.secondaryText
+					color: Theme.color_solarHistoryErrorView_secondaryText
 					//: Details of last error
 					//% "Last"
 					text: model.index === 0 ? qsTrId("charger_history_errors_last")
@@ -147,7 +147,7 @@ MouseArea {
 					anchors.verticalCenter: parent.verticalCenter
 					width: parent.width - root._maxErrorTitleWidth
 					elide: Text.ElideRight
-					color: Theme.color.solarHistoryErrorView.primaryText
+					color: Theme.color_solarHistoryErrorView_primaryText
 					//TODO: get error description from veutil when ChargerError is ported there (same issue as alarmmonitor.cpp)
 					text: "#" + model.errorCode + " (description not available)"
 				}

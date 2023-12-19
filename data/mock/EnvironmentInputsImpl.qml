@@ -14,10 +14,10 @@ Item {
 		for (let i = 0; i < inputCount; ++i) {
 			const inputObj = inputComponent.createObject(root, {
 				name: "Sensor " + (i + 1),
-				temperature_celsius: _rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
-						Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue),
-				humidity: _rand(Theme.geometry.levelsPage.environment.humidityGauge.minimumValue,
-						Theme.geometry.levelsPage.environment.humidityGauge.maximumValue)
+				temperature_celsius: _rand(Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue,
+						Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue),
+				humidity: _rand(Theme.geometry_levelsPage_environment_humidityGauge_minimumValue,
+						Theme.geometry_levelsPage_environment_humidityGauge_maximumValue)
 			})
 			Global.environmentInputs.addInput(inputObj)
 		}
@@ -62,11 +62,11 @@ Item {
 			interval: 10 * 1000
 			onTriggered: {
 				const input = model.device
-				input.temperature_celsius = root._rand(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue,
-						Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
+				input.temperature_celsius = root._rand(Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue,
+						Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue)
 				if (!isNaN(input.humidity)) {
-					input.humidity = root._rand(Theme.geometry.levelsPage.environment.humidityGauge.minimumValue,
-							Theme.geometry.levelsPage.environment.humidityGauge.maximumValue)
+					input.humidity = root._rand(Theme.geometry_levelsPage_environment_humidityGauge_minimumValue,
+							Theme.geometry_levelsPage_environment_humidityGauge_maximumValue)
 				}
 			}
 		}

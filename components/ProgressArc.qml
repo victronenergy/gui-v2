@@ -12,7 +12,7 @@ Shape {
 
 	property real value // 0 - 100
 	property real radius
-	property real strokeWidth: Theme.geometry.progressArc.strokeWidth
+	property real strokeWidth: Theme.geometry_progressArc_strokeWidth
 	property alias useLargeArc: progress.useLargeArc
 	property alias animationEnabled: progress.animationEnabled
 	property alias progressColor: progress.strokeColor
@@ -30,7 +30,7 @@ Shape {
 		radius: control.radius
 		direction: control.direction
 		strokeWidth: control.strokeWidth
-		strokeColor: Theme.color.darkOk
+		strokeColor: Theme.color_darkOk
 		fillColor: control.fillColor
 	}
 
@@ -42,7 +42,7 @@ Shape {
 		endAngle: control.transitionAngle
 		direction: control.direction
 		strokeWidth: control.strokeWidth
-		strokeColor: Theme.color.ok
+		strokeColor: Theme.color_ok
 		fillColor: control.fillColor
 	}
 }

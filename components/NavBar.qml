@@ -14,13 +14,13 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 	property url currentUrl
 
 	width: parent.width
-	height: Theme.geometry.navigationBar.height
+	height: Theme.geometry_navigationBar_height
 
 	Row {
-		x: Theme.geometry.page.content.horizontalMargin
-		width: parent.width - 2*Theme.geometry.page.content.horizontalMargin
+		x: Theme.geometry_page_content_horizontalMargin
+		width: parent.width - 2*Theme.geometry_page_content_horizontalMargin
 		height: parent.height
-		spacing: Theme.geometry.navigationBar.spacing
+		spacing: Theme.geometry_navigationBar_spacing
 
 		Repeater {
 			id: buttonRepeater
@@ -60,7 +60,7 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 
 			delegate: NavButton {
 				height: root.height
-				width: Theme.geometry.navigationBar.button.width
+				width: Theme.geometry_navigationBar_button_width
 				text: model.text
 				icon.source: model.icon
 				checked: root.currentIndex === model.index
@@ -81,14 +81,14 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 				Rectangle {
 					anchors {
 						top: parent.top
-						topMargin: Theme.geometry.navigationBar.notifications.redDot.topMargin
+						topMargin: Theme.geometry_navigationBar_notifications_redDot_topMargin
 						horizontalCenter: parent.horizontalCenter
-						horizontalCenterOffset: Theme.geometry.navigationBar.notifications.redDot.horizontalCenterOffset
+						horizontalCenterOffset: Theme.geometry_navigationBar_notifications_redDot_horizontalCenterOffset
 					}
-					width: Theme.geometry.notificationsPage.delegate.marker.width
+					width: Theme.geometry_notificationsPage_delegate_marker_width
 					height: width
-					radius: Theme.geometry.notificationsPage.delegate.marker.radius
-					color: Theme.color.critical
+					radius: Theme.geometry_notificationsPage_delegate_marker_radius
+					color: Theme.color_critical
 					visible: model.url === Global.appUrl("/pages/NotificationsPage.qml") && !!Global.notifications && Global.notifications.activeModel.hasNewNotifications
 				}
 			}

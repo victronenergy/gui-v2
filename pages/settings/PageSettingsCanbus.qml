@@ -126,7 +126,7 @@ Page {
 
 				bottomContent.children: ListLabel {
 					visible: text.length > 0
-					color: Theme.color.font.secondary
+					color: Theme.color_font_secondary
 					text: root._isVecan
 						//% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
 						? qsTrId("settings_canbus_unique_id_vecan_description")

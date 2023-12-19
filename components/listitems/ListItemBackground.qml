@@ -8,6 +8,6 @@ import Victron.VenusOS
 
 Rectangle {
 	implicitWidth: parent ? parent.width : 0
-	color: Theme.color.listItem.background
-	radius: Theme.geometry.listItem.radius
+	color: Theme.color_listItem_background
+	radius: Theme.geometry_listItem_radius
 }

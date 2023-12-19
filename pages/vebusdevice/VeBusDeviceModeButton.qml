@@ -46,10 +46,10 @@ Loader {
 			if (!root.veBusDevice.modeIsAdjustable) {
 				if (dmc.valid)
 					Global.showToastNotification(VenusOS.Notification_Info, root.noAdjustableByDmc,
-												 Theme.animation.veBusDeviceModeNotAdjustable.toastNotication.duration)
+												 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 				if (bmsMode.value !== undefined)
 					Global.showToastNotification(VenusOS.Notification_Info, root.noAdjustableByBms,
-												 Theme.animation.veBusDeviceModeNotAdjustable.toastNotication.duration)
+												 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 				return
 			}
 
@@ -66,7 +66,7 @@ Loader {
 
 		ListButton {
 			text: CommonWords.mode
-			button.width: Theme.geometry.vebusDeviceListPage.currentLimit.button.width
+			button.width: Theme.geometry_vebusDeviceListPage_currentLimit_button_width
 			button.text: Global.veBusDevices.modeToText(root.veBusDevice.mode)
 			writeAccessLevel: VenusOS.User_AccessType_User
 		}

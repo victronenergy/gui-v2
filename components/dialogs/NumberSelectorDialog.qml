@@ -45,20 +45,20 @@ ModalDialog {
 		Column {
 			anchors {
 				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: -Theme.geometry.modalDialog.content.margins
+				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
 			}
 			width: parent.width
-			spacing: Theme.geometry.modalDialog.content.spacing
+			spacing: Theme.geometry_modalDialog_content_spacing
 
 			SpinBox {
 				id: spinBox
 
 				anchors.horizontalCenter: parent.horizontalCenter
-				width: parent.width - 2*Theme.geometry.modalDialog.content.horizontalMargin
-				height: Theme.geometry.timeSelector.spinBox.height
+				width: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
+				height: Theme.geometry_timeSelector_spinBox_height
 				indicatorImplicitWidth: root.decimals > 0
-						? Theme.geometry.spinBox.indicator.minimumWidth
-						: Theme.geometry.spinBox.indicator.maximumWidth
+						? Theme.geometry_spinBox_indicator_minimumWidth
+						: Theme.geometry_spinBox_indicator_maximumWidth
 				textFromValue: function(value, locale) {
 					return Number(value / root._multiplier()).toLocaleString(locale, 'f', root.decimals) + root.suffix
 				}

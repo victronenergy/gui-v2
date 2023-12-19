@@ -23,8 +23,8 @@ ListItem {
 				anchors.verticalCenter: parent.verticalCenter
 				width: root.itemWidth
 					   || (separator.visible ? implicitWidth + root.content.spacing : implicitWidth)
-				font.pixelSize: Theme.font.size.body2
-				color: Theme.color.listItem.secondaryText
+				font.pixelSize: Theme.font_size_body2
+				color: Theme.color_listItem_secondaryText
 				text: modelData === undefined ? root.invalidText : modelData
 				horizontalAlignment: Text.AlignHCenter
 				elide: Text.ElideRight
@@ -36,9 +36,9 @@ ListItem {
 						right: parent.right
 						rightMargin: -root.content.spacing / 2
 					}
-					width: Theme.geometry.listItem.separator.width
+					width: Theme.geometry_listItem_separator_width
 					height: parent.implicitHeight
-					color: Theme.color.listItem.separator
+					color: Theme.color_listItem_separator
 					visible: model.index !== repeater.count - 1
 				}
 			}

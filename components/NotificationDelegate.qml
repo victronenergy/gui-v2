@@ -40,58 +40,58 @@ Rectangle {
 		return date.toLocaleString(Qt.locale(), "MMM dd hh:mm") // eg. "Mar 27 10:20"
 	}
 
-	width: Theme.geometry.notificationsPage.delegate.width
-	height: Theme.geometry.notificationsPage.delegate.height
-	radius: Theme.geometry.toastNotification.radius
-	color: mouseArea.containsPress ? Theme.color.listItem.down.background : Theme.color.background.secondary
+	width: Theme.geometry_notificationsPage_delegate_width
+	height: Theme.geometry_notificationsPage_delegate_height
+	radius: Theme.geometry_toastNotification_radius
+	color: mouseArea.containsPress ? Theme.color_listItem_down_background : Theme.color_background_secondary
 
 	Row {
 		anchors {
 			top: parent.top
 			bottom: parent.bottom
 			left: parent.left
-			leftMargin: Theme.geometry.notificationsPage.delegate.marker.leftMargin
+			leftMargin: Theme.geometry_notificationsPage_delegate_marker_leftMargin
 		}
 		Rectangle {
 			anchors {
 				top: parent.top
-				topMargin: Theme.geometry.notificationsPage.delegate.marker.topMargin
+				topMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
 			}
-			width: Theme.geometry.notificationsPage.delegate.marker.width
+			width: Theme.geometry_notificationsPage_delegate_marker_width
 			height: width
-			radius: Theme.geometry.notificationsPage.delegate.marker.radius
-			color: root.acknowledged ? "transparent" : Theme.color.critical
+			radius: Theme.geometry_notificationsPage_delegate_marker_radius
+			color: root.acknowledged ? "transparent" : Theme.color_critical
 		}
 		Item {
 			height: 1
-			width: Theme.geometry.notificationsPage.delegate.icon.spacing
+			width: Theme.geometry_notificationsPage_delegate_icon_spacing
 		}
 		CP.ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
 			fillMode: Image.PreserveAspectFit
 			color: root.category === VenusOS.Notification_Info
-				   ? (root.alarmActive ? Theme.color.ok : Theme.color.darkOk)
+				   ? (root.alarmActive ? Theme.color_ok : Theme.color_darkOk)
 				   : root.category === VenusOS.Notification_Warning
-					 ? (root.alarmActive ? Theme.color.warning : Theme.color.darkWarning)
-					 : (root.alarmActive ? Theme.color.critical : Theme.color.darkCritical)
+					 ? (root.alarmActive ? Theme.color_warning : Theme.color_darkWarning)
+					 : (root.alarmActive ? Theme.color_critical : Theme.color_darkCritical)
 			source: root.category === VenusOS.Notification_Info
 					? "qrc:/images/toast_icon_info.svg" : "qrc:/images/toast_icon_alarm.svg"
 		}
 		Item {
 			height: 1
-			width: Theme.geometry.notificationsPage.delegate.description.spacing.horizontal
+			width: Theme.geometry_notificationsPage_delegate_description_spacing_horizontal
 		}
 		Column {
 			anchors.verticalCenter: parent.verticalCenter
-			spacing: Theme.geometry.notificationsPage.delegate.description.spacing.vertical
+			spacing: Theme.geometry_notificationsPage_delegate_description_spacing_vertical
 
 			Label {
-				color: Theme.color.listItem.secondaryText
+				color: Theme.color_listItem_secondaryText
 				text: root.source
 			}
 			Label {
-				color: Theme.color.font.primary
-				font.pixelSize: Theme.font.size.body2
+				color: Theme.color_font_primary
+				font.pixelSize: Theme.font_size_body2
 				text: qsTrId(root.description)
 			}
 		}
@@ -99,11 +99,11 @@ Rectangle {
 	Label {
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.notificationsPage.delegate.topMargin
+			topMargin: Theme.geometry_notificationsPage_delegate_topMargin
 			right: parent.right
-			rightMargin: Theme.geometry.notificationsPage.delegate.rightMargin
+			rightMargin: Theme.geometry_notificationsPage_delegate_rightMargin
 		}
-		color: Theme.color.notificationsPage.text.color
+		color: Theme.color_notificationsPage_text_color
 		text: _formatTimestamp(root.date)
 	}
 	MouseArea {

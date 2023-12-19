@@ -10,12 +10,12 @@ import Victron.VenusOS
 Button {
 	id: root
 
-	icon.width: Theme.geometry.navigationBar.button.icon.width
-	icon.height: Theme.geometry.navigationBar.button.icon.height
-	spacing: Theme.geometry.navigationBar.button.spacing
+	icon.width: Theme.geometry_navigationBar_button_icon_width
+	icon.height: Theme.geometry_navigationBar_button_icon_height
+	spacing: Theme.geometry_navigationBar_button_spacing
 	display: C.AbstractButton.TextUnderIcon
 
 	color: down
-		   ? Theme.color.navigationBar.button.on
-		   : Theme.color.navigationBar.button.off
+		   ? Theme.color_navigationBar_button_on
+		   : Theme.color_navigationBar_button_off
 }

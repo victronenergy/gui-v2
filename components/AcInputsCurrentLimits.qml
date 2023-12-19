@@ -43,7 +43,7 @@ Column {
 		delegate: ListButton {
 			text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
 			writeAccessLevel: VenusOS.User_AccessType_User
-			button.width: Theme.geometry.vebusDeviceListPage.currentLimit.button.width
+			button.width: Theme.geometry_vebusDeviceListPage_currentLimit_button_width
 			button.text: {
 				const quantity = Units.getDisplayText(VenusOS.Units_Amp, modelData.currentLimit)
 				return quantity.number + quantity.unit

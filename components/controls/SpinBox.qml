@@ -14,7 +14,7 @@ CT.SpinBox {
 
 	property alias label: primaryLabel
 	property string secondaryText
-	property int indicatorImplicitWidth: Theme.geometry.spinBox.indicator.minimumWidth
+	property int indicatorImplicitWidth: Theme.geometry_spinBox_indicator_minimumWidth
 	property int orientation: Qt.Horizontal
 	property int _scalingFactor: 1
 
@@ -23,14 +23,14 @@ CT.SpinBox {
 
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 		orientation === Qt.Horizontal
-			? valueColumn.width + up.indicator.width + down.indicator.width + (2 * Theme.geometry.spinBox.spacing) + leftPadding + rightPadding
+			? valueColumn.width + up.indicator.width + down.indicator.width + (2 * Theme.geometry_spinBox_spacing) + leftPadding + rightPadding
 			: valueColumn.width + leftPadding + rightPadding)
 	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
 		orientation === Qt.Horizontal
 			? Math.max(valueColumn.height, up.indicator.height, down.indicator.height) + topPadding + bottomPadding
-			: valueColumn.height + up.indicator.height + down.indicator.height + (2 * Theme.geometry.spinBox.spacing) + topPadding + bottomPadding)
+			: valueColumn.height + up.indicator.height + down.indicator.height + (2 * Theme.geometry_spinBox_spacing) + topPadding + bottomPadding)
 
-	spacing: Theme.geometry.spinBox.spacing
+	spacing: Theme.geometry_spinBox_spacing
 	onValueModified: {
 		if (value === to) {
 			root.maxValueReached()
@@ -51,8 +51,8 @@ CT.SpinBox {
 
 				width: parent.width
 				text: root.textFromValue(root.value, root.locale)
-				color: root.enabled ? Theme.color.font.primary : Theme.color.font.disabled
-				font.pixelSize: root.secondaryText.length ? Theme.font.size.h2 : Theme.font.size.h3
+				color: root.enabled ? Theme.color_font_primary : Theme.color_font_disabled
+				font.pixelSize: root.secondaryText.length ? Theme.font_size_h2 : Theme.font_size_h3
 				horizontalAlignment: Qt.AlignHCenter
 				verticalAlignment: Qt.AlignVCenter
 			}
@@ -63,8 +63,8 @@ CT.SpinBox {
 				width: primaryLabel.width
 				height: text.length ? implicitHeight : 0
 				text: root.secondaryText
-				color: Theme.color.font.secondary
-				font.pixelSize: Theme.font.size.caption
+				color: Theme.color_font_secondary
+				font.pixelSize: Theme.font_size_caption
 				horizontalAlignment: Qt.AlignHCenter
 			}
 		}
@@ -78,11 +78,11 @@ CT.SpinBox {
 		   ? contentItem.y + (contentItem.height / 2) - (height / 2)
 		   : contentItem.y + contentItem.height - height
 		implicitWidth: root.indicatorImplicitWidth
-		implicitHeight: Theme.geometry.spinBox.indicator.height
-		radius: Theme.geometry.spinBox.indicator.radius
+		implicitHeight: Theme.geometry_spinBox_indicator_height
+		radius: Theme.geometry_spinBox_indicator_radius
 		color: root.enabled
-			   ? (root.up.pressed ? Theme.color.darkOk : Theme.color.dimBlue)
-			   : Theme.color.background.disabled
+			   ? (root.up.pressed ? Theme.color_darkOk : Theme.color_dimBlue)
+			   : Theme.color_background_disabled
 
 		Image {
 			anchors.centerIn: parent
@@ -99,11 +99,11 @@ CT.SpinBox {
 		   ? contentItem.y + (contentItem.height / 2) - (height / 2)
 		   : contentItem.y
 		implicitWidth: root.indicatorImplicitWidth
-		implicitHeight: Theme.geometry.spinBox.indicator.height
-		radius: Theme.geometry.spinBox.indicator.radius
+		implicitHeight: Theme.geometry_spinBox_indicator_height
+		radius: Theme.geometry_spinBox_indicator_radius
 		color: root.enabled
-			   ? (root.down.pressed ? Theme.color.darkOk : Theme.color.dimBlue)
-			   : Theme.color.background.disabled
+			   ? (root.down.pressed ? Theme.color_darkOk : Theme.color_dimBlue)
+			   : Theme.color_background_disabled
 		Image {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'

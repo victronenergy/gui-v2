@@ -140,7 +140,7 @@ QtObject {
 			}
 
 			property Instantiator _savedLevels: Instantiator {
-				model: Theme.geometry.briefPage.centerGauge.maximumGaugeCount
+				model: Theme.geometry_briefPage_centerGauge_maximumGaugeCount
 				delegate: DataPoint {
 					source: "com.victronenergy.settings/Settings/Gui/BriefView/Level/" + model.index
 					onValueChanged: {

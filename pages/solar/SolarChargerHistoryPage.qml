@@ -18,7 +18,7 @@ Page {
 		id: tabBar
 
 		anchors.horizontalCenter: parent.horizontalCenter
-		width: Theme.geometry.solarHistoryPage.tabBar.width
+		width: Theme.geometry_solarHistoryPage_tabBar_width
 		model: [
 			//% "Table view"
 			{ value: qsTrId("charger_history_table_view") },
@@ -58,10 +58,10 @@ Page {
 
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry.page.content.horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
 			verticalCenter: tabBar.verticalCenter
 		}
-		width: Theme.geometry.comboBox.width
+		width: Theme.geometry_comboBox_width
 		model: tableModeOptions
 		displayText: model[currentIndex].text
 	}
@@ -80,14 +80,14 @@ Page {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: Theme.geometry.listItem.content.verticalMargin
+			topMargin: Theme.geometry_listItem_content_verticalMargin
 			left: parent.left
-			leftMargin: Theme.geometry.page.content.horizontalMargin
+			leftMargin: Theme.geometry_page_content_horizontalMargin
 			right: parent.right
-			rightMargin: Theme.geometry.page.content.horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
 		minimumHeight: chart.visible ? NaN
-			: root.height - tableView.y - Theme.geometry.page.content.verticalMargin - bottomPadding
+			: root.height - tableView.y - Theme.geometry_page_content_verticalMargin - bottomPadding
 		solarCharger: root.solarCharger
 		dayRange: daysComboBox.model[daysComboBox.currentIndex].dayRange
 
@@ -102,11 +102,11 @@ Page {
 		anchors {
 			top: tableView.bottom
 			left: parent.left
-			leftMargin: Theme.geometry.page.content.horizontalMargin
+			leftMargin: Theme.geometry_page_content_horizontalMargin
 			right: parent.right
-			rightMargin: Theme.geometry.page.content.horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.page.content.verticalMargin
+			bottomMargin: Theme.geometry_page_content_verticalMargin
 		}
 		visible: tabBar.currentIndex === 1
 		solarCharger: root.solarCharger

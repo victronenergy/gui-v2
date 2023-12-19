@@ -72,6 +72,7 @@ ControlCard {
 	Column {
 		anchors {
 			top: parent.status.bottom
+			topMargin: Theme.geometry_controlCard_status_bottomMargin
 			left: parent.left
 			right: parent.right
 		}
@@ -105,7 +106,7 @@ ControlCard {
 			sourceComponent: Component {
 				ButtonControlValue {
 					width: parent.width
-					button.width: Math.max(button.implicitWidth, Theme.geometry.veBusDeviceCard.modeButton.maximumWidth)
+					button.width: Math.max(button.implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
 					label.text: CommonWords.mode
 					button.text: Global.veBusDevices.modeToText(root.veBusDevice.mode)
 					separator.visible: false

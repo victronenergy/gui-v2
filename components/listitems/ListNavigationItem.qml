@@ -24,8 +24,8 @@ ListItem {
 
 			anchors.verticalCenter: parent.verticalCenter
 			visible: text.length > 0
-			font.pixelSize: Theme.font.size.body2
-			color: Theme.color.listItem.secondaryText
+			font.pixelSize: Theme.font_size_body2
+			color: Theme.color_listItem_secondaryText
 			wrapMode: Text.Wrap
 			horizontalAlignment: Text.AlignRight
 		},
@@ -33,10 +33,10 @@ ListItem {
 		CP.ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
 			source: "/images/icon_back_32.svg"
-			width: Theme.geometry.statusBar.button.icon.width
-			height: Theme.geometry.statusBar.button.icon.height
+			width: Theme.geometry_statusBar_button_icon_width
+			height: Theme.geometry_statusBar_button_icon_height
 			rotation: 180
-			color: root.containsPress ? Theme.color.listItem.down.forwardIcon : Theme.color.listItem.forwardIcon
+			color: root.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			fillMode: Image.PreserveAspectFit
 			visible: root.enabled
 		}

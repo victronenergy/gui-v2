@@ -17,7 +17,7 @@ ControlCard {
 	Column {
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.controlCard.mediumItem.height
+			topMargin: Theme.geometry_controlCard_mediumItem_height
 		}
 		width: parent.width
 
@@ -62,7 +62,7 @@ ControlCard {
 
 		Item {
 			id: warningRow
-			height: Theme.geometry.controlCard.mediumItem.height
+			height: Theme.geometry_controlCard_mediumItem_height
 			width: parent.width
 			visible: Global.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
 
@@ -70,11 +70,11 @@ ControlCard {
 				id: warning
 				anchors {
 					left: parent.left
-					leftMargin: Theme.geometry.controlCard.contentMargins
+					leftMargin: Theme.geometry_controlCard_contentMargins
 					verticalCenter: parent.verticalCenter
 				}
-				color: Theme.color.font.secondary
-				font.pixelSize: Theme.font.size.body1
+				color: Theme.color_font_secondary
+				font.pixelSize: Theme.font_size_body1
 				//% "Battery life limit: %1%"
 				text: qsTrId("ess_battery_life_limit").arg(Math.max(Global.ess.minimumStateOfCharge, Global.ess.stateOfChargeLimit))
 			}
@@ -82,11 +82,11 @@ ControlCard {
 			CP.IconImage {
 				anchors {
 					right: parent.right
-					rightMargin: Theme.geometry.controlCard.contentMargins
+					rightMargin: Theme.geometry_controlCard_contentMargins
 					verticalCenter: parent.verticalCenter
 				}
 				source: "qrc:/images/information.svg"
-				color: Theme.color.font.primary
+				color: Theme.color_font_primary
 			}
 		}
 	}

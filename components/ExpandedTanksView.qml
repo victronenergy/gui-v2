@@ -19,13 +19,13 @@ Rectangle {
 
 	parent: Global.dialogLayer
 	anchors.fill: parent
-	color: Theme.color.levelsPage.tankGroupData.background.color
+	color: Theme.color_levelsPage_tankGroupData_background_color
 	opacity: active ? 1 : 0
 
 	Behavior on opacity {
 		enabled: root.animationEnabled
 		OpacityAnimator {
-			duration: Theme.animation.levelsPage.tanks.expandedView.fade.duration
+			duration: Theme.animation_levelsPage_tanks_expandedView_fade_duration
 		}
 	}
 
@@ -36,11 +36,11 @@ Rectangle {
 	}
 
 	Rectangle {
-		color: Theme.color.levelsPage.gauge.backgroundColor
-		radius: Theme.geometry.levelsPage.gauge.radius
-		border.width: Theme.geometry.levelsPage.gauge.border.width
+		color: Theme.color_levelsPage_gauge_backgroundColor
+		radius: Theme.geometry_levelsPage_gauge_radius
+		border.width: Theme.geometry_levelsPage_gauge_border_width
 		border.color: root._tankProperties.borderColor
-		width: groupedSubgauges.width + Theme.geometry.levelsPage.tankGroupData.horizontalMargin
+		width: groupedSubgauges.width + Theme.geometry_levelsPage_tankGroupData_horizontalMargin
 		height: groupedSubgauges.height
 		anchors.centerIn: groupedSubgauges
 	}
@@ -49,36 +49,36 @@ Rectangle {
 		id: groupedSubgauges
 
 		anchors.centerIn: parent
-		spacing: groupedSubgaugesRepeater.count > 2 ? Theme.geometry.levelsPage.tankGroupData.spacing3 : Theme.geometry.levelsPage.tankGroupData.spacing2
+		spacing: groupedSubgaugesRepeater.count > 2 ? Theme.geometry_levelsPage_tankGroupData_spacing3 : Theme.geometry_levelsPage_tankGroupData_spacing2
 
 		Repeater {
 			id: groupedSubgaugesRepeater
 
-			height: Theme.geometry.levelsPage.tankGroupData.height
+			height: Theme.geometry_levelsPage_tankGroupData_height
 
 			delegate: Item {
-				width: Theme.geometry.levelsPage.groupedSubgauges.delegate.width
-				height: Theme.geometry.levelsPage.groupedSubgauges.delegate.height
+				width: Theme.geometry_levelsPage_groupedSubgauges_delegate_width
+				height: Theme.geometry_levelsPage_groupedSubgauges_delegate_height
 				CP.ColorImage  {
 					id: img
 					anchors {
 						top: parent.top
-						topMargin: Theme.geometry.levelsPage.gauge.icon.topMargin
+						topMargin: Theme.geometry_levelsPage_gauge_icon_topMargin
 						horizontalCenter: parent.horizontalCenter
 					}
 					source: root._tankProperties.icon
-					color: Theme.color.levelsPage.tankIcon
+					color: Theme.color_levelsPage_tankIcon
 				}
 				Label {
 					id: label
 					anchors {
 						top: img.bottom
-						topMargin: Theme.geometry.levelsPage.gauge.label.topMargin
+						topMargin: Theme.geometry_levelsPage_gauge_label_topMargin
 						horizontalCenter: parent.horizontalCenter
 					}
-					width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
-					font.pixelSize: Theme.font.size.body1
-					minimumPixelSize: Theme.font.size.caption
+					width: Theme.geometry_levelsPage_gaugeDelegate_contentWidth
+					font.pixelSize: Theme.font_size_body1
+					minimumPixelSize: Theme.font_size_caption
 					fontSizeMode: Text.HorizontalFit
 					horizontalAlignment: Text.AlignHCenter
 					verticalAlignment: Text.AlignBottom
@@ -88,9 +88,9 @@ Rectangle {
 				TankGauge {
 					anchors {
 						top: label.bottom
-						topMargin: Theme.geometry.levelsPage.subgauges.topMargin
+						topMargin: Theme.geometry_levelsPage_subgauges_topMargin
 						bottom: percentageText.top
-						bottomMargin: Theme.geometry.levelsPage.subgauges.bottomMargin
+						bottomMargin: Theme.geometry_levelsPage_subgauges_bottomMargin
 					}
 					width: parent.width
 					height: groupedSubgauges.height
@@ -104,9 +104,9 @@ Rectangle {
 					anchors {
 						horizontalCenter: parent.horizontalCenter
 						bottom: valueText.top
-						bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
+						bottomMargin: Theme.geometry_levelsPage_gauge_valueText_topMargin
 					}
-					font.pixelSize: Theme.font.size.h1
+					font.pixelSize: Theme.font_size_h1
 					unit: VenusOS.Units_Percentage
 					value: (isNaN(model.device.level) || model.device.level < 0) ? 0 : Math.round(model.device.level)
 				}
@@ -115,18 +115,18 @@ Rectangle {
 
 					anchors {
 						bottom: parent.bottom
-						bottomMargin: Theme.geometry.levelsPage.gauge.valueText.bottomMargin
+						bottomMargin: Theme.geometry_levelsPage_gauge_valueText_bottomMargin
 						horizontalCenter: parent.horizontalCenter
 					}
-					width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
+					width: Theme.geometry_levelsPage_gaugeDelegate_contentWidth
 					horizontalAlignment: Text.AlignHCenter
 					fontSizeMode: Text.HorizontalFit
-					font.pixelSize: Theme.font.size.caption
-					color: Theme.color.font.secondary
+					font.pixelSize: Theme.font_size_caption
+					color: Theme.color_font_secondary
 					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit.value,
 							model.device.capacity,
 							model.device.remaining,
-							Theme.geometry.quantityLabel.valueLength)
+							Theme.geometry_quantityLabel_valueLength)
 				}
 			}
 		}

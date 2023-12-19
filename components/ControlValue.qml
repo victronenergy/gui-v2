@@ -15,28 +15,28 @@ Item {
 	property alias separator: separatorBar
 
 	width: parent.width
-	implicitHeight: Theme.geometry.controlCard.largeItem.height
+	implicitHeight: Theme.geometry_controlCard_largeItem_height
 
 	Label {
 		id: label
 		anchors {
 			verticalCenter: parent.verticalCenter
 			left: parent.left
-			leftMargin: Theme.geometry.controlCard.contentMargins
+			leftMargin: Theme.geometry_controlCard_contentMargins
 			right: contentRow.left
-			rightMargin: Theme.geometry.controlCard.contentMargins
+			rightMargin: Theme.geometry_controlCard_contentMargins
 		}
 
 		elide: Text.ElideRight
-		font.pixelSize: Theme.font.size.body1
-		color: Theme.color.font.primary
+		font.pixelSize: Theme.font_size_body1
+		color: Theme.color_font_primary
 	}
 	Row {
 		id: contentRow
 		anchors {
 			verticalCenter: parent.verticalCenter
 			right: parent.right
-			rightMargin: Theme.geometry.controlCard.contentMargins
+			rightMargin: Theme.geometry_controlCard_contentMargins
 		}
 
 		height: parent.height
@@ -47,8 +47,8 @@ Item {
 			bottom: parent.bottom
 			left: parent.left
 			right: parent.right
-			leftMargin: Theme.geometry.controlCard.itemSeparator.margins
-			rightMargin: Theme.geometry.controlCard.itemSeparator.margins
+			leftMargin: Theme.geometry_controlCard_itemSeparator_margins
+			rightMargin: Theme.geometry_controlCard_itemSeparator_margins
 		}
 
 		height: visible ? implicitHeight : 0

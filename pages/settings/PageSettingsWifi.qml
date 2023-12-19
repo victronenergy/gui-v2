@@ -51,7 +51,7 @@ Page {
 
 			text: service ? (service.name ? service.name : "[" + service.ethernet["Address"] + "]") : ""
 			secondaryText: Utils.connmanServiceState(service)
-			primaryLabel.leftPadding: Theme.geometry.statusBar.button.icon.width + Theme.geometry.listItem.content.spacing
+			primaryLabel.leftPadding: Theme.geometry_statusBar_button_icon_width + Theme.geometry_listItem_content_spacing
 
 			CP.ColorImage {
 				anchors {
@@ -59,9 +59,9 @@ Page {
 					verticalCenter: wifiPoint.primaryLabel.verticalCenter
 				}
 				source: "/images/icon_checkmark_48.svg"
-				width: Theme.geometry.statusBar.button.icon.width
-				height: Theme.geometry.statusBar.button.icon.height
-				color: Theme.color.green
+				width: Theme.geometry_statusBar_button_icon_width
+				height: Theme.geometry_statusBar_button_icon_height
+				color: Theme.color_green
 				visible: wifiPoint.service && wifiPoint.service.favorite
 			}
 

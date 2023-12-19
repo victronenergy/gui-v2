@@ -18,7 +18,7 @@ Column {
 	property real minimumHeight: NaN // TODO, for single-tracker mode, stretch the spacer
 
 	width: parent ? parent.width : 0
-	bottomPadding: solarDetailBox.visible ? Theme.geometry.solarDetailBox.verticalMargin : 0
+	bottomPadding: solarDetailBox.visible ? Theme.geometry_solarDetailBox_verticalMargin : 0
 
 	function _trackerHistoryTotal(role, trackerIndex) {
 		let totalValue = NaN
@@ -66,8 +66,8 @@ Column {
 		id: tableSummary
 
 		// Omit right margin to give the table a little more space.
-		x: Theme.geometry.listItem.content.horizontalMargin
-		width: parent.width - Theme.geometry.listItem.content.horizontalMargin
+		x: Theme.geometry_listItem_content_horizontalMargin
+		width: parent.width - Theme.geometry_listItem_content_horizontalMargin
 		smallTextMode: root.smallTextMode
 
 		model: [
@@ -100,7 +100,7 @@ Column {
 		id: trackerTable
 
 		width: parent.width
-		bottomPadding: Theme.geometry.quantityTable.bottomMargin
+		bottomPadding: Theme.geometry_quantityTable_bottomMargin
 		visible: !root.summaryOnly && root.solarCharger.trackers.count > 1
 		headerVisible: false
 
@@ -135,7 +135,7 @@ Column {
 	SolarDetailBox {
 		id: solarDetailBox
 
-		x: Theme.geometry.solarDetailBox.horizontalMargin
+		x: Theme.geometry_solarDetailBox_horizontalMargin
 		width: parent.width - (2 * x)
 		visible: !root.summaryOnly
 		minBatteryVoltage: root._trackerHistoryMin("minBatteryVoltage")
