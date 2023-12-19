@@ -540,6 +540,7 @@ set(VenusQMLModule_CPP_SOURCES
     src/basedevicemodel.cpp
     src/theme.h
     src/theme.cpp
+    src/themeobjects.h
     src/backendconnection.h
     src/backendconnection.cpp
     src/language.h
