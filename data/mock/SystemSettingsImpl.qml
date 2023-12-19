@@ -168,17 +168,6 @@ QtObject {
 		setMockSettingValue("Pump0/StartValue", 50)
 		setMockSettingValue("Pump0/StopValue", 80)
 
-		setMockGeneratorStartStopValue('AccumulatedTotal', 3600)
-		setMockGeneratorStartStopValue('Error', 1)
-		setMockGeneratorStartStopValue('ManualStartTimer', 3700)
-		setMockGeneratorStartStopValue('NextTestRun', Date.now() / 1000 + 80)
-		setMockGeneratorStartStopValue('RunningByCondition', 'soc')
-		setMockGeneratorStartStopValue('Runtime', 1234)
-		setMockGeneratorStartStopValue('ServiceCounterReset', 0)
-		setMockGeneratorStartStopValue('State', 0)
-		setMockGeneratorStartStopValue('TestRunIntervalRuntime', 5678)
-		setMockGeneratorStartStopValue('Capabilities', 1)
-
 		setMockGenerator0Value('AccumulatedTotal', 3780849)
 		setMockGenerator0Value('AutoStartEnabled', 1)
 		setMockGenerator0Value('AccumulatedDaily', '{"1667347200": 60, "1667433600": 120, "1667520000": 1800}')

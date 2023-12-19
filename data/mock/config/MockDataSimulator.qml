@@ -18,6 +18,7 @@ QtObject {
 	signal setDcInputsRequested(var config)
 	signal setEnvironmentInputsRequested(var config)
 	signal setEvChargersRequested(var config)
+	signal setGeneratorsRequested(var config)
 	signal setSolarRequested(var config)
 	signal setSystemRequested(var config)
 	signal setTanksRequested(var config)
