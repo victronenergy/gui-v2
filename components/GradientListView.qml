@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 
 ListView {
@@ -63,10 +63,10 @@ ListView {
 		target: {
 			// Find the parent item that is on a StackView (i.e. a Page)
 			let p = root.parent
-			while (p && p.C.StackView.activated === undefined) {
+			while (p && p.T.StackView.activated === undefined) {
 				p = p.parent
 			}
-			return (!p || (p.C.StackView.activated === undefined)) ? null : p.C.StackView
+			return (!p || (p.T.StackView.activated === undefined)) ? null : p.T.StackView
 		}
 		function onActivated() {
 			// Once the parent page is activated, stop auto-adjustments of contentY.

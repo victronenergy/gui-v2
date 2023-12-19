@@ -6,7 +6,6 @@
 import QtQuick
 import QtQuick.Templates as CT
 import QtQuick.Controls as C
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 CT.Button {
@@ -49,7 +48,7 @@ CT.Button {
 		radius: Theme.geometry.button.radius
 	}
 
-	contentItem: CP.IconLabel {
+	contentItem: IconLabel {
 		anchors.fill: parent
 
 		mirrored: root.iconAlignment === Button.AlignRight

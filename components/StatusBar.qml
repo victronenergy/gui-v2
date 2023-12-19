@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Controls as C
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Rectangle {
@@ -103,7 +102,7 @@ Rectangle {
 			leftPadding: Theme.geometry.notificationsPage.snoozeButton.image.leftMargin
 			anchors.verticalCenter: parent.verticalCenter
 			spacing: Theme.geometry.notificationsPage.snoozeButton.spacing
-			CP.IconLabel {
+			IconLabel {
 				anchors.verticalCenter: parent.verticalCenter
 				icon.source: "qrc:/images/icon_alarm_snooze_24"
 			}

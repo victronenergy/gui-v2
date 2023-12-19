@@ -4,8 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls.impl as CP
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 
 Rectangle {
@@ -17,7 +16,7 @@ Rectangle {
 	color: Theme.color.background.secondary
 	radius: Theme.geometry.panel.radius
 
-	CP.IconLabel {
+	IconLabel {
 		id: title
 		anchors {
 			top: parent.top
@@ -26,7 +25,7 @@ Rectangle {
 			leftMargin: Theme.geometry.controlCard.contentMargins
 		}
 		spacing: Theme.geometry.controlCard.title.spacing
-		display: C.AbstractButton.TextBesideIcon
+		display: T.AbstractButton.TextBesideIcon
 		icon.color: Theme.color.font.primary
 
 		font.family: VenusFont.normal.name

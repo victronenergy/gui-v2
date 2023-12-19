@@ -160,6 +160,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/GradientListView.qml
     components/GsmStatusIcon.qml
     components/IconButton.qml
+    components/IconLabel.qml
     components/InputPanel.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
