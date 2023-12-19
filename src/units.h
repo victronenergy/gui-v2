@@ -66,7 +66,8 @@ public:
 
 	Q_INVOKABLE QString getCombinedDisplayText(
 		Victron::VenusOS::Enums::Units_Type unit,
-		qreal value) const;
+		qreal value,
+		int precision = -1) const;
 
 	Q_INVOKABLE QString getCapacityDisplayText(
 		Victron::VenusOS::Enums::Units_Type unit,

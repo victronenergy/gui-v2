@@ -84,6 +84,8 @@ QString Units::defaultUnitString(Victron::VenusOS::Enums::Units_Type unit) const
 		return QStringLiteral("gal");
 	case Victron::VenusOS::Enums::Units_RevolutionsPerMinute:
 		return QStringLiteral("RPM");
+	case Victron::VenusOS::Enums::Units_Speed_MetresPerSecond:
+		return QStringLiteral("m/s");
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
 		return QString();
@@ -239,9 +241,10 @@ Quantity Units::getDisplayText(
 	return scaledQuantity(value, unitMatchValue, p, baseUnit, scaledUnit);
 }
 
-QString Units::getCombinedDisplayText(Victron::VenusOS::Enums::Units_Type unit, qreal value) const
+QString Units::getCombinedDisplayText(Victron::VenusOS::Enums::Units_Type unit, qreal value, int precision) const
 {
-	const Quantity qty = getDisplayText(unit, value, defaultUnitPrecision(unit));
+	const int p = precision < 0 ? defaultUnitPrecision(unit) : precision;
+	const Quantity qty = getDisplayText(unit, value, p);
 	if (qty.number.compare(QStringLiteral("--")) == 0) {
 		return qty.number;
 	}

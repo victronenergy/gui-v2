@@ -390,6 +390,8 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/debug/PageSystemData.qml
     pages/settings/devicelist/DeviceListPage.qml
     pages/settings/devicelist/AcInDeviceModel.qml
+    pages/settings/devicelist/PageMeteo.qml
+    pages/settings/devicelist/PageMeteoSettings.qml
     pages/settings/devicelist/PageNotYetImplemented.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
