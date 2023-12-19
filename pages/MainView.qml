@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 
 Item {
@@ -50,10 +50,10 @@ Item {
 		}
 
 		Connections {
-			target: !!pageStack.currentItem ? pageStack.currentItem.C.StackView : null
+			target: !!pageStack.currentItem ? pageStack.currentItem.T.StackView : null
 
 			function onStatusChanged() {
-				if (pageStack.currentItem.C.StackView.status === C.StackView.Deactivating) {
+				if (pageStack.currentItem.T.StackView.status === T.StackView.Deactivating) {
 					pageStack.previousItem = pageStack.currentItem
 				}
 			}

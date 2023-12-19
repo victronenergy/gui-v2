@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.Gauges
 
 Page {
@@ -19,7 +19,7 @@ Page {
 	// Use this intermediate model that is built when the page loads, to avoid changing the model
 	// while the radio button group sub-page is shown, as that causes the group options to be rebuilt.
 	property var _gaugesModel
-	C.StackView.onActivating: {
+	T.StackView.onActivating: {
 		_gaugesModel = Global.systemSettings.briefView.centralGauges.value || []
 	}
 

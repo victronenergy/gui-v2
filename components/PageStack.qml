@@ -4,10 +4,10 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 
-C.StackView {
+T.StackView {
 	id: pageStack
 
 	// the x position that the navbar should follow.

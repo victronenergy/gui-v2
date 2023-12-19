@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import net.connman
@@ -21,7 +21,7 @@ Page {
 		settingsListView.model = Connman.getServiceList("wifi")
 	}
 
-	C.StackView.onActivated: _reload()
+	T.StackView.onActivated: _reload()
 
 	GradientListView {
 		id: settingsListView
