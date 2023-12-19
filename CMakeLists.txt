@@ -53,12 +53,12 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
     add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
     add_compile_definitions(MQTT_WEBSOCKETS_ENABLED)
-    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
+    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml LinguistTools Mqtt WebSockets ShaderTools REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
 else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
+    find_package(Qt6 6.5.2 COMPONENTS Core Qml Quick Svg Xml DBus LinguistTools Mqtt ShaderTools REQUIRED) # require at least qt 6.5.2 for qt_add_qml_module to work properly
 endif()
 
 # This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_MODULE_SOURCES})'
@@ -126,6 +126,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/RadioButtonControlValue.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
+    components/ShaderCircularGauge.qml
+    components/ShaderProgressArc.qml
     components/ShinyProgressArc.qml
     components/SideGauge.qml
     components/SolarDetailBox.qml
@@ -483,6 +485,17 @@ qt_add_qml_module(VenusQMLModule
     STATIC
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
+)
+
+qt6_add_shaders(VenusQMLModule "shaders"
+    BATCHABLE
+    PRECOMPILE
+    OPTIMIZED
+    PREFIX
+        "/qt/qml/Victron/VenusOS/components"
+    FILES
+        "shaders/circulargauge.frag"
+        "shaders/progressarc.frag"
 )
 # end VENUS_QML_MODULE
 

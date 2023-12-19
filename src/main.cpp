@@ -343,6 +343,7 @@ int main(int argc, char *argv[])
 	engine.setProperty("screenSize", (round(screenDiagonalMm / 10 / 2.5) == 7)
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
+engine.setProperty("screenSize", Victron::VenusOS::Theme::SevenInch);
 #else
 	engine.setProperty("screenSize", Victron::VenusOS::Theme::SevenInch);
 #endif

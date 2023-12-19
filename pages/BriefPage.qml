@@ -100,9 +100,6 @@ Page {
 
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignLeft | (leftLower.active ? Qt.AlignTop : Qt.AlignVCenter)
-			arcX: leftLower.active ? undefined : 10
-			direction: PathArc.Clockwise
-			startAngle: leftLower.active ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)
 			animationEnabled: root.animationEnabled
 
 			// Gauge color changes only apply when there is a maximum value.
@@ -129,7 +126,7 @@ Page {
 					  : Global.acInputs.current
 					: Units.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
 
-			value: !visible ? 0 : inputsRange.valueAsRatio * 100
+			value: visible ? inputsRange.valueAsRatio * 100 : 0
 
 			ValueRange {
 				id: inputsRange
