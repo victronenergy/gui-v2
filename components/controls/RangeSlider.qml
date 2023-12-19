@@ -4,11 +4,11 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-C.RangeSlider {
+T.RangeSlider {
 	id: root
 
 	property color firstColor: "transparent"
