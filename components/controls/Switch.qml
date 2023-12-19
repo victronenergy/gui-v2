@@ -26,34 +26,34 @@ CT.Switch {
 	bottomPadding: 0
 
 	background: Item {
-		implicitWidth: Theme.geometry.switch.container.width
-		implicitHeight: Theme.geometry.switch.container.height
+		implicitWidth: Theme.geometry_switch_container_width
+		implicitHeight: Theme.geometry_switch_container_height
 		anchors.verticalCenter: parent.verticalCenter
 
 		Rectangle {
 			id: indicatorBackground
 
 			anchors.right: parent.right
-			width: Theme.geometry.switch.groove.width
-			height: Theme.geometry.switch.groove.height
-			radius: Theme.geometry.switch.indicator.width
+			width: Theme.geometry_switch_groove_width
+			height: Theme.geometry_switch_groove_height
+			radius: Theme.geometry_switch_indicator_width
 
 			color: root.enabled
-				   ? (root.checked ? Theme.color.switch.groove.on : Theme.color.switch.groove.off)
-				   : Theme.color.switch.groove.disabled
-			border.color: root.checked ? Theme.color.switch.groove.border.on
-				: Theme.color.switch.groove.border.off
-			border.width: Theme.geometry.switch.groove.border.width
+				   ? (root.checked ? Theme.color_switch_groove_on : Theme.color_switch_groove_off)
+				   : Theme.color_switch_groove_disabled
+			border.color: root.checked ? Theme.color_switch_groove_border_on
+				: Theme.color_switch_groove_border_off
+			border.width: Theme.geometry_switch_groove_border_width
 		}
 	}
 
 	indicator: Image {
 		x: root.checked
-		   ? parent.width - width + Theme.geometry.switch.indicator.shadowOffset
-		   : parent.width - indicatorBackground.width - Theme.geometry.switch.indicator.shadowOffset
+		   ? parent.width - width + Theme.geometry_switch_indicator_shadowOffset
+		   : parent.width - indicatorBackground.width - Theme.geometry_switch_indicator_shadowOffset
 		y: parent.height/2 - height/2
-		width: Theme.geometry.switch.indicator.width
-		height: Theme.geometry.switch.indicator.width
+		width: Theme.geometry_switch_indicator_width
+		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"
 
 		Behavior on x {
@@ -70,7 +70,7 @@ CT.Switch {
 	contentItem: Label {
 		id: label
 		text: root.text
-		color: Theme.color.font.primary
+		color: Theme.color_font_primary
 		verticalAlignment: Text.AlignVCenter
 	}
 

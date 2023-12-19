@@ -37,9 +37,9 @@ OverviewWidget {
 
 		animationEnabled: root.animationEnabled // Note: don't use _animationReady here.
 		value: _normalizedStateOfCharge/100
-		backgroundColor: Theme.color.overviewPage.widget.background
-		foregroundColor: Theme.color.overviewPage.widget.battery.background
-		radius: Theme.geometry.overviewPage.widget.battery.background.radius
+		backgroundColor: Theme.color_overviewPage_widget_background
+		foregroundColor: Theme.color_overviewPage_widget_battery_background
+		radius: Theme.geometry_overviewPage_widget_battery_background_radius
 
 		Item {
 			id: animationClip
@@ -54,7 +54,7 @@ OverviewWidget {
 				id: delayedStartTimer
 				property int count: 0
 				property bool startRunning: root._animationReady
-				interval: Theme.animation.overviewPage.widget.battery.bubble.duration / Theme.animation.overviewPage.widget.battery.bubbles
+				interval: Theme.animation_overviewPage_widget_battery_bubble_duration / Theme.animation_overviewPage_widget_battery_bubbles
 				repeat: true
 
 				onStartRunningChanged: {
@@ -65,7 +65,7 @@ OverviewWidget {
 				}
 
 				onTriggered: {
-					if (count++ > Theme.animation.overviewPage.widget.battery.bubbles) {
+					if (count++ > Theme.animation_overviewPage_widget_battery_bubbles) {
 						running = false
 					}
 				}
@@ -79,36 +79,36 @@ OverviewWidget {
 				Repeater {
 					id: chimneyRepeater
 
-					model: Theme.animation.overviewPage.widget.battery.chimneys
+					model: Theme.animation_overviewPage_widget_battery_chimneys
 
 					delegate: Item {
 						id: chimney // a "chimney" which the bubbles rise up within.
 
 						required property int index
 
-						width: animationClip.width / Theme.animation.overviewPage.widget.battery.chimneys
+						width: animationClip.width / Theme.animation_overviewPage_widget_battery_chimneys
 						height: root.expandedHeight // always full height, the clip item will clip it.
 						y: -(height - animationClip.height)
 
 						Repeater {
-							model: Theme.animation.overviewPage.widget.battery.bubbles
+							model: Theme.animation_overviewPage_widget_battery_bubbles
 							delegate: Rectangle {
 								id: bubble
 								required property int index
 								y: chimney.height
-								width: Theme.geometry.overviewPage.widget.battery.bubble.width
+								width: Theme.geometry_overviewPage_widget_battery_bubble_width
 								height: width
-								color: Theme.color.overviewPage.widget.battery.bubble.background
+								color: Theme.color_overviewPage_widget_battery_bubble_background
 								radius: height/2
 								border.width: 1
-								border.color: Theme.color.overviewPage.widget.battery.bubble.border
+								border.color: Theme.color_overviewPage_widget_battery_bubble_border
 
 								YAnimator {
 									id: yanimator
 									target: bubble
 									from: chimney.height
 									to: 0
-									duration: Theme.animation.overviewPage.widget.battery.bubble.duration + 100*Math.random()*bubble.index
+									duration: Theme.animation_overviewPage_widget_battery_bubble_duration + 100*Math.random()*bubble.index
 									easing.type: Easing.InOutQuad
 									loops: Animation.Infinite
 									running: root._animationReady && delayedStartTimer.count >= bubble.index
@@ -132,7 +132,7 @@ OverviewWidget {
 
 								OpacityAnimator {
 									target: bubble
-									from: Theme.animation.overviewPage.widget.battery.bubble.opacity
+									from: Theme.animation_overviewPage_widget_battery_bubble_opacity
 									to: 0.0
 									easing.type: Easing.InQuad
 									duration: yanimator.duration
@@ -153,16 +153,16 @@ OverviewWidget {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.overviewPage.widget.battery.temperature.topMargin
+			topMargin: Theme.geometry_overviewPage_widget_battery_temperature_topMargin
 			right: parent.right
-			rightMargin: Theme.geometry.overviewPage.widget.battery.temperature.rightMargin
+			rightMargin: Theme.geometry_overviewPage_widget_battery_temperature_rightMargin
 		}
 
 		value: Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
 				? batteryData.temperature_celsius
 				: Units.celsiusToFahrenheit(batteryData.temperature_celsius))
 		unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : VenusOS.Units_Temperature_Celsius
-		font.pixelSize: Theme.font.size.body2
+		font.pixelSize: Theme.font_size_body2
 	}
 
 	extraContent.children: [
@@ -170,17 +170,17 @@ OverviewWidget {
 			anchors {
 				top: parent.top
 				left: parent.left
-				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 			}
 			Label {
 				text: Global.batteries.modeToText(batteryData.mode)
-				font.pixelSize: Theme.font.size.body1
-				color: Theme.color.font.secondary
+				font.pixelSize: Theme.font_size_body1
+				color: Theme.color_font_secondary
 			}
 			Label {
 				text: Global.batteries.timeToGoText(Global.batteries.system, VenusOS.Battery_TimeToGo_ShortFormat)
-				color: Theme.color.font.primary
-				font.pixelSize: Theme.font.overviewPage.battery.timeToGo.pixelSize
+				color: Theme.color_font_primary
+				font.pixelSize: Theme.font_overviewPage_battery_timeToGo_pixelSize
 			}
 		},
 
@@ -189,14 +189,14 @@ OverviewWidget {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
+				bottomMargin: Theme.geometry_overviewPage_widget_battery_bottomRow_bottomMargin
 			}
 
 			value: batteryData.voltage
 			unit: VenusOS.Units_Volt
-			font.pixelSize: Theme.font.size.body2
+			font.pixelSize: Theme.font_size_body2
 		},
 
 		QuantityLabel {
@@ -205,11 +205,11 @@ OverviewWidget {
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
+				bottomMargin: Theme.geometry_overviewPage_widget_battery_bottomRow_bottomMargin
 			}
 			value: batteryData.current
 			unit: VenusOS.Units_Amp
-			font.pixelSize: Theme.font.size.body2
+			font.pixelSize: Theme.font_size_body2
 		},
 
 		QuantityLabel {
@@ -217,13 +217,13 @@ OverviewWidget {
 
 			anchors {
 				right: parent.right
-				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry.overviewPage.widget.battery.bottomRow.bottomMargin
+				bottomMargin: Theme.geometry_overviewPage_widget_battery_bottomRow_bottomMargin
 			}
 			value: batteryData.power
 			unit: VenusOS.Units_Watt
-			font.pixelSize: Theme.font.size.body2
+			font.pixelSize: Theme.font_size_body2
 		}
 	]
 

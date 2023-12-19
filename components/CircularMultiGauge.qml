@@ -13,13 +13,13 @@ Item {
 	id: gauges
 
 	property alias model: arcRepeater.model
-	readonly property real strokeWidth: Theme.geometry.circularMultiGauge.strokeWidth
+	readonly property real strokeWidth: Theme.geometry_circularMultiGauge_strokeWidth
 	property bool animationEnabled
 	property real labelMargin
 	property alias labelOpacity: textCol.opacity
 
 	// Step change in the size of the bounding boxes of successive gauges
-	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry.circularMultiGauge.spacing)
+	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry_circularMultiGauge_spacing)
 
 	Item {
 		id: antialiased
@@ -40,7 +40,7 @@ Item {
 				width: parent.width - (index*_stepSize)
 				height: width
 				anchors.centerIn: parent
-				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
+				visible: model.index < Theme.geometry_briefPage_centerGauge_maximumGaugeCount
 				sourceComponent: model.tankType === VenusOS.Tank_Type_Battery ? shinyProgressArc : progressArc
 				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load circular multi gauge progress arc:", errorString())
 
@@ -84,7 +84,7 @@ Item {
 		anchors.bottom: parent.verticalCenter
 		anchors.left: parent.left
 		anchors.right: parent.horizontalCenter
-		anchors.rightMargin: Theme.geometry.circularMultiGauge.labels.rightMargin + gauges.labelMargin
+		anchors.rightMargin: Theme.geometry_circularMultiGauge_labels_rightMargin + gauges.labelMargin
 
 		Repeater {
 			model: gauges.model
@@ -92,21 +92,21 @@ Item {
 				anchors.verticalCenter: textCol.top
 				anchors.verticalCenterOffset: index * _stepSize/2
 				anchors.right: parent.right
-				anchors.rightMargin: Math.max(0, Theme.geometry.circularMultiGauge.icons.maxWidth - iconImage.width)
-				spacing: Theme.geometry.circularMultiGauge.row.spacing
-				visible: model.index < Theme.geometry.briefPage.centerGauge.maximumGaugeCount
+				anchors.rightMargin: Math.max(0, Theme.geometry_circularMultiGauge_icons_maxWidth - iconImage.width)
+				spacing: Theme.geometry_circularMultiGauge_row_spacing
+				visible: model.index < Theme.geometry_briefPage_centerGauge_maximumGaugeCount
 
 				Label {
 					horizontalAlignment: Text.AlignRight
-					font.pixelSize: Theme.font.size.body2
-					color: Theme.color.font.primary
+					font.pixelSize: Theme.font_size_body2
+					color: Theme.color_font_primary
 					text: model.name
 				}
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					horizontalAlignment: Text.AlignRight
-					font.pixelSize: Theme.font.size.body2
-					color: Theme.color.font.primary
+					font.pixelSize: Theme.font_size_body2
+					color: Theme.color_font_primary
 					visible: Global.systemSettings.briefView.showPercentages.value === 1
 					//% "%1%"
 					text: qsTrId("%1%").arg(isNaN(model.value) ? 0 : Math.round(model.value))
@@ -114,9 +114,9 @@ Item {
 				CP.ColorImage {
 					id: iconImage
 					anchors.verticalCenter: parent.verticalCenter
-					height: Theme.geometry.briefPage.centerGauge.icon.height
+					height: Theme.geometry_briefPage_centerGauge_icon_height
 					source: model.icon
-					color: Theme.color.font.primary
+					color: Theme.color_font_primary
 					fillMode: Image.PreserveAspectFit
 					smooth: true
 				}

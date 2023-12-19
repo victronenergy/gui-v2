@@ -86,7 +86,7 @@ Page {
 					visible: text.length > 0
 					topPadding: 0
 					bottomPadding: 0
-					color: Theme.color.font.secondary
+					color: Theme.color_font_secondary
 					//% "Security warning: only enable the console on LAN when the GX device is connected to a trusted network."
 					text: qsTrId("settings_remoteconsole_enable_on_lan_warning")
 				}

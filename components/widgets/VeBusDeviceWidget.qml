@@ -19,11 +19,11 @@ OverviewWidget {
 		Label {
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				right: parent.right
-				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 			}
-			font.pixelSize: Theme.font.overviewPage.widget.quantityLabel.maximumSize
+			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 			text: Global.system.systemStateToText(Global.system.state)
 			wrapMode: Text.Wrap
 		}

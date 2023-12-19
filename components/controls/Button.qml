@@ -12,20 +12,20 @@ import Victron.VenusOS
 CT.Button {
 	id: root
 
-	property color color: !enabled ? Theme.color.font.disabled
-			: down ? Theme.color.button.down.text
-			: Theme.color.font.primary
-	property color backgroundColor: !enabled ? Theme.color.background.disabled
+	property color color: !enabled ? Theme.color_font_disabled
+			: down ? Theme.color_button_down_text
+			: Theme.color_font_primary
+	property color backgroundColor: !enabled ? Theme.color_background_disabled
 			: down ? downColor
 			: flat ? "transparent"
-			: Theme.color.darkOk
+			: Theme.color_darkOk
 	property color downColor: flat ? "transparent"
-			: Theme.color.ok
+			: Theme.color_ok
 	property alias border: backgroundRect.border
 	property alias radius: backgroundRect.radius
 
 	down: pressed || checked
-	spacing: Theme.geometry.button.spacing
+	spacing: Theme.geometry_button_spacing
 	topPadding: 0
 	bottomPadding: 0
 	leftPadding: 0
@@ -37,16 +37,16 @@ CT.Button {
 	icon.color: root.color
 
 	font.family: VenusFont.normal.name
-	font.pixelSize: Theme.font.size.body1
+	font.pixelSize: Theme.font_size_body1
 	flat: true
 
 	background: Rectangle {
 		id: backgroundRect
 
 		color: root.backgroundColor
-		border.width: root.flat ? 0 : Theme.geometry.button.border.width
-		border.color: Theme.color.ok
-		radius: Theme.geometry.button.radius
+		border.width: root.flat ? 0 : Theme.geometry_button_border_width
+		border.color: Theme.color_ok
+		radius: Theme.geometry_button_radius
 	}
 
 	contentItem: CP.IconLabel {

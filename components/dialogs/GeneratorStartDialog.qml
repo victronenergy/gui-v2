@@ -20,12 +20,12 @@ ModalDialog {
 	contentItem: Column {
 		anchors {
 			top: root.header.bottom
-			topMargin: Theme.geometry.modalDialog.content.margins
+			topMargin: Theme.geometry_modalDialog_content_margins
 			left: parent.left
 			right: parent.right
 			bottom: parent.footer.top
 		}
-		spacing: Theme.geometry.modalDialog.content.margins
+		spacing: Theme.geometry_modalDialog_content_margins
 
 		Switch {
 			id: timedRunSwitch
@@ -53,7 +53,7 @@ ModalDialog {
 				right: timeSelector.right
 			}
 			wrapMode: Text.Wrap
-			color: Theme.color.font.primary
+			color: Theme.color_font_primary
 			horizontalAlignment: Text.AlignHCenter
 
 			//% "Generator will stop after the set time, unless autostart condition is met, in which case it will keep running."
@@ -66,7 +66,7 @@ ModalDialog {
 
 		width: root.acceptButton.width
 		height: root.acceptButton.height
-		color: Theme.color.dimGreen
+		color: Theme.color_dimGreen
 
 		onSlidingAnimationFinished: {
 			root.canAccept = true
@@ -77,7 +77,7 @@ ModalDialog {
 	tryAccept: function() {
 		root.canAccept = false
 		root.generator.start(timedRunSwitch.checked ? Utils.composeDuration(timeSelector.hour, timeSelector.minute) : 0)
-		acceptButtonBackground.slidingAnimationTo(Theme.color.green)
+		acceptButtonBackground.slidingAnimationTo(Theme.color_green)
 		return false
 	}
 

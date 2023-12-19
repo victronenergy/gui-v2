@@ -60,22 +60,22 @@ Item {
 		// Sets the distance between electrons (i.e. how often to spawn a new electron)
 		const electronTravelDistance = _animated
 				// Use a min value to ensure at least one electron is shown for short connectors
-				? Math.max(Theme.geometry.overviewPage.connector.electron.interval, _electronTravelDistance)
+				? Math.max(Theme.geometry_overviewPage_connector_electron_interval, _electronTravelDistance)
 				: 0
-		const modelCount = Math.floor(electronTravelDistance / Theme.geometry.overviewPage.connector.electron.interval)
+		const modelCount = Math.floor(electronTravelDistance / Theme.geometry_overviewPage_connector_electron_interval)
 
 		if (electronRepeater.count !== modelCount) {
 			electronRepeater.model = modelCount
 
 			if (electronTravelDistance > 0) {
-				const fadeDistance = 2 * Theme.geometry.overviewPage.connector.anchor.width
+				const fadeDistance = 2 * Theme.geometry_overviewPage_connector_anchor_width
 				_electronFadeEnd = (electronTravelDistance - fadeDistance) / electronTravelDistance
 			}
 		}
 
 		if (_animated) {
 			// Animate at a constant rate of pixels/sec, based on the diagonal length of the shape
-			electronAnim.duration = electronTravelDistance / Theme.geometry.overviewPage.connector.electron.velocity * 1000
+			electronAnim.duration = electronTravelDistance / Theme.geometry_overviewPage_connector_electron_velocity * 1000
 			electronAnim.restart()
 		}
 	}
@@ -101,7 +101,7 @@ Item {
 
 		NumberAnimation {
 			properties: "y,yDistance,startAnchorY,endAnchorY"
-			duration: Theme.animation.page.idleResize.duration
+			duration: Theme.animation_page_idleResize_duration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -129,8 +129,8 @@ Item {
 			const startWidgetRect = _widgetRect(startWidget, false)
 			const endWidgetRect = _widgetRect(endWidget, false)
 			const anchorWidth = direction === Qt.Horizontal
-					? Theme.geometry.overviewPage.connector.anchor.width
-					: Theme.geometry.overviewPage.connector.anchor.height
+					? Theme.geometry_overviewPage_connector_anchor_width
+					: Theme.geometry_overviewPage_connector_anchor_height
 
 			const _startX = startLocation === VenusOS.WidgetConnector_Location_Left
 				  ? startWidgetRect.x - anchorWidth
@@ -166,8 +166,8 @@ Item {
 			const startWidgetRect = _widgetRect(startWidget, expandedGeometry)
 			const endWidgetRect = _widgetRect(endWidget, expandedGeometry)
 			const anchorHeight = direction === Qt.Horizontal
-					? Theme.geometry.overviewPage.connector.anchor.height
-					: Theme.geometry.overviewPage.connector.anchor.width
+					? Theme.geometry_overviewPage_connector_anchor_height
+					: Theme.geometry_overviewPage_connector_anchor_width
 
 			// Work out the start and end of the path depending on the direction and orientation.
 			const _startY = startLocation === VenusOS.WidgetConnector_Location_Top
@@ -215,8 +215,8 @@ Item {
 			y: connectorPath.startAnchorY
 
 			ShapePath {
-				strokeWidth: Theme.geometry.overviewPage.connector.line.width
-				strokeColor: Theme.color.overviewPage.widget.border
+				strokeWidth: Theme.geometry_overviewPage_connector_line_width
+				strokeColor: Theme.color_overviewPage_widget_border
 				fillColor: "transparent"
 				pathElements: connectorPath.pathElements
 			}
@@ -244,7 +244,7 @@ Item {
 					Behavior on opacity {
 						enabled: root._animated
 						OpacityAnimator {
-							duration: Theme.animation.overviewPage.connector.fade.duration
+							duration: Theme.animation_overviewPage_connector_fade_duration
 						}
 					}
 

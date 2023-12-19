@@ -141,18 +141,18 @@ Page {
 
 				//% "BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present."
 				text: qsTrId("charger_network_bms_control_info")
-				font.pixelSize: Theme.font.size.caption
-				color: Theme.color.font.secondary
+				font.pixelSize: Theme.font_size_caption
+				color: Theme.color_font_secondary
 				leftPadding: infoIcon.x + infoIcon.width + infoIcon.x/2
 				visible: bmsControlled.dataValue === 1
 
 				CP.IconImage {
 					id: infoIcon
 
-					x: Theme.geometry.listItem.content.horizontalMargin
+					x: Theme.geometry_listItem_content_horizontalMargin
 					y: bmsControlInfoLabel.topPadding + (infoFontMetrics.boundingRect("A").height - height)/2
 					source: "qrc:/images/information.svg"
-					color: Theme.color.font.secondary
+					color: Theme.color_font_secondary
 				}
 
 				FontMetrics {

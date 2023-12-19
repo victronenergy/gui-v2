@@ -40,8 +40,8 @@ QuantityTable {
 		return NaN
 	}
 
-	availableWidth: width - 2*Theme.geometry.listItem.content.horizontalMargin
-	firstColumnWidth: Theme.geometry.vebusDeviceListPage.quantityTable.firstColumn.width
+	availableWidth: width - 2*Theme.geometry_listItem_content_horizontalMargin
+	firstColumnWidth: Theme.geometry_vebusDeviceListPage_quantityTable_firstColumn_width
 	units: [
 		{ unit: VenusOS.Units_None },
 		{ unit: VenusOS.Units_Watt },
@@ -53,48 +53,48 @@ QuantityTable {
 	labelHorizontalAlignment: Qt.AlignRight
 	headerComponent: AsymmetricRoundedRectangle {
 		width: root.width
-		height: Theme.geometry.vebusDeviceListPage.quantityTable.header.height
+		height: Theme.geometry_vebusDeviceListPage_quantityTable_header_height
 		roundedSide: VenusOS.AsymmetricRoundedRectangle_RoundedSide_Top
 		flat: true
-		color: Theme.color.quantityTable.row.background
+		color: Theme.color_quantityTable_row_background
 
 		Label {
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.listItem.content.horizontalMargin
+				leftMargin: Theme.geometry_listItem_content_horizontalMargin
 				verticalCenter: parent.verticalCenter
 			}
-			font.pixelSize: Theme.font.size.body2
+			font.pixelSize: Theme.font_size_body2
 			text: root.labelText
 		}
 
 		Column {
 			anchors {
 				right: parent.right
-				rightMargin: Theme.geometry.listItem.content.horizontalMargin
+				rightMargin: Theme.geometry_listItem_content_horizontalMargin
 				verticalCenter: parent.verticalCenter
 			}
 			Label {
 				anchors.right: parent.right
 				//% "Total Power"
 				text: qsTrId("vebus_device_page_total_power")
-				color: Theme.color.quantityTable.quantityValue
-				font.pixelSize: Theme.font.size.caption
+				color: Theme.color_quantityTable_quantityValue
+				font.pixelSize: Theme.font_size_caption
 			}
 			Row {
 				anchors.right: parent.right
 
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
-					font.pixelSize: Theme.font.size.body2
-					color: Theme.color.font.primary
+					font.pixelSize: Theme.font_size_body2
+					color: Theme.color_font_primary
 					text: root.totalPower ? root.totalPower.number : ""
 				}
 
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
-					font.pixelSize: Theme.font.size.body2
-					color: Theme.color.listItem.secondaryText
+					font.pixelSize: Theme.font_size_body2
+					color: Theme.color_listItem_secondaryText
 					text: root.totalPower ? root.totalPower.unit : ""
 				}
 			}

@@ -28,15 +28,15 @@ QtVirtualKeyboard.InputPanel {
 		return false
 	}
 
-	y: Qt.inputMethod.visible ? Theme.geometry.screen.height - root.height : Theme.geometry.screen.height
+	y: Qt.inputMethod.visible ? Theme.geometry_screen_height - root.height : Theme.geometry_screen_height
 	Behavior on y {
 		YAnimator {
-			duration: Theme.animation.inputPanel.slide.duration
+			duration: Theme.animation_inputPanel_slide_duration
 			easing.type: Easing.InOutQuad
 		}
 	}
 
-	width: Theme.geometry.screen.width
+	width: Theme.geometry_screen_width
 
 	states: State {
 		name: "visible"
@@ -52,7 +52,7 @@ QtVirtualKeyboard.InputPanel {
 	transitions: Transition {
 		NumberAnimation {
 			properties: "contentY,height"
-			duration: Theme.animation.inputPanel.slide.duration
+			duration: Theme.animation_inputPanel_slide_duration
 			easing.type: Easing.InOutQuad
 		}
 	}

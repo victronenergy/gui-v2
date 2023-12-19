@@ -39,7 +39,7 @@ Rectangle {
 
 			width: parent.width
 			height: parent.height
-			color: Theme.color.ok
+			color: Theme.color_ok
 			y: nextY
 
 			// don't use a behavior on Y
@@ -69,7 +69,7 @@ Rectangle {
 				id: anim
 				target: fgRect
 				easing.type: Easing.InOutQuad
-				duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration
+				duration: Theme.animation_briefPage_sidePanel_sliderValueChange_duration
 				onRunningChanged: fgRect.resetYBinding()
 			}
 		}

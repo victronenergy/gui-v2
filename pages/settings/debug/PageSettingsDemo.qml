@@ -188,13 +188,13 @@ Page {
 						width: 30
 						height: 30
 						radius: 15
-						color: Theme.color.ok
+						color: Theme.color_ok
 					},
 					Rectangle {
 						anchors.verticalCenter: parent.verticalCenter
 						width: 30
 						height: 30
-						color: Theme.color.warning
+						color: Theme.color_warning
 					}
 				]
 			}
@@ -206,7 +206,7 @@ Page {
 					ListLabel {
 						topPadding: 0
 						bottomPadding: 0
-						color: Theme.color.font.secondary
+						color: Theme.color_font_secondary
 						text: "Custom text label"
 					}
 				]

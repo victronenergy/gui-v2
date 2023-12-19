@@ -12,8 +12,8 @@ import Victron.Gauges
 Page {
 	id: root
 
-	property real _gaugeArcMargin: Theme.geometry.briefPage.edgeGauge.initialize.margin
-	property real _gaugeLabelMargin: Theme.geometry.briefPage.edgeGauge.label.initialize.margin
+	property real _gaugeArcMargin: Theme.geometry_briefPage_edgeGauge_initialize_margin
+	property real _gaugeLabelMargin: Theme.geometry_briefPage_edgeGauge_label_initialize_margin
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
 	readonly property string _inputsIconSource: {
@@ -29,7 +29,7 @@ Page {
 		return "qrc:/images/icon_input_24.svg"
 	}
 
-	backgroundColor: Theme.color.briefPage.background
+	backgroundColor: Theme.color_briefPage_background
 	fullScreenWhenIdle: true
 	animationEnabled: root.isCurrentPage && BackendConnection.applicationVisible && !Global.splashScreenVisible
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
@@ -42,9 +42,9 @@ Page {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.mainGauge.topMargin
+			topMargin: Theme.geometry_mainGauge_topMargin
 		}
-		width: Theme.geometry.mainGauge.size
+		width: Theme.geometry_mainGauge_size
 		height: width
 		x: sidePanel.x/2 - width/2
 		sourceComponent: Global.tanks.totalTankCount === 0 ? singleGauge : multiGauge
@@ -57,7 +57,7 @@ Page {
 		CircularMultiGauge {
 			model: GaugeModel {
 				sourceModel: Gauges.briefCentralGauges
-				maximumGaugeCount: Theme.geometry.briefPage.centerGauge.maximumGaugeCount
+				maximumGaugeCount: Theme.geometry_briefPage_centerGauge_maximumGaugeCount
 			}
 			animationEnabled: root.animationEnabled
 			labelOpacity: root._gaugeLabelOpacity
@@ -89,9 +89,9 @@ Page {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
+			topMargin: Theme.geometry_briefPage_edgeGauge_topMargin
 			left: parent.left
-			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
+			leftMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			right: mainGauge.left
 		}
 		// Show gauge even if there are no active AC inputs, so that the gauge visibility doesn't
@@ -102,7 +102,7 @@ Page {
 			alignment: Qt.AlignLeft | (leftLower.active ? Qt.AlignTop : Qt.AlignVCenter)
 			arcX: leftLower.active ? undefined : 10
 			direction: PathArc.Clockwise
-			startAngle: leftLower.active ? 270 : (270 - Theme.geometry.briefPage.largeEdgeGauge.maxAngle / 2)
+			startAngle: leftLower.active ? 270 : (270 - Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
 			animationEnabled: root.animationEnabled
 
 			// Gauge color changes only apply when there is a maximum value.
@@ -151,9 +151,9 @@ Page {
 
 		anchors {
 			top: leftEdge.active ? leftEdge.bottom : parent.top
-			topMargin: leftEdge.active ? Theme.geometry.briefPage.lowerGauge.topMargin : Theme.geometry.briefPage.edgeGauge.topMargin
+			topMargin: leftEdge.active ? Theme.geometry_briefPage_lowerGauge_topMargin : Theme.geometry_briefPage_edgeGauge_topMargin
 			left: parent.left
-			leftMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
+			leftMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			right: mainGauge.left
 		}
 		active: Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0
@@ -174,9 +174,9 @@ Page {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.briefPage.edgeGauge.topMargin
+			topMargin: Theme.geometry_briefPage_edgeGauge_topMargin
 			right: parent.right
-			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
+			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			left: mainGauge.right
 		}
 		active: !isNaN(Global.system.loads.acPower) || rightLower.active
@@ -206,9 +206,9 @@ Page {
 
 		anchors {
 			top: rightEdge.bottom
-			topMargin: Theme.geometry.briefPage.lowerGauge.topMargin
+			topMargin: Theme.geometry_briefPage_lowerGauge_topMargin
 			right: parent.right
-			rightMargin: Theme.geometry.briefPage.edgeGauge.horizontalMargin
+			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			left: mainGauge.right
 		}
 		active: !isNaN(Global.system.loads.dcPower)
@@ -237,9 +237,9 @@ Page {
 
 		anchors {
 			verticalCenter: mainGauge.verticalCenter
-			verticalCenterOffset: Theme.geometry.briefPage.sidePanel.verticalCenterOffset
+			verticalCenterOffset: Theme.geometry_briefPage_sidePanel_verticalCenterOffset
 		}
-		width: Theme.geometry.briefPage.sidePanel.width
+		width: Theme.geometry_briefPage_sidePanel_width
 		inputsIconSource: root._inputsIconSource
 		animationEnabled: root.animationEnabled && sidePanel.active
 
@@ -277,7 +277,7 @@ Page {
 			when: sidePanel.active
 			PropertyChanges {
 				target: sidePanel
-				x: root.width - sidePanel.width - Theme.geometry.page.content.horizontalMargin
+				x: root.width - sidePanel.width - Theme.geometry_page_content_horizontalMargin
 				opacity: 1
 			}
 			PropertyChanges {
@@ -297,16 +297,16 @@ Page {
 					NumberAnimation {
 						target: root
 						properties: "_gaugeArcOpacity,_gaugeArcMargin"
-						duration: Theme.animation.briefPage.gaugeArc.initialize.duration
+						duration: Theme.animation_briefPage_gaugeArc_initialize_duration
 					}
 					SequentialAnimation {
 						PauseAnimation {
-							duration: Theme.animation.briefPage.gaugeLabel.initialize.delayedStart.duration
+							duration: Theme.animation_briefPage_gaugeLabel_initialize_delayedStart_duration
 						}
 						NumberAnimation {
 							target: root
 							properties: "_gaugeLabelOpacity,_gaugeLabelMargin"
-							duration: Theme.animation.briefPage.gaugeLabel.initialize.duration
+							duration: Theme.animation_briefPage_gaugeLabel_initialize_duration
 						}
 					}
 				}
@@ -319,13 +319,13 @@ Page {
 				NumberAnimation {
 					target: root
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
-					duration: Theme.animation.briefPage.edgeGauge.fade.duration
+					duration: Theme.animation_briefPage_edgeGauge_fade_duration
 				}
 				ScriptAction { script: sidePanel.visible = true }
 				NumberAnimation {
 					target: sidePanel
 					properties: 'x,opacity'
-					duration: Theme.animation.briefPage.sidePanel.slide.duration
+					duration: Theme.animation_briefPage_sidePanel_slide_duration
 					easing.type: Easing.InQuad
 				}
 			}
@@ -337,14 +337,14 @@ Page {
 				NumberAnimation {
 					target: sidePanel
 					properties: 'x,opacity'
-					duration: Theme.animation.briefPage.sidePanel.slide.duration
+					duration: Theme.animation_briefPage_sidePanel_slide_duration
 					easing.type: Easing.InQuad
 				}
 				ScriptAction { script: sidePanel.visible = false }
 				NumberAnimation {
 					target: root
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
-					duration: Theme.animation.briefPage.edgeGauge.fade.duration
+					duration: Theme.animation_briefPage_edgeGauge_fade_duration
 				}
 			}
 		}

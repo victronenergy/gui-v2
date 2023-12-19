@@ -41,9 +41,9 @@ ListItem {
 						   (separator.visible
 							? implicitWidth + root.content.spacing
 							: implicitWidth),
-						   Theme.geometry.veBusAlarm.minimumDelegateWidth)
-				font.pixelSize: Theme.font.size.body2
-				color: Theme.color.listItem.secondaryText
+						   Theme.geometry_veBusAlarm_minimumDelegateWidth)
+				font.pixelSize: Theme.font_size_body2
+				color: Theme.color_listItem_secondaryText
 				text: modelData === undefined ? "--" : modelData.displayText
 				horizontalAlignment: numOfPhases === 1 ? Text.AlignRight : Text.AlignHCenter
 				elide: Text.ElideRight
@@ -55,9 +55,9 @@ ListItem {
 						right: parent.right
 						rightMargin: -root.content.spacing / 2
 					}
-					width: Theme.geometry.listItem.separator.width
+					width: Theme.geometry_listItem_separator_width
 					height: parent.implicitHeight
-					color: Theme.color.listItem.separator
+					color: Theme.color_listItem_separator
 					visible: model.index !== repeater.count - 1 && repeater.itemAt(index + 1).visible
 				}
 			}

@@ -11,7 +11,7 @@ ControlValue {
 
 	property alias button: button
 
-	implicitHeight: Theme.geometry.controlCard.mediumItem.height
+	implicitHeight: Theme.geometry_controlCard_mediumItem_height
 
 	signal clicked()
 
@@ -19,7 +19,7 @@ ControlValue {
 		id: button
 
 		anchors.verticalCenter: parent.verticalCenter
-		font.pixelSize: Theme.font.size.body2
+		font.pixelSize: Theme.font_size_body2
 		down: mouseArea.containsPress || pressed
 
 		onClicked: root.clicked()

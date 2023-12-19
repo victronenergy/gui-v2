@@ -48,8 +48,8 @@ ListItem {
 		property bool _accepted
 
 		width: Math.max(
-				Theme.geometry.listItem.textField.minimumWidth,
-				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry.listItem.textField.maximumWidth))
+				Theme.geometry_listItem_textField_minimumWidth,
+				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry_listItem_textField_maximumWidth))
 		enabled: root.enabled
 		text: dataValid ? dataValue : ""
 
@@ -79,7 +79,7 @@ ListItem {
 		ColorAnimation on color {
 			id: revertedAnimation
 
-			from: Theme.color.orange
+			from: Theme.color_orange
 			duration: 400
 		}
 

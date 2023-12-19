@@ -9,10 +9,10 @@ import Victron.VenusOS
 Label {
 	width: parent ? parent.width : 0
 	height: visible ? implicitHeight : 0
-	topPadding: visible ? Theme.geometry.listItem.content.verticalMargin : 0
-	bottomPadding: visible ? Theme.geometry.listItem.content.verticalMargin : 0
-	leftPadding: Theme.geometry.listItem.content.horizontalMargin
-	rightPadding: Theme.geometry.listItem.content.horizontalMargin
-	font.pixelSize: Theme.font.size.body1
+	topPadding: visible ? Theme.geometry_listItem_content_verticalMargin : 0
+	bottomPadding: visible ? Theme.geometry_listItem_content_verticalMargin : 0
+	leftPadding: Theme.geometry_listItem_content_horizontalMargin
+	rightPadding: Theme.geometry_listItem_content_horizontalMargin
+	font.pixelSize: Theme.font_size_body1
 	wrapMode: Text.Wrap
 }

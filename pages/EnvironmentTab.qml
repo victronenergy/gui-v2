@@ -18,9 +18,9 @@ Flickable {
 	height: parent.height
 	contentWidth: contentRow.width
 	leftMargin: contentRow.width > width
-			? Theme.geometry.levelsPage.environment.minimumHorizontalMargin
+			? Theme.geometry_levelsPage_environment_minimumHorizontalMargin
 			: (width - contentRow.width) / 2
-	rightMargin: Theme.geometry.levelsPage.environment.minimumHorizontalMargin
+	rightMargin: Theme.geometry_levelsPage_environment_minimumHorizontalMargin
 	boundsBehavior: Flickable.StopAtBounds
 	contentX: -leftMargin   // shouldn't be needed, but initial value may be incorrect due to delegate resizing
 
@@ -34,7 +34,7 @@ Flickable {
 				return 0
 			}
 			// Find a spacing between panels that is within the min/max spacing range.
-			const availableWidth = root.width - Theme.geometry.levelsPage.environment.minimumHorizontalMargin*2
+			const availableWidth = root.width - Theme.geometry_levelsPage_environment_minimumHorizontalMargin*2
 			let panelWidths = 0
 			for (let i = 0; i < levelsRepeater.count; ++i) {
 				const item = levelsRepeater.itemAt(i)
@@ -42,8 +42,8 @@ Flickable {
 					panelWidths += item.width
 				}
 			}
-			let candidateSpacing = Math.max(Theme.geometry.levelsPage.environment.minimumSpacing,
-					Math.min(Theme.geometry.levelsPage.environment.maximumSpacing, (availableWidth - panelWidths) / (levelsRepeater.count-1)))
+			let candidateSpacing = Math.max(Theme.geometry_levelsPage_environment_minimumSpacing,
+					Math.min(Theme.geometry_levelsPage_environment_maximumSpacing, (availableWidth - panelWidths) / (levelsRepeater.count-1)))
 
 			// If the spacing is larger than the horizontal margin, use the horizontal margin as
 			// the spacing instead, otherwise looks odd when panels are pushed to edges.
@@ -52,7 +52,7 @@ Flickable {
 			if (candidateSpacing > candidateHorizontalMargin) {
 				candidateSpacing = candidateHorizontalMargin
 			}
-			return Math.max(Theme.geometry.levelsPage.environment.minimumSpacing, candidateSpacing)
+			return Math.max(Theme.geometry_levelsPage_environment_minimumSpacing, candidateSpacing)
 		}
 
 		Repeater {
@@ -67,7 +67,7 @@ Flickable {
 					}
 					// If available area is not big enough to fit all the panels at their max width,
 					// use a compact (reduced) width for two-gauge panels.
-					const availableAreaWidth = root.width - Theme.geometry.levelsPage.environment.minimumHorizontalMargin*2
+					const availableAreaWidth = root.width - Theme.geometry_levelsPage_environment_minimumHorizontalMargin*2
 					let panelWidths = 0
 					for (let i = 0; i < levelsRepeater.count; ++i) {
 						const item = levelsRepeater.itemAt(i)
@@ -75,7 +75,7 @@ Flickable {
 							panelWidths += item.expandedWidth
 						}
 					}
-					const requiredAreaWidth = panelWidths + ((levelsRepeater.count-1) * Theme.geometry.levelsPage.environment.minimumSpacing)
+					const requiredAreaWidth = panelWidths + ((levelsRepeater.count-1) * Theme.geometry_levelsPage_environment_minimumSpacing)
 					return requiredAreaWidth > availableAreaWidth
 							? VenusOS.EnvironmentGaugePanel_Size_Compact
 							: VenusOS.EnvironmentGaugePanel_Size_Expanded
@@ -99,16 +99,16 @@ Flickable {
 		id: temperatureGradient
 
 		GradientStop {
-			position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position1
-			color: Theme.color.temperature1
+			position: Theme.geometry_levelsPage_environment_temperatureGauge_gradient_position1
+			color: Theme.color_temperature1
 		}
 		GradientStop {
-			position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position2
-			color: Theme.color.temperature2
+			position: Theme.geometry_levelsPage_environment_temperatureGauge_gradient_position2
+			color: Theme.color_temperature2
 		}
 		GradientStop {
-			position: Theme.geometry.levelsPage.environment.temperatureGauge.gradient.position3
-			color: Theme.color.temperature3
+			position: Theme.geometry_levelsPage_environment_temperatureGauge_gradient_position3
+			color: Theme.color_temperature3
 		}
 	}
 
@@ -116,16 +116,16 @@ Flickable {
 		id: humidityGradient
 
 		GradientStop {
-			position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position1
-			color: Theme.color.humidity1
+			position: Theme.geometry_levelsPage_environment_humidityGauge_gradient_position1
+			color: Theme.color_humidity1
 		}
 		GradientStop {
-			position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position2
-			color: Theme.color.humidity2
+			position: Theme.geometry_levelsPage_environment_humidityGauge_gradient_position2
+			color: Theme.color_humidity2
 		}
 		GradientStop {
-			position: Theme.geometry.levelsPage.environment.humidityGauge.gradient.position3
-			color: Theme.color.humidity3
+			position: Theme.geometry_levelsPage_environment_humidityGauge_gradient_position3
+			color: Theme.color_humidity3
 		}
 	}
 }

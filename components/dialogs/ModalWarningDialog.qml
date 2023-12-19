@@ -28,29 +28,29 @@ ModalDialog {
 			id: alarmIcon
 			anchors {
 				top: parent.top
-				topMargin: Theme.geometry.modalWarningDialog.alarmIcon.topMargin
+				topMargin: Theme.geometry_modalWarningDialog_alarmIcon_topMargin
 				horizontalCenter: parent.horizontalCenter
 			}
 
-			sourceSize.width: Theme.geometry.modalWarningDialog.alarmIcon.width
-			sourceSize.height: Theme.geometry.modalWarningDialog.alarmIcon.width
+			sourceSize.width: Theme.geometry_modalWarningDialog_alarmIcon_width
+			sourceSize.height: Theme.geometry_modalWarningDialog_alarmIcon_width
 			source: "qrc:/images/icon_alarm_48.svg"
-			color: Theme.color.red
+			color: Theme.color_red
 		}
 
 		Label {
 			id: titleLabel
 			anchors {
 				top: alarmIcon.bottom
-				topMargin: Theme.geometry.modalWarningDialog.title.spacing
+				topMargin: Theme.geometry_modalWarningDialog_title_spacing
 				left: parent.left
-				leftMargin: Theme.geometry.modalWarningDialog.title.horizontalMargin
+				leftMargin: Theme.geometry_modalWarningDialog_title_horizontalMargin
 				right: parent.right
-				rightMargin: Theme.geometry.modalWarningDialog.title.horizontalMargin
+				rightMargin: Theme.geometry_modalWarningDialog_title_horizontalMargin
 			}
 
 			text: root.title
-			font.pixelSize: Theme.font.size.h1
+			font.pixelSize: Theme.font_size_h1
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			wrapMode: Text.Wrap
@@ -60,18 +60,18 @@ ModalDialog {
 			id: consequencesLabel
 			anchors {
 				top: titleLabel.bottom
-				topMargin: Theme.geometry.modalWarningDialog.description.spacing
+				topMargin: Theme.geometry_modalWarningDialog_description_spacing
 				left: parent.left
-				leftMargin: Theme.geometry.modalWarningDialog.description.horizontalMargin
+				leftMargin: Theme.geometry_modalWarningDialog_description_horizontalMargin
 				right: parent.right
-				rightMargin: Theme.geometry.modalWarningDialog.description.horizontalMargin
+				rightMargin: Theme.geometry_modalWarningDialog_description_horizontalMargin
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry.modalWarningDialog.description.spacing
+				bottomMargin: Theme.geometry_modalWarningDialog_description_spacing
 			}
 
 			horizontalAlignment: Text.AlignHCenter
 			text: root.description
-			font.pixelSize: Theme.font.size.body2
+			font.pixelSize: Theme.font_size_body2
 			wrapMode: Text.Wrap
 			fontSizeMode: Text.Fit
 		}

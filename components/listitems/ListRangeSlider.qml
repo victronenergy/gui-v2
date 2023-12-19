@@ -39,7 +39,7 @@ ListItem {
 		SettingsRangeSlider {
 			id: slider
 
-			width: Theme.geometry.listItem.slider.width
+			width: Theme.geometry_listItem_slider_width
 			first.value: {
 				const v = isNaN(firstDataPoint.value) ? 0 : firstDataPoint.value
 				return root.fromSourceValue !== undefined ? root.fromSourceValue(v) : v

@@ -46,7 +46,7 @@ Page {
 	// calculations are also only done once; otherwise, the recalculation/repainting of the paths
 	//  and path animations is very expensive and creates jerky animations on device.
 	function _resetWidgets() {
-		width = Theme.geometry.screen.width
+		width = Theme.geometry_screen_width
 
 		// Reset the left/right widgets that should be shown
 		for (let widgetType in _createdWidgets) {
@@ -144,21 +144,21 @@ Page {
 			expandedWidgetHeights += widget.getExpandedHeight(widget.size)
 		}
 
-		const compactPageHeight = Theme.geometry.screen.height
-				- Theme.geometry.statusBar.height
-				- Theme.geometry.navigationBar.height
-				- Theme.geometry.overviewPage.layout.compact.topMargin
-				- Theme.geometry.overviewPage.layout.compact.bottomMargin
-		if (compactPageHeight !== Theme.geometry.overviewPage.widget.compact.xl.height) {
+		const compactPageHeight = Theme.geometry_screen_height
+				- Theme.geometry_statusBar_height
+				- Theme.geometry_navigationBar_height
+				- Theme.geometry_overviewPage_layout_compact_topMargin
+				- Theme.geometry_overviewPage_layout_compact_bottomMargin
+		if (compactPageHeight !== Theme.geometry_overviewPage_widget_compact_xl_height) {
 			console.log("Warning: theme constants need to be updated.")
 		}
 		const compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
 
-		const expandedPageHeight = Theme.geometry.screen.height
-				- Theme.geometry.statusBar.height
-				- Theme.geometry.overviewPage.layout.expanded.topMargin
-				- Theme.geometry.overviewPage.layout.expanded.bottomMargin
-		if (expandedPageHeight !== Theme.geometry.overviewPage.widget.expanded.xl.height) {
+		const expandedPageHeight = Theme.geometry_screen_height
+				- Theme.geometry_statusBar_height
+				- Theme.geometry_overviewPage_layout_expanded_topMargin
+				- Theme.geometry_overviewPage_layout_expanded_bottomMargin
+		if (expandedPageHeight !== Theme.geometry_overviewPage_widget_expanded_xl_height) {
 			console.log("Warning: theme constants need to be updated.")
 		}
 		const expandedWidgetsTopMargin = Math.max(0, (expandedPageHeight - expandedWidgetHeights) / Math.max(1, widgets.length - 1))
@@ -182,14 +182,14 @@ Page {
 		for (i = 0; i < widgets.length; ++i) {
 			widget = widgets[i]
 			if (widgets === _leftWidgets) {
-				widget.width = Theme.geometry.overviewPage.widget.leftWidgetWidth
-				widget.x = Theme.geometry.page.content.horizontalMargin
+				widget.width = Theme.geometry_overviewPage_widget_leftWidgetWidth
+				widget.x = Theme.geometry_page_content_horizontalMargin
 			} else if (widgets === _centerWidgets) {
-				widget.width = Theme.geometry.overviewPage.widget.centerWidgetWidth
+				widget.width = Theme.geometry_overviewPage_widget_centerWidgetWidth
 				widget.x = root.width/2 - widget.width/2
 			} else if (widgets === _rightWidgets) {
-				widget.width = Theme.geometry.overviewPage.widget.rightWidgetWidth
-				widget.x = root.width - widget.width - Theme.geometry.page.content.horizontalMargin
+				widget.width = Theme.geometry_overviewPage_widget_rightWidgetWidth
+				widget.x = root.width - widget.width - Theme.geometry_page_content_horizontalMargin
 			}
 		}
 	}
@@ -332,19 +332,19 @@ Page {
 			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
 		const power = connectorWidget.startWidget.input.power
-		if (isNaN(power) || Math.abs(power) <= Theme.geometry.overviewPage.connector.animationPowerThreshold) {
+		if (isNaN(power) || Math.abs(power) <= Theme.geometry_overviewPage_connector_animationPowerThreshold) {
 			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
 
 		if (connectorWidget.endWidget === veBusDeviceWidget) {
 			// For AC inputs, positive power means energy is flowing towards inverter/charger,
 			// and negative power means energy is flowing towards the input.
-			return power > Theme.geometry.overviewPage.connector.animationPowerThreshold
+			return power > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_EndToStart
 		} else if (connectorWidget.endWidget === batteryWidget) {
 			// For DC inputs, positive power means energy is flowing towards battery.
-			return power > Theme.geometry.overviewPage.connector.animationPowerThreshold
+			return power > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		} else {
@@ -552,7 +552,7 @@ Page {
 				// Energy flows to Inverter/Charger if there is any PV Inverter power (i.e. AC)
 				animationMode: root.isCurrentPage
 						&& !isNaN(Global.system.solar.acPower)
-						&& Math.abs(Global.system.solar.acPower || 0) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+						&& Math.abs(Global.system.solar.acPower || 0) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -572,7 +572,7 @@ Page {
 				// Energy flows to battery if there is any PV Charger power (i.e. DC, so solar is charging battery)
 				animationMode: root.isCurrentPage
 						&& !isNaN(Global.system.solar.dcPower)
-						&& Math.abs(Global.system.solar.dcPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+						&& Math.abs(Global.system.solar.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -621,7 +621,7 @@ Page {
 		animationMode: root.isCurrentPage
 				&& !isNaN(Global.system.loads.acPower)
 				&& Global.system.loads.acPower > 0
-				&& Math.abs(Global.system.loads.acPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+				&& Math.abs(Global.system.loads.acPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -640,7 +640,7 @@ Page {
 		// If vebus power is negative: battery is discharging, so energy flows to inverter/charger.
 		animationMode: root.isCurrentPage
 				&& !isNaN(Global.system.veBus.power)
-				&& Math.abs(Global.system.veBus.power) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+				&& Math.abs(Global.system.veBus.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 						? (Global.system.veBus.power > 0
 								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
@@ -683,7 +683,7 @@ Page {
 		animationMode: root.isCurrentPage
 				&& !isNaN(Global.system.loads.dcPower)
 				&& Global.system.loads.dcPower > 0
-				&& Math.abs(Global.system.loads.dcPower) > Theme.geometry.overviewPage.connector.animationPowerThreshold
+				&& Math.abs(Global.system.loads.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -746,7 +746,7 @@ Page {
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
-					? Global.evChargers.power > Theme.geometry.overviewPage.connector.animationPowerThreshold
+					? Global.evChargers.power > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					  ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					  : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated

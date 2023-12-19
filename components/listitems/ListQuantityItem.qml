@@ -25,7 +25,7 @@ ListItem {
 			id: quantityLabel
 
 			anchors.verticalCenter: parent.verticalCenter
-			font.pixelSize: Theme.font.size.body2
+			font.pixelSize: Theme.font_size_body2
 			value: dataPoint.value === undefined ? NaN : dataPoint.value
 		}
 	]

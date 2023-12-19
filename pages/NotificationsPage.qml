@@ -16,10 +16,10 @@ Page {
 		id: historicalNotificationsView
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.notificationsPage.topMargin - Theme.geometry.statusBar.height
+			topMargin: Theme.geometry_notificationsPage_topMargin - Theme.geometry_statusBar_height
 			bottom: parent.bottom
 			left: parent.left
-			leftMargin: Theme.geometry.notificationsPage.horizontalMargin
+			leftMargin: Theme.geometry_notificationsPage_horizontalMargin
 			right: parent.right
 		}
 		header: Item {
@@ -40,12 +40,12 @@ Page {
 
 				anchors {
 					top: activeNotificationsView.bottom
-					topMargin: Theme.geometry.notificationsPage.checkmark.topMargin - Theme.geometry.statusBar.height
+					topMargin: Theme.geometry_notificationsPage_checkmark_topMargin - Theme.geometry_statusBar_height
 					left: parent.left
-					leftMargin: Theme.geometry.notificationsPage.checkmark.leftMargin - Theme.geometry.notificationsPage.horizontalMargin
+					leftMargin: Theme.geometry_notificationsPage_checkmark_leftMargin - Theme.geometry_notificationsPage_horizontalMargin
 				}
 				visible: Global.notifications.activeModel.count === 0
-				spacing: Theme.geometry.notificationsPage.checkmark.spacing
+				spacing: Theme.geometry_notificationsPage_checkmark_spacing
 
 				CP.ColorImage {
 					anchors.top: parent.top
@@ -53,8 +53,8 @@ Page {
 				}
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
-					color: Theme.color.notificationsPage.text.color
-					font.pixelSize: Theme.font.size.body3
+					color: Theme.color_notificationsPage_text_color
+					font.pixelSize: Theme.font_size_body3
 
 					//% "No current alerts"
 					text: qsTrId("notifications_no_current_alerts")
@@ -66,13 +66,13 @@ Page {
 					top: Global.notifications.activeModel.count === 0
 						? noCurrentAlerts.bottom : activeNotificationsView.bottom
 					topMargin: Global.notifications.activeModel.count === 0
-						? Theme.geometry.notificationsPage.history.topMargin : Theme.geometry.notificationsPage.delegate.topMargin
+						? Theme.geometry_notificationsPage_history_topMargin : Theme.geometry_notificationsPage_delegate_topMargin
 					left: parent.left
 				}
-				bottomPadding: Theme.geometry.notificationsPage.history.bottomPadding
+				bottomPadding: Theme.geometry_notificationsPage_history_bottomPadding
 
 				visible: historicalNotificationsView.count !== 0
-				color: Theme.color.notificationsPage.text.color
+				color: Theme.color_notificationsPage_text_color
 				text: CommonWords.history
 			}
 		}
@@ -80,14 +80,14 @@ Page {
 		add: Transition {
 			SequentialAnimation {
 				PropertyAction { property: "opacity"; value: 0}
-				PauseAnimation { duration: Theme.animation.notificationsPage.delegate.displaced.duration }
-				OpacityAnimator { from: 0; to: 1.0; duration: Theme.animation.notificationsPage.delegate.opacity.duration }
+				PauseAnimation { duration: Theme.animation_notificationsPage_delegate_displaced_duration }
+				OpacityAnimator { from: 0; to: 1.0; duration: Theme.animation_notificationsPage_delegate_opacity_duration }
 			}
 		}
 		displaced: Transition {
 			ParallelAnimation {
-				XAnimator { duration: Theme.animation.notificationsPage.delegate.displaced.duration }
-				YAnimator { duration: Theme.animation.notificationsPage.delegate.displaced.duration }
+				XAnimator { duration: Theme.animation_notificationsPage_delegate_displaced_duration }
+				YAnimator { duration: Theme.animation_notificationsPage_delegate_displaced_duration }
 			}
 		}
 		ScrollBar.vertical: ScrollBar {
@@ -100,7 +100,7 @@ Page {
 			bottom: parent.bottom
 			left: parent.left
 			right: parent.right
-			rightMargin: Theme.geometry.notificationsPage.delegate.rightMargin
+			rightMargin: Theme.geometry_notificationsPage_delegate_rightMargin
 		}
 	}
 }

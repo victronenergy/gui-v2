@@ -22,13 +22,13 @@ Column {
 				id: phaseLabel
 
 				text: model.name
-				color: Theme.color.font.secondary
+				color: Theme.color_font_secondary
 			}
 
 			ElectricalQuantityLabel {
 				anchors.right: parent.right
 				dataObject: model
-				valueColor: Theme.color.font.secondary
+				valueColor: Theme.color_font_secondary
 			}
 		}
 	}

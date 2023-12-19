@@ -20,8 +20,8 @@ Item {
 	Image {
 		id: icon
 
-		width: Theme.geometry.generatorIconLabel.icon.width
-		height: Theme.geometry.generatorIconLabel.icon.width
+		width: Theme.geometry_generatorIconLabel_icon_width
+		height: Theme.geometry_generatorIconLabel_icon_width
 		source: {
 			if (!root.generator || root.generator.state === VenusOS.Generators_RunningBy_NotRunning) {
 				return ""
@@ -46,7 +46,7 @@ Item {
 				? "--:--"
 				: Utils.formatAsHHMMSS(root.generator.runtime)
 			  : ""
-		font.pixelSize: Theme.font.size.body2
-		color: root.generator && root.generator.runtime > 0 ? Theme.color.font.primary : Theme.color.font.secondary
+		font.pixelSize: Theme.font_size_body2
+		color: root.generator && root.generator.runtime > 0 ? Theme.color_font_primary : Theme.color_font_secondary
 	}
 }

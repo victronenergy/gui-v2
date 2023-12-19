@@ -16,12 +16,12 @@ Column {
 	property bool animationEnabled
 	property string inputsIconSource
 
-	spacing: Theme.geometry.briefPage.sidePanel.columnSpacing
+	spacing: Theme.geometry_briefPage_sidePanel_columnSpacing
 
 	// TODO connect weather forecast to data backend
 	Column {
 		width: parent.width
-		spacing: Theme.geometry.briefPage.sidePanel.header.spacing
+		spacing: Theme.geometry_briefPage_sidePanel_header_spacing
 
 		Row {
 			width: parent.width
@@ -30,7 +30,7 @@ Column {
 				id: todayTemperature
 
 				anchors.verticalCenter: parent.verticalCenter
-				font.pixelSize: Theme.font.briefPage.sidePanel.forecastRow.today.temperature.size
+				font.pixelSize: Theme.font_briefPage_sidePanel_forecastRow_today_temperature_size
 				text: "10°"
 			}
 			CP.ColorImage {
@@ -38,25 +38,25 @@ Column {
 
 				anchors.verticalCenter: parent.verticalCenter
 				source: "qrc:/images/cloud.svg"
-				color: Theme.color.font.primary
+				color: Theme.color_font_primary
 			}
 			Label {
 				anchors.baseline: todayTemperature.baseline
 				width: parent.width - todayTemperature.width - todayIcon.width
 				horizontalAlignment: Text.AlignRight
-				font.pixelSize: Theme.font.briefPage.sidePanel.forecastRow.today.date.size
+				font.pixelSize: Theme.font_briefPage_sidePanel_forecastRow_today_date_size
 				text: Qt.formatDate(ClockTime.currentDateTime, "ddd d MMM")
 			}
 		}
 
 		SeparatorBar {
 			width: parent.width
-			height: Theme.geometry.briefPage.sidePanel.separatorBar.height
-			color: Theme.color.briefPage.sidePanel.forecast.separator
+			height: Theme.geometry_briefPage_sidePanel_separatorBar_height
+			color: Theme.color_briefPage_sidePanel_forecast_separator
 		}
 
 		Row {
-			spacing: Theme.geometry.briefPage.sidePanel.forecastRow.spacing
+			spacing: Theme.geometry_briefPage_sidePanel_forecastRow_spacing
 
 			WeatherDetails {
 				day: "Mon"
@@ -94,7 +94,7 @@ Column {
 
 			anchors.top: solarHeader.bottom
 			dataObject: Global.system.solar
-			font.pixelSize: Theme.font.briefPage.quantityLabel.size
+			font.pixelSize: Theme.font_briefPage_quantityLabel_size
 		}
 
 		Loader {
@@ -105,7 +105,7 @@ Column {
 				bottomMargin: solarQuantityLabel.bottomPadding
 			}
 			active: Global.solarChargers.model.count > 0 && Global.pvInverters.model.count === 0
-			width: Theme.geometry.briefPage.sidePanel.solarYield.width
+			width: Theme.geometry_briefPage_sidePanel_solarYield_width
 			sourceComponent: SolarYieldGraph {}
 		}
 	}
@@ -114,7 +114,7 @@ Column {
 		id: generatorColumn
 
 		width: parent.width
-		spacing: Theme.geometry.briefPage.sidePanel.generator.columnSpacing
+		spacing: Theme.geometry_briefPage_sidePanel_generator_columnSpacing
 		visible: !!generatorQuantityLabel.dataObject
 
 		Item {
@@ -133,7 +133,7 @@ Column {
 
 				anchors.top: generatorHeader.bottom
 				dataObject: Global.acInputs.generatorInput
-				font.pixelSize: Theme.font.briefPage.quantityLabel.size
+				font.pixelSize: Theme.font_briefPage_quantityLabel_size
 			}
 
 			GeneratorIconLabel {
@@ -149,7 +149,7 @@ Column {
 		Slider {
 			enabled: false // not interactive
 			width: parent.width
-			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
+			height: Theme.geometry_briefPage_sidePanel_generator_slider_height
 			value: Global.acInputs.generatorInput ? Global.acInputs.generatorInput.power : 0
 			showHandle: false
 			animationEnabled: root.animationEnabled
@@ -158,7 +158,7 @@ Column {
 
 	Column {
 		width: parent.width
-		spacing: Theme.geometry.briefPage.sidePanel.generator.columnSpacing
+		spacing: Theme.geometry_briefPage_sidePanel_generator_columnSpacing
 		visible: !generatorColumn.visible && !(isNaN(Global.acInputs.power) && isNaN(Global.dcInputs.power))
 
 		Item {
@@ -178,7 +178,7 @@ Column {
 
 				anchors.top: gridHeader.bottom
 				value: root.visible ? Units.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : 0
-				font.pixelSize: Theme.font.briefPage.quantityLabel.size
+				font.pixelSize: Theme.font_briefPage_quantityLabel_size
 			}
 
 			LoadGraph {
@@ -229,8 +229,8 @@ exported power v  0.4 |   /
 					// If we show export power, the minimum scale of the y axis goes from -1000W to +1000W
 					// If we don't show export power, the minimum scale of the y axis goes from 0W to +1000W
 					const minimumRangeWatts = graphShowsExportPower
-							? Theme.animation.loadGraph.minimumRange.watts * 2
-							: Theme.animation.loadGraph.minimumRange.watts
+							? Theme.animation_loadGraph_minimumRange_watts * 2
+							: Theme.animation_loadGraph_minimumRange_watts
 					const peakPowerImportedOrExported = Math.max(Math.abs(inputsPower.maximumSeen), Math.abs(inputsPower.minimumSeen))
 					const graphPowerRange =  graphShowsExportPower // This represents the difference in power between y=0 and y=1 on the graph
 							? Math.max(2 * peakPowerImportedOrExported, minimumRangeWatts)
@@ -288,18 +288,18 @@ exported power v  0.4 |   /
 				initialModelValue: graphShowsExportPower ? 0.5 : 0.0
 				warningThreshold: 0.5
 				belowThresholdFillColor1: graphShowsExportPower
-										  ? Theme.color.briefPage.background
-										  : Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor1
+										  ? Theme.color_briefPage_background
+										  : Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor1
 				belowThresholdFillColor2: graphShowsExportPower
-										  ? Theme.color.briefPage.background
-										  : Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor2
+										  ? Theme.color_briefPage_background
+										  : Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor2
 				belowThresholdBackgroundColor1: graphShowsExportPower
-												? Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor1
-												: Theme.color.briefPage.background
+												? Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor1
+												: Theme.color_briefPage_background
 				belowThresholdBackgroundColor2: graphShowsExportPower
-												? Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor2
-												: Theme.color.briefPage.background
-				horizontalGradientColor1: Theme.color.briefPage.background
+												? Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor2
+												: Theme.color_briefPage_background
+				horizontalGradientColor1: Theme.color_briefPage_background
 				horizontalGradientColor2: "transparent"
 
 				SequentialAnimation {
@@ -310,7 +310,7 @@ exported power v  0.4 |   /
 						property: "offsetFraction"
 						from: 0.0
 						to: 1.0
-						duration: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
+						duration: Theme.geometry_briefPage_sidePanel_loadGraph_intervalMs
 					}
 					ScriptAction {
 						script: gridGraph.addNewValue()
@@ -323,7 +323,7 @@ exported power v  0.4 |   /
 
 			enabled: false // not interactive
 			width: parent.width
-			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
+			height: Theme.geometry_briefPage_sidePanel_generator_slider_height
 			value: gridGraph.normalizedPower || 0
 			showHandle: false
 			animationEnabled: root.animationEnabled
@@ -332,7 +332,7 @@ exported power v  0.4 |   /
 
 	Column {
 		width: parent.width
-		spacing: Theme.geometry.briefPage.sidePanel.loads.columnSpacing
+		spacing: Theme.geometry_briefPage_sidePanel_loads_columnSpacing
 
 		Item {
 			width: parent.width
@@ -351,7 +351,7 @@ exported power v  0.4 |   /
 
 				anchors.top: loadsHeader.bottom
 				dataObject: Global.system.loads
-				font.pixelSize: Theme.font.briefPage.quantityLabel.size
+				font.pixelSize: Theme.font_briefPage_quantityLabel_size
 			}
 
 			LoadGraph {
@@ -371,7 +371,7 @@ exported power v  0.4 |   /
 						property: "offsetFraction"
 						from: 0.0
 						to: 1.0
-						duration: Theme.geometry.briefPage.sidePanel.loadGraph.intervalMs
+						duration: Theme.geometry_briefPage_sidePanel_loadGraph_intervalMs
 					}
 					ScriptAction {
 						script: loadGraph.addValue(loadsPower.valueAsRatio)
@@ -383,10 +383,10 @@ exported power v  0.4 |   /
 		Slider {
 			enabled: false // not interactive
 			width: parent.width
-			height: Theme.geometry.briefPage.sidePanel.generator.slider.height
+			height: Theme.geometry_briefPage_sidePanel_generator_slider_height
 			value: loadsPower.valueAsRatio
-			highlightColor: Theme.color.warning
-			grooveColor: Theme.color.darkWarning
+			highlightColor: Theme.color_warning
+			grooveColor: Theme.color_darkWarning
 			showHandle: false
 			animationEnabled: root.animationEnabled
 		}

@@ -16,7 +16,7 @@ Row {
 	property var inputPhases
 	property var outputPhases
 
-	spacing: Theme.geometry.vebusDeviceListPage.quantityTable.row.spacing
+	spacing: Theme.geometry_vebusDeviceListPage_quantityTable_row_spacing
 
 	ThreePhaseQuantityTable {
 		numberOfPhases: root.numberOfPhases

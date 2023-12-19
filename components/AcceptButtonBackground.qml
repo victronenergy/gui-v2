@@ -11,7 +11,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property color color: Theme.color.dimGreen
+	property color color: Theme.color_dimGreen
 
 	signal slidingAnimationFinished()
 
@@ -35,7 +35,7 @@ Item {
 			property: "width"
 			from: 1
 			to: leftRect.width
-			duration: Theme.animation.acceptButtonBackground.expand.duration
+			duration: Theme.animation_acceptButtonBackground_expand_duration
 		}
 
 		ScriptAction {
@@ -55,7 +55,7 @@ Item {
 			bottom: parent.bottom
 			left: parent.left
 			right: parent.right
-			rightMargin: Theme.geometry.button.radius
+			rightMargin: Theme.geometry_button_radius
 		}
 		color: root.color
 
@@ -75,7 +75,7 @@ Item {
 		anchors {
 			top: parent.top
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.button.radius
+			bottomMargin: Theme.geometry_button_radius
 			left: leftRect.right
 			right: parent.right
 		}
@@ -88,8 +88,8 @@ Item {
 			bottom: parent.bottom
 			right: parent.right
 		}
-		width: Theme.geometry.button.radius
-		height: Theme.geometry.button.radius
+		width: Theme.geometry_button_radius
+		height: Theme.geometry_button_radius
 		clip: true
 
 		Rectangle {
@@ -99,7 +99,7 @@ Item {
 			}
 			width: 2 * parent.width
 			height: 2 * parent.width
-			radius: Theme.geometry.button.radius
+			radius: Theme.geometry_button_radius
 			color: root.color
 		}
 	}

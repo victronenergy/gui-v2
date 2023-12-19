@@ -27,7 +27,7 @@ Page {
 
 		delegate: Loader {
 			width: parent ? parent.width : 0
-			height: Math.max(item ? item.implicitHeight : 0, Theme.geometry.listItem.height)
+			height: Math.max(item ? item.implicitHeight : 0, Theme.geometry_listItem_height)
 			sourceComponent: {
 				if (Global.solarChargers.model.count > 0
 						&& Global.pvInverters.model.count > 0
@@ -103,23 +103,23 @@ Page {
 			property bool chargerMode: Global.solarChargers.model.count > 0
 
 			width: parent.width
-			height: Theme.geometry.listItem.height
+			height: Theme.geometry_listItem_height
 
 			Label {
 				id: firstTitleLabel
 				anchors {
 					left: parent.left
-					leftMargin: Theme.geometry.listItem.content.horizontalMargin
+					leftMargin: Theme.geometry_listItem_content_horizontalMargin
 					right: quantityRow.left
 					bottom: parent.bottom
-					bottomMargin: Theme.geometry.quantityTableSummary.verticalMargin
+					bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin
 				}
 				text: chargerMode
 						//% "PV Charger"
 					  ? qsTrId("solardevices_pv_charger")
 					  : CommonWords.pv_inverter
-				font.pixelSize: Theme.font.size.caption
-				color: Theme.color.solarListPage.header.text
+				font.pixelSize: Theme.font_size_caption
+				color: Theme.color_solarListPage_header_text
 				elide: Text.ElideRight
 			}
 
@@ -128,11 +128,11 @@ Page {
 
 				anchors {
 					bottom: parent.bottom
-					bottomMargin: Theme.geometry.quantityTableSummary.verticalMargin
+					bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin
 					right: parent.right
-					rightMargin: Theme.geometry.listItem.content.horizontalMargin + Theme.geometry.statusBar.button.icon.width
+					rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_statusBar_button_icon_width
 				}
-				width: Theme.geometry.solarListPage.quantityRow.width
+				width: Theme.geometry_solarListPage_quantityRow_width
 
 				Repeater {
 					id: titleRepeater
@@ -141,8 +141,8 @@ Page {
 					delegate: Label {
 						width: (parent.width / titleRepeater.count) * (model.index === 0 ? 1.2 : 1) // kwh column needs more space as unit name is longer
 						text: modelData
-						font.pixelSize: Theme.font.size.caption
-						color: Theme.color.solarListPage.header.text
+						font.pixelSize: Theme.font_size_caption
+						color: Theme.color_solarListPage_header_text
 					}
 				}
 			}

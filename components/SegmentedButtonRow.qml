@@ -11,14 +11,14 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property int fontPixelSize: Theme.font.size.body3
+	property int fontPixelSize: Theme.font_size_body3
 	property alias model: buttonRepeater.model
 	property int currentIndex
 
 	signal buttonClicked(buttonIndex: int)
 
 	implicitWidth: parent.width
-	implicitHeight: Theme.geometry.segmentedButtonRow.height
+	implicitHeight: Theme.geometry_segmentedButtonRow_height
 
 	C.ButtonGroup {
 		buttons: root.children
@@ -41,13 +41,13 @@ Item {
 				width: root.width / buttonRepeater.count
 				height: parent.height
 				color: modelData.enabled === false && model.index !== root.currentIndex
-					   ? Theme.color.background.disabled
+					   ? Theme.color_background_disabled
 					   : (mouseArea.pressed || model.index === root.currentIndex
-						  ? Theme.color.ok
-						  : Theme.color.darkOk)
-				border.width: Theme.geometry.button.border.width
-				border.color: modelData.enabled === false && model.index !== root.currentIndex ? color : Theme.color.ok
-				radius: Theme.geometry.button.radius
+						  ? Theme.color_ok
+						  : Theme.color_darkOk)
+				border.width: Theme.geometry_button_border_width
+				border.color: modelData.enabled === false && model.index !== root.currentIndex ? color : Theme.color_ok
+				radius: Theme.geometry_button_radius
 
 				roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
 					: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
@@ -58,10 +58,10 @@ Item {
 					font.pixelSize: root.fontPixelSize
 					text: modelData.value
 					color: modelData.enabled === false && model.index !== root.currentIndex
-						   ? Theme.color.font.disabled
+						   ? Theme.color_font_disabled
 						   : (mouseArea.pressed || model.index === root.currentIndex
-							  ? Theme.color.button.down.text
-							  : Theme.color.font.primary)
+							  ? Theme.color_button_down_text
+							  : Theme.color_font_primary)
 				}
 
 				MouseArea {

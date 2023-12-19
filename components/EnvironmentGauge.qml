@@ -31,14 +31,14 @@ Item {
 			console.warn("Ignoring zero range! Min:", minimumValue, "Max:", maximumValue)
 			return 0
 		}
-		const tickHeight = Theme.geometry.levelsPage.environment.gauge.tick.size
+		const tickHeight = Theme.geometry_levelsPage_environment_gauge_tick_size
 		const unitsPerPixel = (gaugeTicks.height - tickHeight) / range
 		const unitCount = v - minimumValue
 		const pos = gaugeBar.height - (gaugeTicks.anchors.bottomMargin + (unitsPerPixel * unitCount)) - tickHeight/2
 		return Math.max(0, Math.min(pos, gaugeBar.height))
 	}
 
-	width: Theme.geometry.levelsPage.environment.gauge.width
+	width: Theme.geometry_levelsPage_environment_gauge_width
 	height: parent.height
 
 	CP.ColorImage {
@@ -46,13 +46,13 @@ Item {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.levelsPage.environment.gauge.icon.topMargin
+			topMargin: Theme.geometry_levelsPage_environment_gauge_icon_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		width: Theme.geometry.levelsPage.environment.gauge.icon.size
-		height: Theme.geometry.levelsPage.environment.gauge.icon.size
+		width: Theme.geometry_levelsPage_environment_gauge_icon_size
+		height: Theme.geometry_levelsPage_environment_gauge_icon_size
 		fillMode: Image.Pad
-		color: Theme.color.font.primary
+		color: Theme.color_font_primary
 	}
 
 	Label {
@@ -60,11 +60,11 @@ Item {
 
 		anchors {
 			top: typeIcon.bottom
-			topMargin: Theme.geometry.levelsPage.environment.gauge.typeLabel.topMargin
+			topMargin: Theme.geometry_levelsPage_environment_gauge_typeLabel_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		font.pixelSize: Theme.font.size.caption
-		color: Theme.color.font.primary
+		font.pixelSize: Theme.font_size_caption
+		color: Theme.color_font_primary
 	}
 
 	Column {
@@ -73,47 +73,47 @@ Item {
 		anchors {
 			top: gaugeBar.top
 			bottom: gaugeBar.bottom
-			topMargin: Theme.geometry.levelsPage.environment.gauge.bar.padding
-			bottomMargin: Theme.geometry.levelsPage.environment.gauge.bar.padding
+			topMargin: Theme.geometry_levelsPage_environment_gauge_bar_padding
+			bottomMargin: Theme.geometry_levelsPage_environment_gauge_bar_padding
 			horizontalCenter: parent.horizontalCenter
 		}
-		spacing: (height - (tickRepeater.count * Theme.geometry.levelsPage.environment.gauge.tick.size)) / (tickRepeater.count - 1)
+		spacing: (height - (tickRepeater.count * Theme.geometry_levelsPage_environment_gauge_tick_size)) / (tickRepeater.count - 1)
 
 		Repeater {
 			id: tickRepeater
 
-			model: (root.maximumValue + Theme.geometry.levelsPage.environment.gauge.tick.step - root.minimumValue) / Theme.geometry.levelsPage.environment.gauge.tick.step
+			model: (root.maximumValue + Theme.geometry_levelsPage_environment_gauge_tick_step - root.minimumValue) / Theme.geometry_levelsPage_environment_gauge_tick_step
 			delegate: Item {
 				readonly property int tickValue: {
 					const invertedIndex = tickRepeater.count - index - 1
-					return minimumValue + (Theme.geometry.levelsPage.environment.gauge.tick.step * invertedIndex)
+					return minimumValue + (Theme.geometry_levelsPage_environment_gauge_tick_step * invertedIndex)
 				}
 
-				width: Theme.geometry.levelsPage.environment.gauge.tick.size
-				height: Theme.geometry.levelsPage.environment.gauge.tick.size
+				width: Theme.geometry_levelsPage_environment_gauge_tick_size
+				height: Theme.geometry_levelsPage_environment_gauge_tick_size
 
 				Label {
 					id: tickLabel
 
 					anchors.verticalCenter: parent.verticalCenter
-					leftPadding: Theme.geometry.levelsPage.environment.gauge.tick.margin
+					leftPadding: Theme.geometry_levelsPage_environment_gauge_tick_margin
 					text: model.index === 0 ? root.maximumValue
 						: model.index === tickRepeater.count - 1 ? root.minimumValue
 						: tickValue === root.highlightedValue ? tickValue
 						: ""
-					color: Theme.color.levelsPage.environment.gauge.tickText
-					font.pixelSize: Theme.font.size.caption
+					color: Theme.color_levelsPage_environment_gauge_tickText
+					font.pixelSize: Theme.font_size_caption
 				}
 
 				Rectangle {
 					anchors.verticalCenter: parent.verticalCenter
-					width: Theme.geometry.levelsPage.environment.gauge.tick.size
-					height: Theme.geometry.levelsPage.environment.gauge.tick.size
-					radius: Theme.geometry.levelsPage.environment.gauge.tick.size
+					width: Theme.geometry_levelsPage_environment_gauge_tick_size
+					height: Theme.geometry_levelsPage_environment_gauge_tick_size
+					radius: Theme.geometry_levelsPage_environment_gauge_tick_size
 					color: model.index === 0 ? root.maximumValueColor
 						 : model.index === tickRepeater.count - 1 ? root.minimumValueColor
 						 : tickValue === root.highlightedValue ? root.highlightedValueColor
-						 : Theme.color.levelsPage.environment.gauge.tick
+						 : Theme.color_levelsPage_environment_gauge_tick
 				}
 			}
 		}
@@ -124,23 +124,23 @@ Item {
 
 		anchors {
 			top: typeLabel.bottom
-			topMargin: Theme.geometry.levelsPage.environment.gauge.bar.topMargin
+			topMargin: Theme.geometry_levelsPage_environment_gauge_bar_topMargin
 			bottom: quantitySeparator.top
-			bottomMargin: Theme.geometry.levelsPage.environment.gauge.bar.bottomMargin
+			bottomMargin: Theme.geometry_levelsPage_environment_gauge_bar_bottomMargin
 			right: gaugeTicks.left
-			rightMargin: Theme.geometry.levelsPage.environment.gauge.tick.margin
+			rightMargin: Theme.geometry_levelsPage_environment_gauge_tick_margin
 		}
-		width: Theme.geometry.levelsPage.environment.gauge.bar.width
-		radius: Theme.geometry.levelsPage.environment.gauge.bar.radius
+		width: Theme.geometry_levelsPage_environment_gauge_bar_width
+		radius: Theme.geometry_levelsPage_environment_gauge_bar_radius
 
 		Rectangle {
 			id: valueMarker
 
 			visible: !isNaN(root.value)
 			y: root._barYPosForValue(root.value) - height/2
-			width: Theme.geometry.levelsPage.environment.gauge.valueMarker.width
-			height: Theme.geometry.levelsPage.environment.gauge.valueMarker.background.height
-			color: Theme.color.levelsPage.environment.panel.background
+			width: Theme.geometry_levelsPage_environment_gauge_valueMarker_width
+			height: Theme.geometry_levelsPage_environment_gauge_valueMarker_background_height
+			color: Theme.color_levelsPage_environment_panel_background
 
 			Behavior on y {
 				// Only animate when the value has changed, and not when the page is resizing
@@ -150,9 +150,9 @@ Item {
 
 			Rectangle {
 				anchors.verticalCenter: parent.verticalCenter
-				width: Theme.geometry.levelsPage.environment.gauge.valueMarker.width
-				height: Theme.geometry.levelsPage.environment.gauge.valueMarker.height
-				color: Theme.color.font.primary
+				width: Theme.geometry_levelsPage_environment_gauge_valueMarker_width
+				height: Theme.geometry_levelsPage_environment_gauge_valueMarker_height
+				color: Theme.color_font_primary
 			}
 		}
 	}
@@ -162,9 +162,9 @@ Item {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry.levelsPage.environment.gauge.separator.horizontalMargin
+			leftMargin: Theme.geometry_levelsPage_environment_gauge_separator_horizontalMargin
 			right: parent.right
-			rightMargin: Theme.geometry.levelsPage.environment.gauge.separator.horizontalMargin
+			rightMargin: Theme.geometry_levelsPage_environment_gauge_separator_horizontalMargin
 			bottom: quantityLabel.top
 		}
 	}
@@ -176,7 +176,7 @@ Item {
 			bottom: parent.bottom
 			horizontalCenter: parent.horizontalCenter
 		}
-		font.pixelSize: Theme.font.size.h1
-		height: Theme.geometry.levelsPage.environment.gauge.quantityLabel.height
+		font.pixelSize: Theme.font_size_h1
+		height: Theme.geometry_levelsPage_environment_gauge_quantityLabel_height
 	}
 }

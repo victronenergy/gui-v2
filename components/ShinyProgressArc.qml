@@ -15,7 +15,7 @@ Item {
 	property real radius
 	property bool animationEnabled
 	property bool shineAnimationEnabled
-	property real strokeWidth: Theme.geometry.progressArc.strokeWidth
+	property real strokeWidth: Theme.geometry_progressArc_strokeWidth
 	property alias progressColor: progress.strokeColor
 	property alias remainderColor: remainder.strokeColor
 	property alias startAngle: remainder.startAngle
@@ -35,7 +35,7 @@ Item {
 			startAngle: control.transitionAngle
 			direction: control.direction
 			strokeWidth: control.strokeWidth
-			strokeColor: Theme.color.darkOk
+			strokeColor: Theme.color_darkOk
 			fillColor: control.fillColor
 		}
 	}
@@ -58,7 +58,7 @@ Item {
 			endAngle: control.transitionAngle
 			direction: control.direction
 			strokeWidth: control.strokeWidth
-			strokeColor: Theme.color.ok
+			strokeColor: Theme.color_ok
 			fillColor: control.fillColor
 		}
 	}
@@ -86,14 +86,14 @@ Item {
 				y: -height/3
 
 				// the highlight position of the shine must line up with the horizontal centre of the parent to ensure that it is always perpendicular to the arc direction as it rotates.
-				x: (parent.width-width)/2 - (width*Theme.geometry.briefPage.centerGauge.shine.highlightPosition)/2
+				x: (parent.width-width)/2 - (width*Theme.geometry_briefPage_centerGauge_shine_highlightPosition)/2
 
 				opacity: 1.0
 
 				gradient: Gradient {
 					orientation: Gradient.Horizontal
 					GradientStop { position: 0; color: "transparent" }
-					GradientStop { position: Theme.geometry.briefPage.centerGauge.shine.highlightPosition; color: Theme.color.briefPage.circularGauge.shine }
+					GradientStop { position: Theme.geometry_briefPage_centerGauge_shine_highlightPosition; color: Theme.color_briefPage_circularGauge_shine }
 					GradientStop { position: 1.0; color: "transparent" }
 				}
 			}
@@ -107,7 +107,7 @@ Item {
 						target: shineBar
 						from: 0.0
 						to: 0.998
-						duration: 2*Theme.animation.page.fade.duration
+						duration: 2*Theme.animation_page_fade_duration
 					}
 					OpacityAnimator {
 						id: brightPauseAnimator // effectively a pause animation, but need it to be an animator...
@@ -121,7 +121,7 @@ Item {
 						target: shineBar
 						from: 1.0
 						to: 0.002
-						duration: Theme.animation.page.fade.duration
+						duration: Theme.animation_page_fade_duration
 					}
 					OpacityAnimator {
 						id: waitPauseAnimator // effectively a pause animation, but need it to be an animator...
@@ -138,14 +138,14 @@ Item {
 						easing { type: Easing.InOutCubic }
 						from: -2 // avoid overspill from the trailing edge.
 						to:   349 // avoid overspill from the leading edge.
-						duration: Theme.animation.briefPage.centerGauge.shine.duration
+						duration: Theme.animation_briefPage_centerGauge_shine_duration
 					}
 					RotationAnimator {
 						id: pauseAnimator // effectively a pause animation, but need it to be an animator...
 						target: shineBar
 						from: 349
 						to:   350
-						duration: Theme.animation.briefPage.centerGauge.shine.duration * Theme.animation.briefPage.centerGauge.shine.pauseRatio
+						duration: Theme.animation_briefPage_centerGauge_shine_duration * Theme.animation_briefPage_centerGauge_shine_pauseRatio
 					}
 				}
 			}

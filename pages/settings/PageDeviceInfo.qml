@@ -23,17 +23,17 @@ Page {
 				text: qsTrId("settings_deviceinfo_connection")
 				dataSource: root.bindPrefix + "/Mgmt/Connection"
 				dataInvalidate: false
-				secondaryLabel.rightPadding: connectedIcon.visible ? connectedIcon.width + Theme.geometry.listItem.content.spacing : 0
+				secondaryLabel.rightPadding: connectedIcon.visible ? connectedIcon.width + Theme.geometry_listItem_content_spacing : 0
 
 				CP.ColorImage {
 					id: connectedIcon
 
 					anchors {
 						right: parent.right
-						rightMargin: Theme.geometry.listItem.content.horizontalMargin
+						rightMargin: Theme.geometry_listItem_content_horizontalMargin
 						verticalCenter: parent.primaryLabel.verticalCenter
 					}
-					color: Theme.color.green
+					color: Theme.color_green
 					source: "/images/icon_checkmark_32.svg"
 					visible: connectedDataPoint.value === 1
 				}
