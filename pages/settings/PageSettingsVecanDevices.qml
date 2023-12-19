@@ -46,7 +46,7 @@ Page {
 			secondaryText: qsTrId("settings_vecan_device_number").arg(dataValue)
 			dataSource: model.uid + "/DeviceInstance"
 
-			CP.ColorImage {
+			ColorImage {
 				parent: listDelegate.content
 				anchors.verticalCenter: parent.verticalCenter
 				source: "/images/icon_back_32.svg"

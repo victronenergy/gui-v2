@@ -37,7 +37,7 @@ T.RangeSlider {
 		}
 	}
 
-	first.handle: CP.ColorImage {
+	first.handle: ColorImage {
 		anchors {
 			left: parent.left
 			leftMargin: root.leftPadding + root.first.visualPosition * (root.availableWidth - width)
@@ -50,7 +50,7 @@ T.RangeSlider {
 		color: root.firstColor
 	}
 
-	second.handle: CP.ColorImage {
+	second.handle: ColorImage {
 		anchors {
 			left: parent.left
 			leftMargin: root.leftPadding + root.second.visualPosition * (root.availableWidth - width)

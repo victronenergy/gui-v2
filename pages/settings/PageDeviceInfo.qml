@@ -25,7 +25,7 @@ Page {
 				dataInvalidate: false
 				secondaryLabel.rightPadding: connectedIcon.visible ? connectedIcon.width + Theme.geometry.listItem.content.spacing : 0
 
-				CP.ColorImage {
+				ColorImage {
 					id: connectedIcon
 
 					anchors {

@@ -58,7 +58,7 @@ Rectangle {
 				  : "qrc:/images/gauge_intro_5_matte_black.gif"
 	}
 
-	CP.ColorImage {
+	ColorImage {
 		id: logoIcon
 
 		anchors {
@@ -80,7 +80,7 @@ Rectangle {
 		}
 	}
 
-	CP.ColorImage {
+	ColorImage {
 		id: logoText
 
 		anchors {
@@ -198,10 +198,10 @@ Rectangle {
 				NumberAnimation { properties: "opacity,height" }
 			}
 
-			CP.ColorImage {
+			ColorImage {
 				anchors.centerIn: parent
-				sourceSize.width: 24
-				sourceSize.height: 24
+				sourceSizeWidth: 24
+				sourceSizeHeight: 24
 				source: "qrc:/images/icon_alarm_48.svg"
 				color: Theme.color.red
 			}

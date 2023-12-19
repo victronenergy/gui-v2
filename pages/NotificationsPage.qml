@@ -47,7 +47,7 @@ Page {
 				visible: Global.notifications.activeModel.count === 0
 				spacing: Theme.geometry.notificationsPage.checkmark.spacing
 
-				CP.ColorImage {
+				ColorImage {
 					anchors.top: parent.top
 					source: "qrc:/images/icon_checkmark_48"
 				}

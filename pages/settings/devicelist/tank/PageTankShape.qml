@@ -89,7 +89,7 @@ Page {
 			text: qsTrId("devicelist_tankshape_point").arg(model.index + 1)
 			textModel: modelData.map(function(v) { return v + "%" })
 
-			CP.ColorImage {
+			ColorImage {
 				parent: quantityGroup.content
 				anchors.verticalCenter: parent ? parent.verticalCenter : undefined
 				source: "/images/icon_minus.svg"
@@ -194,7 +194,7 @@ Page {
 					spacing: Theme.geometry.listItem.content.spacing
 					visible: errorLabel.text.length > 0
 
-					CP.ColorImage {
+					ColorImage {
 						id: alarmIcon
 
 						sourceSize.width: 24

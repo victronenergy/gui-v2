@@ -43,7 +43,7 @@ CT.ComboBox {
 				color: optionDelegate.pressed ? Theme.color.button.down.text : Theme.color.font.primary
 			}
 
-			CP.ColorImage {
+			ColorImage {
 				anchors {
 					right: parent.right
 					rightMargin: 8
@@ -56,7 +56,7 @@ CT.ComboBox {
 		}
 	}
 
-	indicator: CP.ColorImage {
+	indicator: ColorImage {
 		id: downIcon
 
 		x: root.width - width - root.rightPadding

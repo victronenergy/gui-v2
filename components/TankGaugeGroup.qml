@@ -64,7 +64,7 @@ Rectangle {
 		}
 	}
 
-	CP.ColorImage {
+	ColorImage {
 		id: img
 
 		anchors {

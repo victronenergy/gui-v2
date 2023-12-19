@@ -59,7 +59,7 @@ Item {
 			anchors.horizontalCenter: parent.horizontalCenter
 			spacing: 6
 
-			CP.ColorImage {
+			ColorImage {
 				id: icon
 
 				color: Theme.color.font.primary

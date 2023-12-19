@@ -20,7 +20,7 @@ GradientListView {
 	delegate: ListIpAddressField {
 		id: ipAddressDelegate
 
-		property CP.ColorImage removalButton: CP.ColorImage {
+		property CP.ColorImage removalButton: ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
 			source: "/images/icon_minus.svg"
 			color: Theme.color.ok

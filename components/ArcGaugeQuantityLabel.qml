@@ -29,7 +29,7 @@ Row {
 	spacing: Theme.geometry.briefPage.edgeGauge.quantityLabel.spacing
 	layoutDirection: root.alignment & Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
 
-	CP.ColorImage {
+	ColorImage {
 		id: icon
 
 		width: Theme.geometry.widgetHeader.icon.width

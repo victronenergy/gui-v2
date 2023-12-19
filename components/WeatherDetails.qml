@@ -34,7 +34,7 @@ Column {
 			color: Theme.color.font.secondary
 		}
 
-		CP.ColorImage {
+		ColorImage {
 			id: image
 
 			anchors.verticalCenter: temperature.verticalCenter

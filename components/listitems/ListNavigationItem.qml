@@ -30,7 +30,7 @@ ListItem {
 			horizontalAlignment: Text.AlignRight
 		},
 
-		CP.ColorImage {
+		ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
 			source: "/images/icon_back_32.svg"
 			width: Theme.geometry.statusBar.button.icon.width

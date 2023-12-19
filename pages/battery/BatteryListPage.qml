@@ -90,7 +90,7 @@ Page {
 				}
 			}
 
-			CP.ColorImage {
+			ColorImage {
 				id: arrowIcon
 
 				anchors {

@@ -111,7 +111,7 @@ Item {
 					//% "%1%"
 					text: qsTrId("%1%").arg(isNaN(model.value) ? 0 : Math.round(model.value))
 				}
-				CP.ColorImage {
+				ColorImage {
 					id: iconImage
 					anchors.verticalCenter: parent.verticalCenter
 					height: Theme.geometry.briefPage.centerGauge.icon.height

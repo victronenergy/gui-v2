@@ -57,7 +57,7 @@ OverviewWidget {
 						}
 					}
 
-					CP.ColorImage {
+					ColorImage {
 						parent: deviceDelegate.content
 						anchors.verticalCenter: parent.verticalCenter
 						source: "/images/icon_back_32.svg"

@@ -38,7 +38,7 @@ MouseArea {
 			color: Theme.color.toastNotification.highlight.error
 			flat: true
 
-			CP.ColorImage {
+			ColorImage {
 				anchors {
 					top: parent.top
 					topMargin: (Theme.geometry.solarHistoryErrorView.itemHeight - height) / 2
@@ -52,7 +52,7 @@ MouseArea {
 		}
 	}
 
-	CP.ColorImage {
+	ColorImage {
 		anchors {
 			top: parent.top
 			topMargin: root.expanded ? 0 : height / 5   // compensate for icon internal alignment

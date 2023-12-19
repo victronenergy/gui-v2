@@ -41,7 +41,7 @@ VerticalGauge {
 		y: 3*parent.height/4
 	}
 
-	CP.ColorImage {
+	ColorImage {
 		anchors.horizontalCenter: parent.horizontalCenter
 		y: (root.height / 4 / 2) - (height / 2)
 		height: Theme.geometry.levelsPage.tankGauge.alarmIcon.height

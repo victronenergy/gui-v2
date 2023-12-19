@@ -144,6 +144,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ButtonControlValue.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
+    components/ColorImage.qml
     components/ControlCard.qml
     components/ControlValue.qml
     components/DataPoint.qml

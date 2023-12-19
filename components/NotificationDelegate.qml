@@ -66,7 +66,7 @@ Rectangle {
 			height: 1
 			width: Theme.geometry.notificationsPage.delegate.icon.spacing
 		}
-		CP.ColorImage {
+		ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
 			fillMode: Image.PreserveAspectFit
 			color: root.category === VenusOS.Notification_Info

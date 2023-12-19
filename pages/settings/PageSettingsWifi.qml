@@ -53,7 +53,7 @@ Page {
 			secondaryText: Utils.connmanServiceState(service)
 			primaryLabel.leftPadding: Theme.geometry.statusBar.button.icon.width + Theme.geometry.listItem.content.spacing
 
-			CP.ColorImage {
+			ColorImage {
 				anchors {
 					left: wifiPoint.primaryLabel.left
 					verticalCenter: wifiPoint.primaryLabel.verticalCenter

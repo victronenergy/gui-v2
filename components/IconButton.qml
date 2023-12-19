@@ -14,7 +14,7 @@ MouseArea {
 	width: icon.width
 	height: icon.height
 
-	CP.ColorImage {
+	ColorImage {
 		id: icon
 
 		anchors.centerIn: parent

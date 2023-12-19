@@ -41,7 +41,7 @@ Item {
 	width: Theme.geometry.levelsPage.environment.gauge.width
 	height: parent.height
 
-	CP.ColorImage {
+	ColorImage {
 		id: typeIcon
 
 		anchors {

@@ -16,7 +16,7 @@ Item {
 	implicitWidth: titleLabel.x + titleLabel.implicitWidth
 	implicitHeight: icon.height
 
-	CP.ColorImage {
+	ColorImage {
 		id: icon
 
 		anchors.verticalCenter: titleLabel.verticalCenter

@@ -32,7 +32,7 @@ Column {
 				font.pixelSize: Theme.font.briefPage.sidePanel.forecastRow.today.temperature.size
 				text: "10°"
 			}
-			CP.ColorImage {
+			ColorImage {
 				id: todayIcon
 
 				anchors.verticalCenter: parent.verticalCenter
