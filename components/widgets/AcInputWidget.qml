@@ -103,11 +103,7 @@ OverviewWidget {
 			y: Theme.geometry_overviewPage_widget_extraContent_topMargin
 			width: parent ? parent.width - 2*Theme.geometry_overviewPage_widget_content_horizontalMargin : 0
 			elide: Text.ElideRight
-
-			//: Shows the amount of time that has passed since the generator was stopped
-			//% "Stopped %1"
-			text: qsTrId("overview_acinputwidget_generator_stopped")
-					.arg(Utils.formatAsHHMMSS(Global.generators.first ? Global.generators.first.runtime : 0))
+			text: CommonWords.stopped
 			color: Theme.color_font_secondary
 		}
 	}
