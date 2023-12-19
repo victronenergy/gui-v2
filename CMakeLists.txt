@@ -763,7 +763,8 @@ qt_add_qml_module(Mqtt
 )
 # end Mqtt_QML_MODULE
 
-set(VEUTIL_CORE_SOURCES
+# VEUTIL_QML_MODULE
+set(VEUTIL_CPP_SOURCES
     src/veutil/inc/veutil/qt/firmware_updater_data.hpp
     src/veutil/inc/veutil/qt/unit_conversion.hpp
     src/veutil/inc/veutil/qt/ve_qitem.hpp
@@ -782,8 +783,10 @@ set(VEUTIL_CORE_SOURCES
     src/veutil/src/qt/ve_qitem_table_model.cpp
     src/veutil/src/qt/ve_qitem_tree_model.cpp
     src/veutil/src/qt/ve_quick_item.cpp
+
+    src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
+    src/veutil/src/qt/ve_qitems_mqtt.cpp
 )
-list(APPEND SOURCES ${VEUTIL_CORE_SOURCES})
 
 SET(VEUTIL_DBUS_SOURCES
     src/veutil/inc/veutil/qt/ve_dbus_connection.hpp
@@ -795,16 +798,19 @@ SET(VEUTIL_DBUS_SOURCES
     src/veutil/src/qt/vebus_error.cpp
 )
 if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    list(APPEND SOURCES ${VEUTIL_DBUS_SOURCES} )
+    list(APPEND VEUTIL_CPP_SOURCES ${VEUTIL_DBUS_SOURCES} )
 endif()
 
-set(VEUTIL_MQTT_SOURCES
-    src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
-    src/veutil/src/qt/ve_qitems_mqtt.cpp
+qt_add_qml_module(Veutil
+    URI Victron.Veutil
+    STATIC
+    OUTPUT_DIRECTORY Victron/Veutil
+    SOURCES ${VEUTIL_CPP_SOURCES}
 )
-list(APPEND SOURCES
-    ${VEUTIL_MQTT_SOURCES}
-)
+target_include_directories(Veutil PRIVATE src/veutil/inc/veutil/qt)
+target_link_libraries(Veutil PRIVATE Qt6::Quick Qt6::DBus Qt6::Mqtt)
+
+# end VEUTIL_QML_MODULE
 
 set(GUIv1_DBUS_SOURCES
     src/gui-v1/alarmbusitem.h
