@@ -92,7 +92,7 @@ T.Dialog {
 				verticalCenter: parent.verticalCenter
 			}
 			icon.sourceSize.height: Theme.geometry.solarDailyHistoryDialog.arrow.icon.size
-			icon.color: containsPress ? Theme.color.gray4 : Theme.color.gray5
+			iconColor: containsPress ? Theme.color.gray4 : Theme.color.gray5
 			icon.source: "qrc:/images/icon_back_32.svg"
 			visible: root.day > root.minimumDay
 
@@ -109,7 +109,7 @@ T.Dialog {
 				verticalCenter: parent.verticalCenter
 			}
 			icon.sourceSize.height: Theme.geometry.solarDailyHistoryDialog.arrow.icon.size
-			icon.color: containsPress ? Theme.color.gray4 : Theme.color.gray5
+			iconColor: containsPress ? Theme.color.gray4 : Theme.color.gray5
 			icon.source: "qrc:/images/icon_back_32.svg"
 			visible: root.day < root.maximumDay
 			rotation: 180
@@ -144,7 +144,7 @@ T.Dialog {
 			width: Theme.geometry.solarDailyHistoryDialog.closeButton.icon.size + (2 * Theme.geometry.solarDailyHistoryDialog.closeButton.icon.margins)
 			height: Theme.geometry.solarDailyHistoryDialog.closeButton.icon.size + (2 * Theme.geometry.solarDailyHistoryDialog.closeButton.icon.margins)
 			icon.sourceSize.height: Theme.geometry.solarDailyHistoryDialog.closeButton.icon.size
-			icon.color: Theme.color.ok
+			iconColor: Theme.color.ok
 			icon.source: "qrc:/images/toast_icon_close.svg"
 
 			onClicked: root.close()

@@ -104,7 +104,7 @@ Rectangle {
 			spacing: Theme.geometry.notificationsPage.snoozeButton.spacing
 			IconLabel {
 				anchors.verticalCenter: parent.verticalCenter
-				icon.source: "qrc:/images/icon_alarm_snooze_24"
+				iconSource: "qrc:/images/icon_alarm_snooze_24"
 			}
 			Label {
 				anchors.verticalCenter: parent.verticalCenter
