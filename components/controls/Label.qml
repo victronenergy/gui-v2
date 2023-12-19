@@ -4,10 +4,10 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 
-C.Label {
+T.Label {
 	color: Theme.color.font.primary
 	font.family: VenusFont.normal.name
 	font.pixelSize: Theme.font.size.body1
