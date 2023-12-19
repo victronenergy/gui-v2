@@ -9,7 +9,7 @@ import Victron.VenusOS
 SegmentedButtonRow {
 	id: buttons
 
-	width: Theme.geometry.tabBar.width
-	height: Theme.geometry.tabBar.height
-	fontPixelSize: Theme.font.size.body1
+	width: Theme.geometry_tabBar_width
+	height: Theme.geometry_tabBar_height
+	fontPixelSize: Theme.font_size_body1
 }

@@ -14,20 +14,20 @@ Repeater {
 	delegate: QuantityLabel {
 		anchors.verticalCenter: parent.verticalCenter
 		width: Math.max(implicitWidth, minimumDelegateWidth)
-		font.pixelSize: Theme.font.size.body2
+		font.pixelSize: Theme.font_size_body2
 		value: isNaN(modelData.value) ? NaN : modelData.value
 		unit: isNaN(modelData.unit) ? VenusOS.Units_None : modelData.unit
-		valueColor: Theme.color.quantityTable.quantityValue
-		unitColor: Theme.color.quantityTable.quantityUnit
+		valueColor: Theme.color_quantityTable_quantityValue
+		unitColor: Theme.color_quantityTable_quantityUnit
 
 		Rectangle {
 			anchors {
 				right: parent.right
-				rightMargin: -Theme.geometry.listItem.content.spacing / 2
+				rightMargin: -Theme.geometry_listItem_content_spacing / 2
 			}
-			width: Theme.geometry.listItem.separator.width
+			width: Theme.geometry_listItem_separator_width
 			height: parent.implicitHeight
-			color: Theme.color.listItem.separator
+			color: Theme.color_listItem_separator
 			visible: model.index !== root.count - 1
 		}
 	}

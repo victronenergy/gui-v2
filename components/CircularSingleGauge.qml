@@ -43,17 +43,17 @@ Item {
 			endAngle: 359 // "Note that a single PathArc cannot be used to specify a circle."
 			progressColor: Theme.statusColorValue(gauges.status)
 			remainderColor: Theme.statusColorValue(gauges.status, true)
-			strokeWidth: Theme.geometry.circularSingularGauge.strokeWidth
+			strokeWidth: Theme.geometry_circularSingularGauge_strokeWidth
 		}
 	}
 
 	Column {
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.briefPage.centerGauge.centerText.topMargin
+			topMargin: Theme.geometry_briefPage_centerGauge_centerText_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		spacing: Theme.geometry.briefPage.centerGauge.centerTextSpacing
+		spacing: Theme.geometry_briefPage_centerGauge_centerTextSpacing
 
 		Row {
 			anchors.horizontalCenter: parent.horizontalCenter
@@ -62,7 +62,7 @@ Item {
 			CP.ColorImage {
 				id: icon
 
-				color: Theme.color.font.primary
+				color: Theme.color_font_primary
 				fillMode: Image.PreserveAspectFit
 				smooth: true
 			}
@@ -70,37 +70,37 @@ Item {
 				id: nameLabel
 
 				anchors.verticalCenter: icon.verticalCenter
-				font.pixelSize: Theme.font.size.body2
-				color: Theme.color.font.primary
+				font.pixelSize: Theme.font_size_body2
+				color: Theme.color_font_primary
 			}
 		}
 
 		QuantityLabel {
 			anchors.horizontalCenter: parent.horizontalCenter
-			font.pixelSize: Theme.font.briefPage.battery.percentage.pixelSize
+			font.pixelSize: Theme.font_briefPage_battery_percentage_pixelSize
 			unit: VenusOS.Units_Percentage
 			value: gauges.value
 		}
 
 		Row {
-			topPadding: Theme.geometry.briefPage.centerGauge.centerText.topPadding
+			topPadding: Theme.geometry_briefPage_centerGauge_centerText_topPadding
 			anchors.horizontalCenter: parent.horizontalCenter
-			spacing: Theme.geometry.briefPage.centerGauge.centerText.horizontalSpacing
+			spacing: Theme.geometry_briefPage_centerGauge_centerText_horizontalSpacing
 
 			QuantityLabel {
 				id: voltageLabel
 
-				valueColor: Theme.color.briefPage.battery.value.text.color
-				unitColor: Theme.color.briefPage.battery.unit.text.color
-				font.pixelSize: Theme.font.briefPage.battery.voltage.pixelSize
+				valueColor: Theme.color_briefPage_battery_value_text_color
+				unitColor: Theme.color_briefPage_battery_unit_text_color
+				font.pixelSize: Theme.font_briefPage_battery_voltage_pixelSize
 				unit: VenusOS.Units_Volt
 			}
 			QuantityLabel {
 				id: currentLabel
 
-				valueColor: Theme.color.briefPage.battery.value.text.color
-				unitColor: Theme.color.briefPage.battery.unit.text.color
-				font.pixelSize: Theme.font.briefPage.battery.voltage.pixelSize
+				valueColor: Theme.color_briefPage_battery_value_text_color
+				unitColor: Theme.color_briefPage_battery_unit_text_color
+				font.pixelSize: Theme.font_briefPage_battery_voltage_pixelSize
 				unit: VenusOS.Units_Amp
 			}
 		}
@@ -109,8 +109,8 @@ Item {
 			id: captionLabel
 
 			anchors.horizontalCenter: parent.horizontalCenter
-			font.pixelSize: Theme.font.briefPage.battery.timeToGo.pixelSize
-			color: Theme.color.briefPage.battery.value.text.color
+			font.pixelSize: Theme.font_briefPage_battery_timeToGo_pixelSize
+			color: Theme.color_briefPage_battery_value_text_color
 		}
 	}
 }

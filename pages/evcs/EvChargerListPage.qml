@@ -16,7 +16,7 @@ Page {
 	GradientListView {
 		header: Item {
 			width: parent.width
-			height: summary.height + Theme.geometry.gradientList.spacing
+			height: summary.height + Theme.geometry_gradientList_spacing
 
 			ListItemBackground {
 				height: summary.y + summary.height
@@ -24,8 +24,8 @@ Page {
 				QuantityTableSummary {
 					id: summary
 
-					x: Theme.geometry.listItem.content.horizontalMargin
-					width: parent.width - (2 * Theme.geometry.listItem.content.horizontalMargin)
+					x: Theme.geometry_listItem_content_horizontalMargin
+					width: parent.width - (2 * Theme.geometry_listItem_content_horizontalMargin)
 
 					model: [
 						{

@@ -22,8 +22,8 @@ OverviewWidget {
 	extraContent.children: [
 		Loader {
 			readonly property int margin: sourceComponent === historyComponent
-				  ? Theme.geometry.overviewPage.widget.solar.graph.margins
-				  : Theme.geometry.overviewPage.widget.extraContent.bottomMargin
+				  ? Theme.geometry_overviewPage_widget_solar_graph_margins
+				  : Theme.geometry_overviewPage_widget_extraContent_bottomMargin
 
 			anchors {
 				left: parent.left
@@ -59,7 +59,7 @@ OverviewWidget {
 		id: historyComponent
 
 		SolarYieldGraph {
-			height: root.extraContent.height - (2 * Theme.geometry.overviewPage.widget.solar.graph.margins)
+			height: root.extraContent.height - (2 * Theme.geometry_overviewPage_widget_solar_graph_margins)
 		}
 	}
 

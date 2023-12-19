@@ -10,7 +10,7 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	color: Theme.color.background.primary
+	color: Theme.color_background_primary
 	visible: Global.splashScreenVisible
 
 	OpacityAnimator on opacity {
@@ -18,7 +18,7 @@ Rectangle {
 
 		running: false
 		to: 0
-		duration: Theme.animation.splash.fade.duration
+		duration: Theme.animation_splash_fade_duration
 		onRunningChanged: {
 			if (!running) {
 				Global.splashScreenVisible = false
@@ -37,12 +37,12 @@ Rectangle {
 
 		anchors {
 			centerIn: parent
-			verticalCenterOffset: Theme.geometry.splashView.gaugeAnimation.verticalCenterOffset
+			verticalCenterOffset: Theme.geometry_splashView_gaugeAnimation_verticalCenterOffset
 		}
 
 		playing: false
 		cache: false
-		paused: currentFrame === Theme.animation.splash.gaugeAnimation.fadeFrame
+		paused: currentFrame === Theme.animation_splash_gaugeAnimation_fadeFrame
 		onPausedChanged: {
 			if (paused) {
 				fadeOutAnim.start()
@@ -63,20 +63,20 @@ Rectangle {
 
 		anchors {
 			centerIn: parent
-			verticalCenterOffset: Theme.geometry.splashView.logo.verticalCenterOffset
-			horizontalCenterOffset: Theme.geometry.splashView.logo.horizontalCenterOffset
+			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
+			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
 		source: Theme.screenSize === Theme.FiveInch
 				? "qrc:/images/splash-logo-icon-5inch.svg"
 				: "qrc:/images/splash-logo-icon-7inch.svg"
-		color: Theme.color.splash.logo
+		color: Theme.color_splash_logo
 
 		OpacityAnimator on opacity {
 			id: logoIconFadeOutAnim
 
 			running: false
 			to: 0
-			duration: Theme.animation.splash.logoIcon.fade.duration
+			duration: Theme.animation_splash_logoIcon_fade_duration
 		}
 	}
 
@@ -85,20 +85,20 @@ Rectangle {
 
 		anchors {
 			centerIn: parent
-			verticalCenterOffset: Theme.geometry.splashView.logo.verticalCenterOffset
-			horizontalCenterOffset: Theme.geometry.splashView.logo.horizontalCenterOffset
+			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
+			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
 		source: Theme.screenSize === Theme.FiveInch
 				? "qrc:/images/splash-logo-text-5inch.svg"
 				: "qrc:/images/splash-logo-text-7inch.svg"
-		color: Theme.color.splash.logo
+		color: Theme.color_splash_logo
 
 		OpacityAnimator on opacity {
 			id: logoTextFadeOutAnim
 
 			running: false
 			to: 0
-			duration: Theme.animation.splash.logoText.fade.duration
+			duration: Theme.animation_splash_logoText_fade_duration
 
 			onRunningChanged: {
 				if (running) {
@@ -131,7 +131,7 @@ Rectangle {
 			value: false
 		}
 		PauseAnimation {
-			duration: Theme.animation.splash.logo.preFadePause.duration
+			duration: Theme.animation_splash_logo_preFadePause_duration
 		}
 		PropertyAction {
 			target: logoTextFadeOutAnim
@@ -145,15 +145,15 @@ Rectangle {
 
 		anchors {
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.splashView.progressBar.bottomMargin
+			bottomMargin: Theme.geometry_splashView_progressBar_bottomMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		width: Theme.geometry.splashView.progressBar.width
+		width: Theme.geometry_splashView_progressBar_width
 		indeterminate: visible && BackendConnection.state !== BackendConnection.Failed
 		opacity: 1.0
 		Behavior on opacity {
 			OpacityAnimator {
-				duration: Theme.animation.splash.progressBar.fade.duration
+				duration: Theme.animation_splash_progressBar_fade_duration
 			}
 		}
 	}
@@ -162,18 +162,18 @@ Rectangle {
 		id: extraInfoColumn
 		anchors {
 			top: loadingProgress.bottom
-			topMargin: Theme.geometry.splashView.progressText.topMargin
+			topMargin: Theme.geometry_splashView_progressText_topMargin
 			left: parent.left
-			leftMargin: Theme.geometry.page.content.horizontalMargin
+			leftMargin: Theme.geometry_page_content_horizontalMargin
 			right: parent.right
-			rightMargin: Theme.geometry.page.content.horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
 		visible: BackendConnection.type === BackendConnection.MqttSource
 		property real nextOpacity: 1.0
 		opacity: BackendConnection.state === BackendConnection.Failed ? 1.0 : nextOpacity
 		Behavior on opacity {
 			OpacityAnimator {
-				duration: Theme.animation.splash.progressBar.fade.duration
+				duration: Theme.animation_splash_progressBar_fade_duration
 			}
 		}
 
@@ -190,7 +190,7 @@ Rectangle {
 				PropertyChanges {
 					target: alarmIconContainer
 					opacity: 1.0
-					height: Theme.geometry.splashView.progressIconContainer.size
+					height: Theme.geometry_splashView_progressIconContainer_size
 				}
 			}
 			transitions: Transition {
@@ -203,16 +203,16 @@ Rectangle {
 				sourceSize.width: 24
 				sourceSize.height: 24
 				source: "qrc:/images/icon_alarm_48.svg"
-				color: Theme.color.red
+				color: Theme.color_red
 			}
 		}
 
 		Label {
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
-			height: implicitHeight + Theme.geometry.splashView.progressText.spacing
-			font.pixelSize: Theme.font.splashView.progressText.size
-			color: Theme.color.font.secondary
+			height: implicitHeight + Theme.geometry_splashView_progressText_spacing
+			font.pixelSize: Theme.font_splashView_progressText_size
+			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
 			text: "[" + BackendConnection.state + "] "
 				  //% "Unable to connect"
@@ -236,8 +236,8 @@ Rectangle {
 
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
-			font.pixelSize: Theme.font.splashView.progressText.size
-			color: Theme.color.font.secondary
+			font.pixelSize: Theme.font_splashView_progressText_size
+			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
 			text: (BackendConnection.mqttClientError !== BackendConnection.MqttClient_NoError
 				  ? "[" + BackendConnection.mqttClientError + "] " : "")

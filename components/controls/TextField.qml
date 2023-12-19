@@ -11,23 +11,23 @@ CT.TextField {
 	id: root
 
 	font.family: VenusFont.normal.name
-	font.pixelSize: Theme.font.size.body2
+	font.pixelSize: Theme.font_size_body2
 
-	leftPadding: Theme.geometry.textField.horizontalMargin
-	rightPadding: Theme.geometry.textField.horizontalMargin
+	leftPadding: Theme.geometry_textField_horizontalMargin
+	rightPadding: Theme.geometry_textField_horizontalMargin
 
 	implicitWidth: contentWidth
-	implicitHeight: Theme.geometry.textField.height
+	implicitHeight: Theme.geometry_textField_height
 
 	horizontalAlignment: Text.AlignHCenter
 	verticalAlignment: Text.AlignVCenter
-	color: Theme.color.font.primary
+	color: Theme.color_font_primary
 
 	background: Rectangle {
 		color: "transparent"
-		border.color: Theme.color.ok
-		border.width: Theme.geometry.button.border.width
-		radius: Theme.geometry.button.radius
+		border.color: Theme.color_ok
+		border.width: Theme.geometry_button_border_width
+		radius: Theme.geometry_button_radius
 
 		// QTBUG-100490 placeholderText doesn't appear in TextField if inside StackView, so
 		// create our own placeholder here.
@@ -43,7 +43,7 @@ CT.TextField {
 			text: root.placeholderText
 			font: root.font
 			visible: root.text.length === 0 && !root.activeFocus
-			color: Theme.color.listItem.secondaryText
+			color: Theme.color_listItem_secondaryText
 		}
 	}
 }

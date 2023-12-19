@@ -7,9 +7,9 @@ import QtQuick
 import Victron.VenusOS
 
 Button {
-	leftPadding: Theme.geometry.listItemButton.horizontalPadding
-	rightPadding: Theme.geometry.listItemButton.horizontalPadding
-	implicitHeight: Theme.geometry.listItemButton.height
+	leftPadding: Theme.geometry_listItemButton_horizontalPadding
+	rightPadding: Theme.geometry_listItemButton_horizontalPadding
+	implicitHeight: Theme.geometry_listItemButton_height
 	flat: !enabled
-	font.pixelSize: Theme.font.size.body2
+	font.pixelSize: Theme.font_size_body2
 }

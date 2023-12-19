@@ -24,7 +24,7 @@ GradientListView {
 		property CP.ColorImage removalButton: CP.ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
 			source: "/images/icon_minus.svg"
-			color: Theme.color.ok
+			color: Theme.color_ok
 
 			MouseArea {
 				anchors.fill: parent
@@ -58,7 +58,7 @@ GradientListView {
 			//% "Remove IP address?"
 			title: qsTrId("settings_fronius_remove_ip_address")
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-			icon.color: Theme.color.orange
+			icon.color: Theme.color_orange
 			acceptText: CommonWords.remove
 
 			onAccepted: {

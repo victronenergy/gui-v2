@@ -185,7 +185,7 @@ Page {
 							Timer {
 								id: popTimer
 
-								interval: Theme.animation.settings.radioButtonPage.autoClose.duration
+								interval: Theme.animation_settings_radioButtonPage_autoClose_duration
 								onTriggered: Global.pageManager.popPage()
 							}
 

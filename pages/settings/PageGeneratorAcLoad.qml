@@ -16,14 +16,14 @@ Page {
 	{
 		//% "Value must be greater than stop value"
 		Global.showToastNotification(VenusOS.Notification_Info, qsTrId("value_must_be_greater_than_stop_value"),
-												   Theme.animation.generator.settings.valueOutOfRange.toastNotification.autoClose.duration)
+												   Theme.animation_generator_settings_valueOutOfRange_toastNotification_autoClose_duration)
 	}
 
 	function maxValueWarning()
 	{
 		//% "Value must be lower than start value"
 		Global.showToastNotification(VenusOS.Notification_Info, qsTrId("value_must_be_lower_than_start_value"),
-												   Theme.animation.generator.settings.valueOutOfRange.toastNotification.autoClose.duration)
+												   Theme.animation_generator_settings_valueOutOfRange_toastNotification_autoClose_duration)
 	}
 
 	//% "AC output"

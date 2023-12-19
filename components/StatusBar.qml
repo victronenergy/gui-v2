@@ -22,20 +22,20 @@ Rectangle {
 	signal rightButtonClicked()
 
 	width: parent.width
-	height: Theme.geometry.statusBar.height
+	height: Theme.geometry_statusBar_height
 	opacity: 0
 
 	SequentialAnimation {
 		running: !Global.splashScreenVisible && animationEnabled
 
 		PauseAnimation {
-			duration: Theme.animation.statusBar.initialize.delayedStart.duration
+			duration: Theme.animation_statusBar_initialize_delayedStart_duration
 		}
 		OpacityAnimator {
 			target: root
 			from: 0.0
 			to: 1.0
-			duration: Theme.animation.statusBar.initialize.fade.duration
+			duration: Theme.animation_statusBar_initialize_fade_duration
 		}
 	}
 
@@ -44,15 +44,15 @@ Rectangle {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry.statusBar.horizontalMargin
+			leftMargin: Theme.geometry_statusBar_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
-		width: Theme.geometry.statusBar.button.width
-		height: Theme.geometry.statusBar.button.height
-		icon.width: Theme.geometry.statusBar.button.icon.width
-		icon.height: Theme.geometry.statusBar.button.icon.height
+		width: Theme.geometry_statusBar_button_width
+		height: Theme.geometry_statusBar_button_height
+		icon.width: Theme.geometry_statusBar_button_icon_width
+		icon.height: Theme.geometry_statusBar_button_icon_height
 		display: C.AbstractButton.IconOnly
-		color: Theme.color.ok
+		color: Theme.color_ok
 		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
 					 ? "qrc:/images/icon_controls_off_32.svg"
 					 : root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive
@@ -66,7 +66,7 @@ Rectangle {
 		opacity: enabled ? 1.0 : 0.0
 		Behavior on opacity {
 			enabled: root.animationEnabled
-			OpacityAnimator { duration: Theme.animation.page.idleOpacity.duration }
+			OpacityAnimator { duration: Theme.animation_page_idleOpacity_duration }
 		}
 
 		onClicked: root.leftButtonClicked()
@@ -82,9 +82,9 @@ Rectangle {
 	Button {
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.notificationsPage.snoozeButton.topMargin
+			topMargin: Theme.geometry_notificationsPage_snoozeButton_topMargin
 			right: parent.right
-			rightMargin: Theme.geometry.notificationsPage.snoozeButton.rightMargin
+			rightMargin: Theme.geometry_notificationsPage_snoozeButton_rightMargin
 		}
 		enabled: !!Global.pageManager
 					&& !!Global.pageManager.navBar
@@ -92,24 +92,24 @@ Rectangle {
 					&& Global.notifications.audibleAlarmActive
 					&& !Global.notifications.snoozeAudibleAlarmActive
 		opacity: enabled ? 1 : 0
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation.toastNotification.fade.duration} }
-		border.width: Theme.geometry.button.border.width
-		border.color: Theme.color.critical
-		width: Theme.geometry.notificationsPage.snoozeButton.width
-		height: Theme.geometry.notificationsPage.snoozeButton.height
-		backgroundColor: Theme.color.darkCritical
-		radius: Theme.geometry.notificationsPage.snoozeButton.radius
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration} }
+		border.width: Theme.geometry_button_border_width
+		border.color: Theme.color_critical
+		width: Theme.geometry_notificationsPage_snoozeButton_width
+		height: Theme.geometry_notificationsPage_snoozeButton_height
+		backgroundColor: Theme.color_darkCritical
+		radius: Theme.geometry_notificationsPage_snoozeButton_radius
 		contentItem: Row {
-			leftPadding: Theme.geometry.notificationsPage.snoozeButton.image.leftMargin
+			leftPadding: Theme.geometry_notificationsPage_snoozeButton_image_leftMargin
 			anchors.verticalCenter: parent.verticalCenter
-			spacing: Theme.geometry.notificationsPage.snoozeButton.spacing
+			spacing: Theme.geometry_notificationsPage_snoozeButton_spacing
 			CP.IconLabel {
 				anchors.verticalCenter: parent.verticalCenter
 				icon.source: "qrc:/images/icon_alarm_snooze_24"
 			}
 			Label {
 				anchors.verticalCenter: parent.verticalCenter
-				font.pixelSize: Theme.font.size.caption
+				font.pixelSize: Theme.font_size_caption
 				//% "Silence alarm"
 				text: qsTrId("silence_alarm")
 			}
@@ -122,7 +122,7 @@ Rectangle {
 
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry.statusBar.horizontalMargin
+			rightMargin: Theme.geometry_statusBar_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
 
@@ -133,16 +133,16 @@ Rectangle {
 		Behavior on opacity {
 			enabled: root.animationEnabled
 			OpacityAnimator {
-				duration: Theme.animation.page.idleOpacity.duration
+				duration: Theme.animation_page_idleOpacity_duration
 			}
 		}
 
-		width: Theme.geometry.statusBar.button.width
-		height: Theme.geometry.statusBar.button.height
-		icon.width: Theme.geometry.statusBar.button.icon.width
-		icon.height: Theme.geometry.statusBar.button.icon.height
+		width: Theme.geometry_statusBar_button_width
+		height: Theme.geometry_statusBar_button_height
+		icon.width: Theme.geometry_statusBar_button_icon_width
+		icon.height: Theme.geometry_statusBar_button_icon_height
 		display: C.AbstractButton.IconOnly
-		color: Theme.color.ok
+		color: Theme.color_ok
 		backgroundColor: "transparent"
 		icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
 				? "qrc:/images/icon_sidepanel_on_32.svg"

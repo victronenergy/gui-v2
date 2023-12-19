@@ -29,31 +29,31 @@ Rectangle {
 	property bool animationEnabled
 
 	function getCompactHeight(s) {
-		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry.overviewPage.widget.compact.xl.height
-			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry.overviewPage.widget.compact.l.height
-			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry.overviewPage.widget.compact.m.height
-			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry.overviewPage.widget.compact.s.height
-			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry.overviewPage.widget.compact.xs.height
+		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry_overviewPage_widget_compact_xl_height
+			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry_overviewPage_widget_compact_l_height
+			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry_overviewPage_widget_compact_m_height
+			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry_overviewPage_widget_compact_s_height
+			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry_overviewPage_widget_compact_xs_height
 			: 0
 	}
 
 	function getExpandedHeight(s) {
-		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry.overviewPage.widget.expanded.xl.height
-			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry.overviewPage.widget.expanded.l.height
-			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry.overviewPage.widget.expanded.m.height
-			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry.overviewPage.widget.expanded.s.height
-			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry.overviewPage.widget.expanded.xs.height
+		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry_overviewPage_widget_expanded_xl_height
+			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry_overviewPage_widget_expanded_l_height
+			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry_overviewPage_widget_expanded_m_height
+			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry_overviewPage_widget_expanded_s_height
+			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry_overviewPage_widget_expanded_xs_height
 			: 0
 	}
 
 	y: compactY
 	height: compactHeight
 	visible: size !== VenusOS.OverviewWidget_Size_Zero
-	radius: Theme.geometry.overviewPage.widget.radius
-	color: Theme.color.overviewPage.widget.background
+	radius: Theme.geometry_overviewPage_widget_radius
+	color: Theme.color_overviewPage_widget_background
 
-	border.width: enabled ? Theme.geometry.overviewPage.widget.border.width : 0
-	border.color: Theme.color.overviewPage.widget.border
+	border.width: enabled ? Theme.geometry_overviewPage_widget_border_width : 0
+	border.color: Theme.color_overviewPage_widget_border
 	enabled: false
 
 	states: State {
@@ -68,7 +68,7 @@ Rectangle {
 
 		NumberAnimation {
 			properties: "y,height"
-			duration: Theme.animation.page.idleResize.duration
+			duration: Theme.animation_page_idleResize_duration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -76,11 +76,11 @@ Rectangle {
 	Item {
 		id: header
 
-		x: Theme.geometry.overviewPage.widget.content.horizontalMargin
+		x: Theme.geometry_overviewPage_widget_content_horizontalMargin
 		y: root.size > VenusOS.OverviewWidget_Size_S
-		   ? Theme.geometry.overviewPage.widget.content.verticalMargin
+		   ? Theme.geometry_overviewPage_widget_content_verticalMargin
 		   : parent.height/2 - height/2
-		width: parent.width - 2*Theme.geometry.overviewPage.widget.content.horizontalMargin
+		width: parent.width - 2*Theme.geometry_overviewPage_widget_content_horizontalMargin
 		height: widgetHeader.height + (quantityLabel.visible ? quantityLabel.anchors.topMargin + quantityLabel.height : 0)
 
 		WidgetHeader {
@@ -94,11 +94,11 @@ Rectangle {
 
 			anchors {
 				top: widgetHeader.bottom
-				topMargin: Theme.geometry.overviewPage.widget.header.spacing
+				topMargin: Theme.geometry_overviewPage_widget_header_spacing
 			}
 			font.pixelSize: root.size === VenusOS.OverviewWidget_Size_XS
-					  ? Theme.font.overviewPage.widget.quantityLabel.minimumSize
-					  : Theme.font.overviewPage.widget.quantityLabel.maximumSize
+					  ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
+					  : Theme.font_overviewPage_widget_quantityLabel_maximumSize
 		}
 	}
 

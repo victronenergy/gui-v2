@@ -21,57 +21,57 @@ Rectangle {
 	property var humidityGaugeGradient
 
 	readonly property int compactWidth: _twoGauges
-		? Theme.geometry.levelsPage.environment.gaugePanel.twoGauge.compact.width
-		: Theme.geometry.levelsPage.environment.gaugePanel.oneGauge.compact.width
-	readonly property int compactHeight: Theme.geometry.levelsPage.environment.gaugePanel.compact.height
+		? Theme.geometry_levelsPage_environment_gaugePanel_twoGauge_compact_width
+		: Theme.geometry_levelsPage_environment_gaugePanel_oneGauge_compact_width
+	readonly property int compactHeight: Theme.geometry_levelsPage_environment_gaugePanel_compact_height
 	readonly property int expandedWidth: _twoGauges
-		? Theme.geometry.levelsPage.environment.gaugePanel.twoGauge.expanded.width
-		: Theme.geometry.levelsPage.environment.gaugePanel.oneGauge.expanded.width
-	readonly property int expandedHeight: Theme.geometry.levelsPage.environment.gaugePanel.expanded.height
+		? Theme.geometry_levelsPage_environment_gaugePanel_twoGauge_expanded_width
+		: Theme.geometry_levelsPage_environment_gaugePanel_oneGauge_expanded_width
+	readonly property int expandedHeight: Theme.geometry_levelsPage_environment_gaugePanel_expanded_height
 
 	readonly property int _twoGauges: !isNaN(temperature) && !isNaN(humidity)
 	readonly property int _gaugeWidth: _twoGauges
-			? (width - (2 * Theme.geometry.levelsPage.environment.gaugePanel.border.width)) / 2
-			: Theme.geometry.levelsPage.environment.gauge.width
+			? (width - (2 * Theme.geometry_levelsPage_environment_gaugePanel_border_width)) / 2
+			: Theme.geometry_levelsPage_environment_gauge_width
 
 	width: horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedWidth : compactWidth
 	height: verticalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedHeight : compactHeight
 
-	color: Theme.color.levelsPage.environment.panel.border.color
-	radius: Theme.geometry.levelsPage.environment.gaugePanel.radius
+	color: Theme.color_levelsPage_environment_panel_border_color
+	radius: Theme.geometry_levelsPage_environment_gaugePanel_radius
 
 	Behavior on height {
 		enabled: root.animationEnabled
-		NumberAnimation { duration: Theme.animation.page.idleResize.duration; easing.type: Easing.InOutQuad }
+		NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
 	}
 
 	Rectangle {
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.levelsPage.environment.gaugePanel.title.height
+			topMargin: Theme.geometry_levelsPage_environment_gaugePanel_title_height
 			left: parent.left
-			leftMargin: Theme.geometry.levelsPage.environment.gaugePanel.border.width
+			leftMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
 			right: parent.right
-			rightMargin: Theme.geometry.levelsPage.environment.gaugePanel.border.width
+			rightMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.levelsPage.environment.gaugePanel.border.width
+			bottomMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
 		}
-		radius: Theme.geometry.levelsPage.environment.gaugePanel.innerRadius
-		color: Theme.color.levelsPage.environment.panel.background
+		radius: Theme.geometry_levelsPage_environment_gaugePanel_innerRadius
+		color: Theme.color_levelsPage_environment_panel_background
 	}
 
 	Label {
 		id: titleLabel
 
 		width: parent.width
-		height: Theme.geometry.levelsPage.environment.gaugePanel.title.height
+		height: Theme.geometry_levelsPage_environment_gaugePanel_title_height
 		horizontalAlignment: Text.AlignHCenter
 		verticalAlignment: Text.AlignVCenter
-		leftPadding: Theme.geometry.levelsPage.environment.gaugePanel.border.width
-		rightPadding: Theme.geometry.levelsPage.environment.gaugePanel.border.width
+		leftPadding: Theme.geometry_levelsPage_environment_gaugePanel_border_width
+		rightPadding: Theme.geometry_levelsPage_environment_gaugePanel_border_width
 
-		font.pixelSize: Theme.font.size.caption
-		color: Theme.color.levelsPage.environment.panel.title
+		font.pixelSize: Theme.font_size_caption
+		color: Theme.color_levelsPage_environment_panel_title
 		elide: Text.ElideRight
 	}
 
@@ -81,7 +81,7 @@ Rectangle {
 		anchors {
 			top: titleLabel.bottom
 			left: humidityGaugeLoader.active ? parent.left : undefined
-			leftMargin: Theme.geometry.levelsPage.environment.gaugePanel.border.width
+			leftMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
 			bottom: parent.bottom
 			horizontalCenter: humidityGaugeLoader.active ? undefined : parent.horizontalCenter
 		}
@@ -95,15 +95,15 @@ Rectangle {
 
 		// TODO min, max and highlight need to come from dbus backend, but not yet available.
 		minimumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-				? Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue
-				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.minimumValue)
+				? Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue
+				: Units.celsiusToFahrenheit(Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue)
 		maximumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-				? Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue
-				: Units.celsiusToFahrenheit(Theme.geometry.levelsPage.environment.temperatureGauge.maximumValue)
-		highlightedValue: Theme.geometry.levelsPage.environment.temperatureGauge.highlightedValue
-		minimumValueColor: Theme.color.blue
-		maximumValueColor: Theme.color.red
-		highlightedValueColor: Theme.color.levelsPage.environment.temperatureGauge.highlightValue
+				? Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue
+				: Units.celsiusToFahrenheit(Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue)
+		highlightedValue: Theme.geometry_levelsPage_environment_temperatureGauge_highlightedValue
+		minimumValueColor: Theme.color_blue
+		maximumValueColor: Theme.color_red
+		highlightedValueColor: Theme.color_levelsPage_environment_temperatureGauge_highlightValue
 		gradient: root.temperatureGaugeGradient
 	}
 
@@ -113,7 +113,7 @@ Rectangle {
 		anchors {
 			top: titleLabel.bottom
 			right: parent.right
-			rightMargin: Theme.geometry.levelsPage.environment.gaugePanel.border.width
+			rightMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
 			bottom: parent.bottom
 		}
 
@@ -129,12 +129,12 @@ Rectangle {
 			animationEnabled: root.animationEnabled
 			unit: VenusOS.Units_Percentage
 			value: Math.round(root.humidity)
-			minimumValue: Theme.geometry.levelsPage.environment.humidityGauge.minimumValue
-			maximumValue: Theme.geometry.levelsPage.environment.humidityGauge.maximumValue
-			highlightedValue: Theme.geometry.levelsPage.environment.humidityGauge.highlightedValue
-			minimumValueColor: Theme.color.orange
-			maximumValueColor: Theme.color.blue
-			highlightedValueColor: Theme.color.green
+			minimumValue: Theme.geometry_levelsPage_environment_humidityGauge_minimumValue
+			maximumValue: Theme.geometry_levelsPage_environment_humidityGauge_maximumValue
+			highlightedValue: Theme.geometry_levelsPage_environment_humidityGauge_highlightedValue
+			minimumValueColor: Theme.color_orange
+			maximumValueColor: Theme.color_blue
+			highlightedValueColor: Theme.color_green
 			gradient: root.humidityGaugeGradient
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load himidity environment gauge:", errorString())

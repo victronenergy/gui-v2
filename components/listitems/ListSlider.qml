@@ -27,7 +27,7 @@ ListItem {
 		SettingsSlider {
 			id: slider
 
-			width: Theme.geometry.listItem.slider.width
+			width: Theme.geometry_listItem_slider_width
 
 			onValueChanged: function(value) {
 				root.valueChanged(value)

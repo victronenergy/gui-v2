@@ -34,7 +34,7 @@ ControlCard {
 		id: timerDisplay
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry.controlCard.contentMargins
+			rightMargin: Theme.geometry_controlCard_contentMargins
 			top: parent.status.top
 			topMargin: parent.status.topMargin
 			bottom: parent.status.bottom
@@ -48,11 +48,11 @@ ControlCard {
 		anchors {
 			top: timerDisplay.bottom
 			left: parent.left
-			leftMargin: Theme.geometry.controlCard.contentMargins
+			leftMargin: Theme.geometry_controlCard_contentMargins
 		}
 
-		color: root.generator.state === VenusOS.Generators_State_Error ? Theme.color.critical
-			: Theme.color.font.secondary
+		color: root.generator.state === VenusOS.Generators_State_Error ? Theme.color_critical
+			: Theme.color_font_secondary
 		text: root.generator.state !== VenusOS.Generators_State_Running ?
 				"" // not running, empty substatus.
 			: root.generator.runningBy === VenusOS.Generators_RunningBy_Manual ?
@@ -95,7 +95,7 @@ ControlCard {
 
 		anchors {
 			top: root.status.bottom
-			topMargin: Theme.geometry.controlCard.status.bottomMargin
+			topMargin: Theme.geometry_controlCard_status_bottomMargin
 		}
 
 		//% "Autostart"
@@ -140,13 +140,13 @@ ControlCard {
 		anchors {
 			top: autostartSwitch.bottom
 			left: parent.left
-			leftMargin: Theme.geometry.controlCard.contentMargins
+			leftMargin: Theme.geometry_controlCard_contentMargins
 			right: parent.right
-			rightMargin: Theme.geometry.controlCard.contentMargins
+			rightMargin: Theme.geometry_controlCard_contentMargins
 		}
 		wrapMode: Text.Wrap
-		color: Theme.color.font.secondary
-		font.pixelSize: Theme.font.size.caption
+		color: Theme.color_font_secondary
+		font.pixelSize: Theme.font_size_caption
 
 		//% "The generator will start and stop based on the configured autostart conditions."
 		text: qsTrId("controlcard_generator_autostart_conditions")
@@ -160,17 +160,17 @@ ControlCard {
 		property int _generatorStateBeforeDialogOpen: -1
 
 		anchors {
-			margins: Theme.geometry.controlCard.button.margins
+			margins: Theme.geometry_controlCard_button_margins
 			bottom: parent.bottom
 			left: parent.left
 			right: parent.right
 		}
-		height: Theme.geometry.generatorCard.startButton.height
-		radius: Theme.geometry.button.radius
+		height: Theme.geometry_generatorCard_startButton_height
+		radius: Theme.geometry_button_radius
 		flat: true
 		enabled: root.generator.state !== VenusOS.Generators_State_Error
-		color: enabled ? Theme.color.font.primary : Theme.color.font.disabled
-		backgroundColor: checked ? Theme.color.dimRed : Theme.color.dimGreen
+		color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
+		backgroundColor: checked ? Theme.color_dimRed : Theme.color_dimGreen
 
 		// If the stop or start dialog is open, set the button color based on the generator
 		// state at the time dialog was opened. This avoid changing the color of the button

@@ -19,11 +19,11 @@ Row {
 		}
 		// "kWh" unit name is longer, so give that column more space.
 		const widthMultiplier = (unit === VenusOS.Units_Energy_KiloWattHour) ? 1.2 : 1
-		return ((width - Theme.geometry.quantityTable.header.widthBoost) / model.length) * widthMultiplier
+		return ((width - Theme.geometry_quantityTable_header_widthBoost) / model.length) * widthMultiplier
 	}
 
 	width: parent ? parent.width : 0
-	height: quantityRow.height + (2 * Theme.geometry.quantityTableSummary.verticalMargin)
+	height: quantityRow.height + (2 * Theme.geometry_quantityTableSummary_verticalMargin)
 
 	Item {
 		id: firstColumn
@@ -37,10 +37,10 @@ Row {
 
 			width: parent.width
 			elide: Text.ElideRight
-			rightPadding: Theme.geometry.listItem.content.spacing
-			font.pixelSize: Theme.font.size.caption
+			rightPadding: Theme.geometry_listItem_content_spacing
+			font.pixelSize: Theme.font_size_caption
 			text: root.model[0].title
-			color: Theme.color.quantityTable.quantityValue
+			color: Theme.color_quantityTable_quantityValue
 		}
 
 		Label {
@@ -48,14 +48,14 @@ Row {
 
 			anchors {
 				top: firstColumnTitleLabel.bottom
-				topMargin: Theme.geometry.quantityTableSummary.verticalSpacing
+				topMargin: Theme.geometry_quantityTableSummary_verticalSpacing
 			}
 			width: parent.width
 			elide: Text.ElideRight
-			rightPadding: Theme.geometry.listItem.content.spacing
-			font.pixelSize: root.smallTextMode ? Theme.font.size.body2 : Theme.font.size.body3
+			rightPadding: Theme.geometry_listItem_content_spacing
+			font.pixelSize: root.smallTextMode ? Theme.font_size_body2 : Theme.font_size_body3
 			text: root.model[0].text
-			color: firstColumnTitleLabel.text ? Theme.color.font.primary : Theme.color.quantityTable.quantityValue
+			color: firstColumnTitleLabel.text ? Theme.color_font_primary : Theme.color_quantityTable_quantityValue
 			opacity: firstColumnTitleLabel.text.length ? 1 : 0
 		}
 
@@ -66,8 +66,8 @@ Row {
 			anchors.baseline: firstColumnSubLabel.baseline
 			width: parent.width
 			elide: Text.ElideRight
-			rightPadding: Theme.geometry.listItem.content.spacing
-			font.pixelSize: Theme.font.size.h1
+			rightPadding: Theme.geometry_listItem_content_spacing
+			font.pixelSize: Theme.font_size_h1
 			text: firstColumnSubLabel.text
 			color: firstColumnSubLabel.color
 			opacity: firstColumnTitleLabel.text.length ? 0 : 1
@@ -86,14 +86,14 @@ Row {
 
 			delegate: Column {
 				width: root._quantityColumnWidth(root.model[model.index + 1].unit)
-				spacing: Theme.geometry.quantityTableSummary.verticalSpacing
+				spacing: Theme.geometry_quantityTableSummary_verticalSpacing
 
 				Label {
 					width: parent.width
 					elide: Text.ElideRight
-					font.pixelSize: Theme.font.size.caption
+					font.pixelSize: Theme.font_size_caption
 					text: root.model[model.index + 1].title
-					color: Theme.color.quantityTable.quantityValue
+					color: Theme.color_quantityTable_quantityValue
 				}
 
 				Loader {
@@ -105,7 +105,7 @@ Row {
 
 						Row {
 							width: parent.width
-							spacing: Theme.geometry.quantityLabel.spacing
+							spacing: Theme.geometry_quantityLabel_spacing
 
 							Label {
 								font.pixelSize: firstColumnSubLabel.font.pixelSize
@@ -115,7 +115,7 @@ Row {
 							Label {
 								font.pixelSize: firstColumnSubLabel.font.pixelSize
 								text: root.model[model.index + 1].secondaryText
-								color: Theme.color.font.secondary
+								color: Theme.color_font_secondary
 
 							}
 						}

@@ -13,7 +13,7 @@ ControlValue {
 
 	signal clicked()
 
-	implicitHeight: Theme.geometry.controlCard.mediumItem.height
+	implicitHeight: Theme.geometry_controlCard_mediumItem_height
 
 	contentRow.children: ListItemButton {
 		id: button

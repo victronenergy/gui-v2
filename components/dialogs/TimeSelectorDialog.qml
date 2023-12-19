@@ -25,7 +25,7 @@ ModalDialog {
 
 			anchors {
 				centerIn: parent
-				verticalCenterOffset: -Theme.geometry.modalDialog.content.margins
+				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
 			}
 		}
 	}

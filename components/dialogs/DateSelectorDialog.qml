@@ -38,7 +38,7 @@ ModalDialog {
 	//% "Set date"
 	title: qsTrId("dateselectordialog_set_date")
 
-	horizontalPadding: Theme.geometry.modalDialog.content.horizontalMargin
+	horizontalPadding: Theme.geometry_modalDialog_content_horizontalMargin
 
 	contentItem: Row {
 		anchors {
@@ -56,9 +56,9 @@ ModalDialog {
 
 			delegate: SpinBox {
 				anchors.verticalCenter: parent.verticalCenter
-				width: (root.width - (Theme.geometry.modalDialog.content.horizontalMargin * 2)) / 3
+				width: (root.width - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3
 				orientation: Qt.Vertical
-				label.font.pixelSize: Theme.font.size.h2
+				label.font.pixelSize: Theme.font_size_h2
 				from: modelData.from
 				to: modelData.to
 				value: modelData.value

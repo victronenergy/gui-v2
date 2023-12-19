@@ -18,7 +18,7 @@ ControlCard {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.controlCard.mediumItem.height
+			topMargin: Theme.geometry_controlCard_mediumItem_height
 			left: parent.left
 			right: parent.right
 			bottom: parent.bottom

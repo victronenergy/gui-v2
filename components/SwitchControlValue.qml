@@ -13,13 +13,13 @@ ControlValue {
 
 	signal clicked()
 
-	height: Theme.geometry.controlCard.mediumItem.height
+	height: Theme.geometry_controlCard_mediumItem_height
 
 	contentRow.children: Switch {
 		id: button
 
 		anchors.verticalCenter: parent.verticalCenter
-		font.pixelSize: Theme.font.size.body2
+		font.pixelSize: Theme.font_size_body2
 
 		onClicked: root.clicked()
 	}

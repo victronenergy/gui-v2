@@ -21,8 +21,8 @@ Page {
 			ListLabel {
 				visible: lowBatteryAlarm.visible || highBatteryAlarm.visible
 				leftPadding: 0
-				color: Theme.color.listItem.secondaryText
-				font.pixelSize: Theme.font.size.caption
+				color: Theme.color_listItem_secondaryText
+				font.pixelSize: Theme.font_size_caption
 				text: CommonWords.alarm_status
 			}
 
@@ -47,8 +47,8 @@ Page {
 			ListLabel {
 				visible: root.solarCharger.errorModel.count > 0
 				leftPadding: 0
-				color: Theme.color.listItem.secondaryText
-				font.pixelSize: Theme.font.size.caption
+				color: Theme.color_listItem_secondaryText
+				font.pixelSize: Theme.font_size_caption
 				//: Details of most recent errors
 				//% "Last Errors"
 				text: qsTrId("charger_alarms_header_last_errors")

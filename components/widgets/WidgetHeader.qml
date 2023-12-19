@@ -20,8 +20,8 @@ Item {
 		id: icon
 
 		anchors.verticalCenter: titleLabel.verticalCenter
-		width: Theme.geometry.widgetHeader.icon.size
-		height: Theme.geometry.widgetHeader.icon.size
+		width: Theme.geometry_widgetHeader_icon_size
+		height: Theme.geometry_widgetHeader_icon_size
 		fillMode: Image.Pad
 		color: titleLabel.color
 	}
@@ -31,7 +31,7 @@ Item {
 
 		anchors {
 			left: icon.right
-			leftMargin: Theme.geometry.widgetHeader.spacing
+			leftMargin: Theme.geometry_widgetHeader_spacing
 			right: parent.right
 		}
 		elide: Text.ElideRight

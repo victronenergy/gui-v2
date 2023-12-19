@@ -143,7 +143,7 @@ ListNavigationItem {
 								//% "Enter password"
 								text: qsTrId("settings_radio_button_enter_password")
 								flickable: optionsListView
-								primaryLabel.color: Theme.color.font.secondary
+								primaryLabel.color: Theme.color_font_secondary
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
 								visible: false
@@ -168,9 +168,9 @@ ListNavigationItem {
 							ListLabel {
 								topPadding: 0
 								bottomPadding: 0
-								color: Theme.color.font.secondary
+								color: Theme.color_font_secondary
 								text: bottomContentLoader.caption
-								font.pixelSize: Theme.font.size.caption
+								font.pixelSize: Theme.font_size_caption
 								visible: bottomContentLoader.caption.length > 0
 							}
 						}
@@ -182,9 +182,9 @@ ListNavigationItem {
 						ListLabel {
 							topPadding: 0
 							bottomPadding: 0
-							color: Theme.color.font.secondary
+							color: Theme.color_font_secondary
 							text: bottomContentLoader.caption
-							font.pixelSize: Theme.font.size.caption
+							font.pixelSize: Theme.font_size_caption
 						}
 					}
 
@@ -211,7 +211,7 @@ ListNavigationItem {
 			Timer {
 				id: popTimer
 
-				interval: Theme.animation.settings.radioButtonPage.autoClose.duration
+				interval: Theme.animation_settings_radioButtonPage_autoClose_duration
 				onTriggered: {
 					if (!!Global.pageManager) {
 						root.aboutToPop()

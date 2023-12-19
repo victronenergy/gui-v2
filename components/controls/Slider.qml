@@ -31,12 +31,12 @@ T.Slider {
 			verticalCenter: parent.verticalCenter
 		}
 
-		implicitWidth: 4*Theme.geometry.switch.indicator.width // suitably small.
-		implicitHeight: Theme.geometry.slider.groove.height
+		implicitWidth: 4*Theme.geometry_switch_indicator_width // suitably small.
+		implicitHeight: Theme.geometry_slider_groove_height
 		width: root.availableWidth
-		height: Theme.geometry.slider.groove.height
-		radius: Theme.geometry.slider.groove.radius
-		color: Theme.color.darkOk
+		height: Theme.geometry_slider_groove_height
+		radius: Theme.geometry_slider_groove_radius
+		color: Theme.color_darkOk
 
 		Rectangle {
 			id: maskRect
@@ -60,7 +60,7 @@ T.Slider {
 				width: parent.width
 				height: parent.height
 				radius: backgroundRect.radius
-				color: Theme.color.ok
+				color: Theme.color_ok
 				x: nextX
 
 				// don't use a behavior on x
@@ -83,7 +83,7 @@ T.Slider {
 					id: anim
 					target: highlightRect
 					easing.type: Easing.InOutQuad
-					duration: Theme.animation.briefPage.sidePanel.sliderValueChange.duration
+					duration: Theme.animation_briefPage_sidePanel_sliderValueChange_duration
 				}
 			}
 		}
@@ -101,9 +101,9 @@ T.Slider {
 		id: handleImg
 
 		x: visible ? root.leftPadding + root.visualPosition * (root.availableWidth - width) : 0
-		y: visible ? root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry.switch.indicator.shadowOffset : 0
-		width: Theme.geometry.switch.indicator.width
-		height: Theme.geometry.switch.indicator.width
+		y: visible ? root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_switch_indicator_shadowOffset : 0
+		width: Theme.geometry_switch_indicator_width
+		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"
 	}
 }

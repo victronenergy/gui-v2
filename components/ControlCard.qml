@@ -12,26 +12,26 @@ Rectangle {
 	property alias title: title
 	property alias status: status
 
-	width: Theme.geometry.controlCard.maximumWidth
+	width: Theme.geometry_controlCard_maximumWidth
 	height: parent ? parent.height : 0
-	color: Theme.color.background.secondary
-	radius: Theme.geometry.panel.radius
+	color: Theme.color_background_secondary
+	radius: Theme.geometry_panel_radius
 
 	CP.IconLabel {
 		id: title
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.controlCard.title.topMargin
+			topMargin: Theme.geometry_controlCard_title_topMargin
 			left: parent.left
-			leftMargin: Theme.geometry.controlCard.contentMargins
+			leftMargin: Theme.geometry_controlCard_contentMargins
 		}
-		spacing: Theme.geometry.controlCard.title.spacing
+		spacing: Theme.geometry_controlCard_title_spacing
 		display: C.AbstractButton.TextBesideIcon
-		icon.color: Theme.color.font.primary
+		icon.color: Theme.color_font_primary
 
 		font.family: VenusFont.normal.name
-		font.pixelSize: Theme.font.size.body1
-		color: Theme.color.font.primary
+		font.pixelSize: Theme.font_size_body1
+		color: Theme.color_font_primary
 	}
 
 	Label {
@@ -41,6 +41,6 @@ Rectangle {
 			top: title.bottom
 			left: title.left
 		}
-		font.pixelSize: Theme.font.size.body3
+		font.pixelSize: Theme.font_size_body3
 	}
 }
