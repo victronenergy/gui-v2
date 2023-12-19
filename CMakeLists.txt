@@ -488,6 +488,10 @@ qt_add_qml_module(VenusQMLModule
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
     SOURCES
+        src/aggregatedevicemodel.h
+        src/aggregatedevicemodel.cpp
+        src/basedevicemodel.h
+        src/basedevicemodel.cpp
         src/theme.h
         src/theme.cpp
         src/backendconnection.h
@@ -500,6 +504,10 @@ qt_add_qml_module(VenusQMLModule
         src/notificationsmodel.cpp
         src/clocktime.h
         src/clocktime.cpp
+        src/uidhelper.h
+        src/uidhelper.cpp
+        src/frameratemodel.h
+        src/frameratemodel.cpp
 )
 target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Core
@@ -786,17 +794,9 @@ endif()
 
 set(VENUS_CPP_SOURCES
     src/main.cpp
-    src/basedevicemodel.h
-    src/basedevicemodel.cpp
-    src/aggregatedevicemodel.h
-    src/aggregatedevicemodel.cpp
     src/logging.h
-    src/uidhelper.h
-    src/uidhelper.cpp
     src/veqitemmockproducer.h
     src/veqitemmockproducer.cpp
-    src/frameratemodel.h
-    src/frameratemodel.cpp
 )
 
 set_source_files_properties(

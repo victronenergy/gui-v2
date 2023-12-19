@@ -18,6 +18,7 @@ namespace VenusOS {
 class AggregateDeviceModel : public QAbstractListModel
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(int count READ count NOTIFY countChanged)
 	Q_PROPERTY(int disconnectedDeviceCount READ disconnectedDeviceCount NOTIFY disconnectedDeviceCountChanged)
 	Q_PROPERTY(QVariantList sourceModels READ sourceModels WRITE setSourceModels NOTIFY sourceModelsChanged)

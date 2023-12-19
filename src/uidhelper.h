@@ -21,11 +21,13 @@ namespace VenusOS {
 class UidHelper : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
 
 public:
 	int deviceInstanceForService(const QString &service) const;
 
-	static UidHelper* instance(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
+	static UidHelper* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 Q_SIGNALS:
 	void serviceRegistered(const QString &service, int deviceInstance);
@@ -36,7 +38,7 @@ public Q_SLOTS:
 	void onNullMessageReceived(const QString &path);
 
 private:
-	UidHelper(QObject *parent = nullptr);
+	UidHelper(QObject *parent);
 
 	void addServiceMapping(const QString &serviceMappingKey, const QString &service);
 	void removeServiceMapping(const QString &serviceMappingKey);
@@ -48,6 +50,7 @@ private:
 class SingleUidHelper : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString dbusUid READ dbusUid WRITE setDBusUid NOTIFY dbusUidChanged)
 	Q_PROPERTY(QString mqttUid READ mqttUid NOTIFY mqttUidChanged)
 
