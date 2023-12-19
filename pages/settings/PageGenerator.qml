@@ -134,12 +134,14 @@ Page {
 		ListNavigationItem {
 			//% "Manual start"
 			text: qsTrId("settings_page_relay_generator_manual_start")
-			onClicked: Global.pageManager.pushPage(manualStartPage, { title: text })
+			onClicked: Global.pageManager.pushPage(manualStartPageComponent, { title: text })
 
 			Component {
-				id: manualStartPage
+				id: manualStartPageComponent
 
 				Page {
+					id: manualStartPage
+
 					GradientListView {
 
 						model: ObjectModel {
@@ -151,7 +153,21 @@ Page {
 								dataSource: root.startStopBindPrefix + "/ManualStart"
 								writeAccessLevel: VenusOS.User_AccessType_User
 								onClicked: {
-									Global.generators.manualRunningNotification(!checked, stopTimer.value)
+									if (manualStartPage.isCurrentPage) {
+										if (!checked) {
+											//% "Stopping, generator will continue running if other conditions are reached"
+											Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_stop_info"), 3000)
+										}
+										if (checked && stopTimer.value == 0) {
+											//% "Starting, generator won't stop till user intervention"
+											Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_start_info"), 5000)
+										}
+										if (checked && stopTimer.value > 0) {
+											//: %1 = time until generator is stopped
+											//% "Starting. The generator will stop in %1, unless other conditions keep it running"
+											Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_start_timer").arg(Utils.secondsToString(stopTimer.value)), 5000)
+										}
+									}
 								}
 							}
 
