@@ -52,18 +52,18 @@ QtObject {
 	}
 
 	property DataPoint accessLevel: DataPoint {
-		 source: "com.victronenergy.settings/Settings/System/AccessLevel"
+		source: "com.victronenergy.settings/Settings/System/AccessLevel"
 	}
 
 	property DataPoint colorScheme: DataPoint {
-		 source: "com.victronenergy.settings/Settings/Gui/ColorScheme"
-		 onValueChanged: {
-			 if (value === Theme.Dark) {
-				Theme.load(Theme.screenSize, Theme.Dark)
-			 } else if (value === Theme.Light) {
-				Theme.load(Theme.screenSize, Theme.Light)
-			 }
-		 }
+		source: "com.victronenergy.settings/Settings/Gui/ColorScheme"
+		onValueChanged: {
+			if (value === Theme.Dark) {
+				Theme.colorScheme = Theme.Dark
+			} else if (value === Theme.Light) {
+				Theme.colorScheme = Theme.Light
+			}
+		}
 	}
 
 	property QtObject electricalQuantity: QtObject {
