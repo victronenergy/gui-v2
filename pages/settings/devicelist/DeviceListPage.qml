@@ -178,6 +178,8 @@ Page {
 			break;
 
 		case "meteo":
+			url = "/pages/settings/devicelist/PageMeteo.qml"
+			params = { "title": device.name, "bindPrefix": device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(VenusOS.Units_WattsPerSquareMeter, device.irradiance) ]
 			break;
 
