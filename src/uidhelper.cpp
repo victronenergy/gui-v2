@@ -96,10 +96,10 @@ void UidHelper::onNullMessageReceived(const QString &path)
 	}
 }
 
-UidHelper* UidHelper::instance(QQmlEngine *, QJSEngine *)
+UidHelper* UidHelper::create(QQmlEngine *, QJSEngine *)
 {
 	// only construct one.  the QML engine will take ownership of it.
-	static QPointer<UidHelper> ret(new UidHelper);
+	static QPointer<UidHelper> ret(new UidHelper(nullptr));
 	return qobject_cast<UidHelper *>(ret.data());
 }
 
@@ -107,7 +107,7 @@ UidHelper* UidHelper::instance(QQmlEngine *, QJSEngine *)
 
 SingleUidHelper::SingleUidHelper(QObject *parent)
 	: QObject(parent)
-	, m_uidHelper(UidHelper::instance())
+	, m_uidHelper(UidHelper::create())
 {
 	if (m_uidHelper.data()) {
 		connect(m_uidHelper.data(), &UidHelper::serviceRegistered,

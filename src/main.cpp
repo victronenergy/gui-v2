@@ -6,9 +6,6 @@
 #include "src/language.h"
 #include "src/logging.h"
 #include "src/notificationsmodel.h"
-#include "src/basedevicemodel.h"
-#include "src/aggregatedevicemodel.h"
-#include "src/uidhelper.h"
 #include "src/backendconnection.h"
 #include "src/frameratemodel.h"
 
@@ -233,16 +230,6 @@ void initBackend(bool *enableFpsCounter)
 
 void registerQmlTypes()
 {
-	qmlRegisterSingletonType<Victron::VenusOS::UidHelper>(
-		"Victron.VenusOS", 2, 0, "UidHelper",
-		&Victron::VenusOS::UidHelper::instance);
-	qmlRegisterSingletonType<Victron::VenusOS::FrameRateModel>(
-		"Victron.VenusOS", 2, 0, "FrameRateModel",
-		&Victron::VenusOS::FrameRateModel::instance);
-	qmlRegisterType<Victron::VenusOS::BaseDevice>("Victron.VenusOS", 2, 0, "BaseDevice");
-	qmlRegisterType<Victron::VenusOS::BaseDeviceModel>("Victron.VenusOS", 2, 0, "BaseDeviceModel");
-	qmlRegisterType<Victron::VenusOS::AggregateDeviceModel>("Victron.VenusOS", 2, 0, "AggregateDeviceModel");
-
 	// These types do not use dbus, so are safe to import even in the Qt Wasm build.
 	qmlRegisterType<VeQuickItem>("Victron.Veutil", 1, 0, "VeQuickItem");
 	qmlRegisterType<VeQItem>("Victron.Veutil", 1, 0, "VeQItem");
@@ -252,9 +239,6 @@ void registerQmlTypes()
 	qmlRegisterType<VeQItemTableModel>("Victron.Veutil", 1, 0, "VeQItemTableModel");
 
 	qmlRegisterUncreatableType<FirmwareUpdaterData>("Victron.Veutil", 1, 0, "FirmwareUpdater", "FirmwareUpdater cannot be created");
-
-	qmlRegisterType<Victron::VenusOS::SingleUidHelper>("Victron.VenusOS", 2, 0, "SingleUidHelper");
-	qmlRegisterType<Victron::VenusOS::LanguageModel>("Victron.VenusOS", 2, 0, "LanguageModel");
 
 	qmlRegisterType<CmTechnology>("net.connman", 0, 1, "CmTechnology");
 	qmlRegisterType<CmService>("net.connman", 0, 1, "CmService");
@@ -292,9 +276,7 @@ int main(int argc, char *argv[])
 	Victron::VenusOS::Language::create();
 
 	/* Force construction of fps counter */
-	int fpsCounterSingletonId = qmlTypeId("Victron.VenusOS", 2, 0, "FrameRateModel");
-	Q_ASSERT(fpsCounterSingletonId);
-	Victron::VenusOS::FrameRateModel* fpsCounter = engine.singletonInstance<Victron::VenusOS::FrameRateModel*>(fpsCounterSingletonId);
+	Victron::VenusOS::FrameRateModel* fpsCounter = Victron::VenusOS::FrameRateModel::create();
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/venus-gui-v2/Main.qml")));
 	if (component.isError()) {
