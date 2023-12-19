@@ -11,9 +11,9 @@
 namespace Victron {
 namespace VenusOS {
 
-QObject* FrameRateModel::instance(QQmlEngine *, QJSEngine *)
+FrameRateModel* FrameRateModel::create(QQmlEngine *, QJSEngine *)
 {
-	static FrameRateModel *frameRateModel = new FrameRateModel;
+	static FrameRateModel *frameRateModel = new FrameRateModel(nullptr);
 	return frameRateModel;
 }
 
