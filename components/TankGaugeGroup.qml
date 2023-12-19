@@ -28,38 +28,38 @@ Rectangle {
 	readonly property var tankProperties: Gauges.tankProperties(tankType)
 
 	readonly property var _subgaugeWidths: [
-		Theme.geometry.levelsPage.subgauge.width1,
-		Theme.geometry.levelsPage.subgauge.width2,
-		Theme.geometry.levelsPage.subgauge.width3,
-		Theme.geometry.levelsPage.subgauge.width4
+		Theme.geometry_levelsPage_subgauge_width1,
+		Theme.geometry_levelsPage_subgauge_width2,
+		Theme.geometry_levelsPage_subgauge_width3,
+		Theme.geometry_levelsPage_subgauge_width4
 	]
 
 	readonly property int _gaugeDelegateWidth: {
 		if (!mergeTanks) {
-			return Theme.geometry.levelsPage.subgauge.width1
+			return Theme.geometry_levelsPage_subgauge_width1
 		}
-		return _subgaugeWidths[gaugeTanks.count - 1] || Theme.geometry.levelsPage.subgauge.width4
+		return _subgaugeWidths[gaugeTanks.count - 1] || Theme.geometry_levelsPage_subgauge_width4
 	}
 
 	implicitWidth: mergeTanks
 			? (_gaugeDelegateWidth * gaugeTanks.count)
-				+ (Theme.geometry.levelsPage.subgauges.spacing * (gaugeTanks.count - 1))
-				+ (Theme.geometry.levelsPage.subgauges.horizontalMargin * 2)
-			: Theme.geometry.levelsPage.gaugeDelegate.width
+				+ (Theme.geometry_levelsPage_subgauges_spacing * (gaugeTanks.count - 1))
+				+ (Theme.geometry_levelsPage_subgauges_horizontalMargin * 2)
+			: Theme.geometry_levelsPage_gaugeDelegate_width
 
 	height: root.expanded
-			? Theme.geometry.levelsPage.gaugeDelegate.expanded.height
-			: Theme.geometry.levelsPage.gaugeDelegate.compact.height
-	color: Theme.color.levelsPage.gauge.backgroundColor
-	radius: Theme.geometry.levelsPage.gauge.radius
+			? Theme.geometry_levelsPage_gaugeDelegate_expanded_height
+			: Theme.geometry_levelsPage_gaugeDelegate_compact_height
+	color: Theme.color_levelsPage_gauge_backgroundColor
+	radius: Theme.geometry_levelsPage_gauge_radius
 
-	border.width: Theme.geometry.levelsPage.gauge.border.width
+	border.width: Theme.geometry_levelsPage_gauge_border_width
 	border.color: tankProperties.borderColor
 
 	Behavior on height {
 		enabled: root.animationEnabled && !!Global.pageManager && Global.pageManager.animatingIdleResize
 		NumberAnimation {
-			duration: Theme.animation.page.idleResize.duration
+			duration: Theme.animation_page_idleResize_duration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -69,12 +69,12 @@ Rectangle {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry.levelsPage.gauge.icon.topMargin
+			topMargin: Theme.geometry_levelsPage_gauge_icon_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		height: Theme.geometry.levelsPage.gauge.icon.height
+		height: Theme.geometry_levelsPage_gauge_icon_height
 		fillMode: Image.PreserveAspectFit
-		color: Theme.color.levelsPage.tankIcon
+		color: Theme.color_levelsPage_tankIcon
 		source: root.tankProperties.icon
 	}
 
@@ -83,12 +83,12 @@ Rectangle {
 
 		anchors {
 			top: img.bottom
-			topMargin: Theme.geometry.levelsPage.gauge.label.topMargin
+			topMargin: Theme.geometry_levelsPage_gauge_label_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
-		font.pixelSize: Theme.font.size.body1
-		minimumPixelSize: Theme.font.size.caption
+		width: Theme.geometry_levelsPage_gaugeDelegate_contentWidth
+		font.pixelSize: Theme.font_size_body1
+		minimumPixelSize: Theme.font_size_caption
 		fontSizeMode: Text.HorizontalFit
 		horizontalAlignment: Text.AlignHCenter
 		verticalAlignment: Text.AlignBottom
@@ -100,15 +100,15 @@ Rectangle {
 
 		anchors {
 			top: label.bottom
-			topMargin: Theme.geometry.levelsPage.subgauges.topMargin
+			topMargin: Theme.geometry_levelsPage_subgauges_topMargin
 			left: parent.left
-			leftMargin: Theme.geometry.levelsPage.subgauges.horizontalMargin
+			leftMargin: Theme.geometry_levelsPage_subgauges_horizontalMargin
 			right: parent.right
-			rightMargin: Theme.geometry.levelsPage.subgauges.horizontalMargin
+			rightMargin: Theme.geometry_levelsPage_subgauges_horizontalMargin
 			bottom: percentageText.top
-			bottomMargin: Theme.geometry.levelsPage.subgauges.bottomMargin
+			bottomMargin: Theme.geometry_levelsPage_subgauges_bottomMargin
 		}
-		spacing: Theme.geometry.levelsPage.subgauges.spacing
+		spacing: Theme.geometry_levelsPage_subgauges_spacing
 
 		Repeater {
 			model: root.gaugeTanks
@@ -133,10 +133,10 @@ Rectangle {
 		anchors {
 			horizontalCenter: parent.horizontalCenter
 			bottom: valueText.top
-			bottomMargin: Theme.geometry.levelsPage.gauge.valueText.topMargin
+			bottomMargin: Theme.geometry_levelsPage_gauge_valueText_topMargin
 		}
-		width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
-		font.pixelSize: Theme.font.size.h1
+		width: Theme.geometry_levelsPage_gaugeDelegate_contentWidth
+		font.pixelSize: Theme.font_size_h1
 		unit: VenusOS.Units_Percentage
 		value: (isNaN(root.level) || root.level < 0) ? 0 : Math.round(root.level)
 	}
@@ -146,17 +146,17 @@ Rectangle {
 
 		anchors {
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.levelsPage.gauge.valueText.bottomMargin
+			bottomMargin: Theme.geometry_levelsPage_gauge_valueText_bottomMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		width: Theme.geometry.levelsPage.gaugeDelegate.contentWidth
+		width: Theme.geometry_levelsPage_gaugeDelegate_contentWidth
 		horizontalAlignment: Text.AlignHCenter
 		fontSizeMode: Text.HorizontalFit
-		font.pixelSize: Theme.font.size.caption
-		color: Theme.color.font.secondary
+		font.pixelSize: Theme.font_size_caption
+		color: Theme.color_font_secondary
 		text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit.value,
 				isNaN(root.totalCapacity) ? 0 : root.totalCapacity,
 				isNaN(root.totalRemaining) ? 0 : root.totalRemaining,
-				Theme.geometry.quantityLabel.valueLength)
+				Theme.geometry_quantityLabel_valueLength)
 	}
 }

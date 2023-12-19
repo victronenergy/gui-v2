@@ -14,9 +14,9 @@ Item {
 	property alias alignment: quantityLabel.alignment
 	property alias label: quantityLabel
 	property bool animationEnabled
-	readonly property int _maxAngle: alignment & Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.maxAngle : Theme.geometry.briefPage.smallEdgeGauge.maxAngle
+	readonly property int _maxAngle: alignment & Qt.AlignVCenter ? Theme.geometry_briefPage_largeEdgeGauge_maxAngle : Theme.geometry_briefPage_smallEdgeGauge_maxAngle
 
-	implicitHeight: alignment & Qt.AlignVCenter ? Theme.geometry.briefPage.largeEdgeGauge.height : Theme.geometry.briefPage.smallEdgeGauge.height
+	implicitHeight: alignment & Qt.AlignVCenter ? Theme.geometry_briefPage_largeEdgeGauge_height : Theme.geometry_briefPage_smallEdgeGauge_height
 
 	Repeater {
 		id: gaugeRepeater
@@ -25,16 +25,16 @@ Item {
 
 		delegate: ArcGauge {
 			animationEnabled: root.animationEnabled
-			width: Theme.geometry.briefPage.edgeGauge.width
+			width: Theme.geometry_briefPage_edgeGauge_width
 			x: index*strokeWidth
 			opacity: 1.0 - index * 0.3
 			height: root.height
 			startAngle: root.alignment & Qt.AlignVCenter ? 270 + _maxAngle/2 : 270
 			endAngle: startAngle - _maxAngle
-			radius: Theme.geometry.briefPage.edgeGauge.radius - index*strokeWidth
+			radius: Theme.geometry_briefPage_edgeGauge_radius - index*strokeWidth
 			useLargeArc: false
 			direction: PathArc.Counterclockwise
-			strokeWidth: Theme.geometry.arc.strokeWidth
+			strokeWidth: Theme.geometry_arc_strokeWidth
 			arcY: root.alignment & Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
 			value: {
 				if (!visible || solarMeasurements.maxPower == 0) {
@@ -67,7 +67,7 @@ Item {
 			const averagePower = _activeSamples.reduce((accumulator, currentValue) => accumulator + currentValue) / _activeSamples.length
 			let newAverages = sampledAverages
 			newAverages.unshift(averagePower)
-			if (newAverages.length >= Theme.geometry.briefPage.solarHistoryGauge.maximumGaugeCount) {
+			if (newAverages.length >= Theme.geometry_briefPage_solarHistoryGauge_maximumGaugeCount) {
 				newAverages.pop()
 			}
 			_activeSamples = []

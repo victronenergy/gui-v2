@@ -28,8 +28,8 @@ Page {
 						return actual + "/" + max
 					}
 
-					x: Theme.geometry.listItem.content.horizontalMargin
-					width: parent.width - Theme.geometry.listItem.content.horizontalMargin
+					x: Theme.geometry_listItem_content_horizontalMargin
+					width: parent.width - Theme.geometry_listItem_content_horizontalMargin
 					equalWidthColumns: true
 
 					model: [
@@ -69,7 +69,7 @@ Page {
 
 					anchors {
 						top: chargerSummary.bottom
-						topMargin: Theme.geometry.gradientList.spacing
+						topMargin: Theme.geometry_gradientList_spacing
 					}
 					visible: root.evCharger.phases.count > 1
 					equalWidthColumns: true
@@ -98,7 +98,7 @@ Page {
 
 			Item {
 				width: 1
-				height: Theme.geometry.gradientList.spacing
+				height: Theme.geometry_gradientList_spacing
 			}
 
 			ListRadioButtonGroup {

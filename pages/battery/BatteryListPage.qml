@@ -12,18 +12,18 @@ Page {
 
 	GradientListView {
 		model: Global.batteries.model
-		spacing: Theme.geometry.gradientList.spacing
+		spacing: Theme.geometry_gradientList_spacing
 		delegate: ListItemBackground {
-			height: Theme.geometry.batteryListPage.item.height
+			height: Theme.geometry_batteryListPage_item_height
 
 			Column {
 				anchors {
 					left: parent.left
-					leftMargin: Theme.geometry.listItem.content.horizontalMargin
+					leftMargin: Theme.geometry_listItem_content_horizontalMargin
 					right: arrowIcon.left
 					verticalCenter: parent.verticalCenter
 				}
-				spacing: Theme.geometry.batteryListPage.item.verticalSpacing
+				spacing: Theme.geometry_batteryListPage_item_verticalSpacing
 
 				Row {
 					id: topRow
@@ -32,10 +32,10 @@ Page {
 					Label {
 						id: nameLabel
 
-						width: parent.width - socLabel.width - Theme.geometry.listItem.content.spacing
+						width: parent.width - socLabel.width - Theme.geometry_listItem_content_spacing
 						elide: Text.ElideRight
 						text: modelData.name
-						font.pixelSize: Theme.font.size.body2
+						font.pixelSize: Theme.font_size_body2
 					}
 
 					QuantityLabel {
@@ -44,7 +44,7 @@ Page {
 						height: nameLabel.height
 						value: modelData.stateOfCharge
 						unit: VenusOS.Units_Percentage
-						font.pixelSize: Theme.font.size.body2
+						font.pixelSize: Theme.font_size_body2
 					}
 				}
 
@@ -56,7 +56,7 @@ Page {
 						id: measurementsRow
 
 						anchors.verticalCenter: parent.verticalCenter
-						spacing: Theme.geometry.listItem.content.spacing
+						spacing: Theme.geometry_listItem_content_spacing
 
 						QuantityRepeater {
 							model: [
@@ -73,10 +73,10 @@ Page {
 
 					Label {
 						anchors.verticalCenter: parent.verticalCenter
-						width: parent.width - measurementsRow.width - Theme.geometry.listItem.content.spacing
+						width: parent.width - measurementsRow.width - Theme.geometry_listItem_content_spacing
 						elide: Text.ElideRight
-						font.pixelSize: Theme.font.size.body2
-						color: Theme.color.listItem.secondaryText
+						font.pixelSize: Theme.font_size_body2
+						color: Theme.color_listItem_secondaryText
 						text: {
 							const modeText = Global.batteries.modeToText(modelData.mode)
 							if (modelData.mode === VenusOS.Battery_Mode_Discharging) {
@@ -95,14 +95,14 @@ Page {
 
 				anchors {
 					right: parent.right
-					rightMargin: Theme.geometry.listItem.content.horizontalMargin
+					rightMargin: Theme.geometry_listItem_content_horizontalMargin
 					verticalCenter: parent.verticalCenter
 				}
 				source: "/images/icon_back_32.svg"
-				width: Theme.geometry.statusBar.button.icon.width
-				height: Theme.geometry.statusBar.button.icon.height
+				width: Theme.geometry_statusBar_button_icon_width
+				height: Theme.geometry_statusBar_button_icon_height
 				rotation: 180
-				color: mouseArea.containsPress ? Theme.color.listItem.down.forwardIcon : Theme.color.listItem.forwardIcon
+				color: mouseArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 				fillMode: Image.PreserveAspectFit
 			}
 

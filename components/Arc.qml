@@ -27,7 +27,7 @@ ShapePath {
 	property real _animatedEndAngle: endAngle
 
 	strokeColor: "black"
-	strokeWidth: Theme.geometry.arc.strokeWidth
+	strokeWidth: Theme.geometry_arc_strokeWidth
 	fillColor: "transparent"
 	capStyle: ShapePath.RoundCap
 	joinStyle: ShapePath.RoundJoin
@@ -38,7 +38,7 @@ ShapePath {
 	Behavior on _animatedEndAngle {
 		enabled: path.animationEnabled
 		NumberAnimation {
-			duration: Theme.animation.progressArc.duration
+			duration: Theme.animation_progressArc_duration
 			easing.type: Easing.InOutQuad
 		}
 	}

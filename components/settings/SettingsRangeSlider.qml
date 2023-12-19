@@ -11,43 +11,43 @@ RangeSlider {
 
 	property int decimals
 	property string suffix
-	property real labelWidth: Theme.geometry.settings.battery.rangeSlider.labelWidth
+	property real labelWidth: Theme.geometry_settings_battery_rangeSlider_labelWidth
 
 	readonly property string _labelPlaceholderText: "" + to.toFixed(decimals) + suffix
 
 	implicitWidth: parent ? parent.width : 0
-	implicitHeight: Theme.geometry.listItem.height
-	stepSize: (to-from) / Theme.geometry.listItem.slider.stepDivsion
+	implicitHeight: Theme.geometry_listItem_height
+	stepSize: (to-from) / Theme.geometry_listItem_slider_stepDivsion
 
-	leftPadding: Theme.geometry.listItem.content.horizontalMargin
+	leftPadding: Theme.geometry_listItem_content_horizontalMargin
 		+ labelWidth
-		+ Theme.geometry.listItem.slider.spacing
-	rightPadding: Theme.geometry.listItem.content.horizontalMargin
+		+ Theme.geometry_listItem_slider_spacing
+	rightPadding: Theme.geometry_listItem_content_horizontalMargin
 		+ labelWidth
-		+ Theme.geometry.listItem.slider.spacing
+		+ Theme.geometry_listItem_slider_spacing
 
 	Label {
 		anchors {
 			verticalCenter: parent.verticalCenter
 			left: parent.left
-			leftMargin: Theme.geometry.listItem.content.horizontalMargin
+			leftMargin: Theme.geometry_listItem_content_horizontalMargin
 		}
 		width: root.labelWidth
 		text: root.first.value.toFixed(root.decimals) + root.suffix
 		horizontalAlignment: Text.AlignRight
-		font.pixelSize: Theme.font.size.body2
-		color: Theme.color.font.secondary
+		font.pixelSize: Theme.font_size_body2
+		color: Theme.color_font_secondary
 	}
 
 	Label {
 		anchors {
 			verticalCenter: parent.verticalCenter
 			right: parent.right
-			rightMargin: Theme.geometry.listItem.content.horizontalMargin
+			rightMargin: Theme.geometry_listItem_content_horizontalMargin
 		}
 		width: root.labelWidth
 		text: root.second.value.toFixed(root.decimals) + root.suffix
-		font.pixelSize: Theme.font.size.body2
-		color: Theme.color.font.secondary
+		font.pixelSize: Theme.font_size_body2
+		color: Theme.color_font_secondary
 	}
 }

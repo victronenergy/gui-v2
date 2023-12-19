@@ -93,7 +93,7 @@ Page {
 				parent: quantityGroup.content
 				anchors.verticalCenter: parent ? parent.verticalCenter : undefined
 				source: "/images/icon_minus.svg"
-				color: Theme.color.ok
+				color: Theme.color_ok
 				visible: root._canEditPoints
 
 				MouseArea {
@@ -130,19 +130,19 @@ Page {
 
 					anchors {
 						centerIn: parent
-						verticalCenterOffset: -Theme.geometry.modalDialog.content.margins
+						verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
 					}
-					spacing: Theme.geometry.modalDialog.content.spacing
+					spacing: Theme.geometry_modalDialog_content_spacing
 
 					Column {
 						width: sensorLevelSpinBox.width
-						spacing: Theme.geometry.modalDialog.content.margins
+						spacing: Theme.geometry_modalDialog_content_margins
 
 						Label {
 							width: parent.width
 							wrapMode: Text.Wrap
 							horizontalAlignment: Text.AlignHCenter
-							color: Theme.color.font.secondary
+							color: Theme.color_font_secondary
 							//: The sensor level (as a percentage) for this tank shape point
 							//% "Sensor level"
 							text: qsTrId("devicelist_tankshape_sensor_level")
@@ -150,8 +150,8 @@ Page {
 
 						SpinBox {
 							id: sensorLevelSpinBox
-							width: Theme.geometry.tankShapeSelector.spinBox.width
-							height: Theme.geometry.tankShapeSelector.spinBox.height
+							width: Theme.geometry_tankShapeSelector_spinBox_width
+							height: Theme.geometry_tankShapeSelector_spinBox_height
 							from: 1
 							to: 99
 							textFromValue: function(value, locale) { return value + "%" }
@@ -161,13 +161,13 @@ Page {
 
 					Column {
 						width: volumeSpinBox.width
-						spacing: Theme.geometry.modalDialog.content.margins
+						spacing: Theme.geometry_modalDialog_content_margins
 
 						Label {
 							width: parent.width
 							wrapMode: Text.Wrap
 							horizontalAlignment: Text.AlignHCenter
-							color: Theme.color.font.secondary
+							color: Theme.color_font_secondary
 							//: The volume (as a percentage) for this tank shape point
 							//% "Volume"
 							text: qsTrId("devicelist_tankshape_volume")
@@ -175,8 +175,8 @@ Page {
 
 						SpinBox {
 							id: volumeSpinBox
-							width: Theme.geometry.tankShapeSelector.spinBox.width
-							height: Theme.geometry.tankShapeSelector.spinBox.height
+							width: Theme.geometry_tankShapeSelector_spinBox_width
+							height: Theme.geometry_tankShapeSelector_spinBox_height
 							from: 1
 							to: 99
 							textFromValue: function(value, locale) { return value + "%" }
@@ -188,10 +188,10 @@ Page {
 				Row {
 					anchors {
 						top: spinBoxRow.bottom
-						topMargin: Theme.geometry.modalDialog.content.margins
+						topMargin: Theme.geometry_modalDialog_content_margins
 						horizontalCenter: parent.horizontalCenter
 					}
-					spacing: Theme.geometry.listItem.content.spacing
+					spacing: Theme.geometry_listItem_content_spacing
 					visible: errorLabel.text.length > 0
 
 					CP.ColorImage {
@@ -200,7 +200,7 @@ Page {
 						sourceSize.width: 24
 						sourceSize.height: 24
 						source: "qrc:/images/icon_alarm_48.svg"
-						color: Theme.color.red
+						color: Theme.color_red
 					}
 
 					Label {
@@ -208,7 +208,7 @@ Page {
 
 						width: Math.min(implicitWidth, spinBoxRow.width - alarmIcon.width - parent.spacing)
 						wrapMode: Text.Wrap
-						color: Theme.color.font.secondary
+						color: Theme.color_font_secondary
 					}
 				}
 			}

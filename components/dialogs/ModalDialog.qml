@@ -37,18 +37,18 @@ T.Dialog {
 	modal: true
 
 	enter: Transition {
-		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation.page.fade.duration }
+		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation_page_fade_duration }
 	}
 	exit: Transition {
-		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation.page.fade.duration }
+		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation_page_fade_duration }
 	}
 
 	background: Rectangle {
-		implicitWidth: Theme.geometry.modalDialog.width
-		implicitHeight: Theme.geometry.modalDialog.height
-		radius: Theme.geometry.modalDialog.radius
-		color: Theme.color.background.secondary
-		border.color: Theme.color.modalDialog.border
+		implicitWidth: Theme.geometry_modalDialog_width
+		implicitHeight: Theme.geometry_modalDialog_height
+		radius: Theme.geometry_modalDialog_radius
+		color: Theme.color_background_secondary
+		border.color: Theme.color_modalDialog_border
 
 		DialogShadow {
 			backgroundRect: parent
@@ -58,7 +58,7 @@ T.Dialog {
 
 	header: Item {
 		width: root.width
-		height: Theme.geometry.modalDialog.header.height
+		height: Theme.geometry_modalDialog_header_height
 
 		Label {
 			id: headerLabel
@@ -69,8 +69,8 @@ T.Dialog {
 			}
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
-			color: Theme.color.font.primary
-			font.pixelSize: root.secondaryTitle.length ? Theme.font.size.body1 : Theme.font.size.body3
+			color: Theme.color_font_primary
+			font.pixelSize: root.secondaryTitle.length ? Theme.font_size_body1 : Theme.font_size_body3
 			text: root.title
 			wrapMode: Text.Wrap
 		}
@@ -81,8 +81,8 @@ T.Dialog {
 			anchors.top: headerLabel.bottom
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
-			color: Theme.color.font.primary
-			font.pixelSize: Theme.font.size.body2
+			color: Theme.color_font_primary
+			font.pixelSize: Theme.font_size_body2
 			text: root.secondaryTitle
 			wrapMode: Text.Wrap
 		}
@@ -90,7 +90,7 @@ T.Dialog {
 
 	footer: Item {
 		visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_NoOptions
-		height: visible ? Theme.geometry.modalDialog.footer.height : 0
+		height: visible ? Theme.geometry_modalDialog_footer_height : 0
 		SeparatorBar {
 			id: footerTopSeparator
 			anchors {
@@ -111,8 +111,8 @@ T.Dialog {
 				bottomMargin: root.background.border.width
 			}
 
-			font.pixelSize: Theme.font.size.body2
-			color: Theme.color.font.primary
+			font.pixelSize: Theme.font_size_body2
+			color: Theme.color_font_primary
 			spacing: 0
 			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
 			text: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly ?
@@ -134,7 +134,7 @@ T.Dialog {
 				bottomMargin: root.background.border.width
 				top: footerTopSeparator.bottom
 			}
-			width: Theme.geometry.modalDialog.footer.midSeparator.width
+			width: Theme.geometry_modalDialog_footer_midSeparator_width
 		}
 		Button {
 			id: doneButton
@@ -147,8 +147,8 @@ T.Dialog {
 				bottomMargin: root.background.border.width
 			}
 
-			font.pixelSize: Theme.font.size.body2
-			color: Theme.color.font.primary
+			font.pixelSize: Theme.font_size_body2
+			color: Theme.color_font_primary
 			spacing: 0
 			text: root.acceptText
 			onClicked: {

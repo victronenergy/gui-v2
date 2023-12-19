@@ -13,14 +13,14 @@ Item {
 	property var model: [] // contains 12 values that define the shape of our bendy graph
 	property real initialModelValue: 0.0
 	property real offsetFraction
-	property real warningThreshold: Theme.geometry.briefPage.sidePanel.loadGraph.warningThreshold
-	property int dotSize: Theme.geometry.briefPage.sidePanel.loadGraph.dotSize
-	property color belowThresholdFillColor1: Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor1
-	property color belowThresholdFillColor2: Theme.color.briefPage.sidePanel.loadGraph.nominal.gradientColor2
-	property color belowThresholdBackgroundColor1: Theme.color.briefPage.background
-	property color belowThresholdBackgroundColor2: Theme.color.briefPage.background
-	property color horizontalGradientColor1: Theme.color.briefPage.background
-	property color horizontalGradientColor2: Theme.color.briefPage.sidePanel.loadGraph.horizontalGradient.color
+	property real warningThreshold: Theme.geometry_briefPage_sidePanel_loadGraph_warningThreshold
+	property int dotSize: Theme.geometry_briefPage_sidePanel_loadGraph_dotSize
+	property color belowThresholdFillColor1: Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor1
+	property color belowThresholdFillColor2: Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor2
+	property color belowThresholdBackgroundColor1: Theme.color_briefPage_background
+	property color belowThresholdBackgroundColor2: Theme.color_briefPage_background
+	property color horizontalGradientColor1: Theme.color_briefPage_background
+	property color horizontalGradientColor2: Theme.color_briefPage_sidePanel_loadGraph_horizontalGradient_color
 
 	function addValue(value) {
 		model.push(value)
@@ -29,25 +29,25 @@ Item {
 		orangePath.model = root.model
 	}
 
-	implicitWidth: Theme.geometry.briefPage.sidePanel.loadGraph.width
-	implicitHeight: Theme.geometry.briefPage.sidePanel.loadGraph.height
+	implicitWidth: Theme.geometry_briefPage_sidePanel_loadGraph_width
+	implicitHeight: Theme.geometry_briefPage_sidePanel_loadGraph_height
 
 	Rectangle {
 		anchors.fill: parent
-		color: Theme.color.briefPage.background
+		color: Theme.color_briefPage_background
 
 		LoadGraphShapePath {
 			id: orangePath
 
 			anchors.fill: parent
 			model: root.model
-			strokeColor: Theme.color.briefPage.sidePanel.loadGraph.warning.strokeColor
+			strokeColor: Theme.color_briefPage_sidePanel_loadGraph_warning_strokeColor
 			offsetFraction: root.offsetFraction
 			fillGradient: LinearGradient {
 				x1: 0; y1: 0
 				x2: 0; y2: height
-				GradientStop { position: 0; color: Theme.color.briefPage.sidePanel.loadGraph.warning.gradientColor1 }
-				GradientStop { position: 1; color: Theme.color.briefPage.sidePanel.loadGraph.warning.gradientColor2 }
+				GradientStop { position: 0; color: Theme.color_briefPage_sidePanel_loadGraph_warning_gradientColor1 }
+				GradientStop { position: 1; color: Theme.color_briefPage_sidePanel_loadGraph_warning_gradientColor2 }
 			}
 		}
 	}
@@ -65,7 +65,7 @@ Item {
 		LoadGraphShapePath {
 			id: bluePath
 			model: orangePath.model
-			strokeColor: Theme.color.briefPage.sidePanel.loadGraph.nominal.strokeColor
+			strokeColor: Theme.color_briefPage_sidePanel_loadGraph_nominal_strokeColor
 			height: root.height + 2*strokeWidth
 			width: parent.width + 2*strokeWidth
 			anchors.bottom: parent.bottom
@@ -93,7 +93,7 @@ Item {
 				delegate: Rectangle {
 					implicitWidth: dotSize
 					implicitHeight: dotSize
-					color: Theme.color.briefPage.sidePanel.loadGraph.dotColor
+					color: Theme.color_briefPage_sidePanel_loadGraph_dotColor
 				}
 			}
 		}
@@ -104,15 +104,15 @@ Item {
 			orientation: Gradient.Horizontal
 			GradientStop { position: 0; color: horizontalGradientColor1 }
 			GradientStop {
-				position: Theme.geometry.briefPage.sidePanel.loadGraph.horizontalGradient.width/width
+				position: Theme.geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width/width
 				color: horizontalGradientColor2
 			}
 			GradientStop {
-				position: 1 - Theme.geometry.briefPage.sidePanel.loadGraph.horizontalGradient.width/width
+				position: 1 - Theme.geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width/width
 				color: horizontalGradientColor2
 			}
 			GradientStop { position: 1; color: horizontalGradientColor1 }
 		}
 	}
-	Component.onCompleted: model = Array(Theme.animation.loadGraph.model.length).fill(initialModelValue)
+	Component.onCompleted: model = Array(Theme.animation_loadGraph_model_length).fill(initialModelValue)
 }

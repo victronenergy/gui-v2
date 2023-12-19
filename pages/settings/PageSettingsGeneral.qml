@@ -171,7 +171,7 @@ Page {
 
 					anchors {
 						bottom: parent.bottom
-						bottomMargin: Theme.geometry.listItem.content.verticalMargin
+						bottomMargin: Theme.geometry_listItem_content_verticalMargin
 					}
 					//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
 					text: qsTrId("settings_demo_mode_caption")

@@ -7,7 +7,7 @@ import QtQuick
 import Victron.VenusOS
 
 ListView {
-	spacing: Theme.geometry.notificationsPage.historyView.spacing
+	spacing: Theme.geometry_notificationsPage_historyView_spacing
 	delegate: NotificationDelegate {
 		acknowledged: model.acknowledged
 		alarmActive: model.active

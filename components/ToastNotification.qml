@@ -20,10 +20,10 @@ Item {
 	signal dismissed()
 
 	implicitWidth: parent ? parent.width : 0
-	implicitHeight: Math.max(Theme.geometry.toastNotification.minHeight,
-			label.implicitHeight + 2*Theme.geometry.toastNotification.label.padding)
+	implicitHeight: Math.max(Theme.geometry_toastNotification_minHeight,
+			label.implicitHeight + 2*Theme.geometry_toastNotification_label_padding)
 
-	Behavior on opacity { OpacityAnimator { duration: Theme.animation.toastNotification.fade.duration } }
+	Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration } }
 	opacity: dismiss.dismissClicked ? 0.0
 		: dismiss.dismissAvailable  ? 1.0
 		: 0.0
@@ -34,11 +34,11 @@ Item {
 		id: background
 		anchors.fill: parent
 
-		radius: Theme.geometry.toastNotification.radius
-		color: root.category === VenusOS.Notification_Confirm ? Theme.color.toastNotification.background.confirmation
-			 : root.category === VenusOS.Notification_Warning ? Theme.color.toastNotification.background.warning
-			 : root.category === VenusOS.Notification_Alarm ? Theme.color.toastNotification.background.error
-			 : Theme.color.toastNotification.background.informative
+		radius: Theme.geometry_toastNotification_radius
+		color: root.category === VenusOS.Notification_Confirm ? Theme.color_toastNotification_background_confirmation
+			 : root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
+			 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
+			 : Theme.color_toastNotification_background_informative
 
 		AsymmetricRoundedRectangle {
 			id: highlight
@@ -49,21 +49,21 @@ Item {
 			}
 
 			visible: root.category !== ToastNotification.None
-			width: Theme.geometry.toastNotification.minHeight
+			width: Theme.geometry_toastNotification_minHeight
 			radius: parent.radius
 			flat: true
 
-			color: root.category === VenusOS.Notification_Confirm ? Theme.color.toastNotification.highlight.confirmation
-				 : root.category === VenusOS.Notification_Warning ? Theme.color.toastNotification.highlight.warning
-				 : root.category === VenusOS.Notification_Alarm ? Theme.color.toastNotification.highlight.error
-				 : Theme.color.toastNotification.highlight.informative
+			color: root.category === VenusOS.Notification_Confirm ? Theme.color_toastNotification_highlight_confirmation
+				 : root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
+				 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error
+				 : Theme.color_toastNotification_highlight_informative
 
 			CP.IconImage {
 				id: icon
 				anchors.centerIn: parent
 
-				width: Theme.geometry.toastNotification.icon.width
-				color: Theme.color.toastNotification.foreground
+				width: Theme.geometry_toastNotification_icon_width
+				color: Theme.color_toastNotification_foreground
 				source: root.category === VenusOS.Notification_Confirm ? "qrc:/images/toast_icon_checkmark.svg"
 					  : root.category === VenusOS.Notification_Warning ? "qrc:/images/toast_icon_alarm.svg"
 					  : root.category === VenusOS.Notification_Alarm ? "qrc:/images/toast_icon_alarm.svg"
@@ -78,13 +78,13 @@ Item {
 				right: dismiss.left
 				top: parent.top
 				bottom: parent.bottom
-				margins: Theme.geometry.toastNotification.label.padding
+				margins: Theme.geometry_toastNotification_label_padding
 			}
 
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			wrapMode: Text.Wrap
-			color: Theme.color.toastNotification.foreground
+			color: Theme.color_toastNotification_foreground
 		}
 
 		MouseArea {
@@ -97,15 +97,15 @@ Item {
 
 			property bool dismissClicked: false
 			property bool dismissAvailable: false
-			width: Theme.geometry.toastNotification.minHeight
+			width: Theme.geometry_toastNotification_minHeight
 			onClicked: dismissClicked = true
 
 			CP.IconImage {
 				id: dismissIcon
 				anchors.centerIn: parent
 
-				width: Theme.geometry.toastNotification.icon.width
-				color: Theme.color.toastNotification.foreground
+				width: Theme.geometry_toastNotification_icon_width
+				color: Theme.color_toastNotification_foreground
 				source: "qrc:/images/toast_icon_close.svg"
 			}
 		}

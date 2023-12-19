@@ -20,19 +20,19 @@ ModalDialog {
 	contentItem: Column {
 		anchors {
 			top: root.header.bottom
-			topMargin: Theme.geometry.modalDialog.content.margins
+			topMargin: Theme.geometry_modalDialog_content_margins
 			left: parent.left
 			right: parent.right
 			bottom: parent.footer.top
 		}
-		spacing: Theme.geometry.modalDialog.content.margins
+		spacing: Theme.geometry_modalDialog_content_margins
 
 		Column {
 			width: parent.width
 
 			Label {
 				width: parent.width
-				height: implicitHeight + Theme.geometry.modalDialog.content.margins/2
+				height: implicitHeight + Theme.geometry_modalDialog_content_margins/2
 				wrapMode: Text.Wrap
 				horizontalAlignment: Text.AlignHCenter
 
@@ -43,13 +43,13 @@ ModalDialog {
 			FixedWidthLabel {
 				anchors.horizontalCenter: parent.horizontalCenter
 				text: Utils.formatAsHHMMSS(root.generator.runtime)
-				font.pixelSize: Theme.font.size.h3
+				font.pixelSize: Theme.font_size_h3
 			}
 
 			Label {
 				width: parent.width
 				wrapMode: Text.Wrap
-				color: Theme.color.font.secondary
+				color: Theme.color_font_secondary
 				horizontalAlignment: Text.AlignHCenter
 				visible: root.generator.manualStartTimer > 0
 
@@ -62,7 +62,7 @@ ModalDialog {
 		Label {
 			width: parent.width
 			wrapMode: Text.Wrap
-			color: Theme.color.font.primary
+			color: Theme.color_font_primary
 			horizontalAlignment: Text.AlignHCenter
 
 			//% "Generator will keep running if an autostart condition is met."
@@ -75,7 +75,7 @@ ModalDialog {
 
 		width: root.acceptButton.width
 		height: root.acceptButton.height
-		color: Theme.color.dimRed
+		color: Theme.color_dimRed
 
 		onSlidingAnimationFinished: {
 			root.canAccept = true
@@ -86,7 +86,7 @@ ModalDialog {
 	tryAccept: function() {
 		root.canAccept = false
 		root.generator.stop()
-		acceptButtonBackground.slidingAnimationTo(Theme.color.red)
+		acceptButtonBackground.slidingAnimationTo(Theme.color_red)
 		return false
 	}
 }

@@ -13,35 +13,35 @@ CT.ComboBox {
 	id: root
 
 	implicitWidth: contentItem.implicitWidth + root.leftPadding + root.rightPadding
-	implicitHeight: Theme.geometry.comboBox.height
+	implicitHeight: Theme.geometry_comboBox_height
 
-	leftPadding: Theme.geometry.comboBox.leftPadding
-	rightPadding: Theme.geometry.comboBox.rightPadding
-	topPadding: Theme.geometry.comboBox.verticalPadding
-	bottomPadding: Theme.geometry.comboBox.verticalPadding
-	spacing: Theme.geometry.comboBox.spacing
+	leftPadding: Theme.geometry_comboBox_leftPadding
+	rightPadding: Theme.geometry_comboBox_rightPadding
+	topPadding: Theme.geometry_comboBox_verticalPadding
+	bottomPadding: Theme.geometry_comboBox_verticalPadding
+	spacing: Theme.geometry_comboBox_spacing
 
 	delegate: CT.ItemDelegate {
 		id: optionDelegate
 
 		width: root.width
-		height: Theme.geometry.comboBox.height
+		height: Theme.geometry_comboBox_height
 		highlighted: root.highlightedIndex === index
 
 		contentItem: Rectangle {
 			anchors.fill: parent
-			radius: Theme.geometry.button.radius
-			color: optionDelegate.pressed ? Theme.color.ok : "transparent"
+			radius: Theme.geometry_button_radius
+			color: optionDelegate.pressed ? Theme.color_ok : "transparent"
 
 			Label {
 				anchors.fill: parent
 				leftPadding: root.leftPadding
 				rightPadding: root.leftPadding  // no indicator here, use same padding as left side
-				font.pixelSize: Theme.font.size.body1
+				font.pixelSize: Theme.font_size_body1
 				verticalAlignment: Text.AlignVCenter
 				elide: Text.ElideRight
 				text: modelData.text
-				color: optionDelegate.pressed ? Theme.color.button.down.text : Theme.color.font.primary
+				color: optionDelegate.pressed ? Theme.color_button_down_text : Theme.color_font_primary
 			}
 
 			CP.ColorImage {
@@ -51,7 +51,7 @@ CT.ComboBox {
 					verticalCenter: parent.verticalCenter
 				}
 				source: "qrc:/images/icon_checkmark_32"
-				color: optionDelegate.pressed ? Theme.color.button.down.text : Theme.color.ok
+				color: optionDelegate.pressed ? Theme.color_button_down_text : Theme.color_ok
 				visible: root.currentIndex === index
 			}
 		}
@@ -63,28 +63,28 @@ CT.ComboBox {
 		x: root.width - width - root.rightPadding
 		y: root.topPadding + (root.availableHeight - height) / 2
 		source: "/images/icon_back_32.svg"
-		width: Theme.geometry.comboBox.indicator.height
-		height: Theme.geometry.comboBox.indicator.height
+		width: Theme.geometry_comboBox_indicator_height
+		height: Theme.geometry_comboBox_indicator_height
 		rotation: 270
-		color: root.pressed ? Theme.color.primary : Theme.color.ok
+		color: root.pressed ? Theme.color_primary : Theme.color_ok
 		fillMode: Image.PreserveAspectFit
 	}
 
 	contentItem: Label {
 		leftPadding: 0
 		rightPadding: root.indicator.width + root.spacing
-		font.pixelSize: Theme.font.size.body1
+		font.pixelSize: Theme.font_size_body1
 		verticalAlignment: Text.AlignVCenter
 		elide: Text.ElideRight
 		text: root.displayText
-		color: root.pressed ? Theme.color.button.down.text : Theme.color.font.primary
+		color: root.pressed ? Theme.color_button_down_text : Theme.color_font_primary
 	}
 
 	background: Rectangle {
-		border.color: Theme.color.ok
-		border.width: Theme.geometry.button.border.width
-		radius: Theme.geometry.button.radius
-		color: root.pressed ? Theme.color.ok : Theme.color.darkOk
+		border.color: Theme.color_ok
+		border.width: Theme.geometry_button_border_width
+		radius: Theme.geometry_button_radius
+		color: root.pressed ? Theme.color_ok : Theme.color_darkOk
 	}
 
 	popup: CT.Popup {
@@ -101,16 +101,16 @@ CT.ComboBox {
 
 		background: Rectangle {
 			// This base rectangle is required because the inner rect below has a transparent
-			// background (Theme.color.darkOk).
-			border.color: Theme.color.ok
-			border.width: Theme.geometry.button.border.width
-			radius: Theme.geometry.button.radius
-			color: Theme.color.page.background
+			// background (Theme.color_darkOk).
+			border.color: Theme.color_ok
+			border.width: Theme.geometry_button_border_width
+			radius: Theme.geometry_button_radius
+			color: Theme.color_page_background
 
 			Rectangle {
 				anchors.fill: parent
-				radius: Theme.geometry.button.radius
-				color: Theme.color.darkOk
+				radius: Theme.geometry_button_radius
+				color: Theme.color_darkOk
 			}
 		}
 	}

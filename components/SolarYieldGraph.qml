@@ -10,17 +10,17 @@ import Victron.Utils
 Item {
 	id: root
 
-	readonly property int _maxBars: Math.max(0, width / (Theme.geometry.overviewPage.widget.solar.graph.bar.width
-		+ Theme.geometry.overviewPage.widget.solar.graph.margins))
+	readonly property int _maxBars: Math.max(0, width / (Theme.geometry_overviewPage_widget_solar_graph_bar_width
+		+ Theme.geometry_overviewPage_widget_solar_graph_margins))
 
 	Row {
 		anchors {
 			horizontalCenter: parent.horizontalCenter
 			bottom: parent.bottom
 		}
-		width: (_maxBars * Theme.geometry.overviewPage.widget.solar.graph.bar.width)
-			+ ((_maxBars-1) * Theme.geometry.overviewPage.widget.solar.graph.margins)
-		spacing: Theme.geometry.overviewPage.widget.solar.graph.margins
+		width: (_maxBars * Theme.geometry_overviewPage_widget_solar_graph_bar_width)
+			+ ((_maxBars-1) * Theme.geometry_overviewPage_widget_solar_graph_margins)
+		spacing: Theme.geometry_overviewPage_widget_solar_graph_margins
 
 		Repeater {
 			id: dayRepeater
@@ -35,9 +35,9 @@ Item {
 				height: yieldModel.maximumYield > 0
 						? root.height * (model.yieldKwh / yieldModel.maximumYield)
 						: 0
-				width: Theme.geometry.overviewPage.widget.solar.graph.bar.width
-				radius: Theme.geometry.overviewPage.widget.solar.graph.bar.radius
-				color: Theme.color.overviewPage.widget.solar.graph.bar
+				width: Theme.geometry_overviewPage_widget_solar_graph_bar_width
+				radius: Theme.geometry_overviewPage_widget_solar_graph_bar_radius
+				color: Theme.color_overviewPage_widget_solar_graph_bar
 			}
 		}
 	}

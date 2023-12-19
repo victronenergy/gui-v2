@@ -25,19 +25,19 @@ ListView {
 	property int _lastVisibleTankType
 
 	readonly property var _spacingValues: [
-		Theme.geometry.levelsPage.gauge.spacing2,
-		Theme.geometry.levelsPage.gauge.spacing3,
-		Theme.geometry.levelsPage.gauge.spacing4,
-		Theme.geometry.levelsPage.gauge.spacing5,
-		Theme.geometry.levelsPage.gauge.spacing6,
-		Theme.geometry.levelsPage.gauge.spacing7,
+		Theme.geometry_levelsPage_gauge_spacing2,
+		Theme.geometry_levelsPage_gauge_spacing3,
+		Theme.geometry_levelsPage_gauge_spacing4,
+		Theme.geometry_levelsPage_gauge_spacing5,
+		Theme.geometry_levelsPage_gauge_spacing6,
+		Theme.geometry_levelsPage_gauge_spacing7,
 	]
 
 	function _spacing() {
 		if (_tankItemCount <= 1) {
 			return 0
 		}
-		return _spacingValues[_tankItemCount - 1] || Theme.geometry.levelsPage.gauge.spacing7
+		return _spacingValues[_tankItemCount - 1] || Theme.geometry_levelsPage_gauge_spacing7
 	}
 
 	function _updateLayout(initialLayout) {
@@ -49,7 +49,7 @@ ListView {
 			}
 		}
 
-		if (Global.tanks.totalTankCount < Theme.geometry.levelsPage.tankMergeThreshold) {
+		if (Global.tanks.totalTankCount < Theme.geometry_levelsPage_tankMergeThreshold) {
 			// There is no more than one tank per type, so merging is not required
 			_tankItemCount = Global.tanks.totalTankCount
 			_mergedTankTypes = []
@@ -61,7 +61,7 @@ ListView {
 				if (tankModel.count > 1) {
 					tankItemCountIfMerged = tankItemCountIfMerged - tankModel.count + 1
 					mergedTankTypes.push(Global.tanks.tankTypes[i])
-					if (tankItemCountIfMerged < Theme.geometry.levelsPage.tankMergeThreshold) {
+					if (tankItemCountIfMerged < Theme.geometry_levelsPage_tankMergeThreshold) {
 						break
 					}
 				}

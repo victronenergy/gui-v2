@@ -87,11 +87,11 @@ Item {
 		anchors {
 			top: parent.top
 			right: parent.right
-			rightMargin: Theme.geometry.solarChart.horizontalMargin
+			rightMargin: Theme.geometry_solarChart_horizontalMargin
 		}
 		text: "kWh" // TODO use UnitConversion unitToString() when unit conversion is updated
-		color: Theme.color.font.secondary
-		font.pixelSize: Theme.font.size.caption
+		color: Theme.color_font_secondary
+		font.pixelSize: Theme.font_size_caption
 	}
 
 	Column {
@@ -99,14 +99,14 @@ Item {
 
 		anchors {
 			top: kwhLabel.bottom
-			topMargin: Theme.geometry.solarChart.horizontalMargin
+			topMargin: Theme.geometry_solarChart_horizontalMargin
 			left: parent.left
-			leftMargin: Theme.geometry.solarChart.horizontalMargin
+			leftMargin: Theme.geometry_solarChart_horizontalMargin
 			right: parent.right
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.solarChart.bottomMargin
+			bottomMargin: Theme.geometry_solarChart_bottomMargin
 		}
-		spacing: (height - (root._tickCount * Theme.geometry.solarChart.tickLine.height)) / (root._tickCount - 1)
+		spacing: (height - (root._tickCount * Theme.geometry_solarChart_tickLine_height)) / (root._tickCount - 1)
 
 		onHeightChanged: Qt.callLater(root._fitChartToMaxYield)
 
@@ -117,18 +117,18 @@ Item {
 
 			delegate: Item {
 				width: parent.width
-				height: Theme.geometry.solarChart.tickLine.height
+				height: Theme.geometry_solarChart_tickLine_height
 
 				Rectangle {
 					id: markerLine
 
 					anchors {
 						left: parent.left
-						rightMargin: Theme.geometry.solarChart.horizontalMargin
+						rightMargin: Theme.geometry_solarChart_horizontalMargin
 						right: markerLabel.left
 					}
-					height: Theme.geometry.solarChart.tickLine.height
-					color: Theme.color.listItem.separator
+					height: Theme.geometry_solarChart_tickLine_height
+					color: Theme.color_listItem_separator
 				}
 
 				Label {
@@ -137,14 +137,14 @@ Item {
 					anchors {
 						verticalCenter: markerLine.verticalCenter
 						right: parent.right
-						rightMargin: Theme.geometry.solarChart.horizontalMargin
+						rightMargin: Theme.geometry_solarChart_horizontalMargin
 					}
-					width: Theme.geometry.solarChart.tickLabel.width
+					width: Theme.geometry_solarChart_tickLabel_width
 					horizontalAlignment: Text.AlignRight
 					text: root._maxTickValue === 0
 						  ? (model.index === gridLinesRepeater.count - 1 ? "0" : "")
 						  : root._maxTickValue - (modelData * (root._maxTickValue / (root._tickCount - 1)))
-					color: Theme.color.font.secondary
+					color: Theme.color_font_secondary
 				}
 			}
 		}
@@ -155,16 +155,16 @@ Item {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry.solarChart.horizontalMargin
+			leftMargin: Theme.geometry_solarChart_horizontalMargin
 			right: parent.right
-			rightMargin: Theme.geometry.solarChart.tickLabel.width + (2 * Theme.geometry.solarChart.horizontalMargin)
+			rightMargin: Theme.geometry_solarChart_tickLabel_width + (2 * Theme.geometry_solarChart_horizontalMargin)
 			top: kwhLabel.bottom
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.solarChart.bottomMargin
+			bottomMargin: Theme.geometry_solarChart_bottomMargin
 		}
-		spacing: barRepeater.count >= 30 ? Theme.geometry.solarChart.bar.spacing.thirtyDays
-			   : barRepeater.count >= 14 ? Theme.geometry.solarChart.bar.spacing.fourteenDays
-			   : Theme.geometry.solarChart.bar.spacing.sevenDays
+		spacing: barRepeater.count >= 30 ? Theme.geometry_solarChart_bar_spacing_thirtyDays
+			   : barRepeater.count >= 14 ? Theme.geometry_solarChart_bar_spacing_fourteenDays
+			   : Theme.geometry_solarChart_bar_spacing_sevenDays
 
 		Repeater {
 			id: barRepeater
@@ -200,18 +200,18 @@ Item {
 
 					anchors {
 						bottom: parent.bottom
-						bottomMargin: Theme.geometry.solarChart.tickLine.height
+						bottomMargin: Theme.geometry_solarChart_tickLine_height
 					}
 					width: parent.width
-					radius: Theme.geometry.solarChart.bar.radius
+					radius: Theme.geometry_solarChart_bar_radius
 
 					// This base rectangle ensures the bar is not transparent when pressed
-					color: barMouseArea.containsPress ? Theme.color.background.primary : "transparent"
+					color: barMouseArea.containsPress ? Theme.color_background_primary : "transparent"
 
 					Rectangle {
 						anchors.fill: parent
-						radius: Theme.geometry.solarChart.bar.radius
-						color: barMouseArea.containsPress ? Theme.color.dimBlue : Theme.color.ok
+						radius: Theme.geometry_solarChart_bar_radius
+						color: barMouseArea.containsPress ? Theme.color_dimBlue : Theme.color_ok
 					}
 				}
 			}

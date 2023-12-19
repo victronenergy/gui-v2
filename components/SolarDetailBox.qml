@@ -29,24 +29,24 @@ Rectangle {
 	}
 
 	width: parent.width
-	height: batteryColumn.height + (2 * Theme.geometry.solarDetailBox.content.spacing)
-	border.color: Theme.color.solarDetailBox.border
+	height: batteryColumn.height + (2 * Theme.geometry_solarDetailBox_content_spacing)
+	border.color: Theme.color_solarDetailBox_border
 	color: "transparent"
-	radius: Theme.geometry.solarDetailBox.radius
+	radius: Theme.geometry_solarDetailBox_radius
 
 	Column {
 		id: batteryColumn
 
 		anchors.verticalCenter: parent.verticalCenter
-		x: Theme.geometry.listItem.content.horizontalMargin - Theme.geometry.solarDetailBox.horizontalMargin
-		width: parent.width * Theme.geometry.solarDetailBox.leftColumn.proportionateWidth
-		spacing: Theme.geometry.solarDetailBox.content.spacing
+		x: Theme.geometry_listItem_content_horizontalMargin - Theme.geometry_solarDetailBox_horizontalMargin
+		width: parent.width * Theme.geometry_solarDetailBox_leftColumn_proportionateWidth
+		spacing: Theme.geometry_solarDetailBox_content_spacing
 
 		Label {
 			text: CommonWords.battery
 			width: parent.width
-			font.pixelSize: Theme.font.size.caption
-			color: Theme.color.solarDetailBox.columnTitle
+			font.pixelSize: Theme.font_size_caption
+			color: Theme.color_solarDetailBox_columnTitle
 		}
 
 		Row {
@@ -77,17 +77,17 @@ Rectangle {
 					width: parent.width / 3
 
 					Label {
-						width: parent.width - Theme.geometry.solarDetailBox.content.spacing
+						width: parent.width - Theme.geometry_solarDetailBox_content_spacing
 						elide: Text.ElideRight
-						font.pixelSize: Theme.font.size.caption
+						font.pixelSize: Theme.font_size_caption
 						text: modelData.title
-						color: Theme.color.solarDetailBox.quantityTitle
+						color: Theme.color_solarDetailBox_quantityTitle
 					}
 
 					QuantityLabel {
 						value: modelData.value
 						unit: modelData.unit
-						font.pixelSize: root.smallTextMode ? Theme.font.size.body1 : Theme.font.size.body2
+						font.pixelSize: root.smallTextMode ? Theme.font_size_body1 : Theme.font_size_body2
 					}
 				}
 			}
@@ -98,23 +98,23 @@ Rectangle {
 		anchors {
 			left: batteryColumn.right
 			top: parent.top
-			topMargin: Theme.geometry.solarDetailBox.content.spacing
+			topMargin: Theme.geometry_solarDetailBox_content_spacing
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.solarDetailBox.content.spacing
+			bottomMargin: Theme.geometry_solarDetailBox_content_spacing
 		}
 		width: root.border.width
 		height: parent.height
-		color: Theme.color.solarDetailBox.border
+		color: Theme.color_solarDetailBox_border
 	}
 
 	Column {
 		anchors {
 			verticalCenter: parent.verticalCenter
 			left: batteryColumn.right
-			leftMargin: Theme.geometry.solarDetailBox.content.spacing
+			leftMargin: Theme.geometry_solarDetailBox_content_spacing
 			right: parent.right
 		}
-		spacing: Theme.geometry.solarDetailBox.content.spacing
+		spacing: Theme.geometry_solarDetailBox_content_spacing
 
 		Label {
 			//: Statistics for battery charging time
@@ -122,8 +122,8 @@ Rectangle {
 			text: qsTrId("charger_history_charge_time")
 			width: parent.width
 			elide: Text.ElideRight
-			font.pixelSize: Theme.font.size.caption
-			color: Theme.color.solarDetailBox.columnTitle
+			font.pixelSize: Theme.font_size_caption
+			color: Theme.color_solarDetailBox_columnTitle
 		}
 
 		Row {
@@ -154,27 +154,27 @@ Rectangle {
 					width: parent.width / 3
 
 					Label {
-						width: parent.width - Theme.geometry.solarDetailBox.content.spacing
+						width: parent.width - Theme.geometry_solarDetailBox_content_spacing
 						elide: Text.ElideRight
-						font.pixelSize: Theme.font.size.caption
+						font.pixelSize: Theme.font_size_caption
 						text: modelData.title
-						color: Theme.color.solarDetailBox.quantityTitle
+						color: Theme.color_solarDetailBox_quantityTitle
 					}
 
 					Label {
 						width: implicitWidth + hourLabel.implicitWidth
 						text: modelData.text
-						font.pixelSize: root.smallTextMode ? Theme.font.size.body1 : Theme.font.size.body2
+						font.pixelSize: root.smallTextMode ? Theme.font_size_body1 : Theme.font_size_body2
 
 						Label {
 							id: hourLabel
 
-							x: parent.implicitWidth + Theme.geometry.quantityLabel.spacing
+							x: parent.implicitWidth + Theme.geometry_quantityLabel_spacing
 							//: Abbreviation of "hour"
 							//% "hr"
 							text: qsTrId("charger_history_hr")
-							font.pixelSize: root.smallTextMode ? Theme.font.size.body1 : Theme.font.size.body2
-							color: Theme.color.font.secondary
+							font.pixelSize: root.smallTextMode ? Theme.font_size_body1 : Theme.font_size_body2
+							color: Theme.color_font_secondary
 						}
 					}
 				}

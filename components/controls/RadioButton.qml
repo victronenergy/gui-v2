@@ -26,21 +26,21 @@ CT.RadioButton {
 			right: parent.right
 			verticalCenter: parent.verticalCenter
 		}
-		implicitWidth: Theme.geometry.radioButton.indicator.width
+		implicitWidth: Theme.geometry_radioButton_indicator_width
 		implicitHeight: implicitWidth
 		radius: implicitWidth/2
-		border.width: Theme.geometry.radioButton.border.width
+		border.width: Theme.geometry_radioButton_border_width
 		border.color: root.enabled || root.checked
-			? ((root.down || root.checked) ? Theme.color.radioButton.indicator.on : Theme.color.radioButton.indicator.off)
-			: Theme.color.radioButton.indicator.disabled
+			? ((root.down || root.checked) ? Theme.color_radioButton_indicator_on : Theme.color_radioButton_indicator_off)
+			: Theme.color_radioButton_indicator_disabled
 		color: 'transparent'
 
 		Rectangle {
 			anchors.centerIn: parent
-			implicitWidth: Theme.geometry.radioButton.indicator.dot.width
+			implicitWidth: Theme.geometry_radioButton_indicator_dot_width
 			implicitHeight: implicitWidth
 			radius: implicitWidth/2
-			color: root.enabled || root.checked ? Theme.color.radioButton.indicator.on : Theme.color.radioButton.indicator.disabled
+			color: root.enabled || root.checked ? Theme.color_radioButton_indicator_on : Theme.color_radioButton_indicator_disabled
 			visible: root.down || root.checked
 		}
 	}
@@ -48,9 +48,9 @@ CT.RadioButton {
 	contentItem: Label {
 		id: label
 
-		font.pixelSize: Theme.font.size.body2
+		font.pixelSize: Theme.font_size_body2
 		text: root.text
 		verticalAlignment: Text.AlignVCenter
-		color: root.enabled || root.checked ? Theme.color.font.primary : Theme.color.font.disabled
+		color: root.enabled || root.checked ? Theme.color_font_primary : Theme.color_font_disabled
 	}
 }

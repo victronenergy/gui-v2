@@ -12,7 +12,7 @@ Item {
 
 	readonly property color backgroundColor: !!pageStack.currentItem
 			? pageStack.currentItem.backgroundColor
-			: Theme.color.page.background
+			: Theme.color_page_background
 
 	property var pageManager
 
@@ -142,7 +142,7 @@ Item {
 
 		Behavior on x {
 			XAnimator {
-				duration: Theme.animation.page.slide.duration
+				duration: Theme.animation_page_slide_duration
 				easing.type: Easing.InOutQuad
 			}
 		}
@@ -163,20 +163,20 @@ Item {
 			running: !Global.splashScreenVisible
 
 			PauseAnimation {
-				duration: Theme.animation.navBar.initialize.delayedStart.duration
+				duration: Theme.animation_navBar_initialize_delayedStart_duration
 			}
 			ParallelAnimation {
 				YAnimator {
 					target: navBar
-					from: root.height - navBar.height + Theme.geometry.navigationBar.initialize.margin
+					from: root.height - navBar.height + Theme.geometry_navigationBar_initialize_margin
 					to: root.height - navBar.height
-					duration: Theme.animation.navBar.initialize.fade.duration
+					duration: Theme.animation_navBar_initialize_fade_duration
 				}
 				OpacityAnimator {
 					target: navBar
 					from: 0.0
 					to: 1.0
-					duration: Theme.animation.navBar.initialize.fade.duration
+					duration: Theme.animation_navBar_initialize_fade_duration
 				}
 			}
 		}
@@ -191,7 +191,7 @@ Item {
 				target: navBar
 				from: root.height
 				to: root.height - navBar.height
-				duration: Theme.animation.page.idleResize.duration
+				duration: Theme.animation_page_idleResize_duration
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
@@ -205,7 +205,7 @@ Item {
 				target: navBar
 				from: 0.0
 				to: 1.0
-				duration: Theme.animation.page.idleOpacity.duration
+				duration: Theme.animation_page_idleOpacity_duration
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
@@ -227,7 +227,7 @@ Item {
 				target: navBar
 				from: 1.0
 				to: 0.0
-				duration: Theme.animation.page.idleOpacity.duration
+				duration: Theme.animation_page_idleOpacity_duration
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
@@ -241,7 +241,7 @@ Item {
 				target: navBar
 				from: root.height - navBar.height
 				to: root.height
-				duration: Theme.animation.page.idleResize.duration
+				duration: Theme.animation_page_idleResize_duration
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {

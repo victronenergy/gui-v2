@@ -21,7 +21,7 @@ OverviewWidget {
 	type: VenusOS.OverviewWidget_Type_AcInput
 	title: !!input ? Global.acInputs.sourceToText(input.source) : ""
 	icon.source: !!input ? Global.acInputs.sourceIcon(input.source) : ""
-	rightPadding: sideGaugeLoader.active ? Theme.geometry.overviewPage.widget.sideGauge.margins : 0
+	rightPadding: sideGaugeLoader.active ? Theme.geometry_overviewPage_widget_sideGauge_margins : 0
 	quantityLabel.dataObject: input && input.connected && !_generatorStopped ? input : null
 	enabled: true
 
@@ -32,17 +32,17 @@ OverviewWidget {
 			top: parent.top
 			bottom: parent.bottom
 			right: parent.right
-			margins: Theme.geometry.overviewPage.widget.sideGauge.margins
+			margins: Theme.geometry_overviewPage_widget_sideGauge_margins
 		}
 
 		active: root.input && root.input.source !== VenusOS.AcInputs_InputSource_Generator
 		sourceComponent: VerticalGauge {
 			id: sideGauge
 
-			width: Theme.geometry.overviewPage.widget.sideGauge.width
-			radius: Theme.geometry.overviewPage.widget.sideGauge.radius
-			backgroundColor: Theme.color.overviewPage.widget.sideGauge.background
-			foregroundColor: Theme.color.overviewPage.widget.sideGauge.highlight
+			width: Theme.geometry_overviewPage_widget_sideGauge_width
+			radius: Theme.geometry_overviewPage_widget_sideGauge_radius
+			backgroundColor: Theme.color_overviewPage_widget_sideGauge_background
+			foregroundColor: Theme.color_overviewPage_widget_sideGauge_highlight
 			animationEnabled: visible && root.animationEnabled
 			value: valueRange.valueAsRatio
 			visible: root.input && root.input.source !== VenusOS.AcInputs_InputSource_Generator
@@ -75,9 +75,9 @@ OverviewWidget {
 		Item {
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				right: parent.right
-				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin + root.rightPadding
+				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin + root.rightPadding
 				bottom: parent.bottom
 			}
 			height: phaseDisplay.height
@@ -87,7 +87,7 @@ OverviewWidget {
 
 				anchors {
 					bottom: parent.bottom
-					bottomMargin: Theme.geometry.overviewPage.widget.extraContent.bottomMargin
+					bottomMargin: Theme.geometry_overviewPage_widget_extraContent_bottomMargin
 				}
 				width: parent.width
 				model: root.phaseModel
@@ -99,16 +99,16 @@ OverviewWidget {
 		id: generatorStatusComponent
 
 		Label {
-			x: Theme.geometry.overviewPage.widget.content.horizontalMargin
-			y: Theme.geometry.overviewPage.widget.extraContent.topMargin
-			width: parent ? parent.width - 2*Theme.geometry.overviewPage.widget.content.horizontalMargin : 0
+			x: Theme.geometry_overviewPage_widget_content_horizontalMargin
+			y: Theme.geometry_overviewPage_widget_extraContent_topMargin
+			width: parent ? parent.width - 2*Theme.geometry_overviewPage_widget_content_horizontalMargin : 0
 			elide: Text.ElideRight
 
 			//: Shows the amount of time that has passed since the generator was stopped
 			//% "Stopped %1"
 			text: qsTrId("overview_acinputwidget_generator_stopped")
 					.arg(Utils.formatAsHHMMSS(Global.generators.first ? Global.generators.first.runtime : 0))
-			color: Theme.color.font.secondary
+			color: Theme.color_font_secondary
 		}
 	}
 

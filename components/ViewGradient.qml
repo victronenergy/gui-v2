@@ -12,19 +12,19 @@ Rectangle {
 		left: root.left
 		right: root.right
 	}
-	height: Theme.geometry.viewGradient.height
+	height: Theme.geometry_viewGradient_height
 	gradient: Gradient {
 		GradientStop {
-			position: Theme.geometry.viewGradient.position1
-			color: Theme.color.viewGradient.color1
+			position: Theme.geometry_viewGradient_position1
+			color: Theme.color_viewGradient_color1
 		}
 		GradientStop {
-			position: Theme.geometry.viewGradient.position2
-			color: Theme.color.viewGradient.color2
+			position: Theme.geometry_viewGradient_position2
+			color: Theme.color_viewGradient_color2
 		}
 		GradientStop {
-			position: Theme.geometry.viewGradient.position3
-			color: Theme.color.viewGradient.color3
+			position: Theme.geometry_viewGradient_position3
+			color: Theme.color_viewGradient_color3
 		}
 	}
 }

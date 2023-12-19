@@ -11,8 +11,8 @@ Page {
 	id: root
 
 	property int cardWidth: cardsView.count > 2
-			? Theme.geometry.controlCard.minimumWidth
-			: Theme.geometry.controlCard.maximumWidth
+			? Theme.geometry_controlCard_minimumWidth
+			: Theme.geometry_controlCard_maximumWidth
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
 
@@ -21,14 +21,14 @@ Page {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry.controlCardsPage.horizontalMargin
+			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
 			right: parent.right
 			top: parent.top
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.controlCardsPage.bottomMargin
+			bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 		}
-		rightMargin: Theme.geometry.controlCardsPage.horizontalMargin
-		spacing: Theme.geometry.controlCardsPage.spacing
+		rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
+		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
 		snapMode: ListView.SnapOneItem
 		boundsBehavior: Flickable.DragOverBounds
@@ -36,7 +36,7 @@ Page {
 		model: ObjectModel {
 			Row {
 				height: cardsView.height
-				spacing: Theme.geometry.controlCardsPage.spacing
+				spacing: Theme.geometry_controlCardsPage_spacing
 
 				Repeater {
 					model: Global.generators.model
@@ -50,7 +50,7 @@ Page {
 
 			Row {
 				height: cardsView.height
-				spacing: Theme.geometry.controlCardsPage.spacing
+				spacing: Theme.geometry_controlCardsPage_spacing
 
 				Repeater {
 					model: Global.veBusDevices.model

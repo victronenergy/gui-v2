@@ -15,31 +15,31 @@ Column {
 	property alias temperature: temperature.text
 	property alias source: image.source
 
-	width: Theme.geometry.weatherDetails.width
+	width: Theme.geometry_weatherDetails_width
 
 	Label {
 		id: day
 
-		color: Theme.color.font.secondary
-		font.pixelSize: Theme.font.size.body1
+		color: Theme.color_font_secondary
+		font.pixelSize: Theme.font_size_body1
 	}
 	Row {
 		id: row
 
-		spacing: Theme.geometry.weatherDetails.row.spacing
+		spacing: Theme.geometry_weatherDetails_row_spacing
 
 		Label {
 			id: temperature
 
-			font.pixelSize: Theme.font.size.body2
-			color: Theme.color.font.secondary
+			font.pixelSize: Theme.font_size_body2
+			color: Theme.color_font_secondary
 		}
 
 		CP.ColorImage {
 			id: image
 
 			anchors.verticalCenter: temperature.verticalCenter
-			color: Theme.color.font.secondary
+			color: Theme.color_font_secondary
 		}
 	}
 }

@@ -21,11 +21,11 @@ OverviewWidget {
 		ThreePhaseDisplay {
 			anchors {
 				left: parent ? parent.left : undefined
-				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				right: parent ? parent.right : undefined
-				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				bottom: parent ? parent.bottom : undefined
-				bottomMargin: Theme.geometry.overviewPage.widget.extraContent.bottomMargin
+				bottomMargin: Theme.geometry_overviewPage_widget_extraContent_bottomMargin
 			}
 
 			visible: model != null && root.size >= VenusOS.OverviewWidget_Size_L

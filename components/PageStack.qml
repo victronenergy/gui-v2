@@ -18,7 +18,7 @@ C.StackView {
 		XAnimator {
 			from: width
 			to: 0
-			duration: Theme.animation.page.slide.duration
+			duration: Theme.animation_page_slide_duration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -27,7 +27,7 @@ C.StackView {
 		XAnimator {
 			from: 0
 			to: -width
-			duration: Theme.animation.page.slide.duration
+			duration: Theme.animation_page_slide_duration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -36,7 +36,7 @@ C.StackView {
 		XAnimator {
 			from: -width
 			to: 0
-			duration: Theme.animation.page.slide.duration
+			duration: Theme.animation_page_slide_duration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -44,7 +44,7 @@ C.StackView {
 		XAnimator {
 			from: 0
 			to: width
-			duration: Theme.animation.page.slide.duration
+			duration: Theme.animation_page_slide_duration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -54,7 +54,7 @@ C.StackView {
 		OpacityAnimator {
 			from: 0.0
 			to: 1.0
-			duration: Theme.animation.page.slide.duration
+			duration: Theme.animation_page_slide_duration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -64,7 +64,7 @@ C.StackView {
 		OpacityAnimator {
 			from: 1.0
 			to: 0.0
-			duration: Theme.animation.page.slide.duration
+			duration: Theme.animation_page_slide_duration
 			easing.type: Easing.InOutQuad
 		}
 	}

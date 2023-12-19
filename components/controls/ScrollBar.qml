@@ -17,19 +17,19 @@ CT.ScrollBar {
 		implicitBackgroundHeight + topInset + bottomInset,
 		implicitContentHeight + topPadding + bottomPadding)
 
-	leftPadding: Theme.geometry.scrollBar.horizontalMargin
-	rightPadding: Theme.geometry.scrollBar.horizontalMargin
+	leftPadding: Theme.geometry_scrollBar_horizontalMargin
+	rightPadding: Theme.geometry_scrollBar_horizontalMargin
 	minimumSize: orientation == Qt.Horizontal ? height / width : width / height
 
 	background: Item {
-		implicitWidth: Theme.geometry.scrollBar.bar.width
+		implicitWidth: Theme.geometry_scrollBar_bar_width
 		implicitHeight: 100
 	}
 
 	contentItem: Rectangle {
-		implicitWidth: Theme.geometry.scrollBar.bar.width
+		implicitWidth: Theme.geometry_scrollBar_bar_width
 		implicitHeight: 100
-		radius: Theme.geometry.scrollBar.bar.radius
-		color: Theme.color.scrollBar.bar
+		radius: Theme.geometry_scrollBar_bar_radius
+		color: Theme.color_scrollBar_bar
 	}
 }

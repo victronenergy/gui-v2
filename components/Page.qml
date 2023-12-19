@@ -11,7 +11,7 @@ FocusScope {
 	id: root
 
 	property string title
-	property color backgroundColor: Theme.color.page.background
+	property color backgroundColor: Theme.color_page_background
 	property bool fullScreenWhenIdle
 	readonly property bool isCurrentPage: !!Global.pageManager && Global.pageManager.currentPage === root
 	property bool animationEnabled: isCurrentPage && BackendConnection.applicationVisible

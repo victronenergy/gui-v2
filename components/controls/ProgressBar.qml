@@ -18,15 +18,15 @@ T.ProgressBar {
 			implicitContentHeight + topPadding + bottomPadding)
 
 	background: Rectangle {
-		implicitHeight: Theme.geometry.progressBar.height
-		implicitWidth: Theme.geometry.progressBar.height
-		radius: Theme.geometry.progressBar.radius
-		color: Theme.color.darkOk
+		implicitHeight: Theme.geometry_progressBar_height
+		implicitWidth: Theme.geometry_progressBar_height
+		radius: Theme.geometry_progressBar_radius
+		color: Theme.color_darkOk
 	}
 
 	contentItem: Item {
-		implicitHeight: Theme.geometry.progressBar.height
-		implicitWidth: Theme.geometry.progressBar.height
+		implicitHeight: Theme.geometry_progressBar_height
+		implicitWidth: Theme.geometry_progressBar_height
 
 		Rectangle {
 			id: mask
@@ -34,7 +34,7 @@ T.ProgressBar {
 			visible: false
 			height: parent.height
 			width: parent.width
-			radius: Theme.geometry.progressBar.radius
+			radius: Theme.geometry_progressBar_radius
 			color: "black"
 		}
 
@@ -48,18 +48,18 @@ T.ProgressBar {
 			Rectangle {
 				id: highlightRect
 				readonly property bool isMirrored: root.position !== root.visualPosition
-				color: Theme.color.ok
+				color: Theme.color_ok
 				height: container.height
 				width: root.indeterminate ? (container.width/3) : (container.width * root.position)
 				x: root.indeterminate
 					? (highlightRect.isMirrored ? container.width : -highlightRect.width)
 					: (highlightRect.isMirrored ? container.width - highlightRect.width : 0)
-				radius: Theme.geometry.progressBar.radius
+				radius: Theme.geometry_progressBar_radius
 
 				XAnimator on x {
 					running: root.indeterminate
 					loops: Animation.Infinite
-					duration: Theme.animation.progressBar.duration
+					duration: Theme.animation_progressBar_duration
 					from: root.indeterminate
 						? (highlightRect.isMirrored ? container.width : -highlightRect.width)
 						: (highlightRect.isMirrored ? container.width - highlightRect.width : 0)

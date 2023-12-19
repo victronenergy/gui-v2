@@ -14,10 +14,10 @@ Window {
 	//% "Venus OS GUI"
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
-	color: Global.allPagesLoaded ? guiLoader.item.mainView.backgroundColor : Theme.color.page.background
+	color: Global.allPagesLoaded ? guiLoader.item.mainView.backgroundColor : Theme.color_page_background
 
-	width: Qt.platform.os != "wasm" ? Theme.geometry.screen.width : Screen.width
-	height: Qt.platform.os != "wasm" ? Theme.geometry.screen.height : Screen.height
+	width: Qt.platform.os != "wasm" ? Theme.geometry_screen_width : Screen.width
+	height: Qt.platform.os != "wasm" ? Theme.geometry_screen_height : Screen.height
 
 	function retranslateUi() {
 		console.warn("Retranslating UI")
@@ -75,8 +75,8 @@ Window {
 
 	Item {
 		anchors.horizontalCenter: parent.horizontalCenter
-		width: Theme.geometry.screen.width + wasmPadding
-		height: Theme.geometry.screen.height
+		width: Theme.geometry_screen_width + wasmPadding
+		height: Theme.geometry_screen_height
 
 		// on wasm just show the GUI at the top of the screen,
 		// otherwise browser chrome can cause problems on mobile devices...
@@ -93,12 +93,12 @@ Window {
 				return 1.0
 			}
 			// no scaling required if we can pad and zoom instead
-			if ((Screen.height >= Theme.geometry.screen.height)
-					&& (Screen.width >= Theme.geometry.screen.width)) {
+			if ((Screen.height >= Theme.geometry_screen_height)
+					&& (Screen.width >= Theme.geometry_screen_width)) {
 				return 1.0
 			}
-			var hscale = Screen.width / Theme.geometry.screen.width
-			var vscale = Screen.height / Theme.geometry.screen.height
+			var hscale = Screen.width / Theme.geometry_screen_width
+			var vscale = Screen.height / Theme.geometry_screen_height
 			// in landscape mode, give even more room, as the browser chrome
 			// will take up significant vertical space.
 			var chromeFactor = (Screen.height > Screen.width) ? 1.0 : 0.75
@@ -122,18 +122,18 @@ Window {
 				return 0
 			}
 			// no padding required if we need to downscale
-			if ((Screen.height < Theme.geometry.screen.height)
-					|| (Screen.width < Theme.geometry.screen.width)) {
+			if ((Screen.height < Theme.geometry_screen_height)
+					|| (Screen.width < Theme.geometry_screen_width)) {
 				return 0
 			}
 			// no padding required if the aspect ratio matches
-			if ((Screen.height / Theme.geometry.screen.height)
-					== (Screen.width / Theme.geometry.screen.width)) {
+			if ((Screen.height / Theme.geometry_screen_height)
+					== (Screen.width / Theme.geometry_screen_width)) {
 				return 0
 			}
 			// fix aspect ratio
-			var verticalRatio = Screen.height / Theme.geometry.screen.height
-			var expectedWidth = Theme.geometry.screen.width * verticalRatio
+			var verticalRatio = Screen.height / Theme.geometry_screen_height
+			var expectedWidth = Theme.geometry_screen_width * verticalRatio
 			var chromeFactor = 1.2 // browser doesn't give whole screen to content area
 			var delta = (Screen.width - expectedWidth) * chromeFactor
 			if (delta < 0) {
@@ -155,8 +155,8 @@ Window {
 
 			anchors.centerIn: parent
 
-			width: Theme.geometry.screen.width
-			height: Theme.geometry.screen.height
+			width: Theme.geometry_screen_width
+			height: Theme.geometry_screen_height
 			asynchronous: true
 			clip: Qt.platform.os == "wasm"
 
@@ -172,8 +172,8 @@ Window {
 			id: splashLoader
 
 			anchors.centerIn: parent
-			width: Theme.geometry.screen.width
-			height: Theme.geometry.screen.height
+			width: Theme.geometry_screen_width
+			height: Theme.geometry_screen_height
 			clip: Qt.platform.os == "wasm"
 
 			active: Global.splashScreenVisible

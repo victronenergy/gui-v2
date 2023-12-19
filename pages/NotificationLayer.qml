@@ -20,14 +20,14 @@ Item {
 	Flow {
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry.toastNotification.horizontalMargin
+			leftMargin: Theme.geometry_toastNotification_horizontalMargin
 			right: parent.right
-			rightMargin: Theme.geometry.toastNotification.horizontalMargin
+			rightMargin: Theme.geometry_toastNotification_horizontalMargin
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry.toastNotification.bottomMargin
+			bottomMargin: Theme.geometry_toastNotification_bottomMargin
 		}
 		width: parent.width
-		spacing: Theme.geometry.toastNotification.bottomMargin
+		spacing: Theme.geometry_toastNotification_bottomMargin
 		layoutDirection: Qt.RightToLeft     // layout from bottom to top
 
 		Repeater {

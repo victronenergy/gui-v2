@@ -13,20 +13,20 @@ Item {
 	property alias color: centreCircle.color
 	property bool _pulse
 
-	width: Theme.geometry.radioButton.indicator.width
-	height: Theme.geometry.radioButton.indicator.width
+	width: Theme.geometry_radioButton_indicator_width
+	height: Theme.geometry_radioButton_indicator_width
 
 	Rectangle {
 		anchors.fill: parent
-		radius: Theme.geometry.radioButton.indicator.width / 2
-		border.color: Theme.color.radioButton.indicator.off
+		radius: Theme.geometry_radioButton_indicator_width / 2
+		border.color: Theme.color_radioButton_indicator_off
 		color: "transparent"
 
 		Rectangle {
 			id: centreCircle
 
 			anchors.fill: parent
-			radius: Theme.geometry.radioButton.indicator.width / 2
+			radius: Theme.geometry_radioButton_indicator_width / 2
 
 			states: [
 				State {

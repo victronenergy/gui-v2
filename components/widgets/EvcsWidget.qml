@@ -22,11 +22,11 @@ OverviewWidget {
 		Loader {
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin
+				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				right: parent.right
-				rightMargin: Theme.geometry.overviewPage.widget.content.horizontalMargin + root.rightPadding
+				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin + root.rightPadding
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry.overviewPage.widget.extraContent.bottomMargin
+				bottomMargin: Theme.geometry_overviewPage_widget_extraContent_bottomMargin
 			}
 			sourceComponent: Global.evChargers.model.count > 1 ? multiEvChargerComponent
 					: Global.evChargers.model.count > 0 ? singleEvChargerComponent
@@ -64,25 +64,25 @@ OverviewWidget {
 				width: parent.width
 				elide: Text.ElideRight
 				text: Global.evChargers.chargerStatusToText(evCharger.status)
-				color: Theme.color.font.secondary
+				color: Theme.color_font_secondary
 			}
 
 			Row {
 				width: parent.width
-				spacing: Theme.geometry.overviewPage.widget.content.horizontalMargin / 2
+				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
 
 				Label {
 					width: parent.width - chargingTimeLabel.width
 					elide: Text.ElideRight
 					text: Global.evChargers.chargerModeToText(evCharger.mode)
-					color: Theme.color.font.secondary
+					color: Theme.color_font_secondary
 				}
 
 				FixedWidthLabel {
 					id: chargingTimeLabel
 
 					text: Utils.formatAsHHMM(evCharger.chargingTime, true)
-					color: Theme.color.font.secondary
+					color: Theme.color_font_secondary
 				}
 			}
 		}
@@ -104,14 +104,14 @@ OverviewWidget {
 						width: parent.width - chargerCountLabel.implicitWidth
 						elide: Text.ElideRight
 						text: Global.evChargers.chargerStatusToText(model.status)
-						color: Theme.color.font.secondary
+						color: Theme.color_font_secondary
 					}
 
 					Label {
 						id: chargerCountLabel
 
 						text: model.statusCount || "-"
-						color: Theme.color.font.secondary
+						color: Theme.color_font_secondary
 					}
 				}
 			}
