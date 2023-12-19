@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -20,7 +20,7 @@ Item {
 	implicitWidth: parent.width
 	implicitHeight: Theme.geometry.segmentedButtonRow.height
 
-	C.ButtonGroup {
+	T.ButtonGroup {
 		buttons: root.children
 	}
 

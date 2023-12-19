@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 import Victron.Veutil
 import Victron.Utils
@@ -393,7 +393,7 @@ Page {
 
 				if (BackendConnection.type === BackendConnection.DBusSource) {
 					// Reboot takes a while to execute, so prevent any user activity until that happens.
-					closePolicy = C.Popup.NoAutoClose
+					closePolicy = T.Popup.NoAutoClose
 					footer.enabled = false
 					footer.opacity = 0
 				}

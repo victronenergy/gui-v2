@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 
 Button {
@@ -13,7 +13,7 @@ Button {
 	icon.width: Theme.geometry.navigationBar.button.icon.width
 	icon.height: Theme.geometry.navigationBar.button.icon.height
 	spacing: Theme.geometry.navigationBar.button.spacing
-	display: C.AbstractButton.TextUnderIcon
+	display: T.AbstractButton.TextUnderIcon
 
 	color: down
 		   ? Theme.color.navigationBar.button.on

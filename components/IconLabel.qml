@@ -9,8 +9,8 @@ Item {
 	property string text
 	property var icon: Item {
 		property color color
-		property string source
 	}
+	property string iconSource
 
 	property var image
 	property var label

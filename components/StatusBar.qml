@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import Victron.VenusOS
 
 Rectangle {
@@ -50,7 +50,7 @@ Rectangle {
 		height: Theme.geometry.statusBar.button.height
 		icon.width: Theme.geometry.statusBar.button.icon.width
 		icon.height: Theme.geometry.statusBar.button.icon.height
-		display: C.AbstractButton.IconOnly
+		display: T.AbstractButton.IconOnly
 		color: Theme.color.ok
 		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
 					 ? "qrc:/images/icon_controls_off_32.svg"
@@ -140,7 +140,7 @@ Rectangle {
 		height: Theme.geometry.statusBar.button.height
 		icon.width: Theme.geometry.statusBar.button.icon.width
 		icon.height: Theme.geometry.statusBar.button.icon.height
-		display: C.AbstractButton.IconOnly
+		display: T.AbstractButton.IconOnly
 		color: Theme.color.ok
 		backgroundColor: "transparent"
 		icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive

@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Templates as CT
-import QtQuick.Controls as C
 import Victron.VenusOS
 
 CT.Button {

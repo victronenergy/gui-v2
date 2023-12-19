@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 
 ModalWarningDialog {
 	id: root
@@ -131,7 +131,7 @@ ModalWarningDialog {
 				? Theme.color.red
 				: Theme.color.green
 
-	closePolicy: _busy ? C.Popup.NoAutoClose : (C.Popup.CloseOnEscape | C.Popup.CloseOnPressOutside)
+	closePolicy: _busy ? T.Popup.NoAutoClose : (T.Popup.CloseOnEscape | T.Popup.CloseOnPressOutside)
 	footer.enabled: !_busy
 	footer.opacity: _busy ? 0 : 1
 

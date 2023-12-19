@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -110,7 +110,7 @@ ListNavigationItem {
 					checked: root.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel
 					writeAccessLevel: root.writeAccessLevel
-					C.ButtonGroup.group: radioButtonGroup
+					T.ButtonGroup.group: radioButtonGroup
 
 					bottomContent.children: Loader {
 						id: bottomContentLoader
@@ -197,7 +197,7 @@ ListNavigationItem {
 					}
 				}
 
-				C.ButtonGroup {
+				T.ButtonGroup {
 					id: radioButtonGroup
 				}
 			}
