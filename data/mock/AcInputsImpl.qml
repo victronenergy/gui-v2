@@ -21,6 +21,7 @@ QtObject {
 			if (config) {
 				root.manualConfig = true
 				acSource.setValue(config.source)
+				root.inputSysInfo._connected.setValue(1)
 				_phaseModel._numberOfPhases.setValue(config.phaseCount || 1)
 			}
 		}
