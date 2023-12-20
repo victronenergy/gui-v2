@@ -18,22 +18,22 @@ Page {
 
 	QtObject {
 		id: _pvCharger
-		property DataPoint power: DataPoint { source: "com.victronenergy.system/Dc/Pv/Power" }
+		property DataPoint power: DataPoint { source: Global.system.serviceUid + "/Dc/Pv/Power" }
 	}
 
 	ObjectAcConnection {
 		id: _pvOnAcOut
-		bindPrefix: "com.victronenergy.system/Ac/PvOnOutput"
+		bindPrefix: Global.system.serviceUid + "/Ac/PvOnOutput"
 	}
 
 	ObjectAcConnection {
 		id: _pvOnAcIn1
-		bindPrefix: "com.victronenergy.system/Ac/PvOnGenset"
+		bindPrefix: Global.system.serviceUid + "/Ac/PvOnGenset"
 	}
 
 	ObjectAcConnection {
 		id: _pvOnAcIn2
-		bindPrefix: "com.victronenergy.system/Ac/PvOnGrid"
+		bindPrefix: Global.system.serviceUid + "/Ac/PvOnGrid"
 	}
 
 	ObjectAcConnection {
@@ -61,6 +61,6 @@ Page {
 		id: _acLoad
 		splitPhaseL2PassthruDisabled: _splitPhaseL2Passthru.value === 0
 		isAcOutput: true
-		bindPrefix: "com.victronenergy.system/Ac/Consumption"
+		bindPrefix: Global.system.serviceUid + "/Ac/Consumption"
 	}
 }

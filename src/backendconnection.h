@@ -106,6 +106,7 @@ public:
 	bool isApplicationVisible() const;
 	void setApplicationVisible(bool v);
 
+	Q_INVOKABLE QString serviceUidForType(const QString &serviceType) const;
 	Q_INVOKABLE QString uidPrefix() const;
 
 	// Move this to some mock data manager when available

@@ -15,27 +15,27 @@ Page {
 
 	DataPoint {
 		id: autoUpdate
-		source: "com.victronenergy.settings/Settings/System/AutoUpdate"
+		source: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
 	}
 	DataPoint {
 		id: currentVersionItem
-		source: "com.victronenergy.platform/Firmware/Installed/Version"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 	}
 	DataPoint {
 		id: currentBuildItem
-		source: "com.victronenergy.platform/Firmware/Installed/Build"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 	}
 	DataPoint {
 		id: backupVersionItem
-		source: "com.victronenergy.platform/Firmware/Backup/AvailableVersion"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Backup/AvailableVersion"
 	}
 	DataPoint {
 		id: backupBuildItem
-		source: "com.victronenergy.platform/Firmware/Backup/AvailableBuild"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Backup/AvailableBuild"
 	}
 	DataPoint {
 		id: activateBackup
-		source: "com.victronenergy.platform/Firmware/Backup/Activate"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Backup/Activate"
 	}
 
 	GradientListView {

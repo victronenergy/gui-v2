@@ -24,13 +24,13 @@ Page {
 
 	DataPoint {
 		id: deviceIds
-		source: "com.victronenergy.settings/Settings/CGwacs/DeviceIds"
+		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/DeviceIds"
 	}
 
 	GradientListView {
 		model: deviceIds.value ? deviceIds.value.split(',') : []
 		delegate: ListNavigationItem {
-			readonly property string devicePath: "com.victronenergy.settings/Settings/Devices/cgwacs_" + modelData
+			readonly property string devicePath: Global.systemSettings.serviceUid + "/Settings/Devices/cgwacs_" + modelData
 
 			text: getDescription(customNameItem.value, modelData)
 			secondaryText: getMenuName(serviceType.value, l2ServiceType.value)

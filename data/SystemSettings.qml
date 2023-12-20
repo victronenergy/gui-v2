@@ -10,6 +10,8 @@ import Victron.Units
 QtObject {
 	id: root
 
+	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
+
 	function canAccess(level) {
 		return accessLevel.valid && accessLevel.value >= level
 	}
@@ -52,18 +54,18 @@ QtObject {
 	}
 
 	property DataPoint accessLevel: DataPoint {
-		source: "com.victronenergy.settings/Settings/System/AccessLevel"
+		 source: root.serviceUid + "/Settings/System/AccessLevel"
 	}
 
 	property DataPoint colorScheme: DataPoint {
-		source: "com.victronenergy.settings/Settings/Gui/ColorScheme"
-		onValueChanged: {
-			if (value === Theme.Dark) {
-				Theme.colorScheme = Theme.Dark
-			} else if (value === Theme.Light) {
-				Theme.colorScheme = Theme.Light
-			}
-		}
+		 source: root.serviceUid + "/Settings/Gui/ColorScheme"
+		 onValueChanged: {
+			 if (value === Theme.Dark) {
+				 Theme.colorScheme = Theme.Dark
+			 } else if (value === Theme.Light) {
+				 Theme.colorScheme = Theme.Light
+			 }
+		 }
 	}
 
 	property QtObject electricalQuantity: QtObject {
@@ -82,7 +84,7 @@ QtObject {
 
 		readonly property DataPoint _electricalQuantityDataPoint: DataPoint {
 			id: _electricalQuantityDataPoint
-			source: "com.victronenergy.settings/Settings/Gui/ElectricalPowerIndicator"
+			source: root.serviceUid + "/Settings/Gui/ElectricalPowerIndicator"
 		}
 	}
 
@@ -104,12 +106,12 @@ QtObject {
 
 		readonly property DataPoint _unitDataPoint: DataPoint {
 			id: _unitDataPoint
-			source: "com.victronenergy.settings/Settings/System/Units/Temperature"
+			source: root.serviceUid + "/Settings/System/Units/Temperature"
 		}
 	}
 
 	property DataPoint volumeUnit: DataPoint {
-		source: "com.victronenergy.settings/Settings/System/VolumeUnit"
+		source: root.serviceUid + "/Settings/System/VolumeUnit"
 	}
 
 	property QtObject briefView: QtObject {
@@ -142,7 +144,7 @@ QtObject {
 			property Instantiator _savedLevels: Instantiator {
 				model: Theme.geometry_briefPage_centerGauge_maximumGaugeCount
 				delegate: DataPoint {
-					source: "com.victronenergy.settings/Settings/Gui/BriefView/Level/" + model.index
+					source: root.serviceUid + "/Settings/Gui/BriefView/Level/" + model.index
 					onValueChanged: {
 						if (value !== undefined) {
 							Qt.callLater(briefView.centralGauges._refresh)
@@ -153,12 +155,12 @@ QtObject {
 		}
 
 		property DataPoint showPercentages: DataPoint {
-			 source: "com.victronenergy.settings/Settings/Gui/BriefView/ShowPercentages"
+			 source: root.serviceUid + "/Settings/Gui/BriefView/ShowPercentages"
 		}
 	}
 
 	property DataPoint time: DataPoint {
-		source: "com.victronenergy.platform/Device/Time"
+		source: Global.venusPlatform.serviceUid + "/Device/Time"
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.setClockTime(value)
@@ -176,7 +178,7 @@ QtObject {
 	}
 
 	property DataPoint timeZone: DataPoint {
-		source: "com.victronenergy.settings/Settings/System/TimeZone"
+		source: root.serviceUid + "/Settings/System/TimeZone"
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.systemTimeZone = value
@@ -186,7 +188,7 @@ QtObject {
 	}
 
 	property DataPoint language: DataPoint {
-		source: "com.victronenergy.settings/Settings/Gui/Language"
+		source: root.serviceUid + "/Settings/Gui/Language"
 		onValueChanged: {
 			if (value !== undefined && !Global.changingLanguage
 					&& value != Language.toCode(Language.current)) {

@@ -72,12 +72,12 @@ Page {
 
 					DataPoint {
 						id: relay0FunctionItem
-						source: "com.victronenergy.settings/Settings/Relay/Function"
+						source: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 					}
 
 					DataPoint {
 						id: relay1FunctionItem
-						source: "com.victronenergy.settings/Settings/Relay/1/Function"
+						source: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
 					}
 
 					GradientListView {

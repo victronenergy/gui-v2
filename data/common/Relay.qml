@@ -27,8 +27,8 @@ Device {
 
 	readonly property DataPoint _relayFunction: DataPoint {
 		source: relay.relayIndex === 0
-			 ? "com.victronenergy.settings/Settings/Relay/Function"
-			 : "com.victronenergy.settings/Settings/Relay/%1/Function".arg(model.index)
+			 ? Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+			 : Global.systemSettings.serviceUid + "/Settings/Relay/%1/Function".arg(model.index)
 	}
 
 	onValidChanged: {

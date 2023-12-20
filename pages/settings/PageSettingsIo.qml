@@ -24,11 +24,7 @@ Page {
 
 	VeQItemTableModel {
 		id: digitalModel
-		uids: BackendConnection.type === BackendConnection.DBusSource
-			  ? ["dbus/com.victronenergy.settings/Settings/DigitalInput"]
-			  : BackendConnection.type === BackendConnection.MqttSource
-				? ["mqtt/settings/0/Settings/DigitalInput"]
-				: []
+		uids: [ Global.systemSettings.serviceUid + "/Settings/DigitalInput" ]
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 

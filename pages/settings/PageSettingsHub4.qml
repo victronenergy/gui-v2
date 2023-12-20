@@ -49,7 +49,7 @@ Page {
 
 			//% "Grid metering"
 			text: qsTrId("settings_ess_grid_metering")
-			dataSource: "com.victronenergy.settings/Settings/CGwacs/RunWithoutGridMeter"
+			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			optionModel: [
 				//% "External meter"
@@ -62,7 +62,7 @@ Page {
 		ListSwitch {
 			//% "Inverter AC output in use"
 			text: qsTrId("settings_ess_inverter_ac_output_in_use")
-			dataSource: "com.victronenergy.settings/Settings/SystemSetup/HasAcOutSystem"
+			dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
 			visible: defaultVisible && withoutGridMeter.currentIndex === 0
 		}
 
@@ -158,7 +158,7 @@ Page {
 			DataPoint {
 				id: peakshaveItem
 
-				source:"com.victronenergy.settings/Settings/CGwacs/AlwaysPeakShave"
+				source: Global.systemSettings.serviceUid + "/Settings/CGwacs/AlwaysPeakShave"
 			}
 		}
 
@@ -167,7 +167,7 @@ Page {
 
 			//% "BatteryLife state"
 			text: qsTrId("settings_ess_batteryLife_state")
-			dataSource: "com.victronenergy.settings/Settings/CGwacs/BatteryLife/State"
+			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& Global.ess.isBatteryLifeActive(dataValue)
@@ -213,7 +213,7 @@ Page {
 			//% "Maximum charge power"
 			text: qsTrId("settings_ess_max_charge_power")
 			visible: defaultVisible && maxChargePowerSwitch.visible && maxChargePowerSwitch.checked
-			dataSource: "com.victronenergy.settings/Settings/CGwacs/MaxChargePower"
+			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 			suffix: "W"
 			to: 200000
 			stepSize: 50
@@ -244,7 +244,7 @@ Page {
 			//% "Maximum inverter power"
 			text: qsTrId("settings_ess_max_inverter_power")
 			visible: defaultVisible && maxInverterPowerSwitch.visible && maxInverterPowerSwitch.checked
-			dataSource: "com.victronenergy.settings/Settings/CGwacs/MaxDischargePower"
+			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 			suffix: "W"
 			to: 300000
 			stepSize: 50
@@ -256,7 +256,7 @@ Page {
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
-			dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
+			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 			suffix: "W"
 			stepSize: 10
 		}
@@ -316,21 +316,21 @@ Page {
 
 	DataPoint {
 		id: systemType
-		source: "com.victronenergy.system/SystemType"
+		source: Global.system.serviceUid + "/SystemType"
 	}
 
 	DataPoint {
 		id: essMode
-		source: "com.victronenergy.settings/Settings/CGwacs/Hub4Mode"
+		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
 	}
 
 	DataPoint {
 		id: socLimit
-		source: "com.victronenergy.settings/Settings/CGwacs/BatteryLife/SocLimit"
+		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/SocLimit"
 	}
 
 	DataPoint {
 		id: maxChargeCurrentControl
-		source: "com.victronenergy.system/Control/MaxChargeCurrent"
+		source: Global.system.serviceUid + "/Control/MaxChargeCurrent"
 	}
 }

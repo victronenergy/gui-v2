@@ -21,7 +21,7 @@ Page {
 				id: gridSetpoint
 
 				text: root.title
-				dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 				suffix: "W"
 				from: -15000
 				to: 15000
@@ -32,7 +32,7 @@ Page {
 						id: gridSetpointSlider
 
 						width: parent.width
-						dataSource: "com.victronenergy.settings/Settings/CGwacs/AcPowerSetPoint"
+						dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 						from: -15000
 						to: 15000
 						stepSize: 50
@@ -101,12 +101,12 @@ Page {
 
 				DataPoint {
 					id: batteryChargePower
-					source: "com.victronenergy.settings/Settings/CGwacs/MaxChargePower"
+					source: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 				}
 
 				DataPoint {
 					id: batteryDischargePower
-					source: "com.victronenergy.settings/Settings/CGwacs/MaxDischargePower"
+					source: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 				}
 			}
 		}

@@ -10,7 +10,7 @@ import Victron.Utils
 Page {
 	id: root
 
-	readonly property string settingsBindPrefix: "com.victronenergy.settings"
+	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid
 	readonly property string pumpBindPrefix: "com.victronenergy.pump.startstop0"
 
 	GradientListView {

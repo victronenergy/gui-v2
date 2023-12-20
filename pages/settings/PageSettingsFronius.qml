@@ -10,7 +10,6 @@ import Victron.VenusOS
 Page {
 	id: root // TODO: update this UI when a design is available
 
-	property string settings: "com.victronenergy.settings"
 	property string gateway: "com.victronenergy.fronius"
 
 	DataPoint {
@@ -56,12 +55,12 @@ Page {
 				//% "TCP port"
 				text: qsTrId("page_settings_fronius_tcp_port")
 				visible: dataValue !== 80
-				dataSource: settings + "/Settings/Fronius/PortNumber"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Fronius/PortNumber"
 			}
 
 			ListSwitch {
 				text: CommonWords.automatic_scanning
-				dataSource: settings + "/Settings/Fronius/AutoScan"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Fronius/AutoScan"
 			}
 		}
 	}

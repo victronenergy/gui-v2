@@ -45,7 +45,7 @@ Page {
 			ListSwitch {
 				id: enable
 				text: CommonWords.enable
-				dataSource: "com.victronenergy.settings/Settings/Services/BleSensors"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/BleSensors"
 			}
 
 			ListSwitch {

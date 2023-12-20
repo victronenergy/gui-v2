@@ -367,7 +367,7 @@ QtObject {
 
 			// PageVeBus
 			readonly property DataPoint _mk3Update: DataPoint {
-				source: "com.victronenergy.settings/Settings/Vebus/AllowMk3Fw212Update"
+				source: Global.systemSettings.serviceUid + "/Settings/Vebus/AllowMk3Fw212Update"
 			}
 
 			readonly property DataPoint _preferRenewableEnergy: DataPoint {

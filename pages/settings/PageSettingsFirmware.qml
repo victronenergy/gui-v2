@@ -18,13 +18,13 @@ Page {
 				id: remotePort
 
 				text: CommonWords.firmware_version
-				dataSource: "com.victronenergy.platform/Firmware/Installed/Version"
+				dataSource: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 			}
 
 			ListTextItem {
 				//% "Build date/time"
 				text: qsTrId("settings_build_date_time")
-				dataSource: "com.victronenergy.platform/Firmware/Installed/Build"
+				dataSource: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 			}
 
 			ListNavigationItem {

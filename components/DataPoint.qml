@@ -43,7 +43,7 @@ VeQuickItem {
 		case BackendConnection.MqttSource:
 			return root.source.startsWith("mqtt/") ? root.source : _uidConverter.mqttUid
 		case BackendConnection.MockSource:
-			return "mock/" + source
+			return root.source.startsWith("mock/") ? root.source : "mock/" + root.source
 		default:
 			console.warn("Unknown DataPoint source type:", BackendConnection.type)
 			break

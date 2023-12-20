@@ -92,7 +92,7 @@ Page {
 	DataPoint {
 		id: mk3Update
 
-		source: "com.victronenergy.settings/Settings/Vebus/AllowMk3Fw212Update"
+		source: Global.systemSettings.serviceUid + "/Settings/Vebus/AllowMk3Fw212Update"
 	}
 
 	DataPoint {

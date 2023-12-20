@@ -479,6 +479,22 @@ void BackendConnection::setApplicationVisible(bool v)
 	}
 }
 
+QString BackendConnection::serviceUidForType(const QString &serviceType) const
+{
+	// Assumes the specified service has the equivalent of DeviceInstance = 0 on MQTT. That is,
+	// /DeviceInstance = 0 for the service, or there is only a single instance of this service and
+	// so it can be accessed as if it had /DeviceInstance = 0.
+	//
+	// E.g. for a service like com.victronenergy.system, returns:
+	//  - D-Bus: dbus/com.victronenergy.system
+	//  - MQTT: mqtt/system/0
+	//  - Mock: mock/com.victronenergy.system
+
+	return m_type == MqttSource
+			? QStringLiteral("mqtt/%1/0").arg(serviceType)
+			: QStringLiteral("%1com.victronenergy.%2").arg(uidPrefix()).arg(serviceType);
+}
+
 QString BackendConnection::uidPrefix() const
 {
 	switch (type()) {

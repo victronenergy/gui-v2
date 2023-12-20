@@ -53,7 +53,7 @@ Page {
 				//% "Maximum charge voltage"
 				text: qsTrId("settings_dvcc_max_charge_voltage")
 				visible: defaultVisible && maxChargeVoltageSwitch.visible && maxChargeVoltageSwitch.checked
-				dataSource: "com.victronenergy.settings/Settings/SystemSetup/MaxChargeVoltage"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeVoltage"
 				suffix: "V"
 				decimals: 1
 			}
@@ -61,7 +61,7 @@ Page {
 			ListDvccSwitch {
 				//% "SVS - Shared voltage sense"
 				text: qsTrId("settings_dvcc_shared_voltage_sense")
-				dataSource: "com.victronenergy.settings/Settings/SystemSetup/SharedVoltageSense"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedVoltageSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
@@ -70,7 +70,7 @@ Page {
 
 				//% "STS - Shared temperature sense"
 				text: qsTrId("settings_dvcc_shared_temp_sense")
-				dataSource: "com.victronenergy.settings/Settings/SystemSetup/SharedTemperatureSense"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedTemperatureSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
@@ -78,13 +78,13 @@ Page {
 				id: temperatureServiceRadioButtons
 
 				text: CommonWords.temperature_sensor
-				dataSource: "com.victronenergy.settings/Settings/SystemSetup/TemperatureService"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/TemperatureService"
 				//% "Unavailable sensor, set another"
 				defaultSecondaryText: qsTrId("settings_system_unavailable_sensor")
 				visible: defaultVisible && commonSettings.dvccActive && sharedTempSense.checked
 
 				DataPoint {
-					source: "com.victronenergy.system/AvailableTemperatureServices"
+					source: Global.system.serviceUid + "/AvailableTemperatureServices"
 					onValueChanged: {
 						if (value === undefined) {
 							return
@@ -102,7 +102,7 @@ Page {
 			ListTextItem {
 				//% "Used sensor"
 				text: qsTrId("settings_dvcc_used_sensor")
-				dataSource: "com.victronenergy.system/AutoSelectedTemperatureService"
+				dataSource: Global.system.serviceUid + "/AutoSelectedTemperatureService"
 				visible: defaultVisible
 					&& sharedTempSense.checked
 					&& commonSettings.dvccActive
@@ -114,14 +114,14 @@ Page {
 
 				//% "SCS - Shared current sense"
 				text: qsTrId("settings_dvcc_shared_current_sense")
-				dataSource: "com.victronenergy.settings/Settings/SystemSetup/BatteryCurrentSense"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryCurrentSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
 			ListRadioButtonGroup {
 				//% "SCS status"
 				text: qsTrId("settings_dvcc_scs_status")
-				dataSource: "com.victronenergy.system/Control/BatteryCurrentSense"
+				dataSource: Global.system.serviceUid + "/Control/BatteryCurrentSense"
 				visible: defaultVisible && commonSettings.dvccActive && sharedCurrentSense.checked
 				enabled: false
 
@@ -149,7 +149,7 @@ Page {
 
 				//% "Controlling BMS"
 				text: qsTrId("settings_dvcc_controlling_bms")
-				dataSource: "com.victronenergy.settings/Settings/SystemSetup/BmsInstance"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BmsInstance"
 				optionModel: defaultOptionModel
 
 				//: Shown when BMS instance is invalid
@@ -158,7 +158,7 @@ Page {
 
 
 				DataPoint {
-					source: "com.victronenergy.system/AvailableBmsServices"
+					source: Global.system.serviceUid + "/AvailableBmsServices"
 					onValueChanged: {
 						if (value === undefined) {
 							return
@@ -188,7 +188,7 @@ Page {
 
 				DataPoint {
 					id: bmsService
-					source: "com.victronenergy.system/ActiveBmsService"
+					source: Global.system.serviceUid + "/ActiveBmsService"
 				}
 
 				DataPoint {

@@ -11,7 +11,7 @@ Page {
 	id: root
 
 	property bool allowDisableAutostart: true
-	property string settingsBindPrefix: "com.victronenergy.settings/Settings/Generator0"
+	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator0"
 	property string startStopBindPrefix: "com.victronenergy.generator.startstop0"
 	readonly property alias generatorState: _generatorState
 	property alias startStopModel: startStopModel
@@ -45,7 +45,7 @@ Page {
 
 		DataPoint {
 			id: relayFunction
-			source: "com.victronenergy.settings/Settings/Relay/Function"
+			source: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 		}
 	}
 

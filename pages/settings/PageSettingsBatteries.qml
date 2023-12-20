@@ -18,7 +18,7 @@ Page {
 
 	DataPoint {
 		id: availableBatteries
-		source: "com.victronenergy.system/AvailableBatteries"
+		source: Global.system.serviceUid + "/AvailableBatteries"
 		onValueChanged: {
 			let jsonObject
 			try {
@@ -34,7 +34,7 @@ Page {
 
 	DataPoint {
 		id: activeBatteryService
-		source: "com.victronenergy.system/ActiveBatteryService"
+		source: Global.system.serviceUid + "/ActiveBatteryService"
 	}
 
 	GradientListView {
@@ -73,7 +73,7 @@ Page {
 
 			DataPoint {
 				id: batteryEnabled
-				source: "com.victronenergy.settings/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Enabled"
+				source: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Enabled"
 			}
 
 			Component {
@@ -100,7 +100,7 @@ Page {
 								text: qsTrId("settings_batteries_name")
 								//% "Enter name"
 								placeholderText: qsTrId("settings_batteries_enter_name")
-								dataSource: "com.victronenergy.settings/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
+								dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
 								visible: dataValid
 								textField.maximumLength: 32 // TODO can the max be fetched from dbus?
 							}
