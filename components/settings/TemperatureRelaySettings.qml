@@ -15,7 +15,7 @@ Column {
 	property bool hasInvalidRelayTempConfig
 
 	readonly property string tempRelayPrefix: "com.victronenergy.temprelay/Sensor/" + sensorId
-	readonly property string settingsBindPrefix: "com.victronenergy.settings/Settings/TempSensorRelay/" + sensorId
+	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
 	readonly property bool relayValue: cRelay.currentValue
 
 	function showEqualValuesWarningToast() {
@@ -27,7 +27,7 @@ Column {
 
 	DataPoint {
 		id: relay1Item
-		source: "com.victronenergy.system/Relay/1/State"
+		source: Global.system.serviceUid + "/Relay/1/State"
 	}
 
 	ListTextItem {

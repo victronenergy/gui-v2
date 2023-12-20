@@ -21,7 +21,7 @@ Page {
 
 				//% "Signal K"
 				text: qsTrId("settings_large_signal_k")
-				dataSource: "com.victronenergy.platform/Services/SignalK/Enabled"
+				dataSource: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
 				visible: dataValid
 				writeAccessLevel: VenusOS.User_AccessType_Installer
 			}
@@ -37,7 +37,7 @@ Page {
 
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
-				dataSource: "com.victronenergy.platform/Services/NodeRed/Mode"
+				dataSource: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 				visible: dataValid
 				writeAccessLevel: VenusOS.User_AccessType_Installer
 				optionModel: [

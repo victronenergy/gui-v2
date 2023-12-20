@@ -30,7 +30,7 @@ Page {
 
 			ListSwitch {
 				text: "Toggle setting: /Settings/Alarm/Audible"
-				dataSource: "com.victronenergy.settings/Settings/Alarm/Audible"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
 			}
 
 			ListRadioButtonGroup {
@@ -106,7 +106,7 @@ Page {
 
 			ListTextItem {
 				text: "Text only, from dbus source"
-				dataSource: "com.victronenergy.system/FirmwareBuild"
+				dataSource: Global.system.serviceUid + "/FirmwareBuild"
 			}
 
 			ListTextGroup {

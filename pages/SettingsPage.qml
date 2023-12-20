@@ -165,26 +165,26 @@ Page {
 
 	DataPoint {
 		id: systemType
-		source: "com.victronenergy.system/SystemType"
+		source: Global.system.serviceUid + "/SystemType"
 	}
 
 	DataPoint {
 		id: accessPoint
-		source: "com.victronenergy.platform/Services/AccessPoint/Enabled"
+		source: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
 	}
 
 	DataPoint {
 		id: relay0
-		source: "com.victronenergy.system/Relay/0/State"
+		source: Global.system.serviceUid + "/Relay/0/State"
 	}
 
 	DataPoint {
 		id: signalK
-		source: "com.victronenergy.platform/Services/SignalK/Enabled"
+		source: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
 	}
 
 	DataPoint {
 		id: nodeRed
-		source: "com.victronenergy.platform/Services/NodeRed/Mode"
+		source: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 	}
 }

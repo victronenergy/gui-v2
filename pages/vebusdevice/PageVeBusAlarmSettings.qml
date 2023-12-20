@@ -10,7 +10,7 @@ import Victron.Units
 Page {
 	id: root
 
-	readonly property string bindPrefix: "com.victronenergy.settings"
+	readonly property string bindPrefix: Global.systemSettings.serviceUid
 	property bool isMulti
 
 	readonly property var defaultOptionModel: [

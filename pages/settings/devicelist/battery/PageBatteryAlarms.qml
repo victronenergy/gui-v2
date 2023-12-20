@@ -132,7 +132,7 @@ Page {
 			ListAlarm {
 				//% "Circuit breaker tripped"
 				text: qsTrId("batteryalarms_circuit_breaker_tripped")
-				dataSource: "com.victronenergy.system/Dc/Battery/Alarms/CircuitBreakerTripped"
+				dataSource: Global.system.serviceUid + "/Dc/Battery/Alarms/CircuitBreakerTripped"
 				visible: defaultVisible && dataValid
 			}
 

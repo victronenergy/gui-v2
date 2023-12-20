@@ -13,10 +13,10 @@ Page {
 	property string gateway
 	property int canConfig
 
-	readonly property string _vecanSettingsPrefix: "com.victronenergy.settings/Settings/Vecan/" + gateway
+	readonly property string _vecanSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Vecan/" + gateway
 	readonly property string _vecanServicePrefix: "com.victronenergy.vecan." + gateway
 
-	readonly property string _rvcSettingsPrefix: "com.victronenergy.settings/Settings/Rvc/" + gateway
+	readonly property string _rvcSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Rvc/" + gateway
 	readonly property string _rvcServicePrefix: "com.victronenergy.rvc." + gateway
 
 	/* VE.Can and RV-C are mutually exclusive */
@@ -51,7 +51,7 @@ Page {
 
 				//% "CAN-bus profile"
 				text: qsTrId("settings_canbus_profile")
-				dataSource: "com.victronenergy.settings/Settings/Canbus/" + root.gateway + "/Profile"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Canbus/" + root.gateway + "/Profile"
 				optionModel: [
 					{
 						//% "Disabled"

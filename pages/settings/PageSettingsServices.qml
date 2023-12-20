@@ -22,7 +22,7 @@ Page {
 
 				DataPoint {
 					id: modbus
-					source: "com.victronenergy.settings/Settings/Services/Modbus"
+					source: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
 				}
 			}
 
@@ -31,7 +31,7 @@ Page {
 
 				//% "MQTT on LAN (SSL)"
 				text: qsTrId("settings_services_mqtt_on_lan_ssl")
-				dataSource: "com.victronenergy.settings/Settings/Services/MqttLocal"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocal"
 			}
 
 			ListSwitch {
@@ -39,14 +39,14 @@ Page {
 
 				//% "MQTT on LAN (Plain-text)"
 				text: qsTrId("settings_services_mqtt_on_lan_insecure")
-				dataSource: "com.victronenergy.settings/Settings/Services/MqttLocalInsecure"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocalInsecure"
 				visible: mqtt.checked
 			}
 
 			ListSwitch {
 				//% "Console on VE.Direct 1"
 				text: qsTrId("settings_services_console_on_vedirect1")
-				dataSource: "com.victronenergy.platform/Services/Console/Enabled"
+				dataSource: Global.venusPlatform.serviceUid + "/Services/Console/Enabled"
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 
@@ -72,14 +72,14 @@ Page {
 
 				DataPoint {
 					id: canInterface
-					source: "com.victronenergy.platform/CanBus/Interfaces"
+					source: Global.venusPlatform.serviceUid + "/CanBus/Interfaces"
 				}
 			}
 
 			ListSwitch {
 				//% "CAN-bus over TCP/IP (Debug)"
 				text: qsTrId("settings_services_canbus_over_tcpip_debug")
-				dataSource: "com.victronenergy.settings/Settings/Services/Socketcand"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/Socketcand"
 				showAccessLevel: VenusOS.User_AccessType_Service
 			}
 		}

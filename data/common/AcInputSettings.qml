@@ -17,7 +17,7 @@ QtObject {
 	readonly property bool currentLimitAdjustable: _currentLimitAdjustable.value === 1
 
 	property DataPoint _type: DataPoint {
-		source: "com.victronenergy.settings/Settings/SystemSetup/AcInput" + inputNumber
+		source: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput" + inputNumber
 	}
 
 	readonly property VeQuickItem _currentLimit: VeQuickItem {

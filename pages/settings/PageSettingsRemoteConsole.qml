@@ -59,7 +59,7 @@ Page {
 
 				//% "Enable on VRM"
 				text: qsTrId("settings_remoteconsole_enable_on_vrm")
-				dataSource: "com.victronenergy.settings/Settings/System/VncInternet"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/System/VncInternet"
 			}
 
 			ListTextItem {
@@ -71,7 +71,7 @@ Page {
 
 				DataPoint {
 					id: remoteSupportIpAndPort
-					source: "com.victronenergy.settings/Settings/System/RemoteSupportIpAndPort"
+					source: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
 				}
 			}
 
@@ -80,7 +80,7 @@ Page {
 
 				//% "Enable on LAN"
 				text: qsTrId("settings_remoteconsole_enable_on_lan")
-				dataSource: "com.victronenergy.settings/Settings/System/VncLocal"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/System/VncLocal"
 
 				bottomContent.children: ListLabel {
 					visible: text.length > 0

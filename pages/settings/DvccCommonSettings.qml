@@ -15,7 +15,7 @@ Column {
 
 		//% "DVCC"
 		text: qsTrId("settings_dvcc_dvcc")
-		dataSource: "com.victronenergy.settings/Settings/Services/Bol"
+		dataSource: Global.systemSettings.serviceUid + "/Settings/Services/Bol"
 
 		onClicked: {
 			if (dataValid && !checked) {
@@ -44,7 +44,7 @@ Column {
 		//% "Maximum charge current"
 		text: qsTrId("settings_dvcc_max_charge_current")
 		visible: defaultVisible && maxChargeCurrentSwitch.visible && maxChargeCurrentSwitch.checked
-		dataSource: "com.victronenergy.settings/Settings/SystemSetup/MaxChargeCurrent"
+		dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeCurrent"
 		suffix: "A"
 	}
 }

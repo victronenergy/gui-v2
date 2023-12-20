@@ -18,7 +18,7 @@ Page {
 	IpAddressListView {
 		id: settingsListView
 
-		ipAddresses.source: "com.victronenergy.settings/Settings/Fronius/KnownIPAddresses"
+		ipAddresses.source: Global.systemSettings.serviceUid + "/Settings/Fronius/KnownIPAddresses"
 	}
 
 	Connections {

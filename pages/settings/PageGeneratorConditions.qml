@@ -17,7 +17,7 @@ Page {
 	DataPoint {
 		id: availableBatteryServices
 
-		source: "com.victronenergy.system/AvailableBatteryMeasurements"
+		source: Global.system.serviceUid + "/AvailableBatteryMeasurements"
 	}
 
 	DataPoint {

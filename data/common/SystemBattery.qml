@@ -19,26 +19,26 @@ QtObject {
 	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
 
 	readonly property DataPoint _stateOfCharge: DataPoint {
-		source: "com.victronenergy.system/Dc/Battery/Soc"
+		source: Global.system.serviceUid + "/Dc/Battery/Soc"
 	}
 
 	readonly property DataPoint _voltage: DataPoint {
-		source: "com.victronenergy.system/Dc/Battery/Voltage"
+		source: Global.system.serviceUid + "/Dc/Battery/Voltage"
 	}
 
 	readonly property DataPoint _power: DataPoint {
-		source: "com.victronenergy.system/Dc/Battery/Power"
+		source: Global.system.serviceUid + "/Dc/Battery/Power"
 	}
 
 	readonly property DataPoint _current: DataPoint {
-		source: "com.victronenergy.system/Dc/Battery/Current"
+		source: Global.system.serviceUid + "/Dc/Battery/Current"
 	}
 
 	readonly property DataPoint _temperature: DataPoint {
-		source: "com.victronenergy.system/Dc/Battery/Temperature"
+		source: Global.system.serviceUid + "/Dc/Battery/Temperature"
 	}
 
 	readonly property DataPoint _timeToGo: DataPoint {
-		source: "com.victronenergy.system/Dc/Battery/TimeToGo"
+		source: Global.system.serviceUid + "/Dc/Battery/TimeToGo"
 	}
 }

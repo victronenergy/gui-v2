@@ -61,6 +61,6 @@ Page {
 
 	DataPoint {
 		id: accessPoint
-		source: "com.victronenergy.platform/Services/AccessPoint/Enabled"
+		source: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
 	}
 }
