@@ -104,7 +104,7 @@ Page {
 						setValue(region + "/" + city)
 					}
 
-					source: "com.victronenergy.settings/Settings/System/TimeZone"
+					source: Global.systemSettings.serviceUid + "/Settings/System/TimeZone"
 					onValueChanged: {
 						if (value !== undefined) {
 							const slash = value.indexOf('/')

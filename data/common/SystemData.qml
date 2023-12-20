@@ -13,7 +13,7 @@ QtObject {
 	id: root
 
 	readonly property DataPoint systemState: DataPoint {
-		source: "com.victronenergy.system/SystemState/State"
+		source: Global.system.serviceUid + "/SystemState/State"
 		Component.onCompleted: {
 			Global.system.state = Qt.binding(function() { return value || VenusOS.System_State_Off })
 		}
@@ -29,7 +29,7 @@ QtObject {
 			consumptionInputObjects.model = value
 			consumptionOutputObjects.model = value
 		}
-		source: "com.victronenergy.system/Ac/Consumption/NumberOfPhases"
+		source: Global.system.serviceUid + "/Ac/Consumption/NumberOfPhases"
 		Component.onCompleted: _update()
 		onValueChanged: _update()
 	}
@@ -47,7 +47,7 @@ QtObject {
 					consumptionInput.power = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
-				source: "com.victronenergy.system/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Power"
+				source: Global.system.serviceUid + "/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Power"
 				Component.onCompleted: _update()
 				onValueChanged: _update()
 			}
@@ -58,7 +58,7 @@ QtObject {
 					consumptionInput.current = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
-				source: "com.victronenergy.system/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Current"
+				source: Global.system.serviceUid + "/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Current"
 				Component.onCompleted: _update()
 				onValueChanged: _update()
 			}
@@ -78,7 +78,7 @@ QtObject {
 					consumptionOutput.power = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
-				source: "com.victronenergy.system/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Power"
+				source: Global.system.serviceUid + "/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Power"
 				Component.onCompleted: _update()
 				onValueChanged: _update()
 			}
@@ -87,7 +87,7 @@ QtObject {
 					consumptionOutput.current = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
-				source: "com.victronenergy.system/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Current"
+				source: Global.system.serviceUid + "/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Current"
 				Component.onCompleted: _update()
 				onValueChanged: _update()
 			}
@@ -116,14 +116,14 @@ QtObject {
 	//--- DC data ---
 
 	readonly property DataPoint veSystemPower: DataPoint {
-		source: "com.victronenergy.system/Dc/System/Power"
+		source: Global.system.serviceUid + "/Dc/System/Power"
 		Component.onCompleted: {
 			Global.system.dc.power = Qt.binding(function() { return value === undefined ? NaN : value })
 		}
 	}
 
 	readonly property DataPoint veBatteryVoltage: DataPoint {
-		source: "com.victronenergy.system/Dc/Battery/Voltage"
+		source: Global.system.serviceUid + "/Dc/Battery/Voltage"
 		Component.onCompleted: {
 			Global.system.dc.voltage = Qt.binding(function() { return value === undefined ? NaN : value })
 		}
@@ -132,7 +132,7 @@ QtObject {
 	//--- veBus ---
 
 	readonly property DataPoint veBusService: DataPoint {
-		source: "com.victronenergy.system/VebusService"
+		source: Global.system.serviceUid + "/VebusService"
 		Component.onCompleted: {
 			Global.system.veBus.serviceUid = Qt.binding(function() { return value || "" })
 		}

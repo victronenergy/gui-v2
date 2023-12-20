@@ -99,11 +99,7 @@ Page {
 		id: classAndVrmInstanceObjects
 
 		model: VeQItemTableModel {
-			uids: BackendConnection.type === BackendConnection.DBusSource
-				  ? ["dbus/com.victronenergy.settings/Settings/Devices"]
-				  : BackendConnection.type === BackendConnection.MqttSource
-					? ["mqtt/settings/0/Settings/Devices"]
-					: []
+			uids: [ Global.systemSettings.serviceUid + "/Settings/Devices" ]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 

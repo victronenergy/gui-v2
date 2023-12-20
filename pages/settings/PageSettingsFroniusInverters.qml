@@ -11,7 +11,7 @@ import Victron.Utils
 Page {
 	id: root
 
-	property string bindPrefix: "com.victronenergy.settings/Settings/Fronius"
+	property string bindPrefix: Global.systemSettings.serviceUid + "/Settings/Fronius"
 
 	GradientListView {
 		model: VeQItemTableModel {

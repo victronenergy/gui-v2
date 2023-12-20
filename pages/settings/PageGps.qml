@@ -131,11 +131,11 @@ Page {
 
 	DataPoint {
 		id: format
-		source: "com.victronenergy.settings/Settings/Gps/Format"
+		source: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
 	}
 
 	DataPoint {
 		id: speedUnit
-		source: "com.victronenergy.settings/Settings/Gps/SpeedUnit"
+		source: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
 	}
 }

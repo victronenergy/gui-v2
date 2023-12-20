@@ -19,7 +19,7 @@ QtObject {
 	property int _updateType
 
 	property DataPoint _stateItem: DataPoint {
-		source: "com.victronenergy.platform/Firmware/State"
+		source: Global.venusPlatform.serviceUid + "/Firmware/State"
 
 		onValueChanged: {
 			let msg = ""
@@ -69,24 +69,24 @@ QtObject {
 
 	// online updates
 	property DataPoint _onlineCheckUpdate: DataPoint {
-		source: "com.victronenergy.platform/Firmware/Online/Check"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Online/Check"
 	}
 	property DataPoint _onlineVersion: DataPoint {
-		source: "com.victronenergy.platform/Firmware/Online/AvailableVersion"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableVersion"
 	}
 	property DataPoint _onlineInstallUpdate: DataPoint {
-		source: "com.victronenergy.platform/Firmware/Online/Install"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Online/Install"
 	}
 
 	// offline updates
 	property DataPoint _offlineCheckUpdate: DataPoint {
-		source: "com.victronenergy.platform/Firmware/Offline/Check"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Offline/Check"
 	}
 	property DataPoint _offlineVersion: DataPoint {
-		source: "com.victronenergy.platform/Firmware/Offline/AvailableVersion"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableVersion"
 	}
 	property DataPoint _offlineInstallUpdate: DataPoint {
-		source: "com.victronenergy.platform/Firmware/Offline/Install"
+		source: Global.venusPlatform.serviceUid + "/Firmware/Offline/Install"
 	}
 
 	function checkForUpdate(updateType) {

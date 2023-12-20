@@ -20,7 +20,7 @@ Page {
 
 	DataPoint {
 		id: systemType
-		source: "com.victronenergy.system/SystemType"
+		source: Global.system.serviceUid + "/SystemType"
 	}
 
 	DataPoint {

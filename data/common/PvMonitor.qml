@@ -110,12 +110,12 @@ Instantiator {
 	// --- DC values ---
 
 	readonly property DataPoint veDcPower: DataPoint {
-		source: "com.victronenergy.system/Dc/Pv/Power"
+		source: Global.system.serviceUid + "/Dc/Pv/Power"
 		onValueChanged: if (!!Global.system) Global.system.solar.dcPower = value === undefined ? NaN : value
 	}
 
 	readonly property DataPoint veDcCurrent: DataPoint {
-		source: "com.victronenergy.system/Dc/Pv/Current"
+		source: Global.system.serviceUid + "/Dc/Pv/Current"
 		onValueChanged: root.updateOverallCurrent()
 	}
 }

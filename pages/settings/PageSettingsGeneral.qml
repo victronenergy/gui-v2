@@ -70,7 +70,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Access level"
 				text: qsTrId("settings_access_level")
-				dataSource: "com.victronenergy.settings/Settings/System/AccessLevel"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
 				optionModel: [
@@ -102,7 +102,7 @@ Page {
 
 				//% "SSH on LAN"
 				text: qsTrId("settings_ssh_on_lan")
-				dataSource: "com.victronenergy.settings/Settings/System/SSHLocal"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/System/SSHLocal"
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 
@@ -111,7 +111,7 @@ Page {
 
 				//% "Remote support"
 				text: qsTrId("settings_remote_support")
-				dataSource: "com.victronenergy.settings/Settings/System/RemoteSupport"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupport"
 			}
 
 			ListTextItem {
@@ -126,7 +126,7 @@ Page {
 
 				//% "Remote support IP and port"
 				text: qsTrId("settings_remote_ip_and_support")
-				dataSource: "com.victronenergy.settings/Settings/System/RemoteSupportIpAndPort"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
 				visible: defaultVisible && remoteSupportOnOff.checked
 			}
 
@@ -141,12 +141,12 @@ Page {
 			ListSwitch {
 				//% "Audible alarm"
 				text: qsTrId("settings_audible_alarm")
-				dataSource: "com.victronenergy.settings/Settings/Alarm/Audible"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
 				visible: defaultVisible && buzzerStateDataPoint.valid
 
 				DataPoint {
 					id: buzzerStateDataPoint
-					source: "com.victronenergy.system/Buzzer/State"
+					source: Global.system.serviceUid + "/Buzzer/State"
 				}
 			}
 			ListRadioButtonGroup {
@@ -154,7 +154,7 @@ Page {
 				text: qsTrId("settings_demo_mode")
 				height: implicitHeight + demoModeCaption.height
 				primaryLabel.anchors.verticalCenterOffset: -(demoModeCaption.height / 2)
-				dataSource: "com.victronenergy.settings/Settings/Gui/DemoMode"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
 				popDestination: undefined // don't pop page automatically.
 				updateOnClick: false // handle option clicked manually.
 				optionModel: [

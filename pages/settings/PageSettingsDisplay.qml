@@ -18,14 +18,14 @@ Page {
 				id: autoBrightness
 				//% "Adaptive brightness"
 				text: qsTrId("settings_adaptive_brightness")
-				dataSource: "com.victronenergy.settings/Settings/Gui/AutoBrightness"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Gui/AutoBrightness"
 				// TODO will this also need bindings similar to gui-v1 vePlatform.hasAutoBrightness?
 			}
 
 			ListSlider {
 				//% "Brightness"
 				text: qsTrId("settings_brightness")
-				dataSource: "com.victronenergy.settings/Settings/Gui/Brightness"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Gui/Brightness"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				visible: defaultVisible && !autoBrightness.checked
 				// TODO will this also need bindings similar to gui-v1 vePlatform.hasBacklight and vePlatform.brightness?
@@ -35,7 +35,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Display off time"
 				text: qsTrId("settings_display_off_time")
-				dataSource: "com.victronenergy.settings/Settings/Gui/DisplayOff"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Gui/DisplayOff"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
 				optionModel: [
@@ -115,7 +115,7 @@ Page {
 
 				DataPoint {
 					id: languageDataPoint
-					source: "com.victronenergy.settings/Settings/Gui/Language"
+					source: Global.systemSettings.serviceUid + "/Settings/Gui/Language"
 				}
 
 				Component {

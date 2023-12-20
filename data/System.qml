@@ -11,10 +11,9 @@ import Victron.Units
 QtObject {
 	id: root
 
-	property int state
+	readonly property string serviceUid: BackendConnection.serviceUidForType("system")
 
-	readonly property string serviceUid: BackendConnection.type === BackendConnection.MqttSource ? "mqtt/system/0"
-		: BackendConnection.uidPrefix() + "com.victronenergy.system"
+	property int state
 
 	// Provides convenience properties for total AC/DC loads.
 	property QtObject loads: QtObject {

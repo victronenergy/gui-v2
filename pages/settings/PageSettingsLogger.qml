@@ -36,7 +36,7 @@ Page {
 				id: loggerMode
 				//% "Logging enabled"
 				text: qsTrId("settings_logging_enabled")
-				dataSource: "com.victronenergy.settings/Settings/Vrmlogger/Logmode"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/Logmode"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled,	value: 1 },
@@ -46,7 +46,7 @@ Page {
 			ListTextItem {
 				//% "VRM Portal ID"
 				text: qsTrId("settings_vrm_portal_id")
-				dataSource: "com.victronenergy.platform/Device/UniqueId" // this doesn't work with mqtt yet, see: https://github.com/victronenergy/gui-v2/issues/385
+				dataSource: Global.venusPlatform.serviceUid + "/Device/UniqueId" // this doesn't work with mqtt yet, see: https://github.com/victronenergy/gui-v2/issues/385
 			}
 
 			ListRadioButtonGroup {
@@ -74,14 +74,14 @@ Page {
 					//% "1 day"
 					{ display: qsTrId("settings_1_day"), value: 86400 },
 				]
-				dataSource: "com.victronenergy.settings/Settings/Vrmlogger/LogInterval"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/LogInterval"
 				visible: !!loggerMode.dataValue && loggerMode.dataValue > 0
 			}
 
 			ListSwitch {
 				//% "Use secure connection (HTTPS)"
 				text: qsTrId("settings_https_enabled")
-				dataSource: "com.victronenergy.settings/Settings/Vrmlogger/HttpsEnabled"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/HttpsEnabled"
 			}
 
 			ListTextItem {
@@ -152,20 +152,20 @@ Page {
 			ListSwitch {
 				//% "VRM two-way communication"
 				text: qsTrId("settings_vrm_communication")
-				dataSource: "com.victronenergy.settings/Settings/Services/MqttVrm"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/MqttVrm"
 			}
 
 			ListSwitch {
 				//% "Reboot device when no contact"
 				text: qsTrId("settings_no_contact_reboot")
-				dataSource: "com.victronenergy.settings/Settings/Watchdog/VrmTimeout"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
 				updateOnClick: false
 				checked: dataValue !== 0
 				onClicked: setDataValue(checked ? 0 : 3600)
 			}
 
 			ListTimeSelector {
-				dataSource: "com.victronenergy.settings/Settings/Watchdog/VrmTimeout"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
 				//% "No contact reset delay (hh:mm)"
 				text: qsTrId("settings_vrm_no_contact_reset_delay")
 				visible: !!dataValue && dataValue > 0

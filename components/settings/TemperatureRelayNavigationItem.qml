@@ -15,7 +15,7 @@ ListNavigationItem {
 	property string sensorId
 
 	readonly property string tempRelayPrefix: "com.victronenergy.temprelay/Sensor/" + sensorId
-	readonly property string settingsBindPrefix: "com.victronenergy.settings/Settings/TempSensorRelay/" + sensorId
+	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
 
 	function temperatureTypeText(value) {
 		switch (value) {

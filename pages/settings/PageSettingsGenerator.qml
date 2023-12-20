@@ -82,13 +82,13 @@ Page {
 				DataPoint {
 					id: acIn1Source
 
-					source: "com.victronenergy.settings/Settings/SystemSetup/AcInput1"
+					source: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1"
 				}
 
 				DataPoint {
 					id: acIn2Source
 
-					source: "com.victronenergy.settings/Settings/SystemSetup/AcInput2"
+					source: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2"
 				}
 			}
 

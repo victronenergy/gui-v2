@@ -84,19 +84,19 @@ QtObject {
 	}
 
 	readonly property DataPoint veBatteryLifeState: DataPoint {
-		source: "com.victronenergy.settings/Settings/CGwacs/BatteryLife/State"
+		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
 	}
 
 	readonly property DataPoint veHub4Mode: DataPoint {
-		source: "com.victronenergy.settings/Settings/CGwacs/Hub4Mode"
+		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
 	}
 
 	readonly property DataPoint veMinimumSocLimit: DataPoint {
-		source: "com.victronenergy.settings/Settings/CGwacs/BatteryLife/MinimumSocLimit"
+		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/MinimumSocLimit"
 	}
 
 	readonly property DataPoint veSocLimit: DataPoint {
-		source: "com.victronenergy.settings/Settings/CGwacs/BatteryLife/SocLimit"
+		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/SocLimit"
 	}
 
 	Component.onCompleted: {

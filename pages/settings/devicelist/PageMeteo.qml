@@ -11,7 +11,7 @@ Page {
 	id: root
 
 	property string bindPrefix
-	readonly property string settingsPrefix: "com.victronenergy.settings/Settings/Service/meteo/" + deviceInstance.value
+	readonly property string settingsPrefix: Global.systemSettings.serviceUid + "/Settings/Service/meteo/" + deviceInstance.value
 
 	DataPoint {
 		id: deviceInstance

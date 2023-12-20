@@ -11,7 +11,7 @@ ListNavigationItem {
 	id: root
 
 	property int scheduleNumber
-	readonly property string _scheduleSource: "com.victronenergy.settings/Settings/CGwacs/BatteryLife/Schedule/Charge/" + scheduleNumber
+	readonly property string _scheduleSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/Schedule/Charge/" + scheduleNumber
 
 	property var _dayModel: [
 		//% "Every day"

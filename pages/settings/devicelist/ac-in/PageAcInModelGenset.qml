@@ -137,7 +137,7 @@ ObjectModel {
 		onClicked: {
 			const props = {
 				"title": text,
-				"settingsBindPrefix": "com.victronenergy.settings/Settings/Generator1",
+				"settingsBindPrefix": Global.systemSettings.serviceUid + "/Settings/Generator1",
 				"startStopBindPrefix": "com.victronenergy.generator.startstop1",
 				"allowDisableAutostart": false,
 			}

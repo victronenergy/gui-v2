@@ -12,7 +12,7 @@ PageGenerator {
 
 	DataPoint {
 		id: relayFunction
-		source: "com.victronenergy.settings/Settings/Relay/Function"
+		source: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 	}
 
 	model: !relayFunction.valid || relayFunction.value === 1 ? startStopModel : disabledModel

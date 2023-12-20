@@ -21,7 +21,7 @@ Page {
 
 	DataPoint {
 		id: canStats
-		source: "com.victronenergy.platform/CanBus/Interface/" + gateway + "/Statistics"
+		source: Global.venusPlatform.serviceUid + "/CanBus/Interface/" + gateway + "/Statistics"
 		onValueChanged: {
 			if (value === undefined) {
 				return

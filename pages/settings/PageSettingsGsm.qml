@@ -11,7 +11,7 @@ Page {
 	id: root
 
 	property string bindPrefix: "com.victronenergy.modem"
-	property string settingsBindPrefix: "com.victronenergy.settings/Settings/Modem"
+	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Modem"
 
 	DataPoint {
 		id: simStatus

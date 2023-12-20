@@ -18,7 +18,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Auto update"
 				text: qsTrId("settings_auto_update")
-				dataSource: "com.victronenergy.settings/Settings/System/AutoUpdate"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.Firmware_AutoUpdate_Disabled },
@@ -34,7 +34,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Update feed"
 				text: qsTrId("settings_update_feed")
-				dataSource: "com.victronenergy.settings/Settings/System/ReleaseType"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/System/ReleaseType"
 				optionModel: [
 					//% "Latest release"
 					{ display: qsTrId("settings_firmware_latest_release"), value: FirmwareUpdater.FirmwareRelease },
@@ -52,7 +52,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Image type"
 				text: qsTrId("settings_firmware_image_type")
-				dataSource: "com.victronenergy.settings/Settings/System/ImageType"
+				dataSource: Global.systemSettings.serviceUid + "/Settings/System/ImageType"
 				visible: largeImageSupport.value === 1
 				optionModel: [
 					//% "Normal"
@@ -63,7 +63,7 @@ Page {
 
 				DataPoint {
 					id: largeImageSupport
-					source: "com.victronenergy.platform/Firmware/LargeImageSupport"
+					source: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport"
 				}
 			}
 
@@ -104,14 +104,14 @@ Page {
 
 				DataPoint {
 					id: progress
-					source: "com.victronenergy.platform/Firmware/Progress"
+					source: Global.venusPlatform.serviceUid + "/Firmware/Progress"
 				}
 			}
 
 			ListTextItem {
 				//% "Update build date/time"
 				text: qsTrId("settings_firmware_update_build_date_time")
-				dataSource: "com.victronenergy.platform/Firmware/Online/AvailableBuild"
+				dataSource: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableBuild"
 				visible: installUpdate.visible && Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 		}
