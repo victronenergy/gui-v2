@@ -92,8 +92,8 @@ Rectangle {
 					&& !Global.notifications.snoozeAudibleAlarmActive
 		opacity: enabled ? 1 : 0
 		Behavior on opacity { OpacityAnimator { duration: Theme.animation.toastNotification.fade.duration} }
-		border.width: Theme.geometry.button.border.width
-		border.color: Theme.color.critical
+		borderWidth: Theme.geometry.button.border.width
+		borderColor: Theme.color.critical
 		width: Theme.geometry.notificationsPage.snoozeButton.width
 		height: Theme.geometry.notificationsPage.snoozeButton.height
 		backgroundColor: Theme.color.darkCritical

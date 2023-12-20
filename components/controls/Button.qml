@@ -19,8 +19,9 @@ CT.Button {
 			: Theme.color.darkOk
 	property color downColor: flat ? "transparent"
 			: Theme.color.ok
-	property alias border: backgroundRect.border
-	property alias radius: backgroundRect.radius
+	property int borderWidth: root.flat ? 0 : Theme.geometry.button.border.width
+	property color borderColor: Theme.color.ok
+	property int radius: Theme.geometry.button.radius
 
 	down: pressed || checked
 	spacing: Theme.geometry.button.spacing
@@ -39,12 +40,10 @@ CT.Button {
 	flat: true
 
 	background: Rectangle {
-		id: backgroundRect
-
 		color: root.backgroundColor
-		border.width: root.flat ? 0 : Theme.geometry.button.border.width
-		border.color: Theme.color.ok
-		radius: Theme.geometry.button.radius
+		border.width: borderWidth
+		border.color: borderColor
+		radius: root.radius
 	}
 
 	contentItem: IconLabel {

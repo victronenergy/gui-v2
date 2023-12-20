@@ -57,8 +57,6 @@ CT.ComboBox {
 	}
 
 	indicator: ColorImage {
-		id: downIcon
-
 		x: root.width - width - root.rightPadding
 		y: root.topPadding + (root.availableHeight - height) / 2
 		source: "/images/icon_back_32.svg"

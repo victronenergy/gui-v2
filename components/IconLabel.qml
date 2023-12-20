@@ -14,4 +14,5 @@ Item {
 
 	property var image
 	property var label
+	property bool mirrored
 }

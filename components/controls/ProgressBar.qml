@@ -38,21 +38,19 @@ T.ProgressBar {
 		}
 
 		Item {
-			id: container
 			width: parent.width   // can't use anchors here or the XAnimator breaks
 			height: parent.height // see QTBUG-118848
 			visible: false
 			layer.enabled: true
 
 			Rectangle {
-				id: highlightRect
 				readonly property bool isMirrored: root.position !== root.visualPosition
 				color: Theme.color.ok
-				height: container.height
-				width: root.indeterminate ? (container.width/3) : (container.width * root.position)
+				height: parent.height
+				width: root.indeterminate ? (parent.width/3) : (parent.width * root.position)
 				x: root.indeterminate
-					? (highlightRect.isMirrored ? container.width : -highlightRect.width)
-					: (highlightRect.isMirrored ? container.width - highlightRect.width : 0)
+					? (isMirrored ? parent.width : -width)
+					: (isMirrored ? parent.width - width : 0)
 				radius: Theme.geometry.progressBar.radius
 
 				XAnimator on x {
@@ -60,11 +58,11 @@ T.ProgressBar {
 					loops: Animation.Infinite
 					duration: Theme.animation.progressBar.duration
 					from: root.indeterminate
-						? (highlightRect.isMirrored ? container.width : -highlightRect.width)
-						: (highlightRect.isMirrored ? container.width - highlightRect.width : 0)
+						? (parent.isMirrored ? contentItem.width : -parent.width)
+						: (parent.isMirrored ? contentItem.width - parent.width : 0)
 					to: root.indeterminate
-						? (highlightRect.isMirrored ? -highlightRect.width : container.width)
-						: (highlightRect.isMirrored ? container.width - highlightRect.width : 0) // x only animates for indeterminate bars.
+						? (parent.isMirrored ? -parent.width : contentItem.width)
+						: (parent.isMirrored ? contentItem.width - parent.width : 0) // x only animates for indeterminate bars.
 				}
 			}
 		}
