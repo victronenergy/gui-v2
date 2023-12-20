@@ -73,7 +73,10 @@ endif()
 # Eventually, we should implement the code generator as a python script
 # and invoke it directly via add_custom_command() + add_custom_target().
 # For now, we require the developer to run the code generator manually.
-#add_subdirectory("tools/themeparser")
+add_subdirectory("tools/themeparser")
+add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/src/themeobjects.h
+    COMMAND bin/themeparser
+)
 
 include_directories(src/veutil/inc src .)
 
