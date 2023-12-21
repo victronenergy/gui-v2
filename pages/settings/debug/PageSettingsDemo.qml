@@ -202,7 +202,7 @@ Page {
 			ListItem {
 				text: "Custom bottom content item"
 
-				bottomContent.children: [
+				bottomContentChildren: [
 					ListLabel {
 						topPadding: 0
 						bottomPadding: 0

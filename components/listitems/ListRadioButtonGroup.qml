@@ -107,7 +107,7 @@ ListNavigationItem {
 					writeAccessLevel: root.writeAccessLevel
 					C.ButtonGroup.group: radioButtonGroup
 
-					bottomContent.children: Loader {
+					bottomContentChildren: Loader {
 						id: bottomContentLoader
 
 						readonly property string caption: Array.isArray(root.optionModel)
