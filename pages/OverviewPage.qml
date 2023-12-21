@@ -59,7 +59,7 @@ Page {
 		let firstLargeWidget = null
 		let widget = null
 		for (i = 0; i < _leftWidgets.length; ++i) {
-			if (_leftWidgets[i].extraContent.children.length > 0) {
+			if (_leftWidgets[i].extraContentChildren.length > 0) {
 				firstLargeWidget = _leftWidgets[i]
 				break
 			}
