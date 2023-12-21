@@ -11,8 +11,8 @@ Page {
 	id: root
 
 	property bool allowDisableAutostart: true
-	readonly property string settingsBindPrefix: "com.victronenergy.settings/Settings/Generator0"
-	readonly property string startStopBindPrefix: "com.victronenergy.generator.startstop0"
+	property string settingsBindPrefix: "com.victronenergy.settings/Settings/Generator0"
+	property string startStopBindPrefix: "com.victronenergy.generator.startstop0"
 	readonly property alias generatorState: _generatorState
 	readonly property alias activeCondition: _activeCondition
 	property alias startStopModel: startStopModel
