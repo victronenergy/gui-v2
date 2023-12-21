@@ -158,10 +158,11 @@ ObjectModel {
 			Page {
 				GradientListView {
 					model: ObjectModel {
-						ListTextItem {
+						ListQuantityItem {
 							//% "Speed"
 							text: qsTrId("ac-in-genset_speed")
 							dataSource: root.bindPrefix + "/Engine/Speed"
+							unit: VenusOS.Units_RevolutionsPerMinute
 						}
 
 						ListTextItem {
