@@ -9,6 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property string modbustcpServiceUid: BackendConnection.serviceUidForType("modbustcp")
+
 	function _shortServiceName(serviceName) {
 		if (serviceName === undefined) {
 			return ""
@@ -28,7 +30,7 @@ Page {
 
 	DataPoint {
 		id: serviceCount
-		source: "com.victronenergy.modbustcp/Services/Count"
+		source: root.modbustcpServiceUid + "/Services/Count"
 	}
 
 	GradientListView {
@@ -37,7 +39,7 @@ Page {
 		delegate: ListItem {
 			id: serviceDelegate
 
-			readonly property string servicePath: "com.victronenergy.modbustcp/Services/" + model.index
+			readonly property string servicePath: root.modbustcpServiceUid + "/Services/" + model.index
 
 			text: root._formatName(productName.value, serviceName.value)
 

@@ -16,11 +16,7 @@ Page {
 		filterFlags: VeQItemSortTableModel.FilterOffline
 		dynamicSortFilter: true
 		model: VeQItemTableModel {
-			uids: BackendConnection.type === BackendConnection.DBusSource
-				  ? ["dbus/com.victronenergy.temprelay/Sensor"]
-				  : BackendConnection.type === BackendConnection.MqttSource
-					? ["mqtt/temprelay/0/Sensor"]
-					: []
+			uids: [ BackendConnection.uidForServiceType("temprelay") + "/Sensor" ]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 	}

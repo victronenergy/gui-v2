@@ -55,6 +55,6 @@ Page {
 	DataPoint {
 		id: scanItem
 
-		source: "com.victronenergy.fronius/AutoDetect"
+		source: BackendConnection.serviceUidForType("fronius") + "/AutoDetect"
 	}
 }

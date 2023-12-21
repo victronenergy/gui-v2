@@ -35,6 +35,6 @@ ListButton {
 	DataPoint {
 		id: mountState
 
-		source: "com.victronenergy.logger/Storage/MountState"
+		source: BackendConnection.serviceUidForType("logger") + "/Storage/MountState"
 	}
 }
