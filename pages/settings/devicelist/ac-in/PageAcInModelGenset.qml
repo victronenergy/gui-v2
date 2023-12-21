@@ -27,11 +27,11 @@ ObjectModel {
 		optionModel: [
 			{ display: CommonWords.on, value: 1 },
 			{ display: CommonWords.off, value: 0 },
-			{ display: CommonWords.generatorNavigationItem.text, value: 2 },
+			{ display: generatorNavigationItem.text, value: 2 },
 		]
 		updateOnClick: false
 		currentIndex: autoStartStopItem.value === 1 ? index_autoStartStop
-					: modeItem.value === 0 ? index_on : index_off
+					: modeItem.value === 1 ? index_on : index_off
 
 		onOptionClicked: function(index) {
 			if (index === index_off) {
@@ -45,7 +45,7 @@ ObjectModel {
 				}
 				autoStartStopItem.setValue(0)
 				modeItem.setValue(1)
-			} else if (localValue === index_autoStartStop) {
+			} else if (index === index_autoStartStop) {
 				autoStartStopItem.setValue(1)
 				modeItem.setValue(0)
 			}
