@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 QtObject {
 	id: root
@@ -74,6 +75,26 @@ QtObject {
 
 	//--- veBus ---
 
+	readonly property VeQuickItem veBusService: VeQuickItem {
+		uid: Global.system.serviceUid + "/VebusService"
+	}
+	readonly property VeQuickItem veBusPower: VeQuickItem {
+		uid: veBusService.value ? "%1/%2/Dc/0/Power".arg(BackendConnection.uidPrefix()).arg(veBusService.value) : ""
+	}
+
+	property Connections veBusServiceSetup: Connections {
+		target: Global.veBusDevices.model
+		function onFirstObjectChanged() {
+			if (Global.veBusDevices.model.firstObject) {
+				// Write uid like "com.victronenergy.vebus.tty0", without "mock/" prefix
+				const uid = Global.veBusDevices.model.firstObject.serviceUid.substring(BackendConnection.uidPrefix().length)
+				root.veBusService.setValue(uid)
+			} else {
+				root.veBusService.setValue("")
+			}
+		}
+	}
+
 	property Timer randomizeVeBusValues: Timer {
 		running: Global.mockDataSimulator.timersActive
 		interval: 1000
@@ -81,7 +102,7 @@ QtObject {
 		triggeredOnStart: true
 
 		onTriggered: {
-			Global.system.veBus.power = 500 + Math.floor(Math.random() * 100)
+			root.veBusPower.setValue(500 + Math.floor(Math.random() * 100))
 		}
 	}
 
