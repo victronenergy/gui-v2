@@ -108,7 +108,7 @@ Page {
 				id: rxGroup
 
 				text: "RX"
-				bottomContent.children: ListTextGroup {
+				bottomContentChildren: ListTextGroup {
 					id: rxErrorGroup
 				}
 			}
@@ -117,7 +117,7 @@ Page {
 				id: txGroup
 
 				text: "TX"
-				bottomContent.children: ListTextGroup {
+				bottomContentChildren: ListTextGroup {
 					id: txErrorGroup
 				}
 			}
