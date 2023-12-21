@@ -128,7 +128,7 @@ Page {
 				visible: root._isVecan || root._isRvc
 				dataItem.uid: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
 
-				bottomContent.children: ListLabel {
+				bottomContentChildren: ListLabel {
 					visible: text.length > 0
 					color: Theme.color_font_secondary
 					text: root._isVecan
@@ -171,7 +171,7 @@ Page {
 							+ (uniqueIdOkLabel.visible ? uniqueIdOkLabel.height : 0))
 						: 0
 
-				bottomContent.children: [
+				bottomContentChildren: [
 					ListLabel {
 						id: uniqueIdConflictLabel
 						topPadding: 0

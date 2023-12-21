@@ -12,6 +12,7 @@ Item {
 	property alias text: primaryLabel.text
 	property alias content: content
 	property alias bottomContent: bottomContent
+	property list<Item> bottomContentChildren
 	property bool down
 	property alias backgroundRect: backgroundRect
 	property int spacing: Theme.geometry_gradientList_spacing
@@ -97,5 +98,6 @@ Item {
 		y: Math.max(primaryLabel.y + primaryLabel.height + bottomContentMargin,
 			content.y + content.height + bottomContentMargin)
 		width: parent.width
+		children: root.bottomContentChildren
 	}
 }
