@@ -14,11 +14,7 @@ Page {
 
 	VeQItemTableModel {
 		id: analogModel
-		uids: BackendConnection.type === BackendConnection.DBusSource
-			  ? ["dbus/com.victronenergy.adc/Devices"]
-			  : BackendConnection.type === BackendConnection.MqttSource
-				? ["mqtt/adc/0/Devices"]
-				: []
+		uids: [ BackendConnection.serviceUidForType("adc") + "/Devices" ]
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 

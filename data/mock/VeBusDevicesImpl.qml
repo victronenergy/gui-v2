@@ -265,11 +265,11 @@ QtObject {
 			}
 
 			readonly property DataPoint _maxChargePower: DataPoint {
-				source: "com.victronenergy.hub4/MaxChargePower"
+				source: BackendConnection.serviceUidForType("hub4") + "/MaxChargePower"
 			}
 
 			readonly property DataPoint _maxDischargePower: DataPoint {
-				source: "com.victronenergy.hub4/MaxDischargePower"
+				source: BackendConnection.serviceUidForType("hub4") + "/MaxDischargePower"
 			}
 
 			readonly property DataPoint _disableCharge: DataPoint {

@@ -12,6 +12,7 @@ Row {
 	id: root
 
 	readonly property bool valid: strength.valid
+	readonly property string modemServiceUid: BackendConnection.serviceUidForType("modem")
 
 	function getScaledStrength(strength) {
 		if (strength <= 3) {
@@ -90,30 +91,30 @@ Row {
 	DataPoint {
 		id: strength
 
-		source: "com.victronenergy.modem/SignalStrength"
+		source: root.modemServiceUid + "/SignalStrength"
 	}
 
 	DataPoint {
 		id: networkType
 
-		source: "com.victronenergy.modem/NetworkType"
+		source: root.modemServiceUid + "/NetworkType"
 	}
 
 	DataPoint {
 		id: simStatus
 
-		source: "com.victronenergy.modem/SimStatus"
+		source: root.modemServiceUid + "/SimStatus"
 	}
 
 	DataPoint {
 		id: roaming
 
-		source: "com.victronenergy.modem/Roaming"
+		source: root.modemServiceUid + "/Roaming"
 	}
 
 	DataPoint {
 		id: connected
 
-		source: "com.victronenergy.modem/Connected"
+		source: root.modemServiceUid + "/Connected"
 	}
 }

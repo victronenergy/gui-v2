@@ -72,7 +72,7 @@ Page {
 				visible: defaultVisible
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& dataValid
-				dataSource: "com.victronenergy.hub4/PvPowerLimiterActive"
+				dataSource: BackendConnection.serviceUidForType("hub4") +"/PvPowerLimiterActive"
 				secondaryText: CommonWords.yesOrNo(dataValue)
 			}
 		}

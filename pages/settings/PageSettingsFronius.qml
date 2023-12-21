@@ -10,18 +10,18 @@ import Victron.VenusOS
 Page {
 	id: root // TODO: update this UI when a design is available
 
-	property string gateway: "com.victronenergy.fronius"
+	readonly property string froniusServiceUid: BackendConnection.serviceUidForType("fronius")
 
 	DataPoint {
 		id: autoDetectItem
 
-		source: gateway + "/AutoDetect"
+		source: root.froniusServiceUid + "/AutoDetect"
 	}
 
 	DataPoint {
 		id: scanProgressItem
 
-		source: gateway + "/ScanProgress"
+		source: root.froniusServiceUid + "/ScanProgress"
 	}
 
 	GradientListView {

@@ -14,7 +14,7 @@ Column {
 	property bool relayActivateOnTemperature
 	property bool hasInvalidRelayTempConfig
 
-	readonly property string tempRelayPrefix: "com.victronenergy.temprelay/Sensor/" + sensorId
+	readonly property string tempRelayPrefix: BackendConnection.serviceUidForType("temprelay") + "/Sensor/" + sensorId
 	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
 	readonly property bool relayValue: cRelay.currentValue
 

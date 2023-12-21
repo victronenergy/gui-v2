@@ -11,15 +11,13 @@ import Victron.Utils
 Page {
 	id: root
 
+	readonly property string bleServiceUid: BackendConnection.serviceUidForType("ble")
+
 	VeQItemSortTableModel {
 		id: sensors
 
 		model: VeQItemTableModel {
-			uids: BackendConnection.type === BackendConnection.DBusSource
-				  ? ["dbus/com.victronenergy.ble/Devices"]
-				  : BackendConnection.type === BackendConnection.MqttSource
-					? ["mqtt/ble/0/Devices"]
-					: []
+			uids: [ root.bleServiceUid + "/Devices" ]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 		dynamicSortFilter: true
@@ -29,11 +27,7 @@ Page {
 	VeQItemSortTableModel {
 		id: interfaces
 		model: VeQItemTableModel {
-			uids: BackendConnection.type === BackendConnection.DBusSource
-				  ? ["dbus/com.victronenergy.ble/Interfaces"]
-				  : BackendConnection.type === BackendConnection.MqttSource
-					? ["mqtt/ble/0/Interfaces"]
-					: []
+			uids: [ root.bleServiceUid + "/Interfaces" ]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 		dynamicSortFilter: true
@@ -52,7 +46,7 @@ Page {
 				id: contScan
 				//% "Continuous scanning"
 				text: qsTrId("settings_continuous_scan")
-				dataSource: "com.victronenergy.ble/ContinuousScan"
+				dataSource: root.bleServiceUid + "/ContinuousScan"
 				visible: enable.checked
 			}
 
