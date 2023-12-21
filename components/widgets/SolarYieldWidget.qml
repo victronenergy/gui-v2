@@ -19,7 +19,7 @@ OverviewWidget {
 	// Solar yield history is only available for PV chargers, and phase data is only available for
 	// PV inverters. So, if there are only solar chargers, show the solar history; otherwise if
 	// there is a single PV inverter, show its phase data.
-	extraContent.children: [
+	extraContentChildren: [
 		Loader {
 			readonly property int margin: sourceComponent === historyComponent
 				  ? Theme.geometry_overviewPage_widget_solar_graph_margins

@@ -17,7 +17,7 @@ OverviewWidget {
 
 	quantityLabel.dataObject: Global.system.ac.consumption
 
-	extraContent.children: [
+	extraContentChildren: [
 		ThreePhaseDisplay {
 			anchors {
 				left: parent ? parent.left : undefined
