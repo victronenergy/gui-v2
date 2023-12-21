@@ -14,7 +14,7 @@ ListNavigationItem {
 	property string bindPrefix
 	property string sensorId
 
-	readonly property string tempRelayPrefix: "com.victronenergy.temprelay/Sensor/" + sensorId
+	readonly property string tempRelayPrefix: BackendConnection.serviceUidForType("temprelay") + "/Sensor/" + sensorId
 	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
 
 	function temperatureTypeText(value) {

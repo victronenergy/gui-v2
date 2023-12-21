@@ -27,13 +27,13 @@ Page {
 	DataPoint {
 		id: maxChargePower
 
-		source: "com.victronenergy.hub4/MaxChargePower"
+		source: BackendConnection.serviceUidForType("hub4") + "/MaxChargePower"
 	}
 
 	DataPoint {
 		id: maxDischargePower
 
-		source: "com.victronenergy.hub4/MaxDischargePower"
+		source: BackendConnection.serviceUidForType("hub4") + "/MaxDischargePower"
 	}
 
 	GradientListView {

@@ -10,7 +10,7 @@ import Victron.Utils
 Page {
 	id: root
 
-	property string bindPrefix: "com.victronenergy.modem"
+	readonly property string bindPrefix: BackendConnection.serviceUidForType("modem")
 	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Modem"
 
 	DataPoint {

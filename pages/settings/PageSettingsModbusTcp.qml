@@ -9,14 +9,16 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property string modbustcpServiceUid: BackendConnection.serviceUidForType("modbustcp")
+
 	DataPoint {
 		id: lastError
-		source: "com.victronenergy.modbustcp/LastError/Message"
+		source: root.modbustcpServiceUid + "/LastError/Message"
 	}
 
 	DataPoint {
 		id: timestamp
-		source: "com.victronenergy.modbustcp/LastError/Timestamp"
+		source: root.modbustcpServiceUid + "/LastError/Timestamp"
 	}
 
 	GradientListView {

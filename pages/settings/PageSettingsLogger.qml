@@ -10,6 +10,8 @@ import Victron.Utils
 Page {
 	id: root
 
+	readonly property string loggerServiceUid: BackendConnection.serviceUidForType("logger")
+
 	function timeAgo(timestamp) {
 		const timeNow = Math.round(new Date() / 1000)
 		let timeAgo = "--"
@@ -46,7 +48,7 @@ Page {
 			ListTextItem {
 				//% "VRM Portal ID"
 				text: qsTrId("settings_vrm_portal_id")
-				dataSource: Global.venusPlatform.serviceUid + "/Device/UniqueId" // this doesn't work with mqtt yet, see: https://github.com/victronenergy/gui-v2/issues/385
+				dataSource: Global.venusPlatform.serviceUid + "/Device/UniqueId"
 			}
 
 			ListRadioButtonGroup {
@@ -87,7 +89,7 @@ Page {
 			ListTextItem {
 				//% "Last contact"
 				text: qsTrId("settings_last_contact")
-				dataSource: "com.victronenergy.logger/Vrm/TimeLastContact"
+				dataSource: root.loggerServiceUid + "/Vrm/TimeLastContact"
 				visible: !!loggerMode.dataValue && loggerMode.dataValue > 0
 
 				Timer {
@@ -135,7 +137,7 @@ Page {
 				//% "Connection error"
 				text: qsTrId("settings_connection_error")
 				secondaryText: stringForErrorCode(dataValue)
-				dataSource: "com.victronenergy.logger/Vrm/ConnectionError"
+				dataSource: root.loggerServiceUid + "/Vrm/ConnectionError"
 			}
 
 			ListItem {
@@ -145,7 +147,7 @@ Page {
 
 				DataPoint {
 					id: errorMessage
-					source: "com.victronenergy.logger/Vrm/ConnectionErrorMessage"
+					source: root.loggerServiceUid + "/Vrm/ConnectionErrorMessage"
 				}
 			}
 
@@ -184,7 +186,7 @@ Page {
 					//% "External storage"
 					{ display: qsTrId("settings_vrm_external_storage"), value: 2 },
 				]
-				dataSource: "com.victronenergy.logger/Buffer/Location"
+				dataSource: root.loggerServiceUid + "/Buffer/Location"
 				enabled: dataValue !== undefined
 			}
 
@@ -207,7 +209,7 @@ Page {
 					{ display: qsTrId("settings_vrm_storage_not_writable_error"), value: 5 },
 				]
 				enabled: false
-				dataSource: "com.victronenergy.logger/Buffer/ErrorState"
+				dataSource: root.loggerServiceUid + "/Buffer/ErrorState"
 				visible: !!dataValue
 			}
 
@@ -219,7 +221,7 @@ Page {
 												 qsTrId("settings_vrm_byte"),
 												 //% "bytes"
 												 qsTrId("settings_vrm_bytes"))
-				dataSource: "com.victronenergy.logger/Buffer/FreeDiskSpace"
+				dataSource: root.loggerServiceUid + "/Buffer/FreeDiskSpace"
 			}
 
 			MountStateListButton {}
@@ -227,7 +229,7 @@ Page {
 			ListTextItem {
 				//% "Stored records"
 				text: qsTrId("settings_vrm_stored_records")
-				dataSource: "com.victronenergy.logger/Buffer/Count"
+				dataSource: root.loggerServiceUid + "/Buffer/Count"
 				//% "%1 records"
 				secondaryText: qsTrId("settings_vrm_records_count").arg(dataValue ? dataValue : 0)
 			}
@@ -238,7 +240,7 @@ Page {
 				property var timeNow: Math.round(new Date() / 1000)
 				//% "Oldest record age"
 				text: qsTrId("settings_vrm_oldest_record_age")
-				dataSource: "com.victronenergy.logger/Buffer/OldestTimestamp"
+				dataSource: root.loggerServiceUid + "/Buffer/OldestTimestamp"
 
 				Timer {
 					interval: 1000
