@@ -27,6 +27,7 @@ Rectangle {
 	property bool expanded
 	property bool animateGeometry
 	property bool animationEnabled
+	property var extraContentChildren
 
 	function getCompactHeight(s) {
 		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry.overviewPage.widget.compact.xl.height
@@ -111,6 +112,7 @@ Rectangle {
 			top: header.bottom
 			bottom: parent.bottom
 		}
+		children: root.extraContentChildren
 		visible: root.size >= VenusOS.OverviewWidget_Size_M
 	}
 }

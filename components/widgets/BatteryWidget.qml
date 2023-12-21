@@ -165,7 +165,7 @@ OverviewWidget {
 		font.pixelSize: Theme.font.size.body2
 	}
 
-	extraContent.children: [
+	extraContentChildren: [
 		Column {
 			anchors {
 				top: parent.top
