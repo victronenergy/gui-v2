@@ -164,7 +164,7 @@ QtObject {
 
 		setMockPumpValue("State", 0)
 		setMockSettingValue("Pump0/Mode", 2)
-		setMockPumpValue("AvailableTankServices", "{'notanksensor': No tank sensor}")
+		setMockPumpValue("AvailableTankServices", '{"notanksensor": "No tank sensor"}')
 		setMockSettingValue("Pump0/StartValue", 50)
 		setMockSettingValue("Pump0/StopValue", 80)
 
