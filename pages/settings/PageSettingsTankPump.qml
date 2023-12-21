@@ -11,7 +11,12 @@ Page {
 	id: root
 
 	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid
-	readonly property string pumpBindPrefix: "com.victronenergy.pump.startstop0"
+
+	// On D-Bus, the service is com.victronenergy.pump.startstop0
+	// On MQTT, there is only one pump service, so it is mqtt/pump/0
+	readonly property string pumpBindPrefix: BackendConnection.type === BackendConnection.MqttSource
+			? BackendConnection.serviceUidForType("pump")
+			: BackendConnection.uidPrefix() + "/com.victronenergy.pump.startstop0"
 
 	GradientListView {
 		id: settingsListView
@@ -67,8 +72,6 @@ Page {
 			defaultSecondaryText: qsTrId("settings_tank_unavailable_sensor")
 
 			DataPoint {
-				id: availableTankServices
-
 				source: root.pumpBindPrefix + "/AvailableTankServices"
 				onValueChanged: {
 					if (value === undefined) {
