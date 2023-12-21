@@ -10,7 +10,7 @@ import Victron.Veutil
 Page {
 	id: root
 
-	property string batteryService
+	readonly property string batteryService: Global.batteries.firstObject ? Global.batteries.firstObject.serviceUid : null
 
 	//% "Grid Setpoint"
 	title: qsTrId("settings_ess_debug_grid_setpoint")
@@ -107,37 +107,6 @@ Page {
 				DataPoint {
 					id: batteryDischargePower
 					source: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
-				}
-			}
-		}
-	}
-
-	Instantiator {
-		active: BackendConnection.type === BackendConnection.DBusSource
-		model: VeQItemSortTableModel {
-			filterRole: VeQItemTableModel.UniqueIdRole
-			filterRegExp: "^dbus/com\.victronenergy\.battery\."
-			model: Global.dataServiceModel
-		}
-		delegate: QtObject {
-			Component.onCompleted: {
-				if (root.batteryService === "") {
-					root.batteryService = model.uid
-				}
-			}
-		}
-	}
-
-	Instantiator {
-		active: BackendConnection.type === BackendConnection.MqttSource
-		model: VeQItemTableModel {
-			uids: ["mqtt/battery"]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-		}
-		delegate: QtObject {
-			Component.onCompleted: {
-				if (root.batteryService === "") {
-					root.batteryService = model.uid
 				}
 			}
 		}
