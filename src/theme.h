@@ -73,7 +73,7 @@ public:
 	}
 
 Q_SIGNALS:
-    void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
+	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
 	void screenSizeChanged_parameterless();
 	void colorSchemeChanged(Victron::VenusOS::Theme::ColorScheme colorScheme);
 	void colorSchemeChanged_parameterless();
