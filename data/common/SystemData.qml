@@ -128,20 +128,4 @@ QtObject {
 			Global.system.dc.voltage = Qt.binding(function() { return value === undefined ? NaN : value })
 		}
 	}
-
-	//--- veBus ---
-
-	readonly property DataPoint veBusService: DataPoint {
-		source: Global.system.serviceUid + "/VebusService"
-		Component.onCompleted: {
-			Global.system.veBus.serviceUid = Qt.binding(function() { return value || "" })
-		}
-	}
-
-	readonly property DataPoint veBusDcPower: DataPoint {
-		source: veBusService.value ? veBusService.value + "/Dc/0/Power" : ""
-		Component.onCompleted: {
-			Global.system.veBus.power = Qt.binding(function() { return value === undefined ? NaN : value })
-		}
-	}
 }

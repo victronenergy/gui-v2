@@ -63,10 +63,14 @@ QtObject {
 		bindPrefix: Global.system.serviceUid + "/Ac/In/0"
 		Component.onCompleted: {
 			_deviceInstance.setValue(300)
-			_serviceName.setValue("com.victronenergy.vebus.tty01")
 			_serviceType.setValue("vebus")
 			_connected.setValue(1)
 		}
+
+		// For convenience, always use the value of com.victronenergy.system/VebusService as the
+		// ServiceName for this input (i.e. pretend this input is on that vebus service).
+		readonly property string vebusServiceUid: Global.system.veBus.serviceUid
+		onVebusServiceUidChanged: root.inputSysInfo._serviceName.setValue(vebusServiceUid)
 
 		// Disconnects every 15 seconds, for 3 seconds
 		property Timer _connectedTimer: Timer {
