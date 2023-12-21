@@ -12,6 +12,8 @@ ModalDialog {
 
 	property var generator
 
+	signal startSlidingAnimation()
+
 	title: CommonWords.generator
 
 	//% "Stop Now"
@@ -71,8 +73,6 @@ ModalDialog {
 	}
 
 	acceptButton.background: AcceptButtonBackground {
-		id: acceptButtonBackground
-
 		width: root.acceptButton.width
 		height: root.acceptButton.height
 		color: Theme.color.dimRed
@@ -81,12 +81,20 @@ ModalDialog {
 			root.canAccept = true
 			root.accept()
 		}
+
+		Connections {
+			target: root
+
+			function onStartSlidingAnimation() {
+				slidingAnimationTo(Theme.color.red)
+			}
+		}
 	}
 
 	tryAccept: function() {
 		root.canAccept = false
 		root.generator.stop()
-		acceptButtonBackground.slidingAnimationTo(Theme.color.red)
+		root.startSlidingAnimation()
 		return false
 	}
 }

@@ -9,7 +9,7 @@ import Victron.VenusOS
 ControlCard {
 	property alias model: switchesView.model
 
-	title.icon.source: "qrc:/images/switches.svg"
+	title.iconSource: "qrc:/images/switches.svg"
 	//% "Switches"
 	title.text: qsTrId("controlcard_switches")
 

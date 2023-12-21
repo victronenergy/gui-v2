@@ -13,7 +13,7 @@ ControlCard {
 
 	property var _currentLimitDialog
 
-	title.icon.source: "qrc:/images/inverter_charger.svg"
+	title.iconSource: "qrc:/images/inverter_charger.svg"
 	//% "Inverter / Charger"
 	title.text: qsTrId("controlcard_inverter_charger")
 

@@ -11,6 +11,11 @@ ModalDialog {
 	id: root
 
 	property var generator
+	property bool _timedRunSwitchChecked
+	property int _timeSelectorHour
+	property int _timeSelectorMinute
+
+	signal startSlidingAnimation()
 
 	title: CommonWords.generator
 
@@ -18,6 +23,8 @@ ModalDialog {
 	acceptText: qsTrId("controlcard_generator_startdialog_start_now")
 
 	contentItem: Column {
+		property var timeSelectorWidth
+
 		anchors {
 			top: root.header.bottom
 			topMargin: Theme.geometry.modalDialog.content.margins
@@ -28,30 +35,34 @@ ModalDialog {
 		spacing: Theme.geometry.modalDialog.content.margins
 
 		Switch {
-			id: timedRunSwitch
-
-			anchors {
-				left: timeSelector.left
-				right: timeSelector.right
-			}
+			width: parent.timeSelectorWidth
 			//% "Timed run"
 			text: qsTrId("controlcard_generator_startdialog_timed_run")
 			checked: root.generator.manualStartTimer > 0
+			Component.onCompleted: root._timedRunSwitchChecked = Qt.binding(function() { return this.checked})
 		}
 
 		TimeSelector {
-			id: timeSelector
-
 			anchors.horizontalCenter: parent.horizontalCenter
-			enabled: timedRunSwitch.checked
+			enabled: root._timedRunSwitchChecked
 			maximumHour: 59
+			hour: _timeSelectorHour
+			minute: _timeSelectorMinute
+			Component.onCompleted: parent.timeSelectorWidth = Qt.binding(function() { return this.width})
+
+			Connections {
+				target: root
+
+				function onAboutToShow() {
+					const timeParts = Utils.decomposeDuration(root.generator.manualStartTimer)
+					_timeSelectorHour = timeParts.h
+					_timeSelectorMinute = timeParts.m
+				}
+			}
 		}
 
 		Label {
-			anchors {
-				left: timeSelector.left
-				right: timeSelector.right
-			}
+			width: parent.timeSelectorWidth
 			wrapMode: Text.Wrap
 			color: Theme.color.font.primary
 			horizontalAlignment: Text.AlignHCenter
@@ -62,8 +73,6 @@ ModalDialog {
 	}
 
 	acceptButton.background: AcceptButtonBackground {
-		id: acceptButtonBackground
-
 		width: root.acceptButton.width
 		height: root.acceptButton.height
 		color: Theme.color.dimGreen
@@ -72,18 +81,20 @@ ModalDialog {
 			root.canAccept = true
 			root.accept()
 		}
+
+		Connections {
+			target: root
+
+			function onStartSlidingAnimation() {
+				slidingAnimationTo(Theme.color.green)
+			}
+		}
 	}
 
 	tryAccept: function() {
 		root.canAccept = false
-		root.generator.start(timedRunSwitch.checked ? Utils.composeDuration(timeSelector.hour, timeSelector.minute) : 0)
-		acceptButtonBackground.slidingAnimationTo(Theme.color.green)
+		root.generator.start(root._timedRunSwitchChecked ? Utils.composeDuration(_timeSelectorHour, _timeSelectorMinute) : 0)
+		root.startSlidingAnimation()
 		return false
-	}
-
-	onAboutToShow: {
-		const timeParts = Utils.decomposeDuration(root.generator.manualStartTimer)
-		timeSelector.hour = timeParts.h
-		timeSelector.minute = timeParts.m
 	}
 }

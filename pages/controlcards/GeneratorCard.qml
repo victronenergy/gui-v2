@@ -13,7 +13,7 @@ ControlCard {
 
 	property var generator
 
-	title.icon.source: "qrc:/images/generator.svg"
+	title.iconSource: "qrc:/images/generator.svg"
 	title.text: CommonWords.generator
 
 	status.text: {
