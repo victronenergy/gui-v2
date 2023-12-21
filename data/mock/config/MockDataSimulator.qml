@@ -94,22 +94,18 @@ QtObject {
 			break
 		case Qt.Key_Plus:
 			if (Theme.screenSize !== Theme.SevenInch) {
-				Theme.load(Theme.SevenInch, Theme.colorScheme)
+				Theme.screenSize = Theme.SevenInch
 				event.accepted = true
 			}
 			break
 		case Qt.Key_Minus:
 			if (Theme.screenSize !== Theme.FiveInch) {
-				Theme.load(Theme.FiveInch, Theme.colorScheme)
+				Theme.screenSize = Theme.FiveInch
 				event.accepted = true
 			}
 			break
 		case Qt.Key_C:
-			if (Theme.colorScheme == Theme.Dark) {
-				Theme.load(Theme.screenSize, Theme.Light)
-			} else {
-				Theme.load(Theme.screenSize, Theme.Dark)
-			}
+			Theme.colorScheme = Theme.colorScheme == Theme.Dark ? Theme.Light : Theme.Dark
 			event.accepted = true
 			break
 		case Qt.Key_G:
