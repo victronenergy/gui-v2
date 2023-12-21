@@ -82,7 +82,7 @@ Page {
 				text: qsTrId("settings_remoteconsole_enable_on_lan")
 				dataSource: "com.victronenergy.settings/Settings/System/VncLocal"
 
-				bottomContent.children: ListLabel {
+				bottomContentChildren: ListLabel {
 					visible: text.length > 0
 					topPadding: 0
 					bottomPadding: 0

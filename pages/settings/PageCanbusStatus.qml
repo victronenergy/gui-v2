@@ -99,7 +99,7 @@ Page {
 
 				//% "State"
 				text: qsTrId("settings_state")
-				bottomContent.children: ListTextGroup {
+				bottomContentChildren: ListTextGroup {
 					id: busOffCounters
 				}
 			}

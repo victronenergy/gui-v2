@@ -560,6 +560,7 @@ qt_add_qml_module(VenusQMLModule
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
     SOURCES ${VenusQMLModule_CPP_SOURCES}
+    DEPENDENCIES QtCore
     IMPORT_PATH ${CMAKE_CURRENT_BINARY_DIR}
     IMPORTS net.connman
         Victron.Utils

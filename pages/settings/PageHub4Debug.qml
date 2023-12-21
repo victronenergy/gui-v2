@@ -27,7 +27,7 @@ Page {
 				to: 15000
 				stepSize: 10
 
-				bottomContent.children: [
+				bottomContentChildren: [
 					SettingsSlider {
 						id: gridSetpointSlider
 
