@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 import Victron.Units
 
@@ -45,9 +46,15 @@ QtObject {
 	property SystemAc ac: SystemAc {}
 	property SystemDc dc: SystemDc {}
 
-	property QtObject veBus: QtObject {
-		property string serviceUid
-		property real power
+	readonly property QtObject veBus: QtObject {
+		readonly property string serviceUid: BackendConnection.type === BackendConnection.MqttSource
+				? (_deviceInstance.isValid ? "mqtt/vebus/" + _deviceInstance.value : "")
+				: (_serviceName.isValid ? BackendConnection.uidPrefix() + "/" + _serviceName.value : "")
+		readonly property real power: _power.value === undefined ? NaN : _power.value
+
+		readonly property VeQuickItem _serviceName: VeQuickItem { uid: root.serviceUid + "/VebusService" }
+		readonly property VeQuickItem _deviceInstance: VeQuickItem { uid: root.serviceUid + "/VebusInstance" }
+		readonly property VeQuickItem _power: VeQuickItem { uid: serviceUid ? serviceUid + "/Dc/0/Power" : "" }
 	}
 
 	function reset() {
