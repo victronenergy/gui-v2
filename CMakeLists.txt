@@ -807,6 +807,7 @@ endif()
 qt_add_qml_module(Veutil
     URI Victron.Veutil
     STATIC
+    DEPENDENCIES QtCore
     OUTPUT_DIRECTORY Victron/Veutil
     SOURCES ${VEUTIL_CPP_SOURCES}
 )
