@@ -86,7 +86,8 @@ QtObject {
 
 	function gensetStatusCodeToText(statusCode) {
 		switch (statusCode) {
-		case VenusOS.Genset_StatusCode_Startup0:
+		case VenusOS.Genset_StatusCode_Standby:
+			return CommonWords.standby
 		case VenusOS.Genset_StatusCode_Startup1:
 		case VenusOS.Genset_StatusCode_Startup2:
 		case VenusOS.Genset_StatusCode_Startup3:

@@ -566,7 +566,7 @@ public:
 	Q_ENUM(PvInverter_Position)
 
 	enum Genset_StatusCode {
-		Genset_StatusCode_Startup0,
+		Genset_StatusCode_Standby,
 		Genset_StatusCode_Startup1,
 		Genset_StatusCode_Startup2,
 		Genset_StatusCode_Startup3,
