@@ -164,7 +164,7 @@ OverviewWidget {
 		alignment: Qt.AlignRight
 	}
 
-	extraContent.children: [
+	extraContentChildren: [
 		Column {
 			anchors {
 				top: parent.top

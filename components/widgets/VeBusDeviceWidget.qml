@@ -15,7 +15,7 @@ OverviewWidget {
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
 	enabled: Global.veBusDevices.model.count > 0
 	quantityLabel.visible: false
-	extraContent.children: [
+	extraContentChildren: [
 		Label {
 			anchors {
 				left: parent.left
