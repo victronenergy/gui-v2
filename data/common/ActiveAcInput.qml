@@ -85,5 +85,5 @@ Device {
 					? "mqtt/" + serviceType + "/" + _activeInputInfo.deviceInstance
 					: ""
 			  // this looks like: "dbus/com.victronenergy.vebus.ttyO1"
-			: serviceName.length ? BackendConnection.uidPrefix() + serviceName : ""
+			: serviceName.length ? BackendConnection.uidPrefix() + "/" + serviceName : ""
 }

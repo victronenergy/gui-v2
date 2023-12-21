@@ -492,7 +492,7 @@ QString BackendConnection::serviceUidForType(const QString &serviceType) const
 
 	return m_type == MqttSource
 			? QStringLiteral("mqtt/%1/0").arg(serviceType)
-			: QStringLiteral("%1com.victronenergy.%2").arg(uidPrefix()).arg(serviceType);
+			: QStringLiteral("%1/com.victronenergy.%2").arg(uidPrefix()).arg(serviceType);
 }
 
 QString BackendConnection::uidPrefix() const
@@ -501,11 +501,11 @@ QString BackendConnection::uidPrefix() const
 	case UnknownSource:
 		break;
 	case DBusSource:
-		return QStringLiteral("dbus/");
+		return QStringLiteral("dbus");
 	case MqttSource:
-		return QStringLiteral("mqtt/");
+		return QStringLiteral("mqtt");
 	case MockSource:
-		return QStringLiteral("mock/");
+		return QStringLiteral("mock");
 	}
 	return QString();
 }
