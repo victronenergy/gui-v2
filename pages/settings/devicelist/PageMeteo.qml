@@ -21,35 +21,33 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListTextItem {
+
+			ListQuantityItem {
+				property var displayText: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataValue, 1)
 				//% "Irradiance"
 				text: qsTrId("page_meteo_irradiance")
-				secondaryText: Units.getCombinedDisplayText(VenusOS.Units_WattsPerSquareMeter, dataValue, 1)
 				dataSource: bindPrefix + "/Irradiance"
+				value: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataValue, 1).number
+				unit: VenusOS.Units_WattsPerSquareMeter
+				precision: 1
 			}
 
-			ListTextItem {
-				readonly property real temperature: Units.convertFromCelsius(dataValue, Global.systemSettings.temperatureUnit.value)
-
-				dataSource: bindPrefix + "/CellTemperature"
+			ListTemperatureItem {
 				//% "Cell temperature"
 				text: qsTrId("page_meteo_cell_temperature")
-				secondaryText: Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit.value, temperature, 1)
+				dataSource: bindPrefix + "/CellTemperature"
 			}
 
-			ListTextItem {
-				readonly property real temperature: Units.convertFromCelsius(dataValue, Global.systemSettings.temperatureUnit.value)
-
-				dataSource: bindPrefix + "/ExternalTemperature"
+			ListTemperatureItem {
 				text: sensor2.dataValid ?
 						  //% "External temperature (1)"
 						  qsTrId("page_meteo_external_temperature_1") :
 						  //% "External temperature"
 						  qsTrId("page_meteo_external_temperature")
-				secondaryText: Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit.value, temperature, 1) //displayText.number + displayText.unit
+				dataSource: bindPrefix + "/ExternalTemperature"
 			}
 
-			ListTextItem {
+			ListTemperatureItem {
 				id: sensor2
 
 				dataSource: bindPrefix + "/ExternalTemperature2"
@@ -58,12 +56,14 @@ Page {
 				visible: dataValid
 			}
 
-			ListTextItem {
+			ListQuantityItem {
 				dataSource: bindPrefix + "/WindSpeed"
 				//% "Wind speed"
 				text: qsTrId("page_meteo_wind_speed")
-				secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Speed_MetresPerSecond, dataValue, 1)
 				visible: dataValid
+				value: dataValue
+				unit: VenusOS.Units_Speed_MetresPerSecond
+				precision: 1
 			}
 
 			ListNavigationItem {
