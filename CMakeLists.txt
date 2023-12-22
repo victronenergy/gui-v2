@@ -378,6 +378,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/evcs/EvChargerListPage.qml
     pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
+    pages/settings/CanbusServiceFinder.qml
     pages/settings/DvccCommonSettings.qml
     pages/settings/GeneratorCondition.qml
     pages/settings/IpAddressListView.qml

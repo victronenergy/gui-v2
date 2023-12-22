@@ -14,24 +14,26 @@ Page {
 	property int canConfig
 
 	readonly property string _vecanSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Vecan/" + gateway
-	readonly property string _vecanServicePrefix: "com.victronenergy.vecan." + gateway
-
 	readonly property string _rvcSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Rvc/" + gateway
-	readonly property string _rvcServicePrefix: "com.victronenergy.rvc." + gateway
 
 	/* VE.Can and RV-C are mutually exclusive */
 	readonly property bool _isRvc: rvcSameUniqueNameUsed.valid
 	readonly property bool _isVecan: vecanSameUniqueNameUsed.valid
 
+	CanbusServiceFinder {
+		id: canbusService
+		gateway: root.gateway
+	}
+
 	DataPoint {
 		id: vecanSameUniqueNameUsed
-		source: root._vecanServicePrefix + "/Alarms/SameUniqueNameUsed"
+		source: canbusService.vecanServiceUid + "/Alarms/SameUniqueNameUsed"
 		onValueChanged: if (value === 1) timer.running = false
 	}
 
 	DataPoint {
 		id: rvcSameUniqueNameUsed
-		source: root._rvcServicePrefix + "/Alarms/SameUniqueNameUsed"
+		source: canbusService.rvcServiceUid + "/Alarms/SameUniqueNameUsed"
 		onValueChanged: if (value === 1) timer.running = false
 	}
 
@@ -102,11 +104,12 @@ Page {
 				text: qsTrId("settings_devices")
 				visible: root._isVecan || root._isRvc
 				onClicked: {
-					if (!!Global.pageManager) {
-						const url = root._isVecan
-								  ? "/pages/settings/PageSettingsVecanDevices.qml"
-								  : "/pages/settings/PageSettingsRvcDevices.qml"
-						Global.pageManager.pushPage(url, { gateway: root.gateway })
+					if (root._isVecan) {
+						Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevices.qml",
+								{ serviceUid: canbusService.vecanServiceUid })
+					} else if (root._isRvc) {
+						Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDevices.qml",
+								{ serviceUid: canbusService.rvcServiceUid })
 					}
 				}
 			}
