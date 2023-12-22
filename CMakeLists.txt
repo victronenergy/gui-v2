@@ -556,8 +556,6 @@ set(VenusQMLModule_CPP_SOURCES
     src/notificationsmodel.cpp
     src/clocktime.h
     src/clocktime.cpp
-    src/uidhelper.h
-    src/uidhelper.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
 )

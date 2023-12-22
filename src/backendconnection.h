@@ -18,8 +18,6 @@ class AlarmBusitem;
 namespace Victron {
 namespace VenusOS {
 
-class UidHelper;
-
 class BackendConnection : public QObject
 {
 	Q_OBJECT
@@ -157,7 +155,6 @@ private:
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	AlarmBusitem *m_alarmBusItem = nullptr;
 #endif
-	UidHelper *m_uidHelper = nullptr;
 	QNetworkAccessManager *m_network = nullptr;
 };
 
