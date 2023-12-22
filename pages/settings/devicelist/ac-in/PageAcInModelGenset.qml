@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 import Victron.Utils
 
@@ -12,6 +13,25 @@ ObjectModel {
 	id: root
 
 	property string bindPrefix
+
+	// On D-Bus, the startstop1 generator is at com.victronenergy.generator.startstop1.
+	// On MQTT, the startstop1 generator is the one with GensetService=com.victronenergy.genset.*
+	readonly property string startStop1Uid: BackendConnection.type === BackendConnection.MqttSource
+			? generatorWithGensetService
+			: BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop1"
+	property string generatorWithGensetService
+
+	property Instantiator generatorObjects: Instantiator {
+		model: BackendConnection.type === BackendConnection.MqttSource ? Global.generators.model : null
+		delegate: VeQuickItem {
+			uid: model.device.serviceUid + "/GensetService"
+			onValueChanged: {
+				if (value !== undefined && value.startsWith("com.victronenergy.genset.")) {
+					root.generatorWithGensetService = model.device.serviceUid
+				}
+			}
+		}
+	}
 
 	readonly property var nrOfPhases: DataPoint {
 		source: root.bindPrefix + "/NrOfPhases"
@@ -53,11 +73,11 @@ ObjectModel {
 
 		DataPoint {
 			id: modeItem
-			source: "com.victronenergy.generator.startstop1/ManualStart"
+			source: root.startStop1Uid + "/ManualStart"
 		}
 		DataPoint {
 			id: autoStartStopItem
-			source: "com.victronenergy.generator.startstop1/AutoStartEnabled"
+			source: root.startStop1Uid + "/AutoStartEnabled"
 		}
 		DataPoint {
 			id: autoStart
@@ -138,7 +158,7 @@ ObjectModel {
 			const props = {
 				"title": text,
 				"settingsBindPrefix": Global.systemSettings.serviceUid + "/Settings/Generator1",
-				"startStopBindPrefix": "com.victronenergy.generator.startstop1",
+				"startStopBindPrefix": root.startStop1Uid,
 				"allowDisableAutostart": false,
 			}
 			Global.pageManager.pushPage("/pages/settings/PageGenerator.qml", props)
