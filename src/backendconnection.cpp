@@ -4,7 +4,6 @@
 */
 
 #include "backendconnection.h"
-#include "uidhelper.h"
 #include "veqitemmockproducer.h"
 #include "enums.h"
 
@@ -76,11 +75,6 @@ void BackendConnection::setState(VeQItemMqttProducer::ConnectionState backendCon
 	case VeQItemMqttProducer::Initializing:
 	{
 		setState(BackendConnection::State::Initializing);
-
-		// Ensure that UidHelper receives the com.victronenergy.system/ServiceMapping value.
-		if (VeQItemMqttProducer *mqttProducer = qobject_cast<VeQItemMqttProducer *>(m_producer)) {
-			mqttProducer->requestValue("mqtt/system/0/ServiceMapping");
-		}
 		break;
 	}
 	case VeQItemMqttProducer::Ready:
@@ -179,7 +173,6 @@ void BackendConnection::initMqttConnection(const QString &address)
 	VeQItemMqttProducer *mqttProducer = new VeQItemMqttProducer(VeQItems::getRoot(), "mqtt", "gui-v2");
 	m_producer = mqttProducer;
 
-	m_uidHelper = UidHelper::create();
 	connect(mqttProducer, &VeQItemMqttProducer::aboutToConnect,
 			mqttProducer, [this] {
 		if (VeQItemMqttProducer *producer = qobject_cast<VeQItemMqttProducer *>(m_producer)) {
@@ -193,10 +186,6 @@ void BackendConnection::initMqttConnection(const QString &address)
 			producer->continueConnect();
 		}
 	});
-	connect(mqttProducer, &VeQItemMqttProducer::messageReceived,
-		m_uidHelper, &UidHelper::onMessageReceived);
-	connect(mqttProducer, &VeQItemMqttProducer::nullMessageReceived,
-		m_uidHelper, &UidHelper::onNullMessageReceived);
 	connect(mqttProducer, &VeQItemMqttProducer::connectionStateChanged, this, [=] {
 		setState(mqttProducer->connectionState());
 	});
