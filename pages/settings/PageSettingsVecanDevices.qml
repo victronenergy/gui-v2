@@ -12,30 +12,15 @@ import Victron.Utils
 Page {
 	id: root
 
-	property string gateway
-
-	readonly property string _dbusDevicesUid: "dbus/com.victronenergy.vecan." + gateway + "/Devices"
+	property string serviceUid
 
 	//% "VE.CAN devices"
 	title: qsTrId("settings_vecan_devices")
 
-	SingleUidHelper {
-		id: vecanUidHelper
-		dbusUid: root._dbusDevicesUid
-	}
-
 	GradientListView {
-		model: VeQItemSortTableModel {
-			filterFlags: VeQItemSortTableModel.FilterOffline
-			dynamicSortFilter: true
-			model: VeQItemTableModel {
-				uids: BackendConnection.type === BackendConnection.DBusSource
-					  ? [root._dbusDevicesUid]
-					  : BackendConnection.type === BackendConnection.MqttSource
-						? [vecanUidHelper.mqttUid]
-						: ""
-				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-			}
+		model: VeQItemTableModel {
+			uids: [ root.serviceUid + "/Devices" ]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
 		delegate: ListSpinBox {

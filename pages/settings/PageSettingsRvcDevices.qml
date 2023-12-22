@@ -11,30 +11,15 @@ import Victron.Utils
 Page {
 	id: root
 
-	property string gateway
-
-	readonly property string _dbusDevicesUid: "dbus/com.victronenergy.rvc." + gateway + "/Devices"
+	property string serviceUid
 
 	//% "RV-C devices"
 	title: qsTrId("settings_rvc_devices")
 
-	SingleUidHelper {
-		id: rvcUidHelper
-		dbusUid: root._dbusDevicesUid
-	}
-
 	GradientListView {
-		model: VeQItemSortTableModel {
-			dynamicSortFilter: true
-			filterFlags: VeQItemSortTableModel.FilterOffline
-			model: VeQItemTableModel {
-				uids: BackendConnection.type === BackendConnection.DBusSource
-					  ? [root._dbusDevicesUid]
-					  : BackendConnection.type === BackendConnection.MqttSource
-						? [rvcUidHelper.mqttUid]
-						: ""
-				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-			}
+		model: VeQItemTableModel {
+			uids: [ root.serviceUid + "/Devices" ]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
 		delegate: ListNavigationItem {
