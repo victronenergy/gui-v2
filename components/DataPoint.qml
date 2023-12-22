@@ -22,17 +22,6 @@ VeQuickItem {
 	// Using 'valid' to be more aligned with other QML APIs
 	readonly property alias valid: root.isValid
 
-	readonly property SingleUidHelper _uidConverter: BackendConnection.type === BackendConnection.MqttSource
-			? _uidConverterComponent.createObject(root)
-			: null
-
-	readonly property Component _uidConverterComponent: Component {
-		SingleUidHelper {
-			dbusUid: root.source.length === 0 || root.source.startsWith("mqtt/") ? ""
-				   : (root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source)
-		}
-	}
-
 	uid: {
 		if (source.length === 0) {
 			return ""
@@ -41,7 +30,7 @@ VeQuickItem {
 		case BackendConnection.DBusSource:
 			return root.source.startsWith("dbus/") ? root.source : "dbus/" + root.source
 		case BackendConnection.MqttSource:
-			return root.source.startsWith("mqtt/") ? root.source : _uidConverter.mqttUid
+			return root.source.startsWith("mqtt/") ? root.source : "mqtt/" + root.source
 		case BackendConnection.MockSource:
 			return root.source.startsWith("mock/") ? root.source : "mock/" + root.source
 		default:
