@@ -12,10 +12,17 @@ Page {
 
 	property bool allowDisableAutostart: true
 	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator0"
-	property string startStopBindPrefix: "com.victronenergy.generator.startstop0"
+
+	// The generator start/stop service is always com.victronenergy.generator.startstop0 on D-Bus,
+	// and mqtt/generator/0 on MQTT.
+	property string startStopBindPrefix: BackendConnection.type === BackendConnection.MqttSource
+			? "mqtt/generator/0"
+			: BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop0"
+
 	readonly property alias generatorState: _generatorState
 	property alias startStopModel: startStopModel
 	property alias model: settingsListView.model
+
 	readonly property var _dates: historicalData.valid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
 
 	DataPoint {
