@@ -1,12 +1,12 @@
 {
-    "font.briefPage.battery.percentage.pixelSize": "font.size.h4",
-    "font.briefPage.battery.timeToGo.pixelSize": "font.size.body1",
-    "font.briefPage.battery.voltage.pixelSize": "font.size.body3",
-    "font.briefPage.quantityLabel.size": "font.size.body3",
-    "font.briefPage.sidePanel.forecastRow.today.temperature.size": "font.size.body3",
-    "font.briefPage.sidePanel.forecastRow.today.date.size": "font.size.body2",
-    "font.overviewPage.battery.timeToGo.pixelSize": "font.size.body1",
-    "font.overviewPage.widget.quantityLabel.minimumSize": "font.size.body3",
-    "font.overviewPage.widget.quantityLabel.maximumSize": "font.size.h1",
-    "font.splashView.progressText.size": "font.size.caption"
+    "font_briefPage_battery_percentage_pixelSize": "font_size_h4",
+    "font_briefPage_battery_timeToGo_pixelSize": "font_size_body1",
+    "font_briefPage_battery_voltage_pixelSize": "font_size_body3",
+    "font_briefPage_quantityLabel_size": "font_size_body3",
+    "font_briefPage_sidePanel_forecastRow_today_temperature_size": "font_size_body3",
+    "font_briefPage_sidePanel_forecastRow_today_date_size": "font_size_body2",
+    "font_overviewPage_battery_timeToGo_pixelSize": "font_size_body1",
+    "font_overviewPage_widget_quantityLabel_minimumSize": "font_size_body3",
+    "font_overviewPage_widget_quantityLabel_maximumSize": "font_size_h1",
+    "font_splashView_progressText_size": "font_size_caption"
 }
