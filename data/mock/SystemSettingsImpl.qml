@@ -194,6 +194,7 @@ QtObject {
 		setMockSettingValue("Vecan/can0/N2kGatewayEnabled", 0)
 		setMockSettingValue("Vecan/can0/VenusUniqueId", 1)
 
+		setMockVecanValue("can0", "Alarms/SameUniqueNameUsed", 1)
 		setMockVecanValue("can0", "Devices/0/ModelName", "BlueSolar Charger MPTT 150/70")
 		setMockVecanValue("can0", "Devices/0/CustomName", "Some custom name")
 		setMockVecanValue("can0", "Devices/0/N2kUniqueNumber", 15965)
