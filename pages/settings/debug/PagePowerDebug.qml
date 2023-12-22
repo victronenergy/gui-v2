@@ -67,7 +67,22 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		// This page has no useful data on MQTT. This can be resolved later on if the MQTT
+		// equivalents can be identified for the com.victronenergy.pvinverter.qwacs_di1 and
+		// com.victronenergy.pvinverter.vebusacsensor_output uids, which are currently hardcoded
+		// in a D-Bus format.
+		model: BackendConnection.type === BackendConnection.MqttSource ? invalidModel : validModel
+
+		ObjectModel {
+			id: invalidModel
+
+			ListLabel {
+				text: "This page is not supported via MQTT. View this on the device instead."
+			}
+		}
+
+		ObjectModel {
+			id: validModel
 
 			ListTextGroup {
 				id: groupP
