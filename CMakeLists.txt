@@ -254,6 +254,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListSlider.qml
     components/listitems/ListSpinBox.qml
     components/listitems/ListSwitch.qml
+    components/listitems/ListTemperatureItem.qml
     components/listitems/ListTextField.qml
     components/listitems/ListTextGroup.qml
     components/listitems/ListTextItem.qml
