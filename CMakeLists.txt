@@ -69,12 +69,6 @@ if(QT_KNOWN_POLICY_QTP0001)
     qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
 endif()
 
-# Not actually a subproject, but we need to build it somehow...
-# Eventually, we should implement the code generator as a python script
-# and invoke it directly via add_custom_command() + add_custom_target().
-# For now, we require the developer to run the code generator manually.
-#add_subdirectory("tools/themeparser")
-
 include_directories(src/veutil/inc src .)
 
 set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added here
@@ -1033,3 +1027,19 @@ add_custom_target(graphviz
                   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 # disable it for now, can re-enable for future analysis when required.
 #add_dependencies(${PROJECT_NAME} graphviz)
+
+# Parse theme json files and generate themeobject.h.
+# Use DEPENDS to ensure script is only run when the script or theme json files have changed.
+find_package(Python3 COMPONENTS Interpreter)
+add_custom_command(
+    COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/tools/themeparser.py "${PROJECT_SOURCE_DIR}/themes/" "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
+    OUTPUT "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
+    DEPENDS "${PROJECT_SOURCE_DIR}/themes/animation" "${PROJECT_SOURCE_DIR}/themes/color" "${PROJECT_SOURCE_DIR}/themes/geometry" "${PROJECT_SOURCE_DIR}/themes/typography" ${PROJECT_SOURCE_DIR}/tools/themeparser.py
+    COMMENT "Generating themeobjects.h"
+)
+add_custom_target(
+    theme_parser ALL
+    DEPENDS "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
+)
+add_dependencies(venus-gui-v2 theme_parser)
+
