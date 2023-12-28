@@ -410,7 +410,6 @@
     "geometry_solarDailyHistoryDialog_closeButton_icon_margins": 12,
     "geometry_solarDailyHistoryDialog_content_horizontalMargin": 16,
     "geometry_solarDailyHistoryDialog_content_bottomMargin": 24,
-    "geometry_solarDayView_content_bottomMargin": 24,
     "geometry_solarDailyHistoryDialog_arrow_icon_size": 72,
     "geometry_solarDailyHistoryDialog_arrow_horizontalMargin": 18,
 
