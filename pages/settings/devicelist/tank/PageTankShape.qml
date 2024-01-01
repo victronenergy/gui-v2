@@ -90,7 +90,7 @@ Page {
 			CP.ColorImage {
 				parent: quantityGroup.content
 				anchors.verticalCenter: parent ? parent.verticalCenter : undefined
-				source: "/images/icon_minus.svg"
+				source: "qrc:/images/icon_minus.svg"
 				color: Theme.color_ok
 				visible: root._canEditPoints
 

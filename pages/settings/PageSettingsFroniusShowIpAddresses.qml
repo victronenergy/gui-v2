@@ -42,7 +42,7 @@ Page {
 			acceptText: qsTrId("settings_fronius_rescan")
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 			icon.color: Theme.color_ok
-			icon.source: "/images/toast_icon_info.svg"
+			icon.source: "qrc:/images/toast_icon_info.svg"
 
 			onAccepted: {
 				settingsListView.ipAddresses.setValue('')
