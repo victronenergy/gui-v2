@@ -7,10 +7,28 @@ cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'q
 # CMAKE HINTS
 #
 # Different build types:
-#   cmake -DCMAKE_BUILD_TYPE=[Debug|Release|RelWithDebInfo|MinSizeRelease]
+#   cmake -DCMAKE_BUILD_TYPE=[Debug|Release|RelWithDebInfo|MinSizeRelease] /path/to/CMakeLists.txt
 #
 # Faster builds, for use in development. This stops qml code from being compiled into C++ at build time. Will run slower on the target.
-#   cmake -DNO_CACHEGEN=true
+#   cmake -DNO_CACHEGEN=true /path/to/CMakeLists.txt
+#
+# Load qml files from the file system, instead of from the compiled qml resources.
+#   cmake -DNO_CACHEGEN=true -DLOAD_QML_FROM_FILESYSTEM=true /path/to/CMakeLists.txt
+#   cmake --build . --parallel 8
+#   cmake --install .
+#
+#   This will create a directory 'install' in your build directory. If you copy the directory to a cerbo, and run the app from that directory,
+#   qml sources will be loaded at run time. You can edit sources directly on the cerbo, restart the app, and see your changes.
+#
+#   When running a desktop build in this way on linux, I had to specify LD_LIBRARY_PATH when starting the app, eg:
+#       $ LD_LIBRARY_PATH=/opt/Qt/6.5.2/gcc_64/lib/ ./appvenus-gui-v2
+#   For windows builds, run windeployqt6.exe venus-gui-v2.exe in the install dir to pull in all the Qt libs etc into the install dir too.
+#
+#   To build in this way from qtcreator, a custom build step has to be added.
+#   In the 'Projects' page, select 'Build', 'Add build step', with the following:
+#       Command: cmake
+#       Argurments: --install .
+#       Working directory: %{buildDir}
 
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
@@ -32,6 +50,7 @@ message("CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
 option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD=ON" OFF) # Disabled by default
 option(VENUS_WEBASSEMBLY_BUILD "enable webassembly build via cmake -DVENUS_WEBASSEMBLY_BUILD=ON" OFF) # Disabled by default
 option(MQTT_WEBSOCKETS_ENABLED "enable websockets build via cmake -DMQTT_WEBSOCKETS_ENABLED=ON" OFF) # Disabled by default
+option(LOAD_QML_FROM_FILESYSTEM "disable filesystem loading via cmake -DLOAD_QML_FROM_FILESYSTEM=OFF" ON) # Enabled by default
 
 # If we want a release build, remove the '-g' debug compiler flag set by the environment setup script.
 # Otherwise, our executable size ballons from ~10MB to ~220MB.
@@ -42,9 +61,13 @@ if(("${CMAKE_BUILD_TYPE}" STREQUAL "Release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "
     message("new CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS} ")
 endif()
 
-if ("${NO_CACHEGEN}")
+if (${NO_CACHEGEN})
     message("Disabling cache generation for faster builds")
     set (QML_MODULE_OPTARGS ${QML_MODULE_OPTARGS} "NO_CACHEGEN")
+endif()
+
+if (${LOAD_QML_FROM_FILESYSTEM})
+    message("This application will load qml sources from the filesystem, not from the compiled resources")
 endif()
 
 set(REQUIRED_QT_VERSION 6.5.2) # require at least qt 6.5.2 for qt_add_qml_module to work properly
@@ -615,6 +638,46 @@ target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Xml
     Qt6::Mqtt
 )
+
+if (${LOAD_QML_FROM_FILESYSTEM})
+    set(thisModule VenusQMLModule)
+    qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
+    install(
+        FILES
+            ${module_qmldir}
+            ApplicationContent.qml
+            FrameRateVisualizer.qml
+            Global.qml
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/VenusOS)
+    install(
+        DIRECTORY
+            components
+            data
+            pages
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/VenusOS)
+
+    # Load all qml resources from the filesystem.
+    # Qt6 cmake projects don't support this properly, see https://bugreports.qt.io/browse/QTBUG-120435
+    # When a qml module is loaded, the associated qmldir file is read. By default, it looks like this:
+
+        # module Victron.VenusOS
+        # linktarget VenusQMLModuleplugin
+        # optional plugin VenusQMLModuleplugin
+        # classname Victron_VenusOSPlugin
+        # typeinfo VenusQMLModule.qmltypes
+        # import net.connman
+        # prefer :/qt/qml/Victron/VenusOS/  <- this line tells the app to prefer the compiled qml sources, i.e. don't load from the file system
+        # singleton CommonWords 2.0 components/CommonWords.qml
+        # [lots more qml files]
+
+    # The 'prefer' line can't be removed via 'qt_add_qml_module', we need to delete it after the build step, and before the install step.
+    # That is what the calls to 'StripRegexFromFile.cmake' are for.
+    add_custom_command(
+        TARGET ${thisModule}
+        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
+        VERBATIM
+    )
+endif()
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     target_link_libraries(VenusQMLModule PRIVATE Qt6::WebSockets)
 else()
@@ -661,6 +724,17 @@ qt_add_qml_module(VictronDbus
     QML_FILES ${Dbus_QML_MODULE_SOURCES}
     ${QML_MODULE_OPTARGS}
 )
+if (${LOAD_QML_FROM_FILESYSTEM})
+    set(thisModule VictronDbus)
+    qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
+    install(FILES ${module_qmldir}  DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Dbus)
+    install(DIRECTORY data/dbus     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Dbus/data)
+    add_custom_command(
+        TARGET ${thisModule}
+        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
+        VERBATIM
+    )
+endif()
 # end Dbus_QML_MODULE
 
 # Mock_QML_MODULE
@@ -708,6 +782,17 @@ qt_add_qml_module(VictronMock
     QML_FILES ${Mock_QML_MODULE_SOURCES}
     ${QML_MODULE_OPTARGS}
 )
+if (${LOAD_QML_FROM_FILESYSTEM})
+    set(thisModule VictronMock)
+    qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
+    install(FILES ${module_qmldir} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Mock)
+    install(DIRECTORY data         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Mock)
+    add_custom_command(
+        TARGET ${thisModule}
+        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
+        VERBATIM
+    )
+endif()
 # end Mock_QML_MODULE
 
 # Gauges_QML_MODULE
@@ -724,6 +809,17 @@ qt_add_qml_module(VictronGauges
     QML_FILES ${Gauges_QML_MODULE_SOURCES}
     ${QML_MODULE_OPTARGS}
 )
+if (${LOAD_QML_FROM_FILESYSTEM})
+    set(thisModule VictronGauges)
+    qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
+    install(FILES ${module_qmldir}    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Gauges)
+    install(FILES ${module_qml_files} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Gauges/components)
+    add_custom_command(
+        TARGET ${thisModule}
+        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
+        VERBATIM
+    )
+endif()
 # end Gauges_QML_MODULE
 
 # Mqtt_QML_MODULE
@@ -764,6 +860,17 @@ qt_add_qml_module(VictronMqtt
     QML_FILES ${Mqtt_QML_MODULE_SOURCES}
     ${QML_MODULE_OPTARGS}
 )
+if (${LOAD_QML_FROM_FILESYSTEM})
+    set(thisModule VictronMqtt)
+    qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
+    install(FILES ${module_qmldir} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Mqtt)
+    install(DIRECTORY data/mqtt    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Mqtt/data)
+    add_custom_command(
+        TARGET ${thisModule}
+        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
+        VERBATIM
+    )
+endif()
 # end Mqtt_QML_MODULE
 
 set(GUIv1_DBUS_SOURCES
@@ -837,6 +944,24 @@ qt_add_qml_module( ${PROJECT_NAME}
     QML_FILES Main.qml
     IMPORTS Victron.VenusOS
 )
+if (${LOAD_QML_FROM_FILESYSTEM})
+    set(thisModule ${PROJECT_NAME})
+    qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
+    install(TARGETS ${thisModule}
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install
+        BUNDLE DESTINATION .
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    )
+
+    install(FILES ${module_qml_files} ${module_qmldir} $<TARGET_FILE:${thisModule}> DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install)
+    install(FILES $<TARGET_FILE:${thisModule}> DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
+
+    add_custom_command(
+        TARGET ${thisModule}
+        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
+        VERBATIM
+    )
+endif()
 
 qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
     BIG_RESOURCES

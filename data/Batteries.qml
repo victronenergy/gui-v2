@@ -42,8 +42,8 @@ QtObject {
 	}
 
 	function batteryIcon(battery) {
-		return isNaN(battery.power) || battery.power === 0 ? "/images/battery.svg"
-			: (battery.power > 0 ? "/images/battery_charging.svg" : "/images/battery_discharging.svg")
+		return isNaN(battery.power) || battery.power === 0 ? "qrc:/images/battery.svg"
+			: (battery.power > 0 ? "qrc:/images/battery_charging.svg" : "qrc:/images/battery_discharging.svg")
 	}
 
 	function batteryMode(battery) {

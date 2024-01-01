@@ -32,7 +32,7 @@ ListItem {
 
 		CP.ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
-			source: "/images/icon_back_32.svg"
+			source: "qrc:/images/icon_back_32.svg"
 			width: Theme.geometry_statusBar_button_icon_width
 			height: Theme.geometry_statusBar_button_icon_height
 			rotation: 180

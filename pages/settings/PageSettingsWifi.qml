@@ -56,7 +56,7 @@ Page {
 					left: wifiPoint.primaryLabel.left
 					verticalCenter: wifiPoint.primaryLabel.verticalCenter
 				}
-				source: "/images/icon_checkmark_48.svg"
+				source: "qrc:/images/icon_checkmark_48.svg"
 				width: Theme.geometry_statusBar_button_icon_width
 				height: Theme.geometry_statusBar_button_icon_height
 				color: Theme.color_green

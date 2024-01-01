@@ -62,7 +62,7 @@ CT.ComboBox {
 
 		x: root.width - width - root.rightPadding
 		y: root.topPadding + (root.availableHeight - height) / 2
-		source: "/images/icon_back_32.svg"
+		source: "qrc:/images/icon_back_32.svg"
 		width: Theme.geometry_comboBox_indicator_height
 		height: Theme.geometry_comboBox_indicator_height
 		rotation: 270
