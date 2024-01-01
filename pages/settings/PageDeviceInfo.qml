@@ -33,7 +33,7 @@ Page {
 						verticalCenter: parent.primaryLabel.verticalCenter
 					}
 					color: Theme.color_green
-					source: "/images/icon_checkmark_32.svg"
+					source: "qrc:/images/icon_checkmark_32.svg"
 					visible: connectedDataItem.value === 1
 				}
 

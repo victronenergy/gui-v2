@@ -53,7 +53,7 @@ Slider {
 		}
 		icon.width: Theme.geometry_listItem_slider_button_size
 		icon.height: Theme.geometry_listItem_slider_button_size
-		icon.source: "/images/icon_minus.svg"
+		icon.source: "qrc:/images/icon_minus.svg"
 		backgroundColor: "transparent"
 
 		onClicked: {
@@ -73,7 +73,7 @@ Slider {
 		}
 		icon.width: Theme.geometry_listItem_slider_button_size
 		icon.height: Theme.geometry_listItem_slider_button_size
-		icon.source: "/images/icon_plus.svg"
+		icon.source: "qrc:/images/icon_plus.svg"
 		backgroundColor: "transparent"
 
 		onClicked: {

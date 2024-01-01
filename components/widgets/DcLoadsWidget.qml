@@ -59,7 +59,7 @@ OverviewWidget {
 					CP.ColorImage {
 						parent: deviceDelegate.content
 						anchors.verticalCenter: parent.verticalCenter
-						source: "/images/icon_back_32.svg"
+						source: "qrc:/images/icon_back_32.svg"
 						rotation: 180
 						color: delegateMouseArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 						fillMode: Image.PreserveAspectFit
