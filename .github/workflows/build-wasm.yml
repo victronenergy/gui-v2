@@ -67,6 +67,7 @@ jobs:
         dos2unix ${QTDIR}/plugins/platforms/{qtloader.js,wasm_shell.html}
         patch ${QTDIR}/plugins/platforms/qtloader.js < ./.github/patches/qtloader.js.patch
         patch ${QTDIR}/plugins/platforms/wasm_shell.html < ./.github/patches/wasm_shell.html.patch
+        patch ${QTDIR}/bin/qt-configure-module < ./.github/patches/qt-configure-module.patch
     - name: Install emscripten ${{env.EMSCRIPTEN}}
       if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
       run: |
