@@ -22,7 +22,7 @@ Page {
 		onValueChanged: {
 			if (value !== undefined && modelLoader.status === Loader.Null) {
 				if (value === wakespeedProductId) {
-					modelLoader.sourceComponent = wakespeedModelComponent
+					modelLoader.sourceComponent = alternatorModelComponent
 				} else {
 					modelLoader.sourceComponent = dcMeterModelComponent
 				}
@@ -41,9 +41,9 @@ Page {
 	}
 
 	Component {
-		id: wakespeedModelComponent
+		id: alternatorModelComponent
 
-		PageAlternatorModelWakespeed {
+		PageAlternatorModel {
 			bindPrefix: root.bindPrefix
 		}
 	}
