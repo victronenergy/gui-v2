@@ -13,7 +13,8 @@ Page {
 	property string bindPrefix
 
 	// wakespeedProductId should always be equal to VE_PROD_ID_WAKESPEED_WS500
-	readonly property int wakespeedProductId: 0xB080
+	readonly property int wakespeedProductId: 0xB080    
+	readonly property int arcoProductId: 0xB090
 
 	VeQuickItem {
 		id: productIdDataItem
@@ -21,7 +22,7 @@ Page {
 		uid: root.bindPrefix + "/ProductId"
 		onValueChanged: {
 			if (value !== undefined && modelLoader.status === Loader.Null) {
-				if (value === wakespeedProductId) {
+				if ([arcoProductId, wakespeedProductId].indexOf(value) >= 0) {
 					modelLoader.sourceComponent = alternatorModelComponent
 				} else {
 					modelLoader.sourceComponent = dcMeterModelComponent
