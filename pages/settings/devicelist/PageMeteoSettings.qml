@@ -24,14 +24,14 @@ Page {
 			ListRadioButtonGroup {
 				//% "Wind speed sensor"
 				text: qsTrId("page_meteo_settings_wind_speed_sensor")
-				dataSource: meteoSettingsPrefix + "/WindSpeedSensor"
+				dataItem.uid: meteoSettingsPrefix + "/WindSpeedSensor"
 				optionModel: root.optionModel
 			}
 
 			ListRadioButtonGroup {
 				//% "External temperature sensor"
 				text: qsTrId("page_meteo_settings_external_temperature_sensor")
-				dataSource: meteoSettingsPrefix + "/ExternalTemperatureSensor"
+				dataItem.uid: meteoSettingsPrefix + "/ExternalTemperatureSensor"
 				optionModel: root.optionModel
 			}
 		}

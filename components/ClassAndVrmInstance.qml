@@ -5,23 +5,24 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 QtObject {
 	id: root
 
 	property string deviceClass
 	property int vrmInstance: -1
-	property alias dataSource: dataPoint.source
+	property alias uid: dataItem.uid
 
 	property var device
 	readonly property string name: device ? device.name : ""
 
 	function setVrmInstance(newInstance) {
-		dataPoint.setValue(deviceClass + ":" + newInstance)
+		dataItem.setValue(deviceClass + ":" + newInstance)
 	}
 
-	readonly property DataPoint dataPoint: DataPoint {
-		id: dataPoint
+	readonly property VeQuickItem dataItem: VeQuickItem {
+		id: dataItem
 
 		onValueChanged: {
 			if (value) {

@@ -20,16 +20,16 @@ Page {
 				id: networkModeEnabled
 				//% "Networked"
 				text: qsTrId("charger_networked")
-				dataSource: root.solarCharger.serviceUid + "/Link/NetworkMode"
-				visible: dataValid
-				secondaryText: dataValue === undefined ? "" : CommonWords.yesOrNo(dataValue & 1)
+				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
+				visible: dataItem.isValid
+				secondaryText: dataItem.value === undefined ? "" : CommonWords.yesOrNo(dataItem.value & 1)
 			}
 
 			ListTextItem {
 				//% "Network status"
 				text: qsTrId("charger_network_status")
-				secondaryText: Global.systemSettings.networkStatusToText(dataValue)
-				dataSource: root.solarCharger.serviceUid + "/Link/NetworkStatus"
+				secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
+				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkStatus"
 			}
 
 			ListTextItem {
@@ -37,10 +37,10 @@ Page {
 				//% "Mode setting"
 				text: qsTrId("charger_mode_setting")
 				secondaryText: {
-					if (dataValue === undefined) {
+					if (dataItem.value === undefined) {
 						return ""
 					}
-					switch (dataValue & 0xE) {
+					switch (dataItem.value & 0xE) {
 					case 0:
 						//% "Standalone"
 						return qsTrId("charger_standalone")
@@ -69,18 +69,18 @@ Page {
 						return ""
 					}
 				}
-				dataSource: root.solarCharger.serviceUid + "/Link/NetworkMode"
-				visible: dataValid && networkModeEnabled.dataValue
+				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
+				visible: dataItem.isValid && networkModeEnabled.dataItem.value
 			}
 
 			ListTextItem {
 				//% "Master setting"
 				text: qsTrId("charger_master_setting")
 				secondaryText: {
-					if (dataValue === undefined) {
+					if (dataItem.value === undefined) {
 						return ""
 					}
-					switch (dataValue & 0x30) {
+					switch (dataItem.value & 0x30) {
 					case 0x00:
 						//% "Slave"
 						return qsTrId("charger_slave")
@@ -97,31 +97,31 @@ Page {
 						return ""
 					}
 				}
-				dataSource: root.solarCharger.serviceUid + "/Link/NetworkMode"
-				visible: dataValid && networkModeEnabled.dataValue && ((dataValue & 0x30) > 0x00)
+				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
+				visible: dataItem.isValid && networkModeEnabled.dataItem.value && ((dataItem.value & 0x30) > 0x00)
 			}
 
 			ListQuantityItem {
 				//% "Charge voltage"
 				text: qsTrId("charger_charge_voltage")
-				dataSource: root.solarCharger.serviceUid + "/Link/ChargeVoltage"
-				visible: dataValid && networkModeEnabled.dataValue > 0 && (networkModeMode.dataValue & 0x04)
+				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeVoltage"
+				visible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x04)
 				unit: VenusOS.Units_Volt
 			}
 
 			ListTextItem {
 				text: CommonWords.charge_current
-				dataSource: root.solarCharger.serviceUid + "/Link/ChargeCurrent"
-				visible: dataValid && networkModeEnabled.dataValue > 0 && (networkModeMode.dataValue & 0x08)
+				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeCurrent"
+				visible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x08)
 			}
 
 			ListTextItem {
 				id: bmsControlled
 				//% "BMS Controlled"
 				text: qsTrId("charger_network_bms_controlled")
-				secondaryText: CommonWords.yesOrNo(dataValue)
-				dataSource: root.solarCharger.serviceUid + "/Settings/BmsPresent"
-				visible: dataValid
+				secondaryText: CommonWords.yesOrNo(dataItem.value)
+				dataItem.uid: root.solarCharger.serviceUid + "/Settings/BmsPresent"
+				visible: dataItem.isValid
 			}
 
 			ListButton {
@@ -130,9 +130,9 @@ Page {
 				//: Reset the BMS control
 				//% "Reset"
 				button.text: qsTrId("charger_network_bms_control_reset")
-				visible: bmsControlled.dataValue === 1
+				visible: bmsControlled.dataItem.value === 1
 				onClicked: {
-					bmsControlled.setDataValue(0)
+					bmsControlled.dataItem.setValue(0)
 				}
 			}
 
@@ -144,7 +144,7 @@ Page {
 				font.pixelSize: Theme.font_size_caption
 				color: Theme.color_font_secondary
 				leftPadding: infoIcon.x + infoIcon.width + infoIcon.x/2
-				visible: bmsControlled.dataValue === 1
+				visible: bmsControlled.dataItem.value === 1
 
 				CP.IconImage {
 					id: infoIcon

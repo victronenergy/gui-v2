@@ -34,12 +34,12 @@ ListNavigationItem {
 	}
 
 	function getTitle() {
-		if (customName.valid && customName.value !== "") {
+		if (customName.isValid && customName.value !== "") {
 			return customName.value
 		}
-		const inputNumber = devInstance.valid ? devInstance.value : ""
+		const inputNumber = devInstance.isValid ? devInstance.value : ""
 
-		if (temperatureType.valid) {
+		if (temperatureType.isValid) {
 			if (inputNumber === "") {
 				//: %1 = temperature sensor type
 				//% "%1 temperature sensor"
@@ -69,12 +69,12 @@ ListNavigationItem {
 			//% "No actions"
 			return qsTrId("settings_relay_no_actions")
 		}
-		if (c0.valid && c0.value > -1) {
+		if (c0.isValid && c0.value > -1) {
 			//: %1 = Relay 1 activation value, %2 = Relay 1 deactivation value
 			//% "C1: %1, %2"
 			summary.push(qsTrId("settings_relay_c0_desc").arg(c0Set.value || "--").arg(c0Clear.value || "--"))
 		}
-		if (c1.valid && c1.value > -1) {
+		if (c1.isValid && c1.value > -1) {
 			//: %1 = Relay 2 activation value, %2 = Relay 2 deactivation value
 			//% "C2: %1, %2"
 			summary.push(qsTrId("settings_relay_c1_desc").arg(c1Set.value || "--").arg(c1Clear.value || "--"))
@@ -85,53 +85,53 @@ ListNavigationItem {
 	text: getTitle()
 	secondaryText: getSummary()
 
-	DataPoint {
+	VeQuickItem {
 		id: devInstance
-		source: bindPrefix + "/DeviceInstance"
+		uid: bindPrefix + "/DeviceInstance"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: temperatureType
-		source: bindPrefix + "/TemperatureType"
+		uid: bindPrefix + "/TemperatureType"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: customName
-		source: bindPrefix + "/CustomName"
+		uid: bindPrefix + "/CustomName"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: functionEnabled
-		source: tempRelayPrefix + "/Enabled"
+		uid: tempRelayPrefix + "/Enabled"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: c0Relay
-		source: settingsBindPrefix + "/0/Relay"
+		uid: settingsBindPrefix + "/0/Relay"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: c1Relay
-		source: settingsBindPrefix + "/1/Relay"
+		uid: settingsBindPrefix + "/1/Relay"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: c0Set
-		source: settingsBindPrefix + "/0/SetValue"
+		uid: settingsBindPrefix + "/0/SetValue"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: c1Set
-		source: settingsBindPrefix + "/1/SetValue"
+		uid: settingsBindPrefix + "/1/SetValue"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: c0Clear
-		source: settingsBindPrefix + "/0/ClearValue"
+		uid: settingsBindPrefix + "/0/ClearValue"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: c1Clear
-		source: settingsBindPrefix + "/1/ClearValue"
+		uid: settingsBindPrefix + "/1/ClearValue"
 	}
 }

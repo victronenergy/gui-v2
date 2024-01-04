@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -92,7 +93,7 @@ Page {
 				text: qsTrId("batterysettings_restore_factory_defaults")
 				//% "Press to restore"
 				secondaryText: qsTrId("batterysettings_press_to_restore")
-				visible: defaultVisible && restoreDefaults.valid
+				visible: defaultVisible && restoreDefaults.isValid
 				onClicked: {
 					if (!_confirmationDialog) {
 						_confirmationDialog = confirmationDialogComponent.createObject(Global.dialogLayer)
@@ -113,17 +114,17 @@ Page {
 					}
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: restoreDefaults
-					source: root.bindPrefix + "/Settings/RestoreDefaults"
+					uid: root.bindPrefix + "/Settings/RestoreDefaults"
 				}
 			}
 
 			ListRadioButtonGroupNoYes {
 				//% "Bluetooth Enabled"
 				text: qsTrId("batterysettings_bluetooth_enabled")
-				dataSource: root.bindPrefix + "/Settings/BluetoothMode"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/Settings/BluetoothMode"
+				visible: defaultVisible && dataItem.isValid
 			}
 		}
 	}

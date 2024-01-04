@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 ListNavigationItem {
@@ -39,13 +40,13 @@ ListNavigationItem {
 	// Autocalculate step size based on number of decimals
 	readonly property real stepSize: Math.pow(10, -decimals)
 
-	secondaryText: dataPoint.value === 1 ? CommonWords.enabled : CommonWords.disabled
+	secondaryText: dataItem.value === 1 ? CommonWords.enabled : CommonWords.disabled
 	onClicked: Global.pageManager.pushPage(subpage)
 
-	DataPoint {
-		id: dataPoint
+	VeQuickItem {
+		id: dataItem
 
-		source: bindPrefix + "/Enabled"
+		uid: bindPrefix + "/Enabled"
 	}
 
 	Component {
@@ -60,39 +61,39 @@ ListNavigationItem {
 
 					ListSwitch {
 						text: root.enableDescription
-						dataSource: bindPrefix + "/Enabled"
+						dataItem.uid: bindPrefix + "/Enabled"
 					}
 
 					ListSpinBox {
 						id: startValue
 
 						text: startValueDescription
-						visible: dataValid
-						dataSource: bindPrefix + "/StartValue"
+						visible: dataItem.isValid
+						dataItem.uid: bindPrefix + "/StartValue"
 						suffix: root.unit
 						decimals: root.decimals
-						from: stopValue.dataValid && root.startValueIsGreater ? stopValue.value + stepSize : 0
-						to: stopValue.dataValid && !root.startValueIsGreater ? stopValue.value - stepSize : 100
+						from: stopValue.dataItem.isValid && root.startValueIsGreater ? stopValue.value + stepSize : 0
+						to: stopValue.dataItem.isValid && !root.startValueIsGreater ? stopValue.value - stepSize : 100
 					}
 
 					ListSpinBox {
 						id: quietHoursStartValue
 
 						text: CommonWords.start_value_during_quiet_hours
-						visible: dataValid
-						dataSource: bindPrefix + "/QuietHoursStartValue"
+						visible: dataItem.isValid
+						dataItem.uid: bindPrefix + "/QuietHoursStartValue"
 						suffix: root.unit
 						decimals: root.decimals
-						from: quietHoursStopValue.dataValid && root.startValueIsGreater ? quietHoursStopValue.value + stepSize : 0
-						to: quietHoursStopValue.dataValid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : 100
+						from: quietHoursStopValue.dataItem.isValid && root.startValueIsGreater ? quietHoursStopValue.value + stepSize : 0
+						to: quietHoursStopValue.dataItem.isValid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : 100
 					}
 
 					ListSpinBox {
 						id: startTime
 
 						text: startTimeDescription
-						visible: dataValid
-						dataSource: bindPrefix + "/StartTimer"
+						visible: dataItem.isValid
+						dataItem.uid: bindPrefix + "/StartTimer"
 						suffix: root.timeUnit
 					}
 
@@ -100,32 +101,32 @@ ListNavigationItem {
 						id: stopValue
 
 						text: stopValueDescription
-						visible: dataValid
-						dataSource: bindPrefix + "/StopValue"
+						visible: dataItem.isValid
+						dataItem.uid: bindPrefix + "/StopValue"
 						suffix: root.unit
 						decimals: root.decimals
-						to: startValue.dataValid && root.startValueIsGreater ? startValue.value - stepSize : 100
-						from: startValue.dataValid && !root.startValueIsGreater ? startValue.value + stepSize : 0
+						to: startValue.dataItem.isValid && root.startValueIsGreater ? startValue.value - stepSize : 100
+						from: startValue.dataItem.isValid && !root.startValueIsGreater ? startValue.value + stepSize : 0
 					}
 
 					ListSpinBox {
 						id: quietHoursStopValue
 
 						text: CommonWords.stop_value_during_quiet_hours
-						visible: dataValid
-						dataSource: bindPrefix + "/QuietHoursStopValue"
+						visible: dataItem.isValid
+						dataItem.uid: bindPrefix + "/QuietHoursStopValue"
 						suffix: root.unit
 						decimals: root.decimals
-						to: quietHoursStartValue.dataValid && root.startValueIsGreater ? quietHoursStartValue.value - stepSize : 100
-						from: quietHoursStartValue.dataValid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : 1
+						to: quietHoursStartValue.dataItem.isValid && root.startValueIsGreater ? quietHoursStartValue.value - stepSize : 100
+						from: quietHoursStartValue.dataItem.isValid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : 1
 					}
 
 					ListSpinBox {
 						id: stopTime
 
 						text: stopTimeDescription
-						visible: dataValid
-						dataSource: bindPrefix + "/StopTimer"
+						visible: dataItem.isValid
+						dataItem.uid: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit
 					}
 				}

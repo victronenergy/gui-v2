@@ -5,17 +5,13 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 ListButton {
 	id: root
 
-	property alias dataSource: dataPoint.source
-	readonly property alias dataValue: dataPoint.value
-	readonly property alias dataValid: dataPoint.valid
-	readonly property alias dataSeen: dataPoint.seen
-	property alias dataInvalidate: dataPoint.invalidate
-	function setDataValue(v) { dataPoint.setValue(v) }
+	readonly property alias dataItem: dataItem
 
 	property int hour: Math.floor(value / 3600)
 	property int minute: Math.floor(value % 3600 / 60)
@@ -23,12 +19,12 @@ ListButton {
 	property int maximumMinute: 59
 
 	// total value, in seconds (data value is assumed to be in seconds)
-	property real value: !dataValid ? 0 : dataValue
+	property real value: !dataItem.isValid ? 0 : dataItem.value
 
 	property var _timeSelector
 
 	button.text: hour < 0 || minute < 0 ? "--" : ClockTime.formatTime(hour, minute)
-	enabled: dataSource === "" || dataValid
+	enabled: dataItem.uid === "" || dataItem.isValid
 
 	onClicked: {
 		if (!_timeSelector) {
@@ -47,9 +43,9 @@ ListButton {
 			maximumMinute: root.maximumMinute
 
 			onAccepted: {
-				if (dataSource.length > 0) {
+				if (dataItem.uid.length > 0) {
 					const seconds = (minute * 60) + (hour * 60 * 60)
-					dataPoint.setValue(seconds)
+					dataItem.setValue(seconds)
 				} else {
 					root.hour = hour
 					root.minute = minute
@@ -58,7 +54,7 @@ ListButton {
 		}
 	}
 
-	DataPoint {
-		id: dataPoint
+	VeQuickItem {
+		id: dataItem
 	}
 }

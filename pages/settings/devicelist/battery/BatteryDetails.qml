@@ -5,14 +5,15 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 QtObject {
 	id: root
 
 	property string bindPrefix
 	readonly property bool anyItemValid: {
-		for (let i = 0; i < _dataPoints.length; ++i) {
-			if (_dataPoints[i].valid) {
+		for (let i = 0; i < _dataItems.length; ++i) {
+			if (_dataItems[i].isValid) {
 				return true
 			}
 		}
@@ -35,66 +36,66 @@ QtObject {
 	readonly property alias maxTemperatureCellId: maxTemperatureCellId
 	readonly property alias installedCapacity: installedCapacity
 
-	readonly property list<DataPoint> _dataPoints: [
-		DataPoint {
+	readonly property list<VeQuickItem> _dataItems: [
+		VeQuickItem {
 			id: modulesOnline
-			source: root.bindPrefix + "/System/NrOfModulesOnline"
+			uid: root.bindPrefix + "/System/NrOfModulesOnline"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: modulesOffline
-			source: root.bindPrefix + "/System/NrOfModulesOffline"
+			uid: root.bindPrefix + "/System/NrOfModulesOffline"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: nrOfModulesBlockingCharge
-			source: root.bindPrefix + "/System/NrOfModulesBlockingCharge"
+			uid: root.bindPrefix + "/System/NrOfModulesBlockingCharge"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: nrOfModulesBlockingDischarge
-			source: root.bindPrefix + "/System/NrOfModulesBlockingDischarge"
+			uid: root.bindPrefix + "/System/NrOfModulesBlockingDischarge"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: nrOfModulesOnline
-			source: root.bindPrefix + "/System/NrOfModulesOnline"
+			uid: root.bindPrefix + "/System/NrOfModulesOnline"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: nrOfModulesOffline
-			source: root.bindPrefix + "/System/NrOfModulesOffline"
+			uid: root.bindPrefix + "/System/NrOfModulesOffline"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: minCellVoltage
-			source: root.bindPrefix + "/System/MinCellVoltage"
+			uid: root.bindPrefix + "/System/MinCellVoltage"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: maxCellVoltage
-			source: root.bindPrefix + "/System/MaxCellVoltage"
+			uid: root.bindPrefix + "/System/MaxCellVoltage"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: minCellTemperature
-			source: root.bindPrefix + "/System/MinCellTemperature"
+			uid: root.bindPrefix + "/System/MinCellTemperature"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: maxCellTemperature
-			source: root.bindPrefix + "/System/MaxCellTemperature"
+			uid: root.bindPrefix + "/System/MaxCellTemperature"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: minVoltageCellId
-			source: root.bindPrefix + "/System/MinVoltageCellId"
+			uid: root.bindPrefix + "/System/MinVoltageCellId"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: maxVoltageCellId
-			source: root.bindPrefix + "/System/MaxVoltageCellId"
+			uid: root.bindPrefix + "/System/MaxVoltageCellId"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: minTemperatureCellId
-			source: root.bindPrefix + "/System/MinTemperatureCellId"
+			uid: root.bindPrefix + "/System/MinTemperatureCellId"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: maxTemperatureCellId
-			source: root.bindPrefix + "/System/MaxTemperatureCellId"
+			uid: root.bindPrefix + "/System/MaxTemperatureCellId"
 		},
-		DataPoint {
+		VeQuickItem {
 			id: installedCapacity
-			source: root.bindPrefix + "/InstalledCapacity"
+			uid: root.bindPrefix + "/InstalledCapacity"
 		}
 	]
 }

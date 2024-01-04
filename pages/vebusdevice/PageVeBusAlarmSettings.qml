@@ -33,7 +33,7 @@ Page {
 
 					ListRadioButtonGroup {
 						text: alarmSettingsModel.displayTexts[index]
-						dataSource: bindPrefix + "/Settings/Alarm/Vebus" + pathSuffix
+						dataItem.uid: bindPrefix + "/Settings/Alarm/Vebus" + pathSuffix
 						visible: multiPhaseOnly ? isMulti : true
 						optionModel: pathSuffix !== "/VeBusError"
 						? defaultOptionModel

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -12,11 +13,11 @@ Page {
 
 	property string bindPrefix
 
-	readonly property bool isLocalSender: manufacturer.value === 358 && vrmInstance.dataValid
+	readonly property bool isLocalSender: manufacturer.value === 358 && vrmInstance.dataItem.isValid
 
-	DataPoint {
+	VeQuickItem {
 		id: manufacturer
-		source: root.bindPrefix + "/Manufacturer"
+		uid: root.bindPrefix + "/Manufacturer"
 	}
 
 	GradientListView {
@@ -24,40 +25,40 @@ Page {
 
 			ListTextItem {
 				text: CommonWords.model_name
-				dataSource: root.bindPrefix + "/ModelName"
+				dataItem.uid: root.bindPrefix + "/ModelName"
 			}
 
 			ListTextItem {
 				text: CommonWords.manufacturer
-				dataSource: root.bindPrefix + "/ManufacturerName"
+				dataItem.uid: root.bindPrefix + "/ManufacturerName"
 			}
 
 			ListTextItem {
 				//% "Source Address"
 				text: qsTrId("settings_rvc_source_address")
-				secondaryText: Utils.toHexFormat(dataValue)
-				dataSource: root.bindPrefix + "/Nad"
+				secondaryText: Utils.toHexFormat(dataItem.value)
+				dataItem.uid: root.bindPrefix + "/Nad"
 			}
 
 			ListFirmwareVersionItem {
-				dataSource: root.bindPrefix + "/FirmwareVersion"
+				dataItem.uid: root.bindPrefix + "/FirmwareVersion"
 			}
 
 			ListTextItem {
 				text: CommonWords.serial_number
-				dataSource: root.bindPrefix + "/Serial"
+				dataItem.uid: root.bindPrefix + "/Serial"
 			}
 
 			ListTextItem {
 				text: CommonWords.unique_identity_number
-				dataSource: root.bindPrefix + "/RvcUniqueNumber"
+				dataItem.uid: root.bindPrefix + "/RvcUniqueNumber"
 			}
 
 			ListTextItem {
 				id: vrmInstance
 
 				text: CommonWords.vrm_instance
-				dataSource: root.bindPrefix + "/VrmInstance"
+				dataItem.uid: root.bindPrefix + "/VrmInstance"
 				visible: root.isLocalSender
 			}
 

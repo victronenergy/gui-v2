@@ -9,11 +9,11 @@ import Victron.VenusOS
 ListTextItem {
 	//% "Alarm state"
 	text: qsTrId("list_alarm_state")
-	visible: defaultVisible && dataValid
+	visible: defaultVisible && dataItem.isValid
 	secondaryText: {
-		if (dataValue === 0) {
+		if (dataItem.value === 0) {
 			return CommonWords.ok
-		} else if (dataValue === 1) {
+		} else if (dataItem.value === 1) {
 			//: Alarm state is active
 			//% "Alarm"
 			return qsTrId("devicelist_battery_alarm_state")

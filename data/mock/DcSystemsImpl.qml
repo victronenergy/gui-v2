@@ -17,7 +17,7 @@ QtObject {
 			property real current: Math.random() * 10
 			readonly property real power: isNaN(voltage) || isNaN(current) ? NaN : voltage * current
 
-			serviceUid: "com.victronenergy.dcsystem.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.dcsystem.ttyUSB" + deviceInstance
 			name: "DCSystem" + deviceInstance
 
 			Component.onCompleted: {

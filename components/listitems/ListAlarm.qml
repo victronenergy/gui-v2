@@ -10,7 +10,7 @@ ListTextItem {
 	id: root
 
 	secondaryText: {
-		switch (dataValue) {
+		switch (dataItem.value) {
 		case VenusOS.Alarm_Level_OK:
 			//: Voltage alarm is at "OK" level
 			//% "OK"

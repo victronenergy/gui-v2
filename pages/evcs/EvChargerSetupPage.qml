@@ -18,7 +18,7 @@ Page {
 				//% "Max charging current"
 				text: qsTrId("evcs_max_charging_current")
 				suffix: "A"
-				dataSource: root.evCharger.serviceUid + "/MaxCurrent"
+				dataItem.uid: root.evCharger.serviceUid + "/MaxCurrent"
 				presets: Global.evChargers.maxCurrentPresets
 			}
 
@@ -36,19 +36,19 @@ Page {
 						value: VenusOS.Evcs_Position_ACOutput
 					}
 				]
-				dataSource: root.evCharger.serviceUid + "/Position"
+				dataItem.uid: root.evCharger.serviceUid + "/Position"
 			}
 
 			ListSwitch {
 				//% "Auto start"
 				text: qsTrId("evcs_auto_start")
-				dataSource: root.evCharger.serviceUid + "/AutoStart"
+				dataItem.uid: root.evCharger.serviceUid + "/AutoStart"
 			}
 
 			ListSwitch {
 				//% "Lock charger display"
 				text: qsTrId("evcs_lock_charger_display")
-				dataSource: root.evCharger.serviceUid + "/EnableDisplay"
+				dataItem.uid: root.evCharger.serviceUid + "/EnableDisplay"
 				invertSourceValue: true
 			}
 		}

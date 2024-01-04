@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -12,10 +13,10 @@ Page {
 	property string settingsBindPrefix
 	property string startStopBindPrefix
 
-	DataPoint {
+	VeQuickItem {
 		id: state
 
-		source: startStopBindPrefix + "/State"
+		uid: startStopBindPrefix + "/State"
 	}
 
 	GradientListView {
@@ -41,10 +42,10 @@ Page {
 					}
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: resetDaily
 
-					source: settingsBindPrefix + "/AccumulatedDaily"
+					uid: settingsBindPrefix + "/AccumulatedDaily"
 				}
 			}
 
@@ -53,20 +54,20 @@ Page {
 
 				//% "Generator total run time (hours)"
 				text: qsTrId("page_settings_generator_total_run_time")
-				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataValue / 60 / 60)
+				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60)
 				textField.inputMethodHints: Qt.ImhDigitsOnly
-				dataSource: settingsBindPrefix + "/AccumulatedTotalOffset"
+				dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
 				enabled: userHasWriteAccess && state.value === 0
-				visible: dataValid
+				visible: dataItem.isValid
 				textField.maximumLength: 6
 				onAccepted: function(hours) {
-					setDataValue(accumulatedTotalItem.value - hours * 60 * 60)
+					dataItem.setValue(accumulatedTotalItem.value - hours * 60 * 60)
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: accumulatedTotalItem
 
-					source: settingsBindPrefix + "/AccumulatedTotal"
+					uid: settingsBindPrefix + "/AccumulatedTotal"
 				}
 			}
 
@@ -75,11 +76,11 @@ Page {
 
 				//% "Generator service interval (hours)"
 				text: qsTrId("page_settings_generator_service_interval")
-				secondaryText: Math.round(dataValue / 60 / 60)
+				secondaryText: Math.round(dataItem.value / 60 / 60)
 				textField.inputMethodHints: Qt.ImhDigitsOnly
-				dataSource: settingsBindPrefix + "/ServiceInterval"
+				dataItem.uid: settingsBindPrefix + "/ServiceInterval"
 				onAccepted: function(hours) {
-					setDataValue(hours * 60 * 60)
+					dataItem.setValue(hours * 60 * 60)
 					//% "Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer."
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_service_time_interval").arg(hours))
 				}
@@ -89,17 +90,17 @@ Page {
 				//% "Reset service timer"
 				text: qsTrId("page_settings_generator_reset_service_timer")
 				button.text: CommonWords.press_to_reset
-				visible: serviceReset.valid
+				visible: serviceReset.isValid
 				onClicked: {
 					serviceReset.setValue(1)
 					//% "The service timer has been reset."
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_service_timer_has_been_reset"))
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: serviceReset
 
-					source: startStopBindPrefix + "/ServiceCounterReset"
+					uid: startStopBindPrefix + "/ServiceCounterReset"
 				}
 			}
 		}

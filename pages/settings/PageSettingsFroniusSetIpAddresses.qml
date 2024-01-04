@@ -18,7 +18,7 @@ Page {
 	IpAddressListView {
 		id: settingsListView
 
-		ipAddresses.source: Global.systemSettings.serviceUid + "/Settings/Fronius/IPAddresses"
+		ipAddresses.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/IPAddresses"
 	}
 
 	Connections {

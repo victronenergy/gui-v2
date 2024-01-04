@@ -15,58 +15,58 @@ Page {
 
 	readonly property var acActiveInPhases: [ acActiveIn1, acActiveIn2, acActiveIn3 ]
 
-	DataPoint {
+	VeQuickItem {
 		id: _acOutputPower
 
-		source: veBusDevice.serviceUid + "/Ac/Out/P"
+		uid: veBusDevice.serviceUid + "/Ac/Out/P"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: _acActiveInputPower
 
-		source: veBusDevice.serviceUid + "/Ac/ActiveIn/P"
+		uid: veBusDevice.serviceUid + "/Ac/ActiveIn/P"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: bmsMode
 
-		source: veBusDevice.serviceUid + "/Devices/Bms/Version"
+		uid: veBusDevice.serviceUid + "/Devices/Bms/Version"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: dmc
 
-		source: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
+		uid: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: _numberOfPhases
 
-		source: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
+		uid: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: dcCurrent
 
-		source: veBusDevice.serviceUid + "/Dc/0/Current"
+		uid: veBusDevice.serviceUid + "/Dc/0/Current"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: dcPower
 
-		source: veBusDevice.serviceUid + "/Dc/0/Power"
+		uid: veBusDevice.serviceUid + "/Dc/0/Power"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: dcVoltage
 
-		source: veBusDevice.serviceUid + "/Dc/0/Voltage"
+		uid: veBusDevice.serviceUid + "/Dc/0/Voltage"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: stateOfCharge
 
-		source: veBusDevice.serviceUid + "/Soc"
+		uid: veBusDevice.serviceUid + "/Soc"
 	}
 
 	AcOutput {

@@ -64,7 +64,7 @@ Device {
 	property Timer _invalidationTimer: Timer {
 		interval: 5000
 		onTriggered: {
-			if (!tank.valid && tank.type >= 0) {
+			if (!tank.isValid && tank.type >= 0) {
 				Global.tanks.removeTank(tank)
 			}
 		}

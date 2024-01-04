@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -23,26 +24,26 @@ Page {
 	property alias startStopModel: startStopModel
 	property alias model: settingsListView.model
 
-	readonly property var _dates: historicalData.valid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
+	readonly property var _dates: historicalData.isValid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
 
-	DataPoint {
+	VeQuickItem {
 		id: _generatorState
-		source: root.startStopBindPrefix + "/State"
+		uid: root.startStopBindPrefix + "/State"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: activeCondition
-		source: root.startStopBindPrefix + "/RunningByConditionCode"
+		uid: root.startStopBindPrefix + "/RunningByConditionCode"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: stopTimer
-		source: startStopBindPrefix + "/ManualStartTimer"
+		uid: startStopBindPrefix + "/ManualStartTimer"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: historicalData
-		source: root.settingsBindPrefix + "/AccumulatedDaily"
+		uid: root.settingsBindPrefix + "/AccumulatedDaily"
 	}
 
 	GradientListView {
@@ -50,9 +51,9 @@ Page {
 
 		model: startStopModel
 
-		DataPoint {
+		VeQuickItem {
 			id: relayFunction
-			source: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+			uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 		}
 	}
 
@@ -63,7 +64,7 @@ Page {
 			id: state
 
 			text: CommonWords.state
-			secondaryText: activeCondition.valid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : '---'
+			secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : '---'
 			enabled: false
 		}
 
@@ -79,22 +80,22 @@ Page {
 				{ display: qsTrId("settings_generator_not_detected"), value: 3 },
 			]
 			enabled: false
-			dataSource: root.startStopBindPrefix + "/Error"
+			dataItem.uid: root.startStopBindPrefix + "/Error"
 		}
 
 		ListTextItem {
 			//% "Run time"
 			text: qsTrId("settings_page_relay_generator_run_time")
-			secondaryText: dataValid ? Utils.secondsToString(dataValue, false) : "0"
-			dataSource: root.startStopBindPrefix + "/Runtime"
+			secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
+			dataItem.uid: root.startStopBindPrefix + "/Runtime"
 			visible: generatorState.value in [1, 2, 3] // Running, Warm-up, Cool-down
 		}
 
 		ListTextItem {
 			//% "Total run time"
 			text: qsTrId("settings_page_relay_generator_total_run_time")
-			secondaryText: Utils.secondsToString(dataValue, false)
-			dataSource: root.settingsBindPrefix + "/AccumulatedTotal"
+			secondaryText: Utils.secondsToString(dataItem.value, false)
+			dataItem.uid: root.settingsBindPrefix + "/AccumulatedTotal"
 		}
 
 		ListTextItem {
@@ -102,8 +103,8 @@ Page {
 			text: qsTrId("settings_page_relay_generator_accumulated_running_time")
 			showAccessLevel: VenusOS.User_AccessType_Service
 			visible: defaultVisible && nextTestRun.visible
-			secondaryText: Utils.secondsToString(dataValue, false)
-			dataSource: root.startStopBindPrefix + "/TestRunIntervalRuntime"
+			secondaryText: Utils.secondsToString(dataItem.value, false)
+			dataItem.uid: root.startStopBindPrefix + "/TestRunIntervalRuntime"
 		}
 
 		ListTextItem {
@@ -111,8 +112,8 @@ Page {
 			//% "Time to next test run"
 			text: qsTrId("settings_page_relay_generator_time_to_next_test_run")
 			secondaryText: ""
-			dataSource: root.startStopBindPrefix + "/NextTestRun"
-			visible: dataValid && dataValue > 0
+			dataItem.uid: root.startStopBindPrefix + "/NextTestRun"
+			visible: dataItem.isValid && dataItem.value > 0
 
 			Timer {
 				running: parent.visible && root.animationEnabled
@@ -120,7 +121,7 @@ Page {
 				interval: 1000
 				onTriggered: {
 					var now = new Date().getTime() / 1000
-					var remainingTime = parent.dataValue - now
+					var remainingTime = parent.dataItem.value - now
 					if (remainingTime > 0) {
 						parent.secondaryText = Utils.secondsToString(remainingTime, false)
 						return
@@ -134,7 +135,7 @@ Page {
 		ListSwitch {
 			//% "Auto start functionality"
 			text: qsTrId("settings_page_relay_generator_auto_start_enabled")
-			dataSource: root.settingsBindPrefix + "/AutoStartEnabled"
+			dataItem.uid: root.settingsBindPrefix + "/AutoStartEnabled"
 			visible: allowDisableAutostart
 		}
 
@@ -157,7 +158,7 @@ Page {
 								id: manualSwitch
 								//% "Start generator"
 								text: qsTrId("settings_page_relay_generator_start_generator")
-								dataSource: root.startStopBindPrefix + "/ManualStart"
+								dataItem.uid: root.startStopBindPrefix + "/ManualStart"
 								writeAccessLevel: VenusOS.User_AccessType_User
 								onClicked: {
 									if (manualStartPage.isCurrentPage) {
@@ -182,7 +183,7 @@ Page {
 								//% "Run for (hh:mm)"
 								text: qsTrId("settings_page_relay_generator_run_for_hh_mm")
 								enabled: !manualSwitch.checked
-								dataSource: root.startStopBindPrefix + "/ManualStartTimer"
+								dataItem.uid: root.startStopBindPrefix + "/ManualStartTimer"
 								writeAccessLevel: VenusOS.User_AccessType_User
 							}
 						}

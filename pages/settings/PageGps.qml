@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -36,8 +37,8 @@ Page {
 			ListTextItem {
 				text: CommonWords.status
 				secondaryText: {
-					if (connected.valid && connected.value) {
-						if (fix.valid && fix.value) {
+					if (connected.isValid && connected.value) {
+						if (fix.isValid && fix.value) {
 							//% "GPS OK (fix)"
 							return qsTrId("settings_gps_ok_fix")
 						}
@@ -52,40 +53,40 @@ Page {
 			ListTextItem {
 				//% "Latitude"
 				text: qsTrId("settings_gps_latitude")
-				dataSource: bindPrefix + "/Position/Latitude"
-				secondaryText: dataValid ? root.formatCoord(dataValue, ["N","S"], format.value) : "--"
+				dataItem.uid: bindPrefix + "/Position/Latitude"
+				secondaryText: dataItem.isValid ? root.formatCoord(dataItem.value, ["N","S"], format.value) : "--"
 			}
 
 			ListTextItem {
 				//% "Longitude"
 				text: qsTrId("settings_gps_longitude")
-				dataSource: bindPrefix + "/Position/Longitude"
-				secondaryText: dataValid ? root.formatCoord(dataValue, ["E","W"], format.value) : "--"
+				dataItem.uid: bindPrefix + "/Position/Longitude"
+				secondaryText: dataItem.isValid ? root.formatCoord(dataItem.value, ["E","W"], format.value) : "--"
 			}
 
 			ListTextItem {
 				text: CommonWords.speed
-				dataSource: bindPrefix + "/Speed"
+				dataItem.uid: bindPrefix + "/Speed"
 				secondaryText: {
-					if (!dataValid) {
+					if (!dataItem.isValid) {
 						return "--"
 					}
 					if (speedUnit.value === "km/h") {
 						//: GPS speed data, in kilometers per hour
 						//% "%1 km/h"
-						return qsTrId("settings_gps_speed_kmh").arg((dataValue * 3.6).toFixed(1))
+						return qsTrId("settings_gps_speed_kmh").arg((dataItem.value * 3.6).toFixed(1))
 					} else if (speedUnit.value === "mph") {
 						//: GPS speed data, in miles per hour
 						//% "%1 mph"
-						return qsTrId("settings_gps_speed_mph").arg((dataValue * 2.236936).toFixed(1))
+						return qsTrId("settings_gps_speed_mph").arg((dataItem.value * 2.236936).toFixed(1))
 					} else if (speedUnit.value === "kt") {
 						//: GPS speed data, in knots
 						//% "%1 kt"
-						return qsTrId("settings_gps_speed_kt").arg((dataValue * (3600/1852)).toFixed(1))
+						return qsTrId("settings_gps_speed_kt").arg((dataItem.value * (3600/1852)).toFixed(1))
 					} else {
 						//: GPS speed data, in meters per second
 						//% "%1 m/s"
-						return qsTrId("settings_gps_speed_ms").arg(dataValue.toFixed(2))
+						return qsTrId("settings_gps_speed_ms").arg(dataItem.value.toFixed(2))
 					}
 				}
 			}
@@ -93,20 +94,20 @@ Page {
 			ListTextItem {
 				//% "Course"
 				text: qsTrId("settings_gps_course")
-				dataSource: bindPrefix + "/Course"
-				secondaryText: dataValid ? "%1°".arg(dataValue.toFixed(1)) : ""
+				dataItem.uid: bindPrefix + "/Course"
+				secondaryText: dataItem.isValid ? "%1°".arg(dataItem.value.toFixed(1)) : ""
 			}
 
 			ListTextItem {
 				//% "Altitude"
 				text: qsTrId("settings_gps_altitude")
-				dataSource: bindPrefix + "/Altitude"
+				dataItem.uid: bindPrefix + "/Altitude"
 			}
 
 			ListTextItem {
 				//% "Number of satellites"
 				text: qsTrId("settings_gps_num_satellites")
-				dataSource: bindPrefix + "/NrOfSatellites"
+				dataItem.uid: bindPrefix + "/NrOfSatellites"
 			}
 
 			ListNavigationItem {
@@ -119,23 +120,23 @@ Page {
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: connected
-		source: bindPrefix + "/Connected"
+		uid: bindPrefix + "/Connected"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: fix
-		source: bindPrefix + "/Fix"
+		uid: bindPrefix + "/Fix"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: format
-		source: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
+		uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: speedUnit
-		source: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
+		uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
 	}
 }

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -70,7 +71,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Access level"
 				text: qsTrId("settings_access_level")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
 				optionModel: [
@@ -102,7 +103,7 @@ Page {
 
 				//% "SSH on LAN"
 				text: qsTrId("settings_ssh_on_lan")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/System/SSHLocal"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SSHLocal"
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 
@@ -111,7 +112,7 @@ Page {
 
 				//% "Remote support"
 				text: qsTrId("settings_remote_support")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupport"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupport"
 			}
 
 			ListTextItem {
@@ -126,7 +127,7 @@ Page {
 
 				//% "Remote support IP and port"
 				text: qsTrId("settings_remote_ip_and_support")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
 				visible: defaultVisible && remoteSupportOnOff.checked
 			}
 
@@ -141,12 +142,12 @@ Page {
 			ListSwitch {
 				//% "Audible alarm"
 				text: qsTrId("settings_audible_alarm")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
-				visible: defaultVisible && buzzerStateDataPoint.valid
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
+				visible: defaultVisible && buzzerStateDataItem.isValid
 
-				DataPoint {
-					id: buzzerStateDataPoint
-					source: Global.system.serviceUid + "/Buzzer/State"
+				VeQuickItem {
+					id: buzzerStateDataItem
+					uid: Global.system.serviceUid + "/Buzzer/State"
 				}
 			}
 			ListRadioButtonGroup {
@@ -154,7 +155,7 @@ Page {
 				text: qsTrId("settings_demo_mode")
 				height: implicitHeight + demoModeCaption.height
 				primaryLabel.anchors.verticalCenterOffset: -(demoModeCaption.height / 2)
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
 				popDestination: undefined // don't pop page automatically.
 				updateOnClick: false // handle option clicked manually.
 				optionModel: [
@@ -178,7 +179,7 @@ Page {
 				}
 				onOptionClicked: function(index) {
 					Qt.callLater(Global.main.rebuildUi)
-					setDataValue(index)
+					dataItem.setValue(index)
 				}
 			}
 		}

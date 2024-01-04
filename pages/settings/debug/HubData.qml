@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -18,7 +19,7 @@ Page {
 
 	QtObject {
 		id: _pvCharger
-		property DataPoint power: DataPoint { source: Global.system.serviceUid + "/Dc/Pv/Power" }
+		property VeQuickItem power: VeQuickItem { uid: Global.system.serviceUid + "/Dc/Pv/Power" }
 	}
 
 	ObjectAcConnection {
@@ -52,9 +53,9 @@ Page {
 	 * invalid: The unit is configured in such way that its L2 output is not used.
 	 */
 
-	DataPoint {
+	VeQuickItem {
 		id: _splitPhaseL2Passthru
-		source: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Ac/State/SplitPhaseL2Passthru" : ""
+		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Ac/State/SplitPhaseL2Passthru" : ""
 	}
 
 	ObjectAcConnection {

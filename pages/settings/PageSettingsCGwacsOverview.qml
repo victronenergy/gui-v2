@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -22,9 +23,9 @@ Page {
 		return result
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: deviceIds
-		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/DeviceIds"
+		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/DeviceIds"
 	}
 
 	GradientListView {
@@ -36,19 +37,19 @@ Page {
 			secondaryText: getMenuName(serviceType.value, l2ServiceType.value)
 			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacs.qml", { title: text, devicePath: devicePath })
 
-			DataPoint {
+			VeQuickItem {
 				id: customNameItem
-				source: devicePath + "/CustomName"
+				uid: devicePath + "/CustomName"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: serviceType
-				source: devicePath + "/ServiceType"
+				uid: devicePath + "/ServiceType"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: l2ServiceType
-				source: devicePath + "/L2/ServiceType"
+				uid: devicePath + "/L2/ServiceType"
 			}
 		}
 	}

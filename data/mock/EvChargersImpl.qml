@@ -90,7 +90,7 @@ QtObject {
 				}
 			}
 
-			serviceUid: "com.victronenergy.evcharger.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.evcharger.ttyUSB" + deviceInstance
 			name: "EVCharger" + deviceInstance
 			Component.onCompleted: {
 				Global.mockDataSimulator.setMockValue(serviceUid + "/Mode", mode)

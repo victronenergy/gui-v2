@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -77,7 +78,7 @@ Page {
 				text: qsTrId("settings_tz_date_time_local")
 				button.text: ClockTime.currentTimeText
 				writeAccessLevel: VenusOS.User_AccessType_User
-				enabled: Global.systemSettings.time.valid
+				enabled: Global.systemSettings.time.isValid
 
 				onClicked: {
 					root._openTimeSelector()
@@ -92,7 +93,7 @@ Page {
 
 				onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: text })
 
-				DataPoint {
+				VeQuickItem {
 					id: tzData
 
 					property string city
@@ -104,7 +105,7 @@ Page {
 						setValue(region + "/" + city)
 					}
 
-					source: Global.systemSettings.serviceUid + "/Settings/System/TimeZone"
+					uid: Global.systemSettings.serviceUid + "/Settings/System/TimeZone"
 					onValueChanged: {
 						if (value !== undefined) {
 							const slash = value.indexOf('/')

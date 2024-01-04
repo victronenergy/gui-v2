@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
+import Victron.Veutil
 
 // Each item in the model is expected to have at least 2 values:
 //      - "display": the text to display for this option
@@ -18,20 +19,14 @@ import Victron.VenusOS
 ListNavigationItem {
 	id: root
 
-	property alias dataSource: dataPoint.source
-	readonly property alias dataValue: dataPoint.value
-	readonly property alias dataValid: dataPoint.valid
-	readonly property alias dataSeen: dataPoint.seen
-	property alias dataInvalidate: dataPoint.invalidate
-	function setDataValue(v) { dataPoint.setValue(v) }
-
+	readonly property alias dataItem: dataItem
 	property var optionModel: []
 	property int currentIndex: {
-		if (!optionModel || optionModel.length === undefined || dataSource.length === 0 || !dataValid) {
+		if (!optionModel || optionModel.length === undefined || dataItem.uid.length === 0 || !dataItem.isValid) {
 			return defaultIndex
 		}
 		for (let i = 0; i < optionModel.length; ++i) {
-			if (optionModel[i].value === dataValue) {
+			if (optionModel[i].value === dataItem.value) {
 				return i
 			}
 		}
@@ -56,7 +51,7 @@ ListNavigationItem {
 			? optionModel[currentIndex].display
 			: defaultSecondaryText
 
-	enabled: userHasReadAccess && (dataSource === "" || dataValid)
+	enabled: userHasReadAccess && (dataItem.uid === "" || dataItem.isValid)
 
 	onClicked: {
 		if (userHasWriteAccess) {
@@ -67,8 +62,8 @@ ListNavigationItem {
 		}
 	}
 
-	DataPoint {
-		id: dataPoint
+	VeQuickItem {
+		id: dataItem
 	}
 
 	Component {
@@ -87,8 +82,8 @@ ListNavigationItem {
 
 					function select() {
 						if (root.updateOnClick) {
-							if (dataSource.length > 0) {
-								dataPoint.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
+							if (dataItem.uid.length > 0) {
+								dataItem.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
 							} else {
 								root.currentIndex = model.index
 							}

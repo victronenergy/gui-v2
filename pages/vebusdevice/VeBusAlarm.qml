@@ -34,8 +34,8 @@ ListItem {
 			delegate: Label {
 				id: label
 				visible: index === 0
-						 ? modelData.valid && !alarmGroup.phase1Alarm.valid
-						 : modelData.valid && numOfPhases >= index
+						 ? modelData.isValid && !alarmGroup.phase1Alarm.isValid
+						 : modelData.isValid && numOfPhases >= index
 				anchors.verticalCenter: parent.verticalCenter
 				width: Math.max(
 						   (separator.visible

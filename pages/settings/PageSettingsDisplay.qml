@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -18,14 +19,14 @@ Page {
 				id: autoBrightness
 				//% "Adaptive brightness"
 				text: qsTrId("settings_adaptive_brightness")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Gui/AutoBrightness"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/AutoBrightness"
 				// TODO will this also need bindings similar to gui-v1 vePlatform.hasAutoBrightness?
 			}
 
 			ListSlider {
 				//% "Brightness"
 				text: qsTrId("settings_brightness")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Gui/Brightness"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Brightness"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				visible: defaultVisible && !autoBrightness.checked
 				// TODO will this also need bindings similar to gui-v1 vePlatform.hasBacklight and vePlatform.brightness?
@@ -35,7 +36,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Display off time"
 				text: qsTrId("settings_display_off_time")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Gui/DisplayOff"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DisplayOff"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
 				optionModel: [
@@ -108,14 +109,14 @@ Page {
 					// The SystemSettings data point listener will trigger retranslateUi()
 					// It may take a few seconds for the backend to deliver the value
 					// change to the other data point.  So, display a message to the user.
-					languageDataPoint.setValue(Language.toCode(optionModel.languageAt(index)))
+					languageDataItem.setValue(Language.toCode(optionModel.languageAt(index)))
 					pleaseWaitDialog = changingLanguageDialog.createObject(Global.dialogLayer)
 					pleaseWaitDialog.open()
 				}
 
-				DataPoint {
-					id: languageDataPoint
-					source: Global.systemSettings.serviceUid + "/Settings/Gui/Language"
+				VeQuickItem {
+					id: languageDataItem
+					uid: Global.systemSettings.serviceUid + "/Settings/Gui/Language"
 				}
 
 				Component {

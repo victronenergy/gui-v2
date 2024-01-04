@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import QtQml
 
 Item {
@@ -14,24 +15,24 @@ Item {
 	property var alarms: [alarm, phase1Alarm, phase2Alarm, phase3Alarm]
 	property int numOfPhases: 1
 
-	property DataPoint alarm: DataPoint {
+	property VeQuickItem alarm: VeQuickItem {
 		property string displayText: getDisplayText(value)
-		source: bindPrefix + "/Alarms" + alarmSuffix
+		uid: bindPrefix + "/Alarms" + alarmSuffix
 	}
 
-	property DataPoint phase1Alarm: DataPoint {
+	property VeQuickItem phase1Alarm: VeQuickItem {
 		property string displayText: (numOfPhases === 1 ? "" : "L1: ") + getDisplayText(value)
-		source: bindPrefix + "/Alarms/L1" + alarmSuffix
+		uid: bindPrefix + "/Alarms/L1" + alarmSuffix
 	}
 
-	property DataPoint phase2Alarm: DataPoint {
+	property VeQuickItem phase2Alarm: VeQuickItem {
 		property string displayText: "L2: " + getDisplayText(value)
-		source: bindPrefix + "/Alarms/L2" + alarmSuffix
+		uid: bindPrefix + "/Alarms/L2" + alarmSuffix
 	}
 
-	property DataPoint phase3Alarm: DataPoint {
+	property VeQuickItem phase3Alarm: VeQuickItem {
 		property string displayText: "L3: " + getDisplayText(value)
-		source: bindPrefix + "/Alarms/L3" + alarmSuffix
+		uid: bindPrefix + "/Alarms/L3" + alarmSuffix
 	}
 
 	function getDisplayText(value)

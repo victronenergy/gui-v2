@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 QtObject {
 	id: battery
@@ -18,27 +19,27 @@ QtObject {
 	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(battery) : ""
 	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
 
-	readonly property DataPoint _stateOfCharge: DataPoint {
-		source: Global.system.serviceUid + "/Dc/Battery/Soc"
+	readonly property VeQuickItem _stateOfCharge: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/Battery/Soc"
 	}
 
-	readonly property DataPoint _voltage: DataPoint {
-		source: Global.system.serviceUid + "/Dc/Battery/Voltage"
+	readonly property VeQuickItem _voltage: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/Battery/Voltage"
 	}
 
-	readonly property DataPoint _power: DataPoint {
-		source: Global.system.serviceUid + "/Dc/Battery/Power"
+	readonly property VeQuickItem _power: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/Battery/Power"
 	}
 
-	readonly property DataPoint _current: DataPoint {
-		source: Global.system.serviceUid + "/Dc/Battery/Current"
+	readonly property VeQuickItem _current: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/Battery/Current"
 	}
 
-	readonly property DataPoint _temperature: DataPoint {
-		source: Global.system.serviceUid + "/Dc/Battery/Temperature"
+	readonly property VeQuickItem _temperature: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/Battery/Temperature"
 	}
 
-	readonly property DataPoint _timeToGo: DataPoint {
-		source: Global.system.serviceUid + "/Dc/Battery/TimeToGo"
+	readonly property VeQuickItem _timeToGo: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/Battery/TimeToGo"
 	}
 }

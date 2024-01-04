@@ -6,6 +6,7 @@
 import QtQuick
 import QtQuick.Window
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -69,9 +70,9 @@ Page {
 					height: cardsView.height
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: systemType
-					source: Global.system.serviceUid + "/SystemType"
+					uid: Global.system.serviceUid + "/SystemType"
 				}
 			}
 

@@ -5,19 +5,20 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
 
 	property string bindPrefix
 	property var veBusDevice
-	property int numberOfPhases: phases.valid ? phases.value : 1
+	property int numberOfPhases: phases.isValid ? phases.value : 1
 	property bool isMulti
 
-	DataPoint {
+	VeQuickItem {
 		id: phases
 
-		source: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
+		uid: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
 	}
 
 	title: CommonWords.alarm_status
@@ -27,7 +28,7 @@ Page {
 
 			ListTextItem {
 				text: CommonWords.vebus_error
-				dataSource: veBusDevice.serviceUid + "/VebusError"
+				dataItem.uid: veBusDevice.serviceUid + "/VebusError"
 			}
 
 			Column {

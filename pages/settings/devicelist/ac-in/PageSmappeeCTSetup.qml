@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -24,9 +25,9 @@ Page {
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: blink
-		source: root.ctPrefix + "/Identify"
+		uid: root.ctPrefix + "/Identify"
 	}
 
 	GradientListView {
@@ -35,10 +36,10 @@ Page {
 				id: type
 
 				text: CommonWords.type
-				dataSource: root.ctPrefix + "/Type"
+				dataItem.uid: root.ctPrefix + "/Type"
 
-				DataPoint {
-					source: root.bindPrefix + "/CTTypes"
+				VeQuickItem {
+					uid: root.bindPrefix + "/CTTypes"
 					onValueChanged: {
 						type.optionModel = Utils.jsonSettingsToModel(value, true)
 					}
@@ -47,7 +48,7 @@ Page {
 
 			ListRadioButtonGroup {
 				text: CommonWords.phase
-				dataSource: root.ctPrefix + "/Phase"
+				dataItem.uid: root.ctPrefix + "/Phase"
 				optionModel: [
 					//: Indicates no phase
 					//% "None"

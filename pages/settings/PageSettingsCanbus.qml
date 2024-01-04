@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -17,23 +18,23 @@ Page {
 	readonly property string _rvcSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Rvc/" + gateway
 
 	/* VE.Can and RV-C are mutually exclusive */
-	readonly property bool _isRvc: rvcSameUniqueNameUsed.valid
-	readonly property bool _isVecan: vecanSameUniqueNameUsed.valid
+	readonly property bool _isRvc: rvcSameUniqueNameUsed.isValid
+	readonly property bool _isVecan: vecanSameUniqueNameUsed.isValid
 
 	CanbusServiceFinder {
 		id: canbusService
 		gateway: root.gateway
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: vecanSameUniqueNameUsed
-		source: canbusService.vecanServiceUid + "/Alarms/SameUniqueNameUsed"
+		uid: canbusService.vecanServiceUid + "/Alarms/SameUniqueNameUsed"
 		onValueChanged: if (value === 1) timer.running = false
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: rvcSameUniqueNameUsed
-		source: canbusService.rvcServiceUid + "/Alarms/SameUniqueNameUsed"
+		uid: canbusService.rvcServiceUid + "/Alarms/SameUniqueNameUsed"
 		onValueChanged: if (value === 1) timer.running = false
 	}
 
@@ -53,7 +54,7 @@ Page {
 
 				//% "CAN-bus profile"
 				text: qsTrId("settings_canbus_profile")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Canbus/" + root.gateway + "/Profile"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Canbus/" + root.gateway + "/Profile"
 				optionModel: [
 					{
 						//% "Disabled"
@@ -117,7 +118,7 @@ Page {
 			ListSwitch {
 				//% "NMEA2000-out"
 				text: qsTrId("settings_canbus_nmea2000out")
-				dataSource: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
+				dataItem.uid: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
 				visible: root._isVecan
 			}
 
@@ -125,7 +126,7 @@ Page {
 				//% "Unique identity number selector"
 				text: qsTrId("settings_canbus_unique_id_select")
 				visible: root._isVecan || root._isRvc
-				dataSource: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
+				dataItem.uid: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
 
 				bottomContent.children: ListLabel {
 					visible: text.length > 0

@@ -5,17 +5,12 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 ListItem {
 	id: root
 
-	property alias dataSource: dataPoint.source
-	readonly property alias dataValue: dataPoint.value
-	readonly property alias dataValid: dataPoint.valid
-	readonly property alias dataSeen: dataPoint.seen
-	property alias dataInvalidate: dataPoint.invalidate
-	function setDataValue(v) { dataPoint.setValue(v) }
-
+	readonly property alias dataItem: dataItem
 	property alias secondaryText: secondaryLabel.text
 	property alias secondaryLabel: secondaryLabel
 
@@ -26,7 +21,7 @@ ListItem {
 			anchors.verticalCenter: parent.verticalCenter
 			width: Math.min(implicitWidth, root.maximumContentWidth)
 			visible: root.secondaryText.length > 0
-			text: dataValue === undefined ? "" : dataValue
+			text: dataItem.value === undefined ? "" : dataItem.value
 			font.pixelSize: Theme.font_size_body2
 			color: Theme.color_listItem_secondaryText
 			wrapMode: Text.Wrap
@@ -35,7 +30,7 @@ ListItem {
 		}
 	]
 
-	DataPoint {
-		id: dataPoint
+	VeQuickItem {
+		id: dataItem
 	}
 }

@@ -43,5 +43,5 @@ ListTextItem {
 	}
 
 	text: CommonWords.firmware_version
-	secondaryText: dataValue ? firmwareVersion(dataValue) : ""
+	secondaryText: dataItem.value ? firmwareVersion(dataItem.value) : ""
 }

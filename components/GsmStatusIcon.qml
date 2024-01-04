@@ -6,12 +6,13 @@
 import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Row {
 	id: root
 
-	readonly property bool valid: strength.valid
+	readonly property bool valid: strength.isValid
 	readonly property string modemServiceUid: BackendConnection.serviceUidForType("modem")
 
 	function getScaledStrength(strength) {
@@ -33,7 +34,7 @@ Row {
 		return 0
 	}
 
-	visible: simStatus.valid
+	visible: simStatus.isValid
 
 	Label {
 		id: gsmStatusText
@@ -42,10 +43,10 @@ Row {
 			top: parent.top
 			topMargin: Theme.geometry_settings_gsmModem_icon_statusText_topMargin
 		}
-		text: (roaming.valid && roaming.value) ? "R" : Utils.simplifiedNetworkType(networkType.value)
+		text: (roaming.isValid && roaming.value) ? "R" : Utils.simplifiedNetworkType(networkType.value)
 		color: Theme.color_settings_gsmModem_signalStrength_active
 		verticalAlignment: Text.AlignTop
-		visible: !simLockedIcon.visible && ((roaming.valid && roaming.value) || (connected.valid && connected.value))
+		visible: !simLockedIcon.visible && ((roaming.isValid && roaming.value) || (connected.isValid && connected.value))
 		font {
 			pixelSize: Theme.font_size_gsm_icon_caption
 		}
@@ -88,33 +89,33 @@ Row {
 		visible: [11, 16].indexOf(simStatus.value) > -1
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: strength
 
-		source: root.modemServiceUid + "/SignalStrength"
+		uid: root.modemServiceUid + "/SignalStrength"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: networkType
 
-		source: root.modemServiceUid + "/NetworkType"
+		uid: root.modemServiceUid + "/NetworkType"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: simStatus
 
-		source: root.modemServiceUid + "/SimStatus"
+		uid: root.modemServiceUid + "/SimStatus"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: roaming
 
-		source: root.modemServiceUid + "/Roaming"
+		uid: root.modemServiceUid + "/Roaming"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: connected
 
-		source: root.modemServiceUid + "/Connected"
+		uid: root.modemServiceUid + "/Connected"
 	}
 }

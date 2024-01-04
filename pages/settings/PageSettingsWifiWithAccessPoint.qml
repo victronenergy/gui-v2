@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import net.connman
 
 Page {
@@ -59,8 +60,8 @@ Page {
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: accessPoint
-		source: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
+		uid: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
 	}
 }

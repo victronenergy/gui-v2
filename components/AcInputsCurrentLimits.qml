@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 Column {
@@ -15,24 +16,24 @@ Column {
 	property var _currentLimitDialog
 	//% "This setting is disabled. Possible reasons are \"Overruled by remote\" is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure."
 	readonly property string noAdjustableTextByConfig: qsTrId("vebus_device_setting_disabled")
-	readonly property bool _readOnly: !currentLimitIsAdjustable.valid || !currentLimitIsAdjustable.value
+	readonly property bool _readOnly: !currentLimitIsAdjustable.isValid || !currentLimitIsAdjustable.value
 
 
-	DataPoint {
+	VeQuickItem {
 		id: dmc
 
-		source: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
+		uid: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: bmsMode
 
-		source: veBusDevice.serviceUid + "/Devices/Bms/Version"
+		uid: veBusDevice.serviceUid + "/Devices/Bms/Version"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: currentLimitIsAdjustable
-		source: veBusDevice.serviceUid + "/Ac/ActiveIn/CurrentLimitIsAdjustable"
+		uid: veBusDevice.serviceUid + "/Ac/ActiveIn/CurrentLimitIsAdjustable"
 	}
 
 	width: parent ? parent.width : 0
@@ -50,11 +51,11 @@ Column {
 			}
 			onClicked: {
 				if (_readOnly) {
-					if (dmc && dmc.valid) {
+					if (dmc && dmc.isValid) {
 						Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc, 5000)
 						return
 					}
-					if (bmsMode && bmsMode.valid) {
+					if (bmsMode && bmsMode.isValid) {
 						Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms, 5000)
 						return
 					}

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -49,7 +50,7 @@ Page {
 
 			//% "Grid metering"
 			text: qsTrId("settings_ess_grid_metering")
-			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			optionModel: [
 				//% "External meter"
@@ -62,17 +63,17 @@ Page {
 		ListSwitch {
 			//% "Inverter AC output in use"
 			text: qsTrId("settings_ess_inverter_ac_output_in_use")
-			dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
 			visible: defaultVisible && withoutGridMeter.currentIndex === 0
 		}
 
 		ListRadioButtonGroup {
 			//% "Multiphase regulation"
 			text: qsTrId("settings_ess_multiphase_regulation")
-			dataSource: essMode.source
+			dataItem.uid: essMode.uid
 			visible: defaultVisible
 				 && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				 && batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				 && batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			defaultSecondaryText: ""
 			optionModel: [
 				//% "Total of all phases"
@@ -102,7 +103,7 @@ Page {
 			button.text: Global.ess.minimumStateOfCharge + "%"
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: {
 				if (!_minSocDialog) {
 					_minSocDialog = minSocDialogComponent.createObject(Global.dialogLayer)
@@ -122,7 +123,7 @@ Page {
 			text: qsTrId("settings_ess_active_soc_limit")
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataValue)
+				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
 			secondaryText: Math.max(Global.ess.minimumStateOfCharge || 0, socLimit.value || 0) + "%"
 		}
 
@@ -130,14 +131,14 @@ Page {
 			//% "Peak shaving"
 			text: qsTrId("settings_ess_peak_shaving")
 			currentIndex: {
-				if (batteryLifeState.dataValue === VenusOS.Ess_BatteryLifeState_KeepCharged) {
+				if (batteryLifeState.dataItem.value === VenusOS.Ess_BatteryLifeState_KeepCharged) {
 					return 1
 				}
 				return peakshaveItem.value === 1 ? 1 : 0
 			}
 			updateOnClick: false
 			visible: defaultVisible && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-			enabled: batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+			enabled: batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			optionModel: [
 				//% "Above minimum SOC only"
 				{ display: qsTrId("settings_ess_above_minimum_soc_only"), value: 0 },
@@ -155,10 +156,10 @@ Page {
 				}
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: peakshaveItem
 
-				source: Global.systemSettings.serviceUid + "/Settings/CGwacs/AlwaysPeakShave"
+				uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AlwaysPeakShave"
 			}
 		}
 
@@ -167,10 +168,10 @@ Page {
 
 			//% "BatteryLife state"
 			text: qsTrId("settings_ess_batteryLife_state")
-			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.ess.isBatteryLifeActive(dataValue)
+				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
 			enabled: false
 			optionModel: [
 				// Values below taken from MaintenanceState enum in dbus-cgwacs
@@ -196,13 +197,13 @@ Page {
 			checked: maxChargePower.value >= 0
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& !maxChargeCurrentControl.valid
+				&& !maxChargeCurrentControl.isValid
 
 			onCheckedChanged: {
 				if (checked && maxChargePower.value < 0) {
-					maxChargePower.setDataValue(1000)
+					maxChargePower.dataItem.setValue(1000)
 				} else if (!checked && maxChargePower.value >= 0) {
-					maxChargePower.setDataValue(-1)
+					maxChargePower.dataItem.setValue(-1)
 				}
 			}
 		}
@@ -213,7 +214,7 @@ Page {
 			//% "Maximum charge power"
 			text: qsTrId("settings_ess_max_charge_power")
 			visible: defaultVisible && maxChargePowerSwitch.visible && maxChargePowerSwitch.checked
-			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 			suffix: "W"
 			to: 200000
 			stepSize: 50
@@ -227,13 +228,13 @@ Page {
 			checked: maxDischargePower.value >= 0
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 			onCheckedChanged: {
 				if (checked && maxDischargePower.value < 0) {
-					maxDischargePower.setDataValue(1000)
+					maxDischargePower.dataItem.setValue(1000)
 				} else if (!checked && maxDischargePower.value >= 0) {
-					maxDischargePower.setDataValue(-1)
+					maxDischargePower.dataItem.setValue(-1)
 				}
 			}
 		}
@@ -244,7 +245,7 @@ Page {
 			//% "Maximum inverter power"
 			text: qsTrId("settings_ess_max_inverter_power")
 			visible: defaultVisible && maxInverterPowerSwitch.visible && maxInverterPowerSwitch.checked
-			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 			suffix: "W"
 			to: 300000
 			stepSize: 50
@@ -255,8 +256,8 @@ Page {
 			text: qsTrId("settings_ess_grid_setpoint")
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
-			dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
+				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 			suffix: "W"
 			stepSize: 10
 		}
@@ -277,7 +278,7 @@ Page {
 			text: qsTrId("settings_ess_scheduled_charging")
 			visible: defaultVisible
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataValue !== VenusOS.Ess_BatteryLifeState_KeepCharged
+				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 			onClicked: {
 				Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
@@ -314,23 +315,23 @@ Page {
 		model: root._valid ? essSettings : null
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: systemType
-		source: Global.system.serviceUid + "/SystemType"
+		uid: Global.system.serviceUid + "/SystemType"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: essMode
-		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
+		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: socLimit
-		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/SocLimit"
+		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/SocLimit"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: maxChargeCurrentControl
-		source: Global.system.serviceUid + "/Control/MaxChargeCurrent"
+		uid: Global.system.serviceUid + "/Control/MaxChargeCurrent"
 	}
 }

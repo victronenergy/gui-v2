@@ -5,17 +5,12 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 ListItem {
 	id: root
 
-	property alias dataSource: dataPoint.source
-	readonly property alias dataValue: dataPoint.value
-	readonly property alias dataValid: dataPoint.valid
-	readonly property alias dataSeen: dataPoint.seen
-	property alias dataInvalidate: dataPoint.invalidate
-	function setDataValue(v) { dataPoint.setValue(v) }
-
+	readonly property alias dataItem: dataItem
 	property alias checked: switchItem.checked
 	property alias secondaryText: secondaryLabel.text
 	property bool updateOnClick: true
@@ -25,11 +20,11 @@ ListItem {
 
 	function _setChecked(c) {
 		if (updateOnClick) {
-			if (root.dataSource.length > 0) {
+			if (root.dataItem.uid.length > 0) {
 				if (invertSourceValue) {
-					dataPoint.setValue(c ? 0 : 1)
+					dataItem.setValue(c ? 0 : 1)
 				} else {
-					dataPoint.setValue(c ? 1 : 0)
+					dataItem.setValue(c ? 1 : 0)
 				}
 			} else {
 				switchItem.checked = c
@@ -39,7 +34,7 @@ ListItem {
 	}
 
 	down: mouseArea.containsPress
-	enabled: userHasWriteAccess && (dataSource === "" || dataValid)
+	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
 
 	content.children: [
 		Label {
@@ -50,7 +45,7 @@ ListItem {
 		},
 		Switch {
 			id: switchItem
-			checked: invertSourceValue ? dataValue === 0 : dataValue === 1
+			checked: invertSourceValue ? dataItem.value === 0 : dataItem.value === 1
 			onClicked: root._setChecked(!checked)
 		}
 	]
@@ -62,7 +57,7 @@ ListItem {
 		onClicked: root._setChecked(!switchItem.checked)
 	}
 
-	DataPoint {
-		id: dataPoint
+	VeQuickItem {
+		id: dataItem
 	}
 }

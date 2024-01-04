@@ -86,7 +86,7 @@ QtObject {
 				}
 			}
 
-			serviceUid: "com.victronenergy." + serviceType + ".ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy." + serviceType + ".ttyUSB" + deviceInstance
 			name: "DCInput" + deviceInstance
 		}
 	}

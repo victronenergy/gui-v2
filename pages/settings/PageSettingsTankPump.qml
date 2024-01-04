@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -25,9 +26,9 @@ Page {
 			   ? startStopModel
 			   : relayFunction.value === VenusOS.Relay_Function_Tank_Pump ? startStopModel : disabledModel
 
-		DataPoint {
+		VeQuickItem {
 			id: relayFunction
-			source: settingsBindPrefix + "/Settings/Relay/Function"
+			uid: settingsBindPrefix + "/Settings/Relay/Function"
 		}
 	}
 
@@ -47,8 +48,8 @@ Page {
 		ListTextItem {
 			//% "Pump state"
 			text: qsTrId("settings_pump_state")
-			dataSource: root.pumpBindPrefix + "/State"
-			secondaryText: CommonWords.onOrOff(dataValue)
+			dataItem.uid: root.pumpBindPrefix + "/State"
+			secondaryText: CommonWords.onOrOff(dataItem.value)
 		}
 
 		ListRadioButtonGroup {
@@ -59,7 +60,7 @@ Page {
 				{ display: CommonWords.onOrOff(1), value: 1 },
 				{ display: CommonWords.onOrOff(0), value: 2 },
 			]
-			dataSource: root.settingsBindPrefix + "/Settings/Pump0/Mode"
+			dataItem.uid: root.settingsBindPrefix + "/Settings/Pump0/Mode"
 		}
 
 		ListRadioButtonGroup {
@@ -67,12 +68,12 @@ Page {
 
 			//% "Tank sensor"
 			text: qsTrId("settings_tank_sensor")
-			dataSource: root.settingsBindPrefix + "/Settings/Pump0/TankService"
+			dataItem.uid: root.settingsBindPrefix + "/Settings/Pump0/TankService"
 			//% "Unavailable sensor, set another"
 			defaultSecondaryText: qsTrId("settings_tank_unavailable_sensor")
 
-			DataPoint {
-				source: root.pumpBindPrefix + "/AvailableTankServices"
+			VeQuickItem {
+				uid: root.pumpBindPrefix + "/AvailableTankServices"
 				onValueChanged: {
 					if (value === undefined) {
 						return
@@ -81,7 +82,7 @@ Page {
 					if (modelArray) {
 						tankSensor.optionModel = modelArray
 					} else {
-						console.warn("Unable to parse data from", source)
+						console.warn("Unable to parse data from", uid)
 					}
 				}
 			}
@@ -90,7 +91,7 @@ Page {
 		ListSpinBox {
 			//% "Start level"
 			text: qsTrId("settings_tank_start_level")
-			dataSource: root.settingsBindPrefix + "/Settings/Pump0/StartValue"
+			dataItem.uid: root.settingsBindPrefix + "/Settings/Pump0/StartValue"
 			from: 0
 			to: 100
 			suffix: "%"
@@ -99,7 +100,7 @@ Page {
 		ListSpinBox {
 			//% "Stop level"
 			text: qsTrId("settings_tank_stop_level")
-			dataSource: root.settingsBindPrefix + "/Settings/Pump0/StopValue"
+			dataItem.uid: root.settingsBindPrefix + "/Settings/Pump0/StopValue"
 			from: 0
 			to: 100
 			suffix: "%"

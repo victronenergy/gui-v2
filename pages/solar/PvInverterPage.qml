@@ -85,13 +85,13 @@ Page {
 			}
 
 			PvInverterPositionRadioButtonGroup {
-				dataSource: root.pvInverter.serviceUid + "/Position"
+				dataItem.uid: root.pvInverter.serviceUid + "/Position"
 			}
 
 			ListTextItem {
 				text: CommonWords.zero_feed_in_power_limit
-				dataSource: root.pvInverter.serviceUid + "/Ac/PowerLimit"
-				visible: dataValid
+				dataItem.uid: root.pvInverter.serviceUid + "/Ac/PowerLimit"
+				visible: dataItem.isValid
 			}
 
 			ListTextItem {

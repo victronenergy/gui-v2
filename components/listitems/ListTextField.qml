@@ -6,17 +6,12 @@
 import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
+import Victron.Veutil
 
 ListItem {
 	id: root
 
-	property alias dataSource: dataPoint.source
-	readonly property alias dataValue: dataPoint.value
-	readonly property alias dataValid: dataPoint.valid
-	readonly property alias dataSeen: dataPoint.seen
-	property alias dataInvalidate: dataPoint.invalidate
-	function setDataValue(v) { dataPoint.setValue(v) }
-
+	readonly property alias dataItem: dataItem
 	property alias textField: textField
 	property alias secondaryText: textField.text
 	property alias placeholderText: textField.placeholderText
@@ -51,13 +46,13 @@ ListItem {
 				Theme.geometry_listItem_textField_minimumWidth,
 				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry_listItem_textField_maximumWidth))
 		enabled: root.enabled
-		text: dataValid ? dataValue : ""
+		text: dataItem.isValid ? dataItem.value : ""
 
 		onAccepted: {
 			let newValue = text
 			_accepted = true
-			if (dataPoint.source) {
-				dataPoint.setValue(newValue)
+			if (dataItem.uid) {
+				dataItem.setValue(newValue)
 			}
 			textField.focus = false
 			root.accepted(newValue)
@@ -92,12 +87,12 @@ ListItem {
 		}
 	}
 
-	enabled: userHasWriteAccess && (dataSource === "" || dataValid)
+	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
 	content.children: [
 		defaultContent
 	]
 
-	DataPoint {
-		id: dataPoint
+	VeQuickItem {
+		id: dataItem
 	}
 }
