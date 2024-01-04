@@ -33,8 +33,8 @@ ObjectModel {
 		}
 	}
 
-	readonly property var nrOfPhases: DataPoint {
-		source: root.bindPrefix + "/NrOfPhases"
+	readonly property var nrOfPhases: VeQuickItem {
+		uid: root.bindPrefix + "/NrOfPhases"
 	}
 
 	ListRadioButtonGroup {
@@ -43,7 +43,7 @@ ObjectModel {
 		readonly property int index_autoStartStop: 2
 
 		text: CommonWords.mode
-		enabled: gensetStatus.valid
+		enabled: gensetStatus.isValid
 		optionModel: [
 			{ display: CommonWords.on, value: 1 },
 			{ display: CommonWords.off, value: 0 },
@@ -71,17 +71,17 @@ ObjectModel {
 			}
 		}
 
-		DataPoint {
+		VeQuickItem {
 			id: modeItem
-			source: root.startStop1Uid + "/ManualStart"
+			uid: root.startStop1Uid + "/ManualStart"
 		}
-		DataPoint {
+		VeQuickItem {
 			id: autoStartStopItem
-			source: root.startStop1Uid + "/AutoStartEnabled"
+			uid: root.startStop1Uid + "/AutoStartEnabled"
 		}
-		DataPoint {
+		VeQuickItem {
 			id: autoStart
-			source: root.bindPrefix + "/AutoStart"
+			uid: root.bindPrefix + "/AutoStart"
 		}
 	}
 
@@ -89,16 +89,16 @@ ObjectModel {
 		text: CommonWords.status
 		secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
 
-		DataPoint {
+		VeQuickItem {
 			id: gensetStatus
-			source: root.bindPrefix + "/StatusCode"
+			uid: root.bindPrefix + "/StatusCode"
 		}
 	}
 
 	ListFpGensetErrorItem {
 		text: CommonWords.error_code
-		dataSource: root.bindPrefix + "/ErrorCode"
-		visible: defaultVisible && dataValid
+		dataItem.uid: root.bindPrefix + "/ErrorCode"
+		visible: defaultVisible && dataItem.isValid
 		nrOfPhases: root.nrOfPhases.value || 3
 	}
 
@@ -108,9 +108,9 @@ ObjectModel {
 		visible: gensetStatus.value === 10
 		onClicked: startItem.setValue(0)
 
-		DataPoint {
+		VeQuickItem {
 			id: startItem
-			source: root.bindPrefix + "/Start"
+			uid: root.bindPrefix + "/Start"
 		}
 	}
 
@@ -133,17 +133,17 @@ ObjectModel {
 					{ value: phasePower.value, unit: VenusOS.Units_Watt },
 				]
 
-				DataPoint {
+				VeQuickItem {
 					id: phaseVoltage
-					source: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Voltage"
+					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Voltage"
 				}
-				DataPoint {
+				VeQuickItem {
 					id: phaseCurrent
-					source: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Current"
+					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Current"
 				}
-				DataPoint {
+				VeQuickItem {
 					id: phasePower
-					source: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Power"
+					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Power"
 				}
 			}
 		}
@@ -181,72 +181,72 @@ ObjectModel {
 						ListQuantityItem {
 							//% "Speed"
 							text: qsTrId("ac-in-genset_speed")
-							dataSource: root.bindPrefix + "/Engine/Speed"
+							dataItem.uid: root.bindPrefix + "/Engine/Speed"
 							unit: VenusOS.Units_RevolutionsPerMinute
 						}
 
 						ListTextItem {
 							//% "Load"
 							text: qsTrId("ac-in-genset_load")
-							dataSource: root.bindPrefix + "/Engine/Load"
-							visible: defaultVisible && dataValid
+							dataItem.uid: root.bindPrefix + "/Engine/Load"
+							visible: defaultVisible && dataItem.isValid
 						}
 
 						ListTextItem {
 							//% "Oil Pressure"
 							text: qsTrId("ac-in-genset_oil_pressure")
-							dataSource: root.bindPrefix + "/Engine/OilPressure"
-							visible: defaultVisible && dataValid
+							dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
+							visible: defaultVisible && dataItem.isValid
 						}
 
 						ListQuantityItem {
 							//% "Coolant temperature"
 							text: qsTrId("ac-in-genset_coolant_temperature")
-							visible: defaultVisible && dataValid
-							dataSource: root.bindPrefix + "/Engine/CoolantTemperature"
-							value: Units.convertFromCelsius(dataValue, Global.systemSettings.temperatureUnit.value)
+							visible: defaultVisible && dataItem.isValid
+							dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
+							value: Units.convertFromCelsius(dataItem.value, Global.systemSettings.temperatureUnit.value)
 							unit: Global.systemSettings.temperatureUnit.value
 						}
 
 						ListQuantityItem {
 							//% "Exhaust temperature"
 							text: qsTrId("ac-in-genset_exhaust_temperature")
-							visible: defaultVisible && dataValid
-							dataSource: root.bindPrefix + "/Engine/ExaustTemperature"
-							value: Units.convertFromCelsius(dataValue, Global.systemSettings.temperatureUnit.value)
+							visible: defaultVisible && dataItem.isValid
+							dataItem.uid: root.bindPrefix + "/Engine/ExaustTemperature"
+							value: Units.convertFromCelsius(dataItem.value, Global.systemSettings.temperatureUnit.value)
 							unit: Global.systemSettings.temperatureUnit.value
 						}
 
 						ListQuantityItem {
 							//% "Winding temperature"
 							text: qsTrId("ac-in-genset_winding_temperature")
-							visible: defaultVisible && dataValid
-							dataSource: root.bindPrefix + "/Engine/WindingTemperature"
-							value: Units.convertFromCelsius(dataValue, Global.systemSettings.temperatureUnit.value)
+							visible: defaultVisible && dataItem.isValid
+							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
+							value: Units.convertFromCelsius(dataItem.value, Global.systemSettings.temperatureUnit.value)
 							unit: Global.systemSettings.temperatureUnit.value
 						}
 
 						ListTextItem {
 							//% "Operating time"
 							text: qsTrId("ac-in-genset_operating_time")
-							visible: defaultVisible && dataValid
-							dataSource: root.bindPrefix + "/Engine/OperatingHours"
-							secondaryText: Utils.secondsToString(dataValue)
+							visible: defaultVisible && dataItem.isValid
+							dataItem.uid: root.bindPrefix + "/Engine/OperatingHours"
+							secondaryText: Utils.secondsToString(dataItem.value)
 						}
 
 						ListQuantityItem {
 							//% "Starter battery voltage"
 							text: qsTrId("ac-in-genset_starter_battery_voltage")
-							dataSource: root.bindPrefix + "/StarterVoltage"
-							visible: defaultVisible && dataValid
+							dataItem.uid: root.bindPrefix + "/StarterVoltage"
+							visible: defaultVisible && dataItem.isValid
 							unit: VenusOS.Units_Volt
 						}
 
 						ListTextItem {
 							//% "Number of starts"
 							text: qsTrId("ac-in-genset_number_of_starts")
-							dataSource: root.bindPrefix + "/Engine/Starts"
-							visible: defaultVisible && dataValid
+							dataItem.uid: root.bindPrefix + "/Engine/Starts"
+							visible: defaultVisible && dataItem.isValid
 						}
 					}
 				}

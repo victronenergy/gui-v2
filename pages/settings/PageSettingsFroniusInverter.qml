@@ -5,30 +5,31 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
 	id: root
 
 	property string bindPrefix
-	readonly property int phaseCount: phaseCountItem.valid ? phaseCountItem.value : 1
+	readonly property int phaseCount: phaseCountItem.isValid ? phaseCountItem.value : 1
 
-	DataPoint {
+	VeQuickItem {
 		id: phaseCountItem
 
-		source: bindPrefix + "/PhaseCount"
+		uid: bindPrefix + "/PhaseCount"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: phaseItem
 
-		source: bindPrefix + "/Phase"
+		uid: bindPrefix + "/Phase"
 	}
 
 	GradientListView {
 		model: ObjectModel {
 			PvInverterPositionRadioButtonGroup {
-				dataSource: bindPrefix + "/Position"
+				dataItem.uid: bindPrefix + "/Position"
 			}
 
 			ListTextItem {
@@ -40,7 +41,7 @@ Page {
 
 			ListRadioButtonGroup {
 				text: CommonWords.phase
-				dataSource: bindPrefix + "/Phase"
+				dataItem.uid: bindPrefix + "/Phase"
 				visible: phaseCount === 1
 				optionModel: [
 					//% "L1"
@@ -57,7 +58,7 @@ Page {
 			ListRadioButtonGroupNoYes {
 				//% "Show"
 				text: qsTrId("page_settings_fronius_inverter_show")
-				dataSource: bindPrefix + "/IsActive"
+				dataItem.uid: bindPrefix + "/IsActive"
 			}
 		}
 	}

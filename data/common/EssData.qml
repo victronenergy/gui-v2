@@ -83,20 +83,20 @@ QtObject {
 		}
 	}
 
-	readonly property DataPoint veBatteryLifeState: DataPoint {
-		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
+	readonly property VeQuickItem veBatteryLifeState: VeQuickItem {
+		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
 	}
 
-	readonly property DataPoint veHub4Mode: DataPoint {
-		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
+	readonly property VeQuickItem veHub4Mode: VeQuickItem {
+		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
 	}
 
-	readonly property DataPoint veMinimumSocLimit: DataPoint {
-		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/MinimumSocLimit"
+	readonly property VeQuickItem veMinimumSocLimit: VeQuickItem {
+		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/MinimumSocLimit"
 	}
 
-	readonly property DataPoint veSocLimit: DataPoint {
-		source: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/SocLimit"
+	readonly property VeQuickItem veSocLimit: VeQuickItem {
+		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/SocLimit"
 	}
 
 	Component.onCompleted: {

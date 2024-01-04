@@ -5,12 +5,13 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
 
 	property string bindPrefix
-	readonly property bool _hasMultipleDcSources: dcSource2Instance.valid
+	readonly property bool _hasMultipleDcSources: dcSource2Instance.isValid
 
 	function _lineInstanceName(num) {
 		return num
@@ -21,9 +22,9 @@ Page {
 			: qsTrId("settings_rvc_line_instance")
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: dcSource2Instance
-		source: root.bindPrefix + "/DcSource/1/Instance"
+		uid: root.bindPrefix + "/DcSource/1/Instance"
 	}
 
 	GradientListView {
@@ -31,21 +32,21 @@ Page {
 			ListSpinBox {
 				//% "Charger instance"
 				text: qsTrId("settings_rvc_charger_instance")
-				dataSource: root.bindPrefix + "/ChargerInstance"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/ChargerInstance"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListSpinBox {
 				//% "Inverter instance"
 				text: qsTrId("settings_rvc_inverter_instance")
-				dataSource: root.bindPrefix + "/InverterInstance"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/InverterInstance"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListRadioButtonGroup {
-				text: root._lineInstanceName(line2.dataValid ? "1" : "")
-				dataSource: root.bindPrefix + "/Line/0/Instance"
-				visible: defaultVisible && dataValid
+				text: root._lineInstanceName(line2.dataItem.isValid ? "1" : "")
+				dataItem.uid: root.bindPrefix + "/Line/0/Instance"
+				visible: defaultVisible && dataItem.isValid
 				optionModel: [
 					{ display: "L1", value: 0 },
 					{ display: "L2", value: 1 },
@@ -56,8 +57,8 @@ Page {
 				id: line2
 
 				text: root._lineInstanceName("2")
-				dataSource: root.bindPrefix + "/Line/1/Instance"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/Line/1/Instance"
+				visible: defaultVisible && dataItem.isValid
 				optionModel: [
 					{ display: "L1", value: 0 },
 					{ display: "L2", value: 1 },
@@ -79,8 +80,8 @@ Page {
 								? qsTrId("settings_rvc_dc_source_#_instance").arg(model.index + 1)
 								  //% "DC source instance"
 								: qsTrId("settings_rvc_dc_source_instance")
-							dataSource: root.bindPrefix + "/DcSource/" + model.index + "/Instance"
-							visible: defaultVisible && dataValid
+							dataItem.uid: root.bindPrefix + "/DcSource/" + model.index + "/Instance"
+							visible: defaultVisible && dataItem.isValid
 						}
 
 						ListSpinBox {
@@ -90,8 +91,8 @@ Page {
 								? qsTrId("settings_rvc_dc_source_#_priority").arg(model.index + 1)
 								  //% "DC source priority"
 								: qsTrId("settings_rvc_dc_source_priority")
-							dataSource: root.bindPrefix + "/DcSource/" + model.index + "/Priority"
-							visible: defaultVisible && dataValid
+							dataItem.uid: root.bindPrefix + "/DcSource/" + model.index + "/Priority"
+							visible: defaultVisible && dataItem.isValid
 						}
 					}
 				}
@@ -100,8 +101,8 @@ Page {
 			ListSpinBox {
 				//% "Tank instance"
 				text: qsTrId("settings_rvc_tank_instance")
-				dataSource: root.bindPrefix + "/TankInstance"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/TankInstance"
+				visible: defaultVisible && dataItem.isValid
 			}
 		}
 	}

@@ -25,8 +25,8 @@ Device {
 		uid: relay.serviceUid + "/State"
 	}
 
-	readonly property DataPoint _relayFunction: DataPoint {
-		source: relay.relayIndex === 0
+	readonly property VeQuickItem _relayFunction: VeQuickItem {
+		uid: relay.relayIndex === 0
 			 ? Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 			 : Global.systemSettings.serviceUid + "/Settings/Relay/%1/Function".arg(model.index)
 	}

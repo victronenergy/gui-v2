@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Column {
 	id: root
@@ -25,35 +26,35 @@ Column {
 
 	width: parent ? parent.width : 0
 
-	DataPoint {
+	VeQuickItem {
 		id: relay1Item
-		source: Global.system.serviceUid + "/Relay/1/State"
+		uid: Global.system.serviceUid + "/Relay/1/State"
 	}
 
 	ListTextItem {
 		//% "Condition %1"
 		text: qsTrId("settings_relay_condition").arg(root.relayNumber + 1)
 		secondaryText: root.relayActivateOnTemperature
-			? dataValue
+			? dataItem.value
 				? CommonWords.active_status
 				: CommonWords.inactive_status
 			  //% "Function disabled"
 			: qsTrId("settings_relay_function_disabled")
-		dataSource: "%1/%2/State".arg(root.tempRelayPrefix).arg(root.relayNumber)
+		dataItem.uid: "%1/%2/State".arg(root.tempRelayPrefix).arg(root.relayNumber)
 	}
 
 	ListRadioButtonGroup {
 		id: cRelay
 
 		text: CommonWords.relay
-		dataSource: "%1/%2/Relay".arg(root.settingsBindPrefix).arg(root.relayNumber)
+		dataItem.uid: "%1/%2/Relay".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		optionModel: [
 			//% "None (Disable)"
 			{ display: qsTrId("settings_relay_none"), value: -1 },
 			//% "Relay 1"
 			{ display: qsTrId("settings_relay1"), value: 0 },
 			//% "Relay 2"
-			{ display: qsTrId("settings_relay2"), value: 1, readOnly: !relay1Item.valid },
+			{ display: qsTrId("settings_relay2"), value: 1, readOnly: !relay1Item.isValid },
 		]
 
 		ListLabel {
@@ -68,7 +69,7 @@ Column {
 
 		//% "Activation value"
 		text: qsTrId("settings_relay_activation_value")
-		dataSource: "%1/%2/SetValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
+		dataItem.uid: "%1/%2/SetValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		from: -50
 		to: 100
 
@@ -87,7 +88,7 @@ Column {
 
 		//% "Deativation value"
 		text: qsTrId("settings_relay_deactivation_value")
-		dataSource: "%1/%2/ClearValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
+		dataItem.uid: "%1/%2/ClearValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		from: cSet.from
 		to: cSet.to
 		suffix: cSet.suffix

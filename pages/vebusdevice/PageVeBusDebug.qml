@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 Page {
@@ -12,28 +13,28 @@ Page {
 
 	property string bindPrefix
 
-	DataPoint {
-		id: sustainDataPoint
+	VeQuickItem {
+		id: sustainDataItem
 
-		source: root.bindPrefix + "/Hub4/Sustain"
+		uid: root.bindPrefix + "/Hub4/Sustain"
 	}
 
-	DataPoint {
-		id: lowSocDataPoint
+	VeQuickItem {
+		id: lowSocDataItem
 
-		source: root.bindPrefix + "/Hub4/LowSoc"
+		uid: root.bindPrefix + "/Hub4/LowSoc"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: maxChargePower
 
-		source: BackendConnection.serviceUidForType("hub4") + "/MaxChargePower"
+		uid: BackendConnection.serviceUidForType("hub4") + "/MaxChargePower"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: maxDischargePower
 
-		source: BackendConnection.serviceUidForType("hub4") + "/MaxDischargePower"
+		uid: BackendConnection.serviceUidForType("hub4") + "/MaxDischargePower"
 	}
 
 	GradientListView {
@@ -60,14 +61,14 @@ Page {
 
 			ListTextItem {
 				text: "Multi SOC"
-				dataSource: root.bindPrefix + "/Soc"
+				dataItem.uid: root.bindPrefix + "/Soc"
 			}
 
 			ListTextGroup {
 				text: "Flags"
 				textModel: [
-					"Sustain: " + Units.getDisplayText(VenusOS.Units_None, sustainDataPoint.value).number,
-					"Low SOC: " + Units.getDisplayText(VenusOS.Units_None, lowSocDataPoint.value).number
+					"Sustain: " + Units.getDisplayText(VenusOS.Units_None, sustainDataItem.value).number,
+					"Low SOC: " + Units.getDisplayText(VenusOS.Units_None, lowSocDataItem.value).number
 				]
 			}
 
@@ -113,22 +114,22 @@ Page {
 					}
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: remoteSetpointL1
 
-					source: root.bindPrefix + "/Hub4/L1/AcPowerSetpoint"
+					uid: root.bindPrefix + "/Hub4/L1/AcPowerSetpoint"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: remoteSetpointL2
 
-					source: root.bindPrefix + "/Hub4/L2/AcPowerSetpoint"
+					uid: root.bindPrefix + "/Hub4/L2/AcPowerSetpoint"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: remoteSetpointL3
 
-					source: root.bindPrefix + "/Hub4/L3/AcPowerSetpoint"
+					uid: root.bindPrefix + "/Hub4/L3/AcPowerSetpoint"
 				}
 			}
 
@@ -155,12 +156,12 @@ Page {
 
 			ListSwitch {
 				text: "Disable Charge"
-				dataSource: root.bindPrefix + "/Hub4/DisableCharge"
+				dataItem.uid: root.bindPrefix + "/Hub4/DisableCharge"
 			}
 
 			ListSwitch {
 				text: "Disable Feed In"
-				dataSource: root.bindPrefix + "/Hub4/DisableFeedIn"
+				dataItem.uid: root.bindPrefix + "/Hub4/DisableFeedIn"
 			}
 		}
 	}

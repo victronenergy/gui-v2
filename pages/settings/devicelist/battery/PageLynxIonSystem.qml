@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -16,26 +17,26 @@ Page {
 			ListTextItem {
 				//% "Capacity"
 				text: qsTrId("lynxionsystem_capacity")
-				dataSource: root.bindPrefix + "/Capacity"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/Capacity"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListTextItem {
 				//% "Batteries"
 				text: qsTrId("lynxionsystem_batteries")
-				dataSource: root.bindPrefix + "/System/NrOfBatteries"
+				dataItem.uid: root.bindPrefix + "/System/NrOfBatteries"
 			}
 
 			ListTextItem {
 				//% "Parallel"
 				text: qsTrId("lynxionsystem_parallel")
-				dataSource: root.bindPrefix + "/System/BatteriesParallel"
+				dataItem.uid: root.bindPrefix + "/System/BatteriesParallel"
 			}
 
 			ListTextItem {
 				//% "Series"
 				text: qsTrId("lynxionsystem_series")
-				dataSource: root.bindPrefix + "/System/BatteriesSeries"
+				dataItem.uid: root.bindPrefix + "/System/BatteriesSeries"
 			}
 
 			ListQuantityGroup {
@@ -45,16 +46,16 @@ Page {
 					{ value: minCellVoltage.value, unit: VenusOS.Units_Volt },
 					{ value: maxCellVoltage.value, unit: VenusOS.Units_Volt },
 				]
-				visible: minCellVoltage.valid && maxCellVoltage.valid
+				visible: minCellVoltage.isValid && maxCellVoltage.isValid
 
-				DataPoint {
+				VeQuickItem {
 					id: minCellVoltage
-					source: root.bindPrefix + "/System/MinCellVoltage"
+					uid: root.bindPrefix + "/System/MinCellVoltage"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: maxCellVoltage
-					source: root.bindPrefix + "/System/MaxCellVoltage"
+					uid: root.bindPrefix + "/System/MaxCellVoltage"
 				}
 			}
 
@@ -71,24 +72,24 @@ Page {
 						unit: Global.systemSettings.temperatureUnit.value
 					}
 				]
-				visible: minCellTemperature.valid && maxCellTemperature.valid
+				visible: minCellTemperature.isValid && maxCellTemperature.isValid
 
-				DataPoint {
+				VeQuickItem {
 					id: minCellTemperature
-					source: root.bindPrefix + "/System/MinCellTemperature"
+					uid: root.bindPrefix + "/System/MinCellTemperature"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: maxCellTemperature
-					source: root.bindPrefix + "/System/MaxCellTemperature"
+					uid: root.bindPrefix + "/System/MaxCellTemperature"
 				}
 			}
 
 			ListTextItem {
 				//% "Balancing"
 				text: qsTrId("lynxionsystem_balancing")
-				dataSource: root.bindPrefix + "/Balancing"
-				secondaryText: CommonWords.activeOrInactive(dataValue)
+				dataItem.uid: root.bindPrefix + "/Balancing"
+				secondaryText: CommonWords.activeOrInactive(dataItem.value)
 			}
 		}
 	}

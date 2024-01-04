@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -38,7 +39,7 @@ Page {
 				id: loggerMode
 				//% "Logging enabled"
 				text: qsTrId("settings_logging_enabled")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/Logmode"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/Logmode"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled,	value: 1 },
@@ -48,7 +49,7 @@ Page {
 			ListTextItem {
 				//% "VRM Portal ID"
 				text: qsTrId("settings_vrm_portal_id")
-				dataSource: Global.venusPlatform.serviceUid + "/Device/UniqueId"
+				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/UniqueId"
 			}
 
 			ListRadioButtonGroup {
@@ -76,28 +77,28 @@ Page {
 					//% "1 day"
 					{ display: qsTrId("settings_1_day"), value: 86400 },
 				]
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/LogInterval"
-				visible: !!loggerMode.dataValue && loggerMode.dataValue > 0
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/LogInterval"
+				visible: !!loggerMode.dataItem.value && loggerMode.dataItem.value > 0
 			}
 
 			ListSwitch {
 				//% "Use secure connection (HTTPS)"
 				text: qsTrId("settings_https_enabled")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/HttpsEnabled"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/HttpsEnabled"
 			}
 
 			ListTextItem {
 				//% "Last contact"
 				text: qsTrId("settings_last_contact")
-				dataSource: root.loggerServiceUid + "/Vrm/TimeLastContact"
-				visible: !!loggerMode.dataValue && loggerMode.dataValue > 0
+				dataItem.uid: root.loggerServiceUid + "/Vrm/TimeLastContact"
+				visible: !!loggerMode.dataItem.value && loggerMode.dataItem.value > 0
 
 				Timer {
 					interval: 1000
 					running: parent.visible && root.animationEnabled
 					repeat: true
 					triggeredOnStart: true
-					onTriggered: parent.secondaryText = root.timeAgo(parent.dataValue)
+					onTriggered: parent.secondaryText = root.timeAgo(parent.dataItem.value)
 				}
 			}
 
@@ -136,8 +137,8 @@ Page {
 				}
 				//% "Connection error"
 				text: qsTrId("settings_connection_error")
-				secondaryText: stringForErrorCode(dataValue)
-				dataSource: root.loggerServiceUid + "/Vrm/ConnectionError"
+				secondaryText: stringForErrorCode(dataItem.value)
+				dataItem.uid: root.loggerServiceUid + "/Vrm/ConnectionError"
 			}
 
 			ListItem {
@@ -145,32 +146,32 @@ Page {
 				text: qsTrId("settings_vrm_error_message").arg(errorMessage.value)
 				visible: !!errorMessage.value
 
-				DataPoint {
+				VeQuickItem {
 					id: errorMessage
-					source: root.loggerServiceUid + "/Vrm/ConnectionErrorMessage"
+					uid: root.loggerServiceUid + "/Vrm/ConnectionErrorMessage"
 				}
 			}
 
 			ListSwitch {
 				//% "VRM two-way communication"
 				text: qsTrId("settings_vrm_communication")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/MqttVrm"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttVrm"
 			}
 
 			ListSwitch {
 				//% "Reboot device when no contact"
 				text: qsTrId("settings_no_contact_reboot")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
 				updateOnClick: false
-				checked: dataValue !== 0
-				onClicked: setDataValue(checked ? 0 : 3600)
+				checked: dataItem.value !== 0
+				onClicked: dataItem.setValue(checked ? 0 : 3600)
 			}
 
 			ListTimeSelector {
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
 				//% "No contact reset delay (hh:mm)"
 				text: qsTrId("settings_vrm_no_contact_reset_delay")
-				visible: !!dataValue && dataValue > 0
+				visible: !!dataItem.value && dataItem.value > 0
 			}
 
 			ListRadioButtonGroup {
@@ -186,8 +187,8 @@ Page {
 					//% "External storage"
 					{ display: qsTrId("settings_vrm_external_storage"), value: 2 },
 				]
-				dataSource: root.loggerServiceUid + "/Buffer/Location"
-				enabled: dataValue !== undefined
+				dataItem.uid: root.loggerServiceUid + "/Buffer/Location"
+				enabled: dataItem.value !== undefined
 			}
 
 			ListRadioButtonGroup {
@@ -209,19 +210,19 @@ Page {
 					{ display: qsTrId("settings_vrm_storage_not_writable_error"), value: 5 },
 				]
 				enabled: false
-				dataSource: root.loggerServiceUid + "/Buffer/ErrorState"
-				visible: !!dataValue
+				dataItem.uid: root.loggerServiceUid + "/Buffer/ErrorState"
+				visible: !!dataItem.value
 			}
 
 			ListTextItem { // This 'flickers' between values for ~30s after inserting a usb stick. Dbus-spy shows that the underlying data point flickers also. Old gui also flickers.
 				//% "Free disk space"
 				text: qsTrId("settings_vrm_free_disk_space")
-				secondaryText: Utils.qtyToString(dataValue,
+				secondaryText: Utils.qtyToString(dataItem.value,
 												 //% "byte"
 												 qsTrId("settings_vrm_byte"),
 												 //% "bytes"
 												 qsTrId("settings_vrm_bytes"))
-				dataSource: root.loggerServiceUid + "/Buffer/FreeDiskSpace"
+				dataItem.uid: root.loggerServiceUid + "/Buffer/FreeDiskSpace"
 			}
 
 			MountStateListButton {}
@@ -229,9 +230,9 @@ Page {
 			ListTextItem {
 				//% "Stored records"
 				text: qsTrId("settings_vrm_stored_records")
-				dataSource: root.loggerServiceUid + "/Buffer/Count"
+				dataItem.uid: root.loggerServiceUid + "/Buffer/Count"
 				//% "%1 records"
-				secondaryText: qsTrId("settings_vrm_records_count").arg(dataValue ? dataValue : 0)
+				secondaryText: qsTrId("settings_vrm_records_count").arg(dataItem.value ? dataItem.value : 0)
 			}
 
 			ListTextItem {
@@ -240,14 +241,14 @@ Page {
 				property var timeNow: Math.round(new Date() / 1000)
 				//% "Oldest record age"
 				text: qsTrId("settings_vrm_oldest_record_age")
-				dataSource: root.loggerServiceUid + "/Buffer/OldestTimestamp"
+				dataItem.uid: root.loggerServiceUid + "/Buffer/OldestTimestamp"
 
 				Timer {
 					interval: 1000
-					running: !!parent.dataValue && root.animationEnabled
+					running: !!parent.dataItem.value && root.animationEnabled
 					repeat: true
 					triggeredOnStart: true
-					onTriggered: parent.secondaryText = root.timeAgo(parent.dataValue)
+					onTriggered: parent.secondaryText = root.timeAgo(parent.dataItem.value)
 				}
 			}
 		}

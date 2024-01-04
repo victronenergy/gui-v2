@@ -23,8 +23,8 @@ Page {
 				//: Change the battery mode
 				//% "Switch"
 				text: qsTrId("battery_switch")
-				dataSource: root.battery.serviceUid + "/Mode"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.battery.serviceUid + "/Mode"
+				visible: defaultVisible && dataItem.isValid
 				optionModel: [
 					{ display: CommonWords.off, value: 4, readOnly: true },
 					{ display: CommonWords.standby, value: 0xfc },
@@ -34,17 +34,17 @@ Page {
 
 			ListTextItem {
 				text: CommonWords.state
-				dataSource: root.battery.serviceUid + "/State"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.battery.serviceUid + "/State"
+				visible: defaultVisible && dataItem.isValid
 				secondaryText: {
-					if (!dataValid) {
+					if (!dataItem.isValid) {
 						return ""
 					}
-					if (dataValue >= 0 && dataValue <= 8) {
+					if (dataItem.value >= 0 && dataItem.value <= 8) {
 						//% "Initializing"
 						return qsTrId("devicelist_battery_initializing")
 					}
-					switch (dataValue) {
+					switch (dataItem.value) {
 					case 9:
 						return CommonWords.running_status
 					case 10:
@@ -82,8 +82,8 @@ Page {
 			// converted into a readable string via veutil. See issue #302
 			ListTextItem {
 				text: CommonWords.error
-				dataSource: root.battery.serviceUid + "/ErrorCode"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.battery.serviceUid + "/ErrorCode"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListQuantityGroup {
@@ -104,8 +104,8 @@ Page {
 			ListQuantityItem {
 				//% "State of health"
 				text: qsTrId("battery_state_of_health")
-				dataSource: root.battery.serviceUid + "/Soh"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.battery.serviceUid + "/Soh"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_Percentage
 			}
 
@@ -120,17 +120,17 @@ Page {
 			ListQuantityItem {
 				//% "Air temperature"
 				text: qsTrId("battery_air_temp")
-				dataSource: root.battery.serviceUid + "/AirTemperature"
-				visible: defaultVisible && dataValid
-				value: dataValue ? Global.systemSettings.convertTemperature(dataValue) : NaN
+				dataItem.uid: root.battery.serviceUid + "/AirTemperature"
+				visible: defaultVisible && dataItem.isValid
+				value: dataItem.value ? Global.systemSettings.convertTemperature(dataItem.value) : NaN
 				unit: Global.systemSettings.temperatureUnit.value
 			}
 
 			ListQuantityItem {
 				//% "Starter voltage"
 				text: qsTrId("battery_starter_voltage")
-				dataSource: root.battery.serviceUid + "/Dc/1/Voltage"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.battery.serviceUid + "/Dc/1/Voltage"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_Volt
 				precision: 2
 			}
@@ -138,8 +138,8 @@ Page {
 			ListQuantityItem {
 				//% "Bus voltage"
 				text: qsTrId("battery_bus_voltage")
-				dataSource: root.battery.serviceUid + "/BusVoltage"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.battery.serviceUid + "/BusVoltage"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_Volt
 				precision: 2
 			}
@@ -147,8 +147,8 @@ Page {
 			ListQuantityItem {
 				//% "Top section voltage"
 				text: qsTrId("battery_top_section_voltage")
-				visible: midVoltage.valid
-				value: midVoltage.valid && !isNaN(root.battery.voltage) ? root.battery.voltage - midVoltage.value : NaN
+				visible: midVoltage.isValid
+				value: midVoltage.isValid && !isNaN(root.battery.voltage) ? root.battery.voltage - midVoltage.value : NaN
 				unit: VenusOS.Units_Volt
 				precision: 2
 			}
@@ -157,7 +157,7 @@ Page {
 				//% "Bottom section voltage"
 				text: qsTrId("battery_bottom_section_voltage")
 				value: midVoltage.value === undefined ? NaN : midVoltage.value
-				visible: midVoltage.valid
+				visible: midVoltage.isValid
 				unit: VenusOS.Units_Volt
 				precision: 2
 			}
@@ -165,24 +165,24 @@ Page {
 			ListQuantityItem {
 				//% "Mid-point deviation"
 				text: qsTrId("battery_mid_point_deviation")
-				dataSource: root.battery.serviceUid + "/Dc/0/MidVoltageDeviation"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.battery.serviceUid + "/Dc/0/MidVoltageDeviation"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_Percentage
 			}
 
 			ListQuantityItem {
 				//% "Consumed AmpHours"
 				text: qsTrId("battery_consumed_amphours")
-				dataSource: root.battery.serviceUid + "/ConsumedAmphours"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.battery.serviceUid + "/ConsumedAmphours"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_AmpHour
 			}
 
 			ListQuantityItem {
 				//% "Bus voltage"
 				text: qsTrId("battery_buss_voltage")
-				dataSource: root.battery.serviceUid + "/BussVoltage"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.battery.serviceUid + "/BussVoltage"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_Volt
 				precision: 2
 			}
@@ -190,16 +190,16 @@ Page {
 			ListTextItem {
 				//% "Time-to-go"
 				text: qsTrId("battery_time_to_go")
-				visible: defaultVisible && dataSeen
+				visible: defaultVisible && dataItem.seen
 				secondaryText: Utils.secondsToString(root.battery.timeToGo)
 			}
 
 			ListRelayState {
-				dataSource: root.battery.serviceUid + "/Relay/0/State"
+				dataItem.uid: root.battery.serviceUid + "/Relay/0/State"
 			}
 
 			ListAlarmState {
-				dataSource: root.battery.serviceUid + "/Alarms/Alarm"
+				dataItem.uid: root.battery.serviceUid + "/Alarms/Alarm"
 			}
 
 			ListNavigationItem {
@@ -258,15 +258,15 @@ Page {
 
 				//% "Diagnostics"
 				text: qsTrId("battery_settings_diagnostics")
-				visible: lastError.valid
+				visible: lastError.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: lastError
-					source: root.battery.serviceUid + "/Diagnostics/LastErrors/1/Error"
+					uid: root.battery.serviceUid + "/Diagnostics/LastErrors/1/Error"
 				}
 			}
 
@@ -283,46 +283,46 @@ Page {
 			ListNavigationItem {
 				//% "Fuses"
 				text: qsTrId("battery_settings_fuses")
-				visible: nrOfDistributors.valid && nrOfDistributors.value > 0
+				visible: nrOfDistributors.isValid && nrOfDistributors.value > 0
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxDistributorList.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: nrOfDistributors
-					source: root.battery.serviceUid + "/NrOfDistributors"
+					uid: root.battery.serviceUid + "/NrOfDistributors"
 				}
 			}
 
 			ListNavigationItem {
 				//% "IO"
 				text: qsTrId("battery_settings_io")
-				visible: allowToCharge.valid
+				visible: allowToCharge.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonIo.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: allowToCharge
-					source: root.battery.serviceUid + "/Io/AllowToCharge"
+					uid: root.battery.serviceUid + "/Io/AllowToCharge"
 				}
 			}
 
 			ListNavigationItem {
 				//% "System"
 				text: qsTrId("battery_settings_system")
-				visible: nrOfBatteries.valid
+				visible: nrOfBatteries.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonSystem.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: nrOfBatteries
-					source: root.battery.serviceUid +"/System/NrOfBatteries"
+					uid: root.battery.serviceUid +"/System/NrOfBatteries"
 				}
 			}
 
@@ -337,25 +337,25 @@ Page {
 			ListNavigationItem {
 				//% "Parameters"
 				text: qsTrId("battery_settings_parameters")
-				visible: cvl.valid || ccl.valid || dcl.valid
+				visible: cvl.isValid || ccl.isValid || dcl.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryParameters.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: cvl
-					source: root.battery.serviceUid + "/Info/MaxChargeVoltage"
+					uid: root.battery.serviceUid + "/Info/MaxChargeVoltage"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: ccl
-					source: root.battery.serviceUid + "/Info/MaxChargeCurrent"
+					uid: root.battery.serviceUid + "/Info/MaxChargeCurrent"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: dcl
-					source: root.battery.serviceUid + "/Info/MaxDischargeCurrent"
+					uid: root.battery.serviceUid + "/Info/MaxDischargeCurrent"
 				}
 			}
 
@@ -365,7 +365,7 @@ Page {
 				//% "Press to redetect"
 				secondaryText: qsTrId("battery_press_to_redetect")
 				enabled: redetect.value === 0
-				visible: redetect.valid
+				visible: redetect.isValid
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: {
 					redetect.setValue(1)
@@ -373,27 +373,27 @@ Page {
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("battery_redetecting_the_battery_note"), 10000)
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: redetect
-					source: root.battery.serviceUid + "/Redetect"
+					uid: root.battery.serviceUid + "/Redetect"
 				}
 			}
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: midVoltage
-		source: root.battery.serviceUid + "/Dc/0/MidVoltage"
+		uid: root.battery.serviceUid + "/Dc/0/MidVoltage"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: productId
-		source: root.battery.serviceUid + "/ProductId"
+		uid: root.battery.serviceUid + "/ProductId"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: hasSettings
-		source: root.battery.serviceUid + "/Settings/HasSettings"
+		uid: root.battery.serviceUid + "/Settings/HasSettings"
 	}
 
 	VeQItemSortTableModel {

@@ -17,7 +17,7 @@ Item {
 		MockDevice {
 			property real aggregate: 101
 
-			serviceUid: "com.victronenergy.pulsemeter.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.pulsemeter.ttyUSB" + deviceInstance
 			name: "PulseMeter" + deviceInstance
 		}
 	}

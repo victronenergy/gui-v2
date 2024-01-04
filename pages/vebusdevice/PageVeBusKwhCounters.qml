@@ -19,12 +19,12 @@ Page {
 			ListTextItem {
 				//% "VE.Bus Quirks"
 				text: qsTrId("vebus_quirks")
-				dataSource: service + "/Quirks"
+				dataItem.uid: service + "/Quirks"
 			}
 
 			ListRadioButtonGroup {
 				text: "Power Type"
-				dataSource: service + "/Ac/PowerMeasurementType"
+				dataItem.uid: service + "/Ac/PowerMeasurementType"
 				enabled: false
 				optionModel: [
 					{ display: "Apparent power, phase masters", value: 0 },
@@ -43,11 +43,11 @@ Page {
 
 					ListTextItem {
 
-						property quantityInfo value: Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour, dataValue)
+						property quantityInfo value: Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour, dataItem.value)
 
 						text: displayText
 						secondaryText: value.number + value.unit
-						dataSource: bindPrefix + pathSuffix
+						dataItem.uid: bindPrefix + pathSuffix
 					}
 				}
 			}

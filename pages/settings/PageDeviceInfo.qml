@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import QtQuick.Controls.impl as CP
 import Victron.Utils
 
@@ -21,8 +22,8 @@ Page {
 			ListTextItem {
 				//% "Connection"
 				text: qsTrId("settings_deviceinfo_connection")
-				dataSource: root.bindPrefix + "/Mgmt/Connection"
-				dataInvalidate: false
+				dataItem.uid: root.bindPrefix + "/Mgmt/Connection"
+				dataItem.invalidate: false
 				secondaryLabel.rightPadding: connectedIcon.visible ? connectedIcon.width + Theme.geometry_listItem_content_spacing : 0
 
 				CP.ColorImage {
@@ -35,28 +36,28 @@ Page {
 					}
 					color: Theme.color_green
 					source: "/images/icon_checkmark_32.svg"
-					visible: connectedDataPoint.value === 1
+					visible: connectedDataItem.value === 1
 				}
 
-				DataPoint {
-					id: connectedDataPoint
+				VeQuickItem {
+					id: connectedDataItem
 
-					source: root.bindPrefix + "/Connected"
+					uid: root.bindPrefix + "/Connected"
 				}
 			}
 
 			ListTextItem {
 				//% "Product"
 				text: qsTrId("settings_deviceinfo_product")
-				dataSource: root.bindPrefix + "/ProductName"
-				dataInvalidate: false
+				dataItem.uid: root.bindPrefix + "/ProductName"
+				dataItem.invalidate: false
 			}
 
 			ListTextField {
 				//% "Name"
 				text: qsTrId("settings_deviceinfo_name")
-				dataSource: root.bindPrefix + "/CustomName"
-				dataInvalidate: false
+				dataItem.uid: root.bindPrefix + "/CustomName"
+				dataItem.invalidate: false
 				textField.maximumLength: 32
 				placeholderText: CommonWords.custom_name
 			}
@@ -64,43 +65,43 @@ Page {
 			ListTextItem {
 				//% "Product ID"
 				text: qsTrId("settings_deviceinfo_product_id")
-				secondaryText: Utils.toHexFormat(dataValue)
-				dataSource: root.bindPrefix + "/ProductId"
-				dataInvalidate: false
+				secondaryText: Utils.toHexFormat(dataItem.value)
+				dataItem.uid: root.bindPrefix + "/ProductId"
+				dataItem.invalidate: false
 			}
 
 			ListFirmwareVersionItem {
-				dataSource: root.bindPrefix + "/FirmwareVersion"
-				dataInvalidate: false
+				dataItem.uid: root.bindPrefix + "/FirmwareVersion"
+				dataItem.invalidate: false
 			}
 
 			ListTextItem {
 				//% "Hardware version"
 				text: qsTrId("settings_deviceinfo_hardware_version")
-				dataSource: root.bindPrefix + "/HardwareVersion"
-				dataInvalidate: false
-				visible: dataValid
+				dataItem.uid: root.bindPrefix + "/HardwareVersion"
+				dataItem.invalidate: false
+				visible: dataItem.isValid
 			}
 
 			ListTextItem {
 				text: CommonWords.vrm_instance
-				dataSource: root.bindPrefix + "/DeviceInstance"
-				dataInvalidate: false
+				dataItem.uid: root.bindPrefix + "/DeviceInstance"
+				dataItem.invalidate: false
 			}
 
 			ListTextItem {
 				text: CommonWords.serial_number
-				dataSource: root.bindPrefix + "/Serial"
-				dataInvalidate: false
-				visible: dataValid
+				dataItem.uid: root.bindPrefix + "/Serial"
+				dataItem.invalidate: false
+				visible: dataItem.isValid
 			}
 
 			ListTextItem {
 				//% "Device name"
 				text: qsTrId("settings_deviceinfo_device_name")
-				dataSource: root.bindPrefix + "/DeviceName"
-				dataInvalidate: false
-				visible: dataValid
+				dataItem.uid: root.bindPrefix + "/DeviceName"
+				dataItem.invalidate: false
+				visible: dataItem.isValid
 			}
 		}
 	}

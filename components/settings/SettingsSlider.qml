@@ -5,16 +5,12 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Slider {
 	id: root
 
-	property alias dataSource: dataPoint.source
-	readonly property alias dataValue: dataPoint.value
-	readonly property alias dataValid: dataPoint.valid
-	readonly property alias dataSeen: dataPoint.seen
-	property alias dataInvalidate: dataPoint.invalidate
-	function setDataValue(v) { dataPoint.setValue(v) }
+	readonly property alias dataItem: dataItem
 
 	property real _emittedValue
 
@@ -23,11 +19,11 @@ Slider {
 	implicitWidth: parent ? parent.width : 0
 	implicitHeight: Theme.geometry_listItem_height
 	live: false
-	from: dataPoint.min !== undefined ? dataPoint.min : 0
-	to: dataPoint.max !== undefined ? dataPoint.max : 1
+	from: dataItem.min !== undefined ? dataItem.min : 0
+	to: dataItem.max !== undefined ? dataItem.max : 1
 	stepSize: (to-from) / Theme.geometry_listItem_slider_stepDivsion
-	value: to > from && dataValid ? dataValue : 0
-	enabled: dataSource === "" || dataValid
+	value: to > from && dataItem.isValid ? dataItem.value : 0
+	enabled: dataItem.uid === "" || dataItem.isValid
 
 	onPressedChanged: {
 		if (root.value !== root._emittedValue) {
@@ -37,8 +33,8 @@ Slider {
 	}
 
 	onValueChanged: function(value) {
-		if (dataSource.length > 0) {
-			dataPoint.setValue(value)
+		if (dataItem.uid.length > 0) {
+			dataItem.setValue(value)
 		}
 	}
 
@@ -90,7 +86,7 @@ Slider {
 		}
 	}
 
-	DataPoint {
-		id: dataPoint
+	VeQuickItem {
+		id: dataItem
 	}
 }

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import QtQuick.Controls as C
 import Victron.Utils
 
@@ -40,10 +41,10 @@ Page {
 				//% "Limit managed battery charge voltage"
 				text: qsTrId("settings_dvcc_limit_managed_battery_charge_voltage")
 				updateOnClick: false
-				checked: maxChargeVoltage.dataValid && maxChargeVoltage.dataValue > 0
+				checked: maxChargeVoltage.dataItem.isValid && maxChargeVoltage.dataItem.value > 0
 				visible: defaultVisible && commonSettings.dvccActive
 				onClicked: {
-					maxChargeVoltage.setDataValue(maxChargeVoltage.dataValue === 0.0 ? 55.0 : 0.0)
+					maxChargeVoltage.dataItem.setValue(maxChargeVoltage.dataItem.value === 0.0 ? 55.0 : 0.0)
 				}
 			}
 
@@ -53,7 +54,7 @@ Page {
 				//% "Maximum charge voltage"
 				text: qsTrId("settings_dvcc_max_charge_voltage")
 				visible: defaultVisible && maxChargeVoltageSwitch.visible && maxChargeVoltageSwitch.checked
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeVoltage"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeVoltage"
 				suffix: "V"
 				decimals: 1
 			}
@@ -61,7 +62,7 @@ Page {
 			ListDvccSwitch {
 				//% "SVS - Shared voltage sense"
 				text: qsTrId("settings_dvcc_shared_voltage_sense")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedVoltageSense"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedVoltageSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
@@ -70,7 +71,7 @@ Page {
 
 				//% "STS - Shared temperature sense"
 				text: qsTrId("settings_dvcc_shared_temp_sense")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedTemperatureSense"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedTemperatureSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
@@ -78,13 +79,13 @@ Page {
 				id: temperatureServiceRadioButtons
 
 				text: CommonWords.temperature_sensor
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/TemperatureService"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/TemperatureService"
 				//% "Unavailable sensor, set another"
 				defaultSecondaryText: qsTrId("settings_system_unavailable_sensor")
 				visible: defaultVisible && commonSettings.dvccActive && sharedTempSense.checked
 
-				DataPoint {
-					source: Global.system.serviceUid + "/AvailableTemperatureServices"
+				VeQuickItem {
+					uid: Global.system.serviceUid + "/AvailableTemperatureServices"
 					onValueChanged: {
 						if (value === undefined) {
 							return
@@ -93,7 +94,7 @@ Page {
 						if (modelArray) {
 							temperatureServiceRadioButtons.optionModel = modelArray
 						} else {
-							console.warn("Unable to parse data from", source)
+							console.warn("Unable to parse data from", uid)
 						}
 					}
 				}
@@ -102,7 +103,7 @@ Page {
 			ListTextItem {
 				//% "Used sensor"
 				text: qsTrId("settings_dvcc_used_sensor")
-				dataSource: Global.system.serviceUid + "/AutoSelectedTemperatureService"
+				dataItem.uid: Global.system.serviceUid + "/AutoSelectedTemperatureService"
 				visible: defaultVisible
 					&& sharedTempSense.checked
 					&& commonSettings.dvccActive
@@ -114,14 +115,14 @@ Page {
 
 				//% "SCS - Shared current sense"
 				text: qsTrId("settings_dvcc_shared_current_sense")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryCurrentSense"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryCurrentSense"
 				visible: defaultVisible && commonSettings.dvccActive
 			}
 
 			ListRadioButtonGroup {
 				//% "SCS status"
 				text: qsTrId("settings_dvcc_scs_status")
-				dataSource: Global.system.serviceUid + "/Control/BatteryCurrentSense"
+				dataItem.uid: Global.system.serviceUid + "/Control/BatteryCurrentSense"
 				visible: defaultVisible && commonSettings.dvccActive && sharedCurrentSense.checked
 				enabled: false
 
@@ -149,7 +150,7 @@ Page {
 
 				//% "Controlling BMS"
 				text: qsTrId("settings_dvcc_controlling_bms")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BmsInstance"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BmsInstance"
 				optionModel: defaultOptionModel
 
 				//: Shown when BMS instance is invalid
@@ -157,8 +158,8 @@ Page {
 				defaultSecondaryText: qsTrId("settings_dvcc_unavailable_bms")
 
 
-				DataPoint {
-					source: Global.system.serviceUid + "/AvailableBmsServices"
+				VeQuickItem {
+					uid: Global.system.serviceUid + "/AvailableBmsServices"
 					onValueChanged: {
 						if (value === undefined) {
 							return
@@ -180,25 +181,25 @@ Page {
 				//% "Auto selected"
 				text: qsTrId("settings_dvcc_auto_selected")
 				visible: defaultVisible && bmsOptions.currentValue === -1
-				secondaryText: bmsService.valid
+				secondaryText: bmsService.isValid
 							   ? bmsProductName.value || bmsCustomName.value
 								 //: Indicates no option is selected
 								 //% "None"
 							   : qsTrId("settings_dvcc_auto_selected_none")
 
-				DataPoint {
+				VeQuickItem {
 					id: bmsService
-					source: Global.system.serviceUid + "/ActiveBmsService"
+					uid: Global.system.serviceUid + "/ActiveBmsService"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: bmsProductName
-					source: bmsService.valid ? bmsService.value + "/ProductName" : ""
+					uid: bmsService.isValid ? bmsService.value + "/ProductName" : ""
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: bmsCustomName
-					source: bmsService.valid ? bmsService.value + "/CustomName" : ""
+					uid: bmsService.isValid ? bmsService.value + "/CustomName" : ""
 				}
 			}
 		}

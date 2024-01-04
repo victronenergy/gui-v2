@@ -32,28 +32,28 @@ Page {
 			//% "%1: %2"
 			text: qsTrId("smappee_ct_list_type").arg(ctIndex + 1).arg(typeLookup.typeName)
 			secondaryText: phase.value === undefined ? "" : "L%1".arg(phase.value + 1)
-			visible: type.valid
+			visible: type.isValid
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml",
 						{ "bindPrefix": root.bindPrefix, ctIndex: menu.ctIndex })
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: type
-				source: model.uid + "/Type"
+				uid: model.uid + "/Type"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: phase
-				source: model.uid + "/Phase"
+				uid: model.uid + "/Phase"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: typeLookup
 
 				property string typeName
 
-				source: type.value === undefined ? "" : root.bindPrefix + "/CTTypes"
+				uid: type.value === undefined ? "" : root.bindPrefix + "/CTTypes"
 
 				onValueChanged: {
 					if (isNaN(type.value)) {

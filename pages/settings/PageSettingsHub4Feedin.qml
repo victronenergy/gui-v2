@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -18,7 +19,7 @@ Page {
 
 				//% "AC-coupled PV - feed in excess"
 				text: qsTrId("settings_ess_ac_coupled_pv")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/PreventFeedback"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/PreventFeedback"
 				visible: defaultVisible && hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 				invertSourceValue: true
 			}
@@ -28,14 +29,14 @@ Page {
 
 				//% "DC-coupled PV - feed in excess"
 				text: qsTrId("settings_ess_dc_coupled_pv")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn"
 				visible: defaultVisible
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
-					&& doNotFeedInvOvervoltage.valid
+					&& doNotFeedInvOvervoltage.isValid
 
-				DataPoint {
+				VeQuickItem {
 					id: doNotFeedInvOvervoltage
-					source: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/DoNotFeedInOvervoltage" : ""
+					uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/DoNotFeedInOvervoltage" : ""
 				}
 			}
 
@@ -48,9 +49,9 @@ Page {
 				checked: maxFeedInPower.value >= 0
 				onCheckedChanged: {
 					if (checked && maxFeedInPower.value < 0)
-						maxFeedInPower.setDataValue(1000)
+						maxFeedInPower.dataItem.setValue(1000)
 					else if (!checked && maxFeedInPower.value >= 0)
-						maxFeedInPower.setDataValue(-1)
+						maxFeedInPower.dataItem.setValue(-1)
 				}
 			}
 
@@ -60,20 +61,21 @@ Page {
 				//% "Maximum feed-in"
 				text: qsTrId("settings_ess_max_feed_in")
 				visible: defaultVisible && restrictFeedIn.visible && restrictFeedIn.checked
-				dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxFeedInPower"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxFeedInPower"
 				suffix: "W"
 				to: 300000
 				stepSize: 100
 			}
 
 			ListTextItem {
+				id: feedInLimitingActive
 				//% "Feed-in limiting active"
 				text: qsTrId("settings_ess_feed_in_limiting_active")
 				visible: defaultVisible
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
-					&& dataValid
-				dataSource: BackendConnection.serviceUidForType("hub4") +"/PvPowerLimiterActive"
-				secondaryText: CommonWords.yesOrNo(dataValue)
+					&& dataItem.isValid
+				dataItem.uid: BackendConnection.serviceUidForType("hub4") +"/PvPowerLimiterActive"
+				secondaryText: CommonWords.yesOrNo(feedInLimitingActive.dataItem.value)
 			}
 		}
 	}

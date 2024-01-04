@@ -6,22 +6,23 @@
 import QtQuick
 import Victron.Utils
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root // TODO: update this UI when a design is available
 
 	readonly property string froniusServiceUid: BackendConnection.serviceUidForType("fronius")
 
-	DataPoint {
+	VeQuickItem {
 		id: autoDetectItem
 
-		source: root.froniusServiceUid + "/AutoDetect"
+		uid: root.froniusServiceUid + "/AutoDetect"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: scanProgressItem
 
-		source: root.froniusServiceUid + "/ScanProgress"
+		uid: root.froniusServiceUid + "/ScanProgress"
 	}
 
 	GradientListView {
@@ -54,13 +55,13 @@ Page {
 			ListPortField {
 				//% "TCP port"
 				text: qsTrId("page_settings_fronius_tcp_port")
-				visible: dataValue !== 80
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Fronius/PortNumber"
+				visible: dataItem.value !== 80
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/PortNumber"
 			}
 
 			ListSwitch {
 				text: CommonWords.automatic_scanning
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Fronius/AutoScan"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/AutoScan"
 			}
 		}
 	}

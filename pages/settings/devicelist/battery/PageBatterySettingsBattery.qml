@@ -5,16 +5,17 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
 
 	property string bindPrefix
-	readonly property bool locked: lock.valid && lock.value
+	readonly property bool locked: lock.isValid && lock.value
 
-	DataPoint {
+	VeQuickItem {
 		id: lock
-		source: root.bindPrefix + "/Settings/Battery/Locked"
+		uid: root.bindPrefix + "/Settings/Battery/Locked"
 	}
 
 	GradientListView {
@@ -22,7 +23,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Nominal Voltage"
 				text: qsTrId("batterysettingsbattery_nominal_voltage")
-				dataSource: root.bindPrefix + "/Settings/Battery/NominalVoltage"
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/NominalVoltage"
 				optionModel: [
 					//% "12 Volt"
 					{ display: qsTrId("batterysettingsbattery_12_volt"), value: 12 },
@@ -31,24 +32,24 @@ Page {
 					//% "48 Volt"
 					{ display: qsTrId("batterysettingsbattery_48_volt"), value: 48 },
 				]
-				visible: defaultVisible && dataValid
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListSpinBox {
 				//% "Capacity"
 				text: qsTrId("batterysettingsbattery_capacity")
-				visible: defaultVisible && dataValid
+				visible: defaultVisible && dataItem.isValid
 				enabled: !root.locked
-				dataSource: root.bindPrefix + "/Settings/Battery/Capacity"
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/Capacity"
 				suffix: "Ah"
 			}
 
 			ListSpinBox {
 				//% "Charged voltage"
 				text: qsTrId("batterysettingsbattery_charged_voltage")
-				visible: defaultVisible && dataValid
+				visible: defaultVisible && dataItem.isValid
 				enabled: !root.locked
-				dataSource: root.bindPrefix + "/Settings/Battery/ChargedVoltage"
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/ChargedVoltage"
 				suffix: "V"
 				decimals: 1
 				stepSize: 0.1
@@ -58,8 +59,8 @@ Page {
 				//% "Tail current"
 				text: qsTrId("batterysettingsbattery_tail_current")
 				enabled: !root.locked
-				visible: defaultVisible && dataValid
-				dataSource: root.bindPrefix + "/Settings/Battery/TailCurrent"
+				visible: defaultVisible && dataItem.isValid
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/TailCurrent"
 				suffix: "%"
 				decimals: 1
 				stepSize: 0.1
@@ -69,8 +70,8 @@ Page {
 				//% "Charged detection time"
 				text: qsTrId("batterysettingsbattery_charged_detection_time")
 				enabled: !root.locked
-				visible: defaultVisible && dataValid
-				dataSource: root.bindPrefix + "/Settings/Battery/ChargedDetectionTime"
+				visible: defaultVisible && dataItem.isValid
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/ChargedDetectionTime"
 				suffix: "min"
 			}
 
@@ -78,8 +79,8 @@ Page {
 				//% "Peukert exponent"
 				text: qsTrId("batterysettingsbattery_peukert_exponent")
 				enabled: !root.locked
-				visible: defaultVisible && dataValid
-				dataSource: root.bindPrefix + "/Settings/Battery/PeukertExponent"
+				visible: defaultVisible && dataItem.isValid
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/PeukertExponent"
 				decimals: 2
 				stepSize: 0.01
 			}
@@ -88,8 +89,8 @@ Page {
 				//% "Charge efficiency factor"
 				text: qsTrId("batterysettingsbattery_charge_efficiency_factor")
 				enabled: !root.locked
-				visible: defaultVisible && dataValid
-				dataSource: root.bindPrefix + "/Settings/Battery/ChargeEfficiency"
+				visible: defaultVisible && dataItem.isValid
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/ChargeEfficiency"
 				suffix: "%"
 			}
 
@@ -97,8 +98,8 @@ Page {
 				//% "Current threshold"
 				text: qsTrId("batterysettingsbattery_current_threshold")
 				enabled: !root.locked
-				visible: defaultVisible && dataValid
-				dataSource: root.bindPrefix + "/Settings/Battery/CurrentThreshold"
+				visible: defaultVisible && dataItem.isValid
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/CurrentThreshold"
 				suffix: "A"
 				decimals: 2
 				stepSize: 0.01
@@ -108,19 +109,19 @@ Page {
 				//% "Time-to-go averaging period"
 				text: qsTrId("batterysettingsbattery_time_to_go_averaging_period")
 				enabled: !root.locked
-				visible: defaultVisible && dataValid
-				dataSource: root.bindPrefix + "/Settings/Battery/TTGAveragingPeriod"
+				visible: defaultVisible && dataItem.isValid
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/TTGAveragingPeriod"
 				suffix: "min"
 			}
 
 			ListLabel {
 				//% "Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu"
 				text: qsTrId("batterysettingsbattery_time_to_go_discharge_note")
-				visible: dischargeFloorLinkedToRelay.valid && dischargeFloorLinkedToRelay.value !== 0
+				visible: dischargeFloorLinkedToRelay.isValid && dischargeFloorLinkedToRelay.value !== 0
 
-				DataPoint {
+				VeQuickItem {
 					id: dischargeFloorLinkedToRelay
-					source: root.bindPrefix + "/Settings/DischargeFloorLinkedToRelay"
+					uid: root.bindPrefix + "/Settings/DischargeFloorLinkedToRelay"
 				}
 			}
 
@@ -128,17 +129,17 @@ Page {
 				//% "Time-to-go discharge floor"
 				text: qsTrId("batterysettingsbattery_time_to_go_discharge_floor")
 				enabled: !root.locked
-				visible: defaultVisible && dataValid
-				dataSource: root.bindPrefix + "/Settings/Battery/DischargeFloor"
+				visible: defaultVisible && dataItem.isValid
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/DischargeFloor"
 				suffix: "%"
 			}
 
 			ListTextItem {
 				//% "Current offset"
 				text: qsTrId("batterysettingsbattery_current_offset")
-				dataSource: root.bindPrefix + "/Settings/Battery/CurrentOffset"
+				dataItem.uid: root.bindPrefix + "/Settings/Battery/CurrentOffset"
 				showAccessLevel: VenusOS.User_AccessType_User
-				visible: defaultVisible && dataValid
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListButton {
@@ -148,11 +149,11 @@ Page {
 				secondaryText: qsTrId("batterysettingsbattery_press_to_sync")
 				enabled: !root.locked
 				onClicked: sync.setValue(1)
-				visible: sync.valid
+				visible: sync.isValid
 
-				DataPoint {
+				VeQuickItem {
 					id: sync
-					source: root.bindPrefix + "/Settings/Battery/Synchronize"
+					uid: root.bindPrefix + "/Settings/Battery/Synchronize"
 				}
 			}
 
@@ -162,11 +163,11 @@ Page {
 				//% "Press to set to 0"
 				secondaryText: qsTrId("batterysettingsbattery_press_to_set_to_0")
 				onClicked: zero.setValue(1)
-				visible: zero.valid
+				visible: zero.isValid
 
-				DataPoint {
+				VeQuickItem {
 					id: zero
-					source: root.bindPrefix + "/Settings/Battery/ZeroCurrent"
+					uid: root.bindPrefix + "/Settings/Battery/ZeroCurrent"
 				}
 			}
 		}

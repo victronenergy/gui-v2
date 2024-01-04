@@ -20,7 +20,7 @@ Item {
 		MockDevice {
 			property int state
 
-			serviceUid: "com.victronenergy.multi.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.multi.ttyUSB" + deviceInstance
 			name: "MultiRsDevice" + deviceInstance
 		}
 	}

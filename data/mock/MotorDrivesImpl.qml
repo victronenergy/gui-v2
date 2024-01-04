@@ -17,7 +17,7 @@ Item {
 		MockDevice {
 			property real motorRpm: 9000
 
-			serviceUid: "com.victronenergy.motordrive.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.motordrive.ttyUSB" + deviceInstance
 			name: "MotorDrive" + deviceInstance
 		}
 	}

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -14,10 +15,10 @@ Page {
 	// wakespeedProductId should always be equal to VE_PROD_ID_WAKESPEED_WS500
 	readonly property int wakespeedProductId: 0xB080
 
-	DataPoint {
-		id: productIdDataPoint
+	VeQuickItem {
+		id: productIdDataItem
 
-		source: root.bindPrefix + "/ProductId"
+		uid: root.bindPrefix + "/ProductId"
 		onValueChanged: {
 			if (value !== undefined && modelLoader.status === Loader.Null) {
 				if (value === wakespeedProductId) {

@@ -16,8 +16,8 @@ QtObject {
 	readonly property real currentLimit: _currentLimit.value === undefined ? -1 : _currentLimit.value
 	readonly property bool currentLimitAdjustable: _currentLimitAdjustable.value === 1
 
-	property DataPoint _type: DataPoint {
-		source: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput" + inputNumber
+	property VeQuickItem _type: VeQuickItem {
+		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput" + inputNumber
 	}
 
 	readonly property VeQuickItem _currentLimit: VeQuickItem {

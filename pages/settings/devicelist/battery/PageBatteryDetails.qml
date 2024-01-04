@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 Page {
@@ -87,9 +88,9 @@ Page {
 				text: qsTrId("batterydetails_installed_available_capacity")
 				textModel: [ details.installedCapacity.value, capacity.value ]
 
-				DataPoint {
+				VeQuickItem {
 					id: capacity
-					source: root.bindPrefix + "/Capacity"
+					uid: root.bindPrefix + "/Capacity"
 				}
 			}
 		}

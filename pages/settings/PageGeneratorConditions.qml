@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -12,30 +13,30 @@ Page {
 
 	property string bindPrefix
 	property string startStopBindPrefix
-	property var availableBatteryMonitors: availableBatteryServices.valid ? availableBatteryServices.value : ""
+	property var availableBatteryMonitors: availableBatteryServices.isValid ? availableBatteryServices.value : ""
 
-	DataPoint {
+	VeQuickItem {
 		id: availableBatteryServices
 
-		source: Global.system.serviceUid + "/AvailableBatteryMeasurements"
+		uid: Global.system.serviceUid + "/AvailableBatteryMeasurements"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: stopOnAc1Item
 
-		source: bindPrefix + "/StopWhenAc1Available"
+		uid: bindPrefix + "/StopWhenAc1Available"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: stopOnAc2Item
 
-		source: bindPrefix + "/StopWhenAc2Available"
+		uid: bindPrefix + "/StopWhenAc2Available"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: capabilities
 
-		source: startStopBindPrefix + "/Capabilities"
+		uid: startStopBindPrefix + "/Capabilities"
 	}
 
 	GradientListView {
@@ -50,14 +51,14 @@ Page {
 				text: qsTrId("page_generator_conditions_battery_monitor")
 				//% "Unavailable monitor, set another"
 				defaultSecondaryText: qsTrId("page_generator_conditions_unavailable_monitor_set_another")
-				dataSource: bindPrefix + "/BatteryService"
-				visible: dataValue !== "default"
+				dataItem.uid: bindPrefix + "/BatteryService"
+				visible: dataItem.value !== "default"
 			}
 
 			ListRadioButtonGroup {
 				//% "On loss of communication"
 				text: qsTrId("page_generator_conditions_on_loss_of_communication")
-				dataSource: bindPrefix + "/OnLossCommunication"
+				dataItem.uid: bindPrefix + "/OnLossCommunication"
 				optionModel: [
 					//% "Stop generator"
 					{ display: qsTrId("page_generator_conditions_stop_generator"), value: 0 },
@@ -119,10 +120,10 @@ Page {
 				secondaryText: acLoadEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorAcLoad.qml", { bindPrefix: root.bindPrefix + "/AcLoad"})
 
-				DataPoint {
+				VeQuickItem {
 					id: acLoadEnabled
 
-					source: root.bindPrefix + "/AcLoad/Enabled"
+					uid: root.bindPrefix + "/AcLoad/Enabled"
 				}
 			}
 
@@ -151,10 +152,10 @@ Page {
 				secondaryText: testRunEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorTestRun.qml", { title: text, bindPrefix: root.bindPrefix })
 
-				DataPoint {
+				VeQuickItem {
 					id: testRunEnabled
 
-					source: root.bindPrefix + "/TestRun/Enabled"
+					uid: root.bindPrefix + "/TestRun/Enabled"
 				}
 			}
 		}

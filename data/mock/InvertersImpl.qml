@@ -39,7 +39,7 @@ Item {
 				property int powerUnit: VenusOS.Units_Watt
 			}
 
-			serviceUid: "com.victronenergy.inverter.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.inverter.ttyUSB" + deviceInstance
 			name: "Inverter" + deviceInstance
 		}
 	}

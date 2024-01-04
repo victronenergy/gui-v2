@@ -6,6 +6,7 @@
 import QtQuick
 import QtQml
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 Page {
@@ -18,19 +19,19 @@ Page {
 	property int forceEqCmd: 1
 
 
-	DataPoint {
+	VeQuickItem {
 		id: systemType
-		source: Global.system.serviceUid + "/SystemType"
+		uid: Global.system.serviceUid + "/SystemType"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: setChargerState
-		source: root.veBusDevice.serviceUid + "/VebusSetChargeState"
+		uid: root.veBusDevice.serviceUid + "/VebusSetChargeState"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: vebusSubState
-		source: root.veBusDevice.serviceUid + "/VebusChargeState"
+		uid: root.veBusDevice.serviceUid + "/VebusChargeState"
 		onValueChanged: {
 			if (value === VenusOS.VeBusDevice_ChargeState_Equalize) {
 				startManualEq = false
@@ -38,25 +39,25 @@ Page {
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: redetectSystem
-		source: root.veBusDevice.serviceUid + "/RedetectSystem"
+		uid: root.veBusDevice.serviceUid + "/RedetectSystem"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: systemReset
-		source: root.veBusDevice.serviceUid + "/SystemReset"
+		uid: root.veBusDevice.serviceUid + "/SystemReset"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: firmwareVersion
-		source: root.veBusDevice.serviceUid + "/FirmwareVersion"
+		uid: root.veBusDevice.serviceUid + "/FirmwareVersion"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: masterHasNetworkQuality
 
-		source: root.veBusDevice.serviceUid + "/Devices/0/ExtendStatus/VeBusNetworkQualityCounter"
+		uid: root.veBusDevice.serviceUid + "/Devices/0/ExtendStatus/VeBusNetworkQualityCounter"
 	}
 
 	Timer {
@@ -199,7 +200,7 @@ Page {
 								//% "Press to redetect"
 							 : qsTrId("vebus_device_press_to_redetect")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				enabled: redetectSystem.valid
+				enabled: redetectSystem.isValid
 				onClicked: redetectSystem.setValue(1)
 			}
 
@@ -212,32 +213,32 @@ Page {
 								//% "Press to restart"
 							 : qsTrId("vebus_device_press_to_restart")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				enabled: systemReset.valid
+				enabled: systemReset.isValid
 				onClicked: systemReset.setValue(1)
 			}
 
 			ListTextItem {
 				//% "AC input 1 ignored"
 				text: qsTrId("vebus_device_ac_input_1_ignored")
-				secondaryText: dataValue ? CommonWords.yes : CommonWords.no
-				dataSource: root.veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn1"
-				visible: dataValid && isMulti
+				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
+				dataItem.uid: root.veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn1"
+				visible: dataItem.isValid && isMulti
 			}
 
 			ListTextItem {
 				//% "AC input 2 ignored"
 				text: qsTrId("vebus_device_ac_input_2_ignored")
-				secondaryText: dataValue ? CommonWords.yes : CommonWords.no
-				dataSource: root.veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn2"
-				visible: dataValid && isMulti
+				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
+				dataItem.uid: root.veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn2"
+				visible: dataItem.isValid && isMulti
 			}
 
 			ListRadioButtonGroup {
 				//% "ESS Relay test"
 				text: qsTrId("vebus_device_ess_relay_test")
-				dataSource: root.veBusDevice.serviceUid + "/Devices/0/ExtendStatus/WaitingForRelayTest"
+				dataItem.uid: root.veBusDevice.serviceUid + "/Devices/0/ExtendStatus/WaitingForRelayTest"
 				enabled: false
-				visible: dataValid && isEssOrHub4 && isMulti
+				visible: dataItem.isValid && isEssOrHub4 && isMulti
 				optionModel: [
 					//% "Completed"
 					{ display: qsTrId("vebus_device_ess_relay_test_completed"), value: 0 },
@@ -251,7 +252,7 @@ Page {
 				//% "VE.Bus diagnostics"
 				text: qsTrId("vebus_diagnostics")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				visible: defaultVisible && masterHasNetworkQuality.valid
+				visible: defaultVisible && masterHasNetworkQuality.isValid
 				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage)
 
 				Component {
@@ -269,8 +270,8 @@ Page {
 										ListTextItem {
 											//% "Network quality counter Phase L%1, device %2 (%3)"
 											text: qsTrId("vebus_veice_network_quality_counter").arg((index % 3) + 1).arg(Math.floor(index / 3) + 1).arg(index)
-											dataSource: root.veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"
-											visible: dataValid
+											dataItem.uid: root.veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"
+											visible: dataItem.isValid
 										}
 									}
 								}

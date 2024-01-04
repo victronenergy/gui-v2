@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -20,9 +21,9 @@ Page {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", { title: text })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: modbus
-					source: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+					uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
 				}
 			}
 
@@ -31,7 +32,7 @@ Page {
 
 				//% "MQTT on LAN (SSL)"
 				text: qsTrId("settings_services_mqtt_on_lan_ssl")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocal"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocal"
 			}
 
 			ListSwitch {
@@ -39,14 +40,14 @@ Page {
 
 				//% "MQTT on LAN (Plain-text)"
 				text: qsTrId("settings_services_mqtt_on_lan_insecure")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocalInsecure"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocalInsecure"
 				visible: mqtt.checked
 			}
 
 			ListSwitch {
 				//% "Console on VE.Direct 1"
 				text: qsTrId("settings_services_console_on_vedirect1")
-				dataSource: Global.venusPlatform.serviceUid + "/Services/Console/Enabled"
+				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/Console/Enabled"
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 
@@ -70,16 +71,16 @@ Page {
 					}
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: canInterface
-					source: Global.venusPlatform.serviceUid + "/CanBus/Interfaces"
+					uid: Global.venusPlatform.serviceUid + "/CanBus/Interfaces"
 				}
 			}
 
 			ListSwitch {
 				//% "CAN-bus over TCP/IP (Debug)"
 				text: qsTrId("settings_services_canbus_over_tcpip_debug")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/Socketcand"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Socketcand"
 				showAccessLevel: VenusOS.User_AccessType_Service
 			}
 		}

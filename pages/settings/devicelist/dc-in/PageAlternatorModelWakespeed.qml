@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 ObjectModel {
 	id: root
@@ -20,59 +21,59 @@ ObjectModel {
 			{ value: dcPower.value, unit: VenusOS.Units_Watt },
 		]
 
-		DataPoint {
+		VeQuickItem {
 			id: dcVoltage
-			source: root.bindPrefix + "/Dc/0/Voltage"
+			uid: root.bindPrefix + "/Dc/0/Voltage"
 		}
-		DataPoint {
+		VeQuickItem {
 			id: dcCurrent
-			source: root.bindPrefix + "/Dc/0/Current"
+			uid: root.bindPrefix + "/Dc/0/Current"
 		}
-		DataPoint {
+		VeQuickItem {
 			id: dcPower
-			source: root.bindPrefix + "/Dc/0/Power"
+			uid: root.bindPrefix + "/Dc/0/Power"
 		}
 	}
 
 	ListQuantityItem {
 		text: CommonWords.temperature
-		dataSource: root.bindPrefix + "/Dc/0/Temperature"
-		value: dataValid ? Global.systemSettings.convertTemperature(dataValue) : NaN
+		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+		value: dataItem.isValid ? Global.systemSettings.convertTemperature(dataItem.value) : NaN
 		unit: Global.systemSettings.temperatureUnit.value
 	}
 
 	ListTextItem {
 		text: CommonWords.state
-		secondaryText: Global.systemSettings.networkStatusToText(dataValue)
-		dataSource: root.bindPrefix + "/Link/NetworkStatus"
-		visible: defaultVisible && dataValid
+		secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
+		dataItem.uid: root.bindPrefix + "/Link/NetworkStatus"
+		visible: defaultVisible && dataItem.isValid
 	}
 
 	ListTextItem {
 		text: CommonWords.error
-		dataSource: root.bindPrefix + "/ErrorCode"
+		dataItem.uid: root.bindPrefix + "/ErrorCode"
 
 		// TODO get error description from WakespeedError when it is ported from velib -> veutil
-		secondaryText: dataValid  ? (dataValue === 0 ? CommonWords.no_error : "#" + dataValue) : ""
+		secondaryText: dataItem.isValid  ? (dataItem.value === 0 ? CommonWords.no_error : "#" + dataItem.value) : ""
 	}
 
 	ListQuantityItem {
 		//% "Field drive"
 		text: qsTrId("alternator_wakespeed_field_drive")
-		dataSource: root.bindPrefix + "/FieldDrive"
+		dataItem.uid: root.bindPrefix + "/FieldDrive"
 		unit: VenusOS.Units_Percentage
 	}
 
 	ListQuantityItem {
 		text: CommonWords.speed
-		dataSource: root.bindPrefix + "/Speed"
+		dataItem.uid: root.bindPrefix + "/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
 	}
 
 	ListQuantityItem {
 		//% "Engine speed"
 		text: qsTrId("alternator_wakespeed_engine_speed")
-		dataSource: root.bindPrefix + "/Engine/Speed"
+		dataItem.uid: root.bindPrefix + "/Engine/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
 	}
 

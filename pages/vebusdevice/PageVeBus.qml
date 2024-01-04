@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 Page {
@@ -17,22 +18,22 @@ Page {
 
 	title: veBusDevice.name
 
-	DataPoint {
+	VeQuickItem {
 		id: _acOutputPower
 
-		source: veBusDevice.serviceUid + "/Ac/Out/P"
+		uid: veBusDevice.serviceUid + "/Ac/Out/P"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: _acActiveInputPower
 
-		source: veBusDevice.serviceUid + "/Ac/ActiveIn/P"
+		uid: veBusDevice.serviceUid + "/Ac/ActiveIn/P"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: _numberOfPhases
 
-		source: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
+		uid: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
 	}
 
 	AcPhase{
@@ -59,51 +60,51 @@ Page {
 		serviceUid: veBusDevice.serviceUid
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: bmsMode
 
-		source: veBusDevice.serviceUid + "/Devices/Bms/Version"
+		uid: veBusDevice.serviceUid + "/Devices/Bms/Version"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: bmsType
 
-		source: veBusDevice.serviceUid + "/Bms/BmsType"
+		uid: veBusDevice.serviceUid + "/Bms/BmsType"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: bmsExpected
 
-		source: veBusDevice.serviceUid + "/Bms/BmsExpected"
+		uid: veBusDevice.serviceUid + "/Bms/BmsExpected"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: dmc
 
-		source: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
+		uid: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: mkVersion
 
-		source: root.veBusDevice.serviceUid + "/Interfaces/Mk2/Version"
+		uid: root.veBusDevice.serviceUid + "/Interfaces/Mk2/Version"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: mk3Update
 
-		source: Global.systemSettings.serviceUid + "/Settings/Vebus/AllowMk3Fw212Update"
+		uid: Global.systemSettings.serviceUid + "/Settings/Vebus/AllowMk3Fw212Update"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: preferRenewableEnergy
 
-		source: root.veBusDevice.serviceUid + "/Dc/0/PreferRenewableEnergy"
+		uid: root.veBusDevice.serviceUid + "/Dc/0/PreferRenewableEnergy"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: firmwareVersion
-		source: root.veBusDevice.serviceUid + "/FirmwareVersion"
+		uid: root.veBusDevice.serviceUid + "/FirmwareVersion"
 	}
 
 	GradientListView {
@@ -170,7 +171,7 @@ Page {
 								 :
 								   //% "Charge the battery to 100%"
 								   qsTrId("vebus_device_charge_the_battery_to_100")
-				visible: preferRenewableEnergy.valid && preferRenewableEnergy.value !== 2
+				visible: preferRenewableEnergy.isValid && preferRenewableEnergy.value !== 2
 				onClicked: Global.pageManager.pushPage(newPageComponent)
 
 				Component {
@@ -227,28 +228,28 @@ Page {
 			}
 
 			ListQuantityItem {
-				dataSource: veBusDevice.serviceUid + "/Dc/0/Voltage"
+				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Voltage"
 				//% "DC Voltage"
 				text: qsTrId("vebus_device_page_dc_voltage")
 				unit: VenusOS.Units_Volt
 			}
 
 			ListQuantityItem {
-				dataSource: veBusDevice.serviceUid + "/Dc/0/Current"
+				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Current"
 				//% "DC Current"
 				text: qsTrId("vebus_device_page_dc_current")
 				unit: VenusOS.Units_Amp
 			}
 
 			ListQuantityItem {
-				dataSource: veBusDevice.serviceUid + "/Soc"
+				dataItem.uid: veBusDevice.serviceUid + "/Soc"
 				text: CommonWords.state_of_charge
 				unit:VenusOS.Units_Percentage
 			}
 
 			ListQuantityItem {
-				visible: defaultVisible && dataValid && root.isMulti
-				dataSource: veBusDevice.serviceUid + "/Dc/0/Temperature"
+				visible: defaultVisible && dataItem.isValid && root.isMulti
+				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Temperature"
 				//% "Battery temperature"
 				text: qsTrId("vebus_device_page_battery_temperature")
 				unit: Global.systemSettings.temperatureUnit.value
@@ -300,13 +301,13 @@ Page {
 			ListLabel {
 				//% "A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible."
 				text: qsTrId("vebus_device_bms_message")
-				visible: bmsMode.valid
+				visible: bmsMode.isValid
 			}
 
 			ListLabel {
 				//% "A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!"
 				text: qsTrId("vebus_device_bms_not_found")
-				visible: bmsType.value === VenusOS.VeBusDevice_Bms_Type_VeBus && !bmsMode.valid
+				visible: bmsType.value === VenusOS.VeBusDevice_Bms_Type_VeBus && !bmsMode.isValid
 			}
 
 			ListNavigationItem {

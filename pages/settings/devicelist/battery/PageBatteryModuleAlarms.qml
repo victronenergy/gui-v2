@@ -25,9 +25,9 @@ Page {
 						{ "title": text, "bindPrefix": modulePath })
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: moduleRoot
-				source: model.uid
+				uid: model.uid
 			}
 		}
 	}

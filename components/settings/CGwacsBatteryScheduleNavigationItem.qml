@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 ListNavigationItem {
@@ -59,12 +60,12 @@ ListNavigationItem {
 
 	function getItemText()
 	{
-		if (itemDay.valid && itemDay.value >= 0) {
+		if (itemDay.isValid && itemDay.value >= 0) {
 			const day = dayNameForValue(itemDay.value)
 			const startTimeSeconds = startTime.value || 0
 			const start = ClockTime.formatTime(Math.floor(startTimeSeconds / 3600), Math.floor(startTimeSeconds % 3600 / 60))
-			const durationSecs = !duration.valid ? "--" : Utils.secondsToString(duration.value)
-			if (!socLimit.valid || socLimit.value >= 100) {
+			const durationSecs = !duration.isValid ? "--" : Utils.secondsToString(duration.value)
+			if (!socLimit.isValid || socLimit.value >= 100) {
 				//% "%1 %2 (%3)"
 				return qsTrId("cgwacs_battery_schedule_format_no_soc").arg(day).arg(start).arg(durationSecs)
 			}
@@ -80,22 +81,22 @@ ListNavigationItem {
 
 	onClicked: Global.pageManager.pushPage(scheduledOptionsComponent, { title: text })
 
-	DataPoint {
+	VeQuickItem {
 		id: itemDay
 		source: root._scheduleSource + "/Day"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: startTime
 		source: root._scheduleSource + "/Start"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: duration
 		source: root._scheduleSource + "/Duration"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: socLimit
 		source: root._scheduleSource + "/Soc"
 	}
@@ -112,7 +113,7 @@ ListNavigationItem {
 						id: itemEnabled
 
 						text: CommonWords.enabled
-						checked: itemDay.valid && itemDay.value >= 0
+						checked: itemDay.isValid && itemDay.value >= 0
 						onCheckedChanged: {
 							if (checked ^ itemDay.value >= 0) {
 								itemDay.setValue(toggleDay(itemDay.value))
@@ -123,7 +124,7 @@ ListNavigationItem {
 					ListRadioButtonGroup {
 						//% "Day"
 						text: qsTrId("cgwacs_battery_schedule_day")
-						dataSource: root._scheduleSource + "/Day"
+						dataItem.uid: root._scheduleSource + "/Day"
 						visible: defaultVisible && itemEnabled.checked
 						//% "Not set"
 						defaultSecondaryText: qsTrId("cgwacs_battery_schedule_day_not_set")
@@ -132,14 +133,14 @@ ListNavigationItem {
 
 					ListTimeSelector {
 						text: CommonWords.start_time
-						dataSource: root._scheduleSource + "/Start"
+						dataItem.uid: root._scheduleSource + "/Start"
 						visible: defaultVisible && itemEnabled.checked
 					}
 
 					ListTimeSelector {
 						//% "Duration (hh:mm)"
 						text: qsTrId("cgwacs_battery_schedule_duration")
-						dataSource: root._scheduleSource + "/Duration"
+						dataItem.uid: root._scheduleSource + "/Duration"
 						visible: defaultVisible && itemEnabled.checked
 						maximumHour: 9999
 					}
@@ -150,7 +151,7 @@ ListNavigationItem {
 						//% "SOC limit"
 						text: qsTrId("cgwacs_battery_schedule_soc_limit")
 						visible: defaultVisible
-						dataSource: root._scheduleSource + "/Soc"
+						dataItem.uid: root._scheduleSource + "/Soc"
 						suffix: "%"
 						from: 5
 						to: 95
@@ -160,7 +161,7 @@ ListNavigationItem {
 					ListRadioButtonGroup {
 						//% "Self-consumption above limit"
 						text: qsTrId("cgwacs_battery_schedule_self_consumption_above_limit")
-						dataSource: root._scheduleSource + "/AllowDischarge"
+						dataItem.uid: root._scheduleSource + "/AllowDischarge"
 						visible: defaultVisible && itemEnabled.checked && socLimit.value < 100
 						optionModel: [
 							//% "PV"

@@ -15,10 +15,10 @@ Column {
 
 		//% "DVCC"
 		text: qsTrId("settings_dvcc_dvcc")
-		dataSource: Global.systemSettings.serviceUid + "/Settings/Services/Bol"
+		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Bol"
 
 		onClicked: {
-			if (dataValid && !checked) {
+			if (dataItem.isValid && !checked) {
 				//% "Make sure to also reset the VE.Bus system after disabling DVCC"
 				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_dvcc_switch_reset_vebus_after_disabling_dvcc"))
 			}
@@ -31,10 +31,10 @@ Column {
 		//% "Limit charge current"
 		text: qsTrId("settings_dvcc_limit_charge_current")
 		updateOnClick: false
-		checked: maxChargeCurrent.dataValid && maxChargeCurrent.dataValue >= 0
+		checked: maxChargeCurrent.dataItem.isValid && maxChargeCurrent.dataItem.value >= 0
 		visible: defaultVisible && dvccSwitch.checked
 		onClicked: {
-			maxChargeCurrent.setDataValue(maxChargeCurrent.dataValue < 0 ? 50 : -1)
+			maxChargeCurrent.dataItem.setValue(maxChargeCurrent.dataItem.value < 0 ? 50 : -1)
 		}
 	}
 
@@ -44,7 +44,7 @@ Column {
 		//% "Maximum charge current"
 		text: qsTrId("settings_dvcc_max_charge_current")
 		visible: defaultVisible && maxChargeCurrentSwitch.visible && maxChargeCurrentSwitch.checked
-		dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeCurrent"
+		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeCurrent"
 		suffix: "A"
 	}
 }

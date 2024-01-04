@@ -40,9 +40,9 @@ Page {
 				Repeater {
 					model: tableModel
 					delegate: ListTextItem {
-						visible: defaultVisible && dataValid
+						visible: defaultVisible && dataItem.isValid
 						text: name(model.id)
-						dataSource: model.uid + "/SerialNumber"
+						dataItem.uid: model.uid + "/SerialNumber"
 					}
 				}
 			}

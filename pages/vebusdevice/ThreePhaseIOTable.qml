@@ -5,14 +5,15 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 Row {
 	id: root
 
 	property int numberOfPhases
-	property DataPoint acActiveInputPower
-	property DataPoint acOutputPower
+	property VeQuickItem acActiveInputPower
+	property VeQuickItem acOutputPower
 	property var inputPhases
 	property var outputPhases
 

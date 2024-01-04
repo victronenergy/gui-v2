@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -16,15 +17,15 @@ Page {
 	//% "Hidden"
 	readonly property string _hiddenText: qsTrId("settings_batteries_battery_hidden")
 
-	DataPoint {
+	VeQuickItem {
 		id: availableBatteries
-		source: Global.system.serviceUid + "/AvailableBatteries"
+		uid: Global.system.serviceUid + "/AvailableBatteries"
 		onValueChanged: {
 			let jsonObject
 			try {
 				jsonObject = JSON.parse(value)
 			} catch (e) {
-				console.warn("Unable to parse data from", source)
+				console.warn("Unable to parse data from", uid)
 				return
 			}
 			_batteries = jsonObject
@@ -32,9 +33,9 @@ Page {
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: activeBatteryService
-		source: Global.system.serviceUid + "/ActiveBatteryService"
+		uid: Global.system.serviceUid + "/ActiveBatteryService"
 	}
 
 	GradientListView {
@@ -65,15 +66,15 @@ Page {
 				}
 				return battery.name
 			}
-			secondaryText: batteryEnabled.valid
+			secondaryText: batteryEnabled.isValid
 				? (batteryEnabled.value === 1 || activeBattery ? root._visibleText : root._hiddenText)
 				: "--"
 
 			onClicked: Global.pageManager.pushPage(batterySettingsComponent, {"title": text})
 
-			DataPoint {
+			VeQuickItem {
 				id: batteryEnabled
-				source: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Enabled"
+				uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Enabled"
 			}
 
 			Component {
@@ -92,7 +93,7 @@ Page {
 							ListSwitch {
 								text: root._visibleText
 								visible: !batteryMenuItem.activeBattery
-								dataSource: batteryEnabled.source
+								dataItem.uid: batteryEnabled.uid
 							}
 
 							ListTextField {
@@ -100,8 +101,8 @@ Page {
 								text: qsTrId("settings_batteries_name")
 								//% "Enter name"
 								placeholderText: qsTrId("settings_batteries_enter_name")
-								dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
-								visible: dataValid
+								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
+								visible: dataItem.isValid
 								textField.maximumLength: 32 // TODO can the max be fetched from dbus?
 							}
 						}

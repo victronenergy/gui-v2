@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 ObjectModel {
 	id: root
@@ -13,12 +14,12 @@ ObjectModel {
 
 	readonly property bool isSssDcEnergyMeter: productId.value === 0xB013
 
-	property DataPoint monitorMode: DataPoint {
-		source: root.bindPrefix + "/Settings/MonitorMode"
+	property VeQuickItem monitorMode: VeQuickItem {
+		uid: root.bindPrefix + "/Settings/MonitorMode"
 	}
 
-	property DataPoint productId: DataPoint {
-		source: root.bindPrefix + "/ProductId"
+	property VeQuickItem productId: VeQuickItem {
+		uid: root.bindPrefix + "/ProductId"
 	}
 
 	ListQuantityGroup {
@@ -29,42 +30,42 @@ ObjectModel {
 			{ value: dcPower.value, unit: VenusOS.Units_Watt },
 		]
 
-		DataPoint {
+		VeQuickItem {
 			id: dcVoltage
-			source: root.bindPrefix + "/Dc/0/Voltage"
+			uid: root.bindPrefix + "/Dc/0/Voltage"
 		}
-		DataPoint {
+		VeQuickItem {
 			id: dcCurrent
-			source: root.bindPrefix + "/Dc/0/Current"
+			uid: root.bindPrefix + "/Dc/0/Current"
 		}
-		DataPoint {
+		VeQuickItem {
 			id: dcPower
-			source: root.bindPrefix + "/Dc/0/Power"
+			uid: root.bindPrefix + "/Dc/0/Power"
 		}
 	}
 
 	ListQuantityItem {
 		text: CommonWords.temperature
-		dataSource: root.bindPrefix + "/Dc/0/Temperature"
-		value: dataValid ? Global.systemSettings.convertTemperature(dataValue) : NaN
+		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+		value: dataItem.isValid ? Global.systemSettings.convertTemperature(dataItem.value) : NaN
 		unit: Global.systemSettings.temperatureUnit.value
-		visible: defaultVisible && dataValid
+		visible: defaultVisible && dataItem.isValid
 	}
 
 	ListQuantityItem {
 		//% "Aux voltage"
 		text: qsTrId("dcmeter_aux_voltage")
-		dataSource: root.bindPrefix + "/Dc/1/Voltage"
+		dataItem.uid: root.bindPrefix + "/Dc/1/Voltage"
 		unit: VenusOS.Units_Volt
-		visible: defaultVisible && dataValid
+		visible: defaultVisible && dataItem.isValid
 	}
 
 	ListRelayState {
-		dataSource: root.bindPrefix + "/Relay/0/State"
+		dataItem.uid: root.bindPrefix + "/Relay/0/State"
 	}
 
 	ListAlarmState {
-		dataSource: root.bindPrefix + "/Alarms/Alarm"
+		dataItem.uid: root.bindPrefix + "/Alarms/Alarm"
 	}
 
 	ListNavigationItem {

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -12,67 +13,67 @@ Page {
 
 	property string bindPrefix
 
-	readonly property bool showStarterVoltage: hasStarterVoltage.valid && hasStarterVoltage.value
-	readonly property bool showTemperature: hasTemperature.valid && hasTemperature.value
+	readonly property bool showStarterVoltage: hasStarterVoltage.isValid && hasStarterVoltage.value
+	readonly property bool showTemperature: hasTemperature.isValid && hasTemperature.value
 
-	DataPoint {
+	VeQuickItem {
 		id: hasStarterVoltage
-		source: root.bindPrefix + "/Settings/HasStarterVoltage"
+		uid: root.bindPrefix + "/Settings/HasStarterVoltage"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: hasTemperature
-		source: root.bindPrefix + "/Settings/HasTemperature"
+		uid: root.bindPrefix + "/Settings/HasTemperature"
 	}
 
 	GradientListView {
 		model: ObjectModel {
 			ListQuantityItem {
 				text: CommonWords.minimum_voltage
-				dataSource: root.bindPrefix + "/History/MinimumVoltage"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/History/MinimumVoltage"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_Volt
 				precision: 2
 			}
 
 			ListQuantityItem {
 				text: CommonWords.maximum_voltage
-				dataSource: root.bindPrefix + "/History/MaximumVoltage"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/History/MaximumVoltage"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_Volt
 				precision: 2
 			}
 
 			ListTextItem {
 				text: CommonWords.low_voltage_alarms
-				dataSource: root.bindPrefix + "/History/LowVoltageAlarms"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/History/LowVoltageAlarms"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListTextItem {
 				text: CommonWords.high_voltage_alarms
-				dataSource: root.bindPrefix + "/History/HighVoltageAlarms"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/History/HighVoltageAlarms"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListTextItem {
 				//% "Low aux voltage alarms"
 				text: qsTrId("dcmeter_history_low_aux_voltage_alarms")
-				dataSource: visible ? root.bindPrefix + "/History/LowStarterVoltageAlarms" : ""
+				dataItem.uid: visible ? root.bindPrefix + "/History/LowStarterVoltageAlarms" : ""
 				visible: defaultVisible && root.showStarterVoltage
 			}
 
 			ListTextItem {
 				//% "High aux voltage alarms"
 				text: qsTrId("dcmeter_history_high_aux_voltage_alarms")
-				dataSource: visible ? root.bindPrefix + "/History/HighStarterVoltageAlarms" : ""
+				dataItem.uid: visible ? root.bindPrefix + "/History/HighStarterVoltageAlarms" : ""
 				visible: defaultVisible && root.showStarterVoltage
 			}
 
 			ListQuantityItem {
 				//% "Minimum aux voltage"
 				text: qsTrId("dcmeter_history_minimum_aux_voltage")
-				dataSource: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
+				dataItem.uid: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
 				visible: defaultVisible && root.showStarterVoltage
 				unit: VenusOS.Units_Volt
 				precision: 2
@@ -81,7 +82,7 @@ Page {
 			ListQuantityItem {
 				//% "Maximum aux voltage"
 				text: qsTrId("dcmeter_history_maximum_aux_voltage")
-				dataSource: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
+				dataItem.uid: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
 				visible: defaultVisible && root.showStarterVoltage
 				unit: VenusOS.Units_Volt
 				precision: 2
@@ -90,30 +91,30 @@ Page {
 			ListQuantityItem {
 				text: CommonWords.minimum_temperature
 				visible: defaultVisible && showTemperature
-				dataSource: root.bindPrefix + "/History/MinimumTemperature"
+				dataItem.uid: root.bindPrefix + "/History/MinimumTemperature"
 				unit: Global.systemSettings.temperatureUnit.value
 			}
 
 			ListQuantityItem {
 				text: CommonWords.maximum_temperature
 				visible: defaultVisible && showTemperature
-				dataSource: root.bindPrefix + "/History/MaximumTemperature"
+				dataItem.uid: root.bindPrefix + "/History/MaximumTemperature"
 				unit: Global.systemSettings.temperatureUnit.value
 			}
 
 			ListQuantityItem {
 				//% "Produced energy"
 				text: qsTrId("dcmeter_history_produced_energy")
-				dataSource: root.bindPrefix + "/History/EnergyOut"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/History/EnergyOut"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 
 			ListQuantityItem {
 				//% "Consumed energy"
 				text: qsTrId("dcmeter_history_consumed_energy")
-				dataSource: root.bindPrefix + "/History/EnergyIn"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/History/EnergyIn"
+				visible: defaultVisible && dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 

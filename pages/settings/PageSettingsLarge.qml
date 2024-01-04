@@ -21,8 +21,8 @@ Page {
 
 				//% "Signal K"
 				text: qsTrId("settings_large_signal_k")
-				dataSource: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
-				visible: dataValid
+				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+				visible: dataItem.isValid
 				writeAccessLevel: VenusOS.User_AccessType_Installer
 			}
 
@@ -37,8 +37,8 @@ Page {
 
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
-				dataSource: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
-				visible: dataValid
+				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+				visible: dataItem.isValid
 				writeAccessLevel: VenusOS.User_AccessType_Installer
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },

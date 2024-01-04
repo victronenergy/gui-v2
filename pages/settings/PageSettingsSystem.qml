@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -37,7 +38,7 @@ Page {
 
 				//% "System name"
 				text: qsTrId("settings_system_name")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
 				optionModel: [
@@ -63,7 +64,7 @@ Page {
 				placeholderText: qsTrId("settings_system_enter_user_defined_name")
 				writeAccessLevel: VenusOS.User_AccessType_User
 				visible: systemNameRadioButtons.currentIndex === systemNameRadioButtons.customValueIndex
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
 			}
 
 			ListRadioButtonGroup {
@@ -71,7 +72,7 @@ Page {
 
 				//% "AC input 1"
 				text: qsTrId("settings_system_ac_input_1")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1"
 				optionModel: root._acInputsModel
 			}
 
@@ -80,7 +81,7 @@ Page {
 
 				//% "AC input 2"
 				text: qsTrId("settings_system_ac_input_2")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2"
 				optionModel: root._acInputsModel
 			}
 
@@ -91,7 +92,7 @@ Page {
 					  //% "Monitor for shore disconnect"
 					: qsTrId("settings_system_monitor_for_shore_disconnect")
 				visible: root._isGrid || root._isShore
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Alarm/System/GridLost"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/System/GridLost"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled, value: 1 },
@@ -103,14 +104,14 @@ Page {
 
 				//% "Battery monitor"
 				text: qsTrId("settings_system_battery_monitor")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryService"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryService"
 				//% "Unavailable monitor, set another"
 				defaultSecondaryText: qsTrId("settings_system_unavailable_monitor")
 
-				DataPoint {
+				VeQuickItem {
 					id: availableBatteryServices
 
-					source: Global.system.serviceUid + "/AvailableBatteryServices"
+					uid: Global.system.serviceUid + "/AvailableBatteryServices"
 					onValueChanged: {
 						if (value === undefined) {
 							return
@@ -128,7 +129,7 @@ Page {
 			ListTextItem {
 				//% "Auto-selected"
 				text: qsTrId("settings_system_auto_selected")
-				dataSource: Global.system.serviceUid + "/AutoSelectedBatteryService"
+				dataItem.uid: Global.system.serviceUid + "/AutoSelectedBatteryService"
 				visible: batteryMonitorRadioButtons.optionModel !== undefined
 					&& batteryMonitorRadioButtons.currentIndex >= 0
 					&& batteryMonitorRadioButtons.optionModel[batteryMonitorRadioButtons.currentIndex].value === "default"
@@ -137,7 +138,7 @@ Page {
 			ListSwitch {
 				//% "Has DC system"
 				text: qsTrId("settings_system_has_dc_system")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
 			}
 
 			ListNavigationItem {

@@ -18,7 +18,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Auto update"
 				text: qsTrId("settings_auto_update")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.Firmware_AutoUpdate_Disabled },
@@ -34,7 +34,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Update feed"
 				text: qsTrId("settings_update_feed")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/System/ReleaseType"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ReleaseType"
 				optionModel: [
 					//% "Latest release"
 					{ display: qsTrId("settings_firmware_latest_release"), value: FirmwareUpdater.FirmwareRelease },
@@ -52,7 +52,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Image type"
 				text: qsTrId("settings_firmware_image_type")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/System/ImageType"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ImageType"
 				visible: largeImageSupport.value === 1
 				optionModel: [
 					//% "Normal"
@@ -61,9 +61,9 @@ Page {
 					{ display: qsTrId("settings_firmware_large"), value: FirmwareUpdater.ImageTypeLarge },
 				]
 
-				DataPoint {
+				VeQuickItem {
 					id: largeImageSupport
-					source: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport"
+					uid: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport"
 				}
 			}
 
@@ -102,16 +102,16 @@ Page {
 					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: progress
-					source: Global.venusPlatform.serviceUid + "/Firmware/Progress"
+					uid: Global.venusPlatform.serviceUid + "/Firmware/Progress"
 				}
 			}
 
 			ListTextItem {
 				//% "Update build date/time"
 				text: qsTrId("settings_firmware_update_build_date_time")
-				dataSource: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableBuild"
+				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableBuild"
 				visible: installUpdate.visible && Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 		}

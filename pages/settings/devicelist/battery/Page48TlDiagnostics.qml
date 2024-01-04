@@ -26,7 +26,7 @@ Page {
 							{ servicePath: "/Diagnostics/LedStatus/Red", color: "#FF0000" },
 						]
 						delegate: Led {
-							dataSource: root.bindPrefix + modelData.servicePath
+							dataItem.uid: root.bindPrefix + modelData.servicePath
 							color: modelData.color
 						}
 					}
@@ -35,8 +35,8 @@ Page {
 
 			ListTextItem {
 				text: CommonWords.alarm
-				dataSource: root.bindPrefix + "/Diagnostics/IoStatus/AlarmOutActive"
-				secondaryText: dataValue
+				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/AlarmOutActive"
+				secondaryText: dataItem.value
 						 //: Indicates no alarm is set
 						 //% "None"
 					   ? qsTrId("batterydiagnostics_none")
@@ -46,34 +46,34 @@ Page {
 			ListTextItem {
 				//% "Main Switch"
 				text: qsTrId("batterydiagnostics_main_switch")
-				dataSource: root.bindPrefix + "/Diagnostics/IoStatus/MainSwitchClosed"
-				secondaryText: dataValue ? CommonWords.closed_status : CommonWords.open_status
+				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/MainSwitchClosed"
+				secondaryText: dataItem.value ? CommonWords.closed_status : CommonWords.open_status
 			}
 
 			ListTextItem {
 				//% "Heater"
 				text: qsTrId("batterydiagnostics_heater")
-				dataSource: root.bindPrefix + "/Diagnostics/IoStatus/HeaterOn"
-				secondaryText: CommonWords.onOrOff(dataValue)
+				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/HeaterOn"
+				secondaryText: CommonWords.onOrOff(dataItem.value)
 			}
 
 			ListTextItem {
 				//% "Internal Fan"
 				text: qsTrId("batterydiagnostics_internal_fan")
-				dataSource: root.bindPrefix + "/Diagnostics/IoStatus/InternalFanActive"
-				secondaryText: CommonWords.onOrOff(dataValue)
+				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/InternalFanActive"
+				secondaryText: CommonWords.onOrOff(dataItem.value)
 			}
 
 			ListTextItem {
 				//% "Warning Flags"
 				text: qsTrId("batterydiagnostics_warning_flags")
-				dataSource: root.bindPrefix + "/Diagnostics/WarningFlags"
+				dataItem.uid: root.bindPrefix + "/Diagnostics/WarningFlags"
 			}
 
 			ListTextItem {
 				//% "Alarm Flags"
 				text: qsTrId("batterydiagnostics_alarm_flags")
-				dataSource: root.bindPrefix + "/Diagnostics/AlarmFlags"
+				dataItem.uid: root.bindPrefix + "/Diagnostics/AlarmFlags"
 			}
 		}
 	}

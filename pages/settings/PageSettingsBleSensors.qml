@@ -39,14 +39,14 @@ Page {
 			ListSwitch {
 				id: enable
 				text: CommonWords.enable
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/BleSensors"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/BleSensors"
 			}
 
 			ListSwitch {
 				id: contScan
 				//% "Continuous scanning"
 				text: qsTrId("settings_continuous_scan")
-				dataSource: root.bleServiceUid + "/ContinuousScan"
+				dataItem.uid: root.bleServiceUid + "/ContinuousScan"
 				visible: enable.checked
 			}
 
@@ -77,7 +77,7 @@ Page {
 							}
 							delegate: ListTextItem {
 								text: model.item.itemParent().id
-								dataSource: Utils.normalizedSource(model.item.uid)
+								dataItem.uid: Utils.normalizedSource(model.item.uid)
 							}
 						}
 					}
@@ -99,7 +99,7 @@ Page {
 
 					delegate: ListSwitch {
 						text: model.item.value
-						dataSource: Utils.normalizedSource(model.item.itemParent().uid) + "/Enabled"
+						dataItem.uid: Utils.normalizedSource(model.item.itemParent().uid) + "/Enabled"
 					}
 				}
 			}

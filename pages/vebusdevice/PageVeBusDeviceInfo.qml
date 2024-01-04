@@ -25,7 +25,7 @@ PageDeviceInfo {
 
 				ListTextItem {
 					text: displayText
-					dataSource: root.bindPrefix + pathSuffix
+					dataItem.uid: root.bindPrefix + pathSuffix
 				}
 			}
 

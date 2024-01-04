@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -59,19 +60,19 @@ Page {
 
 				//% "Enable on VRM"
 				text: qsTrId("settings_remoteconsole_enable_on_vrm")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/System/VncInternet"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/VncInternet"
 			}
 
 			ListTextItem {
 				//% "Remote Console on VRM - status"
 				text: qsTrId("settings_remoteconsole_vrm_status")
 				secondaryText: vncInternet.checked
-						&& remoteSupportIpAndPort.valid
+						&& remoteSupportIpAndPort.isValid
 						&& remoteSupportIpAndPort.value !== 0 ? CommonWords.online : CommonWords.offline
 
-				DataPoint {
+				VeQuickItem {
 					id: remoteSupportIpAndPort
-					source: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
+					uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
 				}
 			}
 
@@ -80,7 +81,7 @@ Page {
 
 				//% "Enable on LAN"
 				text: qsTrId("settings_remoteconsole_enable_on_lan")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/System/VncLocal"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/VncLocal"
 
 				bottomContent.children: ListLabel {
 					visible: text.length > 0
