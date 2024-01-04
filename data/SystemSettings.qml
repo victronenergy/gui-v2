@@ -91,7 +91,7 @@ QtObject {
 
 	property QtObject temperatureUnit: QtObject {
 		// translate /System/Units/Temperature from string to enum value
-		readonly property var value: _unitDataItem.value === "fahrenheit"
+		readonly property int value: _unitDataItem.value === "fahrenheit"
 				? VenusOS.Units_Temperature_Fahrenheit
 				: VenusOS.Units_Temperature_Celsius
 
