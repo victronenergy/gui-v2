@@ -16,36 +16,36 @@ Page {
 			ListTextItem {
 				//% "System Switch"
 				text: qsTrId("lynxionio_system_switch")
-				dataSource: root.bindPrefix + "/SystemSwitch"
-				secondaryText: CommonWords.enabledOrDisabled(dataValue)
+				dataItem.uid: root.bindPrefix + "/SystemSwitch"
+				secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
 			}
 
 			ListTextItem {
 				text: CommonWords.allow_to_charge
-				dataSource: root.bindPrefix + "/Io/AllowToCharge"
-				secondaryText: CommonWords.yesOrNo(dataValue)
+				dataItem.uid: root.bindPrefix + "/Io/AllowToCharge"
+				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
 			ListTextItem {
 				text: CommonWords.allow_to_discharge
-				dataSource: root.bindPrefix + "/Io/AllowToDischarge"
-				secondaryText: CommonWords.yesOrNo(dataValue)
+				dataItem.uid: root.bindPrefix + "/Io/AllowToDischarge"
+				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
 			ListTextItem {
 				//% "External relay"
 				text: qsTrId("lynxionio_external_relay")
-				dataSource: root.bindPrefix + "/Io/ExternalRelay"
-				visible: defaultVisible && dataValid
-				secondaryText: CommonWords.activeOrInactive(dataValue)
+				dataItem.uid: root.bindPrefix + "/Io/ExternalRelay"
+				visible: defaultVisible && dataItem.isValid
+				secondaryText: CommonWords.activeOrInactive(dataItem.value)
 			}
 
 			ListTextItem {
 				//% "Programmable Contact"
 				text: qsTrId("lynxionio_programmable_contact")
-				dataSource: root.bindPrefix + "/Io/ProgrammableContact"
-				visible: defaultVisible && dataValid
-				secondaryText: CommonWords.activeOrInactive(dataValue)
+				dataItem.uid: root.bindPrefix + "/Io/ProgrammableContact"
+				visible: defaultVisible && dataItem.isValid
+				secondaryText: CommonWords.activeOrInactive(dataItem.value)
 			}
 		}
 	}

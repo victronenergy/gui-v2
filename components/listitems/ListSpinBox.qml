@@ -5,23 +5,18 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 ListButton {
 	id: root
 
-	property alias dataSource: dataPoint.source
-	readonly property alias dataValue: dataPoint.value
-	readonly property alias dataValid: dataPoint.valid
-	readonly property alias dataSeen: dataPoint.seen
-	property alias dataInvalidate: dataPoint.invalidate
-	function setDataValue(v) { dataPoint.setValue(v) }
-
-	property real value: !dataValid ? 0 : dataValue
+	readonly property alias dataItem: dataItem
+	property real value: !dataItem.isValid ? 0 : dataItem.value
 	property string suffix
 	property int decimals
-	property int from: !isNaN(dataPoint.min) ? dataPoint.min : 0
-	property int to: !isNaN(dataPoint.max) ? dataPoint.max : 1000
+	property int from: !isNaN(dataItem.min) ? dataItem.min : 0
+	property int to: !isNaN(dataItem.max) ? dataItem.max : 1000
 	property real stepSize: 1
 	property var presets: []
 
@@ -32,7 +27,7 @@ ListButton {
 	signal selectorAccepted(newValue: var)
 
 	button.text: value === undefined ? "--" : Utils.toFloat(value, decimals) + root.suffix
-	enabled: dataSource === "" || dataValid
+	enabled: dataItem.uid === "" || dataItem.isValid
 
 	onClicked: {
 		if (!_numberSelector) {
@@ -55,8 +50,8 @@ ListButton {
 			presets: root.presets
 
 			onAccepted: {
-				if (dataSource.length > 0) {
-					dataPoint.setValue(value)
+				if (dataItem.uid.length > 0) {
+					dataItem.setValue(value)
 				} else {
 					root.value = value
 				}
@@ -67,7 +62,7 @@ ListButton {
 		}
 	}
 
-	DataPoint {
-		id: dataPoint
+	VeQuickItem {
+		id: dataItem
 	}
 }

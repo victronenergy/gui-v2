@@ -104,7 +104,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Charge mode"
 				text: qsTrId("evcs_charge_mode")
-				dataSource: root.evCharger.serviceUid + "/Mode"
+				dataItem.uid: root.evCharger.serviceUid + "/Mode"
 				optionModel: [
 					{
 						display: Global.evChargers.chargerModeToText(VenusOS.Evcs_Mode_Manual),
@@ -132,13 +132,13 @@ Page {
 				suffix: "A"
 				from: 0
 				to: root.evCharger.maxCurrent
-				dataSource: root.evCharger.serviceUid + "/Current"
+				dataItem.uid: root.evCharger.serviceUid + "/Current"
 			}
 
 			ListSwitch {
 				//% "Enable charging"
 				text: qsTrId("evcs_enable_charging")
-				dataSource: root.evCharger.serviceUid + "/StartStop"
+				dataItem.uid: root.evCharger.serviceUid + "/StartStop"
 			}
 
 			ListNavigationItem {

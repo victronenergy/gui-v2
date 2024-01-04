@@ -49,7 +49,7 @@ Page {
 			ListTextItem {
 				//% "Firmware build date/time"
 				text: qsTrId("settings_firmware_build_date_time")
-				dataSource: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableBuild"
+				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableBuild"
 				visible: installUpdate.visible && Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 

@@ -30,7 +30,7 @@ Page {
 
 			ListSwitch {
 				text: "Toggle setting: /Settings/Alarm/Audible"
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
 			}
 
 			ListRadioButtonGroup {
@@ -106,7 +106,7 @@ Page {
 
 			ListTextItem {
 				text: "Text only, from dbus source"
-				dataSource: Global.system.serviceUid + "/FirmwareBuild"
+				dataItem.uid: Global.system.serviceUid + "/FirmwareBuild"
 			}
 
 			ListTextGroup {

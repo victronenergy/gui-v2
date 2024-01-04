@@ -29,10 +29,10 @@ Page {
 			id: menu
 
 			property string inverterPath: model.uid
-			property DataPoint customNameItem: DataPoint { source: inverterPath + "/CustomName" }
-			property DataPoint phaseItem: DataPoint { source: inverterPath + "/Phase" }
-			property DataPoint positionItem: DataPoint { source: inverterPath + "/Position" }
-			property DataPoint serialNumberItem: DataPoint { source: inverterPath + "/SerialNumber" }
+			property VeQuickItem customNameItem: VeQuickItem { uid: inverterPath + "/CustomName" }
+			property VeQuickItem phaseItem: VeQuickItem { uid: inverterPath + "/Phase" }
+			property VeQuickItem positionItem: VeQuickItem { uid: inverterPath + "/Position" }
+			property VeQuickItem serialNumberItem: VeQuickItem { uid: inverterPath + "/SerialNumber" }
 
 			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverter.qml", {"title": menu.text, "bindPrefix": menu.inverterPath})
 			text: customNameItem.value || serialNumberItem.value || '--'

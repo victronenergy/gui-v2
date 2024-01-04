@@ -5,20 +5,21 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
 
 	readonly property string modbustcpServiceUid: BackendConnection.serviceUidForType("modbustcp")
 
-	DataPoint {
+	VeQuickItem {
 		id: lastError
-		source: root.modbustcpServiceUid + "/LastError/Message"
+		uid: root.modbustcpServiceUid + "/LastError/Message"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: timestamp
-		source: root.modbustcpServiceUid + "/LastError/Timestamp"
+		uid: root.modbustcpServiceUid + "/LastError/Timestamp"
 	}
 
 	GradientListView {
@@ -28,12 +29,12 @@ Page {
 
 				//% "Enable Modbus/TCP"
 				text: qsTrId("settings_modbus_enable_modbus_tcp")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
 			}
 
 			ListLabel {
 				//% "No errors reported"
-				text: lastError.valid ? lastError.value : qsTrId("settings_modbus_no_errors")
+				text: lastError.isValid ? lastError.value : qsTrId("settings_modbus_no_errors")
 				visible: enableModbusTcp.checked
 				horizontalAlignment: Text.AlignHCenter
 			}
@@ -41,14 +42,14 @@ Page {
 			ListTextItem {
 				//% "Time of last error"
 				text: qsTrId("settings_modbus_time_of_last_error")
-				secondaryText: timestamp.valid ? Qt.formatDateTime(new Date(timestamp.value * 1000), "yyyy-MM-dd hh:mm:ss") : ""
-				visible: enableModbusTcp.checked && lastError.valid
+				secondaryText: timestamp.isValid ? Qt.formatDateTime(new Date(timestamp.value * 1000), "yyyy-MM-dd hh:mm:ss") : ""
+				visible: enableModbusTcp.checked && lastError.isValid
 			}
 
 			ListButton {
 				text: CommonWords.clear_error_action
 				secondaryText: CommonWords.press_to_clear
-				visible: enableModbusTcp.checked && lastError.valid
+				visible: enableModbusTcp.checked && lastError.isValid
 				onClicked: {
 					lastError.setValue(undefined)
 					timestamp.setValue(undefined)

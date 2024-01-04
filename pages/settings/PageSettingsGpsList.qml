@@ -43,7 +43,7 @@ Page {
 				 : mockGpsModelComponent.createObject(root)
 
 		delegate: ListNavigationItem {
-			text: (productName.valid && vrmInstance.valid)
+			text: (productName.isValid && vrmInstance.isValid)
 				  ? "%1 [2]".arg(productName.value).arg(vrmInstance.value)
 				  : "--"
 
@@ -52,14 +52,14 @@ Page {
 						{"title": text, bindPrefix: model.uid })
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: productName
-				source: model.uid + "/ProductName"
+				uid: model.uid + "/ProductName"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: vrmInstance
-				source: model.uid + "/DeviceInstance"
+				uid: model.uid + "/DeviceInstance"
 			}
 		}
 
@@ -80,7 +80,7 @@ Page {
 								//: Format of reported GPS data
 								//% "Format"
 								text: qsTrId("settings_gps_format")
-								dataSource: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
+								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
 								optionModel: [
 									//: Example of GPS data in the 'Degrees, Minutes, Seconds' format
 									//% "52° 20' 41.6\" N, 5° 13' 12.3\" E"
@@ -98,7 +98,7 @@ Page {
 								//: Speed unit for reported GPS data
 								//% "Speed Unit"
 								text: qsTrId("settings_gps_speed_unit")
-								dataSource: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
+								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
 								optionModel: [
 									//% "Kilometers per hour"
 									{ display: qsTrId("settings_gps_format_kmh"), value: "km/h" },

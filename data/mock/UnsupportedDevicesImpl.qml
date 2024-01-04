@@ -15,7 +15,7 @@ Item {
 
 	property Component unsupportedComponent: Component {
 		MockDevice {
-			serviceUid: "com.victronenergy.unsupported.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.unsupported.ttyUSB" + deviceInstance
 			name: "Unsupported" + deviceInstance
 		}
 	}

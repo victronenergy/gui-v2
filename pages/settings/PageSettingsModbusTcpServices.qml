@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -28,9 +29,9 @@ Page {
 		return "--"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: serviceCount
-		source: root.modbustcpServiceUid + "/Services/Count"
+		uid: root.modbustcpServiceUid + "/Services/Count"
 	}
 
 	GradientListView {
@@ -53,19 +54,19 @@ Page {
 				}
 			]
 
-			DataPoint {
+			VeQuickItem {
 				id: serviceName
-				source: serviceDelegate.servicePath + "/ServiceName"
+				uid: serviceDelegate.servicePath + "/ServiceName"
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: productName
-				source: serviceName.value ? serviceName.value + "/ProductName" : ""
+				uid: serviceName.value ? serviceName.value + "/ProductName" : ""
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: unitId
-				source: serviceDelegate.servicePath + "/UnitId"
+				uid: serviceDelegate.servicePath + "/UnitId"
 			}
 		}
 	}

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 ListButton {
 	id: root
@@ -18,19 +19,19 @@ ListButton {
 			 //% "Clearing"
 		   : qsTrId("clear_history_button_clearing")
 
-	DataPoint {
+	VeQuickItem {
 		id: clear
-		source: root.bindPrefix + "/History/Clear"
+		uid: root.bindPrefix + "/History/Clear"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: canBeCleared
-		source: root.bindPrefix + "/History/CanBeCleared"
+		uid: root.bindPrefix + "/History/CanBeCleared"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: connected
-		source: root.bindPrefix + "/Connected"
+		uid: root.bindPrefix + "/Connected"
 	}
 
 	Timer {

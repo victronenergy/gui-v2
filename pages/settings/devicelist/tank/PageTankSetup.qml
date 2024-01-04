@@ -35,18 +35,18 @@ Page {
 					capacity.setValue(Units.convertVolumeForUnit(newValue, VenusOS.Units_Volume_CubicMeter))
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: capacity
 
-					source: root.bindPrefix + "/Capacity"
+					uid: root.bindPrefix + "/Capacity"
 				}
 			}
 
 			ListRadioButtonGroup {
 				//% "Sensor type"
 				text: qsTrId("devicelist_tanksetup_sensor_type")
-				dataSource: root.bindPrefix + "/SenseType"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/SenseType"
+				visible: defaultVisible && dataItem.isValid
 				optionModel: [
 					{ display: CommonWords.voltage, value: 1 },
 					{ display: CommonWords.current_amps, value: 2 },
@@ -58,8 +58,8 @@ Page {
 
 				//% "Standard"
 				text: qsTrId("devicelist_tanksetup_standard")
-				dataSource: root.bindPrefix + "/Standard"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/Standard"
+				visible: defaultVisible && dataItem.isValid
 				optionModel: [
 					//% "European (0 to 180 Ohm)"
 					{ display: qsTrId("devicelist_tanksetup_european_(0_to_180_ohm)"), value: 0 },
@@ -73,8 +73,8 @@ Page {
 			ListSpinBox {
 				//% "Sensor value when empty"
 				text: qsTrId("devicelist_tanksetup_sensor_value_when_empty")
-				visible: dataSeen && (!standard.dataValid || standard.currentValue === 2)
-				dataSource: root.bindPrefix + "/RawValueEmpty"
+				visible: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
+				dataItem.uid: root.bindPrefix + "/RawValueEmpty"
 				suffix: rawUnit.value || ""
 				decimals: 1
 				stepSize: 0.1
@@ -83,8 +83,8 @@ Page {
 			ListSpinBox {
 				//% "Sensor value when empty"
 				text: qsTrId("devicelist_tanksetup_sensor_value_when_empty")
-				visible: dataSeen && (!standard.dataValid || standard.currentValue === 2)
-				dataSource: root.bindPrefix + "/RawValueFull"
+				visible: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
+				dataItem.uid: root.bindPrefix + "/RawValueFull"
 				suffix: rawUnit.value || ""
 				decimals: 1
 				stepSize: 0.1
@@ -93,7 +93,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Fluid type"
 				text: qsTrId("devicelist_tanksetup_fluid_type")
-				dataSource: root.bindPrefix + "/FluidType"
+				dataItem.uid: root.bindPrefix + "/FluidType"
 				optionModel: Global.tanks.tankTypes.map(function(tankType) {
 					return { display: Gauges.tankProperties(tankType).name || "", value: tankType }
 				})
@@ -102,8 +102,8 @@ Page {
 			ListSpinBox {
 				//% "Butane ratio"
 				text: qsTrId("devicelist_tanksetup_butane_ratio")
-				visible: defaultVisible && dataValid
-				dataSource: root.bindPrefix + "/ButaneRatio"
+				visible: defaultVisible && dataItem.isValid
+				dataItem.uid: root.bindPrefix + "/ButaneRatio"
 				suffix: "%"
 			}
 
@@ -122,25 +122,25 @@ Page {
 							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: shape
-					source: root.bindPrefix + "/Shape"
+					uid: root.bindPrefix + "/Shape"
 				}
 			}
 
 			ListSpinBox {
 				//% "Averaging time"
 				text: qsTrId("devicelist_tanksetup_averaging_time")
-				dataSource: root.bindPrefix + "/FilterLength"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/FilterLength"
+				visible: defaultVisible && dataItem.isValid
 				suffix: "s"
 			}
 
 			ListSpinBox {
 				//% "Sensor value"
 				text: qsTrId("devicelist_tanksetup_sensor_value")
-				dataSource: root.bindPrefix + "/RawValue"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/RawValue"
+				visible: defaultVisible && dataItem.isValid
 				suffix: rawUnit.value || ""
 				decimals: 1
 			}
@@ -154,9 +154,9 @@ Page {
 							{ "title": text, "bindPrefix": root.bindPrefix + "/Alarms/Low" })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: low
-					source: root.bindPrefix + "/Alarms/Low/Enable"
+					uid: root.bindPrefix + "/Alarms/Low/Enable"
 				}
 			}
 
@@ -169,16 +169,16 @@ Page {
 							{ "title": text, "bindPrefix": root.bindPrefix + "/Alarms/High" })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: high
-					source: root.bindPrefix + "/Alarms/High/Enable"
+					uid: root.bindPrefix + "/Alarms/High/Enable"
 				}
 			}
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: rawUnit
-		source: root.bindPrefix + "/RawUnit"
+		uid: root.bindPrefix + "/RawUnit"
 	}
 }

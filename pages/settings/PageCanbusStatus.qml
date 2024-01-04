@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -19,9 +20,9 @@ Page {
 		return " (" + perc.toFixed(2) + "%)"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: canStats
-		source: Global.venusPlatform.serviceUid + "/CanBus/Interface/" + gateway + "/Statistics"
+		uid: Global.venusPlatform.serviceUid + "/CanBus/Interface/" + gateway + "/Statistics"
 		onValueChanged: {
 			if (value === undefined) {
 				return

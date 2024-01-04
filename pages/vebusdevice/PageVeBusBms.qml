@@ -17,20 +17,20 @@ Page {
 		model: ObjectModel {
 			ListRadioButtonGroupNoYes {
 				text: CommonWords.allow_to_charge
-				dataSource: bindPrefix + "/Bms/AllowToCharge"
+				dataItem.uid: bindPrefix + "/Bms/AllowToCharge"
 				enabled: false
 			}
 
 			ListRadioButtonGroupNoYes {
 				text: CommonWords.allow_to_discharge
-				dataSource: bindPrefix + "/Bms/AllowToDischarge"
+				dataItem.uid: bindPrefix + "/Bms/AllowToDischarge"
 				enabled: false
 			}
 
 			ListRadioButtonGroupNoYes {
 				//% "BMS Error"
 				text: qsTrId("vebus_device_bms_error")
-				dataSource: bindPrefix + "/Bms/Error"
+				dataItem.uid: bindPrefix + "/Bms/Error"
 				enabled: false
 				visible: bmsType === VenusOS.VeBusDevice_Bms_Type_VeBus
 			}

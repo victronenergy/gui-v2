@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -112,18 +113,18 @@ Page {
 			ListTextItem {
 				//% "Load"
 				text: qsTrId("charger_load")
-				dataSource: root.solarCharger.serviceUid + "/Load/State"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.solarCharger.serviceUid + "/Load/State"
+				visible: defaultVisible && dataItem.isValid
 
 				/* If load is on and current present, show current.
 				 * Otherwise show the state of the load output. */
-				secondaryText: dataValid && dataValue && loadCurrent.valid
+				secondaryText: dataItem.isValid && dataItem.value && loadCurrent.isValid
 						? loadCurrent.value
-						: CommonWords.yesOrNo(dataValue)
+						: CommonWords.yesOrNo(dataItem.value)
 
-				DataPoint {
+				VeQuickItem {
 					id: loadCurrent
-					source: root.solarCharger.serviceUid + "/Load/I"
+					uid: root.solarCharger.serviceUid + "/Load/I"
 				}
 			}
 
@@ -150,7 +151,7 @@ Page {
 				// Only enable if there is content on the alarms/errors page.
 				// TODO update this binding to consider 'active alarms' section when it is
 				// implemented for the page.
-				enabled: lowBatteryAlarm.valid || highBatteryAlarm.valid
+				enabled: lowBatteryAlarm.isValid || highBatteryAlarm.isValid
 						 || root.solarCharger.errorModel.count
 
 				onClicked: {
@@ -158,13 +159,13 @@ Page {
 							{ "title": text, "solarCharger": root.solarCharger })
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: lowBatteryAlarm
-					source: root.solarCharger.serviceUid + "/Alarms/LowVoltage"
+					uid: root.solarCharger.serviceUid + "/Alarms/LowVoltage"
 				}
-				DataPoint {
+				VeQuickItem {
 					id: highBatteryAlarm
-					source: root.solarCharger.serviceUid + "/Alarms/HighVoltage"
+					uid: root.solarCharger.serviceUid + "/Alarms/HighVoltage"
 				}
 			}
 

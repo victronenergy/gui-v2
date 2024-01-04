@@ -34,9 +34,9 @@ Page {
 
 			text: (devIndex + 1) + ": " + (type.value || "")
 
-			DataPoint {
+			VeQuickItem {
 				id: type
-				source: model.uid + "/Type"
+				uid: model.uid + "/Type"
 			}
 		}
 	}

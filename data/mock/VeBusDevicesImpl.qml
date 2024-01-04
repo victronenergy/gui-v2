@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 QtObject {
 	id: root
@@ -123,17 +124,17 @@ QtObject {
 				Global.mockDataSimulator.mockDataValues["com.victronenergy.vebus.ttyUSB" + deviceInstance + settingId] = value
 			}
 
-			readonly property DataPoint _chargeState: DataPoint {
+			readonly property VeQuickItem _chargeState: VeQuickItem {
 				property Timer subStateTimer : Timer {
 					interval: 10000
 					running: true
 					onTriggered: _chargeState.setValue(VenusOS.VeBusDevice_ChargeState_Absorption)
 				}
-				source: veBusDevice.serviceUid + "/VebusChargeState"
+				uid: veBusDevice.serviceUid + "/VebusChargeState"
 			}
 
-			readonly property DataPoint _setChargeState: DataPoint {
-				source: veBusDevice.serviceUid + "/VebusSetChargeState"
+			readonly property VeQuickItem _setChargeState: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/VebusSetChargeState"
 				onValueChanged: {
 					if (value === 1) {
 						equalizeTimer.start()
@@ -160,12 +161,12 @@ QtObject {
 			property Instantiator vebusDevicesExtendedStatus: Instantiator {
 				model: 18
 				delegate: QtObject {
-					property DataPoint code: DataPoint {
-						source: veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/GridRelayReport/Code"
+					property VeQuickItem code: VeQuickItem {
+						uid: veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/GridRelayReport/Code"
 						Component.onCompleted: setValue(index)
 					}
-					property DataPoint count: DataPoint {
-						source: veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/GridRelayReport/Count"
+					property VeQuickItem count: VeQuickItem {
+						uid: veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/GridRelayReport/Count"
 						Component.onCompleted: setValue(index + 1)
 					}
 				}
@@ -186,8 +187,8 @@ QtObject {
 
 			property Instantiator vebusDeviceAlarmSettings: Instantiator {
 				model: VeBusDeviceAlarmSettingsModel { }
-				delegate: DataPoint {
-					source: veBusDevice.serviceUid + "/Settings/Alarm/Vebus" + pathSuffix
+				delegate: VeQuickItem {
+					uid: veBusDevice.serviceUid + "/Settings/Alarm/Vebus" + pathSuffix
 					Component.onCompleted: setValue(2)
 				}
 			}
@@ -202,8 +203,8 @@ QtObject {
 
 					model: VeBusAcSensorModel { }
 
-					delegate: DataPoint {
-						source: veBusDevice.serviceUid + "/AcSensor/" + sensorIndex + pathSuffix
+					delegate: VeQuickItem {
+						uid: veBusDevice.serviceUid + "/AcSensor/" + sensorIndex + pathSuffix
 						Component.onCompleted: setValue(sensorIndex)
 					}
 
@@ -212,30 +213,30 @@ QtObject {
 
 			readonly property Instantiator vebusDeviceKwhCounters: Instantiator {
 				model: VeBusDeviceKwhCountersModel { }
-				delegate: DataPoint {
-					source: veBusDevice.serviceUid + "/Energy" + pathSuffix
+				delegate: VeQuickItem {
+					uid: veBusDevice.serviceUid + "/Energy" + pathSuffix
 					Component.onCompleted: setValue(4.39 + index * 0.1)
 				}
 			}
 
-			readonly property DataPoint _powerMeasurementType: DataPoint {
-				source: veBusDevice.serviceUid + "/Energy/Ac/PowerMeasurementType"
+			readonly property VeQuickItem _powerMeasurementType: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Energy/Ac/PowerMeasurementType"
 			}
 
 			// PageVeBusAdvanced
 			readonly property Instantiator vebusNetworkQualityCounters: Instantiator {
 				model: 18
-				delegate: DataPoint {
-					source: veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"
+				delegate: VeQuickItem {
+					uid: veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"
 					Component.onCompleted: setValue(index * 2)
 				}
 			}
 
 			// PageVeBusDebug
-			readonly property Instantiator debugPageDataPoints: Instantiator {
+			readonly property Instantiator debugPageDataItems: Instantiator {
 				model: ["/Energy", "/Power", "/Voltage", "/Current", "/Location", "/Phase"]
-				delegate: DataPoint {
-					source: veBusDevice.serviceUid + modelData
+				delegate: VeQuickItem {
+					uid: veBusDevice.serviceUid + modelData
 					Component.onCompleted: {
 						setValue(index * 1000)
 					}
@@ -243,10 +244,10 @@ QtObject {
 			}
 
 			// PageVeBusDeviceInfo
-			readonly property Instantiator veBusDeviceInfoPageDataPoints: Instantiator {
+			readonly property Instantiator veBusDeviceInfoPageDataItems: Instantiator {
 				model: VeBusDeviceInfoModel { }
-				delegate: DataPoint {
-					source: veBusDevice.serviceUid + pathSuffix
+				delegate: VeQuickItem {
+					uid: veBusDevice.serviceUid + pathSuffix
 					Component.onCompleted: {
 						switch(displayText) {
 						case "MK2 version":
@@ -264,37 +265,37 @@ QtObject {
 				}
 			}
 
-			readonly property DataPoint _maxChargePower: DataPoint {
-				source: BackendConnection.serviceUidForType("hub4") + "/MaxChargePower"
+			readonly property VeQuickItem _maxChargePower: VeQuickItem {
+				uid: BackendConnection.serviceUidForType("hub4") + "/MaxChargePower"
 			}
 
-			readonly property DataPoint _maxDischargePower: DataPoint {
-				source: BackendConnection.serviceUidForType("hub4") + "/MaxDischargePower"
+			readonly property VeQuickItem _maxDischargePower: VeQuickItem {
+				uid: BackendConnection.serviceUidForType("hub4") + "/MaxDischargePower"
 			}
 
-			readonly property DataPoint _disableCharge: DataPoint {
-				source: veBusDevice.serviceUid + "/Hub4/DisableCharge"
+			readonly property VeQuickItem _disableCharge: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Hub4/DisableCharge"
 			}
 
-			readonly property DataPoint _disableFeedIn: DataPoint {
-				source: veBusDevice.serviceUid + "/Hub4/DisableFeedIn"
+			readonly property VeQuickItem _disableFeedIn: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Hub4/DisableFeedIn"
 			}
 
 			// PageVeBusSerialNumbers
-			readonly property DataPoint _serialNumber1: DataPoint {
-				source: veBusDevice.serviceUid + "/Devices/0/SerialNumber"
+			readonly property VeQuickItem _serialNumber1: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Devices/0/SerialNumber"
 			}
 
-			readonly property DataPoint _serialNumber2: DataPoint {
-				source: "mqtt/vebus/276/Devices/1/SerialNumber"
+			readonly property VeQuickItem _serialNumber2: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Devices/1/SerialNumber"
 			}
 
-			readonly property DataPoint _serialNumber3: DataPoint {
-				source: "mqtt/vebus/276/Devices/2/SerialNumber"
+			readonly property VeQuickItem _serialNumber3: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Devices/2/SerialNumber"
 			}
 
-			readonly property DataPoint _redetectSystem: DataPoint {
-				source: veBusDevice.serviceUid + "/RedetectSystem"
+			readonly property VeQuickItem _redetectSystem: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/RedetectSystem"
 				onValueChanged: {
 					if (value === 1) {
 						redetectTimer.start()
@@ -307,8 +308,8 @@ QtObject {
 				}
 			}
 
-			readonly property DataPoint _systemReset: DataPoint {
-				source: veBusDevice.serviceUid + "/SystemReset"
+			readonly property VeQuickItem _systemReset: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/SystemReset"
 				onValueChanged: {
 					if (value === 1) {
 						resetSystemTimer.start()
@@ -321,84 +322,84 @@ QtObject {
 				}
 			}
 
-			readonly property DataPoint _ignoreAcIn1: DataPoint {
-				source: veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn1"
+			readonly property VeQuickItem _ignoreAcIn1: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn1"
 			}
 
-			readonly property DataPoint _ignoreAcIn2: DataPoint {
-				source: veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn2"
+			readonly property VeQuickItem _ignoreAcIn2: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn2"
 			}
 
-			readonly property DataPoint _waitingForRelayTest: DataPoint {
-				source: veBusDevice.serviceUid + "/Devices/0/ExtendStatus/WaitingForRelayTest"
+			readonly property VeQuickItem _waitingForRelayTest: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Devices/0/ExtendStatus/WaitingForRelayTest"
 			}
 
-			readonly property DataPoint _numberOfPhases: DataPoint {
-				source: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
+			readonly property VeQuickItem _numberOfPhases: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
 			}
 
-			readonly property DataPoint _bmsMode: DataPoint {
-				source: veBusDevice.serviceUid + "/Devices/Bms/Version"
+			readonly property VeQuickItem _bmsMode: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Devices/Bms/Version"
 			}
 
-			readonly property DataPoint _bmsType: DataPoint {
-				source: veBusDevice.serviceUid + "/Bms/BmsType"
+			readonly property VeQuickItem _bmsType: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Bms/BmsType"
 			}
 
-			readonly property DataPoint _bmsExpected: DataPoint {
-				source: veBusDevice.serviceUid + "/Bms/BmsExpected"
+			readonly property VeQuickItem _bmsExpected: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Bms/BmsExpected"
 			}
 
-			readonly property DataPoint _bmsAllowToCharge: DataPoint {
-				source: veBusDevice.serviceUid + "/Bms/AllowToCharge"
+			readonly property VeQuickItem _bmsAllowToCharge: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Bms/AllowToCharge"
 			}
 
-			readonly property DataPoint _bmsAllowToDischarge: DataPoint {
-				source: veBusDevice.serviceUid + "/Bms/AllowToDischarge"
+			readonly property VeQuickItem _bmsAllowToDischarge: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Bms/AllowToDischarge"
 			}
 
-			readonly property DataPoint _bmsError: DataPoint {
-				source: veBusDevice.serviceUid + "/Bms/Error"
+			readonly property VeQuickItem _bmsError: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Bms/Error"
 			}
 
-			readonly property DataPoint _vebusError: DataPoint {
-				source: veBusDevice.serviceUid + "/VebusError"
+			readonly property VeQuickItem _vebusError: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/VebusError"
 			}
 
 			// PageVeBus
-			readonly property DataPoint _mk3Update: DataPoint {
-				source: Global.systemSettings.serviceUid + "/Settings/Vebus/AllowMk3Fw212Update"
+			readonly property VeQuickItem _mk3Update: VeQuickItem {
+				uid: Global.systemSettings.serviceUid + "/Settings/Vebus/AllowMk3Fw212Update"
 			}
 
-			readonly property DataPoint _preferRenewableEnergy: DataPoint {
-				source: veBusDevice.serviceUid + "/Dc/0/PreferRenewableEnergy"
+			readonly property VeQuickItem _preferRenewableEnergy: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Dc/0/PreferRenewableEnergy"
 			}
 
-			readonly property DataPoint _dcVoltage: DataPoint {
-				source: veBusDevice.serviceUid + "/Dc/0/Voltage"
+			readonly property VeQuickItem _dcVoltage: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Dc/0/Voltage"
 			}
 
-			readonly property DataPoint _l1Voltage: DataPoint {
-				source: veBusDevice.serviceUid + "/Ac/ActiveIn/L1/V"
+			readonly property VeQuickItem _l1Voltage: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/ActiveIn/L1/V"
 			}
 
-			readonly property DataPoint _l1Current: DataPoint {
-				source: veBusDevice.serviceUid + "/Ac/ActiveIn/L1/I"
+			readonly property VeQuickItem _l1Current: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/ActiveIn/L1/I"
 			}
 
-			readonly property DataPoint _l1Power: DataPoint {
-				source: veBusDevice.serviceUid + "/Ac/ActiveIn/L1/P"
+			readonly property VeQuickItem _l1Power: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/ActiveIn/L1/P"
 			}
 
-			readonly property DataPoint _l1Frequency: DataPoint {
-				source: veBusDevice.serviceUid + "/Ac/ActiveIn/L1/F"
+			readonly property VeQuickItem _l1Frequency: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/ActiveIn/L1/F"
 			}
 
-			readonly property DataPoint _currentLimitIsAdjustable: DataPoint {
-				source: veBusDevice.serviceUid + "/Ac/ActiveIn/CurrentLimitIsAdjustable"
+			readonly property VeQuickItem _currentLimitIsAdjustable: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/ActiveIn/CurrentLimitIsAdjustable"
 			}
 
-			serviceUid: "com.victronenergy.vebus.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.vebus.ttyUSB" + deviceInstance
 			name: "VeBusDevice" + deviceInstance
 
 			Component.onCompleted: {

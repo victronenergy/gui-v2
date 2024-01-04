@@ -5,14 +5,15 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 ListTextItem {
 	property var veBusDevice
 
-	DataPoint {
+	VeQuickItem {
 		id: acActiveInput
 
-		source: veBusDevice.serviceUid + "/Ac/ActiveIn/ActiveInput"
+		uid: veBusDevice.serviceUid + "/Ac/ActiveIn/ActiveInput"
 	}
 
 	//% "Active AC Input"

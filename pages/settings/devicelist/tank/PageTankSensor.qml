@@ -17,56 +17,56 @@ Page {
 		model: ObjectModel {
 			ListTextItem {
 				text: CommonWords.status
-				dataSource: root.bindPrefix + "/Status"
-				secondaryText: Global.tanks.statusToText(dataValue)
+				dataItem.uid: root.bindPrefix + "/Status"
+				secondaryText: Global.tanks.statusToText(dataItem.value)
 			}
 
 			ListQuantityItem {
 				//% "Level"
 				text: qsTrId("devicelist_tanksensor_level")
-				dataSource: root.bindPrefix + "/Level"
+				dataItem.uid: root.bindPrefix + "/Level"
 				unit: VenusOS.Units_Percentage
 			}
 
 			ListQuantityItem {
 				//% "Remaining"
 				text: qsTrId("devicelist_tanksensor_remaining")
-				dataSource: root.bindPrefix + "/Remaining"
-				value: Units.convertVolumeForUnit(dataValue, Global.systemSettings.volumeUnit.value)
+				dataItem.uid: root.bindPrefix + "/Remaining"
+				value: Units.convertVolumeForUnit(dataItem.value, Global.systemSettings.volumeUnit.value)
 				unit: Global.systemSettings.volumeUnit.value
 			}
 
 			ListQuantityItem {
 				text: CommonWords.temperature
-				dataSource: root.bindPrefix + "/Temperature"
-				value: dataValid
+				dataItem.uid: root.bindPrefix + "/Temperature"
+				value: dataItem.isValid
 					   ? Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-						   ? dataValue
-						   : Units.celsiusToFahrenheit(dataValue)
+						   ? dataItem.value
+						   : Units.celsiusToFahrenheit(dataItem.value)
 					   : NaN
 				unit: Global.systemSettings.temperatureUnit.value
-				visible: defaultVisible && dataValid
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListQuantityItem {
 				//% "Sensor battery"
 				text: qsTrId("devicelist_tanksensor_sensor_battery")
-				dataSource: root.bindPrefix + "/BatteryVoltage"
+				dataItem.uid: root.bindPrefix + "/BatteryVoltage"
 				unit: VenusOS.Units_Volt
 				precision: 2
-				visible: defaultVisible && dataValid
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListAlarm {
 				text: CommonWords.low_level_alarm
-				dataSource: root.bindPrefix + "/Alarms/Low/State"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/Alarms/Low/State"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListAlarm {
 				text: CommonWords.high_level_alarm
-				dataSource: root.bindPrefix + "/Alarms/High/State"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/Alarms/High/State"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListNavigationItem {

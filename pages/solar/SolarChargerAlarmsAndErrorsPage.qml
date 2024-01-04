@@ -31,8 +31,8 @@ Page {
 
 				//% "Low battery voltage alarm"
 				text: qsTrId("charger_alarms_low_battery_voltage_alarm")
-				dataSource: root.solarCharger.serviceUid + "/Alarms/LowVoltage"
-				visible: dataValid
+				dataItem.uid: root.solarCharger.serviceUid + "/Alarms/LowVoltage"
+				visible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -40,8 +40,8 @@ Page {
 
 				//% "High battery voltage alarm"
 				text: qsTrId("charger_alarms_high_battery_voltage_alarm")
-				dataSource: root.solarCharger.serviceUid + "/Alarms/HighVoltage"
-				visible: dataValid
+				dataItem.uid: root.solarCharger.serviceUid + "/Alarms/HighVoltage"
+				visible: dataItem.isValid
 			}
 
 			ListLabel {

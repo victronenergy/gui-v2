@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 QtObject {
@@ -13,7 +14,7 @@ QtObject {
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
 
 	function canAccess(level) {
-		return accessLevel.valid && accessLevel.value >= level
+		return accessLevel.isValid && accessLevel.value >= level
 	}
 
 	function convertTemperature(celsius_value) {
@@ -53,12 +54,12 @@ QtObject {
 		}
 	}
 
-	property DataPoint accessLevel: DataPoint {
-		 source: root.serviceUid + "/Settings/System/AccessLevel"
+	property VeQuickItem accessLevel: VeQuickItem {
+		 uid: root.serviceUid + "/Settings/System/AccessLevel"
 	}
 
-	property DataPoint colorScheme: DataPoint {
-		 source: root.serviceUid + "/Settings/Gui/ColorScheme"
+	property VeQuickItem colorScheme: VeQuickItem {
+		 uid: root.serviceUid + "/Settings/Gui/ColorScheme"
 		 onValueChanged: {
 			 if (value === Theme.Dark) {
 				 Theme.colorScheme = Theme.Dark
@@ -70,48 +71,48 @@ QtObject {
 
 	property QtObject electricalQuantity: QtObject {
 		// Values for /Settings/Gui/ElectricalPowerIndicator: 0 = watts, 1 = amps
-		readonly property var value: _electricalQuantityDataPoint.value === 1 ? VenusOS.Units_Amp : VenusOS.Units_Watt
+		readonly property var value: _electricalQuantityDataItem.value === 1 ? VenusOS.Units_Amp : VenusOS.Units_Watt
 
 		function setValue(v) {
 			if (v === VenusOS.Units_Watt) {
-				_electricalQuantityDataPoint.setValue(0)
+				_electricalQuantityDataItem.setValue(0)
 			} else if (v === VenusOS.Units_Amp) {
-				_electricalQuantityDataPoint.setValue(1)
+				_electricalQuantityDataItem.setValue(1)
 			} else {
 				console.warn("Unsupported electrical quantity:", v)
 			}
 		}
 
-		readonly property DataPoint _electricalQuantityDataPoint: DataPoint {
-			id: _electricalQuantityDataPoint
-			source: root.serviceUid + "/Settings/Gui/ElectricalPowerIndicator"
+		readonly property VeQuickItem _electricalQuantityDataItem: VeQuickItem {
+			id: _electricalQuantityDataItem
+			uid: root.serviceUid + "/Settings/Gui/ElectricalPowerIndicator"
 		}
 	}
 
 	property QtObject temperatureUnit: QtObject {
 		// translate /System/Units/Temperature from string to enum value
-		readonly property var value: _unitDataPoint.value === "fahrenheit"
+		readonly property var value: _unitDataItem.value === "fahrenheit"
 				? VenusOS.Units_Temperature_Fahrenheit
 				: VenusOS.Units_Temperature_Celsius
 
 		function setValue(v) {
 			if (v === VenusOS.Units_Temperature_Celsius) {
-				_unitDataPoint.setValue("celsius")
+				_unitDataItem.setValue("celsius")
 			} else if (v === VenusOS.Units_Temperature_Fahrenheit) {
-				_unitDataPoint.setValue("fahrenheit")
+				_unitDataItem.setValue("fahrenheit")
 			} else {
 				console.warn("Unsupported temperature unit:", v)
 			}
 		}
 
-		readonly property DataPoint _unitDataPoint: DataPoint {
-			id: _unitDataPoint
-			source: root.serviceUid + "/Settings/System/Units/Temperature"
+		readonly property VeQuickItem _unitDataItem: VeQuickItem {
+			id: _unitDataItem
+			uid: root.serviceUid + "/Settings/System/Units/Temperature"
 		}
 	}
 
-	property DataPoint volumeUnit: DataPoint {
-		source: root.serviceUid + "/Settings/System/VolumeUnit"
+	property VeQuickItem volumeUnit: VeQuickItem {
+		uid: root.serviceUid + "/Settings/System/VolumeUnit"
 	}
 
 	property QtObject briefView: QtObject {
@@ -143,8 +144,8 @@ QtObject {
 
 			property Instantiator _savedLevels: Instantiator {
 				model: Theme.geometry_briefPage_centerGauge_maximumGaugeCount
-				delegate: DataPoint {
-					source: root.serviceUid + "/Settings/Gui/BriefView/Level/" + model.index
+				delegate: VeQuickItem {
+					uid: root.serviceUid + "/Settings/Gui/BriefView/Level/" + model.index
 					onValueChanged: {
 						if (value !== undefined) {
 							Qt.callLater(briefView.centralGauges._refresh)
@@ -154,13 +155,13 @@ QtObject {
 			}
 		}
 
-		property DataPoint showPercentages: DataPoint {
-			 source: root.serviceUid + "/Settings/Gui/BriefView/ShowPercentages"
+		property VeQuickItem showPercentages: VeQuickItem {
+			 uid: root.serviceUid + "/Settings/Gui/BriefView/ShowPercentages"
 		}
 	}
 
-	property DataPoint time: DataPoint {
-		source: Global.venusPlatform.serviceUid + "/Device/Time"
+	property VeQuickItem time: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Device/Time"
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.setClockTime(value)
@@ -177,8 +178,8 @@ QtObject {
 		}
 	}
 
-	property DataPoint timeZone: DataPoint {
-		source: root.serviceUid + "/Settings/System/TimeZone"
+	property VeQuickItem timeZone: VeQuickItem {
+		uid: root.serviceUid + "/Settings/System/TimeZone"
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.systemTimeZone = value
@@ -187,8 +188,8 @@ QtObject {
 		}
 	}
 
-	property DataPoint language: DataPoint {
-		source: root.serviceUid + "/Settings/Gui/Language"
+	property VeQuickItem language: VeQuickItem {
+		uid: root.serviceUid + "/Settings/Gui/Language"
 		onValueChanged: {
 			if (value !== undefined && !Global.changingLanguage
 					&& value != Language.toCode(Language.current)) {

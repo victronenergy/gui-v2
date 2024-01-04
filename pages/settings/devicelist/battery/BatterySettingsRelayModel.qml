@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 ObjectModel {
@@ -25,7 +26,7 @@ ObjectModel {
 		id: mode
 		//% "Relay function"
 		text: qsTrId("batterysettingrelay_relay_function")
-		dataSource: root.bindPrefix + "/Settings/Relay/Mode"
+		dataItem.uid: root.bindPrefix + "/Settings/Relay/Mode"
 		optionModel: [
 			//: Relay function is 'alarm'
 			//% "Alarm"
@@ -37,24 +38,24 @@ ObjectModel {
 			//% "Always open (don't use the relay)"
 			{ display: qsTrId("batterysettingrelay_always_open_dont_use_the_relay"), value: 3 },
 		]
-		visible: defaultVisible && dataValid
+		visible: defaultVisible && dataItem.isValid
 	}
 
 	ListSwitch {
 		text: CommonWords.state
-		dataSource: root.bindPrefix + "/Relay/0/State"
-		enabled: mode.dataValid && mode.dataValue === 2
-		visible: defaultVisible && dataValid
+		dataItem.uid: root.bindPrefix + "/Relay/0/State"
+		enabled: mode.dataItem.isValid && mode.dataItem.value === 2
+		visible: defaultVisible && dataItem.isValid
 	}
 
 	ListLabel {
 		//% "Note that changing the Low state-of-charge setting also changes the Time-to-go discharge floor setting in the battery menu."
 		text: qsTrId("batterysettingrelay_low_state_of_charge_setting_note")
-		visible: dischargeFloorLinkedToRelay.valid && dischargeFloorLinkedToRelay.value !== 0 && lowSoc.visible
+		visible: dischargeFloorLinkedToRelay.isValid && dischargeFloorLinkedToRelay.value !== 0 && lowSoc.visible
 
-		DataPoint {
+		VeQuickItem {
 			id: dischargeFloorLinkedToRelay
-			source: root.bindPrefix + "/Settings/DischargeFloorLinkedToRelay"
+			uid: root.bindPrefix + "/Settings/DischargeFloorLinkedToRelay"
 		}
 	}
 
@@ -65,9 +66,9 @@ ObjectModel {
 		slider.suffix: "%"
 		slider.firstColor: Theme.color_red
 		slider.secondColor: Theme.color_green
-		firstDataSource: root.bindPrefix + "/Settings/Relay/LowSoc"
-		secondDataSource: root.bindPrefix + "/Settings/Relay/LowSocClear"
-		visible: defaultVisible && dataValid && showSetting(0, 1)
+		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSoc"
+		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSocClear"
+		visible: defaultVisible && dataItem.isValid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -77,9 +78,9 @@ ObjectModel {
 		slider.stepSize: 0.1
 		slider.firstColor: Theme.color_red
 		slider.secondColor: Theme.color_green
-		firstDataSource: root.bindPrefix + "/Settings/Relay/LowVoltage"
-		secondDataSource: root.bindPrefix + "/Settings/Relay/LowVoltageClear"
-		visible: defaultVisible && dataValid && showSetting(0, 1)
+		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltage"
+		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltageClear"
+		visible: defaultVisible && dataItem.isValid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -89,9 +90,9 @@ ObjectModel {
 		slider.stepSize: 0.1
 		slider.firstColor: Theme.color_green
 		slider.secondColor: Theme.color_red
-		firstDataSource: root.bindPrefix + "/Settings/Relay/HighVoltageClear"
-		secondDataSource: root.bindPrefix + "/Settings/Relay/HighVoltage"
-		visible: defaultVisible && dataValid && showSetting(0)
+		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltageClear"
+		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltage"
+		visible: defaultVisible && dataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -101,9 +102,9 @@ ObjectModel {
 		slider.stepSize: 0.1
 		slider.firstColor: Theme.color_red
 		slider.secondColor: Theme.color_green
-		firstDataSource: root.bindPrefix + "/Settings/Relay/LowStarterVoltage"
-		secondDataSource: root.bindPrefix + "/Settings/Relay/LowStarterVoltageClear"
-		visible: defaultVisible && dataValid && showSetting(0)
+		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltage"
+		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltageClear"
+		visible: defaultVisible && dataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -113,25 +114,25 @@ ObjectModel {
 		slider.stepSize: 0.1
 		slider.firstColor: Theme.color_green
 		slider.secondColor: Theme.color_red
-		firstDataSource: root.bindPrefix + "/Settings/Relay/HighStarterVoltageClear"
-		secondDataSource: root.bindPrefix + "/Settings/Relay/HighStarterVoltage"
-		visible: defaultVisible && dataValid && showSetting(0)
+		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltageClear"
+		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltage"
+		visible: defaultVisible && dataItem.isValid && showSetting(0)
 	}
 
 	ListSwitch {
 		//% "Fuse blown"
 		text: qsTrId("batterysettingrelay_fuse_blown")
-		dataSource: root.bindPrefix + "/Settings/Relay/FuseBlown"
-		visible: defaultVisible && dataValid && showSetting(0)
+		dataItem.uid: root.bindPrefix + "/Settings/Relay/FuseBlown"
+		visible: defaultVisible && dataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
 		text: CommonWords.low_battery_temperature
 		slider.firstColor: Theme.color_red
 		slider.secondColor: Theme.color_green
-		firstDataSource: root.bindPrefix + "/Settings/Relay/LowBatteryTemperature"
-		secondDataSource: root.bindPrefix + "/Settings/Relay/LowBatteryTemperatureClear"
-		visible: defaultVisible && dataValid && showSetting(0)
+		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperature"
+		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperatureClear"
+		visible: defaultVisible && dataItem.isValid && showSetting(0)
 		toSourceValue: function(v) {
 			return Units.toKelvin(v, Global.systemSettings.temperatureUnit.value)
 		}
@@ -144,9 +145,9 @@ ObjectModel {
 		text: CommonWords.high_battery_temperature
 		slider.firstColor: Theme.color_green
 		slider.secondColor: Theme.color_red
-		firstDataSource: root.bindPrefix + "/Settings/Relay/HighBatteryTemperatureClear"
-		secondDataSource: root.bindPrefix + "/Settings/Relay/HighBatteryTemperature"
-		visible: defaultVisible && dataValid && showSetting(0)
+		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperatureClear"
+		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperature"
+		visible: defaultVisible && dataItem.isValid && showSetting(0)
 		toSourceValue: function(v) {
 			return Units.toKelvin(v, Global.systemSettings.temperatureUnit.value)
 		}

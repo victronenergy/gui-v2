@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 /*
 	'VeBusDeviceModeButton' allow the user to plug in any style of button via 'sourceComponent', and handles raising all of the toast notifications
@@ -27,16 +28,16 @@ Loader {
 	sourceComponent: listButton
 	width: parent ? parent.width : 0
 
-	DataPoint {
+	VeQuickItem {
 		id: bmsMode
 
-		source: veBusDevice.serviceUid + "/Devices/Bms/Version"
+		uid: veBusDevice.serviceUid + "/Devices/Bms/Version"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: dmc
 
-		source: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
+		uid: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
 	}
 
 	Connections {
@@ -44,7 +45,7 @@ Loader {
 
 		function onClicked() {
 			if (!root.veBusDevice.modeIsAdjustable) {
-				if (dmc.valid)
+				if (dmc.isValid)
 					Global.showToastNotification(VenusOS.Notification_Info, root.noAdjustableByDmc,
 												 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 				if (bmsMode.value !== undefined)

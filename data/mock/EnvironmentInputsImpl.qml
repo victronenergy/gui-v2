@@ -33,7 +33,7 @@ Item {
 			property real temperature_celsius
 			property real humidity
 
-			serviceUid: "com.victronenergy.temperature.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.temperature.ttyUSB" + deviceInstance
 			name: "EnvironmentInput" + deviceInstance
 		}
 	}

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 QtObject {
 	id: root
@@ -12,15 +13,15 @@ QtObject {
 	property int fuseNumber
 	property string bindPrefix
 
-	readonly property string fuseName: _nameDataPoint.value || ""
-	readonly property int fuseStatus: _statusDataPoint.value === undefined ? -1 : _statusDataPoint.value
-	readonly property bool blown: _statusDataPoint.value === 3
+	readonly property string fuseName: _nameDataItem.value || ""
+	readonly property int fuseStatus: _statusDataItem.value === undefined ? -1 : _statusDataItem.value
+	readonly property bool blown: _statusDataItem.value === 3
 
-	property DataPoint _nameDataPoint: DataPoint {
-		source: root.bindPrefix+ "/Fuse/" + root.fuseNumber + "/Name"
+	property VeQuickItem _nameDataItem: VeQuickItem {
+		uid: root.bindPrefix+ "/Fuse/" + root.fuseNumber + "/Name"
 	}
 
-	property DataPoint _statusDataPoint: DataPoint {
-		source: root.bindPrefix+ "/Fuse/" + root.fuseNumber + "/Status"
+	property VeQuickItem _statusDataItem: VeQuickItem {
+		uid: root.bindPrefix+ "/Fuse/" + root.fuseNumber + "/Status"
 	}
 }

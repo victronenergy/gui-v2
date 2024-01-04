@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 ObjectModel {
@@ -18,34 +19,34 @@ ObjectModel {
 	// carloGavazziEmProductId should always be equal to VE_PROD_ID_CARLO_GAVAZZI_EM
 	readonly property int carloGavazziEmProductId: 0xB002
 
-	readonly property var nrOfPhases: DataPoint {
-		source: root.bindPrefix + "/NrOfPhases"
+	readonly property var nrOfPhases: VeQuickItem {
+		uid: root.bindPrefix + "/NrOfPhases"
 	}
 
 	ListTextItem {
 		text: CommonWords.status
-		dataSource: root.productId === froniusInverterProductId
+		dataItem.uid: root.productId === froniusInverterProductId
 				? root.bindPrefix + "/StatusCode"
 				: ""
 		visible: root.productId === froniusInverterProductId
-		secondaryText: Global.pvInverters.statusCodeToText(dataValue)
+		secondaryText: Global.pvInverters.statusCodeToText(dataItem.value)
 	}
 
 	ListTextItem {
 		text: CommonWords.error_code
-		dataSource: root.bindPrefix + "/ErrorCode"
+		dataItem.uid: root.bindPrefix + "/ErrorCode"
 		secondaryText: {
 			if (root.productId === froniusInverterProductId) {
-				return dataValue
+				return dataItem.value
 			} else if (root.productId === carloGavazziEmProductId) {
-				if (dataValue === 1) {
+				if (dataItem.value === 1) {
 					//: %1 = the error number
 					//% "Front selector locked (%1)"
-					return qsTrId("ac-in-modeldefault_front_selector_locked").arg(dataValue)
-				} else if (dataValue !== undefined) {
+					return qsTrId("ac-in-modeldefault_front_selector_locked").arg(dataItem.value)
+				} else if (dataItem.value !== undefined) {
 					//: %1 = the error number
 					//% "No error (%1)"
-					return qsTrId("ac-in-modeldefault_no_error").arg(dataValue)
+					return qsTrId("ac-in-modeldefault_no_error").arg(dataItem.value)
 				}
 			}
 			return ""
@@ -67,17 +68,17 @@ ObjectModel {
 					{ value: phasePower.value, unit: VenusOS.Units_Watt },
 				]
 
-				DataPoint {
+				VeQuickItem {
 					id: phaseVoltage
-					source: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Voltage"
+					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Voltage"
 				}
-				DataPoint {
+				VeQuickItem {
 					id: phaseCurrent
-					source: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Current"
+					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Current"
 				}
-				DataPoint {
+				VeQuickItem {
 					id: phasePower
-					source: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Power"
+					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Power"
 				}
 			}
 		}
@@ -91,14 +92,14 @@ ObjectModel {
 			{ value: totalEnergy.value, unit: VenusOS.Units_Energy_KiloWattHour },
 		]
 
-		DataPoint {
+		VeQuickItem {
 			id: totalPower
-			source: root.bindPrefix + "/Ac/Power"
+			uid: root.bindPrefix + "/Ac/Power"
 		}
 
-		DataPoint {
+		VeQuickItem {
 			id: totalEnergy
-			source: root.bindPrefix + "/Ac/Energy/Forward"
+			uid: root.bindPrefix + "/Ac/Energy/Forward"
 		}
 	}
 
@@ -111,7 +112,7 @@ ObjectModel {
 				//: %1 = phase number (1-3)
 				//% "Energy L%1"
 				text: qsTrId("ac-in-modeldefault_energy_x").arg(model.index + 1)
-				dataSource: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(model.index + 1)
+				dataItem.uid: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(model.index + 1)
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 		}
@@ -119,16 +120,16 @@ ObjectModel {
 
 	ListTextItem {
 		text: CommonWords.zero_feed_in_power_limit
-		dataSource: root.bindPrefix + "/Ac/PowerLimit"
-		visible: dataValid
+		dataItem.uid: root.bindPrefix + "/Ac/PowerLimit"
+		visible: dataItem.isValid
 	}
 
 	ListTextItem {
 		//% "Phase Sequence"
 		text: qsTrId("ac-in-modeldefault_phase_sequence")
-		dataSource: root.bindPrefix + "/PhaseSequence"
-		visible: dataValid
-		secondaryText: dataValue === 1
+		dataItem.uid: root.bindPrefix + "/PhaseSequence"
+		visible: dataItem.isValid
+		secondaryText: dataItem.value === 1
 				  //: Phase sequence L1-L3-L2
 				  //% "L1-L3-L2"
 				? qsTrId("ac-in-modeldefault_phase_sequence_l3_first")
@@ -139,15 +140,15 @@ ObjectModel {
 
 	ListNavigationItem {
 		text: CommonWords.setup
-		visible: allowedRoles.valid
+		visible: allowedRoles.isValid
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 
-		DataPoint {
+		VeQuickItem {
 			id: allowedRoles
-			source: root.bindPrefix + "/AllowedRoles"
+			uid: root.bindPrefix + "/AllowedRoles"
 		}
 	}
 
@@ -175,8 +176,8 @@ ObjectModel {
 					ListTextItem {
 						//% "Data manager version"
 						text: qsTrId("ac-in-modeldefault_data_manager_version")
-						dataSource: root.bindPrefix + "/DataManagerVersion"
-						visible: defaultVisible && dataValid
+						dataItem.uid: root.bindPrefix + "/DataManagerVersion"
+						visible: defaultVisible && dataItem.isValid
 					}
 				}
 			}

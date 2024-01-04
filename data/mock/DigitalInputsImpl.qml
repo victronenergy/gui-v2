@@ -25,7 +25,7 @@ Item {
 			property int type
 			property int state
 
-			serviceUid: "com.victronenergy.digitalinput.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.digitalinput.ttyUSB" + deviceInstance
 			name: "DigitalInput" + deviceInstance
 		}
 	}

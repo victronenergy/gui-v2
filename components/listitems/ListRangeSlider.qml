@@ -5,34 +5,24 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 ListItem {
 	id: root
 
-	property alias firstDataSource: firstDataPoint.source
-	readonly property alias firstDataValue: firstDataPoint.value
-	readonly property alias firstDataValid: firstDataPoint.valid
-	readonly property alias firstDataSeen: firstDataPoint.seen
-	property alias firstDataInvalidate: firstDataPoint.invalidate
-	function setFirstDataValue(v) { firstDataPoint.setValue(v) }
+	readonly property alias firstDataItem: firstDataItem
+	readonly property alias secondDataItem: secondDataItem
 
-	property alias secondDataSource: secondDataPoint.source
-	readonly property alias secondDataValue: secondDataPoint.value
-	readonly property alias secondDataValid: secondDataPoint.valid
-	readonly property alias secondDataSeen: secondDataPoint.seen
-	property alias secondDataInvalidate: secondDataPoint.invalidate
-	function setSecondDataValue(v) { secondDataPoint.setValue(v) }
-
-	readonly property bool dataValid: firstDataValid && secondDataValid
+	readonly property bool dataValid: firstDataItem.isValid && secondDataItem.isValid
 	readonly property alias slider: slider
 
-	// Optional functions that convert to/from the DataPoint values.
+	// Optional functions that convert to/from the VeQuickItem values.
 	property var toSourceValue: undefined
 	property var fromSourceValue: undefined
 
 	enabled: userHasWriteAccess
-			 && (firstDataSource === "" || firstDataValid)
-			 && (secondDataSource === "" || secondDataValid)
+			 && (firstDataItem.uid === "" || firstDataItem.isValid)
+			 && (secondDataItem.uid === "" || secondDataItem.isValid)
 
 	content.anchors.rightMargin: 0
 	content.children: [
@@ -41,19 +31,19 @@ ListItem {
 
 			width: Theme.geometry_listItem_slider_width
 			first.value: {
-				const v = isNaN(firstDataPoint.value) ? 0 : firstDataPoint.value
+				const v = isNaN(firstDataItem.value) ? 0 : firstDataItem.value
 				return root.fromSourceValue !== undefined ? root.fromSourceValue(v) : v
 			}
 			second.value: {
-				const v = isNaN(secondDataPoint.value) ? 0 : secondDataPoint.value
+				const v = isNaN(secondDataItem.value) ? 0 : secondDataItem.value
 				return root.fromSourceValue !== undefined ? root.fromSourceValue(v) : v
 			}
 			from: {
-				const v = firstDataPoint.min || 0
+				const v = firstDataItem.min || 0
 				return root.fromSourceValue !== undefined ? root.fromSourceValue(v) : v
 			}
 			to: {
-				const v = secondDataPoint.max || 0
+				const v = secondDataItem.max || 0
 				return root.fromSourceValue !== undefined ? root.fromSourceValue(v) : v
 			}
 
@@ -61,9 +51,9 @@ ListItem {
 				target: slider.first
 				function onPressedChanged() {
 					// Update data value when mouse is released, to avoid spamming data changes.
-					if (!slider.first.pressed && firstDataPoint.source.length > 0) {
+					if (!slider.first.pressed && firstDataItem.uid.length > 0) {
 						const v = root.toSourceValue !== undefined ? root.toSourceValue(slider.first.value) : slider.first.value
-						firstDataPoint.setValue(v)
+						firstDataItem.setValue(v)
 					}
 				}
 			}
@@ -72,20 +62,20 @@ ListItem {
 				target: slider.second
 				function onPressedChanged() {
 					// Update data value when mouse is released, to avoid spamming data changes.
-					if (!slider.second.pressed && secondDataPoint.source.length > 0) {
+					if (!slider.second.pressed && secondDataItem.uid.length > 0) {
 						const v = root.toSourceValue !== undefined ? root.toSourceValue(slider.second.value) : slider.second.value
-						secondDataPoint.setValue(v)
+						secondDataItem.setValue(v)
 					}
 				}
 			}
 		}
 	]
 
-	DataPoint {
-		id: firstDataPoint
+	VeQuickItem {
+		id: firstDataItem
 	}
 
-	DataPoint {
-		id: secondDataPoint
+	VeQuickItem {
+		id: secondDataItem
 	}
 }

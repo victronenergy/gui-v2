@@ -18,8 +18,8 @@ QtObject {
 
 	property int _updateType
 
-	property DataPoint _stateItem: DataPoint {
-		source: Global.venusPlatform.serviceUid + "/Firmware/State"
+	property VeQuickItem _stateItem: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Firmware/State"
 
 		onValueChanged: {
 			let msg = ""
@@ -38,11 +38,11 @@ QtObject {
 			case FirmwareUpdater.Checking:
 				break
 			case FirmwareUpdater.DownloadingAndInstalling:
-				if (_onlineVersion.valid) {
+				if (_onlineVersion.isValid) {
 					//: %1 = firmware version
 					//% "Downloading and installing firmware %1..."
 					msg = qsTrId("settings_firmware_downloading_and_installing").arg(_onlineVersion.value)
-				} else if (_offlineVersion.valid) {
+				} else if (_offlineVersion.isValid) {
 					//: %1 = firmware version
 					//% "Installing %1..."
 					msg = qsTrId("settings_firmware_installing").arg(_offlineVersion.value)
@@ -68,25 +68,25 @@ QtObject {
 	}
 
 	// online updates
-	property DataPoint _onlineCheckUpdate: DataPoint {
-		source: Global.venusPlatform.serviceUid + "/Firmware/Online/Check"
+	property VeQuickItem _onlineCheckUpdate: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/Check"
 	}
-	property DataPoint _onlineVersion: DataPoint {
-		source: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableVersion"
+	property VeQuickItem _onlineVersion: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableVersion"
 	}
-	property DataPoint _onlineInstallUpdate: DataPoint {
-		source: Global.venusPlatform.serviceUid + "/Firmware/Online/Install"
+	property VeQuickItem _onlineInstallUpdate: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/Install"
 	}
 
 	// offline updates
-	property DataPoint _offlineCheckUpdate: DataPoint {
-		source: Global.venusPlatform.serviceUid + "/Firmware/Offline/Check"
+	property VeQuickItem _offlineCheckUpdate: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/Check"
 	}
-	property DataPoint _offlineVersion: DataPoint {
-		source: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableVersion"
+	property VeQuickItem _offlineVersion: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableVersion"
 	}
-	property DataPoint _offlineInstallUpdate: DataPoint {
-		source: Global.venusPlatform.serviceUid + "/Firmware/Offline/Install"
+	property VeQuickItem _offlineInstallUpdate: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/Install"
 	}
 
 	function checkForUpdate(updateType) {
@@ -118,10 +118,10 @@ QtObject {
 		}
 		let msg = ""
 		checkingForUpdate = false
-		if (_updateType === VenusOS.Firmware_UpdateType_Online && !_onlineVersion.valid) {
+		if (_updateType === VenusOS.Firmware_UpdateType_Online && !_onlineVersion.isValid) {
 			//% "No newer version available"
 			msg = qsTrId("settings_firmware_no_newer_version_available")
-		} else if (_updateType === VenusOS.Firmware_UpdateType_Offline && !_offlineVersion.valid) {
+		} else if (_updateType === VenusOS.Firmware_UpdateType_Offline && !_offlineVersion.isValid) {
 			//% "No firmware found"
 			msg = qsTrId("settings_firmware_no_firmware_found")
 		}

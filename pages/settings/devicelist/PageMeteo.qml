@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 Page {
@@ -13,21 +14,21 @@ Page {
 	property string bindPrefix
 	readonly property string settingsPrefix: Global.systemSettings.serviceUid + "/Settings/Service/meteo/" + deviceInstance.value
 
-	DataPoint {
+	VeQuickItem {
 		id: deviceInstance
 
-		source: bindPrefix + "/DeviceInstance"
+		uid: bindPrefix + "/DeviceInstance"
 	}
 
 	GradientListView {
 		model: ObjectModel {
 
 			ListQuantityItem {
-				property var displayText: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataValue, 1)
+				property var displayText: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataItem.value, 1)
 				//% "Irradiance"
 				text: qsTrId("page_meteo_irradiance")
-				dataSource: bindPrefix + "/Irradiance"
-				value: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataValue, 1).number
+				dataItem.uid: bindPrefix + "/Irradiance"
+				value: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataItem.value, 1).number
 				unit: VenusOS.Units_WattsPerSquareMeter
 				precision: 1
 			}
@@ -35,33 +36,33 @@ Page {
 			ListTemperatureItem {
 				//% "Cell temperature"
 				text: qsTrId("page_meteo_cell_temperature")
-				dataSource: bindPrefix + "/CellTemperature"
+				dataItem.uid: bindPrefix + "/CellTemperature"
 			}
 
 			ListTemperatureItem {
-				text: sensor2.dataValid ?
+				text: sensor2.dataItem.isValid ?
 						  //% "External temperature (1)"
 						  qsTrId("page_meteo_external_temperature_1") :
 						  //% "External temperature"
 						  qsTrId("page_meteo_external_temperature")
-				dataSource: bindPrefix + "/ExternalTemperature"
+				dataItem.uid: bindPrefix + "/ExternalTemperature"
 			}
 
 			ListTemperatureItem {
 				id: sensor2
 
-				dataSource: bindPrefix + "/ExternalTemperature2"
+				dataItem.uid: bindPrefix + "/ExternalTemperature2"
 				//% "External temperature (2)"
 				text: qsTrId("page_meteo_external_temperature_2")
-				visible: dataValid
+				visible: dataItem.isValid
 			}
 
 			ListQuantityItem {
-				dataSource: bindPrefix + "/WindSpeed"
+				dataItem.uid: bindPrefix + "/WindSpeed"
 				//% "Wind speed"
 				text: qsTrId("page_meteo_wind_speed")
-				visible: dataValid
-				value: dataValue
+				visible: dataItem.isValid
+				value: dataItem.value
 				unit: VenusOS.Units_Speed_MetresPerSecond
 				precision: 1
 			}

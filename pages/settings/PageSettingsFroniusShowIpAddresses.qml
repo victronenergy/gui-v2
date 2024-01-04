@@ -6,6 +6,7 @@
 import QtQuick
 import QtQuick.Controls as C
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -18,7 +19,7 @@ Page {
 	IpAddressListView {
 		id: settingsListView
 
-		ipAddresses.source: Global.systemSettings.serviceUid + "/Settings/Fronius/KnownIPAddresses"
+		ipAddresses.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/KnownIPAddresses"
 	}
 
 	Connections {
@@ -52,9 +53,9 @@ Page {
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: scanItem
 
-		source: BackendConnection.serviceUidForType("fronius") + "/AutoDetect"
+		uid: BackendConnection.serviceUidForType("fronius") + "/AutoDetect"
 	}
 }

@@ -16,12 +16,12 @@ Page {
 
 			ListTextItem {
 				text: CommonWords.model_name
-				dataSource: root.bindPrefix + "/ModelName"
+				dataItem.uid: root.bindPrefix + "/ModelName"
 			}
 
 			ListTextItem {
 				text: CommonWords.custom_name
-				dataSource: root.bindPrefix + "/CustomName"
+				dataItem.uid: root.bindPrefix + "/CustomName"
 			}
 
 			ListLabel {
@@ -32,32 +32,32 @@ Page {
 			ListSpinBox {
 				//% "Device Instance"
 				text: qsTrId("settings_vecan_device_instance")
-				dataSource: root.bindPrefix + "/DeviceInstance"
+				dataItem.uid: root.bindPrefix + "/DeviceInstance"
 			}
 
 			ListTextItem {
 				text: CommonWords.manufacturer
-				dataSource: root.bindPrefix + "/Manufacturer"
+				dataItem.uid: root.bindPrefix + "/Manufacturer"
 			}
 
 			ListTextItem {
 				//% "Network Address"
 				text: qsTrId("settings_vecan_nad")
-				dataSource: root.bindPrefix + "/Nad"
+				dataItem.uid: root.bindPrefix + "/Nad"
 			}
 
 			ListFirmwareVersionItem {
-				dataSource: root.bindPrefix + "/FirmwareVersion"
+				dataItem.uid: root.bindPrefix + "/FirmwareVersion"
 			}
 
 			ListTextItem {
 				text: CommonWords.serial_number
-				dataSource: root.bindPrefix + "/Serial"
+				dataItem.uid: root.bindPrefix + "/Serial"
 			}
 
 			ListTextItem {
 				text: CommonWords.unique_identity_number
-				dataSource: root.bindPrefix + "/N2kUniqueNumber"
+				dataItem.uid: root.bindPrefix + "/N2kUniqueNumber"
 			}
 		}
 	}

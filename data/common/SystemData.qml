@@ -12,8 +12,8 @@ import Victron.Units
 QtObject {
 	id: root
 
-	readonly property DataPoint systemState: DataPoint {
-		source: Global.system.serviceUid + "/SystemState/State"
+	readonly property VeQuickItem systemState: VeQuickItem {
+		uid: Global.system.serviceUid + "/SystemState/State"
 		Component.onCompleted: {
 			Global.system.state = Qt.binding(function() { return value || VenusOS.System_State_Off })
 		}
@@ -21,7 +21,7 @@ QtObject {
 
 	//--- AC data ---
 
-	readonly property DataPoint consumptionPhaseCount: DataPoint {
+	readonly property VeQuickItem consumptionPhaseCount: VeQuickItem {
 		function _update() {
 			if (!!Global.system) {
 				Global.system.ac.consumption.setPhaseCount(value)
@@ -29,7 +29,7 @@ QtObject {
 			consumptionInputObjects.model = value
 			consumptionOutputObjects.model = value
 		}
-		source: Global.system.serviceUid + "/Ac/Consumption/NumberOfPhases"
+		uid: Global.system.serviceUid + "/Ac/Consumption/NumberOfPhases"
 		Component.onCompleted: _update()
 		onValueChanged: _update()
 	}
@@ -42,23 +42,23 @@ QtObject {
 			property real power: NaN
 			property real current: NaN
 
-			readonly property DataPoint vePower: DataPoint {
+			readonly property VeQuickItem vePower: VeQuickItem {
 				function _update() {
 					consumptionInput.power = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
-				source: Global.system.serviceUid + "/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Power"
+				uid: Global.system.serviceUid + "/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Power"
 				Component.onCompleted: _update()
 				onValueChanged: _update()
 			}
 			// TODO this path doesn't exist in dbus yet but should be provided at a later stage.
 			// Verify when it is added.
-			readonly property DataPoint veCurrent: DataPoint {
+			readonly property VeQuickItem veCurrent: VeQuickItem {
 				function _update() {
 					consumptionInput.current = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
-				source: Global.system.serviceUid + "/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Current"
+				uid: Global.system.serviceUid + "/Ac/ConsumptionOnInput/L" + (model.index + 1) + "/Current"
 				Component.onCompleted: _update()
 				onValueChanged: _update()
 			}
@@ -73,21 +73,21 @@ QtObject {
 			property real power: NaN
 			property real current: NaN
 
-			readonly property DataPoint vePower: DataPoint {
+			readonly property VeQuickItem vePower: VeQuickItem {
 				function _update() {
 					consumptionOutput.power = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
-				source: Global.system.serviceUid + "/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Power"
+				uid: Global.system.serviceUid + "/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Power"
 				Component.onCompleted: _update()
 				onValueChanged: _update()
 			}
-			readonly property DataPoint veCurrent: DataPoint {
+			readonly property VeQuickItem veCurrent: VeQuickItem {
 				function _update() {
 					consumptionOutput.current = value === undefined ? NaN : value
 					Qt.callLater(root._updateConsumptionModel)
 				}
-				source: Global.system.serviceUid + "/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Current"
+				uid: Global.system.serviceUid + "/Ac/ConsumptionOnOutput/L" + (model.index + 1) + "/Current"
 				Component.onCompleted: _update()
 				onValueChanged: _update()
 			}
@@ -115,15 +115,15 @@ QtObject {
 
 	//--- DC data ---
 
-	readonly property DataPoint veSystemPower: DataPoint {
-		source: Global.system.serviceUid + "/Dc/System/Power"
+	readonly property VeQuickItem veSystemPower: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/System/Power"
 		Component.onCompleted: {
 			Global.system.dc.power = Qt.binding(function() { return value === undefined ? NaN : value })
 		}
 	}
 
-	readonly property DataPoint veBatteryVoltage: DataPoint {
-		source: Global.system.serviceUid + "/Dc/Battery/Voltage"
+	readonly property VeQuickItem veBatteryVoltage: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/Battery/Voltage"
 		Component.onCompleted: {
 			Global.system.dc.voltage = Qt.binding(function() { return value === undefined ? NaN : value })
 		}

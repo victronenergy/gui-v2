@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -14,19 +15,19 @@ Page {
 	readonly property string serviceType: classAndVrmInstanceItem.value !== undefined ? classAndVrmInstanceItem.value.split(":")[0] : ""
 	readonly property int deviceInstance: classAndVrmInstanceItem.value !== undefined ? classAndVrmInstanceItem.value.split(":")[1] : 0
 
-	DataPoint {
+	VeQuickItem {
 		id: classAndVrmInstanceItem
-		source: devicePath + "/ClassAndVrmInstance"
+		uid: devicePath + "/ClassAndVrmInstance"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: isMultiPhaseItem
-		source: devicePath + "/IsMultiphase"
+		uid: devicePath + "/IsMultiphase"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: multiPhaseSupport
-		source: devicePath + "/SupportMultiphase"
+		uid: devicePath + "/SupportMultiphase"
 	}
 
 	GradientListView {
@@ -56,14 +57,14 @@ Page {
 
 			PvInverterPositionRadioButtonGroup {
 				id: positions
-				dataSource: root.devicePath + "/Position"
+				dataItem.uid: root.devicePath + "/Position"
 				visible: root.serviceType === "pvinverter"
 			}
 
 			ListRadioButtonGroup {
 				//% "Phase type"
 				text: qsTrId("settings_cgwacs_phase_type")
-				dataSource: root.devicePath + "/IsMultiphase"
+				dataItem.uid: root.devicePath + "/IsMultiphase"
 				enabled: userHasWriteAccess && multiPhaseSupport.value !== undefined
 				optionModel: [
 					//% "Single phase"
@@ -77,7 +78,7 @@ Page {
 				id: pvOnL2
 				//% "PV inverter on phase 2"
 				text: qsTrId("settings_pv_inverter_on_phase_2")
-				dataSource: root.devicePath + "_S/Enabled"
+				dataItem.uid: root.devicePath + "_S/Enabled"
 				visible: multiPhaseSupport.value
 						 && isMultiPhaseItem.value !== undefined
 						 && !isMultiPhaseItem.value
@@ -87,7 +88,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "PV inverter on phase 2 Position"
 				text: qsTrId("settings_cgwacs_pv_inverter_l2_position")
-				dataSource: root.devicePath + "_S/Position"
+				dataItem.uid: root.devicePath + "_S/Position"
 				visible: pvOnL2.checked
 				optionModel: positions.optionModel
 			}

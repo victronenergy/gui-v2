@@ -66,14 +66,14 @@ Page {
 
 					title: relayDelegate.text
 
-					DataPoint {
+					VeQuickItem {
 						id: relay0FunctionItem
-						source: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+						uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 					}
 
-					DataPoint {
+					VeQuickItem {
 						id: relay1FunctionItem
-						source: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
+						uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
 					}
 
 					GradientListView {
@@ -89,7 +89,7 @@ Page {
 
 								//% "Relay activation on temperature"
 								text: qsTrId("settings_relay_activate_on_temp")
-								dataSource: relayDelegate.tempRelayPrefix + "/Enabled"
+								dataItem.uid: relayDelegate.tempRelayPrefix + "/Enabled"
 							}
 
 							TemperatureRelaySettings {

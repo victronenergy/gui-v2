@@ -18,13 +18,13 @@ Page {
 				id: remotePort
 
 				text: CommonWords.firmware_version
-				dataSource: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
+				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 			}
 
 			ListTextItem {
 				//% "Build date/time"
 				text: qsTrId("settings_build_date_time")
-				dataSource: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
+				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 			}
 
 			ListNavigationItem {

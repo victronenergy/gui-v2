@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -33,7 +34,7 @@ Page {
 	}
 
 	function em24Locked() {
-		return em24SwitchPos.dataValid && em24SwitchPos.dataValue === 3
+		return em24SwitchPos.dataItem.isValid && em24SwitchPos.dataItem.value === 3
 	}
 
 	function em24SwitchText(pos) {
@@ -54,15 +55,15 @@ Page {
 		return CommonWords.unknown_status
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: productId
-		source: root.bindPrefix + "/ProductId"
+		uid: root.bindPrefix + "/ProductId"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: allowedRoles
 
-		source: root.bindPrefix + "/AllowedRoles"
+		uid: root.bindPrefix + "/AllowedRoles"
 		onValueChanged: {
 			const roles = value
 			role.optionModel = roles ? roles.map(function(v) {
@@ -79,7 +80,7 @@ Page {
 				id: role
 
 				text: CommonWords.ac_input_role
-				dataSource: root.bindPrefix + "/Role"
+				dataItem.uid: root.bindPrefix + "/Role"
 				popDestination: null
 				onOptionClicked: function(index) {
 					// Changing the role invalidates this whole page, so close the radio buttons
@@ -91,7 +92,7 @@ Page {
 			}
 
 			PvInverterPositionRadioButtonGroup {
-				dataSource: root.bindPrefix + "/Position"
+				dataItem.uid: root.bindPrefix + "/Position"
 				visible: role.currentValue === "pvinverter"
 			}
 
@@ -101,7 +102,7 @@ Page {
 				//% "Phase configuration"
 				text: qsTrId("ac-in-setup_phase_configuration")
 				visible: productId.value == em24ProductId
-				dataSource: root.bindPrefix + "/PhaseConfig"
+				dataItem.uid: root.bindPrefix + "/PhaseConfig"
 				enabled: !em24Locked()
 				optionModel: [
 					{ display: "3P.n", value: 0 },
@@ -117,8 +118,8 @@ Page {
 				//% "Switch position"
 				text: qsTrId("ac-in-setup_switch_position")
 				visible: productId.value == em24ProductId
-				dataSource: root.bindPrefix + "/SwitchPos"
-				secondaryText: dataValid ? em24SwitchText(dataValue) : "--"
+				dataItem.uid: root.bindPrefix + "/SwitchPos"
+				secondaryText: dataItem.isValid ? em24SwitchText(dataItem.value) : "--"
 			}
 
 			ListLabel {
@@ -132,7 +133,7 @@ Page {
 				//% "Phase configuration"
 				text: qsTrId("ac-in-setup_phase_configuration")
 				visible: productId.value == smappeeProductId
-				dataSource: root.bindPrefix + "/PhaseConfig"
+				dataItem.uid: root.bindPrefix + "/PhaseConfig"
 				optionModel: [
 					//% "Single phase"
 					{ display: qsTrId("ac-in-setup_single_phase"), value: 0 },

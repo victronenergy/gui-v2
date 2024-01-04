@@ -18,13 +18,13 @@ Page {
 			ListSwitch {
 				//% "Enable alarm"
 				text: qsTrId("devicelist_tankalarm_enable_alarm")
-				dataSource: root.bindPrefix + "/Enable"
+				dataItem.uid: root.bindPrefix + "/Enable"
 			}
 
 			ListSpinBox {
 				//% "Active level"
 				text: qsTrId("devicelist_tankalarm_active_level")
-				dataSource: root.bindPrefix + "/Active"
+				dataItem.uid: root.bindPrefix + "/Active"
 				from: 0
 				to: 100
 				suffix: "%"
@@ -33,7 +33,7 @@ Page {
 			ListSpinBox {
 				//% "Restore level"
 				text: qsTrId("devicelist_tankalarm_restore_level")
-				dataSource: root.bindPrefix + "/Restore"
+				dataItem.uid: root.bindPrefix + "/Restore"
 				from: 0
 				to: 100
 				suffix: "%"
@@ -42,7 +42,7 @@ Page {
 			ListSpinBox {
 				//% "Delay"
 				text: qsTrId("devicelist_tankalarm_delay")
-				dataSource: root.bindPrefix + "/Delay"
+				dataItem.uid: root.bindPrefix + "/Delay"
 				from: 0
 				to: 100
 				suffix: "s"

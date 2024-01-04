@@ -43,7 +43,7 @@ QtObject {
 			property real remaining
 			property real capacity
 
-			serviceUid: "com.victronenergy.tank.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.tank.ttyUSB" + deviceInstance
 			name: "Tank" + deviceInstance
 		}
 	}

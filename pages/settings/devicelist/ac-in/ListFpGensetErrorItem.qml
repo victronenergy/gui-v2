@@ -11,7 +11,7 @@ ListTextItem {
 
 	secondaryText: {
 		let errorText = ""
-		switch (dataValue) {
+		switch (dataItem.value) {
 		case 0:
 			errorText = CommonWords.no_error
 			break
@@ -2452,6 +2452,6 @@ ListTextItem {
 			errorText = qsTrId("fp-genset-error_dptc_filter")
 			break;
 		}
-		return errorText ? "#%1 %2".arg(dataValue).arg(errorText) : ""
+		return errorText ? "#%1 %2".arg(dataItem.value).arg(errorText) : ""
 	}
 }

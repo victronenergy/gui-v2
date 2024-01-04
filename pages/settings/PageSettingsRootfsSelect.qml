@@ -5,37 +5,38 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
 
 	property bool _autoUpdateDisabled: autoUpdate.value !== 1
-	property bool _switchingEnabled: backupVersionItem.valid
+	property bool _switchingEnabled: backupVersionItem.isValid
 	property bool _rebooting
 
-	DataPoint {
+	VeQuickItem {
 		id: autoUpdate
-		source: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
+		uid: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
 	}
-	DataPoint {
+	VeQuickItem {
 		id: currentVersionItem
-		source: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 	}
-	DataPoint {
+	VeQuickItem {
 		id: currentBuildItem
-		source: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 	}
-	DataPoint {
+	VeQuickItem {
 		id: backupVersionItem
-		source: Global.venusPlatform.serviceUid + "/Firmware/Backup/AvailableVersion"
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Backup/AvailableVersion"
 	}
-	DataPoint {
+	VeQuickItem {
 		id: backupBuildItem
-		source: Global.venusPlatform.serviceUid + "/Firmware/Backup/AvailableBuild"
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Backup/AvailableBuild"
 	}
-	DataPoint {
+	VeQuickItem {
 		id: activateBackup
-		source: Global.venusPlatform.serviceUid + "/Firmware/Backup/Activate"
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Backup/Activate"
 	}
 
 	GradientListView {
@@ -82,7 +83,7 @@ Page {
 				//% "Firmware %1 (%2)"
 				text: qsTrId("settings_firmware_current_version").arg(currentVersionItem.value).arg(currentBuildItem.value)
 				secondaryText: CommonWords.running_status
-				visible: currentVersionItem.valid && root._switchingEnabled
+				visible: currentVersionItem.isValid && root._switchingEnabled
 			}
 
 			ListTextItem {

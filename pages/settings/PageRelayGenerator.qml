@@ -5,17 +5,18 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 PageGenerator {
 	id: root
 
-	DataPoint {
+	VeQuickItem {
 		id: relayFunction
-		source: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+		uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 	}
 
-	model: !relayFunction.valid || relayFunction.value === 1 ? startStopModel : disabledModel
+	model: !relayFunction.isValid || relayFunction.value === 1 ? startStopModel : disabledModel
 
 	ObjectModel {
 		id: disabledModel

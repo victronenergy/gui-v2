@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 QtObject {
 	id: root
@@ -15,8 +16,8 @@ QtObject {
 		_reboot.setValue(true)
 	}
 
-	property DataPoint _reboot: DataPoint {
-		 source: Global.venusPlatform.serviceUid + "/Device/Reboot"
+	property VeQuickItem _reboot: VeQuickItem {
+		 uid: Global.venusPlatform.serviceUid + "/Device/Reboot"
 	}
 
 	Component.onCompleted: Global.venusPlatform = root

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -16,10 +17,10 @@ Page {
 	readonly property int comApProductId: 0xB044
 	readonly property int dseProductId: 0xB046
 
-	DataPoint {
-		id: productIdDataPoint
+	VeQuickItem {
+		id: productIdDataItem
 
-		source: root.bindPrefix + "/ProductId"
+		uid: root.bindPrefix + "/ProductId"
 		onValueChanged: {
 			if (value !== undefined && modelLoader.status === Loader.Null) {
 				if ([fisherPandaProductId, comApProductId, dseProductId].indexOf(value) > -1) {
@@ -54,7 +55,7 @@ Page {
 
 		PageAcInModelDefault {
 			bindPrefix: root.bindPrefix
-			productId: productIdDataPoint.value
+			productId: productIdDataItem.value
 		}
 	}
 }

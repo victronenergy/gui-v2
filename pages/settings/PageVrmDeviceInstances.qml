@@ -93,7 +93,7 @@ Page {
 	// Creates an object for each /Devices/.../ClassAndVrmInstance entry, and populates
 	// classAndVrmInstanceModel with the data for each object. This is better than creating the
 	// ListView directly from the /ClassAndVrmInstance entries, as that would create/destroy the
-	// DataPoint objects when delegates are created/destroyed, and then VRM instance values would not
+	// VeQuickItem objects when delegates are created/destroyed, and then VRM instance values would not
 	// always be available for comparison.
 	Instantiator {
 		id: classAndVrmInstanceObjects
@@ -106,7 +106,7 @@ Page {
 		delegate: ClassAndVrmInstance {
 			property var mqttDevice: Device { }
 
-			dataSource: model.uid + "/ClassAndVrmInstance"
+			uid: model.uid + "/ClassAndVrmInstance"
 
 			function _resetDevice(deviceId) {
 				const deviceInstance = Utils.deviceInstanceForDeviceId(deviceId)
@@ -148,7 +148,7 @@ Page {
 					console.warn("Malformed device id!", deviceId)
 					return
 				}
-				const modelIndex = classAndVrmInstanceModel.findByDataSource(dataSource)
+				const modelIndex = classAndVrmInstanceModel.findByUid(uid)
 				if (modelIndex >= 0) {
 					classAndVrmInstanceModel.set(modelIndex, { deviceClass: deviceClass, vrmInstance: vrmInstance })
 					classAndVrmInstanceModel.updateSortOrder(modelIndex)
@@ -166,7 +166,7 @@ Page {
 			}
 
 			onNameChanged: {
-				const modelIndex = classAndVrmInstanceModel.findByDataSource(dataSource)
+				const modelIndex = classAndVrmInstanceModel.findByUid(uid)
 				if (modelIndex >= 0) {
 					classAndVrmInstanceModel.setProperty(modelIndex, "name", name)
 					classAndVrmInstanceModel.updateSortOrder(modelIndex)
@@ -177,7 +177,7 @@ Page {
 		onObjectAdded: function(index, object) {
 			const insertionIndex = classAndVrmInstanceModel.findInsertionIndex(object.deviceClass, object.name, object.vrmInstance)
 			classAndVrmInstanceModel.insert(insertionIndex, {
-				dataSource: object.dataSource,
+				uid: object.uid,
 				deviceClass: object.deviceClass,
 				vrmInstance: object.vrmInstance,
 				name: object.name
@@ -199,10 +199,10 @@ Page {
 			return -1
 		}
 
-		function findByDataSource(dataSource) {
+		function findByUid(uid) {
 			for (let i = 0; i < count; ++i) {
 				const data = get(i)
-				if (data.dataSource === dataSource) {
+				if (data.uid === uid) {
 					return i
 				}
 			}

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -17,12 +18,12 @@ Page {
 			ListRadioButtonGroup {
 				id: relayFunction
 
-				text: relay1State.valid
+				text: relay1State.isValid
 					  //% "Function (Relay 1)"
 					? qsTrId("settings_relay_function_relay1")
 					  //% "Function"
 					: qsTrId("settings_relay_function")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 				optionModel: [
 					//% "Alarm relay"
 					{ display: qsTrId("settings_relay_alarm_relay"), value: VenusOS.Relay_Function_Alarm },
@@ -41,7 +42,7 @@ Page {
 
 				//% "Alarm relay polarity"
 				text: qsTrId("settings_relay_alarm_polarity")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Relay/Polarity"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Polarity"
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Alarm
 				optionModel: [
 					//% "Normally open"
@@ -71,12 +72,12 @@ Page {
 			ListSwitch {
 				id: manualSwitch
 
-				text: relay1State.valid
+				text: relay1State.isValid
 					  //% "Relay 1 on"
 					? qsTrId("settings_relay_relay1on")
 					  //% "Relay on"
 					: qsTrId("settings_relay_on")
-				dataSource: Global.system.serviceUid + "/Relay/0/State"
+				dataItem.uid: Global.system.serviceUid + "/Relay/0/State"
 				visible: relayFunction.currentValue === VenusOS.Relay_Function_Manual
 			}
 
@@ -85,8 +86,8 @@ Page {
 
 				//% "Function (Relay 2)"
 				text: qsTrId("settings_relay_function_relay2")
-				dataSource: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
-				visible: relay1State.valid
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
+				visible: relay1State.isValid
 				optionModel: [
 					//% "Manual"
 					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
@@ -99,8 +100,8 @@ Page {
 
 				//% "Relay 2 on"
 				text: qsTrId("settings_relay_relay2on")
-				dataSource: Global.system.serviceUid + "/Relay/1/State"
-				visible: relay1State.valid && relay1Function.currentValue === VenusOS.Relay_Function_Manual
+				dataItem.uid: Global.system.serviceUid + "/Relay/1/State"
+				visible: relay1State.isValid && relay1Function.currentValue === VenusOS.Relay_Function_Manual
 			}
 
 			ListNavigationItem {
@@ -115,8 +116,8 @@ Page {
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: relay1State
-		source: Global.system.serviceUid + "/Relay/1/State"
+		uid: Global.system.serviceUid + "/Relay/1/State"
 	}
 }

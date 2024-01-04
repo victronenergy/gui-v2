@@ -36,7 +36,7 @@ Page {
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: points
 
 		property bool _saving
@@ -48,7 +48,7 @@ Page {
 			_saving = false
 		}
 
-		source: root.bindPrefix + "/Shape"
+		uid: root.bindPrefix + "/Shape"
 		onValueChanged: {
 			if (_saving) {
 				return

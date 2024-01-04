@@ -28,8 +28,8 @@ Page {
 
 			text: "%1 [%2]".arg(customName.value || modelName.value).arg(uniqueNumber.value)
 			//% "Device# %1"
-			secondaryText: qsTrId("settings_vecan_device_number").arg(dataValue)
-			dataSource: model.uid + "/DeviceInstance"
+			secondaryText: qsTrId("settings_vecan_device_number").arg(dataItem.value)
+			dataItem.uid: model.uid + "/DeviceInstance"
 
 			CP.ColorImage {
 				parent: listDelegate.content

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 ListButton {
 	id: root
@@ -32,9 +33,9 @@ ListButton {
 
 	onClicked: mountState.setValue(VenusOS.Storage_UnmountRequested)
 
-	DataPoint {
+	VeQuickItem {
 		id: mountState
 
-		source: BackendConnection.serviceUidForType("logger") + "/Storage/MountState"
+		uid: BackendConnection.serviceUidForType("logger") + "/Storage/MountState"
 	}
 }

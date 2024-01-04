@@ -17,13 +17,13 @@ Page {
 				id: enableSwitch
 
 				text: CommonWords.enable
-				dataSource: bindPrefix + "/TestRun/Enabled"
+				dataItem.uid: bindPrefix + "/TestRun/Enabled"
 			}
 
 			ListSpinBox {
 				//% "Run interval"
 				text: qsTrId("run_interval")
-				dataSource: bindPrefix + "/TestRun/Interval"
+				dataItem.uid: bindPrefix + "/TestRun/Interval"
 				//% "%1 day(s)"
 				button.text: qsTrId("page_generator_test_run_days").arg(value)
 				stepSize: 1
@@ -34,7 +34,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Skip run if has been running for"
 				text: qsTrId("page_generator_test_run_skip_run")
-				dataSource: bindPrefix + "/TestRun/SkipRuntime"
+				dataItem.uid: bindPrefix + "/TestRun/SkipRuntime"
 				optionModel: [
 					//% "Start always"
 					{ display: qsTrId("page_generator_test_run_start_always"), value: 0 },
@@ -50,18 +50,18 @@ Page {
 			ListDateSelector {
 				//% "Run interval start date"
 				text: qsTrId("page_generator_test_run_run_interval_start_date")
-				dataSource: bindPrefix + "/TestRun/StartDate"
+				dataItem.uid: bindPrefix + "/TestRun/StartDate"
 			}
 
 			ListTimeSelector {
 				text: CommonWords.start_time
-				dataSource: bindPrefix + "/TestRun/StartTime"
+				dataItem.uid: bindPrefix + "/TestRun/StartTime"
 			}
 
 			ListTimeSelector {
 				//% "Run duration (hh:mm)"
 				text: qsTrId("page_generator_test_run_run_duration")
-				dataSource: bindPrefix + "/TestRun/Duration"
+				dataItem.uid: bindPrefix + "/TestRun/Duration"
 				visible: !runTillBatteryFull.checked
 			}
 
@@ -70,8 +70,8 @@ Page {
 
 				//% "Run until battery is fully charged"
 				text: qsTrId("page_generator_test_run_run_until_fully_charged")
-				dataSource: bindPrefix + "/TestRun/RunTillBatteryFull"
-				visible: dataValid
+				dataItem.uid: bindPrefix + "/TestRun/RunTillBatteryFull"
+				visible: dataItem.isValid
 			}
 		}
 	}

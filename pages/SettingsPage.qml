@@ -10,6 +10,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import net.connman
 
 Page {
@@ -92,7 +93,7 @@ Page {
 			{
 				//% "Wi-Fi"
 				text: qsTrId("settings_wifi"),
-				page: accessPoint.valid
+				page: accessPoint.isValid
 					? "/pages/settings/PageSettingsWifiWithAccessPoint.qml"
 					: "/pages/settings/PageSettingsWifi.qml"
 			},
@@ -125,7 +126,7 @@ Page {
 			{
 				text: CommonWords.relay,
 				page: "/pages/settings/PageSettingsRelay.qml",
-				visible: relay0.valid
+				visible: relay0.isValid
 			},
 			{
 				//% "Services"
@@ -141,7 +142,7 @@ Page {
 				//% "Venus OS Large features"
 				text: qsTrId("settings_venus_os_large_features"),
 				page: "/pages/settings/PageSettingsLarge.qml",
-				visible: signalK.valid || nodeRed.valid
+				visible: signalK.isValid || nodeRed.isValid
 			},
 			{
 				//% "VRM Device Instances"
@@ -163,28 +164,28 @@ Page {
 		}
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: systemType
-		source: Global.system.serviceUid + "/SystemType"
+		uid: Global.system.serviceUid + "/SystemType"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: accessPoint
-		source: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
+		uid: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: relay0
-		source: Global.system.serviceUid + "/Relay/0/State"
+		uid: Global.system.serviceUid + "/Relay/0/State"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: signalK
-		source: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+		uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: nodeRed
-		source: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 	}
 }

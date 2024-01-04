@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -14,10 +15,10 @@ Page {
 	property string startStopBindPrefix
 	property int warmupCapability: 1
 
-	DataPoint {
+	VeQuickItem {
 		id: capabilities
 
-		source: startStopBindPrefix + "/Capabilities"
+		uid: startStopBindPrefix + "/Capabilities"
 	}
 
 	GradientListView {
@@ -34,7 +35,7 @@ Page {
 			ListSpinBox {
 				//% "Minimum run time"
 				text: qsTrId("page_settings_generator_minimum_run_time")
-				dataSource: settingsBindPrefix + "/MinimumRuntime"
+				dataItem.uid: settingsBindPrefix + "/MinimumRuntime"
 				suffix: "m"
 				decimals: 0
 			}
@@ -43,7 +44,7 @@ Page {
 				//% "Warm-up time"
 				text: qsTrId("page_settings_generator_warm_up_time")
 				visible: capabilities.value & warmupCapability
-				dataSource: settingsBindPrefix + "/WarmUpTime"
+				dataItem.uid: settingsBindPrefix + "/WarmUpTime"
 				suffix: "s"
 				decimals: 0
 				stepSize: 10
@@ -53,7 +54,7 @@ Page {
 				//% "Cool-down time"
 				text: qsTrId("page_settings_generator_cool_down_time")
 				visible: capabilities.value & warmupCapability
-				dataSource: settingsBindPrefix + "/CoolDownTime"
+				dataItem.uid: settingsBindPrefix + "/CoolDownTime"
 				suffix: "s"
 				decimals: 0
 				stepSize: 10
@@ -63,8 +64,8 @@ Page {
 				property bool generatorIsSet: acIn1Source.value === 2 || acIn2Source.value === 2
 				//% "Detect generator at AC input"
 				text: qsTrId("page_settings_generator_detect_generator_at_ac_input")
-				dataSource: settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
-				enabled: dataValid && (generatorIsSet || checked)
+				dataItem.uid: settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
+				enabled: dataItem.isValid && (generatorIsSet || checked)
 				onClicked: {
 					if (!checked) {
 						if (!generatorIsSet) {
@@ -79,23 +80,23 @@ Page {
 					}
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: acIn1Source
 
-					source: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1"
+					uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: acIn2Source
 
-					source: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2"
+					uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2"
 				}
 			}
 
 			ListSwitch {
 				//% "Alarm when generator is not in auto start mode"
 				text: qsTrId("page_settings_generator_alarm_when_not_in_auto_start")
-				dataSource: settingsBindPrefix + "/Alarms/AutoStartDisabled"
+				dataItem.uid: settingsBindPrefix + "/Alarms/AutoStartDisabled"
 				onClicked: {
 					if (!checked) {
 						//% "An alarm will be triggered when auto start function is left disabled for more than 10 minutes."
@@ -109,14 +110,14 @@ Page {
 				id: quietHours
 
 				text: CommonWords.quiet_hours
-				dataSource: settingsBindPrefix + "/QuietHours/Enabled"
+				dataItem.uid: settingsBindPrefix + "/QuietHours/Enabled"
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListTimeSelector {
 				//% "Quiet hours start time"
 				text: qsTrId("page_settings_generator_quiet_hours_start_time")
-				dataSource: settingsBindPrefix + "/QuietHours/StartTime"
+				dataItem.uid: settingsBindPrefix + "/QuietHours/StartTime"
 				visible: defaultVisible && quietHours.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
@@ -124,7 +125,7 @@ Page {
 			ListTimeSelector {
 				//% "Quiet hours end time"
 				text: qsTrId("page_settings_generator_quiet_hours_end_time")
-				dataSource: settingsBindPrefix + "/QuietHours/EndTime"
+				dataItem.uid: settingsBindPrefix + "/QuietHours/EndTime"
 				visible: defaultVisible && quietHours.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}

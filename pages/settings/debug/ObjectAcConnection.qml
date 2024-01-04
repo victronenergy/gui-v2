@@ -5,15 +5,16 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 QtObject {
 	property string bindPrefix
 	property string powerKey: "Power"
 
-	property DataPoint powerL1: DataPoint { source: bindPrefix + "/L1/" + powerKey }
-	property DataPoint powerL2: DataPoint { source: bindPrefix + "/L2/" + powerKey }
-	property DataPoint powerL3: DataPoint { source: bindPrefix + "/L3/" + powerKey }
-	property DataPoint phaseCount: DataPoint { source: bindPrefix + "/NumberOfPhases" }
+	property VeQuickItem powerL1: VeQuickItem { uid: bindPrefix + "/L1/" + powerKey }
+	property VeQuickItem powerL2: VeQuickItem { uid: bindPrefix + "/L2/" + powerKey }
+	property VeQuickItem powerL3: VeQuickItem { uid: bindPrefix + "/L3/" + powerKey }
+	property VeQuickItem phaseCount: VeQuickItem { uid: bindPrefix + "/NumberOfPhases" }
 	property bool splitPhaseL2PassthruDisabled: false
 	property bool isAcOutput: false
 	property bool l1AndL2OutShorted: splitPhaseL2PassthruDisabled && isAcOutput
@@ -27,7 +28,7 @@ QtObject {
 		running: BackendConnection.applicationVisible
 		repeat: true
 		onTriggered: {
-			power = powerL1.valid || powerL2.valid || powerL3.valid
+			power = powerL1.isValid || powerL2.isValid || powerL3.isValid
 					? (powerL1.value || 0) + (powerL2.value || 0) + (powerL3.value || 0)
 					: undefined
 		}

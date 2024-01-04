@@ -21,7 +21,7 @@ Page {
 				id: gridSetpoint
 
 				text: root.title
-				dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 				suffix: "W"
 				from: -15000
 				to: 15000
@@ -32,7 +32,7 @@ Page {
 						id: gridSetpointSlider
 
 						width: parent.width
-						dataSource: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
+						dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 						from: -15000
 						to: 15000
 						stepSize: 50
@@ -43,7 +43,7 @@ Page {
 			ListTextItem {
 				//% "AC-In setpoint"
 				text: qsTrId("settings_ess_debug_ac_in_setpoint")
-				dataSource: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/L1/AcPowerSetpoint" : ""
+				dataItem.uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/L1/AcPowerSetpoint" : ""
 			}
 
 			ListTextGroup {
@@ -57,14 +57,14 @@ Page {
 					qsTrId("settings_ess_debug_battery_voltage").arg(batteryVoltage.value || "--"),
 				]
 
-				DataPoint {
+				VeQuickItem {
 					id: batteryCurrent
-					source: root.batteryService + "/Dc/0/Current"
+					uid: root.batteryService + "/Dc/0/Current"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: batteryVoltage
-					source: root.batteryService + "/Dc/0/Voltage"
+					uid: root.batteryService + "/Dc/0/Voltage"
 				}
 			}
 
@@ -78,14 +78,14 @@ Page {
 					qsTrId("settings_ess_debug_battery_discharge").arg(batteryDischargeCurrent.value || "--"),
 				]
 
-				DataPoint {
+				VeQuickItem {
 					id: batteryChargeCurrent
-					source: root.batteryService + "/Info/MaxChargeCurrent"
+					uid: root.batteryService + "/Info/MaxChargeCurrent"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: batteryDischargeCurrent
-					source: root.batteryService + "/Info/MaxDischargeCurrent"
+					uid: root.batteryService + "/Info/MaxDischargeCurrent"
 				}
 			}
 
@@ -99,14 +99,14 @@ Page {
 					qsTrId("settings_ess_debug_battery_discharge").arg(batteryDischargePower.value || "--"),
 				]
 
-				DataPoint {
+				VeQuickItem {
 					id: batteryChargePower
-					source: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
+					uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 				}
 
-				DataPoint {
+				VeQuickItem {
 					id: batteryDischargePower
-					source: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
+					uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 				}
 			}
 		}

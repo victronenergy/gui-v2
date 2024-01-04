@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Utils
 
 Page {
@@ -13,25 +14,25 @@ Page {
 	readonly property string bindPrefix: BackendConnection.serviceUidForType("modem")
 	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Modem"
 
-	DataPoint {
+	VeQuickItem {
 		id: simStatus
-		source: bindPrefix + "/SimStatus"
+		uid: bindPrefix + "/SimStatus"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: apnSetting
-		source: settingsBindPrefix + "/APN"
+		uid: settingsBindPrefix + "/APN"
 	}
 
-	DataPoint {
+	VeQuickItem {
 		id: networkType
-		source: bindPrefix + "/NetworkType"
+		uid: bindPrefix + "/NetworkType"
 	}
 
 	GradientListView {
 		id: settingsListView
 
-		model: simStatus.valid ? modemConnected : notConnected
+		model: simStatus.isValid ? modemConnected : notConnected
 
 		ObjectModel {
 			id: notConnected
@@ -50,8 +51,8 @@ Page {
 
 				//% "Internet"
 				text: qsTrId("page_settings_gsm_internet")
-				secondaryText: dataValue === 1 ? CommonWords.online : CommonWords.offline
-				dataSource: bindPrefix + "/Connected"
+				secondaryText: dataItem.value === 1 ? CommonWords.online : CommonWords.offline
+				dataItem.uid: bindPrefix + "/Connected"
 			}
 
 			ListTextItem {
@@ -59,8 +60,8 @@ Page {
 
 				//% "Carrier"
 				text: qsTrId("page_settings_gsm_carrier")
-				secondaryText: dataValid ? dataValue + " " + Utils.simplifiedNetworkType(networkType.value) : "--"
-				dataSource: bindPrefix + "/NetworkName"
+				secondaryText: dataItem.isValid ? dataItem.value + " " + Utils.simplifiedNetworkType(networkType.value) : "--"
+				dataItem.uid: bindPrefix + "/NetworkName"
 			}
 
 			ListItem {
@@ -79,19 +80,19 @@ Page {
 						}
 					}
 				]
-				visible: gsmStatusIcon.valid
+				visible: gsmStatusIcon.isValid
 			}
 
 			ListItem {
 				//% "It may be necessary to configure the APN settings below in this page, contact your operator for details.\nIf that doesn't work, check sim-card in a phone to make sure that there is credit and/or it is registered to be used for data."
 				text: qsTrId("page_settings_gsm_error_message")
-				visible: status.dataValue === 0 && carrier.dataValid && simStatus.value === 1000
+				visible: status.dataItem.value === 0 && carrier.dataItem.isValid && simStatus.value === 1000
 			}
 
 			ListSwitch {
 				//% "Allow roaming"
 				text: qsTrId("page_settings_gsm_allow_roaming")
-				dataSource: settingsBindPrefix + "/RoamingPermitted"
+				dataItem.uid: settingsBindPrefix + "/RoamingPermitted"
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
@@ -99,7 +100,7 @@ Page {
 				//% "Sim status"
 				text: qsTrId("page_settings_gsm_sim_status")
 				secondaryText: {
-					switch (dataValue) {
+					switch (dataItem.value) {
 					case 10:
 						//% "SIM not inserted"
 						return qsTrId("page_settings_gsm_sim_not_inserted")
@@ -129,30 +130,30 @@ Page {
 						return qsTrId("page_settings_gsm_unknown_error")
 					}
 				}
-				dataSource: bindPrefix + "/SimStatus"
+				dataItem.uid: bindPrefix + "/SimStatus"
 			}
 
 			ListTextField {
 				//% "PIN"
 				text: qsTrId("page_settings_gsm_pin")
 				textField.maximumLength: 35
-				dataSource: settingsBindPrefix + "/PIN"
+				dataItem.uid: settingsBindPrefix + "/PIN"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				// Show only when PIN required
-				visible: dataValid && [11, 16].indexOf(simStatus.value)  > -1
+				visible: dataItem.isValid && [11, 16].indexOf(simStatus.value)  > -1
 			}
 
 			ListTextItem {
 				text: CommonWords.ip_address
-				dataSource: bindPrefix + "/IP"
-				visible: status.dataValue === 1
+				dataItem.uid: bindPrefix + "/IP"
+				visible: status.dataItem.value === 1
 			}
 
 			ListNavigationItem {
 				//% "APN"
 				text: qsTrId("page_settings_gsm_apn")
 				//% "Default"
-				secondaryText: (!apnSetting.valid || apnSetting.value === "") ? qsTrId("page_settings_gsm_default") : apnSetting.value
+				secondaryText: (!apnSetting.isValid || apnSetting.value === "") ? qsTrId("page_settings_gsm_default") : apnSetting.value
 				onClicked: Global.pageManager.pushPage(apnPage, { title: text })
 				Component {
 					id: apnPage
@@ -169,7 +170,7 @@ Page {
 									text: qsTrId("page_settings_gsm_use_default_apn")
 									checked: apnSetting.value === ""
 									onCheckedChanged: {
-										if (apnSetting.valid && checked) {
+										if (apnSetting.isValid && checked) {
 											apnSetting.setValue("")
 										}
 									}
@@ -178,7 +179,7 @@ Page {
 								ListTextField {
 									//% "APN name"
 									text: qsTrId("page_settings_gsm_apn_name")
-									dataSource: root.settingsBindPrefix + "/APN"
+									dataItem.uid: root.settingsBindPrefix + "/APN"
 									visible: !useDefaultApn.checked
 									textField.maximumLength: 50
 								}
@@ -195,8 +196,8 @@ Page {
 				checked: authUser.value !== "" && authPass.value !== ""
 				onCheckedChanged: {
 					if (!checked) {
-						authUser.setDataValue("")
-						authPass.setDataValue("")
+						authUser.dataItem.setValue("")
+						authPass.dataItem.setValue("")
 					}
 				}
 			}
@@ -206,7 +207,7 @@ Page {
 
 				//% "User name"
 				text: qsTrId("page_settings_gsm_user_name")
-				dataSource: settingsBindPrefix + "/User"
+				dataItem.uid: settingsBindPrefix + "/User"
 				visible: useAuth.checked
 			}
 
@@ -214,15 +215,15 @@ Page {
 				id: authPass
 
 				text: CommonWords.password
-				dataSource: settingsBindPrefix + "/Password"
+				dataItem.uid: settingsBindPrefix + "/Password"
 				visible: useAuth.checked
 			}
 
 			ListTextItem {
 				//% "IMEI"
 				text: qsTrId("page_settings_gsm_imei")
-				dataSource: bindPrefix + "/IMEI"
-				visible: dataValid
+				dataItem.uid: bindPrefix + "/IMEI"
+				visible: dataItem.isValid
 			}
 		}
 	}

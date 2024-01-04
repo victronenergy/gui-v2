@@ -149,7 +149,7 @@ QtObject {
 				}
 			}
 
-			serviceUid: "com.victronenergy.solarcharger.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.solarcharger.ttyUSB" + deviceInstance
 			name: "SolarCharger" + deviceInstance
 		}
 	}

@@ -5,16 +5,17 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
 
 	property string bindPrefix
 
-	DataPoint {
+	VeQuickItem {
 		id: firstCode
 
-		source: root.bindPrefix + "/Devices/0/ExtendStatus/GridRelayReport/Code"
+		uid: root.bindPrefix + "/Devices/0/ExtendStatus/GridRelayReport/Code"
 	}
 
 	GradientListView {

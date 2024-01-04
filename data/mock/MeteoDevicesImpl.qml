@@ -17,7 +17,7 @@ Item {
 		MockDevice {
 			property real irradiance: Math.random() * 500
 
-			serviceUid: "com.victronenergy.meteo.ttyUSB" + deviceInstance
+			serviceUid: "mock/com.victronenergy.meteo.ttyUSB" + deviceInstance
 			name: "meteo" + deviceInstance
 		}
 	}

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -16,8 +17,8 @@ Page {
 			ListTextItem {
 				//% "Shutdowns due error"
 				text: qsTrId("lynxiondiagnostics_shutdowns_due_error")
-				dataSource: root.bindPrefix + "/Diagnostics/ShutDownsDueError"
-				visible: defaultVisible && dataValid
+				dataItem.uid: root.bindPrefix + "/Diagnostics/ShutDownsDueError"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			Column {
@@ -39,19 +40,19 @@ Page {
 						text: modelData
 						textModel: [
 							error.value,
-							errorTimestamp.valid ? Qt.formatDateTime(new Date(errorTimestamp.value * 1000), "yyyy-MM-dd hh:mm") : "--"
+							errorTimestamp.isValid ? Qt.formatDateTime(new Date(errorTimestamp.value * 1000), "yyyy-MM-dd hh:mm") : "--"
 						]
 
 						// TODO use this instead  when BMS error descriptions are available. See issue 302.
 						// BmsError { id: errorValue }
-						DataPoint {
+						VeQuickItem {
 							id: error
-							source: root.bindPrefix + "/Diagnostics/LastErrors/" + (model.index + 1) + "/Error"
+							uid: root.bindPrefix + "/Diagnostics/LastErrors/" + (model.index + 1) + "/Error"
 						}
 
-						DataPoint {
+						VeQuickItem {
 							id: errorTimestamp
-							source: root.bindPrefix + "/Diagnostics/LastErrors/" + (model.index + 1) + "/Time"
+							uid: root.bindPrefix + "/Diagnostics/LastErrors/" + (model.index + 1) + "/Time"
 						}
 					}
 				}

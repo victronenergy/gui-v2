@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Page {
 	id: root
@@ -18,7 +19,7 @@ Page {
 
 			readonly property string distributor: String.fromCharCode(65 + model.index)
 			readonly property string bindPrefix: root.bindPrefix + "/Distributor/" + distributor
-			readonly property var connected: status.valid && status.value === 1
+			readonly property var connected: status.isValid && status.value === 1
 			readonly property list<FuseInfo> fuseInfoList: [
 				// Current distributor has 4 fuses
 				FuseInfo { fuseNumber: 0; bindPrefix: distributorDelegate.bindPrefix },
@@ -35,9 +36,9 @@ Page {
 
 			//% "Distributor %1"
 			text: qsTrId("batterylynxdistibutor_distributor").arg(distributor)
-			visible: status.valid && status.value !== 0
+			visible: status.isValid && status.value !== 0
 			secondaryText: {
-				if (!status.valid) {
+				if (!status.isValid) {
 					return "--"
 				} else if (status.value === 0) {
 					return CommonWords.not_available
@@ -69,9 +70,9 @@ Page {
 				Global.pageManager.pushPage(distributorPageComponent, { "title": text })
 			}
 
-			DataPoint {
+			VeQuickItem {
 				id: status
-				source: root.bindPrefix + "/Distributor/" + distributorDelegate.distributor + "/Status"
+				uid: root.bindPrefix + "/Distributor/" + distributorDelegate.distributor + "/Status"
 			}
 
 			Component {

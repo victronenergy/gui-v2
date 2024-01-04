@@ -5,11 +5,12 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 
 Item {
 	id: root
 
-	property alias dataSource: dataPoint.source
+	readonly property alias dataItem: dataItem
 	property alias color: centreCircle.color
 	property bool _pulse
 
@@ -31,36 +32,36 @@ Item {
 			states: [
 				State {
 					name: "off"
-					when: dataPoint.value === 0
+					when: dataItem.value === 0
 					PropertyChanges { target: centreCircle; opacity : 0 }
 				},
 				State {
 					name: "on"
-					when: dataPoint.value === 1
+					when: dataItem.value === 1
 					PropertyChanges { target: centreCircle; opacity : 1 }
 				},
 				State {
 					name: "blink"
-					when: dataPoint.value === 2
+					when: dataItem.value === 2
 					PropertyChanges { target: centreCircle; opacity: _pulse ? 1 : 0 }
 				},
 				State {
 					name: "blinkInverted"
-					when: dataPoint.value === 3
+					when: dataItem.value === 3
 					PropertyChanges { target: centreCircle; opacity: _pulse ? 0 : 1 }
 				}
 			]
 
 			Timer {
 				interval: 500
-				running: dataPoint.value > 0
+				running: dataItem.value > 0
 				repeat: true
 				onTriggered: root._pulse = !root._pulse
 			}
 		}
 	}
 
-	DataPoint {
-		id: dataPoint
+	VeQuickItem {
+		id: dataItem
 	}
 }

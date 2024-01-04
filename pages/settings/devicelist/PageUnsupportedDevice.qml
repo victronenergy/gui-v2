@@ -18,7 +18,7 @@ Page {
 			ListTextItem {
 				//% "Unsupported device found"
 				text: qsTrId("devicelist_unsupporteddevices_found")
-				dataSource: root.bindPrefix + "/Reason"
+				dataItem.uid: root.bindPrefix + "/Reason"
 			}
 
 			ListNavigationItem {
