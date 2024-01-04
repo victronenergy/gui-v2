@@ -52,6 +52,7 @@ ObjectModel {
 	ListTextItem {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/ErrorCode"
+		visible: defaultVisible && dataItem.isValid
 
 		// TODO get error description from WakespeedError when it is ported from velib -> veutil
 		secondaryText: dataItem.isValid  ? (dataItem.value === 0 ? CommonWords.no_error : "#" + dataItem.value) : ""
