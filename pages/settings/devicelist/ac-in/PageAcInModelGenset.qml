@@ -204,8 +204,8 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_coolant_temperature")
 							visible: defaultVisible && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
-							value: Units.convertFromCelsius(dataItem.value, Global.systemSettings.temperatureUnit.value)
-							unit: Global.systemSettings.temperatureUnit.value
+							value: Global.systemSettings.convertFromCelsius(dataItem.value)
+							unit: Global.systemSettings.temperatureUnit
 						}
 
 						ListQuantityItem {
@@ -213,8 +213,8 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_exhaust_temperature")
 							visible: defaultVisible && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/ExaustTemperature"
-							value: Units.convertFromCelsius(dataItem.value, Global.systemSettings.temperatureUnit.value)
-							unit: Global.systemSettings.temperatureUnit.value
+							value: Global.systemSettings.convertFromCelsius(dataItem.value)
+							unit: Global.systemSettings.temperatureUnit
 						}
 
 						ListQuantityItem {
@@ -222,8 +222,8 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_winding_temperature")
 							visible: defaultVisible && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
-							value: Units.convertFromCelsius(dataItem.value, Global.systemSettings.temperatureUnit.value)
-							unit: Global.systemSettings.temperatureUnit.value
+							value: Global.systemSettings.convertFromCelsius(dataItem.value)
+							unit: Global.systemSettings.temperatureUnit
 						}
 
 						ListTextItem {

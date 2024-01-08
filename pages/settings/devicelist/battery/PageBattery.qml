@@ -113,8 +113,8 @@ Page {
 				//% "Battery temperature"
 				text: qsTrId("battery_temp")
 				visible: defaultVisible && !isNaN(root.battery.temperature_celsius)
-				value: Global.systemSettings.convertTemperature(root.battery.temperature_celsius)
-				unit: Global.systemSettings.temperatureUnit.value
+				value: Global.systemSettings.convertFromCelsius(root.battery.temperature_celsius)
+				unit: Global.systemSettings.temperatureUnit
 			}
 
 			ListQuantityItem {
@@ -122,8 +122,8 @@ Page {
 				text: qsTrId("battery_air_temp")
 				dataItem.uid: root.battery.serviceUid + "/AirTemperature"
 				visible: defaultVisible && dataItem.isValid
-				value: dataItem.value ? Global.systemSettings.convertTemperature(dataItem.value) : NaN
-				unit: Global.systemSettings.temperatureUnit.value
+				value: Global.systemSettings.convertFromCelsius(dataItem.value)
+				unit: Global.systemSettings.temperatureUnit
 			}
 
 			ListQuantityItem {

@@ -10,9 +10,9 @@ import Victron.Units
 ListQuantityItem {
 	id: root
 
-	readonly property real temperature: Units.convertFromCelsius(dataItem.value, Global.systemSettings.temperatureUnit.value)
+	readonly property real temperature: Global.systemSettings.convertFromCelsius(dataItem.value)
 
-	value: Units.getDisplayText(Global.systemSettings.temperatureUnit.value, temperature, 1).number
-	unit: Global.systemSettings.temperatureUnit.value
+	value: Units.getDisplayText(Global.systemSettings.temperatureUnit, temperature, 1).number
+	unit: Global.systemSettings.temperatureUnit
 	precision: 1
 }

@@ -32,19 +32,15 @@ Page {
 				//% "Remaining"
 				text: qsTrId("devicelist_tanksensor_remaining")
 				dataItem.uid: root.bindPrefix + "/Remaining"
-				value: Units.convertVolumeForUnit(dataItem.value, Global.systemSettings.volumeUnit.value)
-				unit: Global.systemSettings.volumeUnit.value
+				value: Global.systemSettings.convertFromCubicMeters(dataItem.value)
+				unit: Global.systemSettings.volumeUnit
 			}
 
 			ListQuantityItem {
 				text: CommonWords.temperature
 				dataItem.uid: root.bindPrefix + "/Temperature"
-				value: dataItem.isValid
-					   ? Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-						   ? dataItem.value
-						   : Units.celsiusToFahrenheit(dataItem.value)
-					   : NaN
-				unit: Global.systemSettings.temperatureUnit.value
+				value: Global.systemSettings.convertFromCelsius(dataItem.value)
+				unit: Global.systemSettings.temperatureUnit
 				visible: defaultVisible && dataItem.isValid
 			}
 

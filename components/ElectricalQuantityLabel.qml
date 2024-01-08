@@ -11,7 +11,7 @@ QuantityLabel {
 	id: root
 
 	property var dataObject
-	readonly property bool unitAmps: !!dataObject && !isNaN(dataObject.current) && Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp
+	readonly property bool unitAmps: !!dataObject && !isNaN(dataObject.current) && Global.systemSettings.electricalQuantity === VenusOS.Units_Amp
 	value: dataObject == null ? NaN // double equals to catch undefined and null
 		: unitAmps ? dataObject.current
 		: dataObject.power

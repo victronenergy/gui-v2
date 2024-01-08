@@ -39,12 +39,12 @@ Page {
 				text: qsTrId("batterydetails_minimum_cell_temperature")
 				textModel: [
 					{
-						value: Global.systemSettings.convertTemperature(details.minTemperatureCellId.value),
-						unit: Global.systemSettings.temperatureUnit.value
+						value: Global.systemSettings.convertFromCelsius(details.minTemperatureCellId.value),
+						unit: Global.systemSettings.temperatureUnit
 					},
 					{
-						value: Global.systemSettings.convertTemperature(details.minCellTemperature.value),
-						unit: Global.systemSettings.temperatureUnit.value
+						value: Global.systemSettings.convertFromCelsius(details.minCellTemperature.value),
+						unit: Global.systemSettings.temperatureUnit
 					}
 				]
 			}
@@ -54,12 +54,12 @@ Page {
 				text: qsTrId("batterydetails_maximum_cell_temperature")
 				textModel: [
 					{
-						value: Global.systemSettings.convertTemperature(details.maxTemperatureCellId.value),
-						unit: Global.systemSettings.temperatureUnit.value
+						value: Global.systemSettings.convertFromCelsius(details.maxTemperatureCellId.value),
+						unit: Global.systemSettings.temperatureUnit
 					},
 					{
-						value: Global.systemSettings.convertTemperature(details.maxCellTemperature.value),
-						unit: Global.systemSettings.temperatureUnit.value
+						value: Global.systemSettings.convertFromCelsius(details.maxCellTemperature.value),
+						unit: Global.systemSettings.temperatureUnit
 					}
 				]
 			}

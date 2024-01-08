@@ -38,8 +38,8 @@ ObjectModel {
 	ListQuantityItem {
 		text: CommonWords.temperature
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-		value: dataItem.isValid ? Global.systemSettings.convertTemperature(dataItem.value) : NaN
-		unit: Global.systemSettings.temperatureUnit.value
+		value: Global.systemSettings.convertFromCelsius(dataItem.value)
+		unit: Global.systemSettings.temperatureUnit
 	}
 
 	ListTextItem {

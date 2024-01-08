@@ -158,10 +158,8 @@ OverviewWidget {
 			rightMargin: Theme.geometry_overviewPage_widget_battery_temperature_rightMargin
 		}
 
-		value: Math.round(Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-				? batteryData.temperature_celsius
-				: Units.celsiusToFahrenheit(batteryData.temperature_celsius))
-		unit: !!Global.systemSettings.temperatureUnit.value ? Global.systemSettings.temperatureUnit.value : VenusOS.Units_Temperature_Celsius
+		value: Global.systemSettings.convertFromCelsius(batteryData.temperature_celsius)
+		unit: Global.systemSettings.temperatureUnit
 		font.pixelSize: Theme.font_size_body2
 		alignment: Qt.AlignRight
 	}

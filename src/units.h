@@ -43,15 +43,6 @@ public:
 	Q_INVOKABLE QString defaultUnitString(Victron::VenusOS::Enums::Units_Type unit) const;
 	Q_INVOKABLE QString scaledUnitString(Victron::VenusOS::Enums::Units_Type unit) const;
 
-	Q_INVOKABLE qreal convertVolumeForUnit(
-		qreal value_m3,
-		Victron::VenusOS::Enums::Units_Type toUnit) const;
-
-	Q_INVOKABLE qreal celsiusToFahrenheit(qreal celsius) const;
-	Q_INVOKABLE qreal fromKelvin(qreal value, Victron::VenusOS::Enums::Units_Type toUnit) const;
-	Q_INVOKABLE qreal toKelvin(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit) const;
-	Q_INVOKABLE qreal convertFromCelsius(qreal celsius, Victron::VenusOS::Enums::Units_Type unit) const;
-
 	Q_INVOKABLE Victron::Units::quantityInfo scaledQuantity(
 		qreal value,
 		qreal unitMatchValue,
@@ -70,11 +61,12 @@ public:
 		qreal value,
 		int precision = -1) const;
 
-	Q_INVOKABLE QString getCapacityDisplayText(
-		Victron::VenusOS::Enums::Units_Type unit,
+	Q_INVOKABLE QString getCapacityDisplayText(Victron::VenusOS::Enums::Units_Type unit,
 		qreal capacity_m3,
 		qreal remaining_m3,
 		int precision) const;
+
+	Q_INVOKABLE qreal convert(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit, Victron::VenusOS::Enums::Units_Type toUnit) const;
 
 	Q_INVOKABLE qreal sumRealNumbers(qreal a, qreal b) const;
 };

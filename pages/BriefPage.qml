@@ -119,7 +119,7 @@ Page {
 
 			// AC and DC amp values cannot be combined. If there are both AC and DC values, show
 			// Watts even if Amps is preferred.
-			quantityLabel.unit: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp
+			quantityLabel.unit: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp
 					&& ((Global.acInputs.current || 0) === 0 || (Global.dcInputs.current || 0) === 0)
 					   ? VenusOS.Units_Amp
 					   : VenusOS.Units_Watt
