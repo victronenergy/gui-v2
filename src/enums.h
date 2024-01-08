@@ -67,12 +67,11 @@ public:
 	Q_ENUM(StatusBar_RightButton)
 
 	enum Units_Type {
-		// Volume unit values are those expected by com.victronenergy.settings/Settings/System/VolumeUnit
-		Units_Volume_CubicMeter = 0,
-		Units_Volume_Liter = 1,
-		Units_Volume_GallonImperial = 2,
-		Units_Volume_GallonUS = 3,
-
+		Units_None = 0,
+		Units_Volume_CubicMeter,
+		Units_Volume_Liter,
+		Units_Volume_GallonImperial,
+		Units_Volume_GallonUS,
 		Units_Percentage,
 		Units_Volt,
 		Units_VoltAmpere,
@@ -87,8 +86,6 @@ public:
 		Units_Temperature_Fahrenheit,
 		Units_RevolutionsPerMinute,
 		Units_Speed_MetresPerSecond,
-
-		Units_None = 1000
 	};
 	Q_ENUM(Units_Type)
 	

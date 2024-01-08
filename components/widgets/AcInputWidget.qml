@@ -51,7 +51,7 @@ OverviewWidget {
 				id: valueRange
 
 				value: sideGauge.visible ? root.quantityLabel.value : NaN
-				maximumValue: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp
+				maximumValue: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp
 					? Global.acInputs.currentLimit
 					: NaN
 			}

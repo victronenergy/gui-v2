@@ -13,14 +13,78 @@ QtObject {
 
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
 
+	property int electricalQuantity: VenusOS.Units_None
+	property int temperatureUnit: VenusOS.Units_None
+	property string temperatureUnitSuffix
+	property int volumeUnit: VenusOS.Units_None
+
 	function canAccess(level) {
 		return accessLevel.isValid && accessLevel.value >= level
 	}
 
-	function convertTemperature(celsius_value) {
-		return temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-				? celsius_value
-				: Units.celsiusToFahrenheit(celsius_value)
+	function setElectricalQuantity(value) {
+		switch (value) {
+			case VenusOS.Units_Watt:
+				_electricalQuantity.setValue(_electricalQuantity.ve_watt)
+				break
+			case VenusOS.Units_Amp:
+				_electricalQuantity.setValue(_electricalQuantity.ve_amp)
+				break
+			default:
+				console.warn("setElectricalQuantity() unknown value:", value)
+				break
+		}
+	}
+
+	function setTemperatureUnit(value) {
+		switch (value) {
+			case VenusOS.Units_Temperature_Celsius:
+				_temperatureUnit.setValue(_temperatureUnit.ve_celsius)
+				break
+			case VenusOS.Units_Temperature_Fahrenheit:
+				_temperatureUnit.setValue(_temperatureUnit.ve_fahrenheit)
+				break
+			default:
+				// Other units are not supported, including kelvin
+				console.warn("setTemperatureUnit() unknown value:", value)
+				break
+		}
+	}
+
+	function setVolumeUnit(value) {
+		switch (value) {
+			case VenusOS.Units_Volume_CubicMeter:
+				_volumeUnit.setValue(_volumeUnit.ve_cm3)
+				break
+			case VenusOS.Units_Volume_Liter:
+				_volumeUnit.setValue(_volumeUnit.ve_liter)
+				break
+			case VenusOS.Units_Volume_GallonImperial:
+				_volumeUnit.setValue(_volumeUnit.ve_gallonImperial)
+				break
+			case VenusOS.Units_Volume_GallonUS:
+				_volumeUnit.setValue(_volumeUnit.ve_gallonUs)
+				break
+			default:
+				console.warn("setVolumeUnit() unknown value:", value)
+				break
+		}
+	}
+
+	function convertFromCelsius(celsius_value) {
+		return Units.convert(celsius_value, VenusOS.Units_Temperature_Celsius, temperatureUnit)
+	}
+
+	function convertToCelsius(temperature) {
+		return Units.convert(temperature, temperatureUnit, VenusOS.Units_Temperature_Celsius)
+	}
+
+	function convertFromCubicMeters(cm3_value) {
+		return Units.convert(cm3_value, VenusOS.Units_Volume_CubicMeter, volumeUnit)
+	}
+
+	function convertToCubicMeters(volume) {
+		return Units.convert(volume, volumeUnit, VenusOS.Units_Volume_CubicMeter)
 	}
 
 	function networkStatusToText(status) {
@@ -67,52 +131,6 @@ QtObject {
 				 Theme.colorScheme = Theme.Light
 			 }
 		 }
-	}
-
-	property QtObject electricalQuantity: QtObject {
-		// Values for /Settings/Gui/ElectricalPowerIndicator: 0 = watts, 1 = amps
-		readonly property var value: _electricalQuantityDataItem.value === 1 ? VenusOS.Units_Amp : VenusOS.Units_Watt
-
-		function setValue(v) {
-			if (v === VenusOS.Units_Watt) {
-				_electricalQuantityDataItem.setValue(0)
-			} else if (v === VenusOS.Units_Amp) {
-				_electricalQuantityDataItem.setValue(1)
-			} else {
-				console.warn("Unsupported electrical quantity:", v)
-			}
-		}
-
-		readonly property VeQuickItem _electricalQuantityDataItem: VeQuickItem {
-			id: _electricalQuantityDataItem
-			uid: root.serviceUid + "/Settings/Gui/ElectricalPowerIndicator"
-		}
-	}
-
-	property QtObject temperatureUnit: QtObject {
-		// translate /System/Units/Temperature from string to enum value
-		readonly property int value: _unitDataItem.value === "fahrenheit"
-				? VenusOS.Units_Temperature_Fahrenheit
-				: VenusOS.Units_Temperature_Celsius
-
-		function setValue(v) {
-			if (v === VenusOS.Units_Temperature_Celsius) {
-				_unitDataItem.setValue("celsius")
-			} else if (v === VenusOS.Units_Temperature_Fahrenheit) {
-				_unitDataItem.setValue("fahrenheit")
-			} else {
-				console.warn("Unsupported temperature unit:", v)
-			}
-		}
-
-		readonly property VeQuickItem _unitDataItem: VeQuickItem {
-			id: _unitDataItem
-			uid: root.serviceUid + "/Settings/System/Units/Temperature"
-		}
-	}
-
-	property VeQuickItem volumeUnit: VeQuickItem {
-		uid: root.serviceUid + "/Settings/System/VolumeUnit"
 	}
 
 	property QtObject briefView: QtObject {
@@ -196,6 +214,80 @@ QtObject {
 				Global.changingLanguage = true
 				Language.setCurrentLanguageCode(value)
 				Qt.callLater(Global.main.retranslateUi)
+			}
+		}
+	}
+
+	property VeQuickItem _electricalQuantity: VeQuickItem {
+		readonly property int ve_watt: 0
+		readonly property int ve_amp: 1
+
+		uid: root.serviceUid + "/Settings/Gui/ElectricalPowerIndicator"
+		onValueChanged: {
+			switch (value) {
+			case ve_watt:
+				root.electricalQuantity = VenusOS.Units_Watt
+				break
+			case ve_amp:
+				root.electricalQuantity = VenusOS.Units_Amp
+				break
+			default:
+				console.warn("Cannot load electrical quantity,", uid, "has unsupported value:", value, "default to watts")
+				root.electricalQuantity = VenusOS.Units_Watt
+				break
+			}
+		}
+	}
+
+	property VeQuickItem _temperatureUnit: VeQuickItem {
+		readonly property string ve_celsius: "celsius"
+		readonly property string ve_fahrenheit: "fahrenheit"
+
+		uid: root.serviceUid + "/Settings/System/Units/Temperature"
+		onValueChanged: {
+			switch (value) {
+			case ve_celsius:
+				root.temperatureUnit = VenusOS.Units_Temperature_Celsius
+				root.temperatureUnitSuffix = "C"
+				break
+			case ve_fahrenheit:
+				root.temperatureUnit = VenusOS.Units_Temperature_Fahrenheit
+				root.temperatureUnitSuffix = "F"
+				break
+			default:
+				console.warn("Cannot load temperature unit,", uid, "has unsupported value:", value, "default to celsius")
+				root.temperatureUnit = VenusOS.Units_Temperature_Celsius
+				root.temperatureUnitSuffix = "C"
+				break
+			}
+		}
+	}
+
+	property VeQuickItem _volumeUnit: VeQuickItem {
+		readonly property int ve_cm3: 0
+		readonly property int ve_liter: 1
+		readonly property int ve_gallonImperial: 2
+		readonly property int ve_gallonUs: 3
+
+		uid: root.serviceUid + "/Settings/System/VolumeUnit"
+		onValueChanged: {
+			switch (value) {
+			case ve_cm3:
+				root.volumeUnit = VenusOS.Units_Volume_CubicMeter
+				break
+			case ve_liter:
+				root.volumeUnit = VenusOS.Units_Volume_Liter
+				break
+			case ve_gallonImperial:
+				root.volumeUnit = VenusOS.Units_Volume_GallonImperial
+				break
+			case ve_gallonUs:
+				root.volumeUnit = VenusOS.Units_Volume_GallonUS
+				break
+			default:
+				console.warn("Cannot load volume unit,", uid, "has unsupported value:", value, "default to m3")
+				root.volumeUnit = VenusOS.Units_Volume_CubicMeter
+				break
 			}
 		}
 	}

@@ -64,12 +64,12 @@ Page {
 				text: qsTrId("lynxionsystem_min_max_cell_temperature")
 				textModel: [
 					{
-						value: Global.systemSettings.convertTemperature(minCellTemperature.value),
-						unit: Global.systemSettings.temperatureUnit.value
+						value: Global.systemSettings.convertFromCelsius(minCellTemperature.value),
+						unit: Global.systemSettings.temperatureUnit
 					},
 					{
-						value: Global.systemSettings.convertTemperature(maxCellTemperature.value),
-						unit: Global.systemSettings.temperatureUnit.value
+						value: Global.systemSettings.convertFromCelsius(maxCellTemperature.value),
+						unit: Global.systemSettings.temperatureUnit
 					}
 				]
 				visible: minCellTemperature.isValid && maxCellTemperature.isValid

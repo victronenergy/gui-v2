@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Veutil
 import Victron.Units
 
 ObjectModel {
@@ -78,10 +79,10 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowBatteryTemperatureClear"
 		visible: defaultVisible && dataItem.isValid
 		toSourceValue: function(v) {
-			return Units.toKelvin(v, Global.systemSettings.temperatureUnit.value)
+			return Units.convert(v, Global.systemSettings.temperatureUnit, VenusOS.Units_Temperature_Kelvin)
 		}
 		fromSourceValue: function(v) {
-			return Units.fromKelvin(v, Global.systemSettings.temperatureUnit.value)
+			return Units.convert(v, VenusOS.Units_Temperature_Kelvin, Global.systemSettings.temperatureUnit)
 		}
 	}
 
@@ -93,10 +94,10 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighBatteryTemperature"
 		visible: defaultVisible && dataItem.isValid
 		toSourceValue: function(v) {
-			return Units.toKelvin(v, Global.systemSettings.temperatureUnit.value)
+			return Units.convert(v, Global.systemSettings.temperatureUnit, VenusOS.Units_Temperature_Kelvin)
 		}
 		fromSourceValue: function(v) {
-			return Units.fromKelvin(v, Global.systemSettings.temperatureUnit.value)
+			return Units.convert(v, VenusOS.Units_Temperature_Kelvin, Global.systemSettings.temperatureUnit)
 		}
 	}
 }

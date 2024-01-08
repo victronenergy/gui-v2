@@ -134,10 +134,10 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperatureClear"
 		visible: defaultVisible && dataItem.isValid && showSetting(0)
 		toSourceValue: function(v) {
-			return Units.toKelvin(v, Global.systemSettings.temperatureUnit.value)
+			return Units.convert(v, Global.systemSettings.temperatureUnit, VenusOS.Units_Temperature_Kelvin)
 		}
 		fromSourceValue: function(v) {
-			return Units.fromKelvin(v, Global.systemSettings.temperatureUnit.value)
+			return Units.convert(v, VenusOS.Units_Temperature_Kelvin, Global.systemSettings.temperatureUnit)
 		}
 	}
 
@@ -149,10 +149,10 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperature"
 		visible: defaultVisible && dataItem.isValid && showSetting(0)
 		toSourceValue: function(v) {
-			return Units.toKelvin(v, Global.systemSettings.temperatureUnit.value)
+			return Units.convert(v, Global.systemSettings.temperatureUnit, VenusOS.Units_Temperature_Kelvin)
 		}
 		fromSourceValue: function(v) {
-			return Units.fromKelvin(v, Global.systemSettings.temperatureUnit.value)
+			return Units.convert(v, VenusOS.Units_Temperature_Kelvin, Global.systemSettings.temperatureUnit)
 		}
 	}
 }

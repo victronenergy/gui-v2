@@ -123,7 +123,7 @@ Rectangle {
 					fontSizeMode: Text.HorizontalFit
 					font.pixelSize: Theme.font_size_caption
 					color: Theme.color_font_secondary
-					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit.value,
+					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
 							model.device.capacity,
 							model.device.remaining,
 							Theme.geometry_quantityLabel_valueLength)

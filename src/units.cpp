@@ -5,6 +5,34 @@
 
 #include "units.h"
 
+#include <veutil/qt/unit_conversion.hpp>
+
+namespace {
+
+Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
+{
+	switch (unit) {
+	case Victron::VenusOS::Enums::Units_Volume_CubicMeter:
+		return Unit::CubicMeter;
+	case Victron::VenusOS::Enums::Units_Volume_Liter:
+		return Unit::Litre;
+	case Victron::VenusOS::Enums::Units_Volume_GallonUS:
+		return Unit::UsGallon;
+	case Victron::VenusOS::Enums::Units_Volume_GallonImperial:
+		return Unit::ImperialGallon;
+	case Victron::VenusOS::Enums::Units_Temperature_Kelvin:
+		return Unit::Kelvin;
+	case Victron::VenusOS::Enums::Units_Temperature_Celsius:
+		return Unit::Celsius;
+	case Victron::VenusOS::Enums::Units_Temperature_Fahrenheit:
+		return Unit::Fahrenheit;
+	default:
+		return Unit::Default;
+	}
+}
+
+}
+
 namespace Victron {
 namespace Units {
 
@@ -113,72 +141,6 @@ QString Units::scaledUnitString(Victron::VenusOS::Enums::Units_Type unit) const
 	}
 }
 
-qreal Units::convertVolumeForUnit(qreal value_m3, Victron::VenusOS::Enums::Units_Type toUnit) const
-{
-	if (qIsNaN(value_m3)) {
-		return qQNaN();
-	}
-
-	switch (toUnit) {
-	case Victron::VenusOS::Enums::Units_Volume_CubicMeter:
-		return value_m3;
-	case Victron::VenusOS::Enums::Units_Volume_Liter:
-		return value_m3 * 1000;
-	case Victron::VenusOS::Enums::Units_Volume_GallonUS:
-		return value_m3 * 264.1720523581;
-	case Victron::VenusOS::Enums::Units_Volume_GallonImperial:
-		return value_m3 * 219.9692483;
-	default:
-		qWarning() << "convertVolumeForUnit(): cannot convert m3 to unit" << toUnit;
-		return value_m3;
-	}
-}
-
-qreal Units::celsiusToFahrenheit(qreal celsius) const
-{
-	return qIsNaN(celsius) ? celsius: ((celsius * 9/5) + 32);
-}
-
-qreal Units::fromKelvin(qreal value, Victron::VenusOS::Enums::Units_Type toUnit) const
-{
-	if (toUnit == Victron::VenusOS::Enums::Units_Temperature_Kelvin) {
-		return value;
-	}
-	const qreal celsiusValue = value - 273.15;
-	if (toUnit == Victron::VenusOS::Enums::Units_Temperature_Celsius) {
-		return celsiusValue;
-	}
-	if (toUnit == Victron::VenusOS::Enums::Units_Temperature_Fahrenheit) {
-		return celsiusToFahrenheit(celsiusValue);
-	}
-
-	qWarning() << "Invalid temperature unit:" << toUnit;
-	return value;
-}
-
-qreal Units::toKelvin(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit) const
-{
-	if (fromUnit == Victron::VenusOS::Enums::Units_Temperature_Kelvin) {
-		return value;
-	}
-	if (fromUnit == Victron::VenusOS::Enums::Units_Temperature_Celsius) {
-		return value + 273.15;
-	}
-	if (fromUnit == Victron::VenusOS::Enums::Units_Temperature_Fahrenheit) {
-		return (value + 459.67) * 5/9;
-	}
-
-	qWarning() << "Invalid temperature unit:" << fromUnit;
-	return value;
-}
-
-qreal Units::convertFromCelsius(qreal celsius, Victron::VenusOS::Enums::Units_Type unit) const
-{
-	return unit == Victron::VenusOS::Enums::Units_Temperature_Celsius ? celsius
-		: unit == Victron::VenusOS::Enums::Units_Temperature_Fahrenheit ? celsiusToFahrenheit(celsius)
-		: (celsius + 273.15);
-}
-
 Victron::Units::quantityInfo Units::scaledQuantity(
 	qreal value,
 	qreal unitMatchValue,
@@ -257,11 +219,36 @@ QString Units::getCapacityDisplayText(
 	qreal remaining_m3,
 	int precision) const
 {
-	const qreal capacity = convertVolumeForUnit(capacity_m3, unit);
-	const qreal remaining = convertVolumeForUnit(remaining_m3, unit);
+	const qreal capacity = convert(capacity_m3, Victron::VenusOS::Enums::Units_Volume_CubicMeter, unit);
+	const qreal remaining = convert(remaining_m3, Victron::VenusOS::Enums::Units_Volume_CubicMeter, unit);
+
 	const Victron::Units::quantityInfo c = getDisplayText(unit, capacity, precision);
 	const Victron::Units::quantityInfo r = getDisplayText(unit, remaining, precision, capacity);
 	return QStringLiteral("%1/%2%3").arg(r.number, c.number, c.unit);
+}
+
+qreal Units::convert(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit, Victron::VenusOS::Enums::Units_Type toUnit) const
+{
+	if (qIsNaN(value)
+			|| fromUnit == Victron::VenusOS::Enums::Units_None
+			|| toUnit == Victron::VenusOS::Enums::Units_None) {
+		return qQNaN();
+	}
+	if (fromUnit == toUnit) {
+		return value;
+	}
+
+	Unit::Type fromVeUnit = unitToVeUnit(fromUnit);
+	if (fromVeUnit == Unit::Default) {
+		qWarning() << "convert() does not support conversion from unit:" << fromUnit;
+		return value;
+	}
+	Unit::Type toVeUnit = unitToVeUnit(toUnit);
+	if (toVeUnit == Unit::Default) {
+		qWarning() << "convert() does not support conversion to unit:" << toUnit;
+		return value;
+	}
+	return UnitConverters::instance().convert(value, fromVeUnit, toVeUnit);
 }
 
 // This considers whether the values are NaN. If both are NaN, the result is NaN.

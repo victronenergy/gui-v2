@@ -89,17 +89,13 @@ Rectangle {
 		animationEnabled: root.animationEnabled
 		icon.source: "qrc:/images/icon_temp_32.svg"
 
-		text: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? "F" : "C"
+		text: Global.systemSettings.temperatureUnitSuffix
 		value: Math.round(root.temperature)
-		unit: Global.systemSettings.temperatureUnit.value
+		unit: Global.systemSettings.temperatureUnit
 
 		// TODO min, max and highlight need to come from dbus backend, but not yet available.
-		minimumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-				? Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue
-				: Units.celsiusToFahrenheit(Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue)
-		maximumValue: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-				? Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue
-				: Units.celsiusToFahrenheit(Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue)
+		minimumValue: Global.systemSettings.convertFromCelsius(Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue)
+		maximumValue: Global.systemSettings.convertFromCelsius(Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue)
 		highlightedValue: Theme.geometry_levelsPage_environment_temperatureGauge_highlightedValue
 		minimumValueColor: Theme.color_blue
 		maximumValueColor: Theme.color_red
