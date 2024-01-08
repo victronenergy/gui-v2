@@ -80,11 +80,9 @@ Page {
 				if (isNaN(device.temperature)) {
 					summary = [ levelText ]
 				} else {
-					const tankTemp = Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-							? device.temperature
-							: Units.celsiusToFahrenheit(device.temperature)
+					const tankTemp = Global.systemSettings.convertFromCelsius(device.temperature)
 					summary = [
-						Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit.value, tankTemp),
+						Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, tankTemp),
 						levelText
 					]
 				}
@@ -119,16 +117,14 @@ Page {
 			break;
 
 		case "temperature":
-			const inputTemp = Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Celsius
-					? device.temperature_celsius
-					: Units.celsiusToFahrenheit(device.temperature_celsius)
+			const inputTemp = Global.systemSettings.convertFromCelsius(device.temperature_celsius)
 			if (isNaN(device.humidity)) {
 				summary = [
-					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit.value, inputTemp),
+					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp),
 				]
 			} else {
 				summary = [
-					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit.value, inputTemp),
+					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp),
 					Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.humidity),
 				]
 			}
@@ -166,7 +162,7 @@ Page {
 			break;
 
 		case "pulsemeter":
-			summary = [ Units.getCombinedDisplayText(Global.systemSettings.volumeUnit.value, device.aggregate) ]
+			summary = [ Units.getCombinedDisplayText(Global.systemSettings.volumeUnit, device.aggregate) ]
 			break;
 
 		case "unsupported":

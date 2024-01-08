@@ -252,7 +252,7 @@ Page {
 				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Temperature"
 				//% "Battery temperature"
 				text: qsTrId("vebus_device_page_battery_temperature")
-				unit: Global.systemSettings.temperatureUnit.value
+				unit: Global.systemSettings.temperatureUnit
 			}
 
 			VeBusDeviceActiveAcInputTextItem {

@@ -85,9 +85,7 @@ Flickable {
 						? VenusOS.EnvironmentGaugePanel_Size_Expanded
 						: VenusOS.EnvironmentGaugePanel_Size_Compact
 				title: model.device.name
-				temperature: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit
-						? Units.celsiusToFahrenheit(model.device.temperature_celsius)
-						: model.device.temperature_celsius
+				temperature: Global.systemSettings.convertFromCelsius(model.device.temperature_celsius)
 				humidity: model.device.humidity
 				temperatureGaugeGradient: temperatureGradient
 				humidityGaugeGradient: humidityGradient

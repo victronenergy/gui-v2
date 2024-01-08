@@ -64,8 +64,8 @@ Page {
 								{ value: modelData.current, unit: VenusOS.Units_Amp },
 								{ value: modelData.power, unit: VenusOS.Units_Watt },
 								{
-									value: Global.systemSettings.convertTemperature(modelData.temperature_celsius),
-									unit: Global.systemSettings.temperatureUnit.value
+									value: Global.systemSettings.convertFromCelsius(modelData.temperature_celsius),
+									unit: Global.systemSettings.temperatureUnit
 								}
 							]
 						}

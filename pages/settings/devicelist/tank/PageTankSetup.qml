@@ -21,18 +21,18 @@ Page {
 
 				//% "Capacity"
 				text: qsTrId("devicelist_tanksetup_capacity")
-				suffix: Units.defaultUnitString(Global.systemSettings.volumeUnit.value)
-				stepSize: Global.systemSettings.volumeUnit.value === VenusOS.Units_Volume_CubicMeter
+				suffix: Units.defaultUnitString(Global.systemSettings.volumeUnit)
+				stepSize: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMeter
 						  ? 5   // Cubic meters (this becomes 0.005 when ListSpinBox adjusts it for decimals)
 						  : 1   // Liters, Gallons
-				decimals: Units.defaultUnitPrecision(Global.systemSettings.volumeUnit.value)
-				from: Units.convertVolumeForUnit(capacity.min, Global.systemSettings.volumeUnit.value)
-				to: Units.convertVolumeForUnit(capacity.max, Global.systemSettings.volumeUnit.value)
+				decimals: Units.defaultUnitPrecision(Global.systemSettings.volumeUnit)
+				from: Global.systemSettings.convertFromCubicMeters(capacity.min)
+				to: Global.systemSettings.convertFromCubicMeters(capacity.max)
 				value: capacity.value === undefined ? 0
-					 : Units.convertVolumeForUnit(capacity.value, Global.systemSettings.volumeUnit.value)
+					 : Global.systemSettings.convertFromCubicMeters(capacity.value)
 
 				onSelectorAccepted: function(newValue) {
-					capacity.setValue(Units.convertVolumeForUnit(newValue, VenusOS.Units_Volume_CubicMeter))
+					capacity.setValue(Global.systemSettings.convertToCubicMeters(newValue))
 				}
 
 				VeQuickItem {

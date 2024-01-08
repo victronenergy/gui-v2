@@ -23,10 +23,10 @@ Page {
 					//% "Current (Amps)"
 					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Amp },
 				]
-				currentIndex: Global.systemSettings.electricalQuantity.value === VenusOS.Units_Amp ? 1 : 0
+				currentIndex: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? 1 : 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.electricalQuantity.setValue(optionModel[index].value)
+					Global.systemSettings.setElectricalQuantity(optionModel[index].value)
 				}
 			}
 
@@ -38,10 +38,10 @@ Page {
 					//% "Fahrenheit"
 					{ display: qsTrId("settings_units_fahrenheit"), value: VenusOS.Units_Temperature_Fahrenheit },
 				]
-				currentIndex: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
+				currentIndex: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.temperatureUnit.setValue(optionModel[index].value)
+					Global.systemSettings.setTemperatureUnit(optionModel[index].value)
 				}
 			}
 

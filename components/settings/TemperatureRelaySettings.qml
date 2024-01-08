@@ -70,16 +70,17 @@ Column {
 		//% "Activation value"
 		text: qsTrId("settings_relay_activation_value")
 		dataItem.uid: "%1/%2/SetValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
-		from: -50
-		to: 100
-
-		// TODO the unit string shouldn't be determined here. Fix when units are updated to use velib unit features.
-		suffix: Global.systemSettings.temperatureUnit.value === VenusOS.Units_Temperature_Fahrenheit ? "F" : "C"
+		from: Global.systemSettings.convertFromCelsius(-50)
+		to: Global.systemSettings.convertFromCelsius(100)
+		suffix: Global.systemSettings.temperatureUnitSuffix
 
 		onValueChanged: {
 			if (value === cClear.value) {
 				showEqualValuesWarningToast()
 			}
+		}
+		onSelectorAccepted: function(newValue) {
+			cSet.setValue(Global.systemSettings.convertToCelsius(newValue))
 		}
 	}
 
@@ -97,6 +98,9 @@ Column {
 			if (value === cSet.value) {
 				showEqualValuesWarningToast()
 			}
+		}
+		onSelectorAccepted: function(newValue) {
+			cClear.setValue(Global.systemSettings.convertToCelsius(newValue))
 		}
 	}
 }
