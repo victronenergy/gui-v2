@@ -180,6 +180,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ThreePhaseQuantityTable.qml
     components/TimeSelector.qml
     components/ToastNotification.qml
+    components/Utils.js
     components/ValueRange.qml
     components/VerticalGauge.qml
     components/ViewGradient.qml
@@ -658,22 +659,6 @@ qt_add_qml_module(Mock
 )
 # end Mock_QML_MODULE
 
-# Utils_QML_MODULE
-set(Utils_QML_MODULE_SOURCES
-    components/Utils.js
-)
-
-list(APPEND QML_MODULE_SOURCES ${Utils_QML_MODULE_SOURCES})
-
-qt_add_qml_module(Utils
-    URI Victron.Utils
-    STATIC
-    OUTPUT_DIRECTORY Victron/Utils
-    QML_FILES ${Utils_QML_MODULE_SOURCES}
-    ${QML_MODULE_OPTARGS}
-)
-# end Utils_QML_MODULE
-
 # Gauges_QML_MODULE
 set(Gauges_QML_MODULE_SOURCES
     components/Gauges.js
@@ -979,7 +964,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Mqtt
     VenusQMLModuleplugin
     Gaugesplugin
-    Utilsplugin
     Dbusplugin
     Mockplugin
     Mqttplugin

@@ -7,7 +7,6 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
 import QtQuick.Controls as C
-import Victron.Utils
 
 Page {
 	id: root

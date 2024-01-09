@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Utils
 
 
 // This dialog allows the generator to be started or stopped. It is does not close immediately

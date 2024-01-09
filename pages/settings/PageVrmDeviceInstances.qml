@@ -7,7 +7,6 @@ import QtQuick
 import QtQuick.Controls as C
 import Victron.VenusOS
 import Victron.Veutil
-import Victron.Utils
 
 // Allows VRM instances to be changed for devices on the system.
 //
