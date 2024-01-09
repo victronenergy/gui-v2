@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Units
 
 QuantityLabel {
 	id: root

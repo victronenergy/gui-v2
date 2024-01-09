@@ -7,7 +7,6 @@ import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 import Victron.Gauges
-import Victron.Units
 
 Rectangle {
 	id: root
