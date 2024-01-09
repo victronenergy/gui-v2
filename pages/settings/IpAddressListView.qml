@@ -8,7 +8,6 @@ import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import Victron.Veutil
-import Victron.Utils
 
 GradientListView {
 	id: root

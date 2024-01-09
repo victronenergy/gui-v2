@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import Victron.Utils
 import Victron.VenusOS
 import Victron.Veutil
 

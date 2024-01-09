@@ -4,7 +4,6 @@
 */
 
 import QtQml
-import Victron.Utils
 
 QtObject {
 	property real value: NaN
