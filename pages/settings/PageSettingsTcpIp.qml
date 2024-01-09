@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import net.connman
 import Victron.Utils
 
 Page {
