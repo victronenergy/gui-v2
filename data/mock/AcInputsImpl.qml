@@ -6,7 +6,6 @@
 import QtQuick
 import Victron.Veutil
 import Victron.VenusOS
-import Victron.Units
 import Victron.Utils
 
 QtObject {
