@@ -11,7 +11,6 @@
 import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import Victron.Units
 
 Page {
 	id: root

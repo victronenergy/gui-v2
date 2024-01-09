@@ -6,7 +6,6 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.Veutil
-import Victron.Units
 
 ObjectModel {
 	id: root
