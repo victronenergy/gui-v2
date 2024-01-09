@@ -213,19 +213,6 @@ void initBackend(bool *enableFpsCounter)
 	}
 }
 
-void registerQmlTypes()
-{
-	// These types do not use dbus, so are safe to import even in the Qt Wasm build.
-	qmlRegisterType<VeQuickItem>("Victron.Veutil", 1, 0, "VeQuickItem");
-	qmlRegisterType<VeQItem>("Victron.Veutil", 1, 0, "VeQItem");
-	qmlRegisterType<VeQItemChildModel>("Victron.Veutil", 1, 0, "VeQItemChildModel");
-	qmlRegisterType<VeQItemSortDelegate>("Victron.Veutil", 1, 0, "VeQItemSortDelegate");
-	qmlRegisterType<VeQItemSortTableModel>("Victron.Veutil", 1, 0, "VeQItemSortTableModel");
-	qmlRegisterType<VeQItemTableModel>("Victron.Veutil", 1, 0, "VeQItemTableModel");
-
-	qmlRegisterUncreatableType<FirmwareUpdaterData>("Victron.Veutil", 1, 0, "FirmwareUpdater", "FirmwareUpdater cannot be created");
-}
-
 } // namespace
 
 
@@ -239,8 +226,6 @@ int main(int argc, char *argv[])
 	// The native vkb gets used instead, so a keyboard is still available when required.
 	qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 #endif
-
-	registerQmlTypes();
 
 	QGuiApplication app(argc, argv);
 	QGuiApplication::setApplicationName("Venus");

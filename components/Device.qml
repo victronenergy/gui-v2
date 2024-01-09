@@ -5,7 +5,6 @@
 
 import QtQml
 import Victron.VenusOS
-import Victron.Veutil
 
 BaseDevice {
 	id: root
