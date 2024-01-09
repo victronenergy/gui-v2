@@ -566,7 +566,6 @@ qt_add_qml_module(VenusQMLModule
         Victron.Utils
         Victron.Units
         Victron.Veutil
-    ENABLE_TYPE_COMPILER
 )
 target_include_directories(VenusQMLModule PRIVATE src/connman)
 target_link_libraries(VenusQMLModule
