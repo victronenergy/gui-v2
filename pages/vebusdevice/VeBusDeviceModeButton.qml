@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Veutil
 
 /*
 	'VeBusDeviceModeButton' allow the user to plug in any style of button via 'sourceComponent', and handles raising all of the toast notifications

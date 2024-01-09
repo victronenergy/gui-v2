@@ -7,7 +7,6 @@ import QtQuick
 import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import Victron.Veutil
 
 // Each item in the model is expected to have at least 2 values:
 //      - "display": the text to display for this option

@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Veutil
 import QtQuick.Controls.impl as CP
 
 Page {

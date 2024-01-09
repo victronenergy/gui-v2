@@ -6,7 +6,6 @@
 import QtQuick
 import QtQml
 import Victron.VenusOS
-import Victron.Veutil
 
 Page {
 	id: root

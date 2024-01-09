@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Veutil
 
 // Stores the overall daily history for a solar charger, or the daily history for a single solar tracker.
 QtObject {
