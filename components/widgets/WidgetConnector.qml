@@ -6,7 +6,6 @@
 import QtQuick
 import QtQuick.Shapes
 import Victron.VenusOS
-import Victron.Utils
 
 Item {
 	id: root

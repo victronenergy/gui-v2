@@ -6,7 +6,6 @@
 import QtQuick
 import Victron.Veutil
 import Victron.VenusOS
-import Victron.Utils
 
 Device {
 	id: input
