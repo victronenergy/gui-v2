@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Veutil
 
 Page {
 	id: root // TODO: update this UI when a design is available

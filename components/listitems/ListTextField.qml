@@ -6,7 +6,6 @@
 import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import Victron.Veutil
 
 ListItem {
 	id: root

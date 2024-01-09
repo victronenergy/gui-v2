@@ -111,6 +111,41 @@ endif()
 
 list(APPEND VenusQMLModule_CPP_SOURCES ${CONNMAN_SOURCES})
 
+set(VEUTIL_CORE_SOURCES
+    src/veutil/inc/veutil/qt/firmware_updater_data.hpp
+    src/veutil/inc/veutil/qt/unit_conversion.hpp
+    src/veutil/inc/veutil/qt/ve_qitem.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_child_model.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_loader.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_sort_table_model.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_table_model.hpp
+    src/veutil/inc/veutil/qt/ve_qitem_tree_model.hpp
+    src/veutil/inc/veutil/qt/ve_quick_item.hpp
+
+    src/veutil/src/qt/unit_conversion.cpp
+    src/veutil/src/qt/ve_qitem.cpp
+    src/veutil/src/qt/ve_qitem_child_model.cpp
+    src/veutil/src/qt/ve_qitem_loader.cpp
+    src/veutil/src/qt/ve_qitem_sort_table_model.cpp
+    src/veutil/src/qt/ve_qitem_table_model.cpp
+    src/veutil/src/qt/ve_qitem_tree_model.cpp
+    src/veutil/src/qt/ve_quick_item.cpp
+)
+list(APPEND VenusQMLModule_CPP_SOURCES ${VEUTIL_CORE_SOURCES})
+
+SET(VEUTIL_DBUS_SOURCES
+    src/veutil/inc/veutil/qt/ve_dbus_connection.hpp
+    src/veutil/inc/veutil/qt/ve_qitems_dbus.hpp
+    src/veutil/inc/veutil/qt/vebus_error.hpp
+
+    src/veutil/src/qt/ve_dbus_connection.cpp
+    src/veutil/src/qt/ve_qitems_dbus.cpp
+    src/veutil/src/qt/vebus_error.cpp
+)
+if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+    list(APPEND VenusQMLModule_CPP_SOURCES ${VEUTIL_DBUS_SOURCES} )
+endif()
+
 # VENUS_QML_MODULE
 set (VENUS_QML_MODULE_SOURCES
     ${VENUS_QML_MODULE_SINGLETON_SOURCES}
@@ -553,8 +588,10 @@ qt_add_qml_module(VenusQMLModule
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
     SOURCES ${VenusQMLModule_CPP_SOURCES}
-    IMPORTS  Victron.Veutil
 )
+
+target_include_directories(VenusQMLModule PRIVATE src/veutil/inc/veutil/qt)
+
 target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Core
     Qt6::Gui
@@ -714,41 +751,6 @@ qt_add_qml_module(Mqtt
     ${QML_MODULE_OPTARGS}
 )
 # end Mqtt_QML_MODULE
-
-set(VEUTIL_CORE_SOURCES
-    src/veutil/inc/veutil/qt/firmware_updater_data.hpp
-    src/veutil/inc/veutil/qt/unit_conversion.hpp
-    src/veutil/inc/veutil/qt/ve_qitem.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_child_model.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_loader.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_sort_table_model.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_table_model.hpp
-    src/veutil/inc/veutil/qt/ve_qitem_tree_model.hpp
-    src/veutil/inc/veutil/qt/ve_quick_item.hpp
-
-    src/veutil/src/qt/unit_conversion.cpp
-    src/veutil/src/qt/ve_qitem.cpp
-    src/veutil/src/qt/ve_qitem_child_model.cpp
-    src/veutil/src/qt/ve_qitem_loader.cpp
-    src/veutil/src/qt/ve_qitem_sort_table_model.cpp
-    src/veutil/src/qt/ve_qitem_table_model.cpp
-    src/veutil/src/qt/ve_qitem_tree_model.cpp
-    src/veutil/src/qt/ve_quick_item.cpp
-)
-list(APPEND SOURCES ${VEUTIL_CORE_SOURCES})
-
-SET(VEUTIL_DBUS_SOURCES
-    src/veutil/inc/veutil/qt/ve_dbus_connection.hpp
-    src/veutil/inc/veutil/qt/ve_qitems_dbus.hpp
-    src/veutil/inc/veutil/qt/vebus_error.hpp
-
-    src/veutil/src/qt/ve_dbus_connection.cpp
-    src/veutil/src/qt/ve_qitems_dbus.cpp
-    src/veutil/src/qt/vebus_error.cpp
-)
-if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    list(APPEND SOURCES ${VEUTIL_DBUS_SOURCES} )
-endif()
 
 set(VEUTIL_MQTT_SOURCES
     src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
