@@ -78,7 +78,6 @@ set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added he
 )
 set_source_files_properties( ${VENUS_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )
 
-# Connman module
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     list(APPEND CONNMAN_SOURCES
         src/connman-api.h # mock sources
@@ -110,21 +109,7 @@ else()
     )
 endif()
 
-qt_add_qml_module(Connman
-    URI net.connman
-    VERSION 1.0
-    STATIC
-    OUTPUT_DIRECTORY net/connman
-    SOURCES ${CONNMAN_SOURCES}
-    ${QML_MODULE_OPTARGS}
-)
-
-if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    target_include_directories(Connman PRIVATE src/connman)
-    target_link_libraries(Connman PRIVATE Qt6::DBus)
-endif()
-
-# end Connman module
+list(APPEND VenusQMLModule_CPP_SOURCES ${CONNMAN_SOURCES})
 
 # VENUS_QML_MODULE
 set (VENUS_QML_MODULE_SOURCES
@@ -531,7 +516,7 @@ set (VENUS_QML_MODULE_SOURCES
 
 list(APPEND QML_MODULE_SOURCES ${VENUS_QML_MODULE_SOURCES})
 
-set(VenusQMLModule_CPP_SOURCES
+list(APPEND VenusQMLModule_CPP_SOURCES
     src/aggregatedevicemodel.h
     src/aggregatedevicemodel.cpp
     src/basedevicemodel.h
@@ -553,6 +538,12 @@ set(VenusQMLModule_CPP_SOURCES
     src/frameratemodel.cpp
 )
 
+set(Units_CPP_SOURCES
+    src/units.h
+    src/units.cpp
+)
+list(APPEND VenusQMLModule_CPP_SOURCES ${Units_CPP_SOURCES})
+
 qt_add_qml_module(VenusQMLModule
     ${QML_MODULE_OPTARGS}
     URI Victron.VenusOS
@@ -561,7 +552,7 @@ qt_add_qml_module(VenusQMLModule
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
     SOURCES ${VenusQMLModule_CPP_SOURCES}
-    IMPORTS net.connman
+    IMPORTS  Victron.Veutil
 )
 target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Core
@@ -571,7 +562,6 @@ target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Svg
     Qt6::Xml
     Qt6::Mqtt
-    Connman
 )
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     target_link_libraries(VenusQMLModule PRIVATE Qt6::WebSockets)
@@ -667,21 +657,6 @@ qt_add_qml_module(Mock
     ${QML_MODULE_OPTARGS}
 )
 # end Mock_QML_MODULE
-
-# Units_QML_MODULE
-set(Units_QML_MODULE_SOURCES
-    src/units.h
-    src/units.cpp
-)
-list(APPEND QML_MODULE_SOURCES ${Units_QML_MODULE_SOURCES})
-qt_add_qml_module(Units
-    URI Victron.Units
-    STATIC
-    OUTPUT_DIRECTORY Victron/Units
-    SOURCES ${Units_QML_MODULE_SOURCES}
-    ${QML_MODULE_OPTARGS}
-)
-# end Units_QML_MODULE
 
 # Utils_QML_MODULE
 set(Utils_QML_MODULE_SOURCES
@@ -1004,7 +979,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Mqtt
     VenusQMLModuleplugin
     Gaugesplugin
-    Unitsplugin
     Utilsplugin
     Dbusplugin
     Mockplugin
