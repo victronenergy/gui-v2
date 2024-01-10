@@ -550,7 +550,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/vebusdevice/VeBusDeviceModeButton.qml
 )
 
-list(APPEND QML_MODULE_SOURCES ${VENUS_QML_MODULE_SOURCES})
+list(APPEND TRANSLATION_SOURCES ${VENUS_QML_MODULE_SOURCES})
 
 list(APPEND VenusQMLModule_CPP_SOURCES
     src/aggregatedevicemodel.h
@@ -638,7 +638,7 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/VeBusDevicesImpl.qml
 )
 
-list(APPEND QML_MODULE_SOURCES ${Dbus_QML_MODULE_SOURCES})
+list(APPEND TRANSLATION_SOURCES ${Dbus_QML_MODULE_SOURCES})
 
 qt_add_qml_module(Dbus
     URI Victron.Dbus
@@ -685,7 +685,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/config/SettingsPageConfig.qml
 )
 
-list(APPEND QML_MODULE_SOURCES ${Mock_QML_MODULE_SOURCES})
+list(APPEND TRANSLATION_SOURCES ${Mock_QML_MODULE_SOURCES})
 
 qt_add_qml_module(Mock
     URI Victron.Mock
@@ -701,7 +701,7 @@ set(Gauges_QML_MODULE_SOURCES
     components/Gauges.js
 )
 
-list(APPEND QML_MODULE_SOURCES ${Gauges_QML_MODULE_SOURCES})
+list(APPEND TRANSLATION_SOURCES ${Gauges_QML_MODULE_SOURCES})
 
 qt_add_qml_module(Gauges
     URI Victron.Gauges
@@ -741,7 +741,7 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/VeBusDevicesImpl.qml
 )
 
-list(APPEND QML_MODULE_SOURCES ${Mqtt_QML_MODULE_SOURCES} )
+list(APPEND TRANSLATION_SOURCES ${Mqtt_QML_MODULE_SOURCES} )
 
 qt_add_qml_module(Mqtt
     URI Victron.Mqtt
@@ -794,7 +794,6 @@ list(APPEND SOURCES
 
 list(APPEND TRANSLATION_SOURCES
     ${SOURCES}
-    ${QML_MODULE_SOURCES}
 )
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
