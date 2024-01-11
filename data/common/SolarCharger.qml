@@ -13,6 +13,7 @@ Device {
 	readonly property int errorCode: _errorCode.value === undefined ? -1 : _errorCode.value
 	readonly property ListModel trackers: ListModel {}
 	readonly property real power: _totalPower.value === undefined ? NaN : _totalPower.value
+	readonly property alias history: _history
 
 	readonly property real batteryVoltage: _batteryVoltage.value == undefined ? NaN : _batteryVoltage.value
 	readonly property real batteryCurrent: _batteryCurrent.value == undefined ? NaN : _batteryCurrent.value
@@ -23,14 +24,12 @@ Device {
 
 	// This is the overall error history.
 	// For the per-day error history, use dailyHistory(day).errorModel
-	property SolarHistoryErrorModel errorModel: SolarHistoryErrorModel {
-		uidPrefix: solarCharger.serviceUid + "/History/Overall"
-	}
+	readonly property alias errorModel: _history.errorModel
 
 	signal yieldUpdatedForDay(day: int, yieldKwh: real)
 
 	function dailyHistory(day, trackerIndex) {
-		return _historyObjects.dailyHistory(day, trackerIndex)
+		return _history.dailyHistory(day, trackerIndex)
 	}
 
 	//--- internal members below ---
@@ -63,65 +62,13 @@ Device {
 		uid: solarCharger.serviceUid + "/ErrorCode"
 	}
 
-	// --- history ---
+	//--- history ---
 
-	readonly property Instantiator _historyObjects: Instantiator {
-		function dailyHistory(day, trackerIndex) {
-			let overallDailyHistory = objectAt(day)
-			if (!overallDailyHistory) {
-				// History is not yet available for this day
-				return null
-			}
-			if (trackerIndex === undefined
-					|| trackerIndex < 0
-					|| solarCharger.trackers.count <= 1) {    // When only 1 tracker, use the overall history instead
-				return overallDailyHistory
-			}
-			return overallDailyHistory.trackerHistoryObjects.objectAt(trackerIndex)
-		}
-
-		model: undefined    // ensure delegates are not created before history model is set
-
-		// The overall history for this day, for this charger (i.e. data includes all trackers).
-		delegate: SolarDailyHistory {
-			id: overallDailyHistoryDelegate
-
-			// If there is more than one tracker, find the daily histories for each tracker, under
-			// com.victronenergy.solarcharger.tty0/History/Daily/<day>/Pv/<pv-index>
-			readonly property Instantiator trackerHistoryObjects: Instantiator {
-				model: solarCharger.trackers.count > 1 ? solarCharger.trackers.count : null
-				delegate: SolarDailyHistory {
-					uidPrefix: overallDailyHistoryDelegate.uidPrefix + "/Pv/" + model.index
-				}
-			}
-
-			property bool _completed
-
-			// uid is e.g. com.victronenergy.solarcharger.tty0/History/Daily/<day>
-			uidPrefix: solarCharger.serviceUid + "/History/Daily/" + model.index
-
-			onYieldKwhChanged: {
-				if (_completed) {
-					solarCharger.yieldUpdatedForDay(model.index, yieldKwh)
-				}
-			}
-
-			Component.onCompleted: {
-				_completed = true
-				if (!isNaN(yieldKwh)) {
-					solarCharger.yieldUpdatedForDay(model.index, yieldKwh)
-				}
-			}
-		}
-	}
-
-	readonly property VeQuickItem _veHistoryCount: VeQuickItem {
-		uid: solarCharger.serviceUid + "/History/Overall/DaysAvailable"
-		onValueChanged: {
-			if (value !== undefined) {
-				_historyObjects.model = value
-			}
-		}
+	readonly property SolarHistory _history: SolarHistory {
+		id: _history
+		bindPrefix: solarCharger.serviceUid
+		deviceName: solarCharger.name
+		trackerCount: solarCharger.trackers.count
 	}
 
 	//--- Solar trackers ---
@@ -139,12 +86,6 @@ Device {
 			readonly property real power: solarCharger.trackers.count <= 1 ? solarCharger.power : _power.value || 0
 			readonly property real voltage: _voltage.value || 0
 			readonly property real current: isNaN(power) || isNaN(voltage) || voltage === 0 ? NaN : power / voltage
-
-			readonly property string name: solarCharger.trackers.count > 1
-					  //: Name for a tracker of a solar charger. %1 = solar charger name, %2 = the number of this tracker for the charger
-					  //% "%1 (#%2)"
-					? qsTrId("solarcharger_tracker_title").arg(solarCharger.name).arg(model.index + 1)
-					: solarCharger.name
 
 			readonly property VeQuickItem _voltage: VeQuickItem {
 				uid: solarCharger.trackers.count <= 1

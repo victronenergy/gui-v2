@@ -12,7 +12,7 @@ import Victron.VenusOS
 T.Dialog {
 	id: root
 
-	property alias solarCharger: tableView.solarCharger
+	property alias solarHistory: tableView.solarHistory
 	property int day
 	property int minimumDay
 	property int maximumDay
@@ -159,7 +159,7 @@ T.Dialog {
 				right: parent.right
 			}
 			smallTextMode: true
-			minimumHeight: root.solarCharger.trackers.count > 1 ? NaN
+			minimumHeight: root.solarHistory.trackerCount > 1 ? NaN
 				: Theme.geometry_solarDailyHistoryDialog_minimumHeight - Theme.geometry_solarDailyHistoryDialog_header_height
 		}
 
@@ -179,7 +179,7 @@ T.Dialog {
 			}
 			width: parent.width - (2 * Theme.geometry_solarDetailBox_verticalMargin)
 			model: {
-				const history = root.solarCharger.dailyHistory(root.day)
+				const history = root.solarHistory.dailyHistory(root.day)
 				return history ? history.errorModel : null
 			}
 			visible: model && model.count > 0

@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property QtObject solarCharger
+	property SolarCharger solarCharger
 	readonly property QtObject singleTracker: solarCharger.trackers.count === 1 ? solarCharger.trackers.get(0).solarTracker : null
 
 	title: solarCharger.name
@@ -74,10 +74,11 @@ Page {
 					valueForModelIndex: function(trackerIndex, column) {
 						const tracker = root.solarCharger.trackers.get(trackerIndex).solarTracker
 						if (column === 0) {
-							return tracker.name
+							return Global.solarChargers.trackerName(trackerIndex)
 						} else if (column === 1) {
 							// Today's yield for this tracker
-							return root.solarCharger.dailyHistory(0, trackerIndex).yieldKwh
+							const history = root.solarCharger.dailyHistory(0, trackerIndex)
+							return history ? history.yieldKwh : NaN
 						} else if (column === 2) {
 							return tracker.voltage
 						} else if (column === 3) {
@@ -175,7 +176,7 @@ Page {
 					//% "%1 History"
 					const title = qsTrId("charger_history_name").arg(root.solarCharger.name)
 					Global.pageManager.pushPage("/pages/solar/SolarChargerHistoryPage.qml",
-							{ "title": title, "solarCharger": root.solarCharger })
+							{ "title": title, "solarHistory": root.solarCharger.history })
 				}
 			}
 
