@@ -18,9 +18,7 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
-				//: Change the battery mode
-				//% "Switch"
-				text: qsTrId("battery_switch")
+				text: CommonWords.switch_mode
 				dataItem.uid: root.battery.serviceUid + "/Mode"
 				visible: defaultVisible && dataItem.isValid
 				optionModel: [
@@ -108,8 +106,7 @@ Page {
 			}
 
 			ListQuantityItem {
-				//% "Battery temperature"
-				text: qsTrId("battery_temp")
+				text: CommonWords.battery_temperature
 				visible: defaultVisible && !isNaN(root.battery.temperature_celsius)
 				value: Global.systemSettings.convertFromCelsius(root.battery.temperature_celsius)
 				unit: Global.systemSettings.temperatureUnit

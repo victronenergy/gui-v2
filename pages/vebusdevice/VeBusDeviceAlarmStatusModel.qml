@@ -10,10 +10,8 @@ ListModel {
 	readonly property var displayTexts: [
 		CommonWords.low_battery_voltage,
 		CommonWords.temperature,
-		//% "Overload"
-		qsTrId("vebus_device_overload"),
-		//% "DC ripple"
-		qsTrId("vebus_device_dc_ripple"),
+		CommonWords.alarm_setting_overload,
+		CommonWords.alarm_setting_dc_ripple,
 		//% "Voltage Sensor"
 		qsTrId("vebus_device_voltage_sensor"),
 		CommonWords.temperature_sensor,

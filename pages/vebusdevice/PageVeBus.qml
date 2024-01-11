@@ -248,8 +248,7 @@ Page {
 			ListQuantityItem {
 				visible: defaultVisible && dataItem.isValid && root.isMulti
 				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Temperature"
-				//% "Battery temperature"
-				text: qsTrId("vebus_device_page_battery_temperature")
+				text: CommonWords.battery_temperature
 				unit: Global.systemSettings.temperatureUnit
 			}
 
@@ -286,8 +285,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				//% "Alarm setup"
-				text: qsTrId("vebus_device_alarm_setup")
+				text: CommonWords.alarm_setup
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAlarmSettings.qml",
 													   {
 														   "title": text,

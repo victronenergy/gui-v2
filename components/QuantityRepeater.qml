@@ -17,6 +17,7 @@ Repeater {
 		font.pixelSize: Theme.font_size_body2
 		value: isNaN(modelData.value) ? NaN : modelData.value
 		unit: isNaN(modelData.unit) ? VenusOS.Units_None : modelData.unit
+		precision: isNaN(modelData.precision) ? Units.defaultUnitPrecision(unit) : modelData.precision
 		valueColor: Theme.color_quantityTable_quantityValue
 		unitColor: Theme.color_quantityTable_quantityUnit
 
