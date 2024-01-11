@@ -20,8 +20,7 @@ ListModel {
 		//% "Temperature sense error"
 		qsTrId("vebus_device_temperature_sense_error"),
 		//% "Voltage sense error"
-		qsTrId("vebus_device_voltage_sense_error"),
-		CommonWords.vebus_error
+		qsTrId("vebus_device_voltage_sense_error")
 	]
 
 	ListElement {pathSuffix: "/LowBattery";				multiPhaseOnly: false}
@@ -32,5 +31,4 @@ ListModel {
 	ListElement {pathSuffix: "/HighDcCurrent";			multiPhaseOnly: false}
 	ListElement {pathSuffix: "/TemperatureSenseError";	multiPhaseOnly: true}
 	ListElement {pathSuffix: "/VoltageSenseError";		multiPhaseOnly: true}
-	ListElement {pathSuffix: "/VeBusError";				multiPhaseOnly: false}
 }

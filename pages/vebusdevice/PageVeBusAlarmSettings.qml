@@ -21,28 +21,19 @@ Page {
 	]
 
 	GradientListView {
-		id:  gradientListView
-		model: ObjectModel {
-
-			Column {
-				width: parent ? parent.width : 0
-
-				Repeater {
-					model: VeBusDeviceAlarmSettingsModel { id: alarmSettingsModel }
-
-					ListRadioButtonGroup {
-						text: alarmSettingsModel.displayTexts[index]
-						dataItem.uid: bindPrefix + "/Settings/Alarm/Vebus" + pathSuffix
-						visible: multiPhaseOnly ? isMulti : true
-						optionModel: pathSuffix !== "/VeBusError"
-						? defaultOptionModel
-						: [
-							  { display: CommonWords.disabled, value: 0 },
-							  { display: CommonWords.enabled, value: 2 }
-						  ]
-					}
-				}
-			}
+		model: VeBusDeviceAlarmSettingsModel { id: alarmSettingsModel }
+		delegate: AlarmLevelRadioButtonGroup {
+			text: alarmSettingsModel.displayTexts[model.index]
+			dataItem.uid: root.bindPrefix + "/Settings/Alarm/Vebus" + model.pathSuffix
+			visible: model.multiPhaseOnly ? isMulti : true
+		}
+		footer: ListRadioButtonGroup {
+			text: CommonWords.vebus_error
+			dataItem.uid: root.bindPrefix + "/Settings/Alarm/Vebus/VeBusError"
+			optionModel: [
+				{ display: CommonWords.disabled, value: 0 },
+				{ display: CommonWords.enabled, value: 2 }
+			]
 		}
 	}
 }
