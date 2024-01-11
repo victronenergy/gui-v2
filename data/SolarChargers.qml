@@ -26,6 +26,12 @@ QtObject {
 		model.clear()
 	}
 
+	function trackerName(trackerIndex) {
+		//: %1 = tracker number
+		//% "Tracker #%1"
+		return qsTrId("solarchargers_tracker_name").arg(trackerIndex + 1)
+	}
+
 	function chargerStateToText(state) {
 		switch (state) {
 		case VenusOS.SolarCharger_State_Off:

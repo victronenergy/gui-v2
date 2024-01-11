@@ -9,26 +9,34 @@ import Victron.VenusOS
 ListModel {
 	id: root
 
-	property var targetSolarCharger   // unset if wanting total yield for all chargers
+	property SolarHistory targetHistory // unset if wanting total yield for all solar chargers
 	property var dayRange: [0, 1]
 	property real maximumYield
 
 	property bool _resetting
 
 	property Instantiator _yieldUpdateConnections: Instantiator {
-		model: Global.solarChargers.model
+		model: !!root.targetHistory ? null : Global.solarChargers.model
 
 		delegate: Connections {
 			target: model.device
 			enabled: !root._resetting
 
 			function onYieldUpdatedForDay(day, yieldKwh) {
-				if (!root._resetting) {
-					if (day >= root.dayRange[0] && day < root.dayRange[1]
-							&& (!root.targetSolarCharger || root.targetSolarCharger === target)) {
-						root._refreshYieldForDay(day)
-					}
+				if (day >= root.dayRange[0] && day < root.dayRange[1]) {
+					root._refreshYieldForDay(day)
 				}
+			}
+		}
+	}
+
+	readonly property Connections _targetYieldUpdated: Connections {
+		target: root.targetHistory
+		enabled: !!root.targetHistory && !root._resetting
+
+		function onYieldUpdatedForDay(day, yieldKwh) {
+			if (day >= root.dayRange[0] && day < root.dayRange[1]) {
+				root._refreshYieldForDay(day)
 			}
 		}
 	}
@@ -37,14 +45,18 @@ ListModel {
 		// Get the total yield for this day across all chargers (or just the target charger, if set)
 		let i = 0
 		let yieldForDay = 0
-		for (i = 0; i < Global.solarChargers.model.count; ++i) {
-			const solarCharger = Global.solarChargers.model.deviceAt(i)
-			if (!targetSolarCharger || solarCharger === targetSolarCharger) {
-				const history = solarCharger.dailyHistory(day)
-				if (history) {
-					if (!isNaN(history.yieldKwh)) {
-						yieldForDay += history.yieldKwh
-					}
+		let history
+		if (!!targetHistory) {
+			history = targetHistory.dailyHistory(day)
+			if (history && !isNaN(history.yieldKwh)) {
+				yieldForDay += history.yieldKwh
+			}
+		} else {
+			for (i = 0; i < Global.solarChargers.model.count; ++i) {
+				const solarCharger = Global.solarChargers.model.deviceAt(i)
+				history = solarCharger.dailyHistory(day)
+				if (history && !isNaN(history.yieldKwh)) {
+					yieldForDay += history.yieldKwh
 				}
 			}
 		}
@@ -71,5 +83,5 @@ ListModel {
 	}
 
 	onDayRangeChanged: Qt.callLater(_reset)
-	onTargetSolarChargerChanged: Qt.callLater(_reset)
+	onTargetHistoryChanged: Qt.callLater(_reset)
 }

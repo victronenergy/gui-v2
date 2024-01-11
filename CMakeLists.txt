@@ -398,6 +398,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/Relay.qml
     data/common/SolarCharger.qml
     data/common/SolarDailyHistory.qml
+    data/common/SolarHistory.qml
     data/common/SolarHistoryErrorModel.qml
     data/common/SystemBattery.qml
     data/common/SystemData.qml
