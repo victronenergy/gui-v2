@@ -175,7 +175,7 @@ Page {
 					//: Solar charger historic data information. %1 = charger name
 					//% "%1 History"
 					const title = qsTrId("charger_history_name").arg(root.solarCharger.name)
-					Global.pageManager.pushPage("/pages/solar/SolarChargerHistoryPage.qml",
+					Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
 							{ "title": title, "solarHistory": root.solarCharger.history })
 				}
 			}

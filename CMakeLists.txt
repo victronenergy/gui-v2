@@ -557,9 +557,9 @@ set (VENUS_QML_MODULE_SOURCES
     pages/solar/SolarChargerAlarmsAndErrorsPage.qml
     pages/solar/SolarChargerNetworkedOperationPage.qml
     pages/solar/SolarChargerPage.qml
-    pages/solar/SolarChargerHistoryPage.qml
     pages/solar/SolarDeviceListPage.qml
     pages/solar/SolarDeviceNavigationItem.qml
+    pages/solar/SolarHistoryPage.qml
 
     pages/vebusdevice/OverviewVeBusDevicePage.qml
     pages/vebusdevice/PageAcSensor.qml
