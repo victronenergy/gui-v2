@@ -1,0 +1,85 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+import QtQuick
+import Victron.VenusOS
+
+QtObject {
+	id: root
+
+	property string bindPrefix
+	property string deviceName
+	property int trackerCount
+
+	property SolarHistoryErrorModel errorModel: SolarHistoryErrorModel {
+		uidPrefix: root.bindPrefix + "/History/Overall"
+	}
+
+	signal yieldUpdatedForDay(day: int, yieldKwh: real)
+
+	function dailyHistory(day, trackerIndex) {
+		return _historyObjects.dailyHistory(day, trackerIndex)
+	}
+
+	readonly property Instantiator _historyObjects: Instantiator {
+		function dailyHistory(day, trackerIndex) {
+			let overallDailyHistory = objectAt(day)
+			if (!overallDailyHistory) {
+				// History is not yet available for this day
+				return null
+			}
+			if (trackerIndex === undefined
+					|| trackerIndex < 0
+					|| root.trackerCount <= 1) {    // When only 1 tracker, use the overall history instead
+				return overallDailyHistory
+			}
+			return overallDailyHistory.trackerHistoryObjects.objectAt(trackerIndex)
+		}
+
+		model: undefined    // ensure delegates are not created before history model is set
+
+		// The overall history for this day, for this charger (i.e. data includes all trackers).
+		delegate: SolarDailyHistory {
+			id: overallDailyHistoryDelegate
+
+			// If there is more than one tracker, find the daily histories for each tracker, under
+			// com.victronenergy.root.tty0/History/Daily/<day>/Pv/<pv-index>
+			readonly property Instantiator trackerHistoryObjects: Instantiator {
+				model: root.trackerCount > 1 ? root.trackerCount : null
+				delegate: SolarDailyHistory {
+					uidPrefix: overallDailyHistoryDelegate.uidPrefix + "/Pv/" + model.index
+				}
+			}
+
+			property bool _completed
+
+			// uid is e.g. com.victronenergy.root.tty0/History/Daily/<day>
+			uidPrefix: root.bindPrefix + "/History/Daily/" + model.index
+
+			onYieldKwhChanged: {
+				if (_completed) {
+					root.yieldUpdatedForDay(model.index, yieldKwh)
+				}
+			}
+
+			Component.onCompleted: {
+				_completed = true
+				if (!isNaN(yieldKwh)) {
+					root.yieldUpdatedForDay(model.index, yieldKwh)
+				}
+			}
+		}
+	}
+
+	readonly property VeQuickItem _veHistoryCount: VeQuickItem {
+		uid: root.bindPrefix + "/History/Overall/DaysAvailable"
+		onValueChanged: {
+			if (value !== undefined) {
+				_historyObjects.model = value
+			}
+		}
+	}
+
+}

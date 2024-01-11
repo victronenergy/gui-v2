@@ -9,7 +9,7 @@ import Victron.VenusOS
 Column {
 	id: root
 
-	property var solarCharger
+	property SolarHistory solarHistory
 	property var dayRange: [0, 1]   // exclusive range: [first day, last day + 1]
 
 	property bool smallTextMode
@@ -22,7 +22,7 @@ Column {
 	function _trackerHistoryTotal(role, trackerIndex) {
 		let totalValue = NaN
 		for (let day = dayRange[0]; day < dayRange[1]; ++day) {
-			const history = root.solarCharger.dailyHistory(day, trackerIndex)
+			const history = root.solarHistory.dailyHistory(day, trackerIndex)
 			if (history) {
 				const value = history[role]
 				if (!isNaN(value)) {
@@ -36,7 +36,7 @@ Column {
 	function _trackerHistoryMin(role, trackerIndex) {
 		let minValue = NaN
 		for (let day = dayRange[0]; day < dayRange[1]; ++day) {
-			const history = root.solarCharger.dailyHistory(day, trackerIndex)
+			const history = root.solarHistory.dailyHistory(day, trackerIndex)
 			if (history) {
 				const value = history[role]
 				if (!isNaN(value)) {
@@ -50,7 +50,7 @@ Column {
 	function _trackerHistoryMax(role, trackerIndex) {
 		let maxValue = NaN
 		for (let day = dayRange[0]; day < dayRange[1]; ++day) {
-			const history = root.solarCharger.dailyHistory(day, trackerIndex)
+			const history = root.solarHistory.dailyHistory(day, trackerIndex)
 			if (history) {
 				const value = history[role]
 				if (!isNaN(value)) {
@@ -100,10 +100,10 @@ Column {
 
 		width: parent.width
 		bottomPadding: Theme.geometry_quantityTable_bottomMargin
-		visible: !root.summaryOnly && root.solarCharger.trackers.count > 1
+		visible: !root.summaryOnly && root.solarHistory.trackerCount > 1
 		headerVisible: false
 
-		rowCount: root.solarCharger.trackers.count
+		rowCount: root.solarHistory.trackerCount
 		units: [
 			// No 'title' property is specified, since these are same as summary headers.
 			{ unit: VenusOS.Units_None },
@@ -112,9 +112,8 @@ Column {
 			{ unit: VenusOS.Units_Watt },
 		]
 		valueForModelIndex: function(trackerIndex, column) {
-			const tracker = root.solarCharger.trackers.get(trackerIndex).solarTracker
 			if (column === 0) {
-				return tracker.name
+				return Global.solarChargers.trackerName(trackerIndex)
 			} else if (column === 1) {
 				return root._trackerHistoryTotal("yieldKwh", trackerIndex)
 			} else if (column === 2) {

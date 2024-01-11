@@ -10,9 +10,9 @@ import QtQuick.Controls as C
 Page {
 	id: root
 
-	property var solarCharger
+	property SolarHistory solarHistory
 
-	title: solarCharger.name
+	title: solarHistory.name
 
 	TabBar {
 		id: tabBar
@@ -88,7 +88,7 @@ Page {
 		}
 		minimumHeight: chart.visible ? NaN
 			: root.height - tableView.y - Theme.geometry_page_content_verticalMargin - bottomPadding
-		solarCharger: root.solarCharger
+		solarHistory: root.solarHistory
 		dayRange: daysComboBox.model[daysComboBox.currentIndex].dayRange
 
 		// Since the table view contains the "totals" summary, it is always shown even when "Charts"
@@ -109,7 +109,7 @@ Page {
 			bottomMargin: Theme.geometry_page_content_verticalMargin
 		}
 		visible: tabBar.currentIndex === 1
-		solarCharger: root.solarCharger
+		solarHistory: root.solarHistory
 		dayRange: daysComboBox.model[daysComboBox.currentIndex].dayRange
 	}
 }

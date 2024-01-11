@@ -9,7 +9,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property alias solarCharger: yieldModel.targetSolarCharger
+	property SolarHistory solarHistory
 	property alias dayRange: yieldModel.dayRange
 
 	property var _dailyHistoryDialog
@@ -172,6 +172,8 @@ Item {
 			model: SolarYieldModel {
 				id: yieldModel
 
+				targetHistory: root.solarHistory
+
 				onMaximumYieldChanged: Qt.callLater(root._fitChartToMaxYield)
 			}
 
@@ -222,7 +224,7 @@ Item {
 		id: dailyHistoryDialogComponent
 
 		SolarDailyHistoryDialog {
-			solarCharger: root.solarCharger
+			solarHistory: root.solarHistory
 			minimumDay: yieldModel.dayRange[0]
 			maximumDay: yieldModel.dayRange[1] - 1
 			highlightBarForDay: function(day) {
