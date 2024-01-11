@@ -38,6 +38,11 @@ Page {
 			break;
 
 		case "multi":
+			if (sourceModel === Global.batteries.model
+					|| sourceModel === Global.solarChargers.model
+					|| sourceModel === Global.veBusDevices.model) {
+				return null
+			}
 			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
 			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Global.system.systemStateToText(device.state) ]
@@ -248,7 +253,8 @@ Page {
 					: null
 
 			text: model.cachedDeviceDescription
-			textModel: _displayInfo ? _displayInfo.summary || [] : [ CommonWords.not_connected ]
+			textModel: model.connected && _displayInfo ? _displayInfo.summary || [] : [ CommonWords.not_connected ]
+			visible: _displayInfo !== null
 
 			CP.ColorImage {
 				parent: deviceDelegate.content
