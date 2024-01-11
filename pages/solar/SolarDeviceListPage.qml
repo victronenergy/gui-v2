@@ -62,7 +62,7 @@ Page {
 							text: modelData.name
 							energy: historyToday ? historyToday.yieldKwh : NaN
 							current: modelData.current
-							power: solarCharger.power
+							power: modelData.power
 							voltage: modelData.voltage
 
 							onClicked: {
