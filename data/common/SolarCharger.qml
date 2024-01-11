@@ -68,9 +68,13 @@ Device {
 	readonly property Instantiator _historyObjects: Instantiator {
 		function dailyHistory(day, trackerIndex) {
 			let overallDailyHistory = objectAt(day)
+			if (!overallDailyHistory) {
+				// History is not yet available for this day
+				return null
+			}
 			if (trackerIndex === undefined
 					|| trackerIndex < 0
-					|| _trackerObjects.count <= 1) {    // When only 1 tracker, use the overall history instead
+					|| solarCharger.trackers.count <= 1) {    // When only 1 tracker, use the overall history instead
 				return overallDailyHistory
 			}
 			return overallDailyHistory.trackerHistoryObjects.objectAt(trackerIndex)
@@ -83,9 +87,9 @@ Device {
 			id: overallDailyHistoryDelegate
 
 			// If there is more than one tracker, find the daily histories for each tracker, under
-			// com.victronenergy.solarcharger.tty0/History/Daily/<day>/Pv/<pv-index>/Yield
+			// com.victronenergy.solarcharger.tty0/History/Daily/<day>/Pv/<pv-index>
 			readonly property Instantiator trackerHistoryObjects: Instantiator {
-				model: _trackerObjects.count > 1 ? _trackerObjects.count : null
+				model: solarCharger.trackers.count > 1 ? solarCharger.trackers.count : null
 				delegate: SolarDailyHistory {
 					uidPrefix: overallDailyHistoryDelegate.uidPrefix + "/Pv/" + model.index
 				}
@@ -132,7 +136,7 @@ Device {
 			id: tracker
 
 			readonly property int modelIndex: model.index
-			readonly property real power: _trackerObjects.count <= 1 ? solarCharger.power : _power.value || 0
+			readonly property real power: solarCharger.trackers.count <= 1 ? solarCharger.power : _power.value || 0
 			readonly property real voltage: _voltage.value || 0
 			readonly property real current: isNaN(power) || isNaN(voltage) || voltage === 0 ? NaN : power / voltage
 
@@ -143,13 +147,13 @@ Device {
 					: solarCharger.name
 
 			readonly property VeQuickItem _voltage: VeQuickItem {
-				uid: _trackerObjects.count <= 1
+				uid: solarCharger.trackers.count <= 1
 					 ? solarCharger.serviceUid + "/Pv/V"
 					 : solarCharger.serviceUid + "/Pv/" + model.index + "/V"
 			}
 
 			readonly property VeQuickItem _power: VeQuickItem {
-				uid: _trackerObjects.count === 1
+				uid: solarCharger.trackers.count === 1
 					 ? ""   // only 1 tracker, use solarCharger.power instead (i.e. same as /Yield/Power)
 					 : solarCharger.serviceUid + "/Pv/" + model.index + "/P"
 			}
