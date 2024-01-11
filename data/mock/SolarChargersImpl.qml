@@ -9,100 +9,68 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	property int mockDeviceCount
+
 	function populate() {
 		Global.solarChargers.reset()
 
 		// Add 4 chargers, each with an increasing number of trackers (max 4 trackers)
 		const chargerCount = 4
 		for (let i = 0; i < chargerCount; ++i) {
-			let chargerPower = 50 + Math.floor(Math.random() * 200)
-			const chargerObj = chargerComponent.createObject(root, {
-				name: "My charger " + i,
-				power: chargerPower,
-				errorModel: createErrorModel(Math.floor(Math.random() * 4))
-			})
+			const chargerObj = chargerComponent.createObject(root)
 			chargerObj.initTrackers(i + 1)
-			_createdObjects.push(chargerObj)
-
-			Global.solarChargers.addCharger(chargerObj)
 		}
-	}
-
-	function createErrorModel(errorCount) {
-		const errorCode = 1
-		let errors = errorModelComponent.createObject(root)
-		for (let errorIndex = 0; errorIndex < errorCount; ++errorIndex) {
-			errors.append({'errorNumber': errorIndex + 1, errorCode})
-		}
-		return errors
-	}
-
-	property var errorModelComponent: Component {
-		ListModel {}
 	}
 
 	property Component chargerComponent: Component {
-		MockDevice {
+		SolarCharger {
 			id: solarCharger
 
-			property int state: VenusOS.SolarCharger_State_ExternalControl
-			property int errorCode: -1
-			readonly property ListModel trackers: ListModel {}
-			property real power
+			function randomizeMeasurments() {
+				/*
+				1) a solar charger with one tracker has 3 paths:
+				/Pv/V
+				/Yield/Power
+				/MppOperationMode
 
-			readonly property real batteryVoltage: 43.21
-			readonly property real batteryCurrent: 63.2
-			readonly property real batteryTemperature: 40
+				2) a solar charger with two trackers has 8 paths:
+				/Pv/0/V
+				/Pv/0/P
+				/Pv/0/MppOperationMode
+				/Pv/1/V
+				/Pv/1/P
+				/Pv/1/MppOperationMode
+				/Yield Power
+				/MppOperationMode
+				*/
 
-			readonly property bool relayValid: true
-			readonly property bool relayOn: true
-
-			property var errorModel
-
-			signal yieldUpdatedForDay(day: int, solarCharger: var)
-
-			function dailyHistory(day, trackerIndex) {
-				if (trackerIndex !== undefined) {
-					return _trackerHistory[day][trackerIndex]
-				}
-				let dayData = {}
-				const properties = [
-					"yieldKwh", "maxPower", "maxPvVoltage",
-					"timeInBulk", "timeInAbsorption", "timeInFloat",
-					"minBatteryVoltage", "maxBatteryVoltage", "maxBatteryCurrent"
-				]
-				// get the combined total (or min/max) for all trackers on this day
-				for (let propIndex = 0; propIndex < properties.length; ++propIndex) {
-					const propName = properties[propIndex]
-					let values = []
-					for (let tIndex = 0; tIndex < trackers.count; ++tIndex) {
-						values.push(_trackerHistory[day][tIndex][propName])
+				let totalPower = 0
+				if (_trackerCount.value > 1) {
+					for (let i = 0; i < _trackerCount.value; ++i) {
+						const p = Math.random() * 100
+						const trackerUid = serviceUid + "/Pv/" + i
+						Global.mockDataSimulator.setMockValue(trackerUid + "/V", Math.random() * 10)
+						Global.mockDataSimulator.setMockValue(trackerUid + "/P", p)
+						totalPower += p
 					}
-					let overallValue = 0
-					if (propName.indexOf("min") === 0) {
-						overallValue = values.reduce((a, b) => Math.min(a, b), Infinity);
-					} else if (propName.indexOf("max") === 0) {
-						overallValue = values.reduce((a, b) => Math.max(a, b), -Infinity);
-					} else {
-						overallValue = values.reduce((a, b) => a + b, 0);
-					}
-					dayData[propName] = overallValue
+				} else {
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Pv/V", Math.random() * 10)
+					totalPower = Math.random() * 100
 				}
-				dayData.errorModel = createErrorModel(day % 4)
-				return dayData
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Yield/Power", totalPower)
 			}
 
 			function initTrackers(trackerCount) {
-				for (let i = 0; i < trackerCount; ++i) {
-					const trackerName = "%1 (#%2)".arg(solarCharger.name).arg(i+1)
-					let tracker = trackerComponent.createObject(root, {"name": trackerName})
-					tracker.power = (i + 1) * 100
-					trackers.append({"solarTracker": tracker })
-				}
+				Global.mockDataSimulator.setMockValue(serviceUid + "/NrOfTrackers", trackerCount)
+				randomizeMeasurments()
 
+				// Initialize history values
+				Global.mockDataSimulator.setMockValue(serviceUid + "/History/Overall/DaysAvailable", 30)
+				let trackerIndex = 0
 				for (let day = 0; day < 31; ++day) {
-					let dayHistory = []
-					for (let trackerIndex = 0; trackerIndex < trackers.count; ++trackerIndex) {
+					let dayTotals = []
+					const dayOverallHistoryUid = serviceUid + "/History/Daily/" + day
+					for (trackerIndex = 0; trackerIndex < trackerCount; ++trackerIndex) {
 						// yield/power/voltage
 						let yieldKwh = ((day + 1) + trackerIndex) * 0.01
 						const maxPower = (day + 1 + trackerIndex)
@@ -115,68 +83,88 @@ QtObject {
 						const batteryVoltage = day + 1 + trackerIndex
 
 						const data = {
-							"yieldKwh": yieldKwh * 10,
-							"maxPower": maxPower * 10,
-							"maxPvVoltage": maxPvVoltage * 10,
-							"timeInBulk": timeSample,
-							"timeInAbsorption": timeSample * 2,
-							"timeInFloat": timeSample * 3,
-							"minBatteryVoltage": batteryVoltage,
-							"maxBatteryVoltage": batteryVoltage * 2,
-							"maxBatteryCurrent": batteryVoltage * 1.5
+							"Yield": yieldKwh * 10,
+							"MaxPower": maxPower * 10,
+							"MaxPvVoltage": maxPvVoltage * 10,
+							"TimeInBulk": timeSample,
+							"TimeInAbsorption": timeSample * 2,
+							"TimeInFloat": timeSample * 3,
+							"MinBatteryVoltage": batteryVoltage,
+							"MaxBatteryVoltage": batteryVoltage * 2,
+							"MaxBatteryCurrent": batteryVoltage * 1.5
 						}
-						dayHistory.push(data)
+
+						let historyUid = ""
+						if (trackerCount > 1) {
+							historyUid = serviceUid + "/History/Daily/" + day + "/Pv/" + trackerIndex
+						} else {
+							// If only 1 tracker, add to overall history instead
+							historyUid = dayOverallHistoryUid
+						}
+
+						for (const dataProperty in data) {
+							Global.mockDataSimulator.setMockValue(historyUid + "/" + dataProperty, data[dataProperty])
+							const currentValue = dayTotals[dataProperty] || 0
+							const newValue = data[dataProperty]
+							if (dataProperty.startsWith("Min")) {
+								dayTotals[dataProperty] = Math.min(currentValue, newValue)
+							} else if (dataProperty.startsWith("Max")) {
+								dayTotals[dataProperty] = Math.max(currentValue, newValue)
+							} else {
+								dayTotals[dataProperty] = currentValue + newValue
+							}
+						}
 					}
-					_trackerHistory.push(dayHistory)
+
+					if (trackerCount > 1) {
+						// Update overall history for the day
+						const overallProperties = [
+							"Yield", "MaxPower", "MaxPvVoltage",
+							"TimeInBulk", "TimeInAbsorption", "TimeInFloat",
+							"MinBatteryVoltage", "MaxBatteryVoltage", "MaxBatteryCurrent"
+						]
+						for (let i = 0; i < overallProperties.length; ++i) {
+							const propertyName = overallProperties[i]
+							const total = dayTotals[propertyName]
+							Global.mockDataSimulator.setMockValue(dayOverallHistoryUid + "/" + propertyName, total)
+						}
+					}
+
+					root.setRandomErrors(dayOverallHistoryUid)
 				}
 			}
 
 			//--- internal members below ---
 
-			property var _trackerHistory: []
-
 			property Timer _trackerUpdates: Timer {
 				running: Global.mockDataSimulator.timersActive
 				repeat: true
-				interval: 1000
+				interval: 2000
 				onTriggered: {
-					const trackerIndex = Math.floor(Math.random() * trackers.count)
-					const tracker = trackers.get(trackerIndex).solarTracker
-					solarCharger.power -= tracker.power
-					tracker.power += (1 + (Math.random() * 10))
-					solarCharger.power += tracker.power
+					solarCharger.randomizeMeasurments()
 				}
 			}
 
-			serviceUid: "mock/com.victronenergy.solarcharger.ttyUSB" + deviceInstance
-			name: "SolarCharger" + deviceInstance
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
+
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockDeviceCount++
+				serviceUid = "mock/com.victronenergy.solarcharger.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_productName.setValue("SmartSolar Charger MPPT 100/50")
+				_customName.setValue("My Solar Charger " + deviceInstanceNum)
+				_state.setValue(VenusOS.SolarCharger_State_ExternalControl)
+				_errorCode.setValue(0)
+				root.setRandomErrors(serviceUid + "/History/Overall")
+			}
 		}
 	}
 
-	property var _historyComponent: Component {
-		QtObject {
-			property real yieldKwh
-			property real maxPower
-			property real maxPvVoltage
-
-			property real timeInFloat
-			property real timeInAbsorption
-			property real timeInBulk
-
-			property real minBatteryVoltage
-			property real maxBatteryVoltage
-			property real maxBatteryCurrent
-
-			property var errorModel: createErrorModel()
-		}
-	}
-
-	property Component trackerComponent: Component {
-		QtObject {
-			property real power: Math.random() * 10
-			property real voltage: power / 5
-			readonly property real current: isNaN(power) || isNaN(voltage) || voltage === 0 ? NaN : power / voltage
-			property string name
+	function setRandomErrors(prefix) {
+		for (let i = 0; i < 4; ++i) {
+			const errorCode = Math.floor(Math.random() * 4)
+			Global.mockDataSimulator.setMockValue(prefix + "/LastError" + (i + 1), errorCode)
 		}
 	}
 
@@ -186,20 +174,14 @@ QtObject {
 		function onSetSolarRequested(config) {
 			Global.solarChargers.reset()
 			Global.system.solar.reset()
-			while (_createdObjects.length > 0) {
-				_createdObjects.pop().destroy()
-			}
 
 			if (config && config.chargers) {
 				for (let i = 0; i < config.chargers.length; ++i) {
-					const chargerObj = chargerComponent.createObject(root, {
-						power: config.chargers[i].power,
-						errorModel: createErrorModel(Math.floor(Math.random() * 4))
-					})
-					chargerObj.initTrackers(Global.solarChargers.model.count + 1)
-					_createdObjects.push(chargerObj)
-
-					Global.solarChargers.addCharger(chargerObj)
+					const chargerObj = chargerComponent.createObject(root)
+					chargerObj.initTrackers(i + 1)
+					if (config.chargers[i].power !== undefined) {
+						chargerObj._totalPower.setValue(config.chargers[i].power)
+					}
 				}
 			}
 		}
@@ -208,6 +190,6 @@ QtObject {
 	property var _createdObjects: []
 
 	Component.onCompleted: {
-		populate()
+		 populate()
 	}
 }
