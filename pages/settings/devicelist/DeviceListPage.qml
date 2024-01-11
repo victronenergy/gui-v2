@@ -112,6 +112,8 @@ Page {
 			break;
 
 		case "inverter":
+			url = "/pages/settings/devicelist/inverter/PageInverter.qml"
+			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(device.currentPhase.powerUnit, device.currentPhase.power) ]
 			break;
 

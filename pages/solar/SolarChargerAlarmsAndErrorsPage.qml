@@ -63,25 +63,8 @@ Page {
 					delegate: ListTextItem {
 						//TODO: get error description from veutil when ChargerError is ported there (same issue as alarmmonitor.cpp)
 						text: "#" + model.errorCode + " (description not available)"
-
-						secondaryText: {
-							if (root.solarCharger.errorModel.count === 1) {
-								return ""
-							}
-							//: Details of last error
-							//% "Last error"
-							return model.index === 0 ? qsTrId("charger_alarm_last_error")
-								  //: Details of 2nd last error
-								  //% "2nd last error"
-								: model.index === 1 ? qsTrId("charger_alarm_2nd_last_error")
-								  //: Details of 3rd last error
-								  //% "3rd last error"
-								: model.index === 2 ? qsTrId("charger_alarm_3rd_last_error")
-								  //: Details of 4th last error
-								  //% "4th last error"
-								: model.index === 3 ? qsTrId("charger_alarm_4th_last_error")
-								: ""
-						}
+						secondaryText: root.solarCharger.errorModel.count === 1 ? ""
+								: CommonWords.lastErrorName(model.index)
 					}
 				}
 			}

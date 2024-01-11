@@ -306,6 +306,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListTextItem.qml
     components/listitems/ListTimeSelector.qml
 
+    components/settings/AlarmLevelRadioButtonGroup.qml
     components/settings/CGwacsBatteryScheduleNavigationItem.qml
     components/settings/FirmwareCheckListButton.qml
     components/settings/Led.qml
@@ -525,6 +526,10 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/dc-in/PageDcMeterModel.qml
     pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml
     pages/settings/devicelist/dc-in/PageDcMeterHistory.qml
+    pages/settings/devicelist/inverter/PageInverter.qml
+    pages/settings/devicelist/inverter/PageRsAlarms.qml
+    pages/settings/devicelist/inverter/PageRsAlarmSettings.qml
+    pages/settings/devicelist/inverter/PageSolarStats.qml
     pages/settings/devicelist/tank/PageTankAlarm.qml
     pages/settings/devicelist/tank/PageTankSensor.qml
     pages/settings/devicelist/tank/PageTankSetup.qml

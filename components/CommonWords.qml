@@ -53,6 +53,17 @@ QtObject {
 	//% "Alarm"
 	readonly property string alarm: qsTrId("common_words_alarm")
 
+	//: Alarm configuration when 'overload' state is triggered
+	//% "Overload"
+	readonly property string alarm_setting_overload: qsTrId("common_words_alarm_setting_overload")
+
+	//: Alarm configuration when 'DC ripple' state is triggered
+	//% "DC ripple"
+	readonly property string alarm_setting_dc_ripple: qsTrId("common_words_alarm_setting_dc_ripple")
+
+	//% "Alarm setup"
+	readonly property string alarm_setup: qsTrId("common_words_alarm_setup")
+
 	//% "Alarm status"
 	readonly property string alarm_status: qsTrId("common_words_alarm_status")
 
@@ -76,6 +87,9 @@ QtObject {
 
 	//% "Battery current"
 	readonly property string battery_current: qsTrId("common_words_battery_current")
+
+	//% "Battery temperature"
+	readonly property string battery_temperature: qsTrId("common_words_battery_temperature")
 
 	//% "Battery voltage"
 	readonly property string battery_voltage: qsTrId("common_words_battery_voltage")
@@ -384,6 +398,10 @@ QtObject {
 	//% "Stopped"
 	readonly property string stopped: qsTrId("common_words_stopped")
 
+	//: Change the mode value
+	//% "Switch"
+	readonly property string switch_mode: qsTrId("common_words_switch")
+
 	//% "Temperature"
 	readonly property string temperature: qsTrId("common_words_temperature")
 
@@ -459,5 +477,21 @@ QtObject {
 
 	function activeOrInactive(value) {
 		return value === 1 || value === true ? active_status : inactive_status
+	}
+
+	function lastErrorName(errorIndex) {
+		//: Details of last error
+		//% "Last error"
+		return errorIndex === 0 ? qsTrId("common_words_last_error")
+			  //: Details of 2nd last error
+			  //% "2nd last error"
+			: errorIndex === 1 ? qsTrId("common_words_2nd_last_error")
+			  //: Details of 3rd last error
+			  //% "3rd last error"
+			: errorIndex === 2 ? qsTrId("common_words_3rd_last_error")
+			  //: Details of 4th last error
+			  //% "4th last error"
+			: errorIndex === 3 ? qsTrId("common_words_4th_last_error")
+			: ""
 	}
 }

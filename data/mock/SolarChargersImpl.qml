@@ -190,6 +190,6 @@ QtObject {
 	property var _createdObjects: []
 
 	Component.onCompleted: {
-		 populate()
+		populate()
 	}
 }

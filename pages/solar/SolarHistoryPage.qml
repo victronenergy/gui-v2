@@ -12,7 +12,7 @@ Page {
 
 	property SolarHistory solarHistory
 
-	title: solarHistory.name
+	title: solarHistory.deviceName
 
 	TabBar {
 		id: tabBar

@@ -82,8 +82,7 @@ QtObject {
 			//% "Waiting for start"
 			return qsTrId("evchargers_status_waiting_for_start")
 		case VenusOS.Evcs_Status_LowStateOfCharge:
-			//% "Low state of charge"
-			return qsTrId("evchargers_status_low_status_of_charge")
+			return CommonWords.low_state_of_charge
 		case VenusOS.Evcs_Status_GroundTestError:
 			//% "Ground test error"
 			return qsTrId("evchargers_status_ground_test_error")
