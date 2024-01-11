@@ -21,7 +21,6 @@ int VeQItemMock::setValue(QVariant const &value)
 {
 	VeQItem::setValue(value);
 	produceValue(value);
-	m_producer->setValue(uniqueId(), value);
 	return 0;
 }
 
