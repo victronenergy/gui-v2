@@ -52,6 +52,8 @@ Q_SIGNALS:
 	void mqttUidChanged();
 
 private:
+	static QString normalizedUid(const QString &uid);
+
 	QHash<QString,QVariant> m_values;
 };
 
