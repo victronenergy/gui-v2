@@ -481,6 +481,8 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/ac-in/PageSmappeeCTList.qml
     pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml
     pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml
+    pages/settings/devicelist/pulsemeter/PagePulseCounter.qml
+    pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml
     pages/settings/tz/TzAfricaData.qml
     pages/settings/tz/TzAmericaData.qml
     pages/settings/tz/TzAntarcticaData.qml

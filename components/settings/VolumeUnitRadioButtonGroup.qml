@@ -7,9 +7,8 @@ import QtQuick
 import Victron.VenusOS
 
 ListRadioButtonGroup {
-	//: Title for a list of units of volume (e.g. cubic meters, liters, gallons)
-	//% "Volume"
-	text: qsTrId("components_volumeunit_volume")
+	//% "Volume unit"
+	text: qsTrId("components_volumeunit_title")
 
 	optionModel: [
 		//% "Cubic meters"

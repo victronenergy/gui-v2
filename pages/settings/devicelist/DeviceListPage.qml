@@ -162,6 +162,8 @@ Page {
 			break;
 
 		case "pulsemeter":
+			url = "/pages/settings/devicelist/pulsemeter/PagePulseCounter.qml"
+			params = { "title": device.name, "bindPrefix": device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(Global.systemSettings.volumeUnit, device.aggregate) ]
 			break;
 
