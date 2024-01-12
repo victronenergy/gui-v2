@@ -15,22 +15,6 @@ ListNavigationItem {
 	readonly property string tempRelayPrefix: BackendConnection.serviceUidForType("temprelay") + "/Sensor/" + sensorId
 	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
 
-	function temperatureTypeText(value) {
-		switch (value) {
-		case VenusOS.Temperature_DeviceType_Battery:
-			return CommonWords.battery
-		case VenusOS.Temperature_DeviceType_Fridge:
-			//% "Fridge"
-			return qsTrId("settings_relay_device_fridge")
-		case VenusOS.Temperature_DeviceType_Generic:
-			//% "Generic"
-			return qsTrId("settings_relay_device_generic")
-		default:
-			//% "Unknown"
-			return qsTrId("settings_relay_device_unknown")
-		}
-	}
-
 	function getTitle() {
 		if (customName.isValid && customName.value !== "") {
 			return customName.value
@@ -41,11 +25,11 @@ ListNavigationItem {
 			if (inputNumber === "") {
 				//: %1 = temperature sensor type
 				//% "%1 temperature sensor"
-				return qsTrId("settings_relay_title_type_only").arg(temperatureTypeText(temperatureType.value))
+				return qsTrId("settings_relay_title_type_only").arg(Global.environmentInputs.temperatureTypeToText(temperatureType.value))
 			} else {
 				//: %1 = temperature sensor type, %2 = input number of the sensor
 				//% "%1 temperature sensor (%2)"
-				return qsTrId("settings_relay_title_type_and_number").arg(temperatureTypeText(temperatureType.value), inputNumber)
+				return qsTrId("settings_relay_title_type_and_number").arg(Global.environmentInputs.temperatureTypeToText(temperatureType.value), inputNumber)
 			}
 		}
 
