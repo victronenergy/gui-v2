@@ -109,22 +109,22 @@ Page {
 			}
 
 			/* Only available on 15A chargers */
-			ListTextItem {
+			/* If load is on and current present, show current.
+			 * Otherwise show the state of the load output. */
+			ListQuantityItem {
+				id: loadQuantityItem
+
 				//% "Load"
 				text: qsTrId("charger_load")
-				dataItem.uid: root.solarCharger.serviceUid + "/Load/State"
+				dataItem.uid: root.solarCharger.serviceUid + "/Load/I"
+				unit: VenusOS.Units_Amp
 				visible: defaultVisible && dataItem.isValid
-
-				/* If load is on and current present, show current.
-				 * Otherwise show the state of the load output. */
-				secondaryText: dataItem.isValid && dataItem.value && loadCurrent.isValid
-						? loadCurrent.value
-						: CommonWords.yesOrNo(dataItem.value)
-
-				VeQuickItem {
-					id: loadCurrent
-					uid: root.solarCharger.serviceUid + "/Load/I"
-				}
+			}
+			ListTextItem {
+				text: loadQuantityItem.text
+				dataItem.uid: root.solarCharger.serviceUid + "/Load/State"
+				visible: defaultVisible && dataItem.isValid && !loadQuantityItem.visible
+				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
 			ListSwitch {
