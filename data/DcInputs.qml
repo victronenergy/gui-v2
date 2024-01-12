@@ -70,6 +70,8 @@ QtObject {
 		case "dcsource":
 			// use the monitor mode to determine a sub-type
 			break
+		case "dcsystem":
+			return VenusOS.DcInputs_InputType_DcSystem
 		default:
 			break
 		}
@@ -114,6 +116,9 @@ QtObject {
 		case VenusOS.DcInputs_InputType_DcGenerator:
 			//% "DC generator"
 			return qsTrId("dcInputs_dc_generator")
+		case VenusOS.DcInputs_InputType_DcSystem:
+			//% "DC system"
+			return qsTrId("dcInputs_dc_system")
 		case VenusOS.DcInputs_InputType_FuelCell:
 			//% "Fuel cell"
 			return qsTrId("dcInputs_fuelcell")
