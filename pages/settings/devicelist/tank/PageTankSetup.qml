@@ -105,10 +105,7 @@ Page {
 				suffix: "%"
 			}
 
-			VolumeUnitRadioButtonGroup {
-				//% "Volume unit"
-				text: qsTrId("devicelist_tanksetup_volume_unit")
-			}
+			VolumeUnitRadioButtonGroup {}
 
 			ListNavigationItem {
 				//% "Custom shape"
