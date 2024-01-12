@@ -161,12 +161,10 @@ Page {
 				precision: 2
 			}
 
-			ListQuantityItem {
+			ListTemperatureItem {
 				text: CommonWords.minimum_temperature
 				visible: defaultVisible && hasTemperature.value === 1 && dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/History/MinimumTemperature"
-				value: Global.systemSettings.convertFromCelsius(dataItem.value)
-				unit: Global.systemSettings.temperatureUnit
 
 				VeQuickItem {
 					id: hasTemperature
@@ -174,12 +172,10 @@ Page {
 				}
 			}
 
-			ListQuantityItem {
+			ListTemperatureItem {
 				text: CommonWords.maximum_temperature
 				visible: defaultVisible && hasTemperature.value === 1 && dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/History/MaximumTemperature"
-				value: Global.systemSettings.convertFromCelsius(dataItem.value)
-				unit: Global.systemSettings.temperatureUnit
 			}
 
 			ListQuantityItem {
