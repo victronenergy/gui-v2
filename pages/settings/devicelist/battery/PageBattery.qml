@@ -117,13 +117,11 @@ Page {
 				unit: Global.systemSettings.temperatureUnit
 			}
 
-			ListQuantityItem {
+			ListTemperatureItem {
 				//% "Air temperature"
 				text: qsTrId("battery_air_temp")
 				dataItem.uid: root.battery.serviceUid + "/AirTemperature"
 				visible: defaultVisible && dataItem.isValid
-				value: Global.systemSettings.convertFromCelsius(dataItem.value)
-				unit: Global.systemSettings.temperatureUnit
 			}
 
 			ListQuantityItem {
