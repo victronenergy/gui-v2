@@ -131,6 +131,8 @@ Page {
 			break;
 
 		case "digitalinput":
+			url = "/pages/settings/devicelist/PageDigitalInput.qml"
+			params = { "title": device.name, "bindPrefix": device.serviceUid }
 			summary = [ Global.digitalInputs.inputStateToText(device.state) ]
 			break;
 
