@@ -146,6 +146,15 @@ if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     list(APPEND VenusQMLModule_CPP_SOURCES ${VEUTIL_DBUS_SOURCES} )
 endif()
 
+set(VEUTIL_MQTT_SOURCES
+    src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
+    src/veutil/src/qt/ve_qitems_mqtt.cpp
+)
+list(APPEND VenusQMLModule_CPP_SOURCES
+    ${VEUTIL_MQTT_SOURCES}
+)
+
+
 # VENUS_QML_MODULE
 set (VENUS_QML_MODULE_SOURCES
     ${VENUS_QML_MODULE_SINGLETON_SOURCES}
@@ -751,14 +760,6 @@ qt_add_qml_module(Mqtt
     ${QML_MODULE_OPTARGS}
 )
 # end Mqtt_QML_MODULE
-
-set(VEUTIL_MQTT_SOURCES
-    src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
-    src/veutil/src/qt/ve_qitems_mqtt.cpp
-)
-list(APPEND SOURCES
-    ${VEUTIL_MQTT_SOURCES}
-)
 
 set(GUIv1_DBUS_SOURCES
     src/gui-v1/alarmbusitem.h
