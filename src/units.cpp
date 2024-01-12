@@ -71,6 +71,7 @@ int Units::defaultUnitPrecision(Victron::VenusOS::Enums::Units_Type unit) const
 		// Amp
 		// Hertz
 		// AmpHour
+		// Hectopascal
 		return 1;
 	}
 }
@@ -114,6 +115,8 @@ QString Units::defaultUnitString(Victron::VenusOS::Enums::Units_Type unit) const
 		return QStringLiteral("RPM");
 	case Victron::VenusOS::Enums::Units_Speed_MetresPerSecond:
 		return QStringLiteral("m/s");
+	case Victron::VenusOS::Enums::Units_Hectopascal:
+		return QStringLiteral("hPa");
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
 		return QString();
