@@ -5,14 +5,11 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Units
 
 ListQuantityItem {
 	id: root
 
-	readonly property real temperature: Global.systemSettings.convertFromCelsius(dataItem.value)
-
-	value: Units.getDisplayText(Global.systemSettings.temperatureUnit, temperature, 1).number
+	value: Global.systemSettings.convertFromCelsius(dataItem.value)
 	unit: Global.systemSettings.temperatureUnit
 	precision: 1
 }

@@ -36,11 +36,9 @@ Page {
 				unit: Global.systemSettings.volumeUnit
 			}
 
-			ListQuantityItem {
+			ListTemperatureItem {
 				text: CommonWords.temperature
 				dataItem.uid: root.bindPrefix + "/Temperature"
-				value: Global.systemSettings.convertFromCelsius(dataItem.value)
-				unit: Global.systemSettings.temperatureUnit
 				visible: defaultVisible && dataItem.isValid
 			}
 

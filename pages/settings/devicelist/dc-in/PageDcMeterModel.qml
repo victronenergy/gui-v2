@@ -44,11 +44,9 @@ ObjectModel {
 		}
 	}
 
-	ListQuantityItem {
+	ListTemperatureItem {
 		text: CommonWords.temperature
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-		value: Global.systemSettings.convertFromCelsius(dataItem.value)
-		unit: Global.systemSettings.temperatureUnit
 		visible: defaultVisible && dataItem.isValid
 	}
 

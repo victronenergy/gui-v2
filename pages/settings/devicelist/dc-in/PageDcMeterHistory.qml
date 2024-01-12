@@ -88,20 +88,16 @@ Page {
 				precision: 2
 			}
 
-			ListQuantityItem {
+			ListTemperatureItem {
 				text: CommonWords.minimum_temperature
 				visible: defaultVisible && showTemperature
 				dataItem.uid: root.bindPrefix + "/History/MinimumTemperature"
-				value: Global.systemSettings.convertFromCelsius(dataItem.value)
-				unit: Global.systemSettings.temperatureUnit
 			}
 
-			ListQuantityItem {
+			ListTemperatureItem {
 				text: CommonWords.maximum_temperature
 				visible: defaultVisible && showTemperature
 				dataItem.uid: root.bindPrefix + "/History/MaximumTemperature"
-				value: Global.systemSettings.convertFromCelsius(dataItem.value)
-				unit: Global.systemSettings.temperatureUnit
 			}
 
 			ListQuantityItem {
