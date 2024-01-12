@@ -24,7 +24,6 @@ Device {
 		uid: serviceUid + "/Status"
 	}
 
-	valid: deviceInstance >= 0 && _status.value === VenusOS.EnvironmentInput_Status_Ok
 	onValidChanged: {
 		if (valid) {
 			Global.environmentInputs.addInput(input)
