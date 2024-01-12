@@ -80,6 +80,8 @@ ObjectModel {
 					id: phasePower
 					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Power"
 				}
+
+				visible: phasePower.isValid
 			}
 		}
 	}
@@ -114,6 +116,7 @@ ObjectModel {
 				text: qsTrId("ac-in-modeldefault_energy_x").arg(model.index + 1)
 				dataItem.uid: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(model.index + 1)
 				unit: VenusOS.Units_Energy_KiloWattHour
+				visible: dataItem.isValid
 			}
 		}
 	}
