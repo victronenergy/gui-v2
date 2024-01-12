@@ -61,7 +61,7 @@ const FontInfo& Theme::fontInfo(const QFont &font) const
 	newFi.advanceWidth = metrics.boundingRect(QStringLiteral("44")).width() - (2*newFi.numberWidth);
 	newFi.dotDeltaWidth = newFi.numberWidth - metrics.boundingRect(QChar('.')).width();
 	newFi.minusDeltaWidth = newFi.numberWidth - metrics.boundingRect(QChar('-')).width();
-	newFi.oneHundredWidth = metrics.boundingRect(QStringLiteral("100")).width();
+	newFi.oneHundredWidth = metrics.boundingRect(QStringLiteral("100")).width() + 6; // fudge factor...
 	m_fontInfo.append(newFi);
 	return m_fontInfo[m_fontInfo.count() - 1];
 }
