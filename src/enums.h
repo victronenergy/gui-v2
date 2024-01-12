@@ -86,6 +86,7 @@ public:
 		Units_Temperature_Fahrenheit,
 		Units_RevolutionsPerMinute,
 		Units_Speed_MetresPerSecond,
+		Units_Hectopascal,
 	};
 	Q_ENUM(Units_Type)
 	

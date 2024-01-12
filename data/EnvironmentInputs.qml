@@ -13,6 +13,22 @@ QtObject {
 		modelId: "environmentInputs"
 	}
 
+	function temperatureTypeToText(temperatureType) {
+		switch (temperatureType) {
+		case VenusOS.Temperature_DeviceType_Battery:
+			return CommonWords.battery
+		case VenusOS.Temperature_DeviceType_Fridge:
+			//% "Fridge"
+			return qsTrId("temperature_type_fridge")
+		case VenusOS.Temperature_DeviceType_Generic:
+			//% "Generic"
+			return qsTrId("temperature_type_generic")
+		default:
+			//% "Unknown"
+			return qsTrId("temperature_type_unknown")
+		}
+	}
+
 	function addInput(input) {
 		model.addDevice(input)
 	}
