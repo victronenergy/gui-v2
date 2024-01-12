@@ -152,8 +152,8 @@ Page {
 		case "dcload":		// deliberate fall through
 		case "dcsystem":	// deliberate fall through
 		case "alternator":
-			url = serviceType === "alternator" ? "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/dc-in/PageAlternator.qml"
-					: "qrc:/qt/qml/Victron/VenusOS/pages/settings/devicelist/dc-in/PageDcMeter.qml"
+			url = serviceType === "alternator" ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
+					: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 			params = { "title": device.name, "bindPrefix": device.serviceUid }
 			summary = [
 				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
