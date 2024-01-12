@@ -152,6 +152,7 @@ public:
 		DcInputs_InputType_Alternator,
 		DcInputs_InputType_DcCharger,
 		DcInputs_InputType_DcGenerator,
+		DcInputs_InputType_DcSystem,
 		DcInputs_InputType_FuelCell,
 		DcInputs_InputType_ShaftGenerator,
 		DcInputs_InputType_WaterGenerator,
