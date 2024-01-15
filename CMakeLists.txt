@@ -649,7 +649,7 @@ set(Dbus_QML_MODULE_SOURCES
 
 list(APPEND TRANSLATION_SOURCES ${Dbus_QML_MODULE_SOURCES})
 
-qt_add_qml_module(Dbus
+qt_add_qml_module(VictronDbus
     URI Victron.Dbus
     STATIC
     OUTPUT_DIRECTORY Victron/Dbus
@@ -696,7 +696,7 @@ set(Mock_QML_MODULE_SOURCES
 
 list(APPEND TRANSLATION_SOURCES ${Mock_QML_MODULE_SOURCES})
 
-qt_add_qml_module(Mock
+qt_add_qml_module(VictronMock
     URI Victron.Mock
     STATIC
     OUTPUT_DIRECTORY Victron/Mock
@@ -712,7 +712,7 @@ set(Gauges_QML_MODULE_SOURCES
 
 list(APPEND TRANSLATION_SOURCES ${Gauges_QML_MODULE_SOURCES})
 
-qt_add_qml_module(Gauges
+qt_add_qml_module(VictronGauges
     URI Victron.Gauges
     STATIC
     OUTPUT_DIRECTORY Victron/Gauges
@@ -752,7 +752,7 @@ set(Mqtt_QML_MODULE_SOURCES
 
 list(APPEND TRANSLATION_SOURCES ${Mqtt_QML_MODULE_SOURCES} )
 
-qt_add_qml_module(Mqtt
+qt_add_qml_module(VictronMqtt
     URI Victron.Mqtt
     STATIC
     OUTPUT_DIRECTORY Victron/Mqtt
@@ -965,10 +965,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Xml
     Qt6::Mqtt
     VenusQMLModuleplugin
-    Gaugesplugin
-    Dbusplugin
-    Mockplugin
-    Mqttplugin
+    VictronGaugesplugin
+    VictronDbusplugin
+    VictronMockplugin
+    VictronMqttplugin
 )
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
