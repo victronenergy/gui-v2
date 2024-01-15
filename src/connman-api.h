@@ -20,6 +20,7 @@ class QJSEngine;
 class CmAgent : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString path MEMBER m_path CONSTANT)
 	Q_PROPERTY(QString passphrase MEMBER m_passphrase CONSTANT)
 
@@ -31,6 +32,7 @@ private:
 class CmService : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString state MEMBER m_state CONSTANT)
 	Q_PROPERTY(QString error MEMBER m_error CONSTANT)
 	Q_PROPERTY(QVariant name MEMBER m_name CONSTANT)
@@ -96,6 +98,7 @@ private:
 class CmTechnology : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString name MEMBER m_name CONSTANT)
 	Q_PROPERTY(QString type MEMBER m_type CONSTANT)
 	Q_PROPERTY(bool connected MEMBER m_connected CONSTANT)
