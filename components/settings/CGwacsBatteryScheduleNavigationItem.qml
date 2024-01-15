@@ -81,22 +81,22 @@ ListNavigationItem {
 
 	VeQuickItem {
 		id: itemDay
-		source: root._scheduleSource + "/Day"
+		uid: root._scheduleSource + "/Day"
 	}
 
 	VeQuickItem {
 		id: startTime
-		source: root._scheduleSource + "/Start"
+		uid: root._scheduleSource + "/Start"
 	}
 
 	VeQuickItem {
 		id: duration
-		source: root._scheduleSource + "/Duration"
+		uid: root._scheduleSource + "/Duration"
 	}
 
 	VeQuickItem {
 		id: socLimit
-		source: root._scheduleSource + "/Soc"
+		uid: root._scheduleSource + "/Soc"
 	}
 
 	Component {
