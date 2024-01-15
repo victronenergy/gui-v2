@@ -32,6 +32,7 @@ LanguageModel::LanguageModel(QObject *parent)
 	m_languages.append({ "ไทย", "th", QLocale::Thai }); // crashes WebAssembly.
 #endif
 	m_languages.append({ "Türkçe", "tr", QLocale::Turkish });
+	m_languages.append({ "Українська", "uk", QLocale::Ukrainian });
 	m_languages.append({ "中文", "zh", QLocale::Chinese });
 	m_languages.append({ "العربية", "ar", QLocale::Arabic });
 }
