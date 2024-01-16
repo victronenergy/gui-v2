@@ -113,5 +113,9 @@ CT.ComboBox {
 				color: Theme.color_darkOk
 			}
 		}
+
+		// Workaround for QTBUG-121029 (popup does not open as popup visible=true even when closed)
+		function _updateVisibility() { visible = opened }
+		onOpenedChanged: Qt.callLater(_updateVisibility)
 	}
 }
