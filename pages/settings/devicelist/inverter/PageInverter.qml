@@ -181,8 +181,7 @@ Page {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
 				visible: defaultVisible && root.isInverterCharger
-
-				// TODO show ChargerError when feature is available
+				secondaryText: ChargerError.description(dataItem.value)
 			}
 
 			ListRelayState {
