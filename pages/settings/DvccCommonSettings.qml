@@ -45,6 +45,6 @@ Column {
 		text: qsTrId("settings_dvcc_max_charge_current")
 		visible: defaultVisible && maxChargeCurrentSwitch.visible && maxChargeCurrentSwitch.checked
 		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeCurrent"
-		suffix: "A"
+		suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 	}
 }

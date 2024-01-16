@@ -103,7 +103,7 @@ Page {
 			GeneratorCondition {
 				text: CommonWords.battery_current
 				bindPrefix: root.bindPrefix + "/BatteryCurrent"
-				unit: "A"
+				unit: Units.defaultUnitString(VenusOS.Units_Amp)
 			}
 
 			GeneratorCondition {

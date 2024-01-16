@@ -17,7 +17,7 @@ Page {
 			ListSpinBox {
 				//% "Max charging current"
 				text: qsTrId("evcs_max_charging_current")
-				suffix: "A"
+				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				dataItem.uid: root.evCharger.serviceUid + "/MaxCurrent"
 				presets: Global.evChargers.maxCurrentPresets
 			}

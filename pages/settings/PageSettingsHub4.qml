@@ -214,7 +214,7 @@ Page {
 			text: qsTrId("settings_ess_max_charge_power")
 			visible: defaultVisible && maxChargePowerSwitch.visible && maxChargePowerSwitch.checked
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
-			suffix: "W"
+			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			to: 200000
 			stepSize: 50
 		}
@@ -245,7 +245,7 @@ Page {
 			text: qsTrId("settings_ess_max_inverter_power")
 			visible: defaultVisible && maxInverterPowerSwitch.visible && maxInverterPowerSwitch.checked
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
-			suffix: "W"
+			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			to: 300000
 			stepSize: 50
 		}
@@ -257,7 +257,7 @@ Page {
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
-			suffix: "W"
+			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			stepSize: 10
 		}
 

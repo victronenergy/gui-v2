@@ -74,7 +74,7 @@ Page {
 		delegate: ListTextGroup {
 			readonly property string dcCurrentText: dcCurrent.value === undefined
 				? "--"
-				: Utils.toFloat(dcCurrent.value, 3) + "A"
+				: Utils.toFloat(dcCurrent.value, 3) + Units.defaultUnitString(VenusOS.Units_Amp)
 			//% "Max: %1"
 			readonly property string maxValueText: maxValue.value === undefined
 				? "-- "

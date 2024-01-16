@@ -50,8 +50,7 @@ ControlCard {
 					value: modelData.currentLimit
 					label.text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
 					enabled: modelData.currentLimitAdjustable
-					//% "%1 A"
-					button.text: qsTrId("amps").arg(value)   // TODO use UnitConverter.convertToString() or unitToString() instead
+					button.text: "%1 %2".arg(value).arg(Units.defaultUnitString(VenusOS.Units_Amp))
 					onClicked: {
 						if (!root._currentLimitDialog) {
 							root._currentLimitDialog = currentLimitDialogComponent.createObject(Global.dialogLayer)
