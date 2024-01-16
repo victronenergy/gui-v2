@@ -51,8 +51,7 @@ Page {
 
 					delegate: ListTextItem {
 						text: errorModel.count === 1 ? "" : CommonWords.lastErrorName(model.index)
-						//TODO: get error description from veutil when ChargerError is ported there (same issue as alarmmonitor.cpp)
-						secondaryText: "#" + model.errorCode + " (description not available)"
+						secondaryText: ChargerError.description(model.errorCode)
 					}
 				}
 

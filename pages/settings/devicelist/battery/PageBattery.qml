@@ -74,12 +74,11 @@ Page {
 				}
 			}
 
-			// TODO this should translate the error code into a BMS error, when the error can be
-			// converted into a readable string via veutil. See issue #302
 			ListTextItem {
 				text: CommonWords.error
 				dataItem.uid: root.battery.serviceUid + "/ErrorCode"
 				visible: defaultVisible && dataItem.isValid
+				secondaryText: BmsError.description(dataItem.value)
 			}
 
 			ListQuantityGroup {

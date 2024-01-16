@@ -1,7 +1,7 @@
 #include "alarmmonitor.h"
 #include "alarmbusitem.h"
-#include "wakespeed_error.hpp"
 
+#include <veutil/qt/wakespeed_error.hpp>
 #include <veutil/qt/vebus_error.hpp>
 
 AlarmMonitor::AlarmMonitor(DBusService *service, Type type, const QString &busitemPathAlarm,
