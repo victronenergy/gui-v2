@@ -46,7 +46,7 @@ Page {
 						{
 							title: CommonWords.current_amps,
 							text: _currentSummaryText(),
-							secondaryText: "A"
+							secondaryText: Units.defaultUnitString(VenusOS.Units_Amp)
 						},
 						{
 							title: CommonWords.energy,
@@ -128,7 +128,7 @@ Page {
 
 			ListSpinBox {
 				text: CommonWords.charge_current
-				suffix: "A"
+				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				from: 0
 				to: root.evCharger.maxCurrent
 				dataItem.uid: root.evCharger.serviceUid + "/Current"

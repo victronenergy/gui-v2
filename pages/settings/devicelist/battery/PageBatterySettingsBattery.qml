@@ -99,7 +99,7 @@ Page {
 				enabled: !root.locked
 				visible: defaultVisible && dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/CurrentThreshold"
-				suffix: "A"
+				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				decimals: 2
 				stepSize: 0.01
 			}

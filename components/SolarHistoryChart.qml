@@ -89,7 +89,7 @@ Item {
 			right: parent.right
 			rightMargin: Theme.geometry_solarChart_horizontalMargin
 		}
-		text: "kWh" // TODO use UnitConversion unitToString() when unit conversion is updated
+		text: Units.defaultUnitString(VenusOS.Units_Energy_KiloWattHour)
 		color: Theme.color_font_secondary
 		font.pixelSize: Theme.font_size_caption
 	}

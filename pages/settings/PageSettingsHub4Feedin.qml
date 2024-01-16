@@ -61,7 +61,7 @@ Page {
 				text: qsTrId("settings_ess_max_feed_in")
 				visible: defaultVisible && restrictFeedIn.visible && restrictFeedIn.checked
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxFeedInPower"
-				suffix: "W"
+				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				to: 300000
 				stepSize: 100
 			}

@@ -21,7 +21,7 @@ Page {
 
 				text: root.title
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
-				suffix: "W"
+				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				from: -15000
 				to: 15000
 				stepSize: 10

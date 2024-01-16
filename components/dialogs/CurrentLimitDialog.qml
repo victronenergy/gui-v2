@@ -20,7 +20,7 @@ NumberSelectorDialog {
 	}
 
 	title: Global.acInputs.currentLimitTypeToText(inputSettings ? inputSettings.inputType : 0)
-	suffix: "A"
+	suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 	stepSize: 1
 	to: 1000
 	decimals: 1
