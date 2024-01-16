@@ -61,7 +61,7 @@ Page {
 				onMinValueReached: minValueWarning()
 				visible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/StartValue"
-				suffix: "W"
+				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
 				from: stopValue.value + stepSize
 				to: 1602
@@ -73,7 +73,7 @@ Page {
 				onMinValueReached: minValueWarning()
 				visible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/QuietHoursStartValue"
-				suffix: "W"
+				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
 				from: quietHoursStopValue.value + stepSize
 			}
@@ -94,7 +94,7 @@ Page {
 				onMaxValueReached: maxValueWarning()
 				visible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/StopValue"
-				suffix: "W"
+				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
 				from: 0
 				to: startValue.dataItem.isValid ? startValue.value - stepSize : 1000000
@@ -106,7 +106,7 @@ Page {
 				onMaxValueReached: maxValueWarning()
 				visible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/QuietHoursStopValue"
-				suffix: "W"
+				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
 				to: quietHoursStartValue.dataItem.isValid ? quietHoursStartValue.value - stepSize : 1000000
 				from: 0
