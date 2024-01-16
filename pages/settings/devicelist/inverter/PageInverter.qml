@@ -175,6 +175,7 @@ Page {
 			ListTemperatureItem {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+				visible: defaultVisible && dataItem.isValid
 			}
 
 			ListTextItem {
@@ -228,7 +229,7 @@ Page {
 				visible: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-							{ "bindPrefix": root.bindPrefix })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}
 
@@ -237,7 +238,7 @@ Page {
 				visible: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageRsAlarms.qml",
-							{ "title": title, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })
+							{ "title": text, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })
 				}
 			}
 
@@ -246,7 +247,7 @@ Page {
 				visible: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageRsAlarmSettings.qml",
-							{ "title": title, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })
+							{ "title": text, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })
 				}
 			}
 
