@@ -135,8 +135,11 @@ endif()
 list(APPEND VenusQMLModule_CPP_SOURCES ${CONNMAN_SOURCES})
 
 set(VEUTIL_CORE_SOURCES
+    src/veutil/inc/veutil/qt/bms_error.hpp
+    src/veutil/inc/veutil/qt/charger_error.hpp
     src/veutil/inc/veutil/qt/firmware_updater_data.hpp
     src/veutil/inc/veutil/qt/unit_conversion.hpp
+    src/veutil/inc/veutil/qt/wakespeed_error.hpp
     src/veutil/inc/veutil/qt/ve_qitem.hpp
     src/veutil/inc/veutil/qt/ve_qitem_child_model.hpp
     src/veutil/inc/veutil/qt/ve_qitem_loader.hpp
@@ -145,7 +148,10 @@ set(VEUTIL_CORE_SOURCES
     src/veutil/inc/veutil/qt/ve_qitem_tree_model.hpp
     src/veutil/inc/veutil/qt/ve_quick_item.hpp
 
+    src/veutil/src/qt/bms_error.cpp
+    src/veutil/src/qt/charger_error.cpp
     src/veutil/src/qt/unit_conversion.cpp
+    src/veutil/src/qt/wakespeed_error.cpp
     src/veutil/src/qt/ve_qitem.cpp
     src/veutil/src/qt/ve_qitem_child_model.cpp
     src/veutil/src/qt/ve_qitem_loader.cpp
@@ -889,7 +895,6 @@ set(GUIv1_DBUS_SOURCES
     src/gui-v1/dbus_service.cpp
     src/gui-v1/dbus_services.h
     src/gui-v1/dbus_services.cpp
-    src/gui-v1/wakespeed_error.cpp
 )
 if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     list(APPEND SOURCES ${GUIv1_DBUS_SOURCES})

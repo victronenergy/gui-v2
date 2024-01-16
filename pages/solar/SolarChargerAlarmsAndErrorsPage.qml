@@ -10,7 +10,7 @@ import QtQuick.Controls.impl as CP
 Page {
 	id: root
 
-	property var solarCharger
+	property SolarCharger solarCharger
 
 	GradientListView {
 		id: chargerListView
@@ -61,8 +61,7 @@ Page {
 					model: root.solarCharger.errorModel
 
 					delegate: ListTextItem {
-						//TODO: get error description from veutil when ChargerError is ported there (same issue as alarmmonitor.cpp)
-						text: "#" + model.errorCode + " (description not available)"
+						text: ChargerError.description(model.errorCode)
 						secondaryText: root.solarCharger.errorModel.count === 1 ? ""
 								: CommonWords.lastErrorName(model.index)
 					}

@@ -38,12 +38,10 @@ Page {
 					delegate: ListTextGroup {
 						text: modelData
 						textModel: [
-							error.value,
+							error.isValid ? BmsError.description(error.value) : error.invalidText,
 							errorTimestamp.isValid ? Qt.formatDateTime(new Date(errorTimestamp.value * 1000), "yyyy-MM-dd hh:mm") : "--"
 						]
 
-						// TODO use this instead  when BMS error descriptions are available. See issue 302.
-						// BmsError { id: errorValue }
 						VeQuickItem {
 							id: error
 							uid: root.bindPrefix + "/Diagnostics/LastErrors/" + (model.index + 1) + "/Error"

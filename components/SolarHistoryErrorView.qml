@@ -148,8 +148,7 @@ MouseArea {
 					width: parent.width - root._maxErrorTitleWidth
 					elide: Text.ElideRight
 					color: Theme.color_solarHistoryErrorView_primaryText
-					//TODO: get error description from veutil when ChargerError is ported there (same issue as alarmmonitor.cpp)
-					text: "#" + model.errorCode + " (description not available)"
+					text: ChargerError.description(model.errorCode)
 				}
 			}
 		}
