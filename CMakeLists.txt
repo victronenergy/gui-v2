@@ -1078,16 +1078,44 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
 # That way if new entries are added in code, the updates don't pollute the git diff.
 file(COPY
       "i18n/${PROJECT_NAME}.ts"
+      "i18n/${PROJECT_NAME}_ar.ts"
+      "i18n/${PROJECT_NAME}_cs.ts"
+      "i18n/${PROJECT_NAME}_da.ts"
+      "i18n/${PROJECT_NAME}_de.ts"
       "i18n/${PROJECT_NAME}_en.ts"
+      "i18n/${PROJECT_NAME}_es.ts"
       "i18n/${PROJECT_NAME}_fr.ts"
+      "i18n/${PROJECT_NAME}_it.ts"
+      "i18n/${PROJECT_NAME}_nl.ts"
+      "i18n/${PROJECT_NAME}_pl.ts"
+      "i18n/${PROJECT_NAME}_ro.ts"
+      "i18n/${PROJECT_NAME}_ru.ts"
+      "i18n/${PROJECT_NAME}_sv.ts"
+      "i18n/${PROJECT_NAME}_th.ts"
+      "i18n/${PROJECT_NAME}_tr.ts"
+      "i18n/${PROJECT_NAME}_uk.ts"
     DESTINATION "i18n") # build directory
 
 # This adds 2 new targets, venus-gui-v2_lupdate and venus-gui-v2_lrelease. Parallel builds (eg. 'make -j') do not rebuild venus-gui-v2_lrelease correctly without further 'add_dependencies' hackery
 qt_add_translations( ${PROJECT_NAME}
     TS_FILES
       "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_ar.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_cs.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_da.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_de.ts"
       "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_es.ts"
       "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_fr.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_it.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_nl.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_pl.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_ro.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_ru.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_sv.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_th.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_tr.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_uk.ts"
     SOURCES "${TRANSLATION_SOURCES}"
     LUPDATE_OPTIONS -no-obsolete
     LRELEASE_OPTIONS -idbased
