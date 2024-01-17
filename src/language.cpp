@@ -28,9 +28,7 @@ LanguageModel::LanguageModel(QObject *parent)
 	m_languages.append({ "Русский", "ru", QLocale::Russian });
 	m_languages.append({ "Română", "ro", QLocale::Romanian });
 	m_languages.append({ "Svenska", "sv", QLocale::Swedish });
-#if not defined(VENUS_WEBASSEMBLY_BUILD)
-	m_languages.append({ "ไทย", "th", QLocale::Thai }); // crashes WebAssembly.
-#endif
+	m_languages.append({ "ไทย", "th", QLocale::Thai });
 	m_languages.append({ "Türkçe", "tr", QLocale::Turkish });
 	m_languages.append({ "Українська", "uk", QLocale::Ukrainian });
 	m_languages.append({ "中文", "zh", QLocale::Chinese });
