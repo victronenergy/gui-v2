@@ -12,11 +12,21 @@ Item {
 	anchors.fill: parent
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
-		var toast = toaster.createObject(this, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
+		var toast = toaster.createObject(toastItemsModel, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
 		toastItemsModel.append(toast)
 	}
 
-	Flow {
+	function deleteNotification(toast) {
+		for (let i = 0; i < toastItemsModel.count; ++i) {
+			if (toastItemsModel.get(i) === toast) {
+				toastItemsModel.remove(i, 1)
+				toast.destroy(1000)
+				break
+			}
+		}
+	}
+
+	ListView {
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry_toastNotification_horizontalMargin
@@ -26,13 +36,12 @@ Item {
 			bottomMargin: Theme.geometry_toastNotification_bottomMargin
 		}
 		width: parent.width
+		height: childrenRect.height
 		spacing: Theme.geometry_toastNotification_bottomMargin
 		layoutDirection: Qt.RightToLeft     // layout from bottom to top
 
-		Repeater {
-			model: ObjectModel {
-				id: toastItemsModel
-			}
+		model: ObjectModel {
+			id: toastItemsModel
 		}
 	}
 
@@ -41,18 +50,9 @@ Item {
 		ToastNotification {
 			id: toast
 
-			function _cleanUp() {
-				for (let i = 0; i < toastItemsModel.count; ++i) {
-					if (toastItemsModel.get(i) === toast) {
-						toastItemsModel.remove(i, 1)
-						toast.destroy()
-						break
-					}
-				}
-			}
-
 			// delay removal from model, else will crash
-			onDismissed: Qt.callLater(_cleanUp)
+			onDismissed: root.deleteNotification(toast)
 		}
 	}
+
 }
