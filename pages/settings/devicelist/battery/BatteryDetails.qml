@@ -34,6 +34,7 @@ QtObject {
 	readonly property alias minTemperatureCellId: minTemperatureCellId
 	readonly property alias maxTemperatureCellId: maxTemperatureCellId
 	readonly property alias installedCapacity: installedCapacity
+	readonly property alias capacity: capacity
 
 	readonly property list<VeQuickItem> _dataItems: [
 		VeQuickItem {
@@ -95,6 +96,10 @@ QtObject {
 		VeQuickItem {
 			id: installedCapacity
 			uid: root.bindPrefix + "/InstalledCapacity"
+		},
+		VeQuickItem {
+			id: capacity
+			uid: root.bindPrefix + "/Capacity"
 		}
 	]
 }
