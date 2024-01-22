@@ -607,6 +607,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/aggregatedevicemodel.cpp
     src/basedevicemodel.h
     src/basedevicemodel.cpp
+    src/digitimageprovider.h
+    src/digitimageprovider.cpp
     src/theme.h
     src/theme.cpp
     src/themeobjects.h
