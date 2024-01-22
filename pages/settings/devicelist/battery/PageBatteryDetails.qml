@@ -18,7 +18,7 @@ Page {
 				//% "Lowest cell voltage"
 				text: qsTrId("batterydetails_lowest_cell_voltage")
 				textModel: [
-					{ value: details.minVoltageCellId.value, unit: VenusOS.Units_Volt },
+					{ value: details.minVoltageCellId.value },
 					{ value: details.minCellVoltage.value, unit: VenusOS.Units_Volt },
 				]
 			}
@@ -27,7 +27,7 @@ Page {
 				//% "Highest cell voltage"
 				text: qsTrId("batterydetails_highest_cell_voltage")
 				textModel: [
-					{ value: details.maxVoltageCellId.value, unit: VenusOS.Units_Volt },
+					{ value: details.maxVoltageCellId.value },
 					{ value: details.maxCellVoltage.value, unit: VenusOS.Units_Volt },
 				]
 			}
@@ -37,8 +37,7 @@ Page {
 				text: qsTrId("batterydetails_minimum_cell_temperature")
 				textModel: [
 					{
-						value: Global.systemSettings.convertFromCelsius(details.minTemperatureCellId.value),
-						unit: Global.systemSettings.temperatureUnit
+						value: details.minTemperatureCellId.value
 					},
 					{
 						value: Global.systemSettings.convertFromCelsius(details.minCellTemperature.value),
@@ -52,8 +51,7 @@ Page {
 				text: qsTrId("batterydetails_maximum_cell_temperature")
 				textModel: [
 					{
-						value: Global.systemSettings.convertFromCelsius(details.maxTemperatureCellId.value),
-						unit: Global.systemSettings.temperatureUnit
+						value: details.maxTemperatureCellId.value
 					},
 					{
 						value: Global.systemSettings.convertFromCelsius(details.maxCellTemperature.value),
@@ -68,10 +66,10 @@ Page {
 				textModel: [
 					//: %1 = number of battery modules that are online
 					//% "%1 online"
-					qsTrId("devicelist_batterydetails_modules_online").arg(details.modulesOnline.value || "--"),
+					details.modulesOnline.value === undefined ? "--" : qsTrId("devicelist_batterydetails_modules_online").arg(details.modulesOnline.value),
 					//: %1 = number of battery modules that are offline
 					//% "%1 offline"
-					qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value || "--")
+					details.modulesOffline.value === undefined ? "--" : qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value)
 				]
 			}
 
@@ -81,15 +79,13 @@ Page {
 				textModel: [ details.nrOfModulesBlockingCharge.value, details.nrOfModulesBlockingDischarge.value ]
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				//% "Installed / Available capacity"
 				text: qsTrId("batterydetails_installed_available_capacity")
-				textModel: [ details.installedCapacity.value, capacity.value ]
-
-				VeQuickItem {
-					id: capacity
-					uid: root.bindPrefix + "/Capacity"
-				}
+				textModel: [
+					{ value: details.installedCapacity.value, unit: VenusOS.Units_AmpHour },
+					{ value: details.capacity.value, unit: VenusOS.Units_AmpHour }
+				]
 			}
 		}
 	}
