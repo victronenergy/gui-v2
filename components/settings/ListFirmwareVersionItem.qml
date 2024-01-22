@@ -11,10 +11,12 @@ ListTextItem {
 
 	function firmwareVersion(version, format) {
 
-		if (version === undefined || version === null)
+		if (version === undefined || version === null){
 			return "";
-		if (version === 0xFFFFFF)
+		}
+		if (version === 0xFFFFFF){
 			return "";
+		}
 
 		// 0x00000A => v0.0A
 		// 0x0000A0 => v0.A0
@@ -25,14 +27,17 @@ ListTextItem {
 		// 0xA00BC0 => vA0.0B.C0
 		// 0xA00BFF => vA0.0B
 
-		var hexString = version.toString(16).toUpperCase();
+		// Return the version as it is, if format is "vebus" or if the version is not a hex number
+		if (format === "vebus" || !version.match(/^[0-9A-F]+$/i)){
+			return "v" + version;
+		}
 
-		if (format === "vebus")
-			return "v" + hexString;
+		let hexString = version.toString(16).toUpperCase();
 
 		// Add leading zeros to get a string at least 3 characters long
-		if (version < 0x100)
+		if (version < 0x100){
 			hexString = "00".concat(hexString).slice(-3)
+		}
 		// Insert points and remove trailing zeros in 3 byte version
 		hexString = hexString
 		.replace(/(.{1,2})(?=(.{2})+$)/g, "$1.") // Insert points
