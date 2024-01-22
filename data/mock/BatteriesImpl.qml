@@ -80,6 +80,9 @@ QtObject {
 		function beginCharging() { stepSize = 1.0; start() }
 		function beginDischarging() { stepSize = -1.0; start() }
 		onTriggered: {
+			if (!Global.mockDataSimulator.timersActive) {
+				return
+			}
 			var newSoc = Global.batteries.system.stateOfCharge + stepSize
 			if (newSoc >= 0 && newSoc <= 100) { Global.batteries.system.stateOfCharge = newSoc }
 			else if (newSoc > 100) { Global.batteries.system.stateOfCharge = 100; stop() }

@@ -95,7 +95,7 @@ QtObject {
 		property Timer _measurementsTimer: Timer {
 			property int testEnergyCounter: -5
 
-			running: true
+			running: Global.mockDataSimulator.timersActive && !root.manualConfig
 			repeat: true
 			interval: 3000
 			onTriggered: {
