@@ -10,6 +10,7 @@ QtObject {
 	id: root
 
 	property real power: NaN
+	property real current: NaN
 	property real energy: NaN
 
 	property DeviceModel model: DeviceModel {
@@ -33,6 +34,7 @@ QtObject {
 	function updateTotals() {
 		let totalPower = NaN
 		let totalEnergy = NaN
+		let overallCurrent = NaN // current cannot be summed, so it is NaN when > 1 charger
 		for (let i = 0; i < model.count; ++i) {
 			const evCharger = model.deviceAt(i)
 			const p = evCharger.power
@@ -49,8 +51,12 @@ QtObject {
 				}
 				totalEnergy += e
 			}
+			if (model.count === 1) {
+				overallCurrent = evCharger.current
+			}
 		}
 		power = totalPower
+		current = overallCurrent
 		energy = totalEnergy
 	}
 

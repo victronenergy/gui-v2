@@ -15,7 +15,7 @@ OverviewWidget {
 	icon.source: "qrc:/images/icon_charging_station_24.svg"
 	type: VenusOS.OverviewWidget_Type_Evcs
 	enabled: true
-	quantityLabel.dataObject: { "power": Global.evChargers.power, "current": NaN }
+	quantityLabel.dataObject: { "power": Global.evChargers.power, "current": Global.evChargers.current }
 
 	extraContentChildren: [
 		Loader {
