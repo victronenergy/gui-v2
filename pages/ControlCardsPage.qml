@@ -34,6 +34,19 @@ Page {
 		boundsBehavior: Flickable.DragOverBounds
 
 		model: ObjectModel {
+			Loader {
+				active: systemType.value === "ESS" || systemType.value === "Hub-4"
+				sourceComponent: ESSCard {
+					width: root.cardWidth
+					height: cardsView.height
+				}
+
+				VeQuickItem {
+					id: systemType
+					uid: Global.system.serviceUid + "/SystemType"
+				}
+			}
+
 			Row {
 				height: cardsView.height
 				spacing: Theme.geometry_controlCardsPage_spacing
@@ -59,19 +72,6 @@ Page {
 						width: root.cardWidth
 						veBusDevice: model.device
 					}
-				}
-			}
-
-			Loader {
-				active: systemType.value === "ESS" || systemType.value === "Hub-4"
-				sourceComponent: ESSCard {
-					width: root.cardWidth
-					height: cardsView.height
-				}
-
-				VeQuickItem {
-					id: systemType
-					uid: Global.system.serviceUid + "/SystemType"
 				}
 			}
 
