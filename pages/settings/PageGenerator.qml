@@ -92,8 +92,16 @@ Page {
 		ListTextItem {
 			//% "Total run time"
 			text: qsTrId("settings_page_relay_generator_total_run_time")
-			secondaryText: Utils.secondsToString(dataItem.value, false)
-			dataItem.uid: root.settingsBindPrefix + "/AccumulatedTotal"
+			secondaryText: Utils.secondsToString((accumulatedTotal.value || 0) - (accumulatedTotalOffset.value || 0), false)
+
+			VeQuickItem {
+				id: accumulatedTotal
+				uid: root.settingsBindPrefix + "/AccumulatedTotal"
+			}
+			VeQuickItem {
+				id: accumulatedTotalOffset
+				uid: root.settingsBindPrefix + "/AccumulatedTotalOffset"
+			}
 		}
 
 		ListTextItem {
