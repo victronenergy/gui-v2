@@ -105,6 +105,14 @@ Page {
 		}
 
 		ListTextItem {
+			//% "Time to service"
+			text: qsTrId("settings_page_relay_generator_time_to_service")
+			dataItem.uid: root.startStopBindPrefix + "/ServiceCounter"
+			secondaryText: Utils.secondsToString(dataItem.value, false)
+			visible: defaultVisible && dataItem.isValid
+		}
+
+		ListTextItem {
 			//% "Accumulated running time since last test run"
 			text: qsTrId("settings_page_relay_generator_accumulated_running_time")
 			showAccessLevel: VenusOS.User_AccessType_Service
