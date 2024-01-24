@@ -10,7 +10,7 @@ import Victron.VenusOS
 CT.TextField {
 	id: root
 
-	font.family: VenusFont.normal.name
+	font.family: Language.fontFamily
 	font.pixelSize: Theme.font_size_body2
 
 	leftPadding: Theme.geometry_textField_horizontalMargin
