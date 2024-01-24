@@ -15,7 +15,7 @@ ModalDialog {
 
 	property int from
 	property int to
-	property alias stepSize: spinBox.stepSize
+	property real stepSize
 	property var presets: []
 
 	signal maxValueReached()
@@ -63,6 +63,7 @@ ModalDialog {
 				}
 				from: root.from * root._multiplier()
 				to: root.to * root._multiplier()
+				stepSize: root.stepSize * root._multiplier()
 
 				onValueChanged: {
 					root.value = Number(value / root._multiplier())
