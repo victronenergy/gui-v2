@@ -100,6 +100,10 @@ ListNavigationItem {
 					enabled: !checked && (Array.isArray(root.optionModel)
 						  ? !modelData.readOnly
 						  : !model.readOnly)
+					primaryLabel.font.family: Array.isArray(root.optionModel)
+						  ? modelData.fontFamily || Language.fontFamily
+						  : model.fontFamily || Language.fontFamily
+
 					visible: (userHasWriteAccess && enabled) || checked
 					checked: root.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel

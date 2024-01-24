@@ -9,6 +9,6 @@ import Victron.VenusOS
 
 C.Label {
 	color: Theme.color_font_primary
-	font.family: VenusFont.normal.name
+	font.family: Language.fontFamily
 	font.pixelSize: Theme.font_size_body1
 }

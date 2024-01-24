@@ -10,29 +10,88 @@
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QTranslator>
+#include <QFontDatabase>
 
 using namespace Victron::VenusOS;
+
+namespace {
+
+static const QString defaultFontFileName = QStringLiteral(":/fonts/MuseoSans-500.otf");
+
+QString fontFileNameForLanguage(QLocale::Language language)
+{
+	switch (language) {
+	case QLocale::Thai:
+		return QStringLiteral(":/fonts/NotoSansThai.ttf");
+	default:
+		return defaultFontFileName;
+	}
+}
+
+QString qmlPath(const QString &resourcePath)
+{
+	if (resourcePath.isEmpty() || !resourcePath.startsWith(':')) {
+		return resourcePath;
+	}
+
+	// In C++, resource paths start with ":/". In QML, resource paths start with "qrc:/". Be sure to
+	// use the correct form, else resources cannot be loaded.
+	static const QString prefix = QStringLiteral("qrc");
+	return resourcePath.startsWith(prefix) ? resourcePath : prefix + resourcePath;
+}
+
+QString fontFamilyForLanguage(QLocale::Language language)
+{
+	static QHash<QString, int> fontIds;
+
+	const QString fontFileName = fontFileNameForLanguage(language);
+	if (!fontIds.contains(fontFileName)) {
+		fontIds.insert(fontFileName, QFontDatabase::addApplicationFont(fontFileName));
+	}
+
+	int fontId = fontIds.value(fontFileName, -1);
+	if (fontId < 0) {
+		qWarning() << "Fall back to default font, cannot load" << fontFileName << "for locale" << QLocale(language).name();
+		if (!fontIds.contains(defaultFontFileName)) {
+			fontIds.insert(fontFileName, QFontDatabase::addApplicationFont(defaultFontFileName));
+		}
+		fontId = fontIds.value(defaultFontFileName, -1);
+		if (fontId < 0) {
+			qWarning() << "Unable to fall back to default font!";
+			return QString();
+		}
+	}
+
+	return QFontDatabase::applicationFontFamilies(fontId).value(0);
+}
+
+}
+
 
 LanguageModel::LanguageModel(QObject *parent)
 	: QAbstractListModel(parent)
 {
-	m_languages.append({ "English", "en", QLocale::English });
-	m_languages.append({ "Čeština", "cs", QLocale::Czech });
-	m_languages.append({ "Dansk", "da", QLocale::Danish });
-	m_languages.append({ "Deutsch", "de", QLocale::German });
-	m_languages.append({ "Español", "es", QLocale::Spanish });
-	m_languages.append({ "Français", "fr", QLocale::French });
-	m_languages.append({ "Italiano", "it", QLocale::Italian });
-	m_languages.append({ "Nederlands", "nl", QLocale::Dutch });
-	m_languages.append({ "Polski", "pl", QLocale::Polish });
-	m_languages.append({ "Русский", "ru", QLocale::Russian });
-	m_languages.append({ "Română", "ro", QLocale::Romanian });
-	m_languages.append({ "Svenska", "sv", QLocale::Swedish });
-	m_languages.append({ "ไทย", "th", QLocale::Thai });
-	m_languages.append({ "Türkçe", "tr", QLocale::Turkish });
-	m_languages.append({ "Українська", "uk", QLocale::Ukrainian });
-	m_languages.append({ "中文", "zh", QLocale::Chinese });
-	m_languages.append({ "العربية", "ar", QLocale::Arabic });
+	m_roleNames[Qt::DisplayRole] = "display";
+	m_roleNames[FontFileNameRole] = "fontFileName";
+	m_roleNames[FontFamilyRole] = "fontFamily";
+
+	addLanguage("English", "en", QLocale::English);
+	addLanguage("Čeština", "cs", QLocale::Czech);
+	addLanguage("Dansk", "da", QLocale::Danish);
+	addLanguage("Deutsch", "de", QLocale::German);
+	addLanguage("Español", "es", QLocale::Spanish);
+	addLanguage("Français", "fr", QLocale::French);
+	addLanguage("Italiano", "it", QLocale::Italian);
+	addLanguage("Nederlands", "nl", QLocale::Dutch);
+	addLanguage("Polski", "pl", QLocale::Polish);
+	addLanguage("Русский", "ru", QLocale::Russian);
+	addLanguage("Română", "ro", QLocale::Romanian);
+	addLanguage("Svenska", "sv", QLocale::Swedish);
+	addLanguage("ไทย", "th", QLocale::Thai);
+	addLanguage("Türkçe", "tr", QLocale::Turkish);
+	addLanguage("Українська", "uk", QLocale::Ukrainian);
+//    addLanguage("中文", "zh", QLocale::Chinese);    // TODO add support for Chinese fonts
+	addLanguage("العربية", "ar", QLocale::Arabic);
 }
 
 LanguageModel::~LanguageModel()
@@ -89,10 +148,32 @@ int LanguageModel::rowCount(const QModelIndex &) const
 
 QVariant LanguageModel::data(const QModelIndex &index, int role) const
 {
-	if (role != Qt::DisplayRole || index.row() < 0 || index.row() >= m_languages.count()) {
+	if (index.row() < 0 || index.row() >= m_languages.count()) {
 		return QVariant();
 	}
-	return m_languages.at(index.row()).name;
+
+	const LanguageData &data = m_languages.at(index.row());
+
+	switch (role) {
+	case Qt::DisplayRole:
+		return data.name;
+	case FontFileNameRole:
+		return data.fontFileName;
+	case FontFamilyRole:
+		return data.fontFamily;
+	default:
+		return QVariant();
+	}
+}
+
+void LanguageModel::addLanguage(const QString &name, const QString &code, const QLocale::Language &language)
+{
+	m_languages.append({name, code, qmlPath(fontFileNameForLanguage(language)), fontFamilyForLanguage(language), language });
+}
+
+QHash<int, QByteArray> LanguageModel::roleNames() const
+{
+	return m_roleNames;
 }
 
 
@@ -135,7 +216,19 @@ void Language::setCurrentLanguage(QLocale::Language language)
 {
 	if (language != m_currentLanguage && installTranslatorForLanguage(language)) {
 		emit currentLanguageChanged();
+		emit fontFileNameChanged();
+		emit fontFamilyChanged();
 	}
+}
+
+QString Language::fontFileName() const
+{
+	return m_fontFileName;
+}
+
+QString Language::fontFamily() const
+{
+	return m_fontFamily;
 }
 
 void Language::setCurrentLanguageCode(const QString &code)
@@ -188,6 +281,8 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 	}
 
 	m_currentLanguage = language;
+	m_fontFileName = qmlPath(fontFileNameForLanguage(language));
+	m_fontFamily = fontFamilyForLanguage(language);
 
 	return true;
 }
@@ -207,4 +302,3 @@ void Language::retranslate()
 		qCWarning(venusGui) << "Unable to retranslate";
 	}
 }
-
