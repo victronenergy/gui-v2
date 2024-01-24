@@ -67,6 +67,7 @@ Device {
 
 	readonly property VeQuickItem _current: VeQuickItem {
 		uid: evCharger.serviceUid + "/Current"
+		onValueChanged: Qt.callLater(Global.evChargers.updateTotals)
 	}
 
 	readonly property VeQuickItem _maxCurrent: VeQuickItem {
