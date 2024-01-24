@@ -48,7 +48,10 @@ T.Dialog {
 		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation_page_fade_duration }
 	}
 	exit: Transition {
-		NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation_page_fade_duration }
+		NumberAnimation {
+			loops: Qt.platform.os == "wasm" ? 0 : 1 // workaround wasm crash, see https://bugreports.qt.io/browse/QTBUG-121382
+			property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation_page_fade_duration
+		}
 	}
 
 	background: Rectangle {
