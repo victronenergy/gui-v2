@@ -85,7 +85,7 @@ Page {
 				text: qsTrId("settings_language")
 
 				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: LanguageModel { currentLanguage: Language.current }
+				optionModel: languageModel
 				currentIndex: optionModel.currentIndex
 				secondaryText: optionModel.currentDisplayText
 				popDestination: undefined // don't pop page automatically.
@@ -100,6 +100,18 @@ Page {
 					languageDataItem.setValue(Language.toCode(optionModel.languageAt(index)))
 					pleaseWaitDialog = changingLanguageDialog.createObject(Global.dialogLayer)
 					pleaseWaitDialog.open()
+				}
+
+				LanguageModel {
+					id: languageModel
+					currentLanguage: Language.current
+				}
+
+				Instantiator {
+					model: languageModel
+					delegate: FontLoader {
+						source: model.fontFileName
+					}
 				}
 
 				VeQuickItem {

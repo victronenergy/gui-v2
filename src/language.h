@@ -31,6 +31,11 @@ class LanguageModel : public QAbstractListModel
 	Q_PROPERTY(int count READ rowCount CONSTANT)
 
 public:
+	enum Role {
+		FontFileNameRole = Qt::UserRole,
+		FontFamilyRole
+	};
+
 	explicit LanguageModel(QObject *parent = nullptr);
 	~LanguageModel() override;
 
@@ -49,12 +54,21 @@ signals:
 	void currentIndexChanged();
 	void currentDisplayTextChanged();
 
+protected:
+	QHash<int, QByteArray> roleNames() const override;
+
 private:
 	struct LanguageData {
 		QString name;
 		QString code;
+		QString fontFileName;
+		QString fontFamily;
 		QLocale::Language language;
 	};
+
+	void addLanguage(const QString &name, const QString &code, const QLocale::Language &language);
+
+	QHash<int, QByteArray> m_roleNames;
 	QList<LanguageData> m_languages;
 	int m_currentIndex = -1;
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
@@ -66,6 +80,9 @@ class Language : public QObject
 	QML_ELEMENT
 	QML_SINGLETON
 	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged FINAL)
+	Q_PROPERTY(QString fontFileName READ fontFileName NOTIFY fontFileNameChanged FINAL)
+	Q_PROPERTY(QString fontFamily READ fontFamily NOTIFY fontFamilyChanged FINAL)
+
 public:
 	static Language* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 	Language(const Victron::VenusOS::Language&) = delete;
@@ -83,12 +100,20 @@ public:
 	QLocale::Language getCurrentLanguage() const;
 	void setCurrentLanguage(QLocale::Language language);
 
+	QString fontFileName() const;
+	QString fontFamily() const;
+
 Q_SIGNALS:
 	void currentLanguageChanged();
+	void fontFileNameChanged();
+	void fontFamilyChanged();
 
 private:
 	explicit Language(QQmlEngine* engine);
 	bool installTranslatorForLanguage(QLocale::Language language);
+
+	QString m_fontFileName;
+	QString m_fontFamily;
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
 	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
 };
