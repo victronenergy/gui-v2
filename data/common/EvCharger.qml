@@ -54,7 +54,7 @@ Device {
 
 	readonly property VeQuickItem _power: VeQuickItem {
 		uid: evCharger.serviceUid + "/Ac/Power"
-		onValueChanged: if (!!Global.evChargers) Global.evChargers.updateTotals()
+		onValueChanged: Qt.callLater(Global.evChargers.updateTotals)
 	}
 
 	readonly property VeQuickItem _chargingTime: VeQuickItem {
