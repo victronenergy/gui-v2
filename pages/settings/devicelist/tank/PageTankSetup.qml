@@ -79,8 +79,8 @@ Page {
 			}
 
 			ListSpinBox {
-				//% "Sensor value when empty"
-				text: qsTrId("devicelist_tanksetup_sensor_value_when_empty")
+				//% "Sensor value when full"
+				text: qsTrId("devicelist_tanksetup_sensor_value_when_full")
 				visible: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
 				dataItem.uid: root.bindPrefix + "/RawValueFull"
 				suffix: rawUnit.value || ""
