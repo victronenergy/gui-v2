@@ -219,12 +219,12 @@ QString Units::getCombinedDisplayText(Victron::VenusOS::Enums::Units_Type unit, 
 QString Units::getCapacityDisplayText(
 	Victron::VenusOS::Enums::Units_Type unit,
 	qreal capacity_m3,
-	qreal remaining_m3,
-	int precision) const
+	qreal remaining_m3) const
 {
 	const qreal capacity = convert(capacity_m3, Victron::VenusOS::Enums::Units_Volume_CubicMeter, unit);
 	const qreal remaining = convert(remaining_m3, Victron::VenusOS::Enums::Units_Volume_CubicMeter, unit);
 
+	const int precision = defaultUnitPrecision(unit);
 	const Victron::Units::quantityInfo c = getDisplayText(unit, capacity, precision);
 	const Victron::Units::quantityInfo r = getDisplayText(unit, remaining, precision, capacity);
 	return QStringLiteral("%1/%2%3").arg(r.number, c.number, c.unit);
