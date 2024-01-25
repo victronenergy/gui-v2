@@ -155,7 +155,6 @@ Rectangle {
 		color: Theme.color_font_secondary
 		text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
 				isNaN(root.totalCapacity) ? 0 : root.totalCapacity,
-				isNaN(root.totalRemaining) ? 0 : root.totalRemaining,
-				Theme.geometry_quantityLabel_valueLength)
+				isNaN(root.totalRemaining) ? 0 : root.totalRemaining)
 	}
 }
