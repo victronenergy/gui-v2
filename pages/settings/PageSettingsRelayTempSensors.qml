@@ -14,7 +14,7 @@ Page {
 		filterFlags: VeQItemSortTableModel.FilterOffline
 		dynamicSortFilter: true
 		model: VeQItemTableModel {
-			uids: [ BackendConnection.uidForServiceType("temprelay") + "/Sensor" ]
+			uids: [ BackendConnection.serviceUidForType("temprelay") + "/Sensor" ]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 	}
