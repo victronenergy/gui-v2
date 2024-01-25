@@ -30,7 +30,8 @@ Page {
 				//% "Remaining"
 				text: qsTrId("devicelist_tanksensor_remaining")
 				dataItem.uid: root.bindPrefix + "/Remaining"
-				value: Global.systemSettings.convertFromCubicMeters(dataItem.value)
+				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMeter)
+				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.volumeUnit)
 				unit: Global.systemSettings.volumeUnit
 			}
 
