@@ -37,7 +37,7 @@ void VeQItemMockProducer::initialize()
 	const QString guiSettingUid = QStringLiteral("com.victronenergy.settings/Settings/Gui/%1");
 
 	setValue(systemSettingUid.arg("AccessLevel"), Enums::User_AccessType_Service);
-	setValue(systemSettingUid.arg("VolumeUnit"), Enums::Units_Volume_Liter);
+	setValue(systemSettingUid.arg("VolumeUnit"), 1);    // 1 = Liter
 	setValue(systemSettingUid.arg("Units/Temperature"), QStringLiteral("celsius"));
 
 	setValue(guiSettingUid.arg("ColorScheme"), Theme::Light);
