@@ -195,11 +195,6 @@ function jsonSettingsToModel(json, expectNumber) {
 	})
 }
 
-function toFloat(value, precision) {
-	const factor = Math.pow(10, precision)
-	return Math.round(value * factor) / factor
-}
-
 function formatDaysHours(days, hours) {
 	//% "%1d %2h"
 	return qsTrId("utils_format_days_hours").arg(days).arg(hours)
