@@ -104,10 +104,10 @@ Page {
 				unit: VenusOS.Units_Percentage
 			}
 
-			ListQuantityItem {
+			ListTemperatureItem {
 				text: CommonWords.battery_temperature
-				visible: defaultVisible && !isNaN(root.battery.temperature_celsius)
-				value: Global.systemSettings.convertFromCelsius(root.battery.temperature_celsius)
+				dataItem.uid: root.battery.serviceUid + "/Dc/0/Temperature"
+				visible: defaultVisible && dataItem.isValid
 				unit: Global.systemSettings.temperatureUnit
 			}
 

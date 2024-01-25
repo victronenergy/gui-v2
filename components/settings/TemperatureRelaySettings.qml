@@ -69,6 +69,8 @@ Column {
 		//% "Activation value"
 		text: qsTrId("settings_relay_activation_value")
 		dataItem.uid: "%1/%2/SetValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
+		dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 		from: Global.systemSettings.convertFromCelsius(-50)
 		to: Global.systemSettings.convertFromCelsius(100)
 		suffix: Global.systemSettings.temperatureUnitSuffix
@@ -78,9 +80,6 @@ Column {
 				showEqualValuesWarningToast()
 			}
 		}
-		onSelectorAccepted: function(newValue) {
-			cSet.setValue(Global.systemSettings.convertToCelsius(newValue))
-		}
 	}
 
 	ListSpinBox {
@@ -89,6 +88,8 @@ Column {
 		//% "Deativation value"
 		text: qsTrId("settings_relay_deactivation_value")
 		dataItem.uid: "%1/%2/ClearValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
+		dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 		from: cSet.from
 		to: cSet.to
 		suffix: cSet.suffix
@@ -97,9 +98,6 @@ Column {
 			if (value === cSet.value) {
 				showEqualValuesWarningToast()
 			}
-		}
-		onSelectorAccepted: function(newValue) {
-			cClear.setValue(Global.systemSettings.convertToCelsius(newValue))
 		}
 	}
 }

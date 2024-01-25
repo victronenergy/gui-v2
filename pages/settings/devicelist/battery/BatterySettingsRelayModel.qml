@@ -129,14 +129,12 @@ ObjectModel {
 		slider.firstColor: Theme.color_red
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperature"
+		firstDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
+		firstDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperatureClear"
+		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
+		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 		visible: defaultVisible && dataItem.isValid && showSetting(0)
-		toSourceValue: function(v) {
-			return Units.convert(v, Global.systemSettings.temperatureUnit, VenusOS.Units_Temperature_Kelvin)
-		}
-		fromSourceValue: function(v) {
-			return Units.convert(v, VenusOS.Units_Temperature_Kelvin, Global.systemSettings.temperatureUnit)
-		}
 	}
 
 	ListRangeSlider {
@@ -144,13 +142,11 @@ ObjectModel {
 		slider.firstColor: Theme.color_green
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperatureClear"
+		firstDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
+		firstDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperature"
+		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
+		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 		visible: defaultVisible && dataItem.isValid && showSetting(0)
-		toSourceValue: function(v) {
-			return Units.convert(v, Global.systemSettings.temperatureUnit, VenusOS.Units_Temperature_Kelvin)
-		}
-		fromSourceValue: function(v) {
-			return Units.convert(v, VenusOS.Units_Temperature_Kelvin, Global.systemSettings.temperatureUnit)
-		}
 	}
 }
