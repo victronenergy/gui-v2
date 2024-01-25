@@ -147,113 +147,113 @@ QtObject {
 	property var environmentConfigs: [
 		{
 			name: "Double gauge",
-			inputs: [ { name: "Refrigerator", temperature_celsius: 4.4223, humidity: 32.6075 } ]
+			inputs: [ { customName: "Refrigerator", temperature: 4.4223, humidity: 32.6075 } ]
 		},
 		{
 			name: "Double gauge x 2",
 			inputs: [
-				{ name: "Refrigerator", temperature_celsius: 4.4, humidity: 32.6075 },
-				{ name: "Freezer", temperature_celsius: -48.2, humidity: 28.921 },
+				{ customName: "Refrigerator", temperature: 4.4, humidity: 32.6075 },
+				{ customName: "Freezer", temperature: -48.2, humidity: 28.921 },
 			]
 		},
 		{
 			name: "Double gauge x 3",
 			inputs: [
-				{ name: "Refrigerator", temperature_celsius: -30, humidity: 0 },
-				{ name: "Freezer", temperature_celsius: 0, humidity: 50 },
-				{ name: "Sensor", temperature_celsius: 50, humidity: 100 }
+				{ customName: "Refrigerator", temperature: -30, humidity: 0 },
+				{ customName: "Freezer", temperature: 0, humidity: 50 },
+				{ customName: "Sensor", temperature: 50, humidity: 100 }
 			]
 		},
 		{
 			name: "Double gauge x 4",
 			inputs: [
-				{ name: "Refrigerator", temperature_celsius: 4.4, humidity: 32.6075 },
-				{ name: "Freezer", temperature_celsius: -18.2, humidity: 28.921 },
-				{ name: "Sensor A", temperature_celsius: 48.4122, humidity: 5.2 },
-				{ name: "Sensor B", temperature_celsius: 68.2, humidity: 7.3 },
+				{ customName: "Refrigerator", temperature: 4.4, humidity: 32.6075 },
+				{ customName: "Freezer", temperature: -18.2, humidity: 28.921 },
+				{ customName: "Sensor A", temperature: 48.4122, humidity: 5.2 },
+				{ customName: "Sensor B", temperature: 68.2, humidity: 7.3 },
 			]
 		},
 		{
 			name: "Mix single/double gauge layouts",
 			inputs: [
-				{ name: "Refrigerator", temperature_celsius: 4.4, humidity: 32.6075 },
-				{ name: "Freezer", temperature_celsius: 100, humidity: 100 },
-				{ name: "Sensor A", temperature_celsius: 12, humidity: NaN },
-				{ name: "Sensor B", temperature_celsius: 52, humidity: NaN },
-				{ name: "Sensor C", temperature_celsius: 72, humidity: NaN },
+				{ customName: "Refrigerator", temperature: 4.4, humidity: 32.6075 },
+				{ customName: "Freezer", temperature: 100, humidity: 100 },
+				{ customName: "Sensor A", temperature: 12, humidity: NaN },
+				{ customName: "Sensor B", temperature: 52, humidity: NaN },
+				{ customName: "Sensor C", temperature: 72, humidity: NaN },
 			]
 		},
 		{
 			name: "Single gauge",
-			inputs: [ { name: "Water tank", temperature_celsius: 17, humidity: NaN } ]
+			inputs: [ { customName: "Water tank", temperature: 17, humidity: NaN } ]
 		},
 		{
 			name: "Single gauge x 2",
 			inputs: [
-				{ name: "Water tank", temperature_celsius: 17, humidity: NaN },
-				{ name: "Sensor A", temperature_celsius: 54.2124, humidity: NaN },
+				{ customName: "Water tank", temperature: 17, humidity: NaN },
+				{ customName: "Sensor A", temperature: 54.2124, humidity: NaN },
 			]
 		},
 		{
 			name: "Single gauge x 3",
 			inputs: [
-				{ name: "Water tank", temperature_celsius: 17, humidity: NaN },
-				{ name: "Sensor A", temperature_celsius: 64, humidity: NaN },
-				{ name: "Sensor B", temperature_celsius: 23.822, humidity: NaN },
+				{ customName: "Water tank", temperature: 17, humidity: NaN },
+				{ customName: "Sensor A", temperature: 64, humidity: NaN },
+				{ customName: "Sensor B", temperature: 23.822, humidity: NaN },
 			]
 		},
 		{
 			name: "Single gauge x 4",
 			inputs: [
-				{ name: "Sensor A", temperature_celsius: 14.12, humidity: NaN },
-				{ name: "Sensor B", temperature_celsius: 45.3234, humidity: NaN },
-				{ name: "Sensor C", temperature_celsius: -13.1123, humidity: NaN },
-				{ name: "Sensor D", temperature_celsius: 100, humidity: NaN },
+				{ customName: "Sensor A", temperature: 14.12, humidity: NaN },
+				{ customName: "Sensor B", temperature: 45.3234, humidity: NaN },
+				{ customName: "Sensor C", temperature: -13.1123, humidity: NaN },
+				{ customName: "Sensor D", temperature: 100, humidity: NaN },
 			]
 		},
 		{
 			name: "Single gauge x 5",
 			inputs: [
-				{ name: "Sensor A", temperature_celsius: 64.12, humidity: NaN },
-				{ name: "Sensor B", temperature_celsius: 45.3234, humidity: NaN },
-				{ name: "Sensor C", temperature_celsius: 23.1123, humidity: NaN },
-				{ name: "Sensor D", temperature_celsius: 100, humidity: NaN },
-				{ name: "Sensor E", temperature_celsius: 0, humidity: NaN },
+				{ customName: "Sensor A", temperature: 64.12, humidity: NaN },
+				{ customName: "Sensor B", temperature: 45.3234, humidity: NaN },
+				{ customName: "Sensor C", temperature: 23.1123, humidity: NaN },
+				{ customName: "Sensor D", temperature: 100, humidity: NaN },
+				{ customName: "Sensor E", temperature: 0, humidity: NaN },
 			]
 		},
 		{
 			name: "Single gauge x 6",
 			inputs: [
-				{ name: "Sensor A", temperature_celsius: 64.12, humidity: NaN },
-				{ name: "Sensor B", temperature_celsius: 45.3234, humidity: NaN },
-				{ name: "Sensor C", temperature_celsius: 23.1123 , humidity: NaN },
-				{ name: "Sensor D", temperature_celsius: 100, humidity: NaN },
-				{ name: "Sensor E", temperature_celsius: 0, humidity: NaN },
-				{ name: "Sensor F", temperature_celsius: 43.35 , humidity: NaN },
+				{ customName: "Sensor A", temperature: 64.12, humidity: NaN },
+				{ customName: "Sensor B", temperature: 45.3234, humidity: NaN },
+				{ customName: "Sensor C", temperature: 23.1123 , humidity: NaN },
+				{ customName: "Sensor D", temperature: 100, humidity: NaN },
+				{ customName: "Sensor E", temperature: 0, humidity: NaN },
+				{ customName: "Sensor F", temperature: 43.35 , humidity: NaN },
 			]
 		},
 		{
 			name: "Single gauge x 7",
 			inputs: [
-				{ name: "Sensor A", temperature_celsius: 64.12 , humidity: NaN },
-				{ name: "Sensor B", temperature_celsius: 45.3234 , humidity: NaN },
-				{ name: "Sensor C", temperature_celsius: 23.1123 , humidity: NaN },
-				{ name: "Sensor D", temperature_celsius: 100, humidity: NaN },
-				{ name: "Sensor E", temperature_celsius: 0, humidity: NaN },
-				{ name: "Sensor F", temperature_celsius: 43.35, humidity: NaN },
-				{ name: "Sensor G", temperature_celsius: 23.35, humidity: NaN },     // scrolls off screen
+				{ customName: "Sensor A", temperature: 64.12 , humidity: NaN },
+				{ customName: "Sensor B", temperature: 45.3234 , humidity: NaN },
+				{ customName: "Sensor C", temperature: 23.1123 , humidity: NaN },
+				{ customName: "Sensor D", temperature: 100, humidity: NaN },
+				{ customName: "Sensor E", temperature: 0, humidity: NaN },
+				{ customName: "Sensor F", temperature: 43.35, humidity: NaN },
+				{ customName: "Sensor G", temperature: 23.35, humidity: NaN },     // scrolls off screen
 			]
 		},
 		{
 			name: "Single gauge x 8",
 			inputs: [
-				{ name: "Sensor A", temperature_celsius: 64.12 , humidity: NaN },
-				{ name: "Sensor B", temperature_celsius: 45.3234 , humidity: NaN },
-				{ name: "Sensor C", temperature_celsius: 23.1123 , humidity: NaN },
-				{ name: "Sensor D", temperature_celsius: 100, humidity: NaN },
-				{ name: "Sensor E", temperature_celsius: 0, humidity: NaN },
-				{ name: "Sensor F", temperature_celsius: 43.35, humidity: NaN },
-				{ name: "Sensor G", temperature_celsius: 23.35, humidity: NaN },     // scrolls off screen
+				{ customName: "Sensor A", temperature: 64.12 , humidity: NaN },
+				{ customName: "Sensor B", temperature: 45.3234 , humidity: NaN },
+				{ customName: "Sensor C", temperature: 23.1123 , humidity: NaN },
+				{ customName: "Sensor D", temperature: 100, humidity: NaN },
+				{ customName: "Sensor E", temperature: 0, humidity: NaN },
+				{ customName: "Sensor F", temperature: 43.35, humidity: NaN },
+				{ customName: "Sensor G", temperature: 23.35, humidity: NaN },     // scrolls off screen
 			]
 		},
 	]
