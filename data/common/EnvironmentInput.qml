@@ -9,14 +9,18 @@ import Victron.VenusOS
 Device {
 	id: input
 
-	readonly property real temperature_celsius: _veTemperature.value === undefined ? NaN : _veTemperature.value
-	readonly property real humidity: _veHumidity.value === undefined ? NaN : _veHumidity.value
+	readonly property real temperature_celsius: _temperature.value === undefined ? NaN : _temperature.value
+	readonly property real humidity: _humidity.value === undefined ? NaN : _humidity.value
+	readonly property int temperatureType: _temperatureType.value === undefined ? -1 : _temperatureType.value
 
-	readonly property VeQuickItem _veTemperature: VeQuickItem {
+	readonly property VeQuickItem _temperature: VeQuickItem {
 		uid: serviceUid + "/Temperature"
 	}
-	readonly property VeQuickItem _veHumidity: VeQuickItem {
+	readonly property VeQuickItem _humidity: VeQuickItem {
 		uid: serviceUid + "/Humidity"
+	}
+	readonly property VeQuickItem _temperatureType: VeQuickItem {
+		uid: serviceUid + "/TemperatureType"
 	}
 	readonly property VeQuickItem _status: VeQuickItem {
 		uid: serviceUid + "/Status"

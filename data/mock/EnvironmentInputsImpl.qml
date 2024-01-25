@@ -9,32 +9,56 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	property int mockDeviceCount
+	property var _createdObjects: []
+
 	function populate() {
-		const inputCount = _rand(1, 8)
+		const inputCount = Math.ceil(Math.random() * 4)
 		for (let i = 0; i < inputCount; ++i) {
-			const inputObj = inputComponent.createObject(root, {
-				name: "Sensor " + (i + 1),
-				temperature_celsius: _rand(Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue,
-						Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue),
-				humidity: _rand(Theme.geometry_levelsPage_environment_humidityGauge_minimumValue,
-						Theme.geometry_levelsPage_environment_humidityGauge_maximumValue)
-			})
-			Global.environmentInputs.addInput(inputObj)
+			const properties = {
+				temperature: Math.random() * 100,
+				humidity: Math.random() * 100
+			}
+			addInput(properties)
 		}
 	}
 
-	function _rand(min, max) {
-		const range = (max - min) + 1
-		return (Math.random() * range) + min
+	function addInput(properties) {
+		if (properties.temperatureType === undefined) {
+			properties.temperatureType = Math.floor(Math.random() * VenusOS.Temperature_DeviceType_Generic)
+		}
+		const inputObj = inputComponent.createObject(root)
+		_createdObjects.push(inputObj)
+		for (var p in properties) {
+			inputObj["_" + p].setValue(properties[p])
+		}
 	}
 
 	property Component inputComponent: Component {
-		MockDevice {
-			property real temperature_celsius
-			property real humidity
+		EnvironmentInput {
+			onTemperatureTypeChanged: {
+				if (temperatureType >= 0 && !_customName.value) {
+					_customName.setValue(Global.environmentInputs.temperatureTypeToText(temperatureType) + " temperature sensor")
+				}
+			}
 
-			serviceUid: "mock/com.victronenergy.temperature.ttyUSB" + deviceInstance
-			name: "EnvironmentInput" + deviceInstance
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockDeviceCount++
+				serviceUid = "mock/com.victronenergy.temperature.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_productName.setValue("Generic Temperature Sensor")
+				_status.setValue(VenusOS.EnvironmentInput_Status_Ok)
+			}
+
+			property Timer dummyUpdates: Timer {
+				running: Global.mockDataSimulator.timersActive
+				repeat: true
+				interval: 10 * 1000
+				onTriggered: {
+					_temperature.setValue(Math.random() * 100)
+					_humidity.setValue(Math.random() * 100)
+				}
+			}
 		}
 	}
 
@@ -43,30 +67,13 @@ Item {
 
 		function onSetEnvironmentInputsRequested(config) {
 			Global.environmentInputs.model.clear()
+			while (_createdObjects.length > 0) {
+				_createdObjects.pop().destroy()
+			}
 
 			if (config) {
 				for (let i = 0; i < config.length; ++i) {
-					const inputObj = inputComponent.createObject(root, config[i])
-					Global.environmentInputs.addInput(inputObj)
-				}
-			}
-		}
-	}
-
-	property Instantiator inputObjects: Instantiator {
-		model: Global.environmentInputs.model
-
-		delegate: Timer {
-			running: Global.mockDataSimulator.timersActive
-			repeat: true
-			interval: 10 * 1000
-			onTriggered: {
-				const input = model.device
-				input.temperature_celsius = root._rand(Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue,
-						Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue)
-				if (!isNaN(input.humidity)) {
-					input.humidity = root._rand(Theme.geometry_levelsPage_environment_humidityGauge_minimumValue,
-							Theme.geometry_levelsPage_environment_humidityGauge_maximumValue)
+					root.addInput(config[i])
 				}
 			}
 		}
