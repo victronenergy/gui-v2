@@ -241,12 +241,12 @@ qreal Units::convert(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit, 
 		return value;
 	}
 
-	Unit::Type fromVeUnit = unitToVeUnit(fromUnit);
+	Unit::Type fromVeUnit = ::unitToVeUnit(fromUnit);
 	if (fromVeUnit == Unit::Default) {
 		qWarning() << "convert() does not support conversion from unit:" << fromUnit;
 		return value;
 	}
-	Unit::Type toVeUnit = unitToVeUnit(toUnit);
+	Unit::Type toVeUnit = ::unitToVeUnit(toUnit);
 	if (toVeUnit == Unit::Default) {
 		qWarning() << "convert() does not support conversion to unit:" << toUnit;
 		return value;
@@ -264,6 +264,11 @@ qreal Units::sumRealNumbers(qreal a, qreal b) const
 		: aNaN ? b
 		: bNaN ? a
 		: (a+b);
+}
+
+int Units::unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit) const
+{
+	return static_cast<int>(::unitToVeUnit(unit));
 }
 
 } // Units

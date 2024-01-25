@@ -77,14 +77,6 @@ QtObject {
 		return Units.convert(temperature, temperatureUnit, VenusOS.Units_Temperature_Celsius)
 	}
 
-	function convertFromCubicMeters(cm3_value) {
-		return Units.convert(cm3_value, VenusOS.Units_Volume_CubicMeter, volumeUnit)
-	}
-
-	function convertToCubicMeters(volume) {
-		return Units.convert(volume, volumeUnit, VenusOS.Units_Volume_CubicMeter)
-	}
-
 	function networkStatusToText(status) {
 		switch (status) {
 		case VenusOS.Link_NetworkStatus_Slave:

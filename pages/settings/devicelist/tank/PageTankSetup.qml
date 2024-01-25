@@ -15,29 +15,16 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 			ListSpinBox {
-				id: capacitySpinBox
-
 				//% "Capacity"
 				text: qsTrId("devicelist_tanksetup_capacity")
+				dataItem.uid: root.bindPrefix + "/Capacity"
+				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMeter)
+				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.volumeUnit)
 				suffix: Units.defaultUnitString(Global.systemSettings.volumeUnit)
 				stepSize: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMeter
 						  ? 0.005
 						  : 1   // Liters, Gallons
 				decimals: Units.defaultUnitPrecision(Global.systemSettings.volumeUnit)
-				from: Global.systemSettings.convertFromCubicMeters(capacity.min)
-				to: Global.systemSettings.convertFromCubicMeters(capacity.max)
-				value: capacity.value === undefined ? 0
-					 : Global.systemSettings.convertFromCubicMeters(capacity.value)
-
-				onSelectorAccepted: function(newValue) {
-					capacity.setValue(Global.systemSettings.convertToCubicMeters(newValue))
-				}
-
-				VeQuickItem {
-					id: capacity
-
-					uid: root.bindPrefix + "/Capacity"
-				}
 			}
 
 			ListRadioButtonGroup {

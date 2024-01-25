@@ -10,6 +10,9 @@
 #include <QQmlEngine>
 #include <QObject>
 
+
+#include <veutil/qt/unit_conversion.hpp>
+
 #include "enums.h"
 
 namespace Victron {
@@ -66,6 +69,8 @@ public:
 		int precision) const;
 
 	Q_INVOKABLE qreal convert(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit, Victron::VenusOS::Enums::Units_Type toUnit) const;
+
+	Q_INVOKABLE int unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit) const;
 
 	Q_INVOKABLE qreal sumRealNumbers(qreal a, qreal b) const;
 
