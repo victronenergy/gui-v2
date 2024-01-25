@@ -41,7 +41,6 @@ public:
 
 	Q_INVOKABLE int defaultUnitPrecision(Victron::VenusOS::Enums::Units_Type unit) const;
 	Q_INVOKABLE QString defaultUnitString(Victron::VenusOS::Enums::Units_Type unit) const;
-	Q_INVOKABLE QString scaledUnitString(Victron::VenusOS::Enums::Units_Type unit) const;
 
 	Q_INVOKABLE Victron::Units::quantityInfo scaledQuantity(
 		qreal value,
@@ -69,6 +68,9 @@ public:
 	Q_INVOKABLE qreal convert(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit, Victron::VenusOS::Enums::Units_Type toUnit) const;
 
 	Q_INVOKABLE qreal sumRealNumbers(qreal a, qreal b) const;
+
+private:
+	QString scaledUnitString(Victron::VenusOS::Enums::Units_Type unit) const;
 };
 
 }
