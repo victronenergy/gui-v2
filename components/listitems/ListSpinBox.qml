@@ -24,7 +24,7 @@ ListButton {
 	signal minValueReached()
 	signal selectorAccepted(newValue: var)
 
-	button.text: value === undefined ? "--" : (decimals > 0 ? value.toFixed(decimals) : value) + root.suffix
+	button.text: value === undefined ? "--" : value.toFixed(decimals) + root.suffix
 	enabled: dataItem.uid === "" || dataItem.isValid
 
 	onClicked: {
