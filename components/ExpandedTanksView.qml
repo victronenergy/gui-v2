@@ -124,8 +124,7 @@ Rectangle {
 					color: Theme.color_font_secondary
 					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
 							model.device.capacity,
-							model.device.remaining,
-							Theme.geometry_quantityLabel_valueLength)
+							model.device.remaining)
 				}
 			}
 		}

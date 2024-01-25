@@ -65,8 +65,7 @@ public:
 
 	Q_INVOKABLE QString getCapacityDisplayText(Victron::VenusOS::Enums::Units_Type unit,
 		qreal capacity_m3,
-		qreal remaining_m3,
-		int precision) const;
+		qreal remaining_m3) const;
 
 	Q_INVOKABLE qreal convert(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit, Victron::VenusOS::Enums::Units_Type toUnit) const;
 
