@@ -9,7 +9,7 @@ import Victron.VenusOS
 Device {
 	id: input
 
-	readonly property real temperature_celsius: _temperature.value === undefined ? NaN : _temperature.value
+	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
 	readonly property real humidity: _humidity.value === undefined ? NaN : _humidity.value
 	readonly property int temperatureType: _temperatureType.value === undefined ? -1 : _temperatureType.value
 

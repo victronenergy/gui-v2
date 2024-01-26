@@ -156,7 +156,7 @@ OverviewWidget {
 			rightMargin: Theme.geometry_overviewPage_widget_battery_temperature_rightMargin
 		}
 
-		value: Global.systemSettings.convertFromCelsius(batteryData.temperature_celsius)
+		value: Global.systemSettings.convertFromCelsius(batteryData.temperature)
 		unit: Global.systemSettings.temperatureUnit
 		font.pixelSize: Theme.font_size_body2
 		alignment: Qt.AlignRight
