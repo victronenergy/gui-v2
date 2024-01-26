@@ -410,6 +410,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SystemBattery.qml
     data/common/SystemData.qml
     data/common/Tank.qml
+    data/common/TankModel.qml
     data/common/UnsupportedDevice.qml
     data/common/VeBusDevice.qml
 
