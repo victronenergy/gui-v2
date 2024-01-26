@@ -56,7 +56,7 @@ QtObject {
 			property real voltage
 			property real current
 			property real power: (isNaN(voltage) || isNaN(current) || voltage === 0) ? NaN : voltage * current
-			property real temperature_celsius
+			property real temperature
 
 			property Timer _dummyValues: Timer {
 				running: Global.mockDataSimulator.timersActive
@@ -65,7 +65,7 @@ QtObject {
 				triggeredOnStart: true
 
 				onTriggered: {
-					let properties = ["voltage", "current", "temperature_celsius"]
+					let properties = ["voltage", "current", "temperature"]
 					for (let propIndex = 0; propIndex < properties.length; ++propIndex) {
 						let propTotal = 0
 						const propName = properties[propIndex]
@@ -74,7 +74,7 @@ QtObject {
 							value = 20 + Math.random() * 10
 						} else if (propName === "current") {
 							value = 1 + Math.random()
-						} else if (propName === "temperature_celsius") {
+						} else if (propName === "temperature") {
 							value = 50 + Math.random() * 50
 						} else {
 							console.warn("Unhandled property", propName)

@@ -127,7 +127,7 @@ Page {
 			url = "/pages/settings/devicelist/temperature/PageTemperatureSensor.qml"
 			params = { "bindPrefix" : device.serviceUid }
 
-			const inputTemp = Global.systemSettings.convertFromCelsius(device.temperature_celsius)
+			const inputTemp = Global.systemSettings.convertFromCelsius(device.temperature)
 			if (isNaN(device.humidity)) {
 				summary = [
 					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp),

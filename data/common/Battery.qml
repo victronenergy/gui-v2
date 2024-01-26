@@ -13,7 +13,7 @@ Device {
 	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
 	readonly property real power: _power.value === undefined ? NaN : _power.value
 	readonly property real current: _current.value === undefined ? NaN : _current.value
-	readonly property real temperature_celsius: _temperature.value === undefined ? NaN : _temperature.value
+	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
 	readonly property real timeToGo: _timeToGo.value === undefined ? NaN : _timeToGo.value  // in seconds
 	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(battery) : ""
 	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
