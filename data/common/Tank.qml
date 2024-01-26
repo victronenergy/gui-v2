@@ -17,6 +17,8 @@ Device {
 	property real remaining: NaN
 	property real capacity: NaN
 
+	property DeviceModel _tankModel
+
 	readonly property VeQuickItem _status: VeQuickItem {
 		uid: serviceUid + "/Status"
 	}
@@ -43,28 +45,21 @@ Device {
 	}
 
 	valid: deviceInstance >= 0 && type >= 0
-	onValidChanged: {
-		if (!!Global.tanks) {
-			if (valid) {
-				if (!_invalidationTimer.running) {
-					Global.tanks.addTank(tank)
-				} else {
-					_remaining._update()
-					_capacity._update()
-				}
-			} else {
-				_invalidationTimer.start()
-			}
-		}
-	}
+	onValidChanged: tank._updateModel()
+	onTypeChanged: tank._updateModel()
 
-	// If the tank remains invalid for more than 5 seconds, remove it.
-	property Timer _invalidationTimer: Timer {
-		interval: 5000
-		onTriggered: {
-			if (!tank.isValid && tank.type >= 0) {
-				Global.tanks.removeTank(tank)
+	function _updateModel() {
+		if (valid) {
+			if (_tankModel && _tankModel.type !== type) {
+				_tankModel.removeDevice(tank.serviceUid)
 			}
+			_tankModel = Global.tanks.tankModel(type)
+			_tankModel.addDevice(tank)
+		} else {
+			if (_tankModel) {
+				_tankModel.removeDevice(tank.serviceUid)
+			}
+			_tankModel = null
 		}
 	}
 

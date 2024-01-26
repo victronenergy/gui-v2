@@ -28,76 +28,52 @@ QtObject {
 		return root.tankModel(tankType)
 	})
 
-	readonly property DeviceModel fuelTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_Fuel
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel fuelTanks: TankModel {
+		type: VenusOS.Tank_Type_Fuel
 		modelId: "tanks-Fuel"
 	}
-	readonly property DeviceModel freshWaterTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_FreshWater
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel freshWaterTanks: TankModel {
+		type: VenusOS.Tank_Type_FreshWater
 		modelId: "tanks-FreshWater"
 	}
-	readonly property DeviceModel wasteWaterTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_WasteWater
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel wasteWaterTanks: TankModel {
+		type: VenusOS.Tank_Type_WasteWater
 		modelId: "tanks-WasteWater"
 	}
-	readonly property DeviceModel liveWellTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_LiveWell
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel liveWellTanks: TankModel {
+		type: VenusOS.Tank_Type_LiveWell
 		modelId: "tanks-LiveWell"
 	}
-	readonly property DeviceModel oilTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_Oil
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel oilTanks: TankModel {
+		type: VenusOS.Tank_Type_Oil
 		modelId: "tanks-Oil"
 	}
-	readonly property DeviceModel blackWaterTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_BlackWater
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel blackWaterTanks: TankModel {
+		type: VenusOS.Tank_Type_BlackWater
 		modelId: "tanks-BlackWater"
 	}
-	readonly property DeviceModel gasolineTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_Gasoline
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel gasolineTanks: TankModel {
+		type: VenusOS.Tank_Type_Gasoline
 		modelId: "tanks-Gasoline"
 	}
-	readonly property DeviceModel dieselTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_Diesel
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel dieselTanks: TankModel {
+		type: VenusOS.Tank_Type_Diesel
 		modelId: "tanks-Diesel"
 	}
-	readonly property DeviceModel lpgTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_LPG
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel lpgTanks: TankModel {
+		type: VenusOS.Tank_Type_LPG
 		modelId: "tanks-LPG"
 	}
-	readonly property DeviceModel lngTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_LNG
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel lngTanks: TankModel {
+		type: VenusOS.Tank_Type_LNG
 		modelId: "tanks-LNG"
 	}
-	readonly property DeviceModel hydraulicOilTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_HydraulicOil
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel hydraulicOilTanks: TankModel {
+		type: VenusOS.Tank_Type_HydraulicOil
 		modelId: "tanks-HydraulicOil"
 	}
-	readonly property DeviceModel rawWaterTanks: DeviceModel {
-		readonly property int type: VenusOS.Tank_Type_RawWater
-		property real totalCapacity
-		property real totalRemaining
+	readonly property TankModel rawWaterTanks: TankModel {
+		type: VenusOS.Tank_Type_RawWater
 		modelId: "tanks-RawWater"
 	}
 
@@ -191,30 +167,6 @@ QtObject {
 		}
 		model.totalRemaining = totalRemaining
 		model.totalCapacity = totalCapacity
-	}
-
-	function addTank(tank) {
-		const model = tankModel(tank.type)
-		if (!model) {
-			console.warn("addTank(): Unknown tank type", tank.type)
-			return false
-		}
-		model.addDevice(tank)
-		updateTankModelTotals(tank.type)
-		return true
-	}
-
-	function removeTank(tank) {
-		const model = tankModel(tank.type)
-		if (!model) {
-			console.warn("removeTank(): Unknown tank type", tank.type)
-			return
-		}
-		if (model.removeDevice(tank.serviceUid)) {
-			updateTankModelTotals(tank.type)
-			return true
-		}
-		return false
 	}
 
 	function reset() {
