@@ -14,7 +14,7 @@ QtObject {
 		property real voltage: 55.1534
 		property real power: voltage * current
 		property real current: 14.243
-		property real temperature_celsius: 28.33
+		property real temperature: 28.33
 		property real timeToGo: (24 * 60 * 60) + 190 * 60 // 1d 3h 10m
 		readonly property string icon: Global.batteries.batteryIcon(dummyBattery)
 		readonly property int mode: Global.batteries.batteryMode(dummyBattery)
