@@ -11,6 +11,7 @@ QtObject {
 	id: root
 
 	property int mockDeviceCount
+	property var _createdObjects: []
 
 	function populate() {
 		// Occasionally simulate what it looks like with only the battery
@@ -117,19 +118,12 @@ QtObject {
 				root.addTank(tankProperties)
 			} else {
 				// remove a tank
-				for (let i = 0; i < Global.tanks.tankTypes.length; ++i) {
-					model = Global.tanks.tankModel(Global.tanks.tankTypes[i])
-					if (model.count > 0) {
-						const index = Math.floor(Math.random(model.count))
-						Global.tanks.removeTank(model.deviceAt(index))
-						break
-					}
-				}
+				const index = Math.floor(Math.random() * _createdObjects.length)
+				_createdObjects[index]._deviceInstance.setValue(-1) // causes tank to remove itself from model
+				_createdObjects.splice(index, 1)
 			}
 		}
 	}
-
-	property var _createdObjects: []
 
 	Component.onCompleted: {
 		populate()
