@@ -6,6 +6,17 @@
     "color_humidity2": "#97B974",
     "color_humidity3": "#DBB78E",
 
+    "color_dimBlue": "#BBCEE0",
+    "color_dimOrange": "#F0D5B4",
+    "color_dimRed": "#F0C3BF",
+    "color_dimGreen": "#9BCB7E",
+    "color_dimGray": "#7B7A76",
+    "color_darkBlue": "#C0D4E6",
+    "color_darkOrange": "#F7DBB9",
+    "color_darkRed": "#F8CAC6",
+    "color_darkGreen": "#D1E6C2",
+    "color_darkGray": "#504F4B",
+
     "color_ok": "color_blue",
     "color_darkOk": "color_darkBlue",
     "color_warning": "color_orange",
@@ -89,14 +100,12 @@
     "color_overviewPage_widget_sideGauge_highlight": "color_ok",
     "color_overviewPage_widget_solar_graph_bar": "color_ok",
     "color_overviewPage_widget_battery_background": "color_lightBlue",
-    "color_overviewPage_widget_battery_bubble_background": "#7394bd",
-    "color_overviewPage_widget_battery_bubble_border": "#FFFFFF",
 
     "color_briefPage_background": "color_gray9",
     "color_briefPage_battery_value_text_color": "color_gray2",
     "color_briefPage_battery_unit_text_color": "color_gray3",
     "color_briefPage_circularGauge_shine": "#BBFFFFFF",
-    "color_briefPage_sidePanel_forecast_separator": "color_darkGray2",
+    "color_briefPage_sidePanel_forecast_separator": "color_darkWhite",
     "color_briefPage_sidePanel_loadGraph_dotColor": "color_gray3",
 
     "color_levelsPage_tankIcon": "color_gray2",

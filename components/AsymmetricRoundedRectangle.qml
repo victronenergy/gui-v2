@@ -18,34 +18,7 @@ Item {
 	property alias border: roundedRect.border
 
 	// we have to draw each element separately as any of the colors may have transparency...
-
-	Rectangle {
-		id: topBorderRect
-		anchors {
-			fill: parent
-			bottomMargin: root.height - root.border.width
-			leftMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left ? root.radius : 0
-			rightMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right ? root.radius : 0
-		}
-
-		visible: root.roundedSide !== VenusOS.AsymmetricRoundedRectangle_RoundedSide_All
-
-		color: roundedRect.border.color
-	}
-
-	Rectangle {
-		id: bottomBorderRect
-		anchors {
-			fill: parent
-			topMargin: root.height - root.border.width
-			leftMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left ? root.radius : 0
-			rightMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right ? root.radius : 0
-		}
-
-		visible: root.roundedSide !== VenusOS.AsymmetricRoundedRectangle_RoundedSide_All
-
-		color: roundedRect.border.color
-	}
+	// the order of declaration matters, because any of the colors may be fully opaque...
 
 	Rectangle {
 		id: backgroundRect
@@ -89,5 +62,33 @@ Item {
 			border.width: root.flat ? 0 : Theme.geometry_button_border_width
 			border.color: Theme.color_ok
 		}
+	}
+
+	Rectangle {
+		id: topBorderRect
+		anchors {
+			fill: parent
+			bottomMargin: root.height - root.border.width
+			leftMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left ? root.radius : 0
+			rightMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right ? root.radius : 0
+		}
+
+		visible: root.roundedSide !== VenusOS.AsymmetricRoundedRectangle_RoundedSide_All
+
+		color: roundedRect.border.color
+	}
+
+	Rectangle {
+		id: bottomBorderRect
+		anchors {
+			fill: parent
+			topMargin: root.height - root.border.width
+			leftMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left ? root.radius : 0
+			rightMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right ? root.radius : 0
+		}
+
+		visible: root.roundedSide !== VenusOS.AsymmetricRoundedRectangle_RoundedSide_All
+
+		color: roundedRect.border.color
 	}
 }
