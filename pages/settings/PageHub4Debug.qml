@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property string batteryService: Global.batteries.firstObject ? Global.batteries.firstObject.serviceUid : null
+	readonly property string batteryService: Global.batteries.model.firstObject ? Global.batteries.model.firstObject.serviceUid : null
 
 	//% "Grid Setpoint"
 	title: qsTrId("settings_ess_debug_grid_setpoint")
