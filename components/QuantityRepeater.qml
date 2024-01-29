@@ -12,7 +12,7 @@ Repeater {
 	property int minimumDelegateWidth
 
 	delegate: QuantityLabel {
-		anchors.verticalCenter: parent.verticalCenter
+		anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
 		width: Math.max(implicitWidth, minimumDelegateWidth)
 		font.pixelSize: Theme.font_size_body2
 		value: isNaN(modelData.value) ? NaN : modelData.value
