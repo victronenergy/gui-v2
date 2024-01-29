@@ -44,8 +44,8 @@ Item {
 			height: width
 			x: arcX !== undefined ? arcX : (gauge.alignment & Qt.AlignRight ? (gauge.width - 2*radius) : 0)
 			y: arcY !== undefined ? arcY : ((gauge.height - height) / 2)
-			progressColor: Theme.statusColorValue(status)
-			remainderColor: Theme.statusColorValue(status, true)
+			progressColor: Theme.color_darkOk,Theme.statusColorValue(status)
+			remainderColor: Theme.color_darkOk,Theme.statusColorValue(status, true)
 		}
 	}
 }

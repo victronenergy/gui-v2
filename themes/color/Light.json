@@ -6,6 +6,20 @@
     "color_humidity2": "#97B974",
     "color_humidity3": "#DBB78E",
 
+    "color_dimBlue": "#BBCEE0",
+    "color_dimOrange": "#F0D5B4",
+    "color_dimRed": "#F0C3BF",
+    "color_dimGreen": "#9BCB7E",
+    "color_dimWhite": "#969591",
+    "color_dimGray": "#7B7A76",
+    "color_darkBlue": "#C0D4E6",
+    "color_darkOrange": "#F7DBB9",
+    "color_darkRed": "#F8CAC6",
+    "color_darkGreen": "#D1E6C2",
+    "color_darkWhite": "#64635F",
+    "color_darkGray": "#504F4B",
+    "color_brightGray": "#B3B1AD",
+
     "color_ok": "color_blue",
     "color_darkOk": "color_darkBlue",
     "color_warning": "color_orange",
@@ -14,7 +28,7 @@
     "color_darkCritical": "color_darkRed",
 
     "color_font_primary": "color_gray2",
-    "color_font_secondary": "color_dimGray2",
+    "color_font_secondary": "color_dimGray",
     "color_font_disabled": "color_gray4",
 
     "color_background_primary": "color_white",
@@ -93,7 +107,7 @@
     "color_briefPage_battery_value_text_color": "color_gray2",
     "color_briefPage_battery_unit_text_color": "color_gray3",
     "color_briefPage_circularGauge_shine": "#BBFFFFFF",
-    "color_briefPage_sidePanel_forecast_separator": "color_darkGray2",
+    "color_briefPage_sidePanel_forecast_separator": "color_darkWhite",
     "color_briefPage_sidePanel_loadGraph_dotColor": "color_gray3",
     "color_briefPage_sidePanel_loadGraph_warning_strokeColor": "color_orange",
     "color_briefPage_sidePanel_loadGraph_warning_gradientColor1": "#F0952E",
@@ -122,6 +136,6 @@
 
     "color_notificationsPage_text_color": "color_gray4",
 
-    "color_settings_gsmModem_signalStrength_inactive": "color_darkGray2",
+    "color_settings_gsmModem_signalStrength_inactive": "color_darkWhite",
     "color_settings_gsmModem_signalStrength_active": "color_gray2"
 }
