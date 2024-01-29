@@ -41,8 +41,8 @@ Item {
 			radius: width/2
 			startAngle: 0
 			endAngle: 359 // "Note that a single PathArc cannot be used to specify a circle."
-			progressColor: Theme.statusColorValue(gauges.status)
-			remainderColor: Theme.statusColorValue(gauges.status, true)
+			progressColor: Theme.color_darkOk,Theme.statusColorValue(gauges.status)
+			remainderColor: Theme.color_darkOk,Theme.statusColorValue(gauges.status, true)
 			strokeWidth: Theme.geometry_circularSingularGauge_strokeWidth
 		}
 	}

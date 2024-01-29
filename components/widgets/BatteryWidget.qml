@@ -150,7 +150,6 @@ OverviewWidget {
 				font.pixelSize: Theme.font_size_body1
 				width: parent.width
 				elide: Text.ElideRight
-				color: Theme.color_font_secondary
 			}
 			Label {
 				text: Global.batteries.timeToGoText(Global.batteries.system, VenusOS.Battery_TimeToGo_ShortFormat)
@@ -174,6 +173,7 @@ OverviewWidget {
 			value: batteryData.voltage
 			unit: VenusOS.Units_Volt_DC
 			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
+			unitColor: Theme.color_font_secondary
 			alignment: Qt.AlignLeft
 		},
 

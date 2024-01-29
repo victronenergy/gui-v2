@@ -52,8 +52,8 @@ Item {
 						startAngle: 0
 						endAngle: 270
 						value: loader.value
-						progressColor: Theme.statusColorValue(loader.gaugeStatus)
-						remainderColor: Theme.statusColorValue(loader.gaugeStatus, true)
+						progressColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus)
+						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
 						shineAnimationEnabled: Global.batteries.system.mode === VenusOS.Battery_Mode_Charging
@@ -67,8 +67,8 @@ Item {
 						startAngle: 0
 						endAngle: 270
 						value: loader.value
-						progressColor: Theme.statusColorValue(loader.gaugeStatus)
-						remainderColor: Theme.statusColorValue(loader.gaugeStatus, true)
+						progressColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus)
+						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
 					}

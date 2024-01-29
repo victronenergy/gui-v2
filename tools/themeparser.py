@@ -32,32 +32,33 @@ namespace VenusOS {
 
 class ThemeSingleton : public Theme
 {
-    Q_OBJECT
-    QML_NAMED_ELEMENT(Theme)
-    QML_SINGLETON
+	Q_OBJECT
+	QML_NAMED_ELEMENT(Theme)
+	QML_SINGLETON
 
-    // property declarations
+	// property declarations
 %s
 
 public:
-    ThemeSingleton(QObject *parent = nullptr)
-        : Theme(parent)
-    {
-    }
+	ThemeSingleton(QObject *parent = nullptr)
+		: Theme(parent)
+	{
+	}
 
-    // property accessors
+	// property accessors
 %s
 
-    Q_INVOKABLE QColor statusColorValue(StatusLevel level, bool darkColor = false) const
-    {
-        const QVariant c = (level == Ok && darkColor) ? color_darkOk()
-            : (level == Ok) ? color_ok()
-            : (level == Warning && darkColor) ? color_darkWarning()
-            : (level == Warning) ? color_warning()
-            : (level == Critical && darkColor) ? color_darkCritical()
-            : color_critical();
-        return c.typeId() == QMetaType::QColor ? c.value<QColor>() : QColor(c.value<QString>());
-    }
+	// NOTE: won't capture, so client needs to manually capture the color change signal.
+	Q_INVOKABLE QColor statusColorValue(StatusLevel level, bool darkColor = false) const
+	{
+		const QVariant c = (level == Ok && darkColor) ? color_darkOk()
+			: (level == Ok) ? color_ok()
+			: (level == Warning && darkColor) ? color_darkWarning()
+			: (level == Warning) ? color_warning()
+			: (level == Critical && darkColor) ? color_darkCritical()
+			: color_critical();
+		return c.typeId() == QMetaType::QColor ? c.value<QColor>() : QColor(c.value<QString>());
+	}
 };
 
 
