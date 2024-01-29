@@ -20,7 +20,7 @@ ListItem {
 
 			delegate: Label {
 				id: label
-				anchors.verticalCenter: parent.verticalCenter
+				anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
 				width: root.itemWidth
 					   || (separator.visible ? implicitWidth + root.content.spacing : implicitWidth)
 				font.pixelSize: Theme.font_size_body2
