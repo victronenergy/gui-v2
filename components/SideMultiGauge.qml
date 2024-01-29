@@ -63,8 +63,8 @@ Item {
 					// If showing multiple gauges on the right edge, shift them towards the left
 					- (gaugeRepeater.count === 1 || root.horizontalAlignment === Qt.AlignLeft ? 0 : (strokeWidth * gaugeRepeater.count))
 				valueType: root.valueType
-				progressColor: feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-				remainderColor: feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
+				progressColor: Theme.color_darkOk,feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+				remainderColor: Theme.color_darkOk,feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
 				direction: root.direction
 				startAngle: root.startAngle
 				endAngle: root.endAngle
