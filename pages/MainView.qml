@@ -66,6 +66,7 @@ Item {
 				if (pageStack.busy) {
 					return
 				}
+
 				let objectOrUrl = typeof(obj) === "string" ? Global.appUrl(obj) : obj
 
 				// When pushing a settings sub-page, ensure nav bar is visible.
@@ -73,7 +74,19 @@ Item {
 					properties = properties || {}
 					properties.height = pageStack.height - navBar.height
 				}
-				pageStack.push(objectOrUrl, properties)
+
+				if (typeof(obj) === "string") {
+					// pre-construct the object to make sure there are no errors
+					// to avoid messing up the page stack state.
+					let checkComponent = Qt.createComponent(objectOrUrl)
+					if (checkComponent.status !== Component.Ready) {
+						console.warn("Aborted attempt to push page with errors: " + obj + ": " + checkComponent.errorString())
+						return
+					}
+					objectOrUrl = checkComponent.createObject(null, properties)
+				}
+
+				pageStack.push(objectOrUrl, properties) // at this point, MUST be an object, not URL.
 			}
 
 			function onPagePopRequested(toPage) {
@@ -81,7 +94,10 @@ Item {
 						|| (!!pageStack.currentItem.tryPop && !pageStack.currentItem.tryPop())) {
 					return
 				}
-				pageStack.pop(toPage)
+				let obj = pageStack.pop(toPage)
+				if (!Theme.objectHasQObjectParent(obj)) {
+					obj.destroy()
+				}
 			}
 		}
 	}

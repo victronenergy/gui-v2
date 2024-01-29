@@ -92,6 +92,8 @@ public:
 	Q_INVOKABLE qreal characterMinusDeltaWidth(const QFont &font) const;
 	Q_INVOKABLE qreal charactersOneHundredWidth(const QFont &font) const;
 
+	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const { return obj && obj->parent(); }
+
 Q_SIGNALS:
 	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
 	void screenSizeChanged_parameterless();
