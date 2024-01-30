@@ -281,11 +281,6 @@ function uidEndsWithANumber(uid) {
 	return( !Number.isNaN(parseInt(array[array.length - 1])))
 }
 
-function normalizedSource(s) {
-	// strip '/dbus' prefix
-	return s.startsWith("dbus/") ? s.substr(5) : s
-}
-
 function simplifiedNetworkType(t) {
 	if (!t) {
 		return ""
