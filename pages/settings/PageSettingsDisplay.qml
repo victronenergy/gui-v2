@@ -147,6 +147,7 @@ Page {
 				onOptionClicked: function(index) {
 					if (index === 0) {
 						Global.venusPlatform.reboot()
+						Global.dialogLayer.showRebootDialog()
 					}
 				}
 

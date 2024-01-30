@@ -135,7 +135,10 @@ Page {
 				//% "Reboot now"
 				button.text: qsTrId("settings_reboot_now")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: Global.venusPlatform.reboot()
+				onClicked: {
+					Global.venusPlatform.reboot()
+					Global.dialogLayer.showRebootDialog()
+				}
 			}
 
 			ListSwitch {

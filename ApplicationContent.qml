@@ -50,7 +50,7 @@ Item {
 	}
 
 	// We rely on the implicit Z ordering, so dialog/notification layers be declared after the other views.
-	Item {
+	DialogLayer {
 		id: dialogLayer
 
 		anchors.fill: parent
