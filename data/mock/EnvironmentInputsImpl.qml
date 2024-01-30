@@ -36,6 +36,9 @@ Item {
 
 	property Component inputComponent: Component {
 		EnvironmentInput {
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
+
 			onTemperatureTypeChanged: {
 				if (temperatureType >= 0 && !_customName.value) {
 					_customName.setValue(Global.environmentInputs.temperatureTypeToText(temperatureType) + " temperature sensor")
