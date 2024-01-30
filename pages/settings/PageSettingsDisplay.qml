@@ -138,6 +138,23 @@ Page {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
 				}
 			}
+
+			ListRadioButtonGroup {
+				text: "Onscreen UI (GX Touch & Ekrano)"
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RunningVersion"
+				writeAccessLevel: VenusOS.User_AccessType_User
+
+				onOptionClicked: function(index) {
+					if (index === 0) {
+						Global.venusPlatform.reboot()
+					}
+				}
+
+				optionModel: [
+					{ display: "Standard version", value: 1 },
+					{ display: "Gui-v2 (beta) version", value: 2 },
+				]
+			}
 		}
 	}
 }
