@@ -52,6 +52,9 @@ QtObject {
 		Tank {
 			id: tank
 
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
+
 			onTypeChanged: {
 				if (type >= 0) {
 					_customName.setValue(Gauges.tankProperties(type).name)
