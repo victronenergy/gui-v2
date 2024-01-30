@@ -6,6 +6,7 @@
 #ifndef LANGUAGE_H
 #define LANGUAGE_H
 
+#include <QUrl>
 #include <QLocale>
 #include <QObject>
 #include <QString>
@@ -32,7 +33,7 @@ class LanguageModel : public QAbstractListModel
 
 public:
 	enum Role {
-		FontFileNameRole = Qt::UserRole,
+		FontFileUrlRole = Qt::UserRole,
 		FontFamilyRole
 	};
 
@@ -61,7 +62,7 @@ private:
 	struct LanguageData {
 		QString name;
 		QString code;
-		QString fontFileName;
+		QUrl fontFileUrl;
 		QString fontFamily;
 		QLocale::Language language;
 	};
@@ -80,7 +81,7 @@ class Language : public QObject
 	QML_ELEMENT
 	QML_SINGLETON
 	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged FINAL)
-	Q_PROPERTY(QString fontFileName READ fontFileName NOTIFY fontFileNameChanged FINAL)
+	Q_PROPERTY(QUrl fontFileUrl READ fontFileUrl NOTIFY fontFileUrlChanged FINAL)
 	Q_PROPERTY(QString fontFamily READ fontFamily NOTIFY fontFamilyChanged FINAL)
 
 public:
@@ -100,19 +101,19 @@ public:
 	QLocale::Language getCurrentLanguage() const;
 	void setCurrentLanguage(QLocale::Language language);
 
-	QString fontFileName() const;
+	QUrl fontFileUrl() const;
 	QString fontFamily() const;
 
 Q_SIGNALS:
 	void currentLanguageChanged();
-	void fontFileNameChanged();
+	void fontFileUrlChanged();
 	void fontFamilyChanged();
 
 private:
 	explicit Language(QQmlEngine* engine);
 	bool installTranslatorForLanguage(QLocale::Language language);
 
-	QString m_fontFileName;
+	QUrl m_fontFileUrl;
 	QString m_fontFamily;
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
 	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
