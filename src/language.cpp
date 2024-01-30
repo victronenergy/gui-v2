@@ -11,6 +11,7 @@
 #include <QQmlContext>
 #include <QTranslator>
 #include <QFontDatabase>
+#include <QFile>
 
 using namespace Victron::VenusOS;
 
@@ -20,24 +21,52 @@ static const QString defaultFontFileName = QStringLiteral(":/fonts/MuseoSans-500
 
 QString fontFileNameForLanguage(QLocale::Language language)
 {
+	QString fileName;
+
 	switch (language) {
+	case QLocale::Arabic:
+	{
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+		// On wasm, the root dir contains a symlink to the font file.
+		fileName = QStringLiteral("/DejaVuSans.ttf");
+#elif not defined(VENUS_DESKTOP_BUILD)
+		// On device, look for the system-installed font.
+		fileName = QStringLiteral("/usr/lib/fonts/DejaVuSans.ttf");
+#endif
+		break;
+	}
+	case QLocale::Chinese:
+	{
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+		// On wasm, the root dir contains a symlink to the font file.
+		fileName = QStringLiteral("/DroidSansFallback.ttf");
+#elif not defined(VENUS_DESKTOP_BUILD)
+		// On device, look for the system-installed font.
+		fileName = QStringLiteral("/usr/lib/fonts/DroidSansFallback.ttf");
+#endif
+		break;
+	}
 	case QLocale::Thai:
 		return QStringLiteral(":/fonts/NotoSansThai.ttf");
 	default:
-		return defaultFontFileName;
+		break;
 	}
+
+	return !fileName.isEmpty() && QFile::exists(fileName) ? fileName : defaultFontFileName;
 }
 
-QString qmlPath(const QString &resourcePath)
+QUrl filePathToUrl(const QString &path)
 {
-	if (resourcePath.isEmpty() || !resourcePath.startsWith(':')) {
-		return resourcePath;
+	if (path.isEmpty()) {
+		return QUrl();
 	}
 
-	// In C++, resource paths start with ":/". In QML, resource paths start with "qrc:/". Be sure to
-	// use the correct form, else resources cannot be loaded.
-	static const QString prefix = QStringLiteral("qrc");
-	return resourcePath.startsWith(prefix) ? resourcePath : prefix + resourcePath;
+	if (path.startsWith(':')) {
+		// Convert to QML-friendly "qrc:/" resource path.
+		return QUrl(QStringLiteral("qrc%1").arg(path));
+	}
+
+	return QUrl::fromLocalFile(path);
 }
 
 QString fontFamilyForLanguage(QLocale::Language language)
@@ -72,7 +101,7 @@ LanguageModel::LanguageModel(QObject *parent)
 	: QAbstractListModel(parent)
 {
 	m_roleNames[Qt::DisplayRole] = "display";
-	m_roleNames[FontFileNameRole] = "fontFileName";
+	m_roleNames[FontFileUrlRole] = "fontFileUrl";
 	m_roleNames[FontFamilyRole] = "fontFamily";
 
 	addLanguage("English", "en", QLocale::English);
@@ -90,7 +119,7 @@ LanguageModel::LanguageModel(QObject *parent)
 	addLanguage("ไทย", "th", QLocale::Thai);
 	addLanguage("Türkçe", "tr", QLocale::Turkish);
 	addLanguage("Українська", "uk", QLocale::Ukrainian);
-//    addLanguage("中文", "zh", QLocale::Chinese);    // TODO add support for Chinese fonts
+	addLanguage("中文", "zh", QLocale::Chinese);
 	addLanguage("العربية", "ar", QLocale::Arabic);
 }
 
@@ -157,8 +186,8 @@ QVariant LanguageModel::data(const QModelIndex &index, int role) const
 	switch (role) {
 	case Qt::DisplayRole:
 		return data.name;
-	case FontFileNameRole:
-		return data.fontFileName;
+	case FontFileUrlRole:
+		return data.fontFileUrl;
 	case FontFamilyRole:
 		return data.fontFamily;
 	default:
@@ -168,7 +197,7 @@ QVariant LanguageModel::data(const QModelIndex &index, int role) const
 
 void LanguageModel::addLanguage(const QString &name, const QString &code, const QLocale::Language &language)
 {
-	m_languages.append({name, code, qmlPath(fontFileNameForLanguage(language)), fontFamilyForLanguage(language), language });
+	m_languages.append({name, code, filePathToUrl(fontFileNameForLanguage(language)), fontFamilyForLanguage(language), language });
 }
 
 QHash<int, QByteArray> LanguageModel::roleNames() const
@@ -216,14 +245,14 @@ void Language::setCurrentLanguage(QLocale::Language language)
 {
 	if (language != m_currentLanguage && installTranslatorForLanguage(language)) {
 		emit currentLanguageChanged();
-		emit fontFileNameChanged();
+		emit fontFileUrlChanged();
 		emit fontFamilyChanged();
 	}
 }
 
-QString Language::fontFileName() const
+QUrl Language::fontFileUrl() const
 {
-	return m_fontFileName;
+	return m_fontFileUrl;
 }
 
 QString Language::fontFamily() const
@@ -281,7 +310,7 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 	}
 
 	m_currentLanguage = language;
-	m_fontFileName = qmlPath(fontFileNameForLanguage(language));
+	m_fontFileUrl = filePathToUrl(fontFileNameForLanguage(language));
 	m_fontFamily = fontFamilyForLanguage(language);
 
 	return true;
