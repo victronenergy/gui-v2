@@ -40,11 +40,11 @@ Page {
 							model: analogModel
 							delegate: ListSwitch {
 								text: switchLabel.value || ""
-								dataItem.uid: Utils.normalizedSource(model.uid) + "/Function"
+								dataItem.uid: model.uid + "/Function"
 
 								VeQuickItem {
 									id: switchLabel
-									uid: Utils.normalizedSource(model.uid) + "/Label"
+									uid: model.uid + "/Label"
 								}
 							}
 						}
@@ -71,7 +71,7 @@ Page {
 								//: %1 = number of the digital input
 								//% "Digital input %1"
 								text: qsTrId("settings_io_digital_input").arg(model.uid.split('/').pop())
-								dataItem.uid: Utils.normalizedSource(model.uid) + "/Type"
+								dataItem.uid: model.uid + "/Type"
 								optionModel: [
 									{ display: CommonWords.disabled, value: VenusOS.DigitalInput_Disabled },
 									//% "Pulse meter"

@@ -75,7 +75,7 @@ Page {
 							}
 							delegate: ListTextItem {
 								text: model.item.itemParent().id
-								dataItem.uid: Utils.normalizedSource(model.item.uid)
+								dataItem.uid: model.item.uid
 							}
 						}
 					}
@@ -97,7 +97,7 @@ Page {
 
 					delegate: ListSwitch {
 						text: model.item.value
-						dataItem.uid: Utils.normalizedSource(model.item.itemParent().uid) + "/Enabled"
+						dataItem.uid: model.item.itemParent().uid + "/Enabled"
 					}
 				}
 			}
