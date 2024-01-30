@@ -417,6 +417,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/BriefMonitorPanel.qml
     pages/BriefPage.qml
     pages/ControlCardsPage.qml
+    pages/DialogLayer.qml
     pages/EnvironmentTab.qml
     pages/LevelsPage.qml
     pages/MainView.qml
