@@ -278,6 +278,7 @@ Item {
 		Loader {
 			y: root.height + 4 // avoid fractional scaling smearing a row of pixels into visible area
 			asynchronous: true
+			visible: false
 			source: url
 
 			onStatusChanged: {
