@@ -62,11 +62,21 @@ QtObject {
 
 			function initTrackers(trackerCount) {
 				Global.mockDataSimulator.setMockValue(serviceUid + "/NrOfTrackers", trackerCount)
+				let trackerIndex = 0
+
+				// Sometimes trackers have names. If available, they should show up in the UI.
+				if (trackerCount > 1 && Math.random() < 0.5) {
+					const charCode = 'A'.charCodeAt(0)
+					for (trackerIndex = 0; trackerIndex < trackerCount; ++trackerIndex) {
+						const nextTrackerName = "Charger %1 - Tracker %2".arg(root.mockDeviceCount).arg(String.fromCharCode(charCode + trackerIndex))
+						Global.mockDataSimulator.setMockValue(serviceUid + "/Pv/" + trackerIndex + "/Name", nextTrackerName)
+					}
+				}
+
 				randomizeMeasurments()
 
 				// Initialize history values
 				Global.mockDataSimulator.setMockValue(serviceUid + "/History/Overall/DaysAvailable", 30)
-				let trackerIndex = 0
 				for (let day = 0; day < 31; ++day) {
 					let dayTotals = []
 					const dayOverallHistoryUid = serviceUid + "/History/Daily/" + day

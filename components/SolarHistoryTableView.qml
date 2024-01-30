@@ -113,7 +113,7 @@ Column {
 		]
 		valueForModelIndex: function(trackerIndex, column) {
 			if (column === 0) {
-				return Global.solarChargers.trackerName(trackerIndex)
+				return root.solarHistory.trackerName(trackerIndex)
 			} else if (column === 1) {
 				return root._trackerHistoryTotal("yieldKwh", trackerIndex)
 			} else if (column === 2) {

@@ -212,11 +212,13 @@ Page {
 					id: solarHistoryComponent
 
 					SolarHistory {
+						id: solarHistory
+
 						bindPrefix: root.bindPrefix
 						deviceName: solarDevice.name
 						trackerCount: numberOfTrackers.value || 0
 
-						readonly property var solarDevice: Device {
+						readonly property Device solarDevice: Device {
 							serviceUid: root.bindPrefix
 						}
 					}
