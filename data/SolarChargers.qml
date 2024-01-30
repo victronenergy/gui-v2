@@ -26,10 +26,13 @@ QtObject {
 		model.clear()
 	}
 
-	function trackerName(trackerIndex) {
-		//: %1 = tracker number
-		//% "Tracker #%1"
-		return qsTrId("solarchargers_tracker_name").arg(trackerIndex + 1)
+	function defaultTrackerName(trackerIndex, totalTrackerCount, deviceName) {
+		if (totalTrackerCount === 1) {
+			return deviceName
+		}
+		//: Name for a tracker of a solar charger. %1 = solar charger name, %2 = the number of this tracker for the charger
+		//% "%1 (#%2)"
+		return qsTrId("solarcharger_tracker_name").arg(deviceName).arg(trackerIndex + 1)
 	}
 
 	function chargerStateToText(state) {
