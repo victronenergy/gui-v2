@@ -59,11 +59,7 @@ Page {
 						delegate: SolarDeviceNavigationItem {
 							readonly property SolarDailyHistory historyToday: solarCharger.dailyHistory(0, model.index)
 
-							text: solarCharger.trackers.count > 1
-									//: Name for a tracker of a solar charger. %1 = solar charger name, %2 = the number of this tracker for the charger
-									//% "%1 (#%2)"
-								  ? qsTrId("solardevices_tracker_name").arg(solarCharger.name).arg(model.index + 1)
-								  : solarCharger.name
+							text: solarCharger.trackerName(model.index)
 							energy: historyToday ? historyToday.yieldKwh : NaN
 							current: modelData.current
 							power: modelData.power

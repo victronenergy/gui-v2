@@ -23,6 +23,19 @@ QtObject {
 		return _historyObjects.dailyHistory(day, trackerIndex)
 	}
 
+	function trackerName(trackerIndex) {
+		const nameObject = _trackerNames.objectAt(trackerIndex)
+		const name = nameObject ? nameObject.value || "" : ""
+		return name ? name : Global.solarChargers.defaultTrackerName(trackerIndex, trackerCount, deviceName)
+	}
+
+	readonly property Instantiator _trackerNames: Instantiator {
+		model: root.trackerCount
+		delegate: VeQuickItem {
+			uid: root.bindPrefix + "/Pv/" + model.index + "/Name"
+		}
+	}
+
 	readonly property Instantiator _historyObjects: Instantiator {
 		function dailyHistory(day, trackerIndex) {
 			let overallDailyHistory = objectAt(day)
