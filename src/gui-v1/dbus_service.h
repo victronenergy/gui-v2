@@ -101,7 +101,7 @@ class DBusTankService : public DBusService
 public:
 	DBusTankService(VeQItem *serviceItem, QObject *parent = 0);
 
-	void updateDescription(QVariant);
+	void updateDescription(QVariant) override;
 
 private:
 	static const std::vector<QString> &knownFluidTypes();
