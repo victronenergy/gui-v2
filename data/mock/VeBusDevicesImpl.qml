@@ -69,7 +69,6 @@ QtObject {
 
 			property int state
 			property int mode: -1
-			property bool modeAdjustable
 			property int numberOfPhases: 3
 
 			property ListModel inputSettings: ListModel {}
@@ -87,7 +86,7 @@ QtObject {
 			property int acActiveInput: 1
 			property int acActiveInputPower: 555
 			property int bmsMode: 0
-			property bool modeIsAdjustable: true
+			property bool modeAdjustable: true
 			property bool isMulti: false
 
 			property var acOutput: {
