@@ -43,7 +43,7 @@ Loader {
 		target: root.item
 
 		function onClicked() {
-			if (!root.veBusDevice.modeIsAdjustable) {
+			if (!root.veBusDevice.modeAdjustable) {
 				if (dmc.isValid)
 					Global.showToastNotification(VenusOS.Notification_Info, root.noAdjustableByDmc,
 												 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
