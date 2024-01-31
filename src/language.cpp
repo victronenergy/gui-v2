@@ -17,42 +17,40 @@ using namespace Victron::VenusOS;
 
 namespace {
 
-static const QString defaultFontFileName = QStringLiteral(":/fonts/MuseoSans-500.otf");
+QString defaultFontFileName()
+{
+	return QStringLiteral(":/fonts/MuseoSans-500.otf");
+}
 
 QString fontFileNameForLanguage(QLocale::Language language)
 {
 	QString fileName;
 
-	switch (language) {
-	case QLocale::Arabic:
-	{
-#if defined(VENUS_WEBASSEMBLY_BUILD)
-		// On wasm, the root dir contains a symlink to the font file.
-		fileName = QStringLiteral("/DejaVuSans.ttf");
-#elif not defined(VENUS_DESKTOP_BUILD)
-		// On device, look for the system-installed font.
-		fileName = QStringLiteral("/usr/lib/fonts/DejaVuSans.ttf");
-#endif
-		break;
-	}
-	case QLocale::Chinese:
-	{
-#if defined(VENUS_WEBASSEMBLY_BUILD)
-		// On wasm, the root dir contains a symlink to the font file.
-		fileName = QStringLiteral("/DroidSansFallback.ttf");
-#elif not defined(VENUS_DESKTOP_BUILD)
-		// On device, look for the system-installed font.
-		fileName = QStringLiteral("/usr/lib/fonts/DroidSansFallback.ttf");
-#endif
-		break;
-	}
-	case QLocale::Thai:
-		return QStringLiteral(":/fonts/NotoSansThai.ttf");
-	default:
-		break;
-	}
+	static const QHash<QLocale::Language, QString> fontFileNames = {
+		{ QLocale::Arabic, QStringLiteral("DejaVuSans.ttf") },
+		{ QLocale::Chinese, QStringLiteral("DroidSansFallback.ttf") },
+		{ QLocale::Thai, QStringLiteral("NotoSansThai.ttf") },
+	};
 
-	return !fileName.isEmpty() && QFile::exists(fileName) ? fileName : defaultFontFileName;
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	// On wasm, the root dir contains symlinks to the required font files.
+	fileName = fontFileNames.value(language);
+	if (!fileName.isEmpty()) {
+		fileName = "/" + fileName;
+	}
+#elif not defined(VENUS_DESKTOP_BUILD)
+	// On device, look for the system-installed font files.
+	fileName = fontFileNames.value(language);
+	if (!fileName.isEmpty()) {
+		fileName = "/usr/lib/fonts/" + fileName;
+	}
+#else
+	// On other platforms, use the default font for all languages.
+	Q_UNUSED(language)
+	fileName = defaultFontFileName();
+#endif
+
+	return !fileName.isEmpty() && QFile::exists(fileName) ? fileName : defaultFontFileName();
 }
 
 QUrl filePathToUrl(const QString &path)
@@ -81,10 +79,10 @@ QString fontFamilyForLanguage(QLocale::Language language)
 	int fontId = fontIds.value(fontFileName, -1);
 	if (fontId < 0) {
 		qWarning() << "Fall back to default font, cannot load" << fontFileName << "for locale" << QLocale(language).name();
-		if (!fontIds.contains(defaultFontFileName)) {
-			fontIds.insert(fontFileName, QFontDatabase::addApplicationFont(defaultFontFileName));
+		if (!fontIds.contains(defaultFontFileName())) {
+			fontIds.insert(fontFileName, QFontDatabase::addApplicationFont(defaultFontFileName()));
 		}
-		fontId = fontIds.value(defaultFontFileName, -1);
+		fontId = fontIds.value(defaultFontFileName(), -1);
 		if (fontId < 0) {
 			qWarning() << "Unable to fall back to default font!";
 			return QString();
