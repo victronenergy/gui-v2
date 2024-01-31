@@ -45,8 +45,8 @@ Device {
 	}
 
 	valid: deviceInstance >= 0 && type >= 0
-	onValidChanged: tank._updateModel()
-	onTypeChanged: tank._updateModel()
+	onValidChanged: Qt.callLater(tank._updateModel)
+	onTypeChanged: Qt.callLater(tank._updateModel)
 
 	function _updateModel() {
 		if (valid) {
