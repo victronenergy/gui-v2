@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Templates as T
 
 Item {
 	id: root
@@ -35,7 +34,6 @@ Item {
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
 			footer.enabled: BackendConnection.type !== BackendConnection.DBusSource
 			footer.opacity: footer.enabled ? 1 : 0
-			closePolicy: T.Popup.NoAutoClose
 		}
 	}
 }
