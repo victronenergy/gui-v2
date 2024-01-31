@@ -7,7 +7,8 @@ ifeq ($(EXTRAFONTS),)
 endif
 
 FILES=index.html qtloader.js qtloader-controller.js venus-gui-v2.js \
-	  venus-gui-v2.wasm.sha256 venus-gui-v2.wasm.gz victronenergy.svg
+	  venus-gui-v2.wasm.sha256 venus-gui-v2.wasm.gz victronenergy.svg \
+	  venus-gui-v2_*.qm
 
 all: venus-gui-v2.wasm.sha256 venus-gui-v2.wasm.gz
 
