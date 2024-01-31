@@ -12,7 +12,7 @@ ListItem {
 	property alias textModel: repeater.model
 	property alias minimumDelegateWidth: repeater.minimumDelegateWidth
 
-	content.spacing: Theme.geometry_listItem_content_spacing * 2
+	content.spacing: 0
 	content.children: [
 		QuantityRepeater {
 			id: repeater
