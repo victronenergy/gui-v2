@@ -43,6 +43,7 @@ T.Dialog {
 	verticalPadding: 0
 	horizontalPadding: 0
 	modal: true
+	closePolicy: T.Popup.NoAutoClose
 
 	enter: Transition {
 		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation_page_fade_duration }
