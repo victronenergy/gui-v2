@@ -103,7 +103,7 @@ jobs:
         sed -i "s%^var \(createQtAppInstance\)%window.\1%" venus-gui-v2.js
         cd -
         mkdir -p artifacts/wasm
-        mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
+        mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/venus-gui-v2_*.qm build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
         mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
         cp .github/patches/qtloader-controller.js artifacts/wasm/
         cp .github/patches/Makefile artifacts/wasm/
