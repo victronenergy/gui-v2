@@ -57,7 +57,6 @@ Page {
 			ListRadioButtonGroup {
 				//% "Display mode"
 				text: qsTrId("settings_display_color_mode")
-
 				optionModel: [
 					//: Dark colors mode
 					//% "Dark"
@@ -65,21 +64,11 @@ Page {
 					//: Light colors mode
 					//% "Light"
 					{ display: qsTrId("settings_display_light_mode") },
-					//: Auto colors mode: will automatically switch to Dark or Light mode
-					//% "Auto"
-					{ display: qsTrId("settings_display_auto_mode") },
 				]
-				// TODO detect auto mode
-				currentIndex: Theme.colorScheme === Theme.Dark ? 0 : 1
+				currentIndex: Theme.colorScheme === Theme.Light ? 1 : 0
 
 				onOptionClicked: function(index) {
-					if (index === 0) {
-						Global.systemSettings.colorScheme.setValue(Theme.Dark)
-					} else if (index === 1) {
-						Global.systemSettings.colorScheme.setValue(Theme.Light)
-					} else {
-						// TODO set auto mode
-					}
+					Global.systemSettings.colorScheme.setValue(index === 1 ? Theme.Light : Theme.Dark)
 				}
 			}
 
