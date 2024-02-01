@@ -3,7 +3,7 @@ ifeq ($(PREFIX),)
 endif
 
 ifeq ($(EXTRAFONTS),)
-	EXTRAFONTS=/usr/lib/fonts/DroidSansFallback.ttf /usr/lib/fonts/NotoSansThai.ttf
+	EXTRAFONTS=/usr/lib/fonts/DroidSansFallback.ttf /usr/lib/fonts/NotoSansThai.ttf /usr/lib/fonts/DejaVuSans.ttf
 endif
 
 FILES=index.html qtloader.js qtloader-controller.js venus-gui-v2.js \
