@@ -127,6 +127,63 @@ Page {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
 				}
 			}
+
+			ListRadioButtonGroup {
+				id: runningVersion
+
+				property ModalWarningDialog _restartDialog
+
+				//% "Onscreen UI (GX Touch & Ekrano)"
+				text: qsTrId("settings_display_onscreen_ui")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RunningVersion"
+				writeAccessLevel: VenusOS.User_AccessType_User
+				updateOnClick: false
+				optionModel: [
+					//% "Standard version"
+					{ display: qsTrId("settings_display_standard_version"), value: 1 },
+					//% "Gui-v2 (beta) version"
+					{ display: qsTrId("settings_display_beta_version"), value: 2 },
+				]
+
+				onOptionClicked: function(index) {
+					// When the /RunningVersion changes, venus-platform quits the currently-running
+					// app and starts the selected version. Note: on device, user may not see the
+					// dialog at all, depending on how quickly the app exits.
+					if (!_restartDialog) {
+						_restartDialog = restartDialogComponent.createObject(Global.dialogLayer)
+					}
+					_restartDialog.versionName = optionModel[index].display
+					_restartDialog.open()
+					dataItem.setValue(optionModel[index].value)
+				}
+
+				Component {
+					id: restartDialogComponent
+
+					ModalWarningDialog {
+						property string versionName
+
+						title: BackendConnection.type === BackendConnection.DBusSource
+							  //% "Restarting application..."
+							? qsTrId("settings_restarting_app")
+							  //% "Application restarted"
+							: qsTrId("settings_app_restarted")
+						description: BackendConnection.type === BackendConnection.DBusSource
+							  //: %1 = the UI version that the system is switching to
+							  //% "Onscreen UI will switch to %1."
+							? qsTrId("settings_switch_ui").arg(versionName)
+							   //: %1 = the UI version that the system has switched to.
+							  //% "Onscreen UI has switched to %1."
+							: qsTrId("settings_has_switched_ui").arg(versionName)
+
+						dialogDoneOptions: BackendConnection.type === BackendConnection.DBusSource
+								? VenusOS.ModalDialog_DoneOptions_NoOptions
+								: VenusOS.ModalDialog_DoneOptions_OkOnly
+						footer.enabled: dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_NoOptions
+						footer.opacity: footer.enabled ? 1 : 0
+					}
+				}
+			}
 		}
 	}
 }
