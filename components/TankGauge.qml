@@ -16,8 +16,8 @@ VerticalGauge {
 
 	readonly property int _gaugeStatus: Gauges.getValueStatus(value * 100, gaugeValueType)
 
-	backgroundColor: Theme.statusColorValue(root._gaugeStatus, true)
-	foregroundColor: Theme.statusColorValue(root._gaugeStatus)
+	backgroundColor: Theme.color_darkOk,Theme.statusColorValue(root._gaugeStatus, true)
+	foregroundColor: Theme.color_darkOk,Theme.statusColorValue(root._gaugeStatus)
 	radius: Theme.geometry_levelsPage_tankGauge_radius
 
 	Rectangle {
