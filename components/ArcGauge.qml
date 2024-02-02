@@ -38,14 +38,14 @@ Item {
 		ProgressArc {
 			id: arc
 
-			readonly property int status: Gauges.getValueStatus(gauge.value, gauge.valueType)
+			readonly property int valueStatus: Gauges.getValueStatus(gauge.value, gauge.valueType)
 
 			width: radius*2
 			height: width
 			x: arcX !== undefined ? arcX : (gauge.alignment & Qt.AlignRight ? (gauge.width - 2*radius) : 0)
 			y: arcY !== undefined ? arcY : ((gauge.height - height) / 2)
-			progressColor: Theme.statusColorValue(status)
-			remainderColor: Theme.statusColorValue(status, true)
+			progressColor: Theme.statusColorValue(valueStatus)
+			remainderColor: Theme.statusColorValue(valueStatus, true)
 		}
 	}
 }
