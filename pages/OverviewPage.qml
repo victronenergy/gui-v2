@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property var _leftWidgets: []
-	readonly property var _centerWidgets: [veBusDeviceWidget, batteryWidget]
+	readonly property var _centerWidgets: [inverterChargerWidget, batteryWidget]
 	property var _rightWidgets: []
 
 	// Preferred order for the input widgets on the left hand side
@@ -335,7 +335,7 @@ Page {
 			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
 
-		if (connectorWidget.endWidget === veBusDeviceWidget) {
+		if (connectorWidget.endWidget === inverterChargerWidget) {
 			// For AC inputs, positive power means energy is flowing towards inverter/charger,
 			// and negative power means energy is flowing towards the input.
 			return power > Theme.geometry_overviewPage_connector_animationPowerThreshold
@@ -379,7 +379,7 @@ Page {
 				parent: root
 				startWidget: acInputWidget
 				startLocation: VenusOS.WidgetConnector_Location_Right
-				endWidget: veBusDeviceWidget
+				endWidget: inverterChargerWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
@@ -541,7 +541,7 @@ Page {
 				parent: root
 				startWidget: solarWidget
 				startLocation: VenusOS.WidgetConnector_Location_Right
-				endWidget: veBusDeviceWidget
+				endWidget: inverterChargerWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				visible: defaultVisible && Global.pvInverters.model.count > 0
 				expanded: root._expandLayout
@@ -579,8 +579,8 @@ Page {
 	}
 
 	// the two central widgets are always laid out, even if they are not visible
-	VeBusDeviceWidget {
-		id: veBusDeviceWidget
+	InverterChargerWidget {
+		id: inverterChargerWidget
 
 		size: VenusOS.OverviewWidget_Size_L
 		expanded: root._expandLayout
@@ -607,7 +607,7 @@ Page {
 	WidgetConnector {
 		id: inverterToAcLoadsConnector
 
-		startWidget: veBusDeviceWidget
+		startWidget: inverterChargerWidget
 		startLocation: VenusOS.WidgetConnector_Location_Right
 		endWidget: acLoadsWidget
 		endLocation: VenusOS.WidgetConnector_Location_Left
@@ -627,7 +627,7 @@ Page {
 	WidgetConnector {
 		id: inverterToBatteryConnector
 
-		startWidget: veBusDeviceWidget
+		startWidget: inverterChargerWidget
 		startLocation: VenusOS.WidgetConnector_Location_Bottom
 		endWidget: batteryWidget
 		endLocation: VenusOS.WidgetConnector_Location_Top

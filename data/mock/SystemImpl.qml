@@ -82,11 +82,12 @@ QtObject {
 	}
 
 	property Connections veBusServiceSetup: Connections {
-		target: Global.veBusDevices.model
+		target: Global.inverterChargers.veBusDevices
 		function onFirstObjectChanged() {
-			if (Global.veBusDevices.model.firstObject) {
+			const device = Global.inverterChargers.veBusDevices.firstObject
+			if (device) {
 				// Write uid like "com.victronenergy.vebus.tty0", without "mock/" prefix
-				const uid = Global.veBusDevices.model.firstObject.serviceUid.substring(BackendConnection.uidPrefix().length)
+				const uid = device.serviceUid.substring(BackendConnection.uidPrefix().length)
 				root.veBusService.setValue(uid)
 			} else {
 				root.veBusService.setValue("")

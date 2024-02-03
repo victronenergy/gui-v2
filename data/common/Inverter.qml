@@ -26,14 +26,4 @@ Device {
 	readonly property VeQuickItem _phase: VeQuickItem {
 		uid: inverter.serviceUid + "/Settings/System/AcPhase"
 	}
-
-	onValidChanged: {
-		if (!!Global.inverters) {
-			if (valid) {
-				Global.inverters.model.addDevice(inverter)
-			} else {
-				Global.inverters.model.removeDevice(inverter)
-			}
-		}
-	}
 }

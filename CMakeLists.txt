@@ -338,9 +338,9 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/DcInputWidget.qml
     components/widgets/DcLoadsWidget.qml
     components/widgets/EvcsWidget.qml
+    components/widgets/InverterChargerWidget.qml
     components/widgets/OverviewWidget.qml
     components/widgets/SolarYieldWidget.qml
-    components/widgets/VeBusDeviceWidget.qml
     components/widgets/WidgetConnector.qml
     components/widgets/WidgetConnectorAnchor.qml
     components/widgets/WidgetConnectorPath.qml
@@ -359,7 +359,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/Ess.qml
     data/EvChargers.qml
     data/Generators.qml
-    data/Inverters.qml
+    data/InverterChargers.qml
     data/MeteoDevices.qml
     data/MotorDrives.qml
     data/MultiRsDevices.qml
@@ -374,7 +374,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/SystemSettings.qml
     data/Tanks.qml
     data/UnsupportedDevices.qml
-    data/VeBusDevices.qml
     data/VenusPlatform.qml
 
     data/common/AcData.qml
@@ -396,6 +395,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/EvCharger.qml
     data/common/Generator.qml
     data/common/Inverter.qml
+    data/common/InverterCharger.qml
     data/common/MeteoDevice.qml
     data/common/MotorDrive.qml
     data/common/MultiRsDevice.qml
@@ -412,7 +412,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/Tank.qml
     data/common/TankModel.qml
     data/common/UnsupportedDevice.qml
-    data/common/VeBusDevice.qml
 
     pages/BriefMonitorPanel.qml
     pages/BriefPage.qml
@@ -430,7 +429,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/controlcards/ESSCard.qml
     pages/controlcards/GeneratorCard.qml
     pages/controlcards/SwitchesCard.qml
-    pages/controlcards/VeBusDeviceCard.qml
+    pages/controlcards/InverterChargerCard.qml
     pages/evcs/EvChargerListPage.qml
     pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
@@ -716,7 +715,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/EssImpl.qml
     data/dbus/EvChargersImpl.qml
     data/dbus/GeneratorsImpl.qml
-    data/dbus/InvertersImpl.qml
     data/dbus/MeteoDevicesImpl.qml
     data/dbus/MotorDrivesImpl.qml
     data/dbus/MultiRsDevicesImpl.qml
@@ -729,7 +727,7 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/SystemSettingsImpl.qml
     data/dbus/TanksImpl.qml
     data/dbus/UnsupportedDevicesImpl.qml
-    data/dbus/VeBusDevicesImpl.qml
+    data/dbus/InverterChargersImpl.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Dbus_QML_MODULE_SOURCES})
@@ -767,7 +765,6 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/EssImpl.qml
     data/mock/EvChargersImpl.qml
     data/mock/GeneratorsImpl.qml
-    data/mock/InvertersImpl.qml
     data/mock/MeteoDevicesImpl.qml
     data/mock/MockDevice.qml
     data/mock/MockDataManager.qml
@@ -782,7 +779,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/SystemSettingsImpl.qml
     data/mock/TanksImpl.qml
     data/mock/UnsupportedDevicesImpl.qml
-    data/mock/VeBusDevicesImpl.qml
+    data/mock/InverterChargersImpl.qml
     data/mock/config/BriefAndOverviewPageConfig.qml
     data/mock/config/LevelsPageConfig.qml
     data/mock/config/MockDataSimulator.qml
@@ -851,7 +848,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/EssImpl.qml
     data/mqtt/EvChargersImpl.qml
     data/mqtt/GeneratorsImpl.qml
-    data/mqtt/InvertersImpl.qml
     data/mqtt/MeteoDevicesImpl.qml
     data/mqtt/MotorDrivesImpl.qml
     data/mqtt/MqttDataManager.qml
@@ -865,7 +861,7 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/SystemSettingsImpl.qml
     data/mqtt/TanksImpl.qml
     data/mqtt/UnsupportedDevicesImpl.qml
-    data/mqtt/VeBusDevicesImpl.qml
+    data/mqtt/InverterChargersImpl.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Mqtt_QML_MODULE_SOURCES} )

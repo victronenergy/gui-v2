@@ -60,14 +60,14 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Mode"
 				visible: defaultVisible && root.isInverterCharger
 				optionModel: [
-					{ display: CommonWords.off, value: 4 },
+					{ display: CommonWords.off, value: VenusOS.InverterCharger_Mode_Off },
 					//: Inverter 'Charger Only' mode
 					//% "Charger Only"
-					{ display: qsTrId("inverter_charger_only"), value: 1 },
+					{ display: qsTrId("inverter_charger_only"), value: VenusOS.InverterCharger_Mode_ChargerOnly },
 					//: Inverter 'Inverter Only' mode
 					//% "Inverter Only"
-					{ display: qsTrId("inverter_inverter_only"), value: 2 },
-					{ display: CommonWords.on, value: 3 },
+					{ display: qsTrId("inverter_inverter_only"), value: VenusOS.InverterCharger_Mode_InverterOnly },
+					{ display: CommonWords.on, value: VenusOS.InverterCharger_Mode_On },
 				]
 			}
 
