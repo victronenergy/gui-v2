@@ -21,8 +21,8 @@ QtObject {
 
 		// Max AC power is calculated using com.victronenergy.vebus/Ac/Out/NominalInverterPower.
 		// Assume NominalInverterPower = 80% of max AC load power.
-		readonly property real maximumAcPower: (!Global.veBusDevices || isNaN(Global.veBusDevices.totalNominalInverterPower))
-				? NaN : Global.veBusDevices.totalNominalInverterPower * (100 / 80)
+		readonly property real maximumAcPower: (!Global.inverterChargers || isNaN(Global.inverterChargers.totalNominalInverterPower))
+				? NaN : Global.inverterChargers.totalNominalInverterPower * (100 / 80)
 	}
 
 	property QtObject solar: QtObject {

@@ -245,13 +245,13 @@ public:
 	};
 	Q_ENUM(VeBusDevice_ProductType)
 
-	enum VeBusDevice_Mode {
-		VeBusDevice_Mode_ChargerOnly = 1,
-		VeBusDevice_Mode_InverterOnly,
-		VeBusDevice_Mode_On,
-		VeBusDevice_Mode_Off
+	enum InverterCharger_Mode {
+		InverterCharger_Mode_ChargerOnly = 1,
+		InverterCharger_Mode_InverterOnly,
+		InverterCharger_Mode_On,
+		InverterCharger_Mode_Off
 	};
-	Q_ENUM(VeBusDevice_Mode)
+	Q_ENUM(InverterCharger_Mode)
 
 	enum VeBusDevice_ChargeState {
 		VeBusDevice_ChargeState_InitializingCharger,

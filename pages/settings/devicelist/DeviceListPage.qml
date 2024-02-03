@@ -40,7 +40,7 @@ Page {
 		case "multi":
 			if (sourceModel === Global.batteries.model
 					|| sourceModel === Global.solarChargers.model
-					|| sourceModel === Global.veBusDevices.model) {
+					|| sourceModel === Global.inverterChargers.veBusDevices) {
 				return null
 			}
 			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
@@ -213,14 +213,15 @@ Page {
 				Global.digitalInputs.model,
 				Global.environmentInputs.model,
 				Global.evChargers.model,
-				Global.inverters.model,
+				Global.inverterChargers.veBusDevices,
+				Global.inverterChargers.multiDevices,
+				Global.inverterChargers.inverterDevices,
 				Global.meteoDevices.model,
 				Global.motorDrives.model,
 				Global.multiRsDevices.model,
 				Global.pulseMeters.model,
 				Global.pvInverters.model,
 				Global.solarChargers.model,
-				Global.veBusDevices.model,
 				Global.unsupportedDevices.model,
 
 				// AC input models

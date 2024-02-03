@@ -13,7 +13,7 @@ OverviewWidget {
 	title: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
-	enabled: Global.veBusDevices.model.count > 0
+	enabled: !!Global.inverterChargers.first
 	quantityLabel.visible: false
 	extraContentChildren: [
 		Label {
@@ -30,6 +30,14 @@ OverviewWidget {
 	]
 	MouseArea {
 		anchors.fill: parent
-		onClicked: Global.pageManager.pushPage("/pages/vebusdevice/OverviewVeBusDevicePage.qml")
+		onClicked: {
+			const device = Global.inverterChargers.first
+			if (device.serviceUid.indexOf('inverter') >= 0) {
+				// TODO push a version of OverviewVeBusDevicePage that is appropriate for an Inverter.
+				Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageInverter.qml", { "bindPrefix": device.serviceUid })
+			} else {
+				Global.pageManager.pushPage("/pages/vebusdevice/OverviewVeBusDevicePage.qml", { "inverterCharger": device })
+			}
+		}
 	}
 }

@@ -67,7 +67,7 @@ Loader {
 		ListButton {
 			text: CommonWords.mode
 			button.width: Theme.geometry_vebusDeviceListPage_currentLimit_button_width
-			button.text: Global.veBusDevices.modeToText(root.veBusDevice.mode)
+			button.text: Global.inverterChargers.inverterChargerModeToText(root.veBusDevice.mode)
 			writeAccessLevel: VenusOS.User_AccessType_User
 		}
 	}

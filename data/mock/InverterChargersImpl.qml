@@ -15,24 +15,30 @@ QtObject {
 			productId: 9816,
 			name: "Quattro 48/5000/70-2x100",
 			ampOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ].map(function(v) { return { value: v } }),   // EU amp options
-			mode: VenusOS.VeBusDevice_Mode_On,
+			mode: VenusOS.InverterCharger_Mode_On,
 			modeAdjustable: true,
 		}
 		let quattroDevice = veBusDeviceComponent.createObject(root, quattro)
 		addInputSettings(quattroDevice, [VenusOS.AcInputs_InputSource_Generator, VenusOS.AcInputs_InputSource_Shore])
-		Global.veBusDevices.addVeBusDevice(quattroDevice)
+		Global.inverterChargers.veBusDevices.addDevice(quattroDevice)
 
 		let multiPlus = {
 			state: VenusOS.System_State_AbsorptionCharging,
 			productId: 9728,
 			name: "MultiPlus 12/3000/120-5",
 			ampOptions: [ 10.0, 15.0, 20.0, 30.0, 50.0, 100.0 ].map(function(v) { return { value: v } }),   // US amp options
-			mode: VenusOS.VeBusDevice_Mode_InverterOnly,
+			mode: VenusOS.InverterCharger_Mode_InverterOnly,
 			modeAdjustable: true,
 		}
 		let multiPlusDevice = veBusDeviceComponent.createObject(root, multiPlus)
 		addInputSettings(multiPlusDevice, [VenusOS.AcInputs_InputSource_Grid])
-		Global.veBusDevices.addVeBusDevice(multiPlusDevice)
+		Global.inverterChargers.veBusDevices.addDevice(multiPlusDevice)
+
+		const inverterCount = (Math.random() * 3) + 1
+		for (let i = 0; i < inverterCount; ++i) {
+			const inverterObj = inverterComponent.createObject(root)
+			Global.inverterChargers.inverterDevices.addDevice(inverterObj)
+		}
 	}
 
 	function addInputSettings(veBusDevice, inputTypes) {
@@ -432,6 +438,33 @@ QtObject {
 				_l1Frequency.setValue(49.9)
 				_currentLimitIsAdjustable.setValue(1)
 			}
+		}
+	}
+
+	property Component inverterComponent: Component {
+		MockDevice {
+			property var currentPhase: acOutL2
+			property var acOutL1: QtObject {
+				property real voltage: Math.random() * 10
+				property real current: Math.random() * 10
+				property real power: Math.random() * 10
+				property int powerUnit: VenusOS.Units_Watt
+			}
+			property var acOutL2: QtObject {
+				property real voltage: Math.random() * 10
+				property real current: Math.random() * 10
+				property real power: Math.random() * 10
+				property int powerUnit: VenusOS.Units_Watt
+			}
+			property var acOutL3: QtObject {
+				property real voltage: Math.random() * 10
+				property real current: Math.random() * 10
+				property real power: Math.random() * 10
+				property int powerUnit: VenusOS.Units_Watt
+			}
+
+			serviceUid: "mock/com.victronenergy.inverter.ttyUSB" + deviceInstance
+			name: "Inverter" + deviceInstance
 		}
 	}
 
