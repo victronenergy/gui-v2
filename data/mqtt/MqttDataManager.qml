@@ -20,7 +20,7 @@ QtObject {
 	property var ess: EssImpl { }
 	property var evChargers: EvChargersImpl { }
 	property var generators: GeneratorsImpl { }
-	property var inverters: InvertersImpl { }
+	property var inverterChargers: InverterChargersImpl {}
 	property var meteoDevices: MeteoDevicesImpl { }
 	property var motorDrives: MotorDrivesImpl { }
 	property var multiRsDevices: MultiRsDevicesImpl { }
@@ -33,5 +33,4 @@ QtObject {
 	property var systemSettings: SystemSettingsImpl { }
 	property var tanks: TanksImpl { }
 	property var unsupportedDevices: UnsupportedDevicesImpl { }
-	property var veBusDevices: VeBusDevicesImpl {}
 }

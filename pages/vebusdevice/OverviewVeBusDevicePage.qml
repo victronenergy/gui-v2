@@ -9,89 +9,89 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var veBusDevice: Global.veBusDevices.model.firstObject
+	property var inverterCharger
 
 	readonly property var acActiveInPhases: [ acActiveIn1, acActiveIn2, acActiveIn3 ]
 
 	VeQuickItem {
 		id: _acOutputPower
 
-		uid: veBusDevice.serviceUid + "/Ac/Out/P"
+		uid: inverterCharger.serviceUid + "/Ac/Out/P"
 	}
 
 	VeQuickItem {
 		id: _acActiveInputPower
 
-		uid: veBusDevice.serviceUid + "/Ac/ActiveIn/P"
+		uid: inverterCharger.serviceUid + "/Ac/ActiveIn/P"
 	}
 
 	VeQuickItem {
 		id: bmsMode
 
-		uid: veBusDevice.serviceUid + "/Devices/Bms/Version"
+		uid: inverterCharger.serviceUid + "/Devices/Bms/Version"
 	}
 
 	VeQuickItem {
 		id: dmc
 
-		uid: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
+		uid: root.inverterCharger.serviceUid + "/Devices/Dmc/Version"
 	}
 
 	VeQuickItem {
 		id: _numberOfPhases
 
-		uid: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
+		uid: inverterCharger.serviceUid + "/Ac/NumberOfPhases"
 	}
 
 	VeQuickItem {
 		id: dcCurrent
 
-		uid: veBusDevice.serviceUid + "/Dc/0/Current"
+		uid: inverterCharger.serviceUid + "/Dc/0/Current"
 	}
 
 	VeQuickItem {
 		id: dcPower
 
-		uid: veBusDevice.serviceUid + "/Dc/0/Power"
+		uid: inverterCharger.serviceUid + "/Dc/0/Power"
 	}
 
 	VeQuickItem {
 		id: dcVoltage
 
-		uid: veBusDevice.serviceUid + "/Dc/0/Voltage"
+		uid: inverterCharger.serviceUid + "/Dc/0/Voltage"
 	}
 
 	VeQuickItem {
 		id: stateOfCharge
 
-		uid: veBusDevice.serviceUid + "/Soc"
+		uid: inverterCharger.serviceUid + "/Soc"
 	}
 
 	AcOutput {
 		id: acOutput
 
-		serviceUid: veBusDevice.serviceUid
+		serviceUid: inverterCharger.serviceUid
 	}
 
 	AcPhase{
 		id: acActiveIn1
 
-		serviceUid: veBusDevice.serviceUid + "/Ac/ActiveIn/L1"
+		serviceUid: inverterCharger.serviceUid + "/Ac/ActiveIn/L1"
 	}
 
 	AcPhase{
 		id: acActiveIn2
 
-		serviceUid: veBusDevice.serviceUid + "/Ac/ActiveIn/L2"
+		serviceUid: inverterCharger.serviceUid + "/Ac/ActiveIn/L2"
 	}
 
 	AcPhase{
 		id: acActiveIn3
 
-		serviceUid: veBusDevice.serviceUid + "/Ac/ActiveIn/L3"
+		serviceUid: inverterCharger.serviceUid + "/Ac/ActiveIn/L3"
 	}
 
-	title: root.veBusDevice.description
+	title: root.inverterCharger.description
 
 
 	GradientListView {
@@ -103,12 +103,12 @@ Page {
 			}
 
 			VeBusDeviceModeButton {
-				veBusDevice: root.veBusDevice
+				veBusDevice: root.inverterCharger
 			}
 
 			AcInputsCurrentLimits {
-				model: root.veBusDevice.inputSettings
-				veBusDevice: root.veBusDevice
+				model: root.inverterCharger.inputSettings
+				veBusDevice: root.inverterCharger
 				width: parent ? parent.width : 0
 			}
 
@@ -122,7 +122,7 @@ Page {
 			}
 
 			VeBusDeviceActiveAcInputTextItem {
-				veBusDevice: root.veBusDevice
+				veBusDevice: root.inverterCharger
 			}
 
 			ListTextGroup {
@@ -145,7 +145,7 @@ Page {
 			ListNavigationItem {
 				//% "Product page"
 				text: qsTrId("vebus_device_product_page")
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { veBusDevice: root.veBusDevice })
+				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { veBusDevice: root.inverterCharger })
 			}
 		}
 	}
@@ -154,10 +154,10 @@ Page {
 		id: modeDialogComponent
 
 		InverterChargerModeDialog {
-			isMulti: root.veBusDevice.isMulti
+			isMulti: root.inverterCharger.isMulti
 			onAccepted: {
-				if (root.veBusDevice.mode !== mode) {
-					root.veBusDevice.setMode(mode)
+				if (root.inverterCharger.mode !== mode) {
+					root.inverterCharger.setMode(mode)
 				}
 			}
 		}

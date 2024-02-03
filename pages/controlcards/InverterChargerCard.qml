@@ -9,7 +9,7 @@ import Victron.VenusOS
 ControlCard {
 	id: root
 
-	property var veBusDevice
+	property var inverterCharger
 
 	property var _currentLimitDialog
 
@@ -58,14 +58,14 @@ ControlCard {
 
 	// VE.Bus state is a subset of the aggregated system state, so use the same systemStateToText()
 	// function to get a text description.
-	status.text: Global.system.systemStateToText(veBusDevice.state)
+	status.text: Global.system.systemStateToText(inverterCharger.state)
 
 	Component {
 		id: currentLimitDialogComponent
 
 		CurrentLimitDialog {
-			presets: root.veBusDevice.ampOptions
-			onAccepted: root.veBusDevice.setCurrentLimit(inputIndex, value)
+			presets: root.inverterCharger.ampOptions
+			onAccepted: root.inverterCharger.setCurrentLimit(inputIndex, value)
 		}
 	}
 
@@ -82,7 +82,7 @@ ControlCard {
 			Repeater {
 				id: currentLimitRepeater
 
-				model: root.veBusDevice.inputSettings
+				model: root.inverterCharger.inputSettings
 
 				delegate: ButtonControlValue {
 					visible: label.text !== ""
@@ -101,13 +101,13 @@ ControlCard {
 		}
 
 		VeBusDeviceModeButton {
-			veBusDevice: root.veBusDevice
+			veBusDevice: root.inverterCharger
 			sourceComponent: Component {
 				ButtonControlValue {
 					width: parent.width
 					button.width: Math.max(button.implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
 					label.text: CommonWords.mode
-					button.text: Global.veBusDevices.modeToText(root.veBusDevice.mode)
+					button.text: Global.inverterChargers.inverterChargerModeToText(root.inverterCharger.mode)
 					separator.visible: false
 				}
 			}

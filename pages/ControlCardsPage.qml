@@ -66,13 +66,24 @@ Page {
 				spacing: Theme.geometry_controlCardsPage_spacing
 
 				Repeater {
-					model: Global.veBusDevices.model
+					model: Global.inverterChargers.veBusDevices
 
-					VeBusDeviceCard {
+					InverterChargerCard {
 						width: root.cardWidth
-						veBusDevice: model.device
+						inverterCharger: model.device
 					}
 				}
+
+				Repeater {
+					model: Global.inverterChargers.multiDevices
+
+					InverterChargerCard {
+						width: root.cardWidth
+						inverterCharger: model.device
+					}
+				}
+
+				// TODO show inverter cards
 			}
 
 			Loader {

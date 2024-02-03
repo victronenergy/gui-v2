@@ -34,7 +34,7 @@ QtObject {
 	property var ess
 	property var evChargers
 	property var generators
-	property var inverters
+	property var inverterChargers
 	property var meteoDevices
 	property var motorDrives
 	property var multiRsDevices
@@ -46,7 +46,6 @@ QtObject {
 	property var system
 	property var systemSettings
 	property var tanks
-	property var veBusDevices
 	property var unsupportedDevices
 
 	property var venusPlatform
@@ -111,7 +110,7 @@ QtObject {
 		ess = null
 		evChargers = null
 		generators = null
-		inverters = null
+		inverterChargers = null
 		meteoDevices = null
 		motorDrives = null
 		multiRsDevices = null
@@ -124,7 +123,6 @@ QtObject {
 		systemSettings = null
 		tanks = null
 		unsupportedDevices = null
-		veBusDevices = null
 		venusPlatform = null
 
 		// The last thing we do is set the splash screen visible.

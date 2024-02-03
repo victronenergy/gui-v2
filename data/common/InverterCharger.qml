@@ -7,7 +7,7 @@ import QtQuick
 import Victron.VenusOS
 
 Device {
-	id: veBusDevice
+	id: inverterCharger
 
 	readonly property int state: _state.value === undefined ? -1 : _state.value
 	readonly property int mode: _mode.value === undefined ? -1 : _mode.value
@@ -18,7 +18,6 @@ Device {
 	readonly property bool isMulti: !isNaN(numberOfAcInputs) && numberOfAcInputs !== 0
 
 	property ListModel inputSettings: ListModel {}
-
 
 	readonly property int productId: _productId.value === undefined ? -1 : _productId.value
 	readonly property int productType: _productUpperByte === 0x19 || _productUpperByte === 0x26
@@ -37,38 +36,28 @@ Device {
 	readonly property var _usAmpOptions: [ 10.0, 15.0, 20.0, 30.0, 50.0, 100.0 ].map(function(v) { return { value: v } })
 
 	readonly property VeQuickItem _state: VeQuickItem {
-		uid: veBusDevice.serviceUid + "/State"
+		uid: inverterCharger.serviceUid + "/State"
 	}
 
 	readonly property VeQuickItem _productId: VeQuickItem {
-		uid: veBusDevice.serviceUid + "/ProductId"
+		uid: inverterCharger.serviceUid + "/ProductId"
 	}
 
 	readonly property VeQuickItem _nominalInverterPower: VeQuickItem {
-		uid: veBusDevice.serviceUid + "/Ac/Out/NominalInverterPower"
-		onValueChanged: if (!!Global.veBusDevices) Global.veBusDevices.refreshNominalInverterPower()
+		uid: inverterCharger.serviceUid + "/Ac/Out/NominalInverterPower"
+		onValueChanged: if (!!Global.inverterChargers) Global.inverterChargers.refreshNominalInverterPower()
 	}
 
 	readonly property VeQuickItem _mode: VeQuickItem {
-		uid: veBusDevice.serviceUid + "/Mode"
+		uid: inverterCharger.serviceUid + "/Mode"
 	}
 
 	readonly property VeQuickItem _modeAdjustable: VeQuickItem {
-		uid: veBusDevice.serviceUid + "/ModeIsAdjustable"
+		uid: inverterCharger.serviceUid + "/ModeIsAdjustable"
 	}
 
 	readonly property VeQuickItem _numberOfAcInputs: VeQuickItem {
-		uid: veBusDevice.serviceUid + "/Ac/NumberOfAcInputs"
-	}
-
-	onValidChanged: {
-		if (!!Global.veBusDevices) {
-			if (valid) {
-				Global.veBusDevices.addVeBusDevice(veBusDevice)
-			} else {
-				Global.veBusDevices.removeVeBusDevice(veBusDevice)
-			}
-		}
+		uid: inverterCharger.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
 	function setMode(newMode) {
@@ -107,15 +96,15 @@ Device {
 	property Instantiator _acInputSettingsObjects: Instantiator {
 		model: _numberOfAcInputs.value || null
 		delegate: AcInputSettings {
-			serviceUid: veBusDevice.serviceUid
+			serviceUid: inverterCharger.serviceUid
 			inputNumber: model.index + 1
 		}
 
 		onObjectAdded: function(index, object) {
-			veBusDevice._addInputSettings(object)
+			inverterCharger._addInputSettings(object)
 		}
 		onObjectRemoved: function(index, object) {
-			veBusDevice._removeInputSettings(object)
+			inverterCharger._removeInputSettings(object)
 		}
 	}
 }

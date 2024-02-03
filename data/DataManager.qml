@@ -24,7 +24,7 @@ Item {
 			&& !!Global.ess
 			&& !!Global.evChargers
 			&& !!Global.generators
-			&& !!Global.inverters
+			&& !!Global.inverterChargers
 			&& !!Global.meteoDevices
 			&& !!Global.motorDrives
 			&& !!Global.multiRsDevices
@@ -37,7 +37,6 @@ Item {
 			&& !!Global.systemSettings
 			&& !!Global.tanks
 			&& !!Global.unsupportedDevices
-			&& !!Global.veBusDevices
 			&& !!Global.venusPlatform
 
 	readonly property bool _shouldInitialize: _dataObjectsReady
@@ -95,7 +94,7 @@ Item {
 	Ess {}
 	EvChargers {}
 	Generators {}
-	Inverters {}
+	InverterChargers {}
 	MeteoDevices {}
 	MotorDrives {}
 	MultiRsDevices {}
@@ -108,7 +107,6 @@ Item {
 	SystemSettings {}
 	Tanks {}
 	UnsupportedDevices {}
-	VeBusDevices {}
 	VenusPlatform {}
 
 	Loader {
