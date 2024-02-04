@@ -218,6 +218,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/GsmStatusIcon.qml
     components/IconButton.qml
     components/InputPanel.qml
+    components/InverterModeDialogLauncher.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
     components/NavBar.qml
@@ -430,8 +431,9 @@ set (VENUS_QML_MODULE_SOURCES
     pages/TanksTab.qml
     pages/controlcards/ESSCard.qml
     pages/controlcards/GeneratorCard.qml
-    pages/controlcards/SwitchesCard.qml
+    pages/controlcards/InverterCard.qml
     pages/controlcards/InverterChargerCard.qml
+    pages/controlcards/SwitchesCard.qml
     pages/evcs/EvChargerListPage.qml
     pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
