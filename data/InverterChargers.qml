@@ -82,5 +82,18 @@ QtObject {
 		}
 	}
 
+	function inverterModeToText(m) {
+		switch (m) {
+		case VenusOS.Inverter_Mode_On:
+			return CommonWords.on
+		case VenusOS.Inverter_Mode_Eco:
+			return CommonWords.inverter_mode_eco
+		case VenusOS.Inverter_Mode_Off:
+			return CommonWords.off
+		default:
+			return ""
+		}
+	}
+
 	Component.onCompleted: Global.inverterChargers = root
 }

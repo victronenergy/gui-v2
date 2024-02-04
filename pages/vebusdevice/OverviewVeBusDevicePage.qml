@@ -132,20 +132,17 @@ Page {
 				readonly property quantityInfo current: Units.getDisplayText(VenusOS.Units_Amp, dcCurrent.value)
 				readonly property quantityInfo soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.value)
 
-				//% "DC"
-				text: qsTrId("vebus_device_page_dc")
+				text: CommonWords.dc
 				textModel: [
 					power.number + power.unit,
 					voltage.number + voltage.unit,
 					current.number + current.unit,
-					//% "SOC %1%"
-					qsTrId("vebus_device_page_state_of_charge").arg(soc.number)
+					CommonWords.soc_with_prefix.arg(soc.number)
 				]
 			}
 
 			ListNavigationItem {
-				//% "Product page"
-				text: qsTrId("vebus_device_product_page")
+				text: CommonWords.product_page
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { veBusDevice: root.inverterCharger })
 			}
 		}
