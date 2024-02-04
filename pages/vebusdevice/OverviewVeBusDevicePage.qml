@@ -99,7 +99,8 @@ Page {
 
 			ListTextItem {
 				text: CommonWords.state
-				secondaryText: Global.system.systemStateToText(Global.system.state)
+				secondaryText: Global.system.systemStateToText(dataItem.value)
+				dataItem.uid: root.inverterCharger.serviceUid + "/State"
 			}
 
 			VeBusDeviceModeButton {
