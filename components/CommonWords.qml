@@ -122,6 +122,9 @@ QtObject {
 	//% "Custom name"
 	readonly property string custom_name: qsTrId("common_words_custom_name")
 
+	//% "DC"
+	readonly property string dc: qsTrId("common_words_dc")
+
 	//: Title for a menu item which displays debugging information
 	//% "Debug"
 	readonly property string debug: qsTrId("common_words_debug")
@@ -201,6 +204,10 @@ QtObject {
 
 	//% "Inverter / Charger"
 	readonly property string inverter_charger: qsTrId("common_words_inverter_charger")
+
+	//: Inverter 'Eco' mode
+	//% "Eco"
+	readonly property string inverter_mode_eco: qsTrId("common_words_inverter_mode_eco")
 
 	//% "Inverter overload"
 	readonly property string inverter_overload: qsTrId("common_words_inverter_overload")
@@ -318,6 +325,9 @@ QtObject {
 	//% "Press to scan"
 	readonly property string press_to_scan: qsTrId("common_words_press_to_scan")
 
+	//% "Product page"
+	readonly property string product_page: qsTrId("common_words_product_page");
+
 	//% "PV Inverter"
 	readonly property string pv_inverter: qsTrId("common_words_pv_inverter")
 
@@ -356,6 +366,10 @@ QtObject {
 
 	//% "Signal strength"
 	readonly property string signal_strength: qsTrId("common_words_signal_strength");
+
+	//: State of charge (as a percentage). %1 = the SOC value
+	//% "SOC %1%"
+	readonly property string soc_with_prefix: qsTrId("common_words_soc")
 
 	//: A speed measurement value
 	//% "Speed"

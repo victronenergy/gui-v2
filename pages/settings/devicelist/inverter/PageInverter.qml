@@ -31,12 +31,6 @@ Page {
 		uid: root.bindPrefix + "/IsInverterCharger"
 	}
 
-	AcOutput {
-		id: inverterData
-
-		serviceUid: root.bindPrefix
-	}
-
 	GradientListView {
 		model: ObjectModel {
 
@@ -47,11 +41,9 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Mode"
 				visible: defaultVisible && !root.isInverterCharger
 				optionModel: [
-					{ display: CommonWords.off, value: 4 },
-					{ display: CommonWords.on, value: 2 },
-					//: Inverter 'Eco' mode
-					//% "Eco"
-					{ display: qsTrId("inverter_eco"), value: 5 },
+					{ display: CommonWords.off, value: VenusOS.Inverter_Mode_Off },
+					{ display: CommonWords.on, value: VenusOS.Inverter_Mode_On },
+					{ display: CommonWords.inverter_mode_eco, value: VenusOS.Inverter_Mode_Eco },
 				]
 			}
 
@@ -77,42 +69,13 @@ Page {
 				dataItem.uid: root.bindPrefix + "/State"
 			}
 
-			ListQuantityGroup {
-				//% "AC-Out"
-				text: qsTrId("inverter_ac-out")
-				visible: !root.isInverterCharger
-				textModel: [
-					{ value: inverterData.phase1.voltage, unit: VenusOS.Units_Volt },
-					{ value: inverterData.phase1.current, unit: VenusOS.Units_Amp },
-					{ value: inverterData.phase1.power, unit: VenusOS.Units_Watt },
-				]
+			InverterAcOutQuantityGroup {
+				bindPrefix: root.bindPrefix
+				isInverterCharger: root.isInverterCharger
 			}
 
 			ListQuantityGroup {
-				readonly property AcPhase acPhase: acPhaseNumber.value === 2 ? inverterData.phase3
-						: acPhaseNumber.value === 1 ? inverterData.phase2
-						: inverterData.phase1
-
-				//: %1 = phase number (1-3)
-				//% "AC-Out L%1"
-				text: qsTrId("inverter_ac-out_num").arg(isNaN(acPhase.value) ? 1 : acPhase.value + 1)
-				visible: root.isInverterCharger
-				textModel: [
-					{ value: acPhase.voltage, unit: VenusOS.Units_Volt },
-					{ value: acPhase.current, unit: VenusOS.Units_Amp },
-					{ value: acPhase.power, unit: VenusOS.Units_Watt },
-					{ value: acPhase.frequency, unit: VenusOS.Units_Hertz },
-				]
-
-				VeQuickItem {
-					id: acPhaseNumber
-					uid: root.bindPrefix + "/Settings/System/AcPhase"
-				}
-			}
-
-			ListQuantityGroup {
-				//% "DC"
-				text: qsTrId("inverter_dc")
+				text: CommonWords.dc
 				textModel: [
 					{ value: dcVoltage.value, unit: VenusOS.Units_Volt, precision: 2 },
 					{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
