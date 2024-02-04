@@ -13,9 +13,10 @@ ControlCard {
 
 	property var _currentLimitDialog
 
-	title.icon.source: "qrc:/images/inverter_charger.svg"
-	//% "Inverter / Charger"
-	title.text: qsTrId("controlcard_inverter_charger")
+	icon.source: "qrc:/images/inverter_charger.svg"
+	//: %1 = the inverter/charger name
+	//% "Inverter / Charger (%1)"
+	title.text: qsTrId("controlcard_inverter_charger").arg(inverterCharger.name)
 
 	// VE.Bus state is a subset of the aggregated system state, so use the same systemStateToText()
 	// function to get a text description.

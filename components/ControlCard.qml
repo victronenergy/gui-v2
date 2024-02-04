@@ -9,6 +9,7 @@ import QtQuick.Controls as C
 import Victron.VenusOS
 
 Rectangle {
+	property alias icon: icon
 	property alias title: title
 	property alias status: status
 
@@ -17,21 +18,33 @@ Rectangle {
 	color: Theme.color_background_secondary
 	radius: Theme.geometry_panel_radius
 
-	CP.IconLabel {
-		id: title
+	CP.ColorImage {
+		id: icon
+
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry_controlCard_title_topMargin
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_contentMargins
 		}
-		spacing: Theme.geometry_controlCard_title_spacing
-		display: C.AbstractButton.TextBesideIcon
-		icon.color: Theme.color_font_primary
+		color: Theme.color_font_primary
+	}
 
+	Label {
+		id: title
+
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry_controlCard_title_topMargin
+			left: icon.right
+			leftMargin: Theme.geometry_controlCard_title_spacing
+			right: parent.right
+			rightMargin: Theme.geometry_controlCard_title_spacing
+		}
 		font.family: VenusFont.normal.name
 		font.pixelSize: Theme.font_size_body1
 		color: Theme.color_font_primary
+		elide: Text.ElideRight
 	}
 
 	Label {
