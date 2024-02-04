@@ -10,7 +10,7 @@ import QtQuick.Controls.impl as CP
 ControlCard {
 	id: root
 
-	title.icon.source: "qrc:/images/ess.svg"
+	icon.source: "qrc:/images/ess.svg"
 	//% "ESS"
 	title.text: qsTrId("controlcard_ess")
 

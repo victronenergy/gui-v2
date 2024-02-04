@@ -13,7 +13,7 @@ ControlCard {
 
 	property Generator generator
 
-	title.icon.source: "qrc:/images/generator.svg"
+	icon.source: "qrc:/images/generator.svg"
 	title.text: CommonWords.generator
 	status.text: Global.generators.stateToText(root.generator.state, root.generator.runningBy)
 	status.rightPadding: timerDisplay.width + Theme.geometry_controlCard_contentMargins
