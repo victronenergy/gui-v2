@@ -48,44 +48,13 @@ Page {
 			ListButton {
 				id: modeButton
 
-				property var _modeDialog
-
 				text: CommonWords.mode
-				secondaryText: root.isInverterCharger
-						? Global.inverterChargers.inverterChargerModeToText(modeItem.value)
-						: Global.inverterChargers.inverterModeToText(modeItem.value)
+				secondaryText: modeDialogLauncher.modeText
+				onClicked: modeDialogLauncher.openDialog()
 
-				onClicked: {
-					if (!_modeDialog) {
-						if (root.isInverterCharger) {
-							_modeDialog = inverterChargerModeDialogComponent.createObject(Global.dialogLayer)
-						} else {
-							_modeDialog = inverterModeDialogComponent.createObject(Global.dialogLayer)
-						}
-					}
-					_modeDialog.mode = modeItem.value
-					_modeDialog.open()
-				}
-
-				VeQuickItem {
-					id: modeItem
-					uid: root.serviceUid + "/Mode"
-				}
-
-				Component {
-					id: inverterModeDialogComponent
-
-					InverterModeDialog {
-						onAccepted: modeItem.setValue(mode)
-					}
-				}
-
-				Component {
-					id: inverterChargerModeDialogComponent
-
-					InverterChargerModeDialog {
-						onAccepted: modeItem.setValue(mode)
-					}
+				InverterModeDialogLauncher {
+					id: modeDialogLauncher
+					serviceUid: root.serviceUid
 				}
 			}
 
