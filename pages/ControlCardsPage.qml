@@ -83,7 +83,14 @@ Page {
 					}
 				}
 
-				// TODO show inverter cards
+				Repeater {
+					model: Global.inverterChargers.inverterDevices
+
+					InverterCard {
+						width: root.cardWidth
+						inverter: model.device
+					}
+				}
 			}
 
 			Loader {
