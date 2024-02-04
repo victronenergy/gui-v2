@@ -40,6 +40,7 @@ ModalDialog {
 		RadioButtonControlValue {
 			button.checked: modelData.value === root.mode
 			label.text: Global.inverterChargers.inverterModeToText(modelData.value)
+			separator.visible: model.index !== repeater.count - 1
 			onClicked: root.mode = modelData.value
 		}
 	}
