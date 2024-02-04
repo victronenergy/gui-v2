@@ -33,8 +33,8 @@ OverviewWidget {
 		onClicked: {
 			const device = Global.inverterChargers.first
 			if (device.serviceUid.indexOf('inverter') >= 0) {
-				// TODO push a version of OverviewVeBusDevicePage that is appropriate for an Inverter.
-				Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageInverter.qml", { "bindPrefix": device.serviceUid })
+				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
+						{ "serviceUid": device.serviceUid, "title": device.name })
 			} else {
 				Global.pageManager.pushPage("/pages/vebusdevice/OverviewVeBusDevicePage.qml", { "inverterCharger": device })
 			}

@@ -282,6 +282,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/dialogs/GeneratorStartDialog.qml
     components/dialogs/GeneratorStopDialog.qml
     components/dialogs/InverterChargerModeDialog.qml
+    components/dialogs/InverterModeDialog.qml
     components/dialogs/ModalDialog.qml
     components/dialogs/ModalWarningDialog.qml
     components/dialogs/NumberSelectorDialog.qml
@@ -315,6 +316,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/AlarmLevelRadioButtonGroup.qml
     components/settings/CGwacsBatteryScheduleNavigationItem.qml
     components/settings/FirmwareCheckListButton.qml
+    components/settings/InverterAcOutQuantityGroup.qml
     components/settings/Led.qml
     components/settings/ListAlarmState.qml
     components/settings/ListClearHistoryButton.qml
@@ -433,6 +435,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/evcs/EvChargerListPage.qml
     pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
+    pages/invertercharger/OverviewInverterPage.qml
     pages/settings/CanbusServiceFinder.qml
     pages/settings/DvccCommonSettings.qml
     pages/settings/GeneratorCondition.qml

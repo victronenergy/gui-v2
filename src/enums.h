@@ -245,6 +245,13 @@ public:
 	};
 	Q_ENUM(VeBusDevice_ProductType)
 
+	enum Inverter_Mode {
+		Inverter_Mode_On = 2,
+		Inverter_Mode_Off = 4,
+		Inverter_Mode_Eco = 5
+	};
+	Q_ENUM(Inverter_Mode)
+
 	enum InverterCharger_Mode {
 		InverterCharger_Mode_ChargerOnly = 1,
 		InverterCharger_Mode_InverterOnly,
