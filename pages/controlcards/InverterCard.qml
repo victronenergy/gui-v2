@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2023 Victron Energy B.V.
+** Copyright (C) 2024 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
@@ -11,9 +11,11 @@ ControlCard {
 
 	property var inverter
 
-	title.icon.source: "qrc:/images/inverter_charger.svg"
-	//% "Inverter"
-	title.text: qsTrId("controlcard_inverter")
+	icon.source: "qrc:/images/inverter_charger.svg"
+	//: %1 = the inverter name
+	//% "Inverter (%1)"
+	title.text: qsTrId("controlcard_inverter").arg(inverter.name)
+
 	status.text: Global.system.systemStateToText(stateItem.value)
 
 	VeQuickItem {
