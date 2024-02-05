@@ -437,6 +437,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/evcs/EvChargerListPage.qml
     pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
+    pages/invertercharger/InverterChargerListPage.qml
     pages/invertercharger/OverviewInverterChargerPage.qml
     pages/invertercharger/OverviewInverterPage.qml
     pages/settings/CanbusServiceFinder.qml
