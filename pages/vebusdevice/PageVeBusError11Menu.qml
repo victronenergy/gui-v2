@@ -16,7 +16,7 @@ ListNavigationItem {
 	VeQuickItem {
 		id: code
 
-		property string text: valid ? "0x" + value.toString(16) : "--"
+		property string text: isValid ? "0x" + value.toString(16) : "--"
 
 		uid: devPrefix + "/ExtendStatus/GridRelayReport/Code"
 	}
@@ -24,7 +24,7 @@ ListNavigationItem {
 	VeQuickItem {
 		id: counter
 
-		property string text: valid ? "#" + value : "--"
+		property string text: isValid ? "#" + value : "--"
 
 		uid: devPrefix + "/ExtendStatus/GridRelayReport/Count"
 	}
