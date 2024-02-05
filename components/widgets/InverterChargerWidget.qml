@@ -36,7 +36,7 @@ OverviewWidget {
 				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
 						{ "serviceUid": device.serviceUid, "title": device.name })
 			} else {
-				Global.pageManager.pushPage("/pages/vebusdevice/OverviewVeBusDevicePage.qml", { "inverterCharger": device })
+				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml", { "inverterCharger": device })
 			}
 		}
 	}
