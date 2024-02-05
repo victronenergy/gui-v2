@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property string bindPrefix
-	readonly property int numberOfPhases: phases.valid ? phases.value : 1
+	readonly property int numberOfPhases: phases.isValid ? phases.value : 1
 	property alias rsModel: settingsListView.model
 
 	VeQuickItem {

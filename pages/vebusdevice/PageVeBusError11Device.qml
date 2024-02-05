@@ -14,7 +14,7 @@ Page {
 	VeQuickItem {
 		id: code
 
-		property string text: valid ? "0x" + value.toString(16) : "--"
+		property string text: isValid ? "0x" + value.toString(16) : "--"
 
 		uid: root.bindPrefix + "/ExtendStatus/GridRelayReport/Code"
 	}
