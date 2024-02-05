@@ -437,6 +437,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/evcs/EvChargerListPage.qml
     pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
+    pages/invertercharger/OverviewInverterChargerPage.qml
     pages/invertercharger/OverviewInverterPage.qml
     pages/settings/CanbusServiceFinder.qml
     pages/settings/DvccCommonSettings.qml
@@ -578,7 +579,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/solar/SolarDeviceNavigationItem.qml
     pages/solar/SolarHistoryPage.qml
 
-    pages/vebusdevice/OverviewVeBusDevicePage.qml
     pages/vebusdevice/PageAcSensor.qml
     pages/vebusdevice/PageAcSensors.qml
     pages/vebusdevice/PageVeBusAdvanced.qml
