@@ -9,6 +9,12 @@ import Victron.VenusOS
 Device {
 	id: inverter
 
+	readonly property int state: _state.value === undefined ? -1 : _state.value
+
+	readonly property VeQuickItem _state: VeQuickItem {
+		uid: inverter.serviceUid + "/State"
+	}
+
 	readonly property var currentPhase: acOutL3.bindPrefix !== "" ? acOutL3
 			: acOutL2.bindPrefix !== "" ? acOutL2
 			: acOutL1
