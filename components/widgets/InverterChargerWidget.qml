@@ -31,12 +31,19 @@ OverviewWidget {
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-			const device = Global.inverterChargers.first
-			if (device.serviceUid.indexOf('inverter') >= 0) {
-				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
-						{ "serviceUid": device.serviceUid, "title": device.name })
+			if (Global.inverterChargers.veBusDevices.count
+					+ Global.inverterChargers.multiDevices.count
+					+ Global.inverterChargers.inverterDevices.count > 1) {
+				Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
 			} else {
-				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml", { "inverterCharger": device })
+				const device = Global.inverterChargers.first
+				if (device.serviceUid.indexOf('inverter') >= 0) {
+					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
+							{ "serviceUid": device.serviceUid, "title": device.name })
+				} else {
+					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
+							{ "inverterCharger": device })
+				}
 			}
 		}
 	}
