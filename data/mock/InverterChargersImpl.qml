@@ -9,7 +9,7 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	function populate() {
+	function populateInverterChargers() {
 		let quattro = {
 			state: VenusOS.System_State_Inverting,
 			productId: 9816,
@@ -33,12 +33,6 @@ QtObject {
 		let multiPlusDevice = veBusDeviceComponent.createObject(root, multiPlus)
 		addInputSettings(multiPlusDevice, [VenusOS.AcInputs_InputSource_Grid])
 		Global.inverterChargers.veBusDevices.addDevice(multiPlusDevice)
-
-		const inverterCount = (Math.random() * 3) + 1
-		for (let i = 0; i < inverterCount; ++i) {
-			const inverterObj = inverterComponent.createObject(root)
-			Global.inverterChargers.inverterDevices.addDevice(inverterObj)
-		}
 	}
 
 	function addInputSettings(veBusDevice, inputTypes) {
@@ -441,34 +435,64 @@ QtObject {
 		}
 	}
 
+	//--- inverters ---
+
+	property int mockInverterCount
+
 	property Component inverterComponent: Component {
-		MockDevice {
-			property var currentPhase: acOutL2
-			property var acOutL1: QtObject {
-				property real voltage: Math.random() * 10
-				property real current: Math.random() * 10
-				property real power: Math.random() * 10
-				property int powerUnit: VenusOS.Units_Watt
-			}
-			property var acOutL2: QtObject {
-				property real voltage: Math.random() * 10
-				property real current: Math.random() * 10
-				property real power: Math.random() * 10
-				property int powerUnit: VenusOS.Units_Watt
-			}
-			property var acOutL3: QtObject {
-				property real voltage: Math.random() * 10
-				property real current: Math.random() * 10
-				property real power: Math.random() * 10
-				property int powerUnit: VenusOS.Units_Watt
+		Inverter {
+			id: inverter
+
+			property Timer _trackerUpdates: Timer {
+				running: Global.mockDataSimulator.timersActive
+				repeat: true
+				interval: 2000
+				onTriggered: {
+					acOutL1._voltage.setValue(Math.random() * 200)
+					acOutL1._current.setValue(Math.random() * 10)
+					acOutL1._reportedPower.setValue(Math.random() * 100)
+					dcVoltage.setValue(Math.random() * 10)
+					dcCurrent.setValue(Math.random())
+				}
 			}
 
-			serviceUid: "mock/com.victronenergy.inverter.ttyUSB" + deviceInstance
-			name: "Inverter" + deviceInstance
+			property VeQuickItem dcVoltage: VeQuickItem {
+				uid: inverter.serviceUid + "/Dc/0/Voltage"
+			}
+
+			property VeQuickItem dcCurrent: VeQuickItem {
+				uid: inverter.serviceUid + "/Dc/0/Current"
+			}
+
+			property VeQuickItem mode: VeQuickItem {
+				uid: inverter.serviceUid + "/Mode"
+			}
+
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
+
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockInverterCount++
+				serviceUid = "mock/com.victronenergy.inverter.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_productName.setValue("Phoenix Inverter 12V 250VA 230V")
+				_customName.setValue("My Inverter " + deviceInstanceNum)
+				_state.setValue(Math.floor(Math.random() * VenusOS.System_State_FaultCondition))
+				mode.setValue(VenusOS.Inverter_Mode_Off)
+			}
+		}
+	}
+
+	function populateInverters() {
+		const inverterCount = (Math.random() * 3) + 1
+		for (let i = 0; i < inverterCount; ++i) {
+			const inverterObj = inverterComponent.createObject(root)
+			Global.inverterChargers.inverterDevices.addDevice(inverterObj)
 		}
 	}
 
 	Component.onCompleted: {
-		populate()
+		populateInverterChargers()
+		populateInverters()
 	}
 }
