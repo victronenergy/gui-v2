@@ -9,13 +9,6 @@
 #include "src/backendconnection.h"
 #include "src/frameratemodel.h"
 
-#include "veutil/qt/ve_qitem.hpp"
-#include "veutil/qt/ve_quick_item.hpp"
-#include "veutil/qt/ve_qitem_table_model.hpp"
-#include "veutil/qt/ve_qitem_sort_table_model.hpp"
-#include "veutil/qt/ve_qitem_child_model.hpp"
-#include "veutil/qt/firmware_updater_data.hpp"
-
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 #include <emscripten/html5.h>
 #include <emscripten/val.h>
@@ -219,7 +212,7 @@ void initBackend(bool *enableFpsCounter)
 
 int main(int argc, char *argv[])
 {
-	qInfo("Victron gui version: v%d.%d.%d", PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
+	qInfo().nospace() << "Victron gui version: v" << PROJECT_VERSION_MAJOR << "." << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH;
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	// The qt vkb behaves in an annoying manner in qt6.5.2 wasm builds (but not other versions).
