@@ -46,6 +46,7 @@ public:
 	QString currentDisplayText() const;
 
 	Q_INVOKABLE int languageAt(int index) const;
+	Q_INVOKABLE void setFontFamily(const QUrl &fontUrl, const QString &fontFamily);
 
 	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -82,7 +83,6 @@ class Language : public QObject
 	QML_SINGLETON
 	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged FINAL)
 	Q_PROPERTY(QUrl fontFileUrl READ fontFileUrl NOTIFY fontFileUrlChanged FINAL)
-	Q_PROPERTY(QString fontFamily READ fontFamily NOTIFY fontFamilyChanged FINAL)
 
 public:
 	static Language* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
@@ -102,21 +102,18 @@ public:
 	void setCurrentLanguage(QLocale::Language language);
 
 	QUrl fontFileUrl() const;
-	QString fontFamily() const;
 
 Q_SIGNALS:
 	void currentLanguageChanged();
 	void fontFileUrlChanged();
-	void fontFamilyChanged();
 
 private:
 	explicit Language(QQmlEngine* engine);
 	bool installTranslatorForLanguage(QLocale::Language language);
 
-	QUrl m_fontFileUrl;
-	QString m_fontFamily;
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
 	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
+	QUrl m_fontFileUrl;
 };
 
 } /* VenusOS */
