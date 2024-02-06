@@ -18,6 +18,11 @@ Window {
 	width: Qt.platform.os != "wasm" ? Theme.geometry_screen_width : Screen.width
 	height: Qt.platform.os != "wasm" ? Theme.geometry_screen_height : Screen.height
 
+	function skipSplashScreen() {
+		Global.allPagesLoaded = true
+		Global.splashScreenVisible = false
+	}
+
 	function retranslateUi() {
 		console.warn("Retranslating UI")
 		// If we have to retranslate at startup prior to instantiating mainView

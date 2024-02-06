@@ -178,17 +178,27 @@ Item {
 		SequentialAnimation {
 			running: !Global.splashScreenVisible
 
+			// Force the final animation values in case the Animators are
+			// not run (skipping the splash screen causes the animations to
+			// start before the parent is visible).
+			onStopped: {
+				navBar.y = yAnimator.to
+				navBar.opacity = opacityAnimator.to
+			}
+
 			PauseAnimation {
 				duration: Theme.animation_navBar_initialize_delayedStart_duration
 			}
 			ParallelAnimation {
 				YAnimator {
+					id: yAnimator
 					target: navBar
 					from: root.height - navBar.height + Theme.geometry_navigationBar_initialize_margin
 					to: root.height - navBar.height
 					duration: Theme.animation_navBar_initialize_fade_duration
 				}
 				OpacityAnimator {
+					id: opacityAnimator
 					target: navBar
 					from: 0.0
 					to: 1.0
