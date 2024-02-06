@@ -20,7 +20,6 @@ Page {
 	readonly property bool _wifi: technologyType === "wifi"
 	property string _agentPath: "/com/victronenergy/ccgx"
 	property CmAgent _agent
-	property var _forgetNetworkDialog
 
 	function _getIpv4Property(name) {
 		if (!service) {
@@ -171,12 +170,7 @@ Page {
 			button.text: qsTrId("settings_tcpip_forget")
 			visible: root.service && root._wifi && root.service.favorite
 			writeAccessLevel: VenusOS.User_AccessType_User
-			onClicked: {
-				if (!root._forgetNetworkDialog) {
-					root._forgetNetworkDialog = forgetNetworkDialogComponent.createObject(Global.dialogLayer)
-				}
-				root._forgetNetworkDialog.open()
-			}
+			onClicked: Global.dialogLayer.open(forgetNetworkDialogComponent)
 
 			Component {
 				id: forgetNetworkDialogComponent

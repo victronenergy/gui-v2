@@ -15,7 +15,6 @@ Loader {
 
 	property var veBusDevice
 	readonly property bool isMulti: veBusDevice.numberOfAcInputs > 0
-	property var _modeDialog
 
 	//% "This setting is disabled when a Digital Multi Control is connected."
 	readonly property string noAdjustableByDmc: qsTrId("vebus_no_adjustable_by_dmc")
@@ -53,11 +52,7 @@ Loader {
 				return
 			}
 
-			if (!_modeDialog) {
-				_modeDialog = modeDialogComponent.createObject(Global.dialogLayer)
-			}
-			_modeDialog.mode = root.veBusDevice.mode
-			_modeDialog.open()
+			Global.dialogLayer.open(modeDialogComponent, {mode: root.veBusDevice.mode})
 		}
 	}
 

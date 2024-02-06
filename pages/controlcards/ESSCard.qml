@@ -37,8 +37,6 @@ ControlCard {
 		ButtonControlValue {
 			id: minimumSocRow
 
-			property var _minSocDialog
-
 			//% "Minimum SOC"
 			label.text: qsTrId("ess_card_minimum_soc")
 			//: State of charge as a percentage value
@@ -46,12 +44,7 @@ ControlCard {
 			button.text: qsTrId("ess_card_minimum_soc_value").arg(Global.ess.minimumStateOfCharge)
 			separator.visible: warningRow.visible
 
-			onClicked: {
-				if (!_minSocDialog) {
-					_minSocDialog = minSocDialogComponent.createObject(Global.dialogLayer)
-				}
-				_minSocDialog.open()
-			}
+			onClicked: Global.dialogLayer.open(minSocDialogComponent)
 
 			Component {
 				id: minSocDialogComponent

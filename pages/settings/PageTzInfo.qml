@@ -10,7 +10,6 @@ Page {
 	id: root
 
 	property var _timeZoneModels: [ tzAfrica, tzAmerica, tzAntartica, tzArtic, tzAsia, tzAtlantic, tzAustralia, tzEurope, tzIndian, tzPacific, tzEtc ]
-	property var _timeSelector
 
 	function _findTimeZoneName(region, city) {
 		if (city === "UTC") {
@@ -32,13 +31,8 @@ Page {
 	}
 
 	function _openTimeSelector() {
-		if (!_timeSelector) {
-			_timeSelector = timeSelectorComponent.createObject(Global.dialogLayer)
-		}
 		const dt = ClockTime.currentDateTime
-		_timeSelector.hour = dt.getHours()
-		_timeSelector.minute = dt.getMinutes()
-		_timeSelector.open()
+		Global.dialogLayer.open(timeSelectorComponent, {hour: dt.getHours(), minute: dt.getMinutes()})
 	}
 
 	// Ensure time is up-to-date while this page is open.

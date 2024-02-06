@@ -19,19 +19,10 @@ ListButton {
 	// total value, in seconds (data value is assumed to be in seconds)
 	property real value: !dataItem.isValid ? 0 : dataItem.value
 
-	property var _timeSelector
-
 	button.text: hour < 0 || minute < 0 ? "--" : ClockTime.formatTime(hour, minute)
 	enabled: dataItem.uid === "" || dataItem.isValid
 
-	onClicked: {
-		if (!_timeSelector) {
-			_timeSelector = timeSelectorComponent.createObject(Global.dialogLayer)
-		}
-		_timeSelector.hour = hour
-		_timeSelector.minute = minute
-		_timeSelector.open()
-	}
+	onClicked: Global.dialogLayer.open(timeSelectorComponent, {hour: hour, minute: minute})
 
 	Component {
 		id: timeSelectorComponent

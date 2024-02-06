@@ -14,18 +14,10 @@ ListButton {
 	// data value is assumed to be in seconds
 	property var date: dataItem.isValid ? new Date(dataItem.value * 1000) : null
 
-	property var _dateSelector
-
 	button.text: date == null ? "--" : Qt.formatDate(date, "yyyy-MM-dd")
 	enabled: dataItem.uid === "" || dataItem.isValid
 
-	onClicked: {
-		if (!_dateSelector) {
-			_dateSelector = dateSelectorComponent.createObject(Global.dialogLayer)
-		}
-		_dateSelector.date = date
-		_dateSelector.open()
-	}
+	onClicked: Global.dialogLayer.open(dateSelectorComponent, {date: date})
 
 	Component {
 		id: dateSelectorComponent
