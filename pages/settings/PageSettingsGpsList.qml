@@ -30,7 +30,7 @@ Page {
 		id: mockGpsModelComponent
 
 		ListModel {
-			ListElement { uid: "com.victronenergy.gps" }
+			ListElement { uid: "mock/com.victronenergy.gps" }
 		}
 	}
 
