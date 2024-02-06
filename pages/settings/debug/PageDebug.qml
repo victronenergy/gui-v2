@@ -11,7 +11,6 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-
 			ListItem {
 				id: frameRateSwitch
 				//% "Enable frame-rate visualizer"
@@ -79,6 +78,12 @@ Page {
 				text: "Qt memory"
 				// TODO implement when venus-platform provides equivalent of QuickView.imageCacheSize()
 				// onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
+			}
+
+			ListTextItem {
+				//% "Application version"
+				text: qsTrId("settings_page_debug_application_version")
+				secondaryText: Theme.applicationVersion
 			}
 		}
 	}
