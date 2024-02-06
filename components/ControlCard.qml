@@ -41,7 +41,7 @@ Rectangle {
 			right: parent.right
 			rightMargin: Theme.geometry_controlCard_title_spacing
 		}
-		font.family: Language.fontFamily
+		font.family: Global.fontLoader.name
 		font.pixelSize: Theme.font_size_body1
 		color: Theme.color_font_primary
 		elide: Text.ElideRight
