@@ -18,6 +18,7 @@ QtObject {
 	property VeQItemTableModel dataServiceModel: null
 	property var firmwareUpdate
 
+	property var fontLoader
 	property var inputPanel
 	property var dialogLayer
 	property var notificationLayer

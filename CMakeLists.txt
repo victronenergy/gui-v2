@@ -255,6 +255,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ToastNotification.qml
     components/Utils.js
     components/ValueRange.qml
+    components/VenusFontLoader.qml
     components/VerticalGauge.qml
     components/ViewGradient.qml
     components/ClassAndVrmInstance.qml
