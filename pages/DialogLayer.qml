@@ -9,31 +9,13 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property ModalWarningDialog _rebootDialog
-
-	function showRebootDialog() {
-		if (!_rebootDialog) {
-			_rebootDialog = rebootDialogComponent.createObject(root)
-		}
-		_rebootDialog.open()
+	function open(dialogComponent, properties) {
+		const dialog = dialogComponent.createObject(Global.dialogLayer, properties)
+		dialog.closed.connect(function() {
+			dialog.destroy()
+		})
+		dialog.open()
 	}
 
 	anchors.fill: parent
-
-	Component {
-		id: rebootDialogComponent
-
-		ModalWarningDialog {
-			title: BackendConnection.type === BackendConnection.DBusSource
-				//% "Rebooting..."
-				? qsTrId("dialoglayer_rebooting")
-				//% "Device has been rebooted."
-				: qsTrId("dialoglayer_rebooted")
-
-			// On device, dialog cannot be dismissed; just wait until device is rebooted.
-			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
-			footer.enabled: BackendConnection.type !== BackendConnection.DBusSource
-			footer.opacity: footer.enabled ? 1 : 0
-		}
-	}
 }

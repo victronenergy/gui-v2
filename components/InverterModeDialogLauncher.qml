@@ -15,8 +15,6 @@ QtObject {
 			? Global.inverterChargers.inverterChargerModeToText(_modeItem.value)
 			: Global.inverterChargers.inverterModeToText(_modeItem.value)
 
-	property var _modeDialog
-
 	property VeQuickItem _isInverterChargerItem: VeQuickItem {
 		uid: root.serviceUid + "/IsInverterCharger"
 	}
@@ -40,12 +38,10 @@ QtObject {
 	function openDialog() {
 		if (!_modeDialog) {
 			if (_isInverterChargerItem.value === 1) {
-				_modeDialog = _inverterChargerModeDialogComponent.createObject(Global.dialogLayer)
+				Global.dialogLayer.open(_inverterChargerModeDialogComponent)
 			} else {
-				_modeDialog = _inverterModeDialogComponent.createObject(Global.dialogLayer)
+				Global.dialogLayer.open(_inverterModeDialogComponent)
 			}
 		}
-		_modeDialog.mode = _modeItem.value
-		_modeDialog.open()
 	}
 }
