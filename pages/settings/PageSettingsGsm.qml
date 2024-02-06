@@ -78,7 +78,7 @@ Page {
 						}
 					}
 				]
-				visible: gsmStatusIcon.isValid
+				visible: gsmStatusIcon.valid
 			}
 
 			ListItem {
