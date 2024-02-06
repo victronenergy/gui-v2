@@ -55,7 +55,7 @@ QString calculateMqttAddressFromPortalId(const QString &portalId)
 	return calculateMqttAddressFromShard(shardStr);
 }
 
-void initBackend(bool *enableFpsCounter)
+void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 {
 	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::create();
 
@@ -138,6 +138,10 @@ void initBackend(bool *enableFpsCounter)
 		QGuiApplication::tr("Enable FPS counter"));
 	parser.addOption(fpsCounter);
 
+	QCommandLineOption skipSplash("skip-splash",
+		QGuiApplication::tr("Skip splash screen"));
+	parser.addOption(skipSplash);
+
 	QCommandLineOption mockMode({ "k", "mock" },
 		QGuiApplication::tr("Use mock data source for testing."));
 	parser.addOption(mockMode);
@@ -205,6 +209,9 @@ void initBackend(bool *enableFpsCounter)
 	if (parser.isSet(fpsCounter) || queryFpsCounter.contains(QStringLiteral("enable"))) {
 		*enableFpsCounter = true;
 	}
+	if (parser.isSet(skipSplash)) {
+		*skipSplashScreen = true;
+	}
 }
 
 } // namespace
@@ -226,9 +233,10 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationVersion("2.0");
 
 	bool enableFpsCounter = false;
+	bool skipSplashScreen = false;
 
 	QQmlEngine engine;
-	initBackend(&enableFpsCounter);
+	initBackend(&enableFpsCounter, &skipSplashScreen);
 	engine.addImageProvider(QStringLiteral("digits"), new Victron::VenusOS::DigitImageProvider);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
@@ -265,6 +273,10 @@ int main(int argc, char *argv[])
 	/* Write to window properties here to perform any additional initialization
 	   before initial binding evaluation. */
 	component.completeCreate();
+
+	if (skipSplashScreen) {
+		QMetaObject::invokeMethod(window, "skipSplashScreen");
+	}
 
 #if defined(VENUS_DESKTOP_BUILD)
 	const bool desktop(true);
