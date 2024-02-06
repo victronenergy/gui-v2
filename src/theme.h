@@ -34,6 +34,7 @@ class Theme : public QObject
 	QML_NAMED_ELEMENT(ThemeBase)
 	Q_PROPERTY(ScreenSize screenSize READ screenSize WRITE setScreenSize NOTIFY screenSizeChanged)
 	Q_PROPERTY(ColorScheme colorScheme READ colorScheme WRITE setColorScheme NOTIFY colorSchemeChanged)
+	Q_PROPERTY(QString applicationVersion READ applicationVersion CONSTANT)
 
 public:
 	enum ScreenSize {
@@ -93,6 +94,10 @@ public:
 	Q_INVOKABLE qreal charactersOneHundredWidth(const QFont &font) const;
 
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const { return obj && obj->parent(); }
+
+	QString applicationVersion() const {
+		return QStringLiteral("v%1.%2.%3").arg(PROJECT_VERSION_MAJOR).arg(PROJECT_VERSION_MINOR).arg(PROJECT_VERSION_PATCH);
+	};
 
 Q_SIGNALS:
 	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
