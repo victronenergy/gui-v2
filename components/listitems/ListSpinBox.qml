@@ -27,13 +27,7 @@ ListButton {
 	button.text: value === undefined ? "--" : value.toFixed(decimals) + root.suffix
 	enabled: dataItem.uid === "" || dataItem.isValid
 
-	onClicked: {
-		if (!_numberSelector) {
-			_numberSelector = numberSelectorComponent.createObject(Global.dialogLayer)
-		}
-		_numberSelector.value = value
-		_numberSelector.open()
-	}
+	onClicked: Global.dialogLayer.open(numberSelectorComponent, {value: value})
 
 	Component {
 		id: numberSelectorComponent

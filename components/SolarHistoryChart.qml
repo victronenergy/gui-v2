@@ -190,11 +190,8 @@ Item {
 				height: parent.height
 
 				onClicked: {
-					if (!root._dailyHistoryDialog) {
-						root._dailyHistoryDialog = dailyHistoryDialogComponent.createObject(Global.dialogLayer)
-					}
-					root._dailyHistoryDialog.day = yieldModel.dayRange[0] + model.index
-					root._dailyHistoryDialog.open()
+					Global.dialogLayer.open(dailyHistoryDialogComponent,
+						{day:  yieldModel.dayRange[0] + model.index})
 				}
 
 				Rectangle {

@@ -86,19 +86,12 @@ Page {
 			}
 
 			ListButton {
-				property var _confirmationDialog
-
 				//% "Restore factory defaults"
 				text: qsTrId("batterysettings_restore_factory_defaults")
 				//% "Press to restore"
 				secondaryText: qsTrId("batterysettings_press_to_restore")
 				visible: defaultVisible && restoreDefaults.isValid
-				onClicked: {
-					if (!_confirmationDialog) {
-						_confirmationDialog = confirmationDialogComponent.createObject(Global.dialogLayer)
-					}
-					_confirmationDialog.open()
-				}
+				onClicked: Global.dialogLayer.open(confirmationDialogComponent)
 
 				Component {
 					id: confirmationDialogComponent

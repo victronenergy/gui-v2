@@ -52,10 +52,7 @@ ControlCard {
 					root.generator.setAutoStart(false)
 				} else {
 					// check if they really want to disable
-					if (!autostartSwitch._confirmationDialog) {
-						autostartSwitch._confirmationDialog = confirmationDialogComponent.createObject(Global.dialogLayer)
-					}
-					autostartSwitch._confirmationDialog.open()
+					Global.dialogLayer.open(confirmationDialogComponent)
 				}
 			}
 		}
@@ -97,8 +94,6 @@ ControlCard {
 	Button {
 		id: startStopButton
 
-		property GeneratorStartDialog _startDialog
-		property GeneratorStopDialog _stopDialog
 		property int _generatorStateBeforeDialogOpen: -1
 
 		anchors {
@@ -131,15 +126,9 @@ ControlCard {
 		onClicked: {
 			_generatorStateBeforeDialogOpen = root.generator.state
 			if (root.generator.state === VenusOS.Generators_State_Running) {
-				if (!_stopDialog) {
-					_stopDialog = generatorStopDialogComponent.createObject(Global.dialogLayer)
-				}
-				_stopDialog.open()
+				Global.dialogLayer.open(generatorStopDialogComponent)
 			} else {
-				if (!_startDialog) {
-					_startDialog = generatorStartDialogComponent.createObject(Global.dialogLayer)
-				}
-				_startDialog.open()
+				Global.dialogLayer.open(generatorStartDialogComponent)
 			}
 		}
 

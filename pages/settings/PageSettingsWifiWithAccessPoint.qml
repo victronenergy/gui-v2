@@ -10,7 +10,6 @@ Page {
 	id: root
 
 	property CmTechnology _tech: Connman.getTechnology("wifi")
-	property var _confirmApDialog
 
 	GradientListView {
 		id: settingsListView
@@ -24,10 +23,7 @@ Page {
 
 				onClicked: {
 					if (checked) {
-						if (!root._confirmApDialog) {
-							root._confirmApDialog = confirmApDialogComponent.createObject(Global.dialogLayer)
-						}
-						root._confirmApDialog.open()
+						Global.dialogLayer.open(confirmApDialogComponent)
 					} else {
 						accessPoint.setValue(1)
 					}

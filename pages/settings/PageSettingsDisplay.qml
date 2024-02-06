@@ -91,15 +91,12 @@ Page {
 				popDestination: undefined // don't pop page automatically.
 				updateOnClick: false // handle option clicked manually.
 
-				property var pleaseWaitDialog
-
 				onOptionClicked: function(index) {
 					// The SystemSettings data point listener will trigger retranslateUi()
 					// It may take a few seconds for the backend to deliver the value
 					// change to the other data point.  So, display a message to the user.
 					languageDataItem.setValue(Language.toCode(optionModel.languageAt(index)))
-					pleaseWaitDialog = changingLanguageDialog.createObject(Global.dialogLayer)
-					pleaseWaitDialog.open()
+					Global.dialogLayer.open(changingLanguageDialog)
 				}
 
 				LanguageModel {
