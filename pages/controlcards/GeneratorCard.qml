@@ -43,13 +43,16 @@ ControlCard {
 		label.text: qsTrId("controlcard_generator_label_autostart")
 		button.checked: root.generator.autoStart
 		button.enabled: root.generator.state !== VenusOS.Generators_State_Running
+		button.checkable: false // control the checked state locally
 		separator.visible: false
 
 		Connections {
 			target: autostartSwitch.button
-			function onToggled() {
-				if (autostartSwitch.button.checked) {
-					root.generator.setAutoStart(false)
+
+			function onClicked() {
+				if (!autostartSwitch.button.checked) {
+					root.generator.setAutoStart(true)
+					autostartSwitch.button.checked = true
 				} else {
 					// check if they really want to disable
 					if (!autostartSwitch._confirmationDialog) {
@@ -72,8 +75,10 @@ ControlCard {
 				//% "Autostart will be disabled and the generator won't automatically start based on the configured conditions."
 				description: qsTrId("controlcard_generator_disableautostartdialog_description")
 
-				onAccepted: root.generator.setAutoStart(false)
-				onRejected: root.generator.setAutoStart(true)
+				onAccepted: {
+					root.generator.setAutoStart(false)
+					autostartSwitch.button.checked = false
+				}
 			}
 		}
 	}
