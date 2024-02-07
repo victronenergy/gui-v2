@@ -174,7 +174,7 @@ Page {
 								text: qsTrId("settings_page_relay_generator_start_generator")
 								dataItem.uid: root.startStopBindPrefix + "/ManualStart"
 								writeAccessLevel: VenusOS.User_AccessType_User
-								onClicked: {
+								onCheckedChanged: {
 									if (manualStartPage.isCurrentPage) {
 										if (!checked) {
 											//% "Stopping, generator will continue running if other conditions are reached"
