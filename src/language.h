@@ -30,6 +30,7 @@ class LanguageModel : public QAbstractListModel
 	Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
 	Q_PROPERTY(QString currentDisplayText READ currentDisplayText NOTIFY currentDisplayTextChanged)
 	Q_PROPERTY(int count READ rowCount CONSTANT)
+	Q_PROPERTY(QString unsupportedLanguageMessage READ unsupportedLanguageMessage WRITE setUnsupportedLanguageMessage NOTIFY unsupportedLanguageMessageChanged)
 
 public:
 	enum Role {
@@ -42,8 +43,12 @@ public:
 
 	int currentLanguage() const;
 	void setCurrentLanguage(int language);
+
 	int currentIndex() const;
 	QString currentDisplayText() const;
+
+	QString unsupportedLanguageMessage() const;
+	void setUnsupportedLanguageMessage(const QString &msg);
 
 	Q_INVOKABLE int languageAt(int index) const;
 	Q_INVOKABLE void setFontFamily(const QUrl &fontUrl, const QString &fontFamily);
@@ -55,6 +60,7 @@ signals:
 	void currentLanguageChanged();
 	void currentIndexChanged();
 	void currentDisplayTextChanged();
+	void unsupportedLanguageMessageChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -68,10 +74,12 @@ private:
 		QLocale::Language language;
 	};
 
-	void addLanguage(const QString &name, const QString &code, const QLocale::Language &language);
+	void addLanguage(const QString &name, const QString &code, QLocale::Language language);
+	QString languageDisplayName(QLocale::Language language, const QString &name) const;
 
 	QHash<int, QByteArray> m_roleNames;
 	QList<LanguageData> m_languages;
+	QString m_unsupportedLanguageMessage;
 	int m_currentIndex = -1;
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
 };
