@@ -25,23 +25,42 @@ QUrl fontUrlForLanguage(QLocale::Language language)
 		{ QLocale::Thai, QStringLiteral("NotoSansThai.ttf") },
 	};
 
+	static const QUrl defaultFontUrl = QUrl("qrc:/fonts/MuseoSans-500.otf");
+
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-	// On wasm, the server contains symlinks to the required font files in the root dir.
-	QString fileName = fontFileNames.value(language);
-	if (!fileName.isEmpty()) {
-		return QUrl(fileName);
-	}
+	Q_UNUSED(language);
+	// On wasm, the custom font files are not available. Just use the default font.
+	return defaultFontUrl;
+
 #elif not defined(VENUS_DESKTOP_BUILD)
 	// On device, look for the system-installed font files.
 	QString fileName = fontFileNames.value(language);
 	if (!fileName.isEmpty()) {
 		return QUrl::fromLocalFile("/usr/lib/fonts/" + fileName);
 	}
+#else
+	Q_UNUSED(language);
 #endif
 
-	// Use the default font on other platforms, or if the default font supports this language.
-	static const QUrl defaultFontUrl = QUrl("qrc:/fonts/MuseoSans-500.otf");
+	// Use the default font on other platforms.
 	return defaultFontUrl;
+}
+
+bool isLanguageRenderingSupported(QLocale::Language language)
+{
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	// On wasm, the scripts for these languages cannot be rendered by the default Museo font.
+	switch (language) {
+	case QLocale::Chinese:
+	case QLocale::Thai:
+		return false;
+	default:
+		break;
+	}
+#else
+	Q_UNUSED(language);
+#endif
+	return true;
 }
 
 }
@@ -109,7 +128,32 @@ QString LanguageModel::currentDisplayText() const
 	if (m_currentIndex < 0 || m_currentIndex >= m_languages.count()) {
 		return QString();
 	}
-	return m_languages.at(m_currentIndex).name;
+	const LanguageData &data = m_languages.at(m_currentIndex);
+	return languageDisplayName(data.language, data.name);
+}
+
+QString LanguageModel::unsupportedLanguageMessage() const
+{
+	return m_unsupportedLanguageMessage;
+}
+
+void LanguageModel::setUnsupportedLanguageMessage(const QString &msg)
+{
+	if (m_unsupportedLanguageMessage != msg) {
+		m_unsupportedLanguageMessage = msg;
+		emit unsupportedLanguageMessageChanged();
+
+		if (!isLanguageRenderingSupported(m_currentLanguage)) {
+			emit currentDisplayTextChanged();
+		}
+
+		for (int i = 0; i < m_languages.count(); ++i) {
+			if (!isLanguageRenderingSupported(m_languages.at(i).language)) {
+				static const QList<int> roles = { Qt::DisplayRole };
+				emit dataChanged(createIndex(i, 0), createIndex(i, 0), roles);
+			}
+		}
+	}
 }
 
 int LanguageModel::languageAt(int index) const
@@ -147,7 +191,7 @@ QVariant LanguageModel::data(const QModelIndex &index, int role) const
 
 	switch (role) {
 	case Qt::DisplayRole:
-		return data.name;
+		return languageDisplayName(data.language, data.name);
 	case FontFileUrlRole:
 		return data.fontFileUrl;
 	case FontFamilyRole:
@@ -157,9 +201,28 @@ QVariant LanguageModel::data(const QModelIndex &index, int role) const
 	}
 }
 
-void LanguageModel::addLanguage(const QString &name, const QString &code, const QLocale::Language &language)
+void LanguageModel::addLanguage(const QString &name, const QString &code, QLocale::Language language)
 {
 	m_languages.append({name, code, fontUrlForLanguage(language), QString(), language });
+}
+
+QString LanguageModel::languageDisplayName(QLocale::Language language, const QString &name) const
+{
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	// For languages that cannot be rendered by the default font in wasm, show the language name
+	// in English, so that the name can be rendered.
+	switch (language) {
+	case QLocale::Chinese:
+		return QStringLiteral("Chinese %1").arg(m_unsupportedLanguageMessage);
+	case QLocale::Thai:
+		return QStringLiteral("Thai %1").arg(m_unsupportedLanguageMessage);
+	default:
+		break;
+	}
+#else
+	Q_UNUSED(language);
+#endif
+	return name;
 }
 
 QHash<int, QByteArray> LanguageModel::roleNames() const
@@ -174,7 +237,7 @@ Language* Language::create(QQmlEngine *, QJSEngine *)
 	return language;
 }
 
-Language::Language(QQmlEngine* engine) : QObject(nullptr)
+Language::Language(QQmlEngine*) : QObject(nullptr)
 {
 	/* Load appropriate translations for current locale, e.g. :/i18n/venus-gui-v2_fr.qm */
 	if (!installTranslatorForLanguage(QLocale().language())) {
@@ -228,6 +291,14 @@ void Language::setCurrentLanguageCode(const QString &code)
 
 bool Language::installTranslatorForLanguage(QLocale::Language language)
 {
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	if (!isLanguageRenderingSupported(language)) {
+		qCWarning(venusGui) << "Cannot render language" << QLocale(language).name()
+				   << "with the default font on WASM";
+		return false;
+	}
+#endif
+
 	const bool alreadyLoaded = m_loadedTranslators.contains(language);
 	QTranslator *currTranslator = m_loadedTranslators.value(m_currentLanguage);
 	QTranslator *translator = alreadyLoaded ? m_loadedTranslators.value(language) : new QTranslator(this);

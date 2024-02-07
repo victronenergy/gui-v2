@@ -104,7 +104,8 @@ Page {
 
 				LanguageModel {
 					id: languageModel
-					currentLanguage: Language.current
+					//% "(no browser support)"
+					unsupportedLanguageMessage: qsTrId("settings_language_no_browser_support")
 				}
 
 				Instantiator {
@@ -122,6 +123,11 @@ Page {
 				VeQuickItem {
 					id: languageDataItem
 					uid: Global.systemSettings.serviceUid + "/Settings/Gui/Language"
+					onValueChanged: {
+						if (value !== undefined) {
+							languageModel.currentLanguage = Language.fromCode(value)
+						}
+					}
 				}
 
 				Component {
