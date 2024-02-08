@@ -49,7 +49,7 @@ Page {
 			description: qsTrId("settings_wifi_disable_ap_are_you_sure")
 
 			onAccepted: {
-				accessPoint.setValue(1)
+				accessPoint.setValue(0)
 			}
 		}
 	}
