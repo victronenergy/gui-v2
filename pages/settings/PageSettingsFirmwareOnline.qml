@@ -35,16 +35,16 @@ Page {
 				text: qsTrId("settings_update_feed")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ReleaseType"
 				optionModel: [
-					//% "Latest release"
-					{ display: qsTrId("settings_firmware_latest_release"), value: FirmwareUpdater.FirmwareRelease },
-					//% "Latest release candidate"
-					{ display: qsTrId("settings_firmware_latest_release_candidate"), value: FirmwareUpdater.FirmwareCandidate },
+					//% "Official release"
+					{ display: qsTrId("settings_firmware_official_release"), value: FirmwareUpdater.FirmwareRelease },
+					//% "Beta release"
+					{ display: qsTrId("settings_firmware_beta_release"), value: FirmwareUpdater.FirmwareCandidate },
 					//: Select the 'Testing' update feed
-					//% "Testing"
-					{ display: qsTrId("settings_firmware_testing"), value: FirmwareUpdater.FirmwareTesting, readOnly: !Global.systemSettings.canAccess(VenusOS.User_AccessType_Service) },
+					//% "Testing (Victron internal)"
+					{ display: qsTrId("settings_firmware_testing_internal"), value: FirmwareUpdater.FirmwareTesting, readOnly: !Global.systemSettings.canAccess(VenusOS.User_AccessType_Service) },
 					//: Select the 'Develop' update feed
-					//% "Develop"
-					{ display: qsTrId("settings_firmware_develop"), value: FirmwareUpdater.FirmwareDevelop, readOnly: true },
+					//% "Develop (Victron internal)"
+					{ display: qsTrId("settings_firmware_develop_internal"), value: FirmwareUpdater.FirmwareDevelop, readOnly: true },
 				]
 			}
 
