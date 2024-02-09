@@ -10,6 +10,8 @@ import Victron.VenusOS
 C.StackView {
 	id: pageStack
 
+	onDepthChanged: if (depth === 1) pageStack.navbarX = 0
+
 	// the x position that the navbar should follow.
 	property real navbarX
 
@@ -22,6 +24,7 @@ C.StackView {
 			easing.type: Easing.InOutQuad
 		}
 	}
+
 	pushExit: Transition {
 		ScriptAction { script: if (pageStack.depth === 2) pageStack.navbarX = -width }
 		XAnimator {
@@ -32,7 +35,6 @@ C.StackView {
 		}
 	}
 	popEnter: Transition {
-		ScriptAction { script: if (pageStack.depth === 1) pageStack.navbarX = 0 }
 		XAnimator {
 			from: -width
 			to: 0
@@ -40,6 +42,7 @@ C.StackView {
 			easing.type: Easing.InOutQuad
 		}
 	}
+
 	popExit: Transition {
 		XAnimator {
 			from: 0
@@ -48,6 +51,7 @@ C.StackView {
 			easing.type: Easing.InOutQuad
 		}
 	}
+
 	replaceEnter: Transition {
 		enabled: Global.allPagesLoaded
 
@@ -58,6 +62,7 @@ C.StackView {
 			easing.type: Easing.InOutQuad
 		}
 	}
+
 	replaceExit: Transition {
 		enabled: Global.allPagesLoaded
 
