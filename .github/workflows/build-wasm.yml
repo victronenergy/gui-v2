@@ -7,34 +7,37 @@ on:
 jobs:
   build-wasm-file:
     env:
-      EMSCRIPTEN: 3.1.25
-      QT_VERSION: 6.5.2
+      EMSCRIPTEN: 3.1.37
+      QT_VERSION: 6.6.1
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
     - name: Checkout repository and submodules
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
-    - name: Install dependencies
-      run: |
-       sudo apt-get update -yq &&
-       sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
-                                wget lsb libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
-                                ninja-build dos2unix
-    - name: Set up Python 3.x
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.x
     - name: Check for a cached version
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       id: cached_qt_emscripten
       with:
         path: |
           /opt/hostedtoolcache
         # Adding version as cache key
         key: ${{ runner.os }}-qt-${{ env.QT_VERSION }}-em-${{ env.EMSCRIPTEN }}
+    - name: Install dependencies
+      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
+      run: |
+       sudo apt-get update -yq &&
+       sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
+                                wget lsb libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
+                                ninja-build dos2unix
+       sudo snap install yq
+    - name: Set up Python 3.x
+      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.x
     - name: Install Qt ${{env.QT_VERSION}} linux desktop
       if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
       uses: jurplel/install-qt-action@v3
@@ -62,12 +65,9 @@ jobs:
       if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
       run: |
         echo patch Qt
-        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
         ./.github/patches/qt-fixes.sh
+        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
         dos2unix ${QTDIR}/plugins/platforms/{qtloader.js,wasm_shell.html}
-        patch ${QTDIR}/plugins/platforms/qtloader.js < ./.github/patches/qtloader.js.patch
-        patch ${QTDIR}/plugins/platforms/wasm_shell.html < ./.github/patches/wasm_shell.html.patch
-        patch ${QTDIR}/bin/qt-configure-module < ./.github/patches/qt-configure-module.patch
     - name: Install emscripten ${{env.EMSCRIPTEN}}
       if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
       run: |
@@ -99,18 +99,20 @@ jobs:
         mkdir build-wasm && cd build-wasm
         ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
         cmake --build .
-        grep -q -E '^var createQtAppInstance' venus-gui-v2.js
-        sed -i "s%^var \(createQtAppInstance\)%window.\1%" venus-gui-v2.js
         cd -
+    - name: Patch and pack webassembly files
+      run: |
         mkdir -p artifacts/wasm
         mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
         mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
-        cp .github/patches/qtloader-controller.js artifacts/wasm/
+        patch artifacts/wasm/index.html < ./.github/patches/index.html.patch
+        grep -q -E '^var createQtAppInstance' artifacts/wasm/venus-gui-v2.js
+        sed -i "s%^var \(createQtAppInstance\)%window.\1%" artifacts/wasm/venus-gui-v2.js
         cp .github/patches/Makefile artifacts/wasm/
         cd artifacts
         zip -r ../venus-webassembly.zip wasm
     - name: Upload wasm files
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: venus-webassembly
         path: artifacts
