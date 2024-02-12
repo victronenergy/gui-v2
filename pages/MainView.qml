@@ -10,11 +10,11 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	readonly property color backgroundColor: !!pageStack.currentItem
-			? pageStack.currentItem.backgroundColor
+	readonly property color backgroundColor: !!pageManager.currentPage
+			? pageManager.currentPage.backgroundColor
 			: Theme.color_page_background
 
-	property var pageManager
+	property PageManager pageManager
 
 	property int _loadedPages: 0
 
@@ -41,7 +41,6 @@ Item {
 		id: pageStack
 
 		property var previousItem
-
 		anchors {
 			top: statusBar.bottom
 			left: parent.left
@@ -102,24 +101,114 @@ Item {
 		}
 	}
 
+	Loader {
+		id: controlCardsLoader
+
+		onLoaded: pageManager._controlCardsPage = item
+		onActiveChanged: if (active) active = true // remove binding
+
+		z: 1
+		opacity: 0.0
+		source: Global.appUrl("/pages/ControlCardsPage.qml")
+		active: pageManager.controlsActive
+		enabled: pageManager.controlsActive || controlsOutAnimation.running
+
+		anchors {
+			top: statusBar.bottom
+			left: parent.left
+			right: parent.right
+			bottom: parent.bottom
+		}
+
+		SequentialAnimation {
+			running: pageManager.controlsActive
+
+			ParallelAnimation {
+				YAnimator {
+					target: controlCardsLoader
+					from: statusBar.height - Theme.geometry_controlCards_slide_distance
+					to: statusBar.height
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				OpacityAnimator {
+					target: controlCardsLoader
+					from: 0.0
+					to: 1.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				OpacityAnimator {
+					target: pageStack
+					from: 1.0
+					to: 0.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				OpacityAnimator {
+					target: navBar
+					from: 1.0
+					to: 0.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+			}
+		}
+
+		SequentialAnimation {
+			id: controlsOutAnimation
+
+			running: !pageManager.controlsActive
+
+			ParallelAnimation {
+				YAnimator {
+					target: controlCardsLoader
+					from: statusBar.height
+					to: statusBar.height - Theme.geometry_controlCards_slide_distance
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				OpacityAnimator {
+					target: controlCardsLoader
+					from: 1.0
+					to: 0.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				OpacityAnimator {
+					target: pageStack
+					from: 0.0
+					to: 1.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				OpacityAnimator {
+					target: navBar
+					from: 0.0
+					to: 1.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+			}
+		}
+	}
+
 	StatusBar {
 		id: statusBar
 
-		title: !!pageStack.currentItem ? pageStack.currentItem.title || "" : ""
-		leftButton: !!pageStack.currentItem ? pageStack.currentItem.topLeftButton : VenusOS.StatusBar_LeftButton_None
-		rightButton: !!pageStack.currentItem ? pageStack.currentItem.topRightButton : VenusOS.StatusBar_RightButton_None
+		title: !!pageManager.currentPage ? pageManager.currentPage.title || "" : ""
+		leftButton: !!pageManager.currentPage? pageManager.currentPage.topLeftButton : VenusOS.StatusBar_LeftButton_None
+		rightButton: !!pageManager.currentPage ? pageManager.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
 		animationEnabled: BackendConnection.applicationVisible
 		color: root.backgroundColor
 
 		onLeftButtonClicked: {
 			switch (leftButton) {
 			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				navBar.activatingControls = true
-				pageManager.pushPage("/pages/ControlCardsPage.qml")
+				pageManager.controlsActive = true
 				break
 			case VenusOS.StatusBar_LeftButton_ControlsActive:
-				navBar.activatingControls = true
-				pageManager.popPage()
+				pageManager.controlsActive = false
 				break;
 			case VenusOS.StatusBar_LeftButton_Back:
 				pageManager.popPage()
@@ -135,7 +224,6 @@ Item {
 	NavBar {
 		id: navBar
 
-		property bool activatingControls: false
 		property real navbarX: pageStack.navbarX
 		onNavbarXChanged: {
 			if (!pageStack.currentItem || pageStack.depth < 1) {
@@ -146,13 +234,11 @@ Item {
 			// (rather than activating/deactivating the controls panel)
 			// then don't allow the movement, i.e. keep navbar visible.
 			if (currentIndex === (model.count -1)
-					&& pageStack.currentItem.topLeftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
-					&& !activatingControls) {
+					&& pageStack.currentItem.topLeftButton === VenusOS.StatusBar_LeftButton_ControlsInactive) {
 				return
 			}
 
 			// Make the nav bar slide in/out along with the bottom page in the stack.
-			activatingControls = false
 			x = navbarX
 		}
 
