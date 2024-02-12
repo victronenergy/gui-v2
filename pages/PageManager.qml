@@ -17,9 +17,18 @@ QtObject {
 	}
 
 	// Ugly hack, but ...
-	property var currentPage
-	property var navBar
-	property var statusBar
+	readonly property Page currentPage: controlsActive ? _controlCardsPage : _currentPage
+	property Page _currentPage
+
+	function setCurrentPage(page) {
+		_currentPage = page
+	}
+
+	property bool controlsActive
+	property QtObject _controlCardsPage
+
+	property NavBar navBar
+	property StatusBar statusBar
 
 	property int interactivity: VenusOS.PageManager_InteractionMode_Interactive
 

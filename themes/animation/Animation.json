@@ -11,6 +11,7 @@
     "animation_briefPage_gaugeArc_initialize_duration": 300,
     "animation_briefPage_gaugeLabel_initialize_delayedStart_duration": 100,
     "animation_briefPage_gaugeLabel_initialize_duration": 400,
+    "animation_controlCards_slide_duration": 150,
     "animation_toastNotification_fade_duration": 250,
     "animation_generator_starting_toastNotification_autoClose_duration": 5000,
     "animation_generator_stopping_toastNotification_autoClose_duration": 3000,
