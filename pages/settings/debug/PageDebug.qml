@@ -68,17 +68,17 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml", { title: text })
 			}
 
-			ListNavigationItem {
+			// TODO implement when venus-platform provides equivalent of vePlatform.getMemInfo()
+			/*ListNavigationItem {
 				text: "glibc memory"
-				// TODO implement when venus-platform provides equivalent of vePlatform.getMemInfo()
-				// onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryLibc.qml", { title: text })
-			}
+				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryLibc.qml", { title: text })
+			}*/
 
-			ListNavigationItem {
+			// TODO implement when venus-platform provides equivalent of QuickView.imageCacheSize()
+			/*ListNavigationItem {
 				text: "Qt memory"
-				// TODO implement when venus-platform provides equivalent of QuickView.imageCacheSize()
-				// onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
-			}
+				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
+			}*/
 
 			ListTextItem {
 				//% "Application version"
