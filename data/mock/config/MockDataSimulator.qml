@@ -63,8 +63,13 @@ QtObject {
 	function keyPressed(event) {
 		switch (event.key) {
 		case Qt.Key_Escape:
+
 			if (!!Global.pageManager) {
-				Global.pageManager.popPage()
+				if (Global.pageManager.controlsActive) {
+					Global.pageManager.controlsActive = false
+				} else {
+					Global.pageManager.popPage()
+				}
 			}
 			break
 		case Qt.Key_1:

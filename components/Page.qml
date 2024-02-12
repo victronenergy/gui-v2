@@ -24,5 +24,5 @@ FocusScope {
 	implicitWidth: C.StackView.view ? C.StackView.view.width : 0
 	implicitHeight: C.StackView.view ? C.StackView.view.height : 0
 
-	C.StackView.onActivated: if (!!Global.pageManager) Global.pageManager.currentPage = root
+	C.StackView.onActivated: if (!!Global.pageManager) Global.pageManager.setCurrentPage(root)
 }

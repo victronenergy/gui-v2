@@ -124,6 +124,7 @@
     "geometry_toastNotification_icon_width": 28,
     "geometry_toastNotification_label_padding": 16,
 
+    "geometry_controlCards_slide_distance": 32,
     "geometry_controlCard_minimumWidth": 428,
     "geometry_controlCard_maximumWidth": 448,
     "geometry_controlCard_contentMargins": 16,

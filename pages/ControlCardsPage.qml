@@ -15,18 +15,18 @@ Page {
 			: Theme.geometry_controlCard_maximumWidth
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
+	width: parent.width
+	anchors {
+		top: parent.top
+		bottom: parent.bottom
+		bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
+	}
 
 	ListView {
 		id: cardsView
 
-		anchors {
-			left: parent.left
-			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			right: parent.right
-			top: parent.top
-			bottom: parent.bottom
-			bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
-		}
+		anchors.fill: parent
+		leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
 		rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
