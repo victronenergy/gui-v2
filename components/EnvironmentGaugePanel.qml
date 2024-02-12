@@ -92,7 +92,6 @@ Rectangle {
 		value: Math.round(root.temperature)
 		unit: Global.systemSettings.temperatureUnit
 
-		// TODO min, max and highlight need to come from dbus backend, but not yet available.
 		minimumValue: Global.systemSettings.convertFromCelsius(Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue)
 		maximumValue: Global.systemSettings.convertFromCelsius(Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue)
 		highlightedValue: Theme.geometry_levelsPage_environment_temperatureGauge_highlightedValue
