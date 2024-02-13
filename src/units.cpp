@@ -50,21 +50,21 @@ Units::~Units()
 {
 }
 
-int Units::defaultUnitPrecision(Victron::VenusOS::Enums::Units_Type unit) const
+int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 {
 	switch (unit) {
-	case Victron::VenusOS::Enums::Units_Energy_KiloWattHour: return 2;
-	case Victron::VenusOS::Enums::Units_Volume_CubicMeter: return 3;
-	case Victron::VenusOS::Enums::Units_Volume_Liter:           // fall through
-	case Victron::VenusOS::Enums::Units_Volume_GallonImperial:  // fall through
-	case Victron::VenusOS::Enums::Units_Volume_GallonUS:        // fall through
-	case Victron::VenusOS::Enums::Units_Percentage:             // fall through
-	case Victron::VenusOS::Enums::Units_Watt:                   // fall through
-	case Victron::VenusOS::Enums::Units_WattsPerSquareMeter:    // fall through
-	case Victron::VenusOS::Enums::Units_Temperature_Celsius:    // fall through
-	case Victron::VenusOS::Enums::Units_Temperature_Fahrenheit: // fall through
-	case Victron::VenusOS::Enums::Units_Temperature_Kelvin:     // fall through
-	case Victron::VenusOS::Enums::Units_RevolutionsPerMinute: return 0;
+	case VenusOS::Enums::Units_Energy_KiloWattHour: return 2;
+	case VenusOS::Enums::Units_Volume_CubicMeter: return 3;
+	case VenusOS::Enums::Units_Volume_Liter:           // fall through
+	case VenusOS::Enums::Units_Volume_GallonImperial:  // fall through
+	case VenusOS::Enums::Units_Volume_GallonUS:        // fall through
+	case VenusOS::Enums::Units_Percentage:             // fall through
+	case VenusOS::Enums::Units_Watt:                   // fall through
+	case VenusOS::Enums::Units_WattsPerSquareMeter:    // fall through
+	case VenusOS::Enums::Units_Temperature_Celsius:    // fall through
+	case VenusOS::Enums::Units_Temperature_Fahrenheit: // fall through
+	case VenusOS::Enums::Units_Temperature_Kelvin:     // fall through
+	case VenusOS::Enums::Units_RevolutionsPerMinute: return 0;
 	default:
 		// Volt
 		// VoltAmpere
@@ -76,46 +76,46 @@ int Units::defaultUnitPrecision(Victron::VenusOS::Enums::Units_Type unit) const
 	}
 }
 
-QString Units::defaultUnitString(Victron::VenusOS::Enums::Units_Type unit) const
+QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit) const
 {
 	switch (unit) {
-	case Victron::VenusOS::Enums::Units_Watt:
+	case VenusOS::Enums::Units_Watt:
 		return QStringLiteral("W");
-	case Victron::VenusOS::Enums::Units_Volt:
+	case VenusOS::Enums::Units_Volt:
 		return QStringLiteral("V");
-	case Victron::VenusOS::Enums::Units_VoltAmpere:
+	case VenusOS::Enums::Units_VoltAmpere:
 		return QStringLiteral("VA");
-	case Victron::VenusOS::Enums::Units_Amp:
+	case VenusOS::Enums::Units_Amp:
 		return QStringLiteral("A");
-	case Victron::VenusOS::Enums::Units_Hertz:
+	case VenusOS::Enums::Units_Hertz:
 		return QStringLiteral("Hz");
-	case Victron::VenusOS::Enums::Units_Energy_KiloWattHour:
+	case VenusOS::Enums::Units_Energy_KiloWattHour:
 		return QStringLiteral("kWh");
-	case Victron::VenusOS::Enums::Units_AmpHour:
+	case VenusOS::Enums::Units_AmpHour:
 		return QStringLiteral("Ah");
-	case Victron::VenusOS::Enums::Units_WattsPerSquareMeter:
+	case VenusOS::Enums::Units_WattsPerSquareMeter:
 		return QStringLiteral("W/m2");
-	case Victron::VenusOS::Enums::Units_Percentage:
+	case VenusOS::Enums::Units_Percentage:
 		return QStringLiteral("%");
-	case Victron::VenusOS::Enums::Units_Temperature_Celsius:    // fall through
-	case Victron::VenusOS::Enums::Units_Temperature_Fahrenheit: // fall through
-	case Victron::VenusOS::Enums::Units_Temperature_Kelvin:
+	case VenusOS::Enums::Units_Temperature_Celsius:    // fall through
+	case VenusOS::Enums::Units_Temperature_Fahrenheit: // fall through
+	case VenusOS::Enums::Units_Temperature_Kelvin:
 		// \u00b0 = degrees symbol
 		return  QStringLiteral("\u00b0");
-	case Victron::VenusOS::Enums::Units_Volume_Liter:
+	case VenusOS::Enums::Units_Volume_Liter:
 		// \u2113 = l, \u3398 = kl
 		return QStringLiteral("\u2113");
-	case Victron::VenusOS::Enums::Units_Volume_CubicMeter:
+	case VenusOS::Enums::Units_Volume_CubicMeter:
 		// \u33A5 is not supported by the font, so use two characters \u006D\u00B3 instead.
 		return QStringLiteral("m³");
-	case Victron::VenusOS::Enums::Units_Volume_GallonUS: // fall through
-	case Victron::VenusOS::Enums::Units_Volume_GallonImperial:
+	case VenusOS::Enums::Units_Volume_GallonUS: // fall through
+	case VenusOS::Enums::Units_Volume_GallonImperial:
 		return QStringLiteral("gal");
-	case Victron::VenusOS::Enums::Units_RevolutionsPerMinute:
+	case VenusOS::Enums::Units_RevolutionsPerMinute:
 		return QStringLiteral("RPM");
-	case Victron::VenusOS::Enums::Units_Speed_MetresPerSecond:
+	case VenusOS::Enums::Units_Speed_MetresPerSecond:
 		return QStringLiteral("m/s");
-	case Victron::VenusOS::Enums::Units_Hectopascal:
+	case VenusOS::Enums::Units_Hectopascal:
 		return QStringLiteral("hPa");
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
@@ -123,93 +123,166 @@ QString Units::defaultUnitString(Victron::VenusOS::Enums::Units_Type unit) const
 	}
 }
 
-QString Units::scaledUnitString(Victron::VenusOS::Enums::Units_Type unit) const
-{
-	switch (unit) {
-	case Victron::VenusOS::Enums::Units_Watt:
-		return QStringLiteral("kW");
-	case Victron::VenusOS::Enums::Units_Volt:
-		return QStringLiteral("kV");
-	case Victron::VenusOS::Enums::Units_VoltAmpere:
-		return QStringLiteral("kVA");
-	case Victron::VenusOS::Enums::Units_Amp:
-		return QStringLiteral("kA");
-	case Victron::VenusOS::Enums::Units_Hertz:
-		return QStringLiteral("kHz");
-	case Victron::VenusOS::Enums::Units_Volume_Liter:
-		// \u2113 = l, \u3398 = kl
-		return QStringLiteral("\u3398");
+
+QString Units::scaleToString(VenusOS::Enums::Units_Scale scale) const {
+	switch (scale) {
+	case VenusOS::Enums::Units_Scale_Tera:
+		return QStringLiteral("T");
+	case VenusOS::Enums::Units_Scale_Giga:
+		return QStringLiteral("G");
+	case VenusOS::Enums::Units_Scale_Mega:
+		return QStringLiteral("M");
+	case VenusOS::Enums::Units_Scale_Kilo:
+		return QStringLiteral("k");
+	case VenusOS::Enums::Units_Scale_None:
 	default:
-		return QString();
+		return QStringLiteral("");
 	}
 }
 
-Victron::Units::quantityInfo Units::scaledQuantity(
-	qreal value,
-	qreal unitMatchValue,
-	int precision,
-	const QString &baseUnit,
-	const QString &scaledUnit) const
+bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 {
-	Victron::Units::quantityInfo quantity;
-	qreal v = value;
-	const qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : value;
-	if (!scaledUnit.isEmpty() && (qAbs(scaleMatch) >= 10000)) {
-		quantity.unit = scaledUnit;
-		v /= 1000.0;
-	} else {
-		quantity.unit = baseUnit;
+	switch (unit) {
+	case VenusOS::Enums::Units_Watt:
+	case VenusOS::Enums::Units_Volt:
+	case VenusOS::Enums::Units_VoltAmpere:
+	case VenusOS::Enums::Units_Amp:
+	case VenusOS::Enums::Units_Hertz:
+	case VenusOS::Enums::Units_Energy_KiloWattHour:
+	case VenusOS::Enums::Units_AmpHour:
+	case VenusOS::Enums::Units_WattsPerSquareMeter:
+	case VenusOS::Enums::Units_RevolutionsPerMinute:
+	case VenusOS::Enums::Units_Speed_MetresPerSecond:
+	case VenusOS::Enums::Units_Volume_CubicMeter:
+	case VenusOS::Enums::Units_Volume_Liter:
+	case VenusOS::Enums::Units_Volume_GallonUS:
+	case VenusOS::Enums::Units_Volume_GallonImperial:
+		return true;
+	case VenusOS::Enums::Units_Percentage:
+	case VenusOS::Enums::Units_Temperature_Celsius:
+	case VenusOS::Enums::Units_Temperature_Fahrenheit:
+	case VenusOS::Enums::Units_Temperature_Kelvin:
+	case VenusOS::Enums::Units_Hectopascal:
+	default:
+		return false;
+	}
+}
+
+// Returns the physical quantity as a tuple of strings: { number, unit }.
+// The number is scaled if the absolute value is >= 10,000 (e.g. 10000 W = 10kW)
+quantityInfo Units::getDisplayText(
+	VenusOS::Enums::Units_Type unit,
+	qreal value,
+	int precision,
+	qreal unitMatchValue) const
+{
+	return getDisplayTextWithHysteresis(unit, value, VenusOS::Enums::Units_Scale_None /* skip hysteresis */, precision, unitMatchValue);
+}
+
+quantityInfo Units::getDisplayTextWithHysteresis(
+	VenusOS::Enums::Units_Type unit,
+	qreal value,
+		VenusOS::Enums::Units_Scale previousScale,
+	int precision,
+	qreal unitMatchValue) const
+{
+	// unit unknown
+	if (unit == VenusOS::Enums::Units_None) {
+		//qWarning() << "getDisplayText(): unknown unit " << unit << " with value " << value;
+		quantityInfo qty;
+		qty.number = QStringLiteral("--");
+		return qty;
+	}
+
+	// value unknown
+	if (qIsNaN(value)) {
+		quantityInfo qty;
+		qty.number = QStringLiteral("--");
+		qty.unit = defaultUnitString(unit);
+		return qty;
+	}
+	quantityInfo quantity;
+	quantity.unit = defaultUnitString(unit);
+	quantity.scale = VenusOS::Enums::Units_Scale_None;
+
+	qreal scaledValue = value;
+
+	// scale value is the unit of measure is scalable
+	if (isScalingSupported(unit)) {
+		// Kilowatthour is already in kilos, normalize to plain watthours before scaling
+		if (unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
+			quantity.unit = QStringLiteral("Wh");
+			scaledValue = 1000.0 * scaledValue;
+		}
+
+		const QList<VenusOS::Enums::Units_Scale> scales = {
+			VenusOS::Enums::Units_Scale_Tera,
+			VenusOS::Enums::Units_Scale_Giga,
+			VenusOS::Enums::Units_Scale_Mega,
+			VenusOS::Enums::Units_Scale_Kilo,
+		};
+
+		const qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : scaledValue;
+
+		auto isOverLimit = [](qreal value, VenusOS::Enums::Units_Scale scale, VenusOS::Enums::Units_Scale previousScale) {
+			// Implement hysteresis: Move to larger scale unit when value is over 10*scale,
+			// but only move back to smaller scale when value drops below 9*scale.
+			bool wasPreviousScale = scale == previousScale;
+			const qreal multiplier = wasPreviousScale ? 9 : 10;
+
+			return qAbs(value) >= multiplier*qPow(10, 3*scale);
+		};
+
+		// Litre scaling is special, only kilo range scaling is supported
+		if (unit == VenusOS::Enums::Units_Volume_Liter) {
+			if (isOverLimit(scaleMatch, VenusOS::Enums::Units_Scale_Kilo, previousScale)) {
+				// \u2113 = l, \u3398 = kl
+				quantity.unit = QStringLiteral("\u3398");
+				quantity.scale = VenusOS::Enums::Units_Scale_Kilo;
+				scaledValue = scaledValue / 1000.0;
+			}
+		} else {
+			bool scaled = false;
+			for (const auto scale : scales) {
+				if (isOverLimit(scaleMatch, scale, previousScale)) {
+					quantity.unit = scaleToString(scale) + quantity.unit;
+					quantity.scale = scale;
+					scaledValue = scaledValue / qPow(10, 3*scale);
+					scaled = true;
+					break;
+				}
+			}
+
+			// If no scaling was done prefer kWh instead of Wh
+			if (!scaled && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
+				quantity.unit = defaultUnitString(unit);
+				scaledValue = value;
+			}
+		}
 	}
 
 	// If value is between -1 and 1, but is not zero, show one decimal precision regardless of
 	// precision parameter, to avoid showing just '0'.
 	// And if showing percentages, avoid showing '100%' if value is between 99-100.
-	if ((precision == 1 && v != 0 && qAbs(v) < 1)
-			|| (quantity.unit.compare(QStringLiteral("%")) == 0 && v > 99 && v < 100)) {
-		int vFixed = v * 10;
-		v = (1.0*vFixed) / 10.0;
-		quantity.number = QString::number(v, 'f', 1);
+	precision = precision < 0 ? defaultUnitPrecision(unit) : precision;
+	if (precision < 2 && (scaledValue != 0 && qAbs(scaledValue) < 1)
+			|| (quantity.unit.compare(QStringLiteral("%")) == 0 && scaledValue > 99 && scaledValue < 100)) {
+		int vFixed = qRound(scaledValue * 10);
+		scaledValue = (1.0*vFixed) / 10.0;
+		quantity.number = QString::number(scaledValue, 'f', 1);
 	} else {
 		const qreal vFixedMultiplier = std::pow(10, precision);
-		int vFixed = v * vFixedMultiplier;
-		v = (1.0*vFixed) / vFixedMultiplier;
-		quantity.number = QString::number(v, 'f', precision);
+		int vFixed = qRound(scaledValue * vFixedMultiplier);
+		scaledValue = (1.0*vFixed) / vFixedMultiplier;
+		quantity.number = QString::number(scaledValue, 'f', precision);
 	}
 	return quantity;
 }
 
-// Returns the physical quantity as a tuple of strings: { number, unit }.
-// The number is scaled if the absolute value is >= 10,000 (e.g. 10000 W = 10kW)
-Victron::Units::quantityInfo Units::getDisplayText(
-	Victron::VenusOS::Enums::Units_Type unit,
-	qreal value,
-	int precision,
-	qreal unitMatchValue) const
-{
-	if (unit == Victron::VenusOS::Enums::Units_None) {
-		//qWarning() << "getDisplayText(): unknown unit " << unit << " with value " << value;
-		Victron::Units::quantityInfo qty;
-		qty.number = QStringLiteral("--");
-		return qty;
-	}
-
-	if (qIsNaN(value)) {
-		Victron::Units::quantityInfo qty;
-		qty.number = QStringLiteral("--");
-		qty.unit = defaultUnitString(unit);
-		return qty;
-	}
-
-	const int p = precision < 0 ? defaultUnitPrecision(unit) : precision;
-	const QString baseUnit = defaultUnitString(unit);
-	const QString scaledUnit = scaledUnitString(unit);
-	return scaledQuantity(value, unitMatchValue, p, baseUnit, scaledUnit);
-}
-
-QString Units::getCombinedDisplayText(Victron::VenusOS::Enums::Units_Type unit, qreal value, int precision) const
+QString Units::getCombinedDisplayText(VenusOS::Enums::Units_Type unit, qreal value, int precision) const
 {
 	const int p = precision < 0 ? defaultUnitPrecision(unit) : precision;
-	const Victron::Units::quantityInfo qty = getDisplayText(unit, value, p);
+	const quantityInfo qty = getDisplayText(unit, value, p);
 	if (qty.number.compare(QStringLiteral("--")) == 0) {
 		return qty.number;
 	}
@@ -217,24 +290,24 @@ QString Units::getCombinedDisplayText(Victron::VenusOS::Enums::Units_Type unit, 
 }
 
 QString Units::getCapacityDisplayText(
-	Victron::VenusOS::Enums::Units_Type unit,
+	VenusOS::Enums::Units_Type unit,
 	qreal capacity_m3,
 	qreal remaining_m3) const
 {
-	const qreal capacity = convert(capacity_m3, Victron::VenusOS::Enums::Units_Volume_CubicMeter, unit);
-	const qreal remaining = convert(remaining_m3, Victron::VenusOS::Enums::Units_Volume_CubicMeter, unit);
+	const qreal capacity = convert(capacity_m3, VenusOS::Enums::Units_Volume_CubicMeter, unit);
+	const qreal remaining = convert(remaining_m3, VenusOS::Enums::Units_Volume_CubicMeter, unit);
 
 	const int precision = defaultUnitPrecision(unit);
-	const Victron::Units::quantityInfo c = getDisplayText(unit, capacity, precision);
-	const Victron::Units::quantityInfo r = getDisplayText(unit, remaining, precision, capacity);
+	const quantityInfo c = getDisplayText(unit, capacity, precision);
+	const quantityInfo r = getDisplayText(unit, remaining, precision, capacity);
 	return QStringLiteral("%1/%2%3").arg(r.number, c.number, c.unit);
 }
 
-qreal Units::convert(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit, Victron::VenusOS::Enums::Units_Type toUnit) const
+qreal Units::convert(qreal value, VenusOS::Enums::Units_Type fromUnit, VenusOS::Enums::Units_Type toUnit) const
 {
 	if (qIsNaN(value)
-			|| fromUnit == Victron::VenusOS::Enums::Units_None
-			|| toUnit == Victron::VenusOS::Enums::Units_None) {
+			|| fromUnit == VenusOS::Enums::Units_None
+			|| toUnit == VenusOS::Enums::Units_None) {
 		return qQNaN();
 	}
 	if (fromUnit == toUnit) {
@@ -266,7 +339,7 @@ qreal Units::sumRealNumbers(qreal a, qreal b) const
 		: (a+b);
 }
 
-int Units::unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit) const
+int Units::unitToVeUnit(VenusOS::Enums::Units_Type unit) const
 {
 	return static_cast<int>(::unitToVeUnit(unit));
 }

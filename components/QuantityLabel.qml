@@ -9,18 +9,20 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property real value
-	property int unit: VenusOS.Units_None
+	property alias value: quantityInfo.value
+	property alias unit: quantityInfo.unitType
 	property alias font: unitLabel.font
 	property color valueColor: Theme.color_font_primary
 	property alias unitColor: unitLabel.color
 	property int alignment: Qt.AlignHCenter
-	property int precision: Units.defaultUnitPrecision(unit)
-
-	readonly property quantityInfo _quantity: Units.getDisplayText(unit, value, precision)
+	property alias precision: quantityInfo.precision
 
 	implicitWidth: digitRow.width
 	implicitHeight: digitRow.height
+
+	QuantityInfo {
+		id: quantityInfo
+	}
 
 	Row {
 		id: digitRow
@@ -33,12 +35,12 @@ Item {
 		}
 
 		Repeater {
-			model: root._quantity.number.length
+			model: quantityInfo.number.length
 			delegate: Image {
 				required property int index
 
 				source: "image://digits/%1?pixelSize=%2&weight=%3&color=%4"
-						.arg(root._quantity.number[index])
+						.arg(quantityInfo.number[index])
 						.arg(root.font.pixelSize)
 						.arg(root.font.weight)
 						.arg(root.valueColor)
@@ -63,7 +65,7 @@ Item {
 		Label {
 			id: unitLabel
 
-			text: root._quantity.unit
+			text: quantityInfo.unit
 			color: Theme.color_font_secondary
 			verticalAlignment: Qt.AlignVCenter
 		}

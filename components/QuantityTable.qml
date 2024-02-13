@@ -34,7 +34,7 @@ Column {
 		if (equalWidthColumns) {
 			return availableWidth / units.length
 		}
-		// "kWh" unit name is longer, so give that column more space.
+		// Give the unit symbol some extra space on the column.
 		const widthMultiplier = (unit === VenusOS.Units_Energy_KiloWattHour) ? 1.2 : 1
 		return ((availableWidth - Theme.geometry_quantityTable_header_widthBoost) / units.length) * widthMultiplier
 	}
