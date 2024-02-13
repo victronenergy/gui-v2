@@ -631,13 +631,13 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/clocktime.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
-)
-
-set(Units_CPP_SOURCES
+    src/quantityinfo.h
+    src/quantityinfo.cpp
     src/units.h
     src/units.cpp
 )
-list(APPEND VenusQMLModule_CPP_SOURCES ${Units_CPP_SOURCES})
+
+list(APPEND VenusQMLModule_CPP_SOURCES  ${Units_CPP_SOURCES})
 
 qt_add_qml_module(VenusQMLModule
     ${QML_MODULE_OPTARGS}

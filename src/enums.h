@@ -89,7 +89,16 @@ public:
 		Units_Hectopascal,
 	};
 	Q_ENUM(Units_Type)
-	
+
+	enum Units_Scale {
+		Units_Scale_None = 0,
+		Units_Scale_Kilo,
+		Units_Scale_Mega,
+		Units_Scale_Giga,
+		Units_Scale_Tera,
+	};
+	Q_ENUM(Units_Scale)
+
 	enum User_AccessType {
 		User_AccessType_User,
 		User_AccessType_Installer,

@@ -24,10 +24,12 @@ class quantityInfo
 	QML_ELEMENT
 	Q_PROPERTY(QString number MEMBER number)
 	Q_PROPERTY(QString unit MEMBER unit)
+	Q_PROPERTY(VenusOS::Enums::Units_Scale scale MEMBER scale)
 
 public:
 	QString number;
 	QString unit;
+	VenusOS::Enums::Units_Scale scale = VenusOS::Enums::Units_Scale_None;
 };
 
 class Units : public QObject
@@ -42,39 +44,39 @@ public:
 
 	static QObject* instance(QQmlEngine *engine, QJSEngine *);
 
-	Q_INVOKABLE int defaultUnitPrecision(Victron::VenusOS::Enums::Units_Type unit) const;
-	Q_INVOKABLE QString defaultUnitString(Victron::VenusOS::Enums::Units_Type unit) const;
+	Q_INVOKABLE int defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const;
+	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit) const;
 
-	Q_INVOKABLE Victron::Units::quantityInfo scaledQuantity(
-		qreal value,
-		qreal unitMatchValue,
-		int precision,
-		const QString &baseUnit,
-		const QString &scaledUnit = QString()) const;
+	Q_INVOKABLE QString scaleToString(VenusOS::Enums::Units_Scale scale) const;
+	Q_INVOKABLE bool isScalingSupported(VenusOS::Enums::Units_Type unit) const;
 
-	Q_INVOKABLE Victron::Units::quantityInfo getDisplayText(
-		Victron::VenusOS::Enums::Units_Type unit,
+	Q_INVOKABLE quantityInfo getDisplayText(
+		VenusOS::Enums::Units_Type unit,
 		qreal value,
 		int precision = -1,
 		qreal unitMatchValue = qQNaN()) const;
 
+	quantityInfo getDisplayTextWithHysteresis(
+		VenusOS::Enums::Units_Type unit,
+		qreal value,
+		VenusOS::Enums::Units_Scale previousScale,
+		int precision = -1,
+		qreal unitMatchValue = qQNaN()) const;
+
 	Q_INVOKABLE QString getCombinedDisplayText(
-		Victron::VenusOS::Enums::Units_Type unit,
+		VenusOS::Enums::Units_Type unit,
 		qreal value,
 		int precision = -1) const;
 
-	Q_INVOKABLE QString getCapacityDisplayText(Victron::VenusOS::Enums::Units_Type unit,
+	Q_INVOKABLE QString getCapacityDisplayText(VenusOS::Enums::Units_Type unit,
 		qreal capacity_m3,
 		qreal remaining_m3) const;
 
-	Q_INVOKABLE qreal convert(qreal value, Victron::VenusOS::Enums::Units_Type fromUnit, Victron::VenusOS::Enums::Units_Type toUnit) const;
+	Q_INVOKABLE qreal convert(qreal value, VenusOS::Enums::Units_Type fromUnit, VenusOS::Enums::Units_Type toUnit) const;
 
-	Q_INVOKABLE int unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit) const;
+	Q_INVOKABLE int unitToVeUnit(VenusOS::Enums::Units_Type unit) const;
 
 	Q_INVOKABLE qreal sumRealNumbers(qreal a, qreal b) const;
-
-private:
-	QString scaledUnitString(Victron::VenusOS::Enums::Units_Type unit) const;
 };
 
 }
