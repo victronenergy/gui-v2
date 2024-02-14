@@ -129,28 +129,28 @@ Item {
 					from: statusBar.height - Theme.geometry_controlCards_slide_distance
 					to: statusBar.height
 					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.InSine
+					easing.type: Easing.OutSine
 				}
 				OpacityAnimator {
 					target: controlCardsLoader
 					from: 0.0
 					to: 1.0
 					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.InSine
+					easing.type: Easing.OutSine
 				}
 				OpacityAnimator {
 					target: pageStack
 					from: 1.0
 					to: 0.0
 					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.InSine
+					easing.type: Easing.OutSine
 				}
 				OpacityAnimator {
 					target: navBar
 					from: 1.0
 					to: 0.0
 					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.InSine
+					easing.type: Easing.OutSine
 				}
 			}
 		}
