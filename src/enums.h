@@ -375,11 +375,9 @@ public:
 	Q_ENUM(DVCC_Mode)
 
 	enum Notification_Type {
-		Notification_Inactive,
-		Notification_Info,
-		Notification_Confirm,
 		Notification_Warning,
-		Notification_Alarm
+		Notification_Alarm,
+		Notification_Info
 	};
 	Q_ENUM(Notification_Type)
 

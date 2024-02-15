@@ -10,12 +10,7 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	property bool acknowledged
-	property bool alarmActive
-	property int category
-	property date date
-	property string source
-	property string description
+	property Notification notification
 
 	function _formatTimestamp(date) {
 		let ms = Math.floor(ClockTime.currentDateTime - date)
@@ -60,7 +55,7 @@ Rectangle {
 			width: Theme.geometry_notificationsPage_delegate_marker_width
 			height: width
 			radius: Theme.geometry_notificationsPage_delegate_marker_radius
-			color: root.acknowledged ? "transparent" : Theme.color_critical
+			color: root.notification.acknowledged ? "transparent" : Theme.color_critical
 		}
 		Item {
 			height: 1
@@ -69,12 +64,12 @@ Rectangle {
 		CP.ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
 			fillMode: Image.PreserveAspectFit
-			color: root.category === VenusOS.Notification_Info
-				   ? (root.alarmActive ? Theme.color_ok : Theme.color_darkOk)
-				   : root.category === VenusOS.Notification_Warning
-					 ? (root.alarmActive ? Theme.color_warning : Theme.color_darkWarning)
-					 : (root.alarmActive ? Theme.color_critical : Theme.color_darkCritical)
-			source: root.category === VenusOS.Notification_Info
+			color: root.notification.type === VenusOS.Notification_Info
+				   ? (root.notification.active ? Theme.color_ok : Theme.color_darkOk)
+				   : root.notification.type === VenusOS.Notification_Warning
+					 ? (root.notification.active ? Theme.color_warning : Theme.color_darkWarning)
+					 : (root.notification.active ? Theme.color_critical : Theme.color_darkCritical)
+			source: root.notification.type === VenusOS.Notification_Info
 					? "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
 		}
 		Item {
@@ -87,12 +82,14 @@ Rectangle {
 
 			Label {
 				color: Theme.color_listItem_secondaryText
-				text: root.source
+				text: root.notification.deviceName
 			}
 			Label {
 				color: Theme.color_font_primary
 				font.pixelSize: Theme.font_size_body2
-				text: qsTrId(root.description)
+				//: %1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')
+				//% "%1 %2"
+				text: qsTrId("notification_description_and_value").arg(root.notification.description).arg(root.notification.value)
 			}
 		}
 	}
@@ -104,11 +101,12 @@ Rectangle {
 			rightMargin: Theme.geometry_notificationsPage_delegate_rightMargin
 		}
 		color: Theme.color_notificationsPage_text_color
-		text: _formatTimestamp(root.date)
+		text: _formatTimestamp(root.notification.dateTime)
 	}
 	MouseArea {
 		id: mouseArea
 		anchors.fill: parent
-		onClicked: model.acknowledged = true
+		enabled: !root.notification.acknowledged
+		onClicked: root.notification.setAcknowledged(true)
 	}
 }

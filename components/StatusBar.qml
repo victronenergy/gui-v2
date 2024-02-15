@@ -84,11 +84,7 @@ Rectangle {
 			right: parent.right
 			rightMargin: Theme.geometry_notificationsPage_snoozeButton_rightMargin
 		}
-		enabled: !!Global.pageManager
-					&& !!Global.pageManager.navBar
-					&& Global.pageManager.navBar.currentUrl === "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
-					&& Global.notifications.audibleAlarmActive
-					&& !Global.notifications.snoozeAudibleAlarmActive
+		enabled: !!Global.notifications && Global.notifications.alarm
 		opacity: enabled ? 1 : 0
 		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration} }
 		border.width: Theme.geometry_button_border_width
@@ -112,7 +108,7 @@ Rectangle {
 				text: qsTrId("silence_alarm")
 			}
 		}
-		onClicked: Global.notifications.snoozeAudibleAlarmActive = true
+		onClicked: Global.notifications.acknowledgeAll()
 	}
 
 	Button {
