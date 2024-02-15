@@ -79,8 +79,8 @@ QtObject {
 		case Qt.Key_5:
 			if (!!Global.pageManager) {
 				const newIndex = event.key - Qt.Key_1
-				Global.pageManager.navBar.currentIndex = newIndex
-				Global.pageManager.navBar.currentUrl = Global.pageManager.navBar.model.get(newIndex).url
+				const pageUrl = Global.pageManager.navBar.model.get(newIndex).url
+				Global.pageManager.navBar.showPage(pageUrl.substring(pageUrl.lastIndexOf('/')))
 				event.accepted = true
 			}
 			break

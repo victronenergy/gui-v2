@@ -79,33 +79,36 @@ Rectangle {
 
 	Button {
 		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_notificationsPage_snoozeButton_topMargin
-			right: parent.right
-			rightMargin: Theme.geometry_notificationsPage_snoozeButton_rightMargin
+			right: rightButtonItem.left
+			rightMargin: Theme.geometry_notificationsPage_snoozeButton_horizontalMargin
+			verticalCenter: parent.verticalCenter
 		}
-		enabled: !!Global.notifications && Global.notifications.alarm
+		enabled: !!Global.notifications && Global.notifications.alert
 		opacity: enabled ? 1 : 0
 		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration} }
 		border.width: Theme.geometry_button_border_width
 		border.color: Theme.color_critical
-		width: Theme.geometry_notificationsPage_snoozeButton_width
+		leftPadding: Theme.geometry_notificationsPage_snoozeButton_horizontalMargin
+		rightPadding: Theme.geometry_notificationsPage_snoozeButton_horizontalMargin
 		height: Theme.geometry_notificationsPage_snoozeButton_height
 		backgroundColor: Theme.color_darkCritical
-		radius: Theme.geometry_notificationsPage_snoozeButton_radius
+		radius: Theme.geometry_button_radius
 		contentItem: Row {
-			leftPadding: Theme.geometry_notificationsPage_snoozeButton_image_leftMargin
 			anchors.verticalCenter: parent.verticalCenter
 			spacing: Theme.geometry_notificationsPage_snoozeButton_spacing
-			CP.IconLabel {
+
+			CP.ColorImage {
 				anchors.verticalCenter: parent.verticalCenter
-				icon.source: "qrc:/images/icon_alarm_snooze_24"
+				source: "qrc:/images/icon_alarm_snooze_24"
+				color: Theme.color_critical
 			}
+
 			Label {
 				anchors.verticalCenter: parent.verticalCenter
 				font.pixelSize: Theme.font_size_caption
 				//% "Silence alarm"
 				text: qsTrId("silence_alarm")
+				color: Theme.color_critical
 			}
 		}
 		onClicked: Global.notifications.acknowledgeAll()

@@ -251,6 +251,32 @@ function qtyToString(qty, unitSingle, unitMultiple) {
 	}
 }
 
+function formatTimestamp(dateTime, currentDateTime) {
+	let ms = Math.floor(currentDateTime - dateTime)
+	let minutes = Math.floor(ms / 60000)
+	if (minutes < 1) {
+		//: Indicates an event happened very recently
+		//% "now"
+		return qsTrId("utils_formatTimestamp_now")
+	}
+	if (minutes < 60) {
+		//: Indicates an even happened some minutes before now. %1 = the number of minutes in the past
+		//% "%1m ago"
+		return qsTrId("utils_formatTimestamp_min_ago").arg(minutes) // eg. "26m ago"
+	}
+	let hours = Math.floor(minutes / 60)
+	let days = Math.floor(hours / 24)
+	if (days < 1) {
+		//: Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past
+		//% "%1h %2m ago"
+		return qsTrId("utils_formatTimestamp_hours_min_ago").arg(hours).arg(minutes % 60) // eg. "2h 10m ago"
+	}
+	if (days < 7) {
+		return dateTime.toLocaleString(Qt.locale(), "ddd hh:mm") // eg. "Mon 09:06"
+	}
+	return dateTime.toLocaleString(Qt.locale(), "MMM dd hh:mm") // eg. "Mar 27 10:20"
+}
+
 function connmanServiceState(service) {
 	if (service) {
 		switch (service.state) {

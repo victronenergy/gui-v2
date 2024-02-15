@@ -34,7 +34,7 @@ Item {
 	function _loadUi() {
 		console.warn("Data sources ready, loading pages")
 		preloader.model = navBar.model
-		navBar.currentIndex = 0
+		navBar.showPage("BriefPage.qml")
 	}
 
 	PageStack {
