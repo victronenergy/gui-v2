@@ -10,60 +10,36 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	property Notification notification
+	required property Notification notification
 
-	function _formatTimestamp(date) {
-		let ms = Math.floor(ClockTime.currentDateTime - date)
-		let minutes = Math.floor(ms / 60000)
-		if (minutes < 1) {
-			//% "now"
-			return qsTrId("notifications_page_now")
-		}
-		if (minutes < 60) {
-			//% "%1m ago"
-			return qsTrId("%1m ago").arg(minutes) // eg. "26m ago"
-		}
-		let hours = Math.floor(minutes / 60)
-		let days = Math.floor(hours / 24)
-		if (days < 1) {
-			//% "%1h %2m ago"
-			return qsTrId("%1h %2m ago").arg(hours).arg(minutes % 60) // eg. "2h 10m ago"
-		}
-		if (days < 7) {
-			return date.toLocaleString(Qt.locale(), "ddd hh:mm") // eg. "Mon 09:06"
-		}
-		return date.toLocaleString(Qt.locale(), "MMM dd hh:mm") // eg. "Mar 27 10:20"
-	}
+	width: parent ? parent.width : 0
+	height: textColumn.height
+	radius: Theme.geometry_listItem_radius
+	color: Theme.color_background_secondary
 
-	width: Theme.geometry_notificationsPage_delegate_width
-	height: Theme.geometry_notificationsPage_delegate_height
-	radius: Theme.geometry_toastNotification_radius
-	color: mouseArea.containsPress ? Theme.color_listItem_down_background : Theme.color_background_secondary
-
-	Row {
+	Rectangle {
 		anchors {
 			top: parent.top
-			bottom: parent.bottom
+			topMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
 			left: parent.left
-			leftMargin: Theme.geometry_notificationsPage_delegate_marker_leftMargin
+			leftMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
 		}
-		Rectangle {
-			anchors {
-				top: parent.top
-				topMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
-			}
-			width: Theme.geometry_notificationsPage_delegate_marker_width
-			height: width
-			radius: Theme.geometry_notificationsPage_delegate_marker_radius
-			color: root.notification.acknowledged ? "transparent" : Theme.color_critical
-		}
-		Item {
-			height: 1
-			width: Theme.geometry_notificationsPage_delegate_icon_spacing
-		}
+		width: Theme.geometry_notificationsPage_delegate_marker_width
+		height: Theme.geometry_notificationsPage_delegate_marker_width
+		radius: Theme.geometry_notificationsPage_delegate_marker_radius
+		color: Theme.color_critical
+		visible: !root.notification.acknowledged
+	}
+
+	Item {
+		id: iconContainer
+
+		width: icon.width + (2 * Theme.geometry_listItem_content_horizontalMargin)
+		height: parent.height
+
 		CP.ColorImage {
-			anchors.verticalCenter: parent.verticalCenter
-			fillMode: Image.PreserveAspectFit
+			id: icon
+			anchors.centerIn: parent
 			color: root.notification.type === VenusOS.Notification_Info
 				   ? (root.notification.active ? Theme.color_ok : Theme.color_darkOk)
 				   : root.notification.type === VenusOS.Notification_Warning
@@ -72,41 +48,56 @@ Rectangle {
 			source: root.notification.type === VenusOS.Notification_Info
 					? "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
 		}
-		Item {
-			height: 1
-			width: Theme.geometry_notificationsPage_delegate_description_spacing_horizontal
-		}
-		Column {
-			anchors.verticalCenter: parent.verticalCenter
-			spacing: Theme.geometry_notificationsPage_delegate_description_spacing_vertical
+	}
 
-			Label {
-				color: Theme.color_listItem_secondaryText
-				text: root.notification.deviceName
-			}
-			Label {
-				color: Theme.color_font_primary
-				font.pixelSize: Theme.font_size_body2
-				//: %1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')
-				//% "%1 %2"
-				text: qsTrId("notification_description_and_value").arg(root.notification.description).arg(root.notification.value)
-			}
+	Column {
+		id: textColumn
+
+		anchors {
+			left: iconContainer.right
+			right: timestamp.left
+			rightMargin: Theme.geometry_listItem_content_horizontalMargin
+			verticalCenter: parent.verticalCenter
+		}
+		spacing: Theme.geometry_gradientList_spacing
+		topPadding: Theme.geometry_listItem_content_verticalMargin
+		bottomPadding: Theme.geometry_listItem_content_verticalMargin
+
+		Label {
+			id: descriptionLabel
+
+			width: parent.width
+			wrapMode: Text.Wrap
+			visible: root.notification.description.length > 0 || root.notification.value.length > 0
+			elide: Text.ElideRight
+			color: Theme.color_font_primary
+			font.pixelSize: Theme.font_size_body2
+			//: %1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')
+			//% "%1 %2"
+			text: qsTrId("notification_description_and_value").arg(root.notification.description).arg(root.notification.value)
+		}
+
+		Label {
+			width: parent.width
+			wrapMode: Text.Wrap
+			visible: text.length > 0
+			color: Theme.color_listItem_secondaryText
+			font.pixelSize: descriptionLabel.visible ? Theme.font_size_body1 : Theme.font_size_body2
+			text: root.notification.deviceName
 		}
 	}
+
 	Label {
+		id: timestamp
+
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_notificationsPage_delegate_topMargin
+			topMargin: Theme.geometry_listItem_content_verticalMargin
 			right: parent.right
-			rightMargin: Theme.geometry_notificationsPage_delegate_rightMargin
+			rightMargin: Theme.geometry_listItem_content_horizontalMargin
 		}
-		color: Theme.color_notificationsPage_text_color
-		text: _formatTimestamp(root.notification.dateTime)
-	}
-	MouseArea {
-		id: mouseArea
-		anchors.fill: parent
-		enabled: !root.notification.acknowledged
-		onClicked: root.notification.setAcknowledged(true)
+		color: Theme.color_listItem_secondaryText
+		text: Utils.formatTimestamp(root.notification.dateTime, ClockTime.currentDateTime)
+		font.pixelSize: Theme.font_size_body1
 	}
 }
