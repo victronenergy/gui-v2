@@ -32,12 +32,9 @@ ListItem {
 
 		CP.ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
-			source: "qrc:/images/icon_back_32.svg"
-			width: Theme.geometry_statusBar_button_icon_width
-			height: Theme.geometry_statusBar_button_icon_height
+			source: "qrc:/images/icon_arrow_32.svg"
 			rotation: 180
 			color: root.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-			fillMode: Image.PreserveAspectFit
 			visible: root.enabled
 		}
 	]

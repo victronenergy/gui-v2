@@ -49,15 +49,13 @@ Rectangle {
 		}
 		width: Theme.geometry_statusBar_button_width
 		height: Theme.geometry_statusBar_button_height
-		icon.width: Theme.geometry_statusBar_button_icon_width
-		icon.height: Theme.geometry_statusBar_button_icon_height
 		display: C.AbstractButton.IconOnly
 		color: Theme.color_ok
 		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
 					 ? "qrc:/images/icon_controls_off_32.svg"
 					 : root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive
 					   ? "qrc:/images/icon_controls_on_32.svg"
-					   : "qrc:/images/icon_back_32.svg"
+					   : "qrc:/images/icon_arrow_32.svg"
 
 		enabled: !!Global.pageManager
 				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
@@ -139,8 +137,6 @@ Rectangle {
 
 		width: Theme.geometry_statusBar_button_width
 		height: Theme.geometry_statusBar_button_height
-		icon.width: Theme.geometry_statusBar_button_icon_width
-		icon.height: Theme.geometry_statusBar_button_icon_height
 		display: C.AbstractButton.IconOnly
 		color: Theme.color_ok
 		backgroundColor: "transparent"

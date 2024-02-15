@@ -5,6 +5,10 @@
     "geometry_page_content_horizontalMargin": 40,
     "geometry_page_content_verticalMargin": 40,
 
+    "geometry_icon_size_small": 24,
+    "geometry_icon_size_medium": 32,
+    "geometry_icon_size_large": 48,
+
     "geometry_button_spacing": 7,
     "geometry_button_radius": 6,
     "geometry_button_border_width": 2,
@@ -12,7 +16,7 @@
     "geometry_listItemButton_horizontalPadding": 16,
     "geometry_listItemButton_maximumWidth": 180,
     "geometry_listItemButton_height": 40,
-    
+
     "geometry_panel_radius": 8,
 
     "geometry_progressBar_height": 8,
@@ -63,8 +67,6 @@
     "geometry_statusBar_height": 48,
     "geometry_statusBar_button_width": 48,
     "geometry_statusBar_button_height": 48,
-    "geometry_statusBar_button_icon_width": 32,
-    "geometry_statusBar_button_icon_height": 32,
     "geometry_statusBar_horizontalMargin": 32,
 
     "geometry_tabBar_width": 464,
@@ -121,7 +123,6 @@
     "geometry_toastNotification_bottomMargin" : 8,
     "geometry_toastNotification_radius" : 8,
     "geometry_toastNotification_minHeight": 64,
-    "geometry_toastNotification_icon_width": 28,
     "geometry_toastNotification_label_padding": 16,
 
     "geometry_controlCards_slide_distance": 32,
@@ -149,7 +150,7 @@
 
     "geometry_modalWarningDialog_alarmIcon_topMargin": 44,
     "geometry_modalWarningDialog_alarmIcon_width": 48,
-    "geometry_modalWarningDialog_title_spacing": 32,
+    "geometry_modalWarningDialog_title_spacing": 16,
     "geometry_modalWarningDialog_title_horizontalMargin": "geometry_page_content_horizontalMargin",
     "geometry_modalWarningDialog_description_spacing": 12,
     "geometry_modalWarningDialog_description_horizontalMargin": "geometry_page_content_horizontalMargin",
@@ -177,7 +178,6 @@
     "geometry_briefPage_centerGauge_shine_highlightPosition": 0.8,
     "geometry_briefPage_centerGauge_shine_widthRatio": 0.3,
     "geometry_briefPage_centerGauge_maximumGaugeCount": 4,
-    "geometry_briefPage_centerGauge_icon_height": 22,
     "geometry_briefPage_centerGauge_centerTextSpacing": 8,
     "geometry_briefPage_centerGauge_centerText_horizontalSpacing": 8,
     "geometry_briefPage_centerGauge_centerText_topMargin": 103,
@@ -416,7 +416,6 @@
 
     "geometry_solarHistoryErrorView_radius": 6,
     "geometry_solarHistoryErrorView_itemHeight": 40,
-    "geometry_solarHistoryErrorView_alarmIcon_size": 18,
     "geometry_solarHistoryErrorView_expandIcon_size": 32,
     "geometry_solarHistoryErrorView_expandIcon_horizontalMargin": 8,
     "geometry_solarHistoryErrorView_iconBackground_width": 56,
@@ -429,7 +428,6 @@
     "geometry_comboBox_rightPadding": 10,
     "geometry_comboBox_verticalPadding": 10,
     "geometry_comboBox_spacing": 8,
-    "geometry_comboBox_indicator_height": 24,
 
     "geometry_settings_gsmModem_icon_container_width": 28,
     "geometry_settings_gsmModem_icon_container_height": 28,
@@ -440,15 +438,15 @@
     "geometry_settings_gsmModem_signalStrengthBars_bar_width": 4,
     "geometry_settings_gsmModem_signalStrengthBars_bar_incremental_height": 6,
 
-    "geometry_batteryListPage_item_height": 84,
-    "geometry_batteryListPage_item_verticalSpacing": 2,
-
-    "geometry_settings_battery_rangeSlider_labelWidth": 120,
-
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
     "geometry_vebusDeviceListPage_quantityTable_firstColumn_width": 39,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,
     "geometry_vebusDeviceListPage_currentLimit_button_width": 180,
+
+    "geometry_batteryListPage_item_height": 84,
+    "geometry_batteryListPage_item_verticalSpacing": 2,
+
+    "geometry_settings_battery_rangeSlider_labelWidth": 120,
 
     "geometry_veBusDevice_PVCFListQuantityGroup_minimumDelegateWidth": 100,
     "geometry_veBusAlarm_minimumDelegateWidth": 120

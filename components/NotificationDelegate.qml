@@ -75,7 +75,7 @@ Rectangle {
 					 ? (root.alarmActive ? Theme.color_warning : Theme.color_darkWarning)
 					 : (root.alarmActive ? Theme.color_critical : Theme.color_darkCritical)
 			source: root.category === VenusOS.Notification_Info
-					? "qrc:/images/toast_icon_info.svg" : "qrc:/images/toast_icon_alarm.svg"
+					? "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
 		}
 		Item {
 			height: 1

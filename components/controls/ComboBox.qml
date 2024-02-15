@@ -50,7 +50,7 @@ CT.ComboBox {
 					rightMargin: 8
 					verticalCenter: parent.verticalCenter
 				}
-				source: "qrc:/images/icon_checkmark_32"
+				source: "qrc:/images/icon_checkmark_32.svg"
 				color: optionDelegate.pressed ? Theme.color_button_down_text : Theme.color_ok
 				visible: root.currentIndex === index
 			}
@@ -62,12 +62,9 @@ CT.ComboBox {
 
 		x: root.width - width - root.rightPadding
 		y: root.topPadding + (root.availableHeight - height) / 2
-		source: "qrc:/images/icon_back_32.svg"
-		width: Theme.geometry_comboBox_indicator_height
-		height: Theme.geometry_comboBox_indicator_height
+		source: "qrc:/images/icon_arrow_32.svg"
 		rotation: 270
 		color: root.pressed ? Theme.color_primary : Theme.color_ok
-		fillMode: Image.PreserveAspectFit
 	}
 
 	contentItem: Label {

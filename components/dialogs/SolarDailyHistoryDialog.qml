@@ -95,7 +95,7 @@ T.Dialog {
 			}
 			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_arrow_icon_size
 			icon.color: containsPress ? Theme.color_gray4 : Theme.color_gray5
-			icon.source: "qrc:/images/icon_back_32.svg"
+			icon.source: "qrc:/images/icon_arrow_32.svg"
 			visible: root.day > root.minimumDay
 
 			onClicked: {
@@ -112,7 +112,7 @@ T.Dialog {
 			}
 			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_arrow_icon_size
 			icon.color: containsPress ? Theme.color_gray4 : Theme.color_gray5
-			icon.source: "qrc:/images/icon_back_32.svg"
+			icon.source: "qrc:/images/icon_arrow_32.svg"
 			visible: root.day < root.maximumDay
 			rotation: 180
 
@@ -147,7 +147,7 @@ T.Dialog {
 			height: Theme.geometry_solarDailyHistoryDialog_closeButton_icon_size + (2 * Theme.geometry_solarDailyHistoryDialog_closeButton_icon_margins)
 			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_closeButton_icon_size
 			icon.color: Theme.color_ok
-			icon.source: "qrc:/images/toast_icon_close.svg"
+			icon.source: "qrc:/images/icon_close_32.svg"
 
 			onClicked: root.close()
 		}

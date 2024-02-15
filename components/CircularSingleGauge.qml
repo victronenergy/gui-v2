@@ -63,9 +63,8 @@ Item {
 				id: icon
 
 				color: Theme.color_font_primary
-				fillMode: Image.PreserveAspectFit
-				smooth: true
 			}
+
 			Label {
 				id: nameLabel
 

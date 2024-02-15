@@ -34,7 +34,7 @@ function tankProperties(type) {
 	switch (type) {
 	case V.VenusOS.Tank_Type_Battery:
 		return {
-			icon: "qrc:/images/battery.svg",
+			icon: "qrc:/images/icon_battery_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_ok,
 			//% "Battery"
@@ -42,7 +42,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_Fuel:
 		return {
-			icon: "qrc:/images/fuel.svg",
+			icon: "qrc:/images/icon_fuel_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_fuel,
 			//% "Fuel"
@@ -50,7 +50,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_FreshWater:
 		return {
-			icon: "qrc:/images/freshWater20x27.svg",
+			icon: "qrc:/images/icon_fresh_water_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_freshWater,
 			//% "Fresh water"
@@ -58,7 +58,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_WasteWater:
 		return {
-			icon: "qrc:/images/wasteWater.svg",
+			icon: "qrc:/images/icon_waste_water_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_RisingPercentage,
 			borderColor: V.Theme.color_wasteWater,
 			//% "Waste water"
@@ -66,7 +66,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_LiveWell:
 		return {
-			icon: "qrc:/images/liveWell.svg",
+			icon: "qrc:/images/icon_livewell_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_liveWell,
 			//% "Live well"
@@ -74,7 +74,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_Oil:
 		return {
-			icon: "qrc:/images/oil.svg",
+			icon: "qrc:/images/icon_oil_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_oil,
 			//% "Oil"
@@ -82,7 +82,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_BlackWater:
 		return {
-			icon: "qrc:/images/blackWater.svg",
+			icon: "qrc:/images/icon_black_water_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_RisingPercentage,
 			borderColor: V.Theme.color_blackWater,
 			//% "Black water"
@@ -90,7 +90,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_Gasoline:
 		return {
-			icon: "qrc:/images/tank.svg", // same as "Fuel"
+			icon: "qrc:/images/icon_fuel_24.svg", // same as "Fuel"
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_gasoline,
 			//% "Gasoline"
@@ -98,7 +98,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_Diesel:
 		return {
-			icon: "qrc:/images/tank.svg", // same as "Fuel"
+			icon: "qrc:/images/icon_fuel_24.svg", // same as "Fuel"
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_diesel,
 			//% "Diesel"
@@ -106,7 +106,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_LPG:
 		return {
-			icon: "qrc:/images/icon_lpg_32.svg",
+			icon: "qrc:/images/icon_lpg_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_lpg,
 			//% "LPG"
@@ -114,7 +114,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_LNG:
 		return {
-			icon: "qrc:/images/icon_lng_32.svg",
+			icon: "qrc:/images/icon_lng_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_lng,
 			//% "LNG"
@@ -122,7 +122,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_HydraulicOil:
 		return {
-			icon: "qrc:/images/icon_hydraulic_oil_32.svg",
+			icon: "qrc:/images/icon_hydraulic_oil_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_hydraulicOil,
 			//% "Hydraulic oil"
@@ -130,7 +130,7 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_RawWater:
 		return {
-			icon: "qrc:/images/icon_raw_water_32.svg",
+			icon: "qrc:/images/icon_raw_water_24.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			borderColor: V.Theme.color_rawWater,
 			//% "Raw water"
