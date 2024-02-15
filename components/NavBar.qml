@@ -10,8 +10,25 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 	id: root
 
 	property alias model: buttonRepeater.model
-	property int currentIndex
-	property url currentUrl
+
+	readonly property int currentIndex: _currentIndex
+	readonly property url currentUrl: _currentUrl
+
+	// External components should not write to these properties.
+	property int _currentIndex
+	property url _currentUrl
+
+	function showPage(pageName) {
+		for (let i = 0; i < navBarModel.count; ++i) {
+			const url = navBarModel.get(i).url
+			if (url.endsWith("/" + pageName)) {
+				_currentIndex = i
+				_currentUrl = url
+				return
+			}
+		}
+		console.warn("showPage(): cannot find page", pageName)
+	}
 
 	width: parent.width
 	height: Theme.geometry_navigationBar_height
@@ -26,6 +43,8 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 			id: buttonRepeater
 
 			model: ListModel {
+				id: navBarModel
+
 				ListElement {
 					//% "Brief"
 					text: qsTrId("nav_brief")
@@ -68,13 +87,13 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 				backgroundColor: "transparent"
 
 				onClicked: {
-					root.currentIndex = model.index
-					root.currentUrl = model.url
+					root._currentIndex = model.index
+					root._currentUrl = model.url
 				}
 
 				Component.onCompleted: {
 					if (model.index === root.currentIndex) {
-						root.currentUrl = model.url
+						root._currentUrl = model.url
 					}
 				}
 

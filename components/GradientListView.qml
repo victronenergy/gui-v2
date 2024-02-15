@@ -13,7 +13,6 @@ ListView {
 	x: Theme.geometry_page_content_horizontalMargin
 	width: parent.width - Theme.geometry_page_content_horizontalMargin
 	height: parent.height
-	topMargin: Theme.geometry_gradientList_topMargin
 	bottomMargin: Theme.geometry_gradientList_bottomMargin
 	rightMargin: Theme.geometry_page_content_horizontalMargin
 

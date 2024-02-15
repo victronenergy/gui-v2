@@ -13,6 +13,14 @@ Item {
 
 	property var _inputComponent
 
+	readonly property bool _goToNotifications: !!pageManager.navBar && !!Global.notifications
+			&& Global.notifications.alarm
+	on_GoToNotificationsChanged: {
+		if (_goToNotifications) {
+			pageManager.navBar.showPage("NotificationsPage.qml")
+		}
+	}
+
 	PageManager {
 		id: pageManager
 		Component.onCompleted: Global.pageManager = pageManager
