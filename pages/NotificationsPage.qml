@@ -24,10 +24,12 @@ Page {
 		}
 		header: Item {
 			id: headerItem
+			width: parent.width
 			height: history.y + history.height
 
 			NotificationsView {
 				id: activeNotificationsView // these notifications are active and/or not acknowledged
+				width: parent.width
 				implicitHeight: childrenRect.height
 				interactive: false
 				model: Global.notifications.activeModel

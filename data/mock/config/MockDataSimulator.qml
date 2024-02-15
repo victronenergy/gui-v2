@@ -12,16 +12,16 @@ QtObject {
 	property bool timersActive: !Global.splashScreenVisible
 	property int deviceCount
 
-	signal setBatteryRequested(var config)
-	signal setAcInputsRequested(var config)
-	signal setDcInputsRequested(var config)
-	signal setEnvironmentInputsRequested(var config)
-	signal setEvChargersRequested(var config)
-	signal setGeneratorsRequested(var config)
-	signal setSolarRequested(var config)
-	signal setSystemRequested(var config)
-	signal setTanksRequested(var config)
-	signal deactivateSingleAlarm()
+	signal setBatteryRequested(config : var)
+	signal setAcInputsRequested(config : var)
+	signal setDcInputsRequested(config : var)
+	signal setEnvironmentInputsRequested(config : var)
+	signal setEvChargersRequested(config : var)
+	signal setGeneratorsRequested(config : var)
+	signal setSolarRequested(config : var)
+	signal setSystemRequested(config : var)
+	signal setTanksRequested(config : var)
+	signal addDummyNotification(isAlarm : bool)
 
 	readonly property var _configs: ({
 		"qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml": briefAndOverviewConfig,
@@ -163,10 +163,9 @@ QtObject {
 			break
 		case Qt.Key_N:
 			if (event.modifiers & Qt.ShiftModifier) {
-				Global.notifications.activeModel.deactivateSingleAlarm()
+				root.addDummyNotification(true)
 			} else {
-				var n = notificationsConfig.getRandomAlarm()
-				Global.notifications.activeModel.insertByDate(n.acknowledged, n.active, n.type, n.deviceName, n.dateTime, n.description)
+				root.addDummyNotification(false)
 			}
 			event.accepted = true
 			break

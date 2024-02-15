@@ -10,8 +10,6 @@
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 #include "veutil/qt/ve_dbus_connection.hpp"
 #include "veutil/qt/ve_qitems_dbus.hpp"
-#include "gui-v1/dbus_services.h"
-#include "gui-v1/alarmbusitem.h"
 #endif
 
 #include <QtNetwork/QNetworkRequest>
@@ -153,9 +151,6 @@ void BackendConnection::initDBusConnection(const QString &address)
 	}
 
 	dbusProducer->open(dbus);
-	DBusServices *alarmServices = new DBusServices(dbusProducer->services(), this);
-	m_alarmBusItem = new AlarmBusitem(alarmServices, ActiveNotificationsModel::create());
-	alarmServices->initialScan();
 
 	setState(VeDbusConnection::getConnection().isConnected());
 }
