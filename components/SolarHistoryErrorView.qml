@@ -44,10 +44,8 @@ MouseArea {
 					topMargin: (Theme.geometry_solarHistoryErrorView_itemHeight - height) / 2
 					horizontalCenter: parent.horizontalCenter
 				}
-				height: Theme.geometry_solarHistoryErrorView_alarmIcon_size
-				fillMode: Image.PreserveAspectFit
 				color: Theme.color_solarHistoryErrorView_primaryText
-				source: "qrc:/images/toast_icon_alarm.svg"
+				source: "qrc:/images/icon_warning_24.svg"
 			}
 		}
 	}
@@ -62,7 +60,7 @@ MouseArea {
 		height: Theme.geometry_solarHistoryErrorView_expandIcon_size
 		fillMode: Image.PreserveAspectFit
 		color: Theme.color_solarHistoryErrorView_primaryText
-		source: "qrc:/images/icon_back_32.svg"
+		source: "qrc:/images/icon_arrow_32.svg"
 		rotation: root.expanded ? 270 : 90
 	}
 

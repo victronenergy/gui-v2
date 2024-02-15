@@ -113,12 +113,8 @@ Item {
 				}
 				CP.ColorImage {
 					id: iconImage
-					anchors.verticalCenter: parent.verticalCenter
-					height: Theme.geometry_briefPage_centerGauge_icon_height
 					source: model.icon
 					color: Theme.color_font_primary
-					fillMode: Image.PreserveAspectFit
-					smooth: true
 				}
 			}
 		}

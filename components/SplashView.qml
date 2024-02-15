@@ -200,9 +200,7 @@ Rectangle {
 
 			CP.ColorImage {
 				anchors.centerIn: parent
-				sourceSize.width: 24
-				sourceSize.height: 24
-				source: "qrc:/images/icon_alarm_48.svg"
+				source: "qrc:/images/icon_warning_24.svg"
 				color: Theme.color_red
 			}
 		}

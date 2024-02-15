@@ -261,10 +261,9 @@ Page {
 			CP.ColorImage {
 				parent: deviceDelegate.content
 				anchors.verticalCenter: parent.verticalCenter
-				source: "qrc:/images/icon_back_32.svg"
+				source: "qrc:/images/icon_arrow_32.svg"
 				rotation: 180
 				color: deviceMouseArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-				fillMode: Image.PreserveAspectFit
 				visible: deviceMouseArea.enabled
 			}
 

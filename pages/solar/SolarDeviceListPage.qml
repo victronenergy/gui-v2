@@ -130,7 +130,7 @@ Page {
 					bottom: parent.bottom
 					bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin
 					right: parent.right
-					rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_statusBar_button_icon_width
+					rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
 				}
 				width: Theme.geometry_solarListPage_quantityRow_width
 

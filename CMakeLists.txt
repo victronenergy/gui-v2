@@ -987,10 +987,9 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         fonts/MuseoSans-500.otf
         images/acloads.svg
         images/alternator.svg
-        images/battery.svg
-        images/battery_charging.svg
-        images/battery_discharging.svg
-        images/blackWater.svg
+        images/icon_battery_24.svg
+        images/icon_battery_charging_24.svg
+        images/icon_battery_discharging_24.svg
         images/brief.svg
         images/cloud.svg
         images/consumption.svg
@@ -999,8 +998,17 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/electron.svg
         images/ess.svg
         images/freshWater.svg
-        images/freshWater20x27.svg
-        images/fuel.svg
+        images/icon_battery_24.svg
+        images/icon_black_water_24.svg
+        images/icon_fresh_water_24.svg
+        images/icon_raw_water_24.svg
+        images/icon_waste_water_24.svg
+        images/icon_livewell_24.svg
+        images/icon_fuel_24.svg
+        images/icon_oil_24.svg
+        images/icon_hydraulic_oil_24.svg
+        images/icon_lng_24.svg
+        images/icon_lpg_24.svg
         images/fueltank.svg
         images/gauge_intro_5_matte_black.gif
         images/gauge_intro_5_matte_white.gif
@@ -1009,26 +1017,22 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/generator.svg
         images/grid.svg
         images/icon_simlocked_32.svg
+        images/icon_warning_24.svg
         images/icon_alarm_48.svg
         images/icon_alarm_snooze_24
         images/icon_autostart_24.svg
-        images/icon_back_32.svg
+        images/icon_arrow_32.svg
         images/icon_charging_station_24.svg
-        images/icon_checkmark_32.svg
         images/icon_checkmark_48.svg
         images/icon_controls_off_32.svg
         images/icon_controls_on_32.svg
         images/icon_dc_24.svg
         images/icon_humidity_32.svg
-        images/icon_hydraulic_oil_32.svg
         images/icon_input_24.svg
-        images/icon_lng_32.svg
-        images/icon_lpg_32.svg
         images/icon_manualstart_24.svg
         images/icon_manualstart_timer_24.svg
         images/icon_minus.svg
         images/icon_plus.svg
-        images/icon_raw_water_32.svg
         images/icon_refresh_32.svg
         images/icon_sidepanel_off_32.svg
         images/icon_sidepanel_on_32.svg
@@ -1037,13 +1041,10 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/inverter.svg
         images/inverter_charger.svg
         images/levels.svg
-        images/liveWell.svg
         images/notifications.svg
-        images/oil.svg
         images/overview.svg
         images/rain.svg
         images/scatteredcloud.svg
-        images/settings.png
         images/settings.svg
         images/shore.svg
         images/solaryield.svg
@@ -1054,12 +1055,10 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/sunny.svg
         images/switch_indicator.png
         images/switches.svg
-        images/tank.svg
-        images/toast_icon_alarm.svg
-        images/toast_icon_checkmark.svg
-        images/toast_icon_close.svg
-        images/toast_icon_info.svg
-        images/wasteWater.svg
+        images/icon_warning_32.svg
+        images/icon_checkmark_32.svg
+        images/icon_close_32.svg
+        images/icon_info_32.svg
         images/widget_connector_nub_horizontal.svg
         images/widget_connector_nub_vertical.svg
         images/wind.svg

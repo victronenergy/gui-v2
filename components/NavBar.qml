@@ -53,7 +53,7 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 				ListElement {
 					//% "Settings"
 					text: qsTrId("nav_settings")
-					icon: "qrc:/images/settings.png"
+					icon: "qrc:/images/settings.svg"
 					url: "qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml"
 				}
 			}

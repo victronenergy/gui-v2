@@ -179,6 +179,30 @@ Page {
 				text: "Time selection"
 			}
 
+
+			ListTextItem {
+				text: "Toast"
+				content.children: [
+
+					ListItemButton {
+						text: "Confirm"
+						onClicked: Global.showToastNotification(VenusOS.Notification_Confirm, "This if confirmation toast")
+					},
+					ListItemButton {
+						text: "Warning"
+						onClicked: Global.showToastNotification(VenusOS.Notification_Warning, "This if warning toast")
+					},
+					ListItemButton {
+						text: "Alarm"
+						onClicked: Global.showToastNotification(VenusOS.Notification_Alarm, "This if alarm toast")
+					},
+					ListItemButton {
+						text: "Info"
+						onClicked: Global.showToastNotification(VenusOS.Notification_Info, "This if info toast")
+					}
+				]
+			}
+
 			ListItem {
 				text: "Custom item"
 
