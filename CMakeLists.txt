@@ -402,6 +402,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/MeteoDevice.qml
     data/common/MotorDrive.qml
     data/common/MultiRsDevice.qml
+    data/common/Notification.qml
     data/common/PulseMeter.qml
     data/common/PvInverter.qml
     data/common/PvMonitor.qml
@@ -890,20 +891,6 @@ if (${LOAD_QML_FROM_FILESYSTEM})
     )
 endif()
 # end Mqtt_QML_MODULE
-
-set(GUIv1_DBUS_SOURCES
-    src/gui-v1/alarmbusitem.h
-    src/gui-v1/alarmbusitem.cpp
-    src/gui-v1/alarmmonitor.h
-    src/gui-v1/alarmmonitor.cpp
-    src/gui-v1/dbus_service.h
-    src/gui-v1/dbus_service.cpp
-    src/gui-v1/dbus_services.h
-    src/gui-v1/dbus_services.cpp
-)
-if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    list(APPEND SOURCES ${GUIv1_DBUS_SOURCES})
-endif()
 
 set(VENUS_CPP_SOURCES
     src/main.cpp

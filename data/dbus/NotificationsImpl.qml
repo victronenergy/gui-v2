@@ -6,4 +6,18 @@
 import QtQuick
 import Victron.VenusOS
 
-QtObject { }
+Instantiator {
+	model: VeQItemSortTableModel {
+		dynamicSortFilter: true
+		filterRole: VeQItemTableModel.UniqueIdRole
+		filterRegExp: "^dbus\/com\.victronenergy\.platform\/Notifications\/\\d+$"
+		model: VeQItemTableModel {
+			uids: ["dbus/com.victronenergy.platform/Notifications"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+	}
+	delegate: Notification {
+		required property string id
+		notificationId: id
+	}
+}

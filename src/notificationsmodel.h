@@ -22,115 +22,103 @@ namespace Victron {
 
 namespace VenusOS {
 
-struct Notification
-{
-	Notification(const Notification& other);
-	Notification(const bool acknowledged,
-				 const bool active,
-				 const Enums::Notification_Type type,
-				 const QString &deviceName,
-				 const QDateTime& dateTime,
-				 const QString &description);
-	Notification& operator=(const Notification &other);
 
-	bool acknowledged = false;
-	bool active = true;
-	Enums::Notification_Type type = Enums::Notification_Alarm;
-	QString deviceName;
-	QDateTime dateTime;
-	QString description;
-	QString value;
+class BaseNotification : public QObject
+{
+	Q_OBJECT
+	QML_ELEMENT
+
+	Q_PROPERTY(int notificationId READ notificationId WRITE setNotificationId NOTIFY notificationIdChanged)
+	Q_PROPERTY(bool acknowledged READ acknowledged WRITE setAcknowledged NOTIFY acknowledgedChanged)
+	Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
+	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
+	Q_PROPERTY(QDateTime dateTime READ dateTime WRITE setDateTime NOTIFY dateTimeChanged)
+	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
+	Q_PROPERTY(QString deviceName READ deviceName WRITE setDeviceName NOTIFY deviceNameChanged)
+	Q_PROPERTY(QString value READ value WRITE setValue NOTIFY valueChanged)
+
+public:
+	int notificationId() const;
+	void setNotificationId(int notificationId);
+
+	bool acknowledged() const;
+	void setAcknowledged(bool acknowledged);
+
+	bool active() const;
+	void setActive(bool active);
+
+	int type() const;
+	void setType(int type);
+
+	QDateTime dateTime() const;
+	void setDateTime(const QDateTime &dateTime);
+
+	QString description() const;
+	void setDescription(const QString &description);
+
+	QString deviceName() const;
+	void setDeviceName(const QString &deviceName);
+
+	QString value() const;
+	void setValue(const QString &value);
+
+signals:
+	void notificationIdChanged();
+	void acknowledgedChanged();
+	void activeChanged();
+	void typeChanged();
+	void dateTimeChanged();
+	void descriptionChanged();
+	void deviceNameChanged();
+	void valueChanged();
+
+private:
+	friend class NotificationsModel;
+
+	int m_notificationId = -1;
+	bool m_acknowledged = false;
+	bool m_active = false;
+	int m_type = -1;
+	QDateTime m_dateTime;
+	QString m_description;
+	QString m_deviceName;
+	QString m_value;
 };
 
 class NotificationsModel : public QAbstractListModel
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
-	enum RoleNames {
-		AcknowledgedRole = Qt::UserRole,
-		ActiveRole,
-		TypeRole,
-		ServiceRole,
-		DateTimeRole,
-		DescriptionRole,
-		ValueRole
+	enum Role {
+		NotificationRole = Qt::UserRole,
 	};
 
-	~NotificationsModel() override = 0;
+	explicit NotificationsModel(QObject *parent = nullptr);
 
 	int count(const QModelIndex& parent = QModelIndex()) const;
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
 
-	void insertByDate(const Victron::VenusOS::Notification& newNotification);
-	Q_INVOKABLE void deactivateSingleAlarm(); // testing only
-	Q_INVOKABLE void insertByDate(bool acknowledged,
-							const bool active,
-							const Enums::Notification_Type type,
-							const QString &deviceName,
-							const QDateTime& dateTime,
-							const QString &description);
-	Q_INVOKABLE void remove(int index);
+	Q_INVOKABLE void insertByDate(Victron::VenusOS::BaseNotification *notification);
+	Q_INVOKABLE void removeNotification(int notificationId);
 	Q_INVOKABLE void reset();
-	void insert(const int index, const Victron::VenusOS::Notification& newNotification);
-	void append(const Victron::VenusOS::Notification& notification);
+
+	void insert(const int index, BaseNotification *newNotification);
+	void remove(int index);
 
 signals:
 	void countChanged(int);
 
 protected:
-	explicit NotificationsModel(QObject *parent = nullptr);
 	QHash<int, QByteArray> roleNames() const override;
 
-	QList<Notification> m_data;
-	const int m_maxNotifications;
+	QVector<QPointer<BaseNotification> > m_data;
 
 private:
 	QHash<int, QByteArray> m_roleNames;
-};
-
-class ActiveNotificationsModel : public NotificationsModel
-{
-	Q_OBJECT
-	QML_ELEMENT
-	QML_SINGLETON
-	Q_PROPERTY(bool hasNewNotifications READ hasNewNotifications NOTIFY hasNewNotificationsChanged) // when true, we display a red dot on the 'notifications' button in the nav bar
-public:
-
-	~ActiveNotificationsModel() override;
-	static ActiveNotificationsModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
-	bool setData(const QModelIndex &index, const QVariant &value, int role) override;
-	bool hasNewNotifications() const;
-	void addOrUpdateNotification(Enums::Notification_Type type, const QString &devicename, const QString &description, const QString &value);
-
-public slots:
-	void handleChanges();
-
-signals:
-	void hasNewNotificationsChanged();
-
-protected:
-	explicit ActiveNotificationsModel(QObject *parent);
-
-private:
-	void setHasNewNotifications(const bool hasNewNotifications);
-	bool m_hasNewNotifications = false;
-};
-
-class HistoricalNotificationsModel : public NotificationsModel
-{
-	Q_OBJECT
-	QML_ELEMENT
-	QML_SINGLETON
-public:
-	~HistoricalNotificationsModel() override;
-	static HistoricalNotificationsModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
-	bool setData(const QModelIndex &index, const QVariant &value, int role) override;
-
-protected:
-	explicit HistoricalNotificationsModel(QObject *parent);
 };
 
 } /* VenusOS */

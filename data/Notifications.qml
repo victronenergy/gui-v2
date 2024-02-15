@@ -9,14 +9,35 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property var activeModel: ActiveNotificationsModel
-	property var historicalModel: HistoricalNotificationsModel
-	property bool audibleAlarmActive: false
-	property bool snoozeAudibleAlarmActive: false
+	readonly property string serviceUid: "%1/Notifications".arg(BackendConnection.serviceUidForType("platform"))
+
+	property NotificationsModel activeModel: NotificationsModel {}
+	property NotificationsModel historicalModel: NotificationsModel {}
+
+	readonly property bool alarm: !!_alarm.value
+	readonly property bool alert: !!_alert.value
+
+	signal acknowledgeNotification(notificationId: int)
 
 	function reset() {
 		activeModel.reset()
 		historicalModel.reset()
+	}
+
+	function acknowledgeAll() {
+		_acknowledgeAll.setValue(1)
+	}
+
+	readonly property VeQuickItem _acknowledgeAll: VeQuickItem {
+		uid: root.serviceUid + "/AcknowledgeAll"
+	}
+
+	readonly property VeQuickItem _alarm: VeQuickItem {
+		uid: root.serviceUid + "/Alarm"
+	}
+
+	readonly property VeQuickItem _alert: VeQuickItem {
+		uid: root.serviceUid + "/Alert"
 	}
 
 	Component.onCompleted: {
