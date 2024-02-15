@@ -51,11 +51,8 @@ CT.Button {
 
 	contentItem: CP.IconLabel {
 		anchors.fill: parent
-
-		mirrored: root.iconAlignment === Button.AlignRight
 		spacing: root.spacing
 		display: root.display
-
 		icon: root.icon
 		text: root.text
 		font: root.font
