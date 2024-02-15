@@ -49,16 +49,14 @@ Page {
 
 			text: service ? (service.name ? service.name : "[" + service.ethernet["Address"] + "]") : ""
 			secondaryText: Utils.connmanServiceState(service)
-			primaryLabel.leftPadding: Theme.geometry_statusBar_button_icon_width + Theme.geometry_listItem_content_spacing
+			primaryLabel.leftPadding: Theme.geometry_icon_size_medium + Theme.geometry_listItem_content_spacing
 
 			CP.ColorImage {
 				anchors {
 					left: wifiPoint.primaryLabel.left
 					verticalCenter: wifiPoint.primaryLabel.verticalCenter
 				}
-				source: "qrc:/images/icon_checkmark_48.svg"
-				width: Theme.geometry_statusBar_button_icon_width
-				height: Theme.geometry_statusBar_button_icon_height
+				source: "qrc:/images/icon_checkmark_32.svg"
 				color: Theme.color_green
 				visible: wifiPoint.service && wifiPoint.service.favorite
 			}

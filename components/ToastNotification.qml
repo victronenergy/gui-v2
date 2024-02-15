@@ -62,12 +62,11 @@ Item {
 				id: icon
 				anchors.centerIn: parent
 
-				width: Theme.geometry_toastNotification_icon_width
 				color: Theme.color_toastNotification_foreground
-				source: root.category === VenusOS.Notification_Confirm ? "qrc:/images/toast_icon_checkmark.svg"
-					  : root.category === VenusOS.Notification_Warning ? "qrc:/images/toast_icon_alarm.svg"
-					  : root.category === VenusOS.Notification_Alarm ? "qrc:/images/toast_icon_alarm.svg"
-					  : "qrc:/images/toast_icon_info.svg"
+				source: root.category === VenusOS.Notification_Confirm ? "qrc:/images/icon_checkmark_32.svg"
+					  : root.category === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
+					  : root.category === VenusOS.Notification_Alarm ? "qrc:/images/icon_warning_32.svg"
+					  : "qrc:/images/icon_info_32.svg"
 			}
 		}
 
@@ -104,9 +103,8 @@ Item {
 				id: dismissIcon
 				anchors.centerIn: parent
 
-				width: Theme.geometry_toastNotification_icon_width
 				color: Theme.color_toastNotification_foreground
-				source: "qrc:/images/toast_icon_close.svg"
+				source: "qrc:/images/icon_close_32.svg"
 			}
 		}
 	}

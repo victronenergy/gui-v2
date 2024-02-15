@@ -114,6 +114,7 @@ Rectangle {
 			delegate: Loader {
 				active: model.index === 0 || root.mergeTanks
 				sourceComponent: TankGauge {
+					expanded: root.expanded
 					animationEnabled: root.animationEnabled
 					width: root._gaugeDelegateWidth
 					height: subgauges.height
