@@ -70,13 +70,48 @@ Page {
 				visible: defaultVisible && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListItem {
+				id: sensorBattery
+
 				//% "Sensor battery"
 				text: qsTrId("temperature_sensor_battery")
-				dataItem.uid: bindPrefix + "/BatteryVoltage"
-				unit: VenusOS.Units_Volt
-				precision: 2
-				visible: defaultVisible && dataItem.isValid
+				visible: defaultVisible && batteryVoltage.isValid
+
+				content.children: [
+					QuantityLabel {
+						id: batteryVoltageLabel
+						anchors.verticalCenter: parent.verticalCenter
+						font.pixelSize: Theme.font_size_body2
+						value: batteryVoltage.value
+						unit: VenusOS.Units_Volt
+						precision: 2
+						VeQuickItem {
+							id: batteryVoltage
+							uid: bindPrefix + "/BatteryVoltage"
+						}
+					},
+					Label {
+						anchors.verticalCenter: parent.verticalCenter
+						text: {
+							if (lowBattery.isValid) {
+								const low = lowBattery.value === 1
+								//% "Low"
+								return low ? qsTrId("temperature_sensor_battery_status_low")
+										   : CommonWords.ok
+							} else {
+								return ""
+							}
+						}
+						color: lowBattery.value === 1 ? Theme.color_red : Theme.color_green
+						font.pixelSize: Theme.font_size_body2
+						verticalAlignment: Text.AlignVCenter
+
+						VeQuickItem {
+							id: lowBattery
+							uid:  bindPrefix + "/Alarms/LowBattery"
+						}
+					}
+				]
 			}
 
 			ListNavigationItem {
