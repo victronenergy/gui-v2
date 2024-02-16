@@ -169,6 +169,14 @@ Page {
 					uid: Global.system.serviceUid + "/Buzzer/State"
 				}
 			}
+
+			ListSwitch {
+				//% "Enable status LEDs"
+				text: qsTrId("settings_enable_status_leds")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/LEDs/Enable"
+				visible: defaultVisible && dataItem.isValid
+			}
+
 			ListRadioButtonGroup {
 				//% "Demo mode"
 				text: qsTrId("settings_demo_mode")
