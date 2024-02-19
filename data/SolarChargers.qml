@@ -43,7 +43,7 @@ QtObject {
 		case VenusOS.SolarCharger_State_Fault:
 			//% "Fault"
 			return qsTrId("solarchargers_state_fault")
-		case VenusOS.SolarCharger_State_Buik:
+		case VenusOS.SolarCharger_State_Bulk:
 			//% "Bulk"
 			return qsTrId("solarchargers_state_bulk")
 		case VenusOS.SolarCharger_State_Absorption:
