@@ -182,6 +182,7 @@ Page {
 			ListTextItem {
 				//% "Time-to-go"
 				text: qsTrId("battery_time_to_go")
+				dataItem.uid: root.battery.serviceUid + "/TimeToGo"
 				visible: defaultVisible && dataItem.seen
 				secondaryText: Utils.secondsToString(root.battery.timeToGo)
 			}
