@@ -46,8 +46,6 @@ QtObject {
 
 		ScriptAction {
 			script: {
-				Global.batteries.system.power = Math.abs(Global.batteries.system.power)
-				Global.batteries.system.current = Math.abs(Global.batteries.system.current)
 				root.chargeTimer.beginCharging()
 			}
 		}

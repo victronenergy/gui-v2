@@ -13,7 +13,7 @@ Window {
 	//% "Venus OS GUI"
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
-	color: Global.allPagesLoaded ? guiLoader.item.mainView.backgroundColor : Theme.color_page_background
+	color: Global.allPagesLoaded && !!guiLoader.item ? guiLoader.item.mainView.backgroundColor : Theme.color_page_background
 
 	width: Qt.platform.os != "wasm" ? Theme.geometry_screen_width : Screen.width
 	height: Qt.platform.os != "wasm" ? Theme.geometry_screen_height : Screen.height

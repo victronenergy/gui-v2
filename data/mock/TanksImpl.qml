@@ -106,7 +106,7 @@ QtObject {
 		repeat: true
 		onTriggered: {
 			let model
-			if (Math.random() > 0.5) {
+			if (Math.random() > 0.5 || _createdObjects.length === 0) {
 				// add a tank
 				model = Global.tanks.tankModel(Math.floor(Math.random() * Global.tanks.tankTypes.length))
 				const randomLevel = Math.random()
