@@ -158,7 +158,7 @@ Item {
 		SequentialAnimation {
 			id: controlsOutAnimation
 
-			running: !pageManager.controlsActive
+			running: controlCardsLoader.active && !pageManager.controlsActive
 
 			ParallelAnimation {
 				YAnimator {
