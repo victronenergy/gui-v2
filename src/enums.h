@@ -495,8 +495,8 @@ public:
 
 	enum SolarCharger_State {
 		SolarCharger_State_Off,
-		SolarCharger_State_Fault,
-		SolarCharger_State_Buik,
+		SolarCharger_State_Fault = 2,
+		SolarCharger_State_Bulk,
 		SolarCharger_State_Absorption,
 		SolarCharger_State_Float,
 		SolarCharger_State_Storage,
