@@ -617,7 +617,6 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/digitimageprovider.h
     src/digitimageprovider.cpp
     src/theme.h
-    src/theme.cpp
     src/themeobjects.h
     src/backendconnection.h
     src/backendconnection.cpp
