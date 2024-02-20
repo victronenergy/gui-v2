@@ -27,7 +27,18 @@ Page {
 	}
 
 	GradientListView {
+		id: energyMeterList
 		model: deviceIds.value ? deviceIds.value.split(',') : []
+
+		header: ListLabel {
+			visible: energyMeterList.count === 0
+			//% "No energy meters found\n\n"
+			//% "Note that this menu only shows Carlo Gavazzi meters connected over RS485. "
+			//% "For any other meter, including Carlo Gavazzi meters connected over ethernet, "
+			//% "see the Modbus TCP/UDP devices menu instead."
+			text: qsTrId("settings_cgwacs_no_energy_meters")
+		}
+
 		delegate: ListNavigationItem {
 			readonly property string devicePath: Global.systemSettings.serviceUid + "/Settings/Devices/cgwacs_" + modelData
 
