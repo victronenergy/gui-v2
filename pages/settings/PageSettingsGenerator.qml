@@ -38,24 +38,49 @@ Page {
 				decimals: 0
 			}
 
-			ListSpinBox {
-				//% "Warm-up time"
-				text: qsTrId("page_settings_generator_warm_up_time")
+			ListNavigationItem {
+				//% "Warm-up & cool-down"
+				text: qsTrId("settings_page_generator_warm_up_cool_down")
 				visible: capabilities.value & warmupCapability
-				dataItem.uid: settingsBindPrefix + "/WarmUpTime"
-				suffix: "s"
-				decimals: 0
-				stepSize: 10
-			}
+				onClicked: Global.pageManager.pushPage(warmupPageComponent, { title: text })
 
-			ListSpinBox {
-				//% "Cool-down time"
-				text: qsTrId("page_settings_generator_cool_down_time")
-				visible: capabilities.value & warmupCapability
-				dataItem.uid: settingsBindPrefix + "/CoolDownTime"
-				suffix: "s"
-				decimals: 0
-				stepSize: 10
+				Component {
+					id: warmupPageComponent
+					Page {
+						GradientListView {
+							id: settingsListView
+
+							model: ObjectModel {
+								ListSpinBox {
+									//% "Warm-up time"
+									text: qsTrId("page_settings_generator_warm_up_time")
+									dataItem.uid: settingsBindPrefix + "/WarmUpTime"
+									suffix: "s"
+									decimals: 0
+									stepSize: 10
+								}
+
+								ListSpinBox {
+									//% "Cool-down time"
+									text: qsTrId("page_settings_generator_cool_down_time")
+									dataItem.uid: settingsBindPrefix + "/CoolDownTime"
+									suffix: "s"
+									decimals: 0
+									stepSize: 10
+								}
+
+								ListSpinBox {
+									//% "Generator stop time"
+									text: qsTrId("page_settings_generator_stop_time")
+									dataItem.uid: settingsBindPrefix + "/GeneratorStopTime"
+									suffix: "s"
+									decimals: 0
+									stepSize: 1
+								}
+							}
+						}
+					}
+				}
 			}
 
 			ListSwitch {
