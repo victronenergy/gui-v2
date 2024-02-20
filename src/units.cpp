@@ -261,6 +261,15 @@ quantityInfo Units::getDisplayTextWithHysteresis(
 		}
 	}
 
+	auto numberOfDigits = [](int value) {
+		int digits = 0;
+		while (value) {
+			value /= 10;
+			digits++;
+		}
+		return digits;
+	};
+
 	// If value is between -1 and 1, but is not zero, show one decimal precision regardless of
 	// precision parameter, to avoid showing just '0'.
 	// And if showing percentages, avoid showing '100%' if value is between 99-100.
@@ -274,7 +283,13 @@ quantityInfo Units::getDisplayTextWithHysteresis(
 		const qreal vFixedMultiplier = std::pow(10, precision);
 		int vFixed = qRound(scaledValue * vFixedMultiplier);
 		scaledValue = (1.0*vFixed) / vFixedMultiplier;
+
+		// if the value is large (hundreds or thousands) no need to display decimals after the decimal point
+		int digits = numberOfDigits(scaledValue);
+		precision = qMax(0, precision - qMax(0, digits - (precision == 1 ? 2 : 1)));
+
 		quantity.number = QString::number(scaledValue, 'f', precision);
+
 	}
 	return quantity;
 }
