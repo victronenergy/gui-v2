@@ -256,6 +256,7 @@ Page {
 
 			text: model.cachedDeviceDescription
 			textModel: model.connected && _displayInfo ? _displayInfo.summary || [] : [ CommonWords.not_connected ]
+			down: deviceMouseArea.containsPress
 			visible: _displayInfo !== null
 
 			CP.ColorImage {
