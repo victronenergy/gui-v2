@@ -178,4 +178,34 @@ TestCase {
 		expect(unit, 9567, "9.57", "MWh", true /* hysteresis */)
 		expect(unit, 8967, "8967", "kWh", true /* hysteresis */)
 	}
+
+	function test_unitMatchValue() {
+		const unit = VenusOS.Units_Energy_KiloWattHour
+		var quantity = Units.getDisplayText(unit, 19567890123)
+		compare("19.6", quantity.number)
+		compare("TWh", quantity.unit)
+
+		// choose scale based on different anchor value
+		var quantity = Units.getDisplayText(unit, 19567890123, -1, 123456789)
+		compare("19568", quantity.number)
+		compare("GWh", quantity.unit)
+	}
+
+	function test_precision() {
+		const unit = VenusOS.Units_Watt
+		var quantity = Units.getDisplayText(unit, 1.9612345)
+		compare("2", quantity.number)
+
+		quantity = Units.getDisplayText(unit, 1.9612345, 1)
+		compare("2.0", quantity.number)
+
+		quantity = Units.getDisplayText(unit, 1.9612345, 2)
+		compare("1.96", quantity.number)
+
+		quantity = Units.getDisplayText(unit, 1.9612345, 3)
+		compare("1.961", quantity.number)
+
+		quantity = Units.getDisplayText(unit, 1.9612345, 4)
+		compare("1.9612", quantity.number)
+	}
 }

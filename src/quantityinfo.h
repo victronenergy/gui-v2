@@ -47,7 +47,7 @@ private:
 	quantityInfo quantity;
 
 	qreal value = qQNaN();
-	Victron::VenusOS::Enums::Units_Type unitType;
+	Victron::VenusOS::Enums::Units_Type unitType = Victron::VenusOS::Enums::Units_None;
 	int precision = -1;
 	qreal unitMatchValue = qQNaN();
 	bool completed = false;
