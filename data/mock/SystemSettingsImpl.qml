@@ -176,8 +176,9 @@ QtObject {
 		setMockGenerator0Value('ServiceInterval', 159984000)
 		setMockGenerator0Value('Soc', 1)
 		setMockGenerator0Value('StopWhenAc1Available', 0)
-		setMockGenerator0Value('WarmUpTime', 600)
-		setMockGenerator0Value('CoolDownTime', 1200)
+		setMockGenerator0Value('WarmUpTime', 40)
+		setMockGenerator0Value('CoolDownTime', 60)
+		setMockGenerator0Value('GeneratorStopTime', 10)
 
 		setMockSettingValue("Services/Modbus", 0)
 		setMockModbusTcpValue("Services/Count", 2)
