@@ -18,24 +18,19 @@ ListItem {
 		Repeater {
 			id: repeater
 
-			delegate: Label {
-				id: label
+			delegate: Row {
 				anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
-				width: root.itemWidth
-					   || (separator.visible ? implicitWidth + root.content.spacing : implicitWidth)
-				font.pixelSize: Theme.font_size_body2
-				color: Theme.color_listItem_secondaryText
-				text: modelData === undefined ? root.invalidText : modelData
-				horizontalAlignment: Text.AlignHCenter
-				elide: Text.ElideRight
+				spacing: root.content.spacing
+				Label {
+					width: root.itemWidth || implicitWidth
+					font.pixelSize: Theme.font_size_body2
+					color: Theme.color_listItem_secondaryText
+					text: modelData === undefined ? root.invalidText : modelData
+					horizontalAlignment: Text.AlignHCenter
+					elide: Text.ElideRight
+				}
 
 				Rectangle {
-					id: separator
-
-					anchors {
-						right: parent.right
-						rightMargin: -root.content.spacing / 2
-					}
 					width: Theme.geometry_listItem_separator_width
 					height: parent.implicitHeight
 					color: Theme.color_listItem_separator
