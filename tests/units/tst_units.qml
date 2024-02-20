@@ -32,7 +32,6 @@ TestCase {
 		compare(unitOut, unit)
 	}
 
-
 	function test_percentage() {
 		expect(VenusOS.Units_Percentage, NaN, "--", "%")
 		expect(VenusOS.Units_Percentage, 0, "0", "%")
@@ -109,9 +108,9 @@ TestCase {
 
 			if (Units.isScalingSupported(unit)) {
 				expect(unit, 12345, "12.3", "k" + unitString)
-				expect(unit, 123456789, "124", "M" + unitString)
-				expect(unit, 123456789012, "124", "G" + unitString)
-				expect(unit, 123456789012345, "124", "T" + unitString)
+				expect(unit, 123456789, "123", "M" + unitString)
+				expect(unit, 123556789012, "124", "G" + unitString)
+				expect(unit, 123456789012345, "123", "T" + unitString)
 			} else {
 				expect(unit, 12345, "12345", unitString)
 				expect(unit, 123456789, "123456789", unitString)
@@ -123,18 +122,21 @@ TestCase {
 		const unit = VenusOS.Units_Energy_KiloWattHour
 
 		expect(unit, NaN, "--", "kWh")
-		expect(unit, 0, "0.00", "kWh")
-		expect(unit, 0.005, "0.01", "kWh")
-		expect(unit, 0.05, "0.05", "kWh")
-		expect(unit, 0.554, "0.55", "kWh")
-		expect(unit, 0.555, "0.56", "kWh")
-		expect(unit, 14.123, "14.1", "kWh")
-		expect(unit, 15.51, "15.5", "kWh")
-		expect(unit, 100.3134, "100", "kWh")
-		expect(unit, 1234.5951, "1235", "kWh")
-		expect(unit, 12345, "12.3", "MWh")
-		expect(unit, 123456789, "123", "GWh")
-		expect(unit, 123456789012, "123", "TWh")
+		expect(unit, 0, "0", "kWh")
+		expect(unit, 0.0005, "0.5", "Wh")
+		expect(unit, 0.005, "5", "Wh")
+		expect(unit, 0.3458, "346", "Wh")
+		expect(unit, 0.5, "500", "Wh")
+		expect(unit, 5, "5000", "Wh")
+		expect(unit, 10.554, "10.55", "kWh")
+		expect(unit, 10.555, "10.56", "kWh")
+		expect(unit, 14.123, "14.12", "kWh")
+		expect(unit, 15.51, "15.51", "kWh")
+		expect(unit, 100.3134, "100.3", "kWh")
+		expect(unit, 1234.5951, "1.235", "MWh")
+		expect(unit, 12345, "12.35", "MWh")
+		expect(unit, 123456789, "123.5", "GWh")
+		expect(unit, 123456789012, "123.5", "TWh")
 	}
 
 	function test_volumeCubicMeter() {
@@ -160,33 +162,41 @@ TestCase {
 		const unit = VenusOS.Units_Energy_KiloWattHour
 
 		// Scaling up works like without hysteresis
-		expect(unit, 100.3134, "100", "kWh", true /* hysteresis */)
-		expect(unit, 1234.5951, "1235", "kWh", true /* hysteresis */)
-		expect(unit, 12345, "12.3", "MWh", true /* hysteresis */)
-		expect(unit, 123456789, "123", "GWh", true /* hysteresis */)
-		expect(unit, 123456789012, "123", "TWh", true /* hysteresis */)
+		expect(unit, 1.234, "1234", "Wh", true) // hysteresis = true
+		expect(unit, 100.3134, "100.3", "kWh", true) // hysteresis = true
+		expect(unit, 1234.5951, "1.235", "MWh", true) // hysteresis = true
+		expect(unit, 12345, "12.35", "MWh", true) // hysteresis = true
+		expect(unit, 123456789, "123.5", "GWh", true) // hysteresis = true
+		expect(unit, 123456789012, "123.5", "TWh", true) // hysteresis = true
 
 		// Keep the scale when going 10% below the threshold
-		expect(unit, 9567890123, "9.57", "TWh", true /* hysteresis */)
-		expect(unit, 8967890123, "8968", "GWh", true /* hysteresis */)
+		expect(unit, 956789012, "0.957", "TWh", true) // hysteresis = true
+		expect(unit, 896789012, "896.8", "GWh", true) // hysteresis = true
+		expect(unit, 956789012, "956.8", "GWh", true) // hysteresis = true
 
 		// Keep the scale when going 10% below the threshold
-		expect(unit, 9567890, "9.57", "GWh", true /* hysteresis */)
-		expect(unit, 8967890, "8968", "MWh", true /* hysteresis */)
+		expect(unit, 956789, "0.957", "GWh", true) // hysteresis = true
+		expect(unit, 896789, "896.8", "MWh", true) // hysteresis = true
+		expect(unit, 956789, "956.8", "MWh", true) // hysteresis = true
 
 		// Keep the scale when going 10% below the threshold
-		expect(unit, 9567, "9.57", "MWh", true /* hysteresis */)
-		expect(unit, 8967, "8967", "kWh", true /* hysteresis */)
+		expect(unit, 956.7, "0.957", "MWh", true) // hysteresis = true
+		expect(unit, 896.7, "896.7", "kWh", true) // hysteresis = true
+		expect(unit, 956.7, "956.7", "kWh", true) // hysteresis = true
+
+		// Keep the scale when going 10% below the threshold
+		expect(unit, 9.5675, "9.568", "kWh", true) // hysteresis = true
+		expect(unit, 8.967, "8967", "Wh", true) // hysteresis = true
 	}
 
 	function test_unitMatchValue() {
 		const unit = VenusOS.Units_Energy_KiloWattHour
 		var quantity = Units.getDisplayText(unit, 19567890123)
-		compare("19.6", quantity.number)
+		compare("19.57", quantity.number)
 		compare("TWh", quantity.unit)
 
 		// choose scale based on different anchor value
-		var quantity = Units.getDisplayText(unit, 19567890123, -1, 123456789)
+		quantity = Units.getDisplayText(unit, 19567890123, -1, 123456789)
 		compare("19568", quantity.number)
 		compare("GWh", quantity.unit)
 	}

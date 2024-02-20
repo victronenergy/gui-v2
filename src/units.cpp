@@ -53,7 +53,7 @@ Units::~Units()
 int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 {
 	switch (unit) {
-	case VenusOS::Enums::Units_Energy_KiloWattHour: return 2;
+	case VenusOS::Enums::Units_Energy_KiloWattHour: return 3;
 	case VenusOS::Enums::Units_Volume_CubicMeter: return 3;
 	case VenusOS::Enums::Units_Volume_Liter:           // fall through
 	case VenusOS::Enums::Units_Volume_GallonImperial:  // fall through
@@ -169,7 +169,8 @@ bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 }
 
 // Returns the physical quantity as a tuple of strings: { number, unit }.
-// The number is scaled if the absolute value is >= 10,000 (e.g. 10000 W = 10kW)
+// The number and unit string are displayed as scaled if the absolute value
+// grows high enough (kilo, mega, giga, tera).
 quantityInfo Units::getDisplayText(
 	VenusOS::Enums::Units_Type unit,
 	qreal value,
@@ -229,7 +230,12 @@ quantityInfo Units::getDisplayTextWithHysteresis(
 			// Implement hysteresis: Move to larger scale unit when value is over 10*scale,
 			// but only move back to smaller scale when value drops below 9*scale.
 			bool wasPreviousScale = scale == previousScale;
-			const qreal multiplier = wasPreviousScale ? 9 : 10;
+
+			// Kilo scale has 10k limit, other scales grow by 1k
+			qreal multiplier = wasPreviousScale ? 0.9 : 1;
+			if (scale == VenusOS::Enums::Units_Scale_Kilo) {
+				multiplier = wasPreviousScale ? 9 : 10;
+			}
 
 			return qAbs(value) >= multiplier*qPow(10, 3*scale);
 		};
@@ -254,10 +260,9 @@ quantityInfo Units::getDisplayTextWithHysteresis(
 				}
 			}
 
-			// If no scaling was done prefer kWh instead of Wh
-			if (!scaled && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
+			// If value is zero prefer kWh instead of Wh
+			if (scaledValue == 0 && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
 				quantity.unit = defaultUnitString(unit);
-				scaledValue = value;
 			}
 		}
 	}
@@ -271,23 +276,29 @@ quantityInfo Units::getDisplayTextWithHysteresis(
 		return digits;
 	};
 
+	// If kilowatt-hours have not been scaled avoid decimals
+	if (quantity.scale == VenusOS::Enums::Units_Scale_None && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
+		precision = 0;
+	}
+
 	// If value is between -1 and 1, but is not zero, show one decimal precision regardless of
 	// precision parameter, to avoid showing just '0'.
 	// And if showing percentages, avoid showing '100%' if value is between 99-100.
 	precision = precision < 0 ? defaultUnitPrecision(unit) : precision;
 	if (precision < 2 && (scaledValue != 0 && qAbs(scaledValue) < 1)
 			|| (quantity.unit.compare(QStringLiteral("%")) == 0 && scaledValue > 99 && scaledValue < 100)) {
+
 		int vFixed = qRound(scaledValue * 10);
 		scaledValue = (1.0*vFixed) / 10.0;
 		quantity.number = QString::number(scaledValue, 'f', 1);
 	} else {
-		const qreal vFixedMultiplier = std::pow(10, precision);
-		int vFixed = qRound(scaledValue * vFixedMultiplier);
-		scaledValue = (1.0*vFixed) / vFixedMultiplier;
-
 		// if the value is large (hundreds or thousands) no need to display decimals after the decimal point
 		int digits = numberOfDigits(scaledValue);
 		precision = qMax(0, precision - qMax(0, digits - (precision == 1 ? 2 : 1)));
+
+		const qreal vFixedMultiplier = std::pow(10, precision);
+		int vFixed = qRound(scaledValue * vFixedMultiplier);
+		scaledValue = (1.0*vFixed) / vFixedMultiplier;
 
 		quantity.number = QString::number(scaledValue, 'f', precision);
 

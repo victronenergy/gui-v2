@@ -637,7 +637,7 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/units.cpp
 )
 
-list(APPEND VenusQMLModule_CPP_SOURCES  ${Units_CPP_SOURCES})
+list(APPEND VenusQMLModule_CPP_SOURCES ${Units_CPP_SOURCES})
 
 qt_add_qml_module(VenusQMLModule
     ${QML_MODULE_OPTARGS}
