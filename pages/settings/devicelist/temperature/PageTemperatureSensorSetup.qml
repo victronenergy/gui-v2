@@ -37,7 +37,7 @@ Page {
 			ListSpinBox {
 				//% "Offset"
 				text: qsTrId("temperature_offset")
-				writeAccessLevel: VenusOS.User_AccessType_SuperUser
+				writeAccessLevel: VenusOS.User_AccessType_Installer
 				dataItem.uid: root.bindPrefix + "/Offset"
 				visible: defaultVisible && dataItem.isValid
 				from: -100
@@ -47,7 +47,7 @@ Page {
 			ListSpinBox {
 				//% "Scale"
 				text: qsTrId("temperature_scale")
-				writeAccessLevel: VenusOS.User_AccessType_SuperUser
+				writeAccessLevel: VenusOS.User_AccessType_Installer
 				dataItem.uid: root.bindPrefix + "/Scale"
 				visible: defaultVisible && dataItem.isValid
 				from: 0
