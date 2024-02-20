@@ -25,9 +25,9 @@ class QuantityInfo : public QObject
 	Q_PROPERTY(QString unit READ getUnit NOTIFY updated)
 	Q_PROPERTY(VenusOS::Enums::Units_Scale scale READ getScale NOTIFY updated)
 
-	Q_PROPERTY(qreal value MEMBER value NOTIFY inputChanged)
-	Q_PROPERTY(qreal unitMatchValue MEMBER unitMatchValue NOTIFY inputChanged)
-	Q_PROPERTY(int precision MEMBER precision NOTIFY inputChanged)
+	Q_PROPERTY(qreal value MEMBER value NOTIFY valueChanged)
+	Q_PROPERTY(qreal unitMatchValue MEMBER unitMatchValue NOTIFY unitMatchValueChanged)
+	Q_PROPERTY(int precision MEMBER precision NOTIFY precisionChanged)
 	Q_PROPERTY(Victron::VenusOS::Enums::Units_Type unitType MEMBER unitType NOTIFY inputChanged)
 
 public:
@@ -41,6 +41,9 @@ public:
 signals:
 	void updated();
 	void inputChanged();
+	void valueChanged();
+	void precisionChanged();
+	void unitMatchValueChanged();
 private:
 	void update();
 

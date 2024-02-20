@@ -13,6 +13,9 @@ QuantityInfo::QuantityInfo(QObject *parent)
 	: QObject(parent)
 {
 	connect(this, &QuantityInfo::inputChanged, this, &QuantityInfo::update);
+	connect(this, &QuantityInfo::valueChanged, this, &QuantityInfo::update);
+	connect(this, &QuantityInfo::precisionChanged, this, &QuantityInfo::update);
+	connect(this, &QuantityInfo::unitMatchValueChanged, this, &QuantityInfo::update);
 }
 
 QuantityInfo::~QuantityInfo()
