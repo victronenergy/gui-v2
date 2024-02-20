@@ -15,10 +15,13 @@ Page {
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 
-	VeQItemTableModel {
+	VeQItemSortTableModel {
 		id: digitalModel
-		uids: [ Global.systemSettings.serviceUid + "/Settings/DigitalInput" ]
-		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		filterRegExp: "/[1-9]$"
+		model: VeQItemTableModel {
+			uids: [ Global.systemSettings.serviceUid + "/Settings/DigitalInput" ]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
 	}
 
 	GradientListView {
