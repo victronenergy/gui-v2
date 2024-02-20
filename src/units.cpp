@@ -209,10 +209,13 @@ quantityInfo Units::getDisplayTextWithHysteresis(
 
 	// scale value is the unit of measure is scalable
 	if (isScalingSupported(unit)) {
+		qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : scaledValue;
+
 		// Kilowatthour is already in kilos, normalize to plain watthours before scaling
 		if (unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
 			quantity.unit = QStringLiteral("Wh");
 			scaledValue = 1000.0 * scaledValue;
+			scaleMatch = 1000.0 * scaleMatch;
 		}
 
 		const QList<VenusOS::Enums::Units_Scale> scales = {
@@ -221,8 +224,6 @@ quantityInfo Units::getDisplayTextWithHysteresis(
 			VenusOS::Enums::Units_Scale_Mega,
 			VenusOS::Enums::Units_Scale_Kilo,
 		};
-
-		const qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : scaledValue;
 
 		auto isOverLimit = [](qreal value, VenusOS::Enums::Units_Scale scale, VenusOS::Enums::Units_Scale previousScale) {
 			// Implement hysteresis: Move to larger scale unit when value is over 10*scale,
