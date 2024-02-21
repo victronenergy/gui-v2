@@ -178,7 +178,7 @@
 
     "geometry_briefPage_sidePanel_verticalCenterOffset": -8,
     "geometry_briefPage_sidePanel_width": 240,
-    "geometry_briefPage_sidePanel_columnSpacing": 26,
+    "geometry_briefPage_sidePanel_columnSpacing": 58,
     "geometry_briefPage_sidePanel_header_spacing": 2,
     "geometry_briefPage_sidePanel_separatorBar_height": 2,
     "geometry_briefPage_sidePanel_forecastRow_spacing": 12,
@@ -200,9 +200,6 @@
 
     "geometry_widgetHeader_spacing": 4,
     "geometry_widgetHeader_icon_size": 24,
-
-    "geometry_weatherDetails_width": 72,
-    "geometry_weatherDetails_row_spacing": 3,
 
     "geometry_splashView_logo_verticalCenterOffset": -13,
     "geometry_splashView_logo_horizontalCenterOffset": -1,

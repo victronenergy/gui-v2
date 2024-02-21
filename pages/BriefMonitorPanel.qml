@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Controls as C
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Column {
@@ -15,64 +14,6 @@ Column {
 	property string inputsIconSource
 
 	spacing: Theme.geometry_briefPage_sidePanel_columnSpacing
-
-	// TODO connect weather forecast to data backend
-	Column {
-		width: parent.width
-		spacing: Theme.geometry_briefPage_sidePanel_header_spacing
-
-		Row {
-			width: parent.width
-
-			Label {
-				id: todayTemperature
-
-				anchors.verticalCenter: parent.verticalCenter
-				font.pixelSize: Theme.font_briefPage_sidePanel_forecastRow_today_temperature_size
-				text: "10°"
-			}
-			CP.ColorImage {
-				id: todayIcon
-
-				anchors.verticalCenter: parent.verticalCenter
-				source: "qrc:/images/cloud.svg"
-				color: Theme.color_font_primary
-			}
-			Label {
-				anchors.baseline: todayTemperature.baseline
-				width: parent.width - todayTemperature.width - todayIcon.width
-				horizontalAlignment: Text.AlignRight
-				font.pixelSize: Theme.font_briefPage_sidePanel_forecastRow_today_date_size
-				text: Qt.formatDate(ClockTime.currentDateTime, "ddd d MMM")
-			}
-		}
-
-		SeparatorBar {
-			width: parent.width
-			height: Theme.geometry_briefPage_sidePanel_separatorBar_height
-			color: Theme.color_briefPage_sidePanel_forecast_separator
-		}
-
-		Row {
-			spacing: Theme.geometry_briefPage_sidePanel_forecastRow_spacing
-
-			WeatherDetails {
-				day: "Mon"
-				temperature: "9°"
-				source: "qrc:/images/rain.svg"
-			}
-			WeatherDetails {
-				day: "Tue"
-				temperature: "11°"
-				source: "qrc:/images/scatteredcloud.svg"
-			}
-			WeatherDetails {
-				day: "Wed"
-				temperature: "13°"
-				source: "qrc:/images/sunny.svg"
-			}
-		}
-	}
 
 	Item {
 		width: parent.width
