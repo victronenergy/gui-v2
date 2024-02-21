@@ -259,7 +259,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/VerticalGauge.qml
     components/ViewGradient.qml
     components/ClassAndVrmInstance.qml
-    components/WeatherDetails.qml
 
     components/controls/Button.qml
     components/controls/ComboBox.qml
