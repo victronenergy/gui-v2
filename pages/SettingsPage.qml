@@ -14,9 +14,6 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	// for mock simulator
-	property alias settingsListView: settingsListView
-
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 
 	GradientListView {

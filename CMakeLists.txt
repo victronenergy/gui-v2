@@ -788,7 +788,6 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/config/LevelsPageConfig.qml
     data/mock/config/MockDataSimulator.qml
     data/mock/config/NotificationsPageConfig.qml
-    data/mock/config/SettingsPageConfig.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Mock_QML_MODULE_SOURCES})

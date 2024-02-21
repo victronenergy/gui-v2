@@ -27,7 +27,6 @@ QtObject {
 		"qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml": briefAndOverviewConfig,
 		"qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml": briefAndOverviewConfig,
 		"qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml": levelsConfig,
-		"qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml": settingsConfig,
 	})
 
 	function setMockValue(uid, value) {
@@ -272,10 +271,6 @@ QtObject {
 
 	property NotificationsPageConfig notificationsConfig: NotificationsPageConfig {
 		id: notificationsConfig
-	}
-
-	property SettingsPageConfig settingsConfig: SettingsPageConfig {
-		property int configIndex: -1
 	}
 
 	property Connections _globalConn: Connections {
