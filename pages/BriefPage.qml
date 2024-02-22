@@ -7,7 +7,7 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Gauges
 
-Page {
+SwipeViewPage {
 	id: root
 
 	property real _gaugeArcMargin: Theme.geometry_briefPage_edgeGauge_initialize_margin
@@ -29,7 +29,6 @@ Page {
 
 	backgroundColor: Theme.color_briefPage_background
 	fullScreenWhenIdle: true
-	animationEnabled: root.isCurrentPage && BackendConnection.applicationVisible && !Global.splashScreenVisible
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	topRightButton: sidePanel.showing
 			? VenusOS.StatusBar_RightButton_SidePanelActive

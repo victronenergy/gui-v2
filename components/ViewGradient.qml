@@ -7,11 +7,7 @@ import QtQuick
 import Victron.VenusOS
 
 Rectangle {
-	anchors {
-		bottom: root.bottom
-		left: root.left
-		right: root.right
-	}
+	width: parent.width
 	height: Theme.geometry_viewGradient_height
 	gradient: Gradient {
 		GradientStop {
