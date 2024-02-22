@@ -1079,7 +1079,6 @@ file(COPY
       "i18n/${PROJECT_NAME}_cs.ts"
       "i18n/${PROJECT_NAME}_da.ts"
       "i18n/${PROJECT_NAME}_de.ts"
-      "i18n/${PROJECT_NAME}_en.ts"
       "i18n/${PROJECT_NAME}_es.ts"
       "i18n/${PROJECT_NAME}_fr.ts"
       "i18n/${PROJECT_NAME}_it.ts"
@@ -1091,6 +1090,12 @@ file(COPY
       "i18n/${PROJECT_NAME}_th.ts"
       "i18n/${PROJECT_NAME}_tr.ts"
       "i18n/${PROJECT_NAME}_uk.ts"
+    DESTINATION "i18n") # build directory
+# use the base translation file as the _en.ts
+# don't use a symlink because that doesn't work on Windows.
+file(RENAME "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}.ts"
+            "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts")
+file(COPY "i18n/${PROJECT_NAME}.ts"
     DESTINATION "i18n") # build directory
 
 # This adds 2 new targets, venus-gui-v2_lupdate and venus-gui-v2_lrelease. Parallel builds (eg. 'make -j') do not rebuild venus-gui-v2_lrelease correctly without further 'add_dependencies' hackery
