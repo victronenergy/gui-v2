@@ -1091,6 +1091,7 @@ file(COPY
       "i18n/${PROJECT_NAME}_th.ts"
       "i18n/${PROJECT_NAME}_tr.ts"
       "i18n/${PROJECT_NAME}_uk.ts"
+      "i18n/${PROJECT_NAME}_zh-CN.ts"
     DESTINATION "i18n") # build directory
 
 # This adds 2 new targets, venus-gui-v2_lupdate and venus-gui-v2_lrelease. Parallel builds (eg. 'make -j') do not rebuild venus-gui-v2_lrelease correctly without further 'add_dependencies' hackery
