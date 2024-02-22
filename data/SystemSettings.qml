@@ -234,16 +234,16 @@ QtObject {
 			switch (value) {
 			case ve_celsius:
 				root.temperatureUnit = VenusOS.Units_Temperature_Celsius
-				root.temperatureUnitSuffix = "C"
+				root.temperatureUnitSuffix = "°C"
 				break
 			case ve_fahrenheit:
 				root.temperatureUnit = VenusOS.Units_Temperature_Fahrenheit
-				root.temperatureUnitSuffix = "F"
+				root.temperatureUnitSuffix = "°F"
 				break
 			default:
 				console.warn("Cannot load temperature unit,", uid, "has unsupported value:", value, "default to celsius")
 				root.temperatureUnit = VenusOS.Units_Temperature_Celsius
-				root.temperatureUnitSuffix = "C"
+				root.temperatureUnitSuffix = "°C"
 				break
 			}
 		}

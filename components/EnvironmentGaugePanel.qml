@@ -55,14 +55,23 @@ Rectangle {
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
 		}
-		radius: Theme.geometry_levelsPage_environment_gaugePanel_innerRadius
+
+		// Asymmetrical rounding: don't round rectangle on top-left and top-right corners
+		Rectangle {
+			width: parent.width
+			height: parent.radius
+			color: parent.color
+		}
+
+		radius: Theme.geometry_levelsPage_environment_gaugePanel_radius
 		color: Theme.color_levelsPage_environment_panel_background
 	}
 
 	Label {
 		id: titleLabel
 
-		width: parent.width
+		x: Theme.geometry_levelsPage_environment_gaugePanel_horizontalMargin
+		width: parent.width - 2*x
 		height: Theme.geometry_levelsPage_environment_gaugePanel_title_height
 		horizontalAlignment: Text.AlignHCenter
 		verticalAlignment: Text.AlignVCenter
