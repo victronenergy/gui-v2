@@ -14,7 +14,6 @@ sed -ne 's/.*"i18n\/[^}]*}_\(.*\).ts"/\1/p' CMakeLists.txt |\
 while read -r code
 do
   output_file="i18n/venus-gui-v2_${code}.ts"
-  if [ "${code}" == "zh" ]; then code="zh-CN"; fi
   echo "### Fetching ${code}"
   download_url=$(curl --silent -X POST https://api.poeditor.com/v2/projects/export \
     -d api_token="${POEDITOR_TOKEN}" \
