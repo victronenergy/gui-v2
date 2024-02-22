@@ -147,7 +147,7 @@ Page {
 		}
 
 		ListSwitch {
-			//% "Auto start functionality"
+			//% "Autostart functionality"
 			text: qsTrId("settings_page_relay_generator_auto_start_enabled")
 			dataItem.uid: root.startStopBindPrefix + "/AutoStartEnabled"
 			visible: allowDisableAutostart

@@ -92,12 +92,12 @@ Page {
 			}
 
 			ListSwitch {
-				//% "Alarm when generator is not in auto start mode"
+				//% "Alarm when generator is not in autostart mode"
 				text: qsTrId("page_settings_generator_alarm_when_not_in_auto_start")
 				dataItem.uid: settingsBindPrefix + "/Alarms/AutoStartDisabled"
 				onClicked: {
 					if (!checked) {
-						//% "An alarm will be triggered when auto start function is left disabled for more than 10 minutes."
+						//% "An alarm will be triggered when autostart function is left disabled for more than 10 minutes"
 						Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
 								qsTrId("page_settings_generator_alarm_info"), 12000)
 					}

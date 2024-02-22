@@ -27,7 +27,7 @@ Page {
 			}
 
 			ListLabel {
-				//% "Access Signal K at http://venus.local:3000 and via VRM"
+				//% "Access Signal K at http://venus.local:3000 and via VRM."
 				text: qsTrId("settings_large_access_signal_k")
 				visible: signalk.checked
 			}
@@ -49,7 +49,7 @@ Page {
 			}
 
 			ListLabel {
-				//% "Access Node-RED at https://venus.local:1881 and via VRM"
+				//% "Access Node-RED at https://venus.local:1881 and via VRM."
 				text: qsTrId("settings_large_access_node_red")
 				visible: nodered.currentValue > 0
 			}

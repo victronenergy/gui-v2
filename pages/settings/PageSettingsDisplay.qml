@@ -134,7 +134,7 @@ Page {
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
 						//% "Changing language"
 						title: qsTrId("settings_language_changing_language")
-						//% "Please wait while the language is changed"
+						//% "Please wait while the language is changed."
 						description: qsTrId("settings_language_please_wait")
 					}
 				}

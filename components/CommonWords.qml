@@ -465,7 +465,7 @@ QtObject {
 	readonly property string yield_kwh: qsTrId("common_words_yield_kwh")
 
 	//: Solar charger yield for today, in kWh (kilowatt hours)
-	//% "Yield today"
+	//% "Yield Today"
 	readonly property string yield_today: qsTrId("common_words_yield_today")
 
 	//% "Zero feed-in power limit"

@@ -84,7 +84,7 @@ Page {
 					stopOnAc1Item.setValue(index & 1)
 					stopOnAc2Item.setValue((index & 2) >> 1)
 					if (index > 0) {
-						//% "Make sure that the generator is not connected to AC input %1 when using this option."
+						//% "Make sure that the generator is not connected to AC input %1 when using this option"
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_generator_conditions_make_sure_generator_is_not_connected").arg(index),
 																   Theme.animation_generator_stopWhenAc1Available_toastNotification_autoClose_duration)
 					}

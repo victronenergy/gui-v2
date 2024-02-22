@@ -40,8 +40,8 @@ Page {
 			}
 
 			ListSwitch {
-				//% "Auto start"
-				text: qsTrId("evcs_auto_start")
+				//% "Autostart"
+				text: qsTrId("evcs_autostart")
 				dataItem.uid: root.evCharger.serviceUid + "/AutoStart"
 			}
 
