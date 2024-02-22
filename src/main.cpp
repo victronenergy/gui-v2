@@ -232,6 +232,11 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationName("Venus");
 	QGuiApplication::setApplicationVersion("2.0");
 
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	QObject::connect(&app, &QGuiApplication::aboutToQuit,
+		&app, [] { emscripten_run_script("location.reload()"); }, Qt::QueuedConnection);
+#endif
+
 	bool enableFpsCounter = false;
 	bool skipSplashScreen = false;
 
