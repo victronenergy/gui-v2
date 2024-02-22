@@ -115,7 +115,7 @@
     "color_levelsPage_environment_panel_border_color": "color_gray2",
     "color_levelsPage_environment_gauge_tick": "color_gray4",
     "color_levelsPage_environment_gauge_tickText": "color_gray5",
-    "color_levelsPage_environment_temperatureGauge_highlightValue": "color_gray5",
+    "color_levelsPage_environment_temperatureGauge_highlightValue": "color_font_primary",
 
     "color_solarHistoryErrorView_primaryText": "color_font_primary",
     "color_solarHistoryErrorView_secondaryText": "color_font_secondary",
