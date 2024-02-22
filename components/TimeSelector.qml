@@ -42,7 +42,7 @@ Item {
 		}
 
 		text: ":"
-		color: Theme.color_font_secondary
+		color: root.enabled ? Theme.color_font_secondary : Theme.color_background_disabled
 		font.pixelSize: Theme.font_size_h3
 	}
 
