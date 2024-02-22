@@ -48,27 +48,29 @@ QtObject {
 	}
 
 	function nextConfig() {
-		const pageConfig = _configs[!!Global.pageManager ? Global.pageManager.navBar.currentUrl : 0]
+		const pageConfig = _configs[currentNavBarUrl()]
 		const nextIndex = Utils.modulo(pageConfig.configIndex + 1, pageConfig.configCount())
 		setConfigIndex(pageConfig, nextIndex)
 	}
 
 	function previousConfig() {
-		const pageConfig = _configs[!!Global.pageManager ? Global.pageManager.navBar.currentUrl : 0]
+		const pageConfig = _configs[currentNavBarUrl()]
 		const prevIndex = Utils.modulo(pageConfig.configIndex - 1, pageConfig.configCount())
 		setConfigIndex(pageConfig, prevIndex)
+	}
+
+	function currentNavBarUrl() {
+		const data = Global.pageManager.navBar.model.get(Global.pageManager.navBar.currentIndex)
+		return data.url
 	}
 
 	function keyPressed(event) {
 		switch (event.key) {
 		case Qt.Key_Escape:
-
-			if (!!Global.pageManager) {
-				if (Global.pageManager.controlsActive) {
-					Global.pageManager.controlsActive = false
-				} else {
-					Global.pageManager.popPage()
-				}
+			if (Global.mainView.controlsActive) {
+				Global.mainView.controlsActive = false
+			} else {
+				Global.pageManager.popPage()
 			}
 			break
 		case Qt.Key_1:
@@ -78,19 +80,18 @@ QtObject {
 		case Qt.Key_5:
 			if (!!Global.pageManager) {
 				const newIndex = event.key - Qt.Key_1
-				const pageUrl = Global.pageManager.navBar.model.get(newIndex).url
-				Global.pageManager.navBar.showPage(pageUrl.substring(pageUrl.lastIndexOf('/')))
+				Global.pageManager.navBar.setCurrentIndex(newIndex)
 				event.accepted = true
 			}
 			break
 		case Qt.Key_Left:
-			if (!!Global.pageManager && (Global.pageManager.navBar.currentUrl in root._configs)) {
+			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				previousConfig()
 				event.accepted = true
 			}
 			break
 		case Qt.Key_Right:
-			if (!!Global.pageManager && (Global.pageManager.navBar.currentUrl in root._configs)) {
+			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				nextConfig()
 				event.accepted = true
 			}

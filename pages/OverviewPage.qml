@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+SwipeViewPage {
 	id: root
 
 	property var _leftWidgets: []

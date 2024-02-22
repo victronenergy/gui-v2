@@ -12,20 +12,7 @@ QtObject {
 	property QtObject emitter: QtObject {
 		signal pagePushRequested(var obj, var properties)
 		signal pagePopRequested(var toPage)
-		signal layerPushRequested(var obj, var properties)
-		signal layerPopRequested()
 	}
-
-	// Ugly hack, but ...
-	readonly property Page currentPage: controlsActive ? _controlCardsPage : _currentPage
-	property Page _currentPage
-
-	function setCurrentPage(page) {
-		_currentPage = page
-	}
-
-	property bool controlsActive
-	property QtObject _controlCardsPage
 
 	property NavBar navBar
 	property StatusBar statusBar

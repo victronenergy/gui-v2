@@ -11,7 +11,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+SwipeViewPage {
 	id: root
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive

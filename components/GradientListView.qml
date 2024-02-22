@@ -20,11 +20,7 @@ ListView {
 	// Instead, the spacing is added visually within ListItem's ListItemBackground.
 
 	ViewGradient {
-		anchors {
-			bottom: root.bottom
-			left: root.left
-			right: root.right
-		}
+		anchors.bottom: root.bottom
 	}
 
 	ScrollBar.vertical: ScrollBar {

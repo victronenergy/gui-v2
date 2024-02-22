@@ -10,24 +10,31 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 	id: root
 
 	property alias model: buttonRepeater.model
-
 	readonly property int currentIndex: _currentIndex
-	readonly property url currentUrl: _currentUrl
 
 	// External components should not write to these properties.
 	property int _currentIndex
-	property url _currentUrl
 
-	function showPage(pageName) {
+	function setCurrentPage(pageName) {
 		for (let i = 0; i < navBarModel.count; ++i) {
 			const url = navBarModel.get(i).url
 			if (url.endsWith("/" + pageName)) {
 				_currentIndex = i
-				_currentUrl = url
 				return
 			}
 		}
-		console.warn("showPage(): cannot find page", pageName)
+		console.warn("setCurrentPage(): cannot find page", pageName)
+	}
+
+	function setCurrentIndex(index) {
+		if (index === _currentIndex) {
+			return
+		}
+		if (index < 0 || index >= navBarModel.count) {
+			console.log("setCurrentIndex(): invalid index", index, "nav bar count is:", navBarModel.count)
+			return
+		}
+		_currentIndex = index
 	}
 
 	width: parent.width
@@ -88,13 +95,6 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 
 				onClicked: {
 					root._currentIndex = model.index
-					root._currentUrl = model.url
-				}
-
-				Component.onCompleted: {
-					if (model.index === root.currentIndex) {
-						root._currentUrl = model.url
-					}
 				}
 
 				Rectangle {

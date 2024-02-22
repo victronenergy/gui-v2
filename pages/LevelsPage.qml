@@ -7,11 +7,15 @@ import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 
-Page {
+SwipeViewPage {
 	id: root
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
+
+	// Gauges may overflow into previous/next pages in the SwipeView, so clip the gauge ListView
+	// to the page bounds.
+	clip: tanksTab.contentWidth > tanksTab.width || environmentTab.contentWidth > environmentTab.width
 
 	TabBar {
 		id: tabBar
@@ -116,5 +120,17 @@ Page {
 		}
 
 		visible: tabBar.currentIndex === 1
+	}
+
+	// Show gradients on the left/right edges to indicate the page bounds
+	ViewGradient {
+		x: -(width / 2) + (height / 2)
+		rotation: 90
+		visible: root.clip
+	}
+	ViewGradient {
+		x: (width / 2) - (height / 2)
+		rotation: 270
+		visible: root.clip
 	}
 }

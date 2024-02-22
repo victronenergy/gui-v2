@@ -8,12 +8,9 @@ import QtQuick.Controls as C
 import Victron.VenusOS
 
 C.StackView {
-	id: pageStack
+	id: root
 
-	onDepthChanged: if (depth === 1) pageStack.navbarX = 0
-
-	// the x position that the navbar should follow.
-	property real navbarX
+	property Page _poppedPage
 
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {
@@ -26,7 +23,6 @@ C.StackView {
 	}
 
 	pushExit: Transition {
-		ScriptAction { script: if (pageStack.depth === 2) pageStack.navbarX = -width }
 		XAnimator {
 			from: 0
 			to: -width
@@ -44,33 +40,102 @@ C.StackView {
 	}
 
 	popExit: Transition {
-		XAnimator {
+		SequentialAnimation {
+			XAnimator {
+				from: 0
+				to: width
+				duration: Theme.animation_page_slide_duration
+				easing.type: Easing.InOutQuad
+			}
+			ScriptAction {
+				script: {
+					// Clean up the page object that was created on push.
+					if (root._poppedPage && !Theme.objectHasQObjectParent(root._poppedPage)) {
+						root._poppedPage.destroy()
+					}
+					root._poppedPage = null
+				}
+			}
+		}
+	}
+
+	Connections {
+		target: !!Global.pageManager ? Global.pageManager.emitter : null
+
+		function onPagePushRequested(obj, properties) {
+			if (root.busy) {
+				return
+			}
+
+			let objectOrUrl = typeof(obj) === "string" ? Global.appUrl(obj) : obj
+			if (typeof(obj) === "string") {
+				// pre-construct the object to make sure there are no errors
+				// to avoid messing up the page stack state.
+				let checkComponent = Qt.createComponent(objectOrUrl)
+				if (checkComponent.status !== Component.Ready) {
+					console.warn("Aborted attempt to push page with errors: " + obj + ": " + checkComponent.errorString())
+					return
+				}
+				objectOrUrl = checkComponent.createObject(null, properties)
+			}
+
+			if (root.depth === 0) {
+				// When the first page is added to the stack, slide the stack into view.
+				root.push(objectOrUrl, properties, PageStack.Immediate)
+				fakePushAnimation.start()
+			} else {
+				root.push(objectOrUrl, properties)
+			}
+		}
+
+		function onPagePopRequested(toPage) {
+			if (root.busy
+					|| (!!root.currentItem.tryPop && !root.currentItem.tryPop())) {
+				return
+			}
+			if (root.depth === 1) {
+				// When the last page is removed from the stack, slide the stack out of view.
+				fakePopAnimation.start()
+			} else {
+				// Pop and delay destruction of the popped page until the animation completes,
+				// otherwise the page disappears immediately.
+				_poppedPage = pop(toPage)
+			}
+		}
+	}
+
+	NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
+		id: fakePushAnimation
+
+		target: root
+		property: "x"
+		from: root.width
+		to: 0
+		duration: Theme.animation_page_slide_duration
+		easing.type: Easing.InOutQuad
+	}
+
+	SequentialAnimation {
+		id: fakePopAnimation
+
+		NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
+			target: root
+			property: "x"
 			from: 0
-			to: width
+			to: root.width
 			duration: Theme.animation_page_slide_duration
 			easing.type: Easing.InOutQuad
 		}
-	}
+		ScriptAction {
+			script: {
+				const obj = root.currentItem
+				root.clear()
 
-	replaceEnter: Transition {
-		enabled: Global.allPagesLoaded
-
-		OpacityAnimator {
-			from: 0.0
-			to: 1.0
-			duration: Theme.animation_page_slide_duration
-			easing.type: Easing.InOutQuad
-		}
-	}
-
-	replaceExit: Transition {
-		enabled: Global.allPagesLoaded
-
-		OpacityAnimator {
-			from: 1.0
-			to: 0.0
-			duration: Theme.animation_page_slide_duration
-			easing.type: Easing.InOutQuad
+				// Clean up the page object that was created on push.
+				if (!Theme.objectHasQObjectParent(obj)) {
+					obj.destroy()
+				}
+			}
 		}
 	}
 }

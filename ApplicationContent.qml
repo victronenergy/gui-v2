@@ -17,7 +17,7 @@ Item {
 			&& Global.notifications.alarm
 	on_GoToNotificationsChanged: {
 		if (_goToNotifications) {
-			pageManager.navBar.showPage("NotificationsPage.qml")
+			pageManager.navBar.setCurrentPage("NotificationsPage.qml")
 		}
 	}
 

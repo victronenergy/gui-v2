@@ -244,6 +244,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SolarYieldModel.qml
     components/SplashView.qml
     components/StatusBar.qml
+    components/SwipeViewPage.qml
     components/SwitchControlValue.qml
     components/TabBar.qml
     components/TankGauge.qml
@@ -269,6 +270,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ScrollBar.qml
     components/controls/Slider.qml
     components/controls/SpinBox.qml
+    components/controls/SwipeView.qml
     components/controls/Switch.qml
     components/controls/TextField.qml
 
