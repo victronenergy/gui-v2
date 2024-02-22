@@ -7059,17 +7059,17 @@ Doriți să continuați?</translation>
       <location filename="../data/SolarChargers.qml" line="32"/>
       <source>Tracker #%1</source>
       <extracomment>%1 = tracker number</extracomment>
-      <translation></translation>
+      <translation>Dispozitiv de urmărire #%1</translation>
     </message>
     <message id="fp-genset-error_startup_aborted_(rotation_too_low">
       <location filename="../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
       <source>Startup aborted (rotation too low</source>
-      <translation></translation>
+      <translation>Pornirea a fost anulată (turație prea scazută)</translation>
     </message>
     <message id="fp-genset-error_startup_aborted_(rotation_too_high">
       <location filename="../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
       <source>Startup aborted (rotation too high</source>
-      <translation></translation>
+      <translation>Pornirea a fost anulată (turație prea ridicată)</translation>
     </message>
     <message id="fp-genset-error_no_connection">
       <location filename="../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="255"/>
