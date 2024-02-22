@@ -55,6 +55,9 @@ QtObject {
 	property bool allPagesLoaded
 	property bool changingLanguage
 
+	property string firmwareInstalledBuild // don't clear this on UI reload.  it needs to survive reconnection.
+	property bool firmwareInstalledBuildUpdated // as above.
+
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 	signal keyPressed(var event)
 

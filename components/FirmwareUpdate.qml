@@ -55,10 +55,16 @@ QtObject {
 				msg = qsTrId("settings_firmware_error_during_installation")
 				break
 			case FirmwareUpdater.Rebooting:
-				//% "Firmware installed, rebooting"
+				//% "Firmware installed, device rebooting"
 				msg = qsTrId("settings_firmware_installed_rebooting")
+				// Note: for WebAssembly, don't yet reload the page.
+				// If we did the reload now, we would still get the wrong blob.
+				// Instead, wait for the device to reboot (i.e. requires
+				// a full disconnect/reconnect cycle) then react to the
+				// updated build version we receive (reload the page).
 				break
 			}
+
 			if (msg) {
 				// TODO confirm whether we need to show "icon-firmwareupdate-active" instead of the normal notification icon
 				Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
@@ -86,6 +92,32 @@ QtObject {
 	}
 	property VeQuickItem _offlineInstallUpdate: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/Install"
+	}
+
+	// installed build
+	property VeQuickItem _firmwareInstalledBuild: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
+		onValueChanged: {
+			if (Qt.platform.os == "wasm" && value != null && value.length > 0) {
+				if (Global.firmwareInstalledBuild.length > 0 &&
+						Global.firmwareInstalledBuild != value) {
+					console.warn("Firmware update detected, reloading page in 10 seconds"
+						+ " (" + Global.firmwareInstalledBuild + " != " + value + ")")
+					Global.firmwareInstalledBuildUpdated = true
+				}
+				Global.firmwareInstalledBuild = value
+			}
+		}
+
+		// VRM sometimes won't provide the latest value to existing clients
+		// after a device restart, and MQTT comms can be unreliable.
+		// So, periodically force read the firmware installed build value.
+		property Timer forceReadTimer: Timer {
+			interval: 1000 * 60 * 10
+			repeat: true
+			running: Qt.platform.os == "wasm"
+			onTriggered: root._firmwareInstalledBuild.getValue(true)
+		}
 	}
 
 	function checkForUpdate(updateType) {
