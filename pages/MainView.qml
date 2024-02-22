@@ -95,8 +95,30 @@ Item {
 				}
 				let obj = pageStack.pop(toPage)
 				if (!Theme.objectHasQObjectParent(obj)) {
-					obj.destroy()
+					// wait until the page transitions finish
+					// before destroying the pages
+					delayedPageRemoval.scheduleForRemoval(obj)
 				}
+			}
+		}
+
+		Timer {
+			id: delayedPageRemoval
+			property var pages: []
+			interval: Theme.animation_page_slide_duration
+
+			function scheduleForRemoval(page) {
+				var p = pages
+				p[p.length] = page
+				pages = p
+				restart()
+			}
+
+			onTriggered: {
+				for (const page of pages) {
+					page.destroy()
+				}
+				pages = []
 			}
 		}
 	}
