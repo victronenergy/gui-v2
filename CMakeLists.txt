@@ -1090,6 +1090,7 @@ file(COPY
       "i18n/${PROJECT_NAME}_th.ts"
       "i18n/${PROJECT_NAME}_tr.ts"
       "i18n/${PROJECT_NAME}_uk.ts"
+      "i18n/${PROJECT_NAME}_zh-CN.ts"
     DESTINATION "i18n") # build directory
 # use the base translation file as the _en.ts
 # don't use a symlink because that doesn't work on Windows.
