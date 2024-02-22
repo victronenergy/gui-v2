@@ -157,7 +157,7 @@ QtObject {
 			event.accepted = true
 			break
 		case Qt.Key_L:
-			Language.current = (Language.current === Language.English ? Language.French : Language.English)
+			Language.setCurrentLanguage((Language.current === Language.English ? Language.French : Language.English))
 			pageConfigTitle.text = "Language: " + Language.toString(Language.current)
 			event.accepted = true
 			break

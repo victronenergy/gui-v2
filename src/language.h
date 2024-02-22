@@ -89,7 +89,7 @@ class Language : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 	QML_SINGLETON
-	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged FINAL)
+	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage NOTIFY currentLanguageChanged FINAL)
 	Q_PROPERTY(QUrl fontFileUrl READ fontFileUrl NOTIFY fontFileUrlChanged FINAL)
 
 public:
@@ -103,15 +103,16 @@ public:
 
 	Q_INVOKABLE QString toString(QLocale::Language language) const;
 	Q_INVOKABLE QString toCode(QLocale::Language language) const;
-	Q_INVOKABLE void setCurrentLanguageCode(const QString &code);
+	Q_INVOKABLE bool setCurrentLanguageCode(const QString &code);
 	Q_INVOKABLE QLocale::Language fromCode(const QString &code);
 
 	QLocale::Language getCurrentLanguage() const;
-	void setCurrentLanguage(QLocale::Language language);
+	Q_INVOKABLE bool setCurrentLanguage(QLocale::Language language);
 
 	QUrl fontFileUrl() const;
 
 Q_SIGNALS:
+	void languageChangeFailed();
 	void currentLanguageChanged();
 	void fontFileUrlChanged();
 
