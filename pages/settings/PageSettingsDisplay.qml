@@ -131,11 +131,22 @@ Page {
 					id: changingLanguageDialog
 
 					ModalWarningDialog {
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
+						id: dlg
+						property bool languageChangeFailed
+						dialogDoneOptions: dlg.languageChangeFailed
+							? VenusOS.ModalDialog_DoneOptions_OkOnly
+							: VenusOS.ModalDialog_DoneOptions_NoOptions
 						//% "Changing language"
 						title: qsTrId("settings_language_changing_language")
-						//% "Please wait while the language is changed."
-						description: qsTrId("settings_language_please_wait")
+						description: dlg.languageChangeFailed
+							  //% "Failed to change language!"
+							? qsTrId("settings_language_change_failed")
+							  //% "Please wait while the language is changed."
+							: qsTrId("settings_language_please_wait")
+						Connections {
+							target: Language
+							function onLanguageChangeFailed() { dlg.languageChangeFailed = true }
+						}
 					}
 				}
 			}

@@ -198,8 +198,13 @@ QtObject {
 			if (value !== undefined && !Global.changingLanguage
 					&& value != Language.toCode(Language.current)) {
 				Global.changingLanguage = true
-				Language.setCurrentLanguageCode(value)
-				Qt.callLater(Global.main.retranslateUi)
+				if (!Language.setCurrentLanguageCode(value)) {
+					// failed.  set the settings value back to the previous one.
+					setValue(Language.toCode(Language.current))
+					Qt.callLater(function() { Global.changingLanguage = false })
+				} else {
+					Qt.callLater(Global.main.retranslateUi)
+				}
 			}
 		}
 	}

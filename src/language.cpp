@@ -266,11 +266,15 @@ QLocale::Language Language::fromCode(const QString &code)
 	return QLocale::codeToLanguage(code);
 }
 
-void Language::setCurrentLanguage(QLocale::Language language)
+bool Language::setCurrentLanguage(QLocale::Language language)
 {
 	if (language != m_currentLanguage && installTranslatorForLanguage(language)) {
 		emit currentLanguageChanged();
 		emit fontFileUrlChanged();
+		return true;
+	} else {
+		emit languageChangeFailed();
+		return false;
 	}
 }
 
@@ -279,13 +283,14 @@ QUrl Language::fontFileUrl() const
 	return m_fontFileUrl;
 }
 
-void Language::setCurrentLanguageCode(const QString &code)
+bool Language::setCurrentLanguageCode(const QString &code)
 {
 	const QLocale::Language lang = QLocale::codeToLanguage(code);
 	if (lang != QLocale::AnyLanguage) {
-		setCurrentLanguage(lang);
+		return setCurrentLanguage(lang);
 	} else {
 		qCWarning(venusGui) << "Unknown language code specified:" << code;
+		return false;
 	}
 }
 
