@@ -3668,11 +3668,11 @@ First time use? Make sure to either set or disable the password check.</source>
       <location filename="../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="61"/>
       <source>%n fuse(s) blown</source>
       <extracomment>%n = number of fuses that have blown</extracomment>
-      <translation type="unfinished">
-        <numerusform>%n предохранитель(ы) перегорел(и)</numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
+      <translation>
+        <numerusform>%n предохранитель(и) перегорел</numerusform>
+        <numerusform>%n предохранитель(и) перегорел</numerusform>
+        <numerusform>%n предохранитель(и) перегорел</numerusform>
+        <numerusform>%n предохранитель(и) перегорел</numerusform>
       </translation>
     </message>
     <message id="lynxdistributor_no_information_available">

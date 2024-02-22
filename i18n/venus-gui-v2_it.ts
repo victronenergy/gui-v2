@@ -5777,7 +5777,7 @@ Si desidera continuare?</translation>
       <location filename="../components/CommonWords.qml" line="419"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
-      <translation>Tracker</translation>
+      <translation>Tracciatore</translation>
     </message>
     <message id="common_words_type">
       <location filename="../components/CommonWords.qml" line="422"/>
@@ -7056,17 +7056,17 @@ Si desidera continuare?</translation>
       <location filename="../data/SolarChargers.qml" line="32"/>
       <source>Tracker #%1</source>
       <extracomment>%1 = tracker number</extracomment>
-      <translation></translation>
+      <translation>Tracciatore #%1</translation>
     </message>
     <message id="fp-genset-error_startup_aborted_(rotation_too_low">
       <location filename="../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
       <source>Startup aborted (rotation too low</source>
-      <translation></translation>
+      <translation>Avviamento annullato (rotazione insufficiente)</translation>
     </message>
     <message id="fp-genset-error_startup_aborted_(rotation_too_high">
       <location filename="../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
       <source>Startup aborted (rotation too high</source>
-      <translation></translation>
+      <translation>Avviamento annullato (rotazione eccessiva)</translation>
     </message>
     <message id="fp-genset-error_no_connection">
       <location filename="../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="255"/>

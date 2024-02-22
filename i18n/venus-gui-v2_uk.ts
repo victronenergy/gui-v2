@@ -43,12 +43,12 @@
     <message id="controlcard_inverter_charger">
       <location filename="../pages/controlcards/VeBusDeviceCard.qml" line="18"/>
       <source>Inverter / Charger</source>
-      <translation>Інвертор / Зарядний</translation>
+      <translation>Інв. / Зарядний</translation>
     </message>
     <message id="common_words_low_battery_voltage">
       <location filename="../components/CommonWords.qml" line="215"/>
       <source>Low battery voltage</source>
-      <translation>Низька напруга акумуляторної батареї</translation>
+      <translation>Низька напруга акумулятора</translation>
     </message>
     <message id="settings_tcpip_manual">
       <location filename="../pages/settings/PageSettingsTcpIp.qml" line="218"/>
@@ -94,7 +94,7 @@
       <location filename="../components/dialogs/ESSMinimumSOCDialog.qml" line="23"/>
       <location filename="../pages/controlcards/ESSCard.qml" line="43"/>
       <source>Minimum SOC</source>
-      <translation>Мінімальний SoC:</translation>
+      <translation>Мінімальний SOC:</translation>
     </message>
     <message id="settings_remoteconsole_enter_password">
       <location filename="../pages/settings/PageSettingsRemoteConsole.qml" line="38"/>
@@ -149,7 +149,7 @@
     <message id="settings_general">
       <location filename="../pages/SettingsPage.qml" line="33"/>
       <source>General</source>
-      <translation>Генеральний</translation>
+      <translation>Головне</translation>
     </message>
     <message id="settings_device_list">
       <location filename="../pages/SettingsPage.qml" line="28"/>
@@ -239,7 +239,7 @@
     <message id="settings_services">
       <location filename="../pages/SettingsPage.qml" line="131"/>
       <source>Services</source>
-      <translation>Дилерські послуги</translation>
+      <translation>Служби</translation>
     </message>
     <message id="settings_io">
       <location filename="../pages/SettingsPage.qml" line="136"/>
@@ -1700,7 +1700,7 @@ If that doesn't work, check sim-card in a phone to make sure that there is credi
     <message id="settings_ess_inverter_charger">
       <location filename="../pages/settings/PageSettingsHub4.qml" line="58"/>
       <source>Inverter/Charger</source>
-      <translation>Інвертор/Зарядний</translation>
+      <translation>Інв./Зарядний</translation>
     </message>
     <message id="settings_ess_inverter_ac_output_in_use">
       <location filename="../pages/settings/PageSettingsHub4.qml" line="64"/>
@@ -2390,7 +2390,7 @@ First time use? Make sure to either set or disable the password check.</source>
     <message id="settings_services_canbus_over_tcpip_debug">
       <location filename="../pages/settings/PageSettingsServices.qml" line="81"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
-      <translation>CAN-шина через TCP/IP (налагодження)</translation>
+      <translation>CAN-шина через TCP/IP (дебаг)</translation>
     </message>
     <message id="settings_system_shore_power">
       <location filename="../pages/settings/PageSettingsSystem.qml" line="21"/>
@@ -4601,7 +4601,7 @@ First time use? Make sure to either set or disable the password check.</source>
     <message id="solardevices_pv_charger">
       <location filename="../pages/solar/SolarDeviceListPage.qml" line="123"/>
       <source>PV Charger</source>
-      <translation>PV ЗАРЯДНИЙ</translation>
+      <translation>PV Зарядний</translation>
     </message>
     <message id="vebus_no_adjustable_by_dmc">
       <location filename="../pages/vebusdevice/VeBusDeviceModeButton.qml" line="21"/>
@@ -4883,7 +4883,7 @@ Do you want to continue?</source>
     <message id="vebus_device_switch_to_float">
       <location filename="../pages/vebusdevice/PageVeBusAdvanced.qml" line="91"/>
       <source>The system will automatically switch over to float once the Equalization charge has been completed.</source>
-      <translation>Система автоматично перемкнеться на підтримання заряду після завершення стадії вирівнювання заряду.</translation>
+      <translation>Система автоматично перейде на плаваючий заряд після завершення стадії вирівнювання.</translation>
     </message>
     <message id="vebus_device_interrupt_equalization">
       <location filename="../pages/vebusdevice/PageVeBusAdvanced.qml" line="98"/>
@@ -5256,7 +5256,7 @@ Do you want to continue?</source>
     <message id="common_words_ac_load">
       <location filename="../components/CommonWords.qml" line="30"/>
       <source>AC load</source>
-      <translation>навантаження змінного струму</translation>
+      <translation>AC спожив.</translation>
     </message>
     <message id="common_words_ac_out">
       <location filename="../components/CommonWords.qml" line="33"/>
@@ -5318,7 +5318,7 @@ Do you want to continue?</source>
     <message id="gauges_battery">
       <location filename="../components/Gauges.js" line="41"/>
       <source>Battery</source>
-      <translation>Акумуляторна батарея</translation>
+      <translation>Акумулятор</translation>
     </message>
     <message id="common_words_battery_current">
       <location filename="../components/CommonWords.qml" line="89"/>
@@ -5333,7 +5333,7 @@ Do you want to continue?</source>
     <message id="common_words_charge_current">
       <location filename="../components/CommonWords.qml" line="98"/>
       <source>Charge current</source>
-      <translation>Зарядний струм</translation>
+      <translation>Зар. струм</translation>
     </message>
     <message id="common_words_charging">
       <location filename="../components/CommonWords.qml" line="102"/>
@@ -5362,7 +5362,7 @@ Do you want to continue?</source>
       <location filename="../components/CommonWords.qml" line="117"/>
       <source>Current</source>
       <extracomment>Electric current, as measured in Amps</extracomment>
-      <translation>Зарядний струм</translation>
+      <translation>Струм</translation>
     </message>
     <message id="common_words_current_transformers">
       <location filename="../components/CommonWords.qml" line="120"/>
@@ -5378,7 +5378,7 @@ Do you want to continue?</source>
       <location filename="../components/CommonWords.qml" line="127"/>
       <source>Debug</source>
       <extracomment>Title for a menu item which displays debugging information</extracomment>
-      <translation>Налагодження</translation>
+      <translation>Дебаг</translation>
     </message>
     <message id="common_words_device">
       <location filename="../components/CommonWords.qml" line="131"/>
@@ -5440,7 +5440,7 @@ Do you want to continue?</source>
     <message id="common_words_grid_meter">
       <location filename="../components/CommonWords.qml" line="168"/>
       <source>Grid meter</source>
-      <translation>Сетковий лічильник</translation>
+      <translation>AC лічильник</translation>
     </message>
     <message id="common_words_high_battery_temperature">
       <location filename="../components/CommonWords.qml" line="171"/>
@@ -5481,7 +5481,7 @@ Do you want to continue?</source>
     <message id="common_words_idle">
       <location filename="../components/CommonWords.qml" line="196"/>
       <source>Idle</source>
-      <translation>непрацюючий</translation>
+      <translation>Релаксую</translation>
     </message>
     <message id="common_words_inactive_status">
       <location filename="../components/CommonWords.qml" line="200"/>
@@ -5842,7 +5842,7 @@ Do you want to continue?</source>
       <location filename="../components/CommonWords.qml" line="455"/>
       <source>Yield today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
-      <translation>Продуктивність сьогодні</translation>
+      <translation>Ген. сьогодні</translation>
     </message>
     <message id="common_words_zero_feed_in_power_limit">
       <location filename="../components/CommonWords.qml" line="458"/>
@@ -6544,7 +6544,7 @@ Do you want to continue?</source>
     <message id="utils_format_hours_min">
       <location filename="../components/Utils.js" line="210"/>
       <source>%1h %2m</source>
-      <translation>%1д %2год</translation>
+      <translation>%1г %2хв</translation>
     </message>
     <message id="utils_format_min_sec">
       <location filename="../components/Utils.js" line="231"/>
@@ -6584,12 +6584,12 @@ Do you want to continue?</source>
     <message id="overview_widget_acloads_title">
       <location filename="../components/widgets/AcLoadsWidget.qml" line="13"/>
       <source>AC Loads</source>
-      <translation>AC Навантаження</translation>
+      <translation>AC Спож.</translation>
     </message>
     <message id="overview_widget_dcloads_title">
       <location filename="../components/widgets/DcLoadsWidget.qml" line="14"/>
       <source>DC Loads</source>
-      <translation>Навантаження постійного струму</translation>
+      <translation>DC спож.</translation>
     </message>
     <message id="overview_widget_evcs_title">
       <location filename="../components/widgets/EvcsWidget.qml" line="14"/>
@@ -6636,7 +6636,7 @@ Do you want to continue?</source>
       <location filename="../data/Batteries.qml" line="38"/>
       <source>%1 to go</source>
       <extracomment>%1 = time remaining, e.g. '3h 2m'</extracomment>
-      <translation>Залишилося 1</translation>
+      <translation>%1 залиш.</translation>
     </message>
     <message id="solardevices_tracker_name">
       <location filename="../pages/solar/SolarDeviceListPage.qml" line="65"/>
@@ -6653,7 +6653,7 @@ Do you want to continue?</source>
     <message id="dcInputs_ac_charger">
       <location filename="../data/DcInputs.qml" line="109"/>
       <source>AC charger</source>
-      <translation>Зарядний пристрій зм. стр.</translation>
+      <translation>AC Зарядний</translation>
     </message>
     <message id="dcInputs_alternator">
       <location filename="../data/DcInputs.qml" line="112"/>
@@ -6663,7 +6663,7 @@ Do you want to continue?</source>
     <message id="dcInputs_dccharger">
       <location filename="../data/DcInputs.qml" line="115"/>
       <source>DC charger</source>
-      <translation>Зарядний пристрій постійного струму</translation>
+      <translation>DC Зарядний</translation>
     </message>
     <message id="dcInputs_dc_generator">
       <location filename="../data/DcInputs.qml" line="118"/>
@@ -6693,7 +6693,7 @@ Do you want to continue?</source>
     <message id="dcInputs_wind_charger">
       <location filename="../data/DcInputs.qml" line="133"/>
       <source>Wind charger</source>
-      <translation>Вітроелектричний зарядний пристрій</translation>
+      <translation>Вітро зарядний</translation>
     </message>
     <message id="digitalinputs_state_low">
       <location filename="../data/DigitalInputs.qml" line="56"/>
@@ -6939,7 +6939,7 @@ Do you want to continue?</source>
     <message id="inverters_state_bulkcharging">
       <location filename="../data/System.qml" line="75"/>
       <source>Bulk charging</source>
-      <translation>Головне заряджання</translation>
+      <translation>Осн. зарядж.</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
       <location filename="../data/System.qml" line="78"/>
@@ -6949,7 +6949,7 @@ Do you want to continue?</source>
     <message id="inverters_state_floatcharging">
       <location filename="../data/System.qml" line="81"/>
       <source>Float charging</source>
-      <translation>заряджання на холостому ходу</translation>
+      <translation>Плаваючий заряд</translation>
     </message>
     <message id="inverters_state_storagemode">
       <location filename="../data/System.qml" line="84"/>
@@ -7004,7 +7004,7 @@ Do you want to continue?</source>
     <message id="inverters_state_loaddetect">
       <location filename="../data/System.qml" line="118"/>
       <source>Load detect</source>
-      <translation>Виявлення навантаження</translation>
+      <translation>Виявл. Спож.</translation>
     </message>
     <message id="inverters_state_blocked">
       <location filename="../data/System.qml" line="121"/>

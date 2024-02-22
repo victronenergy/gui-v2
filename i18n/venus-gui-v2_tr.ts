@@ -3669,7 +3669,8 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>%n fuse(s) blown</source>
       <extracomment>%n = number of fuses that have blown</extracomment>
       <translation>
-        <numerusform>n sigorta(lar) atmış</numerusform>
+        <numerusform>%n sigorta atmış
+Çoğul: %n sigorta atmış</numerusform>
         <numerusform></numerusform>
       </translation>
     </message>
