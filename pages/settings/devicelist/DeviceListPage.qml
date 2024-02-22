@@ -78,7 +78,7 @@ Page {
 
 		case "tank":
 			url = "/pages/settings/devicelist/tank/PageTankSensor.qml"
-			params = { "title": device.name, "bindPrefix" : device.serviceUid }
+			params = { "bindPrefix" : device.serviceUid }
 
 			if (device.status === VenusOS.Tank_Status_Ok) {
 				const levelText = Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.level)
@@ -101,7 +101,7 @@ Page {
 		case "genset":		// deliberate fall through
 		case "acload":
 			url = "/pages/settings/devicelist/ac-in/PageAcIn.qml"
-			params = { "bindPrefix": device.serviceUid, "title": device.name }
+			params = { "bindPrefix": device.serviceUid }
 
 			const acInputPowerText = Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power)
 			if (device.gensetStatusCode >= 0) {
@@ -113,7 +113,7 @@ Page {
 
 		case "motordrive":
 			url = "/pages/settings/devicelist/PageMotorDrive.qml"
-			params = { "title": device.name, "bindPrefix" : device.serviceUid }
+			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(VenusOS.Units_RevolutionsPerMinute, device.motorRpm) ]
 			break;
 
@@ -142,7 +142,7 @@ Page {
 
 		case "digitalinput":
 			url = "/pages/settings/devicelist/PageDigitalInput.qml"
-			params = { "title": device.name, "bindPrefix": device.serviceUid }
+			params = {"bindPrefix": device.serviceUid }
 			summary = [ Global.digitalInputs.inputStateToText(device.state) ]
 			break;
 
@@ -165,7 +165,7 @@ Page {
 		case "alternator":
 			url = serviceType === "alternator" ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
 					: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
-			params = { "title": device.name, "bindPrefix": device.serviceUid }
+			params = {"bindPrefix": device.serviceUid }
 			summary = [
 				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
 				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
@@ -175,7 +175,7 @@ Page {
 
 		case "pulsemeter":
 			url = "/pages/settings/devicelist/pulsemeter/PagePulseCounter.qml"
-			params = { "title": device.name, "bindPrefix": device.serviceUid }
+			params = {"bindPrefix": device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(Global.systemSettings.volumeUnit, device.aggregate) ]
 			break;
 
@@ -189,13 +189,14 @@ Page {
 
 		case "meteo":
 			url = "/pages/settings/devicelist/PageMeteo.qml"
-			params = { "title": device.name, "bindPrefix": device.serviceUid }
+			params = {"bindPrefix": device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(VenusOS.Units_WattsPerSquareMeter, device.irradiance) ]
 			break;
 
 		default:
 			return null
 		}
+		params.title = device.name
 
 		return { "summary": summary, "url": url, "params": params }
 	}
