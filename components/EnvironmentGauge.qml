@@ -63,7 +63,7 @@ Item {
 			topMargin: Theme.geometry_levelsPage_environment_gauge_typeLabel_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		font.pixelSize: Theme.font_size_caption
+		font.pixelSize: Theme.font_size_body2
 		color: Theme.color_font_primary
 	}
 
@@ -131,14 +131,14 @@ Item {
 			rightMargin: Theme.geometry_levelsPage_environment_gauge_tick_margin
 		}
 		width: Theme.geometry_levelsPage_environment_gauge_bar_width
-		radius: Theme.geometry_levelsPage_environment_gauge_bar_radius
+		radius: width/2
 
 		Rectangle {
 			id: valueMarker
 
 			visible: !isNaN(root.value)
 			y: root._barYPosForValue(root.value) - height/2
-			width: Theme.geometry_levelsPage_environment_gauge_valueMarker_width
+			width: parent.width
 			height: Theme.geometry_levelsPage_environment_gauge_valueMarker_background_height
 			color: Theme.color_levelsPage_environment_panel_background
 
@@ -150,9 +150,18 @@ Item {
 
 			Rectangle {
 				anchors.verticalCenter: parent.verticalCenter
-				width: Theme.geometry_levelsPage_environment_gauge_valueMarker_width
-				height: Theme.geometry_levelsPage_environment_gauge_valueMarker_height
+				width: gaugeBar.width + Theme.geometry_levelsPage_environment_gauge_tick_margin
+					   + Theme.geometry_levelsPage_environment_gauge_tick_size
+				radius: height/2
+				height: Theme.geometry_levelsPage_environment_gauge_tick_size
 				color: Theme.color_font_primary
+
+				// Asymmetrical rounding: don't round rectangle on top-left and bottom-left corners
+				Rectangle {
+					height: parent.height
+					width: parent.radius
+					color: parent.color
+				}
 			}
 		}
 	}
