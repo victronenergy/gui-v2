@@ -55,7 +55,7 @@ QtObject {
 				msg = qsTrId("settings_firmware_error_during_installation")
 				break
 			case FirmwareUpdater.Rebooting:
-				//% "Firmware installed, rebooting."
+				//% "Firmware installed, rebooting"
 				msg = qsTrId("settings_firmware_installed_rebooting")
 				break
 			}

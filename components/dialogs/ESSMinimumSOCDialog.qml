@@ -67,7 +67,7 @@ ModalDialog {
 				horizontalAlignment: Text.AlignHCenter
 				font.pixelSize: Theme.font_size_caption
 
-				//% "For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum."
+				//% "For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer."
 				text: qsTrId("ess_recommended")
 			}
 		}

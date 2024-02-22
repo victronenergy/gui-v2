@@ -24,7 +24,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		header: ListTextItem {
+		header: ListLabel {
 			visible: settingsListView.count === 0
 			text: {
 				if (root._tech) {

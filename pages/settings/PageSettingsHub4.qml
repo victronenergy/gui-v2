@@ -143,7 +143,7 @@ Page {
 					//% "Use this option for peak shaving.\n\nThe peak shaving threshold is set using the AC input current limit setting.\n\nSee documentation for further information."
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_use_this_option_for_peak_shaving"))
 				} else {
-					//% "Use this option in systems that do not perform peak shaving."
+					//% "Use this option in systems that do not perform peak shaving"
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_do_not_perform_peak_shaving"))
 				}
 			}
@@ -158,7 +158,7 @@ Page {
 		ListRadioButtonGroup {
 			id: batteryLifeState
 
-			//% "BatteryLife state"
+			//% "Battery life state"
 			text: qsTrId("settings_ess_batteryLife_state")
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
 			visible: defaultVisible

@@ -137,7 +137,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				//% "Alarms and Errors"
+				//% "Alarms & Errors"
 				text: qsTrId("charger_alarms_alarms_and_errors")
 				secondaryText: enabled
 					? (root.solarCharger.errorModel.count > 0

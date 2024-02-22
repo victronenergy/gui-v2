@@ -29,23 +29,16 @@ Page {
 				}
 			}
 
-			ListItem {
+			ListButton {
 				id: quitSwitch
-				//% "Quit Application"
-				text: qsTrId("settings_page_debug_quit_application")
-				property bool isQuitting: false
-				onIsQuittingChanged: if (isQuitting) Qt.quit()
-				content.children: [
-					Switch {
-						checked: quitSwitch.isQuitting
-						onClicked: quitSwitch.isQuitting = !quitSwitch.isQuitting
-					}
-				]
 
-				MouseArea {
-					anchors.fill: parent
-					onClicked: quitSwitch.isQuitting = !quitSwitch.isQuitting
-				}
+				//% "Quit application"
+				text: qsTrId("settings_page_debug_quit_application")
+
+				//% "Quit"
+				button.text: qsTrId("settings_page_debug_quit")
+
+				onClicked: Qt.quit()
 			}
 
 			ListNavigationItem {

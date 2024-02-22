@@ -186,19 +186,19 @@ Page {
 
 					ListItemButton {
 						text: "Confirm"
-						onClicked: Global.showToastNotification(VenusOS.Notification_Confirm, "This if confirmation toast")
+						onClicked: Global.showToastNotification(VenusOS.Notification_Confirm, "Confirmation toast")
 					},
 					ListItemButton {
 						text: "Warning"
-						onClicked: Global.showToastNotification(VenusOS.Notification_Warning, "This if warning toast")
+						onClicked: Global.showToastNotification(VenusOS.Notification_Warning, "Warning toast")
 					},
 					ListItemButton {
 						text: "Alarm"
-						onClicked: Global.showToastNotification(VenusOS.Notification_Alarm, "This if alarm toast")
+						onClicked: Global.showToastNotification(VenusOS.Notification_Alarm, "Alarm toast")
 					},
 					ListItemButton {
 						text: "Info"
-						onClicked: Global.showToastNotification(VenusOS.Notification_Info, "This if info toast")
+						onClicked: Global.showToastNotification(VenusOS.Notification_Info, "Info toast")
 					}
 				]
 			}

@@ -117,7 +117,7 @@ Page {
 
 			ListTextItem {
 				id: bmsControlled
-				//% "BMS Controlled"
+				//% "BMS controlled"
 				text: qsTrId("charger_network_bms_controlled")
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 				dataItem.uid: root.solarCharger.serviceUid + "/Settings/BmsPresent"
@@ -125,7 +125,7 @@ Page {
 			}
 
 			ListButton {
-				//% "BMS Control"
+				//% "BMS control"
 				text: qsTrId("charger_network_bms_control")
 				//: Reset the BMS control
 				//% "Reset"
