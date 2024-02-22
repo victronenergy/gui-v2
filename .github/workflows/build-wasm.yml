@@ -103,7 +103,7 @@ jobs:
     - name: Patch and pack webassembly files
       run: |
         mkdir -p artifacts/wasm
-        mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
+        mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg images/victronenergy-color-scheme.svg artifacts/wasm/
         mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
         patch artifacts/wasm/index.html < ./.github/patches/index.html.patch
         grep -q -E '^var createQtAppInstance' artifacts/wasm/venus-gui-v2.js
