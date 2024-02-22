@@ -51,7 +51,7 @@ CT.SpinBox {
 
 				width: parent.width
 				text: root.textFromValue(root.value, root.locale)
-				color: root.enabled ? Theme.color_font_primary : Theme.color_font_disabled
+				color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
 				font.pixelSize: root.secondaryText.length ? Theme.font_size_h2 : Theme.font_size_h3
 				horizontalAlignment: Qt.AlignHCenter
 				verticalAlignment: Qt.AlignVCenter
@@ -87,7 +87,7 @@ CT.SpinBox {
 		Image {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_plus.svg'
-			opacity: root.enabled ? 1.0 : 0.7   // TODO add Theme opacity constants
+			opacity: root.enabled ? 1.0 : 0.4 // TODO add Theme opacity constants
 		}
 	}
 
@@ -107,7 +107,7 @@ CT.SpinBox {
 		Image {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'
-			opacity: root.enabled ? 1.0 : 0.7   // TODO add Theme opacity constants
+			opacity: root.enabled ? 1.0 : 0.4 // TODO add Theme opacity constants
 		}
 	}
 
