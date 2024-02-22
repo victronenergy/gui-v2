@@ -115,17 +115,17 @@ Page {
 
 				onClicked: {
 					if (firmwareVersion.value < 0x400) {
-						//% "This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro."
+						//% "This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro."
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_update_firmware"), 5000)
 					}
 
 					switch (vebusSubState.value) {
 					case VenusOS.VeBusDevice_ChargeState_InitializingCharger:
-						//% "Charger not ready, equalization cannot be started."
+						//% "Charger not ready, equalization cannot be started"
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_charger_not_ready"), 5000)
 						break;
 					case VenusOS.VeBusDevice_ChargeState_Bulk:
-						//% "Equalization cannot be triggered during bulk charge state."
+						//% "Equalization cannot be triggered during bulk charge state"
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_no_equalisation_during_bulk"), 5000)
 						break;
 					case VenusOS.VeBusDevice_ChargeState_Equalize:

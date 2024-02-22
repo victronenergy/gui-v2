@@ -24,7 +24,7 @@ Page {
 
 		model: [
 			{
-				//% "Device List"
+				//% "Device list"
 				text: qsTrId("settings_device_list"),
 				page: "/pages/settings/devicelist/DeviceListPage.qml",
 			},
@@ -143,7 +143,7 @@ Page {
 				visible: signalK.isValid || nodeRed.isValid
 			},
 			{
-				//% "VRM Device Instances"
+				//% "VRM device instances"
 				text: qsTrId("settings_vrm_device_instances"),
 				page: "/pages/settings/PageVrmDeviceInstances.qml",
 			},

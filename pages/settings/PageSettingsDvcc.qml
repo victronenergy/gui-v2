@@ -27,7 +27,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				//% "Charge Current limits"
+				//% "Charge current limits"
 				text: qsTrId("settings_dvcc_charge_current_limits")
 				showAccessLevel: VenusOS.User_AccessType_Service
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageChargeCurrentLimits.qml", { title: text })

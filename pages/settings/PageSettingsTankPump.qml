@@ -34,7 +34,6 @@ Page {
 		id: disabledModel
 
 		ListLabel {
-			horizontalAlignment: Text.AlignHCenter
 			//% "Tank pump start/stop function is not enabled. Go to relay settings and set function to \"Tank pump\"."
 			text: qsTrId("settings_pump_function_not_enabled" )
 		}

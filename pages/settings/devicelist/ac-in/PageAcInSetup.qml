@@ -122,7 +122,7 @@ Page {
 			}
 
 			ListLabel {
-				text: qsTr("Set switch in an unlocked position to change settings")
+				text: qsTr("Set the switch in an unlocked position to modify the settings.")
 				visible: productId.value == em24ProductId && em24Locked()
 			}
 

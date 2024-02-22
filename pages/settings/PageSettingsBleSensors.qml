@@ -49,7 +49,7 @@ Page {
 			}
 
 			ListLabel {
-				//% "Continuous scanning may interfere with Wi-Fi operation"
+				//% "Continuous scanning may interfere with Wi-Fi operation."
 				text: qsTrId("settings_continuous_scan_may_interfere")
 				visible: contScan.checked
 			}

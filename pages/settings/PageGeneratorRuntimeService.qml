@@ -92,7 +92,7 @@ Page {
 				visible: serviceReset.isValid
 				onClicked: {
 					serviceReset.setValue(1)
-					//% "The service timer has been reset."
+					//% "The service timer has been reset"
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_service_timer_has_been_reset"))
 				}
 
