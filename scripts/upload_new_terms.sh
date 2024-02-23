@@ -9,9 +9,9 @@ then
   exit 1
 fi
 
-if [ ! -f i18n/venus-gui-v2.ts ]
+if [ ! -f build/i18n/venus-gui-v2.ts ]
 then
-  echo "No i18n/venus-gui-v2.ts found"
+  echo "No build/i18n/venus-gui-v2.ts found"
   exit 1
 fi
 
@@ -21,6 +21,6 @@ curl -X POST https://api.poeditor.com/v2/projects/upload \
      -F id="674443" \
      -F updating="terms" \
      -F sync_terms=1 \
-     -F file=@"i18n/venus-gui-v2.ts"
+     -F file=@"build/i18n/venus-gui-v2.ts"
 
 exit 0
