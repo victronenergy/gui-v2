@@ -1091,7 +1091,7 @@ file(COPY
       "i18n/${PROJECT_NAME}_th.ts"
       "i18n/${PROJECT_NAME}_tr.ts"
       "i18n/${PROJECT_NAME}_uk.ts"
-      "i18n/${PROJECT_NAME}_zh-CN.ts"
+      "i18n/${PROJECT_NAME}_zh_CN.ts"
     DESTINATION "i18n") # build directory
 
 # This adds 2 new targets, venus-gui-v2_lupdate and venus-gui-v2_lrelease. Parallel builds (eg. 'make -j') do not rebuild venus-gui-v2_lrelease correctly without further 'add_dependencies' hackery
@@ -1114,6 +1114,7 @@ qt_add_translations( ${PROJECT_NAME}
       "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_th.ts"
       "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_tr.ts"
       "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_uk.ts"
+      "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_zh_CN.ts"
     SOURCES "${TRANSLATION_SOURCES}"
     LUPDATE_OPTIONS -no-obsolete
     LRELEASE_OPTIONS -idbased
