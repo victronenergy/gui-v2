@@ -137,6 +137,7 @@ Rectangle {
 		width: Theme.geometry_levelsPage_gaugeDelegate_contentWidth
 		font.pixelSize: Theme.font_size_h1
 		unit: VenusOS.Units_Percentage
+		visible: !isNaN(root.level)
 		value: (isNaN(root.level) || root.level < 0) ? 0 : Math.round(root.level)
 	}
 
@@ -153,6 +154,7 @@ Rectangle {
 		fontSizeMode: Text.HorizontalFit
 		font.pixelSize: Theme.font_size_caption
 		color: Theme.color_font_secondary
+		visible: !isNaN(root.totalCapacity) && !isNaN(root.totalRemaining)
 		text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
 				isNaN(root.totalCapacity) ? 0 : root.totalCapacity,
 				isNaN(root.totalRemaining) ? 0 : root.totalRemaining)
