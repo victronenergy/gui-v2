@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script should be called _after_ building the project. Part of building the project
-# is running `lupdate`, and thus producing i18n/venus-gui-v2.ts
+# is running lupdate, and thus producing .../path/to/build/dir/i18n/venus-gui-v2.ts
 
 if [ "${POEDITOR_TOKEN}" == "" ]
 then
