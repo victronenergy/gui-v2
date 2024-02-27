@@ -50,7 +50,7 @@ ObjectModel {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/ErrorCode"
 		visible: defaultVisible && dataItem.isValid
-		secondaryText: dataItem.isValid ? WakespeedError.description(dataItem.value) : dataItem.invalidText
+		secondaryText: dataItem.isValid ? AlternatorError.description(dataItem.value) : dataItem.invalidText
 	}
 
 	ListQuantityItem {
