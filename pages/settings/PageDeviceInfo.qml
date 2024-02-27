@@ -57,6 +57,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/CustomName"
 				dataItem.invalidate: false
 				textField.maximumLength: 32
+				visible: dataItem.isValid
 				placeholderText: CommonWords.custom_name
 			}
 
