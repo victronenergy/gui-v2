@@ -11,31 +11,13 @@ Slider {
 
 	readonly property alias dataItem: dataItem
 
-	property real _emittedValue
-
-	signal valueChanged(value: real)
-
 	implicitWidth: parent ? parent.width : 0
 	implicitHeight: Theme.geometry_listItem_height
-	live: false
 	from: dataItem.min !== undefined ? dataItem.min : 0
 	to: dataItem.max !== undefined ? dataItem.max : 1
 	stepSize: (to-from) / Theme.geometry_listItem_slider_stepDivsion
 	value: to > from && dataItem.isValid ? dataItem.value : 0
 	enabled: dataItem.uid === "" || dataItem.isValid
-
-	onPressedChanged: {
-		if (root.value !== root._emittedValue) {
-			root._emittedValue = root.value
-			root.valueChanged(root.value)
-		}
-	}
-
-	onValueChanged: function(value) {
-		if (dataItem.uid.length > 0) {
-			dataItem.setValue(value)
-		}
-	}
 
 	leftPadding: Theme.geometry_listItem_content_horizontalMargin
 		+ Theme.geometry_listItem_slider_button_size
@@ -43,6 +25,12 @@ Slider {
 	rightPadding: Theme.geometry_listItem_content_horizontalMargin
 		+ Theme.geometry_listItem_slider_button_size
 		+ Theme.geometry_listItem_slider_spacing
+
+	onPositionChanged: {
+		if (dataItem.uid.length > 0) {
+			dataItem.setValue(value)
+		}
+	}
 
 	Button {
 		id: minusButton
@@ -59,8 +47,6 @@ Slider {
 		onClicked: {
 			if (root.value > root.from) {
 				root.decrease()
-				root._emittedValue = root.value
-				root.valueChanged(root.value)
 			}
 		}
 	}
@@ -79,8 +65,6 @@ Slider {
 		onClicked: {
 			if (root.value < root.to) {
 				root.increase()
-				root._emittedValue = root.value
-				root.valueChanged(root.value)
 			}
 		}
 	}

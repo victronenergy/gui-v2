@@ -12,8 +12,6 @@ ListItem {
 	readonly property alias dataItem: slider.dataItem
 	readonly property alias slider: slider
 
-	signal valueChanged(value: real)
-
 	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
 
 	content.anchors.rightMargin: 0
@@ -22,10 +20,6 @@ ListItem {
 			id: slider
 
 			width: Theme.geometry_listItem_slider_width
-
-			onValueChanged: function(value) {
-				root.valueChanged(value)
-			}
 		}
 	]
 }
