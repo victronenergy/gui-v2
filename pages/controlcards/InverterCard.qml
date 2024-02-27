@@ -72,7 +72,6 @@ ControlCard {
 			width: parent.width
 			button.width: Math.max(button.implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
 			label.text: CommonWords.mode
-			button.text: modeDialogLauncher.modeText
 			separator.visible: false
 			onClicked: modeDialogLauncher.openDialog()
 			button.text: Global.inverters.inverterModeToText(root.inverter.mode)
