@@ -1,3 +1,4 @@
 CMakeLists.txt.user
 CMakeLists.txt.user.*
 src/themeobjects.h
+.DS_Store

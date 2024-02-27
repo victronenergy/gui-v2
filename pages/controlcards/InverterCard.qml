@@ -55,11 +55,6 @@ ControlCard {
 		source: "com.victronenergy.backuprestore/Quattromulti/Error"
 	}
 
-
-	title.icon.source: "qrc:/images/inverter_charger.svg"
-	//% "Inverter / Charger"
-	title.text: qsTrId("controlcard_inverter_charger")
-
 	VeQuickItem {
 		id: stateItem
 		uid: root.inverter.serviceUid + "/State"
