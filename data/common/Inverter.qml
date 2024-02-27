@@ -59,11 +59,19 @@ Device {
 	}
 
 	property bool _valid: deviceInstance.value !== undefined
-	on_ValidChanged: {
+
+	on_ValidChanged: addRemoveInverter()
+
+	property DataPoint _backuprestoreState: DataPoint {
+		source: "com.victronenergy.backuprestore/Quattromulti/State"
+		onValueChanged: addRemoveInverter()
+	}
+
+	function addRemoveInverter() {
 		if (!!Global.inverters) {
-			if (_valid) {
+			if (_valid || _backuprestoreState.value !== 0) {
 				Global.inverters.addInverter(inverter)
-			} else {
+			} else if (!_valid && _backuprestoreState.value === 0) {
 				Global.inverters.removeInverter(inverter)
 			}
 		}
