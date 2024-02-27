@@ -51,10 +51,6 @@ ControlCard {
 		source: "com.victronenergy.backuprestore/Quattromulti/Error"
 	}
 
-
-	title.icon.source: "qrc:/images/inverter_charger.svg"
-	//% "Inverter / Charger"
-	title.text: qsTrId("controlcard_inverter_charger")
 	icon.source: "qrc:/images/inverter_charger.svg"
 	//: %1 = the inverter/charger name
 	//% "Inverter / Charger (%1)"
