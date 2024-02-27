@@ -70,7 +70,7 @@ if (${LOAD_QML_FROM_FILESYSTEM})
     message("This application will load qml sources from the filesystem, not from the compiled resources")
 endif()
 
-set(REQUIRED_QT_VERSION 6.2.4) # require at least qt 6.5.2 for qt_add_qml_module to work properly
+set(REQUIRED_QT_VERSION 6.5.2) # require at least qt 6.5.2 for qt_add_qml_module to work properly
 find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Gui Qml Quick Svg Xml Mqtt LinguistTools REQUIRED)
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
