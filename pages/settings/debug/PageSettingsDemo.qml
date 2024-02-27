@@ -133,9 +133,6 @@ Page {
 				slider.from: 1
 				slider.to: 100
 				slider.stepSize: 10
-				onValueChanged: function(value) {
-					console.log("Value:", value)
-				}
 			}
 
 			ListRangeSlider {
