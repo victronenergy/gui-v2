@@ -22,6 +22,8 @@
     "color_background_disabled": "color_gray6",
 
     "color_button_down_text": "color_white",
+    "color_button_icon": "color_gray5",
+    "color_button_icon_down": "color_gray4",
 
     "color_card_separator": "color_gray6",
 
@@ -33,8 +35,8 @@
 
     "color_listItem_background": "color_background_secondary",
     "color_listItem_down_background": "color_gray8",
-    "color_listItem_forwardIcon": "color_gray5",
-    "color_listItem_down_forwardIcon": "color_gray4",
+    "color_listItem_forwardIcon": "color_button_icon",
+    "color_listItem_down_forwardIcon": "color_button_icon_down",
     "color_listItem_separator": "color_gray5",
     "color_listItem_secondaryText": "color_gray4",
     "color_listItem_highAccessLevel": "#66F0962E",

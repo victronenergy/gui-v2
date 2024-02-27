@@ -42,6 +42,9 @@ Slider {
 		icon.width: Theme.geometry_listItem_slider_button_size
 		icon.height: Theme.geometry_listItem_slider_button_size
 		icon.source: "qrc:/images/icon_minus.svg"
+		icon.color: root.enabled
+			   ? (pressed ? Theme.color_button_icon_down : Theme.color_button_icon)
+			   : Theme.color_background_disabled
 		backgroundColor: "transparent"
 
 		onClicked: {
@@ -60,6 +63,9 @@ Slider {
 		icon.width: Theme.geometry_listItem_slider_button_size
 		icon.height: Theme.geometry_listItem_slider_button_size
 		icon.source: "qrc:/images/icon_plus.svg"
+		icon.color: root.enabled
+			   ? (pressed ? Theme.color_button_icon_down : Theme.color_button_icon)
+			   : Theme.color_background_disabled
 		backgroundColor: "transparent"
 
 		onClicked: {
