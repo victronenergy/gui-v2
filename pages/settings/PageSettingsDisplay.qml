@@ -19,7 +19,6 @@ Page {
 				//% "Adaptive brightness"
 				text: qsTrId("settings_adaptive_brightness")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/AutoBrightness"
-				// TODO will this also need bindings similar to gui-v1 vePlatform.hasAutoBrightness?
 			}
 
 			ListSlider {
@@ -28,8 +27,6 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Brightness"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				visible: defaultVisible && !autoBrightness.checked
-				// TODO will this also need bindings similar to gui-v1 vePlatform.hasBacklight and vePlatform.brightness?
-				slider.to: 15   // TODO replace with maxBrightness from venus-platform when available
 			}
 
 			ListRadioButtonGroup {

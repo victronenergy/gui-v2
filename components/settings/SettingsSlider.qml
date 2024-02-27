@@ -16,8 +16,10 @@ Slider {
 	from: dataItem.min !== undefined ? dataItem.min : 0
 	to: dataItem.max !== undefined ? dataItem.max : 1
 	stepSize: (to-from) / Theme.geometry_listItem_slider_stepDivsion
+	live: true
 	value: to > from && dataItem.isValid ? dataItem.value : 0
 	enabled: dataItem.uid === "" || dataItem.isValid
+	snapMode: Slider.SnapAlways
 
 	leftPadding: Theme.geometry_listItem_content_horizontalMargin
 		+ Theme.geometry_listItem_slider_button_size
@@ -27,8 +29,12 @@ Slider {
 		+ Theme.geometry_listItem_slider_spacing
 
 	onPositionChanged: {
+		// Break the 'value: dataItem.value' binding after the value is initially set, otherwise
+		// the backend value and the slider value will fight each other.
+		root.value = value
+
 		if (dataItem.uid.length > 0) {
-			dataItem.setValue(value)
+			dataItem.setValue(valueAt(position))
 		}
 	}
 
