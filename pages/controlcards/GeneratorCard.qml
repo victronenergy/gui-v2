@@ -52,7 +52,6 @@ ControlCard {
 			function onClicked() {
 				if (!autostartSwitch.button.checked) {
 					root.generator.setAutoStart(true)
-					autostartSwitch.button.checked = true
 				} else {
 					// check if they really want to disable
 					Global.dialogLayer.open(confirmationDialogComponent)
@@ -74,7 +73,6 @@ ControlCard {
 
 				onAccepted: {
 					root.generator.setAutoStart(false)
-					autostartSwitch.button.checked = false
 				}
 			}
 		}
