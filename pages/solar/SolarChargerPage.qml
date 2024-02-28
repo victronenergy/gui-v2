@@ -22,9 +22,6 @@ Page {
 				QuantityTableSummary {
 					id: trackerSummary
 
-					x: Theme.geometry_listItem_content_horizontalMargin
-					width: parent.width - Theme.geometry_listItem_content_horizontalMargin
-
 					model: [
 						{
 							title: CommonWords.state,

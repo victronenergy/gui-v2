@@ -23,9 +23,7 @@ Page {
 				QuantityTableSummary {
 					id: summary
 
-					x: Theme.geometry_listItem_content_horizontalMargin
-					width: parent.width - (2 * Theme.geometry_listItem_content_horizontalMargin)
-
+					width: parent.width - Theme.geometry_listItem_content_horizontalMargin
 					model: [
 						{
 							title: "",
@@ -41,13 +39,7 @@ Page {
 							title: CommonWords.energy,
 							value: Global.evChargers.energy,
 							unit: VenusOS.Units_Energy_KiloWattHour
-						},
-						{
-							// Extra empty column to create spacing
-							title: "",
-							value: NaN,
-							unit: VenusOS.Units_None
-						},
+						}
 					]
 				}
 			}

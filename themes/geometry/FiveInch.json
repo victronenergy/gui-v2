@@ -359,7 +359,7 @@
 
     "geometry_quantityTable_row_height": 32,
     "geometry_quantityTable_bottomMargin": 14,
-    "geometry_quantityTable_header_widthBoost": 90,
+    "geometry_quantityTable_horizontalSpacing": 18,
 
     "geometry_quantityTableSummary_verticalMargin": 8,
     "geometry_quantityTableSummary_verticalSpacing": 4,
