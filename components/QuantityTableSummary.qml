@@ -10,26 +10,25 @@ Row {
 	id: root
 
 	property var model: []
-	property bool smallTextMode
-	property bool equalWidthColumns
+	property alias metrics: quantityMetrics
 
-	function _quantityColumnWidth(unit) {
-		if (equalWidthColumns) {
-			return width / model.length
-		}
-		// Give the unit symbol some extra space on the column.
-		const widthMultiplier = (unit === VenusOS.Units_Energy_KiloWattHour) ? 1.2 : 1
-		return ((width - Theme.geometry_quantityTable_header_widthBoost) / model.length) * widthMultiplier
+	QuantityTableMetrics {
+		id: quantityMetrics
+
+		count: model.length
+		availableWidth: root.width - root.leftPadding
 	}
 
 	width: parent ? parent.width : 0
 	height: quantityRow.height + (2 * Theme.geometry_quantityTableSummary_verticalMargin)
+	// Omit the right padding to give the table a little more space.
+	leftPadding: Theme.geometry_listItem_content_horizontalMargin
 
 	Item {
 		id: firstColumn
 
 		anchors.verticalCenter: parent.verticalCenter
-		width: root.width - quantityRow.width
+		width: root.width - quantityRow.width - x
 		height: firstColumnSubLabel.y + firstColumnSubLabel.height
 
 		Label {
@@ -53,7 +52,7 @@ Row {
 			width: parent.width
 			elide: Text.ElideRight
 			rightPadding: Theme.geometry_listItem_content_spacing
-			font.pixelSize: root.smallTextMode ? Theme.font_size_body2 : Theme.font_size_body3
+			font.pixelSize: metrics.smallTextMode ? Theme.font_size_body2 : Theme.font_size_body3
 			text: root.model[0].text
 			color: firstColumnTitleLabel.text ? Theme.color_font_primary : Theme.color_quantityTable_quantityValue
 			opacity: firstColumnTitleLabel.text.length ? 1 : 0
@@ -85,7 +84,7 @@ Row {
 			model: root.model.length - 1
 
 			delegate: Column {
-				width: root._quantityColumnWidth(root.model[model.index + 1].unit)
+				width: metrics.columnWidth(root.model[model.index + 1].unit)
 				spacing: Theme.geometry_quantityTableSummary_verticalSpacing
 
 				Label {
@@ -94,6 +93,7 @@ Row {
 					font.pixelSize: Theme.font_size_caption
 					text: root.model[model.index + 1].title
 					color: Theme.color_quantityTable_quantityValue
+					fontSizeMode: Text.HorizontalFit
 				}
 
 				Loader {

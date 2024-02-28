@@ -64,10 +64,8 @@ Column {
 	QuantityTableSummary {
 		id: tableSummary
 
-		// Omit right margin to give the table a little more space.
-		x: Theme.geometry_listItem_content_horizontalMargin
-		width: parent.width - Theme.geometry_listItem_content_horizontalMargin
-		smallTextMode: root.smallTextMode
+		metrics.smallTextMode: root.smallTextMode
+		metrics.spacing: 2*Theme.geometry_quantityTable_horizontalSpacing
 
 		model: [
 			{
@@ -98,10 +96,11 @@ Column {
 	QuantityTable {
 		id: trackerTable
 
-		width: parent.width
 		bottomPadding: Theme.geometry_quantityTable_bottomMargin
 		visible: !root.summaryOnly && root.solarHistory.trackerCount > 1
 		headerVisible: false
+		metrics.smallTextMode: root.smallTextMode
+		metrics.spacing: 2*Theme.geometry_quantityTable_horizontalSpacing
 
 		rowCount: root.solarHistory.trackerCount
 		units: [

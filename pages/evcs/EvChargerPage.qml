@@ -27,9 +27,7 @@ Page {
 						return actual + "/" + max
 					}
 
-					x: Theme.geometry_listItem_content_horizontalMargin
-					width: parent.width - Theme.geometry_listItem_content_horizontalMargin
-					equalWidthColumns: true
+					metrics.equalWidthColumns: true
 
 					model: [
 						{
@@ -71,7 +69,7 @@ Page {
 						topMargin: Theme.geometry_gradientList_spacing
 					}
 					visible: root.evCharger.phases.count > 1
-					equalWidthColumns: true
+					metrics.equalWidthColumns: true
 					headerVisible: false
 
 					rowCount: root.evCharger.phases.count

@@ -13,30 +13,18 @@ Column {
 	property int rowCount
 	property var valueForModelIndex  // function(row,column) -> data value for this row/column
 	property bool headerVisible: true
-	property bool equalWidthColumns
 	property Component headerComponent: defaultHeaderComponent
 	property int labelHorizontalAlignment: Qt.AlignLeft
 
-	// If specified, allows for a custom column width for the 'Units_None' column.
-	// Eg. label columns with cells like "L1", "L2" can be thinner to allow wider columns elsewhere.
-	property int firstColumnWidth
+	property alias metrics: quantityMetrics
+	readonly property int leftMargin: Theme.geometry_listItem_content_horizontalMargin
 
-	property real availableWidth: width - Theme.geometry_listItem_content_horizontalMargin
+	QuantityTableMetrics {
+		id: quantityMetrics
 
-	function _quantityColumnWidth(unit) {
-		if (!!firstColumnWidth) {
-			if (unit === VenusOS.Units_None) {
-				return firstColumnWidth
-			}
-			return (availableWidth - firstColumnWidth) / (units.length - 1)
-		}
-
-		if (equalWidthColumns) {
-			return availableWidth / units.length
-		}
-		// Give the unit symbol some extra space on the column.
-		const widthMultiplier = (unit === VenusOS.Units_Energy_KiloWattHour) ? 1.2 : 1
-		return ((availableWidth - Theme.geometry_quantityTable_header_widthBoost) / units.length) * widthMultiplier
+		count: units.length
+		// Omit the right margin to give the table a little more space.
+		availableWidth: root.width - root.leftMargin
 	}
 
 	width: parent ? parent.width : 0
@@ -53,13 +41,13 @@ Column {
 			Row {
 				id: headerRow
 
-				// Omit rightPadding to give the table a little more space.
-				leftPadding: Theme.geometry_listItem_content_horizontalMargin
+				// Omit the right padding to give the table a little more space.
+				leftPadding: root.leftMargin
 				height: visible ? Theme.geometry_quantityTable_row_height : 0
 
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
-					width: root.availableWidth - headerQuantityRow.width
+					width: metrics.availableWidth - headerQuantityRow.width
 					rightPadding: Theme.geometry_listItem_content_spacing
 					font.pixelSize: Theme.font_size_caption
 					elide: Text.ElideRight
@@ -76,7 +64,7 @@ Column {
 						model: headerRow.visible ? units.length - 1 : null
 						delegate: Label {
 							anchors.verticalCenter: parent.verticalCenter
-							width: root._quantityColumnWidth(root.units[model.index + 1].unit)
+							width: metrics.columnWidth(root.units[model.index + 1].unit)
 							rightPadding: Theme.geometry_gradientList_spacing
 							font.pixelSize: Theme.font_size_caption
 							elide: Text.ElideRight
@@ -111,14 +99,13 @@ Column {
 			Row {
 				id: valueRow
 
-				leftPadding: Theme.geometry_listItem_content_horizontalMargin
-				rightPadding: Theme.geometry_listItem_content_horizontalMargin
 				height: Theme.geometry_quantityTable_row_height
+				leftPadding: root.leftMargin
 
 				// Column 1: value is displayed by Label
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
-					width: root.availableWidth - quantityRow.width
+					width: metrics.availableWidth - quantityRow.width
 					rightPadding: Theme.geometry_listItem_content_spacing
 					elide: Text.ElideRight
 					text: root.valueForModelIndex(rowDelegate.rowIndex, 0) || ""
@@ -136,7 +123,7 @@ Column {
 
 						model: root.units.length - 1    // omit the first (non-quantity) column
 						delegate: QuantityLabel {
-							width: root._quantityColumnWidth(unit)
+							width: metrics.columnWidth(unit)
 							alignment: root.labelHorizontalAlignment
 							value: root.valueForModelIndex(rowDelegate.rowIndex, model.index + 1)
 							unit: root.units[model.index + 1].unit

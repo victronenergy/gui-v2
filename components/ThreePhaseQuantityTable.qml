@@ -39,8 +39,8 @@ QuantityTable {
 		return NaN
 	}
 
-	availableWidth: width - 2*Theme.geometry_listItem_content_horizontalMargin
-	firstColumnWidth: Theme.geometry_vebusDeviceListPage_quantityTable_firstColumn_width
+	metrics.availableWidth: width - 2*Theme.geometry_listItem_content_horizontalMargin
+	metrics.firstColumnWidth: Theme.geometry_vebusDeviceListPage_quantityTable_firstColumn_width
 	units: [
 		{ unit: VenusOS.Units_None },
 		{ unit: VenusOS.Units_Watt },
