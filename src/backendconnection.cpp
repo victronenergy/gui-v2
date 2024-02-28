@@ -479,6 +479,25 @@ QString BackendConnection::serviceUidForType(const QString &serviceType) const
 			: QStringLiteral("%1/com.victronenergy.%2").arg(uidPrefix()).arg(serviceType);
 }
 
+QString BackendConnection::serviceTypeFromUid(const QString &uid) const
+{
+	switch (type()) {
+	case UnknownSource:
+		break;
+	case DBusSource:
+	case MockSource:
+	{
+		// uid format is <dbus|mock>/com.victronenergy.<serviceType>.[suffx]/*
+		const QString serviceTypePart = uid.split('/').value(1);
+		return serviceTypePart.split('.').value(2);
+	}
+	case MqttSource:
+		// uid format is "mqtt/<serviceType>/*"
+		return uid.split('/').value(1);
+	}
+	return QString();
+}
+
 QString BackendConnection::uidPrefix() const
 {
 	switch (type()) {

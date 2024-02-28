@@ -27,12 +27,16 @@ ListTextItem {
 		// 0xA00BC0 => vA0.0B.C0
 		// 0xA00BFF => vA0.0B
 
-		// Return the version as it is, if format is "vebus" or if the version is not a hex number
-		if (format === "vebus" || !version.match(/^[0-9A-F]+$/i)){
-			return "v" + version;
+		// Return the version as-is, if the version is not a hex number.
+		const versionString = version.toString()
+		if (!versionString.match(/^[0-9A-F]+$/i)){
+			return versionString.startsWith("v") ? version : "v" + version;
 		}
 
 		let hexString = version.toString(16).toUpperCase();
+		if (format === "vebus") {
+			return "v" + hexString;
+		}
 
 		// Add leading zeros to get a string at least 3 characters long
 		if (version < 0x100){
@@ -48,5 +52,5 @@ ListTextItem {
 	}
 
 	text: CommonWords.firmware_version
-	secondaryText: dataItem.value ? firmwareVersion(dataItem.value) : ""
+	secondaryText: dataItem.value ? firmwareVersion(dataItem.value, BackendConnection.serviceTypeFromUid(dataItem.uid)) : ""
 }
