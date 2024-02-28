@@ -36,12 +36,6 @@ public:
 	};
 	Q_ENUM(AsymmetricRoundedRectangle_RoundedSide)
 
-	enum EnvironmentGaugePanel_Size {
-		EnvironmentGaugePanel_Size_Compact,
-		EnvironmentGaugePanel_Size_Expanded
-	};
-	Q_ENUM(EnvironmentGaugePanel_Size)
-
 	enum Gauges_ValueType {
 		Gauges_ValueType_NeutralPercentage,
 		Gauges_ValueType_RisingPercentage,
