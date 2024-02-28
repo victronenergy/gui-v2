@@ -12,6 +12,7 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
+import Victron.Gauges
 
 ListView {
 	id: root
@@ -22,22 +23,7 @@ ListView {
 	property int _tankItemCount // No. of visible tank items, where merged tanks only count as one item
 	property var _mergedTankTypes: []
 	property int _lastVisibleTankType
-
-	readonly property var _spacingValues: [
-		Theme.geometry_levelsPage_gauge_spacing2,
-		Theme.geometry_levelsPage_gauge_spacing3,
-		Theme.geometry_levelsPage_gauge_spacing4,
-		Theme.geometry_levelsPage_gauge_spacing5,
-		Theme.geometry_levelsPage_gauge_spacing6,
-		Theme.geometry_levelsPage_gauge_spacing7,
-	]
-
-	function _spacing() {
-		if (_tankItemCount <= 1) {
-			return 0
-		}
-		return _spacingValues[_tankItemCount - 1] || Theme.geometry_levelsPage_gauge_spacing7
-	}
+	property int _spacing: Gauges.spacing(_tankItemCount)
 
 	function _updateLayout(initialLayout) {
 		let i = 0
@@ -86,7 +72,7 @@ ListView {
 		readonly property bool mergeTanks: root._mergedTankTypes.indexOf(tankType) >= 0
 
 		// Add spacing between this set of tank types and the next
-		width: implicitWidth + (gaugeRepeater.count === 0 || tankType == root._lastVisibleTankType ? 0 : root._spacing())
+		width: implicitWidth + (gaugeRepeater.count === 0 || tankType == root._lastVisibleTankType ? 0 : root._spacing)
 
 		Repeater {
 			id: gaugeRepeater
@@ -97,7 +83,7 @@ ListView {
 
 			delegate: Item {
 				// Add spacing between this tank and the next (if there is more than one of this type)
-				width: gaugeGroup.width + (model.index === gaugeRepeater.count - 1 ? 0 : root._spacing())
+				width: gaugeGroup.width + (model.index === gaugeRepeater.count - 1 ? 0 : root._spacing)
 				height: 1
 
 				TankGaugeGroup {
@@ -105,8 +91,10 @@ ListView {
 
 					animationEnabled: root.animationEnabled
 					tankType: tankTypeDelegate.tankType
-					title: tankProperties.name
+					header.text: tankProperties.name
 					expanded: !!Global.pageManager && Global.pageManager.expandLayout
+					width: Gauges.width(_tankItemCount, Theme.geometry_levelsPage_max_tank_count, root.width)
+					height: Gauges.height(expanded)
 
 					level: mergeTanks ? gaugeTanks.averageLevel : model.device.level
 					totalRemaining: mergeTanks ? gaugeTanks.totalRemaining : model.device.remaining

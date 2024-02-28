@@ -9,89 +9,41 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	property alias title: titleLabel.text
+	property alias title: header.text
 	property real temperature: NaN
 	property real humidity: NaN
-	property int horizontalSize: VenusOS.EnvironmentGaugePanel_Size_Expanded
-	property int verticalSize: VenusOS.EnvironmentGaugePanel_Size_Expanded
 	property bool animationEnabled: true
 
 	property var temperatureGaugeGradient
 	property var humidityGaugeGradient
 
-	readonly property int compactWidth: _twoGauges
-		? Theme.geometry_levelsPage_environment_gaugePanel_twoGauge_compact_width
-		: Theme.geometry_levelsPage_environment_gaugePanel_oneGauge_compact_width
-	readonly property int compactHeight: Theme.geometry_levelsPage_environment_gaugePanel_compact_height
-	readonly property int expandedWidth: _twoGauges
-		? Theme.geometry_levelsPage_environment_gaugePanel_twoGauge_expanded_width
-		: Theme.geometry_levelsPage_environment_gaugePanel_oneGauge_expanded_width
-	readonly property int expandedHeight: Theme.geometry_levelsPage_environment_gaugePanel_expanded_height
-
 	readonly property int _twoGauges: !isNaN(temperature) && !isNaN(humidity)
 	readonly property int _gaugeWidth: _twoGauges
-			? (width - (2 * Theme.geometry_levelsPage_environment_gaugePanel_border_width)) / 2
+			? (width - (2 * Theme.geometry_levelsPage_panel_border_width)) / 2
 			: Theme.geometry_levelsPage_environment_gauge_width
 
-	width: horizontalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedWidth : compactWidth
-	height: verticalSize === VenusOS.EnvironmentGaugePanel_Size_Expanded ? expandedHeight : compactHeight
-
-	color: Theme.color_levelsPage_environment_panel_border_color
-	radius: Theme.geometry_levelsPage_environment_gaugePanel_radius
+	border.color: Theme.color_levelsPage_panel_border_color
+	border.width: Theme.geometry_levelsPage_panel_border_width
+	color: Theme.color_levelsPage_environment_panel_background
+	radius: Theme.geometry_levelsPage_panel_radius
 
 	Behavior on height {
 		enabled: root.animationEnabled
 		NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
 	}
 
-	Rectangle {
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_levelsPage_environment_gaugePanel_title_height
-			left: parent.left
-			leftMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
-			right: parent.right
-			rightMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
-			bottom: parent.bottom
-			bottomMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
-		}
-
-		// Asymmetrical rounding: don't round rectangle on top-left and top-right corners
-		Rectangle {
-			width: parent.width
-			height: parent.radius
-			color: parent.color
-		}
-
-		radius: Theme.geometry_levelsPage_environment_gaugePanel_radius
-		color: Theme.color_levelsPage_environment_panel_background
-	}
-
-	Label {
-		id: titleLabel
-
-		x: Theme.geometry_levelsPage_environment_gaugePanel_horizontalMargin
-		width: parent.width - 2*x
-		height: Theme.geometry_levelsPage_environment_gaugePanel_title_height
-		horizontalAlignment: Text.AlignHCenter
-		verticalAlignment: Text.AlignVCenter
-		leftPadding: Theme.geometry_levelsPage_environment_gaugePanel_border_width
-		rightPadding: Theme.geometry_levelsPage_environment_gaugePanel_border_width
-
-		font.pixelSize: Theme.font_size_caption
-		color: Theme.color_levelsPage_environment_panel_title
-		elide: Text.ElideRight
+	GaugeHeader {
+		id: header
+		color: Theme.color_levelsPage_panel_border_color
 	}
 
 	EnvironmentGauge {
 		id: tempGauge
 
+		x: humidityGaugeLoader.active ? 0 : parent.width/2 - width/2
 		anchors {
-			top: titleLabel.bottom
-			left: humidityGaugeLoader.active ? parent.left : undefined
-			leftMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
+			top: header.bottom
 			bottom: parent.bottom
-			horizontalCenter: humidityGaugeLoader.active ? undefined : parent.horizontalCenter
 		}
 		width: root._gaugeWidth
 		animationEnabled: root.animationEnabled
@@ -114,9 +66,8 @@ Rectangle {
 		id: humidityGaugeLoader
 
 		anchors {
-			top: titleLabel.bottom
+			top: header.bottom
 			right: parent.right
-			rightMargin: Theme.geometry_levelsPage_environment_gaugePanel_border_width
 			bottom: parent.bottom
 		}
 

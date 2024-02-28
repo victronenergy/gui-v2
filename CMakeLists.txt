@@ -221,6 +221,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/FirmwareUpdate.qml
     components/FixedWidthLabel.qml
     components/GaugeModel.qml
+    components/GaugeHeader.qml
     components/EvChargerStatusModel.qml
     components/GeneratorIconLabel.qml
     components/GradientListView.qml
@@ -259,6 +260,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SwipeViewPage.qml
     components/SwitchControlValue.qml
     components/TabBar.qml
+    components/TankItem.qml
     components/TankGauge.qml
     components/TankGaugeGroup.qml
     components/ThreePhaseDisplay.qml

@@ -108,14 +108,15 @@
 
     "color_levelsPage_tankIcon": "color_gray2",
     "color_levelsPage_fallingGauge_alarmIcon": "color_red",
+    "color_levelsPage_tank_title": "color_black",
     "color_levelsPage_risingGauge_alarmIcon": "color_white",
     "color_levelsPage_tankGroupData_background_color": "#B2000000",
     "color_levelsPage_gauge_backgroundColor": "color_white",
     "color_levelsPage_gauge_separatorBarColor": "color_background_secondary",
 
-    "color_levelsPage_environment_panel_title": "color_white",
+    "color_levelsPage_panel_border_color": "#CCCBC7",
+
     "color_levelsPage_environment_panel_background": "color_white",
-    "color_levelsPage_environment_panel_border_color": "color_gray5",
     "color_levelsPage_environment_gauge_tick": "color_gray5",
     "color_levelsPage_environment_gauge_tickText": "color_gray3",
     "color_levelsPage_environment_temperatureGauge_highlightValue": "color_font_primary",

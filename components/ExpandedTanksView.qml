@@ -34,97 +34,31 @@ Rectangle {
 		onClicked: root.active = false
 	}
 
-	Rectangle {
-		color: Theme.color_levelsPage_gauge_backgroundColor
-		radius: Theme.geometry_levelsPage_gauge_radius
-		border.width: Theme.geometry_levelsPage_gauge_border_width
-		border.color: root._tankProperties.borderColor
-		width: groupedSubgauges.width + Theme.geometry_levelsPage_tankGroupData_horizontalMargin
-		height: groupedSubgauges.height
-		anchors.centerIn: groupedSubgauges
-	}
-
 	Row {
 		id: groupedSubgauges
 
 		anchors.centerIn: parent
-		spacing: groupedSubgaugesRepeater.count > 2 ? Theme.geometry_levelsPage_tankGroupData_spacing3 : Theme.geometry_levelsPage_tankGroupData_spacing2
+		spacing: Gauges.spacing(groupedSubgaugesRepeater.count)
 
 		Repeater {
 			id: groupedSubgaugesRepeater
 
-			height: Theme.geometry_levelsPage_tankGroupData_height
+			delegate: TankItem {
+				width: Gauges.width(groupedSubgaugesRepeater.count, Theme.geometry_levelsPage_max_tank_count, root.width)
+				height: Theme.geometry_levelsPage_panel_expanded_height
 
-			delegate: Item {
-				width: Theme.geometry_levelsPage_groupedSubgauges_delegate_width
-				height: Theme.geometry_levelsPage_groupedSubgauges_delegate_height
-				CP.ColorImage  {
-					id: img
-					anchors {
-						top: parent.top
-						topMargin: Theme.geometry_levelsPage_gauge_icon_topMargin
-						horizontalCenter: parent.horizontalCenter
-					}
-					source: root._tankProperties.icon
-					color: Theme.color_levelsPage_tankIcon
-				}
-				Label {
-					id: label
-					anchors {
-						top: img.bottom
-						topMargin: Theme.geometry_levelsPage_gauge_label_topMargin
-						horizontalCenter: parent.horizontalCenter
-					}
-					width: Theme.geometry_levelsPage_gaugeDelegate_contentWidth
-					font.pixelSize: Theme.font_size_body1
-					minimumPixelSize: Theme.font_size_caption
-					fontSizeMode: Text.HorizontalFit
-					horizontalAlignment: Text.AlignHCenter
-					verticalAlignment: Text.AlignBottom
-					elide: Text.ElideRight
-					text: model.device.name || root._tankProperties.name
-				}
-				TankGauge {
-					anchors {
-						top: label.bottom
-						topMargin: Theme.geometry_levelsPage_subgauges_topMargin
-						bottom: percentageText.top
-						bottomMargin: Theme.geometry_levelsPage_subgauges_bottomMargin
-					}
-					width: parent.width
-					height: groupedSubgauges.height
+				header.text: model.device.name || root._tankProperties.name
+				header.color: root._tankProperties.color
+				level: model.device.level
+				icon: root._tankProperties.icon
+				totalCapacity: model.device.capacity
+				totalRemaining: model.device.remaining
+
+				gauge: TankGauge {
+					width: Theme.geometry_levelsPage_groupedSubgauges_delegate_width
 					gaugeValueType: root._tankProperties.valueType
 					animationEnabled: root.animationEnabled
 					value: model.device.level / 100
-				}
-				QuantityLabel {
-					id: percentageText
-
-					anchors {
-						horizontalCenter: parent.horizontalCenter
-						bottom: valueText.top
-						bottomMargin: Theme.geometry_levelsPage_gauge_valueText_topMargin
-					}
-					font.pixelSize: Theme.font_size_h1
-					unit: VenusOS.Units_Percentage
-					value: model.device.level
-				}
-				Label {
-					id: valueText
-
-					anchors {
-						bottom: parent.bottom
-						bottomMargin: Theme.geometry_levelsPage_gauge_valueText_bottomMargin
-						horizontalCenter: parent.horizontalCenter
-					}
-					width: Theme.geometry_levelsPage_gaugeDelegate_contentWidth
-					horizontalAlignment: Text.AlignHCenter
-					fontSizeMode: Text.HorizontalFit
-					font.pixelSize: Theme.font_size_caption
-					color: Theme.color_font_secondary
-					text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
-							model.device.capacity,
-							model.device.remaining)
 				}
 			}
 		}
