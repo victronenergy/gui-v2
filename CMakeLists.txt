@@ -649,6 +649,8 @@ qt_add_qml_module(VenusQMLModule
     SOURCES ${VenusQMLModule_CPP_SOURCES}
 )
 
+list(APPEND TRANSLATION_SOURCES ${VenusQMLModule_CPP_SOURCES})
+
 target_include_directories(VenusQMLModule PRIVATE src/veutil/inc/veutil/qt)
 
 target_link_libraries(VenusQMLModule PRIVATE
