@@ -14,45 +14,43 @@ Item {
 	property bool controlsActive
 	readonly property Page currentPage: controlsActive && controlCardsLoader.status === Loader.Ready ? controlCardsLoader.item
 			   : !!pageStack.currentItem ? pageStack.currentItem
-			   : swipeView.currentItem
+			   : !!swipeView ? swipeView.currentItem
+			   : null
 
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
 	// when the user drags slowly between pages.
 	readonly property bool allowPageAnimations: BackendConnection.applicationVisible
-			&& !pageStack.busy && !swipeView.flicking
+			&& !pageStack.busy && (!swipeView || !swipeView.flicking)
 			&& !Global.splashScreenVisible
 
 	property int _loadedPages: 0
 
 	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded
 	on_ReadyToInitChanged: {
-		if (_readyToInit && swipeView.count === 0) {
+		if (_readyToInit && swipeViewLoader.active == false) {
 			_loadUi()
 		}
 	}
 
 	function clearUi() {
-		while (swipeView.count > 0) {
-			swipeView.removeItem(swipeView.itemAt(swipeView.count - 1))
-		}
+		swipeViewLoader.active = false
 		pageStack.clear()
-		preloader.model = null
 		_loadedPages = 0
 	}
 
 	function _loadUi() {
 		console.warn("Data sources ready, loading pages")
-		preloader.model = navBar.model
+		swipeViewLoader.active = true
 		navBar.setCurrentPage("BriefPage.qml")
 	}
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
-	SwipeView {
-		id: swipeView
-
+	property SwipeView swipeView: swipeViewLoader.item
+	Loader {
+		id: swipeViewLoader
 		// Anchor this to the PageStack's left side, so that this view slides out of view when the
 		// PageStack slides in (and vice-versa), giving the impression that the SwipeView itself
 		// is part of the stack.
@@ -62,8 +60,24 @@ Item {
 			right: pageStack.left
 		}
 		width: Theme.geometry_screen_width
-		onCurrentIndexChanged: {
-			navBar.setCurrentIndex(currentIndex)
+		active: false
+		asynchronous: true
+		sourceComponent: swipeViewComponent
+		onStatusChanged: if (status == Loader.Ready) Global.allPagesLoaded = true
+	}
+
+	Component {
+		id: swipeViewComponent
+		SwipeView {
+			anchors.fill: parent
+			onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
+
+			// ensure the order matches NavBar.model
+			BriefPage {}
+			OverviewPage {}
+			LevelsPage {}
+			NotificationsPage {}
+			SettingsPage {}
 		}
 	}
 
@@ -177,12 +191,12 @@ Item {
 	NavBar {
 		id: navBar
 
-		x: swipeView.x
+		x: swipeViewLoader.x
 		y: root.height + 4  // nudge below the visible area for wasm
 		color: root.backgroundColor
 		opacity: 0
 
-		onCurrentIndexChanged: swipeView.currentIndex = currentIndex
+		onCurrentIndexChanged: if (swipeView) swipeView.currentIndex = currentIndex
 
 		Component.onCompleted: pageManager.navBar = navBar
 
@@ -336,34 +350,5 @@ Item {
 		}
 
 		Component.onCompleted: pageManager.statusBar = statusBar
-	}
-
-	Repeater {
-		id: preloader // preload all of the pages to improve performance
-
-		model: null
-
-		Loader {
-			y: root.height + 4 // avoid fractional scaling smearing a row of pixels into visible area
-			asynchronous: true
-			visible: false
-			source: url
-
-			onStatusChanged: {
-				if (status === Loader.Ready) {
-					_loadedPages++
-					if (_loadedPages === navBar.model.count) {
-						for (let i = 0; i < preloader.count; ++i) {
-							swipeView.addItem(preloader.itemAt(i).item)
-						}
-						Global.allPagesLoaded = true
-					}
-				} else if (status === Loader.Error) {
-					console.warn("Error preloading page: " + source.toString())
-				} else {
-					console.log("Preloading page: " + source.toString())
-				}
-			}
-		}
 	}
 }
