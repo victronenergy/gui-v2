@@ -10,10 +10,10 @@ import Victron.VenusOS
 ListView {
 	id: root
 
-	x: Theme.geometry_page_content_horizontalMargin
-	width: parent.width - Theme.geometry_page_content_horizontalMargin
+	width: parent.width
 	height: parent.height
 	bottomMargin: Theme.geometry_gradientList_bottomMargin
+	leftMargin: Theme.geometry_page_content_horizontalMargin
 	rightMargin: Theme.geometry_page_content_horizontalMargin
 
 	// Note: do not set spacing here, as it creates extra spacing if an item has visible=false.
