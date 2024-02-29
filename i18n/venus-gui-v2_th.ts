@@ -122,139 +122,129 @@
       <translation>การควบคุมภายนอก</translation>
     </message>
     <message id="brief_loads">
-      <location filename="../../pages/BriefMonitorPanel.qml" line="343"/>
+      <location filename="../../pages/BriefMonitorPanel.qml" line="284"/>
       <source>Loads</source>
       <translation>โหลด</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="45"/>
+      <location filename="../../pages/LevelsPage.qml" line="49"/>
       <source>Tanks</source>
       <translation>ถัง</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="47"/>
+      <location filename="../../pages/LevelsPage.qml" line="51"/>
       <source>Environment</source>
       <translation>สิ่งแวดล้อม</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="60"/>
+      <location filename="../../pages/NotificationsPage.qml" line="150"/>
       <source>No current alerts</source>
       <translation>ไม่มีการแจ้งเตือนในปัจจุบัน</translation>
     </message>
     <message id="settings_bluetooth">
-      <location filename="../../pages/SettingsPage.qml" line="110"/>
+      <location filename="../../pages/SettingsPage.qml" line="114"/>
       <source>Bluetooth</source>
       <translation>บลูทูธ</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="33"/>
+      <location filename="../../pages/SettingsPage.qml" line="37"/>
       <source>General</source>
       <translation>ทั่วไป</translation>
     </message>
-    <message id="settings_device_list">
-      <location filename="../../pages/SettingsPage.qml" line="28"/>
-      <source>Device List</source>
-      <translation>รายการอุปกรณ์</translation>
-    </message>
     <message id="settings_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="38"/>
+      <location filename="../../pages/SettingsPage.qml" line="42"/>
       <source>Firmware</source>
       <translation>เฟิร์มแวร์</translation>
     </message>
     <message id="settings_date_and_time">
-      <location filename="../../pages/SettingsPage.qml" line="43"/>
+      <location filename="../../pages/SettingsPage.qml" line="47"/>
       <source>Date &amp; Time</source>
       <translation>วันเวลา</translation>
     </message>
     <message id="settings_remote_console">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <location filename="../../pages/SettingsPage.qml" line="52"/>
       <source>Remote Console</source>
       <translation>รีโมทคอนโซล</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="53"/>
+      <location filename="../../pages/SettingsPage.qml" line="57"/>
       <source>System setup</source>
       <translation>ติดตั้งระบบ</translation>
     </message>
     <message id="settings_system_dvcc">
-      <location filename="../../pages/SettingsPage.qml" line="58"/>
+      <location filename="../../pages/SettingsPage.qml" line="62"/>
       <source>DVCC</source>
       <translation>DVCC</translation>
     </message>
     <message id="settings_display_and_language">
-      <location filename="../../pages/SettingsPage.qml" line="63"/>
+      <location filename="../../pages/SettingsPage.qml" line="67"/>
       <source>Display &amp; Language</source>
       <translation>การแสดงผลและภาษา</translation>
     </message>
     <message id="settings_vrm_online_portal">
-      <location filename="../../pages/SettingsPage.qml" line="68"/>
+      <location filename="../../pages/SettingsPage.qml" line="72"/>
       <source>VRM online portal</source>
       <translation>VRM ออนไลน์</translation>
     </message>
     <message id="settings_ess">
-      <location filename="../../pages/SettingsPage.qml" line="73"/>
+      <location filename="../../pages/SettingsPage.qml" line="77"/>
       <source>ESS</source>
       <translation>ESS</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/SettingsPage.qml" line="78"/>
+      <location filename="../../pages/SettingsPage.qml" line="82"/>
       <source>Energy meters</source>
       <translation>เครื่องวัดพลังงาน</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/SettingsPage.qml" line="83"/>
+      <location filename="../../pages/SettingsPage.qml" line="87"/>
       <source>PV inverters</source>
       <translation>อินเวอร์เตอร์ PV</translation>
     </message>
     <message id="settings_ethernet">
-      <location filename="../../pages/SettingsPage.qml" line="88"/>
+      <location filename="../../pages/SettingsPage.qml" line="92"/>
       <source>Ethernet</source>
       <translation>อีเธอร์เน็ต</translation>
     </message>
     <message id="settings_wifi">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="97"/>
       <source>Wi-Fi</source>
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_gsm_modem">
-      <location filename="../../pages/SettingsPage.qml" line="100"/>
+      <location filename="../../pages/SettingsPage.qml" line="104"/>
       <source>GSM modem</source>
       <translation>โมเด็ม GSM</translation>
     </message>
     <message id="settings_gps">
-      <location filename="../../pages/SettingsPage.qml" line="105"/>
+      <location filename="../../pages/SettingsPage.qml" line="109"/>
       <source>GPS</source>
       <translation>จีพีเอส</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/SettingsPage.qml" line="116"/>
+      <location filename="../../pages/SettingsPage.qml" line="120"/>
       <source>Generator start/stop</source>
       <translation>เครื่องกำเนิดไฟฟ้าเริ่มต้น/หยุด</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/SettingsPage.qml" line="121"/>
+      <location filename="../../pages/SettingsPage.qml" line="125"/>
       <source>Tank pump</source>
       <translation>ปั๊มถัง</translation>
     </message>
     <message id="settings_services">
-      <location filename="../../pages/SettingsPage.qml" line="131"/>
+      <location filename="../../pages/SettingsPage.qml" line="135"/>
       <source>Services</source>
       <translation>บริการ</translation>
     </message>
     <message id="settings_io">
-      <location filename="../../pages/SettingsPage.qml" line="136"/>
+      <location filename="../../pages/SettingsPage.qml" line="140"/>
       <source>I/O</source>
       <translation>อินพุต/เอาต์พุต</translation>
     </message>
     <message id="settings_venus_os_large_features">
-      <location filename="../../pages/SettingsPage.qml" line="141"/>
+      <location filename="../../pages/SettingsPage.qml" line="145"/>
       <source>Venus OS Large features</source>
       <translation>Venus OS คุณสมบัติขนาดใหญ่</translation>
-    </message>
-    <message id="settings_vrm_device_instances">
-      <location filename="../../pages/SettingsPage.qml" line="147"/>
-      <source>VRM Device Instances</source>
-      <translation>อินสแตนซ์อุปกรณ์ VRM</translation>
     </message>
     <message id="ess_battery_life_limit">
       <location filename="../../pages/controlcards/ESSCard.qml" line="72"/>
@@ -262,27 +252,27 @@
       <translation>ขีดจำกัดอายุการใช้งานแบตเตอรี่: %1%</translation>
     </message>
     <message id="controlcard_generator_disableautostartdialog_description">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="73"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="72"/>
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
       <translation>การเริ่มต้นอัตโนมัติจะถูกปิดใช้งาน และเครื่องกำเนิดไฟฟ้าจะไม่เริ่มทำงานโดยอัตโนมัติตามเงื่อนไขที่กำหนดค่าไว้</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="96"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="94"/>
       <source>The generator will start and stop based on the configured autostart conditions.</source>
       <translation>เครื่องกำเนิดไฟฟ้าจะเริ่มและหยุดตามเงื่อนไขการสตาร์ทอัตโนมัติที่กำหนดค่าไว้</translation>
     </message>
     <message id="controlcard_generator_subcard_button_manual_stop">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="126"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="124"/>
       <source>Manual Stop</source>
       <translation>หยุดด้วยตนเอง</translation>
     </message>
     <message id="controlcard_generator_subcard_button_manual_start">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="129"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="127"/>
       <source>Manual Start</source>
       <translation>เริ่มด้วยตัวเอง</translation>
     </message>
-    <message id="controlcard_generator_label_autostart">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="43"/>
+    <message id="evcs_autostart">
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="44"/>
       <source>Autostart</source>
       <translation>เริ่มอัตโนมัติ</translation>
     </message>
@@ -382,17 +372,17 @@
       <translation>ชื่อ</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="65"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="66"/>
       <source>Product ID</source>
       <translation>รหัสสินค้า</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="78"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="79"/>
       <source>Hardware version</source>
       <translation>เวอร์ชั่นฮาร์ดแวร์</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="99"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="100"/>
       <source>Device name</source>
       <translation>ชื่ออุปกรณ์</translation>
     </message>
@@ -435,11 +425,6 @@
       <location filename="../../pages/settings/PageGenerator.qml" line="144"/>
       <source>Running now</source>
       <translation>วิ่งแล้ว</translation>
-    </message>
-    <message id="settings_page_relay_generator_auto_start_enabled">
-      <location filename="../../pages/settings/PageGenerator.qml" line="151"/>
-      <source>Auto start functionality</source>
-      <translation>ฟังก์ชั่นสตาร์ทอัตโนมัติ</translation>
     </message>
     <message id="settings_page_relay_generator_manual_start">
       <location filename="../../pages/settings/PageGenerator.qml" line="158"/>
@@ -540,11 +525,6 @@
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="72"/>
       <source>Stop generator when AC-input is available</source>
       <translation>หยุดเครื่องกำเนิดไฟฟ้าเมื่อมีอินพุต AC</translation>
-    </message>
-    <message id="page_generator_conditions_make_sure_generator_is_not_connected">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="88"/>
-      <source>Make sure that the generator is not connected to AC input %1 when using this option.</source>
-      <translation>ตรวจสอบให้แน่ใจว่าเครื่องกำเนิดไฟฟ้าไม่ได้เชื่อมต่อกับอินพุต AC %1 เมื่อใช้ตัวเลือกนี้</translation>
     </message>
     <message id="page_generator_conditions_battery_soc">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="96"/>
@@ -759,11 +739,6 @@
       <source>Continuous scanning</source>
       <translation>การสแกนอย่างต่อเนื่อง</translation>
     </message>
-    <message id="settings_continuous_scan_may_interfere">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="53"/>
-      <source>Continuous scanning may interfere with Wi-Fi operation</source>
-      <translation>ค้นหาอย่างต่อเนื่องอาจรบกวนการทำงานของ Wi-Fi</translation>
-    </message>
     <message id="settings_io_bluetooth_adapters">
       <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="59"/>
       <source>Bluetooth adapters</source>
@@ -895,22 +870,22 @@
       <translation>ความสว่างที่ปรับได้</translation>
     </message>
     <message id="settings_brightness">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="27"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="26"/>
       <source>Brightness</source>
       <translation>ความสว่าง</translation>
     </message>
     <message id="settings_display_off_time">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="34"/>
       <source>Display off time</source>
       <translation>แสดงเวลาปิด</translation>
     </message>
     <message id="settings_displayoff_10sec">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="40"/>
       <source>10 sec</source>
       <translation>10 วินาที</translation>
     </message>
     <message id="settings_displayoff_30sec">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="42"/>
       <source>30 sec</source>
       <translation>30 วินาที</translation>
     </message>
@@ -930,46 +905,41 @@
       <translation>30 นาที</translation>
     </message>
     <message id="settings_displayoff_never">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="50"/>
       <source>Never</source>
       <translation>ไม่เคย</translation>
     </message>
     <message id="settings_display_color_mode">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="59"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="56"/>
       <source>Display mode</source>
       <translation>โหมดการแสดงผล</translation>
     </message>
     <message id="settings_display_dark_mode">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="60"/>
       <source>Dark</source>
       <extracomment>Dark colors mode</extracomment>
       <translation>มืด</translation>
     </message>
     <message id="settings_display_light_mode">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="66"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="63"/>
       <source>Light</source>
       <extracomment>Light colors mode</extracomment>
       <translation>แสงสว่าง</translation>
     </message>
     <message id="settings_brief_view_levels">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="77"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="74"/>
       <source>Brief view levels</source>
       <translation>ระดับมุมมองสั้นๆ</translation>
     </message>
     <message id="settings_language">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="82"/>
       <source>Language</source>
       <translation>ภาษา</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="137"/>
       <source>Changing language</source>
       <translation>การเปลี่ยนภาษา</translation>
-    </message>
-    <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="138"/>
-      <source>Please wait while the language is changed</source>
-      <translation>กรุณารอสักครู่ในขณะที่ภาษามีการเปลี่ยนแปลง</translation>
     </message>
     <message id="settings_units_energy">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="18"/>
@@ -987,7 +957,7 @@
       <translation>ปัจจุบัน (แอมป์)</translation>
     </message>
     <message id="settings_units">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="145"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="153"/>
       <source>Units</source>
       <translation>หน่วย</translation>
     </message>
@@ -1018,11 +988,6 @@
       <source>&lt;b&gt;CAUTION:&lt;/b&gt; Read the manual before adjusting.</source>
       <translation>&lt;b&gt;ข้อควรระวัง:&lt;/b&gt; อ่านคู่มือก่อนทำการปรับเปลี่ยน</translation>
     </message>
-    <message id="settings_dvcc_charge_current_limits">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="31"/>
-      <source>Charge Current limits</source>
-      <translation>ชาร์จขีดจำกัดปัจจุบัน</translation>
-    </message>
     <message id="settings_dvcc_limit_managed_battery_charge_voltage">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="40"/>
       <source>Limit managed battery charge voltage</source>
@@ -1044,7 +1009,7 @@
       <translation>STS - ความรู้สึกอุณหภูมิที่ใช้ร่วมกัน</translation>
     </message>
     <message id="settings_tank_unavailable_sensor">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="70"/>
       <source>Unavailable sensor, set another</source>
       <translation>เซ็นเซอร์ไม่พร้อมใช้งาน ตั้งค่าอื่น</translation>
     </message>
@@ -1394,52 +1359,42 @@
       <translation>เวลาทำงานขั้นต่ำ</translation>
     </message>
     <message id="page_settings_generator_warm_up_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="56"/>
       <source>Warm-up time</source>
       <translation>เวลาอุ่นเครื่อง</translation>
     </message>
     <message id="page_settings_generator_cool_down_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="65"/>
       <source>Cool-down time</source>
       <translation>เวลาเย็นลง</translation>
     </message>
     <message id="page_settings_generator_detect_generator_at_ac_input">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="89"/>
       <source>Detect generator at AC input</source>
       <translation>ตรวจจับเครื่องกำเนิดไฟฟ้าที่อินพุต AC</translation>
     </message>
     <message id="page_settings_generator_detect_generator_not_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="96"/>
       <source>None of the AC inputs is set to generator. Go to the system setup page and set the correct AC input to generator in order to enable this functionality.</source>
       <translation>ไม่มีอินพุต AC ใดถูกตั้งค่าเป็นเครื่องกำเนิด ไปที่หน้าการตั้งค่าระบบและตั้งค่าอินพุต AC ที่ถูกต้องเป็นเครื่องกำเนิดเพื่อเปิดใช้งานฟังก์ชันนี้</translation>
     </message>
     <message id="page_settings_generator_detect_generator_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="75"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="100"/>
       <source>An alarm will be triggered when no power from the generator is detected at the inverter AC input. Make sure that the correct AC input is set to generator on the system setup page.</source>
       <translation>สัญญาณเตือนจะทำงานเมื่อตรวจไม่พบพลังงานจากเครื่องกำเนิดไฟฟ้าที่อินพุต AC ของอินเวอร์เตอร์ ตรวจสอบให้แน่ใจว่าได้ตั้งค่าอินพุต AC ที่ถูกต้องเป็นเครื่องกำเนิดในหน้าการตั้งค่าระบบ</translation>
     </message>
-    <message id="page_settings_generator_alarm_when_not_in_auto_start">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="96"/>
-      <source>Alarm when generator is not in auto start mode</source>
-      <translation>ปลุกเมื่อเครื่องกำเนิดไฟฟ้าไม่ได้อยู่ในโหมดเริ่มทำงานอัตโนมัติ</translation>
-    </message>
-    <message id="page_settings_generator_alarm_info">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="102"/>
-      <source>An alarm will be triggered when auto start function is left disabled for more than 10 minutes.</source>
-      <translation>สัญญาณเตือนจะทำงานเมื่อฟังก์ชันเริ่มอัตโนมัติถูกปิดใช้งานนานกว่า 10 นาที</translation>
-    </message>
     <message id="page_settings_generator_quiet_hours_start_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="142"/>
       <source>Quiet hours start time</source>
       <translation>เวลาเริ่มต้นชั่วโมงเงียบ</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_end_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="150"/>
       <source>Quiet hours end time</source>
       <translation>เวลาสิ้นสุดชั่วโมงเงียบ</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="158"/>
       <source>Run time and service</source>
       <translation>ระยะเวลาดำเนินการและบริการ</translation>
     </message>
@@ -1477,11 +1432,6 @@
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="90"/>
       <source>Reset service timer</source>
       <translation>รีเซ็ตตัวจับเวลาบริการ</translation>
-    </message>
-    <message id="page_settings_generator_service_timer_has_been_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
-      <source>The service timer has been reset.</source>
-      <translation>รีเซ็ตตัวจับเวลาบริการแล้ว</translation>
     </message>
     <message id="settings_gps_settings">
       <location filename="../../pages/settings/PageSettingsGpsList.qml" line="67"/>
@@ -1751,16 +1701,6 @@ See documentation for further information.</source>
 
 ดูเอกสารสำหรับข้อมูลเพิ่มเติม</translation>
     </message>
-    <message id="settings_ess_do_not_perform_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
-      <source>Use this option in systems that do not perform peak shaving.</source>
-      <translation>ใช้ตัวเลือกในระบบที่ไม่ใช้การใช้งานสูงสุด</translation>
-    </message>
-    <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
-      <source>BatteryLife state</source>
-      <translation>สถานะแบตเตอรี่</translation>
-    </message>
     <message id="settings_ess_battery_life_discharge_disabled">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="174"/>
       <source>Discharge disabled</source>
@@ -1842,17 +1782,17 @@ See documentation for further information.</source>
       <translation>เปิดใช้งานการจำกัดการป้อนเข้า</translation>
     </message>
     <message id="settings_io_analog_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="29"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="32"/>
       <source>Analog inputs</source>
       <translation>นำเข้าแบบอะนาล็อก</translation>
     </message>
     <message id="settings_io_digital_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="60"/>
       <source>Digital inputs</source>
       <translation>นำเข้าแบบดิจิตอล</translation>
     </message>
     <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="76"/>
       <source>Digital input %1</source>
       <extracomment>%1 = number of the digital input</extracomment>
       <translation>อินพุตดิจิตอล %1</translation>
@@ -1898,7 +1838,7 @@ See documentation for further information.</source>
       <translation>สัญญาณเตือน CO2</translation>
     </message>
     <message id="settings_io_bt_sensors">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="106"/>
       <source>Bluetooth sensors</source>
       <translation>เซ็นเซอร์บลูทูธ</translation>
     </message>
@@ -1916,11 +1856,6 @@ Documentation at https://ve3.nl/vol</source>
       <source>Signal K</source>
       <translation>สัญญาณ K</translation>
     </message>
-    <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
-      <source>Access Signal K at http://venus.local:3000 and via VRM</source>
-      <translation>เข้าถึงสัญญาณ K ได้ที่ http://venus.local:3000 และผ่าน VRM</translation>
-    </message>
     <message id="settings_large_node_red">
       <location filename="../../pages/settings/PageSettingsLarge.qml" line="39"/>
       <source>Node-RED</source>
@@ -1930,11 +1865,6 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/PageSettingsLarge.qml" line="47"/>
       <source>Enabled (safe mode)</source>
       <translation>เปิดใช้งาน (เซฟโหมด)</translation>
-    </message>
-    <message id="settings_large_access_node_red">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="53"/>
-      <source>Access Node-RED at https://venus.local:1881 and via VRM</source>
-      <translation>เข้าถึง Node-RED ได้ที่ https://venus.local:1881 และผ่าน VRM</translation>
     </message>
     <message id="settings_logging_time_ago_deferred">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="22"/>
@@ -2430,16 +2360,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Has DC system</source>
       <translation>มีระบบ DC</translation>
     </message>
-    <message id="settings_system_battery_measurements">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="144"/>
-      <source>Battery Measurements</source>
-      <translation>การวัดแบตเตอรี่</translation>
-    </message>
-    <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="150"/>
-      <source>System Status</source>
-      <translation>สถานะของระบบ</translation>
-    </message>
     <message id="settings_system_status_sync_vebus_soc_with_battery">
       <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="16"/>
       <source>Synchronize VE.Bus SOC with battery</source>
@@ -2460,33 +2380,34 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Solar charger current control</source>
       <translation>ตัวควบคุมกระแสไฟชาร์จพลังงานแสงอาทิตย์</translation>
     </message>
-    <message id="settings_system_status_bms_params">
-      <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="44"/>
+    <message id="charger_network_bms_control">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="129"/>
       <source>BMS control</source>
+      <oldsource>BMS Control</oldsource>
       <translation>ตัวควบคุม BMS</translation>
     </message>
     <message id="settings_pump_function_not_enabled">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="38"/>
       <source>Tank pump start/stop function is not enabled. Go to relay settings and set function to "Tank pump".</source>
       <translation>ไม่ได้เปิดใช้งานฟังก์ชันเริ่ม/หยุดปั๊มถัง ไปที่การตั้งค่ารีเลย์และตั้งค่าฟังก์ชันเป็น "ปั๊มถัง"</translation>
     </message>
     <message id="settings_pump_state">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="48"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="47"/>
       <source>Pump state</source>
       <translation>สถานะปั๊ม</translation>
     </message>
     <message id="settings_tank_sensor">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="67"/>
       <source>Tank sensor</source>
       <translation>เซ็นเซอร์ถัง</translation>
     </message>
     <message id="settings_tank_start_level">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="90"/>
       <source>Start level</source>
       <translation>ระดับเริ่มต้น</translation>
     </message>
     <message id="settings_tank_stop_level">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="99"/>
       <source>Stop level</source>
       <translation>ระดับหยุด</translation>
     </message>
@@ -2833,16 +2754,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Charge voltage</source>
       <translation>แรงดันไฟชาร์จ</translation>
     </message>
-    <message id="charger_network_bms_controlled">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="121"/>
-      <source>BMS Controlled</source>
-      <translation>ควบคุม BMS</translation>
-    </message>
-    <message id="charger_network_bms_control">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="129"/>
-      <source>BMS Control</source>
-      <translation>ตัวควบคุม BMS</translation>
-    </message>
     <message id="charger_network_bms_control_reset">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="132"/>
       <source>Reset</source>
@@ -2858,11 +2769,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <location filename="../../pages/solar/SolarChargerPage.qml" line="119"/>
       <source>Load</source>
       <translation>โหลด</translation>
-    </message>
-    <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="141"/>
-      <source>Alarms and Errors</source>
-      <translation>สัญญาณเตือนและข้อผิดพลาด</translation>
     </message>
     <message id="charger_history_found_with_count">
       <location filename="../../pages/solar/SolarChargerPage.qml" line="146"/>
@@ -2980,11 +2886,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Max charging current</source>
       <translation>กระแสไฟชาร์จสูงสุด</translation>
     </message>
-    <message id="evcs_auto_start">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="44"/>
-      <source>Auto start</source>
-      <translation>เริ่มต้นอัตโนมัติ</translation>
-    </message>
     <message id="evcs_lock_charger_display">
       <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="50"/>
       <source>Lock charger display</source>
@@ -3071,7 +2972,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>ไม่รองรับ</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="237"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="238"/>
       <source>Remove disconnected devices</source>
       <translation>ถอดอุปกรณ์ที่ไม่ได้เชื่อมต่อ</translation>
     </message>
@@ -3237,42 +3138,42 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>เวลาที่จะทำงาน</translation>
     </message>
     <message id="battery_details">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="199"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="200"/>
       <source>Details</source>
       <translation>รายละเอียด</translation>
     </message>
     <message id="battery_module_level_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="223"/>
       <source>Module level alarms</source>
       <translation>สัญญาณเตือนระดับโมดูล</translation>
     </message>
     <message id="battery_settings_diagnostics">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="252"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="253"/>
       <source>Diagnostics</source>
       <translation>การวินิจฉัย</translation>
     </message>
     <message id="battery_settings_fuses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="277"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="278"/>
       <source>Fuses</source>
       <translation>ฟิวส์</translation>
     </message>
     <message id="battery_settings_io">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="293"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="294"/>
       <source>IO</source>
       <translation>IO</translation>
     </message>
     <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="308"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="309"/>
       <source>System</source>
       <translation>ระบบ</translation>
     </message>
     <message id="battery_settings_parameters">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="331"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="332"/>
       <source>Parameters</source>
       <translation>พารามิเตอร์</translation>
     </message>
     <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="356"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="357"/>
       <source>Redetect Battery</source>
       <translation>ตรวจหาแบตเตอรี่อีกครั้ง</translation>
     </message>
@@ -3282,7 +3183,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>กดเพื่อตรวจหาอีกครั้ง</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="365"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="366"/>
       <source>Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect.</source>
       <translation>การตรวจจับแบตเตอรี่อีกครั้งอาจใช้เวลา 60 วินาที ในขณะเดียวกันชื่อของแบตเตอรี่อาจไม่ถูกต้อง</translation>
     </message>
@@ -3593,11 +3494,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Time-to-go averaging period</source>
       <translation>ช่วงเวลาเฉลี่ยที่ต้องเดินทาง</translation>
     </message>
-    <message id="batterysettingsbattery_time_to_go_discharge_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
-      <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu</source>
-      <translation>โปรดทราบว่าการเปลี่ยนการตั้งค่า Time-to-go ระดับการคายประจุจะเปลี่ยนการตั้งค่าสถานะการชาร์จต่ำในเมนูรีเลย์ด้วย</translation>
-    </message>
     <message id="batterysettingsbattery_time_to_go_discharge_floor">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="129"/>
       <source>Time-to-go discharge floor</source>
@@ -3823,7 +3719,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>ที่เหลืออยู่</translation>
     </message>
     <message id="temperature_sensor_battery">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="77"/>
       <source>Sensor battery</source>
       <translation>แบตเตอรี่เซนเซอร์</translation>
     </message>
@@ -4601,11 +4497,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>เอสโอซี %1%</translation>
     </message>
-    <message id="settings_page_debug_quit_application">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="35"/>
-      <source>Quit Application</source>
-      <translation>ออกจากการสมัคร</translation>
-    </message>
     <message id="pulsecounter_setup_inverted">
       <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="20"/>
       <source>Inverted</source>
@@ -4878,21 +4769,6 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="110"/>
       <source>Press to interrupt</source>
       <translation>กดเพื่อขัดจังหวะ</translation>
-    </message>
-    <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="119"/>
-      <source>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</source>
-      <translation>คุณลักษณะนี้ต้องใช้เฟิร์มแวร์เวอร์ชัน 400 หรือสูงกว่า ติดต่อผู้ติดตั้งของคุณเพื่ออัปเดต Multi/Quattro ของคุณ</translation>
-    </message>
-    <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="125"/>
-      <source>Charger not ready, equalization cannot be started.</source>
-      <translation>เครื่องชาร์จไม่พร้อม ไม่สามารถเริ่มการปรับเสียงได้</translation>
-    </message>
-    <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
-      <source>Equalization cannot be triggered during bulk charge state.</source>
-      <translation>ไม่สามารถทริกเกอร์การปรับสมดุลระหว่างสถานะการชาร์จจำนวนมาก</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="152"/>
@@ -5189,11 +5065,6 @@ Do you want to continue?</source>
       <extracomment>Shown below the minimum state of charge, as configured by the user</extracomment>
       <translation>เว้นแต่กริดจะล้มเหลว</translation>
     </message>
-    <message id="ess_recommended">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="71"/>
-      <source>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</source>
-      <translation>สำหรับแบตเตอรี่ลิเธียม ไม่แนะนำให้ใช้ต่ำกว่า 10% สำหรับแบตเตอรี่ประเภทอื่นๆ ให้ตรวจสอบเอกสารข้อมูลเพื่อดูค่าขั้นต่ำที่ผู้ผลิตแนะนำ</translation>
-    </message>
     <message id="common_words_ac_in">
       <location filename="../../components/CommonWords.qml" line="14"/>
       <source>AC In</source>
@@ -5359,7 +5230,7 @@ Do you want to continue?</source>
       <translation>การคายประจุ</translation>
     </message>
     <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="276"/>
+      <location filename="../../components/Utils.js" line="302"/>
       <source>Disconnected</source>
       <translation>ตัดการเชื่อมต่อ</translation>
     </message>
@@ -5658,7 +5529,7 @@ Do you want to continue?</source>
       <translation>หมายเลขซีเรียล</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../components/NavBar.qml" line="55"/>
+      <location filename="../../components/NavBar.qml" line="81"/>
       <source>Settings</source>
       <translation>การตั้งค่า</translation>
     </message>
@@ -5805,12 +5676,6 @@ Do you want to continue?</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>ผลผลิต</translation>
     </message>
-    <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="469"/>
-      <source>Yield today</source>
-      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
-      <translation>ผลผลิตวันนี้</translation>
-    </message>
     <message id="common_words_zero_feed_in_power_limit">
       <location filename="../../components/CommonWords.qml" line="472"/>
       <source>Zero feed-in power limit</source>
@@ -5931,7 +5796,7 @@ Do you want to continue?</source>
       <translation>แลกเปลี่ยน</translation>
     </message>
     <message id="environment_gauge_humidity">
-      <location filename="../../components/EnvironmentGaugePanel.qml" line="122"/>
+      <location filename="../../components/EnvironmentGaugePanel.qml" line="131"/>
       <source>RH</source>
       <extracomment>Abbreviation of "Room Humidity"</extracomment>
       <translation>RH</translation>
@@ -5957,18 +5822,13 @@ Do you want to continue?</source>
       <source>Error during firmware installation</source>
       <translation>เกิดข้อผิดพลาดระหว่างการติดตั้งเฟิร์มแวร์</translation>
     </message>
-    <message id="settings_firmware_installed_rebooting">
-      <location filename="../../components/FirmwareUpdate.qml" line="59"/>
-      <source>Firmware installed, rebooting.</source>
-      <translation>ติดตั้งเฟิร์มแวร์แล้ว รีบูต</translation>
-    </message>
     <message id="settings_firmware_no_newer_version_available">
-      <location filename="../../components/FirmwareUpdate.qml" line="122"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="154"/>
       <source>No newer version available</source>
       <translation>ไม่มีเวอร์ชันใหม่กว่าที่มีอยู่</translation>
     </message>
     <message id="settings_firmware_no_firmware_found">
-      <location filename="../../components/FirmwareUpdate.qml" line="125"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="157"/>
       <source>No firmware found</source>
       <translation>ไม่พบเฟิร์มแวร์</translation>
     </message>
@@ -6043,38 +5903,41 @@ Do you want to continue?</source>
       <translation>รหัสผ่านผิด</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../components/NavBar.qml" line="31"/>
+      <location filename="../../components/NavBar.qml" line="57"/>
       <source>Brief</source>
       <translation>รวบรัด</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../components/NavBar.qml" line="37"/>
+      <location filename="../../components/NavBar.qml" line="63"/>
       <source>Overview</source>
       <translation>ภาพรวม</translation>
     </message>
     <message id="nav_levels">
-      <location filename="../../components/NavBar.qml" line="43"/>
+      <location filename="../../components/NavBar.qml" line="69"/>
       <source>Levels</source>
       <translation>ระดับ</translation>
     </message>
     <message id="nav_notifications">
-      <location filename="../../components/NavBar.qml" line="49"/>
+      <location filename="../../components/NavBar.qml" line="75"/>
       <source>Notifications</source>
       <translation>การแจ้งเตือน</translation>
     </message>
-    <message id="notifications_page_now">
-      <location filename="../../components/NotificationDelegate.qml" line="25"/>
+    <message id="utils_formatTimestamp_now">
+      <location filename="../../components/Utils.js" line="260"/>
       <source>now</source>
+      <extracomment>Indicates an event happened very recently</extracomment>
       <translation>ตอนนี้</translation>
     </message>
-    <message id="%1m ago">
-      <location filename="../../components/NotificationDelegate.qml" line="29"/>
+    <message id="utils_formatTimestamp_min_ago">
+      <location filename="../../components/Utils.js" line="265"/>
       <source>%1m ago</source>
+      <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>%1 นาทีที่แล้ว</translation>
     </message>
-    <message id="%1h %2m ago">
-      <location filename="../../components/NotificationDelegate.qml" line="35"/>
+    <message id="utils_formatTimestamp_hours_min_ago">
+      <location filename="../../components/Utils.js" line="272"/>
       <source>%1h %2m ago</source>
+      <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>%1 ชม. %2 นาทีที่แล้ว</translation>
     </message>
     <message id="cgwacs_battery_schedule_every_day">
@@ -6429,7 +6292,7 @@ Do you want to continue?</source>
       <translation>ถูกตัดการเชื่อมต่อ กำลังพยายามเชื่อมต่อใหม่</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="262"/>
+      <location filename="../../components/Utils.js" line="288"/>
       <source>Connecting</source>
       <translation>กำลังเชื่อมต่อ</translation>
     </message>
@@ -6489,7 +6352,7 @@ Do you want to continue?</source>
       <translation>ข้อผิดพลาดของโปรโตคอล MQTT ระดับ 5</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="112"/>
+      <location filename="../../components/StatusBar.qml" line="110"/>
       <source>Silence alarm</source>
       <translation>ปลุกเงียบ</translation>
     </message>
@@ -6534,17 +6397,17 @@ Do you want to continue?</source>
       <translation>0m</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="259"/>
+      <location filename="../../components/Utils.js" line="285"/>
       <source>Failure</source>
       <translation>ความล้มเหลว</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="265"/>
+      <location filename="../../components/Utils.js" line="291"/>
       <source>Retrieving IP address</source>
       <translation>กำลังเรียกที่อยู่ IP</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="272"/>
+      <location filename="../../components/Utils.js" line="298"/>
       <source>Disconnect</source>
       <translation>ตัดการเชื่อมต่อ</translation>
     </message>
@@ -6832,23 +6695,13 @@ Do you want to continue?</source>
       <source>Manually started</source>
       <translation>เริ่มต้นด้วยตนเอง</translation>
     </message>
-    <message id="notifications_warning_title_inverter_temperature">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="15"/>
-      <source>Inverter temperature</source>
-      <translation>อุณหภูมิอินเวอร์เตอร์</translation>
-    </message>
-    <message id="notifications_warning_description_inverter_temperature">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="17"/>
-      <source>Suggest user an action or inaction, inform about status.  This text can be long and should wrap.</source>
-      <translation>แนะนำให้ผู้ใช้ดำเนินการหรือไม่ดำเนินการ แจ้งเกี่ยวกับสถานะ ข้อความนี้อาจยาวและควรปิดท้าย</translation>
-    </message>
     <message id="notifications_toast_short_text">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="21"/>
+      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="13"/>
       <source>Mollitia quis est quas deleniti quibusdam explicabo quasi.</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi.</translation>
     </message>
     <message id="notifications_toast_long_text">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="24"/>
+      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="16"/>
       <source>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
@@ -7028,7 +6881,7 @@ Do you want to continue?</source>
       <translation>อินเวอร์เตอร์เท่านั้น</translation>
     </message>
     <message id="controlcard_generator_disableautostartdialog_title">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="70"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="69"/>
       <source>Disable autostart?</source>
       <oldsource>Disable Autostart?</oldsource>
       <translation>ปิดการใช้งานการเริ่มอัตโนมัติ?</translation>
@@ -7041,7 +6894,7 @@ Do you want to continue?</source>
       <translation>อินเวอร์เตอร์ / เครื่องชาร์จ (%1)</translation>
     </message>
     <message id="settings_page_debug_application_version">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="85"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="78"/>
       <source>Application version</source>
       <translation>เวอร์ชันแอปพลิเคชัน</translation>
     </message>
@@ -7071,44 +6924,44 @@ Do you want to continue?</source>
       <translation>เวลาให้บริการ</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="157"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="165"/>
       <source>Onscreen UI (GX Touch &amp; Ekrano)</source>
       <translation>UI บนหน้าจอ (GX Touch และ Ekrano)</translation>
     </message>
     <message id="settings_display_standard_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="171"/>
       <source>Standard version</source>
       <translation>รุ่นมาตรฐาน</translation>
     </message>
     <message id="settings_display_beta_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="173"/>
       <source>Gui-v2 (beta) version</source>
       <translation>เวอร์ชัน Gui-v2 (เบต้า)</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="188"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="196"/>
       <source>Restarting application...</source>
       <translation>กำลังรีสตาร์ทแอปพลิเคชัน...</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="190"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="198"/>
       <source>Application restarted</source>
       <translation>แอปพลิเคชันเริ่มต้นใหม่แล้ว</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="194"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="202"/>
       <source>Onscreen UI will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>UI บนหน้าจอจะเปลี่ยนเป็น %1</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="197"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="205"/>
       <source>Onscreen UI has switched to %1.</source>
       <extracomment>%1 = the UI version that the system has switched to.</extracomment>
       <translation>UI บนหน้าจอได้เปลี่ยนเป็น %1</translation>
     </message>
     <message id="settings_language_no_browser_support">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="105"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="102"/>
       <source>(no browser support)</source>
       <translation>(ไม่รองรับเบราว์เซอร์)</translation>
     </message>
@@ -7244,13 +7097,198 @@ Do you want to continue?</source>
       <source>Minimum battery voltage</source>
       <translation>แรงดันแบตเตอรี่ขั้นต่ำ</translation>
     </message>
-  </context>
-  <context>
-    <name>PageAcInSetup</name>
-    <message>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="125"/>
-      <source>Set switch in an unlocked position to change settings</source>
-      <translation>ตั้งสวิตช์ในตำแหน่งปลดล็อคเพื่อเปลี่ยนการตั้งค่า</translation>
+    <message id="ess_recommended">
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="71"/>
+      <source>For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer.</source>
+      <oldsource>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</oldsource>
+      <translation>สำหรับแบตเตอรี่ลิเธียม ไม่แนะนำให้ชาร์จต่ำกว่า 10% สำหรับแบตเตอรี่ประเภทอื่นๆ ให้ตรวจสอบเอกสารข้อมูลเพื่อดูระดับขั้นต่ำที่แนะนำโดยผู้ผลิต</translation>
+    </message>
+    <message id="settings_page_debug_quit_application">
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="36"/>
+      <source>Quit application</source>
+      <oldsource>Quit Application</oldsource>
+      <translation>ออกจากการสมัคร</translation>
+    </message>
+    <message id="settings_page_debug_quit">
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="39"/>
+      <source>Quit</source>
+      <translation>ล้มเลิก</translation>
+    </message>
+    <message id="batterysettingsbattery_time_to_go_discharge_note">
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
+      <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu.</source>
+      <oldsource>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu</oldsource>
+      <translation>โปรดทราบว่าการเปลี่ยนการตั้งค่าชั้นจำหน่าย Time-to-go จะเปลี่ยนการตั้งค่าสถานะการชาร์จต่ำในเมนูรีเลย์ด้วย</translation>
+    </message>
+    <message id="settings_page_relay_generator_auto_start_enabled">
+      <location filename="../../pages/settings/PageGenerator.qml" line="151"/>
+      <source>Autostart functionality</source>
+      <oldsource>Auto start functionality</oldsource>
+      <translation>ฟังก์ชั่นเริ่มต้นอัตโนมัติ</translation>
+    </message>
+    <message id="page_generator_conditions_make_sure_generator_is_not_connected">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="88"/>
+      <source>Make sure that the generator is not connected to AC input %1 when using this option</source>
+      <oldsource>Make sure that the generator is not connected to AC input %1 when using this option.</oldsource>
+      <translation>ตรวจสอบให้แน่ใจว่าเครื่องกำเนิดไฟฟ้าไม่ได้เชื่อมต่อกับอินพุต AC %1 เมื่อใช้ตัวเลือกนี้</translation>
+    </message>
+    <message id="page_settings_generator_service_timer_has_been_reset">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
+      <source>The service timer has been reset</source>
+      <oldsource>The service timer has been reset.</oldsource>
+      <translation>ตัวจับเวลาการบริการถูกรีเซ็ตแล้ว</translation>
+    </message>
+    <message id="settings_continuous_scan_may_interfere">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="53"/>
+      <source>Continuous scanning may interfere with Wi-Fi operation.</source>
+      <oldsource>Continuous scanning may interfere with Wi-Fi operation</oldsource>
+      <translation>การสแกนอย่างต่อเนื่องอาจรบกวนการทำงานของ Wi-Fi</translation>
+    </message>
+    <message id="settings_language_change_failed">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="140"/>
+      <source>Failed to change language!</source>
+      <translation>ไม่สามารถเปลี่ยนภาษาได้!</translation>
+    </message>
+    <message id="settings_language_please_wait">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="142"/>
+      <source>Please wait while the language is changed.</source>
+      <oldsource>Please wait while the language is changed</oldsource>
+      <translation>กรุณารอสักครู่ในขณะที่ภาษามีการเปลี่ยนแปลง</translation>
+    </message>
+    <message id="settings_dvcc_charge_current_limits">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="31"/>
+      <source>Charge current limits</source>
+      <oldsource>Charge Current limits</oldsource>
+      <translation>ชาร์จขีดจำกัดปัจจุบัน</translation>
+    </message>
+    <message id="settings_page_generator_warm_up_cool_down">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="43"/>
+      <source>Warm-up &amp; cool-down</source>
+      <translation>วอร์มอัพและคูลดาวน์</translation>
+    </message>
+    <message id="page_settings_generator_stop_time">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="74"/>
+      <source>Generator stop time</source>
+      <translation>เวลาหยุดเครื่องกำเนิดไฟฟ้า</translation>
+    </message>
+    <message id="page_settings_generator_alarm_when_not_in_auto_start">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="121"/>
+      <source>Alarm when generator is not in autostart mode</source>
+      <oldsource>Alarm when generator is not in auto start mode</oldsource>
+      <translation>แจ้งเตือนเมื่อเครื่องกำเนิดไฟฟ้าไม่อยู่ในโหมดสตาร์ทอัตโนมัติ</translation>
+    </message>
+    <message id="page_settings_generator_alarm_info">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="127"/>
+      <source>An alarm will be triggered when autostart function is left disabled for more than 10 minutes</source>
+      <oldsource>An alarm will be triggered when auto start function is left disabled for more than 10 minutes.</oldsource>
+      <translation>สัญญาณเตือนจะถูกกระตุ้นเมื่อฟังก์ชันสตาร์ทอัตโนมัติถูกปิดใช้งานเป็นเวลานานกว่า 10 นาที</translation>
+    </message>
+    <message id="settings_ess_do_not_perform_peak_shaving">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
+      <source>Use this option in systems that do not perform peak shaving</source>
+      <oldsource>Use this option in systems that do not perform peak shaving.</oldsource>
+      <translation>ใช้ตัวเลือกนี้ในระบบที่ไม่ทำการโกนสูงสุด</translation>
+    </message>
+    <message id="settings_ess_batteryLife_state">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
+      <source>Battery life state</source>
+      <oldsource>BatteryLife state</oldsource>
+      <translation>สถานะอายุการใช้งานแบตเตอรี่</translation>
+    </message>
+    <message id="settings_large_access_signal_k">
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
+      <source>Access Signal K at http://venus.local:3000 and via VRM.</source>
+      <oldsource>Access Signal K at http://venus.local:3000 and via VRM</oldsource>
+      <translation>เข้าถึงสัญญาณ K ได้ที่ http://venus.local:3000 และผ่าน VRM</translation>
+    </message>
+    <message id="settings_large_access_node_red">
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="53"/>
+      <source>Access Node-RED at https://venus.local:1881 and via VRM.</source>
+      <oldsource>Access Node-RED at https://venus.local:1881 and via VRM</oldsource>
+      <translation>เข้าถึง Node-RED ได้ที่ https://venus.local:1881 และผ่าน VRM</translation>
+    </message>
+    <message id="settings_system_battery_measurements">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="144"/>
+      <source>Battery measurements</source>
+      <oldsource>Battery Measurements</oldsource>
+      <translation>การวัดแบตเตอรี่</translation>
+    </message>
+    <message id="settings_system_system_status">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="150"/>
+      <source>System status</source>
+      <oldsource>System Status</oldsource>
+      <translation>สถานะของระบบ</translation>
+    </message>
+    <message id="settings_device_list">
+      <location filename="../../pages/SettingsPage.qml" line="32"/>
+      <source>Device list</source>
+      <oldsource>Device List</oldsource>
+      <translation>รายการอุปกรณ์</translation>
+    </message>
+    <message id="settings_vrm_device_instances">
+      <location filename="../../pages/SettingsPage.qml" line="151"/>
+      <source>VRM device instances</source>
+      <oldsource>VRM Device Instances</oldsource>
+      <translation>อินสแตนซ์อุปกรณ์ VRM</translation>
+    </message>
+    <message id="charger_network_bms_controlled">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="121"/>
+      <source>BMS controlled</source>
+      <oldsource>BMS Controlled</oldsource>
+      <translation>ควบคุม BMS</translation>
+    </message>
+    <message id="charger_alarms_alarms_and_errors">
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="141"/>
+      <source>Alarms &amp; Errors</source>
+      <oldsource>Alarms and Errors</oldsource>
+      <translation>สัญญาณเตือนและข้อผิดพลาด</translation>
+    </message>
+    <message id="vebus_device_update_firmware">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="119"/>
+      <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
+      <oldsource>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</oldsource>
+      <translation>คุณสมบัตินี้ต้องใช้เฟิร์มแวร์เวอร์ชัน 400 ขึ้นไป ติดต่อผู้ติดตั้งเพื่ออัปเดต Multi/Quattro ของคุณ</translation>
+    </message>
+    <message id="vebus_device_charger_not_ready">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="125"/>
+      <source>Charger not ready, equalization cannot be started</source>
+      <oldsource>Charger not ready, equalization cannot be started.</oldsource>
+      <translation>ที่ชาร์จไม่พร้อม ไม่สามารถเริ่มการปรับสมดุลได้</translation>
+    </message>
+    <message id="vebus_device_no_equalisation_during_bulk">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
+      <source>Equalization cannot be triggered during bulk charge state</source>
+      <oldsource>Equalization cannot be triggered during bulk charge state.</oldsource>
+      <translation>ไม่สามารถทริกเกอร์การปรับสมดุลระหว่างสถานะการชาร์จจำนวนมาก</translation>
+    </message>
+    <message id="common_words_yield_today">
+      <location filename="../../components/CommonWords.qml" line="469"/>
+      <source>Yield Today</source>
+      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
+      <oldsource>Yield today</oldsource>
+      <translation>ผลผลิตวันนี้</translation>
+    </message>
+    <message id="settings_firmware_installed_rebooting">
+      <location filename="../../components/FirmwareUpdate.qml" line="59"/>
+      <source>Firmware installed, device rebooting</source>
+      <oldsource>Firmware installed, rebooting.</oldsource>
+      <translation>ติดตั้งเฟิร์มแวร์แล้ว กำลังรีบูตอุปกรณ์</translation>
+    </message>
+    <message id="notification_description_and_value">
+      <location filename="../../components/NotificationDelegate.qml" line="77"/>
+      <source>%1 %2</source>
+      <extracomment>%1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')</extracomment>
+      <translation>%1 %2</translation>
+    </message>
+    <message id="firmware_installed_build_version_update_detected">
+      <location filename="../../pages/DialogLayer.qml" line="29"/>
+      <source>Firmware version update detected</source>
+      <translation>ตรวจพบการอัปเดตเวอร์ชันเฟิร์มแวร์</translation>
+    </message>
+    <message id="firmware_installed_build_page_will_reload">
+      <location filename="../../pages/DialogLayer.qml" line="31"/>
+      <source>Page will automatically reload in ten seconds to load the latest version.</source>
+      <translation>หน้าจะโหลดซ้ำโดยอัตโนมัติในสิบวินาทีเพื่อโหลดเวอร์ชันล่าสุด</translation>
     </message>
   </context>
   <context>
@@ -7858,293 +7896,6 @@ Do you want to continue?</source>
     </message>
   </context>
   <context>
-    <name>BatteryAlarms</name>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="316"/>
-      <source>Low voltage</source>
-      <translation>แรงดันต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="317"/>
-      <source>High voltage</source>
-      <translation>ไฟฟ้าแรงสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="318"/>
-      <source>High current</source>
-      <translation>กระแสสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="319"/>
-      <source>High charge current</source>
-      <translation>กระแสไฟสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="320"/>
-      <source>High discharge current</source>
-      <translation>กระแสไฟออกสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="321"/>
-      <source>High charge temperature</source>
-      <translation>อุณหภูมิการชาร์จสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="322"/>
-      <source>Low charge temperature</source>
-      <translation>อุณหภูมิการชาร์จต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="323"/>
-      <source>Low SOC</source>
-      <translation>SOC ต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="324"/>
-      <source>State of health</source>
-      <translation>สถานะของสุขภาพ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="325"/>
-      <source>Low starter voltage</source>
-      <translation>แรงดันสตาร์ทต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="326"/>
-      <source>High starter voltage</source>
-      <translation>แรงดันไฟสตาร์ทสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="327"/>
-      <source>Low temperature</source>
-      <translation>อุณหภูมิต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="328"/>
-      <source>High Temperature</source>
-      <translation>อุณหภูมิสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="329"/>
-      <source>Mid-point voltage</source>
-      <translation>แรงดันไฟฟ้าจุดกึ่งกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="330"/>
-      <source>Low-fused voltage</source>
-      <translation>แรงดันไฟฟ้าหลอมต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="331"/>
-      <source>High-fused voltage</source>
-      <translation>แรงดันไฟฟ้าหลอมสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="332"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="356"/>
-      <source>Fuse blown</source>
-      <translation>ฟิวส์ขาด</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="333"/>
-      <source>High internal temperature</source>
-      <translation>อุณหภูมิภายในสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="334"/>
-      <source>Internal failure</source>
-      <translation>ความล้มเหลวภายใน</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="335"/>
-      <source>Battery temperature sensor</source>
-      <translation>เซ็นเซอร์อุณหภูมิแบตเตอรี่</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="336"/>
-      <source>Cell imbalance</source>
-      <translation>ความไม่สมดุลของเซลล์</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="337"/>
-      <source>Low cell voltage</source>
-      <translation>แรงดันเซลล์ต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="338"/>
-      <source>Bad contactor</source>
-      <translation>คอนแทคไม่ดี</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="339"/>
-      <source>BMS cable fault</source>
-      <translation>ความผิดพลาดของสาย BMS</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="353"/>
-      <source>Distributor %1 connection lost</source>
-      <translation>สูญเสียการเชื่อมต่อ %1 ของผู้จัดจำหน่าย</translation>
-    </message>
-  </context>
-  <context>
-    <name>DBusTankService</name>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="181"/>
-      <source>Fuel</source>
-      <translation>เชื้อเพลิง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="182"/>
-      <source>Fresh water</source>
-      <translation>น้ำจืด</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="183"/>
-      <source>Waste water</source>
-      <translation>น้ำเสีย</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="184"/>
-      <source>Live well</source>
-      <translation>อยู่ดีมีสุข</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="185"/>
-      <source>Oil</source>
-      <translation>น้ำมัน</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="186"/>
-      <source>Black water (sewage)</source>
-      <translation>น้ำดำ (น้ำเสีย)</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="187"/>
-      <source>Fuel (gasoline)</source>
-      <translation>เชื้อเพลิง (เบนซิน)</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="200"/>
-      <source>Unknown</source>
-      <translation>ไม่รู้จัก</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="236"/>
-      <source>tank</source>
-      <translation>ถัง</translation>
-    </message>
-  </context>
-  <context>
-    <name>DeviceAlarms</name>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="45"/>
-      <source>Generator not detected at AC input</source>
-      <translation>ตรวจไม่พบเครื่องกำเนิดไฟฟ้าที่ AC ขาเข้า</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="63"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="74"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="85"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="101"/>
-      <source>Low battery voltage</source>
-      <translation>แรงดันแบตเตอรี่ต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="64"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="75"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="86"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="102"/>
-      <source>High battery voltage</source>
-      <translation>แรงดันแบตเตอรี่สูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="87"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="103"/>
-      <source>Low AC voltage</source>
-      <translation>แรงดันไฟฟ้ากระแสสลับต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="88"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="104"/>
-      <source>High AC voltage</source>
-      <translation>ไฟฟ้ากระแสสลับสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="89"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="159"/>
-      <source>Low temperature</source>
-      <translation>อุณหภูมิต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="90"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="105"/>
-      <source>High temperature</source>
-      <translation>อุณหภูมิสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="91"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="106"/>
-      <source>Inverter overload</source>
-      <translation>โอเวอร์โหลดอินเวอร์เตอร์</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="92"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="107"/>
-      <source>High DC ripple</source>
-      <translation>ระลอกคลื่น DC สูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="117"/>
-      <source>Circuit breaker tripped</source>
-      <translation>เบรกเกอร์ทริป</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="118"/>
-      <source>DVCC with incompatible firmware #48</source>
-      <translation>DVCC พร้อมเฟิร์มแวร์ที่เข้ากันไม่ได้ #48</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="136"/>
-      <source>Grid meter not found #49</source>
-      <translation>ไม่พบตารางเมตร #49</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="145"/>
-      <source>Low level alarm</source>
-      <translation>สัญญาณเตือนระดับต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="146"/>
-      <source>High level alarm</source>
-      <translation>สัญญาณเตือนระดับสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="155"/>
-      <source>Low voltage</source>
-      <translation>แรงดันต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="156"/>
-      <source>High voltage</source>
-      <translation>ไฟฟ้าแรงสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="157"/>
-      <source>Low aux voltage</source>
-      <translation>แรงดันไฟต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="158"/>
-      <source>High aux voltage</source>
-      <translation>แรงดันไฟฟ้า aux สูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="160"/>
-      <source>High Temperature</source>
-      <translation>อุณหภูมิสูง</translation>
-    </message>
-  </context>
-  <context>
     <name>QGuiApplication</name>
     <message>
       <location filename="../../src/main.cpp" line="97"/>
@@ -8244,88 +7995,864 @@ Do you want to continue?</source>
     </message>
   </context>
   <context>
-    <name>VebusAlarms</name>
+    <name>AlternatorError</name>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="82"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="282"/>
-      <source>High Temperature</source>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="22"/>
+      <source>No error</source>
+      <translation>ไม่มีข้อผิดพลาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="25"/>
+      <source>Unknown error: %1</source>
+      <translation>ข้อผิดพลาดที่ไม่รู้จัก: %1</translation>
+    </message>
+  </context>
+  <context>
+    <name>BmsError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="10"/>
+      <source>No error</source>
+      <translation>ไม่มีข้อผิดพลาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="13"/>
+      <source>Battery initialization error</source>
+      <translation>ข้อผิดพลาดในการเริ่มต้นแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="16"/>
+      <source>No batteries connected</source>
+      <translation>ไม่มีแบตเตอรี่เชื่อมต่อ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="19"/>
+      <source>Unknown battery</source>
+      <translation>ไม่ทราบแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="22"/>
+      <source>Different battery types</source>
+      <translation>แบตเตอรี่ประเภทต่างๆ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="25"/>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="40"/>
+      <source>No. of batteries incorrect</source>
+      <translation>จำนวนแบตเตอรี่ไม่ถูกต้อง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="28"/>
+      <source>Lynx Shunt not found</source>
+      <translation>ไม่พบ Lynx Shunt</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="31"/>
+      <source>Battery measure error</source>
+      <translation>เกิดข้อผิดพลาดในการตรวจวัดแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="34"/>
+      <source>Internal calculation error</source>
+      <translation>เกิดข้อผิดพลาดในการคำนวณภายใน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="37"/>
+      <source>No. of batteries in series incorrect</source>
+      <translation>จำนวนแบตเตอรี่ในชุดไม่ถูกต้อง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="44"/>
+      <source>Hardware error</source>
+      <translation>อุปกรณ์เกิดความผิดปกติ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="47"/>
+      <source>Watchdog error</source>
+      <translation>การตรวจจับการทำงานผิดปกติ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="50"/>
+      <source>Over voltage</source>
+      <translation>แรงดันไฟเกิน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="53"/>
+      <source>Under voltage</source>
+      <translation>ภายใต้แรงดันไฟฟ้า</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="56"/>
+      <source>Over temperature</source>
       <translation>อุณหภูมิสูง</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="82"/>
-      <source>High Temperature on L1</source>
-      <translation>อุณหภูมิสูงบนL1</translation>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="59"/>
+      <source>Under temperature</source>
+      <translation>ภายใต้อุณหภูมิ</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="83"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="283"/>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="62"/>
+      <source>Under-charge standby</source>
+      <translation>สแตนด์บายภายใต้การชาร์จ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="65"/>
+      <source>ADC error</source>
+      <translation>ADC เกิดข้อผิดพลาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="68"/>
+      <source>Battery comm. error</source>
+      <translation>คอมแบตเตอรี ข้อผิดพลาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="71"/>
+      <source>Pre-Charge error</source>
+      <translation>ข้อผิดพลาดในการชาร์จล่วงหน้า</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="75"/>
+      <source>Safety contactor error</source>
+      <translation>ข้อผิดพลาดคอนแทคความปลอดภัย</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="79"/>
+      <source>Battery update error</source>
+      <translation>ข้อผิดพลาดในการอัปเดตแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="82"/>
+      <source>BMS cable error</source>
+      <translation>สาย BMS ผิดพลาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="85"/>
+      <source>Reference voltage failure</source>
+      <translation>แรงดันไฟอ้างอิงล้มเหลว</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="88"/>
+      <source>Wrong system voltage</source>
+      <translation>แรงดันไฟผิดระบบ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="91"/>
+      <source>Pre charge timeout</source>
+      <translation>หมดเวลาชาร์จล่วงหน้า</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="94"/>
+      <source>ATC/ATD failure</source>
+      <translation>ATC/ATD ล้มเหลว</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="98"/>
+      <source>Calibration data lost</source>
+      <translation>ข้อมูลการสอบเทียบสูญหาย</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="102"/>
+      <source>Settings invalid</source>
+      <translation>การตั้งค่าไม่ถูกต้อง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="105"/>
+      <source>Interlock</source>
+      <translation>ลูกโซ่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="108"/>
+      <source>Emergency stop</source>
+      <translation>หยุดฉุกเฉิน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="111"/>
+      <source>Communication timeout</source>
+      <translation>หมดเวลาการสื่อสาร</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="114"/>
+      <source>Safety lock</source>
+      <translation>ล็อคเพื่อความปลอดภัย</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="117"/>
+      <source>Terminal over temperature</source>
+      <translation>เทอร์มินัลเกินอุณหภูมิ</translation>
+    </message>
+  </context>
+  <context>
+    <name>ChargerError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="7"/>
+      <source>No error</source>
+      <translation>ไม่มีข้อผิดพลาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="9"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="103"/>
+      <source>Battery high temperature</source>
+      <translation>อุณหภูมิสูงแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="10"/>
+      <source>Battery high voltage</source>
+      <translation>แบตเตอรี่ไฟฟ้าแรงสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="11"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="12"/>
+      <source>Battery Tsense miswired</source>
+      <translation>แบตเตอรี่ Tsense ต่อสายผิด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="13"/>
+      <source>Battery Tsense missing</source>
+      <translation>ไม่พบการเชื่อมต่อสาย Tsense ของแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="14"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="15"/>
+      <source>Battery Vsense miswired</source>
+      <translation>เชื่อมต่อสาย Vsense ของแบตเตอรี่ผิด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="16"/>
+      <source>Battery Vsense missing</source>
+      <translation>แบตเตอรี Vsense หายไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="17"/>
+      <source>Battery high wire losses</source>
+      <translation>การสูญเสียสายไฟสูงของแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="18"/>
+      <source>Battery low voltage</source>
+      <translation>แรงดันไฟต่ำของแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="19"/>
+      <source>Battery high ripple voltage</source>
+      <translation>แรงดันไฟฟ้าระลอกสูงของแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="20"/>
+      <source>Battery low state of charge</source>
+      <translation>สถานะการชาร์จของแบตเตอรี่ต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="21"/>
+      <source>Battery mid-point voltage issue</source>
+      <translation>ปัญหาแรงดันไฟจุดกึ่งกลางของแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="22"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="104"/>
+      <source>Battery temperature too low</source>
+      <translation>อุณหภูมิแบตเตอรี่ต่ำเกินไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="24"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="106"/>
+      <source>Charger high temperature</source>
+      <translation>เครื่องชาร์จอุณหภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="25"/>
+      <source>Charger excessive current</source>
+      <translation>ตรวจพบกระแสไฟที่ชาร์จมากเกินไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="26"/>
+      <source>Charger negative current</source>
+      <translation>กระแสไฟลบของเครื่องชาร์จ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="27"/>
+      <source>Charger bulk time expired</source>
+      <translation>หมดเวลาชาร์จแบตหมด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="28"/>
+      <source>Charger current sensor issue</source>
+      <translation>ปัญหาเซ็นเซอร์ปัจจุบันของเครื่องชาร์จ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="29"/>
+      <source>Internal Tsensor miswired</source>
+      <translation>เซ็นเซอร์ภายในเดินสายผิด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="30"/>
+      <source>Internal Tsensor missing</source>
+      <translation>เซ็นเซอร์ภายในหายไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="31"/>
+      <source>Charger fan not detected</source>
+      <translation>ตรวจไม่พบพัดลมเครื่องชาร์จ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="32"/>
+      <source>Charger fan over-current</source>
+      <translation>พัดลมชาร์จกระแสเกิน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="33"/>
+      <source>Charger terminal overheat</source>
+      <translation>ขั้วชาร์จร้อนเกินไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="34"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="107"/>
+      <source>Charger short circuit</source>
+      <translation>เครื่องชาร์จลัดวงจร</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="35"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="108"/>
+      <source>Charger power stage issue</source>
+      <translation>ปัญหาสเตจกำลังไฟของเครื่องชาร์จ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="36"/>
+      <source>Over-charge protection</source>
+      <translation>การป้องกันการชาร์จเกิน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="38"/>
+      <source>Input high voltage</source>
+      <translation>อินพุตไฟฟ้าแรงสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="39"/>
+      <source>Input excessive current</source>
+      <translation>การป้อนกระแสเกิน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="40"/>
+      <source>Input excessive power</source>
+      <translation>ป้อนพลังงานมากเกินไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="41"/>
+      <source>Input polarity issue</source>
+      <translation>ตรวจพบปัญหาที่ขั้วต่อขาเข้า</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="42"/>
+      <source>Input voltage absent</source>
+      <translation>แรงดันไฟฟ้าขาเข้าขาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="43"/>
+      <source>Input shutdown (no retries)</source>
+      <translation>อินพุตปิด (ไม่มีการลองใหม่)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="44"/>
+      <source>Input shutdown (retry)</source>
+      <translation>อินพุตปิด (ลองอีกครั้ง)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="45"/>
+      <source>Input internal failure</source>
+      <translation>การป้อนเข้าภายในล้มเหลว</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="47"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="48"/>
+      <source>PV isolation failure</source>
+      <translation>การแยก PV ล้มเหลว</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="49"/>
+      <source>Ground fault detected</source>
+      <translation>ตรวจพบความผิดพลาดของกราวด์</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="51"/>
       <source>Inverter overload</source>
       <translation>โอเวอร์โหลดอินเวอร์เตอร์</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="83"/>
-      <source>Inverter overload on L1</source>
-      <translation>อินเวอร์เตอร์โอเวอร์โหลดบนL1</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="52"/>
+      <source>Inverter temp too high</source>
+      <translation>อุณหภูมิอินเวอร์เตอร์สูงเกินไป</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="247"/>
-      <source>Temperature sense error</source>
-      <translation>ข้อผิดพลาดในการวัดอุณหภูมิ</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="53"/>
+      <source>Inverter peak current</source>
+      <translation>กระแสไฟสูงสุดของอินเวอร์เตอร์</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="248"/>
-      <source>Voltage sense error</source>
-      <translation>ข้อผิดพลาดในการรับรู้แรงดันไฟฟ้า</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="54"/>
+      <source>Inverter internal DC level</source>
+      <translation>อินเวอร์เตอร์ระดับ DC ภายใน</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="249"/>
-      <source>Low battery voltage</source>
-      <translation>แรงดันแบตเตอรี่ต่ำ</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="55"/>
+      <source>Inverter wrong ACout level</source>
+      <translation>อินเวอร์เตอร์ผิดระดับ ACout</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="250"/>
-      <source>High DC ripple</source>
-      <translation>ระลอกคลื่น DC สูง</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="56"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="57"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="59"/>
+      <source>Inverter powerstage fault</source>
+      <translation>เกิดข้อผิดพลาดของ powerstage อินเวอร์เตอร์</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="251"/>
-      <source>Wrong phase rotation detected</source>
-      <translation>ตรวจพบการหมุนเฟสผิด</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="58"/>
+      <source>Inverter connected to AC</source>
+      <translation>อินเวอร์เตอร์ที่เชื่อมต่อกับ AC</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="257"/>
-      <source>High Temperature on L2</source>
-      <translation>อุณหภูมิสูงบนL2</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="60"/>
+      <source>ACIN1 relay test fault</source>
+      <translation>ความผิดพลาดในการทดสอบรีเลย์ ACIN1</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="258"/>
-      <source>Inverter overload on L2</source>
-      <translation>อินเวอร์เตอร์โอเวอร์โหลดบนL2</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="61"/>
+      <source>ACIN2 relay test fault</source>
+      <translation>ข้อผิดพลาดในการทดสอบรีเลย์ ACIN2</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="260"/>
-      <source>High Temperature on L3</source>
-      <translation>อุณหภูมิสูงบนL3</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="63"/>
+      <source>Device disappeared</source>
+      <translation>อุปกรณ์หายไป</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="261"/>
-      <source>Inverter overload on L3</source>
-      <translation>อินเวอร์เตอร์โอเวอร์โหลดบน L3</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="64"/>
+      <source>Incompatible device</source>
+      <translation>อุปกรณ์ที่เข้ากันไม่ได้</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="264"/>
-      <source>Grid lost</source>
-      <translation>กริดหายไป</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="65"/>
+      <source>BMS connection lost</source>
+      <translation>ขาดการเชื่อมต่อ BMS</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="267"/>
-      <source>High DC voltage</source>
-      <translation>ไฟฟ้ากระแสตรงสูง</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="66"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="67"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="68"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="69"/>
+      <source>Network misconfigured</source>
+      <translation>กำหนดค่าเครือข่ายไม่ถูกต้อง</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="268"/>
-      <source>High DC current</source>
-      <translation>กระแสตรงสูง</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="70"/>
+      <source>Phase rotation</source>
+      <translation>การหมุนเฟส</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="71"/>
+      <source>Multiple AC inputs</source>
+      <translation>อินพุต AC หลายช่อง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="72"/>
+      <source>Phase overload</source>
+      <translation>โอเวอร์โหลดเฟส</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="74"/>
+      <source>Memory write error</source>
+      <translation>ข้อผิดพลาดในการเขียนหน่วยความจำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="75"/>
+      <source>CPU temperature too high</source>
+      <translation>อุณหภูมิ CPU สูงเกินไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="76"/>
+      <source>Communication lost</source>
+      <translation>การสื่อสารขาดการเชื่อมต่อ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="77"/>
+      <source>Calibration data lost</source>
+      <translation>ข้อมูลการสอบเทียบสูญหาย</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="78"/>
+      <source>Incompatible firmware</source>
+      <translation>เฟิร์มแวร์ที่เข้ากันไม่ได้</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="79"/>
+      <source>Incompatible hardware</source>
+      <translation>ฮาร์ดแวร์ที่เข้ากันไม่ได้</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="80"/>
+      <source>Settings invalid</source>
+      <translation>การตั้งค่าไม่ถูกต้อง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="81"/>
+      <source>Reference voltage failed</source>
+      <translation>แรงดันอ้างอิงล้มเหลว</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="82"/>
+      <source>Tester fail</source>
+      <translation>ผู้ทดสอบล้มเหลว</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="83"/>
+      <source>History invalid</source>
+      <translation>ประวัติไม่ถูกต้อง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="84"/>
+      <source>kWh counters invalid</source>
+      <translation>ตัวนับ kWh ไม่ถูกต้อง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="86"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="87"/>
+      <source>DC voltage error</source>
+      <translation>ข้อผิดพลาดของแรงดันไฟฟ้ากระแสตรง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="88"/>
+      <source>GFCI sensor error</source>
+      <translation>ข้อผิดพลาดของเซ็นเซอร์ GFCI</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="89"/>
+      <source>3V3 supply error</source>
+      <translation>ข้อผิดพลาดในการจัดหา 3V3</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="90"/>
+      <source>5V supply error</source>
+      <translation>ข้อผิดพลาดในการจัดหา 5V</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="91"/>
+      <source>12V supply error</source>
+      <translation>ข้อผิดพลาดในการจ่ายไฟ 12V</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="92"/>
+      <source>15V supply error</source>
+      <translation>ข้อผิดพลาดในการจ่ายไฟ 15V</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="94"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="95"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="96"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="97"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="98"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="99"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="100"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="101"/>
+      <source>PV Input shutdown</source>
+      <translation>การปิดอินพุต PV</translation>
+    </message>
+  </context>
+  <context>
+    <name>PageAcInSetup</name>
+    <message>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="125"/>
+      <source>Set the switch in an unlocked position to modify the settings.</source>
+      <translation>ตั้งสวิตช์ในตำแหน่งปลดล็อคเพื่อแก้ไขการตั้งค่า</translation>
+    </message>
+  </context>
+  <context>
+    <name>VebusError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="10"/>
+      <source>Device switched off</source>
+      <translation>อุปกรณ์ถูกปิด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="13"/>
+      <source>Mixed old/new MK2</source>
+      <translation>แบบผสมเก่า/ใหม่ MK2 .</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="16"/>
+      <source>Expected devices error</source>
+      <translation>ข้อผิดพลาดของอุปกรณ์ที่คาดไว้</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="19"/>
+      <source>No other device detected</source>
+      <translation>ไม่พบอุปกรณ์อื่น</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="22"/>
+      <source>Overvoltage on AC-out</source>
+      <translation>แรงดันไฟเกินใน AC-ขาออก</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="25"/>
+      <source>DDC program error</source>
+      <translation>ข้อผิดพลาดของโปรแกรม DDC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="28"/>
+      <source>VE.Bus BMS without assistant</source>
+      <translation>VE.Bus BMS ไม่มีผู้ช่วย</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="31"/>
+      <source>Ground relay test failed</source>
+      <translation>การทดสอบการถ่ายทอดกราวด์ล้มเหลว</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="34"/>
+      <source>System time sync error</source>
+      <translation>ข้อผิดพลาดในการซิงค์เวลาของระบบ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="37"/>
+      <source>Grid relay test fault</source>
+      <translation>ข้อผิดพลาดการทดสอบรีเลย์กริด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="40"/>
+      <source>Config mismatch with 2nd mcu</source>
+      <translation>การตั้งค่าไม่ตรงกันกับ mcu . ตัวที่ 2</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="43"/>
+      <source>Device transmit error</source>
+      <translation>ข้อผิดพลาดในการส่งอุปกรณ์</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="46"/>
+      <source>Awaiting configuration or dongle missing</source>
+      <translation>กำลังรอการกำหนดค่าหรือดองเกิลหายไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="49"/>
+      <source>Phase master missing</source>
+      <translation>เฟสมาสเตอร์หายไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="52"/>
+      <source>Overvoltage has occurred</source>
+      <translation>เกิดแรงดันไฟเกิน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="55"/>
+      <source>Slave does not have AC input!</source>
+      <translation>สเลฟไม่มีอินพุต AC!</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="58"/>
+      <source>Device can't be slave</source>
+      <translation>อุปกรณ์ไม่สามารถเป็นทาสได้</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="61"/>
+      <source>System protection initiated</source>
+      <translation>การป้องกันระบบเริ่มต้นขึ้น</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="64"/>
+      <source>Firmware incompatibiltiy</source>
+      <translation>เฟิร์มแวร์ไม่เข้ากัน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="67"/>
+      <source>Internal error</source>
+      <translation>ข้อผิดพลาดภายใน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="70"/>
+      <source>Failing relay test prevents connection</source>
+      <translation>การทดสอบรีเลย์ล้มเหลวป้องกันการเชื่อมต่อ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="73"/>
+      <source>VE.Bus error</source>
+      <translation>ข้อผิดพลาดของ VE.Bus</translation>
+    </message>
+  </context>
+  <context>
+    <name>Wakespeed</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="138"/>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="143"/>
+      <source>Unknown error: </source>
+      <translation>ข้อผิดพลาดที่ไม่รู้จัก: </translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="151"/>
+      <source>Internal error</source>
+      <translation>ข้อผิดพลาดภายใน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="156"/>
+      <source>No error</source>
+      <translation>ไม่มีข้อผิดพลาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="159"/>
+      <source>Battery high temperature</source>
+      <translation>อุณหภูมิสูงแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="162"/>
+      <source>Battery high voltage</source>
+      <translation>แบตเตอรี่ไฟฟ้าแรงสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="165"/>
+      <source>Battery low voltage</source>
+      <translation>แรงดันไฟต่ำของแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="168"/>
+      <source>Battery voltage exceeded configured max</source>
+      <translation>แรงดันแบตเตอรี่เกินการกำหนดค่าสูงสุด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
+      <source>Battery temperature shorted</source>
+      <translation>อุณหภูมิแบตเตอรี่สั้นลง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="175"/>
+      <source>Alternator high temperature</source>
+      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับอุณหภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="178"/>
+      <source>Alternator high RPM</source>
+      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับ RPM สูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="181"/>
+      <source>Field drive FET high temperature</source>
+      <translation>ไดรฟ์ภาคสนาม FET อุณหภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="184"/>
+      <source>Required sensor missing</source>
+      <translation>ขาดเซ็นเซอร์ที่จำเป็น</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="187"/>
+      <source>Alternator low voltage</source>
+      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับแรงดันต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="190"/>
+      <source>Alternator high voltage offset</source>
+      <translation>ออฟเซ็ตไฟฟ้าแรงสูงกระแสสลับ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="193"/>
+      <source>Alternator Voltage exceeded configured max</source>
+      <translation>แรงดันไฟฟ้ากระแสสลับเกินกำหนดmax</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="196"/>
+      <source>Alternator high voltage</source>
+      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับแรงสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="199"/>
+      <source>Battery disconnected</source>
+      <translation>ถอดแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="202"/>
+      <source>Battery high voltage disconnect</source>
+      <translation>ตัดการเชื่อมต่อไฟฟ้าแรงสูงของแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="205"/>
+      <source>Battery instance ouf of range</source>
+      <translation>อินสแตนซ์แบตเตอรี่อยู่นอกช่วง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="208"/>
+      <source>Too many BMS's</source>
+      <translation>BMS มากเกินไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="211"/>
+      <source>Battery about to disconnect</source>
+      <translation>เกี่ยวกับการตัดการเชื่อมต่อแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="214"/>
+      <source>Too many devices to track</source>
+      <translation>มีอุปกรณ์ให้ติดตามมากเกินไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="217"/>
+      <source>Battery low voltage disconnect</source>
+      <translation>ตัดการเชื่อมต่อ แบตเตอรี่แรงดันต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="220"/>
+      <source>Battery high current disconnect</source>
+      <translation>ตัดการเชื่อมต่อ กระแสไฟของแบตเตอรี่สูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="223"/>
+      <source>Battery high temperature disconnect</source>
+      <translation>ตัดการเชื่อมต่อ แบตเตอรี่อุณหภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="226"/>
+      <source>Battery low temperature disconnect</source>
+      <translation>ตัดการเชื่อมต่อ แบตเตอรี่อุณหภูมิต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="229"/>
+      <source>BMS connection lost</source>
+      <translation>ขาดการเชื่อมต่อ BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="232"/>
+      <source>ATC Disabled</source>
+      <translation>ATC พิการ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="235"/>
+      <source>DC/DC converter not ready</source>
+      <translation>ตัวแปลง DC/DC ไม่พร้อมทำงาน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="238"/>
+      <source>DC/DC high primary voltage</source>
+      <translation>DC/DC แรงดันไฟฟ้าหลักสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="241"/>
+      <source>DC/DC low primary voltage</source>
+      <translation>DC/DC แรงดันไฟหลักต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="244"/>
+      <source>DC/DC high secondary voltage</source>
+      <translation>DC/DC แรงดันไฟฟ้าทุติยภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="247"/>
+      <source>DC/DC low secondary voltage</source>
+      <translation>DC/DC แรงดันไฟฟ้าทุติยภูมิต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="250"/>
+      <source>DC/DC high temperature</source>
+      <translation>DC/DC อุณหภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="253"/>
+      <source>DC/DC misconfiguration</source>
+      <translation>การกำหนดค่า DC/DC ผิดพลาด</translation>
     </message>
   </context>
 </TS>
