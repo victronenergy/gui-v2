@@ -49,7 +49,7 @@
     <message id="common_words_low_battery_voltage">
       <location filename="../../components/CommonWords.qml" line="222"/>
       <source>Low battery voltage</source>
-      <translation>Низька напруга акумулятора</translation>
+      <translation>Низька напруга батареї</translation>
     </message>
     <message id="common_words_manual">
       <location filename="../../components/CommonWords.qml" line="241"/>
@@ -123,139 +123,129 @@
       <translation>Зовнішнє керування</translation>
     </message>
     <message id="brief_loads">
-      <location filename="../../pages/BriefMonitorPanel.qml" line="343"/>
+      <location filename="../../pages/BriefMonitorPanel.qml" line="284"/>
       <source>Loads</source>
       <translation>Споживачі</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="45"/>
+      <location filename="../../pages/LevelsPage.qml" line="49"/>
       <source>Tanks</source>
       <translation>Ємності</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="47"/>
+      <location filename="../../pages/LevelsPage.qml" line="51"/>
       <source>Environment</source>
       <translation>Середовище</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="60"/>
+      <location filename="../../pages/NotificationsPage.qml" line="150"/>
       <source>No current alerts</source>
       <translation>Немає поточних тривог</translation>
     </message>
     <message id="settings_bluetooth">
-      <location filename="../../pages/SettingsPage.qml" line="110"/>
+      <location filename="../../pages/SettingsPage.qml" line="114"/>
       <source>Bluetooth</source>
       <translation>Bluetooth</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="33"/>
+      <location filename="../../pages/SettingsPage.qml" line="37"/>
       <source>General</source>
       <translation>Головне</translation>
     </message>
-    <message id="settings_device_list">
-      <location filename="../../pages/SettingsPage.qml" line="28"/>
-      <source>Device List</source>
-      <translation>Список пристроїв</translation>
-    </message>
     <message id="settings_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="38"/>
+      <location filename="../../pages/SettingsPage.qml" line="42"/>
       <source>Firmware</source>
       <translation>Прошивка</translation>
     </message>
     <message id="settings_date_and_time">
-      <location filename="../../pages/SettingsPage.qml" line="43"/>
+      <location filename="../../pages/SettingsPage.qml" line="47"/>
       <source>Date &amp; Time</source>
       <translation>Дата, час</translation>
     </message>
     <message id="settings_remote_console">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <location filename="../../pages/SettingsPage.qml" line="52"/>
       <source>Remote Console</source>
       <translation>Віддалена консоль</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="53"/>
+      <location filename="../../pages/SettingsPage.qml" line="57"/>
       <source>System setup</source>
       <translation>Налаштування системи</translation>
     </message>
     <message id="settings_system_dvcc">
-      <location filename="../../pages/SettingsPage.qml" line="58"/>
+      <location filename="../../pages/SettingsPage.qml" line="62"/>
       <source>DVCC</source>
       <translation>DVCC</translation>
     </message>
     <message id="settings_display_and_language">
-      <location filename="../../pages/SettingsPage.qml" line="63"/>
+      <location filename="../../pages/SettingsPage.qml" line="67"/>
       <source>Display &amp; Language</source>
       <translation>Дисплей і мова</translation>
     </message>
     <message id="settings_vrm_online_portal">
-      <location filename="../../pages/SettingsPage.qml" line="68"/>
+      <location filename="../../pages/SettingsPage.qml" line="72"/>
       <source>VRM online portal</source>
       <translation>Онлайн-портал VRM</translation>
     </message>
     <message id="settings_ess">
-      <location filename="../../pages/SettingsPage.qml" line="73"/>
+      <location filename="../../pages/SettingsPage.qml" line="77"/>
       <source>ESS</source>
       <translation>ESS</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/SettingsPage.qml" line="78"/>
+      <location filename="../../pages/SettingsPage.qml" line="82"/>
       <source>Energy meters</source>
-      <translation>Лічильники електроенергії</translation>
+      <translation>Лічильники ел.енерг.</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/SettingsPage.qml" line="83"/>
+      <location filename="../../pages/SettingsPage.qml" line="87"/>
       <source>PV inverters</source>
       <translation>PV інвертори</translation>
     </message>
     <message id="settings_ethernet">
-      <location filename="../../pages/SettingsPage.qml" line="88"/>
+      <location filename="../../pages/SettingsPage.qml" line="92"/>
       <source>Ethernet</source>
       <translation>Ethernet</translation>
     </message>
     <message id="settings_wifi">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="97"/>
       <source>Wi-Fi</source>
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_gsm_modem">
-      <location filename="../../pages/SettingsPage.qml" line="100"/>
+      <location filename="../../pages/SettingsPage.qml" line="104"/>
       <source>GSM modem</source>
       <translation>GSM модем</translation>
     </message>
     <message id="settings_gps">
-      <location filename="../../pages/SettingsPage.qml" line="105"/>
+      <location filename="../../pages/SettingsPage.qml" line="109"/>
       <source>GPS</source>
       <translation>GPS</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/SettingsPage.qml" line="116"/>
+      <location filename="../../pages/SettingsPage.qml" line="120"/>
       <source>Generator start/stop</source>
       <translation>Пуск/зупинка генератора</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/SettingsPage.qml" line="121"/>
+      <location filename="../../pages/SettingsPage.qml" line="125"/>
       <source>Tank pump</source>
       <translation>Насос ємності</translation>
     </message>
     <message id="settings_services">
-      <location filename="../../pages/SettingsPage.qml" line="131"/>
+      <location filename="../../pages/SettingsPage.qml" line="135"/>
       <source>Services</source>
       <translation>Служби</translation>
     </message>
     <message id="settings_io">
-      <location filename="../../pages/SettingsPage.qml" line="136"/>
+      <location filename="../../pages/SettingsPage.qml" line="140"/>
       <source>I/O</source>
       <translation>I/O</translation>
     </message>
     <message id="settings_venus_os_large_features">
-      <location filename="../../pages/SettingsPage.qml" line="141"/>
+      <location filename="../../pages/SettingsPage.qml" line="145"/>
       <source>Venus OS Large features</source>
       <translation>Функції Великої Venus OS</translation>
-    </message>
-    <message id="settings_vrm_device_instances">
-      <location filename="../../pages/SettingsPage.qml" line="147"/>
-      <source>VRM Device Instances</source>
-      <translation>Екземпляри пристроїв VRM</translation>
     </message>
     <message id="ess_battery_life_limit">
       <location filename="../../pages/controlcards/ESSCard.qml" line="72"/>
@@ -263,27 +253,27 @@
       <translation>Обмеження заряду батареї: %1%</translation>
     </message>
     <message id="controlcard_generator_disableautostartdialog_description">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="73"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="72"/>
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
       <translation>Автозапуск буде вимкнено, і генератор не буде автоматично запускатися на основі налаштованих умов.</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="96"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="94"/>
       <source>The generator will start and stop based on the configured autostart conditions.</source>
       <translation>Генератор буде запускатися і зупинятися відповідно до налаштованих умов автозапуску.</translation>
     </message>
     <message id="controlcard_generator_subcard_button_manual_stop">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="126"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="124"/>
       <source>Manual Stop</source>
       <translation>Ручна зупинка</translation>
     </message>
     <message id="controlcard_generator_subcard_button_manual_start">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="129"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="127"/>
       <source>Manual Start</source>
       <translation>Ручний запуск</translation>
     </message>
-    <message id="controlcard_generator_label_autostart">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="43"/>
+    <message id="evcs_autostart">
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="44"/>
       <source>Autostart</source>
       <translation>Автозапуск</translation>
     </message>
@@ -383,17 +373,17 @@
       <translation>Ім'я</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="65"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="66"/>
       <source>Product ID</source>
       <translation>ID продукту</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="78"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="79"/>
       <source>Hardware version</source>
       <translation>Апаратна версія</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="99"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="100"/>
       <source>Device name</source>
       <translation>Назва пристрою</translation>
     </message>
@@ -436,11 +426,6 @@
       <location filename="../../pages/settings/PageGenerator.qml" line="144"/>
       <source>Running now</source>
       <translation>Зараз працює</translation>
-    </message>
-    <message id="settings_page_relay_generator_auto_start_enabled">
-      <location filename="../../pages/settings/PageGenerator.qml" line="151"/>
-      <source>Auto start functionality</source>
-      <translation>Функція автоматичного запуску</translation>
     </message>
     <message id="settings_page_relay_generator_manual_start">
       <location filename="../../pages/settings/PageGenerator.qml" line="158"/>
@@ -541,11 +526,6 @@
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="72"/>
       <source>Stop generator when AC-input is available</source>
       <translation>Зупиніть генератор, коли буде доступний вхід змінного струму</translation>
-    </message>
-    <message id="page_generator_conditions_make_sure_generator_is_not_connected">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="88"/>
-      <source>Make sure that the generator is not connected to AC input %1 when using this option.</source>
-      <translation>Використовуючи цю опцію, переконайтеся, що генератор не підключений до входу змінного струму %1.</translation>
     </message>
     <message id="page_generator_conditions_battery_soc">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="96"/>
@@ -760,11 +740,6 @@
       <source>Continuous scanning</source>
       <translation>Безперервне сканування</translation>
     </message>
-    <message id="settings_continuous_scan_may_interfere">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="53"/>
-      <source>Continuous scanning may interfere with Wi-Fi operation</source>
-      <translation>Безперервне сканування може перешкоджати роботі Wi-Fi</translation>
-    </message>
     <message id="settings_io_bluetooth_adapters">
       <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="59"/>
       <source>Bluetooth adapters</source>
@@ -896,22 +871,22 @@
       <translation>Адаптивна яскравість</translation>
     </message>
     <message id="settings_brightness">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="27"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="26"/>
       <source>Brightness</source>
       <translation>Яскравість</translation>
     </message>
     <message id="settings_display_off_time">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="34"/>
       <source>Display off time</source>
       <translation>Час вимкнення дисплея</translation>
     </message>
     <message id="settings_displayoff_10sec">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="40"/>
       <source>10 sec</source>
       <translation>10 сек</translation>
     </message>
     <message id="settings_displayoff_30sec">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="42"/>
       <source>30 sec</source>
       <translation>30 сек</translation>
     </message>
@@ -931,46 +906,41 @@
       <translation>30 хв</translation>
     </message>
     <message id="settings_displayoff_never">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="50"/>
       <source>Never</source>
       <translation>Ніколи</translation>
     </message>
     <message id="settings_display_color_mode">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="59"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="56"/>
       <source>Display mode</source>
       <translation>Режим відображення</translation>
     </message>
     <message id="settings_display_dark_mode">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="60"/>
       <source>Dark</source>
       <extracomment>Dark colors mode</extracomment>
       <translation>темний</translation>
     </message>
     <message id="settings_display_light_mode">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="66"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="63"/>
       <source>Light</source>
       <extracomment>Light colors mode</extracomment>
       <translation>світлий</translation>
     </message>
     <message id="settings_brief_view_levels">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="77"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="74"/>
       <source>Brief view levels</source>
       <translation>Короткий огляд рівнів перегляду</translation>
     </message>
     <message id="settings_language">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="82"/>
       <source>Language</source>
       <translation>Мова</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="137"/>
       <source>Changing language</source>
       <translation>Зміна мови</translation>
-    </message>
-    <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="138"/>
-      <source>Please wait while the language is changed</source>
-      <translation>Будь ласка, зачекайте, поки мова зміниться</translation>
     </message>
     <message id="settings_units_energy">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="18"/>
@@ -988,7 +958,7 @@
       <translation>Струм (Ампер)</translation>
     </message>
     <message id="settings_units">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="145"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="153"/>
       <source>Units</source>
       <translation>Одиниці</translation>
     </message>
@@ -1019,15 +989,10 @@
       <source>&lt;b&gt;CAUTION:&lt;/b&gt; Read the manual before adjusting.</source>
       <translation>&lt;b&gt;УВАГА:&lt;/b&gt; Перед налаштуванням прочитайте посібник.</translation>
     </message>
-    <message id="settings_dvcc_charge_current_limits">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="31"/>
-      <source>Charge Current limits</source>
-      <translation>Обмеження струму заряду</translation>
-    </message>
     <message id="settings_dvcc_limit_managed_battery_charge_voltage">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="40"/>
       <source>Limit managed battery charge voltage</source>
-      <translation>Обмеження керованої напруги заряджання акумуляторної батареї</translation>
+      <translation>Обмеження керованої напруги заряджання батареї</translation>
     </message>
     <message id="settings_dvcc_max_charge_voltage">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="53"/>
@@ -1045,7 +1010,7 @@
       <translation>STS - Спільне вимірювання температури</translation>
     </message>
     <message id="settings_tank_unavailable_sensor">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="70"/>
       <source>Unavailable sensor, set another</source>
       <translation>Недоступний датчик, встановіть інший</translation>
     </message>
@@ -1395,52 +1360,42 @@
       <translation>Найкоротший час роботи</translation>
     </message>
     <message id="page_settings_generator_warm_up_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="56"/>
       <source>Warm-up time</source>
       <translation>Час розігріву</translation>
     </message>
     <message id="page_settings_generator_cool_down_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="65"/>
       <source>Cool-down time</source>
       <translation>Час охолодження</translation>
     </message>
     <message id="page_settings_generator_detect_generator_at_ac_input">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="89"/>
       <source>Detect generator at AC input</source>
       <translation>Виявлення генератора на вході змінного струму</translation>
     </message>
     <message id="page_settings_generator_detect_generator_not_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="96"/>
       <source>None of the AC inputs is set to generator. Go to the system setup page and set the correct AC input to generator in order to enable this functionality.</source>
       <translation>Жоден із входів змінного струму не налаштований на генератор. Перейдіть на сторінку налаштування системи та встановіть правильний вхід змінного струму для генератора, щоб увімкнути цю функцію.</translation>
     </message>
     <message id="page_settings_generator_detect_generator_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="75"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="100"/>
       <source>An alarm will be triggered when no power from the generator is detected at the inverter AC input. Make sure that the correct AC input is set to generator on the system setup page.</source>
       <translation>Якщо на вході змінного струму інвертора не буде виявлено живлення від генератора, буде спрацьовувати тривога. Переконайтеся, що правильний вхід змінного струму налаштовано на генератор на сторінці налаштування системи.</translation>
     </message>
-    <message id="page_settings_generator_alarm_when_not_in_auto_start">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="96"/>
-      <source>Alarm when generator is not in auto start mode</source>
-      <translation>Тривога, коли генератор не знаходиться в режимі автоматичного запуску</translation>
-    </message>
-    <message id="page_settings_generator_alarm_info">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="102"/>
-      <source>An alarm will be triggered when auto start function is left disabled for more than 10 minutes.</source>
-      <translation>Тривога спрацює, якщо функція автоматичного запуску буде відключена більш ніж на 10 хвилин.</translation>
-    </message>
     <message id="page_settings_generator_quiet_hours_start_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="142"/>
       <source>Quiet hours start time</source>
       <translation>Час початку тихих годин</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_end_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="150"/>
       <source>Quiet hours end time</source>
       <translation>Час закінчення тихих годин</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="158"/>
       <source>Run time and service</source>
       <translation>Час роботи та обслуговування</translation>
     </message>
@@ -1478,11 +1433,6 @@
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="90"/>
       <source>Reset service timer</source>
       <translation>Скидання таймера обслуговування</translation>
-    </message>
-    <message id="page_settings_generator_service_timer_has_been_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
-      <source>The service timer has been reset.</source>
-      <translation>Таймер обслуговування був скинутий.</translation>
     </message>
     <message id="settings_gps_settings">
       <location filename="../../pages/settings/PageSettingsGpsList.qml" line="67"/>
@@ -1752,16 +1702,6 @@ See documentation for further information.</source>
 
 Додаткову інформацію див. у документації.</translation>
     </message>
-    <message id="settings_ess_do_not_perform_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
-      <source>Use this option in systems that do not perform peak shaving.</source>
-      <translation>Використовуйте цю опцію в пристроях, які не підтримують пікове гоління.</translation>
-    </message>
-    <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
-      <source>BatteryLife state</source>
-      <translation>Стан BatteryLife</translation>
-    </message>
     <message id="settings_ess_battery_life_discharge_disabled">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="174"/>
       <source>Discharge disabled</source>
@@ -1843,17 +1783,17 @@ See documentation for further information.</source>
       <translation>Обмеження подачі живлення активне</translation>
     </message>
     <message id="settings_io_analog_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="29"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="32"/>
       <source>Analog inputs</source>
       <translation>Аналогові входи</translation>
     </message>
     <message id="settings_io_digital_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="60"/>
       <source>Digital inputs</source>
       <translation>Цифрові входи</translation>
     </message>
     <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="76"/>
       <source>Digital input %1</source>
       <extracomment>%1 = number of the digital input</extracomment>
       <translation>Цифровий вхід %1</translation>
@@ -1899,7 +1839,7 @@ See documentation for further information.</source>
       <translation>CO2 тривога</translation>
     </message>
     <message id="settings_io_bt_sensors">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="106"/>
       <source>Bluetooth sensors</source>
       <translation>Датчики Bluetooth</translation>
     </message>
@@ -1917,11 +1857,6 @@ Documentation at https://ve3.nl/vol</source>
       <source>Signal K</source>
       <translation>Signal K</translation>
     </message>
-    <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
-      <source>Access Signal K at http://venus.local:3000 and via VRM</source>
-      <translation>Доступ до Signal K за адресою http://venus.local:3000 і через VRM</translation>
-    </message>
     <message id="settings_large_node_red">
       <location filename="../../pages/settings/PageSettingsLarge.qml" line="39"/>
       <source>Node-RED</source>
@@ -1931,11 +1866,6 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/PageSettingsLarge.qml" line="47"/>
       <source>Enabled (safe mode)</source>
       <translation>Увімкнено (безпечний режим)</translation>
-    </message>
-    <message id="settings_large_access_node_red">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="53"/>
-      <source>Access Node-RED at https://venus.local:1881 and via VRM</source>
-      <translation>Доступ до Node-RED за адресою https://venus.local:1881  та через VRM</translation>
     </message>
     <message id="settings_logging_time_ago_deferred">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="22"/>
@@ -2431,16 +2361,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Has DC system</source>
       <translation>Має систему постійного струму</translation>
     </message>
-    <message id="settings_system_battery_measurements">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="144"/>
-      <source>Battery Measurements</source>
-      <translation>Вимірювання батареї</translation>
-    </message>
-    <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="150"/>
-      <source>System Status</source>
-      <translation>Стан системи</translation>
-    </message>
     <message id="settings_system_status_sync_vebus_soc_with_battery">
       <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="16"/>
       <source>Synchronize VE.Bus SOC with battery</source>
@@ -2462,33 +2382,34 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Solar charger current control</source>
       <translation>Регулювання струму сонячного зарядного</translation>
     </message>
-    <message id="settings_system_status_bms_params">
-      <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="44"/>
+    <message id="charger_network_bms_control">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="129"/>
       <source>BMS control</source>
+      <oldsource>BMS Control</oldsource>
       <translation>Керування BMS</translation>
     </message>
     <message id="settings_pump_function_not_enabled">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="38"/>
       <source>Tank pump start/stop function is not enabled. Go to relay settings and set function to "Tank pump".</source>
       <translation>Функція запуску/зупинки насоса ємності не ввімкнена. Перейдіть до налаштувань реле та встановіть функцію на "Насос ємності".</translation>
     </message>
     <message id="settings_pump_state">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="48"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="47"/>
       <source>Pump state</source>
       <translation>Стан насоса</translation>
     </message>
     <message id="settings_tank_sensor">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="67"/>
       <source>Tank sensor</source>
       <translation>Датчик ємності</translation>
     </message>
     <message id="settings_tank_start_level">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="90"/>
       <source>Start level</source>
       <translation>Рівень запуску</translation>
     </message>
     <message id="settings_tank_stop_level">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="99"/>
       <source>Stop level</source>
       <translation>Рівень зупинки</translation>
     </message>
@@ -2570,7 +2491,7 @@ First time use? Make sure to either set or disable the password check.</source>
     <message id="settings_vecan_instance_zero_warning">
       <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="29"/>
       <source>Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information.</source>
-      <translation>Увага! Для систем ESS, а також систем з керованою акумуляторною батареєю екземпляр пристрою CAN-шини має залишатися налаштованим на 0. Для отримання додаткової інформації див. посібник GX.</translation>
+      <translation>Увага! Для систем ESS, а також систем з керованою батареєю екземпляр пристрою CAN-шини має залишатися налаштованим на 0. Для отримання додаткової інформації див. посібник GX.</translation>
     </message>
     <message id="settings_vecan_device_instance">
       <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="34"/>
@@ -2835,16 +2756,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Charge voltage</source>
       <translation>Напруга заряджання</translation>
     </message>
-    <message id="charger_network_bms_controlled">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="121"/>
-      <source>BMS Controlled</source>
-      <translation>Під керуванням BMS</translation>
-    </message>
-    <message id="charger_network_bms_control">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="129"/>
-      <source>BMS Control</source>
-      <translation>Керування BMS</translation>
-    </message>
     <message id="charger_network_bms_control_reset">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="132"/>
       <source>Reset</source>
@@ -2861,11 +2772,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Load</source>
       <extracomment>Is it load as power or load as unit?</extracomment>
       <translation>Спожив.</translation>
-    </message>
-    <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="141"/>
-      <source>Alarms and Errors</source>
-      <translation>Тривоги та помилки</translation>
     </message>
     <message id="charger_history_found_with_count">
       <location filename="../../pages/solar/SolarChargerPage.qml" line="146"/>
@@ -2983,11 +2889,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Max charging current</source>
       <translation>Макс. струм заряджання</translation>
     </message>
-    <message id="evcs_auto_start">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="44"/>
-      <source>Auto start</source>
-      <translation>Автоматичний запуск</translation>
-    </message>
     <message id="evcs_lock_charger_display">
       <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="50"/>
       <source>Lock charger display</source>
@@ -3074,7 +2975,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Не підтримується</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="237"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="238"/>
       <source>Remove disconnected devices</source>
       <translation>Видалити від’єднані пристрої</translation>
     </message>
@@ -3240,42 +3141,42 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Час до вимкнення</translation>
     </message>
     <message id="battery_details">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="199"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="200"/>
       <source>Details</source>
       <translation>Подробиці</translation>
     </message>
     <message id="battery_module_level_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="223"/>
       <source>Module level alarms</source>
       <translation>Тривоги на рівні модуля</translation>
     </message>
     <message id="battery_settings_diagnostics">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="252"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="253"/>
       <source>Diagnostics</source>
       <translation>Діагностика</translation>
     </message>
     <message id="battery_settings_fuses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="277"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="278"/>
       <source>Fuses</source>
       <translation>Запобіжники</translation>
     </message>
     <message id="battery_settings_io">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="293"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="294"/>
       <source>IO</source>
       <translation>IO</translation>
     </message>
     <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="308"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="309"/>
       <source>System</source>
       <translation>СТАТУС</translation>
     </message>
     <message id="battery_settings_parameters">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="331"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="332"/>
       <source>Parameters</source>
       <translation>Параметри</translation>
     </message>
     <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="356"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="357"/>
       <source>Redetect Battery</source>
       <translation>Повторне виявлення акумулятора</translation>
     </message>
@@ -3285,7 +3186,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Натисніть , щоб знайти</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="365"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="366"/>
       <source>Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect.</source>
       <translation>Повторне виявлення акумулятора може зайняти 60 секунд. При цьому назва батареї може бути неправильною.</translation>
     </message>
@@ -3464,7 +3365,7 @@ First time use? Make sure to either set or disable the password check.</source>
     <message id="batteryhistory_high_starter_bat_voltage_alarms">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="139"/>
       <source>High starter batttery voltage alarms</source>
-      <translation>Тривога високої напруги акумуляторної батареї стартера</translation>
+      <translation>Тривога високої напруги батареї стартера</translation>
     </message>
     <message id="batteryhistory_minimum_starter_bat_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="146"/>
@@ -3474,7 +3375,7 @@ First time use? Make sure to either set or disable the password check.</source>
     <message id="batteryhistory_maximum_starter_bat_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="155"/>
       <source>Maximum starter battery voltage</source>
-      <translation>Максимальна напруга акумуляторної батареї стартера</translation>
+      <translation>Максимальна напруга батареї стартера</translation>
     </message>
     <message id="batteryhistory_discharged_energy">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="181"/>
@@ -3595,11 +3496,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="109"/>
       <source>Time-to-go averaging period</source>
       <translation>Період усереднення часу</translation>
-    </message>
-    <message id="batterysettingsbattery_time_to_go_discharge_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
-      <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu</source>
-      <translation>Зверніть увагу, що зміна налаштування "Час до вимкнення" також змінює налаштування "Низький рівень заряду" в меню реле.</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_discharge_floor">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="129"/>
@@ -3829,7 +3725,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Залишилось</translation>
     </message>
     <message id="temperature_sensor_battery">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="77"/>
       <source>Sensor battery</source>
       <translation>Батарея датчика</translation>
     </message>
@@ -4607,11 +4503,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SOC %1%</translation>
     </message>
-    <message id="settings_page_debug_quit_application">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="35"/>
-      <source>Quit Application</source>
-      <translation>Вийти з програми</translation>
-    </message>
     <message id="pulsecounter_setup_inverted">
       <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="20"/>
       <source>Inverted</source>
@@ -4837,7 +4728,7 @@ Do you want to continue?</source>
     <message id="vebus_device_bms_message">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="299"/>
       <source>A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible.</source>
-      <translation>VE.Bus BMS автоматично вимикає систему, коли це потрібно для захисту акумуляторної батареї. А отже, керування системою за допомогою Color Control неможливе.</translation>
+      <translation>VE.Bus BMS автоматично вимикає систему, коли це потрібно для захисту батареї. А отже, керування системою за допомогою Color Control неможливе.</translation>
     </message>
     <message id="vebus_device_bms_not_found">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="305"/>
@@ -4884,21 +4775,6 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="110"/>
       <source>Press to interrupt</source>
       <translation>Натисніть, щоб перервати</translation>
-    </message>
-    <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="119"/>
-      <source>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</source>
-      <translation>Для використання цієї функції потрібно мати мікропрограму версії 400 або вище. Зверніться до інсталятора, щоб оновити ваш Multi/Quattro.</translation>
-    </message>
-    <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="125"/>
-      <source>Charger not ready, equalization cannot be started.</source>
-      <translation>Зарядний не готовий, вирівнювання не може бути запущено.</translation>
-    </message>
-    <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
-      <source>Equalization cannot be triggered during bulk charge state.</source>
-      <translation>Вирівнювання не може бути запущено під час основного заряджання.</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="152"/>
@@ -5196,11 +5072,6 @@ Do you want to continue?</source>
       <extracomment>Shown below the minimum state of charge, as configured by the user</extracomment>
       <translation>Якщо мережа не виходить з ладу</translation>
     </message>
-    <message id="ess_recommended">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="71"/>
-      <source>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</source>
-      <translation>Для літієвих батарей не рекомендується заряджати батареї нижче 10%. Для інших типів акумуляторів перевірте рекомендований виробником мінімум у технічному паспорті.</translation>
-    </message>
     <message id="common_words_ac_in">
       <location filename="../../components/CommonWords.qml" line="14"/>
       <source>AC In</source>
@@ -5366,7 +5237,7 @@ Do you want to continue?</source>
       <translation>Розрядка</translation>
     </message>
     <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="276"/>
+      <location filename="../../components/Utils.js" line="302"/>
       <source>Disconnected</source>
       <translation>Відключено</translation>
     </message>
@@ -5665,7 +5536,7 @@ Do you want to continue?</source>
       <translation>Серійний номер</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../components/NavBar.qml" line="55"/>
+      <location filename="../../components/NavBar.qml" line="81"/>
       <source>Settings</source>
       <translation>Налаштування</translation>
     </message>
@@ -5810,13 +5681,7 @@ Do you want to continue?</source>
       <location filename="../../components/CommonWords.qml" line="465"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
-      <translation>Врожайність</translation>
-    </message>
-    <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="469"/>
-      <source>Yield today</source>
-      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
-      <translation>Ген. сьогодні</translation>
+      <translation>Генерація</translation>
     </message>
     <message id="common_words_zero_feed_in_power_limit">
       <location filename="../../components/CommonWords.qml" line="472"/>
@@ -5938,7 +5803,7 @@ Do you want to continue?</source>
       <translation>Своп.</translation>
     </message>
     <message id="environment_gauge_humidity">
-      <location filename="../../components/EnvironmentGaugePanel.qml" line="122"/>
+      <location filename="../../components/EnvironmentGaugePanel.qml" line="131"/>
       <source>RH</source>
       <extracomment>Abbreviation of "Room Humidity"</extracomment>
       <translation>ВІДНОСНА ВОЛОГІСТЬ ПОВІТРЯ</translation>
@@ -5964,18 +5829,13 @@ Do you want to continue?</source>
       <source>Error during firmware installation</source>
       <translation>Помилка під час встановлення прошивки</translation>
     </message>
-    <message id="settings_firmware_installed_rebooting">
-      <location filename="../../components/FirmwareUpdate.qml" line="59"/>
-      <source>Firmware installed, rebooting.</source>
-      <translation>Мікропрограма встановлена, перезавантаження.</translation>
-    </message>
     <message id="settings_firmware_no_newer_version_available">
-      <location filename="../../components/FirmwareUpdate.qml" line="122"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="154"/>
       <source>No newer version available</source>
       <translation>Немає новішої версії</translation>
     </message>
     <message id="settings_firmware_no_firmware_found">
-      <location filename="../../components/FirmwareUpdate.qml" line="125"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="157"/>
       <source>No firmware found</source>
       <translation>Прошивка не знайдена</translation>
     </message>
@@ -6050,38 +5910,41 @@ Do you want to continue?</source>
       <translation>Неправильний пароль</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../components/NavBar.qml" line="31"/>
+      <location filename="../../components/NavBar.qml" line="57"/>
       <source>Brief</source>
       <translation>Коротко</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../components/NavBar.qml" line="37"/>
+      <location filename="../../components/NavBar.qml" line="63"/>
       <source>Overview</source>
       <translation>Огляд</translation>
     </message>
     <message id="nav_levels">
-      <location filename="../../components/NavBar.qml" line="43"/>
+      <location filename="../../components/NavBar.qml" line="69"/>
       <source>Levels</source>
       <translation>Рівні</translation>
     </message>
     <message id="nav_notifications">
-      <location filename="../../components/NavBar.qml" line="49"/>
+      <location filename="../../components/NavBar.qml" line="75"/>
       <source>Notifications</source>
       <translation>Сповіщення</translation>
     </message>
-    <message id="notifications_page_now">
-      <location filename="../../components/NotificationDelegate.qml" line="25"/>
+    <message id="utils_formatTimestamp_now">
+      <location filename="../../components/Utils.js" line="260"/>
       <source>now</source>
+      <extracomment>Indicates an event happened very recently</extracomment>
       <translation>Наразі</translation>
     </message>
-    <message id="%1m ago">
-      <location filename="../../components/NotificationDelegate.qml" line="29"/>
+    <message id="utils_formatTimestamp_min_ago">
+      <location filename="../../components/Utils.js" line="265"/>
       <source>%1m ago</source>
+      <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>%1m ago</translation>
     </message>
-    <message id="%1h %2m ago">
-      <location filename="../../components/NotificationDelegate.qml" line="35"/>
+    <message id="utils_formatTimestamp_hours_min_ago">
+      <location filename="../../components/Utils.js" line="272"/>
       <source>%1h %2m ago</source>
+      <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>1 годину 2 місяці тому</translation>
     </message>
     <message id="cgwacs_battery_schedule_every_day">
@@ -6436,7 +6299,7 @@ Do you want to continue?</source>
       <translation>Від'єднано, спроба повторного підключення</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="262"/>
+      <location filename="../../components/Utils.js" line="288"/>
       <source>Connecting</source>
       <translation>Підключення...</translation>
     </message>
@@ -6496,7 +6359,7 @@ Do you want to continue?</source>
       <translation>Помилка 5-го рівня протоколу MQTT</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="112"/>
+      <location filename="../../components/StatusBar.qml" line="110"/>
       <source>Silence alarm</source>
       <translation>Сигналізація тиші</translation>
     </message>
@@ -6541,17 +6404,17 @@ Do you want to continue?</source>
       <translation>0 хв</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="259"/>
+      <location filename="../../components/Utils.js" line="285"/>
       <source>Failure</source>
       <translation>Збій</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="265"/>
+      <location filename="../../components/Utils.js" line="291"/>
       <source>Retrieving IP address</source>
       <translation>Отримання IP-адреси</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="272"/>
+      <location filename="../../components/Utils.js" line="298"/>
       <source>Disconnect</source>
       <translation>Відключити</translation>
     </message>
@@ -6692,7 +6555,7 @@ Do you want to continue?</source>
     <message id="ess_state_keep_batteries_charged">
       <location filename="../../data/Ess.qml" line="32"/>
       <source>Keep batteries charged</source>
-      <translation>Тримати акумуляторні батареї зарядженими</translation>
+      <translation>Тримати батареї зарядженими</translation>
     </message>
     <message id="ess_state_optimized_with_battery_life">
       <location filename="../../data/Ess.qml" line="34"/>
@@ -6702,7 +6565,7 @@ Do you want to continue?</source>
     <message id="ess_state_optimized_without_battery_life">
       <location filename="../../data/Ess.qml" line="36"/>
       <source>Optimized without battery life</source>
-      <translation>Оптимізовано без ресурсу акумуляторної батареї</translation>
+      <translation>Оптимізовано без ресурсу батареї</translation>
     </message>
     <message id="evchargers_status_charged">
       <location filename="../../data/EvChargers.qml" line="80"/>
@@ -6839,23 +6702,13 @@ Do you want to continue?</source>
       <source>Manually started</source>
       <translation>Запущено вручну</translation>
     </message>
-    <message id="notifications_warning_title_inverter_temperature">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="15"/>
-      <source>Inverter temperature</source>
-      <translation>Температура інвертора</translation>
-    </message>
-    <message id="notifications_warning_description_inverter_temperature">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="17"/>
-      <source>Suggest user an action or inaction, inform about status.  This text can be long and should wrap.</source>
-      <translation>Запропонувати користувачеві дію або бездіяльність, повідомити про статус.  Цей текст може бути довгим і повинен бути обгорнутий.</translation>
-    </message>
     <message id="notifications_toast_short_text">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="21"/>
+      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="13"/>
       <source>Mollitia quis est quas deleniti quibusdam explicabo quasi.</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi.</translation>
     </message>
     <message id="notifications_toast_long_text">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="24"/>
+      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="16"/>
       <source>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
@@ -7035,7 +6888,7 @@ Do you want to continue?</source>
       <translation>Тільки інвертор</translation>
     </message>
     <message id="controlcard_generator_disableautostartdialog_title">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="70"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="69"/>
       <source>Disable autostart?</source>
       <oldsource>Disable Autostart?</oldsource>
       <translation>Вимкнути автозапуск?</translation>
@@ -7048,7 +6901,7 @@ Do you want to continue?</source>
       <translation>Інвертор/зарядний пристрій (%1)</translation>
     </message>
     <message id="settings_page_debug_application_version">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="85"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="78"/>
       <source>Application version</source>
       <translation>Версія програми</translation>
     </message>
@@ -7078,44 +6931,44 @@ Do you want to continue?</source>
       <translation>Час для обслуговування</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="157"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="165"/>
       <source>Onscreen UI (GX Touch &amp; Ekrano)</source>
       <translation>Екранний інтерфейс (GX Touch і Ekrano)</translation>
     </message>
     <message id="settings_display_standard_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="171"/>
       <source>Standard version</source>
       <translation>Стандартна версія</translation>
     </message>
     <message id="settings_display_beta_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="173"/>
       <source>Gui-v2 (beta) version</source>
       <translation>Версія Gui-v2 (бета).</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="188"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="196"/>
       <source>Restarting application...</source>
       <translation>Перезапуск програми...</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="190"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="198"/>
       <source>Application restarted</source>
       <translation>Програму перезапущено</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="194"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="202"/>
       <source>Onscreen UI will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Екранний інтерфейс користувача перейде на %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="197"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="205"/>
       <source>Onscreen UI has switched to %1.</source>
       <extracomment>%1 = the UI version that the system has switched to.</extracomment>
       <translation>Екранний інтерфейс користувача змінився на %1.</translation>
     </message>
     <message id="settings_language_no_browser_support">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="105"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="102"/>
       <source>(no browser support)</source>
       <translation>(браузер не підтримує)</translation>
     </message>
@@ -7214,12 +7067,12 @@ Do you want to continue?</source>
     <message id="inverter_total_yield">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="117"/>
       <source>Total yield</source>
-      <translation>Загальний вихід</translation>
+      <translation>Заг. Генерація</translation>
     </message>
     <message id="inverter_system_yield">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="125"/>
       <source>System yield</source>
-      <translation>Вихід системи</translation>
+      <translation>Генерація системи</translation>
     </message>
     <message id="inverter_daily_history">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="159"/>
@@ -7244,20 +7097,205 @@ Do you want to continue?</source>
     <message id="inverter_maximum_battery_voltage">
       <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="27"/>
       <source>Maximum battery voltage</source>
-      <translation>Максимальна напруга акумуляторної батареї</translation>
+      <translation>Максимальна напруга батареї</translation>
     </message>
     <message id="inverter_minimum_battery_voltage">
       <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="36"/>
       <source>Minimum battery voltage</source>
-      <translation>Мінімальна напруга акумуляторної батареї</translation>
+      <translation>Мінімальна напруга батареї</translation>
     </message>
-  </context>
-  <context>
-    <name>PageAcInSetup</name>
-    <message>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="125"/>
-      <source>Set switch in an unlocked position to change settings</source>
-      <translation>Встановіть перемикач у розблоковане положення для зміни налаштувань</translation>
+    <message id="ess_recommended">
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="71"/>
+      <source>For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer.</source>
+      <oldsource>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</oldsource>
+      <translation>Для літієвих батарей не рекомендується заряджати їх нижче 10%. Для інших типів акумуляторів перевірте в технічному паспорті мінімальний рівень заряду, рекомендований виробником.</translation>
+    </message>
+    <message id="settings_page_debug_quit_application">
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="36"/>
+      <source>Quit application</source>
+      <oldsource>Quit Application</oldsource>
+      <translation>Вийти з програми</translation>
+    </message>
+    <message id="settings_page_debug_quit">
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="39"/>
+      <source>Quit</source>
+      <translation>Звільнися.</translation>
+    </message>
+    <message id="batterysettingsbattery_time_to_go_discharge_note">
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
+      <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu.</source>
+      <oldsource>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu</oldsource>
+      <translation>Зверніть увагу, що зміна параметра Час до розряду також змінює значення параметра Низький рівень заряду в меню реле.</translation>
+    </message>
+    <message id="settings_page_relay_generator_auto_start_enabled">
+      <location filename="../../pages/settings/PageGenerator.qml" line="151"/>
+      <source>Autostart functionality</source>
+      <oldsource>Auto start functionality</oldsource>
+      <translation>Функція автозапуску</translation>
+    </message>
+    <message id="page_generator_conditions_make_sure_generator_is_not_connected">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="88"/>
+      <source>Make sure that the generator is not connected to AC input %1 when using this option</source>
+      <oldsource>Make sure that the generator is not connected to AC input %1 when using this option.</oldsource>
+      <translation>Переконайтеся, що генератор не підключений до входу змінного струму %1 під час використання цієї опції</translation>
+    </message>
+    <message id="page_settings_generator_service_timer_has_been_reset">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
+      <source>The service timer has been reset</source>
+      <oldsource>The service timer has been reset.</oldsource>
+      <translation>Сервісний таймер було скинуто</translation>
+    </message>
+    <message id="settings_continuous_scan_may_interfere">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="53"/>
+      <source>Continuous scanning may interfere with Wi-Fi operation.</source>
+      <oldsource>Continuous scanning may interfere with Wi-Fi operation</oldsource>
+      <translation>Безперервне сканування може перешкоджати роботі Wi-Fi.</translation>
+    </message>
+    <message id="settings_language_change_failed">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="140"/>
+      <source>Failed to change language!</source>
+      <translation>Не вдалося змінити мову!</translation>
+    </message>
+    <message id="settings_language_please_wait">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="142"/>
+      <source>Please wait while the language is changed.</source>
+      <oldsource>Please wait while the language is changed</oldsource>
+      <translation>Будь ласка, зачекайте, поки мова зміниться.</translation>
+    </message>
+    <message id="settings_dvcc_charge_current_limits">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="31"/>
+      <source>Charge current limits</source>
+      <oldsource>Charge Current limits</oldsource>
+      <translation>Обмеження струму заряду</translation>
+    </message>
+    <message id="settings_page_generator_warm_up_cool_down">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="43"/>
+      <source>Warm-up &amp; cool-down</source>
+      <translation>Розігрів та охолодження</translation>
+    </message>
+    <message id="page_settings_generator_stop_time">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="74"/>
+      <source>Generator stop time</source>
+      <translation>Час зупинки генератора</translation>
+    </message>
+    <message id="page_settings_generator_alarm_when_not_in_auto_start">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="121"/>
+      <source>Alarm when generator is not in autostart mode</source>
+      <oldsource>Alarm when generator is not in auto start mode</oldsource>
+      <translation>Тривога, коли генератор не в режимі автозапуску</translation>
+    </message>
+    <message id="page_settings_generator_alarm_info">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="127"/>
+      <source>An alarm will be triggered when autostart function is left disabled for more than 10 minutes</source>
+      <oldsource>An alarm will be triggered when auto start function is left disabled for more than 10 minutes.</oldsource>
+      <translation>Сигнал тривоги спрацьовує, якщо функцію автозапуску вимкнено більше ніж на 10 хвилин</translation>
+    </message>
+    <message id="settings_ess_do_not_perform_peak_shaving">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
+      <source>Use this option in systems that do not perform peak shaving</source>
+      <oldsource>Use this option in systems that do not perform peak shaving.</oldsource>
+      <translation>Використовуйте цю опцію в системах, які не виконують пікове гоління</translation>
+    </message>
+    <message id="settings_ess_batteryLife_state">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
+      <source>Battery life state</source>
+      <oldsource>BatteryLife state</oldsource>
+      <translation>Стан заряду акумулятора</translation>
+    </message>
+    <message id="settings_large_access_signal_k">
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
+      <source>Access Signal K at http://venus.local:3000 and via VRM.</source>
+      <oldsource>Access Signal K at http://venus.local:3000 and via VRM</oldsource>
+      <translation>Доступ до Signal K на http://venus.local:3000 та через VRM.</translation>
+    </message>
+    <message id="settings_large_access_node_red">
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="53"/>
+      <source>Access Node-RED at https://venus.local:1881 and via VRM.</source>
+      <oldsource>Access Node-RED at https://venus.local:1881 and via VRM</oldsource>
+      <translation>Доступ до Node-RED на https://venus.local:1881 та через VRM.</translation>
+    </message>
+    <message id="settings_system_battery_measurements">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="144"/>
+      <source>Battery measurements</source>
+      <oldsource>Battery Measurements</oldsource>
+      <translation>Вимірювання батареї</translation>
+    </message>
+    <message id="settings_system_system_status">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="150"/>
+      <source>System status</source>
+      <oldsource>System Status</oldsource>
+      <translation>Стан системи</translation>
+    </message>
+    <message id="settings_device_list">
+      <location filename="../../pages/SettingsPage.qml" line="32"/>
+      <source>Device list</source>
+      <oldsource>Device List</oldsource>
+      <translation>Список пристроїв</translation>
+    </message>
+    <message id="settings_vrm_device_instances">
+      <location filename="../../pages/SettingsPage.qml" line="151"/>
+      <source>VRM device instances</source>
+      <oldsource>VRM Device Instances</oldsource>
+      <translation>Екземпляри пристроїв VRM</translation>
+    </message>
+    <message id="charger_network_bms_controlled">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="121"/>
+      <source>BMS controlled</source>
+      <oldsource>BMS Controlled</oldsource>
+      <translation>Під керуванням BMS</translation>
+    </message>
+    <message id="charger_alarms_alarms_and_errors">
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="141"/>
+      <source>Alarms &amp; Errors</source>
+      <oldsource>Alarms and Errors</oldsource>
+      <translation>Тривоги та помилки</translation>
+    </message>
+    <message id="vebus_device_update_firmware">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="119"/>
+      <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
+      <oldsource>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</oldsource>
+      <translation>Ця функція потребує прошивки версії 400 або новішої. Зверніться до інсталятора, щоб оновити ваш Multi/Quattro.</translation>
+    </message>
+    <message id="vebus_device_charger_not_ready">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="125"/>
+      <source>Charger not ready, equalization cannot be started</source>
+      <oldsource>Charger not ready, equalization cannot be started.</oldsource>
+      <translation>Зарядний пристрій не готовий, вирівнювання не може бути запущено</translation>
+    </message>
+    <message id="vebus_device_no_equalisation_during_bulk">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
+      <source>Equalization cannot be triggered during bulk charge state</source>
+      <oldsource>Equalization cannot be triggered during bulk charge state.</oldsource>
+      <translation>Вирівнювання не може спрацювати під час стану об'ємного заряду</translation>
+    </message>
+    <message id="common_words_yield_today">
+      <location filename="../../components/CommonWords.qml" line="469"/>
+      <source>Yield Today</source>
+      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
+      <oldsource>Yield today</oldsource>
+      <translation>Продуктивність сьогодні</translation>
+    </message>
+    <message id="settings_firmware_installed_rebooting">
+      <location filename="../../components/FirmwareUpdate.qml" line="59"/>
+      <source>Firmware installed, device rebooting</source>
+      <oldsource>Firmware installed, rebooting.</oldsource>
+      <translation>Встановлено прошивку, пристрій перезавантажено</translation>
+    </message>
+    <message id="notification_description_and_value">
+      <location filename="../../components/NotificationDelegate.qml" line="77"/>
+      <source>%1 %2</source>
+      <extracomment>%1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')</extracomment>
+      <translation>%1 %2</translation>
+    </message>
+    <message id="firmware_installed_build_version_update_detected">
+      <location filename="../../pages/DialogLayer.qml" line="29"/>
+      <source>Firmware version update detected</source>
+      <translation>Виявлено оновлення версії прошивки</translation>
+    </message>
+    <message id="firmware_installed_build_page_will_reload">
+      <location filename="../../pages/DialogLayer.qml" line="31"/>
+      <source>Page will automatically reload in ten seconds to load the latest version.</source>
+      <translation>Сторінка автоматично перезавантажиться через десять секунд, щоб завантажити останню версію.</translation>
     </message>
   </context>
   <context>
@@ -7865,293 +7903,6 @@ Do you want to continue?</source>
     </message>
   </context>
   <context>
-    <name>BatteryAlarms</name>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="316"/>
-      <source>Low voltage</source>
-      <translation>Низька напруга</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="317"/>
-      <source>High voltage</source>
-      <translation>Висока напруга</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="318"/>
-      <source>High current</source>
-      <translation>Високий струм</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="319"/>
-      <source>High charge current</source>
-      <translation>Високий струм заряду</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="320"/>
-      <source>High discharge current</source>
-      <translation>Високий струм розряду</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="321"/>
-      <source>High charge temperature</source>
-      <translation>Висока температура заряду</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="322"/>
-      <source>Low charge temperature</source>
-      <translation>Низька температура заряду</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="323"/>
-      <source>Low SOC</source>
-      <translation>Низький SOC</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="324"/>
-      <source>State of health</source>
-      <translation>Стан здоров'я</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="325"/>
-      <source>Low starter voltage</source>
-      <translation>Низька напруга стартера</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="326"/>
-      <source>High starter voltage</source>
-      <translation>Висока напруга стартера</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="327"/>
-      <source>Low temperature</source>
-      <translation>Низька температура</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="328"/>
-      <source>High Temperature</source>
-      <translation>Висока температура</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="329"/>
-      <source>Mid-point voltage</source>
-      <translation>Напруга в середній точці</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="330"/>
-      <source>Low-fused voltage</source>
-      <translation>Низька плавка напруга</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="331"/>
-      <source>High-fused voltage</source>
-      <translation>Висока плавка напруга</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="332"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="356"/>
-      <source>Fuse blown</source>
-      <translation>Перегорів запобіжник</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="333"/>
-      <source>High internal temperature</source>
-      <translation>Висока внутрішня температура</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="334"/>
-      <source>Internal failure</source>
-      <translation>Внутрішній збій</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="335"/>
-      <source>Battery temperature sensor</source>
-      <translation>Датчик температури акумулятора</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="336"/>
-      <source>Cell imbalance</source>
-      <translation>Дисбаланс комірки</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="337"/>
-      <source>Low cell voltage</source>
-      <translation>Низька напруга комірки</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="338"/>
-      <source>Bad contactor</source>
-      <translation>Несправний контактор</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="339"/>
-      <source>BMS cable fault</source>
-      <translation>Несправність кабелю BMS</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="353"/>
-      <source>Distributor %1 connection lost</source>
-      <translation>Втрачено з’єднання з розподільником %1</translation>
-    </message>
-  </context>
-  <context>
-    <name>DBusTankService</name>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="181"/>
-      <source>Fuel</source>
-      <translation>Паливо</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="182"/>
-      <source>Fresh water</source>
-      <translation>Прісна вода</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="183"/>
-      <source>Waste water</source>
-      <translation>Стічні води</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="184"/>
-      <source>Live well</source>
-      <translation>Свердловина під тиском</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="185"/>
-      <source>Oil</source>
-      <translation>Олива</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="186"/>
-      <source>Black water (sewage)</source>
-      <translation>Стічні води (з каналізації)</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="187"/>
-      <source>Fuel (gasoline)</source>
-      <translation>Паливо (бензин)</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="200"/>
-      <source>Unknown</source>
-      <translation>Невідомий</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="236"/>
-      <source>tank</source>
-      <translation>Ємність</translation>
-    </message>
-  </context>
-  <context>
-    <name>DeviceAlarms</name>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="45"/>
-      <source>Generator not detected at AC input</source>
-      <translation>Генератор не виявлено на вході змінного струму</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="63"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="74"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="85"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="101"/>
-      <source>Low battery voltage</source>
-      <translation>Низька напруга акумуляторної батареї</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="64"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="75"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="86"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="102"/>
-      <source>High battery voltage</source>
-      <translation>Висока напруга акумулятора</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="87"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="103"/>
-      <source>Low AC voltage</source>
-      <translation>Низька напруга змінного струму</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="88"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="104"/>
-      <source>High AC voltage</source>
-      <translation>Висока напруга змінного струму</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="89"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="159"/>
-      <source>Low temperature</source>
-      <translation>Низька температура</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="90"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="105"/>
-      <source>High temperature</source>
-      <translation>Висока температура</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="91"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="106"/>
-      <source>Inverter overload</source>
-      <translation>Перевантаження інвертора</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="92"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="107"/>
-      <source>High DC ripple</source>
-      <translation>Високі пульсації постійного струму</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="117"/>
-      <source>Circuit breaker tripped</source>
-      <translation>Спрацював автоматичний вимикач</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="118"/>
-      <source>DVCC with incompatible firmware #48</source>
-      <translation>DVCC із несумісною прошивкой №48</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="136"/>
-      <source>Grid meter not found #49</source>
-      <translation>Лічильник мережі не знайдено #49</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="145"/>
-      <source>Low level alarm</source>
-      <translation>Сигнал тривоги через низький рівень</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="146"/>
-      <source>High level alarm</source>
-      <translation>Сигнал тривоги через високий рівень</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="155"/>
-      <source>Low voltage</source>
-      <translation>Низька напруга</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="156"/>
-      <source>High voltage</source>
-      <translation>Висока напруга</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="157"/>
-      <source>Low aux voltage</source>
-      <translation>Низька допоміжна напруга</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="158"/>
-      <source>High aux voltage</source>
-      <translation>Висока додаткова напруга</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="160"/>
-      <source>High Temperature</source>
-      <translation>Висока температура</translation>
-    </message>
-  </context>
-  <context>
     <name>QGuiApplication</name>
     <message>
       <location filename="../../src/main.cpp" line="97"/>
@@ -8251,88 +8002,864 @@ Do you want to continue?</source>
     </message>
   </context>
   <context>
-    <name>VebusAlarms</name>
+    <name>AlternatorError</name>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="82"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="282"/>
-      <source>High Temperature</source>
-      <translation>Висока температура</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="22"/>
+      <source>No error</source>
+      <translation>Помилки немає</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="82"/>
-      <source>High Temperature on L1</source>
-      <translation>Висока температура на L1</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="25"/>
+      <source>Unknown error: %1</source>
+      <translation>Невідома помилка: %1</translation>
+    </message>
+  </context>
+  <context>
+    <name>BmsError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="10"/>
+      <source>No error</source>
+      <translation>Помилки немає</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="83"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="283"/>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="13"/>
+      <source>Battery initialization error</source>
+      <translation>Помилка ініціалізації акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="16"/>
+      <source>No batteries connected</source>
+      <translation>Аккумулятор не підключено</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="19"/>
+      <source>Unknown battery</source>
+      <translation>Невідомий акумулятор</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="22"/>
+      <source>Different battery types</source>
+      <translation>Різні типи акумуляторів</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="25"/>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="40"/>
+      <source>No. of batteries incorrect</source>
+      <translation>Кількість. акумуляторів неправильна</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="28"/>
+      <source>Lynx Shunt not found</source>
+      <translation>Lynx Шунт не знайдено</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="31"/>
+      <source>Battery measure error</source>
+      <translation>Помилка вимірювання батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="34"/>
+      <source>Internal calculation error</source>
+      <translation>Внутрішня помилка обчислень</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="37"/>
+      <source>No. of batteries in series incorrect</source>
+      <translation>Кількість. акумуляторів у серії неправильна</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="44"/>
+      <source>Hardware error</source>
+      <translation>Апаратна помилка</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="47"/>
+      <source>Watchdog error</source>
+      <translation>Помилка датчика стеження</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="50"/>
+      <source>Over voltage</source>
+      <translation>Перевищення напруги</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="53"/>
+      <source>Under voltage</source>
+      <translation>Під напругою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="56"/>
+      <source>Over temperature</source>
+      <translation>Перевищена температура</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="59"/>
+      <source>Under temperature</source>
+      <translation>Під температурою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="62"/>
+      <source>Under-charge standby</source>
+      <translation>Режим очікування при недостатньому заряді</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="65"/>
+      <source>ADC error</source>
+      <translation>Помилка ADC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="68"/>
+      <source>Battery comm. error</source>
+      <translation>Помилка. зв'язку з батареєю</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="71"/>
+      <source>Pre-Charge error</source>
+      <translation>Помилка попереднього заряду</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="75"/>
+      <source>Safety contactor error</source>
+      <translation>Помилка захисного контактора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="79"/>
+      <source>Battery update error</source>
+      <translation>Помилка оновлення акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="82"/>
+      <source>BMS cable error</source>
+      <translation>Помилка кабелю BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="85"/>
+      <source>Reference voltage failure</source>
+      <translation>Збій опорної напруги</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="88"/>
+      <source>Wrong system voltage</source>
+      <translation>Неправильна напруга системи</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="91"/>
+      <source>Pre charge timeout</source>
+      <translation>Час очікування попереднього заряджання</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="94"/>
+      <source>ATC/ATD failure</source>
+      <translation>Збій ATC/ATD</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="98"/>
+      <source>Calibration data lost</source>
+      <translation>Дані калібрування втрачено</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="102"/>
+      <source>Settings invalid</source>
+      <translation>Налаштування недійсні</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="105"/>
+      <source>Interlock</source>
+      <translation>Блокування</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="108"/>
+      <source>Emergency stop</source>
+      <translation>Аварійна зупинка</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="111"/>
+      <source>Communication timeout</source>
+      <translation>Тайм-аут зв'язку</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="114"/>
+      <source>Safety lock</source>
+      <translation>Запобіжник</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="117"/>
+      <source>Terminal over temperature</source>
+      <translation>Перегрів терміналу</translation>
+    </message>
+  </context>
+  <context>
+    <name>ChargerError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="7"/>
+      <source>No error</source>
+      <translation>Помилки немає</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="9"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="103"/>
+      <source>Battery high temperature</source>
+      <translation>Висока температура акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="10"/>
+      <source>Battery high voltage</source>
+      <translation>Висока напруга акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="11"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="12"/>
+      <source>Battery Tsense miswired</source>
+      <translation>Неправильне підключення датчика температури акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="13"/>
+      <source>Battery Tsense missing</source>
+      <translation>Відсутній датчик температури акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="14"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="15"/>
+      <source>Battery Vsense miswired</source>
+      <translation>Неправильне підключення датчика напруги акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="16"/>
+      <source>Battery Vsense missing</source>
+      <translation>Відсутній датчик напруги акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="17"/>
+      <source>Battery high wire losses</source>
+      <translation>Високі втрати у проводах акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="18"/>
+      <source>Battery low voltage</source>
+      <translation>Низька напруга акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="19"/>
+      <source>Battery high ripple voltage</source>
+      <translation>Висока напруга пульсації акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="20"/>
+      <source>Battery low state of charge</source>
+      <translation>Низький рівень заряду акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="21"/>
+      <source>Battery mid-point voltage issue</source>
+      <translation>Проблема із напругою в середній точці акумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="22"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="104"/>
+      <source>Battery temperature too low</source>
+      <translation>Надто низька температура акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="24"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="106"/>
+      <source>Charger high temperature</source>
+      <translation>Висока температура зарядного пристрою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="25"/>
+      <source>Charger excessive current</source>
+      <translation>Надмірний струм зарядного пристрою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="26"/>
+      <source>Charger negative current</source>
+      <translation>Отрицательный ток зарядного устройства</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="27"/>
+      <source>Charger bulk time expired</source>
+      <translation>Час роботи зарядного пристрою закінчився</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="28"/>
+      <source>Charger current sensor issue</source>
+      <translation>Проблема з датчиком струму зарядного пристрою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="29"/>
+      <source>Internal Tsensor miswired</source>
+      <translation>Внутрішній датчик температури підключено неправильно</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="30"/>
+      <source>Internal Tsensor missing</source>
+      <translation>Відсутній внутрішній датчик температури</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="31"/>
+      <source>Charger fan not detected</source>
+      <translation>Вентилятор зарядного пристрою не виявлено</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="32"/>
+      <source>Charger fan over-current</source>
+      <translation>Перевищення струму вентилятора зарядного пристрою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="33"/>
+      <source>Charger terminal overheat</source>
+      <translation>Перегрів клеми зарядного пристрою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="34"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="107"/>
+      <source>Charger short circuit</source>
+      <translation>Коротке замикання зарядного пристрою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="35"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="108"/>
+      <source>Charger power stage issue</source>
+      <translation>Проблема зі ступенем живлення зарядного пристрою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="36"/>
+      <source>Over-charge protection</source>
+      <translation>Захист від перезаряду</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="38"/>
+      <source>Input high voltage</source>
+      <translation>Вхідна висока напруга</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="39"/>
+      <source>Input excessive current</source>
+      <translation>Надмірний вхідний струм</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="40"/>
+      <source>Input excessive power</source>
+      <translation>Надмірна вхідна потужність</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="41"/>
+      <source>Input polarity issue</source>
+      <translation>Проблема з полярністю входу</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="42"/>
+      <source>Input voltage absent</source>
+      <translation>Вхідна напруга відсутня</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="43"/>
+      <source>Input shutdown (no retries)</source>
+      <translation>Вимкнення входу (без повторних спроб)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="44"/>
+      <source>Input shutdown (retry)</source>
+      <translation>Вимкнення входу (повторна спроба)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="45"/>
+      <source>Input internal failure</source>
+      <translation>Внутрішня несправність входу</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="47"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="48"/>
+      <source>PV isolation failure</source>
+      <translation>Збій ізоляції PV</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="49"/>
+      <source>Ground fault detected</source>
+      <translation>Виявлено замикання на землю</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="51"/>
       <source>Inverter overload</source>
       <translation>Перевантаження інвертора</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="83"/>
-      <source>Inverter overload on L1</source>
-      <translation>Перевантаження інвертора на L1</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="52"/>
+      <source>Inverter temp too high</source>
+      <translation>Надто висока температура інвертора</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="247"/>
-      <source>Temperature sense error</source>
-      <translation>Помилка датчика температури</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="53"/>
+      <source>Inverter peak current</source>
+      <translation>Піковий струм інвертора</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="248"/>
-      <source>Voltage sense error</source>
-      <translation>Помилка датчика напруги</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="54"/>
+      <source>Inverter internal DC level</source>
+      <translation>Внутрішній рівень постійного струму інвертора</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="249"/>
-      <source>Low battery voltage</source>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="55"/>
+      <source>Inverter wrong ACout level</source>
+      <translation>Неправильний вихідний рівень змінного струму інвертора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="56"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="57"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="59"/>
+      <source>Inverter powerstage fault</source>
+      <translation>Несправність інвертора(powerstage)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="58"/>
+      <source>Inverter connected to AC</source>
+      <translation>Інвертор підключений до мережі змінного струму</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="60"/>
+      <source>ACIN1 relay test fault</source>
+      <translation>Не вдалося перевірити реле входу змінного струму 1</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="61"/>
+      <source>ACIN2 relay test fault</source>
+      <translation>Не вдалося перевірити реле входу змінного струму 2</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="63"/>
+      <source>Device disappeared</source>
+      <translation>Пристрій зник</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="64"/>
+      <source>Incompatible device</source>
+      <translation>Несумісний пристрій</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="65"/>
+      <source>BMS connection lost</source>
+      <translation>Втрачено з’єднання BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="66"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="67"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="68"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="69"/>
+      <source>Network misconfigured</source>
+      <translation>Мережа неправильно налаштована</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="70"/>
+      <source>Phase rotation</source>
+      <translation>Чергування фаз</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="71"/>
+      <source>Multiple AC inputs</source>
+      <translation>Кілька входів змінного струму</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="72"/>
+      <source>Phase overload</source>
+      <translation>Перевантаження по фазі</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="74"/>
+      <source>Memory write error</source>
+      <translation>Помилка запису в пам'ять</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="75"/>
+      <source>CPU temperature too high</source>
+      <translation>Занадто висока температура ЦП</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="76"/>
+      <source>Communication lost</source>
+      <translation>Втрачено зв'язок</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="77"/>
+      <source>Calibration data lost</source>
+      <translation>Дані калібрування втрачено</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="78"/>
+      <source>Incompatible firmware</source>
+      <translation>Несумісна прошивка</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="79"/>
+      <source>Incompatible hardware</source>
+      <translation>Несумісне обладнання</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="80"/>
+      <source>Settings invalid</source>
+      <translation>Налаштування недійсні</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="81"/>
+      <source>Reference voltage failed</source>
+      <translation>Збій контрольної напруги</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="82"/>
+      <source>Tester fail</source>
+      <translation>Помилка тестера</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="83"/>
+      <source>History invalid</source>
+      <translation>Історія недійсна</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="84"/>
+      <source>kWh counters invalid</source>
+      <translation>лічильники кВт-год недійсні</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="86"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="87"/>
+      <source>DC voltage error</source>
+      <translation>Помилка напруги постійного струму</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="88"/>
+      <source>GFCI sensor error</source>
+      <translation>Помилка датчика GFCI</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="89"/>
+      <source>3V3 supply error</source>
+      <translation>Помилка живлення 3V3</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="90"/>
+      <source>5V supply error</source>
+      <translation>Помилка живлення 5 В</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="91"/>
+      <source>12V supply error</source>
+      <translation>Помилка живлення 12V</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="92"/>
+      <source>15V supply error</source>
+      <translation>Помилка живлення 15 В</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="94"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="95"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="96"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="97"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="98"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="99"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="100"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="101"/>
+      <source>PV Input shutdown</source>
+      <translation>Вимкнення PV входу</translation>
+    </message>
+  </context>
+  <context>
+    <name>PageAcInSetup</name>
+    <message>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="125"/>
+      <source>Set the switch in an unlocked position to modify the settings.</source>
+      <translation>Щоб змінити налаштування, встановіть перемикач у розблоковане положення.</translation>
+    </message>
+  </context>
+  <context>
+    <name>VebusError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="10"/>
+      <source>Device switched off</source>
+      <translation>Пристрій вимкнено</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="13"/>
+      <source>Mixed old/new MK2</source>
+      <translation>Змішаний старий/новий MK2</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="16"/>
+      <source>Expected devices error</source>
+      <translation>Очікувана помилка пристроїв</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="19"/>
+      <source>No other device detected</source>
+      <translation>Інші пристрої не виявлено</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="22"/>
+      <source>Overvoltage on AC-out</source>
+      <translation>Перенапруга на виході змінного струму</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="25"/>
+      <source>DDC program error</source>
+      <translation>Помилка програми DDC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="28"/>
+      <source>VE.Bus BMS without assistant</source>
+      <translation>VE.Bus BMS без асистента</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="31"/>
+      <source>Ground relay test failed</source>
+      <translation>Не вдалося перевірити реле захисту від замикання на землю</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="34"/>
+      <source>System time sync error</source>
+      <translation>Помилка синхронізації системного часу</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="37"/>
+      <source>Grid relay test fault</source>
+      <translation>Не вдалося перевірити реле мережі</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="40"/>
+      <source>Config mismatch with 2nd mcu</source>
+      <translation>Невідповідність конфігурації другому мікроконтролеру</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="43"/>
+      <source>Device transmit error</source>
+      <translation>Помилка передачі пристрою</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="46"/>
+      <source>Awaiting configuration or dongle missing</source>
+      <translation>Очікується налаштування або відсутній адаптер</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="49"/>
+      <source>Phase master missing</source>
+      <translation>Відсутній головний фази</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="52"/>
+      <source>Overvoltage has occurred</source>
+      <translation>Виникла перенапруга</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="55"/>
+      <source>Slave does not have AC input!</source>
+      <translation>Керований пристрій не має входу змінного струму!</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="58"/>
+      <source>Device can't be slave</source>
+      <translation>Пристрій не може бути керованим</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="61"/>
+      <source>System protection initiated</source>
+      <translation>Ініційовано захист системи</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="64"/>
+      <source>Firmware incompatibiltiy</source>
+      <translation>Несумісність мікропрограми</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="67"/>
+      <source>Internal error</source>
+      <translation>Внутрішня помилка</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="70"/>
+      <source>Failing relay test prevents connection</source>
+      <translation>Тест поламаного реле блокує звʼязок</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="73"/>
+      <source>VE.Bus error</source>
+      <translation>Помилка VE.Bus</translation>
+    </message>
+  </context>
+  <context>
+    <name>Wakespeed</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="138"/>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="143"/>
+      <source>Unknown error: </source>
+      <translation>Невідома помилка: </translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="151"/>
+      <source>Internal error</source>
+      <translation>Внутрішня помилка</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="156"/>
+      <source>No error</source>
+      <translation>Помилки немає</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="159"/>
+      <source>Battery high temperature</source>
+      <translation>Висока температура акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="162"/>
+      <source>Battery high voltage</source>
+      <translation>Висока напруга акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="165"/>
+      <source>Battery low voltage</source>
       <translation>Низька напруга акумуляторної батареї</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="250"/>
-      <source>High DC ripple</source>
-      <translation>Високі пульсації постійного струму</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="168"/>
+      <source>Battery voltage exceeded configured max</source>
+      <translation>Напруга акумуляторної батареї перевищує налаштований максимум</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="251"/>
-      <source>Wrong phase rotation detected</source>
-      <translation>Виявлено неправильне чергування фаз</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
+      <source>Battery temperature shorted</source>
+      <translation>Коротке замикання акумулятора</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="257"/>
-      <source>High Temperature on L2</source>
-      <translation>Висока температура на L2</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="175"/>
+      <source>Alternator high temperature</source>
+      <translation>Висока температура генератора змінного струму</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="258"/>
-      <source>Inverter overload on L2</source>
-      <translation>Перенавантаження інвертора на L2</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="178"/>
+      <source>Alternator high RPM</source>
+      <translation>Високі оберти генератора змінного струму</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="260"/>
-      <source>High Temperature on L3</source>
-      <translation>Висока температура на L3</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="181"/>
+      <source>Field drive FET high temperature</source>
+      <translation>Висока температура польового транзистора FET</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="261"/>
-      <source>Inverter overload on L3</source>
-      <translation>Перенавантаження інвертора на L3</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="184"/>
+      <source>Required sensor missing</source>
+      <translation>Відсутній потрібний датчик</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="264"/>
-      <source>Grid lost</source>
-      <translation>Енергомережа втрачена</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="187"/>
+      <source>Alternator low voltage</source>
+      <translation>Низька напруга генератора змінного струму</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="267"/>
-      <source>High DC voltage</source>
-      <translation>Висока напруга постійного струму</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="190"/>
+      <source>Alternator high voltage offset</source>
+      <translation>Зміщення високої напруги генератора змінного струму</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="268"/>
-      <source>High DC current</source>
-      <translation>Високий постійний струм</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="193"/>
+      <source>Alternator Voltage exceeded configured max</source>
+      <translation>Напруга генератора змінного струму перевищує налаштований максимум</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="196"/>
+      <source>Alternator high voltage</source>
+      <translation>Високовольтний генератор змінного струму</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="199"/>
+      <source>Battery disconnected</source>
+      <translation>Акумуляторну батарею від’єднано</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="202"/>
+      <source>Battery high voltage disconnect</source>
+      <translation>Від’єднання за високої напруги акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="205"/>
+      <source>Battery instance ouf of range</source>
+      <translation>Екземпляр акумуляторної батареї поза зоною</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="208"/>
+      <source>Too many BMS's</source>
+      <translation>Надто багато BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="211"/>
+      <source>Battery about to disconnect</source>
+      <translation>Акумуляторна батарея скоро від’єднається</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="214"/>
+      <source>Too many devices to track</source>
+      <translation>Занадто багато пристроїв для відстеження</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="217"/>
+      <source>Battery low voltage disconnect</source>
+      <translation>Від’єднання за низької напруги акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="220"/>
+      <source>Battery high current disconnect</source>
+      <translation>Від’єднання за високого струму акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="223"/>
+      <source>Battery high temperature disconnect</source>
+      <translation>Від’єднання за високої температури акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="226"/>
+      <source>Battery low temperature disconnect</source>
+      <translation>Від’єднання за низької температури акумуляторної батареї</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="229"/>
+      <source>BMS connection lost</source>
+      <translation>Втрачено з’єднання BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="232"/>
+      <source>ATC Disabled</source>
+      <translation>ATC вимкнено</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="235"/>
+      <source>DC/DC converter not ready</source>
+      <translation>Перетворювач пост. ст./пост. ст. не готовий</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="238"/>
+      <source>DC/DC high primary voltage</source>
+      <translation>Висока первинна напруга пост. ст./пост. ст.</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="241"/>
+      <source>DC/DC low primary voltage</source>
+      <translation>Низька первинна напруга пост. ст./пост. ст.</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="244"/>
+      <source>DC/DC high secondary voltage</source>
+      <translation>Висока вторинна напруга пост. ст./пост. ст.</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="247"/>
+      <source>DC/DC low secondary voltage</source>
+      <translation>Низька вторинна напруга пост. ст./пост. ст.</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="250"/>
+      <source>DC/DC high temperature</source>
+      <translation>Висока температура пост. ст./пост. ст.</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="253"/>
+      <source>DC/DC misconfiguration</source>
+      <translation>Неправильна конфігурація пост. ст./пост. ст.</translation>
     </message>
   </context>
 </TS>

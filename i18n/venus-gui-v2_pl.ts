@@ -122,139 +122,129 @@
       <translation>Sterowanie zewnętrzne</translation>
     </message>
     <message id="brief_loads">
-      <location filename="../../pages/BriefMonitorPanel.qml" line="343"/>
+      <location filename="../../pages/BriefMonitorPanel.qml" line="284"/>
       <source>Loads</source>
       <translation>Obciążenia</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="45"/>
+      <location filename="../../pages/LevelsPage.qml" line="49"/>
       <source>Tanks</source>
       <translation>Zbiorniki</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="47"/>
+      <location filename="../../pages/LevelsPage.qml" line="51"/>
       <source>Environment</source>
       <translation>Środowisko</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="60"/>
+      <location filename="../../pages/NotificationsPage.qml" line="150"/>
       <source>No current alerts</source>
       <translation>Brak aktualnych alertów</translation>
     </message>
     <message id="settings_bluetooth">
-      <location filename="../../pages/SettingsPage.qml" line="110"/>
+      <location filename="../../pages/SettingsPage.qml" line="114"/>
       <source>Bluetooth</source>
       <translation>Bluetooth</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="33"/>
+      <location filename="../../pages/SettingsPage.qml" line="37"/>
       <source>General</source>
       <translation>Ogólne</translation>
     </message>
-    <message id="settings_device_list">
-      <location filename="../../pages/SettingsPage.qml" line="28"/>
-      <source>Device List</source>
-      <translation>Lista urządzeń</translation>
-    </message>
     <message id="settings_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="38"/>
+      <location filename="../../pages/SettingsPage.qml" line="42"/>
       <source>Firmware</source>
       <translation>Firmware</translation>
     </message>
     <message id="settings_date_and_time">
-      <location filename="../../pages/SettingsPage.qml" line="43"/>
+      <location filename="../../pages/SettingsPage.qml" line="47"/>
       <source>Date &amp; Time</source>
       <translation>Data i godzina</translation>
     </message>
     <message id="settings_remote_console">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <location filename="../../pages/SettingsPage.qml" line="52"/>
       <source>Remote Console</source>
       <translation>Konsola Zdalna</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="53"/>
+      <location filename="../../pages/SettingsPage.qml" line="57"/>
       <source>System setup</source>
       <translation>Konfiguracja systemu</translation>
     </message>
     <message id="settings_system_dvcc">
-      <location filename="../../pages/SettingsPage.qml" line="58"/>
+      <location filename="../../pages/SettingsPage.qml" line="62"/>
       <source>DVCC</source>
       <translation>DVCC</translation>
     </message>
     <message id="settings_display_and_language">
-      <location filename="../../pages/SettingsPage.qml" line="63"/>
+      <location filename="../../pages/SettingsPage.qml" line="67"/>
       <source>Display &amp; Language</source>
       <translation>Wyświetlacz i język</translation>
     </message>
     <message id="settings_vrm_online_portal">
-      <location filename="../../pages/SettingsPage.qml" line="68"/>
+      <location filename="../../pages/SettingsPage.qml" line="72"/>
       <source>VRM online portal</source>
       <translation>Portal VRM</translation>
     </message>
     <message id="settings_ess">
-      <location filename="../../pages/SettingsPage.qml" line="73"/>
+      <location filename="../../pages/SettingsPage.qml" line="77"/>
       <source>ESS</source>
       <translation>ESS</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/SettingsPage.qml" line="78"/>
+      <location filename="../../pages/SettingsPage.qml" line="82"/>
       <source>Energy meters</source>
       <translation>Liczniki energii</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/SettingsPage.qml" line="83"/>
+      <location filename="../../pages/SettingsPage.qml" line="87"/>
       <source>PV inverters</source>
       <translation>Inwertery PV</translation>
     </message>
     <message id="settings_ethernet">
-      <location filename="../../pages/SettingsPage.qml" line="88"/>
+      <location filename="../../pages/SettingsPage.qml" line="92"/>
       <source>Ethernet</source>
       <translation>Ethernet</translation>
     </message>
     <message id="settings_wifi">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="97"/>
       <source>Wi-Fi</source>
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_gsm_modem">
-      <location filename="../../pages/SettingsPage.qml" line="100"/>
+      <location filename="../../pages/SettingsPage.qml" line="104"/>
       <source>GSM modem</source>
       <translation>Modem GSM</translation>
     </message>
     <message id="settings_gps">
-      <location filename="../../pages/SettingsPage.qml" line="105"/>
+      <location filename="../../pages/SettingsPage.qml" line="109"/>
       <source>GPS</source>
       <translation>GPS</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/SettingsPage.qml" line="116"/>
+      <location filename="../../pages/SettingsPage.qml" line="120"/>
       <source>Generator start/stop</source>
       <translation>Start/stop generatora</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/SettingsPage.qml" line="121"/>
+      <location filename="../../pages/SettingsPage.qml" line="125"/>
       <source>Tank pump</source>
       <translation>Pompa zbiornika</translation>
     </message>
     <message id="settings_services">
-      <location filename="../../pages/SettingsPage.qml" line="131"/>
+      <location filename="../../pages/SettingsPage.qml" line="135"/>
       <source>Services</source>
       <translation>Usługi</translation>
     </message>
     <message id="settings_io">
-      <location filename="../../pages/SettingsPage.qml" line="136"/>
+      <location filename="../../pages/SettingsPage.qml" line="140"/>
       <source>I/O</source>
       <translation>I/O</translation>
     </message>
     <message id="settings_venus_os_large_features">
-      <location filename="../../pages/SettingsPage.qml" line="141"/>
+      <location filename="../../pages/SettingsPage.qml" line="145"/>
       <source>Venus OS Large features</source>
       <translation>Funkcje Venus OS Large</translation>
-    </message>
-    <message id="settings_vrm_device_instances">
-      <location filename="../../pages/SettingsPage.qml" line="147"/>
-      <source>VRM Device Instances</source>
-      <translation>Instancje Urządzenia VRM</translation>
     </message>
     <message id="ess_battery_life_limit">
       <location filename="../../pages/controlcards/ESSCard.qml" line="72"/>
@@ -262,27 +252,27 @@
       <translation>Limit żywotności akumulatora: %1%</translation>
     </message>
     <message id="controlcard_generator_disableautostartdialog_description">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="73"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="72"/>
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
       <translation>Autostart zostanie wyłączony, a generator nie uruchomi się automatycznie w oparciu o skonfigurowane warunki.</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="96"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="94"/>
       <source>The generator will start and stop based on the configured autostart conditions.</source>
       <translation>Generator uruchomi się i zatrzyma w oparciu o skonfigurowane warunki autostartu.</translation>
     </message>
     <message id="controlcard_generator_subcard_button_manual_stop">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="126"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="124"/>
       <source>Manual Stop</source>
       <translation>Ręczne Zatrzymanie</translation>
     </message>
     <message id="controlcard_generator_subcard_button_manual_start">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="129"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="127"/>
       <source>Manual Start</source>
       <translation>Ręczny Start</translation>
     </message>
-    <message id="controlcard_generator_label_autostart">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="43"/>
+    <message id="evcs_autostart">
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="44"/>
       <source>Autostart</source>
       <translation>Autostart</translation>
     </message>
@@ -382,17 +372,17 @@
       <translation>Nazwa</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="65"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="66"/>
       <source>Product ID</source>
       <translation>Produkt ID</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="78"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="79"/>
       <source>Hardware version</source>
       <translation>Wersja sprzętowa</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="99"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="100"/>
       <source>Device name</source>
       <translation>Nazwa urządzenia</translation>
     </message>
@@ -435,11 +425,6 @@
       <location filename="../../pages/settings/PageGenerator.qml" line="144"/>
       <source>Running now</source>
       <translation>Pracuje</translation>
-    </message>
-    <message id="settings_page_relay_generator_auto_start_enabled">
-      <location filename="../../pages/settings/PageGenerator.qml" line="151"/>
-      <source>Auto start functionality</source>
-      <translation>Funkcja automatycznego startu</translation>
     </message>
     <message id="settings_page_relay_generator_manual_start">
       <location filename="../../pages/settings/PageGenerator.qml" line="158"/>
@@ -540,11 +525,6 @@
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="72"/>
       <source>Stop generator when AC-input is available</source>
       <translation>Zatrzymaj generator, gdy dostępne jest wejście AC</translation>
-    </message>
-    <message id="page_generator_conditions_make_sure_generator_is_not_connected">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="88"/>
-      <source>Make sure that the generator is not connected to AC input %1 when using this option.</source>
-      <translation>Upewnij się, że generator nie jest podłączony do wejścia AC %1 podczas korzystania z tej opcji.</translation>
     </message>
     <message id="page_generator_conditions_battery_soc">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="96"/>
@@ -759,11 +739,6 @@
       <source>Continuous scanning</source>
       <translation>Skanowanie ciągłe</translation>
     </message>
-    <message id="settings_continuous_scan_may_interfere">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="53"/>
-      <source>Continuous scanning may interfere with Wi-Fi operation</source>
-      <translation>Ciągłe skanowanie może zakłócać działanie sieci Wi-Fi</translation>
-    </message>
     <message id="settings_io_bluetooth_adapters">
       <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="59"/>
       <source>Bluetooth adapters</source>
@@ -895,22 +870,22 @@
       <translation>Adaptacyjna jasność</translation>
     </message>
     <message id="settings_brightness">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="27"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="26"/>
       <source>Brightness</source>
       <translation>Jasność</translation>
     </message>
     <message id="settings_display_off_time">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="34"/>
       <source>Display off time</source>
       <translation>Czas wyłączenia wyświetlacza</translation>
     </message>
     <message id="settings_displayoff_10sec">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="40"/>
       <source>10 sec</source>
       <translation>10 s</translation>
     </message>
     <message id="settings_displayoff_30sec">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="42"/>
       <source>30 sec</source>
       <translation>30 s</translation>
     </message>
@@ -930,46 +905,41 @@
       <translation>30 min</translation>
     </message>
     <message id="settings_displayoff_never">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="50"/>
       <source>Never</source>
       <translation>Nigdy</translation>
     </message>
     <message id="settings_display_color_mode">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="59"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="56"/>
       <source>Display mode</source>
       <translation>Tryb wyświetlania</translation>
     </message>
     <message id="settings_display_dark_mode">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="60"/>
       <source>Dark</source>
       <extracomment>Dark colors mode</extracomment>
       <translation>Ciemny</translation>
     </message>
     <message id="settings_display_light_mode">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="66"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="63"/>
       <source>Light</source>
       <extracomment>Light colors mode</extracomment>
       <translation>Jasny</translation>
     </message>
     <message id="settings_brief_view_levels">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="77"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="74"/>
       <source>Brief view levels</source>
       <translation>Poziomy szybkiego podglądu</translation>
     </message>
     <message id="settings_language">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="82"/>
       <source>Language</source>
       <translation>Język</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="137"/>
       <source>Changing language</source>
       <translation>Zmiana języka</translation>
-    </message>
-    <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="138"/>
-      <source>Please wait while the language is changed</source>
-      <translation>Poczekaj na zmianę języka</translation>
     </message>
     <message id="settings_units_energy">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="18"/>
@@ -987,7 +957,7 @@
       <translation>Prąd (A)</translation>
     </message>
     <message id="settings_units">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="145"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="153"/>
       <source>Units</source>
       <translation>Jednostki</translation>
     </message>
@@ -1018,11 +988,6 @@
       <source>&lt;b&gt;CAUTION:&lt;/b&gt; Read the manual before adjusting.</source>
       <translation>&lt;b&gt;UWAGA:&lt;/b&gt; Przeczytaj instrukcję przed dopasowaniem.</translation>
     </message>
-    <message id="settings_dvcc_charge_current_limits">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="31"/>
-      <source>Charge Current limits</source>
-      <translation>Limity Prądu Ładowania</translation>
-    </message>
     <message id="settings_dvcc_limit_managed_battery_charge_voltage">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="40"/>
       <source>Limit managed battery charge voltage</source>
@@ -1044,7 +1009,7 @@
       <translation>STS - Współdzielony czujnik temperatury</translation>
     </message>
     <message id="settings_tank_unavailable_sensor">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="70"/>
       <source>Unavailable sensor, set another</source>
       <translation>Czujnik niedostępny, ustaw inny</translation>
     </message>
@@ -1394,52 +1359,42 @@
       <translation>Minimalny czas pracy</translation>
     </message>
     <message id="page_settings_generator_warm_up_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="56"/>
       <source>Warm-up time</source>
       <translation>Czas nagrzewania</translation>
     </message>
     <message id="page_settings_generator_cool_down_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="65"/>
       <source>Cool-down time</source>
       <translation>Czas schładzania</translation>
     </message>
     <message id="page_settings_generator_detect_generator_at_ac_input">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="89"/>
       <source>Detect generator at AC input</source>
       <translation>Wykryj generator na wejściu AC</translation>
     </message>
     <message id="page_settings_generator_detect_generator_not_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="96"/>
       <source>None of the AC inputs is set to generator. Go to the system setup page and set the correct AC input to generator in order to enable this functionality.</source>
       <translation>Żadne z wejść AC nie jest ustawione na generator. Przejdź do strony konfiguracji systemu i ustaw właściwe wejście AC na generator, aby włączyć tę funkcjonalność.</translation>
     </message>
     <message id="page_settings_generator_detect_generator_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="75"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="100"/>
       <source>An alarm will be triggered when no power from the generator is detected at the inverter AC input. Make sure that the correct AC input is set to generator on the system setup page.</source>
       <translation>Alarm zostanie uruchomiony, gdy na wejściu AC inwertera nie zostanie wykryte zasilanie z generatora. Upewnij się, że prawidłowe wejście AC jest ustawione na generator na stronie konfiguracji systemu.</translation>
     </message>
-    <message id="page_settings_generator_alarm_when_not_in_auto_start">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="96"/>
-      <source>Alarm when generator is not in auto start mode</source>
-      <translation>Alarm, gdy generator nie jest w trybie automatycznego startu</translation>
-    </message>
-    <message id="page_settings_generator_alarm_info">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="102"/>
-      <source>An alarm will be triggered when auto start function is left disabled for more than 10 minutes.</source>
-      <translation>Alarm zostanie wyzwolony, gdy funkcja automatycznego uruchamiania pozostanie wyłączona przez ponad 10 minut.</translation>
-    </message>
     <message id="page_settings_generator_quiet_hours_start_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="142"/>
       <source>Quiet hours start time</source>
       <translation>Czas rozpoczęcia godzin ciszy</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_end_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="150"/>
       <source>Quiet hours end time</source>
       <translation>Czas zakończenia godzin ciszy</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="158"/>
       <source>Run time and service</source>
       <translation>Czas pracy i obsługa</translation>
     </message>
@@ -1477,11 +1432,6 @@
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="90"/>
       <source>Reset service timer</source>
       <translation>Resetowanie zegara serwisowego</translation>
-    </message>
-    <message id="page_settings_generator_service_timer_has_been_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
-      <source>The service timer has been reset.</source>
-      <translation>Zegar serwisowy został zresetowany.</translation>
     </message>
     <message id="settings_gps_settings">
       <location filename="../../pages/settings/PageSettingsGpsList.qml" line="67"/>
@@ -1751,16 +1701,6 @@ Próg wyrownywania jest ustawiany za pomocą ustawienia limitu prądu wejściowe
 
 Więcej informacji znjdziesz w dokumentacji.</translation>
     </message>
-    <message id="settings_ess_do_not_perform_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
-      <source>Use this option in systems that do not perform peak shaving.</source>
-      <translation>Używaj tej opcji w systemach, które nie przeprowadzają wyrównywania obciążeń szczytowych.</translation>
-    </message>
-    <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
-      <source>BatteryLife state</source>
-      <translation>Stan BatteryLife</translation>
-    </message>
     <message id="settings_ess_battery_life_discharge_disabled">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="174"/>
       <source>Discharge disabled</source>
@@ -1842,17 +1782,17 @@ Więcej informacji znjdziesz w dokumentacji.</translation>
       <translation>Ograniczenie dopływu zasilania aktywne</translation>
     </message>
     <message id="settings_io_analog_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="29"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="32"/>
       <source>Analog inputs</source>
       <translation>Wejścia analogowe</translation>
     </message>
     <message id="settings_io_digital_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="60"/>
       <source>Digital inputs</source>
       <translation>Wejścia cyfrowe</translation>
     </message>
     <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="76"/>
       <source>Digital input %1</source>
       <extracomment>%1 = number of the digital input</extracomment>
       <translation>Wejście cyfrowe %1</translation>
@@ -1898,7 +1838,7 @@ Więcej informacji znjdziesz w dokumentacji.</translation>
       <translation>Alarm CO2</translation>
     </message>
     <message id="settings_io_bt_sensors">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="106"/>
       <source>Bluetooth sensors</source>
       <translation>Czujniki Bluetooth</translation>
     </message>
@@ -1916,11 +1856,6 @@ Dokumentacja na https://ve3.nl/vol</translation>
       <source>Signal K</source>
       <translation>Sygnał K</translation>
     </message>
-    <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
-      <source>Access Signal K at http://venus.local:3000 and via VRM</source>
-      <translation>Dostęp do sygnału K na stronie http://venus.local:3000 i przez VRM.</translation>
-    </message>
     <message id="settings_large_node_red">
       <location filename="../../pages/settings/PageSettingsLarge.qml" line="39"/>
       <source>Node-RED</source>
@@ -1930,11 +1865,6 @@ Dokumentacja na https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/PageSettingsLarge.qml" line="47"/>
       <source>Enabled (safe mode)</source>
       <translation>Włączone (tryb bezpieczny)</translation>
-    </message>
-    <message id="settings_large_access_node_red">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="53"/>
-      <source>Access Node-RED at https://venus.local:1881 and via VRM</source>
-      <translation>Uzyskaj dostęp do Node-RED na https://venus.local:1881 i przez VRM</translation>
     </message>
     <message id="settings_logging_time_ago_deferred">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="22"/>
@@ -2430,16 +2360,6 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <source>Has DC system</source>
       <translation>Posiada system DC</translation>
     </message>
-    <message id="settings_system_battery_measurements">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="144"/>
-      <source>Battery Measurements</source>
-      <translation>Pomiary akumulatora</translation>
-    </message>
-    <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="150"/>
-      <source>System Status</source>
-      <translation>Status systemu</translation>
-    </message>
     <message id="settings_system_status_sync_vebus_soc_with_battery">
       <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="16"/>
       <source>Synchronize VE.Bus SOC with battery</source>
@@ -2460,33 +2380,34 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <source>Solar charger current control</source>
       <translation>Regulacja prądu ładowarki słonecznej</translation>
     </message>
-    <message id="settings_system_status_bms_params">
-      <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="44"/>
+    <message id="charger_network_bms_control">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="129"/>
       <source>BMS control</source>
+      <oldsource>BMS Control</oldsource>
       <translation>Kontrola BMS</translation>
     </message>
     <message id="settings_pump_function_not_enabled">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="38"/>
       <source>Tank pump start/stop function is not enabled. Go to relay settings and set function to "Tank pump".</source>
       <translation>Funkcja uruchamiania/zatrzymywania pompy zbiornika nie jest włączona. Przejdź do ustawień przekaźnika i ustaw funkcję na "Pompa zbiornika".</translation>
     </message>
     <message id="settings_pump_state">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="48"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="47"/>
       <source>Pump state</source>
       <translation>Stan pompy</translation>
     </message>
     <message id="settings_tank_sensor">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="67"/>
       <source>Tank sensor</source>
       <translation>Czujnik zbiornika</translation>
     </message>
     <message id="settings_tank_start_level">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="90"/>
       <source>Start level</source>
       <translation>Poziom początkowy</translation>
     </message>
     <message id="settings_tank_stop_level">
-      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="99"/>
       <source>Stop level</source>
       <translation>Poziom końcowy</translation>
     </message>
@@ -2833,16 +2754,6 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <source>Charge voltage</source>
       <translation>Napięcie ładowania</translation>
     </message>
-    <message id="charger_network_bms_controlled">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="121"/>
-      <source>BMS Controlled</source>
-      <translation>Kontrolowane przez BMS</translation>
-    </message>
-    <message id="charger_network_bms_control">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="129"/>
-      <source>BMS Control</source>
-      <translation>Kontrola BMS</translation>
-    </message>
     <message id="charger_network_bms_control_reset">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="132"/>
       <source>Reset</source>
@@ -2858,11 +2769,6 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <location filename="../../pages/solar/SolarChargerPage.qml" line="119"/>
       <source>Load</source>
       <translation>Ładowanie</translation>
-    </message>
-    <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="141"/>
-      <source>Alarms and Errors</source>
-      <translation>Alarmy i błędy</translation>
     </message>
     <message id="charger_history_found_with_count">
       <location filename="../../pages/solar/SolarChargerPage.qml" line="146"/>
@@ -2980,11 +2886,6 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <source>Max charging current</source>
       <translation>Maksymalny prąd ładowania</translation>
     </message>
-    <message id="evcs_auto_start">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="44"/>
-      <source>Auto start</source>
-      <translation>Automatyczny start</translation>
-    </message>
     <message id="evcs_lock_charger_display">
       <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="50"/>
       <source>Lock charger display</source>
@@ -3071,7 +2972,7 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <translation>Nieobsługiwany</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="237"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="238"/>
       <source>Remove disconnected devices</source>
       <translation>Usuń odłączone urządzenia</translation>
     </message>
@@ -3237,42 +3138,42 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <translation>Czas do końca</translation>
     </message>
     <message id="battery_details">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="199"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="200"/>
       <source>Details</source>
       <translation>Szczegóły</translation>
     </message>
     <message id="battery_module_level_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="223"/>
       <source>Module level alarms</source>
       <translation>Alarmy na poziomie modułu</translation>
     </message>
     <message id="battery_settings_diagnostics">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="252"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="253"/>
       <source>Diagnostics</source>
       <translation>Diagnostyka</translation>
     </message>
     <message id="battery_settings_fuses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="277"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="278"/>
       <source>Fuses</source>
       <translation>Bezpieczniki</translation>
     </message>
     <message id="battery_settings_io">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="293"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="294"/>
       <source>IO</source>
       <translation>IO</translation>
     </message>
     <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="308"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="309"/>
       <source>System</source>
       <translation>System</translation>
     </message>
     <message id="battery_settings_parameters">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="331"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="332"/>
       <source>Parameters</source>
       <translation>Parametry</translation>
     </message>
     <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="356"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="357"/>
       <source>Redetect Battery</source>
       <translation>Ponowne wykrycie Akumulatora</translation>
     </message>
@@ -3282,7 +3183,7 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <translation>Naciśnij, aby wykryć ponownie</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="365"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="366"/>
       <source>Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect.</source>
       <translation>Ponowne wykrycie akumulatora może potrwać do 60 sekund. Tymczasem nazwa akumulatora może być nieprawidłowa.</translation>
     </message>
@@ -3593,11 +3494,6 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <source>Time-to-go averaging period</source>
       <translation>Okres uśredniania pozostałego czasu prscy</translation>
     </message>
-    <message id="batterysettingsbattery_time_to_go_discharge_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
-      <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu</source>
-      <translation>Należy pamiętać, że zmiana ustawienia Czasu do wyładowania zmienia również ustawienie Niski stan naładowania w menu przekaźnika</translation>
-    </message>
     <message id="batterysettingsbattery_time_to_go_discharge_floor">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="129"/>
       <source>Time-to-go discharge floor</source>
@@ -3826,7 +3722,7 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <translation>Pozostało</translation>
     </message>
     <message id="temperature_sensor_battery">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="77"/>
       <source>Sensor battery</source>
       <translation>Akumulator czujników</translation>
     </message>
@@ -4604,11 +4500,6 @@ Pierwsze użycie? Upewnij się, że ustawiłeś lub wyłączyłeś sprawdzanie h
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SOC %1%</translation>
     </message>
-    <message id="settings_page_debug_quit_application">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="35"/>
-      <source>Quit Application</source>
-      <translation>Zakończ Aplikację</translation>
-    </message>
     <message id="pulsecounter_setup_inverted">
       <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="20"/>
       <source>Inverted</source>
@@ -4881,21 +4772,6 @@ Czy chcesz kontynuować?</translation>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="110"/>
       <source>Press to interrupt</source>
       <translation>Naciśnij, aby przerwać</translation>
-    </message>
-    <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="119"/>
-      <source>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</source>
-      <translation>Ta funkcja wymaga oprogramowania w wersji 400 lub wyższej, skontaktuj się z instalatorem w celu aktualizacji urządzenia Multi/Quattro.</translation>
-    </message>
-    <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="125"/>
-      <source>Charger not ready, equalization cannot be started.</source>
-      <translation>Ładowarka nie jest gotowa, nie można rozpocząć wyrównania.</translation>
-    </message>
-    <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
-      <source>Equalization cannot be triggered during bulk charge state.</source>
-      <translation>Wyrównanie nie może zostać włączone w czasie trwania fazy Bulk.</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="152"/>
@@ -5192,11 +5068,6 @@ Czy chcesz kontynuować?</translation>
       <extracomment>Shown below the minimum state of charge, as configured by the user</extracomment>
       <translation>O ile sieć nie zawiedzie</translation>
     </message>
-    <message id="ess_recommended">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="71"/>
-      <source>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</source>
-      <translation>W przypadku akumulatorów litowych nie zaleca się stosowania wartości poniżej 10%. Dla innych typów akumulatorów należy w instrukcji minimum zalecane przez producenta minimum.</translation>
-    </message>
     <message id="common_words_ac_in">
       <location filename="../../components/CommonWords.qml" line="14"/>
       <source>AC In</source>
@@ -5362,7 +5233,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Rozładowanie</translation>
     </message>
     <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="276"/>
+      <location filename="../../components/Utils.js" line="302"/>
       <source>Disconnected</source>
       <translation>Odłączone</translation>
     </message>
@@ -5661,7 +5532,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Numer seryjny</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../components/NavBar.qml" line="55"/>
+      <location filename="../../components/NavBar.qml" line="81"/>
       <source>Settings</source>
       <translation>Ustawienia</translation>
     </message>
@@ -5808,12 +5679,6 @@ Czy chcesz kontynuować?</translation>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Uzysk</translation>
     </message>
-    <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="469"/>
-      <source>Yield today</source>
-      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
-      <translation>Uzysk dziś</translation>
-    </message>
     <message id="common_words_zero_feed_in_power_limit">
       <location filename="../../components/CommonWords.qml" line="472"/>
       <source>Zero feed-in power limit</source>
@@ -5934,7 +5799,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Zamiana</translation>
     </message>
     <message id="environment_gauge_humidity">
-      <location filename="../../components/EnvironmentGaugePanel.qml" line="122"/>
+      <location filename="../../components/EnvironmentGaugePanel.qml" line="131"/>
       <source>RH</source>
       <extracomment>Abbreviation of "Room Humidity"</extracomment>
       <translation>RH</translation>
@@ -5960,18 +5825,13 @@ Czy chcesz kontynuować?</translation>
       <source>Error during firmware installation</source>
       <translation>Błąd podczas instalacji oprogramowania</translation>
     </message>
-    <message id="settings_firmware_installed_rebooting">
-      <location filename="../../components/FirmwareUpdate.qml" line="59"/>
-      <source>Firmware installed, rebooting.</source>
-      <translation>Oprogramowanie zainstalowane, restart.</translation>
-    </message>
     <message id="settings_firmware_no_newer_version_available">
-      <location filename="../../components/FirmwareUpdate.qml" line="122"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="154"/>
       <source>No newer version available</source>
       <translation>Brak nowszej wersji</translation>
     </message>
     <message id="settings_firmware_no_firmware_found">
-      <location filename="../../components/FirmwareUpdate.qml" line="125"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="157"/>
       <source>No firmware found</source>
       <translation>Nie znaleziono oprogramowania</translation>
     </message>
@@ -6046,38 +5906,41 @@ Czy chcesz kontynuować?</translation>
       <translation>Nieprawidłowe hasło</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../components/NavBar.qml" line="31"/>
+      <location filename="../../components/NavBar.qml" line="57"/>
       <source>Brief</source>
       <translation>Krótki</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../components/NavBar.qml" line="37"/>
+      <location filename="../../components/NavBar.qml" line="63"/>
       <source>Overview</source>
       <translation>Przegląd</translation>
     </message>
     <message id="nav_levels">
-      <location filename="../../components/NavBar.qml" line="43"/>
+      <location filename="../../components/NavBar.qml" line="69"/>
       <source>Levels</source>
       <translation>Poziomy</translation>
     </message>
     <message id="nav_notifications">
-      <location filename="../../components/NavBar.qml" line="49"/>
+      <location filename="../../components/NavBar.qml" line="75"/>
       <source>Notifications</source>
       <translation>Powiadomienia</translation>
     </message>
-    <message id="notifications_page_now">
-      <location filename="../../components/NotificationDelegate.qml" line="25"/>
+    <message id="utils_formatTimestamp_now">
+      <location filename="../../components/Utils.js" line="260"/>
       <source>now</source>
+      <extracomment>Indicates an event happened very recently</extracomment>
       <translation>teraz</translation>
     </message>
-    <message id="%1m ago">
-      <location filename="../../components/NotificationDelegate.qml" line="29"/>
+    <message id="utils_formatTimestamp_min_ago">
+      <location filename="../../components/Utils.js" line="265"/>
       <source>%1m ago</source>
+      <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>%1m temu</translation>
     </message>
-    <message id="%1h %2m ago">
-      <location filename="../../components/NotificationDelegate.qml" line="35"/>
+    <message id="utils_formatTimestamp_hours_min_ago">
+      <location filename="../../components/Utils.js" line="272"/>
       <source>%1h %2m ago</source>
+      <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>%1h %2m temu</translation>
     </message>
     <message id="cgwacs_battery_schedule_every_day">
@@ -6433,7 +6296,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Rozłączono, próba ponownego połączenia</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="262"/>
+      <location filename="../../components/Utils.js" line="288"/>
       <source>Connecting</source>
       <translation>Łączenie</translation>
     </message>
@@ -6493,7 +6356,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Błąd poziomu 5 protokołu MQTT</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="112"/>
+      <location filename="../../components/StatusBar.qml" line="110"/>
       <source>Silence alarm</source>
       <translation>Wyciszenie alarmu</translation>
     </message>
@@ -6538,17 +6401,17 @@ Czy chcesz kontynuować?</translation>
       <translation>0m</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="259"/>
+      <location filename="../../components/Utils.js" line="285"/>
       <source>Failure</source>
       <translation>Porażka</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="265"/>
+      <location filename="../../components/Utils.js" line="291"/>
       <source>Retrieving IP address</source>
       <translation>Pobieranie adresu IP</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="272"/>
+      <location filename="../../components/Utils.js" line="298"/>
       <source>Disconnect</source>
       <translation>Odłącz</translation>
     </message>
@@ -6836,23 +6699,13 @@ Czy chcesz kontynuować?</translation>
       <source>Manually started</source>
       <translation>Uruchomiono ręczne</translation>
     </message>
-    <message id="notifications_warning_title_inverter_temperature">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="15"/>
-      <source>Inverter temperature</source>
-      <translation>Temperatura inwertera</translation>
-    </message>
-    <message id="notifications_warning_description_inverter_temperature">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="17"/>
-      <source>Suggest user an action or inaction, inform about status.  This text can be long and should wrap.</source>
-      <translation>Sugeruje użytkownikowi działanie lub brak działania, informuje o statusie. Ten tekst może być długi i powinien się zawijać.</translation>
-    </message>
     <message id="notifications_toast_short_text">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="21"/>
+      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="13"/>
       <source>Mollitia quis est quas deleniti quibusdam explicabo quasi.</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi.</translation>
     </message>
     <message id="notifications_toast_long_text">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="24"/>
+      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="16"/>
       <source>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
@@ -7032,7 +6885,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Tylko inwerter</translation>
     </message>
     <message id="controlcard_generator_disableautostartdialog_title">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="70"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="69"/>
       <source>Disable autostart?</source>
       <oldsource>Disable Autostart?</oldsource>
       <translation>Wyłączyć autostart?</translation>
@@ -7045,7 +6898,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Falownik / ładowarka (%1)</translation>
     </message>
     <message id="settings_page_debug_application_version">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="85"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="78"/>
       <source>Application version</source>
       <translation>Wersja aplikacji</translation>
     </message>
@@ -7075,44 +6928,44 @@ Czy chcesz kontynuować?</translation>
       <translation>Czas świadczenia usługi</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="157"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="165"/>
       <source>Onscreen UI (GX Touch &amp; Ekrano)</source>
       <translation>Interfejs ekranowy (GX Touch i Ekrano)</translation>
     </message>
     <message id="settings_display_standard_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="171"/>
       <source>Standard version</source>
       <translation>Wersja standardowa</translation>
     </message>
     <message id="settings_display_beta_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="173"/>
       <source>Gui-v2 (beta) version</source>
       <translation>Wersja Gui-v2 (beta).</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="188"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="196"/>
       <source>Restarting application...</source>
       <translation>Ponowne uruchamianie aplikacji...</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="190"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="198"/>
       <source>Application restarted</source>
       <translation>Aplikacja uruchomiona ponownie</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="194"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="202"/>
       <source>Onscreen UI will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Interfejs ekranowy zostanie przełączony na %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="197"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="205"/>
       <source>Onscreen UI has switched to %1.</source>
       <extracomment>%1 = the UI version that the system has switched to.</extracomment>
       <translation>Interfejs ekranowy został przełączony na %1.</translation>
     </message>
     <message id="settings_language_no_browser_support">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="105"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="102"/>
       <source>(no browser support)</source>
       <translation>(brak obsługi przeglądarki)</translation>
     </message>
@@ -7248,13 +7101,198 @@ Czy chcesz kontynuować?</translation>
       <source>Minimum battery voltage</source>
       <translation>Minimalne napięcie akumulatora</translation>
     </message>
-  </context>
-  <context>
-    <name>PageAcInSetup</name>
-    <message>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="125"/>
-      <source>Set switch in an unlocked position to change settings</source>
-      <translation>W celu zmiany ustawień ustawić przełącznik w pozycji odblokowanej</translation>
+    <message id="ess_recommended">
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="71"/>
+      <source>For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer.</source>
+      <oldsource>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</oldsource>
+      <translation>W przypadku baterii litowych nie zaleca się ładowania poniżej 10%. W przypadku innych typów baterii należy sprawdzić w arkuszu danych minimalny poziom zalecany przez producenta.</translation>
+    </message>
+    <message id="settings_page_debug_quit_application">
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="36"/>
+      <source>Quit application</source>
+      <oldsource>Quit Application</oldsource>
+      <translation>Zakończ Aplikację</translation>
+    </message>
+    <message id="settings_page_debug_quit">
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="39"/>
+      <source>Quit</source>
+      <translation>Odejdź</translation>
+    </message>
+    <message id="batterysettingsbattery_time_to_go_discharge_note">
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
+      <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu.</source>
+      <oldsource>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu</oldsource>
+      <translation>Należy pamiętać, że zmiana ustawienia czasu do rozładowania podłogi powoduje również zmianę ustawienia niskiego stanu naładowania w menu przekaźnika.</translation>
+    </message>
+    <message id="settings_page_relay_generator_auto_start_enabled">
+      <location filename="../../pages/settings/PageGenerator.qml" line="151"/>
+      <source>Autostart functionality</source>
+      <oldsource>Auto start functionality</oldsource>
+      <translation>Funkcja automatycznego uruchamiania</translation>
+    </message>
+    <message id="page_generator_conditions_make_sure_generator_is_not_connected">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="88"/>
+      <source>Make sure that the generator is not connected to AC input %1 when using this option</source>
+      <oldsource>Make sure that the generator is not connected to AC input %1 when using this option.</oldsource>
+      <translation>Upewnij się, że generator nie jest podłączony do wejścia AC %1 podczas korzystania z tej opcji</translation>
+    </message>
+    <message id="page_settings_generator_service_timer_has_been_reset">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
+      <source>The service timer has been reset</source>
+      <oldsource>The service timer has been reset.</oldsource>
+      <translation>Licznik czasu usługi został zresetowany</translation>
+    </message>
+    <message id="settings_continuous_scan_may_interfere">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="53"/>
+      <source>Continuous scanning may interfere with Wi-Fi operation.</source>
+      <oldsource>Continuous scanning may interfere with Wi-Fi operation</oldsource>
+      <translation>Ciągłe skanowanie może zakłócać działanie sieci Wi-Fi.</translation>
+    </message>
+    <message id="settings_language_change_failed">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="140"/>
+      <source>Failed to change language!</source>
+      <translation>Nie udało się zmienić języka!</translation>
+    </message>
+    <message id="settings_language_please_wait">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="142"/>
+      <source>Please wait while the language is changed.</source>
+      <oldsource>Please wait while the language is changed</oldsource>
+      <translation>Poczekaj na zmianę języka.</translation>
+    </message>
+    <message id="settings_dvcc_charge_current_limits">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="31"/>
+      <source>Charge current limits</source>
+      <oldsource>Charge Current limits</oldsource>
+      <translation>Limity prądu ładowania</translation>
+    </message>
+    <message id="settings_page_generator_warm_up_cool_down">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="43"/>
+      <source>Warm-up &amp; cool-down</source>
+      <translation>Rozgrzewka i ochłonięcie</translation>
+    </message>
+    <message id="page_settings_generator_stop_time">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="74"/>
+      <source>Generator stop time</source>
+      <translation>Czas zatrzymania generatora</translation>
+    </message>
+    <message id="page_settings_generator_alarm_when_not_in_auto_start">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="121"/>
+      <source>Alarm when generator is not in autostart mode</source>
+      <oldsource>Alarm when generator is not in auto start mode</oldsource>
+      <translation>Alarm, gdy generator nie jest w trybie autostartu</translation>
+    </message>
+    <message id="page_settings_generator_alarm_info">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="127"/>
+      <source>An alarm will be triggered when autostart function is left disabled for more than 10 minutes</source>
+      <oldsource>An alarm will be triggered when auto start function is left disabled for more than 10 minutes.</oldsource>
+      <translation>Alarm zostanie wyzwolony, gdy funkcja autostartu pozostanie wyłączona przez ponad 10 minut.</translation>
+    </message>
+    <message id="settings_ess_do_not_perform_peak_shaving">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
+      <source>Use this option in systems that do not perform peak shaving</source>
+      <oldsource>Use this option in systems that do not perform peak shaving.</oldsource>
+      <translation>Opcji tej należy używać w systemach, które nie wykonują oszczędzania szczytowego</translation>
+    </message>
+    <message id="settings_ess_batteryLife_state">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
+      <source>Battery life state</source>
+      <oldsource>BatteryLife state</oldsource>
+      <translation>Stan żywotności baterii</translation>
+    </message>
+    <message id="settings_large_access_signal_k">
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
+      <source>Access Signal K at http://venus.local:3000 and via VRM.</source>
+      <oldsource>Access Signal K at http://venus.local:3000 and via VRM</oldsource>
+      <translation>Dostęp do sygnału K na stronie http://venus.local:3000 i za pośrednictwem VRM.</translation>
+    </message>
+    <message id="settings_large_access_node_red">
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="53"/>
+      <source>Access Node-RED at https://venus.local:1881 and via VRM.</source>
+      <oldsource>Access Node-RED at https://venus.local:1881 and via VRM</oldsource>
+      <translation>Dostęp do Node-RED na stronie https://venus.local:1881 i za pośrednictwem VRM.</translation>
+    </message>
+    <message id="settings_system_battery_measurements">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="144"/>
+      <source>Battery measurements</source>
+      <oldsource>Battery Measurements</oldsource>
+      <translation>Pomiary baterii</translation>
+    </message>
+    <message id="settings_system_system_status">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="150"/>
+      <source>System status</source>
+      <oldsource>System Status</oldsource>
+      <translation>Status systemu</translation>
+    </message>
+    <message id="settings_device_list">
+      <location filename="../../pages/SettingsPage.qml" line="32"/>
+      <source>Device list</source>
+      <oldsource>Device List</oldsource>
+      <translation>Lista urządzeń</translation>
+    </message>
+    <message id="settings_vrm_device_instances">
+      <location filename="../../pages/SettingsPage.qml" line="151"/>
+      <source>VRM device instances</source>
+      <oldsource>VRM Device Instances</oldsource>
+      <translation>Instancje Urządzenia VRM</translation>
+    </message>
+    <message id="charger_network_bms_controlled">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="121"/>
+      <source>BMS controlled</source>
+      <oldsource>BMS Controlled</oldsource>
+      <translation>BMS Kontrolowane</translation>
+    </message>
+    <message id="charger_alarms_alarms_and_errors">
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="141"/>
+      <source>Alarms &amp; Errors</source>
+      <oldsource>Alarms and Errors</oldsource>
+      <translation>Alarmy i błędy</translation>
+    </message>
+    <message id="vebus_device_update_firmware">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="119"/>
+      <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
+      <oldsource>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</oldsource>
+      <translation>Ta funkcja wymaga oprogramowania sprzętowego w wersji 400 lub nowszej. Aby zaktualizować urządzenie Multi/Quattro, należy skontaktować się z instalatorem.</translation>
+    </message>
+    <message id="vebus_device_charger_not_ready">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="125"/>
+      <source>Charger not ready, equalization cannot be started</source>
+      <oldsource>Charger not ready, equalization cannot be started.</oldsource>
+      <translation>Ładowarka nie jest gotowa, nie można uruchomić wyrównywania</translation>
+    </message>
+    <message id="vebus_device_no_equalisation_during_bulk">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
+      <source>Equalization cannot be triggered during bulk charge state</source>
+      <oldsource>Equalization cannot be triggered during bulk charge state.</oldsource>
+      <translation>Wyrównanie nie może zostać uruchomione w stanie ładowania zbiorczego</translation>
+    </message>
+    <message id="common_words_yield_today">
+      <location filename="../../components/CommonWords.qml" line="469"/>
+      <source>Yield Today</source>
+      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
+      <oldsource>Yield today</oldsource>
+      <translation>Wydajność w dniu dzisiejszym</translation>
+    </message>
+    <message id="settings_firmware_installed_rebooting">
+      <location filename="../../components/FirmwareUpdate.qml" line="59"/>
+      <source>Firmware installed, device rebooting</source>
+      <oldsource>Firmware installed, rebooting.</oldsource>
+      <translation>Zainstalowane oprogramowanie sprzętowe, ponowne uruchomienie urządzenia</translation>
+    </message>
+    <message id="notification_description_and_value">
+      <location filename="../../components/NotificationDelegate.qml" line="77"/>
+      <source>%1 %2</source>
+      <extracomment>%1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')</extracomment>
+      <translation>%1 %2</translation>
+    </message>
+    <message id="firmware_installed_build_version_update_detected">
+      <location filename="../../pages/DialogLayer.qml" line="29"/>
+      <source>Firmware version update detected</source>
+      <translation>Wykryto aktualizację wersji oprogramowania sprzętowego</translation>
+    </message>
+    <message id="firmware_installed_build_page_will_reload">
+      <location filename="../../pages/DialogLayer.qml" line="31"/>
+      <source>Page will automatically reload in ten seconds to load the latest version.</source>
+      <translation>Strona zostanie automatycznie przeładowana za dziesięć sekund, aby załadować najnowszą wersję.</translation>
     </message>
   </context>
   <context>
@@ -7862,293 +7900,6 @@ Czy chcesz kontynuować?</translation>
     </message>
   </context>
   <context>
-    <name>BatteryAlarms</name>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="316"/>
-      <source>Low voltage</source>
-      <translation>Niskie napięcie</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="317"/>
-      <source>High voltage</source>
-      <translation>Wysokie napięcie</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="318"/>
-      <source>High current</source>
-      <translation>Wysoki prąd</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="319"/>
-      <source>High charge current</source>
-      <translation>Wysoki prąd ładowania</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="320"/>
-      <source>High discharge current</source>
-      <translation>Wysoki prąd rozładowania</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="321"/>
-      <source>High charge temperature</source>
-      <translation>Wysoka temperatura ładowania</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="322"/>
-      <source>Low charge temperature</source>
-      <translation>Niska temperatura ładowania</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="323"/>
-      <source>Low SOC</source>
-      <translation>Niski SOC</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="324"/>
-      <source>State of health</source>
-      <translation>Stan ogólny</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="325"/>
-      <source>Low starter voltage</source>
-      <translation>Niskie napięcie rozruchowe</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="326"/>
-      <source>High starter voltage</source>
-      <translation>Wysokie napięcie rozruchowe</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="327"/>
-      <source>Low temperature</source>
-      <translation>Niska temperatura</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="328"/>
-      <source>High Temperature</source>
-      <translation>Wysoka temperatura</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="329"/>
-      <source>Mid-point voltage</source>
-      <translation>Napięcie środkowe</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="330"/>
-      <source>Low-fused voltage</source>
-      <translation>Niskie napięcie bezpieczników</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="331"/>
-      <source>High-fused voltage</source>
-      <translation>Wysokie napięcie bezpieczników</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="332"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="356"/>
-      <source>Fuse blown</source>
-      <translation>Przepalony bezpiecznik</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="333"/>
-      <source>High internal temperature</source>
-      <translation>Wysoka temperatura wewnętrzna</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="334"/>
-      <source>Internal failure</source>
-      <translation>Uszkodzenie wewnętrzne</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="335"/>
-      <source>Battery temperature sensor</source>
-      <translation>Czujnik temperatury akumulatora</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="336"/>
-      <source>Cell imbalance</source>
-      <translation>Brak równowagi komórkowej</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="337"/>
-      <source>Low cell voltage</source>
-      <translation>Niskie napięcie celi</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="338"/>
-      <source>Bad contactor</source>
-      <translation>Zły stycznik</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="339"/>
-      <source>BMS cable fault</source>
-      <translation>Usterka kabla BMS</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="353"/>
-      <source>Distributor %1 connection lost</source>
-      <translation>Utracono połączenie z dystrybutorem %1</translation>
-    </message>
-  </context>
-  <context>
-    <name>DBusTankService</name>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="181"/>
-      <source>Fuel</source>
-      <translation>Paliwo (L)</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="182"/>
-      <source>Fresh water</source>
-      <translation>Woda słodka</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="183"/>
-      <source>Waste water</source>
-      <translation>Ścieki</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="184"/>
-      <source>Live well</source>
-      <translation>Żyj dobrze</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="185"/>
-      <source>Oil</source>
-      <translation>Olej</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="186"/>
-      <source>Black water (sewage)</source>
-      <translation>Czarna woda (ścieki)</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="187"/>
-      <source>Fuel (gasoline)</source>
-      <translation>Paliwo (benzyna)</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="200"/>
-      <source>Unknown</source>
-      <translation>Nieznany</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/dbus_service.cpp" line="236"/>
-      <source>tank</source>
-      <translation>Zbiornik</translation>
-    </message>
-  </context>
-  <context>
-    <name>DeviceAlarms</name>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="45"/>
-      <source>Generator not detected at AC input</source>
-      <translation>Generator nie jest wykrywany na wejściu AC</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="63"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="74"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="85"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="101"/>
-      <source>Low battery voltage</source>
-      <translation>Niskie napięcie akumulatora</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="64"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="75"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="86"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="102"/>
-      <source>High battery voltage</source>
-      <translation>Wysokie napięcie akumulatora</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="87"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="103"/>
-      <source>Low AC voltage</source>
-      <translation>Niskie napięcie AC</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="88"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="104"/>
-      <source>High AC voltage</source>
-      <translation>Wysokie napięcie AC</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="89"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="159"/>
-      <source>Low temperature</source>
-      <translation>Niska temperatura</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="90"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="105"/>
-      <source>High temperature</source>
-      <translation>Wysoka temperatura</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="91"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="106"/>
-      <source>Inverter overload</source>
-      <translation>Przeciążenie falownika</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="92"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="107"/>
-      <source>High DC ripple</source>
-      <translation>Wysokie tętnienia prądu stałego</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="117"/>
-      <source>Circuit breaker tripped</source>
-      <translation>Zadziałał wyłącznik automatyczny</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="118"/>
-      <source>DVCC with incompatible firmware #48</source>
-      <translation>DVCC z niekompatybilnym firmware #48</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="136"/>
-      <source>Grid meter not found #49</source>
-      <translation>Nie znaleziono licznika sieci #49</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="145"/>
-      <source>Low level alarm</source>
-      <translation>Alarm niskiego poziomu</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="146"/>
-      <source>High level alarm</source>
-      <translation>Alarm wysokiego poziomu</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="155"/>
-      <source>Low voltage</source>
-      <translation>Niskie napięcie</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="156"/>
-      <source>High voltage</source>
-      <translation>Wysokie napięcie</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="157"/>
-      <source>Low aux voltage</source>
-      <translation>Niskie napięcie aux</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="158"/>
-      <source>High aux voltage</source>
-      <translation>Wysokie napięcie aux</translation>
-    </message>
-    <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="160"/>
-      <source>High Temperature</source>
-      <translation>Wysoka temperatura</translation>
-    </message>
-  </context>
-  <context>
     <name>QGuiApplication</name>
     <message>
       <location filename="../../src/main.cpp" line="97"/>
@@ -8248,88 +7999,864 @@ Czy chcesz kontynuować?</translation>
     </message>
   </context>
   <context>
-    <name>VebusAlarms</name>
+    <name>AlternatorError</name>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="82"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="282"/>
-      <source>High Temperature</source>
-      <translation>Wysoka temperatura</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="22"/>
+      <source>No error</source>
+      <translation>Brak błędu</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="82"/>
-      <source>High Temperature on L1</source>
-      <translation>Wysoka temperatura na L1</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="25"/>
+      <source>Unknown error: %1</source>
+      <translation>Nieznany błąd: %1</translation>
+    </message>
+  </context>
+  <context>
+    <name>BmsError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="10"/>
+      <source>No error</source>
+      <translation>Brak błędu</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="83"/>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="283"/>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="13"/>
+      <source>Battery initialization error</source>
+      <translation>Błąd inicjalizacji baterii</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="16"/>
+      <source>No batteries connected</source>
+      <translation>Brak podłączonych akumulatorów</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="19"/>
+      <source>Unknown battery</source>
+      <translation>Nieznany akumulator</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="22"/>
+      <source>Different battery types</source>
+      <translation>Różne rodzaje baterii</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="25"/>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="40"/>
+      <source>No. of batteries incorrect</source>
+      <translation>Liczba nieprawidłowych baterii</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="28"/>
+      <source>Lynx Shunt not found</source>
+      <translation>Lynx Shunt nie został znaleziony</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="31"/>
+      <source>Battery measure error</source>
+      <translation>Błąd pomiaru ak.</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="34"/>
+      <source>Internal calculation error</source>
+      <translation>Wewnętrzny błąd obliczeniowy</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="37"/>
+      <source>No. of batteries in series incorrect</source>
+      <translation>Liczba baterii w szeregu nieprawidłowa</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="44"/>
+      <source>Hardware error</source>
+      <translation>Błąd sprzętowy</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="47"/>
+      <source>Watchdog error</source>
+      <translation>Błąd układu Watchdog</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="50"/>
+      <source>Over voltage</source>
+      <translation>Nadmierne napięcie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="53"/>
+      <source>Under voltage</source>
+      <translation>Za niskie napięcie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="56"/>
+      <source>Over temperature</source>
+      <translation>Nadmierna temperatura</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="59"/>
+      <source>Under temperature</source>
+      <translation>Za niska temperatura</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="62"/>
+      <source>Under-charge standby</source>
+      <translation>Czuwanie w stanie niedoładowania</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="65"/>
+      <source>ADC error</source>
+      <translation>Błąd ADC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="68"/>
+      <source>Battery comm. error</source>
+      <translation>Błąd kom. akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="71"/>
+      <source>Pre-Charge error</source>
+      <translation>Błąd wstępnego ładowania</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="75"/>
+      <source>Safety contactor error</source>
+      <translation>Błąd stycznika bezpieczeństwa</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="79"/>
+      <source>Battery update error</source>
+      <translation>Błąd aktualizacji baterii</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="82"/>
+      <source>BMS cable error</source>
+      <translation>Błąd przewodu BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="85"/>
+      <source>Reference voltage failure</source>
+      <translation>Awaria napięcia odniesienia</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="88"/>
+      <source>Wrong system voltage</source>
+      <translation>Nieprawidłowe napięcie systemowe</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="91"/>
+      <source>Pre charge timeout</source>
+      <translation>Limit czasu ładowania wstępnego</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="94"/>
+      <source>ATC/ATD failure</source>
+      <translation>Awaria ATC/ATD</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="98"/>
+      <source>Calibration data lost</source>
+      <translation>Utrata danych kalibracyjnych</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="102"/>
+      <source>Settings invalid</source>
+      <translation>Ustawienia nieważne</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="105"/>
+      <source>Interlock</source>
+      <translation>Blokada</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="108"/>
+      <source>Emergency stop</source>
+      <translation>Wyłącznik awaryjny</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="111"/>
+      <source>Communication timeout</source>
+      <translation>Limit czasu komunikacji</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="114"/>
+      <source>Safety lock</source>
+      <translation>Blokada bezpieczeństwa</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/bms_error.cpp" line="117"/>
+      <source>Terminal over temperature</source>
+      <translation>Przekroczenie temperatury terminala</translation>
+    </message>
+  </context>
+  <context>
+    <name>ChargerError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="7"/>
+      <source>No error</source>
+      <translation>Brak błędu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="9"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="103"/>
+      <source>Battery high temperature</source>
+      <translation>Wysoka temperatura baterii</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="10"/>
+      <source>Battery high voltage</source>
+      <translation>Wysokie napięcie akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="11"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="12"/>
+      <source>Battery Tsense miswired</source>
+      <translation>Tsense ak. źle podłączony</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="13"/>
+      <source>Battery Tsense missing</source>
+      <translation>Brak baterii Tsense</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="14"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="15"/>
+      <source>Battery Vsense miswired</source>
+      <translation>Bateria Vsense źle podłączona</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="16"/>
+      <source>Battery Vsense missing</source>
+      <translation>Brak Vsense akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="17"/>
+      <source>Battery high wire losses</source>
+      <translation>Wysokie straty w przewodach aku.</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="18"/>
+      <source>Battery low voltage</source>
+      <translation>Niskie napięcie akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="19"/>
+      <source>Battery high ripple voltage</source>
+      <translation>Wysokie napięcie tętniące akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="20"/>
+      <source>Battery low state of charge</source>
+      <translation>Niski stan naładowania akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="21"/>
+      <source>Battery mid-point voltage issue</source>
+      <translation>Problem z napięciem środkowego punktu akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="22"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="104"/>
+      <source>Battery temperature too low</source>
+      <translation>Zbyt niska temperatura baterii</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="24"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="106"/>
+      <source>Charger high temperature</source>
+      <translation>Wysoka temperatura ładowarki</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="25"/>
+      <source>Charger excessive current</source>
+      <translation>Nadmierny prąd ładowarki</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="26"/>
+      <source>Charger negative current</source>
+      <translation>Ujemny prąd ładowarki</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="27"/>
+      <source>Charger bulk time expired</source>
+      <translation>Upłynął czas ładowania.</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="28"/>
+      <source>Charger current sensor issue</source>
+      <translation>Problem z czujnikiem prądu ładowarki</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="29"/>
+      <source>Internal Tsensor miswired</source>
+      <translation>Wewn. czujnik temperatury źle podłączony</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="30"/>
+      <source>Internal Tsensor missing</source>
+      <translation>Brak wewn. czujnika temperatury</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="31"/>
+      <source>Charger fan not detected</source>
+      <translation>Nie wykryto wentylatora ładowarki</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="32"/>
+      <source>Charger fan over-current</source>
+      <translation>Nadmierny prąd wentylatora ładowarki</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="33"/>
+      <source>Charger terminal overheat</source>
+      <translation>Przegrzanie terminala ładowarki</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="34"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="107"/>
+      <source>Charger short circuit</source>
+      <translation>Zwarcie w ładowarce</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="35"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="108"/>
+      <source>Charger power stage issue</source>
+      <translation>Problem ze stopniem mocy ładowarki</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="36"/>
+      <source>Over-charge protection</source>
+      <translation>Zabezpieczenie przed przeładowaniem</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="38"/>
+      <source>Input high voltage</source>
+      <translation>Wysokie napięcie wejściowe</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="39"/>
+      <source>Input excessive current</source>
+      <translation>Nadmierny prąd wejściowy</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="40"/>
+      <source>Input excessive power</source>
+      <translation>Nadmierna moc wejściowa</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="41"/>
+      <source>Input polarity issue</source>
+      <translation>Problem z polaryzacją wejścia</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="42"/>
+      <source>Input voltage absent</source>
+      <translation>Brak napięcia wejściowego</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="43"/>
+      <source>Input shutdown (no retries)</source>
+      <translation>Wyłączenie wejścia (bez ponawiania)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="44"/>
+      <source>Input shutdown (retry)</source>
+      <translation>Wyłączenie wejścia (ponowienie)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="45"/>
+      <source>Input internal failure</source>
+      <translation>Wewnętrzna awaria wejścia</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="47"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="48"/>
+      <source>PV isolation failure</source>
+      <translation>Awaria izolacji PV</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="49"/>
+      <source>Ground fault detected</source>
+      <translation>Wykryto zwarcie doziemne</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="51"/>
       <source>Inverter overload</source>
       <translation>Przeciążenie falownika</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.h" line="83"/>
-      <source>Inverter overload on L1</source>
-      <translation>Przeciążenie inwertera na L1</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="52"/>
+      <source>Inverter temp too high</source>
+      <translation>Za wysoka temperatura inwertera</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="247"/>
-      <source>Temperature sense error</source>
-      <translation>Błąd czujnika temperatury</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="53"/>
+      <source>Inverter peak current</source>
+      <translation>Prąd szczytowy przetwornicy</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="248"/>
-      <source>Voltage sense error</source>
-      <translation>Błąd czujnika napięcia</translation>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="54"/>
+      <source>Inverter internal DC level</source>
+      <translation>Wewnętrzny poziom DC przetwornicy</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="249"/>
-      <source>Low battery voltage</source>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="55"/>
+      <source>Inverter wrong ACout level</source>
+      <translation>Błędny poziom ACout przetwornicy</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="56"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="57"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="59"/>
+      <source>Inverter powerstage fault</source>
+      <translation>Błąd stopnia mocy przetwornicy</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="58"/>
+      <source>Inverter connected to AC</source>
+      <translation>Falownik podłączony do prądu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="60"/>
+      <source>ACIN1 relay test fault</source>
+      <translation>Błąd testu przekaźnika ACIN1</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="61"/>
+      <source>ACIN2 relay test fault</source>
+      <translation>Błąd testu przekaźnika ACIN2</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="63"/>
+      <source>Device disappeared</source>
+      <translation>Urządzenie zniknęło</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="64"/>
+      <source>Incompatible device</source>
+      <translation>Niekompatybilne urządzenie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="65"/>
+      <source>BMS connection lost</source>
+      <translation>Utrata połączenia z BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="66"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="67"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="68"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="69"/>
+      <source>Network misconfigured</source>
+      <translation>Sieć źle skonfigurowana</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="70"/>
+      <source>Phase rotation</source>
+      <translation>Obrót fazowy</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="71"/>
+      <source>Multiple AC inputs</source>
+      <translation>Wiele wejść AC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="72"/>
+      <source>Phase overload</source>
+      <translation>Przeciążenie fazy</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="74"/>
+      <source>Memory write error</source>
+      <translation>Błąd zapisu w pamięci</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="75"/>
+      <source>CPU temperature too high</source>
+      <translation>Zbyt wysoka temperatura procesora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="76"/>
+      <source>Communication lost</source>
+      <translation>Utracona łączność</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="77"/>
+      <source>Calibration data lost</source>
+      <translation>Utrata danych kalibracyjnych</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="78"/>
+      <source>Incompatible firmware</source>
+      <translation>Niekompatybilne oprogramowanie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="79"/>
+      <source>Incompatible hardware</source>
+      <translation>Niekompatybilny sprzęt</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="80"/>
+      <source>Settings invalid</source>
+      <translation>Ustawienia nieważne</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="81"/>
+      <source>Reference voltage failed</source>
+      <translation>Błąd napięcia referencyjnego</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="82"/>
+      <source>Tester fail</source>
+      <translation>Awaria testera</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="83"/>
+      <source>History invalid</source>
+      <translation>Historia nieważna</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="84"/>
+      <source>kWh counters invalid</source>
+      <translation>Nieprawidłowe liczniki kWh</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="86"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="87"/>
+      <source>DC voltage error</source>
+      <translation>Błąd napięcia DC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="88"/>
+      <source>GFCI sensor error</source>
+      <translation>Błąd sensora GFCI</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="89"/>
+      <source>3V3 supply error</source>
+      <translation>Błąd zasilania 3V3</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="90"/>
+      <source>5V supply error</source>
+      <translation>Błąd zasilania 5V</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="91"/>
+      <source>12V supply error</source>
+      <translation>Błąd zasilania 12V</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="92"/>
+      <source>15V supply error</source>
+      <translation>Błąd zasilania 15V</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="94"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="95"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="96"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="97"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="98"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="99"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="100"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="101"/>
+      <source>PV Input shutdown</source>
+      <translation>Wyłączenie wejścia PV</translation>
+    </message>
+  </context>
+  <context>
+    <name>PageAcInSetup</name>
+    <message>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="125"/>
+      <source>Set the switch in an unlocked position to modify the settings.</source>
+      <translation>Ustaw przełącznik w pozycji odblokowanej, aby zmodyfikować ustawienia.</translation>
+    </message>
+  </context>
+  <context>
+    <name>VebusError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="10"/>
+      <source>Device switched off</source>
+      <translation>Urządzenie wyłączone</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="13"/>
+      <source>Mixed old/new MK2</source>
+      <translation>Mieszane stare/nowe MK2</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="16"/>
+      <source>Expected devices error</source>
+      <translation>Oczekiwany błąd urządzeń</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="19"/>
+      <source>No other device detected</source>
+      <translation>Nie wykryto innego urządzenia</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="22"/>
+      <source>Overvoltage on AC-out</source>
+      <translation>Przepięcie na wyjściu AC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="25"/>
+      <source>DDC program error</source>
+      <translation>Błąd programu DDC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="28"/>
+      <source>VE.Bus BMS without assistant</source>
+      <translation>VE.Bus BMS bez asystenta</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="31"/>
+      <source>Ground relay test failed</source>
+      <translation>Test przekaźnika uziemienia nie powiódł się</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="34"/>
+      <source>System time sync error</source>
+      <translation>Błąd synchronizacji czasu systemowego</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="37"/>
+      <source>Grid relay test fault</source>
+      <translation>Błąd testu przekaźnika sieciowego</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="40"/>
+      <source>Config mismatch with 2nd mcu</source>
+      <translation>Niedopasowanie konfiguracji z drugim mcu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="43"/>
+      <source>Device transmit error</source>
+      <translation>Błąd transmisji urządzenia</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="46"/>
+      <source>Awaiting configuration or dongle missing</source>
+      <translation>Oczekiwanie na konfigurację lub brak adaptera</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="49"/>
+      <source>Phase master missing</source>
+      <translation>Brak matrycy fazowej</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="52"/>
+      <source>Overvoltage has occurred</source>
+      <translation>Wystąpiło przepięcie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="55"/>
+      <source>Slave does not have AC input!</source>
+      <translation>Slave nie ma wejścia AC!</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="58"/>
+      <source>Device can't be slave</source>
+      <translation>Urządzenie nie może być podrzędne</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="61"/>
+      <source>System protection initiated</source>
+      <translation>Zainicjowanie ochrony systemu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="64"/>
+      <source>Firmware incompatibiltiy</source>
+      <translation>Niekompatybilność oprogramowania sprzętowego</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="67"/>
+      <source>Internal error</source>
+      <translation>Błąd wewnętrzny</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="70"/>
+      <source>Failing relay test prevents connection</source>
+      <translation>Niepowodzenie testu przekaźnika uniemożliwia połączenie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="73"/>
+      <source>VE.Bus error</source>
+      <translation>Błąd VE.Bus</translation>
+    </message>
+  </context>
+  <context>
+    <name>Wakespeed</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="138"/>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="143"/>
+      <source>Unknown error: </source>
+      <translation>Nieznany błąd: </translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="151"/>
+      <source>Internal error</source>
+      <translation>Błąd wewnętrzny</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="156"/>
+      <source>No error</source>
+      <translation>Brak błędu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="159"/>
+      <source>Battery high temperature</source>
+      <translation>Wysoka temperatura baterii</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="162"/>
+      <source>Battery high voltage</source>
+      <translation>Wysokie napięcie akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="165"/>
+      <source>Battery low voltage</source>
       <translation>Niskie napięcie akumulatora</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="250"/>
-      <source>High DC ripple</source>
-      <translation>Wysokie tętnienia prądu stałego</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="168"/>
+      <source>Battery voltage exceeded configured max</source>
+      <translation>Napięcie akumulatora przekroczyło skonfigurowane maksimum</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="251"/>
-      <source>Wrong phase rotation detected</source>
-      <translation>Wykryto niewłaściwą rotację faz</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
+      <source>Battery temperature shorted</source>
+      <translation>Zwarcie temperatury akumulatora</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="257"/>
-      <source>High Temperature on L2</source>
-      <translation>Wysoka temperatura na L2</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="175"/>
+      <source>Alternator high temperature</source>
+      <translation>Wysoka temperatura alternatora</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="258"/>
-      <source>Inverter overload on L2</source>
-      <translation>Przeciążenie falownika na L2</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="178"/>
+      <source>Alternator high RPM</source>
+      <translation>Wysokie obroty alternatora</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="260"/>
-      <source>High Temperature on L3</source>
-      <translation>Wysoka temperatura na L3</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="181"/>
+      <source>Field drive FET high temperature</source>
+      <translation>Napęd polowy FET wysoka temperatura</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="261"/>
-      <source>Inverter overload on L3</source>
-      <translation>Przeciążenie inwertera na L3</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="184"/>
+      <source>Required sensor missing</source>
+      <translation>Brak wymaganego czujnika</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="264"/>
-      <source>Grid lost</source>
-      <translation>Utracona siatka</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="187"/>
+      <source>Alternator low voltage</source>
+      <translation>Niskie napięcie alternatora</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="267"/>
-      <source>High DC voltage</source>
-      <translation>Wysokie napięcie stałe</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="190"/>
+      <source>Alternator high voltage offset</source>
+      <translation>Zakres wysokiego napięcia alternatora</translation>
     </message>
     <message>
-      <location filename="../../src/gui-v1/alarmbusitem.cpp" line="268"/>
-      <source>High DC current</source>
-      <translation>Wysoki prąd DC</translation>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="193"/>
+      <source>Alternator Voltage exceeded configured max</source>
+      <translation>Napięcie alternatora przekroczyło skonfigurowane maksimum</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="196"/>
+      <source>Alternator high voltage</source>
+      <translation>Wysokie napięcie alternatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="199"/>
+      <source>Battery disconnected</source>
+      <translation>Akumulator odłączony</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="202"/>
+      <source>Battery high voltage disconnect</source>
+      <translation>Odłączenie wysokiego napięcia akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="205"/>
+      <source>Battery instance ouf of range</source>
+      <translation>Bateria poza zasięgiem</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="208"/>
+      <source>Too many BMS's</source>
+      <translation>Zbyt wiele BMS-ów</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="211"/>
+      <source>Battery about to disconnect</source>
+      <translation>Akumulator zaraz się rozłączy</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="214"/>
+      <source>Too many devices to track</source>
+      <translation>Zbyt wiele urządzeń do śledzenia</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="217"/>
+      <source>Battery low voltage disconnect</source>
+      <translation>Odłączenie niskiego napięcia akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="220"/>
+      <source>Battery high current disconnect</source>
+      <translation>Odłączenie wysokiego prądu akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="223"/>
+      <source>Battery high temperature disconnect</source>
+      <translation>Odłączenie wysokiej temperatury akumulatora</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="226"/>
+      <source>Battery low temperature disconnect</source>
+      <translation>Odłączenie akumulatora przy niskiej temperaturze</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="229"/>
+      <source>BMS connection lost</source>
+      <translation>Utrata połączenia z BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="232"/>
+      <source>ATC Disabled</source>
+      <translation>ATC Wyłączone</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="235"/>
+      <source>DC/DC converter not ready</source>
+      <translation>Konwerter DC/DC nie jest gotowy</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="238"/>
+      <source>DC/DC high primary voltage</source>
+      <translation>DC/DC wysokie napięcie pierwotne</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="241"/>
+      <source>DC/DC low primary voltage</source>
+      <translation>DC/DC niskie napięcie pierwotne</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="244"/>
+      <source>DC/DC high secondary voltage</source>
+      <translation>DC/DC wysokie napięcie wtórne</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="247"/>
+      <source>DC/DC low secondary voltage</source>
+      <translation>DC/DC niskie napięcie wtórne</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="250"/>
+      <source>DC/DC high temperature</source>
+      <translation>DC/DC wysoka temperatura</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="253"/>
+      <source>DC/DC misconfiguration</source>
+      <translation>Nieprawidłowa konfiguracja DC/DC</translation>
     </message>
   </context>
 </TS>
