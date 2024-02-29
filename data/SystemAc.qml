@@ -41,7 +41,7 @@ QtObject {
 			}
 			power = totalPower
 			if (index === 0) {
-				_firstPhaseCurrent = Units.sumRealNumbers(_firstPhaseCurrent, data.current)
+				_firstPhaseCurrent = data.current
 			}
 		}
 
