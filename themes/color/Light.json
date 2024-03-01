@@ -12,6 +12,7 @@
     "color_darkWarning": "color_darkOrange",
     "color_critical": "color_red",
     "color_darkCritical": "color_darkRed",
+    "color_critical_background": "#F58B87",
 
     "color_font_primary": "color_gray2",
     "color_font_secondary": "color_dimGray2",
