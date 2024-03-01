@@ -46,6 +46,12 @@ cmake_policy(SET CMP0079 NEW)
 project(venus-gui-v2 LANGUAGES CXX VERSION 0.2.13)
 add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR} -DPROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH} )
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/install CACHE PATH "..." FORCE)
+else()
+    include(GNUInstallDirs)
+endif()
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -701,13 +707,13 @@ if (${LOAD_QML_FROM_FILESYSTEM})
             ApplicationContent.qml
             FrameRateVisualizer.qml
             Global.qml
-        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/VenusOS)
+        DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/VenusOS)
     install(
         DIRECTORY
             components
             data
             pages
-        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/VenusOS)
+        DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/VenusOS)
 
     # Load all qml resources from the filesystem.
     # Qt6 cmake projects don't support this properly, see https://bugreports.qt.io/browse/QTBUG-120435
@@ -778,8 +784,8 @@ qt_add_qml_module(VictronDbus
 if (${LOAD_QML_FROM_FILESYSTEM})
     set(thisModule VictronDbus)
     qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(FILES ${module_qmldir}  DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Dbus)
-    install(DIRECTORY data/dbus     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Dbus/data)
+    install(FILES ${module_qmldir}  DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Dbus)
+    install(DIRECTORY data/dbus     DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Dbus/data)
     add_custom_command(
         TARGET ${thisModule}
         COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
@@ -833,8 +839,8 @@ qt_add_qml_module(VictronMock
 if (${LOAD_QML_FROM_FILESYSTEM})
     set(thisModule VictronMock)
     qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(FILES ${module_qmldir} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Mock)
-    install(DIRECTORY data         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Mock)
+    install(FILES ${module_qmldir} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Mock)
+    install(DIRECTORY data         DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Mock)
     add_custom_command(
         TARGET ${thisModule}
         COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
@@ -860,8 +866,8 @@ qt_add_qml_module(VictronGauges
 if (${LOAD_QML_FROM_FILESYSTEM})
     set(thisModule VictronGauges)
     qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(FILES ${module_qmldir}    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Gauges)
-    install(FILES ${module_qml_files} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Gauges/components)
+    install(FILES ${module_qmldir}    DESTINATION ${CMAKE_INSTALL_BINDIR}/Gauges)
+    install(FILES ${module_qml_files} DESTINATION ${CMAKE_INSTALL_BINDIR}/Gauges/components)
     add_custom_command(
         TARGET ${thisModule}
         COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
@@ -909,8 +915,8 @@ qt_add_qml_module(VictronMqtt
 if (${LOAD_QML_FROM_FILESYSTEM})
     set(thisModule VictronMqtt)
     qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(FILES ${module_qmldir} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Mqtt)
-    install(DIRECTORY data/mqtt    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/Victron/Mqtt/data)
+    install(FILES ${module_qmldir} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Mqtt)
+    install(DIRECTORY data/mqtt    DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Mqtt/data)
     add_custom_command(
         TARGET ${thisModule}
         COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
@@ -979,13 +985,13 @@ if (${LOAD_QML_FROM_FILESYSTEM})
     set(thisModule ${PROJECT_NAME})
     qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
     install(TARGETS ${thisModule}
-        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
         BUNDLE DESTINATION .
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     )
 
-    install(FILES ${module_qml_files} ${module_qmldir} $<TARGET_FILE:${thisModule}> DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install)
-    install(FILES $<TARGET_FILE:${thisModule}> DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
+    install(FILES ${module_qml_files} ${module_qmldir} $<TARGET_FILE:${thisModule}> DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(FILES $<TARGET_FILE:${thisModule}> DESTINATION ${CMAKE_INSTALL_BINDIR} PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
 
     add_custom_command(
         TARGET ${thisModule}
