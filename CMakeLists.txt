@@ -1003,7 +1003,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_simlocked_32.svg
         images/icon_warning_24.svg
         images/icon_alarm_48.svg
-        images/icon_alarm_snooze_24
+        images/icon_alarm_snooze_24.svg
         images/icon_autostart_24.svg
         images/icon_arrow_32.svg
         images/icon_charging_station_24.svg

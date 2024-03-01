@@ -86,12 +86,10 @@ Rectangle {
 		enabled: !!Global.notifications && Global.notifications.alert
 		opacity: enabled ? 1 : 0
 		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration} }
-		border.width: Theme.geometry_button_border_width
-		border.color: Theme.color_critical
 		leftPadding: Theme.geometry_notificationsPage_snoozeButton_horizontalMargin
 		rightPadding: Theme.geometry_notificationsPage_snoozeButton_horizontalMargin
 		height: Theme.geometry_notificationsPage_snoozeButton_height
-		backgroundColor: Theme.color_darkCritical
+		backgroundColor: Theme.color_critical_background
 		radius: Theme.geometry_button_radius
 		contentItem: Row {
 			anchors.verticalCenter: parent.verticalCenter
@@ -99,8 +97,8 @@ Rectangle {
 
 			CP.ColorImage {
 				anchors.verticalCenter: parent.verticalCenter
-				source: "qrc:/images/icon_alarm_snooze_24"
-				color: Theme.color_critical
+				source: "qrc:/images/icon_alarm_snooze_24.svg"
+				color: Theme.color_font_primary
 			}
 
 			Label {
@@ -108,7 +106,6 @@ Rectangle {
 				font.pixelSize: Theme.font_size_caption
 				//% "Silence alarm"
 				text: qsTrId("silence_alarm")
-				color: Theme.color_critical
 			}
 		}
 		onClicked: Global.notifications.acknowledgeAll()
