@@ -660,6 +660,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/quantityinfo.cpp
     src/units.h
     src/units.cpp
+    src/widgetconnectorpathupdater.h
+    src/widgetconnectorpathupdater.cpp
 )
 
 list(APPEND VenusQMLModule_CPP_SOURCES ${Units_CPP_SOURCES})
@@ -694,6 +696,7 @@ target_link_libraries(VenusQMLModule PRIVATE
     Qt6::Qml
     Qt6::Quick
     Qt6::Svg
+    Qt6::QuickPrivate
     Qt6::Xml
     Qt6::Mqtt
 )

@@ -25,10 +25,8 @@ Item {
 	property bool straight
 
 	readonly property bool _animated: _initialized && visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated && animationEnabled
-	property real _animationProgress
 
 	property real _electronTravelDistance
-	property real _electronFadeEnd
 
 	property bool _initialized
 
@@ -68,7 +66,7 @@ Item {
 
 			if (electronTravelDistance > 0) {
 				const fadeDistance = 2 * Theme.geometry_overviewPage_connector_anchor_width
-				_electronFadeEnd = (electronTravelDistance - fadeDistance) / electronTravelDistance
+				pathUpdater.fadeOutThreshold = (electronTravelDistance - fadeDistance) / electronTravelDistance
 			}
 		}
 
@@ -224,57 +222,26 @@ Item {
 				id: electronRepeater
 
 				delegate: Image {
-					id: electron
-
-					readonly property real progress: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
-							? animPathInterpolator.progress
-							: 1 - animPathInterpolator.progress
-
-					x: animPathInterpolator.x - width/2
-					y: animPathInterpolator.y - height/2
 					source: "qrc:/images/electron.svg"
-					rotation: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
-							  ? animPathInterpolator.angle
-							  : animPathInterpolator.angle + 180
 
-					// Fade out the electron just before it reaches the end of the path, so that it
-					// disappears nicely into the end anchor point, instead of disappearing abruptly.
-					opacity: progress > _electronFadeEnd ? 0 : 1
 					Behavior on opacity {
 						enabled: root._animated
 						OpacityAnimator {
 							duration: Theme.animation_overviewPage_connector_fade_duration
 						}
 					}
-
-					// Cannot use PathAnimation, because after the first animation loop it ignores the
-					// initial PathArc in the path.
-					PathInterpolator {
-						id: animPathInterpolator
-
-						path: animPath
-
-						// Evenly space out the progress of each electron
-						progress: Utils.modulo(root._animationProgress - ((1 / electronRepeater.count) * model.index), 1)
-					}
+					Component.onCompleted: pathUpdater.add(this)
+					Component.onDestruction: pathUpdater.remove(this)
 				}
 			}
 		}
 	}
 
-	// Create a separate Path for the animation, instead of using the ShapePath,
-	// because PathInterpolator does not work for ShapePath.
-	Path {
-		id: animPath
-
-		pathElements: connectorPath.pathElements
-	}
-
 	NumberAnimation {
 		id: electronAnim
 
-		target: root
-		property: "_animationProgress"
+		target: pathUpdater
+		property: "progress"
 
 		from: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
 			  ? 0
@@ -285,5 +252,17 @@ Item {
 
 		running: root._animated
 		loops: Animation.Infinite
+	}
+
+	WidgetConnectorPathUpdater {
+		id: pathUpdater
+
+		animationMode: root.animationMode
+
+		// Create a separate Path for the animation, instead of using the ShapePath,
+		// because WidgetConnectorPathUpdater does not work for ShapePath.
+		path: Path {
+			pathElements: connectorPath.pathElements
+		}
 	}
 }
