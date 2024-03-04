@@ -13,7 +13,7 @@
                  status.innerHTML = 'Loading...';
  
                  const instance = await qtLoad({
-+                    arguments: ['--mqtt', 'ws://' + document.location.host + ':9001/'],
++                    arguments: ['--mqtt', (location.protocol === 'https:' ? 'wss://' + document.location.host + '/websocket-mqtt' : 'ws://' + document.location.host + ':9001/')],
                      qt: {
                          onLoaded: () => showUi(screen),
                          onExit: exitData =>
