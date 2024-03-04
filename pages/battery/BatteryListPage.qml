@@ -109,7 +109,7 @@ Page {
 				anchors.fill: parent
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
-							{ "title": text, "bindPrefix": modelData })
+							{ "title": modelData.name, "battery": modelData })
 				}
 			}
 		}
