@@ -6353,7 +6353,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>MQTT-protokol niveau 5 fejl</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="110"/>
+      <location filename="../../components/StatusBar.qml" line="108"/>
       <source>Silence alarm</source>
       <translation>Sluk for alarmen</translation>
     </message>
@@ -6899,16 +6899,6 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Application version</source>
       <translation>Applikationsversion</translation>
     </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
-      <source>Startup aborted (rotation too low</source>
-      <translation>Opstart afbrudt (rotation for lav)</translation>
-    </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
-      <source>Startup aborted (rotation too high</source>
-      <translation>Opstart afbrudt (rotation for høj)</translation>
-    </message>
     <message id="fp-genset-error_no_connection">
       <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="255"/>
       <source>No connection</source>
@@ -7290,6 +7280,25 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <location filename="../../pages/DialogLayer.qml" line="31"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>Siden genindlæses automatisk om ti sekunder for at indlæse den nyeste version.</translation>
+    </message>
+    <message id="settings_cgwacs_no_energy_meters">
+      <location filename="../../pages/settings/PageSettingsCGwacsOverview.qml" line="39"/>
+      <source>No energy meters found
+
+Note that this menu only shows Carlo Gavazzi meters connected over RS485. For any other meter, including Carlo Gavazzi meters connected over ethernet, see the Modbus TCP/UDP devices menu instead.</source>
+      <translation>Ingen energimålere fundet
+
+Bemærk, at denne menu kun viser Carlo Gavazzi-målere, der er tilsluttet via RS485. For alle andre målere, herunder Carlo Gavazzi-målere, der er tilsluttet via ethernet, skal du i stedet se menuen Modbus TCP/UDP-enheder.</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_low)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
+      <source>Startup aborted (rotation too low)</source>
+      <translation>Opstart afbrudt (rotation for lav)</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_high)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
+      <source>Startup aborted (rotation too high)</source>
+      <translation>Opstart afbrudt (rotation for høj)</translation>
     </message>
   </context>
   <context>
