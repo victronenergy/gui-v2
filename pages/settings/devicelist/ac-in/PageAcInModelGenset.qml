@@ -182,18 +182,20 @@ ObjectModel {
 							unit: VenusOS.Units_RevolutionsPerMinute
 						}
 
-						ListTextItem {
+						ListQuantityItem {
 							//% "Load"
 							text: qsTrId("ac-in-genset_load")
 							dataItem.uid: root.bindPrefix + "/Engine/Load"
 							visible: defaultVisible && dataItem.isValid
+							unit: VenusOS.Units_Percentage
 						}
 
-						ListTextItem {
+						ListQuantityItem {
 							//% "Oil Pressure"
 							text: qsTrId("ac-in-genset_oil_pressure")
 							dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
 							visible: defaultVisible && dataItem.isValid
+							unit: VenusOS.Units_Kilopascal
 						}
 
 						ListTemperatureItem {
@@ -201,6 +203,7 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_coolant_temperature")
 							visible: defaultVisible && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
+							precision: 0
 						}
 
 						ListTemperatureItem {

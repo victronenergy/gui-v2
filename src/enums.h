@@ -87,6 +87,7 @@ public:
 		Units_RevolutionsPerMinute,
 		Units_Speed_MetresPerSecond,
 		Units_Hectopascal,
+		Units_Kilopascal,
 	};
 	Q_ENUM(Units_Type)
 
