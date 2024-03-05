@@ -220,6 +220,14 @@ ObjectModel {
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
 						}
 
+						ListTemperatureItem {
+							//% "Oil temperature"
+							text: qsTrId("ac-in-genset_oil_temperature")
+							visible: defaultVisible && dataItem.isValid
+							dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
+							precision: 0
+						}
+
 						ListTextItem {
 							//% "Operating time"
 							text: qsTrId("ac-in-genset_operating_time")
