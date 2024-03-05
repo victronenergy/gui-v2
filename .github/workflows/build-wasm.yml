@@ -109,6 +109,7 @@ jobs:
         grep -q -E '^var createQtAppInstance' artifacts/wasm/venus-gui-v2.js
         sed -i "s%^var \(createQtAppInstance\)%window.\1%" artifacts/wasm/venus-gui-v2.js
         cp .github/patches/Makefile artifacts/wasm/
+        cp LICENSE.txt artifacts/wasm/
         cd artifacts
         zip -r ../venus-webassembly.zip wasm
     - name: Upload wasm files
