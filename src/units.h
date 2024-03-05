@@ -39,13 +39,19 @@ class Units : public QObject
 	QML_SINGLETON
 
 public:
+	enum FormatHint {
+		CompactUnitFormat = 0x1
+	};
+	Q_ENUM(FormatHint)
+	Q_DECLARE_FLAGS(FormatHints, FormatHint)
+
 	explicit Units(QObject *parent = nullptr);
 	~Units() override;
 
 	static QObject* instance(QQmlEngine *engine, QJSEngine *);
 
 	Q_INVOKABLE int defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const;
-	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit) const;
+	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints) const;
 
 	Q_INVOKABLE QString scaleToString(VenusOS::Enums::Units_Scale scale) const;
 	Q_INVOKABLE bool isScalingSupported(VenusOS::Enums::Units_Type unit) const;
@@ -61,7 +67,8 @@ public:
 		qreal value,
 		VenusOS::Enums::Units_Scale previousScale,
 		int precision = -1,
-		qreal unitMatchValue = qQNaN()) const;
+		qreal unitMatchValue = qQNaN(),
+		int formatHints = 0) const;
 
 	Q_INVOKABLE QString getCombinedDisplayText(
 		VenusOS::Enums::Units_Type unit,
@@ -82,6 +89,7 @@ public:
 }
 }
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(Victron::Units::Units::FormatHints)
 Q_DECLARE_METATYPE(Victron::Units::quantityInfo)
 
 #endif // VICTRON_VENUSOS_GUI_V2_UNITS_H
