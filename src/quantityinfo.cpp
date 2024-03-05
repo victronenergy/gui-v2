@@ -16,6 +16,7 @@ QuantityInfo::QuantityInfo(QObject *parent)
 	connect(this, &QuantityInfo::valueChanged, this, &QuantityInfo::update);
 	connect(this, &QuantityInfo::precisionChanged, this, &QuantityInfo::update);
 	connect(this, &QuantityInfo::unitMatchValueChanged, this, &QuantityInfo::update);
+	connect(this, &QuantityInfo::formatHintsChanged, this, &QuantityInfo::update);
 }
 
 QuantityInfo::~QuantityInfo()
@@ -24,7 +25,7 @@ QuantityInfo::~QuantityInfo()
 
 void QuantityInfo::update() {
 	// Pass the previous value to allow hysteresis
-	quantity = qobject_cast<Units>(Units::instance(nullptr, nullptr)).getDisplayTextWithHysteresis(unitType, value, quantity.scale, precision, unitMatchValue);
+	quantity = qobject_cast<Units>(Units::instance(nullptr, nullptr)).getDisplayTextWithHysteresis(unitType, value, quantity.scale, precision, unitMatchValue, formatHints);
 	emit updated();
 }
 

@@ -187,5 +187,6 @@ Item {
 		}
 		font.pixelSize: Theme.font_size_h1
 		height: Theme.geometry_levelsPage_environment_gauge_quantityLabel_height
+		formatHints: Units.CompactUnitFormat
 	}
 }

@@ -9,6 +9,8 @@
 
 namespace {
 
+static const QString DegreesSymbol = QStringLiteral("\u00b0");
+
 Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
 {
 	switch (unit) {
@@ -76,7 +78,7 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	}
 }
 
-QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit) const
+QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints) const
 {
 	switch (unit) {
 	case VenusOS::Enums::Units_Watt:
@@ -97,11 +99,12 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit) const
 		return QStringLiteral("W/m2");
 	case VenusOS::Enums::Units_Percentage:
 		return QStringLiteral("%");
-	case VenusOS::Enums::Units_Temperature_Celsius:    // fall through
-	case VenusOS::Enums::Units_Temperature_Fahrenheit: // fall through
+	case VenusOS::Enums::Units_Temperature_Celsius:
+		return (formatHints & CompactUnitFormat) ? DegreesSymbol : DegreesSymbol + QLatin1Char('C');
+	case VenusOS::Enums::Units_Temperature_Fahrenheit:
+		return (formatHints & CompactUnitFormat) ? DegreesSymbol : DegreesSymbol + QLatin1Char('F');
 	case VenusOS::Enums::Units_Temperature_Kelvin:
-		// \u00b0 = degrees symbol
-		return  QStringLiteral("\u00b0");
+		return (formatHints & CompactUnitFormat) ? DegreesSymbol : DegreesSymbol + QLatin1Char('K');
 	case VenusOS::Enums::Units_Volume_Liter:
 		// \u2113 = l, \u3398 = kl
 		return QStringLiteral("\u2113");
@@ -122,7 +125,6 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit) const
 		return QString();
 	}
 }
-
 
 QString Units::scaleToString(VenusOS::Enums::Units_Scale scale) const {
 	switch (scale) {
@@ -180,12 +182,12 @@ quantityInfo Units::getDisplayText(
 	return getDisplayTextWithHysteresis(unit, value, VenusOS::Enums::Units_Scale_None /* skip hysteresis */, precision, unitMatchValue);
 }
 
-quantityInfo Units::getDisplayTextWithHysteresis(
-	VenusOS::Enums::Units_Type unit,
+quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit,
 	qreal value,
-		VenusOS::Enums::Units_Scale previousScale,
+	VenusOS::Enums::Units_Scale previousScale,
 	int precision,
-	qreal unitMatchValue) const
+	qreal unitMatchValue,
+	int formatHints) const
 {
 	// unit unknown
 	if (unit == VenusOS::Enums::Units_None) {
@@ -199,11 +201,11 @@ quantityInfo Units::getDisplayTextWithHysteresis(
 	if (qIsNaN(value)) {
 		quantityInfo qty;
 		qty.number = QStringLiteral("--");
-		qty.unit = defaultUnitString(unit);
+		qty.unit = defaultUnitString(unit, formatHints);
 		return qty;
 	}
 	quantityInfo quantity;
-	quantity.unit = defaultUnitString(unit);
+	quantity.unit = defaultUnitString(unit, formatHints);
 	quantity.scale = VenusOS::Enums::Units_Scale_None;
 
 	qreal scaledValue = value;
@@ -262,7 +264,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(
 
 			// If value is zero prefer kWh instead of Wh
 			if (scaledValue == 0 && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
-				quantity.unit = defaultUnitString(unit);
+				quantity.unit = defaultUnitString(unit, formatHints);
 			}
 		}
 	}

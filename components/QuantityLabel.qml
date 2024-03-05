@@ -16,6 +16,7 @@ Item {
 	property alias unitColor: unitLabel.color
 	property int alignment: Qt.AlignHCenter
 	property alias precision: quantityInfo.precision
+	property alias formatHints: quantityInfo.formatHints
 
 	implicitWidth: digitRow.width
 	implicitHeight: digitRow.height

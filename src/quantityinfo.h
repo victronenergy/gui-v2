@@ -29,6 +29,7 @@ class QuantityInfo : public QObject
 	Q_PROPERTY(qreal unitMatchValue MEMBER unitMatchValue NOTIFY unitMatchValueChanged)
 	Q_PROPERTY(int precision MEMBER precision NOTIFY precisionChanged)
 	Q_PROPERTY(Victron::VenusOS::Enums::Units_Type unitType MEMBER unitType NOTIFY inputChanged)
+	Q_PROPERTY(int formatHints MEMBER formatHints NOTIFY formatHintsChanged)
 
 public:
 	explicit QuantityInfo(QObject *parent = nullptr);
@@ -44,6 +45,7 @@ signals:
 	void valueChanged();
 	void precisionChanged();
 	void unitMatchValueChanged();
+	void formatHintsChanged();
 private:
 	void update();
 
@@ -54,6 +56,7 @@ private:
 	int precision = -1;
 	qreal unitMatchValue = qQNaN();
 	bool completed = false;
+	int formatHints = 0;
 };
 
 }
