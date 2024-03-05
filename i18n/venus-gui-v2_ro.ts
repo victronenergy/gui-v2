@@ -6354,7 +6354,7 @@ Doriți să continuați?</translation>
       <translation>Eroare de nivel 5 al protocolului MQTT</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="110"/>
+      <location filename="../../components/StatusBar.qml" line="108"/>
       <source>Silence alarm</source>
       <translation>Opriți alarma</translation>
     </message>
@@ -6900,16 +6900,6 @@ Doriți să continuați?</translation>
       <source>Application version</source>
       <translation></translation>
     </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
-      <source>Startup aborted (rotation too low</source>
-      <translation>Pornirea a fost anulată (turație prea scazută)</translation>
-    </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
-      <source>Startup aborted (rotation too high</source>
-      <translation>Pornirea a fost anulată (turație prea ridicată)</translation>
-    </message>
     <message id="fp-genset-error_no_connection">
       <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="255"/>
       <source>No connection</source>
@@ -7291,6 +7281,25 @@ Doriți să continuați?</translation>
       <location filename="../../pages/DialogLayer.qml" line="31"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation></translation>
+    </message>
+    <message id="settings_cgwacs_no_energy_meters">
+      <location filename="../../pages/settings/PageSettingsCGwacsOverview.qml" line="39"/>
+      <source>No energy meters found
+
+Note that this menu only shows Carlo Gavazzi meters connected over RS485. For any other meter, including Carlo Gavazzi meters connected over ethernet, see the Modbus TCP/UDP devices menu instead.</source>
+      <translation>Nu s-au găsit contoare de energie
+
+Rețineți că acest meniu afișează doar contoarele Carlo Gavazzi conectate prin RS485. Pentru orice alt contor, inclusiv pentru contoarele Carlo Gavazzi conectate prin ethernet, consultați în schimb meniul Dispozitive Modbus TCP/UDP.</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_low)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
+      <source>Startup aborted (rotation too low)</source>
+      <translation>Pornire esuata (turatie prea scazuta)</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_high)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
+      <source>Startup aborted (rotation too high)</source>
+      <translation>Pornire esuata (turatie prea ridicata)</translation>
     </message>
   </context>
   <context>

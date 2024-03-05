@@ -6355,7 +6355,7 @@ Chcete pokračovat?</translation>
       <translation>Chyba protokolu MQTT úrovně 5</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="110"/>
+      <location filename="../../components/StatusBar.qml" line="108"/>
       <source>Silence alarm</source>
       <translation>Vypnutí alarmu</translation>
     </message>
@@ -6901,16 +6901,6 @@ Chcete pokračovat?</translation>
       <source>Application version</source>
       <translation>Verze aplikace</translation>
     </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
-      <source>Startup aborted (rotation too low</source>
-      <translation>Spuštění bylo přerušeno (rotace je příliš nízká</translation>
-    </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
-      <source>Startup aborted (rotation too high</source>
-      <translation>Spuštění přerušeno (rotace je příliš vysoká</translation>
-    </message>
     <message id="fp-genset-error_no_connection">
       <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="255"/>
       <source>No connection</source>
@@ -7292,6 +7282,25 @@ Chcete pokračovat?</translation>
       <location filename="../../pages/DialogLayer.qml" line="31"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>Stránka se automaticky načte za deset sekund, aby se načetla nejnovější verze.</translation>
+    </message>
+    <message id="settings_cgwacs_no_energy_meters">
+      <location filename="../../pages/settings/PageSettingsCGwacsOverview.qml" line="39"/>
+      <source>No energy meters found
+
+Note that this menu only shows Carlo Gavazzi meters connected over RS485. For any other meter, including Carlo Gavazzi meters connected over ethernet, see the Modbus TCP/UDP devices menu instead.</source>
+      <translation>Nebyly nalezeny žádné měřiče energie
+
+Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připojené přes RS485. Jakékoli jiné měřiče, včetně měřičů Carlo Gavazzi připojených přes ethernet, naleznete v nabídce zařízení Modbus TCP/UDP.</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_low)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
+      <source>Startup aborted (rotation too low)</source>
+      <translation>Spuštění přerušeno (rotace příliš pomalá)</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_high)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
+      <source>Startup aborted (rotation too high)</source>
+      <translation>Spuštění přerušeno (rotace příliš rychlá)</translation>
     </message>
   </context>
   <context>

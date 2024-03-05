@@ -6353,7 +6353,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>MQTT-Protokoll Level 5 Fehler</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="110"/>
+      <location filename="../../components/StatusBar.qml" line="108"/>
       <source>Silence alarm</source>
       <translation>Alarm stummschalten</translation>
     </message>
@@ -6467,7 +6467,7 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../data/Batteries.qml" line="38"/>
       <source>%1 to go</source>
       <extracomment>%1 = time remaining, e.g. '3h 2m'</extracomment>
-      <translation>%1 zum Mitnehmen</translation>
+      <translation>%1 verbleiben</translation>
     </message>
     <message id="solarcharger_tracker_name">
       <location filename="../../data/SolarChargers.qml" line="35"/>
@@ -6899,16 +6899,6 @@ Möchtest Sie fortfahren?</translation>
       <source>Application version</source>
       <translation>Anwendungsversion</translation>
     </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
-      <source>Startup aborted (rotation too low</source>
-      <translation>Startvorgang abgebrochen (Rotation zu niedrig</translation>
-    </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
-      <source>Startup aborted (rotation too high</source>
-      <translation>Startvorgang abgebrochen (Rotation zu hoch)</translation>
-    </message>
     <message id="fp-genset-error_no_connection">
       <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="255"/>
       <source>No connection</source>
@@ -6927,12 +6917,12 @@ Möchtest Sie fortfahren?</translation>
     <message id="settings_display_onscreen_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="165"/>
       <source>Onscreen UI (GX Touch &amp; Ekrano)</source>
-      <translation>Bildschirm-Benutzeroberfläche (GX Touch &amp; Ekrano)</translation>
+      <translation>Bildschirm-UI (GX Touch &amp; Ekrano)</translation>
     </message>
     <message id="settings_display_standard_version">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="171"/>
       <source>Standard version</source>
-      <translation>Standard Version</translation>
+      <translation>Standardversion</translation>
     </message>
     <message id="settings_display_beta_version">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="173"/>
@@ -6942,7 +6932,7 @@ Möchtest Sie fortfahren?</translation>
     <message id="settings_restarting_app">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="196"/>
       <source>Restarting application...</source>
-      <translation>Anwendung wird neu gestartet...</translation>
+      <translation>Neustart der Anwendung...</translation>
     </message>
     <message id="settings_app_restarted">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="198"/>
@@ -6953,13 +6943,13 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="202"/>
       <source>Onscreen UI will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
-      <translation>Die Bildschirmoberfläche wechselt zu %1.</translation>
+      <translation>Bildschirm-UI wechselt zu %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="205"/>
       <source>Onscreen UI has switched to %1.</source>
       <extracomment>%1 = the UI version that the system has switched to.</extracomment>
-      <translation>Die Bildschirmbenutzeroberfläche wurde auf %1 umgestellt.</translation>
+      <translation>Bildschirm-UI wurde auf %1 umgestellt.</translation>
     </message>
     <message id="settings_language_no_browser_support">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="102"/>
@@ -6991,7 +6981,7 @@ Möchtest Sie fortfahren?</translation>
     <message id="dialoglayer_rebooting">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="149"/>
       <source>Rebooting...</source>
-      <translation>Es wird neu gestartet...</translation>
+      <translation>Neustart...</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
       <location filename="../../components/CommonWords.qml" line="210"/>
@@ -7029,12 +7019,12 @@ Möchtest Sie fortfahren?</translation>
     <message id="devicelist_motordrive_motortemperature">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
       <source>Motor Temperature</source>
-      <translation>Temperatur Motor</translation>
+      <translation>Motortemperatur</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="51"/>
       <source>Controller Temperature</source>
-      <translation>Temperatur Wächter</translation>
+      <translation>Reglertemperatur</translation>
     </message>
     <message id="rs_alarm_low_ac_out_voltage">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="22"/>
@@ -7086,7 +7076,7 @@ Möchtest Sie fortfahren?</translation>
     <message id="inverter_maximum_pv_voltage">
       <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="18"/>
       <source>Maximum PV voltage</source>
-      <translation>Höchstwert PV-Spannung</translation>
+      <translation>Höchste PV-Spannung</translation>
     </message>
     <message id="inverter_maximum_battery_voltage">
       <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="27"/>
@@ -7096,7 +7086,7 @@ Möchtest Sie fortfahren?</translation>
     <message id="inverter_minimum_battery_voltage">
       <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="36"/>
       <source>Minimum battery voltage</source>
-      <translation>Minimale Batteriespannung</translation>
+      <translation>Geringste Batteriespannung</translation>
     </message>
     <message id="ess_recommended">
       <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="71"/>
@@ -7108,12 +7098,12 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../pages/settings/debug/PageDebug.qml" line="36"/>
       <source>Quit application</source>
       <oldsource>Quit Application</oldsource>
-      <translation>Beenden der Anwendung</translation>
+      <translation>Anwendung beenden</translation>
     </message>
     <message id="settings_page_debug_quit">
       <location filename="../../pages/settings/debug/PageDebug.qml" line="39"/>
       <source>Quit</source>
-      <translation>Beenden Sie</translation>
+      <translation>Beenden</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_discharge_note">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
@@ -7143,7 +7133,7 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="53"/>
       <source>Continuous scanning may interfere with Wi-Fi operation.</source>
       <oldsource>Continuous scanning may interfere with Wi-Fi operation</oldsource>
-      <translation>Kontinuierliches Scannen kann den Wi-Fi-Betrieb stören.</translation>
+      <translation>Kontinuierliches Scannen kann den WiFi-Betrieb stören.</translation>
     </message>
     <message id="settings_language_change_failed">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="140"/>
@@ -7188,13 +7178,13 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
       <source>Use this option in systems that do not perform peak shaving</source>
       <oldsource>Use this option in systems that do not perform peak shaving.</oldsource>
-      <translation>Verwenden Sie diese Option in Systemen, die keine Spitzenabschaltung durchführen</translation>
+      <translation>Verwenden Sie diese Option in Systemen, die kein Peak Shaving durchführen</translation>
     </message>
     <message id="settings_ess_batteryLife_state">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
       <source>Battery life state</source>
       <oldsource>BatteryLife state</oldsource>
-      <translation>Stand der Batterielebensdauer</translation>
+      <translation>Lebensdauer der Batterie</translation>
     </message>
     <message id="settings_large_access_signal_k">
       <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
@@ -7236,7 +7226,7 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="121"/>
       <source>BMS controlled</source>
       <oldsource>BMS Controlled</oldsource>
-      <translation>BMS gesteuert</translation>
+      <translation>BMS-gesteuert</translation>
     </message>
     <message id="charger_alarms_alarms_and_errors">
       <location filename="../../pages/solar/SolarChargerPage.qml" line="141"/>
@@ -7248,7 +7238,7 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="119"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
       <oldsource>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</oldsource>
-      <translation>Diese Funktion erfordert Firmware-Version 400 oder höher. Wenden Sie sich an Ihren Installateur, um Ihr Multi/Quattro zu aktualisieren.</translation>
+      <translation>Diese Funktion erfordert Firmware-Version 400 oder höher. Wenden Sie sich an Ihren Installateur, um Ihren Multi/Quattro zu aktualisieren.</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="125"/>
@@ -7290,6 +7280,25 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../pages/DialogLayer.qml" line="31"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>Die Seite wird in zehn Sekunden automatisch neu geladen, um die neueste Version zu laden.</translation>
+    </message>
+    <message id="settings_cgwacs_no_energy_meters">
+      <location filename="../../pages/settings/PageSettingsCGwacsOverview.qml" line="39"/>
+      <source>No energy meters found
+
+Note that this menu only shows Carlo Gavazzi meters connected over RS485. For any other meter, including Carlo Gavazzi meters connected over ethernet, see the Modbus TCP/UDP devices menu instead.</source>
+      <translation>Keine Energiezähler gefunden
+
+Beachten Sie, dass dieses Menü nur Carlo Gavazzi Zähler anzeigt, die über RS485 angeschlossen sind. Für alle anderen Zähler, einschließlich der über Ethernet angeschlossenen Carlo Gavazzi Zähler, siehe stattdessen das Menü Modbus TCP/UDP Geräte.</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_low)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
+      <source>Startup aborted (rotation too low)</source>
+      <translation>Anlaufen fehlgeschlagen (Rotation zu schwach)</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_high)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
+      <source>Startup aborted (rotation too high)</source>
+      <translation>Anlaufen fehlgeschlagen (Rotation zu hoch)</translation>
     </message>
   </context>
   <context>
@@ -7944,7 +7953,7 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../src/main.cpp" line="119"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
-      <translation>Scherbe</translation>
+      <translation>Shard</translation>
     </message>
     <message>
       <location filename="../../src/main.cpp" line="123"/>
@@ -8094,7 +8103,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="62"/>
       <source>Under-charge standby</source>
-      <translation>Standby wegen zu niedriger Ladung</translation>
+      <translation>Unterladungs-Standby</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="65"/>
@@ -8104,7 +8113,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="68"/>
       <source>Battery comm. error</source>
-      <translation>Fehler Datenaustausch m. Batterie</translation>
+      <translation>Batteriekommunikation Fehler</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="71"/>
@@ -8169,7 +8178,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="111"/>
       <source>Communication timeout</source>
-      <translation>Zeitüberschreitung bei der Kommunikation</translation>
+      <translation>Timeout der Kommunikation</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="114"/>
@@ -8179,7 +8188,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="117"/>
       <source>Terminal over temperature</source>
-      <translation>Terminal Übertemperatur</translation>
+      <translation>Klemme Übertemperatur</translation>
     </message>
   </context>
   <context>
@@ -8193,18 +8202,18 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="9"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="103"/>
       <source>Battery high temperature</source>
-      <translation>Hohe Temperatur Batterie</translation>
+      <translation>Hohe Batterietemperatur</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="10"/>
       <source>Battery high voltage</source>
-      <translation>Hohe Spannung Batterie</translation>
+      <translation>Hohe Batteriespannung</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="11"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="12"/>
       <source>Battery Tsense miswired</source>
-      <translation>Tsensor d. Batt. falsch angeschlossen</translation>
+      <translation>Tsense d. Batt. falsch verdrahtet</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="13"/>
@@ -8215,7 +8224,7 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="14"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="15"/>
       <source>Battery Vsense miswired</source>
-      <translation>Vsensor Batt. falsch angeschlossen</translation>
+      <translation>Vsensor Batt. falsch verdrahtet</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="16"/>
@@ -8230,17 +8239,17 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="18"/>
       <source>Battery low voltage</source>
-      <translation>Niedrige Spannung Batterie</translation>
+      <translation>Batteriespannung niedrig</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="19"/>
       <source>Battery high ripple voltage</source>
-      <translation>DC-Brummspannung hoch</translation>
+      <translation>Batteriebrummspannung hoch</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="20"/>
       <source>Battery low state of charge</source>
-      <translation>niedriger Ladezustand Batterie</translation>
+      <translation>Batterieladezustand niedrig</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="21"/>
@@ -8257,17 +8266,17 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="24"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="106"/>
       <source>Charger high temperature</source>
-      <translation>Hohe Temperatur Ladegerät</translation>
+      <translation>Ladegerättemperatur hoch</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="25"/>
       <source>Charger excessive current</source>
-      <translation>Überhöhter Strom Ladegerät</translation>
+      <translation>Ladegerätstrom überhöht</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="26"/>
       <source>Charger negative current</source>
-      <translation>Negativer Strom Ladegerät</translation>
+      <translation>Ladegerätstrom negativ</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="27"/>
@@ -8302,7 +8311,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="33"/>
       <source>Charger terminal overheat</source>
-      <translation>Überhitzung Ladegerätanschluss</translation>
+      <translation>Überhitzung Ladegeräteklemmen</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="34"/>
@@ -8324,12 +8333,12 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="38"/>
       <source>Input high voltage</source>
-      <translation>Hohe Spannung am Eingang</translation>
+      <translation>Hohe Eingangsspannung</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="39"/>
       <source>Input excessive current</source>
-      <translation>Übermäßige Stromlast am Eingang</translation>
+      <translation>Übermäßiger Eingangsstrom</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="40"/>
@@ -8349,17 +8358,17 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="43"/>
       <source>Input shutdown (no retries)</source>
-      <translation>Abschaltung des Eingangs (keine Wiederholungsversuche)</translation>
+      <translation>Eingangsabschaltung (keine Wiederholungen)</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="44"/>
       <source>Input shutdown (retry)</source>
-      <translation>Abschaltung des Eingangs (Wiederholung)</translation>
+      <translation>Eingangsanschaltung (Wiederholung)</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="45"/>
       <source>Input internal failure</source>
-      <translation>Interner Fehler bei der Eingabe</translation>
+      <translation>Interner Fehler des Eingangs</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="47"/>
@@ -8385,29 +8394,29 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="53"/>
       <source>Inverter peak current</source>
-      <translation>Wechselrichter-Spitzenstrom</translation>
+      <translation>Wechselrichter Spitzenstrom</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="54"/>
       <source>Inverter internal DC level</source>
-      <translation>Wechselrichter-interner DC-Pegel</translation>
+      <translation>Wechselrichter Interner DC-Pegel</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="55"/>
       <source>Inverter wrong ACout level</source>
-      <translation>Wechselrichter falsches ACout-Level</translation>
+      <translation>Wechselrichter falscher ACout-Level</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="56"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="57"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="59"/>
       <source>Inverter powerstage fault</source>
-      <translation>Fehler in der Leistungsstufe des Wechselrichters</translation>
+      <translation>Fehler Leistungsstufe des Wechselrichters</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="58"/>
       <source>Inverter connected to AC</source>
-      <translation>Wechselrichter an AC angeschlossen</translation>
+      <translation>Wechselrichter mit AC verbunden</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="60"/>
@@ -8432,7 +8441,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="65"/>
       <source>BMS connection lost</source>
-      <translation>Verbindung zum BMS unterbrochen</translation>
+      <translation>BMS-Verbindung verloren</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="66"/>
@@ -8460,7 +8469,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="74"/>
       <source>Memory write error</source>
-      <translation>Fehler beim Schreiben auf Speicher</translation>
+      <translation>Schreibfehler Speicher</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="75"/>
@@ -8574,12 +8583,12 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="13"/>
       <source>Mixed old/new MK2</source>
-      <translation>altes/neues MK2 gemischt</translation>
+      <translation>Altes/neues MK2 gemischt</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="16"/>
       <source>Expected devices error</source>
-      <translation>Fehler bei erwarteten Geräten</translation>
+      <translation>Erwartete Gerätefehler</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="19"/>
@@ -8589,7 +8598,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="22"/>
       <source>Overvoltage on AC-out</source>
-      <translation>Überspannung am AC-Ausgang</translation>
+      <translation>Überspannung am AC-out</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="25"/>
@@ -8609,7 +8618,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="34"/>
       <source>System time sync error</source>
-      <translation>Fehler bei System Zeit Synchron</translation>
+      <translation>Fehler Systemzeitsynchronisation</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="37"/>
@@ -8698,17 +8707,17 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="159"/>
       <source>Battery high temperature</source>
-      <translation>Hohe Temperatur Batterie</translation>
+      <translation>Batterietemperatur hoch</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="162"/>
       <source>Battery high voltage</source>
-      <translation>Hohe Spannung Batterie</translation>
+      <translation>Batteriespannung hoch</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="165"/>
       <source>Battery low voltage</source>
-      <translation>Niedrige Spannung Batterie</translation>
+      <translation>Batteriespannung niedrig</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="168"/>
@@ -8718,12 +8727,13 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
       <source>Battery temperature shorted</source>
-      <translation>Batterietemperatur kurzgeschlossen</translation>
+      <extracomment>This doesn't sound right to me. How can the battery temperature be shorted?</extracomment>
+      <translation>Batterietemperatursensor defekt</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="175"/>
       <source>Alternator high temperature</source>
-      <translation>Lichtmaschine hohe Temperatur</translation>
+      <translation>Lichtmaschinentemperatur hoch</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="178"/>
@@ -8733,7 +8743,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="181"/>
       <source>Field drive FET high temperature</source>
-      <translation>Hohe Temperatur Feldantrieb</translation>
+      <translation>Feldantrieb FET hohe Temperatur</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="184"/>
@@ -8743,7 +8753,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="187"/>
       <source>Alternator low voltage</source>
-      <translation>Niedrige Spannung Lichtmaschine</translation>
+      <translation>Lichtmaschinenspannung niedrig</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="190"/>
@@ -8758,7 +8768,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="196"/>
       <source>Alternator high voltage</source>
-      <translation>Hochspannung der Lichtmaschine</translation>
+      <translation>Lichtmaschine Hochspannung</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="199"/>
@@ -8798,7 +8808,7 @@ Möchtest Sie fortfahren?</translation>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="220"/>
       <source>Battery high current disconnect</source>
-      <translation>Batterie Überstromabschlatung</translation>
+      <translation>Batterie Überstromabschaltung</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="223"/>

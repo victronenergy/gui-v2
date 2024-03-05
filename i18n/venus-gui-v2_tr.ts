@@ -6354,7 +6354,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>MQTT protokolü seviye 5 hatası</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="110"/>
+      <location filename="../../components/StatusBar.qml" line="108"/>
       <source>Silence alarm</source>
       <translation>Sessiz alarm</translation>
     </message>
@@ -6900,16 +6900,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>Application version</source>
       <translation>Uygulama sürümü</translation>
     </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
-      <source>Startup aborted (rotation too low</source>
-      <translation>Başlatma iptal edildi (dönüş çok düşük</translation>
-    </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
-      <source>Startup aborted (rotation too high</source>
-      <translation>Başlatma iptal edildi (dönüş çok yüksek</translation>
-    </message>
     <message id="fp-genset-error_no_connection">
       <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="255"/>
       <source>No connection</source>
@@ -7291,6 +7281,25 @@ Devam etmek istiyor musunuz?</translation>
       <location filename="../../pages/DialogLayer.qml" line="31"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>Sayfa, en son sürümü yüklemek için on saniye içinde otomatik olarak yeniden yüklenecektir.</translation>
+    </message>
+    <message id="settings_cgwacs_no_energy_meters">
+      <location filename="../../pages/settings/PageSettingsCGwacsOverview.qml" line="39"/>
+      <source>No energy meters found
+
+Note that this menu only shows Carlo Gavazzi meters connected over RS485. For any other meter, including Carlo Gavazzi meters connected over ethernet, see the Modbus TCP/UDP devices menu instead.</source>
+      <translation>Enerji sayacı bulunamadı
+
+Bu menünün sadece RS485 üzerinden bağlı Carlo Gavazzi sayaçlarını gösterdiğini unutmayın. Ethernet üzerinden bağlı Carlo Gavazzi sayaçları da dahil olmak üzere diğer tüm sayaçlar için Modbus TCP/UDP cihazları menüsüne bakın.</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_low)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
+      <source>Startup aborted (rotation too low)</source>
+      <translation>Marş iptal edildi (devir çok düşük)</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_high)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
+      <source>Startup aborted (rotation too high)</source>
+      <translation>Marş iptal edildi (devir çok yüksek)</translation>
     </message>
   </context>
   <context>

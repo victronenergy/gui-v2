@@ -6357,7 +6357,7 @@ Do you want to continue?</source>
       <translation>خطأ المستوى الخامس من بروتوكول MQTT</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="110"/>
+      <location filename="../../components/StatusBar.qml" line="108"/>
       <source>Silence alarm</source>
       <translation>إنذار صامت</translation>
     </message>
@@ -6903,16 +6903,6 @@ Do you want to continue?</source>
       <source>Application version</source>
       <translation></translation>
     </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
-      <source>Startup aborted (rotation too low</source>
-      <translation>إيقاف بدء التشغيل (الدوران منخفض للغاية)</translation>
-    </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
-      <source>Startup aborted (rotation too high</source>
-      <translation>إيقاف بدء التشغيل (الدوران مرتفع للغاية)</translation>
-    </message>
     <message id="fp-genset-error_no_connection">
       <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="255"/>
       <source>No connection</source>
@@ -7294,6 +7284,25 @@ Do you want to continue?</source>
       <location filename="../../pages/DialogLayer.qml" line="31"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation></translation>
+    </message>
+    <message id="settings_cgwacs_no_energy_meters">
+      <location filename="../../pages/settings/PageSettingsCGwacsOverview.qml" line="39"/>
+      <source>No energy meters found
+
+Note that this menu only shows Carlo Gavazzi meters connected over RS485. For any other meter, including Carlo Gavazzi meters connected over ethernet, see the Modbus TCP/UDP devices menu instead.</source>
+      <translation>لم يتم العثور على عداد طاقة
+
+ يرجى العلم أن هذه القائمة تظهر عدادات كارلو غافاتسي المتصلة بـ RS485. لأي عداد آخر، بما في ذلك عدادات كارلو غافاتسي المتصلة بالإيثرنت، انظر قائمة أجهزة Mobdus TCP/UDP بدلاً من ذلك.</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_low)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
+      <source>Startup aborted (rotation too low)</source>
+      <translation>تم إحباط الإعداد (التناوب منخفض جدا)</translation>
+    </message>
+    <message id="fp-genset-error_startup_aborted_(rotation_too_high)">
+      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
+      <source>Startup aborted (rotation too high)</source>
+      <translation>تم إيقاف بدء التشغيل (التناوب مرتفع جدا)</translation>
     </message>
   </context>
   <context>
