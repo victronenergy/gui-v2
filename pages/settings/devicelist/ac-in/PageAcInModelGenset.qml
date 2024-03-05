@@ -233,7 +233,7 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_operating_time")
 							visible: defaultVisible && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/OperatingHours"
-							secondaryText: Utils.secondsToString(dataItem.value)
+							secondaryText: Utils.formatAsHHMM(dataItem.value, true)
 						}
 
 						ListQuantityItem {
