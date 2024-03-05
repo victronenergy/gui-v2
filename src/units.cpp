@@ -120,6 +120,8 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("m/s");
 	case VenusOS::Enums::Units_Hectopascal:
 		return QStringLiteral("hPa");
+	case VenusOS::Enums::Units_Kilopascal:
+		return QStringLiteral("kPa");
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
 		return QString();
@@ -165,6 +167,7 @@ bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Temperature_Fahrenheit:
 	case VenusOS::Enums::Units_Temperature_Kelvin:
 	case VenusOS::Enums::Units_Hectopascal:
+	case VenusOS::Enums::Units_Kilopascal:
 	default:
 		return false;
 	}
