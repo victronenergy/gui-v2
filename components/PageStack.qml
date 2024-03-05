@@ -12,6 +12,8 @@ C.StackView {
 
 	property Page _poppedPage
 
+	readonly property bool _busy: busy || fakePushAnimation.running || fakePopAnimation.running
+
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {
 		XAnimator {
@@ -63,7 +65,7 @@ C.StackView {
 		target: !!Global.pageManager ? Global.pageManager.emitter : null
 
 		function onPagePushRequested(obj, properties) {
-			if (root.busy) {
+			if (root._busy) {
 				return
 			}
 
@@ -89,8 +91,8 @@ C.StackView {
 		}
 
 		function onPagePopRequested(toPage) {
-			if (root.busy
-					|| (!!root.currentItem.tryPop && !root.currentItem.tryPop())) {
+			if (root._busy
+					|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop())) {
 				return
 			}
 			if (root.depth === 1) {
