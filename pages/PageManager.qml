@@ -28,8 +28,9 @@ QtObject {
 
 	property Timer idleModeTimer: Timer {
 		running: !Global.splashScreenVisible
-			&& root.currentPage !== null && root.currentPage !== undefined
-			&& root.currentPage.fullScreenWhenIdle
+			&& !!Global.mainView
+			&& Global.mainView.currentPage !== null && Global.mainView.currentPage !== undefined
+			&& Global.mainView.currentPage.fullScreenWhenIdle
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			&& BackendConnection.applicationVisible
 		interval: Theme.animation_page_idleResize_timeout
