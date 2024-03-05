@@ -137,10 +137,10 @@ ListTextItem {
 		case 25 + 0x00: errorText = qsTrId("fp-genset-error_starter_battery_voltage_too_low"); break;
 		//% "Starter battery voltage too high"
 		case 25 + 0x40: errorText = qsTrId("fp-genset-error_starter_battery_voltage_too_high"); break;
-		//% "Startup aborted (rotation too low"
-		case 26 + 0x00: errorText = qsTrId("fp-genset-error_startup_aborted_(rotation_too_low"); break;
-		//% "Startup aborted (rotation too high"
-		case 26 + 0x40: errorText = qsTrId("fp-genset-error_startup_aborted_(rotation_too_high"); break;
+		//% "Startup aborted (rotation too low)"
+		case 26 + 0x00: errorText = qsTrId("fp-genset-error_startup_aborted_(rotation_too_low)"); break;
+		//% "Startup aborted (rotation too high)"
+		case 26 + 0x40: errorText = qsTrId("fp-genset-error_startup_aborted_(rotation_too_high)"); break;
 		//% "Rotation too low"
 		case 28 + 0x00: errorText = qsTrId("fp-genset-error_rotation_too_low"); break;
 		//% "Rotation too high"
