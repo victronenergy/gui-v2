@@ -87,15 +87,19 @@ T.Dialog {
 			radius: Theme.geometry_solarChart_bar_radius
 		}
 
-		IconButton {
+		component ArrowButton : IconButton {
+			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_arrow_icon_size
+			icon.color: containsPress ? Theme.color_gray4 : Theme.color_gray5
+			icon.source: "qrc:/images/icon_arrow_32.svg"
+			effectEnabled: false
+		}
+
+		ArrowButton {
 			anchors {
 				right: parent.left
 				rightMargin: Theme.geometry_solarDailyHistoryDialog_arrow_horizontalMargin
 				verticalCenter: parent.verticalCenter
 			}
-			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_arrow_icon_size
-			icon.color: containsPress ? Theme.color_gray4 : Theme.color_gray5
-			icon.source: "qrc:/images/icon_arrow_32.svg"
 			visible: root.day > root.minimumDay
 
 			onClicked: {
@@ -104,15 +108,12 @@ T.Dialog {
 			}
 		}
 
-		IconButton {
+		ArrowButton {
 			anchors {
 				left: parent.right
 				leftMargin: Theme.geometry_solarDailyHistoryDialog_arrow_horizontalMargin
 				verticalCenter: parent.verticalCenter
 			}
-			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_arrow_icon_size
-			icon.color: containsPress ? Theme.color_gray4 : Theme.color_gray5
-			icon.source: "qrc:/images/icon_arrow_32.svg"
 			visible: root.day < root.maximumDay
 			rotation: 180
 
@@ -165,7 +166,7 @@ T.Dialog {
 				: Theme.geometry_solarDailyHistoryDialog_minimumHeight - Theme.geometry_solarDailyHistoryDialog_header_height
 		}
 
-		MouseArea {
+		PressArea {
 			anchors.fill: tableView
 			enabled: errorView.expanded
 			onClicked: errorView.expanded = false

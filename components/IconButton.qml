@@ -5,8 +5,9 @@
 
 import QtQuick
 import QtQuick.Controls.impl as CP
+import Victron.VenusOS
 
-MouseArea {
+PressArea {
 	id: root
 
 	property alias icon: icon

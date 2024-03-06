@@ -10,6 +10,8 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	onClicked: Global.pageManager.pushPage(consumptionPageComponent, { "title": root.title })
+
 	//% "DC Loads"
 	title: qsTrId("overview_widget_dcloads_title")
 	icon.source: "qrc:/images/dcloads.svg"
@@ -17,13 +19,6 @@ OverviewWidget {
 	enabled: (Global.dcLoads.model.count + Global.dcSystems.model.count) > 0
 
 	quantityLabel.dataObject: Global.system.dc
-
-	MouseArea {
-		anchors.fill: parent
-		onClicked: {
-			Global.pageManager.pushPage(consumptionPageComponent, { "title": root.title })
-		}
-	}
 
 	Component {
 		id: consumptionPageComponent
@@ -46,10 +41,14 @@ OverviewWidget {
 						Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
 					]
 
-					MouseArea {
-						id: delegateMouseArea
+					PressArea {
+						id: delegatePressArea
 
-						anchors.fill: parent
+						radius: backgroundRect.radius
+						anchors {
+							fill: parent
+							bottomMargin: deviceDelegate.spacing
+						}
 						onClicked: {
 							Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",
 									{ "title": device.name, "bindPrefix": device.serviceUid })
@@ -61,7 +60,7 @@ OverviewWidget {
 						anchors.verticalCenter: parent.verticalCenter
 						source: "qrc:/images/icon_arrow_32.svg"
 						rotation: 180
-						color: delegateMouseArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
+						color: delegatePressArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 					}
 				}
 			}

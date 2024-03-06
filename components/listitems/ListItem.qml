@@ -44,7 +44,7 @@ Item {
 		id: backgroundRect
 
 		height: root.height - root.spacing
-		color: root.down ? Theme.color_listItem_down_background : Theme.color_listItem_background
+		color: Theme.color_listItem_background
 		// TODO how to indicate read-only setting?
 
 		// Show thin colored indicator on left side if settings is only visible to super/service users

@@ -14,6 +14,7 @@ Button {
 	icon.height: Theme.geometry_navigationBar_button_icon_height
 	spacing: Theme.geometry_navigationBar_button_spacing
 	display: C.AbstractButton.TextUnderIcon
+	radius: 0
 
 	color: down
 		   ? Theme.color_navigationBar_button_on

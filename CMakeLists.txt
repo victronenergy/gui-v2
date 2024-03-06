@@ -71,7 +71,7 @@ if (${LOAD_QML_FROM_FILESYSTEM})
 endif()
 
 set(REQUIRED_QT_VERSION 6.5.2) # require at least qt 6.5.2 for qt_add_qml_module to work properly
-find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Gui Qml Quick Svg Xml Mqtt LinguistTools REQUIRED)
+find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Gui Qml Quick Svg Xml Mqtt LinguistTools ShaderTools REQUIRED)
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -265,6 +265,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ComboBox.qml
     components/controls/Label.qml
     components/controls/ListItemButton.qml
+    components/controls/PressArea.qml
+    components/controls/PressEffect.qml
     components/controls/ProgressBar.qml
     components/controls/RadioButton.qml
     components/controls/RangeSlider.qml
@@ -648,6 +650,16 @@ qt_add_qml_module(VenusQMLModule
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
     SOURCES ${VenusQMLModule_CPP_SOURCES}
+)
+
+qt6_add_shaders(VenusQMLModule "venus-shaders"
+    BATCHABLE
+    PRECOMPILE
+    OPTIMIZED
+    PREFIX
+        "/"
+    FILES
+        "components/controls/presseffect.frag"
 )
 
 list(APPEND TRANSLATION_SOURCES ${VenusQMLModule_CPP_SOURCES})

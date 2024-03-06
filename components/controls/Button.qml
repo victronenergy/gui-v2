@@ -24,6 +24,10 @@ CT.Button {
 	property alias border: backgroundRect.border
 	property alias radius: backgroundRect.radius
 
+	onPressed: pressEffect.start(pressX/width, pressY/height)
+	onReleased: pressEffect.stop()
+	onCanceled: pressEffect.stop()
+
 	down: pressed || checked
 	spacing: Theme.geometry_button_spacing
 	topPadding: 0
@@ -47,6 +51,12 @@ CT.Button {
 		border.width: root.flat ? 0 : Theme.geometry_button_border_width
 		border.color: Theme.color_ok
 		radius: Theme.geometry_button_radius
+
+		PressEffect {
+			id: pressEffect
+			radius: backgroundRect.radius
+			anchors.fill: parent
+		}
 	}
 
 	contentItem: CP.IconLabel {

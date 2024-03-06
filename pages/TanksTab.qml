@@ -119,9 +119,10 @@ ListView {
 					gaugeTanks: tankTypeDelegate.tankModel
 					mergeTanks: tankTypeDelegate.mergeTanks
 
-					MouseArea {
+					PressArea {
 						anchors.fill: parent
 						enabled: tankTypeDelegate.tankModel.count > 1
+						radius: gaugeGroup.radius
 						onClicked: {
 							expandedTanksLoader.tankModel = tankTypeDelegate.tankModel
 							expandedTanksLoader.active = true

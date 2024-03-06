@@ -37,10 +37,11 @@ Page {
 				color: listDelegate.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			}
 
-			MouseArea {
+			PressArea {
 				id: mouseArea
 
 				parent: listDelegate.backgroundRect
+				radius: listDelegate.backgroundRect.radius
 				anchors.fill: parent
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
