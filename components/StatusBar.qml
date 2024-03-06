@@ -39,7 +39,23 @@ Rectangle {
 		}
 	}
 
-	Button {
+	component StatusBarButton : Button {
+		radius: 0
+		width: Theme.geometry_statusBar_button_width
+		height: Theme.geometry_statusBar_button_height
+		backgroundColor: "transparent"  // don't show background when disabled
+		display: C.AbstractButton.IconOnly
+		color: Theme.color_ok
+		opacity: enabled ? 1.0 : 0.0
+		Behavior on opacity {
+			enabled: root.animationEnabled
+			OpacityAnimator {
+				duration: Theme.animation_page_idleOpacity_duration
+			}
+		}
+	}
+
+	StatusBarButton {
 		id: leftButton
 
 		anchors {
@@ -47,10 +63,6 @@ Rectangle {
 			leftMargin: Theme.geometry_statusBar_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
-		width: Theme.geometry_statusBar_button_width
-		height: Theme.geometry_statusBar_button_height
-		display: C.AbstractButton.IconOnly
-		color: Theme.color_ok
 		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
 					 ? "qrc:/images/icon_controls_off_32.svg"
 					 : root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive
@@ -60,12 +72,6 @@ Rectangle {
 		enabled: !!Global.pageManager
 				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				&& root.leftButton != VenusOS.StatusBar_LeftButton_None
-		backgroundColor: "transparent"  // don't show background when disabled
-		opacity: enabled ? 1.0 : 0.0
-		Behavior on opacity {
-			enabled: root.animationEnabled
-			OpacityAnimator { duration: Theme.animation_page_idleOpacity_duration }
-		}
 
 		onClicked: root.leftButtonClicked()
 	}
@@ -111,7 +117,7 @@ Rectangle {
 		onClicked: Global.notifications.acknowledgeAll()
 	}
 
-	Button {
+	StatusBarButton {
 		id: rightButtonItem
 
 		anchors {
@@ -123,19 +129,7 @@ Rectangle {
 		enabled: !!Global.pageManager
 				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				&& root.rightButton != VenusOS.StatusBar_RightButton_None
-		opacity: enabled ? 1.0 : 0.0
-		Behavior on opacity {
-			enabled: root.animationEnabled
-			OpacityAnimator {
-				duration: Theme.animation_page_idleOpacity_duration
-			}
-		}
 
-		width: Theme.geometry_statusBar_button_width
-		height: Theme.geometry_statusBar_button_height
-		display: C.AbstractButton.IconOnly
-		color: Theme.color_ok
-		backgroundColor: "transparent"
 		icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
 				? "qrc:/images/icon_sidepanel_on_32.svg"
 				: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive

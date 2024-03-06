@@ -269,10 +269,14 @@ Page {
 				visible: deviceMouseArea.enabled
 			}
 
-			MouseArea {
+			PressArea {
 				id: deviceMouseArea
 
-				anchors.fill: parent
+				anchors {
+					fill: parent
+					bottomMargin: deviceDelegate.spacing
+				}
+				radius: deviceDelegate.backgroundRect.radius
 				enabled: !!_displayInfo && _displayInfo.url.length > 0
 				onClicked: {
 					Global.pageManager.pushPage(_displayInfo.url, _displayInfo.params)

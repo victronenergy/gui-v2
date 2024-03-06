@@ -9,6 +9,15 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	onClicked: {
+		if (Global.batteries.model.count === 1) {
+			Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
+					{ "battery": Global.batteries.model.deviceAt(0) })
+		} else {
+			Global.pageManager.pushPage("/pages/battery/BatteryListPage.qml")
+		}
+	}
+
 	readonly property var batteryData: Global.batteries.system
 
 	readonly property int _normalizedStateOfCharge: Math.round(batteryData.stateOfCharge || 0)
@@ -225,17 +234,4 @@ OverviewWidget {
 			alignment: Qt.AlignRight
 		}
 	]
-
-	MouseArea {
-		anchors.fill: parent
-		onClicked: {
-			if (Global.batteries.model.count === 1) {
-				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
-						{ "battery": Global.batteries.model.deviceAt(0) })
-			} else {
-				Global.pageManager.pushPage("/pages/battery/BatteryListPage.qml")
-			}
-		}
-	}
-
 }

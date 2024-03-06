@@ -103,9 +103,10 @@ Page {
 				color: mouseArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			}
 
-			MouseArea {
+			PressArea {
 				id: mouseArea
 
+				radius: parent.radius
 				anchors.fill: parent
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",

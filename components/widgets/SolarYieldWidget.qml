@@ -9,6 +9,19 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	onClicked: {
+		const singleDeviceOnly = (Global.solarChargers.model.count + Global.pvInverters.model.count) === 1
+		if (singleDeviceOnly && Global.solarChargers.model.count === 1) {
+			Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml",
+					{ "solarCharger": Global.solarChargers.model.deviceAt(0) })
+		} else if (singleDeviceOnly && Global.pvInverters.model === 1) {
+			Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
+					{ "pvInverter": Global.pvInverters.model.deviceAt(0) })
+		} else {
+			Global.pageManager.pushPage("/pages/solar/SolarDeviceListPage.qml", { "title": root.title })
+		}
+	}
+
 	//% "Solar yield"
 	title: qsTrId("overview_widget_solaryield_title")
 	icon.source: "qrc:/images/solaryield.svg"
@@ -60,23 +73,6 @@ OverviewWidget {
 
 		SolarYieldGraph {
 			height: root.extraContent.height - (2 * Theme.geometry_overviewPage_widget_solar_graph_margins)
-		}
-	}
-
-	MouseArea {
-		anchors.fill: parent
-
-		onClicked: {
-			const singleDeviceOnly = (Global.solarChargers.model.count + Global.pvInverters.model.count) === 1
-			if (singleDeviceOnly && Global.solarChargers.model.count === 1) {
-				Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml",
-						{ "solarCharger": Global.solarChargers.model.deviceAt(0) })
-			} else if (singleDeviceOnly && Global.pvInverters.model === 1) {
-				Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
-						{ "pvInverter": Global.pvInverters.model.deviceAt(0) })
-			} else {
-				Global.pageManager.pushPage("/pages/solar/SolarDeviceListPage.qml", { "title": root.title })
-			}
 		}
 	}
 }

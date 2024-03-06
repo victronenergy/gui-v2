@@ -9,6 +9,24 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	onClicked: {
+		return
+		if (Global.inverterChargers.veBusDevices.count
+				+ Global.inverterChargers.multiDevices.count
+				+ Global.inverterChargers.inverterDevices.count > 1) {
+			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
+		} else {
+			const device = Global.inverterChargers.first
+			if (device.serviceUid.indexOf('inverter') >= 0) {
+				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
+						{ "serviceUid": device.serviceUid, "title": device.name })
+			} else {
+				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
+						{ "inverterCharger": device })
+			}
+		}
+	}
+
 	//% "Inverter / Charger"
 	title: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
@@ -28,23 +46,4 @@ OverviewWidget {
 			wrapMode: Text.Wrap
 		}
 	]
-	MouseArea {
-		anchors.fill: parent
-		onClicked: {
-			if (Global.inverterChargers.veBusDevices.count
-					+ Global.inverterChargers.multiDevices.count
-					+ Global.inverterChargers.inverterDevices.count > 1) {
-				Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
-			} else {
-				const device = Global.inverterChargers.first
-				if (device.serviceUid.indexOf('inverter') >= 0) {
-					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
-							{ "serviceUid": device.serviceUid, "title": device.name })
-				} else {
-					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
-							{ "inverterCharger": device })
-				}
-			}
-		}
-	}
 }

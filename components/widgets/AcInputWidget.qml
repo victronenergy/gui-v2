@@ -9,6 +9,13 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	onClicked: {
+		Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
+			"title": root.input.name,
+			"bindPrefix": root.input.serviceUid
+		})
+	}
+
 	property ActiveAcInput input: Global.acInputs.activeInput
 	property ListModel phaseModel: input && input.connected ? input.phases : null
 
@@ -104,16 +111,6 @@ OverviewWidget {
 			elide: Text.ElideRight
 			text: CommonWords.stopped
 			color: Theme.color_font_secondary
-		}
-	}
-
-	MouseArea {
-		anchors.fill: parent
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
-				"title": root.input.name,
-				"bindPrefix": root.input.serviceUid
-			})
 		}
 	}
 }

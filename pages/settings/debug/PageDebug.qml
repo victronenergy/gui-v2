@@ -23,8 +23,12 @@ Page {
 					}
 				]
 
-				MouseArea {
-					anchors.fill: parent
+				PressArea {
+					radius: frameRateSwitch.backgroundRect.radius
+					anchors {
+						fill: parent
+						bottomMargin: frameRateSwitch.spacing
+					}
 					onClicked: FrameRateModel.enabled = !FrameRateModel.enabled
 				}
 			}

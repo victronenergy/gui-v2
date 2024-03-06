@@ -25,7 +25,7 @@ ControlValue {
 		onClicked: root.clicked()
 	}
 
-	MouseArea {
+	PressArea {
 		id: mouseArea
 
 		anchors.fill: parent

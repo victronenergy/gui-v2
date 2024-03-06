@@ -95,14 +95,11 @@ SwipeViewPage {
 					id: activeDelegate
 
 					// When the delegate is clicked, acknowledge it.
-					// Change the delegate color when pressed, but do not restore the original color
-					// when acknowledging an inactive delegate, else the color flashes just before
-					// it fades out in the remove animation.
-					MouseArea {
+					PressArea {
 						anchors.fill: parent
 						enabled: !activeDelegate.notification.acknowledged
-						onPressed: activeDelegate.color = Theme.color_listItem_down_background
-						onCanceled: activeDelegate.color = Theme.color_background_secondary
+						radius: activeDelegate.radius
+
 						onReleased: {
 							activeDelegate.notification.setAcknowledged(true)
 							if (activeDelegate.notification.active) {

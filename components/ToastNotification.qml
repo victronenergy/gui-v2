@@ -86,7 +86,7 @@ Item {
 			color: Theme.color_toastNotification_foreground
 		}
 
-		MouseArea {
+		PressArea {
 			id: dismiss
 			anchors {
 				right: parent.right

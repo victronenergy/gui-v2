@@ -15,7 +15,7 @@ ListItem {
 
 	signal clicked()
 
-	down: mouseArea.containsPress
+	down: pressArea.containsPress
 	enabled: userHasWriteAccess
 
 	content.children: [
@@ -26,10 +26,15 @@ ListItem {
 		}
 	]
 
-	MouseArea {
-		id: mouseArea
+	PressArea {
+		id: pressArea
 
-		anchors.fill: parent
+		radius: backgroundRect.radius
+		anchors {
+			fill: parent
+			bottomMargin: root.spacing
+		}
+
 		onClicked: root.clicked()
 	}
 }

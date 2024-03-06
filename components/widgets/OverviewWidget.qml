@@ -16,6 +16,8 @@ Rectangle {
 	property alias title: widgetHeader.title
 	property alias quantityLabel: quantityLabel
 
+	signal clicked
+
 	property int rightPadding
 	property alias extraContent: extraContent
 	property var connectors: []
@@ -115,5 +117,11 @@ Rectangle {
 		}
 		children: root.extraContentChildren
 		visible: root.size >= VenusOS.OverviewWidget_Size_M
+	}
+
+	PressArea {
+		radius: root.radius
+		anchors.fill: parent
+		onClicked: root.clicked()
 	}
 }

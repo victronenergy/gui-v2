@@ -9,6 +9,15 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	onClicked: {
+		if (Global.evChargers.model.count === 1) {
+			Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml",
+					{ "evCharger": Global.evChargers.model.deviceAt(0) })
+		} else {
+			Global.pageManager.pushPage("/pages/evcs/EvChargerListPage.qml")
+		}
+	}
+
 	//: Abbreviation of Electric Vehicle Charging Station
 	//% "EVCS"
 	title: qsTrId("overview_widget_evcs_title")
@@ -32,18 +41,6 @@ OverviewWidget {
 					: null
 		}
 	]
-
-	MouseArea {
-		anchors.fill: parent
-		onClicked: {
-			if (Global.evChargers.model.count === 1) {
-				Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml",
-						{ "evCharger": Global.evChargers.model.deviceAt(0) })
-			} else {
-				Global.pageManager.pushPage("/pages/evcs/EvChargerListPage.qml")
-			}
-		}
-	}
 
 	Component {
 		id: singleEvChargerComponent

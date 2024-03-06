@@ -9,6 +9,13 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	onClicked: {
+		Global.pageManager.pushPage(root.detailUrl, {
+			"title": root.input.name,
+			"bindPrefix": root.input.serviceUid
+		})
+	}
+
 	property var input
 	property string detailUrl: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 
@@ -16,14 +23,4 @@ OverviewWidget {
 	quantityLabel.dataObject: input
 	icon.source: "qrc:/images/icon_dc_24.svg"
 	enabled: true
-
-	MouseArea {
-		anchors.fill: parent
-		onClicked: {
-			Global.pageManager.pushPage(root.detailUrl, {
-				"title": root.input.name,
-				"bindPrefix": root.input.serviceUid
-			})
-		}
-	}
 }
