@@ -27,8 +27,18 @@ cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'q
 #   To build in this way from qtcreator, a custom build step has to be added.
 #   In the 'Projects' page, select 'Build', 'Add build step', with the following:
 #       Command: cmake
-#       Argurments: --install .
+#       Arguments: --install .
 #       Working directory: %{buildDir}
+#
+# Translations
+#   You can download the latest translations from poeditor if you have a token.
+#       cmake /path/to/CMakeLists.txt
+#       POEDITOR_TOKEN='....' make download_translations  # this downloads all translations
+#       POEDITOR_TOKEN='....' make venus-gui-v2_uk        # this downloads a single translation file
+#
+#   You can upload new terms to poeditor if you have a token.
+#       cmake /path/to/CMakeLists.txt
+#       POEDITOR_TOKEN='....' make upload_translations  # this uploads /path/to/build/i18n/venus-gui-v2.ts to poeditor
 
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
@@ -51,8 +61,6 @@ option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD
 option(VENUS_WEBASSEMBLY_BUILD "enable webassembly build via cmake -DVENUS_WEBASSEMBLY_BUILD=ON" OFF) # Disabled by default
 option(MQTT_WEBSOCKETS_ENABLED "enable websockets build via cmake -DMQTT_WEBSOCKETS_ENABLED=ON" OFF) # Disabled by default
 option(LOAD_QML_FROM_FILESYSTEM "disable filesystem loading via cmake -DLOAD_QML_FROM_FILESYSTEM=OFF" ON) # Enabled by default
-option(DOWNLOAD_TRANSLATIONS "download translations from poeditor website via cmake -DDOWNLOAD_TRANSLATIONS=ON" OFF) # Disabled by default
-option(UPLOAD_TRANSLATIONS "upload translations to poeditor website via cmake -DUPLOAD_TRANSLATIONS=ON" OFF) # Disabled by default
 
 # If we want a release build, remove the '-g' debug compiler flag set by the environment setup script.
 # Otherwise, our executable size ballons from ~10MB to ~220MB.
@@ -1075,12 +1083,10 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
 )
 
 list(APPEND TS_CODES "ar" "cs" "da" "de" "es" "fr" "it" "nl" "pl" "ro" "ru" "sv" "th" "tr" "uk" "zh_CN")
-message("TS_CODES: ${TS_CODES}")
 list(APPEND TS_FILES ${TS_CODES})
 list(TRANSFORM TS_FILES PREPEND "i18n/${PROJECT_NAME}_")
 list(TRANSFORM TS_FILES APPEND ".ts")
 list(APPEND TS_FILES "i18n/${PROJECT_NAME}.ts")
-message("TS_FILES: ${TS_FILES}")
 
 list(APPEND BUILD_DIR_TS_FILES ${TS_FILES} i18n/${PROJECT_NAME}_en.ts)
 list(TRANSFORM BUILD_DIR_TS_FILES PREPEND "${CMAKE_CURRENT_BINARY_DIR}/")
@@ -1091,29 +1097,23 @@ message("BUILD_DIR_TS_FILES: ${BUILD_DIR_TS_FILES}")
 file(COPY ${TS_FILES} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/i18n") # build directory
 configure_file(i18n/${PROJECT_NAME}.ts ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts) # this is the least clumsy way to copy-and-rename a file in cmake
 
-if (${DOWNLOAD_TRANSLATIONS})
-    message("TS_CODES: ${TS_CODES}")
-    foreach(code IN LISTS TS_CODES)
-        set(output_file ${CMAKE_CURRENT_SOURCE_DIR}/i18n/venus-gui-v2_${code}.ts)
-        message("### Fetching ${code}, storing in ${output_file}")
-        execute_process(
-            COMMAND bash "-c" "curl -X POST https://api.poeditor.com/v2/projects/export -d api_token=\"81a0b50ea2437c0205bdff63573ed852\" -d id=\"674443\" -d type=\"ts\" -d language=\"${code}\" | jq -r '.result.url'"
-            OUTPUT_FILE download_url_file
-        )
+foreach(code IN LISTS TS_CODES)
+    set(output_file ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${code}.ts)
+    set(new_target ${PROJECT_NAME}_${code})
+    add_custom_target( ${new_target}
+        COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/scripts/download_from_poeditor.sh ${code} ${output_file}"
+    )
+    list(APPEND TS_TARGETS ${new_target})
+endforeach()
 
-        file (STRINGS ${CMAKE_CURRENT_BINARY_DIR}/download_url_file download_url)
-        if(${download_url} STREQUAL "null")
-            message("!!!!!!!!!! WARNING: got ${download_url} when asking for download url for language ${code}")
-            continue()
-        endif()
+add_custom_target(download_translations
+    DEPENDS ${TS_TARGETS}
+)
 
-        set(command "curl -X GET ${download_url} --output ${output_file}")
-        message("calling: ${command}")
-        execute_process(
-            COMMAND bash "-c" "curl -X GET ${download_url} --output ${output_file}"
-        )
-    endforeach()
-endif()
+add_custom_target(upload_translations
+    COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/scripts/upload_new_terms.sh ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}.ts"
+    DEPENDS ${PROJECT_NAME}
+)
 
 # This adds 2 new targets, venus-gui-v2_lupdate and venus-gui-v2_lrelease. Parallel builds (eg. 'make -j') do not rebuild venus-gui-v2_lrelease correctly without further 'add_dependencies' hackery
 qt_add_translations( ${PROJECT_NAME}
@@ -1179,9 +1179,5 @@ add_custom_target(
     theme_parser ALL
     DEPENDS "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
 )
-add_dependencies(venus-gui-v2 theme_parser)
+add_dependencies(${PROJECT_NAME} theme_parser)
 
-add_custom_target(download_translations
-    "${CMAKE_COMMAND}" "--graphviz=${PROJECT_NAME}.dot" .
-     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-)
