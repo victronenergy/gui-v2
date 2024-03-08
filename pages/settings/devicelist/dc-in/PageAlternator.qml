@@ -14,6 +14,19 @@ Page {
 	// wakespeedProductId should always be equal to VE_PROD_ID_WAKESPEED_WS500
 	readonly property int wakespeedProductId: 0xB080    
 	readonly property int arcoProductId: 0xB090
+	readonly property int mgAfcProductId: 0xB0F0
+	readonly property int genericProductId: 0xB091
+	readonly property int orionXsProductIdMin: 0xA3F0
+	readonly property int orionXsProductIdMax: 0xA3FF
+
+	function isRealAlternator(productId) {
+		const alternators = [arcoProductId, wakespeedProductId, mgAfcProductId, genericProductId]
+		return alternators.indexOf(productId) > -1
+	}
+
+	function isOrionXsAlternator(productId) {
+		return productId >= orionXsProductIdMin && productId <= orionXsProductIdMax
+	}
 
 	VeQuickItem {
 		id: productIdDataItem
@@ -21,7 +34,7 @@ Page {
 		uid: root.bindPrefix + "/ProductId"
 		onValueChanged: {
 			if (value !== undefined && modelLoader.status === Loader.Null) {
-				if ([arcoProductId, wakespeedProductId].indexOf(value) >= 0) {
+				if (isRealAlternator(value) || isOrionXsAlternator(value)) {
 					modelLoader.sourceComponent = alternatorModelComponent
 				} else {
 					modelLoader.sourceComponent = dcMeterModelComponent

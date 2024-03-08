@@ -189,8 +189,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				//% "Overall history"
-				text: qsTrId("inverter_overall_history")
+				text: CommonWords.overall_history
 				visible: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",

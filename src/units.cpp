@@ -371,6 +371,15 @@ qreal Units::sumRealNumbers(qreal a, qreal b) const
 		: (a+b);
 }
 
+qreal Units::sumRealNumbersList(const QList<qreal> &numbers) const
+{
+	qreal total = 0;
+	for (qreal n : numbers) {
+		total += (qIsNaN(n) ? 0 : n);
+	}
+	return total;
+}
+
 int Units::unitToVeUnit(VenusOS::Enums::Units_Type unit) const
 {
 	return static_cast<int>(::unitToVeUnit(unit));

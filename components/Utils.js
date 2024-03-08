@@ -102,7 +102,7 @@ function pad(val, length, char) {
 
 function formatAsHHMM(seconds, showUnits) {
 	if (Number.isNaN(seconds) || seconds < 0) {
-		return "--:--"
+		return showUnits ? "--h --m" : "--:--"
 	}
 
 	const duration = decomposeDuration(seconds)
