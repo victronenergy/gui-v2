@@ -84,6 +84,8 @@ public:
 	Q_INVOKABLE int unitToVeUnit(VenusOS::Enums::Units_Type unit) const;
 
 	Q_INVOKABLE qreal sumRealNumbers(qreal a, qreal b) const;
+
+	Q_INVOKABLE qreal sumRealNumbersList(const QList<qreal> &numbers) const;
 };
 
 }

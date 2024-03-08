@@ -214,8 +214,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				//% "Network status"
-				text: qsTrId("settings_network_status")
+				text: CommonWords.network_status
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageCanbusStatus.qml",
 						{ gateway: root.gateway, title: root.title })

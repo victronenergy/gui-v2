@@ -261,6 +261,9 @@ QtObject {
 	//% "Model name"
 	readonly property string model_name: qsTrId("common_words_model_name")
 
+	//% "Network status"
+	readonly property string network_status: qsTrId("common_words_network_status")
+
 	//% "No"
 	readonly property string no: qsTrId("common_words_no")
 
@@ -301,6 +304,9 @@ QtObject {
 	//: Status is 'open'
 	//% "Open"
 	readonly property string open_status: qsTrId("common_words_open_status");
+
+	//% "Overall history"
+	readonly property string overall_history: qsTrId("common_words_overall_history")
 
 	//% "Password"
 	readonly property string password: qsTrId("common_words_password")

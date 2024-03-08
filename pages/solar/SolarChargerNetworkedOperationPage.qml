@@ -26,8 +26,7 @@ Page {
 			}
 
 			ListTextItem {
-				//% "Network status"
-				text: qsTrId("charger_network_status")
+				text: CommonWords.network_status
 				secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkStatus"
 			}
