@@ -56,14 +56,17 @@ Page {
 
 					Repeater {
 						model: solarCharger.trackers
-						delegate: SolarDeviceNavigationItem {
+						delegate: ListQuantityGroupNavigationItem {
 							readonly property SolarDailyHistory historyToday: solarCharger.dailyHistory(0, model.index)
 
 							text: solarCharger.trackerName(model.index)
-							energy: historyToday ? historyToday.yieldKwh : NaN
-							current: modelData.current
-							power: modelData.power
-							voltage: modelData.voltage
+							quantityRowWidth: Theme.geometry_solarListPage_quantityRow_width
+							quantityModel: [
+								{ value: historyToday ? historyToday.yieldKwh : NaN, unit: VenusOS.Units_Energy_KiloWattHour },
+								{ value: modelData.voltage, unit: VenusOS.Units_Volt },
+								{ value: modelData.current, unit: VenusOS.Units_Amp },
+								{ value: modelData.power, unit: VenusOS.Units_Watt },
+							]
 
 							onClicked: {
 								Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
@@ -76,17 +79,20 @@ Page {
 			Component {
 				id: pvInverterRowComponent
 
-				SolarDeviceNavigationItem {
+				ListQuantityGroupNavigationItem {
 					readonly property QtObject pvInverter: {
 						let pvInverterIndex = model.index - Global.solarChargers.model.count - chargerListView.extraHeaderCount
 						return Global.pvInverters.model.deviceAt(pvInverterIndex)
 					}
 
 					text: pvInverter.name
-					energy: pvInverter.energy
-					current: pvInverter.current
-					power: pvInverter.power
-					voltage: pvInverter.voltage
+					quantityRowWidth: Theme.geometry_solarListPage_quantityRow_width
+					quantityModel: [
+						{ value: pvInverter.energy, unit: VenusOS.Units_Energy_KiloWattHour },
+						{ value: pvInverter.voltage, unit: VenusOS.Units_Volt },
+						{ value: pvInverter.current, unit: VenusOS.Units_Amp },
+						{ value: pvInverter.power, unit: VenusOS.Units_Watt },
+					]
 
 					onClicked: {
 						Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml", { "pvInverter": pvInverter })
@@ -108,12 +114,10 @@ Page {
 			Label {
 				id: firstTitleLabel
 				anchors {
-					left: parent.left
-					leftMargin: Theme.geometry_listItem_content_horizontalMargin
-					right: quantityRow.left
 					bottom: parent.bottom
 					bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin
 				}
+				leftPadding: Theme.geometry_listItem_content_horizontalMargin
 				text: chargerMode
 						//% "PV Charger"
 					  ? qsTrId("solardevices_pv_charger")
@@ -121,6 +125,7 @@ Page {
 				font.pixelSize: Theme.font_size_caption
 				color: Theme.color_solarListPage_header_text
 				elide: Text.ElideRight
+				width: parent.width - quantityRow.width
 			}
 
 			Row {
@@ -137,13 +142,24 @@ Page {
 				Repeater {
 					id: titleRepeater
 
-					model: [chargerMode ? CommonWords.yield_today : CommonWords.energy, CommonWords.voltage, CommonWords.current_amps, CommonWords.power_watts]
+					model: [
+						{ text: chargerMode ? CommonWords.yield_today : CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
+						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt },
+						{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
+						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
+					]
 					delegate: Label {
-						width: (parent.width / titleRepeater.count) * (model.index === 0 ? 1.2 : 1) // kwh column needs more space as unit name is longer
-						text: modelData
+						width: quantityMetrics.columnWidth(modelData.unit)
+						text: modelData.text
 						font.pixelSize: Theme.font_size_caption
 						color: Theme.color_solarListPage_header_text
 					}
+				}
+
+				QuantityTableMetrics {
+					id: quantityMetrics
+					count: titleRepeater.count
+					availableWidth: quantityRow.width
 				}
 			}
 		}
