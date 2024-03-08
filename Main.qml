@@ -18,6 +18,9 @@ Window {
 	width: Qt.platform.os != "wasm" ? Theme.geometry_screen_width : Screen.width
 	height: Qt.platform.os != "wasm" ? Theme.geometry_screen_height : Screen.height
 
+	property bool isDesktop: false
+	onIsDesktopChanged: Global.isDesktop = root.isDesktop
+
 	function skipSplashScreen() {
 		Global.allPagesLoaded = true
 		Global.splashScreenVisible = false

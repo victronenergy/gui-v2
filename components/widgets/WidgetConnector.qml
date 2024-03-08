@@ -73,7 +73,6 @@ Item {
 		if (_animated) {
 			// Animate at a constant rate of pixels/sec, based on the diagonal length of the shape
 			electronAnim.duration = electronTravelDistance / Theme.geometry_overviewPage_connector_electron_velocity * 1000
-			electronAnim.restart()
 		}
 	}
 
@@ -222,6 +221,7 @@ Item {
 				id: electronRepeater
 
 				delegate: Image {
+					opacity: 0.0
 					source: "qrc:/images/electron.svg"
 
 					Behavior on opacity {
@@ -237,21 +237,20 @@ Item {
 		}
 	}
 
-	NumberAnimation {
+	Connections {
 		id: electronAnim
 
-		target: pathUpdater
-		property: "progress"
+		property real duration
+		property bool startToEnd: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
 
-		from: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
-			  ? 0
-			  : 1
-		to: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
-			? 1
-			: 0
+		enabled: root._animated
+		target: overviewPageRootAnimation
 
-		running: root._animated
-		loops: Animation.Infinite
+		function onUpdate(elapsedTime) {
+			var progress = 1000*elapsedTime/electronAnim.duration
+			progress = progress - Math.floor(progress)
+			pathUpdater.progress = startToEnd ? progress : 1.0 - progress
+		}
 	}
 
 	WidgetConnectorPathUpdater {
