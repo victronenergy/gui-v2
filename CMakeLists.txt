@@ -316,6 +316,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListRadioButtonGroup.qml
     components/listitems/ListRadioButtonGroupNoYes.qml
     components/listitems/ListQuantityGroup.qml
+    components/listitems/ListQuantityGroupNavigationItem.qml
     components/listitems/ListQuantityItem.qml
     components/listitems/ListRangeSlider.qml
     components/listitems/ListSlider.qml
@@ -592,7 +593,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/solar/SolarChargerNetworkedOperationPage.qml
     pages/solar/SolarChargerPage.qml
     pages/solar/SolarDeviceListPage.qml
-    pages/solar/SolarDeviceNavigationItem.qml
     pages/solar/SolarHistoryPage.qml
 
     pages/vebusdevice/PageAcSensor.qml

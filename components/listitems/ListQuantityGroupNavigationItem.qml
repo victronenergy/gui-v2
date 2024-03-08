@@ -9,12 +9,10 @@ import Victron.VenusOS
 ListNavigationItem {
 	id: root
 
-	property real energy: NaN
-	property real voltage: NaN
-	property real current: NaN
-	property real power: NaN
+	property alias quantityModel: quantityRepeater.model
+	property alias quantityRowWidth: quantityRow.width
 
-	primaryLabel.width: availableWidth - Theme.geometry_solarListPage_quantityRow_width - Theme.geometry_listItem_content_horizontalMargin
+	primaryLabel.width: availableWidth - quantityRow.width - Theme.geometry_listItem_content_horizontalMargin
 
 	Row {
 		id: quantityRow
@@ -23,21 +21,13 @@ ListNavigationItem {
 			right: parent.right
 			rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
 		}
-		width: Theme.geometry_solarListPage_quantityRow_width
 		height: parent.height - parent.spacing
 
 		Repeater {
 			id: quantityRepeater
 
-			model: [
-				{ value: root.energy, unit: VenusOS.Units_Energy_KiloWattHour },
-				{ value: root.voltage, unit: VenusOS.Units_Volt },
-				{ value: root.current, unit: VenusOS.Units_Amp },
-				{ value: root.power, unit: VenusOS.Units_Watt },
-			]
-
 			delegate: QuantityLabel {
-				width: (quantityRow.width / quantityRepeater.count) * (model.index === 0 ? 1.2 : 1)
+				width: quantityMetrics.columnWidth(unit)
 				height: quantityRow.height
 				value: modelData.value
 				unit: modelData.unit
@@ -47,5 +37,11 @@ ListNavigationItem {
 				unitColor: Theme.color_quantityTable_quantityUnit
 			}
 		}
+	}
+
+	QuantityTableMetrics {
+		id: quantityMetrics
+		count: quantityRepeater.count
+		availableWidth: quantityRow.width
 	}
 }
