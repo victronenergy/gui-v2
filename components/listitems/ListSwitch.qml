@@ -15,15 +15,18 @@ ListItem {
 	property bool updateOnClick: true
 	property bool invertSourceValue
 
+	property int valueTrue: 1
+	property int valueFalse: 0
+
 	signal clicked()
 
 	function _setChecked(c) {
 		if (updateOnClick) {
 			if (root.dataItem.uid.length > 0) {
 				if (invertSourceValue) {
-					dataItem.setValue(c ? 0 : 1)
+					dataItem.setValue(c ? valueFalse : valueTrue)
 				} else {
-					dataItem.setValue(c ? 1 : 0)
+					dataItem.setValue(c ? valueTrue : valueFalse)
 				}
 			} else {
 				switchItem.checked = c
@@ -44,7 +47,7 @@ ListItem {
 		},
 		Switch {
 			id: switchItem
-			checked: invertSourceValue ? dataItem.value === 0 : dataItem.value === 1
+			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 			onClicked: root._setChecked(!checked)
 		}
 	]
