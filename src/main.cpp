@@ -288,7 +288,9 @@ int main(int argc, char *argv[])
 #else
 	const bool desktop(QGuiApplication::primaryScreen()->availableSize().height() > 600);
 #endif
+
 	if (desktop) {
+		window->setProperty("isDesktop", true);
 		window->show();
 	} else {
 		window->showFullScreen();
