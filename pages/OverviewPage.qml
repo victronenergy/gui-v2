@@ -524,6 +524,31 @@ SwipeViewPage {
 		}
 	}
 
+	FrameAnimation {
+		id: overviewPageRootAnimation
+
+		running: root.visible
+		property int index
+		property real previousElapsed
+
+		signal update(real elapsedTime)
+
+		onRunningChanged: {
+			if (!running) {
+				index = 0
+				previousElapsed = previousElapsed + elapsedTime
+			}
+		}
+
+		onTriggered: {
+			// Limit the frame rate to 20fps on the GX products
+			if (index === 0 || Qt.platform.os !== "linux" || Global.isDesktop) {
+				update(elapsedTime)
+			}
+			index = (index + 1) % 3
+		}
+	}
+
 	Component {
 		id: solarComponent
 

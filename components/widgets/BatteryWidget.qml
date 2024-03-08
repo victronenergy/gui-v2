@@ -91,8 +91,6 @@ OverviewWidget {
 					delegate: Item {
 						id: chimney // a "chimney" which the bubbles rise up within.
 
-						required property int index
-
 						width: animationClip.width / Theme.animation_overviewPage_widget_battery_chimneys
 						height: root.expandedHeight // always full height, the clip item will clip it.
 						y: -(height - animationClip.height)
