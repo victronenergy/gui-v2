@@ -105,63 +105,20 @@ Page {
 	Component {
 		id: listHeaderComponent
 
-		Item {
+		QuantityGroupListHeader {
 			property bool chargerMode: Global.solarChargers.model.count > 0
 
-			width: parent.width
-			height: Theme.geometry_listItem_height
-
-			Label {
-				id: firstTitleLabel
-				anchors {
-					bottom: parent.bottom
-					bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin
-				}
-				leftPadding: Theme.geometry_listItem_content_horizontalMargin
-				text: chargerMode
-						//% "PV Charger"
-					  ? qsTrId("solardevices_pv_charger")
-					  : CommonWords.pv_inverter
-				font.pixelSize: Theme.font_size_caption
-				color: Theme.color_solarListPage_header_text
-				elide: Text.ElideRight
-				width: parent.width - quantityRow.width
-			}
-
-			Row {
-				id: quantityRow
-
-				anchors {
-					bottom: parent.bottom
-					bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin
-					right: parent.right
-					rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
-				}
-				width: Theme.geometry_solarListPage_quantityRow_width
-
-				Repeater {
-					id: titleRepeater
-
-					model: [
-						{ text: chargerMode ? CommonWords.yield_today : CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
-						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt },
-						{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
-						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
-					]
-					delegate: Label {
-						width: quantityMetrics.columnWidth(modelData.unit)
-						text: modelData.text
-						font.pixelSize: Theme.font_size_caption
-						color: Theme.color_solarListPage_header_text
-					}
-				}
-
-				QuantityTableMetrics {
-					id: quantityMetrics
-					count: titleRepeater.count
-					availableWidth: quantityRow.width
-				}
-			}
+			firstColumnText: chargerMode
+					//% "PV Charger"
+				  ? qsTrId("solardevices_pv_charger")
+				  : CommonWords.pv_inverter
+			quantityRowWidth: Theme.geometry_solarListPage_quantityRow_width
+			quantityTitleModel: [
+				{ text: chargerMode ? CommonWords.yield_today : CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
+				{ text: CommonWords.voltage, unit: VenusOS.Units_Volt },
+				{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
+				{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
+			]
 		}
 	}
 }
