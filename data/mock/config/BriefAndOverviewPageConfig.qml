@@ -123,8 +123,8 @@ QtObject {
 			solar: { inverters: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
 		},
 		{
-			name: "Orion XS alternator",
-			dcInputs: { types: [ { serviceType: "alternator", productId: 0xA3F0 } ] },
+			name: "Multiple alternators, including Orion XS",
+			dcInputs: { types: [ { serviceType: "alternator", productId: 0xA3F0 }, { serviceType: "alternator" } ] },
 		},
 	]
 
