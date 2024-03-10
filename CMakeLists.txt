@@ -336,6 +336,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/Led.qml
     components/settings/ListAlarmState.qml
     components/settings/ListClearHistoryButton.qml
+    components/settings/ListDcInputQuantityGroup.qml
+    components/settings/ListDcOutputQuantityGroup.qml
     components/settings/ListDvccSwitch.qml
     components/settings/ListFirmwareVersionItem.qml
     components/settings/ListRelayState.qml

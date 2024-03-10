@@ -19,51 +19,12 @@ ObjectModel {
 		visible: defaultVisible && dataItem.isValid
 	}
 
-	ListQuantityGroup {
-		//% "Input"
-		text: qsTrId("alternator_wakespeed_input")
-		visible: defaultVisible && (inVoltage.isValid || inPower.isValid)
-		textModel: [
-			{ value: inVoltage.value, unit: VenusOS.Units_Volt, visible: inVoltage.isValid },
-			{ value: inCurrent.value, unit: VenusOS.Units_Amp, visible: inCurrent.isValid },
-			{ value: inPower.value, unit: VenusOS.Units_Watt, visible: inPower.isValid },
-		]
-
-		VeQuickItem {
-			id: inVoltage
-			uid: root.bindPrefix + "/Dc/In/V"
-		}
-		VeQuickItem {
-			id: inCurrent
-			uid: root.bindPrefix + "/Dc/In/I"
-		}
-		VeQuickItem {
-			id: inPower
-			uid: root.bindPrefix + "/Dc/In/P"
-		}
+	ListDcInputQuantityGroup {
+		bindPrefix: root.bindPrefix
 	}
 
-	ListQuantityGroup {
-		//% "Output"
-		text: qsTrId("alternator_wakespeed_output")
-		textModel: [
-			{ value: dcVoltage.value, unit: VenusOS.Units_Volt },
-			{ value: dcCurrent.value, unit: VenusOS.Units_Amp, visible: dcCurrent.isValid },
-			{ value: dcPower.value, unit: VenusOS.Units_Watt, visible: dcPower.isValid },
-		]
-
-		VeQuickItem {
-			id: dcVoltage
-			uid: root.bindPrefix + "/Dc/0/Voltage"
-		}
-		VeQuickItem {
-			id: dcCurrent
-			uid: root.bindPrefix + "/Dc/0/Current"
-		}
-		VeQuickItem {
-			id: dcPower
-			uid: root.bindPrefix + "/Dc/0/Power"
-		}
+	ListDcOutputQuantityGroup {
+		bindPrefix: root.bindPrefix
 	}
 
 	ListTemperatureItem {
