@@ -58,6 +58,8 @@ QtObject {
 		current = NaN
 	}
 
+	// TODO these provide names that are not only for DC inputs, e.g. "dcsystem", so should move
+	// this and inputTypeToText() to Global or somewhere else.
 	function inputType(serviceUid, monitorMode) {
 		const serviceType = BackendConnection.type === BackendConnection.MqttSource
 					? serviceUid.split("/")[1] || ""

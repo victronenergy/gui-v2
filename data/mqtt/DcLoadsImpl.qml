@@ -9,12 +9,25 @@ import Victron.VenusOS
 Instantiator {
 	id: root
 
-	model: VeQItemTableModel {
-		uids: ["mqtt/dcload"]
-		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+	readonly property Instantiator dcloadObjects: Instantiator {
+		model: VeQItemTableModel {
+			uids: ["mqtt/dcload"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: DcLoad {
+			serviceUid: model.uid
+		}
 	}
 
-	delegate: DcLoad {
-		serviceUid: model.uid
+	readonly property Instantiator dcsystemObjects: Instantiator {
+		model: VeQItemTableModel {
+			uids: ["mqtt/dcsystem"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: DcLoad {
+			serviceUid: model.uid
+		}
 	}
 }

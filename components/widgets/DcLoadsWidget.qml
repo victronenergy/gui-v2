@@ -16,7 +16,7 @@ OverviewWidget {
 	title: qsTrId("overview_widget_dcloads_title")
 	icon.source: "qrc:/images/dcloads.svg"
 	type: VenusOS.OverviewWidget_Type_DcLoads
-	enabled: (Global.dcLoads.model.count + Global.dcSystems.model.count) > 0
+	enabled: Global.dcLoads.model.count > 0
 
 	quantityLabel.dataObject: Global.system.dc
 
@@ -25,14 +25,12 @@ OverviewWidget {
 
 		Page {
 			GradientListView {
-				model: Global.dcLoads.model.count + Global.dcSystems.model.count
+				model: Global.dcLoads.model
 
 				delegate: ListTextGroup {
 					id: deviceDelegate
 
-					readonly property var device: model.index < Global.dcLoads.model.count
-							? Global.dcLoads.model.deviceAt(model.index)
-							: Global.dcSystems.model.deviceAt(model.index - Global.dcLoads.model.count)
+					required property var device
 
 					text: device.name
 					textModel: [

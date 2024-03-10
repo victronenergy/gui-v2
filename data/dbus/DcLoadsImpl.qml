@@ -9,14 +9,29 @@ import Victron.VenusOS
 Instantiator {
 	id: root
 
-	model: VeQItemSortTableModel {
-		dynamicSortFilter: true
-		filterRole: VeQItemTableModel.UniqueIdRole
-		filterRegExp: "^dbus/com\.victronenergy\.dcload\."
-		model: Global.dataServiceModel
+	readonly property Instantiator dcloadObjects: Instantiator {
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.dcload\."
+			model: Global.dataServiceModel
+		}
+
+		delegate: DcLoad {
+			serviceUid: model.uid
+		}
 	}
 
-	delegate: DcLoad {
-		serviceUid: model.uid
+	readonly property Instantiator dcsystemObjects: Instantiator {
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.dcsystem\."
+			model: Global.dataServiceModel
+		}
+
+		delegate: DcLoad {
+			serviceUid: model.uid
+		}
 	}
 }
