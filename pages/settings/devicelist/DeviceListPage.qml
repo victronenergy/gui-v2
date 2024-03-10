@@ -210,7 +210,6 @@ Page {
 				Global.chargers.model,
 				Global.dcInputs.model,
 				Global.dcLoads.model,
-				Global.dcSystems.model,
 				Global.digitalInputs.model,
 				Global.environmentInputs.model,
 				Global.evChargers.model,
