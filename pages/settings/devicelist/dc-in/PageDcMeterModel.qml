@@ -21,26 +21,9 @@ ObjectModel {
 		uid: root.bindPrefix + "/ProductId"
 	}
 
-	ListQuantityGroup {
+	ListDcOutputQuantityGroup {
 		text: Global.dcInputs.inputTypeToText(Global.dcInputs.inputType(root.bindPrefix, monitorMode.value))
-		textModel: [
-			{ value: dcVoltage.value, unit: VenusOS.Units_Volt },
-			{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
-			{ value: dcPower.value, unit: VenusOS.Units_Watt },
-		]
-
-		VeQuickItem {
-			id: dcVoltage
-			uid: root.bindPrefix + "/Dc/0/Voltage"
-		}
-		VeQuickItem {
-			id: dcCurrent
-			uid: root.bindPrefix + "/Dc/0/Current"
-		}
-		VeQuickItem {
-			id: dcPower
-			uid: root.bindPrefix + "/Dc/0/Power"
-		}
+		bindPrefix: root.bindPrefix
 	}
 
 	ListTemperatureItem {
