@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Controls.impl as CP
 
 SwipeViewPage {
 	id: root
@@ -168,5 +169,38 @@ SwipeViewPage {
 		model: Global.notifications.historicalModel
 		spacing: Theme.geometry_gradientList_spacing
 		delegate: NotificationDelegate {}
+	}
+
+	Button {
+		parent: !!Global.pageManager ? Global.pageManager.statusBar.rightSideRow : root
+		leftPadding: Theme.geometry_silenceAlarmButton_horizontalPadding
+		rightPadding: Theme.geometry_silenceAlarmButton_horizontalPadding
+		height: Theme.geometry_notificationsPage_snoozeButton_height
+		radius: Theme.geometry_button_radius
+
+		enabled: !!Global.notifications && Global.notifications.alert && root.isCurrentPage
+		opacity: enabled ? 1 : 0
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration} }
+		backgroundColor: Theme.color_critical_background
+
+		contentItem: Row {
+			anchors.verticalCenter: parent.verticalCenter
+			spacing: Theme.geometry_notificationsPage_snoozeButton_spacing
+
+			CP.ColorImage {
+				anchors.verticalCenter: parent.verticalCenter
+				source: "qrc:/images/icon_alarm_snooze_24.svg"
+				color: Theme.color_font_primary
+			}
+
+			Label {
+				anchors.verticalCenter: parent.verticalCenter
+				font.pixelSize: Theme.font_size_caption
+				//% "Silence alarm"
+				text: qsTrId("silence_alarm")
+			}
+		}
+
+		onClicked: Global.notifications.acknowledgeAll()
 	}
 }
