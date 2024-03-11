@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Controls as C
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Rectangle {
@@ -15,6 +14,7 @@ Rectangle {
 
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
+	property alias rightSideRow: rightSideRow
 
 	property bool animationEnabled
 
@@ -77,38 +77,13 @@ Rectangle {
 		text: root.title.length > 0 ? root.title : ClockTime.currentTimeText
 	}
 
-	Button {
+	Row {
+		id: rightSideRow
 		anchors {
 			right: rightButtonItem.left
-			rightMargin: Theme.geometry_notificationsPage_snoozeButton_horizontalMargin
+			rightMargin: Theme.geometry_statusBar_rightSideRow_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
-		enabled: !!Global.notifications && Global.notifications.alert
-		opacity: enabled ? 1 : 0
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration} }
-		leftPadding: Theme.geometry_notificationsPage_snoozeButton_horizontalMargin
-		rightPadding: Theme.geometry_notificationsPage_snoozeButton_horizontalMargin
-		height: Theme.geometry_notificationsPage_snoozeButton_height
-		backgroundColor: Theme.color_critical_background
-		radius: Theme.geometry_button_radius
-		contentItem: Row {
-			anchors.verticalCenter: parent.verticalCenter
-			spacing: Theme.geometry_notificationsPage_snoozeButton_spacing
-
-			CP.ColorImage {
-				anchors.verticalCenter: parent.verticalCenter
-				source: "qrc:/images/icon_alarm_snooze_24.svg"
-				color: Theme.color_font_primary
-			}
-
-			Label {
-				anchors.verticalCenter: parent.verticalCenter
-				font.pixelSize: Theme.font_size_caption
-				//% "Silence alarm"
-				text: qsTrId("silence_alarm")
-			}
-		}
-		onClicked: Global.notifications.acknowledgeAll()
 	}
 
 	Button {

@@ -13,6 +13,8 @@
     "geometry_button_radius": 6,
     "geometry_button_border_width": 2,
 
+    "geometry_silenceAlarmButton_horizontalPadding": 16,
+
     "geometry_listItemButton_horizontalPadding": 16,
     "geometry_listItemButton_maximumWidth": 180,
     "geometry_listItemButton_height": 40,
@@ -68,6 +70,7 @@
     "geometry_statusBar_button_width": 48,
     "geometry_statusBar_button_height": 48,
     "geometry_statusBar_horizontalMargin": 18,
+    "geometry_statusBar_rightSideRow_horizontalMargin" : 16,
 
     "geometry_tabBar_width": 368,
     "geometry_tabBar_height": 40,
@@ -93,7 +96,6 @@
     "geometry_notificationsPage_delegate_marker_width" : 8,
     "geometry_notificationsPage_delegate_marker_radius" : 4,
     "geometry_notificationsPage_snoozeButton_height" : 32,
-    "geometry_notificationsPage_snoozeButton_horizontalMargin" : 16,
     "geometry_notificationsPage_snoozeButton_spacing" : 7,
     "geometry_notificationsPage_history_height" : 40,
     "geometry_notificationsPage_history_bottomPadding" : 3,
