@@ -51,7 +51,7 @@ public:
 	static QObject* instance(QQmlEngine *engine, QJSEngine *);
 
 	Q_INVOKABLE int defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const;
-	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints) const;
+	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints = 0) const;
 
 	Q_INVOKABLE QString scaleToString(VenusOS::Enums::Units_Scale scale) const;
 	Q_INVOKABLE bool isScalingSupported(VenusOS::Enums::Units_Type unit) const;
