@@ -55,6 +55,7 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeVoltage"
 				suffix: "V"
 				decimals: 1
+				stepSize: 0.1
 			}
 
 			ListDvccSwitch {
