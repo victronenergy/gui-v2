@@ -14,7 +14,7 @@ QtObject {
 
 	function populate() {
 		// Add all known types of DC loads.
-		const serviceTypes = ["dcload", "dcsystem"]
+		const serviceTypes = ["dcload", "dcsystem", "dcdc"]
 		for (let i = 0; i < serviceTypes.length; ++i) {
 			createDcLoad({ serviceType: serviceTypes[i]})
 		}
@@ -50,16 +50,17 @@ QtObject {
 				triggeredOnStart: true
 
 				onTriggered: {
-					const properties = {
-						"power": 50 + Math.random() * 10,
-						"voltage": 20 + Math.random() * 10,
-						"current": 1 + Math.random(),
-					}
-					for (let propName in properties) {
-						const value = properties[propName]
-						dcLoad["_" + propName].setValue(value)
-					}
+					setMockValue("/Dc/0/Power", 50 + Math.random() * 10)
+					setMockValue("/Dc/0/Voltage", 20 + Math.random() * 10)
+					setMockValue("/Dc/0/Current", 1 + Math.random())
+					setMockValue("/Dc/In/P", 50 + Math.random() * 10)
+					setMockValue("/Dc/In/V", 20 + Math.random() * 10)
+					setMockValue("/Dc/In/I", 1 + Math.random())
 				}
+			}
+
+			function setMockValue(key, value) {
+				Global.mockDataSimulator.setMockValue(serviceUid + key, value)
 			}
 
 			Component.onCompleted: {
@@ -67,6 +68,10 @@ QtObject {
 				serviceUid = "mock/com.victronenergy." + serviceType + ".ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_productName.setValue("DC Load (%1)".arg(serviceType))
+				setMockValue("/Mode", 4)
+				setMockValue("/State", 5)
+				setMockValue("/Error", 0)
+				setMockValue("/Connected", 1)
 			}
 		}
 	}

@@ -553,6 +553,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml
     pages/settings/devicelist/dc-in/PageAlternator.qml
     pages/settings/devicelist/dc-in/PageAlternatorModel.qml
+    pages/settings/devicelist/dc-in/PageDcDcConverter.qml
     pages/settings/devicelist/dc-in/PageDcMeter.qml
     pages/settings/devicelist/dc-in/PageDcMeterModel.qml
     pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml

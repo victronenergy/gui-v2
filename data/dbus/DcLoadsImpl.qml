@@ -34,4 +34,17 @@ Instantiator {
 			serviceUid: model.uid
 		}
 	}
+
+	readonly property Instantiator dcdcObjects: Instantiator {
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterRegExp: "^dbus/com\.victronenergy\.dcdc\."
+			model: Global.dataServiceModel
+		}
+
+		delegate: DcLoad {
+			serviceUid: model.uid
+		}
+	}
 }
