@@ -162,6 +162,7 @@ Page {
 		case "dcsource":	// deliberate fall through
 		case "dcload":		// deliberate fall through
 		case "dcsystem":	// deliberate fall through
+		case "dcdc":        // deliberate fall through
 		case "alternator":
 			url = serviceType === "alternator" ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
 					: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"

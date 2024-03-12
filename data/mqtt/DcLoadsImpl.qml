@@ -30,4 +30,15 @@ Instantiator {
 			serviceUid: model.uid
 		}
 	}
+
+	readonly property Instantiator dcdcObjects: Instantiator {
+		model: VeQItemTableModel {
+			uids: ["mqtt/dcdc"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: DcLoad {
+			serviceUid: model.uid
+		}
+	}
 }

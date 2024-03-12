@@ -28,7 +28,7 @@ SwipeViewPage {
 	readonly property int _shouldResetWidgets: Global.dcInputs.model.count
 			+ (Global.acInputs.activeInput ? Global.acInputs.activeInput.source : -1)
 			+ (Global.acInputs.generatorInput ? 1 : 0)
-			+ (isNaN(Global.system.loads.dcPower) ? 0 : 1)
+			+ (Global.dcLoads.model.count === 0 || isNaN(Global.system.loads.dcPower) ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
 			+ (Global.evChargers.model.count === 0 ? 0 : 1)
 			+ (Global.pvInverters.model.count === 0 ? 0 : 1)
@@ -99,7 +99,7 @@ SwipeViewPage {
 		if (!!evChargerWidget) {
 			evChargerWidget.size = VenusOS.OverviewWidget_Size_L
 		}
-		dcLoadsWidget.size = !isNaN(Global.system.loads.dcPower)
+		dcLoadsWidget.size = Global.dcLoads.model.count > 0 || !isNaN(Global.system.loads.dcPower)
 				? (!!evChargerWidget ? VenusOS.OverviewWidget_Size_XS : VenusOS.OverviewWidget_Size_L)
 				: VenusOS.OverviewWidget_Size_Zero
 		acLoadsWidget.size = dcLoadsWidget.size === VenusOS.OverviewWidget_Size_Zero
@@ -313,7 +313,7 @@ SwipeViewPage {
 		if (Global.evChargers.model.count > 0) {
 			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
 		}
-		if (!isNaN(Global.system.loads.dcPower)) {
+		if (Global.dcLoads.model.count > 0 || !isNaN(Global.system.loads.dcPower)) {
 			widgets.push(dcLoadsWidget)
 		}
 		_rightWidgets = widgets
