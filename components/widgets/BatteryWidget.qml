@@ -44,100 +44,44 @@ OverviewWidget {
 
 			width: parent.width
 			height: parent.height * (animationRect.value)
-			y: parent.height - height
+			anchors.bottom: parent.bottom
 			visible: batteryData.mode === VenusOS.Battery_Mode_Charging && root._animationReady
 			clip: true
 
-			Timer {
-				id: delayedStartTimer
-				property int count: 0
-				property bool startRunning: root._animationReady
-				interval: Theme.animation_overviewPage_widget_battery_bubble_duration / Theme.animation_overviewPage_widget_battery_bubbles
-				repeat: true
+			SequentialAnimation {
+				property bool startAnimation: root._animationReady
+				onStartAnimationChanged: if (startAnimation) start()
+				onStopped: if (startAnimation) start()
 
-				onStartRunningChanged: {
-					if (startRunning) {
-						count = 0
-						running = true
-					}
+				YAnimator {
+					target: gradient
+					from: animationClip.height
+					to: -gradient.height
+					duration: Theme.animation_overviewPage_widget_battery_animation_duration
+					easing.type: Easing.OutQuad
 				}
 
-				onTriggered: {
-					if (count++ > Theme.animation_overviewPage_widget_battery_bubbles) {
-						running = false
-					}
+				PauseAnimation {
+					duration: Theme.animation_overviewPage_widget_battery_animation_pause_duration
 				}
 			}
 
-			Row {
-				id: chimneysRow
-
-				height: parent.height
-
-				Repeater {
-					id: chimneyRepeater
-
-					model: Theme.animation_overviewPage_widget_battery_chimneys
-
-					delegate: Item {
-						id: chimney // a "chimney" which the bubbles rise up within.
-
-						width: animationClip.width / Theme.animation_overviewPage_widget_battery_chimneys
-						height: root.expandedHeight // always full height, the clip item will clip it.
-						y: -(height - animationClip.height)
-
-						Repeater {
-							model: Theme.animation_overviewPage_widget_battery_bubbles
-							delegate: Rectangle {
-								id: bubble
-								required property int index
-								y: chimney.height
-								width: Theme.geometry_overviewPage_widget_battery_bubble_width
-								height: width
-								color: Theme.color_overviewPage_widget_battery_bubble_background
-								radius: height/2
-								border.width: 1
-								border.color: Theme.color_overviewPage_widget_battery_bubble_border
-
-								YAnimator {
-									id: yanimator
-									target: bubble
-									from: chimney.height
-									to: 0
-									duration: Theme.animation_overviewPage_widget_battery_bubble_duration + 100*Math.random()*bubble.index
-									easing.type: Easing.InOutQuad
-									loops: Animation.Infinite
-									running: root._animationReady && delayedStartTimer.count >= bubble.index
-								}
-
-								XAnimator {
-									target: bubble
-									// define three slightly different paths for bubbles.
-									from: bubble.index % 3 === 0 ? chimney.width/2 - bubble.width
-										: bubble.index % 2 === 0 ? chimney.width - 3*bubble.width
-										: (3*bubble.width)
-									to: bubble.index % 3 === 0 ? chimney.width/2 + bubble.width
-									  : bubble.index % 2 === 0 ? 3*bubble.width
-									  : (chimney.width - 3*bubble.width)
-									duration: yanimator.duration
-									easing.type: Easing.InBack
-									easing.overshoot: Math.max(2.0, (0.8 + Math.random() * bubble.index))
-									loops: Animation.Infinite
-									running: yanimator.running
-								}
-
-								OpacityAnimator {
-									target: bubble
-									from: Theme.animation_overviewPage_widget_battery_bubble_opacity
-									to: 0.0
-									easing.type: Easing.InQuad
-									duration: yanimator.duration
-									loops: Animation.Infinite
-									running: yanimator.running
-									onRunningChanged: if (!running) bubble.opacity = 0
-								}
-							}
-						}
+			Rectangle {
+				id: gradient
+				width: parent.width
+				height: Theme.geometry_overviewPage_widget_battery_gradient_height
+				gradient: Gradient {
+					GradientStop {
+						position: 0.0
+						color: Qt.rgba(1,1,1,0.3)
+					}
+					GradientStop {
+						position: 0.3
+						color: Qt.rgba(1,1,1,0.15)
+					}
+					GradientStop {
+						position: 1.0
+						color: Qt.rgba(1,1,1,0.0)
 					}
 				}
 			}
