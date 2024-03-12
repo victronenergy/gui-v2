@@ -56,16 +56,18 @@ ListView {
 	}
 	Connections {
 		target: {
-			// Find the parent item that is on a StackView (i.e. a Page)
+			// Find the root Page parent item
 			let p = root.parent
-			while (p && p.C.StackView.activated === undefined) {
+			while (p && p.__is_venus_gui_page__ === undefined) {
 				p = p.parent
 			}
-			return (!p || (p.C.StackView.activated === undefined)) ? null : p.C.StackView
+			return (!p || (p.__is_venus_gui_page__ === undefined)) ? null : p
 		}
-		function onActivated() {
+		function onIsCurrentPageChanged() {
 			// Once the parent page is activated, stop auto-adjustments of contentY.
-			root._previousContentY = NaN
+			if (target && target.isCurrentPage) {
+				root._previousContentY = NaN
+			}
 		}
 	}
 

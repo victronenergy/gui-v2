@@ -21,6 +21,8 @@ FocusScope {
 
 	property var tryPop // optional function: returns whether the page can be poppped
 
+	readonly property bool __is_venus_gui_page__: true
+
 	implicitWidth: Theme.geometry_screen_width
 	implicitHeight: Theme.geometry_screen_height
 }
