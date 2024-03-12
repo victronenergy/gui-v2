@@ -235,7 +235,7 @@
     "geometry_overviewPage_widget_rightWidgetWidth": 224,
 
     "geometry_overviewPage_widget_battery_background_radius": 4,
-    "geometry_overviewPage_widget_battery_bubble_width": 14,
+    "geometry_overviewPage_widget_battery_gradient_height": 48,
     "geometry_overviewPage_widget_battery_bottomRow_bottomMargin": 9,
     "geometry_overviewPage_widget_battery_temperature_topMargin": 10,
     "geometry_overviewPage_widget_battery_temperature_rightMargin": 16,
