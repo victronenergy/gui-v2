@@ -8,6 +8,7 @@ import Victron.VenusOS
 
 DeviceModel {
 	property int type
+	property real averageLevel
 	property real totalCapacity
 	property real totalRemaining
 

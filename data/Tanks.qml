@@ -148,25 +148,23 @@ QtObject {
 			console.warn("updateTankModelTotals(): Unknown tank type", tankType)
 			return
 		}
+		let totalLevel = NaN
 		let totalRemaining = NaN
 		let totalCapacity = NaN
 		for (let i = 0; i < model.count; ++i) {
 			const tank = model.deviceAt(i)
-			if (!isNaN(tank.remaining)) {
-				if (isNaN(totalRemaining)) {
-					totalRemaining = 0
-				}
-				totalRemaining += tank.remaining
-			}
-			if (!isNaN(tank.capacity)) {
-				if (isNaN(totalCapacity)) {
-					totalCapacity = 0
-				}
-				totalCapacity += tank.capacity
-			}
+			totalRemaining = Units.sumRealNumbers(totalRemaining, tank.remaining)
+			totalCapacity = Units.sumRealNumbers(totalCapacity, tank.capacity)
+			totalLevel = Units.sumRealNumbers(totalLevel, tank.level)
 		}
+		model.averageLevel = isNaN(totalLevel) || model.count === 0 ? NaN : totalLevel / model.count
 		model.totalRemaining = totalRemaining
 		model.totalCapacity = totalCapacity
+
+		// If /Level is not available for the tanks, calculate it from /Remaining and /Capacity.
+		if (isNaN(model.averageLevel) && !isNaN(totalRemaining) && !isNaN(totalCapacity) && totalCapacity > 0) {
+			model.averageLevel = totalRemaining / totalCapacity * 100
+		}
 	}
 
 	function reset() {

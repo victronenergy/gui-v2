@@ -38,9 +38,6 @@ QtObject {
 	}
 
 	function addTank(properties) {
-		if (properties.remaining === undefined) {
-			properties.remaining = properties.capacity * (properties.level / 100)
-		}
 		const tankObj = tankComponent.createObject(root)
 		_createdObjects.push(tankObj)
 		for (var p in properties) {
