@@ -138,7 +138,7 @@ Rectangle {
 		width: Theme.geometry_levelsPage_gaugeDelegate_contentWidth
 		font.pixelSize: Theme.font_size_h1
 		unit: VenusOS.Units_Percentage
-		value: (isNaN(root.level) || root.level < 0) ? 0 : Math.round(root.level)
+		value: root.level
 	}
 
 	Label {
