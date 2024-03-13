@@ -108,11 +108,7 @@ ListView {
 					title: tankProperties.name
 					expanded: !!Global.pageManager && Global.pageManager.expandLayout
 
-					level: mergeTanks
-							? (gaugeTanks.totalCapacity === 0
-							   ? 0
-							   : (gaugeTanks.totalRemaining / gaugeTanks.totalCapacity) * 100)
-							: model.device.level
+					level: mergeTanks ? gaugeTanks.averageLevel : model.device.level
 					totalRemaining: mergeTanks ? gaugeTanks.totalRemaining : model.device.remaining
 					totalCapacity: mergeTanks ? gaugeTanks.totalCapacity : model.device.capacity
 

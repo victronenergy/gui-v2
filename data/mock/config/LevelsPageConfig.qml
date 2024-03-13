@@ -142,6 +142,20 @@ QtObject {
 				{ type: VenusOS.Tank_Type_RawWater, level: 95, capacity: .6 },
 			]
 		},
+		{
+			name: "Merge 2 tanks with average level of 50%, no capacity/remaining",
+			tanks: [
+				// Should get an average level of 50%
+				{ type: VenusOS.Tank_Type_Fuel, level: 25 },
+				{ type: VenusOS.Tank_Type_Fuel, level: 75 },
+
+				{ type: VenusOS.Tank_Type_FreshWater, level: 10 },
+				{ type: VenusOS.Tank_Type_WasteWater, level: 75.334 },
+				{ type: VenusOS.Tank_Type_LiveWell, capacity: 1, remaining: 2.5 },
+				{ type: VenusOS.Tank_Type_Oil, level: 80.2, capacity: .1 },
+				{ type: VenusOS.Tank_Type_BlackWater, level: 25, capacity: .2 },
+			]
+		},
 	]
 
 	property var environmentConfigs: [
