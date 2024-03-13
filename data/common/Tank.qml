@@ -67,13 +67,19 @@ Device {
 		let remainingValue = _remaining.value === undefined ? NaN : _remaining.value
 		let levelValue = _level.value === undefined ? NaN : _level.value    // 0 - 100
 		let capacityValue = _capacity.value === undefined ? NaN : _capacity.value
-		if ( (isNaN(remainingValue) || isNaN(levelValue)) && !isNaN(capacityValue) ) {
-			if (isNaN(remainingValue)) {
-				remainingValue = capacityValue * (levelValue / 100)
-			} else if (isNaN(levelValue)) {
+
+		// If there is no /Level, calculate it from other values.
+		if (isNaN(levelValue) && !isNaN(capacityValue) && !isNaN(remainingValue)) {
+			if (capacityValue > 0) {
 				levelValue = remainingValue / capacityValue * 100
 			}
 		}
+
+		// If there is no /Remaining, calculate from other values.
+		if (isNaN(remainingValue) && !isNaN(levelValue) && !isNaN(capacityValue)) {
+			remainingValue = capacityValue * (levelValue / 100)
+		}
+
 		capacity = capacityValue
 		remaining = remainingValue
 		level = levelValue
