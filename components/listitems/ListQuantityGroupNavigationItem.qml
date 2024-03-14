@@ -10,7 +10,6 @@ ListNavigationItem {
 	id: root
 
 	property alias quantityModel: quantityRepeater.model
-	property alias quantityRowWidth: quantityRow.width
 
 	primaryLabel.width: availableWidth - quantityRow.width - Theme.geometry_listItem_content_horizontalMargin
 
@@ -43,5 +42,6 @@ ListNavigationItem {
 		id: quantityMetrics
 		count: quantityRepeater.count
 		availableWidth: quantityRow.width
+		spacing: Theme.geometry_quantityGroupRow_spacing
 	}
 }

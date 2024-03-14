@@ -60,7 +60,6 @@ Page {
 							readonly property SolarDailyHistory historyToday: solarCharger.dailyHistory(0, model.index)
 
 							text: solarCharger.trackerName(model.index)
-							quantityRowWidth: Theme.geometry_solarListPage_quantityRow_width
 							quantityModel: [
 								{ value: historyToday ? historyToday.yieldKwh : NaN, unit: VenusOS.Units_Energy_KiloWattHour },
 								{ value: modelData.voltage, unit: VenusOS.Units_Volt },
@@ -86,7 +85,6 @@ Page {
 					}
 
 					text: pvInverter.name
-					quantityRowWidth: Theme.geometry_solarListPage_quantityRow_width
 					quantityModel: [
 						{ value: pvInverter.energy, unit: VenusOS.Units_Energy_KiloWattHour },
 						{ value: pvInverter.voltage, unit: VenusOS.Units_Volt },
@@ -112,7 +110,6 @@ Page {
 					//% "PV Charger"
 				  ? qsTrId("solardevices_pv_charger")
 				  : CommonWords.pv_inverter
-			quantityRowWidth: Theme.geometry_solarListPage_quantityRow_width
 			quantityTitleModel: [
 				{ text: chargerMode ? CommonWords.yield_today : CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
 				{ text: CommonWords.voltage, unit: VenusOS.Units_Volt },

@@ -366,8 +366,7 @@
     "geometry_quantityTableSummary_verticalMargin": 8,
     "geometry_quantityTableSummary_verticalSpacing": 4,
 
-    "geometry_solarListPage_quantityRow_width": 440,
-    "geometry_inputListPage_quantityRow_width": 330,
+    "geometry_quantityGroupRow_spacing": 4,
 
     "geometry_solarHistoryPage_tabBar_width": 260,
 
