@@ -9,7 +9,6 @@ import Victron.VenusOS
 Item {
 	property alias firstColumnText: firstTitleLabel.text
 	property alias quantityTitleModel: titleRepeater.model
-	property alias quantityRowWidth: quantityRow.width
 
 	width: parent.width
 	height: Theme.geometry_listItem_height
@@ -24,7 +23,7 @@ Item {
 		font.pixelSize: Theme.font_size_caption
 		color: Theme.color_solarListPage_header_text
 		elide: Text.ElideRight
-		width: parent.width - quantityRow.width
+		width: parent.width - quantityRow.width - Theme.geometry_quantityGroupRow_spacing
 	}
 
 	Row {
@@ -53,6 +52,7 @@ Item {
 			id: quantityMetrics
 			count: titleRepeater.count
 			availableWidth: quantityRow.width
+			spacing: Theme.geometry_quantityGroupRow_spacing
 		}
 	}
 }
