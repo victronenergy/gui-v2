@@ -33,6 +33,10 @@ jobs:
                                 wget lsb libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
                                 ninja-build dos2unix libegl1
        sudo snap install yq
+    - name: Install libraries needed for building the wasm
+      run: |
+        sudo apt-get update -yq &&
+        sudo apt-get install -y libegl1
     - name: Set up Python 3.x
       if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
       uses: actions/setup-python@v5
