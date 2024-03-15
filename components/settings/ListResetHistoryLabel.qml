@@ -14,6 +14,7 @@ Row {
 	leftPadding: Theme.geometry_listItem_content_horizontalMargin
 	rightPadding: Theme.geometry_listItem_content_horizontalMargin
 	spacing: Theme.geometry_listItem_content_horizontalMargin
+	height: visible ? implicitHeight : 0
 
 	CP.IconImage {
 		id: icon
