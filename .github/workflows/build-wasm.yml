@@ -24,7 +24,7 @@ jobs:
         path: |
           /opt/hostedtoolcache
         # Adding version as cache key
-        key: ${{ runner.os }}-qt-${{ env.QT_VERSION }}-em-${{ env.EMSCRIPTEN }}
+        key: ${{ runner.os }}-qt-${{ env.QT_VERSION }}-em-${{ env.EMSCRIPTEN }}-libegl1
     - name: Install dependencies
       if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
       run: |
