@@ -112,7 +112,7 @@ Page {
 				}
 			}
 
-			ListRadioButtonGroupNoYes {
+			ListSwitch {
 				//% "Bluetooth Enabled"
 				text: qsTrId("batterysettings_bluetooth_enabled")
 				dataItem.uid: root.bindPrefix + "/Settings/BluetoothMode"

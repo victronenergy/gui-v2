@@ -395,9 +395,7 @@ Page {
 		filterRegExp: "\/Module[0-9]\/Id$"
 		filterFlags: VeQItemSortTableModel.FilterInvalid
 		model: VeQItemTableModel {
-			uids: BackendConnection.type === BackendConnection.DBusSource ? [root.battery.serviceUid + "/Diagnostics"]
-				: BackendConnection.type === BackendConnection.MqttSource ? [root.battery.serviceUid + "/Diagnostics"]
-				: []
+			uids: [root.battery.serviceUid + "/Diagnostics"]
 		}
 	}
 }
