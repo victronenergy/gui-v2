@@ -155,7 +155,7 @@ Rectangle {
 		font.pixelSize: Theme.font_size_caption
 		color: Theme.color_font_secondary
 		text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
-				isNaN(root.totalCapacity) ? 0 : root.totalCapacity,
-				isNaN(root.totalRemaining) ? 0 : root.totalRemaining)
+				root.totalCapacity,
+				root.totalRemaining)
 	}
 }
