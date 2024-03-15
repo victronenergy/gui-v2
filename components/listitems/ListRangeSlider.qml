@@ -42,7 +42,7 @@ ListItem {
 				return root.fromSourceValue !== undefined ? root.fromSourceValue(v) : v
 			}
 			to: {
-				const v = secondDataItem.max || 0
+				const v = secondDataItem.max || 100
 				return root.fromSourceValue !== undefined ? root.fromSourceValue(v) : v
 			}
 
