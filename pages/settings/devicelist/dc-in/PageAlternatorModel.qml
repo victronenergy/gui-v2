@@ -85,8 +85,63 @@ ObjectModel {
 
 	ListNavigationItem {
 		text: CommonWords.overall_history
+		visible: overallHistoryMonitor.hasVisibleItem
 		onClicked: {
 			Global.pageManager.pushPage(overallHistoryComponent, { "title": text })
+		}
+
+		ObjectModelMonitor {
+			id: overallHistoryMonitor
+			model: overallHistoryModel
+		}
+
+		ObjectModel {
+			id: overallHistoryModel
+
+			ListTextItem {
+				//% "Operation time"
+				text: qsTrId("alternator_wakespeed_operation_time")
+				secondaryText: Utils.secondsToString(dataItem.value, true)
+				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/OperationTime"
+				visible: defaultVisible && dataItem.isValid
+			}
+
+			ListQuantityItem {
+				//% "Charged Ah"
+				text: qsTrId("alternator_wakespeed_charged_ah")
+				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"
+				unit: VenusOS.Units_AmpHour
+				precision: 0
+				visible: defaultVisible && dataItem.isValid
+			}
+
+			ListTextItem {
+				//% "Cycles started"
+				text: qsTrId("alternator_wakespeed_cycles_started")
+				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesStarted"
+				visible: defaultVisible && dataItem.isValid
+			}
+
+			ListTextItem {
+				//% "Cycles completed"
+				text: qsTrId("alternator_wakespeed_cycles_completed")
+				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesCompleted"
+				visible: defaultVisible && dataItem.isValid
+			}
+
+			ListTextItem {
+				//% "Number of power-ups"
+				text: qsTrId("alternator_wakespeed_nr_of_power_ups")
+				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfPowerups"
+				visible: defaultVisible && dataItem.isValid
+			}
+
+			ListTextItem {
+				//% "Number of deep discharges"
+				text: qsTrId("alternator_wakespeed_nr_of_deep_discharges")
+				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfDeepDischarges"
+				visible: defaultVisible && dataItem.isValid
+			}
 		}
 
 		Component {
@@ -94,52 +149,7 @@ ObjectModel {
 
 			Page {
 				GradientListView {
-					model: ObjectModel {
-						ListTextItem {
-							//% "Operation time"
-							text: qsTrId("alternator_wakespeed_operation_time")
-							secondaryText: Utils.secondsToString(dataItem.value, true)
-							dataItem.uid: root.bindPrefix + "/History/Cumulative/User/OperationTime"
-							visible: defaultVisible && dataItem.isValid
-						}
-
-						ListQuantityItem {
-							//% "Charged Ah"
-							text: qsTrId("alternator_wakespeed_charged_ah")
-							dataItem.uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"
-							unit: VenusOS.Units_AmpHour
-							precision: 0
-							visible: defaultVisible && dataItem.isValid
-						}
-
-						ListTextItem {
-							//% "Cycles started"
-							text: qsTrId("alternator_wakespeed_cycles_started")
-							dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesStarted"
-							visible: defaultVisible && dataItem.isValid
-						}
-
-						ListTextItem {
-							//% "Cycles completed"
-							text: qsTrId("alternator_wakespeed_cycles_completed")
-							dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesCompleted"
-							visible: defaultVisible && dataItem.isValid
-						}
-
-						ListTextItem {
-							//% "Number of power-ups"
-							text: qsTrId("alternator_wakespeed_nr_of_power_ups")
-							dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfPowerups"
-							visible: defaultVisible && dataItem.isValid
-						}
-
-						ListTextItem {
-							//% "Number of deep discharges"
-							text: qsTrId("alternator_wakespeed_nr_of_deep_discharges")
-							dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfDeepDischarges"
-							visible: defaultVisible && dataItem.isValid
-						}
-					}
+					model: overallHistoryModel
 				}
 			}
 		}

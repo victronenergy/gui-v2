@@ -11,48 +11,14 @@ Page {
 
 	property string bindPrefix
 
-	property bool _hasVisibleAlarmSettings
-	property bool _hasVisibleRelaySettings
-
-	function _hasVisibleItem(model) {
-		for (let i = 0; i < model.count; ++i) {
-			if (model.get(i).visible) {
-				return true
-			}
-		}
-		return false
-	}
-
 	BatterySettingsAlarmModel {
 		id: batterySettingsAlarmModel
 		bindPrefix: root.bindPrefix
 	}
 
-	Instantiator {
-		model: batterySettingsAlarmModel.count
-		delegate: Connections {
-			target: batterySettingsAlarmModel.get(model.index)
-			function onVisibleChanged() {
-				root._hasVisibleAlarmSettings = target.visible || root._hasVisibleItem(batterySettingsAlarmModel)
-			}
-			Component.onCompleted: onVisibleChanged()
-		}
-	}
-
 	BatterySettingsRelayModel {
 		id: batterySettingsRelayModel
 		bindPrefix: root.bindPrefix
-	}
-
-	Instantiator {
-		model: batterySettingsRelayModel.count
-		delegate: Connections {
-			target: batterySettingsRelayModel.get(model.index)
-			function onVisibleChanged() {
-				root._hasVisibleRelaySettings = target.visible || root._hasVisibleItem(batterySettingsRelayModel)
-			}
-			Component.onCompleted: onVisibleChanged()
-		}
 	}
 
 	GradientListView {
@@ -68,20 +34,30 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.alarms
-				visible: root._hasVisibleAlarmSettings
+				visible: alarmSettingsMonitor.hasVisibleItem
 				onClicked: {
 					Global.pageManager.pushPage(emptySettingsComponent,
 							{ "title": text, "model": batterySettingsAlarmModel })
+				}
+
+				ObjectModelMonitor {
+					id: alarmSettingsMonitor
+					model: batterySettingsAlarmModel
 				}
 			}
 
 			ListNavigationItem {
 				//% "Relay (on battery monitor)"
 				text: qsTrId("batterysettings_relay_on_battery_monitor")
-				visible: root._hasVisibleRelaySettings
+				visible: relaySettingsMonitor.hasVisibleItem
 				onClicked: {
 					Global.pageManager.pushPage(emptySettingsComponent,
 							{ "title": text, "model": batterySettingsRelayModel })
+				}
+
+				ObjectModelMonitor {
+					id: relaySettingsMonitor
+					model: batterySettingsRelayModel
 				}
 			}
 
