@@ -13,6 +13,31 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
+
+			ListTextItem {
+				text: "Charge Mode"
+				dataItem.uid: root.bindPrefix + "/Info/ChargeMode"
+			}
+
+			ListItem {
+				text: "Charge Mode Debug"
+
+				bottomContentChildren: [
+					ListLabel {
+						topPadding: 0
+						bottomPadding: 0
+						color: Theme.color_font_secondary
+						text: chargeModeDebug.value
+						horizontalAlignment: Text.AlignHCenter
+					}
+				]
+
+				VeQuickItem {
+					id: chargeModeDebug
+					uid: root.bindPrefix + "/Info/ChargeModeDebug"
+				}
+			}
+
 			ListQuantityItem {
 				//% "Charge Voltage Limit (CVL)"
 				text: qsTrId("batteryparameters_charge_voltage_limit_cvl")
@@ -20,11 +45,21 @@ Page {
 				unit: VenusOS.Units_Volt
 			}
 
+			ListTextItem {
+				text: "Charge Limitation"
+				dataItem.uid: root.bindPrefix + "/Info/ChargeLimitation"
+			}
+
 			ListQuantityItem {
 				//% "Charge Current Limit (CCL)"
 				text: qsTrId("batteryparameters_charge_current_limit_ccl")
 				dataItem.uid: root.bindPrefix + "/Info/MaxChargeCurrent"
 				unit: VenusOS.Units_Amp
+			}
+
+			ListTextItem {
+				text: "Discharge Limitation"
+				dataItem.uid: root.bindPrefix + "/Info/DischargeLimitation"
 			}
 
 			ListQuantityItem {

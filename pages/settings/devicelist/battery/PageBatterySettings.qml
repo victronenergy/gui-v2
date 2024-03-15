@@ -118,6 +118,18 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Settings/BluetoothMode"
 				visible: defaultVisible && dataItem.isValid
 			}
+
+			ListSpinBox {
+				//% "Reset SoC to"
+				text: "Reset SoC to"
+				visible: defaultVisible && dataItem.isValid
+				dataItem.uid: root.bindPrefix + "/Settings/ResetSoc"
+				suffix: "%"
+				from: 0
+				to: 100
+				stepSize: 1
+			}
+
 		}
 	}
 

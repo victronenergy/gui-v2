@@ -17,18 +17,28 @@ Page {
 				//% "System Switch"
 				text: qsTrId("lynxionio_system_switch")
 				dataItem.uid: root.bindPrefix + "/SystemSwitch"
+				visible: defaultVisible && dataItem.isValid
 				secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
 			}
 
 			ListTextItem {
 				text: CommonWords.allow_to_charge
 				dataItem.uid: root.bindPrefix + "/Io/AllowToCharge"
+				visible: defaultVisible && dataItem.isValid
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
 			ListTextItem {
 				text: CommonWords.allow_to_discharge
 				dataItem.uid: root.bindPrefix + "/Io/AllowToDischarge"
+				visible: defaultVisible && dataItem.isValid
+				secondaryText: CommonWords.yesOrNo(dataItem.value)
+			}
+
+			ListTextItem {
+				text: "Allow to balance"
+				dataItem.uid: root.bindPrefix + "/Io/AllowToBalance"
+				visible: defaultVisible && dataItem.isValid
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
