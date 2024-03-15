@@ -66,7 +66,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSoc"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSocClear"
-		visible: defaultVisible && dataItem.isValid && showSetting(0, 1)
+		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -78,7 +78,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltageClear"
-		visible: defaultVisible && dataItem.isValid && showSetting(0, 1)
+		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -90,7 +90,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltage"
-		visible: defaultVisible && dataItem.isValid && showSetting(0)
+		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -102,7 +102,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltageClear"
-		visible: defaultVisible && dataItem.isValid && showSetting(0)
+		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -114,7 +114,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltage"
-		visible: defaultVisible && dataItem.isValid && showSetting(0)
+		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListSwitch {
@@ -134,7 +134,7 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperatureClear"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		visible: defaultVisible && dataItem.isValid && showSetting(0)
+		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -147,6 +147,6 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperature"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		visible: defaultVisible && dataItem.isValid && showSetting(0)
+		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 }
