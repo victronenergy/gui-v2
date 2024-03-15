@@ -233,6 +233,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/NavBar.qml
     components/NavButton.qml
     components/NotificationDelegate.qml
+    components/ObjectModelMonitor.qml
     components/Page.qml
     components/PageStack.qml
     components/ProgressArc.qml
