@@ -126,6 +126,7 @@ ObjectModel {
 
 	ListRangeSlider {
 		text: CommonWords.low_battery_temperature
+		slider.suffix: Global.systemSettings.temperatureUnitSuffix
 		slider.firstColor: Theme.color_red
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperature"
@@ -139,6 +140,7 @@ ObjectModel {
 
 	ListRangeSlider {
 		text: CommonWords.high_battery_temperature
+		slider.suffix: Global.systemSettings.temperatureUnitSuffix
 		slider.firstColor: Theme.color_green
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperatureClear"
