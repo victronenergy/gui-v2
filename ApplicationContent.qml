@@ -38,6 +38,18 @@ Item {
 		Component.onCompleted: Global.firmwareUpdate = firmwareUpdate
 	}
 
+	onWindowChanged: function (window) { screenBlanker.window = window }
+
+	ScreenBlanker {
+		id: screenBlanker
+		enabled: !Global.splashScreenVisible && !(!!Global.notifications && Global.notifications.alarm)
+		displayOffTime: displayOffItem.isValid ? 1000*displayOffItem.value : 0.0
+		property VeQuickItem displayOffItem: VeQuickItem {
+			uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/DisplayOff" : ""
+		}
+		Component.onCompleted: Global.screenBlanker = screenBlanker
+	}
+
 	MouseArea {
 		id: idleModeMouseArea
 		anchors.fill: parent

@@ -32,10 +32,16 @@ qt_add_qml_module( ${PROJECT_NAME}
     OUTPUT_DIRECTORY Victron/VenusOS
 )
 
-    set_target_properties(tst_units PROPERTIES
+set_target_properties(tst_units PROPERTIES
     WIN32_EXECUTABLE TRUE
     MACOSX_BUNDLE TRUE
 )
+
+option(VENUS_INSTALL_TESTS "enable test installation via cmake -DVENUS_INSTALL_TESTS=ON" OFF) # Disabled by default
+if (VENUS_INSTALL_TESTS)
+    install(FILES tst_units.qml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/units)
+    install(TARGETS tst_units DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/units)
+endif()
 
 target_link_libraries(tst_units PRIVATE
     Qt6::Core

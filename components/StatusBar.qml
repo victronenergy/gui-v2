@@ -86,14 +86,14 @@ Rectangle {
 	Row {
 		id: rightSideRow
 		anchors {
-			right: rightButtonItem.left
+			right: rightButtonRow.left
 			rightMargin: Theme.geometry_statusBar_rightSideRow_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
 	}
 
-	StatusBarButton {
-		id: rightButtonItem
+	Row {
+		id: rightButtonRow
 
 		anchors {
 			right: parent.right
@@ -101,20 +101,30 @@ Rectangle {
 			verticalCenter: parent.verticalCenter
 		}
 
-		enabled: !!Global.pageManager
-				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				&& root.rightButton != VenusOS.StatusBar_RightButton_None
+		StatusBarButton {
+			enabled: !!Global.pageManager
+					&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+					&& root.rightButton != VenusOS.StatusBar_RightButton_None
 
-		icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
-				? "qrc:/images/icon_sidepanel_on_32.svg"
-				: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive
-					? "qrc:/images/icon_sidepanel_off_32.svg"
-					: root.rightButton === VenusOS.StatusBar_RightButton_Add
-					  ? "qrc:/images/icon_plus.svg"
-					  : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
-						? "qrc:/images/icon_refresh_32.svg"
-						: ""
+			icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
+					? "qrc:/images/icon_sidepanel_on_32.svg"
+					: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive
+						? "qrc:/images/icon_sidepanel_off_32.svg"
+						: root.rightButton === VenusOS.StatusBar_RightButton_Add
+						  ? "qrc:/images/icon_plus.svg"
+						  : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
+							? "qrc:/images/icon_refresh_32.svg"
+							: ""
 
-		onClicked: root.rightButtonClicked()
+			onClicked: root.rightButtonClicked()
+		}
+
+		StatusBarButton {
+			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
+			visible: !!Global.screenBlanker && Global.screenBlanker.supported
+			enabled: !!Global.pageManager
+					 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			onClicked: Global.screenBlanker.setDisplayOff()
+		}
 	}
 }
