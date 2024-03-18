@@ -22,6 +22,7 @@ QtObject {
 	property var inputPanel
 	property var dialogLayer
 	property var notificationLayer
+	property ScreenBlanker screenBlanker
 
 	// data sources
 	property var acInputs

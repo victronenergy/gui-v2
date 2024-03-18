@@ -52,6 +52,8 @@ else()
     include(GNUInstallDirs)
 endif()
 
+add_subdirectory(tests)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -661,6 +663,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/quantityinfo.cpp
     src/units.h
     src/units.cpp
+    src/screenblanker.h
+    src/screenblanker.cpp
     src/widgetconnectorpathupdater.h
     src/widgetconnectorpathupdater.cpp
 )
@@ -1060,6 +1064,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_refresh_32.svg
         images/icon_sidepanel_off_32.svg
         images/icon_sidepanel_on_32.svg
+        images/icon_screen_sleep_32.svg
         images/icon_temp_32.svg
         images/information.svg
         images/inverter.svg
