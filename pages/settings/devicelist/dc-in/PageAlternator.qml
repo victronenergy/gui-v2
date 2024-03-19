@@ -21,7 +21,7 @@ Page {
 	readonly property int orionXsProductIdMax: 0xA3FF
 
 	function isRealAlternator(productId) {
-		const alternators = [arcoProductId, wakespeedProductId, mgAfcProductId, genericProductId integrelProductId]
+		const alternators = [arcoProductId, wakespeedProductId, mgAfcProductId, genericProductId, integrelProductId]
 		return alternators.indexOf(productId) > -1
 	}
 
