@@ -207,6 +207,7 @@ set (VENUS_QML_MODULE_SOURCES
     FrameRateVisualizer.qml
 
     components/AcceptButtonBackground.qml
+    components/AcInGaugeQuantityRow.qml
     components/AcInputsCurrentLimits.qml
     components/AcOutput.qml
     components/AcPhase.qml
@@ -1026,10 +1027,12 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_waste_water_24.svg
         images/icon_livewell_24.svg
         images/icon_fuel_24.svg
+        images/icon_from_grid.svg
         images/icon_oil_24.svg
         images/icon_hydraulic_oil_24.svg
         images/icon_lng_24.svg
         images/icon_lpg_24.svg
+        images/icon_to_grid.svg
         images/fueltank.svg
         images/gauge_intro_5_matte_black.gif
         images/gauge_intro_5_matte_white.gif

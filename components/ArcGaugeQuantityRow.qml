@@ -12,6 +12,7 @@ Row {
 
 	property int alignment: Qt.AlignTop | Qt.AlignLeft
 	property alias icon: icon
+	property alias iconRow: iconRow
 	property alias quantityLabel: quantityLabel
 	property real leftMargin
 
@@ -29,19 +30,24 @@ Row {
 	spacing: Theme.geometry_briefPage_edgeGauge_quantityLabel_spacing
 	layoutDirection: root.alignment & Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
 
-	CP.ColorImage {
-		id: icon
+	Row {
+		id: iconRow
+		spacing: Theme.geometry_briefPage_edgeGauge_quantityLabel_spacing
 
-		width: Theme.geometry_widgetHeader_icon_width
-		fillMode: Image.Pad
-		color: Theme.color_font_primary
+		CP.ColorImage {
+			id: icon
+
+			width: Theme.geometry_widgetHeader_icon_width
+			fillMode: Image.Pad
+			color: Theme.color_font_primary
+		}
 	}
 
 	ElectricalQuantityLabel {
 		id: quantityLabel
 
 		height: icon.height
-		anchors.verticalCenter: icon.verticalCenter
+		anchors.verticalCenter: iconRow.verticalCenter
 		font.pixelSize: Theme.font_briefPage_quantityLabel_size
 	}
 }
