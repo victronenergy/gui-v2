@@ -18,7 +18,7 @@ CmManager::CmManager(QObject *parent) :
 	mManager("net.connman", "/", VeDbusConnection::getConnection()),
 	mWatcher("net.connman", VeDbusConnection::getConnection(),
 			 QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration),
-	mAgent(parent)
+	mAgent(this)
 {
 	registerConnmanDataTypes();
 
