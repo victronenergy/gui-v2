@@ -91,7 +91,7 @@ ListView {
 
 					animationEnabled: root.animationEnabled
 					tankType: tankTypeDelegate.tankType
-					header.text: tankProperties.name
+					header.text: mergeTanks ? tankProperties.name : model.device.name || tankProperties.name
 					expanded: !!Global.pageManager && Global.pageManager.expandLayout
 					width: Gauges.width(_tankItemCount, Theme.geometry_levelsPage_max_tank_count, root.width)
 					height: Gauges.height(expanded)
