@@ -11,7 +11,17 @@ GeneratorDialog {
 
 	//% "Stop Now"
 	acceptText: qsTrId("controlcard_generator_stopdialog_stop_now")
-	finalGeneratorState: VenusOS.Generators_State_Stopped
+
+	onGeneratorStateChanged: {
+		if (root.open) {
+			if (generatorState == VenusOS.Generators_State_Stopped
+					|| generatorState == VenusOS.Generators_State_Stopping
+					|| generatorState == VenusOS.Generators_State_CoolDown) {
+				root.accept()
+			}
+		}
+	}
+
 	runGeneratorAction: function() {
 		root.generator.stop()
 	}

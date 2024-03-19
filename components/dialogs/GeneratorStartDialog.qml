@@ -11,7 +11,16 @@ GeneratorDialog {
 
 	//% "Start Now"
 	acceptText: qsTrId("controlcard_generator_startdialog_start_now")
-	finalGeneratorState: VenusOS.Generators_State_Running
+
+	onGeneratorStateChanged: {
+		if (root.open) {
+			if (generatorState == VenusOS.Generators_State_Running
+					|| generatorState == VenusOS.Generators_State_WarmUp) {
+				root.accept()
+			}
+		}
+	}
+
 	runGeneratorAction: function() {
 		root.generator.start(timedRunSwitch.checked ? Utils.composeDuration(timeSelector.hour, timeSelector.minute) : 0)
 	}
