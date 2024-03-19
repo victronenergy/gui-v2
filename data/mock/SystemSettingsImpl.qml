@@ -93,6 +93,7 @@ QtObject {
 		setMockSystemValue("Control/BatteryCurrentSense", 0)
 
 		setMockSystemValue("SystemType", "ESS")
+		setMockSystemValue("Hub", 4)
 		setMockSettingValue("CGwacs/AcPowerSetPoint", 50)
 		setMockSettingValue("CGwacs/BatteryLife/DischargedTime", 0)
 		setMockSettingValue("CGwacs/BatteryLife/Flags", 0)
@@ -108,6 +109,7 @@ QtObject {
 		setMockSettingValue("CGwacs/MaxChargePower", -1)
 		setMockSettingValue("CGwacs/MaxDischargePower", -1)
 		setMockSettingValue("CGwacs/RunWithoutGridMeter", 0)
+		setMockSettingValue("CGwacs/OvervoltageFeedIn", 1)
 		setMockSettingValue("CGwacs/PreventFeedback", 0)
 
 		setMockSettingValue("CGwacs/DeviceIds", "1,2,3,4,5,6")

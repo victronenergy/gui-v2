@@ -170,7 +170,7 @@
     "geometry_briefPage_edgeGauge_topMargin": 24,
     "geometry_briefPage_edgeGauge_radius": 360,
     "geometry_briefPage_edgeGauge_width": 60,
-    "geometry_briefPage_edgeGauge_quantityLabel_spacing": 4,
+    "geometry_briefPage_edgeGauge_quantityLabel_spacing": 2,
     "geometry_briefPage_smallEdgeGauge_height": 154,
     "geometry_briefPage_smallEdgeGauge_maxAngle": 24,
     "geometry_briefPage_largeEdgeGauge_height": 320,

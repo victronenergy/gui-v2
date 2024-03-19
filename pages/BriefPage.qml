@@ -111,7 +111,7 @@ SwipeViewPage {
 			opacity: root._gaugeArcOpacity
 			value: !visible ? 0 : inputsRange.valueAsRatio * 100
 
-			ArcGaugeQuantityRow {
+			AcInGaugeQuantityRow {
 				id: acInGaugeQuantity
 
 				alignment: parent.alignment
