@@ -9,10 +9,6 @@ import Victron.VenusOS
 ArcGauge {
 	id: root
 
-	property alias label: quantityLabel
-	property alias icon: quantityLabel.icon
-	property alias quantityLabel: quantityLabel.quantityLabel
-
 	readonly property int _maxArcHeight: Math.sin(Utils.degreesToRadians(_maxAngle)) * radius
 	readonly property int _arcOffset: -(radius - root.height) - strokeWidth / 2
 	readonly property real _maxAngle: alignment & Qt.AlignVCenter ? Theme.geometry_briefPage_largeEdgeGauge_maxAngle : Theme.geometry_briefPage_smallEdgeGauge_maxAngle
@@ -27,10 +23,4 @@ ArcGauge {
 	useLargeArc: false
 	strokeWidth: Theme.geometry_arc_strokeWidth
 	arcY: alignment & Qt.AlignTop ? _arcOffset : alignment & Qt.AlignVCenter ? undefined : _arcOffset - _maxArcHeight
-
-	ArcGaugeQuantityLabel {
-		id: quantityLabel
-
-		alignment: root.alignment
-	}
 }

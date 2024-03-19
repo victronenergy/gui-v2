@@ -10,8 +10,7 @@ import QtQuick.Controls.impl as CP
 Item {
 	id: root
 
-	property alias alignment: quantityLabel.alignment
-	property alias label: quantityLabel
+	property int alignment
 	property bool animationEnabled
 	readonly property int _maxAngle: alignment & Qt.AlignVCenter ? Theme.geometry_briefPage_largeEdgeGauge_maxAngle : Theme.geometry_briefPage_smallEdgeGauge_maxAngle
 
@@ -72,14 +71,6 @@ Item {
 			_activeSamples = []
 			sampledAverages = newAverages
 		}
-	}
-
-	ArcGaugeQuantityLabel {
-		id: quantityLabel
-
-		alignment: root.alignment
-		icon.source: "qrc:/images/solaryield.svg"
-		quantityLabel.dataObject: Global.system.solar
 	}
 
 	Connections {

@@ -109,33 +109,37 @@ SwipeViewPage {
 
 			x: root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
-			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
-			label.opacity: root._gaugeLabelOpacity
+			value: !visible ? 0 : inputsRange.valueAsRatio * 100
 
-			icon.source: root._inputsIconSource
+			ArcGaugeQuantityLabel {
+				id: acInGaugeQuantity
 
-			// AC and DC amp values cannot be combined. If there are both AC and DC values, show
-			// Watts even if Amps is preferred.
-			quantityLabel.unit: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp
+				alignment: parent.alignment
+				icon.source: root._inputsIconSource
+				leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
+				opacity: root._gaugeLabelOpacity
+
+				// AC and DC amp values cannot be combined. If there are both AC and DC values, show
+				// Watts even if Amps is preferred.
+				quantityLabel.unit: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp
 					&& ((Global.acInputs.current || 0) === 0 || (Global.dcInputs.current || 0) === 0)
 					   ? VenusOS.Units_Amp
 					   : VenusOS.Units_Watt
-			quantityLabel.value: quantityLabel.unit === VenusOS.Units_Amp
+				quantityLabel.value: quantityLabel.unit === VenusOS.Units_Amp
 					? (Global.acInputs.current || 0) === 0
 					  ? Global.dcInputs.current
 					  : Global.acInputs.current
 					: Units.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power)
-
-			value: !visible ? 0 : inputsRange.valueAsRatio * 100
+			}
 
 			ValueRange {
 				id: inputsRange
 
-				value: quantityLabel.value
+				value: acInGaugeQuantity.quantityLabel.value
 
 				// When showing current instead of power, set a max value to change the gauge colors
 				// when the value approaches the currentLimit.
-				maximumValue: quantityLabel.unit === VenusOS.Units_Amp
+				maximumValue: acInGaugeQuantity.quantityLabel.unit === VenusOS.Units_Amp
 					? Global.acInputs.currentLimit
 					: NaN
 			}
@@ -159,9 +163,15 @@ SwipeViewPage {
 			alignment: Qt.AlignLeft | (leftEdge.active ? Qt.AlignBottom : Qt.AlignVCenter)
 			x: root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
-			label.leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
-			label.opacity: root._gaugeLabelOpacity
 			animationEnabled: root.animationEnabled
+
+			ArcGaugeQuantityLabel {
+				alignment: parent.alignment
+				icon.source: "qrc:/images/solaryield.svg"
+				leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
+				opacity: root._gaugeLabelOpacity
+				quantityLabel.dataObject: Global.system.solar
+			}
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left lower")
 	}
@@ -180,14 +190,17 @@ SwipeViewPage {
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignRight | (rightLower.active ? Qt.AlignTop : Qt.AlignVCenter)
 			animationEnabled: root.animationEnabled
-			icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 			value: !visible ? 0 : acLoadsRange.valueAsRatio * 100
-			quantityLabel.dataObject: Global.system.ac.consumption
-
 			x: -root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
-			label.leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
-			label.opacity: root._gaugeLabelOpacity
+
+			ArcGaugeQuantityLabel {
+				alignment: parent.alignment
+				icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
+				leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
+				opacity: root._gaugeLabelOpacity
+				quantityLabel.dataObject: Global.system.ac.consumption
+			}
 
 			ValueRange {
 				id: acLoadsRange
@@ -212,14 +225,16 @@ SwipeViewPage {
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignRight | Qt.AlignBottom
 			animationEnabled: root.animationEnabled
-			icon.source: "qrc:/images/dcloads.svg"
-			value: visible ? dcLoadsRange.valueAsRatio * 100 : 0
-			quantityLabel.dataObject: Global.system.dc
-
+			value: visible ? dcLoadsRange.valueAsRatio * 100 : 0           
 			x: -root._gaugeArcMargin
-			opacity: root._gaugeArcOpacity
-			label.leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
-			label.opacity: root._gaugeLabelOpacity
+
+			ArcGaugeQuantityLabel {
+				alignment: parent.alignment
+				icon.source: "qrc:/images/dcloads.svg"
+				leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
+				opacity: root._gaugeLabelOpacity
+				quantityLabel.dataObject: Global.system.dc
+			}
 
 			ValueRange {
 				id: dcLoadsRange
