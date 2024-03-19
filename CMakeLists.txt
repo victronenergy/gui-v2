@@ -212,7 +212,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/AcPhase.qml
     components/Arc.qml
     components/ArcGauge.qml
-    components/ArcGaugeQuantityLabel.qml
+    components/ArcGaugeQuantityRow.qml
     components/AsymmetricRoundedRectangle.qml
     components/ButtonControlValue.qml
     components/CircularMultiGauge.qml
