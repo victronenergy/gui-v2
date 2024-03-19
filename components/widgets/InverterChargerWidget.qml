@@ -10,7 +10,6 @@ OverviewWidget {
 	id: root
 
 	onClicked: {
-		return
 		if (Global.inverterChargers.veBusDevices.count
 				+ Global.inverterChargers.multiDevices.count
 				+ Global.inverterChargers.inverterDevices.count > 1) {
