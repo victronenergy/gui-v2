@@ -173,7 +173,7 @@ Page {
 					}
 				]
 				currentIndex: 0
-				visible: false
+				allowed: false
 				onOptionClicked: function(index) {
 					if (localValue !== VenusOS.VeBusDevice_ChargeState_InitializingCharger) {
 						interruptTimer.start()
@@ -220,7 +220,7 @@ Page {
 				text: qsTrId("vebus_device_ac_input_1_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
 				dataItem.uid: root.veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn1"
-				visible: dataItem.isValid && isMulti
+				allowed: dataItem.isValid && isMulti
 			}
 
 			ListTextItem {
@@ -228,7 +228,7 @@ Page {
 				text: qsTrId("vebus_device_ac_input_2_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
 				dataItem.uid: root.veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn2"
-				visible: dataItem.isValid && isMulti
+				allowed: dataItem.isValid && isMulti
 			}
 
 			ListRadioButtonGroup {
@@ -236,7 +236,7 @@ Page {
 				text: qsTrId("vebus_device_ess_relay_test")
 				dataItem.uid: root.veBusDevice.serviceUid + "/Devices/0/ExtendStatus/WaitingForRelayTest"
 				enabled: false
-				visible: dataItem.isValid && isEssOrHub4 && isMulti
+				allowed: dataItem.isValid && isEssOrHub4 && isMulti
 				optionModel: [
 					//% "Completed"
 					{ display: qsTrId("vebus_device_ess_relay_test_completed"), value: 0 },
@@ -250,7 +250,7 @@ Page {
 				//% "VE.Bus diagnostics"
 				text: qsTrId("vebus_diagnostics")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				visible: defaultVisible && masterHasNetworkQuality.isValid
+				allowed: defaultAllowed && masterHasNetworkQuality.isValid
 				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage)
 
 				Component {
@@ -269,7 +269,7 @@ Page {
 											//% "Network quality counter Phase L%1, device %2 (%3)"
 											text: qsTrId("vebus_veice_network_quality_counter").arg((index % 3) + 1).arg(Math.floor(index / 3) + 1).arg(index)
 											dataItem.uid: root.veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"
-											visible: dataItem.isValid
+											allowed: dataItem.isValid
 										}
 									}
 								}

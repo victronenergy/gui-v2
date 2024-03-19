@@ -18,7 +18,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Mode"
 				valueTrue: 1
 				valueFalse: 4
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListDcInputQuantityGroup {
@@ -32,7 +32,7 @@ Page {
 			ListTemperatureItem {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 				unit: Global.systemSettings.temperatureUnit
 			}
 

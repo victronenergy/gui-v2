@@ -35,7 +35,7 @@ Page {
 
 			//% "Distributor %1"
 			text: qsTrId("batterylynxdistibutor_distributor").arg(distributor)
-			visible: status.isValid && status.value !== 0
+			allowed: status.isValid && status.value !== 0
 			secondaryText: {
 				if (!status.isValid) {
 					return "--"
@@ -105,7 +105,7 @@ Page {
 								}
 							}
 							// First 4 fuses are always visible; last 4 only shown if status is valid.
-							visible: model.index < 4 ? defaultVisible : defaultVisible && fuseStatus >= 0
+							allowed: model.index < 4 ? defaultAllowed : defaultAllowed && fuseStatus >= 0
 						}
 					}
 				}

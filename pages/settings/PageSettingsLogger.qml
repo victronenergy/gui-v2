@@ -76,7 +76,7 @@ Page {
 					{ display: qsTrId("settings_1_day"), value: 86400 },
 				]
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/LogInterval"
-				visible: !!loggerMode.dataItem.value && loggerMode.dataItem.value > 0
+				allowed: !!loggerMode.dataItem.value && loggerMode.dataItem.value > 0
 			}
 
 			ListSwitch {
@@ -89,7 +89,7 @@ Page {
 				//% "Last contact"
 				text: qsTrId("settings_last_contact")
 				dataItem.uid: root.loggerServiceUid + "/Vrm/TimeLastContact"
-				visible: !!loggerMode.dataItem.value && loggerMode.dataItem.value > 0
+				allowed: !!loggerMode.dataItem.value && loggerMode.dataItem.value > 0
 
 				Timer {
 					interval: 1000
@@ -142,7 +142,7 @@ Page {
 			ListItem {
 				//% "Error message: \n%1"
 				text: qsTrId("settings_vrm_error_message").arg(errorMessage.value)
-				visible: !!errorMessage.value
+				allowed: !!errorMessage.value
 
 				VeQuickItem {
 					id: errorMessage
@@ -169,7 +169,7 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
 				//% "No contact reset delay (hh:mm)"
 				text: qsTrId("settings_vrm_no_contact_reset_delay")
-				visible: !!dataItem.value && dataItem.value > 0
+				allowed: !!dataItem.value && dataItem.value > 0
 			}
 
 			ListRadioButtonGroup {
@@ -209,7 +209,7 @@ Page {
 				]
 				enabled: false
 				dataItem.uid: root.loggerServiceUid + "/Buffer/ErrorState"
-				visible: !!dataItem.value
+				allowed: !!dataItem.value
 			}
 
 			ListTextItem { // This 'flickers' between values for ~30s after inserting a usb stick. Dbus-spy shows that the underlying data point flickers also. Old gui also flickers.

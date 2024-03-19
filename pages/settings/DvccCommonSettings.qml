@@ -32,7 +32,7 @@ Column {
 		text: qsTrId("settings_dvcc_limit_charge_current")
 		updateOnClick: false
 		checked: maxChargeCurrent.dataItem.isValid && maxChargeCurrent.dataItem.value >= 0
-		visible: defaultVisible && dvccSwitch.checked
+		allowed: defaultAllowed && dvccSwitch.checked
 		onClicked: {
 			maxChargeCurrent.dataItem.setValue(maxChargeCurrent.dataItem.value < 0 ? 50 : -1)
 		}
@@ -43,7 +43,7 @@ Column {
 
 		//% "Maximum charge current"
 		text: qsTrId("settings_dvcc_max_charge_current")
-		visible: defaultVisible && maxChargeCurrentSwitch.visible && maxChargeCurrentSwitch.checked
+		allowed: defaultAllowed && maxChargeCurrentSwitch.visible && maxChargeCurrentSwitch.checked
 		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeCurrent"
 		suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 	}

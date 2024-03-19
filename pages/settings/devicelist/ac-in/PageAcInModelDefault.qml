@@ -26,7 +26,7 @@ ObjectModel {
 		dataItem.uid: root.productId === froniusInverterProductId
 				? root.bindPrefix + "/StatusCode"
 				: ""
-		visible: root.productId === froniusInverterProductId
+		allowed: root.productId === froniusInverterProductId
 		secondaryText: Global.pvInverters.statusCodeToText(dataItem.value)
 	}
 
@@ -49,7 +49,7 @@ ObjectModel {
 			}
 			return ""
 		}
-		visible: root.productId === froniusInverterProductId
+		allowed: root.productId === froniusInverterProductId
 				|| root.productId === carloGavazziEmProductId
 	}
 
@@ -119,14 +119,14 @@ ObjectModel {
 	ListTextItem {
 		text: CommonWords.zero_feed_in_power_limit
 		dataItem.uid: root.bindPrefix + "/Ac/PowerLimit"
-		visible: dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListTextItem {
 		//% "Phase Sequence"
 		text: qsTrId("ac-in-modeldefault_phase_sequence")
 		dataItem.uid: root.bindPrefix + "/PhaseSequence"
-		visible: dataItem.isValid
+		allowed: dataItem.isValid
 		secondaryText: dataItem.value === 1
 				  //: Phase sequence L1-L3-L2
 				  //% "L1-L3-L2"
@@ -138,7 +138,7 @@ ObjectModel {
 
 	ListNavigationItem {
 		text: CommonWords.setup
-		visible: allowedRoles.isValid
+		allowed: allowedRoles.isValid
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
@@ -175,7 +175,7 @@ ObjectModel {
 						//% "Data manager version"
 						text: qsTrId("ac-in-modeldefault_data_manager_version")
 						dataItem.uid: root.bindPrefix + "/DataManagerVersion"
-						visible: defaultVisible && dataItem.isValid
+						allowed: defaultAllowed && dataItem.isValid
 					}
 				}
 			}

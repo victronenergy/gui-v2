@@ -63,6 +63,7 @@ Page {
 			}
 
 			ListItem {
+				allowed: gsmStatusIcon.valid
 				text: CommonWords.signal_strength
 
 				content.children: [
@@ -78,13 +79,12 @@ Page {
 						}
 					}
 				]
-				visible: gsmStatusIcon.valid
 			}
 
 			ListItem {
 				//% "It may be necessary to configure the APN settings below in this page, contact your operator for details.\nIf that doesn't work, check sim-card in a phone to make sure that there is credit and/or it is registered to be used for data."
 				text: qsTrId("page_settings_gsm_error_message")
-				visible: status.dataItem.value === 0 && carrier.dataItem.isValid && simStatus.value === 1000
+				allowed: status.dataItem.value === 0 && carrier.dataItem.isValid && simStatus.value === 1000
 			}
 
 			ListSwitch {
@@ -138,13 +138,13 @@ Page {
 				dataItem.uid: settingsBindPrefix + "/PIN"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				// Show only when PIN required
-				visible: dataItem.isValid && [11, 16].indexOf(simStatus.value)  > -1
+				allowed: dataItem.isValid && [11, 16].indexOf(simStatus.value)  > -1
 			}
 
 			ListTextItem {
 				text: CommonWords.ip_address
 				dataItem.uid: bindPrefix + "/IP"
-				visible: status.dataItem.value === 1
+				allowed: status.dataItem.value === 1
 			}
 
 			ListNavigationItem {
@@ -178,7 +178,7 @@ Page {
 									//% "APN name"
 									text: qsTrId("page_settings_gsm_apn_name")
 									dataItem.uid: root.settingsBindPrefix + "/APN"
-									visible: !useDefaultApn.checked
+									allowed: !useDefaultApn.checked
 									textField.maximumLength: 50
 								}
 							}
@@ -206,7 +206,7 @@ Page {
 				//% "User name"
 				text: qsTrId("page_settings_gsm_user_name")
 				dataItem.uid: settingsBindPrefix + "/User"
-				visible: useAuth.checked
+				allowed: useAuth.checked
 			}
 
 			ListTextField {
@@ -214,14 +214,14 @@ Page {
 
 				text: CommonWords.password
 				dataItem.uid: settingsBindPrefix + "/Password"
-				visible: useAuth.checked
+				allowed: useAuth.checked
 			}
 
 			ListTextItem {
 				//% "IMEI"
 				text: qsTrId("page_settings_gsm_imei")
 				dataItem.uid: bindPrefix + "/IMEI"
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 			}
 		}
 	}

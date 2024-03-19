@@ -86,7 +86,7 @@ Page {
 			text: qsTrId("settings_page_relay_generator_run_time")
 			secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
 			dataItem.uid: root.startStopBindPrefix + "/Runtime"
-			visible: generatorState.value in [1, 2, 3] // Running, Warm-up, Cool-down
+			allowed: generatorState.value in [1, 2, 3] // Running, Warm-up, Cool-down
 		}
 
 		ListTextItem {
@@ -109,14 +109,14 @@ Page {
 			text: qsTrId("settings_page_relay_generator_time_to_service")
 			dataItem.uid: root.startStopBindPrefix + "/ServiceCounter"
 			secondaryText: Utils.secondsToString(dataItem.value, false)
-			visible: defaultVisible && dataItem.isValid
+			allowed: defaultAllowed && dataItem.isValid
 		}
 
 		ListTextItem {
 			//% "Accumulated running time since last test run"
 			text: qsTrId("settings_page_relay_generator_accumulated_running_time")
 			showAccessLevel: VenusOS.User_AccessType_Service
-			visible: defaultVisible && nextTestRun.visible
+			allowed: defaultAllowed && nextTestRun.allowed
 			secondaryText: Utils.secondsToString(dataItem.value, false)
 			dataItem.uid: root.startStopBindPrefix + "/TestRunIntervalRuntime"
 		}
@@ -127,10 +127,10 @@ Page {
 			text: qsTrId("settings_page_relay_generator_time_to_next_test_run")
 			secondaryText: ""
 			dataItem.uid: root.startStopBindPrefix + "/NextTestRun"
-			visible: dataItem.isValid && dataItem.value > 0
+			allowed: dataItem.isValid && dataItem.value > 0
 
 			Timer {
-				running: parent.visible && root.animationEnabled
+				running: parent.allowed && root.animationEnabled
 				repeat: true
 				interval: 1000
 				onTriggered: {
@@ -150,7 +150,7 @@ Page {
 			//% "Autostart functionality"
 			text: qsTrId("settings_page_relay_generator_auto_start_enabled")
 			dataItem.uid: root.startStopBindPrefix + "/AutoStartEnabled"
-			visible: allowDisableAutostart
+			allowed: allowDisableAutostart
 		}
 
 		ListNavigationItem {

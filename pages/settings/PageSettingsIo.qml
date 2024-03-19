@@ -30,7 +30,7 @@ Page {
 			ListNavigationItem {
 				//% "Analog inputs"
 				text: qsTrId("settings_io_analog_inputs")
-				visible: defaultVisible && analogModel.rowCount > 0
+				allowed: defaultAllowed && analogModel.rowCount > 0
 				onClicked: {
 					Global.pageManager.pushPage(analogInputsComponent, {"title": text})
 				}
@@ -58,7 +58,7 @@ Page {
 			ListNavigationItem {
 				//% "Digital inputs"
 				text: qsTrId("settings_io_digital_inputs")
-				visible: defaultVisible && digitalModel.rowCount > 0
+				allowed: defaultAllowed && digitalModel.rowCount > 0
 				onClicked: {
 					Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
 				}
@@ -104,7 +104,7 @@ Page {
 			ListNavigationItem {
 				//% "Bluetooth sensors"
 				text: qsTrId("settings_io_bt_sensors")
-				visible: Connman.technologyList.indexOf("bluetooth") !== -1
+				allowed: Connman.technologyList.indexOf("bluetooth") !== -1
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
 				}

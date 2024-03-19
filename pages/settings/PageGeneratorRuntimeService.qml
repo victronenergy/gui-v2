@@ -57,7 +57,7 @@ Page {
 				textField.inputMethodHints: Qt.ImhDigitsOnly
 				dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
 				enabled: userHasWriteAccess && state.value === 0
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 				textField.maximumLength: 6
 				onAccepted: function(hours) {
 					dataItem.setValue(accumulatedTotalItem.value - hours * 60 * 60)
@@ -89,7 +89,7 @@ Page {
 				//% "Reset service timer"
 				text: qsTrId("page_settings_generator_reset_service_timer")
 				button.text: CommonWords.press_to_reset
-				visible: serviceReset.isValid
+				allowed: serviceReset.isValid
 				onClicked: {
 					serviceReset.setValue(1)
 					//% "The service timer has been reset"

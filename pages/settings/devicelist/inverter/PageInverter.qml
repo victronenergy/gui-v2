@@ -39,7 +39,7 @@ Page {
 
 				text: CommonWords.switch_mode
 				dataItem.uid: root.bindPrefix + "/Mode"
-				visible: defaultVisible && !root.isInverterCharger
+				allowed: defaultAllowed && !root.isInverterCharger
 				optionModel: [
 					{ display: CommonWords.off, value: VenusOS.Inverter_Mode_Off },
 					{ display: CommonWords.on, value: VenusOS.Inverter_Mode_On },
@@ -50,7 +50,7 @@ Page {
 			ListRadioButtonGroup {
 				text: modeSwitch.text
 				dataItem.uid: root.bindPrefix + "/Mode"
-				visible: defaultVisible && root.isInverterCharger
+				allowed: defaultAllowed && root.isInverterCharger
 				optionModel: [
 					{ display: CommonWords.off, value: VenusOS.InverterCharger_Mode_Off },
 					//: Inverter 'Charger Only' mode
@@ -95,7 +95,7 @@ Page {
 			ListQuantityGroup {
 				//% "PV"
 				text: qsTrId("inverter_pv")
-				visible: pvV.isValid || pvYield.isValid
+				allowed: pvV.isValid || pvYield.isValid
 				textModel: [
 					{ value: pvV.value, unit: VenusOS.Units_Volt, precision: 2 },
 					{ value: pvYield.value, unit: VenusOS.Units_Watt },
@@ -115,7 +115,7 @@ Page {
 			ListQuantityItem {
 				//% "Total yield"
 				text: qsTrId("inverter_total_yield")
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/User"
 			}
@@ -123,14 +123,14 @@ Page {
 			ListQuantityItem {
 				//% "System yield"
 				text: qsTrId("inverter_system_yield")
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/System"
 			}
 
 			ListQuantityItem {
 				text: CommonWords.state_of_charge
-				visible: defaultVisible && root.isInverterCharger
+				allowed: defaultAllowed && root.isInverterCharger
 				unit: VenusOS.Units_Percentage
 				dataItem.uid: root.bindPrefix + "/Soc"
 			}
@@ -138,13 +138,13 @@ Page {
 			ListTemperatureItem {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListTextItem {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
-				visible: defaultVisible && root.isInverterCharger
+				allowed: defaultAllowed && root.isInverterCharger
 				secondaryText: ChargerError.description(dataItem.value)
 			}
 
@@ -157,7 +157,7 @@ Page {
 
 				//% "Daily history"
 				text: qsTrId("inverter_daily_history")
-				visible: (numberOfTrackers.value || 0) > 0
+				allowed: (numberOfTrackers.value || 0) > 0
 				onClicked: {
 					if (!solarHistory) {
 						solarHistory = solarHistoryComponent.createObject(root)
@@ -190,7 +190,7 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.overall_history
-				visible: root.isInverterCharger
+				allowed: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -199,7 +199,7 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.alarm_status
-				visible: root.isInverterCharger
+				allowed: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageRsAlarms.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })
@@ -208,7 +208,7 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.alarm_setup
-				visible: root.isInverterCharger
+				allowed: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageRsAlarmSettings.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })

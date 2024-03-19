@@ -95,14 +95,14 @@ ObjectModel {
 	ListFpGensetErrorItem {
 		text: CommonWords.error_code
 		dataItem.uid: root.bindPrefix + "/ErrorCode"
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 		nrOfPhases: root.nrOfPhases.value || 3
 	}
 
 	ListButton {
 		text: CommonWords.clear_error_action
 		secondaryText: CommonWords.press_to_clear
-		visible: gensetStatus.value === 10
+		allowed: gensetStatus.value === 10
 		onClicked: startItem.setValue(0)
 
 		VeQuickItem {
@@ -150,7 +150,7 @@ ObjectModel {
 		id: generatorNavigationItem
 		//% "Auto start/stop"
 		text: qsTrId("ac-in-genset_auto_start_stop")
-		visible: autoStartStopItem.value === 1
+		allowed: autoStartStopItem.value === 1
 		onClicked: {
 			const props = {
 				"title": text,
@@ -186,7 +186,7 @@ ObjectModel {
 							//% "Load"
 							text: qsTrId("ac-in-genset_load")
 							dataItem.uid: root.bindPrefix + "/Engine/Load"
-							visible: defaultVisible && dataItem.isValid
+							allowed: defaultAllowed && dataItem.isValid
 							unit: VenusOS.Units_Percentage
 						}
 
@@ -194,14 +194,14 @@ ObjectModel {
 							//% "Oil Pressure"
 							text: qsTrId("ac-in-genset_oil_pressure")
 							dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
-							visible: defaultVisible && dataItem.isValid
+							allowed: defaultAllowed && dataItem.isValid
 							unit: VenusOS.Units_Kilopascal
 						}
 
 						ListTemperatureItem {
 							//% "Coolant temperature"
 							text: qsTrId("ac-in-genset_coolant_temperature")
-							visible: defaultVisible && dataItem.isValid
+							allowed: defaultAllowed && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
 							precision: 0
 						}
@@ -209,21 +209,21 @@ ObjectModel {
 						ListTemperatureItem {
 							//% "Exhaust temperature"
 							text: qsTrId("ac-in-genset_exhaust_temperature")
-							visible: defaultVisible && dataItem.isValid
+							allowed: defaultAllowed && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/ExaustTemperature"
 						}
 
 						ListTemperatureItem {
 							//% "Winding temperature"
 							text: qsTrId("ac-in-genset_winding_temperature")
-							visible: defaultVisible && dataItem.isValid
+							allowed: defaultAllowed && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
 						}
 
 						ListTemperatureItem {
 							//% "Oil temperature"
 							text: qsTrId("ac-in-genset_oil_temperature")
-							visible: defaultVisible && dataItem.isValid
+							allowed: defaultAllowed && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
 							precision: 0
 						}
@@ -231,7 +231,7 @@ ObjectModel {
 						ListTextItem {
 							//% "Operating time"
 							text: qsTrId("ac-in-genset_operating_time")
-							visible: defaultVisible && dataItem.isValid
+							allowed: defaultAllowed && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/OperatingHours"
 							secondaryText: Utils.formatAsHHMM(dataItem.value, true)
 						}
@@ -240,7 +240,7 @@ ObjectModel {
 							//% "Starter battery voltage"
 							text: qsTrId("ac-in-genset_starter_battery_voltage")
 							dataItem.uid: root.bindPrefix + "/StarterVoltage"
-							visible: defaultVisible && dataItem.isValid
+							allowed: defaultAllowed && dataItem.isValid
 							unit: VenusOS.Units_Volt
 						}
 
@@ -248,7 +248,7 @@ ObjectModel {
 							//% "Number of starts"
 							text: qsTrId("ac-in-genset_number_of_starts")
 							dataItem.uid: root.bindPrefix + "/Engine/Starts"
-							visible: defaultVisible && dataItem.isValid
+							allowed: defaultAllowed && dataItem.isValid
 						}
 					}
 				}

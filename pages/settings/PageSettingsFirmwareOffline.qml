@@ -39,7 +39,7 @@ Page {
 
 				enabled: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
-				visible: !!Global.firmwareUpdate.offlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
+				allowed: !!Global.firmwareUpdate.offlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {
 					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Offline)
 				}
@@ -49,7 +49,8 @@ Page {
 				//% "Firmware build date/time"
 				text: qsTrId("settings_firmware_build_date_time")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableBuild"
-				visible: installUpdate.visible && Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
+				allowed: installUpdate.allowed
+					&& Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 
 			MountStateListButton {}

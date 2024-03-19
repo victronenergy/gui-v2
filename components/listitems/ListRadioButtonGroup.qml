@@ -104,7 +104,7 @@ ListNavigationItem {
 						  ? modelData.fontFamily || Global.fontLoader.name
 						  : model.fontFamily || Global.fontLoader.name
 
-					visible: (userHasWriteAccess && enabled) || checked
+					allowed: (userHasWriteAccess && enabled) || checked
 					checked: root.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel
 					writeAccessLevel: root.writeAccessLevel
@@ -129,7 +129,7 @@ ListNavigationItem {
 
 						Column {
 							function showPasswordInput() {
-								passwordField.visible = true
+								passwordField.allowed = true
 								passwordField.forceActiveFocus()
 							}
 
@@ -144,7 +144,7 @@ ListNavigationItem {
 								primaryLabel.color: Theme.color_font_secondary
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
-								visible: false
+								allowed: false
 
 								onAccepted: function(text) {
 									if (text === bottomContentLoader.password) {

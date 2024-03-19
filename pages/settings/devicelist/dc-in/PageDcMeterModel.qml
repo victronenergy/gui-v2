@@ -29,7 +29,7 @@ ObjectModel {
 	ListTemperatureItem {
 		text: CommonWords.temperature
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListQuantityItem {
@@ -37,7 +37,7 @@ ObjectModel {
 		text: qsTrId("dcmeter_aux_voltage")
 		dataItem.uid: root.bindPrefix + "/Dc/1/Voltage"
 		unit: VenusOS.Units_Volt
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListRelayState {
@@ -50,7 +50,7 @@ ObjectModel {
 
 	ListNavigationItem {
 		text: CommonWords.alarms
-		visible: !isSssDcEnergyMeter
+		allowed: !isSssDcEnergyMeter
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
@@ -59,7 +59,7 @@ ObjectModel {
 
 	ListNavigationItem {
 		text: CommonWords.history
-		visible: !isSssDcEnergyMeter
+		allowed: !isSssDcEnergyMeter
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeterHistory.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })

@@ -57,7 +57,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/CustomName"
 				dataItem.invalidate: false
 				textField.maximumLength: 32
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 				placeholderText: CommonWords.custom_name
 			}
 
@@ -79,7 +79,7 @@ Page {
 				text: qsTrId("settings_deviceinfo_hardware_version")
 				dataItem.uid: root.bindPrefix + "/HardwareVersion"
 				dataItem.invalidate: false
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListTextItem {
@@ -92,7 +92,7 @@ Page {
 				text: CommonWords.serial_number
 				dataItem.uid: root.bindPrefix + "/Serial"
 				dataItem.invalidate: false
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListTextItem {
@@ -100,7 +100,7 @@ Page {
 				text: qsTrId("settings_deviceinfo_device_name")
 				dataItem.uid: root.bindPrefix + "/DeviceName"
 				dataItem.invalidate: false
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 			}
 		}
 	}

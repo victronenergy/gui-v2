@@ -36,14 +36,14 @@ ObjectModel {
 			//% "Always open (don't use the relay)"
 			{ display: qsTrId("batterysettingrelay_always_open_dont_use_the_relay"), value: 3 },
 		]
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListSwitch {
 		text: CommonWords.state
 		dataItem.uid: root.bindPrefix + "/Relay/0/State"
 		enabled: mode.dataItem.isValid && mode.dataItem.value === 2
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListLabel {
@@ -66,7 +66,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSoc"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSocClear"
-		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
+		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -78,7 +78,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltageClear"
-		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
+		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -90,7 +90,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltage"
-		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -102,7 +102,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltageClear"
-		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -114,14 +114,14 @@ ObjectModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltage"
-		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListSwitch {
 		//% "Fuse blown"
 		text: qsTrId("batterysettingrelay_fuse_blown")
 		dataItem.uid: root.bindPrefix + "/Settings/Relay/FuseBlown"
-		visible: defaultVisible && dataItem.isValid && showSetting(0)
+		allowed: defaultAllowed && dataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -135,7 +135,7 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperatureClear"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -149,6 +149,6 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperature"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		visible: defaultVisible && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 }

@@ -26,7 +26,7 @@ Page {
 				text: qsTrId("settings_brightness")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Brightness"
 				writeAccessLevel: VenusOS.User_AccessType_User
-				visible: defaultVisible && !autoBrightness.checked
+				allowed: defaultAllowed && !autoBrightness.checked
 			}
 
 			ListRadioButtonGroup {
