@@ -26,6 +26,7 @@ Rectangle {
 	property real expandedY
 	readonly property int compactHeight: getCompactHeight(size)
 	readonly property int expandedHeight: getExpandedHeight(size)
+	property real verticalMargin: Theme.geometry_overviewPage_widget_content_verticalMargin
 	property bool expanded
 	property bool animateGeometry
 	property bool animationEnabled
@@ -63,14 +64,19 @@ Rectangle {
 		name: "expanded"
 		when: root.expanded
 
-		PropertyChanges { target: root; y: root.expandedY; height: root.expandedHeight }
+		PropertyChanges {
+			target: root
+			y: root.expandedY
+			height: root.expandedHeight
+			verticalMargin: Theme.geometry_overviewPage_widget_content_expanded_verticalMargin
+		}
 	}
 
 	transitions: Transition {
 		enabled: root.animateGeometry
 
 		NumberAnimation {
-			properties: "y,height"
+			properties: "y,height,verticalMargin"
 			duration: Theme.animation_page_idleResize_duration
 			easing.type: Easing.InOutQuad
 		}
@@ -80,25 +86,19 @@ Rectangle {
 		id: header
 
 		x: Theme.geometry_overviewPage_widget_content_horizontalMargin
-		y: root.size > VenusOS.OverviewWidget_Size_S
-		   ? Theme.geometry_overviewPage_widget_content_verticalMargin
-		   : parent.height/2 - height/2
+		y: root.verticalMargin
 		width: parent.width - 2*Theme.geometry_overviewPage_widget_content_horizontalMargin
-		height: widgetHeader.height + (quantityLabel.visible ? quantityLabel.anchors.topMargin + quantityLabel.height : 0)
+		height: widgetHeader.height + (quantityLabel.visible ? quantityLabel.height : 0)
 
 		WidgetHeader {
 			id: widgetHeader
-
 			width: parent.width
 		}
 
 		ElectricalQuantityLabel {
 			id: quantityLabel
 
-			anchors {
-				top: widgetHeader.bottom
-				topMargin: Theme.geometry_overviewPage_widget_header_spacing
-			}
+			anchors.top: widgetHeader.bottom
 			font.pixelSize: root.size === VenusOS.OverviewWidget_Size_XS
 					  ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
 					  : Theme.font_overviewPage_widget_quantityLabel_maximumSize

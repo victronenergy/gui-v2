@@ -102,9 +102,9 @@ OverviewWidget {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_overviewPage_widget_battery_temperature_topMargin
+			topMargin: root.verticalMargin
 			right: parent.right
-			rightMargin: Theme.geometry_overviewPage_widget_battery_temperature_rightMargin
+			rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 		}
 
 		value: Global.systemSettings.convertFromCelsius(batteryData.temperature)

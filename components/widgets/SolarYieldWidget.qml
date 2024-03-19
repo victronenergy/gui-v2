@@ -36,7 +36,7 @@ OverviewWidget {
 		Loader {
 			readonly property int margin: sourceComponent === historyComponent
 				  ? Theme.geometry_overviewPage_widget_solar_graph_margins
-				  : Theme.geometry_overviewPage_widget_extraContent_bottomMargin
+				  : root.verticalMargin
 
 			anchors {
 				left: parent.left

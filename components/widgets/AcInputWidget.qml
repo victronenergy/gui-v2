@@ -93,7 +93,7 @@ OverviewWidget {
 
 				anchors {
 					bottom: parent.bottom
-					bottomMargin: Theme.geometry_overviewPage_widget_extraContent_bottomMargin
+					bottomMargin: root.verticalMargin
 				}
 				width: parent.width
 				model: root.phaseModel
