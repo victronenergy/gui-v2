@@ -34,7 +34,7 @@ OverviewWidget {
 				right: parent.right
 				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin + root.rightPadding
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry_overviewPage_widget_extraContent_bottomMargin
+				bottomMargin: root.verticalMargin
 			}
 			sourceComponent: Global.evChargers.model.count > 1 ? multiEvChargerComponent
 					: Global.evChargers.model.count > 0 ? singleEvChargerComponent
@@ -69,7 +69,7 @@ OverviewWidget {
 				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
 
 				Label {
-					width: parent.width - chargingTimeLabel.width
+					width: parent.width - chargingTimeLabel.width - parent.spacing
 					elide: Text.ElideRight
 					text: Global.evChargers.chargerModeToText(evCharger.mode)
 					color: Theme.color_font_secondary
