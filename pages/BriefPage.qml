@@ -111,7 +111,7 @@ SwipeViewPage {
 			opacity: root._gaugeArcOpacity
 			value: !visible ? 0 : inputsRange.valueAsRatio * 100
 
-			ArcGaugeQuantityLabel {
+			ArcGaugeQuantityRow {
 				id: acInGaugeQuantity
 
 				alignment: parent.alignment
@@ -165,7 +165,7 @@ SwipeViewPage {
 			opacity: root._gaugeArcOpacity
 			animationEnabled: root.animationEnabled
 
-			ArcGaugeQuantityLabel {
+			ArcGaugeQuantityRow {
 				alignment: parent.alignment
 				icon.source: "qrc:/images/solaryield.svg"
 				leftMargin: root._gaugeLabelMargin - root._gaugeArcMargin
@@ -194,7 +194,7 @@ SwipeViewPage {
 			x: -root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
 
-			ArcGaugeQuantityLabel {
+			ArcGaugeQuantityRow {
 				alignment: parent.alignment
 				icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 				leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
@@ -228,7 +228,7 @@ SwipeViewPage {
 			value: visible ? dcLoadsRange.valueAsRatio * 100 : 0           
 			x: -root._gaugeArcMargin
 
-			ArcGaugeQuantityLabel {
+			ArcGaugeQuantityRow {
 				alignment: parent.alignment
 				icon.source: "qrc:/images/dcloads.svg"
 				leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
