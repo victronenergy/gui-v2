@@ -52,23 +52,6 @@ Page {
 			}
 
 			ListSwitch {
-				id: relaySwitch
-
-				//% "Alarm relay on"
-				text: qsTrId("settings_relay_alarm_relay_on")
-				updateOnClick: false
-				checked: root._relay0Object && _relay0Object.state === VenusOS.Relays_State_Active
-
-				visible: relayFunction.currentValue === VenusOS.Relay_Function_Alarm
-				onClicked: {
-					// TODO in gui-v1 the relay state change considers relay polarity and alarm status.
-					// In gui-v2 we will connect to venus-platform or some backend to do this.
-					const newState = checked ? VenusOS.Relays_State_Inactive : VenusOS.Relays_State_Active
-					root._relay0Object.setState(newState)
-				}
-			}
-
-			ListSwitch {
 				id: manualSwitch
 
 				text: relay1State.isValid
