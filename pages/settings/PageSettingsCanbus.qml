@@ -101,7 +101,7 @@ Page {
 			ListNavigationItem {
 				//% "Devices"
 				text: qsTrId("settings_devices")
-				visible: root._isVecan || root._isRvc
+				allowed: root._isVecan || root._isRvc
 				onClicked: {
 					if (root._isVecan) {
 						Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevices.qml",
@@ -117,13 +117,13 @@ Page {
 				//% "NMEA2000-out"
 				text: qsTrId("settings_canbus_nmea2000out")
 				dataItem.uid: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
-				visible: root._isVecan
+				allowed: root._isVecan
 			}
 
 			ListSpinBox {
 				//% "Unique identity number selector"
 				text: qsTrId("settings_canbus_unique_id_select")
-				visible: root._isVecan || root._isRvc
+				allowed: root._isVecan || root._isRvc
 				dataItem.uid: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
 
 				bottomContentChildren: ListLabel {
@@ -158,7 +158,7 @@ Page {
 
 				//% "Check Unique id numbers"
 				text: qsTrId("settings_canbus_unique_id_choose")
-				visible: root._isVecan || root._isRvc
+				allowed: root._isVecan || root._isRvc
 				button.text: timer.running
 					? Utils.secondsToString(timer.remainingTime)
 					  //% "Press to check"

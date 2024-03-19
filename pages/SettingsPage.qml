@@ -128,7 +128,7 @@ SwipeViewPage {
 			{
 				text: CommonWords.relay,
 				page: "/pages/settings/PageSettingsRelay.qml",
-				visible: relay0.isValid
+				allowed: relay0.isValid
 			},
 			{
 				//% "Services"
@@ -144,7 +144,7 @@ SwipeViewPage {
 				//% "Venus OS Large features"
 				text: qsTrId("settings_venus_os_large_features"),
 				page: "/pages/settings/PageSettingsLarge.qml",
-				visible: signalK.isValid || nodeRed.isValid
+				allowed: signalK.isValid || nodeRed.isValid
 			},
 			{
 				//% "VRM device instances"
@@ -161,7 +161,7 @@ SwipeViewPage {
 		delegate: ListNavigationItem {
 			text: modelData.text
 			showAccessLevel: modelData.showAccessLevel || VenusOS.User_AccessType_User
-			visible: defaultVisible && (modelData.visible === undefined || modelData.visible === true)
+			allowed: defaultAllowed && (modelData.allowed === undefined || modelData.allowed === true)
 			onClicked: Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
 		}
 	}

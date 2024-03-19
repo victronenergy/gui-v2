@@ -86,12 +86,12 @@ Page {
 								text: root._visibleText
 								//% "Active battery monitor"
 								secondaryText: qsTrId("settings_batteries_active_battery_monitor")
-								visible: batteryMenuItem.activeBattery
+								allowed: batteryMenuItem.activeBattery
 							}
 
 							ListSwitch {
 								text: root._visibleText
-								visible: !batteryMenuItem.activeBattery
+								allowed: !batteryMenuItem.activeBattery
 								dataItem.uid: batteryEnabled.uid
 							}
 
@@ -101,7 +101,7 @@ Page {
 								//% "Enter name"
 								placeholderText: qsTrId("settings_batteries_enter_name")
 								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
-								visible: dataItem.isValid
+								allowed: dataItem.isValid
 								textField.maximumLength: 32 // TODO can the max be fetched from dbus?
 							}
 						}

@@ -45,7 +45,7 @@ Page {
 				//% "Continuous scanning"
 				text: qsTrId("settings_continuous_scan")
 				dataItem.uid: root.bleServiceUid + "/ContinuousScan"
-				visible: enable.checked
+				allowed: enable.checked
 			}
 
 			ListLabel {
@@ -57,7 +57,7 @@ Page {
 			ListNavigationItem {
 				//% "Bluetooth adapters"
 				text: qsTrId("settings_io_bluetooth_adapters")
-				visible: enable.checked
+				allowed: enable.checked
 				onClicked: Global.pageManager.pushPage(bluetoothAdaptersComponent, {"title": text})
 
 				Component {

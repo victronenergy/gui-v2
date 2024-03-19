@@ -41,7 +41,7 @@ Page {
 			ListNavigationItem {
 				//% "Warm-up & cool-down"
 				text: qsTrId("settings_page_generator_warm_up_cool_down")
-				visible: capabilities.value & warmupCapability
+				allowed: capabilities.value & warmupCapability
 				onClicked: Global.pageManager.pushPage(warmupPageComponent, { title: text })
 
 				Component {
@@ -141,7 +141,7 @@ Page {
 				//% "Quiet hours start time"
 				text: qsTrId("page_settings_generator_quiet_hours_start_time")
 				dataItem.uid: settingsBindPrefix + "/QuietHours/StartTime"
-				visible: defaultVisible && quietHours.checked
+				allowed: defaultAllowed && quietHours.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
@@ -149,7 +149,7 @@ Page {
 				//% "Quiet hours end time"
 				text: qsTrId("page_settings_generator_quiet_hours_end_time")
 				dataItem.uid: settingsBindPrefix + "/QuietHours/EndTime"
-				visible: defaultVisible && quietHours.checked
+				allowed: defaultAllowed && quietHours.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 

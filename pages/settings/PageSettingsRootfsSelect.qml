@@ -57,7 +57,7 @@ Page {
 					 //% "Press to boot"
 				   ? qsTrId("settings_firmware_press_to_boot")
 				   : CommonWords.disabled
-				visible: root._switchingEnabled
+				allowed: root._switchingEnabled
 
 				onClicked: {
 					if (_autoUpdateDisabled) {
@@ -82,13 +82,13 @@ Page {
 				//% "Firmware %1 (%2)"
 				text: qsTrId("settings_firmware_current_version").arg(currentVersionItem.value).arg(currentBuildItem.value)
 				secondaryText: CommonWords.running_status
-				visible: currentVersionItem.isValid && root._switchingEnabled
+				allowed: currentVersionItem.isValid && root._switchingEnabled
 			}
 
 			ListTextItem {
 				//% "Backup firmware not available"
 				text: qsTrId("settings_firmware_backup_not_available")
-				visible: !currentVersion.visible && !backupVersion.visible && !root._rebooting
+				allowed: !currentVersion.visible && !backupVersion.visible && !root._rebooting
 			}
 		}
 	}

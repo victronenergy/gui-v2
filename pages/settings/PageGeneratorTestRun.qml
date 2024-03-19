@@ -62,7 +62,7 @@ Page {
 				//% "Run duration (hh:mm)"
 				text: qsTrId("page_generator_test_run_run_duration")
 				dataItem.uid: bindPrefix + "/TestRun/Duration"
-				visible: !runTillBatteryFull.checked
+				allowed: !runTillBatteryFull.checked
 			}
 
 			ListSwitch {
@@ -71,7 +71,7 @@ Page {
 				//% "Run until battery is fully charged"
 				text: qsTrId("page_generator_test_run_run_until_fully_charged")
 				dataItem.uid: bindPrefix + "/TestRun/RunTillBatteryFull"
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 			}
 		}
 	}

@@ -277,7 +277,7 @@ Page {
 
 			textField.inputMethodHints: Qt.ImhDigitsOnly
 			textField.text: model.vrmInstance
-			visible: model.deviceClass.length > 0 && model.vrmInstance >= 0
+			allowed: model.deviceClass.length > 0 && model.vrmInstance >= 0
 
 			onAccepted: {
 				const newVrmInstance = parseInt(textField.text)

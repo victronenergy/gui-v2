@@ -92,7 +92,7 @@ Page {
 
 			PvInverterPositionRadioButtonGroup {
 				dataItem.uid: root.bindPrefix + "/Position"
-				visible: role.currentValue === "pvinverter"
+				allowed: role.currentValue === "pvinverter"
 			}
 
 			/* EM24 settings */
@@ -100,7 +100,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Phase configuration"
 				text: qsTrId("ac-in-setup_phase_configuration")
-				visible: productId.value == em24ProductId
+				allowed: productId.value == em24ProductId
 				dataItem.uid: root.bindPrefix + "/PhaseConfig"
 				enabled: !em24Locked()
 				optionModel: [
@@ -116,14 +116,14 @@ Page {
 				id: em24SwitchPos
 				//% "Switch position"
 				text: qsTrId("ac-in-setup_switch_position")
-				visible: productId.value == em24ProductId
+				allowed: productId.value == em24ProductId
 				dataItem.uid: root.bindPrefix + "/SwitchPos"
 				secondaryText: dataItem.isValid ? em24SwitchText(dataItem.value) : "--"
 			}
 
 			ListLabel {
 				text: qsTr("Set the switch in an unlocked position to modify the settings.")
-				visible: productId.value == em24ProductId && em24Locked()
+				allowed: productId.value == em24ProductId && em24Locked()
 			}
 
 			/* Smappee settings */
@@ -131,7 +131,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Phase configuration"
 				text: qsTrId("ac-in-setup_phase_configuration")
-				visible: productId.value == smappeeProductId
+				allowed: productId.value == smappeeProductId
 				dataItem.uid: root.bindPrefix + "/PhaseConfig"
 				optionModel: [
 					//% "Single phase"
@@ -145,7 +145,7 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.current_transformers
-				visible: productId.value == smappeeProductId
+				allowed: productId.value == smappeeProductId
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeCTList.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -155,7 +155,7 @@ Page {
 			ListNavigationItem {
 				//% "Devices"
 				text: qsTrId("ac-in-setup_devices")
-				visible: productId.value == smappeeProductId
+				allowed: productId.value == smappeeProductId
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml",
 							{ "bindPrefix": root.bindPrefix })

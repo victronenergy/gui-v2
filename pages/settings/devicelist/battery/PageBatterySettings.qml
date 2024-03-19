@@ -34,7 +34,7 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.alarms
-				visible: alarmSettingsMonitor.hasVisibleItem
+				allowed: alarmSettingsMonitor.hasVisibleItem
 				onClicked: {
 					Global.pageManager.pushPage(emptySettingsComponent,
 							{ "title": text, "model": batterySettingsAlarmModel })
@@ -49,7 +49,7 @@ Page {
 			ListNavigationItem {
 				//% "Relay (on battery monitor)"
 				text: qsTrId("batterysettings_relay_on_battery_monitor")
-				visible: relaySettingsMonitor.hasVisibleItem
+				allowed: relaySettingsMonitor.hasVisibleItem
 				onClicked: {
 					Global.pageManager.pushPage(emptySettingsComponent,
 							{ "title": text, "model": batterySettingsRelayModel })
@@ -66,7 +66,7 @@ Page {
 				text: qsTrId("batterysettings_restore_factory_defaults")
 				//% "Press to restore"
 				secondaryText: qsTrId("batterysettings_press_to_restore")
-				visible: defaultVisible && restoreDefaults.isValid
+				allowed: defaultAllowed && restoreDefaults.isValid
 				onClicked: Global.dialogLayer.open(confirmationDialogComponent)
 
 				Component {
@@ -92,7 +92,7 @@ Page {
 				//% "Bluetooth Enabled"
 				text: qsTrId("batterysettings_bluetooth_enabled")
 				dataItem.uid: root.bindPrefix + "/Settings/BluetoothMode"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 		}
 	}

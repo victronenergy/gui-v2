@@ -34,13 +34,13 @@ Page {
 				text: CommonWords.phase
 				//% "Multiphase"
 				secondaryText: qsTrId("page_settings_fronius_inverter_multiphase")
-				visible: phaseCount > 1
+				allowed: phaseCount > 1
 			}
 
 			ListRadioButtonGroup {
 				text: CommonWords.phase
 				dataItem.uid: bindPrefix + "/Phase"
-				visible: phaseCount === 1
+				allowed: phaseCount === 1
 				optionModel: [
 					//% "L1"
 					{ display: qsTrId("page_settings_fronius_inverter_l1"), value: 1 },

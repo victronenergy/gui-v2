@@ -56,7 +56,7 @@ Page {
 			PvInverterPositionRadioButtonGroup {
 				id: positions
 				dataItem.uid: root.devicePath + "/Position"
-				visible: root.serviceType === "pvinverter"
+				allowed: root.serviceType === "pvinverter"
 			}
 
 			ListRadioButtonGroup {
@@ -77,7 +77,7 @@ Page {
 				//% "PV inverter on phase 2"
 				text: qsTrId("settings_pv_inverter_on_phase_2")
 				dataItem.uid: root.devicePath + "_S/Enabled"
-				visible: multiPhaseSupport.value
+				allowed: multiPhaseSupport.value
 						 && isMultiPhaseItem.value !== undefined
 						 && !isMultiPhaseItem.value
 						 && root.serviceType === "grid"
@@ -87,7 +87,7 @@ Page {
 				//% "PV inverter on phase 2 Position"
 				text: qsTrId("settings_cgwacs_pv_inverter_l2_position")
 				dataItem.uid: root.devicePath + "_S/Position"
-				visible: pvOnL2.checked
+				allowed: pvOnL2.checked
 				optionModel: positions.optionModel
 			}
 		}

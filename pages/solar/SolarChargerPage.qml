@@ -116,12 +116,12 @@ Page {
 				text: qsTrId("charger_load")
 				dataItem.uid: root.solarCharger.serviceUid + "/Load/I"
 				unit: VenusOS.Units_Amp
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 			ListTextItem {
 				text: loadQuantityItem.text
 				dataItem.uid: root.solarCharger.serviceUid + "/Load/State"
-				visible: defaultVisible && dataItem.isValid && !loadQuantityItem.visible
+				allowed: defaultAllowed && dataItem.isValid && !loadQuantityItem.visible
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
@@ -129,7 +129,7 @@ Page {
 				text: CommonWords.relay
 				checked: root.solarCharger.relayOn
 				secondaryText: CommonWords.onOrOff(root.solarCharger.relayOn)
-				visible: root.solarCharger.relayValid
+				allowed: root.solarCharger.relayValid
 				enabled: false
 			}
 

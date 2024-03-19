@@ -31,7 +31,7 @@ Page {
 				text: qsTrId("vebus_device_bms_error")
 				dataItem.uid: bindPrefix + "/Bms/Error"
 				enabled: false
-				visible: bmsType === VenusOS.VeBusDevice_Bms_Type_VeBus
+				allowed: bmsType === VenusOS.VeBusDevice_Bms_Type_VeBus
 			}
 		}
 	}

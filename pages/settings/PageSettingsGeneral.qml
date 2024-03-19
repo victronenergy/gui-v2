@@ -118,7 +118,7 @@ Page {
 				//% "Remote support tunnel"
 				text: qsTrId("settings_remote_support_tunnel")
 				secondaryText: remotePort.secondaryText.length > 0 ? CommonWords.online : CommonWords.offline
-				visible: defaultVisible && remoteSupportOnOff.checked
+				allowed: defaultAllowed && remoteSupportOnOff.checked
 			}
 
 			ListTextItem {
@@ -127,7 +127,7 @@ Page {
 				//% "Remote support IP and port"
 				text: qsTrId("settings_remote_ip_and_support")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
-				visible: defaultVisible && remoteSupportOnOff.checked
+				allowed: defaultAllowed && remoteSupportOnOff.checked
 			}
 
 			ListButton {
@@ -162,7 +162,7 @@ Page {
 				//% "Audible alarm"
 				text: qsTrId("settings_audible_alarm")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
-				visible: defaultVisible && buzzerStateDataItem.isValid
+				allowed: defaultAllowed && buzzerStateDataItem.isValid
 
 				VeQuickItem {
 					id: buzzerStateDataItem
@@ -174,7 +174,7 @@ Page {
 				//% "Enable status LEDs"
 				text: qsTrId("settings_enable_status_leds")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/LEDs/Enable"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListRadioButtonGroup {

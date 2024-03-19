@@ -23,22 +23,22 @@ Item {
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 	readonly property bool userHasReadAccess: Global.systemSettings.canAccess(showAccessLevel)
 
-	readonly property bool defaultVisible: userHasReadAccess
+	readonly property bool defaultAllowed: userHasReadAccess
 	readonly property alias primaryLabel: primaryLabel
-	readonly property int defaultImplicitHeight: visible
-		? Math.max(Math.max(primaryLabel.implicitHeight + Theme.geometry_listItem_content_verticalMargin*2, content.height)
-					+ (bottomContent.height > 0
-							? bottomContent.height + bottomContentMargin
-							: 0),
-				   Theme.geometry_listItem_height)
-		: 0
+	readonly property int defaultImplicitHeight: {
+		const bottomHeight = bottomContent.height > 0 ? bottomContent.height + bottomContentMargin : 0
+		const labelHeight = primaryLabel.implicitHeight + Theme.geometry_listItem_content_verticalMargin*2
+		return Math.max(Theme.geometry_listItem_height,
+						Math.max(content.height, labelHeight) + bottomHeight)
+	}
 
 	readonly property int availableWidth: width - primaryLabel.anchors.leftMargin - content.anchors.rightMargin - content.spacing
 	property int maximumContentWidth: availableWidth * 0.7
+	property bool allowed: defaultAllowed
 
+	visible: allowed
+	implicitHeight: allowed ? defaultImplicitHeight : 0
 	implicitWidth: parent ? parent.width : 0
-	implicitHeight: visible ? defaultImplicitHeight : 0
-	visible: defaultVisible
 
 	ListItemBackground {
 		id: backgroundRect

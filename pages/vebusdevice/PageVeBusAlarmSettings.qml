@@ -25,7 +25,7 @@ Page {
 		delegate: AlarmLevelRadioButtonGroup {
 			text: alarmSettingsModel.displayTexts[model.index]
 			dataItem.uid: root.bindPrefix + "/Settings/Alarm/Vebus" + model.pathSuffix
-			visible: model.multiPhaseOnly ? isMulti : true
+			allowed: model.multiPhaseOnly ? isMulti : true
 		}
 		footer: ListRadioButtonGroup {
 			text: CommonWords.vebus_error

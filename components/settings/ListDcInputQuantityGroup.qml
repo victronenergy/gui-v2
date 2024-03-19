@@ -14,7 +14,7 @@ ListQuantityGroup {
 	//: DC input measurement values
 	//% "Input"
 	text: qsTrId("dc_input")
-	visible: defaultVisible && (inVoltage.isValid || inPower.isValid)
+	allowed: defaultAllowed && (inVoltage.isValid || inPower.isValid)
 	textModel: [
 		{ value: inVoltage.value, unit: VenusOS.Units_Volt, visible: inVoltage.isValid },
 		{ value: inCurrent.value, unit: VenusOS.Units_Amp, visible: inCurrent.isValid },

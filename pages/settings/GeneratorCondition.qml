@@ -66,7 +66,7 @@ ListNavigationItem {
 						id: startValue
 
 						text: startValueDescription
-						visible: dataItem.isValid
+						allowed: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StartValue"
 						suffix: root.unit
 						decimals: root.decimals
@@ -78,7 +78,7 @@ ListNavigationItem {
 						id: quietHoursStartValue
 
 						text: CommonWords.start_value_during_quiet_hours
-						visible: dataItem.isValid
+						allowed: dataItem.isValid
 						dataItem.uid: bindPrefix + "/QuietHoursStartValue"
 						suffix: root.unit
 						decimals: root.decimals
@@ -90,7 +90,7 @@ ListNavigationItem {
 						id: startTime
 
 						text: startTimeDescription
-						visible: dataItem.isValid
+						allowed: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StartTimer"
 						suffix: root.timeUnit
 					}
@@ -99,7 +99,7 @@ ListNavigationItem {
 						id: stopValue
 
 						text: stopValueDescription
-						visible: dataItem.isValid
+						allowed: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StopValue"
 						suffix: root.unit
 						decimals: root.decimals
@@ -111,7 +111,7 @@ ListNavigationItem {
 						id: quietHoursStopValue
 
 						text: CommonWords.stop_value_during_quiet_hours
-						visible: dataItem.isValid
+						allowed: dataItem.isValid
 						dataItem.uid: bindPrefix + "/QuietHoursStopValue"
 						suffix: root.unit
 						decimals: root.decimals
@@ -123,7 +123,7 @@ ListNavigationItem {
 						id: stopTime
 
 						text: stopTimeDescription
-						visible: dataItem.isValid
+						allowed: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit
 					}

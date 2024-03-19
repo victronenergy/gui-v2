@@ -131,13 +131,13 @@ Page {
 			text: qsTrId("settings_tcpip_name")
 			//% "[Hidden]"
 			secondaryText: root.service ? (service.name || qsTrId("settings_tcpip_hidden")) : ""
-			visible: root._wifi
+			allowed: root._wifi
 		}
 
 		ListTextField {
 			text: CommonWords.password
 			textField.maximumLength: 63
-			visible: root.service && root._wifi
+			allowed: root.service && root._wifi
 					 && (root.service.state === "idle" || root.service.state === "failure")
 					 && !root.service.favorite && root._secured
 			writeAccessLevel: VenusOS.User_AccessType_User
@@ -152,7 +152,7 @@ Page {
 			text: qsTrId("settings_tcpip_connect_to_network")
 			//% "Connect"
 			button.text: qsTrId("settings_tcpip_connect")
-			visible: root.service && root._wifi
+			allowed: root.service && root._wifi
 					 && (root.service.state === "idle" || root.service.state === "failure")
 					 && (root.service.favorite || !root._secured)
 			writeAccessLevel: VenusOS.User_AccessType_User
@@ -168,7 +168,7 @@ Page {
 			text: qsTrId("settings_tcpip_forget_network")
 			//% "Forget"
 			button.text: qsTrId("settings_tcpip_forget")
-			visible: root.service && root._wifi && root.service.favorite
+			allowed: root.service && root._wifi && root.service.favorite
 			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: Global.dialogLayer.open(forgetNetworkDialogComponent)
 
@@ -190,7 +190,7 @@ Page {
 		ListTextItem {
 			text: CommonWords.signal_strength
 			secondaryText: root.service ? service.strength + "%" : ""
-			visible: root._wifi
+			allowed: root._wifi
 		}
 
 		ListTextItem {
@@ -266,7 +266,7 @@ Page {
 			text: qsTrId("settings_tcpip_link_local")
 			enabled: false
 			textField.text: "TODO fetch from vePlatform"
-			visible: root.technologyType === "ethernet"
+			allowed: root.technologyType === "ethernet"
 		}
 	}
 }

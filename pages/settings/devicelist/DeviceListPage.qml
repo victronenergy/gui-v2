@@ -237,7 +237,7 @@ Page {
 			//% "Remove disconnected devices"
 			text: qsTrId("devicelist_remove_disconnected_devices")
 			secondaryText: CommonWords.remove
-			visible: aggregateModel.disconnectedDeviceCount > 0
+			allowed: aggregateModel.disconnectedDeviceCount > 0
 			onClicked: {
 				aggregateModel.removeDisconnectedDevices()
 			}
@@ -258,7 +258,7 @@ Page {
 			text: model.cachedDeviceDescription
 			textModel: model.connected && _displayInfo ? _displayInfo.summary || [] : [ CommonWords.not_connected ]
 			down: deviceMouseArea.containsPress
-			visible: _displayInfo !== null
+			allowed: _displayInfo !== null
 
 			CP.ColorImage {
 				parent: deviceDelegate.content

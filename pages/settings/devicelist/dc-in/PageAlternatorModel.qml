@@ -16,7 +16,7 @@ ObjectModel {
 		dataItem.uid: root.bindPrefix + "/Mode"
 		valueTrue: 1
 		valueFalse: 4
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListDcInputQuantityGroup {
@@ -30,7 +30,8 @@ ObjectModel {
 	ListTemperatureItem {
 		text: CommonWords.temperature
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
+		onHeightChanged: console.trace()
 	}
 
 	ListTextItem {
@@ -43,20 +44,20 @@ ObjectModel {
 		text: CommonWords.network_status
 		secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
 		dataItem.uid: root.bindPrefix + "/Link/NetworkStatus"
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListTextItem {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/ErrorCode"
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 		secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 	}
 
 	ListTextItem {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/Error/0/Id"
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 		secondaryText: dataItem.isValid ? AlternatorError.description(dataItem.value) : dataItem.invalidText
 	}
 
@@ -65,14 +66,14 @@ ObjectModel {
 		text: qsTrId("alternator_wakespeed_field_drive")
 		dataItem.uid: root.bindPrefix + "/FieldDrive"
 		unit: VenusOS.Units_Percentage
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListQuantityItem {
 		text: CommonWords.speed
 		dataItem.uid: root.bindPrefix + "/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListQuantityItem {
@@ -80,12 +81,12 @@ ObjectModel {
 		text: qsTrId("alternator_wakespeed_engine_speed")
 		dataItem.uid: root.bindPrefix + "/Engine/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
-		visible: defaultVisible && dataItem.isValid
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListNavigationItem {
 		text: CommonWords.overall_history
-		visible: overallHistoryMonitor.hasVisibleItem
+		allowed: overallHistoryMonitor.hasVisibleItem
 		onClicked: {
 			Global.pageManager.pushPage(overallHistoryComponent, { "title": text })
 		}
@@ -103,7 +104,7 @@ ObjectModel {
 				text: qsTrId("alternator_wakespeed_operation_time")
 				secondaryText: Utils.secondsToString(dataItem.value, true)
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/OperationTime"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListQuantityItem {
@@ -112,35 +113,35 @@ ObjectModel {
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"
 				unit: VenusOS.Units_AmpHour
 				precision: 0
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListTextItem {
 				//% "Cycles started"
 				text: qsTrId("alternator_wakespeed_cycles_started")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesStarted"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListTextItem {
 				//% "Cycles completed"
 				text: qsTrId("alternator_wakespeed_cycles_completed")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesCompleted"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListTextItem {
 				//% "Number of power-ups"
 				text: qsTrId("alternator_wakespeed_nr_of_power_ups")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfPowerups"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListTextItem {
 				//% "Number of deep discharges"
 				text: qsTrId("alternator_wakespeed_nr_of_deep_discharges")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfDeepDischarges"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 		}
 
@@ -158,7 +159,7 @@ ObjectModel {
 	ListNavigationItem {
 		//% "Charge cycle history"
 		text: qsTrId("alternator_wakespeed_charge_cycle_history")
-		visible: historyCyclesAvailable.isValid
+		allowed: historyCyclesAvailable.isValid
 		onClicked: {
 			Global.pageManager.pushPage(chargeHistoryComponent, { "title": text })
 		}

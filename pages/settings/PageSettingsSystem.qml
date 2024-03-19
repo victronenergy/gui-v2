@@ -61,7 +61,7 @@ Page {
 				//% "Enter name"
 				placeholderText: qsTrId("settings_system_enter_user_defined_name")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				visible: systemNameRadioButtons.currentIndex === systemNameRadioButtons.customValueIndex
+				allowed: systemNameRadioButtons.currentIndex === systemNameRadioButtons.customValueIndex
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
 			}
 
@@ -89,7 +89,7 @@ Page {
 					? qsTrId("settings_system_monitor_for_grid_failure")
 					  //% "Monitor for shore disconnect"
 					: qsTrId("settings_system_monitor_for_shore_disconnect")
-				visible: root._isGrid || root._isShore
+				allowed: root._isGrid || root._isShore
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/System/GridLost"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
@@ -128,7 +128,7 @@ Page {
 				//% "Auto-selected"
 				text: qsTrId("settings_system_auto_selected")
 				dataItem.uid: Global.system.serviceUid + "/AutoSelectedBatteryService"
-				visible: batteryMonitorRadioButtons.optionModel !== undefined
+				allowed: batteryMonitorRadioButtons.optionModel !== undefined
 					&& batteryMonitorRadioButtons.currentIndex >= 0
 					&& batteryMonitorRadioButtons.optionModel[batteryMonitorRadioButtons.currentIndex].value === "default"
 			}

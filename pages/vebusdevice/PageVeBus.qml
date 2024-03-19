@@ -132,7 +132,7 @@ Page {
 				text: qsTrId("vebus_device_update_the_mk3")
 				//% "Press to update"
 				secondaryText: qsTrId("vebus_device_press_to_update")
-				visible: mk3firmware.visible
+				allowed: mk3firmware.visible
 				onClicked: {
 					//% "Updating the MK3, values will reappear after the update is complete"
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_updating_the_mk3"), 10000)
@@ -153,7 +153,7 @@ Page {
 				text: qsTrId("vebus_device_charging_to_100")
 				//% "In progress"
 				secondaryText: qsTrId("vebus_device_in_progress")
-				visible: preferRenewableEnergy.value === 2
+				allowed: preferRenewableEnergy.value === 2
 			}
 
 			ListNavigationItem {
@@ -169,7 +169,7 @@ Page {
 								 :
 								   //% "Charge the battery to 100%"
 								   qsTrId("vebus_device_charge_the_battery_to_100")
-				visible: preferRenewableEnergy.isValid && preferRenewableEnergy.value !== 2
+				allowed: preferRenewableEnergy.isValid && preferRenewableEnergy.value !== 2
 				onClicked: Global.pageManager.pushPage(newPageComponent)
 
 				Component {
@@ -246,7 +246,7 @@ Page {
 			}
 
 			ListQuantityItem {
-				visible: defaultVisible && dataItem.isValid && root.isMulti
+				allowed: defaultAllowed && dataItem.isValid && root.isMulti
 				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Temperature"
 				text: CommonWords.battery_temperature
 				unit: Global.systemSettings.temperatureUnit
@@ -309,7 +309,7 @@ Page {
 			ListNavigationItem {
 				//% "VE.Bus BMS"
 				text: qsTrId("vebus_device_vebus_bms")
-				visible: bmsExpected.value === 1
+				allowed: bmsExpected.value === 1
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusBms.qml", {
 														   "title": text,
 														   "bindPrefix": root.veBusDevice.serviceUid,

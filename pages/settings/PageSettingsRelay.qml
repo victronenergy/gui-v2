@@ -42,7 +42,7 @@ Page {
 				//% "Alarm relay polarity"
 				text: qsTrId("settings_relay_alarm_polarity")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Polarity"
-				visible: relayFunction.currentValue === VenusOS.Relay_Function_Alarm
+				allowed: relayFunction.currentValue === VenusOS.Relay_Function_Alarm
 				optionModel: [
 					//% "Normally open"
 					{ display: qsTrId("settings_relay_normally_open"), value: 0 },
@@ -60,7 +60,7 @@ Page {
 					  //% "Relay on"
 					: qsTrId("settings_relay_on")
 				dataItem.uid: Global.system.serviceUid + "/Relay/0/State"
-				visible: relayFunction.currentValue === VenusOS.Relay_Function_Manual
+				allowed: relayFunction.currentValue === VenusOS.Relay_Function_Manual
 			}
 
 			ListRadioButtonGroup {
@@ -69,7 +69,7 @@ Page {
 				//% "Function (Relay 2)"
 				text: qsTrId("settings_relay_function_relay2")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
-				visible: relay1State.isValid
+				allowed: relay1State.isValid
 				optionModel: [
 					//% "Manual"
 					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
@@ -83,13 +83,14 @@ Page {
 				//% "Relay 2 on"
 				text: qsTrId("settings_relay_relay2on")
 				dataItem.uid: Global.system.serviceUid + "/Relay/1/State"
-				visible: relay1State.isValid && relay1Function.currentValue === VenusOS.Relay_Function_Manual
+				allowed: relay1State.isValid
+					&& relay1Function.currentValue === VenusOS.Relay_Function_Manual
 			}
 
 			ListNavigationItem {
 				//% "Temperature control rules"
 				text: qsTrId("settings_relay_temp_control_rules")
-				visible: relayFunction.currentValue === VenusOS.Relay_Function_Temperature
+				allowed: relayFunction.currentValue === VenusOS.Relay_Function_Temperature
 					|| relay1Function.currentValue === VenusOS.Relay_Function_Temperature
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsRelayTempSensors.qml", { title: text })

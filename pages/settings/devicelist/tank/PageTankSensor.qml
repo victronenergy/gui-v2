@@ -38,7 +38,7 @@ Page {
 			ListTemperatureItem {
 				text: CommonWords.temperature
 				dataItem.uid: root.bindPrefix + "/Temperature"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListQuantityItem {
@@ -47,19 +47,19 @@ Page {
 				dataItem.uid: root.bindPrefix + "/BatteryVoltage"
 				unit: VenusOS.Units_Volt
 				precision: 2
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListAlarm {
 				text: CommonWords.low_level_alarm
 				dataItem.uid: root.bindPrefix + "/Alarms/Low/State"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListAlarm {
 				text: CommonWords.high_level_alarm
 				dataItem.uid: root.bindPrefix + "/Alarms/High/State"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListNavigationItem {

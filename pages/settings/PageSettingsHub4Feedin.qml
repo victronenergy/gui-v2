@@ -19,7 +19,7 @@ Page {
 				//% "AC-coupled PV - feed in excess"
 				text: qsTrId("settings_ess_ac_coupled_pv")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/PreventFeedback"
-				visible: defaultVisible && hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
+				allowed: defaultAllowed && hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 				invertSourceValue: true
 			}
 
@@ -29,7 +29,7 @@ Page {
 				//% "DC-coupled PV - feed in excess"
 				text: qsTrId("settings_ess_dc_coupled_pv")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn"
-				visible: defaultVisible
+				allowed: defaultAllowed
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& doNotFeedInvOvervoltage.isValid
 
@@ -44,7 +44,7 @@ Page {
 
 				//% "Limit system feed-in"
 				text: qsTrId("settings_ess_limit_system_feed_in")
-				visible: defaultVisible && (acFeedin.checked || feedInDc.checked)
+				allowed: defaultAllowed && (acFeedin.checked || feedInDc.checked)
 				checked: maxFeedInPower.value >= 0
 				onCheckedChanged: {
 					if (checked && maxFeedInPower.value < 0)
@@ -59,7 +59,7 @@ Page {
 
 				//% "Maximum feed-in"
 				text: qsTrId("settings_ess_max_feed_in")
-				visible: defaultVisible && restrictFeedIn.visible && restrictFeedIn.checked
+				allowed: defaultAllowed && restrictFeedIn.visible && restrictFeedIn.checked
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxFeedInPower"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				to: 300000
@@ -70,7 +70,7 @@ Page {
 				id: feedInLimitingActive
 				//% "Feed-in limiting active"
 				text: qsTrId("settings_ess_feed_in_limiting_active")
-				visible: defaultVisible
+				allowed: defaultAllowed
 					&& hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& dataItem.isValid
 				dataItem.uid: BackendConnection.serviceUidForType("hub4") +"/PvPowerLimiterActive"

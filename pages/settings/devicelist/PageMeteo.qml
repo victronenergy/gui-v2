@@ -52,14 +52,14 @@ Page {
 				dataItem.uid: bindPrefix + "/ExternalTemperature2"
 				//% "External temperature (2)"
 				text: qsTrId("page_meteo_external_temperature_2")
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListQuantityItem {
 				dataItem.uid: bindPrefix + "/WindSpeed"
 				//% "Wind speed"
 				text: qsTrId("page_meteo_wind_speed")
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 				value: dataItem.value
 				unit: VenusOS.Units_Speed_MetresPerSecond
 				precision: 1

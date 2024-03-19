@@ -49,5 +49,5 @@ ListButton {
 		timer.start()
 	}
 
-	visible: connected.value === 1 && canBeCleared.value === 1
+	allowed: connected.value === 1 && canBeCleared.value === 1
 }

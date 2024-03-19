@@ -21,7 +21,7 @@ Page {
 				//% "Networked"
 				text: qsTrId("charger_networked")
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 				secondaryText: dataItem.value === undefined ? "" : CommonWords.yesOrNo(dataItem.value & 1)
 			}
 
@@ -69,7 +69,7 @@ Page {
 					}
 				}
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
-				visible: dataItem.isValid && networkModeEnabled.dataItem.value
+				allowed: dataItem.isValid && networkModeEnabled.dataItem.value
 			}
 
 			ListTextItem {
@@ -97,21 +97,21 @@ Page {
 					}
 				}
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
-				visible: dataItem.isValid && networkModeEnabled.dataItem.value && ((dataItem.value & 0x30) > 0x00)
+				allowed: dataItem.isValid && networkModeEnabled.dataItem.value && ((dataItem.value & 0x30) > 0x00)
 			}
 
 			ListQuantityItem {
 				//% "Charge voltage"
 				text: qsTrId("charger_charge_voltage")
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeVoltage"
-				visible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x04)
+				allowed: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x04)
 				unit: VenusOS.Units_Volt
 			}
 
 			ListTextItem {
 				text: CommonWords.charge_current
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeCurrent"
-				visible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x08)
+				allowed: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x08)
 			}
 
 			ListTextItem {
@@ -120,7 +120,7 @@ Page {
 				text: qsTrId("charger_network_bms_controlled")
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 				dataItem.uid: root.solarCharger.serviceUid + "/Settings/BmsPresent"
-				visible: dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListButton {
@@ -129,7 +129,7 @@ Page {
 				//: Reset the BMS control
 				//% "Reset"
 				button.text: qsTrId("charger_network_bms_control_reset")
-				visible: bmsControlled.dataItem.value === 1
+				allowed: bmsControlled.dataItem.value === 1
 				onClicked: {
 					bmsControlled.dataItem.setValue(0)
 				}

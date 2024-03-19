@@ -19,7 +19,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/History/Overall/MaxPvVoltage"
 				unit: VenusOS.Units_Volt
 				precision: 2
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListQuantityItem {
@@ -28,7 +28,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/History/Overall/MaxBatteryVoltage"
 				unit: VenusOS.Units_Volt
 				precision: 2
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListQuantityItem {
@@ -37,7 +37,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/History/Overall/MinBatteryVoltage"
 				unit: VenusOS.Units_Volt
 				precision: 2
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			Column {

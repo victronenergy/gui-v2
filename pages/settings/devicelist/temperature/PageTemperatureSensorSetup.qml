@@ -26,7 +26,7 @@ Page {
 			ListRadioButtonGroup {
 				text: CommonWords.type
 				dataItem.uid: bindPrefix + "/TemperatureType"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 				optionModel: [
 					{ display: Global.environmentInputs.temperatureTypeToText(VenusOS.Temperature_DeviceType_Battery), value: VenusOS.Temperature_DeviceType_Battery },
 					{ display: Global.environmentInputs.temperatureTypeToText(VenusOS.Temperature_DeviceType_Fridge), value: VenusOS.Temperature_DeviceType_Fridge },
@@ -39,7 +39,7 @@ Page {
 				text: qsTrId("temperature_offset")
 				writeAccessLevel: VenusOS.User_AccessType_Installer
 				dataItem.uid: root.bindPrefix + "/Offset"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 				from: -100
 				to: 100
 			}
@@ -49,7 +49,7 @@ Page {
 				text: qsTrId("temperature_scale")
 				writeAccessLevel: VenusOS.User_AccessType_Installer
 				dataItem.uid: root.bindPrefix + "/Scale"
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 				from: 0
 				to: 10
 				decimals: 1
@@ -58,7 +58,7 @@ Page {
 			ListQuantityItem {
 				//% "Sensor voltage"
 				text: qsTrId("temperature_sensor_voltage")
-				visible: defaultVisible && dataItem.isValid
+				allowed: defaultAllowed && dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/RawValue"
 				unit: VenusOS.Units_Volt
 				precision: 2
