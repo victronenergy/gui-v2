@@ -191,14 +191,15 @@ Page {
 					uid: Global.system.serviceUid + "/ActiveBmsService"
 				}
 
+				// TODO the uid is wrong on MQTT, need something like mqtt/<type>/ProductName
+				// but it is currently mqtt/com.victronenergy.<service>/ProductName
 				VeQuickItem {
 					id: bmsProductName
-					uid: bmsService.isValid ? bmsService.value + "/ProductName" : ""
+					uid: bmsService.isValid ? "%1/%2/ProductName".arg(BackendConnection.uidPrefix()).arg(bmsService.value) : ""
 				}
-
 				VeQuickItem {
 					id: bmsCustomName
-					uid: bmsService.isValid ? bmsService.value + "/CustomName" : ""
+					uid: bmsService.isValid ? "%1/%2/CustomName".arg(BackendConnection.uidPrefix()).arg(bmsService.value) : ""
 				}
 			}
 		}

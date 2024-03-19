@@ -91,6 +91,7 @@ QtObject {
 		setMockSystemValue("AutoSelectedTemperatureService", "-")
 		setMockSettingValue("SystemSetup/SharedTemperatureSense", 2)
 		setMockSystemValue("Control/BatteryCurrentSense", 0)
+		setMockSystemValue("ActiveBmsService", "com.victronenergy.battery.ttyUSB1")
 
 		setMockSystemValue("SystemType", "ESS")
 		setMockSystemValue("Hub", 4)
@@ -184,7 +185,7 @@ QtObject {
 
 		setMockSettingValue("Services/Modbus", 0)
 		setMockModbusTcpValue("Services/Count", 2)
-		setMockModbusTcpValue("Services/0/ServiceName", "com.victronenergy.battery.ttyUSB0")
+		setMockModbusTcpValue("Services/0/ServiceName", "com.victronenergy.battery.ttyUSB1")
 		setMockModbusTcpValue("Services/0/UnitId", 288)
 		setMockModbusTcpValue("Services/1/ServiceName", "com.victronenergy.solarcharger.ttyUSB1")
 		setMockModbusTcpValue("Services/1/UnitId", 289)
