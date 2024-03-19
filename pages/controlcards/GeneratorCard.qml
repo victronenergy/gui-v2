@@ -117,6 +117,7 @@ ControlCard {
 		// when it is visible below the open start/stop dialogs.
 		checked: _generatorStateBeforeDialogOpen < 0
 				 ? root.generator.state === VenusOS.Generators_State_Running
+				   || root.generator.state === VenusOS.Generators_State_WarmUp
 				 : _generatorStateBeforeDialogOpen === VenusOS.Generators_State_Running
 
 		text: checked
@@ -128,7 +129,8 @@ ControlCard {
 
 		onClicked: {
 			_generatorStateBeforeDialogOpen = root.generator.state
-			if (root.generator.state === VenusOS.Generators_State_Running) {
+			if (root.generator.state === VenusOS.Generators_State_Running
+					|| root.generator.state === VenusOS.Generators_State_WarmUp) {
 				Global.dialogLayer.open(generatorStopDialogComponent)
 			} else {
 				Global.dialogLayer.open(generatorStartDialogComponent)

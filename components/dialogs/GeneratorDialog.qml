@@ -28,7 +28,7 @@ ModalDialog {
 	id: root
 
 	property Generator generator
-	property int finalGeneratorState: VenusOS.Generators_State_Stopped
+	readonly property int generatorState: root.generator ? root.generator.state : -1
 	property var runGeneratorAction
 
 	title: CommonWords.generator
@@ -124,12 +124,5 @@ ModalDialog {
 
 	onAboutToShow: {
 		acceptButtonBackground.state = "default"
-	}
-
-	readonly property int _generatorState: root.generator ? root.generator.state : -1
-	on_GeneratorStateChanged: {
-		if (root.open && root.generator.state === root.finalGeneratorState) {
-			root.accept()
-		}
 	}
 }
