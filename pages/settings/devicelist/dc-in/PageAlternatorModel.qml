@@ -91,6 +91,7 @@ ObjectModel {
 			Global.pageManager.pushPage(overallHistoryComponent, { "title": text })
 		}
 
+		// Declare ObjectModelMonitor before the model that it is monitoring. See QTBUG-123496
 		ObjectModelMonitor {
 			id: overallHistoryMonitor
 			model: overallHistoryModel

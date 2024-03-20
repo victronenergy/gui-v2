@@ -11,6 +11,16 @@ Page {
 
 	property string bindPrefix
 
+	// Declare ObjectModelMonitor before the model that it is monitoring. See QTBUG-123496
+	ObjectModelMonitor {
+		id: alarmSettingsMonitor
+		model: batterySettingsAlarmModel
+	}
+	ObjectModelMonitor {
+		id: relaySettingsMonitor
+		model: batterySettingsRelayModel
+	}
+
 	BatterySettingsAlarmModel {
 		id: batterySettingsAlarmModel
 		bindPrefix: root.bindPrefix
@@ -39,11 +49,6 @@ Page {
 					Global.pageManager.pushPage(emptySettingsComponent,
 							{ "title": text, "model": batterySettingsAlarmModel })
 				}
-
-				ObjectModelMonitor {
-					id: alarmSettingsMonitor
-					model: batterySettingsAlarmModel
-				}
 			}
 
 			ListNavigationItem {
@@ -53,11 +58,6 @@ Page {
 				onClicked: {
 					Global.pageManager.pushPage(emptySettingsComponent,
 							{ "title": text, "model": batterySettingsRelayModel })
-				}
-
-				ObjectModelMonitor {
-					id: relaySettingsMonitor
-					model: batterySettingsRelayModel
 				}
 			}
 
