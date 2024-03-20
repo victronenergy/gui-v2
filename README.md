@@ -21,7 +21,7 @@ For more technical information on Venus OS, see the [Venus OS wiki](https://gith
 
 **Status:** This is available for public preview, and lots of work needs to be done before official release/inclusion in Venus OS.
 
-**How to install:** See https://bit.ly/gui-beta
+**How to install:** See https://bit.ly/gui-v2
 
 ## Don't use the issue tracker for support
 
