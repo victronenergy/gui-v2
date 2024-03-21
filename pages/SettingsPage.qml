@@ -19,13 +19,6 @@ SwipeViewPage {
 	GradientListView {
 		id: settingsListView
 
-		header: Item {
-			// Would be better if this was set as the Flickable topMargin, but that causes the list
-			// to initially be offset by the topMargin (related to QTBUG-87007).
-			width: 1
-			height: Theme.geometry_gradientList_topMargin
-		}
-
 		model: [
 			{
 				//% "Device list"
