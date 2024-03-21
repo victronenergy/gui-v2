@@ -66,9 +66,7 @@
 
     "geometry_separatorBar_width": 1,
 
-    "geometry_statusBar_height": 48,
-    "geometry_statusBar_button_width": 48,
-    "geometry_statusBar_button_height": 48,
+    "geometry_statusBar_height": 56,
     "geometry_statusBar_horizontalMargin": 32,
     "geometry_statusBar_rightSideRow_horizontalMargin" : 16,
 
@@ -95,7 +93,7 @@
     "geometry_notificationsPage_delegate_marker_topMargin" : 12,
     "geometry_notificationsPage_delegate_marker_width" : 8,
     "geometry_notificationsPage_delegate_marker_radius" : 4,
-    "geometry_notificationsPage_snoozeButton_height" : 32,
+    "geometry_notificationsPage_snoozeButton_height" : 36,
     "geometry_notificationsPage_snoozeButton_spacing" : 7,
     "geometry_notificationsPage_history_height" : 40,
     "geometry_notificationsPage_history_bottomPadding" : 3,
@@ -143,7 +141,7 @@
     "geometry_progressArc_strokeWidth": 8,
 
     "geometry_mainGauge_size": 400,
-    "geometry_mainGauge_topMargin": 48,
+    "geometry_mainGauge_topMargin": 40,
 
     "geometry_circularMultiGauge_strokeWidth": 16,
     "geometry_circularMultiGauge_spacing": 16,
@@ -240,14 +238,14 @@
 
     "geometry_overviewPage_widget_compact_xl_height": 472,
     "geometry_overviewPage_widget_compact_l_height": 192,
-    "geometry_overviewPage_widget_compact_m_height": 130,
+    "geometry_overviewPage_widget_compact_m_height": 137,
     "geometry_overviewPage_widget_compact_s_height": 106,
     "geometry_overviewPage_widget_compact_xs_height": 83,
-    "geometry_overviewPage_widget_expanded_xl_height": 520,
-    "geometry_overviewPage_widget_expanded_l_height": 221,
-    "geometry_overviewPage_widget_expanded_m_height": 138,
-    "geometry_overviewPage_widget_expanded_s_height": 118,
-    "geometry_overviewPage_widget_expanded_xs_height": 88,
+    "geometry_overviewPage_widget_expanded_xl_height": 504,
+    "geometry_overviewPage_widget_expanded_l_height": 205,
+    "geometry_overviewPage_widget_expanded_m_height": 146,
+    "geometry_overviewPage_widget_expanded_s_height": 113,
+    "geometry_overviewPage_widget_expanded_xs_height": 87,
 
     "geometry_overviewPage_connector_line_width": 2,
     "geometry_overviewPage_connector_electron_velocity": 30,
@@ -256,10 +254,7 @@
     "geometry_overviewPage_connector_anchor_width": 6,
     "geometry_overviewPage_connector_anchor_height": 12,
 
-    "geometry_overviewPage_layout_compact_topMargin": 0,
-    "geometry_overviewPage_layout_compact_bottomMargin": 8,
-    "geometry_overviewPage_layout_expanded_topMargin": 0,
-    "geometry_overviewPage_layout_expanded_bottomMargin": 32,
+    "geometry_overviewPage_layout_expanded_bottomMargin": 40,
 
     "geometry_overviewPage_widget_solar_graph_bar_width": 8,
     "geometry_overviewPage_widget_solar_graph_bar_radius": 8,
@@ -301,7 +296,7 @@
     "geometry_levelsPage_environment_horizontalMargin": 40,
 
     "geometry_levelsPage_environment_gauge_width": 120,
-    "geometry_levelsPage_environment_gauge_icon_topMargin": 16,
+    "geometry_levelsPage_environment_gauge_icon_topMargin": 8,
     "geometry_levelsPage_environment_gauge_icon_size": 32,
     "geometry_levelsPage_environment_gauge_typeLabel_topMargin": 6,
     "geometry_levelsPage_environment_gauge_bar_topMargin": 9,
@@ -330,7 +325,6 @@
     "geometry_levelsPage_environment_humidityGauge_gradient_position2": 0.49,
     "geometry_levelsPage_environment_humidityGauge_gradient_position3": 0.9,
 
-    "geometry_gradientList_topMargin": 6,
     "geometry_gradientList_bottomMargin": 16,
     "geometry_gradientList_spacing": 4,
     "geometry_viewGradient_height": 28,

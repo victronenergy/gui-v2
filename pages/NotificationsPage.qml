@@ -81,13 +81,6 @@ SwipeViewPage {
 					}
 				}
 
-				header: Item {
-					// Would be better if this was set as the Flickable topMargin, but then
-					// positionViewAtBeginning() does not work correctly. See QTBUG-122422.
-					width: 1
-					height: Theme.geometry_gradientList_topMargin
-				}
-
 				width: parent.width
 				interactive: false  // this list cannot be scrolled separately to the main list
 				spacing: Theme.geometry_gradientList_spacing

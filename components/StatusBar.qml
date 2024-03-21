@@ -41,8 +41,8 @@ Rectangle {
 
 	component StatusBarButton : Button {
 		radius: 0
-		width: Theme.geometry_statusBar_button_width
-		height: Theme.geometry_statusBar_button_height
+		width: parent.height
+		height: parent.height
 		backgroundColor: "transparent"  // don't show background when disabled
 		display: C.AbstractButton.IconOnly
 		color: Theme.color_ok
@@ -67,7 +67,7 @@ Rectangle {
 					 ? "qrc:/images/icon_controls_off_32.svg"
 					 : root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive
 					   ? "qrc:/images/icon_controls_on_32.svg"
-					   : "qrc:/images/icon_arrow_32.svg"
+					   : "qrc:/images/icon_back_32.svg"
 
 		enabled: !!Global.pageManager
 				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
@@ -95,10 +95,10 @@ Rectangle {
 	Row {
 		id: rightButtonRow
 
+		height: parent.height
 		anchors {
 			right: parent.right
 			rightMargin: Theme.geometry_statusBar_horizontalMargin
-			verticalCenter: parent.verticalCenter
 		}
 
 		StatusBarButton {
