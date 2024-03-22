@@ -15,7 +15,8 @@ SwipeViewPage {
 
 	// Preferred order for the input widgets on the left hand side
 	readonly property var _leftWidgetOrder: [
-		VenusOS.OverviewWidget_Type_AcInput,
+		VenusOS.OverviewWidget_Type_AcGenericInput,
+		VenusOS.OverviewWidget_Type_AcGeneratorInput,
 		VenusOS.OverviewWidget_Type_DcGenerator,
 		VenusOS.OverviewWidget_Type_Alternator,
 		VenusOS.OverviewWidget_Type_FuelCell,
@@ -26,8 +27,8 @@ SwipeViewPage {
 	// Set a counter that updates whenever the layout should change.
 	// Use a delayed binding to avoid repopulating the model unnecessarily.
 	readonly property int _shouldResetWidgets: Global.dcInputs.model.count
-			+ (Global.acInputs.activeInput ? Global.acInputs.activeInput.source : -1)
-			+ (Global.acInputs.generatorInput ? 1 : 0)
+			+ Global.acInputs.input1Info.source
+			+ Global.acInputs.input2Info.source
 			+ (Global.dcLoads.model.count === 0 || isNaN(Global.system.loads.dcPower) ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
 			+ (Global.evChargers.model.count === 0 ? 0 : 1)
@@ -200,8 +201,11 @@ SwipeViewPage {
 		args = args || {}
 		let widget = null
 		switch (type) {
-		case VenusOS.OverviewWidget_Type_AcInput:
+		case VenusOS.OverviewWidget_Type_AcGenericInput:
 			widget = acInputComponent.createObject(root, args)
+			break
+		case VenusOS.OverviewWidget_Type_AcGeneratorInput:
+			widget = acInputComponent.createObject(root, Object.assign(args, { type: VenusOS.OverviewWidget_Type_AcGeneratorInput }))
 			break
 		case VenusOS.OverviewWidget_Type_Alternator:
 			widget = alternatorComponent.createObject(root, args)
@@ -233,24 +237,34 @@ SwipeViewPage {
 		let widgetType = -1
 		let widgetCandidates = []
 		let widget
-		if (Global.acInputs.activeInput != null) {
-			switch (Global.acInputs.activeInput.source) {
+		let i
+
+		const inputInfos = [ Global.acInputs.input1Info, Global.acInputs.input2Info ]
+		for (i = 0; i < inputInfos.length; ++i) {
+			const inputInfo = inputInfos[i]
+			if (!inputInfo) {
+				continue
+			}
+			switch (inputInfo.source) {
 			// Valid AC inputs:
 			case VenusOS.AcInputs_InputSource_Grid:
-			case VenusOS.AcInputs_InputSource_Generator:
 			case VenusOS.AcInputs_InputSource_Shore:
-				widgetType = VenusOS.OverviewWidget_Type_AcInput
+				widgetType = VenusOS.OverviewWidget_Type_AcGenericInput
+				break
+			case VenusOS.AcInputs_InputSource_Generator:
+				widgetType = VenusOS.OverviewWidget_Type_AcGeneratorInput
 				break
 			// Not a valid AC input:
 			case VenusOS.AcInputs_InputSource_NotAvailable:
 			case VenusOS.AcInputs_InputSource_Inverting:
-				break
+				continue
 			default:
-				console.warn("Unknown AC input type:", Global.acInputs.activeInput.source)
-				break
+				console.warn("Unknown AC input source:", inputInfo.source)
+				continue
 			}
 			if (widgetType >= 0) {
 				widget = _createWidget(widgetType)
+				widget.inputInfo = inputInfo
 				widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
 			}
 		}
@@ -258,7 +272,7 @@ SwipeViewPage {
 		// Add DC widgets. Only one widget is added per DC type, regardless of the number of inputs
 		// for that type.
 		let clearedWidgets = []
-		for (let i = 0; i < Global.dcInputs.model.count; ++i) {
+		for (i = 0; i < Global.dcInputs.model.count; ++i) {
 			// Add the input to the DC widget
 			const dcInput = Global.dcInputs.model.deviceAt(i)
 			widgetType = _dcWidgetTypeForInputType(dcInput.inputType)
