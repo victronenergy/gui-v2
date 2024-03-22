@@ -104,7 +104,8 @@ public:
 
 	enum OverviewWidget_Type {
 		OverviewWidget_Type_Unknown,
-		OverviewWidget_Type_AcInput,
+		OverviewWidget_Type_AcGenericInput,
+		OverviewWidget_Type_AcGeneratorInput,
 		OverviewWidget_Type_DcGenerator,
 		OverviewWidget_Type_Alternator,
 		OverviewWidget_Type_FuelCell,

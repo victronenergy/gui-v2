@@ -16,19 +16,18 @@ OverviewWidget {
 		})
 	}
 
-	property ActiveAcInput input: Global.acInputs.activeInput
+	// If this is the currently active AC input, then fetch the measurements and phase data from
+	// Global.acInputs.activeInput. Otherwise, just show the icon and title.
+	property AcInputSystemInfo inputInfo
+	property ActiveAcInput input: inputInfo && inputInfo.isActiveInput ? Global.acInputs.activeInput : null
 	property ListModel phaseModel: input && input.connected ? input.phases : null
 
-	readonly property bool _generatorStopped: input
-		 && input.source === VenusOS.AcInputs_InputSource_Generator
-		 && Global.generators.first
-		 && Global.generators.first.state === VenusOS.Generators_State_Stopped
-
-	type: VenusOS.OverviewWidget_Type_AcInput
-	title: !!input ? Global.acInputs.sourceToText(input.source) : ""
-	icon.source: !!input ? Global.acInputs.sourceIcon(input.source) : ""
+	type: VenusOS.OverviewWidget_Type_AcGenericInput
+	title: !!inputInfo ? Global.acInputs.sourceToText(inputInfo.source) : ""
+	icon.source: !!inputInfo ? Global.acInputs.sourceIcon(inputInfo.source) : ""
 	rightPadding: sideGaugeLoader.active ? Theme.geometry_overviewPage_widget_sideGauge_margins : 0
-	quantityLabel.dataObject: input && input.connected && !_generatorStopped ? input : null
+	quantityLabel.dataObject: input && input.connected ? input : null
+	quantityLabel.visible: input && input.connected
 	enabled: true
 
 	Loader {
