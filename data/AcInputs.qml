@@ -12,6 +12,10 @@ QtObject {
 	readonly property ActiveAcInput activeInput: _activeInputLoader.item
 	readonly property ActiveAcInput generatorInput: activeInput && activeInput.source === VenusOS.AcInputs_InputSource_Generator ? activeInput : null
 
+	readonly property AcInputSystemInfo activeInputInfo: input1Info.isActiveInput ? input1Info
+			: input2Info.isActiveInput ? input2Info
+			: null
+
 	property real power: activeInput != null ? activeInput.power : NaN
 	property real current: activeInput != null ? activeInput.current : NaN
 	property real currentLimit: activeInput != null ? activeInput.currentLimit : NaN
@@ -23,6 +27,16 @@ QtObject {
 		{ role: "acload", name: CommonWords.ac_load },
 	]
 
+	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>. There are always two inputs.
+	property AcInputSystemInfo input1Info: AcInputSystemInfo {
+		bindPrefix: Global.system.serviceUid + "/Ac/In/0"
+		isActiveInput: source === _activeInputSource.sourceAsInt
+	}
+	property AcInputSystemInfo input2Info: AcInputSystemInfo {
+		bindPrefix: Global.system.serviceUid + "/Ac/In/1"
+		isActiveInput: source === _activeInputSource.sourceAsInt
+	}
+
 	// Set activeInput to a valid object when /Ac/ActiveIn/Source is set to a valid source.
 	readonly property VeQuickItem _activeInputSource: VeQuickItem {
 		readonly property int sourceAsInt: value === undefined ? VenusOS.AcInputs_InputSource_NotAvailable : parseInt(value)
@@ -33,7 +47,7 @@ QtObject {
 		active: root._activeInputSource.sourceAsInt !== VenusOS.AcInputs_InputSource_NotAvailable
 				&& root._activeInputSource.sourceAsInt !== VenusOS.AcInputs_InputSource_Inverting
 		sourceComponent: ActiveAcInput {
-			source: root._activeInputSource.sourceAsInt
+			inputInfo: root.activeInputInfo
 		}
 	}
 

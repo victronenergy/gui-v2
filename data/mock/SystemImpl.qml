@@ -42,7 +42,7 @@ QtObject {
 
 	//--- AC data ---
 
-	readonly property int _phaseCount: 1 + Math.floor(Math.random() * 3)
+	readonly property int _phaseCount: 3
 
 	property Timer randomizeAcValues: Timer {
 		running: Global.mockDataSimulator.timersActive

@@ -20,7 +20,7 @@ Loader {
 
 	// StatusCode is only valid for genset devices
 	readonly property VeQuickItem _gensetStatusCode: VeQuickItem {
-		uid: root.serviceType === "genset" ? root.serviceUid + "/StatusCode" : ""
+		uid: root.active && root.serviceUid && root.serviceType === "genset" ? root.serviceUid + "/StatusCode" : ""
 	}
 
 	sourceComponent: {
