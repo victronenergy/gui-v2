@@ -64,14 +64,15 @@ OverviewWidget {
 		}
 	}
 
-	Loader {
-		parent: root.extraContent
-		anchors.fill: parent
-		active: root.input && root.size >= VenusOS.OverviewWidget_Size_L
-		sourceComponent: root._generatorStopped
-			 ? generatorStatusComponent
-			 : root.phaseModel && root.phaseModel.count > 1 ? phaseDisplayComponent : null
-	}
+	extraContentChildren: [
+		Loader {
+			anchors.fill: parent
+			active: root.input && root.size >= VenusOS.OverviewWidget_Size_L
+			sourceComponent: root._generatorStopped
+				 ? generatorStatusComponent
+				 : root.phaseModel && root.phaseModel.count > 1 ? phaseDisplayComponent : null
+		}
+	]
 
 	Component {
 		id: phaseDisplayComponent
