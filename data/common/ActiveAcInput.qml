@@ -9,39 +9,19 @@ import Victron.VenusOS
 Device {
 	id: root
 
-	readonly property bool connected: !!_activeInputInfo && _activeInputInfo.connected
-	readonly property string serviceType: !!_activeInputInfo ? _activeInputInfo.serviceType : ""
-	readonly property string serviceName: !!_activeInputInfo ? _activeInputInfo.serviceName : ""
+	property AcInputSystemInfo inputInfo
 
-	property int source: VenusOS.AcInputs_InputSource_NotAvailable
+	readonly property bool connected: inputInfo && inputInfo.connected
+	readonly property string serviceType: !!inputInfo ? inputInfo.serviceType : ""
+	readonly property string serviceName: !!inputInfo ? inputInfo.serviceName : ""
+
+	readonly property int source: !!inputInfo ? inputInfo.source : VenusOS.AcInputs_InputSource_NotAvailable
 	readonly property alias gensetStatusCode: _acInputService.gensetStatusCode
 
 	readonly property real power: _acInputService.hasTotalPower ? _acInputService.totalPower : _phases.totalPower
 	readonly property real current: phases.count === 1 ? _phases.firstPhaseCurrent : NaN // multi-phase systems don't have a total current
 	readonly property alias currentLimit: _acInputService.currentLimit
 	readonly property alias phases: _phases
-
-	property AcInputSystemInfo _activeInputInfo
-
-	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>
-	property Instantiator _inputInfoObjects: Instantiator {
-		model: VeQItemTableModel {
-			uids: [Global.system.serviceUid + "/Ac/In"]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-		}
-		delegate: AcInputSystemInfo {
-			id: infoObject
-
-			bindPrefix: model.uid
-			onConnectedChanged: {
-				if (connected) {
-					root._activeInputInfo = infoObject
-				} else if (root._activeInputInfo === infoObject) {
-					root._activeInputInfo = null
-				}
-			}
-		}
-	}
 
 	// Phase measurements from com.victronenergy.system/Ac/ActiveIn/L<1|2|3>
 	readonly property AcInputPhaseModel _phases: AcInputPhaseModel {
@@ -73,14 +53,15 @@ Device {
 	readonly property AcInputServiceLoader _acInputService: AcInputServiceLoader {
 		id: _acInputService
 
+		active: !!root.inputInfo
 		serviceUid: root.serviceUid
 		serviceType: root.serviceType
 	}
 
 	serviceUid: BackendConnection.type === BackendConnection.MqttSource
 			  // this looks like: 'mqtt/vebus/289/'
-			? _activeInputInfo && serviceType.length && _activeInputInfo.deviceInstance >= 0
-					? "mqtt/" + serviceType + "/" + _activeInputInfo.deviceInstance
+			? inputInfo && serviceType.length && inputInfo.deviceInstance >= 0
+					? "mqtt/" + serviceType + "/" + inputInfo.deviceInstance
 					: ""
 			  // this looks like: "dbus/com.victronenergy.vebus.ttyO1"
 			: serviceName.length ? BackendConnection.uidPrefix() + "/" + serviceName : ""
