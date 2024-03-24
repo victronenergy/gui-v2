@@ -98,7 +98,6 @@ QtObject {
 		},
 		{
 			name: "Boat with DC generator",
-
 			acInputs: [ { source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", phaseCount: 3, connected: 1 }, emptyAcInput ],
 			dcInputs: {  types: [ { serviceType: "dcsource", monitorMode: -1 }, { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			solar: { chargers: [ { power: 456 } ] },
@@ -148,6 +147,33 @@ QtObject {
 				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3 },
 				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 1 },
 			],
+		},
+		{
+			name: "Shore + Generator + Solar, Shore active",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3 },
+			],
+			solar: { chargers: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
+		},
+		{
+			name: "Shore + Generator + Solar, Generator active",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3 },
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 1 },
+			],
+			solar: { chargers: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
+		},
+		{
+			name: "Shore + Generator with 3-phase, with 5 left-hand widgets in total",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3 },
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 1 },
+			],
+			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
+			solar: { chargers: [ { power: 456 } ] },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: {}, dc: {} },
+			battery: { stateOfCharge: 43, current: 1 },
 		},
 	]
 

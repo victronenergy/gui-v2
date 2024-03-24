@@ -222,6 +222,7 @@
 
     "geometry_overviewPage_widget_radius": 8,
     "geometry_overviewPage_widget_border_width": 2,
+    "geometry_overviewPage_widget_content_small_verticalMargin": 8,
     "geometry_overviewPage_widget_content_expanded_verticalMargin": 16,
     "geometry_overviewPage_widget_content_verticalMargin": 14,
     "geometry_overviewPage_widget_content_horizontalMargin": 14,
@@ -239,12 +240,12 @@
 
     "geometry_overviewPage_widget_compact_xl_height": 472,
     "geometry_overviewPage_widget_compact_l_height": 192,
-    "geometry_overviewPage_widget_compact_m_height": 119,
+    "geometry_overviewPage_widget_compact_m_height": 130,
     "geometry_overviewPage_widget_compact_s_height": 106,
     "geometry_overviewPage_widget_compact_xs_height": 83,
     "geometry_overviewPage_widget_expanded_xl_height": 520,
     "geometry_overviewPage_widget_expanded_l_height": 221,
-    "geometry_overviewPage_widget_expanded_m_height": 131,
+    "geometry_overviewPage_widget_expanded_m_height": 138,
     "geometry_overviewPage_widget_expanded_s_height": 118,
     "geometry_overviewPage_widget_expanded_xs_height": 88,
 
@@ -263,6 +264,8 @@
     "geometry_overviewPage_widget_solar_graph_bar_width": 8,
     "geometry_overviewPage_widget_solar_graph_bar_radius": 8,
     "geometry_overviewPage_widget_solar_graph_margins": 8,
+
+    "geometry_three_phase_column_spacing": 0,
 
     "geometry_levelsPage_groupedSubgauges_delegate_width": 100,
     "geometry_levelsPage_gaugesView_compact_topMargin": 16,

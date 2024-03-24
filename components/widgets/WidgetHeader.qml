@@ -7,14 +7,15 @@ import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 
-Item {
+Row {
 	id: root
 
 	property alias title: titleLabel.text
+	property alias secondaryText: secondaryLabel.text
 	property alias icon: icon
 
-	implicitWidth: titleLabel.x + titleLabel.implicitWidth
-	implicitHeight: icon.height
+	width: parent ? parent.width : 0
+	spacing: Theme.geometry_widgetHeader_spacing
 
 	CP.ColorImage {
 		id: icon
@@ -28,13 +29,13 @@ Item {
 
 	Label {
 		id: titleLabel
-
-		anchors {
-			left: icon.right
-			leftMargin: Theme.geometry_widgetHeader_spacing
-			right: parent.right
-		}
+		width: parent.width - icon.width - secondaryLabel.implicitWidth - (2 * Theme.geometry_widgetHeader_spacing)
 		elide: Text.ElideRight
+	}
+
+	Label {
+		id: secondaryLabel
+		color: Theme.color_font_secondary
 	}
 }
 
