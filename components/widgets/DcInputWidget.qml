@@ -31,6 +31,7 @@ OverviewWidget {
 		property real current: NaN
 	}
 	icon.source: "qrc:/images/icon_dc_24.svg"
+	preferLargeSize: false  // there is no extra content, so no need for size L widget.
 	enabled: true
 
 	onClicked: {

@@ -14,6 +14,7 @@ Item {
 	property alias font: unitLabel.font
 	property color valueColor: Theme.color_font_primary
 	property alias unitColor: unitLabel.color
+	property alias unitVisible: unitLabel.visible
 	property int alignment: Qt.AlignHCenter
 	property alias precision: quantityInfo.precision
 	property alias formatHints: quantityInfo.formatHints
@@ -66,9 +67,12 @@ Item {
 		Label {
 			id: unitLabel
 
+			// At smaller font sizes, allow the unit to be vertically aligned at a sub-pixel value,
+			// else it is noticeably misaligned by less than 1 pixel.
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.alignWhenCentered: font.pixelSize >= Theme.font_size_body1
 			text: quantityInfo.unit
 			color: Theme.color_font_secondary
-			verticalAlignment: Qt.AlignVCenter
 		}
 	}
 }

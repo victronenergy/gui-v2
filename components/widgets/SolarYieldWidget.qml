@@ -28,12 +28,15 @@ OverviewWidget {
 	type: VenusOS.OverviewWidget_Type_Solar
 	enabled: true
 	quantityLabel.dataObject: Global.system.solar
+	preferLargeSize: extraContentLoader.status !== Loader.Null
 
 	// Solar yield history is only available for PV chargers, and phase data is only available for
 	// PV inverters. So, if there are only solar chargers, show the solar history; otherwise if
 	// there is a single PV inverter, show its phase data.
 	extraContentChildren: [
 		Loader {
+			id: extraContentLoader
+
 			readonly property int margin: sourceComponent === historyComponent
 				  ? Theme.geometry_overviewPage_widget_solar_graph_margins
 				  : root.verticalMargin
@@ -53,6 +56,10 @@ OverviewWidget {
 				} else if (Global.pvInverters.model.count === 0) {
 					return historyComponent
 				}
+				// If there are both chargers and inverters, do not show the history (as inverters
+				// do not have history) and also do not show phase data (as we cannot combine the
+				// phase data from inverters and chargers together).
+				return null
 			}
 		}
 	]
@@ -63,6 +70,7 @@ OverviewWidget {
 		ThreePhaseDisplay {
 			model: Global.pvInverters.model.deviceAt(0).phases
 			visible: model.count > 1
+			widgetSize: root.size
 		}
 	}
 

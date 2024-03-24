@@ -28,7 +28,9 @@ SwipeViewPage {
 	// Use a delayed binding to avoid repopulating the model unnecessarily.
 	readonly property int _shouldResetWidgets: Global.dcInputs.model.count
 			+ Global.acInputs.input1Info.source
+			+ Global.acInputs.input1Info.connected
 			+ Global.acInputs.input2Info.source
+			+ Global.acInputs.input2Info.connected
 			+ (Global.dcLoads.model.count === 0 || isNaN(Global.system.loads.dcPower) ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
 			+ (Global.evChargers.model.count === 0 ? 0 : 1)
@@ -57,11 +59,14 @@ SwipeViewPage {
 
 		let i = 0
 		let firstLargeWidget = null
+		let preferLargeWidgetCount = 0
 		let widget = null
 		for (i = 0; i < _leftWidgets.length; ++i) {
-			if (_leftWidgets[i].extraContentChildren.length > 0) {
-				firstLargeWidget = _leftWidgets[i]
-				break
+			if (_leftWidgets[i].preferLargeSize) {
+				if (!firstLargeWidget) {
+					firstLargeWidget = _leftWidgets[i]
+				}
+				preferLargeWidgetCount++
 			}
 		}
 
@@ -76,6 +81,25 @@ SwipeViewPage {
 				widget.size = VenusOS.OverviewWidget_Size_L
 				break
 			case 3:
+				if (preferLargeWidgetCount === 3) {
+					// If all three prefer L size, then use M for all three.
+					widget.size = VenusOS.OverviewWidget_Size_M
+				} else if (preferLargeWidgetCount >= 2) {
+					// If only two prefer L size, then use L for the first one, M for the other,
+					// and S for the last.
+					if (widget.preferLargeSize) {
+						widget.size = widget.preferLargeSize ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_M
+					} else {
+						widget.size = VenusOS.OverviewWidget_Size_S
+					}
+				} else if (preferLargeWidgetCount === 1) {
+					// Use size L for that one, and S for the others.
+					widget.size = widget === firstLargeWidget ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_S
+				} else {
+					// Reserve size L for the bottom widget, and use S for the others.
+					widget.size = i === _leftWidgets.length - 1 ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_S
+				}
+				break
 			case 4:
 				// Only one of the widgets can have L size, and the other ones use a reduced size.
 				if (widget === firstLargeWidget) {
