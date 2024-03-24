@@ -46,15 +46,13 @@ OverviewWidget {
 				bottom: parent.bottom
 				bottomMargin: margin
 			}
+			active: root.size >= VenusOS.OverviewWidget_Size_L
 			sourceComponent: {
-				if (root.size >= VenusOS.OverviewWidget_Size_L) {
-					if (Global.pvInverters.model.count === 1 && Global.solarChargers.model.count === 0) {
-						return phaseComponent
-					} else if (Global.pvInverters.model.count === 0) {
-						return historyComponent
-					}
+				if (Global.pvInverters.model.count === 1 && Global.solarChargers.model.count === 0) {
+					return phaseComponent
+				} else if (Global.pvInverters.model.count === 0) {
+					return historyComponent
 				}
-				return null
 			}
 		}
 	]
