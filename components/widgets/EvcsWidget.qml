@@ -36,6 +36,7 @@ OverviewWidget {
 				bottom: parent.bottom
 				bottomMargin: root.verticalMargin
 			}
+			active: root.size >= VenusOS.OverviewWidget_Size_M
 			sourceComponent: Global.evChargers.model.count > 1 ? multiEvChargerComponent
 					: Global.evChargers.model.count > 0 ? singleEvChargerComponent
 					: null
