@@ -225,8 +225,9 @@ SwipeViewPage {
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignRight | Qt.AlignBottom
 			animationEnabled: root.animationEnabled
-			value: visible ? dcLoadsRange.valueAsRatio * 100 : 0           
+			value: visible ? dcLoadsRange.valueAsRatio * 100 : 0
 			x: -root._gaugeArcMargin
+			opacity: root._gaugeArcOpacity
 
 			ArcGaugeQuantityRow {
 				alignment: parent.alignment
