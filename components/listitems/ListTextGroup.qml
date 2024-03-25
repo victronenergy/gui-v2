@@ -13,20 +13,30 @@ ListItem {
 	property alias textModel: repeater.model
 	property int itemWidth
 	property string invalidText: "--"
+	property bool alignGroupColumns
 
 	content.children: [
-		Repeater {
+		ListGroupRepeater {
 			id: repeater
 
+			allowed: root.alignGroupColumns && root.allowed
 			delegate: Row {
+				property real columnWidth
+				property alias columnImplicitWidth: label.implicitWidth
+
 				anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
 				spacing: root.content.spacing
+
 				Label {
-					width: root.itemWidth || implicitWidth
+					id: label
+
+					width: root.itemWidth > 0 || Math.max(implicitWidth, columnWidth)
+					onImplicitWidthChanged: repeater.update()
+
 					font.pixelSize: Theme.font_size_body2
 					color: Theme.color_listItem_secondaryText
 					text: modelData === undefined ? root.invalidText : modelData
-					horizontalAlignment: Text.AlignHCenter
+					horizontalAlignment: Text.AlignRight
 					elide: Text.ElideRight
 				}
 

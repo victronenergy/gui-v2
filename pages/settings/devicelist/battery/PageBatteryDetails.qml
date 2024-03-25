@@ -86,6 +86,7 @@ Page {
 					{ value: details.installedCapacity.value, unit: VenusOS.Units_AmpHour },
 					{ value: details.capacity.value, unit: VenusOS.Units_AmpHour }
 				]
+				alignGroupColumns: false
 			}
 		}
 	}

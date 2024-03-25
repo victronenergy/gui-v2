@@ -69,6 +69,7 @@ Page {
 				readonly property quantityInfo soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.value)
 
 				text: CommonWords.dc
+				alignGroupColumns: true
 				textModel: root.isInverterCharger
 					? [ voltage.number + voltage.unit, current.number + current.unit, CommonWords.soc_with_prefix.arg(soc.number) ]
 					: [ voltage.number + voltage.unit, current.number + current.unit ]

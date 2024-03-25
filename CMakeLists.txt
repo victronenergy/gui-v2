@@ -247,6 +247,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/Page.qml
     components/PageStack.qml
     components/ProgressArc.qml
+    components/ListGroupMetrics.qml
+    components/ListGroupRepeater.qml
     components/QuantityTableMetrics.qml
     components/QuantityGroupListHeader.qml
     components/QuantityLabel.qml
