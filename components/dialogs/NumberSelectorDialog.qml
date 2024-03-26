@@ -26,7 +26,7 @@ ModalDialog {
 	}
 
 	onAboutToShow: {
-		spinBox.value = value * _multiplier()
+		spinBox.value = Math.round(value * _multiplier())
 
 		if (presets.length) {
 			let presetsIndex = -1
