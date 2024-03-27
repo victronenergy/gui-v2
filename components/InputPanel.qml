@@ -28,9 +28,11 @@ QtVirtualKeyboard.InputPanel {
 		return false
 	}
 
+	visible: Qt.inputMethod.visible || yAnimator.running
 	y: Qt.inputMethod.visible ? Theme.geometry_screen_height - root.height : Theme.geometry_screen_height
 	Behavior on y {
 		YAnimator {
+			id: yAnimator
 			duration: Theme.animation_inputPanel_slide_duration
 			easing.type: Easing.InOutQuad
 		}
