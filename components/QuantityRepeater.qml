@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Repeater {
+ListGroupRepeater {
 	id: root
 
 	property int minimumDelegateWidth
@@ -14,11 +14,16 @@ Repeater {
 	delegate: Row {
 		// Visibility is determined by optional 'visible' property.
 		readonly property bool showValue: modelData.visible !== false
+		readonly property bool showTextLabel: typeof(modelData.value) === 'string'
+
+		readonly property real columnImplicitWidth: showTextLabel ? textLabel.implicitWidth : quantityLabel.implicitWidth
+		property real columnWidth
+		visible: showValue
 
 		Item {
 			width: Theme.geometry_listItem_separator_width + (Theme.geometry_listItem_content_spacing * 2)
 			height: parent.implicitHeight
-			visible: showValue && model.index !== 0
+			visible: model.index !== 0
 
 			Rectangle {
 				anchors.horizontalCenter: parent.horizontalCenter
@@ -31,9 +36,11 @@ Repeater {
 		QuantityLabel {
 			id: quantityLabel
 			anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
-			visible: showValue && !textLabel.visible
-			width: Math.max(implicitWidth, minimumDelegateWidth)
-			alignment: Qt.AlignHCenter
+			visible: !showTextLabel
+			width: Math.max(implicitWidth, columnWidth, minimumDelegateWidth)
+
+			onImplicitWidthChanged: if (showValue) root.update()
+			alignment: Qt.AlignRight
 			font.pixelSize: Theme.font_size_body2
 			value: isNaN(modelData.value) ? NaN : modelData.value
 			unit: modelData.unit === undefined ? VenusOS.Units_None : modelData.unit
@@ -47,10 +54,10 @@ Repeater {
 		Label {
 			id: textLabel
 			anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
-			visible: showValue && typeof(modelData.value) === 'string'
-			text: visible ? modelData.value : ""
-			width: Math.max(implicitWidth, minimumDelegateWidth)
-			horizontalAlignment: Qt.AlignHCenter
+			visible: showTextLabel
+			text: showTextLabel ? modelData.value : ""
+			width: Math.max(implicitWidth, columnWidth, minimumDelegateWidth)
+			horizontalAlignment: Qt.AlignRight
 			font.pixelSize: Theme.font_size_body2
 			color: Theme.color_quantityTable_quantityValue
 		}

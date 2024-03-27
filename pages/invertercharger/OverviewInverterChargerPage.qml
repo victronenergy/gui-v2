@@ -133,6 +133,7 @@ Page {
 				readonly property quantityInfo soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.value)
 
 				text: CommonWords.dc
+				alignGroupColumns: true
 				textModel: [
 					power.number + power.unit,
 					voltage.number + voltage.unit,
