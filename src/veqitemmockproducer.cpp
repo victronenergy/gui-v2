@@ -42,7 +42,7 @@ void VeQItemMockProducer::initialize()
 
 	setValue(guiSettingUid.arg("ColorScheme"), Theme::Light);
 	setValue(guiSettingUid.arg("ElectricalPowerIndicator"), 0); // 0 = watts, 1 = amps
-	setValue(guiSettingUid.arg("BriefView/ShowPercentages"), 1);
+	setValue(guiSettingUid.arg("BriefView/Unit"), Enums::BriefView_Unit_Percentage);
 
 	static const QMap<int, QVariant> defaultLevels = {
 		{ 0, Enums::Tank_Type_Battery },

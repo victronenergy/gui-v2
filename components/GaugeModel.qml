@@ -37,8 +37,11 @@ ListModel {
 				return
 			}
 		}
+
+		const value = Global.systemSettings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage || gauge.isBattery ? gauge.tankLevel : gauge.tankRemaining
+
 		insert(_insertionIndex(gauge.tankType, sortedGaugeTypes),
-			   Object.assign({}, Gauges.tankProperties(gauge.tankType), { tankType: gauge.tankType, value: gauge.tankLevel }))
+			   Object.assign({}, Gauges.tankProperties(gauge.tankType), { tankType: gauge.tankType, value: value }))
 	}
 
 	function findGauge(gauge) {
@@ -53,7 +56,8 @@ ListModel {
 	function updateGauge(gauge) {
 		const gaugeIndex = findGauge(gauge)
 		if (gaugeIndex >= 0) {
-			set(gaugeIndex, { name: gauge.tankName, icon: gauge.tankIcon, value: gauge.tankLevel })
+			const value = Global.systemSettings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage || gauge.isBattery ? gauge.tankLevel : gauge.tankRemaining
+			set(gaugeIndex, { name: gauge.tankName, icon: gauge.tankIcon, value: value })
 		}
 	}
 
@@ -88,6 +92,8 @@ ListModel {
 					: !isNaN(tankModel.averageLevel) ? tankModel.averageLevel
 					: (tankModel.count === 0 || tankModel.totalCapacity === 0) ? 0
 					: ((Math.min(tankModel.totalRemaining / tankModel.totalCapacity, 1.0) * 100))
+			readonly property real tankRemaining: isBattery ? null
+															: Units.convert(tankModel.totalRemaining, VenusOS.Units_Volume_CubicMeter, Global.systemSettings.volumeUnit);
 
 			readonly property var _tankProperties: Gauges.tankProperties(tankType)
 
