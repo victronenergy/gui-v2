@@ -23,6 +23,7 @@
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QCommandLineParser>
+#include <QStyleHints>
 
 #include <QtDebug>
 
@@ -231,6 +232,8 @@ int main(int argc, char *argv[])
 	QGuiApplication app(argc, argv);
 	QGuiApplication::setApplicationName("Venus");
 	QGuiApplication::setApplicationVersion("2.0");
+
+	QGuiApplication::styleHints()->setWheelScrollLines(5);
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	QObject::connect(&app, &QGuiApplication::aboutToQuit,
