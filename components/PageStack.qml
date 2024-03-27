@@ -13,6 +13,7 @@ C.StackView {
 	property Page _poppedPage
 
 	readonly property bool _busy: busy || fakePushAnimation.running || fakePopAnimation.running
+	property bool swipeViewVisible: true
 
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {
@@ -109,6 +110,8 @@ C.StackView {
 	NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
 		id: fakePushAnimation
 
+		onStopped: swipeViewVisible = false
+
 		target: root
 		property: "x"
 		from: root.width
@@ -117,27 +120,25 @@ C.StackView {
 		easing.type: Easing.InOutQuad
 	}
 
-	SequentialAnimation {
+	NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
 		id: fakePopAnimation
 
-		NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
-			target: root
-			property: "x"
-			from: 0
-			to: root.width
-			duration: Theme.animation_page_slide_duration
-			easing.type: Easing.InOutQuad
-		}
-		ScriptAction {
-			script: {
-				const obj = root.currentItem
-				root.clear()
+		onStarted: swipeViewVisible = true
+		onStopped: {
+			const obj = root.currentItem
+			root.clear()
 
-				// Clean up the page object that was created on push.
-				if (!Theme.objectHasQObjectParent(obj)) {
-					obj.destroy()
-				}
+			// Clean up the page object that was created on push.
+			if (!Theme.objectHasQObjectParent(obj)) {
+				obj.destroy()
 			}
 		}
+
+		target: root
+		property: "x"
+		from: 0
+		to: root.width
+		duration: Theme.animation_page_slide_duration
+		easing.type: Easing.InOutQuad
 	}
 }
