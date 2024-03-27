@@ -159,8 +159,8 @@ QtObject {
 			}
 		}
 
-		property VeQuickItem showPercentages: VeQuickItem {
-			 uid: root.serviceUid + "/Settings/Gui/BriefView/ShowPercentages"
+		property VeQuickItem unit: VeQuickItem {
+			 uid: root.serviceUid + "/Settings/Gui/BriefView/Unit"
 		}
 	}
 

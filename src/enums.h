@@ -324,6 +324,13 @@ public:
 	};
 	Q_ENUM(System_State)
 
+	enum BriefView_Unit {
+		BriefView_Unit_None,
+		BriefView_Unit_Absolute,
+		BriefView_Unit_Percentage
+	};
+	Q_ENUM(BriefView_Unit)
+
 	enum Tank_Type {
 		// These values align with tank types from dbus
 		// see: https://github.com/victronenergy/venus/wiki/dbus#tank-levels

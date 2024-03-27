@@ -102,14 +102,36 @@ Item {
 					color: Theme.color_font_primary
 					text: model.name
 				}
+
 				Label {
+					id: valueLabel
 					anchors.verticalCenter: parent.verticalCenter
 					horizontalAlignment: Text.AlignRight
 					font.pixelSize: Theme.font_size_body2
 					color: Theme.color_font_primary
-					visible: Global.systemSettings.briefView.showPercentages.value === 1
-					//% "%1%"
-					text: qsTrId("%1%").arg(isNaN(model.value) ? 0 : Math.round(model.value))
+					visible: false
+					property int unit
+					property quantityInfo quantity
+
+					states: State {
+						when: Global.systemSettings.briefView.unit.value !== VenusOS.BriefView_Unit_None
+						PropertyChanges {
+							target: valueLabel
+
+							visible: !isNaN(model.value)
+							text: quantity.number + quantity.unit
+							quantity: Units.getDisplayText(unit, value)
+							unit: {
+								if (Global.systemSettings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage) {
+									return VenusOS.Units_Percentage
+								} else if (model.tankType === VenusOS.Tank_Type_Battery) {
+									return VenusOS.Units_Percentage
+								} else {
+									return Global.systemSettings.volumeUnit
+								}
+							}
+						}
+					}
 				}
 				CP.ColorImage {
 					id: iconImage
