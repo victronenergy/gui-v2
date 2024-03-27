@@ -63,6 +63,8 @@ Item {
 		active: false
 		asynchronous: true
 		sourceComponent: swipeViewComponent
+
+		visible: pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
 		onStatusChanged: if (status == Loader.Ready) Global.allPagesLoaded = true
 	}
 
@@ -100,6 +102,7 @@ Item {
 		}
 
 		SequentialAnimation {
+			id: controlsInAnimation
 			running: root.controlsActive
 
 			ParallelAnimation {
