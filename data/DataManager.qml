@@ -54,21 +54,39 @@ Item {
 		switch (BackendConnection.type) {
 		case BackendConnection.DBusSource:
 			console.warn("Loading D-Bus data backend...")
-			dataManagerLoader.source = "qrc:/qt/qml/Victron/Dbus/data/dbus/DBusDataManager.qml"
+			dataManagerLoader.sourceComponent = dbus
 			break
 		case BackendConnection.MqttSource:
 			console.warn("Loading MQTT data backend...")
-			dataManagerLoader.source = "qrc:/qt/qml/Victron/Mqtt/data/mqtt/MqttDataManager.qml"
+			dataManagerLoader.sourceComponent = mqtt
 			break
 		case BackendConnection.MockSource:
 			console.warn("Loading mock data backend...")
-			dataManagerLoader.source = "qrc:/qt/qml/Victron/Mock/data/mock/MockDataManager.qml"
+			dataManagerLoader.sourceComponent = mock
 			break
 		default:
 			console.warn("Unsupported data backend!", BackendConnection.type)
 			return
 		}
 		dataManagerLoader.active = true
+	}
+
+	Component {
+		id: dbus
+
+		DBusDataManager {}
+	}
+
+	Component {
+		id: mqtt
+
+		MqttDataManager {}
+	}
+
+	Component {
+		id: mock
+
+		MockDataManager {}
 	}
 
 	on_ShouldInitializeChanged: _setBackendSource()
