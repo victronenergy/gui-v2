@@ -88,7 +88,9 @@ Item {
 
 		z: 1
 		opacity: 0.0
-		source: Global.appUrl("/pages/ControlCardsPage.qml")
+		sourceComponent: Component {
+			ControlCardsPage {}
+		}
 		active: root.controlsActive
 		enabled: root.controlsActive || controlsOutAnimation.running
 
