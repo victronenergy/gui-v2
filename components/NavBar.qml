@@ -108,7 +108,7 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 					height: width
 					radius: Theme.geometry_notificationsPage_delegate_marker_radius
 					color: Theme.color_critical
-					visible: model.url === Global.appUrl("/pages/NotificationsPage.qml")
+					visible: model.url.endsWith("NotificationsPage.qml")
 							 && !!Global.notifications
 							 && Global.notifications.alert
 				}

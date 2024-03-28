@@ -853,7 +853,7 @@ if (${LOAD_QML_FROM_FILESYSTEM})
     set(thisModule VictronMock)
     qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
     install(FILES ${module_qmldir} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Mock)
-    install(DIRECTORY data         DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Mock)
+    install(DIRECTORY data/mock         DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Mock/data)
     add_custom_command(
         TARGET ${thisModule}
         COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
@@ -879,8 +879,8 @@ qt_add_qml_module(VictronGauges
 if (${LOAD_QML_FROM_FILESYSTEM})
     set(thisModule VictronGauges)
     qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(FILES ${module_qmldir}    DESTINATION ${CMAKE_INSTALL_BINDIR}/Gauges)
-    install(FILES ${module_qml_files} DESTINATION ${CMAKE_INSTALL_BINDIR}/Gauges/components)
+    install(FILES ${module_qmldir}    DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Gauges)
+    install(FILES ${module_qml_files} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Gauges/components)
     add_custom_command(
         TARGET ${thisModule}
         COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
