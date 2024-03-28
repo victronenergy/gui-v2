@@ -47,11 +47,22 @@ Page {
 			}
 		}
 
-		footer: ListSwitch {
+		footer: ListRadioButtonGroup {
 			//: Show percentage values in Brief view
-			//% "Show %"
-			text: qsTrId("settings_briefview_show_percentage")
-			checked: Global.systemSettings.briefView.showPercentages.value === 1
+			//% "Unit to show on Brief view"
+			text: qsTrId("settings_briefview_unit")
+			optionModel: [
+				//% "Show no values and units on the Brief view"
+				{ display: qsTrId("settings_briefview_units_none"), value: 0 },
+				//% "Show values in absolute units"
+				{ display: qsTrId("settings_briefview_units_absolute"), value: 1 },
+				//% "Show percentages"
+				{ display: qsTrId("settings_briefview_units_percentages"), value: 2 },
+			]
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit"
+		}
+		ListSwitch {
+			checked: Global.systemSettings.briefView.unit.value === 1
 			onClicked: Global.systemSettings.briefView.showPercentages.setValue(checked ? 1 : 0)
 		}
 	}

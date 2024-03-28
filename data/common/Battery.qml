@@ -13,10 +13,13 @@ Device {
 	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
 	readonly property real power: _power.value === undefined ? NaN : _power.value
 	readonly property real current: _current.value === undefined ? NaN : _current.value
+	readonly property real capacity: _capacity.value === undefined ? NaN : _capacity.value
 	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
 	readonly property real timeToGo: _timeToGo.value === undefined ? NaN : _timeToGo.value  // in seconds
 	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(battery) : ""
 	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
+
+	readonly property real remainingAmphours: capacity === NaN || stateOfCharge === NaN ? NaN : stateOfCharge * capacity / 100
 
 	readonly property VeQuickItem _stateOfCharge: VeQuickItem {
 		uid: battery.serviceUid + "/Soc"
@@ -40,6 +43,10 @@ Device {
 
 	readonly property VeQuickItem _timeToGo: VeQuickItem {
 		uid: battery.serviceUid + "/TimeToGo"
+	}
+
+	readonly property VeQuickItem _capacity: VeQuickItem {
+		uid: battery.serviceUid + "/Capacity"
 	}
 
 	onValidChanged: {
