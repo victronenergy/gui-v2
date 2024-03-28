@@ -70,7 +70,7 @@ C.StackView {
 				return
 			}
 
-			let objectOrUrl = typeof(obj) === "string" ? Global.appUrl(obj) : obj
+			let objectOrUrl = typeof(obj) === "string" ? ".." + obj : obj
 			if (typeof(obj) === "string") {
 				// pre-construct the object to make sure there are no errors
 				// to avoid messing up the page stack state.

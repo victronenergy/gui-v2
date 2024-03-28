@@ -88,18 +88,15 @@ Item {
 	// Qt for WebAssembly due to QTBUG-104109).
 	// Note the VKB layer is the top-most layer, to allow the idleModeMouseArea beneath to call
 	// testCloseOnClick() when clicking outside of the focused text field, to auto-close the VKB.
-	Component.onCompleted: {
-		if (Qt.platform.os !== "wasm") {
-			_inputComponent = Qt.createComponent(Global.appUrl("/components/InputPanel.qml"), Component.Asynchronous)
-			_inputComponent.statusChanged.connect(function() {
-				if (_inputComponent.status === Component.Ready) {
-					Global.inputPanel = _inputComponent.createObject(root, { mainViewItem: mainView })
-				} else if (_inputComponent.status === Component.Error) {
-					console.warn("Cannot load InputPanel:", _inputComponent.errorString())
-				}
-			})
-		} else {
-			console.log("Not creating InputPanel, this is a wasm build")
+
+	Loader {
+		id: loader
+
+		asynchronous: true
+		active: Qt.platform.os !== "wasm"
+		sourceComponent: InputPanel {
+			mainViewItem: mainView
 		}
+		onLoaded: Global.inputPanel = item
 	}
 }

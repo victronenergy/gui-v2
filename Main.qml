@@ -6,6 +6,8 @@
 import QtQuick
 import QtQuick.Window
 
+// *** This file cannot be edited directly on the cerbo filesystem. It is loaded from the binary ***
+
 Window {
 	id: root
 
