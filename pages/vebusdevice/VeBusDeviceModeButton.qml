@@ -52,7 +52,7 @@ Loader {
 				return
 			}
 
-			Global.dialogLayer.open(modeDialogComponent, {mode: root.veBusDevice.mode})
+			Global.dialogLayer.open(modeDialogComponent, {mode: root.veBusDevice.mode, hasPassthroughSupport: root.veBusDevice.hasPassthroughSupport})
 		}
 	}
 

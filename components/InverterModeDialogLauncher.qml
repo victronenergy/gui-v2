@@ -36,7 +36,7 @@ QtObject {
 	}
 
 	function openDialog() {
-		if (!_modeDialog) {
+		if (!_modeDialog) { // TODO: "_modeDialog is not defined" if you click the mode button on an inverter card
 			if (_isInverterChargerItem.value === 1) {
 				Global.dialogLayer.open(_inverterChargerModeDialogComponent)
 			} else {

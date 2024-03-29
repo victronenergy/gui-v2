@@ -149,19 +149,6 @@ Page {
 	}
 
 	Component {
-		id: modeDialogComponent
-
-		InverterChargerModeDialog {
-			isMulti: root.inverterCharger.isMulti
-			onAccepted: {
-				if (root.inverterCharger.mode !== mode) {
-					root.inverterCharger.setMode(mode)
-				}
-			}
-		}
-	}
-
-	Component {
 		id: singlePhaseAcInOut
 
 		Column {
