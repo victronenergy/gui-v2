@@ -261,7 +261,8 @@ public:
 		InverterCharger_Mode_ChargerOnly = 1,
 		InverterCharger_Mode_InverterOnly,
 		InverterCharger_Mode_On,
-		InverterCharger_Mode_Off
+		InverterCharger_Mode_Off,
+		InverterCharger_Mode_Passthrough = 251,
 	};
 	Q_ENUM(InverterCharger_Mode)
 

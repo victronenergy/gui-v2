@@ -77,6 +77,9 @@ QtObject {
 			return qsTrId("inverterCharger_mode_inverter_only")
 		case VenusOS.InverterCharger_Mode_Off:
 			return CommonWords.onOrOff(0)
+		case VenusOS.InverterCharger_Mode_Passthrough:
+			//% "Passthrough"
+			return qsTrId("inverterCharger_mode_passthrough")
 		default:
 			return ""
 		}

@@ -70,6 +70,7 @@ QtObject {
 			property int state
 			property int mode: -1
 			property int numberOfPhases: 3
+			property bool hasPassthroughSupport: true
 
 			property ListModel inputSettings: ListModel {}
 
@@ -116,10 +117,6 @@ QtObject {
 
 			function setCurrentLimit(inputIndex, currentLimit) {
 				inputSettings.get(inputIndex).inputSettings.setCurrentLimit(currentLimit)
-			}
-
-			function setMockVeBusDeviceValue(settingId, value) {
-				Global.mockDataSimulator.mockDataValues["com.victronenergy.vebus.ttyUSB" + deviceInstance + settingId] = value
 			}
 
 			readonly property VeQuickItem _chargeState: VeQuickItem {

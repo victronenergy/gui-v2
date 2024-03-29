@@ -15,6 +15,7 @@ Device {
 	readonly property real nominalInverterPower: _nominalInverterPower.value === undefined ? NaN : _nominalInverterPower.value
 
 	readonly property int numberOfAcInputs: _numberOfAcInputs.value === undefined ? NaN : _numberOfAcInputs.value
+	readonly property bool hasPassthroughSupport: _hasPassthroughSupport.value === 1
 	readonly property bool isMulti: !isNaN(numberOfAcInputs) && numberOfAcInputs !== 0
 
 	property ListModel inputSettings: ListModel {}
@@ -58,6 +59,10 @@ Device {
 
 	readonly property VeQuickItem _numberOfAcInputs: VeQuickItem {
 		uid: inverterCharger.serviceUid + "/Ac/NumberOfAcInputs"
+	}
+
+	readonly property VeQuickItem _hasPassthroughSupport: VeQuickItem {
+		uid: inverterCharger.serviceUid + "/Capabilities/HasAcPassthroughSupport"
 	}
 
 	function setMode(newMode) {
