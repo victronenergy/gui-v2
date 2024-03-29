@@ -29,11 +29,11 @@ ModalDialog {
 			id: repeater
 			width: parent.width
 			model: [
-				{ value: VenusOS.InverterCharger_Mode_On,			enabled: true,			visible: true },
-				{ value: VenusOS.InverterCharger_Mode_ChargerOnly,	enabled: root.isMulti,	visible: true },
-				{ value: VenusOS.InverterCharger_Mode_InverterOnly, enabled: root.isMulti,	visible: true },
-				{ value: VenusOS.InverterCharger_Mode_Off,			enabled: true,			visible: true },
-				{ value: VenusOS.InverterCharger_Mode_Passthrough,	enabled: true,			visible: root.hasPassthroughSupport }
+				{ value: VenusOS.InverterCharger_Mode_On, enabled: true },
+				{ value: VenusOS.InverterCharger_Mode_ChargerOnly, enabled: root.isMulti },
+				{ value: VenusOS.InverterCharger_Mode_InverterOnly, enabled: root.isMulti },
+				{ value: VenusOS.InverterCharger_Mode_Off, enabled: true },
+				{ value: VenusOS.InverterCharger_Mode_Passthrough, enabled: true, visible: root.hasPassthroughSupport }
 			]
 			delegate: buttonStyling
 		}
