@@ -16,8 +16,8 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 	property int _currentIndex
 
 	function setCurrentPage(pageName) {
-		for (let i = 0; i < navBarModel.count; ++i) {
-			const url = navBarModel.get(i).url
+		for (let i = 0; i < model.count; ++i) {
+			const url = model.get(i).url
 			if (url.endsWith("/" + pageName)) {
 				_currentIndex = i
 				return
@@ -30,8 +30,8 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 		if (index === _currentIndex) {
 			return
 		}
-		if (index < 0 || index >= navBarModel.count) {
-			console.log("setCurrentIndex(): invalid index", index, "nav bar count is:", navBarModel.count)
+		if (index < 0 || index >= model.count) {
+			console.log("setCurrentIndex(): invalid index", index, "nav bar count is:", model.count)
 			return
 		}
 		_currentIndex = index
@@ -44,46 +44,12 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 		x: Theme.geometry_page_content_horizontalMargin
 		width: parent.width - 2*Theme.geometry_page_content_horizontalMargin
 		height: parent.height
-		spacing: Theme.geometry_navigationBar_spacing
+		spacing: (width - (buttonRepeater.count * Theme.geometry_navigationBar_button_width)) / Math.max(buttonRepeater.count - 1, 1)
 
 		Repeater {
 			id: buttonRepeater
 
-			model: ListModel {
-				id: navBarModel
-
-				ListElement {
-					//% "Brief"
-					text: qsTrId("nav_brief")
-					icon: "qrc:/images/brief.svg"
-					url: "qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml"
-				}
-				ListElement {
-					//% "Overview"
-					text: qsTrId("nav_overview")
-					icon: "qrc:/images/overview.svg"
-					url: "qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml"
-				}
-				ListElement {
-					//% "Levels"
-					text: qsTrId("nav_levels")
-					icon: "qrc:/images/levels.svg"
-					url: "qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml"
-				}
-				ListElement {
-					//% "Notifications"
-					text: qsTrId("nav_notifications")
-					icon: "qrc:/images/notifications.svg"
-					url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
-				}
-				ListElement {
-					//% "Settings"
-					text: qsTrId("nav_settings")
-					icon: "qrc:/images/settings.svg"
-					url: "qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml"
-				}
-			}
-
+			model: SwipePageModel { }
 			delegate: NavButton {
 				height: root.height
 				width: Theme.geometry_navigationBar_button_width

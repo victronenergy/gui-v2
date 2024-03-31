@@ -12,14 +12,26 @@ Item {
 	property int mockDeviceCount
 	property var _createdObjects: []
 
-	function populate() {
-		const inputCount = Math.ceil(Math.random() * 4)
-		for (let i = 0; i < inputCount; ++i) {
-			const properties = {
-				temperature: Math.random() * 100,
-				humidity: Math.random() * 100
+	Connections {
+		target: Global.mockDataSimulator
+		function onEnvironmentalInputsEnabledChanged() {
+			if (!Global.mockDataSimulator.environmentalInputsEnabled) {
+				_createdObjects = []
+				Global.environmentInputs.model.clear()
 			}
-			addInput(properties)
+		}
+	}
+
+	function populate() {
+		if (Global.mockDataSimulator.environmentalInputsEnabled) {
+			const inputCount = Math.ceil(Math.random() * 4)
+			for (let i = 0; i < inputCount; ++i) {
+				const properties = {
+					temperature: Math.random() * 100,
+					humidity: Math.random() * 100
+				}
+				addInput(properties)
+			}
 		}
 	}
 

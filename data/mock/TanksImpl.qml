@@ -14,6 +14,10 @@ QtObject {
 	property var _createdObjects: []
 
 	function populate() {
+		if (!Global.mockDataSimulator.tanksEnabled) {
+			return
+		}
+
 		// Occasionally simulate what it looks like with only the battery
 		const batteryOnly = Math.random() < 0.1
 		if (batteryOnly) {
@@ -122,6 +126,30 @@ QtObject {
 				_createdObjects[index]._deviceInstance.setValue(-1) // causes tank to remove itself from model
 				_createdObjects.splice(index, 1)
 			}
+		}
+	}
+
+	property bool tanksEnabled: Global.mockDataSimulator.tanksEnabled
+	onTanksEnabledChanged: {
+		if (tanksEnabled) {
+			let model
+			model = Global.tanks.tankModel(Math.floor(Math.random() * Global.tanks.tankTypes.length))
+			const randomLevel = Math.random()
+			const capacity = 1  // m3
+			const tankProperties = {
+				type: model.type,
+				temperature: Math.random() * 100,
+				level: randomLevel * 100,
+				capacity: capacity,
+				remaining: capacity * randomLevel,
+			}
+			root.addTank(tankProperties)
+		} else {
+			for (var i = 0; i < _createdObjects.length; ++i) {
+				_createdObjects[i]._deviceInstance.setValue(-1) // causes tank to remove itself from model
+			}
+
+			_createdObjects = []
 		}
 	}
 
