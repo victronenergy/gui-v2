@@ -81,7 +81,6 @@
 
     "geometry_navigationBar_initialize_margin": 12,
     "geometry_navigationBar_height": 72,
-    "geometry_navigationBar_spacing": 8,
     "geometry_navigationBar_button_width": 144,
     "geometry_navigationBar_button_icon_width": 32,
     "geometry_navigationBar_button_icon_height": 32,

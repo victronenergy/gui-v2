@@ -55,6 +55,7 @@ QtObject {
 	property bool dataManagerLoaded
 	property bool allPagesLoaded
 	property bool changingLanguage
+	property var pageModel
 
 	property string firmwareInstalledBuild // don't clear this on UI reload.  it needs to survive reconnection.
 	property bool firmwareInstalledBuildUpdated // as above.

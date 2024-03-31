@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.Templates as T
+import Victron.VenusOS
 
 T.SwipeView {
 	id: control
@@ -39,7 +40,7 @@ T.SwipeView {
 		snapMode: ListView.SnapOneItem
 		boundsBehavior: Flickable.StopAtBounds
 
-		highlightRangeMode: ListView.StrictlyEnforceRange
+		highlightRangeMode: Global.allPagesLoaded ? ListView.StrictlyEnforceRange : ListView.NoHighlightRange
 		preferredHighlightBegin: 0
 		preferredHighlightEnd: 0
 		highlightMoveDuration: 250

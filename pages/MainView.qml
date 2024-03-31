@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Controls as C
 
 Item {
 	id: root
@@ -14,7 +15,7 @@ Item {
 	property bool controlsActive
 	readonly property Page currentPage: controlsActive && controlCardsLoader.status === Loader.Ready ? controlCardsLoader.item
 			   : !!pageStack.currentItem ? pageStack.currentItem
-			   : !!swipeView ? swipeView.currentItem
+			   : !!swipeView && swipeView.currentItem && swipeView.currentItem.status === Loader.Ready ? swipeView.currentItem.item
 			   : null
 
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
@@ -43,7 +44,6 @@ Item {
 	function _loadUi() {
 		console.warn("Data sources ready, loading pages")
 		swipeViewLoader.active = true
-		navBar.setCurrentPage("BriefPage.qml")
 	}
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
@@ -65,21 +65,40 @@ Item {
 		sourceComponent: swipeViewComponent
 
 		visible: pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
-		onStatusChanged: if (status == Loader.Ready) Global.allPagesLoaded = true
 	}
 
 	Component {
 		id: swipeViewComponent
 		SwipeView {
+			id: _swipeView
 			anchors.fill: parent
 			onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 
-			// ensure the order matches NavBar.model
-			BriefPage {}
-			OverviewPage {}
-			LevelsPage {}
-			NotificationsPage {}
-			SettingsPage {}
+			Repeater {
+				id: repeater
+
+				model: Global.pageModel
+				property int pagesLoaded: 0
+				onPagesLoadedChanged: {
+					if (pagesLoaded >= count) {
+						Global.allPagesLoaded = true
+						_swipeView.setCurrentIndex(0)
+						navBar.setCurrentIndex(0)
+					}
+				}
+
+				Loader {
+					id: loader
+
+					visible: C.SwipeView.view.pageInView(index * Theme.geometry_screen_width, width, Theme.geometry_page_content_horizontalMargin)
+					sourceComponent: model.sourceComponent
+					onStatusChanged: {
+						if (status === Loader.Ready) {
+							repeater.pagesLoaded++
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -199,7 +218,11 @@ Item {
 		color: root.backgroundColor
 		opacity: 0
 
-		onCurrentIndexChanged: if (swipeView) swipeView.currentIndex = currentIndex
+		onCurrentIndexChanged: {
+			if (swipeView) {
+				swipeView.currentIndex = currentIndex
+			}
+		}
 
 		Component.onCompleted: pageManager.navBar = navBar
 

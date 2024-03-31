@@ -270,6 +270,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SolarYieldModel.qml
     components/SplashView.qml
     components/StatusBar.qml
+    components/SwipePageModel.qml
     components/SwipeViewPage.qml
     components/SwitchControlValue.qml
     components/TabBar.qml

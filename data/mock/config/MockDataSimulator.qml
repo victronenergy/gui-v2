@@ -11,6 +11,8 @@ QtObject {
 
 	property bool timersActive: !Global.splashScreenVisible
 	property int deviceCount
+	property bool tanksEnabled: true
+	property bool environmentalInputsEnabled: true
 
 	signal setBatteryRequested(config : var)
 	signal setAcInputsRequested(config : var)
@@ -245,6 +247,13 @@ QtObject {
 						   ? "Gallons (US)"
 						   : "Gallons (Imperial)")
 			event.accepted = true
+			break
+		case Qt.Key_V:
+			tanksEnabled = !tanksEnabled
+			if (!tanksEnabled) {
+
+			}
+
 			break
 		case Qt.Key_Space:
 			Global.allPagesLoaded = true
