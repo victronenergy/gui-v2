@@ -82,7 +82,7 @@ SwipeViewPage {
 	}
 
 	Loader {
-		id: leftEdge
+		id: acInputGauge
 
 		anchors {
 			top: parent.top
@@ -94,10 +94,10 @@ SwipeViewPage {
 		active: !!Global.acInputs.activeInput || Global.dcInputs.model.count > 0
 
 		sourceComponent: SideGauge {
-			alignment: Qt.AlignLeft | (leftLower.active ? Qt.AlignTop : Qt.AlignVCenter)
-			arcX: leftLower.active ? undefined : 10
+			alignment: Qt.AlignLeft | (solarYieldGauge.active ? Qt.AlignTop : Qt.AlignVCenter)
+			arcX: solarYieldGauge.active ? undefined : 10
 			direction: PathArc.Clockwise
-			startAngle: leftLower.active ? 270 : (270 - Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
+			startAngle: solarYieldGauge.active ? 270 : (270 - Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
 			animationEnabled: root.animationEnabled
 
 			// Gauge color changes only apply when there is a maximum value.
@@ -142,15 +142,15 @@ SwipeViewPage {
 					: NaN
 			}
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left edge")
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC input edge")
 	}
 
 	Loader {
-		id: leftLower
+		id: solarYieldGauge
 
 		anchors {
-			top: leftEdge.active ? leftEdge.bottom : parent.top
-			topMargin: leftEdge.active ? Theme.geometry_briefPage_lowerGauge_topMargin : Theme.geometry_briefPage_edgeGauge_topMargin
+			top: acInputGauge.active ? acInputGauge.bottom : parent.top
+			topMargin: acInputGauge.active ? Theme.geometry_briefPage_lowerGauge_topMargin : Theme.geometry_briefPage_edgeGauge_topMargin
 			left: parent.left
 			leftMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			right: mainGauge.left
@@ -158,7 +158,7 @@ SwipeViewPage {
 		active: Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0
 
 		sourceComponent: SolarYieldGauge {
-			alignment: Qt.AlignLeft | (leftEdge.active ? Qt.AlignBottom : Qt.AlignVCenter)
+			alignment: Qt.AlignLeft | (acInputGauge.active ? Qt.AlignBottom : Qt.AlignVCenter)
 			x: root._gaugeArcMargin
 			opacity: root._gaugeArcOpacity
 			animationEnabled: root.animationEnabled
@@ -171,11 +171,11 @@ SwipeViewPage {
 				quantityLabel.dataObject: Global.system.solar
 			}
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load left lower")
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load solar yield gauge")
 	}
 
 	Loader {
-		id: rightEdge
+		id: acLoadGauge
 
 		anchors {
 			top: parent.top
@@ -184,9 +184,9 @@ SwipeViewPage {
 			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			left: mainGauge.right
 		}
-		active: !isNaN(Global.system.loads.acPower) || rightLower.active
+		active: !isNaN(Global.system.loads.acPower) || dcLoadGauge.active
 		sourceComponent: SideGauge {
-			alignment: Qt.AlignRight | (rightLower.active ? Qt.AlignTop : Qt.AlignVCenter)
+			alignment: Qt.AlignRight | (dcLoadGauge.active ? Qt.AlignTop : Qt.AlignVCenter)
 			animationEnabled: root.animationEnabled
 			value: !visible ? 0 : acLoadsRange.valueAsRatio * 100
 			x: -root._gaugeArcMargin
@@ -194,7 +194,7 @@ SwipeViewPage {
 
 			ArcGaugeQuantityRow {
 				alignment: parent.alignment
-				icon.source: rightLower.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
+				icon.source: dcLoadGauge.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 				leftMargin: -root._gaugeLabelMargin + root._gaugeArcMargin
 				opacity: root._gaugeLabelOpacity
 				quantityLabel.dataObject: Global.system.ac.consumption
@@ -206,14 +206,14 @@ SwipeViewPage {
 				maximumValue: Global.system.loads.maximumAcPower
 			}
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right edge")
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC load edge")
 	}
 
 	Loader {
-		id: rightLower
+		id: dcLoadGauge
 
 		anchors {
-			top: rightEdge.bottom
+			top: acLoadGauge.bottom
 			topMargin: Theme.geometry_briefPage_lowerGauge_topMargin
 			right: parent.right
 			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
@@ -240,7 +240,7 @@ SwipeViewPage {
 				value: root.visible ? Global.system.loads.dcPower || 0 : 0
 			}
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load right lower")
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load DC load gauge")
 	}
 
 	Loader {
