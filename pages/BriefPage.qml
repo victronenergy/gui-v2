@@ -91,9 +91,7 @@ SwipeViewPage {
 			leftMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			right: mainGauge.left
 		}
-		// Show gauge even if there are no active AC inputs, so that the gauge visibility doesn't
-		// jump on/off when inputs are connected/disconnected
-		active: visible && (!!Global.acInputs.activeInput || Global.dcInputs.model.count > 0)
+		active: !!Global.acInputs.activeInput || Global.dcInputs.model.count > 0
 
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignLeft | (leftLower.active ? Qt.AlignTop : Qt.AlignVCenter)
@@ -157,7 +155,7 @@ SwipeViewPage {
 			leftMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			right: mainGauge.left
 		}
-		active: visible && (Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0)
+		active: Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0
 
 		sourceComponent: SolarYieldGauge {
 			alignment: Qt.AlignLeft | (leftEdge.active ? Qt.AlignBottom : Qt.AlignVCenter)
@@ -186,7 +184,7 @@ SwipeViewPage {
 			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			left: mainGauge.right
 		}
-		active: visible && (!isNaN(Global.system.loads.acPower) || rightLower.active)
+		active: !isNaN(Global.system.loads.acPower) || rightLower.active
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignRight | (rightLower.active ? Qt.AlignTop : Qt.AlignVCenter)
 			animationEnabled: root.animationEnabled
@@ -221,7 +219,7 @@ SwipeViewPage {
 			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
 			left: mainGauge.right
 		}
-		active: visible && !isNaN(Global.system.loads.dcPower)
+		active: !isNaN(Global.system.loads.dcPower)
 		sourceComponent: SideGauge {
 			alignment: Qt.AlignRight | Qt.AlignBottom
 			animationEnabled: root.animationEnabled
