@@ -75,10 +75,7 @@ T.Dialog {
 		radius: Theme.geometry_modalDialog_radius
 		color: Theme.color_background_secondary
 
-		DialogShadow {
-			backgroundRect: parent
-			dialog: root
-		}
+		DialogShadow {}
 
 		Rectangle {
 			id: highlightBar

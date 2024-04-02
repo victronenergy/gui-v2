@@ -80,20 +80,18 @@ Window {
 		}
 	}
 
-	Item {
-		anchors.horizontalCenter: parent.horizontalCenter
-		width: Theme.geometry_screen_width + wasmPadding
-		height: Theme.geometry_screen_height
-
+	contentItem {
 		// on wasm just show the GUI at the top of the screen,
 		// otherwise browser chrome can cause problems on mobile devices...
-		y: (Qt.platform.os != "wasm" || scale == 1.0) ? (parent.height-height)/2 : 0
+		y: (Qt.platform.os != "wasm" || scale == 1.0) ? (root.height - contentItem.height)/2 : 0
 		transformOrigin: Qt.platform.os != "wasm" ? Item.Center : Item.Top
+		x: (root.width - contentItem.width)/2
 
 		// In WebAssembly builds, if we are displaying on a low-dpi mobile
 		// device, it may not have enough pixels to display the UI natively.
 		// To fix, we need to downscale everything by the appropriate factor,
 		// and take into account browser chrome stealing real-estate also.
+		onScaleChanged: Global.scalingRatio = contentItem.scale
 		scale: {
 			// no scaling required if not on wasm
 			if (Qt.platform.os != "wasm") {
@@ -151,51 +149,46 @@ Window {
 
 		// Ideally each item would use focus handling to get its own key events, but in wasm the
 		// pagestack's pages do not reliably receive key events even when focused.
-		focus: true
 		Keys.onPressed: function(event) {
 			Global.keyPressed(event)
 			event.accepted = false
 		}
+	}
 
-		Loader {
-			id: guiLoader
+	Loader {
+		id: guiLoader
 
+		anchors.centerIn: parent
+
+		width: Theme.geometry_screen_width
+		height: Theme.geometry_screen_height
+		asynchronous: true
+		clip: Qt.platform.os == "wasm"
+
+		active: Global.dataManagerLoaded
+		sourceComponent: ApplicationContent {
 			anchors.centerIn: parent
-
-			width: Theme.geometry_screen_width
-			height: Theme.geometry_screen_height
-			asynchronous: true
-			clip: Qt.platform.os == "wasm"
-
-			active: Global.dataManagerLoaded
-			sourceComponent: Component {
-				ApplicationContent {
-					anchors.centerIn: parent
-				}
-			}
 		}
+	}
 
-		Loader {
-			id: splashLoader
+	Loader {
+		id: splashLoader
 
+		anchors.centerIn: parent
+		width: Theme.geometry_screen_width
+		height: Theme.geometry_screen_height
+		clip: Qt.platform.os == "wasm"
+
+		active: Global.splashScreenVisible
+		sourceComponent: SplashView {
 			anchors.centerIn: parent
-			width: Theme.geometry_screen_width
-			height: Theme.geometry_screen_height
-			clip: Qt.platform.os == "wasm"
-
-			active: Global.splashScreenVisible
-			sourceComponent: Component {
-				SplashView {
-					anchors.centerIn: parent
-				}
-			}
 		}
+	}
 
-		VenusFontLoader {
-			id: fontLoader
+	VenusFontLoader {
+		id: fontLoader
 
-			Component.onCompleted: Global.fontLoader = fontLoader
-		}
+		Component.onCompleted: Global.fontLoader = fontLoader
 	}
 
 	FrameRateVisualizer {}
