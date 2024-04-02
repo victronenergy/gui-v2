@@ -561,10 +561,19 @@ SwipeViewPage {
 		}
 	}
 
+	CpuInfo {
+		id: cpuInfo
+
+		enabled: root.animationEnabled
+		upperLimit: 85
+		lowerLimit: 50
+	}
+
 	FrameAnimation {
 		id: overviewPageRootAnimation
 
-		running: root.visible
+		paused: cpuInfo.overLimit
+		running: root.animationEnabled
 		property int index
 		property real previousElapsed
 
@@ -719,7 +728,7 @@ SwipeViewPage {
 		size: VenusOS.OverviewWidget_Size_L
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
-		animationEnabled: root.animationEnabled
+		animationEnabled: root.animationEnabled && !cpuInfo.overLimit
 		connectors: [ batteryToDcLoadsConnector ]
 
 		WidgetConnectorAnchor {

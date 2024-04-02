@@ -657,6 +657,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/notificationsmodel.cpp
     src/clocktime.h
     src/clocktime.cpp
+    src/cpuinfo.h
+    src/cpuinfo.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
     src/quantityinfo.h
