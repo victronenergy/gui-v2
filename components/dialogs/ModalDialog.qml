@@ -38,8 +38,8 @@ T.Dialog {
 	readonly property string rejectTextClose: qsTrId("modaldialog_close")
 
 	anchors.centerIn: parent
-	implicitWidth: background.implicitWidth
-	implicitHeight: background.implicitHeight
+	implicitWidth: Theme.geometry_modalDialog_width
+	implicitHeight: Theme.geometry_modalDialog_height
 	verticalPadding: 0
 	horizontalPadding: 0
 	modal: true
@@ -56,16 +56,11 @@ T.Dialog {
 	}
 
 	background: Rectangle {
-		implicitWidth: Theme.geometry_modalDialog_width
-		implicitHeight: Theme.geometry_modalDialog_height
 		radius: Theme.geometry_modalDialog_radius
 		color: Theme.color_background_secondary
 		border.color: Theme.color_modalDialog_border
 
-		DialogShadow {
-			backgroundRect: parent
-			dialog: root
-		}
+		DialogShadow {}
 	}
 
 	header: Item {

@@ -59,6 +59,7 @@ QtObject {
 	property string firmwareInstalledBuild // don't clear this on UI reload.  it needs to survive reconnection.
 	property bool firmwareInstalledBuildUpdated // as above.
 	property bool isDesktop
+	property real scalingRatio: 1.0
 
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 	signal keyPressed(var event)
