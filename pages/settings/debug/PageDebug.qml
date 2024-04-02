@@ -11,26 +11,41 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListItem {
-				id: frameRateSwitch
-				//% "Enable frame-rate visualizer"
-				text: qsTrId("settings_page_debug_enable_fps_visualizer")
-				content.children: [
-					Switch {
-						id: switchItem
-						checked: FrameRateModel.enabled
-						onClicked: FrameRateModel.enabled = !FrameRateModel.enabled
-					}
-				]
+
+			component SwitchItem : ListItem {
+				id: switchItem
+
+				signal clicked
+				property alias checked: childSwitch.checked
+
+				content.children: Switch {
+					id: childSwitch
+					onClicked: switchItem.clicked()
+				}
 
 				PressArea {
-					radius: frameRateSwitch.backgroundRect.radius
+					radius: switchItem.backgroundRect.radius
 					anchors {
 						fill: parent
-						bottomMargin: frameRateSwitch.spacing
+						bottomMargin: switchItem.spacing
 					}
-					onClicked: FrameRateModel.enabled = !FrameRateModel.enabled
+					onClicked: switchItem.clicked()
 				}
+			}
+
+			SwitchItem {
+				//% "Enable frame-rate visualizer"
+				text: qsTrId("settings_page_debug_enable_fps_visualizer")
+				checked: FrameRateModel.enabled
+				onClicked: FrameRateModel.enabled = !FrameRateModel.enabled
+			}
+
+			SwitchItem {
+				//% "Display CPU usage"
+				text: qsTrId("settings_page_debug_display_cpu_usage")
+				checked: Global.displayCpuUsage
+				onClicked: Global.displayCpuUsage = !Global.displayCpuUsage
+				allowed: defaultAllowed && Qt.platform.os === "linux"
 			}
 
 			ListButton {

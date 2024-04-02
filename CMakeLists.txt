@@ -222,6 +222,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/CircularSingleGauge.qml
     components/ControlCard.qml
     components/ControlValue.qml
+    components/CpuMonitor.qml
     components/Device.qml
     components/ElectricalQuantityLabel.qml
     components/EnvironmentGauge.qml
