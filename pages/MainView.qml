@@ -354,4 +354,15 @@ Item {
 
 		Component.onCompleted: pageManager.statusBar = statusBar
 	}
+
+	Loader {
+		active: Global.displayCpuUsage
+		anchors {
+			bottom: parent.bottom
+			right: parent.right
+		}
+		sourceComponent: CpuMonitor {
+			color: root.backgroundColor
+		}
+	}
 }

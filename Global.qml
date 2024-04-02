@@ -23,6 +23,7 @@ QtObject {
 	property var dialogLayer
 	property var notificationLayer
 	property ScreenBlanker screenBlanker
+	property bool displayCpuUsage
 
 	// data sources
 	property var acInputs
