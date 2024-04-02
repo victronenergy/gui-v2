@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.Templates as T
+import QtQuick.Controls as C
 import Victron.VenusOS
 
 // This doesn't extend ModalDialog, due to the custom background layering required to show the
@@ -67,6 +68,7 @@ T.Dialog {
 			property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation_page_fade_duration }
 	}
 
+	C.Overlay.modal: DialogShadow {}
 	background: Rectangle {
 		implicitWidth: Theme.geometry_modalDialog_width
 		implicitHeight: Theme.geometry_solarDailyHistoryDialog_header_height
@@ -74,11 +76,6 @@ T.Dialog {
 					+ (errorView.visible ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_verticalMargin : 0)
 		radius: Theme.geometry_modalDialog_radius
 		color: Theme.color_background_secondary
-
-		DialogShadow {
-			backgroundRect: parent
-			dialog: root
-		}
 
 		Rectangle {
 			id: highlightBar
