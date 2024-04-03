@@ -24,7 +24,6 @@ Window {
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
 
 	function skipSplashScreen() {
-		Global.allPagesLoaded = true
 		Global.splashScreenVisible = false
 	}
 
