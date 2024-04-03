@@ -32,7 +32,6 @@ public:
 	Q_INVOKABLE void add(QQuickItem *electron);
 	Q_INVOKABLE void remove(QQuickItem *electron);
 
-protected slots:
 	Q_INVOKABLE void update() const;
 
 signals:
