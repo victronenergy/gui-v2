@@ -12,7 +12,7 @@ QtObject {
 	property bool timersActive: !Global.splashScreenVisible
 	property int deviceCount
 	property bool tanksEnabled: true
-	property bool environmentalInputsEnabled: true
+	property bool environmentalInputsEnabled: tanksEnabled
 
 	signal setBatteryRequested(config : var)
 	signal setAcInputsRequested(config : var)
@@ -250,13 +250,8 @@ QtObject {
 			break
 		case Qt.Key_V:
 			tanksEnabled = !tanksEnabled
-			if (!tanksEnabled) {
-
-			}
-
 			break
 		case Qt.Key_Space:
-			Global.allPagesLoaded = true
 			Global.splashScreenVisible = false
 			event.accepted = true
 			break

@@ -74,14 +74,25 @@ Item {
 			anchors.fill: parent
 			onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 
+			Connections {
+				enabled: !Global.allPagesLoaded
+				target: _swipeView
+				function onMovingChanged() {
+					if (!parent.moving && repeater.pagesLoaded === repeater.count) {
+						Global.allPagesLoaded = true
+					}
+				}
+			}
+
 			Repeater {
 				id: repeater
 
-				model: navBar.model
 				property int pagesLoaded: 0
+
+				model: navBar.model
+
 				onPagesLoadedChanged: {
-					if (pagesLoaded == count) {
-						Global.allPagesLoaded = true
+					if (pagesLoaded === count && !Global.allPagesLoaded) {
 						_swipeView.setCurrentIndex(0)
 						navBar.setCurrentIndex(0)
 					}
@@ -92,8 +103,8 @@ Item {
 
 					// Once https://bugreports.qt.io/browse/QTBUG-115468 is fixed, the following expression for 'visible'
 					// can be replaced with: visible: C.SwipeView.view.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)
-					visible: _swipeView.moving || SwipeView.isCurrentItem
 					sourceComponent: model.sourceComponent
+					visible: Global.allPagesLoaded && (_swipeView.moving || SwipeView.isCurrentItem)
 					onStatusChanged: {
 						if (status === Loader.Ready) {
 							repeater.pagesLoaded++
