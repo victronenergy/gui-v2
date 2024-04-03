@@ -74,6 +74,11 @@ Item {
 			// Animate at a constant rate of pixels/sec, based on the diagonal length of the shape
 			electronAnim.duration = electronTravelDistance / Theme.geometry_overviewPage_connector_electron_velocity * 1000
 		}
+
+		// Force drawing manually if the animations are paused
+		if (overviewPageRootAnimation.paused) {
+			pathUpdater.update()
+		}
 	}
 
 	visible: defaultVisible
@@ -90,13 +95,13 @@ Item {
 		PropertyChanges { target: connectorPath; y: connectorPath.expandedY; yDistance: connectorPath.expandedYDistance }
 		PropertyChanges { target: connectorPath; startAnchorY: connectorPath.startAnchorExpandedY }
 		PropertyChanges { target: connectorPath; endAnchorY: connectorPath.endAnchorExpandedY }
+		PropertyChanges { target: root; _transitionUpdating: 1.0 }
 	}
 
 	transitions: Transition {
 		enabled: root.animateGeometry
-
 		NumberAnimation {
-			properties: "y,yDistance,startAnchorY,endAnchorY"
+			properties: "y, yDistance, startAnchorY, endAnchorY, _transitionUpdating"
 			duration: Theme.animation_page_idleResize_duration
 			easing.type: Easing.InOutQuad
 		}
@@ -252,6 +257,10 @@ Item {
 			pathUpdater.progress = startToEnd ? progress : 1.0 - progress
 		}
 	}
+
+	// Force drawing during the expanding transition even if the animations are paused
+	property real _transitionUpdating
+	on_TransitionUpdatingChanged: if (overviewPageRootAnimation.paused) pathUpdater.update()
 
 	WidgetConnectorPathUpdater {
 		id: pathUpdater
