@@ -77,7 +77,6 @@ ListModel {
 		}
 
 		if (showLevelsPage) {
-			console.log("adding levels page")
 			insert(2, {
 					   //% "Levels"
 					   text: qsTrId("nav_levels"),
@@ -86,10 +85,7 @@ ListModel {
 					   sourceComponent: levelsPage
 				   })
 		} else {
-			console.log("removing levels page")
 			remove(2)
 		}
 	}
-
-	Component.onCompleted: Global.pageModel = root
 }

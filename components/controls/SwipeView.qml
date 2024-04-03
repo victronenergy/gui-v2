@@ -12,7 +12,12 @@ T.SwipeView {
 
 	readonly property alias flicking: listView.flicking
 	readonly property alias dragging: listView.dragging
+	readonly property bool moving: listView.moving || scrollingTimer.running
 
+	// Due to https://bugreports.qt.io/browse/QTBUG-115468, 'pageInView()' does not work reliably
+	// when a page is removed from the SwipeView. Eg. if you are on a page to the right of the
+	// Levels page, and the Levels page is removed, this function wrongly returns false.
+	// Leaving the function here for use in a future Qt version.
 	function pageInView(pageXStart, pageWidth, threshold) {
 		const pageXEnd = pageXStart + pageWidth
 		const visibleXStart = listView.contentX + listView.originX + threshold
@@ -33,6 +38,8 @@ T.SwipeView {
 		model: control.contentModel
 		interactive: control.interactive
 		currentIndex: control.currentIndex
+		onCurrentIndexChanged: scrollingTimer.restart()	// 'listView.moving' stays false when we are moving to a different page due to clicking on the nav bar.
+														// The scrolling timer is needed to tell us when the listView is in motion due to a nav bar click.
 		focus: control.focus
 
 		spacing: control.spacing
@@ -45,5 +52,10 @@ T.SwipeView {
 		preferredHighlightEnd: 0
 		highlightMoveDuration: 250
 		maximumFlickVelocity: 4 * (control.orientation === Qt.Horizontal ? width : height)
+
+		Timer {
+			id: scrollingTimer
+			interval: listView.highlightMoveDuration
+		}
 	}
 }
