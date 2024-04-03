@@ -77,10 +77,10 @@ Item {
 			Repeater {
 				id: repeater
 
-				model: Global.pageModel
+				model: navBar.model
 				property int pagesLoaded: 0
 				onPagesLoadedChanged: {
-					if (pagesLoaded >= count) {
+					if (pagesLoaded == count) {
 						Global.allPagesLoaded = true
 						_swipeView.setCurrentIndex(0)
 						navBar.setCurrentIndex(0)
@@ -90,7 +90,9 @@ Item {
 				Loader {
 					id: loader
 
-					visible: C.SwipeView.view.pageInView(index * Theme.geometry_screen_width, width, Theme.geometry_page_content_horizontalMargin)
+					// Once https://bugreports.qt.io/browse/QTBUG-115468 is fixed, the following expression for 'visible'
+					// can be replaced with: visible: C.SwipeView.view.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)
+					visible: _swipeView.moving || SwipeView.isCurrentItem
 					sourceComponent: model.sourceComponent
 					onStatusChanged: {
 						if (status === Loader.Ready) {
