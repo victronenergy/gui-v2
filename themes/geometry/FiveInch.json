@@ -141,7 +141,6 @@
     "geometry_progressArc_strokeWidth": 8,
 
     "geometry_mainGauge_size": 320,
-    "geometry_mainGauge_topMargin": 16,
 
     "geometry_circularMultiGauge_strokeWidth": 16,
     "geometry_circularMultiGauge_spacing": 16,
@@ -165,15 +164,13 @@
     "geometry_briefPage_centerGauge_centerText_topMargin": 74,
     "geometry_briefPage_centerGauge_centerText_topPadding": 3,
     "geometry_briefPage_edgeGauge_horizontalMargin": "geometry_page_content_horizontalMargin",
-    "geometry_briefPage_edgeGauge_topMargin": 24,
     "geometry_briefPage_edgeGauge_radius": 360,
     "geometry_briefPage_edgeGauge_width": 60,
+    "geometry_briefPage_edgeGauge_spacing": 16,
+    "geometry_briefPage_edgeGauge_spacingAngle": 3,
     "geometry_briefPage_edgeGauge_quantityLabel_spacing": 2,
-    "geometry_briefPage_smallEdgeGauge_height": 154,
-    "geometry_briefPage_smallEdgeGauge_maxAngle": 24,
-    "geometry_briefPage_largeEdgeGauge_height": 320,
+    "geometry_briefPage_largeEdgeGauge_height": 340,
     "geometry_briefPage_largeEdgeGauge_maxAngle": 51,
-    "geometry_briefPage_lowerGauge_topMargin": 16,
     "geometry_briefPage_solarHistoryGauge_maximumGaugeCount": 3,
 
     "geometry_briefPage_sidePanel_verticalCenterOffset": -8,

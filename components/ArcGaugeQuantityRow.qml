@@ -24,8 +24,8 @@ Row {
 	y: alignment & Qt.AlignVCenter
 	   ? parent.height/2 - height/2
 	   : alignment & Qt.AlignTop
-		 ? parent.height - height
-		 : 0    // root.alignment & Qt.AlignBottom
+		 ? parent.height - height - (Theme.geometry_briefPage_edgeGauge_spacing / 2)
+		 : Theme.geometry_briefPage_edgeGauge_spacing / 2    // root.alignment & Qt.AlignBottom
 
 	spacing: Theme.geometry_briefPage_edgeGauge_quantityLabel_spacing
 	layoutDirection: root.alignment & Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
