@@ -12,28 +12,27 @@ Item {
 
 	property int alignment
 	property bool animationEnabled
-	readonly property int _maxAngle: alignment & Qt.AlignVCenter ? Theme.geometry_briefPage_largeEdgeGauge_maxAngle : Theme.geometry_briefPage_smallEdgeGauge_maxAngle
 
-	implicitHeight: alignment & Qt.AlignVCenter ? Theme.geometry_briefPage_largeEdgeGauge_height : Theme.geometry_briefPage_smallEdgeGauge_height
+	property int direction
+	property real startAngle
+	property real endAngle
 
 	Repeater {
 		id: gaugeRepeater
 
 		model: powerSampler.sampledAverages.length + 1
 
-		delegate: ArcGauge {
+		delegate: SideGauge {
 			animationEnabled: root.animationEnabled
 			width: Theme.geometry_briefPage_edgeGauge_width
 			x: index*strokeWidth
 			opacity: 1.0 - index * 0.3
 			height: root.height
-			startAngle: root.alignment & Qt.AlignVCenter ? 270 + _maxAngle/2 : 270
-			endAngle: startAngle - _maxAngle
+			alignment: root.alignment
+			direction: root.direction
+			startAngle: root.startAngle
+			endAngle: root.endAngle
 			radius: Theme.geometry_briefPage_edgeGauge_radius - index*strokeWidth
-			useLargeArc: false
-			direction: PathArc.Counterclockwise
-			strokeWidth: Theme.geometry_arc_strokeWidth
-			arcY: root.alignment & Qt.AlignVCenter ? undefined : -radius + strokeWidth/2
 			value: {
 				if (!visible || solarMeasurements.maxPower == 0) {
 					// No useful max yet, so show a full gauge
