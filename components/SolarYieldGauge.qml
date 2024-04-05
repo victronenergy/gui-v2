@@ -10,12 +10,15 @@ import QtQuick.Controls.impl as CP
 Item {
 	id: root
 
-	property int alignment
-	property bool animationEnabled
-
 	property int direction
 	property real startAngle
 	property real endAngle
+	property int horizontalAlignment
+	property real arcVerticalCenterOffset
+	property bool animationEnabled
+
+	width: parent.width
+	height: parent.height
 
 	Repeater {
 		id: gaugeRepeater
@@ -28,11 +31,12 @@ Item {
 			x: index*strokeWidth
 			opacity: 1.0 - index * 0.3
 			height: root.height
-			alignment: root.alignment
 			direction: root.direction
 			startAngle: root.startAngle
 			endAngle: root.endAngle
 			radius: Theme.geometry_briefPage_edgeGauge_radius - index*strokeWidth
+			horizontalAlignment: root.horizontalAlignment
+			arcVerticalCenterOffset: root.arcVerticalCenterOffset
 			value: {
 				if (!visible || solarMeasurements.maxPower == 0) {
 					// No useful max yet, so show a full gauge

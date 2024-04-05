@@ -9,11 +9,14 @@ import Victron.VenusOS
 ArcGauge {
 	id: root
 
-	implicitWidth: Theme.geometry_briefPage_edgeGauge_width
+	property int horizontalAlignment
+
+	width: parent.width
+	height: parent.height
 	radius: Theme.geometry_briefPage_edgeGauge_radius
 	useLargeArc: false
 	strokeWidth: Theme.geometry_arc_strokeWidth
-	arcY: alignment & Qt.AlignTop ? -(radius - root.height)
-			: alignment & Qt.AlignBottom ? -radius
-			: undefined     // Qt.AlignVCenter
+	arcHorizontalCenterOffset: (horizontalAlignment & Qt.AlignLeft) ? -(width - (2 * radius)) / 2
+			: (horizontalAlignment & Qt.AlignRight) ? (width - (2 * radius)) / 2
+			: 0
 }
