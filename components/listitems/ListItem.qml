@@ -43,6 +43,7 @@ Item {
 	ListItemBackground {
 		id: backgroundRect
 
+		z: -2
 		height: root.height - root.spacing
 		color: Theme.color_listItem_background
 		// TODO how to indicate read-only setting?

@@ -103,7 +103,7 @@ Page {
 				color: mouseArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			}
 
-			PressArea {
+			ListPressArea {
 				id: mouseArea
 
 				radius: parent.radius

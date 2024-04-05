@@ -11,6 +11,7 @@ MouseArea {
 
 	property bool effectEnabled: true
 	property alias radius: pressEffect.radius
+	property alias color: pressEffect.color
 
 	onPressed: if (effectEnabled) pressEffect.start(mouseX/width, mouseY/height)
 	onReleased: if (effectEnabled) pressEffect.stop()
