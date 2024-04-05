@@ -49,12 +49,21 @@ ShaderEffect {
 			easing.type: Easing.OutSine
 		}
 
+		// Disable UniformAnimator on WebAssembly due to QTBUG-124152
 		UniformAnimator {
 			target: shaderEffect
 			uniform: "progress"
 			from: 0.0
 			to: 1.0
-			duration: 400
+			duration: Qt.platform.os !== "wasm" ? 400 : 0
+			easing.type: Easing.OutSine
+		}
+		NumberAnimation {
+			target: shaderEffect
+			property: "progress"
+			from: 0.0
+			to: 1.0
+			duration: Qt.platform.os === "wasm" ? 400 : 0
 			easing.type: Easing.OutSine
 		}
 	}
@@ -70,12 +79,22 @@ ShaderEffect {
 			easing.type: Easing.InSine
 		}
 
+		// Disable UniformAnimator on WebAssembly due to QTBUG-124152
 		UniformAnimator {
 			target: shaderEffect
 			uniform: "progress"
 			from: shaderEffect.progress
 			to: 1.0
-			duration: 300
+			duration: Qt.platform.os !== "wasm" ? 300 : 0
+			easing.type: Easing.InSine
+		}
+
+		NumberAnimation {
+			target: shaderEffect
+			property: "progress"
+			from: shaderEffect.progress
+			to: 1.0
+			duration: Qt.platform.os === "wasm" ? 300 : 0
 			easing.type: Easing.InSine
 		}
 	}
