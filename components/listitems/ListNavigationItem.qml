@@ -39,7 +39,7 @@ ListItem {
 		}
 	]
 
-	PressArea {
+	ListPressArea {
 		id: pressArea
 
 		radius: backgroundRect.radius

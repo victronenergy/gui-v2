@@ -269,7 +269,7 @@ Page {
 				visible: deviceMouseArea.enabled
 			}
 
-			PressArea {
+			ListPressArea {
 				id: deviceMouseArea
 
 				anchors {

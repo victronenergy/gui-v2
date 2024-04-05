@@ -37,7 +37,7 @@ Page {
 				color: listDelegate.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			}
 
-			PressArea {
+			ListPressArea {
 				id: mouseArea
 
 				parent: listDelegate.backgroundRect

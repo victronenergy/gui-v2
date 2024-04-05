@@ -23,7 +23,7 @@ Page {
 					onClicked: switchItem.clicked()
 				}
 
-				PressArea {
+				ListPressArea {
 					radius: switchItem.backgroundRect.radius
 					anchors {
 						fill: parent

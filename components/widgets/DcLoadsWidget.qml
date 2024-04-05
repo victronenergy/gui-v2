@@ -39,7 +39,7 @@ OverviewWidget {
 						Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
 					]
 
-					PressArea {
+					ListPressArea {
 						id: delegatePressArea
 
 						radius: backgroundRect.radius
