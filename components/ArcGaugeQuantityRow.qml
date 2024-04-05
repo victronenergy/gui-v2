@@ -14,18 +14,17 @@ Row {
 	property alias icon: icon
 	property alias iconRow: iconRow
 	property alias quantityLabel: quantityLabel
-	property real leftMargin
 
 	// Use x/y bindings as the layout sometimes did not update dynamically when multiple anchor
 	// bindings were used instead.
 	x: root.alignment & Qt.AlignLeft
-	   ? Theme.geometry_loadMiniGauge_label_rightMargin + leftMargin
-	   : parent.width - width - Theme.geometry_loadMiniGauge_label_rightMargin + leftMargin
+	   ? Theme.geometry_briefPage_edgeGauge_quantityLabel_horizontalMargin
+	   : parent.width - width - Theme.geometry_briefPage_edgeGauge_quantityLabel_horizontalMargin
 	y: alignment & Qt.AlignVCenter
 	   ? parent.height/2 - height/2
-	   : alignment & Qt.AlignTop
+	   : alignment & Qt.AlignBottom
 		 ? parent.height - height - (Theme.geometry_briefPage_edgeGauge_spacing / 2)
-		 : Theme.geometry_briefPage_edgeGauge_spacing / 2    // root.alignment & Qt.AlignBottom
+		 : Theme.geometry_briefPage_edgeGauge_spacing / 2    // root.alignment & Qt.AlignTop
 
 	spacing: Theme.geometry_briefPage_edgeGauge_quantityLabel_spacing
 	layoutDirection: root.alignment & Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
