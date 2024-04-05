@@ -123,15 +123,18 @@ QtObject {
 			evcs: { chargers: [ { status: VenusOS.Evcs_Status_Charging }, { status: VenusOS.Evcs_Status_Charging }, { status: VenusOS.Evcs_Status_Disconnected } ] },
 		},
 		{
-			name: "Single PV inverter",
+			name: "Single PV inverter, no AC/DC inputs",
+			acInputs: [emptyAcInput, emptyAcInput],
 			solar: { inverters: [ { power: 123 } ] },
 		},
 		{
-			name: "Multiple PV inverters",
+			name: "Multiple PV inverters, no AC/DC inputs",
+			acInputs: [emptyAcInput, emptyAcInput],
 			solar: { inverters: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
 		},
 		{
-			name: "Multiple alternators, including Orion XS",
+			name: "Multiple alternators (including Orion XS), no AC/DC inputs",
+			acInputs: [emptyAcInput, emptyAcInput],
 			dcInputs: { types: [ { serviceType: "alternator", productId: 0xA3F0 }, { serviceType: "alternator" } ] },
 		},
 		{

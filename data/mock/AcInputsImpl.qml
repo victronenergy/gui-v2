@@ -34,9 +34,10 @@ QtObject {
 		for (let i = 0; i < inputs.length; ++i) {
 			if (inputs[i].connected === 1) {
 				acSource.setValue(inputs[i].source)
-				break
+				return
 			}
 		}
+		acSource.setValue(undefined)
 	}
 
 	property Connections mockConn: Connections {
@@ -152,7 +153,7 @@ QtObject {
 
 			// For vebus/grid/genset services, forcibly update the total power
 			const inputServiceLoader = Global.acInputs.activeInput._acInputService
-			if (inputServiceLoader && inputServiceLoader.hasTotalPower) {
+			if (inputServiceLoader && inputServiceLoader.item && inputServiceLoader.hasTotalPower) {
 				inputServiceLoader.item._power.setValue(totalPower)
 			}
 
