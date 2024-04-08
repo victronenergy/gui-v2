@@ -267,29 +267,29 @@ function formatTimestamp(dateTime, currentDateTime) {
 	return dateTime.toLocaleString(Qt.locale(), "MMM dd hh:mm") // eg. "Mar 27 10:20"
 }
 
-function connmanServiceState(service) {
-	if (service) {
-		switch (service.state) {
-		case "failure":
-			//% "Failure"
-			return qsTrId("utils_connman_failure")
-		case "association":
-			//% "Connecting"
-			return qsTrId("utils_connman_connecting")
-		case "configuration":
-			//% "Retrieving IP address"
-			return qsTrId("utils_connman_retrieving_ip_address")
-		case "ready":
-		case "online":
-			//% "Connected"
-			return qsTrId("utils_connman_connected")
-		case "disconnect":
-			//% "Disconnect"
-			return qsTrId("utils_connman_disconnect")
-		}
+function connmanServiceState(state) {
+	switch (state) {
+	case "failure":
+		//% "Failure"
+		return qsTrId("utils_connman_failure")
+	case "association":
+		//% "Connecting"
+		return qsTrId("utils_connman_connecting")
+	case "configuration":
+		//% "Retrieving IP address"
+		return qsTrId("utils_connman_retrieving_ip_address")
+	case "ready":
+	case "online":
+		//% "Connected"
+		return qsTrId("utils_connman_connected")
+	case "disconnect":
+		//% "Disconnect"
+		return qsTrId("utils_connman_disconnect")
+	case "idle":
+	default:
+		//% "Disconnected"
+		return qsTrId("utils_connman_disconnected")
 	}
-	//% "Disconnected"
-	return qsTrId("utils_connman_disconnected")
 }
 
 function uidEndsWithANumber(uid) {

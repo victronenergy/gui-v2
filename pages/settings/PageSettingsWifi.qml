@@ -10,81 +10,133 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property CmTechnology _tech: Connman.getTechnology("wifi")
+	onIsCurrentPageChanged: if (isCurrentPage) servicesItem.update()
 
-	function _reload() {
+	VeQuickItem {
+		id: servicesItem
+
+		uid: Global.venusPlatform.serviceUid + "/Network/Services"
+
 		// TODO ideally this would be an QAbstractListModel that updates itself progressively,
 		// instead of needing to reload the whole model.
-		settingsListView.model = Connman.getServiceList("wifi")
+		onValueChanged: if (root.isCurrentPage) update()
+
+		function update() {
+			if (!isValid || !scanItem.isValid) {
+				model.clear()
+				return
+			}
+
+			/*
+				Following config is provided for each network item:
+
+				"Victron": {
+					"Service": "/net/connman/service/wifi_5cc5633c7cfa_56696374726f6e_managed_ieee8021x",
+					"State": "Disconnected",
+					"Strength": "45",
+					"Secured": "yes",
+					"Favorite": "yes",
+					"Address": "192.168.68.62",
+					"Gateway": "",
+					"Method": "manual",
+					"Netmask": "255.255.252.0",
+					"Mac": "5C:C5:63:3C:7C:FA",
+					"Nameservers": ["193.12.34.56", "193.12.34.57"]
+				}
+			*/
+			const wifis = JSON.parse(value)["wifi"]
+
+			const services = Object.values(wifis)
+			  .filter((object) => object && typeof object === "object")
+			  .map((object) => object["Service"])
+
+			// Remove networks that have been dropped
+			for (var i = 0; i < model.count; i++) {
+				if (services.indexOf(model.get(i).service) == -1) {
+					model.remove(i)
+				}
+			}
+
+			i = 0
+			for (const [network, details] of Object.entries(wifis)) {
+				let found = false
+				for (let j = 0; j < model.count; j++) {
+					let service = details["Service"]
+					// Update existing networks
+					if (service && service === model.get(j).service) {
+						found = true
+						model.set(i, {
+									  "network": network,
+									  "service": details["Service"],
+									  "state": details["State"],
+									  "favorite": details["Favorite"] === "yes"
+								  })
+						break
+					}
+				}
+
+				// Insert newly discovered networks
+				if (!found) {
+					// Services are sorted by favorite and signal strength, try to maintain order
+					model.insert(i, {
+									 "network": network,
+									 "service": details["Service"],
+									 "state": details["State"],
+									 "favorite": details["Favorite"] === "yes"
+								 })
+				}
+				i++
+			}
+		}
 	}
 
-	onIsCurrentPageChanged: {
-		if (isCurrentPage) {
-			_reload()
-		}
+	VeQuickItem {
+		id: scanItem
+		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"
 	}
 
 	GradientListView {
 		id: settingsListView
 
+		model: ListModel { id: model }
 		header: ListLabel {
 			allowed: settingsListView.count === 0
-			text: {
-				if (root._tech) {
-					if (root._tech.powered) {
-						//% "No access points"
-						return qsTrId("settings_wifi_no_access_points")
-					} else {
-						root._tech.powered = true
-					}
-				}
-				//% "No Wi-Fi adapter connected"
-				return qsTrId("settings_wifi_no_wifi_adapter_connected")
-			}
+			text: scanItem.isValid
+					//% "No access points"
+				  ? qsTrId("settings_wifi_no_access_points")
+					//% "No Wi-Fi adapter connected"
+				  : qsTrId("settings_wifi_no_wifi_adapter_connected")
 		}
 
-		model: Connman.getServiceList("wifi")
-
 		delegate: ListNavigationItem {
-			id: wifiPoint
+			id: delagate
 
-			property CmService service: Connman.getService(modelData)
-
-			text: service ? (service.name ? service.name : "[" + service.ethernet["Address"] + "]") : ""
-			secondaryText: Utils.connmanServiceState(service)
+			//% "[Hidden]"
+			text: model.network ? model.network : qsTrId("settings_tcpip_hidden")
+			secondaryText: Utils.connmanServiceState(model.state)
 			primaryLabel.leftPadding: Theme.geometry_icon_size_medium + Theme.geometry_listItem_content_spacing
 
 			CP.ColorImage {
 				anchors {
-					left: wifiPoint.primaryLabel.left
-					verticalCenter: wifiPoint.primaryLabel.verticalCenter
+					left: delagate.primaryLabel.left
+					verticalCenter: delagate.primaryLabel.verticalCenter
 				}
 				source: "qrc:/images/icon_checkmark_32.svg"
 				color: Theme.color_green
-				visible: wifiPoint.service && wifiPoint.service.favorite
+				visible: model.favorite
 			}
 
-			onClicked: {
-				Global.pageManager.pushPage(wifiPointComponent, { title: service.name })
-			}
+			onClicked: Global.pageManager.pushPage(wifiPointComponent)
 
 			Component {
 				id: wifiPointComponent
 
 				PageSettingsTcpIp {
-					path: modelData
-					service: wifiPoint.service
-					technologyType: "wifi"
+					title: delagate.text
+					service: model.service
+					network: model.network
+					tech: "wifi"
 				}
-			}
-		}
-	}
-
-	Connections {
-		target: Connman
-		function onServiceListChanged() {
-			if (!!Global.pageManager && root.isCurrentPage) {
-				root._reload()
 			}
 		}
 	}
@@ -95,18 +147,14 @@ Page {
 		running: root.animationEnabled
 		repeat: true
 		triggeredOnStart: true
-		onTriggered: {
-			if (root._tech) {
-				root._tech.scan()
-			}
-		}
+		onTriggered: scanItem.setValue(1)
 	}
 
 	// This timer is added because when a wifi service is in failure, it will only leave this
 	// state when a user presses connect or when the service is removed because wpa_supplicant
 	// did not see the service for 3 minutes. This will not happen while we continue to scan
 	// every 10 seconds, but the scanning does make sense while we are in this menu. So it
-	// was decided to exit this menu when a user did nothing for 5 mminutes. In the end,
+	// was decided to exit this menu when a user did nothing for 5 minutes. In the end,
 	// this will result in a removal of a service in failure with a possible automatic
 	// reconnect when the service is seen again because of the automatic scan by connman.
 	Timer {

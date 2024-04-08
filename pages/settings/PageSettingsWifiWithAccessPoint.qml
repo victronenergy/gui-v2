@@ -9,8 +9,6 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property CmTechnology _tech: Connman.getTechnology("wifi")
-
 	GradientListView {
 		id: settingsListView
 
