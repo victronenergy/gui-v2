@@ -9,100 +9,110 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string technologyType: "ethernet"
-	property string path: Connman.getServiceList(technologyType)[0] || ""
-	property CmService service: path ? Connman.getService(path) : null
+	property string network: "Wired"
+	property string tech: "ethernet"
 
-	readonly property string _security: service ? service.security.toString() : ""
-	property bool _secured: _security.indexOf("none") === -1 && _security !== ""
-	readonly property string _serviceMethod: !!service && service.ipv4Config["Method"] ? service.ipv4Config["Method"] : "--"
-	readonly property bool _readOnlySettings: _serviceMethod !== "manual"
-	readonly property bool _wifi: technologyType === "wifi"
-	property string _agentPath: "/com/victronenergy/ccgx"
-	property CmAgent _agent
+	property alias service: service.service
+	readonly property bool ready: root.service.length > 0
 
-	function _getIpv4Property(name) {
-		if (!service) {
-			return ""
-		}
-		if (service.ipv4["Method"] === "manual") {
-			return service.ipv4Config[name] || "--"
-		}
-		return service.ipv4[name] || "--"
+	readonly property bool _wifi: tech === "wifi"
+	readonly property bool _disconnected: service.state === "idle" || service.state === "failure"
+
+	function performAction(action) {
+		setServiceProperty("Action", action)
 	}
 
-	function _setIpv4Property(name, value) {
-		let ipv4Config = service.ipv4
-		ipv4Config[name] = value
-		service.ipv4Config = ipv4Config
+	function setServiceProperty(item, value) {
+		var obj = { Service: service.service };
+		obj[item] = value
+		setValueItem.setValue(JSON.stringify(obj))
 	}
 
-	function _setMethod(selectedMethod) {
-		if (!service) {
-			return
-		}
-		let ipv4Config = service.ipv4
-		let nameserversConfig = service.nameservers
-		let oldMethod = ipv4Config["Method"]
-
-		switch (selectedMethod) {
-		case "dhcp":
-			if (oldMethod === "manual") {
-				ipv4Config['Address'] = "255.255.255.255"
-				service.ipv4Config = ipv4Config
-			}
-			ipv4Config["Method"] = "dhcp"
-			nameserversConfig = []
-			break
-		case "manual":
-			ipv4Config["Method"] = "manual"
-			let addr = service.checkIpAddress(ipv4Config["Address"])
-			/*
-			 * Make sure the ip settings are valid when switching to "manual"
-			 * When the ip settings are not valid, connman will continuously disconnect
-			 * and reconnect the service and it is impossible to set the ip-address.
-			 */
-			if (!addr) {
-				ipv4Config["Address"] = "169.254.1.2"
-				ipv4Config["Netmask"] = "255.255.255.0"
-				ipv4Config["Gateway"] = "169.254.1.1"
-			}
-			break
-		}
-		if (ipv4Config["Method"] !== oldMethod) {
-			service.ipv4Config = ipv4Config
-			service.nameserversConfig = nameserversConfig
-		}
+	function setAgent(action) {
+		setValueItem.setValue(JSON.stringify({Agent: action}))
 	}
 
-	Component.onCompleted: {
-		if (_wifi) {
-			_agent = Connman.registerAgent(_agentPath)
-		}
-	}
+	VeQuickItem {
+		id: service
 
-	Component.onDestruction: {
-		if (_wifi) {
-			Connman.unRegisterAgent(_agentPath)
-		}
-	}
+		uid: Global.venusPlatform.serviceUid + "/Network/Services"
 
-	Connections {
-		target: Connman
-		function onServiceRemoved(path) {
-			if (path === root.path) {
-				root.path = ""
+		property string service
+		property string state
+		property string method_
+		property string macAddress
+		property string ipAddress
+		property string netmask
+		property string gateway
+		property string nameserver
+		property string strength
+		readonly property bool manual: method_ === "manual"
+		property bool secured
+		property bool favorite
+		property bool completed
+
+		// Only handle changed value after component completion because otherwise <network> may not be set correctly.
+		onValueChanged: if (completed) parseJson()
+		Component.onCompleted: {
+			completed = true
+			parseJson()
+			if (root._wifi) {
+				setAgent("on")
 			}
 		}
-		function onServiceAdded(path) {
-			// refresh the service, else we may have a stale service object
-			root.path = Connman.getServiceList(technologyType)[0]
+
+		Component.onDestruction: {
+			if (root._wifi)
+				setAgent("off")
 		}
+
+		function parseJson() {
+			if (!isValid || typeof value !== "string") {
+				return
+			}
+
+			const services = JSON.parse(value)
+
+			let details
+
+			// Find the network service using service identifier
+			if (root.service.length > 0) {
+				for (const [network, networkDetails] of Object.entries(services[tech])) {
+					if (root.service === networkDetails["Service"]) {
+						root.network = network // SSID name may have been updated
+						details = networkDetails
+						break
+					}
+				}
+			} else if (network.length > 0) {
+				// If not available use the network name instead (in Ethernet case "Wired")
+				details = network && services[tech][network] ? services[tech][network] : undefined
+			}
+
+			if (details) {
+				root.service = details["Service"]
+				state = details["State"]
+				method_ = details["Method"]
+				ipAddress = details["Address"]
+				macAddress = details["Mac"]
+				netmask = details["Netmask"]
+				gateway = details["Gateway"]
+				nameserver = details["Nameservers"][0] || ""
+				strength = details["Strength"] || ""
+				secured = details["Secured"] === "yes"
+				favorite = details["Favorite"] === "yes"
+			}
+		}
+	}
+
+	VeQuickItem {
+		id: setValueItem
+		uid: Global.venusPlatform.serviceUid + "/Network/SetValue"
 	}
 
 	GradientListView {
 		id: settingsListView
-		model: root.service ? connectedModel : disconnectedModel
+		model: root.ready ? connectedModel : disconnectedModel
 	}
 
 	ObjectModel {
@@ -123,27 +133,34 @@ Page {
 
 		ListTextItem {
 			text: CommonWords.state
-			secondaryText: Utils.connmanServiceState(root.service)
+			secondaryText: Utils.connmanServiceState(service.state)
 		}
 
 		ListTextItem {
 			//% "Name"
 			text: qsTrId("settings_tcpip_name")
-			//% "[Hidden]"
-			secondaryText: root.service ? (service.name || qsTrId("settings_tcpip_hidden")) : ""
+			secondaryText: !root._wifi
+					 //% "Wired"
+					? qsTrId("settings_tcpip_wired")
+					 //% "[Hidden]"
+					: root.network || qsTrId("settings_tcpip_hidden")
 			allowed: root._wifi
 		}
 
 		ListTextField {
 			text: CommonWords.password
 			textField.maximumLength: 63
-			allowed: root.service && root._wifi
-					 && (root.service.state === "idle" || root.service.state === "failure")
-					 && !root.service.favorite && root._secured
+			allowed: root.ready && root._wifi && root._disconnected
+					 && !service.favorite && service.secured
 			writeAccessLevel: VenusOS.User_AccessType_User
 			onAccepted: {
-				root._agent.passphrase = textField.text
-				root.service.connect()
+				var obj = {
+					Service: service.service,
+					Action: "connect",
+					Passphrase: textField.text
+				}
+				var json = JSON.stringify(obj);
+				setValueItem.setValue(json)
 			}
 		}
 
@@ -152,13 +169,10 @@ Page {
 			text: qsTrId("settings_tcpip_connect_to_network")
 			//% "Connect"
 			button.text: qsTrId("settings_tcpip_connect")
-			allowed: root.service && root._wifi
-					 && (root.service.state === "idle" || root.service.state === "failure")
-					 && (root.service.favorite || !root._secured)
+			allowed: root.ready && root._wifi && root._disconnected
+					 && (service.favorite || !service.secured)
 			writeAccessLevel: VenusOS.User_AccessType_User
-			onClicked: {
-				root.service.connect()
-			}
+			onClicked: performAction("connect")
 		}
 
 		ListButton {
@@ -168,7 +182,7 @@ Page {
 			text: qsTrId("settings_tcpip_forget_network")
 			//% "Forget"
 			button.text: qsTrId("settings_tcpip_forget")
-			allowed: root.service && root._wifi && root.service.favorite
+			allowed: root.ready && root._wifi && service.favorite
 			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: Global.dialogLayer.open(forgetNetworkDialogComponent)
 
@@ -180,23 +194,24 @@ Page {
 					title: forgetNetworkButton.text
 					//% "Are you sure that you want to forget this network?"
 					description: qsTrId("settings_tcpip_forget_confirm")
-					onAccepted: {
-						root.service.remove()
-					}
+					onAccepted: performAction("remove")
 				}
 			}
 		}
 
-		ListTextItem {
+		ListQuantityItem {
 			text: CommonWords.signal_strength
-			secondaryText: root.service ? service.strength + "%" : ""
+			value: service.strength
+			unit: VenusOS.Units_Percentage
 			allowed: root._wifi
 		}
 
+		// TODO: Report MAC address (BSSID) of Wi-Fi networks (see Venus issue #364)
 		ListTextItem {
 			//% "MAC address"
 			text: qsTrId("settings_tcpip_mac_address")
-			secondaryText: root.service ? service.ethernet["Address"] : ""
+			secondaryText: service.macAddress
+			allowed: !root._wifi
 		}
 
 		ListRadioButtonGroup {
@@ -217,56 +232,59 @@ Page {
 			]
 			currentIndex: {
 				for (let i = 0; i < optionModel.length; ++i) {
-					if (optionModel[i].value === root._serviceMethod) {
+					if (optionModel[i].value === service.method_) {
 						return i
 					}
 				}
 				return -1
 			}
+
+			enabled: userHasReadAccess
+			allowed: defaultAllowed && currentIndex >= 0
+
 			onOptionClicked: function(index) {
-				root._setMethod(optionModel[index].value)
+				setServiceProperty("Method", optionModel[index].value)
 			}
 		}
 
 		ListIpAddressField {
 			text: CommonWords.ip_address
-			enabled: method.userHasWriteAccess && !root._readOnlySettings
-			textField.text: root._getIpv4Property("Address")
-			onAccepted: root._setIpv4Property("Address", textField.text)
+			enabled: method.userHasWriteAccess && service.manual
+			textField.text: service.ipAddress
+			onAccepted: setServiceProperty("Address", textField.text)
 		}
 
 		ListIpAddressField {
 			//% "Netmask"
 			text: qsTrId("settings_tcpip_netmask")
-			enabled: method.userHasWriteAccess && !root._readOnlySettings
-			textField.text: root._getIpv4Property("Netmask")
-			onAccepted: root._setIpv4Property("Netmask", textField.text)
+			enabled: method.userHasWriteAccess && service.manual
+			textField.text: service.netmask
+			onAccepted: setServiceProperty("Netmask", textField.text)
 		}
 
 		ListIpAddressField {
 			//% "Gateway"
 			text: qsTrId("settings_tcpip_gateway")
-			enabled: method.userHasWriteAccess && !root._readOnlySettings
-			textField.text: root._getIpv4Property("Gateway")
-			onAccepted: root._setIpv4Property("Gateway", textField.text)
+			enabled: method.userHasWriteAccess && service.manual
+			textField.text: service.gateway
+			onAccepted: setServiceProperty("Gateway", textField.text)
 		}
 
 		ListIpAddressField {
 			//% "DNS server"
 			text: qsTrId("settings_tcpip_dns_server")
-			enabled: method.userHasWriteAccess && !root._readOnlySettings
-			textField.text: root.service ? root.service.nameservers[0] || "" : ""
-			onAccepted: root.service.nameserversConfig = textField.text
+			enabled: method.userHasWriteAccess && service.manual
+			textField.text: service.nameserver
+			onAccepted: setServiceProperty("Nameserver", textField.text)
 		}
 
-		ListIpAddressField {
+		ListTextItem {
 			id: linklocal
 
 			//% "Link-local IP address"
 			text: qsTrId("settings_tcpip_link_local")
-			enabled: false
-			textField.text: "TODO fetch from vePlatform"
-			allowed: root.technologyType === "ethernet"
+			allowed: !root._wifi
+			dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Ethernet/LinkLocalIpAddress"
 		}
 	}
 }
