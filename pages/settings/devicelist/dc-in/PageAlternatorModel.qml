@@ -37,6 +37,7 @@ ObjectModel {
 	ListTextItem {
 		text: CommonWords.state
 		secondaryText: Global.system.systemStateToText(dataItem.value)
+		allowed: defaultAllowed && dataItem.isValid
 		dataItem.uid: root.bindPrefix + "/State"
 	}
 
