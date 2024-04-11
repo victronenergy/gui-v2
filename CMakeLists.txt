@@ -260,6 +260,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SeparatorBar.qml
     components/ShinyProgressArc.qml
     components/SideGauge.qml
+    components/SideMultiGauge.qml
     components/SolarDetailBox.qml
     components/SolarHistoryChart.qml
     components/SolarHistoryErrorView.qml
