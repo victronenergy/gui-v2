@@ -331,13 +331,13 @@ exported power v  0.4 |   /
 		}
 	}
 
-	ValueRange {
+	DynamicValueRange {
 		id: loadsPower
 
 		value: root.visible ? Global.system.loads.power : NaN
 	}
 
-	ValueRange {
+	DynamicValueRange {
 		id: inputsPower
 
 		value: root.visible ? Units.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : NaN
