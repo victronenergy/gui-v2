@@ -143,7 +143,7 @@ SwipeViewPage {
 
 			name: properties.name
 			icon.source: battery.icon
-			value: (!visible || isNaN(battery.stateOfCharge)) ? 0 : Math.round(battery.stateOfCharge)
+			value: visible && !isNaN(battery.stateOfCharge) ? battery.stateOfCharge : 0
 			voltage: battery.voltage
 			current: battery.current
 			status: Gauges.getValueStatus(value, properties.valueType)
@@ -181,7 +181,7 @@ SwipeViewPage {
 				x: root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
-				value: !visible ? 0 : acInputRange.valueAsRatio * 100
+				value: visible ? acInputRange.valueAsRatio * 100 : 0
 
 				// Gauge color changes only apply when there is a maximum value.
 				valueType: isNaN(acInputRange.maximumValue)
@@ -234,7 +234,7 @@ SwipeViewPage {
 				x: root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
-				value: !visible ? 0 : dcInputRange.valueAsRatio * 100
+				value: visible ? dcInputRange.valueAsRatio * 100 : 0
 
 				ArcGaugeQuantityRow {
 					id: dcInGaugeQuantity
@@ -319,7 +319,7 @@ SwipeViewPage {
 				x: -root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
-				value: !visible ? 0 : acLoadsRange.valueAsRatio * 100
+				value: visible ? acLoadsRange.valueAsRatio * 100 : 0
 
 				ArcGaugeQuantityRow {
 					alignment: Qt.AlignRight | (root._rightGaugeCount === 2 ? Qt.AlignBottom : Qt.AlignVCenter)
