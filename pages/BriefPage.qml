@@ -210,7 +210,7 @@ SwipeViewPage {
 					// When >= 2 left gauges, AC input is always the top one, so label aligns to
 					// the bottom.
 					alignment: Qt.AlignLeft | (root._leftGaugeCount >= 2 ? Qt.AlignBottom : Qt.AlignVCenter)
-					icon.source: root._inputsIconSource
+					icon.source: Global.acInputs.sourceIcon(Global.acInputs.activeInput.source)
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.dataObject: Global.acInputs.activeInput
@@ -247,7 +247,10 @@ SwipeViewPage {
 							// top, or is the first (top) gauge, so label aligns to the bottom.
 							? Qt.AlignLeft | (acInputGauge.active ? Qt.AlignTop : Qt.AlignBottom)
 							: Qt.AlignLeft| Qt.AlignVCenter
-					icon.source: root._inputsIconSource
+					icon.source: Global.dcInputs.model.count === 1
+							? VenusOS.dcInputIcon(Global.dcInputs.model.firstObject.source)
+							: "qrc:/images/icon_input_24.svg"
+
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.dataObject: Global.dcInputs
