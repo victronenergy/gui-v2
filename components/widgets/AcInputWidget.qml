@@ -62,7 +62,7 @@ OverviewWidget {
 			value: valueRange.valueAsRatio
 			visible: root.input && root.input.source !== VenusOS.AcInputs_InputSource_Generator
 
-			ValueRange {
+			DynamicValueRange {
 				id: valueRange
 
 				value: sideGauge.visible ? root.quantityLabel.value : NaN

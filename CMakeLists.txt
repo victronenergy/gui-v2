@@ -224,6 +224,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ControlValue.qml
     components/CpuMonitor.qml
     components/Device.qml
+    components/DynamicValueRange.qml
     components/ElectricalQuantityLabel.qml
     components/EnvironmentGauge.qml
     components/EnvironmentGaugePanel.qml

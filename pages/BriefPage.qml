@@ -200,7 +200,7 @@ SwipeViewPage {
 					quantityLabel.dataObject: Global.acInputs.activeInput
 				}
 
-				ValueRange {
+				DynamicValueRange {
 					id: acInputRange
 
 					value: acInGaugeQuantity.quantityLabel.value
@@ -249,7 +249,7 @@ SwipeViewPage {
 					quantityLabel.dataObject: Global.dcInputs
 				}
 
-				ValueRange {
+				DynamicValueRange {
 					id: dcInputRange
 					value: root.visible ? Global.dcInputs.power || 0 : 0
 				}
@@ -329,7 +329,7 @@ SwipeViewPage {
 					quantityLabel.dataObject: Global.system.ac.consumption
 				}
 
-				ValueRange {
+				DynamicValueRange {
 					id: acLoadsRange
 					value: root.visible ? Global.system.loads.acPower || 0 : 0
 					maximumValue: Global.system.loads.maximumAcPower
@@ -367,7 +367,7 @@ SwipeViewPage {
 					quantityLabel.dataObject: Global.system.dc
 				}
 
-				ValueRange {
+				DynamicValueRange {
 					id: dcLoadsRange
 					value: root.visible ? Global.system.loads.dcPower || 0 : 0
 				}
