@@ -41,7 +41,7 @@ SwipeViewPage {
 	  since it is the second gauge when listing the left gauges in a clockwise direction. If the
 	  solar gauge was not active, the index would be 0 instead.
 	*/
-	function _sideGaugeParameters(baseAngle, activeGaugeCount, activeGaugeIndex) {
+	function _sideGaugeParameters(baseAngle, activeGaugeCount, activeGaugeIndex, isMultiPhase) {
 		// Start/end angles are those for the large single-gauge case if there is only one gauge,
 		// otherwise this angle is split into equal segments for each active gauge (minus spacing).
 		let maxSideAngle
@@ -56,10 +56,26 @@ SwipeViewPage {
 		}
 		const gaugeStartAngle = baseAngle + (activeGaugeIndex * maxSideAngle) + baseAngleOffset
 		const gaugeEndAngle = gaugeStartAngle + maxSideAngle
-		return { start: gaugeStartAngle, end: gaugeEndAngle }
+
+		let angleOffset = 0
+		let phaseLabelHorizontalMargin = 0
+		if (isMultiPhase) {
+			// If this is a multi-phase gauge, SideMultiGauge will be used instead of SideGauge.
+			// Since SideMultiGauge shows 1,2,3 labels beneath the gauges, provide an angleOffset
+			// for adjusting the arc angle to make room for the labels. Also provide the edge margin
+			// to horizontally align each gauge label with its gauge.
+			angleOffset = activeGaugeCount === 1 ? Theme.geometry_briefPage_edgeGauge_angleOffset_one_gauge
+					: activeGaugeCount === 2 ? Theme.geometry_briefPage_edgeGauge_angleOffset_two_gauge
+					: Theme.geometry_briefPage_edgeGauge_angleOffset_three_gauge
+			phaseLabelHorizontalMargin = activeGaugeCount === 1 ? Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_one_gauge
+					: activeGaugeCount === 2 ? Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_two_gauge
+					: Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_three_gauge
+		}
+
+		return { start: gaugeStartAngle, end: gaugeEndAngle, angleOffset: angleOffset, phaseLabelHorizontalMargin: phaseLabelHorizontalMargin }
 	}
 
-	function _leftGaugeParameters(gauge) {
+	function _leftGaugeParameters(gauge, isMultiPhase = false) {
 		// In a clockwise direction, the gauges start from the solar gauge and go upwards to the AC
 		// input gauge.
 		const baseAngle = 270 - (Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
@@ -69,7 +85,7 @@ SwipeViewPage {
 		} else if (gauge === acInputGauge) {
 			gaugeIndex = (solarYieldGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0)
 		}
-		const params = _sideGaugeParameters(baseAngle, _leftGaugeCount, gaugeIndex)
+		const params = _sideGaugeParameters(baseAngle, _leftGaugeCount, gaugeIndex, isMultiPhase)
 
 		// Add y offset if gauge is aligned to the top or bottom.
 		let arcVerticalCenterOffset = 0
@@ -86,12 +102,12 @@ SwipeViewPage {
 		return Object.assign(params, { arcVerticalCenterOffset: arcVerticalCenterOffset })
 	}
 
-	function _rightGaugeParameters(gauge) {
+	function _rightGaugeParameters(gauge, isMultiPhase = false) {
 		// In a clockwise direction, the gauges start from the AC load gauge and go downwards to the
 		// DC load gauge.
 		const baseAngle = 90 - (Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
 		const gaugeIndex = gauge === acLoadGauge ? 0 : (acLoadGauge.active ? 1 : 0)
-		const params = _sideGaugeParameters(baseAngle, _rightGaugeCount, gaugeIndex)
+		const params = _sideGaugeParameters(baseAngle, _rightGaugeCount, gaugeIndex, isMultiPhase)
 
 		// Add y offset if gauge is aligned to the top or bottom.
 		let arcVerticalCenterOffset = 0
@@ -168,25 +184,25 @@ SwipeViewPage {
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? root._leftGaugeHeight : 0
 			active: !!Global.acInputs.activeInput
-			sourceComponent: SideGauge {
-				readonly property var gaugeParams: root._leftGaugeParameters(acInputGauge)
+
+			sourceComponent: SideMultiGauge {
+				readonly property var gaugeParams: root._leftGaugeParameters(acInputGauge, phaseModel && phaseModel.count > 1)
+				readonly property real startAngleOffset: gaugeParams.angleOffset || 0
 
 				// AC input gauge progresses in clockwise direction (i.e. upwards).
 				direction: PathArc.Clockwise
-				startAngle: gaugeParams.start || 0
+				startAngle: gaugeParams.start ? gaugeParams.start + startAngleOffset : 0
 				endAngle: gaugeParams.end || 0
+				phaseLabelHorizontalMargin: gaugeParams.phaseLabelHorizontalMargin || 0
 				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset || 0
 				horizontalAlignment: Qt.AlignLeft
 
 				x: root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
-				value: visible ? acInputRange.valueAsRatio * 100 : 0
+				phaseModel: Global.acInputs.activeInput.phases
 
-				// Gauge color changes only apply when there is a maximum value.
-				valueType: isNaN(acInputRange.maximumValue)
-						   ? VenusOS.Gauges_ValueType_NeutralPercentage
-						   : VenusOS.Gauges_ValueType_RisingPercentage
+				// TODO set maximumCurrent
 
 				AcInGaugeQuantityRow {
 					id: acInGaugeQuantity
@@ -198,18 +214,6 @@ SwipeViewPage {
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.dataObject: Global.acInputs.activeInput
-				}
-
-				DynamicValueRange {
-					id: acInputRange
-
-					value: acInGaugeQuantity.quantityLabel.value
-
-					// When showing current instead of power, set a max value to change the gauge colors
-					// when the value approaches the currentLimit.
-					maximumValue: acInGaugeQuantity.quantityLabel.unit === VenusOS.Units_Amp
-						? Global.acInputs.currentLimit
-						: NaN
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC input edge")
@@ -306,20 +310,25 @@ SwipeViewPage {
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? root._rightGaugeHeight : 0
 			active: !isNaN(Global.system.loads.acPower)
-			sourceComponent: SideGauge {
-				readonly property var gaugeParams: root._rightGaugeParameters(acLoadGauge)
+
+			sourceComponent: SideMultiGauge {
+				readonly property var gaugeParams: root._rightGaugeParameters(acLoadGauge, phaseModel.count > 1)
+				readonly property real startAngleOffset: -(gaugeParams.angleOffset || 0)
 
 				// AC load gauge progresses in counter-clockwise direction (i.e. upwards).
 				direction: PathArc.Counterclockwise
-				startAngle: gaugeParams.end || 0
+				startAngle: gaugeParams.end ? gaugeParams.end + startAngleOffset : 0
 				endAngle: gaugeParams.start || 0
+				phaseLabelHorizontalMargin: gaugeParams.phaseLabelHorizontalMargin || 0
 				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset || 0
 				horizontalAlignment: Qt.AlignRight
 
 				x: -root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
-				value: visible ? acLoadsRange.valueAsRatio * 100 : 0
+				phaseModel: Global.system.ac.consumption.phases
+
+				// TODO set maximumCurrent
 
 				ArcGaugeQuantityRow {
 					alignment: Qt.AlignRight | (root._rightGaugeCount === 2 ? Qt.AlignBottom : Qt.AlignVCenter)
@@ -327,12 +336,6 @@ SwipeViewPage {
 					rightPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.dataObject: Global.system.ac.consumption
-				}
-
-				DynamicValueRange {
-					id: acLoadsRange
-					value: root.visible ? Global.system.loads.acPower || 0 : 0
-					maximumValue: Global.system.loads.maximumAcPower
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC load edge")
