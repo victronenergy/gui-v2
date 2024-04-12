@@ -38,14 +38,14 @@ Item {
 			horizontalAlignment: root.horizontalAlignment
 			arcVerticalCenterOffset: root.arcVerticalCenterOffset
 			valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-			value: {
-				if (!visible || solarMeasurements.maxPower == 0) {
-					// No useful max yet, so show a full gauge
-					return 100
-				}
+			value: valueRange.valueAsRatio * 100
+
+			ValueRange {
+				id: valueRange
+
 				// First gauge shows the current runtime power, other gauges show historical values.
-				const power = model.index === 0 ? Global.system.solar.power : powerSampler.sampledAverages[model.index - 1]
-				return Utils.scaleToRange(power, 0, solarMeasurements.maxPower, 0, 100)
+				value: model.index === 0 ? Global.system.solar.power : powerSampler.sampledAverages[model.index - 1]
+				maximumValue: Global.system.solar.maximumPower
 			}
 		}
 	}
@@ -74,18 +74,6 @@ Item {
 			}
 			_activeSamples = []
 			sampledAverages = newAverages
-		}
-	}
-
-	Connections {
-		id: solarMeasurements
-
-		property real maxPower: NaN
-
-		target: Global.system.solar
-
-		function onPowerChanged() {
-			maxPower = isNaN(maxPower) ? Global.system.solar.power : Math.max(maxPower, Global.system.solar.power)
 		}
 	}
 }

@@ -138,25 +138,6 @@ function reactToSignalOnce(sig, slot) {
 	sig.connect(f)
 }
 
-function scaleToRange(value, valueMin, valueMax, scaledMin, scaledMax) {
-	if (valueMin >= valueMax) {
-		console.warn("scaleToRange() failed, valueMin", valueMin, ">= valueMax", valueMax)
-		return value
-	}
-	if (scaledMin >= scaledMax) {
-		console.warn("scaleToRange() failed, scaledMin", scaledMin, ">= valueMax", scaledMax)
-		return value
-	}
-	if (value < valueMin || value > valueMax) {
-		console.warn("scaleToRange() failed, value", value, "not within range", valueMin, valueMax)
-		return value
-	}
-
-	const origRange = valueMax - valueMin
-	const scaledRange = scaledMax - scaledMin
-	return scaledRange * (value / origRange)
-}
-
 // Can't use % operator, that gives remainder rather than a modulo that wraps.
 function modulo(dividend, divisor) {
 	return dividend - divisor * Math.floor(dividend / divisor)
