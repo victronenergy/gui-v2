@@ -15,20 +15,23 @@ ListItem {
 
 	signal clicked()
 
-	down: pressArea.containsPress
+	down: pressArea.containsPress || radioButton.down
 	enabled: userHasWriteAccess
 
 	content.children: [
 		RadioButton {
 			id: radioButton
 
-			onClicked: root.clicked()
+			// Alternative to binding "enabled: !checked". No clicked() signal
+			// got emitted when the button was disabled on checked=false.
+			onClicked: if (root.checked) root.clicked()
 		}
 	]
 
 	ListPressArea {
 		id: pressArea
 
+		enabled: !root.checked
 		radius: backgroundRect.radius
 		anchors {
 			fill: parent

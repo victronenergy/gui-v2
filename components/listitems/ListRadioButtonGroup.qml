@@ -97,7 +97,7 @@ ListNavigationItem {
 					text: Array.isArray(root.optionModel)
 						  ? modelData.display || ""
 						  : model.display || ""
-					enabled: !checked && (Array.isArray(root.optionModel)
+					enabled: (Array.isArray(root.optionModel)
 						  ? !modelData.readOnly
 						  : !model.readOnly)
 					primaryLabel.font.family: Array.isArray(root.optionModel)
