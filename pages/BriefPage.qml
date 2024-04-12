@@ -187,14 +187,14 @@ SwipeViewPage {
 
 			sourceComponent: SideMultiGauge {
 				readonly property var gaugeParams: root._leftGaugeParameters(acInputGauge, phaseModel && phaseModel.count > 1)
-				readonly property real startAngleOffset: gaugeParams.angleOffset || 0
+				readonly property real startAngleOffset: gaugeParams.angleOffset
 
 				// AC input gauge progresses in clockwise direction (i.e. upwards).
 				direction: PathArc.Clockwise
-				startAngle: gaugeParams.start ? gaugeParams.start + startAngleOffset : 0
-				endAngle: gaugeParams.end || 0
-				phaseLabelHorizontalMargin: gaugeParams.phaseLabelHorizontalMargin || 0
-				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset || 0
+				startAngle: gaugeParams.start + startAngleOffset
+				endAngle: gaugeParams.end
+				phaseLabelHorizontalMargin: gaugeParams.phaseLabelHorizontalMargin
+				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 				horizontalAlignment: Qt.AlignLeft
 
 				x: root._gaugeArcMargin
@@ -230,9 +230,9 @@ SwipeViewPage {
 
 				// DC input gauge progresses in clockwise direction (i.e. upwards).
 				direction: PathArc.Clockwise
-				startAngle: gaugeParams.start || 0
-				endAngle: gaugeParams.end || 0
-				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset || 0
+				startAngle: gaugeParams.start
+				endAngle: gaugeParams.end
+				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 				horizontalAlignment: Qt.AlignLeft
 
 				x: root._gaugeArcMargin
@@ -275,9 +275,9 @@ SwipeViewPage {
 
 				// Solar gauge progresses in counter-clockwise direction (i.e. downwards).
 				direction: PathArc.Counterclockwise
-				startAngle: gaugeParams.end || 0
-				endAngle: gaugeParams.start || 0
-				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset || 0
+				startAngle: gaugeParams.end
+				endAngle: gaugeParams.start
+				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 				horizontalAlignment: Qt.AlignLeft
 
 				x: root._gaugeArcMargin
@@ -316,14 +316,14 @@ SwipeViewPage {
 
 			sourceComponent: SideMultiGauge {
 				readonly property var gaugeParams: root._rightGaugeParameters(acLoadGauge, phaseModel.count > 1)
-				readonly property real startAngleOffset: -(gaugeParams.angleOffset || 0)
+				readonly property real startAngleOffset: -gaugeParams.angleOffset
 
 				// AC load gauge progresses in counter-clockwise direction (i.e. upwards).
 				direction: PathArc.Counterclockwise
-				startAngle: gaugeParams.end ? gaugeParams.end + startAngleOffset : 0
-				endAngle: gaugeParams.start || 0
-				phaseLabelHorizontalMargin: gaugeParams.phaseLabelHorizontalMargin || 0
-				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset || 0
+				startAngle: gaugeParams.end + startAngleOffset
+				endAngle: gaugeParams.start
+				phaseLabelHorizontalMargin: gaugeParams.phaseLabelHorizontalMargin
+				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 				horizontalAlignment: Qt.AlignRight
 
 				x: -root._gaugeArcMargin
@@ -355,9 +355,9 @@ SwipeViewPage {
 
 				// DC load gauge progresses in counter-clockwise direction (i.e. upwards).
 				direction: PathArc.Counterclockwise
-				startAngle: gaugeParams.end || 0
-				endAngle: gaugeParams.start || 0
-				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset || 0
+				startAngle: gaugeParams.end
+				endAngle: gaugeParams.start
+				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 				horizontalAlignment: Qt.AlignRight
 
 				x: -root._gaugeArcMargin
