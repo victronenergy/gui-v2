@@ -183,7 +183,7 @@ SwipeViewPage {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? root._leftGaugeHeight : 0
-			active: !!Global.acInputs.activeInput
+			active: !!Global.acInputs.activeInput && !!Global.acInputs.activeInputInfo
 
 			sourceComponent: SideMultiGauge {
 				readonly property var gaugeParams: root._leftGaugeParameters(acInputGauge, phaseModel && phaseModel.count > 1)
@@ -202,8 +202,9 @@ SwipeViewPage {
 				animationEnabled: root.animationEnabled
 				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 				phaseModel: Global.acInputs.activeInput.phases
-
-				// TODO set maximumCurrent
+				phaseModelProperty: "current"
+				minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
+				maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
 
 				AcInGaugeQuantityRow {
 					id: acInGaugeQuantity
@@ -333,8 +334,8 @@ SwipeViewPage {
 				animationEnabled: root.animationEnabled
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage
 				phaseModel: Global.system.ac.consumption.phases
-
-				// TODO set maximumCurrent
+				phaseModelProperty: "current"
+				maximumValue: Global.system.ac.consumption.maximumCurrent
 
 				ArcGaugeQuantityRow {
 					alignment: Qt.AlignRight | (root._rightGaugeCount === 2 ? Qt.AlignBottom : Qt.AlignVCenter)
