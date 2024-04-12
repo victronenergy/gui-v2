@@ -5,11 +5,12 @@
 
 #include "cpuinfo.h"
 
+using namespace Victron::VenusOS;
+
+#ifdef Q_OS_LINUX
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-using namespace Victron::VenusOS;
 
 int get_cpu_usage(unsigned long long &previousBusy, unsigned long long &previousIdle) {
 	// Read CPU stats
@@ -24,7 +25,6 @@ int get_cpu_usage(unsigned long long &previousBusy, unsigned long long &previous
 	busyTotal = user + nice + system;
 	fclose(file);
 
-
 	// Calculate CPU usage
 	unsigned long long busy = busyTotal - previousBusy;
 	unsigned long long idle = idleTotal - previousIdle;
@@ -32,6 +32,7 @@ int get_cpu_usage(unsigned long long &previousBusy, unsigned long long &previous
 	previousIdle = idleTotal;
 	return qRound((busy * 100.0) / (busy + idle));
 }
+#endif
 
 CpuInfo::CpuInfo(QObject *parent)
 	: QObject(parent)
