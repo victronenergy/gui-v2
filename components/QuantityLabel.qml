@@ -12,7 +12,7 @@ Item {
 	property alias value: quantityInfo.value
 	property alias unit: quantityInfo.unitType
 	property alias font: unitLabel.font
-	property color valueColor: Theme.color_font_primary
+	property alias valueColor: valueLabel.color
 	property alias unitColor: unitLabel.color
 	property alias unitVisible: unitLabel.visible
 	property int alignment: Qt.AlignHCenter
@@ -36,27 +36,14 @@ Item {
 			right: root.alignment & Qt.AlignRight ? parent.right : undefined
 		}
 
-		Repeater {
-			model: quantityInfo.number.length
-			delegate: Image {
-				required property int index
+		Label {
+			id: valueLabel
 
-				source: "image://digits/%1?pixelSize=%2&weight=%3&color=%4"
-						.arg(quantityInfo.number[index])
-						.arg(root.font.pixelSize)
-						.arg(root.font.weight)
-						.arg(root.valueColor)
-
-				// Workaround for QTBUG-38127 (image providers generating blurry images due to
-				// missing support for device pixel ratio).
-				// Set any non-null sourceSize, in order to trigger a code path in Qt where the
-				// implicit size of this image will be the size of the texture returned by the image
-				// provider, divided by the device pixel ratio.
-				// It's OK for this sourceSize width/height to be 0, since DigitImageProvider
-				// internally ignores the sourceSize (i.e. the requestedSize passed to requestImage()).
-				sourceSize.width: 0
-				sourceSize.height: 0
-			}
+			color: Theme.color_font_primary
+			text: quantityInfo.number
+			font.pixelSize: root.font.pixelSize
+			font.weight: root.font.weight
+			font.family: "Museo Sans 500 Mono digits"
 		}
 
 		Item {

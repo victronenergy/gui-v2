@@ -280,7 +280,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/ToastNotification.qml
     components/Utils.js
     components/ValueRange.qml
-    components/VenusFontLoader.qml
     components/VerticalGauge.qml
     components/ViewGradient.qml
     components/ClassAndVrmInstance.qml
@@ -645,8 +644,6 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/aggregatedevicemodel.cpp
     src/basedevicemodel.h
     src/basedevicemodel.cpp
-    src/digitimageprovider.h
-    src/digitimageprovider.cpp
     src/theme.h
     src/themeobjects.h
     src/backendconnection.h
@@ -1016,6 +1013,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
     BIG_RESOURCES
     FILES
         fonts/MuseoSans-500.otf
+        fonts/MuseoSans-500-monospaced-digits.otf
         images/acloads.svg
         images/alternator.svg
         images/icon_battery_24.svg

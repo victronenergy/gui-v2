@@ -3,7 +3,6 @@
 ** See LICENSE.txt for license information.
 */
 
-#include "src/digitimageprovider.h"
 #include "src/language.h"
 #include "src/logging.h"
 #include "src/backendconnection.h"
@@ -245,7 +244,6 @@ int main(int argc, char *argv[])
 
 	QQmlEngine engine;
 	initBackend(&enableFpsCounter, &skipSplashScreen);
-	engine.addImageProvider(QStringLiteral("digits"), new Victron::VenusOS::DigitImageProvider);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
 	/* Force construction of translator */
