@@ -259,9 +259,10 @@ SwipeViewPage {
 					quantityLabel.dataObject: Global.dcInputs
 				}
 
-				DynamicValueRange {
+				ValueRange {
 					id: dcInputRange
 					value: root.visible ? Global.dcInputs.power || 0 : 0
+					maximumValue: Global.dcInputs.maximumPower
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load DC input edge")
