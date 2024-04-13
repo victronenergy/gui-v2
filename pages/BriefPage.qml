@@ -379,9 +379,10 @@ SwipeViewPage {
 					quantityLabel.dataObject: Global.system.dc
 				}
 
-				DynamicValueRange {
+				ValueRange {
 					id: dcLoadsRange
 					value: root.visible ? Global.system.loads.dcPower || 0 : 0
+					maximumValue: Global.system.dc.maximumPower
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load DC load gauge")
