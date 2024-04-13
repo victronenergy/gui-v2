@@ -28,10 +28,11 @@ SwipeViewPage {
 	}
 
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
-	readonly property real _leftGaugeHeight: Theme.geometry_briefPage_largeEdgeGauge_height / _leftGaugeCount
-
 	readonly property int _rightGaugeCount: (acLoadGauge.active ? 1 : 0) + (dcLoadGauge.active ? 1 : 0)
-	readonly property real _rightGaugeHeight: Theme.geometry_briefPage_largeEdgeGauge_height / _rightGaugeCount
+
+	function _gaugeHeight(gaugeCount) {
+		return Theme.geometry_briefPage_largeEdgeGauge_height / gaugeCount
+	}
 
 	/*
 	  Returns the start/end angles for the gauge at the specified activeGaugeIndex, where the index
@@ -72,10 +73,21 @@ SwipeViewPage {
 					: Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_three_gauge
 		}
 
-		return { start: gaugeStartAngle, end: gaugeEndAngle, angleOffset: angleOffset, phaseLabelHorizontalMargin: phaseLabelHorizontalMargin }
+		return {
+			start: gaugeStartAngle,
+			end: gaugeEndAngle,
+			angleOffset: angleOffset,
+			phaseLabelHorizontalMargin: phaseLabelHorizontalMargin,
+			activeGaugeCount: activeGaugeCount
+		}
 	}
 
 	function _leftGaugeParameters(gauge, isMultiPhase = false) {
+		// Store _leftGaugeCount in a temporary var, as it may change value unexpectedly during the
+		// function call if it is updated via its property binding.
+		const activeGaugeCount = _leftGaugeCount
+		const gaugeHeight = _gaugeHeight(activeGaugeCount)
+
 		// In a clockwise direction, the gauges start from the solar gauge and go upwards to the AC
 		// input gauge.
 		const baseAngle = 270 - (Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
@@ -85,34 +97,39 @@ SwipeViewPage {
 		} else if (gauge === acInputGauge) {
 			gaugeIndex = (solarYieldGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0)
 		}
-		const params = _sideGaugeParameters(baseAngle, _leftGaugeCount, gaugeIndex, isMultiPhase)
+		const params = _sideGaugeParameters(baseAngle, activeGaugeCount, gaugeIndex, isMultiPhase)
 
 		// Add y offset if gauge is aligned to the top or bottom.
 		let arcVerticalCenterOffset = 0
-		if (_leftGaugeCount === 2) {
-			arcVerticalCenterOffset = gaugeIndex === 0 ? -(_leftGaugeHeight / 2) : _leftGaugeHeight / 2
-		} else if (_leftGaugeCount === 3) {
+		if (activeGaugeCount === 2) {
+			arcVerticalCenterOffset = gaugeIndex === 0 ? -(gaugeHeight / 2) : gaugeHeight / 2
+		} else if (activeGaugeCount === 3) {
 			// The second (center) gauge does not need an offset, as it will be vertically centered.
 			if (gaugeIndex === 0) {
-				arcVerticalCenterOffset = -_leftGaugeHeight
+				arcVerticalCenterOffset = -gaugeHeight
 			} else if (gaugeIndex === 2) {
-				arcVerticalCenterOffset = _leftGaugeHeight
+				arcVerticalCenterOffset = gaugeHeight
 			}
 		}
 		return Object.assign(params, { arcVerticalCenterOffset: arcVerticalCenterOffset })
 	}
 
 	function _rightGaugeParameters(gauge, isMultiPhase = false) {
+		// Store _rightGaugeCount in a temporary var, as it may change value unexpectedly during the
+		// function call if it is updated via its property binding.
+		const activeGaugeCount = _rightGaugeCount
+		const gaugeHeight = _gaugeHeight(activeGaugeCount)
+
 		// In a clockwise direction, the gauges start from the AC load gauge and go downwards to the
 		// DC load gauge.
 		const baseAngle = 90 - (Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
 		const gaugeIndex = gauge === acLoadGauge ? 0 : (acLoadGauge.active ? 1 : 0)
-		const params = _sideGaugeParameters(baseAngle, _rightGaugeCount, gaugeIndex, isMultiPhase)
+		const params = _sideGaugeParameters(baseAngle, activeGaugeCount, gaugeIndex, isMultiPhase)
 
 		// Add y offset if gauge is aligned to the top or bottom.
 		let arcVerticalCenterOffset = 0
-		if (_rightGaugeCount === 2) {
-			arcVerticalCenterOffset = gaugeIndex === 0 ? _rightGaugeHeight / 2 : -(_rightGaugeHeight / 2)
+		if (activeGaugeCount === 2) {
+			arcVerticalCenterOffset = gaugeIndex === 0 ? gaugeHeight / 2 : -(gaugeHeight / 2)
 		}
 		return Object.assign(params, { arcVerticalCenterOffset: arcVerticalCenterOffset })
 	}
@@ -182,7 +199,7 @@ SwipeViewPage {
 			id: acInputGauge
 
 			width: Theme.geometry_briefPage_edgeGauge_width
-			height: active ? root._leftGaugeHeight : 0
+			height: active ? root._gaugeHeight(root._leftGaugeCount) : 0
 			active: !!Global.acInputs.activeInput && !!Global.acInputs.activeInputInfo
 
 			sourceComponent: SideMultiGauge {
@@ -211,7 +228,7 @@ SwipeViewPage {
 
 					// When >= 2 left gauges, AC input is always the top one, so label aligns to
 					// the bottom.
-					alignment: Qt.AlignLeft | (root._leftGaugeCount >= 2 ? Qt.AlignBottom : Qt.AlignVCenter)
+					alignment: Qt.AlignLeft | (gaugeParams.activeGaugeCount >= 2 ? Qt.AlignBottom : Qt.AlignVCenter)
 					icon.source: Global.acInputs.sourceIcon(Global.acInputs.activeInput.source)
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
@@ -225,7 +242,7 @@ SwipeViewPage {
 			id: dcInputGauge
 
 			width: Theme.geometry_briefPage_edgeGauge_width
-			height: active ? root._leftGaugeHeight : 0
+			height: active ? root._gaugeHeight(root._leftGaugeCount) : 0
 			active: Global.dcInputs.model.count > 0
 			sourceComponent: SideGauge {
 				readonly property var gaugeParams: root._leftGaugeParameters(dcInputGauge)
@@ -245,7 +262,7 @@ SwipeViewPage {
 
 				ArcGaugeQuantityRow {
 					id: dcInGaugeQuantity
-					alignment: root._leftGaugeCount === 2
+					alignment: gaugeParams.activeGaugeCount === 2
 							// DC input gauge is the second (bottom) gauge, so label aligns to the
 							// top, or is the first (top) gauge, so label aligns to the bottom.
 							? Qt.AlignLeft | (acInputGauge.active ? Qt.AlignTop : Qt.AlignBottom)
@@ -272,7 +289,7 @@ SwipeViewPage {
 			id: solarYieldGauge
 
 			width: Theme.geometry_briefPage_edgeGauge_width
-			height: active ? root._leftGaugeHeight : 0
+			height: active ? root._gaugeHeight(root._leftGaugeCount) : 0
 			active: Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0
 			sourceComponent: SolarYieldGauge {
 				readonly property var gaugeParams: root._leftGaugeParameters(solarYieldGauge)
@@ -291,7 +308,7 @@ SwipeViewPage {
 				ArcGaugeQuantityRow {
 					// When >= 2 left gauges, solar gauge is always the bottom one, so label aligns
 					// to the top.
-					alignment: Qt.AlignLeft | (root._leftGaugeCount >= 2 ? Qt.AlignTop : Qt.AlignVCenter)
+					alignment: Qt.AlignLeft | (gaugeParams.activeGaugeCount >= 2 ? Qt.AlignTop : Qt.AlignVCenter)
 					icon.source: "qrc:/images/solaryield.svg"
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
@@ -315,7 +332,7 @@ SwipeViewPage {
 			id: acLoadGauge
 
 			width: Theme.geometry_briefPage_edgeGauge_width
-			height: active ? root._rightGaugeHeight : 0
+			height: active ? root._gaugeHeight(root._rightGaugeCount) : 0
 			active: !isNaN(Global.system.loads.acPower)
 
 			sourceComponent: SideMultiGauge {
@@ -339,7 +356,7 @@ SwipeViewPage {
 				maximumValue: Global.system.ac.consumption.maximumCurrent
 
 				ArcGaugeQuantityRow {
-					alignment: Qt.AlignRight | (root._rightGaugeCount === 2 ? Qt.AlignBottom : Qt.AlignVCenter)
+					alignment: Qt.AlignRight | (gaugeParams.activeGaugeCount === 2 ? Qt.AlignBottom : Qt.AlignVCenter)
 					icon.source: dcLoadGauge.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 					rightPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
@@ -353,7 +370,7 @@ SwipeViewPage {
 			id: dcLoadGauge
 
 			width: Theme.geometry_briefPage_edgeGauge_width
-			height: active ? root._rightGaugeHeight : 0
+			height: active ? root._gaugeHeight(root._rightGaugeCount) : 0
 			active: !isNaN(Global.system.loads.dcPower)
 			sourceComponent: SideGauge {
 				readonly property var gaugeParams: root._rightGaugeParameters(dcLoadGauge)
@@ -372,7 +389,7 @@ SwipeViewPage {
 				value: visible ? dcLoadsRange.valueAsRatio * 100 : 0
 
 				ArcGaugeQuantityRow {
-					alignment: Qt.AlignRight | (root._rightGaugeCount === 2 ? Qt.AlignTop : Qt.AlignVCenter)
+					alignment: Qt.AlignRight | (gaugeParams.activeGaugeCount === 2 ? Qt.AlignTop : Qt.AlignVCenter)
 					icon.source: "qrc:/images/dcloads.svg"
 					rightPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
