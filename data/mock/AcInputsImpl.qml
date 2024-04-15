@@ -105,6 +105,10 @@ QtObject {
 							inputSysInfo["_" + configProperty].setValue(configValue)
 						}
 					}
+
+					// Hardcode the min/max currents
+					_minimumCurrent.setValue(-20)
+					_maximumCurrent.setValue(20)
 				}
 			}
 		}
@@ -141,14 +145,12 @@ QtObject {
 				const phase = phases.objectAt(i)
 				if (zeroEnergyFlow) {
 					phase._power.setValue(NaN)
+					phase._current.setValue(NaN)
 				} else {
-					const value = negativeEnergyFlow
-								? (Math.random() * 300) * -1
-								: Math.random() * 300
-					phase._power.setValue(value)
+					phase._power.setValue(Math.random() * 300 * (negativeEnergyFlow ? -1 : 1))
+					phase._current.setValue(Math.random() * 20 * (negativeEnergyFlow ? -1 : 1))
 				}
 				totalPower = Units.sumRealNumbers(totalPower, phase._power.value)
-				phase._current.setValue(Math.random() * 10)
 			}
 
 			// For vebus/grid/genset services, forcibly update the total power
