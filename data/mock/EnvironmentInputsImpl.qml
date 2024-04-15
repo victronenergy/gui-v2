@@ -14,8 +14,8 @@ Item {
 
 	Connections {
 		target: Global.mockDataSimulator
-		function onEnvironmentalInputsEnabledChanged() {
-			if (!Global.mockDataSimulator.environmentalInputsEnabled) {
+		function onLevelsEnabledChanged() {
+			if (!Global.mockDataSimulator.levelsEnabled) {
 				_createdObjects = []
 				Global.environmentInputs.model.clear()
 			}
@@ -23,7 +23,7 @@ Item {
 	}
 
 	function populate() {
-		if (Global.mockDataSimulator.environmentalInputsEnabled) {
+		if (Global.mockDataSimulator.levelsEnabled) {
 			const inputCount = Math.ceil(Math.random() * 4)
 			for (let i = 0; i < inputCount; ++i) {
 				const properties = {

@@ -10,6 +10,11 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	required property string navButtonText
+	required property url navButtonIcon
+	required property url url
+	required property SwipeView view
+
 	// Allow animations if this is the current page, or when dragging between pages
 	animationEnabled: defaultAnimationEnabled && visible
 

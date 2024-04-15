@@ -39,7 +39,7 @@ Item {
 				id: buttonDelegate
 
 				width: root.width / buttonRepeater.count
-				height: parent.height
+				height: parent ? parent.height : 0
 				color: modelData.enabled === false && model.index !== root.currentIndex
 					   ? Theme.color_background_disabled
 					   : (mouseArea.pressed || model.index === root.currentIndex

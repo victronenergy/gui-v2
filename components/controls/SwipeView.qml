@@ -47,7 +47,7 @@ T.SwipeView {
 		snapMode: ListView.SnapOneItem
 		boundsBehavior: Flickable.StopAtBounds
 
-		highlightRangeMode: Global.allPagesLoaded ? ListView.StrictlyEnforceRange : ListView.NoHighlightRange
+		highlightRangeMode: ListView.StrictlyEnforceRange
 		preferredHighlightBegin: 0
 		preferredHighlightEnd: 0
 		highlightMoveDuration: 250

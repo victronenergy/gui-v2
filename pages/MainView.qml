@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls as C
 
 Item {
 	id: root
@@ -15,7 +14,7 @@ Item {
 	property bool controlsActive
 	readonly property Page currentPage: controlsActive && controlCardsLoader.status === Loader.Ready ? controlCardsLoader.item
 			   : !!pageStack.currentItem ? pageStack.currentItem
-			   : !!swipeView && swipeView.currentItem && swipeView.currentItem.status === Loader.Ready ? swipeView.currentItem.item
+			   : !!swipeView ? swipeView.currentItem
 			   : null
 
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
@@ -64,55 +63,27 @@ Item {
 		asynchronous: true
 		sourceComponent: swipeViewComponent
 
-		visible: pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
+		visible: swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
 	}
 
 	Component {
 		id: swipeViewComponent
 		SwipeView {
 			id: _swipeView
+
+			property bool ready: Global.allPagesLoaded && !moving // hide this view until all pages are loaded and we have scrolled back to the brief page
+
+			onReadyChanged: if (ready) ready = true // remove binding
 			anchors.fill: parent
 			onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
-
-			Connections {
-				enabled: !Global.allPagesLoaded
-				target: _swipeView
-				function onMovingChanged() {
-					if (!parent.moving && repeater.pagesLoaded === repeater.count) {
-						Global.allPagesLoaded = true
-					}
-				}
-			}
-
-			Repeater {
-				id: repeater
-
-				property int pagesLoaded: 0
-
-				model: navBar.model
-
-				onPagesLoadedChanged: {
-					if (pagesLoaded === count && !Global.allPagesLoaded) {
-						_swipeView.setCurrentIndex(0)
-						navBar.setCurrentIndex(0)
-					}
-				}
-
-				Loader {
-					id: loader
-
-					// Once https://bugreports.qt.io/browse/QTBUG-115468 is fixed, the following expression for 'visible'
-					// can be replaced with: visible: C.SwipeView.view.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)
-					sourceComponent: model.sourceComponent
-					visible: Global.allPagesLoaded && (_swipeView.moving || SwipeView.isCurrentItem)
-					onStatusChanged: {
-						if (status === Loader.Ready) {
-							repeater.pagesLoaded++
-						}
-					}
-				}
-			}
+			contentChildren: swipePageModel.children
+			Component.onCompleted: Global.allPagesLoaded = true
 		}
+	}
+
+	SwipePageModel {
+		id: swipePageModel
+		view: swipeView
 	}
 
 	Loader {
@@ -230,12 +201,9 @@ Item {
 		y: root.height + 4  // nudge below the visible area for wasm
 		color: root.backgroundColor
 		opacity: 0
+		model: swipeView.contentModel
 
-		onCurrentIndexChanged: {
-			if (swipeView) {
-				swipeView.currentIndex = currentIndex
-			}
-		}
+		onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
 
 		Component.onCompleted: pageManager.navBar = navBar
 

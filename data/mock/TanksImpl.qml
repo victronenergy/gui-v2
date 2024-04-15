@@ -14,7 +14,7 @@ QtObject {
 	property var _createdObjects: []
 
 	function populate() {
-		if (!Global.mockDataSimulator.tanksEnabled) {
+		if (!Global.mockDataSimulator.levelsEnabled) {
 			return
 		}
 
@@ -129,9 +129,9 @@ QtObject {
 		}
 	}
 
-	property bool tanksEnabled: Global.mockDataSimulator.tanksEnabled
-	onTanksEnabledChanged: {
-		if (tanksEnabled) {
+	property bool levelsEnabled: Global.mockDataSimulator.levelsEnabled
+	onLevelsEnabledChanged: {
+		if (levelsEnabled) {
 			let model
 			model = Global.tanks.tankModel(Math.floor(Math.random() * Global.tanks.tankTypes.length))
 			const randomLevel = Math.random()

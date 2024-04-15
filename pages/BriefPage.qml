@@ -139,6 +139,10 @@ SwipeViewPage {
 		return Object.assign(params, { arcVerticalCenterOffset: arcVerticalCenterOffset })
 	}
 
+	//% "Brief"
+	navButtonText: qsTrId("nav_brief")
+	navButtonIcon: "qrc:/images/brief.svg"
+	url: "qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml"
 	backgroundColor: Theme.color_briefPage_background
 	fullScreenWhenIdle: true
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
