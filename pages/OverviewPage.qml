@@ -146,11 +146,6 @@ SwipeViewPage {
 		for (let i = 0; i < widgets.length; ++i) {
 			const connectors = widgets[i].connectors
 			for (let j = 0; j < connectors.length; ++j) {
-				// For all left widgets except for solar (which has two connectors), straighten the
-				// connector if there is only one widget (as it will expand to full size).
-				if (widgets === _leftWidgets) {
-					connectors[j].straight = connectors.length === 1 && _leftWidgets.length === 1
-				}
 				connectors[j].reset()
 			}
 		}
@@ -411,7 +406,6 @@ SwipeViewPage {
 
 			WidgetConnectorAnchor {
 				location: VenusOS.WidgetConnector_Location_Right
-				y: acInputWidgetConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
 				visible: acInputWidgetConnector.visible
 			}
 
@@ -444,7 +438,6 @@ SwipeViewPage {
 
 			WidgetConnectorAnchor {
 				location: VenusOS.WidgetConnector_Location_Right
-				y: dcGeneratorConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
 				visible: dcGeneratorConnector.visible
 			}
 
@@ -477,7 +470,6 @@ SwipeViewPage {
 
 			WidgetConnectorAnchor {
 				location: VenusOS.WidgetConnector_Location_Right
-				y: dcInputConnector.straight ? inverterLeftConnectorAnchor.y : defaultY
 				visible: dcInputConnector.visible
 			}
 
@@ -690,7 +682,6 @@ SwipeViewPage {
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
-		straight: _rightWidgets.length <= 2   // straight if only AC Loads is present, or AC Loads plus EVCS or DC Loads
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
@@ -773,7 +764,6 @@ SwipeViewPage {
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
-			y: root._rightWidgets.length <= 2 ? inverterLeftConnectorAnchor.y : defaultY
 		}
 
 		WidgetConnectorAnchor {

@@ -21,13 +21,8 @@ Item {
 	property bool animationEnabled
 	readonly property bool defaultVisible: startWidget.visible && endWidget.visible && _initialized
 
-	// Forces a straight line by aligning the anchor points using the centre of the smaller widget
-	property bool straight
-
 	readonly property bool _animated: _initialized && visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated && animationEnabled
-
 	property real _electronTravelDistance
-
 	property bool _initialized
 
 	function reset() {
@@ -133,27 +128,16 @@ Item {
 					? Theme.geometry_overviewPage_connector_anchor_width
 					: Theme.geometry_overviewPage_connector_anchor_height
 
-			const _startX = startLocation === VenusOS.WidgetConnector_Location_Left
+			const startX = startLocation === VenusOS.WidgetConnector_Location_Left
 				  ? startWidgetRect.x - anchorWidth
 				  : startLocation === VenusOS.WidgetConnector_Location_Right
 					? startWidgetRect.x + startWidgetRect.width + anchorWidth
 					: startWidgetRect.x + startWidgetRect.width/2   // Top/Bottom location
-			const _endX = endLocation === VenusOS.WidgetConnector_Location_Left
+			const endX = endLocation === VenusOS.WidgetConnector_Location_Left
 				  ? endWidgetRect.x - anchorWidth
 				  : endLocation === VenusOS.WidgetConnector_Location_Right
 					? endWidgetRect.x + endWidgetRect.width + anchorWidth
 					: endWidgetRect.x + endWidgetRect.width/2 // Top/Bottom location
-			let startX = _startX
-			let endX = _endX
-
-			// If the path is straight, align the path to the smaller of the start/end widgets.
-			if (straight && direction === Qt.Vertical) {
-				if (startWidgetRect.width > endWidgetRect.width) {
-					startX = _endX
-				} else if (startWidgetRect.width < endWidgetRect.width) {
-					endX = _startX
-				}
-			}
 
 			// x positions stay constant. The anchor points must be positioned with x value instead of
 			// anchor bindings, else the position may be incorrect when reloadPathLayout() is called.
@@ -171,27 +155,16 @@ Item {
 					: Theme.geometry_overviewPage_connector_anchor_width
 
 			// Work out the start and end of the path depending on the direction and orientation.
-			const _startY = startLocation === VenusOS.WidgetConnector_Location_Top
+			const startY = startLocation === VenusOS.WidgetConnector_Location_Top
 				  ? startWidgetRect.y - anchorHeight
 				  : startLocation === VenusOS.WidgetConnector_Location_Bottom
 					? startWidgetRect.y + startWidgetRect.height + anchorHeight
 					: startWidgetRect.y + startWidgetRect.height/2  // Left/Right location
-			const _endY = endLocation === VenusOS.WidgetConnector_Location_Top
+			const endY = endLocation === VenusOS.WidgetConnector_Location_Top
 				  ? endWidgetRect.y - anchorHeight
 				  : endLocation === VenusOS.WidgetConnector_Location_Bottom
 					? endWidgetRect.y + endWidgetRect.height + anchorHeight
 					: endWidgetRect.y + endWidgetRect.height/2  // Left/Right location
-			let startY = _startY
-			let endY = _endY
-
-			// If the path is straight, align the path to the smaller of the start/end widgets.
-			if (straight && direction === Qt.Horizontal) {
-				if (startWidgetRect.height > endWidgetRect.height) {
-					startY = _endY
-				} else if (startWidgetRect.height < endWidgetRect.height) {
-					endY = _startY
-				}
-			}
 
 			// y and height change depending on compact/expanded state
 			if (expandedGeometry) {
