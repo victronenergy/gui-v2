@@ -72,9 +72,14 @@ QtObject {
 		triggeredOnStart: true
 
 		onTriggered: {
-			Global.system.dc.power = 500 + Math.floor(Math.random() * 100)
+			Global.system.dc.power = Math.random() * 600
 			Global.system.dc.voltage = 20 + Math.floor(Math.random() * 10)
 		}
+	}
+
+	readonly property VeQuickItem _maximumDcPower: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/System/Power/Max"
+		Component.onCompleted: setValue(600)
 	}
 
 	//--- veBus ---
