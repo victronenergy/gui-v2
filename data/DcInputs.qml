@@ -11,6 +11,7 @@ QtObject {
 
 	property real power: NaN
 	property real current: NaN
+	readonly property real maximumPower: _maximumPower.value === undefined ? NaN : _maximumPower.value
 
 	property DeviceModel model: DeviceModel {
 		modelId: "dcInputs"
@@ -134,6 +135,10 @@ QtObject {
 			//% "Wind charger"
 			return qsTrId("dcInputs_wind_charger")
 		}
+	}
+
+	readonly property VeQuickItem _maximumPower: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/Input/Power/Max"
 	}
 
 	Component.onCompleted: Global.dcInputs = root

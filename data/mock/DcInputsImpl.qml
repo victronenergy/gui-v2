@@ -61,6 +61,11 @@ QtObject {
 		_createdObjects.push(input)
 	}
 
+	readonly property VeQuickItem _maximumPower: VeQuickItem {
+		uid: Global.system.serviceUid + "/Dc/Input/Power/Max"
+		Component.onCompleted: setValue(200)
+	}
+
 	property Component inputComponent: Component {
 		DcInput {
 			id: input
