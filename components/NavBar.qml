@@ -9,7 +9,7 @@ import Victron.VenusOS
 Rectangle {  // Use an opaque background so that page disappears behind nav bar when scrolled
 	id: root
 
-	property alias model: buttonRepeater.model
+	required property var model
 	readonly property int currentIndex: _currentIndex
 
 	// External components should not write to these properties.
@@ -49,19 +49,21 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 		Repeater {
 			id: buttonRepeater
 
-			model: SwipePageModel { }
+			// The model for this repeater is a 'visual' model (i.e. an ObjectModel), and is used as the model for the SwipeView in MainView.qml.
+			// If you use an ObjectModel as the model for more than 1 view, the Items in the ObjectModel only appear in 1 of the views.
+			// To work around this shortcoming, we have to use 'root.model.count' instead of 'root.model' as the Repeater model,
+			// and other awkward syntax to access model properties.
+			model: root.model ? root.model.count : null
 			delegate: NavButton {
+				readonly property var _modelData: root.model.get(index)
 				height: root.height
 				width: Theme.geometry_navigationBar_button_width
-				text: model.text
-				icon.source: model.icon
+				text: _modelData.navButtonText
+				icon.source: _modelData.navButtonIcon
 				checked: root.currentIndex === model.index
 				enabled: root.currentIndex !== model.index
 				backgroundColor: "transparent"
-
-				onClicked: {
-					root._currentIndex = model.index
-				}
+				onClicked: root._currentIndex = model.index
 
 				Rectangle {
 					anchors {

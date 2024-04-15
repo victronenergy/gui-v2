@@ -12,6 +12,10 @@ SwipeViewPage {
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
+	//% "Levels"
+	navButtonText: qsTrId("nav_levels")
+	navButtonIcon: "qrc:/images/levels.svg"
+	url: "qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml"
 
 	// Gauges may overflow into previous/next pages in the SwipeView, so clip the gauge ListView
 	// to the page bounds.

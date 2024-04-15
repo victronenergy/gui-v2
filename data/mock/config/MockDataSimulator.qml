@@ -11,8 +11,7 @@ QtObject {
 
 	property bool timersActive: !Global.splashScreenVisible
 	property int deviceCount
-	property bool tanksEnabled: true
-	property bool environmentalInputsEnabled: tanksEnabled
+	property bool levelsEnabled: true
 
 	signal setBatteryRequested(config : var)
 	signal setAcInputsRequested(config : var)
@@ -251,7 +250,7 @@ QtObject {
 			event.accepted = true
 			break
 		case Qt.Key_V:
-			tanksEnabled = !tanksEnabled
+			levelsEnabled = !levelsEnabled
 			break
 		case Qt.Key_Space:
 			Global.splashScreenVisible = false

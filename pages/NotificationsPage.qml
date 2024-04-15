@@ -10,6 +10,10 @@ import QtQuick.Controls.impl as CP
 SwipeViewPage {
 	id: root
 
+	//% "Notifications"
+	navButtonText: qsTrId("nav_notifications")
+	navButtonIcon: "qrc:/images/notifications.svg"
+	url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 
 	GradientListView {
