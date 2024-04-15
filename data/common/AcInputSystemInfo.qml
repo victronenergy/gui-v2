@@ -19,6 +19,8 @@ QtObject {
 	readonly property string serviceType: _serviceType.value || "" // e.g. "vebus"
 	readonly property string serviceName: _serviceName.value || "" // e.g. com.victronenergy.vebus.ttyO, com.victronenergy.grid.ttyO
 	readonly property int source: _source.value === undefined ? VenusOS.AcInputs_InputSource_NotAvailable : _source.value
+	readonly property real minimumCurrent: _minimumCurrent.value === undefined ? NaN : _minimumCurrent.value
+	readonly property real maximumCurrent: _maximumCurrent.value === undefined ? NaN : _maximumCurrent.value
 
 	readonly property VeQuickItem _connected: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/Connected" : ""
@@ -38,5 +40,13 @@ QtObject {
 
 	readonly property VeQuickItem _source: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/Source" : ""
+	}
+
+	readonly property VeQuickItem _minimumCurrent: VeQuickItem {
+		uid: root.bindPrefix ? root.bindPrefix + "/Current/Min" : ""
+	}
+
+	readonly property VeQuickItem _maximumCurrent: VeQuickItem {
+		uid: root.bindPrefix ? root.bindPrefix + "/Current/Max" : ""
 	}
 }
