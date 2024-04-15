@@ -169,6 +169,11 @@ QtObject {
 		}
 	}
 
+	readonly property VeQuickItem _maximumPvPower: VeQuickItem {
+		uid: Global.system.serviceUid + "/Pv/Power/Max"
+		Component.onCompleted: setValue(1000)
+	}
+
 	//---
 
 	Component.onCompleted: {
