@@ -32,11 +32,16 @@ QtObject {
 		property real acPower: NaN
 		property real dcPower: NaN
 		property real current: NaN
+		readonly property real maximumPower: _maximumPower.value === undefined ? NaN : _maximumPower.value
 
 		function reset() {
 			acPower = NaN
 			dcPower = NaN
 			current = NaN
+		}
+
+		readonly property VeQuickItem _maximumPower: VeQuickItem {
+			uid: root.serviceUid + "/Pv/Power/Max"
 		}
 	}
 
