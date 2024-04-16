@@ -19,9 +19,7 @@ T.Dialog {
 	property var highlightBarForDay
 
 	function _refresh() {
-		const now = ClockTime.currentDateTime
-		now.setDate(now.getDate() - day)
-		dateLabel.text = Qt.formatDate(now, "ddd d MMM")
+		dateLabel.text = ClockTime.formatDeltaDate(-1 * 86400 * day, "ddd d MMM")
 		tableView.dayRange = [day, day + 1]
 
 		const sourceBar = highlightBarForDay(day)

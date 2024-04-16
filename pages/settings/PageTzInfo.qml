@@ -31,8 +31,7 @@ Page {
 	}
 
 	function _openTimeSelector() {
-		const dt = ClockTime.currentDateTime
-		Global.dialogLayer.open(timeSelectorComponent, {hour: dt.getHours(), minute: dt.getMinutes()})
+		Global.dialogLayer.open(timeSelectorComponent, {hour: ClockTime.hour, minute: ClockTime.minute})
 	}
 
 	// Ensure time is up-to-date while this page is open.
@@ -49,10 +48,13 @@ Page {
 
 		TimeSelectorDialog {
 			onAccepted: {
-				let dt = ClockTime.currentDateTime
-				dt.setHours(hour)
-				dt.setMinutes(minute)
-				Global.systemSettings.time.setValue(dt.getTime() / 1000)
+				Global.systemSettings.time.setValue(
+					ClockTime.otherClockTime(
+						ClockTime.year,
+						ClockTime.month,
+						ClockTime.day,
+						hour,
+						minute))
 			}
 		}
 	}
@@ -63,7 +65,7 @@ Page {
 			ListTextItem {
 				//% "Date/Time UTC"
 				text: qsTrId("settings_tz_date_time_utc")
-				secondaryText: ClockTime.currentTimeUtcText
+				secondaryText: ClockTime.currentDateTimeUtc
 			}
 
 			ListButton {
@@ -74,7 +76,7 @@ Page {
 
 				//% "Date/Time local"
 				text: qsTrId("settings_tz_date_time_local")
-				button.text: ClockTime.currentTimeText
+				button.text: ClockTime.currentTime
 				writeAccessLevel: VenusOS.User_AccessType_User
 				enabled: allowed && Global.systemSettings.time.isValid
 
