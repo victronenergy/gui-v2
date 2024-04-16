@@ -147,8 +147,9 @@ QtObject {
 					phase._power.setValue(NaN)
 					phase._current.setValue(NaN)
 				} else {
-					phase._power.setValue(Math.random() * 300 * (negativeEnergyFlow ? -1 : 1))
-					phase._current.setValue(Math.random() * 20 * (negativeEnergyFlow ? -1 : 1))
+					const current = Math.random() * 20 * (negativeEnergyFlow ? -1 : 1)
+					phase._current.setValue(current)
+					phase._power.setValue(current * 10)
 				}
 				totalPower = Units.sumRealNumbers(totalPower, phase._power.value)
 			}
