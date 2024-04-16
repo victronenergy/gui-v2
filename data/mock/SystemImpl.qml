@@ -52,8 +52,8 @@ QtObject {
 		onTriggered: {
 			// Use some wild fluctuations that can be seen in the Brief side panel graph
 			const randomIndex = Math.floor(Math.random() * Global.system.ac.consumption.phases.count)
-			const power = Math.floor(Math.random() * 800)
 			const current = Math.floor(Math.random() * _maximumAcCurrent.value)
+			const power = current * 10
 			Global.system.ac.consumption.setPhaseData(randomIndex, { power: power, current: current})
 		}
 	}
