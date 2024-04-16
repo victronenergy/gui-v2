@@ -30,17 +30,28 @@ Page {
 		return ""
 	}
 
+	function _openDateSelector() {
+		Global.dialogLayer.open(dateSelectorComponent, {year: ClockTime.year, month: ClockTime.month, day: ClockTime.day})
+	}
+
 	function _openTimeSelector() {
 		Global.dialogLayer.open(timeSelectorComponent, {hour: ClockTime.hour, minute: ClockTime.minute})
 	}
 
-	// Ensure time is up-to-date while this page is open.
-	Timer {
-		interval: 10000
-		repeat: true
-		triggeredOnStart: true
-		running: BackendConnection.applicationVisible
-		onTriggered: Global.systemSettings.time.getValue(true)
+	Component {
+		id: dateSelectorComponent
+
+		DateSelectorDialog {
+			onAccepted: {
+				Global.systemSettings.time.setValue(
+					ClockTime.otherClockTime(
+						year,
+						month,
+						day,
+						ClockTime.hour,
+						ClockTime.minute))
+			}
+		}
 	}
 
 	Component {
@@ -59,6 +70,15 @@ Page {
 		}
 	}
 
+	// Ensure time is up-to-date while this page is open.
+	Timer {
+		interval: 10000
+		repeat: true
+		triggeredOnStart: true
+		running: BackendConnection.applicationVisible
+		onTriggered: Global.systemSettings.time.getValue(true)
+	}
+
 	GradientListView {
 		model: ObjectModel {
 
@@ -68,7 +88,7 @@ Page {
 				secondaryText: ClockTime.currentDateTimeUtc
 			}
 
-			ListButton {
+			ListItem {
 				// Qt for WebAssembly doesn't support timezones,
 				// so we can't display the device-local date/time,
 				// as we don't know what it is.  Just hide the setting.
@@ -76,12 +96,19 @@ Page {
 
 				//% "Date/Time local"
 				text: qsTrId("settings_tz_date_time_local")
-				button.text: ClockTime.currentTime
 				writeAccessLevel: VenusOS.User_AccessType_User
 				enabled: allowed && Global.systemSettings.time.isValid
 
-				onClicked: {
-					root._openTimeSelector()
+				content.children: Row {
+					spacing: Theme.geometry_listItem_content_spacing
+					ListItemButton {
+						text: ClockTime.currentDate
+						onClicked: root._openDateSelector()
+					}
+					ListItemButton {
+						text: ClockTime.currentTime
+						onClicked: root._openTimeSelector()
+					}
 				}
 			}
 
