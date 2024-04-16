@@ -80,7 +80,7 @@ Rectangle {
 		id: clockLabel
 		anchors.centerIn: parent
 		font.pixelSize: 22
-		text: root.title.length > 0 ? root.title : ClockTime.currentTimeText
+		text: root.title.length > 0 ? root.title : ClockTime.currentTime
 	}
 
 	Row {

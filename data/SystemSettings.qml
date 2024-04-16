@@ -168,7 +168,7 @@ QtObject {
 		uid: Global.venusPlatform.serviceUid + "/Device/Time"
 		onValueChanged: {
 			if (value !== undefined) {
-				ClockTime.setClockTime(value)
+				ClockTime.clockTime = value
 			}
 		}
 
@@ -187,6 +187,7 @@ QtObject {
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.systemTimeZone = value
+				Date.timeZoneUpdated()      // Inform the JS engine that the system tz has changed.
 				root.time.getValue(true)    // ensure the time value is the latest one from the server
 			}
 		}

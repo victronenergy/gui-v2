@@ -96,8 +96,9 @@ Rectangle {
 			right: parent.right
 			rightMargin: Theme.geometry_listItem_content_horizontalMargin
 		}
+
 		color: Theme.color_listItem_secondaryText
-		text: Utils.formatTimestamp(root.notification.dateTime, ClockTime.currentDateTime)
 		font.pixelSize: Theme.font_size_body1
+		text: Utils.formatTimestamp(root.notification.dateTime, ClockTime.dateTime)
 	}
 }

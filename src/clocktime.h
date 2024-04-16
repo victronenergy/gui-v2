@@ -23,44 +23,89 @@ class ClockTime : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 	QML_SINGLETON
-	Q_PROPERTY(QDateTime currentDateTime MEMBER m_currentDateTime NOTIFY currentDateTimeChanged)
-	Q_PROPERTY(QDateTime currentDateTimeUtc MEMBER m_currentDateTimeUtc NOTIFY currentDateTimeUtcChanged)
-	Q_PROPERTY(QString currentTimeText MEMBER m_currentTimeText NOTIFY currentTimeTextChanged)
-	Q_PROPERTY(QString currentTimeUtcText MEMBER m_currentTimeUtcText NOTIFY currentTimeUtcTextChanged)
+
+	// Note: access in QML will result in conversion to JS Date
+	// which may not retain timezone information (if the system time zone
+	// doesn't match the QDateTime's timezone).
+	// For CerboGX, `date` reports that the timezone is still UTC
+	// after setting the DBus/MQTT platform/Device/Time setting,
+	// so the system timezone will not usually match the Qt timezone.
+	// For WebAssembly, QTBUG-91441 means that we can never guarantee
+	// that the dateTime will be in the systemTimeZone.
+	// In short: QML clients should not access this directly, in general.
+	Q_PROPERTY(QDateTime dateTime READ dateTime NOTIFY dateTimeChanged)
+
+	// Expose the needed data from the dateTime as ints.
+	// The data will be in the "correct" timezone.
+	Q_PROPERTY(int year READ year NOTIFY yearChanged)
+	Q_PROPERTY(int month READ month NOTIFY monthChanged)
+	Q_PROPERTY(int day READ day NOTIFY dayChanged)
+	Q_PROPERTY(int hour READ hour NOTIFY hourChanged)
+	Q_PROPERTY(int minute READ minute NOTIFY minuteChanged)
+	Q_PROPERTY(int second READ second NOTIFY secondChanged)
+	Q_PROPERTY(int msec READ msec NOTIFY msecChanged)
+
+	Q_PROPERTY(qint64 clockTime READ clockTime WRITE setClockTime NOTIFY clockTimeChanged) // secsSinceEpoch.
 	Q_PROPERTY(QString systemTimeZone READ systemTimeZone WRITE setSystemTimeZone NOTIFY systemTimeZoneChanged)
+
+	Q_PROPERTY(QString currentDate READ currentDate NOTIFY currentDateChanged)
+	Q_PROPERTY(QString currentTime READ currentTime NOTIFY currentTimeChanged)
+	Q_PROPERTY(QString currentDateTimeUtc READ currentDateTimeUtc NOTIFY currentDateTimeUtcChanged)
 
 public:
 	static ClockTime* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
+	QDateTime dateTime() const;
+	void setDateTime(const QDateTime &dt);
+
+	int year() const;
+	int month() const;
+	int day() const;
+	int hour() const;
+	int minute() const;
+	int second() const;
+	int msec() const;
+
+	qint64 clockTime() const;
+	void setClockTime(qint64 secondsSinceEpoch);
+
 	QString systemTimeZone() const;
 	void setSystemTimeZone(const QString &tz); // "region/city" format.
 
-public Q_SLOTS:
-	QString formatTime(int hour, int minute) const;
-	bool isDateValid(int year, int month, int day) const; // month is 1-12
-	void setClockTime(qint64 secondsSinceEpoch);
+	QString currentDate() const;
+	QString currentTime() const;
+	QString currentDateTimeUtc() const;
+
+	Q_INVOKABLE QString formatTime(int hour, int minute) const; // as hh:mm
+	Q_INVOKABLE QString formatDeltaDate(qint64 secondsDelta, const QString &format) const; // negative is in the past
+	Q_INVOKABLE qint64 otherClockTime(int year, int month, int day, int hour, int minute) const;
+	Q_INVOKABLE bool isDateValid(int year, int month, int day) const; // month is 1-12
 
 Q_SIGNALS:
-	void currentDateTimeChanged();
-	void currentDateTimeUtcChanged();
-	void currentTimeTextChanged();
-	void currentTimeUtcTextChanged();
+	void dateTimeChanged();
+	void yearChanged();
+	void monthChanged();
+	void dayChanged();
+	void hourChanged();
+	void minuteChanged();
+	void secondChanged();
+	void msecChanged();
+	void clockTimeChanged();
 	void systemTimeZoneChanged();
+	void currentDateChanged();
+	void currentTimeChanged();
+	void currentDateTimeUtcChanged();
 
 protected:
 	void timerEvent(QTimerEvent *) override;
 
 private:
 	ClockTime(QObject *parent);
-	void updateTime();
+	void updateTime(qint64 secsSinceEpoch);
 	void scheduleNextTimeCheck(int interval);
 
-	QDateTime m_currentDateTime;
-	QDateTime m_currentDateTimeUtc;
-	QString m_currentTimeText;
-	QString m_currentTimeUtcText;
+	QDateTime m_dateTime;
 	QString m_systemTimeZone;
-	qint64 m_secondsSinceEpoch = 0;
 	int m_timerInterval = 0;
 	int m_timerId = 0;
 };
