@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Gauges
 
 // Displays measurements for one or more phases.
 // For OverviewWidget_Size_XS / S:
@@ -19,10 +20,25 @@ Flow {
 	property alias model: phaseRepeater.model
 	property int widgetSize: VenusOS.OverviewWidget_Size_S
 
+	// These properties are used to change the text color depending on the phase value.
+	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
+	property string phaseModelProperty
+	property real minimumValue
+	property real maximumValue
+
 	Repeater {
 		id: phaseRepeater
 
 		delegate: Item {
+			id: phaseDelegate
+
+			readonly property int valueStatus: root.phaseModelProperty
+					? Gauges.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
+					: Theme.Ok
+			readonly property color textColor: (valueStatus === Theme.Critical || valueStatus === Theme.Warning)
+					? Theme.statusColorValue(valueStatus)
+					: Theme.color_font_secondary
+
 			width: root.widgetSize <= VenusOS.OverviewWidget_Size_S
 				   ? parent.width / 3
 				   : parent.width
@@ -34,7 +50,7 @@ Flow {
 				id: phaseLabel
 
 				text: model.name + ":"
-				color: Theme.color_font_secondary
+				color: phaseDelegate.textColor
 				font.pixelSize: root.widgetSize >= VenusOS.OverviewWidget_Size_L
 						? Theme.font_size_body1
 						: Theme.font_size_phase_small
@@ -54,6 +70,16 @@ Flow {
 				dataObject: model
 				font.pixelSize: phaseLabel.font.pixelSize
 				unitVisible: root.widgetSize >= VenusOS.OverviewWidget_Size_M
+				unitColor: phaseDelegate.textColor
+				valueColor: phaseDelegate.textColor
+			}
+
+			ValueRange {
+				id: valueRange
+
+				value: root.phaseModelProperty ? model[root.phaseModelProperty] : 0
+				minimumValue: root.minimumValue
+				maximumValue: root.maximumValue
 			}
 		}
 	}
