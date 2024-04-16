@@ -20,8 +20,8 @@ T.SwipeView {
 	// Leaving the function here for use in a future Qt version.
 	function pageInView(pageXStart, pageWidth, threshold) {
 		const pageXEnd = pageXStart + pageWidth
-		const visibleXStart = listView.contentX + listView.originX + threshold
-		const visibleXEnd = listView.contentX + listView.originX + pageWidth - threshold
+		const visibleXStart = listView.contentX + threshold
+		const visibleXEnd = listView.contentX + pageWidth - threshold
 
 		return visibleXStart >= pageXStart && visibleXStart <= pageXEnd
 				|| visibleXEnd >= pageXStart && visibleXEnd <= pageXEnd

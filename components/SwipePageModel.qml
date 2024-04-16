@@ -6,7 +6,10 @@ ObjectModel {
 	id: root
 
 	required property SwipeView view
-	readonly property bool showLevelsPage: (Global.tanks && Global.tanks.totalTankCount > 0) || (Global.environmentInputs && Global.environmentInputs.model.count > 0)
+	readonly property bool showLevelsPage: tankCount > 0 || environmentInputCount > 0
+	readonly property bool tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
+	readonly property bool environmentInputCount: Global.environmentInputs ? Global.environmentInputs.model.count : 0
+
 	property bool _completed: false
 	readonly property Component levelsPage: Component {
 		LevelsPage {
@@ -43,9 +46,9 @@ ObjectModel {
 		}
 
 		if (showLevelsPage) {
-			insert(2, levelsPage.createObject(parent))
+			root.view.insertItem(2, levelsPage.createObject(parent))
 		} else {
-			remove(2)
+			root.view.removeItem(view.itemAt(2))
 		}
 	}
 }
