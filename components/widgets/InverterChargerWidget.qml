@@ -32,6 +32,7 @@ OverviewWidget {
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
 	enabled: !!Global.inverterChargers.first
 	quantityLabel.visible: false
+	rightPadding: Theme.geometry_overviewPage_widget_sideGauge_margins
 	extraContentChildren: [
 		Label {
 			anchors {
@@ -45,4 +46,21 @@ OverviewWidget {
 			wrapMode: Text.Wrap
 		}
 	]
+
+	Loader {
+		id: sideGaugeLoader
+
+		anchors {
+			top: parent.top
+			bottom: parent.bottom
+			right: parent.right
+			margins: Theme.geometry_overviewPage_widget_sideGauge_margins
+		}
+		sourceComponent: ThreePhaseBarGauge {
+			valueType: VenusOS.Gauges_ValueType_RisingPercentage
+			phaseModel: Global.system.ac.consumption.phases
+			phaseModelProperty: "current"
+			maximumValue: Global.system.ac.consumption.maximumCurrent
+		}
+	}
 }

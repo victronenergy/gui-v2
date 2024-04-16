@@ -257,6 +257,7 @@
     "geometry_overviewPage_widget_solar_graph_margins": 8,
 
     "geometry_three_phase_column_spacing": -4,
+    "geometry_three_phase_gauge_spacing": 4,
 
     "geometry_levelsPage_groupedSubgauges_delegate_width": 100,
     "geometry_levelsPage_gaugesView_compact_topMargin": 16,
