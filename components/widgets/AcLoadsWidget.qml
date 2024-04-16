@@ -31,6 +31,9 @@ OverviewWidget {
 			visible: model != null && root.size >= VenusOS.OverviewWidget_Size_L
 			model: Global.system.ac.consumption.phases.count > 1 ? Global.system.ac.consumption.phases : null
 			widgetSize: root.size
+			valueType: VenusOS.Gauges_ValueType_RisingPercentage
+			phaseModelProperty: "current"
+			maximumValue: Global.system.ac.consumption.maximumCurrent
 		}
 	]
 }
