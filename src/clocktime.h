@@ -80,6 +80,7 @@ public:
 	Q_INVOKABLE QString formatDeltaDate(qint64 secondsDelta, const QString &format) const; // negative is in the past
 	Q_INVOKABLE qint64 otherClockTime(int year, int month, int day, int hour, int minute) const;
 	Q_INVOKABLE bool isDateValid(int year, int month, int day) const; // month is 1-12
+	Q_INVOKABLE int daysInMonth(int month, int year) const;
 
 Q_SIGNALS:
 	void dateTimeChanged();

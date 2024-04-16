@@ -52,7 +52,7 @@ CT.SpinBox {
 				width: parent.width
 				text: root.textFromValue(root.value, root.locale)
 				color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
-				font.pixelSize: root.secondaryText.length ? Theme.font_size_h2 : Theme.font_size_h3
+				font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
 				horizontalAlignment: Qt.AlignHCenter
 				verticalAlignment: Qt.AlignVCenter
 			}

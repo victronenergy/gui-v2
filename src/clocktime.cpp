@@ -162,6 +162,12 @@ bool ClockTime::isDateValid(int year, int month, int day) const
 	return calendar.isDateValid(year, month, day);
 }
 
+int ClockTime::daysInMonth(int month, int year) const
+{
+	static const QCalendar calendar;
+	return calendar.daysInMonth(month, year);
+}
+
 void ClockTime::timerEvent(QTimerEvent *)
 {
 	qint64 secsSinceEpoch = clockTime();

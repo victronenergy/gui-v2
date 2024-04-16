@@ -17,18 +17,22 @@ ListButton {
 	button.text: date == null ? "--" : Qt.formatDate(date, "yyyy-MM-dd")
 	enabled: dataItem.uid === "" || dataItem.isValid
 
-	onClicked: Global.dialogLayer.open(dateSelectorComponent, {date: date})
+	onClicked: Global.dialogLayer.open(dateSelectorComponent, {
+		year: date ? date.getFullYear() : ClockTime.year,
+		month: date ? date.getMonth() : ClockTime.month,
+		day: date ? date.getDate() : ClockTime.day
+	})
 
 	Component {
 		id: dateSelectorComponent
 
 		DateSelectorDialog {
 			onAccepted: {
+				const seconds = ClockTime.otherClockTime(year, month, day, date ? date.getHours() : 0, date ? date.getSeconds() : 0)
 				if (dataItem.uid.length > 0) {
-					const seconds = date.getTime() / 1000
 					dataItem.setValue(seconds)
 				} else {
-					root.date = date
+					root.date = new Date(seconds * 1000)
 				}
 			}
 		}
