@@ -49,27 +49,13 @@ OverviewWidget {
 			right: parent.right
 			margins: Theme.geometry_overviewPage_widget_sideGauge_margins
 		}
-
-		active: root.isConnectedSinglePhase && root.input.source !== VenusOS.AcInputs_InputSource_Generator
-		sourceComponent: VerticalGauge {
-			id: sideGauge
-
-			width: Theme.geometry_overviewPage_widget_sideGauge_width
-			radius: Theme.geometry_overviewPage_widget_sideGauge_radius
-			backgroundColor: Theme.color_overviewPage_widget_sideGauge_background
-			foregroundColor: Theme.color_overviewPage_widget_sideGauge_highlight
-			animationEnabled: visible && root.animationEnabled
-			value: valueRange.valueAsRatio
-			visible: root.input && root.input.source !== VenusOS.AcInputs_InputSource_Generator
-
-			DynamicValueRange {
-				id: valueRange
-
-				value: sideGauge.visible ? root.quantityLabel.value : NaN
-				maximumValue: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp
-					? Global.acInputs.currentLimit
-					: NaN
-			}
+		active: root.connected && root.size >= VenusOS.OverviewWidget_Size_M
+		sourceComponent: ThreePhaseBarGauge {
+			valueType: VenusOS.Gauges_ValueType_NeutralPercentage
+			phaseModel: root.phaseModel
+			phaseModelProperty: "current"
+			minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
+			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
 		}
 	}
 

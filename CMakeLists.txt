@@ -275,6 +275,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/TankItem.qml
     components/TankGauge.qml
     components/TankGaugeGroup.qml
+    components/ThreePhaseBarGauge.qml
     components/ThreePhaseDisplay.qml
     components/ThreePhaseQuantityTable.qml
     components/TimeSelector.qml
