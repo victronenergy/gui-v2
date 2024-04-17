@@ -42,7 +42,7 @@ Item {
 
 	ScreenBlanker {
 		id: screenBlanker
-		enabled: !Global.splashScreenVisible && !(!!Global.notifications && Global.notifications.alarm)
+		enabled: !Global.splashScreenVisible && !(!!Global.notifications && Global.notifications.alert)
 		displayOffTime: displayOffItem.isValid ? 1000*displayOffItem.value : 0.0
 		property VeQuickItem displayOffItem: VeQuickItem {
 			uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/DisplayOff" : ""
