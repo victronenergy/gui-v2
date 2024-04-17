@@ -91,6 +91,10 @@ C.StackView {
 			}
 		}
 
+		function onPopAllPagesRequested() {
+			fakePopAnimation.start()
+		}
+
 		function onPagePopRequested(toPage) {
 			if (root._busy
 					|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop())) {
@@ -125,11 +129,20 @@ C.StackView {
 
 		onStarted: swipeViewVisible = true
 		onStopped: {
+			// When leaving the page stack destroy all the pages
+			while (root.depth > 1) {
+				const page = root.pop()
+				if (page && !Theme.objectHasQObjectParent(page)) {
+					page.destroy()
+				}
+			}
+
+			// pop() only works for depth > 1
 			const obj = root.currentItem
 			root.clear()
 
 			// Clean up the page object that was created on push.
-			if (!Theme.objectHasQObjectParent(obj)) {
+			if (obj && !Theme.objectHasQObjectParent(obj)) {
 				obj.destroy()
 			}
 		}
