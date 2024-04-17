@@ -12,6 +12,7 @@ QtObject {
 	property QtObject emitter: QtObject {
 		signal pagePushRequested(var obj, var properties)
 		signal pagePopRequested(var toPage)
+		signal popAllPagesRequested()
 	}
 
 	property NavBar navBar
@@ -43,5 +44,9 @@ QtObject {
 
 	function popPage(toPage) {
 		emitter.pagePopRequested(toPage)
+	}
+
+	function popAllPages() {
+		emitter.popAllPagesRequested()
 	}
 }

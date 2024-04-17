@@ -17,6 +17,8 @@ Item {
 			&& Global.notifications.alarm
 	on_GoToNotificationsChanged: {
 		if (_goToNotifications) {
+			pageManager.popAllPages()
+			mainView.controlsActive = false
 			pageManager.navBar.setCurrentPage("NotificationsPage.qml")
 		}
 	}
