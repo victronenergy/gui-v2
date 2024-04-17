@@ -48,6 +48,7 @@ ListItem {
 		Switch {
 			id: switchItem
 			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
+			checkable: false
 			onClicked: root._setChecked(!checked)
 		}
 	]
