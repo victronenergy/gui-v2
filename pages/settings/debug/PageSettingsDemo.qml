@@ -25,7 +25,12 @@ Page {
 
 			ListSwitch {
 				text: "Switch"
-				onClicked: console.log("Switch now checked?", checked)
+				property bool value
+				checked: value
+				onClicked: {
+					value = !checked
+					console.log("Switch now checked?", checked)
+				}
 			}
 
 			ListSwitch {
@@ -61,6 +66,7 @@ Page {
 				currentIndex: 1
 
 				onOptionClicked: function(index) {
+					currentIndex = index
 					console.log("Radio button clicked at index", index)
 				}
 			}
@@ -94,6 +100,7 @@ Page {
 				secondaryText: optionModel.get(2).display
 
 				onOptionClicked: function(index) {
+					currentIndex = index
 					console.log("Radio button clicked at index", index)
 					secondaryText = optionModel.get(index).display
 				}

@@ -175,6 +175,7 @@ Page {
 				currentIndex: 0
 				allowed: false
 				onOptionClicked: function(index) {
+					currentIndex = index
 					if (localValue !== VenusOS.VeBusDevice_ChargeState_InitializingCharger) {
 						interruptTimer.start()
 						if (localValue !== VenusOS.VeBusDevice_ChargeState_Bulk) {

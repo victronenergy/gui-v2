@@ -46,6 +46,7 @@ GeneratorDialog {
 			//% "Timed run"
 			text: qsTrId("controlcard_generator_startdialog_timed_run")
 			checked: root.generator.manualStartTimer > 0
+			checkable: true
 		}
 
 		TimeSelector {

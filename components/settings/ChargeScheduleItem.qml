@@ -112,6 +112,7 @@ ListNavigationItem {
 
 						text: CommonWords.enabled
 						checked: itemDay.isValid && itemDay.value >= 0
+						checkable: true
 						onCheckedChanged: {
 							if (checked ^ itemDay.value >= 0) {
 								itemDay.setValue(toggleDay(itemDay.value))
