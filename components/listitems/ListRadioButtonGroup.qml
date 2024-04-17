@@ -81,14 +81,12 @@ ListNavigationItem {
 					id: radioButton
 
 					function select(password) {
-						if (root.updateOnClick) {
-							if (dataItem.uid.length > 0) {
+						if (!checked) {
+							if (root.updateOnClick && dataItem.uid.length > 0) {
 								dataItem.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
-							} else {
-								root.currentIndex = model.index
 							}
+							root.optionClicked(model.index, password)
 						}
-						root.optionClicked(model.index, password)
 
 						if (root.popDestination !== undefined) {
 							popTimer.restart()

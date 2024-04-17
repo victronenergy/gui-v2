@@ -40,7 +40,6 @@ ControlCard {
 		label.text: qsTrId("controlcard_generator_label_autostart")
 		button.checked: root.generator.autoStart
 		button.enabled: root.generator.state !== VenusOS.Generators_State_Running
-		button.checkable: false // control the checked state locally
 		separator.visible: false
 
 		Connections {

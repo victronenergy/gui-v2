@@ -21,6 +21,7 @@ ControlValue {
 		anchors.verticalCenter: parent.verticalCenter
 		font.pixelSize: Theme.font_size_body2
 		down: mouseArea.containsPress || pressed
+		checkable: false
 
 		onClicked: root.clicked()
 	}
