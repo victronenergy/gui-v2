@@ -14,7 +14,10 @@ FocusScope {
 	property color backgroundColor: Theme.color_page_background
 	property bool fullScreenWhenIdle
 	readonly property bool isCurrentPage: !!Global.mainView && Global.mainView.currentPage === root
-	property bool animationEnabled: !!Global.mainView && Global.mainView.allowPageAnimations && isCurrentPage
+	readonly property bool defaultAnimationEnabled: !!Global.mainView && Global.mainView.allowPageAnimations
+			&& !(!!Global.screenBlanker && Global.screenBlanker.blanked)
+	property bool animationEnabled: defaultAnimationEnabled && isCurrentPage
+
 
 	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None
