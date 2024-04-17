@@ -121,7 +121,7 @@ Rectangle {
 
 		StatusBarButton {
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
-			visible: !!Global.screenBlanker && Global.screenBlanker.supported
+			visible: !!Global.screenBlanker && Global.screenBlanker.supported && Global.screenBlanker.enabled
 			enabled: !!Global.pageManager
 					 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			onClicked: Global.screenBlanker.setDisplayOff()
