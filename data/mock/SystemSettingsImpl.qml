@@ -279,5 +279,6 @@ QtObject {
 		setMockSystemValue("/SystemType", "ESS")
 
 		ClockTime.clockTime = (new Date().getTime() / 1000)
+		setMockPlatformValue("Device/Time", ClockTime.clockTime)
 	}
 }
