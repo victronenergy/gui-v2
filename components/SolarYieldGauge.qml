@@ -37,6 +37,7 @@ Item {
 			radius: Theme.geometry_briefPage_edgeGauge_radius - index*strokeWidth
 			horizontalAlignment: root.horizontalAlignment
 			arcVerticalCenterOffset: root.arcVerticalCenterOffset
+			valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 			value: {
 				if (!visible || solarMeasurements.maxPower == 0) {
 					// No useful max yet, so show a full gauge

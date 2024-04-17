@@ -200,6 +200,7 @@ SwipeViewPage {
 				x: root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
+				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 				phaseModel: Global.acInputs.activeInput.phases
 
 				// TODO set maximumCurrent
@@ -238,6 +239,7 @@ SwipeViewPage {
 				x: root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
+				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 				value: visible ? dcInputRange.valueAsRatio * 100 : 0
 
 				ArcGaugeQuantityRow {
@@ -329,6 +331,7 @@ SwipeViewPage {
 				x: -root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
+				valueType: VenusOS.Gauges_ValueType_RisingPercentage
 				phaseModel: Global.system.ac.consumption.phases
 
 				// TODO set maximumCurrent
@@ -363,6 +366,7 @@ SwipeViewPage {
 				x: -root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
+				valueType: VenusOS.Gauges_ValueType_RisingPercentage
 				value: visible ? dcLoadsRange.valueAsRatio * 100 : 0
 
 				ArcGaugeQuantityRow {
