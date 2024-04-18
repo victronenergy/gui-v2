@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import Victron.Gauges
 
@@ -230,7 +231,21 @@ SwipeViewPage {
 				minimumValue: !!Global.acInputs.activeInputInfo ? Global.acInputs.activeInputInfo.minimumCurrent : NaN
 				maximumValue: !!Global.acInputs.activeInputInfo ? Global.acInputs.activeInputInfo.maximumCurrent : NaN
 
-				AcInGaugeQuantityRow {
+				// When ESS feedback to grid is enabled, show an arrow indicating the flow direction.
+				CP.ColorImage {
+					anchors {
+						left: acInGaugeQuantity.left
+						bottom: acInGaugeQuantity.top
+						bottomMargin: Theme.geometry_briefPage_edgeGauge_quantityLabel_feedback_margin
+					}
+					visible: Global.acInputs.activeInput
+							&& (Global.acInputs.activeInput.power || 0) !== 0
+							&& Global.systemSettings.essFeedbackToGridEnabled()
+					source: visible ? (Global.acInputs.activeInput.power > 0 ? "qrc:/images/icon_from_grid.svg" : "qrc:/images/icon_to_grid.svg") : ""
+					color: visible && Global.acInputs.activeInput.power > 0 ? Theme.color_blue : Theme.color_green
+				}
+
+				ArcGaugeQuantityRow {
 					id: acInGaugeQuantity
 
 					// When >= 2 left gauges, AC input is always the top one, so label aligns to

@@ -104,6 +104,12 @@ QtObject {
 		}
 	}
 
+	function essFeedbackToGridEnabled() {
+		return _hubSetting.value === 4
+				&& _overvoltageFeedIn.value === 1
+				&& _preventFeedback.value === 0
+	}
+
 	property VeQuickItem accessLevel: VeQuickItem {
 		 uid: root.serviceUid + "/Settings/System/AccessLevel"
 	}
@@ -282,6 +288,18 @@ QtObject {
 				break
 			}
 		}
+	}
+
+	readonly property VeQuickItem _hubSetting: VeQuickItem {
+		uid: Global.system.serviceUid + "/Hub"
+	}
+
+	readonly property VeQuickItem _overvoltageFeedIn: VeQuickItem {
+		uid: root.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn"
+	}
+
+	readonly property VeQuickItem _preventFeedback: VeQuickItem {
+		uid: root.serviceUid + "/Settings/CGwacs/PreventFeedback"
 	}
 
 	function reset() {
