@@ -28,7 +28,7 @@ SwipeViewPage {
 	}
 
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
-	readonly property int _rightGaugeCount: (acLoadGauge.active ? 1 : 0) + (dcLoadGauge.active ? 1 : 0)
+	readonly property int _rightGaugeCount: dcLoadGauge.active ? 2 : 1  // AC load gauge is always active
 
 	function _gaugeHeight(gaugeCount) {
 		return Theme.geometry_briefPage_largeEdgeGauge_height / gaugeCount
@@ -123,7 +123,7 @@ SwipeViewPage {
 		// In a clockwise direction, the gauges start from the AC load gauge and go downwards to the
 		// DC load gauge.
 		const baseAngle = 90 - (Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
-		const gaugeIndex = gauge === acLoadGauge ? 0 : (acLoadGauge.active ? 1 : 0)
+		const gaugeIndex = gauge === acLoadGauge ? 0 : 1
 		const params = _sideGaugeParameters(baseAngle, activeGaugeCount, gaugeIndex, isMultiPhase)
 
 		// Add y offset if gauge is aligned to the top or bottom.
@@ -332,8 +332,7 @@ SwipeViewPage {
 			id: acLoadGauge
 
 			width: Theme.geometry_briefPage_edgeGauge_width
-			height: active ? root._gaugeHeight(root._rightGaugeCount) : 0
-			active: !isNaN(Global.system.loads.acPower)
+			height: root._gaugeHeight(root._rightGaugeCount)
 
 			sourceComponent: SideMultiGauge {
 				readonly property var gaugeParams: root._rightGaugeParameters(acLoadGauge, phaseModel.count > 1)
