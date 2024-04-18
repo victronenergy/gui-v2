@@ -198,6 +198,22 @@ QtObject {
 			event.accepted = true
 			break
 		case Qt.Key_U:
+			// Change the unit display of the Brief view center gauges
+			if (event.modifiers & Qt.ControlModifier) {
+				const v = root.mockValue(Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit")
+				let newBriefUnit = ""
+				if (v === VenusOS.BriefView_Unit_None) {
+					newBriefUnit = VenusOS.BriefView_Unit_Absolute
+				} else if (v === VenusOS.BriefView_Unit_Absolute) {
+					newBriefUnit = VenusOS.BriefView_Unit_Percentage
+				} else {
+					newBriefUnit = VenusOS.BriefView_Unit_None
+				}
+				root.setMockValue(Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit", newBriefUnit)
+				return
+			}
+
+			// Change the system unit
 			Global.systemSettings.setElectricalQuantity(
 					Global.systemSettings.electricalQuantity === VenusOS.Units_Watt
 					? VenusOS.Units_Amp
