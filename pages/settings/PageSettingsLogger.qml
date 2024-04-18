@@ -151,6 +151,8 @@ Page {
 			}
 
 			ListSwitch {
+				// don't allow turning off VRM connection if connecting via VRM.
+				allowed: defaultAllowed && !BackendConnection.brokerIsVrm
 				//% "VRM two-way communication"
 				text: qsTrId("settings_vrm_communication")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttVrm"

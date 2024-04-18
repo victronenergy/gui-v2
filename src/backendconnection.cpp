@@ -188,6 +188,9 @@ void BackendConnection::initMqttConnection(const QString &address)
 		this, &BackendConnection::mqttErrorChanged);
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
+	m_brokerIsVrm = address.startsWith(QStringLiteral("wss://webmqtt"))
+			&& address.endsWith(QStringLiteral(".victronenergy.com"));
+	emit brokerIsVrmChanged();
 	mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);
 #else
 	const QStringList parts = address.split(':');
@@ -448,6 +451,11 @@ void BackendConnection::requestShardFromVrmApi()
 
 			qWarning() << "Unable to find record matching portal id: " << m_portalId;
 		});
+}
+
+bool BackendConnection::brokerIsVrm() const
+{
+	return m_brokerIsVrm;
 }
 
 bool BackendConnection::isApplicationVisible() const

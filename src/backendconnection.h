@@ -32,6 +32,7 @@ class BackendConnection : public QObject
 	Q_PROPERTY(QString shard READ shard WRITE setShard NOTIFY shardChanged)
 	Q_PROPERTY(QString token READ token WRITE setToken NOTIFY tokenChanged)
 	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged)
+	Q_PROPERTY(bool brokerIsVrm READ brokerIsVrm NOTIFY brokerIsVrmChanged)
 	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged)
 
 public:
@@ -101,6 +102,8 @@ public:
 	void loginVrmApi();
 	void requestShardFromVrmApi();
 
+	bool brokerIsVrm() const;
+
 	bool isApplicationVisible() const;
 	void setApplicationVisible(bool v);
 
@@ -122,6 +125,7 @@ Q_SIGNALS:
 	void shardChanged();
 	void tokenChanged();
 	void idUserChanged();
+	void brokerIsVrmChanged();
 	void applicationVisibleChanged();
 
 private:
@@ -146,6 +150,7 @@ private:
 	QString m_token;
 	int m_idUser = -1;
 
+	bool m_brokerIsVrm = false;
 	bool m_applicationVisible = true;
 
 	State m_state = BackendConnection::State::Idle;
