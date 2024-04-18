@@ -161,11 +161,13 @@ Page {
 				id: runningVersion
 
 				property ModalWarningDialog _restartDialog
+				property ModalDialog _vrmConsoleDialog
 
 				//% "Onscreen UI (GX Touch & Ekrano)"
 				text: qsTrId("settings_display_onscreen_ui")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RunningVersion"
 				writeAccessLevel: VenusOS.User_AccessType_User
+				popDestination: undefined // don't pop page automatically.
 				updateOnClick: false
 				optionModel: [
 					//% "Standard version"
@@ -175,6 +177,20 @@ Page {
 				]
 
 				onOptionClicked: function(index) {
+					if (dataItem.value == optionModel[index].value) {
+						return // no change.
+					}
+					if (BackendConnection.brokerIsVrm && index == 1) {
+						if (!_vrmConsoleDialog) {
+							_vrmConsoleDialog = vrmRemoteConsoleDialogComponent.createObject(Global.dialogLayer)
+						}
+						_vrmConsoleDialog.open()
+					} else {
+						setOptionValue(index)
+					}
+				}
+
+				function setOptionValue(index) {
 					// When the /RunningVersion changes, venus-platform quits the currently-running
 					// app and starts the selected version. Note: on device, user may not see the
 					// dialog at all, depending on how quickly the app exits.
@@ -184,6 +200,26 @@ Page {
 					_restartDialog.versionName = optionModel[index].display
 					_restartDialog.open()
 					dataItem.setValue(optionModel[index].value)
+				}
+
+				Component {
+					id: vrmRemoteConsoleDialogComponent
+
+					ModalDialog {
+						//% "Warning: VRM Remote Console"
+						title: qsTrId("settings_display_switch_ui_warning_vrm_console")
+
+						contentItem: Item {
+							Label {
+								anchors.centerIn: parent
+								width: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
+								wrapMode: Text.Wrap
+								text: "Selecting Gui-v2 (beta) version will disable the VRM Remote Console. You may need local LAN access or a local display to return to the Standard version."
+							}
+						}
+
+						onAccepted: runningVersion.setOptionValue(1) // i.e. "Gui-v2 (beta)"
+					}
 				}
 
 				Component {
