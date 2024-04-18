@@ -30,6 +30,10 @@ SwipeViewPage {
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
 	readonly property int _rightGaugeCount: dcLoadGauge.active ? 2 : 1  // AC load gauge is always active
 
+	// Do not animate gauge progress changes while the left/right side gauge layouts are changing.
+	on_LeftGaugeCountChanged: pauseLeftGaugeAnimations.restart()
+	on_RightGaugeCountChanged: pauseRightGaugeAnimations.restart()
+
 	function _gaugeHeight(gaugeCount) {
 		return Theme.geometry_briefPage_largeEdgeGauge_height / gaugeCount
 	}
@@ -219,7 +223,7 @@ SwipeViewPage {
 
 				x: root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
-				animationEnabled: root.animationEnabled
+				animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 				phaseModel: !!Global.acInputs.activeInput ? Global.acInputs.activeInput.phases : null
 				phaseModelProperty: "current"
@@ -259,7 +263,7 @@ SwipeViewPage {
 
 				x: root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
-				animationEnabled: root.animationEnabled
+				animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 				value: visible ? dcInputRange.valueAsRatio * 100 : 0
 
@@ -306,7 +310,7 @@ SwipeViewPage {
 
 				x: root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
-				animationEnabled: root.animationEnabled
+				animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 
 				ArcGaugeQuantityRow {
 					// When >= 2 left gauges, solar gauge is always the bottom one, so label aligns
@@ -351,7 +355,7 @@ SwipeViewPage {
 
 				x: -root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
-				animationEnabled: root.animationEnabled
+				animationEnabled: root.animationEnabled && !pauseRightGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage
 				phaseModel: Global.system.ac.consumption.phases
 				phaseModelProperty: "current"
@@ -386,7 +390,7 @@ SwipeViewPage {
 
 				x: -root._gaugeArcMargin
 				opacity: root._gaugeArcOpacity
-				animationEnabled: root.animationEnabled
+				animationEnabled: root.animationEnabled && !pauseRightGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage
 				value: visible ? dcLoadsRange.valueAsRatio * 100 : 0
 
@@ -406,6 +410,16 @@ SwipeViewPage {
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load DC load gauge")
 		}
+	}
+
+	Timer {
+		id: pauseLeftGaugeAnimations
+		interval: Theme.animation_progressArc_duration
+	}
+
+	Timer {
+		id: pauseRightGaugeAnimations
+		interval: Theme.animation_progressArc_duration
 	}
 
 	Loader {
