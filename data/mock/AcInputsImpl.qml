@@ -100,7 +100,9 @@ QtObject {
 					for (let configProperty in input.modelData) {
 						const configValue = input.modelData[configProperty]
 						if (configProperty === "phaseCount") {
-							_numberOfPhases.setValue(configValue)
+							if (!!input.connected) {
+								_numberOfPhases.setValue(configValue)
+							}
 						} else {
 							inputSysInfo["_" + configProperty].setValue(configValue)
 						}
@@ -122,47 +124,35 @@ QtObject {
 	}
 
 	property Timer _measurementsTimer: Timer {
-		property int testEnergyCounter: -5
-
-		running: Global.mockDataSimulator.timersActive
+		running: Global.mockDataSimulator.timersActive && Global.acInputs.activeInput
 		repeat: true
 		interval: 3000
 		triggeredOnStart: true
 		onTriggered: {
-			if (!Global.acInputs.activeInput) {
-				return
-			}
-
-			// Cycle between positive -> negative -> zero energy.
-			// Positive energy value = imported energy, flowing towards inverter/charger.
-			// Negative energy value = exported energy, flowing towards grid.
-			const negativeEnergyFlow = testEnergyCounter < 0
-			const zeroEnergyFlow = testEnergyCounter === 0
-
-			const phases = Global.acInputs.activeInput._phases._phaseObjects
 			let totalPower = NaN
-			for (let i = 0; i < phases.count; ++i) {
-				const phase = phases.objectAt(i)
-				if (zeroEnergyFlow) {
-					phase._power.setValue(NaN)
-					phase._current.setValue(NaN)
-				} else {
-					const current = Math.random() * 20 * (negativeEnergyFlow ? -1 : 1)
-					phase._current.setValue(current)
-					phase._power.setValue(current * 10)
+			for (let i = 0; i < Global.acInputs.activeInput.phases.count; ++i) {
+				// For each phase, randomly choose between positive, negative and no energy.
+				// Positive energy value = imported energy, flowing towards inverter/charger.
+				// Negative energy value = exported energy, flowing towards grid.
+				const randomNum = Math.random()
+				const negativeEnergyFlow = randomNum < 0.5
+				const noEnergyFlow = randomNum >= 0.5 && randomNum <= 0.6
+				let power = NaN
+				let current = NaN
+				if (!noEnergyFlow) {
+					current = Math.random() * 20 * (negativeEnergyFlow ? -1 : 1)
+					power = current * 10
 				}
-				totalPower = Units.sumRealNumbers(totalPower, phase._power.value)
+				totalPower = Units.sumRealNumbers(totalPower, power)
+				const activePhasePath = Global.system.serviceUid + "/Ac/ActiveIn/L" + (i + 1)
+				Global.mockDataSimulator.setMockValue(activePhasePath + "/Current", current)
+				Global.mockDataSimulator.setMockValue(activePhasePath + "/Power", power)
 			}
 
 			// For vebus/grid/genset services, forcibly update the total power
 			const inputServiceLoader = Global.acInputs.activeInput._acInputService
 			if (inputServiceLoader && inputServiceLoader.item && inputServiceLoader.hasTotalPower) {
 				inputServiceLoader.item._power.setValue(totalPower)
-			}
-
-			testEnergyCounter++
-			if (testEnergyCounter >= 5) {
-				testEnergyCounter = -5
 			}
 		}
 	}
