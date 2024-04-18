@@ -32,6 +32,7 @@ Shape {
 		strokeWidth: control.strokeWidth
 		strokeColor: Theme.color_darkOk
 		fillColor: control.fillColor
+		animationEnabled: progress.animationEnabled
 	}
 
 	Arc {
