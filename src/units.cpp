@@ -40,7 +40,8 @@ namespace Units {
 
 QObject* Units::instance(QQmlEngine *, QJSEngine *)
 {
-	return new Units;
+	static QObject* units = new Units;
+	return units;
 }
 
 Units::Units(QObject *parent)
