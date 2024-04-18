@@ -22,9 +22,8 @@ ListItem {
 		RadioButton {
 			id: radioButton
 
-			// Alternative to binding "enabled: !checked". No clicked() signal
-			// got emitted when the button was disabled on checked=false.
-			onClicked: if (root.checked) root.clicked()
+			checkable: false
+			onClicked: root.clicked()
 		}
 	]
 
