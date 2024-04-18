@@ -200,7 +200,10 @@ SwipeViewPage {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? root._gaugeHeight(root._leftGaugeCount) : 0
-			active: !!Global.acInputs.activeInput && !!Global.acInputs.activeInputInfo
+
+			// Similarly to the Overview page, show the AC input, even when it is not connected, as
+			// long as one of the AC input sources are valid.
+			active: Global.acInputs.findValidSource() !== VenusOS.AcInputs_InputSource_NotAvailable
 
 			sourceComponent: SideMultiGauge {
 				readonly property var gaugeParams: root._leftGaugeParameters(acInputGauge, phaseModel && phaseModel.count > 1)
@@ -218,10 +221,10 @@ SwipeViewPage {
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled
 				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-				phaseModel: Global.acInputs.activeInput.phases
+				phaseModel: !!Global.acInputs.activeInput ? Global.acInputs.activeInput.phases : null
 				phaseModelProperty: "current"
-				minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
-				maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
+				minimumValue: !!Global.acInputs.activeInputInfo ? Global.acInputs.activeInputInfo.minimumCurrent : NaN
+				maximumValue: !!Global.acInputs.activeInputInfo ? Global.acInputs.activeInputInfo.maximumCurrent : NaN
 
 				AcInGaugeQuantityRow {
 					id: acInGaugeQuantity
@@ -229,7 +232,7 @@ SwipeViewPage {
 					// When >= 2 left gauges, AC input is always the top one, so label aligns to
 					// the bottom.
 					alignment: Qt.AlignLeft | (gaugeParams.activeGaugeCount >= 2 ? Qt.AlignBottom : Qt.AlignVCenter)
-					icon.source: Global.acInputs.sourceIcon(Global.acInputs.activeInput.source)
+					icon.source: Global.acInputs.sourceIcon(Global.acInputs.findValidSource())
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.dataObject: Global.acInputs.activeInput
