@@ -17,7 +17,7 @@ Item {
 	property real arcVerticalCenterOffset
 	property real phaseLabelHorizontalMargin
 	property bool animationEnabled
-	property alias phaseModel: gaugeRepeater.model
+	property var phaseModel
 	property string phaseModelProperty
 	property real minimumValue
 	property real maximumValue
@@ -25,8 +25,23 @@ Item {
 	width: parent.width
 	height: parent.height
 
+	onPhaseModelPropertyChanged: {
+		placeholderModel.clear();
+		if (phaseModelProperty.length > 0) {
+			let itemProperties = {}
+			itemProperties[phaseModelProperty] = NaN
+			placeholderModel.append(itemProperties)
+		}
+	}
+
+	ListModel {
+		id: placeholderModel
+	}
+
 	Repeater {
 		id: gaugeRepeater
+
+		model: root.phaseModel && root.phaseModel.count ? root.phaseModel : placeholderModel
 
 		delegate: Item {
 			id: gaugeDelegate

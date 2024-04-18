@@ -54,8 +54,15 @@ QtObject {
 		return source !== VenusOS.AcInputs_InputSource_NotAvailable && source !== VenusOS.AcInputs_InputSource_Inverting
 	}
 
-	function hasValidSource() {
-		return !!activeInput || sourceValid(input1Info.source) || sourceValid(input2Info.source)
+	function findValidSource() {
+		if (activeInput) {
+			return activeInput.source
+		} else if (sourceValid(input1Info.source)) {
+			return input1Info.source
+		} else if (sourceValid(input2Info.source)) {
+			return input2Info.source
+		}
+		return VenusOS.AcInputs_InputSource_NotAvailable
 	}
 
 	function sourceToText(source) {

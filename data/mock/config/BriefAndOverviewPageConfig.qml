@@ -179,6 +179,14 @@ QtObject {
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: {} },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
+		{
+			name: "Grid connected",
+			acInputs: [ { source: VenusOS.AcInputs_InputSource_Grid, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 }, emptyAcInput, ],
+		},
+		{
+			name: "Grid disconnected",
+			acInputs: [ { source: VenusOS.AcInputs_InputSource_Grid, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 0 }, emptyAcInput, ],
+		},
 	]
 
 	function configCount() {
