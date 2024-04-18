@@ -84,19 +84,22 @@ Item {
 		Component.onCompleted: Global.notificationLayer = notificationLayer
 	}
 
+	// We only want the VKB on CerboGX/EkranoGX devices.
+	// WebAssembly should use the native platform VKB.
+	// Desktop platforms should use hardware keyboard.
 	// Create the InputPanel dynamically in case QtQuick.VirtualKeyboard is not available (e.g. on
 	// Qt for WebAssembly due to QTBUG-104109).
 	// Note the VKB layer is the top-most layer, to allow the idleModeMouseArea beneath to call
 	// testCloseOnClick() when clicking outside of the focused text field, to auto-close the VKB.
-
 	Loader {
 		id: loader
 
 		asynchronous: true
-		active: Qt.platform.os !== "wasm"
-		sourceComponent: InputPanel {
-			mainViewItem: mainView
+		active: Qt.platform.os == "linux" && !Global.isDesktop
+		source: "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
+		onLoaded: {
+			item.mainViewItem = mainView
+			Global.inputPanel = item
 		}
-		onLoaded: Global.inputPanel = item
 	}
 }

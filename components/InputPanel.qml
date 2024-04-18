@@ -7,6 +7,11 @@ import QtQuick
 import QtQuick.VirtualKeyboard as QtVirtualKeyboard
 import Victron.VenusOS
 
+// *** This file can be edited directly on the cerbo filesystem,
+// *** but you will also need to edit ApplicationContent.qml
+// *** so that the loader's source property is:
+// *** "file:///opt/victronenergy/gui-v2/Victron/VenusOS/components/InputPanel.qml"
+
 QtVirtualKeyboard.InputPanel {
 	id: root
 
