@@ -83,8 +83,9 @@ Item {
 		anchors.topMargin: strokeWidth/2
 		anchors.bottom: parent.verticalCenter
 		anchors.left: parent.left
+		anchors.leftMargin: Theme.geometry_circularMultiGauge_label_leftMargin
 		anchors.right: parent.horizontalCenter
-		anchors.rightMargin: Theme.geometry_circularMultiGauge_labels_rightMargin + gauges.labelMargin
+		anchors.rightMargin: Theme.geometry_circularMultiGauge_icon_rightMargin + gauges.labelMargin
 
 		Repeater {
 			model: gauges.model
@@ -93,23 +94,29 @@ Item {
 				anchors.verticalCenterOffset: index * _stepSize/2
 				anchors.right: parent.right
 				anchors.rightMargin: Math.max(0, Theme.geometry_circularMultiGauge_icons_maxWidth - iconImage.width)
-				spacing: Theme.geometry_circularMultiGauge_row_spacing
 				visible: model.index < Theme.geometry_briefPage_centerGauge_maximumGaugeCount
+				height: iconImage.height
 
 				Label {
+					anchors.verticalCenter: parent.verticalCenter
+					rightPadding: Theme.geometry_circularMultiGauge_label_rightMargin
 					horizontalAlignment: Text.AlignRight
-					font.pixelSize: Theme.font_size_body2
+					font.pixelSize: valueLabel.visible ? Theme.font_size_body1 : Theme.font_size_body2
 					color: Theme.color_font_primary
 					text: model.name
+					width: textCol.width - valueLabel.width - iconImage.width
+					elide: Text.ElideRight
 				}
 
 				Label {
 					id: valueLabel
 					anchors.verticalCenter: parent.verticalCenter
+					rightPadding: Theme.geometry_circularMultiGauge_value_rightMargin
 					horizontalAlignment: Text.AlignRight
-					font.pixelSize: Theme.font_size_body2
+					font.pixelSize: Theme.font_size_body1
 					color: Theme.color_font_primary
 					visible: false
+
 					property int unit
 					property quantityInfo quantity
 
@@ -133,6 +140,7 @@ Item {
 						}
 					}
 				}
+
 				CP.ColorImage {
 					id: iconImage
 					source: model.icon

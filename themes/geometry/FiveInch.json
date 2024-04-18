@@ -144,8 +144,10 @@
 
     "geometry_circularMultiGauge_strokeWidth": 16,
     "geometry_circularMultiGauge_spacing": 16,
-    "geometry_circularMultiGauge_row_spacing": 6,
-    "geometry_circularMultiGauge_labels_rightMargin": 14,
+    "geometry_circularMultiGauge_label_leftMargin": -20,
+    "geometry_circularMultiGauge_label_rightMargin": 4,
+    "geometry_circularMultiGauge_value_rightMargin": 2,
+    "geometry_circularMultiGauge_icon_rightMargin": 12,
     "geometry_circularMultiGauge_icons_maxWidth": 18,
 
     "geometry_circularSingularGauge_strokeWidth": 16,

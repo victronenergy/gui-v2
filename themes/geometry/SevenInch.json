@@ -144,8 +144,10 @@
 
     "geometry_circularMultiGauge_strokeWidth": 16,
     "geometry_circularMultiGauge_spacing": 16,
-    "geometry_circularMultiGauge_row_spacing": 7,
-    "geometry_circularMultiGauge_labels_rightMargin": 14,
+    "geometry_circularMultiGauge_label_leftMargin": 0,
+    "geometry_circularMultiGauge_label_rightMargin": 6,
+    "geometry_circularMultiGauge_value_rightMargin": 2,
+    "geometry_circularMultiGauge_icon_rightMargin": 14,
     "geometry_circularMultiGauge_icons_maxWidth": 18,
 
     "geometry_circularSingularGauge_strokeWidth": 16,
@@ -169,7 +171,7 @@
     "geometry_briefPage_edgeGauge_spacing": 44,
     "geometry_briefPage_edgeGauge_spacingAngle": 4,
     "geometry_briefPage_edgeGauge_quantityLabel_spacing": 2,
-    "geometry_briefPage_edgeGauge_quantityLabel_horizontalMargin": 64,
+    "geometry_briefPage_edgeGauge_quantityLabel_horizontalMargin": 60,
     "geometry_briefPage_edgeGauge_quantityLabel_topMargin": 24,
     "geometry_briefPage_edgeGauge_quantityLabel_bottomMargin": 20,
     "geometry_briefPage_edgeGauge_quantityLabel_feedback_margin": 4,
