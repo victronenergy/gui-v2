@@ -24,7 +24,7 @@ QtObject {
 				Global.system.state = config.state
 
 				if (config.ac) {
-					randomizeAcValues.running = true
+					randomizeAcValues.restart()  // immediately provide valid values for the new configuration
 					Global.system.ac.consumption.setPhaseCount(config.ac.phaseCount || 3)
 				} else {
 					randomizeAcValues.running = false
@@ -32,7 +32,7 @@ QtObject {
 				}
 
 				if (config.dc) {
-					randomizeDcValues.running = true
+					randomizeDcValues.restart()  // immediately provide valid values for the new configuration
 				} else {
 					randomizeDcValues.running = false
 					Global.system.dc.reset()
