@@ -230,6 +230,7 @@ SwipeViewPage {
 				phaseModelProperty: "current"
 				minimumValue: !!Global.acInputs.activeInputInfo ? Global.acInputs.activeInputInfo.minimumCurrent : NaN
 				maximumValue: !!Global.acInputs.activeInputInfo ? Global.acInputs.activeInputInfo.maximumCurrent : NaN
+				inputMode: true
 
 				// When ESS feedback to grid is enabled, show an arrow indicating the flow direction.
 				CP.ColorImage {
