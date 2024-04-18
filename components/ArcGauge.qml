@@ -13,7 +13,6 @@ Item {
 	id: gauge
 
 	property alias value: arc.value
-	property int valueType: VenusOS.Gauges_ValueType_FallingPercentage
 	property alias startAngle: arc.startAngle
 	property alias endAngle: arc.endAngle
 	property alias radius: arc.radius
@@ -21,6 +20,8 @@ Item {
 	property alias strokeWidth: arc.strokeWidth
 	property alias direction: arc.direction
 	property alias animationEnabled: arc.animationEnabled
+	property alias progressColor: arc.progressColor
+	property alias remainderColor: arc.remainderColor
 	property real arcHorizontalCenterOffset
 	property real arcVerticalCenterOffset
 
@@ -36,14 +37,10 @@ Item {
 		ProgressArc {
 			id: arc
 
-			readonly property int valueStatus: Gauges.getValueStatus(gauge.value, gauge.valueType)
-
 			width: radius*2
 			height: width
 			x: ((gauge.width - width) / 2) + gauge.arcHorizontalCenterOffset
 			y: ((gauge.height - height) / 2) + gauge.arcVerticalCenterOffset
-			progressColor: Theme.statusColorValue(valueStatus)
-			remainderColor: Theme.statusColorValue(valueStatus, true)
 		}
 	}
 }

@@ -21,6 +21,7 @@ Item {
 	property string phaseModelProperty
 	property real minimumValue
 	property real maximumValue
+	property bool inputMode
 
 	width: parent.width
 	height: parent.height
@@ -46,6 +47,10 @@ Item {
 		delegate: Item {
 			id: gaugeDelegate
 
+			readonly property bool feedingToGrid: root.inputMode
+					&& (model.power || 0) < 0
+					&& Global.systemSettings.essFeedbackToGridEnabled()
+
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: root.height
 
@@ -58,6 +63,8 @@ Item {
 					// If showing multiple gauges on the right edge, shift them towards the left
 					- (gaugeRepeater.count === 1 || root.horizontalAlignment === Qt.AlignLeft ? 0 : (strokeWidth * gaugeRepeater.count))
 				valueType: root.valueType
+				progressColor: feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+				remainderColor: feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
 				direction: root.direction
 				startAngle: root.startAngle
 				endAngle: root.endAngle
