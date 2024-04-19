@@ -12,7 +12,7 @@ Item {
 	anchors.fill: parent
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
-		var toast = toaster.createObject(toastItemsModel, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
+		var toast = toaster.createObject(root, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
 		toastItemsModel.append(toast)
 	}
 
