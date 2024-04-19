@@ -19,7 +19,7 @@ NumberSelectorDialog {
 		open()
 	}
 
-	title: Global.acInputs.currentLimitTypeToText(inputSettings ? inputSettings.inputType : 0)
+	title: inputSettings ? Global.acInputs.currentLimitTypeToText(inputSettings.inputType) : ""
 	suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 	stepSize: 1
 	to: 1000

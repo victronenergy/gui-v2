@@ -82,7 +82,7 @@ Page {
 						id: batteryVoltageLabel
 						anchors.verticalCenter: parent.verticalCenter
 						font.pixelSize: Theme.font_size_body2
-						value: batteryVoltage.value
+						value: batteryVoltage.value == undefined ? NaN : batteryVoltage.value
 						unit: VenusOS.Units_Volt
 						precision: 2
 						VeQuickItem {
