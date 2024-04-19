@@ -35,8 +35,7 @@ Item {
 		anchors.fill: parent
 
 		radius: Theme.geometry_toastNotification_radius
-		color: root.category === VenusOS.Notification_Confirm ? Theme.color_toastNotification_background_confirmation
-			 : root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
+		color: root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
 			 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
 			 : Theme.color_toastNotification_background_informative
 
@@ -53,8 +52,7 @@ Item {
 			radius: parent.radius
 			flat: true
 
-			color: root.category === VenusOS.Notification_Confirm ? Theme.color_toastNotification_highlight_confirmation
-				 : root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
+			color: root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
 				 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error
 				 : Theme.color_toastNotification_highlight_informative
 
@@ -63,8 +61,7 @@ Item {
 				anchors.centerIn: parent
 
 				color: Theme.color_toastNotification_foreground
-				source: root.category === VenusOS.Notification_Confirm ? "qrc:/images/icon_checkmark_32.svg"
-					  : root.category === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
+				source: root.category === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
 					  : root.category === VenusOS.Notification_Alarm ? "qrc:/images/icon_warning_32.svg"
 					  : "qrc:/images/icon_info_32.svg"
 			}

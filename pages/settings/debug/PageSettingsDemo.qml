@@ -182,10 +182,6 @@ Page {
 				content.children: [
 
 					ListItemButton {
-						text: "Confirm"
-						onClicked: Global.showToastNotification(VenusOS.Notification_Confirm, "Confirmation toast")
-					},
-					ListItemButton {
 						text: "Warning"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Warning, "Warning toast")
 					},
