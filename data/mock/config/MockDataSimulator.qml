@@ -55,6 +55,7 @@ QtObject {
 
 	function previousConfig() {
 		const pageConfig = _configs[currentNavBarUrl()]
+		if (pageConfig.configIndex === -1) pageConfig.configIndex = 0
 		const prevIndex = Utils.modulo(pageConfig.configIndex - 1, pageConfig.configCount())
 		setConfigIndex(pageConfig, prevIndex)
 	}
