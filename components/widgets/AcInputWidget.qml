@@ -56,6 +56,7 @@ OverviewWidget {
 			phaseModelProperty: "current"
 			minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
 			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
+			inputMode: true
 		}
 	}
 
@@ -94,6 +95,7 @@ OverviewWidget {
 				width: parent.width
 				model: root.phaseModel
 				widgetSize: root.size
+				inputMode: true
 			}
 		}
 	}
