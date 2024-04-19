@@ -26,18 +26,29 @@ Flow {
 	property real minimumValue
 	property real maximumValue
 
+	// If true, the color text will be green when the phase is feeding back to the grid.
+	property bool inputMode
+
 	Repeater {
 		id: phaseRepeater
 
 		delegate: Item {
 			id: phaseDelegate
 
-			readonly property int valueStatus: root.phaseModelProperty
-					? Gauges.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
-					: Theme.Ok
-			readonly property color textColor: (valueStatus === Theme.Critical || valueStatus === Theme.Warning)
+			readonly property color textColor: {
+				const feedingToGrid = root.inputMode
+						&& (model.power || 0) < 0
+						&& Global.systemSettings.essFeedbackToGridEnabled()
+				if (feedingToGrid) {
+					return Theme.color_green
+				}
+				const valueStatus = root.phaseModelProperty
+						? Gauges.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
+						: Theme.Ok
+				return (valueStatus === Theme.Critical || valueStatus === Theme.Warning)
 					? Theme.statusColorValue(valueStatus)
-					: Theme.color_font_secondary
+					: Theme.color_font_primary
+			}
 
 			width: root.widgetSize <= VenusOS.OverviewWidget_Size_S
 				   ? parent.width / 3
@@ -50,7 +61,7 @@ Flow {
 				id: phaseLabel
 
 				text: model.name + ":"
-				color: phaseDelegate.textColor
+				color: quantityLabel.unitColor
 				font.pixelSize: root.widgetSize >= VenusOS.OverviewWidget_Size_L
 						? Theme.font_size_body1
 						: Theme.font_size_phase_small
@@ -70,8 +81,10 @@ Flow {
 				dataObject: model
 				font.pixelSize: phaseLabel.font.pixelSize
 				unitVisible: root.widgetSize >= VenusOS.OverviewWidget_Size_M
-				unitColor: phaseDelegate.textColor
 				valueColor: phaseDelegate.textColor
+				unitColor: valueColor == Theme.color_font_primary
+						   ? Theme.color_font_secondary
+						   : phaseDelegate.textColor
 			}
 
 			ValueRange {

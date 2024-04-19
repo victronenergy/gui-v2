@@ -15,8 +15,11 @@ Flow {
 	property string phaseModelProperty
 	property real minimumValue
 	property real maximumValue
+	property bool inputMode
 
-	width: Theme.geometry_overviewPage_widget_sideGauge_width
+	width: phaseRepeater.count > 1
+		   ? Theme.geometry_overviewPage_widget_sideGauge_small_width
+		   : Theme.geometry_overviewPage_widget_sideGauge_large_width
 	height: parent ? parent.height : 0
 	spacing: Theme.geometry_three_phase_gauge_spacing
 
@@ -24,13 +27,16 @@ Flow {
 		id: phaseRepeater
 
 		delegate: VerticalGauge {
+			readonly property bool feedingToGrid: root.inputMode
+					&& (model.power || 0) < 0
+					&& Global.systemSettings.essFeedbackToGridEnabled()
 			readonly property int valueStatus: Gauges.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
 
 			width: parent.width
 			height: (root.height - (root.spacing * (phaseRepeater.count - 1))) / phaseRepeater.count
-			radius: Theme.geometry_overviewPage_widget_sideGauge_width
-			backgroundColor: Theme.statusColorValue(valueStatus, true)
-			foregroundColor: Theme.statusColorValue(valueStatus)
+			radius: width / 2
+			foregroundColor: feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+			backgroundColor: feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
 			value: valueRange.valueAsRatio
 
 			ValueRange {
