@@ -14,10 +14,6 @@ T.SwipeView {
 	readonly property alias dragging: listView.dragging
 	readonly property bool moving: listView.moving || scrollingTimer.running
 
-	// Due to https://bugreports.qt.io/browse/QTBUG-115468, 'pageInView()' does not work reliably
-	// when a page is removed from the SwipeView. Eg. if you are on a page to the right of the
-	// Levels page, and the Levels page is removed, this function wrongly returns false.
-	// Leaving the function here for use in a future Qt version.
 	function pageInView(pageXStart, pageWidth, threshold) {
 		const pageXEnd = pageXStart + pageWidth
 		const visibleXStart = listView.contentX + threshold
