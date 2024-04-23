@@ -53,7 +53,7 @@ QtObject {
 		}
 
 		readonly property VeQuickItem _maximumCurrent: VeQuickItem {
-			uid: Global.system.serviceUid + "/Ac/Consumption/Current/Max"
+			uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/NoAcIn/Consumption/Current/Max"
 		}
 	}
 

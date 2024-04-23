@@ -29,11 +29,11 @@ QtObject {
 
 	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>. There are always two inputs.
 	property AcInputSystemInfo input1Info: AcInputSystemInfo {
-		bindPrefix: Global.system.serviceUid + "/Ac/In/0"
+		inputIndex: 0
 		isActiveInput: source === _activeInputSource.sourceAsInt
 	}
 	property AcInputSystemInfo input2Info: AcInputSystemInfo {
-		bindPrefix: Global.system.serviceUid + "/Ac/In/1"
+		inputIndex: 1
 		isActiveInput: source === _activeInputSource.sourceAsInt
 	}
 

@@ -83,7 +83,7 @@ QtObject {
 			required property var modelData
 
 			readonly property AcInputSystemInfo inputSysInfo: AcInputSystemInfo {
-				bindPrefix: Global.system.serviceUid + "/Ac/In/" + input.index
+				inputIndex: input.index
 
 				// For convenience, if this is a vebus service, then use the value of
 				// com.victronenergy.system/VebusService as the /ServiceName for this input (i.e.
@@ -109,8 +109,12 @@ QtObject {
 					}
 
 					// Hardcode the min/max currents
-					_minimumCurrent.setValue(-20)
-					_maximumCurrent.setValue(20)
+					if (isNaN(_minimumCurrent.value)) {
+						_minimumCurrent.setValue(-20)
+					}
+					if (isNaN(_maximumCurrent.value)) {
+						_maximumCurrent.setValue(20)
+					}
 				}
 			}
 		}

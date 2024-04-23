@@ -41,7 +41,7 @@ QtObject {
 		}
 
 		readonly property VeQuickItem _maximumPower: VeQuickItem {
-			uid: root.serviceUid + "/Pv/Power/Max"
+			uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
 		}
 	}
 

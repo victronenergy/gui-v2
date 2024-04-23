@@ -138,7 +138,7 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _maximumPower: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/Input/Power/Max"
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
 	}
 
 	Component.onCompleted: Global.dcInputs = root
