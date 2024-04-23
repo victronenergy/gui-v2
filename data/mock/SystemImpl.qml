@@ -59,7 +59,7 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _maximumAcCurrent: VeQuickItem {
-		uid: Global.system.serviceUid + "/Ac/Consumption/Current/Max"
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/NoAcIn/Consumption/Current/Max"
 		Component.onCompleted: setValue(20)
 	}
 
@@ -78,7 +78,7 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _maximumDcPower: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/System/Power/Max"
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
 		Component.onCompleted: setValue(600)
 	}
 
@@ -170,7 +170,7 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _maximumPvPower: VeQuickItem {
-		uid: Global.system.serviceUid + "/Pv/Power/Max"
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
 		Component.onCompleted: setValue(1000)
 	}
 

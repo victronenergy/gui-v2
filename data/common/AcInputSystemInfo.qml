@@ -12,7 +12,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property string bindPrefix
+	required property int inputIndex
+	readonly property string bindPrefix: Global.system.serviceUid + "/Ac/In/" + inputIndex
 	property bool isActiveInput
 	readonly property bool connected: _connected.value === 1
 	readonly property int deviceInstance: _deviceInstance.value === undefined ? -1 : _deviceInstance.value
@@ -43,10 +44,10 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _minimumCurrent: VeQuickItem {
-		uid: root.bindPrefix ? root.bindPrefix + "/Current/Min" : ""
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Min".arg(root.inputIndex)
 	}
 
 	readonly property VeQuickItem _maximumCurrent: VeQuickItem {
-		uid: root.bindPrefix ? root.bindPrefix + "/Current/Max" : ""
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Max".arg(root.inputIndex)
 	}
 }
