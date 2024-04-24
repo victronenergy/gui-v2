@@ -44,6 +44,8 @@ ListItem {
 			anchors.verticalCenter: switchItem.verticalCenter
 			color: Theme.color_font_secondary
 			font.pixelSize: Theme.font_size_body2
+			width: Math.min(implicitWidth, root.maximumContentWidth - switchItem.width - parent.spacing)
+			wrapMode: Text.Wrap
 		},
 		Switch {
 			id: switchItem

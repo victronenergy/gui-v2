@@ -80,6 +80,8 @@ Item {
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			wrapMode: Text.Wrap
+			maximumLineCount: 12
+			elide: Text.ElideRight
 			color: Theme.color_toastNotification_foreground
 		}
 

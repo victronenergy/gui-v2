@@ -21,6 +21,7 @@ ListItem {
 		ListItemButton {
 			id: button
 
+			width: Math.min(implicitWidth, root.maximumContentWidth)
 			enabled: root.enabled
 
 			onClicked: root.clicked()

@@ -75,6 +75,7 @@
 
     "geometry_tabBar_width": 464,
     "geometry_tabBar_height": 40,
+    "geometry_tabBar_horizontalMargin": 6,
 
     "geometry_timeSelector_spinBox_width": 238,
     "geometry_timeSelector_spinBox_height": 72,

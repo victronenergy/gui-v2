@@ -10,8 +10,6 @@ import Victron.VenusOS
 CT.RadioButton {
 	id: root
 
-	property alias label: label
-
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
 		implicitContentWidth + leftPadding + rightPadding,
@@ -43,14 +41,5 @@ CT.RadioButton {
 			color: root.enabled || root.checked ? Theme.color_radioButton_indicator_on : Theme.color_radioButton_indicator_disabled
 			visible: root.down || root.checked
 		}
-	}
-
-	contentItem: Label {
-		id: label
-
-		font.pixelSize: Theme.font_size_body2
-		text: root.text
-		verticalAlignment: Text.AlignVCenter
-		color: root.enabled || root.checked ? Theme.color_font_primary : Theme.color_font_disabled
 	}
 }

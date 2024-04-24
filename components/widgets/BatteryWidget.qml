@@ -119,15 +119,21 @@ OverviewWidget {
 				top: parent.top
 				left: parent.left
 				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				right: parent.right
+				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 			}
 			Label {
 				text: Global.batteries.modeToText(batteryData.mode)
 				font.pixelSize: Theme.font_size_body1
+				width: parent.width
+				elide: Text.ElideRight
 				color: Theme.color_font_secondary
 			}
 			Label {
 				text: Global.batteries.timeToGoText(Global.batteries.system, VenusOS.Battery_TimeToGo_ShortFormat)
 				color: Theme.color_font_primary
+				width: parent.width
+				elide: Text.ElideRight
 				font.pixelSize: Theme.font_overviewPage_battery_timeToGo_pixelSize
 			}
 		},
