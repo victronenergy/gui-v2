@@ -11,6 +11,7 @@ Item {
 	id: root
 
 	property var model: [] // contains 12 values that define the shape of our bendy graph
+	property var getNextValue   // function that returns next value (0.0 - 1.0) to be added to the graph
 	property real initialModelValue: 0.0
 	property real offsetFraction
 	property real warningThreshold: Theme.geometry_briefPage_sidePanel_loadGraph_warningThreshold
@@ -21,6 +22,7 @@ Item {
 	property color belowThresholdBackgroundColor2: Theme.color_briefPage_background
 	property color horizontalGradientColor1: Theme.color_briefPage_background
 	property color horizontalGradientColor2: Theme.color_briefPage_sidePanel_loadGraph_horizontalGradient_color
+	property alias active: graphAnimation.running
 
 	function addValue(value) {
 		model.push(value)
@@ -31,6 +33,24 @@ Item {
 
 	implicitWidth: Theme.geometry_briefPage_sidePanel_loadGraph_width
 	implicitHeight: Theme.geometry_briefPage_sidePanel_loadGraph_height
+
+	SequentialAnimation {
+		id: graphAnimation
+
+		loops: Animation.Infinite
+
+		NumberAnimation {
+			target: root
+			property: "offsetFraction"
+			from: 0.0
+			to: 1.0
+			duration: Theme.geometry_briefPage_sidePanel_loadGraph_intervalMs
+		}
+
+		ScriptAction {
+			script: root.addValue(root.getNextValue())
+		}
+	}
 
 	Rectangle {
 		anchors.fill: parent

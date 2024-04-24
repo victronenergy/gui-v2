@@ -162,7 +162,7 @@ exported power v  0.4 |   /
 
 				property real _oldGraphPowerRange: NaN
 
-				function addNewValue() {
+				getNextValue: function() {
 					graphShowsExportPower = inputsPower.minimumSeen < 0
 
 					// If we show export power, the minimum scale of the y axis goes from -1000W to +1000W
@@ -187,8 +187,8 @@ exported power v  0.4 |   /
 						}
 						_oldGraphPowerRange = graphPowerRange
 					}
-					addValue(normalizedPower)
 					normalizedPowerSlider.value = normalizedPower
+					return normalizedPower
 				}
 
 				function scaleHistoricalData(scalingFactor, normalizedZeroPowerPoint) {
@@ -221,6 +221,7 @@ exported power v  0.4 |   /
 					bottom: gridQuantityLabel.bottom
 					bottomMargin: gridQuantityLabel.bottomPadding
 				}
+				active: root.animationEnabled
 
 				// For a system that sometimes exports power, 0.5 represents 0 power.
 				// For a system that only imports power, 0 represents 0 power.
@@ -240,21 +241,6 @@ exported power v  0.4 |   /
 												: Theme.color_briefPage_background
 				horizontalGradientColor1: Theme.color_briefPage_background
 				horizontalGradientColor2: "transparent"
-
-				SequentialAnimation {
-					loops: Animation.Infinite
-					running: root.animationEnabled
-					NumberAnimation {
-						target: gridGraph
-						property: "offsetFraction"
-						from: 0.0
-						to: 1.0
-						duration: Theme.geometry_briefPage_sidePanel_loadGraph_intervalMs
-					}
-					ScriptAction {
-						script: gridGraph.addNewValue()
-					}
-				}
 			}
 		}
 		Slider {
@@ -301,20 +287,9 @@ exported power v  0.4 |   /
 					bottom: loadsQuantityLabel.bottom
 					bottomMargin: loadsQuantityLabel.bottomPadding
 				}
-
-				SequentialAnimation {
-					loops: Animation.Infinite
-					running: root.animationEnabled
-					NumberAnimation {
-						target: loadGraph
-						property: "offsetFraction"
-						from: 0.0
-						to: 1.0
-						duration: Theme.geometry_briefPage_sidePanel_loadGraph_intervalMs
-					}
-					ScriptAction {
-						script: loadGraph.addValue(loadsPower.valueAsRatio)
-					}
+				active: root.animationEnabled
+				getNextValue: function() {
+					return loadsPower.valueAsRatio
 				}
 			}
 		}
