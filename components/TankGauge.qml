@@ -6,19 +6,15 @@
 import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
-import Victron.Gauges
 
-VerticalGauge {
+BarGauge {
 	id: root
 
 	property int gaugeValueType
 	property bool isGrouped: false
 	property bool expanded
 
-	readonly property int _gaugeStatus: Gauges.getValueStatus(value * 100, gaugeValueType)
-
-	backgroundColor: Theme.statusColorValue(root._gaugeStatus, true)
-	foregroundColor: Theme.statusColorValue(root._gaugeStatus)
+	valueType: gaugeValueType
 	radius: Theme.geometry_levelsPage_tankGauge_radius
 
 	Rectangle {

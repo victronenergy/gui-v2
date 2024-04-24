@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Gauges
 
 Flow {
 	id: root
@@ -16,6 +15,7 @@ Flow {
 	property real minimumValue
 	property real maximumValue
 	property bool inputMode
+	property bool animationEnabled
 
 	width: phaseRepeater.count > 1
 		   ? Theme.geometry_overviewPage_widget_sideGauge_small_width
@@ -26,11 +26,10 @@ Flow {
 	Repeater {
 		id: phaseRepeater
 
-		delegate: VerticalGauge {
+		delegate: BarGauge {
 			readonly property bool feedingToGrid: root.inputMode
 					&& (model.power || 0) < 0
 					&& Global.systemSettings.essFeedbackToGridEnabled()
-			readonly property int valueStatus: Gauges.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
 
 			width: parent.width
 			height: (root.height - (root.spacing * (phaseRepeater.count - 1))) / phaseRepeater.count
@@ -38,6 +37,7 @@ Flow {
 			foregroundColor: feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
 			backgroundColor: feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
 			value: valueRange.valueAsRatio
+			animationEnabled: root.animationEnabled
 
 			ValueRange {
 				id: valueRange

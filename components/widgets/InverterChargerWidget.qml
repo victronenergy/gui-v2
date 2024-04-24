@@ -68,6 +68,7 @@ OverviewWidget {
 			phaseModel: Global.system.ac.consumption.phases
 			phaseModelProperty: "current"
 			maximumValue: Global.system.ac.consumption.maximumCurrent
+			animationEnabled: root.animationEnabled
 		}
 	}
 }
