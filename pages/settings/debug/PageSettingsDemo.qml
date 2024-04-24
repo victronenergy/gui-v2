@@ -177,7 +177,7 @@ Page {
 			}
 
 
-			ListTextItem {
+			ListItem {
 				text: "Toast"
 				content.children: [
 
@@ -217,10 +217,12 @@ Page {
 			}
 
 			ListItem {
+				id: customListItem
 				text: "Custom bottom content item"
 
 				bottomContentChildren: [
 					ListLabel {
+						width: Math.min(implicitWidth, customListItem.maximumContentWidth)
 						topPadding: 0
 						bottomPadding: 0
 						color: Theme.color_font_secondary

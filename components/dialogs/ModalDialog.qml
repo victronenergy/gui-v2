@@ -74,24 +74,26 @@ T.Dialog {
 				verticalCenter: parent.verticalCenter
 				verticalCenterOffset: secondaryHeaderLabel.text.length ? -secondaryHeaderLabel.height / 2 : 0
 			}
-			width: parent.width
+			x: Theme.geometry_page_content_horizontalMargin
+			width: parent.width - 2*x
 			horizontalAlignment: Text.AlignHCenter
 			color: Theme.color_font_primary
 			font.pixelSize: root.secondaryTitle.length ? Theme.font_size_body1 : Theme.font_size_body3
 			text: root.title
-			wrapMode: Text.Wrap
+			elide: Text.ElideRight
 		}
 
 		Label {
 			id: secondaryHeaderLabel
 
 			anchors.top: headerLabel.bottom
-			width: parent.width
+			x: Theme.geometry_page_content_horizontalMargin
+			width: parent.width - 2*x
 			horizontalAlignment: Text.AlignHCenter
 			color: Theme.color_font_primary
 			font.pixelSize: Theme.font_size_body2
 			text: root.secondaryTitle
-			wrapMode: Text.Wrap
+			elide: Text.ElideRight
 		}
 	}
 

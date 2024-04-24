@@ -67,11 +67,13 @@ CT.Switch {
 		}
 	}
 
-	contentItem: Label {
-		id: label
-		text: root.text
-		color: Theme.color_font_primary
-		verticalAlignment: Text.AlignVCenter
+	contentItem: Item {
+		Label {
+			text: root.text
+			color: Theme.color_font_primary
+			width: parent.width - Theme.geometry_switch_groove_width
+			elide: Text.ElideRight
+		}
 	}
 
 	// Don't animate the value change when setting the value on initial load

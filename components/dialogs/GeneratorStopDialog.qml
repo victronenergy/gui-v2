@@ -40,10 +40,12 @@ GeneratorDialog {
 			width: parent.width
 
 			Label {
-				width: parent.width
 				height: implicitHeight + Theme.geometry_modalDialog_content_margins/2
 				wrapMode: Text.Wrap
 				horizontalAlignment: Text.AlignHCenter
+				x: Theme.geometry_page_content_horizontalMargin
+				elide: Text.ElideRight
+				width: parent.width - 2*x
 
 				//% "Total Run Time"
 				text: qsTrId("controlcard_generator_stopdialog_total_run_time")
@@ -56,7 +58,8 @@ GeneratorDialog {
 			}
 
 			Label {
-				width: parent.width
+				elide: Text.ElideRight
+				width: parent.width - 2*x
 				wrapMode: Text.Wrap
 				color: Theme.color_font_secondary
 				horizontalAlignment: Text.AlignHCenter
@@ -74,6 +77,8 @@ GeneratorDialog {
 			color: Theme.color_font_primary
 			horizontalAlignment: Text.AlignHCenter
 			visible: root.generator.autoStart
+			elide: Text.ElideRight
+			maximumLineCount: 2
 
 			//% "Generator will keep running if an autostart condition is met."
 			text: qsTrId("controlcard_generator_stopdialog_description")

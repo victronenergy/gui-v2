@@ -56,6 +56,11 @@ Item {
 				Label {
 					anchors.centerIn: parent
 					font.pixelSize: root.fontPixelSize
+					horizontalAlignment: Text.AlignHCenter
+					x: Theme.geometry_tabBar_horizontalMargin
+					width: parent.width - 2*x
+
+					elide: Text.ElideRight
 					text: modelData.value
 					color: modelData.enabled === false && model.index !== root.currentIndex
 						   ? Theme.color_font_disabled

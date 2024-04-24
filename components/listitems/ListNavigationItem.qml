@@ -27,10 +27,13 @@ ListItem {
 			font.pixelSize: Theme.font_size_body2
 			color: Theme.color_listItem_secondaryText
 			wrapMode: Text.Wrap
+			width: Math.min(implicitWidth, root.maximumContentWidth - icon.width - parent.spacing)
 			horizontalAlignment: Text.AlignRight
 		},
 
 		CP.ColorImage {
+			id: icon
+
 			anchors.verticalCenter: parent.verticalCenter
 			source: "qrc:/images/icon_arrow_32.svg"
 			rotation: 180

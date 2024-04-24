@@ -71,6 +71,10 @@ Item {
 				anchors.verticalCenter: icon.verticalCenter
 				font.pixelSize: Theme.font_size_body2
 				color: Theme.color_font_primary
+
+				// Keep the name bounding box inside the circle to avoid truncation
+				width: Math.min(implicitWidth, 0.7*gauges.width - icon.width - parent.spacing)
+				elide: Text.ElideRight
 			}
 		}
 
