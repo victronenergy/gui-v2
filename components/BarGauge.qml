@@ -6,16 +6,20 @@
 import QtQuick
 import QtQuick.Effects as Effects
 import Victron.VenusOS
+import Victron.Gauges
 
 Rectangle {
 	id: bgRect
 
-	property alias backgroundColor: bgRect.color
-	property alias foregroundColor: fgRect.color
+	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
+	readonly property int valueStatus: Gauges.getValueStatus(_value * 100, valueType)
+	property color foregroundColor: Theme.statusColorValue(valueStatus)
+	property color backgroundColor: Theme.statusColorValue(valueStatus, true)
 	property real value: 0.0
 	property real _value: isNaN(value) || value < 0 ? 0 : Math.min(1.0, value)
 	property bool animationEnabled
 
+	color: backgroundColor
 	onAnimationEnabledChanged: fgRect.resetYBinding()
 
 	Rectangle {
@@ -39,7 +43,7 @@ Rectangle {
 
 			width: parent.width
 			height: parent.height
-			color: Theme.color_ok
+			color: foregroundColor
 			y: nextY
 
 			// don't use a behavior on Y

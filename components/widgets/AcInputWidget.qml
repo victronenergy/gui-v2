@@ -53,6 +53,7 @@ AcWidget {
 			minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
 			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
 			inputMode: true
+			animationEnabled: root.animationEnabled
 		}
 	}
 

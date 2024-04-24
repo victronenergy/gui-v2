@@ -53,7 +53,7 @@ OverviewWidget {
 
 	color: "transparent"
 
-	VerticalGauge {
+	BarGauge {
 		id: animationRect
 		z: -1
 

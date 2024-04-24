@@ -216,6 +216,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ArcGauge.qml
     components/ArcGaugeQuantityRow.qml
     components/AsymmetricRoundedRectangle.qml
+    components/BarGauge.qml
     components/ButtonControlValue.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
@@ -284,7 +285,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/ToastNotification.qml
     components/Utils.js
     components/ValueRange.qml
-    components/VerticalGauge.qml
     components/ViewGradient.qml
     components/ClassAndVrmInstance.qml
 
