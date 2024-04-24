@@ -208,6 +208,9 @@
     "geometry_briefPage_sidePanel_loadGraph_height": 51,
     "geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width": 10,
 
+    "geometry_monitorWidget_sideWidget_width": 144,
+    "geometry_monitorWidget_bottomWidget_topMargin": 2,
+
     "geometry_quantityLabel_spacing": 2,
     "geometry_quantityLabel_bottomMargin": 2,
 

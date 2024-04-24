@@ -15,38 +15,14 @@ Column {
 
 	spacing: Theme.geometry_briefPage_sidePanel_columnSpacing
 
-	Item {
-		width: parent.width
-		height: solarQuantityLabel.y + solarQuantityLabel.height
-		visible: Global.solarChargers.model.count || Global.pvInverters.model.count
-
-		WidgetHeader {
-			id: solarHeader
-
-			//% "Solar yield"
-			title: qsTrId("brief_solar_yield")
-			icon.source: "qrc:/images/solaryield.svg"
-		}
-
-		ElectricalQuantityLabel {
-			id: solarQuantityLabel
-
-			anchors.top: solarHeader.bottom
-			dataObject: Global.system.solar
-			font.pixelSize: Theme.font_briefPage_quantityLabel_size
-		}
-
-		Loader {
-			anchors {
-				right: parent.right
-				top: parent.top
-				bottom: solarQuantityLabel.bottom
-				bottomMargin: solarQuantityLabel.bottomPadding
-			}
-			active: Global.solarChargers.model.count > 0 && Global.pvInverters.model.count === 0
-			width: Theme.geometry_briefPage_sidePanel_solarYield_width
-			sourceComponent: SolarYieldGraph {}
-		}
+	BriefMonitorWidget {
+		//% "Solar yield"
+		title: qsTrId("brief_solar_yield")
+		icon.source: "qrc:/images/solaryield.svg"
+		active: Global.solarChargers.model.count > 0 && Global.pvInverters.model.count === 0
+		visible: active
+		quantityLabel.dataObject: Global.system.solar
+		sideComponent: SolarYieldGraph {}
 	}
 
 	Column {
