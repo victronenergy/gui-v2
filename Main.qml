@@ -90,7 +90,7 @@ Window {
 		// To fix, we need to downscale everything by the appropriate factor,
 		// and take into account browser chrome stealing real-estate also.
 		onScaleChanged: Global.scalingRatio = contentItem.scale
-		scale: Math.min(1.0, root.width/Theme.geometry_screen_width, root.height/Theme.geometry_screen_height)
+		scale: Math.min(root.width/Theme.geometry_screen_width, root.height/Theme.geometry_screen_height)
 
 		// Ideally each item would use focus handling to get its own key events, but in wasm the
 		// pagestack's pages do not reliably receive key events even when focused.
