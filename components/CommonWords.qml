@@ -13,15 +13,6 @@ QtObject {
 	//% "AC In"
 	readonly property string ac_in: qsTrId("common_words_ac_in")
 
-	//% "AC Input"
-	readonly property string ac_input: qsTrId("common_words_ac_input")
-
-	//% "AC Input 1"
-	readonly property string ac_input_1: qsTrId("common_words_ac_input_1")
-
-	//% "AC Input 2"
-	readonly property string ac_input_2: qsTrId("common_words_ac_input_2")
-
 	//: The role for an AC input (grid meter, genset, acload, etc.)
 	//% "Role"
 	readonly property string ac_input_role: qsTrId("common_words_ac_input_role")
@@ -476,6 +467,15 @@ QtObject {
 
 	//% "Zero feed-in power limit"
 	readonly property string zero_feed_in_power_limit: qsTrId("common_words_zero_feed_in_power_limit")
+
+	function acInput(index) {
+			   //% "AC Input 1"
+		return index === 0 ? qsTrId("common_words_ac_input_1")
+			   //% "AC Input 2"
+			 : index === 1 ? qsTrId("common_words_ac_input_2")
+			   //% "AC Input"
+			 : qsTrId("common_words_ac_input")
+	}
 
 	function onOrOff(value) {
 		if (value === 0 || value === false) {
