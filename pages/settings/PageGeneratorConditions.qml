@@ -76,8 +76,8 @@ Page {
 				updateOnClick: false
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
-					{ display: CommonWords.ac_input_1, value: 1 },
-					{ display: CommonWords.ac_input_2, value: 2, readOnly: !(capabilities.value & 1) },
+					{ display: CommonWords.acInput(0), value: 1 },
+					{ display: CommonWords.acInput(1), value: 2, readOnly: !(capabilities.value & 1) },
 				]
 
 				onOptionClicked: function(index) {

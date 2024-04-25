@@ -28,7 +28,7 @@ Page {
 				text: qsTrId("evcs_ac_position")
 				optionModel: [
 					{
-						display: CommonWords.ac_input,
+						display: CommonWords.acInput(),
 						value: VenusOS.Evcs_Position_ACInput
 					},
 					{
