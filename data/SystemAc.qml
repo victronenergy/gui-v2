@@ -53,7 +53,9 @@ QtObject {
 		}
 
 		readonly property VeQuickItem _maximumCurrent: VeQuickItem {
-			uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/NoAcIn/Consumption/Current/Max"
+			uid: Global.acInputs.input1Info.connected ? Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
+			   : Global.acInputs.input2Info.connected ? Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
+			   : Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
 		}
 	}
 
