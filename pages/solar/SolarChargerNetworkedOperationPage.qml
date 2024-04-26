@@ -126,9 +126,7 @@ Page {
 			ListButton {
 				//% "BMS control"
 				text: qsTrId("charger_network_bms_control")
-				//: Reset the BMS control
-				//% "Reset"
-				button.text: qsTrId("charger_network_bms_control_reset")
+				button.text: CommonWords.reset
 				allowed: bmsControlled.dataItem.value === 1
 				onClicked: {
 					bmsControlled.dataItem.setValue(0)
