@@ -5798,7 +5798,7 @@ Do you want to continue?</source>
       <location filename="../../components/EnvironmentGaugePanel.qml" line="82"/>
       <source>RH</source>
       <extracomment>Abbreviation of "Room Humidity"</extracomment>
-      <translation>ВІДНОСНА ВОЛОГІСТЬ ПОВІТРЯ</translation>
+      <translation>RH</translation>
     </message>
     <message id="settings_firmware_error_during_checking_for_updates">
       <location filename="../../components/FirmwareUpdate.qml" line="35"/>

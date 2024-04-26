@@ -5720,7 +5720,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
     <message id="modaldialog_set">
       <location filename="../../components/dialogs/ModalDialog.qml" line="25"/>
       <source>Set</source>
-      <translation>&lt;mrk mtype="seg" mid="562"&gt;Sep&lt;/mrk&gt;</translation>
+      <translation>Sæt</translation>
     </message>
     <message id="modaldialog_cancel">
       <location filename="../../components/dialogs/ModalDialog.qml" line="36"/>

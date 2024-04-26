@@ -98,7 +98,7 @@
     <message id="settings_radio_button_enter_password">
       <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="142"/>
       <source>Enter password</source>
-      <translation>&lt;mrk mtype="seg" mid="769"&gt;Introducir contraseña&lt;/mrk&gt;</translation>
+      <translation>Introducir contraseña</translation>
     </message>
     <message id="settings_firmware_press_to_check">
       <location filename="../../components/settings/FirmwareCheckListButton.qml" line="18"/>
@@ -1591,7 +1591,7 @@ Si esto no funcionara, compruebe el buen funcionamiento de la tarjeta SIM en un 
     <message id="page_settings_gsm_imei">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="222"/>
       <source>IMEI</source>
-      <translation>&lt;mrk mtype="seg" mid="520"&gt;El número de IMEI debe tener al menos 15 dígitos.&lt;/mrk&gt;</translation>
+      <translation>IMEI</translation>
     </message>
     <message id="settings_ess_battery_life_self_consumption">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="15"/>
@@ -2842,7 +2842,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
       <source>Time</source>
       <extracomment>Charging time for the EV charger</extracomment>
-      <translation>&lt;mrk mtype="seg" mid="452"&gt;Plazo&lt;/mrk&gt;</translation>
+      <translation>Momento</translation>
     </message>
     <message id="evcs_charge_mode">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="103"/>

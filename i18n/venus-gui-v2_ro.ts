@@ -5901,7 +5901,7 @@ Doriți să continuați?</translation>
     <message id="nav_overview">
       <location filename="../../pages/OverviewPage.qml" line="394"/>
       <source>Overview</source>
-      <translation>Privire de ansamblu</translation>
+      <translation>Sitem</translation>
     </message>
     <message id="nav_levels">
       <location filename="../../pages/LevelsPage.qml" line="16"/>
