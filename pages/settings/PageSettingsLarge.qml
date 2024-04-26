@@ -23,7 +23,6 @@ Page {
 				text: qsTrId("settings_large_signal_k")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
 				allowed: dataItem.isValid
-				writeAccessLevel: VenusOS.User_AccessType_Installer
 			}
 
 			ListLabel {
@@ -39,7 +38,6 @@ Page {
 				text: qsTrId("settings_large_node_red")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 				allowed: dataItem.isValid
-				writeAccessLevel: VenusOS.User_AccessType_Installer
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
 					{ display: CommonWords.enabled, value: VenusOS.NodeRed_Mode_Enabled },
