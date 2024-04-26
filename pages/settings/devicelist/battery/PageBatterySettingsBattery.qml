@@ -137,7 +137,6 @@ Page {
 				//% "Current offset"
 				text: qsTrId("batterysettingsbattery_current_offset")
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/CurrentOffset"
-				showAccessLevel: VenusOS.User_AccessType_User
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
