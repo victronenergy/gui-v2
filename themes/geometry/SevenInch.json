@@ -19,6 +19,9 @@
     "geometry_listItemButton_maximumWidth": 180,
     "geometry_listItemButton_height": 40,
 
+    "geometry_listSectionHeader_topPadding": 18,
+    "geometry_listSectionHeader_bottomPadding": 8,
+
     "geometry_panel_radius": 8,
 
     "geometry_progressBar_height": 8,

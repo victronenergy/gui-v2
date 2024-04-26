@@ -329,6 +329,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListItemBackground.qml
     components/listitems/ListLabel.qml
     components/listitems/ListNavigationItem.qml
+    components/listitems/ListNumberField.qml
     components/listitems/ListPortField.qml
     components/listitems/ListRadioButton.qml
     components/listitems/ListRadioButtonGroup.qml
@@ -337,6 +338,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListQuantityGroupNavigationItem.qml
     components/listitems/ListQuantityItem.qml
     components/listitems/ListRangeSlider.qml
+    components/listitems/ListSectionHeader.qml
     components/listitems/ListSlider.qml
     components/listitems/ListSpinBox.qml
     components/listitems/ListSwitch.qml
@@ -496,6 +498,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsCanbus.qml
     pages/settings/PageSettingsDisplay.qml
     pages/settings/PageSettingsDisplayBrief.qml
+    pages/settings/PageSettingsDisplayMinMax.qml
     pages/settings/PageSettingsDisplayUnits.qml
     pages/settings/PageSettingsDvcc.qml
     pages/settings/PageSettingsFirmware.qml

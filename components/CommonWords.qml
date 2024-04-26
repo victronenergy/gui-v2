@@ -234,11 +234,20 @@ QtObject {
 	//% "Manufacturer"
 	readonly property string manufacturer: qsTrId("common_words_manufacturer")
 
+	//% "Maximum current"
+	readonly property string maximum_current: qsTrId("common_words_maximum_current")
+
+	//% "Maximum power"
+	readonly property string maximum_power: qsTrId("common_words_maximum_power")
+
 	//% "Maximum temperature"
 	readonly property string maximum_temperature: qsTrId("common_words_maximum_temperature")
 
 	//% "Maximum voltage"
 	readonly property string maximum_voltage: qsTrId("common_words_maximum_voltage")
+
+	//% "Minimum current"
+	readonly property string minimum_current: qsTrId("common_words_minimum_current")
 
 	//% "Minimum temperature"
 	readonly property string minimum_temperature: qsTrId("common_words_minimum_temperature")
@@ -338,6 +347,9 @@ QtObject {
 	//: Relay switch
 	//% "Relay"
 	readonly property string relay: qsTrId("common_words_relay")
+
+	//% "Reset"
+	readonly property string reset: qsTrId("common_words_reset")
 
 	//% "Reboot"
 	readonly property string reboot: qsTrId("common_words_reboot")

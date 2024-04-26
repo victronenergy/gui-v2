@@ -157,6 +157,14 @@ Page {
 				}
 			}
 
+			ListNavigationItem {
+				//% "Minimum and maximum gauge ranges"
+				text: qsTrId("settings_display_minmax")
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayMinMax.qml", {"title": text})
+				}
+			}
+
 			ListRadioButtonGroup {
 				id: runningVersion
 
