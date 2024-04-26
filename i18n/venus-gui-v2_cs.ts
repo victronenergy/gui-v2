@@ -10,12 +10,12 @@
       <translation>%1%</translation>
     </message>
     <message id="common_words_disabled">
-      <location filename="../../components/CommonWords.qml" line="137"/>
+      <location filename="../../components/CommonWords.qml" line="128"/>
       <source>Disabled</source>
       <translation>Deaktivováno</translation>
     </message>
     <message id="common_words_inverter_overload">
-      <location filename="../../components/CommonWords.qml" line="213"/>
+      <location filename="../../components/CommonWords.qml" line="204"/>
       <source>Inverter overload</source>
       <translation>Přetížení měniče</translation>
     </message>
@@ -31,12 +31,12 @@
       <translation>Vypnuto</translation>
     </message>
     <message id="common_words_auto">
-      <location filename="../../components/CommonWords.qml" line="80"/>
+      <location filename="../../components/CommonWords.qml" line="71"/>
       <source>Auto</source>
       <translation>Auto</translation>
     </message>
     <message id="common_words_high_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="177"/>
+      <location filename="../../components/CommonWords.qml" line="168"/>
       <source>High battery voltage</source>
       <translation>Vysoké napětí baterie</translation>
     </message>
@@ -46,12 +46,12 @@
       <translation>Měnič / nabíječka</translation>
     </message>
     <message id="common_words_low_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="222"/>
+      <location filename="../../components/CommonWords.qml" line="213"/>
       <source>Low battery voltage</source>
       <translation>Nízké napětí baterie</translation>
     </message>
     <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="241"/>
+      <location filename="../../components/CommonWords.qml" line="232"/>
       <source>Manual</source>
       <translation>Manuální</translation>
     </message>
@@ -68,13 +68,13 @@
       <translation>Pozice</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="382"/>
+      <location filename="../../components/CommonWords.qml" line="385"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation>Rychlost</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="400"/>
+      <location filename="../../components/CommonWords.qml" line="403"/>
       <source>State</source>
       <translation>Stav</translation>
     </message>
@@ -116,7 +116,7 @@
       <translation>Solární výnos</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="127"/>
+      <location filename="../../data/System.qml" line="132"/>
       <source>External control</source>
       <translation>Externí ovládání</translation>
     </message>
@@ -126,122 +126,122 @@
       <translation>Zátěže</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="49"/>
+      <location filename="../../pages/LevelsPage.qml" line="53"/>
       <source>Tanks</source>
       <translation>Nádrže</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="51"/>
+      <location filename="../../pages/LevelsPage.qml" line="55"/>
       <source>Environment</source>
       <translation>Prostředí</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="141"/>
+      <location filename="../../pages/NotificationsPage.qml" line="145"/>
       <source>No current alerts</source>
       <translation>Žádná aktuální upozornění</translation>
     </message>
     <message id="settings_bluetooth">
-      <location filename="../../pages/SettingsPage.qml" line="107"/>
+      <location filename="../../pages/SettingsPage.qml" line="111"/>
       <source>Bluetooth</source>
       <translation>Bluetooth</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="30"/>
+      <location filename="../../pages/SettingsPage.qml" line="34"/>
       <source>General</source>
       <translation>Všeobecný</translation>
     </message>
     <message id="settings_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="35"/>
+      <location filename="../../pages/SettingsPage.qml" line="39"/>
       <source>Firmware</source>
       <translation>Firmware</translation>
     </message>
     <message id="settings_date_and_time">
-      <location filename="../../pages/SettingsPage.qml" line="40"/>
+      <location filename="../../pages/SettingsPage.qml" line="44"/>
       <source>Date &amp; Time</source>
       <translation>Datum a čas</translation>
     </message>
     <message id="settings_remote_console">
-      <location filename="../../pages/SettingsPage.qml" line="45"/>
+      <location filename="../../pages/SettingsPage.qml" line="49"/>
       <source>Remote Console</source>
       <translation>Vzdálené ovládání</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="50"/>
+      <location filename="../../pages/SettingsPage.qml" line="54"/>
       <source>System setup</source>
       <translation>Nastavení systému</translation>
     </message>
     <message id="settings_system_dvcc">
-      <location filename="../../pages/SettingsPage.qml" line="55"/>
+      <location filename="../../pages/SettingsPage.qml" line="59"/>
       <source>DVCC</source>
       <translation>DVCC</translation>
     </message>
     <message id="settings_display_and_language">
-      <location filename="../../pages/SettingsPage.qml" line="60"/>
+      <location filename="../../pages/SettingsPage.qml" line="64"/>
       <source>Display &amp; Language</source>
       <translation>Zobrazení a jazyk</translation>
     </message>
     <message id="settings_vrm_online_portal">
-      <location filename="../../pages/SettingsPage.qml" line="65"/>
+      <location filename="../../pages/SettingsPage.qml" line="69"/>
       <source>VRM online portal</source>
       <translation>VRM online portál</translation>
     </message>
     <message id="settings_ess">
-      <location filename="../../pages/SettingsPage.qml" line="70"/>
+      <location filename="../../pages/SettingsPage.qml" line="74"/>
       <source>ESS</source>
       <translation>ESS</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/SettingsPage.qml" line="75"/>
+      <location filename="../../pages/SettingsPage.qml" line="79"/>
       <source>Energy meters</source>
       <translation>Měřiče energie</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/SettingsPage.qml" line="80"/>
+      <location filename="../../pages/SettingsPage.qml" line="84"/>
       <source>PV inverters</source>
       <translation>FV měniče</translation>
     </message>
     <message id="settings_ethernet">
-      <location filename="../../pages/SettingsPage.qml" line="85"/>
+      <location filename="../../pages/SettingsPage.qml" line="89"/>
       <source>Ethernet</source>
       <translation>Ethernet</translation>
     </message>
     <message id="settings_wifi">
-      <location filename="../../pages/SettingsPage.qml" line="90"/>
+      <location filename="../../pages/SettingsPage.qml" line="94"/>
       <source>Wi-Fi</source>
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_gsm_modem">
-      <location filename="../../pages/SettingsPage.qml" line="97"/>
+      <location filename="../../pages/SettingsPage.qml" line="101"/>
       <source>GSM modem</source>
       <translation>GSM modem</translation>
     </message>
     <message id="settings_gps">
-      <location filename="../../pages/SettingsPage.qml" line="102"/>
+      <location filename="../../pages/SettingsPage.qml" line="106"/>
       <source>GPS</source>
       <translation>GPS</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/SettingsPage.qml" line="113"/>
+      <location filename="../../pages/SettingsPage.qml" line="117"/>
       <source>Generator start/stop</source>
       <translation>Spuštění/zastavení generátoru</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/SettingsPage.qml" line="118"/>
+      <location filename="../../pages/SettingsPage.qml" line="122"/>
       <source>Tank pump</source>
       <translation>Čerpadlo nádrže</translation>
     </message>
     <message id="settings_services">
-      <location filename="../../pages/SettingsPage.qml" line="128"/>
+      <location filename="../../pages/SettingsPage.qml" line="132"/>
       <source>Services</source>
       <translation>Zákaznický servis</translation>
     </message>
     <message id="settings_io">
-      <location filename="../../pages/SettingsPage.qml" line="133"/>
+      <location filename="../../pages/SettingsPage.qml" line="137"/>
       <source>I/O</source>
       <translation>I/O</translation>
     </message>
     <message id="settings_venus_os_large_features">
-      <location filename="../../pages/SettingsPage.qml" line="138"/>
+      <location filename="../../pages/SettingsPage.qml" line="142"/>
       <source>Venus OS Large features</source>
       <translation>Funkce zařízení Venus OS Large</translation>
     </message>
@@ -455,8 +455,8 @@
       <source>Value must be lower than start value</source>
       <translation>Hodnota musí být nižší než spouštěcí hodnota</translation>
     </message>
-    <message id="ac_output">
-      <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="29"/>
+    <message id="settings_minmax_acout_max_power">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="106"/>
       <source>AC output</source>
       <translation>AC výstup</translation>
     </message>
@@ -1705,12 +1705,12 @@ Další informace naleznete v dokumentaci.</translation>
       <translation>Pomalé nabíjení</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="133"/>
+      <location filename="../../data/System.qml" line="138"/>
       <source>Sustain</source>
       <translation>Udržování</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="136"/>
+      <location filename="../../data/System.qml" line="141"/>
       <source>Recharge</source>
       <translation>Nabíjení</translation>
     </message>
@@ -2530,72 +2530,72 @@ Používáte zařízení poprvé? Ujistěte se, že jste nastavili nebo zakázal
       <translation>Opravdu chcete deaktivovat přístupový bod?</translation>
     </message>
     <message id="settings_tz_date_time_utc">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="65"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="87"/>
       <source>Date/Time UTC</source>
       <translation>Datum a čas UTC</translation>
     </message>
     <message id="settings_tz_date_time_local">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="71"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="98"/>
       <source>Date/Time local</source>
       <translation>Místní datum a čas</translation>
     </message>
     <message id="settings_tz_time_zone">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="83"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="117"/>
       <source>Time zone</source>
       <translation>Časové pásmo</translation>
     </message>
     <message id="settings_tz_africa">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="173"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="207"/>
       <source>Africa</source>
       <translation>Afrika</translation>
     </message>
     <message id="settings_tz_america">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="179"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="213"/>
       <source>America</source>
       <translation>Amerika</translation>
     </message>
     <message id="settings_tz_antartica">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="185"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="219"/>
       <source>Antartica</source>
       <translation>Antartica</translation>
     </message>
     <message id="settings_tz_artic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="191"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="225"/>
       <source>Artic</source>
       <translation>Artic</translation>
     </message>
     <message id="settings_tz_asia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="197"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="231"/>
       <source>Asia</source>
       <translation>Asie</translation>
     </message>
     <message id="settings_tz_atlantic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="203"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="237"/>
       <source>Atlantic</source>
       <translation>Atlantik</translation>
     </message>
     <message id="settings_tz_ustralia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="209"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="243"/>
       <source>Australia</source>
       <translation>Austrálie</translation>
     </message>
     <message id="settings_tz_europe">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="215"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="249"/>
       <source>Europe</source>
       <translation>Evropa</translation>
     </message>
     <message id="settings_tz_indian">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="221"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="255"/>
       <source>Indian</source>
       <translation>Indie</translation>
     </message>
     <message id="settings_tz_pacific">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="227"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="261"/>
       <source>Pacific</source>
       <translation>Pacifik</translation>
     </message>
     <message id="settings_tz_etc">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="233"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="267"/>
       <source>Etc</source>
       <translation>Atd</translation>
     </message>
@@ -2642,25 +2642,25 @@ Používáte zařízení poprvé? Ujistěte se, že jste nastavili nebo zakázal
       <translation>Poslední chyby</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="505"/>
+      <location filename="../../components/CommonWords.qml" line="517"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Poslední chyba</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="508"/>
+      <location filename="../../components/CommonWords.qml" line="520"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>Předposlední chyba</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="511"/>
+      <location filename="../../components/CommonWords.qml" line="523"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>3. poslední chyba</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="514"/>
+      <location filename="../../components/CommonWords.qml" line="526"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>4. poslední chyba</translation>
@@ -2742,14 +2742,14 @@ Používáte zařízení poprvé? Ujistěte se, že jste nastavili nebo zakázal
       <source>Charge voltage</source>
       <translation>Nabíjecí napětí</translation>
     </message>
-    <message id="charger_network_bms_control_reset">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="131"/>
+    <message id="common_words_reset">
+      <location filename="../../components/CommonWords.qml" line="352"/>
       <source>Reset</source>
       <extracomment>Reset the BMS control</extracomment>
       <translation>Reset</translation>
     </message>
     <message id="charger_network_bms_control_info">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="142"/>
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="140"/>
       <source>BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present.</source>
       <translation>Řízení BMS se aktivuje automaticky, pokud je BMS přítomna. Resetujte, pokud se změnila konfigurace systému nebo pokud není přítomna žádná BMS.</translation>
     </message>
@@ -2943,7 +2943,7 @@ Používáte zařízení poprvé? Ujistěte se, že jste nastavili nebo zakázal
       <translation>Zařízení RV-C</translation>
     </message>
     <message id="settings_page_debug_enable_fps_visualizer">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="17"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="38"/>
       <source>Enable frame-rate visualizer</source>
       <translation>Povolení vizualizéru snímkové frekvence</translation>
     </message>
@@ -3035,7 +3035,7 @@ Používáte zařízení poprvé? Ujistěte se, že jste nastavili nebo zakázal
       <translation>Alarmové ikony</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="423"/>
+      <location filename="../../components/CommonWords.qml" line="426"/>
       <source>Switch</source>
       <extracomment>Change the battery mode</extracomment>
       <translation>Spínač</translation>
@@ -3081,7 +3081,7 @@ Používáte zařízení poprvé? Ujistěte se, že jste nastavili nebo zakázal
       <translation>Stav životnosti</translation>
     </message>
     <message id="common_words_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="92"/>
+      <location filename="../../components/CommonWords.qml" line="83"/>
       <source>Battery temperature</source>
       <translation>Teplota baterie</translation>
     </message>
@@ -3611,12 +3611,12 @@ Používáte zařízení poprvé? Ujistěte se, že jste nastavili nebo zakázal
       <translation>Výstup</translation>
     </message>
     <message id="alternator_wakespeed_field_drive">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="67"/>
       <source>Field drive</source>
       <translation>Polní pohon</translation>
     </message>
     <message id="alternator_wakespeed_engine_speed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="81"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="82"/>
       <source>Engine speed</source>
       <translation>Otáčky motoru</translation>
     </message>
@@ -4479,12 +4479,12 @@ Používáte zařízení poprvé? Ujistěte se, že jste nastavili nebo zakázal
       <translation>AC v %1</translation>
     </message>
     <message id="common_words_dc">
-      <location filename="../../components/CommonWords.qml" line="126"/>
+      <location filename="../../components/CommonWords.qml" line="117"/>
       <source>DC</source>
       <translation>DC</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="378"/>
+      <location filename="../../components/CommonWords.qml" line="381"/>
       <source>SOC %1%</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SOC %1%</translation>
@@ -4707,7 +4707,7 @@ Chcete pokračovat?</translation>
       <translation>Pokročilé</translation>
     </message>
     <message id="common_words_alarm_setup">
-      <location filename="../../components/CommonWords.qml" line="65"/>
+      <location filename="../../components/CommonWords.qml" line="56"/>
       <source>Alarm setup</source>
       <translation>Nastavení alarmu</translation>
     </message>
@@ -5005,13 +5005,13 @@ Chcete pokračovat?</translation>
       <translation>Chyba čidla napětí</translation>
     </message>
     <message id="common_words_alarm_setting_overload">
-      <location filename="../../components/CommonWords.qml" line="58"/>
+      <location filename="../../components/CommonWords.qml" line="49"/>
       <source>Overload</source>
       <extracomment>Alarm configuration when 'overload' state is triggered</extracomment>
       <translation>Přetížení</translation>
     </message>
     <message id="common_words_alarm_setting_dc_ripple">
-      <location filename="../../components/CommonWords.qml" line="62"/>
+      <location filename="../../components/CommonWords.qml" line="53"/>
       <source>DC ripple</source>
       <extracomment>Alarm configuration when 'DC ripple' state is triggered</extracomment>
       <translation>DC zvlnění</translation>
@@ -5063,85 +5063,85 @@ Chcete pokračovat?</translation>
       <translation>AC In</translation>
     </message>
     <message id="common_words_ac_input">
-      <location filename="../../components/CommonWords.qml" line="17"/>
+      <location filename="../../components/CommonWords.qml" line="489"/>
       <source>AC Input</source>
       <translation>AC VSTUP</translation>
     </message>
     <message id="common_words_ac_input_1">
-      <location filename="../../components/CommonWords.qml" line="20"/>
+      <location filename="../../components/CommonWords.qml" line="485"/>
       <source>AC Input 1</source>
       <translation>AC vstup 1</translation>
     </message>
     <message id="common_words_ac_input_2">
-      <location filename="../../components/CommonWords.qml" line="23"/>
+      <location filename="../../components/CommonWords.qml" line="487"/>
       <source>AC Input 2</source>
       <translation>AC vstup 2</translation>
     </message>
     <message id="common_words_ac_input_role">
-      <location filename="../../components/CommonWords.qml" line="27"/>
+      <location filename="../../components/CommonWords.qml" line="18"/>
       <source>Role</source>
       <extracomment>The role for an AC input (grid meter, genset, acload, etc.)</extracomment>
       <translation>Role</translation>
     </message>
     <message id="common_words_ac_load">
-      <location filename="../../components/CommonWords.qml" line="30"/>
+      <location filename="../../components/CommonWords.qml" line="21"/>
       <source>AC load</source>
       <translation>AC zatěž</translation>
     </message>
     <message id="common_words_ac_out">
-      <location filename="../../components/CommonWords.qml" line="33"/>
+      <location filename="../../components/CommonWords.qml" line="24"/>
       <source>AC Out</source>
       <translation>AC Out</translation>
     </message>
     <message id="common_words_ac_output">
-      <location filename="../../components/CommonWords.qml" line="36"/>
+      <location filename="../../components/CommonWords.qml" line="27"/>
       <source>AC Output</source>
       <translation>AC výstup</translation>
     </message>
     <message id="common_words_ac_phase_x">
-      <location filename="../../components/CommonWords.qml" line="40"/>
+      <location filename="../../components/CommonWords.qml" line="31"/>
       <source>AC Phase L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>Fáze střídavého proudu L%1</translation>
     </message>
     <message id="common_words_ac_sensor_x">
-      <location filename="../../components/CommonWords.qml" line="43"/>
+      <location filename="../../components/CommonWords.qml" line="34"/>
       <source>AC Sensor %1</source>
       <translation>Senzor střídavého proudu %1</translation>
     </message>
     <message id="common_words_ac_sensor">
-      <location filename="../../components/CommonWords.qml" line="46"/>
+      <location filename="../../components/CommonWords.qml" line="37"/>
       <source>AC Sensors</source>
       <translation>Senzory střídavého proudu</translation>
     </message>
     <message id="common_words_active">
-      <location filename="../../components/CommonWords.qml" line="50"/>
+      <location filename="../../components/CommonWords.qml" line="41"/>
       <source>Active</source>
       <extracomment>Status is 'active'</extracomment>
       <translation>Aktivní</translation>
     </message>
     <message id="common_words_alarm_status">
-      <location filename="../../components/CommonWords.qml" line="68"/>
+      <location filename="../../components/CommonWords.qml" line="59"/>
       <source>Alarm status</source>
       <translation>Stav alarmu</translation>
     </message>
     <message id="common_words_alarms">
-      <location filename="../../components/CommonWords.qml" line="71"/>
+      <location filename="../../components/CommonWords.qml" line="62"/>
       <source>Alarms</source>
       <translation>Alarmy</translation>
     </message>
     <message id="common_words_allow_to_charge">
-      <location filename="../../components/CommonWords.qml" line="74"/>
+      <location filename="../../components/CommonWords.qml" line="65"/>
       <source>Allow to charge</source>
       <translation>Povolit nabíjení</translation>
     </message>
     <message id="common_words_allow_to_discharge">
-      <location filename="../../components/CommonWords.qml" line="77"/>
+      <location filename="../../components/CommonWords.qml" line="68"/>
       <source>Allow to discharge</source>
       <translation>Povolit vybíjení</translation>
     </message>
     <message id="common_words_automatic_scanning">
-      <location filename="../../components/CommonWords.qml" line="83"/>
+      <location filename="../../components/CommonWords.qml" line="74"/>
       <source>Automatic scanning</source>
       <translation>Automatické skenování</translation>
     </message>
@@ -5151,34 +5151,34 @@ Chcete pokračovat?</translation>
       <translation>Baterie</translation>
     </message>
     <message id="common_words_battery_current">
-      <location filename="../../components/CommonWords.qml" line="89"/>
+      <location filename="../../components/CommonWords.qml" line="80"/>
       <source>Battery current</source>
       <translation>proud baterie</translation>
     </message>
     <message id="common_words_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="95"/>
+      <location filename="../../components/CommonWords.qml" line="86"/>
       <source>Battery voltage</source>
       <translation>Napětí baterie</translation>
     </message>
     <message id="common_words_charge_current">
-      <location filename="../../components/CommonWords.qml" line="98"/>
+      <location filename="../../components/CommonWords.qml" line="89"/>
       <source>Charge current</source>
       <translation>Nabíjecí proud</translation>
     </message>
     <message id="common_words_charging">
-      <location filename="../../components/CommonWords.qml" line="102"/>
+      <location filename="../../components/CommonWords.qml" line="93"/>
       <source>Charging</source>
       <extracomment>"Charging" state</extracomment>
       <translation>Nabíjení</translation>
     </message>
     <message id="common_words_clear_error_action">
-      <location filename="../../components/CommonWords.qml" line="106"/>
+      <location filename="../../components/CommonWords.qml" line="97"/>
       <source>Clear error</source>
       <extracomment>Action to clear an error state</extracomment>
       <translation>Zrušení chyby</translation>
     </message>
     <message id="common_words_closed_status">
-      <location filename="../../components/CommonWords.qml" line="110"/>
+      <location filename="../../components/CommonWords.qml" line="101"/>
       <source>Closed</source>
       <extracomment>Status is 'closed'</extracomment>
       <translation>Sepnuto</translation>
@@ -5189,76 +5189,76 @@ Chcete pokračovat?</translation>
       <translation>Připojeno</translation>
     </message>
     <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="117"/>
+      <location filename="../../components/CommonWords.qml" line="108"/>
       <source>Current</source>
       <extracomment>Electric current, as measured in Amps</extracomment>
       <translation>Proud</translation>
     </message>
     <message id="common_words_current_transformers">
-      <location filename="../../components/CommonWords.qml" line="120"/>
+      <location filename="../../components/CommonWords.qml" line="111"/>
       <source>Current transformers</source>
       <translation>Proudové transformátory</translation>
     </message>
     <message id="common_words_custom_name">
-      <location filename="../../components/CommonWords.qml" line="123"/>
+      <location filename="../../components/CommonWords.qml" line="114"/>
       <source>Custom name</source>
       <translation>Vlastní název</translation>
     </message>
     <message id="common_words_debug">
-      <location filename="../../components/CommonWords.qml" line="130"/>
+      <location filename="../../components/CommonWords.qml" line="121"/>
       <source>Debug</source>
       <extracomment>Title for a menu item which displays debugging information</extracomment>
       <translation>Odladit</translation>
     </message>
     <message id="common_words_device">
-      <location filename="../../components/CommonWords.qml" line="134"/>
+      <location filename="../../components/CommonWords.qml" line="125"/>
       <source>Device</source>
       <extracomment>Title for device information</extracomment>
       <translation>Zařízení</translation>
     </message>
     <message id="common_words_discharging">
-      <location filename="../../components/CommonWords.qml" line="140"/>
+      <location filename="../../components/CommonWords.qml" line="131"/>
       <source>Discharging</source>
       <translation>vybíjení</translation>
     </message>
     <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="302"/>
+      <location filename="../../components/Utils.js" line="283"/>
       <source>Disconnected</source>
       <translation>Odpojeno</translation>
     </message>
     <message id="common_words_enable">
-      <location filename="../../components/CommonWords.qml" line="146"/>
+      <location filename="../../components/CommonWords.qml" line="137"/>
       <source>Enable</source>
       <translation>Aktivovat</translation>
     </message>
     <message id="common_words_enabled">
-      <location filename="../../components/CommonWords.qml" line="149"/>
+      <location filename="../../components/CommonWords.qml" line="140"/>
       <source>Enabled</source>
       <translation>Aktivováno</translation>
     </message>
     <message id="common_words_energy">
-      <location filename="../../components/CommonWords.qml" line="153"/>
+      <location filename="../../components/CommonWords.qml" line="144"/>
       <source>Energy</source>
       <extracomment>Amount of charged energy</extracomment>
       <translation>Energie</translation>
     </message>
     <message id="common_words_error">
-      <location filename="../../components/CommonWords.qml" line="156"/>
+      <location filename="../../components/CommonWords.qml" line="147"/>
       <source>Error</source>
       <translation>Chyba</translation>
     </message>
     <message id="common_words_error_colon">
-      <location filename="../../components/CommonWords.qml" line="159"/>
+      <location filename="../../components/CommonWords.qml" line="150"/>
       <source>Error:</source>
       <translation>Chyba:</translation>
     </message>
     <message id="common_words_error_code">
-      <location filename="../../components/CommonWords.qml" line="162"/>
+      <location filename="../../components/CommonWords.qml" line="153"/>
       <source>Error code</source>
       <translation>Kód chyby</translation>
     </message>
     <message id="common_words_firmware_version">
-      <location filename="../../components/CommonWords.qml" line="165"/>
+      <location filename="../../components/CommonWords.qml" line="156"/>
       <source>Firmware version</source>
       <translation>Verze firmwaru</translation>
     </message>
@@ -5268,105 +5268,105 @@ Chcete pokračovat?</translation>
       <translation>Generátor</translation>
     </message>
     <message id="common_words_grid_meter">
-      <location filename="../../components/CommonWords.qml" line="171"/>
+      <location filename="../../components/CommonWords.qml" line="162"/>
       <source>Grid meter</source>
       <translation>Měřič sítě</translation>
     </message>
     <message id="common_words_high_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="174"/>
+      <location filename="../../components/CommonWords.qml" line="165"/>
       <source>High battery temperature</source>
       <translation>Vysoká teplota baterie</translation>
     </message>
     <message id="common_words_high_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="181"/>
+      <location filename="../../components/CommonWords.qml" line="172"/>
       <source>High level alarm</source>
       <extracomment>An alarm that triggers when the level is too high</extracomment>
       <translation>Alarm vysoké úrovně</translation>
     </message>
     <message id="common_words_high_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="184"/>
+      <location filename="../../components/CommonWords.qml" line="175"/>
       <source>High starter battery voltage</source>
       <translation>Vysoké napětí startovací baterie</translation>
     </message>
     <message id="common_words_high_temperature">
-      <location filename="../../components/CommonWords.qml" line="187"/>
+      <location filename="../../components/CommonWords.qml" line="178"/>
       <source>High temperature</source>
       <translation>Vysoká teplota</translation>
     </message>
     <message id="common_words_high_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="190"/>
+      <location filename="../../components/CommonWords.qml" line="181"/>
       <source>High voltage alarms</source>
       <translation>Alarmy vysokého napětí</translation>
     </message>
     <message id="common_words_history">
-      <location filename="../../components/CommonWords.qml" line="193"/>
+      <location filename="../../components/CommonWords.qml" line="184"/>
       <source>History</source>
       <translation>Historie</translation>
     </message>
     <message id="common_words_x_hours">
-      <location filename="../../components/CommonWords.qml" line="196"/>
+      <location filename="../../components/CommonWords.qml" line="187"/>
       <source>%1 Hour(s)</source>
       <translation>%1 Hodina(y)</translation>
     </message>
     <message id="common_words_idle">
-      <location filename="../../components/CommonWords.qml" line="199"/>
+      <location filename="../../components/CommonWords.qml" line="190"/>
       <source>Idle</source>
       <translation>Nečinný</translation>
     </message>
     <message id="common_words_inactive_status">
-      <location filename="../../components/CommonWords.qml" line="203"/>
+      <location filename="../../components/CommonWords.qml" line="194"/>
       <source>Inactive</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation>Neaktivní</translation>
     </message>
     <message id="common_words_ip_address">
-      <location filename="../../components/CommonWords.qml" line="216"/>
+      <location filename="../../components/CommonWords.qml" line="207"/>
       <source>IP address</source>
       <translation>IP adresa</translation>
     </message>
     <message id="common_words_low_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="219"/>
+      <location filename="../../components/CommonWords.qml" line="210"/>
       <source>Low battery temperature</source>
       <translation>Nízká teplota baterie</translation>
     </message>
     <message id="common_words_low_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="226"/>
+      <location filename="../../components/CommonWords.qml" line="217"/>
       <source>Low level alarm</source>
       <extracomment>An alarm that triggers when the level is too low</extracomment>
       <translation>Alarm nízké úrovně</translation>
     </message>
     <message id="common_words_low_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="229"/>
+      <location filename="../../components/CommonWords.qml" line="220"/>
       <source>Low starter battery voltage</source>
       <translation>Nízké napětí startovací baterie</translation>
     </message>
     <message id="common_words_low_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="232"/>
+      <location filename="../../components/CommonWords.qml" line="223"/>
       <source>Low state-of-charge</source>
       <translation>Nízká úroveň nabití</translation>
     </message>
     <message id="common_words_low_temperature">
-      <location filename="../../components/CommonWords.qml" line="235"/>
+      <location filename="../../components/CommonWords.qml" line="226"/>
       <source>Low temperature</source>
       <translation>Nízká teplota</translation>
     </message>
     <message id="common_words_low_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="238"/>
+      <location filename="../../components/CommonWords.qml" line="229"/>
       <source>Low voltage alarms</source>
       <translation>Alarmy nízkého napětí</translation>
     </message>
     <message id="common_words_manufacturer">
-      <location filename="../../components/CommonWords.qml" line="244"/>
+      <location filename="../../components/CommonWords.qml" line="235"/>
       <source>Manufacturer</source>
       <translation>Výrobce</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="247"/>
+      <location filename="../../components/CommonWords.qml" line="244"/>
       <source>Maximum temperature</source>
       <translation>Maximální teplota</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="250"/>
+      <location filename="../../components/CommonWords.qml" line="247"/>
       <source>Maximum voltage</source>
       <translation>Maximální napětí</translation>
     </message>
@@ -5495,135 +5495,135 @@ Chcete pokračovat?</translation>
       <translation>Relé</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="352"/>
+      <location filename="../../components/CommonWords.qml" line="355"/>
       <source>Reboot</source>
       <translation>Restart</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="355"/>
+      <location filename="../../components/CommonWords.qml" line="358"/>
       <source>Remove</source>
       <translation>Odstranit</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="359"/>
+      <location filename="../../components/CommonWords.qml" line="362"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation>Chod</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="362"/>
+      <location filename="../../components/CommonWords.qml" line="365"/>
       <source>Scanning %1%</source>
       <translation>Skenování %1%</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="365"/>
+      <location filename="../../components/CommonWords.qml" line="368"/>
       <source>Serial number</source>
       <translation>Výrobní číslo</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../components/NavBar.qml" line="81"/>
+      <location filename="../../pages/SettingsPage.qml" line="18"/>
       <source>Settings</source>
       <translation>Nastavení</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="371"/>
+      <location filename="../../components/CommonWords.qml" line="374"/>
       <source>Setup</source>
       <translation>Nastavení</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="374"/>
+      <location filename="../../components/CommonWords.qml" line="377"/>
       <source>Signal strength</source>
       <translation>Síla signálu</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="385"/>
+      <location filename="../../components/CommonWords.qml" line="388"/>
       <source>Standby</source>
       <translation>Standby</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="388"/>
+      <location filename="../../components/CommonWords.qml" line="391"/>
       <source>Start after the condition is reached for</source>
       <translation>Spuštění po dosažení podmínek pro</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="391"/>
+      <location filename="../../components/CommonWords.qml" line="394"/>
       <source>Start time</source>
       <translation>Čas spuštění</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="394"/>
+      <location filename="../../components/CommonWords.qml" line="397"/>
       <source>Start value during quiet hours</source>
       <translation>Spouštěcí hodnota během doby klidu</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="397"/>
+      <location filename="../../components/CommonWords.qml" line="400"/>
       <source>Start when warning is active for</source>
       <translation>Spustit, když je aktivní varování pro</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="403"/>
+      <location filename="../../components/CommonWords.qml" line="406"/>
       <source>State of charge</source>
       <translation>Stav nabití</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="406"/>
+      <location filename="../../components/CommonWords.qml" line="409"/>
       <source>Status</source>
       <translation>Stav</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="410"/>
+      <location filename="../../components/CommonWords.qml" line="413"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation>Spuštění (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="413"/>
+      <location filename="../../components/CommonWords.qml" line="416"/>
       <source>Stop value during quiet hours</source>
       <translation>Hodnota zastavení v době klidu</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="416"/>
+      <location filename="../../components/CommonWords.qml" line="419"/>
       <source>Stop after the condition is reached for</source>
       <translation>Zastavit po dosažení podmínek pro</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="419"/>
+      <location filename="../../components/CommonWords.qml" line="422"/>
       <source>Stopped</source>
       <translation>Zastavený</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="426"/>
+      <location filename="../../components/CommonWords.qml" line="429"/>
       <source>Temperature</source>
       <translation>Teplota</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="429"/>
+      <location filename="../../components/CommonWords.qml" line="432"/>
       <source>Temperature sensor</source>
       <translation>Teplotní snímač</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="432"/>
+      <location filename="../../components/CommonWords.qml" line="435"/>
       <source>Today</source>
       <translation>Dnes</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="435"/>
+      <location filename="../../components/CommonWords.qml" line="438"/>
       <source>Total</source>
       <translation>Celkem</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="439"/>
+      <location filename="../../components/CommonWords.qml" line="442"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Monitorování</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="442"/>
+      <location filename="../../components/CommonWords.qml" line="445"/>
       <source>Type</source>
       <translation>Typ</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="445"/>
+      <location filename="../../components/CommonWords.qml" line="448"/>
       <source>Unique Identity Number</source>
       <translation>Unikátní identifikační číslo</translation>
     </message>
@@ -5633,48 +5633,48 @@ Chcete pokračovat?</translation>
       <translation>Neznámý</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="452"/>
+      <location filename="../../components/CommonWords.qml" line="455"/>
       <source>VE.Bus Error</source>
       <translation>VE.Bus chyba</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="455"/>
+      <location filename="../../components/CommonWords.qml" line="458"/>
       <source>Voltage</source>
       <translation>Napětí</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="458"/>
+      <location filename="../../components/CommonWords.qml" line="461"/>
       <source>VRM instance</source>
       <translation>Připojení k VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="461"/>
+      <location filename="../../components/CommonWords.qml" line="464"/>
       <source>When warning is cleared stop after</source>
       <translation>Po vymazání varování, zastavit po</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="464"/>
+      <location filename="../../components/CommonWords.qml" line="467"/>
       <source>Yes</source>
       <translation>Ano</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="467"/>
+      <location filename="../../components/CommonWords.qml" line="470"/>
       <source>Yesterday</source>
       <translation>Včera</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="471"/>
+      <location filename="../../components/CommonWords.qml" line="474"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Výnos</translation>
     </message>
     <message id="common_words_zero_feed_in_power_limit">
-      <location filename="../../components/CommonWords.qml" line="478"/>
+      <location filename="../../components/CommonWords.qml" line="481"/>
       <source>Zero feed-in power limit</source>
       <translation>Zero feed-in mezní výkon</translation>
     </message>
     <message id="dateselectordialog_set_date">
-      <location filename="../../components/dialogs/DateSelectorDialog.qml" line="39"/>
+      <location filename="../../components/dialogs/DateSelectorDialog.qml" line="17"/>
       <source>Set date</source>
       <translation>Stanovené datum</translation>
     </message>
@@ -5715,7 +5715,7 @@ Chcete pokračovat?</translation>
       <translation>Generátor bude pokračovat v provozu, pokud je splněna podmínka automatického spuštění.</translation>
     </message>
     <message id="controlcard_inverter_charger_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="16"/>
+      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="17"/>
       <source>Inverter / Charger mode</source>
       <translation>Režim měniče / nabíječky</translation>
     </message>
@@ -5895,39 +5895,39 @@ Chcete pokračovat?</translation>
       <translation>Chybné heslo</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../components/NavBar.qml" line="57"/>
+      <location filename="../../pages/BriefPage.qml" line="143"/>
       <source>Brief</source>
       <translation>Krátce</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../components/NavBar.qml" line="63"/>
+      <location filename="../../pages/OverviewPage.qml" line="394"/>
       <source>Overview</source>
       <translation>Přehled</translation>
     </message>
     <message id="nav_levels">
-      <location filename="../../components/NavBar.qml" line="69"/>
+      <location filename="../../pages/LevelsPage.qml" line="16"/>
       <source>Levels</source>
       <translation>Úrovně</translation>
     </message>
     <message id="nav_notifications">
-      <location filename="../../components/NavBar.qml" line="75"/>
+      <location filename="../../pages/NotificationsPage.qml" line="14"/>
       <source>Notifications</source>
       <translation>Oznámení</translation>
     </message>
     <message id="utils_formatTimestamp_now">
-      <location filename="../../components/Utils.js" line="260"/>
+      <location filename="../../components/Utils.js" line="241"/>
       <source>now</source>
       <extracomment>Indicates an event happened very recently</extracomment>
       <translation>nyní</translation>
     </message>
     <message id="utils_formatTimestamp_min_ago">
-      <location filename="../../components/Utils.js" line="265"/>
+      <location filename="../../components/Utils.js" line="246"/>
       <source>%1m ago</source>
       <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>Před %1m</translation>
     </message>
     <message id="utils_formatTimestamp_hours_min_ago">
-      <location filename="../../components/Utils.js" line="272"/>
+      <location filename="../../components/Utils.js" line="253"/>
       <source>%1h %2m ago</source>
       <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>před %1h %2m</translation>
@@ -6284,7 +6284,7 @@ Chcete pokračovat?</translation>
       <translation>Odpojeno, pokus o opětovné připojení</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="288"/>
+      <location filename="../../components/Utils.js" line="269"/>
       <source>Connecting</source>
       <translation>Připojení</translation>
     </message>
@@ -6344,7 +6344,7 @@ Chcete pokračovat?</translation>
       <translation>Chyba protokolu MQTT úrovně 5</translation>
     </message>
     <message id="silence_alarm">
-      <location filename="../../pages/NotificationsPage.qml" line="190"/>
+      <location filename="../../pages/NotificationsPage.qml" line="194"/>
       <source>Silence alarm</source>
       <translation>Vypnutí alarmu</translation>
     </message>
@@ -6359,47 +6359,47 @@ Chcete pokračovat?</translation>
       <translation>Min.</translation>
     </message>
     <message id="utils_format_days_hours">
-      <location filename="../../components/Utils.js" line="200"/>
+      <location filename="../../components/Utils.js" line="181"/>
       <source>%1d %2h</source>
       <translation>%1d %2h</translation>
     </message>
     <message id="utils_format_hours_min">
-      <location filename="../../components/Utils.js" line="205"/>
+      <location filename="../../components/Utils.js" line="186"/>
       <source>%1h %2m</source>
       <translation>%1d %2h</translation>
     </message>
     <message id="utils_format_min_sec">
-      <location filename="../../components/Utils.js" line="226"/>
+      <location filename="../../components/Utils.js" line="207"/>
       <source>%1m %2s</source>
       <translation>%1m %2s</translation>
     </message>
     <message id="utils_format_min">
-      <location filename="../../components/Utils.js" line="228"/>
+      <location filename="../../components/Utils.js" line="209"/>
       <source>%1m</source>
       <translation>%1m</translation>
     </message>
     <message id="utils_format_sec">
-      <location filename="../../components/Utils.js" line="232"/>
+      <location filename="../../components/Utils.js" line="213"/>
       <source>%1s</source>
       <translation>%1s</translation>
     </message>
     <message id="utils_zero_minutes">
-      <location filename="../../components/Utils.js" line="234"/>
+      <location filename="../../components/Utils.js" line="215"/>
       <source>0m</source>
       <translation>0 m</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="285"/>
+      <location filename="../../components/Utils.js" line="266"/>
       <source>Failure</source>
       <translation>Porucha</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="291"/>
+      <location filename="../../components/Utils.js" line="272"/>
       <source>Retrieving IP address</source>
       <translation>Získávám IP adresu</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="298"/>
+      <location filename="../../components/Utils.js" line="279"/>
       <source>Disconnect</source>
       <translation>Odpojit</translation>
     </message>
@@ -6425,27 +6425,27 @@ Chcete pokračovat?</translation>
       <translation>Vítr</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="62"/>
+      <location filename="../../data/AcInputs.qml" line="76"/>
       <source>Shore</source>
       <translation>Pobřežní přípojka</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="86"/>
+      <location filename="../../data/AcInputs.qml" line="100"/>
       <source>Grid current limit</source>
       <translation>Omezení proudu v síti</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="89"/>
+      <location filename="../../data/AcInputs.qml" line="103"/>
       <source>Generator current limit</source>
       <translation>Omezení proudu generátoru</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="92"/>
+      <location filename="../../data/AcInputs.qml" line="106"/>
       <source>Shore current limit</source>
       <translation>Břehový proudový limit</translation>
     </message>
     <message id="acInputs_current_limit_unrecognized">
-      <location filename="../../data/AcInputs.qml" line="96"/>
+      <location filename="../../data/AcInputs.qml" line="110"/>
       <source>Unrecognized current limit</source>
       <translation>Nerozpoznaný proudový limit</translation>
     </message>
@@ -6473,47 +6473,47 @@ Chcete pokračovat?</translation>
       <translation>nádrž %1 (%2)</translation>
     </message>
     <message id="dcInputs_ac_charger">
-      <location filename="../../data/DcInputs.qml" line="111"/>
+      <location filename="../../data/DcInputs.qml" line="112"/>
       <source>AC charger</source>
       <translation>Nabíječka AC</translation>
     </message>
     <message id="dcInputs_alternator">
-      <location filename="../../data/DcInputs.qml" line="114"/>
+      <location filename="../../data/DcInputs.qml" line="115"/>
       <source>Alternator</source>
       <translation>Generátor</translation>
     </message>
     <message id="dcInputs_dccharger">
-      <location filename="../../data/DcInputs.qml" line="117"/>
+      <location filename="../../data/DcInputs.qml" line="118"/>
       <source>DC charger</source>
       <translation>Stejnosměrná nabíječka</translation>
     </message>
     <message id="dcInputs_dc_generator">
-      <location filename="../../data/DcInputs.qml" line="120"/>
+      <location filename="../../data/DcInputs.qml" line="121"/>
       <source>DC generator</source>
       <translation>Generátor stejnosměrného proudu</translation>
     </message>
     <message id="dcInputs_dc_system">
-      <location filename="../../data/DcInputs.qml" line="123"/>
+      <location filename="../../data/DcInputs.qml" line="124"/>
       <source>DC system</source>
       <translation>DC SYSTÉM</translation>
     </message>
     <message id="dcInputs_fuelcell">
-      <location filename="../../data/DcInputs.qml" line="126"/>
+      <location filename="../../data/DcInputs.qml" line="127"/>
       <source>Fuel cell</source>
       <translation>Palivový článek</translation>
     </message>
     <message id="dcInputs_shaft_generator">
-      <location filename="../../data/DcInputs.qml" line="129"/>
+      <location filename="../../data/DcInputs.qml" line="130"/>
       <source>Shaft generator</source>
       <translation>Hřídelový generátor</translation>
     </message>
     <message id="dcInputs_water_generator">
-      <location filename="../../data/DcInputs.qml" line="132"/>
+      <location filename="../../data/DcInputs.qml" line="133"/>
       <source>Water generator</source>
       <translation>Generátor vody</translation>
     </message>
     <message id="dcInputs_wind_charger">
-      <location filename="../../data/DcInputs.qml" line="135"/>
+      <location filename="../../data/DcInputs.qml" line="136"/>
       <source>Wind charger</source>
       <translation>Větrná nabíječka</translation>
     </message>
@@ -6739,102 +6739,102 @@ Chcete pokračovat?</translation>
       <translation>Vyrovnávání</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="69"/>
+      <location filename="../../data/System.qml" line="74"/>
       <source>AES mode</source>
       <translation>Nízký výkon</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="72"/>
+      <location filename="../../data/System.qml" line="77"/>
       <source>Fault condition</source>
       <translation>Poruchový stav</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="75"/>
+      <location filename="../../data/System.qml" line="80"/>
       <source>Bulk charging</source>
       <translation>Rychlé nabíjení</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="78"/>
+      <location filename="../../data/System.qml" line="83"/>
       <source>Absorption charging</source>
       <translation>Absorpční nabíjení</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="81"/>
+      <location filename="../../data/System.qml" line="86"/>
       <source>Float charging</source>
       <translation>Udržovací nabíjení</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="84"/>
+      <location filename="../../data/System.qml" line="89"/>
       <source>Storage mode</source>
       <translation>Režim skladování</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="87"/>
+      <location filename="../../data/System.qml" line="92"/>
       <source>Equalization charging</source>
       <translation>Vyrovnávací nabíjení</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="90"/>
+      <location filename="../../data/System.qml" line="95"/>
       <source>Pass-thru</source>
       <translation>Pass-thru</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="93"/>
+      <location filename="../../data/System.qml" line="98"/>
       <source>Inverting</source>
       <translation>Měnič</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="96"/>
+      <location filename="../../data/System.qml" line="101"/>
       <source>Assisting</source>
       <translation>Asistence</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="99"/>
+      <location filename="../../data/System.qml" line="104"/>
       <source>Power supply mode</source>
       <translation>Režim dodávky energie</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="106"/>
+      <location filename="../../data/System.qml" line="111"/>
       <source>Wake up</source>
       <translation>Probuďte se</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="109"/>
+      <location filename="../../data/System.qml" line="114"/>
       <source>Repeated absorption</source>
       <translation>Opakovaná absorpce</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="112"/>
+      <location filename="../../data/System.qml" line="117"/>
       <source>Auto equalize</source>
       <translation>Automatické vyrovnávání</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="115"/>
+      <location filename="../../data/System.qml" line="120"/>
       <source>Battery safe</source>
       <translation>Systém Battery Safe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="118"/>
+      <location filename="../../data/System.qml" line="123"/>
       <source>Load detect</source>
       <translation>Detekce zatížení</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="121"/>
+      <location filename="../../data/System.qml" line="126"/>
       <source>Blocked</source>
       <translation>Zablokovaný</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="124"/>
+      <location filename="../../data/System.qml" line="129"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_scheduledrecharge">
-      <location filename="../../data/System.qml" line="139"/>
+      <location filename="../../data/System.qml" line="144"/>
       <source>Scheduled recharge</source>
       <translation>Plánované dobíjení</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="142"/>
+      <location filename="../../data/System.qml" line="147"/>
       <source>Dynamic ESS</source>
       <translation>Dynamická ESS</translation>
     </message>
@@ -6886,7 +6886,7 @@ Chcete pokračovat?</translation>
       <translation>Střídač / nabíječka (%1)</translation>
     </message>
     <message id="settings_page_debug_application_version">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="82"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="97"/>
       <source>Application version</source>
       <translation>Verze aplikace</translation>
     </message>
@@ -6906,38 +6906,38 @@ Chcete pokračovat?</translation>
       <translation>Čas do servisu</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="166"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="174"/>
       <source>Onscreen UI (GX Touch &amp; Ekrano)</source>
       <translation>Uživatelské rozhraní na obrazovce (GX Touch &amp; Ekrano)</translation>
     </message>
     <message id="settings_display_standard_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="172"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="180"/>
       <source>Standard version</source>
       <translation>Standardní verze</translation>
     </message>
     <message id="settings_display_beta_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="174"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="182"/>
       <source>Gui-v2 (beta) version</source>
       <translation>Gui-v2 (beta) verze</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="197"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="205"/>
       <source>Restarting application...</source>
       <translation>Restartování aplikace...</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="199"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="207"/>
       <source>Application restarted</source>
       <translation>Aplikace restartována</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="203"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="211"/>
       <source>Onscreen UI will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Uživatelské rozhraní na obrazovce se přepne na %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="206"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="214"/>
       <source>Onscreen UI has switched to %1.</source>
       <extracomment>%1 = the UI version that the system has switched to.</extracomment>
       <translation>Uživatelské rozhraní na obrazovce se přepnulo na %1.</translation>
@@ -6975,7 +6975,7 @@ Chcete pokračovat?</translation>
       <translation>Restartuji...</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
-      <location filename="../../components/CommonWords.qml" line="210"/>
+      <location filename="../../components/CommonWords.qml" line="201"/>
       <source>Eco</source>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>Eco</translation>
@@ -7086,13 +7086,13 @@ Chcete pokračovat?</translation>
       <translation>U lithiových baterií se nedoporučuje nabíjení pod 10 %. U ostatních typů baterií zjistěte v datasheetu minimální úroveň doporučenou výrobcem.</translation>
     </message>
     <message id="settings_page_debug_quit_application">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="40"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="55"/>
       <source>Quit application</source>
       <oldsource>Quit Application</oldsource>
       <translation>Ukončení aplikace</translation>
     </message>
     <message id="settings_page_debug_quit">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="43"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="58"/>
       <source>Quit</source>
       <translation>Ukončit</translation>
     </message>
@@ -7202,13 +7202,13 @@ Chcete pokračovat?</translation>
       <translation>Stav systému</translation>
     </message>
     <message id="settings_device_list">
-      <location filename="../../pages/SettingsPage.qml" line="25"/>
+      <location filename="../../pages/SettingsPage.qml" line="29"/>
       <source>Device list</source>
       <oldsource>Device List</oldsource>
       <translation>Seznam zařízení</translation>
     </message>
     <message id="settings_vrm_device_instances">
-      <location filename="../../pages/SettingsPage.qml" line="144"/>
+      <location filename="../../pages/SettingsPage.qml" line="148"/>
       <source>VRM device instances</source>
       <oldsource>VRM Device Instances</oldsource>
       <translation>Instance zařízení VRM</translation>
@@ -7244,7 +7244,7 @@ Chcete pokračovat?</translation>
       <translation>Vyrovnání nelze spustit během stavu hromadného nabíjení</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="475"/>
+      <location filename="../../components/CommonWords.qml" line="478"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <oldsource>Yield today</oldsource>
@@ -7297,37 +7297,37 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <translation>Teplota oleje</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="105"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="106"/>
       <source>Operation time</source>
       <translation>Doba provozu</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="114"/>
       <source>Charged Ah</source>
       <translation>Nabité Ah</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="122"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="123"/>
       <source>Cycles started</source>
       <translation>Zahájení cyklů</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="130"/>
       <source>Cycles completed</source>
       <translation>Dokončené cykly</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="137"/>
       <source>Number of power-ups</source>
       <translation>Počet bonusů</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="143"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="144"/>
       <source>Number of deep discharges</source>
       <translation>Počet hlubokých výbojů</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="162"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="163"/>
       <source>Charge cycle history</source>
       <translation>Historie nabíjecích cyklů</translation>
     </message>
@@ -7418,6 +7418,88 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="80"/>
       <source>Battery (V&lt;sub&gt;start&lt;/sub&gt;/V&lt;sub&gt;end&lt;/sub&gt;)</source>
       <translation>Baterie (V&lt;sub&gt;start&lt;/sub&gt;/V&lt;sub&gt;end&lt;/sub&gt;)</translation>
+    </message>
+    <message id="settings_page_debug_display_cpu_usage">
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="45"/>
+      <source>Display CPU usage</source>
+      <translation>Zobrazení využití procesoru</translation>
+    </message>
+    <message id="settings_display_minmax">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="162"/>
+      <source>Minimum and maximum gauge ranges</source>
+      <translation>Minimální a maximální rozsahy měřidla</translation>
+    </message>
+    <message id="common_words_maximum_current">
+      <location filename="../../components/CommonWords.qml" line="238"/>
+      <source>Maximum current</source>
+      <translation>Maximální proud</translation>
+    </message>
+    <message id="common_words_maximum_power">
+      <location filename="../../components/CommonWords.qml" line="241"/>
+      <source>Maximum power</source>
+      <translation>Maximální výkon</translation>
+    </message>
+    <message id="common_words_minimum_current">
+      <location filename="../../components/CommonWords.qml" line="250"/>
+      <source>Minimum current</source>
+      <translation>Minimální proud</translation>
+    </message>
+    <message id="inverterCharger_mode_passthrough">
+      <location filename="../../data/InverterChargers.qml" line="82"/>
+      <source>Passthrough</source>
+      <translation>Průchozí</translation>
+    </message>
+    <message id="settings_minmax_autorange">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="17"/>
+      <source>Auto-ranging</source>
+      <extracomment>Whether to adjust the min/max values in the range dynamically, based on the lowest and highest values observed on the system.</extracomment>
+      <translation>Automatické nastavení</translation>
+    </message>
+    <message id="settings_minmax_autorange_desc">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="25"/>
+      <source>When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values.</source>
+      <translation>Pokud je tato funkce povolena, minima a maxima měřidel a grafů se automaticky upravují na základě minulých hodnot.</translation>
+    </message>
+    <message id="settings_minmax_reset">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="32"/>
+      <source>Reset all range values to zero</source>
+      <translation>Vynulování všech hodnot rozsahu na nulu</translation>
+    </message>
+    <message id="settings_minmax_ac_in_header_with_source">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="73"/>
+      <source>%1 (%2)</source>
+      <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
+      <translation>%1 (%2)</translation>
+    </message>
+    <message id="settings_minmax_dc_input">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="95"/>
+      <source>DC input</source>
+      <translation>Stejnosměrný vstup</translation>
+    </message>
+    <message id="settings_minmax_acout_max_acin1">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="112"/>
+      <source>Maximum power: AC in 1 connected</source>
+      <translation>Maximální výkon: AC v 1 připojeném</translation>
+    </message>
+    <message id="settings_minmax_acout_max_acin2">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="119"/>
+      <source>Maximum power: AC in 2 connected</source>
+      <translation>Maximální výkon: AC ve 2 připojených</translation>
+    </message>
+    <message id="settings_minmax_acout_max">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="126"/>
+      <source>Maximum power: no AC inputs</source>
+      <translation>Maximální výkon: bez vstupů střídavého proudu</translation>
+    </message>
+    <message id="settings_minmax_dc_out">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="132"/>
+      <source>DC output</source>
+      <translation>Stejnosměrný výstup</translation>
+    </message>
+    <message id="settings_minmax_solar">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="143"/>
+      <source>Solar</source>
+      <translation>Solární energie</translation>
     </message>
   </context>
   <context>
@@ -8027,98 +8109,98 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="98"/>
+      <location filename="../../src/main.cpp" line="97"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>Použít zdroj dat D-Bus: připojte se k zadané adrese D-Bus.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="99"/>
+      <location filename="../../src/main.cpp" line="98"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>adresa</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="103"/>
+      <location filename="../../src/main.cpp" line="102"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>Použít zdroj dat D-Bus: připojte se k výchozí adrese D-Bus</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="108"/>
+      <location filename="../../src/main.cpp" line="107"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>Použít zdroj dat MQTT: připojte se k zadané adrese zprostředkovatele MQTT.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="109"/>
+      <location filename="../../src/main.cpp" line="108"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>adresa</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="114"/>
+      <location filename="../../src/main.cpp" line="113"/>
       <source>MQTT data source device portal id.</source>
       <translation>ID portálu zařízení zdroje dat MQTT.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="115"/>
+      <location filename="../../src/main.cpp" line="114"/>
       <source>portalId</source>
       <translation>ID portálu</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="118"/>
       <source>MQTT VRM webhost shard</source>
       <translation>Úlomek webhostingu MQTT VRM</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="120"/>
+      <location filename="../../src/main.cpp" line="119"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>střep</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="124"/>
+      <location filename="../../src/main.cpp" line="123"/>
       <source>MQTT data source username</source>
       <translation>Uživatelské jméno zdroje dat MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="125"/>
+      <location filename="../../src/main.cpp" line="124"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>Uživatel</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="129"/>
+      <location filename="../../src/main.cpp" line="128"/>
       <source>MQTT data source password</source>
       <translation>Heslo zdroje dat MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="130"/>
+      <location filename="../../src/main.cpp" line="129"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>složit</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="134"/>
+      <location filename="../../src/main.cpp" line="133"/>
       <source>MQTT data source token</source>
       <translation>Token zdroje dat MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="135"/>
+      <location filename="../../src/main.cpp" line="134"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>žeton</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="139"/>
+      <location filename="../../src/main.cpp" line="138"/>
       <source>Enable FPS counter</source>
       <translation>Povolit čítač FPS</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="143"/>
+      <location filename="../../src/main.cpp" line="142"/>
       <source>Skip splash screen</source>
       <translation>Přeskočit úvodní obrazovku</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="147"/>
+      <location filename="../../src/main.cpp" line="146"/>
       <source>Use mock data source for testing.</source>
       <translation>Pro testování použijte simulovaný zdroj dat.</translation>
     </message>
