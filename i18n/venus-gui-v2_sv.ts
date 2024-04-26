@@ -969,7 +969,7 @@
     <message id="settings_units_celsius">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="37"/>
       <source>Celsius</source>
-      <translation>&lt;mrk mtype="seg" mid="892"&gt;Celsius (°C)&lt;/mrk&gt;</translation>
+      <translation>Celsius (°C)</translation>
     </message>
     <message id="settings_units_fahrenheit">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="39"/>
@@ -1112,7 +1112,7 @@
     <message id="settings_auto_update">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="19"/>
       <source>Auto update</source>
-      <translation>&lt;mrk mtype="seg" mid="74"&gt;Automatisk uppdatering&lt;/mrk&gt;</translation>
+      <translation>Automatisk uppdatering</translation>
     </message>
     <message id="settings_firmware_check_only">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="25"/>
@@ -1435,7 +1435,7 @@
       <location filename="../../pages/settings/PageSettingsGpsList.qml" line="81"/>
       <source>Format</source>
       <extracomment>Format of reported GPS data</extracomment>
-      <translation>&lt;mrk mtype="seg" mid="376"&gt;yyyy-mm-dd&lt;/mrk&gt;</translation>
+      <translation>Format</translation>
     </message>
     <message id="settings_gps_format_dms_example">
       <location filename="../../pages/settings/PageSettingsGpsList.qml" line="86"/>
@@ -1591,7 +1591,7 @@ Om det inte fungerar, testa simkortet i en telefon för att säkerställa att de
     <message id="page_settings_gsm_imei">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="222"/>
       <source>IMEI</source>
-      <translation>&lt;mrk mtype="seg" mid="520"&gt;IMEI-numret måste vara 15 siffror långt.&lt;/mrk&gt;</translation>
+      <translation>IMEI</translation>
     </message>
     <message id="settings_ess_battery_life_self_consumption">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="15"/>
@@ -4823,7 +4823,7 @@ Vill du fortsätta?</translation>
     <message id="cycle_history_completed">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="31"/>
       <source>Completed</source>
-      <translation>&lt;mrk mtype="seg" mid="719"&gt;Registrering slutförd&lt;/mrk&gt;</translation>
+      <translation>Avslutad</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="244"/>

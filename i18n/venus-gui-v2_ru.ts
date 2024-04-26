@@ -98,7 +98,7 @@
     <message id="settings_radio_button_enter_password">
       <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="142"/>
       <source>Enter password</source>
-      <translation>&lt;mrk mtype="seg" mid="771"&gt;Введите пароль&lt;/mrk&gt;</translation>
+      <translation>Введите пароль</translation>
     </message>
     <message id="settings_firmware_press_to_check">
       <location filename="../../components/settings/FirmwareCheckListButton.qml" line="18"/>
@@ -358,7 +358,7 @@
     <message id="settings_deviceinfo_connection">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="22"/>
       <source>Connection</source>
-      <translation>&lt;mrk mtype="seg" mid="678"&gt;Подключение&lt;/mrk&gt;</translation>
+      <translation>Подключение</translation>
     </message>
     <message id="settings_deviceinfo_product">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="49"/>
@@ -1586,12 +1586,12 @@ If that doesn't work, check sim-card in a phone to make sure that there is credi
     <message id="page_settings_gsm_user_name">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="207"/>
       <source>User name</source>
-      <translation>&lt;mrk mtype="seg" mid="223"&gt;Имя пользователя&lt;/mrk&gt;</translation>
+      <translation>Имя пользователя</translation>
     </message>
     <message id="page_settings_gsm_imei">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="222"/>
       <source>IMEI</source>
-      <translation>&lt;mrk mtype="seg" mid="522"&gt;Номер IMEI должен составлять 15 цифр.&lt;/mrk&gt;</translation>
+      <translation>IMEI</translation>
     </message>
     <message id="settings_ess_battery_life_self_consumption">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="15"/>
@@ -2842,7 +2842,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
       <source>Time</source>
       <extracomment>Charging time for the EV charger</extracomment>
-      <translation>&lt;mrk mtype="seg" mid="454"&gt;Время&lt;/mrk&gt;</translation>
+      <translation>Время</translation>
     </message>
     <message id="evcs_charge_mode">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="103"/>
