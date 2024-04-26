@@ -179,7 +179,7 @@
     "geometry_briefPage_edgeGauge_quantityLabel_feedback_margin": 4,
     "geometry_briefPage_edgeGauge_angleOffset_one_gauge": 3.2,
     "geometry_briefPage_edgeGauge_angleOffset_two_gauge": 2.4,
-    "geometry_briefPage_edgeGauge_angleOffset_three_gauge": 2,
+    "geometry_briefPage_edgeGauge_angleOffset_three_gauge": 2.0,
     "geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_one_gauge": 34,
     "geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_two_gauge": 1,
     "geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_three_gauge": 9,
