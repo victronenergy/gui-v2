@@ -31,16 +31,30 @@ Page {
 				//% "Reset all range values to zero"
 				text: qsTrId("settings_minmax_reset")
 				secondaryText: CommonWords.reset
-				onClicked: {
-					for (let i = 0; i < acInputsRepeater.count; ++i) {
-						acInputsRepeater.itemAt(i).reset()
+				onClicked: Global.dialogLayer.open(confirmResetDialog)
+
+				Component {
+					id: confirmResetDialog
+
+					ModalWarningDialog {
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						//% "Reset Range Values"
+						title: qsTrId("settings_wifi_disable_ap")
+						//% "Are you sure that you want to reset all the values to zero?"
+						description: qsTrId("settings_minmax_reset_are_you_sure")
+
+						onAccepted: {
+							for (let i = 0; i < acInputsRepeater.count; ++i) {
+								acInputsRepeater.itemAt(i).reset()
+							}
+							dcInMaxPower.dataItem.setValue(0)
+							acIn1MaxOutPower.dataItem.setValue(0)
+							acIn2MaxOutPower.dataItem.setValue(0)
+							noAcInMaxOutPower.dataItem.setValue(0)
+							dcOutMaxPower.dataItem.setValue(0)
+							pvMaxPower.dataItem.setValue(0)
+						}
 					}
-					dcInMaxPower.dataItem.setValue(0)
-					acIn1MaxOutPower.dataItem.setValue(0)
-					acIn2MaxOutPower.dataItem.setValue(0)
-					noAcInMaxOutPower.dataItem.setValue(0)
-					dcOutMaxPower.dataItem.setValue(0)
-					pvMaxPower.dataItem.setValue(0)
 				}
 			}
 
