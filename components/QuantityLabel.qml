@@ -56,7 +56,7 @@ Item {
 
 			// At smaller font sizes, allow the unit to be vertically aligned at a sub-pixel value,
 			// else it is noticeably misaligned by less than 1 pixel.
-			anchors.verticalCenter: parent.verticalCenter
+			anchors.baseline: valueLabel.baseline
 			anchors.alignWhenCentered: font.pixelSize >= Theme.font_size_body1
 			text: quantityInfo.unit
 			color: Theme.color_font_secondary
