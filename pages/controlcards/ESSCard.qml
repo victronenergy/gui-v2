@@ -64,15 +64,18 @@ ControlCard {
 				anchors {
 					left: parent.left
 					leftMargin: Theme.geometry_controlCard_contentMargins
+					right: infoIcon.left
 					verticalCenter: parent.verticalCenter
 				}
 				color: Theme.color_font_secondary
 				font.pixelSize: Theme.font_size_body1
+				wrapMode: Text.Wrap
 				//% "Battery life limit: %1%"
 				text: qsTrId("ess_battery_life_limit").arg(Math.max(Global.ess.minimumStateOfCharge, Global.ess.stateOfChargeLimit))
 			}
 
 			CP.IconImage {
+				id: infoIcon
 				anchors {
 					right: parent.right
 					rightMargin: Theme.geometry_controlCard_contentMargins
