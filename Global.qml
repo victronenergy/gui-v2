@@ -61,7 +61,7 @@ QtObject {
 	property bool isDesktop
 	property real scalingRatio: 1.0
 
-	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
+	signal aboutToFocusTextField(var textField, var flickable)
 	signal keyPressed(var event)
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {

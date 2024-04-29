@@ -102,6 +102,7 @@
 
     "geometry_textField_height": 40,
     "geometry_textField_horizontalMargin": 16,
+    "geometry_textField_autoscrollMargin": 32,
 
     "geometry_toastNotification_horizontalMargin" : 24,
     "geometry_toastNotification_bottomMargin" : 8,

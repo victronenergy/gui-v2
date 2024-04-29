@@ -30,9 +30,23 @@ ListItem {
 		// ensure the whole textfield is visible.
 		const textFieldVerticalMargin = root.height - textField.height
 		const textFieldBottom = root.height - textFieldVerticalMargin/2
-		Global.aboutToFocusTextField(textField,
-				textFieldBottom,
-				root.flickable)
+		Global.aboutToFocusTextField(textField, root.flickable)
+	}
+
+	onWindowChanged: {
+		// In nested views the ListView attached property
+		// might have not returned valid parent flickable.
+		if (!flickable) {
+			let p = parent
+			while (p) {
+				if (p.hasOwnProperty("originY") && p.hasOwnProperty("contentY")) {
+					flickable = p
+					break
+				}
+
+				p = p.parent
+			}
+		}
 	}
 
 	property TextField defaultContent: TextField {
@@ -93,5 +107,22 @@ ListItem {
 
 	VeQuickItem {
 		id: dataItem
+	}
+
+	Connections {
+		enabled: root.hasActiveFocus
+		target: root.flickable
+		function onHeightChanged() {
+			const flickable = root.flickable
+			const cursorRect = textField.cursorRectangle
+			const margin = Theme.geometry_textField_autoscrollMargin
+			const cursor = flickable.mapFromItem(textField, 0, cursorRect.y)
+			if (cursor.y < margin) {
+				flickable.contentY = Math.max(flickable.originY, flickable.contentY + cursor.y - margin)
+			} else if (cursor.y + cursorRect.height + margin > flickable.height) {
+				flickable.contentY = Math.min(flickable.originY + flickable.contentHeight,
+											  flickable.contentY + cursor.y + cursorRect.height + margin) - flickable.height
+			}
+		}
 	}
 }
