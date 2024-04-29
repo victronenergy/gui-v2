@@ -36,14 +36,21 @@ OverviewWidget {
 	extraContentChildren: [
 		Label {
 			anchors {
+				top: parent.top
 				left: parent.left
 				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				right: parent.right
 				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				bottom: parent.bottom
 			}
-			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 			text: Global.system.systemStateToText(Global.system.state)
+			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
+			minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
+			fontSizeMode: Text.VerticalFit
+
 			wrapMode: Text.Wrap
+			maximumLineCount: 4
+			elide: Text.ElideRight
 		}
 	]
 
