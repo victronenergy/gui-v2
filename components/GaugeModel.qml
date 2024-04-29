@@ -133,6 +133,14 @@ ListModel {
 					root.addGauge(gaugeObject)
 				}
 			}
+
+			property Connections _unitConn: Connections {
+				target: Global.systemSettings.briefView.unit
+
+				function onValueChanged() {
+					Qt.callLater(_updateGaugeModel)
+				}
+			}
 		}
 	}
 
