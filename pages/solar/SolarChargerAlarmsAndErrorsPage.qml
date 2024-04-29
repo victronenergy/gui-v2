@@ -19,7 +19,7 @@ Page {
 			// TODO add 'active alarms' section for this charger
 
 			ListLabel {
-				visible: lowBatteryAlarm.visible || highBatteryAlarm.visible
+				visible: lowBatteryAlarm.visible || highBatteryAlarm.visible || highTemperatureAlarm.visible || shortCircuitAlarm.visible
 				leftPadding: 0
 				color: Theme.color_listItem_secondaryText
 				font.pixelSize: Theme.font_size_caption
@@ -41,6 +41,24 @@ Page {
 				//% "High battery voltage alarm"
 				text: qsTrId("charger_alarms_high_battery_voltage_alarm")
 				dataItem.uid: root.solarCharger.serviceUid + "/Alarms/HighVoltage"
+				allowed: dataItem.isValid
+			}
+
+			ListAlarm {
+				id: highTemperatureAlarm
+
+				//% "High temperature alarm"
+				text: qsTrId("charger_alarms_high_temperature_alarm")
+				dataItem.uid: root.solarCharger.serviceUid + "/Alarms/HighTemperature"
+				allowed: dataItem.isValid
+			}
+
+			ListAlarm {
+				id: shortCircuitAlarm
+
+				//% "Short circuit alarm"
+				text: qsTrId("charger_alarms_short_circuit_alarm")
+				dataItem.uid: root.solarCharger.serviceUid + "/Alarms/ShortCircuit"
 				allowed: dataItem.isValid
 			}
 

@@ -118,6 +118,7 @@ Page {
 				unit: VenusOS.Units_Amp
 				allowed: defaultAllowed && dataItem.isValid
 			}
+
 			ListTextItem {
 				text: loadQuantityItem.text
 				dataItem.uid: root.solarCharger.serviceUid + "/Load/State"
@@ -146,9 +147,7 @@ Page {
 				secondaryLabel.color: root.solarCharger.errorModel.count ? Theme.color_critical : Theme.color_font_secondary
 
 				// Only enable if there is content on the alarms/errors page.
-				// TODO update this binding to consider 'active alarms' section when it is
-				// implemented for the page.
-				enabled: lowBatteryAlarm.isValid || highBatteryAlarm.isValid
+				enabled: lowBatteryAlarm.isValid || highBatteryAlarm.isValid || highTemperatureAlarm.isValid || shortCircuitAlarm.isValid
 						 || root.solarCharger.errorModel.count
 
 				onClicked: {
@@ -163,6 +162,14 @@ Page {
 				VeQuickItem {
 					id: highBatteryAlarm
 					uid: root.solarCharger.serviceUid + "/Alarms/HighVoltage"
+				}
+				VeQuickItem {
+					id: highTemperatureAlarm
+					uid: root.solarCharger.serviceUid + "/Alarms/HighTemperature"
+				}
+				VeQuickItem {
+					id: shortCircuitAlarm
+					uid: root.solarCharger.serviceUid + "/Alarms/ShortCircuit"
 				}
 			}
 
