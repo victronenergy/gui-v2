@@ -17,6 +17,7 @@ Item {
 	property bool animationEnabled
 	property real labelMargin
 	property alias labelOpacity: textCol.opacity
+	property int leftGaugeCount
 
 	// Step change in the size of the bounding boxes of successive gauges
 	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry_circularMultiGauge_spacing)
@@ -104,7 +105,13 @@ Item {
 					font.pixelSize: valueLabel.visible ? Theme.font_size_body1 : Theme.font_size_body2
 					color: Theme.color_font_primary
 					text: model.name
+
+					// With three gauges on the left there is a risk that the last labels on
+					// on the multi-gauge overlap with the labels on the top-left gauge.
+					//
+					// Increase the space for the two top-most labels or if there are less left gauges.
 					width: textCol.width - valueLabel.width - iconImage.width
+						+ (model.index < 2 || gauges.leftGaugeCount < 3 ? Theme.geometry_circularMultiGauge_label_extraWidth : 0)
 					elide: Text.ElideRight
 				}
 
