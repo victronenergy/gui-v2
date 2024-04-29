@@ -151,6 +151,7 @@
     "geometry_circularMultiGauge_value_rightMargin": 2,
     "geometry_circularMultiGauge_icon_rightMargin": 12,
     "geometry_circularMultiGauge_icons_maxWidth": 18,
+    "geometry_circularMultiGauge_label_extraWidth": 112,
 
     "geometry_circularSingularGauge_strokeWidth": 16,
 

@@ -173,6 +173,7 @@ SwipeViewPage {
 			animationEnabled: root.animationEnabled
 			labelOpacity: root._gaugeLabelOpacity
 			labelMargin: root._gaugeLabelMargin
+			leftGaugeCount: root._leftGaugeCount
 		}
 	}
 
