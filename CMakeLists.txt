@@ -369,6 +369,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/TemperatureRelaySettings.qml
     components/settings/VolumeUnitRadioButtonGroup.qml
 
+    components/widgets/AcWidget.qml
     components/widgets/AcInputWidget.qml
     components/widgets/AcLoadsWidget.qml
     components/widgets/AlternatorWidget.qml

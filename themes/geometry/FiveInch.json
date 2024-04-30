@@ -231,7 +231,6 @@
 
     "geometry_overviewPage_widget_radius": 8,
     "geometry_overviewPage_widget_border_width": 2,
-    "geometry_overviewPage_widget_content_small_verticalMargin": 4,
     "geometry_overviewPage_widget_content_expanded_verticalMargin": 10,
     "geometry_overviewPage_widget_content_verticalMargin": 8,
     "geometry_overviewPage_widget_content_horizontalMargin": 10,
@@ -271,7 +270,7 @@
     "geometry_overviewPage_widget_solar_graph_bar_radius": 8,
     "geometry_overviewPage_widget_solar_graph_margins": 8,
 
-    "geometry_three_phase_column_spacing": -4,
+    "geometry_three_phase_column_spacing": -2,
     "geometry_three_phase_gauge_spacing": 4,
 
     "geometry_levelsPage_groupedSubgauges_delegate_width": 100,
