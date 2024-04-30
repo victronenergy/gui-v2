@@ -195,7 +195,7 @@
     "geometry_briefPage_sidePanel_header_spacing": 2,
     "geometry_briefPage_sidePanel_separatorBar_height": 2,
     "geometry_briefPage_sidePanel_forecastRow_spacing": 44,
-    "geometry_briefPage_sidePanel_solarYield_width": 160,
+    "geometry_briefPage_sidePanel_solarYield_width": 150,
     "geometry_briefPage_sidePanel_generator_slider_height": 8,
     "geometry_briefPage_sidePanel_generator_columnSpacing": 2,
     "geometry_briefPage_sidePanel_loads_columnSpacing": 2,
