@@ -20,8 +20,13 @@ Page {
 				optionModel: [
 					//% "Power (Watts)"
 					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Watt },
-					//% "Current (Amps)"
-					{ display: qsTrId("settings_units_amps"), value: VenusOS.Units_Amp },
+					{
+						//% "Current (Amps)"
+						display: qsTrId("settings_units_amps"),
+						value: VenusOS.Units_Amp,
+						//% "Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead."
+						caption: qsTrId("settings_units_amps_exceptions"),
+					},
 				]
 				currentIndex: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? 1 : 0
 
