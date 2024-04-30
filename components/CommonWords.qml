@@ -13,7 +13,7 @@ QtObject {
 	//% "AC In"
 	readonly property string ac_in: qsTrId("common_words_ac_in")
 
-	//: The role for an AC input (grid meter, genset, acload, etc.)
+	//: The role for an AC input (grid, genset, acload, etc.)
 	//% "Role"
 	readonly property string ac_input_role: qsTrId("common_words_ac_input_role")
 
@@ -158,8 +158,8 @@ QtObject {
 	//% "Generator"
 	readonly property string generator: qsTrId("common_words_generator")
 
-	//% "Grid meter"
-	readonly property string grid_meter: qsTrId("common_words_grid_meter")
+	//% "Grid"
+	readonly property string grid: qsTrId("common_words_grid")
 
 	//% "High battery temperature"
 	readonly property string high_battery_temperature: qsTrId("common_words_high_battery_temperature")
