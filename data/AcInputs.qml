@@ -21,7 +21,7 @@ QtObject {
 	property real currentLimit: activeInput != null ? activeInput.currentLimit : NaN
 
 	readonly property var roles: [
-		{ role: "grid", name: CommonWords.grid_meter },
+		{ role: "grid", name: CommonWords.grid },
 		{ role: "pvinverter", name: CommonWords.pv_inverter },
 		{ role: "genset", name: CommonWords.generator },
 		{ role: "acload", name: CommonWords.ac_load },
@@ -68,7 +68,7 @@ QtObject {
 	function sourceToText(source) {
 		switch (source) {
 		case VenusOS.AcInputs_InputSource_Grid:
-			return CommonWords.grid_meter
+			return CommonWords.grid
 		case VenusOS.AcInputs_InputSource_Generator:
 			return CommonWords.generator
 		case VenusOS.AcInputs_InputSource_Shore:
