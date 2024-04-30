@@ -23,6 +23,26 @@ OverviewWidget {
 	readonly property int _normalizedStateOfCharge: Math.round(batteryData.stateOfCharge || 0)
 	readonly property bool _animationReady: animationEnabled && !isNaN(batteryData.stateOfCharge)
 
+	// Calculate whether current and power quantities fit on the footer together, if not use smaller font.
+	// Discharging battery has negative amperes and its not unusual for the watts to be in the 1k+ range.
+	// No need to do the same check for the shorter voltage label on the left.
+	readonly property bool _useSmallFont: root.width/2 - 2*batteryPowerDisplay.anchors.rightMargin
+										  < quantityLabelWidth(batteryCurrentDisplay.valueText, batteryCurrentDisplay.unitText)/2
+										  + quantityLabelWidth(batteryPowerDisplay.valueText, batteryPowerDisplay.unitText)
+
+	function quantityLabelWidth(valueText, unitText){
+		const valueTextRect = quantityLabelFont.tightBoundingRect(valueText)
+		return quantityLabelFont.font, (valueTextRect.x + valueTextRect.width
+										+ Theme.geometry_quantityLabel_spacing
+										+ quantityLabelFont.advanceWidth(unitText))
+	}
+
+	FontMetrics {
+		id: quantityLabelFont
+		font.pixelSize: Theme.font_size_body2
+		font.family: "Museo Sans 500 Mono digits"
+	}
+
 	title: CommonWords.battery
 	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
@@ -150,7 +170,7 @@ OverviewWidget {
 
 			value: batteryData.voltage
 			unit: VenusOS.Units_Volt
-			font.pixelSize: Theme.font_size_body2
+			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
 			alignment: Qt.AlignLeft
 		},
 
@@ -164,7 +184,7 @@ OverviewWidget {
 			}
 			value: batteryData.current
 			unit: VenusOS.Units_Amp
-			font.pixelSize: Theme.font_size_body2
+			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
 		},
 
 		QuantityLabel {
@@ -178,7 +198,7 @@ OverviewWidget {
 			}
 			value: batteryData.power
 			unit: VenusOS.Units_Watt
-			font.pixelSize: Theme.font_size_body2
+			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
 			alignment: Qt.AlignRight
 		}
 	]

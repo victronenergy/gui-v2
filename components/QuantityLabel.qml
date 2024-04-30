@@ -15,6 +15,8 @@ Item {
 	property alias valueColor: valueLabel.color
 	property alias unitColor: unitLabel.color
 	property alias unitVisible: unitLabel.visible
+	readonly property alias valueText: valueLabel.text
+	readonly property alias unitText: unitLabel.text
 	property int alignment: Qt.AlignHCenter
 	property alias precision: quantityInfo.precision
 	property alias formatHints: quantityInfo.formatHints
