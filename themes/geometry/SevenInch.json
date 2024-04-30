@@ -231,7 +231,6 @@
 
     "geometry_overviewPage_widget_radius": 8,
     "geometry_overviewPage_widget_border_width": 2,
-    "geometry_overviewPage_widget_content_small_verticalMargin": 8,
     "geometry_overviewPage_widget_content_expanded_verticalMargin": 16,
     "geometry_overviewPage_widget_content_verticalMargin": 14,
     "geometry_overviewPage_widget_content_horizontalMargin": 14,
