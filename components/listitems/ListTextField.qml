@@ -35,6 +35,22 @@ ListItem {
 				root.flickable)
 	}
 
+	onWindowChanged: {
+	    // In nested views the ListView attached property
+	    // might have not returned valid parent flickable.
+		if (!flickable) {
+			let p = parent
+			while (p) {
+				if (p.hasOwnProperty("originY") && p.hasOwnProperty("contentY")) {
+					flickable = p
+					break
+				}
+
+				p = p.parent
+			}
+		}
+	}
+
 	property TextField defaultContent: TextField {
 		id: textField
 
