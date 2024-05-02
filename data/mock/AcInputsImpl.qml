@@ -97,10 +97,11 @@ QtObject {
 
 				Component.onCompleted: {
 					_deviceInstance.setValue(input.index)
+					const inputConnected = !!input.modelData["connected"]
 					for (let configProperty in input.modelData) {
 						const configValue = input.modelData[configProperty]
 						if (configProperty === "phaseCount") {
-							if (!!input.connected) {
+							if (inputConnected) {
 								_numberOfPhases.setValue(configValue)
 							}
 						} else {
