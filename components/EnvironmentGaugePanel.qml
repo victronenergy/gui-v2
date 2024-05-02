@@ -77,9 +77,9 @@ Rectangle {
 
 			width: root._gaugeWidth
 			icon.source: "qrc:/images/icon_humidity_32.svg"
-			//: Abbreviation of "Room Humidity"
-			//% "RH"
-			text: qsTrId("environment_gauge_humidity")
+			// Don't translate. Short local acronyms often don't exist. RH is an international standard.
+			// In case user is not familiar with the acronym "RH" there is also drop icon and percentage sign (%).
+			text: "RH"
 			animationEnabled: root.animationEnabled
 			unit: VenusOS.Units_Percentage
 			value: Math.round(root.humidity)
