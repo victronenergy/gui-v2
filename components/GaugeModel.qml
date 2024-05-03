@@ -88,7 +88,7 @@ ListModel {
 			readonly property string tankName: _tankProperties.name
 			readonly property string tankIcon: isBattery ? Global.batteries.system.icon : _tankProperties.icon
 			readonly property var tankModel: isBattery ? null : Global.tanks.tankModel(tankType)
-			readonly property real tankLevel: isBattery ? Math.round(Global.batteries.system.stateOfCharge || 0)
+			readonly property real tankLevel: isBattery ? Math.round(Global.batteries.system.stateOfCharge)
 					: !isNaN(tankModel.averageLevel) ? tankModel.averageLevel
 					: (tankModel.count === 0 || tankModel.totalCapacity === 0) ? 0
 					: ((Math.min(tankModel.totalRemaining / tankModel.totalCapacity, 1.0) * 100))

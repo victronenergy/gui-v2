@@ -132,7 +132,7 @@ Item {
 						PropertyChanges {
 							target: valueLabel
 
-							visible: !isNaN(model.value)
+							visible: true
 							text: quantity.number + quantity.unit
 							quantity: Units.getDisplayText(unit, value)
 							unit: {
