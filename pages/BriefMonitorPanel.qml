@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import Victron.VenusOS
 
 Column {
@@ -231,61 +230,61 @@ exported power v  0.4 |   /
 		}
 	}
 
-	Column {
-		width: parent.width
-		spacing: Theme.geometry_briefPage_sidePanel_loads_columnSpacing
-
-		Item {
-			width: parent.width
-			height: loadsQuantityLabel.y + loadsQuantityLabel.height
-
-			WidgetHeader {
-				id: loadsHeader
-
-				//% "Loads"
-				title: qsTrId("brief_loads")
-				icon.source: "qrc:/images/consumption.svg"
+	BriefMonitorWidget {
+		//% "AC Loads"
+		title: qsTrId("brief_ac_loads")
+		icon.source: "qrc:/images/acloads.svg"
+		quantityLabel.dataObject: Global.system.ac.consumption
+		active: true
+		sideComponent: LoadGraph {
+			active: root.animationEnabled
+			getNextValue: function() {
+				return acLoadGraphRange.averagePhaseCurrentAsRatio
 			}
 
-			ElectricalQuantityLabel {
-				id: loadsQuantityLabel
-
-				anchors.top: loadsHeader.bottom
-				dataObject: Global.system.loads
-				font.pixelSize: Theme.font_briefPage_quantityLabel_size
-			}
-
-			LoadGraph {
-				id: loadGraph
-
-				anchors {
-					right: parent.right
-					bottom: loadsQuantityLabel.bottom
-					bottomMargin: loadsQuantityLabel.bottomPadding
-				}
-				active: root.animationEnabled
-				getNextValue: function() {
-					return loadsPower.valueAsRatio
-				}
+			AcPhasesCurrentRange {
+				id: acLoadGraphRange
+				phaseModel: root.visible ? Global.system.ac.consumption.phases : null
+				maximumCurrent: Global.system.ac.consumption.maximumCurrent
 			}
 		}
-
-		Slider {
-			enabled: false // not interactive
+		bottomComponent: ThreePhaseBarGauge {
 			width: parent.width
-			height: Theme.geometry_briefPage_sidePanel_generator_slider_height
-			value: loadsPower.valueAsRatio
-			highlightColor: Theme.color_warning
-			grooveColor: Theme.color_darkWarning
-			showHandle: false
+			height: Theme.geometry_barGauge_vertical_width_large
+			orientation: Qt.Horizontal
+			valueType: VenusOS.Gauges_ValueType_RisingPercentage
+			phaseModel: root.visible ? Global.system.ac.consumption.phases : null
+			phaseModelProperty: "current"
+			maximumValue: Global.system.ac.consumption.maximumCurrent
 			animationEnabled: root.animationEnabled
 		}
 	}
 
-	DynamicValueRange {
-		id: loadsPower
+	BriefMonitorWidget {
+		//% "DC Loads"
+		title: qsTrId("brief_dc_loads")
+		icon.source: "qrc:/images/dcloads.svg"
+		active: !isNaN(Global.system.dc.power)
+		visible: active
+		quantityLabel.dataObject: Global.system.dc
+		sideComponent: LoadGraph {
+			active: root.animationEnabled
+			getNextValue: function() {
+				return dcLoadRange.valueAsRatio
+			}
+		}
+		bottomComponent: BarGauge {
+			orientation: Qt.Horizontal
+			valueType: VenusOS.Gauges_ValueType_RisingPercentage
+			value: dcLoadRange.valueAsRatio
+			animationEnabled: root.animationEnabled
+		}
 
-		value: root.visible ? Global.system.loads.power : NaN
+		ValueRange {
+			id: dcLoadRange
+			value: root.visible ? Global.system.dc.power : NaN
+			maximumValue: Global.system.dc.maximumPower
+		}
 	}
 
 	DynamicValueRange {
