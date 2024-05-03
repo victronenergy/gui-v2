@@ -28,6 +28,7 @@ T.SwipeView {
 	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
 							 contentHeight + topPadding + bottomPadding)
 
+	focus: true
 	contentItem: ListView {
 		id: listView
 

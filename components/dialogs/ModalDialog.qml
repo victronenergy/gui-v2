@@ -43,6 +43,35 @@ T.Dialog {
 	horizontalPadding: 0
 	modal: true
 	closePolicy: T.Popup.NoAutoClose
+	focus: true
+
+	Component.onCompleted: registerKeys()
+	onContentItemChanged: registerKeys()
+
+	function registerKeys() {
+		if (contentItem) {
+			root.contentItem.Keys.spacePressed.connect(function() {
+				root._handleAccept()
+			})
+			root.contentItem.Keys.escapePressed.connect(function() {
+				root._handleReject()
+			})
+		}
+	}
+
+	function _handleAccept() {
+		if (!!root.tryAccept && !root.tryAccept()) {
+			return
+		}
+		root.accept()
+	}
+
+	function _handleReject() {
+		if (!!root.tryReject && !root.tryReject()) {
+			return
+		}
+		root.reject()
+	}
 
 	enter: Transition {
 		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation_page_fade_duration }
@@ -125,12 +154,7 @@ T.Dialog {
 			spacing: 0
 			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
 			text: root.rejectText
-			onClicked: {
-				if (!!root.tryReject && !root.tryReject()) {
-					return
-				}
-				root.reject()
-			}
+			onClicked: root._handleReject()
 		}
 
 		SeparatorBar {
@@ -159,12 +183,7 @@ T.Dialog {
 			color: Theme.color_font_primary
 			spacing: 0
 			text: root.acceptText
-			onClicked: {
-				if (!!root.tryAccept && !root.tryAccept()) {
-					return
-				}
-				root.accept()
-			}
+			onClicked: root._handleAccept()
 		}
 	}
 }

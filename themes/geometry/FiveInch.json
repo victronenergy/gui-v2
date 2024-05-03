@@ -22,6 +22,10 @@
     "geometry_button_radius": 6,
     "geometry_button_border_width": 2,
 
+    "geometry_key_navigation_highlight_margin": 4,
+    "geometry_key_navigation_border_margin": 2,
+    "geometry_key_navigation_border_corner_size": 19,
+
     "geometry_silenceAlarmButton_horizontalPadding": 16,
 
     "geometry_listItemButton_horizontalPadding": 16,

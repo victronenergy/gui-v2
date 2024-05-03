@@ -18,6 +18,9 @@ ListItem {
 	down: pressArea.containsPress
 	enabled: userHasReadAccess
 
+	Keys.onReturnPressed: root.clicked()
+	Keys.onSpacePressed: root.clicked()
+
 	content.children: [
 		Label {
 			id: secondaryLabel

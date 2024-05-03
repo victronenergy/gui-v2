@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	property var value
@@ -16,6 +16,11 @@ Item {
 
 	width: parent.width
 	implicitHeight: Theme.geometry_controlCard_largeItem_height
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.focus
+	}
 
 	Label {
 		id: label
@@ -41,6 +46,7 @@ Item {
 
 		height: parent.height
 	}
+
 	SeparatorBar {
 		id: separatorBar
 		anchors {

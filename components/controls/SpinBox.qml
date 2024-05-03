@@ -21,6 +21,9 @@ CT.SpinBox {
 	signal maxValueReached()
 	signal minValueReached()
 
+	Keys.onDownPressed: decrease()
+	Keys.onUpPressed: increase()
+
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 		orientation === Qt.Horizontal
 			? valueColumn.width + up.indicator.width + down.indicator.width + (2 * Theme.geometry_spinBox_spacing) + leftPadding + rightPadding
@@ -51,7 +54,9 @@ CT.SpinBox {
 
 				width: parent.width
 				text: root.textFromValue(root.value, root.locale)
-				color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
+				color: !root.enabled ? Theme.color_background_disabled
+									 : root.activeFocus ? Theme.color_ok
+														: Theme.color_font_primary
 				font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
 				horizontalAlignment: Qt.AlignHCenter
 				verticalAlignment: Qt.AlignVCenter

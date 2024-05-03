@@ -11,11 +11,27 @@ Rectangle {
 	id: root
 
 	required property Notification notification
+	signal clicked
+
+	Keys.onReturnPressed: clicked()
+	Keys.onSpacePressed: clicked()
 
 	width: parent ? parent.width : 0
 	height: textColumn.height
 	radius: Theme.geometry_listItem_radius
-	color: Theme.color_background_secondary
+	color: activeFocus ? Theme.color_listItem_down_background : Theme.color_listItem_background
+
+	PressArea {
+		anchors.fill: parent
+		radius: root.radius
+		onClicked: root.clicked()
+	}
+
+	KeyNavigationHighlight {
+		active: root.activeFocus
+		anchors.fill: parent
+		margin: 0
+	}
 
 	Rectangle {
 		anchors {

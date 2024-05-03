@@ -16,7 +16,8 @@ ModalDialog {
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
 	header: null
 
-	contentItem: Item {
+	contentItem: FocusScope {
+		focus: true
 		anchors {
 			top: parent.top
 			left: parent.left

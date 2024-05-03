@@ -65,6 +65,7 @@ ListItem {
 		text: dataItem.isValid ? dataItem.value : ""
 		rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
 		horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
+		focus: true
 
 		onAccepted: {
 			let newValue = text

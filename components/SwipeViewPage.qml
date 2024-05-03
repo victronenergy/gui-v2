@@ -28,4 +28,44 @@ Page {
 			 (view.moving
 			 ? Global.mainView.swipeView.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)
 			 : SwipeView.isCurrentItem) // 'SwipeView.isCurrentItem' correctly returns false for the Settings page on Startup.
+
+	property alias contentItem: content
+	default property alias children: content.data
+
+	Connections {
+		ignoreUnknownSignals: true
+		target: Global.mainView.swipeView
+		function onCurrentIndexChanged() {
+			resetFocus()
+		}
+	}
+
+	function resetFocus() {
+		pageFocus.focus = true
+	}
+
+	FocusScope {
+		id: content
+		anchors.fill: parent
+		Keys.onEscapePressed: pageFocus.focus = true
+	}
+
+	KeyNavigationHighlight {
+		id: pageFocus
+
+		z: 1
+		focus: true
+		active: activeFocus
+		margin: 0
+		anchors {
+			leftMargin: Theme.geometry_page_content_horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
+			fill: parent
+		}
+
+		Keys.onReturnPressed: contentItem.focus = true
+		Keys.onSpacePressed: contentItem.focus = true
+		Keys.onLeftPressed: pageManager.navBar.goToPreviousPage()
+		Keys.onRightPressed: pageManager.navBar.goToNextPage()
+	}
 }

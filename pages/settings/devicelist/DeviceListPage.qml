@@ -258,6 +258,12 @@ Page {
 			textModel: model.connected && _displayInfo ? _displayInfo.summary || [] : [ CommonWords.not_connected ]
 			down: deviceMouseArea.containsPress
 			allowed: _displayInfo !== null
+			Keys.onReturnPressed: clicked()
+			Keys.onSpacePressed: clicked()
+
+			function clicked() {
+				Global.pageManager.pushPage(_displayInfo.url, _displayInfo.params)
+			}
 
 			CP.ColorImage {
 				parent: deviceDelegate.content
@@ -277,9 +283,7 @@ Page {
 				}
 				radius: deviceDelegate.backgroundRect.radius
 				enabled: !!_displayInfo && _displayInfo.url.length > 0
-				onClicked: {
-					Global.pageManager.pushPage(_displayInfo.url, _displayInfo.params)
-				}
+				onClicked: parent.clicked()
 			}
 		}
 	}

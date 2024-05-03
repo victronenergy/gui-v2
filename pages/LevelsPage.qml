@@ -26,6 +26,7 @@ SwipeViewPage {
 
 		// Prefer a tab that is enabled.
 		property int _preferredIndex: model[0].enabled || !model[1].enabled ? 0 : 1
+		readonly property bool tanksOpen: tabBar.currentIndex === 0
 
 		anchors {
 			top: parent.top
@@ -57,6 +58,24 @@ SwipeViewPage {
 
 		currentIndex: _preferredIndex
 		onCurrentIndexChanged: _preferredIndex = currentIndex   // once user selects a tab, don't use the default index anymore
+
+		focus: true
+		Keys.onRightPressed: function (event) {
+			if (tanksOpen && model[1].enabled) {
+				currentIndex = 1
+				return
+			}
+			event.accepted = false
+		}
+
+		Keys.onLeftPressed: function (event) {
+			if (!tanksOpen && model[0].enabled) {
+				currentIndex = 0
+				return
+			}
+			event.accepted = false
+		}
+		KeyNavigation.down: tanksOpen ? tanksTab : environmentTab
 	}
 
 	TanksTab {
@@ -94,7 +113,7 @@ SwipeViewPage {
 			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
 		}
 
-		visible: tabBar.currentIndex === 0
+		visible: tabBar.tanksOpen
 	}
 
 	EnvironmentTab {
@@ -123,7 +142,7 @@ SwipeViewPage {
 			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
 		}
 
-		visible: tabBar.currentIndex === 1
+		visible: !tabBar.tanksOpen
 	}
 
 	// Show gradients on the left/right edges to indicate the page bounds

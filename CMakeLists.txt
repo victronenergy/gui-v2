@@ -297,6 +297,7 @@ set (VENUS_QML_MODULE_SOURCES
 
     components/controls/Button.qml
     components/controls/ComboBox.qml
+    components/controls/KeyNavigationHighlight.qml
     components/controls/Label.qml
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
@@ -689,6 +690,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/cpuinfo.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
+    src/keyeventfilter.h
+    src/keyeventfilter.cpp
     src/quantityinfo.h
     src/quantityinfo.cpp
     src/qrangemodel_p.h
@@ -1058,6 +1061,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/electron.svg
         images/ess.svg
         images/freshWater.svg
+        images/key-navigation-highlight.svg
         images/icon_black_water_24.svg
         images/icon_fresh_water_24.svg
         images/icon_raw_water_24.svg

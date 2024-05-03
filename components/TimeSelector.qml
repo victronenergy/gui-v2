@@ -32,6 +32,9 @@ Item {
 		label.text: Utils.pad(value, 2)
 		//% "hr"
 		secondaryText: qsTrId("timeselector_hr")
+		focus: true
+		KeyNavigation.left: minSpinbox
+		KeyNavigation.right: minSpinbox
 	}
 
 	Label {
@@ -60,5 +63,7 @@ Item {
 		label.text: Utils.pad(value, 2)
 		//% "min"
 		secondaryText: qsTrId("timeselector_min")
+		KeyNavigation.left: hrSpinbox
+		KeyNavigation.right: hrSpinbox
 	}
 }

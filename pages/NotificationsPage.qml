@@ -37,6 +37,7 @@ SwipeViewPage {
 
 				property bool animateHeightChanges
 				property int prevCount: -1
+				focus: true
 
 				onCountChanged: {
 					if (count < prevCount && count !== 0) { // don't fade/resize for the last remaining notification
@@ -92,17 +93,10 @@ SwipeViewPage {
 				delegate: NotificationDelegate {
 					id: activeDelegate
 
-					// When the delegate is clicked, acknowledge it.
-					PressArea {
-						anchors.fill: parent
-						enabled: !activeDelegate.notification.acknowledged
-						radius: activeDelegate.radius
-
-						onReleased: {
-							activeDelegate.notification.setAcknowledged(true)
-							if (activeDelegate.notification.active) {
-								activeDelegate.color = Theme.color_background_secondary
-							}
+					onClicked: {
+						activeDelegate.notification.setAcknowledged(true)
+						if (activeDelegate.notification.active) {
+							activeDelegate.color = Theme.color_background_secondary
 						}
 					}
 				}

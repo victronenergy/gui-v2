@@ -53,6 +53,7 @@ ModalDialog {
 
 				property bool _initialized: false
 
+				focus: true
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
 				height: Theme.geometry_timeSelector_spinBox_height
@@ -71,6 +72,8 @@ ModalDialog {
 						root.value = Number(spinBox.value / root._multiplier())
 					}
 				}
+				Keys.onLeftPressed: decrease()
+				Keys.onRightPressed: increase()
 
 				onMinValueReached: root.minValueReached()
 				onMaxValueReached: root.maxValueReached()

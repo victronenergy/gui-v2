@@ -19,6 +19,7 @@ QtObject {
 
 	readonly property string fontFamily: _defaultFontLoader.name
 	readonly property string quantityFontFamily: _quantityFontLoader.name
+	property var activeFocusItem
 	property var inputPanel
 	property var dialogLayer
 	property var notificationLayer

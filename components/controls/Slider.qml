@@ -20,6 +20,9 @@ T.Slider {
 
 	implicitHeight: Math.max(implicitBackgroundHeight, implicitHandleHeight)
 
+	Keys.onLeftPressed: decrease()
+	Keys.onRightPressed: increase()
+
 	background: Rectangle {
 		id: backgroundRect
 

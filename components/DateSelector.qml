@@ -31,6 +31,9 @@ Item {
 			from: 1970
 			to: 2100
 			label.text: value
+			focus: true
+			KeyNavigation.left: daySpinbox
+			KeyNavigation.right: monthSpinbox
 		}
 
 		SpinBox {
@@ -42,6 +45,8 @@ Item {
 			from: 1
 			to: 12
 			label.text: Utils.pad(value, 2)
+			KeyNavigation.left: yearSpinbox
+			KeyNavigation.right: daySpinbox
 		}
 
 		SpinBox {
@@ -53,6 +58,8 @@ Item {
 			from: 1
 			to: root.year,root.month, ClockTime.daysInMonth(root.month, root.year)
 			label.text: Utils.pad(value, 2)
+			KeyNavigation.left: monthSpinbox
+			KeyNavigation.right: yearSpinbox
 		}
 	}
 }

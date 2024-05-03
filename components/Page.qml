@@ -18,7 +18,6 @@ FocusScope {
 			&& !(!!Global.screenBlanker && Global.screenBlanker.blanked)
 	property bool animationEnabled: defaultAnimationEnabled && isCurrentPage
 
-
 	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None
 
@@ -26,6 +25,7 @@ FocusScope {
 
 	readonly property bool __is_venus_gui_page__: true
 
+	focus: isCurrentPage
 	implicitWidth: Theme.geometry_screen_width
 	implicitHeight: Theme.geometry_screen_height
 }

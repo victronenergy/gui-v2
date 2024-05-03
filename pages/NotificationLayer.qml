@@ -9,9 +9,15 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	property Item _previousActiveFocusItem
+
 	anchors.fill: parent
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
+		if (toastItemsModel.count === 0) {
+			_previousActiveFocusItem = Global.activeFocusItem
+		}
+
 		var toast = toaster.createObject(root, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
 		toastItemsModel.append(toast)
 	}
@@ -22,6 +28,11 @@ Item {
 				toastItemsModel.remove(i, 1)
 				toast.destroy(1000)
 				break
+			}
+		}
+		if (toastItemsModel.count === 0) {
+			if (_previousActiveFocusItem) {
+				_previousActiveFocusItem.forceActiveFocus()
 			}
 		}
 	}
@@ -52,6 +63,10 @@ Item {
 
 			// delay removal from model, else will crash
 			onDismissed: root.deleteNotification(toast)
+			Keys.onEscapePressed: dismiss()
+			Keys.onSpacePressed: dismiss()
+			Keys.onReturnPressed: dismiss()
+			onOpacityChanged: if (opacity === 1.0) forceActiveFocus()
 		}
 	}
 

@@ -10,14 +10,23 @@ Item {
 	id: root
 
 	property QtObject currentDialog
+	property Item _previousActiveFocusItem
+
 	anchors.fill: parent
 
 	function open(dialogComponent, properties) {
 		currentDialog = dialogComponent.createObject(root, properties)
+		currentDialog.aboutToHide.connect(function() {
+			if (_previousActiveFocusItem) {
+				_previousActiveFocusItem.forceActiveFocus()
+			}
+		})
+
 		currentDialog.closed.connect(function() {
 			currentDialog.destroy()
 			currentDialog = null
 		})
+		_previousActiveFocusItem = Global.activeFocusItem
 		currentDialog.open()
 	}
 

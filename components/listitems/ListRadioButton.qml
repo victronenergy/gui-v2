@@ -22,9 +22,12 @@ ListItem {
 		RadioButton {
 			id: radioButton
 
+			focus: true
+
 			// Alternative to binding "enabled: !checked". No clicked() signal
 			// got emitted when the button was disabled on checked=false.
 			onClicked: if (root.checked) root.clicked()
+			Keys.onSpacePressed: root.clicked()
 		}
 	]
 

@@ -10,6 +10,7 @@ import Victron.VenusOS
 ListView {
 	id: root
 
+	focus: true
 	width: parent.width
 	height: parent.height
 	bottomMargin: Theme.geometry_gradientList_bottomMargin
@@ -74,5 +75,4 @@ ListView {
 			}
 		}
 	}
-
 }

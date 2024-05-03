@@ -19,4 +19,9 @@ Button {
 	color: down
 		   ? Theme.color_navigationBar_button_on
 		   : Theme.color_navigationBar_button_off
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.activeFocus
+	}
 }

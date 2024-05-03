@@ -189,18 +189,30 @@ Page {
 			ListItem {
 				text: "Toast"
 				content.children: [
-
 					ListItemButton {
+						id: warningButton
+						focus: true
 						text: "Warning"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Warning, "Warning toast")
+						down: pressed || checked || activeFocus
+						KeyNavigation.left: infoButton
+						KeyNavigation.right: alarmButton
 					},
 					ListItemButton {
+						id: alarmButton
 						text: "Alarm"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Alarm, "Alarm toast")
+						down: pressed || checked || activeFocus
+						KeyNavigation.left: warningButton
+						KeyNavigation.right: infoButton
 					},
 					ListItemButton {
+						id: infoButton
 						text: "Info"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Info, "Info toast")
+						down: pressed || checked || activeFocus
+						KeyNavigation.left: alarmButton
+						KeyNavigation.right: warningButton
 					}
 				]
 			}

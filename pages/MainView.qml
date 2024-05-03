@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
@@ -50,6 +50,7 @@ Item {
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
 	property SwipeView swipeView: swipeViewLoader.item
+
 	Loader {
 		id: swipeViewLoader
 		// Anchor this to the PageStack's left side, so that this view slides out of view when the
@@ -64,7 +65,8 @@ Item {
 		active: false
 		asynchronous: true
 		sourceComponent: swipeViewComponent
-
+		KeyNavigation.up: statusBar
+		Keys.onEscapePressed: navBar.focus = true
 		visible: swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
 	}
 
@@ -206,6 +208,11 @@ Item {
 		model: swipeView.contentModel
 
 		onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
+		onFocusChanged: if (focus && swipeView.currentItem) swipeView.currentItem.resetFocus()
+
+		focus: true
+		KeyNavigation.up: swipeViewLoader
+		KeyNavigation.down: statusBar
 
 		Component.onCompleted: pageManager.navBar = navBar
 
@@ -325,6 +332,15 @@ Item {
 		}
 		x: width
 		width: Theme.geometry_screen_width
+		focus: pageStack.depth > 0
+		KeyNavigation.up: statusBar
+		KeyNavigation.down: navBar
+		Keys.onEscapePressed: {
+			if (depth === 1) {
+				swipeViewLoader.focus = true
+			}
+			Global.pageManager.popPage()
+		}
 	}
 
 	StatusBar {
@@ -341,6 +357,8 @@ Item {
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
 		animationEnabled: BackendConnection.applicationVisible
 		color: root.backgroundColor
+
+		KeyNavigation.down: pageStack.depth > 0 ? pageStack : swipeViewLoader
 
 		onLeftButtonClicked: {
 			switch (leftButton) {

@@ -8,7 +8,7 @@ import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	property int fontPixelSize: Theme.font_size_body3
@@ -38,6 +38,7 @@ Item {
 			delegate: AsymmetricRoundedRectangle {
 				id: buttonDelegate
 
+				focus: currentIndex === model.index
 				width: root.width / buttonRepeater.count
 				height: parent ? parent.height : 0
 				color: modelData.enabled === false && model.index !== root.currentIndex
@@ -79,6 +80,11 @@ Item {
 						root.buttonClicked(model.index)
 						root.currentIndex = model.index
 					}
+				}
+
+				KeyNavigationHighlight {
+					active: buttonDelegate.activeFocus
+					anchors.fill: parent
 				}
 			}
 		}

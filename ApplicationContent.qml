@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	property alias mainView: mainView
@@ -22,6 +22,7 @@ Item {
 			pageManager.navBar.setCurrentPage("NotificationsPage.qml")
 		}
 	}
+	focus: true
 
 	PageManager {
 		id: pageManager
@@ -30,6 +31,7 @@ Item {
 
 	MainView {
 		id: mainView
+		focus: true
 		anchors.fill: parent
 		pageManager: pageManager
 		Component.onCompleted: Global.mainView = mainView

@@ -3,10 +3,10 @@
 ** See LICENSE.txt for license information.
 */
 
-import QtQml
+import QtQuick
 import Victron.VenusOS
 
-QtObject {
+Item {
 	id: root
 
 	property QtObject emitter: QtObject {
@@ -48,5 +48,21 @@ QtObject {
 
 	function popAllPages() {
 		emitter.popAllPagesRequested()
+	}
+	onWindowChanged: function (window) {
+		keyEventFilter.window = window
+	}
+
+	KeyEventFilter {
+		id: keyEventFilter
+		consumeKeyEvents: root.interactivity === VenusOS.PageManager_InteractionMode_Idle
+		onPressed: {
+			if (idleModeTimer.running) {
+				idleModeTimer.restart()
+			}
+			if (root.interactivity === VenusOS.PageManager_InteractionMode_Idle) {
+				root.interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
+			}
+		}
 	}
 }

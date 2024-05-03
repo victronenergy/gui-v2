@@ -21,6 +21,7 @@ ListItem {
 		ListItemButton {
 			id: button
 
+			focus: true
 			width: Math.min(implicitWidth, root.maximumContentWidth)
 			enabled: root.enabled
 

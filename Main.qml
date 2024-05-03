@@ -23,9 +23,14 @@ Window {
 	property bool isDesktop: false
 	property real scaleFactor: 1.0
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
+	onActiveFocusItemChanged: Global.activeFocusItem = root.activeFocusItem
 
 	function skipSplashScreen() {
 		Global.splashScreenVisible = false
+	}
+
+	function keyPressed() {
+		console.log("key pressed")
 	}
 
 	function retranslateUi() {
@@ -104,6 +109,7 @@ Window {
 	Loader {
 		id: guiLoader
 
+		focus: true
 		clip: Qt.platform.os == "wasm"
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height

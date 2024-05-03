@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	property alias text: primaryLabel.text
@@ -62,6 +62,12 @@ Item {
 				height: parent.height
 				color: backgroundRect.color
 			}
+		}
+
+		KeyNavigationHighlight {
+			active: root.activeFocus
+			margin: 0
+			anchors.fill: parent
 		}
 	}
 

@@ -30,6 +30,10 @@ Item {
 	onOpacityChanged: if (dismiss.dismissClicked && opacity === 0.0) root.dismissed()
 	Component.onCompleted: dismiss.dismissAvailable = true // ensures fade-in as well as fade-out transition.
 
+	function dismiss() {
+		dismiss.dismissClicked = true
+	}
+
 	Rectangle {
 		id: background
 		anchors.fill: parent
@@ -96,7 +100,7 @@ Item {
 			property bool dismissClicked: false
 			property bool dismissAvailable: false
 			width: Theme.geometry_toastNotification_minHeight
-			onClicked: dismissClicked = true
+			onClicked: root.dismiss()
 
 			CP.IconImage {
 				id: dismissIcon

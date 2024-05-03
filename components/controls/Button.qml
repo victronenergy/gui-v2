@@ -28,6 +28,8 @@ CT.Button {
 	onReleased: pressEffect.stop()
 	onCanceled: pressEffect.stop()
 
+	Keys.onSpacePressed: clicked()
+
 	down: pressed || checked
 	spacing: Theme.geometry_button_spacing
 	topPadding: 0

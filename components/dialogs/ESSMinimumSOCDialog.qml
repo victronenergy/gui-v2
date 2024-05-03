@@ -46,12 +46,14 @@ ModalDialog {
 			}
 
 			Slider {
+				focus: true
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
 				value: root.minimumStateOfCharge
 				from: 0
 				to: 100
-				onMoved: root.minimumStateOfCharge = value
+				stepSize: 1
+				onValueChanged: root.minimumStateOfCharge = value
 			}
 
 			Item {

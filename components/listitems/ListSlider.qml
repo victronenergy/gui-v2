@@ -19,6 +19,7 @@ ListItem {
 		SettingsSlider {
 			id: slider
 
+			focus: root.focus
 			width: Theme.geometry_listItem_slider_width
 		}
 	]

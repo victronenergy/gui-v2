@@ -7,7 +7,7 @@ import QtQuick
 import QtQuick.Controls as C
 import Victron.VenusOS
 
-Rectangle {
+FocusScope {
 	id: root
 
 	property string title
@@ -23,7 +23,14 @@ Rectangle {
 
 	width: parent.width
 	height: Theme.geometry_statusBar_height
+	property alias color: background.color
+
 	opacity: 0
+
+	Rectangle {
+		id: background
+		anchors.fill: parent
+	}
 
 	SequentialAnimation {
 		running: !Global.splashScreenVisible && animationEnabled
@@ -53,6 +60,11 @@ Rectangle {
 				duration: Theme.animation_page_idleOpacity_duration
 			}
 		}
+
+		KeyNavigationHighlight {
+			anchors.fill: parent
+			active: parent.activeFocus
+		}
 	}
 
 	StatusBarButton {
@@ -63,6 +75,8 @@ Rectangle {
 			leftMargin: Theme.geometry_statusBar_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
+
+		focus: root.focus
 		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
 					 ? "qrc:/images/icon_controls_off_32.svg"
 					 : root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive
@@ -72,6 +86,8 @@ Rectangle {
 		enabled: !!Global.pageManager
 				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				&& root.leftButton != VenusOS.StatusBar_LeftButton_None
+		KeyNavigation.left: rightButton
+		KeyNavigation.right: rightButton
 
 		onClicked: root.leftButtonClicked()
 	}
@@ -102,6 +118,8 @@ Rectangle {
 		}
 
 		StatusBarButton {
+			id: rightButton
+
 			enabled: !!Global.pageManager
 					&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 					&& root.rightButton != VenusOS.StatusBar_RightButton_None
@@ -115,6 +133,9 @@ Rectangle {
 						  : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
 							? "qrc:/images/icon_refresh_32.svg"
 							: ""
+
+			KeyNavigation.left: leftButton
+			KeyNavigation.right: leftButton
 
 			onClicked: root.rightButtonClicked()
 		}

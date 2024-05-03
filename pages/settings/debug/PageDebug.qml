@@ -20,6 +20,8 @@ Page {
 
 				content.children: Switch {
 					id: childSwitch
+					focus: true
+					Keys.onSpacePressed: switchItem.clicked()
 					onClicked: switchItem.clicked()
 				}
 
