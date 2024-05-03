@@ -16,11 +16,36 @@ Rectangle {
 	property color foregroundColor: Theme.statusColorValue(valueStatus)
 	property color backgroundColor: Theme.statusColorValue(valueStatus, true)
 	property real value: 0.0
-	property real _value: isNaN(value) || value < 0 ? 0 : Math.min(1.0, value)
+	property int orientation: Qt.Vertical
 	property bool animationEnabled
 
+	readonly property real _value: isNaN(value) ? 0 : Math.min(1.0, Math.max(0, value))
+
 	color: backgroundColor
-	onAnimationEnabledChanged: fgRect.resetYBinding()
+	width: orientation === Qt.Vertical ? Theme.geometry_barGauge_vertical_width_large : parent.width
+	height: orientation === Qt.Vertical ? parent.height : Theme.geometry_barGauge_horizontal_height
+	radius: orientation === Qt.Vertical ? width / 2 : height / 2
+
+	// Only update the nextPos when visible and width/height have been initialized.
+	readonly property real _nextPos: visible && width !== Infinity && height !== Infinity
+			? orientation === Qt.Vertical
+				? height - (height * _value)    // slide in from bottom to top
+				: -width + (width * _value)     // slide in from left to right
+			: 0
+
+	on_NextPosChanged: {
+		if (animationEnabled) {
+			const animator = orientation === Qt.Vertical ? yAnimator : xAnimator
+			animator.to = _nextPos
+			animator.start()
+		} else if (visible) {
+			if (orientation === Qt.Vertical) {
+				fgRect.y = _nextPos
+			} else {
+				fgRect.x = _nextPos
+			}
+		}
+	}
 
 	Rectangle {
 		id: maskRect
@@ -44,37 +69,20 @@ Rectangle {
 			width: parent.width
 			height: parent.height
 			color: foregroundColor
-			y: nextY
 
-			// don't use a behavior on Y
-			// otherwise there can be a "jump" we receive receive two value updates in close succession.
-			readonly property real nextY: maskRect.height - (fgRect.height*bgRect._value)
-
-			// when the animation isn't handling y changes, we need to reassign
-			// the initial binding, to ensure the value is correct when not animating.
-			function resetYBinding() {
-				if (!bgRect.animationEnabled && !anim.running) {
-					y = Qt.binding(function() { return fgRect.nextY })
-				}
-			}
-
-			onNextYChanged: {
-				if (!anim.running && bgRect.animationEnabled) {
-					anim.from = fgRect.y
-					// do a little dance to break the y binding...
-					fgRect.y = 0
-					fgRect.y = anim.from
-					anim.to = fgRect.nextY
-					anim.start()
-				}
-			}
-
-			YAnimator {
-				id: anim
+			// Use animators instead of a behavior on x/y. Otherwise, there can be a "jump" when
+			// receiving two value updates in close succession.
+			XAnimator {
+				id: xAnimator
 				target: fgRect
 				easing.type: Easing.InOutQuad
 				duration: Theme.animation_briefPage_sidePanel_sliderValueChange_duration
-				onRunningChanged: fgRect.resetYBinding()
+			}
+			YAnimator {
+				id: yAnimator
+				target: fgRect
+				easing.type: Easing.InOutQuad
+				duration: Theme.animation_briefPage_sidePanel_sliderValueChange_duration
 			}
 		}
 	}
