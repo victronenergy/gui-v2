@@ -209,6 +209,7 @@ set (VENUS_QML_MODULE_SOURCES
     FrameRateVisualizer.qml
 
     components/AcceptButtonBackground.qml
+    components/AcPhasesCurrentRange.qml
     components/AcInputsCurrentLimits.qml
     components/AcOutput.qml
     components/AcPhase.qml
