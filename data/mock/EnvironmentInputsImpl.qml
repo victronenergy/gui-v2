@@ -81,15 +81,25 @@ Item {
 		target: Global.mockDataSimulator || null
 
 		function onSetEnvironmentInputsRequested(config) {
-			Global.environmentInputs.model.clear()
-			while (_createdObjects.length > 0) {
-				_createdObjects.pop().destroy()
+			// Do not remove all objects in the model before adding the new ones, as Levels page
+			// will disappear.
+			const hasCreatedObjects = _createdObjects.length > 0
+			while (_createdObjects.length > 1) {
+				let obj = _createdObjects.pop()
+				obj._deviceInstance.setValue(-1)
+				obj.destroy()
 			}
 
 			if (config) {
 				for (let i = 0; i < config.length; ++i) {
 					root.addInput(config[i])
 				}
+			}
+
+			if (hasCreatedObjects) {
+				let lastObject = _createdObjects.shift()
+				lastObject._deviceInstance.setValue(-1)
+				lastObject.destroy()
 			}
 		}
 	}
