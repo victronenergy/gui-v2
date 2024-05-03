@@ -84,7 +84,7 @@ Item {
 				}
 				visible: gaugeRepeater.count > 1
 				text: model.index + 1
-				font.pixelSize: Theme.font_size_brief_phase
+				font.pixelSize: Theme.font_size_phase_number
 			}
 
 			ValueRange {

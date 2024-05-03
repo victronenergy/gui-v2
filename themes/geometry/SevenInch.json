@@ -9,6 +9,12 @@
     "geometry_icon_size_medium": 32,
     "geometry_icon_size_large": 48,
 
+    "geometry_barGauge_vertical_width_large": 8,
+    "geometry_barGauge_vertical_width_small": 4,
+    "geometry_barGauge_horizontal_height": 10,
+    "geometry_barGauge_phaseLabel_leftPadding": 3,
+    "geometry_barGauge_phaseLabel_rightPadding": 3,
+
     "geometry_button_spacing": 7,
     "geometry_button_radius": 6,
     "geometry_button_border_width": 2,
@@ -241,8 +247,6 @@
     "geometry_overviewPage_widget_content_horizontalMargin": 14,
     "geometry_overviewPage_widget_extraContent_topMargin": 6,
     "geometry_overviewPage_widget_sideGauge_margins": 8,
-    "geometry_overviewPage_widget_sideGauge_small_width": 4,
-    "geometry_overviewPage_widget_sideGauge_large_width": 8,
     "geometry_overviewPage_widget_leftWidgetWidth": 224,
     "geometry_overviewPage_widget_centerWidgetWidth": 304,
     "geometry_overviewPage_widget_rightWidgetWidth": 224,
