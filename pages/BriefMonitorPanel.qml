@@ -24,56 +24,47 @@ Column {
 		sideComponent: SolarYieldGraph {}
 	}
 
-	Column {
-		id: generatorColumn
-
-		width: parent.width
-		spacing: Theme.geometry_briefPage_sidePanel_generator_columnSpacing
-		visible: !!generatorQuantityLabel.dataObject
-
-		Item {
-			width: parent.width
-			height: generatorQuantityLabel.y + generatorQuantityLabel.height
-
-			WidgetHeader {
-				id: generatorHeader
-
-				title: CommonWords.generator
-				icon.source: "qrc:/images/generator.svg"
-			}
-
-			ElectricalQuantityLabel {
-				id: generatorQuantityLabel
-
-				anchors.top: generatorHeader.bottom
-				dataObject: Global.acInputs.generatorInput
-				font.pixelSize: Theme.font_briefPage_quantityLabel_size
-			}
+	// In most cases there is only 1 generator, so don't worry about other ones here.
+	BriefMonitorWidget {
+		id: generatorWidget
+		title: Global.generators.model.count === 1 ? Global.generators.model.firstObject.name : CommonWords.generator
+		icon.source: "qrc:/images/generator.svg"
+		active: Global.acInputs.activeInputInfo
+				&& Global.acInputs.activeInputInfo.source === VenusOS.AcInputs_InputSource_Generator
+				&& Global.acInputs.activeInput
+		visible: active
+		quantityLabel.dataObject: Global.acInputs.generatorInput
+		sideComponent: Item {
+			width: generatorLabel.width
+			height: generatorLabel.height
 
 			GeneratorIconLabel {
+				id: generatorLabel
+
 				anchors {
 					right: parent.right
-					bottom: generatorQuantityLabel.bottom
-					bottomMargin: generatorQuantityLabel.bottomPadding
+					bottom: parent.bottom
 				}
-				// In most cases there is only 1 generator, so don't worry about other ones here.
-				generator: Global.generators.first
+				generator: Global.generators.model.firstObject
 			}
 		}
-		Slider {
-			enabled: false // not interactive
+		bottomComponent: ThreePhaseBarGauge {
 			width: parent.width
-			height: Theme.geometry_briefPage_sidePanel_generator_slider_height
-			value: Global.acInputs.generatorInput ? Global.acInputs.generatorInput.power : 0
-			showHandle: false
+			height: Theme.geometry_barGauge_vertical_width_large
+			orientation: Qt.Horizontal
+			phaseModel: Global.acInputs.activeInput.phases
+			phaseModelProperty: "current"
+			minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
+			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
 			animationEnabled: root.animationEnabled
+			inputMode: true
 		}
 	}
 
 	Column {
 		width: parent.width
 		spacing: Theme.geometry_briefPage_sidePanel_generator_columnSpacing
-		visible: !generatorColumn.visible && !(isNaN(Global.acInputs.power) && isNaN(Global.dcInputs.power))
+		visible: !(isNaN(Global.acInputs.power) && isNaN(Global.dcInputs.power))
 
 		Item {
 			width: parent.width
