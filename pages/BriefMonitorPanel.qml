@@ -128,7 +128,7 @@ exported power v  0.4 |   /
 
 				property real _oldGraphPowerRange: NaN
 
-				getNextValue: function() {
+				onNextValueRequested: {
 					graphShowsExportPower = inputsPower.minimumSeen < 0
 
 					// If we show export power, the minimum scale of the y axis goes from -1000W to +1000W
@@ -154,7 +154,7 @@ exported power v  0.4 |   /
 						_oldGraphPowerRange = graphPowerRange
 					}
 					normalizedPowerSlider.value = normalizedPower
-					return normalizedPower
+					addValue(normalizedPower)
 				}
 
 				function scaleHistoricalData(scalingFactor, normalizedZeroPowerPoint) {
@@ -229,9 +229,7 @@ exported power v  0.4 |   /
 		active: true
 		sideComponent: LoadGraph {
 			active: root.animationEnabled
-			getNextValue: function() {
-				return acLoadGraphRange.averagePhaseCurrentAsRatio
-			}
+			onNextValueRequested: addValue(acLoadGraphRange.averagePhaseCurrentAsRatio)
 
 			AcPhasesCurrentRange {
 				id: acLoadGraphRange
@@ -260,9 +258,7 @@ exported power v  0.4 |   /
 		quantityLabel.dataObject: Global.system.dc
 		sideComponent: LoadGraph {
 			active: root.animationEnabled
-			getNextValue: function() {
-				return dcLoadRange.valueAsRatio
-			}
+			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
 		}
 		bottomComponent: BarGauge {
 			orientation: Qt.Horizontal
