@@ -18,8 +18,8 @@ Column {
 		//% "Solar yield"
 		title: qsTrId("brief_solar_yield")
 		icon.source: "qrc:/images/solaryield.svg"
-		active: Global.solarChargers.model.count > 0 && Global.pvInverters.model.count === 0
-		visible: active
+		loadersActive: Global.solarChargers.model.count > 0 && Global.pvInverters.model.count === 0
+		visible: loadersActive
 		quantityLabel.dataObject: Global.system.solar
 		sideComponent: SolarYieldGraph {}
 	}
@@ -29,10 +29,10 @@ Column {
 		id: generatorWidget
 		title: Global.generators.model.count === 1 ? Global.generators.model.firstObject.name : CommonWords.generator
 		icon.source: "qrc:/images/generator.svg"
-		active: Global.acInputs.activeInputInfo
+		loadersActive: Global.acInputs.activeInputInfo
 				&& Global.acInputs.activeInputInfo.source === VenusOS.AcInputs_InputSource_Generator
 				&& Global.acInputs.activeInput
-		visible: active
+		visible: loadersActive
 		quantityLabel.dataObject: Global.acInputs.generatorInput
 		sideComponent: Item {
 			width: generatorLabel.width
@@ -62,13 +62,13 @@ Column {
 	}
 
 	BriefMonitorWidget {
-		 title: active ? Global.acInputs.sourceToText(Global.acInputs.activeInputInfo.source) : ""
-		 icon.source: active ? Global.acInputs.sourceIcon(Global.acInputs.activeInputInfo.source) : ""
+		 title: loadersActive ? Global.acInputs.sourceToText(Global.acInputs.activeInputInfo.source) : ""
+		 icon.source: loadersActive ? Global.acInputs.sourceIcon(Global.acInputs.activeInputInfo.source) : ""
 		 quantityLabel.dataObject: Global.acInputs.activeInput
-		 active: Global.acInputs.activeInputInfo
+		 loadersActive: Global.acInputs.activeInputInfo
 				 && Global.acInputs.activeInputInfo.source !== VenusOS.AcInputs_InputSource_Generator
 				 && Global.acInputs.activeInput
-		 visible: active
+		 visible: loadersActive
 		 sideComponent: LoadGraph {
 				/*
 			This graph shows the current/amps that is imported/exported by the AC input. On a
@@ -179,11 +179,9 @@ exported power v  0.4 |   /
 				? Global.dcInputs.inputTypeToText(Global.dcInputs.model.firstObject.inputType)
 				  //% "DC input"
 				: qsTrId("brief_dc_input")
-		icon.source: Global.dcInputs.model.count === 1
-				? Global.dcInputs.inputTypeIcon(Global.dcInputs.model.firstObject.inputType)
-				: Global.dcInputs.multiInputIcon
-		active: Global.dcInputs.model.count > 0
-		visible: active
+		icon.source: root.dcInputIconSource
+		loadersActive: Global.dcInputs.model.count > 0
+		visible: loadersActive
 		quantityLabel.dataObject: Global.dcInputs
 		sideComponent: LoadGraph {
 			active: root.animationEnabled
@@ -209,7 +207,7 @@ exported power v  0.4 |   /
 		title: qsTrId("brief_ac_loads")
 		icon.source: "qrc:/images/acloads.svg"
 		quantityLabel.dataObject: Global.system.ac.consumption
-		active: true
+		loadersActive: true
 		sideComponent: LoadGraph {
 			active: root.animationEnabled
 			onNextValueRequested: addValue(acLoadGraphRange.averagePhaseCurrentAsRatio)
@@ -236,8 +234,8 @@ exported power v  0.4 |   /
 		//% "DC Loads"
 		title: qsTrId("brief_dc_loads")
 		icon.source: "qrc:/images/dcloads.svg"
-		active: !isNaN(Global.system.dc.power)
-		visible: active
+		loadersActive: !isNaN(Global.system.dc.power)
+		visible: loadersActive
 		quantityLabel.dataObject: Global.system.dc
 		sideComponent: LoadGraph {
 			active: root.animationEnabled

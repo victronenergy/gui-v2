@@ -14,7 +14,7 @@ Item {
 	property alias quantityLabel: quantityLabel
 	property alias sideComponent: sideLoader.sourceComponent
 	property alias bottomComponent: bottomLoader.sourceComponent
-	property bool active
+	property bool loadersActive
 
 	width: parent.width
 	height: bottomLoader.y + bottomLoader.height
@@ -38,7 +38,7 @@ Item {
 			bottomMargin: quantityLabel.bottomPadding
 		}
 		width: Theme.geometry_monitorWidget_sideWidget_width
-		active: root.active
+		active: root.loadersActive
 	}
 
 	Loader {
@@ -48,6 +48,6 @@ Item {
 			topMargin: Theme.geometry_monitorWidget_bottomWidget_topMargin
 		}
 		width: parent.width
-		active: root.active
+		active: root.loadersActive
 	}
 }
