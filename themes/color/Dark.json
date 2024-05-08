@@ -98,13 +98,6 @@
     "color_briefPage_circularGauge_shine": "#BBFFFFFF",
     "color_briefPage_sidePanel_forecast_separator": "color_darkWhite",
     "color_briefPage_sidePanel_loadGraph_dotColor": "color_gray3",
-    "color_briefPage_sidePanel_loadGraph_warning_strokeColor": "color_orange",
-    "color_briefPage_sidePanel_loadGraph_warning_gradientColor1": "#F0952E",
-    "color_briefPage_sidePanel_loadGraph_warning_gradientColor2": "transparent",
-    "color_briefPage_sidePanel_loadGraph_nominal_strokeColor": "color_blue",
-    "color_briefPage_sidePanel_loadGraph_nominal_gradientColor1": "color_blue",
-    "color_briefPage_sidePanel_loadGraph_nominal_gradientColor2": "transparent",
-    "color_briefPage_sidePanel_loadGraph_horizontalGradient_color": "transparent",
 
     "color_levelsPage_tankIcon": "color_white",
     "color_levelsPage_tank_title": "color_black",

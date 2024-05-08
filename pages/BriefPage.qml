@@ -15,18 +15,9 @@ SwipeViewPage {
 	property real _gaugeLabelMargin: Theme.geometry_briefPage_edgeGauge_label_initialize_margin
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
-	readonly property string _inputsIconSource: {
-		const totalInputs = (Global.acInputs.activeInput != null ? 1 : 0)
-				+ Global.dcInputs.model.count
-		if (totalInputs <= 1) {
-			if (Global.acInputs.activeInput != null) {
-				return Global.acInputs.sourceIcon(Global.acInputs.activeInput.source)
-			} else if (Global.dcInputs.model.count > 0) {
-				return VenusOS.dcInputIcon(Global.dcInputs.model.deviceAt(0).source)
-			}
-		}
-		return "qrc:/images/icon_input_24.svg"
-	}
+	readonly property string _dcInputIconSource: Global.dcInputs.model.count === 1
+		 ? Global.dcInputs.inputTypeIcon(Global.dcInputs.model.firstObject.inputType)
+		 : "qrc:/images/icon_dc_24.svg"
 
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
 	readonly property int _rightGaugeCount: dcLoadGauge.active ? 2 : 1  // AC load gauge is always active
@@ -295,10 +286,7 @@ SwipeViewPage {
 							// top, or is the first (top) gauge, so label aligns to the bottom.
 							? Qt.AlignLeft | (acInputGauge.active ? Qt.AlignTop : Qt.AlignBottom)
 							: Qt.AlignLeft| Qt.AlignVCenter
-					icon.source: Global.dcInputs.model.count === 1
-							? Global.dcInputs.inputTypeIcon(Global.dcInputs.model.firstObject.inputType)
-							: "qrc:/images/icon_dc_24.svg"
-
+					icon.source: root._dcInputIconSource
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.dataObject: Global.dcInputs
@@ -451,8 +439,8 @@ SwipeViewPage {
 		}
 		width: Theme.geometry_briefPage_sidePanel_width
 		sourceComponent: BriefMonitorPanel {
-			inputsIconSource: root._inputsIconSource
 			animationEnabled: root.animationEnabled
+			dcInputIconSource: root._dcInputIconSource
 		}
 
 		// the brief monitor panel has animations which mess with the asynchronous heuristic

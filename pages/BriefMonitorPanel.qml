@@ -10,7 +10,7 @@ Column {
 	id: root
 
 	property bool animationEnabled
-	property string inputsIconSource
+	property string dcInputIconSource
 
 	spacing: Theme.geometry_briefPage_sidePanel_columnSpacing
 
@@ -52,7 +52,7 @@ Column {
 			width: parent.width
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
-			phaseModel: Global.acInputs.activeInput.phases
+			phaseModel: root.visible ? Global.acInputs.activeInput.phases : null
 			phaseModelProperty: "current"
 			minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
 			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
@@ -61,45 +61,32 @@ Column {
 		}
 	}
 
-	Column {
-		width: parent.width
-		spacing: Theme.geometry_briefPage_sidePanel_generator_columnSpacing
-		visible: !(isNaN(Global.acInputs.power) && isNaN(Global.dcInputs.power))
-
-		Item {
-			width: parent.width
-			height: gridQuantityLabel.y + gridQuantityLabel.height
-
-			WidgetHeader {
-				id: gridHeader
-
-				//% "Power"
-				title: qsTrId("power")
-				icon.source: root.inputsIconSource
-			}
-
-			ElectricalQuantityLabel {
-				id: gridQuantityLabel
-
-				anchors.top: gridHeader.bottom
-				value: root.visible ? Units.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : 0
-				font.pixelSize: Theme.font_briefPage_quantityLabel_size
-			}
-
-			LoadGraph {
-				id: gridGraph
-
+	BriefMonitorWidget {
+		 title: active ? Global.acInputs.sourceToText(Global.acInputs.activeInputInfo.source) : ""
+		 icon.source: active ? Global.acInputs.sourceIcon(Global.acInputs.activeInputInfo.source) : ""
+		 quantityLabel.dataObject: Global.acInputs.activeInput
+		 active: Global.acInputs.activeInputInfo
+				 && Global.acInputs.activeInputInfo.source !== VenusOS.AcInputs_InputSource_Generator
+				 && Global.acInputs.activeInput
+		 visible: active
+		 sideComponent: LoadGraph {
 				/*
+			This graph shows the current/amps that is imported/exported by the AC input. On a
+			multi-phase system, the graph shows the average current per phase.
+
+			If feed-in to grid is enabled, the graph shows imported and exported current, as in
+			Graph B. Otherwise, we only show imported current, as in Graph A.
+
 				   Graph A
-				   <Power>
-		1000W     1.0 |
+				   <Current>
+	Max current   1.0 |
 				  0.9 |
 				  0.8 |
 				  0.7 |
 				  0.6 |
 				  0.5 |
 				  0.4 |      ___________
-				  0.3 |     /           \_________        (only shows imported power. 'graphShowsExportPower' is false)
+				  0.3 |     /           \_________        (only shows imported current. '_graphShowsFeedIn' is false)
 				  0.2 |____/
 imported power ^  0.1 |
 			 0W   0.0 |---------------------------> <Time>
@@ -107,117 +94,113 @@ imported power ^  0.1 |
 
 
 				   Graph B
-				   <Power>
-		1000 W	  1.0 |
+				   <Current>
+	Max current   1.0 |
 				  0.9 |
-				  0.8 |       ___________ (e.g. +600W)
+				  0.8 |       ___________ (e.g. +60A)
 				  0.7 |      /           \_______
 imported power ^  0.6 |     /
-			  0W  0.5 |..../.......................       (shows imported and exported power. 'graphShowsExportPower' is true)
+			  0W  0.5 |..../.......................       (shows imported and exported current. '_graphShowsFeedIn' is true)
 exported power v  0.4 |   /
-				  0.3 |__/  (e.g. -400W)
+				  0.3 |__/  (e.g. -40A)
 				  0.2 |
 				  0.1 |
-		-1000W	  0.0 |----------------------------> <Time>
+	Min current   0.0 |----------------------------> <Time>
 
 				  */
 
-				// If we have ever seen power exported to the grid, the graph shows imported and exported power, as in Graph B.
-				// Otherwise, we only show imported power, as in Graph A.
-				property bool graphShowsExportPower: false
+			readonly property bool _graphShowsFeedIn: acInputGraphRange.minimumCurrent < 0
+					&& Global.systemSettings.essFeedbackToGridEnabled()
+			property real _prevGraphMin
+			property real _prevGraphMax
 
-				property real _oldGraphPowerRange: NaN
-
-				onNextValueRequested: {
-					graphShowsExportPower = inputsPower.minimumSeen < 0
-
-					// If we show export power, the minimum scale of the y axis goes from -1000W to +1000W
-					// If we don't show export power, the minimum scale of the y axis goes from 0W to +1000W
-					const minimumRangeWatts = graphShowsExportPower
-							? Theme.animation_loadGraph_minimumRange_watts * 2
-							: Theme.animation_loadGraph_minimumRange_watts
-					const peakPowerImportedOrExported = Math.max(Math.abs(inputsPower.maximumSeen), Math.abs(inputsPower.minimumSeen))
-					const graphPowerRange =  graphShowsExportPower // This represents the difference in power between y=0 and y=1 on the graph
-							? Math.max(2 * peakPowerImportedOrExported, minimumRangeWatts)
-							: Math.max(inputsPower.maximumSeen, minimumRangeWatts)
-
-					// in Graph A, when the graph is at y=0.0, power is zero.
-					// in Graph B, when the graph is at y=0.5, power is zero.
-					const normalizedZeroPowerPoint = graphShowsExportPower ? 0.5 : 0.0
-					const normalizedPower = (inputsPower.value / graphPowerRange) + normalizedZeroPowerPoint
-
-					if (_oldGraphPowerRange != graphPowerRange) {
-						if (!isNaN(_oldGraphPowerRange)) {
-							const scalingFactor = graphPowerRange / _oldGraphPowerRange
-							scaleHistoricalData(scalingFactor, normalizedZeroPowerPoint)
-						}
-						_oldGraphPowerRange = graphPowerRange
-					}
-					normalizedPowerSlider.value = normalizedPower
-					addValue(normalizedPower)
+			function scaleHistoricalData(prevMin, prevMax, newMin, newMax) {
+				for (let i = 0; i < model.length; ++i) {
+					// Scale each amps value in the model from the old range to the new range.
+					const averagePhaseCurrentAsRatio = model[i]
+					const currentInAmps = Utils.scaleNumber(averagePhaseCurrentAsRatio, 0, 1, prevMin, prevMax)
+					model[i] = Utils.scaleNumber(currentInAmps, prevMin, prevMax, newMin, newMax)
 				}
+			}
 
-				function scaleHistoricalData(scalingFactor, normalizedZeroPowerPoint) {
-					// If our historical power data was like this: [-1000, 1000, -1000, 1000, ...], and inputsPower.minimumSeen === -1000,
-					// and inputsPower.maximumSeen === 1000, our graph 'y' values would be like this: [-1, 0, -1, 1, ...]
-					// If we then got a new power import reading of 5000W, we need to scale down all of the historical data by
-					// a factor of 5, eg. [-0.2, 0.2, -0.2, 0.2, ...]
-					for (let i = 0; i < model.length; ++i) {
-						model[i] = normalizedZeroPowerPoint + (model[i] - normalizedZeroPowerPoint) / scalingFactor
+			active: root.animationEnabled
+			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
+			belowThresholdFillColor: _graphShowsFeedIn ? Theme.color_green : Theme.color_blue
+			initialModelValue: 0
+			threshold: {
+				// For a system with a min current below zero (i.e. it sometimes exports), the
+				// threshold is the 0 amp mark within the min/max range.
+				if (acInputGraphRange.minimumCurrent < 0) {
+					const range = acInputGraphRange.maximumCurrent - acInputGraphRange.minimumCurrent
+					if (range !== 0) {
+						return Math.abs(acInputGraphRange.minimumCurrent) / range
 					}
 				}
+				// For a system that only imports, no threshold is required.
+				return 0
+			}
 
-				onGraphShowsExportPowerChanged: {
-					// This can only ever change from false to true.
-					// If the system has never exported power, the graph values start at 0 (importing 0 power)
-					// and go to 1 (peak power import).
-					// The first time the system exports power, we need to scale and offset the historical power values.
-					// E.g. An old value of 0 (meaning importing 0 power) has to be changed to 0.5
-					// An old value of 0.2 (meaning importing 20% of peak power) has to be changed to 0.6,
-					// as the range has doubled, and the zero-point has changed from 0 to 0.5.
-					for (let i = 0; i < model.length; ++i) {
-						if (model[i] < 0.5) {
-							model[i] = model[i]/2 + 0.5
-						}
-					}
+			onNextValueRequested: {
+				const graphMin = acInputGraphRange.minimumCurrent || 0
+				const graphMax = acInputGraphRange.maximumCurrent || 0
+
+				if (_prevGraphMin !== graphMin || _prevGraphMax !== graphMax) {
+					scaleHistoricalData(_prevGraphMin, _prevGraphMax, graphMin, graphMax)
+					_prevGraphMin = graphMin
+					_prevGraphMax = graphMax
 				}
+				addValue(acInputGraphRange.averagePhaseCurrentAsRatio)
+			}
 
-				anchors {
-					right: parent.right
-					bottom: gridQuantityLabel.bottom
-					bottomMargin: gridQuantityLabel.bottomPadding
-				}
-				active: root.animationEnabled
+			AcPhasesCurrentRange {
+				id: acInputGraphRange
 
-				// For a system that sometimes exports power, 0.5 represents 0 power.
-				// For a system that only imports power, 0 represents 0 power.
-				initialModelValue: graphShowsExportPower ? 0.5 : 0.0
-				warningThreshold: 0.5
-				belowThresholdFillColor1: graphShowsExportPower
-										  ? Theme.color_briefPage_background
-										  : Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor1
-				belowThresholdFillColor2: graphShowsExportPower
-										  ? Theme.color_briefPage_background
-										  : Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor2
-				belowThresholdBackgroundColor1: graphShowsExportPower
-												? Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor1
-												: Theme.color_briefPage_background
-				belowThresholdBackgroundColor2: graphShowsExportPower
-												? Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor2
-												: Theme.color_briefPage_background
-				horizontalGradientColor1: Theme.color_briefPage_background
-				horizontalGradientColor2: "transparent"
+				phaseModel: root.visible ? Global.acInputs.activeInput.phases : null
+				minimumCurrent: Global.acInputs.activeInputInfo.minimumCurrent
+				maximumCurrent: Global.acInputs.activeInputInfo.maximumCurrent
 			}
 		}
-		Slider {
-			id: normalizedPowerSlider
 
-			enabled: false // not interactive
+		bottomComponent: ThreePhaseBarGauge {
 			width: parent.width
-			height: Theme.geometry_briefPage_sidePanel_generator_slider_height
-			value: gridGraph.normalizedPower || 0
-			showHandle: false
+			height: Theme.geometry_barGauge_vertical_width_large
+			orientation: Qt.Horizontal
+			phaseModel: root.visible ? Global.acInputs.activeInput.phases : null
+			phaseModelProperty: "current"
+			minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
+			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
 			animationEnabled: root.animationEnabled
+			inputMode: true
+		}
+	}
+
+	BriefMonitorWidget {
+		title: Global.dcInputs.model.count === 1
+				? Global.dcInputs.inputTypeToText(Global.dcInputs.model.firstObject.inputType)
+				  //% "DC input"
+				: qsTrId("brief_dc_input")
+		icon.source: Global.dcInputs.model.count === 1
+				? Global.dcInputs.inputTypeIcon(Global.dcInputs.model.firstObject.inputType)
+				: Global.dcInputs.multiInputIcon
+		active: Global.dcInputs.model.count > 0
+		visible: active
+		quantityLabel.dataObject: Global.dcInputs
+		sideComponent: LoadGraph {
+			active: root.animationEnabled
+			threshold: 0    // no threshold needed for inputs
+			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
+			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
+		}
+		bottomComponent: BarGauge {
+			orientation: Qt.Horizontal
+			value: dcInputRange.valueAsRatio
+			animationEnabled: root.animationEnabled
+		}
+
+		ValueRange {
+			id: dcInputRange
+			value: root.visible ? Global.dcInputs.power : NaN
+			maximumValue: Global.dcInputs.maximumPower
 		}
 	}
 
@@ -272,11 +255,5 @@ exported power v  0.4 |   /
 			value: root.visible ? Global.system.dc.power : NaN
 			maximumValue: Global.system.dc.maximumPower
 		}
-	}
-
-	DynamicValueRange {
-		id: inputsPower
-
-		value: root.visible ? Units.sumRealNumbers(Global.acInputs.power, Global.dcInputs.power) : NaN
 	}
 }

@@ -207,7 +207,6 @@
     "geometry_briefPage_sidePanel_generator_slider_height": 8,
     "geometry_briefPage_sidePanel_generator_columnSpacing": 2,
     "geometry_briefPage_sidePanel_loads_columnSpacing": 2,
-    "geometry_briefPage_sidePanel_loadGraph_warningThreshold": 0.6,
     "geometry_briefPage_sidePanel_loadGraph_dotSize": 1,
     "geometry_briefPage_sidePanel_loadGraph_intervalMs": 1000,
     "geometry_briefPage_sidePanel_loadGraph_width": 144,
