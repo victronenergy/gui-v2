@@ -57,7 +57,8 @@ Item {
 		anchors.fill: parent
 
 		onPressed: function(mouse) {
-			mouse.accepted = false
+			// block touch during navigation bar fadeout
+			mouse.accepted = mainView.navBarAnimatingOut
 			if (pageManager.idleModeTimer.running) {
 				pageManager.idleModeTimer.restart()
 			}
