@@ -60,10 +60,24 @@ Page {
 		}
 
 		ListSwitch {
+			id: acOutInUse
 			//% "Inverter AC output in use"
 			text: qsTrId("settings_ess_inverter_ac_output_in_use")
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
 			allowed: defaultAllowed && withoutGridMeter.currentIndex === 0
+		}
+
+		ListRadioButtonGroup {
+			//% "Self-consumption from battery"
+			text: qsTrId("settings_ess_self_consumption_battery")
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryUse"
+			allowed: defaultAllowed && withoutGridMeter.currentIndex === 0 && acOutInUse.checked
+			optionModel: [
+				//% "All system loads"
+				{ display: qsTrId("settings_ess_all_system_loads"), value: 0 },
+				//% "Only critical loads"
+				{ display: qsTrId("settings_ess_only_critical_loads"), value: 1 },
+			]
 		}
 
 		ListRadioButtonGroup {
