@@ -17,6 +17,8 @@ Item {
 			   : !!swipeView ? swipeView.currentItem
 			   : null
 
+	property alias navBarAnimatingOut: animateNavBarOut.running
+
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
