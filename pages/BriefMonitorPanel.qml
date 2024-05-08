@@ -4,15 +4,14 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
-Column {
+ColumnLayout {
 	id: root
 
 	property bool animationEnabled
 	property string dcInputIconSource
-
-	spacing: Theme.geometry_briefPage_sidePanel_columnSpacing
 
 	BriefMonitorWidget {
 		//% "Solar yield"

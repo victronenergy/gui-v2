@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+Column {
 	id: root
 
 	property alias title: header.title
@@ -17,36 +17,43 @@ Item {
 	property bool loadersActive
 
 	width: parent.width
-	height: bottomLoader.y + bottomLoader.height
+	bottomPadding: Theme.geometry_monitorWidget_verticalMargin
 
 	WidgetHeader {
 		id: header
+		z: 1    // place the title above the side component if it overflows
 	}
 
-	ElectricalQuantityLabel {
-		id: quantityLabel
-		anchors.top: header.bottom
-		font.pixelSize: Theme.font_briefPage_quantityLabel_size
-	}
+	Row {
+		width: parent.width
+		height: quantityLabel.height
 
-	Loader {
-		id: sideLoader
-		anchors {
-			right: parent.right
-			top: header.bottom
-			bottom: quantityLabel.bottom
-			bottomMargin: quantityLabel.bottomPadding
+		ElectricalQuantityLabel {
+			id: quantityLabel
+			font.pixelSize: Theme.font_briefPage_quantityLabel_size
+			width: parent.width - sideLoader.width
+			alignment: Qt.AlignLeft
 		}
-		width: Theme.geometry_monitorWidget_sideWidget_width
-		active: root.loadersActive
+
+		Loader {
+			id: sideLoader
+			anchors {
+				top: parent.top
+				bottom: parent.bottom
+				bottomMargin: Theme.geometry_monitorWidget_sideWidget_bottomMargin
+			}
+			width: Theme.geometry_monitorWidget_sideWidget_width
+			active: root.loadersActive
+		}
+	}
+
+	Item {
+		width: 1
+		height: bottomLoader.status === Loader.Ready ? Theme.geometry_monitorWidget_quantityLabel_bottomMargin : 0
 	}
 
 	Loader {
 		id: bottomLoader
-		anchors {
-			top: quantityLabel.bottom
-			topMargin: Theme.geometry_monitorWidget_bottomWidget_topMargin
-		}
 		width: parent.width
 		active: root.loadersActive
 	}

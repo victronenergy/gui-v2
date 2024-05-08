@@ -197,9 +197,7 @@
     "geometry_briefPage_largeEdgeGauge_maxAngle": 53,
     "geometry_briefPage_solarHistoryGauge_maximumGaugeCount": 3,
 
-    "geometry_briefPage_sidePanel_verticalCenterOffset": -6,
     "geometry_briefPage_sidePanel_width": 304,
-    "geometry_briefPage_sidePanel_columnSpacing": 36,
     "geometry_briefPage_sidePanel_header_spacing": 2,
     "geometry_briefPage_sidePanel_separatorBar_height": 2,
     "geometry_briefPage_sidePanel_forecastRow_spacing": 44,
@@ -214,7 +212,10 @@
     "geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width": 10,
 
     "geometry_monitorWidget_sideWidget_width": 144,
-    "geometry_monitorWidget_bottomWidget_topMargin": 2,
+    "geometry_monitorWidget_sideWidget_topMargin": 12,
+    "geometry_monitorWidget_sideWidget_bottomMargin": 4,
+    "geometry_monitorWidget_quantityLabel_bottomMargin": 4,
+    "geometry_monitorWidget_verticalMargin": 16,
 
     "geometry_quantityLabel_spacing": 2,
     "geometry_quantityLabel_bottomMargin": 2,
