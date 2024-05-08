@@ -137,6 +137,19 @@ QtObject {
 		}
 	}
 
+	function inputTypeIcon(type) {
+		switch (type) {
+		case VenusOS.DcInputs_InputType_Alternator:
+			return "qrc:/images/alternator.svg"
+		case VenusOS.DcInputs_InputType_DcGenerator:
+			return "qrc:/images/generator.svg"
+		case VenusOS.DcInputs_InputType_Wind:
+			return "qrc:/images/wind.svg"
+		default:
+			return "qrc:/images/icon_dc_24.svg"
+		}
+	}
+
 	readonly property VeQuickItem _maximumPower: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
 	}
