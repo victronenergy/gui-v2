@@ -13,14 +13,12 @@ Item {
 	property var model: [] // contains 12 values that define the shape of our bendy graph
 	property real initialModelValue: 0.0
 	property real offsetFraction
-	property real warningThreshold: Theme.geometry_briefPage_sidePanel_loadGraph_warningThreshold
+	property real threshold: 0.8    // same as 80% warning level for gauges
 	property int dotSize: Theme.geometry_briefPage_sidePanel_loadGraph_dotSize
-	property color belowThresholdFillColor1: Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor1
-	property color belowThresholdFillColor2: Theme.color_briefPage_sidePanel_loadGraph_nominal_gradientColor2
-	property color belowThresholdBackgroundColor1: Theme.color_briefPage_background
-	property color belowThresholdBackgroundColor2: Theme.color_briefPage_background
+	property color aboveThresholdFillColor: Theme.color_orange
+	property color belowThresholdFillColor: Theme.color_blue
 	property color horizontalGradientColor1: Theme.color_briefPage_background
-	property color horizontalGradientColor2: Theme.color_briefPage_sidePanel_loadGraph_horizontalGradient_color
+	property color horizontalGradientColor2: "transparent"
 	property alias active: graphAnimation.running
 
 	signal nextValueRequested()
@@ -62,31 +60,27 @@ Item {
 
 			anchors.fill: parent
 			model: root.model
-			strokeColor: Theme.color_briefPage_sidePanel_loadGraph_warning_strokeColor
+			strokeColor: aboveThresholdFillColor
 			offsetFraction: root.offsetFraction
 			fillGradient: LinearGradient {
 				x1: 0; y1: 0
 				x2: 0; y2: height
-				GradientStop { position: 0; color: Theme.color_briefPage_sidePanel_loadGraph_warning_gradientColor1 }
-				GradientStop { position: 1; color: Theme.color_briefPage_sidePanel_loadGraph_warning_gradientColor2 }
+				GradientStop { position: 0; color: aboveThresholdFillColor }
+				GradientStop { position: 1; color: "transparent" }
 			}
 		}
 	}
 	Rectangle {
 		anchors.bottom: parent.bottom
 		width: parent.width
-		height: parent.height * warningThreshold + 1 // '+1' to conceal a 1 pixel orange line from the orange section
+		height: parent.height * threshold + 1 // '+1' to conceal a 1 pixel orange line from the orange section
 		clip: true
-
-		gradient: Gradient {
-			GradientStop { position: 0; color: belowThresholdBackgroundColor2 }
-			GradientStop { position: 1; color: belowThresholdBackgroundColor1 }
-		}
+		color: Theme.color_briefPage_background
 
 		LoadGraphShapePath {
 			id: bluePath
 			model: orangePath.model
-			strokeColor: Theme.color_briefPage_sidePanel_loadGraph_nominal_strokeColor
+			strokeColor: belowThresholdFillColor
 			height: root.height + 2*strokeWidth
 			width: parent.width + 2*strokeWidth
 			anchors.bottom: parent.bottom
@@ -94,12 +88,12 @@ Item {
 			fillGradient: LinearGradient {
 				x1: 0; y1: 0
 				x2: 0; y2: height
-				GradientStop { position: 0; color: belowThresholdFillColor1 }
+				GradientStop { position: 0; color: belowThresholdFillColor }
 				GradientStop {
-					position: 1 - warningThreshold + (dottedLine.height / height)
-					color: belowThresholdFillColor1
+					position: 1 - threshold + (dottedLine.height / height)
+					color: belowThresholdFillColor
 				}
-				GradientStop { position: 1; color: belowThresholdFillColor2 }
+				GradientStop { position: 1; color: "transparent" }
 			}
 		}
 		Row {

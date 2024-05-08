@@ -10,6 +10,7 @@ QtObject {
 
 	property alias minimumCurrent: _valueRange.minimumValue
 	property alias maximumCurrent: _valueRange.maximumValue
+	readonly property real averagePhaseCurrent: _valueRange.value
 	readonly property real averagePhaseCurrentAsRatio: _valueRange.valueAsRatio
 	property alias phaseModel: _phaseObjects.model
 

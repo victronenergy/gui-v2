@@ -181,17 +181,25 @@ QtObject {
 			event.accepted = true
 			break
 		case Qt.Key_P:
-			Global.dcInputs.power = 0
-			Global.acInputs.generatorInput = null
-			if (event.modifiers & Qt.ControlModifier) {
-				Global.acInputs.power = 0
-			} else if (event.modifiers & Qt.ShiftModifier) {
-				Global.acInputs.power += 200
-			} else {
-				Global.acInputs.power -= 200
+		{
+			const phases = Global.acInputs.activeInput.phases
+			for (let i = 0; i < phases.count; ++i) {
+				const phaseCurrent = phases.get(i).current
+				const phasePower = phases.get(i).power
+				if (event.modifiers & Qt.ControlModifier) {
+					phases.setProperty(i, "current", 0)
+					phases.setProperty(i, "power", 0)
+				} else if (event.modifiers & Qt.ShiftModifier) {
+					phases.setProperty(i, "current", phaseCurrent + 5)
+					phases.setProperty(i, "power", phasePower + 100)
+				} else {
+					phases.setProperty(i, "current", phaseCurrent - 5)
+					phases.setProperty(i, "power", phasePower - 100)
+				}
 			}
 			event.accepted = true
 			break
+		}
 		case Qt.Key_T:
 			root.timersActive = !root.timersActive
 			pageConfigTitle.text = "Timers on: " + root.timersActive

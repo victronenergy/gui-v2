@@ -4,6 +4,7 @@
 */
 
 import QtQml
+import Victron.VenusOS
 
 QtObject {
 	property real minimumValue
@@ -13,8 +14,7 @@ QtObject {
 		if (isNaN(value) || isNaN(minimumValue) || isNaN(maximumValue)) {
 			return 0
 		}
-		const range = maximumValue - minimumValue
-		const normalizedValue = Math.max(minimumValue, Math.min(maximumValue, value))
-		return range === 0 ? 0 : (normalizedValue - minimumValue) / range
+		// Scale the value from the min-max range to a 0-1 range.
+		return Utils.scaleNumber(value, minimumValue, maximumValue, 0, 1)
 	}
 }
