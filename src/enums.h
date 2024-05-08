@@ -607,8 +607,6 @@ public:
 		Alarm_Level_Alarm
 	};
 	Q_ENUM(Alarm_Level)
-
-	Q_INVOKABLE QString dcInputIcon(DcInputs_InputType type);
 };
 
 }
