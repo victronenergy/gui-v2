@@ -22,6 +22,8 @@ SwipeViewPage {
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
 	readonly property int _rightGaugeCount: dcLoadGauge.active ? 2 : 1  // AC load gauge is always active
 
+	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
+
 	// Do not animate gauge progress changes while the left/right side gauge layouts are changing.
 	on_LeftGaugeCountChanged: pauseLeftGaugeAnimations.restart()
 	on_RightGaugeCountChanged: pauseRightGaugeAnimations.restart()
@@ -144,8 +146,7 @@ SwipeViewPage {
 	Loader {
 		id: mainGauge
 
-		// vertically center to the unexpanded height of the page
-		y: (Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height - height) / 2
+		y: (root._unexpandedHeight - height) / 2
 		width: Theme.geometry_mainGauge_size
 		height: width
 		x: sidePanel.x/2 - width/2
@@ -433,12 +434,10 @@ SwipeViewPage {
 
 	Loader {
 		id: sidePanel
-		anchors {
-			verticalCenter: mainGauge.verticalCenter
-			verticalCenterOffset: Theme.geometry_briefPage_sidePanel_verticalCenterOffset
-		}
 		width: Theme.geometry_briefPage_sidePanel_width
 		sourceComponent: BriefMonitorPanel {
+			width: parent.width
+			height: Math.max(root._unexpandedHeight, implicitHeight)
 			animationEnabled: root.animationEnabled
 			dcInputIconSource: root._dcInputIconSource
 		}
