@@ -211,11 +211,10 @@
     "geometry_briefPage_sidePanel_loadGraph_height": 51,
     "geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width": 10,
 
-    "geometry_monitorWidget_sideWidget_width": 122,
-    "geometry_monitorWidget_sideWidget_topMargin": 12,
-    "geometry_monitorWidget_sideWidget_bottomMargin": 4,
-    "geometry_monitorWidget_quantityLabel_bottomMargin": 2,
-    "geometry_monitorWidget_verticalMargin": 8,
+    "geometry_sidePanel_sideWidget_width": 122,
+    "geometry_sidePanel_sideWidget_bottomMargin": 4,
+    "geometry_sidePanel_quantityLabel_bottomMargin": 2,
+    "geometry_sidePanel_verticalMargin": 8,
 
     "geometry_quantityLabel_spacing": 2,
     "geometry_quantityLabel_bottomMargin": 2,

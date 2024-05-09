@@ -218,7 +218,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ArcGaugeQuantityRow.qml
     components/AsymmetricRoundedRectangle.qml
     components/BarGauge.qml
-    components/BriefMonitorWidget.qml
+    components/BriefSidePanelWidget.qml
     components/ButtonControlValue.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
@@ -454,7 +454,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/TankModel.qml
     data/common/UnsupportedDevice.qml
 
-    pages/BriefMonitorPanel.qml
+    pages/BriefSidePanel.qml
     pages/BriefPage.qml
     pages/ControlCardsPage.qml
     pages/DialogLayer.qml
