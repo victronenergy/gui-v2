@@ -52,7 +52,7 @@ TankItem {
 					}
 
 					height: subgauges.height
-					gaugeValueType: root.tankProperties.valueType
+					valueType: root.tankProperties.valueType
 					value: (root.mergeTanks ? model.device.level : root.level) / 100
 					isGrouped: root.mergeTanks
 				}
