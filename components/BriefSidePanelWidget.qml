@@ -17,7 +17,7 @@ Column {
 	property bool loadersActive
 
 	width: parent.width
-	bottomPadding: Theme.geometry_monitorWidget_verticalMargin
+	bottomPadding: Theme.geometry_sidePanel_verticalMargin
 
 	WidgetHeader {
 		id: header
@@ -40,16 +40,16 @@ Column {
 			anchors {
 				top: parent.top
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry_monitorWidget_sideWidget_bottomMargin
+				bottomMargin: Theme.geometry_sidePanel_sideWidget_bottomMargin
 			}
-			width: Theme.geometry_monitorWidget_sideWidget_width
+			width: Theme.geometry_sidePanel_sideWidget_width
 			active: root.loadersActive
 		}
 	}
 
 	Item {
 		width: 1
-		height: bottomLoader.status === Loader.Ready ? Theme.geometry_monitorWidget_quantityLabel_bottomMargin : 0
+		height: bottomLoader.status === Loader.Ready ? Theme.geometry_sidePanel_quantityLabel_bottomMargin : 0
 	}
 
 	Loader {

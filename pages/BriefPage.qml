@@ -435,7 +435,7 @@ SwipeViewPage {
 	Loader {
 		id: sidePanel
 		width: Theme.geometry_briefPage_sidePanel_width
-		sourceComponent: BriefMonitorPanel {
+		sourceComponent: BriefSidePanel {
 			width: parent.width
 			height: Math.max(root._unexpandedHeight, implicitHeight)
 			animationEnabled: root.animationEnabled

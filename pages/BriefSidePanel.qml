@@ -13,7 +13,7 @@ ColumnLayout {
 	property bool animationEnabled
 	property string dcInputIconSource
 
-	BriefMonitorWidget {
+	BriefSidePanelWidget {
 		//% "Solar yield"
 		title: qsTrId("brief_solar_yield")
 		icon.source: "qrc:/images/solaryield.svg"
@@ -24,7 +24,7 @@ ColumnLayout {
 	}
 
 	// In most cases there is only 1 generator, so don't worry about other ones here.
-	BriefMonitorWidget {
+	BriefSidePanelWidget {
 		id: generatorWidget
 		title: Global.generators.model.count === 1 ? Global.generators.model.firstObject.name : CommonWords.generator
 		icon.source: "qrc:/images/generator.svg"
@@ -60,7 +60,7 @@ ColumnLayout {
 		}
 	}
 
-	BriefMonitorWidget {
+	BriefSidePanelWidget {
 		 title: loadersActive ? Global.acInputs.sourceToText(Global.acInputs.activeInputInfo.source) : ""
 		 icon.source: loadersActive ? Global.acInputs.sourceIcon(Global.acInputs.activeInputInfo.source) : ""
 		 quantityLabel.dataObject: Global.acInputs.activeInput
@@ -173,7 +173,7 @@ exported power v  0.4 |   /
 		}
 	}
 
-	BriefMonitorWidget {
+	BriefSidePanelWidget {
 		title: Global.dcInputs.model.count === 1
 				? Global.dcInputs.inputTypeToText(Global.dcInputs.model.firstObject.inputType)
 				  //% "DC input"
@@ -201,7 +201,7 @@ exported power v  0.4 |   /
 		}
 	}
 
-	BriefMonitorWidget {
+	BriefSidePanelWidget {
 		//% "AC Loads"
 		title: qsTrId("brief_ac_loads")
 		icon.source: "qrc:/images/acloads.svg"
@@ -229,7 +229,7 @@ exported power v  0.4 |   /
 		}
 	}
 
-	BriefMonitorWidget {
+	BriefSidePanelWidget {
 		//% "DC Loads"
 		title: qsTrId("brief_dc_loads")
 		icon.source: "qrc:/images/dcloads.svg"
