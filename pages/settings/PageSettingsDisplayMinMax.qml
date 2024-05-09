@@ -48,9 +48,9 @@ Page {
 								acInputsRepeater.itemAt(i).reset()
 							}
 							dcInMaxPower.dataItem.setValue(0)
-							acIn1MaxOutPower.dataItem.setValue(0)
-							acIn2MaxOutPower.dataItem.setValue(0)
-							noAcInMaxOutPower.dataItem.setValue(0)
+							acIn1MaxOutCurrent.dataItem.setValue(0)
+							acIn2MaxOutCurrent.dataItem.setValue(0)
+							noAcInMaxOutCurrent.dataItem.setValue(0)
 							dcOutMaxPower.dataItem.setValue(0)
 							pvMaxPower.dataItem.setValue(0)
 						}
@@ -121,22 +121,22 @@ Page {
 			}
 
 			ListNumberField {
-				id: acIn1MaxOutPower
-				//% "Maximum power: AC in 1 connected"
+				id: acIn1MaxOutCurrent
+				//% "Maximum current: AC in 1 connected"
 				text: qsTrId("settings_minmax_acout_max_acin1")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
 			}
 
 			ListNumberField {
-				id: acIn2MaxOutPower
-				//% "Maximum power: AC in 2 connected"
+				id: acIn2MaxOutCurrent
+				//% "Maximum current: AC in 2 connected"
 				text: qsTrId("settings_minmax_acout_max_acin2")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
 			}
 
 			ListNumberField {
-				id: noAcInMaxOutPower
-				//% "Maximum power: no AC inputs"
+				id: noAcInMaxOutCurrent
+				//% "Maximum current: no AC inputs"
 				text: qsTrId("settings_minmax_acout_max")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
 			}
