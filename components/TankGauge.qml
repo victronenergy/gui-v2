@@ -10,11 +10,9 @@ import QtQuick.Controls.impl as CP
 BarGauge {
 	id: root
 
-	property int gaugeValueType
 	property bool isGrouped: false
 	property bool expanded
 
-	valueType: gaugeValueType
 	radius: Theme.geometry_levelsPage_tankGauge_radius
 
 	Rectangle {
@@ -43,9 +41,9 @@ BarGauge {
 		y: (root.height / 4 / 2) - (height / 2)
 
 		visible: !root.isGrouped
-				 && ((gaugeValueType === VenusOS.Gauges_ValueType_FallingPercentage && value <= 0.05)
-					 || (gaugeValueType === VenusOS.Gauges_ValueType_RisingPercentage && value >= 0.95))
-		color: root.gaugeValueType === VenusOS.Gauges_ValueType_FallingPercentage
+				 && ((root.valueType === VenusOS.Gauges_ValueType_FallingPercentage && value <= 0.05)
+					 || (root.valueType === VenusOS.Gauges_ValueType_RisingPercentage && value >= 0.95))
+		color: root.valueType === VenusOS.Gauges_ValueType_FallingPercentage
 			   ? Theme.color_levelsPage_fallingGauge_alarmIcon
 			   : Theme.color_levelsPage_risingGauge_alarmIcon
 		source: expanded ? "qrc:/images/icon_warning_32.svg"

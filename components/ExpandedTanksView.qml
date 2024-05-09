@@ -56,7 +56,7 @@ Rectangle {
 
 				gauge: TankGauge {
 					width: Theme.geometry_levelsPage_groupedSubgauges_delegate_width
-					gaugeValueType: root._tankProperties.valueType
+					valueType: root._tankProperties.valueType
 					animationEnabled: root.animationEnabled
 					value: model.device.level / 100
 				}
