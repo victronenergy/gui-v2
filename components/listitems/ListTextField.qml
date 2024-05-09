@@ -36,8 +36,8 @@ ListItem {
 	}
 
 	onWindowChanged: {
-	    // In nested views the ListView attached property
-	    // might have not returned valid parent flickable.
+		// In nested views the ListView attached property
+		// might have not returned valid parent flickable.
 		if (!flickable) {
 			let p = parent
 			while (p) {
