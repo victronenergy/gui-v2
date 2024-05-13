@@ -140,7 +140,7 @@ QtObject {
 				// Positive energy value = imported energy, flowing towards inverter/charger.
 				// Negative energy value = exported energy, flowing towards grid.
 				const randomNum = Math.random()
-				const negativeEnergyFlow = randomNum < 0.5
+				const negativeEnergyFlow = Global.systemSettings.essFeedbackToGridEnabled && randomNum < 0.5
 				const noEnergyFlow = randomNum >= 0.5 && randomNum <= 0.6
 				let power = NaN
 				let current = NaN

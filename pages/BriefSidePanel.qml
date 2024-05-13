@@ -61,13 +61,24 @@ ColumnLayout {
 	}
 
 	BriefSidePanelWidget {
+		id: acInputWidget
+
 		 title: loadersActive ? Global.acInputs.sourceToText(Global.acInputs.activeInputInfo.source) : ""
 		 icon.source: loadersActive ? Global.acInputs.sourceIcon(Global.acInputs.activeInputInfo.source) : ""
 		 quantityLabel.dataObject: Global.acInputs.activeInput
+		 quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+		 quantityLabel.acInputMode: true
 		 loadersActive: Global.acInputs.activeInputInfo
 				 && Global.acInputs.activeInputInfo.source !== VenusOS.AcInputs_InputSource_Generator
 				 && Global.acInputs.activeInput
 		 visible: loadersActive
+
+		 AcInputDirectionIcon {
+			 id: acInputDirectionIcon
+			 parent: acInputWidget.quantityLabel
+			 anchors.verticalCenter: parent.verticalCenter
+		 }
+
 		 sideComponent: LoadGraph {
 				/*
 			This graph shows the current/amps that is imported/exported by the AC input. On a

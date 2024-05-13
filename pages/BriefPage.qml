@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import Victron.Gauges
 
@@ -229,18 +228,13 @@ SwipeViewPage {
 				maximumValue: !!Global.acInputs.activeInputInfo ? Global.acInputs.activeInputInfo.maximumCurrent : NaN
 				inputMode: true
 
-				// When ESS feedback to grid is enabled, show an arrow indicating the flow direction.
-				CP.ColorImage {
+				AcInputDirectionIcon {
+					id: acInputDirectionIcon
 					anchors {
 						left: acInGaugeQuantity.left
 						bottom: acInGaugeQuantity.top
 						bottomMargin: Theme.geometry_briefPage_edgeGauge_quantityLabel_feedback_margin
 					}
-					visible: Global.acInputs.activeInput
-							&& (Global.acInputs.activeInput.power || 0) !== 0
-							&& Global.systemSettings.essFeedbackToGridEnabled()
-					source: visible ? (Global.acInputs.activeInput.power > 0 ? "qrc:/images/icon_from_grid.svg" : "qrc:/images/icon_to_grid.svg") : ""
-					color: visible && Global.acInputs.activeInput.power > 0 ? Theme.color_blue : Theme.color_green
 				}
 
 				ArcGaugeQuantityRow {
@@ -253,6 +247,7 @@ SwipeViewPage {
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.dataObject: Global.acInputs.activeInput
+					quantityLabel.acInputMode: true
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC input edge")
