@@ -26,22 +26,43 @@ QtObject {
 	}
 
 	property QtObject solar: QtObject {
-		readonly property real power: isNaN(acPower) && isNaN(dcPower)
-				? NaN
-				: (isNaN(acPower) ? 0 : acPower) + (isNaN(dcPower) ? 0 : dcPower)
-		property real acPower: NaN
-		property real dcPower: NaN
-		property real current: NaN
+		readonly property real power: Units.sumRealNumbers(acPower, dcPower)
+		property real acPower: _pvMonitor.totalPower
+		property real dcPower: _dcPvPower.value === undefined ? NaN : _dcPvPower.value
 		readonly property real maximumPower: _maximumPower.value === undefined ? NaN : _maximumPower.value
 
-		function reset() {
-			acPower = NaN
-			dcPower = NaN
-			current = NaN
+		// In cases where the overall current cannot be determined, the value is NaN.
+		readonly property real current: {
+			if (Global.pvInverters.model.count > 0) {
+				if (Global.solarChargers.model.count > 0) {
+					// If both PV chargers and PV inverters are present, return NaN as the current
+					// cannot be summed across AC and DC systems.
+					return NaN
+				}
+				if (_pvMonitor.maxPhaseCount > 1) {
+					// If any PV inverter has more than one phase, return NaN as current values
+					// cannot be summed across multiple phases.
+					return NaN
+				}
+				return _pvMonitor.totalCurrent
+			} else if (Global.solarChargers.model.count > 0) {
+				return _dcPvCurrent.value === undefined ? NaN : _dcPvCurrent.value
+			}
+			return NaN
 		}
 
 		readonly property VeQuickItem _maximumPower: VeQuickItem {
 			uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
+		}
+
+		readonly property PvMonitor _pvMonitor: PvMonitor {}
+
+		readonly property VeQuickItem _dcPvPower: VeQuickItem {
+			uid: root.serviceUid + "/Dc/Pv/Power"
+		}
+
+		readonly property VeQuickItem _dcPvCurrent: VeQuickItem {
+			uid: root.serviceUid + "/Dc/Pv/Current"
 		}
 	}
 

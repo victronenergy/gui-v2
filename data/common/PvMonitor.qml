@@ -9,31 +9,15 @@ import Victron.VenusOS
 Instantiator {
 	id: root
 
-	property int acSourceCount
-	property real acCurrent: NaN
-
-	function updateOverallCurrent() {
-		if (!Global.system) {
-			return
-		}
-		// Current values cannot be summed, so if there is more than one current measurement from
-		// AC and DC sources combined, set the overall current to NaN.
-		const totalSourceCount = acSourceCount + (veDcCurrent.value === undefined ? 0 : 1)
-		if (totalSourceCount === 1) {
-			Global.system.solar.current = acSourceCount === 1 ? acCurrent : veDcCurrent.value
-		} else {
-			Global.system.solar.current = NaN
-		}
-	}
-
-	// --- AC values ---
+	property real totalPower: NaN
+	property real totalCurrent: NaN
+	property int maxPhaseCount: 0
 
 	// AC power is the total power from Ac/PvOnGrid/L*/Power, Ac/PvOnGenset/L*/Power
 	// and Ac/PvOnOutput/L*/Power.
 	function updateAcTotals() {
-		let totalPower = NaN
-		let totalPhaseCount = 0
-		let lastPhaseObject = null
+		let _totalPower = NaN
+		let _totalCurrent = NaN
 
 		for (let i = 0; i < count; ++i) {
 			const acPv = objectAt(i)
@@ -43,23 +27,20 @@ Instantiator {
 					if (!phase) {
 						continue
 					}
-					totalPower = Units.sumRealNumbers(totalPower, phase.power)
-					lastPhaseObject = phase
-					totalPhaseCount++
+					_totalPower = Units.sumRealNumbers(_totalPower, phase.power)
+					_totalCurrent = Units.sumRealNumbers(_totalCurrent, phase.current)
 				}
 			}
 		}
-		acSourceCount = totalPhaseCount
-
-		// Current values cannot be summed, so if there is more than one current measurement
-		// found in any AC PV source, set acCurrent=NaN.
-		acCurrent = totalPhaseCount === 1 ? lastPhaseObject.current : NaN
-
-		if (!!Global.system) {
-			Global.system.solar.acPower = totalPower
-			updateOverallCurrent()
-		}
+		root.totalPower = _totalPower
+		root.totalCurrent = _totalCurrent
 	}
+
+	model: [
+		Global.system.serviceUid + "/Ac/PvOnGrid",
+		Global.system.serviceUid + "/Ac/PvOnGenset",
+		Global.system.serviceUid + "/Ac/PvOnOutput"
+	]
 
 	delegate: QtObject {
 		id: acPvDelegate
@@ -72,6 +53,15 @@ Instantiator {
 				const phaseCount = value === undefined ? 0 : value
 				if (pvPhases.count !== phaseCount) {
 					pvPhases.model = phaseCount
+
+					let _maxPhaseCount = 0
+					for (let i = 0; i < count; ++i) {
+						const acPvDelegate = root.objectAt(i)
+						if (!!acPvDelegate) {
+							_maxPhaseCount = Math.max(_maxPhaseCount, acPvDelegate.vePhaseCount.value || 0)
+						}
+					}
+					root.maxPhaseCount = _maxPhaseCount
 				}
 			}
 		}
@@ -79,6 +69,7 @@ Instantiator {
 		// Each Ac/PvOnX uid has 1-3 phases with power and current, e.g. Ac/PvOnGrid/L1/Power,
 		// Ac/PvOnGrid/L1/Current
 		property var pvPhases: Instantiator {
+			model: null
 			delegate: QtObject {
 				id: phase
 
@@ -101,18 +92,5 @@ Instantiator {
 				}
 			}
 		}
-	}
-
-
-	// --- DC values ---
-
-	readonly property VeQuickItem veDcPower: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/Pv/Power"
-		onValueChanged: if (!!Global.system) Global.system.solar.dcPower = value === undefined ? NaN : value
-	}
-
-	readonly property VeQuickItem veDcCurrent: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/Pv/Current"
-		onValueChanged: root.updateOverallCurrent()
 	}
 }
