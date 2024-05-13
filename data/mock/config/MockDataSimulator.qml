@@ -114,6 +114,14 @@ QtObject {
 			Theme.colorScheme = Theme.colorScheme == Theme.Dark ? Theme.Light : Theme.Dark
 			event.accepted = true
 			break
+		case Qt.Key_F:
+		{
+			// Toggle ESS feed-in
+			const feedIn = root.mockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn") === 1
+			root.setMockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn", feedIn ? 0 : 1)
+			event.accepted = true
+			break
+		}
 		case Qt.Key_G:
 			let oldValue
 			let newValue
