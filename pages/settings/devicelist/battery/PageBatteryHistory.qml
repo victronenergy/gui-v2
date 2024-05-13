@@ -81,7 +81,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/History/MinimumCellVoltage"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Volt
-				precision: 2
+				precision: 3
 			}
 
 			ListQuantityItem {
@@ -90,7 +90,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/History/MaximumCellVoltage"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Volt
-				precision: 2
+				precision: 3
 			}
 
 			ListTextItem {
