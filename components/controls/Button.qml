@@ -40,7 +40,7 @@ CT.Button {
 
 	icon.color: root.color
 
-	font.family: Global.fontLoader.name
+	font.family: Global.fontFamily
 	font.pixelSize: Theme.font_size_body1
 	flat: true
 

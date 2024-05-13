@@ -5,7 +5,7 @@
 
 pragma Singleton
 
-import QtQml
+import QtQuick
 import Victron.VenusOS
 
 QtObject {
@@ -18,7 +18,7 @@ QtObject {
 	property VeQItemTableModel dataServiceModel: null
 	property var firmwareUpdate
 
-	property var fontLoader
+	readonly property string fontFamily: _defaultFontLoader.name
 	property var inputPanel
 	property var dialogLayer
 	property var notificationLayer
@@ -123,6 +123,10 @@ QtObject {
 		allPagesLoaded = false
 		dataManagerLoaded = false
 		splashScreenVisible = true
+	}
+
+	readonly property FontLoader _defaultFontLoader: FontLoader {
+		source: Language.fontFileUrl
 	}
 }
 

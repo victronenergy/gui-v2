@@ -101,8 +101,8 @@ ListNavigationItem {
 						  ? !modelData.readOnly
 						  : !model.readOnly)
 					primaryLabel.font.family: Array.isArray(root.optionModel)
-						  ? modelData.fontFamily || Global.fontLoader.name
-						  : model.fontFamily || Global.fontLoader.name
+						  ? modelData.fontFamily || Global.fontFamily
+						  : model.fontFamily || Global.fontFamily
 
 					allowed: (userHasWriteAccess && enabled) || checked
 					checked: root.currentIndex === model.index
