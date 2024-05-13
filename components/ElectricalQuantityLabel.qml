@@ -22,7 +22,7 @@ QuantityLabel {
 			// For AC inputs, if an AcInputDirectionIcon is present to indicate when power is negative,
 			// then the minus sign is not necessary. In this case, if feed-in to grid is enabled, omit
 			// the minus sign and just show the absolute value.
-			return Global.systemSettings.essFeedbackToGridEnabled ? Math.abs(v) : v
+			return Global.systemSettings.essFeedbackToGridEnabled ? Math.abs(v) : Global.acInputs.clampMeasurement(v)
 		}
 		return v
 	}
