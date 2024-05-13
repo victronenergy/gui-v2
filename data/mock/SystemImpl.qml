@@ -130,53 +130,72 @@ QtObject {
 
 	function _updatePvTotals() {
 		let i
+		let phaseIndex
 		if (pvInverters.count) {
-			let acPower = 0
+			let phaseCount = 0
+			let phasePowers = []
+			let phaseCurrents = []
 			for (i = 0; i < pvInverters.count; ++i) {
 				const inverter = pvInverters.objectAt(i)
 				if (inverter) {
-					acPower += inverter.power
+					phaseCount = Math.max(phaseCount, inverter.phases.count)
+					for (phaseIndex = 0; phaseIndex < inverter.phases.count; ++phaseIndex) {
+						const phase = inverter.phases.get(phaseIndex)
+						phasePowers[phaseIndex] = Units.sumRealNumbers(phasePowers[phaseIndex], phase.power)
+						phaseCurrents[phaseIndex] = Units.sumRealNumbers(phaseCurrents[phaseIndex], phase.current)
+					}
 				}
 			}
-			Global.system.solar.acPower = acPower
+			// Could set the values on any of PvOnGrid/PvOnGenset/PvOnOutput
+			Global.mockDataSimulator.setMockValue("com.victronenergy.system/Ac/PvOnOutput/NumberOfPhases", phaseCount)
+			for (phaseIndex = 0; phaseIndex < phaseCount; ++phaseIndex) {
+				Global.mockDataSimulator.setMockValue("com.victronenergy.system/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), phasePowers[phaseIndex])
+				Global.mockDataSimulator.setMockValue("com.victronenergy.system/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), phaseCurrents[phaseIndex])
+			}
+			// Reset any other phase values from previous configurations.
+			for (phaseIndex = phaseCount; phaseIndex < 3; ++phaseIndex) {
+				Global.mockDataSimulator.setMockValue("com.victronenergy.system/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), phasePowers[phaseIndex])
+				Global.mockDataSimulator.setMockValue("com.victronenergy.system/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), phaseCurrents[phaseIndex])
+			}
+		} else {
+			Global.mockDataSimulator.setMockValue("com.victronenergy.system/Ac/PvOnOutput/NumberOfPhases", undefined)
+			for (phaseIndex = 0; phaseIndex < 3; ++phaseIndex) {
+				Global.mockDataSimulator.setMockValue("com.victronenergy.system/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), undefined)
+				Global.mockDataSimulator.setMockValue("com.victronenergy.system/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), undefined)
+			}
 		}
-		if (solarChargers.count) {
-			let dcPower = 0
-			for (i = 0; i < solarChargers.count; ++i) {
-				const charger = solarChargers.objectAt(i)
+
+		let dcPower = NaN
+		if (solarChargers.model.count) {
+			for (i = 0; i < solarChargers.model.count; ++i) {
+				const charger = solarChargers.model.deviceAt(i)
 				if (charger) {
-					dcPower += charger.power
+					dcPower = Units.sumRealNumbers(dcPower, charger.power)
 				}
 			}
-			Global.system.solar.dcPower = dcPower
 		}
-		Global.system.solar.current = NaN
+		Global.mockDataSimulator.setMockValue("com.victronenergy.system/Dc/Pv/Power", dcPower)
+		Global.mockDataSimulator.setMockValue("com.victronenergy.system/Dc/Pv/Current", dcPower * 0.01)
 	}
 
 	property Instantiator solarChargers: Instantiator {
 		model: Global.solarChargers.model
 		delegate: QtObject {
 			readonly property real power: modelData.power
-			onPowerChanged: root._updatePvTotals()
+			readonly property var phases: modelData.phases
+			onPowerChanged: Qt.callLater(root._updatePvTotals)
 		}
-		onCountChanged: {
-			if (count === 0) {
-				Global.system.solar.dcPower = NaN
-			}
-		}
+		onCountChanged: Qt.callLater(root._updatePvTotals)
 	}
 
 	property Instantiator pvInverters: Instantiator {
 		model: Global.pvInverters.model
 		delegate: QtObject {
 			readonly property real power: modelData.power
-			onPowerChanged: root._updatePvTotals()
+			readonly property var phases: modelData.phases
+			onPowerChanged: Qt.callLater(root._updatePvTotals)
 		}
-		onCountChanged: {
-			if (count === 0) {
-				Global.system.solar.acPower = NaN
-			}
-		}
+		onCountChanged: Qt.callLater(root._updatePvTotals)
 	}
 
 	readonly property VeQuickItem _maximumPvPower: VeQuickItem {

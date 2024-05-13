@@ -183,7 +183,6 @@ QtObject {
 
 		function onSetSolarRequested(config) {
 			Global.solarChargers.reset()
-			Global.system.solar.reset()
 
 			if (config && config.chargers) {
 				for (let i = 0; i < config.chargers.length; ++i) {
