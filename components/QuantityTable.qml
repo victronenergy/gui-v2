@@ -127,6 +127,7 @@ Column {
 							alignment: root.labelHorizontalAlignment
 							value: root.valueForModelIndex(rowDelegate.rowIndex, model.index + 1)
 							unit: root.units[model.index + 1].unit
+							precision: root.units[model.index + 1].precision || VenusOS.Units_Precision_Default
 							font.pixelSize: Theme.font_size_body1
 							valueColor: Theme.color_quantityTable_quantityValue
 							unitColor: Theme.color_quantityTable_quantityUnit

@@ -30,6 +30,7 @@ ListNavigationItem {
 				height: quantityRow.height
 				value: modelData.value
 				unit: modelData.unit
+				precision: modelData.precision || VenusOS.Units_Precision_Default
 				alignment: Qt.AlignLeft
 				font.pixelSize: Theme.font_size_body2
 				valueColor: Theme.color_quantityTable_quantityValue

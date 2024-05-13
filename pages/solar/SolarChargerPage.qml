@@ -36,7 +36,7 @@ Page {
 						{
 							title: root.singleTracker ? CommonWords.voltage : "",
 							value: root.singleTracker ? root.singleTracker.voltage : NaN,
-							unit: root.singleTracker ? VenusOS.Units_Volt : VenusOS.Units_None
+							unit: root.singleTracker ? VenusOS.Units_Volt_DC : VenusOS.Units_None,
 						},
 						{
 							title: root.singleTracker ? CommonWords.current_amps : "",
@@ -64,7 +64,7 @@ Page {
 					units: [
 						{ title: CommonWords.tracker, unit: VenusOS.Units_None },
 						{ title: trackerSummary.model[1].title, unit: VenusOS.Units_Energy_KiloWattHour },
-						{ title: CommonWords.voltage, unit: VenusOS.Units_Volt },
+						{ title: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
 						{ title: CommonWords.current_amps, unit: VenusOS.Units_Amp },
 						{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 					]
@@ -97,7 +97,7 @@ Page {
 				textModel: [
 					{
 						value: root.solarCharger.batteryVoltage,
-						unit: VenusOS.Units_Volt
+						unit: VenusOS.Units_Volt_DC,
 					},
 					{
 						value: root.solarCharger.batteryCurrent,

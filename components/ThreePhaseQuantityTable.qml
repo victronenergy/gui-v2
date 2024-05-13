@@ -44,7 +44,7 @@ QuantityTable {
 	units: [
 		{ unit: VenusOS.Units_None },
 		{ unit: VenusOS.Units_Watt },
-		{ unit: VenusOS.Units_Volt },
+		{ unit: VenusOS.Units_Volt_AC },
 		{ unit: VenusOS.Units_Amp },
 		{ unit: VenusOS.Units_Hertz }
 	]

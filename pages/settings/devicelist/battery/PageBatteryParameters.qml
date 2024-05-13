@@ -17,7 +17,7 @@ Page {
 				//% "Charge Voltage Limit (CVL)"
 				text: qsTrId("batteryparameters_charge_voltage_limit_cvl")
 				dataItem.uid: root.bindPrefix + "/Info/MaxChargeVoltage"
-				unit: VenusOS.Units_Volt
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
@@ -39,7 +39,7 @@ Page {
 				text: qsTrId("batteryparameters_low_voltage_disconnect_always_ignored")
 				dataItem.uid: root.bindPrefix + "/Info/BatteryLowVoltage"
 				showAccessLevel: VenusOS.User_AccessType_Service
-				unit: VenusOS.Units_Volt
+				unit: VenusOS.Units_Volt_DC
 			}
 		}
 	}

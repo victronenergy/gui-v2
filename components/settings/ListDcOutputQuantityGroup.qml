@@ -15,7 +15,7 @@ ListQuantityGroup {
 	//% "Output"
 	text: qsTrId("dc_output")
 	textModel: [
-		{ value: dcVoltage.value, unit: VenusOS.Units_Volt },
+		{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
 		{ value: dcCurrent.value, unit: VenusOS.Units_Amp, visible: dcCurrent.isValid },
 		{ value: dcPower.value, unit: VenusOS.Units_Watt, visible: dcPower.isValid },
 	]

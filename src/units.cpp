@@ -56,8 +56,10 @@ Units::~Units()
 int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 {
 	switch (unit) {
-	case VenusOS::Enums::Units_Energy_KiloWattHour: return 3;
-	case VenusOS::Enums::Units_Volume_CubicMeter: return 3;
+	case VenusOS::Enums::Units_Energy_KiloWattHour:  return 3;
+	case VenusOS::Enums::Units_Volume_CubicMeter:    return 3;
+	case VenusOS::Enums::Units_Volt_DC:              return 2;
+	case VenusOS::Enums::Units_Volt_AC:                // fall through
 	case VenusOS::Enums::Units_Volume_Liter:           // fall through
 	case VenusOS::Enums::Units_Volume_GallonImperial:  // fall through
 	case VenusOS::Enums::Units_Volume_GallonUS:        // fall through
@@ -69,7 +71,6 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Temperature_Kelvin:     // fall through
 	case VenusOS::Enums::Units_RevolutionsPerMinute: return 0;
 	default:
-		// Volt
 		// VoltAmpere
 		// Amp
 		// Hertz
@@ -84,7 +85,8 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 	switch (unit) {
 	case VenusOS::Enums::Units_Watt:
 		return QStringLiteral("W");
-	case VenusOS::Enums::Units_Volt:
+	case VenusOS::Enums::Units_Volt_AC: // fall through
+	case VenusOS::Enums::Units_Volt_DC:
 		return QStringLiteral("V");
 	case VenusOS::Enums::Units_VoltAmpere:
 		return QStringLiteral("VA");
@@ -149,7 +151,8 @@ bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 {
 	switch (unit) {
 	case VenusOS::Enums::Units_Watt:
-	case VenusOS::Enums::Units_Volt:
+	case VenusOS::Enums::Units_Volt_AC:
+	case VenusOS::Enums::Units_Volt_DC:
 	case VenusOS::Enums::Units_VoltAmpere:
 	case VenusOS::Enums::Units_Amp:
 	case VenusOS::Enums::Units_Hertz:
@@ -300,7 +303,8 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	} else {
 		// if the value is large (hundreds or thousands) no need to display decimals after the decimal point
 		int digits = numberOfDigits(scaledValue);
-		precision = qMax(0, precision - qMax(0, digits - (precision == 1 ? 2 : 1)));
+		if (unit != VenusOS::Enums::Units_Volt_DC || digits > 2) // don't clip precision for values like 53.35 V DC.
+			precision = qMax(0, precision - qMax(0, digits - (precision == 1 ? 2 : 1)));
 
 		const qreal vFixedMultiplier = std::pow(10, precision);
 		int vFixed = qRound(scaledValue * vFixedMultiplier);

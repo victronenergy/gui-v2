@@ -30,16 +30,14 @@ Page {
 				text: CommonWords.minimum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MinimumVoltage"
 				allowed: defaultAllowed && dataItem.isValid
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
 				text: CommonWords.maximum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MaximumVoltage"
 				allowed: defaultAllowed && dataItem.isValid
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTextItem {
@@ -73,8 +71,7 @@ Page {
 				text: qsTrId("dcmeter_history_minimum_aux_voltage")
 				dataItem.uid: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
 				allowed: defaultAllowed && root.showStarterVoltage
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
@@ -82,8 +79,7 @@ Page {
 				text: qsTrId("dcmeter_history_maximum_aux_voltage")
 				dataItem.uid: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
 				allowed: defaultAllowed && root.showStarterVoltage
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTemperatureItem {

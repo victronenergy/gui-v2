@@ -123,7 +123,7 @@ Page {
 			ListQuantityGroup {
 				text: "Multiple quantities"
 				textModel: [
-					{ value: 5.1, unit: VenusOS.Units_Volt },
+					{ value: 5.1, unit: VenusOS.Units_Volt_DC },
 					{ value: 48, unit: VenusOS.Units_Watt }
 				]
 			}

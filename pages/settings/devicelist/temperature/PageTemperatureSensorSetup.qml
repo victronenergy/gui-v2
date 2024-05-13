@@ -58,8 +58,7 @@ Page {
 				text: qsTrId("temperature_sensor_voltage")
 				allowed: defaultAllowed && dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/RawValue"
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 		}
 	}

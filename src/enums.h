@@ -67,7 +67,8 @@ public:
 		Units_Volume_GallonImperial,
 		Units_Volume_GallonUS,
 		Units_Percentage,
-		Units_Volt,
+		Units_Volt_AC,
+		Units_Volt_DC,
 		Units_VoltAmpere,
 		Units_Watt,
 		Units_Amp,
@@ -93,6 +94,15 @@ public:
 		Units_Scale_Tera,
 	};
 	Q_ENUM(Units_Scale)
+
+	enum Units_Precision {
+		Units_Precision_Default       = -1, // per-unit default precision
+		Units_Precision_ZeroDecimals  = 0,
+		Units_Precision_OneDecimal    = 1,
+		Units_Precision_TwoDecimals   = 2,
+		Units_Precision_ThreeDecimals = 3
+	};
+	Q_ENUM(Units_Precision)
 
 	enum User_AccessType {
 		User_AccessType_User,

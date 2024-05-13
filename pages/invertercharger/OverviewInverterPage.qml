@@ -64,7 +64,7 @@ Page {
 			}
 
 			ListTextGroup {
-				readonly property quantityInfo voltage: Units.getDisplayText(VenusOS.Units_Volt, dcVoltage.value)
+				readonly property quantityInfo voltage: Units.getDisplayText(VenusOS.Units_Volt_DC, dcVoltage.value)
 				readonly property quantityInfo current: Units.getDisplayText(VenusOS.Units_Amp, dcCurrent.value)
 				readonly property quantityInfo soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.value)
 

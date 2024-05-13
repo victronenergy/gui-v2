@@ -229,7 +229,7 @@ Page {
 				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Voltage"
 				//% "DC Voltage"
 				text: qsTrId("vebus_device_page_dc_voltage")
-				unit: VenusOS.Units_Volt
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
