@@ -96,7 +96,7 @@ Item {
 				valueColor: Theme.color_briefPage_battery_value_text_color
 				unitColor: Theme.color_briefPage_battery_unit_text_color
 				font.pixelSize: Theme.font_briefPage_battery_voltage_pixelSize
-				unit: VenusOS.Units_Volt
+				unit: VenusOS.Units_Volt_DC
 			}
 			QuantityLabel {
 				id: currentLabel

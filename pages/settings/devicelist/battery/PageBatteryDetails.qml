@@ -19,7 +19,7 @@ Page {
 				text: qsTrId("batterydetails_lowest_cell_voltage")
 				textModel: [
 					{ value: details.minVoltageCellId.value },
-					{ value: details.minCellVoltage.value, unit: VenusOS.Units_Volt, precision: 3 },
+					{ value: details.minCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
 				]
 			}
 
@@ -28,7 +28,7 @@ Page {
 				text: qsTrId("batterydetails_highest_cell_voltage")
 				textModel: [
 					{ value: details.maxVoltageCellId.value },
-					{ value: details.maxCellVoltage.value, unit: VenusOS.Units_Volt, precision: 3 },
+					{ value: details.maxCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
 				]
 			}
 

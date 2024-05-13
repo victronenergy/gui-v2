@@ -35,7 +35,7 @@ Page {
 						{
 							title: CommonWords.voltage,
 							value: root.pvInverter.voltage,
-							unit: VenusOS.Units_Volt
+							unit: VenusOS.Units_Volt_AC
 						},
 						{
 							title: CommonWords.current_amps,
@@ -64,7 +64,7 @@ Page {
 					units: [
 						{ title: CommonWords.phase, unit: VenusOS.Units_None },
 						{ title: CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
-						{ title: CommonWords.voltage, unit: VenusOS.Units_Volt },
+						{ title: CommonWords.voltage, unit: VenusOS.Units_Volt_AC },
 						{ title: CommonWords.current_amps, unit: VenusOS.Units_Amp },
 						{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 					]

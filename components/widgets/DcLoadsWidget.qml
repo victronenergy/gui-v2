@@ -34,7 +34,7 @@ OverviewWidget {
 
 					text: device.name
 					textModel: [
-						Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
+						Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, device.voltage),
 						Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
 						Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
 					]

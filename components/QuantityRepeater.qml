@@ -35,9 +35,9 @@ Repeater {
 			width: Math.max(implicitWidth, minimumDelegateWidth)
 			alignment: Qt.AlignHCenter
 			font.pixelSize: Theme.font_size_body2
-			value: isNaN(modelData.value) ? NaN : modelData.value
 			unit: modelData.unit === undefined ? VenusOS.Units_None : modelData.unit
-			precision: isNaN(modelData.precision) ? Units.defaultUnitPrecision(unit) : modelData.precision
+			precision: modelData.precision === undefined ? VenusOS.Units_Precision_Default : modelData.precision
+			value: isNaN(modelData.value) ? NaN : modelData.value
 			valueColor: Theme.color_quantityTable_quantityValue
 			unitColor: Theme.color_quantityTable_quantityUnit
 		}

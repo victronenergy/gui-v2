@@ -82,7 +82,7 @@ Column {
 				//% "Max Voltage"
 				title: qsTrId("charger_history_max_voltage"),
 				value: root._trackerHistoryMax("maxPvVoltage"),
-				unit: VenusOS.Units_Volt
+				unit: VenusOS.Units_Volt_DC
 			},
 			{
 				//% "Max Power"
@@ -107,7 +107,7 @@ Column {
 			// No 'title' property is specified, since these are same as summary headers.
 			{ unit: VenusOS.Units_None },
 			{ unit: VenusOS.Units_Energy_KiloWattHour },
-			{ unit: VenusOS.Units_Volt },
+			{ unit: VenusOS.Units_Volt_DC },
 			{ unit: VenusOS.Units_Watt },
 		]
 		valueForModelIndex: function(trackerIndex, column) {

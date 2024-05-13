@@ -57,13 +57,13 @@ Rectangle {
 						//% "Min Voltage"
 						"title": qsTrId("charger_history_box_min_voltage"),
 						"value": root.minBatteryVoltage,
-						"unit": VenusOS.Units_Volt
+						"unit": VenusOS.Units_Volt_DC
 					},
 					{
 						//% "Max Voltage"
 						"title": qsTrId("charger_history_box_max_voltage"),
 						"value": root.maxBatteryVoltage,
-						"unit": VenusOS.Units_Volt
+						"unit": VenusOS.Units_Volt_DC
 					},
 					{
 						//% "Max Current"

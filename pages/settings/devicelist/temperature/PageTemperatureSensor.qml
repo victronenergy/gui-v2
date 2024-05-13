@@ -83,8 +83,7 @@ Page {
 						anchors.verticalCenter: parent.verticalCenter
 						font.pixelSize: Theme.font_size_body2
 						value: batteryVoltage.value == undefined ? NaN : batteryVoltage.value
-						unit: VenusOS.Units_Volt
-						precision: 2
+						unit: VenusOS.Units_Volt_DC
 						VeQuickItem {
 							id: batteryVoltage
 							uid: bindPrefix + "/BatteryVoltage"

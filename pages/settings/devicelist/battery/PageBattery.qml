@@ -84,7 +84,7 @@ Page {
 			ListQuantityGroup {
 				text: CommonWords.battery
 				textModel: [
-					{ value: root.battery.voltage, unit: VenusOS.Units_Volt },
+					{ value: root.battery.voltage, unit: VenusOS.Units_Volt_DC },
 					{ value: root.battery.current, unit: VenusOS.Units_Amp },
 					{ value: root.battery.power, unit: VenusOS.Units_Watt }
 				]
@@ -123,8 +123,7 @@ Page {
 				text: qsTrId("battery_starter_voltage")
 				dataItem.uid: root.battery.serviceUid + "/Dc/1/Voltage"
 				allowed: defaultAllowed && dataItem.isValid
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
@@ -132,8 +131,7 @@ Page {
 				text: qsTrId("battery_bus_voltage")
 				dataItem.uid: root.battery.serviceUid + "/BusVoltage"
 				allowed: defaultAllowed && dataItem.isValid
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
@@ -141,8 +139,7 @@ Page {
 				text: qsTrId("battery_top_section_voltage")
 				allowed: midVoltage.isValid
 				value: midVoltage.isValid && !isNaN(root.battery.voltage) ? root.battery.voltage - midVoltage.value : NaN
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
@@ -150,8 +147,7 @@ Page {
 				text: qsTrId("battery_bottom_section_voltage")
 				value: midVoltage.value === undefined ? NaN : midVoltage.value
 				allowed: midVoltage.isValid
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
@@ -175,8 +171,7 @@ Page {
 				text: qsTrId("battery_buss_voltage")
 				dataItem.uid: root.battery.serviceUid + "/BussVoltage"
 				allowed: defaultAllowed && dataItem.isValid
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTextItem {

@@ -86,7 +86,7 @@ TestCase {
 	}
 
 	function test_precisionOne() {
-		var units = [VenusOS.Units_Volt,
+		var units = [VenusOS.Units_Volt_DC,
 					 VenusOS.Units_VoltAmpere,
 					 VenusOS.Units_Amp,
 					 VenusOS.Units_Hertz,

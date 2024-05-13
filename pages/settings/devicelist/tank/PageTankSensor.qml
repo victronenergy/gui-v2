@@ -45,8 +45,7 @@ Page {
 				//% "Sensor battery"
 				text: qsTrId("devicelist_tanksensor_sensor_battery")
 				dataItem.uid: root.bindPrefix + "/BatteryVoltage"
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 				allowed: defaultAllowed && dataItem.isValid
 			}
 

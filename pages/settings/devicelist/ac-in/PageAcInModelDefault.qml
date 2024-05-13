@@ -61,7 +61,7 @@ ObjectModel {
 			delegate: ListQuantityGroup {
 				text: CommonWords.ac_phase_x.arg(model.index + 1)
 				textModel: [
-					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt },
+					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt_AC },
 					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
 					{ value: phasePower.value, unit: VenusOS.Units_Watt },
 				]

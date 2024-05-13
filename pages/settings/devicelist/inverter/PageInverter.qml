@@ -77,7 +77,7 @@ Page {
 			ListQuantityGroup {
 				text: CommonWords.dc
 				textModel: [
-					{ value: dcVoltage.value, unit: VenusOS.Units_Volt, precision: 2 },
+					{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
 					{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
 				]
 
@@ -97,7 +97,7 @@ Page {
 				text: qsTrId("inverter_pv")
 				allowed: pvV.isValid || pvYield.isValid
 				textModel: [
-					{ value: pvV.value, unit: VenusOS.Units_Volt, precision: 2 },
+					{ value: pvV.value, unit: VenusOS.Units_Volt_DC },
 					{ value: pvYield.value, unit: VenusOS.Units_Watt },
 				]
 

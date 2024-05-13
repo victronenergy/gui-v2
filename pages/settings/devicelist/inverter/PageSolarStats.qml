@@ -17,8 +17,7 @@ Page {
 				//% "Maximum PV voltage"
 				text: qsTrId("inverter_maximum_pv_voltage")
 				dataItem.uid: root.bindPrefix + "/History/Overall/MaxPvVoltage"
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
@@ -26,8 +25,7 @@ Page {
 				//% "Maximum battery voltage"
 				text: qsTrId("inverter_maximum_battery_voltage")
 				dataItem.uid: root.bindPrefix + "/History/Overall/MaxBatteryVoltage"
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
@@ -35,8 +33,7 @@ Page {
 				//% "Minimum battery voltage"
 				text: qsTrId("inverter_minimum_battery_voltage")
 				dataItem.uid: root.bindPrefix + "/History/Overall/MinBatteryVoltage"
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 				allowed: defaultAllowed && dataItem.isValid
 			}
 

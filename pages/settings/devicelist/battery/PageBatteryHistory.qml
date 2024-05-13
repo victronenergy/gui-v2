@@ -63,16 +63,14 @@ Page {
 				text: CommonWords.minimum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MinimumVoltage"
 				allowed: defaultAllowed && dataItem.isValid
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
 				text: CommonWords.maximum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MaximumVoltage"
 				allowed: defaultAllowed && dataItem.isValid
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
@@ -80,7 +78,7 @@ Page {
 				text: qsTrId("batteryhistory_minimum_cell_voltage")
 				dataItem.uid: root.bindPrefix + "/History/MinimumCellVoltage"
 				allowed: defaultAllowed && dataItem.isValid
-				unit: VenusOS.Units_Volt
+				unit: VenusOS.Units_Volt_DC
 				precision: 3
 			}
 
@@ -89,7 +87,7 @@ Page {
 				text: qsTrId("batteryhistory_maximum_cell_voltage")
 				dataItem.uid: root.bindPrefix + "/History/MaximumCellVoltage"
 				allowed: defaultAllowed && dataItem.isValid
-				unit: VenusOS.Units_Volt
+				unit: VenusOS.Units_Volt_DC
 				precision: 3
 			}
 
@@ -146,8 +144,7 @@ Page {
 				text: qsTrId("batteryhistory_minimum_starter_bat_voltage")
 				dataItem.uid: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
 				allowed: defaultAllowed && lowStarterVoltageAlarm.visible
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {
@@ -155,8 +152,7 @@ Page {
 				text: qsTrId("batteryhistory_maximum_starter_bat_voltage")
 				dataItem.uid: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
 				allowed: defaultAllowed && lowStarterVoltageAlarm.visible
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTemperatureItem {

@@ -125,7 +125,7 @@ ObjectModel {
 					  : CommonWords.ac_phase_x.arg(model.index + 1)
 
 				textModel: [
-					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt },
+					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt_AC },
 					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
 					{ value: phasePower.value, unit: VenusOS.Units_Watt },
 				]
@@ -241,7 +241,7 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_starter_battery_voltage")
 							dataItem.uid: root.bindPrefix + "/StarterVoltage"
 							allowed: defaultAllowed && dataItem.isValid
-							unit: VenusOS.Units_Volt
+							unit: VenusOS.Units_Volt_DC
 						}
 
 						ListTextItem {

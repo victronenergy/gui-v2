@@ -36,7 +36,7 @@ ObjectModel {
 		//% "Aux voltage"
 		text: qsTrId("dcmeter_aux_voltage")
 		dataItem.uid: root.bindPrefix + "/Dc/1/Voltage"
-		unit: VenusOS.Units_Volt
+		unit: VenusOS.Units_Volt_DC
 		allowed: defaultAllowed && dataItem.isValid
 	}
 

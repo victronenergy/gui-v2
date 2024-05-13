@@ -80,8 +80,8 @@ Column {
 		text: qsTrId("cycle_history_battery_voltage")
 		primaryLabel.textFormat: Text.RichText
 		textModel: [
-			{ value: startVoltage.value, precision: 2, unit: VenusOS.Units_Volt },
-			{ value: endVoltage.value, precision: 2, unit: VenusOS.Units_Volt },
+			{ value: startVoltage.value, unit: VenusOS.Units_Volt_DC },
+			{ value: endVoltage.value, unit: VenusOS.Units_Volt_DC },
 		]
 
 		VeQuickItem { id: startVoltage; uid: root.bindPrefix + "/StartVoltage" }

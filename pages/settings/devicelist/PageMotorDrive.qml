@@ -35,8 +35,7 @@ Page {
 			ListQuantityItem {
 				text: CommonWords.voltage
 				dataItem.uid: root.bindPrefix + "/Dc/0/Voltage"
-				unit: VenusOS.Units_Volt
-				precision: 2
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantityItem {

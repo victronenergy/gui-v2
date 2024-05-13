@@ -105,7 +105,7 @@ Page {
 				text: qsTrId("charger_charge_voltage")
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeVoltage"
 				allowed: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x04)
-				unit: VenusOS.Units_Volt
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTextItem {

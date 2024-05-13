@@ -24,7 +24,7 @@ Column {
 		text: CommonWords.ac_out
 		allowed: !root.isInverterCharger
 		textModel: [
-			{ value: inverterData.phase1.voltage, unit: VenusOS.Units_Volt },
+			{ value: inverterData.phase1.voltage, unit: VenusOS.Units_Volt_AC },
 			{ value: inverterData.phase1.current, unit: VenusOS.Units_Amp },
 			{ value: inverterData.phase1.power, unit: VenusOS.Units_Watt },
 		]
@@ -40,7 +40,7 @@ Column {
 		text: qsTrId("inverter_ac-out_num").arg(isNaN(acPhase.value) ? 1 : acPhase.value + 1)
 		allowed: root.isInverterCharger
 		textModel: [
-			{ value: acPhase.voltage, unit: VenusOS.Units_Volt },
+			{ value: acPhase.voltage, unit: VenusOS.Units_Volt_AC },
 			{ value: acPhase.current, unit: VenusOS.Units_Amp },
 			{ value: acPhase.power, unit: VenusOS.Units_Watt },
 			{ value: acPhase.frequency, unit: VenusOS.Units_Hertz },

@@ -169,7 +169,7 @@ OverviewWidget {
 			}
 
 			value: batteryData.voltage
-			unit: VenusOS.Units_Volt
+			unit: VenusOS.Units_Volt_DC
 			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
 			alignment: Qt.AlignLeft
 		},

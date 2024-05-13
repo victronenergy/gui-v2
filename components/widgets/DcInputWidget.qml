@@ -66,7 +66,7 @@ OverviewWidget {
 			GradientListView {
 				header: QuantityGroupListHeader {
 					quantityTitleModel: [
-						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt },
+						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
 						{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
 						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
 					]
@@ -76,7 +76,7 @@ OverviewWidget {
 				delegate: ListQuantityGroupNavigationItem {
 					text: model.device.name
 					quantityModel: [
-						{ value: model.device.voltage, unit: VenusOS.Units_Volt },
+						{ value: model.device.voltage, unit: VenusOS.Units_Volt_DC },
 						{ value: model.device.current, unit: VenusOS.Units_Amp },
 						{ value: model.device.power, unit: VenusOS.Units_Watt },
 					]

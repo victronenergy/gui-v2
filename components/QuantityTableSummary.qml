@@ -116,7 +116,6 @@ Row {
 								font.pixelSize: firstColumnSubLabel.font.pixelSize
 								text: root.model[model.index + 1].secondaryText
 								color: Theme.color_font_secondary
-
 							}
 						}
 					}
@@ -131,6 +130,7 @@ Row {
 							font.pixelSize: firstColumnSubLabel.font.pixelSize
 							value: root.model[model.index + 1].value
 							unit: root.model[model.index + 1].unit
+							precision: root.model[model.index + 1].precision || VenusOS.Units_Precision_Default
 							visible: unit !== VenusOS.Units_None
 						}
 					}

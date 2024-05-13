@@ -16,7 +16,7 @@ ListQuantityGroup {
 		},
 		{
 			value: data.voltage,
-			unit: VenusOS.Units_Volt
+			unit: VenusOS.Units_Volt_AC
 		},
 		{
 			value: data.current,

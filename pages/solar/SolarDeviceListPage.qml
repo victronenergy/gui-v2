@@ -62,7 +62,7 @@ Page {
 							text: solarCharger.trackerName(model.index)
 							quantityModel: [
 								{ value: historyToday ? historyToday.yieldKwh : NaN, unit: VenusOS.Units_Energy_KiloWattHour },
-								{ value: modelData.voltage, unit: VenusOS.Units_Volt },
+								{ value: modelData.voltage, unit: VenusOS.Units_Volt_DC },
 								{ value: modelData.current, unit: VenusOS.Units_Amp },
 								{ value: modelData.power, unit: VenusOS.Units_Watt },
 							]
@@ -87,7 +87,7 @@ Page {
 					text: pvInverter.name
 					quantityModel: [
 						{ value: pvInverter.energy, unit: VenusOS.Units_Energy_KiloWattHour },
-						{ value: pvInverter.voltage, unit: VenusOS.Units_Volt },
+						{ value: pvInverter.voltage, unit: VenusOS.Units_Volt_AC },
 						{ value: pvInverter.current, unit: VenusOS.Units_Amp },
 						{ value: pvInverter.power, unit: VenusOS.Units_Watt },
 					]
@@ -112,7 +112,7 @@ Page {
 				  : CommonWords.pv_inverter
 			quantityTitleModel: [
 				{ text: chargerMode ? CommonWords.yield_today : CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
-				{ text: CommonWords.voltage, unit: VenusOS.Units_Volt },
+				{ text: CommonWords.voltage, unit: chargerMode ? VenusOS.Units_Volt_DC : VenusOS.Units_Volt_AC },
 				{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
 				{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
 			]

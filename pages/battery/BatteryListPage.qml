@@ -60,7 +60,7 @@ Page {
 
 						QuantityRepeater {
 							model: [
-								{ value: modelData.voltage, unit: VenusOS.Units_Volt },
+								{ value: modelData.voltage, unit: VenusOS.Units_Volt_DC },
 								{ value: modelData.current, unit: VenusOS.Units_Amp },
 								{ value: modelData.power, unit: VenusOS.Units_Watt },
 								{
