@@ -12,7 +12,7 @@ Loader {
 	property string serviceUid
 	property string serviceType
 
-	readonly property real totalPower: hasTotalPower && item ? item.power : NaN
+	readonly property real totalPower: hasTotalPower && item ? Global.acInputs.clampMeasurement(item.power) : NaN
 	readonly property bool hasTotalPower: serviceType === "vebus" || serviceType == "grid" || serviceType == "genset"
 
 	readonly property real currentLimit: !!item ? item.currentLimit : NaN
@@ -48,7 +48,7 @@ Loader {
 		id: vebusComponent
 
 		QtObject {
-			readonly property real power: _power.value === undefined ? NaN : _power.value
+			readonly property real power: _power.value === undefined ? NaN : Global.acInputs.clampMeasurement(_power.value)
 			readonly property real currentLimit: _currentLimit.value === undefined ? NaN : _currentLimit.value
 
 			readonly property VeQuickItem _power: VeQuickItem {
@@ -89,7 +89,7 @@ Loader {
 		id: gridOrGensetComponent
 
 		QtObject {
-			readonly property real power: _power.value === undefined ? NaN : _power.value
+			readonly property real power: _power.value === undefined ? NaN : Global.acInputs.clampMeasurement(_power.value)
 
 			// For these devices, there is no current limit.
 			readonly property real currentLimit: NaN
