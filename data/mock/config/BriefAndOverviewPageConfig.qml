@@ -19,22 +19,22 @@ QtObject {
 
 	readonly property var configs: [
 		{
-			name: "ESS - AC & DC coupled.  PV Inverter on AC Bus + AC output",
+			name: "ESS - AC & DC coupled. 1-phase PV Inverter on AC Bus + AC output",
 			acInputs: [
 				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 },
 				emptyAcInput,
 			],
-			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
+			solar: { inverters: [ { phaseCount: 1 } ] },
 			system: { state: VenusOS.System_State_Inverting, ac: { phaseCount: 3 }, dc: {} },
 			battery: { stateOfCharge: 64, current: 1 },
 		},
 		{
-			name: "ESS - AC & DC coupled. PV Inverter on AC Out",
+			name: "ESS - AC & DC coupled. 3-phase PV Inverter on AC Out",
 			acInputs: [
 				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 },
 				emptyAcInput,
 			],
-			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
+			solar: { inverters: [ { phaseCount: 3 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: {} },
 			battery: { stateOfCharge: 73, current: -1 },
 		},
@@ -46,7 +46,7 @@ QtObject {
 				emptyAcInput,
 			],
 			generators: { running: true },
-			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
+			solar: { chargers: [ { power: 300 } ], inverters: [ { phaseCount: 3 } ] },
 			system: { state: VenusOS.System_State_PassThrough, ac: { phaseCount: 3 } },
 			battery: { stateOfCharge: 29, current: 1 },
 		},
@@ -57,7 +57,7 @@ QtObject {
 				emptyAcInput,
 			],
 			generators: { running: false },
-			solar: { chargers: [ { power: 300 } ], inverters: [ { power: 1000 } ] },
+			solar: { chargers: [ { power: 300 } ], inverters: [ { phaseCount: 3 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 1 }, dc: {} },
 			battery: { stateOfCharge: 95, current: 1 },
 		},
@@ -67,7 +67,7 @@ QtObject {
 				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 1, connected: 1 },
 				emptyAcInput,
 			],
-			solar: { inverters: [ { power: 1000 } ] },
+			solar: { inverters: [ { phaseCount: 3 } ] },
 			system: { state: VenusOS.System_State_FloatCharging, ac: { phaseCount: 1 } },
 			battery: { stateOfCharge: 100, current: 0 },
 		},
@@ -142,7 +142,7 @@ QtObject {
 		},
 		{
 			name: "Multiple solar chargers",
-			solar: { chargers: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
+			solar: { chargers: [ { phaseCount: 1 }, { power: 456 }, { power: 234 } ] },
 		},
 		{
 			name: "AC Loads + 1 EVCS + DC Loads, 1-phase AC input",
@@ -166,15 +166,15 @@ QtObject {
 			evcs: { chargers: [ { status: VenusOS.Evcs_Status_Charging }, { status: VenusOS.Evcs_Status_Charging }, { status: VenusOS.Evcs_Status_Disconnected } ] },
 		},
 		{
-			name: "Single PV inverter, no AC/DC inputs",
+			name: "Single 3-phase PV inverter, no AC/DC inputs",
 			acInputs: [emptyAcInput, emptyAcInput],
 			system: { state: VenusOS.System_State_FloatCharging, ac: { phaseCount: 3 } },
-			solar: { inverters: [ { power: 123 } ] },
+			solar: { inverters: [ { phaseCount: 3 } ] },
 		},
 		{
-			name: "Multiple PV inverters, no AC/DC inputs",
+			name: "Multiple 1-phase PV inverters, no AC/DC inputs",
 			acInputs: [emptyAcInput, emptyAcInput],
-			solar: { inverters: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
+			solar: { inverters: [ { phaseCount: 1 }, { phaseCount: 1 }, { phaseCount: 1 } ] },
 		},
 		{
 			name: "Multiple alternators (including Orion XS), no AC/DC inputs",
@@ -201,7 +201,7 @@ QtObject {
 				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 },
 				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3 },
 			],
-			solar: { chargers: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
+			solar: { chargers: [ { phaseCount: 1 }, { power: 456 }, { power: 234 } ] },
 		},
 		{
 			name: "Shore + Generator + Solar, Generator active",
@@ -209,7 +209,7 @@ QtObject {
 				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3 },
 				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 1 },
 			],
-			solar: { chargers: [ { power: 123 }, { power: 456 }, { power: 234 } ] },
+			solar: { chargers: [ { phaseCount: 1 }, { power: 456 }, { power: 234 } ] },
 		},
 		{
 			name: "Shore + Generator with 3-phase, with 5 left-hand widgets in total",

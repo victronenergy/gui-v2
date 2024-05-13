@@ -60,7 +60,6 @@ QtObject {
 	}
 
 	function reset() {
-		solar.reset()
 		ac.reset()
 		dc.reset()
 	}

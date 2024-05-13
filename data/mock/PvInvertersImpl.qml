@@ -9,6 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	property int mockDeviceCount
+
 	function populate() {
 		Global.pvInverters.reset()
 
@@ -19,55 +21,70 @@ QtObject {
 				phaseCount: i + 1,
 			})
 			_createdObjects.push(inverterObj)
-
-			Global.pvInverters.addInverter(inverterObj)
 		}
 	}
 
 	property Component inverterComponent: Component {
-		MockDevice {
+		PvInverter {
 			id: pvInverter
 
-			property int statusCode: Math.random() * VenusOS.PvInverter_StatusCode_Error
-			property int errorCode: -1
 			property int phaseCount
-
-			readonly property ListModel phases: ListModel {
-				Component.onCompleted: {
-					for (let i = 0; i < phaseCount; ++i) {
-						let phaseData = { name: "L"+(i+1), energy: Math.random() * 1000, power: Math.random() * 100, voltage: 1 + (Math.random() * 5)}
-						phaseData.current = phaseData.power / phaseData.voltage
-						append(phaseData)
-					}
-				}
-			}
-
-			property real energy: Math.random() * 10
-			readonly property real current: NaN // multi-phase systems don't have a total current
-			property real power: Math.random() * 50
-			property real voltage: Math.random() * 30
 
 			property Timer _updates: Timer {
 				running: Global.mockDataSimulator.timersActive
 				repeat: true
-				interval: 1000
+				interval: 2000
+				triggeredOnStart: true
 				onTriggered: {
-					if (phases.count === 0) {
+					if (pvInverter.phaseCount === 0) {
 						return
 					}
-					const phaseIndex = Math.floor(Math.random() * phases.count)
-					const phase = phases.get(phaseIndex)
+					const phaseIndex = Math.floor(Math.random() * pvInverter.phaseCount)
 					const delta = Math.random() > 0.5 ? 1 : -1 // power may fluctuate up or down
-					pvInverter.power -= phase.power
-					phase.power = Math.max(0, phase.power + (1 + (Math.random() * 10)) * delta)
-					pvInverter.power += phase.power
-					pvInverter.energy = Math.random() * 10
-					pvInverter.voltage = Math.random() * 30
+					const power = (300 + Math.random() * 100) * delta
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Power".arg(phaseIndex + 1), power)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Current".arg(phaseIndex + 1), power * 0.01)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Voltage".arg(phaseIndex + 1), Math.random() * 30)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Energy/Forward".arg(phaseIndex + 1), Math.random() * 10)
+					Qt.callLater(_updateTotals)
+				}
+
+				function _updateTotals() {
+					let totalPower = NaN
+					let totalEnergy = NaN
+					for (let i = 0; i < pvInverter.phases.count; ++i) {
+						totalPower = Units.sumRealNumbers(totalPower, pvInverter.phases.get(i).power)
+						totalEnergy = Units.sumRealNumbers(totalEnergy, pvInverter.phases.get(i).energy)
+					}
+					const firstPhase = pvInverter.phases.get(0)
+					if (!firstPhase) {
+						return
+					}
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/Power", totalPower)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/Current", !!firstPhase ? firstPhase.current : NaN)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/Voltage", !!firstPhase ? firstPhase.voltage : NaN)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/Energy/Forward", totalEnergy)
 				}
 			}
 
-			serviceUid: "mock/com.victronenergy.pvinverter.ttyUSB" + deviceInstance
-			name: "PV Inverter " + deviceInstance
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
+
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockDeviceCount++
+				serviceUid = "mock/com.victronenergy.pvinverter.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_productName.setValue("PV Inverter")
+				_customName.setValue("My PV Inverter " + deviceInstanceNum)
+				_statusCode.setValue(Math.random() * VenusOS.PvInverter_StatusCode_Error)
+
+				for (let phaseIndex = 0; phaseIndex < 3; ++phaseIndex) {
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Power".arg(phaseIndex + 1), NaN)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Current".arg(phaseIndex + 1), NaN)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Voltage".arg(phaseIndex + 1), NaN)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Energy/Forward".arg(phaseIndex + 1), NaN)
+				}
+			}
 		}
 	}
 
@@ -83,12 +100,9 @@ QtObject {
 			if (config && config.inverters) {
 				for (let i = 0; i < config.inverters.length; ++i) {
 					const inverterObj = inverterComponent.createObject(root, {
-						statusCode: config.inverters[i].statusCode || VenusOS.PvInverter_StatusCode_Running,
-						power: config.inverters[i].power,
+						phaseCount: config.inverters[i].phaseCount || 1,
 					})
 					_createdObjects.push(inverterObj)
-
-					Global.pvInverters.addInverter(inverterObj)
 				}
 			}
 		}
