@@ -216,6 +216,8 @@
     "geometry_sidePanel_quantityLabel_bottomMargin": 2,
     "geometry_sidePanel_verticalMargin": 8,
 
+    "geometry_acInputDirectionIcon_rightMargin": 2,
+
     "geometry_quantityLabel_spacing": 2,
     "geometry_quantityLabel_bottomMargin": 2,
 

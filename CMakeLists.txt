@@ -210,6 +210,7 @@ set (VENUS_QML_MODULE_SOURCES
 
     components/AcceptButtonBackground.qml
     components/AcPhasesCurrentRange.qml
+    components/AcInputDirectionIcon.qml
     components/AcInputsCurrentLimits.qml
     components/AcOutput.qml
     components/AcPhase.qml

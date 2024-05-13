@@ -20,6 +20,8 @@ AcWidget {
 	icon.source: !!inputInfo ? Global.acInputs.sourceIcon(inputInfo.source) : ""
 	rightPadding: sideGaugeLoader.active ? Theme.geometry_overviewPage_widget_sideGauge_margins : 0
 	quantityLabel.dataObject: connected ? input : null
+	quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+	quantityLabel.acInputMode: true
 	phaseCount: connected ? input.phases.count : 0
 	enabled: true
 	extraContentLoader.sourceComponent: ThreePhaseDisplay {
@@ -71,5 +73,11 @@ AcWidget {
 				? CommonWords.stopped
 				: CommonWords.disconnected
 		visible: !root.connected
+	}
+
+	AcInputDirectionIcon {
+		id: acInputDirectionIcon
+		parent: root.quantityLabel
+		anchors.verticalCenter: parent.verticalCenter
 	}
 }
