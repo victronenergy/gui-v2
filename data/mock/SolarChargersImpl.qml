@@ -49,12 +49,12 @@ QtObject {
 					for (let i = 0; i < _trackerCount.value; ++i) {
 						const p = Math.random() * 100
 						const trackerUid = serviceUid + "/Pv/" + i
-						Global.mockDataSimulator.setMockValue(trackerUid + "/V", Math.random() * 10)
+						Global.mockDataSimulator.setMockValue(trackerUid + "/V", 90 + (Math.random() * 10))
 						Global.mockDataSimulator.setMockValue(trackerUid + "/P", p)
 						totalPower += p
 					}
 				} else {
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Pv/V", Math.random() * 10)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Pv/V", 90 + (Math.random() * 10))
 					totalPower = Math.random() * 100
 				}
 				Global.mockDataSimulator.setMockValue(serviceUid + "/Yield/Power", totalPower)
