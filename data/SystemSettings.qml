@@ -16,6 +16,10 @@ QtObject {
 	property string temperatureUnitSuffix
 	property int volumeUnit: VenusOS.Units_None
 
+	readonly property bool essFeedbackToGridEnabled: _hubSetting.value === 4
+			&& _overvoltageFeedIn.value === 1
+			&& _preventFeedback.value === 0
+
 	function canAccess(level) {
 		return accessLevel.isValid && accessLevel.value >= level
 	}
@@ -102,12 +106,6 @@ QtObject {
 		default:
 			return ""
 		}
-	}
-
-	function essFeedbackToGridEnabled() {
-		return _hubSetting.value === 4
-				&& _overvoltageFeedIn.value === 1
-				&& _preventFeedback.value === 0
 	}
 
 	property VeQuickItem accessLevel: VeQuickItem {

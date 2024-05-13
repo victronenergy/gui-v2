@@ -38,7 +38,7 @@ Flow {
 			readonly property color textColor: {
 				const feedingToGrid = root.inputMode
 						&& (model.power || 0) < 0
-						&& Global.systemSettings.essFeedbackToGridEnabled()
+						&& Global.systemSettings.essFeedbackToGridEnabled
 				if (feedingToGrid) {
 					return Theme.color_green
 				}
