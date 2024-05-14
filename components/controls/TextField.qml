@@ -39,7 +39,7 @@ CT.TextField {
 				rightMargin: root.rightPadding
 				verticalCenter: parent.verticalCenter
 			}
-			horizontalAlignment: Text.AlignHCenter
+			horizontalAlignment: root.horizontalAlignment
 			text: root.placeholderText
 			font: root.font
 			elide: Text.ElideRight

@@ -88,15 +88,17 @@ Page {
 							}
 						}
 
-						ListNumberField {
+						ListQuantityField {
 							id: acInputMinCurrent
 							text: CommonWords.minimum_current
 							dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Min".arg(index)
+							unit: VenusOS.Units_Amp
 						}
-						ListNumberField {
+						ListQuantityField {
 							id: acInputMaxCurrent
 							text: CommonWords.maximum_current
 							dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Max".arg(index)
+							unit: VenusOS.Units_Amp
 						}
 					}
 				}
@@ -107,10 +109,11 @@ Page {
 				text: qsTrId("settings_minmax_dc_input")
 			}
 
-			ListNumberField {
+			ListQuantityField {
 				id: dcInMaxPower
 				text: CommonWords.maximum_power
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
+				unit: VenusOS.Units_Watt
 			}
 
 			ListSectionHeader {
@@ -118,25 +121,28 @@ Page {
 				text: qsTrId("settings_minmax_acout_max_power")
 			}
 
-			ListNumberField {
+			ListQuantityField {
 				id: acIn1MaxOutCurrent
 				//% "Maximum current: AC in 1 connected"
 				text: qsTrId("settings_minmax_acout_max_acin1")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
+				unit: VenusOS.Units_Amp
 			}
 
-			ListNumberField {
+			ListQuantityField {
 				id: acIn2MaxOutCurrent
 				//% "Maximum current: AC in 2 connected"
 				text: qsTrId("settings_minmax_acout_max_acin2")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
+				unit: VenusOS.Units_Amp
 			}
 
-			ListNumberField {
+			ListQuantityField {
 				id: noAcInMaxOutCurrent
 				//% "Maximum current: no AC inputs"
 				text: qsTrId("settings_minmax_acout_max")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
+				unit: VenusOS.Units_Amp
 			}
 
 			ListSectionHeader {
@@ -144,10 +150,11 @@ Page {
 				text: qsTrId("settings_minmax_dc_out")
 			}
 
-			ListNumberField {
+			ListQuantityField {
 				id: dcOutMaxPower
 				text: CommonWords.maximum_power
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
+				unit: VenusOS.Units_Watt
 			}
 
 			ListSectionHeader {
@@ -155,10 +162,11 @@ Page {
 				text: qsTrId("settings_minmax_solar")
 			}
 
-			ListNumberField {
+			ListQuantityField {
 				id: pvMaxPower
 				text: CommonWords.maximum_power
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
+				unit: VenusOS.Units_Watt
 			}
 		}
 	}

@@ -60,17 +60,17 @@ QtObject {
 
 	readonly property VeQuickItem _input1MaximumAcCurrent: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
-		Component.onCompleted: setValue(50)
+		Component.onCompleted: setValue(50.1235)    // settings page should show this with precision=1
 	}
 
 	readonly property VeQuickItem _input2MaximumAcCurrent: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
-		Component.onCompleted: setValue(100)
+		Component.onCompleted: setValue(100.98483)
 	}
 
 	readonly property VeQuickItem _maximumAcCurrent: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
-		Component.onCompleted: setValue(20)
+		Component.onCompleted: setValue(20.4455)
 	}
 
 	//--- DC data ---

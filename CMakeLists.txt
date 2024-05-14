@@ -329,11 +329,11 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListItemBackground.qml
     components/listitems/ListLabel.qml
     components/listitems/ListNavigationItem.qml
-    components/listitems/ListNumberField.qml
     components/listitems/ListPortField.qml
     components/listitems/ListRadioButton.qml
     components/listitems/ListRadioButtonGroup.qml
     components/listitems/ListRadioButtonGroupNoYes.qml
+    components/listitems/ListQuantityField.qml
     components/listitems/ListQuantityGroup.qml
     components/listitems/ListQuantityGroupNavigationItem.qml
     components/listitems/ListQuantityItem.qml

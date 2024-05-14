@@ -155,6 +155,13 @@ Page {
 				placeholderText: "Enter text"
 			}
 
+			ListQuantityField {
+				text: "Quantity input"
+				value: 123.5324
+				unit: VenusOS.Units_Amp
+				decimals: 1
+			}
+
 			ListIpAddressField {
 				text: "IP address"
 			}
