@@ -75,8 +75,6 @@ Page {
 						width: parent ? parent.width : 0
 
 						ListSectionHeader {
-							//: %1 = AC input number (0 or 1), %2 = name of connected input (e.g. Grid, Shore)
-							//% "AC in %1 (%2)"
 							text: {
 								const inputInfo = Global.acInputs["input" + (index + 1) + "Info"]
 								if (inputInfo.source === VenusOS.AcInputs_InputSource_NotAvailable) {
