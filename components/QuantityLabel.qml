@@ -45,7 +45,7 @@ Item {
 			text: quantityInfo.number
 			font.pixelSize: root.font.pixelSize
 			font.weight: root.font.weight
-			font.family: "Museo Sans 500 Mono digits"
+			font.family: Global.monospacedFontFamily
 		}
 
 		Item {

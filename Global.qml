@@ -19,6 +19,7 @@ QtObject {
 	property var firmwareUpdate
 
 	readonly property string fontFamily: _defaultFontLoader.name
+	readonly property string monospacedFontFamily: _monospacedFontLoader.name
 	property var inputPanel
 	property var dialogLayer
 	property var notificationLayer
@@ -127,6 +128,10 @@ QtObject {
 
 	readonly property FontLoader _defaultFontLoader: FontLoader {
 		source: Language.fontFileUrl
+	}
+
+	readonly property FontLoader _monospacedFontLoader: FontLoader {
+		source: "qrc:/fonts/MuseoSans-500-monospaced-digits.otf"
 	}
 }
 

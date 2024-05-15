@@ -143,9 +143,5 @@ Window {
 		}
 	}
 
-	FontLoader {
-		source: "qrc:/fonts/MuseoSans-500-monospaced-digits.otf"
-	}
-
 	FrameRateVisualizer {}
 }
