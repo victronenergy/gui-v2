@@ -17,8 +17,7 @@ QtObject {
 	property int volumeUnit: VenusOS.Units_None
 
 	readonly property bool essFeedbackToGridEnabled: _hubSetting.value === 4
-			&& _overvoltageFeedIn.value === 1
-			&& _preventFeedback.value === 0
+			&& (_overvoltageFeedIn.value === 1 || _preventFeedback.value === 0)
 
 	function canAccess(level) {
 		return accessLevel.isValid && accessLevel.value >= level
