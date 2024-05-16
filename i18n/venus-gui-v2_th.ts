@@ -105,8 +105,8 @@
       <source>Press to check</source>
       <translation>กดเพื่อตรวจสอบ</translation>
     </message>
-    <message id="settings_system_grid">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="18"/>
+    <message id="common_words_grid">
+      <location filename="../../components/CommonWords.qml" line="162"/>
       <source>Grid</source>
       <translation>กริด</translation>
     </message>
@@ -116,14 +116,9 @@
       <translation>ผลผลิตพลังงานแสงอาทิตย์</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="132"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>External control</source>
       <translation>การควบคุมภายนอก</translation>
-    </message>
-    <message id="brief_loads">
-      <location filename="../../pages/BriefMonitorPanel.qml" line="284"/>
-      <source>Loads</source>
-      <translation>โหลด</translation>
     </message>
     <message id="levels_page_tanks">
       <location filename="../../pages/LevelsPage.qml" line="53"/>
@@ -246,7 +241,7 @@
       <translation>Venus OS คุณสมบัติขนาดใหญ่</translation>
     </message>
     <message id="ess_battery_life_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="72"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="74"/>
       <source>Battery life limit: %1%</source>
       <translation>ขีดจำกัดอายุการใช้งานแบตเตอรี่: %1%</translation>
     </message>
@@ -456,7 +451,7 @@
       <translation>ค่าต้องต่ำกว่าค่าเริ่มต้น</translation>
     </message>
     <message id="settings_minmax_acout_max_power">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="121"/>
       <source>AC output</source>
       <translation>เอาต์พุต AC</translation>
     </message>
@@ -951,7 +946,7 @@
       <translation>กำลังไฟ (วัตต์)</translation>
     </message>
     <message id="settings_units_amps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="24"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="25"/>
       <source>Current (Amps)</source>
       <translation>ปัจจุบัน (แอมป์)</translation>
     </message>
@@ -967,12 +962,12 @@
       <translation>ระดับ 1</translation>
     </message>
     <message id="settings_units_celsius">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="42"/>
       <source>Celsius</source>
       <translation>เซลเซียส</translation>
     </message>
     <message id="settings_units_fahrenheit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
       <source>Fahrenheit</source>
       <translation>ฟาเรนไฮต์</translation>
     </message>
@@ -1619,27 +1614,27 @@ If that doesn't work, check sim-card in a phone to make sure that there is credi
       <translation>อินเวอร์เตอร์/เครื่องชาร์จ</translation>
     </message>
     <message id="settings_ess_inverter_ac_output_in_use">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="65"/>
       <source>Inverter AC output in use</source>
       <translation>อินเวอร์เตอร์ไฟฟ้ากระแสสลับที่ใช้งาน</translation>
     </message>
     <message id="settings_ess_multiphase_regulation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="85"/>
       <source>Multiphase regulation</source>
       <translation>การควบคุมหลายเฟส</translation>
     </message>
     <message id="settings_ess_phase_compensation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="93"/>
       <source>Total of all phases</source>
       <translation>รวมทุกขั้นตอน</translation>
     </message>
     <message id="settings_ess_individual_phase">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="95"/>
       <source>Individual phase</source>
       <translation>เฟสส่วนตัว</translation>
     </message>
     <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="101"/>
       <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
 
 CAUTION: Use only if required by the utility provider.</source>
@@ -1648,7 +1643,7 @@ CAUTION: Use only if required by the utility provider.</source>
 ข้อควรระวัง: ใช้เฉพาะในกรณีที่ผู้ให้บริการสาธารณูปโภคต้องการเท่านั้น</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="104"/>
       <source>The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).
 
 Use unless prohibited by the utility provider.</source>
@@ -1657,32 +1652,32 @@ Use unless prohibited by the utility provider.</source>
 ใช้เว้นแต่จะได้รับอนุญาตจากผู้ให้บริการสาธารณูปโภค</translation>
     </message>
     <message id="settings_ess_min_soc">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="113"/>
       <source>Minimum SOC (unless grid fails)</source>
       <translation>SOC ขั้นต่ำ (เว้นแต่กริดจะล้มเหลว)</translation>
     </message>
     <message id="settings_ess_active_soc_limit">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="129"/>
       <source>Active SOC limit</source>
       <translation>ขีด จำกัด SOC ที่ใช้งานอยู่</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="138"/>
       <source>Peak shaving</source>
       <translation>การใช้สูงสุด</translation>
     </message>
     <message id="settings_ess_above_minimum_soc_only">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="150"/>
       <source>Above minimum SOC only</source>
       <translation>สูงกว่าขั้นต่ำ SOC เท่านั้น</translation>
     </message>
     <message id="settings_ess_always">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="138"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="152"/>
       <source>Always</source>
       <translation>ตลอดเวลา</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="158"/>
       <source>Use this option for peak shaving.
 
 The peak shaving threshold is set using the AC input current limit setting.
@@ -1695,57 +1690,57 @@ See documentation for further information.</source>
 ดูเอกสารสำหรับข้อมูลเพิ่มเติม</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="174"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="188"/>
       <source>Discharge disabled</source>
       <translation>ปลดประจำการ</translation>
     </message>
     <message id="settings_ess_battery_life_slow_charge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="176"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="190"/>
       <source>Slow charge</source>
       <translation>ชาร์จช้า</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="138"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Sustain</source>
       <translation>ยังชีพประคับประคอง</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="141"/>
+      <location filename="../../data/System.qml" line="161"/>
       <source>Recharge</source>
       <translation>เติมเงิน</translation>
     </message>
     <message id="settings_ess_limit_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="188"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="202"/>
       <source>Limit charge power</source>
       <translation>ขีด จำกัด กำลังการชาร์จ</translation>
     </message>
     <message id="settings_ess_max_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="207"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="221"/>
       <source>Maximum charge power</source>
       <translation>กำลังชาร์จสูงสุด</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="233"/>
       <source>Limit inverter power</source>
       <translation>จำกัดกำลังของอินเวอร์เตอร์</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="252"/>
       <source>Maximum inverter power</source>
       <translation>กำลังสูงสุดของอินเวอร์เตอร์</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="248"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="262"/>
       <source>Grid setpoint</source>
       <translation>จุดตั้งค่ากริด</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="259"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="273"/>
       <source>Grid feed-in</source>
       <translation>กริดป้อนเข้า</translation>
     </message>
     <message id="settings_ess_scheduled_charging">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="284"/>
       <source>Scheduled charging</source>
       <translation>การชาร์จตามกำหนดเวลา</translation>
     </message>
@@ -1850,12 +1845,12 @@ Documentation at https://ve3.nl/vol</source>
       <translation>สัญญาณ K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="38"/>
       <source>Node-RED</source>
       <translation>โหนด-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="47"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="45"/>
       <source>Enabled (safe mode)</source>
       <translation>เปิดใช้งาน (เซฟโหมด)</translation>
     </message>
@@ -2404,8 +2399,8 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Connection lost</source>
       <translation>ขาดการเชื่อมต่อ</translation>
     </message>
-    <message id="evchargers_status_disconnected">
-      <location filename="../../data/EvChargers.qml" line="72"/>
+    <message id="settings_tcpip_connection_unplugged">
+      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="117"/>
       <source>Unplugged</source>
       <translation>ถอดปลั๊ก</translation>
     </message>
@@ -2519,11 +2514,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Wi-Fi networks</source>
       <translation>เครือข่าย Wi-Fi</translation>
     </message>
-    <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifiWithAccessPoint.qml" line="47"/>
-      <source>Disable Access Point</source>
-      <translation>ปิดการใช้งานจุดเข้าใช้งาน</translation>
-    </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
       <location filename="../../pages/settings/PageSettingsWifiWithAccessPoint.qml" line="49"/>
       <source>Are you sure that you want to disable the access point?</source>
@@ -2636,7 +2626,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>สัญญาณเตือนแรงดันแบตเตอรี่สูง</translation>
     </message>
     <message id="charger_alarms_header_last_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="54"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="72"/>
       <source>Last Errors</source>
       <extracomment>Details of most recent errors</extracomment>
       <translation>ข้อผิดพลาดครั้งล่าสุด</translation>
@@ -2676,7 +2666,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>การตั้งค่าโหมด</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="97"/>
+      <location filename="../../data/SystemSettings.qml" line="100"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>สแตนด์อโลน</translation>
@@ -2717,7 +2707,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>การตั้งค่าหลัก</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="81"/>
+      <location filename="../../data/SystemSettings.qml" line="84"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>ตัวรอง</translation>
@@ -2759,19 +2749,19 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>โหลด</translation>
     </message>
     <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="143"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="144"/>
       <source>%1 found</source>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>พบ %1</translation>
     </message>
     <message id="charger_history_name">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="174"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="181"/>
       <source>%1 History</source>
       <extracomment>Solar charger historic data information. %1 = charger name</extracomment>
       <translation>%1 ประวัติศาสตร์</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="182"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="189"/>
       <source>Networked operation</source>
       <translation>การทำงานแบบเครือข่าย</translation>
     </message>
@@ -2813,7 +2803,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>เตือน</translation>
     </message>
     <message id="components_volumeunit_volume">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="56"/>
       <source>Volume</source>
       <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
       <translation>ปริมาณ</translation>
@@ -3185,8 +3175,8 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>High discharge current</source>
       <translation>กระแสไฟออกสูง</translation>
     </message>
-    <message id="batteryalarms_low_soc">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
+    <message id="evchargers_status_low_state_of_charge">
+      <location filename="../../data/EvChargers.qml" line="92"/>
       <source>Low SOC</source>
       <translation>SOC ต่ำ</translation>
     </message>
@@ -3493,22 +3483,22 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>ออฟเซ็ตปัจจุบัน</translation>
     </message>
     <message id="batterysettingsbattery_synchronise_state_of_charge_to_100%">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="146"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="145"/>
       <source>Synchronise state-of-charge to 100%</source>
       <translation>ซิงโครไนซ์สถานะการชาร์จเป็น 100%</translation>
     </message>
     <message id="batterysettingsbattery_press_to_sync">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="148"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="147"/>
       <source>Press to sync</source>
       <translation>กดเพื่อซิงค์</translation>
     </message>
     <message id="batterysettingsbattery_calibrate_zero_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="160"/>
       <source>Calibrate zero current</source>
       <translation>ปรับเทียบศูนย์ปัจจุบัน</translation>
     </message>
     <message id="batterysettingsbattery_press_to_set_to_0">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="163"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="162"/>
       <source>Press to set to 0</source>
       <translation>กดเพื่อตั้งค่าเป็น 0</translation>
     </message>
@@ -4577,12 +4567,12 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>ออฟเซ็ต</translation>
     </message>
     <message id="temperature_scale">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="49"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="48"/>
       <source>Scale</source>
       <translation>มาตราส่วน</translation>
     </message>
     <message id="temperature_sensor_voltage">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="58"/>
       <source>Sensor voltage</source>
       <translation>แรงดันเซ็นเซอร์</translation>
     </message>
@@ -5218,9 +5208,10 @@ Do you want to continue?</source>
       <source>Discharging</source>
       <translation>การคายประจุ</translation>
     </message>
-    <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="283"/>
+    <message id="evchargers_status_disconnected">
+      <location filename="../../data/EvChargers.qml" line="72"/>
       <source>Disconnected</source>
+      <oldsource>Unplugged</oldsource>
       <translation>ตัดการเชื่อมต่อ</translation>
     </message>
     <message id="common_words_enable">
@@ -5263,11 +5254,6 @@ Do you want to continue?</source>
       <location filename="../../data/DigitalInputs.qml" line="46"/>
       <source>Generator</source>
       <translation>เครื่องกำเนิดไฟฟ้า</translation>
-    </message>
-    <message id="common_words_grid_meter">
-      <location filename="../../components/CommonWords.qml" line="162"/>
-      <source>Grid meter</source>
-      <translation>กริดเมตร</translation>
     </message>
     <message id="common_words_high_battery_temperature">
       <location filename="../../components/CommonWords.qml" line="165"/>
@@ -5624,8 +5610,8 @@ Do you want to continue?</source>
       <source>Unique Identity Number</source>
       <translation>หมายเลขประจำตัวที่ไม่ซ้ำกัน</translation>
     </message>
-    <message id="temperature_type_unknown">
-      <location filename="../../data/EnvironmentInputs.qml" line="28"/>
+    <message id="evchargers_status_unknown">
+      <location filename="../../data/EvChargers.qml" line="135"/>
       <source>Unknown</source>
       <translation>ไม่รู้จัก</translation>
     </message>
@@ -5696,18 +5682,18 @@ Do you want to continue?</source>
       <translation>หยุดเดี๋ยวนี้</translation>
     </message>
     <message id="controlcard_generator_stopdialog_total_run_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="49"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="51"/>
       <source>Total Run Time</source>
       <translation>เวลาทำงานทั้งหมด</translation>
     </message>
     <message id="controlcard_generator_stopdialog_set_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="67"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="70"/>
       <source>Set Time %1</source>
       <extracomment>%1 = the total time (in hours, minutes, seconds) that the generator will run for, as set by the user</extracomment>
       <translation>ตั้งเวลา %1</translation>
     </message>
     <message id="controlcard_generator_stopdialog_description">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="79"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="84"/>
       <source>Generator will keep running if an autostart condition is met.</source>
       <translation>เครื่องกำเนิดไฟฟ้าจะทำงานต่อไปหากตรงตามเงื่อนไขการสตาร์ทอัตโนมัติ</translation>
     </message>
@@ -5783,12 +5769,6 @@ Do you want to continue?</source>
       <source>Swap</source>
       <extracomment>Confirm that the two devices' instance number should be swapped.</extracomment>
       <translation>แลกเปลี่ยน</translation>
-    </message>
-    <message id="environment_gauge_humidity">
-      <location filename="../../components/EnvironmentGaugePanel.qml" line="82"/>
-      <source>RH</source>
-      <extracomment>Abbreviation of "Room Humidity"</extracomment>
-      <translation>RH</translation>
     </message>
     <message id="settings_firmware_error_during_checking_for_updates">
       <location filename="../../components/FirmwareUpdate.qml" line="35"/>
@@ -5892,7 +5872,7 @@ Do you want to continue?</source>
       <translation>รหัสผ่านผิด</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../pages/BriefPage.qml" line="143"/>
+      <location filename="../../pages/BriefPage.qml" line="135"/>
       <source>Brief</source>
       <translation>รวบรัด</translation>
     </message>
@@ -5912,19 +5892,19 @@ Do you want to continue?</source>
       <translation>การแจ้งเตือน</translation>
     </message>
     <message id="utils_formatTimestamp_now">
-      <location filename="../../components/Utils.js" line="241"/>
+      <location filename="../../components/Utils.js" line="250"/>
       <source>now</source>
       <extracomment>Indicates an event happened very recently</extracomment>
       <translation>ตอนนี้</translation>
     </message>
     <message id="utils_formatTimestamp_min_ago">
-      <location filename="../../components/Utils.js" line="246"/>
+      <location filename="../../components/Utils.js" line="255"/>
       <source>%1m ago</source>
       <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>%1 นาทีที่แล้ว</translation>
     </message>
     <message id="utils_formatTimestamp_hours_min_ago">
-      <location filename="../../components/Utils.js" line="253"/>
+      <location filename="../../components/Utils.js" line="262"/>
       <source>%1h %2m ago</source>
       <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>%1 ชม. %2 นาทีที่แล้ว</translation>
@@ -6281,7 +6261,7 @@ Do you want to continue?</source>
       <translation>ถูกตัดการเชื่อมต่อ กำลังพยายามเชื่อมต่อใหม่</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="269"/>
+      <location filename="../../components/Utils.js" line="278"/>
       <source>Connecting</source>
       <translation>กำลังเชื่อมต่อ</translation>
     </message>
@@ -6356,47 +6336,47 @@ Do you want to continue?</source>
       <translation>นาที</translation>
     </message>
     <message id="utils_format_days_hours">
-      <location filename="../../components/Utils.js" line="181"/>
+      <location filename="../../components/Utils.js" line="190"/>
       <source>%1d %2h</source>
       <translation>%1d %2h</translation>
     </message>
     <message id="utils_format_hours_min">
-      <location filename="../../components/Utils.js" line="186"/>
+      <location filename="../../components/Utils.js" line="195"/>
       <source>%1h %2m</source>
       <translation>%1d %2h</translation>
     </message>
     <message id="utils_format_min_sec">
-      <location filename="../../components/Utils.js" line="207"/>
+      <location filename="../../components/Utils.js" line="216"/>
       <source>%1m %2s</source>
       <translation>%1m %2s</translation>
     </message>
     <message id="utils_format_min">
-      <location filename="../../components/Utils.js" line="209"/>
+      <location filename="../../components/Utils.js" line="218"/>
       <source>%1m</source>
       <translation>%1m</translation>
     </message>
     <message id="utils_format_sec">
-      <location filename="../../components/Utils.js" line="213"/>
+      <location filename="../../components/Utils.js" line="222"/>
       <source>%1s</source>
       <translation>%1s</translation>
     </message>
     <message id="utils_zero_minutes">
-      <location filename="../../components/Utils.js" line="215"/>
+      <location filename="../../components/Utils.js" line="224"/>
       <source>0m</source>
       <translation>0m</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="266"/>
+      <location filename="../../components/Utils.js" line="275"/>
       <source>Failure</source>
       <translation>ความล้มเหลว</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="272"/>
+      <location filename="../../components/Utils.js" line="281"/>
       <source>Retrieving IP address</source>
       <translation>กำลังเรียกที่อยู่ IP</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="279"/>
+      <location filename="../../components/Utils.js" line="288"/>
       <source>Disconnect</source>
       <translation>ตัดการเชื่อมต่อ</translation>
     </message>
@@ -6422,27 +6402,27 @@ Do you want to continue?</source>
       <translation>ลม</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="76"/>
+      <location filename="../../data/AcInputs.qml" line="82"/>
       <source>Shore</source>
       <translation>ชายฝั่ง</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="100"/>
+      <location filename="../../data/AcInputs.qml" line="106"/>
       <source>Grid current limit</source>
       <translation>ขีด จำกัด ปัจจุบันของกริด</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="103"/>
+      <location filename="../../data/AcInputs.qml" line="109"/>
       <source>Generator current limit</source>
       <translation>ขีด จำกัด กระแสไฟของเครื่องกำเนิดไฟฟ้า</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="106"/>
+      <location filename="../../data/AcInputs.qml" line="112"/>
       <source>Shore current limit</source>
       <translation>ขีดจำกัดกระแสฝั่ง</translation>
     </message>
     <message id="acInputs_current_limit_unrecognized">
-      <location filename="../../data/AcInputs.qml" line="110"/>
+      <location filename="../../data/AcInputs.qml" line="116"/>
       <source>Unrecognized current limit</source>
       <translation>ขีดจำกัดปัจจุบันที่ไม่รู้จัก</translation>
     </message>
@@ -6570,62 +6550,47 @@ Do you want to continue?</source>
       <translation>รอการเริ่มต้น</translation>
     </message>
     <message id="evchargers_status_ground_test_error">
-      <location filename="../../data/EvChargers.qml" line="94"/>
+      <location filename="../../data/EvChargers.qml" line="95"/>
       <source>Ground test error</source>
       <translation>ข้อผิดพลาดในการทดสอบภาคพื้นดิน</translation>
     </message>
-    <message id="evchargers_status_welded_contacts_error">
-      <location filename="../../data/EvChargers.qml" line="97"/>
-      <source>Welded contacts error</source>
-      <translation>รอยเชื่อมผิดพลาด</translation>
-    </message>
     <message id="evchargers_status_cp_input_test_error">
-      <location filename="../../data/EvChargers.qml" line="100"/>
+      <location filename="../../data/EvChargers.qml" line="101"/>
       <source>CP input test error</source>
       <translation>ข้อผิดพลาดในการทดสอบอินพุต CP</translation>
     </message>
     <message id="evchargers_status_residual_current_detected">
-      <location filename="../../data/EvChargers.qml" line="103"/>
+      <location filename="../../data/EvChargers.qml" line="104"/>
       <source>Residual current detected</source>
       <translation>ตรวจพบกระแสไฟฟ้าตกค้าง</translation>
     </message>
     <message id="evchargers_status_undervoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="106"/>
+      <location filename="../../data/EvChargers.qml" line="107"/>
       <source>Undervoltage detected</source>
       <translation>ตรวจพบแรงดันตก</translation>
     </message>
     <message id="evchargers_status_overvoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="109"/>
+      <location filename="../../data/EvChargers.qml" line="110"/>
       <source>Overvoltage detected</source>
       <translation>ตรวจพบแรงดันไฟฟ้าเกิน</translation>
     </message>
     <message id="evchargers_status_overheating_detected">
-      <location filename="../../data/EvChargers.qml" line="112"/>
+      <location filename="../../data/EvChargers.qml" line="113"/>
       <source>Overheating detected</source>
       <translation>ตรวจพบความร้อนสูงเกินไป</translation>
     </message>
     <message id="evchargers_status_charging_limit">
-      <location filename="../../data/EvChargers.qml" line="115"/>
+      <location filename="../../data/EvChargers.qml" line="116"/>
       <source>Charging limit</source>
       <translation>ขีดจำกัดการชาร์จ</translation>
     </message>
     <message id="evchargers_status_start_charging">
-      <location filename="../../data/EvChargers.qml" line="118"/>
+      <location filename="../../data/EvChargers.qml" line="119"/>
       <source>Start charging</source>
       <translation>เริ่มการชาร์จ</translation>
     </message>
-    <message id="evchargers_status_switching_to_three_phase">
-      <location filename="../../data/EvChargers.qml" line="121"/>
-      <source>Switching to 3-phase</source>
-      <translation>เปลี่ยนเป็น 3 เฟส</translation>
-    </message>
-    <message id="evchargers_status_switching_to_single_phase">
-      <location filename="../../data/EvChargers.qml" line="124"/>
-      <source>Switching to single phase</source>
-      <translation>เปลี่ยนเป็นเฟสเดียว</translation>
-    </message>
     <message id="evchargers_mode_scheduled">
-      <location filename="../../data/EvChargers.qml" line="138"/>
+      <location filename="../../data/EvChargers.qml" line="148"/>
       <source>Scheduled</source>
       <translation>กำหนดการ</translation>
     </message>
@@ -6736,125 +6701,125 @@ Do you want to continue?</source>
       <translation>Equalize</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="74"/>
+      <location filename="../../data/System.qml" line="94"/>
       <source>AES mode</source>
       <translation>พลังงานต่ำ</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="77"/>
+      <location filename="../../data/System.qml" line="97"/>
       <source>Fault condition</source>
       <translation>สภาพข้อบกพร่อง</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="80"/>
+      <location filename="../../data/System.qml" line="100"/>
       <source>Bulk charging</source>
       <translation>การชาร์จจำนวนมาก</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="83"/>
+      <location filename="../../data/System.qml" line="103"/>
       <source>Absorption charging</source>
       <translation>การชาร์จแบบดูดซับ</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="86"/>
+      <location filename="../../data/System.qml" line="106"/>
       <source>Float charging</source>
       <translation>การชาร์จแบบลอยตัว</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="89"/>
+      <location filename="../../data/System.qml" line="109"/>
       <source>Storage mode</source>
       <translation>โหมดการจัดเก็บข้อมูล</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="92"/>
+      <location filename="../../data/System.qml" line="112"/>
       <source>Equalization charging</source>
       <translation>การชาร์จที่เท่าเทียมกัน</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="95"/>
+      <location filename="../../data/System.qml" line="115"/>
       <source>Pass-thru</source>
       <translation>ผ่าน</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="98"/>
+      <location filename="../../data/System.qml" line="118"/>
       <source>Inverting</source>
       <translation>สลับด้าน</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="101"/>
+      <location filename="../../data/System.qml" line="121"/>
       <source>Assisting</source>
       <translation>ช่วยเหลือ</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="104"/>
+      <location filename="../../data/System.qml" line="124"/>
       <source>Power supply mode</source>
       <translation>โหมดพาวเวอร์ซัพพลาย</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="111"/>
+      <location filename="../../data/System.qml" line="131"/>
       <source>Wake up</source>
       <translation>ตื่น</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="114"/>
+      <location filename="../../data/System.qml" line="134"/>
       <source>Repeated absorption</source>
       <translation>การดูดซึมซ้ำ</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="117"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>Auto equalize</source>
       <translation>ปรับสมดุลอัตโนมัติ</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="120"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Battery safe</source>
       <translation>แบตเตอรี่ปลอดภัย</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="123"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Load detect</source>
       <translation>โหลดตรวจจับ</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="126"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Blocked</source>
       <translation>ถูกบล็อค</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="129"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Test</source>
       <translation>ทดสอบ</translation>
     </message>
     <message id="inverters_state_scheduledrecharge">
-      <location filename="../../data/System.qml" line="144"/>
+      <location filename="../../data/System.qml" line="164"/>
       <source>Scheduled recharge</source>
       <translation>การเติมเงินตามกำหนด</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="147"/>
+      <location filename="../../data/System.qml" line="167"/>
       <source>Dynamic ESS</source>
       <translation>ไดนามิก ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="85"/>
+      <location filename="../../data/SystemSettings.qml" line="88"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>กลุ่มตัวหลัก</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="89"/>
+      <location filename="../../data/SystemSettings.qml" line="92"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>อินสแตนซ์มาสเตอร์</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="93"/>
+      <location filename="../../data/SystemSettings.qml" line="96"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>ต้นแบบกลุ่มและอินสแตนซ์</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="101"/>
+      <location filename="../../data/SystemSettings.qml" line="104"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>สแตนด์อโลน &amp; หัวหน้ากลุ่ม</translation>
@@ -7163,25 +7128,25 @@ Do you want to continue?</source>
       <translation>สัญญาณเตือนจะถูกกระตุ้นเมื่อฟังก์ชันสตาร์ทอัตโนมัติถูกปิดใช้งานเป็นเวลานานกว่า 10 นาที</translation>
     </message>
     <message id="settings_ess_do_not_perform_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="161"/>
       <source>Use this option in systems that do not perform peak shaving</source>
       <oldsource>Use this option in systems that do not perform peak shaving.</oldsource>
       <translation>ใช้ตัวเลือกนี้ในระบบที่ไม่ทำการโกนสูงสุด</translation>
     </message>
     <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="176"/>
       <source>Battery life state</source>
       <oldsource>BatteryLife state</oldsource>
       <translation>สถานะอายุการใช้งานแบตเตอรี่</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="30"/>
       <source>Access Signal K at http://venus.local:3000 and via VRM.</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM</oldsource>
       <translation>เข้าถึงสัญญาณ K ได้ที่ http://venus.local:3000 และผ่าน VRM</translation>
     </message>
     <message id="settings_large_access_node_red">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="51"/>
       <source>Access Node-RED at https://venus.local:1881 and via VRM.</source>
       <oldsource>Access Node-RED at https://venus.local:1881 and via VRM</oldsource>
       <translation>เข้าถึง Node-RED ได้ที่ https://venus.local:1881 และผ่าน VRM</translation>
@@ -7217,7 +7182,7 @@ Do you want to continue?</source>
       <translation>ควบคุม BMS</translation>
     </message>
     <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="138"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="139"/>
       <source>Alarms &amp; Errors</source>
       <oldsource>Alarms and Errors</oldsource>
       <translation>สัญญาณเตือนและข้อผิดพลาด</translation>
@@ -7463,40 +7428,109 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>รีเซ็ตค่าช่วงทั้งหมดให้เป็นศูนย์</translation>
     </message>
     <message id="settings_minmax_ac_in_header_with_source">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
       <source>%1 (%2)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
       <translation>%1 (%2)</translation>
     </message>
     <message id="settings_minmax_dc_input">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="109"/>
       <source>DC input</source>
       <translation>อินพุตกระแสตรง</translation>
     </message>
-    <message id="settings_minmax_acout_max_acin1">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="112"/>
-      <source>Maximum power: AC in 1 connected</source>
-      <translation>กำลังไฟสูงสุด: เชื่อมต่อ AC in 1</translation>
-    </message>
-    <message id="settings_minmax_acout_max_acin2">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="119"/>
-      <source>Maximum power: AC in 2 connected</source>
-      <translation>กำลังไฟสูงสุด: เชื่อมต่อ AC เข้า 2</translation>
-    </message>
-    <message id="settings_minmax_acout_max">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="126"/>
-      <source>Maximum power: no AC inputs</source>
-      <translation>กำลังไฟสูงสุด: ไม่มีอินพุต AC</translation>
-    </message>
     <message id="settings_minmax_dc_out">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="150"/>
       <source>DC output</source>
       <translation>เอาท์พุทกระแสตรง</translation>
     </message>
     <message id="settings_minmax_solar">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="162"/>
       <source>Solar</source>
       <translation>แสงอาทิตย์</translation>
+    </message>
+    <message id="settings_units_amps_exceptions">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="28"/>
+      <source>Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead.</source>
+      <translation>หมายเหตุ: หากไม่สามารถแสดงกระแสได้ (เช่น เมื่อแสดงผลรวมสำหรับแหล่งจ่ายไฟ AC และ DC รวม) ก็จะแสดงกำลังไฟแทน</translation>
+    </message>
+    <message id="settings_wifi_disable_ap">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="42"/>
+      <source>Reset Range Values</source>
+      <oldsource>Disable Access Point</oldsource>
+      <translation>รีเซ็ตค่าช่วง</translation>
+    </message>
+    <message id="settings_minmax_reset_are_you_sure">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="44"/>
+      <source>Are you sure that you want to reset all the values to zero?</source>
+      <translation>คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตค่าทั้งหมดให้เป็นศูนย์</translation>
+    </message>
+    <message id="charger_alarms_high_temperature_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="51"/>
+      <source>High temperature alarm</source>
+      <translation>สัญญาณเตือนอุณหภูมิสูง</translation>
+    </message>
+    <message id="charger_alarms_short_circuit_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="60"/>
+      <source>Short circuit alarm</source>
+      <translation>สัญญาณเตือนไฟฟ้าลัดวงจร</translation>
+    </message>
+    <message id="settings_ess_self_consumption_battery">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="72"/>
+      <source>Self-consumption from battery</source>
+      <translation>การบริโภคเองจากแบตเตอรี่</translation>
+    </message>
+    <message id="settings_ess_all_system_loads">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="77"/>
+      <source>All system loads</source>
+      <translation>โหลดระบบทั้งหมด</translation>
+    </message>
+    <message id="settings_ess_only_critical_loads">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="79"/>
+      <source>Only critical loads</source>
+      <translation>โหลดวิกฤติเท่านั้น</translation>
+    </message>
+    <message id="settings_minmax_acout_max_acin1">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="127"/>
+      <source>Maximum current: AC in 1 connected</source>
+      <translation>กระแสไฟสูงสุด: เชื่อมต่อ AC in 1</translation>
+    </message>
+    <message id="settings_minmax_acout_max_acin2">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="135"/>
+      <source>Maximum current: AC in 2 connected</source>
+      <translation>กระแสสูงสุด: เชื่อมต่อ AC ใน 2</translation>
+    </message>
+    <message id="settings_minmax_acout_max">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="143"/>
+      <source>Maximum current: no AC inputs</source>
+      <translation>กระแสไฟฟ้าสูงสุด: ไม่มีอินพุต AC</translation>
+    </message>
+    <message id="evchargers_status_welded_contacts_error">
+      <location filename="../../data/EvChargers.qml" line="98"/>
+      <source>Welded contacts test error (shorted)</source>
+      <oldsource>Welded contacts error</oldsource>
+      <translation>ข้อผิดพลาดในการทดสอบหน้าสัมผัสรอยเชื่อม (ลัดวงจร)</translation>
+    </message>
+    <message id="evchargers_status_switching_to_three_phase">
+      <location filename="../../data/EvChargers.qml" line="122"/>
+      <source>Switching to 3 phase</source>
+      <oldsource>Switching to 3-phase</oldsource>
+      <translation>กำลังเปลี่ยนเป็น 3 เฟส</translation>
+    </message>
+    <message id="evchargers_status_switching_to_single_phase">
+      <location filename="../../data/EvChargers.qml" line="125"/>
+      <source>Switching to 1 phase</source>
+      <oldsource>Switching to single phase</oldsource>
+      <translation>กำลังเปลี่ยนเป็น 1 เฟส</translation>
+    </message>
+    <message id="evchargers_status_stop_charging">
+      <location filename="../../data/EvChargers.qml" line="128"/>
+      <source>Stop charging</source>
+      <translation>หยุดชาร์จ</translation>
+    </message>
+    <message id="evchargers_status_reserved">
+      <location filename="../../data/EvChargers.qml" line="132"/>
+      <source>Reserved</source>
+      <translation>ที่สงวนไว้</translation>
     </message>
   </context>
   <context>
