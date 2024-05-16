@@ -105,8 +105,8 @@
       <source>Press to check</source>
       <translation>Pulsar para comprobar</translation>
     </message>
-    <message id="settings_system_grid">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="18"/>
+    <message id="common_words_grid">
+      <location filename="../../components/CommonWords.qml" line="162"/>
       <source>Grid</source>
       <translation>Red eléctrica</translation>
     </message>
@@ -116,14 +116,9 @@
       <translation>Rendimiento solar</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="132"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>External control</source>
       <translation>Control externo</translation>
-    </message>
-    <message id="brief_loads">
-      <location filename="../../pages/BriefMonitorPanel.qml" line="284"/>
-      <source>Loads</source>
-      <translation>Cargas</translation>
     </message>
     <message id="levels_page_tanks">
       <location filename="../../pages/LevelsPage.qml" line="53"/>
@@ -246,7 +241,7 @@
       <translation>Características de Venus OS Large</translation>
     </message>
     <message id="ess_battery_life_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="72"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="74"/>
       <source>Battery life limit: %1%</source>
       <translation>Límite de vida de la batería: %1%</translation>
     </message>
@@ -456,7 +451,7 @@
       <translation>El valor debe de ser menor que el valor de arranque</translation>
     </message>
     <message id="settings_minmax_acout_max_power">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="121"/>
       <source>AC output</source>
       <translation>Salida CA</translation>
     </message>
@@ -951,7 +946,7 @@
       <translation>Potencia (vatios)</translation>
     </message>
     <message id="settings_units_amps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="24"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="25"/>
       <source>Current (Amps)</source>
       <translation>Corriente (amperios)</translation>
     </message>
@@ -967,12 +962,12 @@
       <translation>Nivel %1</translation>
     </message>
     <message id="settings_units_celsius">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="42"/>
       <source>Celsius</source>
       <translation>Centígrado</translation>
     </message>
     <message id="settings_units_fahrenheit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
       <source>Fahrenheit</source>
       <translation>Fahrenheit</translation>
     </message>
@@ -1619,27 +1614,27 @@ Si esto no funcionara, compruebe el buen funcionamiento de la tarjeta SIM en un 
       <translation>Inversor/cargador</translation>
     </message>
     <message id="settings_ess_inverter_ac_output_in_use">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="65"/>
       <source>Inverter AC output in use</source>
       <translation>Salida CA del inversor en uso</translation>
     </message>
     <message id="settings_ess_multiphase_regulation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="85"/>
       <source>Multiphase regulation</source>
       <translation>Regulación multifásica</translation>
     </message>
     <message id="settings_ess_phase_compensation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="93"/>
       <source>Total of all phases</source>
       <translation>Total de todas las fases</translation>
     </message>
     <message id="settings_ess_individual_phase">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="95"/>
       <source>Individual phase</source>
       <translation>Fase individual</translation>
     </message>
     <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="101"/>
       <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
 
 CAUTION: Use only if required by the utility provider.</source>
@@ -1648,7 +1643,7 @@ CAUTION: Use only if required by the utility provider.</source>
 PRECAUCIÓN: Úselo solo si lo requiere el proveedor de suministros.</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="104"/>
       <source>The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).
 
 Use unless prohibited by the utility provider.</source>
@@ -1657,32 +1652,32 @@ Use unless prohibited by the utility provider.</source>
 Úselo a menos que el proveedor de suministros lo prohíba.</translation>
     </message>
     <message id="settings_ess_min_soc">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="113"/>
       <source>Minimum SOC (unless grid fails)</source>
       <translation>Estado de carga (SoC) mínimo (salvo fallo de red)</translation>
     </message>
     <message id="settings_ess_active_soc_limit">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="129"/>
       <source>Active SOC limit</source>
       <translation>Límite real de estado de carga</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="138"/>
       <source>Peak shaving</source>
       <translation>Recorte de picos (peak shaving)</translation>
     </message>
     <message id="settings_ess_above_minimum_soc_only">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="150"/>
       <source>Above minimum SOC only</source>
       <translation>Solo por encima del estado de carga mínimo</translation>
     </message>
     <message id="settings_ess_always">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="138"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="152"/>
       <source>Always</source>
       <translation>Siempre</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="158"/>
       <source>Use this option for peak shaving.
 
 The peak shaving threshold is set using the AC input current limit setting.
@@ -1695,57 +1690,57 @@ El umbral de recorte de picos se establece con el ajuste del límite de la corri
 Consulte la documentación para más información.</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="174"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="188"/>
       <source>Discharge disabled</source>
       <translation>Descarga deshabilitada</translation>
     </message>
     <message id="settings_ess_battery_life_slow_charge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="176"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="190"/>
       <source>Slow charge</source>
       <translation>Carga lenta</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="138"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Sustain</source>
       <translation>Sostener</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="141"/>
+      <location filename="../../data/System.qml" line="161"/>
       <source>Recharge</source>
       <translation>Cargando</translation>
     </message>
     <message id="settings_ess_limit_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="188"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="202"/>
       <source>Limit charge power</source>
       <translation>Limitar potencia de carga</translation>
     </message>
     <message id="settings_ess_max_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="207"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="221"/>
       <source>Maximum charge power</source>
       <translation>Máxima potencia de carga</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="233"/>
       <source>Limit inverter power</source>
       <translation>Limitar la potencia del inversor</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="252"/>
       <source>Maximum inverter power</source>
       <translation>Potencia máxima del inversor</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="248"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="262"/>
       <source>Grid setpoint</source>
       <translation>Objetivo red</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="259"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="273"/>
       <source>Grid feed-in</source>
       <translation>Inyección a red</translation>
     </message>
     <message id="settings_ess_scheduled_charging">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="284"/>
       <source>Scheduled charging</source>
       <translation>Carga programada</translation>
     </message>
@@ -1850,12 +1845,12 @@ Documentación en https://ve3.nl/vol</translation>
       <translation>Signal K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="38"/>
       <source>Node-RED</source>
       <translation>Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="47"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="45"/>
       <source>Enabled (safe mode)</source>
       <translation>Habilitado (modo seguro)</translation>
     </message>
@@ -2404,8 +2399,8 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Connection lost</source>
       <translation>Conexión perdida</translation>
     </message>
-    <message id="evchargers_status_disconnected">
-      <location filename="../../data/EvChargers.qml" line="72"/>
+    <message id="settings_tcpip_connection_unplugged">
+      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="117"/>
       <source>Unplugged</source>
       <translation>Desconectado</translation>
     </message>
@@ -2519,11 +2514,6 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Wi-Fi networks</source>
       <translation>Redes Wi-Fi</translation>
     </message>
-    <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifiWithAccessPoint.qml" line="47"/>
-      <source>Disable Access Point</source>
-      <translation>Deshabilitar punto de acceso</translation>
-    </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
       <location filename="../../pages/settings/PageSettingsWifiWithAccessPoint.qml" line="49"/>
       <source>Are you sure that you want to disable the access point?</source>
@@ -2636,7 +2626,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Alarma de tensión de batería alta</translation>
     </message>
     <message id="charger_alarms_header_last_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="54"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="72"/>
       <source>Last Errors</source>
       <extracomment>Details of most recent errors</extracomment>
       <translation>Últimos errores</translation>
@@ -2676,7 +2666,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Configuración del modo</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="97"/>
+      <location filename="../../data/SystemSettings.qml" line="100"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>Autónomo</translation>
@@ -2717,7 +2707,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Configuración del maestro</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="81"/>
+      <location filename="../../data/SystemSettings.qml" line="84"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>Esclavo</translation>
@@ -2759,19 +2749,19 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Carga</translation>
     </message>
     <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="143"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="144"/>
       <source>%1 found</source>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>%1 encontrado</translation>
     </message>
     <message id="charger_history_name">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="174"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="181"/>
       <source>%1 History</source>
       <extracomment>Solar charger historic data information. %1 = charger name</extracomment>
       <translation>%1 Historia</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="182"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="189"/>
       <source>Networked operation</source>
       <translation>Operación interconectada</translation>
     </message>
@@ -2813,7 +2803,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Alarma</translation>
     </message>
     <message id="components_volumeunit_volume">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="56"/>
       <source>Volume</source>
       <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
       <translation>Volumen</translation>
@@ -3185,8 +3175,8 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>High discharge current</source>
       <translation>Corriente de descarga alta</translation>
     </message>
-    <message id="batteryalarms_low_soc">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
+    <message id="evchargers_status_low_state_of_charge">
+      <location filename="../../data/EvChargers.qml" line="92"/>
       <source>Low SOC</source>
       <translation>SOC bajo</translation>
     </message>
@@ -3493,22 +3483,22 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Compensación de la corriente</translation>
     </message>
     <message id="batterysettingsbattery_synchronise_state_of_charge_to_100%">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="146"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="145"/>
       <source>Synchronise state-of-charge to 100%</source>
       <translation>Sincronizar estado de carga al 100%</translation>
     </message>
     <message id="batterysettingsbattery_press_to_sync">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="148"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="147"/>
       <source>Press to sync</source>
       <translation>Presiona para sincronizar</translation>
     </message>
     <message id="batterysettingsbattery_calibrate_zero_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="160"/>
       <source>Calibrate zero current</source>
       <translation>Calibrar corriente cero</translation>
     </message>
     <message id="batterysettingsbattery_press_to_set_to_0">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="163"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="162"/>
       <source>Press to set to 0</source>
       <translation>Pulsar para fijar en 0</translation>
     </message>
@@ -4578,12 +4568,12 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Compensación</translation>
     </message>
     <message id="temperature_scale">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="49"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="48"/>
       <source>Scale</source>
       <translation>Escala</translation>
     </message>
     <message id="temperature_sensor_voltage">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="58"/>
       <source>Sensor voltage</source>
       <translation>Tensión del sensor</translation>
     </message>
@@ -5218,9 +5208,10 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <source>Discharging</source>
       <translation>Descargando</translation>
     </message>
-    <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="283"/>
+    <message id="evchargers_status_disconnected">
+      <location filename="../../data/EvChargers.qml" line="72"/>
       <source>Disconnected</source>
+      <oldsource>Unplugged</oldsource>
       <translation>Desconectado</translation>
     </message>
     <message id="common_words_enable">
@@ -5263,11 +5254,6 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <location filename="../../data/DigitalInputs.qml" line="46"/>
       <source>Generator</source>
       <translation>Generador</translation>
-    </message>
-    <message id="common_words_grid_meter">
-      <location filename="../../components/CommonWords.qml" line="162"/>
-      <source>Grid meter</source>
-      <translation>Contador de red</translation>
     </message>
     <message id="common_words_high_battery_temperature">
       <location filename="../../components/CommonWords.qml" line="165"/>
@@ -5624,8 +5610,8 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <source>Unique Identity Number</source>
       <translation>Número de identidad único</translation>
     </message>
-    <message id="temperature_type_unknown">
-      <location filename="../../data/EnvironmentInputs.qml" line="28"/>
+    <message id="evchargers_status_unknown">
+      <location filename="../../data/EvChargers.qml" line="135"/>
       <source>Unknown</source>
       <translation>Desconocido</translation>
     </message>
@@ -5696,18 +5682,18 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Detener ahora</translation>
     </message>
     <message id="controlcard_generator_stopdialog_total_run_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="49"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="51"/>
       <source>Total Run Time</source>
       <translation>Tiempo de funcionamiento total</translation>
     </message>
     <message id="controlcard_generator_stopdialog_set_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="67"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="70"/>
       <source>Set Time %1</source>
       <extracomment>%1 = the total time (in hours, minutes, seconds) that the generator will run for, as set by the user</extracomment>
       <translation>Hora establecida %1</translation>
     </message>
     <message id="controlcard_generator_stopdialog_description">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="79"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="84"/>
       <source>Generator will keep running if an autostart condition is met.</source>
       <translation>El generador seguirá funcionando si se cumple una condición de arranque automático.</translation>
     </message>
@@ -5783,12 +5769,6 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <source>Swap</source>
       <extracomment>Confirm that the two devices' instance number should be swapped.</extracomment>
       <translation>Intercambiar</translation>
-    </message>
-    <message id="environment_gauge_humidity">
-      <location filename="../../components/EnvironmentGaugePanel.qml" line="82"/>
-      <source>RH</source>
-      <extracomment>Abbreviation of "Room Humidity"</extracomment>
-      <translation>RH</translation>
     </message>
     <message id="settings_firmware_error_during_checking_for_updates">
       <location filename="../../components/FirmwareUpdate.qml" line="35"/>
@@ -5892,7 +5872,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Contraseña incorrecta</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../pages/BriefPage.qml" line="143"/>
+      <location filename="../../pages/BriefPage.qml" line="135"/>
       <source>Brief</source>
       <translation>Breve</translation>
     </message>
@@ -5912,19 +5892,19 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Notificaciones</translation>
     </message>
     <message id="utils_formatTimestamp_now">
-      <location filename="../../components/Utils.js" line="241"/>
+      <location filename="../../components/Utils.js" line="250"/>
       <source>now</source>
       <extracomment>Indicates an event happened very recently</extracomment>
       <translation>Ahora</translation>
     </message>
     <message id="utils_formatTimestamp_min_ago">
-      <location filename="../../components/Utils.js" line="246"/>
+      <location filename="../../components/Utils.js" line="255"/>
       <source>%1m ago</source>
       <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>hace %1m </translation>
     </message>
     <message id="utils_formatTimestamp_hours_min_ago">
-      <location filename="../../components/Utils.js" line="253"/>
+      <location filename="../../components/Utils.js" line="262"/>
       <source>%1h %2m ago</source>
       <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>hace %1h %2m</translation>
@@ -6281,7 +6261,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Desconectado, intentando volver a conectar</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="269"/>
+      <location filename="../../components/Utils.js" line="278"/>
       <source>Connecting</source>
       <translation>Conectando</translation>
     </message>
@@ -6356,47 +6336,47 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>mín</translation>
     </message>
     <message id="utils_format_days_hours">
-      <location filename="../../components/Utils.js" line="181"/>
+      <location filename="../../components/Utils.js" line="190"/>
       <source>%1d %2h</source>
       <translation>%1 d %2 h</translation>
     </message>
     <message id="utils_format_hours_min">
-      <location filename="../../components/Utils.js" line="186"/>
+      <location filename="../../components/Utils.js" line="195"/>
       <source>%1h %2m</source>
       <translation>%1 h %2 m</translation>
     </message>
     <message id="utils_format_min_sec">
-      <location filename="../../components/Utils.js" line="207"/>
+      <location filename="../../components/Utils.js" line="216"/>
       <source>%1m %2s</source>
       <translation>%1 m %2 s</translation>
     </message>
     <message id="utils_format_min">
-      <location filename="../../components/Utils.js" line="209"/>
+      <location filename="../../components/Utils.js" line="218"/>
       <source>%1m</source>
       <translation>%1 m</translation>
     </message>
     <message id="utils_format_sec">
-      <location filename="../../components/Utils.js" line="213"/>
+      <location filename="../../components/Utils.js" line="222"/>
       <source>%1s</source>
       <translation>%1 s</translation>
     </message>
     <message id="utils_zero_minutes">
-      <location filename="../../components/Utils.js" line="215"/>
+      <location filename="../../components/Utils.js" line="224"/>
       <source>0m</source>
       <translation>0 m</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="266"/>
+      <location filename="../../components/Utils.js" line="275"/>
       <source>Failure</source>
       <translation>Fallo</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="272"/>
+      <location filename="../../components/Utils.js" line="281"/>
       <source>Retrieving IP address</source>
       <translation>Obteniendo dirección IP</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="279"/>
+      <location filename="../../components/Utils.js" line="288"/>
       <source>Disconnect</source>
       <translation>Desconectar</translation>
     </message>
@@ -6422,27 +6402,27 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Viento</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="76"/>
+      <location filename="../../data/AcInputs.qml" line="82"/>
       <source>Shore</source>
       <translation>Toma de puerto</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="100"/>
+      <location filename="../../data/AcInputs.qml" line="106"/>
       <source>Grid current limit</source>
       <translation>Límite de corriente de la red</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="103"/>
+      <location filename="../../data/AcInputs.qml" line="109"/>
       <source>Generator current limit</source>
       <translation>Límite de corriente del generador</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="106"/>
+      <location filename="../../data/AcInputs.qml" line="112"/>
       <source>Shore current limit</source>
       <translation>Límite de corriente del pantalán</translation>
     </message>
     <message id="acInputs_current_limit_unrecognized">
-      <location filename="../../data/AcInputs.qml" line="110"/>
+      <location filename="../../data/AcInputs.qml" line="116"/>
       <source>Unrecognized current limit</source>
       <translation>Límite de corriente no reconocido</translation>
     </message>
@@ -6570,62 +6550,47 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Esperando el inicio.</translation>
     </message>
     <message id="evchargers_status_ground_test_error">
-      <location filename="../../data/EvChargers.qml" line="94"/>
+      <location filename="../../data/EvChargers.qml" line="95"/>
       <source>Ground test error</source>
       <translation>Error de prueba de tierra</translation>
     </message>
-    <message id="evchargers_status_welded_contacts_error">
-      <location filename="../../data/EvChargers.qml" line="97"/>
-      <source>Welded contacts error</source>
-      <translation>Error de contactos soldados</translation>
-    </message>
     <message id="evchargers_status_cp_input_test_error">
-      <location filename="../../data/EvChargers.qml" line="100"/>
+      <location filename="../../data/EvChargers.qml" line="101"/>
       <source>CP input test error</source>
       <translation>Error de prueba de entrada de CP</translation>
     </message>
     <message id="evchargers_status_residual_current_detected">
-      <location filename="../../data/EvChargers.qml" line="103"/>
+      <location filename="../../data/EvChargers.qml" line="104"/>
       <source>Residual current detected</source>
       <translation>Corriente residual detectada</translation>
     </message>
     <message id="evchargers_status_undervoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="106"/>
+      <location filename="../../data/EvChargers.qml" line="107"/>
       <source>Undervoltage detected</source>
       <translation>Subtensión detectada</translation>
     </message>
     <message id="evchargers_status_overvoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="109"/>
+      <location filename="../../data/EvChargers.qml" line="110"/>
       <source>Overvoltage detected</source>
       <translation>Sobretensión detectada</translation>
     </message>
     <message id="evchargers_status_overheating_detected">
-      <location filename="../../data/EvChargers.qml" line="112"/>
+      <location filename="../../data/EvChargers.qml" line="113"/>
       <source>Overheating detected</source>
       <translation>Sobrecalentamiento detectado</translation>
     </message>
     <message id="evchargers_status_charging_limit">
-      <location filename="../../data/EvChargers.qml" line="115"/>
+      <location filename="../../data/EvChargers.qml" line="116"/>
       <source>Charging limit</source>
       <translation>Límite de carga</translation>
     </message>
     <message id="evchargers_status_start_charging">
-      <location filename="../../data/EvChargers.qml" line="118"/>
+      <location filename="../../data/EvChargers.qml" line="119"/>
       <source>Start charging</source>
       <translation>Iniciar el proceso de carga</translation>
     </message>
-    <message id="evchargers_status_switching_to_three_phase">
-      <location filename="../../data/EvChargers.qml" line="121"/>
-      <source>Switching to 3-phase</source>
-      <translation>Pasando a trifásica</translation>
-    </message>
-    <message id="evchargers_status_switching_to_single_phase">
-      <location filename="../../data/EvChargers.qml" line="124"/>
-      <source>Switching to single phase</source>
-      <translation>Pasando a monofásica</translation>
-    </message>
     <message id="evchargers_mode_scheduled">
-      <location filename="../../data/EvChargers.qml" line="138"/>
+      <location filename="../../data/EvChargers.qml" line="148"/>
       <source>Scheduled</source>
       <translation>Programado</translation>
     </message>
@@ -6736,125 +6701,125 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Ecualización</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="74"/>
+      <location filename="../../data/System.qml" line="94"/>
       <source>AES mode</source>
       <translation>Baja potencia</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="77"/>
+      <location filename="../../data/System.qml" line="97"/>
       <source>Fault condition</source>
       <translation>Condición de fallo</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="80"/>
+      <location filename="../../data/System.qml" line="100"/>
       <source>Bulk charging</source>
       <translation>En carga inicial</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="83"/>
+      <location filename="../../data/System.qml" line="103"/>
       <source>Absorption charging</source>
       <translation>En carga de absorción</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="86"/>
+      <location filename="../../data/System.qml" line="106"/>
       <source>Float charging</source>
       <translation>En carga de flotación</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="89"/>
+      <location filename="../../data/System.qml" line="109"/>
       <source>Storage mode</source>
       <translation>Modo de almacenamiento</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="92"/>
+      <location filename="../../data/System.qml" line="112"/>
       <source>Equalization charging</source>
       <translation>Realizando una carga de ecualización</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="95"/>
+      <location filename="../../data/System.qml" line="115"/>
       <source>Pass-thru</source>
       <translation>Pass-thru</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="98"/>
+      <location filename="../../data/System.qml" line="118"/>
       <source>Inverting</source>
       <translation>Invirtiendo</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="101"/>
+      <location filename="../../data/System.qml" line="121"/>
       <source>Assisting</source>
       <translation>Asistiendo</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="104"/>
+      <location filename="../../data/System.qml" line="124"/>
       <source>Power supply mode</source>
       <translation>Modo fuente de alimentación</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="111"/>
+      <location filename="../../data/System.qml" line="131"/>
       <source>Wake up</source>
       <translation>Activación</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="114"/>
+      <location filename="../../data/System.qml" line="134"/>
       <source>Repeated absorption</source>
       <translation>Absorción repetida</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="117"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>Auto equalize</source>
       <translation>Ecualización automática</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="120"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Battery safe</source>
       <translation>BatterySafe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="123"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Load detect</source>
       <translation>Detección de carga</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="126"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Blocked</source>
       <translation>Bloqueado</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="129"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Test</source>
       <translation>Prueba</translation>
     </message>
     <message id="inverters_state_scheduledrecharge">
-      <location filename="../../data/System.qml" line="144"/>
+      <location filename="../../data/System.qml" line="164"/>
       <source>Scheduled recharge</source>
       <translation>Recarga programada</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="147"/>
+      <location filename="../../data/System.qml" line="167"/>
       <source>Dynamic ESS</source>
       <translation>ESS dinámico</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="85"/>
+      <location filename="../../data/SystemSettings.qml" line="88"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>Maestro del grupo</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="89"/>
+      <location filename="../../data/SystemSettings.qml" line="92"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>Maestro Instancia</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="93"/>
+      <location filename="../../data/SystemSettings.qml" line="96"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>Maestro Grupo e Instancia</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="101"/>
+      <location filename="../../data/SystemSettings.qml" line="104"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>Autónomo y Maestro Grupo</translation>
@@ -7163,25 +7128,25 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Saltará una alarma cuando la función de arranque automático permanezca deshabilitada durante más de 10 minutos</translation>
     </message>
     <message id="settings_ess_do_not_perform_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="161"/>
       <source>Use this option in systems that do not perform peak shaving</source>
       <oldsource>Use this option in systems that do not perform peak shaving.</oldsource>
       <translation>Utilice esta opción en sistemas que no efectúen recorte de picos</translation>
     </message>
     <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="176"/>
       <source>Battery life state</source>
       <oldsource>BatteryLife state</oldsource>
       <translation>Estado de la vida de la batería</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="30"/>
       <source>Access Signal K at http://venus.local:3000 and via VRM.</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM</oldsource>
       <translation>Puede acceder a Signal K en http://venus.local:3000 y a través de VRM.</translation>
     </message>
     <message id="settings_large_access_node_red">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="51"/>
       <source>Access Node-RED at https://venus.local:1881 and via VRM.</source>
       <oldsource>Access Node-RED at https://venus.local:1881 and via VRM</oldsource>
       <translation>Puede acceder a Node-RED en https://venus.local:1881 y a través de VRM.</translation>
@@ -7217,7 +7182,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Controlado por BMS</translation>
     </message>
     <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="138"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="139"/>
       <source>Alarms &amp; Errors</source>
       <oldsource>Alarms and Errors</oldsource>
       <translation>Alarmas y errores</translation>
@@ -7291,7 +7256,7 @@ Tenga en cuenta que este menú solo muestra contadores de Carlo Gavazzi conectad
     <message id="ac-in-genset_oil_temperature">
       <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="225"/>
       <source>Oil temperature</source>
-      <translation></translation>
+      <translation>Temperatura del aceite</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
       <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="106"/>
@@ -7332,22 +7297,22 @@ Tenga en cuenta que este menú solo muestra contadores de Carlo Gavazzi conectad
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="53"/>
       <source>Brief view unit</source>
       <extracomment>Show percentage values in Brief view</extracomment>
-      <translation></translation>
+      <translation>Vista breve de la unidad</translation>
     </message>
     <message id="settings_briefview_unit_none">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="56"/>
       <source>No labels</source>
-      <translation></translation>
+      <translation>Sin etiquetas</translation>
     </message>
     <message id="settings_briefview_unit_absolute">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="58"/>
       <source>Show tank volumes</source>
-      <translation></translation>
+      <translation>Mostrar volúmenes de los depósitos</translation>
     </message>
     <message id="settings_briefview_unit_percentages">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="60"/>
       <source>Show percentages</source>
-      <translation></translation>
+      <translation>Mostrar porcentajes</translation>
     </message>
     <message id="settings_enable_status_leds">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="175"/>
@@ -7419,12 +7384,12 @@ Tenga en cuenta que este menú solo muestra contadores de Carlo Gavazzi conectad
     <message id="settings_page_debug_display_cpu_usage">
       <location filename="../../pages/settings/debug/PageDebug.qml" line="45"/>
       <source>Display CPU usage</source>
-      <translation></translation>
+      <translation>Mostrar uso de la CPU</translation>
     </message>
     <message id="settings_display_minmax">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="162"/>
       <source>Minimum and maximum gauge ranges</source>
-      <translation></translation>
+      <translation>Rangos mínimo y máximo de los indicadores</translation>
     </message>
     <message id="common_words_maximum_current">
       <location filename="../../components/CommonWords.qml" line="238"/>
@@ -7434,12 +7399,12 @@ Tenga en cuenta que este menú solo muestra contadores de Carlo Gavazzi conectad
     <message id="common_words_maximum_power">
       <location filename="../../components/CommonWords.qml" line="241"/>
       <source>Maximum power</source>
-      <translation></translation>
+      <translation>Potencia máxima</translation>
     </message>
     <message id="common_words_minimum_current">
       <location filename="../../components/CommonWords.qml" line="250"/>
       <source>Minimum current</source>
-      <translation></translation>
+      <translation>Corriente mínima</translation>
     </message>
     <message id="inverterCharger_mode_passthrough">
       <location filename="../../data/InverterChargers.qml" line="82"/>
@@ -7450,53 +7415,122 @@ Tenga en cuenta que este menú solo muestra contadores de Carlo Gavazzi conectad
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="17"/>
       <source>Auto-ranging</source>
       <extracomment>Whether to adjust the min/max values in the range dynamically, based on the lowest and highest values observed on the system.</extracomment>
-      <translation></translation>
+      <translation>Autorregulado</translation>
     </message>
     <message id="settings_minmax_autorange_desc">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="25"/>
       <source>When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values.</source>
-      <translation></translation>
+      <translation>Si está habilitado, el mínimo y el máximo de los indicadores y los gráficos se ajustan automáticamente en función de valores anteriores.</translation>
     </message>
     <message id="settings_minmax_reset">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="32"/>
       <source>Reset all range values to zero</source>
-      <translation></translation>
+      <translation>Restablecer todos los valores del rango a cero</translation>
     </message>
     <message id="settings_minmax_ac_in_header_with_source">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
       <source>%1 (%2)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
-      <translation></translation>
+      <translation>%1 (%2)</translation>
     </message>
     <message id="settings_minmax_dc_input">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="109"/>
       <source>DC input</source>
       <translation>Entrada CC</translation>
     </message>
+    <message id="settings_minmax_dc_out">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="150"/>
+      <source>DC output</source>
+      <translation>Salida CC</translation>
+    </message>
+    <message id="settings_minmax_solar">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="162"/>
+      <source>Solar</source>
+      <translation>Solar</translation>
+    </message>
+    <message id="settings_units_amps_exceptions">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="28"/>
+      <source>Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead.</source>
+      <translation>Nota: Si no se puede mostrar la corriente (por ejemplo, cuando se muestra el total para las fuentes CA y CC combinadas) se mostrará la potencia.</translation>
+    </message>
+    <message id="settings_wifi_disable_ap">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="42"/>
+      <source>Reset Range Values</source>
+      <oldsource>Disable Access Point</oldsource>
+      <translation>Restablecer valores del rango</translation>
+    </message>
+    <message id="settings_minmax_reset_are_you_sure">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="44"/>
+      <source>Are you sure that you want to reset all the values to zero?</source>
+      <translation>¿Está seguro de que quiere volver a poner todos los valores a cero?</translation>
+    </message>
+    <message id="charger_alarms_high_temperature_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="51"/>
+      <source>High temperature alarm</source>
+      <translation>Alarma de temperatura alta</translation>
+    </message>
+    <message id="charger_alarms_short_circuit_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="60"/>
+      <source>Short circuit alarm</source>
+      <translation>Alarma de cortocircuito</translation>
+    </message>
+    <message id="settings_ess_self_consumption_battery">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="72"/>
+      <source>Self-consumption from battery</source>
+      <translation>Autoconsumo de la batería</translation>
+    </message>
+    <message id="settings_ess_all_system_loads">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="77"/>
+      <source>All system loads</source>
+      <translation>Todas las cargas del sistema</translation>
+    </message>
+    <message id="settings_ess_only_critical_loads">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="79"/>
+      <source>Only critical loads</source>
+      <translation>Solo las cargas críticas</translation>
+    </message>
     <message id="settings_minmax_acout_max_acin1">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="112"/>
-      <source>Maximum power: AC in 1 connected</source>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="127"/>
+      <source>Maximum current: AC in 1 connected</source>
       <translation></translation>
     </message>
     <message id="settings_minmax_acout_max_acin2">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="119"/>
-      <source>Maximum power: AC in 2 connected</source>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="135"/>
+      <source>Maximum current: AC in 2 connected</source>
       <translation></translation>
     </message>
     <message id="settings_minmax_acout_max">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="126"/>
-      <source>Maximum power: no AC inputs</source>
-      <translation></translation>
-    </message>
-    <message id="settings_minmax_dc_out">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="132"/>
-      <source>DC output</source>
-      <translation></translation>
-    </message>
-    <message id="settings_minmax_solar">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="143"/>
-      <source>Solar</source>
-      <translation>Solar</translation>
+      <source>Maximum current: no AC inputs</source>
+      <translation></translation>
+    </message>
+    <message id="evchargers_status_welded_contacts_error">
+      <location filename="../../data/EvChargers.qml" line="98"/>
+      <source>Welded contacts test error (shorted)</source>
+      <oldsource>Welded contacts error</oldsource>
+      <translation></translation>
+    </message>
+    <message id="evchargers_status_switching_to_three_phase">
+      <location filename="../../data/EvChargers.qml" line="122"/>
+      <source>Switching to 3 phase</source>
+      <oldsource>Switching to 3-phase</oldsource>
+      <translation></translation>
+    </message>
+    <message id="evchargers_status_switching_to_single_phase">
+      <location filename="../../data/EvChargers.qml" line="125"/>
+      <source>Switching to 1 phase</source>
+      <oldsource>Switching to single phase</oldsource>
+      <translation></translation>
+    </message>
+    <message id="evchargers_status_stop_charging">
+      <location filename="../../data/EvChargers.qml" line="128"/>
+      <source>Stop charging</source>
+      <translation>Detener la carga</translation>
+    </message>
+    <message id="evchargers_status_reserved">
+      <location filename="../../data/EvChargers.qml" line="132"/>
+      <source>Reserved</source>
+      <translation></translation>
     </message>
   </context>
   <context>

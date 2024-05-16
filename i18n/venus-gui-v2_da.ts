@@ -105,8 +105,8 @@
       <source>Press to check</source>
       <translation>Tryk for at tjekke</translation>
     </message>
-    <message id="settings_system_grid">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="18"/>
+    <message id="common_words_grid">
+      <location filename="../../components/CommonWords.qml" line="162"/>
       <source>Grid</source>
       <translation>Netværk</translation>
     </message>
@@ -116,14 +116,9 @@
       <translation>Sol produktion</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="132"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>External control</source>
       <translation>Ekstern styring</translation>
-    </message>
-    <message id="brief_loads">
-      <location filename="../../pages/BriefMonitorPanel.qml" line="284"/>
-      <source>Loads</source>
-      <translation>Belastninger</translation>
     </message>
     <message id="levels_page_tanks">
       <location filename="../../pages/LevelsPage.qml" line="53"/>
@@ -246,7 +241,7 @@
       <translation>Venus OS Large features</translation>
     </message>
     <message id="ess_battery_life_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="72"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="74"/>
       <source>Battery life limit: %1%</source>
       <translation>Grænse for batterilevetid: %1</translation>
     </message>
@@ -456,7 +451,7 @@
       <translation>Værdien skal være lavere end start værdien</translation>
     </message>
     <message id="settings_minmax_acout_max_power">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="121"/>
       <source>AC output</source>
       <translation>Vekselstrømsudgang</translation>
     </message>
@@ -951,7 +946,7 @@
       <translation>Effekt (watt)</translation>
     </message>
     <message id="settings_units_amps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="24"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="25"/>
       <source>Current (Amps)</source>
       <translation>Strøm (ampere)</translation>
     </message>
@@ -967,12 +962,12 @@
       <translation>Niveau %1</translation>
     </message>
     <message id="settings_units_celsius">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="42"/>
       <source>Celsius</source>
       <translation>Celsius</translation>
     </message>
     <message id="settings_units_fahrenheit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
       <source>Fahrenheit</source>
       <translation>Fahrenheit</translation>
     </message>
@@ -1619,27 +1614,27 @@ Hvis det ikke virker, tjek Sim-kortet på en telefon for at være sikker på det
       <translation>Inverter/oplader</translation>
     </message>
     <message id="settings_ess_inverter_ac_output_in_use">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="65"/>
       <source>Inverter AC output in use</source>
       <translation>Inverter AC output i brug</translation>
     </message>
     <message id="settings_ess_multiphase_regulation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="85"/>
       <source>Multiphase regulation</source>
       <translation>Multifase regulation</translation>
     </message>
     <message id="settings_ess_phase_compensation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="93"/>
       <source>Total of all phases</source>
       <translation>Total af alle phaser</translation>
     </message>
     <message id="settings_ess_individual_phase">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="95"/>
       <source>Individual phase</source>
       <translation>Individuel fase</translation>
     </message>
     <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="101"/>
       <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
 
 CAUTION: Use only if required by the utility provider.</source>
@@ -1648,7 +1643,7 @@ CAUTION: Use only if required by the utility provider.</source>
 FORSIGTIG: Må kun bruges, hvis det kræves af forsyningsleverandøren.</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="104"/>
       <source>The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).
 
 Use unless prohibited by the utility provider.</source>
@@ -1657,32 +1652,32 @@ Use unless prohibited by the utility provider.</source>
 Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
     </message>
     <message id="settings_ess_min_soc">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="113"/>
       <source>Minimum SOC (unless grid fails)</source>
       <translation>Minimum SoC (med mindre nettet fejler)</translation>
     </message>
     <message id="settings_ess_active_soc_limit">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="129"/>
       <source>Active SOC limit</source>
       <translation>Aktiv SoC grænse</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="138"/>
       <source>Peak shaving</source>
       <translation>Peak shaving</translation>
     </message>
     <message id="settings_ess_above_minimum_soc_only">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="150"/>
       <source>Above minimum SOC only</source>
       <translation>Kun over minimum SoC</translation>
     </message>
     <message id="settings_ess_always">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="138"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="152"/>
       <source>Always</source>
       <translation>Altid</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="158"/>
       <source>Use this option for peak shaving.
 
 The peak shaving threshold is set using the AC input current limit setting.
@@ -1695,57 +1690,57 @@ Den maksimale peak tærskel indstilles ved hjælp af indstillingen for AC-indgan
 Se dokumentation for yderligere information.</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="174"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="188"/>
       <source>Discharge disabled</source>
       <translation>Afladning deaktiveret</translation>
     </message>
     <message id="settings_ess_battery_life_slow_charge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="176"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="190"/>
       <source>Slow charge</source>
       <translation>Langsom ladning</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="138"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Sustain</source>
       <translation>Oprethold</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="141"/>
+      <location filename="../../data/System.qml" line="161"/>
       <source>Recharge</source>
       <translation>Opladning</translation>
     </message>
     <message id="settings_ess_limit_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="188"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="202"/>
       <source>Limit charge power</source>
       <translation>Begræns opladnings power</translation>
     </message>
     <message id="settings_ess_max_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="207"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="221"/>
       <source>Maximum charge power</source>
       <translation>Maksimum opladnings power</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="233"/>
       <source>Limit inverter power</source>
       <translation>Begræns inverter power</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="252"/>
       <source>Maximum inverter power</source>
       <translation>Maksimum inverter power</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="248"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="262"/>
       <source>Grid setpoint</source>
       <translation>Net setpoint</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="259"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="273"/>
       <source>Grid feed-in</source>
       <translation>Net feed-in</translation>
     </message>
     <message id="settings_ess_scheduled_charging">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="284"/>
       <source>Scheduled charging</source>
       <translation>Planlagt opladning</translation>
     </message>
@@ -1850,12 +1845,12 @@ Dokumentation på https://ve3.nl/vol</translation>
       <translation>Signal K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="38"/>
       <source>Node-RED</source>
       <translation>Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="47"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="45"/>
       <source>Enabled (safe mode)</source>
       <translation>Aktiveret (safe mode)</translation>
     </message>
@@ -2404,8 +2399,8 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <source>Connection lost</source>
       <translation>Forbindelse tabt</translation>
     </message>
-    <message id="evchargers_status_disconnected">
-      <location filename="../../data/EvChargers.qml" line="72"/>
+    <message id="settings_tcpip_connection_unplugged">
+      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="117"/>
       <source>Unplugged</source>
       <translation>Utilsluttet</translation>
     </message>
@@ -2519,11 +2514,6 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <source>Wi-Fi networks</source>
       <translation>Wi-fi netværk</translation>
     </message>
-    <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifiWithAccessPoint.qml" line="47"/>
-      <source>Disable Access Point</source>
-      <translation>Deaktiver Access point</translation>
-    </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
       <location filename="../../pages/settings/PageSettingsWifiWithAccessPoint.qml" line="49"/>
       <source>Are you sure that you want to disable the access point?</source>
@@ -2636,7 +2626,7 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <translation>Høj batteri volt alarm</translation>
     </message>
     <message id="charger_alarms_header_last_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="54"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="72"/>
       <source>Last Errors</source>
       <extracomment>Details of most recent errors</extracomment>
       <translation>Sidste fejl</translation>
@@ -2676,7 +2666,7 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <translation>Tilstandsvælger</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="97"/>
+      <location filename="../../data/SystemSettings.qml" line="100"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>Standalone</translation>
@@ -2717,7 +2707,7 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <translation>Master indstilling</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="81"/>
+      <location filename="../../data/SystemSettings.qml" line="84"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>Slave</translation>
@@ -2759,19 +2749,19 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <translation>Indlæs</translation>
     </message>
     <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="143"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="144"/>
       <source>%1 found</source>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>%1 fundet</translation>
     </message>
     <message id="charger_history_name">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="174"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="181"/>
       <source>%1 History</source>
       <extracomment>Solar charger historic data information. %1 = charger name</extracomment>
       <translation>%1 Historie</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="182"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="189"/>
       <source>Networked operation</source>
       <translation>Netværks tilstand</translation>
     </message>
@@ -2813,7 +2803,7 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <translation>Alarm</translation>
     </message>
     <message id="components_volumeunit_volume">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="56"/>
       <source>Volume</source>
       <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
       <translation>Størrelse</translation>
@@ -3185,8 +3175,8 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <source>High discharge current</source>
       <translation>Høj afladningsstrøm</translation>
     </message>
-    <message id="batteryalarms_low_soc">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
+    <message id="evchargers_status_low_state_of_charge">
+      <location filename="../../data/EvChargers.qml" line="92"/>
       <source>Low SOC</source>
       <translation>Lav SoC</translation>
     </message>
@@ -3493,22 +3483,22 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <translation>Strøm Offset</translation>
     </message>
     <message id="batterysettingsbattery_synchronise_state_of_charge_to_100%">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="146"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="145"/>
       <source>Synchronise state-of-charge to 100%</source>
       <translation>Synkroniser State-of-Charge til 100%</translation>
     </message>
     <message id="batterysettingsbattery_press_to_sync">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="148"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="147"/>
       <source>Press to sync</source>
       <translation>Tryk for synk.</translation>
     </message>
     <message id="batterysettingsbattery_calibrate_zero_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="160"/>
       <source>Calibrate zero current</source>
       <translation>Kalibrer nul strøm</translation>
     </message>
     <message id="batterysettingsbattery_press_to_set_to_0">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="163"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="162"/>
       <source>Press to set to 0</source>
       <translation>Tryk for at sætte til 0</translation>
     </message>
@@ -4578,12 +4568,12 @@ Første gang du bruger den? Sørg for enten at indstille eller deaktivere adgang
       <translation>Offset</translation>
     </message>
     <message id="temperature_scale">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="49"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="48"/>
       <source>Scale</source>
       <translation>Skala</translation>
     </message>
     <message id="temperature_sensor_voltage">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="58"/>
       <source>Sensor voltage</source>
       <translation>Sensor volt</translation>
     </message>
@@ -5219,9 +5209,10 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Discharging</source>
       <translation>Aflader</translation>
     </message>
-    <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="283"/>
+    <message id="evchargers_status_disconnected">
+      <location filename="../../data/EvChargers.qml" line="72"/>
       <source>Disconnected</source>
+      <oldsource>Unplugged</oldsource>
       <translation>Afbrudt.</translation>
     </message>
     <message id="common_words_enable">
@@ -5264,11 +5255,6 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <location filename="../../data/DigitalInputs.qml" line="46"/>
       <source>Generator</source>
       <translation>Generator</translation>
-    </message>
-    <message id="common_words_grid_meter">
-      <location filename="../../components/CommonWords.qml" line="162"/>
-      <source>Grid meter</source>
-      <translation>Net måler</translation>
     </message>
     <message id="common_words_high_battery_temperature">
       <location filename="../../components/CommonWords.qml" line="165"/>
@@ -5625,8 +5611,8 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Unique Identity Number</source>
       <translation>Unikt identitetsnummer</translation>
     </message>
-    <message id="temperature_type_unknown">
-      <location filename="../../data/EnvironmentInputs.qml" line="28"/>
+    <message id="evchargers_status_unknown">
+      <location filename="../../data/EvChargers.qml" line="135"/>
       <source>Unknown</source>
       <translation>Ukendt</translation>
     </message>
@@ -5697,18 +5683,18 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Stop nu</translation>
     </message>
     <message id="controlcard_generator_stopdialog_total_run_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="49"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="51"/>
       <source>Total Run Time</source>
       <translation>Total køretid</translation>
     </message>
     <message id="controlcard_generator_stopdialog_set_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="67"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="70"/>
       <source>Set Time %1</source>
       <extracomment>%1 = the total time (in hours, minutes, seconds) that the generator will run for, as set by the user</extracomment>
       <translation>Indstil tid %1</translation>
     </message>
     <message id="controlcard_generator_stopdialog_description">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="79"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="84"/>
       <source>Generator will keep running if an autostart condition is met.</source>
       <translation>Generatoren vil fortsætte med at køre, hvis en autostart-betingelse er opfyldt.</translation>
     </message>
@@ -5784,12 +5770,6 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Swap</source>
       <extracomment>Confirm that the two devices' instance number should be swapped.</extracomment>
       <translation>Bytte</translation>
-    </message>
-    <message id="environment_gauge_humidity">
-      <location filename="../../components/EnvironmentGaugePanel.qml" line="82"/>
-      <source>RH</source>
-      <extracomment>Abbreviation of "Room Humidity"</extracomment>
-      <translation>RH</translation>
     </message>
     <message id="settings_firmware_error_during_checking_for_updates">
       <location filename="../../components/FirmwareUpdate.qml" line="35"/>
@@ -5893,7 +5873,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Forkert adgangskode</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../pages/BriefPage.qml" line="143"/>
+      <location filename="../../pages/BriefPage.qml" line="135"/>
       <source>Brief</source>
       <translation>Kort</translation>
     </message>
@@ -5913,19 +5893,19 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Meddelelser</translation>
     </message>
     <message id="utils_formatTimestamp_now">
-      <location filename="../../components/Utils.js" line="241"/>
+      <location filename="../../components/Utils.js" line="250"/>
       <source>now</source>
       <extracomment>Indicates an event happened very recently</extracomment>
       <translation>Nu</translation>
     </message>
     <message id="utils_formatTimestamp_min_ago">
-      <location filename="../../components/Utils.js" line="246"/>
+      <location filename="../../components/Utils.js" line="255"/>
       <source>%1m ago</source>
       <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>For 1 måned siden</translation>
     </message>
     <message id="utils_formatTimestamp_hours_min_ago">
-      <location filename="../../components/Utils.js" line="253"/>
+      <location filename="../../components/Utils.js" line="262"/>
       <source>%1h %2m ago</source>
       <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>%1h %2m ago</translation>
@@ -6282,7 +6262,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Afbrudt, forsøger at genoprette forbindelsen</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="269"/>
+      <location filename="../../components/Utils.js" line="278"/>
       <source>Connecting</source>
       <translation>Forbinder...</translation>
     </message>
@@ -6357,47 +6337,47 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>min</translation>
     </message>
     <message id="utils_format_days_hours">
-      <location filename="../../components/Utils.js" line="181"/>
+      <location filename="../../components/Utils.js" line="190"/>
       <source>%1d %2h</source>
       <translation>%1d %2t</translation>
     </message>
     <message id="utils_format_hours_min">
-      <location filename="../../components/Utils.js" line="186"/>
+      <location filename="../../components/Utils.js" line="195"/>
       <source>%1h %2m</source>
       <translation>%1t %2m</translation>
     </message>
     <message id="utils_format_min_sec">
-      <location filename="../../components/Utils.js" line="207"/>
+      <location filename="../../components/Utils.js" line="216"/>
       <source>%1m %2s</source>
       <translation>%1m %2s</translation>
     </message>
     <message id="utils_format_min">
-      <location filename="../../components/Utils.js" line="209"/>
+      <location filename="../../components/Utils.js" line="218"/>
       <source>%1m</source>
       <translation>%1m</translation>
     </message>
     <message id="utils_format_sec">
-      <location filename="../../components/Utils.js" line="213"/>
+      <location filename="../../components/Utils.js" line="222"/>
       <source>%1s</source>
       <translation>%1s</translation>
     </message>
     <message id="utils_zero_minutes">
-      <location filename="../../components/Utils.js" line="215"/>
+      <location filename="../../components/Utils.js" line="224"/>
       <source>0m</source>
       <translation>0m</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="266"/>
+      <location filename="../../components/Utils.js" line="275"/>
       <source>Failure</source>
       <translation>Fejl</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="272"/>
+      <location filename="../../components/Utils.js" line="281"/>
       <source>Retrieving IP address</source>
       <translation>Henter IP adresse</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="279"/>
+      <location filename="../../components/Utils.js" line="288"/>
       <source>Disconnect</source>
       <translation>Afbrudt</translation>
     </message>
@@ -6423,27 +6403,27 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Vind</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="76"/>
+      <location filename="../../data/AcInputs.qml" line="82"/>
       <source>Shore</source>
       <translation>Kyst</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="100"/>
+      <location filename="../../data/AcInputs.qml" line="106"/>
       <source>Grid current limit</source>
       <translation>Grænse for netstrøm</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="103"/>
+      <location filename="../../data/AcInputs.qml" line="109"/>
       <source>Generator current limit</source>
       <translation>Generatorens strømbegrænsning</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="106"/>
+      <location filename="../../data/AcInputs.qml" line="112"/>
       <source>Shore current limit</source>
       <translation>Grænse for landstrøm</translation>
     </message>
     <message id="acInputs_current_limit_unrecognized">
-      <location filename="../../data/AcInputs.qml" line="110"/>
+      <location filename="../../data/AcInputs.qml" line="116"/>
       <source>Unrecognized current limit</source>
       <translation>Ikke-erkendt strømgrænse</translation>
     </message>
@@ -6571,62 +6551,47 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Venter på start</translation>
     </message>
     <message id="evchargers_status_ground_test_error">
-      <location filename="../../data/EvChargers.qml" line="94"/>
+      <location filename="../../data/EvChargers.qml" line="95"/>
       <source>Ground test error</source>
       <translation>Fejl i jordtest</translation>
     </message>
-    <message id="evchargers_status_welded_contacts_error">
-      <location filename="../../data/EvChargers.qml" line="97"/>
-      <source>Welded contacts error</source>
-      <translation>Svejst kontakt fejl</translation>
-    </message>
     <message id="evchargers_status_cp_input_test_error">
-      <location filename="../../data/EvChargers.qml" line="100"/>
+      <location filename="../../data/EvChargers.qml" line="101"/>
       <source>CP input test error</source>
       <translation>CP input test fejl</translation>
     </message>
     <message id="evchargers_status_residual_current_detected">
-      <location filename="../../data/EvChargers.qml" line="103"/>
+      <location filename="../../data/EvChargers.qml" line="104"/>
       <source>Residual current detected</source>
       <translation>Fejlstrøm opdaget</translation>
     </message>
     <message id="evchargers_status_undervoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="106"/>
+      <location filename="../../data/EvChargers.qml" line="107"/>
       <source>Undervoltage detected</source>
       <translation>Undervolt opdget</translation>
     </message>
     <message id="evchargers_status_overvoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="109"/>
+      <location filename="../../data/EvChargers.qml" line="110"/>
       <source>Overvoltage detected</source>
       <translation>Overvolt opdaget</translation>
     </message>
     <message id="evchargers_status_overheating_detected">
-      <location filename="../../data/EvChargers.qml" line="112"/>
+      <location filename="../../data/EvChargers.qml" line="113"/>
       <source>Overheating detected</source>
       <translation>Overophedning opdaget</translation>
     </message>
     <message id="evchargers_status_charging_limit">
-      <location filename="../../data/EvChargers.qml" line="115"/>
+      <location filename="../../data/EvChargers.qml" line="116"/>
       <source>Charging limit</source>
       <translation>Lade grænse</translation>
     </message>
     <message id="evchargers_status_start_charging">
-      <location filename="../../data/EvChargers.qml" line="118"/>
+      <location filename="../../data/EvChargers.qml" line="119"/>
       <source>Start charging</source>
       <translation>Start opladning</translation>
     </message>
-    <message id="evchargers_status_switching_to_three_phase">
-      <location filename="../../data/EvChargers.qml" line="121"/>
-      <source>Switching to 3-phase</source>
-      <translation>Skifter til 3 faser</translation>
-    </message>
-    <message id="evchargers_status_switching_to_single_phase">
-      <location filename="../../data/EvChargers.qml" line="124"/>
-      <source>Switching to single phase</source>
-      <translation>Skifter til enkelt fase</translation>
-    </message>
     <message id="evchargers_mode_scheduled">
-      <location filename="../../data/EvChargers.qml" line="138"/>
+      <location filename="../../data/EvChargers.qml" line="148"/>
       <source>Scheduled</source>
       <translation>Planlagt</translation>
     </message>
@@ -6737,125 +6702,125 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Udjævn</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="74"/>
+      <location filename="../../data/System.qml" line="94"/>
       <source>AES mode</source>
       <translation>AES tilstand</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="77"/>
+      <location filename="../../data/System.qml" line="97"/>
       <source>Fault condition</source>
       <translation>Fejltilstand</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="80"/>
+      <location filename="../../data/System.qml" line="100"/>
       <source>Bulk charging</source>
       <translation>Opladning i løs vægt</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="83"/>
+      <location filename="../../data/System.qml" line="103"/>
       <source>Absorption charging</source>
       <translation>Opladning af absorption</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="86"/>
+      <location filename="../../data/System.qml" line="106"/>
       <source>Float charging</source>
       <translation>Opladning af flyder</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="89"/>
+      <location filename="../../data/System.qml" line="109"/>
       <source>Storage mode</source>
       <translation>Storage mode</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="92"/>
+      <location filename="../../data/System.qml" line="112"/>
       <source>Equalization charging</source>
       <translation>Udligningsopladning</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="95"/>
+      <location filename="../../data/System.qml" line="115"/>
       <source>Pass-thru</source>
       <translation>Pass-thru</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="98"/>
+      <location filename="../../data/System.qml" line="118"/>
       <source>Inverting</source>
       <translation>Inverting</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="101"/>
+      <location filename="../../data/System.qml" line="121"/>
       <source>Assisting</source>
       <translation>Hjælpende</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="104"/>
+      <location filename="../../data/System.qml" line="124"/>
       <source>Power supply mode</source>
       <translation>Strømforsyningstilstand</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="111"/>
+      <location filename="../../data/System.qml" line="131"/>
       <source>Wake up</source>
       <translation>Vågn op</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="114"/>
+      <location filename="../../data/System.qml" line="134"/>
       <source>Repeated absorption</source>
       <translation>Gentagne Absorbering</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="117"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>Auto equalize</source>
       <translation>Automatisk udligning</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="120"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Battery safe</source>
       <translation>Spar batteri</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="123"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Load detect</source>
       <translation>Registrering af belastning</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="126"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Blocked</source>
       <translation>Blokeret</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="129"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_scheduledrecharge">
-      <location filename="../../data/System.qml" line="144"/>
+      <location filename="../../data/System.qml" line="164"/>
       <source>Scheduled recharge</source>
       <translation>Planlagt genopladning</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="147"/>
+      <location filename="../../data/System.qml" line="167"/>
       <source>Dynamic ESS</source>
       <translation>Dynamisk ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="85"/>
+      <location filename="../../data/SystemSettings.qml" line="88"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>Gruppe Master</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="89"/>
+      <location filename="../../data/SystemSettings.qml" line="92"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>Enheds Master</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="93"/>
+      <location filename="../../data/SystemSettings.qml" line="96"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>Gruppe &amp; ensheds master</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="101"/>
+      <location filename="../../data/SystemSettings.qml" line="104"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>Standalone &amp; gruppe master</translation>
@@ -7164,25 +7129,25 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>En alarm udløses, når autostart-funktionen er deaktiveret i mere end 10 minutter.</translation>
     </message>
     <message id="settings_ess_do_not_perform_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="161"/>
       <source>Use this option in systems that do not perform peak shaving</source>
       <oldsource>Use this option in systems that do not perform peak shaving.</oldsource>
       <translation>Brug denne indstilling i systemer, der ikke udfører peak shaving.</translation>
     </message>
     <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="176"/>
       <source>Battery life state</source>
       <oldsource>BatteryLife state</oldsource>
       <translation>Status for batteriets levetid</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="31"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="30"/>
       <source>Access Signal K at http://venus.local:3000 and via VRM.</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM</oldsource>
       <translation>Få adgang til Signal K på http://venus.local:3000 og via VRM.</translation>
     </message>
     <message id="settings_large_access_node_red">
-      <location filename="../../pages/settings/PageSettingsLarge.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsLarge.qml" line="51"/>
       <source>Access Node-RED at https://venus.local:1881 and via VRM.</source>
       <oldsource>Access Node-RED at https://venus.local:1881 and via VRM</oldsource>
       <translation>Få adgang til Node-RED på https://venus.local:1881 og via VRM.</translation>
@@ -7218,7 +7183,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>BMS kontrolleret</translation>
     </message>
     <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="138"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="139"/>
       <source>Alarms &amp; Errors</source>
       <oldsource>Alarms and Errors</oldsource>
       <translation>Alarmer og fejl</translation>
@@ -7464,40 +7429,109 @@ Bemærk, at denne menu kun viser Carlo Gavazzi-målere, der er tilsluttet via RS
       <translation>Nulstil alle områdets værdier til nul</translation>
     </message>
     <message id="settings_minmax_ac_in_header_with_source">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
       <source>%1 (%2)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
       <translation>%1 (%2)</translation>
     </message>
     <message id="settings_minmax_dc_input">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="109"/>
       <source>DC input</source>
       <translation>DC-indgang</translation>
     </message>
-    <message id="settings_minmax_acout_max_acin1">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="112"/>
-      <source>Maximum power: AC in 1 connected</source>
-      <translation>Maksimal effekt: AC i 1 tilsluttet</translation>
-    </message>
-    <message id="settings_minmax_acout_max_acin2">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="119"/>
-      <source>Maximum power: AC in 2 connected</source>
-      <translation>Maksimal effekt: AC i 2 tilsluttede</translation>
-    </message>
-    <message id="settings_minmax_acout_max">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="126"/>
-      <source>Maximum power: no AC inputs</source>
-      <translation>Maksimal effekt: ingen AC-indgange</translation>
-    </message>
     <message id="settings_minmax_dc_out">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="150"/>
       <source>DC output</source>
       <translation>DC-udgang</translation>
     </message>
     <message id="settings_minmax_solar">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="162"/>
       <source>Solar</source>
       <translation>Solenergi</translation>
+    </message>
+    <message id="settings_units_amps_exceptions">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="28"/>
+      <source>Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead.</source>
+      <translation>Bemærk: Hvis strøm ikke kan vises (f.eks. når der vises en total for kombinerede AC- og DC-kilder), vises effekt i stedet.</translation>
+    </message>
+    <message id="settings_wifi_disable_ap">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="42"/>
+      <source>Reset Range Values</source>
+      <oldsource>Disable Access Point</oldsource>
+      <translation>Nulstil områdeværdier</translation>
+    </message>
+    <message id="settings_minmax_reset_are_you_sure">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="44"/>
+      <source>Are you sure that you want to reset all the values to zero?</source>
+      <translation>Er du sikker på, at du vil nulstille alle værdier?</translation>
+    </message>
+    <message id="charger_alarms_high_temperature_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="51"/>
+      <source>High temperature alarm</source>
+      <translation>Høj temperatur alarm</translation>
+    </message>
+    <message id="charger_alarms_short_circuit_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="60"/>
+      <source>Short circuit alarm</source>
+      <translation>Kortslutnings alarm</translation>
+    </message>
+    <message id="settings_ess_self_consumption_battery">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="72"/>
+      <source>Self-consumption from battery</source>
+      <translation>Selvforbrug fra batteri</translation>
+    </message>
+    <message id="settings_ess_all_system_loads">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="77"/>
+      <source>All system loads</source>
+      <translation>Alle systembelastninger</translation>
+    </message>
+    <message id="settings_ess_only_critical_loads">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="79"/>
+      <source>Only critical loads</source>
+      <translation>Kun kritiske belastninger</translation>
+    </message>
+    <message id="settings_minmax_acout_max_acin1">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="127"/>
+      <source>Maximum current: AC in 1 connected</source>
+      <translation>Maksimal strømstyrke: AC i 1 tilsluttet</translation>
+    </message>
+    <message id="settings_minmax_acout_max_acin2">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="135"/>
+      <source>Maximum current: AC in 2 connected</source>
+      <translation>Maksimal strømstyrke: AC i 2 tilsluttede</translation>
+    </message>
+    <message id="settings_minmax_acout_max">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="143"/>
+      <source>Maximum current: no AC inputs</source>
+      <translation>Maksimal strøm: ingen AC-indgange</translation>
+    </message>
+    <message id="evchargers_status_welded_contacts_error">
+      <location filename="../../data/EvChargers.qml" line="98"/>
+      <source>Welded contacts test error (shorted)</source>
+      <oldsource>Welded contacts error</oldsource>
+      <translation>Testfejl for svejsede kontakter (kortsluttet)</translation>
+    </message>
+    <message id="evchargers_status_switching_to_three_phase">
+      <location filename="../../data/EvChargers.qml" line="122"/>
+      <source>Switching to 3 phase</source>
+      <oldsource>Switching to 3-phase</oldsource>
+      <translation>Skift til 3-fase</translation>
+    </message>
+    <message id="evchargers_status_switching_to_single_phase">
+      <location filename="../../data/EvChargers.qml" line="125"/>
+      <source>Switching to 1 phase</source>
+      <oldsource>Switching to single phase</oldsource>
+      <translation>Skift til 1 fase</translation>
+    </message>
+    <message id="evchargers_status_stop_charging">
+      <location filename="../../data/EvChargers.qml" line="128"/>
+      <source>Stop charging</source>
+      <translation>Stop opladning</translation>
+    </message>
+    <message id="evchargers_status_reserved">
+      <location filename="../../data/EvChargers.qml" line="132"/>
+      <source>Reserved</source>
+      <translation>Reserveret</translation>
     </message>
   </context>
   <context>
