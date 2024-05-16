@@ -15,12 +15,18 @@ QtObject {
 			? Global.inverterChargers.inverterChargerModeToText(_modeItem.value)
 			: Global.inverterChargers.inverterModeToText(_modeItem.value)
 
+	readonly property bool isMulti: _numberOfAcInputs.value === undefined ? false : (_numberOfAcInputs.value > 0)
+
 	property VeQuickItem _isInverterChargerItem: VeQuickItem {
 		uid: root.serviceUid + "/IsInverterCharger"
 	}
 
 	property VeQuickItem _modeItem: VeQuickItem {
 		uid: root.serviceUid + "/Mode"
+	}
+
+	readonly property VeQuickItem _numberOfAcInputs: VeQuickItem {
+		uid: root.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
 	property Component _inverterModeDialogComponent: Component {
@@ -31,6 +37,7 @@ QtObject {
 
 	property Component _inverterChargerModeDialogComponent: Component {
 		InverterChargerModeDialog {
+			isMulti: root.isMulti
 			onAccepted: root._modeItem.setValue(mode)
 		}
 	}

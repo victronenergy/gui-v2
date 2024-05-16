@@ -71,6 +71,7 @@ Loader {
 		id: modeDialogComponent
 
 		InverterChargerModeDialog {
+			isMulti: root.isMulti
 			onAccepted: root.veBusDevice.setMode(mode)
 		}
 	}
