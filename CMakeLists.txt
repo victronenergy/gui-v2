@@ -1023,8 +1023,7 @@ endif()
 qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
     BIG_RESOURCES
     FILES
-        fonts/MuseoSans-500.otf
-        fonts/MuseoSans-500-monospaced-digits.otf
+        fonts/Roboto-Regular.ttf
         images/acloads.svg
         images/alternator.svg
         images/icon_battery_24.svg
