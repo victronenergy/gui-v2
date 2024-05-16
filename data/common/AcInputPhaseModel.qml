@@ -15,7 +15,10 @@ ListModel {
 		if (phaseIndex < 0 || phaseIndex >= count) {
 			return
 		}
-		const v = propertyValue === undefined ? NaN : Global.acInputs.clampMeasurement(propertyValue)
+
+		const v = propertyValue === undefined ? NaN
+				: (Global.acInputs ? Global.acInputs.clampMeasurement(propertyValue) : propertyValue)
+
 		setProperty(phaseIndex, propertyName, v)
 		phaseValueChanged(phaseIndex, propertyName, v)
 	}
