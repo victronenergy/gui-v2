@@ -545,7 +545,8 @@ public:
 		Evcs_Status_ChargingLimit = 20,
 		Evcs_Status_StartCharging,
 		Evcs_Status_SwitchingToThreePhase,
-		Evcs_Status_SwitchingToSinglePhase
+		Evcs_Status_SwitchingToSinglePhase,
+		Evcs_Status_StopCharging
 	};
 	Q_ENUM(Evcs_Status)
 

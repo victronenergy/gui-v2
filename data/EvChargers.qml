@@ -68,7 +68,7 @@ QtObject {
 	function chargerStatusToText(status) {
 		switch (status) {
 		case VenusOS.Evcs_Status_Disconnected:
-			//% "Unplugged"
+			//% "Disconnected"
 			return qsTrId("evchargers_status_disconnected")
 		case VenusOS.Evcs_Status_Connected:
 			//% "Connected"
@@ -88,12 +88,13 @@ QtObject {
 			//% "Waiting for start"
 			return qsTrId("evchargers_status_waiting_for_start")
 		case VenusOS.Evcs_Status_LowStateOfCharge:
-			return CommonWords.low_state_of_charge
+			//% "Low SOC"
+			return qsTrId("evchargers_status_low_state_of_charge")
 		case VenusOS.Evcs_Status_GroundTestError:
 			//% "Ground test error"
 			return qsTrId("evchargers_status_ground_test_error")
 		case VenusOS.Evcs_Status_WeldedContactsError:
-			//% "Welded contacts error"
+			//% "Welded contacts test error (shorted)"
 			return qsTrId("evchargers_status_welded_contacts_error")
 		case VenusOS.Evcs_Status_CpInputTestError:
 			//% "CP input test error"
@@ -113,17 +114,26 @@ QtObject {
 		case VenusOS.Evcs_Status_ChargingLimit:
 			//% "Charging limit"
 			return qsTrId("evchargers_status_charging_limit")
-		case VenusOS.Evcs_status_StartCharging:
+		case VenusOS.Evcs_Status_StartCharging:
 			//% "Start charging"
 			return qsTrId("evchargers_status_start_charging")
-		case VenusOS.Evcs_status_SwitchingToThreePhase:
-			//% "Switching to 3-phase"
+		case VenusOS.Evcs_Status_SwitchingToThreePhase:
+			//% "Switching to 3 phase"
 			return qsTrId("evchargers_status_switching_to_three_phase")
-		case VenusOS.Evcs_status_SwitchingToSinglePhase:
-			//% "Switching to single phase"
+		case VenusOS.Evcs_Status_SwitchingToSinglePhase:
+			//% "Switching to 1 phase"
 			return qsTrId("evchargers_status_switching_to_single_phase")
+		case VenusOS.Evcs_Status_StopCharging:
+			//% "Stop charging"
+			return qsTrId("evchargers_status_stop_charging")
 		default:
-			return ""
+			if (status > VenusOS.Evcs_Status_OverheatingDetected && status < VenusOS.Evcs_Status_ChargingLimit) {
+				//% "Reserved"
+				return qsTrId("evchargers_status_reserved")
+			} else {
+				//% "Unknown"
+				return qsTrId("evchargers_status_unknown")
+			}
 		}
 	}
 
