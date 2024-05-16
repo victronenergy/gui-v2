@@ -20,6 +20,7 @@ BarGauge {
 		height: 2
 		color: Theme.color_levelsPage_gauge_separatorBarColor
 		y: parent.height/4
+		z: 5
 	}
 
 	Rectangle {
@@ -27,6 +28,7 @@ BarGauge {
 		height: 2
 		color: Theme.color_levelsPage_gauge_separatorBarColor
 		y: 2*parent.height/4
+		z: 5
 	}
 
 	Rectangle {
@@ -34,11 +36,13 @@ BarGauge {
 		height: 2
 		color: Theme.color_levelsPage_gauge_separatorBarColor
 		y: 3*parent.height/4
+		z: 5
 	}
 
 	CP.ColorImage {
 		anchors.horizontalCenter: parent.horizontalCenter
 		y: (root.height / 4 / 2) - (height / 2)
+		z: 5
 
 		visible: !root.isGrouped
 				 && ((root.valueType === VenusOS.Gauges_ValueType_FallingPercentage && value <= 0.05)
