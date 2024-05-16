@@ -23,12 +23,15 @@ OverviewWidget {
 	readonly property int _normalizedStateOfCharge: Math.round(batteryData.stateOfCharge || 0)
 	readonly property bool _animationReady: animationEnabled && !isNaN(batteryData.stateOfCharge)
 
-	// Calculate whether current and power quantities fit on the footer together, if not use smaller font.
+	// Calculate whether voltage, current and power quantities fit on the footer together, if not use smaller font.
 	// Discharging battery has negative amperes and its not unusual for the watts to be in the 1k+ range.
-	// No need to do the same check for the shorter voltage label on the left.
-	readonly property bool _useSmallFont: root.width/2 - 2*batteryPowerDisplay.anchors.rightMargin
-										  < quantityLabelWidth(batteryCurrentDisplay.valueText, batteryCurrentDisplay.unitText)/2
-										  + quantityLabelWidth(batteryPowerDisplay.valueText, batteryPowerDisplay.unitText)
+	readonly property bool _useSmallFont: !quantityLabelFits(batteryVoltageDisplay) || !quantityLabelFits(batteryPowerDisplay)
+
+	function quantityLabelFits(label) {
+		return root.width/2 - 2*Theme.geometry_overviewPage_widget_content_horizontalMargin
+			> quantityLabelWidth(batteryCurrentDisplay.valueText, batteryCurrentDisplay.unitText)/2
+			+ quantityLabelWidth(label.valueText, label.unitText)
+	}
 
 	function quantityLabelWidth(valueText, unitText){
 		const valueTextRect = quantityLabelFont.tightBoundingRect(valueText)
