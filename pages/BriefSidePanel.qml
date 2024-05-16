@@ -137,18 +137,11 @@ exported power v  0.4 |   /
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			belowThresholdFillColor: _graphShowsFeedIn ? Theme.color_green : Theme.color_blue
 			initialModelValue: 0
-			threshold: {
-				// For a system with a min current below zero (i.e. it sometimes exports), the
-				// threshold is the 0 amp mark within the min/max range.
-				if (acInputGraphRange.minimumCurrent < 0) {
-					const range = acInputGraphRange.maximumCurrent - acInputGraphRange.minimumCurrent
-					if (range !== 0) {
-						return Math.abs(acInputGraphRange.minimumCurrent) / range
-					}
-				}
-				// For a system that only imports, no threshold is required.
-				return 0
-			}
+
+			// For a system that only imports, no threshold is required.
+			// For a system that sometimes exports (i.e. can have values below zero), the threshold
+			// is the mid-point, which should be zero.
+			threshold: isNaN(acInputGraphRange.maximumAboveZeroMidPoint) ? 0 : 0.5
 
 			onNextValueRequested: {
 				const graphMin = acInputGraphRange.minimumCurrent || 0
@@ -165,9 +158,21 @@ exported power v  0.4 |   /
 			AcPhasesCurrentRange {
 				id: acInputGraphRange
 
+				// If the graph values may go below zero (i.e. it shows both import and export
+				// values) then use a min/max range that allows the mid-point to be zero. To do
+				// this, find the maximum range to be shown above or below the mid-point.
+				readonly property real maximumAboveZeroMidPoint: Global.acInputs.activeInputInfo.minimumCurrent < 0
+						&& Global.acInputs.activeInputInfo.maximumCurrent > 0
+					? Math.max(Math.abs(Global.acInputs.activeInputInfo.minimumCurrent), Global.acInputs.activeInputInfo.maximumCurrent)
+					: NaN
+
 				phaseModel: root.visible ? Global.acInputs.activeInput.phases : null
-				minimumCurrent: Global.acInputs.activeInputInfo.minimumCurrent
-				maximumCurrent: Global.acInputs.activeInputInfo.maximumCurrent
+				minimumCurrent: isNaN(maximumAboveZeroMidPoint)
+								? Global.acInputs.activeInputInfo.minimumCurrent
+								: -maximumAboveZeroMidPoint
+				maximumCurrent: isNaN(maximumAboveZeroMidPoint)
+								? Global.acInputs.activeInputInfo.maximumCurrent
+								: maximumAboveZeroMidPoint
 			}
 		}
 
