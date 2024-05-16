@@ -114,7 +114,9 @@ QtObject {
 						_minimumCurrent.setValue(-20)
 					}
 					if (isNaN(_maximumCurrent.value)) {
-						_maximumCurrent.setValue(20)
+						// Use a max bigger than 20 to check the side panel graph is still
+						// symmetrical above and below the threshold.
+						_maximumCurrent.setValue(40)
 					}
 				}
 			}
