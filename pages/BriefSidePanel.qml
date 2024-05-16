@@ -18,7 +18,7 @@ ColumnLayout {
 		title: qsTrId("brief_solar_yield")
 		icon.source: "qrc:/images/solaryield.svg"
 		loadersActive: Global.solarChargers.model.count > 0 && Global.pvInverters.model.count === 0
-		visible: loadersActive
+		visible: Global.solarChargers.model.count || Global.pvInverters.model.count
 		quantityLabel.dataObject: Global.system.solar
 		sideComponent: SolarYieldGraph {}
 	}
