@@ -143,16 +143,5 @@ Window {
 		}
 	}
 
-	FontLoader {
-		id: fontLoader
-
-		source: Language.fontFileUrl
-		Component.onCompleted: Global.fontLoader = fontLoader
-	}
-
-	FontLoader {
-		source: "qrc:/fonts/MuseoSans-500-monospaced-digits.otf"
-	}
-
 	FrameRateVisualizer {}
 }

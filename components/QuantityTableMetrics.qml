@@ -17,7 +17,7 @@ FontMetrics {
 	// Eg. label columns with cells like "L1", "L2" can be thinner to allow wider columns elsewhere.
 	property int firstColumnWidth
 
-	font.family: Global.fontLoader.name
+	font.family: Global.fontFamily
 	font.pixelSize: smallTextMode ? Theme.font_size_body2 : Theme.font_size_body3
 
 	function columnWidth(unit) {

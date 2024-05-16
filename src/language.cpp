@@ -25,7 +25,7 @@ QUrl fontUrlForLanguage(QLocale::Language language)
 		{ QLocale::Thai, QStringLiteral("NotoSansThai.ttf") },
 	};
 
-	static const QUrl defaultFontUrl = QUrl("qrc:/fonts/MuseoSans-500.otf");
+	static const QUrl defaultFontUrl = QUrl("qrc:/fonts/Roboto-Regular.ttf");
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	Q_UNUSED(language);

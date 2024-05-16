@@ -40,7 +40,7 @@ OverviewWidget {
 	FontMetrics {
 		id: quantityLabelFont
 		font.pixelSize: Theme.font_size_body2
-		font.family: "Museo Sans 500 Mono digits"
+		font.family: Global.quantityFontFamily
 	}
 
 	title: CommonWords.battery
