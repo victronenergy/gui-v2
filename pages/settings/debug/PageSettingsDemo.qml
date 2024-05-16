@@ -112,6 +112,7 @@ Page {
 			ListTextGroup {
 				text: "Multiple texts"
 				textModel: ["204.07V", "4.7A", "950W"]
+				alignGroupColumns: true
 			}
 
 			ListQuantityItem {

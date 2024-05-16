@@ -19,6 +19,7 @@ Page {
 		let summary = []
 		let url = ""
 		let params = ""
+		let alignGroupColumns = false
 
 		if (!serviceType || !device || !sourceModel) {
 			return null
@@ -56,6 +57,7 @@ Page {
 				Units.getCombinedDisplayText(VenusOS.Units_Volt, device.voltage),
 				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
 			]
+			alignGroupColumns = true
 			break;
 
 		case "solarcharger":
@@ -81,6 +83,7 @@ Page {
 			params = { "bindPrefix" : device.serviceUid }
 
 			if (device.status === VenusOS.Tank_Status_Ok) {
+				alignGroupColumns = true
 				const levelText = Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.level)
 				if (isNaN(device.temperature)) {
 					summary = [ levelText ]
@@ -121,11 +124,13 @@ Page {
 			url = "/pages/settings/devicelist/inverter/PageInverter.qml"
 			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(device.currentPhase.powerUnit, device.currentPhase.power) ]
+			alignGroupColumns = true
 			break;
 
 		case "temperature":
 			url = "/pages/settings/devicelist/temperature/PageTemperatureSensor.qml"
 			params = { "bindPrefix" : device.serviceUid }
+			alignGroupColumns = true
 
 			const inputTemp = Global.systemSettings.convertFromCelsius(device.temperature)
 			if (isNaN(device.humidity)) {
@@ -172,6 +177,7 @@ Page {
 				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
 				Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
 			]
+			alignGroupColumns = true
 			break;
 
 		case "pulsemeter":
@@ -193,13 +199,15 @@ Page {
 			params = {"bindPrefix": device.serviceUid }
 			summary = [ Units.getCombinedDisplayText(VenusOS.Units_WattsPerSquareMeter, device.irradiance) ]
 			break;
-
 		default:
 			return null
 		}
 		params.title = device.name
 
-		return { "summary": summary, "url": url, "params": params }
+		return {
+			"summary": summary, "url": url, "params": params,
+			"alignGroupColumns": alignGroupColumns
+		}
 	}
 
 	GradientListView {
@@ -259,6 +267,7 @@ Page {
 			textModel: model.connected && _displayInfo ? _displayInfo.summary || [] : [ CommonWords.not_connected ]
 			down: deviceMouseArea.containsPress
 			allowed: _displayInfo !== null
+			alignGroupColumns: _displayInfo && _displayInfo.alignGroupColumns
 
 			CP.ColorImage {
 				parent: deviceDelegate.content
