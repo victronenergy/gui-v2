@@ -14,15 +14,7 @@ ListTextField {
 	property int decimals: Units.defaultUnitPrecision(unit)
 
 	suffix: Units.defaultUnitString(unit)
-	textField.validator: DoubleValidator {}
+	textField.validator: DoubleValidator { decimals: root.decimals }
 	textField.inputMethodHints: Qt.ImhDigitsOnly
-	textField.text: tryAcceptInput(value)
-
-	tryAcceptInput: function(inputText) {
-		const n = Number(inputText)
-		if (isNaN(n)) {
-			return "--"
-		}
-		return n.toFixed(root.decimals)
-	}
+	textField.text: Number(value).toFixed(decimals)
 }
