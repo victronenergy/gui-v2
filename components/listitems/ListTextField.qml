@@ -15,7 +15,6 @@ ListItem {
 	property alias secondaryText: textField.text
 	property alias placeholderText: textField.placeholderText
 	property string suffix
-	property var tryAcceptInput
 	property var flickable: root.ListView ? root.ListView.view : null
 	readonly property bool hasActiveFocus: textField.activeFocus
 
@@ -59,18 +58,6 @@ ListItem {
 		property string _textWhenFocused
 		property bool _accepted
 
-		function _tryAcceptInput(keyEvent) {
-			if (!!root.tryAcceptInput) {
-				const result = root.tryAcceptInput(text)
-				if (result === undefined) {
-					keyEvent.accepted = true
-					return
-				}
-				text = result
-			}
-			keyEvent.accepted = false
-		}
-
 		width: Math.max(
 				Theme.geometry_listItem_textField_minimumWidth,
 				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry_listItem_textField_maximumWidth))
@@ -78,9 +65,6 @@ ListItem {
 		text: dataItem.isValid ? dataItem.value : ""
 		rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
 		horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
-
-		Keys.onEnterPressed: function (keyEvent) { textField._tryAcceptInput(keyEvent) }
-		Keys.onReturnPressed: function (keyEvent) { textField._tryAcceptInput(keyEvent) }
 
 		onAccepted: {
 			let newValue = text
