@@ -7,18 +7,19 @@ import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 
-BarGauge {
+ClippingBarGauge {
 	id: root
 
 	property bool isGrouped: false
 	property bool expanded
 
 	radius: Theme.geometry_levelsPage_tankGauge_radius
+	surfaceColor: Theme.color_levelsPage_gauge_separatorBarColor
 
 	Rectangle {
 		width: parent.width
 		height: 2
-		color: Theme.color_levelsPage_gauge_separatorBarColor
+		color: root.surfaceColor
 		y: parent.height/4
 		z: 5
 	}
@@ -26,7 +27,7 @@ BarGauge {
 	Rectangle {
 		width: parent.width
 		height: 2
-		color: Theme.color_levelsPage_gauge_separatorBarColor
+		color: root.surfaceColor
 		y: 2*parent.height/4
 		z: 5
 	}
@@ -34,7 +35,7 @@ BarGauge {
 	Rectangle {
 		width: parent.width
 		height: 2
-		color: Theme.color_levelsPage_gauge_separatorBarColor
+		color: root.surfaceColor
 		y: 3*parent.height/4
 		z: 5
 	}
