@@ -219,10 +219,12 @@ set (VENUS_QML_MODULE_SOURCES
     components/ArcGaugeQuantityRow.qml
     components/AsymmetricRoundedRectangle.qml
     components/BarGauge.qml
+    components/BarGaugeBase.qml
     components/BriefSidePanelWidget.qml
     components/ButtonControlValue.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
+    components/ClippingBarGauge.qml
     components/ControlCard.qml
     components/ControlValue.qml
     components/CpuMonitor.qml
