@@ -64,7 +64,6 @@ Page {
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
 				from: stopValue.value + stepSize
-				to: 1602
 			}
 
 			ListSpinBox {

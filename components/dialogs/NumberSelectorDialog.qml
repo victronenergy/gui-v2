@@ -26,7 +26,6 @@ ModalDialog {
 	}
 
 	onAboutToShow: {
-		spinBox.value = Math.round(value * _multiplier())
 
 		if (presets.length) {
 			let presetsIndex = -1
@@ -52,6 +51,8 @@ ModalDialog {
 			SpinBox {
 				id: spinBox
 
+				property bool _initialized: false
+
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
 				height: Theme.geometry_timeSelector_spinBox_height
@@ -66,11 +67,17 @@ ModalDialog {
 				stepSize: root.stepSize * root._multiplier()
 
 				onValueChanged: {
-					root.value = Number(value / root._multiplier())
+					if (_initialized) {
+						root.value = Number(spinBox.value / root._multiplier())
+					}
 				}
 
 				onMinValueReached: root.minValueReached()
 				onMaxValueReached: root.maxValueReached()
+				Component.onCompleted: {
+					spinBox.value = Math.round(root.value * root._multiplier())
+					_initialized = true
+				}
 			}
 
 			SegmentedButtonRow {

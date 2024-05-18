@@ -14,7 +14,8 @@ ListButton {
 	property string suffix
 	property int decimals
 	property int from: !isNaN(dataItem.min) ? dataItem.min : 0
-	property int to: !isNaN(dataItem.max) ? dataItem.max : 1000
+	// Number.MAX_SAFE_INTEGER === 9,007,199,254,740,991, which is less than C++ 64 bit max int 9,223,372,036,854,775,807, so should be safe to use for 'SpinBox.to'
+	property int to: !isNaN(dataItem.max) ? dataItem.max : Number.MAX_SAFE_INTEGER
 	property real stepSize: 1
 	property var presets: []
 
