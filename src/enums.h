@@ -470,7 +470,9 @@ public:
 		DigitalInput_Type_SmokeAlarm,
 		DigitalInput_Type_FireAlarm,
 		DigitalInput_Type_CO2Alarm,
-		DigitalInput_Type_Generator
+		DigitalInput_Type_Generator,
+		// 10 is not used
+		DigitalInput_Type_TouchInputControl = 11
 	};
 	Q_ENUM(DigitalInput_Type)
 

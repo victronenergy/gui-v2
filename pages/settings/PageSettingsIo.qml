@@ -94,6 +94,8 @@ Page {
 									//% "CO2 alarm"
 									{ display: qsTrId("settings_io_digital_input_co2_alarm"), value: VenusOS.DigitalInput_Type_CO2Alarm },
 									{ display: CommonWords.generator, value: VenusOS.DigitalInput_Type_Generator },
+									//% "Touch input control"
+									{ display: qsTrId("settings_io_digital_input_touch_input_control"), value: VenusOS.DigitalInput_Type_TouchInputControl },
 								]
 							}
 						}
