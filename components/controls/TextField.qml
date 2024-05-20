@@ -16,7 +16,7 @@ CT.TextField {
 	leftPadding: Theme.geometry_textField_horizontalMargin
 	rightPadding: Theme.geometry_textField_horizontalMargin
 
-	implicitWidth: contentWidth
+	implicitWidth: Math.max(contentWidth, placeholderText.implicitWidth)
 	implicitHeight: Theme.geometry_textField_height
 
 	horizontalAlignment: Text.AlignHCenter
@@ -32,6 +32,7 @@ CT.TextField {
 		// QTBUG-100490 placeholderText doesn't appear in TextField if inside StackView, so
 		// create our own placeholder here.
 		Label {
+			id: placeholderText
 			anchors {
 				left: parent.left
 				leftMargin: root.leftPadding
