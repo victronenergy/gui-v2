@@ -17,10 +17,11 @@ Window {
 	title: qsTrId("venus_os_gui")
 	color: Global.allPagesLoaded && !!guiLoader.item ? guiLoader.item.mainView.backgroundColor : Theme.color_page_background
 
-	width: Qt.platform.os != "wasm" ? Theme.geometry_screen_width : Screen.width
-	height: Qt.platform.os != "wasm" ? Theme.geometry_screen_height : Screen.height
+	width: Qt.platform.os != "wasm" ? Theme.geometry_screen_width/scaleFactor : Screen.width/scaleFactor
+	height: Qt.platform.os != "wasm" ? Theme.geometry_screen_height/scaleFactor : Screen.height/scaleFactor
 
 	property bool isDesktop: false
+	property real scaleFactor: 1.0
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
 
 	function skipSplashScreen() {
