@@ -58,9 +58,9 @@ ListItem {
 		property string _textWhenFocused
 		property bool _accepted
 
-		width: Math.max(
-				Theme.geometry_listItem_textField_minimumWidth,
-				Math.min(implicitWidth + leftPadding + rightPadding, Theme.geometry_listItem_textField_maximumWidth))
+		width: Math.max(Theme.geometry_listItem_textField_minimumWidth,
+						Math.min(Theme.geometry_listItem_textField_maximumWidth,
+								 implicitWidth + leftPadding + rightPadding))
 		enabled: root.enabled
 		text: dataItem.isValid ? dataItem.value : ""
 		rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
