@@ -26,6 +26,8 @@
 
 #include <QtDebug>
 
+#include "themeobjects.h"
+
 Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 namespace {
@@ -216,6 +218,17 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 
 } // namespace
 
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+
+EM_JS(int, getWindowInnerWidth, (), {
+  return window.innerWidth;
+});
+
+EM_JS(int, getWindowInnerHeight, (), {
+  return window.innerHeight;
+});
+
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -227,6 +240,24 @@ int main(int argc, char *argv[])
 	// The native vkb gets used instead, so a keyboard is still available when required.
 	qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 #endif
+
+	qreal scaleFactor = 1.0;
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	// Take both portrait and landscape into account since the
+	// user can rotate the screen while the app is running
+	qreal width = qMax(getWindowInnerWidth(), getWindowInnerHeight());
+	qreal height = qMin(getWindowInnerWidth(), getWindowInnerHeight());
+
+	if (width > 0 && height > 0) {
+		Victron::VenusOS::ThemeSingleton theme;
+		scaleFactor = qMax(1.0, qMin(width/theme.geometry_screen_width(), height/theme.geometry_screen_height()));
+	}
+#endif
+
+	std::string scaleAsString = std::to_string(scaleFactor);
+	QByteArray scaleAsQByteArray(scaleAsString.c_str(), scaleAsString.length());
+	qputenv("QT_SCALE_FACTOR", scaleAsQByteArray);
 
 	QGuiApplication app(argc, argv);
 	QGuiApplication::setApplicationName("Venus");
@@ -290,6 +321,7 @@ int main(int argc, char *argv[])
 	const bool desktop(QGuiApplication::primaryScreen()->availableSize().height() > 600);
 #endif
 
+	window->setProperty("scaleFactor", scaleFactor);
 	if (desktop) {
 		window->setProperty("isDesktop", true);
 		window->show();
