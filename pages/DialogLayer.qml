@@ -9,14 +9,30 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	property QtObject currentDialog
 	anchors.fill: parent
 
 	function open(dialogComponent, properties) {
-		const dialog = dialogComponent.createObject(root, properties)
-		dialog.closed.connect(function() {
-			dialog.destroy()
+		currentDialog = dialogComponent.createObject(root, properties)
+		currentDialog.closed.connect(function() {
+			currentDialog.destroy()
+			currentDialog = null
 		})
-		dialog.open()
+		currentDialog.open()
+	}
+
+	Connections {
+		target: Global.mainView
+		ignoreUnknownSignals: true
+		function onCurrentPageChanged() {
+			// If the parent page is closed close the dialog also,
+			// e.g. when an alarm is received, which pops existing
+			// pages on the page stack and opens Notificationgs page.
+			if (currentDialog) {
+				currentDialog.destroy()
+				currentDialog = null
+			}
+		}
 	}
 
 	// For WebAssembly, if the firmware changed on device, this might
