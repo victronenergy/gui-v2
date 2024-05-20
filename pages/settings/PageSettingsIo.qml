@@ -67,6 +67,20 @@ Page {
 					id: digitalInputsComponent
 
 					Page {
+						readonly property var delegateOptionModel: [
+							VenusOS.DigitalInput_Type_Disabled,
+							VenusOS.DigitalInput_Type_PulseMeter,
+							VenusOS.DigitalInput_Type_DoorAlarm,
+							VenusOS.DigitalInput_Type_BilgePump,
+							VenusOS.DigitalInput_Type_BilgeAlarm,
+							VenusOS.DigitalInput_Type_BurglarAlarm,
+							VenusOS.DigitalInput_Type_SmokeAlarm,
+							VenusOS.DigitalInput_Type_FireAlarm,
+							VenusOS.DigitalInput_Type_CO2Alarm,
+							VenusOS.DigitalInput_Type_Generator,
+							VenusOS.DigitalInput_Type_TouchInputControl
+						].map(function(v) { return { value: v, display: Global.digitalInputs.inputTypeToText(v)} } )
+
 						GradientListView {
 							model: digitalModel
 
@@ -75,28 +89,7 @@ Page {
 								//% "Digital input %1"
 								text: qsTrId("settings_io_digital_input").arg(model.uid.split('/').pop())
 								dataItem.uid: model.uid + "/Type"
-								optionModel: [
-									{ display: CommonWords.disabled, value: VenusOS.DigitalInput_Type_Disabled },
-									//% "Pulse meter"
-									{ display: qsTrId("settings_io_digital_input_pulse_meter"), value: VenusOS.DigitalInput_Type_PulseMeter },
-									//% "Door alarm"
-									{ display: qsTrId("settings_io_digital_input_door_alarm"), value: VenusOS.DigitalInput_Type_DoorAlarm },
-									//% "Bilge pump"
-									{ display: qsTrId("settings_io_digital_input_bilge_pump"), value: VenusOS.DigitalInput_Type_BilgePump },
-									//% "Bilge alarm"
-									{ display: qsTrId("settings_io_digital_input_bilge_alarm"), value: VenusOS.DigitalInput_Type_BilgeAlarm },
-									//% "Burglar alarm"
-									{ display: qsTrId("settings_io_digital_input_burglar_alarm"), value: VenusOS.DigitalInput_Type_BurglarAlarm },
-									//% "Smoke alarm"
-									{ display: qsTrId("settings_io_digital_input_smoke_alarm"), value: VenusOS.DigitalInput_Type_SmokeAlarm },
-									//% "Fire alarm"
-									{ display: qsTrId("settings_io_digital_input_bilge_fire"), value: VenusOS.DigitalInput_Type_FireAlarm },
-									//% "CO2 alarm"
-									{ display: qsTrId("settings_io_digital_input_co2_alarm"), value: VenusOS.DigitalInput_Type_CO2Alarm },
-									{ display: CommonWords.generator, value: VenusOS.DigitalInput_Type_Generator },
-									//% "Touch input control"
-									{ display: qsTrId("settings_io_digital_input_touch_input_control"), value: VenusOS.DigitalInput_Type_TouchInputControl },
-								]
+								optionModel: delegateOptionModel
 							}
 						}
 					}

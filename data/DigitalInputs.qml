@@ -44,6 +44,9 @@ QtObject {
 		case VenusOS.DigitalInput_Type_Generator:
 			//% "Generator"
 			return qsTrId("digitalinputs_type_generator")
+		case VenusOS.DigitalInput_Type_TouchInputControl:
+			//% "Touch input control"
+			return qsTrId("digitalinputs_touch_input_control")
 		default:
 			return ""
 		}
