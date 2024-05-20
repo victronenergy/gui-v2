@@ -126,10 +126,12 @@ CT.SpinBox {
 	}
 
 	Timer {
-		interval: 100
+		interval: 500
 		repeat: true
 		running: pressTimer.running
+		onRunningChanged: if (!running) interval = 500
 		onTriggered: {
+			interval = 100
 			for (let i = 0; i < _scalingFactor; ++i) {
 				up.pressed ? root.increase() : root.decrease()
 			}
