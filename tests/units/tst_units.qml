@@ -86,8 +86,7 @@ TestCase {
 	}
 
 	function test_precisionOne() {
-		var units = [VenusOS.Units_Volt_DC,
-					 VenusOS.Units_VoltAmpere,
+		var units = [VenusOS.Units_VoltAmpere,
 					 VenusOS.Units_Amp,
 					 VenusOS.Units_Hertz,
 					 VenusOS.Units_AmpHour,
@@ -108,6 +107,36 @@ TestCase {
 
 			if (Units.isScalingSupported(unit)) {
 				expect(unit, 12345, "12.3", "k" + unitString)
+				expect(unit, 123456789, "123", "M" + unitString)
+				expect(unit, 123556789012, "124", "G" + unitString)
+				expect(unit, 123456789012345, "123", "T" + unitString)
+			} else {
+				expect(unit, 12345, "12345", unitString)
+				expect(unit, 123456789, "123456789", unitString)
+			}
+		}
+	}
+
+	function test_precisionTwo() {
+		var units = [
+			VenusOS.Units_Volt_DC
+		]
+
+		for (const unit of units) {
+			const unitString = Units.defaultUnitString(unit)
+
+			expect(unit, NaN, "--", unitString)
+			expect(unit, 0, "0.00", unitString)
+			expect(unit, 0.64, "0.64", unitString)
+			expect(unit, 0.254, "0.25", unitString)
+			expect(unit, 0.255, "0.26", unitString)
+			expect(unit, 14, "14.00", unitString)
+			expect(unit, 15.55, "15.55", unitString)
+			expect(unit, 100, "100", unitString)
+			expect(unit, 1234, "1234", unitString)
+
+			if (Units.isScalingSupported(unit)) {
+				expect(unit, 12345, "12.35", "k" + unitString)
 				expect(unit, 123456789, "123", "M" + unitString)
 				expect(unit, 123556789012, "124", "G" + unitString)
 				expect(unit, 123456789012345, "123", "T" + unitString)
