@@ -70,6 +70,7 @@ ListNavigationItem {
 						dataItem.uid: bindPrefix + "/StartValue"
 						suffix: root.unit
 						decimals: root.decimals
+						stepSize: root.stepSize
 						from: stopValue.dataItem.isValid && root.startValueIsGreater ? stopValue.value + stepSize : dataItem.defaultMin
 						to: stopValue.dataItem.isValid && !root.startValueIsGreater ? stopValue.value - stepSize : dataItem.defaultMax
 					}
@@ -82,9 +83,9 @@ ListNavigationItem {
 						dataItem.uid: bindPrefix + "/QuietHoursStartValue"
 						suffix: root.unit
 						decimals: root.decimals
+						stepSize: root.stepSize
 						from: quietHoursStopValue.dataItem.isValid && root.startValueIsGreater ? quietHoursStopValue.value + stepSize : dataItem.defaultMin
 						to: quietHoursStopValue.dataItem.isValid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : dataItem.defaultMax
-						onValueChanged: console.log(dataItem.uid, value, from, to)
 					}
 
 					ListSpinBox {
@@ -104,6 +105,7 @@ ListNavigationItem {
 						dataItem.uid: bindPrefix + "/StopValue"
 						suffix: root.unit
 						decimals: root.decimals
+						stepSize: root.stepSize
 						to: startValue.dataItem.isValid && root.startValueIsGreater ? startValue.value - stepSize : dataItem.defaultMax
 						from: startValue.dataItem.isValid && !root.startValueIsGreater ? startValue.value + stepSize : dataItem.defaultMin
 					}
@@ -116,6 +118,7 @@ ListNavigationItem {
 						dataItem.uid: bindPrefix + "/QuietHoursStopValue"
 						suffix: root.unit
 						decimals: root.decimals
+						stepSize: root.stepSize
 						to: quietHoursStartValue.dataItem.isValid && root.startValueIsGreater ? quietHoursStartValue.value - stepSize : dataItem.defaultMax
 						from: quietHoursStartValue.dataItem.isValid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : dataItem.defaultMin
 					}
