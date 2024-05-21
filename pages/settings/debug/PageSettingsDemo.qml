@@ -170,6 +170,7 @@ Page {
 				text: "Spin box"
 				value: 5.789
 				decimals: 2
+				stepSize: Math.pow(10, -decimals)
 				from: 5
 				to: 10
 			}
