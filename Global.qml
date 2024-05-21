@@ -14,7 +14,7 @@ QtObject {
 	property var mainView
 	property var mockDataSimulator    // only valid when mock mode is active
 	property var dataManager
-	property var locale: Qt.locale()  // TODO: read from settings
+	property var locale: Qt.locale(Language.localeName)
 	property VeQItemTableModel dataServiceModel: null
 	property var firmwareUpdate
 
@@ -80,6 +80,10 @@ QtObject {
 		return []
 	}
 
+	function formatNumber(n, decimals = 0) {
+		return n.toLocaleString(locale, 'f', decimals)
+	}
+
 	function reset() {
 		// note: we don't reset `main` or `changingLanguage`
 		// as main will never be destroyed during the ui rebuild,
@@ -88,7 +92,7 @@ QtObject {
 		mainView = null
 		mockDataSimulator = null
 		dataManager = null
-		locale = Qt.locale()
+		locale = Qt.locale(Language.localeName)
 		dataServiceModel = null
 		firmwareUpdate = null
 		inputPanel = null

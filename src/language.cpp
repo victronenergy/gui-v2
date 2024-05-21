@@ -230,8 +230,12 @@ QHash<int, QByteArray> LanguageModel::roleNames() const
 	return m_roleNames;
 }
 
-
 Language* Language::create(QQmlEngine *, QJSEngine *)
+{
+	return instance();
+}
+
+Language* Language::instance()
 {
 	static Language* language = new Language(nullptr);
 	return language;
@@ -248,7 +252,7 @@ Language::Language(QQmlEngine*) : QObject(nullptr)
 
 QLocale::Language Language::getCurrentLanguage() const
 {
-	return m_currentLanguage;
+	return m_locale.language();
 }
 
 QString Language::toString(QLocale::Language language) const
@@ -268,14 +272,25 @@ QLocale::Language Language::fromCode(const QString &code)
 
 bool Language::setCurrentLanguage(QLocale::Language language)
 {
-	if (language != m_currentLanguage && installTranslatorForLanguage(language)) {
+	if (language != m_locale.language() && installTranslatorForLanguage(language)) {
 		emit currentLanguageChanged();
+		emit localeNameChanged();
 		emit fontFileUrlChanged();
 		return true;
 	} else {
 		emit languageChangeFailed();
 		return false;
 	}
+}
+
+const QLocale &Language::locale() const
+{
+	return m_locale;
+}
+
+QString Language::localeName() const
+{
+	return m_locale.name();
 }
 
 QUrl Language::fontFileUrl() const
@@ -305,19 +320,20 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 #endif
 
 	const bool alreadyLoaded = m_loadedTranslators.contains(language);
-	QTranslator *currTranslator = m_loadedTranslators.value(m_currentLanguage);
+	QTranslator *currTranslator = m_loadedTranslators.value(m_locale.language());
 	QTranslator *translator = alreadyLoaded ? m_loadedTranslators.value(language) : new QTranslator(this);
+	QLocale locale(language);
 
 	if (!alreadyLoaded) {
 		if (translator->load(
-				QLocale(language),
+				locale,
 				QLatin1String("venus-gui-v2"),
 				QLatin1String("_"),
 				QLatin1String(":/i18n"))) {
-			qCDebug(venusGui) << "Successfully loaded translations for locale" << QLocale(language).name();
+			qCDebug(venusGui) << "Successfully loaded translations for locale" << locale.name();
 			m_loadedTranslators.insert(language, translator);
 		} else {
-			qCWarning(venusGui) << "Unable to load translations for locale" << QLocale(language).name();
+			qCWarning(venusGui) << "Unable to load translations for locale" << locale.name();
 			translator->deleteLater();
 			if (m_loadedTranslators.value(language) == translator) {
 				m_loadedTranslators.remove(language);
@@ -327,7 +343,7 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 	}
 
 	if (!QCoreApplication::installTranslator(translator)) {
-		qCWarning(venusGui) << "Unable to install translator for locale" << QLocale(language).name();
+		qCWarning(venusGui) << "Unable to install translator for locale" << locale.name();
 		translator->deleteLater();
 		if (m_loadedTranslators.value(language) == translator) {
 			m_loadedTranslators.remove(language);
@@ -337,12 +353,13 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 
 	if (currTranslator) {
 		if (!QCoreApplication::removeTranslator(currTranslator)) {
-			qCWarning(venusGui) << "Unable to remove old translator for locale" << QLocale(language).name();
+			qCWarning(venusGui) << "Unable to remove old translator for locale" << m_locale.name();
 		}
 	}
 
-	m_currentLanguage = language;
+	m_locale = locale;
 	m_fontFileUrl = fontUrlForLanguage(language);
+	QLocale::setDefault(m_locale);
 
 	return true;
 }

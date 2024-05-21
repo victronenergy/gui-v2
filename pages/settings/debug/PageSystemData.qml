@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	function _formatValue(value, unit) {
-		return (value == null ? "--" : value.toFixed(2)) + " " + unit
+		return (value == null ? "--" : Global.formatNumber(value, 2)) + " " + unit
 	}
 
 	function _formatPowerValue(value) {

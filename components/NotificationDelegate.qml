@@ -99,6 +99,6 @@ Rectangle {
 
 		color: Theme.color_listItem_secondaryText
 		font.pixelSize: Theme.font_size_body1
-		text: Utils.formatTimestamp(root.notification.dateTime, ClockTime.dateTime)
+		text: Utils.formatTimestamp(root.notification.dateTime, ClockTime.dateTime, Global.locale)
 	}
 }

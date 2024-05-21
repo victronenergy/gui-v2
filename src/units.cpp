@@ -4,6 +4,7 @@
 */
 
 #include "units.h"
+#include "language.h"
 
 #include <veutil/qt/unit_conversion.hpp>
 
@@ -299,7 +300,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 
 		int vFixed = qRound(scaledValue * 10);
 		scaledValue = (1.0*vFixed) / 10.0;
-		quantity.number = QString::number(scaledValue, 'f', 1);
+		quantity.number = QLocale().toString(scaledValue, 'f', 1);
 	} else {
 		// if the value is large (hundreds or thousands) no need to display decimals after the decimal point
 		int digits = numberOfDigits(scaledValue);
@@ -309,10 +310,9 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		const qreal vFixedMultiplier = std::pow(10, precision);
 		int vFixed = qRound(scaledValue * vFixedMultiplier);
 		scaledValue = (1.0*vFixed) / vFixedMultiplier;
-
-		quantity.number = QString::number(scaledValue, 'f', precision);
-
+		quantity.number = QLocale().toString(scaledValue, 'f', precision);
 	}
+
 	return quantity;
 }
 

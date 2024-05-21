@@ -65,12 +65,12 @@ TestCase {
 			expect(unit, 14, "14", unitString)
 			expect(unit, 15.5, "16", unitString)
 			expect(unit, 100, "100", unitString)
-			expect(unit, 1234, "1234", unitString)
+			expect(unit, 1234, "1,234", unitString)
 
 			if (Units.isScalingSupported(unit)) {
 				if (unit === VenusOS.Units_Volume_Liter) {
 					expect(unit, 12345, "12", "㎘")
-					expect(unit, 123456789, "123457", "㎘")
+					expect(unit, 123456789, "123,457", "㎘")
 				} else {
 					expect(unit, 12345, "12", "k" + unitString)
 					expect(unit, 123456789, "123", "M" + unitString)
@@ -78,9 +78,9 @@ TestCase {
 					expect(unit, 123456789012345, "123", "T" + unitString)
 				}
 			} else {
-				expect(unit, 1234, "1234", unitString)
-				expect(unit, 12345, "12345", unitString)
-				expect(unit, 123456789, "123456789", unitString)
+				expect(unit, 1234, "1,234", unitString)
+				expect(unit, 12345, "12,345", unitString)
+				expect(unit, 123456789, "123,456,789", unitString)
 			}
 		}
 	}
@@ -103,7 +103,7 @@ TestCase {
 			expect(unit, 14, "14.0", unitString)
 			expect(unit, 15.5, "15.5", unitString)
 			expect(unit, 100, "100", unitString)
-			expect(unit, 1234, "1234", unitString)
+			expect(unit, 1234, "1,234", unitString)
 
 			if (Units.isScalingSupported(unit)) {
 				expect(unit, 12345, "12.3", "k" + unitString)
@@ -111,8 +111,8 @@ TestCase {
 				expect(unit, 123556789012, "124", "G" + unitString)
 				expect(unit, 123456789012345, "123", "T" + unitString)
 			} else {
-				expect(unit, 12345, "12345", unitString)
-				expect(unit, 123456789, "123456789", unitString)
+				expect(unit, 12345, "12,345", unitString)
+				expect(unit, 123456789, "123,456,789", unitString)
 			}
 		}
 	}
@@ -126,7 +126,7 @@ TestCase {
 		expect(unit, 0.005, "5", "Wh")
 		expect(unit, 0.3458, "346", "Wh")
 		expect(unit, 0.5, "500", "Wh")
-		expect(unit, 5, "5000", "Wh")
+		expect(unit, 5, "5,000", "Wh")
 		expect(unit, 10.554, "10.55", "kWh")
 		expect(unit, 10.555, "10.56", "kWh")
 		expect(unit, 14.123, "14.12", "kWh")
@@ -150,7 +150,7 @@ TestCase {
 		expect(unit, 14.1234, "14.12", "m³")
 		expect(unit, 15.5123, "15.51", "m³")
 		expect(unit, 100.3134, "100.3", "m³")
-		expect(unit, 1234.59551, "1235", "m³")
+		expect(unit, 1234.59551, "1,235", "m³")
 		expect(unit, 12345.5, "12.35", "km³")
 		expect(unit, 123456789, "123.5", "Mm³")
 		expect(unit, 123456789012, "123.5", "Gm³")
@@ -161,7 +161,7 @@ TestCase {
 		const unit = VenusOS.Units_Energy_KiloWattHour
 
 		// Scaling up works like without hysteresis
-		expect(unit, 1.234, "1234", "Wh", true) // hysteresis = true
+		expect(unit, 1.234, "1,234", "Wh", true) // hysteresis = true
 		expect(unit, 100.3134, "100.3", "kWh", true) // hysteresis = true
 		expect(unit, 1234.5951, "1.235", "MWh", true) // hysteresis = true
 		expect(unit, 12345, "12.35", "MWh", true) // hysteresis = true
@@ -185,7 +185,7 @@ TestCase {
 
 		// Keep the scale when going 10% below the threshold
 		expect(unit, 9.5675, "9.568", "kWh", true) // hysteresis = true
-		expect(unit, 8.967, "8967", "Wh", true) // hysteresis = true
+		expect(unit, 8.967, "8,967", "Wh", true) // hysteresis = true
 	}
 
 	function test_unitMatchValue() {
@@ -196,7 +196,7 @@ TestCase {
 
 		// choose scale based on different anchor value
 		quantity = Units.getDisplayText(unit, 19567890123, -1, 123456789)
-		compare("19568", quantity.number)
+		compare("19,568", quantity.number)
 		compare("GWh", quantity.unit)
 	}
 

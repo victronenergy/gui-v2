@@ -59,7 +59,7 @@ ModalDialog {
 						? Theme.geometry_spinBox_indicator_minimumWidth
 						: Theme.geometry_spinBox_indicator_maximumWidth
 				textFromValue: function(value, locale) {
-					return Number(value / root._multiplier()).toLocaleString(locale, 'f', root.decimals) + root.suffix
+					return Global.formatNumber(value / root._multiplier(), root.decimals) + root.suffix
 				}
 				from: root.from * root._multiplier()
 				to: root.to * root._multiplier()

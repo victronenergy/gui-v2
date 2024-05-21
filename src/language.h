@@ -90,10 +90,10 @@ class Language : public QObject
 	QML_ELEMENT
 	QML_SINGLETON
 	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage NOTIFY currentLanguageChanged FINAL)
+	Q_PROPERTY(QString localeName READ localeName NOTIFY localeNameChanged FINAL)
 	Q_PROPERTY(QUrl fontFileUrl READ fontFileUrl NOTIFY fontFileUrlChanged FINAL)
 
 public:
-	static Language* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 	Language(const Victron::VenusOS::Language&) = delete;
 	Language& operator=(const Victron::VenusOS::Language&) = delete;
 
@@ -109,18 +109,24 @@ public:
 	QLocale::Language getCurrentLanguage() const;
 	Q_INVOKABLE bool setCurrentLanguage(QLocale::Language language);
 
+	const QLocale &locale() const;
+	QString localeName() const;
 	QUrl fontFileUrl() const;
+
+	static Language* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
+	static Language* instance();
 
 Q_SIGNALS:
 	void languageChangeFailed();
 	void currentLanguageChanged();
+	void localeNameChanged();
 	void fontFileUrlChanged();
 
 private:
 	explicit Language(QQmlEngine* engine);
 	bool installTranslatorForLanguage(QLocale::Language language);
 
-	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
+	QLocale m_locale = QLocale(QLocale::AnyLanguage);
 	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
 	QUrl m_fontFileUrl;
 };

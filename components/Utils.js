@@ -241,7 +241,7 @@ function qtyToString(qty, unitSingle, unitMultiple) {
 	}
 }
 
-function formatTimestamp(dateTime, currentDateTime) {
+function formatTimestamp(dateTime, currentDateTime, locale) {
 	let ms = Math.floor(currentDateTime - dateTime)
 	let minutes = Math.floor(ms / 60000)
 	if (minutes < 1) {
@@ -262,9 +262,9 @@ function formatTimestamp(dateTime, currentDateTime) {
 		return qsTrId("utils_formatTimestamp_hours_min_ago").arg(hours).arg(minutes % 60) // eg. "2h 10m ago"
 	}
 	if (days < 7) {
-		return dateTime.toLocaleString(Qt.locale(), "ddd hh:mm") // eg. "Mon 09:06"
+		return dateTime.toLocaleString(locale, "ddd hh:mm") // eg. "Mon 09:06"
 	}
-	return dateTime.toLocaleString(Qt.locale(), "MMM dd hh:mm") // eg. "Mar 27 10:20"
+	return dateTime.toLocaleString(locale, "MMM dd hh:mm") // eg. "Mar 27 10:20"
 }
 
 function connmanServiceState(service) {

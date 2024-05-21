@@ -16,13 +16,13 @@ Page {
 	function powerDiff(a, b) {
 		if (!a.isValid || !b.isValid)
 			return "--"
-		return (a.value - b.value).toFixed(0) + "W"
+		return Global.formatNumber(a.value - b.value) + "W"
 	}
 
 	function apparentPower(V, I) {
 		if (!V.isValid || !I.isValid)
 			return "--"
-		return (V.value * I.value).toFixed(0) + "VA"
+		return Global.formatNumber(V.value * I.value) + "VA"
 	}
 
 	function groupItemWidth(group) {

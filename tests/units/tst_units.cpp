@@ -5,7 +5,11 @@
 
 #include <QtQuickTest/quicktest.h>
 #include "units.h"
+#include "logging.h"
 #include "quantityinfo.h"
+
+// Since this is declared in logging.h, we must define it in the tests
+Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 template <typename T> static QObject *singletonFactory(QQmlEngine *, QJSEngine *)
 {

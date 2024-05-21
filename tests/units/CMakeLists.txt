@@ -14,6 +14,9 @@ qt_add_executable(tst_units
     tst_units.cpp
     ../../src/enums.h
     ../../src/enums.cpp
+    ../../src/language.h
+    ../../src/language.cpp
+    ../../src/logging.h
     ../../src/quantityinfo.h
     ../../src/quantityinfo.cpp
     ../../src/units.h

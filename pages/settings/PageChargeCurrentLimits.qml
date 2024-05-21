@@ -74,11 +74,11 @@ Page {
 		delegate: ListTextGroup {
 			readonly property string dcCurrentText: dcCurrent.value === undefined
 				? "--"
-				: dcCurrent.value.toFixed(3) + Units.defaultUnitString(VenusOS.Units_Amp)
+				: Global.formatNumber(dcCurrent.value, 3) + Units.defaultUnitString(VenusOS.Units_Amp)
 			//% "Max: %1"
 			readonly property string maxValueText: maxValue.value === undefined
 				? "-- "
-				: qsTrId("settings_dvcc_max").arg(maxValue.value.toFixed(3))
+				: qsTrId("settings_dvcc_max").arg(Global.formatNumber(maxValue.value, 3))
 
 			width: parent.width
 			text: "[" + (n2kDeviceInstance.value || 0) + "] " + (customName.value || productName.value || "")
