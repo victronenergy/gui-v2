@@ -103,13 +103,13 @@ SwipeViewPage {
 			case 4:
 				// Only one of the widgets can have L size, and the other ones use a reduced size.
 				if (widget === firstLargeWidget) {
-					widget.size = VenusOS.OverviewWidget_Size_L
+					widget.size = VenusOS.OverviewWidget_Size_M
 				} else if (firstLargeWidget != null) {
 					// There is a large widget, so use M or XS size to fit around it
-					widget.size = _leftWidgets.length == 3 ? VenusOS.OverviewWidget_Size_M : VenusOS.OverviewWidget_Size_XS
+					widget.size = VenusOS.OverviewWidget_Size_XS
 				} else {
 					// There are no large widgets; use the same size for all left widgets
-					widget.size = _leftWidgets.length == 3 ? VenusOS.OverviewWidget_Size_M : VenusOS.OverviewWidget_Size_S
+					widget.size = VenusOS.OverviewWidget_Size_S
 				}
 				break
 			default:
