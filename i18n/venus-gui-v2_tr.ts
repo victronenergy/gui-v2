@@ -1780,7 +1780,7 @@ Daha fazla bilgi için belgelere bakın.</translation>
       <translation>Dijital girişler</translation>
     </message>
     <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="90"/>
       <source>Digital input %1</source>
       <extracomment>%1 = number of the digital input</extracomment>
       <translation>Dijital giriş %1</translation>
@@ -1826,7 +1826,7 @@ Daha fazla bilgi için belgelere bakın.</translation>
       <translation>CO2 alarmı</translation>
     </message>
     <message id="settings_io_bt_sensors">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="101"/>
       <source>Bluetooth sensors</source>
       <translation>Bluetooth sensörleri</translation>
     </message>
@@ -2797,7 +2797,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Uyarı</translation>
     </message>
     <message id="digitalinputs_state_alarm">
-      <location filename="../../data/DigitalInputs.qml" line="77"/>
+      <location filename="../../data/DigitalInputs.qml" line="80"/>
       <source>Alarm</source>
       <extracomment>Relay function is 'alarm'</extracomment>
       <translation>Alarm</translation>
@@ -3086,72 +3086,72 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Starter voltaj</translation>
     </message>
     <message id="battery_buss_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="175"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="171"/>
       <source>Bus voltage</source>
       <translation>Bara voltaj</translation>
     </message>
     <message id="battery_top_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="139"/>
       <source>Top section voltage</source>
       <translation>Üst bölge voltaj</translation>
     </message>
     <message id="battery_bottom_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="150"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="147"/>
       <source>Bottom section voltage</source>
       <translation>Alt bölge voltaj</translation>
     </message>
     <message id="battery_mid_point_deviation">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="159"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="155"/>
       <source>Mid-point deviation</source>
       <translation>Orta nokta sapması</translation>
     </message>
     <message id="battery_consumed_amphours">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="163"/>
       <source>Consumed AmpHours</source>
       <translation>Tüketilmiş AmpSaatler</translation>
     </message>
     <message id="battery_time_to_go">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="184"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="179"/>
       <source>Time-to-go</source>
       <translation>Kalan Zaman</translation>
     </message>
     <message id="battery_details">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="195"/>
       <source>Details</source>
       <translation>Ayrıntılar</translation>
     </message>
     <message id="battery_module_level_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="223"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="218"/>
       <source>Module level alarms</source>
       <translation>Modül seviyesi alarmları</translation>
     </message>
     <message id="battery_settings_diagnostics">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="253"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="248"/>
       <source>Diagnostics</source>
       <translation>Tanılama</translation>
     </message>
     <message id="battery_settings_fuses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="278"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="273"/>
       <source>Fuses</source>
       <translation>Sigortalar</translation>
     </message>
     <message id="battery_settings_io">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="294"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="289"/>
       <source>IO</source>
       <translation>IO</translation>
     </message>
     <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="309"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="304"/>
       <source>System</source>
       <translation>Sistem</translation>
     </message>
     <message id="battery_settings_parameters">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="332"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="327"/>
       <source>Parameters</source>
       <translation>Parametreler</translation>
     </message>
     <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="357"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="352"/>
       <source>Redetect Battery</source>
       <translation>Aküyü Yeniden Algıla</translation>
     </message>
@@ -3161,7 +3161,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Yeniden algılamak için basın</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="366"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="361"/>
       <source>Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect.</source>
       <translation>Akünün yeniden algılanması 60 saniye sürebilir. Bu esnada akünün adı hatalı olabilir.</translation>
     </message>
@@ -3313,52 +3313,52 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Çekilen kümülatif Ah</translation>
     </message>
     <message id="batteryhistory_minimum_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="80"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="78"/>
       <source>Minimum cell voltage</source>
       <translation>Minimum hücre voltaj</translation>
     </message>
     <message id="batteryhistory_maximum_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="87"/>
       <source>Maximum cell voltage</source>
       <translation>Maksimum hücre voltaj</translation>
     </message>
     <message id="batteryhistory_time_since_last_full_charge">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="96"/>
       <source>Time since last full charge</source>
       <translation>Son tam şarjdan bu yana geçen süre</translation>
     </message>
     <message id="batteryhistory_synchronisation_count">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="104"/>
       <source>Synchronisation count</source>
       <translation>Senkronizasyon sayımı</translation>
     </message>
     <message id="batteryhistory_low_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="125"/>
       <source>Low starter battery voltage alarms</source>
       <translation>Düşük marş aküsü voltajı alarmı</translation>
     </message>
     <message id="batteryhistory_high_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="137"/>
       <source>High starter batttery voltage alarms</source>
       <translation>Yüksek marş motoru akü voltajı alarmları</translation>
     </message>
     <message id="batteryhistory_minimum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="146"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="144"/>
       <source>Minimum starter battery voltage</source>
       <translation>Minimum marş aküsü voltajı</translation>
     </message>
     <message id="batteryhistory_maximum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="155"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="152"/>
       <source>Maximum starter battery voltage</source>
       <translation>Maksimum marş aküsü voltajı</translation>
     </message>
     <message id="batteryhistory_discharged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="181"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="177"/>
       <source>Discharged energy</source>
       <translation>Deşarj edilen enerji</translation>
     </message>
     <message id="batteryhistory_charged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="189"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="185"/>
       <source>Charged energy</source>
       <translation>Şarj edilen enerji</translation>
     </message>
@@ -3641,32 +3641,32 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Yüksek aux voltaj</translation>
     </message>
     <message id="dcmeter_history_low_aux_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="57"/>
       <source>Low aux voltage alarms</source>
       <translation>Düşük aux voltaj alarmları</translation>
     </message>
     <message id="dcmeter_history_high_aux_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="64"/>
       <source>High aux voltage alarms</source>
       <translation>Yüksek aux voltaj alarmları</translation>
     </message>
     <message id="dcmeter_history_minimum_aux_voltage">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="71"/>
       <source>Minimum aux voltage</source>
       <translation>Minimum aux voltaj</translation>
     </message>
     <message id="dcmeter_history_maximum_aux_voltage">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="82"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="79"/>
       <source>Maximum aux voltage</source>
       <translation>Maksimum aux voltaj</translation>
     </message>
     <message id="dcmeter_history_produced_energy">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="103"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="99"/>
       <source>Produced energy</source>
       <translation>Üretilen enerji</translation>
     </message>
     <message id="dcmeter_history_consumed_energy">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="111"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="107"/>
       <source>Consumed energy</source>
       <translation>Tüketilen enerji</translation>
     </message>
@@ -6498,12 +6498,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Rüzgar Şarj Cihazı</translation>
     </message>
     <message id="digitalinputs_state_low">
-      <location filename="../../data/DigitalInputs.qml" line="56"/>
+      <location filename="../../data/DigitalInputs.qml" line="59"/>
       <source>Low</source>
       <translation>Düşük</translation>
     </message>
     <message id="digitalinputs_state_high">
-      <location filename="../../data/DigitalInputs.qml" line="59"/>
+      <location filename="../../data/DigitalInputs.qml" line="62"/>
       <source>High</source>
       <translation>Yüksek</translation>
     </message>
@@ -6978,7 +6978,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Motor sıcaklığı</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="51"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="50"/>
       <source>Controller Temperature</source>
       <translation>Kontrolör sıcaklığı</translation>
     </message>
@@ -7035,12 +7035,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Maksimum PV voltaj</translation>
     </message>
     <message id="inverter_maximum_battery_voltage">
-      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="27"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="26"/>
       <source>Maximum battery voltage</source>
       <translation>Maksimum akü voltaj</translation>
     </message>
     <message id="inverter_minimum_battery_voltage">
-      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="36"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="34"/>
       <source>Minimum battery voltage</source>
       <translation>Minimum akü voltaj</translation>
     </message>
@@ -7228,12 +7228,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>%1 %2</translation>
     </message>
     <message id="firmware_installed_build_version_update_detected">
-      <location filename="../../pages/DialogLayer.qml" line="29"/>
+      <location filename="../../pages/DialogLayer.qml" line="45"/>
       <source>Firmware version update detected</source>
       <translation>Ürün Firmware sürüm güncellemesi algılandı</translation>
     </message>
     <message id="firmware_installed_build_page_will_reload">
-      <location filename="../../pages/DialogLayer.qml" line="31"/>
+      <location filename="../../pages/DialogLayer.qml" line="47"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>Sayfa, en son sürümü yüklemek için on saniye içinde otomatik olarak yeniden yüklenecektir.</translation>
     </message>
@@ -7534,6 +7534,11 @@ Bu menünün sadece RS485 üzerinden bağlı Carlo Gavazzi sayaçlarını göste
       <location filename="../../data/EvChargers.qml" line="132"/>
       <source>Reserved</source>
       <translation>Ayrılmış</translation>
+    </message>
+    <message id="digitalinputs_touch_input_control">
+      <location filename="../../data/DigitalInputs.qml" line="49"/>
+      <source>Touch input control</source>
+      <translation>Touch input control</translation>
     </message>
   </context>
   <context>
@@ -8143,98 +8148,98 @@ Bu menünün sadece RS485 üzerinden bağlı Carlo Gavazzi sayaçlarını göste
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="97"/>
+      <location filename="../../src/main.cpp" line="99"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>D-Bus veri kaynağını kullan: belirtilen D-Bus adresine bağlanın.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="98"/>
+      <location filename="../../src/main.cpp" line="100"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>adres</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="102"/>
+      <location filename="../../src/main.cpp" line="104"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>D-Bus veri kaynağını kullanın: varsayılan D-Bus adresine bağlanın</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="107"/>
+      <location filename="../../src/main.cpp" line="109"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>MQTT veri kaynağını kullan: belirtilen MQTT aracı adresine bağlanın.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="108"/>
+      <location filename="../../src/main.cpp" line="110"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>adres</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="113"/>
+      <location filename="../../src/main.cpp" line="115"/>
       <source>MQTT data source device portal id.</source>
       <translation>MQTT veri kaynağı cihazı portal kimliği.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="114"/>
+      <location filename="../../src/main.cpp" line="116"/>
       <source>portalId</source>
       <translation>Portal ID</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="118"/>
+      <location filename="../../src/main.cpp" line="120"/>
       <source>MQTT VRM webhost shard</source>
       <translation>MQTT VRM web barındırıcısı parçası</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="121"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>kırık</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="123"/>
+      <location filename="../../src/main.cpp" line="125"/>
       <source>MQTT data source username</source>
       <translation>MQTT veri kaynağı kullanıcı adı</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="124"/>
+      <location filename="../../src/main.cpp" line="126"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>Kullanıcı</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="128"/>
+      <location filename="../../src/main.cpp" line="130"/>
       <source>MQTT data source password</source>
       <translation>MQTT veri kaynağı şifresi</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="129"/>
+      <location filename="../../src/main.cpp" line="131"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>Pass</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="133"/>
+      <location filename="../../src/main.cpp" line="135"/>
       <source>MQTT data source token</source>
       <translation>MQTT veri kaynağı jetonu</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="134"/>
+      <location filename="../../src/main.cpp" line="136"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>Jeton kodu</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="140"/>
       <source>Enable FPS counter</source>
       <translation>FPS sayacını etkinleştir</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="142"/>
+      <location filename="../../src/main.cpp" line="144"/>
       <source>Skip splash screen</source>
       <translation>Açılış ekranını atla</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="146"/>
+      <location filename="../../src/main.cpp" line="148"/>
       <source>Use mock data source for testing.</source>
       <translation>Test için sahte veri kaynağı kullanın.</translation>
     </message>
