@@ -13,6 +13,15 @@ TestCase {
 		id: info
 	}
 
+	function formatNumber(number) {
+		const locale = Qt.locale()
+		number = number.replace(/,/g, "g") // group separator
+		number = number.replace(/\./g, "d") // decimal point
+		number = number.replace(/\g/g, locale.groupSeparator)
+		number = number.replace(/d/g, locale.decimalPoint)
+		return number
+	}
+
 	function expect(type, value, number, unit, hysteresis = false) {
 		var numberOut = ""
 		var unitOut = ""
@@ -27,10 +36,13 @@ TestCase {
 			unitOut = quantity.unit
 		}
 
-		console.log("Testing value", value, "(" + Units.defaultUnitString(type) +") ->", numberOut + unitOut)
+		number = formatNumber(number)
+
+		console.log("Testing value", number, "(" + Units.defaultUnitString(type) +") ->", numberOut + unitOut)
 		compare(numberOut, number)
 		compare(unitOut, unit)
 	}
+
 
 	function test_percentage() {
 		expect(VenusOS.Units_Percentage, NaN, "--", "%")
@@ -191,12 +203,12 @@ TestCase {
 	function test_unitMatchValue() {
 		const unit = VenusOS.Units_Energy_KiloWattHour
 		var quantity = Units.getDisplayText(unit, 19567890123)
-		compare("19.57", quantity.number)
+		compare(formatNumber("19.57"), quantity.number)
 		compare("TWh", quantity.unit)
 
 		// choose scale based on different anchor value
 		quantity = Units.getDisplayText(unit, 19567890123, -1, 123456789)
-		compare("19,568", quantity.number)
+		compare(formatNumber("19,568"), quantity.number)
 		compare("GWh", quantity.unit)
 	}
 
@@ -206,15 +218,15 @@ TestCase {
 		compare("2", quantity.number)
 
 		quantity = Units.getDisplayText(unit, 1.9612345, 1)
-		compare("2.0", quantity.number)
+		compare(formatNumber("2.0"), quantity.number)
 
 		quantity = Units.getDisplayText(unit, 1.9612345, 2)
-		compare("1.96", quantity.number)
+		compare(formatNumber("1.96"), quantity.number)
 
 		quantity = Units.getDisplayText(unit, 1.9612345, 3)
-		compare("1.961", quantity.number)
+		compare(formatNumber("1.961"), quantity.number)
 
 		quantity = Units.getDisplayText(unit, 1.9612345, 4)
-		compare("1.9612", quantity.number)
+		compare(formatNumber("1.9612"), quantity.number)
 	}
 }
