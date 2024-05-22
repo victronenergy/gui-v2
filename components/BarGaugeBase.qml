@@ -12,6 +12,7 @@ Rectangle {
 
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 	readonly property int valueStatus: Gauges.getValueStatus(_value * 100, valueType)
+	property alias foregroundParent: fgRect.parent
 	property color foregroundColor: Theme.statusColorValue(valueStatus)
 	property color backgroundColor: Theme.statusColorValue(valueStatus, true)
 	property color surfaceColor: Theme.color_levelsPage_gauge_separatorBarColor
@@ -37,7 +38,12 @@ Rectangle {
 	onVisibleChanged: if (visible) _updateGauge()
 
 	function _updateGauge() {
-		if (animationEnabled) {
+		if (bgRect == null) {
+			// if the YAnimator finishes running after the object is destroyed
+			// we need to detect this case and early out to avoid crash.
+			// Reproduced on Windows with Qt 6.6.1 and AOT.
+			return
+		} else if (animationEnabled) {
 			const animator = orientation === Qt.Vertical ? yAnimator : xAnimator
 			const currValue = orientation === Qt.Vertical ? fgRect.y : fgRect.x
 			if (!animator.running && currValue !== _nextPos) {
@@ -52,6 +58,14 @@ Rectangle {
 				fgRect.x = _nextPos
 			}
 		}
+	}
+
+	Rectangle {
+		id: fgRect
+		width: bgRect.width
+		height: bgRect.height
+		color: bgRect.foregroundColor
+		z: 2 // drawn above the background, but below the border
 	}
 
 	// Use animators instead of a behavior on x/y. Otherwise, there can be a "jump" when
@@ -70,6 +84,4 @@ Rectangle {
 		duration: Theme.animation_briefPage_sidePanel_sliderValueChange_duration
 		onRunningChanged: if (!running) Qt.callLater(_updateGauge) // if _nextPos changed during previous animation
 	}
-
-	property Rectangle fgRect
 }
