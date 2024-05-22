@@ -3,8 +3,6 @@
     "font_briefPage_battery_timeToGo_pixelSize": "font_size_body1",
     "font_briefPage_battery_voltage_pixelSize": "font_size_body3",
     "font_briefPage_quantityLabel_size": "font_size_body3",
-    "font_briefPage_sidePanel_forecastRow_today_temperature_size": "font_size_body3",
-    "font_briefPage_sidePanel_forecastRow_today_date_size": "font_size_body2",
     "font_briefPage_sidePanel_quantityLabel_size": "font_size_body2",
     "font_overviewPage_battery_timeToGo_pixelSize": "font_size_body1",
     "font_overviewPage_widget_quantityLabel_minimumSize": "font_size_body2",
