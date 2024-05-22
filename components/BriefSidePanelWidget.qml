@@ -30,7 +30,7 @@ Column {
 
 		ElectricalQuantityLabel {
 			id: quantityLabel
-			font.pixelSize: Theme.font_briefPage_quantityLabel_size
+			font.pixelSize: Theme.font_briefPage_sidePanel_quantityLabel_size
 			width: parent.width - sideLoader.width
 			alignment: Qt.AlignLeft
 		}
