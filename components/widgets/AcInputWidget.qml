@@ -23,7 +23,7 @@ AcWidget {
 	quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
 	quantityLabel.acInputMode: true
 	phaseCount: connected ? input.phases.count : 0
-	enabled: true
+	enabled: !!input
 	extraContentLoader.sourceComponent: ThreePhaseDisplay {
 		width: parent.width
 		model: root.input.phases
