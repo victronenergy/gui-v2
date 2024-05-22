@@ -256,16 +256,9 @@
     "geometry_overviewPage_widget_battery_gradient_height": 38,
     "geometry_overviewPage_widget_battery_bottomRow_bottomMargin": 6,
 
-    "geometry_overviewPage_widget_compact_xl_height": 352,
+    "geometry_overviewPage_widget_spacing": 8,
     "geometry_overviewPage_widget_compact_l_height": 152,
-    "geometry_overviewPage_widget_compact_m_height": 114,
-    "geometry_overviewPage_widget_compact_s_height": 80,
-    "geometry_overviewPage_widget_compact_xs_height": 64,
-    "geometry_overviewPage_widget_expanded_xl_height": 400,
     "geometry_overviewPage_widget_expanded_l_height": 176,
-    "geometry_overviewPage_widget_expanded_m_height": 132,
-    "geometry_overviewPage_widget_expanded_s_height": 94,
-    "geometry_overviewPage_widget_expanded_xs_height": 74,
 
     "geometry_overviewPage_connector_line_width": 2,
     "geometry_overviewPage_connector_electron_velocity": 30,
