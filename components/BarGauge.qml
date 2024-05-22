@@ -11,7 +11,7 @@ import Victron.Gauges
 BarGaugeBase {
 	id: root
 
-	fgRect: foregroundRect
+	foregroundParent: sourceItem
 
 	Rectangle {
 		id: maskRect
@@ -31,14 +31,6 @@ BarGaugeBase {
 		width: parent.width
 		height: parent.height
 		z: 2
-
-		Rectangle {
-			id: foregroundRect
-			width: parent.width
-			height: parent.height
-			color: root.foregroundColor
-			z: 2 // drawn above the background, but below the border
-		}
 	}
 
 	Effects.MultiEffect {

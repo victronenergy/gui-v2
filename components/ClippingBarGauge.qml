@@ -10,16 +10,8 @@ import Victron.Gauges
 BarGaugeBase  {
 	id: root
 
+	foregroundParent: root
 	clip: true
-	fgRect: foregroundRect
-
-	Rectangle {
-		id: foregroundRect
-		width: root.width
-		height: root.height
-		color: root.foregroundColor
-		z: 2 // drawn above the background, but below the border
-	}
 
 	Rectangle {
 		id: borderRect
