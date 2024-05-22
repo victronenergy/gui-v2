@@ -35,20 +35,22 @@ Rectangle {
 	property list<QtObject> extraContentChildren
 
 	function getCompactHeight(s) {
-		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry_overviewPage_widget_compact_xl_height
+		const availableHeight = Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
+		return s === VenusOS.OverviewWidget_Size_XL ? availableHeight
 			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry_overviewPage_widget_compact_l_height
-			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry_overviewPage_widget_compact_m_height
-			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry_overviewPage_widget_compact_s_height
-			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry_overviewPage_widget_compact_xs_height
+			: s === VenusOS.OverviewWidget_Size_M ? (availableHeight - 2*Theme.geometry_overviewPage_widget_spacing)/3
+			: s === VenusOS.OverviewWidget_Size_S ? (availableHeight - 3*Theme.geometry_overviewPage_widget_spacing)/4
+			: s === VenusOS.OverviewWidget_Size_XS ? (availableHeight - 4*Theme.geometry_overviewPage_widget_spacing)/5
 			: 0
 	}
 
 	function getExpandedHeight(s) {
-		return s === VenusOS.OverviewWidget_Size_XL ? Theme.geometry_overviewPage_widget_expanded_xl_height
+		const availableHeight = Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_overviewPage_layout_expanded_bottomMargin
+		return s === VenusOS.OverviewWidget_Size_XL ? availableHeight
 			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry_overviewPage_widget_expanded_l_height
-			: s === VenusOS.OverviewWidget_Size_M ? Theme.geometry_overviewPage_widget_expanded_m_height
-			: s === VenusOS.OverviewWidget_Size_S ? Theme.geometry_overviewPage_widget_expanded_s_height
-			: s === VenusOS.OverviewWidget_Size_XS ? Theme.geometry_overviewPage_widget_expanded_xs_height
+			: s === VenusOS.OverviewWidget_Size_M ? (availableHeight - 2*Theme.geometry_overviewPage_widget_spacing)/3
+			: s === VenusOS.OverviewWidget_Size_S ? (availableHeight - 3*Theme.geometry_overviewPage_widget_spacing)/4
+			: s === VenusOS.OverviewWidget_Size_XS ? (availableHeight - 4*Theme.geometry_overviewPage_widget_spacing)/5
 			: 0
 	}
 

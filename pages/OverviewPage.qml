@@ -166,18 +166,10 @@ SwipeViewPage {
 		const compactPageHeight = Theme.geometry_screen_height
 				- Theme.geometry_statusBar_height
 				- Theme.geometry_navigationBar_height
-
-		if (compactPageHeight !== Theme.geometry_overviewPage_widget_compact_xl_height) {
-			console.log("Warning: theme constants need to be updated.")
-		}
 		const compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
-
 		const expandedPageHeight = Theme.geometry_screen_height
 				- Theme.geometry_statusBar_height
 				- Theme.geometry_overviewPage_layout_expanded_bottomMargin
-		if (expandedPageHeight !== Theme.geometry_overviewPage_widget_expanded_xl_height) {
-			console.log("Warning: theme constants need to be updated.")
-		}
 
 		const expandedWidgetsTopMargin = Math.max(0, (expandedPageHeight - expandedWidgetHeights) / Math.max(1, widgets.length - 1))
 
