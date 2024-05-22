@@ -1780,7 +1780,7 @@ See documentation for further information.</source>
       <translation>مدخلات رقمية</translation>
     </message>
     <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="90"/>
       <source>Digital input %1</source>
       <extracomment>%1 = number of the digital input</extracomment>
       <translation>مدخل رقمي %1</translation>
@@ -1826,7 +1826,7 @@ See documentation for further information.</source>
       <translation>إنذار ثاني أكسيد الكربون</translation>
     </message>
     <message id="settings_io_bt_sensors">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="101"/>
       <source>Bluetooth sensors</source>
       <translation>مستشعرات بلوتوث</translation>
     </message>
@@ -2797,7 +2797,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>تحذير</translation>
     </message>
     <message id="digitalinputs_state_alarm">
-      <location filename="../../data/DigitalInputs.qml" line="77"/>
+      <location filename="../../data/DigitalInputs.qml" line="80"/>
       <source>Alarm</source>
       <extracomment>Relay function is 'alarm'</extracomment>
       <translation>إنذار</translation>
@@ -3086,72 +3086,72 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>مشغل التيار</translation>
     </message>
     <message id="battery_buss_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="175"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="171"/>
       <source>Bus voltage</source>
       <translation>الجهد الكهربائي للمسار التجميعي</translation>
     </message>
     <message id="battery_top_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="139"/>
       <source>Top section voltage</source>
       <translation>الفرع الأعلى للتيار</translation>
     </message>
     <message id="battery_bottom_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="150"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="147"/>
       <source>Bottom section voltage</source>
       <translation>الفرع الأسفل للتيار</translation>
     </message>
     <message id="battery_mid_point_deviation">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="159"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="155"/>
       <source>Mid-point deviation</source>
       <translation>تباين نقطة الوسط</translation>
     </message>
     <message id="battery_consumed_amphours">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="163"/>
       <source>Consumed AmpHours</source>
       <translation>أمبير بالساعة مستهلك</translation>
     </message>
     <message id="battery_time_to_go">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="184"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="179"/>
       <source>Time-to-go</source>
       <translation>الوقت المتبقي للانطلاق</translation>
     </message>
     <message id="battery_details">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="195"/>
       <source>Details</source>
       <translation>تفاصيل</translation>
     </message>
     <message id="battery_module_level_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="223"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="218"/>
       <source>Module level alarms</source>
       <translation>تنبيهات مستوى الوحدة</translation>
     </message>
     <message id="battery_settings_diagnostics">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="253"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="248"/>
       <source>Diagnostics</source>
       <translation>تشخيص</translation>
     </message>
     <message id="battery_settings_fuses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="278"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="273"/>
       <source>Fuses</source>
       <translation>المصهرات</translation>
     </message>
     <message id="battery_settings_io">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="294"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="289"/>
       <source>IO</source>
       <translation>داخل/خارج</translation>
     </message>
     <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="309"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="304"/>
       <source>System</source>
       <translation>النظام</translation>
     </message>
     <message id="battery_settings_parameters">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="332"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="327"/>
       <source>Parameters</source>
       <translation>عامل متغير</translation>
     </message>
     <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="357"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="352"/>
       <source>Redetect Battery</source>
       <translation>إعادة كشف البطارية</translation>
     </message>
@@ -3161,7 +3161,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>اضغط لإعادة الكشف</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="366"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="361"/>
       <source>Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect.</source>
       <translation>إعادة كشف البطارية يتطلب قرابة 60 ثانية. خلال هذا الوقت اسم البطارية قد يكون خاطئا.</translation>
     </message>
@@ -3313,52 +3313,52 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>رسم تراكمي</translation>
     </message>
     <message id="batteryhistory_minimum_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="80"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="78"/>
       <source>Minimum cell voltage</source>
       <translation>الحد الأدنى للجهد الكهربائي للخلية</translation>
     </message>
     <message id="batteryhistory_maximum_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="87"/>
       <source>Maximum cell voltage</source>
       <translation>الحد الأعلى للجهد الكهربائي للخلية</translation>
     </message>
     <message id="batteryhistory_time_since_last_full_charge">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="96"/>
       <source>Time since last full charge</source>
       <translation>الوقت منذ آخر شحن كامل</translation>
     </message>
     <message id="batteryhistory_synchronisation_count">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="104"/>
       <source>Synchronisation count</source>
       <translation>حساب عملية التزامن</translation>
     </message>
     <message id="batteryhistory_low_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="125"/>
       <source>Low starter battery voltage alarms</source>
       <translation>إنذارات انخفاض جهد بطارية بدء التشغيل</translation>
     </message>
     <message id="batteryhistory_high_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="137"/>
       <source>High starter batttery voltage alarms</source>
       <translation>إنذار ارتفاع جهد بطارية بدء التشغيل</translation>
     </message>
     <message id="batteryhistory_minimum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="146"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="144"/>
       <source>Minimum starter battery voltage</source>
       <translation>الحد الأدنى لجهد بطارية بدء التشغيل</translation>
     </message>
     <message id="batteryhistory_maximum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="155"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="152"/>
       <source>Maximum starter battery voltage</source>
       <translation>الحد الأقصى لجهد بطارية بدء التشغيل</translation>
     </message>
     <message id="batteryhistory_discharged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="181"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="177"/>
       <source>Discharged energy</source>
       <translation>الطاقة المفرغة</translation>
     </message>
     <message id="batteryhistory_charged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="189"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="185"/>
       <source>Charged energy</source>
       <translation>طاقة مشحونة</translation>
     </message>
@@ -3643,32 +3643,32 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>الجهد الكهربائي المساعد المرتفع</translation>
     </message>
     <message id="dcmeter_history_low_aux_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="57"/>
       <source>Low aux voltage alarms</source>
       <translation>إنذارات الجهد الكهربائي المساعد المنخفض</translation>
     </message>
     <message id="dcmeter_history_high_aux_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="64"/>
       <source>High aux voltage alarms</source>
       <translation>إنذارات الجهد الكهربائي المساعد المرتفع</translation>
     </message>
     <message id="dcmeter_history_minimum_aux_voltage">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="71"/>
       <source>Minimum aux voltage</source>
       <translation>الحد الأدنى للجهد الكهربائي المساعد</translation>
     </message>
     <message id="dcmeter_history_maximum_aux_voltage">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="82"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="79"/>
       <source>Maximum aux voltage</source>
       <translation>الحد الأعلى للجهد الكهربائي المساعد</translation>
     </message>
     <message id="dcmeter_history_produced_energy">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="103"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="99"/>
       <source>Produced energy</source>
       <translation>الطاقة المنتجة</translation>
     </message>
     <message id="dcmeter_history_consumed_energy">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="111"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="107"/>
       <source>Consumed energy</source>
       <translation>الطاقة المستهلكة</translation>
     </message>
@@ -6500,12 +6500,12 @@ Do you want to continue?</source>
       <translation>شاحن باستخدام الرياح</translation>
     </message>
     <message id="digitalinputs_state_low">
-      <location filename="../../data/DigitalInputs.qml" line="56"/>
+      <location filename="../../data/DigitalInputs.qml" line="59"/>
       <source>Low</source>
       <translation>منخفض</translation>
     </message>
     <message id="digitalinputs_state_high">
-      <location filename="../../data/DigitalInputs.qml" line="59"/>
+      <location filename="../../data/DigitalInputs.qml" line="62"/>
       <source>High</source>
       <translation>مرتفع</translation>
     </message>
@@ -6980,7 +6980,7 @@ Do you want to continue?</source>
       <translation>حرارة المحرك</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="51"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="50"/>
       <source>Controller Temperature</source>
       <translation>درجة الحرارة المتحكم</translation>
     </message>
@@ -7037,12 +7037,12 @@ Do you want to continue?</source>
       <translation>الحد الأعلى لتيار الجهاز الضوئي</translation>
     </message>
     <message id="inverter_maximum_battery_voltage">
-      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="27"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="26"/>
       <source>Maximum battery voltage</source>
       <translation>الحد الأعلى لتيار البطارية</translation>
     </message>
     <message id="inverter_minimum_battery_voltage">
-      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="36"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="34"/>
       <source>Minimum battery voltage</source>
       <translation>الحد الأدنى لتيار البطارية</translation>
     </message>
@@ -7230,12 +7230,12 @@ Do you want to continue?</source>
       <translation>%1 %2</translation>
     </message>
     <message id="firmware_installed_build_version_update_detected">
-      <location filename="../../pages/DialogLayer.qml" line="29"/>
+      <location filename="../../pages/DialogLayer.qml" line="45"/>
       <source>Firmware version update detected</source>
       <translation>تم اكتشاف تحديث لإصدار البرنامج الثابت</translation>
     </message>
     <message id="firmware_installed_build_page_will_reload">
-      <location filename="../../pages/DialogLayer.qml" line="31"/>
+      <location filename="../../pages/DialogLayer.qml" line="47"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>سيتم إعادة تحميل الصفحة تلقائيًا خلال عشر ثوانٍ لتحميل أحدث إصدار. </translation>
     </message>
@@ -7536,6 +7536,11 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <location filename="../../data/EvChargers.qml" line="132"/>
       <source>Reserved</source>
       <translation></translation>
+    </message>
+    <message id="digitalinputs_touch_input_control">
+      <location filename="../../data/DigitalInputs.qml" line="49"/>
+      <source>Touch input control</source>
+      <translation>التحكم في الإدخال باللمس</translation>
     </message>
   </context>
   <context>
@@ -8145,98 +8150,98 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="97"/>
+      <location filename="../../src/main.cpp" line="99"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>استخدم مصدر بيانات D-Bus: اتصل بعنوان D-Bus المحدد. </translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="98"/>
+      <location filename="../../src/main.cpp" line="100"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>عنوان</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="102"/>
+      <location filename="../../src/main.cpp" line="104"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>استخدم مصدر بيانات D-Bus: اتصل بعنوان D-Bus الافتراضي</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="107"/>
+      <location filename="../../src/main.cpp" line="109"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>استخدم مصدر بيانات MQTT: اتصل بعنوان وسيط MQTT المحدد.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="108"/>
+      <location filename="../../src/main.cpp" line="110"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>عنوان</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="113"/>
+      <location filename="../../src/main.cpp" line="115"/>
       <source>MQTT data source device portal id.</source>
       <translation>معرف بوابة جهاز مصدر بيانات MQTT.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="114"/>
+      <location filename="../../src/main.cpp" line="116"/>
       <source>portalId</source>
       <translation>معرّف البوابة</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="118"/>
+      <location filename="../../src/main.cpp" line="120"/>
       <source>MQTT VRM webhost shard</source>
       <translation>جزء مضيف الويب MQTT VRM</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="121"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>جزء</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="123"/>
+      <location filename="../../src/main.cpp" line="125"/>
       <source>MQTT data source username</source>
       <translation>اسم مستخدم مصدر بيانات MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="124"/>
+      <location filename="../../src/main.cpp" line="126"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>مستخدم</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="128"/>
+      <location filename="../../src/main.cpp" line="130"/>
       <source>MQTT data source password</source>
       <translation>كلمة مرور مصدر بيانات MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="129"/>
+      <location filename="../../src/main.cpp" line="131"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>اجتياز </translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="133"/>
+      <location filename="../../src/main.cpp" line="135"/>
       <source>MQTT data source token</source>
       <translation>رمز مصدر بيانات MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="134"/>
+      <location filename="../../src/main.cpp" line="136"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>رمز</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="140"/>
       <source>Enable FPS counter</source>
       <translation>تمكين عداد FPS </translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="142"/>
+      <location filename="../../src/main.cpp" line="144"/>
       <source>Skip splash screen</source>
       <translation>تخطي شاشة البداية</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="146"/>
+      <location filename="../../src/main.cpp" line="148"/>
       <source>Use mock data source for testing.</source>
       <translation>استخدم مصدر بيانات وهميًا للاختبار. </translation>
     </message>

@@ -1780,7 +1780,7 @@ See documentation for further information.</source>
       <translation>数字输入</translation>
     </message>
     <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="90"/>
       <source>Digital input %1</source>
       <extracomment>%1 = number of the digital input</extracomment>
       <translation>数字输入 %1</translation>
@@ -1826,7 +1826,7 @@ See documentation for further information.</source>
       <translation>二氧化碳报警</translation>
     </message>
     <message id="settings_io_bt_sensors">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="101"/>
       <source>Bluetooth sensors</source>
       <translation>蓝牙感应</translation>
     </message>
@@ -2797,7 +2797,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>警告</translation>
     </message>
     <message id="digitalinputs_state_alarm">
-      <location filename="../../data/DigitalInputs.qml" line="77"/>
+      <location filename="../../data/DigitalInputs.qml" line="80"/>
       <source>Alarm</source>
       <extracomment>Relay function is 'alarm'</extracomment>
       <translation>报警</translation>
@@ -3086,72 +3086,72 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>启动电池电压</translation>
     </message>
     <message id="battery_buss_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="175"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="171"/>
       <source>Bus voltage</source>
       <translation>总线电压</translation>
     </message>
     <message id="battery_top_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="139"/>
       <source>Top section voltage</source>
       <translation>顶边电压</translation>
     </message>
     <message id="battery_bottom_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="150"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="147"/>
       <source>Bottom section voltage</source>
       <translation>底边电压</translation>
     </message>
     <message id="battery_mid_point_deviation">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="159"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="155"/>
       <source>Mid-point deviation</source>
       <translation>中间点差异</translation>
     </message>
     <message id="battery_consumed_amphours">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="163"/>
       <source>Consumed AmpHours</source>
       <translation>消耗安时数</translation>
     </message>
     <message id="battery_time_to_go">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="184"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="179"/>
       <source>Time-to-go</source>
       <translation>剩余时间</translation>
     </message>
     <message id="battery_details">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="195"/>
       <source>Details</source>
       <translation>细节</translation>
     </message>
     <message id="battery_module_level_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="223"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="218"/>
       <source>Module level alarms</source>
       <translation>模块级报警</translation>
     </message>
     <message id="battery_settings_diagnostics">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="253"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="248"/>
       <source>Diagnostics</source>
       <translation>诊断</translation>
     </message>
     <message id="battery_settings_fuses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="278"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="273"/>
       <source>Fuses</source>
       <translation>保险</translation>
     </message>
     <message id="battery_settings_io">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="294"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="289"/>
       <source>IO</source>
       <translation>IO</translation>
     </message>
     <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="309"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="304"/>
       <source>System</source>
       <translation>系统</translation>
     </message>
     <message id="battery_settings_parameters">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="332"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="327"/>
       <source>Parameters</source>
       <translation>参数</translation>
     </message>
     <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="357"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="352"/>
       <source>Redetect Battery</source>
       <translation>重新检测电池</translation>
     </message>
@@ -3161,7 +3161,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>按下重新检测</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="366"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="361"/>
       <source>Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect.</source>
       <translation>重新检测电池可能要花60秒。期间电池名称可能有误。</translation>
     </message>
@@ -3313,52 +3313,52 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>累计消耗安时数</translation>
     </message>
     <message id="batteryhistory_minimum_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="80"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="78"/>
       <source>Minimum cell voltage</source>
       <translation>最低电芯电压</translation>
     </message>
     <message id="batteryhistory_maximum_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="87"/>
       <source>Maximum cell voltage</source>
       <translation>最高电芯电压</translation>
     </message>
     <message id="batteryhistory_time_since_last_full_charge">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="96"/>
       <source>Time since last full charge</source>
       <translation>上次充满电到现在的时间</translation>
     </message>
     <message id="batteryhistory_synchronisation_count">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="104"/>
       <source>Synchronisation count</source>
       <translation>同步计数</translation>
     </message>
     <message id="batteryhistory_low_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="125"/>
       <source>Low starter battery voltage alarms</source>
       <translation>启动电池电压低警报</translation>
     </message>
     <message id="batteryhistory_high_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="137"/>
       <source>High starter batttery voltage alarms</source>
       <translation>启动器电池电压过高警报</translation>
     </message>
     <message id="batteryhistory_minimum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="146"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="144"/>
       <source>Minimum starter battery voltage</source>
       <translation>启动电池最低电压</translation>
     </message>
     <message id="batteryhistory_maximum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="155"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="152"/>
       <source>Maximum starter battery voltage</source>
       <translation>启动电池最高电压</translation>
     </message>
     <message id="batteryhistory_discharged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="181"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="177"/>
       <source>Discharged energy</source>
       <translation>放电量</translation>
     </message>
     <message id="batteryhistory_charged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="189"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="185"/>
       <source>Charged energy</source>
       <translation>充电量</translation>
     </message>
@@ -3638,32 +3638,32 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>辅助电压高</translation>
     </message>
     <message id="dcmeter_history_low_aux_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="57"/>
       <source>Low aux voltage alarms</source>
       <translation>辅助电压低报警</translation>
     </message>
     <message id="dcmeter_history_high_aux_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="64"/>
       <source>High aux voltage alarms</source>
       <translation>辅助电压高报警</translation>
     </message>
     <message id="dcmeter_history_minimum_aux_voltage">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="71"/>
       <source>Minimum aux voltage</source>
       <translation>最小辅助电压</translation>
     </message>
     <message id="dcmeter_history_maximum_aux_voltage">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="82"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="79"/>
       <source>Maximum aux voltage</source>
       <translation>最高辅助电压</translation>
     </message>
     <message id="dcmeter_history_produced_energy">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="103"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="99"/>
       <source>Produced energy</source>
       <translation>产出电量</translation>
     </message>
     <message id="dcmeter_history_consumed_energy">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="111"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="107"/>
       <source>Consumed energy</source>
       <translation>消耗电量</translation>
     </message>
@@ -6495,12 +6495,12 @@ Do you want to continue?</source>
       <translation>风能充电器</translation>
     </message>
     <message id="digitalinputs_state_low">
-      <location filename="../../data/DigitalInputs.qml" line="56"/>
+      <location filename="../../data/DigitalInputs.qml" line="59"/>
       <source>Low</source>
       <translation>低</translation>
     </message>
     <message id="digitalinputs_state_high">
-      <location filename="../../data/DigitalInputs.qml" line="59"/>
+      <location filename="../../data/DigitalInputs.qml" line="62"/>
       <source>High</source>
       <translation>高</translation>
     </message>
@@ -6975,7 +6975,7 @@ Do you want to continue?</source>
       <translation>电机温度</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="51"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="50"/>
       <source>Controller Temperature</source>
       <translation>控制器温度</translation>
     </message>
@@ -7032,12 +7032,12 @@ Do you want to continue?</source>
       <translation>最高PV电压</translation>
     </message>
     <message id="inverter_maximum_battery_voltage">
-      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="27"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="26"/>
       <source>Maximum battery voltage</source>
       <translation>最高电池电压</translation>
     </message>
     <message id="inverter_minimum_battery_voltage">
-      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="36"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="34"/>
       <source>Minimum battery voltage</source>
       <translation>最低电池电压</translation>
     </message>
@@ -7225,12 +7225,12 @@ Do you want to continue?</source>
       <translation>%1 %2</translation>
     </message>
     <message id="firmware_installed_build_version_update_detected">
-      <location filename="../../pages/DialogLayer.qml" line="29"/>
+      <location filename="../../pages/DialogLayer.qml" line="45"/>
       <source>Firmware version update detected</source>
       <translation>检测到固件版本更新</translation>
     </message>
     <message id="firmware_installed_build_page_will_reload">
-      <location filename="../../pages/DialogLayer.qml" line="31"/>
+      <location filename="../../pages/DialogLayer.qml" line="47"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>页面将在十秒后自动重新加载，以加载最新版本。</translation>
     </message>
@@ -7531,6 +7531,11 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <location filename="../../data/EvChargers.qml" line="132"/>
       <source>Reserved</source>
       <translation>保留</translation>
+    </message>
+    <message id="digitalinputs_touch_input_control">
+      <location filename="../../data/DigitalInputs.qml" line="49"/>
+      <source>Touch input control</source>
+      <translation>触摸输入控制</translation>
     </message>
   </context>
   <context>
@@ -8140,98 +8145,98 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="97"/>
+      <location filename="../../src/main.cpp" line="99"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>使用D-Bus数据源：连接到指定的D-Bus地址。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="98"/>
+      <location filename="../../src/main.cpp" line="100"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>地址</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="102"/>
+      <location filename="../../src/main.cpp" line="104"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>使用D-Bus数据源：连接到默认的D-Bus地址</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="107"/>
+      <location filename="../../src/main.cpp" line="109"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>使用MQTT数据源：连接到指定的MQTT代理地址。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="108"/>
+      <location filename="../../src/main.cpp" line="110"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>地址</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="113"/>
+      <location filename="../../src/main.cpp" line="115"/>
       <source>MQTT data source device portal id.</source>
       <translation>MQTT 数据源设备门户 ID。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="114"/>
+      <location filename="../../src/main.cpp" line="116"/>
       <source>portalId</source>
       <translation>门户ID</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="118"/>
+      <location filename="../../src/main.cpp" line="120"/>
       <source>MQTT VRM webhost shard</source>
       <translation>MQTT VRM Web 主机分片</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="121"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>分片</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="123"/>
+      <location filename="../../src/main.cpp" line="125"/>
       <source>MQTT data source username</source>
       <translation>MQTT 数据源用户名</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="124"/>
+      <location filename="../../src/main.cpp" line="126"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>用户</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="128"/>
+      <location filename="../../src/main.cpp" line="130"/>
       <source>MQTT data source password</source>
       <translation>MQTT数据源密码</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="129"/>
+      <location filename="../../src/main.cpp" line="131"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>通过</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="133"/>
+      <location filename="../../src/main.cpp" line="135"/>
       <source>MQTT data source token</source>
       <translation>MQTT 数据源令牌</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="134"/>
+      <location filename="../../src/main.cpp" line="136"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>令牌代码</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="140"/>
       <source>Enable FPS counter</source>
       <translation>启用 FPS 计数器</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="142"/>
+      <location filename="../../src/main.cpp" line="144"/>
       <source>Skip splash screen</source>
       <translation>跳过启动画面</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="146"/>
+      <location filename="../../src/main.cpp" line="148"/>
       <source>Use mock data source for testing.</source>
       <translation>使用模拟数据源进行测试。</translation>
     </message>

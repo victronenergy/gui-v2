@@ -1780,7 +1780,7 @@ Consulte la documentación para más información.</translation>
       <translation>Entradas digitales</translation>
     </message>
     <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="90"/>
       <source>Digital input %1</source>
       <extracomment>%1 = number of the digital input</extracomment>
       <translation>Entrada digital %1</translation>
@@ -1826,7 +1826,7 @@ Consulte la documentación para más información.</translation>
       <translation>Alarma de CO2</translation>
     </message>
     <message id="settings_io_bt_sensors">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsIo.qml" line="101"/>
       <source>Bluetooth sensors</source>
       <translation>Sensores de Bluetooth</translation>
     </message>
@@ -2797,7 +2797,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Advertencia</translation>
     </message>
     <message id="digitalinputs_state_alarm">
-      <location filename="../../data/DigitalInputs.qml" line="77"/>
+      <location filename="../../data/DigitalInputs.qml" line="80"/>
       <source>Alarm</source>
       <extracomment>Relay function is 'alarm'</extracomment>
       <translation>Alarma</translation>
@@ -3086,72 +3086,72 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Tensión batería arranque</translation>
     </message>
     <message id="battery_buss_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="175"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="171"/>
       <source>Bus voltage</source>
       <translation>Tensión del bus</translation>
     </message>
     <message id="battery_top_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="139"/>
       <source>Top section voltage</source>
       <translation>Tensión sección superior</translation>
     </message>
     <message id="battery_bottom_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="150"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="147"/>
       <source>Bottom section voltage</source>
       <translation>Tensión sección inferior</translation>
     </message>
     <message id="battery_mid_point_deviation">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="159"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="155"/>
       <source>Mid-point deviation</source>
       <translation>Desviación punto medio</translation>
     </message>
     <message id="battery_consumed_amphours">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="163"/>
       <source>Consumed AmpHours</source>
       <translation>Ah consumidos</translation>
     </message>
     <message id="battery_time_to_go">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="184"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="179"/>
       <source>Time-to-go</source>
       <translation>Tiempo restante</translation>
     </message>
     <message id="battery_details">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="195"/>
       <source>Details</source>
       <translation>Detalles</translation>
     </message>
     <message id="battery_module_level_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="223"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="218"/>
       <source>Module level alarms</source>
       <translation>Alarmas a nivel de módulo</translation>
     </message>
     <message id="battery_settings_diagnostics">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="253"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="248"/>
       <source>Diagnostics</source>
       <translation>Diagnósticos</translation>
     </message>
     <message id="battery_settings_fuses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="278"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="273"/>
       <source>Fuses</source>
       <translation>Fusibles</translation>
     </message>
     <message id="battery_settings_io">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="294"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="289"/>
       <source>IO</source>
       <translation>IO</translation>
     </message>
     <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="309"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="304"/>
       <source>System</source>
       <translation>Sistema</translation>
     </message>
     <message id="battery_settings_parameters">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="332"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="327"/>
       <source>Parameters</source>
       <translation>Parámetros</translation>
     </message>
     <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="357"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="352"/>
       <source>Redetect Battery</source>
       <translation>Volver a detectar bateria</translation>
     </message>
@@ -3161,7 +3161,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Presiona para detectar</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="366"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="361"/>
       <source>Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect.</source>
       <translation>Volver a detectar la batería puede llevar hasta 60 segundos. Mientras tanto el nombre de la batería puede ser incorrecto.</translation>
     </message>
@@ -3313,52 +3313,52 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Acumulado de Ah consumidos</translation>
     </message>
     <message id="batteryhistory_minimum_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="80"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="78"/>
       <source>Minimum cell voltage</source>
       <translation>Tensión mínima de la celda</translation>
     </message>
     <message id="batteryhistory_maximum_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="87"/>
       <source>Maximum cell voltage</source>
       <translation>Tensión máxima de la celda</translation>
     </message>
     <message id="batteryhistory_time_since_last_full_charge">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="96"/>
       <source>Time since last full charge</source>
       <translation>Tiempo desde la última carga completa</translation>
     </message>
     <message id="batteryhistory_synchronisation_count">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="104"/>
       <source>Synchronisation count</source>
       <translation>Número de sincronizaciones</translation>
     </message>
     <message id="batteryhistory_low_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="125"/>
       <source>Low starter battery voltage alarms</source>
       <translation>Alarmas por tensión de la batería arranque baja</translation>
     </message>
     <message id="batteryhistory_high_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="137"/>
       <source>High starter batttery voltage alarms</source>
       <translation>Alarmas por tensión de la batería arranque alta</translation>
     </message>
     <message id="batteryhistory_minimum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="146"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="144"/>
       <source>Minimum starter battery voltage</source>
       <translation>Mínima tensión de la batería de arranque</translation>
     </message>
     <message id="batteryhistory_maximum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="155"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="152"/>
       <source>Maximum starter battery voltage</source>
       <translation>Máxima tensión de la batería de arranque</translation>
     </message>
     <message id="batteryhistory_discharged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="181"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="177"/>
       <source>Discharged energy</source>
       <translation>Energía descargada</translation>
     </message>
     <message id="batteryhistory_charged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="189"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="185"/>
       <source>Charged energy</source>
       <translation>Energía cargada</translation>
     </message>
@@ -3639,32 +3639,32 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>Tensión aux. alta</translation>
     </message>
     <message id="dcmeter_history_low_aux_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="57"/>
       <source>Low aux voltage alarms</source>
       <translation>Alarmas por tensión aux. baja</translation>
     </message>
     <message id="dcmeter_history_high_aux_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="64"/>
       <source>High aux voltage alarms</source>
       <translation>Alarmas por tensión aux. alta</translation>
     </message>
     <message id="dcmeter_history_minimum_aux_voltage">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="71"/>
       <source>Minimum aux voltage</source>
       <translation>Mínima tensión aux.</translation>
     </message>
     <message id="dcmeter_history_maximum_aux_voltage">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="82"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="79"/>
       <source>Maximum aux voltage</source>
       <translation>Máxima tensión aux.</translation>
     </message>
     <message id="dcmeter_history_produced_energy">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="103"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="99"/>
       <source>Produced energy</source>
       <translation>Energía producida</translation>
     </message>
     <message id="dcmeter_history_consumed_energy">
-      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="111"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageDcMeterHistory.qml" line="107"/>
       <source>Consumed energy</source>
       <translation>Energía consumida</translation>
     </message>
@@ -6495,12 +6495,12 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Cargador eólico</translation>
     </message>
     <message id="digitalinputs_state_low">
-      <location filename="../../data/DigitalInputs.qml" line="56"/>
+      <location filename="../../data/DigitalInputs.qml" line="59"/>
       <source>Low</source>
       <translation>Baja</translation>
     </message>
     <message id="digitalinputs_state_high">
-      <location filename="../../data/DigitalInputs.qml" line="59"/>
+      <location filename="../../data/DigitalInputs.qml" line="62"/>
       <source>High</source>
       <translation>Alto</translation>
     </message>
@@ -6975,7 +6975,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Temperatura motor</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="51"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="50"/>
       <source>Controller Temperature</source>
       <translation>Temperatura controlador</translation>
     </message>
@@ -7032,12 +7032,12 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Voltage FV máximo</translation>
     </message>
     <message id="inverter_maximum_battery_voltage">
-      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="27"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="26"/>
       <source>Maximum battery voltage</source>
       <translation>Tensión máxima de la batería</translation>
     </message>
     <message id="inverter_minimum_battery_voltage">
-      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="36"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="34"/>
       <source>Minimum battery voltage</source>
       <translation>Tensión mínima de la batería</translation>
     </message>
@@ -7225,12 +7225,12 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>%1 %2</translation>
     </message>
     <message id="firmware_installed_build_version_update_detected">
-      <location filename="../../pages/DialogLayer.qml" line="29"/>
+      <location filename="../../pages/DialogLayer.qml" line="45"/>
       <source>Firmware version update detected</source>
       <translation>Actualización de la versión de firmware detectada</translation>
     </message>
     <message id="firmware_installed_build_page_will_reload">
-      <location filename="../../pages/DialogLayer.qml" line="31"/>
+      <location filename="../../pages/DialogLayer.qml" line="47"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>La página se volverá a cargar automáticamente en diez segundos para cargar la última versión.</translation>
     </message>
@@ -7531,6 +7531,11 @@ Tenga en cuenta que este menú solo muestra contadores de Carlo Gavazzi conectad
       <location filename="../../data/EvChargers.qml" line="132"/>
       <source>Reserved</source>
       <translation></translation>
+    </message>
+    <message id="digitalinputs_touch_input_control">
+      <location filename="../../data/DigitalInputs.qml" line="49"/>
+      <source>Touch input control</source>
+      <translation>Control de entrada Touch</translation>
     </message>
   </context>
   <context>
@@ -8140,98 +8145,98 @@ Tenga en cuenta que este menú solo muestra contadores de Carlo Gavazzi conectad
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="97"/>
+      <location filename="../../src/main.cpp" line="99"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>Usar fuente de datos D-Bus: conectar a la dirección D-Bus indicada.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="98"/>
+      <location filename="../../src/main.cpp" line="100"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>Dirección</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="102"/>
+      <location filename="../../src/main.cpp" line="104"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>Usar fuente de datos D-Bus: conectar a la dirección D-Bus predeterminada.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="107"/>
+      <location filename="../../src/main.cpp" line="109"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>Usar fuente de datos MQTT: conectar a la dirección del broker MQTT indicada.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="108"/>
+      <location filename="../../src/main.cpp" line="110"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>Dirección</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="113"/>
+      <location filename="../../src/main.cpp" line="115"/>
       <source>MQTT data source device portal id.</source>
       <translation>Identificación del portal del dispositivo de la fuente de datos MQTT.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="114"/>
+      <location filename="../../src/main.cpp" line="116"/>
       <source>portalId</source>
       <translation>ID portal</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="118"/>
+      <location filename="../../src/main.cpp" line="120"/>
       <source>MQTT VRM webhost shard</source>
       <translation>Fragmento del hospedador web VRM MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="121"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>fragmento</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="123"/>
+      <location filename="../../src/main.cpp" line="125"/>
       <source>MQTT data source username</source>
       <translation>Nombre de usuario de la fuente de datos MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="124"/>
+      <location filename="../../src/main.cpp" line="126"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>Usuario</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="128"/>
+      <location filename="../../src/main.cpp" line="130"/>
       <source>MQTT data source password</source>
       <translation>Contraseña de la fuente de datos MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="129"/>
+      <location filename="../../src/main.cpp" line="131"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>Pass</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="133"/>
+      <location filename="../../src/main.cpp" line="135"/>
       <source>MQTT data source token</source>
       <translation>Token de la fuente de datos MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="134"/>
+      <location filename="../../src/main.cpp" line="136"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>Token</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="140"/>
       <source>Enable FPS counter</source>
       <translation>Habilitar contador de FPS</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="142"/>
+      <location filename="../../src/main.cpp" line="144"/>
       <source>Skip splash screen</source>
       <translation>Saltar pantalla de presentación</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="146"/>
+      <location filename="../../src/main.cpp" line="148"/>
       <source>Use mock data source for testing.</source>
       <translation>Usar fuente de datos ficticia para pruebas.</translation>
     </message>
