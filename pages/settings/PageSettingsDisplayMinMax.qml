@@ -39,7 +39,7 @@ Page {
 					ModalWarningDialog {
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						//% "Reset Range Values"
-						title: qsTrId("settings_wifi_disable_ap")
+						title: qsTrId("settings_minmax_reset_range_values")
 						//% "Are you sure that you want to reset all the values to zero?"
 						description: qsTrId("settings_minmax_reset_are_you_sure")
 
