@@ -424,6 +424,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/AcInputPhaseModel.qml
     data/common/AcInputServiceLoader.qml
     data/common/AcInputSettings.qml
+    data/common/AcInputSettingsModel.qml
     data/common/AcInputSystemInfo.qml
     data/common/ActiveAcInput.qml
     data/common/Battery.qml
