@@ -18,7 +18,10 @@ Device {
 	readonly property bool hasPassthroughSupport: _hasPassthroughSupport.value === 1
 	readonly property bool isMulti: !isNaN(numberOfAcInputs) && numberOfAcInputs !== 0
 
-	property ListModel inputSettings: ListModel {}
+	readonly property AcInputSettingsModel inputSettings: AcInputSettingsModel {
+		serviceUid: inverterCharger.serviceUid
+		numberOfAcInputs: _numberOfAcInputs.value || 0
+	}
 
 	readonly property int productId: _productId.value === undefined ? -1 : _productId.value
 	readonly property int productType: _productUpperByte === 0x19 || _productUpperByte === 0x26
@@ -76,40 +79,5 @@ Device {
 			return
 		}
 		inputSettings.get(inputIndex).inputSettings.setCurrentLimit(currentLimit)
-	}
-
-	function _addInputSettings(settings) {
-		let insertionIndex = inputSettings.count
-		for (let i = 0; i < inputSettings.count; ++i) {
-			if (settings.inputNumber < inputSettings.get(i).inputSettings.inputNumber) {
-				insertionIndex = i
-				break
-			}
-		}
-		inputSettings.insert(insertionIndex, { inputSettings: settings })
-	}
-
-	function _removeInputSettings(settings) {
-		for (let i = 0; i < inputSettings.length; ++i) {
-			if (inputSettings.get(i).inputSettings.inputNumber === settings.inputNumber) {
-				inputSettings.remove(i)
-				break
-			}
-		}
-	}
-
-	property Instantiator _acInputSettingsObjects: Instantiator {
-		model: _numberOfAcInputs.value || null
-		delegate: AcInputSettings {
-			serviceUid: inverterCharger.serviceUid
-			inputNumber: model.index + 1
-		}
-
-		onObjectAdded: function(index, object) {
-			inverterCharger._addInputSettings(object)
-		}
-		onObjectRemoved: function(index, object) {
-			inverterCharger._removeInputSettings(object)
-		}
 	}
 }
