@@ -73,19 +73,19 @@ Page {
 		serviceUid: inverterCharger.serviceUid
 	}
 
-	AcPhase{
+	AcPhase {
 		id: acActiveIn1
 
 		serviceUid: inverterCharger.serviceUid + "/Ac/ActiveIn/L1"
 	}
 
-	AcPhase{
+	AcPhase {
 		id: acActiveIn2
 
 		serviceUid: inverterCharger.serviceUid + "/Ac/ActiveIn/L2"
 	}
 
-	AcPhase{
+	AcPhase {
 		id: acActiveIn3
 
 		serviceUid: inverterCharger.serviceUid + "/Ac/ActiveIn/L3"
