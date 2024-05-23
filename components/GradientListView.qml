@@ -24,6 +24,9 @@ ListView {
 		anchors.bottom: root.bottom
 	}
 
+	maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
+	flickDeceleration: Theme.geometry_flickable_flickDeceleration
+
 	ScrollBar.vertical: ScrollBar {
 		topPadding: Theme.geometry_gradientList_topMargin
 		bottomPadding: Theme.geometry_gradientList_bottomMargin

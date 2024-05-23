@@ -32,6 +32,8 @@ Page {
 		orientation: ListView.Horizontal
 		snapMode: ListView.SnapOneItem
 		boundsBehavior: Flickable.DragOverBounds
+		maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
+		flickDeceleration: Theme.geometry_flickable_flickDeceleration
 
 		model: ObjectModel {
 			Loader {
