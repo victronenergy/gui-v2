@@ -64,7 +64,7 @@ Flow {
 				color: quantityLabel.unitColor
 				font.pixelSize: root.widgetSize >= VenusOS.OverviewWidget_Size_L
 						? Theme.font_size_body1
-						: Theme.font_size_phase_small
+						: Theme.font_overviewPage_phase_pixelSize
 			}
 
 			ElectricalQuantityLabel {

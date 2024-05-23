@@ -1,7 +1,8 @@
 {
     "font_size_gsm_icon_caption": 12,
     "font_size_phase_number": 12,
-    "font_size_phase_small": 14,
+    "font_size_phase_small": 13,
+    "font_size_phase_medium": 15,
     "font_size_caption": 16,
     "font_size_body1": 18,
     "font_size_body2": 22,

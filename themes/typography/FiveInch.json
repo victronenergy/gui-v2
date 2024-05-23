@@ -8,5 +8,6 @@
     "font_overviewPage_battery_timeToGo_pixelSize": "font_size_body1",
     "font_overviewPage_widget_quantityLabel_minimumSize": "font_size_body2",
     "font_overviewPage_widget_quantityLabel_maximumSize": "font_size_h1",
+    "font_overviewPage_phase_pixelSize": "font_size_phase_small",
     "font_splashView_progressText_size": "font_size_caption"
 }
