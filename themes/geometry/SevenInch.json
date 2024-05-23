@@ -9,6 +9,9 @@
     "geometry_icon_size_medium": 32,
     "geometry_icon_size_large": 48,
 
+    "geometry_flickable_maximumFlickVelocity": 2500,
+    "geometry_flickable_flickDeceleration": 2500,
+
     "geometry_barGauge_vertical_width_large": 8,
     "geometry_barGauge_vertical_width_small": 4,
     "geometry_barGauge_horizontal_height": 10,
