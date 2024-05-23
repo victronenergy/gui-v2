@@ -226,7 +226,7 @@
 
     "geometry_splashView_logo_verticalCenterOffset": -25,
     "geometry_splashView_logo_horizontalCenterOffset": -2,
-    "geometry_splashView_gaugeAnimation_verticalCenterOffset": 0,
+    "geometry_splashView_gaugeAnimation_verticalCenterOffset": -4,
     "geometry_splashView_progressBar_bottomMargin": 244,
     "geometry_splashView_progressBar_width": 464,
     "geometry_splashView_progressText_topMargin": 12,
