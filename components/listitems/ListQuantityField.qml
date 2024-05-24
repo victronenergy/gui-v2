@@ -14,7 +14,10 @@ ListTextField {
 	property int decimals: Units.defaultUnitPrecision(unit)
 
 	suffix: Units.defaultUnitString(unit)
-	textField.validator: DoubleValidator { decimals: root.decimals }
-	textField.inputMethodHints: Qt.ImhDigitsOnly
-	textField.text: Number(value).toFixed(decimals)
+	textField.validator: DoubleValidator {
+		decimals: root.decimals
+		locale: Units.numberFormattingLocaleName
+	}
+	textField.inputMethodHints: Qt.ImhFormattedNumbersOnly
+	textField.text: Units.formatNumber(root.value, root.decimals)
 }

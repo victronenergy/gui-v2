@@ -142,6 +142,7 @@ Page {
 				slider.first.value: 25
 				slider.second.value: 75
 				slider.suffix: "%"
+				slider.decimals: 1
 			}
 
 			ListButton {

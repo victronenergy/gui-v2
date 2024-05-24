@@ -37,6 +37,7 @@ class Units : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 	QML_SINGLETON
+	Q_PROPERTY(QString numberFormattingLocaleName READ numberFormattingLocaleName CONSTANT)
 
 public:
 	enum FormatHint {
@@ -49,6 +50,9 @@ public:
 	~Units() override;
 
 	static QObject* instance(QQmlEngine *engine, QJSEngine *);
+
+	QString numberFormattingLocaleName() const;
+	Q_INVOKABLE QString formatNumber(qreal number, int precision = 0) const;
 
 	Q_INVOKABLE int defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const;
 	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints = 0) const;

@@ -33,6 +33,12 @@ Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
 	}
 }
 
+const QLocale *formattingLocale()
+{
+	static const QLocale locale = QLocale::c();
+	return &locale;
+}
+
 }
 
 namespace Victron {
@@ -51,6 +57,16 @@ Units::Units(QObject *parent)
 
 Units::~Units()
 {
+}
+
+QString Units::numberFormattingLocaleName() const
+{
+	return formattingLocale()->name();
+}
+
+QString Units::formatNumber(qreal number, int precision) const
+{
+	return formattingLocale()->toString(number, 'f', precision);
 }
 
 int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
@@ -299,7 +315,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 
 		int vFixed = qRound(scaledValue * 10);
 		scaledValue = (1.0*vFixed) / 10.0;
-		quantity.number = QString::number(scaledValue, 'f', 1);
+		quantity.number = formattingLocale()->toString(scaledValue, 'f', 1);
 	} else {
 		// if the value is large (hundreds or thousands) no need to display decimals after the decimal point
 		int digits = numberOfDigits(scaledValue);
@@ -309,10 +325,9 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		const qreal vFixedMultiplier = std::pow(10, precision);
 		int vFixed = qRound(scaledValue * vFixedMultiplier);
 		scaledValue = (1.0*vFixed) / vFixedMultiplier;
-
-		quantity.number = QString::number(scaledValue, 'f', precision);
-
+		quantity.number = formattingLocale()->toString(scaledValue, 'f', precision);
 	}
+
 	return quantity;
 }
 
