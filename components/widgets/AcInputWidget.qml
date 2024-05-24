@@ -32,6 +32,19 @@ AcWidget {
 	}
 
 	onClicked: {
+		if (root.input.serviceType === "vebus") {
+			const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(root.input.serviceUid)
+			if (deviceIndex >= 0) {
+				const veBusDevice = Global.inverterChargers.veBusDevices.deviceAt(deviceIndex)
+				Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
+					"title": veBusDevice.name,
+					"veBusDevice": veBusDevice
+				})
+			}
+			return
+		}
+
+		// Assume this is on a grid/genset service
 		Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
 			"title": root.input.name,
 			"bindPrefix": root.input.serviceUid
