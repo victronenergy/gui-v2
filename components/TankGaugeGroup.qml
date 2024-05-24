@@ -33,25 +33,29 @@ TankItem {
 	gauge: Row {
 		id: subgauges // contains 1 or more gauges of a single type
 
-		spacing: Theme.geometry_levelsPage_subgauges_spacing
+		height: parent.height
+		spacing: root.mergeTanks ? Theme.geometry_levelsPage_subgauges_spacing : 0
 
 		Repeater {
 			model: root.gaugeTanks
 			delegate: Loader {
 				active: model.index === 0 || root.mergeTanks
-				sourceComponent: TankGauge {
-					expanded: root.expanded
-					animationEnabled: root.animationEnabled
-					width: {
+				width: {
+					if (active) {
 						const availableSpace = root.width - 2*Theme.geometry_levelsPage_subgauges_horizontalMargin
 						if (root.mergeTanks) {
 							return (availableSpace - (gaugeTanks.count - 1) * subgauges.spacing)/gaugeTanks.count
 						} else {
 							return availableSpace
 						}
+					} else {
+						return 0
 					}
-
-					height: subgauges.height
+				}
+				height: subgauges.height
+				sourceComponent: TankGauge {
+					expanded: root.expanded
+					animationEnabled: root.animationEnabled
 					valueType: root.tankProperties.valueType
 					value: (root.mergeTanks ? model.device.level : root.level) / 100
 					isGrouped: root.mergeTanks
