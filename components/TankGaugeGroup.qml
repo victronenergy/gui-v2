@@ -10,6 +10,7 @@ import Victron.Gauges
 TankItem {
 	id: root
 
+	property int groupIndex: -1
 	property bool animationEnabled: true
 	property int tankType
 	property bool expanded
@@ -39,7 +40,14 @@ TankItem {
 		Repeater {
 			model: root.gaugeTanks
 			delegate: Loader {
-				active: model.index === 0 || root.mergeTanks
+				id: tankGaugeLoader
+				property int tankIndex: model.index
+				property real tankLevel: model.device.level
+				// There are two options: either there is a single TankGaugeGroup which is showing
+				// all gauges for tanks of this type (and mergeTanks will be true), OR there are
+				// multiple TankGaugeGroup instances for tanks of this type, and each TankGaugeGroup
+				// should only show the gauge for the specific tank where the tank index matches the group index.
+				active: root.mergeTanks || (tankIndex === root.groupIndex)
 				width: {
 					if (active) {
 						const availableSpace = root.width - 2*Theme.geometry_levelsPage_subgauges_horizontalMargin
@@ -57,7 +65,7 @@ TankItem {
 					expanded: root.expanded
 					animationEnabled: root.animationEnabled
 					valueType: root.tankProperties.valueType
-					value: (root.mergeTanks ? model.device.level : root.level) / 100
+					value: tankGaugeLoader.tankLevel / 100
 					isGrouped: root.mergeTanks
 				}
 				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load tank levels gauge:", errorString())

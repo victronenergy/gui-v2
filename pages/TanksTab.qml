@@ -102,6 +102,7 @@ ListView {
 					totalRemaining: mergeTanks ? gaugeTanks.totalRemaining : model.device.remaining
 					totalCapacity: mergeTanks ? gaugeTanks.totalCapacity : model.device.capacity
 
+					groupIndex: model.index
 					gaugeTanks: tankTypeDelegate.tankModel
 					mergeTanks: tankTypeDelegate.mergeTanks
 
