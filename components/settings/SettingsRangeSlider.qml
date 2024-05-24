@@ -13,8 +13,6 @@ RangeSlider {
 	property string suffix
 	property real labelWidth: Theme.geometry_settings_battery_rangeSlider_labelWidth
 
-	readonly property string _labelPlaceholderText: "" + to.toFixed(decimals) + suffix
-
 	implicitWidth: parent ? parent.width : 0
 	implicitHeight: Theme.geometry_listItem_height
 	stepSize: (to-from) / Theme.geometry_listItem_slider_stepDivsion
@@ -33,7 +31,7 @@ RangeSlider {
 			leftMargin: Theme.geometry_listItem_content_horizontalMargin
 		}
 		width: root.labelWidth
-		text: root.first.value.toFixed(root.decimals) + root.suffix
+		text: Units.formatNumber(root.first.value, root.decimals) + root.suffix
 		horizontalAlignment: Text.AlignRight
 		font.pixelSize: Theme.font_size_body2
 		color: Theme.color_font_secondary
@@ -46,7 +44,7 @@ RangeSlider {
 			rightMargin: Theme.geometry_listItem_content_horizontalMargin
 		}
 		width: root.labelWidth
-		text: root.second.value.toFixed(root.decimals) + root.suffix
+		text: Units.formatNumber(root.second.value, root.decimals) + root.suffix
 		font.pixelSize: Theme.font_size_body2
 		color: Theme.color_font_secondary
 	}

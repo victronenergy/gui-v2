@@ -14,7 +14,6 @@ QtObject {
 	property var mainView
 	property var mockDataSimulator    // only valid when mock mode is active
 	property var dataManager
-	property var locale: Qt.locale()  // TODO: read from settings
 	property VeQItemTableModel dataServiceModel: null
 	property var firmwareUpdate
 
@@ -88,7 +87,6 @@ QtObject {
 		mainView = null
 		mockDataSimulator = null
 		dataManager = null
-		locale = Qt.locale()
 		dataServiceModel = null
 		firmwareUpdate = null
 		inputPanel = null

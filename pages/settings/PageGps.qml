@@ -19,14 +19,17 @@ Page {
 
 		switch (fmt) {
 		case VenusOS.GpsData_Format_DecimalDegrees: // e.g. 52.34489
-			return val.toFixed(6)
+			return Units.formatNumber(val, 6)
 		case VenusOS.GpsData_Format_DegreesMinutes: // e.g. 52° 20.693 N
-			return "%1° %2 %3".arg(Math.floor(degrees).toFixed()).arg(minutes.toFixed(4)).arg(direction)
+			return "%1° %2 %3"
+				.arg(Units.formatNumber(Math.floor(degrees)))
+				.arg(Units.formatNumber(minutes, 4))
+				.arg(direction)
 		default: // VenusOS.GpsData_Format_DegreesMinutesSeconds e.g. 52° 20' 41.6" N
 			return "%1° %2' %3\" %4"
-					.arg(Math.floor(degrees).toFixed())
-					.arg(Math.floor(minutes).toFixed())
-					.arg(seconds.toFixed(1))
+					.arg(Units.formatNumber(Math.floor(degrees)))
+					.arg(Units.formatNumber(Math.floor(minutes)))
+					.arg(Units.formatNumber(seconds, 1))
 					.arg(direction)
 		}
 	}
@@ -73,19 +76,19 @@ Page {
 					if (speedUnit.value === "km/h") {
 						//: GPS speed data, in kilometers per hour
 						//% "%1 km/h"
-						return qsTrId("settings_gps_speed_kmh").arg((dataItem.value * 3.6).toFixed(1))
+						return qsTrId("settings_gps_speed_kmh").arg(Units.formatNumber(dataItem.value * 3.6, 1))
 					} else if (speedUnit.value === "mph") {
 						//: GPS speed data, in miles per hour
 						//% "%1 mph"
-						return qsTrId("settings_gps_speed_mph").arg((dataItem.value * 2.236936).toFixed(1))
+						return qsTrId("settings_gps_speed_mph").arg(Units.formatNumber(dataItem.value * 2.236936, 1))
 					} else if (speedUnit.value === "kt") {
 						//: GPS speed data, in knots
 						//% "%1 kt"
-						return qsTrId("settings_gps_speed_kt").arg((dataItem.value * (3600/1852)).toFixed(1))
+						return qsTrId("settings_gps_speed_kt").arg(Units.formatNumber(dataItem.value * (3600/1852), 1))
 					} else {
 						//: GPS speed data, in meters per second
 						//% "%1 m/s"
-						return qsTrId("settings_gps_speed_ms").arg(dataItem.value.toFixed(2))
+						return qsTrId("settings_gps_speed_ms").arg(Units.formatNumber(dataItem.value, 2))
 					}
 				}
 			}
@@ -94,7 +97,7 @@ Page {
 				//% "Course"
 				text: qsTrId("settings_gps_course")
 				dataItem.uid: bindPrefix + "/Course"
-				secondaryText: dataItem.isValid ? "%1°".arg(dataItem.value.toFixed(1)) : ""
+				secondaryText: dataItem.isValid ? "%1°".arg(Units.formatNumber(dataItem.value, 1)) : ""
 			}
 
 			ListTextItem {

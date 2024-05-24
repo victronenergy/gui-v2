@@ -16,7 +16,7 @@ Page {
 			return ""
 		}
 		let perc = count / total * 100
-		return " (" + perc.toFixed(2) + "%)"
+		return " (" + Units.formatNumber(perc, 2) + "%)"
 	}
 
 	VeQuickItem {
