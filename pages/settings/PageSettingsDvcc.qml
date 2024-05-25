@@ -177,6 +177,10 @@ Page {
 			}
 
 			ListTextItem {
+				id: bmsName
+
+				readonly property string serviceUid: BackendConnection.serviceUidFromName(bmsService.value || "", bmsInstance.value || 0)
+
 				//% "Auto selected"
 				text: qsTrId("settings_dvcc_auto_selected")
 				allowed: defaultAllowed && bmsOptions.currentValue === -1
@@ -191,15 +195,19 @@ Page {
 					uid: Global.system.serviceUid + "/ActiveBmsService"
 				}
 
-				// TODO the uid is wrong on MQTT, need something like mqtt/<type>/ProductName
-				// but it is currently mqtt/com.victronenergy.<service>/ProductName
+				VeQuickItem {
+					id: bmsInstance
+					uid: Global.system.serviceUid + "/ActiveBmsInstance"
+				}
+
 				VeQuickItem {
 					id: bmsProductName
-					uid: bmsService.isValid ? "%1/%2/ProductName".arg(BackendConnection.uidPrefix()).arg(bmsService.value) : ""
+					uid: bmsName.serviceUid ? "%1/ProductName".arg(bmsName.serviceUid) : ""
 				}
+
 				VeQuickItem {
 					id: bmsCustomName
-					uid: bmsService.isValid ? "%1/%2/CustomName".arg(BackendConnection.uidPrefix()).arg(bmsService.value) : ""
+					uid: bmsName.serviceUid ? "%1/CustomName".arg(bmsName.serviceUid) : ""
 				}
 			}
 		}
