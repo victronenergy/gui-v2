@@ -487,13 +487,37 @@ QString BackendConnection::serviceTypeFromUid(const QString &uid) const
 	case DBusSource:
 	case MockSource:
 	{
-		// uid format is <dbus|mock>/com.victronenergy.<serviceType>.[suffx]/*
+		// uid format is "<dbus|mock>/com.victronenergy.<serviceType>[.suffx]/*"
 		const QString serviceTypePart = uid.split('/').value(1);
 		return serviceTypePart.split('.').value(2);
 	}
 	case MqttSource:
 		// uid format is "mqtt/<serviceType>/*"
 		return uid.split('/').value(1);
+	}
+	return QString();
+}
+
+QString BackendConnection::serviceUidFromName(const QString &serviceName, int deviceInstance) const
+{
+	// serviceName format is "com.victronenergy.<serviceType>[.suffx]/*"
+	if (serviceName.isEmpty() || deviceInstance < 0) {
+		return QString();
+	}
+
+	switch (type()) {
+	case UnknownSource:
+		break;
+	case DBusSource:
+	case MockSource:
+		// Return <dbus|mock>/<serviceName>
+		return uidPrefix() + '/' + serviceName;
+	case MqttSource:
+	{
+		// Return mqtt/<serviceType>/<deviceInstance>
+		const QString serviceType = serviceName.split('.').value(2);
+		return QString("%1/%2/%3").arg(uidPrefix(), serviceType, QString::number(deviceInstance));
+	}
 	}
 	return QString();
 }
