@@ -91,7 +91,9 @@ QtObject {
 		setMockSystemValue("AutoSelectedTemperatureService", "-")
 		setMockSettingValue("SystemSetup/SharedTemperatureSense", 2)
 		setMockSystemValue("Control/BatteryCurrentSense", 0)
+		setMockSettingValue("SystemSetup/BmsInstance", -1)
 		setMockSystemValue("ActiveBmsService", "com.victronenergy.battery.ttyUSB1")
+		setMockSystemValue("ActiveBmsInstance", 1)
 
 		setMockSystemValue("SystemType", "ESS")
 		setMockSystemValue("Hub", 4)
