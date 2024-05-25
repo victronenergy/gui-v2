@@ -70,9 +70,7 @@ QtObject {
 	property SystemDc dc: SystemDc {}
 
 	readonly property QtObject veBus: QtObject {
-		readonly property string serviceUid: BackendConnection.type === BackendConnection.MqttSource
-				? (_deviceInstance.isValid ? "mqtt/vebus/" + _deviceInstance.value : "")
-				: (_serviceName.isValid ? BackendConnection.uidPrefix() + "/" + _serviceName.value : "")
+		readonly property string serviceUid: BackendConnection.serviceUidFromName(_serviceName.value || "", _deviceInstance.value || 0)
 		readonly property real power: _power.value === undefined ? NaN : _power.value
 
 		readonly property VeQuickItem _serviceName: VeQuickItem { uid: root.serviceUid + "/VebusService" }
