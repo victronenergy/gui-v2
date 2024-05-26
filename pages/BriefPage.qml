@@ -204,7 +204,7 @@ SwipeViewPage {
 
 			// Similarly to the Overview page, show the AC input, even when it is not connected, as
 			// long as one of the AC input sources are valid.
-			active: Global.acInputs.findValidSource() !== VenusOS.AcInputs_InputSource_NotAvailable
+			active: Global.acInputs.findValidSource() !== VenusOS.AcInputs_InputSource_NotAvailable && root.state !== "panelOpened"
 
 			sourceComponent: SideMultiGauge {
 				readonly property var gaugeParams: root._leftGaugeParameters(acInputGauge, phaseModel && phaseModel.count > 1)
@@ -258,7 +258,7 @@ SwipeViewPage {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? root._gaugeHeight(root._leftGaugeCount) : 0
-			active: Global.dcInputs.model.count > 0
+			active: Global.dcInputs.model.count > 0 && root.state !== "panelOpened"
 			sourceComponent: SideGauge {
 				readonly property var gaugeParams: root._leftGaugeParameters(dcInputGauge)
 
@@ -302,7 +302,7 @@ SwipeViewPage {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? root._gaugeHeight(root._leftGaugeCount) : 0
-			active: Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0
+			active: (Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0) && root.state !== "panelOpened"
 			sourceComponent: SolarYieldGauge {
 				readonly property var gaugeParams: root._leftGaugeParameters(solarYieldGauge)
 
@@ -345,6 +345,7 @@ SwipeViewPage {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: root._gaugeHeight(root._rightGaugeCount)
+			active: root.state !== "panelOpened"
 
 			sourceComponent: SideMultiGauge {
 				readonly property var gaugeParams: root._rightGaugeParameters(acLoadGauge, phaseModel.count > 1)
@@ -382,7 +383,7 @@ SwipeViewPage {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? root._gaugeHeight(root._rightGaugeCount) : 0
-			active: !isNaN(Global.system.loads.dcPower)
+			active: !isNaN(Global.system.loads.dcPower) && root.state !== "panelOpened"
 			sourceComponent: SideGauge {
 				readonly property var gaugeParams: root._rightGaugeParameters(dcLoadGauge)
 
@@ -445,9 +446,6 @@ SwipeViewPage {
 		active: false
 		x: root.width
 		opacity: 0.0
-		property bool showing // intermediate, used only to trigger loading.
-		property bool showingAndLoaded: showing && active && status == Loader.Ready
-		onShowingChanged: if (showing) active = true // trigger creation.
 	}
 
 	Connections {
@@ -455,14 +453,18 @@ SwipeViewPage {
 		enabled: root.isCurrentPage
 
 		function onRightButtonClicked() {
-			sidePanel.showing = !sidePanel.showing
+			if (root.state === "initialized") {
+				root.state = "panelOpening"
+			} else if (root.state === "panelOpened") {
+				root.state = "initialized"
+			}
 		}
 	}
 
 	states: [
 		State {
 			name: "initialized"
-			when: !Global.splashScreenVisible && !sidePanel.showingAndLoaded
+			when: !Global.splashScreenVisible
 			PropertyChanges {
 				target: root
 				_gaugeArcMargin: 0
@@ -472,9 +474,8 @@ SwipeViewPage {
 			}
 		},
 		State {
-			name: "panelOpen"
+			name: "panelOpening"
 			extend: "initialized"
-			when: sidePanel.showingAndLoaded
 			PropertyChanges {
 				target: sidePanel
 				x: root.width - sidePanel.width - Theme.geometry_page_content_horizontalMargin
@@ -485,6 +486,11 @@ SwipeViewPage {
 				_gaugeArcOpacity: 0
 				_gaugeLabelOpacity: 1
 			}
+			StateChangeScript { script: sidePanel.active = true }
+		},
+		State {
+			name: "panelOpened"
+			extend: "panelOpening"
 		}
 	]
 
@@ -513,7 +519,7 @@ SwipeViewPage {
 			}
 		},
 		Transition {
-			to: "panelOpen"
+			to: "panelOpening"
 			from: "initialized"
 			SequentialAnimation {
 				NumberAnimation {
@@ -527,11 +533,12 @@ SwipeViewPage {
 					duration: Theme.animation_briefPage_sidePanel_slide_duration
 					easing.type: Easing.InQuad
 				}
+				ScriptAction { script: root.state = "panelOpened" }
 			}
 		},
 		Transition {
 			to: "initialized"
-			from: "panelOpen"
+			from: "panelOpened"
 			SequentialAnimation {
 				NumberAnimation {
 					target: sidePanel
