@@ -7,7 +7,7 @@ import QtQuick
 import Victron.VenusOS
 
 Label {
-	property bool allowed
+	property bool allowed: true
 
 	width: parent ? parent.width : 0
 	height: allowed ? implicitHeight : 0
