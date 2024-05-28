@@ -225,9 +225,7 @@ Page {
 		ListSpinBox {
 			//% "Grid setpoint"
 			text: qsTrId("settings_ess_grid_setpoint")
-			allowed: defaultAllowed
-				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
+			allowed: defaultAllowed && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			stepSize: 10
