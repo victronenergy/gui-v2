@@ -61,7 +61,7 @@ ListItem {
 		width: Math.max(Theme.geometry_listItem_textField_minimumWidth,
 						Math.min(Theme.geometry_listItem_textField_maximumWidth,
 								 implicitWidth + leftPadding + rightPadding))
-		enabled: root.enabled
+		visible: root.enabled
 		text: dataItem.isValid ? dataItem.value : ""
 		rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
 		horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
@@ -121,8 +121,17 @@ ListItem {
 
 	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
 	content.children: [
-		defaultContent
+		defaultContent,
+		readonlyLabel
 	]
+
+	ListTextItemSecondaryLabel {
+		id: readonlyLabel
+
+		text: textField.text.length > 0 ? textField.text : "--"
+		width: Math.min(implicitWidth, root.maximumContentWidth)
+		visible: !root.enabled
+	}
 
 	VeQuickItem {
 		id: dataItem

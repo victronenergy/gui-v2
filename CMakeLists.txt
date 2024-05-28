@@ -350,6 +350,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListTextField.qml
     components/listitems/ListTextGroup.qml
     components/listitems/ListTextItem.qml
+    components/listitems/ListTextItemSecondaryLabel.qml
     components/listitems/ListTimeSelector.qml
 
     components/settings/AlarmLevelRadioButtonGroup.qml
@@ -542,7 +543,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsVecanDevice.qml
     pages/settings/PageSettingsVecanDevices.qml
     pages/settings/PageSettingsWifi.qml
-    pages/settings/PageSettingsWifiWithAccessPoint.qml
     pages/settings/PageTzInfo.qml
     pages/settings/PageVrmDeviceInstances.qml
     pages/settings/debug/HubData.qml

@@ -138,7 +138,7 @@ SwipeViewPage {
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					width: parent.width - iconContainer.width
-					color: Theme.color_notificationsPage_text_color
+					color: Theme.color_font_secondary
 					font.pixelSize: Theme.font_size_body3
 
 					//% "No current alerts"
@@ -146,16 +146,12 @@ SwipeViewPage {
 				}
 			}
 
-			Label {
+			ListSectionHeader {
 				id: history
 
-				anchors.top: activeNotificationsView.count ? activeNotificationsView.bottom : noCurrentAlerts.bottom
-				verticalAlignment: Text.AlignBottom
-				bottomPadding: Theme.geometry_notificationsPage_history_bottomPadding
-				height: Theme.geometry_notificationsPage_history_height
-				visible: notificationsView.count !== 0
-				color: Theme.color_notificationsPage_text_color
 				text: CommonWords.history
+				anchors.top: activeNotificationsView.count ? activeNotificationsView.bottom : noCurrentAlerts.bottom
+				allowed: notificationsView.count !== 0
 			}
 		}
 

@@ -107,8 +107,6 @@
     "geometry_notificationsPage_delegate_marker_radius" : 4,
     "geometry_notificationsPage_snoozeButton_height" : 36,
     "geometry_notificationsPage_snoozeButton_spacing" : 7,
-    "geometry_notificationsPage_history_height" : 40,
-    "geometry_notificationsPage_history_bottomPadding" : 3,
 
     "geometry_textField_height": 40,
     "geometry_textField_horizontalMargin": 16,

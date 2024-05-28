@@ -117,8 +117,6 @@
     "color_solarHistoryErrorView_primaryText": "color_white",
     "color_solarHistoryErrorView_secondaryText": "color_dimWhite",
 
-    "color_notificationsPage_text_color": "color_gray4",
-
     "color_settings_gsmModem_signalStrength_inactive": "color_darkGray2",
     "color_settings_gsmModem_signalStrength_active": "color_gray2"
 }

@@ -92,9 +92,7 @@ SwipeViewPage {
 			{
 				//% "Wi-Fi"
 				text: qsTrId("settings_wifi"),
-				page: accessPoint.isValid
-					? "/pages/settings/PageSettingsWifiWithAccessPoint.qml"
-					: "/pages/settings/PageSettingsWifi.qml"
+				page: "/pages/settings/PageSettingsWifi.qml"
 			},
 			{
 				//% "GSM modem"
@@ -166,11 +164,6 @@ SwipeViewPage {
 	VeQuickItem {
 		id: systemType
 		uid: Global.system.serviceUid + "/SystemType"
-	}
-
-	VeQuickItem {
-		id: accessPoint
-		uid: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
 	}
 
 	VeQuickItem {
