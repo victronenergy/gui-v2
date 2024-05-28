@@ -112,6 +112,9 @@ QtObject {
 		setMockSettingValue("CGwacs/MaxChargePower", -1)
 		setMockSettingValue("CGwacs/MaxDischargePower", -1)
 		setMockSettingValue("CGwacs/RunWithoutGridMeter", 0)
+		setMockSettingValue("CGwacs/AlwaysPeakShave", 0)
+		setMockSettingValue("CGwacs/AcInputLimit", 100)
+		setMockSettingValue("CGwacs/AcExportLimit", 200)
 		setMockSettingValue("CGwacs/OvervoltageFeedIn", 1)
 		setMockSettingValue("CGwacs/PreventFeedback", 0)
 
