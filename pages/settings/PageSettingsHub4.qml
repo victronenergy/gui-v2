@@ -124,13 +124,14 @@ Page {
 			}
 		}
 
-		ListTextItem {
+		ListQuantityItem {
 			//% "Active SOC limit"
 			text: qsTrId("settings_ess_active_soc_limit")
 			allowed: defaultAllowed
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
-			secondaryText: Math.max(Global.ess.minimumStateOfCharge || 0, socLimit.value || 0) + "%"
+			value: Math.max(Global.ess.minimumStateOfCharge || 0, socLimit.value || 0)
+			unit: VenusOS.Units_Percentage
 		}
 
 		ListRadioButtonGroup {
