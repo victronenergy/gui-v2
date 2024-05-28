@@ -14,18 +14,11 @@ ListItem {
 	property alias secondaryLabel: secondaryLabel
 
 	content.children: [
-		Label {
+		ListTextItemSecondaryLabel {
 			id: secondaryLabel
-
-			anchors.verticalCenter: parent.verticalCenter
-			width: Math.min(implicitWidth, root.maximumContentWidth)
-			visible: root.secondaryText.length > 0
 			text: dataItem.value === undefined ? "" : dataItem.value
-			font.pixelSize: Theme.font_size_body2
-			color: Theme.color_listItem_secondaryText
-			wrapMode: Text.Wrap
-			horizontalAlignment: Text.AlignRight
-			verticalAlignment: Text.AlignVCenter
+			width: Math.min(implicitWidth, root.maximumContentWidth)
+			visible: text.length > 0
 		}
 	]
 

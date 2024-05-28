@@ -99,13 +99,60 @@ Page {
 		id: settingsListView
 
 		model: ListModel { id: model }
-		header: ListLabel {
-			allowed: settingsListView.count === 0
-			text: scanItem.isValid
-					//% "No access points"
-				  ? qsTrId("settings_wifi_no_access_points")
-					//% "No Wi-Fi adapter connected"
-				  : qsTrId("settings_wifi_no_wifi_adapter_connected")
+
+		header: Column {
+			width: parent.width
+			ListSwitch {
+				//% "Create access point"
+				text: qsTrId("settings_wifi_create_ap")
+				checked: accessPoint.value === 1
+				allowed: defaultAllowed && accessPoint.isValid
+				updateOnClick: false
+
+				onClicked: {
+					if (checked) {
+						Global.dialogLayer.open(confirmApDialogComponent)
+					} else {
+						accessPoint.setValue(1)
+					}
+				}
+
+				VeQuickItem {
+					id: accessPoint
+					uid: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
+				}
+
+				Component {
+					id: confirmApDialogComponent
+
+					ModalWarningDialog {
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						//% "Disable Access Point"
+						title: qsTrId("settings_wifi_disable_ap")
+						//% "Are you sure that you want to disable the access point?"
+						description: qsTrId("settings_wifi_disable_ap_are_you_sure")
+
+						onAccepted: {
+							accessPoint.setValue(0)
+						}
+					}
+				}
+			}
+
+			ListSectionHeader {
+				//% "Wi-Fi networks"
+				text: qsTrId("settings_wifi_networks")
+				allowed: scanItem.isValid && accessPoint.isValid
+			}
+
+			ListLabel {
+				allowed: settingsListView.count === 0
+				text: scanItem.isValid && servicesItem.isValid
+						//% "No access points"
+					  ? qsTrId("settings_wifi_no_access_points")
+						//% "No Wi-Fi adapter connected"
+					  : qsTrId("settings_wifi_no_wifi_adapter_connected")
+			}
 		}
 
 		delegate: ListNavigationItem {
