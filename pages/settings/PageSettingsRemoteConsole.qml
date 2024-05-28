@@ -83,7 +83,7 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/VncLocal"
 
 				bottomContentChildren: ListLabel {
-					visible: text.length > 0
+					allowed: text.length > 0
 					topPadding: 0
 					bottomPadding: 0
 					color: Theme.color_font_secondary

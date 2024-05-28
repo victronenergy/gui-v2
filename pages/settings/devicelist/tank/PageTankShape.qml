@@ -76,7 +76,7 @@ Page {
 		header: ListLabel {
 			//% "No custom shape defined. You may define one with up to ten points. Note that 0% and 100% are implied."
 			text: qsTrId("devicelist_tankshape_empty")
-			visible: pointsListView.count === 0
+			allowed: pointsListView.count === 0
 		}
 
 		delegate: ListTextGroup {

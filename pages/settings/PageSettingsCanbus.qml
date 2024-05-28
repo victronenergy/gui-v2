@@ -127,7 +127,7 @@ Page {
 				dataItem.uid: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
 
 				bottomContentChildren: ListLabel {
-					visible: text.length > 0
+					allowed: text.length > 0
 					color: Theme.color_font_secondary
 					text: root._isVecan
 						//% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
@@ -176,7 +176,7 @@ Page {
 						bottomPadding: 0
 						//% "There is another device connected with this unique number, please select a new number."
 						text: qsTrId("settings_canbus_unique_id_conflict")
-						visible: vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1
+						allowed: vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1
 					},
 					ListLabel {
 						id: uniqueIdOkLabel
@@ -184,7 +184,7 @@ Page {
 						bottomPadding: 0
 						//% "OK: No other device is connected with this unique number."
 						text: qsTrId("settings_canbus_unique_id_ok")
-						visible: (vecanSameUniqueNameUsed.value === 0 || rvcSameUniqueNameUsed.value === 0) && uniqueCheck.testDone
+						allowed: (vecanSameUniqueNameUsed.value === 0 || rvcSameUniqueNameUsed.value === 0) && uniqueCheck.testDone
 					}
 				]
 

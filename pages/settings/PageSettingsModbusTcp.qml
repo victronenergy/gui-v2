@@ -34,7 +34,7 @@ Page {
 			ListLabel {
 				//% "No errors reported"
 				text: lastError.isValid ? lastError.value : qsTrId("settings_modbus_no_errors")
-				visible: enableModbusTcp.checked
+				allowed: enableModbusTcp.checked
 				horizontalAlignment: Text.AlignHCenter
 			}
 

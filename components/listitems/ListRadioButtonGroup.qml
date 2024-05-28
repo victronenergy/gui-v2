@@ -169,7 +169,7 @@ ListNavigationItem {
 								color: Theme.color_font_secondary
 								text: bottomContentLoader.caption
 								font.pixelSize: Theme.font_size_caption
-								visible: bottomContentLoader.caption.length > 0
+								allowed: bottomContentLoader.caption.length > 0
 							}
 						}
 					}

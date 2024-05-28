@@ -116,7 +116,7 @@ Page {
 			ListLabel {
 				//% "Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu."
 				text: qsTrId("batterysettingsbattery_time_to_go_discharge_note")
-				visible: dischargeFloorLinkedToRelay.isValid && dischargeFloorLinkedToRelay.value !== 0
+				allowed: dischargeFloorLinkedToRelay.isValid && dischargeFloorLinkedToRelay.value !== 0
 
 				VeQuickItem {
 					id: dischargeFloorLinkedToRelay
