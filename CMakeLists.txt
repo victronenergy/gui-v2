@@ -508,6 +508,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsDisplayMinMax.qml
     pages/settings/PageSettingsDisplayUnits.qml
     pages/settings/PageSettingsDvcc.qml
+    pages/settings/PageSettingsDynamicEss.qml
     pages/settings/PageSettingsFirmware.qml
     pages/settings/PageSettingsFirmwareOffline.qml
     pages/settings/PageSettingsFirmwareOnline.qml
