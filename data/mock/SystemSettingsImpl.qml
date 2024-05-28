@@ -282,6 +282,9 @@ QtObject {
 		setMockSolarChargerValue("/Alarms/HighVoltage", VenusOS.Alarm_Level_OK)
 
 		setMockSystemValue("/SystemType", "ESS")
+		setMockSettingValue("DynamicEss/Mode", 1)
+		setMockSystemValue("DynamicEss/Active", 2)
+		setMockSystemValue("DynamicEss/TargetSoc", 55)
 
 		ClockTime.clockTime = (new Date().getTime() / 1000)
 		setMockPlatformValue("Device/Time", ClockTime.clockTime)

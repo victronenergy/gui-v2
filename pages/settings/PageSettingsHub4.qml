@@ -277,6 +277,22 @@ Page {
 		}
 
 		ListNavigationItem {
+			//% "Dynamic ESS"
+			text: qsTrId("settings_ess_dynamic")
+			allowed: (dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service))
+					&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+					&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml", { title: text })
+			}
+
+			VeQuickItem {
+				id: dEssModeItem
+				uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
+			}
+		}
+
+		ListNavigationItem {
 			text: CommonWords.debug
 			allowed: defaultAllowed
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
