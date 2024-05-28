@@ -49,7 +49,7 @@ ObjectModel {
 	ListLabel {
 		//% "Note that changing the Low state-of-charge setting also changes the Time-to-go discharge floor setting in the battery menu."
 		text: qsTrId("batterysettingrelay_low_state_of_charge_setting_note")
-		visible: dischargeFloorLinkedToRelay.isValid && dischargeFloorLinkedToRelay.value !== 0 && lowSoc.visible
+		allowed: dischargeFloorLinkedToRelay.isValid && dischargeFloorLinkedToRelay.value !== 0 && lowSoc.visible
 
 		VeQuickItem {
 			id: dischargeFloorLinkedToRelay

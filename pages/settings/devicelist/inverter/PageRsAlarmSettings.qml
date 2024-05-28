@@ -20,16 +20,16 @@ Page {
 				for (let i = 0; i < settingsListView.count; ++i) {
 					const listItem = settingsListView.itemAtIndex(i)
 					if (listItem && listItem.visible) {
-						visible = false
+						allowed = false
 						return
 					}
 				}
-				visible = true
+				allowed = true
 			}
 
 			//% "No alarms to be configured"
 			text: qsTrId("rs_alarm_no_alarms_to_be_configured")
-			visible: false
+			allowed: false
 		}
 
 		delegate: AlarmLevelRadioButtonGroup {

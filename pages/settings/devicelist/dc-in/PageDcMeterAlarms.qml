@@ -15,7 +15,7 @@ Page {
 		header: ListLabel {
 			//% "No alarms"
 			text: qsTrId("dcmeter_alarms_no_alarms")
-			visible: !lowVoltage.visible
+			allowed: !lowVoltage.visible
 					 && !highVoltage.visible
 					 && !lowAuxVoltage.visible
 					 && !highAuxVoltage.visible

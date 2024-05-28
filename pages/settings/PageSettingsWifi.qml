@@ -28,7 +28,7 @@ Page {
 		id: settingsListView
 
 		header: ListLabel {
-			visible: settingsListView.count === 0
+			allowed: settingsListView.count === 0
 			text: {
 				if (root._tech) {
 					if (root._tech.powered) {

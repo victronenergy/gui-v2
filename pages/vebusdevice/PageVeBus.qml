@@ -124,7 +124,7 @@ Page {
 
 				//% "A new MK3 version is available.\nNOTE: The update might temporarily stop the system."
 				text: qsTrId("vebus_mk3_new_version_available")
-				visible: mkVersion.value === 1170212 && mk3Update.value === 0
+				allowed: mkVersion.value === 1170212 && mk3Update.value === 0
 			}
 
 			ListButton {
@@ -297,13 +297,13 @@ Page {
 			ListLabel {
 				//% "A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible."
 				text: qsTrId("vebus_device_bms_message")
-				visible: bmsMode.isValid
+				allowed: bmsMode.isValid
 			}
 
 			ListLabel {
 				//% "A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!"
 				text: qsTrId("vebus_device_bms_not_found")
-				visible: bmsType.value === VenusOS.VeBusDevice_Bms_Type_VeBus && !bmsMode.isValid
+				allowed: bmsType.value === VenusOS.VeBusDevice_Bms_Type_VeBus && !bmsMode.isValid
 			}
 
 			ListNavigationItem {

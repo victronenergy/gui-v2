@@ -17,7 +17,7 @@ Page {
 			ListLabel {
 				//% "<b>CAUTION:</b> Read the manual before adjusting."
 				text: qsTrId("settings_dvcc_instructions")
-				visible: commonSettings.userHasWriteAccess
+				allowed: commonSettings.userHasWriteAccess
 			}
 
 			DvccCommonSettings {

@@ -141,7 +141,7 @@ Page {
 				font.pixelSize: Theme.font_size_caption
 				color: Theme.color_font_secondary
 				leftPadding: infoIcon.x + infoIcon.width + infoIcon.x/2
-				visible: bmsControlled.dataItem.value === 1
+				allowed: bmsControlled.dataItem.value === 1
 
 				CP.IconImage {
 					id: infoIcon

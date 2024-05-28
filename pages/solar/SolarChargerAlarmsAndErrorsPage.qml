@@ -19,7 +19,7 @@ Page {
 			// TODO add 'active alarms' section for this charger
 
 			ListLabel {
-				visible: lowBatteryAlarm.visible || highBatteryAlarm.visible || highTemperatureAlarm.visible || shortCircuitAlarm.visible
+				allowed: lowBatteryAlarm.visible || highBatteryAlarm.visible || highTemperatureAlarm.visible || shortCircuitAlarm.visible
 				leftPadding: 0
 				color: Theme.color_listItem_secondaryText
 				font.pixelSize: Theme.font_size_caption
@@ -63,7 +63,7 @@ Page {
 			}
 
 			ListLabel {
-				visible: root.solarCharger.errorModel.count > 0
+				allowed: root.solarCharger.errorModel.count > 0
 				leftPadding: 0
 				color: Theme.color_listItem_secondaryText
 				font.pixelSize: Theme.font_size_caption
