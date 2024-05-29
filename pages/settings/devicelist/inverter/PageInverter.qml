@@ -23,7 +23,9 @@ Page {
 		//% "High AC OUT voltage"
 		{ text: qsTrId("rs_alarm_high_ac_out_voltage"), alarmSuffix: "/HighVoltageAcOut", pathSuffix: "/Settings/AlarmLevel/HighVoltageAcOut" },
 		{ text: CommonWords.alarm_setting_overload, alarmSuffix: "/Overload", pathSuffix: "/Settings/AlarmLevel/Overload" },
-		{ text: CommonWords.alarm_setting_dc_ripple, alarmSuffix: "/Ripple", pathSuffix: "/Settings/AlarmLevel/Ripple" }
+		{ text: CommonWords.alarm_setting_dc_ripple, alarmSuffix: "/Ripple", pathSuffix: "/Settings/AlarmLevel/Ripple" },
+		//% "Short circuit"
+		{ text: qsTrId("rs_alarm_short_circuit"), alarmSuffix: "/ShortCircuit", pathSuffix: "/Settings/AlarmLevel/ShortCircuit" }
 	]
 
 	VeQuickItem {
