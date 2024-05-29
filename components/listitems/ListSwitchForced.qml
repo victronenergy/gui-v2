@@ -9,9 +9,9 @@ import Victron.VenusOS
 ListSwitch {
 	id: root
 
-	readonly property bool _forced: dataItem.value === VenusOS.DVCC_ForcedOff || dataItem.value === VenusOS.DVCC_ForcedOn
+	readonly property bool _forced: dataItem.value === VenusOS.Switch_ForcedOff || dataItem.value === VenusOS.Switch_ForcedOn
 
-	checked: dataItem.value === 1 || dataItem.value === VenusOS.DVCC_ForcedOn
+	checked: dataItem.value === 1 || dataItem.value === VenusOS.Switch_ForcedOn
 	enabled: dataItem.isValid && userHasWriteAccess && !_forced
 
 	secondaryText: _forced && checked

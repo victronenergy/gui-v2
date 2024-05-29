@@ -347,6 +347,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListSlider.qml
     components/listitems/ListSpinBox.qml
     components/listitems/ListSwitch.qml
+    components/listitems/ListSwitchForced.qml
     components/listitems/ListTemperatureItem.qml
     components/listitems/ListTextField.qml
     components/listitems/ListTextGroup.qml
@@ -362,7 +363,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/ListClearHistoryButton.qml
     components/settings/ListDcInputQuantityGroup.qml
     components/settings/ListDcOutputQuantityGroup.qml
-    components/settings/ListDvccSwitch.qml
     components/settings/ListFirmwareVersionItem.qml
     components/settings/ListRelayState.qml
     components/settings/ListResetHistoryLabel.qml

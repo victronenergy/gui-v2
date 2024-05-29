@@ -58,14 +58,14 @@ Page {
 				stepSize: 0.1
 			}
 
-			ListDvccSwitch {
+			ListSwitchForced {
 				//% "SVS - Shared voltage sense"
 				text: qsTrId("settings_dvcc_shared_voltage_sense")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedVoltageSense"
 				allowed: defaultAllowed && commonSettings.dvccActive
 			}
 
-			ListDvccSwitch {
+			ListSwitchForced {
 				id: sharedTempSense
 
 				//% "STS - Shared temperature sense"
