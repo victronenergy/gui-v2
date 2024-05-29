@@ -80,4 +80,10 @@ Device {
 		}
 		inputSettings.get(inputIndex).inputSettings.setCurrentLimit(currentLimit)
 	}
+
+	onValidChanged: {
+		if (!valid) {
+			inverterCharger.inputSettings.clear()
+		}
+	}
 }
