@@ -38,6 +38,11 @@ Loader {
 		uid: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
 	}
 
+	VeQuickItem {
+		id: _hasPassthroughSupport
+		uid: root.veBusDevice.serviceUid + "/Capabilities/HasAcPassthroughSupport"
+	}
+
 	Connections {
 		target: root.item
 
@@ -72,6 +77,7 @@ Loader {
 
 		InverterChargerModeDialog {
 			isMulti: root.isMulti
+			hasPassthroughSupport: _hasPassthroughSupport.value === 1
 			onAccepted: root.veBusDevice.setMode(mode)
 		}
 	}

@@ -29,6 +29,10 @@ QtObject {
 		uid: root.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
+	readonly property VeQuickItem _hasPassthroughSupport: VeQuickItem {
+		uid: root.serviceUid + "/Capabilities/HasAcPassthroughSupport"
+	}
+
 	property Component _inverterModeDialogComponent: Component {
 		InverterModeDialog {
 			onAccepted: root._modeItem.setValue(mode)
@@ -38,6 +42,7 @@ QtObject {
 	property Component _inverterChargerModeDialogComponent: Component {
 		InverterChargerModeDialog {
 			isMulti: root.isMulti
+			hasPassthroughSupport: _hasPassthroughSupport.value === 1
 			onAccepted: root._modeItem.setValue(mode)
 		}
 	}
