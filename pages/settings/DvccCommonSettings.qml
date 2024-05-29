@@ -10,7 +10,7 @@ Column {
 	property alias dvccActive: dvccSwitch.checked
 	readonly property alias userHasWriteAccess: dvccSwitch.userHasWriteAccess
 
-	ListDvccSwitch {
+	ListSwitchForced {
 		id: dvccSwitch
 
 		//% "DVCC"

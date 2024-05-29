@@ -391,11 +391,11 @@ public:
 	};
 	Q_ENUM(PageManager_InteractionMode)
 
-	enum DVCC_Mode {
-		DVCC_ForcedOff = 2,
-		DVCC_ForcedOn = 3
+	enum Switch_ForcedMode {
+		Switch_ForcedOff = 2,
+		Switch_ForcedOn = 3
 	};
-	Q_ENUM(DVCC_Mode)
+	Q_ENUM(Switch_ForcedMode)
 
 	enum Notification_Type {
 		Notification_Warning,
