@@ -427,14 +427,22 @@ public:
 		CanBusProfile_CanBms500,
 		CanBusProfile_Oceanvolt,
 		CanBusProfile_None250,
-		CanBusProfile_RvC
+		CanBusProfile_RvC,
+		CanBusProfile_HighVoltage
 	};
 	Q_ENUM(CanBusProfile_Type)
 
 	enum CanBusConfig_Type {
+		// "any" means, any of the for Venus tested protocols, before supporting the
+		// hv-can-bus (CAN-fd). That is classic CAN up to 500 kbit/s.
 		CanBusConfig_AnyBus,
 		CanBusConfig_ForcedCanBusBms,
-		CanBusConfig_ForcedVeCan
+		CanBusConfig_ForcedVeCan,
+		// High Voltage CAN can send CAN fd frames as well. Hence CAN interfaces must
+		// explicitly indicate it is supported, not only that CAN-fd messages are
+		// supported, but also to assure the device can keep up with the higher
+		// througput. The HV protocol uses upto 1Mbit/s at the moment.
+		CanBusConfig_AnyBusAndHv
 	};
 	Q_ENUM(CanBusConfig_Type)
 
