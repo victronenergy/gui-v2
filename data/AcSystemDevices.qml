@@ -10,8 +10,8 @@ QtObject {
 	id: root
 
 	property DeviceModel model: DeviceModel {
-		modelId: "multiRsDevices"
+		modelId: "acSystemDevices"
 	}
 
-	Component.onCompleted: Global.multiRsDevices = root
+	Component.onCompleted: Global.acSystemDevices = root
 }

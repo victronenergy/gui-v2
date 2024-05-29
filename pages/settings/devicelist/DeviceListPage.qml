@@ -207,6 +207,7 @@ Page {
 			id: aggregateModel
 
 			sourceModels: [
+				Global.acSystemDevices.model,
 				Global.batteries.model,
 				Global.chargers.model,
 				Global.dcInputs.model,
@@ -219,7 +220,6 @@ Page {
 				Global.inverterChargers.inverterDevices,
 				Global.meteoDevices.model,
 				Global.motorDrives.model,
-				Global.multiRsDevices.model,
 				Global.pulseMeters.model,
 				Global.pvInverters.model,
 				Global.solarChargers.model,

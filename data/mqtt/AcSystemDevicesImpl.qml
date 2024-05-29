@@ -11,10 +11,10 @@ QtObject {
 
 	property Instantiator objects: Instantiator {
 		model: VeQItemTableModel {
-			uids: ["mqtt/multi"]
+			uids: ["mqtt/acsystem"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
-		delegate: MultiRsDevice {
+		delegate: AcSystemDevice {
 			serviceUid: model.uid
 		}
 	}
