@@ -88,7 +88,7 @@
     "color_overviewPage_widget_sideGauge_background": "color_darkOk",
     "color_overviewPage_widget_sideGauge_highlight": "color_ok",
     "color_overviewPage_widget_solar_graph_bar": "color_ok",
-    "color_overviewPage_widget_battery_background": "color_blue",
+    "color_overviewPage_widget_battery_background": "color_lightBlue",
     "color_overviewPage_widget_battery_bubble_background": "#7394bd",
     "color_overviewPage_widget_battery_bubble_border": "#FFFFFF",
 
