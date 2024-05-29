@@ -78,13 +78,13 @@ Page {
 						readOnly: isReadOnly(VenusOS.CanBusProfile_VecanAndCanBms)
 					},
 					{
-						//% "CAN-bus BMS (500 kbit/s)"
+						//% "CAN-bus BMS LV (500 kbit/s)"
 						display: qsTrId("settings_canbus_bms"),
 						value: VenusOS.CanBusProfile_CanBms500,
 						readOnly: isReadOnly(VenusOS.CanBusProfile_CanBms500)
 					},
 					{
-						//% "HV CAN-bus (500 kbit/s)"
+						//% "CAN-bus BMS HV (500 kbit/s)"
 						display: qsTrId("settings_canbus_high_voltage"),
 						value: VenusOS.CanBusProfile_HighVoltage,
 						readOnly: isReadOnly(VenusOS.CanBusProfile_HighVoltage)
