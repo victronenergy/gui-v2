@@ -45,6 +45,12 @@ Page {
 						return profile !== VenusOS.CanBusProfile_Vecan
 					case VenusOS.CanBusConfig_ForcedCanBusBms:
 						return profile !== VenusOS.CanBusProfile_CanBms500
+					// The classic CAN busses don't support CAN fd / CAN XL frames like the HV CAN bus uses.
+					// All other protocols are supported.
+					case VenusOS.CanBusConfig_AnyBus:
+						return profile === VenusOS.CanBusProfile_HighVoltage
+					// These interfaces support all profiles
+					case VenusOS.CanBusConfig_AnyBusAndHv:
 					default:
 						return false
 					}
@@ -76,6 +82,12 @@ Page {
 						display: qsTrId("settings_canbus_bms"),
 						value: VenusOS.CanBusProfile_CanBms500,
 						readOnly: isReadOnly(VenusOS.CanBusProfile_CanBms500)
+					},
+					{
+						//% "HV CAN-bus (500 kbit/s)"
+						display: qsTrId("settings_canbus_high_voltage"),
+						value: VenusOS.CanBusProfile_HighVoltage,
+						readOnly: isReadOnly(VenusOS.CanBusProfile_HighVoltage)
 					},
 					{
 						//% "Oceanvolt (250 kbit/s)"
