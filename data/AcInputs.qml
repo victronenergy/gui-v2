@@ -72,7 +72,13 @@ QtObject {
 	}
 
 	function sourceToText(source) {
+		if (source === undefined) {
+			return CommonWords.acInput()
+		}
 		switch (source) {
+		case VenusOS.AcInputs_InputSource_NotAvailable:
+			//% "Not available"
+			return qsTrId("acInputs_not_available")
 		case VenusOS.AcInputs_InputSource_Grid:
 			return CommonWords.grid
 		case VenusOS.AcInputs_InputSource_Generator:
@@ -80,6 +86,8 @@ QtObject {
 		case VenusOS.AcInputs_InputSource_Shore:
 			//% "Shore"
 			return qsTrId("acInputs_shore")
+		// deliberate fall-through
+		case VenusOS.AcInputs_InputSource_Inverting:
 		default:
 			return ""
 		}
