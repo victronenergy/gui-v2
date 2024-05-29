@@ -27,6 +27,7 @@ QtObject {
 
 	// data sources
 	property var acInputs
+	property var acSystemDevices
 	property var chargers
 	property var batteries
 	property var dcInputs
@@ -39,7 +40,6 @@ QtObject {
 	property var inverterChargers
 	property var meteoDevices
 	property var motorDrives
-	property var multiRsDevices
 	property var notifications
 	property var pulseMeters
 	property var pvInverters
@@ -94,6 +94,7 @@ QtObject {
 		notificationLayer = null
 
 		acInputs = null
+		acSystemDevices = null
 		chargers = null
 		batteries = null
 		dcInputs = null
@@ -106,7 +107,6 @@ QtObject {
 		inverterChargers = null
 		meteoDevices = null
 		motorDrives = null
-		multiRsDevices = null
 		notifications = null
 		pulseMeters = null
 		pvInverters = null

@@ -13,10 +13,10 @@ QtObject {
 		model: VeQItemSortTableModel {
 			dynamicSortFilter: true
 			filterRole: VeQItemTableModel.UniqueIdRole
-			filterRegExp: "^dbus/com\.victronenergy\.multi\."
+			filterRegExp: "^dbus/com\.victronenergy\.acsystem\."
 			model: Global.dataServiceModel
 		}
-		delegate: MultiRsDevice {
+		delegate: AcSystemDevice {
 			serviceUid: model.uid
 		}
 	}

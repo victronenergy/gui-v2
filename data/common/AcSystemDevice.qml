@@ -7,20 +7,20 @@ import QtQuick
 import Victron.VenusOS
 
 Device {
-	id: multiRsDevice
+	id: acSystemDevice
 
 	readonly property int state: _state.value === undefined ? -1 : _state.value
 
 	readonly property VeQuickItem _state: VeQuickItem {
-		uid: multiRsDevice.serviceUid + "/State"
+		uid: acSystemDevice.serviceUid + "/State"
 	}
 
 	onValidChanged: {
-		if (!!Global.multiRsDevices) {
+		if (!!Global.acSystemDevices) {
 			if (valid) {
-				Global.multiRsDevices.model.addDevice(multiRsDevice)
+				Global.acSystemDevices.model.addDevice(acSystemDevice)
 			} else {
-				Global.multiRsDevices.model.removeDevice(multiRsDevice)
+				Global.acSystemDevices.model.removeDevice(acSystemDevice)
 			}
 		}
 	}

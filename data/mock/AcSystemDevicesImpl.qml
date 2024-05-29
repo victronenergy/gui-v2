@@ -10,18 +10,18 @@ Item {
 	id: root
 
 	function populate() {
-		const multiRsDeviceObj = multiRsDeviceComponent.createObject(root, {
+		const acSystemDeviceObj = acSystemDeviceComponent.createObject(root, {
 			state: Math.random() * VenusOS.System_State_EqualizationCharging
 		})
-		Global.multiRsDevices.model.addDevice(multiRsDeviceObj)
+		Global.acSystemDevices.model.addDevice(acSystemDeviceObj)
 	}
 
-	property Component multiRsDeviceComponent: Component {
+	property Component acSystemDeviceComponent: Component {
 		MockDevice {
 			property int state
 
-			serviceUid: "mock/com.victronenergy.multi.ttyUSB" + deviceInstance
-			name: "MultiRsDevice" + deviceInstance
+			serviceUid: "mock/com.victronenergy.acsystem.ttyUSB" + deviceInstance
+			name: "AcSystemDevice" + deviceInstance
 		}
 	}
 

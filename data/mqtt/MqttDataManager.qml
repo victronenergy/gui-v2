@@ -10,6 +10,7 @@ import Victron.Mqtt
 QtObject {
 	id: root
 
+	property var acSystemDevices: AcSystemDevicesImpl { }
 	property var chargers: ChargersImpl { }
 	property var batteries: BatteriesImpl { }
 	property var dcInputs: DcInputsImpl { }
@@ -22,7 +23,6 @@ QtObject {
 	property var inverterChargers: InverterChargersImpl {}
 	property var meteoDevices: MeteoDevicesImpl { }
 	property var motorDrives: MotorDrivesImpl { }
-	property var multiRsDevices: MultiRsDevicesImpl { }
 	property var notifications: NotificationsImpl {}
 	property var pulseMeters: PulseMetersImpl { }
 	property var pvInverters: PvInvertersImpl { }

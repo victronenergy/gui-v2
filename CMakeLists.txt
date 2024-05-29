@@ -392,6 +392,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/WindWidget.qml
 
     data/AcInputs.qml
+    data/AcSystemDevices.qml
     data/Chargers.qml
     data/Batteries.qml
     data/DataManager.qml
@@ -405,7 +406,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/InverterChargers.qml
     data/MeteoDevices.qml
     data/MotorDrives.qml
-    data/MultiRsDevices.qml
     data/Notifications.qml
     data/PulseMeters.qml
     data/PvInverters.qml
@@ -425,6 +425,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/AcInputSettings.qml
     data/common/AcInputSettingsModel.qml
     data/common/AcInputSystemInfo.qml
+    data/common/AcSystemDevice.qml
     data/common/ActiveAcInput.qml
     data/common/Battery.qml
     data/common/Charger.qml
@@ -441,7 +442,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/InverterCharger.qml
     data/common/MeteoDevice.qml
     data/common/MotorDrive.qml
-    data/common/MultiRsDevice.qml
     data/common/Notification.qml
     data/common/PulseMeter.qml
     data/common/PvInverter.qml
@@ -774,6 +774,7 @@ endif()
 
 # Dbus_QML_MODULE
 set(Dbus_QML_MODULE_SOURCES
+    data/dbus/AcSystemDevicesImpl.qml
     data/dbus/BatteriesImpl.qml
     data/dbus/ChargersImpl.qml
     data/dbus/DBusDataManager.qml
@@ -786,7 +787,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/GeneratorsImpl.qml
     data/dbus/MeteoDevicesImpl.qml
     data/dbus/MotorDrivesImpl.qml
-    data/dbus/MultiRsDevicesImpl.qml
     data/dbus/NotificationsImpl.qml
     data/dbus/PulseMetersImpl.qml
     data/dbus/PvInvertersImpl.qml
@@ -824,6 +824,7 @@ endif()
 # Mock_QML_MODULE
 set(Mock_QML_MODULE_SOURCES
     data/mock/AcInputsImpl.qml
+    data/mock/AcSystemDevicesImpl.qml
     data/mock/BatteriesImpl.qml
     data/mock/ChargersImpl.qml
     data/mock/DcInputsImpl.qml
@@ -837,7 +838,6 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/MockDevice.qml
     data/mock/MockDataManager.qml
     data/mock/MotorDrivesImpl.qml
-    data/mock/MultiRsDevicesImpl.qml
     data/mock/NotificationsImpl.qml
     data/mock/PulseMetersImpl.qml
     data/mock/PvInvertersImpl.qml
@@ -905,6 +905,7 @@ endif()
 
 # Mqtt_QML_MODULE
 set(Mqtt_QML_MODULE_SOURCES
+    data/mqtt/AcSystemDevicesImpl.qml
     data/mqtt/BatteriesImpl.qml
     data/mqtt/ChargersImpl.qml
     data/mqtt/DcInputsImpl.qml
@@ -917,7 +918,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/MeteoDevicesImpl.qml
     data/mqtt/MotorDrivesImpl.qml
     data/mqtt/MqttDataManager.qml
-    data/mqtt/MultiRsDevicesImpl.qml
     data/mqtt/NotificationsImpl.qml
     data/mqtt/PulseMetersImpl.qml
     data/mqtt/PvInvertersImpl.qml
