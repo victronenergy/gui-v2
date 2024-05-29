@@ -23,8 +23,6 @@ QtObject {
 	readonly property alias modulesOffline: modulesOffline
 	readonly property alias nrOfModulesBlockingCharge: nrOfModulesBlockingCharge
 	readonly property alias nrOfModulesBlockingDischarge: nrOfModulesBlockingDischarge
-	readonly property alias nrOfModulesOnline: nrOfModulesOnline
-	readonly property alias nrOfModulesOffline: nrOfModulesOffline
 	readonly property alias minCellVoltage: minCellVoltage
 	readonly property alias maxCellVoltage: maxCellVoltage
 	readonly property alias minCellTemperature: minCellTemperature
@@ -52,14 +50,6 @@ QtObject {
 		VeQuickItem {
 			id: nrOfModulesBlockingDischarge
 			uid: root.bindPrefix + "/System/NrOfModulesBlockingDischarge"
-		},
-		VeQuickItem {
-			id: nrOfModulesOnline
-			uid: root.bindPrefix + "/System/NrOfModulesOnline"
-		},
-		VeQuickItem {
-			id: nrOfModulesOffline
-			uid: root.bindPrefix + "/System/NrOfModulesOffline"
 		},
 		VeQuickItem {
 			id: minCellVoltage

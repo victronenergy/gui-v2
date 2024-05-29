@@ -14,6 +14,7 @@ QtObject {
 			"/Alarms/LowCellVoltage": 0,
 			"/Balancing": 0,
 			"/Capacity": 200,
+			"/InstalledCapacity": 250,
 			"/Connected": 1,
 			"/ConsumedAmphours": 10,
 			"/CustomName": "Lynx Smart BMS HQ21302VUDQ",
