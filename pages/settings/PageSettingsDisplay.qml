@@ -176,10 +176,18 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 				updateOnClick: false
 				optionModel: [
-					//% "Standard version"
-					{ display: qsTrId("settings_display_standard_version"), value: 1 },
-					//% "Gui-v2 (beta) version"
-					{ display: qsTrId("settings_display_beta_version"), value: 2 },
+					{
+						//% "Standard version"
+						display: qsTrId("settings_display_standard_version"),
+						value: 1
+					},
+					{
+						//% "Gui-v2 version"
+						display: qsTrId("settings_display_beta_version"),
+						//% "Beta, check the announcement first."
+						caption: qsTrId("settings_display_beta_version_caption"),
+						value: 2
+					},
 				]
 
 				onOptionClicked: function(index) {
