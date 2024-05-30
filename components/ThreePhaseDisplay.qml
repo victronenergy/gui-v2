@@ -45,6 +45,8 @@ Flow {
 				const valueStatus = root.phaseModelProperty
 						? Gauges.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
 						: Theme.Ok
+
+				Theme.color_darkOk // force capture since Theme.statusColorValue() doesn't.
 				return (valueStatus === Theme.Critical || valueStatus === Theme.Warning)
 					? Theme.statusColorValue(valueStatus)
 					: Theme.color_font_primary

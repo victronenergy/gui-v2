@@ -14,6 +14,7 @@ Item {
 	property int fontPixelSize: Theme.font_size_body3
 	property alias model: buttonRepeater.model
 	property int currentIndex
+	property bool flat
 
 	signal buttonClicked(buttonIndex: int)
 
@@ -38,15 +39,16 @@ Item {
 			delegate: AsymmetricRoundedRectangle {
 				id: buttonDelegate
 
+				flat: root.flat
 				width: root.width / buttonRepeater.count
 				height: parent ? parent.height : 0
 				color: modelData.enabled === false && model.index !== root.currentIndex
 					   ? Theme.color_background_disabled
-					   : (mouseArea.pressed || model.index === root.currentIndex
+					   : ((mouseArea.pressed || model.index === root.currentIndex)
 						  ? Theme.color_ok
 						  : Theme.color_darkOk)
 				border.width: Theme.geometry_button_border_width
-				border.color: modelData.enabled === false && model.index !== root.currentIndex ? color : Theme.color_ok
+				border.color: (modelData.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok
 				radius: Theme.geometry_button_radius
 
 				roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left

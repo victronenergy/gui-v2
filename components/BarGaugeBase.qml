@@ -13,8 +13,8 @@ Rectangle {
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 	readonly property int valueStatus: Gauges.getValueStatus(_value * 100, valueType)
 	property alias foregroundParent: fgRect.parent
-	property color foregroundColor: Theme.statusColorValue(valueStatus)
-	property color backgroundColor: Theme.statusColorValue(valueStatus, true)
+	property color foregroundColor: Theme.color_darkOk,Theme.statusColorValue(valueStatus)
+	property color backgroundColor: Theme.color_darkOk,Theme.statusColorValue(valueStatus, true)
 	property color surfaceColor: Theme.color_levelsPage_gauge_separatorBarColor
 	property real value: 0.0
 	property int orientation: Qt.Vertical

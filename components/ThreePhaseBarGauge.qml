@@ -55,8 +55,8 @@ Flow {
 				anchors.right: parent.right
 				width: parent.width - (phaseLabel.visible ? phaseLabel.width : 0)
 				height: parent.height
-				foregroundColor: feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-				backgroundColor: feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
+				foregroundColor: Theme.color_darkOk,feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+				backgroundColor: Theme.color_darkOk,feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
 				valueType: root.valueType
 				value: valueRange.valueAsRatio
 				orientation: root.orientation
