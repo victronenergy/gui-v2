@@ -132,7 +132,6 @@ else()
         src/connman/cmservice.h
         src/connman/cmagent.h
         src/connman/cmagent_adaptor.h
-        src/connman/clockmodel.h
         src/connman/clockproxy.h
         src/connman/connmandbustypes.cpp
         src/connman/cmmanager.cpp
@@ -143,7 +142,6 @@ else()
         src/connman/cmservice.cpp
         src/connman/cmagent.cpp
         src/connman/cmagent_adaptor.cpp
-        src/connman/clockmodel.cpp
         src/connman/clockproxy.cpp
         src/connman/connmandbustypes.h
     )
