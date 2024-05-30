@@ -219,6 +219,13 @@ QtObject {
 			event.accepted = true
 			break
 		}
+		case Qt.Key_S:
+		{
+			Global.system.ac.consumption._l2L1OutSummed.setValue(!Global.system.ac.consumption._l2L1OutSummed.value)
+			event.accepted = true
+			break
+		}
+
 		case Qt.Key_T:
 			root.timersActive = !root.timersActive
 			pageConfigTitle.text = "Timers on: " + root.timersActive
