@@ -461,6 +461,19 @@ SwipeViewPage {
 		}
 	}
 
+	CpuInfo {
+		enabled: root.isCurrentPage && root.state === "panelOpened"
+		upperLimit: 90
+		lowerLimit: 50
+		onOverLimitChanged: {
+			if (overLimit) {
+				//% "System load high, closing the side panel to reduce CPU load"
+				Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("nav_brief_close_side_panel_high_cpu"))
+				root.state = "initialized"
+			}
+		}
+	}
+
 	states: [
 		State {
 			name: "initialized"
