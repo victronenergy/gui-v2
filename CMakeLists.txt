@@ -222,6 +222,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ButtonControlValue.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
+    components/CheapBarGauge.qml
     components/ClippingBarGauge.qml
     components/ControlCard.qml
     components/ControlValue.qml
