@@ -35,22 +35,16 @@ Flow {
 		delegate: Item {
 			id: phaseDelegate
 
-			readonly property color textColor: {
-				const feedingToGrid = root.inputMode
-						&& (model.power || 0) < 0
-						&& Global.systemSettings.essFeedbackToGridEnabled
-				if (feedingToGrid) {
-					return Theme.color_green
-				}
-				const valueStatus = root.phaseModelProperty
-						? Gauges.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
-						: Theme.Ok
-
-				Theme.color_darkOk // force capture since Theme.statusColorValue() doesn't.
-				return (valueStatus === Theme.Critical || valueStatus === Theme.Warning)
-					? Theme.statusColorValue(valueStatus)
+			readonly property bool feedingToGrid: Global.systemSettings.essFeedbackToGridEnabled
+					&& root.inputMode
+					&& (model.power || 0) < 0
+			readonly property int valueStatus: feedingToGrid ? Theme.Ok
+					: root.phaseModelProperty ? Gauges.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
+					: Theme.Ok
+			readonly property bool criticalOrWarning: valueStatus === Theme.Critical || valueStatus === Theme.Warning
+			readonly property color textColor: Theme.color_darkOk,feedingToGrid ? Theme.color_green
+					: criticalOrWarning ? Theme.statusColorValue(valueStatus)
 					: Theme.color_font_primary
-			}
 
 			width: root.widgetSize <= VenusOS.OverviewWidget_Size_S
 				   ? parent.width / 3
