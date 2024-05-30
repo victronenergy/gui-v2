@@ -15,6 +15,7 @@ QtObject {
 			"/Balancing": 0,
 			"/Capacity": 200,
 			"/Connected": 1,
+			"/Errors/SmartLithium/Communication": 0,
 			"/ConsumedAmphours": 10,
 			"/CustomName": "Lynx Smart BMS HQ21302VUDQ",
 			"/Dc/0/Current": -9.4,

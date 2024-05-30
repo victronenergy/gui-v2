@@ -81,6 +81,35 @@ Page {
 				secondaryText: BmsError.description(dataItem.value)
 			}
 
+			ListTextItem {
+				//% "Battery bank error"
+				text: qsTrId("battery_bank_error")
+				dataItem.uid: root.battery.serviceUid + "/ErrorCode"
+				allowed: defaultAllowed && (errorComm.isValid || errorVoltage.isValid || errorNrOfBatteries.isValid || errorInvalidConfig.isValid)
+				secondaryText: {
+					if (errorComm.isValid && errorComm.value) {
+						//% "Communication error"
+						return qsTrId("battery_bank_error_communication")
+					} else if (errorVoltage.isValid && errorVoltage.value) {
+						//% "Battery voltage not supported"
+						return qsTrId("battery_bank_error_voltage_not_supported")
+					} else if (errorNrOfBatteries.isValid && errorNrOfBatteries.value) {
+						//% "Incorrect number of batteries"
+						return qsTrId("battery_bank_error_incorrect_number_of_batteries")
+					} else if (errorInvalidConfig.isValid && errorInvalidConfig.value) {
+						//% "Invalid battery configuration"
+						return qsTrId("battery_bank_error_invalid_configuration")
+					} else {
+						return CommonWords.none_errors
+					}
+				}
+
+				VeQuickItem { id: errorComm; uid: root.battery.serviceUid + "/Errors/SmartLithium/Communication" }
+				VeQuickItem { id: errorVoltage; uid: root.battery.serviceUid + "/Errors/SmartLithium/Voltage" }
+				VeQuickItem { id: errorNrOfBatteries; uid: root.battery.serviceUid + "/Errors/SmartLithium/NrOfBatteries" }
+				VeQuickItem { id: errorInvalidConfig; uid: root.battery.serviceUid + "/Errors/SmartLithium/InvalidConfiguration" }
+			}
+
 			ListQuantityGroup {
 				text: CommonWords.battery
 				textModel: [
