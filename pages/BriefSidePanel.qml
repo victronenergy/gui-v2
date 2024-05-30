@@ -204,7 +204,7 @@ exported power v  0.4 |   /
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
 		}
-		bottomComponent: BarGauge {
+		bottomComponent: CheapBarGauge {
 			orientation: Qt.Horizontal
 			value: dcInputRange.valueAsRatio
 			animationEnabled: root.animationEnabled
@@ -256,7 +256,7 @@ exported power v  0.4 |   /
 			active: root.animationEnabled
 			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
 		}
-		bottomComponent: BarGauge {
+		bottomComponent: CheapBarGauge {
 			orientation: Qt.Horizontal
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
 			value: dcLoadRange.valueAsRatio

@@ -45,7 +45,7 @@ Flow {
 				visible: root.orientation === Qt.Horizontal && phaseRepeater.count > 1
 			}
 
-			BarGauge {
+			CheapBarGauge {
 				id: phaseGauge
 
 				readonly property bool feedingToGrid: root.inputMode
