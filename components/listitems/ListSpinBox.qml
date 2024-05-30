@@ -10,7 +10,7 @@ ListButton {
 	id: root
 
 	readonly property alias dataItem: dataItem
-	property real value: !dataItem.isValid ? 0 : dataItem.value
+	property alias value: rangeModel.value
 	property string suffix
 	property int decimals
 	property int from: !isNaN(dataItem.min) ? dataItem.min : 0
@@ -29,6 +29,13 @@ ListButton {
 	enabled: dataItem.uid === "" || dataItem.isValid
 
 	onClicked: Global.dialogLayer.open(numberSelectorComponent, {value: value})
+
+	RangeModel {
+		id: rangeModel
+		minimumValue: root.from
+		maximumValue: root.to
+		value: dataItem.isValid ? dataItem.value : 0
+	}
 
 	Component {
 		id: numberSelectorComponent
