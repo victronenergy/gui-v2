@@ -23,4 +23,5 @@ AcWidget {
 		phaseModelProperty: "current"
 		maximumValue: Global.system.ac.consumption.maximumCurrent
 	}
+	extraContentLoader.active: root.phaseCount > 1 || Global.system.ac.consumption.l2AndL1OutSummed
 }
