@@ -673,6 +673,9 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/frameratemodel.cpp
     src/quantityinfo.h
     src/quantityinfo.cpp
+    src/qrangemodel_p.h
+    src/qrangemodel.h
+    src/qrangemodel.cpp
     src/units.h
     src/units.cpp
     src/screenblanker.h
