@@ -61,6 +61,8 @@ QtObject {
 	property bool isDesktop
 	property real scalingRatio: 1.0
 
+	property bool animationEnabled: true // for mock mode only.
+
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 	signal keyPressed(var event)
 

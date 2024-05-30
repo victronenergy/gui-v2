@@ -110,6 +110,12 @@ QtObject {
 				event.accepted = true
 			}
 			break
+		case Qt.Key_A:
+			if (!!Global) {
+				Global.animationEnabled = !Global.animationEnabled
+				event.accepted = true
+			}
+			break
 		case Qt.Key_C:
 			Theme.colorScheme = Theme.colorScheme == Theme.Dark ? Theme.Light : Theme.Dark
 			event.accepted = true
