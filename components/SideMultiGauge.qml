@@ -89,7 +89,7 @@ Item {
 
 			ValueRange {
 				id: valueRange
-				value: model[root.phaseModelProperty]
+				value: root.visible ? model[root.phaseModelProperty] : root.minimumValue
 				minimumValue: root.minimumValue
 				maximumValue: root.maximumValue
 			}
