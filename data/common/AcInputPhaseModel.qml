@@ -11,29 +11,37 @@ ListModel {
 
 	signal phaseValueChanged(int phaseIndex, string propertyName, real propertyValue)
 
-	function _updatePhaseValue(phaseIndex, propertyName, propertyValue) {
-		if (phaseIndex < 0 || phaseIndex >= count) {
-			return
-		}
-
-		const v = propertyValue === undefined ? NaN
-				: (Global.acInputs ? Global.acInputs.clampMeasurement(propertyValue) : propertyValue)
-
-		setProperty(phaseIndex, propertyName, v)
-		phaseValueChanged(phaseIndex, propertyName, v)
-	}
+	readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
 
 	property Instantiator _phaseObjects: Instantiator {
 		model: null
 		delegate: QtObject {
 			readonly property VeQuickItem _current: VeQuickItem {
 				uid:  Global.system.serviceUid + "/Ac/ActiveIn/L" + (model.index + 1) + "/Current"
-				onValueChanged: root._updatePhaseValue(model.index, "current", value)
+				readonly property real currentValue: !isValid ? NaN : value
+				readonly property real clampedCurrentValue: (root._feedbackEnabled || isNaN(currentValue)) ? currentValue
+								: currentValue > 0 ? currentValue // see AcInputs.clampMeasurement()
+								: 0.0
+				onClampedCurrentValueChanged: {
+					if (model.index >= 0 && model.index < root.count) {
+						setProperty(model.index, "current", clampedCurrentValue)
+						root.phaseValueChanged(model.index, "current", clampedCurrentValue)
+					}
+				}
 			}
 
 			readonly property VeQuickItem _power: VeQuickItem {
 				uid: Global.system.serviceUid + "/Ac/ActiveIn/L" + (model.index + 1) + "/Power"
-				onValueChanged: root._updatePhaseValue(model.index, "power", value)
+				readonly property real powerValue: !isValid ? NaN : value
+				readonly property real clampedPowerValue: (root._feedbackEnabled || isNaN(powerValue)) ? powerValue
+								: powerValue > 0 ? powerValue // see AcInputs.clampMeasurement().
+								: 0.0
+				onClampedPowerValueChanged: {
+					if (model.index >= 0 && model.index < root.count) {
+						setProperty(model.index, "power", clampedPowerValue)
+						root.phaseValueChanged(model.index, "power", clampedPowerValue)
+					}
+				}
 			}
 		}
 	}
