@@ -12,7 +12,11 @@ Loader {
 	property string serviceUid
 	property string serviceType
 
-	readonly property real totalPower: hasTotalPower && item ? Global.acInputs.clampMeasurement(item.power) : NaN
+	readonly property real totalPower: (!hasTotalPower || !item) ? NaN
+			: isNaN(_itemPower) ? NaN
+			: _feedbackEnabled ? _itemPower
+			: _itemPower > 0 ? _itemPower // see AcInputs.clampMeasurement()
+			: 0.0
 	readonly property bool hasTotalPower: serviceType === "vebus" || serviceType == "grid" || serviceType == "genset"
 
 	readonly property real currentLimit: !!item ? item.currentLimit : NaN
@@ -22,6 +26,12 @@ Loader {
 	readonly property VeQuickItem _gensetStatusCode: VeQuickItem {
 		uid: root.active && root.serviceUid && root.serviceType === "genset" ? root.serviceUid + "/StatusCode" : ""
 	}
+
+	readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
+
+	readonly property real _itemPower: !item ? 0.0
+			: item.power === undefined ? NaN
+			: item.power
 
 	sourceComponent: {
 		if (serviceUid == "" || serviceType == "") {
@@ -48,8 +58,12 @@ Loader {
 		id: vebusComponent
 
 		QtObject {
-			readonly property real power: _power.value === undefined ? NaN : Global.acInputs.clampMeasurement(_power.value)
+			readonly property real power: isNaN(_powerValue) ? NaN
+					: root._feedbackEnabled ? _powerValue
+					: _powerValue > 0 ? _powerValue // see AcInputs.clampMeasurement().
+					: 0.0
 			readonly property real currentLimit: _currentLimit.value === undefined ? NaN : _currentLimit.value
+			readonly property real _powerValue: _power.value === undefined ? NaN : _power.value
 
 			readonly property VeQuickItem _power: VeQuickItem {
 				uid: root.serviceUid + "/Ac/ActiveIn/P"
@@ -89,7 +103,10 @@ Loader {
 		id: gridOrGensetComponent
 
 		QtObject {
-			readonly property real power: _power.value === undefined ? NaN : Global.acInputs.clampMeasurement(_power.value)
+			readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
+			readonly property real power: _power.value === undefined ? NaN
+				: _feedbackEnabled ? _power.value
+				: Math.max(0, value) // See AcInputs.clampMeasurement().
 
 			// For these devices, there is no current limit.
 			readonly property real currentLimit: NaN
