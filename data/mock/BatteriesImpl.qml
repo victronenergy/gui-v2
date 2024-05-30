@@ -13,6 +13,7 @@ QtObject {
 		const props = {
 			"/Alarms/LowCellVoltage": 0,
 			"/Balancing": 0,
+			"/Balancer/Status": VenusOS.Battery_Balancer_Balancing,
 			"/Capacity": 200,
 			"/Connected": 1,
 			"/ConsumedAmphours": 10,
