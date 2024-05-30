@@ -155,7 +155,9 @@ Page {
 				//: Shown when BMS instance is invalid
 				//% "Unavailable, set another"
 				defaultSecondaryText: qsTrId("settings_dvcc_unavailable_bms")
-
+				allowed: defaultAllowed && commonSettings.dvccActive
+						 // Only show if there are valid services published on /AvailableBmsServices or a valid active BMS service selected
+						 && (bmsOptions.optionModel.length > 2 || bmsService.isValid)
 
 				VeQuickItem {
 					uid: Global.system.serviceUid + "/AvailableBmsServices"
@@ -183,7 +185,7 @@ Page {
 
 				//% "Auto selected"
 				text: qsTrId("settings_dvcc_auto_selected")
-				allowed: defaultAllowed && bmsOptions.currentValue === -1
+				allowed: defaultAllowed && bmsOptions.allowed && bmsOptions.currentValue === -1
 				secondaryText: bmsService.isValid
 							   ? bmsProductName.value || bmsCustomName.value || ""
 								 //: Indicates no option is selected
