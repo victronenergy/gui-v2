@@ -21,6 +21,7 @@ Item {
 	property bool animationEnabled
 	readonly property bool defaultVisible: startWidget.visible && endWidget.visible && _initialized
 
+	readonly property real animationElapsed: overviewPageRootAnimation.animationElapsed
 	readonly property bool _animated: _initialized && visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated && animationEnabled
 	property real _electronTravelDistance
 	property bool _initialized
@@ -67,7 +68,7 @@ Item {
 
 		if (_animated) {
 			// Animate at a constant rate of pixels/sec, based on the diagonal length of the shape
-			electronAnim.duration = electronTravelDistance / Theme.geometry_overviewPage_connector_electron_velocity * 1000
+			pathUpdater.duration = electronTravelDistance / Theme.geometry_overviewPage_connector_electron_velocity * 1000
 		}
 
 		// Force drawing manually if the animations are paused
@@ -78,6 +79,7 @@ Item {
 
 	visible: defaultVisible
 	on_AnimatedChanged: Qt.callLater(_resetDistance)
+	onAnimationElapsedChanged: if (root._animated) pathUpdater.normalizedElapsed = 1000*animationElapsed/pathUpdater.duration
 
 	// Ensure electrons are shown above connector paths that do not have electrons, to avoid a
 	// situation where non-animated connector paths partially obscure electrons from other paths.
@@ -215,28 +217,18 @@ Item {
 		}
 	}
 
-	Connections {
-		id: electronAnim
-
-		property real duration
-		property bool startToEnd: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
-
-		enabled: root._animated
-		target: overviewPageRootAnimation
-
-		function onUpdate(elapsedTime) {
-			var progress = 1000*elapsedTime/electronAnim.duration
-			progress = progress - Math.floor(progress)
-			pathUpdater.progress = startToEnd ? progress : 1.0 - progress
-		}
-	}
-
 	// Force drawing during the expanding transition even if the animations are paused
 	property real _transitionUpdating
 	on_TransitionUpdatingChanged: if (overviewPageRootAnimation.paused) pathUpdater.update()
 
 	WidgetConnectorPathUpdater {
 		id: pathUpdater
+
+		property real normalizedElapsed
+		property real duration
+		readonly property real loopedElapsed: normalizedElapsed - Math.trunc(normalizedElapsed)
+		readonly property bool startToEnd: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
+		progress: startToEnd ? loopedElapsed : 1.0 - loopedElapsed
 
 		animationMode: root.animationMode
 
