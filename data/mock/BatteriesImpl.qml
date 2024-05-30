@@ -15,6 +15,7 @@ QtObject {
 			"/Balancing": 0,
 			"/Capacity": 200,
 			"/InstalledCapacity": 250,
+			"/NumberOfBmses": 1,
 			"/Connected": 1,
 			"/ConsumedAmphours": 10,
 			"/CustomName": "Lynx Smart BMS HQ21302VUDQ",

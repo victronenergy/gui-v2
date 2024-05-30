@@ -91,6 +91,22 @@ Page {
 			}
 
 			ListQuantityItem {
+				//% "Total Capacity"
+				text: qsTrId("devicelist_battery_total_capacity")
+				dataItem.uid: root.battery.serviceUid + "/Capacity"
+				allowed: defaultAllowed && numberOfBms.allowed
+				unit: VenusOS.Units_AmpHour
+			}
+
+			ListTextItem {
+				id: numberOfBms
+				//% "Number of BMSes"
+				text: qsTrId("devicelist_battery_number_of_bmses")
+				dataItem.uid: root.battery.serviceUid + "/NumberOfBmses"
+				allowed: defaultAllowed && dataItem.isValid
+			}
+
+			ListQuantityItem {
 				text: CommonWords.state_of_charge
 				value: root.battery.stateOfCharge
 				unit: VenusOS.Units_Percentage
