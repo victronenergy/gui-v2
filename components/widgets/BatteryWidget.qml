@@ -79,6 +79,7 @@ OverviewWidget {
 			anchors.bottom: parent.bottom
 			visible: batteryData.mode === VenusOS.Battery_Mode_Charging && root._animationReady
 			clip: true
+			z: 6 // greater than the explicit z-order specified in BarGauge.
 
 			SequentialAnimation {
 				property bool startAnimation: root._animationReady
