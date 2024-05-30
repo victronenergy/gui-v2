@@ -26,6 +26,7 @@ Item {
 	readonly property bool allowPageAnimations: BackendConnection.applicationVisible
 			&& !pageStack.busy && (!swipeView || !swipeView.flicking)
 			&& !Global.splashScreenVisible
+			&& Global.animationEnabled
 
 	property int _loadedPages: 0
 
@@ -339,7 +340,7 @@ Item {
 			return customButton
 		}
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
-		animationEnabled: BackendConnection.applicationVisible
+		animationEnabled: BackendConnection.applicationVisible && (!!Global ? Global.animationEnabled : true)
 		color: root.backgroundColor
 
 		onLeftButtonClicked: {
