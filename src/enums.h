@@ -198,6 +198,14 @@ public:
 	};
 	Q_ENUM(Battery_TimeToGo_Format)
 
+	enum Battery_Balancer_Status {
+		Battery_Balancer_Unknown = 0,
+		Battery_Balancer_Balanced,
+		Battery_Balancer_Balancing,
+		Battery_Balancer_Imbalance
+	};
+	Q_ENUM(Battery_Balancer_Status)
+
 	enum Ess_State {
 		Ess_State_OptimizedWithBatteryLife,
 		Ess_State_OptimizedWithoutBatteryLife,

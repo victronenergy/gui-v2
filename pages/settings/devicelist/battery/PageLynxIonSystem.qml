@@ -88,7 +88,32 @@ Page {
 				//% "Balancing"
 				text: qsTrId("lynxionsystem_balancing")
 				dataItem.uid: root.bindPrefix + "/Balancing"
+				allowed: defaultAllowed && dataItem.seen
 				secondaryText: CommonWords.activeOrInactive(dataItem.value)
+			}
+
+			ListTextItem {
+				//% "Balancer status"
+				text: qsTrId("lynxionsystem_balancer_status")
+				dataItem.uid: root.bindPrefix + "/Balancer/Status"
+				allowed: defaultAllowed && dataItem.seen
+				secondaryText: {
+					switch (dataItem.value) {
+					case VenusOS.Battery_Balancer_Balanced:
+						//% "Balanced"
+						return qsTrId("lynxionsystem_balancer_balanced")
+					case VenusOS.Battery_Balancer_Balancing:
+						//% "Balancing"
+						return qsTrId("lynxionsystem_balancer_balancing")
+					case VenusOS.Battery_Balancer_Imbalance:
+						//% "Imbalance"
+						return qsTrId("lynxionsystem_balancer_imbalance")
+					case VenusOS.Battery_Balancer_Unknown:
+					default:
+						//% "Unknown"
+						return qsTrId("lynxionsystem_balancer_unknown")
+					}
+				}
 			}
 		}
 	}
