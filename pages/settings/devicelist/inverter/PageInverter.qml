@@ -13,21 +13,6 @@ Page {
 
 	readonly property bool isInverterCharger: isInverterChargerItem.value === 1
 
-	readonly property var rsAlarms: [
-		{ text: CommonWords.low_state_of_charge, alarmSuffix: "/LowSoc", pathSuffix: "/Settings/AlarmLevel/LowSoc" },
-		{ text: CommonWords.low_battery_voltage, alarmSuffix: "/LowVoltage", pathSuffix: "/Settings/AlarmLevel/LowVoltage" },
-		{ text: CommonWords.high_battery_voltage, alarmSuffix: "/HighVoltage", pathSuffix: "/Settings/AlarmLevel/HighVoltage" },
-		{ text: CommonWords.high_temperature, alarmSuffix: "/HighTemperature", pathSuffix: "/Settings/AlarmLevel/HighTemperature" },
-		//% "Low AC OUT voltage"
-		{ text: qsTrId("rs_alarm_low_ac_out_voltage"), alarmSuffix: "/LowVoltageAcOut", pathSuffix: "/Settings/AlarmLevel/LowVoltageAcOut" },
-		//% "High AC OUT voltage"
-		{ text: qsTrId("rs_alarm_high_ac_out_voltage"), alarmSuffix: "/HighVoltageAcOut", pathSuffix: "/Settings/AlarmLevel/HighVoltageAcOut" },
-		{ text: CommonWords.alarm_setting_overload, alarmSuffix: "/Overload", pathSuffix: "/Settings/AlarmLevel/Overload" },
-		{ text: CommonWords.alarm_setting_dc_ripple, alarmSuffix: "/Ripple", pathSuffix: "/Settings/AlarmLevel/Ripple" },
-		//% "Short circuit"
-		{ text: qsTrId("rs_alarm_short_circuit"), alarmSuffix: "/ShortCircuit", pathSuffix: "/Settings/AlarmLevel/ShortCircuit" }
-	]
-
 	VeQuickItem {
 		id: isInverterChargerItem
 		uid: root.bindPrefix + "/IsInverterCharger"
@@ -204,7 +189,7 @@ Page {
 				allowed: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}
 
@@ -213,7 +198,7 @@ Page {
 				allowed: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarmSettings.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}
 

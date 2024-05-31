@@ -11,7 +11,6 @@ Page {
 
 	property string bindPrefix
 	readonly property int numberOfPhases: phases.isValid ? phases.value : 1
-	property alias rsModel: settingsListView.model
 
 	VeQuickItem {
 		id: phases
@@ -21,6 +20,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
+		model: Global.inverterChargers.rsAlarms
 		delegate: VeBusAlarm {
 			text: modelData.text
 			bindPrefix: root.bindPrefix
