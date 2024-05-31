@@ -203,7 +203,7 @@ Page {
 				text: CommonWords.alarm_status
 				allowed: root.isInverterCharger
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageRsAlarms.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })
 				}
 			}
@@ -212,7 +212,7 @@ Page {
 				text: CommonWords.alarm_setup
 				allowed: root.isInverterCharger
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageRsAlarmSettings.qml",
+					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarmSettings.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix, "rsModel": root.rsAlarms })
 				}
 			}
