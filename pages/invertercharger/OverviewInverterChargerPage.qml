@@ -11,20 +11,6 @@ Page {
 
 	property var inverterCharger
 
-	readonly property var acActiveInPhases: [ acActiveIn1, acActiveIn2, acActiveIn3 ]
-
-	VeQuickItem {
-		id: _acOutputPower
-
-		uid: inverterCharger.serviceUid + "/Ac/Out/P"
-	}
-
-	VeQuickItem {
-		id: _acActiveInputPower
-
-		uid: inverterCharger.serviceUid + "/Ac/ActiveIn/P"
-	}
-
 	VeQuickItem {
 		id: bmsMode
 
@@ -67,32 +53,7 @@ Page {
 		uid: inverterCharger.serviceUid + "/Soc"
 	}
 
-	AcOutput {
-		id: acOutput
-
-		serviceUid: inverterCharger.serviceUid
-	}
-
-	AcPhase {
-		id: acActiveIn1
-
-		serviceUid: inverterCharger.serviceUid + "/Ac/ActiveIn/L1"
-	}
-
-	AcPhase {
-		id: acActiveIn2
-
-		serviceUid: inverterCharger.serviceUid + "/Ac/ActiveIn/L2"
-	}
-
-	AcPhase {
-		id: acActiveIn3
-
-		serviceUid: inverterCharger.serviceUid + "/Ac/ActiveIn/L3"
-	}
-
 	title: root.inverterCharger.description
-
 
 	GradientListView {
 		model: ObjectModel {
@@ -154,12 +115,12 @@ Page {
 		Column {
 			PVCFListQuantityGroup {
 				text: CommonWords.ac_in
-				data: acActiveIn1
+				data: AcPhase { serviceUid: root.inverterCharger.serviceUid + "/Ac/ActiveIn/L1" }
 			}
 
 			PVCFListQuantityGroup {
 				text: CommonWords.ac_out
-				data: acOutput.phase1
+				data: AcPhase { serviceUid: root.inverterCharger.serviceUid + "/Ac/Out/L1" }
 			}
 		}
 	}
@@ -169,11 +130,11 @@ Page {
 
 		ThreePhaseIOTable {
 			width: parent ? parent.width : 0
-			numberOfPhases: _numberOfPhases.value
-			inputPhases: root.acActiveInPhases
-			outputPhases: acOutput.phases
-			acActiveInputPower: _acActiveInputPower
-			acOutputPower: _acOutputPower
+			phaseCount: _numberOfPhases.value || 0
+			inputPhaseUidPrefix: root.inverterCharger.serviceUid + "/Ac/ActiveIn"
+			outputPhaseUidPrefix: root.inverterCharger.serviceUid + "/Ac/Out"
+			totalInputPowerUid: root.inverterCharger.serviceUid + "/Ac/ActiveIn/P"
+			totalOutputPowerUid: root.inverterCharger.serviceUid + "/Ac/Out/P"
 		}
 	}
 }

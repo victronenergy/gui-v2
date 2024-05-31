@@ -11,51 +11,14 @@ Page {
 
 	property var veBusDevice
 	readonly property bool isMulti: veBusDevice.numberOfAcInputs > 0
-	readonly property var acActiveInPhases: [ acActiveIn1, acActiveIn2, acActiveIn3 ]
 	readonly property bool chargeInProcess: preferRenewableEnergy.value === 0
 
 	title: veBusDevice.name
 
 	VeQuickItem {
-		id: _acOutputPower
-
-		uid: veBusDevice.serviceUid + "/Ac/Out/P"
-	}
-
-	VeQuickItem {
-		id: _acActiveInputPower
-
-		uid: veBusDevice.serviceUid + "/Ac/ActiveIn/P"
-	}
-
-	VeQuickItem {
 		id: _numberOfPhases
 
 		uid: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
-	}
-
-	AcPhase {
-		id: acActiveIn1
-
-		serviceUid: veBusDevice.serviceUid + "/Ac/ActiveIn/L1"
-	}
-
-	AcPhase {
-		id: acActiveIn2
-
-		serviceUid: veBusDevice.serviceUid + "/Ac/ActiveIn/L2"
-	}
-
-	AcPhase {
-		id: acActiveIn3
-
-		serviceUid: veBusDevice.serviceUid + "/Ac/ActiveIn/L3"
-	}
-
-	AcOutput {
-		id: acOutput
-
-		serviceUid: veBusDevice.serviceUid
 	}
 
 	VeQuickItem {
@@ -364,12 +327,12 @@ Page {
 		Column {
 			PVCFListQuantityGroup {
 				text: CommonWords.ac_in
-				data: acActiveIn1
+				data: AcPhase { serviceUid: veBusDevice.serviceUid + "/Ac/ActiveIn/L1" }
 			}
 
 			PVCFListQuantityGroup {
 				text: CommonWords.ac_out
-				data: acOutput.phase1
+				data: AcPhase { serviceUid: root.veBusDevice.serviceUid + "/Ac/Out/L1" }
 			}
 		}
 	}
@@ -379,11 +342,11 @@ Page {
 
 		ThreePhaseIOTable {
 			width: parent ? parent.width : 0
-			numberOfPhases: _numberOfPhases.value
-			inputPhases: root.acActiveInPhases
-			outputPhases: acOutput.phases
-			acActiveInputPower: _acActiveInputPower
-			acOutputPower: _acOutputPower
+			phaseCount: _numberOfPhases.value || 0
+			inputPhaseUidPrefix: root.veBusDevice.serviceUid + "/Ac/ActiveIn"
+			outputPhaseUidPrefix: root.veBusDevice.serviceUid + "/Ac/Out"
+			totalInputPowerUid: root.veBusDevice.serviceUid + "/Ac/ActiveIn/P"
+			totalOutputPowerUid: root.veBusDevice.serviceUid + "/Ac/Out/P"
 		}
 	}
 }

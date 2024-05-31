@@ -283,6 +283,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/TankGaugeGroup.qml
     components/ThreePhaseBarGauge.qml
     components/ThreePhaseDisplay.qml
+    components/ThreePhaseIOTable.qml
     components/ThreePhaseQuantityTable.qml
     components/TimeSelector.qml
     components/ToastNotification.qml
@@ -638,7 +639,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/vebusdevice/PageVeBusKwhCounters.qml
     pages/vebusdevice/PageVeBusSerialNumbers.qml
     pages/vebusdevice/PVCFListQuantityGroup.qml
-    pages/vebusdevice/ThreePhaseIOTable.qml
     pages/vebusdevice/VeBusAcSensorModel.qml
     pages/vebusdevice/PageVeBus.qml
     pages/vebusdevice/VeBusAlarm.qml

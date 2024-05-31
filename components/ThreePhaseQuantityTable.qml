@@ -9,21 +9,18 @@ import Victron.VenusOS
 QuantityTable {
 	id: root
 
-	property quantityInfo totalPower
+	property string phaseUidPrefix
+	property string totalPowerUid
 	property string labelText
-	property int numberOfPhases
-	property var acPhases
+
+	readonly property quantityInfo _totalPowerInfo: Units.getDisplayText(VenusOS.Units_Watt, totalPowerItem.value)
 
 	valueForModelIndex: function(phaseIndex, column) {
 		if (column === 0) {
 			return "L%1".arg(phaseIndex + 1)
 		}
 
-		if (!numberOfPhases || !acPhases || acPhases.length < phaseIndex + 1) {
-			return NaN
-		}
-
-		let phase = root.acPhases[phaseIndex]
+		const phase = phases.objectAt(phaseIndex)
 		if (phase) {
 			switch(column) {
 			case 1:
@@ -48,7 +45,6 @@ QuantityTable {
 		{ unit: VenusOS.Units_Amp },
 		{ unit: VenusOS.Units_Hertz }
 	]
-	rowCount: 3
 	labelHorizontalAlignment: Qt.AlignRight
 	headerComponent: AsymmetricRoundedRectangle {
 		width: root.width
@@ -73,6 +69,8 @@ QuantityTable {
 				rightMargin: Theme.geometry_listItem_content_horizontalMargin
 				verticalCenter: parent.verticalCenter
 			}
+			visible: root.totalPowerUid.length > 0
+
 			Label {
 				anchors.right: parent.right
 				//% "Total Power"
@@ -87,16 +85,30 @@ QuantityTable {
 					anchors.verticalCenter: parent.verticalCenter
 					font.pixelSize: Theme.font_size_body2
 					color: Theme.color_font_primary
-					text: root.totalPower ? root.totalPower.number : ""
+					text: root._totalPowerInfo.number
 				}
 
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					font.pixelSize: Theme.font_size_body2
 					color: Theme.color_listItem_secondaryText
-					text: root.totalPower ? root.totalPower.unit : ""
+					text: root._totalPowerInfo.unit
 				}
 			}
 		}
+	}
+
+	Instantiator {
+		id: phases
+		model: root.rowCount
+		delegate: AcPhase {
+			required property int index
+			serviceUid: root.phaseUidPrefix.length ? root.phaseUidPrefix + "/L" + (index + 1) : ""
+		}
+	}
+
+	VeQuickItem {
+		id: totalPowerItem
+		uid: root.totalPowerUid
 	}
 }
