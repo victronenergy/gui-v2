@@ -10,10 +10,11 @@ Page {
 	id: root
 
 	property string bindPrefix
-	property alias rsModel: settingsListView.model
 
 	GradientListView {
 		id: settingsListView
+
+		model: Global.inverterChargers.rsAlarms
 
 		header: ListLabel {
 			function updateVisibility() {
