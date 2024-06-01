@@ -215,8 +215,8 @@ Page {
 				unit: Global.systemSettings.temperatureUnit
 			}
 
-			VeBusDeviceActiveAcInputTextItem {
-				veBusDevice: root.veBusDevice
+			ActiveAcInputTextItem {
+				bindPrefix: root.veBusDevice.serviceUid
 			}
 
 			Loader {
