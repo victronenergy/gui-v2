@@ -353,6 +353,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListTextItem.qml
     components/listitems/ListTimeSelector.qml
 
+    components/settings/ActiveAcInputTextItem.qml
     components/settings/AlarmLevelRadioButtonGroup.qml
     components/settings/CGwacsBatteryScheduleNavigationItem.qml
     components/settings/FirmwareCheckListButton.qml
@@ -642,7 +643,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/vebusdevice/VeBusAcSensorModel.qml
     pages/vebusdevice/PageVeBus.qml
     pages/vebusdevice/VeBusAlarm.qml
-    pages/vebusdevice/VeBusDeviceActiveAcInputTextItem.qml
     pages/vebusdevice/VeBusDeviceAlarmGroup.qml
     pages/vebusdevice/VeBusDeviceAlarmSettingsModel.qml
     pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml

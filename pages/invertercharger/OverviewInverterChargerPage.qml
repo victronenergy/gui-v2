@@ -83,8 +83,8 @@ Page {
 								   : null
 			}
 
-			VeBusDeviceActiveAcInputTextItem {
-				veBusDevice: root.inverterCharger
+			ActiveAcInputTextItem {
+				bindPrefix: root.inverterCharger.serviceUid
 			}
 
 			ListTextGroup {

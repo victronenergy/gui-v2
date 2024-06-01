@@ -7,22 +7,23 @@ import QtQuick
 import Victron.VenusOS
 
 ListTextItem {
-	property var veBusDevice
+	id: root
+
+	property string bindPrefix
 
 	VeQuickItem {
 		id: acActiveInput
 
-		uid: veBusDevice.serviceUid + "/Ac/ActiveIn/ActiveInput"
+		uid: root.bindPrefix + "/Ac/ActiveIn/ActiveInput"
 	}
 
 	//% "Active AC Input"
 	text: qsTrId("vebus_device_active_ac_input")
 	secondaryText: {
-		switch(acActiveInput.value) {
+		switch (acActiveInput.value) {
 		case 0:
 		case 1:
-			//% "AC in %1"
-			return qsTrId("vebus_device_page_ac_in").arg(acActiveInput.value + 1)
+			return CommonWords.acInput(acActiveInput.value)
 		default:
 			return CommonWords.disconnected
 		}
