@@ -11,8 +11,7 @@ ControlCard {
 	id: root
 
 	icon.source: "qrc:/images/ess.svg"
-	//% "ESS"
-	title.text: qsTrId("controlcard_ess")
+	title.text: CommonWords.ess
 
 	Column {
 		anchors {

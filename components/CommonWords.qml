@@ -113,6 +113,9 @@ QtObject {
 	//% "Custom name"
 	readonly property string custom_name: qsTrId("common_words_custom_name")
 
+	//% "Daily history"
+	readonly property string daily_history: qsTrId("common_words_daily_history")
+
 	//% "DC"
 	readonly property string dc: qsTrId("common_words_dc")
 
@@ -151,6 +154,9 @@ QtObject {
 
 	//% "Error code"
 	readonly property string error_code: qsTrId("common_words_error_code")
+
+	//% "ESS"
+	readonly property string ess: qsTrId("common_words_ess")
 
 	//% "Firmware version"
 	readonly property string firmware_version: qsTrId("common_words_firmware_version")

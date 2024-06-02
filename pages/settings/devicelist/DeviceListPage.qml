@@ -25,6 +25,12 @@ Page {
 		}
 
 		switch(serviceType) {
+		case "acsystem":
+			url = "/pages/settings/devicelist/rs/PageRsSystem.qml"
+			params = { "bindPrefix" : device.serviceUid }
+			summary = [ Global.system.systemStateToText(device.state) ]
+			break;
+
 		case "vebus":
 			// vebus devices may also show up as AC inputs, so ensure they do not appear twice
 			// in the list.
@@ -38,15 +44,9 @@ Page {
 			break;
 
 		case "multi":
-			if (sourceModel === Global.batteries.model
-					|| sourceModel === Global.solarChargers.model
-					|| sourceModel === Global.inverterChargers.veBusDevices) {
-				return null
-			}
-			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
-			params = { "bindPrefix" : device.serviceUid }
-			summary = [ Global.system.systemStateToText(device.state) ]
-			break;
+			// multi devices are not shown in the Device List; they are shown as part of the
+			// "Devices" list in the acsystem page (PageRsSystem) instead.
+			return null
 
 		case "battery":
 			url = "/pages/settings/devicelist/battery/PageBattery.qml"
@@ -216,7 +216,6 @@ Page {
 				Global.environmentInputs.model,
 				Global.evChargers.model,
 				Global.inverterChargers.veBusDevices,
-				Global.inverterChargers.multiDevices,
 				Global.inverterChargers.inverterDevices,
 				Global.meteoDevices.model,
 				Global.motorDrives.model,

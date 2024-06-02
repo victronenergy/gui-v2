@@ -142,8 +142,7 @@ Page {
 			ListNavigationItem {
 				property SolarHistory solarHistory
 
-				//% "Daily history"
-				text: qsTrId("inverter_daily_history")
+				text: CommonWords.daily_history
 				allowed: (numberOfTrackers.value || 0) > 0
 				onClicked: {
 					if (!solarHistory) {

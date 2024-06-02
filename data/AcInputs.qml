@@ -119,9 +119,8 @@ QtObject {
 			//% "Shore current limit"
 			return qsTrId("acInputs_current_limit_shore")
 		default:
-			console.warn("Unrecognized AC Input Type")
-			//% "Unrecognized current limit"
-			return qsTrId("acInputs_current_limit_unrecognized")
+			//% "Input current limit"
+			return qsTrId("acInputs_input_current_limit")
 		}
 	}
 

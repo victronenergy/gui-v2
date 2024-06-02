@@ -14,6 +14,7 @@ Row {
 	property alias outputPhaseUidPrefix: outputTable.phaseUidPrefix
 	property alias totalInputPowerUid: inputTable.totalPowerUid
 	property alias totalOutputPowerUid: outputTable.totalPowerUid
+	property int voltPrecision: Units.defaultUnitPrecision(VenusOS.Units_Volt_AC)
 
 	spacing: Theme.geometry_vebusDeviceListPage_quantityTable_row_spacing
 
@@ -22,6 +23,7 @@ Row {
 		width: (parent.width - parent.spacing) / 2
 		labelText: CommonWords.ac_in
 		rowCount: root.phaseCount
+		voltPrecision: root.voltPrecision
 	}
 
 	ThreePhaseQuantityTable {
@@ -29,5 +31,6 @@ Row {
 		width: (parent.width - parent.spacing) / 2
 		labelText: CommonWords.ac_out
 		rowCount: root.phaseCount
+		voltPrecision: root.voltPrecision
 	}
 }

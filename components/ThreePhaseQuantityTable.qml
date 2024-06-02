@@ -12,8 +12,7 @@ QuantityTable {
 	property string phaseUidPrefix
 	property string totalPowerUid
 	property string labelText
-
-	readonly property quantityInfo _totalPowerInfo: Units.getDisplayText(VenusOS.Units_Watt, totalPowerItem.value)
+	property int voltPrecision: Units.defaultUnitPrecision(VenusOS.Units_Volt_AC)
 
 	valueForModelIndex: function(phaseIndex, column) {
 		if (column === 0) {
@@ -41,7 +40,7 @@ QuantityTable {
 	units: [
 		{ unit: VenusOS.Units_None },
 		{ unit: VenusOS.Units_Watt },
-		{ unit: VenusOS.Units_Volt_AC },
+		{ unit: VenusOS.Units_Volt_AC, precision: root.voltPrecision },
 		{ unit: VenusOS.Units_Amp },
 		{ unit: VenusOS.Units_Hertz }
 	]
@@ -78,22 +77,11 @@ QuantityTable {
 				color: Theme.color_quantityTable_quantityValue
 				font.pixelSize: Theme.font_size_caption
 			}
-			Row {
+			QuantityLabel {
 				anchors.right: parent.right
-
-				Label {
-					anchors.verticalCenter: parent.verticalCenter
-					font.pixelSize: Theme.font_size_body2
-					color: Theme.color_font_primary
-					text: root._totalPowerInfo.number
-				}
-
-				Label {
-					anchors.verticalCenter: parent.verticalCenter
-					font.pixelSize: Theme.font_size_body2
-					color: Theme.color_listItem_secondaryText
-					text: root._totalPowerInfo.unit
-				}
+				font.pixelSize: Theme.font_size_body2
+				unit: VenusOS.Units_Watt
+				value: totalPowerItem.isValid ? totalPowerItem.value : NaN
 			}
 		}
 	}
