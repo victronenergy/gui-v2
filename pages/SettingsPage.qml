@@ -70,8 +70,7 @@ SwipeViewPage {
 				page: "/pages/settings/PageSettingsLogger.qml"
 			},
 			{
-				//% "ESS"
-				text: systemType.value === "Hub-4" ? systemType.value : qsTrId("settings_ess"),
+				text: systemType.value === "Hub-4" ? systemType.value : CommonWords.ess,
 				page: "/pages/settings/PageSettingsHub4.qml"
 			},
 			{
