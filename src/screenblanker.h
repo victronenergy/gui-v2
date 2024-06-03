@@ -20,11 +20,11 @@ class ScreenBlanker : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 
-	Q_PROPERTY(bool blanked READ blanked NOTIFY blankedChanged)
-	Q_PROPERTY(bool supported READ supported CONSTANT)
-	Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
-	Q_PROPERTY(int displayOffTime READ displayOffTime WRITE setDisplayOffTime NOTIFY displayOffTimeChanged)
-	Q_PROPERTY(QQuickWindow* window READ window WRITE setWindow NOTIFY windowChanged)
+	Q_PROPERTY(bool blanked READ blanked NOTIFY blankedChanged FINAL)
+	Q_PROPERTY(bool supported READ supported CONSTANT FINAL)
+	Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged FINAL)
+	Q_PROPERTY(int displayOffTime READ displayOffTime WRITE setDisplayOffTime NOTIFY displayOffTimeChanged FINAL)
+	Q_PROPERTY(QQuickWindow* window READ window WRITE setWindow NOTIFY windowChanged FINAL)
 
 public:
 	explicit ScreenBlanker(QObject *parent = nullptr);

@@ -28,14 +28,14 @@ class BaseNotification : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 
-	Q_PROPERTY(int notificationId READ notificationId WRITE setNotificationId NOTIFY notificationIdChanged)
-	Q_PROPERTY(bool acknowledged READ acknowledged WRITE setAcknowledged NOTIFY acknowledgedChanged)
-	Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
-	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
-	Q_PROPERTY(QDateTime dateTime READ dateTime WRITE setDateTime NOTIFY dateTimeChanged)
-	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
-	Q_PROPERTY(QString deviceName READ deviceName WRITE setDeviceName NOTIFY deviceNameChanged)
-	Q_PROPERTY(QString value READ value WRITE setValue NOTIFY valueChanged)
+	Q_PROPERTY(int notificationId READ notificationId WRITE setNotificationId NOTIFY notificationIdChanged FINAL)
+	Q_PROPERTY(bool acknowledged READ acknowledged WRITE setAcknowledged NOTIFY acknowledgedChanged FINAL)
+	Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
+	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged FINAL)
+	Q_PROPERTY(QDateTime dateTime READ dateTime WRITE setDateTime NOTIFY dateTimeChanged FINAL)
+	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged FINAL)
+	Q_PROPERTY(QString deviceName READ deviceName WRITE setDeviceName NOTIFY deviceNameChanged FINAL)
+	Q_PROPERTY(QString value READ value WRITE setValue NOTIFY valueChanged FINAL)
 
 public:
 	int notificationId() const;

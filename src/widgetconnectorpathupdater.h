@@ -20,10 +20,10 @@ class WidgetConnectorPathUpdater : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 
-	Q_PROPERTY(qreal progress MEMBER progress NOTIFY progressChanged)
-	Q_PROPERTY(QQuickPath *path MEMBER path)
-	Q_PROPERTY(qreal fadeOutThreshold MEMBER fadeOutThreshold)
-	Q_PROPERTY(Victron::VenusOS::Enums::WidgetConnector_AnimationMode animationMode MEMBER animationMode)
+	Q_PROPERTY(qreal progress MEMBER progress NOTIFY progressChanged FINAL)
+	Q_PROPERTY(QQuickPath *path MEMBER path FINAL)
+	Q_PROPERTY(qreal fadeOutThreshold MEMBER fadeOutThreshold FINAL)
+	Q_PROPERTY(Victron::VenusOS::Enums::WidgetConnector_AnimationMode animationMode MEMBER animationMode FINAL)
 
 public:
 	explicit WidgetConnectorPathUpdater(QObject *parent = nullptr);

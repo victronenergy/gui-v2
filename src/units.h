@@ -22,9 +22,9 @@ class quantityInfo
 {
 	Q_GADGET
 	QML_ELEMENT
-	Q_PROPERTY(QString number MEMBER number)
-	Q_PROPERTY(QString unit MEMBER unit)
-	Q_PROPERTY(VenusOS::Enums::Units_Scale scale MEMBER scale)
+	Q_PROPERTY(QString number MEMBER number FINAL)
+	Q_PROPERTY(QString unit MEMBER unit FINAL)
+	Q_PROPERTY(VenusOS::Enums::Units_Scale scale MEMBER scale FINAL)
 
 public:
 	QString number;
@@ -37,7 +37,7 @@ class Units : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 	QML_SINGLETON
-	Q_PROPERTY(QString numberFormattingLocaleName READ numberFormattingLocaleName CONSTANT)
+	Q_PROPERTY(QString numberFormattingLocaleName READ numberFormattingLocaleName CONSTANT FINAL)
 
 public:
 	enum FormatHint {

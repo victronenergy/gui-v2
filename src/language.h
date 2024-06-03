@@ -26,11 +26,11 @@ class LanguageModel : public QAbstractListModel
 {
 	Q_OBJECT
 	QML_ELEMENT
-	Q_PROPERTY(int currentLanguage READ currentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged)
-	Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
-	Q_PROPERTY(QString currentDisplayText READ currentDisplayText NOTIFY currentDisplayTextChanged)
-	Q_PROPERTY(int count READ rowCount CONSTANT)
-	Q_PROPERTY(QString unsupportedLanguageMessage READ unsupportedLanguageMessage WRITE setUnsupportedLanguageMessage NOTIFY unsupportedLanguageMessageChanged)
+	Q_PROPERTY(int currentLanguage READ currentLanguage WRITE setCurrentLanguage NOTIFY currentLanguageChanged FINAL)
+	Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged FINAL)
+	Q_PROPERTY(QString currentDisplayText READ currentDisplayText NOTIFY currentDisplayTextChanged FINAL)
+	Q_PROPERTY(int count READ rowCount CONSTANT FINAL)
+	Q_PROPERTY(QString unsupportedLanguageMessage READ unsupportedLanguageMessage WRITE setUnsupportedLanguageMessage NOTIFY unsupportedLanguageMessageChanged FINAL)
 
 public:
 	enum Role {
