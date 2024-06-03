@@ -128,8 +128,8 @@ exported power v  0.4 |   /
 				for (let i = 0; i < model.length; ++i) {
 					// Scale each amps value in the model from the old range to the new range.
 					const averagePhaseCurrentAsRatio = model[i]
-					const currentInAmps = Utils.scaleNumber(averagePhaseCurrentAsRatio, 0, 1, prevMin, prevMax)
-					model[i] = Utils.scaleNumber(currentInAmps, prevMin, prevMax, newMin, newMax)
+					const currentInAmps = Units.scaleNumber(averagePhaseCurrentAsRatio, 0, 1, prevMin, prevMax)
+					model[i] = Units.scaleNumber(currentInAmps, prevMin, prevMax, newMin, newMax)
 				}
 			}
 

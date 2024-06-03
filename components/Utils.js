@@ -24,16 +24,6 @@ function deviceInstanceForDeviceId(deviceId) {
 	return data === undefined ? -1 : data.deviceInstance
 }
 
-function scaleNumber(n, fromMin, fromMax, toMin, toMax) {
-	const fromRange = fromMax - fromMin
-	if (fromRange === 0) {
-		return 0
-	}
-	const toRange = toMax - toMin
-	const normalizedValue = Math.max(fromMin, Math.min(fromMax, n))
-	return (((normalizedValue - fromMin) / fromRange) * toRange) + toMin
-}
-
 function arrayCompare(lhs, rhs) {
 	if (!Array.isArray(lhs)) {
 		if (!Array.isArray(rhs)) {
