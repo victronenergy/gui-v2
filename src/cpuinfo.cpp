@@ -38,7 +38,13 @@ CpuInfo::CpuInfo(QObject *parent)
 	: QObject(parent)
 {
 #ifdef Q_OS_LINUX
-	m_timer.setInterval(2000);
+	m_worker = new CpuInfoWorker;
+	m_worker->moveToThread(&m_thread);
+	connect(&m_thread, &QThread::finished, m_worker, &QObject::deleteLater);
+	connect(this, &CpuInfo::requestingCpuUsage, m_worker, &CpuInfoWorker::calculateCpuUsage);
+	connect(m_worker, &CpuInfoWorker::calculatedCpuUsage, this, &CpuInfo::handleCpuUsage);
+
+	m_timer.setInterval(5000);
 	if (m_enabled) {
 		m_timer.start();
 	}
@@ -51,20 +57,54 @@ CpuInfo::CpuInfo(QObject *parent)
 		}
 	});
 
-	connect(&m_timer, &QTimer::timeout,
-		this, [this] {
-			int usage = get_cpu_usage(m_previousBusy, m_previousIdle);
-			if (m_usage != usage) {
-				m_usage = usage;
-				if (m_overLimit && usage < m_lowerLimit) {
-					m_overLimit = false;
-					emit overLimitChanged();
-				} else if (!m_overLimit && usage > m_upperLimit) {
-					m_overLimit = true;
-					emit overLimitChanged();
-				}
-				emit usageChanged();
-			}
+	connect(&m_timer, &QTimer::timeout, this, [this] {
+		emit requestingCpuUsage(m_previousBusy, m_previousIdle);
 	});
+
+	m_thread.start();
+#endif
+}
+
+CpuInfo::~CpuInfo()
+{
+#ifdef Q_OS_LINUX
+	m_thread.quit();
+	m_thread.wait();
+#endif
+}
+
+void CpuInfo::handleCpuUsage(int usage, unsigned long long busy, unsigned long long idle)
+{
+	m_previousBusy = busy;
+	m_previousIdle = idle;
+	if (m_usage != usage) {
+		m_usage = usage;
+		if (m_overLimit && usage < m_lowerLimit) {
+			m_overLimit = false;
+			emit overLimitChanged();
+		} else if (!m_overLimit && usage > m_upperLimit) {
+			m_overLimit = true;
+			emit overLimitChanged();
+		}
+		emit usageChanged();
+	}
+}
+
+CpuInfoWorker::CpuInfoWorker(QObject *parent)
+	: QObject(parent)
+{
+}
+
+#ifdef Q_OS_LINUX
+void CpuInfoWorker::calculateCpuUsage(unsigned long long previousBusy , unsigned long long previousIdle)
+#else
+void CpuInfoWorker::calculateCpuUsage(unsigned long long, unsigned long long)
+#endif
+{
+#ifdef Q_OS_LINUX
+	unsigned long long busy = previousBusy;
+	unsigned long long idle = previousIdle;
+	const int usage = get_cpu_usage(busy, idle);
+	emit calculatedCpuUsage(usage, busy, idle);
 #endif
 }
