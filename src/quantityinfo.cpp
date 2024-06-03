@@ -26,6 +26,18 @@ QuantityInfo::~QuantityInfo()
 void QuantityInfo::update() {
 	// Pass the previous value to allow hysteresis
 	quantity = qobject_cast<Units>(Units::instance(nullptr, nullptr)).getDisplayTextWithHysteresis(unitType, value, quantity.scale, precision, unitMatchValue, formatHints);
+	if (m_number != quantity.number) {
+		m_number = quantity.number;
+		emit numberChanged();
+	}
+	if (m_unit != quantity.unit) {
+		m_unit = quantity.unit;
+		emit unitChanged();
+	}
+	if (m_scale != quantity.scale) {
+		m_scale = quantity.scale;
+		emit scaleChanged();
+	}
 	emit updated();
 }
 
