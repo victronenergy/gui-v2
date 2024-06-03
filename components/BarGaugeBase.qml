@@ -5,13 +5,12 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Gauges
 
 Rectangle {
 	id: bgRect
 
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-	readonly property int valueStatus: Gauges.getValueStatus(_value * 100, valueType)
+	readonly property int valueStatus: Theme.getValueStatus(_value * 100, valueType)
 	property alias foregroundParent: fgRect.parent
 	property color foregroundColor: Theme.color_darkOk,Theme.statusColorValue(valueStatus)
 	property color backgroundColor: Theme.color_darkOk,Theme.statusColorValue(valueStatus, true)
