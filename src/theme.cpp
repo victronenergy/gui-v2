@@ -60,8 +60,22 @@ void Theme::setColorScheme(Victron::VenusOS::Theme::ColorScheme scheme)
 		Q_EMIT colorSchemeChanged_parameterless(); // work around moc limitation.
 	}
 }
+Victron::VenusOS::Theme::StatusLevel Theme::getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const
+{
+	if (valueType == Victron::VenusOS::Enums::Gauges_ValueType_RisingPercentage) {
+		return value >= 90 ? Critical
+			: value >= 80 ? Warning
+			: Ok;
+	} else if (valueType == Victron::VenusOS::Enums::Gauges_ValueType_FallingPercentage) {
+		return value <= 10 ? Critical
+			: value <= 20 ? Warning
+			: Ok;
+	} else {
+		return Ok;
+	}
+}
 
-Q_INVOKABLE bool Theme::objectHasQObjectParent(QObject *obj) const
+bool Theme::objectHasQObjectParent(QObject *obj) const
 {
 	return obj && obj->parent();
 }

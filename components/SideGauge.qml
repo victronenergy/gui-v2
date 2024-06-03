@@ -5,14 +5,13 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Gauges
 
 ArcGauge {
 	id: root
 
 	property int horizontalAlignment
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-	readonly property int valueStatus: Gauges.getValueStatus(value, valueType)
+	readonly property int valueStatus: Theme.getValueStatus(value, valueType)
 
 	width: parent.width
 	height: parent.height

@@ -7,7 +7,6 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import Victron.Gauges
 
 Item {
 	id: gauges
@@ -36,7 +35,7 @@ Item {
 			width: parent.width
 			delegate: Loader {
 				id: loader
-				property int gaugeStatus: Gauges.getValueStatus(model.value, model.valueType)
+				property int gaugeStatus: Theme.getValueStatus(model.value, model.valueType)
 				property real value: model.value
 				width: parent.width - (index*_stepSize)
 				height: width

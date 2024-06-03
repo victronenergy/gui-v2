@@ -12,6 +12,8 @@
 #include <QSizeF>
 #include <qqmlintegration.h>
 
+#include "enums.h"
+
 namespace Victron {
 namespace VenusOS {
 
@@ -50,6 +52,8 @@ public:
 
 	Victron::VenusOS::Theme::ColorScheme colorScheme() const;
 	void setColorScheme(Victron::VenusOS::Theme::ColorScheme scheme);
+
+	Q_INVOKABLE Victron::VenusOS::Theme::StatusLevel getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const;
 
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
 
