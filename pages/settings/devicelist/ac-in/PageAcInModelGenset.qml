@@ -145,7 +145,7 @@ ObjectModel {
 	ListTextItem {
 		//% "Remote start mode"
 		text: qsTrId("ac-in-genset_remote_start_mode")
-		dataItem.uid: root.bindPrefix + "/AutoStart"
+		dataItem.uid: root.bindPrefix + "/RemoteStartModeEnabled"
 		secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
 	}
 

@@ -42,7 +42,7 @@ ListItemButton {
 		}
 		_generatorStateBeforeDialogOpen = _state.value
 
-		// If genset /AutoStart is set to 0, then it cannot be started/stopped.
+		// If genset /RemoteStartModeEnabled is set to 0, then it cannot be started/stopped.
 		if (_remoteStartMode.isValid && _remoteStartMode.value === 0) {
 			Global.dialogLayer.open(noStartStopDialogComponent)
 			return
@@ -73,7 +73,7 @@ ListItemButton {
 
 	VeQuickItem {
 		id: _remoteStartMode
-		uid: root.gensetUid ? root.gensetUid + "/AutoStart" : ""
+		uid: root.gensetUid ? root.gensetUid + "/RemoteStartModeEnabled" : ""
 	}
 
 	Component {
