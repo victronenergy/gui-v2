@@ -25,6 +25,7 @@ QtObject {
 	readonly property alias maxTemperatureCellId: maxTemperatureCellId
 	readonly property alias installedCapacity: installedCapacity
 	readonly property alias capacity: capacity
+	readonly property alias connectionInformation: connectionInformation
 
 	readonly property bool allowsLowestCellVoltage: minCellVoltage.isValid
 	readonly property bool allowsHighestCellVoltage: maxCellVoltage.isValid
@@ -98,6 +99,10 @@ QtObject {
 		VeQuickItem {
 			id: capacity
 			uid: root.bindPrefix + "/Capacity"
+		},
+		VeQuickItem {
+			id: connectionInformation
+			uid: root.bindPrefix + "/ConnectionInformation"
 		}
 	]
 }

@@ -94,6 +94,13 @@ Page {
 				]
 				allowed: defaultAllowed && details.allowsCapacity
 			}
+
+			ListTextGroup {
+				//% "Connection information"
+				text: qsTrId("batterydetails_connection_information")
+				textModel: [ details.connectionInformation.value ]
+				allowed: defaultAllowed && details.connectionInformation.isValid
+			}
 		}
 	}
 }
