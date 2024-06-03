@@ -9,7 +9,7 @@ import Victron.VenusOS
 Device {
 	id: motorDrive
 
-	readonly property real motorRpm: _motorRpm.value === undefined ? NaN : _motorRpm.value
+	readonly property real motorRpm: _motorRpm.numberValue
 
 	readonly property VeQuickItem _motorRpm: VeQuickItem {
 		uid: motorDrive.serviceUid + "/Motor/RPM"

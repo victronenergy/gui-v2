@@ -28,8 +28,8 @@ QtObject {
 	property QtObject solar: QtObject {
 		readonly property real power: Units.sumRealNumbers(acPower, dcPower)
 		property real acPower: _pvMonitor.totalPower
-		property real dcPower: _dcPvPower.value === undefined ? NaN : _dcPvPower.value
-		readonly property real maximumPower: _maximumPower.value === undefined ? NaN : _maximumPower.value
+		property real dcPower: _dcPvPower.numberValue
+		readonly property real maximumPower: _maximumPower.numberValue
 
 		// In cases where the overall current cannot be determined, the value is NaN.
 		readonly property real current: {
@@ -46,7 +46,7 @@ QtObject {
 				}
 				return _pvMonitor.totalCurrent
 			} else if (Global.solarChargers.model.count > 0) {
-				return _dcPvCurrent.value === undefined ? NaN : _dcPvCurrent.value
+				return _dcPvCurrent.numberValue
 			}
 			return NaN
 		}
@@ -71,7 +71,7 @@ QtObject {
 
 	readonly property QtObject veBus: QtObject {
 		readonly property string serviceUid: BackendConnection.serviceUidFromName(_serviceName.value || "", _deviceInstance.value || 0)
-		readonly property real power: _power.value === undefined ? NaN : _power.value
+		readonly property real power: _power.numberValue
 
 		readonly property VeQuickItem _serviceName: VeQuickItem { uid: root.serviceUid + "/VebusService" }
 		readonly property VeQuickItem _deviceInstance: VeQuickItem { uid: root.serviceUid + "/VebusInstance" }

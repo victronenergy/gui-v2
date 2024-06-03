@@ -88,10 +88,10 @@ Page {
 			}
 
 			ListTextGroup {
-				readonly property quantityInfo power: Units.getDisplayText(VenusOS.Units_Watt, dcPower.value)
-				readonly property quantityInfo voltage: Units.getDisplayText(VenusOS.Units_Volt_DC, dcVoltage.value)
-				readonly property quantityInfo current: Units.getDisplayText(VenusOS.Units_Amp, dcCurrent.value)
-				readonly property quantityInfo soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.value)
+				readonly property quantityInfo power: Units.getDisplayText(VenusOS.Units_Watt, dcPower.numberValue)
+				readonly property quantityInfo voltage: Units.getDisplayText(VenusOS.Units_Volt_DC, dcVoltage.numberValue)
+				readonly property quantityInfo current: Units.getDisplayText(VenusOS.Units_Amp, dcCurrent.numberValue)
+				readonly property quantityInfo soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.numberValue)
 
 				text: CommonWords.dc
 				textModel: [

@@ -12,7 +12,7 @@ QtObject {
 	property QtObject consumption: QtObject {
 		property real power: NaN
 		readonly property real current: phases.count === 1 ? _firstPhaseCurrent : NaN // multi-phase systems don't have a total current
-		readonly property real maximumCurrent: _maximumCurrent.value === undefined ? NaN : _maximumCurrent.value
+		readonly property real maximumCurrent: _maximumCurrent.numberValue
 		property real _firstPhaseCurrent: NaN
 
 		property ListModel phases: ListModel {}

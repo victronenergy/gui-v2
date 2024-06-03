@@ -9,7 +9,7 @@ import Victron.VenusOS
 ListTextField {
 	id: root
 
-	property real value: dataItem.isValid ? dataItem.value : NaN
+	property real value: dataItem.numberValue
 	property int unit: VenusOS.Units_None
 	property int decimals: Units.defaultUnitPrecision(unit)
 

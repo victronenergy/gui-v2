@@ -10,10 +10,10 @@ QtObject {
 	id: root
 
 	property string serviceUid
-	readonly property real frequency: _frequency.value === undefined ? NaN : _frequency.value
-	readonly property real current: _current.value === undefined ? NaN : _current.value
-	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
-	readonly property real power: _power.value === undefined ? NaN : _power.value
+	readonly property real frequency: _frequency.numberValue
+	readonly property real current: _current.numberValue
+	readonly property real voltage: _voltage.numberValue
+	readonly property real power: _power.numberValue
 	readonly property bool valid: !isNaN(frequency)
 								  && !isNaN(current)
 								  && !isNaN(voltage)

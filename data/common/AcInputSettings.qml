@@ -12,7 +12,7 @@ QtObject {
 	property string serviceUid
 	property int inputNumber: model.index + 1
 	readonly property int inputType: isNaN(_type.value) ? -1 : _type.value
-	readonly property real currentLimit: _currentLimit.value === undefined ? -1 : _currentLimit.value
+	readonly property real currentLimit: _currentLimit.isValid ? _currentLimit.numberValue : -1
 	readonly property bool currentLimitAdjustable: _currentLimitAdjustable.value === 1
 
 	property VeQuickItem _type: VeQuickItem {

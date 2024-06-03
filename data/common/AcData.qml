@@ -11,16 +11,16 @@ QtObject {
 
 	property string bindPrefix
 
-	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
-	readonly property real current: _current.value === undefined ? NaN : _current.value
-	readonly property real frequency: _frequency.value === undefined ? NaN : _frequency.value
+	readonly property real voltage: _voltage.numberValue
+	readonly property real current: _current.numberValue
+	readonly property real frequency: _frequency.numberValue
 
 	// If the power is not reported, calculate the apparent power
-	readonly property real power: _reportedPower.value !== undefined ? _reportedPower.value
-			 : _apparentPower.value !== undefined ? _apparentPower.value
-			 : _voltage.value !== undefined && _current.value !== undefined ? _voltage.value * _current.value
+	readonly property real power: _reportedPower.isValid ? _reportedPower.numberValue
+			 : _apparentPower.isValid ? _apparentPower.numberValue
+			 : (_voltage.isValid && _current.isValid) ? _voltage.numberValue * _current.numberValue
 			 : NaN
-	readonly property int powerUnit: _reportedPower.value !== undefined ? VenusOS.Units_Watt : VenusOS.Units_VoltAmpere
+	readonly property int powerUnit: _reportedPower.isValid ? VenusOS.Units_Watt : VenusOS.Units_VoltAmpere
 
 	property VeQuickItem _voltage: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/V" : ""

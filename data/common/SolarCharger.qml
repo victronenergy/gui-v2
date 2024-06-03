@@ -12,12 +12,12 @@ Device {
 	readonly property int state: _state.value === undefined ? -1 : _state.value
 	readonly property int errorCode: _errorCode.value === undefined ? -1 : _errorCode.value
 	readonly property ListModel trackers: ListModel {}
-	readonly property real power: _totalPower.value === undefined ? NaN : _totalPower.value
+	readonly property real power: _totalPower.numberValue
 	readonly property alias history: _history
 
-	readonly property real batteryVoltage: _batteryVoltage.value == undefined ? NaN : _batteryVoltage.value
-	readonly property real batteryCurrent: _batteryCurrent.value == undefined ? NaN : _batteryCurrent.value
-	readonly property real batteryTemperature: _batteryTemperature.value == undefined ? NaN : _batteryTemperature.value
+	readonly property real batteryVoltage: _batteryVoltage.numberValue
+	readonly property real batteryCurrent: _batteryCurrent.numberValue
+	readonly property real batteryTemperature: _batteryTemperature.numberValue
 
 	readonly property bool relayValid: _relay.value !== undefined
 	readonly property bool relayOn: _relay.value === 1

@@ -9,12 +9,12 @@ import Victron.VenusOS
 Device {
 	id: battery
 
-	readonly property real stateOfCharge: _stateOfCharge.value === undefined ? NaN : _stateOfCharge.value
-	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
-	readonly property real power: _power.value === undefined ? NaN : _power.value
-	readonly property real current: _current.value === undefined ? NaN : _current.value
-	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
-	readonly property real timeToGo: _timeToGo.value === undefined ? NaN : _timeToGo.value  // in seconds
+	readonly property real stateOfCharge: _stateOfCharge.numberValue
+	readonly property real voltage: _voltage.numberValue
+	readonly property real power: _power.numberValue
+	readonly property real current: _current.numberValue
+	readonly property real temperature: _temperature.numberValue
+	readonly property real timeToGo: _timeToGo.numberValue  // in seconds
 	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(battery) : ""
 	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
 
