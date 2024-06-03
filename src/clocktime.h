@@ -33,24 +33,24 @@ class ClockTime : public QObject
 	// For WebAssembly, QTBUG-91441 means that we can never guarantee
 	// that the dateTime will be in the systemTimeZone.
 	// In short: QML clients should not access this directly, in general.
-	Q_PROPERTY(QDateTime dateTime READ dateTime NOTIFY dateTimeChanged)
+	Q_PROPERTY(QDateTime dateTime READ dateTime NOTIFY dateTimeChanged FINAL)
 
 	// Expose the needed data from the dateTime as ints.
 	// The data will be in the "correct" timezone.
-	Q_PROPERTY(int year READ year NOTIFY yearChanged)
-	Q_PROPERTY(int month READ month NOTIFY monthChanged)
-	Q_PROPERTY(int day READ day NOTIFY dayChanged)
-	Q_PROPERTY(int hour READ hour NOTIFY hourChanged)
-	Q_PROPERTY(int minute READ minute NOTIFY minuteChanged)
-	Q_PROPERTY(int second READ second NOTIFY secondChanged)
-	Q_PROPERTY(int msec READ msec NOTIFY msecChanged)
+	Q_PROPERTY(int year READ year NOTIFY yearChanged FINAL)
+	Q_PROPERTY(int month READ month NOTIFY monthChanged FINAL)
+	Q_PROPERTY(int day READ day NOTIFY dayChanged FINAL)
+	Q_PROPERTY(int hour READ hour NOTIFY hourChanged FINAL)
+	Q_PROPERTY(int minute READ minute NOTIFY minuteChanged FINAL)
+	Q_PROPERTY(int second READ second NOTIFY secondChanged FINAL)
+	Q_PROPERTY(int msec READ msec NOTIFY msecChanged FINAL)
 
-	Q_PROPERTY(qint64 clockTime READ clockTime WRITE setClockTime NOTIFY clockTimeChanged) // secsSinceEpoch.
-	Q_PROPERTY(QString systemTimeZone READ systemTimeZone WRITE setSystemTimeZone NOTIFY systemTimeZoneChanged)
+	Q_PROPERTY(qint64 clockTime READ clockTime WRITE setClockTime NOTIFY clockTimeChanged FINAL) // secsSinceEpoch.
+	Q_PROPERTY(QString systemTimeZone READ systemTimeZone WRITE setSystemTimeZone NOTIFY systemTimeZoneChanged FINAL)
 
-	Q_PROPERTY(QString currentDate READ currentDate NOTIFY currentDateChanged)
-	Q_PROPERTY(QString currentTime READ currentTime NOTIFY currentTimeChanged)
-	Q_PROPERTY(QString currentDateTimeUtc READ currentDateTimeUtc NOTIFY currentDateTimeUtcChanged)
+	Q_PROPERTY(QString currentDate READ currentDate NOTIFY currentDateChanged FINAL)
+	Q_PROPERTY(QString currentTime READ currentTime NOTIFY currentTimeChanged FINAL)
+	Q_PROPERTY(QString currentDateTimeUtc READ currentDateTimeUtc NOTIFY currentDateTimeUtcChanged FINAL)
 
 public:
 	static ClockTime* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);

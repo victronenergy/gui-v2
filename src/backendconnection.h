@@ -23,16 +23,16 @@ class BackendConnection : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 	QML_SINGLETON
-	Q_PROPERTY(State state READ state NOTIFY stateChanged)
-	Q_PROPERTY(SourceType type READ type NOTIFY typeChanged)
-	Q_PROPERTY(MqttClientError mqttClientError READ mqttClientError NOTIFY mqttClientErrorChanged)
-	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
-	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
-	Q_PROPERTY(QString portalId READ portalId WRITE setPortalId NOTIFY portalIdChanged)
-	Q_PROPERTY(QString shard READ shard WRITE setShard NOTIFY shardChanged)
-	Q_PROPERTY(QString token READ token WRITE setToken NOTIFY tokenChanged)
-	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged)
-	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged)
+	Q_PROPERTY(State state READ state NOTIFY stateChanged FINAL)
+	Q_PROPERTY(SourceType type READ type NOTIFY typeChanged FINAL)
+	Q_PROPERTY(MqttClientError mqttClientError READ mqttClientError NOTIFY mqttClientErrorChanged FINAL)
+	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged FINAL)
+	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged FINAL)
+	Q_PROPERTY(QString portalId READ portalId WRITE setPortalId NOTIFY portalIdChanged FINAL)
+	Q_PROPERTY(QString shard READ shard WRITE setShard NOTIFY shardChanged FINAL)
+	Q_PROPERTY(QString token READ token WRITE setToken NOTIFY tokenChanged FINAL)
+	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged FINAL)
+	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged FINAL)
 
 public:
 	enum SourceType {

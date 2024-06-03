@@ -51,14 +51,14 @@ class QRangeModel : public QObject
 {
 	Q_OBJECT
 	QML_NAMED_ELEMENT(RangeModel)
-	Q_PROPERTY(qreal value READ value WRITE setValue NOTIFY valueChanged USER true)
-	Q_PROPERTY(qreal minimumValue READ minimum WRITE setMinimum NOTIFY minimumChanged)
-	Q_PROPERTY(qreal maximumValue READ maximum WRITE setMaximum NOTIFY maximumChanged)
-	Q_PROPERTY(qreal stepSize READ stepSize WRITE setStepSize NOTIFY stepSizeChanged)
-	Q_PROPERTY(qreal position READ position WRITE setPosition NOTIFY positionChanged)
-	Q_PROPERTY(qreal positionAtMinimum READ positionAtMinimum WRITE setPositionAtMinimum NOTIFY positionAtMinimumChanged)
-	Q_PROPERTY(qreal positionAtMaximum READ positionAtMaximum WRITE setPositionAtMaximum NOTIFY positionAtMaximumChanged)
-	Q_PROPERTY(bool inverted READ inverted WRITE setInverted NOTIFY invertedChanged)
+	Q_PROPERTY(qreal value READ value WRITE setValue NOTIFY valueChanged USER true FINAL)
+	Q_PROPERTY(qreal minimumValue READ minimum WRITE setMinimum NOTIFY minimumChanged FINAL)
+	Q_PROPERTY(qreal maximumValue READ maximum WRITE setMaximum NOTIFY maximumChanged FINAL)
+	Q_PROPERTY(qreal stepSize READ stepSize WRITE setStepSize NOTIFY stepSizeChanged FINAL)
+	Q_PROPERTY(qreal position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+	Q_PROPERTY(qreal positionAtMinimum READ positionAtMinimum WRITE setPositionAtMinimum NOTIFY positionAtMinimumChanged FINAL)
+	Q_PROPERTY(qreal positionAtMaximum READ positionAtMaximum WRITE setPositionAtMaximum NOTIFY positionAtMaximumChanged FINAL)
+	Q_PROPERTY(bool inverted READ inverted WRITE setInverted NOTIFY invertedChanged FINAL)
 
 public:
 	QRangeModel(QObject *parent = nullptr);

@@ -35,14 +35,14 @@ class FrameRateModel : public QAbstractListModel
 	Q_OBJECT
 	QML_ELEMENT
 	QML_SINGLETON
-	Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
-	Q_PROPERTY(int visualizationRate READ visualizationRate WRITE setVisualizationRate NOTIFY visualizationRateChanged)
-	Q_PROPERTY(int secondsToVisualize READ secondsToVisualize WRITE setSecondsToVisualize NOTIFY secondsToVisualizeChanged)
-	Q_PROPERTY(int expectedFrameRate READ expectedFrameRate WRITE setExpectedFrameRate NOTIFY expectedFrameRateChanged)
-	Q_PROPERTY(int framesPerChunk READ framesPerChunk WRITE setFramesPerChunk NOTIFY framesPerChunkChanged)
-	Q_PROPERTY(int chunkCount READ chunkCount NOTIFY chunkCountChanged)
-	Q_PROPERTY(QList<qreal> chunks READ chunks NOTIFY chunksChanged)
-	Q_PROPERTY(int frameRate READ frameRate NOTIFY frameRateChanged)
+	Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged FINAL)
+	Q_PROPERTY(int visualizationRate READ visualizationRate WRITE setVisualizationRate NOTIFY visualizationRateChanged FINAL)
+	Q_PROPERTY(int secondsToVisualize READ secondsToVisualize WRITE setSecondsToVisualize NOTIFY secondsToVisualizeChanged FINAL)
+	Q_PROPERTY(int expectedFrameRate READ expectedFrameRate WRITE setExpectedFrameRate NOTIFY expectedFrameRateChanged FINAL)
+	Q_PROPERTY(int framesPerChunk READ framesPerChunk WRITE setFramesPerChunk NOTIFY framesPerChunkChanged FINAL)
+	Q_PROPERTY(int chunkCount READ chunkCount NOTIFY chunkCountChanged FINAL)
+	Q_PROPERTY(QList<qreal> chunks READ chunks NOTIFY chunksChanged FINAL)
+	Q_PROPERTY(int frameRate READ frameRate NOTIFY frameRateChanged FINAL)
 
 public:
 	static FrameRateModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsengine = nullptr);

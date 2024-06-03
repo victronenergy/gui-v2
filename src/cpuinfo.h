@@ -17,11 +17,11 @@ class CpuInfo : public QObject
 {
 	Q_OBJECT
 	QML_ELEMENT
-	Q_PROPERTY(int usage MEMBER m_usage NOTIFY usageChanged)
-	Q_PROPERTY(bool enabled MEMBER m_enabled NOTIFY enabledChanged)
-	Q_PROPERTY(int upperLimit MEMBER m_upperLimit NOTIFY upperLimitChanged)
-	Q_PROPERTY(int lowerLimit MEMBER m_lowerLimit NOTIFY lowerLimitChanged)
-	Q_PROPERTY(bool overLimit MEMBER m_overLimit NOTIFY overLimitChanged)
+	Q_PROPERTY(int usage MEMBER m_usage NOTIFY usageChanged FINAL)
+	Q_PROPERTY(bool enabled MEMBER m_enabled NOTIFY enabledChanged FINAL)
+	Q_PROPERTY(int upperLimit MEMBER m_upperLimit NOTIFY upperLimitChanged FINAL)
+	Q_PROPERTY(int lowerLimit MEMBER m_lowerLimit NOTIFY lowerLimitChanged FINAL)
+	Q_PROPERTY(bool overLimit MEMBER m_overLimit NOTIFY overLimitChanged FINAL)
 public:
 	explicit CpuInfo(QObject *parent = nullptr);
 Q_SIGNALS:

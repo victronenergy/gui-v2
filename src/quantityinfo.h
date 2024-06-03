@@ -21,15 +21,15 @@ class QuantityInfo : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 
-	Q_PROPERTY(QString number READ getNumber NOTIFY updated)
-	Q_PROPERTY(QString unit READ getUnit NOTIFY updated)
-	Q_PROPERTY(VenusOS::Enums::Units_Scale scale READ getScale NOTIFY updated)
+	Q_PROPERTY(QString number READ getNumber NOTIFY updated FINAL)
+	Q_PROPERTY(QString unit READ getUnit NOTIFY updated FINAL)
+	Q_PROPERTY(VenusOS::Enums::Units_Scale scale READ getScale NOTIFY updated FINAL)
 
-	Q_PROPERTY(qreal value MEMBER value NOTIFY valueChanged)
-	Q_PROPERTY(qreal unitMatchValue MEMBER unitMatchValue NOTIFY unitMatchValueChanged)
-	Q_PROPERTY(int precision MEMBER precision NOTIFY precisionChanged)
-	Q_PROPERTY(Victron::VenusOS::Enums::Units_Type unitType MEMBER unitType NOTIFY inputChanged)
-	Q_PROPERTY(int formatHints MEMBER formatHints NOTIFY formatHintsChanged)
+	Q_PROPERTY(qreal value MEMBER value NOTIFY valueChanged FINAL)
+	Q_PROPERTY(qreal unitMatchValue MEMBER unitMatchValue NOTIFY unitMatchValueChanged FINAL)
+	Q_PROPERTY(int precision MEMBER precision NOTIFY precisionChanged FINAL)
+	Q_PROPERTY(Victron::VenusOS::Enums::Units_Type unitType MEMBER unitType NOTIFY inputChanged FINAL)
+	Q_PROPERTY(int formatHints MEMBER formatHints NOTIFY formatHintsChanged FINAL)
 
 public:
 	explicit QuantityInfo(QObject *parent = nullptr);
