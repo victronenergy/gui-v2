@@ -22,6 +22,7 @@
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QCommandLineParser>
+#include <QQuickItem>
 #include <QStyleHints>
 
 #include <QtDebug>
@@ -228,6 +229,27 @@ EM_JS(int, getWindowInnerHeight, (), {
   return window.innerHeight;
 });
 
+EM_JS(void, setContentEditable, (bool editable), {
+	// Work-around Qt Android issue where keyboard constantly pops up (see QTBUG-88803)
+	const android = /Android/i.test(navigator.userAgent);
+	if (android) {
+		const inputs = document.querySelectorAll('input[type="text"]');
+		for (let i = 0; i < inputs.length; i++) {
+			const input = inputs[i];
+			const rect = input.getBoundingClientRect();
+
+			// Qt <input> has no identifier so identify using off-screen co-ordinates.
+			if (rect.x === -1000 && rect.y === -1000) {
+				input.style.visibility = editable ? "visible" : "hidden";
+				if (editable) {
+					input.focus();
+				}
+			}
+		}
+	}
+});
+
+
 #endif
 
 int main(int argc, char *argv[])
@@ -291,6 +313,14 @@ int main(int argc, char *argv[])
 
 	QScopedPointer<QObject> object(component.beginCreate(engine.rootContext()));
 	const auto window = qobject_cast<QQuickWindow *>(object.data());
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	QObject::connect(window, &QQuickWindow::activeFocusItemChanged, [window] {
+		const bool editable = window->activeFocusItem() != nullptr && (window->activeFocusItem()->flags() & QQuickItem::ItemAcceptsInputMethod);
+		setContentEditable(editable);
+	});
+#endif
+
 	if (!window) {
 		component.completeCreate();
 		qWarning() << "The scene root item is not a window." << object.data();
