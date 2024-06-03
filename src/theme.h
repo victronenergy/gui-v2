@@ -43,41 +43,17 @@ public:
 	};
 	Q_ENUM(StatusLevel)
 
-	Theme(QObject *parent = nullptr) : QObject(parent)
-	{
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
-		const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
-		const int screenDiagonalMm = static_cast<int>(sqrt((physicalScreenSize.width() * physicalScreenSize.width())
-			+ (physicalScreenSize.height() * physicalScreenSize.height())));
-		setScreenSize((round(screenDiagonalMm / 10 / 2.5) == 7)
-			? Victron::VenusOS::Theme::SevenInch
-			: Victron::VenusOS::Theme::FiveInch);
-#endif
-	}
+	explicit Theme(QObject *parent = nullptr);
 
-	Victron::VenusOS::Theme::ScreenSize screenSize() const { return m_screenSize; }
-	void setScreenSize(Victron::VenusOS::Theme::ScreenSize size) {
-		if (m_screenSize != size) {
-			m_screenSize = size;
-			Q_EMIT screenSizeChanged(size);
-			Q_EMIT screenSizeChanged_parameterless(); // work around moc limitation.
-		}
-	}
+	Victron::VenusOS::Theme::ScreenSize screenSize() const;
+	void setScreenSize(Victron::VenusOS::Theme::ScreenSize size);
 
-	Victron::VenusOS::Theme::ColorScheme colorScheme() const { return m_colorScheme; }
-	void setColorScheme(Victron::VenusOS::Theme::ColorScheme scheme) {
-		if (m_colorScheme != scheme) {
-			m_colorScheme = scheme;
-			Q_EMIT colorSchemeChanged(scheme);
-			Q_EMIT colorSchemeChanged_parameterless(); // work around moc limitation.
-		}
-	}
+	Victron::VenusOS::Theme::ColorScheme colorScheme() const;
+	void setColorScheme(Victron::VenusOS::Theme::ColorScheme scheme);
 
-	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const { return obj && obj->parent(); }
+	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
 
-	QString applicationVersion() const {
-		return QStringLiteral("v%1.%2.%3").arg(PROJECT_VERSION_MAJOR).arg(PROJECT_VERSION_MINOR).arg(PROJECT_VERSION_PATCH);
-	};
+	QString applicationVersion() const;
 
 Q_SIGNALS:
 	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
