@@ -33,6 +33,18 @@ Page {
 				}
 			}
 
+			ListButton {
+				id: quitSwitch
+
+				//% "Quit application"
+				text: qsTrId("settings_page_debug_quit_application")
+
+				//% "Quit"
+				button.text: qsTrId("settings_page_debug_quit")
+
+				onClicked: Qt.quit()
+			}
+
 			SwitchItem {
 				//% "Enable frame-rate visualizer"
 				text: qsTrId("settings_page_debug_enable_fps_visualizer")
@@ -48,16 +60,11 @@ Page {
 				allowed: defaultAllowed && Qt.platform.os === "linux"
 			}
 
-			ListButton {
-				id: quitSwitch
-
-				//% "Quit application"
-				text: qsTrId("settings_page_debug_quit_application")
-
-				//% "Quit"
-				button.text: qsTrId("settings_page_debug_quit")
-
-				onClicked: Qt.quit()
+			SwitchItem {
+				//% "Pause electron animations"
+				text: qsTrId("settings_page_debug_pause_electron_animations")
+				checked: Global.pauseElectronAnimations
+				onClicked: Global.pauseElectronAnimations = !Global.pauseElectronAnimations
 			}
 
 			ListNavigationItem {
