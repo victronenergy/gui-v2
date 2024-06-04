@@ -84,6 +84,12 @@ ObjectModel {
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
+	ListTemperatureItem {
+		text: CommonWords.temperature
+		dataItem.uid: root.bindPrefix + "/Engine/Temperature"
+		allowed: defaultAllowed && dataItem.isValid
+	}
+
 	ListNavigationItem {
 		text: CommonWords.overall_history
 		allowed: overallHistoryMonitor.hasVisibleItem
