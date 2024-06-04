@@ -69,6 +69,7 @@ AcWidget {
 			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
 			inputMode: true
 			animationEnabled: root.animationEnabled
+			inOverviewWidget: true
 		}
 	}
 

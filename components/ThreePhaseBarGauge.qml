@@ -17,6 +17,7 @@ Flow {
 	property bool inputMode
 	property int orientation: Qt.Vertical
 	property bool animationEnabled
+	property bool inOverviewWidget
 
 	readonly property real _longEdgeLength: orientation === Qt.Vertical ? height : width
 	readonly property real _delegateLength: (_longEdgeLength - (spacing * (phaseRepeater.count - 1))) / phaseRepeater.count
@@ -67,7 +68,9 @@ Flow {
 				id: cheapGauge
 				CheapBarGauge {
 					foregroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-					backgroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
+					backgroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_darkGreen
+							: root.inOverviewWidget && valueStatus === Theme.Ok ? Theme.color_darkishBlue
+							: Theme.statusColorValue(valueStatus, true)
 					valueType: root.valueType
 					value: valueRange.valueAsRatio
 					orientation: root.orientation
@@ -79,7 +82,9 @@ Flow {
 				id: prettyGauge
 				BarGauge {
 					foregroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-					backgroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
+					backgroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_darkGreen
+							: root.inOverviewWidget && valueStatus === Theme.Ok ? Theme.color_darkishBlue
+							: Theme.statusColorValue(valueStatus, true)
 					valueType: root.valueType
 					value: valueRange.valueAsRatio
 					orientation: root.orientation
