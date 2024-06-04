@@ -560,7 +560,7 @@ SwipeViewPage {
 	FrameAnimation {
 		id: overviewPageRootAnimation
 
-		paused: cpuInfo.overLimit
+		paused: cpuInfo.overLimit || Global.pauseElectronAnimations
 		running: root.animationEnabled
 		property real previousElapsed
 
@@ -709,7 +709,7 @@ SwipeViewPage {
 		size: VenusOS.OverviewWidget_Size_L
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
-		animationEnabled: root.animationEnabled && !cpuInfo.overLimit
+		animationEnabled: root.animationEnabled && !overviewPageRootAnimation.paused
 		connectors: [ batteryToDcLoadsConnector ]
 
 		WidgetConnectorAnchor {

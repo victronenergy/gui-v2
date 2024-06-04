@@ -24,6 +24,7 @@ QtObject {
 	property var notificationLayer
 	property ScreenBlanker screenBlanker
 	property bool displayCpuUsage
+	property bool pauseElectronAnimations
 
 	// data sources
 	property var acInputs
