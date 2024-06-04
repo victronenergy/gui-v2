@@ -21,7 +21,10 @@ T.Dialog {
 	function _refresh() {
 		dateLabel.text = ClockTime.formatDeltaDate(-1 * 86400 * day, "ddd d MMM")
 		tableView.dayRange = [day, day + 1]
+		_positionHighlightBar()
+	}
 
+	function _positionHighlightBar() {
 		const sourceBar = highlightBarForDay(day)
 		if (!sourceBar) {
 			console.warn("No highlight bar found for day", day)
@@ -45,6 +48,9 @@ T.Dialog {
 	verticalPadding: 0
 	horizontalPadding: 0
 	modal: true
+
+	// In case height changes when dialog is opened, update the highlight bar position.
+	onHeightChanged: root._positionHighlightBar()
 
 	enter: Transition {
 		SequentialAnimation {
