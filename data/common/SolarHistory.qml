@@ -19,8 +19,12 @@ QtObject {
 
 	signal yieldUpdatedForDay(day: int, yieldKwh: real)
 
-	function dailyHistory(day, trackerIndex) {
-		return _historyObjects.dailyHistory(day, trackerIndex)
+	function dailyHistory(day) {
+		return _historyObjects.dailyHistory(day)
+	}
+
+	function dailyTrackerHistory(day, trackerIndex) {
+		return _historyObjects.dailyTrackerHistory(day, trackerIndex)
 	}
 
 	function trackerName(trackerIndex) {
@@ -37,16 +41,15 @@ QtObject {
 	}
 
 	readonly property Instantiator _historyObjects: Instantiator {
-		function dailyHistory(day, trackerIndex) {
+		function dailyHistory(day) {
+			return objectAt(day)
+		}
+
+		function dailyTrackerHistory(day, trackerIndex) {
 			let overallDailyHistory = objectAt(day)
 			if (!overallDailyHistory) {
 				// History is not yet available for this day
 				return null
-			}
-			if (trackerIndex === undefined
-					|| trackerIndex < 0
-					|| root.trackerCount <= 1) {    // When only 1 tracker, use the overall history instead
-				return overallDailyHistory
 			}
 			return overallDailyHistory.trackerHistoryObjects.objectAt(trackerIndex)
 		}
@@ -61,7 +64,7 @@ QtObject {
 			// com.victronenergy.root.tty0/History/Daily/<day>/Pv/<pv-index>
 			readonly property Instantiator trackerHistoryObjects: Instantiator {
 				model: root.trackerCount > 1 ? root.trackerCount : null
-				delegate: SolarDailyHistory {
+				delegate: SolarTrackerDailyHistory {
 					uidPrefix: overallDailyHistoryDelegate.uidPrefix + "/Pv/" + model.index
 				}
 			}

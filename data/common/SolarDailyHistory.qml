@@ -6,12 +6,11 @@
 import QtQuick
 import Victron.VenusOS
 
-// Stores the overall daily history for a solar charger, or the daily history for a single solar tracker.
+// Stores the overall daily history for a solar charger.
 QtObject {
 	id: root
 
-	// For a charger, prefix is: com.victronenergy.solarcharger.tty0/History/Daily/<day>
-	// For a tracker, prefix is: com.victronenergy.solarcharger.tty0/History/Daily/<day>/Pv/<pv-index>
+	// Prefix is: com.victronenergy.solarcharger.tty0/History/Daily/<day>
 	property string uidPrefix
 
 	readonly property real yieldKwh: _yieldKwh.value == undefined ? NaN : _yieldKwh.value

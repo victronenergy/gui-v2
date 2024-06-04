@@ -22,12 +22,11 @@ Column {
 	function _trackerHistoryTotal(role, trackerIndex) {
 		let totalValue = NaN
 		for (let day = dayRange[0]; day < dayRange[1]; ++day) {
-			const history = root.solarHistory.dailyHistory(day, trackerIndex)
+			const history = trackerIndex === undefined
+					? root.solarHistory.dailyHistory(day)
+					: root.solarHistory.dailyTrackerHistory(day, trackerIndex)
 			if (history) {
-				const value = history[role]
-				if (!isNaN(value)) {
-					totalValue = isNaN(totalValue) ? value : totalValue + value
-				}
+				totalValue = Units.sumRealNumbers(totalValue, history[role])
 			}
 		}
 		return totalValue
@@ -36,7 +35,9 @@ Column {
 	function _trackerHistoryMin(role, trackerIndex) {
 		let minValue = NaN
 		for (let day = dayRange[0]; day < dayRange[1]; ++day) {
-			const history = root.solarHistory.dailyHistory(day, trackerIndex)
+			const history = trackerIndex === undefined
+					? root.solarHistory.dailyHistory(day)
+					: root.solarHistory.dailyTrackerHistory(day, trackerIndex)
 			if (history) {
 				const value = history[role]
 				if (!isNaN(value)) {
@@ -50,7 +51,9 @@ Column {
 	function _trackerHistoryMax(role, trackerIndex) {
 		let maxValue = NaN
 		for (let day = dayRange[0]; day < dayRange[1]; ++day) {
-			const history = root.solarHistory.dailyHistory(day, trackerIndex)
+			const history = trackerIndex === undefined
+					? root.solarHistory.dailyHistory(day)
+					: root.solarHistory.dailyTrackerHistory(day, trackerIndex)
 			if (history) {
 				const value = history[role]
 				if (!isNaN(value)) {
@@ -116,7 +119,7 @@ Column {
 			} else if (column === 1) {
 				return root._trackerHistoryTotal("yieldKwh", trackerIndex)
 			} else if (column === 2) {
-				return root._trackerHistoryMax("maxPvVoltage", trackerIndex)
+				return root._trackerHistoryMax("maxVoltage", trackerIndex)
 			} else if (column === 3) {
 				return root._trackerHistoryMax("maxPower", trackerIndex)
 			}
