@@ -45,28 +45,45 @@ Flow {
 				visible: root.orientation === Qt.Horizontal && phaseRepeater.count > 1
 			}
 
-			CheapBarGauge {
-				id: phaseGauge
+			ValueRange {
+				id: valueRange
+				value: root.visible ? model[root.phaseModelProperty] : root.minimumValue
+				minimumValue: root.minimumValue
+				maximumValue: root.maximumValue
+			}
 
-				readonly property bool feedingToGrid: root.inputMode
-						&& (model.power || 0) < 0
-						&& Global.systemSettings.essFeedbackToGridEnabled
-
+			Loader {
+				id: gaugeLoader
 				anchors.right: parent.right
 				width: parent.width - (phaseLabel.visible ? phaseLabel.width : 0)
 				height: parent.height
-				foregroundColor: Theme.color_darkOk,feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-				backgroundColor: Theme.color_darkOk,feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
-				valueType: root.valueType
-				value: valueRange.valueAsRatio
-				orientation: root.orientation
-				animationEnabled: root.animationEnabled
+				sourceComponent: (Qt.platform.os === "linux" && !Global.isDesktop) ? cheapGauge : prettyGauge
+				readonly property bool feedingToGrid: root.inputMode
+						&& (model.power || 0) < 0
+						&& Global.systemSettings.essFeedbackToGridEnabled
+			}
 
-				ValueRange {
-					id: valueRange
-					value: root.visible ? model[root.phaseModelProperty] : root.minimumValue
-					minimumValue: root.minimumValue
-					maximumValue: root.maximumValue
+			Component {
+				id: cheapGauge
+				CheapBarGauge {
+					foregroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+					backgroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
+					valueType: root.valueType
+					value: valueRange.valueAsRatio
+					orientation: root.orientation
+					animationEnabled: root.animationEnabled
+				}
+			}
+
+			Component {
+				id: prettyGauge
+				BarGauge {
+					foregroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+					backgroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
+					valueType: root.valueType
+					value: valueRange.valueAsRatio
+					orientation: root.orientation
+					animationEnabled: root.animationEnabled
 				}
 			}
 		}
