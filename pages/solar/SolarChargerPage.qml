@@ -74,7 +74,7 @@ Page {
 							return tracker.name
 						} else if (column === 1) {
 							// Today's yield for this tracker
-							const history = root.solarCharger.dailyHistory(0, trackerIndex)
+							const history = root.solarCharger.dailyTrackerHistory(0, trackerIndex)
 							return history ? history.yieldKwh : NaN
 						} else if (column === 2) {
 							return tracker.voltage

@@ -92,24 +92,29 @@ QtObject {
 						// battery
 						const batteryVoltage = day + 1 + trackerIndex
 
-						const data = {
-							"Yield": yieldKwh * 10,
-							"MaxPower": maxPower * 10,
-							"MaxPvVoltage": maxPvVoltage * 10,
-							"TimeInBulk": timeSample,
-							"TimeInAbsorption": timeSample * 2,
-							"TimeInFloat": timeSample * 3,
-							"MinBatteryVoltage": batteryVoltage,
-							"MaxBatteryVoltage": batteryVoltage * 2,
-							"MaxBatteryCurrent": batteryVoltage * 1.5
-						}
-
+						let data
 						let historyUid = ""
 						if (trackerCount > 1) {
 							historyUid = serviceUid + "/History/Daily/" + day + "/Pv/" + trackerIndex
+							data = {
+								"Yield": yieldKwh * 10,
+								"MaxPower": maxPower * 10,
+								"MaxVoltage": maxPvVoltage * 10,
+							}
 						} else {
 							// If only 1 tracker, add to overall history instead
 							historyUid = dayOverallHistoryUid
+							data = {
+								"Yield": yieldKwh * 10,
+								"MaxPower": maxPower * 10,
+								"MaxPvVoltage": maxPvVoltage * 10,
+								"TimeInBulk": timeSample,
+								"TimeInAbsorption": timeSample * 2,
+								"TimeInFloat": timeSample * 3,
+								"MinBatteryVoltage": batteryVoltage,
+								"MaxBatteryVoltage": batteryVoltage * 2,
+								"MaxBatteryCurrent": batteryVoltage * 1.5
+							}
 						}
 
 						for (const dataProperty in data) {
@@ -135,7 +140,7 @@ QtObject {
 						]
 						for (let i = 0; i < overallProperties.length; ++i) {
 							const propertyName = overallProperties[i]
-							const total = dayTotals[propertyName]
+							const total = dayTotals[propertyName] || 0
 							Global.mockDataSimulator.setMockValue(dayOverallHistoryUid + "/" + propertyName, total)
 						}
 					}

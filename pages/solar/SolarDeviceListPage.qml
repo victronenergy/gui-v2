@@ -57,11 +57,16 @@ Page {
 					Repeater {
 						model: solarCharger.trackers
 						delegate: ListQuantityGroupNavigationItem {
-							readonly property SolarDailyHistory historyToday: solarCharger.dailyHistory(0, model.index)
+							readonly property real yieldToday: {
+								const historyToday = solarCharger.trackers.count > 1
+										? solarCharger.dailyTrackerHistory(0, model.index)
+										: solarCharger.dailyHistory(0)
+								return historyToday ? historyToday.yieldKwh : NaN
+							}
 
 							text: solarCharger.trackerName(model.index)
 							quantityModel: [
-								{ value: historyToday ? historyToday.yieldKwh : NaN, unit: VenusOS.Units_Energy_KiloWattHour },
+								{ value: yieldToday, unit: VenusOS.Units_Energy_KiloWattHour },
 								{ value: modelData.voltage, unit: VenusOS.Units_Volt_DC },
 								{ value: modelData.current, unit: VenusOS.Units_Amp },
 								{ value: modelData.power, unit: VenusOS.Units_Watt },

@@ -28,8 +28,12 @@ Device {
 
 	signal yieldUpdatedForDay(day: int, yieldKwh: real)
 
-	function dailyHistory(day, trackerIndex) {
-		return _history.dailyHistory(day, trackerIndex)
+	function dailyHistory(day) {
+		return _history.dailyHistory(day)
+	}
+
+	function dailyTrackerHistory(day, trackerIndex) {
+		return _history.dailyTrackerHistory(day, trackerIndex)
 	}
 
 	function trackerName(trackerIndex) {
