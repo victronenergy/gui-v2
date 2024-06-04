@@ -69,6 +69,7 @@ Column {
 
 		metrics.smallTextMode: root.smallTextMode
 		metrics.spacing: 2*Theme.geometry_quantityTable_horizontalSpacing
+		metrics.firstColumnWidth: (root.width / model.length) * 1.5  // expand tracker name column to fill 1.5 column space
 
 		model: [
 			{
@@ -104,6 +105,7 @@ Column {
 		headerVisible: false
 		metrics.smallTextMode: root.smallTextMode
 		metrics.spacing: 2*Theme.geometry_quantityTable_horizontalSpacing
+		metrics.firstColumnWidth: (root.width / units.length) * 1.5  // expand tracker name column to fill 1.5 column space
 
 		rowCount: root.solarHistory.trackerCount
 		units: [
