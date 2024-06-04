@@ -204,16 +204,31 @@ exported power v  0.4 |   /
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
 		}
-		bottomComponent: CheapBarGauge {
-			orientation: Qt.Horizontal
-			value: dcInputRange.valueAsRatio
-			animationEnabled: root.animationEnabled
-		}
+
+		bottomComponent: (Qt.platform.os === "linux" && !Global.isDesktop) ? cheapGaugeDcInput : prettyGaugeDcInput
 
 		ValueRange {
 			id: dcInputRange
 			value: root.visible ? Global.dcInputs.power : NaN
 			maximumValue: Global.dcInputs.maximumPower
+		}
+
+		Component {
+			id: cheapGaugeDcInput
+			CheapBarGauge {
+				orientation: Qt.Horizontal
+				value: dcInputRange.valueAsRatio
+				animationEnabled: root.animationEnabled
+			}
+		}
+
+		Component {
+			id : prettyGaugeDcInput
+			BarGauge {
+				orientation: Qt.Horizontal
+				value: dcInputRange.valueAsRatio
+				animationEnabled: root.animationEnabled
+			}
 		}
 	}
 
@@ -256,17 +271,33 @@ exported power v  0.4 |   /
 			active: root.animationEnabled
 			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
 		}
-		bottomComponent: CheapBarGauge {
-			orientation: Qt.Horizontal
-			valueType: VenusOS.Gauges_ValueType_RisingPercentage
-			value: dcLoadRange.valueAsRatio
-			animationEnabled: root.animationEnabled
-		}
+
+		bottomComponent: (Qt.platform.os === "linux" && !Global.isDesktop) ? cheapGaugeDcLoad : prettyGaugeDcLoad
 
 		ValueRange {
 			id: dcLoadRange
 			value: root.visible ? Global.system.dc.power : NaN
 			maximumValue: Global.system.dc.maximumPower
+		}
+
+		Component {
+			id: cheapGaugeDcLoad
+			CheapBarGauge {
+				orientation: Qt.Horizontal
+				valueType: VenusOS.Gauges_ValueType_RisingPercentage
+				value: dcLoadRange.valueAsRatio
+				animationEnabled: root.animationEnabled
+			}
+		}
+
+		Component {
+			id : prettyGaugeDcLoad
+			BarGauge {
+				orientation: Qt.Horizontal
+				valueType: VenusOS.Gauges_ValueType_RisingPercentage
+				value: dcLoadRange.valueAsRatio
+				animationEnabled: root.animationEnabled
+			}
 		}
 	}
 }
