@@ -31,7 +31,6 @@ ObjectModel {
 		text: CommonWords.temperature
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 		allowed: defaultAllowed && dataItem.isValid
-		onHeightChanged: console.trace()
 	}
 
 	ListTextItem {
@@ -82,6 +81,12 @@ ObjectModel {
 		text: qsTrId("alternator_wakespeed_engine_speed")
 		dataItem.uid: root.bindPrefix + "/Engine/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
+		allowed: defaultAllowed && dataItem.isValid
+	}
+
+	ListTemperatureItem {
+		text: CommonWords.temperature
+		dataItem.uid: root.bindPrefix + "/Engine/Temperature"
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
