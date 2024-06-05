@@ -205,7 +205,7 @@ exported power v  0.4 |   /
 			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
 		}
 
-		bottomComponent: (Qt.platform.os === "linux" && !Global.isDesktop) ? cheapGaugeDcInput : prettyGaugeDcInput
+		bottomComponent: Global.isGxDevice ? cheapGaugeDcInput : prettyGaugeDcInput
 
 		ValueRange {
 			id: dcInputRange
@@ -272,7 +272,7 @@ exported power v  0.4 |   /
 			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
 		}
 
-		bottomComponent: (Qt.platform.os === "linux" && !Global.isDesktop) ? cheapGaugeDcLoad : prettyGaugeDcLoad
+		bottomComponent: Global.isGxDevice ? cheapGaugeDcLoad : prettyGaugeDcLoad
 
 		ValueRange {
 			id: dcLoadRange

@@ -566,9 +566,9 @@ SwipeViewPage {
 
 		// Limit the frame rate of widget connector animations
 		// to 20fps on the GX products
-		property bool notLimitFps: Qt.platform.os !== "linux" || Global.isDesktop
+		property bool limitFps: Global.isGxDevice
 		property real animationElapsed
-		onTriggered: if (notLimitFps || (currentFrame % 3 == 0)) animationElapsed = elapsedTime
+		onTriggered: if (!limitFps || (currentFrame % 3 == 0)) animationElapsed = elapsedTime
 
 		onRunningChanged: {
 			if (!running) {
