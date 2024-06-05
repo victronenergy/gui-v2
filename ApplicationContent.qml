@@ -98,7 +98,7 @@ Item {
 		id: loader
 
 		asynchronous: true
-		active: Qt.platform.os == "linux" && !Global.isDesktop
+		active: Global.isGxDevice
 		source: "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
 		onLoaded: {
 			item.mainViewItem = mainView

@@ -60,6 +60,7 @@ QtObject {
 	property string firmwareInstalledBuild // don't clear this on UI reload.  it needs to survive reconnection.
 	property bool firmwareInstalledBuildUpdated // as above.
 	property bool isDesktop
+	property bool isGxDevice: Qt.platform.os === "linux" && !isDesktop
 	property real scalingRatio: 1.0
 
 	property bool animationEnabled: true // for mock mode only.

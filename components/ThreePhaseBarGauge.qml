@@ -58,7 +58,7 @@ Flow {
 				anchors.right: parent.right
 				width: parent.width - (phaseLabel.visible ? phaseLabel.width : 0)
 				height: parent.height
-				sourceComponent: (Qt.platform.os === "linux" && !Global.isDesktop) ? cheapGauge : prettyGauge
+				sourceComponent: Global.isGxDevice ? cheapGauge : prettyGauge
 				readonly property bool feedingToGrid: root.inputMode
 						&& (model.power || 0) < 0
 						&& Global.systemSettings.essFeedbackToGridEnabled
