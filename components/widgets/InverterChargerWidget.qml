@@ -10,11 +10,20 @@ OverviewWidget {
 	id: root
 
 	onClicked: {
-		if (Global.inverterChargers.veBusDevices.count
-				+ Global.inverterChargers.multiDevices.count
-				+ Global.inverterChargers.inverterDevices.count > 1) {
+		if ((Global.inverterChargers.veBusDevices.count
+				+ Global.inverterChargers.inverterDevices.count
+				+ Global.acSystemDevices.model.count) > 1) {
 			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
 		} else {
+			// Show page for acsystem
+			if (Global.acSystemDevices.model.count) {
+				const acSystem = Global.acSystemDevices.model.firstObject
+				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml",
+						{ "bindPrefix": acSystem.serviceUid, "title": acSystem.name })
+				return
+			}
+
+			// Show page for inverter/charger
 			const device = Global.inverterChargers.first
 			if (device.serviceUid.indexOf('inverter') >= 0) {
 				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
