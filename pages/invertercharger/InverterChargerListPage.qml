@@ -16,8 +16,8 @@ Page {
 		model: AggregateDeviceModel {
 			sourceModels: [
 				Global.inverterChargers.veBusDevices,
-				Global.inverterChargers.multiDevices,
-				Global.inverterChargers.inverterDevices
+				Global.inverterChargers.inverterDevices,
+				Global.acSystemDevices.model
 			]
 		}
 
@@ -26,6 +26,14 @@ Page {
 			secondaryText: Global.system.systemStateToText(model.device.state)
 
 			onClicked: {
+				// Show page for acsystem
+				if (model.device.serviceUid.indexOf('acsystem') >= 0) {
+					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml",
+							{ "bindPrefix": model.device.serviceUid, "title": model.device.name })
+					return
+				}
+
+				// Show page for inverter/charger
 				if (model.device.serviceUid.indexOf('inverter') >= 0) {
 					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
 							{ "serviceUid": model.device.serviceUid, "title": model.device.name })
