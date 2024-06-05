@@ -23,10 +23,9 @@ Item {
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
 	// when the user drags slowly between pages.
-	readonly property bool allowPageAnimations: BackendConnection.applicationVisible
+	property bool allowPageAnimations: BackendConnection.applicationVisible
 			&& !pageStack.busy && (!swipeView || !swipeView.flicking)
 			&& !Global.splashScreenVisible
-			&& Global.animationEnabled
 
 	property int _loadedPages: 0
 
@@ -340,7 +339,7 @@ Item {
 			return customButton
 		}
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
-		animationEnabled: BackendConnection.applicationVisible && (!!Global ? Global.animationEnabled : true)
+		animationEnabled: BackendConnection.applicationVisible
 		color: root.backgroundColor
 
 		onLeftButtonClicked: {
