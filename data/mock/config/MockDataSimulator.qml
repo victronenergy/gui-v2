@@ -12,6 +12,7 @@ QtObject {
 	property bool timersActive: !Global.splashScreenVisible
 	property int deviceCount
 	property bool levelsEnabled: true
+	property bool animationEnabled: true
 
 	signal setBatteryRequested(config : var)
 	signal setAcInputsRequested(config : var)
@@ -111,10 +112,8 @@ QtObject {
 			}
 			break
 		case Qt.Key_A:
-			if (!!Global) {
-				Global.animationEnabled = !Global.animationEnabled
-				event.accepted = true
-			}
+			root.animationEnabled = !root.animationEnabled
+			event.accepted = true
 			break
 		case Qt.Key_C:
 			Theme.colorScheme = Theme.colorScheme == Theme.Dark ? Theme.Light : Theme.Dark
@@ -325,5 +324,19 @@ QtObject {
 		function onKeyPressed(event) {
 			root.keyPressed(event)
 		}
+	}
+
+	property Binding _pageAnimationsBinding: Binding {
+		when: !animationEnabled
+		target: !!Global.mainView ? Global.mainView : null
+		property: "allowPageAnimations"
+		value: false
+	}
+
+	property Binding _statusBarAnimationsBinding: Binding {
+		when: !animationEnabled
+		target: !!Global.pageManager ? Global.pageManager.statusBar : null
+		property: "animationEnabled"
+		value: false
 	}
 }
