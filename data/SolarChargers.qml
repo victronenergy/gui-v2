@@ -26,13 +26,22 @@ QtObject {
 		model.clear()
 	}
 
-	function defaultTrackerName(trackerIndex, totalTrackerCount, deviceName) {
-		if (totalTrackerCount === 1) {
-			return deviceName
+	function formatTrackerName(trackerName, trackerIndex, totalTrackerCount, deviceName, format) {
+		if (format === VenusOS.TrackerName_WithDevicePrefix) {
+			if (trackerName.length > 0) {
+				return "%1-%2".arg(deviceName).arg(trackerName)
+			} else if (totalTrackerCount > 1) {
+				return "%1-#%2".arg(deviceName).arg(trackerIndex + 1)
+			} else {
+				return deviceName
+			}
+		} else {    // format === VenusOS.TrackerName_NoDevicePrefix
+			if (trackerName.length > 0) {
+				return trackerName
+			} else {
+				return "#%2".arg(deviceName).arg(trackerIndex + 1)
+			}
 		}
-		//: Name for a tracker of a solar charger. %1 = solar charger name, %2 = the number of this tracker for the charger
-		//% "%1 (#%2)"
-		return qsTrId("solarcharger_tracker_name").arg(deviceName).arg(trackerIndex + 1)
 	}
 
 	function chargerStateToText(state) {

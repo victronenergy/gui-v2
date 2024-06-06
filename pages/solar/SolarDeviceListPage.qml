@@ -64,7 +64,7 @@ Page {
 								return historyToday ? historyToday.yieldKwh : NaN
 							}
 
-							text: solarCharger.trackerName(model.index)
+							text: solarCharger.trackerName(model.index, VenusOS.TrackerName_WithDevicePrefix)
 							quantityModel: [
 								{ value: yieldToday, unit: VenusOS.Units_Energy_KiloWattHour },
 								{ value: modelData.voltage, unit: VenusOS.Units_Volt_DC },

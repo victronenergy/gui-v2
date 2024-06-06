@@ -68,7 +68,7 @@ QtObject {
 				if (trackerCount > 1 && Math.random() < 0.5) {
 					const charCode = 'A'.charCodeAt(0)
 					for (trackerIndex = 0; trackerIndex < trackerCount; ++trackerIndex) {
-						const nextTrackerName = "Charger %1 - Tracker %2".arg(root.mockDeviceCount).arg(String.fromCharCode(charCode + trackerIndex))
+						const nextTrackerName = "Tracker %1".arg(String.fromCharCode(charCode + trackerIndex))
 						Global.mockDataSimulator.setMockValue(serviceUid + "/Pv/" + trackerIndex + "/Name", nextTrackerName)
 					}
 				}

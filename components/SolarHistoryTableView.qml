@@ -117,7 +117,7 @@ Column {
 		]
 		valueForModelIndex: function(trackerIndex, column) {
 			if (column === 0) {
-				return root.solarHistory.trackerName(trackerIndex)
+				return root.solarHistory.trackerName(trackerIndex, VenusOS.TrackerName_NoDevicePrefix)
 			} else if (column === 1) {
 				return root._trackerHistoryTotal("yieldKwh", trackerIndex)
 			} else if (column === 2) {
