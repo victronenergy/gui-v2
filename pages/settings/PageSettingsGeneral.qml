@@ -68,6 +68,62 @@ Page {
 
 		model: ObjectModel {
 			ListRadioButtonGroup {
+				//% "Security profile"
+				text: qsTrId("settings_security_profile")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+				updateOnClick: false // handle option clicked manually.
+				optionModel: [
+					{
+						//% "Secured"
+						display: qsTrId("settings_security_profile_secured"),
+						value: VenusOS.Security_Profile_Secured,
+						//% "Password protected and the network communication is encrypted"
+						caption: qsTrId("settings_security_profile_secured_caption"),
+						promptPassword: true
+					},
+					{
+						//% "Weak"
+						display: qsTrId("settings_security_profile_weak"),
+						value: VenusOS.Security_Profile_Weak,
+						//% "Password protected, but the network communication is not encrypted"
+						caption: qsTrId("settings_security_profile_weak_caption"),
+						promptPassword: true
+					},
+					{
+						//% "Unsecured"
+						display: qsTrId("settings_security_profile_unsecured"),
+						value: VenusOS.Security_Profile_Unsecured,
+						//% "No password and the network communication is not encrypted"
+						caption: qsTrId("settings_security_profile_unsecured_caption")
+					},
+				]
+
+				onOptionClicked: function(index, password) {
+					// Radio button model indexes should match the enums
+					if (index === VenusOS.Security_Profile_Unsecured) {
+						// NOTE: this restarts the webserver when changed
+						dataItem.setValue(VenusOS.Security_Profile_Unsecured)
+					} else {
+						if (password.length < 8) {
+							//% "Password needs to be at least 8 characters long"
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_security_too_short_password"), 5000)
+						} else {
+							var object = {Action: "SetPassword", Password: password}
+							var json = JSON.stringify(object)
+							securityApi.setValue(json)
+
+							// NOTE: this restarts the webserver when changed
+							dataItem.setValue(index)
+						}
+					}
+				}
+				VeQuickItem {
+					id: securityApi
+					uid: Global.venusPlatform.serviceUid + "/Security/Api"
+				}
+			}
+
+			ListRadioButtonGroup {
 				//% "Access level"
 				text: qsTrId("settings_access_level")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
@@ -138,14 +194,9 @@ Page {
 
 				// Cannot log out from GX devices, VRM or Unsecured profile with no password
 				allowed: Qt.platform.os === "wasm" && !BackendConnection.vrm
-						 && securityProfile.value !== VenusOS.Security_Profile_Unsecured
+						 && securityProfile.dataItem.value !== VenusOS.Security_Profile_Unsecured
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: Global.dialogLayer.open(logoutDialogComponent)
-
-				VeQuickItem {
-					id: securityProfile
-					uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
-				}
 
 				Component {
 					id: logoutDialogComponent
