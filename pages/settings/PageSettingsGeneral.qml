@@ -68,10 +68,15 @@ Page {
 
 		model: ObjectModel {
 			ListRadioButtonGroup {
+				id: securityProfile
+
+				property int pendingProfile
+
 				//% "Security profile"
 				text: qsTrId("settings_security_profile")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
 				updateOnClick: false // handle option clicked manually.
+				popDestination: undefined
 				optionModel: [
 					{
 						//% "Secured"
@@ -100,26 +105,75 @@ Page {
 
 				onOptionClicked: function(index, password) {
 					// Radio button model indexes should match the enums
-					if (index === VenusOS.Security_Profile_Unsecured) {
+					securityProfile.pendingProfile = index
+					if (securityProfile.pendingProfile === VenusOS.Security_Profile_Unsecured) {
 						// NOTE: this restarts the webserver when changed
-						dataItem.setValue(VenusOS.Security_Profile_Unsecured)
+						Global.dialogLayer.open(securityProfileConfirmationDialog)
 					} else {
 						if (password.length < 8) {
 							//% "Password needs to be at least 8 characters long"
 							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_security_too_short_password"), 5000)
 						} else {
-							var object = {Action: "SetPassword", Password: password}
-							var json = JSON.stringify(object)
-							securityApi.setValue(json)
-
-							// NOTE: this restarts the webserver when changed
-							dataItem.setValue(index)
+							Global.dialogLayer.open(securityProfileConfirmationDialog, {password: password})
 						}
 					}
 				}
 				VeQuickItem {
 					id: securityApi
 					uid: Global.venusPlatform.serviceUid + "/Security/Api"
+				}
+
+				Component {
+					id: securityProfileConfirmationDialog
+
+					ModalWarningDialog {
+						property string password
+
+						icon.source: ""
+						title: {
+							switch (securityProfile.pendingProfile) {
+							case VenusOS.Security_Profile_Secured:
+								//% "Select 'Secured' profile?"
+								return qsTrId("settings_security_profile_secured_title")
+							case VenusOS.Security_Profile_Weak:
+								//% "Select 'Weak' profile?"
+								return qsTrId("settings_security_profile_weak_title")
+							case VenusOS.Security_Profile_Unsecured:
+								//% "Select 'Unsecured' profile?"
+								return qsTrId("settings_security_profile_unsecured_title")
+							}
+						}
+
+						description: {
+							switch (securityProfile.pendingProfile) {
+							case VenusOS.Security_Profile_Secured:
+								//% "• Local network services are password protected\n• The network communication is encrypted\n• A secure connection with VRM is enabled\n• Insecure settings cannot be enabled"
+								return qsTrId("settings_security_profile_secured_description")
+							case VenusOS.Security_Profile_Weak:
+								//% "• Local network services are password protected\n• Unencrypted access to local websites is enabled as well (HTTP/HTTPS)"
+								return qsTrId("settings_security_profile_weak_description")
+							case VenusOS.Security_Profile_Unsecured:
+								//% "• Local network services do not need a password\n• Unencrypted access to local websites is enabled as well (HTTP/HTTPS)"
+								return  qsTrId("settings_security_profile_unsecured_description")
+							}
+						}
+						onAccepted: {
+							const profile = securityProfile.pendingProfile
+							if (profile !== VenusOS.Security_Profile_Unsecured) {
+								var object = {Action: "SetPassword", Password: password}
+								var json = JSON.stringify(object)
+								securityApi.setValue(json)
+							}
+							// NOTE: this restarts the webserver when changed
+							securityProfile.dataItem.setValue(profile)
+						}
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured
+								? Theme.geometry_modalDialog_height
+								: Theme.geometry_modalDialog_height_small
+
+						onClosed: Global.pageManager.popPage()
+					}
 				}
 			}
 

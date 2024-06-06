@@ -161,6 +161,7 @@ ListNavigationItem {
 								primaryLabel.color: Theme.color_font_secondary
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
+								backgroundRect.color: "transparent"
 								Component.onCompleted: allowed = model.index !== root.currentIndex
 
 								onAccepted: function(text) {
