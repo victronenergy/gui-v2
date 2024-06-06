@@ -628,6 +628,12 @@ public:
 		Alarm_Level_Alarm
 	};
 	Q_ENUM(Alarm_Level)
+
+	enum TrackerName_Format {
+		TrackerName_WithDevicePrefix,
+		TrackerName_NoDevicePrefix
+	};
+	Q_ENUM(TrackerName_Format)
 };
 
 }

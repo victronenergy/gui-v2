@@ -27,10 +27,10 @@ QtObject {
 		return _historyObjects.dailyTrackerHistory(day, trackerIndex)
 	}
 
-	function trackerName(trackerIndex) {
+	function trackerName(trackerIndex, format) {
 		const nameObject = _trackerNames.objectAt(trackerIndex)
 		const name = nameObject ? nameObject.value || "" : ""
-		return name ? name : Global.solarChargers.defaultTrackerName(trackerIndex, trackerCount, deviceName)
+		return Global.solarChargers.formatTrackerName(name, trackerIndex, trackerCount, deviceName, format)
 	}
 
 	readonly property Instantiator _trackerNames: Instantiator {

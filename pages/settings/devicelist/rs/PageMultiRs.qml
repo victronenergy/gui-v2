@@ -234,7 +234,9 @@ Page {
 						valueForModelIndex: function(trackerIndex, column) {
 							const tracker = trackerObjects.objectAt(trackerIndex)
 							if (column === 0) {
-								return tracker.name
+								return Global.solarChargers.formatTrackerName(tracker.name,
+										trackerIndex, root.trackerCount, root.title,
+										VenusOS.TrackerName_NoDevicePrefix)
 							} else if (column === 1) {
 								return tracker.voltage
 							} else if (column === 2) {
@@ -252,7 +254,7 @@ Page {
 								readonly property real power: _power.value === undefined ? NaN : _power.value
 								readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
 								readonly property real current: isNaN(power) || isNaN(voltage) || voltage === 0 ? NaN : power / voltage
-								readonly property string name: _name.value || Global.solarChargers.defaultTrackerName(index, root.trackerCount, root.title)
+								readonly property string name: _name.value || ""
 
 								readonly property VeQuickItem _voltage: VeQuickItem { uid: root.bindPrefix + "/Pv/" + index + "/V" }
 								readonly property VeQuickItem _power: VeQuickItem { uid: root.bindPrefix + "/Pv/" + index + "/P" }

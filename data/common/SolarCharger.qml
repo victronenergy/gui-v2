@@ -36,9 +36,10 @@ Device {
 		return _history.dailyTrackerHistory(day, trackerIndex)
 	}
 
-	function trackerName(trackerIndex) {
+	function trackerName(trackerIndex, format) {
 		const tracker = _trackerObjects.objectAt(trackerIndex)
-		return tracker ? tracker.name || "" : ""
+		const trackerName = tracker ? tracker.name || "" : ""
+		return Global.solarChargers.formatTrackerName(trackerName, trackerIndex, trackers.count, solarCharger.name, format)
 	}
 
 	//--- internal members below ---
@@ -95,8 +96,7 @@ Device {
 			readonly property real power: solarCharger.trackers.count <= 1 ? solarCharger.power : _power.value || 0
 			readonly property real voltage: _voltage.value || 0
 			readonly property real current: isNaN(power) || isNaN(voltage) || voltage === 0 ? NaN : power / voltage
-
-			readonly property string name: _name.value || Global.solarChargers.defaultTrackerName(model.index, _trackerObjects.count, solarCharger.name)
+			readonly property string name: _name.value || ""
 
 			readonly property VeQuickItem _voltage: VeQuickItem {
 				uid: solarCharger.trackers.count <= 1
