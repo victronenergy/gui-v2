@@ -114,6 +114,7 @@ public:
 	Q_INVOKABLE QString uidPrefix() const;
 
 	Q_INVOKABLE void logout();
+	Q_INVOKABLE void securityProtocolChanged();
 
 	// Move this to some mock data manager when available
 	Q_INVOKABLE void setMockValue(const QString &uid, const QVariant &value);
@@ -131,6 +132,10 @@ Q_SIGNALS:
 	void idUserChanged();
 	void vrmChanged();
 	void applicationVisibleChanged();
+
+private Q_SLOTS:
+	void onNetworkConfigChanged(const QVariant var);
+	void onReloadPageTimerExpired();
 
 private:
 	explicit BackendConnection(QObject *parent = nullptr);
@@ -160,6 +165,8 @@ private:
 	State m_state = BackendConnection::State::Idle;
 	SourceType m_type = UnknownSource;
 	QMqttClient::ClientError m_mqttClientError = QMqttClient::NoError;
+
+	QTimer *mRestartDelayTimer = nullptr;
 
 	VeQItemProducer *m_producer = nullptr;
 #if !defined(VENUS_WEBASSEMBLY_BUILD)

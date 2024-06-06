@@ -15,8 +15,10 @@ Item {
 	function open(dialogComponent, properties) {
 		currentDialog = dialogComponent.createObject(root, properties)
 		currentDialog.closed.connect(function() {
-			currentDialog.destroy()
-			currentDialog = null
+			if (currentDialog) {
+				currentDialog.destroy()
+				currentDialog = null
+			}
 		})
 		currentDialog.open()
 	}
