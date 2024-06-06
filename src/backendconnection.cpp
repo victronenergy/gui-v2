@@ -158,6 +158,54 @@ void BackendConnection::initDBusConnection(const QString &address)
 }
 #endif
 
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+void BackendConnection::onNetworkConfigChanged(const QVariant var)
+{
+	qWarning() << "onNetworkConfigChanged" << var;
+
+	if (var.toInt() > 0 && !mRestartDelayTimer) {
+		VeQItemMqttProducer *mqtt = qobject_cast<VeQItemMqttProducer *>(m_producer);
+		if (mqtt)
+			mqtt->close();
+
+		mRestartDelayTimer = new QTimer();
+		connect(mRestartDelayTimer, &QTimer::timeout, this, &BackendConnection::onReloadPageTimerExpired);
+		mRestartDelayTimer->setSingleShot(true);
+		mRestartDelayTimer->start(3000);
+	}
+}
+
+void BackendConnection::onReloadPageTimerExpired()
+{
+	if (mRestartDelayTimer) {
+		delete mRestartDelayTimer;
+		mRestartDelayTimer = nullptr;
+	}
+
+	emscripten_run_script("reload();");
+}
+
+// If the wasm itself changed the Security Profile, it should normally be notified
+// that it is accepted by receiving a Network Config change. Since that event is send
+// over a connection which is going to be disconnected, this acts as a fallback if
+// that fails and still triggers a reload (albeit a bit later).
+void BackendConnection::securityProtocolChanged()
+{
+	QTimer *timer = new QTimer(this);
+	connect(timer, &QTimer::timeout, this, &BackendConnection::onReloadPageTimerExpired);
+	connect(timer, &QTimer::timeout, timer, &QObject::deleteLater);
+	timer->setSingleShot(true);
+	timer->start(5000);
+}
+
+#else
+
+void BackendConnection::onNetworkConfigChanged(const QVariant var) { Q_UNUSED(var); }
+void BackendConnection::onReloadPageTimerExpired() {}
+void BackendConnection::securityProtocolChanged() {}
+
+#endif
+
 void BackendConnection::initMqttConnection(const QString &address)
 {
 	qWarning() << "Connecting to MQTT source at" << address << "...";
@@ -195,6 +243,9 @@ void BackendConnection::initMqttConnection(const QString &address)
 	setVrm(address.startsWith(QStringLiteral("wss://webmqtt"))
 		&& address.contains(QStringLiteral(".victronenergy.com")));
 	mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);
+
+	VeQItem *item = mqttProducer->services()->itemGetOrCreate("/platform/0/Network/ConfigChanged");
+	connect(item, &VeQItem::valueChanged, this, &BackendConnection::onNetworkConfigChanged);
 #else
 	const QStringList parts = address.split(':');
 	if (parts.size() >= 2) {

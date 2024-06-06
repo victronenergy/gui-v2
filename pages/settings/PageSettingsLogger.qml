@@ -34,13 +34,16 @@ Page {
 		model: ObjectModel {
 
 			ListRadioButtonGroup {
-				id: loggerMode
-				//% "Logging enabled"
-				text: qsTrId("settings_logging_enabled")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/Logmode"
+				id: vrmPortalMode
+				//% "VRM portal"
+				text: qsTrId("settings_logging_vrm_portal")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Network/VrmPortal"
 				optionModel: [
-					{ display: CommonWords.disabled, value: 0 },
-					{ display: CommonWords.enabled,	value: 1 },
+					{ display: CommonWords.off, value: VenusOS.Vrm_PortalMode_Off },
+					//% "Read-only"
+					{ display: qsTrId("settings_vrm_portal_readonly"), value: VenusOS.Vrm_PortalMode_ReadOnly },
+					//% "Full"
+					{ display: qsTrId("settings_vrm_portal_full"), value: VenusOS.Vrm_PortalMode_Full }
 				]
 			}
 
@@ -76,20 +79,26 @@ Page {
 					{ display: qsTrId("settings_1_day"), value: 86400 },
 				]
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/LogInterval"
-				allowed: !!loggerMode.dataItem.value && loggerMode.dataItem.value > 0
+				allowed: vrmPortalMode.dataItem.isValid && vrmPortalMode.dataItem.value > 0
 			}
 
 			ListSwitch {
 				//% "Use secure connection (HTTPS)"
 				text: qsTrId("settings_https_enabled")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/HttpsEnabled"
+				allowed: defaultAllowed && securityProfile.value !== VenusOS.Security_Profile_Secured
+
+				VeQuickItem {
+					id: securityProfile
+					uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+				}
 			}
 
 			ListTextItem {
 				//% "Last contact"
 				text: qsTrId("settings_last_contact")
 				dataItem.uid: root.loggerServiceUid + "/Vrm/TimeLastContact"
-				allowed: !!loggerMode.dataItem.value && loggerMode.dataItem.value > 0
+				allowed: vrmPortalMode.dataItem.isValid && vrmPortalMode.dataItem.value !== VenusOS.Vrm_PortalMode_Off
 
 				Timer {
 					interval: 1000
@@ -148,12 +157,6 @@ Page {
 					id: errorMessage
 					uid: root.loggerServiceUid + "/Vrm/ConnectionErrorMessage"
 				}
-			}
-
-			ListSwitch {
-				//% "VRM two-way communication"
-				text: qsTrId("settings_vrm_communication")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttVrm"
 			}
 
 			ListSwitch {

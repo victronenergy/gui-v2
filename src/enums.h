@@ -484,6 +484,21 @@ public:
 	};
 	Q_ENUM(Firmware_UpdateType)
 
+	enum Security_Profile {
+		Security_Profile_Secured,
+		Security_Profile_Weak,
+		Security_Profile_Unsecured,
+		Security_Profile_Indeterminate
+	};
+	Q_ENUM(Security_Profile)
+
+	enum Vrm_PortalMode {
+		Vrm_PortalMode_Off,
+		Vrm_PortalMode_ReadOnly,
+		Vrm_PortalMode_Full
+	};
+	Q_ENUM(Vrm_PortalMode)
+
 	enum DigitalInput_Type {
 		DigitalInput_Type_Disabled,
 		DigitalInput_Type_PulseMeter,
