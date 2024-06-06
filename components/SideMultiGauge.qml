@@ -63,8 +63,8 @@ Item {
 					// If showing multiple gauges on the right edge, shift them towards the left
 					- (gaugeRepeater.count === 1 || root.horizontalAlignment === Qt.AlignLeft ? 0 : (strokeWidth * gaugeRepeater.count))
 				valueType: root.valueType
-				progressColor: Theme.color_darkOk,feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-				remainderColor: Theme.color_darkOk,feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
+				progressColor: Theme.color_darkOk,gaugeDelegate.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+				remainderColor: Theme.color_darkOk,gaugeDelegate.feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
 				direction: root.direction
 				startAngle: root.startAngle
 				endAngle: root.endAngle
@@ -89,9 +89,15 @@ Item {
 
 			ValueRange {
 				id: valueRange
-				value: root.visible ? model[root.phaseModelProperty] : root.minimumValue
-				minimumValue: root.minimumValue
-				maximumValue: root.maximumValue
+
+				// When feeding in to grid, use an absolute value for the gauge. This effectively
+				// reverses the gauge direction so that negative and positive values have the same
+				// value on the gauge, though negative values will be drawn in green.
+				value: root.visible
+					   ? (gaugeDelegate.feedingToGrid ? Math.abs(model[root.phaseModelProperty]) : model[root.phaseModelProperty])
+					   : root.minimumValue
+				minimumValue: 0
+				maximumValue: Math.max(Math.abs(root.minimumValue), Math.abs(root.maximumValue))
 			}
 		}
 	}

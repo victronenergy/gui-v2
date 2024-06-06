@@ -48,9 +48,15 @@ Flow {
 
 			ValueRange {
 				id: valueRange
-				value: root.visible ? model[root.phaseModelProperty] : root.minimumValue
-				minimumValue: root.minimumValue
-				maximumValue: root.maximumValue
+
+				// When feeding in to grid, use an absolute value for the gauge. This effectively
+				// reverses the gauge direction so that negative and positive values have the same
+				// value on the gauge, though negative values will be drawn in green.
+				value: root.visible
+					   ? gaugeLoader.feedingToGrid ? Math.abs(model[root.phaseModelProperty]) : model[root.phaseModelProperty]
+					   : root.minimumValue
+				minimumValue: 0
+				maximumValue: Math.max(Math.abs(root.minimumValue), Math.abs(root.maximumValue))
 			}
 
 			Loader {
