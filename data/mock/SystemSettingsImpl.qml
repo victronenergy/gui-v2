@@ -61,6 +61,14 @@ QtObject {
 		Global.mockDataSimulator.setMockValue("com.victronenergy.solarcharger.ttyUSB1" + key, value)
 	}
 
+	function setMockModbusClientValue(key, value) {
+		Global.mockDataSimulator.setMockValue(BackendConnection.serviceUidForType("modbusclient") + key, value)
+	}
+
+	function setMockSettingsModbusClientValue(key, value) {
+		Global.mockDataSimulator.setMockValue(Global.systemSettings.serviceUid + "/Settings/ModbusClient/tcp" + key, value)
+	}
+
 	Component.onCompleted: {
 		// Other system settings
 		setMockSettingValue("System/VncInternet", 1)
@@ -288,5 +296,10 @@ QtObject {
 
 		ClockTime.clockTime = (new Date().getTime() / 1000)
 		setMockPlatformValue("Device/Time", ClockTime.clockTime)
+
+		// Modbus devices and settings
+		setMockModbusClientValue("/Scan", false)
+		setMockModbusClientValue("/ScanProgress", 0)
+		setMockSettingsModbusClientValue("/AutoScan", false)
 	}
 }

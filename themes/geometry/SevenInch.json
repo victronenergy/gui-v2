@@ -132,6 +132,7 @@
 
     "geometry_modalDialog_width": 624,
     "geometry_modalDialog_height": 368,
+    "geometry_modalDialog_height_small": 320,
     "geometry_modalDialog_radius": 8,
     "geometry_modalDialog_header_height": 78,
     "geometry_modalDialog_footer_height": 64,
@@ -417,6 +418,9 @@
     "geometry_settings_battery_rangeSlider_labelWidth": 120,
 
     "geometry_veBusDevice_PVCFListQuantityGroup_minimumDelegateWidth": 100,
-    "geometry_veBusAlarm_minimumDelegateWidth": 120
+    "geometry_veBusAlarm_minimumDelegateWidth": 120,
+
+    "geometry_modbus_device_protocol_width": 40,
+    "geometry_modbus_device_ip_address_width": 150
 
 }

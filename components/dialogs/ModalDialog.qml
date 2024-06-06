@@ -32,8 +32,7 @@ T.Dialog {
 				? rejectTextCancel
 				: rejectTextClose
 
-	//% "Cancel"
-	readonly property string rejectTextCancel: qsTrId("modaldialog_cancel")
+	readonly property string rejectTextCancel: CommonWords.cancel
 	//% "Close"
 	readonly property string rejectTextClose: qsTrId("modaldialog_close")
 

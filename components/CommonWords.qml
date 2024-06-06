@@ -13,6 +13,9 @@ QtObject {
 	//% "AC In"
 	readonly property string ac_in: qsTrId("common_words_ac_in")
 
+	//% "Add device"
+	readonly property string add_device: qsTrId("common_words_add_device")
+
 	//: The role for an AC input (grid, genset, acload, etc.)
 	//% "Role"
 	readonly property string ac_input_role: qsTrId("common_words_ac_input_role")
@@ -84,6 +87,9 @@ QtObject {
 
 	//% "Battery voltage"
 	readonly property string battery_voltage: qsTrId("common_words_battery_voltage")
+
+	//% "Cancel"
+	readonly property string cancel: qsTrId("common_words_cancel")
 
 	//% "Charge current"
 	readonly property string charge_current: qsTrId("common_words_charge_current")

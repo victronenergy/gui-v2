@@ -303,6 +303,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ProgressBar.qml
     components/controls/RadioButton.qml
     components/controls/RangeSlider.qml
+    components/controls/RemoveButton.qml
     components/controls/ScrollBar.qml
     components/controls/Slider.qml
     components/controls/SpinBox.qml
@@ -530,6 +531,10 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsIo.qml
     pages/settings/PageSettingsLarge.qml
     pages/settings/PageSettingsLogger.qml
+    pages/settings/PageSettingsModbus.qml
+    pages/settings/PageSettingsModbusAddDevice.qml
+    pages/settings/PageSettingsModbusDevices.qml
+    pages/settings/PageSettingsModbusDiscovered.qml
     pages/settings/PageSettingsModbusTcp.qml
     pages/settings/PageSettingsModbusTcpServices.qml
     pages/settings/PageSettingsRelay.qml

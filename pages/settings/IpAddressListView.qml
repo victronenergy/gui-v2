@@ -20,20 +20,13 @@ GradientListView {
 	delegate: ListIpAddressField {
 		id: ipAddressDelegate
 
-		property CP.ColorImage removalButton: CP.ColorImage {
-			anchors.verticalCenter: parent.verticalCenter
-			source: "qrc:/images/icon_minus.svg"
-			color: Theme.color_ok
-
-			MouseArea {
-				anchors.fill: parent
-				onClicked: {
-					if (!root._removalDialog) {
-						root._removalDialog = removalDialogComponent.createObject(root)
-					}
-					root._removalDialog.description = modelData
-					root._removalDialog.open()
+		property RemoveButton removalButton: RemoveButton {
+			onClicked: {
+				if (!root._removalDialog) {
+					root._removalDialog = removalDialogComponent.createObject(root)
 				}
+				root._removalDialog.description = modelData
+				root._removalDialog.open()
 			}
 		}
 

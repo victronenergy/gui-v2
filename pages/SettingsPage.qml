@@ -84,6 +84,11 @@ SwipeViewPage {
 				page: "/pages/settings/PageSettingsFronius.qml"
 			},
 			{
+				//% "Modbus TCP/UDP devices"
+				text: qsTrId("settings_modbus_tcp_udp_devices"),
+				page: "/pages/settings/PageSettingsModbus.qml"
+			},
+			{
 				//% "Ethernet"
 				text: qsTrId("settings_ethernet"),
 				page: "/pages/settings/PageSettingsTcpIp.qml"
