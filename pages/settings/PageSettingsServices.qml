@@ -29,18 +29,9 @@ Page {
 			ListSwitch {
 				id: mqtt
 
-				//% "MQTT on LAN (SSL)"
-				text: qsTrId("settings_services_mqtt_on_lan_ssl")
+				//% "MQTT Access"
+				text: qsTrId("settings_services_mqtt_access")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocal"
-			}
-
-			ListSwitch {
-				id: mqttLocalInsecure
-
-				//% "MQTT on LAN (Plain-text)"
-				text: qsTrId("settings_services_mqtt_on_lan_insecure")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocalInsecure"
-				allowed: mqtt.checked
 			}
 
 			ListSwitch {
