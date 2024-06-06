@@ -12,10 +12,10 @@ Device {
 	readonly property int statusCode: _statusCode.value === undefined ? -1 : _statusCode.value
 	readonly property int errorCode: _errorCode.value === undefined ? -1 : _errorCode.value
 
-	readonly property real energy: _energy.value === undefined ? NaN : _energy.value
-	readonly property real current: phases.count === 1 && _current.value !== undefined ? _current.value : NaN // multi-phase systems don't have a total current
-	readonly property real power: _power.value === undefined ? NaN : _power.value
-	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
+	readonly property real energy: _energy.numberValue
+	readonly property real current: phases.count === 1 ? _current.numberValue : NaN // multi-phase systems don't have a total current
+	readonly property real power: _power.numberValue
+	readonly property real voltage: _voltage.numberValue
 
 	readonly property ListModel phases: ListModel {
 		function setPhaseProperty(phaseName, propertyName, value) {

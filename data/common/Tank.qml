@@ -12,7 +12,7 @@ Device {
 
 	readonly property int type: _type.value === undefined ? -1 : _type.value
 	readonly property int status: _status.value === undefined ? VenusOS.Tank_Status_Unknown : _status.value
-	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
+	readonly property real temperature: _temperature.numberValue
 	property real level: NaN
 	property real remaining: NaN
 	property real capacity: NaN

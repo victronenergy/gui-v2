@@ -16,16 +16,18 @@ QtObject {
 	readonly property string bindPrefix: Global.system.serviceUid + "/Ac/In/" + inputIndex
 	property bool isActiveInput
 	readonly property bool connected: _connected.value === 1
-	readonly property int deviceInstance: _deviceInstance.value === undefined ? -1 : _deviceInstance.value
+	readonly property int deviceInstance: _deviceInstance.isValid ? _deviceInstance.value : -1
 	readonly property string serviceType: _serviceType.value || "" // e.g. "vebus"
 	readonly property string serviceName: _serviceName.value || "" // e.g. com.victronenergy.vebus.ttyO, com.victronenergy.grid.ttyO
 	readonly property int source: _source.value === undefined ? VenusOS.AcInputs_InputSource_NotAvailable : _source.value
-	readonly property real minimumCurrent: _minimumCurrent.value === undefined ? NaN
-			: _feedbackEnabled ? _minimumCurrent.value
-			: Math.max(0, _minimumCurrent.value) // See AcInputs.clampMeasurement().
-	readonly property real maximumCurrent: _maximumCurrent.value === undefined ? NaN
-			: _feedbackEnabled ? _maximumCurrent.value
-			: Math.max(0, _maximumCurrent.value) // See AcInputs.clampMeasurement().
+	readonly property real minimumCurrent: !_minimumCurrent.isValid ? _minimumCurrent.numberValue // will be NaN if invalid.
+			: _feedbackEnabled ? _minimumCurrent.numberValue
+			: _minimumCurrent.numberValue > 0 ? _minimumCurrent.numberValue // See AcInputs.clampMeasurement().
+			: 0.0
+	readonly property real maximumCurrent: !_maximumCurrent.isValid ? _maximumCurrent.numberValue // will be NaN if invalid.
+			: _feedbackEnabled ? _maximumCurrent.numberValue
+			: _maximumCurrent.numberValue > 0 ? _maximumCurrent.numberValue // See AcInputs.clampMeasurement().
+			: 0.0
 
 	readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
 

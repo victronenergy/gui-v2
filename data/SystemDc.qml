@@ -12,7 +12,7 @@ QtObject {
 	property real power: NaN
 	readonly property real current: (isNaN(power) || isNaN(voltage) || voltage === 0) ? NaN : power / voltage
 	property real voltage: NaN
-	readonly property real maximumPower: _maximumDcPower.value === undefined ? NaN : _maximumDcPower.value
+	readonly property real maximumPower: _maximumDcPower.numberValue
 
 	function reset() {
 		power = NaN

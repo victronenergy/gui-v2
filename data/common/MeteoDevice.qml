@@ -9,7 +9,7 @@ import Victron.VenusOS
 Device {
 	id: meteoDevice
 
-	readonly property real irradiance: _irradiance.value === undefined ? NaN : _irradiance.value
+	readonly property real irradiance: _irradiance.numberValue
 
 	readonly property VeQuickItem _irradiance: VeQuickItem {
 		uid: meteoDevice.serviceUid + "/Irradiance"

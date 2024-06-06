@@ -12,7 +12,7 @@ Device {
 	readonly property int state: _state.value === undefined ? -1 : _state.value
 	readonly property int mode: _mode.value === undefined ? -1 : _mode.value
 	readonly property bool modeAdjustable: _modeAdjustable.value !== undefined && _modeAdjustable.value > 0
-	readonly property real nominalInverterPower: _nominalInverterPower.value === undefined ? NaN : _nominalInverterPower.value
+	readonly property real nominalInverterPower: _nominalInverterPower.numberValue
 
 	readonly property int numberOfAcInputs: _numberOfAcInputs.value === undefined ? NaN : _numberOfAcInputs.value
 	readonly property bool hasPassthroughSupport: _hasPassthroughSupport.value === 1

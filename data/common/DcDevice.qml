@@ -9,9 +9,9 @@ import Victron.VenusOS
 Device {
 	id: dcDevice
 
-	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
-	readonly property real current: _current.value === undefined ? NaN : _current.value
-	readonly property real power: _power.value === undefined ? NaN : _power.value
+	readonly property real voltage: _voltage.numberValue
+	readonly property real current: _current.numberValue
+	readonly property real power: _power.numberValue
 
 	readonly property VeQuickItem _voltage: VeQuickItem {
 		uid: dcDevice.serviceUid + "/Dc/0/Voltage"

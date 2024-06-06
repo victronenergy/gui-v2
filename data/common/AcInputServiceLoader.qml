@@ -58,12 +58,12 @@ Loader {
 		id: vebusComponent
 
 		QtObject {
-			readonly property real power: isNaN(_powerValue) ? NaN
+			readonly property real power: !_power.isValid ? _powerValue // Will be NaN.
 					: root._feedbackEnabled ? _powerValue
 					: _powerValue > 0 ? _powerValue // see AcInputs.clampMeasurement().
 					: 0.0
-			readonly property real currentLimit: _currentLimit.value === undefined ? NaN : _currentLimit.value
-			readonly property real _powerValue: _power.value === undefined ? NaN : _power.value
+			readonly property real currentLimit: _currentLimit.numberValue
+			readonly property real _powerValue: _power.numberValue
 
 			readonly property VeQuickItem _power: VeQuickItem {
 				uid: root.serviceUid + "/Ac/ActiveIn/P"
@@ -85,7 +85,7 @@ Loader {
 		id: multiComponent
 
 		QtObject {
-			readonly property real currentLimit: _currentLimit.value === undefined ? NaN : _currentLimit.value
+			readonly property real currentLimit: _currentLimit.numberValue
 
 			readonly property VeQuickItem _activeInput: VeQuickItem {
 				uid: root.serviceUid + "/Ac/ActiveIn/ActiveInput"
@@ -104,9 +104,11 @@ Loader {
 
 		QtObject {
 			readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
-			readonly property real power: _power.value === undefined ? NaN
-				: _feedbackEnabled ? _power.value
-				: Math.max(0, value) // See AcInputs.clampMeasurement().
+
+			readonly property real power: isNaN(_power.numberValue) ? _power.numberValue
+					: _feedbackEnabled ? _power.numberValue
+					: _power.numberValue > 0 ? _power.numberValue // See AcInputs.clampMeasurement().
+					: 0
 
 			// For these devices, there is no current limit.
 			readonly property real currentLimit: NaN

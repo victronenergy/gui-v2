@@ -13,17 +13,17 @@ QtObject {
 	// Prefix is: com.victronenergy.solarcharger.tty0/History/Daily/<day>
 	property string uidPrefix
 
-	readonly property real yieldKwh: _yieldKwh.value == undefined ? NaN : _yieldKwh.value
-	readonly property real maxPower: _maxPower.value == undefined ? NaN : _maxPower.value
-	readonly property real maxPvVoltage: _maxPvVoltage.value == undefined ? NaN : _maxPvVoltage.value
+	readonly property real yieldKwh: _yieldKwh.numberValue
+	readonly property real maxPower: _maxPower.numberValue
+	readonly property real maxPvVoltage: _maxPvVoltage.numberValue
 
-	readonly property real timeInFloat: _timeInFloat.value == undefined ? NaN : _timeInFloat.value
-	readonly property real timeInAbsorption: _timeInAbsorption.value == undefined ? NaN : _timeInAbsorption.value
-	readonly property real timeInBulk: _timeInBulk.value == undefined ? NaN : _timeInBulk.value
+	readonly property real timeInFloat: _timeInFloat.numberValue
+	readonly property real timeInAbsorption: _timeInAbsorption.numberValue
+	readonly property real timeInBulk: _timeInBulk.numberValue
 
-	readonly property real minBatteryVoltage: _minBatteryVoltage.value == undefined ? NaN : _minBatteryVoltage.value
-	readonly property real maxBatteryVoltage: _maxBatteryVoltage.value == undefined ? NaN : _maxBatteryVoltage.value
-	readonly property real maxBatteryCurrent: _maxBatteryCurrent.value == undefined ? NaN : _maxBatteryCurrent.value
+	readonly property real minBatteryVoltage: _minBatteryVoltage.numberValue
+	readonly property real maxBatteryVoltage: _maxBatteryVoltage.numberValue
+	readonly property real maxBatteryCurrent: _maxBatteryCurrent.numberValue
 
 	property SolarHistoryErrorModel errorModel: SolarHistoryErrorModel {
 		uidPrefix: root.uidPrefix

@@ -14,23 +14,16 @@ Device {
 	readonly property bool connected: _connected.value === 1
 	readonly property int chargingTime: _chargingTime.value || 0
 
-	readonly property real energy: _energy.value === undefined ? NaN : _energy.value
-	readonly property real power: _power.value === undefined ? NaN : _power.value
-	readonly property real current: _current.value === undefined ? NaN : _current.value
-	readonly property real maxCurrent: _maxCurrent.value === undefined ? NaN : _maxCurrent.value
+	readonly property real energy: _energy.numberValue
+	readonly property real power: _power.numberValue
+	readonly property real current: _current.numberValue
+	readonly property real maxCurrent: _maxCurrent.numberValue
 
 	readonly property ListModel phases: ListModel {
-		function setPower(index, value) {
-			if (index >= 0 && index < count) {
-				setProperty(index, "power", value === undefined ? NaN : value)
-			}
-		}
-
 		Component.onCompleted: {
 			const properties = [_phase1Power, _phase2Power, _phase3Power]
 			for (let i = 0; i < properties.length; ++i) {
-				const v = properties[i].value
-				append({ name: "L" + (i + 1), power: v === undefined ? NaN : v })
+				append({ name: "L" + (i + 1), power: properties[i].numberValue })
 			}
 		}
 	}
@@ -41,15 +34,15 @@ Device {
 
 	readonly property VeQuickItem _phase1Power: VeQuickItem {
 		uid: evCharger.serviceUid + "/Ac/L1/Power"
-		onValueChanged: phases.setPower(0, value)
+		onValueChanged: if (phases.count > 0) phases.setProperty(0, "power", numberValue)
 	}
 	readonly property VeQuickItem _phase2Power: VeQuickItem {
 		uid: evCharger.serviceUid + "/Ac/L2/Power"
-		onValueChanged: phases.setPower(1, value)
+		onValueChanged: if (phases.count > 1) phases.setProperty(1, "power", numberValue)
 	}
 	readonly property VeQuickItem _phase3Power: VeQuickItem {
 		uid: evCharger.serviceUid + "/Ac/L3/Power"
-		onValueChanged: phases.setPower(2, value)
+		onValueChanged: if (phases.count > 2) phases.setProperty(2, "power", numberValue)
 	}
 
 	readonly property VeQuickItem _power: VeQuickItem {
