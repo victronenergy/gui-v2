@@ -106,7 +106,7 @@ Loader {
 			readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
 			readonly property real power: _power.value === undefined ? NaN
 				: _feedbackEnabled ? _power.value
-				: Math.max(0, value) // See AcInputs.clampMeasurement().
+				: Math.max(0, _power.value) // See AcInputs.clampMeasurement().
 
 			// For these devices, there is no current limit.
 			readonly property real currentLimit: NaN
