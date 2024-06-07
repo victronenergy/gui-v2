@@ -132,6 +132,7 @@
 
     "geometry_modalDialog_width": 624,
     "geometry_modalDialog_height": 368,
+    "geometry_modalDialog_height_small": 320,
     "geometry_modalDialog_radius": 8,
     "geometry_modalDialog_header_height": 78,
     "geometry_modalDialog_footer_height": 64,
