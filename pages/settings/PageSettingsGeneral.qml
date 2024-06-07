@@ -131,6 +131,39 @@ Page {
 			}
 
 			ListButton {
+				//% "Logout"
+				text: qsTrId("settings_logout")
+				//% "Log out now"
+				button.text: qsTrId("settings_logout_now")
+
+				// Cannot log out from GX devices, VRM or Unsecured profile with no password
+				allowed: Qt.platform.os === "wasm" && !BackendConnection.vrm
+						 && securityProfile.value !== VenusOS.Security_Profile_Unsecured
+				writeAccessLevel: VenusOS.User_AccessType_User
+				onClicked: Global.dialogLayer.open(logoutDialogComponent)
+
+				VeQuickItem {
+					id: securityProfile
+					uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+				}
+
+				Component {
+					id: logoutDialogComponent
+					ModalWarningDialog {
+						//% "Log out?"
+						title: qsTrId("settings_logout_dialog_title")
+						//% "This will disconnect all local network connections."
+						description: qsTrId("settings_logout_dialog_description")
+						//% "Log out"
+						acceptText: qsTrId("settings_logout_dialog_accept_text")
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						height: Theme.geometry_modalDialog_height_small
+						onAccepted: BackendConnection.logout()
+					}
+				}
+			}
+
+			ListButton {
 				text: CommonWords.reboot
 				//% "Reboot now"
 				button.text: qsTrId("settings_reboot_now")
