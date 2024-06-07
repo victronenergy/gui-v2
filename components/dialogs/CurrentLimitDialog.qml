@@ -9,17 +9,10 @@ import Victron.VenusOS
 NumberSelectorDialog {
 	id: root
 
-	property var inputSettings
+	property int inputType: -1
 	property int inputIndex
 
-	function openDialog(inputSettings, index) {
-		root.inputSettings = inputSettings
-		root.inputIndex = index
-		root.value = inputSettings.currentLimit
-		open()
-	}
-
-	title: inputSettings ? Global.acInputs.currentLimitTypeToText(inputSettings.inputType) : ""
+	title: Global.acInputs.currentLimitTypeToText(inputType)
 	suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 	stepSize: 1
 	to: 1000
