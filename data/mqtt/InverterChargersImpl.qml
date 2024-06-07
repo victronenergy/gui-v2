@@ -32,20 +32,20 @@ QtObject {
 
 	property Instantiator multiRsInverterObjects: Instantiator {
 		model: VeQItemTableModel {
-			uids: ["mqtt/multi"]
+			uids: ["mqtt/acsystem"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
 		delegate: InverterCharger {
-			id: multiDevice
+			id: acSystemDevice
 
 			serviceUid: model.uid
 
 			onValidChanged: {
 				if (valid) {
-					Global.inverterChargers.multiDevices.addDevice(multiDevice)
+					Global.inverterChargers.acSystemDevices.addDevice(acSystemDevice)
 				} else {
-					Global.inverterChargers.multiDevices.removeDevice(multiDevice)
+					Global.inverterChargers.acSystemDevices.removeDevice(acSystemDevice)
 				}
 			}
 		}

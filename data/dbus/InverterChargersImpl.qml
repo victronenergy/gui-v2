@@ -36,20 +36,20 @@ QtObject {
 		model: VeQItemSortTableModel {
 			dynamicSortFilter: true
 			filterRole: VeQItemTableModel.UniqueIdRole
-			filterRegExp: "^dbus/com\.victronenergy\.multi\."
+			filterRegExp: "^dbus/com\.victronenergy\.acsystem\."
 			model: Global.dataServiceModel
 		}
 
 		delegate: InverterCharger {
-			id: multiDevice
+			id: acSystemDevice
 
 			serviceUid: model.uid
 
 			onValidChanged: {
 				if (valid) {
-					Global.inverterChargers.multiDevices.addDevice(multiDevice)
+					Global.inverterChargers.acSystemDevices.addDevice(acSystemDevice)
 				} else {
-					Global.inverterChargers.multiDevices.removeDevice(multiDevice)
+					Global.inverterChargers.acSystemDevices.removeDevice(acSystemDevice)
 				}
 			}
 		}

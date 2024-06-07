@@ -77,7 +77,7 @@ Page {
 				}
 
 				Repeater {
-					model: Global.inverterChargers.multiDevices
+					model: Global.inverterChargers.acSystemDevices
 
 					InverterChargerCard {
 						width: root.cardWidth
