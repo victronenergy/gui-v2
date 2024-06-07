@@ -313,15 +313,6 @@ Page {
 	}
 
 	Component {
-		id: currentLimitDialogComponent
-
-		CurrentLimitDialog {
-			presets: root.inverter.ampOptions
-			onAccepted: root.veBusDevice.setCurrentLimit(inputIndex, value)
-		}
-	}
-
-	Component {
 		id: singlePhaseAcInOut
 
 		Column {

@@ -11,7 +11,7 @@ Column {
 
 	property var veBusDevice
 	property alias model: currentLimitRepeater.model
-	property var _currentLimitDialog
+
 	//% "This setting is disabled. Possible reasons are \"Overruled by remote\" is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure."
 	readonly property string noAdjustableTextByConfig: qsTrId("vebus_device_setting_disabled")
 	readonly property bool _readOnly: !currentLimitIsAdjustable.isValid || !currentLimitIsAdjustable.value
@@ -61,10 +61,8 @@ Column {
 					return
 				}
 
-				if (!root._currentLimitDialog) {
-					root._currentLimitDialog = currentLimitDialogComponent.createObject(Global.dialogLayer)
-				}
-				root._currentLimitDialog.openDialog(modelData, model.index)
+				Global.dialogLayer.open(currentLimitDialogComponent,
+						{ inputType: modelData.inputType, inputIndex: model.index, value: modelData.currentLimit })
 			}
 		}
 	}

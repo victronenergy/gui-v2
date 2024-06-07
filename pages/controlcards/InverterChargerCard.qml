@@ -11,8 +11,6 @@ ControlCard {
 
 	property var inverterCharger
 
-	property var _currentLimitDialog
-
 	icon.source: "qrc:/images/inverter_charger.svg"
 	//: %1 = the inverter/charger name
 	//% "Inverter / Charger (%1)"
@@ -53,10 +51,8 @@ ControlCard {
 					enabled: modelData.currentLimitAdjustable
 					button.text: "%1 %2".arg(value).arg(Units.defaultUnitString(VenusOS.Units_Amp))
 					onClicked: {
-						if (!root._currentLimitDialog) {
-							root._currentLimitDialog = currentLimitDialogComponent.createObject(Global.dialogLayer)
-						}
-						root._currentLimitDialog.openDialog(modelData, model.index)
+						Global.dialogLayer.open(currentLimitDialogComponent,
+								{ inputType: modelData.inputType, inputIndex: model.index, value: modelData.currentLimit })
 					}
 				}
 			}
