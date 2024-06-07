@@ -72,8 +72,13 @@ Item {
 				acSystem.setMockValue("/Ac/NumberOfAcInputs", 2)
 				acSystem.setMockValue("/Ac/In/1/CurrentLimit", 10.5)
 				acSystem.setMockValue("/Ac/In/1/CurrentLimitIsAdjustable", 1)
+				acSystem.setMockValue("/Ac/In/2/CurrentLimit", 20.25)
+				acSystem.setMockValue("/Ac/In/2/CurrentLimitIsAdjustable", 1)
 				acSystem.setMockValue("/State", Math.floor(Math.random() * VenusOS.System_State_FaultCondition))
 				acSystem.setMockValue("/Mode", VenusOS.Inverter_Mode_Off)
+				acSystem.setMockValue("/ModeIsAdjustable", 1)
+				acSystem.setMockValue("/Capabilities/HasAcPassthroughSupport", 1)
+				acSystem.setMockValue("/ProductId", 9816)    // for EU amp options
 				acSystem.setMockValue("/Settings/Ess/Mode", VenusOS.Ess_State_OptimizedWithoutBatteryLife)
 				acSystem.setMockValue("/Settings/Ess/MinimumSocLimit", 85)
 				acSystem.setMockValue("/Settings/AlarmLevel/LowSoc", 1) // Alarm only
@@ -83,6 +88,10 @@ Item {
 				addRsService(multiRsServiceName, deviceInstanceNum)
 				acSystem.setMockValue("/Devices/0/Service", multiRsServiceName)
 				acSystem.setMockValue("/Devices/0/Instance", deviceInstanceNum)
+
+				// Add this multi RS to the list of inverter/chargers on the system
+				const inverterCharger = inverterChargerComponent.createObject(acSystem, { serviceUid: acSystem.serviceUid })
+				Global.inverterChargers.acSystemDevices.addDevice(inverterCharger)
 			}
 		}
 	}
@@ -145,6 +154,12 @@ Item {
 				multiRs.setMockValue("/ErrorCode", Math.random() * 5)
 			}
 		}
+	}
+
+	Component {
+		id: inverterChargerComponent
+
+		InverterCharger {}
 	}
 
 	Component.onCompleted: {
