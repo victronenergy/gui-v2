@@ -471,7 +471,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/DialogLayer.qml
     pages/EnvironmentTab.qml
     pages/LevelsPage.qml
-    pages/LogoutPage.qml
     pages/MainView.qml
     pages/NotificationLayer.qml
     pages/NotificationsPage.qml
