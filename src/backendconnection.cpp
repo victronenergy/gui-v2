@@ -7,7 +7,9 @@
 #include "veqitemmockproducer.h"
 #include "enums.h"
 
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+#include <emscripten.h>
+#else
 #include "veutil/qt/ve_dbus_connection.hpp"
 #include "veutil/qt/ve_qitems_dbus.hpp"
 #endif
@@ -188,6 +190,8 @@ void BackendConnection::initMqttConnection(const QString &address)
 		this, &BackendConnection::mqttErrorChanged);
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
+	setVrm(address.startsWith(QStringLiteral("wss://webmqtt"))
+		&& address.contains(QStringLiteral(".victronenergy.com")));
 	mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);
 #else
 	const QStringList parts = address.split(':');
@@ -448,6 +452,26 @@ void BackendConnection::requestShardFromVrmApi()
 
 			qWarning() << "Unable to find record matching portal id: " << m_portalId;
 		});
+}
+
+void BackendConnection::logout()
+{
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	emscripten_run_script("location.href = \'logout.html\'");
+#endif
+}
+
+bool BackendConnection::isVrm() const
+{
+	return m_vrm;
+}
+
+void BackendConnection::setVrm(bool v)
+{
+	if (m_vrm != v) {
+		m_vrm = v;
+		emit vrmChanged();
+	}
 }
 
 bool BackendConnection::isApplicationVisible() const
