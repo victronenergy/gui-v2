@@ -71,7 +71,7 @@ Page {
 			break;
 
 		case "charger":
-			url = "/pages/settings/devicelist/PageNotYetImplemented.qml"
+			url = "/pages/settings/devicelist/PageAcCharger.qml"
 			params = { "bindPrefix" : device.serviceUid }
 			summary = [ Global.system.systemStateToText(device.state) ]
 			break;
