@@ -13,7 +13,6 @@ Page {
 	property alias pvOnAcIn1: _pvOnAcIn1
 	property alias pvOnAcIn2: _pvOnAcIn2
 	property alias pvOnAcOut: _pvOnAcOut
-	property alias vebusAcOut: _vebusAcOut
 	property alias acLoad: _acLoad
 
 	QtObject {
@@ -34,12 +33,6 @@ Page {
 	ObjectAcConnection {
 		id: _pvOnAcIn2
 		bindPrefix: Global.system.serviceUid + "/Ac/PvOnGrid"
-	}
-
-	ObjectAcConnection {
-		id: _vebusAcOut
-		bindPrefix: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Ac/Out" : ""
-		powerKey: "P"
 	}
 
 	/*

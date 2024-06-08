@@ -71,11 +71,9 @@ QtObject {
 
 	readonly property QtObject veBus: QtObject {
 		readonly property string serviceUid: BackendConnection.serviceUidFromName(_serviceName.value || "", _deviceInstance.value || 0)
-		readonly property real power: _power.value === undefined ? NaN : _power.value
 
 		readonly property VeQuickItem _serviceName: VeQuickItem { uid: root.serviceUid + "/VebusService" }
 		readonly property VeQuickItem _deviceInstance: VeQuickItem { uid: root.serviceUid + "/VebusInstance" }
-		readonly property VeQuickItem _power: VeQuickItem { uid: veBus.serviceUid ? veBus.serviceUid + "/Dc/0/Power" : "" }
 	}
 
 	function reset() {
