@@ -276,11 +276,14 @@ QtObject {
 	//% "No"
 	readonly property string no: qsTrId("common_words_no")
 
-	//% "This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu."
+	//% "This setting is disabled when a Digital Multi Control is connected."
 	readonly property string noAdjustableByDmc: qsTrId("common_words_setting_disabled_when_dmc_connected")
 
-	//% "This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu."
+	//% "This setting is disabled when a VE.Bus BMS is connected."
 	readonly property string noAdjustableByBms: qsTrId("common_words_setting_disabled_when_bms_connected")
+
+	//% "This setting is disabled. Possible reasons are \"Overruled by remote\" is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure."
+	readonly property string noAdjustableTextByConfig: qsTrId("common_words_setting_disabled_by_config")
 
 	//% "No error"
 	readonly property string no_error: qsTrId("common_words_no_error")

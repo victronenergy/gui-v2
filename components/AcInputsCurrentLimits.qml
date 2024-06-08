@@ -12,8 +12,6 @@ Column {
 	property var veBusDevice
 	property alias model: currentLimitRepeater.model
 
-	//% "This setting is disabled. Possible reasons are \"Overruled by remote\" is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure."
-	readonly property string noAdjustableTextByConfig: qsTrId("vebus_device_setting_disabled")
 	readonly property bool _readOnly: !currentLimitIsAdjustable.isValid || !currentLimitIsAdjustable.value
 
 
@@ -49,15 +47,17 @@ Column {
 			}
 			onClicked: {
 				if (_readOnly) {
-					if (dmc && dmc.isValid) {
-						Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc, 5000)
+					if (dmc.isValid) {
+						//% "This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu."
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_current_limits_dms"), 5000)
 						return
 					}
-					if (bmsMode && bmsMode.isValid) {
-						Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms, 5000)
+					if (bmsMode.isValid) {
+						//% "This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu."
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_current_limits_bms"), 5000)
 						return
 					}
-					Global.showToastNotification(VenusOS.Notification_Info, noAdjustableTextByConfig, 5000)
+					Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableTextByConfig, 5000)
 					return
 				}
 
