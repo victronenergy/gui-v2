@@ -16,10 +16,6 @@ Loader {
 	property var veBusDevice
 	readonly property bool isMulti: veBusDevice.numberOfAcInputs > 0
 
-	//% "This setting is disabled when a Digital Multi Control is connected."
-	readonly property string noAdjustableByDmc: qsTrId("vebus_no_adjustable_by_dmc")
-	//% "This setting is disabled when a VE.Bus BMS is connected."
-	readonly property string noAdjustableByBms: qsTrId("vebus_no_adjustable_by_bms")
 	//% "This setting is disabled. Possible reasons are \"Overruled by remote\" is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure."
 	readonly property string noAdjustableTextByConfig: qsTrId("vebus_no_adjustable_text_by_config")
 
@@ -49,10 +45,10 @@ Loader {
 		function onClicked() {
 			if (!root.veBusDevice.modeAdjustable) {
 				if (dmc.isValid)
-					Global.showToastNotification(VenusOS.Notification_Info, root.noAdjustableByDmc,
+					Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc,
 												 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 				if (bmsMode.value !== undefined)
-					Global.showToastNotification(VenusOS.Notification_Info, root.noAdjustableByBms,
+					Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms,
 												 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 				return
 			}
