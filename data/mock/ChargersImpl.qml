@@ -9,22 +9,52 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	property int mockDeviceCount
+
 	function populate() {
-		const chargerCount = (Math.random() * 2) + 1
-		for (let i = 0; i < chargerCount; ++i) {
-			const chargerObj = chargerComponent.createObject(root, {
-				state: Math.random() * VenusOS.System_State_EqualizationCharging
-			})
-			Global.chargers.model.addDevice(chargerObj)
-		}
+		chargerComponent.createObject(root)
 	}
 
 	property Component chargerComponent: Component {
-		MockDevice {
-			property int state
+		Charger {
+			id: charger
 
-			serviceUid: "mock/com.victronenergy.charger.ttyUSB" + deviceInstance
-			name: "Charger" + deviceInstance
+			property int inputCount: 1 + Math.floor(Math.random() * 2)
+
+			function setMockValue(path, value) {
+				Global.mockDataSimulator.setMockValue(serviceUid + path, value)
+			}
+
+			property Timer _measurementUpdates: Timer {
+				running: Global.mockDataSimulator.timersActive
+				repeat: true
+				interval: 2000
+				onTriggered: {
+					for (let i = 0; i < charger.inputCount; ++i) {
+						charger.setMockValue("/Dc/%1/Voltage".arg(i+1), Math.random() * 50)
+						charger.setMockValue("/Dc/%1/Current".arg(i+1), Math.random() * 10)
+					}
+					charger.setMockValue("/Ac/In/L1/I", Math.random() * 10)
+				}
+			}
+
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
+
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockDeviceCount++
+				serviceUid = "mock/com.victronenergy.charger.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_customName.setValue("AC Charger " + deviceInstanceNum)
+				charger.setMockValue("/Mode", 1)
+				charger.setMockValue("/State", Math.floor(Math.random() * VenusOS.System_State_FaultCondition))
+				charger.setMockValue("/Ac/In/CurrentLimit", Math.random() * 30)
+				charger.setMockValue("/NrOfOutputs", inputCount)
+				charger.setMockValue("/Alarms/LowVoltage", Math.floor(Math.random() * VenusOS.Alarm_Level_Alarm))
+				charger.setMockValue("/Alarms/HighVoltage", Math.floor(Math.random() * VenusOS.Alarm_Level_Alarm))
+				charger.setMockValue("/ErrorCode", Math.floor(Math.random() * 5))
+				charger.setMockValue("/Relay/0/State", 1)
+			}
 		}
 	}
 
