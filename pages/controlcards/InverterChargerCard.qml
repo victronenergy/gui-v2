@@ -20,6 +20,18 @@ ControlCard {
 	// function to get a text description.
 	status.text: Global.system.systemStateToText(inverterCharger.state)
 
+	VeQuickItem {
+		id: bmsMode
+
+		uid: root.inverterCharger.serviceUid + "/Devices/Bms/Version"
+	}
+
+	VeQuickItem {
+		id: dmc
+
+		uid: root.inverterCharger.serviceUid + "/Devices/Dmc/Version"
+	}
+
 	Component {
 		id: currentLimitDialogComponent
 
@@ -48,9 +60,20 @@ ControlCard {
 					visible: label.text !== ""
 					value: modelData.currentLimit
 					label.text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
-					enabled: modelData.currentLimitAdjustable
 					button.text: "%1 %2".arg(value).arg(Units.defaultUnitString(VenusOS.Units_Amp))
 					onClicked: {
+						if (!modelData.currentLimitAdjustable) {
+							if (dmc.isValid) {
+								Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc, 5000)
+								return
+							}
+							if (bmsMode.isValid) {
+								Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms, 5000)
+								return
+							}
+							Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableTextByConfig, 5000)
+							return
+						}
 						Global.dialogLayer.open(currentLimitDialogComponent,
 								{ inputType: modelData.inputType, inputIndex: model.index, value: modelData.currentLimit })
 					}
