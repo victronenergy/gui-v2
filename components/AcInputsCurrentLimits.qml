@@ -12,9 +12,6 @@ Column {
 	property var veBusDevice
 	property alias model: currentLimitRepeater.model
 
-	readonly property bool _readOnly: !currentLimitIsAdjustable.isValid || !currentLimitIsAdjustable.value
-
-
 	VeQuickItem {
 		id: dmc
 
@@ -25,11 +22,6 @@ Column {
 		id: bmsMode
 
 		uid: veBusDevice.serviceUid + "/Devices/Bms/Version"
-	}
-
-	VeQuickItem {
-		id: currentLimitIsAdjustable
-		uid: veBusDevice.serviceUid + "/Ac/ActiveIn/CurrentLimitIsAdjustable"
 	}
 
 	width: parent ? parent.width : 0
@@ -46,7 +38,7 @@ Column {
 				return quantity.number + quantity.unit
 			}
 			onClicked: {
-				if (_readOnly) {
+				if (!modelData.currentLimitAdjustable) {
 					if (dmc.isValid) {
 						//% "This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu."
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_current_limits_dms"), 5000)
