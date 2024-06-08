@@ -692,12 +692,11 @@ SwipeViewPage {
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 
-		// If vebus power is positive: battery is charging, so energy flows to battery.
-		// If vebus power is negative: battery is discharging, so energy flows to inverter/charger.
+		// If inverter/charger power is positive: battery is charging, so energy flows to battery.
+		// If inverter/charger power is negative: battery is discharging, so energy flows to inverter/charger.
 		animationMode: root.isCurrentPage
-				&& !isNaN(Global.system.veBus.power)
-				&& Math.abs(Global.system.veBus.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
-						? (Global.system.veBus.power > 0
+				&& Math.abs(inverterChargerPower.value) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						? (inverterChargerPower.value > 0
 								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
 						: VenusOS.WidgetConnector_AnimationMode_NotAnimated
@@ -809,4 +808,8 @@ SwipeViewPage {
 		}
 	}
 
+	VeQuickItem {
+		id: inverterChargerPower
+		uid: Global.system.serviceUid + "/Dc/InverterCharger/Power"
+	}
 }

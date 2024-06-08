@@ -100,9 +100,6 @@ QtObject {
 	readonly property VeQuickItem veBusService: VeQuickItem {
 		uid: Global.system.serviceUid + "/VebusService"
 	}
-	readonly property VeQuickItem veBusPower: VeQuickItem {
-		uid: veBusService.value ? "%1/%2/Dc/0/Power".arg(BackendConnection.uidPrefix()).arg(veBusService.value) : ""
-	}
 
 	property Connections veBusServiceSetup: Connections {
 		target: Global.inverterChargers.veBusDevices
@@ -115,17 +112,6 @@ QtObject {
 			} else {
 				root.veBusService.setValue("")
 			}
-		}
-	}
-
-	property Timer randomizeVeBusValues: Timer {
-		running: Global.mockDataSimulator.timersActive
-		interval: 1000
-		repeat: true
-		triggeredOnStart: true
-
-		onTriggered: {
-			root.veBusPower.setValue(500 + Math.floor(Math.random() * 100))
 		}
 	}
 

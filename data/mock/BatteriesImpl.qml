@@ -20,8 +20,6 @@ QtObject {
 			"/Errors/SmartLithium/Communication": 0,
 			"/ConsumedAmphours": 10,
 			"/CustomName": "Lynx Smart BMS HQ21302VUDQ",
-			"/Dc/0/Current": -9.4,
-			"/Dc/0/Power": 238,
 			"/Dc/0/Voltage": 26.4,
 			"/Dc/0/Temperature": 23.3,
 			"/DeviceInstance": 0,
@@ -133,51 +131,45 @@ QtObject {
 		}
 	}
 
-	property SequentialAnimation socAnimation: SequentialAnimation {
-		running: Global.mockDataSimulator.timersActive
-		loops: Animation.Infinite
-
-		ScriptAction {
-			script: {
-				root.chargeTimer.beginCharging()
-			}
-		}
-		PauseAnimation {
-			duration: 2 * 60 * 1000 // wait for charge
-		}
-		PauseAnimation {
-			duration: 10 * 1000
-		}
-		ScriptAction {
-			script: {
-				// negative value == discharging
-				dummyBattery._power.setValue(dummyBattery.power * -1)
-				root.chargeTimer.beginDischarging()
-			}
-		}
-		PauseAnimation {
-			duration: 2 * 60 * 1000 // wait for discharge
-		}
-	}
-
 	// Use a Timer rather than NumberAnimations because otherwise we get
 	// a heap of animated property value updates showing up in the profiler.
 	property Timer chargeTimer: Timer {
-		running: false
+		running: Global.mockDataSimulator.timersActive
 		repeat: true
 		interval: 1000
 		property real stepSize: 1.0 // will take 100 steps to charge to 100% from 0%.
-		function beginCharging() { stepSize = 1.0; start() }
-		function beginDischarging() { stepSize = -1.0; start() }
 		onTriggered: {
 			if (!Global.mockDataSimulator.timersActive) {
 				return
 			}
 			var newSoc = Global.batteries.system.stateOfCharge + stepSize
-			if (newSoc >= 0 && newSoc <= 100) { dummyBattery._stateOfCharge.setValue(newSoc) }
-			else if (newSoc > 100) { dummyBattery._stateOfCharge.setValue(100); stop() }
-			else if (newSoc < 0) { dummyBattery._stateOfCharge.setValue(0); stop() }
-			else { stop() }
+			if (newSoc >= 0 && newSoc <= 100) {
+				dummyBattery._stateOfCharge.setValue(newSoc)
+			} else if (newSoc > 100) {
+				dummyBattery._stateOfCharge.setValue(100)
+				stop()
+				chargeRestartTimer.start()
+			} else if (newSoc < 0) {
+				dummyBattery._stateOfCharge.setValue(0);
+				stop()
+				chargeRestartTimer.start()
+			}
+
+			// Positive power when battery is charging, negative power when battery is discharging
+			const randomPower = Math.round(100 + (Math.random() * 300))
+			const power = stepSize > 0 ? randomPower
+					: stepSize < 0 ? randomPower * -1
+					: 0
+			Global.batteries.system._power.setValue(power)
+			Global.batteries.system._current.setValue(power * 0.1)
+		}
+	}
+
+	property Timer chargeRestartTimer: Timer {
+		interval: 5000
+		onTriggered: {
+			chargeTimer.stepSize *= -1
+			chargeTimer.start()
 		}
 	}
 }
