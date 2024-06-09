@@ -12,11 +12,16 @@ ListTextItem {
 	property string bindPrefix
 
 	text: CommonWords.firmware_version
-	secondaryText: dataItem.value ? FirmwareVersion.versionText(dataItem.value, FirmwareVersion.versionFormat(mgmtConnection.value)) : ""
+	secondaryText: FirmwareVersion.versionText(dataItem.value, FirmwareVersion.versionFormat(mgmtConnection.value, mgmtProcessName.value))
 	dataItem.uid: root.bindPrefix + "/FirmwareVersion"
 
 	VeQuickItem {
 		id: mgmtConnection
 		uid: root.bindPrefix + "/Mgmt/Connection"
+	}
+
+	VeQuickItem {
+		id: mgmtProcessName
+		uid: root.bindPrefix + "/Mgmt/ProcessName"
 	}
 }

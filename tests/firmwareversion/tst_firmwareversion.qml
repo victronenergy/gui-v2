@@ -12,8 +12,13 @@ TestCase {
 	function test_versionFormat() {
 		compare(FirmwareVersion.versionFormat("VE.Bus"), "vebus")
 		compare(FirmwareVersion.versionFormat("ve.bus"), undefined)
+
+		compare(FirmwareVersion.versionFormat("", "can-bus-bms"), "can-bus-bms")
+		compare(FirmwareVersion.versionFormat(undefined, "can-bus-bms"), "can-bus-bms")
+
 		compare(FirmwareVersion.versionFormat("something"), undefined)
-		compare(FirmwareVersion.versionFormat(undefined), undefined)
+		compare(FirmwareVersion.versionFormat("something", "something"), undefined)
+		compare(FirmwareVersion.versionFormat(), undefined)
 	}
 
 	function test_versionText_veBus() {
@@ -25,6 +30,11 @@ TestCase {
 	function test_versionText_venusOs() {
 		compare(FirmwareVersion.versionText(208896, "venus"), "v3.30")
 		compare(FirmwareVersion.versionText(213025, "venus"), "v3.40~21")
+	}
+
+	function test_canBus() {
+		compare(FirmwareVersion.versionText(1047, "can-bus-bms"), "v4.23")
+		compare(FirmwareVersion.versionText(282, "can-bus-bms"), "v1.26")
 	}
 
 	function test_versionText_other() {
