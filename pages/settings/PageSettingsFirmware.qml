@@ -18,6 +18,7 @@ Page {
 				id: remotePort
 
 				text: CommonWords.firmware_version
+				secondaryText: FirmwareVersion.versionText(dataItem.value, "venus")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 			}
 
