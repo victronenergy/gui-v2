@@ -31,6 +31,7 @@ QtObject {
 			"/Diagnostics/LastErrors/3/Error": 0,
 			"/Diagnostics/LastErrors/4/Error": 0,
 			"/ErrorCode": 0,
+			"/Mgmt/Connection": "VE.Bus",
 			"/FirmwareVersion": 66303,
 			"/History/AutomaticSyncs": 10,
 			"/History/CanBeCleared": 1,

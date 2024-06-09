@@ -9,6 +9,14 @@ import Victron.VenusOS
 ListTextItem {
 	id: root
 
+	property string bindPrefix
+
 	text: CommonWords.firmware_version
-	secondaryText: dataItem.value ? FirmwareVersion.versionText(dataItem.value, BackendConnection.serviceTypeFromUid(dataItem.uid)) : ""
+	secondaryText: dataItem.value ? FirmwareVersion.versionText(dataItem.value, FirmwareVersion.versionFormat(mgmtConnection.value)) : ""
+	dataItem.uid: root.bindPrefix + "/FirmwareVersion"
+
+	VeQuickItem {
+		id: mgmtConnection
+		uid: root.bindPrefix + "/Mgmt/Connection"
+	}
 }
