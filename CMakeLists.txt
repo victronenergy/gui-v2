@@ -114,6 +114,7 @@ include_directories(src/veutil/inc src .)
 
 set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added here
     components/CommonWords.qml
+    components/FirmwareVersion.qml
     Global.qml
 )
 set_source_files_properties( ${VENUS_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )

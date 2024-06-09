@@ -7,5 +7,7 @@ cmake_minimum_required(VERSION 2.8)
 cmake_policy(SET CMP0048 NEW)
 project(tests LANGUAGES CXX)
 
+add_subdirectory(firmwareversion)
 add_subdirectory(units)
 add_subdirectory(screenblanker)
+
