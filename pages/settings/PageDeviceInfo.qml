@@ -70,7 +70,7 @@ Page {
 			}
 
 			ListFirmwareVersionItem {
-				dataItem.uid: root.bindPrefix + "/FirmwareVersion"
+				bindPrefix: root.bindPrefix
 				dataItem.invalidate: false
 			}
 

@@ -10,6 +10,15 @@ import QtQml
 QtObject {
 	id: root
 
+	function versionFormat(connection) {
+		if (connection === "VE.Bus") {
+			return "vebus"
+		} else {
+			// VE.Direct/VE.Can/Generic version format
+			return undefined
+		}
+	}
+
 	function versionText(version, format) {
 		if (version === undefined || version === null) {
 			return ""

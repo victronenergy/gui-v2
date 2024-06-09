@@ -9,6 +9,13 @@ import Victron.VenusOS
 TestCase {
 	name: "FirmwareVersionTest"
 
+	function test_versionFormat() {
+		compare(FirmwareVersion.versionFormat("VE.Bus"), "vebus")
+		compare(FirmwareVersion.versionFormat("ve.bus"), undefined)
+		compare(FirmwareVersion.versionFormat("something"), undefined)
+		compare(FirmwareVersion.versionFormat(undefined), undefined)
+	}
+
 	function test_versionText_veBus() {
 		// Sample of VE.Bus devices
 		compare(FirmwareVersion.versionText(1282, "vebus"), "v502")
