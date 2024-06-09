@@ -22,6 +22,11 @@ TestCase {
 		compare(FirmwareVersion.versionText(1058, "vebus"), "v422")
 	}
 
+	function test_versionText_venusOs() {
+		compare(FirmwareVersion.versionText(208896, "venus"), "v3.30")
+		compare(FirmwareVersion.versionText(213025, "venus"), "v3.40~21")
+	}
+
 	function test_versionText_other() {
 		// Test versions for VE.Direct/VE.Can/Generic devices.
 
