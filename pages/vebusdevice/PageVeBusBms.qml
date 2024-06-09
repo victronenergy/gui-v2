@@ -14,24 +14,24 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListRadioButtonGroupNoYes {
+			ListTextItem {
 				text: CommonWords.allow_to_charge
+				secondaryText: CommonWords.yesOrNo(dataItem.value)
 				dataItem.uid: bindPrefix + "/Bms/AllowToCharge"
-				enabled: false
 			}
 
-			ListRadioButtonGroupNoYes {
+			ListTextItem {
 				text: CommonWords.allow_to_discharge
+				secondaryText: CommonWords.yesOrNo(dataItem.value)
 				dataItem.uid: bindPrefix + "/Bms/AllowToDischarge"
-				enabled: false
 			}
 
-			ListRadioButtonGroupNoYes {
+			ListTextItem {
 				//% "BMS Error"
 				text: qsTrId("vebus_device_bms_error")
+				secondaryText: CommonWords.yesOrNo(dataItem.value)
 				dataItem.uid: bindPrefix + "/Bms/Error"
-				enabled: false
-				allowed: bmsType === VenusOS.VeBusDevice_Bms_Type_VeBus
+				allowed: dataItem.value === VenusOS.VeBusDevice_Bms_Type_VeBus
 			}
 		}
 	}
