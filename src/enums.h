@@ -373,7 +373,7 @@ public:
 
 	enum Tank_Status {
 		Tank_Status_Ok = 0,
-		Tank_Status_Disconnected,
+		Tank_Status_Open_Circuit,
 		Tank_Status_ShortCircuited,
 		Tank_Status_ReversePolarity,
 		Tank_Status_Unknown,

@@ -32,7 +32,7 @@ Page {
 					case 0:
 						return CommonWords.ok
 					case 1:
-						return CommonWords.disconnected
+						return CommonWords.open_circuit
 					case 2:
 						//% "Short circuited"
 						return qsTrId("temperature_short_circuited")
