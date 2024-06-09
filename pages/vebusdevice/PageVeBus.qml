@@ -275,10 +275,8 @@ Page {
 				allowed: bmsExpected.value === 1
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusBms.qml", {
 														   "title": text,
-														   "bindPrefix": root.veBusDevice.serviceUid,
-														   "bmsType": bmsType.value
-													   }
-													   )
+														   "bindPrefix": root.veBusDevice.serviceUid
+													   })
 			}
 
 			ListNavigationItem {
