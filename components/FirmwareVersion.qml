@@ -10,9 +10,11 @@ import QtQml
 QtObject {
 	id: root
 
-	function versionFormat(connection) {
+	function versionFormat(connection, processName) {
 		if (connection === "VE.Bus") {
 			return "vebus"
+		} else if (processName === "can-bus-bms") {
+			return "can-bus-bms"
 		} else {
 			// VE.Direct/VE.Can/Generic version format
 			return undefined
@@ -25,6 +27,9 @@ QtObject {
 		}
 		if (version === 0xFFFFFF) {
 			return ""
+		}
+		if (format === "can-bus-bms") {
+			return "v%1.%2".arg(version >> 8).arg(version & 0xFF)
 		}
 
 		// 0x00000A => v0.0A
