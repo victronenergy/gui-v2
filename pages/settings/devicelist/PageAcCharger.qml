@@ -28,7 +28,7 @@ Page {
 			}
 
 			ListSpinBox {
-				text: Global.acInputs.currentLimitTypeToText()
+				text: CommonWords.input_current_limit
 				writeAccessLevel: VenusOS.User_AccessType_User
 				allowed: defaultAllowed && dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Ac/In/CurrentLimit"

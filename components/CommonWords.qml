@@ -199,6 +199,9 @@ QtObject {
 	//% "Inactive"
 	readonly property string inactive_status: qsTrId("common_words_inactive_status")
 
+	//% "Input current limit"
+	readonly property string input_current_limit: qsTrId("common_words_input_current_limit")
+
 	//% "Inverter / Charger"
 	readonly property string inverter_charger: qsTrId("common_words_inverter_charger")
 
