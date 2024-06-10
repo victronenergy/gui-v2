@@ -177,7 +177,6 @@ void BackendConnection::initMqttConnection(const QString &address)
 				// TODO: fetch updated credentials via VRM API if required...
 				producer->setCredentials(m_username, m_password);
 			}
-			producer->setPortalId(m_portalId);
 			producer->continueConnect();
 		}
 	});
@@ -187,6 +186,9 @@ void BackendConnection::initMqttConnection(const QString &address)
 	connect(mqttProducer, &VeQItemMqttProducer::errorChanged,
 		this, &BackendConnection::mqttErrorChanged);
 
+	if (!m_portalId.isEmpty()) {
+		mqttProducer->setPortalId(m_portalId);
+	}
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);
 #else
