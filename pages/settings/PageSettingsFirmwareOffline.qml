@@ -53,7 +53,9 @@ Page {
 					&& Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 
-			MountStateListButton {}
+			MountStateListButton {
+				button.enabled: mounted && Global.firmwareUpdate.state !== FirmwareUpdater.DownloadingAndInstalling
+			}
 		}
 	}
 }
