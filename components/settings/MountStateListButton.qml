@@ -9,6 +9,7 @@ import Victron.VenusOS
 ListButton {
 	id: root
 
+	readonly property bool mounted: mountState.value === VenusOS.Storage_Mounted
 	function _mountStateToText(s) {
 		switch (s) {
 		case VenusOS.Storage_Mounted:
@@ -27,7 +28,7 @@ ListButton {
 	//% "microSD / USB"
 	text: qsTrId("components_mount_state_microsd_usb")
 	button.text: _mountStateToText(mountState.value)
-	button.enabled: mountState.value === VenusOS.Storage_Mounted
+	button.enabled: mounted
 	writeAccessLevel: VenusOS.User_AccessType_User
 
 	onClicked: mountState.setValue(VenusOS.Storage_UnmountRequested)
