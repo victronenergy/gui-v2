@@ -18,7 +18,10 @@ QtObject {
 	property int _updateType
 
 	property VeQuickItem _stateItem: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Firmware/State"
+
+		// Make sure notificationLayer is ready before reading the firmware state,
+		// otherwise Global.showToastNotification() call inside onValueChanged signal handler will fail.
+		uid: !!Global.notificationLayer ? Global.venusPlatform.serviceUid + "/Firmware/State" : ""
 
 		onValueChanged: {
 			let msg = ""
