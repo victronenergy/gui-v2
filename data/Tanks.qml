@@ -151,19 +151,25 @@ QtObject {
 		let totalLevel = NaN
 		let totalRemaining = NaN
 		let totalCapacity = NaN
+		let requireFallback = false
 		for (let i = 0; i < model.count; ++i) {
 			const tank = model.deviceAt(i)
 			totalRemaining = Units.sumRealNumbers(totalRemaining, tank.remaining)
 			totalCapacity = Units.sumRealNumbers(totalCapacity, tank.capacity)
 			totalLevel = Units.sumRealNumbers(totalLevel, tank.level)
+			requireFallback = requireFallback || isNaN(tank.remaining) || isNaN(tank.capacity)
 		}
-		model.averageLevel = isNaN(totalLevel) || model.count === 0 ? NaN : totalLevel / model.count
+
 		model.totalRemaining = totalRemaining
 		model.totalCapacity = totalCapacity
-
-		// If /Level is not available for the tanks, calculate it from /Remaining and /Capacity.
-		if (isNaN(model.averageLevel) && !isNaN(totalRemaining) && !isNaN(totalCapacity) && totalCapacity > 0) {
+		if (!requireFallback && !isNaN(totalRemaining) && !isNaN(totalCapacity) && totalCapacity > 0) {
+			// if we know all tank capacities and usages,
+			// we can calculate the combined level.
 			model.averageLevel = totalRemaining / totalCapacity * 100
+		} else {
+			// only fall back to a crude average level
+			// if we don't know all tank capacities and usages.
+			model.averageLevel = isNaN(totalLevel) || model.count === 0 ? NaN : totalLevel / model.count
 		}
 	}
 

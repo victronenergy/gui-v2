@@ -156,6 +156,14 @@ QtObject {
 				{ type: VenusOS.Tank_Type_BlackWater, level: 25, capacity: .2 },
 			]
 		},
+		{
+			// crude average level = 25+75/2 = 50%, but actual combined average = 15.5/22 = 70%
+			name: "Merge 2 Freshwater tanks with vastly different capacities",
+			tanks: [
+				{ type: VenusOS.Tank_Type_FreshWater, level: 25, capacity: 2 },
+				{ type: VenusOS.Tank_Type_FreshWater, level: 75, capacity: 20 },
+			]
+		},
 	]
 
 	property var environmentConfigs: [
