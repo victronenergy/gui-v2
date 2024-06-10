@@ -152,7 +152,7 @@ ListNavigationItem {
 						dataItem.uid: root._scheduleSource + "/Soc"
 						suffix: "%"
 						from: 5
-						to: 95
+						to: 100
 						stepSize: 5
 					}
 
