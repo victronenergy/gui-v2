@@ -12,6 +12,7 @@ CT.TextField {
 
 	font.family: Global.fontFamily
 	font.pixelSize: Theme.font_size_body2
+	passwordCharacter: "\u2022"
 
 	leftPadding: Theme.geometry_textField_horizontalMargin
 	rightPadding: Theme.geometry_textField_horizontalMargin
