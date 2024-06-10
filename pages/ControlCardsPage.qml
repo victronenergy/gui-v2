@@ -25,12 +25,12 @@ Page {
 	ListView {
 		id: cardsView
 
-		anchors.fill: parent
-		leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
-		rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
+		anchors {
+			fill: parent
+			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
+		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
-		snapMode: ListView.SnapOneItem
 		boundsBehavior: Flickable.DragOverBounds
 		maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
 		flickDeceleration: Theme.geometry_flickable_flickDeceleration
