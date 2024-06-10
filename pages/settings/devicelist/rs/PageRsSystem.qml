@@ -59,8 +59,8 @@ Page {
 
 			ListButton {
 				text: numberOfAcInputs.isValid && numberOfAcInputs.value > 1
-					  ? "%1 - %2".arg(Global.acInputs.currentLimitTypeToText()).arg(CommonWords.acInput(0))
-					  : Global.acInputs.currentLimitTypeToText()
+					  ? "%1 - %2".arg(CommonWords.input_current_limit).arg(CommonWords.acInput(0))
+					  : CommonWords.input_current_limit
 				secondaryText: currentLimit.isValid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, currentLimit.value) : "--"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: {
@@ -86,7 +86,7 @@ Page {
 					id: currentLimitDialogComponent
 
 					CurrentLimitDialog {
-						title: Global.acInputs.currentLimitTypeToText()
+						title: CommonWords.input_current_limit
 						secondaryTitle: numberOfAcInputs.isValid && numberOfAcInputs.value > 1 ? CommonWords.acInput(0) : ""
 						onAccepted: currentLimit.setValue(value)
 					}

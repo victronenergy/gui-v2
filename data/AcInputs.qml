@@ -119,8 +119,7 @@ QtObject {
 			//% "Shore current limit"
 			return qsTrId("acInputs_current_limit_shore")
 		default:
-			//% "Input current limit"
-			return qsTrId("acInputs_input_current_limit")
+			return CommonWords.input_current_limit
 		}
 	}
 
