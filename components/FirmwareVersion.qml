@@ -23,10 +23,10 @@ QtObject {
 
 	function versionText(version, format) {
 		if (version === undefined || version === null) {
-			return ""
+			return "--"
 		}
 		if (version === 0xFFFFFF) {
-			return ""
+			return "--"
 		}
 		if (format === "can-bus-bms") {
 			return "v%1.%2".arg(version >> 8).arg(version & 0xFF)
