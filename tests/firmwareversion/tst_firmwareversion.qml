@@ -55,6 +55,6 @@ TestCase {
 	}
 
 	function test_version_none() {
-		compare(FirmwareVersion.versionText(undefined), "")
+		compare(FirmwareVersion.versionText(undefined), "--")
 	}
 }
