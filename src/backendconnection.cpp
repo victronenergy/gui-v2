@@ -459,7 +459,7 @@ void BackendConnection::requestShardFromVrmApi()
 void BackendConnection::logout()
 {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-	emscripten_run_script("location.href = \'logout.html\'");
+	emscripten_run_script("location.href = \'../auth/logout.php\'");
 #endif
 }
 
