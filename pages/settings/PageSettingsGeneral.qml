@@ -86,14 +86,22 @@ Page {
 			}
 
 			ListTextField {
-				//% "Set root password"
-				text: qsTrId("settings_set_root_password")
+				//% "Root password"
+				text: qsTrId("settings_root_password")
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
-				placeholderText: "* * * * * *"
+				//% "Enter password"
+				placeholderText: qsTrId("settings_root_enter_password")
+				textField.echoMode: TextInput.Password
 
 				onAccepted: {
-					// TODO implement via platform helpers
-					Global.showToastNotification(VenusOS.Notification_Info, "not yet implemented!")
+					if (secondaryText.length < 8) {
+						//% "Password needs to be at least 8 characters long"
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_root_too_short_password"), 5000)
+					} else {
+						var object = {Action: "SetRootPassword", Password: secondaryText}
+						var json = JSON.stringify(object)
+						securityApi.setValue(json)
+					}
 				}
 			}
 
