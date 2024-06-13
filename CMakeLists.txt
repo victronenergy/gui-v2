@@ -368,6 +368,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/ListDcInputQuantityGroup.qml
     components/settings/ListDcOutputQuantityGroup.qml
     components/settings/ListFirmwareVersionItem.qml
+    components/settings/ListGeneratorError.qml
     components/settings/ListRelayState.qml
     components/settings/ListResetHistoryLabel.qml
     components/settings/MountStateListButton.qml
@@ -497,6 +498,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageGenerator.qml
     pages/settings/PageGeneratorAcLoad.qml
     pages/settings/PageGeneratorConditions.qml
+    pages/settings/PageGeneratorManualStart.qml
     pages/settings/PageGeneratorRuntimeService.qml
     pages/settings/PageGeneratorTestRun.qml
     pages/settings/PageGps.qml

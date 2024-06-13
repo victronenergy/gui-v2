@@ -246,6 +246,9 @@ QtObject {
 	//% "Manual"
 	readonly property string manual: qsTrId("common_words_manual")
 
+	//% "Manual start"
+	readonly property string manual_start: qsTrId("common_words_manual_start")
+
 	//% "Manufacturer"
 	readonly property string manufacturer: qsTrId("common_words_manufacturer")
 
@@ -527,6 +530,12 @@ QtObject {
 
 	function activeOrInactive(value) {
 		return value === 1 || value === true ? active_status : inactive_status
+	}
+
+	function formatError(text, value) {
+		//: %1 = error number, %2 = text description of this error
+		//% "#%1 %2"
+		return qsTrId("common_words_format_error").arg(value).arg(text)
 	}
 
 	function lastErrorName(errorIndex) {
