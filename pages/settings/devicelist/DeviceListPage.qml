@@ -80,7 +80,9 @@ Page {
 			url = "/pages/settings/devicelist/tank/PageTankSensor.qml"
 			params = { "bindPrefix" : device.serviceUid }
 
-			if (device.status === VenusOS.Tank_Status_Ok) {
+			if (isNaN(device.level)) {
+				summary = [ device.status === VenusOS.Tank_Status_Unknown ? "--" : Global.tanks.statusToText(device.status) ]
+			} else {
 				const levelText = Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.level)
 				if (isNaN(device.temperature)) {
 					summary = [ levelText ]
@@ -91,8 +93,6 @@ Page {
 						levelText
 					]
 				}
-			} else {
-				summary = [ device.status >= 0 ? Global.tanks.statusToText(device.status) : "--" ]
 			}
 			break;
 
