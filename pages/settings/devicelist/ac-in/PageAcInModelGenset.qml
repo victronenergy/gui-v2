@@ -10,6 +10,8 @@ ObjectModel {
 	id: root
 
 	property string bindPrefix
+	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator1"
+	property string startStopBindPrefix: startStop1Uid
 
 	// On D-Bus, the startstop1 generator is at com.victronenergy.generator.startstop1.
 	// On MQTT, the startstop1 generator is the one with GensetService=com.victronenergy.genset.*
@@ -34,56 +36,44 @@ ObjectModel {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
 
-	ListRadioButtonGroup {
-		readonly property int index_on: 0
-		readonly property int index_off: 1
-		readonly property int index_autoStartStop: 2
+	ListSwitch {
+		//% "Auto start functionality"
+		text: qsTrId("ac-in-genset_auto_start_functionality")
+		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/AutoStartEnabled" : ""
+	}
 
-		text: CommonWords.mode
-		enabled: gensetStatus.isValid
-		optionModel: [
-			{ display: CommonWords.on, value: 1 },
-			{ display: CommonWords.off, value: 0 },
-			{ display: generatorNavigationItem.text, value: 2 },
-		]
-		updateOnClick: false
-		currentIndex: autoStartStopItem.value === 1 ? index_autoStartStop
-					: modeItem.value === 1 ? index_on : index_off
-
-		onOptionClicked: function(index) {
-			if (index === index_off) {
-				autoStartStopItem.setValue(0)
-				modeItem.setValue(0)
-			} else if (index === index_on) {
-				if (autoStart.value === 0) {
-					//% "AutoStart functionality is currently disabled, enable it on the genset panel in order to start the genset from this menu."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("ac-in-genset_autostart_functionality_disabled"), 7000)
-					return
-				}
-				autoStartStopItem.setValue(0)
-				modeItem.setValue(1)
-			} else if (index === index_autoStartStop) {
-				autoStartStopItem.setValue(1)
-				modeItem.setValue(0)
-			}
-		}
-
-		VeQuickItem {
-			id: modeItem
-			uid: root.startStop1Uid + "/ManualStart"
-		}
-		VeQuickItem {
-			id: autoStartStopItem
-			uid: root.startStop1Uid + "/AutoStartEnabled"
-		}
-		VeQuickItem {
-			id: autoStart
-			uid: root.bindPrefix + "/AutoStart"
+	ListNavigationItem {
+		text: CommonWords.manual_start
+		onClicked: {
+			Global.pageManager.pushPage("/pages/settings/PageGeneratorManualStart.qml",
+					{ title: text, startStopBindPrefix: root.startStopBindPrefix, gensetService: root.bindPrefix })
 		}
 	}
 
 	ListTextItem {
-		text: CommonWords.status
+		//% "Control status"
+		text: qsTrId("ac-in-genset_auto_control_status")
+		secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : "--"
+
+		VeQuickItem {
+			id: activeCondition
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/RunningByCondition" : ""
+		}
+
+		VeQuickItem {
+			id: generatorState
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/State" : ""
+		}
+	}
+
+	ListGeneratorError {
+		allowed: defaultAllowed && dataItem.isValid
+		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
+	}
+
+	ListTextItem {
+		//% "Genset status"
+		text: qsTrId("ac-in-genset_status")
 		secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
 
 		VeQuickItem {
@@ -93,14 +83,16 @@ ObjectModel {
 	}
 
 	ListFpGensetErrorItem {
-		text: CommonWords.error_code
+		//% "Genset error code"
+		text: qsTrId("ac-in-genset_error")
 		dataItem.uid: root.bindPrefix + "/ErrorCode"
 		allowed: defaultAllowed && dataItem.isValid
 		nrOfPhases: root.nrOfPhases.value || 3
 	}
 
 	ListButton {
-		text: CommonWords.clear_error_action
+		//% "Clear genset error"
+		text: qsTrId("ac-in-genset_error")
 		secondaryText: CommonWords.press_to_clear
 		allowed: gensetStatus.value === 10
 		onClicked: startItem.setValue(0)
@@ -146,17 +138,21 @@ ObjectModel {
 		}
 	}
 
+	ListTextItem {
+		//% "Remote start mode"
+		text: qsTrId("ac-in-genset_remote_start_mode")
+		dataItem.uid: root.bindPrefix + "/AutoStart"
+		secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
+	}
+
 	ListNavigationItem {
-		id: generatorNavigationItem
 		//% "Auto start/stop"
 		text: qsTrId("ac-in-genset_auto_start_stop")
-		allowed: autoStartStopItem.value === 1
 		onClicked: {
 			const props = {
 				"title": text,
-				"settingsBindPrefix": Global.systemSettings.serviceUid + "/Settings/Generator1",
-				"startStopBindPrefix": root.startStop1Uid,
-				"allowDisableAutostart": false,
+				"settingsBindPrefix": root.settingsBindPrefix,
+				"startStopBindPrefix": root.startStopBindPrefix
 			}
 			Global.pageManager.pushPage("/pages/settings/PageGenerator.qml", props)
 		}
@@ -191,11 +187,19 @@ ObjectModel {
 						}
 
 						ListQuantityItem {
-							//% "Oil Pressure"
+							//% "Oil pressure"
 							text: qsTrId("ac-in-genset_oil_pressure")
 							dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
 							allowed: defaultAllowed && dataItem.isValid
 							unit: VenusOS.Units_Kilopascal
+						}
+
+						ListTemperatureItem {
+							//% "Oil temperature"
+							text: qsTrId("ac-in-genset_oil_temperature")
+							allowed: defaultAllowed && dataItem.isValid
+							dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
+							precision: 0
 						}
 
 						ListTemperatureItem {
@@ -218,14 +222,6 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_winding_temperature")
 							allowed: defaultAllowed && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
-						}
-
-						ListTemperatureItem {
-							//% "Oil temperature"
-							text: qsTrId("ac-in-genset_oil_temperature")
-							allowed: defaultAllowed && dataItem.isValid
-							dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
-							precision: 0
 						}
 
 						ListTextItem {

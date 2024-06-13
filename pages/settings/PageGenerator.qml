@@ -9,12 +9,12 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property bool allowDisableAutostart: true
 	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator0"
+	property string startStopBindPrefix: generator0ServiceUid
 
 	// The generator start/stop service is always com.victronenergy.generator.startstop0 on D-Bus,
 	// and mqtt/generator/0 on MQTT.
-	property string startStopBindPrefix: BackendConnection.type === BackendConnection.MqttSource
+	readonly property string generator0ServiceUid: BackendConnection.type === BackendConnection.MqttSource
 			? "mqtt/generator/0"
 			: BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop0"
 
@@ -27,16 +27,6 @@ Page {
 	VeQuickItem {
 		id: _generatorState
 		uid: root.startStopBindPrefix + "/State"
-	}
-
-	VeQuickItem {
-		id: activeCondition
-		uid: root.startStopBindPrefix + "/RunningByConditionCode"
-	}
-
-	VeQuickItem {
-		id: stopTimer
-		uid: startStopBindPrefix + "/ManualStartTimer"
 	}
 
 	VeQuickItem {
@@ -62,22 +52,17 @@ Page {
 			id: state
 
 			text: CommonWords.state
+			allowed: root.startStopBindPrefix === root.generator0ServiceUid
 			secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : '---'
-			enabled: false
+
+			VeQuickItem {
+				id: activeCondition
+				uid: root.startStopBindPrefix + "/RunningByConditionCode"
+			}
 		}
 
-		ListRadioButtonGroup {
-			text: CommonWords.error
-			optionModel: [
-				{ display: CommonWords.no_error, value: 0 },
-				//% "Remote switch control disabled"
-				{ display: qsTrId("settings_remote_switch_control_disabled"), value: 1 },
-				//% "Generator in fault condition"
-				{ display: qsTrId("settings_generator_in_fault_condition"), value: 2 },
-				//% "Generator not detected at AC input"
-				{ display: qsTrId("settings_generator_not_detected"), value: 3 },
-			]
-			enabled: false
+		ListGeneratorError {
+			allowed: root.startStopBindPrefix === root.generator0ServiceUid
 			dataItem.uid: root.startStopBindPrefix + "/Error"
 		}
 
@@ -150,59 +135,15 @@ Page {
 			//% "Autostart functionality"
 			text: qsTrId("settings_page_relay_generator_auto_start_enabled")
 			dataItem.uid: root.startStopBindPrefix + "/AutoStartEnabled"
-			allowed: allowDisableAutostart
+			allowed: root.startStopBindPrefix === root.generator0ServiceUid
 		}
 
 		ListNavigationItem {
-			//% "Manual start"
-			text: qsTrId("settings_page_relay_generator_manual_start")
-			onClicked: Global.pageManager.pushPage(manualStartPageComponent, { title: text })
-
-			Component {
-				id: manualStartPageComponent
-
-				Page {
-					id: manualStartPage
-
-					GradientListView {
-
-						model: ObjectModel {
-
-							ListSwitch {
-								id: manualSwitch
-								//% "Start generator"
-								text: qsTrId("settings_page_relay_generator_start_generator")
-								dataItem.uid: root.startStopBindPrefix + "/ManualStart"
-								writeAccessLevel: VenusOS.User_AccessType_User
-								onCheckedChanged: {
-									if (manualStartPage.isCurrentPage) {
-										if (!checked) {
-											//% "Stopping, generator will continue running if other conditions are reached"
-											Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_stop_info"), 3000)
-										}
-										if (checked && stopTimer.value == 0) {
-											//% "Starting, generator won't stop till user intervention"
-											Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_start_info"), 5000)
-										}
-										if (checked && stopTimer.value > 0) {
-											//: %1 = time until generator is stopped
-											//% "Starting. The generator will stop in %1, unless other conditions keep it running"
-											Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_page_relay_generator_start_timer").arg(Utils.secondsToString(stopTimer.value)), 5000)
-										}
-									}
-								}
-							}
-
-							ListTimeSelector {
-								//% "Run for (hh:mm)"
-								text: qsTrId("settings_page_relay_generator_run_for_hh_mm")
-								enabled: !manualSwitch.checked
-								dataItem.uid: root.startStopBindPrefix + "/ManualStartTimer"
-								writeAccessLevel: VenusOS.User_AccessType_User
-							}
-						}
-					}
-				}
+			text: CommonWords.manual_start
+			allowed: root.startStopBindPrefix === root.generator0ServiceUid
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/PageGeneratorManualStart.qml",
+						{ title: text, startStopBindPrefix: root.startStopBindPrefix })
 			}
 		}
 
