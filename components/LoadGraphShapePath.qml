@@ -19,6 +19,7 @@ Shape {
 	property alias strokeColor: shapePath.strokeColor
 	property alias strokeWidth: shapePath.strokeWidth
 	property alias fillGradient: shapePath.fillGradient
+	property bool zeroCentered
 
 	function calcY(data) { return (1 - (data || 0)) * height }
 
@@ -49,8 +50,8 @@ Shape {
 		PathCubic { x: 11 * segWidth - offset; y: calcY(model[11]); relativeControl1X: rc1x; control1Y: calcY(model[10]); relativeControl2X: rc2x; control2Y: y; }
 
 		PathLine { x: root.width + root.strokeWidth; y: calcY(model[11])}
-		PathLine { x: root.width + root.strokeWidth; y: root.height + root.strokeWidth }
-		PathLine { x: 0 - root.strokeWidth; y: root.height + root.strokeWidth}
+		PathLine { x: root.width + root.strokeWidth; y: root.zeroCentered ? root.height/2 : (root.height + root.strokeWidth) }
+		PathLine { x: 0 - root.strokeWidth; y: root.zeroCentered ? root.height/2 : (root.height + root.strokeWidth) }
 		PathLine { x: 0 - root.strokeWidth; y: shapePath.startY}
 	}
 }

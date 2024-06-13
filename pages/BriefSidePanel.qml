@@ -136,7 +136,8 @@ exported power v  0.4 |   /
 			active: root.animationEnabled
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			belowThresholdFillColor: _graphShowsFeedIn ? Theme.color_green : Theme.color_blue
-			initialModelValue: 0
+			initialModelValue: _graphShowsFeedIn ? 0.5 : 0
+			zeroCentered: _graphShowsFeedIn
 
 			// For a system that only imports, no threshold is required.
 			// For a system that sometimes exports (i.e. can have values below zero), the threshold
@@ -148,7 +149,10 @@ exported power v  0.4 |   /
 				const graphMax = acInputGraphRange.maximumCurrent || 0
 
 				if (_prevGraphMin !== graphMin || _prevGraphMax !== graphMax) {
-					scaleHistoricalData(_prevGraphMin, _prevGraphMax, graphMin, graphMax)
+					// don't scale historical data if the prevMin=prevMax=0 i.e. uninitialized.
+					if (_prevGraphMin !== 0 || _prevGraphMax !== 0) {
+						scaleHistoricalData(_prevGraphMin, _prevGraphMax, graphMin, graphMax)
+					}
 					_prevGraphMin = graphMin
 					_prevGraphMax = graphMax
 				}
