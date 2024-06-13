@@ -19,6 +19,7 @@ Item {
 	property color belowThresholdFillColor: Theme.color_blue
 	property color horizontalGradientColor1: Theme.color_briefPage_background
 	property color horizontalGradientColor2: "transparent"
+	property bool zeroCentered
 	property alias active: graphAnimation.running
 
 	signal nextValueRequested()
@@ -84,16 +85,17 @@ Item {
 			height: root.height + 2*strokeWidth
 			width: parent.width + 2*strokeWidth
 			anchors.bottom: parent.bottom
+			zeroCentered: root.zeroCentered
 			offsetFraction: root.offsetFraction
 			fillGradient: LinearGradient {
 				x1: 0; y1: 0
 				x2: 0; y2: height
-				GradientStop { position: 0; color: belowThresholdFillColor }
+				GradientStop { position: 0; color: bluePath.zeroCentered ? "transparent" : belowThresholdFillColor }
 				GradientStop {
 					position: 1 - threshold + (dottedLine.height / height)
-					color: belowThresholdFillColor
+					color: bluePath.zeroCentered ? Qt.rgba(belowThresholdFillColor.r, belowThresholdFillColor.g, belowThresholdFillColor.b, belowThresholdFillColor.a * 0.5) : belowThresholdFillColor
 				}
-				GradientStop { position: 1; color: "transparent" }
+				GradientStop { position: 1; color: bluePath.zeroCentered ? belowThresholdFillColor : "transparent" }
 			}
 		}
 		Row {
