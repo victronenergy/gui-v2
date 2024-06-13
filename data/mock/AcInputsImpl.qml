@@ -16,6 +16,7 @@ QtObject {
 			source: VenusOS.AcInputs_InputSource_Grid,
 			serviceType: "vebus",
 			serviceName: "com.victronenergy.vebus.ttyUSB0",
+			customName: "Grid AC input",
 			connected: 0,
 			phaseCount: 3,
 		}
@@ -23,8 +24,10 @@ QtObject {
 			source: VenusOS.AcInputs_InputSource_Generator,
 			serviceType: "genset",
 			serviceName: "com.victronenergy.genset.ttyUSB0",
+			customName: "Genset AC input",
 			connected: 1,
 			phaseCount: 3,
+			productId: 0xB040,  // fisher panda
 		}
 		setInputs([ gridInput, generatorInput ])
 	}
@@ -82,6 +85,23 @@ QtObject {
 			required property int index
 			required property var modelData
 
+			readonly property Device device: Device {
+				readonly property VeQuickItem _productId: VeQuickItem {
+					uid: device.serviceUid ? device.serviceUid + "/ProductId" : ""
+				}
+
+				Component.onCompleted: {
+					serviceUid = "mock/" + input.modelData["serviceName"]
+					_deviceInstance.setValue(input.index)
+					for (let configProperty in input.modelData) {
+						const configValue = input.modelData[configProperty]
+						if (device["_" + configProperty] !== undefined) {
+							device["_" + configProperty].setValue(configValue)
+						}
+					}
+				}
+			}
+
 			readonly property AcInputSystemInfo inputSysInfo: AcInputSystemInfo {
 				inputIndex: input.index
 
@@ -95,6 +115,7 @@ QtObject {
 					}
 				}
 
+
 				Component.onCompleted: {
 					_deviceInstance.setValue(input.index)
 					const inputConnected = !!input.modelData["connected"]
@@ -104,7 +125,7 @@ QtObject {
 							if (inputConnected) {
 								_numberOfPhases.setValue(configValue)
 							}
-						} else {
+						} else if (inputSysInfo["_" + configProperty] !== undefined) {
 							inputSysInfo["_" + configProperty].setValue(configValue)
 						}
 					}
