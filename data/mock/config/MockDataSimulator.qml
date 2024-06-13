@@ -119,6 +119,10 @@ QtObject {
 			Theme.colorScheme = Theme.colorScheme == Theme.Dark ? Theme.Light : Theme.Dark
 			event.accepted = true
 			break
+		case Qt.Key_D:
+			Global.pageManager.pushPage(Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml"))
+			event.accepted = true
+			break
 		case Qt.Key_E:
 			if (!!Global) {
 				Global.isGxDevice = !Global.isGxDevice
