@@ -56,6 +56,7 @@ OverviewWidget {
 				value: evCharger.energy
 				valueColor: unitColor
 				alignment: Qt.AlignLeft
+				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 
 			Label {
