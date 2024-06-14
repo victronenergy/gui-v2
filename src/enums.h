@@ -479,7 +479,8 @@ public:
 	enum Security_Profile {
 		Security_Profile_Secured,
 		Security_Profile_Weak,
-		Security_Profile_Unsecured
+		Security_Profile_Unsecured,
+		Security_Profile_Indeterminate
 	};
 	Q_ENUM(Security_Profile)
 

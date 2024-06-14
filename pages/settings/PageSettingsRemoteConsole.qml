@@ -11,7 +11,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListSwitch {
+			ListSecurityWarningSwitch {
 				id: vncOnLan
 
 				//% "Enable Remote Console"

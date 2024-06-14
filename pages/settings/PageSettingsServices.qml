@@ -26,7 +26,7 @@ Page {
 				}
 			}
 
-			ListSwitch {
+			ListSecurityWarningSwitch {
 				id: mqtt
 
 				//% "MQTT Access"

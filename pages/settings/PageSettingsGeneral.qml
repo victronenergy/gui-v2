@@ -77,6 +77,8 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
 				updateOnClick: false // handle option clicked manually.
 				popDestination: undefined
+				//% "Please select..."
+				defaultSecondaryText: qsTrId("settings_security_profile_indeterminate")
 				optionModel: [
 					{
 						//% "Secured"
