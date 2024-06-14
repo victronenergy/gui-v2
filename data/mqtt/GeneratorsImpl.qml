@@ -16,7 +16,18 @@ QtObject {
 		}
 
 		delegate: Generator {
+			id: generator
+
 			serviceUid: model.uid
+			onValidChanged: {
+				if (!!Global.generators) {
+					if (valid) {
+						Global.generators.addGenerator(generator)
+					} else {
+						Global.generators.removeGenerator(generator)
+					}
+				}
+			}
 		}
 	}
 }
