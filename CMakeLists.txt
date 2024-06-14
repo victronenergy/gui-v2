@@ -239,6 +239,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/FixedWidthLabel.qml
     components/GaugeModel.qml
     components/GaugeHeader.qml
+    components/GeneratorManualControlButton.qml
     components/EvChargerStatusModel.qml
     components/GeneratorIconLabel.qml
     components/GradientListView.qml
@@ -497,7 +498,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageGenerator.qml
     pages/settings/PageGeneratorAcLoad.qml
     pages/settings/PageGeneratorConditions.qml
-    pages/settings/PageGeneratorManualStart.qml
     pages/settings/PageGeneratorRuntimeService.qml
     pages/settings/PageGeneratorTestRun.qml
     pages/settings/PageGps.qml

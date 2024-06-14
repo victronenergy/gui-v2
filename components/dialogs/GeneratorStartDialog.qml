@@ -11,6 +11,7 @@ GeneratorDialog {
 
 	//% "Start Now"
 	acceptText: qsTrId("controlcard_generator_startdialog_start_now")
+	secondaryTitle: CommonWords.manual_start
 
 	onGeneratorStateChanged: {
 		if (root.open) {

@@ -11,6 +11,7 @@ GeneratorDialog {
 
 	//% "Stop Now"
 	acceptText: qsTrId("controlcard_generator_stopdialog_stop_now")
+	secondaryTitle: CommonWords.manual_stop
 
 	onGeneratorStateChanged: {
 		if (root.open) {

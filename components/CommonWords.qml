@@ -240,8 +240,14 @@ QtObject {
 	//% "Manual"
 	readonly property string manual: qsTrId("common_words_manual")
 
+	//% "Manual control"
+	readonly property string manual_control: qsTrId("common_words_manual_control")
+
 	//% "Manual start"
 	readonly property string manual_start: qsTrId("common_words_manual_start")
+
+	//% "Manual stop"
+	readonly property string manual_stop: qsTrId("common_words_manual_stop")
 
 	//% "Manufacturer"
 	readonly property string manufacturer: qsTrId("common_words_manufacturer")
