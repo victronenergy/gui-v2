@@ -39,16 +39,6 @@ Device {
 		uid: serviceUid + "/AutoStartEnabled"
 	}
 
-	onValidChanged: {
-		if (!!Global.generators) {
-			if (valid) {
-				Global.generators.addGenerator(generator)
-			} else {
-				Global.generators.removeGenerator(generator)
-			}
-		}
-	}
-
 	function start(durationSecs) {
 		_manualStartTimer.setValue(durationSecs)
 		_manualStart.setValue(1)

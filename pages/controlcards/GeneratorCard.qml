@@ -141,7 +141,7 @@ ControlCard {
 			id: generatorStartDialogComponent
 
 			GeneratorStartDialog {
-				generator: root.generator
+				generatorUid: root.generator.serviceUid
 				onAboutToShow: secondaryTitle = startStopButton.text
 				onAboutToHide: startStopButton._generatorStateBeforeDialogOpen = -1
 			}
@@ -151,7 +151,7 @@ ControlCard {
 			id: generatorStopDialogComponent
 
 			GeneratorStopDialog {
-				generator: root.generator
+				generatorUid: root.generator.serviceUid
 				onAboutToShow: secondaryTitle = startStopButton.text
 				onAboutToHide: startStopButton._generatorStateBeforeDialogOpen = -1
 			}

@@ -27,8 +27,10 @@ import Victron.VenusOS
 ModalDialog {
 	id: root
 
-	property Generator generator
-	readonly property int generatorState: root.generator ? root.generator.state : -1
+	required property string generatorUid
+
+	readonly property Generator generator: Generator { serviceUid: root.generatorUid }
+	readonly property int generatorState: generator ? generator.state : VenusOS.Generators_State_Stopped
 	property var runGeneratorAction
 
 	title: CommonWords.generator

@@ -12,6 +12,16 @@ QtObject {
 	readonly property Generator generator: Generator {
 		serviceUid: "mock/com.victronenergy.generator.startstop0"
 
+		onValidChanged: {
+			if (!!Global.generators) {
+				if (valid) {
+					Global.generators.addGenerator(generator)
+				} else {
+					Global.generators.removeGenerator(generator)
+				}
+			}
+		}
+
 		Component.onCompleted: {
 			_deviceInstance.setValue(0)
 			_productName.setValue("Start/Stop generator")
