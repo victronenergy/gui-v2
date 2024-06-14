@@ -138,13 +138,15 @@ Page {
 			allowed: root.startStopBindPrefix === root.generator0ServiceUid
 		}
 
-		ListNavigationItem {
-			text: CommonWords.manual_start
+		ListItem {
+			text: CommonWords.manual_control
 			allowed: root.startStopBindPrefix === root.generator0ServiceUid
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageGeneratorManualStart.qml",
-						{ title: text, startStopBindPrefix: root.startStopBindPrefix })
-			}
+			content.children: [
+				GeneratorManualControlButton {
+					generatorUid: root.startStopBindPrefix
+					gensetUid: ""
+				}
+			]
 		}
 
 		ListNavigationItem {

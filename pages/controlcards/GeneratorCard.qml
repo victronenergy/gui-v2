@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -94,11 +93,7 @@ ControlCard {
 		text: qsTrId("controlcard_generator_autostart_conditions")
 	}
 
-	Button {
-		id: startStopButton
-
-		property int _generatorStateBeforeDialogOpen: -1
-
+	GeneratorManualControlButton {
 		anchors {
 			margins: Theme.geometry_controlCard_button_margins
 			bottom: parent.bottom
@@ -107,54 +102,7 @@ ControlCard {
 		}
 		height: Theme.geometry_generatorCard_startButton_height
 		radius: Theme.geometry_button_radius
-		flat: true
-		enabled: root.generator.state !== VenusOS.Generators_State_Error
-		color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
-		backgroundColor: checked ? Theme.color_dimRed : Theme.color_dimGreen
-
-		// If the stop or start dialog is open, set the button color based on the generator
-		// state at the time dialog was opened. This avoid changing the color of the button
-		// when it is visible below the open start/stop dialogs.
-		checked: _generatorStateBeforeDialogOpen < 0
-				 ? root.generator.state === VenusOS.Generators_State_Running
-				   || root.generator.state === VenusOS.Generators_State_WarmUp
-				 : _generatorStateBeforeDialogOpen === VenusOS.Generators_State_Running
-
-		text: checked
-				//% "Manual Stop"
-			  ? qsTrId("controlcard_generator_subcard_button_manual_stop")
-				/* stopped */
-				//% "Manual Start"
-			  : qsTrId("controlcard_generator_subcard_button_manual_start")
-
-		onClicked: {
-			_generatorStateBeforeDialogOpen = root.generator.state
-			if (root.generator.state === VenusOS.Generators_State_Running
-					|| root.generator.state === VenusOS.Generators_State_WarmUp) {
-				Global.dialogLayer.open(generatorStopDialogComponent)
-			} else {
-				Global.dialogLayer.open(generatorStartDialogComponent)
-			}
-		}
-
-		Component {
-			id: generatorStartDialogComponent
-
-			GeneratorStartDialog {
-				generatorUid: root.generator.serviceUid
-				onAboutToShow: secondaryTitle = startStopButton.text
-				onAboutToHide: startStopButton._generatorStateBeforeDialogOpen = -1
-			}
-		}
-
-		Component {
-			id: generatorStopDialogComponent
-
-			GeneratorStopDialog {
-				generatorUid: root.generator.serviceUid
-				onAboutToShow: secondaryTitle = startStopButton.text
-				onAboutToHide: startStopButton._generatorStateBeforeDialogOpen = -1
-			}
-		}
+		font.pixelSize: Theme.font_size_body1
+		generatorUid: root.generator.serviceUid
 	}
 }

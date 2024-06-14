@@ -42,12 +42,14 @@ ObjectModel {
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/AutoStartEnabled" : ""
 	}
 
-	ListNavigationItem {
-		text: CommonWords.manual_start
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageGeneratorManualStart.qml",
-					{ title: text, startStopBindPrefix: root.startStopBindPrefix, gensetService: root.bindPrefix })
-		}
+	ListItem {
+		text: CommonWords.manual_control
+		content.children: [
+			GeneratorManualControlButton {
+				generatorUid: root.startStopBindPrefix
+				gensetUid: root.bindPrefix
+			}
+		]
 	}
 
 	ListTextItem {
