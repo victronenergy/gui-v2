@@ -31,7 +31,6 @@ ObjectModel {
 		text: CommonWords.temperature
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 		allowed: defaultAllowed && dataItem.isValid
-		onHeightChanged: console.trace()
 	}
 
 	ListTextItem {
