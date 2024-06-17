@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property string bindPrefix
-	property var details
+	property BatteryDetails details
 
 	GradientListView {
 		model: ObjectModel {
@@ -21,7 +21,7 @@ Page {
 					{ value: details.minVoltageCellId.value, visible: details.minVoltageCellId.isValid },
 					{ value: details.minCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
 				]
-				allowed: defaultAllowed && details.minCellVoltage.isValid
+				allowed: defaultAllowed && details.allowsLowestCellVoltage
 			}
 
 			ListQuantityGroup {
@@ -31,7 +31,7 @@ Page {
 					{ value: details.maxVoltageCellId.value, visible: details.maxVoltageCellId.isValid },
 					{ value: details.maxCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
 				]
-				allowed: defaultAllowed && details.maxCellVoltage.isValid
+				allowed: defaultAllowed && details.allowsHighestCellVoltage
 			}
 
 			ListQuantityGroup {
@@ -46,7 +46,7 @@ Page {
 						unit: Global.systemSettings.temperatureUnit
 					}
 				]
-				allowed: defaultAllowed && details.minCellTemperature.isValid
+				allowed: defaultAllowed && details.allowsMinimumCellTemperature
 			}
 
 			ListQuantityGroup {
@@ -61,7 +61,7 @@ Page {
 						unit: Global.systemSettings.temperatureUnit
 					}
 				]
-				allowed: defaultAllowed && details.maxCellTemperature.isValid
+				allowed: defaultAllowed && details.allowsMaximumCellTemperature
 			}
 
 			ListTextGroup {
@@ -75,14 +75,14 @@ Page {
 					//% "%1 offline"
 					details.modulesOffline.value === undefined ? "--" : qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value)
 				]
-				allowed: defaultAllowed && (details.modulesOnline.isValid || details.modulesOffline.isValid)
+				allowed: defaultAllowed && details.allowsBatteryModules
 			}
 
 			ListTextGroup {
 				//% "Number of modules blocking charge / discharge"
 				text: qsTrId("batterydetails_number_of_modules_blocking_charge_discharge")
 				textModel: [ details.nrOfModulesBlockingCharge.value, details.nrOfModulesBlockingDischarge.value ]
-				allowed: defaultAllowed && (details.nrOfModulesBlockingCharge.isValid || details.nrOfModulesBlockingDischarge.isValid)
+				allowed: defaultAllowed && details.allowsNumberOfModulesBlockingChargeDischarge
 			}
 
 			ListQuantityGroup {
@@ -92,7 +92,7 @@ Page {
 					{ value: details.installedCapacity.value, unit: VenusOS.Units_AmpHour },
 					{ value: details.capacity.value, unit: VenusOS.Units_AmpHour }
 				]
-				allowed: defaultAllowed && details.installedCapacity.isValid
+				allowed: defaultAllowed && details.allowsCapacity
 			}
 		}
 	}

@@ -10,14 +10,6 @@ QtObject {
 	id: root
 
 	property string bindPrefix
-	readonly property bool anyItemValid: {
-		for (let i = 0; i < _dataItems.length; ++i) {
-			if (_dataItems[i].isValid) {
-				return true
-			}
-		}
-		return false
-	}
 
 	readonly property alias modulesOnline: modulesOnline
 	readonly property alias modulesOffline: modulesOffline
@@ -33,6 +25,22 @@ QtObject {
 	readonly property alias maxTemperatureCellId: maxTemperatureCellId
 	readonly property alias installedCapacity: installedCapacity
 	readonly property alias capacity: capacity
+
+	readonly property bool allowsLowestCellVoltage: minCellVoltage.isValid
+	readonly property bool allowsHighestCellVoltage: maxCellVoltage.isValid
+	readonly property bool allowsMinimumCellTemperature: minCellTemperature.isValid
+	readonly property bool allowsMaximumCellTemperature: maxCellTemperature.isValid
+	readonly property bool allowsBatteryModules: modulesOnline.isValid || modulesOffline.isValid
+	readonly property bool allowsNumberOfModulesBlockingChargeDischarge: nrOfModulesBlockingCharge.isValid || nrOfModulesBlockingDischarge.isValid
+	readonly property bool allowsCapacity: installedCapacity.isValid
+
+	readonly property bool hasAllowedItem: allowsLowestCellVoltage
+		|| allowsHighestCellVoltage
+		|| allowsMinimumCellTemperature
+		|| allowsMaximumCellTemperature
+		|| allowsBatteryModules
+		|| allowsNumberOfModulesBlockingChargeDischarge
+		|| allowsCapacity
 
 	readonly property list<VeQuickItem> _dataItems: [
 		VeQuickItem {
