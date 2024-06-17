@@ -238,7 +238,7 @@ Page {
 			ListNavigationItem {
 				//% "Details"
 				text: qsTrId("battery_details")
-				allowed: defaultAllowed && batteryDetails.anyItemValid
+				allowed: defaultAllowed && batteryDetails.hasAllowedItem
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDetails.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid, "details": batteryDetails })
