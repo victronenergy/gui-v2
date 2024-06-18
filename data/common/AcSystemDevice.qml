@@ -20,7 +20,7 @@ Device {
 			if (valid) {
 				Global.acSystemDevices.model.addDevice(acSystemDevice)
 			} else {
-				Global.acSystemDevices.model.removeDevice(acSystemDevice)
+				Global.acSystemDevices.model.removeDevice(acSystemDevice.serviceUid)
 			}
 		}
 	}

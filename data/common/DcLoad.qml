@@ -14,7 +14,7 @@ DcDevice {
 			if (valid) {
 				Global.dcLoads.model.addDevice(dcLoad)
 			} else {
-				Global.dcLoads.model.removeDevice(dcLoad)
+				Global.dcLoads.model.removeDevice(dcLoad.serviceUid)
 			}
 		}
 	}

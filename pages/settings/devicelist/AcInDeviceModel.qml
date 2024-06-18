@@ -33,7 +33,7 @@ BaseDeviceModel {
 				if (valid) {
 					root.addDevice(device)
 				} else {
-					root.removeDevice(device)
+					root.removeDevice(device.serviceUid)
 				}
 			}
 		}

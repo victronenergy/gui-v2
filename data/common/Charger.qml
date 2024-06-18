@@ -20,7 +20,7 @@ Device {
 			if (valid) {
 				Global.chargers.model.addDevice(charger)
 			} else {
-				Global.chargers.model.removeDevice(charger)
+				Global.chargers.model.removeDevice(charger.serviceUid)
 			}
 		}
 	}

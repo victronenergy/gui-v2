@@ -14,7 +14,7 @@ Device {
 			if (valid) {
 				Global.unsupportedDevices.model.addDevice(unsupportedDevice)
 			} else {
-				Global.unsupportedDevices.model.removeDevice(unsupportedDevice)
+				Global.unsupportedDevices.model.removeDevice(unsupportedDevice.serviceUid)
 			}
 		}
 	}

@@ -34,7 +34,7 @@ Page {
 				if (valid) {
 					rsDeviceModel.addDevice(rsDevice)
 				} else {
-					rsDeviceModel.removeDevice(rsDevice)
+					rsDeviceModel.removeDevice(rsDevice.serviceUid)
 				}
 			}
 		}
