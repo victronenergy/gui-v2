@@ -203,42 +203,15 @@ Page {
 	}
 
 	GradientListView {
-		model: AggregateDeviceModel {
-			id: aggregateModel
-
-			sourceModels: [
-				Global.acSystemDevices.model,
-				Global.batteries.model,
-				Global.chargers.model,
-				Global.dcInputs.model,
-				Global.dcLoads.model,
-				Global.digitalInputs.model,
-				Global.environmentInputs.model,
-				Global.evChargers.model,
-				Global.inverterChargers.veBusDevices,
-				Global.inverterChargers.inverterDevices,
-				Global.meteoDevices.model,
-				Global.motorDrives.model,
-				Global.pulseMeters.model,
-				Global.pvInverters.model,
-				Global.solarChargers.model,
-				Global.unsupportedDevices.model,
-
-				// AC input models
-				gridDeviceModel,
-				gensetDeviceModel,
-				acLoadDeviceModel,
-
-			].concat(Global.tanks.allTankModels)
-		}
+		model: Global.allDevicesModel
 
 		footer: ListButton {
 			//% "Remove disconnected devices"
 			text: qsTrId("devicelist_remove_disconnected_devices")
 			secondaryText: CommonWords.remove
-			allowed: aggregateModel.disconnectedDeviceCount > 0
+			allowed: Global.allDevicesModel.disconnectedDeviceCount > 0
 			onClicked: {
-				aggregateModel.removeDisconnectedDevices()
+				Global.allDevicesModel.removeDisconnectedDevices()
 			}
 		}
 
@@ -282,21 +255,6 @@ Page {
 				}
 			}
 		}
-	}
-
-	AcInDeviceModel {
-		id: gridDeviceModel
-		serviceType: "grid"
-	}
-
-	AcInDeviceModel {
-		id: gensetDeviceModel
-		serviceType: "genset"
-	}
-
-	AcInDeviceModel {
-		id: acLoadDeviceModel
-		serviceType: "acload"
 	}
 }
 

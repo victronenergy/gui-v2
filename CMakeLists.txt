@@ -211,6 +211,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/AcPhasesCurrentRange.qml
     components/AcInputDirectionIcon.qml
     components/AcInputsCurrentLimits.qml
+    components/AllDevicesModel.qml
     components/AcOutput.qml
     components/AcPhase.qml
     components/Arc.qml

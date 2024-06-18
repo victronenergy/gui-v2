@@ -16,6 +16,7 @@ QtObject {
 	property var dataManager
 	property VeQItemTableModel dataServiceModel: null
 	property var firmwareUpdate
+	property var allDevicesModel
 
 	readonly property string fontFamily: _defaultFontLoader.name
 	readonly property string quantityFontFamily: _quantityFontLoader.name
@@ -93,6 +94,7 @@ QtObject {
 		dataManager = null
 		dataServiceModel = null
 		firmwareUpdate = null
+		allDevicesModel = null
 		inputPanel = null
 		dialogLayer = null
 		notificationLayer = null
