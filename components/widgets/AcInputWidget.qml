@@ -32,7 +32,10 @@ AcWidget {
 	}
 
 	onClicked: {
-		if (root.input.serviceType === "vebus") {
+		if (root.input.serviceType === "multi") {
+			Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageMultiRs.qml",
+					{ "title": root.input.name, "bindPrefix": root.input.serviceUid })
+		} else if (root.input.serviceType === "vebus") {
 			const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(root.input.serviceUid)
 			if (deviceIndex >= 0) {
 				const veBusDevice = Global.inverterChargers.veBusDevices.deviceAt(deviceIndex)
