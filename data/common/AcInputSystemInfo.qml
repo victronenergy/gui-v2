@@ -16,18 +16,12 @@ QtObject {
 	readonly property string bindPrefix: Global.system.serviceUid + "/Ac/In/" + inputIndex
 	property bool isActiveInput
 	readonly property bool connected: _connected.value === 1
-	readonly property int deviceInstance: _deviceInstance.value === undefined ? -1 : _deviceInstance.value
+	readonly property int deviceInstance: _deviceInstance.isValid ? _deviceInstance.value : -1
 	readonly property string serviceType: _serviceType.value || "" // e.g. "vebus"
 	readonly property string serviceName: _serviceName.value || "" // e.g. com.victronenergy.vebus.ttyO, com.victronenergy.grid.ttyO
-	readonly property int source: _source.value === undefined ? VenusOS.AcInputs_InputSource_NotAvailable : _source.value
-	readonly property real minimumCurrent: _minimumCurrent.value === undefined ? NaN
-			: _feedbackEnabled ? _minimumCurrent.value
-			: Math.max(0, _minimumCurrent.value) // See AcInputs.clampMeasurement().
-	readonly property real maximumCurrent: _maximumCurrent.value === undefined ? NaN
-			: _feedbackEnabled ? _maximumCurrent.value
-			: Math.max(0, _maximumCurrent.value) // See AcInputs.clampMeasurement().
-
-	readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
+	readonly property int source: _source.isValid ? _source.value : VenusOS.AcInputs_InputSource_NotAvailable
+	readonly property real minimumCurrent: _minimumCurrent.isValid ? _minimumCurrent.value : NaN
+	readonly property real maximumCurrent: _maximumCurrent.isValid ? _maximumCurrent.value : NaN
 
 	readonly property VeQuickItem _connected: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/Connected" : ""
