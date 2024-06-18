@@ -55,9 +55,6 @@ ListItem {
 	property TextField defaultContent: TextField {
 		id: textField
 
-		property string _textWhenFocused
-		property bool _accepted
-
 		width: Math.max(Theme.geometry_listItem_textField_minimumWidth,
 						Math.min(Theme.geometry_listItem_textField_maximumWidth,
 								 implicitWidth + leftPadding + rightPadding))
@@ -66,35 +63,17 @@ ListItem {
 		rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
 		horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
 
-		onAccepted: {
+		function accept() {
 			let newValue = text
-			_accepted = true
 			if (dataItem.uid) {
 				dataItem.setValue(newValue)
 			}
-			textField.focus = false
 			root.accepted(newValue)
 		}
 
+		onAccepted: textField.focus = false
 		onEditingFinished: root.editingFinished()
-
-		onActiveFocusChanged: {
-			if (activeFocus) {
-				_textWhenFocused = text
-				_accepted = false
-			} else if (!_accepted && _textWhenFocused !== text) {
-				text = _textWhenFocused
-				revertedAnimation.to = textField.color
-				revertedAnimation.start()
-			}
-		}
-
-		ColorAnimation on color {
-			id: revertedAnimation
-
-			from: Theme.color_orange
-			duration: 400
-		}
+		onActiveFocusChanged: if (!activeFocus) accept()
 
 		Label {
 			id: suffixLabel
