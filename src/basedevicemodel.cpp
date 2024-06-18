@@ -210,6 +210,16 @@ bool BaseDeviceModel::removeDevice(const QString &serviceUid)
 	return false;
 }
 
+void BaseDeviceModel::intersect(const QStringList &serviceUids)
+{
+	for (int i = m_devices.count() - 1; i >= 0; --i) {
+		const QString serviceUid = m_devices[i] ? m_devices[i]->serviceUid() : QString();
+		if (serviceUid.length() && serviceUids.indexOf(serviceUid) < 0) {
+			removeDevice(serviceUid);
+		}
+	}
+}
+
 void BaseDeviceModel::clear()
 {
 	if (count() == 0) {
@@ -219,6 +229,12 @@ void BaseDeviceModel::clear()
 	m_devices.clear();
 	emit endResetModel();
 	emit countChanged();
+}
+
+void BaseDeviceModel::deleteAllAndClear()
+{
+	qDeleteAll(m_devices);
+	m_devices.clear();
 }
 
 int BaseDeviceModel::indexOf(const QString &serviceUid) const

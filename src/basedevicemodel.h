@@ -94,7 +94,9 @@ public:
 
 	Q_INVOKABLE bool addDevice(BaseDevice *device);
 	Q_INVOKABLE bool removeDevice(const QString &serviceUid);
+	Q_INVOKABLE void intersect(const QStringList &serviceUids); // remove entries that are not in this list
 	Q_INVOKABLE void clear();
+	Q_INVOKABLE void deleteAllAndClear();
 
 	Q_INVOKABLE int indexOf(const QString &serviceUid) const;
 	Q_INVOKABLE BaseDevice *deviceForDeviceInstance(int deviceInstance) const;

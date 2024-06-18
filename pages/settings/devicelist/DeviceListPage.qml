@@ -32,9 +32,9 @@ Page {
 			break;
 
 		case "vebus":
-			// vebus devices may also show up as AC inputs, so ensure they do not appear twice
-			// in the list.
-			if (sourceModel === Global.acInputs.model) {
+			// vebus devices may also show up as AC inputs or batteries, so ensure they do not
+			// appear multiple times in the list.
+			if (sourceModel !== Global.inverterChargers.veBusDevices) {
 				return null
 			} else {
 				url = "/pages/vebusdevice/PageVeBus.qml"

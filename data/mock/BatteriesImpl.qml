@@ -118,6 +118,12 @@ QtObject {
 			root.initLynxBattery(dummyBattery)
 
 			Global.batteries.system = dummyBattery
+
+			const batteryList = [{
+				id: "com.victronenergy.battery.ttyUSB1",
+				instance: 1,
+			}]
+			Global.mockDataSimulator.setMockValue(Global.system.serviceUid + "/Batteries", batteryList)
 		}
 	}
 
