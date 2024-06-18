@@ -20,8 +20,6 @@ Loader {
 		uid: root.active && root.serviceUid && root.serviceType === "genset" ? root.serviceUid + "/StatusCode" : ""
 	}
 
-	readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
-
 	sourceComponent: {
 		if (serviceUid == "" || serviceType == "") {
 			return null
@@ -83,8 +81,6 @@ Loader {
 		id: gridOrGensetComponent
 
 		QtObject {
-			readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
-
 			// For these devices, there is no current limit.
 			readonly property real currentLimit: NaN
 		}

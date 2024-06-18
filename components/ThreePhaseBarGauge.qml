@@ -67,7 +67,6 @@ Flow {
 				sourceComponent: Global.isGxDevice ? cheapGauge : prettyGauge
 				readonly property bool feedingToGrid: root.inputMode
 						&& (model.power || 0) < 0
-						&& Global.systemSettings.essFeedbackToGridEnabled
 			}
 
 			Component {
