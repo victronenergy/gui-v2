@@ -240,7 +240,7 @@ Page {
 			}
 
 			enabled: userHasReadAccess
-			allowed: defaultAllowed && currentIndex >= 0
+			allowed: defaultAllowed
 
 			onOptionClicked: function(index) {
 				setServiceProperty("Method", optionModel[index].value)
