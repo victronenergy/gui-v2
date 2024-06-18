@@ -41,14 +41,4 @@ Device {
 	readonly property VeQuickItem _timeToGo: VeQuickItem {
 		uid: battery.serviceUid + "/TimeToGo"
 	}
-
-	onValidChanged: {
-		if (!!Global.batteries) {
-			if (valid) {
-				Global.batteries.addBattery(battery)
-			} else {
-				Global.batteries.removeBattery(battery)
-			}
-		}
-	}
 }

@@ -12,7 +12,6 @@ QtObject {
 
 	property var acSystemDevices: AcSystemDevicesImpl { }
 	property var chargers: ChargersImpl { }
-	property var batteries: BatteriesImpl { }
 	property var dcInputs: DcInputsImpl { }
 	property var dcLoads: DcLoadsImpl { }
 	property var digitalInputs: DigitalInputsImpl {}
