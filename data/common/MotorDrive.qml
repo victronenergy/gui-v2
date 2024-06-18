@@ -20,7 +20,7 @@ Device {
 			if (valid) {
 				Global.motorDrives.model.addDevice(motorDrive)
 			} else {
-				Global.motorDrives.model.removeDevice(motorDrive)
+				Global.motorDrives.model.removeDevice(motorDrive.serviceUid)
 			}
 		}
 	}

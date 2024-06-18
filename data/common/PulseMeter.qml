@@ -20,7 +20,7 @@ Device {
 			if (valid) {
 				Global.pulseMeters.model.addDevice(pulseMeter)
 			} else {
-				Global.pulseMeters.model.removeDevice(pulseMeter)
+				Global.pulseMeters.model.removeDevice(pulseMeter.serviceUid)
 			}
 		}
 	}

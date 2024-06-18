@@ -20,7 +20,7 @@ Device {
 			if (valid) {
 				Global.meteoDevices.model.addDevice(meteoDevice)
 			} else {
-				Global.meteoDevices.model.removeDevice(meteoDevice)
+				Global.meteoDevices.model.removeDevice(meteoDevice.serviceUid)
 			}
 		}
 	}

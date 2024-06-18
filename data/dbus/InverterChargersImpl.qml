@@ -26,7 +26,7 @@ QtObject {
 				if (valid) {
 					Global.inverterChargers.veBusDevices.addDevice(veBusDevice)
 				} else {
-					Global.inverterChargers.veBusDevices.removeDevice(veBusDevice)
+					Global.inverterChargers.veBusDevices.removeDevice(veBusDevice.serviceUid)
 				}
 			}
 		}
@@ -49,7 +49,7 @@ QtObject {
 				if (valid) {
 					Global.inverterChargers.acSystemDevices.addDevice(acSystemDevice)
 				} else {
-					Global.inverterChargers.acSystemDevices.removeDevice(acSystemDevice)
+					Global.inverterChargers.acSystemDevices.removeDevice(acSystemDevice.serviceUid)
 				}
 			}
 		}
@@ -72,7 +72,7 @@ QtObject {
 				if (valid) {
 					Global.inverterChargers.inverterDevices.addDevice(inverterDevice)
 				} else {
-					Global.inverterChargers.inverterDevices.removeDevice(inverterDevice)
+					Global.inverterChargers.inverterDevices.removeDevice(inverterDevice.serviceUid)
 				}
 			}
 		}

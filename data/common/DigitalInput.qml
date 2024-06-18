@@ -25,7 +25,7 @@ Device {
 			if (valid) {
 				Global.digitalInputs.model.addDevice(input)
 			} else {
-				Global.digitalInputs.model.removeDevice(input)
+				Global.digitalInputs.model.removeDevice(input.serviceUid)
 			}
 		}
 	}
