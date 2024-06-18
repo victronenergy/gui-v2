@@ -35,6 +35,11 @@ Item {
 		Component.onCompleted: Global.mainView = mainView
 	}
 
+	AllDevicesModel {
+		id: allDevicesModel
+		Component.onCompleted: Global.allDevicesModel = allDevicesModel
+	}
+
 	FirmwareUpdate {
 		id: firmwareUpdate
 		Component.onCompleted: Global.firmwareUpdate = firmwareUpdate
