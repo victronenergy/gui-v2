@@ -109,6 +109,18 @@ Page {
 				radius: parent.radius
 				anchors.fill: parent
 				onClicked: {
+					if (BackendConnection.serviceTypeFromUid(modelData.serviceUid) === "vebus") {
+						const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(modelData.serviceUid)
+						if (deviceIndex >= 0) {
+							const veBusDevice = Global.inverterChargers.veBusDevices.deviceAt(deviceIndex)
+							Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
+								"title": veBusDevice.name,
+								"veBusDevice": veBusDevice
+							})
+						}
+						return
+					}
+
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
 							{ "title": modelData.name, "battery": modelData })
 				}
