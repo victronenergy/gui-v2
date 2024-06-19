@@ -208,11 +208,10 @@ Page {
 				unit:VenusOS.Units_Percentage
 			}
 
-			ListQuantityItem {
+			ListTemperatureItem {
 				allowed: defaultAllowed && dataItem.isValid && root.isMulti
 				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Temperature"
 				text: CommonWords.battery_temperature
-				unit: Global.systemSettings.temperatureUnit
 			}
 
 			ActiveAcInputTextItem {
