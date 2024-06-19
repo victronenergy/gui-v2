@@ -459,8 +459,25 @@ void BackendConnection::requestShardFromVrmApi()
 void BackendConnection::logout()
 {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-	emscripten_run_script("location.href = \'../auth/logout.php\'");
+	emscripten_run_script("location.href = \'../auth/logout.php\';");
 #endif
+}
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+
+EM_JS(void, toggleSecureProtocol, (bool secure), {
+	const alreadySecure = location.href.indexOf("https://") >= 0;
+	if (!alreadySecure && secure) {
+		location.href = location.href.replace('http://','https://');
+	}
+	return window.innerWidth;
+});
+
+#endif
+
+void BackendConnection::toggleSecureProtocol(bool secure)
+{
+	toggleSecureProtocol(secure);
 }
 
 bool BackendConnection::isVrm() const

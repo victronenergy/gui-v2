@@ -168,6 +168,7 @@ Page {
 							}
 							// NOTE: this restarts the webserver when changed
 							securityProfile.dataItem.setValue(profile)
+							BackendConnection.toggleSecureProtocol(securityProfile.pendingProfile === VenusOS.Security_Profile_Secured)
 						}
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured

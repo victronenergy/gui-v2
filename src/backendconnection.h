@@ -114,6 +114,7 @@ public:
 	Q_INVOKABLE QString uidPrefix() const;
 
 	Q_INVOKABLE void logout();
+	Q_INVOKABLE void toggleSecureProtocol(bool secure);
 
 	// Move this to some mock data manager when available
 	Q_INVOKABLE void setMockValue(const QString &uid, const QVariant &value);
