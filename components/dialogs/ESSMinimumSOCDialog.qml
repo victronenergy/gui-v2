@@ -29,7 +29,7 @@ ModalDialog {
 			Label {
 				anchors.horizontalCenter: parent.horizontalCenter
 				font.pixelSize: Theme.font_size_h3
-				text: qsTrId("%1%").arg(root.minimumStateOfCharge)
+				text: "%1%".arg(root.minimumStateOfCharge)
 			}
 
 			Label {
