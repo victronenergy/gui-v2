@@ -9,8 +9,6 @@ import Victron.VenusOS
 ListModel {
 	id: root
 
-	signal phaseValueChanged(int phaseIndex, string propertyName, real propertyValue)
-
 	readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
 
 	property Instantiator _phaseObjects: Instantiator {
@@ -25,7 +23,6 @@ ListModel {
 				onClampedCurrentValueChanged: {
 					if (model.index >= 0 && model.index < root.count) {
 						setProperty(model.index, "current", clampedCurrentValue)
-						root.phaseValueChanged(model.index, "current", clampedCurrentValue)
 					}
 				}
 			}
@@ -39,7 +36,6 @@ ListModel {
 				onClampedPowerValueChanged: {
 					if (model.index >= 0 && model.index < root.count) {
 						setProperty(model.index, "power", clampedPowerValue)
-						root.phaseValueChanged(model.index, "power", clampedPowerValue)
 					}
 				}
 			}
