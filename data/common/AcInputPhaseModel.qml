@@ -10,6 +10,13 @@ ListModel {
 	id: root
 
 	readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
+	readonly property int totalPower: {
+		let sum = 0
+		for (let i = 0; i < count; ++i) {
+			sum += get(i).power
+		}
+		return sum
+	}
 
 	property Instantiator _phaseObjects: Instantiator {
 		model: null
