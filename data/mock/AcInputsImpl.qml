@@ -176,12 +176,6 @@ QtObject {
 				Global.mockDataSimulator.setMockValue(activePhasePath + "/Current", current)
 				Global.mockDataSimulator.setMockValue(activePhasePath + "/Power", power)
 			}
-
-			// For vebus/grid/genset services, forcibly update the total power
-			const inputServiceLoader = Global.acInputs.activeInput._acInputService
-			if (inputServiceLoader && inputServiceLoader.item && inputServiceLoader.hasTotalPower) {
-				inputServiceLoader.item._power.setValue(totalPower)
-			}
 		}
 	}
 

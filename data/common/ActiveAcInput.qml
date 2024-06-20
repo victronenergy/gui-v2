@@ -18,7 +18,7 @@ Device {
 	readonly property int source: !!inputInfo ? inputInfo.source : VenusOS.AcInputs_InputSource_NotAvailable
 	readonly property alias gensetStatusCode: _acInputService.gensetStatusCode
 
-	readonly property real power: _acInputService.hasTotalPower ? _acInputService.totalPower : _phases.totalPower
+	readonly property real power: _phases.totalPower
 	readonly property real current: phases.count === 1 ? _phases.firstPhaseCurrent : NaN // multi-phase systems don't have a total current
 	readonly property alias currentLimit: _acInputService.currentLimit
 	readonly property alias phases: _phases
@@ -27,23 +27,19 @@ Device {
 	readonly property AcInputPhaseModel _phases: AcInputPhaseModel {
 		id: _phases
 
-		property real totalPower: NaN
-		property real firstPhaseCurrent: NaN
+		property int totalPower
+		property real firstPhaseCurrent: count === 1 ? get(0).current : NaN
 
-		onPhaseValueChanged: function(phaseIndex, propertyName, propertyValue) {
-			if (propertyName === "power" && !root._acInputService.hasTotalPower) {
-				let total = NaN
-				for (let i = 0; i < phases.count; ++i) {
-					if (i === phaseIndex) {
-						total = Units.sumRealNumbers(total, propertyValue)
-					} else {
-						const phase = get(phaseIndex)
-						total = Units.sumRealNumbers(total, phase ? phase[propertyName] : NaN)
-					}
+		readonly property Timer _timer: Timer { // timer needed so the display doesn't update too frequently
+			interval: 1000
+			repeat: true
+			running: true
+			onTriggered: {
+				let sum = 0
+				for (let i = 0; i < _phases.count; ++i) {
+					sum += _phases.get(i).power || 0
 				}
-				totalPower = total
-			} else if (propertyName === "current" && count === 1) {
-				firstPhaseCurrent = propertyValue
+				_phases.totalPower = sum
 			}
 		}
 	}
