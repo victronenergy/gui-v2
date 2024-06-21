@@ -75,7 +75,6 @@ Flow {
 						: 0
 				dataObject: model
 				font.pixelSize: phaseLabel.font.pixelSize
-				unitVisible: root.widgetSize >= VenusOS.OverviewWidget_Size_M
 				valueColor: phaseDelegate.textColor
 				unitColor: valueColor == Theme.color_font_primary
 						   ? Theme.color_font_secondary

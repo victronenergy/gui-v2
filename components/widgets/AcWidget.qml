@@ -29,18 +29,24 @@ OverviewWidget {
 		active: root.phaseCount > 1
 		states: [
 			State {
-				name: "small"
-				when: root.size === VenusOS.OverviewWidget_Size_XS || root.size === VenusOS.OverviewWidget_Size_S
+				name: "extrasmall"
+				when: root.size === VenusOS.OverviewWidget_Size_XS
 				PropertyChanges {
 					target: root.quantityLabel
-					visible: !!quantityLabel.dataObject && extraContentLoader.status !== Loader.Ready
+					visible: !!quantityLabel.dataObject && extraContentLoader.status !== Loader.Ready // hide the total power
 					font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
 				}
 				PropertyChanges {
-					target: root
-					secondaryTitle: extraContentLoader.status === Loader.Ready
-									? "(%1)".arg(Units.defaultUnitString(Global.systemSettings.electricalQuantity))
-									: ""
+					target: extraContentLoader
+					anchors.bottomMargin: root.verticalMargin / 3
+				}
+			},
+			State {
+				name: "small"
+				when: root.size === VenusOS.OverviewWidget_Size_S
+				PropertyChanges {
+					target: root.quantityLabel
+					font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
 				}
 				PropertyChanges {
 					target: extraContentLoader
@@ -58,7 +64,7 @@ OverviewWidget {
 				}
 			},
 			State {
-				name: "medium-or-larger"
+				name: "large"
 				when: root.size === VenusOS.OverviewWidget_Size_L || root.size === VenusOS.OverviewWidget_Size_XL
 				PropertyChanges {
 					target: root.quantityLabel
