@@ -91,12 +91,9 @@ QtObject {
 				}
 			}
 
-			property VeQuickItem _productId: VeQuickItem {
-				uid: input.serviceUid + "/ProductId"
-				onValueChanged: {
-					if (value === 0xA3F0) {
-						initOrionXSValues()
-					}
+			onProductIdChanged: {
+				if (productId === 0xA3F0) {
+					initOrionXSValues()
 				}
 			}
 
@@ -142,6 +139,7 @@ QtObject {
 				serviceUid = "mock/com.victronenergy." + serviceType + ".ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_productName.setValue("DC device (%1)".arg(serviceType))
+				_productId.setValue(123)
 				setMockValue("/State", 4)
 			}
 		}

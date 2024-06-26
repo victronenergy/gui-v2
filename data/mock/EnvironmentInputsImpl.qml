@@ -62,6 +62,7 @@ Item {
 				serviceUid = "mock/com.victronenergy.temperature.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_productName.setValue("Generic Temperature Sensor")
+				_productId.setValue(123)
 				_status.setValue(VenusOS.EnvironmentInput_Status_Ok)
 			}
 

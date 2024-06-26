@@ -168,6 +168,7 @@ QtObject {
 				serviceUid = "mock/com.victronenergy.solarcharger.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_productName.setValue("SmartSolar Charger MPPT 100/50")
+				_productId.setValue(123)
 				_customName.setValue("My Solar Charger " + deviceInstanceNum)
 				_state.setValue(VenusOS.SolarCharger_State_ExternalControl)
 				_errorCode.setValue(0)

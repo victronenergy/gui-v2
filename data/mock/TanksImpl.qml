@@ -67,6 +67,7 @@ QtObject {
 				serviceUid = "mock/com.victronenergy.tank.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_productName.setValue("Generic Tank Input")
+				_productId.setValue(123)
 				_status.setValue(VenusOS.Tank_Status_Ok)
 			}
 

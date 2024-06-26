@@ -68,6 +68,7 @@ QtObject {
 				serviceUid = "mock/com.victronenergy." + serviceType + ".ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_productName.setValue("DC Load (%1)".arg(serviceType))
+				_productId.setValue(123)
 				setMockValue("/Mode", 4)
 				setMockValue("/State", 5)
 				setMockValue("/Error", 0)

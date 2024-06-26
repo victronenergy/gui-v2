@@ -67,6 +67,7 @@ Item {
 				serviceUid = "mock/com.victronenergy.acsystem.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_productName.setValue("RS 48/6000")
+				_productId.setValue(123)
 				_customName.setValue("AC System " + deviceInstanceNum)
 				acSystem.setMockValue("/Ac/NumberOfPhases", 3)
 				acSystem.setMockValue("/Ac/NumberOfAcInputs", 2)
