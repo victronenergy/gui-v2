@@ -43,7 +43,7 @@ ListNavigationItem {
 	//% "Unknown"
 	property string defaultSecondaryText: qsTrId("settings_radio_button_group_unknown")
 
-	signal optionClicked(index: int)
+	signal optionClicked(index: int, password: string)
 	signal aboutToPop()
 
 	secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
@@ -75,11 +75,12 @@ ListNavigationItem {
 				id: optionsListView
 
 				model: root.optionModel
+				currentIndex: root.currentIndex
 
 				delegate: ListRadioButton {
 					id: radioButton
 
-					function select() {
+					function select(password) {
 						if (root.updateOnClick) {
 							if (dataItem.uid.length > 0) {
 								dataItem.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
@@ -87,7 +88,7 @@ ListNavigationItem {
 								root.currentIndex = model.index
 							}
 						}
-						root.optionClicked(model.index)
+						root.optionClicked(model.index, password)
 
 						if (root.popDestination !== undefined) {
 							popTimer.restart()
@@ -105,11 +106,13 @@ ListNavigationItem {
 						  : model.fontFamily || Global.fontFamily
 
 					allowed: (userHasWriteAccess && enabled) || checked
-					checked: root.currentIndex === model.index
+					checked: optionsListView.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel
 					writeAccessLevel: root.writeAccessLevel
 					C.ButtonGroup.group: radioButtonGroup
 
+					bottomContent.z: model.index === optionsListView.currentIndex ? 1 : -1
+					bottomContentMargin: Theme.geometry_radioButton_bottomContentMargin
 					bottomContentChildren: Loader {
 						id: bottomContentLoader
 
@@ -119,35 +122,52 @@ ListNavigationItem {
 						readonly property string password: Array.isArray(root.optionModel)
 							  ? modelData.password || ""
 							  : model.password || ""
+						readonly property bool promptPassword: Array.isArray(root.optionModel)
+							  ? !!modelData.promptPassword
+							  : !!model.promptPassword
 
 						width: parent.width
-						sourceComponent: password ? passwordComponent : caption ? captionComponent : null
+						sourceComponent: (password.length > 0 || promptPassword) ? passwordComponent
+																				 : caption ? captionComponent
+																						   : null
 					}
 
 					Component {
 						id: passwordComponent
 
 						Column {
-							function showPasswordInput() {
-								passwordField.allowed = true
+							function focusPasswordInput() {
 								passwordField.forceActiveFocus()
 							}
 
 							width: parent.width
 
+							ListLabel {
+								topPadding: 0
+								bottomPadding: 0
+								color: Theme.color_font_secondary
+								text: bottomContentLoader.caption
+								font.pixelSize: Theme.font_size_caption
+								allowed: bottomContentLoader.caption.length > 0
+							}
+
 							ListTextField {
 								id: passwordField
 
 								//% "Enter password"
-								text: qsTrId("settings_radio_button_enter_password")
+								placeholderText: qsTrId("settings_radio_button_enter_password")
+								text: ""
 								flickable: optionsListView
 								primaryLabel.color: Theme.color_font_secondary
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
-								allowed: false
+								backgroundRect.color: "transparent"
+								Component.onCompleted: allowed = model.index !== root.currentIndex
 
 								onAccepted: function(text) {
-									if (text === bottomContentLoader.password) {
+									if (bottomContentLoader.promptPassword) {
+										radioButton.select(text)
+									} else if (text === bottomContentLoader.password) {
 										radioButton.select()
 									} else {
 										//% "Incorrect password"
@@ -158,18 +178,8 @@ ListNavigationItem {
 								onHasActiveFocusChanged: {
 									if (!hasActiveFocus) {
 										textField.text = ""
-										visible = false
 									}
 								}
-							}
-
-							ListLabel {
-								topPadding: 0
-								bottomPadding: 0
-								color: Theme.color_font_secondary
-								text: bottomContentLoader.caption
-								font.pixelSize: Theme.font_size_caption
-								allowed: bottomContentLoader.caption.length > 0
 							}
 						}
 					}
@@ -187,8 +197,12 @@ ListNavigationItem {
 					}
 
 					onClicked: {
-						if (bottomContentLoader.sourceComponent === passwordComponent) {
-							bottomContentLoader.item.showPasswordInput()
+						if (root.currentIndex === model.index) {
+							optionsListView.currentIndex = model.index
+							popTimer.restart()
+						} else if (bottomContentLoader.sourceComponent === passwordComponent) {
+							optionsListView.currentIndex = model.index
+							bottomContentLoader.item.focusPasswordInput()
 						} else {
 							radioButton.select()
 						}

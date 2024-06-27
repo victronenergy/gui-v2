@@ -71,8 +71,8 @@ QtObject {
 
 	Component.onCompleted: {
 		// Other system settings
-		setMockSettingValue("System/VncInternet", 1)
 		setMockSettingValue("System/VncLocal", 1)
+		setMockSettingValue("System/SecurityProfile", VenusOS.Security_Profile_Secured)
 		setMockSettingValue("SystemSetup/AcInput1", 2)
 		setMockSettingValue("SystemSetup/AcInput2", 3)
 		setMockSettingValue("Gui/DemoMode", 1)

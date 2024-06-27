@@ -372,6 +372,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/ListGeneratorError.qml
     components/settings/ListRelayState.qml
     components/settings/ListResetHistoryLabel.qml
+    components/settings/ListSecurityWarningSwitch.qml
     components/settings/MountStateListButton.qml
     components/settings/PvInverterPositionRadioButtonGroup.qml
     components/settings/SettingsRangeSlider.qml

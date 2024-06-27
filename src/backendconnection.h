@@ -32,6 +32,7 @@ class BackendConnection : public QObject
 	Q_PROPERTY(QString shard READ shard WRITE setShard NOTIFY shardChanged FINAL)
 	Q_PROPERTY(QString token READ token WRITE setToken NOTIFY tokenChanged FINAL)
 	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged FINAL)
+	Q_PROPERTY(bool vrm READ isVrm WRITE setVrm NOTIFY vrmChanged FINAL)
 	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged FINAL)
 
 public:
@@ -101,6 +102,9 @@ public:
 	void loginVrmApi();
 	void requestShardFromVrmApi();
 
+	bool isVrm() const;
+	void setVrm(bool v);
+
 	bool isApplicationVisible() const;
 	void setApplicationVisible(bool v);
 
@@ -108,6 +112,8 @@ public:
 	Q_INVOKABLE QString serviceTypeFromUid(const QString &uid) const;
 	Q_INVOKABLE QString serviceUidFromName(const QString &serviceName, int deviceInstance) const;
 	Q_INVOKABLE QString uidPrefix() const;
+
+	Q_INVOKABLE void logout();
 
 	// Move this to some mock data manager when available
 	Q_INVOKABLE void setMockValue(const QString &uid, const QVariant &value);
@@ -123,6 +129,7 @@ Q_SIGNALS:
 	void shardChanged();
 	void tokenChanged();
 	void idUserChanged();
+	void vrmChanged();
 	void applicationVisibleChanged();
 
 private:
@@ -147,6 +154,7 @@ private:
 	QString m_token;
 	int m_idUser = -1;
 
+	bool m_vrm = false;
 	bool m_applicationVisible = true;
 
 	State m_state = BackendConnection::State::Idle;

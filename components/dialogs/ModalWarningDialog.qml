@@ -12,6 +12,7 @@ ModalDialog {
 
 	property string description
 	property alias icon: alarmIcon
+	property alias descriptionLabel: consequencesLabel
 
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
 	header: null
