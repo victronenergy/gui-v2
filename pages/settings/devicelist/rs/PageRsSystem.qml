@@ -16,38 +16,19 @@ Page {
 		id: numberOfPhases
 		uid: root.bindPrefix + "/Ac/NumberOfPhases"
 	}
-	VeQuickItem {
-		id: numberOfAcInputs
-		uid: root.bindPrefix + "/Ac/NumberOfAcInputs"
-	}
-	VeQuickItem {
-		id: _hasPassthroughSupport
-		uid: root.bindPrefix + "/Capabilities/HasAcPassthroughSupport"
-	}
 
 	GradientListView {
 		model: ObjectModel {
 			ListButton {
 				id: modeButton
 				text: CommonWords.mode
-				secondaryText: Global.inverterChargers.inverterChargerModeToText(modeItem.value)
+				secondaryText: modeDetails.modeText
 				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: Global.dialogLayer.open(modeDialogComponent)
+				onClicked: modeDetails.openDialog()
 
-				VeQuickItem {
-					id: modeItem
-					uid: root.bindPrefix + "/Mode"
-				}
-
-				Component {
-					id: modeDialogComponent
-
-					InverterChargerModeDialog {
-						isMulti: root.multiPhase
-						hasPassthroughSupport: _hasPassthroughSupport.value === 1
-						mode: modeItem.value
-						onAccepted: modeItem.setValue(mode)
-					}
+				RsSystemModeDetails {
+					id: modeDetails
+					bindPrefix: root.bindPrefix
 				}
 			}
 
@@ -58,38 +39,14 @@ Page {
 			}
 
 			ListButton {
-				text: numberOfAcInputs.isValid && numberOfAcInputs.value > 1
-					  ? "%1 - %2".arg(CommonWords.input_current_limit).arg(CommonWords.acInput(0))
-					  : CommonWords.input_current_limit
-				secondaryText: currentLimit.isValid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, currentLimit.value) : "--"
+				text: currentLimitDetails.title
+				secondaryText: currentLimitDetails.currentLimitText
 				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: {
-					if (currentLimitIsAdjustable.isValid && currentLimitIsAdjustable.value) {
-						Global.dialogLayer.open(currentLimitDialogComponent, { value: currentLimit.value })
-					} else {
-						//% "This current limit is configured as fixed, not user changeable."
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_rs_current_limit_not_adjustable"), 5000)
-					}
-				}
+				onClicked: currentLimitDetails.openDialog()
 
-				VeQuickItem {
-					id: currentLimitIsAdjustable
-					uid: root.bindPrefix + "/Ac/In/1/CurrentLimitIsAdjustable"
-				}
-
-				VeQuickItem {
-					id: currentLimit
-					uid: root.bindPrefix + "/Ac/In/1/CurrentLimit"
-				}
-
-				Component {
-					id: currentLimitDialogComponent
-
-					CurrentLimitDialog {
-						title: CommonWords.input_current_limit
-						secondaryTitle: numberOfAcInputs.isValid && numberOfAcInputs.value > 1 ? CommonWords.acInput(0) : ""
-						onAccepted: currentLimit.setValue(value)
-					}
+				RsSystemCurrentLimitDetails {
+					id: currentLimitDetails
+					bindPrefix: root.bindPrefix
 				}
 			}
 
