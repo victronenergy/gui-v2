@@ -60,7 +60,7 @@ ControlCard {
 					visible: label.text !== ""
 					value: modelData.currentLimit
 					label.text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
-					button.text: "%1 %2".arg(value).arg(Units.defaultUnitString(VenusOS.Units_Amp))
+					button.text: isNaN(value) ? "--" : Units.getCombinedDisplayText(VenusOS.Units_Amp, value)
 					onClicked: {
 						if (!modelData.currentLimitAdjustable) {
 							if (dmc.isValid) {
