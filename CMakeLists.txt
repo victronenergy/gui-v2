@@ -263,6 +263,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
     components/RadioButtonControlValue.qml
+    components/RsSystemCurrentLimitDetails.qml
+    components/RsSystemModeDetails.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ShinyProgressArc.qml
@@ -482,6 +484,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/controlcards/GeneratorCard.qml
     pages/controlcards/InverterCard.qml
     pages/controlcards/InverterChargerCard.qml
+    pages/controlcards/RsSystemCard.qml
     pages/controlcards/SwitchesCard.qml
     pages/evcs/EvChargerListPage.qml
     pages/evcs/EvChargerPage.qml
