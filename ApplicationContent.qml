@@ -15,6 +15,7 @@ Item {
 
 	readonly property bool _goToNotifications: !!pageManager.navBar && !!Global.notifications
 			&& Global.notifications.alarm
+			&& !!pageManager.navBar.model && pageManager.navBar.model.count > 0 // if alarm is detected at startup, wait until nav bar is ready
 	on_GoToNotificationsChanged: {
 		if (_goToNotifications) {
 			pageManager.popAllPages()
