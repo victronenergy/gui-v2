@@ -23,7 +23,6 @@ Device {
 		numberOfAcInputs: _numberOfAcInputs.value || 0
 	}
 
-	readonly property int productId: _productId.value === undefined ? -1 : _productId.value
 	readonly property int productType: _productUpperByte === 0x19 || _productUpperByte === 0x26
 			? VenusOS.VeBusDevice_ProductType_EuProduct
 			: (_productUpperByte === 0x20 || _productUpperByte === 0x27 ? VenusOS.VeBusDevice_ProductType_UsProduct : -1)
@@ -41,10 +40,6 @@ Device {
 
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: inverterCharger.serviceUid + "/State"
-	}
-
-	readonly property VeQuickItem _productId: VeQuickItem {
-		uid: inverterCharger.serviceUid + "/ProductId"
 	}
 
 	readonly property VeQuickItem _nominalInverterPower: VeQuickItem {

@@ -86,10 +86,6 @@ QtObject {
 			required property var modelData
 
 			readonly property Device device: Device {
-				readonly property VeQuickItem _productId: VeQuickItem {
-					uid: device.serviceUid ? device.serviceUid + "/ProductId" : ""
-				}
-
 				Component.onCompleted: {
 					serviceUid = "mock/" + input.modelData["serviceName"]
 					_deviceInstance.setValue(input.index)

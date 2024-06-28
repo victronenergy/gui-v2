@@ -18,19 +18,30 @@ class BaseDevice : public QObject
 {
 	Q_OBJECT
 	QML_ELEMENT
+	Q_PROPERTY(bool valid READ isValid NOTIFY validChanged)
 	Q_PROPERTY(QString serviceUid READ serviceUid WRITE setServiceUid NOTIFY serviceUidChanged)
 	Q_PROPERTY(int deviceInstance READ deviceInstance WRITE setDeviceInstance NOTIFY deviceInstanceChanged)
+	Q_PROPERTY(int productId READ productId WRITE setProductId NOTIFY productIdChanged)
+	Q_PROPERTY(QString productName READ productName WRITE setProductName NOTIFY productNameChanged)
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 
 public:
 	explicit BaseDevice(QObject *parent = nullptr);
 
+	bool isValid() const;
+
 	QString serviceUid() const;
 	void setServiceUid(const QString &serviceUid);
 
 	int deviceInstance() const;
 	void setDeviceInstance(int deviceInstance);
+
+	int productId() const;
+	void setProductId(int productId);
+
+	QString productName() const;
+	void setProductName(const QString &productName);
 
 	QString name() const;
 	void setName(const QString &name);
@@ -39,8 +50,11 @@ public:
 	void setDescription(const QString &description);
 
 Q_SIGNALS:
+	void validChanged();
 	void serviceUidChanged();
 	void deviceInstanceChanged();
+	void productNameChanged();
+	void productIdChanged();
 	void nameChanged();
 	void descriptionChanged();
 
@@ -48,7 +62,9 @@ private:
 	QString m_serviceUid;
 	QString m_name;
 	QString m_description;
+	QString m_productName;
 	int m_deviceInstance = -1;
+	int m_productId = 0;
 };
 
 

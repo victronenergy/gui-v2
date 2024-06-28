@@ -44,12 +44,11 @@ Device {
 		Component.onCompleted: Qt.callLater(tank._updateMeasurements)
 	}
 
-	valid: deviceInstance >= 0 && type >= 0
 	onValidChanged: Qt.callLater(tank._updateModel)
 	onTypeChanged: Qt.callLater(tank._updateModel)
 
 	function _updateModel() {
-		if (valid) {
+		if (valid && type >= 0) {
 			if (_tankModel && _tankModel.type !== type) {
 				_tankModel.removeDevice(tank.serviceUid)
 			}
