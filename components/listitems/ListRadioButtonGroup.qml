@@ -80,14 +80,15 @@ ListNavigationItem {
 					id: radioButton
 
 					function select() {
-						if (root.updateOnClick) {
-							if (dataItem.uid.length > 0) {
-								dataItem.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
-							} else {
-								root.currentIndex = model.index
+						if (!checked) {
+							if (root.updateOnClick) {
+								if (dataItem.uid.length > 0) {
+									dataItem.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
+								}
 							}
+
+							root.optionClicked(model.index)
 						}
-						root.optionClicked(model.index)
 
 						if (root.popDestination !== undefined) {
 							popTimer.restart()

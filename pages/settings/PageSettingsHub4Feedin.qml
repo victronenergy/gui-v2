@@ -46,11 +46,12 @@ Page {
 				text: qsTrId("settings_ess_limit_system_feed_in")
 				allowed: defaultAllowed && (acFeedin.checked || feedInDc.checked)
 				checked: maxFeedInPower.value >= 0
-				onCheckedChanged: {
-					if (checked && maxFeedInPower.value < 0)
+				onClicked: {
+					if (maxFeedInPower.value < 0) {
 						maxFeedInPower.dataItem.setValue(1000)
-					else if (!checked && maxFeedInPower.value >= 0)
+					} else if (maxFeedInPower.value >= 0) {
 						maxFeedInPower.dataItem.setValue(-1)
+					}
 				}
 			}
 

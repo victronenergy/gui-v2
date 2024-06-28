@@ -12,6 +12,7 @@ import Victron.VenusOS
 CT.Switch {
 	id: root
 
+	checkable: false
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
 		implicitContentWidth + leftPadding + rightPadding)
