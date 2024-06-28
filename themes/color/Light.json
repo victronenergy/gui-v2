@@ -6,7 +6,6 @@
     "color_humidity2": "#97B974",
     "color_humidity3": "#DBB78E",
 
-    "color_dimBlue": "#BBCEE0",
     "color_dimOrange": "#F0D5B4",
     "color_dimRed": "#F0C3BF",
     "color_dimGreen": "#9BCB7E",
@@ -34,6 +33,8 @@
     "color_background_secondary": "color_gray9",
     "color_background_disabled": "color_gray6",
 
+    "color_button": "color_blue",
+    "color_button_down": "color_lightBlue",
     "color_button_down_text": "color_white",
     "color_button_icon": "color_gray5",
     "color_button_icon_down": "color_gray4",
