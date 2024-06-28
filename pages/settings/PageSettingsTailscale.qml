@@ -192,6 +192,7 @@ Page {
 				showAccessLevel: VenusOS.User_AccessType_Installer
 			}
 
+			/*
 			ListSwitch {
                 // --advertise-exit-node
                 // NOTE: disable when Exit Node is enabled
@@ -211,6 +212,7 @@ Page {
 				enabled: ! isEnabled
 				showAccessLevel: VenusOS.User_AccessType_Installer
 			}
+			*/
 
 			ListTextField {
                 // --advertise-routes=<ip|subnet>
@@ -225,13 +227,14 @@ Page {
 					color: Theme.color_font_secondary
 					//% ""
 					// text: qsTrId("settings_tailscale_")
-                    text: "Expose physical subnet routes to your entire Tailscale network.\n\n<b>NOTE:</b> If you haven't enabled \"autoApprovers\" in the Tailscale admin console, then you need to manually approve the route in the Tailscale admin console. See https://tailscale.com/kb/1019/subnets -> Enable subnet routes from the admin console"
+                    text: "Expose physical subnet routes to your entire Tailscale network.\n\nNOTE: If you haven't enabled \"autoApprovers\" in the Tailscale admin console, then you need to manually approve the route in the Tailscale admin console. See https://tailscale.com/kb/1019/subnets -> Enable subnet routes from the admin console"
 				}
 
 				enabled: ! isEnabled
 				showAccessLevel: VenusOS.User_AccessType_Installer
 			}
 
+			/*
 			ListTextField {
                 // --exit-node=<ip|name>
                 // --exit-node-allow-lan-access
@@ -253,6 +256,7 @@ Page {
 				enabled: ! isEnabled
 				showAccessLevel: VenusOS.User_AccessType_Installer
 			}
+			*/
 
 			ListTextField {
                 // --hostname=<name>
