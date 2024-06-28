@@ -91,12 +91,9 @@ QtObject {
 				}
 			}
 
-			property VeQuickItem _productId: VeQuickItem {
-				uid: input.serviceUid + "/ProductId"
-				onValueChanged: {
-					if (value === 0xA3F0) {
-						initOrionXSValues()
-					}
+			onProductIdChanged: {
+				if (productId === 0xA3F0) {
+					initOrionXSValues()
 				}
 			}
 
