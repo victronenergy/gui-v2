@@ -148,7 +148,7 @@ ListNavigationItem {
 
 						//% "SOC limit"
 						text: qsTrId("cgwacs_battery_schedule_soc_limit")
-						allowed: defaultAllowed
+						allowed: defaultAllowed && itemEnabled.checked
 						dataItem.uid: root._scheduleSource + "/Soc"
 						suffix: "%"
 						from: 5
