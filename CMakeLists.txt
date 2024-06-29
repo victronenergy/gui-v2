@@ -361,7 +361,7 @@ set (VENUS_QML_MODULE_SOURCES
 
     components/settings/ActiveAcInputTextItem.qml
     components/settings/AlarmLevelRadioButtonGroup.qml
-    components/settings/CGwacsBatteryScheduleNavigationItem.qml
+    components/settings/ChargeScheduleItem.qml
     components/settings/FirmwareCheckListButton.qml
     components/settings/InverterAcOutQuantityGroup.qml
     components/settings/Led.qml

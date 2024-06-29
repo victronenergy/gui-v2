@@ -268,7 +268,7 @@ Page {
 				Page {
 					GradientListView {
 						model: 5
-						delegate: CGwacsBatteryScheduleNavigationItem {
+						delegate: ChargeScheduleItem {
 							scheduleNumber: modelData
 						}
 					}
