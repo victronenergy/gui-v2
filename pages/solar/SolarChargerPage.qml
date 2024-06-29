@@ -30,7 +30,7 @@ Page {
 						},
 						{
 							title: CommonWords.yield_today,
-							value: root.solarCharger.dailyHistory(0).yieldKwh || 0,
+							value: solarCharger.dailyHistory(0)?.yieldKwh ?? NaN,
 							unit: VenusOS.Units_Energy_KiloWattHour
 						},
 						{
