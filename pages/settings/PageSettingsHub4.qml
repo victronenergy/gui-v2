@@ -252,14 +252,24 @@ Page {
 		}
 
 		ListNavigationItem {
-			//% "Scheduled charging"
-			text: qsTrId("settings_ess_scheduled_charging")
+			//% "Scheduled charge levels"
+			text: qsTrId("settings_ess_scheduled_charge_levels")
+			secondaryText: scheduleSoc.valid
+					  //% "Active (%1)"
+					? qsTrId("settings_ess_active").arg(scheduleSoc.text)
+					  //% "Inactive"
+					: qsTrId("settings_ess_inactive")
 			allowed: defaultAllowed
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 			onClicked: {
 				Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
+			}
+
+			VeQuickItem {
+				id: scheduleSoc
+				uid: Global.system.serviceUid + "/Control/ScheduledSoc"
 			}
 
 			Component {
