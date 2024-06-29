@@ -155,9 +155,9 @@ QtObject {
 		case VenusOS.System_State_Recharge:
 			//% "Recharge"
 			return qsTrId("inverters_state_recharge")
-		case VenusOS.System_State_ScheduledRecharge:
-			//% "Scheduled recharge"
-			return qsTrId("inverters_state_scheduledrecharge")
+		case VenusOS.System_State_ScheduledCharge:
+			//% "Scheduled"
+			return qsTrId("inverters_state_scheduledcharge")
 		case VenusOS.System_State_DynamicESS:
 			//% "Dynamic ESS"
 			return qsTrId("inverters_state_dynamic_ess")
