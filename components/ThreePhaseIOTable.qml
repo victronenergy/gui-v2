@@ -17,6 +17,7 @@ Row {
 	property int voltPrecision: Units.defaultUnitPrecision(VenusOS.Units_Volt_AC)
 
 	spacing: Theme.geometry_vebusDeviceListPage_quantityTable_row_spacing
+	bottomPadding: Theme.geometry_gradientList_spacing
 
 	ThreePhaseQuantityTable {
 		id: inputTable
