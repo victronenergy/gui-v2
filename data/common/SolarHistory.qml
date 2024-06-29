@@ -61,7 +61,7 @@ QtObject {
 			id: overallDailyHistoryDelegate
 
 			// If there is more than one tracker, find the daily histories for each tracker, under
-			// com.victronenergy.root.tty0/History/Daily/<day>/Pv/<pv-index>
+			// com.victronenergy.solarcharger.tty0/History/Daily/<day>/Pv/<pv-index>
 			readonly property Instantiator trackerHistoryObjects: Instantiator {
 				model: root.trackerCount > 1 ? root.trackerCount : null
 				delegate: SolarTrackerDailyHistory {
