@@ -58,12 +58,12 @@ Page {
 
 						VeQuickItem {
 							id: dcVoltage
-							uid: root.bindPrefix + "/Dc/%1/Voltage".arg(model.index + 1)
+							uid: root.bindPrefix + "/Dc/%1/Voltage".arg(model.index)
 						}
 
 						VeQuickItem {
 							id: dcCurrent
-							uid: root.bindPrefix + "/Dc/%1/Current".arg(model.index + 1)
+							uid: root.bindPrefix + "/Dc/%1/Current".arg(model.index)
 						}
 					}
 				}
