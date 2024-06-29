@@ -78,7 +78,9 @@ Page {
 							text: {
 								const inputInfo = Global.acInputs["input" + (index + 1) + "Info"]
 								if (inputInfo.source === VenusOS.AcInputs_InputSource_NotAvailable) {
-									return CommonWords.acInput(index)
+									//: %1 = 'AC input 1' or 'AC input 2'
+									//% "%1 (not available)"
+									return qsTrId("settings_minmax_ac_in_not_available").arg(CommonWords.acInput(index))
 								}
 								//: %1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)
 								//% "%1 (%2)"
