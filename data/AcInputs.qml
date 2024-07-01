@@ -50,12 +50,6 @@ QtObject {
 		}
 	}
 
-	function clampMeasurement(value) {
-		// If feed-in to grid is disabled, any values below zero are just noise; so in that case,
-		// user zero as the minimum value.
-		return Global.systemSettings.essFeedbackToGridEnabled ? value : Math.max(0, value)
-	}
-
 	function sourceValid(source) {
 		return source !== VenusOS.AcInputs_InputSource_NotAvailable && source !== VenusOS.AcInputs_InputSource_Inverting
 	}
