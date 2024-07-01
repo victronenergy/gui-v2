@@ -93,7 +93,7 @@ Page {
 		else
 			returnValue =  "Unknown state: " + connectState
 
-		return ( qsTr ( returnValue + ( connectState != 6 ? errorMessage : "" ) ) )
+		return ( qsTr ( returnValue + ( ! isConnected && connectState != 6 ? errorMessage : "" ) ) )
 	}
 
 	GradientListView {
@@ -227,7 +227,7 @@ Page {
 					color: Theme.color_font_secondary
 					//% ""
 					// text: qsTrId("settings_tailscale_")
-                    text: "Expose physical subnet routes to your entire Tailscale network.\n\nNOTE: If you haven't enabled \"autoApprovers\" in the Tailscale admin console, then you need to manually approve the route in the Tailscale admin console. See https://tailscale.com/kb/1019/subnets -> Enable subnet routes from the admin console"
+                    text: "Expose physical subnet routes to your entire Tailscale network. Separate multiple IP/subnets by comma.\n\nNOTE: If you haven't enabled \"autoApprovers\" in the Tailscale admin console, then you need to manually approve the route in the Tailscale admin console. See https://tailscale.com/kb/1019/subnets -> Enable subnet routes from the admin console"
 				}
 
 				enabled: ! isEnabled
