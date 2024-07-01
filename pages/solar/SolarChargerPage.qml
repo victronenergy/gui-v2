@@ -175,6 +175,7 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.history
+				allowed: root.solarCharger.history.valid
 				onClicked: {
 					//: Solar charger historic data information. %1 = charger name
 					//% "%1 History"
