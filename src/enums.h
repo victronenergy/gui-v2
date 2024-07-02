@@ -343,6 +343,14 @@ public:
 	};
 	Q_ENUM(System_State)
 
+	enum System_HubSetting {
+		System_HubSetting_Hub_1 = 1,
+		System_HubSetting_Hub_2,
+		System_HubSetting_Hub_3,
+		System_HubSetting_Ess
+	};
+	Q_ENUM(System_HubSetting)
+
 	enum BriefView_Unit {
 		BriefView_Unit_None,
 		BriefView_Unit_Absolute,

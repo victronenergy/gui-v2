@@ -49,7 +49,6 @@ Item {
 
 			readonly property bool feedingToGrid: root.inputMode
 					&& (model.power || 0) < 0
-					&& Global.systemSettings.essFeedbackToGridEnabled
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: root.height
