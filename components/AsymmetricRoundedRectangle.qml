@@ -17,6 +17,10 @@ Item {
 	property alias radius: roundedRect.radius
 	property alias border: roundedRect.border
 
+	// ensure that the entire texture is faded equally during animations
+	// otherwise the clip messes with this on WASM platform.
+	layer.enabled: true
+
 	// we have to draw each element separately as any of the colors may have transparency...
 	// the order of declaration matters, because any of the colors may be fully opaque...
 
@@ -39,10 +43,10 @@ Item {
 		id: clipRect
 		anchors {
 			fill: parent
-			leftMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right ? root.width - root.radius : 0
-			rightMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left ? root.width - root.radius : 0
-			topMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Bottom ? root.height - root.radius : 0
-			bottomMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Top ? root.height - root.radius : 0
+			leftMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right ? root.width - root.radius - 1 : 0
+			rightMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left ? root.width - root.radius - 1 : 0
+			topMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Bottom ? root.height - root.radius - 1 : 0
+			bottomMargin: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Top ? root.height - root.radius - 1 : 0
 		}
 
 		visible: root.roundedSide !== VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
