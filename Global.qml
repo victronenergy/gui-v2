@@ -70,7 +70,9 @@ QtObject {
 	signal keyPressed(var event)
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
-		notificationLayer.showToastNotification(category, text, autoCloseInterval)
+		if (!!notificationLayer) {
+			notificationLayer.showToastNotification(category, text, autoCloseInterval)
+		}
 	}
 
 	function deviceModelsForClass(deviceClass) {

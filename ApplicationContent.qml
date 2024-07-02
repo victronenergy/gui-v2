@@ -60,9 +60,30 @@ Item {
 
 	MouseArea {
 		id: idleModeMouseArea
+
+		property VeQuickItem touchEnabled: VeQuickItem {
+			uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/TouchEnabled"
+			onValueChanged: {
+				Global.showToastNotification(VenusOS.Notification_Info,
+											 (value ?
+												 //% "Touch input on"
+												 qsTrId("application_content_touch_input_on") :
+												 //% "Touch input off"
+												 qsTrId("application_content_touch_input_off")),
+											 3000)
+			}
+		}
+
 		anchors.fill: parent
 
 		onPressed: function(mouse) {
+			if (Global.isGxDevice && !touchEnabled.value) {
+				//% "Touch input disabled"
+				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("application_content_touch_input_disabled"), 1000)
+				mouse.accepted = true
+				return
+			}
+
 			// block touch during navigation bar fadeout
 			mouse.accepted = mainView.navBarAnimatingOut
 			if (pageManager.idleModeTimer.running) {
