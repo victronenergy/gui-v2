@@ -6,8 +6,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+QtObject {
 	id: root
+
+	property int mockDeviceCount
 
 	function populate() {
 		const inputCount = (Math.random() * 3) + 1
@@ -16,17 +18,20 @@ Item {
 				type: Math.random() * VenusOS.DigitalInput_Type_Generator,
 				state: Math.random() * VenusOS.DigitalInput_State_Stopped
 			})
-			Global.digitalInputs.model.addDevice(inputObj)
 		}
 	}
 
 	property Component inputComponent: Component {
-		MockDevice {
-			property int type
-			property int state
+		DigitalInput {
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
 
-			serviceUid: "mock/com.victronenergy.digitalinput.ttyUSB" + deviceInstance
-			name: "DigitalInput" + deviceInstance
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockDeviceCount++
+				serviceUid = "mock/com.victronenergy.digitalinput.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_productName.setValue("Digital input %1".arg(deviceInstanceNum))
+			}
 		}
 	}
 

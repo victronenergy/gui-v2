@@ -6,19 +6,26 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+QtObject {
 	id: root
 
+	property int mockDeviceCount
+
 	function populate() {
-		Global.pulseMeters.model.addDevice(pulseMeterComponent.createObject(root))
+		pulseMeterComponent.createObject(root)
 	}
 
 	property Component pulseMeterComponent: Component {
-		MockDevice {
-			property real aggregate: 101
+		PulseMeter {
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
 
-			serviceUid: "mock/com.victronenergy.pulsemeter.ttyUSB" + deviceInstance
-			name: "PulseMeter" + deviceInstance
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockDeviceCount++
+				serviceUid = "mock/com.victronenergy.pulsemeter.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_productName.setValue("PulseMeter %1".arg(deviceInstanceNum))
+			}
 		}
 	}
 

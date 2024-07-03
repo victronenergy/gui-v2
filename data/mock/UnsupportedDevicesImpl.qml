@@ -6,17 +6,26 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+QtObject {
 	id: root
 
+	property int mockDeviceCount
+
 	function populate() {
-		Global.unsupportedDevices.model.addDevice(unsupportedComponent.createObject(root))
+		unsupportedComponent.createObject(root)
 	}
 
 	property Component unsupportedComponent: Component {
-		MockDevice {
-			serviceUid: "mock/com.victronenergy.unsupported.ttyUSB" + deviceInstance
-			name: "Unsupported" + deviceInstance
+		UnsupportedDevice {
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
+
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockDeviceCount++
+				serviceUid = "mock/com.victronenergy.unsupported.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_productName.setValue("Unsupported %1".arg(deviceInstanceNum))
+			}
 		}
 	}
 

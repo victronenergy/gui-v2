@@ -6,19 +6,26 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+QtObject {
 	id: root
 
+	property int mockDeviceCount
+
 	function populate() {
-		Global.motorDrives.model.addDevice(motorDriveComponent.createObject(root))
+		motorDriveComponent.createObject(root)
 	}
 
 	property Component motorDriveComponent: Component {
-		MockDevice {
-			property real motorRpm: 9000
+		MotorDrive {
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
 
-			serviceUid: "mock/com.victronenergy.motordrive.ttyUSB" + deviceInstance
-			name: "MotorDrive" + deviceInstance
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockDeviceCount++
+				serviceUid = "mock/com.victronenergy.motordrive.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_productName.setValue("Meteo %1".arg(deviceInstanceNum))
+			}
 		}
 	}
 
