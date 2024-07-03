@@ -46,6 +46,7 @@ Item {
 				serviceUid = "mock/com.victronenergy.charger.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_customName.setValue("AC Charger " + deviceInstanceNum)
+				_productName.setValue("Skylla-i")
 				charger.setMockValue("/Mode", 1)
 				charger.setMockValue("/State", Math.floor(Math.random() * VenusOS.System_State_FaultCondition))
 				charger.setMockValue("/Ac/In/CurrentLimit", Math.random() * 30)
