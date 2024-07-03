@@ -27,21 +27,6 @@ Device {
 	readonly property AcInputPhaseModel _phases: AcInputPhaseModel {
 		id: _phases
 
-		property int totalPower
-		property real firstPhaseCurrent: count === 1 ? get(0).current : NaN
-
-		readonly property Timer _timer: Timer { // timer needed so the display doesn't update too frequently
-			interval: 1000
-			repeat: true
-			running: true
-			onTriggered: {
-				let sum = 0
-				for (let i = 0; i < _phases.count; ++i) {
-					sum += _phases.get(i).power || 0
-				}
-				_phases.totalPower = sum
-			}
-		}
 	}
 
 	// Data from the input-specific service, e.g. com.victronenergy.vebus for a VE.Bus input,

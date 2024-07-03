@@ -9,7 +9,21 @@ import Victron.VenusOS
 ListModel {
 	id: root
 
-	readonly property bool _feedbackEnabled: Global.systemSettings.essFeedbackToGridEnabled
+	property int totalPower
+	property real firstPhaseCurrent: count === 1 ? get(0).current : NaN
+
+	readonly property Timer _timer: Timer { // timer needed so the display doesn't update too frequently
+		interval: 1000
+		repeat: true
+		running: true
+		onTriggered: {
+			let sum = 0
+			for (let i = 0; i < _phases.count; ++i) {
+				sum += _phases.get(i).power || 0
+			}
+			root.totalPower  = sum
+		}
+	}
 
 	property Instantiator _phaseObjects: Instantiator {
 		model: null
