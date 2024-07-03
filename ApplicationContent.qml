@@ -61,7 +61,8 @@ Item {
 	MouseArea {
 		id: idleModeMouseArea
 
-		property VeQuickItem touchEnabled: VeQuickItem {
+		VeQuickItem {
+			id: touchEnabled
 			uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/TouchEnabled"
 			onValueChanged: {
 				Global.showToastNotification(VenusOS.Notification_Info,
