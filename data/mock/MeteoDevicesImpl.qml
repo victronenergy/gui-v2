@@ -6,19 +6,26 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+QtObject {
 	id: root
 
+	property int mockDeviceCount
+
 	function populate() {
-		Global.meteoDevices.model.addDevice(meteoComponent.createObject(root))
+		meteoComponent.createObject(root)
 	}
 
 	property Component meteoComponent: Component {
-		MockDevice {
-			property real irradiance: Math.random() * 500
+		MeteoDevice {
+			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
+			serviceUid: "mock/com.victronenergy.dummy"
 
-			serviceUid: "mock/com.victronenergy.meteo.ttyUSB" + deviceInstance
-			name: "meteo" + deviceInstance
+			Component.onCompleted: {
+				const deviceInstanceNum = root.mockDeviceCount++
+				serviceUid = "mock/com.victronenergy.meteo.ttyUSB" + deviceInstanceNum
+				_deviceInstance.setValue(deviceInstanceNum)
+				_productName.setValue("Meteo %1".arg(deviceInstanceNum))
+			}
 		}
 	}
 
