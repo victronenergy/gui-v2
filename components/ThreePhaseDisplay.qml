@@ -34,9 +34,7 @@ Flow {
 		delegate: Item {
 			id: phaseDelegate
 
-			readonly property bool feedingToGrid: Global.systemSettings.essFeedbackToGridEnabled
-					&& root.inputMode
-					&& (model.power || 0) < 0
+			readonly property bool feedingToGrid: root.inputMode && (model.power || 0) < 0
 			readonly property int valueStatus: feedingToGrid ? Theme.Ok
 					: root.phaseModelProperty ? Theme.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
 					: Theme.Ok
