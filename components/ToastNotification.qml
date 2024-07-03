@@ -111,6 +111,7 @@ Item {
 	Timer {
 		id: timer
 
+		interval: 0
 		onTriggered: root.dismissed()
 		onIntervalChanged: {
 			if (interval !== 0) {
