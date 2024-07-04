@@ -51,11 +51,17 @@ Page {
 		case "battery":
 			url = "/pages/settings/devicelist/battery/PageBattery.qml"
 			params = { "battery" : device }
-			summary = [
-				Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.stateOfCharge),
-				Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, device.voltage),
-				Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
-			]
+			summary = (!device.isParallelBms && device.state === VenusOS.Battery_State_Pending)
+					? [
+						  CommonWords.pending,
+						  Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, device.voltage),
+						  Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.stateOfCharge)
+					  ]
+					: [
+						  Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.stateOfCharge),
+						  Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, device.voltage),
+						  Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
+					  ]
 			break;
 
 		case "solarcharger":

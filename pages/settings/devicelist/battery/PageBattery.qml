@@ -42,33 +42,35 @@ Page {
 						return qsTrId("devicelist_battery_initializing")
 					}
 					switch (dataItem.value) {
-					case 9:
+					case VenusOS.Battery_State_Running:
 						return CommonWords.running_status
-					case 10:
+					case VenusOS.Battery_State_Error:
 						return CommonWords.error
-					// case 11 (Unknown) is omitted
-					case 12:
+					// case Battery_State_Unknown is omitted
+					case VenusOS.Battery_State_Shutdown:
 						//: Status is 'Shutdown'
 						//% "Shutdown"
 						return qsTrId("devicelist_battery_shutdown")
-					case 13:
+					case VenusOS.Battery_State_Updating:
 						//: Status is 'Updating'
 						//% "Updating"
 						return qsTrId("devicelist_battery_updating")
-					case 14:
+					case VenusOS.Battery_State_Standby:
 						return CommonWords.standby
-					case 15:
+					case VenusOS.Battery_State_GoingToRun:
 						//: Status is 'Going to run'
 						//% "Going to run"
 						return qsTrId("devicelist_battery_going_to_run")
-					case 16:
+					case VenusOS.Battery_State_Precharging:
 						//: Status is 'Pre-Charging'
 						//% "Pre-Charging"
 						return qsTrId("devicelist_battery_pre_charging")
-					case 17:
+					case VenusOS.Battery_State_ContactorCheck:
 						//: Status is 'Contactor check'
 						//% "Contactor check"
 						return qsTrId("devicelist_battery_contactor_check")
+					case VenusOS.Battery_State_Pending:
+						return CommonWords.pending
 					default:
 						return ""
 					}
@@ -126,6 +128,18 @@ Page {
 				dataItem.uid: root.battery.serviceUid + "/Capacity"
 				allowed: defaultAllowed && numberOfBms.allowed
 				unit: VenusOS.Units_AmpHour
+			}
+
+			ListQuantityItem {
+				readonly property VeQuickItem _n2kDeviceInstance: VeQuickItem {
+					uid: battery.serviceUid + "/N2kDeviceInstance"
+				}
+
+				//% "System voltage"
+				text: qsTrId("devicelist_battery_system_voltage")
+				dataItem.uid: BackendConnection.serviceUidForType("battery.lynxparallel") + _n2kDeviceInstance.value + "/Dc/0/Voltage"
+				allowed: defaultAllowed && _n2kDeviceInstance.isValid && root.battery.state === VenusOS.Battery_State_Pending
+				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTextItem {
