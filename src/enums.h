@@ -192,6 +192,20 @@ public:
 	};
 	Q_ENUM(Battery_Mode)
 
+	enum Battery_State {
+		Battery_State_Running = 9,
+		Battery_State_Error = 10,
+		Battery_State_Unknown = 11,
+		Battery_State_Shutdown = 12,
+		Battery_State_Updating = 13,
+		Battery_State_Standby = 14,
+		Battery_State_GoingToRun = 15,
+		Battery_State_Precharging = 16,
+		Battery_State_ContactorCheck = 17,
+		Battery_State_Pending = 18
+	};
+	Q_ENUM(Battery_State)
+
 	enum Battery_TimeToGo_Format {
 		Battery_TimeToGo_ShortFormat,
 		Battery_TimeToGo_LongFormat

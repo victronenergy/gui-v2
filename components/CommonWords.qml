@@ -338,6 +338,9 @@ QtObject {
 	//% "Overall history"
 	readonly property string overall_history: qsTrId("common_words_overall_history")
 
+	//% "Pending"
+	readonly property string pending: qsTrId("common_words_pending")
+
 	//% "Password"
 	readonly property string password: qsTrId("common_words_password")
 

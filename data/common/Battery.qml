@@ -17,6 +17,8 @@ Device {
 	readonly property real timeToGo: _timeToGo.value === undefined ? NaN : _timeToGo.value  // in seconds
 	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(battery) : ""
 	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
+	readonly property bool isParallelBms: _numberOfBmses.isValid
+	readonly property int state: _state.isValid ? _state.value : NaN
 
 	readonly property VeQuickItem _stateOfCharge: VeQuickItem {
 		uid: battery.serviceUid + "/Soc"
@@ -40,5 +42,13 @@ Device {
 
 	readonly property VeQuickItem _timeToGo: VeQuickItem {
 		uid: battery.serviceUid + "/TimeToGo"
+	}
+
+	property VeQuickItem _numberOfBmses: VeQuickItem {
+		uid: battery.serviceUid + "/NumberOfBmses"
+	}
+
+	property VeQuickItem _state: VeQuickItem {
+		uid: battery.serviceUid + "/State"
 	}
 }
