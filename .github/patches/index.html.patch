@@ -1,5 +1,6 @@
---- index.html~	2024-05-16 22:05:34.652178584 +0300
-+++ index.html	2024-05-16 22:12:44.106129598 +0300
+diff -u index.html venus-gui-v2.html
+--- index.html	2024-05-16 22:12:44.106129598 +0300
++++ venus-gui-v2.html	2024-07-05 12:44:44.396192697 +0200
 @@ -12,15 +12,18 @@
      <title>venus-gui-v2</title>
      <style>
@@ -22,7 +23,39 @@
          <div id="qtstatus"></div>
          <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
        </center>
-@@ -46,6 +49,7 @@
+@@ -28,6 +31,31 @@
+     <div id="screen"></div>
+ 
+     <script type="text/javascript">
++        async function check(url, attempt, delay, available, unavailable)
++        {
++           try {
++                const response = await fetch(url, {cache: "no-cache"});
++                if (response.ok) {
++                    available();
++                    return;
++                }
++            } catch (error) {
++            }
++
++            if (attempt == 0 || --attempt == 0) {
++                unavailable();
++                return;
++            }
++
++            setTimeout(check, delay, url, attempt, delay, available, unavailable);
++        }
++
++        // Reload the page and make sure it is available, since the webserver might start up.
++        function reload()
++        {
++            check(location.href, 30, 1000, (function() { location.reload(); }), (function() { console.log("Failed to reload gui-v2: web server unavailable"); }) );
++        }
++
+         async function init()
+         {
+             const spinner = document.querySelector('#qtspinner');
+@@ -46,6 +74,7 @@
                  status.innerHTML = 'Loading...';
  
                  const instance = await qtLoad({
