@@ -50,6 +50,10 @@ Page {
 				}
 			}
 
+			ActiveAcInputTextItem {
+				bindPrefix: root.bindPrefix
+			}
+
 			Loader {
 				width: parent ? parent.width : 0
 				sourceComponent: numberOfPhases.value === 1 ? singlePhaseAcInOut
