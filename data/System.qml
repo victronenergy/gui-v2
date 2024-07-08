@@ -161,8 +161,9 @@ QtObject {
 		case VenusOS.System_State_DynamicESS:
 			//% "Dynamic ESS"
 			return qsTrId("inverters_state_dynamic_ess")
+		default:
+			return CommonWords.unknown_status
 		}
-		return ""
 	}
 
 	Component.onCompleted: Global.system = root
