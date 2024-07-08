@@ -25,6 +25,7 @@ QtObject {
 				serviceUid = "mock/com.victronenergy.pulsemeter.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_customName.setValue("PulseMeter %1".arg(deviceInstanceNum))
+				_aggregate.setValue(Math.random() * 100)
 			}
 		}
 	}

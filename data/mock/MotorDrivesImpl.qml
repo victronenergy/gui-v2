@@ -25,6 +25,7 @@ QtObject {
 				serviceUid = "mock/com.victronenergy.motordrive.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_customName.setValue("Motor Drive %1".arg(deviceInstanceNum))
+				_motorRpm.setValue((Math.random() * 5000) + 5000)
 			}
 		}
 	}

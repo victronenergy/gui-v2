@@ -25,6 +25,7 @@ QtObject {
 				serviceUid = "mock/com.victronenergy.meteo.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
 				_customName.setValue("Meteo %1".arg(deviceInstanceNum))
+				_irradiance.setValue(Math.random() * 500)
 			}
 		}
 	}
