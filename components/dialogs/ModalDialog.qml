@@ -37,8 +37,15 @@ T.Dialog {
 	readonly property string rejectTextClose: qsTrId("modaldialog_close")
 
 	anchors.centerIn: parent
-	implicitWidth: Theme.geometry_modalDialog_width
-	implicitHeight: Theme.geometry_modalDialog_height
+
+	/*
+	If you specify implicitWidth & implicitHeight here, and shrink the browser (or desktop app) window from 100% -> 0%,
+	the dialog scales correctly with the rest of the app down to ~60%, and then scales down at a faster rate than the
+	rest of the app. Specifying 'width' and 'height' instead of 'implicitWidth' and 'implicitHeight' for ModalDialog
+	makes it scale properly when you shrink the window. See https://bugreports.qt.io/browse/QTBUG-127068
+	*/
+	width: Theme.geometry_modalDialog_width
+	height: Theme.geometry_modalDialog_height
 	verticalPadding: 0
 	horizontalPadding: 0
 	modal: true
