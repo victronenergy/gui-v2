@@ -60,7 +60,6 @@ Page {
 				//% "Wind speed"
 				text: qsTrId("page_meteo_wind_speed")
 				allowed: dataItem.isValid
-				value: dataItem.value
 				unit: VenusOS.Units_Speed_MetresPerSecond
 				precision: 1
 			}
