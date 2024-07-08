@@ -9,8 +9,6 @@ import Victron.VenusOS
 BaseDevice {
 	id: root
 
-	readonly property string customName: _customName.value || ""
-
 	readonly property VeQuickItem _deviceInstance: VeQuickItem {
 		uid: root.serviceUid ? root.serviceUid + "/DeviceInstance" : ""
 	}
@@ -30,6 +28,7 @@ BaseDevice {
 	deviceInstance: _deviceInstance.isValid ? _deviceInstance.value : -1
 	productId: _productId.isValid ? _productId.value : 0
 	productName: _productName.value || ""
+	customName: _customName.value || ""
 	name: _customName.value || _productName.value || ""
 	description: name
 }

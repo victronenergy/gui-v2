@@ -74,7 +74,6 @@ QtObject {
 				const deviceInstanceNum = root.mockDeviceCount++
 				serviceUid = "mock/com.victronenergy.pvinverter.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
-				_productName.setValue("PV Inverter")
 				_customName.setValue("My PV Inverter " + deviceInstanceNum)
 				_statusCode.setValue(Math.random() * VenusOS.PvInverter_StatusCode_Error)
 

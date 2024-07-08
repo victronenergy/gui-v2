@@ -17,7 +17,7 @@ BaseDevice::BaseDevice(QObject *parent)
 
 bool BaseDevice::isValid() const
 {
-	return !m_serviceUid.isEmpty() && !m_productName.isEmpty() && m_deviceInstance >= 0;
+	return !m_serviceUid.isEmpty() && (!m_productName.isEmpty() || !m_customName.isEmpty()) && m_deviceInstance >= 0;
 }
 
 QString BaseDevice::serviceUid() const
@@ -78,6 +78,23 @@ void BaseDevice::setProductName(const QString &productName)
 		const bool prevValid = isValid();
 		m_productName = productName;
 		emit productNameChanged();
+		if (prevValid != isValid()) {
+			emit validChanged();
+		}
+	}
+}
+
+QString BaseDevice::customName() const
+{
+	return m_customName;
+}
+
+void BaseDevice::setCustomName(const QString &customName)
+{
+	if (m_customName != customName) {
+		const bool prevValid = isValid();
+		m_customName = customName;
+		emit customNameChanged();
 		if (prevValid != isValid()) {
 			emit validChanged();
 		}
