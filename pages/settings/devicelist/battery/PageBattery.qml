@@ -12,6 +12,7 @@ Page {
 	property var battery
 
 	readonly property bool isFiamm48TL: productId.value === 0xB012
+	readonly property bool isParallelBms: productId.value === 0xA3E3
 
 	title: battery.name
 
@@ -252,6 +253,7 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.alarms
+				allowed: !root.isParallelBms
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryAlarms.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })
