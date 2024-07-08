@@ -67,7 +67,7 @@ QtObject {
 				const deviceInstanceNum = root.mockDeviceCount++
 				serviceUid = "mock/com.victronenergy." + serviceType + ".ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
-				_productName.setValue("DC Load (%1)".arg(serviceType))
+				_customName.setValue("DC Load (%1)".arg(serviceType))
 				setMockValue("/Mode", 4)
 				setMockValue("/State", 5)
 				setMockValue("/Error", 0)

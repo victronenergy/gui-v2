@@ -30,7 +30,7 @@ QtObject {
 				const deviceInstanceNum = root.mockDeviceCount++
 				serviceUid = "mock/com.victronenergy.digitalinput.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
-				_productName.setValue("Digital input %1".arg(deviceInstanceNum))
+				_customName.setValue("Digital input %1".arg(deviceInstanceNum))
 			}
 		}
 	}

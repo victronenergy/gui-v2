@@ -17,7 +17,7 @@ BaseDevice::BaseDevice(QObject *parent)
 
 bool BaseDevice::isValid() const
 {
-	return !m_serviceUid.isEmpty() && !m_productName.isEmpty() && m_deviceInstance >= 0;
+	return !m_serviceUid.isEmpty() && (!m_productName.isEmpty() || !m_customName.isEmpty()) && m_deviceInstance >= 0;
 }
 
 QString BaseDevice::serviceUid() const
@@ -28,12 +28,10 @@ QString BaseDevice::serviceUid() const
 void BaseDevice::setServiceUid(const QString &serviceUid)
 {
 	if (m_serviceUid != serviceUid) {
-		const bool prevValid = isValid();
-		m_serviceUid = serviceUid;
-		emit serviceUidChanged();
-		if (prevValid != isValid()) {
-			emit validChanged();
-		}
+		maybeEmitValidChanged([=]() {
+			m_serviceUid = serviceUid;
+			emit serviceUidChanged();
+		});
 	}
 }
 
@@ -45,12 +43,10 @@ int BaseDevice::deviceInstance() const
 void BaseDevice::setDeviceInstance(int deviceInstance)
 {
 	if (m_deviceInstance != deviceInstance) {
-		const bool prevValid = isValid();
-		m_deviceInstance = deviceInstance;
-		emit deviceInstanceChanged();
-		if (prevValid != isValid()) {
-			emit validChanged();
-		}
+		maybeEmitValidChanged([=]() {
+			m_deviceInstance = deviceInstance;
+			emit deviceInstanceChanged();
+		});
 	}
 }
 
@@ -75,12 +71,25 @@ QString BaseDevice::productName() const
 void BaseDevice::setProductName(const QString &productName)
 {
 	if (m_productName != productName) {
-		const bool prevValid = isValid();
-		m_productName = productName;
-		emit productNameChanged();
-		if (prevValid != isValid()) {
-			emit validChanged();
-		}
+		maybeEmitValidChanged([=]() {
+			m_productName = productName;
+			emit productNameChanged();
+		});
+	}
+}
+
+QString BaseDevice::customName() const
+{
+	return m_customName;
+}
+
+void BaseDevice::setCustomName(const QString &customName)
+{
+	if (m_customName != customName) {
+		maybeEmitValidChanged([=]() {
+			m_customName = customName;
+			emit customNameChanged();
+		});
 	}
 }
 
@@ -107,6 +116,15 @@ void BaseDevice::setDescription(const QString &description)
 	if (m_description != description) {
 		m_description = description;
 		emit descriptionChanged();
+	}
+}
+
+void BaseDevice::maybeEmitValidChanged(const std::function<void ()> &propertyChangeFunc)
+{
+	const bool prevValid = isValid();
+	propertyChangeFunc();
+	if (prevValid != isValid()) {
+		emit validChanged();
 	}
 }
 
