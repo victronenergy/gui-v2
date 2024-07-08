@@ -24,7 +24,7 @@ QtObject {
 				const deviceInstanceNum = root.mockDeviceCount++
 				serviceUid = "mock/com.victronenergy.unsupported.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
-				_productName.setValue("Unsupported %1".arg(deviceInstanceNum))
+				_customName.setValue("Unsupported %1".arg(deviceInstanceNum))
 			}
 		}
 	}

@@ -11,6 +11,8 @@
 #include <QAbstractListModel>
 #include <qqmlintegration.h>
 
+#include <functional>
+
 namespace Victron {
 namespace VenusOS {
 
@@ -23,6 +25,7 @@ class BaseDevice : public QObject
 	Q_PROPERTY(int deviceInstance READ deviceInstance WRITE setDeviceInstance NOTIFY deviceInstanceChanged)
 	Q_PROPERTY(int productId READ productId WRITE setProductId NOTIFY productIdChanged)
 	Q_PROPERTY(QString productName READ productName WRITE setProductName NOTIFY productNameChanged)
+	Q_PROPERTY(QString customName READ customName WRITE setCustomName NOTIFY customNameChanged)
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 
@@ -43,6 +46,9 @@ public:
 	QString productName() const;
 	void setProductName(const QString &productName);
 
+	QString customName() const;
+	void setCustomName(const QString &customName);
+
 	QString name() const;
 	void setName(const QString &name);
 
@@ -54,15 +60,19 @@ Q_SIGNALS:
 	void serviceUidChanged();
 	void deviceInstanceChanged();
 	void productNameChanged();
+	void customNameChanged();
 	void productIdChanged();
 	void nameChanged();
 	void descriptionChanged();
 
 private:
+	void maybeEmitValidChanged(const std::function<void()>& propertyChangeFunc);
+
 	QString m_serviceUid;
 	QString m_name;
 	QString m_description;
 	QString m_productName;
+	QString m_customName;
 	int m_deviceInstance = -1;
 	int m_productId = 0;
 };

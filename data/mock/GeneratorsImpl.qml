@@ -30,7 +30,7 @@ QtObject {
 
 			Component.onCompleted: {
 				_deviceInstance.setValue(0)
-				_productName.setValue("Start/Stop generator")
+				_customName.setValue("Start/Stop generator")
 				_state.setValue(VenusOS.Generators_State_Running)
 				_runningBy.setValue(VenusOS.Generators_RunningBy_Soc)
 				setAutoStart(true)

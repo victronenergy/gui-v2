@@ -24,7 +24,7 @@ QtObject {
 				const deviceInstanceNum = root.mockDeviceCount++
 				serviceUid = "mock/com.victronenergy.motordrive.ttyUSB" + deviceInstanceNum
 				_deviceInstance.setValue(deviceInstanceNum)
-				_productName.setValue("Meteo %1".arg(deviceInstanceNum))
+				_customName.setValue("Motor Drive %1".arg(deviceInstanceNum))
 			}
 		}
 	}
