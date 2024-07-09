@@ -31,8 +31,6 @@ ControlCard {
 	SwitchControlValue {
 		id: autostartSwitch
 
-		property ModalWarningDialog _confirmationDialog
-
 		anchors {
 			top: root.status.bottom
 			topMargin: Theme.geometry_controlCard_status_bottomMargin
