@@ -69,6 +69,8 @@ ObjectModel {
 	}
 
 	ListGeneratorError {
+		//% "Control error code"
+		text: qsTrId("ac-in-genset_control_error_code")
 		allowed: defaultAllowed && dataItem.isValid
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
 	}
