@@ -12,11 +12,12 @@ QtObject {
 	property bool manualConfig
 
 	function populate() {
+		// Note: since this is using "com.victronenergy.vebus.ttyUSB0" as the service, this is
+		// actually using the first mock vebus service provided by InverterChargersImpl.qml.
 		const gridInput = {
 			source: VenusOS.AcInputs_InputSource_Grid,
 			serviceType: "vebus",
 			serviceName: "com.victronenergy.vebus.ttyUSB0",
-			customName: "Grid AC input",
 			connected: 0,
 			phaseCount: 3,
 		}
@@ -24,7 +25,6 @@ QtObject {
 			source: VenusOS.AcInputs_InputSource_Generator,
 			serviceType: "genset",
 			serviceName: "com.victronenergy.genset.ttyUSB0",
-			customName: "Genset AC input",
 			connected: 1,
 			phaseCount: 3,
 			productId: 0xB040,  // fisher panda
@@ -89,11 +89,8 @@ QtObject {
 				Component.onCompleted: {
 					serviceUid = "mock/" + input.modelData["serviceName"]
 					_deviceInstance.setValue(input.index)
-					for (let configProperty in input.modelData) {
-						const configValue = input.modelData[configProperty]
-						if (device["_" + configProperty] !== undefined) {
-							device["_" + configProperty].setValue(configValue)
-						}
+					if (input.modelData["productId"]) {
+						device._productId.setValue(input.modelData["productId"])
 					}
 				}
 			}
