@@ -9,16 +9,25 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	property int mockDeviceCount
+
 	function populate() {
 		for (let i = 0; i < 3; ++i) {
-			createCharger({ status: Math.random() * VenusOS.Evcs_Status_Charged })
+			createCharger({ status: Math.random() * VenusOS.Evcs_Status_Charged, mode: VenusOS.Evcs_Mode_Auto })
 		}
 	}
 
-	function createCharger(properties) {
-		const charger = chargerComponent.createObject(root, properties)
+	function createCharger(config) {
+		const deviceInstanceNum = mockDeviceCount++
+		const charger = chargerComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.evcharger.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
+		for (const configProperty in config) {
+			const configValue = config[configProperty]
+			charger["_" + configProperty].setValue(configValue)
+		 }
 		_createdObjects.push(charger)
-		Global.evChargers.addCharger(charger)
 	}
 
 	property Connections mockConn: Connections {
@@ -39,18 +48,8 @@ QtObject {
 	}
 
 	property Component chargerComponent: Component {
-		MockDevice {
+		EvCharger {
 			id: evCharger
-
-			property int status: VenusOS.Evcs_Status_Charging
-			property int mode: Math.random() * VenusOS.Evcs_Mode_Scheduled
-			property bool connected
-			property int chargingTime: 100000
-
-			property real energy: 1 + Math.random() * 10
-			property real power: 1 + Math.random() * 100
-			property real current: 1 + Math.random() * 20
-			property real maxCurrent: 30
 
 			readonly property ListModel phases: ListModel {
 				ListElement { name: "L1"; power: 10 }
@@ -64,19 +63,17 @@ QtObject {
 				interval: 1000
 
 				onTriggered: {
-					const properties = ["energy", "power", "current"]
-					for (let propIndex = 0; propIndex < properties.length; ++propIndex) {
-						const propName = properties[propIndex]
-						const value = evCharger[propName]
-						if (!isNaN(value)) {
-							evCharger[propName] = value * 1.01
-						}
-					}
-					evCharger.current = 1 + Math.random() * 20
-					Global.evChargers.updateTotals()
-					evCharger.chargingTime += 60
+					const phase1Power = Math.random() * 50
+					const phase2Power = Math.random() * 50
+					const phase3Power = Math.random() * 50
+					_phase1Power.setValue(phase1Power)
+					_phase2Power.setValue(phase2Power)
+					_phase3Power.setValue(phase3Power)
 
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Current", current)
+					_energy.setValue(1 + Math.random() * 10)
+					_current.setValue(1 + Math.random() * 20)
+					_power.setValue(phase1Power + phase2Power + phase3Power)
+					_chargingTime.setValue(chargingTime + 60)
 				}
 			}
 
@@ -86,25 +83,25 @@ QtObject {
 				interval: 3000
 
 				onTriggered: {
-					evCharger.status = Math.random() * VenusOS.Evcs_Status_OverheatingDetected
+					evCharger._status.setValue(Math.random() * VenusOS.Evcs_Status_OverheatingDetected)
 				}
 			}
 
-			serviceUid: "mock/com.victronenergy.evcharger.ttyUSB" + deviceInstance
-			name: "EVCharger" + deviceInstance
 			Component.onCompleted: {
-				Global.mockDataSimulator.setMockValue(serviceUid + "/Mode", mode)
+				_deviceInstance.setValue(deviceInstance)
+				_maxCurrent.setValue(30)
+				_customName.setValue("EV Charger " + deviceInstance)
+				_productId.setValue(0xC025)
+				_chargingTime.setValue(100000)
+
 				Global.mockDataSimulator.setMockValue(serviceUid + "/Position", 1)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/StartStop", 1)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/AutoStart", 1)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/EnableDisplay", 1)
-				Global.mockDataSimulator.setMockValue(serviceUid + "/MaxCurrent", maxCurrent)
 
 				// Device info
 				Global.mockDataSimulator.setMockValue(serviceUid + "/Mgmt/Connection", serviceUid)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/Connected", 1)
-				Global.mockDataSimulator.setMockValue(serviceUid + "/ProductName", name)
-				Global.mockDataSimulator.setMockValue(serviceUid + "/ProductId", "0xC025")
 			}
 		}
 	}

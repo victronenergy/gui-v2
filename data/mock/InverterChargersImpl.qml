@@ -9,114 +9,67 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	property int mockInverterChargerCount
+
 	function populateInverterChargers() {
 		let quattro = {
 			state: VenusOS.System_State_Inverting,
-			productId: 9816,
-			name: "Quattro 48/5000/70-2x100",
-			ampOptions: [ 3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0 ].map(function(v) { return { value: v } }),   // EU amp options
+			productId: 9816,    // will produce EU amp options
+			productName: "Quattro 48/5000/70-2x100",
 			mode: VenusOS.InverterCharger_Mode_On,
 			modeAdjustable: true,
 		}
-		let quattroDevice = veBusDeviceComponent.createObject(root, quattro)
+		let quattroDevice = createInverterCharger(quattro)
 		addInputSettings(quattroDevice, [VenusOS.AcInputs_InputSource_Generator, VenusOS.AcInputs_InputSource_Shore])
 		Global.inverterChargers.veBusDevices.addDevice(quattroDevice)
 
 		let multiPlus = {
 			state: VenusOS.System_State_AbsorptionCharging,
-			productId: 9728,
-			name: "MultiPlus 12/3000/120-5",
-			ampOptions: [ 10.0, 15.0, 20.0, 30.0, 50.0, 100.0 ].map(function(v) { return { value: v } }),   // US amp options
+			productId: 9728,    // will produce US amp options
+			productName: "MultiPlus 12/3000/120-5",
 			mode: VenusOS.InverterCharger_Mode_InverterOnly,
 			modeAdjustable: true,
 		}
-		let multiPlusDevice = veBusDeviceComponent.createObject(root, multiPlus)
+		let multiPlusDevice = createInverterCharger(multiPlus)
 		addInputSettings(multiPlusDevice, [VenusOS.AcInputs_InputSource_Grid])
 		Global.inverterChargers.veBusDevices.addDevice(multiPlusDevice)
 	}
 
-	function addInputSettings(veBusDevice, inputTypes) {
-		let settings = []
+	function createInverterCharger(config) {
+		const deviceInstanceNum = mockInverterChargerCount++
+		const inverterCharger = inverterChargerComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.vebus.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum
+		})
+		for (const configProperty in config) {
+			const configValue = config[configProperty]
+			if (inverterCharger["_" + configProperty] !== undefined) {
+				inverterCharger["_" + configProperty].setValue(configValue)
+			}
+		}
+		return inverterCharger
+	}
+
+	function addInputSettings(inverterCharger, inputTypes) {
 		for (let i = 0; i < inputTypes.length; ++i) {
-			const settingData = {
-				inputNumber: i+1,
-				inputType: inputTypes[i],
-				currentLimit: Math.floor(Math.random() * 50),
-				currentLimitAdjustable: i === 0,
-			}
-			let settings = acInputSettingsComponent.createObject(root, settingData)
-			veBusDevice.inputSettings.append({ inputSettings: settings })
+			const inputNumber = i + 1
+			const inputType = inputTypes[i]
+			const currentLimit = Math.floor(Math.random() * 50)
+			const currentLimitAdjustable = i === 0
+
+			Global.mockDataSimulator.setMockValue(Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput" + inputNumber, inputType)
+			inverterCharger.setMockValue("/Ac/In/%1/CurrentLimit".arg(inputNumber), currentLimit)
+			inverterCharger.setMockValue("/Ac/In/%1/CurrentLimitIsAdjustable".arg(inputNumber), currentLimitAdjustable)
 		}
-		return settings
+		inverterCharger.setMockValue("/Ac/NumberOfAcInputs", inputTypes.length)
 	}
 
-	property Component acInputSettingsComponent: Component {
-		QtObject {
-			property int inputNumber
-			property int inputType
-			property real currentLimit
-			property bool currentLimitAdjustable
-
-			function setCurrentLimit(limit) {
-				currentLimit = limit
-			}
-		}
-	}
-
-	property Component veBusDeviceComponent: Component {
-		MockDevice {
+	property Component inverterChargerComponent: Component {
+		InverterCharger {
 			id: veBusDevice
 
-			property int state
-			property int mode: -1
-			property int numberOfPhases: 3
-			property bool hasPassthroughSupport: true
-
-			property ListModel inputSettings: ListModel {}
-
-			property int productId
-			property int productType
-			property var ampOptions
-
-			property int acOutputPower: 100
-			property int dcPower: 101
-			property int dcVoltage: 102
-			property int dcCurrent: 103
-			property int stateOfCharge: 77
-
-			property int acActiveInput: 1
-			property int acActiveInputPower: 555
-			property int bmsMode: 0
-			property bool modeAdjustable: true
-			property bool isMulti: false
-
-			property var acOutput: {
-				"phase1" : {
-					"frequency" : 50.1,
-					"current" : 20,
-					"voltage" : 235,
-					"power" : 4700
-				},
-				"phase2" : {
-					"frequency" : 50.2,
-					"current" : 20,
-					"voltage" : 235,
-					"power" : 4700
-				},
-				"phase3" : {
-					"frequency" : 50.3,
-					"current" : 20,
-					"voltage" : 235,
-					"power" : 4700
-				}
-			}
-
-			function setMode(newMode) {
-				mode = newMode
-			}
-
-			function setCurrentLimit(inputIndex, currentLimit) {
-				inputSettings.get(inputIndex).inputSettings.setCurrentLimit(currentLimit)
+			function setMockValue(path, value) {
+				Global.mockDataSimulator.setMockValue(serviceUid + path, value)
 			}
 
 			readonly property VeQuickItem _chargeState: VeQuickItem {
@@ -398,10 +351,8 @@ QtObject {
 				uid: veBusDevice.serviceUid + "/Ac/ActiveIn/CurrentLimitIsAdjustable"
 			}
 
-			serviceUid: "mock/com.victronenergy.vebus.ttyUSB" + deviceInstance
-			name: "VeBusDevice" + deviceInstance
-
 			Component.onCompleted: {
+				_deviceInstance.setValue(deviceInstance)
 				_chargeState.setValue(VenusOS.VeBusDevice_ChargeState_InitializingCharger)
 				_setChargeState.setValue(VenusOS.VeBusDevice_ChargeState_InitializingCharger)
 				_redetectSystem.setValue(0)
