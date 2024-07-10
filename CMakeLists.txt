@@ -852,7 +852,6 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/EvChargersImpl.qml
     data/mock/GeneratorsImpl.qml
     data/mock/MeteoDevicesImpl.qml
-    data/mock/MockDevice.qml
     data/mock/MockDataManager.qml
     data/mock/MotorDrivesImpl.qml
     data/mock/NotificationsImpl.qml

@@ -9,39 +9,23 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property Instantiator relayObjects: Instantiator {
-		model: 3
+	property int mockDeviceCount
 
-		delegate: MockDevice {
-			id: relay
-
-			function _reloadRelayFunction() {
-				const uid = model.index === 0
-						  ? Global.systemSettings.serviceUid + "/Settings/Relay/Function"
-						  : Global.systemSettings.serviceUid + "/Settings/Relay/%1/Function".arg(model.index)
-				const value = Global.mockDataSimulator.mockValue(uid)
-				relayFunction = value === undefined ? -1 : value
-			}
-
-			property int state: model.index % 2 == 0 ? VenusOS.Relays_State_Inactive : VenusOS.Relays_State_Active
-			property int relayFunction
-
-			serviceUid: Global.system.serviceUid + "/Relay" + deviceInstance
-			name: Global.relays.relayName(model.index)
-
-			readonly property Timer _functionUpdater: Timer {
-				running: Global.mockDataSimulator.timersActive
-				interval: 3000
-				onTriggered: _reloadRelayFunction()
-			}
-
-			function setState(s) {
-				state = s
-			}
+	function populate() {
+		const deviceInstanceNum = mockDeviceCount++
+		for (let i = 0; i < 3; ++i) {
+			const relay = relayComponent.createObject(root, {
+				serviceUid: Global.system.serviceUid + "/Relay" + deviceInstanceNum,
+				deviceInstance: deviceInstanceNum,
+			})
+			relay._veState.setValue(i % 2 == 0 ? VenusOS.Relays_State_Inactive : VenusOS.Relays_State_Active)
+			relay._relayFunction.setValue(i == 0 ? VenusOS.Relay_Function_Manual : Math.floor(Math.random() * VenusOS.Relay_Function_Temperature))
 		}
+	}
 
-		onObjectAdded: function(index, object) {
-			Global.relays.addRelay(object)
+	property Component relayComponent: Component {
+		Relay {
+			id: relay
 		}
 	}
 }
