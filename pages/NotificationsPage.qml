@@ -168,10 +168,10 @@ SwipeViewPage {
 		height: Theme.geometry_notificationsPage_snoozeButton_height
 		radius: Theme.geometry_button_radius
 
-		enabled: !!Global.notifications && Global.notifications.alert && root.isCurrentPage
+		enabled: !!Global.notifications && (Global.notifications.alarm || Global.notifications.alert) && root.isCurrentPage
 		opacity: enabled ? 1 : 0
 		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration} }
-		backgroundColor: Theme.color_critical_background
+		backgroundColor: Global.notifications.alarm ? Theme.color_critical_background : Theme.color_warning
 
 		contentItem: Row {
 			anchors.verticalCenter: parent.verticalCenter
@@ -179,6 +179,7 @@ SwipeViewPage {
 
 			CP.ColorImage {
 				anchors.verticalCenter: parent.verticalCenter
+				visible: Global.notifications.alarm
 				source: "qrc:/images/icon_alarm_snooze_24.svg"
 				color: Theme.color_font_primary
 			}
@@ -186,8 +187,11 @@ SwipeViewPage {
 			Label {
 				anchors.verticalCenter: parent.verticalCenter
 				font.pixelSize: Theme.font_size_caption
-				//% "Silence alarm"
-				text: qsTrId("silence_alarm")
+				text: Global.notifications.alarm
+						//% "Silence alarm"
+					  ? qsTrId("notifications_silence_alarm")
+						//% "Acknowledge alerts"
+					  : qsTrId("notifications_acknowledge_alerts")
 			}
 		}
 
