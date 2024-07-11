@@ -11,20 +11,19 @@ QtObject {
 
 	property int mockDeviceCount
 
-	function populate() {
-		pulseMeterComponent.createObject(root)
+	function populate() {        
+		const deviceInstanceNum = mockDeviceCount++
+		pulseMeterComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.pulsemeter.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
 	}
 
 	property Component pulseMeterComponent: Component {
 		PulseMeter {
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.pulsemeter.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
-				_customName.setValue("PulseMeter %1".arg(deviceInstanceNum))
+				_deviceInstance.setValue(deviceInstance)
+				_customName.setValue("PulseMeter %1".arg(deviceInstance))
 			}
 		}
 	}

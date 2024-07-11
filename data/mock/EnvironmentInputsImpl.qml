@@ -39,7 +39,11 @@ Item {
 		if (properties.temperatureType === undefined) {
 			properties.temperatureType = Math.floor(Math.random() * VenusOS.Temperature_DeviceType_Generic)
 		}
-		const inputObj = inputComponent.createObject(root)
+		const deviceInstanceNum = mockDeviceCount++
+		const inputObj = inputComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.temperature.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
 		_createdObjects.push(inputObj)
 		for (var p in properties) {
 			inputObj["_" + p].setValue(properties[p])
@@ -48,9 +52,6 @@ Item {
 
 	property Component inputComponent: Component {
 		EnvironmentInput {
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			onTemperatureTypeChanged: {
 				if (temperatureType >= 0 && !_customName.value) {
 					_customName.setValue(Global.environmentInputs.temperatureTypeToText(temperatureType) + " temperature sensor")
@@ -58,9 +59,7 @@ Item {
 			}
 
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.temperature.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
+				_deviceInstance.setValue(deviceInstance)
 				_productName.setValue("Generic Temperature Sensor")
 				_status.setValue(VenusOS.EnvironmentInput_Status_Ok)
 			}

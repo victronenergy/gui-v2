@@ -421,15 +421,10 @@ QtObject {
 				uid: inverter.serviceUid + "/Mode"
 			}
 
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockInverterCount++
-				serviceUid = "mock/com.victronenergy.inverter.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
+				_deviceInstance.setValue(deviceInstance)
 				_productName.setValue("Phoenix Inverter 12V 250VA 230V")
-				_customName.setValue("My Inverter " + deviceInstanceNum)
+				_customName.setValue("My Inverter " + deviceInstance)
 				_state.setValue(Math.floor(Math.random() * VenusOS.System_State_FaultCondition))
 				mode.setValue(VenusOS.Inverter_Mode_Off)
 			}
@@ -439,7 +434,11 @@ QtObject {
 	function populateInverters() {
 		const inverterCount = (Math.random() * 3) + 1
 		for (let i = 0; i < inverterCount; ++i) {
-			const inverterObj = inverterComponent.createObject(root)
+			const deviceInstanceNum = mockInverterCount++
+			const inverterObj = inverterComponent.createObject(root, {
+				serviceUid: "mock/com.victronenergy.inverter.ttyUSB" + deviceInstanceNum,
+				deviceInstance: deviceInstanceNum,
+			})
 			Global.inverterChargers.inverterDevices.addDevice(inverterObj)
 		}
 	}

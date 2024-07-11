@@ -12,19 +12,18 @@ QtObject {
 	property int mockDeviceCount
 
 	function populate() {
-		unsupportedComponent.createObject(root)
+		const deviceInstanceNum = mockDeviceCount++
+		unsupportedComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.unsupported.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
 	}
 
 	property Component unsupportedComponent: Component {
 		UnsupportedDevice {
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.unsupported.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
-				_customName.setValue("Unsupported %1".arg(deviceInstanceNum))
+				_deviceInstance.setValue(deviceInstance)
+				_customName.setValue("Unsupported %1".arg(deviceInstance))
 			}
 		}
 	}

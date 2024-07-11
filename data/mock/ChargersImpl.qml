@@ -12,7 +12,11 @@ Item {
 	property int mockDeviceCount
 
 	function populate() {
-		chargerComponent.createObject(root)
+		const deviceInstanceNum = mockDeviceCount++
+		chargerComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.charger.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
 	}
 
 	property Component chargerComponent: Component {
@@ -38,14 +42,9 @@ Item {
 				}
 			}
 
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.charger.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
-				_customName.setValue("AC Charger " + deviceInstanceNum)
+				_deviceInstance.setValue(deviceInstance)
+				_customName.setValue("AC Charger " + deviceInstance)
 				_productName.setValue("Skylla-i")
 				charger.setMockValue("/Mode", 1)
 				charger.setMockValue("/State", Math.floor(Math.random() * VenusOS.System_State_FaultCondition))

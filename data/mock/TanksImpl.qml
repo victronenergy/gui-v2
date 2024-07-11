@@ -42,7 +42,11 @@ QtObject {
 	}
 
 	function addTank(properties) {
-		const tankObj = tankComponent.createObject(root)
+		const deviceInstanceNum = mockDeviceCount++
+		const tankObj = tankComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.tank.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
 		_createdObjects.push(tankObj)
 		for (var p in properties) {
 			tankObj["_" + p].setValue(properties[p])
@@ -53,9 +57,6 @@ QtObject {
 		Tank {
 			id: tank
 
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			onTypeChanged: {
 				if (type >= 0) {
 					_customName.setValue("Custom " + Gauges.tankProperties(type).name + " tank")
@@ -63,9 +64,7 @@ QtObject {
 			}
 
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.tank.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
+				_deviceInstance.setValue(deviceInstance)
 				_productName.setValue("Generic Tank Input")
 				_status.setValue(VenusOS.Tank_Status_Ok)
 			}

@@ -113,7 +113,6 @@ QtObject {
 		}
 
 		Component.onCompleted: {
-			serviceUid = "mock/com.victronenergy.battery.ttyUSB1"
 			_deviceInstance.setValue(1)
 			root.initLynxBattery(dummyBattery)
 

@@ -12,7 +12,11 @@ Item {
 	property int mockDeviceCount
 
 	function populate() {
-		acSystemDeviceComponent.createObject(root)
+		const deviceInstanceNum = mockDeviceCount++
+		acSystemDeviceComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.acsystem.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
 	}
 
 	property Component acSystemDeviceComponent: Component {
@@ -59,15 +63,10 @@ Item {
 				}
 			}
 
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.acsystem.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
+				_deviceInstance.setValue(deviceInstance)
 				_productName.setValue("RS 48/6000")
-				_customName.setValue("AC System " + deviceInstanceNum)
+				_customName.setValue("AC System " + deviceInstance)
 				acSystem.setMockValue("/Ac/NumberOfPhases", 3)
 				acSystem.setMockValue("/Ac/NumberOfAcInputs", 2)
 				acSystem.setMockValue("/Ac/In/1/CurrentLimit", 10.5)
@@ -84,10 +83,10 @@ Item {
 				acSystem.setMockValue("/Settings/AlarmLevel/LowSoc", 1) // Alarm only
 
 				// RS devices
-				const multiRsServiceName = "com.victronenergy.multi.ttyUSB" + deviceInstanceNum
-				addRsService(multiRsServiceName, deviceInstanceNum)
+				const multiRsServiceName = "com.victronenergy.multi.ttyUSB" + deviceInstance
+				addRsService(multiRsServiceName, deviceInstance)
 				acSystem.setMockValue("/Devices/0/Service", multiRsServiceName)
-				acSystem.setMockValue("/Devices/0/Instance", deviceInstanceNum)
+				acSystem.setMockValue("/Devices/0/Instance", deviceInstance)
 
 				// Add this multi RS to the list of inverter/chargers on the system
 				const inverterCharger = inverterChargerComponent.createObject(acSystem, { serviceUid: acSystem.serviceUid })
