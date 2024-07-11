@@ -26,7 +26,6 @@ Device {
 	// Phase measurements from com.victronenergy.system/Ac/ActiveIn/L<1|2|3>
 	readonly property AcInputPhaseModel _phases: AcInputPhaseModel {
 		id: _phases
-
 	}
 
 	// Data from the input-specific service, e.g. com.victronenergy.vebus for a VE.Bus input,
@@ -38,12 +37,4 @@ Device {
 		serviceUid: root.serviceUid
 		serviceType: root.serviceType
 	}
-
-	serviceUid: BackendConnection.type === BackendConnection.MqttSource
-			  // this looks like: 'mqtt/vebus/289/'
-			? inputInfo && serviceType.length && inputInfo.deviceInstance >= 0
-					? "mqtt/" + serviceType + "/" + inputInfo.deviceInstance
-					: ""
-			  // this looks like: "dbus/com.victronenergy.vebus.ttyO1"
-			: serviceName.length ? BackendConnection.uidPrefix() + "/" + serviceName : ""
 }

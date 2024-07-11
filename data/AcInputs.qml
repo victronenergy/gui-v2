@@ -9,7 +9,7 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	readonly property ActiveAcInput activeInput: _activeInputLoader.item
+	property ActiveAcInput activeInput
 	readonly property ActiveAcInput generatorInput: activeInput && activeInput.source === VenusOS.AcInputs_InputSource_Generator ? activeInput : null
 
 	readonly property AcInputSystemInfo activeInputInfo: input1Info.isActiveInput ? input1Info
@@ -30,23 +30,36 @@ QtObject {
 	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>. There are always two inputs.
 	property AcInputSystemInfo input1Info: AcInputSystemInfo {
 		inputIndex: 0
-		isActiveInput: source === _activeInputSource.sourceAsInt
+		isActiveInput: valid && source === _activeInputSource.sourceAsInt
 	}
 	property AcInputSystemInfo input2Info: AcInputSystemInfo {
 		inputIndex: 1
-		isActiveInput: source === _activeInputSource.sourceAsInt
+		isActiveInput: valid && source === _activeInputSource.sourceAsInt
 	}
 
-	// Set activeInput to a valid object when /Ac/ActiveIn/Source is set to a valid source.
 	readonly property VeQuickItem _activeInputSource: VeQuickItem {
-		readonly property int sourceAsInt: value === undefined ? VenusOS.AcInputs_InputSource_NotAvailable : parseInt(value)
-
+		readonly property int sourceAsInt: !isValid ? VenusOS.AcInputs_InputSource_NotAvailable : parseInt(value)
 		uid: Global.system.serviceUid + "/Ac/ActiveIn/Source"
 	}
-	readonly property Loader _activeInputLoader: Loader {
-		active: root.sourceValid(root._activeInputSource.sourceAsInt)
-		sourceComponent: ActiveAcInput {
-			inputInfo: root.activeInputInfo
+
+	readonly property Component _activeAcInputComponent: Component {
+		ActiveAcInput {}
+	}
+
+	// Set activeInput to a valid object when /Ac/ActiveIn/Source is set to a valid source and
+	// triggers input1Info or input2Info to become the active input.
+	onActiveInputInfoChanged: {
+		if (activeInput) {
+			activeInput.destroy()
+			activeInput = null
+		}
+		if (activeInputInfo) {
+			const serviceUid = BackendConnection.type === BackendConnection.MqttSource
+				  // this looks like: 'mqtt/vebus/289/'
+				? "mqtt/" + activeInputInfo.serviceType + "/" + activeInputInfo.deviceInstance
+				  // this looks like: "dbus/com.victronenergy.vebus.ttyO1"
+				: BackendConnection.uidPrefix() + "/" + activeInputInfo.serviceName
+			activeInput = _activeAcInputComponent.createObject(root, { serviceUid: serviceUid, inputInfo: activeInputInfo })
 		}
 	}
 
