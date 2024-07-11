@@ -102,7 +102,7 @@ Page {
 		}
 
 		delegate: ClassAndVrmInstance {
-			property var mqttDevice: Device { }
+			id: classAndVrmInstance
 
 			uid: model.uid + "/ClassAndVrmInstance"
 
@@ -135,8 +135,7 @@ Page {
 					const serviceType = deviceClass.startsWith("com.victronenergy.")
 							? deviceClass.substring("com.victronenergy.".length)
 							: deviceClass
-					mqttDevice.serviceUid = "mqtt/" + serviceType + "/" + deviceInstance
-					device = mqttDevice
+					device = deviceComponent.createObject(classAndVrmInstance, { serviceUid: "mqtt/" + serviceType + "/" + deviceInstance })
 				}
 			}
 
@@ -399,5 +398,10 @@ Page {
 				Global.pageManager.popPage()
 			}
 		}
+	}
+
+	Component {
+		id: deviceComponent
+		Device {}
 	}
 }

@@ -16,12 +16,18 @@ QtObject {
 
 		const inverterCount = 3
 		for (let i = 0; i < inverterCount; ++i) {
-			const inverterObj = inverterComponent.createObject(root, {
-				name: "My PV inverter " + i,
-				phaseCount: i + 1,
-			})
-			_createdObjects.push(inverterObj)
+			createPvInverter(i + 1)
 		}
+	}
+
+	function createPvInverter(phaseCount) {
+		const deviceInstanceNum = mockDeviceCount++
+		const inverterObj = inverterComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.pvinverter.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+			phaseCount: phaseCount
+		})
+		_createdObjects.push(inverterObj)
 	}
 
 	property Component inverterComponent: Component {
@@ -67,14 +73,9 @@ QtObject {
 				}
 			}
 
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.pvinverter.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
-				_customName.setValue("My PV Inverter " + deviceInstanceNum)
+				_deviceInstance.setValue(deviceInstance)
+				_customName.setValue("My PV Inverter " + deviceInstance)
 				_statusCode.setValue(Math.random() * VenusOS.PvInverter_StatusCode_Error)
 
 				for (let phaseIndex = 0; phaseIndex < 3; ++phaseIndex) {
@@ -98,10 +99,7 @@ QtObject {
 
 			if (config && config.inverters) {
 				for (let i = 0; i < config.inverters.length; ++i) {
-					const inverterObj = inverterComponent.createObject(root, {
-						phaseCount: config.inverters[i].phaseCount || 1,
-					})
-					_createdObjects.push(inverterObj)
+					root.createPvInverter(config.inverters[i].phaseCount || 1)
 				}
 			}
 		}

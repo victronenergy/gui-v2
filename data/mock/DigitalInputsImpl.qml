@@ -14,7 +14,10 @@ QtObject {
 	function populate() {
 		const inputCount = (Math.random() * 3) + 1
 		for (let i = 0; i < inputCount; ++i) {
+			const deviceInstanceNum = mockDeviceCount++
 			const inputObj = inputComponent.createObject(root, {
+				serviceUid: "mock/com.victronenergy.digitalinput.ttyUSB" + deviceInstanceNum,
+				deviceInstance: deviceInstanceNum,
 				type: Math.random() * VenusOS.DigitalInput_Type_Generator,
 				state: Math.random() * VenusOS.DigitalInput_State_Stopped
 			})
@@ -23,14 +26,9 @@ QtObject {
 
 	property Component inputComponent: Component {
 		DigitalInput {
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.digitalinput.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
-				_customName.setValue("Digital input %1".arg(deviceInstanceNum))
+				_deviceInstance.setValue(deviceInstance)
+				_customName.setValue("Digital input %1".arg(deviceInstance))
 			}
 		}
 	}

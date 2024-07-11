@@ -12,19 +12,18 @@ QtObject {
 	property int mockDeviceCount
 
 	function populate() {
-		meteoComponent.createObject(root)
+		const deviceInstanceNum = mockDeviceCount++
+		meteoComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.meteo.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
 	}
 
 	property Component meteoComponent: Component {
 		MeteoDevice {
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.meteo.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
-				_customName.setValue("Meteo %1".arg(deviceInstanceNum))
+				_deviceInstance.setValue(deviceInstance)
+				_customName.setValue("Meteo %1".arg(deviceInstance))
 			}
 		}
 	}

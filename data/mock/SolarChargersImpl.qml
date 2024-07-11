@@ -16,8 +16,12 @@ QtObject {
 
 		// Add 4 chargers, each with an increasing number of trackers (max 4 trackers)
 		const chargerCount = 4
-		for (let i = 0; i < chargerCount; ++i) {
-			const chargerObj = chargerComponent.createObject(root)
+		for (let i = 0; i < chargerCount; ++i) {            
+			const deviceInstanceNum = root.mockDeviceCount++
+			const chargerObj = chargerComponent.createObject(root, {
+				serviceUid: "mock/com.victronenergy.solarcharger.ttyUSB" + deviceInstanceNum,
+				deviceInstance: deviceInstanceNum,
+			})
 			chargerObj.initTrackers(i + 1)
 		}
 	}
@@ -160,15 +164,10 @@ QtObject {
 				}
 			}
 
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.solarcharger.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
+				_deviceInstance.setValue(deviceInstance)
 				_productName.setValue("SmartSolar Charger MPPT 100/50")
-				_customName.setValue("My Solar Charger " + deviceInstanceNum)
+				_customName.setValue("My Solar Charger " + deviceInstance)
 				_state.setValue(VenusOS.SolarCharger_State_ExternalControl)
 				_errorCode.setValue(0)
 				root.setRandomErrors(serviceUid + "/History/Overall")
@@ -190,8 +189,12 @@ QtObject {
 			Global.solarChargers.reset()
 
 			if (config && config.chargers) {
-				for (let i = 0; i < config.chargers.length; ++i) {
-					const chargerObj = chargerComponent.createObject(root)
+				for (let i = 0; i < config.chargers.length; ++i) {                    
+					const deviceInstanceNum = root.mockDeviceCount++
+					const chargerObj = chargerComponent.createObject(root, {
+						serviceUid: "mock/com.victronenergy.solarcharger.ttyUSB" + deviceInstanceNum,
+						deviceInstance: deviceInstanceNum,
+					})
 					chargerObj.initTrackers(i + 1)
 					if (config.chargers[i].power !== undefined) {
 						chargerObj._totalPower.setValue(config.chargers[i].power)

@@ -86,8 +86,9 @@ QtObject {
 			required property var modelData
 
 			readonly property Device device: Device {
+				serviceUid: "mock/" + input.modelData["serviceName"]
+
 				Component.onCompleted: {
-					serviceUid = "mock/" + input.modelData["serviceName"]
 					_deviceInstance.setValue(input.index)
 					if (input.modelData["productId"]) {
 						device._productId.setValue(input.modelData["productId"])

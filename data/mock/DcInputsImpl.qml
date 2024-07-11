@@ -48,7 +48,12 @@ QtObject {
 			console.warn("Cannot create mock DC device without service type! Properties are:", JSON.stringify(props))
 			return
 		}
-		const input = inputComponent.createObject(root, { serviceType: props.serviceType })
+		const deviceInstanceNum = mockDeviceCount++
+		const input = inputComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.%1.ttyUSB%2".arg(props.serviceType).arg(deviceInstanceNum),
+			deviceInstance: deviceInstanceNum,
+			serviceType: props.serviceType
+		})
 		for (let name in props) {
 			if (name !== "serviceType") {
 				input["_" + name].setValue(props[name])
@@ -71,9 +76,6 @@ QtObject {
 			id: input
 
 			property string serviceType
-
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
 
 			property Timer _dummyValues: Timer {
 				running: Global.mockDataSimulator.timersActive
@@ -135,9 +137,7 @@ QtObject {
 			}
 
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy." + serviceType + ".ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
+				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("DC device (%1)".arg(serviceType))
 				setMockValue("/State", 4)
 			}

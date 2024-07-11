@@ -12,19 +12,18 @@ QtObject {
 	property int mockDeviceCount
 
 	function populate() {
-		motorDriveComponent.createObject(root)
+		const deviceInstanceNum = mockDeviceCount++
+		motorDriveComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.motordrive.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
 	}
 
 	property Component motorDriveComponent: Component {
 		MotorDrive {
-			// Set a non-empty uid to avoid bindings to empty serviceUid before Component.onCompleted is called
-			serviceUid: "mock/com.victronenergy.dummy"
-
 			Component.onCompleted: {
-				const deviceInstanceNum = root.mockDeviceCount++
-				serviceUid = "mock/com.victronenergy.motordrive.ttyUSB" + deviceInstanceNum
-				_deviceInstance.setValue(deviceInstanceNum)
-				_customName.setValue("Motor Drive %1".arg(deviceInstanceNum))
+				_deviceInstance.setValue(deviceInstance)
+				_customName.setValue("Motor Drive %1".arg(deviceInstance))
 			}
 		}
 	}
