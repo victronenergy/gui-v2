@@ -11,8 +11,8 @@ Page {
 
 	property var battery
 
-	readonly property bool isFiamm48TL: productId.value === 0xB012
-	readonly property bool isParallelBms: productId.value === 0xA3E3
+	readonly property bool isFiamm48TL: productId.value === ProductInfo.ProductId_Battery_Fiamm48TL
+	readonly property bool isParallelBms: productId.value === ProductInfo.ProductId_Battery_ParallelBms
 
 	title: battery.name
 

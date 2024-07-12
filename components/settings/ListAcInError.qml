@@ -11,17 +11,12 @@ ListTextItem {
 
 	property string bindPrefix
 
-	// froniusInverterProductId should always be equal to VE_PROD_ID_PV_INVERTER_FRONIUS
-	readonly property int froniusInverterProductId: 0xA142
-	// carloGavazziEmProductId should always be equal to VE_PROD_ID_CARLO_GAVAZZI_EM
-	readonly property int carloGavazziEmProductId: 0xB002
-
 	text: CommonWords.error_code
 	dataItem.uid: root.bindPrefix + "/ErrorCode"
 	secondaryText: {
-		if (productId.value === froniusInverterProductId) {
+		if (productId.value === ProductInfo.ProductId_PvInverter_Fronius) {
 			return dataItem.value
-		} else if (productId.value === carloGavazziEmProductId) {
+		} else if (productId.value === ProductInfo.ProductId_EnergyMeter_CarloGavazzi) {
 			if (dataItem.value === 1) {
 				//: %1 = the error number
 				//% "Front selector locked (%1)"
@@ -34,8 +29,8 @@ ListTextItem {
 		}
 		return ""
 	}
-	allowed: productId.value === froniusInverterProductId
-			|| productId.value === carloGavazziEmProductId
+	allowed: productId.value === ProductInfo.ProductId_PvInverter_Fronius
+			|| productId.value === ProductInfo.ProductId_EnergyMeter_CarloGavazzi
 
 
 	VeQuickItem {

@@ -12,21 +12,16 @@ ObjectModel {
 	property string bindPrefix
 	property int productId
 
-	// froniusInverterProductId should always be equal to VE_PROD_ID_PV_INVERTER_FRONIUS
-	readonly property int froniusInverterProductId: 0xA142
-	// carloGavazziEmProductId should always be equal to VE_PROD_ID_CARLO_GAVAZZI_EM
-	readonly property int carloGavazziEmProductId: 0xB002
-
 	readonly property var nrOfPhases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
 
 	ListTextItem {
 		text: CommonWords.status
-		dataItem.uid: root.productId === froniusInverterProductId
+		dataItem.uid: root.productId === ProductInfo.ProductId_PvInverter_Fronius
 				? root.bindPrefix + "/StatusCode"
 				: ""
-		allowed: root.productId === froniusInverterProductId
+		allowed: root.productId === ProductInfo.ProductId_PvInverter_Fronius
 		secondaryText: Global.pvInverters.statusCodeToText(dataItem.value)
 	}
 

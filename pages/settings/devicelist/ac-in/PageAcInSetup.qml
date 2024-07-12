@@ -11,9 +11,6 @@ Page {
 
 	property string bindPrefix
 
-	property int em24ProductId: 0xb017
-	property int smappeeProductId: 0xb018
-
 	/*
 	 * This is a bit weird, when changing the role in a cgwacs service, it will
 	 * directly disconnect, without a reply or signal that the value changed. So
@@ -100,7 +97,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Phase configuration"
 				text: qsTrId("ac-in-setup_phase_configuration")
-				allowed: productId.value == em24ProductId
+				allowed: productId.value == ProductInfo.ProductId_EnergyMeter_Em24
 				dataItem.uid: root.bindPrefix + "/PhaseConfig"
 				enabled: !em24Locked()
 				optionModel: [
@@ -116,14 +113,14 @@ Page {
 				id: em24SwitchPos
 				//% "Switch position"
 				text: qsTrId("ac-in-setup_switch_position")
-				allowed: productId.value == em24ProductId
+				allowed: productId.value == ProductInfo.ProductId_EnergyMeter_Em24
 				dataItem.uid: root.bindPrefix + "/SwitchPos"
 				secondaryText: dataItem.isValid ? em24SwitchText(dataItem.value) : "--"
 			}
 
 			ListLabel {
 				text: qsTr("Set the switch in an unlocked position to modify the settings.")
-				allowed: productId.value == em24ProductId && em24Locked()
+				allowed: productId.value == ProductInfo.ProductId_EnergyMeter_Em24 && em24Locked()
 			}
 
 			/* Smappee settings */
@@ -131,7 +128,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Phase configuration"
 				text: qsTrId("ac-in-setup_phase_configuration")
-				allowed: productId.value == smappeeProductId
+				allowed: productId.value == ProductInfo.ProductId_PowerBox_Smappee
 				dataItem.uid: root.bindPrefix + "/PhaseConfig"
 				optionModel: [
 					//% "Single phase"
@@ -145,7 +142,7 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.current_transformers
-				allowed: productId.value == smappeeProductId
+				allowed: productId.value == ProductInfo.ProductId_PowerBox_Smappee
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeCTList.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -155,7 +152,7 @@ Page {
 			ListNavigationItem {
 				//% "Devices"
 				text: qsTrId("ac-in-setup_devices")
-				allowed: productId.value == smappeeProductId
+				allowed: productId.value == ProductInfo.ProductId_PowerBox_Smappee
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml",
 							{ "bindPrefix": root.bindPrefix })
