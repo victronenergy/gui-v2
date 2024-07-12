@@ -179,7 +179,7 @@ QtObject {
 		{
 			name: "Multiple alternators (including Orion XS), no AC/DC inputs",
 			acInputs: [emptyAcInput, emptyAcInput],
-			dcInputs: { types: [ { serviceType: "alternator", productId: 0xA3F0 }, { serviceType: "alternator" } ] },
+			dcInputs: { types: [ { serviceType: "alternator", productId: ProductInfo.ProductId_OrionXs_Min }, { serviceType: "alternator" } ] },
 		},
 		{
 			name: "Shore and Generator, Shore active",

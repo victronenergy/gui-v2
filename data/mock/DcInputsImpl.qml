@@ -61,7 +61,7 @@ QtObject {
 		}
 		if (props.serviceType === "alternator" && props.productId === undefined) {
 			// Set a generic product id so that PageAlternator can show a valid page.
-			input._productId.setValue(0xB091)
+			input._productId.setValue(ProductInfo.ProductId_Alternator_Generic)
 		}
 		_createdObjects.push(input)
 	}
@@ -94,7 +94,7 @@ QtObject {
 			}
 
 			onProductIdChanged: {
-				if (productId === 0xA3F0) {
+				if (productId === ProductInfo.ProductId_OrionXs_Min) {
 					initOrionXSValues()
 				}
 			}
