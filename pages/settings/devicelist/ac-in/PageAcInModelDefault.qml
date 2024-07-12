@@ -30,27 +30,8 @@ ObjectModel {
 		secondaryText: Global.pvInverters.statusCodeToText(dataItem.value)
 	}
 
-	ListTextItem {
-		text: CommonWords.error_code
-		dataItem.uid: root.bindPrefix + "/ErrorCode"
-		secondaryText: {
-			if (root.productId === froniusInverterProductId) {
-				return dataItem.value
-			} else if (root.productId === carloGavazziEmProductId) {
-				if (dataItem.value === 1) {
-					//: %1 = the error number
-					//% "Front selector locked (%1)"
-					return qsTrId("ac-in-modeldefault_front_selector_locked").arg(dataItem.value)
-				} else if (dataItem.value !== undefined) {
-					//: %1 = the error number
-					//% "No error (%1)"
-					return qsTrId("ac-in-modeldefault_no_error").arg(dataItem.value)
-				}
-			}
-			return ""
-		}
-		allowed: root.productId === froniusInverterProductId
-				|| root.productId === carloGavazziEmProductId
+	ListAcInError {
+		bindPrefix: root.bindPrefix
 	}
 
 	Column {

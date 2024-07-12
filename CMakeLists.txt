@@ -367,6 +367,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/FirmwareCheckListButton.qml
     components/settings/InverterAcOutQuantityGroup.qml
     components/settings/Led.qml
+    components/settings/ListAcInError.qml
     components/settings/ListAlarmState.qml
     components/settings/ListClearHistoryButton.qml
     components/settings/ListDcInputQuantityGroup.qml

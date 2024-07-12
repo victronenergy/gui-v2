@@ -91,9 +91,9 @@ Page {
 				allowed: dataItem.isValid
 			}
 
-			ListTextItem {
+			ListAcInError {
 				text: CommonWords.error
-				secondaryText: root.pvInverter.errorCode > 0 ? root.pvInverter.errorCode : CommonWords.none_errors
+				bindPrefix: root.pvInverter.serviceUid
 				secondaryLabel.color: root.pvInverter.errorCode > 0 ? Theme.color_critical : Theme.color_font_secondary
 			}
 
