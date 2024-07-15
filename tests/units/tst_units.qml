@@ -35,12 +35,13 @@ TestCase {
 	function test_percentage() {
 		expect(VenusOS.Units_Percentage, NaN, "--", "%")
 		expect(VenusOS.Units_Percentage, 0, "0", "%")
-		expect(VenusOS.Units_Percentage, 0.4, "0.4", "%")
-		expect(VenusOS.Units_Percentage, 0.55, "0.6", "%")
+		expect(VenusOS.Units_Percentage, 0.4, "0", "%")
+		expect(VenusOS.Units_Percentage, 0.55, "1", "%")
 		expect(VenusOS.Units_Percentage, 14, "14", "%")
 		expect(VenusOS.Units_Percentage, 15.5, "16", "%")
-		expect(VenusOS.Units_Percentage, 99.3, "99.3", "%")
-		expect(VenusOS.Units_Percentage, 99.7, "99.7", "%")
+		expect(VenusOS.Units_Percentage, 99.3, "99", "%")
+		expect(VenusOS.Units_Percentage, 99.7, "99", "%")
+		expect(VenusOS.Units_Percentage, 99.9, "100", "%")
 		expect(VenusOS.Units_Percentage, 100, "100", "%")
 	}
 
@@ -60,8 +61,14 @@ TestCase {
 
 			expect(unit, NaN, "--", unitString)
 			expect(unit, 0, "0", unitString)
-			expect(unit, 0.4, "0.4", unitString)
-			expect(unit, 0.55, "0.6", unitString)
+			expect(unit, 0.4, "0", unitString)
+			if (unit === VenusOS.Units_Watt) {
+				expect(unit, 0.55, "0", unitString)
+				expect(unit, 0.9, "0", unitString)
+				expect(unit, 1.1, "1", unitString)
+			} else {
+				expect(unit, 0.55, "1", unitString)
+			}
 			expect(unit, 14, "14", unitString)
 			expect(unit, 15.5, "16", unitString)
 			expect(unit, 100, "100", unitString)
@@ -152,7 +159,7 @@ TestCase {
 
 		expect(unit, NaN, "--", "kWh")
 		expect(unit, 0, "0", "kWh")
-		expect(unit, 0.0005, "0.5", "Wh")
+		expect(unit, 0.0005, "1", "Wh") // precision of three for kWh means precision of zero for Wh.
 		expect(unit, 0.005, "5", "Wh")
 		expect(unit, 0.3458, "346", "Wh")
 		expect(unit, 0.5, "500", "Wh")
