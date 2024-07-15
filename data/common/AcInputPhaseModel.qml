@@ -30,20 +30,18 @@ ListModel {
 		delegate: QtObject {
 			readonly property VeQuickItem _current: VeQuickItem {
 				uid:  Global.system.serviceUid + "/Ac/ActiveIn/L" + (model.index + 1) + "/Current"
-				readonly property real currentValue: !isValid ? NaN : value
-				onCurrentValueChanged: {
+				onValueChanged: {
 					if (model.index >= 0 && model.index < root.count) {
-						setProperty(model.index, "current", currentValue)
+						setProperty(model.index, "current", isValid ? value : NaN)
 					}
 				}
 			}
 
 			readonly property VeQuickItem _power: VeQuickItem {
 				uid: Global.system.serviceUid + "/Ac/ActiveIn/L" + (model.index + 1) + "/Power"
-				readonly property real powerValue: !isValid ? NaN : value
-				onPowerValueChanged: {
+				onValueChanged: {
 					if (model.index >= 0 && model.index < root.count) {
-						setProperty(model.index, "power", powerValue)
+						setProperty(model.index, "power", isValid ? value : NaN)
 					}
 				}
 			}
