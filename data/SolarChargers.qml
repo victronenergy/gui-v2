@@ -39,7 +39,7 @@ QtObject {
 			if (trackerName.length > 0) {
 				return trackerName
 			} else {
-				return "#%2".arg(deviceName).arg(trackerIndex + 1)
+				return "#%1".arg(trackerIndex + 1)
 			}
 		}
 	}

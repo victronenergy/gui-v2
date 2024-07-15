@@ -71,7 +71,7 @@ Page {
 					valueForModelIndex: function(trackerIndex, column) {
 						const tracker = root.solarCharger.trackers.get(trackerIndex).solarTracker
 						if (column === 0) {
-							return tracker.name
+							return Global.solarChargers.formatTrackerName(tracker.name, trackerIndex, root.solarCharger.trackers.count, root.solarCharger.name, VenusOS.TrackerName_NoDevicePrefix)
 						} else if (column === 1) {
 							// Today's yield for this tracker
 							const history = root.solarCharger.dailyTrackerHistory(0, trackerIndex)
