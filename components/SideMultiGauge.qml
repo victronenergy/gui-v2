@@ -47,11 +47,13 @@ Item {
 		delegate: Item {
 			id: gaugeDelegate
 
-			readonly property bool feedingToGrid: root.inputMode
-					&& (model.power || 0) < 0
-
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: root.height
+
+			// ignore noise values (close to zero)
+			readonly property real modelValue: Math.floor(Math.abs(model[root.phaseModelProperty] || 0)) < 1.0 ? 0.0
+					: model[root.phaseModelProperty]
+			readonly property bool feedingToGrid: root.inputMode && modelValue < 0.0
 
 			SideGauge {
 				id: gauge
@@ -93,7 +95,7 @@ Item {
 				// reverses the gauge direction so that negative and positive values have the same
 				// value on the gauge, though negative values will be drawn in green.
 				value: root.visible
-					   ? (gaugeDelegate.feedingToGrid ? Math.abs(model[root.phaseModelProperty]) : model[root.phaseModelProperty])
+					   ? (gaugeDelegate.feedingToGrid ? Math.abs(gaugeDelegate.modelValue) : gaugeDelegate.modelValue)
 					   : root.minimumValue
 				minimumValue: 0
 				maximumValue: Math.max(Math.abs(root.minimumValue), Math.abs(root.maximumValue))

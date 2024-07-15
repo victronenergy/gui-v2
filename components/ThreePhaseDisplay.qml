@@ -34,7 +34,10 @@ Flow {
 		delegate: Item {
 			id: phaseDelegate
 
-			readonly property bool feedingToGrid: root.inputMode && (model.power || 0) < 0
+			// ignore noise values (close to zero)
+			readonly property real modelValue: Math.floor(Math.abs(model[root.phaseModelProperty] || 0)) < 1.0 ? 0.0
+					: model[root.phaseModelProperty]
+			readonly property bool feedingToGrid: root.inputMode && modelValue < 0.0
 			readonly property int valueStatus: feedingToGrid ? Theme.Ok
 					: root.phaseModelProperty ? Theme.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
 					: Theme.Ok
@@ -82,7 +85,7 @@ Flow {
 			ValueRange {
 				id: valueRange
 
-				value: root.phaseModelProperty ? model[root.phaseModelProperty] : 0
+				value: phaseDelegate.modelValue
 				minimumValue: root.minimumValue
 				maximumValue: root.maximumValue
 			}

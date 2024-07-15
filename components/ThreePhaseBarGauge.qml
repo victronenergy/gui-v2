@@ -32,8 +32,15 @@ Flow {
 		id: phaseRepeater
 
 		delegate: Item {
+			id: phaseDelegate
+
 			width: root.orientation === Qt.Vertical ? root.width : root._delegateLength
 			height: root.orientation === Qt.Vertical ? root._delegateLength : root.height
+
+			// ignore noise values (close to zero)
+			readonly property real modelValue: Math.floor(Math.abs(model[root.phaseModelProperty] || 0)) < 1.0 ? 0.0
+					: model[root.phaseModelProperty]
+			readonly property bool feedingToGrid: root.inputMode && modelValue < 0.0
 
 			Label {
 				id: phaseLabel
@@ -53,7 +60,7 @@ Flow {
 				// reverses the gauge direction so that negative and positive values have the same
 				// value on the gauge, though negative values will be drawn in green.
 				value: root.visible
-					   ? gaugeLoader.feedingToGrid ? Math.abs(model[root.phaseModelProperty]) : model[root.phaseModelProperty]
+					   ? phaseDelegate.feedingToGrid ? Math.abs(phaseDelegate.modelValue) : phaseDelegate.modelValue
 					   : root.minimumValue
 				minimumValue: 0
 				maximumValue: Math.max(Math.abs(root.minimumValue), Math.abs(root.maximumValue))
@@ -65,15 +72,13 @@ Flow {
 				width: parent.width - (phaseLabel.visible ? phaseLabel.width : 0)
 				height: parent.height
 				sourceComponent: Global.isGxDevice ? cheapGauge : prettyGauge
-				readonly property bool feedingToGrid: root.inputMode
-						&& (model.power || 0) < 0
 			}
 
 			Component {
 				id: cheapGauge
 				CheapBarGauge {
-					foregroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-					backgroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_darkGreen
+					foregroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+					backgroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_darkGreen
 							: root.inOverviewWidget && valueStatus === Theme.Ok ? Theme.color_darkishBlue
 							: Theme.statusColorValue(valueStatus, true)
 					valueType: root.valueType
@@ -86,8 +91,8 @@ Flow {
 			Component {
 				id: prettyGauge
 				BarGauge {
-					foregroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-					backgroundColor: Theme.color_darkOk,gaugeLoader.feedingToGrid ? Theme.color_darkGreen
+					foregroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+					backgroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_darkGreen
 							: root.inOverviewWidget && valueStatus === Theme.Ok ? Theme.color_darkishBlue
 							: Theme.statusColorValue(valueStatus, true)
 					valueType: root.valueType
