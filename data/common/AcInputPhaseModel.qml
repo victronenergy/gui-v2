@@ -9,7 +9,7 @@ import Victron.VenusOS
 ListModel {
 	id: root
 
-	property int totalPower
+	property real totalPower
 	property real firstPhaseCurrent: count === 1 ? get(0).current : NaN
 
 	readonly property Timer _timer: Timer { // timer needed so the display doesn't update too frequently
@@ -18,8 +18,8 @@ ListModel {
 		running: true
 		onTriggered: {
 			let sum = 0
-			for (let i = 0; i < _phases.count; ++i) {
-				sum += _phases.get(i).power || 0
+			for (let i = 0; i < root.count; ++i) {
+				sum += root.get(i).power || 0
 			}
 			root.totalPower  = sum
 		}
