@@ -7,6 +7,8 @@
 
 #include <veutil/qt/unit_conversion.hpp>
 
+#include <QtMath>
+
 namespace {
 
 static const QString DegreesSymbol = QStringLiteral("\u00b0");
@@ -231,6 +233,22 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	quantity.unit = defaultUnitString(unit, formatHints);
 	quantity.scale = VenusOS::Enums::Units_Scale_None;
 
+	// For Watts, floor values with magnitude less than 1.0 W.
+	// This ensures we ignore potential noise values.
+	if (unit == VenusOS::Enums::Units_Watt && qAbs(value) < 1.0) {
+		quantity.number = formattingLocale()->toString(0.0, 'f', 0);
+		return quantity;
+	}
+
+	// For Percentages with zero precision, if the value is between 99% and 99.9%,
+	// always show 99% so that it's clear that it's not completely full.
+	if (unit == VenusOS::Enums::Units_Percentage && (precision == 0 || precision == -1) && value > 99) {
+		quantity.number = value < 99.9
+			? formattingLocale()->toString(99.0, 'f', 0)
+			: formattingLocale()->toString(100.0, 'f', 0);
+		return quantity;
+	}
+
 	qreal scaledValue = value;
 
 	// scale value is the unit of measure is scalable
@@ -292,7 +310,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		}
 	}
 
-	auto numberOfDigits = [](int value) {
+	auto numberOfDigits = [](int value) -> int {
 		int digits = 0;
 		while (value) {
 			value /= 10;
@@ -306,27 +324,19 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		precision = 0;
 	}
 
-	// If value is between -1 and 1, but is not zero, show one decimal precision regardless of
-	// precision parameter, to avoid showing just '0'.
-	// And if showing percentages, avoid showing '100%' if value is between 99-100.
+	// if the scaled value is large (hundreds or thousands) no need to display all fractional digits after the decimal point.
+	// Possibly clip the precision by 1 or 2 fractional digits for scaled values between 10 and 99,
+	// except for Units_Volt_DC values i.e. don't clip precision for values like 53.35 V DC.
 	precision = precision < 0 ? defaultUnitPrecision(unit) : precision;
-	if (precision < 2 && (scaledValue != 0 && qAbs(scaledValue) < 1)
-			|| (quantity.unit.compare(QStringLiteral("%")) == 0 && scaledValue > 99 && scaledValue < 100)) {
-
-		int vFixed = qRound(scaledValue * 10);
-		scaledValue = (1.0*vFixed) / 10.0;
-		quantity.number = formattingLocale()->toString(scaledValue, 'f', 1);
-	} else {
-		// if the value is large (hundreds or thousands) no need to display decimals after the decimal point
-		int digits = numberOfDigits(scaledValue);
-		if (unit != VenusOS::Enums::Units_Volt_DC || digits > 2) // don't clip precision for values like 53.35 V DC.
-			precision = qMax(0, precision - qMax(0, digits - (precision == 1 ? 2 : 1)));
-
-		const qreal vFixedMultiplier = std::pow(10, precision);
-		int vFixed = qRound(scaledValue * vFixedMultiplier);
-		scaledValue = (1.0*vFixed) / vFixedMultiplier;
-		quantity.number = formattingLocale()->toString(scaledValue, 'f', precision);
+	int digits = numberOfDigits(static_cast<int>(scaledValue));
+	if (unit != VenusOS::Enums::Units_Volt_DC || digits > 2) {
+		precision = qMax(0, precision - qMax(0, digits - (precision == 1 ? 2 : 1)));
 	}
+
+	const qreal vFixedMultiplier = std::pow(10, precision);
+	int vFixed = qRound(scaledValue * vFixedMultiplier);
+	scaledValue = (1.0*vFixed) / vFixedMultiplier;
+	quantity.number = formattingLocale()->toString(scaledValue, 'f', precision);
 
 	return quantity;
 }
