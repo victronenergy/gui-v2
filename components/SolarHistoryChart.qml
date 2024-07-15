@@ -210,7 +210,7 @@ Item {
 					Rectangle {
 						anchors.fill: parent
 						radius: Theme.geometry_solarChart_bar_radius
-						color: barMouseArea.containsPress ? Theme.color_dimBlue : Theme.color_ok
+						color: barMouseArea.containsPress ? Theme.color_lightBlue : Theme.color_ok
 					}
 				}
 			}
