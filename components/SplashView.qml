@@ -13,6 +13,25 @@ Rectangle {
 	color: Theme.color_background_primary
 	visible: Global.splashScreenVisible
 
+	property bool allPagesLoaded: Global.allPagesLoaded
+	onAllPagesLoadedChanged: {
+		if (Qt.platform.os == "wasm") {
+			// skip the fade and logo animations on WebAssembly
+			// as startup speed is more important.
+			hideSplashView()
+		}
+	}
+
+	function hideSplashView() {
+		Global.splashScreenVisible = false
+		// reset the state variables we animated.
+		logoIcon.opacity = 1.0
+		logoText.opacity = 1.0
+		extraInfoColumn.nextOpacity = 1.0
+		loadingProgress.opacity = 1.0
+		loadingProgress.visible = true
+	}
+
 	OpacityAnimator on opacity {
 		id: fadeOutAnim
 
@@ -21,13 +40,7 @@ Rectangle {
 		duration: Theme.animation_splash_fade_duration
 		onRunningChanged: {
 			if (!running) {
-				Global.splashScreenVisible = false
-				// reset the state variables we animated.
-				logoIcon.opacity = 1.0
-				logoText.opacity = 1.0
-				extraInfoColumn.nextOpacity = 1.0
-				loadingProgress.opacity = 1.0
-				loadingProgress.visible = true
+				root.hideSplashView()
 			}
 		}
 	}
@@ -49,7 +62,8 @@ Rectangle {
 			}
 		}
 
-		source: Theme.colorScheme === Theme.Light
+		source: Qt.platform.os == "wasm" ? null
+			: Theme.colorScheme === Theme.Light
 				? Theme.screenSize === Theme.SevenInch
 				  ? "qrc:/images/gauge_intro_7_matte_white.gif"
 				  : "qrc:/images/gauge_intro_5_matte_white.gif"
@@ -113,7 +127,7 @@ Rectangle {
 	SequentialAnimation {
 		id: initialFadeAnimation
 
-		running: Global.allPagesLoaded
+		running: Global.allPagesLoaded && Qt.platform.os != "wasm"
 
 		PropertyAction {
 			target: extraInfoColumn
