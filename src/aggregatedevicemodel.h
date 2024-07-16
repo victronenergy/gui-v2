@@ -59,6 +59,7 @@ private:
 	public:
 		DeviceInfo(BaseDevice *d, BaseDeviceModel *m);
 		~DeviceInfo();
+		bool isConnected() const;
 
 		static QString infoId(BaseDevice *device, BaseDeviceModel *sourceModel);
 
@@ -72,11 +73,11 @@ private:
 	};
 
 	void sourceModelRowsInserted(const QModelIndex &parent, int first, int last);
-	void sourceModelRowsAboutToBeRemoved(const QModelIndex &parent, int first, int last);
 	int indexOf(const QString &deviceInfoId) const;
 	int indexOf(const BaseDevice *device) const;
 	int insertionIndex(BaseDevice *device) const;
 	void deviceDescriptionChanged();
+	void deviceValidChanged();
 	void cleanUp();
 
 	QHash<int, QByteArray> m_roleNames;
