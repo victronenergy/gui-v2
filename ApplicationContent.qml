@@ -63,15 +63,21 @@ Item {
 
 		VeQuickItem {
 			id: touchEnabled
+
+			property bool _initialized: false
+
 			uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/TouchEnabled"
 			onValueChanged: {
-				Global.showToastNotification(VenusOS.Notification_Info,
-											 (value ?
-												 //% "Touch input on"
-												 qsTrId("application_content_touch_input_on") :
-												 //% "Touch input off"
-												 qsTrId("application_content_touch_input_off")),
-											 3000)
+				if (_initialized) { // Only show the notification when the value changes, not when the application is loaded
+					Global.showToastNotification(VenusOS.Notification_Info,
+												 (value ?
+													 //% "Touch input on"
+													 qsTrId("application_content_touch_input_on") :
+													 //% "Touch input off"
+													 qsTrId("application_content_touch_input_off")),
+												 3000)
+				}
+				_initialized = true
 			}
 		}
 
