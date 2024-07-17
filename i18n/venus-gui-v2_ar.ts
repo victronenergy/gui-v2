@@ -20,7 +20,7 @@
       <translation>إفراط في تحيمل المعاكس</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="334"/>
+      <location filename="../../components/CommonWords.qml" line="346"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>طاقة</translation>
@@ -56,25 +56,25 @@
       <translation>يدوي</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="299"/>
+      <location filename="../../components/CommonWords.qml" line="308"/>
       <source>None</source>
       <extracomment>Indicates no phase</extracomment>
       <translation>لا أحد</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="341"/>
+      <location filename="../../components/CommonWords.qml" line="353"/>
       <source>Position</source>
       <extracomment>EVCS AC input/output position</extracomment>
       <translation>الموقع</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="403"/>
+      <location filename="../../components/CommonWords.qml" line="415"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation>السرعة</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="421"/>
+      <location filename="../../components/CommonWords.qml" line="433"/>
       <source>State</source>
       <translation>الحالة</translation>
     </message>
@@ -246,22 +246,22 @@
       <translation>حد عمر البطارية: %1%</translation>
     </message>
     <message id="controlcard_generator_disableautostartdialog_description">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="72"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="69"/>
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
       <translation>سيتم تعطيل التشغيل التلقائي ولن يبدأ المولد تلقائيًا استنادًا إلى الأوضاع المحددة.</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="94"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="91"/>
       <source>The generator will start and stop based on the configured autostart conditions.</source>
       <translation>سيتم تشغيل المولد ويتوقف حسب أوضاع التشغيل الآلي المحددة.</translation>
     </message>
     <message id="controlcard_generator_subcard_button_manual_stop">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="125"/>
+      <location filename="../../components/GeneratorManualControlButton.qml" line="34"/>
       <source>Manual Stop</source>
       <translation>الإيقاف اليدوي</translation>
     </message>
     <message id="controlcard_generator_subcard_button_manual_start">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="128"/>
+      <location filename="../../components/GeneratorManualControlButton.qml" line="37"/>
       <source>Manual Start</source>
       <translation>البدء الآلي</translation>
     </message>
@@ -381,47 +381,47 @@
       <translation>اسم الجهاز</translation>
     </message>
     <message id="settings_remote_switch_control_disabled">
-      <location filename="../../pages/settings/PageGenerator.qml" line="74"/>
+      <location filename="../../components/settings/ListGeneratorError.qml" line="17"/>
       <source>Remote switch control disabled</source>
       <translation>مفتاح التحكم عن بعد تم تعطيله</translation>
     </message>
     <message id="settings_generator_in_fault_condition">
-      <location filename="../../pages/settings/PageGenerator.qml" line="76"/>
+      <location filename="../../components/settings/ListGeneratorError.qml" line="19"/>
       <source>Generator in fault condition</source>
       <translation>المولد في حالة الخلل</translation>
     </message>
     <message id="settings_generator_not_detected">
-      <location filename="../../pages/settings/PageGenerator.qml" line="78"/>
+      <location filename="../../components/settings/ListGeneratorError.qml" line="21"/>
       <source>Generator not detected at AC input</source>
       <translation>المولد غير مكتشف في دخل التيار المتردد</translation>
     </message>
     <message id="settings_page_relay_generator_run_time">
-      <location filename="../../pages/settings/PageGenerator.qml" line="86"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="71"/>
       <source>Run time</source>
       <translation>وقت التشغيل</translation>
     </message>
     <message id="settings_page_relay_generator_total_run_time">
-      <location filename="../../pages/settings/PageGenerator.qml" line="94"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="79"/>
       <source>Total run time</source>
       <translation>وقت التشغيل الكلي</translation>
     </message>
     <message id="settings_page_relay_generator_accumulated_running_time">
-      <location filename="../../pages/settings/PageGenerator.qml" line="117"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="102"/>
       <source>Accumulated running time since last test run</source>
       <translation>وقت التشغيل المتراكم منذ آخر تشغيل للاختبار</translation>
     </message>
     <message id="settings_page_relay_generator_time_to_next_test_run">
-      <location filename="../../pages/settings/PageGenerator.qml" line="127"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="112"/>
       <source>Time to next test run</source>
       <translation>الوقت المتبقي للمعاينة التالية</translation>
     </message>
     <message id="settings_page_relay_generator_running_now">
-      <location filename="../../pages/settings/PageGenerator.qml" line="144"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="129"/>
       <source>Running now</source>
       <translation>مشغل حاليا</translation>
     </message>
-    <message id="settings_page_relay_generator_manual_start">
-      <location filename="../../pages/settings/PageGenerator.qml" line="158"/>
+    <message id="common_words_manual_start">
+      <location filename="../../components/CommonWords.qml" line="253"/>
       <source>Manual start</source>
       <translation>البدء الآلي</translation>
     </message>
@@ -430,13 +430,8 @@
       <source>Start generator</source>
       <translation>تشغيل المولد</translation>
     </message>
-    <message id="settings_page_relay_generator_run_for_hh_mm">
-      <location filename="../../pages/settings/PageGenerator.qml" line="198"/>
-      <source>Run for (hh:mm)</source>
-      <translation>التشغيل خلال (hh:mm)</translation>
-    </message>
     <message id="settings_page_relay_generator_daily_run_time">
-      <location filename="../../pages/settings/PageGenerator.qml" line="211"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="154"/>
       <source>Daily run time</source>
       <translation>وقت التشغيل اليومي</translation>
     </message>
@@ -451,7 +446,7 @@
       <translation>القيمة يجب أن تكون أقل من قيمة التشغيل</translation>
     </message>
     <message id="settings_minmax_acout_max_power">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="121"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="123"/>
       <source>AC output</source>
       <translation>خرج التيار المتردد</translation>
     </message>
@@ -703,11 +698,6 @@
       <source>Hidden</source>
       <translation>مخفي</translation>
     </message>
-    <message id="settings_batteries_intro">
-      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="45"/>
-      <source>Use this menu to define which battery measurements to see on the VRM Portal and the MFD HTML5 App.</source>
-      <translation>استخدم هذه القائمة في تحديد قياسات البطارية التي ستظهر على بوابة VRM وتطبيق MFD HTML5.</translation>
-    </message>
     <message id="settings_batteries_battery_auxiliary_measurement">
       <location filename="../../pages/settings/PageSettingsBatteries.qml" line="62"/>
       <source>%1 (Auxiliary measurement)</source>
@@ -849,7 +839,7 @@
       <translation>جيد. ليس هناك أي جهاز متصل مع نفس هذا الرقم الفريد.</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="280"/>
+      <location filename="../../components/CommonWords.qml" line="289"/>
       <source>Network status</source>
       <translation>حالة الشبكة</translation>
     </message>
@@ -1722,11 +1712,6 @@ Use unless prohibited by the utility provider.</source>
       <source>Grid feed-in</source>
       <translation>تغذية داخلية للشبكة</translation>
     </message>
-    <message id="settings_ess_scheduled_charging">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="256"/>
-      <source>Scheduled charging</source>
-      <translation>الشحن مجدول</translation>
-    </message>
     <message id="settings_ess_ac_coupled_pv">
       <location filename="../../pages/settings/PageSettingsHub4Feedin.qml" line="20"/>
       <source>AC-coupled PV - feed in excess</source>
@@ -2096,42 +2081,42 @@ Documentation على  https://ve3.nl/vol</translation>
       <translation>إنذار المرحل</translation>
     </message>
     <message id="settings_relay_alarm_polarity">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="43"/>
       <source>Alarm relay polarity</source>
       <translation>قطبية مرحل الإنذار</translation>
     </message>
     <message id="settings_relay_normally_open">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="48"/>
       <source>Normally open</source>
       <translation>فتح عادي</translation>
     </message>
     <message id="settings_relay_normally_closed">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="50"/>
       <source>Normally closed</source>
       <translation>مغلق في العادة</translation>
     </message>
     <message id="settings_relay_relay1on">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="59"/>
       <source>Relay 1 on</source>
       <translation>مرحل 1 مشغل</translation>
     </message>
     <message id="settings_relay_on">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="61"/>
       <source>Relay on</source>
       <translation>مرحل مشغل</translation>
     </message>
     <message id="settings_relay_function_relay2">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="70"/>
       <source>Function (Relay 2)</source>
       <translation>الوظيفة (مرحل 2)</translation>
     </message>
     <message id="settings_relay_relay2on">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="84"/>
       <source>Relay 2 on</source>
       <translation>مرحل 2 مشغل</translation>
     </message>
     <message id="settings_relay_temp_control_rules">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="92"/>
       <source>Temperature control rules</source>
       <translation>قواعد التحكم في درجة الحرارة</translation>
     </message>
@@ -2574,28 +2559,28 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>إلخ</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="276"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="275"/>
       <source>Unconnected %1</source>
       <extracomment>Name for an unconnected device. %1 = type of device</extracomment>
       <translation>غير متصل %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="357"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="356"/>
       <source>Reboot now?</source>
       <translation>هل تريد إعادة التشغيل الآن؟</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="360"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="359"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>لن يتم تطبيق تغييرات نسخة VRM إلى أن يتم إعادة تشغيل الجهاز.</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="378"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="377"/>
       <source>Device is rebooting...</source>
       <translation>إعادة تشغيل الجهاز...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="381"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="380"/>
       <source>Device has been rebooted.</source>
       <translation>تم إعادة تشغيل الجهاز.</translation>
     </message>
@@ -2616,25 +2601,25 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>أحدث أخطاء</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="535"/>
+      <location filename="../../components/CommonWords.qml" line="553"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>آخر خطأ</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="538"/>
+      <location filename="../../components/CommonWords.qml" line="556"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>ثاني آخر خطأ</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="541"/>
+      <location filename="../../components/CommonWords.qml" line="559"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>ثالث آخر خطأ</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="544"/>
+      <location filename="../../components/CommonWords.qml" line="562"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>رابع آخر خطأ</translation>
@@ -2717,7 +2702,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>الجهد الكهربائي للشحن</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="370"/>
+      <location filename="../../components/CommonWords.qml" line="382"/>
       <source>Reset</source>
       <extracomment>Reset the BMS control</extracomment>
       <translation>إعادة ضبط</translation>
@@ -2745,7 +2730,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>%1 التاريخ</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="189"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="190"/>
       <source>Networked operation</source>
       <translation>عملية عبر الشبكة</translation>
     </message>
@@ -2934,7 +2919,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>غير مدعم</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="237"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="210"/>
       <source>Remove disconnected devices</source>
       <translation>افصل الأجهزة غير المتصلة</translation>
     </message>
@@ -2953,8 +2938,8 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Charger or generator start/stop</source>
       <translation>بدء/وقف الشاحن أو المولد</translation>
     </message>
-    <message id="batterysettingrelay_manual_control">
-      <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="35"/>
+    <message id="common_words_manual_control">
+      <location filename="../../components/CommonWords.qml" line="250"/>
       <source>Manual control</source>
       <translation>تحكم يدوي</translation>
     </message>
@@ -3004,42 +2989,42 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>علامات الإنذار</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="444"/>
+      <location filename="../../components/CommonWords.qml" line="456"/>
       <source>Switch</source>
       <extracomment>Change the battery mode</extracomment>
       <translation>مبدل</translation>
     </message>
     <message id="devicelist_battery_initializing">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="41"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="42"/>
       <source>Initializing</source>
       <translation>القيام بالبدء</translation>
     </message>
     <message id="devicelist_battery_shutdown">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="53"/>
       <source>Shutdown</source>
       <extracomment>Status is 'Shutdown'</extracomment>
       <translation>إيقاف التشغيل</translation>
     </message>
     <message id="devicelist_battery_updating">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="56"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="57"/>
       <source>Updating</source>
       <extracomment>Status is 'Updating'</extracomment>
       <translation>يتم التحديث</translation>
     </message>
     <message id="devicelist_battery_going_to_run">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="62"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="63"/>
       <source>Going to run</source>
       <extracomment>Status is 'Going to run'</extracomment>
       <translation>سيبدأ بالتشغيل</translation>
     </message>
     <message id="devicelist_battery_pre_charging">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="67"/>
       <source>Pre-Charging</source>
       <extracomment>Status is 'Pre-Charging'</extracomment>
       <translation>وضعية ما قبل الشحن</translation>
     </message>
     <message id="devicelist_battery_contactor_check">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="71"/>
       <source>Contactor check</source>
       <extracomment>Status is 'Contactor check'</extracomment>
       <translation>تحقق من الموصل</translation>
@@ -3055,82 +3040,82 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>حرارة البطارية</translation>
     </message>
     <message id="battery_air_temp">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="162"/>
       <source>Air temperature</source>
       <translation>حرارة الهواء</translation>
     </message>
     <message id="battery_starter_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="168"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="169"/>
       <source>Starter voltage</source>
       <translation>مشغل التيار</translation>
     </message>
     <message id="battery_buss_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="216"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="217"/>
       <source>Bus voltage</source>
       <translation>الجهد الكهربائي للمسار التجميعي</translation>
     </message>
     <message id="battery_top_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="184"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="185"/>
       <source>Top section voltage</source>
       <translation>الفرع الأعلى للتيار</translation>
     </message>
     <message id="battery_bottom_section_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="192"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="193"/>
       <source>Bottom section voltage</source>
       <translation>الفرع الأسفل للتيار</translation>
     </message>
     <message id="battery_mid_point_deviation">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="201"/>
       <source>Mid-point deviation</source>
       <translation>تباين نقطة الوسط</translation>
     </message>
     <message id="battery_consumed_amphours">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="208"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="209"/>
       <source>Consumed AmpHours</source>
       <translation>أمبير بالساعة مستهلك</translation>
     </message>
     <message id="battery_time_to_go">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="224"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="225"/>
       <source>Time-to-go</source>
       <translation>الوقت المتبقي للانطلاق</translation>
     </message>
     <message id="battery_details">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="240"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="241"/>
       <source>Details</source>
       <translation>تفاصيل</translation>
     </message>
     <message id="battery_module_level_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="263"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="265"/>
       <source>Module level alarms</source>
       <translation>تنبيهات مستوى الوحدة</translation>
     </message>
     <message id="battery_settings_diagnostics">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="293"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="295"/>
       <source>Diagnostics</source>
       <translation>تشخيص</translation>
     </message>
     <message id="battery_settings_fuses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="318"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="320"/>
       <source>Fuses</source>
       <translation>المصهرات</translation>
     </message>
     <message id="battery_settings_io">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="334"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="336"/>
       <source>IO</source>
       <translation>داخل/خارج</translation>
     </message>
     <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="349"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="351"/>
       <source>System</source>
       <translation>النظام</translation>
     </message>
     <message id="battery_settings_parameters">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="372"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="374"/>
       <source>Parameters</source>
       <translation>عامل متغير</translation>
     </message>
     <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="397"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="399"/>
       <source>Redetect Battery</source>
       <translation>إعادة كشف البطارية</translation>
     </message>
@@ -3140,7 +3125,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>اضغط لإعادة الكشف</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="406"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="408"/>
       <source>Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect.</source>
       <translation>إعادة كشف البطارية يتطلب قرابة 60 ثانية. خلال هذا الوقت اسم البطارية قد يكون خاطئا.</translation>
     </message>
@@ -3582,12 +3567,12 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>مخرج</translation>
     </message>
     <message id="alternator_wakespeed_field_drive">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="67"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="66"/>
       <source>Field drive</source>
       <translation>محرك المجال</translation>
     </message>
     <message id="alternator_wakespeed_engine_speed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="82"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="81"/>
       <source>Engine speed</source>
       <translation>سرعة المحرك</translation>
     </message>
@@ -4262,58 +4247,53 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>جهد كهربائي زائد في التيار المستمر</translation>
     </message>
     <message id="ac-in-setup_unlocked_(kvarh)">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="43"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="40"/>
       <source>Unlocked (kVARh)</source>
       <translation>مفتوح (كيلو فولت أمبير ساعة تفاعلية)</translation>
     </message>
     <message id="ac-in-setup_unlocked_(2)">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="46"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="43"/>
       <source>Unlocked (2)</source>
       <translation>مفتوح (2)</translation>
     </message>
     <message id="ac-in-setup_unlocked_(1)">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="49"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="46"/>
       <source>Unlocked (1)</source>
       <translation>مفتوح (1)</translation>
     </message>
     <message id="ac-in-setup_locked">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="49"/>
       <source>Locked</source>
       <translation>مغلق</translation>
     </message>
     <message id="ac-in-setup_phase_configuration">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="102"/>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="133"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="130"/>
       <source>Phase configuration</source>
       <translation>تهيئة الطور</translation>
     </message>
     <message id="ac-in-setup_switch_position">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="118"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="115"/>
       <source>Switch position</source>
       <translation>موضع المفتاح</translation>
     </message>
     <message id="ac-in-setup_two_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="140"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="137"/>
       <source>2-phase</source>
       <translation>2-طور</translation>
     </message>
     <message id="ac-in-setup_three_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="142"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="139"/>
       <source>3-phase</source>
       <translation>3-طور</translation>
     </message>
-    <message id="ac-in-genset_autostart_functionality_disabled">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="60"/>
-      <source>AutoStart functionality is currently disabled, enable it on the genset panel in order to start the genset from this menu.</source>
-      <translation>وظيفة البدء الآلي معطلة حاليا. قم بتفعيلها من لوحة المولد حتى تتمكن من تشغيل المولد من هذه القائمة.</translation>
-    </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="124"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="120"/>
       <source>AC</source>
       <translation>التيار المتردد</translation>
     </message>
     <message id="ac-in-genset_auto_start_stop">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="152"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="154"/>
       <source>Auto start/stop</source>
       <translation>بدء/توقف آلي</translation>
     </message>
@@ -4322,23 +4302,18 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Engine</source>
       <translation>المحرك</translation>
     </message>
-    <message id="ac-in-genset_oil_pressure">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="195"/>
-      <source>Oil Pressure</source>
-      <translation>ضغط الزيت</translation>
-    </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="203"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="211"/>
       <source>Coolant temperature</source>
       <translation>حرارة المبرد</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="211"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="219"/>
       <source>Exhaust temperature</source>
       <translation>حرارة العادم</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="218"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="226"/>
       <source>Winding temperature</source>
       <translation>حرارة اللفيفة</translation>
     </message>
@@ -4358,47 +4333,47 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>عدد مرات بدء التشغيل</translation>
     </message>
     <message id="ac-in-modeldefault_front_selector_locked">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="43"/>
+      <location filename="../../components/settings/ListAcInError.qml" line="23"/>
       <source>Front selector locked (%1)</source>
       <extracomment>%1 = the error number</extracomment>
       <translation>قفل أداة التحديد الأمامية (%1)</translation>
     </message>
     <message id="ac-in-modeldefault_no_error">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="47"/>
+      <location filename="../../components/settings/ListAcInError.qml" line="27"/>
       <source>No error (%1)</source>
       <extracomment>%1 = the error number</extracomment>
       <translation>لا يوجد خطأ (%1)</translation>
     </message>
     <message id="ac-in-modeldefault_ac_totals">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="87"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="63"/>
       <source>AC Totals</source>
       <translation>التيار المتردد الكلي</translation>
     </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="112"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="88"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>طاقة L%1/&gt;</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="103"/>
       <source>Phase Sequence</source>
       <translation>مرحلة الطور</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="133"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="109"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="112"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="176"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="152"/>
       <source>Data manager version</source>
       <translation>نسخة مدير البيانات</translation>
     </message>
@@ -4430,19 +4405,19 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>شاحن ضوئي</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="286"/>
+      <location filename="../../components/CommonWords.qml" line="295"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <oldsource>This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>تم تعطيل هذا الإعداد عند توصيل التحكم الرقمي المتعدد.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="289"/>
+      <location filename="../../components/CommonWords.qml" line="298"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <oldsource>This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>تم تعطيل هذا الإعداد عند توصيل VE.Bus BMS.</translation>
     </message>
     <message id="common_words_setting_disabled_by_config">
-      <location filename="../../components/CommonWords.qml" line="292"/>
+      <location filename="../../components/CommonWords.qml" line="301"/>
       <source>This setting is disabled. Possible reasons are "Overruled by remote" is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure.</source>
       <translation>هذا الإعداد معطل. الأسباب المحتملة هي أن "التعطيل عن بعد" غير مفعل أو أن المساعد يمنع التعديل. تحقق من فضلك من إعدادات المعاكس مع إعدادات تنصيب VE.</translation>
     </message>
@@ -4458,7 +4433,7 @@ First time use? Make sure to either set or disable the password check.</source>
       <translation>التيار المستمر</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="399"/>
+      <location filename="../../components/CommonWords.qml" line="411"/>
       <source>SOC %1%</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>حالة الشحن %1%</translation>
@@ -4563,29 +4538,13 @@ First time use? Make sure to either set or disable the password check.</source>
       <source>Sensor voltage</source>
       <translation>الجهد الكهربائي للمستشعر</translation>
     </message>
-    <message id="settings_page_relay_generator_stop_info">
-      <location filename="../../pages/settings/PageGenerator.qml" line="181"/>
-      <source>Stopping, generator will continue running if other conditions are reached</source>
-      <translation>عند التوقف، سيتابع المولد العمل إذا بقيت الشروط الأخرى مستوفاة</translation>
-    </message>
-    <message id="settings_page_relay_generator_start_info">
-      <location filename="../../pages/settings/PageGenerator.qml" line="185"/>
-      <source>Starting, generator won't stop till user intervention</source>
-      <translation>عند التشغيل، لن يتوقف المولد حتى يتدخل المستخدم</translation>
-    </message>
-    <message id="settings_page_relay_generator_start_timer">
-      <location filename="../../pages/settings/PageGenerator.qml" line="190"/>
-      <source>Starting. The generator will stop in %1, unless other conditions keep it running</source>
-      <extracomment>%1 = time until generator is stopped</extracomment>
-      <translation>يتم التشغيل. المولد سيتوقف عند 1%، إلا إذا الوضعيات الأخرى أبقته مفعلا.</translation>
-    </message>
     <message id="settings_multirs_total_pv_power">
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="215"/>
       <source>Total PV Power</source>
       <translation>إجمالي الطاقة الكهروضوئية</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="353"/>
+      <location filename="../../components/CommonWords.qml" line="365"/>
       <source>Product page</source>
       <translation>صفحة المنتج</translation>
     </message>
@@ -4676,7 +4635,7 @@ Do you want to continue?</source>
       <translation>التيار المستمر الحالي</translation>
     </message>
     <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="233"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="232"/>
       <source>Advanced</source>
       <translation>متقدم</translation>
     </message>
@@ -4686,17 +4645,17 @@ Do you want to continue?</source>
       <translation>إعادة ضبط الإنذار</translation>
     </message>
     <message id="vebus_device_bms_message">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="262"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="261"/>
       <source>A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible.</source>
       <translation>المسار التجميعي VE لنظام إدارة البطارية تقوم بإيقاف النظام آليا عندما تحتاج إلى حماية البطارية. ومن ثم فالتحكم بالنظام عبر إعدادات الألوان غير متاح.</translation>
     </message>
     <message id="vebus_device_bms_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="268"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="267"/>
       <source>A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!</source>
       <translation>المساعد المركب لنظام إدارة البطارية معد لمسار تجميعي لنظام إدارة البطارية ولكن لم يتم العثور على نظام إدارة البطارية للمسار التجميعي VE!</translation>
     </message>
     <message id="vebus_device_vebus_bms">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="274"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="273"/>
       <source>VE.Bus BMS</source>
       <translation>المسار التجميعي لنظام إدارة البطارية VE</translation>
     </message>
@@ -5037,17 +4996,17 @@ Do you want to continue?</source>
       <translation>مدخل التيار المناوب</translation>
     </message>
     <message id="common_words_ac_input">
-      <location filename="../../components/CommonWords.qml" line="507"/>
+      <location filename="../../components/CommonWords.qml" line="519"/>
       <source>AC Input</source>
       <translation>مدخلات التيار المتردد</translation>
     </message>
     <message id="common_words_ac_input_1">
-      <location filename="../../components/CommonWords.qml" line="503"/>
+      <location filename="../../components/CommonWords.qml" line="515"/>
       <source>AC Input 1</source>
       <translation>مدخلات التيار المتردد 1</translation>
     </message>
     <message id="common_words_ac_input_2">
-      <location filename="../../components/CommonWords.qml" line="505"/>
+      <location filename="../../components/CommonWords.qml" line="517"/>
       <source>AC Input 2</source>
       <translation>مدخلات التيار المتردد 2</translation>
     </message>
@@ -5326,42 +5285,42 @@ Do you want to continue?</source>
       <translation>إنذارات الجهد المنخفض</translation>
     </message>
     <message id="common_words_manufacturer">
-      <location filename="../../components/CommonWords.qml" line="250"/>
+      <location filename="../../components/CommonWords.qml" line="259"/>
       <source>Manufacturer</source>
       <translation>الشركة المصنعة</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="259"/>
+      <location filename="../../components/CommonWords.qml" line="268"/>
       <source>Maximum temperature</source>
       <translation>الحد الأقصى لدرجة الحرارة</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="262"/>
+      <location filename="../../components/CommonWords.qml" line="271"/>
       <source>Maximum voltage</source>
       <translation>الحد الأعلى للجهد الكهربائي</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="268"/>
+      <location filename="../../components/CommonWords.qml" line="277"/>
       <source>Minimum temperature</source>
       <translation>الحرارة الأدنى</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="271"/>
+      <location filename="../../components/CommonWords.qml" line="280"/>
       <source>Minimum voltage</source>
       <translation>الحد الأدنى للجهد الكهربائي</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="274"/>
+      <location filename="../../components/CommonWords.qml" line="283"/>
       <source>Mode</source>
       <translation>وضعية</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="277"/>
+      <location filename="../../components/CommonWords.qml" line="286"/>
       <source>Model name</source>
       <translation>اسم الطراز</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="283"/>
+      <location filename="../../components/CommonWords.qml" line="292"/>
       <source>No</source>
       <translation>لا</translation>
     </message>
@@ -5376,22 +5335,22 @@ Do you want to continue?</source>
       <translation>هذا الإعداد يتعطل عندما يتم توصيل 'موصل VE لنظام BMS'. إذا تم فصله قبل قليل قم بتنفيذ 'نظام إعادة الكشف' المتوفر في صفحة قائمة المعاكس.</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="295"/>
+      <location filename="../../components/CommonWords.qml" line="304"/>
       <source>No error</source>
       <translation>لا يوجد خطأ</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="81"/>
+      <location filename="../../data/AcInputs.qml" line="88"/>
       <source>Not available</source>
       <translation>غير متوفر</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="305"/>
+      <location filename="../../components/CommonWords.qml" line="314"/>
       <source>Not connected</source>
       <translation>غير متصل</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="311"/>
+      <location filename="../../components/CommonWords.qml" line="320"/>
       <source>Offline</source>
       <translation>خارج الخط</translation>
     </message>
@@ -5402,91 +5361,91 @@ Do you want to continue?</source>
       <translation>صحيح</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="317"/>
+      <location filename="../../components/CommonWords.qml" line="326"/>
       <source>On</source>
       <translation>مشغل</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="320"/>
+      <location filename="../../components/CommonWords.qml" line="329"/>
       <source>Online</source>
       <translation>على الخط</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="324"/>
+      <location filename="../../components/CommonWords.qml" line="333"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation>مفتوح</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="330"/>
+      <location filename="../../components/CommonWords.qml" line="342"/>
       <source>Password</source>
       <translation>كلمة السر</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="337"/>
+      <location filename="../../components/CommonWords.qml" line="349"/>
       <source>Phase</source>
       <translation>الطور</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="344"/>
+      <location filename="../../components/CommonWords.qml" line="356"/>
       <source>Press to clear</source>
       <translation>اضغط للمحو</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="347"/>
+      <location filename="../../components/CommonWords.qml" line="359"/>
       <source>Press to reset</source>
       <translation>اضغط لإعادة الضبط</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="350"/>
+      <location filename="../../components/CommonWords.qml" line="362"/>
       <source>Press to scan</source>
       <translation>اضغط للمسح الضوئي</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="356"/>
+      <location filename="../../components/CommonWords.qml" line="368"/>
       <source>PV Inverter</source>
       <translation>معاكس ضوئي</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="360"/>
+      <location filename="../../components/CommonWords.qml" line="372"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>طاقة معاكس ضوئية</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="363"/>
+      <location filename="../../components/CommonWords.qml" line="375"/>
       <source>Quiet hours</source>
       <translation>ساعات السكون</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="367"/>
+      <location filename="../../components/CommonWords.qml" line="379"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>المرحل</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="373"/>
+      <location filename="../../components/CommonWords.qml" line="385"/>
       <source>Reboot</source>
       <translation>إعادة التشغيل</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="376"/>
+      <location filename="../../components/CommonWords.qml" line="388"/>
       <source>Remove</source>
       <translation>إزالة</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="380"/>
+      <location filename="../../components/CommonWords.qml" line="392"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation>مشغل</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="383"/>
+      <location filename="../../components/CommonWords.qml" line="395"/>
       <source>Scanning %1%</source>
       <translation>مسح %1%</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="386"/>
+      <location filename="../../components/CommonWords.qml" line="398"/>
       <source>Serial number</source>
       <translation>رقم السلسلة</translation>
     </message>
@@ -5496,104 +5455,104 @@ Do you want to continue?</source>
       <translation>الإعدادات</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="392"/>
+      <location filename="../../components/CommonWords.qml" line="404"/>
       <source>Setup</source>
       <translation>إعادة ضبط</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="395"/>
+      <location filename="../../components/CommonWords.qml" line="407"/>
       <source>Signal strength</source>
       <translation>قوة الإشارة</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="406"/>
+      <location filename="../../components/CommonWords.qml" line="418"/>
       <source>Standby</source>
       <translation>انتظار</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="409"/>
+      <location filename="../../components/CommonWords.qml" line="421"/>
       <source>Start after the condition is reached for</source>
       <translation>التشغيل بعد ما يصل الشرط إلى</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="412"/>
+      <location filename="../../components/CommonWords.qml" line="424"/>
       <source>Start time</source>
       <translation>وقت البدء</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="415"/>
+      <location filename="../../components/CommonWords.qml" line="427"/>
       <source>Start value during quiet hours</source>
       <translation>قيمة البدء خلال ساعات السكون</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="418"/>
+      <location filename="../../components/CommonWords.qml" line="430"/>
       <source>Start when warning is active for</source>
       <translation>تشغيل عندما يكون التنبيه مفعلا ل</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="424"/>
+      <location filename="../../components/CommonWords.qml" line="436"/>
       <source>State of charge</source>
       <translation>حالة الشحن</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="427"/>
+      <location filename="../../components/CommonWords.qml" line="439"/>
       <source>Status</source>
       <translation>الحالة</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="431"/>
+      <location filename="../../components/CommonWords.qml" line="443"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation>بدء التشغيل (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="434"/>
+      <location filename="../../components/CommonWords.qml" line="446"/>
       <source>Stop value during quiet hours</source>
       <translation>قيمة التوقف خلال ساعات السكون</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="437"/>
+      <location filename="../../components/CommonWords.qml" line="449"/>
       <source>Stop after the condition is reached for</source>
       <translation>الإيقاف بعد ما يصل الشرط إلى</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="440"/>
+      <location filename="../../components/CommonWords.qml" line="452"/>
       <source>Stopped</source>
       <translation>متوقف</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="447"/>
+      <location filename="../../components/CommonWords.qml" line="459"/>
       <source>Temperature</source>
       <translation>الحرارة</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="450"/>
+      <location filename="../../components/CommonWords.qml" line="462"/>
       <source>Temperature sensor</source>
       <translation>حساس الحرارة</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="453"/>
+      <location filename="../../components/CommonWords.qml" line="465"/>
       <source>Today</source>
       <translation>اليوم</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="456"/>
+      <location filename="../../components/CommonWords.qml" line="468"/>
       <source>Total</source>
       <translation>المجموع</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="460"/>
+      <location filename="../../components/CommonWords.qml" line="472"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>المتعقب</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="463"/>
+      <location filename="../../components/CommonWords.qml" line="475"/>
       <source>Type</source>
       <translation>النوع</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="466"/>
+      <location filename="../../components/CommonWords.qml" line="478"/>
       <source>Unique Identity Number</source>
       <translation>رقم التعريف الفريد</translation>
     </message>
@@ -5603,43 +5562,43 @@ Do you want to continue?</source>
       <translation>مجهول</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="473"/>
+      <location filename="../../components/CommonWords.qml" line="485"/>
       <source>VE.Bus Error</source>
       <translation>خطأ في المسار التجميعي VE</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="476"/>
+      <location filename="../../components/CommonWords.qml" line="488"/>
       <source>Voltage</source>
       <translation>الجهد الكهربائي</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="479"/>
+      <location filename="../../components/CommonWords.qml" line="491"/>
       <source>VRM instance</source>
       <translation>نموذج VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="482"/>
+      <location filename="../../components/CommonWords.qml" line="494"/>
       <source>When warning is cleared stop after</source>
       <translation>عندما يختفي التنبيه توقف بعد</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="485"/>
+      <location filename="../../components/CommonWords.qml" line="497"/>
       <source>Yes</source>
       <translation>نعم</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="488"/>
+      <location filename="../../components/CommonWords.qml" line="500"/>
       <source>Yesterday</source>
       <translation>الأمس</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="492"/>
+      <location filename="../../components/CommonWords.qml" line="504"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>المحصول</translation>
     </message>
     <message id="common_words_zero_feed_in_power_limit">
-      <location filename="../../components/CommonWords.qml" line="499"/>
+      <location filename="../../components/CommonWords.qml" line="511"/>
       <source>Zero feed-in power limit</source>
       <translation>حد قدرة التغذية الداخلة الصفرية</translation>
     </message>
@@ -5654,12 +5613,12 @@ Do you want to continue?</source>
       <translation>التشغيل الآن</translation>
     </message>
     <message id="controlcard_generator_startdialog_timed_run">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="46"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="47"/>
       <source>Timed run</source>
       <translation>التشغيل ذو الوقت المحدد</translation>
     </message>
     <message id="controlcard_generator_startdialog_description">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="69"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="70"/>
       <source>Generator will stop after the set time, unless autostart condition is met, in which case it will keep running.</source>
       <translation>سيتوقف المولد بعد الوقت المحدد، ما لم تلبى حالة التشغيل التلقائي، وفي هذه الحالة، سيستمر في التشغيل.</translation>
     </message>
@@ -5669,18 +5628,18 @@ Do you want to continue?</source>
       <translation>بدء التشغيل الآن</translation>
     </message>
     <message id="controlcard_generator_stopdialog_total_run_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="51"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="52"/>
       <source>Total Run Time</source>
       <translation>وقت التشغيل الكلي</translation>
     </message>
     <message id="controlcard_generator_stopdialog_set_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="70"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="71"/>
       <source>Set Time %1</source>
       <extracomment>%1 = the total time (in hours, minutes, seconds) that the generator will run for, as set by the user</extracomment>
       <translation>ضبط الوقت %1</translation>
     </message>
     <message id="controlcard_generator_stopdialog_description">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="84"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="85"/>
       <source>Generator will keep running if an autostart condition is met.</source>
       <translation>سيستمر تشغيل المولد إن تم تلبية حالة التشغيل التلقائي.</translation>
     </message>
@@ -5897,92 +5856,92 @@ Do you want to continue?</source>
       <translation>%1ساعة %2دقيقة مضت</translation>
     </message>
     <message id="cgwacs_battery_schedule_every_day">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="17"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="17"/>
       <source>Every day</source>
       <translation>كل يوم</translation>
     </message>
     <message id="cgwacs_battery_schedule_weekdays">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="19"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="19"/>
       <source>Weekdays</source>
       <translation>أيام الأسبوع</translation>
     </message>
     <message id="cgwacs_battery_schedule_weekends">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="21"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="21"/>
       <source>Weekends</source>
       <translation>نهاية الأسبوع</translation>
     </message>
     <message id="cgwacs_battery_schedule_monday">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="23"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="23"/>
       <source>Monday</source>
       <translation>الاثنين</translation>
     </message>
     <message id="cgwacs_battery_schedule_tuesday">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="25"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="25"/>
       <source>Tuesday</source>
       <translation>الثلاثاء</translation>
     </message>
     <message id="cgwacs_battery_schedule_wednesday">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="27"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="27"/>
       <source>Wednesday</source>
       <translation>الأربعاء</translation>
     </message>
     <message id="cgwacs_battery_schedule_thursday">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="29"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="29"/>
       <source>Thursday</source>
       <translation>الخميس</translation>
     </message>
     <message id="cgwacs_battery_schedule_friday">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="31"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="31"/>
       <source>Friday</source>
       <translation>الجمعة</translation>
     </message>
     <message id="cgwacs_battery_schedule_saturday">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="33"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="33"/>
       <source>Saturday</source>
       <translation>السبت</translation>
     </message>
     <message id="cgwacs_battery_schedule_sunday">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="35"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="35"/>
       <source>Sunday</source>
       <translation>الأحد</translation>
     </message>
     <message id="cgwacs_battery_schedule_format_no_soc">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="68"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="68"/>
       <source>%1 %2 (%3)</source>
       <translation>%1 %2 (%3)</translation>
     </message>
     <message id="cgwacs_battery_schedule_format_soc">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="71"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="71"/>
       <source>%1 %2 (%3 or %4%)</source>
       <translation>%1 %2 (%3 أو %4%</translation>
     </message>
     <message id="cgwacs_battery_schedule_name">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="77"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="77"/>
       <source>Schedule %1</source>
       <translation>جدول %1</translation>
     </message>
     <message id="cgwacs_battery_schedule_day">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="124"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="124"/>
       <source>Day</source>
       <translation>اليوم</translation>
     </message>
     <message id="cgwacs_battery_schedule_day_not_set">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="128"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="128"/>
       <source>Not set</source>
       <translation>لم يتم الضبط</translation>
     </message>
     <message id="cgwacs_battery_schedule_duration">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="140"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="140"/>
       <source>Duration (hh:mm)</source>
       <translation>المدة (سا:دق)</translation>
     </message>
     <message id="cgwacs_battery_schedule_soc_limit">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="150"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="150"/>
       <source>SOC limit</source>
       <translation>حد الـ SOC</translation>
     </message>
     <message id="cgwacs_battery_schedule_self_consumption_above_limit">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="161"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="161"/>
       <source>Self-consumption above limit</source>
       <translation>الاستهلاك الذاتي زائد عن الحد</translation>
     </message>
@@ -5992,7 +5951,7 @@ Do you want to continue?</source>
       <translation>جهاز ضوئي</translation>
     </message>
     <message id="cgwacs_battery_schedule_pv_and_battery">
-      <location filename="../../components/settings/CGwacsBatteryScheduleNavigationItem.qml" line="168"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="168"/>
       <source>PV &amp; Battery</source>
       <translation>الخلايا الكهروضوئية والبطارية</translation>
     </message>
@@ -6307,8 +6266,8 @@ Do you want to continue?</source>
       <source>MQTT protocol level 5 error</source>
       <translation>خطأ المستوى الخامس من بروتوكول MQTT</translation>
     </message>
-    <message id="silence_alarm">
-      <location filename="../../pages/NotificationsPage.qml" line="190"/>
+    <message id="notifications_silence_alarm">
+      <location filename="../../pages/NotificationsPage.qml" line="192"/>
       <source>Silence alarm</source>
       <translation>إنذار صامت</translation>
     </message>
@@ -6389,22 +6348,22 @@ Do you want to continue?</source>
       <translation>رياح</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="88"/>
+      <location filename="../../data/AcInputs.qml" line="95"/>
       <source>Shore</source>
       <translation>دعامة</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="114"/>
+      <location filename="../../data/AcInputs.qml" line="121"/>
       <source>Grid current limit</source>
       <translation>حد تيار الشبكة</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="117"/>
+      <location filename="../../data/AcInputs.qml" line="124"/>
       <source>Generator current limit</source>
       <translation>حد تيار المولد</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="120"/>
+      <location filename="../../data/AcInputs.qml" line="127"/>
       <source>Shore current limit</source>
       <translation>حد تيار الشاطئ</translation>
     </message>
@@ -6420,7 +6379,7 @@ Do you want to continue?</source>
       <translation>%1 للانطلاق</translation>
     </message>
     <message id="tank_description">
-      <location filename="../../data/common/Tank.qml" line="99"/>
+      <location filename="../../data/common/Tank.qml" line="104"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank desription. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 خزان (%2)</translation>
@@ -6565,8 +6524,8 @@ Do you want to continue?</source>
       <source>Start charging</source>
       <translation>ابدأ الشحن</translation>
     </message>
-    <message id="evchargers_mode_scheduled">
-      <location filename="../../data/EvChargers.qml" line="148"/>
+    <message id="inverters_state_scheduledcharge">
+      <location filename="../../data/System.qml" line="160"/>
       <source>Scheduled</source>
       <translation>مجدول</translation>
     </message>
@@ -6766,11 +6725,6 @@ Do you want to continue?</source>
       <source>Test</source>
       <translation>معاينة</translation>
     </message>
-    <message id="inverters_state_scheduledrecharge">
-      <location filename="../../data/System.qml" line="160"/>
-      <source>Scheduled recharge</source>
-      <translation>إعادة الشحن المجدول</translation>
-    </message>
     <message id="inverters_state_dynamic_ess">
       <location filename="../../data/System.qml" line="163"/>
       <source>Dynamic ESS</source>
@@ -6831,7 +6785,7 @@ Do you want to continue?</source>
       <translation>تعطيل نقطة التوصيل</translation>
     </message>
     <message id="settings_minmax_dc_input">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="109"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="111"/>
       <source>DC input</source>
       <translation>دخل التيار المستمر</translation>
     </message>
@@ -6842,16 +6796,15 @@ Do you want to continue?</source>
       <translation>بالنسبة لبطاريات الليثيوم، لا يوصى بشحن أقل من 10%. بالنسبة لأنواع البطاريات الأخرى، تحقق من ورقة البيانات لمعرفة الحد الأدنى الموصى به من قبل الشركة المصنعة.</translation>
     </message>
     <message id="controlcard_generator_disableautostartdialog_title">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="69"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="66"/>
       <source>Disable autostart?</source>
       <oldsource>Disable Autostart?</oldsource>
       <translation>هل ترغب في تعطيل التشغيل الآلي؟</translation>
     </message>
-    <message id="controlcard_inverter_charger">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="17"/>
+    <message id="controlcard_rs_inverter_charger">
+      <location filename="../../pages/controlcards/RsSystemCard.qml" line="17"/>
       <source>Inverter / Charger (%1)</source>
       <extracomment>%1 = the inverter/charger name</extracomment>
-      <oldsource>Inverter / Charger</oldsource>
       <translation>محول التردد/ الشاحن (%1)</translation>
     </message>
     <message id="settings_page_debug_display_cpu_usage">
@@ -6881,7 +6834,7 @@ Do you want to continue?</source>
       <translation>ليس هناك اتصال</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="225"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="203"/>
       <source>Oil temperature</source>
       <translation>درجة حرارة الزيت</translation>
     </message>
@@ -6892,37 +6845,37 @@ Do you want to continue?</source>
       <translation>لاحظ أن تغيير إعداد أرضية التفريغ Time-to-go يؤدي أيضًا إلى تغيير إعداد حالة الشحن المنخفضة في قائمة الترحيل.</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="105"/>
       <source>Operation time</source>
       <translation>وقت التشغيل</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="114"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
       <source>Charged Ah</source>
       <translation>شحن أمبير/ ساعة</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="123"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="122"/>
       <source>Cycles started</source>
       <translation>دورات البداية</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="130"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
       <source>Cycles completed</source>
       <translation>الدورات المستكملة</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="137"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="136"/>
       <source>Number of power-ups</source>
       <translation>عدد مرات التشغيل</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="144"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="143"/>
       <source>Number of deep discharges</source>
       <translation>عدد مرات التفريغ العميق</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="163"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="162"/>
       <source>Charge cycle history</source>
       <translation>تاريخ دورة الشحن</translation>
     </message>
@@ -6932,12 +6885,12 @@ Do you want to continue?</source>
       <translation>قيمة جهاز الاستشعار عندما يكون ممتلئ</translation>
     </message>
     <message id="settings_page_relay_generator_time_to_service">
-      <location filename="../../pages/settings/PageGenerator.qml" line="109"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="94"/>
       <source>Time to service</source>
       <translation>زمن الصيانة</translation>
     </message>
     <message id="settings_page_relay_generator_auto_start_enabled">
-      <location filename="../../pages/settings/PageGenerator.qml" line="151"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="136"/>
       <source>Autostart functionality</source>
       <oldsource>Auto start functionality</oldsource>
       <translation>وظيفة التشغيل التلقائي</translation>
@@ -7198,27 +7151,27 @@ Do you want to continue?</source>
       <translation>بيئة</translation>
     </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="253"/>
+      <location filename="../../components/CommonWords.qml" line="262"/>
       <source>Maximum current</source>
       <translation>الحد الأقصى للتيار</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="256"/>
+      <location filename="../../components/CommonWords.qml" line="265"/>
       <source>Maximum power</source>
       <translation>الطاقة القصوى</translation>
     </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="265"/>
+      <location filename="../../components/CommonWords.qml" line="274"/>
       <source>Minimum current</source>
       <translation>الحد الأدنى للتيار</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="327"/>
+      <location filename="../../components/CommonWords.qml" line="339"/>
       <source>Overall history</source>
       <translation>السجل الإجمالي</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="496"/>
+      <location filename="../../components/CommonWords.qml" line="508"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <oldsource>Yield today</oldsource>
@@ -7348,33 +7301,33 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>هل أنت متأكد من أنك تريد إعادة تعيين جميع القيم إلى الصفر؟</translation>
     </message>
     <message id="settings_minmax_ac_in_header_with_source">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="87"/>
       <source>%1 (%2)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
       <translation>%1 (%2)</translation>
     </message>
     <message id="settings_minmax_acout_max_acin1">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="127"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="129"/>
       <source>Maximum current: AC in 1 connected</source>
       <translation>الحد الأقصى للتيار: تيار متردد المدخل 1 متصل</translation>
     </message>
     <message id="settings_minmax_acout_max_acin2">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="135"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="137"/>
       <source>Maximum current: AC in 2 connected</source>
       <translation>الحد الأقصى للتيار: تيار متردد المدخل 2 متصل</translation>
     </message>
     <message id="settings_minmax_acout_max">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="145"/>
       <source>Maximum current: no AC inputs</source>
       <translation>الحد الأقصى للتيار: لا توجد مدخلات التيار المتردد</translation>
     </message>
     <message id="settings_minmax_dc_out">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="150"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="152"/>
       <source>DC output</source>
       <translation>خرج التيار المستمر</translation>
     </message>
     <message id="settings_minmax_solar">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="164"/>
       <source>Solar</source>
       <translation>شمسي</translation>
     </message>
@@ -7507,22 +7460,22 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>الحد الأدنى لتيار البطارية</translation>
     </message>
     <message id="battery_bank_error">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="86"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="87"/>
       <source>Battery bank error</source>
       <translation>خطأ في بنك البطارية</translation>
     </message>
     <message id="battery_bank_error_voltage_not_supported">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="95"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="96"/>
       <source>Battery voltage not supported</source>
       <translation>الجهد الكهربائي للبطارية غير مدعوم</translation>
     </message>
     <message id="battery_bank_error_incorrect_number_of_batteries">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="99"/>
       <source>Incorrect number of batteries</source>
       <translation>عدد البطاريات غير صحيح</translation>
     </message>
     <message id="battery_bank_error_invalid_configuration">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="101"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="102"/>
       <source>Invalid battery configuration</source>
       <translation>إعداد البطارية غير صالح</translation>
     </message>
@@ -7647,41 +7600,41 @@ See documentation for further information.</oldsource>
       <source>Trackers</source>
       <translation>متعقب</translation>
     </message>
-    <message id="settings_rs_current_limit_not_adjustable">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="71"/>
+    <message id="rs_current_limit_not_adjustable">
+      <location filename="../../components/RsSystemCurrentLimitDetails.qml" line="28"/>
       <source>This current limit is configured as fixed, not user changeable.</source>
       <translation>تم تكوين حد التيار المذكور كثابت، وليس قابلًا للتغير من المستخدم.</translation>
     </message>
     <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="159"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="120"/>
       <source>RS devices</source>
       <translation>أجهزة RS</translation>
     </message>
     <message id="settings_page_debug_pause_electron_animations">
       <location filename="../../pages/settings/debug/PageDebug.qml" line="65"/>
       <source>Pause electron animations</source>
-      <translation></translation>
+      <translation>توقف الرسوم المتحركة الإلكترونية </translation>
     </message>
     <message id="devicelist_battery_total_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="124"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="125"/>
       <source>Total Capacity</source>
-      <translation></translation>
+      <translation>السعة الإجمالية</translation>
     </message>
     <message id="devicelist_battery_number_of_bmses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="133"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="134"/>
       <source>Number of BMSes</source>
-      <translation></translation>
+      <translation>عدد أنظمة إدارة البطاريات (BMSes)</translation>
     </message>
     <message id="settings_canbus_bms">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="82"/>
       <source>CAN-bus BMS LV (500 kbit/s)</source>
       <oldsource>CAN-bus BMS (500 kbit/s)</oldsource>
-      <translation></translation>
+      <translation>نظام إدارة البطاريات (BMS) باستخدام ناقل CAN منخفض الجهد (500 كيلوبت/ثانية)</translation>
     </message>
     <message id="settings_canbus_high_voltage">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="88"/>
       <source>CAN-bus BMS HV (500 kbit/s)</source>
-      <translation></translation>
+      <translation>نظام إدارة البطاريات (BMS) باستخدام ناقل CAN عالي الجهد (500 كيلوبت/ثانية)</translation>
     </message>
     <message id="settings_ess_limit_system_ac_export_current">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="127"/>
@@ -7696,7 +7649,7 @@ See documentation for further information.</oldsource>
     <message id="common_words_add_device">
       <location filename="../../components/CommonWords.qml" line="17"/>
       <source>Add device</source>
-      <translation></translation>
+      <translation>أضف جهازًا</translation>
     </message>
     <message id="page_settings_modbus_scan_for_devices">
       <location filename="../../pages/settings/PageSettingsModbus.qml" line="37"/>
@@ -7721,12 +7674,12 @@ See documentation for further information.</oldsource>
     <message id="modbus_add_device_tcp">
       <location filename="../../pages/settings/PageSettingsModbusAddDevice.qml" line="31"/>
       <source>TCP</source>
-      <translation></translation>
+      <translation>بروتوكول التحكم بالنقل (TCP)</translation>
     </message>
     <message id="modbus_add_device_udp">
       <location filename="../../pages/settings/PageSettingsModbusAddDevice.qml" line="33"/>
       <source>UDP</source>
-      <translation></translation>
+      <translation>بروتوكول بيانات المستخدم (UDP)</translation>
     </message>
     <message id="modbus_add_device_protocol">
       <location filename="../../pages/settings/PageSettingsModbusAddDevice.qml" line="36"/>
@@ -7761,33 +7714,147 @@ See documentation for further information.</oldsource>
     <message id="settings_modbus_no_devices_saved">
       <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="40"/>
       <source>No Modbus devices saved</source>
-      <translation></translation>
+      <translation>لم يتم حفظ أي أجهزة Modbus</translation>
     </message>
     <message id="page_settings_modbus_device_number">
       <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="53"/>
       <source>Device %1</source>
-      <translation></translation>
+      <translation>جهاز %1</translation>
     </message>
     <message id="page_settings_modbus_device_remove_device">
       <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="111"/>
       <source>Remove Modbus device?</source>
-      <translation></translation>
+      <translation>هل تريد إزالة جهاز Modbus؟</translation>
     </message>
     <message id="settings_modbus_no_devices_discovered">
       <location filename="../../pages/settings/PageSettingsModbusDiscovered.qml" line="32"/>
       <source>No Modbus devices discovered</source>
-      <translation></translation>
+      <translation>لم يتم اكتشاف أي أجهزة Modbus</translation>
     </message>
     <message id="settings_accharger_battery">
       <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="53"/>
       <source>Battery %1</source>
       <extracomment>%1 = battery number</extracomment>
-      <translation></translation>
+      <translation>البطارية %1</translation>
     </message>
     <message id="settings_accharger_current">
       <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="80"/>
       <source>AC current</source>
       <translation>التيار المتردد الحالي</translation>
+    </message>
+    <message id="generator_dialog_disabled">
+      <location filename="../../components/GeneratorManualControlButton.qml" line="99"/>
+      <source>Generator start/stop disabled</source>
+      <translation>تشغيل/إيقاف المولد معطل</translation>
+    </message>
+    <message id="generator_dialog_remote_start_disabled">
+      <location filename="../../components/GeneratorManualControlButton.qml" line="102"/>
+      <source>The remote start functionality is disabled on the genset. The GX will not be able to start or stop the genset now. Enable it on the genset control panel.</source>
+      <translation>تم تعطيل وظيفة التشغيل عن بعد في المولد. لن يتمكن GX من تشغيل أو إيقاف المولد الآن. اجعله متاحا على لوحة تحكم المولد.</translation>
+    </message>
+    <message id="ac-in-genset_auto_start_functionality">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="41"/>
+      <source>Auto start functionality</source>
+      <translation>وظيفة البدء التلقائي</translation>
+    </message>
+    <message id="ac-in-genset_auto_control_status">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="57"/>
+      <source>Control status</source>
+      <translation>حالة التحكم</translation>
+    </message>
+    <message id="ac-in-genset_status">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="80"/>
+      <source>Genset status</source>
+      <translation>حالة المولد</translation>
+    </message>
+    <message id="ac-in-genset_error">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="91"/>
+      <source>Genset error code</source>
+      <translation>رمز خطأ المولد</translation>
+    </message>
+    <message id="ac-in-clear-genset_error">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="99"/>
+      <source>Clear genset error</source>
+      <translation>مسح خطأ المولد</translation>
+    </message>
+    <message id="ac-in-genset_remote_start_mode">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="147"/>
+      <source>Remote start mode</source>
+      <translation>وضع البدء عن بعد</translation>
+    </message>
+    <message id="ac-in-genset_oil_pressure">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="195"/>
+      <source>Oil pressure</source>
+      <oldsource>Oil Pressure</oldsource>
+      <translation>ضغط الزيت</translation>
+    </message>
+    <message id="settings_ess_scheduled_charge_levels">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="256"/>
+      <source>Scheduled charge levels</source>
+      <translation>مستويات الشحن المجدولة</translation>
+    </message>
+    <message id="settings_ess_active">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="259"/>
+      <source>Active (%1)</source>
+      <translation>نشط (%1)</translation>
+    </message>
+    <message id="common_words_manual_stop">
+      <location filename="../../components/CommonWords.qml" line="256"/>
+      <source>Manual stop</source>
+      <translation>التوقف اليدوي</translation>
+    </message>
+    <message id="common_words_open_circuit">
+      <location filename="../../components/CommonWords.qml" line="336"/>
+      <source>Open circuit</source>
+      <translation>دائرة مفتوحة</translation>
+    </message>
+    <message id="common_words_format_error">
+      <location filename="../../components/CommonWords.qml" line="547"/>
+      <source>#%1 %2</source>
+      <extracomment>%1 = error number, %2 = text description of this error</extracomment>
+      <translation>#%1 %2</translation>
+    </message>
+    <message id="rs_currentlimit_title">
+      <location filename="../../components/RsSystemCurrentLimitDetails.qml" line="15"/>
+      <source>Input current limit - AC in 1</source>
+      <translation>الحد الحالي للمدخل - التيار المتردد في 1</translation>
+    </message>
+    <message id="settings_minmax_ac_in_not_available">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="83"/>
+      <source>%1 (not available)</source>
+      <extracomment>%1 = 'AC input 1' or 'AC input 2'</extracomment>
+      <translation>%1 (غير متاح)</translation>
+    </message>
+    <message id="application_content_touch_input_on">
+      <location filename="../../ApplicationContent.qml" line="71"/>
+      <source>Touch input on</source>
+      <translation>الإدخال باللمس قيد التشغيل</translation>
+    </message>
+    <message id="application_content_touch_input_off">
+      <location filename="../../ApplicationContent.qml" line="73"/>
+      <source>Touch input off</source>
+      <translation>الإدخال باللمس معطل</translation>
+    </message>
+    <message id="application_content_touch_input_disabled">
+      <location filename="../../ApplicationContent.qml" line="83"/>
+      <source>Touch input disabled</source>
+      <translation>تم تعطيل الإدخال باللمس</translation>
+    </message>
+    <message id="notifications_acknowledge_alerts">
+      <location filename="../../pages/NotificationsPage.qml" line="194"/>
+      <source>Acknowledge alerts</source>
+      <translation></translation>
+    </message>
+    <message id="ac-in-genset_control_error_code">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="73"/>
+      <source>Control error code</source>
+      <translation></translation>
+    </message>
+    <message id="settings_batteries_intro">
+      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="45"/>
+      <source>Use this menu to define the battery data shown when clicking the Battery icon on the Overview page. The same selection is also visible on the VRM Portal.</source>
+      <oldsource>Use this menu to define which battery measurements to see on the VRM Portal and the MFD HTML5 App.</oldsource>
+      <translation></translation>
     </message>
   </context>
   <context>
@@ -8958,7 +9025,7 @@ See documentation for further information.</oldsource>
   <context>
     <name>PageAcInSetup</name>
     <message>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="125"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="122"/>
       <source>Set the switch in an unlocked position to modify the settings.</source>
       <translation>اضبط المفتاح في وضع إلغاء القفل لتعديل الإعدادات.</translation>
     </message>
@@ -9351,7 +9418,7 @@ See documentation for further information.</oldsource>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
       <source>Battery temperature sensor defective</source>
-      <translation></translation>
+      <translation>مستشعر درجة حرارة البطارية معيب</translation>
     </message>
   </context>
 </TS>
