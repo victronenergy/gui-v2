@@ -228,30 +228,30 @@ TestCase {
 	function test_unitMatchValue() {
 		const unit = VenusOS.Units_Energy_KiloWattHour
 		var quantity = Units.getDisplayText(unit, 19567890123)
-		compare("19.57", quantity.number)
-		compare("TWh", quantity.unit)
+		compare(quantity.number, "19.57")
+		compare(quantity.unit, "TWh")
 
 		// choose scale based on different anchor value
 		quantity = Units.getDisplayText(unit, 19567890123, -1, 123456789)
-		compare("19568", quantity.number)
-		compare("GWh", quantity.unit)
+		compare(quantity.number, "19568")
+		compare(quantity.unit, "GWh")
 	}
 
 	function test_precision() {
 		const unit = VenusOS.Units_Watt
 		var quantity = Units.getDisplayText(unit, 1.9612345)
-		compare("2", quantity.number)
+		compare(quantity.number, "2")
 
 		quantity = Units.getDisplayText(unit, 1.9612345, 1)
-		compare("2.0", quantity.number)
+		compare(quantity.number, "2.0")
 
 		quantity = Units.getDisplayText(unit, 1.9612345, 2)
-		compare("1.96", quantity.number)
+		compare(quantity.number, "1.96")
 
 		quantity = Units.getDisplayText(unit, 1.9612345, 3)
-		compare("1.961", quantity.number)
+		compare(quantity.number, "1.961")
 
 		quantity = Units.getDisplayText(unit, 1.9612345, 4)
-		compare("1.9612", quantity.number)
+		compare(quantity.number, "1.9612")
 	}
 }
