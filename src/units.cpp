@@ -229,6 +229,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		qty.unit = defaultUnitString(unit, formatHints);
 		return qty;
 	}
+
 	quantityInfo quantity;
 	quantity.unit = defaultUnitString(unit, formatHints);
 	quantity.scale = VenusOS::Enums::Units_Scale_None;
@@ -251,7 +252,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 
 	qreal scaledValue = value;
 
-	// scale value is the unit of measure is scalable
+	// scale value if the unit of measure is scalable
 	if (isScalingSupported(unit)) {
 		qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : scaledValue;
 
@@ -292,13 +293,11 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 				scaledValue = scaledValue / 1000.0;
 			}
 		} else {
-			bool scaled = false;
 			for (const auto scale : scales) {
 				if (isOverLimit(scaleMatch, scale, previousScale)) {
 					quantity.unit = scaleToString(scale) + quantity.unit;
 					quantity.scale = scale;
 					scaledValue = scaledValue / qPow(10, 3*scale);
-					scaled = true;
 					break;
 				}
 			}
@@ -324,13 +323,21 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		precision = 0;
 	}
 
-	// if the scaled value is large (hundreds or thousands) no need to display all fractional digits after the decimal point.
-	// Possibly clip the precision by 1 or 2 fractional digits for scaled values between 10 and 99,
-	// except for Units_Volt_DC values i.e. don't clip precision for values like 53.35 V DC.
+	// If the scaled value is large then possibly clip the precision by 1 or 2 fractional digits depending on initial precision.
+	// Only apply this logic to scaled values with 2 non fractional digits if the units are not Units_Volt_DC.
+	// i.e. don't clip precision for values like 53.35 V DC.
 	precision = precision < 0 ? defaultUnitPrecision(unit) : precision;
 	int digits = numberOfDigits(static_cast<int>(scaledValue));
 	if (unit != VenusOS::Enums::Units_Volt_DC || digits > 2) {
-		precision = qMax(0, precision - qMax(0, digits - (precision == 1 ? 2 : 1)));
+		if (digits >= 4) {
+			precision = 0;
+		} else if (digits == 3) {
+			precision = precision >= 3 ? 1 : 0;
+		} else if (digits == 2) {
+			precision = precision >= 3 ? 2
+				: precision >= 1 ? 1
+				: 0;
+		}
 	}
 
 	const qreal vFixedMultiplier = std::pow(10, precision);
