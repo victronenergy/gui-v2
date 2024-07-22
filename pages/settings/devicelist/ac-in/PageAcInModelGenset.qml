@@ -97,7 +97,7 @@ ObjectModel {
 	ListFpGensetErrorItem {
 		//% "Genset error code"
 		text: qsTrId("ac-in-genset_error")
-		dataItem.uid: root.bindPrefix + "/ErrorCode"
+		dataItem.uid: root.bindPrefix + "/Error/0/Id"
 		allowed: defaultAllowed && dataItem.isValid
 		nrOfPhases: root.nrOfPhases.value || 3
 	}
