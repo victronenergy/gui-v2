@@ -2,6 +2,11 @@
 # Copyright (C) 2023 Victron Energy B.V.
 # See LICENSE.txt for license information.
 #
+
+if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
+    message(FATAL_ERROR "In-source builds are not allowed. Build artifacts such as CMakeCache.txt created in ${CMAKE_SOURCE_DIR} will cause problems for future builds. Run 'git clean -fd' in ${CMAKE_SOURCE_DIR} to continue.")
+endif()
+
 cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'qt_add_qml_module' properly, you get errors at runtime like: "qrc:/main.qml:164 ApplicationContent is not a type\n"
 
 # CMAKE HINTS
