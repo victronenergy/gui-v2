@@ -161,40 +161,39 @@ SwipeViewPage {
 		delegate: NotificationDelegate {}
 	}
 
-	Button {
-		parent: !!Global.pageManager ? Global.pageManager.statusBar.rightSideRow : root
-		leftPadding: Theme.geometry_silenceAlarmButton_horizontalPadding
-		rightPadding: Theme.geometry_silenceAlarmButton_horizontalPadding
-		height: Theme.geometry_notificationsPage_snoozeButton_height
-		radius: Theme.geometry_button_radius
+	NotificationButton {
+		enabled: root.isCurrentPage && !!Global.notifications && Global.notifications.alert && !alarmButton.enabled
+		backgroundColor: Theme.color_warning
 
-		enabled: !!Global.notifications && (Global.notifications.alarm || Global.notifications.alert) && root.isCurrentPage
-		opacity: enabled ? 1 : 0
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration} }
-		backgroundColor: Global.notifications.alarm ? Theme.color_critical_background : Theme.color_warning
-
-		contentItem: Row {
+		contentItemChildren: Label {
 			anchors.verticalCenter: parent.verticalCenter
-			spacing: Theme.geometry_notificationsPage_snoozeButton_spacing
+			font.pixelSize: Theme.font_size_caption
+			//% "Acknowledge alerts"
+			text: qsTrId("notifications_acknowledge_alerts")
+		}
 
+		onClicked: Global.notifications.acknowledgeAll()
+	}
+
+	NotificationButton {
+		id: alarmButton
+
+		enabled: root.isCurrentPage && !!Global.notifications && Global.notifications.alarm
+		backgroundColor: Theme.color_critical_background
+
+		contentItemChildren: [
 			CP.ColorImage {
 				anchors.verticalCenter: parent.verticalCenter
-				visible: Global.notifications.alarm
 				source: "qrc:/images/icon_alarm_snooze_24.svg"
 				color: Theme.color_font_primary
-			}
-
+			},
 			Label {
 				anchors.verticalCenter: parent.verticalCenter
 				font.pixelSize: Theme.font_size_caption
-				text: Global.notifications.alarm
-						//% "Silence alarm"
-					  ? qsTrId("notifications_silence_alarm")
-						//% "Acknowledge alerts"
-					  : qsTrId("notifications_acknowledge_alerts")
+				//% "Silence alarm"
+				text: qsTrId("notifications_silence_alarm")
 			}
-		}
-
+		]
 		onClicked: Global.notifications.acknowledgeAll()
 	}
 }

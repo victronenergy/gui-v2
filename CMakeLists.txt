@@ -262,6 +262,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/LoadGraphShapePath.qml
     components/NavBar.qml
     components/NavButton.qml
+    components/NotificationButton.qml
     components/NotificationDelegate.qml
     components/ObjectModelMonitor.qml
     components/Page.qml
