@@ -59,8 +59,8 @@ Page {
 				enabled: userHasWriteAccess && state.value === 0
 				allowed: dataItem.isValid
 				textField.maximumLength: 6
-				onAccepted: function(hours) {
-					dataItem.setValue(accumulatedTotalItem.value - hours * 60 * 60)
+				onAccepted: {
+					dataItem.setValue(accumulatedTotalItem.value - textField.text * 60 * 60)
 				}
 
 				VeQuickItem {
@@ -78,8 +78,8 @@ Page {
 				secondaryText: Math.round(dataItem.value / 60 / 60)
 				textField.inputMethodHints: Qt.ImhDigitsOnly
 				dataItem.uid: settingsBindPrefix + "/ServiceInterval"
-				onAccepted: function(hours) {
-					dataItem.setValue(hours * 60 * 60)
+				onAccepted: {
+					dataItem.setValue(textField.text * 60 * 60)
 					//% "Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer."
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_service_time_interval").arg(hours))
 				}

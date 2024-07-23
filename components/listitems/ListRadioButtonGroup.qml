@@ -164,10 +164,10 @@ ListNavigationItem {
 								backgroundRect.color: "transparent"
 								Component.onCompleted: allowed = model.index !== root.currentIndex
 
-								onAccepted: function(text) {
+								onAccepted: {
 									if (bottomContentLoader.promptPassword) {
-										radioButton.select(text)
-									} else if (text === bottomContentLoader.password) {
+										radioButton.select(textField.text)
+									} else if (textField.text === bottomContentLoader.password) {
 										radioButton.select()
 									} else {
 										//% "Incorrect password"
