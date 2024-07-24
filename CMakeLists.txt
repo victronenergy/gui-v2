@@ -161,11 +161,12 @@ endif()
 list(APPEND VenusQMLModule_CPP_SOURCES ${CONNMAN_SOURCES})
 
 set(VEUTIL_CORE_SOURCES
+    src/veutil/inc/veutil/qt/alternator_error.hpp
     src/veutil/inc/veutil/qt/bms_error.hpp
     src/veutil/inc/veutil/qt/charger_error.hpp
     src/veutil/inc/veutil/qt/firmware_updater_data.hpp
+    src/veutil/inc/veutil/qt/genset_error.hpp
     src/veutil/inc/veutil/qt/unit_conversion.hpp
-    src/veutil/inc/veutil/qt/alternator_error.hpp
     src/veutil/inc/veutil/qt/ve_qitem.hpp
     src/veutil/inc/veutil/qt/ve_qitem_child_model.hpp
     src/veutil/inc/veutil/qt/ve_qitem_loader.hpp
@@ -174,10 +175,11 @@ set(VEUTIL_CORE_SOURCES
     src/veutil/inc/veutil/qt/ve_qitem_tree_model.hpp
     src/veutil/inc/veutil/qt/ve_quick_item.hpp
 
+    src/veutil/src/qt/alternator_error.cpp
     src/veutil/src/qt/bms_error.cpp
     src/veutil/src/qt/charger_error.cpp
+    src/veutil/src/qt/genset_error.cpp
     src/veutil/src/qt/unit_conversion.cpp
-    src/veutil/src/qt/alternator_error.cpp
     src/veutil/src/qt/ve_qitem.cpp
     src/veutil/src/qt/ve_qitem_child_model.cpp
     src/veutil/src/qt/ve_qitem_loader.cpp
@@ -457,6 +459,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/EssData.qml
     data/common/EvCharger.qml
     data/common/Generator.qml
+    data/common/GensetErrorModel.qml
     data/common/Inverter.qml
     data/common/InverterCharger.qml
     data/common/MeteoDevice.qml
@@ -619,7 +622,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/tank/PageTankSensor.qml
     pages/settings/devicelist/tank/PageTankSetup.qml
     pages/settings/devicelist/tank/PageTankShape.qml
-    pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml
     pages/settings/devicelist/ac-in/PageAcIn.qml
     pages/settings/devicelist/ac-in/PageAcInSetup.qml
     pages/settings/devicelist/ac-in/PageAcInModelGenset.qml

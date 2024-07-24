@@ -18,9 +18,7 @@ Item {
 			&& !!pageManager.navBar.model && pageManager.navBar.model.count > 0 // if alarm is detected at startup, wait until nav bar is ready
 	on_GoToNotificationsChanged: {
 		if (_goToNotifications) {
-			pageManager.popAllPages()
-			mainView.controlsActive = false
-			pageManager.navBar.setCurrentPage("NotificationsPage.qml")
+			notificationLayer.popAndGoToNotifications()
 		}
 	}
 
@@ -119,6 +117,15 @@ Item {
 
 		anchors.fill: parent
 		Component.onCompleted: Global.notificationLayer = notificationLayer
+
+		// technically, the notification layer is not related to the notifications page
+		// but we need to way to expose the "go to notifications page" functionality
+		// and the notifications layer is already part of the global object.
+		function popAndGoToNotifications() {
+			pageManager.popAllPages()
+			mainView.controlsActive = false
+			pageManager.navBar.setCurrentPage("NotificationsPage.qml")
+		}
 	}
 
 	// We only want the VKB on CerboGX/EkranoGX devices.
