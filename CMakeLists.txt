@@ -57,6 +57,16 @@ else()
     include(GNUInstallDirs)
 endif()
 
+option(LOAD_QML_FROM_FILESYSTEM "disable filesystem loading via cmake -DLOAD_QML_FROM_FILESYSTEM=OFF" ON) # Enabled by default
+option(RUN_UNIT_TESTS "only affects desktop builds. Enable via cmake -DRUN_UNIT_TESTS=ON" OFF) # Disabled by default
+
+if (${CMAKE_SYSTEM_PROCESSOR} STREQUAL ${CMAKE_HOST_SYSTEM_PROCESSOR})
+    set(VENUS_DESKTOP_BUILD ON)
+endif()
+if (${VENUS_DESKTOP_BUILD})
+    add_compile_definitions(VENUS_DESKTOP_BUILD)
+    enable_testing()
+endif()
 add_subdirectory(tests)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -69,11 +79,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 message("Building VenusOS for ${CMAKE_SYSTEM_NAME}")
 message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 message("CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
-
-option(VENUS_DESKTOP_BUILD "enable desktop build via cmake -DVENUS_DESKTOP_BUILD=ON" OFF) # Disabled by default
-option(VENUS_WEBASSEMBLY_BUILD "enable webassembly build via cmake -DVENUS_WEBASSEMBLY_BUILD=ON" OFF) # Disabled by default
-option(MQTT_WEBSOCKETS_ENABLED "enable websockets build via cmake -DMQTT_WEBSOCKETS_ENABLED=ON" OFF) # Disabled by default
-option(LOAD_QML_FROM_FILESYSTEM "disable filesystem loading via cmake -DLOAD_QML_FROM_FILESYSTEM=OFF" ON) # Enabled by default
 
 # If we want a release build, remove the '-g' debug compiler flag set by the environment setup script.
 # Otherwise, our executable size ballons from ~10MB to ~220MB.
@@ -1001,18 +1006,15 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     )
 elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
     list(APPEND venusCompileFlags  ${UNIX_COMPILE_FLAGS})
-    add_compile_definitions(VENUS_DESKTOP_BUILD)
     qt_add_executable(${PROJECT_NAME}
       MACOSX_BUNDLE
       ${SOURCES}
     )
 elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
-    add_compile_definitions(VENUS_DESKTOP_BUILD)
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
 elseif(VENUS_DESKTOP_BUILD)
-    add_compile_definitions(VENUS_DESKTOP_BUILD)
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
@@ -1020,6 +1022,16 @@ else()
     list(APPEND venusCompileFlags ${UNIX_COMPILE_FLAGS})
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
+    )
+endif()
+
+if ("${RUN_UNIT_TESTS}" STREQUAL "ON")
+    add_custom_command(
+         TARGET ${PROJECT_NAME}
+         COMMENT "Run tests"
+         POST_BUILD
+         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+         COMMAND ${CMAKE_CTEST_COMMAND} -V -C $<CONFIGURATION> --output-on-failures
     )
 endif()
 
