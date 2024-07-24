@@ -86,12 +86,30 @@ ObjectModel {
 		}
 	}
 
-	ListFpGensetErrorItem {
-		//% "Genset error code"
+	ListNavigationItem {
+		//% "Genset error codes"
 		text: qsTrId("ac-in-genset_error")
-		dataItem.uid: root.bindPrefix + "/Error/0/Id"
+		secondaryText: {
+			let errorCodes = ""
+			for (let i = 0; i < errorModel.errorCodes.length; ++i) {
+				if (errorModel.errorCodes[i] !== 0) {
+					errorCodes += (errorCodes.length ? " " : "") + errorModel.errorCodes[i]
+				}
+			}
+			return errorCodes.length ? errorCodes : CommonWords.none_errors
+		}
+
 		allowed: defaultAllowed && dataItem.isValid
-		nrOfPhases: root.nrOfPhases.value || 3
+		enabled: secondaryText !== CommonWords.none_errors
+
+		onClicked: Global.notificationLayer.popAndGoToNotificationsPage()
+
+		property VeQuickItem dataItem: VeQuickItem {
+			uid: root.bindPrefix + "/Error/0/Id"
+		}
+		property GensetErrorModel errorModel: GensetErrorModel {
+			uidPrefix: root.bindPrefix
+		}
 	}
 
 	ListButton {
