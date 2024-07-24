@@ -50,3 +50,4 @@ target_link_libraries(tst_units PRIVATE
     Qt6::Quick
 )
 
+add_test(NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})

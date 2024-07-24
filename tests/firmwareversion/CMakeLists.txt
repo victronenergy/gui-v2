@@ -51,3 +51,4 @@ target_link_libraries(tst_firmwareversion PRIVATE
     Qt6::Quick
 )
 
+add_test(NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})
