@@ -259,7 +259,7 @@ Page {
 	GradientListView {
 		model: classAndVrmInstanceModel
 
-		delegate: ListTextField {
+		delegate: ListIntField {
 			id: deviceDelegate
 
 			readonly property int _modelVrmInstance: model.vrmInstance
@@ -277,16 +277,17 @@ Page {
 			textField.inputMethodHints: Qt.ImhDigitsOnly
 			textField.text: model.vrmInstance
 			allowed: model.deviceClass.length > 0 && model.vrmInstance >= 0
-
-			onAccepted: {
+			validateInput: function() {
 				const newVrmInstance = parseInt(textField.text)
 				if (isNaN(newVrmInstance)) {
-					console.warn("Cannot change device instance, bad value:", newVrmInstance)
-					return
+					return validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
 				}
+				return validationResult(VenusOS.InputValidation_Result_OK, "", newVrmInstance)
+			}
+			saveInput: function() {
+				const newVrmInstance = parseInt(textField.text)
 				root._changeVrmInstance(model.index, newVrmInstance, revertText)
 			}
-
 			on_ModelVrmInstanceChanged: {
 				// If VRM instance is changed in the backend, reset the text.
 				textField.text = _modelVrmInstance

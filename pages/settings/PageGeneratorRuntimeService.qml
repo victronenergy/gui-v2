@@ -48,19 +48,18 @@ Page {
 				}
 			}
 
-			ListTextField {
+			ListIntField {
 				id: setTotalRunTime
 
 				//% "Generator total run time (hours)"
 				text: qsTrId("page_settings_generator_total_run_time")
 				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60)
-				textField.inputMethodHints: Qt.ImhDigitsOnly
 				dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
 				enabled: userHasWriteAccess && state.value === 0
 				allowed: dataItem.isValid
-				textField.maximumLength: 6
-				onAccepted: {
-					dataItem.setValue(accumulatedTotalItem.value - textField.text * 60 * 60)
+				maximumLength: 6
+				saveInput: function() {
+					dataItem.setValue(accumulatedTotalItem.value - parseInt(textField.text, 10) * 60 * 60)
 				}
 
 				VeQuickItem {
@@ -70,18 +69,17 @@ Page {
 				}
 			}
 
-			ListTextField {
+			ListIntField {
 				id: serviceInterval
 
 				//% "Generator service interval (hours)"
 				text: qsTrId("page_settings_generator_service_interval")
 				secondaryText: Math.round(dataItem.value / 60 / 60)
-				textField.inputMethodHints: Qt.ImhDigitsOnly
 				dataItem.uid: settingsBindPrefix + "/ServiceInterval"
-				onAccepted: {
-					dataItem.setValue(textField.text * 60 * 60)
+				saveInput: function() {
+					dataItem.setValue(parseInt(textField.text, 10) * 60 * 60)
 					//% "Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer."
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_service_time_interval").arg(hours))
+					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_service_time_interval").arg(textField.text))
 				}
 			}
 

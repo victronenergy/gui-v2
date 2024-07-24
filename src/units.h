@@ -53,6 +53,7 @@ public:
 
 	QString numberFormattingLocaleName() const;
 	Q_INVOKABLE QString formatNumber(qreal number, int precision = 0) const;
+	Q_INVOKABLE qreal formattedNumberToReal(const QString &s) const;
 
 	Q_INVOKABLE int defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const;
 	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints = 0) const;

@@ -679,6 +679,19 @@ public:
 		TrackerName_NoDevicePrefix
 	};
 	Q_ENUM(TrackerName_Format)
+
+	enum InputValidation_Result {
+		InputValidation_Result_Unknown,
+		InputValidation_Result_OK,
+		InputValidation_Result_Error,
+	};
+	Q_ENUM(InputValidation_Result)
+
+	enum InputValidation_ValidateMode {
+		InputValidation_ValidateOnly,
+		InputValidation_ValidateAndSave,
+	};
+	Q_ENUM(InputValidation_ValidateMode)
 };
 
 }

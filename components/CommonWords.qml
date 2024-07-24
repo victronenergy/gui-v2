@@ -161,6 +161,9 @@ QtObject {
 	//% "Error code"
 	readonly property string error_code: qsTrId("common_words_error_code")
 
+	//% "'%1' is not a number."
+	readonly property string error_nan: qsTrId("common_words_error_not_a_number")
+
 	//% "ESS"
 	readonly property string ess: qsTrId("common_words_ess")
 

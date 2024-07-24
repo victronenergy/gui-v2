@@ -164,20 +164,42 @@ ListNavigationItem {
 								backgroundRect.color: "transparent"
 								Component.onCompleted: allowed = model.index !== root.currentIndex
 
+								validateInput: function() {
+									if (!allowed) {
+										return validationResult(VenusOS.InputValidation_Result_Unknown)
+									}
+									if (textField.text !== bottomContentLoader.password) {
+										//% "%1: Incorrect password"
+										return validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_radio_button_incorrect_password").arg(radioButton.text))
+									}
+									return validationResult(VenusOS.InputValidation_Result_OK)
+								}
+								saveInput: function() {
+									if (allowed) {
+										radioButton.select()
+									}
+								}
+
+								onEditingFinished: {
+									allowed = false
+									textField.text = ""
+								}
 								onAccepted: {
 									if (bottomContentLoader.promptPassword) {
 										radioButton.select(textField.text)
 									} else if (textField.text === bottomContentLoader.password) {
 										radioButton.select()
-									} else {
-										//% "Incorrect password"
-										Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
-												qsTrId("settings_radio_button_incorrect_password"))
 									}
 								}
-								onHasActiveFocusChanged: {
-									if (!hasActiveFocus) {
-										textField.text = ""
+
+								Connections {
+									target: root
+									enabled: passwordField.allowed
+
+									function onOptionClicked(clickedIndex) {
+										if (clickedIndex !== model.index) {
+											passwordField.allowed = false
+										}
 									}
 								}
 							}

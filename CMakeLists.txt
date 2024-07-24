@@ -335,6 +335,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListAlarm.qml
     components/listitems/ListButton.qml
     components/listitems/ListDateSelector.qml
+    components/listitems/ListIntField.qml
     components/listitems/ListIpAddressField.qml
     components/listitems/ListItem.qml
     components/listitems/ListItemBackground.qml
