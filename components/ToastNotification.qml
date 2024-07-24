@@ -17,6 +17,20 @@ Item {
 	property alias text: label.text
 	property alias autoCloseInterval: timer.interval
 
+	property bool _closed
+
+	function close(immediately) {
+		if (_closed) {
+			return
+		}
+		_closed = true
+		if (immediately) {
+			dismissed()
+		} else {
+			dismiss.dismissClicked = true
+		}
+	}
+
 	signal dismissed()
 
 	implicitWidth: parent ? parent.width : 0

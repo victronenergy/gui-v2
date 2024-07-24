@@ -14,6 +14,7 @@ Item {
 	function showToastNotification(category, text, autoCloseInterval = 0) {
 		var toast = toaster.createObject(root, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
 		toastItemsModel.append(toast)
+		return toast
 	}
 
 	function deleteNotification(toast) {
@@ -21,9 +22,10 @@ Item {
 			if (toastItemsModel.get(i) === toast) {
 				toastItemsModel.remove(i, 1)
 				toast.destroy(1000)
-				break
+				return true
 			}
 		}
+		return false
 	}
 
 	ListView {

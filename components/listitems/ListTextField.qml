@@ -82,9 +82,10 @@ ListItem {
 					//% "The entered text does not have the correct format. Try again."
 					errorText = qsTrId("text_field_default_error_text")
 				}
-				// TODO if notification is already visible, update the existing notification
-				// and reset the notification timeout.
-				Global.showToastNotification(VenusOS.Notification_Info, errorText, 5000)
+				if (textField.currentNotification) {
+					textField.currentNotification.close(true)
+				}
+				textField.currentNotification = Global.showToastNotification(VenusOS.Notification_Info, errorText, 5000)
 			}
 			if (result.adjustedText != null) {
 				textField.text = result.adjustedText
@@ -142,7 +143,11 @@ ListItem {
 			// edited. If the result is either OK or unknown, then clear the invalid marker.
 			if (_showErrorHighlight && root.runValidation(VenusOS.InputValidation_ValidateOnly) !== VenusOS.InputValidation_Result_Error) {
 				_showErrorHighlight = false
-				// TODO close the error notification if it is open
+			}
+			// Close error notification if visible.
+			if (textField.currentNotification) {
+				textField.currentNotification.close(false)
+				textField.currentNotification = null
 			}
 			_validateBeforeSaving = true
 		}
