@@ -71,7 +71,7 @@ Page {
 					ListElement { display: "Option A"; value: 1 }
 					ListElement { display: "Option B"; value: 2; readOnly: true }
 					ListElement { display: "Option C"; value: 3 }
-					ListElement { display: "Option D"; value: 4 }
+					ListElement { display: "Option D (with password 'AAA')"; value: 4; password: "AAA" }
 					ListElement { display: "Option E"; value: 5 }
 					ListElement { display: "Option F"; value: 6 }
 					ListElement { display: "Option G"; value: 7 }
@@ -156,6 +156,11 @@ Page {
 				placeholderText: "Enter text"
 			}
 
+			ListIntField {
+				text: "Number with 5 digits max"
+				maximumLength: 5
+			}
+
 			ListQuantityField {
 				text: "Quantity input"
 				value: 123.5324
@@ -165,6 +170,7 @@ Page {
 
 			ListIpAddressField {
 				text: "IP address"
+				secondaryText: "12.23.21.4"
 			}
 
 			ListSpinBox {

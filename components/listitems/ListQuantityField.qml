@@ -14,10 +14,22 @@ ListTextField {
 	property int decimals: Units.defaultUnitPrecision(unit)
 
 	suffix: Units.defaultUnitString(unit)
-	textField.validator: DoubleValidator {
-		decimals: root.decimals
-		locale: Units.numberFormattingLocaleName
-	}
 	textField.inputMethodHints: Qt.ImhFormattedNumbersOnly
 	textField.text: Units.formatNumber(root.value, root.decimals)
+	validateInput: function() {
+		const numberValue = Units.formattedNumberToReal(textField.text)
+		if (isNaN(numberValue)) {
+		   return validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
+		}
+
+		// In case the user has entered a number with a greater precision than what is supported,
+		// adjust the precision of the displayed number.
+		const formattedNumber = Units.formatNumber(numberValue, root.decimals)
+		return validationResult(VenusOS.InputValidation_Result_OK, "", formattedNumber)
+	}
+	saveInput: function() {
+		if (dataItem.uid) {
+			dataItem.setValue(Units.formattedNumberToReal(textField.text))
+		}
+	}
 }

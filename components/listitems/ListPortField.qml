@@ -6,10 +6,25 @@
 import QtQuick
 import Victron.VenusOS
 
-ListTextField {
+ListIntField {
 	id: root
 
+	//% "Port"
+	text: qsTrId("port_field_title")
 	placeholderText: "80"
-	textField.validator: RegularExpressionValidator { regularExpression: /[0-9]{1,5}/ }
-	textField.inputMethodHints: Qt.ImhDigitsOnly
+	validateInput: function() {
+		// Check whether the input is a number
+		const intValidationResult = validateIntInput()
+		if (intValidationResult.status === VenusOS.InputValidation_Result_Error) {
+			return intValidationResult
+		}
+
+		// Check whether the input is a valid port
+		const valueAsInt = parseInt(textField.text)
+		if (isNaN(valueAsInt) || valueAsInt < 0 || valueAsInt > 65535) {
+			//% "'%1' is not a valid port number. Use a number between 0-65535."
+			return validationResult(VenusOS.InputValidation_Result_Error, qsTrId("port_input_not_valid").arg(textField.text))
+		}
+		return validationResult(VenusOS.InputValidation_Result_OK)
+	}
 }

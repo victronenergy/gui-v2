@@ -102,7 +102,7 @@ Page {
 								placeholderText: qsTrId("settings_batteries_enter_name")
 								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
 								allowed: dataItem.isValid
-								textField.maximumLength: 32 // TODO can the max be fetched from dbus?
+								textField.maximumLength: 32
 							}
 						}
 					}

@@ -153,7 +153,7 @@ Page {
 			allowed: root.ready && root._wifi && root._disconnected
 					 && !service.favorite && service.secured
 			writeAccessLevel: VenusOS.User_AccessType_User
-			onAccepted: {
+			saveInput: function() {
 				var obj = {
 					Service: service.service,
 					Action: "connect",
@@ -248,10 +248,9 @@ Page {
 		}
 
 		ListIpAddressField {
-			text: CommonWords.ip_address
 			enabled: method.userHasWriteAccess && service.manual
 			textField.text: service.ipAddress
-			onAccepted: setServiceProperty("Address", textField.text)
+			saveInput: function() { setServiceProperty("Address", textField.text) }
 		}
 
 		ListIpAddressField {
@@ -259,7 +258,7 @@ Page {
 			text: qsTrId("settings_tcpip_netmask")
 			enabled: method.userHasWriteAccess && service.manual
 			textField.text: service.netmask
-			onAccepted: setServiceProperty("Netmask", textField.text)
+			saveInput: function() { setServiceProperty("Netmask", textField.text) }
 		}
 
 		ListIpAddressField {
@@ -267,7 +266,7 @@ Page {
 			text: qsTrId("settings_tcpip_gateway")
 			enabled: method.userHasWriteAccess && service.manual
 			textField.text: service.gateway
-			onAccepted: setServiceProperty("Gateway", textField.text)
+			saveInput: function() { setServiceProperty("Gateway", textField.text) }
 		}
 
 		ListIpAddressField {
@@ -275,7 +274,7 @@ Page {
 			text: qsTrId("settings_tcpip_dns_server")
 			enabled: method.userHasWriteAccess && service.manual
 			textField.text: service.nameserver
-			onAccepted: setServiceProperty("Nameserver", textField.text)
+			saveInput: function() { setServiceProperty("Nameserver", textField.text) }
 		}
 
 		ListTextItem {

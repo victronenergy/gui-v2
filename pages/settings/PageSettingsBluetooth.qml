@@ -28,7 +28,8 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 				textField.maximumLength: 6
 				textField.inputMethodHints: Qt.ImhDigitsOnly
-				onAccepted: {
+				saveInput: function() {
+					dataItem.setValue(textField.text)
 					Global.showToastNotification(VenusOS.Notification_Info,
 						   //% "It might be necessary to remove existing pairing information before connecting."
 						   qsTrId("settings_bluetooth_remove_existing_pairing_info"),

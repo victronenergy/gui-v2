@@ -205,8 +205,7 @@ Page {
 				//% "Enter password"
 				placeholderText: qsTrId("settings_root_enter_password")
 				textField.echoMode: TextInput.Password
-
-				onAccepted: {
+				saveInput: function() {
 					if (secondaryText.length < 8) {
 						//% "Password needs to be at least 8 characters long"
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_root_too_short_password"), 5000)

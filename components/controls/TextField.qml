@@ -10,6 +10,8 @@ import Victron.VenusOS
 CT.TextField {
 	id: root
 
+	property color borderColor: Theme.color_ok
+
 	font.family: Global.fontFamily
 	font.pixelSize: Theme.font_size_body2
 	passwordCharacter: "\u2022"
@@ -26,7 +28,7 @@ CT.TextField {
 
 	background: Rectangle {
 		color: "transparent"
-		border.color: Theme.color_ok
+		border.color: root.borderColor
 		border.width: Theme.geometry_button_border_width
 		radius: Theme.geometry_button_radius
 

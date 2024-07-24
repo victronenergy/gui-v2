@@ -42,69 +42,39 @@ Page {
 
 			ListIpAddressField {
 				id: ipAddress
-
-				function valid() {
-					const digits = secondaryText.split('.')
-					return ( digits.length === 4 &&
-							parseInt(digits[0]) < 256 &&
-							parseInt(digits[1]) < 256 &&
-							parseInt(digits[2]) < 256 &&
-							parseInt(digits[3]) < 256 &&
-							secondaryText !== "0.0.0.0" )
-				}
-
-				text: CommonWords.ip_address
 			}
 
-			ListTextField {
+			ListPortField {
 				id: port
 
-				function valid() {
-					const valueAsInt = parseInt(secondaryText)
-					return ((valueAsInt > 0) && (valueAsInt < 65535))
-				}
-
-				//% "Port"
-				text: qsTrId("modbus_add_device_port")
 				secondaryText: "502"
-				textField.validator: RegularExpressionValidator { regularExpression: /[0-9]{1,5}/ }
-				textField.inputMethodHints: Qt.ImhDigitsOnly
 			}
 
-			ListTextField {
+			ListIntField {
 				id: unit
-
-				function valid() {
-					const valueAsInt = parseInt(secondaryText)
-					return ((valueAsInt > 0) && (valueAsInt <= 247))
-				}
 
 				//% "Unit"
 				text: qsTrId("modbus_add_device_unit")
 				secondaryText: "1"
-				textField.validator: RegularExpressionValidator { regularExpression: /[0-9]{1,5}/ }
-				textField.inputMethodHints: Qt.ImhDigitsOnly
+				validateInput: function() {
+					const valueAsInt = parseInt(textField.text)
+					if (isNaN(valueAsInt) || valueAsInt <= 0 || valueAsInt > 247) {
+						//% "%1 is not a valid unit number. Use a number between 1-247."
+						return validationResult(VenusOS.InputValidation_Result_Error, qsTrId("modbus_add_unit_invalid").arg(textField.text))
+					}
+					return validationResult(VenusOS.InputValidation_Result_OK, "", valueAsInt)
+				}
 			}
 
 			ListButton {
 				secondaryText: CommonWords.add_device
 				onClicked: {
-					if (!ipAddress.valid()) {
-						//% "Invalid IP address"
-						Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("modbus_invalid_ip_address"), 5000)
-						return
-					}
-
-					if (!port.valid()) {
-						//% "Invalid port number"
-						Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("modbus_invalid_port_number"), 5000)
-						return
-					}
-
-					if (!unit.valid()) {
-						//% "Invalid unit address"
-						Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("modbus_invalid_unit_address"), 5000)
-						return
+					const fields = [ipAddress, port, unit]
+					for (let i = 0; i < fields.length; ++i) {
+						const resultStatus = fields[i].runValidation(VenusOS.InputValidation_ValidateAndSave)
+						if (resultStatus !== VenusOS.InputValidation_Result_OK) {
+							return
+						}
 					}
 
 					const d = [protocol.currentValue, ipAddress.secondaryText, port.secondaryText, unit.secondaryText];

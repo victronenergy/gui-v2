@@ -71,6 +71,13 @@ QString Units::formatNumber(qreal number, int precision) const
 	return formattingLocale()->toString(number, 'f', precision);
 }
 
+qreal Units::formattedNumberToReal(const QString &s) const
+{
+	bool ok = false;
+	const double d = formattingLocale()->toDouble(s, &ok);
+	return ok ? d : qQNaN();
+}
+
 int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 {
 	switch (unit) {
