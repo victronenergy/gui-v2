@@ -71,8 +71,9 @@ QtObject {
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
 		if (!!notificationLayer) {
-			notificationLayer.showToastNotification(category, text, autoCloseInterval)
+			return notificationLayer.showToastNotification(category, text, autoCloseInterval)
 		}
+		return null
 	}
 
 	function deviceModelsForClass(deviceClass) {
