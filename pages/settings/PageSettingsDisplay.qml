@@ -50,6 +50,7 @@ Page {
 					//% "Never"
 					{ display: qsTrId("settings_displayoff_never"), value: 0 },
 				]
+				allowed: defaultAllowed && Qt.platform.os != "wasm"
 			}
 
 			ListRadioButtonGroup {
