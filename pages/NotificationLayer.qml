@@ -10,6 +10,7 @@ Item {
 	id: root
 
 	anchors.fill: parent
+	anchors.bottomMargin: Qt.inputMethod && Qt.inputMethod.visible ? Qt.inputMethod.keyboardRectangle.height : 0
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
 		var toast = toaster.createObject(root, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
