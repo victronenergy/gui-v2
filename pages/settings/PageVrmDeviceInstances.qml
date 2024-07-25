@@ -236,11 +236,11 @@ Page {
 			return count
 		}
 
-		function updateSortOrder(index) {
-			const data = get(index)
+		function updateSortOrder(modelIndex) {
+			const data = get(modelIndex)
 			const insertionIndex = findInsertionIndex(data.deviceClass, data.name, data.vrmInstance)
 			if (insertionIndex !== modelIndex) {
-				move(index, insertionIndex, 1)
+				move(modelIndex, insertionIndex, 1)
 			}
 		}
 
