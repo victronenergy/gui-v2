@@ -36,17 +36,25 @@ Page {
 			id: relayDelegate
 
 			function getIdFromService(service) {
+				// if service = com.victronenergy.temperature.ruuvi_f00f00d00001 then the sensor id
+				// is ruuvi_f00f00d00001
 				if (service.indexOf(".temperature.") > -1) {
 					return service.split(".temperature.")[1]
 				}
 				return ""
 			}
 
-			bindPrefix: model.item.value    // e.g. com.victronenergy.temperature.ruuvi_f00f00d00001
-			sensorId: getIdFromService(bindPrefix)
+			// model.item.value is e.g. com.victronenergy.temperature.ruuvi_f00f00d00001
+			bindPrefix: BackendConnection.serviceUidFromName(model.item.value, serviceInstance.value)
+			sensorId: getIdFromService(model.item.value)
 
 			onClicked: {
 				Global.pageManager.pushPage(sensorRelayComponent)
+			}
+
+			VeQuickItem {
+				id: serviceInstance
+				uid: "%1/Sensor/%2/ServiceInstance".arg(BackendConnection.serviceUidForType("temprelay")).arg(sensorId)
 			}
 
 			Component {
@@ -92,14 +100,14 @@ Page {
 
 							TemperatureRelaySettings {
 								relayNumber: 0
-								sensorId: relayDelegate.getIdFromService(relayDelegate.bindPrefix)
+								sensorId: relayDelegate.sensorId
 								relayActivateOnTemperature: functionEnabledSwitch.checked
 								hasInvalidRelayTempConfig: _hasInvalidRelayTempConfig(relayValue)
 							}
 
 							TemperatureRelaySettings {
 								relayNumber: 1
-								sensorId: relayDelegate.getIdFromService(relayDelegate.bindPrefix)
+								sensorId: relayDelegate.sensorId
 								relayActivateOnTemperature: functionEnabledSwitch.checked
 								hasInvalidRelayTempConfig: _hasInvalidRelayTempConfig(relayValue)
 							}
