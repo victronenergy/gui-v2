@@ -91,7 +91,7 @@ QtObject {
 			const hasCreatedObjects = _createdObjects.length > 0
 			while (_createdObjects.length > 1) {
 				let obj = _createdObjects.pop()
-				obj._deviceInstance.setValue(-1)
+				obj.deviceInstance = -1
 				obj.destroy()
 			}
 
@@ -103,7 +103,7 @@ QtObject {
 
 			if (hasCreatedObjects) {
 				let lastObject = _createdObjects.shift()
-				lastObject._deviceInstance.setValue(-1)
+				lastObject.deviceInstance = -1
 				lastObject.destroy()
 			}
 		}
@@ -132,7 +132,7 @@ QtObject {
 			} else {
 				// remove a tank
 				const index = Math.floor(Math.random() * _createdObjects.length)
-				_createdObjects[index]._deviceInstance.setValue(-1) // causes tank to remove itself from model
+				_createdObjects[index].deviceInstance = -1 // causes tank to remove itself from model
 				_createdObjects.splice(index, 1)
 			}
 		}
@@ -155,7 +155,7 @@ QtObject {
 			root.addTank(tankProperties)
 		} else {
 			for (var i = 0; i < _createdObjects.length; ++i) {
-				_createdObjects[i]._deviceInstance.setValue(-1) // causes tank to remove itself from model
+				_createdObjects[i].deviceInstance = -1 // causes tank to remove itself from model
 			}
 
 			_createdObjects = []
