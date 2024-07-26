@@ -85,7 +85,7 @@ Item {
 			const hasCreatedObjects = _createdObjects.length > 0
 			while (_createdObjects.length > 1) {
 				let obj = _createdObjects.pop()
-				obj._deviceInstance.setValue(-1)
+				obj.deviceInstance = -1
 				obj.destroy()
 			}
 
@@ -97,7 +97,7 @@ Item {
 
 			if (hasCreatedObjects) {
 				let lastObject = _createdObjects.shift()
-				lastObject._deviceInstance.setValue(-1)
+				lastObject.deviceInstance = -1
 				lastObject.destroy()
 			}
 		}
