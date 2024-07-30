@@ -8,7 +8,7 @@ jobs:
   build-wasm-file:
     env:
       EMSCRIPTEN: 3.1.37
-      QT_VERSION: 6.6.1
+      QT_VERSION: 6.6.3
     runs-on: ubuntu-latest
     permissions:
       contents: write
