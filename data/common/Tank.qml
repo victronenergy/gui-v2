@@ -45,7 +45,7 @@ Device {
 	}
 
 	onValidChanged: Qt.callLater(tank._updateModel)
-	onTypeChanged: Qt.callLater(tank._updateModel)
+	onTypeChanged: Qt.callLater(tank._updateModel) // if type changes, move tank to the correct model
 
 	function _updateModel() {
 		if (valid && type >= 0) {
