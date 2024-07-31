@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.Controls as C
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Rectangle {
@@ -14,7 +15,7 @@ Rectangle {
 
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
-	property alias rightSideRow: rightSideRow
+	property bool notificationButtonsEnabled
 
 	property bool animationEnabled
 
@@ -55,6 +56,25 @@ Rectangle {
 		}
 	}
 
+	component NotificationButton : Button {
+		property alias contentItemChildren: row.children
+
+		leftPadding: Theme.geometry_silenceAlarmButton_horizontalPadding
+		rightPadding: Theme.geometry_silenceAlarmButton_horizontalPadding
+		height: Theme.geometry_notificationsPage_snoozeButton_height
+		radius: Theme.geometry_button_radius
+		opacity: enabled ? 1 : 0
+		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration } }
+
+		contentItem: Row {
+			id: row
+
+			anchors.verticalCenter: parent.verticalCenter
+			spacing: Theme.geometry_notificationsPage_snoozeButton_spacing
+		}
+	}
+
+
 	StatusBarButton {
 		id: leftButton
 
@@ -90,6 +110,50 @@ Rectangle {
 			rightMargin: Theme.geometry_statusBar_rightSideRow_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
+	}
+
+	NotificationButton {
+		anchors {
+			right: rightSideRow.right
+			verticalCenter: parent.verticalCenter
+		}
+		enabled: notificationButtonsEnabled && !!Global.notifications && Global.notifications.alert && !alarmButton.enabled
+		backgroundColor: Theme.color_warning
+
+		contentItemChildren: Label {
+			anchors.verticalCenter: parent.verticalCenter
+			font.pixelSize: Theme.font_size_caption
+			//% "Acknowledge alerts"
+			text: qsTrId("notifications_acknowledge_alerts")
+		}
+
+		onClicked: Global.notifications.acknowledgeAll()
+	}
+
+	NotificationButton {
+		id: alarmButton
+
+		anchors {
+			right: rightSideRow.right
+			verticalCenter: parent.verticalCenter
+		}
+		enabled: notificationButtonsEnabled && !!Global.notifications && Global.notifications.alarm
+		backgroundColor: Theme.color_critical_background
+
+		contentItemChildren: [
+			CP.ColorImage {
+				anchors.verticalCenter: parent.verticalCenter
+				source: "qrc:/images/icon_alarm_snooze_24.svg"
+				color: Theme.color_font_primary
+			},
+			Label {
+				anchors.verticalCenter: parent.verticalCenter
+				font.pixelSize: Theme.font_size_caption
+				//% "Silence alarm"
+				text: qsTrId("notifications_silence_alarm")
+			}
+		]
+		onClicked: Global.notifications.acknowledgeAll()
 	}
 
 	Row {
