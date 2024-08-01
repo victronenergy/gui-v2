@@ -797,6 +797,7 @@ endif()
 # Dbus_QML_MODULE
 set(Dbus_QML_MODULE_SOURCES
     data/dbus/AcSystemDevicesImpl.qml
+    data/dbus/BatteriesImpl.qml
     data/dbus/ChargersImpl.qml
     data/dbus/DBusDataManager.qml
     data/dbus/DcInputsImpl.qml
@@ -926,6 +927,7 @@ endif()
 # Mqtt_QML_MODULE
 set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/AcSystemDevicesImpl.qml
+    data/mqtt/BatteriesImpl.qml
     data/mqtt/ChargersImpl.qml
     data/mqtt/DcInputsImpl.qml
     data/mqtt/DcLoadsImpl.qml
