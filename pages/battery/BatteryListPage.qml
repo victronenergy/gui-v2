@@ -11,7 +11,7 @@ Page {
 	id: root
 
 	GradientListView {
-		model: Global.batteries.model
+		model: batteryModel
 		spacing: Theme.geometry_gradientList_spacing
 		delegate: ListItemBackground {
 			height: Theme.geometry_batteryListPage_item_height
@@ -123,6 +123,51 @@ Page {
 
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
 							{ "title": modelData.name, "battery": modelData })
+				}
+			}
+		}
+	}
+
+	// A model of Battery objects, generated from com.victronenergy.system/Batteries.
+	DeviceModel {
+		id: batteryModel
+	}
+
+	VeQuickItem {
+		uid: Global.system.serviceUid + "/Batteries"
+		onValueChanged: {
+			let i
+			if (!isValid) {
+				batteryModel.deleteAllAndClear()
+				return
+			}
+			// Value is a list of key-value pairs with info about each battery.
+			const batteryUids = value.map((info) => BackendConnection.serviceUidFromName(info.id, info.instance))
+
+			// Remove batteries that are not in this list
+			batteryModel.intersect(batteryUids)
+
+			// Add new battery objects
+			for (i = 0; i < batteryUids.length; ++i) {
+				if (batteryModel.indexOf(batteryUids[i]) < 0) {
+					batteryComponent.createObject(batteryModel, { serviceUid: batteryUids[i] })
+				}
+			}
+		}
+	}
+
+	Component {
+		id: batteryComponent
+
+		Battery {
+			id: battery
+
+			onValidChanged: {
+				if (valid) {
+					batteryModel.addDevice(battery)
+				} else {
+					batteryModel.removeDevice(battery.serviceUid)
+					battery.destroy()
 				}
 			}
 		}

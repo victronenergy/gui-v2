@@ -64,43 +64,5 @@ QtObject {
 		}
 	}
 
-	readonly property VeQuickItem _batteries: VeQuickItem {
-		uid: Global.system.serviceUid + "/Batteries"
-		onValueChanged: {
-			let i
-			if (!isValid) {
-				root.model.deleteAllAndClear()
-				return
-			}
-			// Value is a list of key-value pairs with info about each battery.
-			const batteryUids = value.map((info) => BackendConnection.serviceUidFromName(info.id, info.instance))
-
-			// Remove batteries from Global.batteries.model that are not in this list
-			root.model.intersect(batteryUids)
-
-			// Add new entries to Global.batteries.model
-			for (i = 0; i < batteryUids.length; ++i) {
-				if (root.model.indexOf(batteryUids[i]) < 0) {
-					_batteryComponent.createObject(root, { serviceUid: batteryUids[i] })
-				}
-			}
-		}
-	}
-
-	property Component _batteryComponent: Component {
-		Battery {
-			id: battery
-
-			onValidChanged: {
-				if (valid) {
-					root.addBattery(battery)
-				} else {
-					root.removeBattery(battery.serviceUid)
-					battery.destroy()
-				}
-			}
-		}
-	}
-
 	Component.onCompleted: Global.batteries = root
 }

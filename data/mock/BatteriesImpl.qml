@@ -117,6 +117,7 @@ QtObject {
 			root.initLynxBattery(dummyBattery)
 
 			Global.batteries.system = dummyBattery
+			Global.batteries.addBattery(dummyBattery)
 
 			const batteryList = [{
 				id: "com.victronenergy.battery.ttyUSB1",

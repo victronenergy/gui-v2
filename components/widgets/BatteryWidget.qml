@@ -10,26 +10,34 @@ OverviewWidget {
 	id: root
 
 	onClicked: {
-		if (Global.batteries.model.count === 1) {
-			const firstBattery = Global.batteries.model.firstObject
-			if (BackendConnection.serviceTypeFromUid(firstBattery.serviceUid) === "vebus") {
-				const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(firstBattery.serviceUid)
+		// If com.victronenergy.system/Batteries has only one battery, then show the device
+		// settings for that battery; otherwise, show the full battery list using BatteryListPage.
+		if (batteries.value.length === 1) {
+			const batteryUids = batteries.value.map((info) => BackendConnection.serviceUidFromName(info.id, info.instance))
+
+			// Show the vebus page if the battery is from a vebus service.
+			if (BackendConnection.serviceTypeFromUid(batteryUids[0]) === "vebus") {
+				const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(batteryUids[0])
 				if (deviceIndex >= 0) {
 					const veBusDevice = Global.inverterChargers.veBusDevices.deviceAt(deviceIndex)
 					Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
 						"title": veBusDevice.name,
 						"veBusDevice": veBusDevice
 					})
+					return
 				}
-				return
 			}
 
 			// Assume this is a battery service
-			Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
-					{ "battery": firstBattery })
-		} else {
-			Global.pageManager.pushPage("/pages/battery/BatteryListPage.qml")
+			const batteryIndex = Global.batteries.model.indexOf(batteryUids[0])
+			if (batteryIndex >= 0) {
+				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
+						{ "battery": Global.batteries.model.deviceAt(batteryIndex) })
+				return
+			}
 		}
+
+		Global.pageManager.pushPage("/pages/battery/BatteryListPage.qml")
 	}
 
 	readonly property var batteryData: Global.batteries.system
@@ -60,10 +68,15 @@ OverviewWidget {
 		font.family: Global.quantityFontFamily
 	}
 
+	VeQuickItem {
+		id: batteries
+		uid: Global.system.serviceUid + "/Batteries"
+	}
+
 	title: CommonWords.battery
 	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
-	enabled: Global.batteries.model.count > 0
+	enabled: batteries.isValid
 
 	quantityLabel.value: batteryData.stateOfCharge
 	quantityLabel.unit: VenusOS.Units_Percentage
