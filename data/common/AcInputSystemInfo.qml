@@ -17,7 +17,7 @@ QtObject {
 	property bool isActiveInput
 	readonly property bool valid: deviceInstance >= 0 && serviceType.length && serviceName.length
 
-	readonly property bool connected: _connected.value === 1
+	readonly property bool connected: !!_connected.value
 	readonly property int deviceInstance: _deviceInstance.isValid ? _deviceInstance.value : -1
 	readonly property string serviceType: _serviceType.value || "" // e.g. "vebus"
 	readonly property string serviceName: _serviceName.value || "" // e.g. com.victronenergy.vebus.ttyO, com.victronenergy.grid.ttyO
