@@ -35,9 +35,17 @@ Page {
 
 			ListRadioButtonGroup {
 				id: vrmPortalMode
+
+				function setMode(mode) {
+					dataItem.setValue(mode)
+					Global.pageManager.popPage(root)
+				}
+
 				//% "VRM portal"
 				text: qsTrId("settings_logging_vrm_portal")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Network/VrmPortal"
+				updateOnClick: false
+				popDestination: undefined   // do not automatically pop page when value is selected
 				optionModel: [
 					{ display: CommonWords.off, value: VenusOS.Vrm_PortalMode_Off },
 					//% "Read-only"
@@ -45,6 +53,31 @@ Page {
 					//% "Full"
 					{ display: qsTrId("settings_vrm_portal_full"), value: VenusOS.Vrm_PortalMode_Full }
 				]
+				onOptionClicked: (index, password) => {
+					// When connecting via VRM, confirm mode changes that will lock the user out
+					// of the VRM portal connection.
+					const newMode = optionModel[index].value
+					if (newMode !== VenusOS.Vrm_PortalMode_Full && Qt.platform.os == "wasm" && BackendConnection.vrm) {
+						Global.dialogLayer.open(modeConfirmationDialogComponent, { mode: newMode })
+					} else {
+						setMode(newMode)
+					}
+				}
+
+				Component {
+					id: modeConfirmationDialogComponent
+
+					ModalWarningDialog {
+						property int mode
+
+						//% "Are you sure?"
+						title: qsTrId("settings_vrm_portal_mode_confirm_title")
+						//% "Changing this setting to Read-only or Off will lock you out."
+						description: qsTrId("settings_vrm_portal_mode_confirm_description")
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						onAccepted: vrmPortalMode.setMode(mode)
+					}
+				}
 			}
 
 			ListTextItem {
