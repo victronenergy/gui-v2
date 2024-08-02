@@ -182,7 +182,7 @@ void BackendConnection::onReloadPageTimerExpired()
 		mRestartDelayTimer = nullptr;
 	}
 
-	emscripten_run_script("reload();");
+	reloadPage();
 }
 
 // If the wasm itself changed the Security Profile, it should normally be notified
@@ -198,11 +198,17 @@ void BackendConnection::securityProtocolChanged()
 	timer->start(5000);
 }
 
+void BackendConnection::reloadPage()
+{
+	emscripten_run_script("reload();");
+}
+
 #else
 
 void BackendConnection::onNetworkConfigChanged(const QVariant var) { Q_UNUSED(var); }
 void BackendConnection::onReloadPageTimerExpired() {}
 void BackendConnection::securityProtocolChanged() {}
+void BackendConnection::reloadPage() {}
 
 #endif
 
