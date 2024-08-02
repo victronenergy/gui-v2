@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Controls as C
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Rectangle {
@@ -15,7 +14,8 @@ Rectangle {
 
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
-	property bool notificationButtonsEnabled
+	readonly property bool notificationButtonsEnabled: Global.mainView.currentPage && Global.mainView.currentPage.url.endsWith("NotificationsPage.qml")
+	readonly property bool notificationButtonVisible: alertButton.enabled || alertButton.animating || alarmButton.enabled || alarmButton.animating
 
 	property bool animationEnabled
 
@@ -57,6 +57,8 @@ Rectangle {
 	}
 
 	component NotificationButton : Button {
+		readonly property bool animating: animator.running
+
 		leftPadding: Theme.geometry_silenceAlarmButton_horizontalPadding
 		rightPadding: Theme.geometry_silenceAlarmButton_horizontalPadding
 		height: Theme.geometry_notificationsPage_snoozeButton_height
@@ -64,7 +66,13 @@ Rectangle {
 		opacity: enabled ? 1 : 0
 		font.family: Global.fontFamily
 		font.pixelSize: Theme.font_size_caption
-		Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration } }
+		Behavior on opacity {
+			OpacityAnimator {
+				id: animator
+
+				duration: Theme.animation_toastNotification_fade_duration
+			}
+		}
 	}
 
 
@@ -103,9 +111,12 @@ Rectangle {
 			rightMargin: Theme.geometry_statusBar_rightSideRow_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
+		width: Math.max(20, implicitWidth)
 	}
 
 	NotificationButton {
+		id: alertButton
+
 		anchors {
 			right: rightSideRow.right
 			verticalCenter: parent.verticalCenter
@@ -126,7 +137,6 @@ Rectangle {
 		}
 		enabled: notificationButtonsEnabled && !!Global.notifications && Global.notifications.alarm
 		backgroundColor: Theme.color_critical_background
-		display: C.AbstractButton.TextBesideIcon
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
 		//% "Silence alarm"
 		text: qsTrId("notifications_silence_alarm")
