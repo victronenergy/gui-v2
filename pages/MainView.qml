@@ -29,7 +29,7 @@ Item {
 
 	property int _loadedPages: 0
 
-	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded
+	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded && !Global.needPageReload
 	on_ReadyToInitChanged: {
 		if (_readyToInit && swipeViewLoader.active == false) {
 			_loadUi()

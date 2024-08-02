@@ -50,11 +50,11 @@ Item {
 			Timer {
 				running: true
 				interval: 10*1000
-				onTriggered: Qt.quit() // the aboutToQuit handler will trigger page reload.
+				onTriggered: BackendConnection.reloadPage()
 			}
 		}
 	}
 
-	property bool _needPageReload: Qt.platform.os == "wasm" && Global.firmwareInstalledBuildUpdated
+	property bool _needPageReload: Global.needPageReload
 	on_NeedPageReloadChanged: if (_needPageReload) open(_firmwareVersionRestartDialog)
 }

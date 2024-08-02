@@ -69,7 +69,7 @@ Window {
 		onConnectionReadyChanged: {
 			if (connectionReady) {
 				active = true
-			} else if (active) {
+			} else if (active && !Global.needPageReload) {
 				root.rebuildUi()
 				active = false
 			}
