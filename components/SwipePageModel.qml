@@ -9,7 +9,6 @@ ObjectModel {
 	readonly property bool showLevelsPage: tankCount > 0 || environmentInputCount > 0
 	readonly property bool tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
 	readonly property bool environmentInputCount: Global.environmentInputs ? Global.environmentInputs.model.count : 0
-	readonly property alias notificationsPage: _notificationsPage
 
 	property bool _completed: false
 	readonly property Component levelsPage: Component {
@@ -27,8 +26,6 @@ ObjectModel {
 	}
 
 	NotificationsPage {
-		id: _notificationsPage
-
 		view: root.view
 	}
 

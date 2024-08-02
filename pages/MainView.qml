@@ -341,7 +341,6 @@ Item {
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
 		animationEnabled: BackendConnection.applicationVisible
 		color: root.backgroundColor
-		notificationButtonsEnabled: swipePageModel.notificationsPage.isCurrentPage
 
 		onLeftButtonClicked: {
 			switch (leftButton) {
