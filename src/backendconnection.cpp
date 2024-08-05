@@ -62,6 +62,9 @@ void BackendConnection::setState(VeQItemMqttProducer::ConnectionState backendCon
 		setState(BackendConnection::State::Idle);
 		break;
 	}
+	case VeQItemMqttProducer::WaitingToConnect: // fall through
+	case VeQItemMqttProducer::TransportConnecting: // fall through
+	case VeQItemMqttProducer::TransportConnected: // fall through
 	case VeQItemMqttProducer::Connecting:
 	{
 		setState(BackendConnection::State::Connecting);
@@ -72,6 +75,7 @@ void BackendConnection::setState(VeQItemMqttProducer::ConnectionState backendCon
 		setState(BackendConnection::State::Connected);
 		break;
 	}
+	case VeQItemMqttProducer::Identified: // fall through
 	case VeQItemMqttProducer::Initializing:
 	{
 		setState(BackendConnection::State::Initializing);
@@ -87,6 +91,9 @@ void BackendConnection::setState(VeQItemMqttProducer::ConnectionState backendCon
 		setState(BackendConnection::State::Disconnected);
 		break;
 	}
+	case VeQItemMqttProducer::WaitingToReconnect: // fall through
+	case VeQItemMqttProducer::TransportReconnecting: // fall through
+	case VeQItemMqttProducer::TransportReconnected: // fall through
 	case VeQItemMqttProducer::Reconnecting:
 	{
 		setState(BackendConnection::State::Reconnecting);
@@ -161,12 +168,12 @@ void BackendConnection::initDBusConnection(const QString &address)
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 void BackendConnection::onNetworkConfigChanged(const QVariant var)
 {
-	qWarning() << "onNetworkConfigChanged" << var;
-
-	if (var.toInt() > 0 && !mRestartDelayTimer) {
+	if (var.isValid() && var.toInt() > 0 && !mRestartDelayTimer) {
+		qWarning() << "Closing MQTT connection and reloading due to network config change";
 		VeQItemMqttProducer *mqtt = qobject_cast<VeQItemMqttProducer *>(m_producer);
-		if (mqtt)
+		if (mqtt) {
 			mqtt->close();
+		}
 
 		mRestartDelayTimer = new QTimer();
 		connect(mRestartDelayTimer, &QTimer::timeout, this, &BackendConnection::onReloadPageTimerExpired);

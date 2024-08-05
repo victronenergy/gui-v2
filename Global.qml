@@ -90,6 +90,9 @@ QtObject {
 	}
 
 	function reset() {
+		// unload the gui.
+		dataManagerLoaded = false
+
 		// note: we don't reset `main` or `changingLanguage`
 		// as main will never be destroyed during the ui rebuild,
 		// and we handle changingLanguage specially.
@@ -131,7 +134,6 @@ QtObject {
 
 		// The last thing we do is set the splash screen visible.
 		allPagesLoaded = false
-		dataManagerLoaded = false
 		splashScreenVisible = true
 	}
 
