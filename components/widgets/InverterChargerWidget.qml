@@ -12,9 +12,18 @@ OverviewWidget {
 	onClicked: {
 		if ((Global.inverterChargers.veBusDevices.count
 				+ Global.inverterChargers.inverterDevices.count
+				+ Global.chargers.model.count
 				+ Global.acSystemDevices.model.count) > 1) {
 			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
 		} else {
+			// Show page for chargers
+			if (Global.chargers.model.count) {
+				const charger = Global.chargers.model.firstObject
+				Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
+						{ "bindPrefix": charger.serviceUid, "title": charger.name })
+				return
+			}
+
 			// Show page for acsystem
 			if (Global.acSystemDevices.model.count) {
 				const acSystem = Global.acSystemDevices.model.firstObject

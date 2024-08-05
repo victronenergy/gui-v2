@@ -17,6 +17,7 @@ Page {
 			sourceModels: [
 				Global.inverterChargers.veBusDevices,
 				Global.inverterChargers.inverterDevices,
+				Global.chargers.model,
 				Global.acSystemDevices.model
 			]
 		}
@@ -26,6 +27,13 @@ Page {
 			secondaryText: Global.system.systemStateToText(model.device.state)
 
 			onClicked: {
+				// Show page for chargers
+				if (model.device.serviceUid.indexOf('charger') >= 0) {
+					Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
+							{ "bindPrefix": model.device.serviceUid, "title": model.device.name })
+					return
+				}
+
 				// Show page for acsystem
 				if (model.device.serviceUid.indexOf('acsystem') >= 0) {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml",
