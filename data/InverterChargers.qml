@@ -12,13 +12,12 @@ QtObject {
 	// The "first" inverter/charger is from one of com.victronenergy.vebus, com.victronenergy.acsystem
 	// or com.victronenergy.inverter (in that order of preference). If there is more than one service
 	// for a particular type, the one with the lowest device instance will be used.
-	property var first
+	readonly property var first: veBusDevices.firstObject || acSystemDevices.firstObject || inverterDevices.firstObject
 
 	// Devices from com.victronenergy.vebus
 	property DeviceModel veBusDevices: DeviceModel {
 		modelId: "veBusDevices"
 		onCountChanged: {
-			Qt.callLater(root._refreshFirst)
 			Qt.callLater(root.refreshNominalInverterPower)
 		}
 	}
@@ -27,7 +26,6 @@ QtObject {
 	property DeviceModel acSystemDevices: DeviceModel {
 		modelId: "acSystemDevices"
 		onCountChanged: {
-			Qt.callLater(root._refreshFirst)
 			Qt.callLater(root.refreshNominalInverterPower)
 		}
 	}
@@ -37,7 +35,6 @@ QtObject {
 	property DeviceModel inverterDevices: DeviceModel {
 		modelId: "inverterDevices"
 		onCountChanged: {
-			Qt.callLater(root._refreshFirst)
 			Qt.callLater(root.refreshNominalInverterPower)
 		}
 	}
@@ -62,10 +59,6 @@ QtObject {
 	function refreshNominalInverterPower() {
 		// Only vebus and multi devices have /NominalInverterPower
 		totalNominalInverterPower = Units.sumRealNumbers(_totalNominalInverterPower(veBusDevices), _totalNominalInverterPower(acSystemDevices))
-	}
-
-	function _refreshFirst() {
-		first = veBusDevices.firstObject || acSystemDevices.firstObject || inverterDevices.firstObject
 	}
 
 	function _totalNominalInverterPower(model) {
