@@ -19,6 +19,7 @@ Page {
 				valueTrue: 1
 				valueFalse: 4
 				allowed: defaultAllowed && dataItem.isValid
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListTextItem {
