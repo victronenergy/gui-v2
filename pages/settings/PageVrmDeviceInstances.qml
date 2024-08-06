@@ -38,25 +38,25 @@ Page {
 	property var _swapDialog
 	property var _rebootDialog
 
-	function _changeVrmInstance(index, newVrmInstance, errorFunc) {
+	function _changeVrmInstance(uid, deviceClass, newVrmInstance, errorFunc) {
 		// See if another device of this class already has this VRM instance.
-		const modelData = classAndVrmInstanceModel.get(index)
-		const conflictingDeviceIndex = classAndVrmInstanceModel.findByClassAndVrmInstance(modelData.deviceClass, newVrmInstance)
+		const conflictingDeviceIndex = classAndVrmInstanceModel.findByClassAndVrmInstance(deviceClass, newVrmInstance)
 		if (conflictingDeviceIndex >= 0) {
 			// Show a dialog to confirm whether to swap device instances with the conflicting one.
 			if (!_swapDialog) {
 				_swapDialog = swapDialogComponent.createObject(root)
 			}
-			const maximumVrmInstance = classAndVrmInstanceModel.maximumVrmInstance(modelData.deviceClass)
+			const maximumVrmInstance = classAndVrmInstanceModel.maximumVrmInstance(deviceClass)
 
-			_swapDialog.instanceA = classAndVrmInstanceObjects.objectAt(index)
-			_swapDialog.instanceB = classAndVrmInstanceObjects.objectAt(conflictingDeviceIndex)
+			_swapDialog.instanceA.uid = uid
+			_swapDialog.instanceB.uid = classAndVrmInstanceModel.get(conflictingDeviceIndex).uid
 			_swapDialog.temporaryVrmInstance = isNaN(maximumVrmInstance) ? 0 : maximumVrmInstance + 1
 			_swapDialog.errorFunc = errorFunc
 			_swapDialog.open()
 		} else {
 			// No conflicts; just set the new VRM instance.
-			classAndVrmInstanceObjects.objectAt(index).setVrmInstance(newVrmInstance)
+			vrmInstanceItem.uid = uid
+			vrmInstanceItem.setValue(deviceClass + ":" + newVrmInstance)
 			_setConfirmRebootOnPop()
 		}
 	}
@@ -87,6 +87,8 @@ Page {
 		// If user changes the VRM instance, ask whether reboot should be done when page is popped.
 		tryPop = _confirmStackPop
 	}
+
+	VeQuickItem { id: vrmInstanceItem }
 
 	// Creates an object for each /Devices/.../ClassAndVrmInstance entry, and populates
 	// classAndVrmInstanceModel with the data for each object. This is better than creating the
@@ -286,7 +288,7 @@ Page {
 			}
 			saveInput: function() {
 				const newVrmInstance = parseInt(textField.text)
-				root._changeVrmInstance(model.index, newVrmInstance, revertText)
+				root._changeVrmInstance(model.uid, model.deviceClass, newVrmInstance, revertText)
 			}
 			on_ModelVrmInstanceChanged: {
 				// If VRM instance is changed in the backend, reset the text.

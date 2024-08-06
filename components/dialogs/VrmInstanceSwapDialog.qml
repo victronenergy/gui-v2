@@ -10,8 +10,8 @@ import QtQuick.Controls as C
 ModalWarningDialog {
 	id: root
 
-	property ClassAndVrmInstance instanceA
-	property ClassAndVrmInstance instanceB
+	property ClassAndVrmInstance instanceA: ClassAndVrmInstance {}
+	property ClassAndVrmInstance instanceB: ClassAndVrmInstance {}
 	property int temporaryVrmInstance
 
 	property bool _busy
