@@ -53,11 +53,12 @@ Page {
 			_swapDialog.temporaryVrmInstance = isNaN(maximumVrmInstance) ? 0 : maximumVrmInstance + 1
 			_swapDialog.errorFunc = errorFunc
 			_swapDialog.open()
+			return false
 		} else {
 			// No conflicts; just set the new VRM instance.
 			vrmInstanceItem.uid = uid
 			vrmInstanceItem.setValue(deviceClass + ":" + newVrmInstance)
-			_setConfirmRebootOnPop()
+			return true
 		}
 	}
 
@@ -75,16 +76,18 @@ Page {
 		return null
 	}
 
-	function _confirmStackPop() {
-		let vrmInstanceChanged = false
-		for (let i = 0; i < classAndVrmInstanceModel.count; ++i) {
-			const modelData = classAndVrmInstanceModel.get(i)
-			if (modelData.vrmInstance !== modelData.initialVrmInstance) {
-				vrmInstanceChanged = true
-				break
-			}
+	// If user changes the VRM instance, ask whether reboot should be done when page is popped.
+	tryPop: () => {
+		if (_swapDialog && _swapDialog.visible) {
+			return false
 		}
-		if (!vrmInstanceChanged) {
+
+		// If a text field delegate in the list is currently focused, remove the focus so that it
+		// calls _changeVrmInstance() to save the new VRM instance value, before this checks
+		// whether any VRM instances have changed.
+		vrmInstancesListView.focus = false
+
+		if (!classAndVrmInstanceModel.hasVrmInstanceChanges()) {
 			return true
 		}
 
@@ -93,11 +96,6 @@ Page {
 		}
 		_rebootDialog.open()
 		return false
-	}
-
-	function _setConfirmRebootOnPop() {
-		// If user changes the VRM instance, ask whether reboot should be done when page is popped.
-		tryPop = _confirmStackPop
 	}
 
 	VeQuickItem { id: vrmInstanceItem }
@@ -192,6 +190,7 @@ Page {
 				deviceClass: object.deviceClass,
 				vrmInstance: object.vrmInstance,
 				initialVrmInstance: object.vrmInstance,
+				savedVrmInstance: object.vrmInstance,
 				name: object.name
 			})
 		}
@@ -269,9 +268,21 @@ Page {
 			}
 			return maxValue
 		}
+
+		function hasVrmInstanceChanges() {
+			for (let i = 0; i < count; ++i) {
+				const modelData = get(i)
+				if (modelData.savedVrmInstance !== modelData.initialVrmInstance
+						|| modelData.vrmInstance !== modelData.initialVrmInstance) {
+					return true
+				}
+			}
+			return false
+		}
 	}
 
 	GradientListView {
+		id: vrmInstancesListView
 		model: classAndVrmInstanceModel
 
 		delegate: ListIntField {
@@ -301,7 +312,14 @@ Page {
 			}
 			saveInput: function() {
 				const newVrmInstance = parseInt(textField.text)
-				root._changeVrmInstance(model.uid, model.deviceClass, newVrmInstance, revertText)
+				if (newVrmInstance !== model.vrmInstance) {
+					if (root._changeVrmInstance(model.uid, model.deviceClass, newVrmInstance, revertText)) {
+						// Set a "savedVrmInstance" value so that hasVrmInstanceChanges() will
+						// detect a change even if the new value has not yet been saved to the
+						// backend.
+						classAndVrmInstanceModel.setProperty(model.index, "savedVrmInstance", newVrmInstance)
+					}
+				}
 			}
 			on_ModelVrmInstanceChanged: {
 				// If VRM instance is changed in the backend, reset the text.
@@ -358,7 +376,6 @@ Page {
 				errorFunc = null
 			}
 
-			onAccepted: root._setConfirmRebootOnPop()
 			onRejected: _callErrorFunc()
 			onSwapFailed: _callErrorFunc()
 		}
