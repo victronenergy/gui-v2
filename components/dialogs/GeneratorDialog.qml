@@ -50,10 +50,6 @@ ModalDialog {
 				name: "default"
 				PropertyChanges {
 					target: root
-					rejectText: root.rejectTextClose
-				}
-				PropertyChanges {
-					target: root
 					tryReject: function() {
 						// Dialog can be closed as user has not clicked 'accept'.
 						return true
@@ -86,7 +82,6 @@ ModalDialog {
 				}
 				PropertyChanges {
 					target: root
-					rejectText: root.rejectTextCancel
 					canAccept: false
 					tryReject: function() {
 						// If user clicks reject button, restore the default dialog state, instead
@@ -114,7 +109,6 @@ ModalDialog {
 				// should be almost immediate.)
 				PropertyChanges {
 					target: root
-					rejectText: root.rejectTextCancel
 					canAccept: false
 					tryReject: function() {
 						return true

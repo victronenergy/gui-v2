@@ -360,8 +360,10 @@ Page {
 			description: qsTrId("settings_vrm_device_instances_reboot_now_description")
 
 			onAboutToShow: {
-				dialogDoneOptions = VenusOS.ModalDialog_DoneOptions_SetAndClose
+				dialogDoneOptions = VenusOS.ModalDialog_DoneOptions_SetAndCancel
 				acceptText = CommonWords.reboot
+				//% "Close"
+				rejectText = qsTrId("settings_vrm_device_instances_close")
 			}
 
 			tryAccept: function() {

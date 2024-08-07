@@ -407,7 +407,7 @@ public:
 		ModalDialog_DoneOptions_NoOptions,
 		ModalDialog_DoneOptions_OkOnly,
 		ModalDialog_DoneOptions_OkAndCancel,
-		ModalDialog_DoneOptions_SetAndClose
+		ModalDialog_DoneOptions_SetAndCancel
 	};
 	Q_ENUM(ModalDialog_DoneOptions)
 
