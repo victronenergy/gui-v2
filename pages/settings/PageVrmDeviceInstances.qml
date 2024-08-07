@@ -76,6 +76,18 @@ Page {
 	}
 
 	function _confirmStackPop() {
+		let vrmInstanceChanged = false
+		for (let i = 0; i < classAndVrmInstanceModel.count; ++i) {
+			const modelData = classAndVrmInstanceModel.get(i)
+			if (modelData.vrmInstance !== modelData.initialVrmInstance) {
+				vrmInstanceChanged = true
+				break
+			}
+		}
+		if (!vrmInstanceChanged) {
+			return true
+		}
+
 		if (!_rebootDialog) {
 			_rebootDialog = rebootDialogComponent.createObject(root)
 		}
@@ -179,6 +191,7 @@ Page {
 				uid: object.uid,
 				deviceClass: object.deviceClass,
 				vrmInstance: object.vrmInstance,
+				initialVrmInstance: object.vrmInstance,
 				name: object.name
 			})
 		}
