@@ -11,7 +11,7 @@ T.Dialog {
 	id: root
 
 	property string secondaryTitle
-	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndClose
+	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndCancel
 	property alias canAccept: doneButton.enabled
 
 	// Optional functions: called when accept/reject is attempted.
@@ -20,7 +20,7 @@ T.Dialog {
 	property var tryReject
 
 	readonly property alias acceptButton: doneButton
-	property string acceptText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndClose
+	property string acceptText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndCancel
 			  //% "Set"
 			? qsTrId("modaldialog_set")
 			: CommonWords.ok
@@ -28,13 +28,9 @@ T.Dialog {
 	readonly property alias rejectButton: rejectButton
 	property string rejectText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly
 			? ""
-			: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel
-				? rejectTextCancel
-				: rejectTextClose
+			: rejectTextCancel
 
 	readonly property string rejectTextCancel: CommonWords.cancel
-	//% "Close"
-	readonly property string rejectTextClose: qsTrId("modaldialog_close")
 
 	anchors.centerIn: parent
 
