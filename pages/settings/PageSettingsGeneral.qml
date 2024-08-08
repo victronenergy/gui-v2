@@ -212,7 +212,7 @@ Page {
 						//% "Password needs to be at least 8 characters long"
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_root_too_short_password"), 5000)
 					} else {
-						var object = {Action: "SetRootPassword", Password: secondaryText}
+						var object = {"SetRootPassword": secondaryText}
 						var json = JSON.stringify(object)
 						securityApi.setValue(json)
 					}
