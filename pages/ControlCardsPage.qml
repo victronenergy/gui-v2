@@ -31,7 +31,7 @@ Page {
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
-		boundsBehavior: Flickable.DragOverBounds
+		boundsBehavior: Flickable.StopAtBounds
 		maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
 		flickDeceleration: Theme.geometry_flickable_flickDeceleration
 

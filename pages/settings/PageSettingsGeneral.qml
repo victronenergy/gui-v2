@@ -66,6 +66,8 @@ Page {
 	GradientListView {
 		id: settingsListView
 
+		boundsBehavior: Flickable.DragOverBounds
+
 		model: ObjectModel {
 			ListRadioButtonGroup {
 				id: securityProfile
