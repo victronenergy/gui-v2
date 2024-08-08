@@ -2,6 +2,7 @@
 # Copyright (C) 2023 Victron Energy B.V.
 # See LICENSE.txt for license information.
 #
+
 cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'qt_add_qml_module' properly, you get errors at runtime like: "qrc:/main.qml:164 ApplicationContent is not a type\n"
 
 # CMAKE HINTS
