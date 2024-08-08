@@ -15,7 +15,7 @@ ListView {
 	bottomMargin: Theme.geometry_gradientList_bottomMargin
 	leftMargin: Theme.geometry_page_content_horizontalMargin
 	rightMargin: Theme.geometry_page_content_horizontalMargin
-	boundsBehavior: Flickable.DragOverBounds
+	boundsBehavior: Flickable.StopAtBounds
 
 	// Note: do not set spacing here, as it creates extra spacing if an item has visible=false.
 	// Instead, the spacing is added visually within ListItem's ListItemBackground.
