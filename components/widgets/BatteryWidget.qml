@@ -162,6 +162,7 @@ OverviewWidget {
 		unit: Global.systemSettings.temperatureUnit
 		font.pixelSize: Theme.font_size_body2
 		alignment: Qt.AlignRight
+		visible: !isNaN(batteryData.temperature)
 	}
 
 	extraContentChildren: [
