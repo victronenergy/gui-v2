@@ -51,7 +51,7 @@ jobs:
         host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
-        modules: 'qtwebsockets qt5compat qtshadertools'
+        modules: 'qtwebsockets qtshadertools'
         dir: '/opt/hostedtoolcache'
     - name: Install QT ${{env.QT_VERSION}} linux wasm and cmake
       if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
@@ -62,7 +62,7 @@ jobs:
         host: 'linux'
         target: 'desktop'
         arch: 'wasm_singlethread'
-        modules: 'qtwebsockets qt5compat qtshadertools'
+        modules: 'qtwebsockets qtshadertools'
         tools: 'tools_cmake'
         dir: '/opt/hostedtoolcache'
     - name: patch Qt ${{env.QT_VERSION}}
