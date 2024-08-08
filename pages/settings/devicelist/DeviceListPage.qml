@@ -136,11 +136,11 @@ Page {
 			const inputTemp = Global.systemSettings.convertFromCelsius(device.temperature)
 			if (isNaN(device.humidity)) {
 				summary = [
-					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp),
+					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp, 1),
 				]
 			} else {
 				summary = [
-					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp),
+					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp, 1),
 					Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.humidity),
 				]
 			}
