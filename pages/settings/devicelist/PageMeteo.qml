@@ -35,6 +35,7 @@ Page {
 				//% "Cell temperature"
 				text: qsTrId("page_meteo_cell_temperature")
 				dataItem.uid: bindPrefix + "/CellTemperature"
+				precision: 1
 			}
 
 			ListTemperatureItem {
@@ -44,6 +45,7 @@ Page {
 						  //% "External temperature"
 						  qsTrId("page_meteo_external_temperature")
 				dataItem.uid: bindPrefix + "/ExternalTemperature"
+				precision: 1
 			}
 
 			ListTemperatureItem {
@@ -53,6 +55,7 @@ Page {
 				//% "External temperature (2)"
 				text: qsTrId("page_meteo_external_temperature_2")
 				allowed: dataItem.isValid
+				precision: 1
 			}
 
 			ListQuantityItem {

@@ -12,5 +12,4 @@ ListQuantityItem {
 	dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
 	dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	unit: Global.systemSettings.temperatureUnit
-	precision: 1
 }
