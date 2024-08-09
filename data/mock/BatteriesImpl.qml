@@ -112,6 +112,11 @@ QtObject {
 			Component.onCompleted: setValue(1)
 		}
 
+		readonly property VeQuickItem peukertExponent: VeQuickItem {
+			uid: dummyBattery.serviceUid + "/Settings/Battery/PeukertExponent"
+			Component.onCompleted: setValue(1.03999999)
+		}
+
 		Component.onCompleted: {
 			_deviceInstance.setValue(1)
 			root.initLynxBattery(dummyBattery)

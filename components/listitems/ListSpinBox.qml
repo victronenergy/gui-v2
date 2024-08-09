@@ -14,8 +14,7 @@ ListButton {
 	property string suffix
 	property int decimals
 	property int from: !isNaN(dataItem.min) ? dataItem.min : 0
-	// Number.MAX_SAFE_INTEGER === 9,007,199,254,740,991, which is less than C++ 64 bit max int 9,223,372,036,854,775,807, so should be safe to use for 'SpinBox.to'
-	property int to: !isNaN(dataItem.max) ? dataItem.max : Number.MAX_SAFE_INTEGER
+	property int to: !isNaN(dataItem.max) ? dataItem.max : 2147483647 / Math.pow(10, decimals) // qml int is a signed 32 bit value
 	property real stepSize: 1
 	property var presets: []
 

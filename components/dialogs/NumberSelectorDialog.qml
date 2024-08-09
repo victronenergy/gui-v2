@@ -62,8 +62,8 @@ ModalDialog {
 				textFromValue: function(value, locale) {
 					return Units.formatNumber(value / root._multiplier(), root.decimals) + root.suffix
 				}
-				from: root.from * root._multiplier()
-				to: root.to * root._multiplier()
+				from: Math.max(-2147483648, root.from * root._multiplier())
+				to: Math.min(2147483647, root.to * root._multiplier())
 				stepSize: root.stepSize * root._multiplier()
 
 				onValueChanged: {
