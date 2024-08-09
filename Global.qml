@@ -68,6 +68,9 @@ QtObject {
 
 	property bool animationEnabled: true // for mock mode only.
 
+	readonly property int int32Max: _intValidator.top
+	readonly property int int32Min: _intValidator.bottom
+
 	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
 	signal keyPressed(var event)
 
@@ -142,6 +145,9 @@ QtObject {
 	}
 	readonly property FontLoader _quantityFontLoader: FontLoader {
 		source: "qrc:/fonts/Roboto-Regular.ttf"
+	}
+
+	readonly property IntValidator _intValidator: IntValidator {
 	}
 }
 
