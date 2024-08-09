@@ -14,7 +14,7 @@ Rectangle {
 
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
-	readonly property bool notificationButtonsEnabled: Global.mainView.currentPage && Global.mainView.currentPage.url.endsWith("NotificationsPage.qml")
+	readonly property bool notificationButtonsEnabled: Global.mainView.currentPage && !!Global.mainView.currentPage.url && Global.mainView.currentPage.url.endsWith("NotificationsPage.qml")
 	readonly property bool notificationButtonVisible: alertButton.enabled || alertButton.animating || alarmButton.enabled || alarmButton.animating
 
 	property bool animationEnabled
