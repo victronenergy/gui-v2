@@ -9,6 +9,10 @@ import QtQuick.Templates as CT
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
+// SpinBox uses a binding to increase 'stepSize' when the user holds a button down for a while. This allows the spin box to quickly change arbitrarily large values.
+// When the button is released, 'stepSize' reverts to its original value.
+// TODO - find a way to do this without exposing the changes to 'stepSize', as it may surprise developers when the value changes unexpectedly.
+
 CT.SpinBox {
 	id: root
 
@@ -17,6 +21,7 @@ CT.SpinBox {
 	property int indicatorImplicitWidth: Theme.geometry_spinBox_indicator_minimumWidth
 	property int orientation: Qt.Horizontal
 	property int _scalingFactor: 1
+	property int _originalStepSize
 
 	signal maxValueReached()
 	signal minValueReached()
@@ -119,10 +124,17 @@ CT.SpinBox {
 		running: up.pressed || down.pressed
 		onTriggered: _scalingFactor *= 2
 		onRunningChanged: {
-			if (!running) {
+			if (running) {
+				_originalStepSize = stepSize
+			} else {
 				_scalingFactor = 1
 			}
 		}
+	}
+
+	Binding {
+		root.stepSize: root._originalStepSize * _scalingFactor
+		when: pressTimer.running
 	}
 
 	Timer {
@@ -132,9 +144,7 @@ CT.SpinBox {
 		onRunningChanged: if (!running) interval = 500
 		onTriggered: {
 			interval = 100
-			for (let i = 0; i < _scalingFactor; ++i) {
-				up.pressed ? root.increase() : root.decrease()
-			}
+			up.pressed ? root.increase() : root.decrease()
 		}
 	}
 }
