@@ -168,7 +168,7 @@ void BackendConnection::initDBusConnection(const QString &address)
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 void BackendConnection::onNetworkConfigChanged(const QVariant var)
 {
-	if (var.isValid() && var.toInt() > 0 && !mRestartDelayTimer) {
+	if (!isVrm() && var.isValid() && var.toInt() > 0 && !mRestartDelayTimer) {
 		qWarning() << "Closing MQTT connection and reloading due to network config change";
 		VeQItemMqttProducer *mqtt = qobject_cast<VeQItemMqttProducer *>(m_producer);
 		if (mqtt) {

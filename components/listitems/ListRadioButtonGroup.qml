@@ -88,6 +88,7 @@ ListNavigationItem {
 								root.currentIndex = model.index
 							}
 						}
+
 						root.optionClicked(model.index, password)
 
 						if (root.popDestination !== undefined) {
@@ -127,6 +128,7 @@ ListNavigationItem {
 							  : !!model.promptPassword
 
 						width: parent.width
+						height: item ? item.implicitHeight : 0
 						sourceComponent: (password.length > 0 || promptPassword) ? passwordComponent
 																				 : caption ? captionComponent
 																						   : null
@@ -135,14 +137,16 @@ ListNavigationItem {
 					Component {
 						id: passwordComponent
 
-						Column {
+						Item {
+							implicitHeight: passwordLabel.height + passwordField.height
+
 							function focusPasswordInput() {
 								passwordField.forceActiveFocus()
 							}
 
-							width: parent.width
-
 							ListLabel {
+								id: passwordLabel
+								width: parent.width
 								topPadding: 0
 								bottomPadding: 0
 								color: Theme.color_font_secondary
@@ -153,6 +157,8 @@ ListNavigationItem {
 
 							ListTextField {
 								id: passwordField
+								y: passwordLabel.height
+								width: parent.width
 
 								//% "Enter password"
 								placeholderText: qsTrId("settings_radio_button_enter_password")
@@ -162,44 +168,42 @@ ListNavigationItem {
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
 								backgroundRect.color: "transparent"
-								Component.onCompleted: allowed = model.index !== root.currentIndex
+
+								// Setting implicitHeight should not be required, but for some reason
+								// the ListTextField type doesn't have a valid implicitHeight by default
+								// if the height is specified.  So, specify it.
+								implicitHeight: defaultImplicitHeight
+								height: allowed ? implicitHeight : 0
+								allowed: model.index === optionsListView.currentIndex || model.index === root.currentIndex
+
+								property bool saved: false
 
 								validateInput: function() {
 									if (!allowed) {
 										return validationResult(VenusOS.InputValidation_Result_Unknown)
-									}
-									if (textField.text !== bottomContentLoader.password) {
+									} else if (bottomContentLoader.promptPassword || textField.text === bottomContentLoader.password) {
+										return validationResult(VenusOS.InputValidation_Result_OK)
+									} else {
 										//% "%1: Incorrect password"
 										return validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_radio_button_incorrect_password").arg(radioButton.text))
 									}
-									return validationResult(VenusOS.InputValidation_Result_OK)
 								}
 								saveInput: function() {
 									if (allowed) {
-										radioButton.select()
+										saved = true
 									}
 								}
 
 								onEditingFinished: {
-									allowed = false
+									saved = false
 									textField.text = ""
 								}
 								onAccepted: {
-									if (bottomContentLoader.promptPassword) {
+									// Require explicit enter-key / accept before we select the option.
+									if (saved && bottomContentLoader.promptPassword) {
 										radioButton.select(textField.text)
-									} else if (textField.text === bottomContentLoader.password) {
+									} else if (saved && textField.text === bottomContentLoader.password) {
 										radioButton.select()
-									}
-								}
-
-								Connections {
-									target: root
-									enabled: passwordField.allowed
-
-									function onOptionClicked(clickedIndex) {
-										if (clickedIndex !== model.index) {
-											passwordField.allowed = false
-										}
 									}
 								}
 							}
