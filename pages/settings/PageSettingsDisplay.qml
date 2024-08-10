@@ -88,7 +88,6 @@ Page {
 				currentIndex: optionModel.currentIndex
 				secondaryText: optionModel.currentDisplayText
 				popDestination: undefined // don't pop page automatically.
-				updateOnClick: false // handle option clicked manually.
 
 				onOptionClicked: function(index) {
 					// The SystemSettings data point listener will trigger retranslateUi()
@@ -175,7 +174,7 @@ Page {
 				text: qsTrId("settings_display_onscreen_ui")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RunningVersion"
 				writeAccessLevel: VenusOS.User_AccessType_User
-				updateOnClick: false
+				updateDataOnClick: false
 				optionModel: [
 					{
 						//% "Standard version"

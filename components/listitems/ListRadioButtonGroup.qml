@@ -36,7 +36,7 @@ ListNavigationItem {
 			? optionModel[currentIndex].value
 			: undefined
 
-	property bool updateOnClick: true
+	property bool updateDataOnClick: true
 	property var popDestination: null   // if undefined, will not automatically pop page when value is selected
 
 	property int defaultIndex: -1
@@ -82,7 +82,7 @@ ListNavigationItem {
 
 					function select(password) {
 						if (!checked) {
-							if (root.updateOnClick && dataItem.uid.length > 0) {
+							if (root.updateDataOnClick && dataItem.uid.length > 0) {
 								dataItem.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
 							}
 							root.optionClicked(model.index, password)

@@ -64,7 +64,6 @@ Page {
 					}
 				]
 				currentIndex: !enabled ? 1 : peakshaveItem.value || 0
-				updateOnClick: false
 				onOptionClicked: function(index) {
 					const newValue = optionModel[index].value
 					peakshaveItem.setValue(newValue)

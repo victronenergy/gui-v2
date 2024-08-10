@@ -73,7 +73,6 @@ Page {
 				currentIndex: stopOnAc1Item.value === 1
 					   ? 1 : stopOnAc2Item.value === 1
 							  ? 2 : 0
-				updateOnClick: false
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.acInput(0), value: 1 },

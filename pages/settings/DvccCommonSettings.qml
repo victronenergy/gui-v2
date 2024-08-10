@@ -30,7 +30,6 @@ Column {
 
 		//% "Limit charge current"
 		text: qsTrId("settings_dvcc_limit_charge_current")
-		updateOnClick: false
 		checked: maxChargeCurrent.dataItem.isValid && maxChargeCurrent.dataItem.value >= 0
 		allowed: defaultAllowed && dvccSwitch.checked
 		onClicked: {

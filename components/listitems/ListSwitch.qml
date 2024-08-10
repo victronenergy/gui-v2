@@ -13,7 +13,7 @@ ListItem {
 	property alias checked: switchItem.checked
 	property alias checkable: switchItem.checkable
 	property alias secondaryText: secondaryLabel.text
-	property bool updateOnClick: true
+	property bool updateDataOnClick: true
 	property bool invertSourceValue
 
 	property int valueTrue: 1
@@ -22,7 +22,7 @@ ListItem {
 	signal clicked()
 
 	function _setChecked(c) {
-		if (updateOnClick) {
+		if (updateDataOnClick) {
 			if (root.dataItem.uid.length > 0) {
 				if (invertSourceValue) {
 					dataItem.setValue(c ? valueFalse : valueTrue)
