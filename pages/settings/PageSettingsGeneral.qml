@@ -77,7 +77,7 @@ Page {
 				//% "Security profile"
 				text: qsTrId("settings_security_profile")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
-				updateOnClick: false // handle option clicked manually.
+				updateDataOnClick: false // handle option clicked manually.
 				popDestination: undefined
 				//% "Please select..."
 				defaultSecondaryText: qsTrId("settings_security_profile_indeterminate")
@@ -334,7 +334,7 @@ Page {
 				primaryLabel.anchors.verticalCenterOffset: -(demoModeCaption.height / 2)
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
 				popDestination: undefined // don't pop page automatically.
-				updateOnClick: false // handle option clicked manually.
+				updateDataOnClick: false // handle option clicked manually.
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					//% "ESS demo"

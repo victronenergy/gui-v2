@@ -32,7 +32,6 @@ Page {
 		model: ObjectModel {
 			ListRadioButtonGroup {
 				text: CommonWords.ac_input_role
-				updateOnClick: false
 				optionModel: Global.acInputs.roles.map(function(role) {
 					return { display: role.name, value: role.role }
 				})

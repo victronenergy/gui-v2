@@ -155,7 +155,6 @@ Page {
 								text: "UTC"
 								writeAccessLevel: VenusOS.User_AccessType_User
 								checked: tzData.city === text
-								updateOnClick: false
 								onClicked: {
 									if (!checked) {
 										tzData.saveTimeZone("", text)
@@ -177,7 +176,7 @@ Page {
 								optionModel: modelData
 								secondaryText: ""
 								writeAccessLevel: VenusOS.User_AccessType_User
-								updateOnClick: false
+								updateDataOnClick: false
 								popDestination: root
 								currentIndex: {
 									if (tzData.region === modelData.region) {

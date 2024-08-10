@@ -37,8 +37,6 @@ Page {
 				}
 				return -1
 			}
-			updateOnClick: false
-
 			onOptionClicked: function(index) {
 				Global.ess.setStateRequested(optionModel[index].value)
 			}

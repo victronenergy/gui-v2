@@ -38,7 +38,6 @@ Page {
 
 				//% "Limit managed battery charge voltage"
 				text: qsTrId("settings_dvcc_limit_managed_battery_charge_voltage")
-				updateOnClick: false
 				checked: maxChargeVoltage.dataItem.isValid && maxChargeVoltage.dataItem.value > 0
 				allowed: defaultAllowed && commonSettings.dvccActive
 				onClicked: {

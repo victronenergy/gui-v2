@@ -44,7 +44,7 @@ Page {
 				//% "VRM portal"
 				text: qsTrId("settings_logging_vrm_portal")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Network/VrmPortal"
-				updateOnClick: false
+				updateDataOnClick: false
 				popDestination: undefined   // do not automatically pop page when value is selected
 				optionModel: [
 					{ display: CommonWords.off, value: VenusOS.Vrm_PortalMode_Off },
@@ -196,7 +196,7 @@ Page {
 				//% "Reboot device when no contact"
 				text: qsTrId("settings_no_contact_reboot")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
-				updateOnClick: false
+				updateDataOnClick: false
 				checked: dataItem.value !== 0
 				onClicked: dataItem.setValue(checked ? 0 : 3600)
 			}
