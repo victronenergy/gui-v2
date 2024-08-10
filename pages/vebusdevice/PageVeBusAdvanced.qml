@@ -142,8 +142,6 @@ Page {
 			ListRadioButtonGroup {
 				id: stopEq
 
-				readonly property int localValue: optionModel[currentIndex].value
-
 				//% "Interrupt equalization"
 				text: qsTrId("vebus_device_interrupt_equalization")
 				optionModel: [
@@ -172,10 +170,10 @@ Page {
 						readOnly: false
 					}
 				]
-				currentIndex: 0
+				currentIndex: 1 // float state is always selected
 				allowed: false
 				onOptionClicked: function(index) {
-					currentIndex = index
+					const localValue = optionModel[index].value
 					if (localValue !== VenusOS.VeBusDevice_ChargeState_InitializingCharger) {
 						interruptTimer.start()
 						if (localValue !== VenusOS.VeBusDevice_ChargeState_Bulk) {
