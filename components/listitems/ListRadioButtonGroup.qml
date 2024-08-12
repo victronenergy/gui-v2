@@ -160,8 +160,7 @@ ListNavigationItem {
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
 								backgroundRect.color: "transparent"
-								Component.onCompleted: allowed = model.index !== root.currentIndex
-
+								allowed: model.index === optionsListView.currentIndex
 								validateInput: function() {
 									if (!allowed) {
 										return validationResult(VenusOS.InputValidation_Result_Unknown)
@@ -179,7 +178,6 @@ ListNavigationItem {
 								}
 
 								onEditingFinished: {
-									allowed = false
 									textField.text = ""
 								}
 								onAccepted: {
@@ -187,17 +185,6 @@ ListNavigationItem {
 										radioButton.select(textField.text)
 									} else if (textField.text === bottomContentLoader.password) {
 										radioButton.select()
-									}
-								}
-
-								Connections {
-									target: root
-									enabled: passwordField.allowed
-
-									function onOptionClicked(clickedIndex) {
-										if (clickedIndex !== model.index) {
-											passwordField.allowed = false
-										}
 									}
 								}
 							}
