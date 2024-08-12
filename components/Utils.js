@@ -326,6 +326,11 @@ function toHexFormat(n) {
 	return n ? "0x" + n.toString(16).toUpperCase() : ""
 }
 
+// Returns an object to return for text field validation. The status can be:
+// - InputValidation_Result_Error: the input text is invalid; highlight the input with a red border
+// - InputValidation_Result_OK: the input text is valid, and can be saved, or red highlight can be removed
+// - InputValidation_Result_Unknown: the input text should not be saved, but is not invalid, so
+//   do not highlight with a red border. This is useful when the input string is empty.
 function validationResult(status, errorText = "", adjustedText = undefined) {
 	return { status: status, errorText: errorText, adjustedText: adjustedText }
 }

@@ -23,8 +23,8 @@ ListIntField {
 		const valueAsInt = parseInt(textField.text)
 		if (isNaN(valueAsInt) || valueAsInt < 0 || valueAsInt > 65535) {
 			//% "'%1' is not a valid port number. Use a number between 0-65535."
-			return validationResult(VenusOS.InputValidation_Result_Error, qsTrId("port_input_not_valid").arg(textField.text))
+			return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("port_input_not_valid").arg(textField.text))
 		}
-		return validationResult(VenusOS.InputValidation_Result_OK)
+		return Utils.validationResult(VenusOS.InputValidation_Result_OK)
 	}
 }

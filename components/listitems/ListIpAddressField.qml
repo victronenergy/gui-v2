@@ -31,9 +31,9 @@ ListTextField {
 		const trimmed = textField.text.trim()
 		if (!_isValidIp(trimmed)) {
 			//% "'%1' is not a valid IP address."
-			return validationResult(VenusOS.InputValidation_Result_Error, qsTrId("ip_address_input_not_valid").arg(trimmed))
+			return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("ip_address_input_not_valid").arg(trimmed))
 		}
-		return validationResult(VenusOS.InputValidation_Result_OK, "", trimmed)
+		return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", trimmed)
 	}
 	saveInput: function() {
 		if (dataItem.uid) {

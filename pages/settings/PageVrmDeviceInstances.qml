@@ -306,9 +306,9 @@ Page {
 			validateInput: function() {
 				const newVrmInstance = parseInt(textField.text)
 				if (isNaN(newVrmInstance)) {
-					return validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
+					return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
 				}
-				return validationResult(VenusOS.InputValidation_Result_OK, "", newVrmInstance)
+				return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", newVrmInstance)
 			}
 			saveInput: function() {
 				const newVrmInstance = parseInt(textField.text)

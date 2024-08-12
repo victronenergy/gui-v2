@@ -19,7 +19,7 @@ ListItem {
 
 	// These are functions that can optionally be overridden.
 	// - validateInput: validates the TextField input, and returns the object provided by
-	//   validationResult() to describe the validation result.
+	//   Utils.validationResult() to describe the validation result.
 	// - save: saves the text field input. The default implementation saves the value to the dataItem.
 	//
 	// When the text field loses focus or is accepted, validate is called(); if it returns a result
@@ -39,15 +39,6 @@ ListItem {
 	function forceActiveFocus() {
 		_aboutToFocus()
 		textField.forceActiveFocus()
-	}
-
-	// Returns an object to return from validateInput(). The status can be:
-	// - InputValidation_Result_Error: the input text is invalid; highlight the input with a red border
-	// - InputValidation_Result_OK: the input text is valid, and can be saved, or red highlight can be removed
-	// - InputValidation_Result_Unknown: the input text should not be saved, but is not invalid, so
-	//   do not highlight with a red border. This is useful when the input string is empty.
-	function validationResult(status, errorText = "", adjustedText = undefined) {
-		return Utils.validationResult(status, errorText, adjustedText)
 	}
 
 	function runValidation(mode) {
