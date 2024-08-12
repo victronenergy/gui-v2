@@ -325,3 +325,7 @@ function simplifiedNetworkType(t) {
 function toHexFormat(n) {
 	return n ? "0x" + n.toString(16).toUpperCase() : ""
 }
+
+function validationResult(status, errorText = "", adjustedText = undefined) {
+	return { status: status, errorText: errorText, adjustedText: adjustedText }
+}
