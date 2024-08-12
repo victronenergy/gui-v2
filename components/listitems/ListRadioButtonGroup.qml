@@ -135,6 +135,7 @@ ListNavigationItem {
 
 						Column {
 							function focusPasswordInput() {
+								passwordField.showField = true
 								passwordField.secondaryText = ""
 								passwordField.forceActiveFocus()
 							}
@@ -168,6 +169,7 @@ ListNavigationItem {
 									}
 								}
 								property bool validateOnConfirm
+								property bool showField
 
 								//% "Enter password"
 								placeholderText: qsTrId("settings_radio_button_enter_password")
@@ -177,7 +179,7 @@ ListNavigationItem {
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
 								backgroundRect.color: "transparent"
-								allowed: model.index === optionsListView.currentIndex && !!root.validatePassword
+								allowed: showField && model.index === optionsListView.currentIndex && !!root.validatePassword
 								validateInput: function() {
 									// Validate the password on Enter/Return, or when "Confirm" is
 									// clicked. Ignore validation requests when the field does not
