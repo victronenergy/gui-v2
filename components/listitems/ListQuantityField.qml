@@ -19,13 +19,13 @@ ListTextField {
 	validateInput: function() {
 		const numberValue = Units.formattedNumberToReal(textField.text)
 		if (isNaN(numberValue)) {
-		   return validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
+		   return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
 		}
 
 		// In case the user has entered a number with a greater precision than what is supported,
 		// adjust the precision of the displayed number.
 		const formattedNumber = Units.formatNumber(numberValue, root.decimals)
-		return validationResult(VenusOS.InputValidation_Result_OK, "", formattedNumber)
+		return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", formattedNumber)
 	}
 	saveInput: function() {
 		if (dataItem.uid) {

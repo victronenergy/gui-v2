@@ -60,9 +60,9 @@ Page {
 					const valueAsInt = parseInt(textField.text)
 					if (isNaN(valueAsInt) || valueAsInt <= 0 || valueAsInt > 247) {
 						//% "%1 is not a valid unit number. Use a number between 1-247."
-						return validationResult(VenusOS.InputValidation_Result_Error, qsTrId("modbus_add_unit_invalid").arg(textField.text))
+						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("modbus_add_unit_invalid").arg(textField.text))
 					}
-					return validationResult(VenusOS.InputValidation_Result_OK, "", valueAsInt)
+					return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", valueAsInt)
 				}
 			}
 
