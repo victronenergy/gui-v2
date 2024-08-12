@@ -171,19 +171,19 @@ Page {
 							const profile = securityProfile.pendingProfile
 							if (profile === VenusOS.Security_Profile_Unsecured)
 								password = "";
+							securityProfile.currentIndex = profile
 							// NOTE: this restarts the webserver when changed
 							var object = {"SetPassword": password, "SetSecurityProfile": profile};
 							var json = JSON.stringify(object);
 							securityApi.setValue(json);
 							// This guards the wasm version to trigger a reload even if the reply isn't received.
 							BackendConnection.securityProtocolChanged()
+							Global.pageManager.popPage()
 						}
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured
 								? Theme.geometry_modalDialog_height
 								: Theme.geometry_modalDialog_height_small
-
-						onClosed: Global.pageManager.popPage()
 					}
 				}
 			}
