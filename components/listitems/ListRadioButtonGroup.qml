@@ -87,10 +87,7 @@ ListNavigationItem {
 							}
 							root.optionClicked(model.index, password)
 						}
-
-						if (root.popDestination !== undefined) {
-							popTimer.restart()
-						}
+						popTimer.restartIfNeeded()
 					}
 
 					text: Array.isArray(root.optionModel)
@@ -206,7 +203,7 @@ ListNavigationItem {
 					onClicked: {
 						if (root.currentIndex === model.index) {
 							optionsListView.currentIndex = model.index
-							popTimer.restart()
+							popTimer.restartIfNeeded()
 						} else if (bottomContentLoader.sourceComponent === passwordComponent) {
 							optionsListView.currentIndex = model.index
 							bottomContentLoader.item.focusPasswordInput()
@@ -229,6 +226,12 @@ ListNavigationItem {
 
 			Timer {
 				id: popTimer
+
+				function restartIfNeeded() {
+					if (root.popDestination !== undefined) {
+						restart()
+					}
+				}
 
 				interval: Theme.animation_settings_radioButtonPage_autoClose_duration
 				onTriggered: {
