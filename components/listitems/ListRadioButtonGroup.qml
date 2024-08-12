@@ -38,12 +38,13 @@ ListNavigationItem {
 
 	property bool updateDataOnClick: true
 	property var popDestination: null   // if undefined, will not automatically pop page when value is selected
+	property var validatePassword
 
 	property int defaultIndex: -1
 	//% "Unknown"
 	property string defaultSecondaryText: qsTrId("settings_radio_button_group_unknown")
 
-	signal optionClicked(index: int, password: string)
+	signal optionClicked(index: int)
 	signal aboutToPop()
 
 	secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
@@ -74,18 +75,25 @@ ListNavigationItem {
 			GradientListView {
 				id: optionsListView
 
+				property bool selectionChanged
+
 				model: root.optionModel
 				currentIndex: root.currentIndex
 
 				delegate: ListRadioButton {
 					id: radioButton
 
-					function select(password) {
-						if (!checked) {
+					function select() {
+						// If the user selects the already-selected option, ignore this and just
+						// pop the page, unless the user changed the selection and then selected the
+						// original option again. (The latter case can only occur if the page is not
+						// popped automatically, by setting popDestination=undefined.)
+						if (optionsListView.currentIndex !== root.currentIndex || optionsListView.selectionChanged) {
+							optionsListView.selectionChanged = true
 							if (root.updateDataOnClick && dataItem.uid.length > 0) {
 								dataItem.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
 							}
-							root.optionClicked(model.index, password)
+							root.optionClicked(model.index)
 						}
 						popTimer.restartIfNeeded()
 					}
@@ -114,17 +122,12 @@ ListNavigationItem {
 						readonly property string caption: Array.isArray(root.optionModel)
 							  ? modelData.caption || ""
 							  : model.caption || ""
-						readonly property string password: Array.isArray(root.optionModel)
-							  ? modelData.password || ""
-							  : model.password || ""
 						readonly property bool promptPassword: Array.isArray(root.optionModel)
 							  ? !!modelData.promptPassword
 							  : !!model.promptPassword
 
 						width: parent.width
-						sourceComponent: (password.length > 0 || promptPassword) ? passwordComponent
-																				 : caption ? captionComponent
-																						   : null
+						sourceComponent: promptPassword ? passwordComponent : (caption ? captionComponent : null)
 					}
 
 					Component {
@@ -132,6 +135,7 @@ ListNavigationItem {
 
 						Column {
 							function focusPasswordInput() {
+								passwordField.secondaryText = ""
 								passwordField.forceActiveFocus()
 							}
 
@@ -149,6 +153,22 @@ ListNavigationItem {
 							ListTextField {
 								id: passwordField
 
+								readonly property ListItemButton confirmButton: ListItemButton {
+									//: Confirm password, and verify it if possible
+									//% "Confirm"
+									text: qsTrId("settings_radio_button_group_confirm")
+									onClicked: {
+										passwordField.validateOnConfirm = true
+										if (passwordField.textField.activeFocus) {
+											// Trigger the validation that occurs when focus is lost.
+											passwordField.textField.focus = false
+										} else {
+											passwordField.runValidation(VenusOS.InputValidation_ValidateAndSave)
+										}
+									}
+								}
+								property bool validateOnConfirm
+
 								//% "Enter password"
 								placeholderText: qsTrId("settings_radio_button_enter_password")
 								text: ""
@@ -157,33 +177,29 @@ ListNavigationItem {
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
 								backgroundRect.color: "transparent"
-								allowed: model.index === optionsListView.currentIndex
+								allowed: model.index === optionsListView.currentIndex && !!root.validatePassword
 								validateInput: function() {
-									if (!allowed) {
-										return validationResult(VenusOS.InputValidation_Result_Unknown)
+									// Validate the password on Enter/Return, or when "Confirm" is
+									// clicked. Ignore validation requests when the field does not
+									// have focus: e.g. when the selected radio button changes, or
+									// when this page is popped, or when an external dialog opens
+									// and causes focus to be lost. We want to only validate the
+									// password when the user explicitly indicates it should be done.
+									if (!textField.activeFocus && !passwordField.validateOnConfirm) {
+										return Utils.validationResult(VenusOS.InputValidation_Result_Unknown)
 									}
-									if (textField.text !== bottomContentLoader.password) {
-										//% "%1: Incorrect password"
-										return validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_radio_button_incorrect_password").arg(radioButton.text))
-									}
-									return validationResult(VenusOS.InputValidation_Result_OK)
+									passwordField.validateOnConfirm = false
+									return root.validatePassword(model.index, textField.text)
 								}
 								saveInput: function() {
 									if (allowed) {
 										radioButton.select()
 									}
 								}
-
-								onEditingFinished: {
-									textField.text = ""
-								}
-								onAccepted: {
-									if (bottomContentLoader.promptPassword) {
-										radioButton.select(textField.text)
-									} else if (textField.text === bottomContentLoader.password) {
-										radioButton.select()
-									}
-								}
+								content.children: [
+									defaultContent,
+									confirmButton
+								]
 							}
 						}
 					}
@@ -201,11 +217,8 @@ ListNavigationItem {
 					}
 
 					onClicked: {
-						if (root.currentIndex === model.index) {
-							optionsListView.currentIndex = model.index
-							popTimer.restartIfNeeded()
-						} else if (bottomContentLoader.sourceComponent === passwordComponent) {
-							optionsListView.currentIndex = model.index
+						optionsListView.currentIndex = model.index
+						if (bottomContentLoader.sourceComponent === passwordComponent) {
 							bottomContentLoader.item.focusPasswordInput()
 						} else {
 							radioButton.select()

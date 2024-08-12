@@ -44,8 +44,8 @@ Page {
 					{ display: "Option A", value: 1 },
 					{ display: "Option B", value: 2, readOnly: true },
 					{ display: "Option C", value: 3, caption: "Some extra description below" },
-					{ display: "Option D", value: 4, password: "123" },
-					{ display: "Option E", value: 5, password: "456", caption: "This needs a password" },
+					{ display: "Option D", value: 4, promptPassword: true, caption: "Password is 'abc'" },
+					{ display: "Option E", value: 5, promptPassword: true, caption: "Password is '1234'" },
 					{ display: "Option F", value: 6 },
 					{ display: "Option G", value: 7 },
 					{ display: "Option H", value: 8 },
@@ -64,6 +64,12 @@ Page {
 					{ display: "Option U", value: 21 },
 				]
 				currentIndex: 1
+				validatePassword: (index, password) => {
+					if ((index === 3 && password === "abc") || (index === 4 && password === "1234")) {
+						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+					}
+					return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Wrong password!")
+				}
 
 				onOptionClicked: function(index) {
 					currentIndex = index
@@ -77,7 +83,7 @@ Page {
 					ListElement { display: "Option A"; value: 1 }
 					ListElement { display: "Option B"; value: 2; readOnly: true }
 					ListElement { display: "Option C"; value: 3 }
-					ListElement { display: "Option D (with password 'AAA')"; value: 4; password: "AAA" }
+					ListElement { display: "Option D (with password 'AAA')"; value: 4; promptPassword: true }
 					ListElement { display: "Option E"; value: 5 }
 					ListElement { display: "Option F"; value: 6 }
 					ListElement { display: "Option G"; value: 7 }
@@ -98,6 +104,12 @@ Page {
 				}
 				currentIndex: 2
 				secondaryText: optionModel.get(2).display
+				validatePassword: (index, password) => {
+					if (index === 3 && password === "AAA") {
+						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+					}
+					return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Wrong password!")
+				}
 
 				onOptionClicked: function(index) {
 					currentIndex = index

@@ -73,6 +73,7 @@ Page {
 				id: securityProfile
 
 				property int pendingProfile
+				property string pendingPassword
 
 				//% "Security profile"
 				text: qsTrId("settings_security_profile")
@@ -106,22 +107,27 @@ Page {
 						caption: qsTrId("settings_security_profile_unsecured_caption")
 					},
 				]
+				validatePassword: (index, password) => {
+					pendingPassword = ""
+					if (password.length < 8) {
+						//% "Password needs to be at least 8 characters long"
+						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_security_too_short_password"))
+					}
+					pendingPassword = password
+					return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+				}
 
-				onOptionClicked: function(index, password) {
+				onOptionClicked: (index) => {
 					// Radio button model indexes should match the enums
 					securityProfile.pendingProfile = index
 					if (securityProfile.pendingProfile === VenusOS.Security_Profile_Unsecured) {
 						// NOTE: this restarts the webserver when changed
 						Global.dialogLayer.open(securityProfileConfirmationDialog)
 					} else {
-						if (password.length < 8) {
-							//% "Password needs to be at least 8 characters long"
-							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_security_too_short_password"), 5000)
-						} else {
-							Global.dialogLayer.open(securityProfileConfirmationDialog, {password: password})
-						}
+						Global.dialogLayer.open(securityProfileConfirmationDialog, {password: pendingPassword})
 					}
 				}
+
 				VeQuickItem {
 					id: securityApi
 					uid: Global.venusPlatform.serviceUid + "/Security/Api"
@@ -187,17 +193,23 @@ Page {
 				text: qsTrId("settings_access_level")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
 				writeAccessLevel: VenusOS.User_AccessType_User
-
 				optionModel: [
 					//% "User"
-					{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User, password: "ZZZ" },
+					{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User, promptPassword: true },
 					//% "User & Installer"
-					{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer, password: "ZZZ" },
+					{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer, promptPassword: true },
 					//% "Superuser"
 					{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser, readOnly: true },
 					//% "Service"
 					{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service, readOnly: true },
 				]
+				validatePassword: (index, password) => {
+					if ((index === 0 || index === 1) && password === "ZZZ") {
+						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+					}
+					//% "Incorrect password"
+					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_access_incorrect_password"))
+				}
 			}
 
 			ListTextField {

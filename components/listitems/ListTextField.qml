@@ -47,7 +47,7 @@ ListItem {
 	// - InputValidation_Result_Unknown: the input text should not be saved, but is not invalid, so
 	//   do not highlight with a red border. This is useful when the input string is empty.
 	function validationResult(status, errorText = "", adjustedText = undefined) {
-		return { status: status, errorText = errorText, adjustedText = adjustedText }
+		return Utils.validationResult(status, errorText, adjustedText)
 	}
 
 	function runValidation(mode) {
