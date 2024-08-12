@@ -144,7 +144,6 @@ ListNavigationItem {
 
 							ListLabel {
 								topPadding: 0
-								bottomPadding: 0
 								color: Theme.color_font_secondary
 								text: bottomContentLoader.caption
 								font.pixelSize: Theme.font_size_caption
