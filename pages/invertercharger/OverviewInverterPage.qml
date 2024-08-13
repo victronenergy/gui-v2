@@ -45,17 +45,17 @@ Page {
 				dataItem.uid: root.serviceUid + "/State"
 			}
 
-			ListButton {
-				id: modeButton
+			ListItem {
+				id: modeListButton
 
 				text: CommonWords.mode
-				secondaryText: modeDialogLauncher.modeText
-				onClicked: modeDialogLauncher.openDialog()
-
-				InverterModeDialogLauncher {
-					id: modeDialogLauncher
-					serviceUid: root.serviceUid
-				}
+				writeAccessLevel: VenusOS.User_AccessType_User
+				content.children: [
+					InverterChargerModeButton {
+						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
+						serviceUid: root.serviceUid
+					}
+				]
 			}
 
 			InverterAcOutQuantityGroup {

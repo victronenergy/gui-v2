@@ -19,17 +19,17 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListButton {
-				id: modeButton
-				text: CommonWords.mode
-				secondaryText: modeDetails.modeText
-				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: modeDetails.openDialog()
+			ListItem {
+				id: modeListButton
 
-				RsSystemModeDetails {
-					id: modeDetails
-					bindPrefix: root.bindPrefix
-				}
+				text: CommonWords.mode
+				writeAccessLevel: VenusOS.User_AccessType_User
+				content.children: [
+					InverterChargerModeButton {
+						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
+						serviceUid: root.bindPrefix
+					}
+				]
 			}
 
 			ListTextItem {

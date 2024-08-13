@@ -44,18 +44,15 @@ ControlCard {
 			}
 		}
 
-		ButtonControlValue {
+		ControlValue {
 			width: parent.width
-			button.width: Math.max(button.implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
+			implicitHeight: Theme.geometry_controlCard_mediumItem_height
 			label.text: CommonWords.mode
-			button.text: modeDetails.modeText
-			enabled: Global.systemSettings.canAccess(VenusOS.User_AccessType_User)
 			separator.visible: false
-			onClicked: modeDetails.openDialog()
-
-			RsSystemModeDetails {
-				id: modeDetails
-				bindPrefix: root.device.serviceUid
+			contentRow.children: InverterChargerModeButton {
+				anchors.verticalCenter: parent.verticalCenter
+				width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
+				serviceUid: root.device.serviceUid
 			}
 		}
 	}

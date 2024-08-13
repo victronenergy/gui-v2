@@ -20,33 +20,16 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
+			ListItem {
+				id: modeListButton
 
-			ListRadioButtonGroup {
-				id: modeSwitch
-
-				text: CommonWords.switch_mode
-				dataItem.uid: root.bindPrefix + "/Mode"
-				allowed: defaultAllowed && !root.isInverterCharger
-				optionModel: [
-					{ display: CommonWords.off, value: VenusOS.Inverter_Mode_Off },
-					{ display: CommonWords.on, value: VenusOS.Inverter_Mode_On },
-					{ display: CommonWords.inverter_mode_eco, value: VenusOS.Inverter_Mode_Eco },
-				]
-			}
-
-			ListRadioButtonGroup {
-				text: modeSwitch.text
-				dataItem.uid: root.bindPrefix + "/Mode"
-				allowed: defaultAllowed && root.isInverterCharger
-				optionModel: [
-					{ display: CommonWords.off, value: VenusOS.InverterCharger_Mode_Off },
-					//: Inverter 'Charger Only' mode
-					//% "Charger Only"
-					{ display: qsTrId("inverter_charger_only"), value: VenusOS.InverterCharger_Mode_ChargerOnly },
-					//: Inverter 'Inverter Only' mode
-					//% "Inverter Only"
-					{ display: qsTrId("inverter_inverter_only"), value: VenusOS.InverterCharger_Mode_InverterOnly },
-					{ display: CommonWords.on, value: VenusOS.InverterCharger_Mode_On },
+				text: CommonWords.mode
+				writeAccessLevel: VenusOS.User_AccessType_User
+				content.children: [
+					InverterChargerModeButton {
+						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
+						serviceUid: root.bindPrefix
+					}
 				]
 			}
 

@@ -258,7 +258,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/IconButton.qml
     components/InputPanel.qml
     components/InverterChargerModeButton.qml
-    components/InverterModeDialogLauncher.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
     components/NavBar.qml
@@ -276,7 +275,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityTable.qml
     components/RadioButtonControlValue.qml
     components/RsSystemCurrentLimitDetails.qml
-    components/RsSystemModeDetails.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ShinyProgressArc.qml
@@ -336,7 +334,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/dialogs/GeneratorStartDialog.qml
     components/dialogs/GeneratorStopDialog.qml
     components/dialogs/InverterChargerModeDialog.qml
-    components/dialogs/InverterModeDialog.qml
     components/dialogs/ModalDialog.qml
     components/dialogs/ModalWarningDialog.qml
     components/dialogs/NumberSelectorDialog.qml

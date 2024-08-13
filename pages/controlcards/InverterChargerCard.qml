@@ -90,7 +90,6 @@ ControlCard {
 				anchors.verticalCenter: parent.verticalCenter
 				width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
 				serviceUid: root.inverterCharger.serviceUid
-				text: Global.inverterChargers.inverterChargerModeToText(root.inverterCharger.mode)
 			}
 		}
 	}

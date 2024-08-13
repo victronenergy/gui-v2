@@ -31,16 +31,14 @@ ControlCard {
 			right: parent.right
 		}
 
-		ButtonControlValue {
+		ControlValue {
 			width: parent.width
-			button.width: Math.max(button.implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
+			implicitHeight: Theme.geometry_controlCard_mediumItem_height
 			label.text: CommonWords.mode
-			button.text: modeDialogLauncher.modeText
 			separator.visible: false
-			onClicked: modeDialogLauncher.openDialog()
-
-			InverterModeDialogLauncher {
-				id: modeDialogLauncher
+			contentRow.children: InverterChargerModeButton {
+				anchors.verticalCenter: parent.verticalCenter
+				width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
 				serviceUid: root.inverter.serviceUid
 			}
 		}
