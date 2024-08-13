@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QZXing
 
 Page {
 	id: root
@@ -249,6 +250,19 @@ Page {
 			ListTextItem {
 				text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum occaecat cupidatat"
 				secondaryText: "Occaecat cupidatat"
+			}
+
+			ListItem {
+				text: "Scan the QR code:"
+				content.children: [
+					Image {
+						source: "image://QZXing/encode/" + "https://www.victronenergy.com/" +
+								"?correctionLevel=M" +
+								"&format=qrcode"
+						sourceSize.width: Theme.geometry_listItem_height
+						sourceSize.height: Theme.geometry_listItem_height
+					}
+				]
 			}
 		}
 	}

@@ -120,6 +120,10 @@ if(QT_KNOWN_POLICY_QTP0001)
     qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
 endif()
 
+set(QZXING_USE_QML ON)
+set(QZXING_USE_ENCODER ON)
+add_subdirectory(src/qzxing/src)
+
 include_directories(src/veutil/inc src .)
 
 set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added here
@@ -1225,6 +1229,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     VictronDbusplugin
     VictronMockplugin
     VictronMqttplugin
+    qzxing
 )
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
