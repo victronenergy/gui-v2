@@ -81,16 +81,16 @@ ControlCard {
 			}
 		}
 
-		VeBusDeviceModeButton {
-			veBusDevice: root.inverterCharger
-			sourceComponent: Component {
-				ButtonControlValue {
-					width: parent.width
-					button.width: Math.max(button.implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
-					label.text: CommonWords.mode
-					button.text: Global.inverterChargers.inverterChargerModeToText(root.inverterCharger.mode)
-					separator.visible: false
-				}
+		ControlValue {
+			width: parent.width
+			implicitHeight: Theme.geometry_controlCard_mediumItem_height
+			label.text: CommonWords.mode
+			separator.visible: false
+			contentRow.children: InverterChargerModeButton {
+				anchors.verticalCenter: parent.verticalCenter
+				width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
+				serviceUid: root.inverterCharger.serviceUid
+				text: Global.inverterChargers.inverterChargerModeToText(root.inverterCharger.mode)
 			}
 		}
 	}

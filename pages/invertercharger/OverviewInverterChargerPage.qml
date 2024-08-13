@@ -64,8 +64,17 @@ Page {
 				dataItem.uid: root.inverterCharger.serviceUid + "/State"
 			}
 
-			VeBusDeviceModeButton {
-				veBusDevice: root.inverterCharger
+			ListItem {
+				id: modeListButton
+
+				text: CommonWords.mode
+				writeAccessLevel: VenusOS.User_AccessType_User
+				content.children: [
+					InverterChargerModeButton {
+						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
+						serviceUid: root.inverterCharger.serviceUid
+					}
+				]
 			}
 
 			AcInputsCurrentLimits {

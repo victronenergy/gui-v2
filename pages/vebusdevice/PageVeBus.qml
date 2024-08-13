@@ -70,9 +70,17 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
+			ListItem {
+				id: modeListButton
 
-			VeBusDeviceModeButton {
-				veBusDevice: root.veBusDevice
+				text: CommonWords.mode
+				writeAccessLevel: VenusOS.User_AccessType_User
+				content.children: [
+					InverterChargerModeButton {
+						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
+						serviceUid: root.veBusDevice.serviceUid
+					}
+				]
 			}
 
 			ListTextItem {

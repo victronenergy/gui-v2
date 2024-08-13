@@ -257,6 +257,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/GsmStatusIcon.qml
     components/IconButton.qml
     components/InputPanel.qml
+    components/InverterChargerModeButton.qml
     components/InverterModeDialogLauncher.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
@@ -679,7 +680,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml
     pages/vebusdevice/VeBusDeviceInfoModel.qml
     pages/vebusdevice/VeBusDeviceKwhCountersModel.qml
-    pages/vebusdevice/VeBusDeviceModeButton.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${VENUS_QML_MODULE_SOURCES})
