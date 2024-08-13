@@ -11,10 +11,13 @@ ListItemButton {
 
 	property string serviceUid
 
+	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 
-	text: Global.inverterChargers.inverterChargerModeToText(modeItem.value)
+	text: serviceType !== "inverter" || isInverterChargerItem.value === 1
+			? Global.inverterChargers.inverterChargerModeToText(modeItem.value)
+			: Global.inverterChargers.inverterModeToText(modeItem.value)
 	enabled: userHasWriteAccess
 
 	onClicked: {
@@ -32,12 +35,12 @@ ListItemButton {
 			return
 		}
 
-		const properties = {
-			mode: modeItem.value,
-			isMulti: numberOfAcInputs.isValid && numberOfAcInputs.value > 0,
-			hasPassthroughSupport: hasAcPassthroughSupport.value === 1
-		}
-		Global.dialogLayer.open(modeDialogComponent, properties)
+		Global.dialogLayer.open(modeDialogComponent, { mode: modeItem.value })
+	}
+
+	VeQuickItem {
+		id: isInverterChargerItem
+		uid: root.serviceUid + "/IsInverterCharger"
 	}
 
 	VeQuickItem {
@@ -60,20 +63,11 @@ ListItemButton {
 		uid: root.serviceUid + "/Devices/Dmc/Version"
 	}
 
-	VeQuickItem {
-		id: numberOfAcInputs
-		uid: root.serviceUid + "/Ac/NumberOfAcInputs"
-	}
-
-	VeQuickItem {
-		id: hasAcPassthroughSupport
-		uid: root.serviceUid + "/Capabilities/HasAcPassthroughSupport"
-	}
-
 	Component {
 		id: modeDialogComponent
 
 		InverterChargerModeDialog {
+			serviceUid: root.serviceUid
 			onAccepted: modeItem.setValue(mode)
 		}
 	}

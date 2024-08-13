@@ -421,6 +421,10 @@ QtObject {
 				uid: inverter.serviceUid + "/Mode"
 			}
 
+			property VeQuickItem isInverterCharger: VeQuickItem {
+				uid: inverter.serviceUid + "/IsInverterCharger"
+			}
+
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_productName.setValue("Phoenix Inverter 12V 250VA 230V")
@@ -439,6 +443,10 @@ QtObject {
 				serviceUid: "mock/com.victronenergy.inverter.ttyUSB" + deviceInstanceNum,
 				deviceInstance: deviceInstanceNum,
 			})
+			if (i == 0) {
+				inverterObj.isInverterCharger.setValue(1)
+				inverterObj._customName.setValue("Inverter with IsInverterCharger=1")
+			}
 			Global.inverterChargers.inverterDevices.addDevice(inverterObj)
 		}
 	}
