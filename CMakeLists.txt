@@ -274,6 +274,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
     components/RadioButtonControlValue.qml
+    components/RsSystemAcIODisplay.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ShinyProgressArc.qml
