@@ -100,13 +100,8 @@ Page {
 				}
 			}
 
-			Loader {
-				width: parent ? parent.width : 0
-				sourceComponent: _numberOfPhases.value === 1
-								 ? singlePhaseAcInOut
-								 : _numberOfPhases.value === 3
-								   ? threePhaseTables
-								   : null
+			VeBusAcIODisplay {
+				serviceUid: root.inverterCharger.serviceUid
 			}
 
 			ActiveAcInputTextItem {
@@ -132,35 +127,6 @@ Page {
 				text: CommonWords.product_page
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { veBusDevice: root.inverterCharger })
 			}
-		}
-	}
-
-	Component {
-		id: singlePhaseAcInOut
-
-		Column {
-			PVCFListQuantityGroup {
-				text: CommonWords.ac_in
-				data: AcPhase { serviceUid: root.inverterCharger.serviceUid + "/Ac/ActiveIn/L1" }
-			}
-
-			PVCFListQuantityGroup {
-				text: CommonWords.ac_out
-				data: AcPhase { serviceUid: root.inverterCharger.serviceUid + "/Ac/Out/L1" }
-			}
-		}
-	}
-
-	Component {
-		id: threePhaseTables
-
-		ThreePhaseIOTable {
-			width: parent ? parent.width : 0
-			phaseCount: _numberOfPhases.value || 0
-			inputPhaseUidPrefix: root.inverterCharger.serviceUid + "/Ac/ActiveIn"
-			outputPhaseUidPrefix: root.inverterCharger.serviceUid + "/Ac/Out"
-			totalInputPowerUid: root.inverterCharger.serviceUid + "/Ac/ActiveIn/P"
-			totalOutputPowerUid: root.inverterCharger.serviceUid + "/Ac/Out/P"
 		}
 	}
 }
