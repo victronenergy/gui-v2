@@ -243,13 +243,8 @@ Page {
 				bindPrefix: root.veBusDevice.serviceUid
 			}
 
-			Loader {
-				width: parent ? parent.width : 0
-				sourceComponent: _numberOfPhases.value === 1
-								 ? singlePhaseAcInOut
-								 : _numberOfPhases.value === 3
-								   ? threePhaseTables
-								   : null
+			VeBusAcIODisplay {
+				serviceUid: root.veBusDevice.serviceUid
 			}
 
 			ListNavigationItem {
@@ -331,35 +326,6 @@ Page {
 													   }
 													   )
 			}
-		}
-	}
-
-	Component {
-		id: singlePhaseAcInOut
-
-		Column {
-			PVCFListQuantityGroup {
-				text: CommonWords.ac_in
-				data: AcPhase { serviceUid: veBusDevice.serviceUid + "/Ac/ActiveIn/L1" }
-			}
-
-			PVCFListQuantityGroup {
-				text: CommonWords.ac_out
-				data: AcPhase { serviceUid: root.veBusDevice.serviceUid + "/Ac/Out/L1" }
-			}
-		}
-	}
-
-	Component {
-		id: threePhaseTables
-
-		ThreePhaseIOTable {
-			width: parent ? parent.width : 0
-			phaseCount: _numberOfPhases.value || 0
-			inputPhaseUidPrefix: root.veBusDevice.serviceUid + "/Ac/ActiveIn"
-			outputPhaseUidPrefix: root.veBusDevice.serviceUid + "/Ac/Out"
-			totalInputPowerUid: root.veBusDevice.serviceUid + "/Ac/ActiveIn/P"
-			totalOutputPowerUid: root.veBusDevice.serviceUid + "/Ac/Out/P"
 		}
 	}
 }
