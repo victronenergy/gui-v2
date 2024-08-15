@@ -119,7 +119,6 @@ Page {
 				Repeater {
 					model: AcInputSettingsModel {
 						serviceUid: root.veBusDevice.serviceUid
-						numberOfAcInputs: root.veBusDevice.numberOfAcInputs
 					}
 					delegate: ListItem {
 						id: currentLimitListButton

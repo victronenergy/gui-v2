@@ -9,51 +9,38 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var inverterCharger
-
-	VeQuickItem {
-		id: bmsMode
-
-		uid: inverterCharger.serviceUid + "/Devices/Bms/Version"
-	}
-
-	VeQuickItem {
-		id: dmc
-
-		uid: root.inverterCharger.serviceUid + "/Devices/Dmc/Version"
-	}
-
-	VeQuickItem {
-		id: _numberOfPhases
-
-		uid: inverterCharger.serviceUid + "/Ac/NumberOfPhases"
-	}
+	// serviceUid can be for an inverter, vebus or acsystem service.
+	property string serviceUid
+	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 
 	VeQuickItem {
 		id: dcCurrent
 
-		uid: inverterCharger.serviceUid + "/Dc/0/Current"
+		uid: root.serviceUid + "/Dc/0/Current"
 	}
 
 	VeQuickItem {
 		id: dcPower
 
-		uid: inverterCharger.serviceUid + "/Dc/0/Power"
+		uid: root.serviceUid + "/Dc/0/Power"
 	}
 
 	VeQuickItem {
 		id: dcVoltage
 
-		uid: inverterCharger.serviceUid + "/Dc/0/Voltage"
+		uid: root.serviceUid + "/Dc/0/Voltage"
 	}
 
 	VeQuickItem {
 		id: stateOfCharge
 
-		uid: inverterCharger.serviceUid + "/Soc"
+		uid: root.serviceUid + "/Soc"
 	}
 
-	title: root.inverterCharger.description
+	VeQuickItem {
+		id: isInverterChargerItem
+		uid: root.serviceUid + "/IsInverterCharger"
+	}
 
 	GradientListView {
 		model: ObjectModel {
@@ -61,7 +48,7 @@ Page {
 			ListTextItem {
 				text: CommonWords.state
 				secondaryText: Global.system.systemStateToText(dataItem.value)
-				dataItem.uid: root.inverterCharger.serviceUid + "/State"
+				dataItem.uid: root.serviceUid + "/State"
 			}
 
 			ListItem {
@@ -72,7 +59,7 @@ Page {
 				content.children: [
 					InverterChargerModeButton {
 						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
-						serviceUid: root.inverterCharger.serviceUid
+						serviceUid: root.serviceUid
 					}
 				]
 			}
@@ -82,8 +69,7 @@ Page {
 
 				Repeater {
 					model: AcInputSettingsModel {
-						serviceUid: root.inverterCharger.serviceUid
-						numberOfAcInputs: root.inverterCharger.numberOfAcInputs
+						serviceUid: root.serviceUid
 					}
 					delegate: ListItem {
 						id: currentLimitListButton
@@ -92,7 +78,7 @@ Page {
 						content.children: [
 							CurrentLimitButton {
 								width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
-								serviceUid: root.inverterCharger.serviceUid
+								serviceUid: root.serviceUid
 								inputNumber: modelData.inputNumber
 							}
 						]
@@ -100,32 +86,69 @@ Page {
 				}
 			}
 
-			VeBusAcIODisplay {
-				serviceUid: root.inverterCharger.serviceUid
+			Loader {
+				width: parent ? parent.width : 0
+				sourceComponent: root.serviceType === "inverter" ? inverterAcOutQuantityGroup
+						: root.serviceType === "vebus" ? veBusAcIODisplay
+						: root.serviceType === "acsystem" ? rsSystemAcIODisplay
+						: null
+
+				Component {
+					id: inverterAcOutQuantityGroup
+					InverterAcOutQuantityGroup {
+						bindPrefix: root.serviceUid
+					}
+				}
+
+				Component {
+					id: veBusAcIODisplay
+					VeBusAcIODisplay {
+						serviceUid: root.serviceUid
+					}
+				}
+
+				Component {
+					id: rsSystemAcIODisplay
+					RsSystemAcIODisplay {
+						serviceUid: root.serviceUid
+					}
+				}
 			}
 
 			ActiveAcInputTextItem {
-				bindPrefix: root.inverterCharger.serviceUid
+				bindPrefix: root.serviceUid
+				allowed: root.serviceType !== "inverter"
 			}
 
-			ListTextGroup {
-				readonly property quantityInfo power: Units.getDisplayText(VenusOS.Units_Watt, dcPower.value)
-				readonly property quantityInfo voltage: Units.getDisplayText(VenusOS.Units_Volt_DC, dcVoltage.value)
-				readonly property quantityInfo current: Units.getDisplayText(VenusOS.Units_Amp, dcCurrent.value)
-				readonly property quantityInfo soc: Units.getDisplayText(VenusOS.Units_Percentage, stateOfCharge.value)
-
+			ListQuantityGroup {
 				text: CommonWords.dc
 				textModel: [
-					power.number + power.unit,
-					voltage.number + voltage.unit,
-					current.number + current.unit,
-					CommonWords.soc_with_prefix.arg(soc.number)
+					{ value: dcPower.value, unit: VenusOS.Units_Watt, visible: root.serviceType !== "inverter" },
+					{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
+					{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
+					{ value: CommonWords.soc_with_prefix.arg(stateOfCharge.isValid ? stateOfCharge.value : "--"), visible: root.serviceType !== "inverter" || isInverterChargerItem.value === 1 },
 				]
 			}
 
 			ListNavigationItem {
 				text: CommonWords.product_page
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { veBusDevice: root.inverterCharger })
+				onClicked: {
+					if (root.serviceType === "inverter") {
+						Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageInverter.qml", { bindPrefix: root.serviceUid })
+					} else if (root.serviceType === "vebus") {
+						const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(root.serviceUid)
+						const device = deviceIndex >= 0 ? Global.inverterChargers.veBusDevices.deviceAt(deviceIndex) : null
+						if (device) {
+							Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { veBusDevice: device })
+						} else {
+							console.warn("Cannot find vebus object for service:", root.serviceUid)
+						}
+					} else if (root.serviceType === "acsystem") {
+						Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml", { bindPrefix: root.serviceUid })
+					} else {
+						console.warn("Unsupported service:", root.serviceUid)
+					}
+				}
 			}
 		}
 	}

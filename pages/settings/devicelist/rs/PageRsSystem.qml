@@ -38,25 +38,25 @@ Page {
 				dataItem.uid: root.bindPrefix + "/State"
 			}
 
-			ListItem {
-				id: currentLimitListButton
+			Column {
+				width: parent ? parent.width : 0
 
-				text: numberOfAcInputs.isValid && numberOfAcInputs.value > 1
-							//% "Input current limit - AC in 1"
-						  ? qsTrId("rs_currentlimit_title")
-						  : CommonWords.input_current_limit
-				writeAccessLevel: VenusOS.User_AccessType_User
-				content.children: [
-					CurrentLimitButton {
-						width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
+				Repeater {
+					model: AcInputSettingsModel {
 						serviceUid: root.bindPrefix
-						inputNumber: 1  // Only show details for AC input 1
 					}
-				]
-
-				VeQuickItem {
-					id: numberOfAcInputs
-					uid: root.bindPrefix + "/Ac/NumberOfAcInputs"
+					delegate: ListItem {
+						id: currentLimitListButton
+						writeAccessLevel: VenusOS.User_AccessType_User
+						text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
+						content.children: [
+							CurrentLimitButton {
+								width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
+								serviceUid: root.bindPrefix
+								inputNumber: modelData.inputNumber
+							}
+						]
+					}
 				}
 			}
 

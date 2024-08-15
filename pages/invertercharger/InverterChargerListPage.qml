@@ -31,23 +31,10 @@ Page {
 				if (model.device.serviceUid.indexOf('charger') >= 0) {
 					Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
 							{ "bindPrefix": model.device.serviceUid, "title": model.device.name })
-					return
-				}
-
-				// Show page for acsystem
-				if (model.device.serviceUid.indexOf('acsystem') >= 0) {
-					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml",
-							{ "bindPrefix": model.device.serviceUid, "title": model.device.name })
-					return
-				}
-
-				// Show page for inverter/charger
-				if (model.device.serviceUid.indexOf('inverter') >= 0) {
-					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
-							{ "serviceUid": model.device.serviceUid, "title": model.device.name })
 				} else {
+					// Show page for inverter, vebus and acsystem services
 					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
-							{ "inverterCharger": model.device })
+							{ "serviceUid": model.device.serviceUid, "title": model.device.name })
 				}
 			}
 		}

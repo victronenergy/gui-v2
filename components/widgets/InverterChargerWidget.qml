@@ -21,25 +21,11 @@ OverviewWidget {
 				const charger = Global.chargers.model.firstObject
 				Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
 						{ "bindPrefix": charger.serviceUid, "title": charger.name })
-				return
-			}
-
-			// Show page for acsystem
-			if (Global.acSystemDevices.model.count) {
-				const acSystem = Global.acSystemDevices.model.firstObject
-				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml",
-						{ "bindPrefix": acSystem.serviceUid, "title": acSystem.name })
-				return
-			}
-
-			// Show page for inverter/charger
-			const device = Global.inverterChargers.first
-			if (device.serviceUid.indexOf('inverter') >= 0) {
-				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterPage.qml",
-						{ "serviceUid": device.serviceUid, "title": device.name })
 			} else {
+				// Show page for inverter, vebus and acsystem services
+				const device = Global.inverterChargers.first
 				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
-						{ "inverterCharger": device })
+						{ "serviceUid": device.serviceUid, "title": device.name })
 			}
 		}
 	}
@@ -48,7 +34,7 @@ OverviewWidget {
 	title: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
-	enabled: !!Global.inverterChargers.first
+	enabled: !!Global.inverterChargers.first || Global.chargers.model.count
 	quantityLabel.visible: false
 	rightPadding: Theme.geometry_overviewPage_widget_sideGauge_margins
 	extraContentChildren: [
