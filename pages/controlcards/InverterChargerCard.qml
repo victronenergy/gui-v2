@@ -34,7 +34,6 @@ ControlCard {
 			Repeater {
 				model: AcInputSettingsModel {
 					serviceUid: root.inverterCharger.serviceUid
-					numberOfAcInputs: root.inverterCharger.numberOfAcInputs
 				}
 				delegate: ControlValue {
 					width: parent.width

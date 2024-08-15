@@ -41,7 +41,6 @@ Page {
 
 			InverterAcOutQuantityGroup {
 				bindPrefix: root.bindPrefix
-				isInverterCharger: root.isInverterCharger
 			}
 
 			ListQuantityGroup {

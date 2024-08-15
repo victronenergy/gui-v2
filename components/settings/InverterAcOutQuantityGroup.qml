@@ -10,9 +10,14 @@ Column {
 	id: root
 
 	property string bindPrefix
-	property bool isInverterCharger
+	readonly property bool isInverterCharger: isInverterChargerItem.value === 1
 
 	width: parent ? parent.width : 0
+
+	VeQuickItem {
+		id: isInverterChargerItem
+		uid: root.bindPrefix + "/IsInverterCharger"
+	}
 
 	AcOutput {
 		id: inverterData

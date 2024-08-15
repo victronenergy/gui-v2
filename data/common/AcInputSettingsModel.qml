@@ -10,10 +10,13 @@ ListModel {
 	id: root
 
 	property string serviceUid
-	property int numberOfAcInputs
+
+	readonly property VeQuickItem _numberOfAcInputs: VeQuickItem {
+		uid: root.serviceUid + "/Ac/NumberOfAcInputs"
+	}
 
 	property Instantiator _acInputSettingsObjects: Instantiator {
-		model: root.numberOfAcInputs || null
+		model: _numberOfAcInputs.isValid ? _numberOfAcInputs.value : null
 		delegate: AcInputSettings {
 			serviceUid: root.serviceUid
 			inputNumber: model.index + 1
