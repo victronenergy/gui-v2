@@ -44,13 +44,6 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-
-			ListTextItem {
-				text: CommonWords.state
-				secondaryText: Global.system.systemStateToText(dataItem.value)
-				dataItem.uid: root.serviceUid + "/State"
-			}
-
 			ListItem {
 				id: modeListButton
 
@@ -62,6 +55,12 @@ Page {
 						serviceUid: root.serviceUid
 					}
 				]
+			}
+
+			ListTextItem {
+				text: CommonWords.state
+				secondaryText: Global.system.systemStateToText(dataItem.value)
+				dataItem.uid: root.serviceUid + "/State"
 			}
 
 			Column {
