@@ -77,10 +77,27 @@ Page {
 				]
 			}
 
-			AcInputsCurrentLimits {
-				model: root.inverterCharger.inputSettings
-				veBusDevice: root.inverterCharger
+			Column {
 				width: parent ? parent.width : 0
+
+				Repeater {
+					model: AcInputSettingsModel {
+						serviceUid: root.inverterCharger.serviceUid
+						numberOfAcInputs: root.inverterCharger.numberOfAcInputs
+					}
+					delegate: ListItem {
+						id: currentLimitListButton
+						writeAccessLevel: VenusOS.User_AccessType_User
+						text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
+						content.children: [
+							CurrentLimitButton {
+								width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
+								serviceUid: root.inverterCharger.serviceUid
+								inputNumber: modelData.inputNumber
+							}
+						]
+					}
+				}
 			}
 
 			Loader {

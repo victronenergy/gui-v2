@@ -220,7 +220,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/AcceptButtonBackground.qml
     components/AcPhasesCurrentRange.qml
     components/AcInputDirectionIcon.qml
-    components/AcInputsCurrentLimits.qml
     components/AllDevicesModel.qml
     components/AcOutput.qml
     components/AcPhase.qml
@@ -239,6 +238,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ControlCard.qml
     components/ControlValue.qml
     components/CpuMonitor.qml
+    components/CurrentLimitButton.qml
     components/DateSelector.qml
     components/Device.qml
     components/DynamicValueRange.qml
@@ -274,7 +274,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
     components/RadioButtonControlValue.qml
-    components/RsSystemCurrentLimitDetails.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ShinyProgressArc.qml

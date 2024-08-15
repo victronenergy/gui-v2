@@ -276,12 +276,6 @@ public:
 	};
 	Q_ENUM(Generators_RunningBy)
 
-	enum VeBusDevice_ProductType {
-		VeBusDevice_ProductType_EuProduct = 0,
-		VeBusDevice_ProductType_UsProduct
-	};
-	Q_ENUM(VeBusDevice_ProductType)
-
 	enum Inverter_Mode {
 		Inverter_Mode_On = 2,
 		Inverter_Mode_Off = 4,
