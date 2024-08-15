@@ -10,24 +10,26 @@ QtObject {
 	id: root
 
 	property string serviceUid
-	property int inputNumber: model.index + 1
-	readonly property int inputType: isNaN(_type.value) ? -1 : _type.value
-	readonly property real currentLimit: _currentLimit.value === undefined ? -1 : _currentLimit.value
-	readonly property bool currentLimitAdjustable: _currentLimitAdjustable.value === 1
+	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
+	property int inputNumber
+	readonly property int inputType: {
+		if (serviceType === "vebus"
+				&& Global.inverterChargers.veBusDevices.first
+				&& serviceUid === Global.inverterChargers.veBusDevices.first.serviceUid
+				&& _systemSetupType.isValid) {
+			// The /SystemSetup/AcInput<x> settings only apply to the first/main vebus service.
+			return  _systemSetupType.value
+		} else if (serviceType === "acsystem" && _type.isValid) {
+			return _type.value
+		}
+		return -1
+	}
 
-	property VeQuickItem _type: VeQuickItem {
+	property VeQuickItem _systemSetupType: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput" + inputNumber
 	}
 
-	readonly property VeQuickItem _currentLimit: VeQuickItem {
-		uid: root.serviceUid + "/Ac/In/" + inputNumber + "/CurrentLimit"
-	}
-
-	readonly property VeQuickItem _currentLimitAdjustable: VeQuickItem {
-		uid: root.serviceUid + "/Ac/In/" + inputNumber + "/CurrentLimitIsAdjustable"
-	}
-
-	function setCurrentLimit(currentLimit) {
-		_currentLimit.setValue(currentLimit)
+	property VeQuickItem _type: VeQuickItem {
+		uid: root.serviceUid + "/Ac/In/" + inputNumber + "/Type"
 	}
 }

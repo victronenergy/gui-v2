@@ -31,16 +31,15 @@ ControlCard {
 			right: parent.right
 		}
 
-		ButtonControlValue {
-			value: currentLimitDetails.currentLimit
-			label.text: currentLimitDetails.title
-			button.text: currentLimitDetails.currentLimitText
-			enabled: Global.systemSettings.canAccess(VenusOS.User_AccessType_User)
-			onClicked: currentLimitDetails.openDialog()
-
-			RsSystemCurrentLimitDetails {
-				id: currentLimitDetails
-				bindPrefix: root.device.serviceUid
+		ControlValue {
+			width: parent.width
+			implicitHeight: Theme.geometry_controlCard_mediumItem_height
+			label.text: CommonWords.input_current_limit
+			contentRow.children: CurrentLimitButton {
+				anchors.verticalCenter: parent.verticalCenter
+				width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
+				serviceUid: root.device.serviceUid
+				inputNumber: 1  // Only show details for AC input 1
 			}
 		}
 

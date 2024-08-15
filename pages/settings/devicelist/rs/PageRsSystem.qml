@@ -38,15 +38,25 @@ Page {
 				dataItem.uid: root.bindPrefix + "/State"
 			}
 
-			ListButton {
-				text: currentLimitDetails.title
-				secondaryText: currentLimitDetails.currentLimitText
-				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: currentLimitDetails.openDialog()
+			ListItem {
+				id: currentLimitListButton
 
-				RsSystemCurrentLimitDetails {
-					id: currentLimitDetails
-					bindPrefix: root.bindPrefix
+				text: numberOfAcInputs.isValid && numberOfAcInputs.value > 1
+							//% "Input current limit - AC in 1"
+						  ? qsTrId("rs_currentlimit_title")
+						  : CommonWords.input_current_limit
+				writeAccessLevel: VenusOS.User_AccessType_User
+				content.children: [
+					CurrentLimitButton {
+						width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
+						serviceUid: root.bindPrefix
+						inputNumber: 1  // Only show details for AC input 1
+					}
+				]
+
+				VeQuickItem {
+					id: numberOfAcInputs
+					uid: root.bindPrefix + "/Ac/NumberOfAcInputs"
 				}
 			}
 

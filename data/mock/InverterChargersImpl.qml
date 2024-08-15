@@ -72,6 +72,10 @@ QtObject {
 				Global.mockDataSimulator.setMockValue(serviceUid + path, value)
 			}
 
+			readonly property VeQuickItem _modeAdjustable: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/ModeIsAdjustable"
+			}
+
 			readonly property VeQuickItem _chargeState: VeQuickItem {
 				property Timer subStateTimer : Timer {
 					interval: 10000

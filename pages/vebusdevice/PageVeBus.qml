@@ -113,10 +113,27 @@ Page {
 
 			/*	This shows the current limits for Ac/In/<x>/CurrentLimit.
 				Note that gui-v1 instead shows a single current limit based on Ac/ActiveIn/CurrentLimit, which is deprecated in the dbus doco. */
-			AcInputsCurrentLimits {
-				model: root.veBusDevice.inputSettings
-				veBusDevice: root.veBusDevice
+			Column {
 				width: parent ? parent.width : 0
+
+				Repeater {
+					model: AcInputSettingsModel {
+						serviceUid: root.veBusDevice.serviceUid
+						numberOfAcInputs: root.veBusDevice.numberOfAcInputs
+					}
+					delegate: ListItem {
+						id: currentLimitListButton
+						writeAccessLevel: VenusOS.User_AccessType_User
+						text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
+						content.children: [
+							CurrentLimitButton {
+								width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
+								serviceUid: root.veBusDevice.serviceUid
+								inputNumber: modelData.inputNumber
+							}
+						]
+					}
+				}
 			}
 
 			ListTextItem {
