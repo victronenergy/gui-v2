@@ -38,7 +38,6 @@ QtObject {
 			property var notifications: NotificationsImpl {}
 			property var pulseMeters: PulseMetersImpl { }
 			property var pvInverters: PvInvertersImpl {}
-			property var relays: RelaysImpl {}
 			property var solarChargers: SolarChargersImpl {}
 			property var system: SystemImpl {}
 			property var systemSettings: SystemSettingsImpl {}

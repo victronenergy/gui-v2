@@ -30,7 +30,6 @@ Item {
 			&& !!Global.notifications
 			&& !!Global.pulseMeters
 			&& !!Global.pvInverters
-			&& !!Global.relays
 			&& !!Global.solarChargers
 			&& !!Global.system
 			&& !!Global.systemSettings
@@ -117,7 +116,6 @@ Item {
 	Notifications {}
 	PulseMeters {}
 	PvInverters {}
-	Relays {}
 	SolarChargers {}
 	System {}
 	SystemSettings {}

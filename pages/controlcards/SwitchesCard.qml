@@ -7,7 +7,9 @@ import QtQuick
 import Victron.VenusOS
 
 ControlCard {
-	property alias model: switchesView.model
+	id: root
+
+	property ManualRelayModel model
 
 	icon.source: "qrc:/images/switches.svg"
 	//% "Switches"
@@ -23,14 +25,17 @@ ControlCard {
 			right: parent.right
 			bottom: parent.bottom
 		}
+		model: root.model
 		delegate: SwitchControlValue {
-			label.text: model.device.name
-			button.checked: model.device.state === VenusOS.Relays_State_Active
+			//: %1 = Relay number
+			//% "Relay %1"
+			label.text: qsTrId("controlcard_switches_relay_name").arg(model.relayNumber + 1)
+			button.checked: model.relayState === VenusOS.Relays_State_Active
 			onClicked: {
-				var newState = model.device.state === VenusOS.Relays_State_Active
+				const newState = model.relayState === VenusOS.Relays_State_Active
 						? VenusOS.Relays_State_Inactive
 						: VenusOS.Relays_State_Active
-				model.device.setState(newState)
+				root.model.setRelayState(model.relayNumber, newState)
 			}
 		}
 	}

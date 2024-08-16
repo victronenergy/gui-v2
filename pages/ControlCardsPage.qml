@@ -96,12 +96,14 @@ Page {
 			}
 
 			Loader {
-				active: Global.relays.manualRelays.count > 0
+				active: manualRelays.count > 0
 				sourceComponent: SwitchesCard {
 					width: root.cardWidth
 					height: cardsView.height
-					model: Global.relays.manualRelays
+					model: manualRelays
 				}
+
+				ManualRelayModel { id: manualRelays }
 			}
 		}
 	}

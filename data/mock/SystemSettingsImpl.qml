@@ -223,12 +223,15 @@ QtObject {
 
 		setMockPlatformValue("CanBus/Interface/can0/Statistics", '[{"ifindex":3,"ifname":"can0","flags":["NOARP","UP","LOWER_UP","ECHO"],"mtu":16,"qdisc":"pfifo_fast","operstate":"UP","linkmode":"DEFAULT","group":"default","txqlen":100,"link_type":"can","promiscuity":0,"min_mtu":0,"max_mtu":0,"linkinfo":{"info_kind":"can","info_data":{"state":"ERROR-PASSIVE","berr_counter":{"tx":0,"rx":135},"restart_ms":100,"bittiming":{"bitrate":250000,"sample_point":0.875,"tq":250,"prop_seg":6,"phase_seg1":7,"phase_seg2":2,"sjw":1},"bittiming_const":{"name":"sun4i_can","tseg1":{"min":1,"max":16},"tseg2":{"min":1,"max":8},"sjw":{"min":1,"max":4},"brp":{"min":1,"max":64},"brp_inc":1},"clock":24000000},"info_xstats":{"restarts":0,"bus_error":2,"arbitration_lost":0,"error_warning":1,"error_passive":1,"bus_off":0}},"num_tx_queues":1,"num_rx_queues":1,"gso_max_size":65536,"gso_max_segs":65535,"stats64":{"rx":{"bytes":16,"packets":2,"errors":2,"dropped":0,"over_errors":0,"multicast":0},"tx":{"bytes":0,"packets":0,"errors":0,"dropped":0,"carrier_errors":0,"collisions":0}}}]')
 
-		setMockSettingValue("Relay/Function", 1)
+		// Relay 1
+		setMockSystemValue("Relay/0/State", VenusOS.Relays_State_Active)
+		setMockSettingValue("Relay/Function", VenusOS.Relay_Function_GeneratorStartStop)
 		setMockSettingValue("Relay/Polarity", 0)
-		setMockSettingValue("Relay/1/Function", 4) // Temperature
+
+		// Relay 2
+		setMockSystemValue("Relay/1/State", VenusOS.Relays_State_Active)
+		setMockSettingValue("Relay/1/Function", VenusOS.Relay_Function_Manual)
 		setMockSettingValue("Relay/1/Polarity", 0)
-		setMockSystemValue("Relay/0/State", 1)
-		setMockSystemValue("Relay/1/State", 1)
 
 		// GSM modem
 		setMockModemValue("/Connected", 1)

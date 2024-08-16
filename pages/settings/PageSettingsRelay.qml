@@ -9,8 +9,6 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property var _relay0Object: Global.relays.model.count > 0 ? Global.relays.model.deviceAt(0) : null
-
 	GradientListView {
 		model: ObjectModel {
 
