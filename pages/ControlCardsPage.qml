@@ -28,6 +28,7 @@ Page {
 		anchors {
 			fill: parent
 			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
+			rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
@@ -38,6 +39,7 @@ Page {
 		model: ObjectModel {
 			Loader {
 				active: systemType.value === "ESS" || systemType.value === "Hub-4"
+				width: active ? root.cardWidth : -cardsView.spacing
 				sourceComponent: ESSCard {
 					width: root.cardWidth
 					height: cardsView.height
@@ -97,6 +99,7 @@ Page {
 
 			Loader {
 				active: manualRelays.count > 0
+				width: active ? root.cardWidth : -cardsView.spacing
 				sourceComponent: SwitchesCard {
 					width: root.cardWidth
 					height: cardsView.height
