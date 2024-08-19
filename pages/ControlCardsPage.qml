@@ -74,25 +74,28 @@ Page {
 
 					InverterChargerCard {
 						width: root.cardWidth
-						inverterCharger: model.device
+						serviceUid: model.device.serviceUid
+						name: model.device.name
 					}
 				}
 
 				Repeater {
 					model: Global.inverterChargers.acSystemDevices
 
-					RsSystemCard {
+					InverterChargerCard {
 						width: root.cardWidth
-						device: model.device
+						serviceUid: model.device.serviceUid
+						name: model.device.name
 					}
 				}
 
 				Repeater {
 					model: Global.inverterChargers.inverterDevices
 
-					InverterCard {
+					InverterChargerCard {
 						width: root.cardWidth
-						inverter: model.device
+						serviceUid: model.device.serviceUid
+						name: model.device.name
 					}
 				}
 			}
