@@ -48,89 +48,6 @@ Page {
 	ObjectModel {
 		id: startStopModel
 
-		ListTextItem {
-			id: state
-
-			text: CommonWords.state
-			allowed: root.startStopBindPrefix === root.generator0ServiceUid
-			secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : '---'
-
-			VeQuickItem {
-				id: activeCondition
-				uid: root.startStopBindPrefix + "/RunningByConditionCode"
-			}
-		}
-
-		ListGeneratorError {
-			allowed: root.startStopBindPrefix === root.generator0ServiceUid
-			dataItem.uid: root.startStopBindPrefix + "/Error"
-		}
-
-		ListTextItem {
-			//% "Run time"
-			text: qsTrId("settings_page_relay_generator_run_time")
-			secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
-			dataItem.uid: root.startStopBindPrefix + "/Runtime"
-			allowed: generatorState.value in [1, 2, 3] // Running, Warm-up, Cool-down
-		}
-
-		ListTextItem {
-			//% "Total run time"
-			text: qsTrId("settings_page_relay_generator_total_run_time")
-			secondaryText: Utils.secondsToString((accumulatedTotal.value || 0) - (accumulatedTotalOffset.value || 0), false)
-
-			VeQuickItem {
-				id: accumulatedTotal
-				uid: root.settingsBindPrefix + "/AccumulatedTotal"
-			}
-			VeQuickItem {
-				id: accumulatedTotalOffset
-				uid: root.settingsBindPrefix + "/AccumulatedTotalOffset"
-			}
-		}
-
-		ListTextItem {
-			//% "Time to service"
-			text: qsTrId("settings_page_relay_generator_time_to_service")
-			dataItem.uid: root.startStopBindPrefix + "/ServiceCounter"
-			secondaryText: Utils.secondsToString(dataItem.value, false)
-			allowed: defaultAllowed && dataItem.isValid
-		}
-
-		ListTextItem {
-			//% "Accumulated running time since last test run"
-			text: qsTrId("settings_page_relay_generator_accumulated_running_time")
-			showAccessLevel: VenusOS.User_AccessType_Service
-			allowed: defaultAllowed && nextTestRun.allowed
-			secondaryText: Utils.secondsToString(dataItem.value, false)
-			dataItem.uid: root.startStopBindPrefix + "/TestRunIntervalRuntime"
-		}
-
-		ListTextItem {
-			id: nextTestRun
-			//% "Time to next test run"
-			text: qsTrId("settings_page_relay_generator_time_to_next_test_run")
-			secondaryText: ""
-			dataItem.uid: root.startStopBindPrefix + "/NextTestRun"
-			allowed: dataItem.isValid && dataItem.value > 0
-
-			Timer {
-				running: parent.allowed && root.animationEnabled
-				repeat: true
-				interval: 1000
-				onTriggered: {
-					var now = new Date().getTime() / 1000
-					var remainingTime = parent.dataItem.value - now
-					if (remainingTime > 0) {
-						parent.secondaryText = Utils.secondsToString(remainingTime, false)
-						return
-					}
-					//% "Running now"
-					parent.secondaryText = qsTrId("settings_page_relay_generator_running_now")
-				}
-			}
-		}
-
 		ListSwitch {
 			//% "Autostart functionality"
 			text: qsTrId("settings_page_relay_generator_auto_start_enabled")
@@ -149,24 +66,30 @@ Page {
 			]
 		}
 
-		ListNavigationItem {
-			//% "Daily run time"
-			text: qsTrId("settings_page_relay_generator_daily_run_time")
-			onClicked: Global.pageManager.pushPage(dailyRunTimePage, { title: text })
+		ListTextItem {
+			//% "Current run time"
+			text: qsTrId("settings_page_relay_generator_run_time")
+			secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
+			dataItem.uid: root.startStopBindPrefix + "/Runtime"
+			allowed: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
+		}
 
-			Component {
-				id: dailyRunTimePage
+		ListTextItem {
+			id: state
 
-				Page {
-					GradientListView {
-						model: _dates
-						delegate: ListTextItem {
-							text: Qt.formatDate(new Date(parseInt(_dates[index]) * 1000), "dd-MM-yyyy") // TODO: locale-specific date format?
-							secondaryText: Utils.secondsToString(JSON.parse(historicalData.value)[_dates[index]], false)
-						}
-					}
-				}
+			text: CommonWords.state
+			allowed: root.startStopBindPrefix === root.generator0ServiceUid
+			secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : '---'
+
+			VeQuickItem {
+				id: activeCondition
+				uid: root.startStopBindPrefix + "/RunningByConditionCode"
 			}
+		}
+
+		ListGeneratorError {
+			allowed: root.startStopBindPrefix === root.generator0ServiceUid
+			dataItem.uid: root.startStopBindPrefix + "/Error"
 		}
 
 		ListNavigationItem {
@@ -175,6 +98,17 @@ Page {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
 					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 			}
+		}
+
+		ListNavigationItem {
+			//% "Run time and service"
+			text: qsTrId("page_settings_generator_run_time_and_service")
+			onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
+													{
+														title: text,
+														settingsBindPrefix: root.settingsBindPrefix,
+														startStopBindPrefix: root.startStopBindPrefix
+													})
 		}
 	}
 }
