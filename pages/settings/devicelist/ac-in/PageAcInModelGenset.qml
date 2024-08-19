@@ -53,6 +53,14 @@ ObjectModel {
 	}
 
 	ListTextItem {
+		//% "Current run time"
+		text: qsTrId("settings_page_genset_generator_run_time")
+		secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
+		dataItem.uid: root.startStopBindPrefix + "/Runtime"
+		allowed: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
+	}
+
+	ListTextItem {
 		//% "Control status"
 		text: qsTrId("ac-in-genset_auto_control_status")
 		secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : "--"
@@ -150,19 +158,6 @@ ObjectModel {
 	}
 
 	ListNavigationItem {
-		//% "Auto start/stop"
-		text: qsTrId("ac-in-genset_auto_start_stop")
-		onClicked: {
-			const props = {
-				"title": text,
-				"settingsBindPrefix": root.settingsBindPrefix,
-				"startStopBindPrefix": root.startStopBindPrefix
-			}
-			Global.pageManager.pushPage("/pages/settings/PageGenerator.qml", props)
-		}
-	}
-
-	ListNavigationItem {
 		//% "Engine"
 		text: qsTrId("ac-in-genset_engine")
 		onClicked: {
@@ -228,14 +223,6 @@ ObjectModel {
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
 						}
 
-						ListTextItem {
-							//% "Operating time"
-							text: qsTrId("ac-in-genset_operating_time")
-							allowed: defaultAllowed && dataItem.isValid
-							dataItem.uid: root.bindPrefix + "/Engine/OperatingHours"
-							secondaryText: Utils.formatAsHHMM(dataItem.value, true)
-						}
-
 						ListQuantityItem {
 							//% "Starter battery voltage"
 							text: qsTrId("ac-in-genset_starter_battery_voltage")
@@ -255,6 +242,26 @@ ObjectModel {
 			}
 		}
 	}
+
+	ListNavigationItem {
+		text: CommonWords.settings
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
+					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+			}
+	}
+
+	ListNavigationItem {
+			//% "Run time and service"
+			text: qsTrId("page_settings_generator_run_time_and_service")
+			onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
+													{
+														title: text,
+														settingsBindPrefix: root.settingsBindPrefix,
+														startStopBindPrefix: root.startStopBindPrefix,
+														gensetBindPrefix: root.bindPrefix
+													})
+		}
 
 	ListNavigationItem {
 		text: CommonWords.device_info_title
