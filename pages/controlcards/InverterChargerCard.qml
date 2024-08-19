@@ -9,16 +9,25 @@ import Victron.VenusOS
 ControlCard {
 	id: root
 
-	property var inverterCharger
+	property string serviceUid
+	property string name
+	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 
 	icon.source: "qrc:/images/inverter_charger.svg"
-	//: %1 = the inverter/charger name
-	//% "Inverter / Charger (%1)"
-	title.text: qsTrId("controlcard_inverter_charger").arg(inverterCharger.name)
+	title.text: serviceType === "inverter"
+		  //: %1 = the inverter name
+		  //% "Inverter (%1)"
+		? qsTrId("controlcard_inverter").arg(name)
+		  //: %1 = the inverter/charger name
+		  //% "Inverter / Charger (%1)"
+		: qsTrId("controlcard_inverter_charger").arg(name)
 
-	// VE.Bus state is a subset of the aggregated system state, so use the same systemStateToText()
-	// function to get a text description.
-	status.text: Global.system.systemStateToText(inverterCharger.state)
+	status.text: Global.system.systemStateToText(stateItem.value)
+
+	VeQuickItem {
+		id: stateItem
+		uid: root.serviceUid + "/State"
+	}
 
 	Column {
 		anchors {
@@ -33,7 +42,7 @@ ControlCard {
 
 			Repeater {
 				model: AcInputSettingsModel {
-					serviceUid: root.inverterCharger.serviceUid
+					serviceUid: root.serviceUid
 				}
 				delegate: ControlValue {
 					width: parent.width
@@ -42,7 +51,7 @@ ControlCard {
 					contentRow.children: CurrentLimitButton {
 						anchors.verticalCenter: parent.verticalCenter
 						width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
-						serviceUid: root.inverterCharger.serviceUid
+						serviceUid: root.serviceUid
 						inputNumber: modelData.inputNumber
 					}
 				}
@@ -57,7 +66,7 @@ ControlCard {
 			contentRow.children: InverterChargerModeButton {
 				anchors.verticalCenter: parent.verticalCenter
 				width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
-				serviceUid: root.inverterCharger.serviceUid
+				serviceUid: root.serviceUid
 			}
 		}
 	}
