@@ -91,7 +91,7 @@ Device {
 		// This must be a generic Victron tank sensor, where the product name is always "Tank
 		// sensor" and there is no custom name, so use the tank type to provide a meaningful name.
 		? Gauges.tankProperties(type).name
-		: productName || customName
+		: customName || productName
 
 	description: {
 		if (customName.length > 0) {
