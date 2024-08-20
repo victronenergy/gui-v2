@@ -49,10 +49,12 @@
     "geometry_segmentedButtonRow_height": 48,
 
     "geometry_listItem_height": 64,
+    "geometry_listItem_flat_height": 50,
     "geometry_listItem_radius": 8,
     "geometry_listItem_content_horizontalMargin": 24,
-    "geometry_listItem_content_verticalMargin": 20,
-    "geometry_listItem_content_spacing": 17,
+    "geometry_listItem_flat_content_horizontalMargin": 16,
+    "geometry_listItem_content_verticalMargin": 16,
+    "geometry_listItem_content_spacing": 16,
     "geometry_listItem_separator_width": 1,
     "geometry_listItem_slider_width": 630,
     "geometry_listItem_slider_button_size": 24,
@@ -78,7 +80,8 @@
     "geometry_switch_indicator_width": 28,
     "geometry_switch_indicator_shadowOffset": 2,
 
-    "geometry_separatorBar_width": 1,
+    "geometry_separatorBar_size": 1,
+    "geometry_separatorBar_horizontalMargin": 8,
 
     "geometry_statusBar_height": 56,
     "geometry_statusBar_horizontalMargin": 32,
@@ -128,9 +131,6 @@
     "geometry_controlCard_status_topMargin": 6,
     "geometry_controlCard_status_bottomMargin": 28,
     "geometry_controlCard_button_margins": 24,
-    "geometry_controlCard_mediumItem_height" : 56,
-    "geometry_controlCard_largeItem_height" : 72,
-    "geometry_controlCard_itemSeparator_margins": 8,
 
     "geometry_modalDialog_width": 624,
     "geometry_modalDialog_height": 368,

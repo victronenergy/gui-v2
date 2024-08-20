@@ -230,13 +230,11 @@ set (VENUS_QML_MODULE_SOURCES
     components/BarGauge.qml
     components/BarGaugeBase.qml
     components/BriefSidePanelWidget.qml
-    components/ButtonControlValue.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
     components/CheapBarGauge.qml
     components/ClippingBarGauge.qml
     components/ControlCard.qml
-    components/ControlValue.qml
     components/CpuMonitor.qml
     components/CurrentLimitButton.qml
     components/DateSelector.qml
@@ -252,6 +250,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/GaugeHeader.qml
     components/GeneratorManualControlButton.qml
     components/EvChargerStatusModel.qml
+    components/FlatListItemSeparator.qml
     components/GeneratorIconLabel.qml
     components/GradientListView.qml
     components/GsmStatusIcon.qml
@@ -273,7 +272,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityRepeater.qml
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
-    components/RadioButtonControlValue.qml
     components/RsSystemAcIODisplay.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
@@ -291,7 +289,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/StatusBar.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
-    components/SwitchControlValue.qml
     components/TabBar.qml
     components/TankItem.qml
     components/TankGauge.qml

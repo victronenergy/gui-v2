@@ -37,37 +37,35 @@ ControlCard {
 			right: parent.right
 		}
 
-		Column {
-			width: parent ? parent.width : 0
+		Repeater {
+			model: AcInputSettingsModel {
+				serviceUid: root.serviceUid
+			}
+			delegate: Column {
+				width: parent.width
 
-			Repeater {
-				model: AcInputSettingsModel {
-					serviceUid: root.serviceUid
-				}
-				delegate: ControlValue {
-					width: parent.width
-					implicitHeight: Theme.geometry_controlCard_mediumItem_height
-					label.text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
-					contentRow.children: CurrentLimitButton {
-						anchors.verticalCenter: parent.verticalCenter
-						width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
+				ListItem {
+					text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
+					flat: true
+					content.children: CurrentLimitButton {
 						serviceUid: root.serviceUid
 						inputNumber: modelData.inputNumber
 					}
 				}
+
+				FlatListItemSeparator {}
 			}
 		}
 
-		ControlValue {
-			width: parent.width
-			implicitHeight: Theme.geometry_controlCard_mediumItem_height
-			label.text: CommonWords.mode
-			separator.visible: false
-			contentRow.children: InverterChargerModeButton {
-				anchors.verticalCenter: parent.verticalCenter
-				width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
-				serviceUid: root.serviceUid
-			}
+		ListItem {
+			text: CommonWords.mode
+			flat: true
+			content.children: [
+				InverterChargerModeButton {
+					width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
+					serviceUid: root.serviceUid
+				}
+			]
 		}
 	}
 }
