@@ -13,15 +13,24 @@ SwipeViewPage {
 	readonly property var _centerWidgets: [inverterChargerWidget, batteryWidget]
 	property var _rightWidgets: []
 
-	// Preferred order for the input widgets on the left hand side
+	// Preferred order for the input widgets on the left hand side. When placing widgets, avoid / minimize connectors crossing each other.
 	readonly property var _leftWidgetOrder: [
+		// Top widgets: these widgets have to be up the top, as they connect to the 'inverter/charger widget', which is at the top of the center column.
 		VenusOS.OverviewWidget_Type_AcGenericInput,
 		VenusOS.OverviewWidget_Type_AcGeneratorInput,
+		// End top widgets
+
+		// Middle widgets: these widgets can connect to both the inverter/charger widget and the battery widget in the center column.
+		// They need to be in the middle so as to avoid connectors crossing.
+		VenusOS.OverviewWidget_Type_Solar,
+		// End middle widgets
+
+		// Bottom widgets: these widgets only connect to the battery, which is at the bottom of the center column.
 		VenusOS.OverviewWidget_Type_DcGenerator,
 		VenusOS.OverviewWidget_Type_Alternator,
 		VenusOS.OverviewWidget_Type_FuelCell,
-		VenusOS.OverviewWidget_Type_Wind,
-		VenusOS.OverviewWidget_Type_Solar
+		VenusOS.OverviewWidget_Type_Wind
+		// End bottom widgets
 	]
 
 	// Set a counter that updates whenever the layout should change.
