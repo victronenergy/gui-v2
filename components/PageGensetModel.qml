@@ -43,14 +43,26 @@ ObjectModel {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
 
+	readonly property VeQuickItem gensetEnabled: VeQuickItem {
+		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Enabled" : ""
+	}
+
+	ListLabel {
+		allowed: root.gensetEnabled.value === 0
+		//% "This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to \"Connected genset helper relay\"."
+		text: qsTrId("genset_controller_requires_helper_relay")
+	}
+
 	ListSwitch {
 		//% "Auto start functionality"
 		text: qsTrId("ac-in-genset_auto_start_functionality")
+		allowed: root.gensetEnabled.value === 1
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/AutoStartEnabled" : ""
 	}
 
 	ListItem {
 		text: CommonWords.manual_control
+		allowed: root.gensetEnabled.value === 1
 		content.children: [
 			GeneratorManualControlButton {
 				generatorUid: root.startStopBindPrefix

@@ -24,8 +24,10 @@ Page {
 				optionModel: [
 					//% "Alarm relay"
 					{ display: qsTrId("settings_relay_alarm_relay"), value: VenusOS.Relay_Function_Alarm },
-					//% "Generator start/stop"
+					//% "Relay controlled genset"
 					{ display: qsTrId("settings_relay_generator_start_stop"), value: VenusOS.Relay_Function_GeneratorStartStop },
+					//% "Connected genset helper relay"
+					{ display: qsTrId("settings_relay_genset_helper_relay"), value: VenusOS.Relay_Function_GensetHelperRelay },
 					//% "Tank pump"
 					{ display: qsTrId("settings_relay_tank_pump"), value: VenusOS.Relay_Function_Tank_Pump },
 					//% "Manual"

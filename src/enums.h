@@ -483,7 +483,8 @@ public:
 		Relay_Function_GeneratorStartStop,
 		Relay_Function_Manual,
 		Relay_Function_Tank_Pump,
-		Relay_Function_Temperature
+		Relay_Function_Temperature,
+		Relay_Function_GensetHelperRelay
 	};
 	Q_ENUM(Relay_Function)
 
