@@ -87,15 +87,21 @@ ModalDialog {
 	Component {
 		id: buttonStyling
 
-		RadioButtonControlValue {
-			enabled: modelData.enabled !== false
-			visible: modelData.visible !== false
-			button.checked: modelData.value === root.mode
-			label.text: root.showInverterModesOnly
-					? Global.inverterChargers.inverterModeToText(modelData.value)
-					: Global.inverterChargers.inverterChargerModeToText(modelData.value)
-			separator.visible: model.index !== repeater.count - 1
-			onClicked: root.mode = modelData.value
+		Column {
+			width: parent.width
+
+			ListRadioButton {
+				flat: true
+				enabled: modelData.enabled !== false
+				visible: modelData.visible !== false
+				checked: modelData.value === root.mode
+				text: root.showInverterModesOnly
+						? Global.inverterChargers.inverterModeToText(modelData.value)
+						: Global.inverterChargers.inverterChargerModeToText(modelData.value)
+				onClicked: root.mode = modelData.value
+			}
+
+			SeparatorBar { visible: model.index !== repeater.count - 1 }
 		}
 	}
 }

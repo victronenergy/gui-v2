@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 
 ControlCard {
@@ -15,34 +16,40 @@ ControlCard {
 
 	Column {
 		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_controlCard_mediumItem_height
+			top: root.title.bottom
+			topMargin: Theme.geometry_controlCard_status_bottomMargin
 		}
 		width: parent.width
+
+		C.ButtonGroup {
+			id: stateRadioButtonGroup
+		}
 
 		Repeater {
 			id: repeater
 
 			width: parent.width
 			model: Global.ess.stateModel
-			delegate: RadioButtonControlValue {
-				button.checked: Global.ess.state === modelData.value
-				label.text: modelData.display
+			delegate: Column {
+				width: parent.width
 
-				onClicked: Global.ess.setStateRequested(modelData.value)
+				ListRadioButton {
+					text: modelData.display
+					flat: true
+					checked: Global.ess.state === modelData.value
+					C.ButtonGroup.group: stateRadioButtonGroup
+					onClicked: Global.ess.setStateRequested(modelData.value)
+				}
+
+				FlatListItemSeparator {}
 			}
 		}
 
-		ButtonControlValue {
-			id: minimumSocRow
-
+		ListButton {
 			//% "Minimum SOC"
-			label.text: qsTrId("ess_card_minimum_soc")
-			//: State of charge as a percentage value
-			//% "%1%"
-			button.text: qsTrId("ess_card_minimum_soc_value").arg(Global.ess.minimumStateOfCharge)
-			separator.visible: warningRow.visible
-
+			text: qsTrId("ess_card_minimum_soc")
+			flat: true
+			button.text: Units.getCombinedDisplayText(VenusOS.Units_Percentage, Global.ess.minimumStateOfCharge)
 			onClicked: Global.dialogLayer.open(minSocDialogComponent)
 
 			Component {
@@ -52,37 +59,21 @@ ControlCard {
 			}
 		}
 
-		Item {
-			id: warningRow
-			height: Theme.geometry_controlCard_mediumItem_height
-			width: parent.width
+		FlatListItemSeparator { visible: batteryLifeLimitWarning.visible}
+
+		ListItem {
+			id: batteryLifeLimitWarning
+
 			visible: Global.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
-
-			Label {
-				id: warning
-				anchors {
-					left: parent.left
-					leftMargin: Theme.geometry_controlCard_contentMargins
-					right: infoIcon.left
-					verticalCenter: parent.verticalCenter
+			//% "Battery life limit: %1%"
+			text: qsTrId("ess_battery_life_limit").arg(Math.max(Global.ess.minimumStateOfCharge, Global.ess.stateOfChargeLimit))
+			flat: true
+			content.children: [
+				CP.IconImage {
+					source: "qrc:/images/information.svg"
+					color: Theme.color_blue
 				}
-				color: Theme.color_font_secondary
-				font.pixelSize: Theme.font_size_body1
-				wrapMode: Text.Wrap
-				//% "Battery life limit: %1%"
-				text: qsTrId("ess_battery_life_limit").arg(Math.max(Global.ess.minimumStateOfCharge, Global.ess.stateOfChargeLimit))
-			}
-
-			CP.IconImage {
-				id: infoIcon
-				anchors {
-					right: parent.right
-					rightMargin: Theme.geometry_controlCard_contentMargins
-					verticalCenter: parent.verticalCenter
-				}
-				source: "qrc:/images/information.svg"
-				color: Theme.color_font_primary
-			}
+			]
 		}
 	}
 }
