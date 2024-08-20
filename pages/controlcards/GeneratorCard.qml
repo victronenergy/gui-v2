@@ -39,7 +39,6 @@ ControlCard {
 		//% "Autostart"
 		text: qsTrId("controlcard_generator_label_autostart")
 		checked: root.generator.autoStart
-		enabled: root.generator.state !== VenusOS.Generators_State_Running
 		flat: true
 		bottomContent.children: [
 			ListLabel {
