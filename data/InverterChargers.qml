@@ -17,6 +17,7 @@ QtObject {
 	// Devices from com.victronenergy.vebus
 	property DeviceModel veBusDevices: DeviceModel {
 		modelId: "veBusDevices"
+		sortBy: BaseDeviceModel.SortByDeviceInstance
 		onCountChanged: {
 			Qt.callLater(root.refreshNominalInverterPower)
 		}
@@ -25,6 +26,7 @@ QtObject {
 	// Devices from com.victronenergy.acsystem
 	property DeviceModel acSystemDevices: DeviceModel {
 		modelId: "acSystemDevices"
+		sortBy: BaseDeviceModel.SortByDeviceInstance
 		onCountChanged: {
 			Qt.callLater(root.refreshNominalInverterPower)
 		}
@@ -34,6 +36,7 @@ QtObject {
 	// (Inverter RS and Phoenix Inverter, which do not have AC inputs)
 	property DeviceModel inverterDevices: DeviceModel {
 		modelId: "inverterDevices"
+		sortBy: BaseDeviceModel.SortByDeviceInstance
 		onCountChanged: {
 			Qt.callLater(root.refreshNominalInverterPower)
 		}
