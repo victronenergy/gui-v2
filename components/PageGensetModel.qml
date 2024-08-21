@@ -12,6 +12,7 @@ ObjectModel {
 	property string bindPrefix
 	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator1"
 	property string startStopBindPrefix: startStop1Uid
+	readonly property string serviceType: BackendConnection.serviceTypeFromUid(bindPrefix)
 
 	// On D-Bus, the startstop1 generator is at com.victronenergy.generator.startstop1.
 	// On MQTT, the startstop1 generator is the one with GensetService=com.victronenergy.genset.*
@@ -32,7 +33,9 @@ ObjectModel {
 		}
 	}
 
-	readonly property var nrOfPhases: VeQuickItem {
+	readonly property bool dcGenset: serviceType === "dcgenset"
+	readonly property int nrOfPhases: phases.valid ? phases.value : dcGenset ? 0 : 3
+	readonly property var phases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
 
@@ -124,6 +127,7 @@ ObjectModel {
 
 			uidPrefix: root.bindPrefix
 		}
+		nrOfPhases: root.nrOfPhases
 	}
 
 	ListButton {
@@ -145,7 +149,7 @@ ObjectModel {
 		Repeater {
 			id: phaseRepeater
 
-			model: root.nrOfPhases.value || 3
+			model: root.nrOfPhases
 			delegate: ListQuantityGroup {
 				text: phaseRepeater.count === 1
 						//% "AC"
@@ -179,6 +183,18 @@ ObjectModel {
 		text: qsTrId("ac-in-genset_remote_start_mode")
 		dataItem.uid: root.bindPrefix + "/RemoteStartModeEnabled"
 		secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
+	}
+
+	ListDcOutputQuantityGroup {
+		bindPrefix: root.bindPrefix
+		allowed: defaultAllowed && root.dcGenset
+	}
+
+	ListTemperatureItem {
+		//% "Heatsink temperature"
+		text: qsTrId("genset_heatsink_temperature")
+		dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"
+		allowed: defaultAllowed && dataItem.isValid
 	}
 
 	ListNavigationItem {
@@ -286,6 +302,85 @@ ObjectModel {
 														gensetBindPrefix: root.bindPrefix
 													})
 		}
+
+	ListNavigationItem {
+		allowed: defaultAllowed && (chargeVoltage.isValid || chargeCurrent.isValid || bmsControlled.isValid)
+		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
+
+		VeQuickItem {
+			id: chargeVoltage
+			uid: root.bindPrefix + "/Settings/ChargeVoltage"
+		}
+
+		VeQuickItem {
+			id: chargeCurrent
+			uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
+		}
+
+		VeQuickItem {
+			id: bmsControlled
+			uid: root.bindPrefix + "/Settings/BmsPresent"
+		}
+
+		Component {
+			id: settingsComponent
+
+			Page {
+				GradientListView {
+					model: ObjectModel {
+						ListSpinBox {
+							//% "Charge voltage"
+							text: qsTrId("genset_charge_voltage")
+							dataItem.uid: root.bindPrefix + "/Settings/ChargeVoltage"
+							decimals: 1
+							stepSize: 0.1
+							suffix: "V"
+							allowed: defaultAllowed && dataItem.isValid
+							enabled: bmsControlled.dataItem.value === 0
+						}
+
+						ListTextItem {
+							//% "The charge voltage is currently controlled by the BMS."
+							text: qsTrId("genset_charge_voltage_controlled_by_bms")
+							allowed: defaultAllowed && bmsControlled.dataItem.value === 1
+						}
+
+						ListSpinBox {
+							text: CommonWords.charge_current
+							dataItem.uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
+							suffix: "A"
+							allowed: defaultAllowed && dataItem.isValid
+						}
+
+						ListRadioButtonGroupNoYes {
+							id: bmsControlled
+
+							//% "BMS Controlled"
+							text: qsTrId("genset_bms_controlled")
+							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
+							enabled: false
+							allowed: defaultAllowed && dataItem.isValid
+						}
+
+						ListTextItem {
+							//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
+							text: qsTrId("genset_bms_control_enabled_automatically")
+							allowed: defaultAllowed && bmsControlled.dataItem.value === 1
+						}
+
+						ListButton {
+							//% "BMS control"
+							text: qsTrId("genset_bms_control")
+							secondaryText: CommonWords.press_to_reset
+							visible: defaultAllowed && bmsControlled.dataItem.value === 1
+							// TODO: gui-v1 has "cornerMark: true" for this button. What does this mean? Does gui-v2 support this?
+							onClicked: bmsControlled.dataItem.setValue(0)
+						}
+					}
+				}
+			}
+		}
+	}
 
 	ListNavigationItem {
 		text: CommonWords.device_info_title

@@ -27,7 +27,7 @@ QtObject {
 			serviceName: "com.victronenergy.genset.ttyUSB0",
 			connected: 1,
 			phaseCount: 3,
-			productId: ProductInfo.ProductId_Genset_FischerPanda,
+			productId: ProductInfo.ProductId_Genset_FischerPandaAc,
 		}
 		setInputs([ gridInput, generatorInput ])
 	}
