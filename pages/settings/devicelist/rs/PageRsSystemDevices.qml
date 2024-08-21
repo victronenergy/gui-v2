@@ -40,17 +40,10 @@ Page {
 		}
 	}
 
-	DeviceModel {
-		id: rsDeviceModel
-		modelId: "multirs"
-	}
 
 	GradientListView {
-		// A model of all the multi RS devices for this AC system, sorted by custom/product name.
-		// Instead of assigning a DeviceModel to the ListView, use AggregateDeviceModel as a
-		// convenience for sorting the model by custom/product name, rather than by device instance.
-		model: AggregateDeviceModel {
-			sourceModels: [ rsDeviceModel ]
+		model: DeviceModel {
+			id: rsDeviceModel
 		}
 
 		delegate: ListNavigationItem {
