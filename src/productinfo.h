@@ -38,9 +38,11 @@ public:
 	Q_ENUM(ProductId_Battery)
 
 	enum ProductId_Genset {
-		ProductId_Genset_FischerPanda = 0xB040,
+		ProductId_Genset_FischerPandaAc = 0xB040,
 		ProductId_Genset_ComAp = 0xB044,
+		ProductId_Genset_Hatz = 0xB045,
 		ProductId_Genset_Dse = 0xB046,
+		ProductId_Genset_FischerPandaDc = 0xB047,
 		ProductId_Genset_Cre = 0xB048,
 		ProductId_Genset_Deif = 0xB049,
 	};
@@ -59,9 +61,11 @@ public:
 
 	Q_INVOKABLE bool isGensetProduct(int productId) {
 		switch (productId) {
-		case ProductId_Genset_FischerPanda:
+		case ProductId_Genset_FischerPandaAc:
 		case ProductId_Genset_ComAp:
+		case ProductId_Genset_Hatz:
 		case ProductId_Genset_Dse:
+		case ProductId_Genset_FischerPandaDc:
 		case ProductId_Genset_Cre:
 		case ProductId_Genset_Deif:
 			return true;

@@ -105,6 +105,7 @@ Page {
 		case "pvinverter":	// deliberate fall through
 		case "grid":		// deliberate fall through
 		case "genset":		// deliberate fall through
+		case "dcgenset":	// deliberate fall through
 		case "acload":
 			url = "/pages/settings/devicelist/ac-in/PageAcIn.qml"
 			params = { "bindPrefix": device.serviceUid }

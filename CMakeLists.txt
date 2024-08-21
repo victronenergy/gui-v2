@@ -266,6 +266,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/NotificationDelegate.qml
     components/ObjectModelMonitor.qml
     components/Page.qml
+    components/PageGensetModel.qml
     components/PageStack.qml
     components/ProgressArc.qml
     components/QuantityTableMetrics.qml
@@ -624,7 +625,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/tank/PageTankShape.qml
     pages/settings/devicelist/ac-in/PageAcIn.qml
     pages/settings/devicelist/ac-in/PageAcInSetup.qml
-    pages/settings/devicelist/ac-in/PageAcInModelGenset.qml
     pages/settings/devicelist/ac-in/PageAcInModelDefault.qml
     pages/settings/devicelist/ac-in/PageSmappeeCTList.qml
     pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml

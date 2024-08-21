@@ -13,7 +13,7 @@ QtObject {
 		model: VeQItemSortTableModel {
 			dynamicSortFilter: true
 			filterRole: VeQItemTableModel.UniqueIdRole
-			filterRegExp: "^dbus/com\.victronenergy\.(alternator|fuelcell|dcsource)\."
+			filterRegExp: "^dbus/com\.victronenergy\.(alternator|fuelcell|dcsource|dcgenset)\."
 			model: Global.dataServiceModel
 		}
 

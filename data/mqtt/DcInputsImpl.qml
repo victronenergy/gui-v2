@@ -15,6 +15,7 @@ QtObject {
 				"mqtt/alternator",
 				"mqtt/fuelcell",
 				"mqtt/dcsource",
+				"mqtt/dcgenset",
 			]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}

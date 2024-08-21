@@ -39,7 +39,7 @@ Page {
 	Component {
 		id: gensetModelComponent
 
-		PageAcInModelGenset {
+		PageGensetModel {
 			bindPrefix: root.bindPrefix
 		}
 	}
