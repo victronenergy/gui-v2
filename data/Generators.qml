@@ -13,7 +13,6 @@ QtObject {
 		modelId: "generators"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 	}
-	property var first: model.firstObject
 
 	function addGenerator(generator) {
 		model.addDevice(generator)
