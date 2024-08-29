@@ -113,19 +113,6 @@ void BaseDevice::setName(const QString &name)
 	}
 }
 
-QString BaseDevice::description() const
-{
-	return m_description;
-}
-
-void BaseDevice::setDescription(const QString &description)
-{
-	if (m_description != description) {
-		m_description = description;
-		emit descriptionChanged();
-	}
-}
-
 void BaseDevice::maybeEmitValidChanged(const std::function<void ()> &propertyChangeFunc)
 {
 	const bool prevValid = isValid();

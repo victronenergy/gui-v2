@@ -233,7 +233,7 @@ Page {
 					? root._deviceDisplayInfo(_serviceType, model.device, model.sourceModel)
 					: null
 
-			text: model.cachedDeviceDescription
+			text: model.cachedDeviceName
 			textModel: model.connected && _displayInfo ? _displayInfo.summary || [] : [ CommonWords.not_connected ]
 			down: deviceMouseArea.containsPress
 			allowed: !model.connected || _displayInfo !== null
