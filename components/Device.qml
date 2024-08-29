@@ -30,5 +30,4 @@ BaseDevice {
 	productName: _productName.value || ""
 	customName: _customName.value || ""
 	name: _customName.value || _productName.value || ""
-	description: name
 }

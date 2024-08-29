@@ -27,7 +27,6 @@ class BaseDevice : public QObject
 	Q_PROPERTY(QString productName READ productName WRITE setProductName NOTIFY productNameChanged)
 	Q_PROPERTY(QString customName READ customName WRITE setCustomName NOTIFY customNameChanged)
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 
 public:
 	explicit BaseDevice(QObject *parent = nullptr);
@@ -52,9 +51,6 @@ public:
 	QString name() const;
 	void setName(const QString &name);
 
-	QString description() const;
-	void setDescription(const QString &description);
-
 Q_SIGNALS:
 	void validChanged();
 	void serviceUidChanged();
@@ -63,14 +59,12 @@ Q_SIGNALS:
 	void customNameChanged();
 	void productIdChanged();
 	void nameChanged();
-	void descriptionChanged();
 
 private:
 	void maybeEmitValidChanged(const std::function<void()>& propertyChangeFunc);
 
 	QString m_serviceUid;
 	QString m_name;
-	QString m_description;
 	QString m_productName;
 	QString m_customName;
 	int m_deviceInstance = -1;
