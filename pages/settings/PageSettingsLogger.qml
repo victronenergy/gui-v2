@@ -41,7 +41,7 @@ Page {
 					Global.pageManager.popPage(root)
 				}
 
-				//% "VRM portal"
+				//% "VRM Portal"
 				text: qsTrId("settings_logging_vrm_portal")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Network/VrmPortal"
 				updateDataOnClick: false
