@@ -67,16 +67,11 @@ ListItem {
 
 		// If attempting to save, then show any errors and adjust the input text.
 		if (mode === VenusOS.InputValidation_ValidateAndSave) {
-			if (result.status === VenusOS.InputValidation_Result_Error) {
-				let errorText = result.errorText
-				if (errorText.length === 0) {
-					//% "The entered text does not have the correct format. Try again."
-					errorText = qsTrId("text_field_default_error_text")
-				}
-				if (textField.currentNotification) {
-					textField.currentNotification.close(true)
-				}
-				textField.currentNotification = Global.showToastNotification(VenusOS.Notification_Info, errorText, 5000)
+			if (textField.currentNotification) {
+				textField.currentNotification.close(true)
+			}
+			if (result.notificationText.length > 0) {
+				textField.currentNotification = Global.showToastNotification(VenusOS.Notification_Info, result.notificationText, 5000)
 			}
 			if (result.adjustedText != null) {
 				textField.text = result.adjustedText

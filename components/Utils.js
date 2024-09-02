@@ -331,6 +331,6 @@ function toHexFormat(n) {
 // - InputValidation_Result_OK: the input text is valid, and can be saved, or red highlight can be removed
 // - InputValidation_Result_Unknown: the input text should not be saved, but is not invalid, so
 //   do not highlight with a red border. This is useful when the input string is empty.
-function validationResult(status, errorText = "", adjustedText = undefined) {
-	return { status: status, errorText: errorText, adjustedText: adjustedText }
+function validationResult(status, notificationText = "", adjustedText = undefined) {
+	return { status: status, notificationText: notificationText, adjustedText: adjustedText }
 }

@@ -175,6 +175,20 @@ Page {
 				placeholderText: "Enter text"
 			}
 
+			ListTextField {
+				text: "Text input: forced capitalization, numbers disallowed"
+				placeholderText: "Enter text"
+				validateInput: function() {
+					if (textField.text.match(/[0-9]/)) {
+						return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Numbers are not allowed!")
+					} else if (textField.text.match(/[a-z]/)) {
+						return Utils.validationResult(VenusOS.InputValidation_Result_OK, "Characters changed to uppercase", textField.text.toUpperCase())
+					} else {
+						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+					}
+				}
+			}
+
 			ListIntField {
 				text: "Number with 5 digits max"
 				maximumLength: 5
