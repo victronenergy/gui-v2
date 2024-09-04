@@ -28,6 +28,6 @@ ListModel {
 			}
 		}
 
-		root.setProperty(errorNumber, "errorCode", errorCode)
+		root.setProperty(errorNumber, "errorCode", errorCode === undefined ? "" : errorCode)
 	}
 }
