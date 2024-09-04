@@ -72,7 +72,9 @@ ListItem {
 				textField.currentNotification.close(true)
 			}
 			if (result.notificationText.length > 0) {
-				textField.currentNotification = Global.showToastNotification(VenusOS.Notification_Info, result.notificationText, 5000)
+				const notificationType = result.status === VenusOS.InputValidation_Result_Error ? VenusOS.Notification_Alarm
+						: VenusOS.Notification_Info
+				textField.currentNotification = Global.showToastNotification(notificationType, result.notificationText, 5000)
 			}
 			if (result.adjustedText != null) {
 				textField.text = result.adjustedText
