@@ -182,10 +182,13 @@ Page {
 					if (textField.text.match(/[0-9]/)) {
 						return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Numbers are not allowed!")
 					} else if (textField.text.match(/[a-z]/)) {
-						return Utils.validationResult(VenusOS.InputValidation_Result_OK, "Characters changed to uppercase", textField.text.toUpperCase())
+						return Utils.validationResult(VenusOS.InputValidation_Result_Warning, "Characters changed to uppercase", textField.text.toUpperCase())
 					} else {
 						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
 					}
+				}
+				saveInput: function() {
+					console.log("Saving text: %1".arg(textField.text))
 				}
 			}
 

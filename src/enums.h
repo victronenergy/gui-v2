@@ -677,6 +677,7 @@ public:
 	enum InputValidation_Result {
 		InputValidation_Result_Unknown,
 		InputValidation_Result_OK,
+		InputValidation_Result_Warning,
 		InputValidation_Result_Error,
 	};
 	Q_ENUM(InputValidation_Result)
