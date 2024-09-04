@@ -28,6 +28,5 @@ ListQuantityGroup {
 		}
 	]
 
-	minimumDelegateWidth: Theme.geometry_veBusDevice_PVCFListQuantityGroup_minimumDelegateWidth
 	maximumContentWidth: availableWidth
 }

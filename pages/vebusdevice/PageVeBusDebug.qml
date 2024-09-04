@@ -72,7 +72,6 @@ Page {
 
 			ListQuantityGroup {
 				text: "AC power setpoint"
-				minimumDelegateWidth: 80
 				textModel: [
 					{ value: remoteSetpointL1.value, unit: VenusOS.Units_Watt },
 					{ value: remoteSetpointL2.value, unit: VenusOS.Units_Watt },

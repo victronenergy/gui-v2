@@ -269,7 +269,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityTableMetrics.qml
     components/QuantityGroupListHeader.qml
     components/QuantityLabel.qml
-    components/QuantityRepeater.qml
+    components/QuantityRow.qml
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
     components/RsSystemAcIODisplay.qml
