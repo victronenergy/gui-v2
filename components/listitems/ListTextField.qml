@@ -23,10 +23,10 @@ ListItem {
 	// - saveInput: saves the text field input. The default implementation saves the value to the
 	//   dataItem, if it has a valid uid.
 	//
-	// When the text field loses focus or is accepted, validate is called(); if it returns a result
-	// of InputValidation_Result_OK, then saveInput() is called. validateInput() is also called to check
-	// whether the user has corrected the input to make it valid, if the input was previously found
-	// to be invalid.
+	// When the text field loses focus or is accepted, validateInput is called; if it returns a result
+	// of InputValidation_Result_OK or InputValidation_Result_Warning, then saveInput() is called.
+	// validateInput() is also called to check whether the user has corrected the input to make it
+	// valid, if the input was previously found to be invalid.
 	property var validateInput
 	property var saveInput: function() {
 		if (dataItem.uid) {
@@ -45,7 +45,8 @@ ListItem {
 	function runValidation(mode) {
 		const resultStatus = _doValidateInput(mode)
 		if (mode === VenusOS.InputValidation_ValidateAndSave
-				&& resultStatus === VenusOS.InputValidation_Result_OK) {
+				&& (resultStatus === VenusOS.InputValidation_Result_OK
+					|| resultStatus === VenusOS.InputValidation_Result_Warning)) {
 			saveInput()
 		}
 		return resultStatus
@@ -129,7 +130,8 @@ ListItem {
 
 		onTextEdited: {
 			// When the input is marked as invalid, run the validation again each time the input is
-			// edited. If the result is either OK or unknown, then clear the invalid marker.
+			// edited. If validation produces a result code that is not InputValidation_Result_Error,
+			// clear the invalid marker.
 			if (_showErrorHighlight && root.runValidation(VenusOS.InputValidation_ValidateOnly) !== VenusOS.InputValidation_Result_Error) {
 				_showErrorHighlight = false
 			}

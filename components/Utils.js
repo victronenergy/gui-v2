@@ -326,11 +326,24 @@ function toHexFormat(n) {
 	return n ? "0x" + n.toString(16).toUpperCase() : ""
 }
 
-// Returns an object to return for text field validation. The status can be:
-// - InputValidation_Result_Error: the input text is invalid; highlight the input with a red border
-// - InputValidation_Result_OK: the input text is valid, and can be saved, or red highlight can be removed
+// Returns an object to return for text field validation.
+//
+// If notificationText is set, then when the input is validated prior to an attempted save, a
+// a notification of the appropriate type will be shown.
+//
+// The status can be:
+// - InputValidation_Result_Error: the input text is invalid; highlight the input with a red border.
+//   Notifications will have an 'error' type.
+// - InputValidation_Result_OK: the input text is valid, and can be saved, or red highlight can be
+//   removed. Notifications will have an 'info' type.
+// - InputValidation_Result_Warning: same as InputValidation_Result_OK, but notifications will have
+//   have a 'warning' type.
 // - InputValidation_Result_Unknown: the input text should not be saved, but is not invalid, so
 //   do not highlight with a red border. This is useful when the input string is empty.
+//   Notifications will have an 'info' type.
+//
+// If adjustedText is set, then the text input field is updated to contain this text.
+//
 function validationResult(status, notificationText = "", adjustedText = undefined) {
 	return { status: status, notificationText: notificationText, adjustedText: adjustedText }
 }
