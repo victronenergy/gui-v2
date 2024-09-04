@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2023 Victron Energy B.V.
+** Copyright (C) 2024 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
@@ -11,17 +11,21 @@ Page {
 
 	property string bindPrefix
 
+	function setPageModel() {
+		if (ProductInfo.isGensetProduct(productIdDataItem.value)) {
+			modelLoader.sourceComponent = pageGensetModel
+		} else {
+			modelLoader.sourceComponent = pageAcInModel
+		}
+	}
+
 	VeQuickItem {
 		id: productIdDataItem
 
 		uid: root.bindPrefix + "/ProductId"
 		onValueChanged: {
 			if (value !== undefined && modelLoader.status === Loader.Null) {
-				if (ProductInfo.isGensetProduct(value)) {
-					modelLoader.sourceComponent = gensetModelComponent
-				} else {
-					modelLoader.sourceComponent = defaultModelComponent
-				}
+				setPageModel()
 			}
 		}
 	}
@@ -37,7 +41,7 @@ Page {
 	}
 
 	Component {
-		id: gensetModelComponent
+		id: pageGensetModel
 
 		PageGensetModel {
 			bindPrefix: root.bindPrefix
@@ -45,7 +49,7 @@ Page {
 	}
 
 	Component {
-		id: defaultModelComponent
+		id: pageAcInModel
 
 		PageAcInModel {
 			bindPrefix: root.bindPrefix

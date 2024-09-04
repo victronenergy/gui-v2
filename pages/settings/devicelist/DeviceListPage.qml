@@ -102,10 +102,21 @@ Page {
 			}
 			break;
 
+		case "genset":		// deliberate fall through
+		case "dcgenset":
+			url = "/pages/settings/devicelist/PageGenset.qml"
+			params = { "bindPrefix": device.serviceUid }
+
+			const gensetPowerText = Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power)
+			if (device.gensetStatusCode >= 0) {
+				summary = [ Global.acInputs.gensetStatusCodeToText(device.gensetStatusCode), gensetPowerText ]
+			} else {
+				summary = [ gensetPowerText ]
+			}
+			break;
+
 		case "pvinverter":	// deliberate fall through
 		case "grid":		// deliberate fall through
-		case "genset":		// deliberate fall through
-		case "dcgenset":	// deliberate fall through
 		case "acload":
 			url = "/pages/settings/devicelist/ac-in/PageAcIn.qml"
 			params = { "bindPrefix": device.serviceUid }

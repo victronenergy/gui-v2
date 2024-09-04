@@ -16,6 +16,7 @@ ObjectModel {
 
 	// On D-Bus, the startstop1 generator is at com.victronenergy.generator.startstop1.
 	// On MQTT, the startstop1 generator is the one with GensetService=com.victronenergy.genset.*
+	// (or GensetService=com.victronenergy.dcgenset.* if this is a dcgenset)
 	readonly property string startStop1Uid: BackendConnection.type === BackendConnection.MqttSource
 			? generatorWithGensetService
 			: BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop1"
@@ -26,16 +27,19 @@ ObjectModel {
 		delegate: VeQuickItem {
 			uid: model.device.serviceUid + "/GensetService"
 			onValueChanged: {
-				if (value !== undefined && value.startsWith("com.victronenergy.genset.")) {
-					root.generatorWithGensetService = model.device.serviceUid
+				if ( (isValid && root.dcGenset && value.startsWith("com.victronenergy.dcgenset."))
+						|| (isValid && !root.dcGenset && value.startsWith("com.victronenergy.genset.")) ) {
+						root.generatorWithGensetService = model.device.serviceUid
 				}
 			}
 		}
 	}
 
 	readonly property bool dcGenset: serviceType === "dcgenset"
-	readonly property int nrOfPhases: phases.valid ? phases.value : dcGenset ? 0 : 3
-	readonly property var phases: VeQuickItem {
+	readonly property int nrOfPhases: phases.isValid ? phases.value
+												   : dcGenset ? 0
+															  : 3
+	readonly property VeQuickItem phases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
 
@@ -127,7 +131,6 @@ ObjectModel {
 
 			uidPrefix: root.bindPrefix
 		}
-		nrOfPhases: root.nrOfPhases
 	}
 
 	ListButton {
@@ -283,7 +286,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem {
+	ListNavigationItem { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
 		text: CommonWords.settings
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
@@ -292,18 +295,20 @@ ObjectModel {
 	}
 
 	ListNavigationItem {
-			//% "Run time and service"
-			text: qsTrId("page_settings_generator_run_time_and_service")
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
-													{
-														title: text,
-														settingsBindPrefix: root.settingsBindPrefix,
-														startStopBindPrefix: root.startStopBindPrefix,
-														gensetBindPrefix: root.bindPrefix
-													})
-		}
+		//% "Run time and service"
+		text: qsTrId("page_settings_generator_run_time_and_service")
+		onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
+											   {
+												   title: text,
+												   settingsBindPrefix: root.settingsBindPrefix,
+												   startStopBindPrefix: root.startStopBindPrefix,
+												   gensetBindPrefix: root.bindPrefix
+											   })
+	}
 
 	ListNavigationItem {
+		//% "BMS Settings"
+		text: qsTrId("page_genset_model_bms_settings")
 		allowed: defaultAllowed && (chargeVoltage.isValid || chargeCurrent.isValid || bmsControlled.isValid)
 		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
 
@@ -334,7 +339,7 @@ ObjectModel {
 							dataItem.uid: root.bindPrefix + "/Settings/ChargeVoltage"
 							decimals: 1
 							stepSize: 0.1
-							suffix: "V"
+							suffix: Units.defaultUnitString(VenusOS.Units_Volt)
 							allowed: defaultAllowed && dataItem.isValid
 							enabled: bmsControlled.dataItem.value === 0
 						}
@@ -346,26 +351,26 @@ ObjectModel {
 						}
 
 						ListSpinBox {
-							text: CommonWords.charge_current
+							//% "Charge current limit"
+							text: qsTrId("genset_charge_current_limit")
 							dataItem.uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
-							suffix: "A"
-							allowed: defaultAllowed && dataItem.isValid
-						}
-
-						ListRadioButtonGroupNoYes {
-							id: bmsControlled
-
-							//% "BMS Controlled"
-							text: qsTrId("genset_bms_controlled")
-							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
-							enabled: false
+							suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 							allowed: defaultAllowed && dataItem.isValid
 						}
 
 						ListTextItem {
-							//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
-							text: qsTrId("genset_bms_control_enabled_automatically")
-							allowed: defaultAllowed && bmsControlled.dataItem.value === 1
+							id: bmsControlled
+
+							//% "BMS Controlled"
+							text: qsTrId("genset_bms_controlled")
+							secondaryText: CommonWords.yesOrNo(dataItem.value)
+							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
+							allowed: defaultAllowed && dataItem.isValid
+							bottomContentChildren: ListLabel {
+								//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
+								text: qsTrId("genset_bms_control_enabled_automatically")
+								allowed: bmsControlled.dataItem.value === 1
+							}
 						}
 
 						ListButton {
@@ -373,7 +378,6 @@ ObjectModel {
 							text: qsTrId("genset_bms_control")
 							secondaryText: CommonWords.press_to_reset
 							visible: defaultAllowed && bmsControlled.dataItem.value === 1
-							// TODO: gui-v1 has "cornerMark: true" for this button. What does this mean? Does gui-v2 support this?
 							onClicked: bmsControlled.dataItem.setValue(0)
 						}
 					}

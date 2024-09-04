@@ -587,6 +587,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/AcInDeviceModel.qml
     pages/settings/devicelist/PageAcCharger.qml
     pages/settings/devicelist/PageDigitalInput.qml
+    pages/settings/devicelist/PageGenset.qml
     pages/settings/devicelist/PageMeteo.qml
     pages/settings/devicelist/PageMeteoSettings.qml
     pages/settings/devicelist/PageMotorDrive.qml
@@ -630,7 +631,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/tank/PageTankShape.qml
     pages/settings/devicelist/ac-in/PageAcIn.qml
     pages/settings/devicelist/ac-in/PageAcInSetup.qml
-    pages/settings/devicelist/ac-in/PageAcInModelDefault.qml
+    pages/settings/devicelist/ac-in/PageAcInModel.qml
     pages/settings/devicelist/ac-in/PageSmappeeCTList.qml
     pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml
     pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml
