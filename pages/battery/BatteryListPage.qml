@@ -52,23 +52,22 @@ Page {
 					id: bottomRow
 					width: parent.width
 
-					Row {
+					QuantityRow {
 						id: measurementsRow
 
 						anchors.verticalCenter: parent.verticalCenter
-						spacing: Theme.geometry_listItem_content_spacing
+						leftPadding: -(measurementsRow.quantityMetrics.spacing * 2) // align first quantity label with battery name
+						height: parent.height
 
-						QuantityRepeater {
-							model: [
-								{ value: modelData.voltage, unit: VenusOS.Units_Volt_DC },
-								{ value: modelData.current, unit: VenusOS.Units_Amp },
-								{ value: modelData.power, unit: VenusOS.Units_Watt },
-								{
-									value: Global.systemSettings.convertFromCelsius(modelData.temperature),
-									unit: Global.systemSettings.temperatureUnit
-								}
-							]
-						}
+						model: [
+							{ value: modelData.voltage, unit: VenusOS.Units_Volt_DC },
+							{ value: modelData.current, unit: VenusOS.Units_Amp },
+							{ value: modelData.power, unit: VenusOS.Units_Watt },
+							{
+								value: Global.systemSettings.convertFromCelsius(modelData.temperature),
+								unit: Global.systemSettings.temperatureUnit
+							}
+						]
 					}
 
 					Label {

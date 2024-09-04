@@ -71,6 +71,7 @@ Page {
 								{ value: modelData.current, unit: VenusOS.Units_Amp },
 								{ value: modelData.power, unit: VenusOS.Units_Watt },
 							]
+							tableMode: true
 
 							onClicked: {
 								Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
@@ -96,6 +97,7 @@ Page {
 						{ value: pvInverter.current, unit: VenusOS.Units_Amp },
 						{ value: pvInverter.power, unit: VenusOS.Units_Watt },
 					]
+					tableMode: true
 
 					onClicked: {
 						Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml", { "pvInverter": pvInverter })

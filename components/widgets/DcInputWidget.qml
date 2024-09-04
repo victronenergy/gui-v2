@@ -80,6 +80,8 @@ OverviewWidget {
 						{ value: model.device.current, unit: VenusOS.Units_Amp },
 						{ value: model.device.power, unit: VenusOS.Units_Watt },
 					]
+					tableMode: true
+
 					onClicked: {
 						Global.pageManager.pushPage(root.detailUrl, {
 							"title": model.device.name,
