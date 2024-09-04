@@ -121,12 +121,33 @@ Page {
 
 			ListQuantityGroup {
 				text: CommonWords.dc
-				textModel: [
-					{ value: dcPower.value, unit: VenusOS.Units_Watt, visible: root.serviceType !== "inverter" },
+
+				readonly property var _socModel: [
+					{ value: CommonWords.soc_with_prefix.arg(stateOfCharge.isValid ? Units.getCombinedDisplayText(VenusOS.Units_Percentage, stateOfCharge.value) : "--") },
+				]
+
+				readonly property var _inverterModel: [
+					{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
+					{ value: dcCurrent.value, unit: VenusOS.Units_Amp }
+				]
+
+				readonly property var _inverterChargerModel: [
+					{ value: dcPower.value, unit: VenusOS.Units_Watt },
 					{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
 					{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
-					{ value: CommonWords.soc_with_prefix.arg(stateOfCharge.isValid ? stateOfCharge.value : "--"), visible: root.serviceType !== "inverter" || isInverterChargerItem.value === 1 },
-				]
+				].concat(_socModel)
+
+				textModel: {
+					if (root.serviceType === "inverter") {
+						if (isInverterChargerItem.value === 1) {
+							return _inverterModel.concat(_socModel)
+						} else {
+							return _inverterModel
+						}
+					} else {
+						return _inverterChargerModel
+					}
+				}
 			}
 
 			ListNavigationItem {

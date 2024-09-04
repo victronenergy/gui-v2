@@ -413,7 +413,7 @@ QtObject {
 	readonly property string signal_strength: qsTrId("common_words_signal_strength");
 
 	//: State of charge (as a percentage). %1 = the SOC value
-	//% "SOC %1%"
+	//% "SOC %1"
 	readonly property string soc_with_prefix: qsTrId("common_words_soc")
 
 	//: A speed measurement value
