@@ -20,7 +20,8 @@ ListItem {
 	// These are functions that can optionally be overridden.
 	// - validateInput: validates the TextField input, and returns the object provided by
 	//   Utils.validationResult() to describe the validation result.
-	// - save: saves the text field input. The default implementation saves the value to the dataItem.
+	// - saveInput: saves the text field input. The default implementation saves the value to the
+	//   dataItem, if it has a valid uid.
 	//
 	// When the text field loses focus or is accepted, validate is called(); if it returns a result
 	// of InputValidation_Result_OK, then saveInput() is called. validateInput() is also called to check
