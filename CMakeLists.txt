@@ -559,6 +559,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsServices.qml
     pages/settings/PageSettingsSystem.qml
     pages/settings/PageSettingsSystemStatus.qml
+    pages/settings/PageSettingsTailscale.qml
     pages/settings/PageSettingsTankPump.qml
     pages/settings/PageSettingsTcpIp.qml
     pages/settings/PageSettingsVecanDevice.qml
