@@ -260,7 +260,7 @@ Page {
 								}
 
 								ListTextField {
-									//% "Custom network(s)
+									//% "Custom network(s)"
 									text: qsTrId("settings_tailscale_local_network_access_custom_networks")
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/CustomNetworks"
 									//% "Example: 192.168.1.0/24"
