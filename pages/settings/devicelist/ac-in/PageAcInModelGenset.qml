@@ -100,7 +100,7 @@ ObjectModel {
 		secondaryText: {
 			let errorCodes = ""
 			for (let i = 0; i < errorModel.errorCodes.length; ++i) {
-				if (errorModel.errorCodes[i] !== 0) {
+				if (errorModel.errorCodes[i]) {
 					errorCodes += (errorCodes.length ? " " : "") + errorModel.errorCodes[i]
 				}
 			}
@@ -110,7 +110,7 @@ ObjectModel {
 		allowed: defaultAllowed && dataItem.isValid
 		enabled: secondaryText !== CommonWords.none_errors
 
-		onClicked: Global.notificationLayer.popAndGoToNotificationsPage()
+		onClicked: Global.notificationLayer.popAndGoToNotifications()
 
 		property VeQuickItem dataItem: VeQuickItem {
 			uid: root.bindPrefix + "/Error/0/Id"
