@@ -18,7 +18,7 @@ Page {
 	VeQuickItem {
 		id: state
 
-		uid: startStopBindPrefix + "/State"
+		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/State" : ""
 	}
 
 	VeQuickItem {
@@ -109,7 +109,7 @@ Page {
 				//% "Time to next test run"
 				text: qsTrId("settings_page_run_time_and_service_time_to_next_test_run")
 				secondaryText: ""
-				dataItem.uid: root.startStopBindPrefix + "/NextTestRun"
+				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/NextTestRun" : ""
 				allowed: dataItem.isValid && dataItem.value > 0
 
 				Timer {
@@ -135,13 +135,13 @@ Page {
 				showAccessLevel: VenusOS.User_AccessType_Service
 				allowed: defaultAllowed && nextTestRun.allowed
 				secondaryText: Utils.secondsToString(dataItem.value, false)
-				dataItem.uid: root.startStopBindPrefix + "/TestRunIntervalRuntime"
+				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/TestRunIntervalRuntime" : ""
 			}
 
 			ListTextItem {
 				//% "Time to service"
 				text: qsTrId("settings_page_run_time_and_service_time_to_service")
-				dataItem.uid: root.startStopBindPrefix + "/ServiceCounter"
+				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/ServiceCounter" : ""
 				secondaryText: Math.round(dataItem.value / 60 / 60) + "h"
 				allowed: defaultAllowed && dataItem.isValid
 			}
@@ -180,7 +180,7 @@ Page {
 
 				VeQuickItem {
 					id: serviceReset
-					uid: startStopBindPrefix + "/ServiceCounterReset"
+					uid: root.startStopBindPrefix ? startStopBindPrefix + "/ServiceCounterReset" : ""
 				}
 			}
 		}

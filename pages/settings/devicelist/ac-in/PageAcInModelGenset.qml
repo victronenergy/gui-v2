@@ -56,7 +56,7 @@ ObjectModel {
 		//% "Current run time"
 		text: qsTrId("settings_page_genset_generator_run_time")
 		secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
-		dataItem.uid: root.startStopBindPrefix + "/Runtime"
+		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Runtime" : ""
 		allowed: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
 	}
 
