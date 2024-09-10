@@ -444,7 +444,8 @@ public:
 		CanBusProfile_Oceanvolt,
 		CanBusProfile_None250,
 		CanBusProfile_RvC,
-		CanBusProfile_HighVoltage
+		CanBusProfile_HighVoltage,
+		CanBusProfile_None500
 	};
 	Q_ENUM(CanBusProfile_Type)
 
