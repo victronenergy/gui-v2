@@ -35,6 +35,14 @@ Item {
 				currentDialog = null
 			}
 		}
+		function onScreenIsBlankedChanged() {
+			// If the screen blanker blanks the screen, we should
+			// close the dialog.
+			if (Global.mainView.screenIsBlanked && currentDialog) {
+				currentDialog.destroy()
+				currentDialog = null
+			}
+		}
 	}
 
 	// For WebAssembly, if the firmware changed on device, this might
