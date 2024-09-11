@@ -28,9 +28,13 @@ QtObject {
 
 		// Make sure notificationLayer is ready before reading the firmware state,
 		// otherwise Global.showToastNotification() call inside onValueChanged signal handler will fail.
-		uid: !!Global.notificationLayer ? Global.venusPlatform.serviceUid + "/Firmware/State" : ""
+		uid: (Global.allPagesLoaded && !!Global.notificationLayer) ? Global.venusPlatform.serviceUid + "/Firmware/State" : ""
 
 		onValueChanged: {
+			if (uid === "" || !isValid) {
+				return
+			}
+
 			let msg = ""
 			switch (value) {
 			case FirmwareUpdater.Idle: // fall through

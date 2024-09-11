@@ -81,7 +81,7 @@ Item {
 			anchors.fill: parent
 			onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 			contentChildren: swipePageModel.children
-			Component.onCompleted: Global.allPagesLoaded = true
+			Component.onCompleted: Qt.callLater(function() { Global.allPagesLoaded = true })
 		}
 	}
 
