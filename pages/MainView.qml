@@ -27,6 +27,8 @@ Item {
 			&& !pageStack.busy && (!swipeView || !swipeView.flicking)
 			&& !Global.splashScreenVisible
 
+	readonly property bool screenIsBlanked: !!Global.screenBlanker && Global.screenBlanker.blanked
+
 	property int _loadedPages: 0
 
 	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded && !Global.needPageReload
