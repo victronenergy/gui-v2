@@ -99,9 +99,10 @@ ObjectModel {
 		text: qsTrId("ac-in-genset_error")
 		secondaryText: {
 			let errorCodes = ""
-			for (let i = 0; i < errorModel.errorCodes.length; ++i) {
-				if (errorModel.errorCodes[i]) {
-					errorCodes += (errorCodes.length ? " " : "") + errorModel.errorCodes[i]
+			for (let i = 0; i < errorModel.count; ++i) {
+				const errorCode = errorModel.get(i).errorCode
+				if (errorCode) {
+					errorCodes += (errorCodes.length ? " " : "") + errorCode
 				}
 			}
 			return errorCodes.length ? errorCodes : CommonWords.none_errors
@@ -112,10 +113,15 @@ ObjectModel {
 
 		onClicked: Global.notificationLayer.popAndGoToNotifications()
 
-		property VeQuickItem dataItem: VeQuickItem {
+		VeQuickItem {
+			id: dataItem
+
 			uid: root.bindPrefix + "/Error/0/Id"
 		}
-		property GensetErrorModel errorModel: GensetErrorModel {
+
+		GensetErrorModel {
+			id: errorModel
+
 			uidPrefix: root.bindPrefix
 		}
 	}

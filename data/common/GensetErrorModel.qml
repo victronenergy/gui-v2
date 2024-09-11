@@ -10,7 +10,6 @@ ListModel {
 	id: root
 
 	property string uidPrefix
-	property list<string> errorCodes: ["", "", "", "", "", "", "", ""]
 
 	property Instantiator instantiator: Instantiator {
 		model: 8
@@ -22,24 +21,13 @@ ListModel {
 		}
 	}
 
-	function _errorChanged(errorNumber, errorCode) {
-		errorCodes[errorNumber] = errorCode // 'errorCode' is eg. "dse:w-4097"
-
+	function _errorChanged(errorNumber, errorCode) { // 'errorCode' is eg. "dse:w-4097"
 		if (root.count === 0) { // initialize ListModel
-			for (var i = 0; i < instantiator.count; ++i) {
+			for (let i = 0; i < instantiator.model; ++i) {
 				root.append({"errorNumber": i, "errorCode": ""})
 			}
 		}
 
-		for (let i = 0; i < root.count; ++i) {
-			const data = get(i)
-			if (data.errorNumber === errorNumber) {
-				root.setProperty(i, "errorCode", errorCode)
-				return
-			} else if (data.errorNumber > errorNumber) {
-				insert(i, {"errorNumber": errorNumber, "errorCode": errorCode })
-				return
-			}
-		}
+		root.setProperty(errorNumber, "errorCode", errorCode)
 	}
 }
