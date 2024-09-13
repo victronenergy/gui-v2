@@ -51,8 +51,7 @@ Page {
 			if (_saving) {
 				return
 			}
-
-			if (value === undefined) {
+			if (!value) {
 				pointsListView.model = []
 			} else if (value.length > 0) {
 				// Value is a comma-separated list of "<sensor-level>:<volume>" pairs.
