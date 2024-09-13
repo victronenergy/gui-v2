@@ -15,7 +15,6 @@ import Victron.VenusOS
 QtVirtualKeyboard.InputPanel {
 	id: root
 
-	property var mainViewItem
 	property var focusedItem
 	property var focusedFlickable
 	property real toContentY
@@ -27,9 +26,12 @@ QtVirtualKeyboard.InputPanel {
 		}
 		const mappedPoint = focusedItem.mapFromItem(item, itemMouseX, itemMouseY)
 		if (!focusedItem.contains(mappedPoint)) {
+			// The screen was clicked outside of the text field. Remove focus from the text field,
+			// so that the VKB will close. Return true to swallow the mouse event.
 			focusedItem.focus = false
 			return true
 		}
+		// The mouse was clicked within the text field, so allow it to receive the mouse event.
 		return false
 	}
 
@@ -67,13 +69,21 @@ QtVirtualKeyboard.InputPanel {
 	Connections {
 		target: Global
 
-		function onAboutToFocusTextField(textField, toTextFieldY, flickable) {
-			if (!textField || !flickable) {
-				console.warn("onAboutToFocusTextField(): invalid item/flickable:", textField, flickable)
+		function onAboutToFocusTextField(textField, textFieldContainer, flickable) {
+			if (!textField || !textFieldContainer || !flickable) {
+				console.warn("onAboutToFocusTextField(): invalid item/container/flickable:", textField, textFieldContainer, flickable)
 				return
 			}
-			const inputPanelY = mainViewItem.height - root.height
-			const toWinY = textField.mapToItem(mainViewItem, 0, toTextFieldY).y
+			const inputPanelY = Global.mainView.height - root.height
+
+			// Find the bottom of the text field's container item (e.g. the ListTextField) within
+			// the main view.
+			const textFieldVerticalMargin = textFieldContainer.height - textField.height
+			const textFieldBottom = textFieldContainer.height - textFieldVerticalMargin/2
+			const toWinY = textFieldContainer.mapToItem(Global.mainView, 0, textFieldBottom).y
+
+			// Find the distance between the top of the input panel and the bottom of the text
+			// field container.
 			const delta = toWinY - inputPanelY
 
 			if (delta > 0) {
