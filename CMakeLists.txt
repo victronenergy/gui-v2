@@ -305,6 +305,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ValueRange.qml
     components/VeBusAcIODisplay.qml
     components/ViewGradient.qml
+    components/WasmVirtualKeyboardHandler.qml
     components/ClassAndVrmInstance.qml
 
     components/controls/Button.qml

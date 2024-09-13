@@ -20,7 +20,7 @@ QtVirtualKeyboard.InputPanel {
 	property real toContentY
 	property real toHeight
 
-	function testCloseOnClick(item, itemMouseX, itemMouseY) {
+	function acceptMouseEvent(item, itemMouseX, itemMouseY) {
 		if (!Qt.inputMethod.visible || !item || !focusedItem) {
 			return false
 		}

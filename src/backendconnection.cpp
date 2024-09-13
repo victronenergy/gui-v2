@@ -553,6 +553,19 @@ void BackendConnection::setApplicationVisible(bool v)
 	}
 }
 
+bool BackendConnection::needsWasmKeyboardHandler() const
+{
+	return m_needsWasmKeyboardHandler;
+}
+
+void BackendConnection::setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler)
+{
+	if (m_needsWasmKeyboardHandler != needsWasmKeyboardHandler) {
+		m_needsWasmKeyboardHandler = needsWasmKeyboardHandler;
+		emit needsWasmKeyboardHandlerChanged();
+	}
+}
+
 QString BackendConnection::serviceUidForType(const QString &serviceType) const
 {
 	// Assumes the specified service has the equivalent of DeviceInstance = 0 on MQTT. That is,
