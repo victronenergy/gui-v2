@@ -34,6 +34,7 @@ class BackendConnection : public QObject
 	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged FINAL)
 	Q_PROPERTY(bool vrm READ isVrm WRITE setVrm NOTIFY vrmChanged FINAL)
 	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged FINAL)
+	Q_PROPERTY(bool needsWasmKeyboardHandler READ needsWasmKeyboardHandler WRITE setNeedsWasmKeyboardHandler NOTIFY needsWasmKeyboardHandlerChanged FINAL)
 
 public:
 	enum SourceType {
@@ -108,6 +109,9 @@ public:
 	bool isApplicationVisible() const;
 	void setApplicationVisible(bool v);
 
+	bool needsWasmKeyboardHandler() const;
+	void setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler);
+
 	Q_INVOKABLE QString serviceUidForType(const QString &serviceType) const;
 	Q_INVOKABLE QString serviceTypeFromUid(const QString &uid) const;
 	Q_INVOKABLE QString serviceUidFromName(const QString &serviceName, int deviceInstance) const;
@@ -133,6 +137,7 @@ Q_SIGNALS:
 	void idUserChanged();
 	void vrmChanged();
 	void applicationVisibleChanged();
+	void needsWasmKeyboardHandlerChanged();
 
 private Q_SLOTS:
 	void onNetworkConfigChanged(const QVariant var);
@@ -162,6 +167,7 @@ private:
 
 	bool m_vrm = false;
 	bool m_applicationVisible = true;
+	bool m_needsWasmKeyboardHandler = false;
 
 	State m_state = BackendConnection::State::Idle;
 	SourceType m_type = UnknownSource;
