@@ -89,10 +89,8 @@ ListItem {
 	function _aboutToFocus() {
 		// Intercept the event before the VKB opens and scroll the parent flickable to
 		// ensure the whole textfield is visible.
-		const textFieldVerticalMargin = root.height - textField.height
-		const textFieldBottom = root.height - textFieldVerticalMargin/2
 		Global.aboutToFocusTextField(textField,
-				textFieldBottom,
+				root,
 				root.flickable)
 	}
 

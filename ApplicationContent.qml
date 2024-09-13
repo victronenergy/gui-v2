@@ -98,7 +98,7 @@ Item {
 				mouse.accepted = true
 				pageManager.interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
 			}
-			if (Global.inputPanel && Global.inputPanel.testCloseOnClick(idleModeMouseArea, mouse.x, mouse.y)) {
+			if (keyboardHandlerLoader.item && keyboardHandlerLoader.item.testCloseOnClick(idleModeMouseArea, mouse.x, mouse.y)) {
 				mouse.accepted = true
 			}
 		}
@@ -136,14 +136,10 @@ Item {
 	// Note the VKB layer is the top-most layer, to allow the idleModeMouseArea beneath to call
 	// testCloseOnClick() when clicking outside of the focused text field, to auto-close the VKB.
 	Loader {
-		id: loader
+		id: keyboardHandlerLoader
 
 		asynchronous: true
 		active: Global.isGxDevice
 		source: "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
-		onLoaded: {
-			item.mainViewItem = mainView
-			Global.inputPanel = item
-		}
 	}
 }
