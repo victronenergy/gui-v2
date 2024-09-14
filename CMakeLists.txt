@@ -268,6 +268,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/NavBar.qml
     components/NavButton.qml
     components/NotificationDelegate.qml
+    components/ObjectAcConnection.qml
     components/ObjectModelMonitor.qml
     components/Page.qml
     components/PageGensetModel.qml
@@ -439,8 +440,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/PvInverters.qml
     data/SolarChargers.qml
     data/System.qml
-    data/SystemAc.qml
-    data/SystemDc.qml
+    data/SystemLoad.qml
     data/SystemSettings.qml
     data/Tanks.qml
     data/UnsupportedDevices.qml
@@ -480,7 +480,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarHistoryErrorModel.qml
     data/common/SolarTrackerDailyHistory.qml
     data/common/SystemBattery.qml
-    data/common/SystemData.qml
     data/common/Tank.qml
     data/common/TankModel.qml
     data/common/UnsupportedDevice.qml
@@ -577,7 +576,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageTzInfo.qml
     pages/settings/PageVrmDeviceInstances.qml
     pages/settings/debug/HubData.qml
-    pages/settings/debug/ObjectAcConnection.qml
     pages/settings/debug/PageDebug.qml
     pages/settings/debug/PageDebugVeQItems.qml
     pages/settings/debug/PagePowerDebug.qml
@@ -706,6 +704,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/cpuinfo.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
+    src/phasemodel.h
+    src/phasemodel.cpp
     src/productinfo.h
     src/quantityinfo.h
     src/quantityinfo.cpp
@@ -823,7 +823,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/PulseMetersImpl.qml
     data/dbus/PvInvertersImpl.qml
     data/dbus/SolarChargersImpl.qml
-    data/dbus/SystemImpl.qml
     data/dbus/SystemSettingsImpl.qml
     data/dbus/TanksImpl.qml
     data/dbus/UnsupportedDevicesImpl.qml
@@ -951,7 +950,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/PulseMetersImpl.qml
     data/mqtt/PvInvertersImpl.qml
     data/mqtt/SolarChargersImpl.qml
-    data/mqtt/SystemImpl.qml
     data/mqtt/SystemSettingsImpl.qml
     data/mqtt/TanksImpl.qml
     data/mqtt/UnsupportedDevicesImpl.qml

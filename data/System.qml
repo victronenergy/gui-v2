@@ -10,13 +10,29 @@ QtObject {
 	id: root
 
 	readonly property string serviceUid: BackendConnection.serviceUidForType("system")
+	readonly property int state: _systemState.isValid ? _systemState.value : VenusOS.System_State_Off
 
-	property int state
+	readonly property QtObject load: SystemLoad {
+		systemServiceUid: root.serviceUid
+	}
 
-	// Provides convenience properties for total AC/DC loads.
-	property QtObject loads: QtObject {
-		readonly property real acPower: ac.consumption.power
-		readonly property real dcPower: dc.power
+	readonly property QtObject dc: QtObject {
+		readonly property real power: _dcSystemPower.isValid ? _dcSystemPower.value : NaN
+		readonly property real current: (isNaN(power) || isNaN(voltage) || voltage === 0) ? NaN : power / voltage
+		readonly property real voltage: _dcBatteryVoltage.isValid ? _dcBatteryVoltage.value : NaN
+		readonly property real maximumPower: _maximumDcPower.value === undefined ? NaN : _maximumDcPower.value
+
+		readonly property VeQuickItem _dcSystemPower: VeQuickItem {
+			uid: root.serviceUid + "/Dc/System/Power"
+		}
+
+		readonly property VeQuickItem _dcBatteryVoltage: VeQuickItem {
+			uid: root.serviceUid + "/Dc/Battery/Voltage"
+		}
+
+		readonly property VeQuickItem _maximumDcPower: VeQuickItem {
+			uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
+		}
 	}
 
 	property QtObject solar: QtObject {
@@ -60,9 +76,6 @@ QtObject {
 		}
 	}
 
-	property SystemAc ac: SystemAc {}
-	property SystemDc dc: SystemDc {}
-
 	readonly property QtObject veBus: QtObject {
 		readonly property string serviceUid: BackendConnection.serviceUidFromName(_serviceName.value || "", _deviceInstance.value || 0)
 
@@ -70,9 +83,8 @@ QtObject {
 		readonly property VeQuickItem _deviceInstance: VeQuickItem { uid: root.serviceUid + "/VebusInstance" }
 	}
 
-	function reset() {
-		ac.reset()
-		dc.reset()
+	readonly property VeQuickItem _systemState: VeQuickItem {
+		uid: root.serviceUid + "/SystemState/State"
 	}
 
 	function systemStateToText(s) {

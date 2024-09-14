@@ -225,7 +225,7 @@ QtObject {
 		}
 		case Qt.Key_S:
 		{
-			Global.system.ac.consumption._l2L1OutSummed.setValue(!Global.system.ac.consumption._l2L1OutSummed.value)
+			Global.system.load._l2L1OutSummed.setValue(!!Global.system.load._l2L1OutSummed.value ? 0 : 1)
 			event.accepted = true
 			break
 		}
