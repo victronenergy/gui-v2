@@ -15,14 +15,8 @@ QtObject {
 
 	// Provides convenience properties for total AC/DC loads.
 	property QtObject loads: QtObject {
-		readonly property real power: Units.sumRealNumbers(acPower, dcPower)
 		readonly property real acPower: ac.consumption.power
 		readonly property real dcPower: dc.power
-
-		// Max AC power is calculated using com.victronenergy.vebus/Ac/Out/NominalInverterPower.
-		// Assume NominalInverterPower = 80% of max AC load power.
-		readonly property real maximumAcPower: (!Global.inverterChargers || isNaN(Global.inverterChargers.totalNominalInverterPower))
-				? NaN : Global.inverterChargers.totalNominalInverterPower * (100 / 80)
 	}
 
 	property QtObject solar: QtObject {
