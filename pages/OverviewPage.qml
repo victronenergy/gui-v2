@@ -40,7 +40,7 @@ SwipeViewPage {
 			+ Global.acInputs.input1Info.connected
 			+ Global.acInputs.input2Info.source
 			+ Global.acInputs.input2Info.connected
-			+ (Global.dcLoads.model.count === 0 || isNaN(Global.system.loads.dcPower) ? 0 : 1)
+			+ (Global.dcLoads.model.count === 0 || isNaN(Global.system.dc.power) ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
 			+ (Global.evChargers.model.count === 0 ? 0 : 1)
 			+ (Global.pvInverters.model.count === 0 ? 0 : 1)
@@ -133,7 +133,7 @@ SwipeViewPage {
 		if (!!evChargerWidget) {
 			evChargerWidget.size = VenusOS.OverviewWidget_Size_L
 		}
-		dcLoadsWidget.size = Global.dcLoads.model.count > 0 || !isNaN(Global.system.loads.dcPower)
+		dcLoadsWidget.size = Global.dcLoads.model.count > 0 || !isNaN(Global.system.dc.power)
 				? (!!evChargerWidget ? VenusOS.OverviewWidget_Size_XS : VenusOS.OverviewWidget_Size_L)
 				: VenusOS.OverviewWidget_Size_Zero
 		acLoadsWidget.size = dcLoadsWidget.size === VenusOS.OverviewWidget_Size_Zero
@@ -346,7 +346,7 @@ SwipeViewPage {
 		if (Global.evChargers.model.count > 0) {
 			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
 		}
-		if (Global.dcLoads.model.count > 0 || !isNaN(Global.system.loads.dcPower)) {
+		if (Global.dcLoads.model.count > 0 || !isNaN(Global.system.dc.power)) {
 			widgets.push(dcLoadsWidget)
 		}
 		_rightWidgets = widgets
@@ -684,9 +684,9 @@ SwipeViewPage {
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
-				&& !isNaN(Global.system.loads.acPower)
-				&& Global.system.loads.acPower > 0
-				&& Math.abs(Global.system.loads.acPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+				&& !isNaN(Global.system.load.ac.power)
+				&& Global.system.load.ac.power > 0
+				&& Math.abs(Global.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -745,9 +745,9 @@ SwipeViewPage {
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
-				&& !isNaN(Global.system.loads.dcPower)
-				&& Global.system.loads.dcPower > 0
-				&& Math.abs(Global.system.loads.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+				&& !isNaN(Global.system.dc.power)
+				&& Global.system.dc.power > 0
+				&& Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}

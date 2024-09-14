@@ -13,15 +13,15 @@ AcWidget {
 	title: qsTrId("overview_widget_acloads_title")
 	icon.source: "qrc:/images/acloads.svg"
 	type: VenusOS.OverviewWidget_Type_AcLoads
-	quantityLabel.dataObject: Global.system.ac.consumption
-	phaseCount: Global.system.ac.consumption.phases.count
+	quantityLabel.dataObject: Global.system.load.ac
+	phaseCount: Global.system.load.ac.phases.count
 	enabled: false
 	extraContentLoader.sourceComponent: ThreePhaseDisplay {
-		model: Global.system.ac.consumption.phases
+		model: Global.system.load.ac.phases
 		widgetSize: root.size
 		valueType: VenusOS.Gauges_ValueType_RisingPercentage
 		phaseModelProperty: "current"
-		maximumValue: Global.system.ac.consumption.maximumCurrent
+		maximumValue: Global.system.load.maximumAcCurrent
 	}
-	extraContentLoader.active: root.phaseCount > 1 || Global.system.ac.consumption.l2AndL1OutSummed
+	extraContentLoader.active: root.phaseCount > 1 || Global.system.load.ac.l2AndL1OutSummed
 }
