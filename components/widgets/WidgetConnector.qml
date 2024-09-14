@@ -15,6 +15,9 @@ Item {
 	property int startLocation
 	property int endLocation
 
+	property int startOffsetY
+	property int midpointOffsetX
+
 	property int animationMode: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	property alias expanded: connectorPath.expanded
 	property bool animateGeometry
@@ -171,11 +174,11 @@ Item {
 			// y and height change depending on compact/expanded state
 			if (expandedGeometry) {
 				expandedY = Math.min(startY, endY)
-				startAnchorExpandedY = startY - expandedY
+				startAnchorExpandedY = startY - expandedY + root.startOffsetY
 				endAnchorExpandedY = endY - expandedY
 			} else {
 				compactY = Math.min(startY, endY)
-				startAnchorCompactY = startY - compactY
+				startAnchorCompactY = startY - compactY + root.startOffsetY
 				endAnchorCompactY = endY - compactY
 
 				// We could also set a different electron travel distance in expanded mode, but it
@@ -184,6 +187,8 @@ Item {
 				_electronTravelDistance = width + compactHeight
 			}
 		}
+
+		midpointOffsetX: root.midpointOffsetX
 
 		Shape {
 			id: connectorShape

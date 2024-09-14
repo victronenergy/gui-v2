@@ -257,6 +257,7 @@
     "geometry_overviewPage_connector_animationPowerThreshold": 30,
     "geometry_overviewPage_connector_anchor_width": 6,
     "geometry_overviewPage_connector_anchor_height": 12,
+    "geometry_overviewPage_connector_anchor_spacing": 4,
 
     "geometry_overviewPage_layout_expanded_bottomMargin": 40,
 
