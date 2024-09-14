@@ -11,17 +11,19 @@ Image {
 	id: root
 
 	property int location
+	property int offsetY
 
 	x: location === VenusOS.WidgetConnector_Location_Left
 		? -width
 		: location === VenusOS.WidgetConnector_Location_Right
 		  ? parent.width
 		  : parent.width/2 - width/2
-	y: location === VenusOS.WidgetConnector_Location_Top
-	   ? -height
-	   : location === VenusOS.WidgetConnector_Location_Bottom
-		 ? parent.height
-		 : parent.height/2 - height/2
+	y: offsetY +
+	   (location === VenusOS.WidgetConnector_Location_Top
+		   ? -height
+		   : location === VenusOS.WidgetConnector_Location_Bottom
+			 ? parent.height
+			 : parent.height/2 - height/2)
 
 	source: location === VenusOS.WidgetConnector_Location_Left
 			|| location === VenusOS.WidgetConnector_Location_Right

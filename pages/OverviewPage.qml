@@ -760,12 +760,18 @@ SwipeViewPage {
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 
+		// The anchor for the connector to the Inverter/Charger, positioned on the vertical center
+		// of the widget.
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
 		}
 
+		// The anchor for the connector to the EVCS widget, positioned slightly lower to provide
+		// more space between the different connector lines.
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Bottom
+			id: acLoadsToEvcsStartAnchor
+			location: VenusOS.WidgetConnector_Location_Left
+			offsetY: height + Theme.geometry_overviewPage_connector_anchor_spacing
 			visible: Global.evChargers.model.count > 0
 		}
 	}
@@ -794,17 +800,25 @@ SwipeViewPage {
 			connectors: [ evcsConnector ]
 
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Top
+				location: VenusOS.WidgetConnector_Location_Left
 			}
 
 			WidgetConnector {
 				id: evcsConnector
 
+				// The widget anchors of the AC load and EVCS widgets are vertically aligned, but
+				// the connector line should not travel vertically in a straight line. Instead, move
+				// the midpoint of this line to the left, by a distance that is one-quarter of the
+				// way between the EVCS widget and the centre widgets.
+				readonly property real connectorXDistance: (evcsWidget.x - (inverterChargerWidget.x + inverterChargerWidget.width)) / 4
+
 				parent: root
 				startWidget: acLoadsWidget
-				startLocation: VenusOS.WidgetConnector_Location_Bottom
+				startLocation: VenusOS.WidgetConnector_Location_Left
+				startOffsetY: acLoadsToEvcsStartAnchor.offsetY
 				endWidget: evcsWidget
-				endLocation: VenusOS.WidgetConnector_Location_Top
+				endLocation: VenusOS.WidgetConnector_Location_Left
+				midpointOffsetX: -connectorXDistance
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
