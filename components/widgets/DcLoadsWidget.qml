@@ -10,7 +10,15 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
-	onClicked: Global.pageManager.pushPage(consumptionPageComponent, { "title": root.title })
+	function _showSettingsPage(device) {
+		if (BackendConnection.serviceTypeFromUid(device.serviceUid) === "dcdc") {
+			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcDcConverter.qml",
+					{ "title": device.name, "bindPrefix": device.serviceUid })
+		} else {
+			  Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",
+					{ "title": device.name, "bindPrefix": device.serviceUid })
+		}
+	}
 
 	//% "DC Loads"
 	title: qsTrId("overview_widget_dcloads_title")
@@ -20,8 +28,16 @@ OverviewWidget {
 
 	quantityLabel.dataObject: Global.system.dc
 
+	onClicked: {
+		if (Global.dcLoads.model.count > 1) {
+			Global.pageManager.pushPage(deviceListPageComponent, { "title": root.title })
+		} else {
+			root._showSettingsPage(Global.dcLoads.model.firstObject)
+		}
+	}
+
 	Component {
-		id: consumptionPageComponent
+		id: deviceListPageComponent
 
 		Page {
 			GradientListView {
@@ -47,15 +63,7 @@ OverviewWidget {
 							fill: parent
 							bottomMargin: deviceDelegate.spacing
 						}
-						onClicked: {
-							if (BackendConnection.serviceTypeFromUid(device.serviceUid) === "dcdc") {
-								Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcDcConverter.qml",
-										{ "title": device.name, "bindPrefix": device.serviceUid })
-							} else {
-								  Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",
-										{ "title": device.name, "bindPrefix": device.serviceUid })
-							}
-						}
+						onClicked: root._showSettingsPage(device)
 					}
 
 					CP.ColorImage {
