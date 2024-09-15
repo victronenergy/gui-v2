@@ -18,6 +18,7 @@ QtObject {
 		for (let i = 0; i < serviceTypes.length; ++i) {
 			createDcLoad({ serviceType: serviceTypes[i]})
 		}
+		updateDcValues.restart()
 	}
 
 	function createDcLoad(props) {
@@ -37,6 +38,48 @@ QtObject {
 			}
 		}
 		_createdObjects.push(dcLoad)
+	}
+
+	property Connections mockConn: Connections {
+		target: Global.mockDataSimulator || null
+
+		function onSetSystemRequested(config) {
+			if (config) {
+				while (_createdObjects.length > 0) {
+					let obj = _createdObjects.pop()
+					obj.deviceInstance = -1
+					obj.destroy()
+				}
+				if (config.dc) {
+					for (let i = 0; i < config.dc.serviceTypes.length; ++i) {
+						createDcLoad({ serviceType: config.dc.serviceTypes[i]})
+					}
+				} else {
+					Global.mockDataSimulator.setMockValue("com.victronenergy.system/Dc/System/Power", NaN)
+					Global.mockDataSimulator.setMockValue("com.victronenergy.system/Dc/Battery/Voltage", NaN)
+				}
+				updateDcValues.restart()
+			}
+		}
+	}
+
+	property Timer updateDcValues: Timer {
+		running: Global.mockDataSimulator.timersActive
+		interval: 1000
+		repeat: true
+		triggeredOnStart: true
+
+		onTriggered: {
+			let totalPower = NaN
+			for (let i = 0; i < Global.dcLoads.model.count; ++i) {
+				const dcLoad = Global.dcLoads.model.deviceAt(i)
+				totalPower = Units.sumRealNumbers(totalPower, dcLoad.power)
+			}
+
+			Global.mockDataSimulator.setMockValue("com.victronenergy.system/Dc/System/Power", totalPower)
+			const voltage = isNaN(totalPower) ? NaN : 20 + Math.floor(Math.random() * 10)
+			Global.mockDataSimulator.setMockValue("com.victronenergy.system/Dc/Battery/Voltage", voltage)
+		}
 	}
 
 	property Component dcLoadComponent: Component {

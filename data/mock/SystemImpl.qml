@@ -38,14 +38,6 @@ QtObject {
 					randomizeAcValues.running = false
 					root.setAcLoadPhaseCount(0)
 				}
-
-				if (config.dc) {
-					randomizeDcValues.restart()  // immediately provide valid values for the new configuration
-				} else {
-					randomizeDcValues.running = false
-					root.setMockValue("/Dc/System/Power", NaN)
-					root.setMockValue("/Dc/Battery/Voltage", NaN)
-				}
 			}
 		}
 	}
@@ -93,18 +85,6 @@ QtObject {
 	}
 
 	//--- DC data ---
-
-	property Timer randomizeDcValues: Timer {
-		running: Global.mockDataSimulator.timersActive
-		interval: 1000
-		repeat: true
-		triggeredOnStart: true
-
-		onTriggered: {
-			root.setMockValue("/Dc/System/Power", Math.random() * 600)
-			root.setMockValue("/Dc/Battery/Voltage", 20 + Math.floor(Math.random() * 10))
-		}
-	}
 
 	readonly property VeQuickItem _maximumDcPower: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
