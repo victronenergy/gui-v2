@@ -5,8 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-// NOTE: wait for https://github.com/victronenergy/gui-v2/issues/1350 to be merged
-// import QZXing
+import QZXing
 
 Page {
 	id: root
@@ -172,8 +171,7 @@ Page {
 				horizontalAlignment: Text.AlignHCenter
 			}
 
-			// NOTE: wait for https://github.com/victronenergy/gui-v2/issues/1350 to be merged
-			/*Rectangle {
+			Rectangle {
 				id: qrCodeRect
 				color: Theme.color_page_background
 				width: 200
@@ -188,13 +186,13 @@ Page {
 						"?correctionLevel=M" +
 						"&format=qrcode"
 					) : ""
-					sourceSize.width: Theme.geometry_listItem_height
-					sourceSize.height: Theme.geometry_listItem_height
+					sourceSize.width: 200
+					sourceSize.height: 200
 
 					width: 200
 					height: 200
 				}
-			}*/
+			}
 
 			ListTextField {
 				//% "Machine name"
