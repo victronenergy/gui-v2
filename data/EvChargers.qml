@@ -13,6 +13,11 @@ QtObject {
 	property real current: NaN
 	property real energy: NaN
 
+	property int acInputPositionCount   // Chargers with input position, i.e. connected to (non-essential) AC loads
+	property real acInputPositionPower: NaN // The total power for chargers with an input position
+	property int acOutputPositionCount  // Chargers with output position, i.e. connected to Essential loads
+	property real acOutputPositionPower: NaN // The total power for chargers with an output position
+
 	property DeviceModel model: DeviceModel {
 		modelId: "evChargers"
 	}
@@ -32,32 +37,41 @@ QtObject {
 	}
 
 	function updateTotals() {
+		_measurementUpdates.start()
+	}
+
+	function _doUpdateTotals() {
 		let totalPower = NaN
 		let totalEnergy = NaN
 		let overallCurrent = NaN // current cannot be summed, so it is NaN when > 1 charger
+
+		let totalInputCount = 0
+		let totalInputPower = NaN
+		let totalOutputCount = 0
+		let totalOutputPower = NaN
+
 		for (let i = 0; i < model.count; ++i) {
 			const evCharger = model.deviceAt(i)
-			const p = evCharger.power
-			if (!isNaN(p)) {
-				if (isNaN(totalPower)) {
-					totalPower = 0
-				}
-				totalPower += p
-			}
-			const e = evCharger.energy
-			if (!isNaN(e)) {
-				if (isNaN(totalEnergy)) {
-					totalEnergy = 0
-				}
-				totalEnergy += e
-			}
+			totalPower = Units.sumRealNumbers(totalPower, evCharger.power)
+			totalEnergy = Units.sumRealNumbers(totalEnergy, evCharger.energy)
 			if (model.count === 1) {
 				overallCurrent = evCharger.current
+			}
+			if (evCharger.position === VenusOS.PvInverter_Position_ACInput) {
+				totalInputCount++
+				totalInputPower = Units.sumRealNumbers(totalInputPower, evCharger.power)
+			} else if (evCharger.position === VenusOS.PvInverter_Position_ACOutput) {
+				totalOutputCount++
+				totalOutputPower = Units.sumRealNumbers(totalOutputPower, evCharger.power)
 			}
 		}
 		power = totalPower
 		current = overallCurrent
 		energy = totalEnergy
+		acInputPositionCount = totalInputCount
+		acInputPositionPower = totalInputPower
+		acOutputPositionCount = totalOutputCount
+		acOutputPositionPower = totalOutputPower
 	}
 
 	function reset() {
@@ -149,6 +163,13 @@ QtObject {
 		default:
 			return ""
 		}
+	}
+
+	// Only update the totals periodically (and only when they change) to avoid excessive changes,
+	// especially on multi-phase systems.
+	readonly property Timer _measurementUpdates: Timer {
+		interval: 1000
+		onTriggered: root._doUpdateTotals()
 	}
 
 	Component.onCompleted: Global.evChargers = root

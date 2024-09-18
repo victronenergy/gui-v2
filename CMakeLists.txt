@@ -409,6 +409,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/DcGeneratorWidget.qml
     components/widgets/DcInputWidget.qml
     components/widgets/DcLoadsWidget.qml
+    components/widgets/EssentialLoadsWidget.qml
     components/widgets/EvcsWidget.qml
     components/widgets/InverterChargerWidget.qml
     components/widgets/OverviewWidget.qml
@@ -1078,6 +1079,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/ess.svg
         images/freshWater.svg
         images/icon_black_water_24.svg
+        images/icon_CL_24.svg
         images/icon_fresh_water_24.svg
         images/icon_raw_water_24.svg
         images/icon_waste_water_24.svg

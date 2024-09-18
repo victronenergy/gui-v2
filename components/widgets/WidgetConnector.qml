@@ -16,6 +16,7 @@ Item {
 	property int endLocation
 
 	property int startOffsetY
+	property int endOffsetY
 	property int midpointOffsetX
 	property int straighten: VenusOS.WidgetConnector_Straighten_None
 
@@ -181,11 +182,11 @@ Item {
 			if (expandedGeometry) {
 				expandedY = Math.min(startY, endY)
 				startAnchorExpandedY = startY - expandedY + root.startOffsetY
-				endAnchorExpandedY = endY - expandedY
+				endAnchorExpandedY = endY - expandedY + root.endOffsetY
 			} else {
 				compactY = Math.min(startY, endY)
 				startAnchorCompactY = startY - compactY + root.startOffsetY
-				endAnchorCompactY = endY - compactY
+				endAnchorCompactY = endY - compactY + root.endOffsetY
 
 				// We could also set a different electron travel distance in expanded mode, but it
 				// makes little difference visually and results in more Repeater model changes.

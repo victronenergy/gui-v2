@@ -230,6 +230,54 @@ QtObject {
 			name: "Grid disconnected",
 			acInputs: [ { source: VenusOS.AcInputs_InputSource_Grid, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 0 }, emptyAcInput, ],
 		},
+		{
+			name: "AC Loads + Essential Loads; EVCS connected to AC Loads only",
+			system: { showInputLoads: true, hasAcOutSystem: 1, ac: { phaseCount: 1 }, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACInput },
+				]
+			}
+		},
+		{
+			name: "AC Loads + Essential Loads; EVCS connected to Essential Loads only",
+			system: { showInputLoads: true, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACOutput },
+				]
+			}
+		},
+		{
+			name: "AC Loads + Essential Loads; EVCS connected to AC Loads + Essential Loads",
+			system: { showInputLoads: true, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACOutput },
+				]
+			}
+		},
+		{
+			name: "AC Loads only because AC-Out disabled; EVCS connected to AC Loads only",
+			system: { showInputLoads: true, hasAcOutSystem: 0, ac: {}, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACOutput },
+				]
+			}
+		},
+		{
+			name: "AC Loads only because showInputLoads=false; EVCS connected to Inverter/Charger",
+			system: { showInputLoads: false, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACOutput },
+				]
+			}
+		},
 	]
 
 	function configCount() {

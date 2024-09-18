@@ -23,6 +23,7 @@ QtObject {
 	signal setSolarRequested(config : var)
 	signal setSystemRequested(config : var)
 	signal setTanksRequested(config : var)
+	signal setShowInputLoadsRequested(split: bool)
 	signal addDummyNotification(isAlarm : bool)
 
 	readonly property var _configs: ({
@@ -225,13 +226,16 @@ QtObject {
 			event.accepted = true
 			break
 		}
+		case Qt.Key_Q:
+			root.setShowInputLoadsRequested(!Global.system.showInputLoads)
+			event.accepted = true
+			break
 		case Qt.Key_S:
 		{
 			Global.system.load._l2L1OutSummed.setValue(!!Global.system.load._l2L1OutSummed.value ? 0 : 1)
 			event.accepted = true
 			break
 		}
-
 		case Qt.Key_T:
 			root.timersActive = !root.timersActive
 			pageConfigTitle.text = "Timers on: " + root.timersActive

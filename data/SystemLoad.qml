@@ -13,8 +13,6 @@ QtObject {
 
 	readonly property real maximumAcCurrent: _maximumAcCurrent.isValid ? _maximumAcCurrent.value : NaN
 
-	//--- AC data ---
-
 	readonly property ObjectAcConnection ac: ObjectAcConnection {
 		l2AndL1OutSummed: _l2L1OutSummed.isValid && (_l2L1OutSummed.value !== 0)
 		isAcOutput: true
