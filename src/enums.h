@@ -147,6 +147,13 @@ public:
 	};
 	Q_ENUM(WidgetConnector_Location)
 
+	enum WidgetConnector_Straighten {
+		WidgetConnector_Straighten_None,
+		WidgetConnector_Straighten_StartToEnd,
+		WidgetConnector_Straighten_EndToStart
+	};
+	Q_ENUM(WidgetConnector_Straighten)
+
 	enum WidgetConnector_AnimationMode {
 		WidgetConnector_AnimationMode_NotAnimated,
 		WidgetConnector_AnimationMode_StartToEnd,

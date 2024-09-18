@@ -17,6 +17,7 @@ Item {
 
 	property int startOffsetY
 	property int midpointOffsetX
+	property int straighten: VenusOS.WidgetConnector_Straighten_None
 
 	property int animationMode: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	property alias expanded: connectorPath.expanded
@@ -160,16 +161,21 @@ Item {
 					: Theme.geometry_overviewPage_connector_anchor_width
 
 			// Work out the start and end of the path depending on the direction and orientation.
-			const startY = startLocation === VenusOS.WidgetConnector_Location_Top
+			let startY = startLocation === VenusOS.WidgetConnector_Location_Top
 				  ? startWidgetRect.y - anchorHeight
 				  : startLocation === VenusOS.WidgetConnector_Location_Bottom
 					? startWidgetRect.y + startWidgetRect.height + anchorHeight
 					: startWidgetRect.y + startWidgetRect.height/2  // Left/Right location
-			const endY = endLocation === VenusOS.WidgetConnector_Location_Top
+			let endY = endLocation === VenusOS.WidgetConnector_Location_Top
 				  ? endWidgetRect.y - anchorHeight
 				  : endLocation === VenusOS.WidgetConnector_Location_Bottom
 					? endWidgetRect.y + endWidgetRect.height + anchorHeight
 					: endWidgetRect.y + endWidgetRect.height/2  // Left/Right location
+			if (root.straighten === VenusOS.WidgetConnector_Straighten_StartToEnd) {
+				endY = startY
+			} else if (root.straighten === VenusOS.WidgetConnector_Straighten_EndToStart) {
+				startY = endY
+			}
 
 			// y and height change depending on compact/expanded state
 			if (expandedGeometry) {

@@ -663,8 +663,11 @@ SwipeViewPage {
 					|| Global.pvInverters.model.count > 0
 		}
 		WidgetConnectorAnchor {
+			id: inverterToAcLoadsAnchor
 			location: VenusOS.WidgetConnector_Location_Right
 			visible: inverterToAcLoadsConnector.visible
+			y: inverterToAcLoadsConnector.straighten === VenusOS.WidgetConnector_Straighten_None ? defaultY
+				   : acLoadsToInverterAnchor.y
 		}
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Bottom
@@ -676,6 +679,7 @@ SwipeViewPage {
 
 		startWidget: inverterChargerWidget
 		startLocation: VenusOS.WidgetConnector_Location_Right
+		straighten: _rightWidgets.length === 1 ? VenusOS.WidgetConnector_Straighten_None : VenusOS.WidgetConnector_Straighten_EndToStart
 		endWidget: acLoadsWidget
 		endLocation: VenusOS.WidgetConnector_Location_Left
 		expanded: root._expandLayout
@@ -763,6 +767,7 @@ SwipeViewPage {
 		// The anchor for the connector to the Inverter/Charger, positioned on the vertical center
 		// of the widget.
 		WidgetConnectorAnchor {
+			id: acLoadsToInverterAnchor
 			location: VenusOS.WidgetConnector_Location_Left
 		}
 
