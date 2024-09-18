@@ -40,7 +40,8 @@ QtObject {
 	property bool isAcOutput: false
 	property bool l2AndL1OutSummed: false
 
-	readonly property real power: _totalPowerTimer.running ? _power : NaN
+	readonly property real power: hasPower ? _power : NaN
+	readonly property bool hasPower: powerL1.isValid || powerL2.isValid || powerL3.isValid
 	property real _power: NaN
 
 	// multi-phase systems don't have a total current
@@ -56,8 +57,7 @@ QtObject {
 	// changes too often on system with more than one phase
 	readonly property Timer _totalPowerTimer: Timer {
 		interval: 1000
-		running: BackendConnection.applicationVisible
-				&& (powerL1.isValid || powerL2.isValid || powerL3.isValid)
+		running: BackendConnection.applicationVisible && root.hasPower
 		repeat: true
 		onTriggered: {
 			_power = (powerL1.value || 0) + (powerL2.value || 0) + (powerL3.value || 0)

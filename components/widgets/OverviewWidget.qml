@@ -11,7 +11,7 @@ Rectangle {
 
 	property int type: VenusOS.OverviewWidget_Type_Unknown
 	property int size: VenusOS.OverviewWidget_Size_M
-	property bool preferLargeSize: true
+	property int preferredSize: VenusOS.OverviewWidget_PreferredSize_Any
 
 	property alias icon: widgetHeader.icon
 	property alias title: widgetHeader.title

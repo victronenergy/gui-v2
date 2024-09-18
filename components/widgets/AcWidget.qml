@@ -13,7 +13,7 @@ OverviewWidget {
 	readonly property alias extraContentLoader: extraContentLoader
 
 	quantityLabel.visible: !!quantityLabel.dataObject
-	preferLargeSize: phaseCount > 1
+	preferredSize: phaseCount > 1 ? VenusOS.OverviewWidget_PreferredSize_PreferLarge : VenusOS.OverviewWidget_PreferredSize_Any
 
 	extraContentChildren: Loader {
 		id: extraContentLoader
@@ -46,7 +46,7 @@ OverviewWidget {
 				when: root.size === VenusOS.OverviewWidget_Size_S
 				PropertyChanges {
 					target: root.quantityLabel
-					font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
+					font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_smallSizeWithExtraContent
 				}
 				PropertyChanges {
 					target: extraContentLoader

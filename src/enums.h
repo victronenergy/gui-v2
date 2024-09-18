@@ -125,6 +125,7 @@ public:
 		OverviewWidget_Type_Battery,
 		OverviewWidget_Type_AcLoads,
 		OverviewWidget_Type_DcLoads,
+		OverviewWidget_Type_EssentialLoads,
 		OverviewWidget_Type_Evcs
 	};
 	Q_ENUM(OverviewWidget_Type)
@@ -138,6 +139,13 @@ public:
 		OverviewWidget_Size_XL
 	};
 	Q_ENUM(OverviewWidget_Size)
+
+	enum OverviewWidget_PreferredSize {
+		OverviewWidget_PreferredSize_Any,
+		OverviewWidget_PreferredSize_PreferLarge,
+		OverviewWidget_PreferredSize_LargeOnly
+	};
+	Q_ENUM(OverviewWidget_PreferredSize)
 
 	enum WidgetConnector_Location {
 		WidgetConnector_Location_Left,
@@ -626,7 +634,8 @@ public:
 
 	enum Evcs_Position {
 		Evcs_Position_ACOutput,
-		Evcs_Position_ACInput
+		Evcs_Position_ACInput,
+		Evcs_Position_Unknown = 100
 	};
 	Q_ENUM(Evcs_Position)
 

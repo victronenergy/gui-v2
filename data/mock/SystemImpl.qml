@@ -27,6 +27,16 @@ QtObject {
 	property Connections mockConn: Connections {
 		target: Global.mockDataSimulator || null
 
+		function onSetShowInputLoadsRequested(showInputLoads) {
+			if (showInputLoads) {
+				root.setMockValue("/Ac/Grid/DeviceType", 1)  // Set to any valid value for testing
+				Global.mockDataSimulator.setMockValue(Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem", 1)
+			} else {
+				root.setMockValue("/Ac/Grid/DeviceType", undefined)
+				Global.mockDataSimulator.setMockValue(Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem", 0)
+			}
+		}
+
 		function onSetSystemRequested(config) {
 			root.setMockValue("/SystemState/State", config?.state || VenusOS.System_State_Off)
 
@@ -37,6 +47,12 @@ QtObject {
 				} else {
 					randomizeAcValues.running = false
 					root.setAcLoadPhaseCount(0)
+				}
+				if (config.showInputLoads !== undefined) {
+					onSetShowInputLoadsRequested(config.showInputLoads)
+				}
+				if (config.hasAcOutSystem !== undefined) {
+					Global.mockDataSimulator.setMockValue(Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem", config.hasAcOutSystem ? 1 : 0)
 				}
 			}
 		}

@@ -13,6 +13,7 @@ Device {
 	readonly property int mode: _mode.value === undefined ? -1 : _mode.value
 	readonly property bool connected: _connected.value === 1
 	readonly property int chargingTime: _chargingTime.value || 0
+	readonly property int position: _position.isValid ? _position.value : VenusOS.Evcs_Position_Unknown
 
 	readonly property real energy: _energy.value === undefined ? NaN : _energy.value
 	readonly property real power: _power.value === undefined ? NaN : _power.value
@@ -54,7 +55,7 @@ Device {
 
 	readonly property VeQuickItem _power: VeQuickItem {
 		uid: evCharger.serviceUid + "/Ac/Power"
-		onValueChanged: Qt.callLater(Global.evChargers.updateTotals)
+		onValueChanged: Global.evChargers.updateTotals()
 	}
 
 	readonly property VeQuickItem _chargingTime: VeQuickItem {
@@ -67,7 +68,7 @@ Device {
 
 	readonly property VeQuickItem _current: VeQuickItem {
 		uid: evCharger.serviceUid + "/Current"
-		onValueChanged: Qt.callLater(Global.evChargers.updateTotals)
+		onValueChanged: Global.evChargers.updateTotals()
 	}
 
 	readonly property VeQuickItem _maxCurrent: VeQuickItem {
@@ -80,6 +81,11 @@ Device {
 
 	readonly property VeQuickItem _status: VeQuickItem {
 		uid: evCharger.serviceUid + "/Status"
+	}
+
+	readonly property VeQuickItem _position: VeQuickItem {
+		uid: evCharger.serviceUid + "/Position"
+		onValueChanged: Global.evChargers.updateTotals()
 	}
 
 	onValidChanged: {

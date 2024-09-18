@@ -12,6 +12,12 @@ QtObject {
 	readonly property string serviceUid: BackendConnection.serviceUidForType("system")
 	readonly property int state: _systemState.isValid ? _systemState.value : VenusOS.System_State_Off
 
+	readonly property bool hasGridMeter: _gridDeviceType.isValid
+	readonly property bool hasAcOutSystem: _hasAcOutSystem.isValid && _hasAcOutSystem.value === 1
+	readonly property bool hasVebusEss: _systemType.value === "ESS" || _systemType.value === "Hub-4"
+	readonly property bool showInputLoads: load.acIn.hasPower
+			&& (hasVebusEss ? (hasGridMeter && _withoutGridMeter.value === 0) : hasGridMeter)
+
 	readonly property QtObject load: SystemLoad {
 		systemServiceUid: root.serviceUid
 	}
@@ -85,6 +91,22 @@ QtObject {
 
 	readonly property VeQuickItem _systemState: VeQuickItem {
 		uid: root.serviceUid + "/SystemState/State"
+	}
+
+	readonly property VeQuickItem _systemType: VeQuickItem {
+		uid: root.serviceUid + "/SystemType"
+	}
+
+	readonly property VeQuickItem _gridDeviceType: VeQuickItem {
+		uid: root.serviceUid + "/Ac/Grid/DeviceType"
+	}
+
+	readonly property VeQuickItem _hasAcOutSystem: VeQuickItem {
+		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
+	}
+
+	readonly property VeQuickItem _withoutGridMeter: VeQuickItem {
+		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
 	}
 
 	function systemStateToText(s) {
