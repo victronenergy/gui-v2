@@ -115,13 +115,13 @@ ObjectModel {
 			return errorCodes.length ? errorCodes : CommonWords.none_errors
 		}
 
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: defaultAllowed && _dataItem.isValid
 		enabled: secondaryText !== CommonWords.none_errors
 
 		onClicked: Global.notificationLayer.popAndGoToNotifications()
 
 		VeQuickItem {
-			id: dataItem
+			id: _dataItem
 
 			uid: root.bindPrefix + "/Error/0/Id"
 		}
@@ -339,7 +339,7 @@ ObjectModel {
 							dataItem.uid: root.bindPrefix + "/Settings/ChargeVoltage"
 							decimals: 1
 							stepSize: 0.1
-							suffix: Units.defaultUnitString(VenusOS.Units_Volt)
+							suffix: Units.defaultUnitString(VenusOS.Units_Volt_DC)
 							allowed: defaultAllowed && dataItem.isValid
 							enabled: bmsControlled.dataItem.value === 0
 						}
