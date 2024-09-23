@@ -46,9 +46,8 @@ BackendConnection::State BackendConnection::state() const
 
 void BackendConnection::setState(State backendConnectionState)
 {
-	qDebug() << "BackendConnection state:" << backendConnectionState;
-
 	if (m_state != backendConnectionState) {
+		qDebug() << "BackendConnection state:" << backendConnectionState;
 		m_state = backendConnectionState;
 		emit stateChanged();
 	}
@@ -207,7 +206,11 @@ void BackendConnection::securityProtocolChanged()
 
 void BackendConnection::reloadPage()
 {
-	emscripten_run_script("reload();");
+	if (isVrm()) {
+		emscripten_run_script("location.reload();");
+	} else {
+		emscripten_run_script("reload();");
+	}
 }
 
 #else
