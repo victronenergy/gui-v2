@@ -212,11 +212,11 @@ Page {
 
 			ListSpinBox {
 				text: "Spin box"
-				value: 5.789
+				value: 1.2
 				decimals: 2
 				stepSize: Math.pow(10, -decimals)
-				from: 5
-				to: 10
+				from: 1
+				to: 1.5
 			}
 
 			ListDateSelector {
