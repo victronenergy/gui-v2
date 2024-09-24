@@ -74,7 +74,7 @@ ObjectModel {
 
 		VeQuickItem {
 			id: activeCondition
-			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/RunningByCondition" : ""
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/RunningByConditionCode" : ""
 		}
 
 		VeQuickItem {
