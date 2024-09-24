@@ -13,8 +13,8 @@ ModalDialog {
 	property string suffix
 	property int decimals
 
-	property int from
-	property int to
+	property real from
+	property real to
 	property real stepSize
 	property var presets: []
 

@@ -13,8 +13,8 @@ ListButton {
 	property alias value: rangeModel.value
 	property string suffix
 	property int decimals
-	property int from: !isNaN(dataItem.min) ? dataItem.min : 0
-	property int to: !isNaN(dataItem.max) ? dataItem.max : Global.int32Max / Math.pow(10, decimals) // qml int is a signed 32 bit value
+	property real from: !isNaN(dataItem.min) ? dataItem.min : 0
+	property real to: !isNaN(dataItem.max) ? dataItem.max : Global.int32Max / Math.pow(10, decimals) // qml int is a signed 32 bit value
 	property real stepSize: 1
 	property var presets: []
 
