@@ -45,11 +45,6 @@ SwipeViewPage {
 				page: "/pages/settings/PageTzInfo.qml"
 			},
 			{
-				//% "Remote Console"
-				text: qsTrId("settings_remote_console"),
-				page: "/pages/settings/PageSettingsRemoteConsole.qml"
-			},
-			{
 				//% "System setup"
 				text: qsTrId("settings_system_setup"),
 				page: "/pages/settings/PageSettingsSystem.qml"

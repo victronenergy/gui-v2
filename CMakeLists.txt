@@ -529,7 +529,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsModbusTcpServices.qml
     pages/settings/PageSettingsRelay.qml
     pages/settings/PageSettingsRelayTempSensors.qml
-    pages/settings/PageSettingsRemoteConsole.qml
     pages/settings/PageSettingsRootfsSelect.qml
     pages/settings/PageSettingsRvcDevice.qml
     pages/settings/PageSettingsRvcDeviceConfiguration.qml
