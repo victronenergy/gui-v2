@@ -140,6 +140,7 @@ Page {
 				enableDescription: qsTrId("page_generator_conditions_start_on_overload_warning")
 				startTimeDescription: CommonWords.start_when_warning_is_active_for
 				stopTimeDescription: CommonWords.when_warning_is_cleared_stop_after
+				supportsWarmup: (capabilities.value & 1)
 				bindPrefix: root.bindPrefix + "/InverterOverload"
 			}
 

@@ -14,6 +14,7 @@ ListNavigationItem {
 	property string timeUnit: "s"
 	property int decimals: 1
 	property bool startValueIsGreater: true
+	property bool supportsWarmup: false
 	property string name: text
 
 	//% "Use %1 value to start/stop"
@@ -130,6 +131,13 @@ ListNavigationItem {
 						allowed: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit
+					}
+
+					ListSwitch {
+						//% "Skip generator warm-up"
+						text: qsTrId("settings_generator_condition_skip_warmup")
+						dataItem.uid: bindPrefix + "/SkipWarmup"
+						allowed: root.supportsWarmup
 					}
 				}
 			}
