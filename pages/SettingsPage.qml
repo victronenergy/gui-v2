@@ -112,7 +112,7 @@ SwipeViewPage {
 				//% "Bluetooth"
 				text: qsTrId("settings_bluetooth"),
 				page: "/pages/settings/PageSettingsBluetooth.qml",
-				show: Connman.technologyList.indexOf("bluetooth") !== -1
+				show: hasBluetoothSupport.value
 			},
 			{
 				//% "Generator start/stop"
@@ -183,5 +183,10 @@ SwipeViewPage {
 	VeQuickItem {
 		id: nodeRed
 		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+	}
+
+	VeQuickItem {
+		id: hasBluetoothSupport
+		uid: Global.venusPlatform.serviceUid + "/Network/HasBluetoothSupport"
 	}
 }

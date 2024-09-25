@@ -133,37 +133,6 @@ set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added he
 )
 set_source_files_properties( ${VENUS_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )
 
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    list(APPEND CONNMAN_SOURCES
-        src/connman-api.h # mock sources
-    )
-else()
-    list(APPEND CONNMAN_SOURCES
-        src/connman/cmmanager.h
-        src/connman/cmmananger_interface.h
-        src/connman/cmtechnology.h
-        src/connman/cmtechnology_interface.h
-        src/connman/cmservice_interface.h
-        src/connman/cmservice.h
-        src/connman/cmagent.h
-        src/connman/cmagent_adaptor.h
-        src/connman/clockproxy.h
-        src/connman/connmandbustypes.cpp
-        src/connman/cmmanager.cpp
-        src/connman/cmmananger_interface.cpp
-        src/connman/cmtechnology.cpp
-        src/connman/cmtechnology_interface.cpp
-        src/connman/cmservice_interface.cpp
-        src/connman/cmservice.cpp
-        src/connman/cmagent.cpp
-        src/connman/cmagent_adaptor.cpp
-        src/connman/clockproxy.cpp
-        src/connman/connmandbustypes.h
-    )
-endif()
-
-list(APPEND VenusQMLModule_CPP_SOURCES ${CONNMAN_SOURCES})
-
 set(VEUTIL_CORE_SOURCES
     src/veutil/inc/veutil/qt/alternator_error.hpp
     src/veutil/inc/veutil/qt/bms_error.hpp
@@ -783,7 +752,6 @@ if (${LOAD_QML_FROM_FILESYSTEM})
         # optional plugin VenusQMLModuleplugin
         # classname Victron_VenusOSPlugin
         # typeinfo VenusQMLModule.qmltypes
-        # import net.connman
         # prefer :/qt/qml/Victron/VenusOS/  <- this line tells the app to prefer the compiled qml sources, i.e. don't load from the file system
         # singleton CommonWords 2.0 components/CommonWords.qml
         # [lots more qml files]
@@ -799,7 +767,6 @@ endif()
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     target_link_libraries(VenusQMLModule PRIVATE Qt6::WebSockets)
 else()
-    target_include_directories(VenusQMLModule PRIVATE src/connman)
     target_link_libraries(VenusQMLModule PRIVATE Qt6::DBus)
 endif()
 # end VENUS_QML_MODULE
