@@ -50,6 +50,7 @@ Page {
 				text: qsTrId("evcs_lock_charger_display")
 				dataItem.uid: root.evCharger.serviceUid + "/EnableDisplay"
 				invertSourceValue: true
+				allowed: defaultAllowed && dataItem.isValid
 			}
 		}
 	}
