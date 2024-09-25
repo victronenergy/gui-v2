@@ -99,11 +99,16 @@ Page {
 			ListNavigationItem {
 				//% "Bluetooth sensors"
 				text: qsTrId("settings_io_bt_sensors")
-				allowed: Connman.technologyList.indexOf("bluetooth") !== -1
+				allowed: hasBluetoothSupport.value
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
 				}
 			}
 		}
+	}
+
+	VeQuickItem {
+		id: hasBluetoothSupport
+		uid: Global.venusPlatform.serviceUid + "/Network/HasBluetoothSupport"
 	}
 }
