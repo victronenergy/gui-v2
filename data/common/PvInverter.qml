@@ -9,13 +9,13 @@ import Victron.VenusOS
 Device {
 	id: pvInverter
 
-	readonly property int statusCode: _statusCode.value === undefined ? -1 : _statusCode.value
-	readonly property int errorCode: _errorCode.value === undefined ? -1 : _errorCode.value
+	readonly property int statusCode: _statusCode.isValid ? _statusCode.value : -1
+	readonly property int errorCode: _errorCode.isValid ? _errorCode.value : -1
 
-	readonly property real energy: _energy.value === undefined ? NaN : _energy.value
-	readonly property real current: phases.count === 1 && _current.value !== undefined ? _current.value : NaN // multi-phase systems don't have a total current
-	readonly property real power: _power.value === undefined ? NaN : _power.value
-	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
+	readonly property real energy: _energy.isValid ? _energy.value : NaN
+	readonly property real current: _current.isValid ? _current.value : NaN
+	readonly property real power: _power.isValid ? _power.value : NaN
+	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
 
 	readonly property ListModel phases: ListModel {
 		function setPhaseProperty(phaseName, propertyName, value) {

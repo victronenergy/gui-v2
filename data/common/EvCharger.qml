@@ -9,16 +9,16 @@ import Victron.VenusOS
 Device {
 	id: evCharger
 
-	readonly property int status: _status.value === undefined ? -1 : _status.value
-	readonly property int mode: _mode.value === undefined ? -1 : _mode.value
+	readonly property int status: _status.isValid ? _status.value : -1
+	readonly property int mode: _mode.isValid ? _mode.value : -1
 	readonly property bool connected: _connected.value === 1
 	readonly property int chargingTime: _chargingTime.value || 0
 	readonly property int position: _position.isValid ? _position.value : VenusOS.Evcs_Position_Unknown
 
-	readonly property real energy: _energy.value === undefined ? NaN : _energy.value
-	readonly property real power: _power.value === undefined ? NaN : _power.value
-	readonly property real current: _current.value === undefined ? NaN : _current.value
-	readonly property real maxCurrent: _maxCurrent.value === undefined ? NaN : _maxCurrent.value
+	readonly property real energy: _energy.isValid ? _energy.value : NaN
+	readonly property real power: _power.isValid ? _power.value : NaN
+	readonly property real current: _current.isValid ? _current.value : NaN
+	readonly property real maxCurrent: _maxCurrent.isValid ? _maxCurrent.value : NaN
 
 	readonly property ListModel phases: ListModel {
 		function setPower(index, value) {
