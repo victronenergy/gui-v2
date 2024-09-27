@@ -20,37 +20,39 @@ Device {
 	readonly property real current: _current.isValid ? _current.value : NaN
 	readonly property real maxCurrent: _maxCurrent.isValid ? _maxCurrent.value : NaN
 
-	readonly property ListModel phases: ListModel {
-		function setPower(index, value) {
-			if (index >= 0 && index < count) {
-				setProperty(index, "power", value === undefined ? NaN : value)
-			}
+	readonly property QtObject phases: QtObject {
+		property int count
+
+		function updateCount(maxPhaseCount) {
+			count = Math.max(count, maxPhaseCount)
 		}
 
-		Component.onCompleted: {
-			const properties = [_phase1Power, _phase2Power, _phase3Power]
-			for (let i = 0; i < properties.length; ++i) {
-				const v = properties[i].value
-				append({ name: "L" + (i + 1), power: v === undefined ? NaN : v })
+		function get(index) {
+			return _phases.objectAt(index)
+		}
+
+		readonly property Instantiator _phases: Instantiator {
+			model: 3
+			delegate: QtObject {
+				required property int index
+				readonly property string phaseUid: evCharger.serviceUid + "/Ac/L" + (index + 1)
+				readonly property string name: "L" + (index + 1)
+				readonly property real power: _power.isValid ? _power.value : NaN
+
+				function updatePhaseCount(phaseCount) {
+					evCharger.count = Math.max(evCharger.count, phaseCount)
+				}
+
+				readonly property VeQuickItem _power: VeQuickItem {
+					uid: phaseUid + "/Power"
+					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+				}
 			}
 		}
 	}
 
 	readonly property VeQuickItem _energy: VeQuickItem {
 		uid: evCharger.serviceUid + "/Ac/Energy/Forward"
-	}
-
-	readonly property VeQuickItem _phase1Power: VeQuickItem {
-		uid: evCharger.serviceUid + "/Ac/L1/Power"
-		onValueChanged: phases.setPower(0, value)
-	}
-	readonly property VeQuickItem _phase2Power: VeQuickItem {
-		uid: evCharger.serviceUid + "/Ac/L2/Power"
-		onValueChanged: phases.setPower(1, value)
-	}
-	readonly property VeQuickItem _phase3Power: VeQuickItem {
-		uid: evCharger.serviceUid + "/Ac/L3/Power"
-		onValueChanged: phases.setPower(2, value)
 	}
 
 	readonly property VeQuickItem _power: VeQuickItem {

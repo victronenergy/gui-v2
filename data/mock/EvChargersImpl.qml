@@ -63,9 +63,9 @@ QtObject {
 					const phase1Power = zeroPower ? 0 : Math.random() * 50
 					const phase2Power = zeroPower ? 0 : Math.random() * 50
 					const phase3Power = zeroPower ? 0 : Math.random() * 50
-					_phase1Power.setValue(phase1Power)
-					_phase2Power.setValue(phase2Power)
-					_phase3Power.setValue(phase3Power)
+					phases.get(0)._power.setValue(phase1Power)
+					phases.get(1)._power.setValue(phase2Power)
+					phases.get(2)._power.setValue(phase3Power)
 
 					_energy.setValue(1 + Math.random() * 10)
 					_current.setValue(1 + Math.random() * 20)
