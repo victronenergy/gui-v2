@@ -77,13 +77,6 @@ QtObject {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("My PV Inverter " + deviceInstance)
 				_statusCode.setValue(Math.random() * VenusOS.PvInverter_StatusCode_Error)
-
-				for (let phaseIndex = 0; phaseIndex < 3; ++phaseIndex) {
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Power".arg(phaseIndex + 1), NaN)
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Current".arg(phaseIndex + 1), NaN)
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Voltage".arg(phaseIndex + 1), NaN)
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Ac/L%1/Energy/Forward".arg(phaseIndex + 1), NaN)
-				}
 			}
 		}
 	}

@@ -17,61 +17,44 @@ Device {
 	readonly property real power: _power.isValid ? _power.value : NaN
 	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
 
-	readonly property ListModel phases: ListModel {
-		function setPhaseProperty(phaseName, propertyName, value) {
-			let index = count
-			let needsInsert = true
-			for (let i = 0; i < count; ++i) {
-				const currName = get(i).name
-				if (currName === phaseName) {
-					needsInsert = false
-					index = i
-					break
-				} else if (currName > phaseName) {
-					// Do an ordered insertion.
-					index = i
-					break
-				}
-			}
-			if (value === undefined) {
-				value = NaN
-			}
-			if (needsInsert) {
-				if (isNaN(value)) {
-					// Wait until we have a valid value for this phase before adding it to the model
-					return
-				}
-				let data = { name: phaseName, energy: NaN, power: NaN, current: NaN, voltage: NaN }
-				data[propertyName] = value
-				insert(index, data)
-			} else if (index >= 0 && index < count) {
-				setProperty(index, propertyName, value)
-			} else {
-				console.warn("setPhaseProperty(): bad index", index, "count is", count)
-			}
+	readonly property QtObject phases: QtObject {
+		property int count
+
+		function updateCount(maxPhaseCount) {
+			count = Math.max(count, maxPhaseCount)
 		}
 
-		readonly property Instantiator _phaseObjects: Instantiator {
+		function get(index) {
+			return _phases.objectAt(index)
+		}
+
+		readonly property Instantiator _phases: Instantiator {
 			model: 3
 			delegate: QtObject {
-				readonly property string phaseName: "L" + (model.index + 1)
-				readonly property string phaseUid: pvInverter.serviceUid + "/Ac/" + phaseName
+				required property int index
+				readonly property string phaseUid: pvInverter.serviceUid + "/Ac/L" + (index + 1)
+
+				readonly property string name: "L" + (index + 1)
+				readonly property real energy: _phaseEnergy.isValid ? _phaseEnergy.value : NaN
+				readonly property real power: _phasePower.isValid ? _phasePower.value : NaN
+				readonly property real current: _phaseCurrent.isValid ? _phaseCurrent.value : NaN
+				readonly property real voltage: _phaseVoltage.isValid ? _phaseVoltage.value : NaN
 
 				readonly property VeQuickItem _phaseEnergy: VeQuickItem {
 					uid: phaseUid + "/Energy/Forward"
-					onValueChanged: phases.setPhaseProperty(phaseName, "energy", value)
+					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
 				}
 				readonly property VeQuickItem _phasePower: VeQuickItem {
 					uid: phaseUid + "/Power"
-					onValueChanged: phases.setPhaseProperty(phaseName, "power", value)
+					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
 				}
 				readonly property VeQuickItem _phaseCurrent: VeQuickItem {
 					uid: phaseUid + "/Current"
-					onValueChanged: phases.setPhaseProperty(phaseName, "current", value)
+					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
 				}
 				readonly property VeQuickItem _phaseVoltage: VeQuickItem {
 					uid: phaseUid + "/Voltage"
-					onValueChanged: phases.setPhaseProperty(phaseName, "voltage", value)
+					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
 				}
 			}
 		}
