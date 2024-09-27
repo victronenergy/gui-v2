@@ -19,13 +19,16 @@ Device {
 	readonly property alias gensetStatusCode: _acInputService.gensetStatusCode
 
 	// clamp to zero any values with magnitude < 1 (assume it's noise) to avoid UI flicker.
-	readonly property real power: (Math.floor(Math.abs(_phases.totalPower)) < 1.0) ? 0.0 : _phases.totalPower
-	readonly property real current: phases.count === 1 ? _phases.firstPhaseCurrent : NaN // multi-phase systems don't have a total current
+	readonly property real power: (Math.floor(Math.abs(_phaseMeasurements.power)) < 1.0) ? 0.0 : _phaseMeasurements.power
+	readonly property real current: _phaseMeasurements.current
 	readonly property alias currentLimit: _acInputService.currentLimit
-	readonly property alias phases: _phases
+	readonly property alias phases: _phaseMeasurements.phases
 
 	// Phase measurements from com.victronenergy.system/Ac/ActiveIn/L<1|2|3>
-	readonly property AcInputPhaseModel _phases: AcInputPhaseModel { id: _phases }
+	readonly property ObjectAcConnection _phaseMeasurements: ObjectAcConnection {
+		id: _phaseMeasurements
+		bindPrefix: Global.system.serviceUid + "/Ac/ActiveIn"
+	}
 
 	// Data from the input-specific service, e.g. com.victronenergy.vebus for a VE.Bus input,
 	// or com.victronenergy.grid for grid parallel systems.

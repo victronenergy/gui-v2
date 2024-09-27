@@ -448,7 +448,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/VenusPlatform.qml
 
     data/common/AcData.qml
-    data/common/AcInputPhaseModel.qml
     data/common/AcInputServiceLoader.qml
     data/common/AcInputSettings.qml
     data/common/AcInputSettingsModel.qml
