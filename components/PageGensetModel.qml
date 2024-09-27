@@ -193,13 +193,6 @@ ObjectModel {
 		allowed: defaultAllowed && root.dcGenset
 	}
 
-	ListTemperatureItem {
-		//% "Heatsink temperature"
-		text: qsTrId("genset_heatsink_temperature")
-		dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"
-		allowed: defaultAllowed && dataItem.isValid
-	}
-
 	ListNavigationItem {
 		//% "Engine"
 		text: qsTrId("ac-in-genset_engine")
@@ -264,6 +257,13 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_winding_temperature")
 							allowed: defaultAllowed && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
+						}
+
+						ListTemperatureItem {
+							//% "Heatsink temperature"
+							text: qsTrId("genset_heatsink_temperature")
+							dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"
+							allowed: defaultAllowed && dataItem.isValid
 						}
 
 						ListQuantityItem {
