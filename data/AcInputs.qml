@@ -18,7 +18,6 @@ QtObject {
 
 	property real power: activeInput != null ? activeInput.power : NaN
 	property real current: activeInput != null ? activeInput.current : NaN
-	property real currentLimit: activeInput != null ? activeInput.currentLimit : NaN
 
 	readonly property var roles: [
 		{ role: "grid", name: CommonWords.grid },
