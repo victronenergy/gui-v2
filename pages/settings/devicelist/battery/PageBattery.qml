@@ -328,7 +328,7 @@ Page {
 			}
 
 			ListNavigationItem {
-				text: "Cells"
+				text: "Cell Voltages"
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryCells.qml",
 							{ "title": text, "bindPrefix": root.battery.serviceUid })

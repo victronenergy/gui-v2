@@ -11,27 +11,10 @@ Page {
 
 	property string bindPrefix
 
-	VeQuickItem {
-		id: _batteryCellVoltageSum
-		uid: root.bindPrefix + "/Voltages/Sum"
-	}
-	VeQuickItem {
-		id: _batteryCellVoltageDiff
-		uid: root.bindPrefix + "/Voltages/Diff"
-	}
-	VeQuickItem {
-		id: _batteryMinCellVoltage
-		uid: root.bindPrefix + "/System/MinCellVoltage"
-	}
-	VeQuickItem {
-		id: _batteryMaxCellVoltage
-		uid: root.bindPrefix + "/System/MaxCellVoltage"
-	}
-
-	property string batteryCellVoltageSum: _batteryCellVoltageSum.isValid ? _batteryCellVoltageSum.value.toFixed(2) : "--"
-	property string batteryCellVoltageDiff: _batteryCellVoltageDiff.isValid ? _batteryCellVoltageDiff.value.toFixed(3) : "--"
-	property string batteryMinCellVoltage: _batteryMinCellVoltage.isValid ? _batteryMinCellVoltage.value.toFixed(3) : "--"
-	property string batteryMaxCellVoltage: _batteryMaxCellVoltage.isValid ? _batteryMaxCellVoltage.value.toFixed(3) : "--"
+	readonly property string batteryCellVoltageSum: _batteryCellVoltageSum.isValid ? _batteryCellVoltageSum.value.toFixed(2) : "--"
+	readonly property string batteryCellVoltageDiff: _batteryCellVoltageDiff.isValid ? _batteryCellVoltageDiff.value.toFixed(3) : "--"
+	readonly property string batteryMinCellVoltage: _batteryMinCellVoltage.isValid ? _batteryMinCellVoltage.value.toFixed(3) : "--"
+	readonly property string batteryMaxCellVoltage: _batteryMaxCellVoltage.isValid ? _batteryMaxCellVoltage.value.toFixed(3) : "--"
 
 
 	readonly property VeQuickItem _batteryVoltagesCell_1: VeQuickItem { uid: root.bindPrefix + "/Voltages/Cell1" }
@@ -68,38 +51,38 @@ Page {
 	readonly property VeQuickItem _batteryVoltagesCell_32: VeQuickItem { uid: root.bindPrefix + "/Voltages/Cell32" }
 
 
-	property string batteryVoltagesCell_1: _batteryVoltagesCell_1.isValid ? _batteryVoltagesCell_1.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_2: _batteryVoltagesCell_2.isValid ? _batteryVoltagesCell_2.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_3: _batteryVoltagesCell_3.isValid ? _batteryVoltagesCell_3.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_4: _batteryVoltagesCell_4.isValid ? _batteryVoltagesCell_4.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_5: _batteryVoltagesCell_5.isValid ? _batteryVoltagesCell_5.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_6: _batteryVoltagesCell_6.isValid ? _batteryVoltagesCell_6.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_7: _batteryVoltagesCell_7.isValid ? _batteryVoltagesCell_7.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_8: _batteryVoltagesCell_8.isValid ? _batteryVoltagesCell_8.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_9: _batteryVoltagesCell_9.isValid ? _batteryVoltagesCell_9.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_10: _batteryVoltagesCell_10.isValid ? _batteryVoltagesCell_10.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_11: _batteryVoltagesCell_11.isValid ? _batteryVoltagesCell_11.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_12: _batteryVoltagesCell_12.isValid ? _batteryVoltagesCell_12.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_13: _batteryVoltagesCell_13.isValid ? _batteryVoltagesCell_13.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_14: _batteryVoltagesCell_14.isValid ? _batteryVoltagesCell_14.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_15: _batteryVoltagesCell_15.isValid ? _batteryVoltagesCell_15.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_16: _batteryVoltagesCell_16.isValid ? _batteryVoltagesCell_16.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_17: _batteryVoltagesCell_17.isValid ? _batteryVoltagesCell_17.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_18: _batteryVoltagesCell_18.isValid ? _batteryVoltagesCell_18.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_19: _batteryVoltagesCell_19.isValid ? _batteryVoltagesCell_19.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_20: _batteryVoltagesCell_20.isValid ? _batteryVoltagesCell_20.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_21: _batteryVoltagesCell_21.isValid ? _batteryVoltagesCell_21.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_22: _batteryVoltagesCell_22.isValid ? _batteryVoltagesCell_22.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_23: _batteryVoltagesCell_23.isValid ? _batteryVoltagesCell_23.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_24: _batteryVoltagesCell_24.isValid ? _batteryVoltagesCell_24.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_25: _batteryVoltagesCell_25.isValid ? _batteryVoltagesCell_25.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_26: _batteryVoltagesCell_26.isValid ? _batteryVoltagesCell_26.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_27: _batteryVoltagesCell_27.isValid ? _batteryVoltagesCell_27.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_28: _batteryVoltagesCell_28.isValid ? _batteryVoltagesCell_28.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_29: _batteryVoltagesCell_29.isValid ? _batteryVoltagesCell_29.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_30: _batteryVoltagesCell_30.isValid ? _batteryVoltagesCell_30.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_31: _batteryVoltagesCell_31.isValid ? _batteryVoltagesCell_31.value.toFixed(3) : "--"
-	property string batteryVoltagesCell_32: _batteryVoltagesCell_32.isValid ? _batteryVoltagesCell_32.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_1: _batteryVoltagesCell_1.isValid ? _batteryVoltagesCell_1.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_2: _batteryVoltagesCell_2.isValid ? _batteryVoltagesCell_2.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_3: _batteryVoltagesCell_3.isValid ? _batteryVoltagesCell_3.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_4: _batteryVoltagesCell_4.isValid ? _batteryVoltagesCell_4.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_5: _batteryVoltagesCell_5.isValid ? _batteryVoltagesCell_5.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_6: _batteryVoltagesCell_6.isValid ? _batteryVoltagesCell_6.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_7: _batteryVoltagesCell_7.isValid ? _batteryVoltagesCell_7.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_8: _batteryVoltagesCell_8.isValid ? _batteryVoltagesCell_8.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_9: _batteryVoltagesCell_9.isValid ? _batteryVoltagesCell_9.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_10: _batteryVoltagesCell_10.isValid ? _batteryVoltagesCell_10.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_11: _batteryVoltagesCell_11.isValid ? _batteryVoltagesCell_11.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_12: _batteryVoltagesCell_12.isValid ? _batteryVoltagesCell_12.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_13: _batteryVoltagesCell_13.isValid ? _batteryVoltagesCell_13.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_14: _batteryVoltagesCell_14.isValid ? _batteryVoltagesCell_14.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_15: _batteryVoltagesCell_15.isValid ? _batteryVoltagesCell_15.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_16: _batteryVoltagesCell_16.isValid ? _batteryVoltagesCell_16.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_17: _batteryVoltagesCell_17.isValid ? _batteryVoltagesCell_17.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_18: _batteryVoltagesCell_18.isValid ? _batteryVoltagesCell_18.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_19: _batteryVoltagesCell_19.isValid ? _batteryVoltagesCell_19.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_20: _batteryVoltagesCell_20.isValid ? _batteryVoltagesCell_20.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_21: _batteryVoltagesCell_21.isValid ? _batteryVoltagesCell_21.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_22: _batteryVoltagesCell_22.isValid ? _batteryVoltagesCell_22.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_23: _batteryVoltagesCell_23.isValid ? _batteryVoltagesCell_23.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_24: _batteryVoltagesCell_24.isValid ? _batteryVoltagesCell_24.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_25: _batteryVoltagesCell_25.isValid ? _batteryVoltagesCell_25.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_26: _batteryVoltagesCell_26.isValid ? _batteryVoltagesCell_26.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_27: _batteryVoltagesCell_27.isValid ? _batteryVoltagesCell_27.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_28: _batteryVoltagesCell_28.isValid ? _batteryVoltagesCell_28.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_29: _batteryVoltagesCell_29.isValid ? _batteryVoltagesCell_29.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_30: _batteryVoltagesCell_30.isValid ? _batteryVoltagesCell_30.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_31: _batteryVoltagesCell_31.isValid ? _batteryVoltagesCell_31.value.toFixed(3) : "--"
+	readonly property string batteryVoltagesCell_32: _batteryVoltagesCell_32.isValid ? _batteryVoltagesCell_32.value.toFixed(3) : "--"
 
 
 	readonly property VeQuickItem _batteryBalancesCell_1: VeQuickItem { uid: root.bindPrefix + "/Balances/Cell1" }
@@ -136,39 +119,55 @@ Page {
 	readonly property VeQuickItem _batteryBalancesCell_32: VeQuickItem { uid: root.bindPrefix + "/Balances/Cell32" }
 
 
-	property string cellTextColor1: _batteryBalancesCell_1.isValid && _batteryBalancesCell_1.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor2: _batteryBalancesCell_2.isValid && _batteryBalancesCell_2.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor3: _batteryBalancesCell_3.isValid && _batteryBalancesCell_3.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor4: _batteryBalancesCell_4.isValid && _batteryBalancesCell_4.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor5: _batteryBalancesCell_5.isValid && _batteryBalancesCell_5.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor6: _batteryBalancesCell_6.isValid && _batteryBalancesCell_6.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor7: _batteryBalancesCell_7.isValid && _batteryBalancesCell_7.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor8: _batteryBalancesCell_8.isValid && _batteryBalancesCell_8.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor9: _batteryBalancesCell_9.isValid && _batteryBalancesCell_9.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor10: _batteryBalancesCell_10.isValid && _batteryBalancesCell_10.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor11: _batteryBalancesCell_11.isValid && _batteryBalancesCell_11.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor12: _batteryBalancesCell_12.isValid && _batteryBalancesCell_12.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor13: _batteryBalancesCell_13.isValid && _batteryBalancesCell_13.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor14: _batteryBalancesCell_14.isValid && _batteryBalancesCell_14.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor15: _batteryBalancesCell_15.isValid && _batteryBalancesCell_15.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor16: _batteryBalancesCell_16.isValid && _batteryBalancesCell_16.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor17: _batteryBalancesCell_17.isValid && _batteryBalancesCell_17.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor18: _batteryBalancesCell_18.isValid && _batteryBalancesCell_18.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor19: _batteryBalancesCell_19.isValid && _batteryBalancesCell_19.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor20: _batteryBalancesCell_20.isValid && _batteryBalancesCell_20.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor21: _batteryBalancesCell_21.isValid && _batteryBalancesCell_21.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor22: _batteryBalancesCell_22.isValid && _batteryBalancesCell_22.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor23: _batteryBalancesCell_23.isValid && _batteryBalancesCell_23.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor24: _batteryBalancesCell_24.isValid && _batteryBalancesCell_24.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor25: _batteryBalancesCell_25.isValid && _batteryBalancesCell_25.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor26: _batteryBalancesCell_26.isValid && _batteryBalancesCell_26.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor27: _batteryBalancesCell_27.isValid && _batteryBalancesCell_27.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor28: _batteryBalancesCell_28.isValid && _batteryBalancesCell_28.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor29: _batteryBalancesCell_29.isValid && _batteryBalancesCell_29.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor30: _batteryBalancesCell_30.isValid && _batteryBalancesCell_30.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor31: _batteryBalancesCell_31.isValid && _batteryBalancesCell_31.value == "1" ? "#b80101" : Theme.color_font_primary
-	property string cellTextColor32: _batteryBalancesCell_32.isValid && _batteryBalancesCell_32.value == "1" ? "#b80101" : Theme.color_font_primary
+	readonly property string cellTextColor1: _batteryBalancesCell_1.isValid && _batteryBalancesCell_1.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_1 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor2: _batteryBalancesCell_2.isValid && _batteryBalancesCell_2.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_2 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor3: _batteryBalancesCell_3.isValid && _batteryBalancesCell_3.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_3 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor4: _batteryBalancesCell_4.isValid && _batteryBalancesCell_4.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_4 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor5: _batteryBalancesCell_5.isValid && _batteryBalancesCell_5.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_5 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor6: _batteryBalancesCell_6.isValid && _batteryBalancesCell_6.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_6 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor7: _batteryBalancesCell_7.isValid && _batteryBalancesCell_7.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_7 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor8: _batteryBalancesCell_8.isValid && _batteryBalancesCell_8.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_8 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor9: _batteryBalancesCell_9.isValid && _batteryBalancesCell_9.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_9 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor10: _batteryBalancesCell_10.isValid && _batteryBalancesCell_10.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_10 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor11: _batteryBalancesCell_11.isValid && _batteryBalancesCell_11.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_11 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor12: _batteryBalancesCell_12.isValid && _batteryBalancesCell_12.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_12 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor13: _batteryBalancesCell_13.isValid && _batteryBalancesCell_13.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_13 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor14: _batteryBalancesCell_14.isValid && _batteryBalancesCell_14.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_14 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor15: _batteryBalancesCell_15.isValid && _batteryBalancesCell_15.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_15 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor16: _batteryBalancesCell_16.isValid && _batteryBalancesCell_16.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_16 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor17: _batteryBalancesCell_17.isValid && _batteryBalancesCell_17.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_17 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor18: _batteryBalancesCell_18.isValid && _batteryBalancesCell_18.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_18 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor19: _batteryBalancesCell_19.isValid && _batteryBalancesCell_19.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_19 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor20: _batteryBalancesCell_20.isValid && _batteryBalancesCell_20.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_20 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor21: _batteryBalancesCell_21.isValid && _batteryBalancesCell_21.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_21 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor22: _batteryBalancesCell_22.isValid && _batteryBalancesCell_22.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_22 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor23: _batteryBalancesCell_23.isValid && _batteryBalancesCell_23.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_23 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor24: _batteryBalancesCell_24.isValid && _batteryBalancesCell_24.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_24 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor25: _batteryBalancesCell_25.isValid && _batteryBalancesCell_25.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_25 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor26: _batteryBalancesCell_26.isValid && _batteryBalancesCell_26.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_26 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor27: _batteryBalancesCell_27.isValid && _batteryBalancesCell_27.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_27 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor28: _batteryBalancesCell_28.isValid && _batteryBalancesCell_28.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_28 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor29: _batteryBalancesCell_29.isValid && _batteryBalancesCell_29.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_29 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor30: _batteryBalancesCell_30.isValid && _batteryBalancesCell_30.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_30 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor31: _batteryBalancesCell_31.isValid && _batteryBalancesCell_31.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_31 ? "#387DC5" : "#b80101") : Theme.color_font_primary
+	readonly property string cellTextColor32: _batteryBalancesCell_32.isValid && _batteryBalancesCell_32.value == "1" ? (batteryMinCellVoltage == batteryVoltagesCell_32 ? "#387DC5" : "#b80101") : Theme.color_font_primary
 
+	VeQuickItem {
+		id: _batteryCellVoltageSum
+		uid: root.bindPrefix + "/Voltages/Sum"
+	}
+	VeQuickItem {
+		id: _batteryCellVoltageDiff
+		uid: root.bindPrefix + "/Voltages/Diff"
+	}
+	VeQuickItem {
+		id: _batteryMinCellVoltage
+		uid: root.bindPrefix + "/System/MinCellVoltage"
+	}
+	VeQuickItem {
+		id: _batteryMaxCellVoltage
+		uid: root.bindPrefix + "/System/MaxCellVoltage"
+	}
 
 	GradientListView {
 		model: ObjectModel {
