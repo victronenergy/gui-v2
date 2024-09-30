@@ -22,10 +22,15 @@ ObjectModel {
 		uid: root.bindPrefix + "/Ac/Phase"
 	}
 
-	// Phase numbers are determined by /NrOfPhases or /Ac/Phase, in that order.
+	// Phase numbers are determined by /NrOfPhases or /Ac/Phase, in that order. If neither are set,
+	// use all 3 phases and rely on phaseCountKnown to filter out invalid phases.
 	readonly property var phaseNumbers: nrOfPhases.isValid ? Array.from({length: nrOfPhases.value}, (_, index) => index+1)
 			: phase.isValid ? [ phase.value ]
-			: [1]   // always show at least L1 phase
+			: [1,2,3]   // default to 3 phases, and use phaseCountKnown to filter out invalid phases
+
+	// If the number of phases is not known, show each phase depending on whether there is valid
+	// data for that phase.
+	readonly property bool phaseCountKnown: phase.isValid || nrOfPhases.isValid
 
 	ListTextItem {
 		text: CommonWords.status
@@ -44,6 +49,7 @@ ObjectModel {
 		Repeater {
 			model: root.phaseNumbers
 			delegate: ListQuantityGroup {
+				allowed: root.phaseCountKnown || (phaseVoltage.isValid || phaseCurrent.isValid || phasePower.isValid)
 				text: CommonWords.ac_phase_x.arg(modelData)
 				textModel: [
 					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt_AC },
@@ -97,6 +103,7 @@ ObjectModel {
 				text: qsTrId("ac-in-modeldefault_energy_x").arg(modelData)
 				dataItem.uid: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(modelData)
 				unit: VenusOS.Units_Energy_KiloWattHour
+				allowed: root.phaseCountKnown || dataItem.isValid
 			}
 		}
 	}
