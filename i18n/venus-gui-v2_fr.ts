@@ -3,8 +3,8 @@
 <TS version="2.1" language="fr">
   <context>
     <name></name>
-    <message id="common_words_disabled">
-      <location filename="../../components/CommonWords.qml" line="137"/>
+    <message id="settings_tailscale_disabled">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="114"/>
       <source>Disabled</source>
       <translation>Désactivé</translation>
     </message>
@@ -73,7 +73,7 @@
       <translation>État</translation>
     </message>
     <message id="settings_firmware_installing">
-      <location filename="../../components/FirmwareUpdate.qml" line="50"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="67"/>
       <source>Installing %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>Installation en cours %1...</translation>
@@ -189,8 +189,8 @@
       <source>PV inverters</source>
       <translation>Convertisseurs PV</translation>
     </message>
-    <message id="settings_ethernet">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+    <message id="settings_tailscale_ethernet">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="99"/>
       <source>Ethernet</source>
       <translation>Ethernet</translation>
     </message>
@@ -389,28 +389,18 @@
       <source>Generator not detected at AC input</source>
       <translation>Générateur non détecté sur l'entrée CA</translation>
     </message>
-    <message id="settings_page_relay_generator_run_time">
-      <location filename="../../pages/settings/PageGenerator.qml" line="71"/>
-      <source>Run time</source>
-      <translation>Durée de fonctionnement</translation>
-    </message>
-    <message id="settings_page_relay_generator_total_run_time">
-      <location filename="../../pages/settings/PageGenerator.qml" line="79"/>
-      <source>Total run time</source>
-      <translation>Durée de fonctionnement totale</translation>
-    </message>
-    <message id="settings_page_relay_generator_accumulated_running_time">
-      <location filename="../../pages/settings/PageGenerator.qml" line="102"/>
+    <message id="settings_page_run_time_and_service_accumulated_running_time">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="134"/>
       <source>Accumulated running time since last test run</source>
       <translation>Durée de fonctionnement cumulée depuis dernier test</translation>
     </message>
-    <message id="settings_page_relay_generator_time_to_next_test_run">
-      <location filename="../../pages/settings/PageGenerator.qml" line="112"/>
+    <message id="settings_page_run_time_and_service_time_to_next_test_run">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="110"/>
       <source>Time to next test run</source>
       <translation>Temps manquant avant prochain test</translation>
     </message>
-    <message id="settings_page_relay_generator_running_now">
-      <location filename="../../pages/settings/PageGenerator.qml" line="129"/>
+    <message id="settings_page_run_time_and_service_running_now">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="127"/>
       <source>Running now</source>
       <translation>Fonctionnement en cours</translation>
     </message>
@@ -424,8 +414,8 @@
       <source>Start generator</source>
       <translation>Démarrer générateur</translation>
     </message>
-    <message id="settings_page_relay_generator_daily_run_time">
-      <location filename="../../pages/settings/PageGenerator.qml" line="154"/>
+    <message id="settings_page_run_time_and_service_daily_run_time">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="64"/>
       <source>Daily run time</source>
       <translation>Durée de fonctionnement quotidien</translation>
     </message>
@@ -1356,42 +1346,44 @@
       <translation>Fin Heures calmes</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="158"/>
+      <location filename="../../components/PageGensetModel.qml" line="299"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="105"/>
       <source>Run time and service</source>
       <translation>Durée d'exécution et service</translation>
     </message>
-    <message id="page_settings_generator_reset_daily_run_time_counters">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="28"/>
+    <message id="page_settings_run_time_and_service_reset_daily_run_time_counters">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="84"/>
       <source>Reset daily run time counters</source>
       <translation>Réinitialiser compteurs d'exécution quotidienne</translation>
     </message>
-    <message id="page_settings_generator_runtime_counter_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="37"/>
+    <message id="page_settings_run_time_and_service_runtime_counter_reset">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="93"/>
       <source>The daily runtime counter has been reset</source>
       <translation>Le compteur d'exécution quotidienne a été réinitialisé</translation>
     </message>
-    <message id="page_settings_generator_runtime_counter_cant_reset_while_running">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="40"/>
+    <message id="page_settings_run_time_and_service_runtime_counter_cant_reset_while_running">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
       <source>It is not possible to modify the counters while the generator is running</source>
       <translation>Il n'est pas possible de modifier les compteurs tant que le générateur est en marche</translation>
     </message>
-    <message id="page_settings_generator_total_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="55"/>
+    <message id="page_settings_run_time_and_service_total_run_time">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="42"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="51"/>
       <source>Generator total run time (hours)</source>
       <translation>Durée de fonctionnement totale du générateur (h)</translation>
     </message>
     <message id="page_settings_generator_service_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="76"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="153"/>
       <source>Generator service interval (hours)</source>
       <translation>Intervalle d'entretien du générateur (heures)</translation>
     </message>
-    <message id="page_settings_generator_service_time_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="82"/>
+    <message id="page_settings_run_time_and_service_service_time_interval">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="161"/>
       <source>Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer.</source>
       <translation>L'intervalle de temps de service est réglé sur %1h. Utilisez le bouton "Réinitialiser le minuteur de service" pour réinitialiser le minuteur de service.</translation>
     </message>
-    <message id="page_settings_generator_reset_service_timer">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="88"/>
+    <message id="page_settings_run_time_and_service_reset_service_timer">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="172"/>
       <source>Reset service timer</source>
       <translation>Réinitialisation de la minuterie de service</translation>
     </message>
@@ -2152,12 +2144,12 @@ Documentation sur https://ve3.nl/vol</translation>
       <translation>Modbus TCP</translation>
     </message>
     <message id="settings_services_console_on_vedirect1">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsServices.qml" line="54"/>
       <source>Console on VE.Direct 1</source>
       <translation>Console sur VE.Direct 1</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsServices.qml" line="87"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>CAN-bus sur TCP/IP (Débogage)</translation>
     </message>
@@ -2705,7 +2697,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="evcs_charging_stations">
       <location filename="../../pages/evcs/EvChargerListPage.qml" line="13"/>
       <source>EV Charging Stations</source>
-      <translation>Stations de recharge pour VE</translation>
+      <translation>Chargeurs VE</translation>
     </message>
     <message id="evcs_session">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="35"/>
@@ -2828,13 +2820,13 @@ Documentation sur https://ve3.nl/vol</translation>
       <translation>Erreur : %1</translation>
     </message>
     <message id="devicelist_unsupported">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="192"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="204"/>
       <source>Unsupported</source>
       <extracomment>Device is not supported</extracomment>
       <translation>Incompatible</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="216"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="228"/>
       <source>Remove disconnected devices</source>
       <translation>Supprimer les appareils déconnectés</translation>
     </message>
@@ -3603,8 +3595,8 @@ Documentation sur https://ve3.nl/vol</translation>
       <source>US (240 to 30 Ohm)</source>
       <translation>US (240 à 30 Ohm)</translation>
     </message>
-    <message id="devicelist_tanksetup_custom">
-      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="54"/>
+    <message id="settings_tailscale_custom">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="109"/>
       <source>Custom</source>
       <translation>Personnaliser</translation>
     </message>
@@ -3639,524 +3631,41 @@ Documentation sur https://ve3.nl/vol</translation>
       <translation>Valeur du capteur</translation>
     </message>
     <message id="devicelist_tankshape_empty">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="78"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="77"/>
       <source>No custom shape defined. You may define one with up to ten points. Note that 0% and 100% are implied.</source>
       <translation>Aucune forme personnalisée n'a été définie. Vous pouvez en définir une avec un maximum de dix points. Notez que 0 % et 100 % sont implicites.</translation>
     </message>
     <message id="devicelist_tankshape_point">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="87"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="86"/>
       <source>Point %1</source>
       <extracomment>%1 = the point number</extracomment>
       <translation>Point %1</translation>
     </message>
     <message id="devicelist_tankshape_add_point">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="123"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="122"/>
       <source>Add point</source>
       <translation>Ajouter un point</translation>
     </message>
     <message id="devicelist_tankshape_sensor_level">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="146"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="145"/>
       <source>Sensor level</source>
       <extracomment>The sensor level (as a percentage) for this tank shape point</extracomment>
       <translation>Niveau du capteur</translation>
     </message>
     <message id="devicelist_tankshape_duplicate_sensor_level">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="230"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="229"/>
       <source>Duplicate sensor level values are not allowed.</source>
       <translation>Les valeurs de niveau de capteur en double ne sont pas autorisées.</translation>
     </message>
     <message id="devicelist_tankshape_volume_not_increasing">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="236"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="235"/>
       <source>Volume values must be increasing.</source>
       <translation>Les valeurs de volume doivent augmenter.</translation>
-    </message>
-    <message id="fp-genset-error_ac_voltage_l1_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="23"/>
-      <source>AC voltage L1 too low</source>
-      <translation>Tension CA L1 trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_voltage_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="25"/>
-      <source>AC voltage too low</source>
-      <translation>Tension CA trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_voltage_l1_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="30"/>
-      <source>AC voltage L1 too high</source>
-      <translation>Tension CA L1 trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_voltage_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="32"/>
-      <source>AC voltage too high</source>
-      <translation>Tension CA trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_frequency_l1_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="37"/>
-      <source>AC frequency L1 too low</source>
-      <translation>Fréquence CA L1 trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_frequency_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="39"/>
-      <source>AC frequency too low</source>
-      <translation>Fréquence CA trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_frequency_l1_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="44"/>
-      <source>AC frequency L1 too high</source>
-      <translation>Fréquence CA L1 trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_frequency_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="46"/>
-      <source>AC frequency too high</source>
-      <translation>Fréquence CA trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_current_l1_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="51"/>
-      <source>AC current L1 too low</source>
-      <translation>Courant CA L1 trop bas</translation>
-    </message>
-    <message id="fp-genset-error_ac_current_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="53"/>
-      <source>AC current too low</source>
-      <translation>Courant CA trop bas</translation>
-    </message>
-    <message id="fp-genset-error_ac_current_l1_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="58"/>
-      <source>AC current L1 too high</source>
-      <translation>Courant CA L1 trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_ac_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="60"/>
-      <source>AC current too high</source>
-      <translation>Courant CA trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_ac_power_l1_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="65"/>
-      <source>AC power L1 too low</source>
-      <translation>Puissance CA L1 trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_power_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="67"/>
-      <source>AC power too low</source>
-      <translation>Puissance CA trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_power_l1_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="72"/>
-      <source>AC power L1 too high</source>
-      <translation>Puissance CA L1 trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_power_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="74"/>
-      <source>AC power too high</source>
-      <translation>Puissance CA trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_emergency_stop">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="77"/>
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="253"/>
-      <source>Emergency stop</source>
-      <translation>Arrêt d'urgence</translation>
-    </message>
-    <message id="fp-genset-error_servo_current_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="79"/>
-      <source>Servo current too low</source>
-      <translation>Courant Servomoteur trop bas</translation>
-    </message>
-    <message id="fp-genset-error_servo_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="81"/>
-      <source>Servo current too high</source>
-      <translation>Courant servomoteur trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_oil_pressure_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="83"/>
-      <source>Oil pressure too low</source>
-      <translation>Pression d'huile trop basse</translation>
-    </message>
-    <message id="fp-genset-error_oil_pressure_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="85"/>
-      <source>Oil pressure too high</source>
-      <translation>Pression d'huile trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_engine_temperature_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="87"/>
-      <source>Engine temperature too low</source>
-      <translation>Température moteur trop basse</translation>
-    </message>
-    <message id="fp-genset-error_engine_temperature_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="89"/>
-      <source>Engine temperature too high</source>
-      <translation>Température moteur trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_winding_temperature_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="91"/>
-      <source>Winding temperature too low</source>
-      <translation>Température d'enroulement trop basse</translation>
-    </message>
-    <message id="fp-genset-error_winding_temperature_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="93"/>
-      <source>Winding temperature too high</source>
-      <translation>Température d'enroulement trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_exhaust_temperature_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="95"/>
-      <source>Exhaust temperature too low</source>
-      <translation>Température d'échappement trop basse</translation>
-    </message>
-    <message id="fp-genset-error_exhaust_temperature_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="97"/>
-      <source>Exhaust temperature too high</source>
-      <translation>Température d'échappement trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_starter_current_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="99"/>
-      <source>Starter current too low</source>
-      <translation>Courant de batterie de démarrage trop bas</translation>
-    </message>
-    <message id="fp-genset-error_starter_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="101"/>
-      <source>Starter current too high</source>
-      <translation>Courant de batterie de démarrage trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_glow_current_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="103"/>
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="107"/>
-      <source>Glow current too low</source>
-      <translation>Courant d'effluve trop bas</translation>
-    </message>
-    <message id="fp-genset-error_glow_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="105"/>
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="109"/>
-      <source>Glow current too high</source>
-      <translation>Courant d'effluve trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_fuel_holding_magnet_current_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="111"/>
-      <source>Fuel holding magnet current too low</source>
-      <translation>Courant d'électroaimant de carburant trop bas</translation>
-    </message>
-    <message id="fp-genset-error_fuel_holding_magnet_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="113"/>
-      <source>Fuel holding magnet current too high</source>
-      <translation>Courant d'électroaimant de carburant trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_stop_solenoid_hold_coil_current_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="115"/>
-      <source>Stop solenoid hold coil current too low</source>
-      <translation>Courant de bobine de fixation solenoïde d'arrêt trop bas</translation>
-    </message>
-    <message id="fp-genset-error_stop_solenoid_hold_coil_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="117"/>
-      <source>Stop solenoid hold coil current too high</source>
-      <translation>Courant de bobine de fixation solenoïde d'arrêt trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_stop_solenoid_pull_coil_current_too_low_">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="119"/>
-      <source>Stop solenoid pull coil current too low </source>
-      <translation>Courant de bobine de traction solenoïde d'arrêt trop faible</translation>
-    </message>
-    <message id="fp-genset-error_stop_solenoid_pull_coil_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="121"/>
-      <source>Stop solenoid pull coil current too high</source>
-      <translation>Courant de bobine de traction solenoïde d'arrêt trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_optional_dc_out_current_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="123"/>
-      <source>Optional DC out current too low</source>
-      <translation>Courant de sortie CC en option trop bas</translation>
-    </message>
-    <message id="fp-genset-error_optional_dc_out_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="125"/>
-      <source>Optional DC out current too high</source>
-      <translation>Courant de sortie CC en option trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_5v_output_voltage_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="127"/>
-      <source>5V output voltage too low</source>
-      <translation>Tension de sortie 5 V trop basse</translation>
-    </message>
-    <message id="fp-genset-error_5v_output_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="129"/>
-      <source>5V output current too high</source>
-      <translation>Courant de sortie 5 V trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_boost_output_current_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="131"/>
-      <source>Boost output current too low</source>
-      <translation>Courant de sortie de pointe trop bas</translation>
-    </message>
-    <message id="fp-genset-error_boost_output_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="133"/>
-      <source>Boost output current too high</source>
-      <translation>Courant de sortie de pointe trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_panel_supply_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="135"/>
-      <source>Panel supply current too high</source>
-      <translation>Courant d'alimentation panneau trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_starter_battery_voltage_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="137"/>
-      <source>Starter battery voltage too low</source>
-      <translation>Tension de batterie de démarrage trop basse</translation>
-    </message>
-    <message id="fp-genset-error_starter_battery_voltage_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="139"/>
-      <source>Starter battery voltage too high</source>
-      <translation>Tension de batterie de démarrage trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_rotation_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="145"/>
-      <source>Rotation too low</source>
-      <translation>Rotation trop basse</translation>
-    </message>
-    <message id="fp-genset-error_rotation_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="147"/>
-      <source>Rotation too high</source>
-      <translation>Rotation trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_power_contactor_current_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="149"/>
-      <source>Power contactor current too low</source>
-      <translation>Courant de contacteur de puissance trop bas</translation>
-    </message>
-    <message id="fp-genset-error_power_contactor_current_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="151"/>
-      <source>Power contactor current too high</source>
-      <translation>Courant de contacteur de puissance trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_ac_voltage_l2_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="153"/>
-      <source>AC voltage L2 too low</source>
-      <translation>Tension CA L2 trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_voltage_l2_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="155"/>
-      <source>AC voltage L2 too high</source>
-      <translation>Tension CA L2 trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_frequency_l2_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="157"/>
-      <source>AC frequency L2 too low</source>
-      <translation>Fréquence CA L2 trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_frequency_l2_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="159"/>
-      <source>AC frequency L2 too high</source>
-      <translation>Fréquence CA L2 trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_current_l2_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="161"/>
-      <source>AC current L2 too low</source>
-      <translation>Courant CA L2 trop bas</translation>
-    </message>
-    <message id="fp-genset-error_ac_current_l2_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="163"/>
-      <source>AC current L2 too high</source>
-      <translation>Courant CA L2 trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_ac_power_l2_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="165"/>
-      <source>AC power L2 too low</source>
-      <translation>Puissance CA L2 trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_power_l2_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="167"/>
-      <source>AC power L2 too high</source>
-      <translation>Puissance CA L2 trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_voltage_l3_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="169"/>
-      <source>AC voltage L3 too low</source>
-      <translation>Tension CA L3 trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_voltage_l3_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="171"/>
-      <source>AC voltage L3 too high</source>
-      <translation>Tension CA L3 trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_frequency_l3_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="173"/>
-      <source>AC frequency L3 too low</source>
-      <translation>Fréquence CA L3 trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_frequency_l3_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="175"/>
-      <source>AC frequency L3 too high</source>
-      <translation>Fréquence CA L3 trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_ac_current_l3_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="177"/>
-      <source>AC current L3 too low</source>
-      <translation>Courant CA L3 trop bas</translation>
-    </message>
-    <message id="fp-genset-error_ac_current_l3_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="179"/>
-      <source>AC current L3 too high</source>
-      <translation>Courant CA L3 trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_ac_power_l3_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="181"/>
-      <source>AC power L3 too low</source>
-      <translation>Puissance CA L3 trop basse</translation>
-    </message>
-    <message id="fp-genset-error_ac_power_l3_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="183"/>
-      <source>AC power L3 too high</source>
-      <translation>Puissance CA L3 trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_fuel_temperature_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="185"/>
-      <source>Fuel temperature too low</source>
-      <translation>Température carburant trop basse</translation>
-    </message>
-    <message id="fp-genset-error_fuel_temperature_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="187"/>
-      <source>Fuel temperature too high</source>
-      <translation>Température carburant trop élevée</translation>
-    </message>
-    <message id="fp-genset-error_fuel_level_too_low">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="189"/>
-      <source>Fuel level too low</source>
-      <translation>Niveau carburant trop bas</translation>
-    </message>
-    <message id="fp-genset-error_fuel_level_too_high">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="191"/>
-      <source>Fuel level too high</source>
-      <translation>Niveau carburant trop élevé</translation>
-    </message>
-    <message id="fp-genset-error_lost_control_unit">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="195"/>
-      <source>Lost control unit</source>
-      <translation>Unité de contrôle perdue</translation>
-    </message>
-    <message id="fp-genset-error_lost_panel">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="197"/>
-      <source>Lost panel</source>
-      <translation>Panneau perdu</translation>
-    </message>
-    <message id="fp-genset-error_service_needed">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="199"/>
-      <source>Service needed</source>
-      <translation>Réparation nécessaire</translation>
-    </message>
-    <message id="fp-genset-error_lost_3-phase_module">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="201"/>
-      <source>Lost 3-phase module</source>
-      <translation>Module triphasé perdu</translation>
-    </message>
-    <message id="fp-genset-error_lost_agt_module">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="203"/>
-      <source>Lost AGT module</source>
-      <translation>Module AGT perdu</translation>
-    </message>
-    <message id="fp-genset-error_synchronization_failure">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="205"/>
-      <source>Synchronization failure</source>
-      <translation>Échec synchronisation</translation>
-    </message>
-    <message id="fp-genset-error_intake_airfilter">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="207"/>
-      <source>Intake airfilter</source>
-      <translation>Filtre d'aspiration d'air</translation>
-    </message>
-    <message id="fp-genset-error_lost_sync._module">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="209"/>
-      <source>Lost sync. module</source>
-      <translation>Module sync. perdu</translation>
-    </message>
-    <message id="fp-genset-error_load-balance_failed">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="211"/>
-      <source>Load-balance failed</source>
-      <translation>Échec équilibrage de charge</translation>
-    </message>
-    <message id="fp-genset-error_sync-mode_deactivated">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="213"/>
-      <source>Sync-mode deactivated</source>
-      <translation>Mode sync. désactivé</translation>
-    </message>
-    <message id="fp-genset-error_engine_controller">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="215"/>
-      <source>Engine controller</source>
-      <translation>Contrôleur moteur</translation>
-    </message>
-    <message id="fp-genset-error_rotating_field_wrong">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="217"/>
-      <source>Rotating field wrong</source>
-      <translation>Champ de rotation incorrect</translation>
-    </message>
-    <message id="fp-genset-error_fuel_level_sensor_lost">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="219"/>
-      <source>Fuel level sensor lost</source>
-      <translation>Sonde de niveau de carburant perdue</translation>
-    </message>
-    <message id="fp-genset-error_init_failed">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="223"/>
-      <source>Init failed</source>
-      <translation>Échec init.</translation>
     </message>
     <message id="cycle_history_watchdog">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="41"/>
       <source>Watchdog</source>
       <translation>Chien de garde</translation>
-    </message>
-    <message id="fp-genset-error_out_winding">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="227"/>
-      <source>Out: winding</source>
-      <translation>Sortie : enroulement</translation>
-    </message>
-    <message id="fp-genset-error_out_exhaust">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="229"/>
-      <source>Out: exhaust</source>
-      <translation>Sortie : échappement</translation>
-    </message>
-    <message id="fp-genset-error_out_cyl_head">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="231"/>
-      <source>Out: Cyl. head</source>
-      <translation>Sortie : tête cyl.</translation>
-    </message>
-    <message id="fp-genset-error_inverter_over_temperature">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="233"/>
-      <source>Inverter over temperature</source>
-      <translation>Surchauffe convertisseur</translation>
-    </message>
-    <message id="fp-genset-error_inverter_communication_lost">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="237"/>
-      <source>Inverter communication lost</source>
-      <translation>Communication convertisseur perdue</translation>
-    </message>
-    <message id="fp-genset-error_inverter_sync_failed">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="239"/>
-      <source>Inverter sync failed</source>
-      <translation>Échec sync. convertisseur</translation>
-    </message>
-    <message id="fp-genset-error_can_communication_lost">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="241"/>
-      <source>CAN communication lost</source>
-      <translation>Communication CAN perdue</translation>
-    </message>
-    <message id="fp-genset-error_l1_overload">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="243"/>
-      <source>L1 overload</source>
-      <translation>Surcharge L1</translation>
-    </message>
-    <message id="fp-genset-error_l2_overload">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="245"/>
-      <source>L2 overload</source>
-      <translation>Surcharge L2</translation>
-    </message>
-    <message id="fp-genset-error_l3_overload">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="247"/>
-      <source>L3 overload</source>
-      <translation>Surcharge L3</translation>
-    </message>
-    <message id="fp-genset-error_dc_overload">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="249"/>
-      <source>DC overload</source>
-      <translation>Surcharge CC</translation>
-    </message>
-    <message id="fp-genset-error_dc_overvoltage">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="251"/>
-      <source>DC overvoltage</source>
-      <translation>Surtension CC</translation>
     </message>
     <message id="ac-in-setup_unlocked_(kvarh)">
       <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="40"/>
@@ -4200,47 +3709,37 @@ Documentation sur https://ve3.nl/vol</translation>
       <translation>Triphasé</translation>
     </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="120"/>
+      <location filename="../../components/PageGensetModel.qml" line="159"/>
       <source>AC</source>
       <translation>CA</translation>
     </message>
-    <message id="ac-in-genset_auto_start_stop">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="154"/>
-      <source>Auto start/stop</source>
-      <translation>Allumage/démarrage automatique</translation>
-    </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="167"/>
+      <location filename="../../components/PageGensetModel.qml" line="205"/>
       <source>Engine</source>
       <translation>Moteur</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="211"/>
+      <location filename="../../components/PageGensetModel.qml" line="249"/>
       <source>Coolant temperature</source>
       <translation>Température de refroidissement</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="219"/>
+      <location filename="../../components/PageGensetModel.qml" line="257"/>
       <source>Exhaust temperature</source>
       <translation>Température d'échappement</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="226"/>
+      <location filename="../../components/PageGensetModel.qml" line="264"/>
       <source>Winding temperature</source>
       <translation>Température d'enroulement</translation>
     </message>
-    <message id="ac-in-genset_operating_time">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="233"/>
-      <source>Operating time</source>
-      <translation>Durée de fonctionnement</translation>
-    </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="241"/>
+      <location filename="../../components/PageGensetModel.qml" line="271"/>
       <source>Starter battery voltage</source>
       <translation>Tension de batterie de démarrage</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="249"/>
+      <location filename="../../components/PageGensetModel.qml" line="279"/>
       <source>Number of starts</source>
       <translation>Nombre de départs</translation>
     </message>
@@ -4257,35 +3756,35 @@ Documentation sur https://ve3.nl/vol</translation>
       <translation>Pas d'erreur (%1)</translation>
     </message>
     <message id="ac-in-modeldefault_ac_totals">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="63"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="63"/>
       <source>AC Totals</source>
       <translation>Totaux CA</translation>
     </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="88"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="88"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>Énergie L%1</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="103"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="103"/>
       <source>Phase Sequence</source>
       <translation>Séquence de phase</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="109"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="109"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="112"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="112"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelDefault.qml" line="152"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="152"/>
       <source>Data manager version</source>
       <translation>Version Data Manager</translation>
     </message>
@@ -4312,7 +3811,7 @@ Documentation sur https://ve3.nl/vol</translation>
       <translation>Appareils bus Smappee</translation>
     </message>
     <message id="solardevices_pv_charger">
-      <location filename="../../pages/solar/SolarDeviceListPage.qml" line="116"/>
+      <location filename="../../pages/solar/SolarDeviceListPage.qml" line="118"/>
       <source>PV Charger</source>
       <translation>Chargeur PV</translation>
     </message>
@@ -4337,18 +3836,12 @@ Documentation sur https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="165"/>
       <source>AC in %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
-      <translation>AC en %1</translation>
+      <translation>AC in %1</translation>
     </message>
     <message id="common_words_dc">
       <location filename="../../components/CommonWords.qml" line="126"/>
       <source>DC</source>
       <translation>CC</translation>
-    </message>
-    <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="417"/>
-      <source>SOC %1%</source>
-      <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
-      <translation>SOC %1%</translation>
     </message>
     <message id="pulsecounter_setup_inverted">
       <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="20"/>
@@ -4463,7 +3956,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="vebus_device_ac_sensor_x_y">
       <location filename="../../pages/vebusdevice/PageAcSensor.qml" line="26"/>
       <source>AC sensor %1 %2</source>
-      <translation>Capteur AC %1 %2</translation>
+      <translation>Sonde CA %1 %2</translation>
     </message>
     <message id="vebus_mk3_new_version_available">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="97"/>
@@ -4546,8 +4039,8 @@ Voulez-vous continuer ?</translation>
       <source>DC Current</source>
       <translation>Courant CC</translation>
     </message>
-    <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="251"/>
+    <message id="settings_tailscale_advanced">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="294"/>
       <source>Advanced</source>
       <translation>Avancé</translation>
     </message>
@@ -4597,8 +4090,8 @@ Voulez-vous continuer ?</translation>
       <source>Interrupting...</source>
       <translation>Interruption en cours...</translation>
     </message>
-    <message id="vebus_device_starting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="107"/>
+    <message id="settings_tailscale_starting">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="52"/>
       <source>Starting...</source>
       <translation>Démarrage en cours...</translation>
     </message>
@@ -5619,33 +5112,33 @@ Voulez-vous continuer ?</translation>
       <translation>Echange</translation>
     </message>
     <message id="settings_firmware_error_during_checking_for_updates">
-      <location filename="../../components/FirmwareUpdate.qml" line="38"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="55"/>
       <source>Error while checking for firmware updates</source>
       <translation>Erreur lors de la recherche de mises à jour micrologiciel</translation>
     </message>
     <message id="settings_firmware_downloading_and_installing">
-      <location filename="../../components/FirmwareUpdate.qml" line="46"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="63"/>
       <source>Downloading and installing firmware %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>Téléchargement et installation en cours micrologiciel %1...</translation>
     </message>
     <message id="settings_firmware_installing_firmware">
-      <location filename="../../components/FirmwareUpdate.qml" line="53"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="70"/>
       <source>Installing firmware...</source>
       <translation>Installation en cours micrologiciel...</translation>
     </message>
     <message id="settings_firmware_error_during_installation">
-      <location filename="../../components/FirmwareUpdate.qml" line="58"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="75"/>
       <source>Error during firmware installation</source>
       <translation>Erreur lors de l’installation du micrologiciel</translation>
     </message>
     <message id="settings_firmware_no_newer_version_available">
-      <location filename="../../components/FirmwareUpdate.qml" line="157"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="185"/>
       <source>No newer version available</source>
       <translation>Aucune version plus récente disponible</translation>
     </message>
     <message id="settings_firmware_no_firmware_found">
-      <location filename="../../components/FirmwareUpdate.qml" line="160"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="188"/>
       <source>No firmware found</source>
       <translation>Aucun micrologiciel trouvé</translation>
     </message>
@@ -6281,7 +5774,7 @@ Voulez-vous continuer ?</translation>
       <translation>%1 restant</translation>
     </message>
     <message id="tank_description">
-      <location filename="../../data/common/Tank.qml" line="104"/>
+      <location filename="../../data/common/Tank.qml" line="96"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank desription. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 réservoir (%2)</translation>
@@ -6667,16 +6160,6 @@ Voulez-vous continuer ?</translation>
       <source>Inverter only</source>
       <translation>Onduleur uniquement</translation>
     </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_low)">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="141"/>
-      <source>Startup aborted (rotation too low)</source>
-      <translation>Démarrage avorté (rotation trop basse)</translation>
-    </message>
-    <message id="fp-genset-error_startup_aborted_(rotation_too_high)">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="143"/>
-      <source>Startup aborted (rotation too high)</source>
-      <translation>Démarrage avorté (rotation trop élevée)</translation>
-    </message>
     <message id="charger_alarms_short_circuit_alarm">
       <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="60"/>
       <source>Short circuit alarm</source>
@@ -6732,13 +6215,8 @@ Voulez-vous continuer ?</translation>
       <source>Application version</source>
       <translation>Version de l'application</translation>
     </message>
-    <message id="fp-genset-error_no_connection">
-      <location filename="../../pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml" line="255"/>
-      <source>No connection</source>
-      <translation>Pas de connexion</translation>
-    </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="203"/>
+      <location filename="../../components/PageGensetModel.qml" line="241"/>
       <source>Oil temperature</source>
       <translation>Température de l'huile</translation>
     </message>
@@ -6788,13 +6266,13 @@ Voulez-vous continuer ?</translation>
       <source>Sensor value when full</source>
       <translation>Valeur du capteur quand plein</translation>
     </message>
-    <message id="settings_page_relay_generator_time_to_service">
-      <location filename="../../pages/settings/PageGenerator.qml" line="94"/>
+    <message id="settings_page_run_time_and_service_time_to_service">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="143"/>
       <source>Time to service</source>
       <translation>Délai de mise en service</translation>
     </message>
     <message id="settings_page_relay_generator_auto_start_enabled">
-      <location filename="../../pages/settings/PageGenerator.qml" line="136"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="53"/>
       <source>Autostart functionality</source>
       <oldsource>Auto start functionality</oldsource>
       <translation>Fonctionnalité de démarrage automatique</translation>
@@ -6805,10 +6283,9 @@ Voulez-vous continuer ?</translation>
       <oldsource>Make sure that the generator is not connected to AC input %1 when using this option.</oldsource>
       <translation>Assurez-vous que le générateur n'est pas connecté à l'entrée AC %1 lorsque vous utilisez cette option.</translation>
     </message>
-    <message id="page_settings_generator_service_timer_has_been_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="94"/>
+    <message id="page_settings_run_time_and_service_service_timer_has_been_reset">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
       <source>The service timer has been reset</source>
-      <oldsource>The service timer has been reset.</oldsource>
       <translation>La minuterie de service a été réinitialisée</translation>
     </message>
     <message id="settings_continuous_scan_may_interfere">
@@ -7082,7 +6559,7 @@ Voulez-vous continuer ?</translation>
       <translation>Production aujourd'hui</translation>
     </message>
     <message id="settings_firmware_installed_rebooting">
-      <location filename="../../components/FirmwareUpdate.qml" line="62"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="79"/>
       <source>Firmware installed, device rebooting</source>
       <oldsource>Firmware installed, rebooting.</oldsource>
       <translation>Firmware installé, appareil redémarré</translation>
@@ -7149,12 +6626,12 @@ Voulez-vous continuer ?</translation>
       <translation>Passthrough</translation>
     </message>
     <message id="firmware_installed_build_version_update_detected">
-      <location filename="../../pages/DialogLayer.qml" line="47"/>
+      <location filename="../../pages/DialogLayer.qml" line="55"/>
       <source>Firmware version update detected</source>
       <translation>Mise à jour de la version du micrologiciel détectée</translation>
     </message>
     <message id="firmware_installed_build_page_will_reload">
-      <location filename="../../pages/DialogLayer.qml" line="49"/>
+      <location filename="../../pages/DialogLayer.qml" line="57"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>La page sera automatiquement rechargée dans dix secondes pour afficher la dernière version.</translation>
     </message>
@@ -7630,37 +7107,32 @@ See documentation for further information.</oldsource>
       <translation>La fonctionnalité de démarrage à distance est désactivée sur le groupe électrogène. Le GX ne pourra pas démarrer ou arrêter le groupe électrogène pour le moment. Activez-le sur le panneau de commande du groupe électrogène.</translation>
     </message>
     <message id="ac-in-genset_auto_start_functionality">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="41"/>
+      <location filename="../../components/PageGensetModel.qml" line="48"/>
       <source>Auto start functionality</source>
       <translation>Fonction de démarrage auto</translation>
     </message>
     <message id="ac-in-genset_auto_control_status">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="57"/>
+      <location filename="../../components/PageGensetModel.qml" line="72"/>
       <source>Control status</source>
       <translation>État du contrôle</translation>
     </message>
     <message id="ac-in-genset_status">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="80"/>
+      <location filename="../../components/PageGensetModel.qml" line="95"/>
       <source>Genset status</source>
       <translation>État du groupe électrogène</translation>
     </message>
-    <message id="ac-in-genset_error">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="91"/>
-      <source>Genset error code</source>
-      <translation>Code d'erreur du groupe électrogène</translation>
-    </message>
     <message id="ac-in-clear-genset_error">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="99"/>
+      <location filename="../../components/PageGensetModel.qml" line="138"/>
       <source>Clear genset error</source>
       <translation>Effacer l'erreur du groupe électrogène</translation>
     </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="147"/>
+      <location filename="../../components/PageGensetModel.qml" line="186"/>
       <source>Remote start mode</source>
       <translation>Mode démarrage à distance</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="195"/>
+      <location filename="../../components/PageGensetModel.qml" line="233"/>
       <source>Oil pressure</source>
       <oldsource>Oil Pressure</oldsource>
       <translation>Pression d'huile</translation>
@@ -7698,17 +7170,17 @@ See documentation for further information.</oldsource>
       <translation>%1 (non disponible)</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="75"/>
+      <location filename="../../ApplicationContent.qml" line="73"/>
       <source>Touch input on</source>
       <translation>Entrée tactile on</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="77"/>
+      <location filename="../../ApplicationContent.qml" line="75"/>
       <source>Touch input off</source>
       <translation>Entrée tactile off</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="89"/>
+      <location filename="../../ApplicationContent.qml" line="87"/>
       <source>Touch input disabled</source>
       <translation>Entrée tactile désactivée</translation>
     </message>
@@ -7718,7 +7190,7 @@ See documentation for further information.</oldsource>
       <translation>Accuser réception des alertes</translation>
     </message>
     <message id="ac-in-genset_control_error_code">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModelGenset.qml" line="73"/>
+      <location filename="../../components/PageGensetModel.qml" line="88"/>
       <source>Control error code</source>
       <translation>Code d'erreur de contrôle</translation>
     </message>
@@ -7833,8 +7305,8 @@ See documentation for further information.</oldsource>
       <source>Logout</source>
       <translation>Déconnexion</translation>
     </message>
-    <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="271"/>
+    <message id="settings_tailscale_logout_button">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="228"/>
       <source>Log out now</source>
       <translation>Se déconnecter</translation>
     </message>
@@ -7852,11 +7324,6 @@ See documentation for further information.</oldsource>
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="287"/>
       <source>Log out</source>
       <translation>Déconnexion</translation>
-    </message>
-    <message id="settings_logging_vrm_portal">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="45"/>
-      <source>VRM portal</source>
-      <translation>Portail VRM</translation>
     </message>
     <message id="settings_vrm_portal_readonly">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="52"/>
@@ -7896,7 +7363,7 @@ See documentation for further information.</oldsource>
       <translation>Éteint</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsServices.qml" line="48"/>
       <source>MQTT Access</source>
       <translation>Accès MQTT</translation>
     </message>
@@ -7926,20 +7393,224 @@ See documentation for further information.</oldsource>
       <source>'%1' is not a valid port number. Use a number between 0-65535.</source>
       <translation>'%1' n'est pas un numéro de port valide. Utilisez un numéro compris entre 0 et 65535.</translation>
     </message>
-    <message id="text_field_default_error_text">
-      <location filename="../../components/listitems/ListTextField.qml" line="74"/>
-      <source>The entered text does not have the correct format. Try again.</source>
-      <translation>Le texte saisi n'a pas le bon format. Réessayez.</translation>
-    </message>
-    <message id="settings_security_warning_profile_configuration_order">
-      <location filename="../../components/settings/ListSecurityWarningSwitch.qml" line="15"/>
-      <source>A Security Profile must configured before the network services can be enabled, see Settings - General</source>
-      <translation>Un profil de sécurité doit être configuré avant que les services réseau puissent être activés, voir Paramètres - Général</translation>
-    </message>
     <message id="modbus_add_unit_invalid">
       <location filename="../../pages/settings/PageSettingsModbusAddDevice.qml" line="63"/>
       <source>%1 is not a valid unit number. Use a number between 1-247.</source>
       <translation>%1 n'est pas un numéro d'unité valide. Utilisez un nombre compris entre 1 et 247.</translation>
+    </message>
+    <message id="settings_page_relay_generator_run_time">
+      <location filename="../../pages/settings/PageGenerator.qml" line="71"/>
+      <source>Current run time</source>
+      <oldsource>Run time</oldsource>
+      <translation>Durée d'exécution actuelle</translation>
+    </message>
+    <message id="ac-in-genset_error">
+      <location filename="../../components/PageGensetModel.qml" line="106"/>
+      <source>Genset error codes</source>
+      <translation>Codes d'erreur du groupe électrogène</translation>
+    </message>
+    <message id="genset_heatsink_temperature">
+      <location filename="../../components/PageGensetModel.qml" line="198"/>
+      <source>Heatsink temperature</source>
+      <translation>Température du radiateur</translation>
+    </message>
+    <message id="page_genset_model_bms_settings">
+      <location filename="../../components/PageGensetModel.qml" line="311"/>
+      <source>BMS Settings</source>
+      <translation>Paramètres du BMS</translation>
+    </message>
+    <message id="genset_charge_voltage_controlled_by_bms">
+      <location filename="../../components/PageGensetModel.qml" line="349"/>
+      <source>The charge voltage is currently controlled by the BMS.</source>
+      <translation>La tension de charge est actuellement contrôlée par le BMS.</translation>
+    </message>
+    <message id="genset_charge_current_limit">
+      <location filename="../../components/PageGensetModel.qml" line="355"/>
+      <source>Charge current limit</source>
+      <translation>Limite de courant de charge</translation>
+    </message>
+    <message id="genset_bms_controlled">
+      <location filename="../../components/PageGensetModel.qml" line="365"/>
+      <source>BMS Controlled</source>
+      <translation>Contrôlé par BMS</translation>
+    </message>
+    <message id="genset_bms_control_enabled_automatically">
+      <location filename="../../components/PageGensetModel.qml" line="371"/>
+      <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
+      <translation>Le contrôle du BMS est activé automatiquement si un BMS est présent. Réinitialisez-le si la configuration du système a été modifiée ou s'il n'y a pas de BMS.</translation>
+    </message>
+    <message id="page_settings_run_time_and_service_service_time_disabled">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="165"/>
+      <source>Service timer disabled.</source>
+      <translation>Minuterie de service désactivée.</translation>
+    </message>
+    <message id="settings_logging_vrm_portal">
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="45"/>
+      <source>VRM Portal</source>
+      <translation>Portail VRM</translation>
+    </message>
+    <message id="settings_services_tailscale_remote_vpn_access">
+      <location filename="../../pages/settings/PageSettingsServices.qml" line="31"/>
+      <source>Tailscale (remote VPN access)</source>
+      <translation>Tailscale (accès VPN à distance)</translation>
+    </message>
+    <message id="common_words_soc">
+      <location filename="../../components/CommonWords.qml" line="417"/>
+      <source>SOC %1</source>
+      <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
+      <translation>SOC %1%</translation>
+    </message>
+    <message id="settings_security_warning_profile_configuration_order">
+      <location filename="../../components/settings/ListSecurityWarningSwitch.qml" line="15"/>
+      <source>A Security Profile must be configured before the network services can be enabled, see Settings - General</source>
+      <translation>Un profil de sécurité doit être configuré avant que les services réseau puissent être activés, voir Paramètres - Général</translation>
+    </message>
+    <message id="settings_tailscale_replaced_invalid_characters">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="37"/>
+      <source>'%1' was replaced with '%2' since it contained invalid characters.</source>
+      <translation>'%1' a été remplacé par '%2' car il contenait des caractères non valides.</translation>
+    </message>
+    <message id="settings_tailscale_initializing">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="58"/>
+      <source>Initializing...</source>
+      <translation>Initialisation...</translation>
+    </message>
+    <message id="settings_tailscale_backend_starting">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="61"/>
+      <source>Backend starting...</source>
+      <translation>Backend débutant...</translation>
+    </message>
+    <message id="settings_tailscale_backend_stopped">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="64"/>
+      <source>Backend stopped.</source>
+      <translation>Backend arrêté.</translation>
+    </message>
+    <message id="settings_tailscale_connection_failed">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="67"/>
+      <source>Connection failed.</source>
+      <translation>La connexion a échoué.</translation>
+    </message>
+    <message id="settings_tailscale_logged_out">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="70"/>
+      <source>This GX device is logged out of Tailscale.
+
+Please wait or check your internet connection.</source>
+      <translation>Cet appareil GX est déconnecté de Tailscale.
+
+Veuillez patienter ou vérifier votre connexion internet.</translation>
+    </message>
+    <message id="settings_tailscale_wait_for_response">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="73"/>
+      <source>Waiting for a response from Tailscale...</source>
+      <translation>En attente d'une réponse de Tailscale...</translation>
+    </message>
+    <message id="settings_tailscale_wait_for_login">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="76"/>
+      <source>Connect this GX device to your Tailscale account by opening this link:</source>
+      <translation>Connectez cet appareil GX à votre compte Tailscale en ouvrant ce lien :</translation>
+    </message>
+    <message id="settings_tailscale_check_internet_connection">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="79"/>
+      <source>Please wait or check your internet connection.</source>
+      <translation>Veuillez patienter ou vérifier votre connexion internet.</translation>
+    </message>
+    <message id="settings_tailscale_unknown_state">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="83"/>
+      <source>Unknown state: #%1</source>
+      <extracomment>%1 = number code for the connect state</extracomment>
+      <translation>État inconnu : #%1</translation>
+    </message>
+    <message id="settings_tailscale_error">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="88"/>
+      <source>ERROR: %1</source>
+      <translation>Erreur : %1</translation>
+    </message>
+    <message id="settings_tailscale_wifi">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="104"/>
+      <source>WiFi</source>
+      <translation>Wi-Fi</translation>
+    </message>
+    <message id="settings_tailscale_disable_to_edit">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="124"/>
+      <source>Disable Tailscale to edit these settings.</source>
+      <translation>Désactiver Tailscale pour modifier ces paramètres.</translation>
+    </message>
+    <message id="settings_tailscale_enable">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="165"/>
+      <source>Enable Tailscale</source>
+      <translation>Activer Tailscale</translation>
+    </message>
+    <message id="settings_tailscale_machinename">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="201"/>
+      <source>Machine name</source>
+      <translation>Nom de la machine</translation>
+    </message>
+    <message id="settings_tailscale_ipv4">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="212"/>
+      <source>IPv4</source>
+      <translation>IPv4</translation>
+    </message>
+    <message id="settings_tailscale_ipv6">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="219"/>
+      <source>IPv6</source>
+      <translation>IPv6</translation>
+    </message>
+    <message id="settings_tailscale_logout">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="226"/>
+      <source>Logout from Tailscale account</source>
+      <translation>Déconnexion du compte Tailscale</translation>
+    </message>
+    <message id="settings_tailscale_local_network_access">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="236"/>
+      <source>Local network access</source>
+      <translation>Accès au réseau local</translation>
+    </message>
+    <message id="settings_tailscale_local_network_access_ethernet">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="250"/>
+      <source>Access local ethernet network</source>
+      <translation>Accès au réseau local ethernet</translation>
+    </message>
+    <message id="settings_tailscale_local_network_access_wifi">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="257"/>
+      <source>Access local WiFi network</source>
+      <translation>Accéder au réseau WiFi local</translation>
+    </message>
+    <message id="settings_tailscale_local_network_access_custom_networks">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="264"/>
+      <source>Custom network(s)</source>
+      <translation>Réseau(x) personnalisé(s)</translation>
+    </message>
+    <message id="settings_tailscale_local_network_access_custom_networks_placeholder">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="267"/>
+      <source>Example: 192.168.1.0/24</source>
+      <translation>Exemple : 192.168.1.0/24</translation>
+    </message>
+    <message id="settings_tailscale_local_network_access_explanation">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="280"/>
+      <source>Explanation:
+
+This feature, called subnet routes by Tailscale, allows remote access to other devices in the local network(s).
+
+The custom networks field accepts a comma-separated list of CIDR notation subnets.
+
+After adding/enabling a new network, you need to approve it in the Tailscale admin console once.</source>
+      <translation>Explication :
+
+Cette fonction, appelée routes de sous-réseau par Tailscale, permet d'accéder à distance à d'autres appareils sur le(s) réseau(x) local(aux).
+
+Le champ réseaux personnalisés accepte une liste de sous-réseaux en notation CIDR séparée par des virgules.
+
+Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois dans la console d'administration de Tailscale.</translation>
+    </message>
+    <message id="settings_tailscale_advanced_custom_tailscale_up_arguments">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="307"/>
+      <source>Custom "tailscale up" arguments</source>
+      <translation>Arguments personnalisés "tailscale up</translation>
+    </message>
+    <message id="settings_tailscale_advanced_custom_server_url">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="318"/>
+      <source>Custom server URL (Headscale)</source>
+      <translation>URL du serveur personnalisé (Headscale)</translation>
     </message>
   </context>
   <context>
@@ -9504,6 +9175,876 @@ See documentation for further information.</oldsource>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
       <source>Battery temperature sensor defective</source>
       <translation>Capteur de température de la batterie défectueux</translation>
+    </message>
+  </context>
+  <context>
+    <name>CRE</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="838"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="843"/>
+      <source>Unknown error: </source>
+      <translation>Erreur inconnue :</translation>
+    </message>
+  </context>
+  <context>
+    <name>DEIF</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="857"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="862"/>
+      <source>Unknown error: </source>
+      <translation>Erreur inconnue :</translation>
+    </message>
+  </context>
+  <context>
+    <name>DSE</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="242"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="247"/>
+      <source>Unknown error: </source>
+      <translation>Erreur inconnue :</translation>
+    </message>
+  </context>
+  <context>
+    <name>FischerPanda</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="87"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="92"/>
+      <source>Unknown error: </source>
+      <translation>Erreur inconnue :</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="98"/>
+      <source>No error</source>
+      <translation>Aucune erreur</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="101"/>
+      <source>AC voltage L1 too low</source>
+      <translation>Tension CA L1 trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="101"/>
+      <source>AC voltage too low</source>
+      <translation>Tension CA trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="102"/>
+      <source>AC voltage L1 too high</source>
+      <translation>Tension CA L1 trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="102"/>
+      <source>AC voltage too high</source>
+      <translation>Tension CA trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="103"/>
+      <source>AC frequency L1 too low</source>
+      <translation>Fréquence CA L1 trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="103"/>
+      <source>AC frequency too low</source>
+      <translation>Fréquence CA trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="104"/>
+      <source>AC frequency L1 too high</source>
+      <translation>Fréquence CA L1 trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="104"/>
+      <source>AC frequency too high</source>
+      <translation>Fréquence CA trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="105"/>
+      <source>AC current L1 too high</source>
+      <translation>Courant CA L1 trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="105"/>
+      <source>AC current too high</source>
+      <translation>Courant CA trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="106"/>
+      <source>AC power L1 too high</source>
+      <translation>Puissance CA L1 trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="106"/>
+      <source>AC power too high</source>
+      <translation>Puissance CA trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="107"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="231"/>
+      <source>Emergency stop</source>
+      <translation>Arrêt d'urgence</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="108"/>
+      <source>Servo current too high</source>
+      <translation>Courant servomoteur trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="109"/>
+      <source>Oil pressure too low</source>
+      <translation>Pression d'huile trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="110"/>
+      <source>Oil pressure too high</source>
+      <translation>Pression d'huile trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="111"/>
+      <source>Engine temperature too low</source>
+      <translation>Température moteur trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="112"/>
+      <source>Engine temperature too high</source>
+      <translation>Température moteur trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="113"/>
+      <source>Winding temperature too low</source>
+      <translation>Température d'enroulement trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="114"/>
+      <source>Winding temperature too high</source>
+      <translation>Température d'enroulement trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="115"/>
+      <source>Exhaust temperature too low</source>
+      <translation>Température d'échappement trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="116"/>
+      <source>Exhaust temperature too high</source>
+      <translation>Température d'échappement trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="117"/>
+      <source>Electronic temperature low</source>
+      <translation>Température électronique basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="118"/>
+      <source>Electronic temperature high</source>
+      <translation>Température électronique élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="119"/>
+      <source>Starter voltage too low</source>
+      <translation>Tension de démarrage trop faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="120"/>
+      <source>Starter current too high</source>
+      <translation>Courant de batterie de démarrage trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="121"/>
+      <source>Glow voltage too low</source>
+      <translation>Tension de préchauffage trop faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="122"/>
+      <source>Glow current too high</source>
+      <translation>Courant d'effluve trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="123"/>
+      <source>Cold-Start-Aid voltage too high</source>
+      <translation>Tension de l'aide au démarrage à froid trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="124"/>
+      <source>Cold-Start-Aid current too high</source>
+      <translation>Courant d'aide au démarrage à froid trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="125"/>
+      <source>Fuel holding magnet voltage too low</source>
+      <translation>Tension de l'aimant de maintien du carburant trop faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="126"/>
+      <source>Fuel holding magnet current too high</source>
+      <translation>Courant d'électroaimant de carburant trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="127"/>
+      <source>Stop solenoid hold coil voltage too low</source>
+      <translation>Tension de la bobine de maintien du solénoïde d'arrêt trop faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="128"/>
+      <source>Stop solenoid hold coil current too high</source>
+      <translation>Courant de bobine de fixation solenoïde d'arrêt trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="129"/>
+      <source>Stop solenoid pull coil voltage too low </source>
+      <translation>Tension de la bobine de traction du solénoïde d'arrêt trop faible </translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="130"/>
+      <source>Stop solenoid pull coil current too high</source>
+      <translation>Courant de bobine de traction solenoïde d'arrêt trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="131"/>
+      <source>Fan/water pump voltage too low</source>
+      <translation>Tension du ventilateur/de la pompe à eau trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="132"/>
+      <source>Fan/water pump current too high</source>
+      <translation>Courant du ventilateur/de la pompe à eau trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="133"/>
+      <source>Current sensor voltage low</source>
+      <translation>Tension basse du capteur de courant</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="134"/>
+      <source>Current sensor current high</source>
+      <translation>Courant élevé du capteur de courant</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="135"/>
+      <source>Boost output voltage too low</source>
+      <translation>Tension de sortie de l'amplificateur trop faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="136"/>
+      <source>Boost output current too high</source>
+      <translation>Courant de sortie de pointe trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="137"/>
+      <source>Bus supply voltage too low</source>
+      <translation>Tension d'alimentation du bus trop faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="138"/>
+      <source>Bus supply current too high</source>
+      <translation>Courant d'alimentation du bus trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="139"/>
+      <source>Starter battery voltage too low</source>
+      <translation>Tension de batterie de démarrage trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="140"/>
+      <source>Starter battery voltage too high</source>
+      <translation>Tension de batterie de démarrage trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="141"/>
+      <source>Rotation too low</source>
+      <translation>Rotation trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="142"/>
+      <source>Rotation too high</source>
+      <translation>Rotation trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="143"/>
+      <source>Unexpected stop/problem with fuel supply</source>
+      <translation>Arrêt inattendu/problème d'alimentation en carburant</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="144"/>
+      <source>Power contactor voltage too low</source>
+      <translation>Tension du contacteur de puissance trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="145"/>
+      <source>Power contactor current too high</source>
+      <translation>Courant de contacteur de puissance trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="146"/>
+      <source>AC voltage L2 too low</source>
+      <translation>Tension CA L2 trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="147"/>
+      <source>AC voltage L2 too high</source>
+      <translation>Tension CA L2 trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="148"/>
+      <source>AC frequency L2 too low</source>
+      <translation>Fréquence CA L2 trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="149"/>
+      <source>AC frequency L2 too high</source>
+      <translation>Fréquence CA L2 trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="150"/>
+      <source>AC current L2 too high</source>
+      <translation>Courant CA L2 trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="151"/>
+      <source>AC power L2 too high</source>
+      <translation>Puissance CA L2 trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="152"/>
+      <source>AC voltage L3 too low</source>
+      <translation>Tension CA L3 trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="153"/>
+      <source>AC voltage L3 too high</source>
+      <translation>Tension CA L3 trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="154"/>
+      <source>AC frequency L3 too low</source>
+      <translation>Fréquence CA L3 trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="155"/>
+      <source>AC frequency L3 too high</source>
+      <translation>Fréquence CA L3 trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="156"/>
+      <source>AC current L3 too high</source>
+      <translation>Courant CA L3 trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="157"/>
+      <source>AC power L3 too high</source>
+      <translation>Puissance CA L3 trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="158"/>
+      <source>Output Inverter voltage too low</source>
+      <translation>Sortie Tension de l'onduleur trop faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="159"/>
+      <source>Output Inverter current too  high</source>
+      <translation>Sortie Courant de l'onduleur trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="160"/>
+      <source>Universal output (1A) voltage too low</source>
+      <translation>Tension de la sortie universelle (1A) trop faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="161"/>
+      <source>Universal output (1A) current too high</source>
+      <translation>Courant de la sortie universelle (1A) trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="162"/>
+      <source>Universal output (5A) voltage too low</source>
+      <translation>Tension de la sortie universelle (5A) trop faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="163"/>
+      <source>Universal output (5A) current too high</source>
+      <translation>Courant de sortie universel (5A) trop élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="164"/>
+      <source>AGT DC voltage 1 low</source>
+      <translation>AGT Tension continue 1 faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="165"/>
+      <source>AGT DC voltage 1 high</source>
+      <translation>AGT Tension continue 1 élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="166"/>
+      <source>AGT DC current 1 low</source>
+      <translation>AGT Courant continu 1 faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="167"/>
+      <source>AGT DC current 1 high</source>
+      <translation>AGT Courant continu 1 élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="168"/>
+      <source>AGT DC voltage 2 low</source>
+      <translation>AGT Tension continue 2 faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="169"/>
+      <source>AGT DC voltage 2 high</source>
+      <translation>Tension continue AGT 2 élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="170"/>
+      <source>AGT DC current 2 low</source>
+      <translation>AGT Courant continu 2 faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="171"/>
+      <source>AGT DC current 2 high</source>
+      <translation>AGT Courant continu 2 élevé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="172"/>
+      <source>AGT B6 cooler low</source>
+      <translation>AGT B6 cooler low</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="173"/>
+      <source>AGT B6 cooler high</source>
+      <translation>AGT B6 cooler high</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="174"/>
+      <source>AGT B6 rail (-) low</source>
+      <translation>AGT B6 rail (-) bas</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="175"/>
+      <source>AGT B6 rail (-) high</source>
+      <translation>AGT B6 rail (-) haut</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="176"/>
+      <source>AGT B6 rail (+) low</source>
+      <translation>AGT B6 rail (+) bas</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="177"/>
+      <source>AGT B6 rail (+) high</source>
+      <translation>AGT B6 rail (+) haut</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="178"/>
+      <source>Fuel temperature too low</source>
+      <translation>Température carburant trop basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="179"/>
+      <source>Fuel temperature too high</source>
+      <translation>Température carburant trop élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="180"/>
+      <source>Fuel level too low</source>
+      <translation>Niveau carburant trop bas</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="183"/>
+      <source>Lost control unit</source>
+      <translation>Unité de contrôle perdue</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="184"/>
+      <source>Lost panel</source>
+      <translation>Panneau perdu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="185"/>
+      <source>Service needed</source>
+      <translation>Réparation nécessaire</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="186"/>
+      <source>Lost 3-phase module</source>
+      <translation>Module triphasé perdu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="187"/>
+      <source>Lost AGT module</source>
+      <translation>Module AGT perdu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="188"/>
+      <source>Synchronization failure</source>
+      <translation>Échec synchronisation</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="189"/>
+      <source>Lost external ECU</source>
+      <translation>Perte de l'ECU externe</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="190"/>
+      <source>Intake airfilter</source>
+      <translation>Filtre d'aspiration d'air</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="191"/>
+      <source>Diagnostic message (ECU)</source>
+      <translation>Message de diagnostic (ECU)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="192"/>
+      <source>Lost sync. module</source>
+      <translation>Module sync. perdu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="193"/>
+      <source>Load-balance failed</source>
+      <translation>Échec équilibrage de charge</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="194"/>
+      <source>Sync-mode deactivated</source>
+      <translation>Mode sync. désactivé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="195"/>
+      <source>Red Stop Lamp (RSL)</source>
+      <translation>Feu rouge d'arrêt (RSL)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="196"/>
+      <source>Amber Warning Lamp (AWL)</source>
+      <translation>Lampe d'avertissement orange (AWL)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="197"/>
+      <source>Malfunction Indicator Lamp (MIL)</source>
+      <translation>Témoin de dysfonctionnement (MIL)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="198"/>
+      <source>Protect Lamp (PL)</source>
+      <translation>Lampe de protection (PL)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="199"/>
+      <source>Rotating field wrong</source>
+      <translation>Champ de rotation incorrect</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="200"/>
+      <source>Fuel level sensor lost</source>
+      <translation>Sonde de niveau de carburant perdue</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="201"/>
+      <source>Starting without inverter</source>
+      <translation>Démarrage sans onduleur</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="202"/>
+      <source>Bus #1 dead</source>
+      <translation>Le bus n° 1 est mort</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="203"/>
+      <source>Start request denied</source>
+      <translation>Demande de démarrage refusée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="204"/>
+      <source>Remote start denied</source>
+      <translation>Démarrage à distance refusé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="205"/>
+      <source>Forced switch off load relay</source>
+      <translation>Interruption forcée du relais de charge</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="206"/>
+      <source>Synchronization Module is offline</source>
+      <translation>Le module de synchronisation est hors ligne</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="207"/>
+      <source>Lost BMS</source>
+      <translation>BMS perdu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="208"/>
+      <source>Converter DC Link Voltage Low/Reverse</source>
+      <translation>Tension de liaison CC du convertisseur basse/inverse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="209"/>
+      <source>Converter DC Link Current Low</source>
+      <translation>Courant de liaison CC du convertisseur Faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="210"/>
+      <source>Converter DC Precharge Voltage Low</source>
+      <translation>Tension de précharge CC du convertisseur basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="211"/>
+      <source>Converter DC Precharge Voltage High</source>
+      <translation>Convertisseur Tension de précharge CC élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="212"/>
+      <source>Converter IGBT/MOSFET Driver Error</source>
+      <translation>Erreur du pilote du convertisseur IGBT/MOSFET</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="213"/>
+      <source>Converter Error Power Control Loop</source>
+      <translation>Erreur du convertisseur Boucle de contrôle de puissance</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="214"/>
+      <source>Converter AC Frequency Detection</source>
+      <translation>Détection de la fréquence CA du convertisseur</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="215"/>
+      <source>Converter Control Value Fail</source>
+      <translation>Défaut de la valeur de contrôle du convertisseur</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="216"/>
+      <source>Factory setting changed</source>
+      <translation>Modification du réglage d'usine</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="217"/>
+      <source>Parameter changed in admin mode</source>
+      <translation>Paramètre modifié en mode administrateur</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="218"/>
+      <source>Manual Intervention (ext. System)</source>
+      <translation>Intervention manuelle (système ext.)</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="221"/>
+      <source>Init failed</source>
+      <translation>Échec init.</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="222"/>
+      <source>Watchdog</source>
+      <translation>Chien de garde</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="223"/>
+      <source>Inverter temperature high L1</source>
+      <translation>Température élevée de l'onduleur L1</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="224"/>
+      <source>Inverter temperature high L2</source>
+      <translation>Température élevée de l'onduleur L2</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="225"/>
+      <source>Inverter temperature high L3</source>
+      <translation>Température de l'onduleur élevée L3</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="226"/>
+      <source>Inverter temperature high DC link</source>
+      <translation>Température de l'onduleur élevée Liaison DC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="227"/>
+      <source>Inverter overload</source>
+      <translation>Surcharge convertisseur</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="228"/>
+      <source>Inverter communication lost</source>
+      <translation>Communication convertisseur perdue</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="229"/>
+      <source>DC overload</source>
+      <translation>Surcharge CC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="230"/>
+      <source>DC overvoltage</source>
+      <translation>Surtension CC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="232"/>
+      <source>No connection</source>
+      <translation>Pas de connexion</translation>
+    </message>
+  </context>
+  <context>
+    <name>GensetError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="68"/>
+      <source>No error</source>
+      <translation>Aucune erreur</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="79"/>
+      <source>Unknown error: %1</source>
+      <translation>Erreur inconnue : %1</translation>
+    </message>
+  </context>
+  <context>
+    <name>Hatz</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="778"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="784"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="790"/>
+      <source>Unknown error: </source>
+      <translation>Erreur inconnue :</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="797"/>
+      <source>Oil pressure</source>
+      <translation>Pression d'huile</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="798"/>
+      <source>Cylinder head overtemperature</source>
+      <translation>Surchauffe de la culasse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="799"/>
+      <source>Charge control</source>
+      <translation>Contrôle de la charge</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="800"/>
+      <source>Speed higher than expected</source>
+      <translation>Vitesse plus élevée que prévu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="801"/>
+      <source>Overspeed</source>
+      <translation>Survitesse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="803"/>
+      <source>Oiltemperature higher than expected</source>
+      <translation>Température du pétrole plus élevée que prévu</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="804"/>
+      <source>Oiltemperature open circuit / short to power</source>
+      <translation>Température de l'huile circuit ouvert / court-circuit d'alimentation</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="805"/>
+      <source>Oiltemperature short to ground</source>
+      <translation>Température de l'huile court-circuit à la masse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="806"/>
+      <source>Analog setpoint high / short to power</source>
+      <translation>Point de consigne analogique élevé / court-circuit à l'alimentation</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="807"/>
+      <source>Analog setpoint low / short to ground</source>
+      <translation>Point de consigne analogique bas / court-circuit à la masse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="808"/>
+      <source>TSC1 message receive timeout</source>
+      <translation>Délai de réception du message TSC1</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="809"/>
+      <source>CM1 message receive timeout</source>
+      <translation>Délai de réception des messages CM1</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="810"/>
+      <source>Battery voltage high</source>
+      <translation>Tension de batterie élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="811"/>
+      <source>Battery voltage low</source>
+      <translation>Tension de batterie faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="812"/>
+      <source>Speed signal distorted</source>
+      <translation>Signal de vitesse déformé</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="813"/>
+      <source>Internal 5V sensor supply high</source>
+      <translation>Alimentation interne 5V du capteur élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="814"/>
+      <source>Internal 5V sensor supply low</source>
+      <translation>Alimentation interne 5V du capteur faible</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="815"/>
+      <source>Barometric pressure high</source>
+      <translation>Pression barométrique élevée</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="816"/>
+      <source>Barometric pressure low</source>
+      <translation>Pression barométrique basse</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="817"/>
+      <source>Output fuelpump short to power</source>
+      <translation>Court-circuit de la pompe à carburant de sortie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="818"/>
+      <source>Output fuelpump short to ground</source>
+      <translation>Court-circuit à la masse de la pompe à carburant de sortie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="819"/>
+      <source>Output glow plug short to power</source>
+      <translation>Court-circuit de la bougie de préchauffage de sortie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="820"/>
+      <source>Output glow plug short to ground</source>
+      <translation>Court-circuit à la masse de la bougie de préchauffage de sortie</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="821"/>
+      <source>Injector open circuit/low side short to ground</source>
+      <translation>Injecteur en circuit ouvert/court-circuit à la masse du côté bas</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="822"/>
+      <source>Injector coil internal short circuit</source>
+      <translation>Court-circuit interne de la bobine d'injecteur</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="823"/>
+      <source>Injector low side short to power</source>
+      <translation>Court-circuit d'alimentation du côté bas de l'injecteur</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="824"/>
+      <source>Service hours expired</source>
+      <translation>Heures de service expirées</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="828"/>
+      <source>Processor failure</source>
+      <translation>Défaillance du processeur</translation>
     </message>
   </context>
 </TS>
