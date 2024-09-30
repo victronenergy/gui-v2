@@ -18,10 +18,8 @@ ObjectModel {
 
 	ListTextItem {
 		text: CommonWords.status
-		dataItem.uid: root.productId === ProductInfo.ProductId_PvInverter_Fronius
-				? root.bindPrefix + "/StatusCode"
-				: ""
-		allowed: root.productId === ProductInfo.ProductId_PvInverter_Fronius
+		dataItem.uid: root.bindPrefix + "/StatusCode"
+		allowed: defaultAllowed && dataItem.isValid
 		secondaryText: Global.pvInverters.statusCodeToText(dataItem.value)
 	}
 
