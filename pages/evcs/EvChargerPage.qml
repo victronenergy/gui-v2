@@ -11,6 +11,8 @@ Page {
 
 	property var evCharger
 
+	readonly property bool energyMeterMode: !chargeMode.dataItem.isValid
+
 	title: evCharger.name
 
 	GradientListView {
@@ -22,6 +24,9 @@ Page {
 					id: chargerSummary
 
 					function _currentSummaryText() {
+						if (root.energyMeterMode) {
+							return "--"
+						}
 						const actual = isNaN(root.evCharger.current) ? "--" : Math.round(root.evCharger.current)
 						const max = isNaN(root.evCharger.maxCurrent) ? "--" : Math.round(root.evCharger.maxCurrent)
 						return actual + "/" + max
@@ -55,7 +60,7 @@ Page {
 							//: Charging time for the EV charger
 							//% "Time"
 							title: qsTrId("evcs_charging_time"),
-							text: Utils.formatAsHHMM(root.evCharger.chargingTime, true),
+							text: root.energyMeterMode ? "--" : Utils.formatAsHHMM(root.evCharger.chargingTime, true),
 							secondaryText: ""
 						},
 					]
@@ -99,9 +104,11 @@ Page {
 			}
 
 			ListRadioButtonGroup {
+				id: chargeMode
 				//% "Charge mode"
 				text: qsTrId("evcs_charge_mode")
 				dataItem.uid: root.evCharger.serviceUid + "/Mode"
+				allowed: defaultAllowed && dataItem.isValid
 				optionModel: [
 					{
 						display: Global.evChargers.chargerModeToText(VenusOS.Evcs_Mode_Manual),
@@ -130,12 +137,14 @@ Page {
 				from: 0
 				to: root.evCharger.maxCurrent
 				dataItem.uid: root.evCharger.serviceUid + "/Current"
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListSwitch {
 				//% "Enable charging"
 				text: qsTrId("evcs_enable_charging")
 				dataItem.uid: root.evCharger.serviceUid + "/StartStop"
+				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListNavigationItem {
