@@ -286,10 +286,15 @@ Page {
 
 			ListNavigationItem {
 				text: CommonWords.history
-				allowed: !isFiamm48TL
+				allowed: !isFiamm48TL && batteryHistory.hasAllowedItem
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryHistory.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.battery.serviceUid, "history": batteryHistory })
+				}
+
+				BatteryHistory {
+					id: batteryHistory
+					bindPrefix: root.battery.serviceUid
 				}
 			}
 
