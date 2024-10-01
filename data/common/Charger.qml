@@ -9,7 +9,7 @@ import Victron.VenusOS
 Device {
 	id: charger
 
-	readonly property int state: _state.value === undefined ? -1 : _state.value
+	readonly property int state: _state.isValid ? _state.value : -1
 
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: charger.serviceUid + "/State"

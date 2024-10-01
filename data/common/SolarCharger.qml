@@ -9,17 +9,17 @@ import Victron.VenusOS
 Device {
 	id: solarCharger
 
-	readonly property int state: _state.value === undefined ? -1 : _state.value
-	readonly property int errorCode: _errorCode.value === undefined ? -1 : _errorCode.value
+	readonly property int state: _state.isValid ? _state.value : -1
+	readonly property int errorCode: _errorCode.isValid ? _errorCode.value : -1
 	readonly property ListModel trackers: ListModel {}
-	readonly property real power: _totalPower.value === undefined ? NaN : _totalPower.value
+	readonly property real power: _totalPower.isValid ? _totalPower.value : NaN
 	readonly property alias history: _history
 
-	readonly property real batteryVoltage: _batteryVoltage.value == undefined ? NaN : _batteryVoltage.value
-	readonly property real batteryCurrent: _batteryCurrent.value == undefined ? NaN : _batteryCurrent.value
-	readonly property real batteryTemperature: _batteryTemperature.value == undefined ? NaN : _batteryTemperature.value
+	readonly property real batteryVoltage: _batteryVoltage.isValid ? _batteryVoltage.value : NaN
+	readonly property real batteryCurrent: _batteryCurrent.isValid ? _batteryCurrent.value : NaN
+	readonly property real batteryTemperature: _batteryTemperature.isValid ? _batteryTemperature.value : NaN
 
-	readonly property bool relayValid: _relay.value !== undefined
+	readonly property bool relayValid: _relay.isValid
 	readonly property bool relayOn: _relay.value === 1
 
 	// This is the overall error history.

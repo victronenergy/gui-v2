@@ -10,9 +10,9 @@ import Victron.Gauges
 Device {
 	id: tank
 
-	readonly property int type: _type.value === undefined ? -1 : _type.value
-	readonly property int status: _status.value === undefined ? VenusOS.Tank_Status_Unknown : _status.value
-	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
+	readonly property int type: _type.isValid ? _type.value : -1
+	readonly property int status: _status.isValid ? _status.value : VenusOS.Tank_Status_Unknown
+	readonly property real temperature: _temperature.isValid ? _temperature.value : NaN
 	property real level: NaN
 	property real remaining: NaN
 	property real capacity: NaN
@@ -63,9 +63,9 @@ Device {
 	}
 
 	function _updateMeasurements() {
-		let remainingValue = _remaining.value === undefined ? NaN : _remaining.value
-		let levelValue = _level.value === undefined ? NaN : _level.value    // 0 - 100
-		let capacityValue = _capacity.value === undefined ? NaN : _capacity.value
+		let remainingValue = _remaining.isValid ? _remaining.value : NaN
+		let levelValue = _level.isValid ? _level.value : NaN   // 0 - 100
+		let capacityValue = _capacity.isValid ? _capacity.value : NaN
 
 		// If there is no /Level, calculate it from other values.
 		if (isNaN(levelValue) && !isNaN(capacityValue) && !isNaN(remainingValue)) {

@@ -93,8 +93,8 @@ BaseNotification {
 
 	acknowledged: !!_acknowledged.value
 	active: !!_active.value
-	type: _type.value === undefined ? -1 : parseInt(_type.value)
-	dateTime: _dateTime.value === undefined ? _invalidDate : new Date(_dateTime.value * 1000)
+	type: _type.isValid ? parseInt(_type.value) : -1
+	dateTime: _dateTime.isValid ? new Date(_dateTime.value * 1000) : _invalidDate
 	deviceName: _deviceName.value || ""
 	description: _description.value || ""
 	value: _value.value || ""

@@ -10,14 +10,11 @@ QtObject {
 	id: root
 
 	property string serviceUid
-	readonly property real frequency: _frequency.value === undefined ? NaN : _frequency.value
-	readonly property real current: _current.value === undefined ? NaN : _current.value
-	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
-	readonly property real power: _power.value === undefined ? NaN : _power.value
-	readonly property bool valid: !isNaN(frequency)
-								  && !isNaN(current)
-								  && !isNaN(voltage)
-								  && !isNaN(power)
+	readonly property real frequency: _frequency.isValid ? _frequency.value : NaN
+	readonly property real current: _current.isValid ? _current.value : NaN
+	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
+	readonly property real power: _power.isValid ? _power.value : NaN
+	readonly property bool valid: _frequency.isValid && _current.isValid && _voltage.isValid && _power.isValid
 
 	readonly property VeQuickItem _frequency: VeQuickItem {
 		uid: serviceUid + "/F"

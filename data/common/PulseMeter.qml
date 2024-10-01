@@ -9,7 +9,7 @@ import Victron.VenusOS
 Device {
 	id: pulseMeter
 
-	readonly property real aggregate: _aggregate.value === undefined ? -1 : _aggregate.value
+	readonly property real aggregate: _aggregate.isValid ? _aggregate.value : NaN
 
 	readonly property VeQuickItem _aggregate: VeQuickItem {
 		uid: pulseMeter.serviceUid + "/Aggregate"

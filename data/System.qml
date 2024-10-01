@@ -26,7 +26,7 @@ QtObject {
 		readonly property real power: _dcSystemPower.isValid ? _dcSystemPower.value : NaN
 		readonly property real current: (isNaN(power) || isNaN(voltage) || voltage === 0) ? NaN : power / voltage
 		readonly property real voltage: _dcBatteryVoltage.isValid ? _dcBatteryVoltage.value : NaN
-		readonly property real maximumPower: _maximumDcPower.value === undefined ? NaN : _maximumDcPower.value
+		readonly property real maximumPower: _maximumDcPower.isValid ? _maximumDcPower.value : NaN
 
 		readonly property VeQuickItem _dcSystemPower: VeQuickItem {
 			uid: root.serviceUid + "/Dc/System/Power"
@@ -44,8 +44,8 @@ QtObject {
 	property QtObject solar: QtObject {
 		readonly property real power: Units.sumRealNumbers(acPower, dcPower)
 		property real acPower: _pvMonitor.totalPower
-		property real dcPower: _dcPvPower.value === undefined ? NaN : _dcPvPower.value
-		readonly property real maximumPower: _maximumPower.value === undefined ? NaN : _maximumPower.value
+		property real dcPower: _dcPvPower.isValid ? _dcPvPower.value : NaN
+		readonly property real maximumPower: _maximumPower.isValid ? _maximumPower.value : NaN
 
 		// In cases where the overall current cannot be determined, the value is NaN.
 		readonly property real current: {
@@ -62,7 +62,7 @@ QtObject {
 				}
 				return _pvMonitor.totalCurrent
 			} else if (Global.solarChargers.model.count > 0) {
-				return _dcPvCurrent.value === undefined ? NaN : _dcPvCurrent.value
+				return _dcPvCurrent.isValid ? _dcPvCurrent.value : NaN
 			}
 			return NaN
 		}

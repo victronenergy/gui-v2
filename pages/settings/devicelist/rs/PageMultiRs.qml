@@ -251,9 +251,9 @@ Page {
 							model: root.trackerCount
 							delegate: QtObject {
 								required property int index
-								readonly property real power: _power.value === undefined ? NaN : _power.value
-								readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
-								readonly property real current: isNaN(power) || isNaN(voltage) || voltage === 0 ? NaN : power / voltage
+								readonly property real power: _power.isValid ? _power.value : NaN
+								readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
+								readonly property real current: !_power.isValid || !_voltage.isValid || voltage === 0 ? NaN : power / voltage
 								readonly property string name: _name.value || ""
 
 								readonly property VeQuickItem _voltage: VeQuickItem { uid: root.bindPrefix + "/Pv/" + index + "/V" }

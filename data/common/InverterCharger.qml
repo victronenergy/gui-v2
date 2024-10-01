@@ -9,11 +9,11 @@ import Victron.VenusOS
 Device {
 	id: inverterCharger
 
-	readonly property int state: _state.value === undefined ? -1 : _state.value
-	readonly property int mode: _mode.value === undefined ? -1 : _mode.value
-	readonly property real nominalInverterPower: _nominalInverterPower.value === undefined ? NaN : _nominalInverterPower.value
+	readonly property int state: _state.isValid ? _state.value : -1
+	readonly property int mode: _mode.isValid ? _mode.value : -1
+	readonly property real nominalInverterPower: _nominalInverterPower.isValid ? _nominalInverterPower.value : NaN
 
-	readonly property int numberOfAcInputs: _numberOfAcInputs.value === undefined ? NaN : _numberOfAcInputs.value
+	readonly property int numberOfAcInputs: _numberOfAcInputs.isValid ? _numberOfAcInputs.value : NaN
 
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: inverterCharger.serviceUid + "/State"
