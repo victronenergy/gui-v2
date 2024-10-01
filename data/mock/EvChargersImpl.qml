@@ -14,7 +14,8 @@ QtObject {
 	function populate() {
 		for (let i = 0; i < 3; ++i) {
 			createCharger({
-				position: i % 2 === 0 ? VenusOS.PvInverter_Position_ACInput : VenusOS.PvInverter_Position_ACOutput
+				position: i % 2 === 0 ? VenusOS.PvInverter_Position_ACInput : VenusOS.PvInverter_Position_ACOutput,
+				nrOfPhases: i + 1
 			})
 		}
 	}
@@ -60,16 +61,16 @@ QtObject {
 
 				onTriggered: {
 					const zeroPower = Math.random() < 0.2
-					const phase1Power = zeroPower ? 0 : Math.random() * 50
-					const phase2Power = zeroPower ? 0 : Math.random() * 50
-					const phase3Power = zeroPower ? 0 : Math.random() * 50
-					phases.get(0)._power.setValue(phase1Power)
-					phases.get(1)._power.setValue(phase2Power)
-					phases.get(2)._power.setValue(phase3Power)
+					let totalPower = 0
+					for (let i = 0; i < evCharger.phases.count; ++i) {
+						const phasePower = zeroPower ? 0 : Math.random() * 50
+						phases.get(i)._power.setValue(phasePower)
+						totalPower += phasePower
+					}
 
 					_energy.setValue(1 + Math.random() * 10)
 					_current.setValue(1 + Math.random() * 20)
-					_power.setValue(phase1Power + phase2Power + phase3Power)
+					_power.setValue(totalPower)
 					_chargingTime.setValue(chargingTime + 60)
 				}
 			}
