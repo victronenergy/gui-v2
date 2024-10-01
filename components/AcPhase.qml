@@ -14,7 +14,6 @@ QtObject {
 	readonly property real current: _current.isValid ? _current.value : NaN
 	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
 	readonly property real power: _power.isValid ? _power.value : NaN
-	readonly property bool valid: _frequency.isValid && _current.isValid && _voltage.isValid && _power.isValid
 
 	readonly property VeQuickItem _frequency: VeQuickItem {
 		uid: serviceUid + "/F"
