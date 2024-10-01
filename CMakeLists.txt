@@ -558,6 +558,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/PageMotorDrive.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
+    pages/settings/devicelist/battery/BatteryHistory.qml
     pages/settings/devicelist/battery/BatterySettingsAlarmModel.qml
     pages/settings/devicelist/battery/BatterySettingsRelayModel.qml
     pages/settings/devicelist/battery/FuseInfo.qml
