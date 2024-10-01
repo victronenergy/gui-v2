@@ -118,13 +118,12 @@ Page {
 				suffix: "s"
 			}
 
-			ListSpinBox {
+			ListTextItem {
 				//% "Sensor value"
 				text: qsTrId("devicelist_tanksetup_sensor_value")
 				dataItem.uid: root.bindPrefix + "/RawValue"
 				allowed: defaultAllowed && dataItem.isValid
-				suffix: rawUnit.value || ""
-				decimals: 1
+				secondaryText: dataItem.isValid ? Units.formatNumber(dataItem.value, 1) + (rawUnit.value || "") : "--"
 			}
 
 			ListNavigationItem {
