@@ -169,10 +169,14 @@ Page {
 			params = { "evCharger" : device }
 
 			const evChargerModeText = Global.evChargers.chargerModeToText(device.mode)
-			if (device.status === VenusOS.Evcs_Status_Charging) {
+			if (device.mode < 0) {
+				summary = [ Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power) ]
+			} else if (device.status === VenusOS.Evcs_Status_Charging) {
 				summary = [ evChargerModeText, Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power) ]
-			} else {
+			} else if (device.status >= 0) {
 				summary = [ evChargerModeText, Global.evChargers.chargerStatusToText(device.status) ]
+			} else {
+				summary = [ evChargerModeText ]
 			}
 			break;
 
