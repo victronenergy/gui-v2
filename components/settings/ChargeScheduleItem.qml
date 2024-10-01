@@ -19,6 +19,8 @@ ListNavigationItem {
 		{ display: qsTrId("cgwacs_battery_schedule_weekdays"), value: 8 },
 		//% "Weekends"
 		{ display: qsTrId("cgwacs_battery_schedule_weekends"), value: 9 },
+		//% "Monthly"
+		{ display: qsTrId("cgwacs_battery_schedule_monthly"), value: 11 },
 		//% "Monday"
 		{ display: qsTrId("cgwacs_battery_schedule_monday"), value: 1 },
 		//% "Tuesday"
