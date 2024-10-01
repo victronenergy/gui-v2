@@ -18,6 +18,7 @@ QtObject {
 				nrOfPhases: i + 1
 			})
 		}
+		createEnergyMeter()
 	}
 
 	function createCharger(config) {
@@ -30,6 +31,15 @@ QtObject {
 			const configValue = config[configProperty]
 			charger["_" + configProperty].setValue(configValue)
 		 }
+		_createdObjects.push(charger)
+	}
+
+	function createEnergyMeter() {
+		const deviceInstanceNum = mockDeviceCount++
+		const charger = energyMeterComponent.createObject(root, {
+			serviceUid: "mock/com.victronenergy.evcharger.ttyUSB" + deviceInstanceNum,
+			deviceInstance: deviceInstanceNum,
+		})
 		_createdObjects.push(charger)
 	}
 
@@ -108,6 +118,89 @@ QtObject {
 				// Immediately queue an update so that the Brief/Overview pages update sooner for
 				// UI testing.
 				Qt.callLater(Global.evChargers._doUpdateTotals)
+			}
+		}
+	}
+
+	property Component energyMeterComponent: Component {
+		Device {
+			id: energyMeter
+
+			readonly property int status: Math.floor(Math.random() * VenusOS.Evcs_Status_ChargingLimit)
+			readonly property real energy: _energy.isValid ? _energy.value : NaN
+			readonly property real power: _power.isValid ? _power.value : NaN
+			readonly property real current: NaN
+			readonly property real maxCurrent: NaN
+
+			function updateTotals() {
+				let totalPower = 0
+				for (let i = 0; i < phases.count; ++i) {
+					totalPower += phases.get(i).power
+				}
+				_power.setValue(totalPower)
+				_energy.setValue(Math.random() * 100)
+			}
+
+			readonly property VeQuickItem _energy: VeQuickItem {
+				uid: energyMeter.serviceUid + "/Ac/Energy/Forward"
+			}
+
+			readonly property VeQuickItem _power: VeQuickItem {
+				uid: energyMeter.serviceUid + "/Ac/Power"
+			}
+
+			readonly property VeQuickItem _role: VeQuickItem {
+				uid: energyMeter.serviceUid + "/Role"
+				Component.onCompleted: setValue("evcharger")
+			}
+
+			readonly property VeQuickItem _allowedRoles: VeQuickItem {
+				uid: energyMeter.serviceUid + "/AllowedRoles"
+				Component.onCompleted: setValue(["evcharger"])
+			}
+
+			readonly property QtObject phases: QtObject {
+				property int count: 3
+
+				function get(index) {
+					return _phases.objectAt(index)
+				}
+
+				readonly property Instantiator _phases: Instantiator {
+					model: 3
+					delegate: QtObject {
+						required property int index
+						readonly property string phaseUid: energyMeter.serviceUid + "/Ac/L" + (index + 1)
+						readonly property string name: "L" + (index + 1)
+						readonly property real power: _power.isValid ? _power.value : NaN
+
+						readonly property VeQuickItem _power: VeQuickItem {
+							uid: phaseUid + "/Power"
+						}
+						property Timer _dummyValues: Timer {
+							running: Global.mockDataSimulator.timersActive
+							repeat: true
+							interval: 2000
+							onTriggered: {
+								_power.setValue(Math.random() * 100)
+								Qt.callLater(energyMeter.updateTotals)
+							}
+						}
+					}
+				}
+			}
+
+			Component.onCompleted: {
+				_deviceInstance.setValue(deviceInstance)
+				_productName.setValue("Energy Meter")
+			}
+
+			onValidChanged: {
+				if (valid) {
+					Global.evChargers.addCharger(energyMeter)
+				} else {
+					Global.evChargers.removeCharger(energyMeter)
+				}
 			}
 		}
 	}
