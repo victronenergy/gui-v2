@@ -11,4 +11,5 @@ DcInputWidget {
 
 	icon.source: "qrc:/images/generator.svg"
 	type: VenusOS.OverviewWidget_Type_DcGenerator
+	detailUrl: "/pages/settings/devicelist/PageGenset.qml"
 }

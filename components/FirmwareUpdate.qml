@@ -13,25 +13,42 @@ QtObject {
 	readonly property string offlineAvailableVersion: _offlineVersion.value || ""
 	readonly property bool busy: state > FirmwareUpdater.Idle
 	readonly property var state: _stateItem.value
-	property bool checkingForUpdate
+	readonly property alias checkingForUpdate: updateCheckTimer.running
 
 	property int _updateType
+
+	property Timer _updateCheckTimeout: Timer {
+		id: updateCheckTimer
+		repeat: false
+		running: false
+		onTriggered: root._finishUpdateCheck()
+	}
 
 	property VeQuickItem _stateItem: VeQuickItem {
 
 		// Make sure notificationLayer is ready before reading the firmware state,
 		// otherwise Global.showToastNotification() call inside onValueChanged signal handler will fail.
-		uid: !!Global.notificationLayer ? Global.venusPlatform.serviceUid + "/Firmware/State" : ""
+		uid: (Global.allPagesLoaded && !!Global.notificationLayer) ? Global.venusPlatform.serviceUid + "/Firmware/State" : ""
 
 		onValueChanged: {
+			if (uid === "" || !isValid) {
+				return
+			}
+
 			let msg = ""
 			switch (value) {
-			case FirmwareUpdater.Idle:
+			case FirmwareUpdater.Idle: // fall through
 			case FirmwareUpdater.UpdateFileNotFound:
 				// If a new version is available, the online/offline version value will be available
 				// together with the new state value, but the version may not be deserialized and
-				// set until after the state change. So, wait until the next event loop to be sure.
-				Qt.callLater(root._finishUpdateCheck)
+				// set until after the state change.  Also, an intermediate invalid value may be
+				// set while waiting on the backend to supply the actual value.
+				// So, wait asynchronously for a valid value to be provided.
+				if (updateCheckTimer.running) {
+					updateCheckTimer.stop()
+					updateCheckTimer.interval = 500
+					updateCheckTimer.start()
+				}
 				break
 			case FirmwareUpdater.ErrorDuringChecking:
 				//% "Error while checking for firmware updates"
@@ -66,6 +83,8 @@ QtObject {
 				// a full disconnect/reconnect cycle) then react to the
 				// updated build version we receive (reload the page).
 				break
+			default:
+				break
 			}
 
 			if (msg) {
@@ -81,6 +100,12 @@ QtObject {
 	}
 	property VeQuickItem _onlineVersion: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableVersion"
+		onIsValidChanged: {
+			if (isValid && _updateType === VenusOS.Firmware_UpdateType_Online && updateCheckTimer.running) {
+				updateCheckTimer.stop()
+				Qt.callLater(root._finishUpdateCheck)
+			}
+		}
 	}
 	property VeQuickItem _onlineInstallUpdate: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/Install"
@@ -92,6 +117,12 @@ QtObject {
 	}
 	property VeQuickItem _offlineVersion: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableVersion"
+		onIsValidChanged: {
+			if (isValid && _updateType === VenusOS.Firmware_UpdateType_Offline && updateCheckTimer.running) {
+				updateCheckTimer.stop()
+				Qt.callLater(root._finishUpdateCheck)
+			}
+		}
 	}
 	property VeQuickItem _offlineInstallUpdate: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/Install"
@@ -125,7 +156,8 @@ QtObject {
 
 	function checkForUpdate(updateType) {
 		_updateType = updateType
-		checkingForUpdate = true
+		updateCheckTimer.interval = 8000 // give up after 8 seconds
+		updateCheckTimer.start()
 		if (updateType === VenusOS.Firmware_UpdateType_Online) {
 			_onlineCheckUpdate.setValue(1)
 		} else if (updateType === VenusOS.Firmware_UpdateType_Offline) {
@@ -147,15 +179,11 @@ QtObject {
 	}
 
 	function _finishUpdateCheck() {
-		if (!checkingForUpdate) {
-			return
-		}
 		let msg = ""
-		checkingForUpdate = false
-		if (_updateType === VenusOS.Firmware_UpdateType_Online && !_onlineVersion.isValid) {
+		if (_updateType === VenusOS.Firmware_UpdateType_Online && onlineAvailableVersion.length === 0) {
 			//% "No newer version available"
 			msg = qsTrId("settings_firmware_no_newer_version_available")
-		} else if (_updateType === VenusOS.Firmware_UpdateType_Offline && !_offlineVersion.isValid) {
+		} else if (_updateType === VenusOS.Firmware_UpdateType_Offline && offlineAvailableVersion.length === 0) {
 			//% "No firmware found"
 			msg = qsTrId("settings_firmware_no_firmware_found")
 		}

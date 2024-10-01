@@ -363,16 +363,16 @@ SwipeViewPage {
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled && !pauseRightGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage
-				phaseModel: Global.system.ac.consumption.phases
+				phaseModel: Global.system.load.ac.phases
 				phaseModelProperty: "current"
-				maximumValue: Global.system.ac.consumption.maximumCurrent
+				maximumValue: Global.system.load.maximumAcCurrent
 
 				ArcGaugeQuantityRow {
 					alignment: Qt.AlignRight | (gaugeParams.activeGaugeCount === 2 ? Qt.AlignBottom : Qt.AlignVCenter)
 					icon.source: dcLoadGauge.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 					rightPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
-					quantityLabel.dataObject: Global.system.ac.consumption
+					quantityLabel.dataObject: Global.system.load.ac
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC load edge")
@@ -383,7 +383,7 @@ SwipeViewPage {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? root._gaugeHeight(root._rightGaugeCount) : 0
-			active: !isNaN(Global.system.loads.dcPower) && root.state !== "panelOpened"
+			active: !isNaN(Global.system.dc.power) && root.state !== "panelOpened"
 			sourceComponent: SideGauge {
 				readonly property var gaugeParams: root._rightGaugeParameters(dcLoadGauge)
 
@@ -410,7 +410,7 @@ SwipeViewPage {
 
 				ValueRange {
 					id: dcLoadsRange
-					value: root.visible ? Global.system.loads.dcPower || 0 : 0
+					value: root.visible ? Global.system.dc.power || 0 : 0
 					maximumValue: Global.system.dc.maximumPower
 				}
 			}

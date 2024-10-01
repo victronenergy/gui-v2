@@ -6,16 +6,13 @@
     "color_humidity2": "#405A25",
     "color_humidity3": "#784B17",
 
-    "color_dimOrange": "#593912",
     "color_dimRed": "#592220",
     "color_dimGreen": "#508135",
-    "color_dimGray": "#7B7A76",
     "color_darkishBlue": "#1B3B5C",
     "color_darkBlue": "#11263B",
     "color_darkOrange": "#482D0E",
     "color_darkRed": "#491C1B",
     "color_darkGreen": "#223817",
-    "color_darkGray": "#504F4B",
 
     "color_ok": "color_blue",
     "color_darkOk": "color_darkBlue",
@@ -69,13 +66,10 @@
     "color_navigationBar_button_off": "color_gray5",
 
     "color_toastNotification_foreground": "color_font_primary",
-    "color_toastNotification_background_none": "color_gray3",
     "color_toastNotification_background_informative": "#295C91",
-    "color_toastNotification_background_confirmation": "#5C9C39",
     "color_toastNotification_background_warning": "#BD7624",
     "color_toastNotification_background_error": "#BF4845",
     "color_toastNotification_highlight_informative": "color_blue",
-    "color_toastNotification_highlight_confirmation": "color_green",
     "color_toastNotification_highlight_warning": "color_warning",
     "color_toastNotification_highlight_error": "color_critical",
 
@@ -98,8 +92,6 @@
 
     "color_overviewPage_widget_background": "color_darkBlue",
     "color_overviewPage_widget_border": "color_ok",
-    "color_overviewPage_widget_sideGauge_background": "color_darkBlue",
-    "color_overviewPage_widget_sideGauge_highlight": "color_ok",
     "color_overviewPage_widget_solar_graph_bar": "color_ok",
     "color_overviewPage_widget_battery_background": "color_blue",
 
@@ -107,7 +99,6 @@
     "color_briefPage_battery_value_text_color": "color_gray5",
     "color_briefPage_battery_unit_text_color": "color_gray4",
     "color_briefPage_circularGauge_shine": "#BBFFFFFF",
-    "color_briefPage_sidePanel_forecast_separator": "color_darkWhite",
     "color_briefPage_sidePanel_loadGraph_dotColor": "color_gray3",
 
     "color_levelsPage_tankIcon": "color_white",

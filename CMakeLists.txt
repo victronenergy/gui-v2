@@ -48,7 +48,7 @@ cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'q
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
 
-project(venus-gui-v2 LANGUAGES CXX VERSION 0.3.10)
+project(venus-gui-v2 LANGUAGES CXX VERSION 0.3.12)
 add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR} -DPROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH} )
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -120,6 +120,10 @@ if(QT_KNOWN_POLICY_QTP0001)
     qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
 endif()
 
+set(QZXING_USE_QML ON)
+set(QZXING_USE_ENCODER ON)
+add_subdirectory(src/qzxing/src)
+
 include_directories(src/veutil/inc src .)
 
 set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added here
@@ -129,43 +133,13 @@ set (VENUS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be added he
 )
 set_source_files_properties( ${VENUS_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE )
 
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    list(APPEND CONNMAN_SOURCES
-        src/connman-api.h # mock sources
-    )
-else()
-    list(APPEND CONNMAN_SOURCES
-        src/connman/cmmanager.h
-        src/connman/cmmananger_interface.h
-        src/connman/cmtechnology.h
-        src/connman/cmtechnology_interface.h
-        src/connman/cmservice_interface.h
-        src/connman/cmservice.h
-        src/connman/cmagent.h
-        src/connman/cmagent_adaptor.h
-        src/connman/clockproxy.h
-        src/connman/connmandbustypes.cpp
-        src/connman/cmmanager.cpp
-        src/connman/cmmananger_interface.cpp
-        src/connman/cmtechnology.cpp
-        src/connman/cmtechnology_interface.cpp
-        src/connman/cmservice_interface.cpp
-        src/connman/cmservice.cpp
-        src/connman/cmagent.cpp
-        src/connman/cmagent_adaptor.cpp
-        src/connman/clockproxy.cpp
-        src/connman/connmandbustypes.h
-    )
-endif()
-
-list(APPEND VenusQMLModule_CPP_SOURCES ${CONNMAN_SOURCES})
-
 set(VEUTIL_CORE_SOURCES
+    src/veutil/inc/veutil/qt/alternator_error.hpp
     src/veutil/inc/veutil/qt/bms_error.hpp
     src/veutil/inc/veutil/qt/charger_error.hpp
     src/veutil/inc/veutil/qt/firmware_updater_data.hpp
+    src/veutil/inc/veutil/qt/genset_error.hpp
     src/veutil/inc/veutil/qt/unit_conversion.hpp
-    src/veutil/inc/veutil/qt/alternator_error.hpp
     src/veutil/inc/veutil/qt/ve_qitem.hpp
     src/veutil/inc/veutil/qt/ve_qitem_child_model.hpp
     src/veutil/inc/veutil/qt/ve_qitem_loader.hpp
@@ -174,10 +148,11 @@ set(VEUTIL_CORE_SOURCES
     src/veutil/inc/veutil/qt/ve_qitem_tree_model.hpp
     src/veutil/inc/veutil/qt/ve_quick_item.hpp
 
+    src/veutil/src/qt/alternator_error.cpp
     src/veutil/src/qt/bms_error.cpp
     src/veutil/src/qt/charger_error.cpp
+    src/veutil/src/qt/genset_error.cpp
     src/veutil/src/qt/unit_conversion.cpp
-    src/veutil/src/qt/alternator_error.cpp
     src/veutil/src/qt/ve_qitem.cpp
     src/veutil/src/qt/ve_qitem_child_model.cpp
     src/veutil/src/qt/ve_qitem_loader.cpp
@@ -230,13 +205,11 @@ set (VENUS_QML_MODULE_SOURCES
     components/BarGauge.qml
     components/BarGaugeBase.qml
     components/BriefSidePanelWidget.qml
-    components/ButtonControlValue.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
     components/CheapBarGauge.qml
     components/ClippingBarGauge.qml
     components/ControlCard.qml
-    components/ControlValue.qml
     components/CpuMonitor.qml
     components/CurrentLimitButton.qml
     components/DateSelector.qml
@@ -252,6 +225,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/GaugeHeader.qml
     components/GeneratorManualControlButton.qml
     components/EvChargerStatusModel.qml
+    components/FlatListItemSeparator.qml
     components/GeneratorIconLabel.qml
     components/GradientListView.qml
     components/GsmStatusIcon.qml
@@ -263,17 +237,18 @@ set (VENUS_QML_MODULE_SOURCES
     components/NavBar.qml
     components/NavButton.qml
     components/NotificationDelegate.qml
+    components/ObjectAcConnection.qml
     components/ObjectModelMonitor.qml
     components/Page.qml
+    components/PageGensetModel.qml
     components/PageStack.qml
     components/ProgressArc.qml
     components/QuantityTableMetrics.qml
     components/QuantityGroupListHeader.qml
     components/QuantityLabel.qml
-    components/QuantityRepeater.qml
+    components/QuantityRow.qml
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
-    components/RadioButtonControlValue.qml
     components/RsSystemAcIODisplay.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
@@ -291,7 +266,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/StatusBar.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
-    components/SwitchControlValue.qml
     components/TabBar.qml
     components/TankItem.qml
     components/TankGauge.qml
@@ -306,6 +280,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ValueRange.qml
     components/VeBusAcIODisplay.qml
     components/ViewGradient.qml
+    components/WasmVirtualKeyboardHandler.qml
     components/ClassAndVrmInstance.qml
 
     components/controls/Button.qml
@@ -403,6 +378,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/DcGeneratorWidget.qml
     components/widgets/DcInputWidget.qml
     components/widgets/DcLoadsWidget.qml
+    components/widgets/EssentialLoadsWidget.qml
     components/widgets/EvcsWidget.qml
     components/widgets/InverterChargerWidget.qml
     components/widgets/OverviewWidget.qml
@@ -434,16 +410,13 @@ set (VENUS_QML_MODULE_SOURCES
     data/PvInverters.qml
     data/SolarChargers.qml
     data/System.qml
-    data/SystemAc.qml
-    data/SystemDc.qml
+    data/SystemLoad.qml
     data/SystemSettings.qml
     data/Tanks.qml
     data/UnsupportedDevices.qml
     data/VenusPlatform.qml
 
     data/common/AcData.qml
-    data/common/AcInputPhaseModel.qml
-    data/common/AcInputServiceLoader.qml
     data/common/AcInputSettings.qml
     data/common/AcInputSettingsModel.qml
     data/common/AcInputSystemInfo.qml
@@ -460,6 +433,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/EssData.qml
     data/common/EvCharger.qml
     data/common/Generator.qml
+    data/common/GensetErrorModel.qml
     data/common/Inverter.qml
     data/common/InverterCharger.qml
     data/common/MeteoDevice.qml
@@ -474,7 +448,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarHistoryErrorModel.qml
     data/common/SolarTrackerDailyHistory.qml
     data/common/SystemBattery.qml
-    data/common/SystemData.qml
     data/common/Tank.qml
     data/common/TankModel.qml
     data/common/UnsupportedDevice.qml
@@ -554,7 +527,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsModbusTcpServices.qml
     pages/settings/PageSettingsRelay.qml
     pages/settings/PageSettingsRelayTempSensors.qml
-    pages/settings/PageSettingsRemoteConsole.qml
     pages/settings/PageSettingsRootfsSelect.qml
     pages/settings/PageSettingsRvcDevice.qml
     pages/settings/PageSettingsRvcDeviceConfiguration.qml
@@ -562,6 +534,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsServices.qml
     pages/settings/PageSettingsSystem.qml
     pages/settings/PageSettingsSystemStatus.qml
+    pages/settings/PageSettingsTailscale.qml
     pages/settings/PageSettingsTankPump.qml
     pages/settings/PageSettingsTcpIp.qml
     pages/settings/PageSettingsVecanDevice.qml
@@ -570,7 +543,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageTzInfo.qml
     pages/settings/PageVrmDeviceInstances.qml
     pages/settings/debug/HubData.qml
-    pages/settings/debug/ObjectAcConnection.qml
     pages/settings/debug/PageDebug.qml
     pages/settings/debug/PageDebugVeQItems.qml
     pages/settings/debug/PagePowerDebug.qml
@@ -580,6 +552,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/AcInDeviceModel.qml
     pages/settings/devicelist/PageAcCharger.qml
     pages/settings/devicelist/PageDigitalInput.qml
+    pages/settings/devicelist/PageGenset.qml
     pages/settings/devicelist/PageMeteo.qml
     pages/settings/devicelist/PageMeteoSettings.qml
     pages/settings/devicelist/PageMotorDrive.qml
@@ -621,11 +594,9 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/tank/PageTankSensor.qml
     pages/settings/devicelist/tank/PageTankSetup.qml
     pages/settings/devicelist/tank/PageTankShape.qml
-    pages/settings/devicelist/ac-in/ListFpGensetErrorItem.qml
     pages/settings/devicelist/ac-in/PageAcIn.qml
     pages/settings/devicelist/ac-in/PageAcInSetup.qml
-    pages/settings/devicelist/ac-in/PageAcInModelGenset.qml
-    pages/settings/devicelist/ac-in/PageAcInModelDefault.qml
+    pages/settings/devicelist/ac-in/PageAcInModel.qml
     pages/settings/devicelist/ac-in/PageSmappeeCTList.qml
     pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml
     pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml
@@ -700,6 +671,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/cpuinfo.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
+    src/phasemodel.h
+    src/phasemodel.cpp
     src/productinfo.h
     src/quantityinfo.h
     src/quantityinfo.cpp
@@ -777,7 +750,6 @@ if (${LOAD_QML_FROM_FILESYSTEM})
         # optional plugin VenusQMLModuleplugin
         # classname Victron_VenusOSPlugin
         # typeinfo VenusQMLModule.qmltypes
-        # import net.connman
         # prefer :/qt/qml/Victron/VenusOS/  <- this line tells the app to prefer the compiled qml sources, i.e. don't load from the file system
         # singleton CommonWords 2.0 components/CommonWords.qml
         # [lots more qml files]
@@ -793,7 +765,6 @@ endif()
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     target_link_libraries(VenusQMLModule PRIVATE Qt6::WebSockets)
 else()
-    target_include_directories(VenusQMLModule PRIVATE src/connman)
     target_link_libraries(VenusQMLModule PRIVATE Qt6::DBus)
 endif()
 # end VENUS_QML_MODULE
@@ -817,7 +788,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/PulseMetersImpl.qml
     data/dbus/PvInvertersImpl.qml
     data/dbus/SolarChargersImpl.qml
-    data/dbus/SystemImpl.qml
     data/dbus/SystemSettingsImpl.qml
     data/dbus/TanksImpl.qml
     data/dbus/UnsupportedDevicesImpl.qml
@@ -945,7 +915,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/PulseMetersImpl.qml
     data/mqtt/PvInvertersImpl.qml
     data/mqtt/SolarChargersImpl.qml
-    data/mqtt/SystemImpl.qml
     data/mqtt/SystemSettingsImpl.qml
     data/mqtt/TanksImpl.qml
     data/mqtt/UnsupportedDevicesImpl.qml
@@ -1074,6 +1043,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/ess.svg
         images/freshWater.svg
         images/icon_black_water_24.svg
+        images/icon_CL_24.svg
         images/icon_fresh_water_24.svg
         images/icon_raw_water_24.svg
         images/icon_waste_water_24.svg
@@ -1216,6 +1186,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     VictronDbusplugin
     VictronMockplugin
     VictronMqttplugin
+    qzxing
 )
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")

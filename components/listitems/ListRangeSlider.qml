@@ -23,7 +23,7 @@ ListItem {
 			 && (firstDataItem.uid === "" || firstDataItem.isValid)
 			 && (secondDataItem.uid === "" || secondDataItem.isValid)
 
-	content.anchors.rightMargin: 0
+	rightPadding: 0
 	content.children: [
 		SettingsRangeSlider {
 			id: slider

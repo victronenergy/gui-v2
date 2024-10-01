@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QZXing
 
 Page {
 	id: root
@@ -175,6 +176,23 @@ Page {
 				placeholderText: "Enter text"
 			}
 
+			ListTextField {
+				text: "Text input: forced capitalization, numbers disallowed"
+				placeholderText: "Enter text"
+				validateInput: function() {
+					if (textField.text.match(/[0-9]/)) {
+						return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Numbers are not allowed!")
+					} else if (textField.text.match(/[a-z]/)) {
+						return Utils.validationResult(VenusOS.InputValidation_Result_Warning, "Characters changed to uppercase", textField.text.toUpperCase())
+					} else {
+						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+					}
+				}
+				saveInput: function() {
+					console.log("Saving text: %1".arg(textField.text))
+				}
+			}
+
 			ListIntField {
 				text: "Number with 5 digits max"
 				maximumLength: 5
@@ -194,11 +212,11 @@ Page {
 
 			ListSpinBox {
 				text: "Spin box"
-				value: 5.789
+				value: 1.2
 				decimals: 2
 				stepSize: Math.pow(10, -decimals)
-				from: 5
-				to: 10
+				from: 1
+				to: 1.5
 			}
 
 			ListDateSelector {
@@ -268,6 +286,19 @@ Page {
 			ListTextItem {
 				text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum occaecat cupidatat"
 				secondaryText: "Occaecat cupidatat"
+			}
+
+			ListItem {
+				text: "Scan the QR code:"
+				content.children: [
+					Image {
+						source: "image://QZXing/encode/" + "https://www.victronenergy.com/" +
+								"?correctionLevel=M" +
+								"&format=qrcode"
+						sourceSize.width: Theme.geometry_listItem_height
+						sourceSize.height: Theme.geometry_listItem_height
+					}
+				]
 			}
 		}
 	}

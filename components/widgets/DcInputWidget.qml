@@ -31,7 +31,6 @@ OverviewWidget {
 		property real current: NaN
 	}
 	icon.source: "qrc:/images/icon_dc_24.svg"
-	preferLargeSize: false  // there is no extra content, so no need for size L widget.
 	enabled: true
 
 	onClicked: {
@@ -80,6 +79,8 @@ OverviewWidget {
 						{ value: model.device.current, unit: VenusOS.Units_Amp },
 						{ value: model.device.power, unit: VenusOS.Units_Watt },
 					]
+					tableMode: true
+
 					onClicked: {
 						Global.pageManager.pushPage(root.detailUrl, {
 							"title": model.device.name,

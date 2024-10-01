@@ -13,10 +13,10 @@ AggregateDeviceModel::DeviceInfo::DeviceInfo(BaseDevice *d, BaseDeviceModel *m)
 	: id(infoId(d, m))
 	, device(d)
 	, sourceModel(m)
-	, cachedDeviceDescription(d ? d->description() : QString())
+	, cachedDeviceName(d ? d->name() : QString())
 {
-	if (device && cachedDeviceDescription.isEmpty()) {
-		cachedDeviceDescription = device->serviceUid();
+	if (device && cachedDeviceName.isEmpty()) {
+		cachedDeviceName = device->serviceUid();
 	}
 }
 
@@ -45,7 +45,7 @@ AggregateDeviceModel::AggregateDeviceModel(QObject *parent)
 	m_roleNames[DeviceRole] = "device";
 	m_roleNames[SourceModelRole] = "sourceModel";
 	m_roleNames[ConnectedRole] = "connected";
-	m_roleNames[CachedDeviceDescriptionRole] = "cachedDeviceDescription";
+	m_roleNames[CachedDeviceNameRole] = "cachedDeviceName";
 }
 
 AggregateDeviceModel::~AggregateDeviceModel()
@@ -84,7 +84,7 @@ void AggregateDeviceModel::setSourceModels(const QVariantList &models)
 		for (int i = 0; i < model->count(); ++i) {
 			BaseDevice *device = model->deviceAt(i);
 			m_deviceInfos.insert(insertionIndex(device), DeviceInfo(device, model));
-			connect(device, &BaseDevice::descriptionChanged, this, &AggregateDeviceModel::deviceDescriptionChanged);
+			connect(device, &BaseDevice::nameChanged, this, &AggregateDeviceModel::deviceNameChanged);
 			connect(device, &BaseDevice::validChanged, this, &AggregateDeviceModel::deviceValidChanged);
 		}
 		connect(model, &BaseDeviceModel::rowsInserted, this, &AggregateDeviceModel::sourceModelRowsInserted);
@@ -129,8 +129,8 @@ QVariant AggregateDeviceModel::data(const QModelIndex &index, int role) const
 		return QVariant::fromValue<BaseDeviceModel *>(deviceInfo.sourceModel.data());
 	case ConnectedRole:
 		return deviceInfo.isConnected();
-	case CachedDeviceDescriptionRole:
-		return deviceInfo.cachedDeviceDescription;
+	case CachedDeviceNameRole:
+		return deviceInfo.cachedDeviceName;
 	default:
 		return QVariant();
 	}
@@ -210,7 +210,7 @@ int AggregateDeviceModel::insertionIndex(BaseDevice *newDevice) const
 {
 	for (int i = 0; i < m_deviceInfos.count(); ++i) {
 		BaseDevice *device = m_deviceInfos[i].device;
-		if (device && newDevice->description().localeAwareCompare(m_deviceInfos[i].cachedDeviceDescription) < 0) {
+		if (device && newDevice->name().localeAwareCompare(m_deviceInfos[i].cachedDeviceName) < 0) {
 			return i;
 		}
 	}
@@ -257,10 +257,10 @@ void AggregateDeviceModel::sourceModelRowsInserted(const QModelIndex &, int firs
 				m_deviceInfos[index].device = device;
 				roles << DeviceRole;
 			}
-			if (!device->description().isEmpty()
-					&& device->description() != m_deviceInfos[index].cachedDeviceDescription) {
-				m_deviceInfos[index].cachedDeviceDescription = device->description();
-				roles << CachedDeviceDescriptionRole;
+			if (!device->name().isEmpty()
+					&& device->name() != m_deviceInfos[index].cachedDeviceName) {
+				m_deviceInfos[index].cachedDeviceName = device->name();
+				roles << CachedDeviceNameRole;
 			}
 			m_disconnectedDeviceCount--;
 			emit dataChanged(createIndex(index, 0), createIndex(index, 0), roles);
@@ -272,8 +272,8 @@ void AggregateDeviceModel::sourceModelRowsInserted(const QModelIndex &, int firs
 			emit endInsertRows();
 		}
 
-		// Be notified when the description changes, so that the list order can be updated.
-		connect(device, &BaseDevice::descriptionChanged, this, &AggregateDeviceModel::deviceDescriptionChanged);
+		// Be notified when the name changes, so that the list order can be updated.
+		connect(device, &BaseDevice::nameChanged, this, &AggregateDeviceModel::deviceNameChanged);
 		connect(device, &BaseDevice::validChanged, this, &AggregateDeviceModel::deviceValidChanged);
 	}
 
@@ -285,16 +285,16 @@ void AggregateDeviceModel::sourceModelRowsInserted(const QModelIndex &, int firs
 	}
 }
 
-void AggregateDeviceModel::deviceDescriptionChanged()
+void AggregateDeviceModel::deviceNameChanged()
 {
 	BaseDevice *changedDevice = qobject_cast<BaseDevice *>(sender());
 	if (!changedDevice) {
-		qmlInfo(this) << "descriptionChanged() signal was not from a BaseDevice!";
+		qmlInfo(this) << "nameChanged() signal was not from a BaseDevice!";
 		return;
 	}
 
-	const QString newDescription = changedDevice->description();
-	if (newDescription.isEmpty()) {
+	const QString newName = changedDevice->name();
+	if (newName.isEmpty()) {
 		// Don't set the cached name to an empty string
 		return;
 	}
@@ -304,15 +304,15 @@ void AggregateDeviceModel::deviceDescriptionChanged()
 		return;
 	}
 
-	// Update the cached description
-	m_deviceInfos[fromIndex].cachedDeviceDescription = newDescription;
-	static const QList<int> roles = { CachedDeviceDescriptionRole };
+	// Update the cached name
+	m_deviceInfos[fromIndex].cachedDeviceName = newName;
+	static const QList<int> roles = { CachedDeviceNameRole };
 	emit dataChanged(createIndex(fromIndex, 0), createIndex(fromIndex, 0), roles);
 
 	// Update the list order if needed
 	int toIndex = count() - 1;
 	for (int i = 0; i < m_deviceInfos.count(); ++i) {
-		if (newDescription.localeAwareCompare(m_deviceInfos[i].cachedDeviceDescription) < 0) {
+		if (newName.localeAwareCompare(m_deviceInfos[i].cachedDeviceName) < 0) {
 			if (i > 0 && m_deviceInfos[i - 1].device == changedDevice) {
 				// The device at the previous index is this changed device, so it is already at
 				// the correct index.

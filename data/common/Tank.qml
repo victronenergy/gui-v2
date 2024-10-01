@@ -87,22 +87,15 @@ Device {
 		}
 	}
 
-	name: productId === ProductInfo.ProductId_TankSensor_Generic
-		// This must be a generic Victron tank sensor, where the product name is always "Tank
-		// sensor" and there is no custom name, so use the tank type to provide a meaningful name.
-		? Gauges.tankProperties(type).name
-		: productName || customName
-
-	description: {
+	name: {
 		if (customName.length > 0) {
 			return customName
-		}
-		if (type >= 0 && deviceInstance >= 0) {
-			const fluidType = Gauges.tankProperties(type).name
+		} else if (type >= 0 && deviceInstance >= 0) {
 			//: Tank desription. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)
 			//% "%1 tank (%2)"
-			return qsTrId("tank_description").arg(fluidType).arg(deviceInstance)
+			return qsTrId("tank_description").arg(Gauges.tankProperties(type).name).arg(deviceInstance)
+		} else {
+			return productName
 		}
-		return name
 	}
 }

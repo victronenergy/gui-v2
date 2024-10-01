@@ -125,6 +125,7 @@ public:
 		OverviewWidget_Type_Battery,
 		OverviewWidget_Type_AcLoads,
 		OverviewWidget_Type_DcLoads,
+		OverviewWidget_Type_EssentialLoads,
 		OverviewWidget_Type_Evcs
 	};
 	Q_ENUM(OverviewWidget_Type)
@@ -139,6 +140,13 @@ public:
 	};
 	Q_ENUM(OverviewWidget_Size)
 
+	enum OverviewWidget_PreferredSize {
+		OverviewWidget_PreferredSize_Any,
+		OverviewWidget_PreferredSize_PreferLarge,
+		OverviewWidget_PreferredSize_LargeOnly
+	};
+	Q_ENUM(OverviewWidget_PreferredSize)
+
 	enum WidgetConnector_Location {
 		WidgetConnector_Location_Left,
 		WidgetConnector_Location_Right,
@@ -146,6 +154,13 @@ public:
 		WidgetConnector_Location_Bottom
 	};
 	Q_ENUM(WidgetConnector_Location)
+
+	enum WidgetConnector_Straighten {
+		WidgetConnector_Straighten_None,
+		WidgetConnector_Straighten_StartToEnd,
+		WidgetConnector_Straighten_EndToStart
+	};
+	Q_ENUM(WidgetConnector_Straighten)
 
 	enum WidgetConnector_AnimationMode {
 		WidgetConnector_AnimationMode_NotAnimated,
@@ -444,7 +459,8 @@ public:
 		CanBusProfile_Oceanvolt,
 		CanBusProfile_None250,
 		CanBusProfile_RvC,
-		CanBusProfile_HighVoltage
+		CanBusProfile_HighVoltage,
+		CanBusProfile_None500
 	};
 	Q_ENUM(CanBusProfile_Type)
 
@@ -619,7 +635,8 @@ public:
 
 	enum Evcs_Position {
 		Evcs_Position_ACOutput,
-		Evcs_Position_ACInput
+		Evcs_Position_ACInput,
+		Evcs_Position_Unknown = 100
 	};
 	Q_ENUM(Evcs_Position)
 
@@ -678,6 +695,7 @@ public:
 	enum InputValidation_Result {
 		InputValidation_Result_Unknown,
 		InputValidation_Result_OK,
+		InputValidation_Result_Warning,
 		InputValidation_Result_Error,
 	};
 	Q_ENUM(InputValidation_Result)

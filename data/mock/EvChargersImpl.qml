@@ -13,7 +13,9 @@ QtObject {
 
 	function populate() {
 		for (let i = 0; i < 3; ++i) {
-			createCharger({ status: Math.random() * VenusOS.Evcs_Status_Charged, mode: VenusOS.Evcs_Mode_Auto })
+			createCharger({
+				position: i % 2 === 0 ? VenusOS.PvInverter_Position_ACInput : VenusOS.PvInverter_Position_ACOutput
+			})
 		}
 	}
 
@@ -51,24 +53,19 @@ QtObject {
 		EvCharger {
 			id: evCharger
 
-			readonly property ListModel phases: ListModel {
-				ListElement { name: "L1"; power: 10 }
-				ListElement { name: "L2"; power: 20 }
-				ListElement { name: "L3"; power: 30 }
-			}
-
 			property Timer _dummyValues: Timer {
 				running: Global.mockDataSimulator.timersActive
 				repeat: true
 				interval: 1000
 
 				onTriggered: {
-					const phase1Power = Math.random() * 50
-					const phase2Power = Math.random() * 50
-					const phase3Power = Math.random() * 50
-					_phase1Power.setValue(phase1Power)
-					_phase2Power.setValue(phase2Power)
-					_phase3Power.setValue(phase3Power)
+					const zeroPower = Math.random() < 0.2
+					const phase1Power = zeroPower ? 0 : Math.random() * 50
+					const phase2Power = zeroPower ? 0 : Math.random() * 50
+					const phase3Power = zeroPower ? 0 : Math.random() * 50
+					phases.get(0)._power.setValue(phase1Power)
+					phases.get(1)._power.setValue(phase2Power)
+					phases.get(2)._power.setValue(phase3Power)
 
 					_energy.setValue(1 + Math.random() * 10)
 					_current.setValue(1 + Math.random() * 20)
@@ -89,12 +86,16 @@ QtObject {
 
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
+
+				// Set default values
 				_maxCurrent.setValue(30)
 				_customName.setValue("EV Charger " + deviceInstance)
 				_productId.setValue(0xC025)
+				_status.setValue(Math.floor(Math.random() * VenusOS.Evcs_Status_Charged))
+				_mode.setValue(Math.floor(Math.random() * VenusOS.Evcs_Mode_Auto))
 				_chargingTime.setValue(100000)
+				_position.setValue(1)
 
-				Global.mockDataSimulator.setMockValue(serviceUid + "/Position", 1)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/StartStop", 1)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/AutoStart", 1)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/EnableDisplay", 1)
@@ -102,6 +103,10 @@ QtObject {
 				// Device info
 				Global.mockDataSimulator.setMockValue(serviceUid + "/Mgmt/Connection", serviceUid)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/Connected", 1)
+
+				// Immediately queue an update so that the Brief/Overview pages update sooner for
+				// UI testing.
+				Qt.callLater(Global.evChargers._doUpdateTotals)
 			}
 		}
 	}

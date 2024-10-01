@@ -12,9 +12,11 @@ ObjectModel {
 	property string bindPrefix
 	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator1"
 	property string startStopBindPrefix: startStop1Uid
+	readonly property string serviceType: BackendConnection.serviceTypeFromUid(bindPrefix)
 
 	// On D-Bus, the startstop1 generator is at com.victronenergy.generator.startstop1.
 	// On MQTT, the startstop1 generator is the one with GensetService=com.victronenergy.genset.*
+	// (or GensetService=com.victronenergy.dcgenset.* if this is a dcgenset)
 	readonly property string startStop1Uid: BackendConnection.type === BackendConnection.MqttSource
 			? generatorWithGensetService
 			: BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop1"
@@ -25,14 +27,19 @@ ObjectModel {
 		delegate: VeQuickItem {
 			uid: model.device.serviceUid + "/GensetService"
 			onValueChanged: {
-				if (value !== undefined && value.startsWith("com.victronenergy.genset.")) {
-					root.generatorWithGensetService = model.device.serviceUid
+				if ( (isValid && root.dcGenset && value.startsWith("com.victronenergy.dcgenset."))
+						|| (isValid && !root.dcGenset && value.startsWith("com.victronenergy.genset.")) ) {
+						root.generatorWithGensetService = model.device.serviceUid
 				}
 			}
 		}
 	}
 
-	readonly property var nrOfPhases: VeQuickItem {
+	readonly property bool dcGenset: serviceType === "dcgenset"
+	readonly property int nrOfPhases: phases.isValid ? phases.value
+												   : dcGenset ? 0
+															  : 3
+	readonly property VeQuickItem phases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
 
@@ -65,13 +72,21 @@ ObjectModel {
 	}
 
 	ListTextItem {
+		//% "Current run time"
+		text: qsTrId("settings_page_genset_generator_run_time")
+		secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
+		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Runtime" : ""
+		allowed: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
+	}
+
+	ListTextItem {
 		//% "Control status"
 		text: qsTrId("ac-in-genset_auto_control_status")
 		secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : "--"
 
 		VeQuickItem {
 			id: activeCondition
-			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/RunningByCondition" : ""
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/RunningByConditionCode" : ""
 		}
 
 		VeQuickItem {
@@ -98,12 +113,36 @@ ObjectModel {
 		}
 	}
 
-	ListFpGensetErrorItem {
-		//% "Genset error code"
+	ListNavigationItem {
+		//% "Genset error codes"
 		text: qsTrId("ac-in-genset_error")
-		dataItem.uid: root.bindPrefix + "/ErrorCode"
-		allowed: defaultAllowed && dataItem.isValid
-		nrOfPhases: root.nrOfPhases.value || 3
+		secondaryText: {
+			let errorCodes = ""
+			for (let i = 0; i < errorModel.count; ++i) {
+				const errorCode = errorModel.get(i).errorCode
+				if (errorCode) {
+					errorCodes += (errorCodes.length ? " " : "") + errorCode
+				}
+			}
+			return errorCodes.length ? errorCodes : CommonWords.none_errors
+		}
+
+		allowed: defaultAllowed && _dataItem.isValid
+		enabled: secondaryText !== CommonWords.none_errors
+
+		onClicked: Global.notificationLayer.popAndGoToNotifications()
+
+		VeQuickItem {
+			id: _dataItem
+
+			uid: root.bindPrefix + "/Error/0/Id"
+		}
+
+		GensetErrorModel {
+			id: errorModel
+
+			uidPrefix: root.bindPrefix
+		}
 	}
 
 	ListButton {
@@ -125,7 +164,7 @@ ObjectModel {
 		Repeater {
 			id: phaseRepeater
 
-			model: root.nrOfPhases.value || 3
+			model: root.nrOfPhases
 			delegate: ListQuantityGroup {
 				text: phaseRepeater.count === 1
 						//% "AC"
@@ -161,17 +200,9 @@ ObjectModel {
 		secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
 	}
 
-	ListNavigationItem {
-		//% "Auto start/stop"
-		text: qsTrId("ac-in-genset_auto_start_stop")
-		onClicked: {
-			const props = {
-				"title": text,
-				"settingsBindPrefix": root.settingsBindPrefix,
-				"startStopBindPrefix": root.startStopBindPrefix
-			}
-			Global.pageManager.pushPage("/pages/settings/PageGenerator.qml", props)
-		}
+	ListDcOutputQuantityGroup {
+		bindPrefix: root.bindPrefix
+		allowed: defaultAllowed && root.dcGenset
 	}
 
 	ListNavigationItem {
@@ -240,12 +271,11 @@ ObjectModel {
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
 						}
 
-						ListTextItem {
-							//% "Operating time"
-							text: qsTrId("ac-in-genset_operating_time")
+						ListTemperatureItem {
+							//% "Heatsink temperature"
+							text: qsTrId("genset_heatsink_temperature")
+							dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"
 							allowed: defaultAllowed && dataItem.isValid
-							dataItem.uid: root.bindPrefix + "/Engine/OperatingHours"
-							secondaryText: Utils.formatAsHHMM(dataItem.value, true)
 						}
 
 						ListQuantityItem {
@@ -261,6 +291,106 @@ ObjectModel {
 							text: qsTrId("ac-in-genset_number_of_starts")
 							dataItem.uid: root.bindPrefix + "/Engine/Starts"
 							allowed: defaultAllowed && dataItem.isValid
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ListNavigationItem { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
+		text: CommonWords.settings
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
+					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+			}
+	}
+
+	ListNavigationItem {
+		//% "Run time and service"
+		text: qsTrId("page_settings_generator_run_time_and_service")
+		onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
+											   {
+												   title: text,
+												   settingsBindPrefix: root.settingsBindPrefix,
+												   startStopBindPrefix: root.startStopBindPrefix,
+												   gensetBindPrefix: root.bindPrefix
+											   })
+	}
+
+	ListNavigationItem {
+		//% "BMS Settings"
+		text: qsTrId("page_genset_model_bms_settings")
+		allowed: defaultAllowed && (chargeVoltage.isValid || chargeCurrent.isValid || bmsControlled.isValid)
+		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
+
+		VeQuickItem {
+			id: chargeVoltage
+			uid: root.bindPrefix + "/Settings/ChargeVoltage"
+		}
+
+		VeQuickItem {
+			id: chargeCurrent
+			uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
+		}
+
+		VeQuickItem {
+			id: bmsControlled
+			uid: root.bindPrefix + "/Settings/BmsPresent"
+		}
+
+		Component {
+			id: settingsComponent
+
+			Page {
+				GradientListView {
+					model: ObjectModel {
+						ListSpinBox {
+							//% "Charge voltage"
+							text: qsTrId("genset_charge_voltage")
+							dataItem.uid: root.bindPrefix + "/Settings/ChargeVoltage"
+							decimals: 1
+							stepSize: 0.1
+							suffix: Units.defaultUnitString(VenusOS.Units_Volt_DC)
+							allowed: defaultAllowed && dataItem.isValid
+							enabled: bmsControlled.dataItem.value === 0
+						}
+
+						ListTextItem {
+							//% "The charge voltage is currently controlled by the BMS."
+							text: qsTrId("genset_charge_voltage_controlled_by_bms")
+							allowed: defaultAllowed && bmsControlled.dataItem.value === 1
+						}
+
+						ListSpinBox {
+							//% "Charge current limit"
+							text: qsTrId("genset_charge_current_limit")
+							dataItem.uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
+							suffix: Units.defaultUnitString(VenusOS.Units_Amp)
+							allowed: defaultAllowed && dataItem.isValid
+						}
+
+						ListTextItem {
+							id: bmsControlled
+
+							//% "BMS Controlled"
+							text: qsTrId("genset_bms_controlled")
+							secondaryText: CommonWords.yesOrNo(dataItem.value)
+							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
+							allowed: defaultAllowed && dataItem.isValid
+							bottomContentChildren: ListLabel {
+								//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
+								text: qsTrId("genset_bms_control_enabled_automatically")
+								allowed: bmsControlled.dataItem.value === 1
+							}
+						}
+
+						ListButton {
+							//% "BMS control"
+							text: qsTrId("genset_bms_control")
+							secondaryText: CommonWords.press_to_reset
+							visible: defaultAllowed && bmsControlled.dataItem.value === 1
+							onClicked: bmsControlled.dataItem.setValue(0)
 						}
 					}
 				}

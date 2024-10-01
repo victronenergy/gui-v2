@@ -106,6 +106,12 @@ Page {
 						display: qsTrId("settings_up_bu_no_services"),
 						value: VenusOS.CanBusProfile_None250,
 						readOnly: true
+					},
+					{
+						//% "Up, but no services (500 kbit/s)"
+						display: qsTrId("settings_up_but_no_services_500"),
+						value: VenusOS.CanBusProfile_None500,
+						readOnly: true
 					}
 				]
 			}

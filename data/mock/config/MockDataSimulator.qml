@@ -23,6 +23,7 @@ QtObject {
 	signal setSolarRequested(config : var)
 	signal setSystemRequested(config : var)
 	signal setTanksRequested(config : var)
+	signal setShowInputLoadsRequested(split: bool)
 	signal addDummyNotification(isAlarm : bool)
 
 	readonly property var _configs: ({
@@ -133,7 +134,9 @@ QtObject {
 		{
 			// Toggle ESS feed-in
 			const feedIn = root.mockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn") === 1
+			const preventFeedback = root.mockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/PreventFeedback") === 1
 			root.setMockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn", feedIn ? 0 : 1)
+			root.setMockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/PreventFeedback", preventFeedback ? 0 : 1)
 			event.accepted = true
 			break
 		}
@@ -223,13 +226,16 @@ QtObject {
 			event.accepted = true
 			break
 		}
+		case Qt.Key_Q:
+			root.setShowInputLoadsRequested(!Global.system.showInputLoads)
+			event.accepted = true
+			break
 		case Qt.Key_S:
 		{
-			Global.system.ac.consumption._l2L1OutSummed.setValue(!Global.system.ac.consumption._l2L1OutSummed.value)
+			Global.system.load._l2L1OutSummed.setValue(!!Global.system.load._l2L1OutSummed.value ? 0 : 1)
 			event.accepted = true
 			break
 		}
-
 		case Qt.Key_T:
 			root.timersActive = !root.timersActive
 			pageConfigTitle.text = "Timers on: " + root.timersActive

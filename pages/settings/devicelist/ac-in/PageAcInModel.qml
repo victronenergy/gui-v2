@@ -12,16 +12,30 @@ ObjectModel {
 	property string bindPrefix
 	property int productId
 
-	readonly property var nrOfPhases: VeQuickItem {
+	readonly property VeQuickItem nrOfPhases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
 
+	// The selected phase, if applicable (e.g. Multi RS in PV inverter only mode, which is assigned
+	// to a specific phase).
+	readonly property VeQuickItem phase: VeQuickItem {
+		uid: root.bindPrefix + "/Ac/Phase"
+	}
+
+	// Phase numbers are determined by /NrOfPhases or /Ac/Phase, in that order. If neither are set,
+	// use all 3 phases and rely on phaseCountKnown to filter out invalid phases.
+	readonly property var phaseNumbers: nrOfPhases.isValid ? Array.from({length: nrOfPhases.value}, (_, index) => index+1)
+			: phase.isValid ? [ phase.value ]
+			: [1,2,3]   // default to 3 phases, and use phaseCountKnown to filter out invalid phases
+
+	// If the number of phases is not known, show each phase depending on whether there is valid
+	// data for that phase.
+	readonly property bool phaseCountKnown: phase.isValid || nrOfPhases.isValid
+
 	ListTextItem {
 		text: CommonWords.status
-		dataItem.uid: root.productId === ProductInfo.ProductId_PvInverter_Fronius
-				? root.bindPrefix + "/StatusCode"
-				: ""
-		allowed: root.productId === ProductInfo.ProductId_PvInverter_Fronius
+		dataItem.uid: root.bindPrefix + "/StatusCode"
+		allowed: defaultAllowed && dataItem.isValid
 		secondaryText: Global.pvInverters.statusCodeToText(dataItem.value)
 	}
 
@@ -33,9 +47,10 @@ ObjectModel {
 		width: parent ? parent.width : 0
 
 		Repeater {
-			model: nrOfPhases.value || 3
+			model: root.phaseNumbers
 			delegate: ListQuantityGroup {
-				text: CommonWords.ac_phase_x.arg(model.index + 1)
+				allowed: root.phaseCountKnown || (phaseVoltage.isValid || phaseCurrent.isValid || phasePower.isValid)
+				text: CommonWords.ac_phase_x.arg(modelData)
 				textModel: [
 					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt_AC },
 					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
@@ -44,15 +59,15 @@ ObjectModel {
 
 				VeQuickItem {
 					id: phaseVoltage
-					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Voltage"
+					uid: root.bindPrefix + "/Ac/L" + modelData + "/Voltage"
 				}
 				VeQuickItem {
 					id: phaseCurrent
-					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Current"
+					uid: root.bindPrefix + "/Ac/L" + modelData + "/Current"
 				}
 				VeQuickItem {
 					id: phasePower
-					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Power"
+					uid: root.bindPrefix + "/Ac/L" + modelData + "/Power"
 				}
 			}
 		}
@@ -81,13 +96,14 @@ ObjectModel {
 		width: parent ? parent.width : 0
 
 		Repeater {
-			model: nrOfPhases.value || 3
+			model: root.phaseNumbers
 			delegate: ListQuantityItem {
 				//: %1 = phase number (1-3)
 				//% "Energy L%1"
-				text: qsTrId("ac-in-modeldefault_energy_x").arg(model.index + 1)
-				dataItem.uid: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(model.index + 1)
+				text: qsTrId("ac-in-modeldefault_energy_x").arg(modelData)
+				dataItem.uid: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(modelData)
 				unit: VenusOS.Units_Energy_KiloWattHour
+				allowed: root.phaseCountKnown || dataItem.isValid
 			}
 		}
 	}

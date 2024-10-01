@@ -84,6 +84,28 @@ Page {
 			}
 
 			ListRadioButtonGroup {
+				//% "Position of AC loads"
+				text: qsTrId("settings_system_ac_position")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcInLoads"
+				optionModel: [
+					{
+						//% "AC input & output"
+						display: qsTrId("settings_system_ac_input_and_output"),
+						//% "Use this option when AC-loads are present on the input of the Inverter/Charger. Use this option if unsure."
+						caption: qsTrId("settings_system_ac_input_and_output_description"),
+						value: 1
+					},
+					{
+						//% "AC output only"
+						display: qsTrId("settings_system_ac_output_only"),
+						//% "Use this option when the system uses a grid meter, but all AC-loads are on the output of the Inverter/Charger."
+						caption: qsTrId("settings_system_ac_output_only_description"),
+						value: 0
+					},
+				]
+			}
+
+			ListRadioButtonGroup {
 				text: root._isGrid
 					  //% "Monitor for grid failure"
 					? qsTrId("settings_system_monitor_for_grid_failure")

@@ -28,7 +28,9 @@ OverviewWidget {
 	type: VenusOS.OverviewWidget_Type_Solar
 	enabled: true
 	quantityLabel.dataObject: Global.system.solar
-	preferLargeSize: extraContentLoader.status !== Loader.Null
+	preferredSize: extraContentLoader.status !== Loader.Null
+			? VenusOS.OverviewWidget_PreferredSize_PreferLarge
+			: VenusOS.OverviewWidget_PreferredSize_Any
 
 	// Solar yield history is only available for PV chargers, and phase data is only available for
 	// PV inverters. So, if there are only solar chargers, show the solar history; otherwise if

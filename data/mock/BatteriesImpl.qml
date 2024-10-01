@@ -16,6 +16,7 @@ QtObject {
 			"/Balancer/Status": VenusOS.Battery_Balancer_Balancing,
 			"/Capacity": 200,
 			"/InstalledCapacity": 250,
+			"/ConnectionInformation": "Generic connection info",
 			"/NumberOfBmses": 1,
 			"/Connected": 1,
 			"/Errors/SmartLithium/Communication": 0,

@@ -9,13 +9,12 @@ import Victron.VenusOS
 ListItem {
 	id: root
 
-	property alias textModel: repeater.model
-	property alias minimumDelegateWidth: repeater.minimumDelegateWidth
+	property alias textModel: quantityRow.model
 
 	content.spacing: 0
 	content.children: [
-		QuantityRepeater {
-			id: repeater
+		QuantityRow {
+			id: quantityRow
 		}
 	]
 }

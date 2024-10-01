@@ -39,7 +39,7 @@ Page {
 	Component {
 		id: gensetModelComponent
 
-		PageAcInModelGenset {
+		PageGensetModel {
 			bindPrefix: root.bindPrefix
 		}
 	}
@@ -47,7 +47,7 @@ Page {
 	Component {
 		id: defaultModelComponent
 
-		PageAcInModelDefault {
+		PageAcInModel {
 			bindPrefix: root.bindPrefix
 			productId: productIdDataItem.value
 		}

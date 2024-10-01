@@ -20,7 +20,6 @@ QtObject {
 
 	readonly property string fontFamily: _defaultFontLoader.name
 	readonly property string quantityFontFamily: _quantityFontLoader.name
-	property var inputPanel
 	property var dialogLayer
 	property var notificationLayer
 	property ScreenBlanker screenBlanker
@@ -70,7 +69,7 @@ QtObject {
 	readonly property int int32Max: _intValidator.top
 	readonly property int int32Min: _intValidator.bottom
 
-	signal aboutToFocusTextField(var textField, int toTextFieldY, var flickable)
+	signal aboutToFocusTextField(var textField, var textFieldContainer, var flickable)
 	signal keyPressed(var event)
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
@@ -105,7 +104,6 @@ QtObject {
 		dataServiceModel = null
 		firmwareUpdate = null
 		allDevicesModel = null
-		inputPanel = null
 		dialogLayer = null
 		notificationLayer = null
 

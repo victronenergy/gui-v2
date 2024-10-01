@@ -27,6 +27,8 @@ Item {
 			&& !pageStack.busy && (!swipeView || !swipeView.flicking)
 			&& !Global.splashScreenVisible
 
+	readonly property bool screenIsBlanked: !!Global.screenBlanker && Global.screenBlanker.blanked
+
 	property int _loadedPages: 0
 
 	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded && !Global.needPageReload
@@ -79,7 +81,7 @@ Item {
 			anchors.fill: parent
 			onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 			contentChildren: swipePageModel.children
-			Component.onCompleted: Global.allPagesLoaded = true
+			Component.onCompleted: Qt.callLater(function() { Global.allPagesLoaded = true })
 		}
 	}
 

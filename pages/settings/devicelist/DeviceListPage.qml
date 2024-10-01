@@ -102,9 +102,21 @@ Page {
 			}
 			break;
 
+		case "genset":		// deliberate fall through
+		case "dcgenset":
+			url = "/pages/settings/devicelist/PageGenset.qml"
+			params = { "bindPrefix": device.serviceUid }
+
+			const gensetPowerText = Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power)
+			if (device.gensetStatusCode >= 0) {
+				summary = [ Global.acInputs.gensetStatusCodeToText(device.gensetStatusCode), gensetPowerText ]
+			} else {
+				summary = [ gensetPowerText ]
+			}
+			break;
+
 		case "pvinverter":	// deliberate fall through
 		case "grid":		// deliberate fall through
-		case "genset":		// deliberate fall through
 		case "acload":
 			url = "/pages/settings/devicelist/ac-in/PageAcIn.qml"
 			params = { "bindPrefix": device.serviceUid }
@@ -136,11 +148,11 @@ Page {
 			const inputTemp = Global.systemSettings.convertFromCelsius(device.temperature)
 			if (isNaN(device.humidity)) {
 				summary = [
-					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp, 1),
+					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp, 0),
 				]
 			} else {
 				summary = [
-					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp, 1),
+					Units.getCombinedDisplayText(Global.systemSettings.temperatureUnit, inputTemp, 0),
 					Units.getCombinedDisplayText(VenusOS.Units_Percentage, device.humidity),
 				]
 			}
@@ -233,7 +245,7 @@ Page {
 					? root._deviceDisplayInfo(_serviceType, model.device, model.sourceModel)
 					: null
 
-			text: model.cachedDeviceDescription
+			text: model.cachedDeviceName
 			textModel: model.connected && _displayInfo ? _displayInfo.summary || [] : [ CommonWords.not_connected ]
 			down: deviceMouseArea.containsPress
 			allowed: !model.connected || _displayInfo !== null

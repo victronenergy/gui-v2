@@ -152,17 +152,6 @@ Page {
 				allowed: defaultAllowed && quietHours.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
-
-			ListNavigationItem {
-				//% "Run time and service"
-				text: qsTrId("page_settings_generator_run_time_and_service")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
-													   {
-														   title: text,
-														   settingsBindPrefix: root.settingsBindPrefix,
-														   startStopBindPrefix: root.startStopBindPrefix
-													   })
-			}
 		}
 	}
 }

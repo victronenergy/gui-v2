@@ -28,7 +28,7 @@ public:
 		DeviceRole = Qt::UserRole,
 		SourceModelRole,
 		ConnectedRole,
-		CachedDeviceDescriptionRole
+		CachedDeviceNameRole
 	};
 
 	explicit AggregateDeviceModel(QObject *parent = nullptr);
@@ -69,14 +69,14 @@ private:
 		QString id;
 		QPointer<BaseDevice> device;
 		QPointer<BaseDeviceModel> sourceModel;
-		QString cachedDeviceDescription;
+		QString cachedDeviceName;
 	};
 
 	void sourceModelRowsInserted(const QModelIndex &parent, int first, int last);
 	int indexOf(const QString &deviceInfoId) const;
 	int indexOf(const BaseDevice *device) const;
 	int insertionIndex(BaseDevice *device) const;
-	void deviceDescriptionChanged();
+	void deviceNameChanged();
 	void deviceValidChanged();
 	void cleanUp();
 

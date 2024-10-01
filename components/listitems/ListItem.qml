@@ -14,9 +14,12 @@ Item {
 	property alias bottomContent: bottomContent
 	property alias bottomContentChildren: bottomContent.children
 	property bool down
+	property bool flat
 	property alias backgroundRect: backgroundRect
 	property int spacing: Theme.geometry_gradientList_spacing
 	property int bottomContentMargin: Theme.geometry_listItem_content_spacing
+	property int leftPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
+	property int rightPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer
@@ -28,11 +31,11 @@ Item {
 	readonly property int defaultImplicitHeight: {
 		const bottomHeight = bottomContent.height > 0 ? bottomContent.height + bottomContentMargin : 0
 		const labelHeight = primaryLabel.implicitHeight + Theme.geometry_listItem_content_verticalMargin*2
-		return Math.max(Theme.geometry_listItem_height,
+		return Math.max(flat ? Theme.geometry_listItem_flat_height : Theme.geometry_listItem_height,
 						Math.max(content.height, labelHeight) + bottomHeight)
 	}
 
-	readonly property int availableWidth: width - primaryLabel.anchors.leftMargin - content.anchors.rightMargin - content.spacing
+	readonly property int availableWidth: width - leftPadding - rightPadding - content.spacing
 	property int maximumContentWidth: availableWidth * 0.7
 	property bool allowed: defaultAllowed
 
@@ -46,6 +49,7 @@ Item {
 		z: -2
 		height: root.height - root.spacing
 		color: Theme.color_listItem_background
+		visible: !root.flat
 		// TODO how to indicate read-only setting?
 
 		// Show thin colored indicator on left side if settings is only visible to super/service users
@@ -70,14 +74,14 @@ Item {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_listItem_content_horizontalMargin
+			leftMargin: root.leftPadding
 			verticalCenter: parent.verticalCenter
 			verticalCenterOffset: -root.spacing/2
 				- (bottomContent.height > 0
 						? bottomContent.height/2 + bottomContentMargin/2
 						: 0)
 		}
-		font.pixelSize: Theme.font_size_body2
+		font.pixelSize: flat ? Theme.font_size_body1 : Theme.font_size_body2
 		wrapMode: Text.Wrap
 		width: root.availableWidth - content.width
 	}
@@ -87,7 +91,7 @@ Item {
 
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry_listItem_content_horizontalMargin
+			rightMargin: root.rightPadding
 			verticalCenter: primaryLabel.verticalCenter
 		}
 		spacing: Theme.geometry_listItem_content_spacing

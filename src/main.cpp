@@ -28,7 +28,7 @@
 #include <QtDebug>
 
 #include "themeobjects.h"
-
+#include "QZXing.h"
 Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 namespace {
@@ -249,6 +249,13 @@ EM_JS(void, setContentEditable, (bool editable), {
 	}
 });
 
+EM_JS(bool, hasNativeVirtualKeyboard, (), {
+	// Not the best way to test for whether gui-v2 is running in a mobile browser that has its own
+	// VKB, but once QTBUG-128406 is fixed, the wasm keyboard handler can be removed.
+	return /Android|iPad|iPhone/i.test(navigator.userAgent)
+		   // Newer iPads use a Macintosh user agent, so need a hacky test here.
+		|| (/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+});
 
 #endif
 
@@ -275,6 +282,8 @@ int main(int argc, char *argv[])
 		Victron::VenusOS::ThemeSingleton theme;
 		scaleFactor = qMax(1.0, qMin(width/theme.geometry_screen_width(), height/theme.geometry_screen_height()));
 	}
+
+	Victron::VenusOS::BackendConnection::create()->setNeedsWasmKeyboardHandler(hasNativeVirtualKeyboard());
 #endif
 
 	std::string scaleAsString = std::to_string(scaleFactor);
@@ -291,6 +300,9 @@ int main(int argc, char *argv[])
 	bool skipSplashScreen = false;
 
 	QQmlEngine engine;
+	QZXing::registerQMLTypes();
+	QZXing::registerQMLImageProvider(engine);
+
 	initBackend(&enableFpsCounter, &skipSplashScreen);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 

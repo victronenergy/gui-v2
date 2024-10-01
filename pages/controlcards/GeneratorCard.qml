@@ -28,7 +28,7 @@ ControlCard {
 		generator: root.generator
 	}
 
-	SwitchControlValue {
+	ListSwitch {
 		id: autostartSwitch
 
 		anchors {
@@ -37,21 +37,27 @@ ControlCard {
 		}
 
 		//% "Autostart"
-		label.text: qsTrId("controlcard_generator_label_autostart")
-		button.checked: root.generator.autoStart
-		button.enabled: root.generator.state !== VenusOS.Generators_State_Running
-		separator.visible: false
+		text: qsTrId("controlcard_generator_label_autostart")
+		checked: root.generator.autoStart
+		flat: true
+		bottomContent.children: [
+			ListLabel {
+				//% "The generator will start and stop based on the configured autostart conditions."
+				text: qsTrId("controlcard_generator_autostart_conditions")
+				color: Theme.color_font_secondary
+				font.pixelSize: Theme.font_size_caption
+				topPadding: 0
+				leftPadding: autostartSwitch.leftPadding
+				rightPadding: autostartSwitch.rightPadding
+			}
+		]
 
-		Connections {
-			target: autostartSwitch.button
-
-			function onClicked() {
-				if (!autostartSwitch.button.checked) {
-					root.generator.setAutoStart(true)
-				} else {
-					// check if they really want to disable
-					Global.dialogLayer.open(confirmationDialogComponent)
-				}
+		onClicked: {
+			if (!checked) {
+				root.generator.setAutoStart(true)
+			} else {
+				// check if they really want to disable
+				Global.dialogLayer.open(confirmationDialogComponent)
 			}
 		}
 
@@ -72,22 +78,6 @@ ControlCard {
 				}
 			}
 		}
-	}
-
-	Label {
-		anchors {
-			top: autostartSwitch.bottom
-			left: parent.left
-			leftMargin: Theme.geometry_controlCard_contentMargins
-			right: parent.right
-			rightMargin: Theme.geometry_controlCard_contentMargins
-		}
-		wrapMode: Text.Wrap
-		color: Theme.color_font_secondary
-		font.pixelSize: Theme.font_size_caption
-
-		//% "The generator will start and stop based on the configured autostart conditions."
-		text: qsTrId("controlcard_generator_autostart_conditions")
 	}
 
 	GeneratorManualControlButton {

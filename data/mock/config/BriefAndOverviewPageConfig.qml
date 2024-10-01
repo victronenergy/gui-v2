@@ -25,7 +25,7 @@ QtObject {
 				emptyAcInput,
 			],
 			solar: { inverters: [ { phaseCount: 1 } ] },
-			system: { state: VenusOS.System_State_Inverting, ac: { phaseCount: 3 }, dc: {} },
+			system: { state: VenusOS.System_State_Inverting, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcdc"] } },
 			battery: { stateOfCharge: 64, current: 1 },
 		},
 		{
@@ -35,7 +35,7 @@ QtObject {
 				emptyAcInput,
 			],
 			solar: { inverters: [ { phaseCount: 3 } ] },
-			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: {} },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcdc","dcload"] } },
 			battery: { stateOfCharge: 73, current: -1 },
 		},
 		// TODO "ESS - AC & DC coupled. PV Inverter on AC Out (Amps version)",
@@ -58,7 +58,7 @@ QtObject {
 			],
 			generators: { running: false },
 			solar: { chargers: [ { power: 300 } ], inverters: [ { phaseCount: 3 } ] },
-			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 1 }, dc: {} },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 1 }, dc: { serviceTypes: ["dcload", "dcdc"] } },
 			battery: { stateOfCharge: 95, current: 1 },
 		},
 		{
@@ -89,7 +89,7 @@ QtObject {
 			],
 			dcInputs: {  types: [ { serviceType: "dcsource", monitorMode: -1 }, { serviceType: "alternator", monitorMode: -1 } ] },
 			solar: { chargers: [ { power: 300 } ] },
-			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: {} },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcdc"] } },
 		},
 		{
 			name: "Single-phase Shore",
@@ -97,7 +97,7 @@ QtObject {
 				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 1, connected: 1 },
 				emptyAcInput,
 			],
-			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 1 }, dc: {} },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 1 }, dc: { serviceTypes: ["dcdc"] } },
 		},
 		{
 			name: "Single phase + solar",
@@ -106,7 +106,7 @@ QtObject {
 				emptyAcInput,
 			],
 			solar: { chargers: [ { power: 456 } ] },
-			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 1 }, dc: {} },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 1 }, dc: { serviceTypes: ["dcsystem"] } },
 		},
 		{
 			name: "Small RV with alternator or small boat",
@@ -116,7 +116,7 @@ QtObject {
 			],
 			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 } ] },
 			solar: { chargers: [ { power: 456 } ] },
-			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: {} },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcload"] } },
 		},
 		{
 			name: "Catamaran with wind: Shore / Solar / Left alternator / Right alternator / Wind",
@@ -126,7 +126,7 @@ QtObject {
 			],
 			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			solar: { chargers: [ { power: 456 } ] },
-			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: {} },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcdc","dcload"] } },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
 		{
@@ -137,7 +137,7 @@ QtObject {
 			],
 			dcInputs: {  types: [ { serviceType: "dcsource", monitorMode: -1 }, { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			solar: { chargers: [ { power: 456 } ] },
-			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: {} },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcdc","dcload"] } },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
 		{
@@ -151,7 +151,7 @@ QtObject {
 				emptyAcInput,
 			],
 			acInputs: [ { source: VenusOS.AcInputs_InputSource_Grid, serviceType: "vebus", phaseCount: 1, connected: 1 }, emptyAcInput ],
-			system: { state: VenusOS.System_State_FloatCharging, ac: { phaseCount: 3 }, dc: {} },
+			system: { state: VenusOS.System_State_FloatCharging, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcdc","dcload"] } },
 			battery: { stateOfCharge: 100, current: 0 },
 			evcs: { chargers: [ { status: VenusOS.Evcs_Status_Charging, mode: VenusOS.Evcs_Mode_Auto } ] }
 		},
@@ -219,7 +219,7 @@ QtObject {
 			],
 			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			solar: { chargers: [ { power: 456 } ] },
-			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: {} },
+			system: { state: VenusOS.System_State_AbsorptionCharging, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcdc","dcload"] } },
 			battery: { stateOfCharge: 43, current: 1 },
 		},
 		{
@@ -229,6 +229,54 @@ QtObject {
 		{
 			name: "Grid disconnected",
 			acInputs: [ { source: VenusOS.AcInputs_InputSource_Grid, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 0 }, emptyAcInput, ],
+		},
+		{
+			name: "AC Loads + Essential Loads; EVCS connected to AC Loads only",
+			system: { showInputLoads: true, hasAcOutSystem: 1, ac: { phaseCount: 1 }, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACInput },
+				]
+			}
+		},
+		{
+			name: "AC Loads + Essential Loads; EVCS connected to Essential Loads only",
+			system: { showInputLoads: true, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACOutput },
+				]
+			}
+		},
+		{
+			name: "AC Loads + Essential Loads; EVCS connected to AC Loads + Essential Loads",
+			system: { showInputLoads: true, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACOutput },
+				]
+			}
+		},
+		{
+			name: "AC Loads only because AC-Out disabled; EVCS connected to AC Loads only",
+			system: { showInputLoads: true, hasAcOutSystem: 0, ac: {}, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACOutput },
+				]
+			}
+		},
+		{
+			name: "AC Loads only because showInputLoads=false; EVCS connected to Inverter/Charger",
+			system: { showInputLoads: false, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
+			evcs: {
+				chargers: [
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.PvInverter_Position_ACOutput },
+				]
+			}
 		},
 	]
 

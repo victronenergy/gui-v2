@@ -129,6 +129,6 @@ Item {
 		active: false
 		asynchronous: true
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load data manager:", source)
-		onLoaded: Global.dataManagerLoaded = true
+		onLoaded: Qt.callLater(function() { Global.dataManagerLoaded = true })
 	}
 }

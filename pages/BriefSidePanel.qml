@@ -240,7 +240,7 @@ exported power v  0.4 |   /
 		//% "AC Loads"
 		title: qsTrId("brief_ac_loads")
 		icon.source: "qrc:/images/acloads.svg"
-		quantityLabel.dataObject: Global.system.ac.consumption
+		quantityLabel.dataObject: Global.system.load.ac
 		loadersActive: true
 		sideComponent: LoadGraph {
 			active: root.animationEnabled
@@ -248,8 +248,8 @@ exported power v  0.4 |   /
 
 			AcPhasesCurrentRange {
 				id: acLoadGraphRange
-				phaseModel: root.visible ? Global.system.ac.consumption.phases : null
-				maximumCurrent: Global.system.ac.consumption.maximumCurrent
+				phaseModel: root.visible ? Global.system.load.ac.phases : null
+				maximumCurrent: Global.system.load.maximumAcCurrent
 			}
 		}
 		bottomComponent: ThreePhaseBarGauge {
@@ -257,9 +257,9 @@ exported power v  0.4 |   /
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
-			phaseModel: root.visible ? Global.system.ac.consumption.phases : null
+			phaseModel: root.visible ? Global.system.load.ac.phases : null
 			phaseModelProperty: "current"
-			maximumValue: Global.system.ac.consumption.maximumCurrent
+			maximumValue: Global.system.load.maximumAcCurrent
 			animationEnabled: root.animationEnabled
 		}
 	}

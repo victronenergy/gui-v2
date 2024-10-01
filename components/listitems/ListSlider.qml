@@ -14,7 +14,7 @@ ListItem {
 
 	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
 
-	content.anchors.rightMargin: 0
+	rightPadding: 0
 	content.children: [
 		SettingsSlider {
 			id: slider

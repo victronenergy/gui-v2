@@ -13,15 +13,24 @@ SwipeViewPage {
 	readonly property var _centerWidgets: [inverterChargerWidget, batteryWidget]
 	property var _rightWidgets: []
 
-	// Preferred order for the input widgets on the left hand side
+	// Preferred order for the input widgets on the left hand side. When placing widgets, avoid / minimize connectors crossing each other.
 	readonly property var _leftWidgetOrder: [
+		// Top widgets: these widgets have to be up the top, as they connect to the 'inverter/charger widget', which is at the top of the center column.
 		VenusOS.OverviewWidget_Type_AcGenericInput,
 		VenusOS.OverviewWidget_Type_AcGeneratorInput,
+		// End top widgets
+
+		// Middle widgets: these widgets can connect to both the inverter/charger widget and the battery widget in the center column.
+		// They need to be in the middle so as to avoid connectors crossing.
+		VenusOS.OverviewWidget_Type_Solar,
+		// End middle widgets
+
+		// Bottom widgets: these widgets only connect to the battery, which is at the bottom of the center column.
 		VenusOS.OverviewWidget_Type_DcGenerator,
 		VenusOS.OverviewWidget_Type_Alternator,
 		VenusOS.OverviewWidget_Type_FuelCell,
-		VenusOS.OverviewWidget_Type_Wind,
-		VenusOS.OverviewWidget_Type_Solar
+		VenusOS.OverviewWidget_Type_Wind
+		// End bottom widgets
 	]
 
 	// Set a counter that updates whenever the layout should change.
@@ -31,9 +40,13 @@ SwipeViewPage {
 			+ Global.acInputs.input1Info.connected
 			+ Global.acInputs.input2Info.source
 			+ Global.acInputs.input2Info.connected
-			+ (Global.dcLoads.model.count === 0 || isNaN(Global.system.loads.dcPower) ? 0 : 1)
+			+ (Global.system.showInputLoads ? 1 : 0)
+			+ (Global.system.hasAcOutSystem ? 1 : 0)
+			+ (Global.dcLoads.model.count === 0 || isNaN(Global.system.dc.power) ? 0 : 1)
 			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
 			+ (Global.evChargers.model.count === 0 ? 0 : 1)
+			+ Global.evChargers.acInputPositionCount
+			+ Global.evChargers.acOutputPositionCount
 			+ (Global.pvInverters.model.count === 0 ? 0 : 1)
 	on_ShouldResetWidgetsChanged: Qt.callLater(_resetWidgets)
 	Component.onCompleted: Qt.callLater(_resetWidgets)
@@ -42,6 +55,7 @@ SwipeViewPage {
 
 	property bool _expandLayout: !!Global.pageManager && Global.pageManager.expandLayout
 	property bool _animateGeometry: root.isCurrentPage && !!Global.pageManager && Global.pageManager.animatingIdleResize
+	property int _evcsChangeToken
 
 	// Resets the layout, setting the y pos and height for all overview widgets. This is done once
 	// imperatively, instead of using anchors or y/height bindings, so that widget connector path
@@ -57,79 +71,9 @@ SwipeViewPage {
 		_resetLeftWidgets()
 		_resetRightWidgets()
 
-		let i = 0
-		let firstLargeWidget = null
-		let preferLargeWidgetCount = 0
-		let widget = null
-		for (i = 0; i < _leftWidgets.length; ++i) {
-			if (_leftWidgets[i].preferLargeSize) {
-				if (!firstLargeWidget) {
-					firstLargeWidget = _leftWidgets[i]
-				}
-				preferLargeWidgetCount++
-			}
-		}
-
-		// Set the left widget sizes
-		for (i = 0; i < _leftWidgets.length; ++i) {
-			widget = _leftWidgets[i]
-			switch (_leftWidgets.length) {
-			case 1:
-				widget.size = VenusOS.OverviewWidget_Size_XL
-				break
-			case 2:
-				widget.size = VenusOS.OverviewWidget_Size_L
-				break
-			case 3:
-				if (preferLargeWidgetCount === 3) {
-					// If all three prefer L size, then use M for all three.
-					widget.size = VenusOS.OverviewWidget_Size_M
-				} else if (preferLargeWidgetCount >= 2) {
-					// If only two prefer L size, then use L for the first one, M for the other,
-					// and S for the last.
-					if (widget.preferLargeSize) {
-						widget.size = widget.preferLargeSize ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_M
-					} else {
-						widget.size = VenusOS.OverviewWidget_Size_S
-					}
-				} else if (preferLargeWidgetCount === 1) {
-					// Use size L for that one, and S for the others.
-					widget.size = widget === firstLargeWidget ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_S
-				} else {
-					// Reserve size L for the bottom widget, and use S for the others.
-					widget.size = i === _leftWidgets.length - 1 ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_S
-				}
-				break
-			case 4:
-				// Only one of the widgets can have L size, and the other ones use a reduced size.
-				if (widget === firstLargeWidget) {
-					widget.size = VenusOS.OverviewWidget_Size_M
-				} else if (firstLargeWidget != null) {
-					// There is a large widget, so use M or XS size to fit around it
-					widget.size = VenusOS.OverviewWidget_Size_XS
-				} else {
-					// There are no large widgets; use the same size for all left widgets
-					widget.size = VenusOS.OverviewWidget_Size_S
-				}
-				break
-			default:
-				widget.size = VenusOS.OverviewWidget_Size_XS
-				break
-			}
-		}
-
-		// Set right widget sizes. AC Loads is always present; AC & DC Loads are sized depending on
-		// whether EVCS is visible.
-		const evChargerWidget = _findWidget(_rightWidgets, VenusOS.OverviewWidget_Type_Evcs)
-		if (!!evChargerWidget) {
-			evChargerWidget.size = VenusOS.OverviewWidget_Size_L
-		}
-		dcLoadsWidget.size = Global.dcLoads.model.count > 0 || !isNaN(Global.system.loads.dcPower)
-				? (!!evChargerWidget ? VenusOS.OverviewWidget_Size_XS : VenusOS.OverviewWidget_Size_L)
-				: VenusOS.OverviewWidget_Size_Zero
-		acLoadsWidget.size = dcLoadsWidget.size === VenusOS.OverviewWidget_Size_Zero
-				? (!!evChargerWidget ? VenusOS.OverviewWidget_Size_L : VenusOS.OverviewWidget_Size_XL)
-				: (!!evChargerWidget ? VenusOS.OverviewWidget_Size_XS : VenusOS.OverviewWidget_Size_L)
+		// Set the widget sizes
+		_resetWidgetSizes(_leftWidgets)
+		_resetWidgetSizes(_rightWidgets)
 
 		// Set the widget positions
 		resetWidgetPositions(_leftWidgets)
@@ -140,6 +84,65 @@ SwipeViewPage {
 		resetWidgetConnectors(_leftWidgets)
 		resetWidgetConnectors(_centerWidgets)
 		resetWidgetConnectors(_rightWidgets)
+	}
+
+	function _resetWidgetSizes(widgets) {
+		let i = 0
+		let preferLargeWidgetCount = 0
+		let largeOnlyWidgetCount = 0
+		let widget = null
+		for (i = 0; i < widgets.length; ++i) {
+			if (widgets[i].preferredSize === VenusOS.OverviewWidget_PreferredSize_PreferLarge) {
+				preferLargeWidgetCount++
+			} else if (widgets[i].preferredSize === VenusOS.OverviewWidget_PreferredSize_LargeOnly) {
+				largeOnlyWidgetCount++
+			}
+		}
+		if (largeOnlyWidgetCount > 1) {
+			console.warn("Warning: layout does not handle > 1 widget with OverviewWidget_PreferredSize_LargeOnly")
+		}
+
+		for (i = 0; i < widgets.length; ++i) {
+			widget = widgets[i]
+			switch (widgets.length) {
+			case 1:
+				widget.size = VenusOS.OverviewWidget_Size_XL
+				break
+			case 2:
+				widget.size = VenusOS.OverviewWidget_Size_L
+				break
+			case 3:
+			case 4:
+				if (largeOnlyWidgetCount === 1 || preferLargeWidgetCount === 1) {
+					// One widget must have L size, or only one widget prefers L size.
+					// In this case, use L for that one widget, and S/XS for the others.
+					const smallWidgetSize = widgets.length === 3 ? VenusOS.OverviewWidget_Size_S : VenusOS.OverviewWidget_Size_XS
+					if (largeOnlyWidgetCount === 1) {
+						widget.size = widget.preferredSize === VenusOS.OverviewWidget_PreferredSize_LargeOnly
+								? VenusOS.OverviewWidget_Size_L
+								: smallWidgetSize
+					} else {
+						widget.size = widget.preferredSize === VenusOS.OverviewWidget_PreferredSize_PreferLarge
+								? VenusOS.OverviewWidget_Size_L
+								: smallWidgetSize
+					}
+				} else if (preferLargeWidgetCount === 1 || preferLargeWidgetCount === 2) {
+					// If one or two prefer L size, then use M for those, and S otherwise.
+					widget.size = widget.preferredSize === VenusOS.OverviewWidget_PreferredSize_PreferLarge
+							? VenusOS.OverviewWidget_Size_M
+							: VenusOS.OverviewWidget_Size_S
+				} else {
+					// There are no size preferences, or all three prefer L size, so use the same
+					// size for all of them.
+					widget.size = widgets.length === 3 ? VenusOS.OverviewWidget_Size_M : VenusOS.OverviewWidget_Size_S
+				}
+				break
+			default:
+				// If there are more than four widgets, then size preferences are ignored.
+				widget.size = VenusOS.OverviewWidget_Size_XS
+				break
+			}
+		}
 	}
 
 	function resetWidgetConnectors(widgets) {
@@ -222,6 +225,9 @@ SwipeViewPage {
 			break
 		case VenusOS.OverviewWidget_Type_DcGenerator:
 			widget = dcGeneratorComponent.createObject(root, args)
+			break
+		case VenusOS.OverviewWidget_Type_DcLoads:
+			widget = dcLoadsComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_FuelCell:
 			widget = dcInputComponent.createObject(root, args)
@@ -337,8 +343,13 @@ SwipeViewPage {
 		if (Global.evChargers.model.count > 0) {
 			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
 		}
-		if (Global.dcLoads.model.count > 0 || !isNaN(Global.system.loads.dcPower)) {
-			widgets.push(dcLoadsWidget)
+		if (Global.system.showInputLoads && Global.system.hasAcOutSystem) {
+			widgets.push(essentialLoadsWidget)
+		} else {
+			essentialLoadsWidget.size = VenusOS.OverviewWidget_Size_Zero
+		}
+		if (Global.dcLoads.model.count > 0 || !isNaN(Global.system.dc.power)) {
+			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_DcLoads))
 		}
 		_rightWidgets = widgets
 	}
@@ -654,8 +665,11 @@ SwipeViewPage {
 					|| Global.pvInverters.model.count > 0
 		}
 		WidgetConnectorAnchor {
+			id: inverterToAcLoadsAnchor
 			location: VenusOS.WidgetConnector_Location_Right
 			visible: inverterToAcLoadsConnector.visible
+			y: inverterToAcLoadsConnector.straighten === VenusOS.WidgetConnector_Straighten_None ? defaultY
+				   : acLoadsToInverterAnchor.y
 		}
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Bottom
@@ -667,6 +681,7 @@ SwipeViewPage {
 
 		startWidget: inverterChargerWidget
 		startLocation: VenusOS.WidgetConnector_Location_Right
+		straighten: _rightWidgets.length === 1 ? VenusOS.WidgetConnector_Straighten_None : VenusOS.WidgetConnector_Straighten_EndToStart
 		endWidget: acLoadsWidget
 		endLocation: VenusOS.WidgetConnector_Location_Left
 		expanded: root._expandLayout
@@ -675,9 +690,9 @@ SwipeViewPage {
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
-				&& !isNaN(Global.system.loads.acPower)
-				&& Global.system.loads.acPower > 0
-				&& Math.abs(Global.system.loads.acPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+				&& !isNaN(Global.system.load.ac.power)
+				&& Global.system.load.ac.power > 0
+				&& Math.abs(Global.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -709,41 +724,16 @@ SwipeViewPage {
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled && !overviewPageRootAnimation.paused
-		connectors: [ batteryToDcLoadsConnector ]
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
 			visible: Global.dcInputs.model.count > 0 || Global.solarChargers.model.count > 0
 		}
 		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Right
-			visible: batteryToDcLoadsConnector.visible
-		}
-		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Top
 		}
 	}
-	WidgetConnector {
-		id: batteryToDcLoadsConnector
 
-		startWidget: batteryWidget
-		startLocation: VenusOS.WidgetConnector_Location_Right
-		endWidget: dcLoadsWidget
-		endLocation: VenusOS.WidgetConnector_Location_Left
-		expanded: root._expandLayout
-		animateGeometry: root._animateGeometry
-		animationEnabled: root.animationEnabled
-
-		// If load power is positive (i.e. consumed energy), energy flows to load.
-		animationMode: root.isCurrentPage
-				&& !isNaN(Global.system.loads.dcPower)
-				&& Global.system.loads.dcPower > 0
-				&& Math.abs(Global.system.loads.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
-					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
-	}
-
-	// the two output widgets are always present
 	AcLoadsWidget {
 		id: acLoadsWidget
 
@@ -752,24 +742,95 @@ SwipeViewPage {
 		animationEnabled: root.animationEnabled
 
 		WidgetConnectorAnchor {
+			id: acLoadsToInverterAnchor
 			location: VenusOS.WidgetConnector_Location_Left
-		}
-
-		WidgetConnectorAnchor {
-			location: VenusOS.WidgetConnector_Location_Bottom
-			visible: Global.evChargers.model.count > 0
 		}
 	}
 
-	DcLoadsWidget {
-		id: dcLoadsWidget
+	EssentialLoadsWidget {
+		id: essentialLoadsWidget
 
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
+		connectors: [ inverterToEssentialLoadsConnector ]
+
+		WidgetConnectorAnchor {
+			id: inverterToEssentialLoadsStartAnchor
+			parent: inverterChargerWidget
+			location: VenusOS.WidgetConnector_Location_Right
+			visible: inverterToEssentialLoadsConnector.visible
+			offsetY: height + Theme.geometry_overviewPage_connector_anchor_spacing
+		}
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
+		}
+
+		WidgetConnector {
+			id: inverterToEssentialLoadsConnector
+
+			parent: root
+			startWidget: inverterChargerWidget
+			startLocation: VenusOS.WidgetConnector_Location_Right
+			startOffsetY: inverterToEssentialLoadsStartAnchor.offsetY
+			endWidget: essentialLoadsWidget
+			endLocation: VenusOS.WidgetConnector_Location_Left
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
+			animationEnabled: root.animationEnabled
+
+			// If load power is positive (i.e. consumed energy), energy flows to load.
+			animationMode: root.isCurrentPage
+					&& !isNaN(Global.system.load.acOut.power)
+					&& Global.system.load.acOut.power > 0
+					&& Math.abs(Global.system.load.acOut.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+						: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+		}
+	}
+
+	Component {
+		id: dcLoadsComponent
+
+		DcLoadsWidget {
+			id: dcLoadsWidget
+
+			expanded: root._expandLayout
+			animateGeometry: root._animateGeometry
+			animationEnabled: root.animationEnabled
+			connectors: [ batteryToDcLoadsConnector ]
+
+			WidgetConnectorAnchor {
+				parent: batteryWidget
+				location: VenusOS.WidgetConnector_Location_Right
+				visible: batteryToDcLoadsConnector.visible
+			}
+
+			WidgetConnectorAnchor {
+				location: VenusOS.WidgetConnector_Location_Left
+			}
+
+			WidgetConnector {
+				id: batteryToDcLoadsConnector
+
+				parent: root
+				startWidget: batteryWidget
+				startLocation: VenusOS.WidgetConnector_Location_Right
+				endWidget: dcLoadsWidget
+				endLocation: VenusOS.WidgetConnector_Location_Left
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
+				animationEnabled: root.animationEnabled
+
+				// If load power is positive (i.e. consumed energy), energy flows to load.
+				animationMode: root.isCurrentPage
+						&& !isNaN(Global.system.dc.power)
+						&& Global.system.dc.power > 0
+						&& Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+							? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+							: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			}
 		}
 	}
 
@@ -779,30 +840,130 @@ SwipeViewPage {
 		EvcsWidget {
 			id: evcsWidget
 
+			// The EVCS widget may have connectors to the Inverter/Charger, AC Loads or Essential
+			// Loads, depending on whether AC loads are split, and the "Position" configuration
+			// of the EV chargers on the system.
+			//
+			// If showing combined AC loads:
+			//  - connect to Inverter/Charger
+			// If splitting loads into (input) AC Loads and (output) Essential Loads:
+			//  - connect to AC Loads, if there are any EV chargers with /Position=1 (AC-In)
+			//  - connect to Essential Loads, if there are any EV chargers with /Position=0 (AC-Out)
+			readonly property bool connectToInverterCharger: visible && !Global.system.showInputLoads
+			readonly property bool connectToAcLoads: visible
+					&& Global.system.showInputLoads
+					&& Global.evChargers.acInputPositionCount > 0
+			readonly property bool connectToEssentialLoads: visible
+					&& Global.system.showInputLoads
+					&& Global.system.hasAcOutSystem
+					&& Global.evChargers.acOutputPositionCount > 0
+
+			// When connecting the EVCS widget to the AC Loads and Essential Loads widgets, the
+			// connector line should not travel vertically in a straight line. Instead, move the
+			// midpoint of this line to the left, by a distance that is one-quarter of the way
+			// between the EVCS widget and the centre widgets.
+			readonly property real loadsConnectorsXDistance: (evcsWidget.x - (inverterChargerWidget.x + inverterChargerWidget.width)) / 4
+
+			visible: Global.evChargers.model.count > 0
 			expanded: root._expandLayout
 			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
-			connectors: [ evcsConnector ]
+			connectors: [ inverterToEvcsConnector, acLoadsToEvcsConnector, essentialLoadsToEvcsConnector ]
 
+			// Connector for Inverter/Charger -> EVCS
 			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Top
+				id: inverterToEvcsStartAnchor
+				parent: inverterChargerWidget
+				location: VenusOS.WidgetConnector_Location_Right
+				visible: evcsWidget.connectToInverterCharger
 			}
-
+			WidgetConnectorAnchor {
+				id: inverterToEvcsEndAnchor
+				location: VenusOS.WidgetConnector_Location_Left
+				visible: evcsWidget.connectToInverterCharger
+			}
 			WidgetConnector {
-				id: evcsConnector
-
+				id: inverterToEvcsConnector
 				parent: root
-				startWidget: acLoadsWidget
-				startLocation: VenusOS.WidgetConnector_Location_Bottom
+				visible: evcsWidget.connectToInverterCharger
+				startWidget: inverterChargerWidget
+				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: evcsWidget
-				endLocation: VenusOS.WidgetConnector_Location_Top
+				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
-					? Global.evChargers.power > Theme.geometry_overviewPage_connector_animationPowerThreshold
-					  ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-					  : VenusOS.WidgetConnector_AnimationMode_NotAnimated
+						&& Global.evChargers.power > Theme.geometry_overviewPage_connector_animationPowerThreshold
+					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			}
+
+			// Connector for AC Loads -> EVCS
+			WidgetConnectorAnchor {
+				id: acLoadsToEvcsStartAnchor
+				parent: acLoadsWidget
+				location: VenusOS.WidgetConnector_Location_Left
+				offsetY: height + Theme.geometry_overviewPage_connector_anchor_spacing
+				visible: evcsWidget.connectToAcLoads
+			}
+			WidgetConnectorAnchor {
+				id: acLoadsToEvcsEndAnchor
+				location: VenusOS.WidgetConnector_Location_Left
+				offsetY: -(height + Theme.geometry_overviewPage_connector_anchor_spacing)
+				visible: evcsWidget.connectToAcLoads
+			}
+			WidgetConnector {
+				id: acLoadsToEvcsConnector
+				parent: root
+				visible: evcsWidget.connectToAcLoads
+				startWidget: acLoadsWidget
+				startLocation: VenusOS.WidgetConnector_Location_Left
+				startOffsetY: acLoadsToEvcsStartAnchor.offsetY
+				endWidget: evcsWidget
+				endLocation: VenusOS.WidgetConnector_Location_Left
+				endOffsetY: acLoadsToEvcsEndAnchor.offsetY
+				midpointOffsetX: -evcsWidget.loadsConnectorsXDistance
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
+				animationEnabled: root.animationEnabled
+				animationMode: root.isCurrentPage
+						&& Global.evChargers.acInputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold
+					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			}
+
+			// Connector for Essential Loads -> EVCS
+			WidgetConnectorAnchor {
+				id: essentialLoadsToEvcsStartAnchor
+				parent: essentialLoadsWidget
+				location: VenusOS.WidgetConnector_Location_Left
+				offsetY: -(height + Theme.geometry_overviewPage_connector_anchor_spacing)
+				visible: evcsWidget.connectToEssentialLoads
+			}
+			WidgetConnectorAnchor {
+				id: essentialLoadsToEvcsEndAnchor
+				location: VenusOS.WidgetConnector_Location_Left
+				offsetY: height + Theme.geometry_overviewPage_connector_anchor_spacing
+				visible: evcsWidget.connectToEssentialLoads
+			}
+			WidgetConnector {
+				id: essentialLoadsToEvcsConnector
+				parent: root
+				visible: evcsWidget.connectToEssentialLoads
+				startWidget: essentialLoadsWidget
+				startLocation: VenusOS.WidgetConnector_Location_Left
+				startOffsetY: essentialLoadsToEvcsStartAnchor.offsetY
+				endWidget: evcsWidget
+				endLocation: VenusOS.WidgetConnector_Location_Left
+				endOffsetY: essentialLoadsToEvcsEndAnchor.offsetY
+				midpointOffsetX: -evcsWidget.loadsConnectorsXDistance
+				expanded: root._expandLayout
+				animateGeometry: root._animateGeometry
+				animationEnabled: root.animationEnabled
+				animationMode: root.isCurrentPage
+						&& Global.evChargers.acOutputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold
+					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
 		}

@@ -14,8 +14,6 @@
     "animation_controlCards_slide_duration": 150,
     "animation_toastNotification_fade_duration": 250,
     "animation_scrollbar_fade_duration": 250,
-    "animation_generator_starting_toastNotification_autoClose_duration": 5000,
-    "animation_generator_stopping_toastNotification_autoClose_duration": 3000,
     "animation_generator_stopWhenAc1Available_toastNotification_autoClose_duration": 10000,
     "animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration": 10000,
     "animation_generator_detectGeneratorSet_toastNotification_autoClose_duration": 12000,
@@ -43,7 +41,6 @@
     "animation_navBar_initialize_fade_duration": 400,
     "animation_settings_radioButtonPage_autoClose_duration": 600,
     "animation_loadGraph_model_length": 12,
-    "animation_loadGraph_minimumRange_watts": 1000,
     "animation_solarHistoryErrorView_expand_duration": 100,
     "animation_acceptButtonBackground_expand_duration": 1200,
     "animation_veBusDeviceModeNotAdjustable_toastNotication_duration": 5000

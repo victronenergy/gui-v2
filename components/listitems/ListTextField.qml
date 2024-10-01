@@ -20,12 +20,13 @@ ListItem {
 	// These are functions that can optionally be overridden.
 	// - validateInput: validates the TextField input, and returns the object provided by
 	//   Utils.validationResult() to describe the validation result.
-	// - save: saves the text field input. The default implementation saves the value to the dataItem.
+	// - saveInput: saves the text field input. The default implementation saves the value to the
+	//   dataItem, if it has a valid uid.
 	//
-	// When the text field loses focus or is accepted, validate is called(); if it returns a result
-	// of InputValidation_Result_OK, then saveInput() is called. validateInput() is also called to check
-	// whether the user has corrected the input to make it valid, if the input was previously found
-	// to be invalid.
+	// When the text field loses focus or is accepted, validateInput is called; if it returns a result
+	// of InputValidation_Result_OK or InputValidation_Result_Warning, then saveInput() is called.
+	// validateInput() is also called to check whether the user has corrected the input to make it
+	// valid, if the input was previously found to be invalid.
 	property var validateInput
 	property var saveInput: function() {
 		if (dataItem.uid) {
@@ -44,7 +45,8 @@ ListItem {
 	function runValidation(mode) {
 		const resultStatus = _doValidateInput(mode)
 		if (mode === VenusOS.InputValidation_ValidateAndSave
-				&& resultStatus === VenusOS.InputValidation_Result_OK) {
+				&& (resultStatus === VenusOS.InputValidation_Result_OK
+					|| resultStatus === VenusOS.InputValidation_Result_Warning)) {
 			saveInput()
 		}
 		return resultStatus
@@ -67,16 +69,13 @@ ListItem {
 
 		// If attempting to save, then show any errors and adjust the input text.
 		if (mode === VenusOS.InputValidation_ValidateAndSave) {
-			if (result.status === VenusOS.InputValidation_Result_Error) {
-				let errorText = result.errorText
-				if (errorText.length === 0) {
-					//% "The entered text does not have the correct format. Try again."
-					errorText = qsTrId("text_field_default_error_text")
-				}
-				if (textField.currentNotification) {
-					textField.currentNotification.close(true)
-				}
-				textField.currentNotification = Global.showToastNotification(VenusOS.Notification_Info, errorText, 5000)
+			if (textField.currentNotification) {
+				textField.currentNotification.close(true)
+			}
+			if (result.notificationText.length > 0) {
+				const notificationType = result.status === VenusOS.InputValidation_Result_Error ? VenusOS.Notification_Alarm
+						: VenusOS.Notification_Info
+				textField.currentNotification = Global.showToastNotification(notificationType, result.notificationText, 5000)
 			}
 			if (result.adjustedText != null) {
 				textField.text = result.adjustedText
@@ -90,10 +89,8 @@ ListItem {
 	function _aboutToFocus() {
 		// Intercept the event before the VKB opens and scroll the parent flickable to
 		// ensure the whole textfield is visible.
-		const textFieldVerticalMargin = root.height - textField.height
-		const textFieldBottom = root.height - textFieldVerticalMargin/2
 		Global.aboutToFocusTextField(textField,
-				textFieldBottom,
+				root,
 				root.flickable)
 	}
 
@@ -131,7 +128,8 @@ ListItem {
 
 		onTextEdited: {
 			// When the input is marked as invalid, run the validation again each time the input is
-			// edited. If the result is either OK or unknown, then clear the invalid marker.
+			// edited. If validation produces a result code that is not InputValidation_Result_Error,
+			// clear the invalid marker.
 			if (_showErrorHighlight && root.runValidation(VenusOS.InputValidation_ValidateOnly) !== VenusOS.InputValidation_Result_Error) {
 				_showErrorHighlight = false
 			}
