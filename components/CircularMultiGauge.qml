@@ -35,8 +35,8 @@ Item {
 			width: parent.width
 			delegate: Loader {
 				id: loader
-				property int gaugeStatus: Theme.getValueStatus(model.value, model.valueType)
-				property real value: model.value
+				property int gaugeStatus: Theme.getValueStatus(model.level, model.valueType)
+				property real level: model.level // always draw the tank level (percentage).
 				width: parent.width - (index*_stepSize)
 				height: width
 				anchors.centerIn: parent
@@ -50,7 +50,7 @@ Item {
 						radius: width/2
 						startAngle: 0
 						endAngle: 270
-						value: loader.value
+						value: loader.level
 						progressColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus)
 						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
@@ -65,7 +65,7 @@ Item {
 						radius: width/2
 						startAngle: 0
 						endAngle: 270
-						value: loader.value
+						value: loader.level
 						progressColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus)
 						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
