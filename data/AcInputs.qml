@@ -24,6 +24,10 @@ QtObject {
 		{ role: "pvinverter", name: CommonWords.pv_inverter },
 		{ role: "genset", name: CommonWords.generator },
 		{ role: "acload", name: CommonWords.ac_load },
+		//% "EV Charger"
+		{ role: "evcharger", name: qsTrId("acInputs_evcharger") },
+		//% "Heat pump"
+		{ role: "heatpump", name: qsTrId("acInputs_heat_pump") },
 	]
 
 	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>. There are always two inputs.
