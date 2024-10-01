@@ -21,7 +21,7 @@ Device {
 	readonly property real maxCurrent: _maxCurrent.isValid ? _maxCurrent.value : NaN
 
 	readonly property QtObject phases: QtObject {
-		property int count
+		property int count: _nrOfPhases.isValid ? _nrOfPhases.value : 0
 
 		function updateCount(maxPhaseCount) {
 			count = Math.max(count, maxPhaseCount)
@@ -45,7 +45,7 @@ Device {
 
 				readonly property VeQuickItem _power: VeQuickItem {
 					uid: phaseUid + "/Power"
-					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onIsValidChanged: if (isValid && !_nrOfPhases.isValid) phases.updateCount(index + 1)
 				}
 			}
 		}
@@ -88,6 +88,10 @@ Device {
 	readonly property VeQuickItem _position: VeQuickItem {
 		uid: evCharger.serviceUid + "/Position"
 		onValueChanged: Global.evChargers.updateTotals()
+	}
+
+	readonly property VeQuickItem _nrOfPhases: VeQuickItem {
+		uid: evCharger.serviceUid + "/NrOfPhases"
 	}
 
 	onValidChanged: {
