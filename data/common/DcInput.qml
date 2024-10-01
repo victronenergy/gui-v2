@@ -10,8 +10,8 @@ DcDevice {
 	id: input
 
 	readonly property int inputType: Global.dcInputs.inputType(serviceUid, monitorMode)
-	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
-	readonly property int monitorMode: _monitorMode.value === undefined ? -1 : _monitorMode.value
+	readonly property real temperature: _temperature.isValid ? _temperature.value : NaN
+	readonly property int monitorMode: _monitorMode.isValid ? _monitorMode.value : -1
 
 	property bool _completed
 

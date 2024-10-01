@@ -22,7 +22,7 @@ Page {
 				text: qsTrId("charger_networked")
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
 				allowed: dataItem.isValid
-				secondaryText: dataItem.value === undefined ? "" : CommonWords.yesOrNo(dataItem.value & 1)
+				secondaryText: dataItem.isValid ? CommonWords.yesOrNo(dataItem.value & 1) : ""
 			}
 
 			ListTextItem {
@@ -36,7 +36,7 @@ Page {
 				//% "Mode setting"
 				text: qsTrId("charger_mode_setting")
 				secondaryText: {
-					if (dataItem.value === undefined) {
+					if (!dataItem.isValid) {
 						return ""
 					}
 					switch (dataItem.value & 0xE) {
@@ -76,7 +76,7 @@ Page {
 				//% "Master setting"
 				text: qsTrId("charger_master_setting")
 				secondaryText: {
-					if (dataItem.value === undefined) {
+					if (!dataItem.isValid) {
 						return ""
 					}
 					switch (dataItem.value & 0x30) {

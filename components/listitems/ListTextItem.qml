@@ -16,7 +16,7 @@ ListItem {
 	content.children: [
 		ListTextItemSecondaryLabel {
 			id: secondaryLabel
-			text: dataItem.value === undefined ? "" : dataItem.value
+			text: dataItem.isValid ? dataItem.value : ""
 			width: Math.min(implicitWidth, root.maximumContentWidth)
 			visible: text.length > 0
 		}

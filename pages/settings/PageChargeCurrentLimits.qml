@@ -72,12 +72,10 @@ Page {
 		}
 
 		delegate: ListTextGroup {
-			readonly property string dcCurrentText: dcCurrent.value === undefined
-				? "--"
+			readonly property string dcCurrentText: !dcCurrent.isValid ? "--"
 				: Units.formatNumber(dcCurrent.value, 3) + Units.defaultUnitString(VenusOS.Units_Amp)
 			//% "Max: %1"
-			readonly property string maxValueText: maxValue.value === undefined
-				? "-- "
+			readonly property string maxValueText: !maxValue.isValid ? "--"
 				: qsTrId("settings_dvcc_max").arg(Units.formatNumber(maxValue.value, 3))
 
 			width: parent.width

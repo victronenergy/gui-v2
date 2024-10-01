@@ -9,8 +9,8 @@ import Victron.VenusOS
 Device {
 	id: input
 
-	readonly property int type: _type.value === undefined ? -1 : _type.value
-	readonly property int state: _state.value === undefined ? -1 : _state.value
+	readonly property int type: _type.isValid ? _type.value : -1
+	readonly property int state: _state.isValid ? _state.value : -1
 
 	readonly property VeQuickItem _type: VeQuickItem {
 		uid: input.serviceUid + "/Type"

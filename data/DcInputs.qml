@@ -11,7 +11,7 @@ QtObject {
 
 	property real power: NaN
 	property real current: NaN
-	readonly property real maximumPower: _maximumPower.value === undefined ? NaN : _maximumPower.value
+	readonly property real maximumPower: _maximumPower.isValid ? _maximumPower.value : NaN
 
 	property DeviceModel model: DeviceModel {
 		modelId: "dcInputs"

@@ -70,10 +70,10 @@ Page {
 				textModel: [
 					//: %1 = number of battery modules that are online
 					//% "%1 online"
-					details.modulesOnline.value === undefined ? "--" : qsTrId("devicelist_batterydetails_modules_online").arg(details.modulesOnline.value),
+					details.modulesOnline.isValid ? qsTrId("devicelist_batterydetails_modules_online").arg(details.modulesOnline.value) : "--",
 					//: %1 = number of battery modules that are offline
 					//% "%1 offline"
-					details.modulesOffline.value === undefined ? "--" : qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value)
+					details.modulesOffline.isValid ? qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value) : "--"
 				]
 				allowed: defaultAllowed && details.allowsBatteryModules
 			}

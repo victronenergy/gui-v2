@@ -9,12 +9,12 @@ import Victron.VenusOS
 QtObject {
 	id: battery
 
-	readonly property real stateOfCharge: _stateOfCharge.value === undefined ? NaN : _stateOfCharge.value
-	readonly property real voltage: _voltage.value === undefined ? NaN : _voltage.value
-	readonly property real power: _power.value === undefined ? NaN : _power.value
-	readonly property real current: _current.value === undefined ? NaN : _current.value
-	readonly property real temperature: _temperature.value === undefined ? NaN : _temperature.value
-	readonly property real timeToGo: _timeToGo.value === undefined ? NaN : _timeToGo.value
+	readonly property real stateOfCharge: _stateOfCharge.isValid ? _stateOfCharge.value : NaN
+	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
+	readonly property real power: _power.isValid ? _power.value : NaN
+	readonly property real current: _current.isValid ? _current.value : NaN
+	readonly property real temperature: _temperature.isValid ? _temperature.value : NaN
+	readonly property real timeToGo: _timeToGo.isValid ? _timeToGo.value : NaN
 	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(battery) : ""
 	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
 

@@ -17,8 +17,8 @@ BaseDeviceModel {
 		delegate: Device {
 			id: device
 
-			readonly property real power: _power.value === undefined ? NaN : _power.value
-			readonly property int gensetStatusCode: _gensetStatusCode.value === undefined ? -1 : _gensetStatusCode.value
+			readonly property real power: _power.isValid ? _power.value : NaN
+			readonly property int gensetStatusCode: _gensetStatusCode.isValid ? _gensetStatusCode.value : -1
 
 			readonly property VeQuickItem _power: VeQuickItem {
 				uid: device.serviceUid + "/Ac/Power"

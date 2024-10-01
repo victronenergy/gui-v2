@@ -9,11 +9,11 @@ import Victron.VenusOS
 Device {
 	id: generator
 
-	readonly property int state: _state.value === undefined ? -1 : _state.value
+	readonly property int state: _state.isValid ? _state.value : -1
 	readonly property bool autoStart: _autoStart.value === 1
-	readonly property int manualStartTimer: _manualStartTimer.value === undefined ? -1 : _manualStartTimer.value
+	readonly property int manualStartTimer: _manualStartTimer.isValid ? _manualStartTimer.value : 0
 	readonly property int runtime: _runtime.value || 0
-	readonly property int runningBy: _runningBy.value === undefined ? -1 : _runningBy.value
+	readonly property int runningBy: _runningBy.isValid ? _runningBy.value : 0
 
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: serviceUid + "/State"
