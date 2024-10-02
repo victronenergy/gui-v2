@@ -31,25 +31,18 @@ Page {
 				allowed: signalk.checked
 			}
 
-			ListRadioButtonGroup {
+			ListNavigationItem {
 				id: nodered
 
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
-				allowed: dataItem.isValid
-				optionModel: [
-					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
-					{ display: CommonWords.enabled, value: VenusOS.NodeRed_Mode_Enabled },
-					//% "Enabled (safe mode)"
-					{ display: qsTrId("settings_large_enabled_safe_mode"), value: VenusOS.NodeRed_Mode_EnabledWithSafeMode },
-				]
-			}
+				allowed: nodeRedModeItem.isValid
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsNodeRed.qml", {"title": nodered.text })
 
-			ListLabel {
-				//% "Access Node-RED at https://venus.local:1881 and via VRM."
-				text: qsTrId("settings_large_access_node_red")
-				allowed: nodered.currentValue > 0
+				VeQuickItem {
+					id: nodeRedModeItem
+					uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+				}
 			}
 		}
 	}
