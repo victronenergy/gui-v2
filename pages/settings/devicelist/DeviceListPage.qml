@@ -219,7 +219,7 @@ Page {
 		default:
 			return null
 		}
-		params.title = device.name
+		params.title = Qt.binding(function(){ return device.name })
 
 		return { "summary": summary, "url": url, "params": params }
 	}
