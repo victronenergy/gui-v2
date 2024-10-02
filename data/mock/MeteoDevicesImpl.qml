@@ -24,6 +24,7 @@ QtObject {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("Meteo %1".arg(deviceInstance))
+				_irradiance.setValue(Math.random() * 100)
 			}
 		}
 	}
