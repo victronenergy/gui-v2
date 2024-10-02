@@ -65,10 +65,11 @@ GeneratorDialog {
 			wrapMode: Text.Wrap
 			color: Theme.color_font_primary
 			horizontalAlignment: Text.AlignHCenter
-			visible: root.generator.autoStart
-
-			//% "Generator will stop after the set time, unless autostart condition is met, in which case it will keep running."
-			text: qsTrId("controlcard_generator_startdialog_description")
+			text: timedRunSwitch.checked && (timeSelector.hour || timeSelector.minute)
+				  ? //% "Generator will stop in %1 unless autostart conditions are enabled that keep it running."
+					qsTrId("generator_start_dialog_will_stop_in_x").arg(Utils.formatHoursMinutes(timeSelector.hour, timeSelector.minute))
+				  : //% "Generator will run until manually stopped, unless autostart conditions are enabled that keep it running."
+					qsTrId("generator_start_dialog_will_run_until_manually_stopped")
 		}
 	}
 

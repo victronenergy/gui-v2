@@ -77,7 +77,6 @@ ModalDialog {
 					onAnimationFinished: {
 						// When the animation finishes, execute the start/stop action
 						acceptButtonBackground.state = "actionRunning"
-						root.runGeneratorAction()
 					}
 				}
 				PropertyChanges {

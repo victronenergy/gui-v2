@@ -32,15 +32,21 @@ Page {
 		uid: settingsBindPrefix + "/AccumulatedTotal"
 	}
 
+	VeQuickItem {
+		id: gensetOperatingHours
+
+		uid: gensetBindPrefix + "/Engine/OperatingHours"
+	}
+
 	GradientListView {
 		id: settingsListView
 
 		model: ObjectModel {
 
 			ListTextItem {
-				//% "Generator total run time (hours)"
+				//% "Total run time"
 				text: qsTrId("page_settings_run_time_and_service_total_run_time")
-				allowed: gensetBindPrefix !== ""
+				allowed: gensetOperatingHours.isValid
 				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) + "h"
 			}
 

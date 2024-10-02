@@ -298,14 +298,6 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
-		text: CommonWords.settings
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
-					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
-			}
-	}
-
 	ListNavigationItem {
 		//% "Run time and service"
 		text: qsTrId("page_settings_generator_run_time_and_service")
@@ -319,8 +311,8 @@ ObjectModel {
 	}
 
 	ListNavigationItem {
-		//% "BMS Settings"
-		text: qsTrId("page_genset_model_bms_settings")
+		//% "DC genset settings"
+		text: qsTrId("page_genset_model_dc_genset_settings")
 		allowed: defaultAllowed && (chargeVoltage.isValid || chargeCurrent.isValid || bmsControlled.isValid)
 		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
 
@@ -395,6 +387,14 @@ ObjectModel {
 					}
 				}
 			}
+		}
+	}
+
+	ListNavigationItem { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
+		text: CommonWords.settings
+		onClicked: {
+			Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
+										{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 		}
 	}
 
