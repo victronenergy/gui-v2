@@ -7457,7 +7457,7 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <location filename="../../components/CommonWords.qml" line="417"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
-      <translation>SOC %1%</translation>
+      <translation>SOC %1</translation>
     </message>
     <message id="settings_security_warning_profile_configuration_order">
       <location filename="../../components/settings/ListSecurityWarningSwitch.qml" line="15"/>

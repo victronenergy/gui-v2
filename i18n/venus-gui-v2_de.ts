@@ -1582,7 +1582,7 @@ Sollte das nicht funktionieren, überprüfen Sie die Sim-Karte in einem Telefon 
     <message id="settings_ess_inverter_ac_output_in_use">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="63"/>
       <source>Inverter AC output in use</source>
-      <translation>Wechserichter AC-Ausgang in Betrieb</translation>
+      <translation>Wechselrichter AC-Ausgang in Betrieb</translation>
     </message>
     <message id="settings_ess_multiphase_regulation">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="83"/>
@@ -7457,7 +7457,7 @@ See documentation for further information.</oldsource>
       <location filename="../../components/CommonWords.qml" line="417"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
-      <translation>SOC %1%</translation>
+      <translation>SOC %1</translation>
     </message>
     <message id="settings_security_warning_profile_configuration_order">
       <location filename="../../components/settings/ListSecurityWarningSwitch.qml" line="15"/>
