@@ -34,4 +34,10 @@ else
   curl -X GET ${download_url} --output ${output_file}
 fi
 
+if [ "${code}" == "zh-CN" ]
+then
+  echo "### POEditor uses zh-CN, Qt doesn't recognize this language code, it uses zh_CN. Patching ${output_file}, replacing zh-CN with zh_CN."
+  sed -Ei 's/<TS version=(.*) language="zh-CN">/<TS version=\1 language="zh_CN">/' "${output_file}"
+fi
+
 exit 0
