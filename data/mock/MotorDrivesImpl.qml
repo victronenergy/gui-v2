@@ -24,6 +24,7 @@ QtObject {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("Motor Drive %1".arg(deviceInstance))
+				_motorRpm.setValue(Math.floor(Math.random() * 50))
 			}
 		}
 	}
