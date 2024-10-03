@@ -47,14 +47,26 @@ Page {
 			{ text: CommonWords.yesterday, dayRange: [1, 2] }
 		].concat(chartModeOptions)
 
-		readonly property var chartModeOptions: [
-			//% "Last 7 days"
-			{ text: qsTrId("charger_history_last_7_days"), dayRange: [0, 7] },
-			//% "Last 14 days"
-			{ text: qsTrId("charger_history_last_14_days"), dayRange: [0, 14] },
-			//% "Last 30 days"
-			{ text: qsTrId("charger_history_last_30_days"), dayRange: [0, 30] }
-		]
+		readonly property var chartModeOptions: {
+			let options = []
+			if (solarHistory.daysAvailable <= 2) {
+				// MPPT chargers connected via VE.CAN only have 2 days of history (i.e. today and
+				// yesterday), so charts are not available for these devices.
+				return options
+			}
+			const dayRanges = [7, 14, 31]
+			for (let i = 0; i < dayRanges.length; ++i) {
+				const numberOfDays = Math.min(solarHistory.daysAvailable, dayRanges[i])
+				//: %1 = number of days of solar history that will be shown
+				//% "Last %1 days"
+				const optionText = qsTrId("charger_history_last_x_days")
+				options.push({ text: optionText.arg(numberOfDays), dayRange: [0, numberOfDays] })
+				if (numberOfDays >= solarHistory.daysAvailable) {
+					break
+				}
+			}
+			return options
+		}
 
 		anchors {
 			right: parent.right
