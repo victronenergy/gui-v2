@@ -12,6 +12,7 @@ QtObject {
 	property string bindPrefix
 	property string deviceName
 	property int trackerCount
+	readonly property int daysAvailable: _veHistoryCount.isValid ? _veHistoryCount.value : 0
 	readonly property bool valid: _veHistoryCount.isValid && _veHistoryCount.value > 0
 
 	property SolarHistoryErrorModel errorModel: SolarHistoryErrorModel {

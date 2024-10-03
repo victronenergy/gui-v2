@@ -22,6 +22,10 @@ QtObject {
 				serviceUid: "mock/com.victronenergy.solarcharger.ttyUSB" + deviceInstanceNum,
 				deviceInstance: deviceInstanceNum,
 			})
+			// MPPT chargers connected via VE.CAN only have 2 days of history; add a charger that
+			// simulates this.
+			const historyDaysAvailable = i === 0 ? 2 : 31
+			Global.mockDataSimulator.setMockValue(chargerObj.serviceUid + "/History/Overall/DaysAvailable", historyDaysAvailable)
 			chargerObj.initTrackers(i + 1)
 		}
 	}
@@ -80,8 +84,7 @@ QtObject {
 				randomizeMeasurments()
 
 				// Initialize history values
-				Global.mockDataSimulator.setMockValue(serviceUid + "/History/Overall/DaysAvailable", 30)
-				for (let day = 0; day < 31; ++day) {
+				for (let day = 0; day < solarCharger.history.daysAvailable; ++day) {
 					let dayTotals = []
 					const dayOverallHistoryUid = serviceUid + "/History/Daily/" + day
 					for (trackerIndex = 0; trackerIndex < trackerCount; ++trackerIndex) {
