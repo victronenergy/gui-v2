@@ -138,7 +138,7 @@ SwipeViewPage {
 	backgroundColor: Theme.color_briefPage_background
 	fullScreenWhenIdle: true
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-	topRightButton: sidePanel.showing
+	topRightButton: sidePanel.active && state !== "panelOpening"
 			? VenusOS.StatusBar_RightButton_SidePanelActive
 			: VenusOS.StatusBar_RightButton_SidePanelInactive
 
