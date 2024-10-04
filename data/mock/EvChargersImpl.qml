@@ -14,7 +14,7 @@ QtObject {
 	function populate() {
 		for (let i = 0; i < 3; ++i) {
 			createCharger({
-				position: i % 2 === 0 ? VenusOS.PvInverter_Position_ACInput : VenusOS.PvInverter_Position_ACOutput,
+				position: i % 2 === 0 ? VenusOS.Evcs_Position_ACInput : VenusOS.Evcs_Position_ACOutput,
 				nrOfPhases: i + 1
 			})
 		}
