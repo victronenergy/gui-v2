@@ -28,7 +28,7 @@ ObjectModel {
 	}
 
 	ListTemperatureItem {
-		text: CommonWords.temperature
+		text:  qsTrId("dc_alternator_temperature")
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 		allowed: defaultAllowed && dataItem.isValid
 	}
@@ -85,7 +85,7 @@ ObjectModel {
 	}
 
 	ListTemperatureItem {
-		text: CommonWords.temperature
+		text: qsTrId("alternator_engine_temperature")
 		dataItem.uid: root.bindPrefix + "/Engine/Temperature"
 		allowed: defaultAllowed && dataItem.isValid
 	}
