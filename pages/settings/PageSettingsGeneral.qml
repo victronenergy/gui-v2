@@ -70,13 +70,37 @@ Page {
 
 		model: ObjectModel {
 			ListRadioButtonGroup {
+				//% "Access level"
+				text: qsTrId("settings_access_level")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
+				writeAccessLevel: VenusOS.User_AccessType_User
+				optionModel: [
+					//% "User"
+					{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User, promptPassword: true },
+					//% "User & Installer"
+					{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer, promptPassword: true },
+					//% "Superuser"
+					{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser, readOnly: true },
+					//% "Service"
+					{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service, readOnly: true },
+				]
+				validatePassword: (index, password) => {
+					if ((index === 0 || index === 1) && password === "ZZZ") {
+						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+					}
+					//% "Incorrect password"
+					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_access_incorrect_password"))
+				}
+			}
+
+			ListRadioButtonGroup {
 				id: securityProfile
 
 				property int pendingProfile
 				property string pendingPassword
 
-				//% "Security profile"
-				text: qsTrId("settings_security_profile")
+				//% "Network security profile"
+				text: qsTrId("settings_network_security_profile")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
 				updateDataOnClick: false // handle option clicked manually.
 				popDestination: undefined
@@ -187,31 +211,6 @@ Page {
 					}
 				}
 			}
-
-			ListRadioButtonGroup {
-				//% "Access level"
-				text: qsTrId("settings_access_level")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: [
-					//% "User"
-					{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User, promptPassword: true },
-					//% "User & Installer"
-					{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer, promptPassword: true },
-					//% "Superuser"
-					{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser, readOnly: true },
-					//% "Service"
-					{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service, readOnly: true },
-				]
-				validatePassword: (index, password) => {
-					if ((index === 0 || index === 1) && password === "ZZZ") {
-						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
-					}
-					//% "Incorrect password"
-					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_access_incorrect_password"))
-				}
-			}
-
 			ListTextField {
 				//% "Root password"
 				text: qsTrId("settings_root_password")
