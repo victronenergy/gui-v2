@@ -11,7 +11,7 @@ Device {
 
 	readonly property real temperature: _temperature.isValid ? _temperature.value : NaN
 	readonly property real humidity: _humidity.isValid ? _humidity.value : NaN
-	readonly property int temperatureType: _temperatureType.isValid ? _temperatureType.value : -1
+	readonly property int temperatureType: _temperatureType.isValid ? _temperatureType.value : VenusOS.Temperature_DeviceType_Generic
 
 	readonly property VeQuickItem _temperature: VeQuickItem {
 		uid: serviceUid + "/Temperature"

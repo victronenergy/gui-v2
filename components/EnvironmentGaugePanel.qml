@@ -11,6 +11,7 @@ Rectangle {
 
 	property alias title: header.text
 	property real temperature: NaN
+	property int temperatureType: VenusOS.Temperature_DeviceType_Generic
 	property real humidity: NaN
 	property bool animationEnabled: true
 
@@ -53,8 +54,9 @@ Rectangle {
 		value: Math.round(root.temperature)
 		unit: Global.systemSettings.temperatureUnit
 
-		minimumValue: Global.systemSettings.convertFromCelsius(Theme.geometry_levelsPage_environment_temperatureGauge_minimumValue)
-		maximumValue: Global.systemSettings.convertFromCelsius(Theme.geometry_levelsPage_environment_temperatureGauge_maximumValue)
+		minimumValue: Global.systemSettings.convertFromCelsius(Global.environmentInputs.temperatureGaugeMinimum(root.temperatureType))
+		maximumValue: Global.systemSettings.convertFromCelsius(Global.environmentInputs.temperatureGaugeMaximum(root.temperatureType))
+		stepSize: Global.environmentInputs.temperatureGaugeStepSize(root.temperatureType)
 		highlightedValue: Theme.geometry_levelsPage_environment_temperatureGauge_highlightedValue
 		minimumValueColor: Theme.color_blue
 		maximumValueColor: Theme.color_red

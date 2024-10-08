@@ -312,8 +312,6 @@
     "geometry_levelsPage_environment_gauge_tick_margin": 8,
     "geometry_levelsPage_environment_gauge_tick_step": 10,
 
-    "geometry_levelsPage_environment_temperatureGauge_minimumValue": -40,
-    "geometry_levelsPage_environment_temperatureGauge_maximumValue": 60,
     "geometry_levelsPage_environment_temperatureGauge_highlightedValue": 0,
     "geometry_levelsPage_environment_temperatureGauge_gradient_position1": 0,
     "geometry_levelsPage_environment_temperatureGauge_gradient_position2": 0.47,

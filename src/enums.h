@@ -491,7 +491,11 @@ public:
 	enum Temperature_DeviceType {
 		Temperature_DeviceType_Battery = 0,
 		Temperature_DeviceType_Fridge,
-		Temperature_DeviceType_Generic
+		Temperature_DeviceType_Generic,
+		Temperature_DeviceType_Room,
+		Temperature_DeviceType_Outdoor,
+		Temperature_DeviceType_WaterHeater,
+		Temperature_DeviceType_Freezer
 	};
 	Q_ENUM(Temperature_DeviceType)
 

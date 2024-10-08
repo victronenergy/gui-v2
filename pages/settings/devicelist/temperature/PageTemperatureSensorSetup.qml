@@ -31,6 +31,10 @@ Page {
 					{ display: Global.environmentInputs.temperatureTypeToText(VenusOS.Temperature_DeviceType_Battery), value: VenusOS.Temperature_DeviceType_Battery },
 					{ display: Global.environmentInputs.temperatureTypeToText(VenusOS.Temperature_DeviceType_Fridge), value: VenusOS.Temperature_DeviceType_Fridge },
 					{ display: Global.environmentInputs.temperatureTypeToText(VenusOS.Temperature_DeviceType_Generic), value: VenusOS.Temperature_DeviceType_Generic },
+					{ display: Global.environmentInputs.temperatureTypeToText(VenusOS.Temperature_DeviceType_Room), value: VenusOS.Temperature_DeviceType_Room },
+					{ display: Global.environmentInputs.temperatureTypeToText(VenusOS.Temperature_DeviceType_Outdoor), value: VenusOS.Temperature_DeviceType_Outdoor },
+					{ display: Global.environmentInputs.temperatureTypeToText(VenusOS.Temperature_DeviceType_WaterHeater), value: VenusOS.Temperature_DeviceType_WaterHeater },
+					{ display: Global.environmentInputs.temperatureTypeToText(VenusOS.Temperature_DeviceType_Freezer), value: VenusOS.Temperature_DeviceType_Freezer },
 				]
 			}
 
