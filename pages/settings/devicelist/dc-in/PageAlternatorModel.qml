@@ -28,7 +28,8 @@ ObjectModel {
 	}
 
 	ListTemperatureItem {
-		text:  qsTrId("dc_alternator_temperature")
+		//% "Alterntaor Temperature"
+		text:  qsTrId("alternator_temperature")
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 		allowed: defaultAllowed && dataItem.isValid
 	}
@@ -85,7 +86,8 @@ ObjectModel {
 	}
 
 	ListTemperatureItem {
-		text: qsTrId("alternator_engine_temperature")
+		//% "Engine Temperature"
+		text: qsTrId("engine_temperature")
 		dataItem.uid: root.bindPrefix + "/Engine/Temperature"
 		allowed: defaultAllowed && dataItem.isValid
 	}
