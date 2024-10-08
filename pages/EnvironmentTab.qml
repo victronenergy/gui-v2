@@ -44,6 +44,7 @@ Flickable {
 				height: Gauges.height(!!Global.pageManager && Global.pageManager.expandLayout)
 				title: model.device.name
 				temperature: Global.systemSettings.convertFromCelsius(model.device.temperature)
+				temperatureType: model.device.temperatureType
 				humidity: model.device.humidity
 				temperatureGaugeGradient: temperatureGradient
 				humidityGaugeGradient: humidityGradient

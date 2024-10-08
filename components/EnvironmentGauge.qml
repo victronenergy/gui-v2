@@ -17,6 +17,7 @@ Item {
 
 	property int minimumValue: 0
 	property int maximumValue: 100
+	property int stepSize: Theme.geometry_levelsPage_environment_gauge_tick_step
 	property int highlightedValue: 0
 	property color minimumValueColor
 	property color maximumValueColor
@@ -82,11 +83,11 @@ Item {
 		Repeater {
 			id: tickRepeater
 
-			model: (root.maximumValue + Theme.geometry_levelsPage_environment_gauge_tick_step - root.minimumValue) / Theme.geometry_levelsPage_environment_gauge_tick_step
+			model: (root.maximumValue + root.stepSize - root.minimumValue) / root.stepSize
 			delegate: Item {
 				readonly property int tickValue: {
 					const invertedIndex = tickRepeater.count - index - 1
-					return minimumValue + (Theme.geometry_levelsPage_environment_gauge_tick_step * invertedIndex)
+					return minimumValue + (root.stepSize * invertedIndex)
 				}
 
 				width: Theme.geometry_levelsPage_environment_gauge_tick_size
