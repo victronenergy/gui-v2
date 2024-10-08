@@ -28,7 +28,8 @@ ObjectModel {
 	}
 
 	ListTemperatureItem {
-		text: CommonWords.temperature
+		//% "Alterntaor Temperature"
+		text:  qsTrId("alternator_temperature")
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 		allowed: defaultAllowed && dataItem.isValid
 	}
@@ -81,6 +82,13 @@ ObjectModel {
 		text: qsTrId("alternator_wakespeed_engine_speed")
 		dataItem.uid: root.bindPrefix + "/Engine/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
+		allowed: defaultAllowed && dataItem.isValid
+	}
+
+	ListTemperatureItem {
+		//% "Engine Temperature"
+		text: qsTrId("engine_temperature")
+		dataItem.uid: root.bindPrefix + "/Engine/Temperature"
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
