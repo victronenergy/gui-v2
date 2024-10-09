@@ -63,7 +63,7 @@ GeneratorDialog {
 
 			FixedWidthLabel {
 				anchors.horizontalCenter: parent.horizontalCenter
-				text: Utils.formatAsHHMMSS(root.generator.runtime)
+				text: Utils.formatGeneratorRuntime(root.generator.runtime)
 				font.pixelSize: Theme.font_size_h3
 			}
 

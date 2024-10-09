@@ -14,7 +14,7 @@ ControlCard {
 
 	icon.source: "qrc:/images/generator.svg"
 	title.text: CommonWords.generator
-	status.text: Global.generators.stateToText(root.generator.state, root.generator.runningBy)
+	status.text: root.generator.stateText
 	status.rightPadding: timerDisplay.width + Theme.geometry_controlCard_contentMargins
 
 	GeneratorIconLabel {
@@ -28,11 +28,31 @@ ControlCard {
 		generator: root.generator
 	}
 
+	Label {
+		id: runningBy
+
+		anchors {
+			top: root.status.bottom
+			topMargin: Theme.geometry_controlCard_status_topMargin
+			left: parent.left
+			leftMargin: Theme.geometry_controlCard_contentMargins
+			right: parent.right
+			rightMargin: Theme.geometry_controlCard_contentMargins
+		}
+		text: root.generator.isAutoStarted
+			  ? CommonWords.autostarted_dot_running_by.arg(root.generator.runningByText)
+			  : root.generator.runningByText
+		color: Theme.color_font_secondary
+		font.pixelSize: Theme.font_size_caption
+		wrapMode: Text.WordWrap
+		visible: root.generator.isRunning
+	}
+
 	ListSwitch {
 		id: autostartSwitch
 
 		anchors {
-			top: root.status.bottom
+			top: runningBy.visible ? runningBy.bottom : root.status.bottom
 			topMargin: Theme.geometry_controlCard_status_bottomMargin
 		}
 

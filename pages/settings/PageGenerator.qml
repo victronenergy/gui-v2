@@ -79,10 +79,15 @@ Page {
 
 			text: CommonWords.state
 			allowed: root.startStopBindPrefix === root.generator0ServiceUid
-			secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : '---'
+			secondaryText: activeCondition.isAutoStarted
+						   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
+						   : Global.generators.stateText(generatorState.value)
 
 			VeQuickItem {
 				id: activeCondition
+
+				readonly property bool isAutoStarted: isValid && Global.generators.isAutoStarted(value)
+
 				uid: root.startStopBindPrefix + "/RunningByConditionCode"
 			}
 		}
