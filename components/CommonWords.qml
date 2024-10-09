@@ -76,6 +76,9 @@ QtObject {
 	//% "Automatic scanning"
 	readonly property string automatic_scanning: qsTrId("common_words_automatic_scanning")
 
+	//% "Auto-started \u2022 %1"
+	readonly property string autostarted_dot_running_by: qsTrId("controlcard_generator_autostarted")
+
 	//% "Battery"
 	readonly property string battery: qsTrId("common_words_battery")
 

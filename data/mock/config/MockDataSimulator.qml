@@ -232,11 +232,32 @@ QtObject {
 			break
 		case Qt.Key_S:
 		{
+			if (event.modifiers & Qt.ShiftModifier) {
+				var g = Global.generators.model.firstObject
+				g._runningBy.setValue(g._runningBy.value + 1)
+				break
+			}
+			if (event.modifiers & Qt.ControlModifier) {
+				var g = Global.generators.model.firstObject
+				g._runningBy.setValue(g._runningBy.value - 1)
+				break
+			}
+
 			Global.system.load._l2L1OutSummed.setValue(!!Global.system.load._l2L1OutSummed.value ? 0 : 1)
 			event.accepted = true
 			break
 		}
 		case Qt.Key_T:
+			if (event.modifiers & Qt.ShiftModifier) {
+				var g = Global.generators.model.firstObject
+				g._state.setValue(g._state.value + 1)
+				break
+			}
+			if (event.modifiers & Qt.ControlModifier) {
+				var g = Global.generators.model.firstObject
+				g._state.setValue(g._state.value - 1)
+				break
+			}
 			root.timersActive = !root.timersActive
 			pageConfigTitle.text = "Timers on: " + root.timersActive
 			event.accepted = true

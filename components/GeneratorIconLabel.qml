@@ -47,17 +47,13 @@ Item {
 			left: icon.right
 			leftMargin: Theme.geometry_generatorIconLabel_icon_margin
 		}
-		width: Theme.geometry_generatorIconLabel_duration_width
-				* (root.generator && root.generator.runtime > 60 * 60 ? 1.5 : 1)    // wider if over an hour
 		font.pixelSize: Theme.font_size_body2
 		color: root.generator && root.generator_runtime > 0 ? Theme.color_font_primary : Theme.color_font_secondary
 
 		// When generator runtime < 60 it has second precision, otherwise when >= 60, it is only
 		// updated every minute. So, show mm:ss when < 60, and hh:mm when >= 60.
 		text: root.generator && root.generator.state !== VenusOS.Generators_State_Stopped && root.generator.runtime !== 0
-				? root.generator.runtime < 60
-				  ? Utils.formatAsHHMMSS(root.generator.runtime)
-				  : Utils.formatAsHHMMSS(root.generator.runtime / 60)
+				? Utils.formatGeneratorRuntime(root.generator.runtime)
 				: "--:--"
 	}
 }

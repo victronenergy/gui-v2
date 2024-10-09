@@ -129,6 +129,12 @@ function formatAsHHMMSS(seconds, showUnits) {
 	return s
 }
 
+function formatGeneratorRuntime(seconds) {
+	return seconds < 60
+			? secondsToString(seconds)
+			: formatAsHHMM(seconds / 60)
+}
+
 function reactToSignalOnce(sig, slot) {
 	var f = function() {
 		slot.apply(this, arguments)
