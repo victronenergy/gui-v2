@@ -54,7 +54,9 @@ Item {
 		EnvironmentInput {
 			onTemperatureTypeChanged: {
 				if (temperatureType >= 0 && !_customName.value) {
-					_customName.setValue(Global.environmentInputs.temperatureTypeToText(temperatureType) + " temperature sensor")
+					Qt.callLater(function() {
+						_customName.setValue(Global.environmentInputs.temperatureTypeToText(temperatureType) + " temperature sensor")
+					})
 				}
 			}
 
