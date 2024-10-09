@@ -14,7 +14,7 @@ ControlCard {
 
 	icon.source: "qrc:/images/generator.svg"
 	title.text: CommonWords.generator
-	status.text: Global.generators.stateToText(root.generator.state, root.generator.runningBy)
+	status.text: Global.generators.controlCardStatusText(root.generator.state, root.generator.runningBy)
 	status.rightPadding: timerDisplay.width + Theme.geometry_controlCard_contentMargins
 
 	GeneratorIconLabel {
@@ -28,11 +28,28 @@ ControlCard {
 		generator: root.generator
 	}
 
+
+	Label {
+		id: autoStarted
+
+		anchors {
+			top: root.status.bottom
+			topMargin: Theme.geometry_controlCard_status_topMargin
+			left: parent.left
+			leftMargin: Theme.geometry_controlCard_contentMargins
+		}
+		//% "Auto-started • %1"
+		text: qsTrId("controlcard_generator_autostarted").arg(Global.generators.autoStartReason(root.generator.runningBy))
+		color: Theme.color_font_secondary
+		font.pixelSize: Theme.font_size_caption
+		visible: Global.generators.isAutoStarted(root.generator.runningBy)
+	}
+
 	ListSwitch {
 		id: autostartSwitch
 
 		anchors {
-			top: root.status.bottom
+			top: autoStarted.visible ? autoStarted.bottom : root.status.bottom
 			topMargin: Theme.geometry_controlCard_status_bottomMargin
 		}
 
