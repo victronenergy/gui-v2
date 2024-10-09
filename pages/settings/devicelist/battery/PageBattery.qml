@@ -137,7 +137,7 @@ Page {
 
 				//% "System voltage"
 				text: qsTrId("devicelist_battery_system_voltage")
-				dataItem.uid: BackendConnection.serviceUidForType("battery.lynxparallel") + _n2kDeviceInstance.value + "/Dc/0/Voltage"
+				dataItem.uid: BackendConnection.serviceUidFromName("com.victronenergy.battery.lynxparallel" + _n2kDeviceInstance.value, _n2kDeviceInstance.value) + "/Dc/0/Voltage"
 				allowed: defaultAllowed && _n2kDeviceInstance.isValid && root.battery.state === VenusOS.Battery_State_Pending
 				unit: VenusOS.Units_Volt_DC
 			}
