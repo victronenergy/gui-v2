@@ -82,7 +82,7 @@ ObjectModel {
 	ListTextItem {
 		//% "Control status"
 		text: qsTrId("ac-in-genset_auto_control_status")
-		secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : "--"
+		secondaryText: activeCondition.isValid ? Global.generators.stateAndCondition(generatorState.value, activeCondition.value) : "--"
 
 		VeQuickItem {
 			id: activeCondition
