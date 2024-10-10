@@ -10,6 +10,7 @@ import Victron.VenusOS
 C.StackView {
 	id: root
 
+	property var pageUrls: []
 	property Page _poppedPage
 
 	readonly property bool _busy: busy || fakePushAnimation.running || fakePopAnimation.running
@@ -65,7 +66,7 @@ C.StackView {
 	Connections {
 		target: !!Global.pageManager ? Global.pageManager.emitter : null
 
-		function onPagePushRequested(obj, properties) {
+		function onPagePushRequested(obj, properties, operation) {
 			if (root._busy) {
 				return
 			}
@@ -80,34 +81,49 @@ C.StackView {
 					return
 				}
 				objectOrUrl = checkComponent.createObject(null, properties)
+				root.pageUrls.push(obj)
+			} else {
+				root.pageUrls.push("")
 			}
 
 			if (root.depth === 0) {
-				// When the first page is added to the stack, slide the stack into view.
-				root.push(objectOrUrl, properties, PageStack.Immediate)
+				// When the first page is added to the stack, move the stack into view.
+				root.push(objectOrUrl, properties, C.StackView.Immediate)
+				fakePushAnimation.duration = _animationDuration(operation)
 				fakePushAnimation.start()
 			} else {
-				root.push(objectOrUrl, properties)
+				root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
 			}
 		}
 
-		function onPopAllPagesRequested() {
+		function onPopAllPagesRequested(operation) {
+			fakePopAnimation.duration = _animationDuration(operation)
 			fakePopAnimation.start()
 		}
 
-		function onPagePopRequested(toPage) {
+		function onPagePopRequested(toPage, operation) {
 			if (root._busy
 					|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop())) {
 				return
 			}
 			if (root.depth === 1) {
-				// When the last page is removed from the stack, slide the stack out of view.
+				// When the last page is removed from the stack, move the stack out of view.
+				fakePopAnimation.duration = _animationDuration(operation)
 				fakePopAnimation.start()
 			} else {
 				// Pop and delay destruction of the popped page until the animation completes,
 				// otherwise the page disappears immediately.
-				_poppedPage = pop(toPage)
+				_poppedPage = root.pop(toPage, _adjustedStackOperation(operation))
 			}
+			root.pageUrls.pop()
+		}
+
+		function _animationDuration(operation) {
+			return Global.allPagesLoaded && operation !== C.StackView.Immediate ? Theme.animation_page_slide_duration : 0
+		}
+
+		function _adjustedStackOperation(operation) {
+			return Global.allPagesLoaded && operation !== C.StackView.Immediate ? operation : C.StackView.Immediate
 		}
 	}
 
@@ -120,7 +136,6 @@ C.StackView {
 		property: "x"
 		from: root.width
 		to: 0
-		duration: Theme.animation_page_slide_duration
 		easing.type: Easing.InOutQuad
 	}
 
@@ -131,7 +146,7 @@ C.StackView {
 		onStopped: {
 			// When leaving the page stack destroy all the pages
 			while (root.depth > 1) {
-				const page = root.pop()
+				const page = root.pop(duration > 0 ? C.StackView.PopTransition : C.StackView.Immediate)
 				if (page && !Theme.objectHasQObjectParent(page)) {
 					page.destroy()
 				}
@@ -151,7 +166,6 @@ C.StackView {
 		property: "x"
 		from: 0
 		to: root.width
-		duration: Theme.animation_page_slide_duration
 		easing.type: Easing.InOutQuad
 	}
 }

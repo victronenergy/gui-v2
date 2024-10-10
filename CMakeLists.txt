@@ -409,6 +409,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/PulseMeters.qml
     data/PvInverters.qml
     data/SolarChargers.qml
+    data/StartPageConfiguration.qml
     data/System.qml
     data/SystemLoad.qml
     data/SystemSettings.qml
@@ -499,6 +500,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsDisplayBrief.qml
     pages/settings/PageSettingsDisplayMinMax.qml
     pages/settings/PageSettingsDisplayUnits.qml
+    pages/settings/PageSettingsDisplayStartPage.qml
     pages/settings/PageSettingsDvcc.qml
     pages/settings/PageSettingsDynamicEss.qml
     pages/settings/PageSettingsFirmware.qml

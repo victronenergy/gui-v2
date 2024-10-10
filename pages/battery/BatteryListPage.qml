@@ -10,6 +10,9 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	//% "Batteries"
+	title: qsTrId("battery_list_page_title")
+
 	GradientListView {
 		model: batteryModel
 		spacing: Theme.geometry_gradientList_spacing

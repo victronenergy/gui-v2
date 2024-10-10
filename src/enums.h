@@ -709,6 +709,17 @@ public:
 		InputValidation_ValidateAndSave,
 	};
 	Q_ENUM(InputValidation_ValidateMode)
+
+	enum StartPage_Type {
+		StartPage_Type_Auto,
+		StartPage_Type_Brief_SidePanelClosed,
+		StartPage_Type_Brief_SidePanelOpened,
+		StartPage_Type_Overview,
+		StartPage_Type_Levels_Tanks,
+		StartPage_Type_Levels_Environment,
+		StartPage_Type_BatteryList
+	};
+	Q_ENUM(StartPage_Type)
 };
 
 }
