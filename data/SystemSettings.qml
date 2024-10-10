@@ -15,6 +15,9 @@ QtObject {
 	property int temperatureUnit: VenusOS.Units_None
 	property string temperatureUnitSuffix
 	property int volumeUnit: VenusOS.Units_None
+	readonly property StartPageConfiguration startPageConfiguration: StartPageConfiguration {
+		systemSettingsUid: root.serviceUid
+	}
 
 	readonly property bool essFeedbackToGridEnabled: _hubSetting.value === VenusOS.System_HubSetting_Ess
 			&& (_overvoltageFeedIn.value === 1 || _preventFeedback.value === 0)

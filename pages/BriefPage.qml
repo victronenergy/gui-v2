@@ -20,8 +20,28 @@ SwipeViewPage {
 
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
 	readonly property int _rightGaugeCount: dcLoadGauge.active ? 2 : 1  // AC load gauge is always active
-
 	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
+
+	property bool _readyToInit: state === "" && !Global.splashScreenVisible
+	on_ReadyToInitChanged: {
+		if (_readyToInit) {
+			_readyToInit = false    // break the binding
+			state = "initialized"
+			if (showSidePanel) {
+				state = "panelOpening"
+			}
+		}
+	}
+
+	// Used by StartPageConfiguration when this is the start page.
+	property bool showSidePanel
+	onShowSidePanelChanged: {
+		if (showSidePanel && state === "initialized") {
+			state = "panelOpening"
+		} else if (!showSidePanel && state === "panelOpened") {
+			state = "initialized"
+		}
+	}
 
 	// Do not animate gauge progress changes while the left/right side gauge layouts are changing.
 	on_LeftGaugeCountChanged: pauseLeftGaugeAnimations.restart()
@@ -452,11 +472,7 @@ SwipeViewPage {
 		enabled: root.isCurrentPage
 
 		function onRightButtonClicked() {
-			if (root.state === "initialized") {
-				root.state = "panelOpening"
-			} else if (root.state === "panelOpened") {
-				root.state = "initialized"
-			}
+			root.showSidePanel = !root.showSidePanel
 		}
 	}
 
@@ -476,7 +492,6 @@ SwipeViewPage {
 	states: [
 		State {
 			name: "initialized"
-			when: !Global.splashScreenVisible
 			PropertyChanges {
 				target: root
 				_gaugeArcMargin: 0
@@ -510,6 +525,7 @@ SwipeViewPage {
 		Transition {
 			from: ""
 			to: "initialized"
+			enabled: Global.allPagesLoaded
 			SequentialAnimation {
 				ParallelAnimation {
 					NumberAnimation {
@@ -533,6 +549,7 @@ SwipeViewPage {
 		Transition {
 			to: "panelOpening"
 			from: "initialized"
+			enabled: Global.allPagesLoaded
 			SequentialAnimation {
 				NumberAnimation {
 					target: root
@@ -551,6 +568,7 @@ SwipeViewPage {
 		Transition {
 			to: "initialized"
 			from: "panelOpened"
+			enabled: Global.allPagesLoaded
 			SequentialAnimation {
 				NumberAnimation {
 					target: sidePanel

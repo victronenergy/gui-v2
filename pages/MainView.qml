@@ -38,6 +38,10 @@ Item {
 		}
 	}
 
+	function loadStartPage() {
+		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.pageUrls)
+	}
+
 	function clearUi() {
 		swipeViewLoader.active = false
 		pageStack.clear()
@@ -47,6 +51,27 @@ Item {
 	function _loadUi() {
 		console.warn("Data sources ready, loading pages")
 		swipeViewLoader.active = true
+	}
+
+	// Revert to the start page when the application is inactive.
+	Timer {
+		running: Global.systemSettings.startPageConfiguration.hasStartPage
+				 && Global.systemSettings.startPageConfiguration.startPageTimeout > 0
+				 && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
+		interval: Global.systemSettings.startPageConfiguration.startPageTimeout * 1000
+		onTriggered: root.loadStartPage()
+	}
+
+	// Auto-select the start page after 1 minute, if needed.
+	Timer {
+		running: Global.systemSettings.startPageConfiguration.autoSelect
+				 && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
+		interval: Global.systemSettings.startPageConfiguration.autoSelectTimeout * 1000
+		onTriggered: {
+			const mainPageName = root.pageManager.navBar.getCurrentPage()
+			const mainPage = swipeView.getCurrentPage()
+			Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.pageUrls)
+		}
 	}
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
@@ -66,8 +91,16 @@ Item {
 		active: false
 		asynchronous: true
 		sourceComponent: swipeViewComponent
-
 		visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
+		onLoaded: {
+			// If there is an alarm, the notifications page will be shown; otherwise, show the
+			// application start page, if set.
+			if (!Global.notifications.alarm) {
+				root.loadStartPage()
+			}
+			// Notify that the UI is ready to be displayed.
+			Global.allPagesLoaded = true
+		}
 	}
 
 	Component {
@@ -81,7 +114,6 @@ Item {
 			anchors.fill: parent
 			onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 			contentChildren: swipePageModel.children
-			Component.onCompleted: Qt.callLater(function() { Global.allPagesLoaded = true })
 		}
 	}
 

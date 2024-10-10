@@ -23,6 +23,10 @@ T.SwipeView {
 				|| visibleXEnd >= pageXStart && visibleXEnd <= pageXEnd
 	}
 
+	function getCurrentPage() {
+		return listView.currentItem
+	}
+
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 							contentWidth + leftPadding + rightPadding)
 	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
@@ -46,7 +50,7 @@ T.SwipeView {
 		highlightRangeMode: ListView.StrictlyEnforceRange
 		preferredHighlightBegin: 0
 		preferredHighlightEnd: 0
-		highlightMoveDuration: 250
+		highlightMoveDuration: Global.allPagesLoaded ? 250 : 0 // don't animate when loading initial page
 		maximumFlickVelocity: 4 * (control.orientation === Qt.Horizontal ? width : height)
 
 		Timer {

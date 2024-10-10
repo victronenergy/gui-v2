@@ -167,6 +167,14 @@ Page {
 				}
 			}
 
+			ListNavigationItem {
+				//% "Start page"
+				text: qsTrId("settings_brief_view_start_page")
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayStartPage.qml", {"title": text})
+				}
+			}
+
 			ListRadioButtonGroup {
 				id: runningVersion
 
