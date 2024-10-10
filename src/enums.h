@@ -717,6 +717,23 @@ public:
 	};
 	Q_ENUM(OnboardingState)
 	Q_DECLARE_FLAGS(OnboardingStateFlag, OnboardingState)
+
+	enum StartPage_Mode {
+		StartPage_Mode_AutoSelect,
+		StartPage_Mode_UserSelect
+	};
+	Q_ENUM(StartPage_Mode)
+
+	enum StartPage_Type {
+		StartPage_Type_None,
+		StartPage_Type_Brief_SidePanelClosed,
+		StartPage_Type_Brief_SidePanelOpened,
+		StartPage_Type_Overview,
+		StartPage_Type_Levels_Tanks,
+		StartPage_Type_Levels_Environment,
+		StartPage_Type_BatteryList
+	};
+	Q_ENUM(StartPage_Type)
 };
 
 }

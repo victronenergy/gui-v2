@@ -294,6 +294,9 @@ QtObject {
 		case Qt.Key_V:
 			levelsEnabled = !levelsEnabled
 			break
+		case Qt.Key_W:
+			Global.mainView.loadStartPage()
+			break
 		case Qt.Key_Space:
 			Global.splashScreenVisible = false
 			event.accepted = true
