@@ -17,11 +17,41 @@ BaseDeviceModel {
 		delegate: Device {
 			id: device
 
-			readonly property real power: _power.isValid ? _power.value : NaN
 			readonly property int gensetStatusCode: _gensetStatusCode.isValid ? _gensetStatusCode.value : -1
+
+			readonly property real power: {
+				if (_power.isValid)
+					return _power.value
+
+				var power = 0
+				var nrOfPhases = _nrOfPhases.isValid ? _nrOfPhases.value : 3
+				if (_powerL1.isValid && nrOfPhases > 0)
+					power += _powerL1.value
+				if (_powerL2.isValid && nrOfPhases > 1)
+					power += _powerL2.value
+				if (_powerL3.isValid && nrOfPhases > 2)
+					power += _powerL3.value
+				return (_powerL1.isValid || _powerL2.isValid || _powerL3.isValid) ? power : NaN
+			}
 
 			readonly property VeQuickItem _power: VeQuickItem {
 				uid: device.serviceUid + "/Ac/Power"
+			}
+
+			readonly property VeQuickItem _powerL1: VeQuickItem {
+				uid: device.serviceUid + "/Ac/L1/Power"
+			}
+
+			readonly property VeQuickItem _powerL2: VeQuickItem {
+				uid: device.serviceUid + "/Ac/L2/Power"
+			}
+
+			readonly property VeQuickItem _powerL3: VeQuickItem {
+				uid: device.serviceUid + "/Ac/L3/Power"
+			}
+
+			readonly property VeQuickItem _nrOfPhases: VeQuickItem {
+				uid: device.serviceUid + "/NrOfPhases"
 			}
 
 			readonly property VeQuickItem _gensetStatusCode: VeQuickItem {
