@@ -177,15 +177,13 @@ Page {
 				updateDataOnClick: false
 				optionModel: [
 					{
-						//% "Standard version"
-						display: qsTrId("settings_display_standard_version"),
+						//% "Classic UI"
+						display: qsTrId("settings_display_classic_ui"),
 						value: 1
 					},
 					{
-						//% "Gui-v2 version"
-						display: qsTrId("settings_display_beta_version"),
-						//% "Beta, check the announcement first."
-						caption: qsTrId("settings_display_beta_version_caption"),
+						//% "New UI"
+						display: qsTrId("settings_display_new_ui"),
 						value: 2
 					},
 				]
