@@ -145,19 +145,6 @@ ObjectModel {
 		}
 	}
 
-	ListButton {
-		//% "Clear genset error"
-		text: qsTrId("ac-in-clear-genset_error")
-		secondaryText: CommonWords.press_to_clear
-		allowed: gensetStatus.value === 10
-		onClicked: startItem.setValue(0)
-
-		VeQuickItem {
-			id: startItem
-			uid: root.bindPrefix + "/Start"
-		}
-	}
-
 	Column {
 		width: parent ? parent.width : 0
 
