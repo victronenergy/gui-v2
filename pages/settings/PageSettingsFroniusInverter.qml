@@ -19,12 +19,6 @@ Page {
 	}
 
 	VeQuickItem {
-		id: phaseItem
-
-		uid: bindPrefix + "/Phase"
-	}
-
-	VeQuickItem {
 		id: limiterSupportedItem
 
 		uid: bindPrefix + "/LimiterSupported"
