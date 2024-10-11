@@ -18,6 +18,10 @@ Page {
 		uid: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
 	}
 	VeQuickItem {
+		id: securityProfile
+		uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+	}
+	VeQuickItem {
 		id: currentVersionItem
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 	}
@@ -60,6 +64,13 @@ Page {
 				allowed: root._switchingEnabled
 
 				onClicked: {
+					if (securityProfile.value === VenusOS.Security_Profile_Indeterminate) {
+						//% "Switching firmware version is not possible without \"Network Security Profile\" in "
+						//% "\"Settings / General\" being selected."
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_switching_not_possible_indeterminate_profile"), 10000)
+						return
+					}
+
 					if (_autoUpdateDisabled) {
 						text = ""
 						root._rebooting = true
