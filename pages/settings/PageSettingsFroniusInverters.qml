@@ -14,7 +14,7 @@ Page {
 	GradientListView {
 		model: VeQItemTableModel {
 			uids: BackendConnection.type === BackendConnection.DBusSource
-				  ? ["dbus/" + bindPrefix + "/Inverters"]
+				  ? [bindPrefix + "/Inverters"]
 				  : BackendConnection.type === BackendConnection.MqttSource
 					? ["mqtt/settings/0/Settings/Fronius/Inverters"]
 					: []
