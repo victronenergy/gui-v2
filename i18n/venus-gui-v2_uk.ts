@@ -188,7 +188,7 @@
     <message id="settings_tailscale_ethernet">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="98"/>
       <source>Ethernet</source>
-      <translation>Ethernet</translation>
+      <translation>Локальна мережа Ethernet</translation>
     </message>
     <message id="settings_wifi">
       <location filename="../../pages/SettingsPage.qml" line="93"/>
@@ -240,11 +240,6 @@
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
       <translation>Автозапуск буде вимкнено, і генератор не буде автоматично запускатися на основі налаштованих умов.</translation>
     </message>
-    <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="46"/>
-      <source>The generator will start and stop based on the configured autostart conditions.</source>
-      <translation>Генератор буде запускатися і зупинятися відповідно до налаштованих умов автозапуску.</translation>
-    </message>
     <message id="controlcard_generator_subcard_button_manual_stop">
       <location filename="../../components/GeneratorManualControlButton.qml" line="34"/>
       <source>Manual Stop</source>
@@ -266,27 +261,27 @@
       <translation>Перемикачі</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="193"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="74"/>
       <source>Access level</source>
       <translation>Рівень доступу</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="198"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="79"/>
       <source>User</source>
       <translation>Користувач</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="81"/>
       <source>User &amp; Installer</source>
       <translation>Користувач і Інсталятор</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="202"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="83"/>
       <source>Superuser</source>
       <translation>Суперкористувач</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="204"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="85"/>
       <source>Service</source>
       <translation>Сервіс</translation>
     </message>
@@ -386,17 +381,17 @@
       <translation>Генератор не виявлено на вході AC</translation>
     </message>
     <message id="settings_page_run_time_and_service_accumulated_running_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="134"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="140"/>
       <source>Accumulated running time since last test run</source>
       <translation>Сукупний час роботи з моменту останнього тестового запуску</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_next_test_run">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="110"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="116"/>
       <source>Time to next test run</source>
       <translation>Час до наступного тестового запуску</translation>
     </message>
     <message id="settings_page_run_time_and_service_running_now">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="127"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="133"/>
       <source>Running now</source>
       <translation>Зараз працює</translation>
     </message>
@@ -411,7 +406,7 @@
       <translation>Запустити генератор</translation>
     </message>
     <message id="settings_page_run_time_and_service_daily_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="64"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="70"/>
       <source>Daily run time</source>
       <translation>Щоденна тривалість роботи</translation>
     </message>
@@ -1247,57 +1242,57 @@ could be better and more universal</extracomment>
       <translation>Повторне сканування</translation>
     </message>
     <message id="settings_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="239"/>
       <source>SSH on LAN</source>
       <translation>SSH в локальній мережі</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="248"/>
       <source>Remote support</source>
       <translation>Віддалена підтримка</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="255"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="254"/>
       <source>Remote support tunnel</source>
       <translation>Тунель віддаленої підтримки</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="263"/>
       <source>Remote support IP and port</source>
       <translation>IP та порт віддаленої підтримки</translation>
     </message>
     <message id="settings_reboot_now">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="300"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="299"/>
       <source>Reboot now</source>
       <translation>Перезавантажити зараз</translation>
     </message>
     <message id="settings_audible_alarm">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="326"/>
       <source>Audible alarm</source>
       <translation>Звукова тривога</translation>
     </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="346"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="345"/>
       <source>Demo mode</source>
       <translation>Демонстраційний режим</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="355"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="354"/>
       <source>ESS demo</source>
       <translation>Демо ESS</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="357"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="356"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>Демо човна/дома на колесах 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="359"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="358"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>Демо човна/дома на колесах 2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="369"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="368"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>Запуск демо режиму призведе до зміни деяких налаштувань, а інтерфейс користувача на мить не відповідає.</translation>
     </message>
@@ -1347,44 +1342,38 @@ could be better and more universal</extracomment>
       <translation>Час закінчення тихих годин</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="311"/>
+      <location filename="../../components/PageGensetModel.qml" line="303"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="105"/>
       <source>Run time and service</source>
       <translation>Час роботи та обслуговування</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_daily_run_time_counters">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="84"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="90"/>
       <source>Reset daily run time counters</source>
       <translation>Скидання щоденних лічильників часу роботи</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="93"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="99"/>
       <source>The daily runtime counter has been reset</source>
       <translation>Щоденний лічильник часу роботи скинуто</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_cant_reset_while_running">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="102"/>
       <source>It is not possible to modify the counters while the generator is running</source>
       <translation>Неможливо змінити лічильники під час роботи генератора</translation>
     </message>
-    <message id="page_settings_run_time_and_service_total_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="42"/>
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="51"/>
-      <source>Generator total run time (hours)</source>
-      <translation>Загальний час роботи генератора (годин)</translation>
-    </message>
     <message id="page_settings_generator_service_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="153"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="159"/>
       <source>Generator service interval (hours)</source>
       <translation>Інтервал обслуговування генератора (годин)</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_time_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="161"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="167"/>
       <source>Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer.</source>
       <translation>Інтервал сервісного часу встановлено на %1 год. Використовуйте кнопку "Скинути сервісний таймер" для скидання сервісного таймера.</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_service_timer">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="172"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
       <source>Reset service timer</source>
       <translation>Скидання таймера обслуговування</translation>
     </message>
@@ -2177,7 +2166,7 @@ Documentation at https://ve3.nl/vol</source>
     <message id="settings_system_name_user_defined">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="53"/>
       <source>User defined</source>
-      <translation>Задані користувачем</translation>
+      <translation>Задана користувачем</translation>
     </message>
     <message id="settings_system_user_defined_name">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="60"/>
@@ -2223,7 +2212,7 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="23"/>
       <source>Use solar charger current to improve VE.Bus SOC</source>
       <extracomment>to improve means - calibration ?</extracomment>
-      <translation>Використовуйте струм pv зарядного для калібрування SOC VE.Bus</translation>
+      <translation>Враховувати струм від PV для точнішого визначення рівня SOC VE.Bus</translation>
     </message>
     <message id="settings_system_status_solar_charger_voltage_control">
       <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="30"/>
@@ -2514,19 +2503,19 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../components/CommonWords.qml" line="562"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
-      <translation>2-а помилка</translation>
+      <translation>передостання помилка</translation>
     </message>
     <message id="common_words_3rd_last_error">
       <location filename="../../components/CommonWords.qml" line="565"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
-      <translation>3 помилка</translation>
+      <translation>третя помилка</translation>
     </message>
     <message id="common_words_4th_last_error">
       <location filename="../../components/CommonWords.qml" line="568"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
-      <translation>4-я помилка</translation>
+      <translation>четверта помилка</translation>
     </message>
     <message id="charger_networked">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="22"/>
@@ -2648,21 +2637,6 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/solar/SolarHistoryPage.qml" line="26"/>
       <source>Chart</source>
       <translation>Діаграма</translation>
-    </message>
-    <message id="charger_history_last_7_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="52"/>
-      <source>Last 7 days</source>
-      <translation>Останні 7 днів</translation>
-    </message>
-    <message id="charger_history_last_14_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="54"/>
-      <source>Last 14 days</source>
-      <translation>Останні 14 днів</translation>
-    </message>
-    <message id="charger_history_last_30_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="56"/>
-      <source>Last 30 days</source>
-      <translation>останні 30 днів</translation>
     </message>
     <message id="listitems_alarm_level_warning">
       <location filename="../../components/listitems/ListAlarm.qml" line="21"/>
@@ -3466,12 +3440,12 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Вихід</translation>
     </message>
     <message id="alternator_wakespeed_field_drive">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="67"/>
       <source>Field drive</source>
       <translation>Польовий привід</translation>
     </message>
     <message id="alternator_wakespeed_engine_speed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="81"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="82"/>
       <source>Engine speed</source>
       <translation>Оберти двигуна</translation>
     </message>
@@ -3831,7 +3805,7 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="165"/>
       <source>AC in %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
-      <translation>AC у %1</translation>
+      <translation>AC вхід %1</translation>
     </message>
     <message id="common_words_dc">
       <location filename="../../components/CommonWords.qml" line="126"/>
@@ -3924,17 +3898,17 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Тиск</translation>
     </message>
     <message id="temperature_offset">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="39"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="43"/>
       <source>Offset</source>
       <translation>Зміщення</translation>
     </message>
     <message id="temperature_scale">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="52"/>
       <source>Scale</source>
       <translation>Шкала</translation>
     </message>
     <message id="temperature_sensor_voltage">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="58"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="62"/>
       <source>Sensor voltage</source>
       <translation>Напруга датчика</translation>
     </message>
@@ -4462,7 +4436,7 @@ Do you want to continue?</source>
     <message id="common_words_alarms">
       <location filename="../../components/CommonWords.qml" line="65"/>
       <source>Alarms</source>
-      <translation>Сигнали тривоги</translation>
+      <translation>Тривоги</translation>
     </message>
     <message id="common_words_allow_to_charge">
       <location filename="../../components/CommonWords.qml" line="68"/>
@@ -4611,7 +4585,7 @@ Do you want to continue?</source>
       <location filename="../../components/CommonWords.qml" line="187"/>
       <source>High level alarm</source>
       <extracomment>An alarm that triggers when the level is too high</extracomment>
-      <translation>Сигнал тривоги через високий рівень</translation>
+      <translation>Тривога через високий рівень</translation>
     </message>
     <message id="common_words_high_starter_battery_voltage">
       <location filename="../../components/CommonWords.qml" line="190"/>
@@ -4663,7 +4637,7 @@ Do you want to continue?</source>
       <location filename="../../components/CommonWords.qml" line="235"/>
       <source>Low level alarm</source>
       <extracomment>An alarm that triggers when the level is too low</extracomment>
-      <translation>Сигнал тривоги через низький рівень</translation>
+      <translation>Тривога через низький рівень</translation>
     </message>
     <message id="common_words_low_starter_battery_voltage">
       <location filename="../../components/CommonWords.qml" line="238"/>
@@ -5008,11 +4982,6 @@ Do you want to continue?</source>
       <source>Timed run</source>
       <translation>Запуск за часом</translation>
     </message>
-    <message id="controlcard_generator_startdialog_description">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="71"/>
-      <source>Generator will stop after the set time, unless autostart condition is met, in which case it will keep running.</source>
-      <translation>Генератор зупиниться після закінчення заданого часу, якщо не буде виконано умову автозапуску, в цьому випадку він буде продовжувати працювати.</translation>
-    </message>
     <message id="controlcard_generator_stopdialog_stop_now">
       <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="13"/>
       <source>Stop Now</source>
@@ -5204,7 +5173,7 @@ Do you want to continue?</source>
       <translation>Налаштування заблоковано для рівня доступу</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="211"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="92"/>
       <source>Incorrect password</source>
       <translation>Неправильний пароль</translation>
     </message>
@@ -5585,7 +5554,7 @@ Do you want to continue?</source>
     <message id="charger_history_max_power">
       <location filename="../../components/SolarHistoryTableView.qml" line="93"/>
       <source>Max Power</source>
-      <translation>Максимальна потужність</translation>
+      <translation>Пік потужності</translation>
     </message>
     <message id="splash_view_unable_to_connect">
       <location filename="../../components/SplashView.qml" line="231"/>
@@ -5829,16 +5798,6 @@ Do you want to continue?</source>
       <location filename="../../data/DigitalInputs.qml" line="62"/>
       <source>High</source>
       <translation>Високий</translation>
-    </message>
-    <message id="temperature_type_fridge">
-      <location filename="../../data/EnvironmentInputs.qml" line="22"/>
-      <source>Fridge</source>
-      <translation>Холодильник</translation>
-    </message>
-    <message id="temperature_type_generic">
-      <location filename="../../data/EnvironmentInputs.qml" line="25"/>
-      <source>Generic</source>
-      <translation>Загальне</translation>
     </message>
     <message id="ess_state_keep_batteries_charged">
       <location filename="../../data/Ess.qml" line="32"/>
@@ -6158,7 +6117,7 @@ Do you want to continue?</source>
     <message id="charger_alarms_short_circuit_alarm">
       <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="60"/>
       <source>Short circuit alarm</source>
-      <translation>Сигнал тривоги через коротке замикання</translation>
+      <translation>Тривога через коротке замикання</translation>
     </message>
     <message id="settings_wifi_disable_ap">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="129"/>
@@ -6222,37 +6181,37 @@ Do you want to continue?</source>
       <translation>Зверніть увагу, що зміна параметра Час до розряду також змінює значення параметра Низький рівень заряду в меню реле.</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="105"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
       <source>Operation time</source>
       <translation>Час роботи</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="121"/>
       <source>Charged Ah</source>
       <translation>Заряджено А·год</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="122"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="130"/>
       <source>Cycles started</source>
       <translation>Запущених циклів</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="137"/>
       <source>Cycles completed</source>
       <translation>Завершених циклів</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="144"/>
       <source>Number of power-ups</source>
       <translation>Кількість під’єднань живлення</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="143"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="151"/>
       <source>Number of deep discharges</source>
       <translation>Кількість глибоких розрядів</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="162"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="170"/>
       <source>Charge cycle history</source>
       <translation>Історія циклів заряду</translation>
     </message>
@@ -6262,7 +6221,7 @@ Do you want to continue?</source>
       <translation>Значення датчика, ємність повна</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="143"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
       <source>Time to service</source>
       <translation>Час для обслуговування</translation>
     </message>
@@ -6279,7 +6238,7 @@ Do you want to continue?</source>
       <translation>Переконайтеся, що генератор не підключений до входу AC %1 під час використання цієї опції</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_timer_has_been_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="184"/>
       <source>The service timer has been reset</source>
       <translation>Сервісний таймер було скинуто</translation>
     </message>
@@ -6397,12 +6356,12 @@ Do you want to continue?</source>
       <translation>Розробка (внутрішнє Victron)</translation>
     </message>
     <message id="dialoglayer_rebooting">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="312"/>
       <source>Rebooting...</source>
       <translation>Перезавантаження...</translation>
     </message>
     <message id="settings_enable_status_leds">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="339"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="338"/>
       <source>Enable status LEDs</source>
       <translation>Увімкнути індикатори стану</translation>
     </message>
@@ -6426,7 +6385,7 @@ Do you want to continue?</source>
       <location filename="../../pages/settings/PageSettingsGenerator.qml" line="127"/>
       <source>An alarm will be triggered when autostart function is left disabled for more than 10 minutes</source>
       <oldsource>An alarm will be triggered when auto start function is left disabled for more than 10 minutes.</oldsource>
-      <translation>Сигнал тривоги спрацьовує, якщо функцію автозапуску вимкнено більше ніж на 10 хвилин</translation>
+      <translation>Тривога спрацьовує, якщо функцію автозапуску вимкнено більше ніж на 10 хвилин</translation>
     </message>
     <message id="settings_ess_self_consumption_battery">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="70"/>
@@ -6488,7 +6447,7 @@ Do you want to continue?</source>
     <message id="charger_alarms_high_temperature_alarm">
       <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="51"/>
       <source>High temperature alarm</source>
-      <translation>Сигнал тривоги через високу температуру</translation>
+      <translation>Тривога через високу температуру</translation>
     </message>
     <message id="charger_network_bms_controlled">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="120"/>
@@ -6713,12 +6672,12 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>Оберти двигуна</translation>
     </message>
     <message id="devicelist_motordrive_motortemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="26"/>
       <source>Motor Temperature</source>
       <translation>Температура двигуна</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="50"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="55"/>
       <source>Controller Temperature</source>
       <translation>Температура Контролера</translation>
     </message>
@@ -6806,7 +6765,7 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
     <message id="rs_alarm_no_alarms_to_be_configured">
       <location filename="../../pages/settings/devicelist/rs/PageRsAlarmSettings.qml" line="32"/>
       <source>No alarms to be configured</source>
-      <translation>Немає сигналів тривог для налаштування</translation>
+      <translation>Немає тривог для налаштування</translation>
     </message>
     <message id="inverter_maximum_pv_voltage">
       <location filename="../../pages/settings/devicelist/inverter/PageSolarStats.qml" line="18"/>
@@ -6957,7 +6916,7 @@ See documentation for further information.</oldsource>
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="172"/>
       <source>AC out %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
-      <translation>Вихід AC %1</translation>
+      <translation>AC вихід %1</translation>
     </message>
     <message id="settings_multirs_trackers">
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="222"/>
@@ -7205,68 +7164,63 @@ See documentation for further information.</oldsource>
       <source>Connection information</source>
       <translation>Інформація про зʼєднання</translation>
     </message>
-    <message id="settings_security_profile">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="79"/>
-      <source>Security profile</source>
-      <translation>Профіль безпеки</translation>
-    </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="108"/>
       <source>Please select...</source>
       <translation>Будь ласка, оберіть...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="112"/>
       <source>Secured</source>
       <translation>Захищено</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="115"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Захищено паролем, а мережеве з'єднання зашифровано</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="120"/>
       <source>Weak</source>
       <translation>Слабкий.</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="123"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Захищено паролем, але мережеве з'єднання не шифрується</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="128"/>
       <source>Unsecured</source>
       <translation>Незахищено</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="131"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Немає пароля і мережеве з'єднання не шифрується</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="224"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>Пароль повинен мати довжину не менше 8 символів</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="171"/>
       <source>Select 'Secured' profile?</source>
       <translation>Обрали профіль "Захищений"?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="150"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="174"/>
       <source>Select 'Weak' profile?</source>
       <translation>Обрали профіль "Слабкий"?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="177"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Обрали профіль "Незахищений"?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="161"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="185"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -7277,26 +7231,26 @@ See documentation for further information.</oldsource>
 - Неможливо ввімкнути небезпечні налаштування</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="188"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Служби локальної мережі захищені паролем
 - Також дозволено незашифрований доступ до локальних веб-сайтів (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="191"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Служби локальної мережі не потребують пароля
 - Доступ до локальних веб-сайтів у незашифрованому вигляді (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="217"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="216"/>
       <source>Root password</source>
       <translation>Рут-пароль</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="270"/>
       <source>Logout</source>
       <translation>Вихід</translation>
     </message>
@@ -7306,17 +7260,17 @@ See documentation for further information.</oldsource>
       <translation>Вийдіть з системи</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="285"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="284"/>
       <source>Log out?</source>
       <translation>Вийти з системи?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="287"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="286"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Це призведе до відключення всіх підключень до локальної мережі.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="289"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="288"/>
       <source>Log out</source>
       <translation>Вихід</translation>
     </message>
@@ -7392,33 +7346,28 @@ See documentation for further information.</oldsource>
       <source>Heatsink temperature</source>
       <translation>Температура радіатора</translation>
     </message>
-    <message id="page_genset_model_bms_settings">
-      <location filename="../../components/PageGensetModel.qml" line="323"/>
-      <source>BMS Settings</source>
-      <translation>Налаштування BMS</translation>
-    </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="361"/>
+      <location filename="../../components/PageGensetModel.qml" line="353"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>Напруга заряду наразі контролюється системою BMS.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="367"/>
+      <location filename="../../components/PageGensetModel.qml" line="359"/>
       <source>Charge current limit</source>
       <translation>Обмеження зарядного струму</translation>
     </message>
     <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="377"/>
+      <location filename="../../components/PageGensetModel.qml" line="369"/>
       <source>BMS Controlled</source>
       <translation>Під керуванням BMS</translation>
     </message>
     <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="383"/>
+      <location filename="../../components/PageGensetModel.qml" line="375"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>Керування BMS вмикається автоматично за наявності BMS. Скиньте, якщо змінилася конфігурація системи або якщо відсутня BMS.</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_time_disabled">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="165"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="171"/>
       <source>Service timer disabled.</source>
       <translation>Сервісний таймер вимкнено.</translation>
     </message>
@@ -7612,7 +7561,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>Вгору, але без послуг (500 кбіт/с)</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="231"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="230"/>
       <source>Root password changed to %1</source>
       <translation>Рут-пароль змінено на %1</translation>
     </message>
@@ -7630,7 +7579,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
     <message id="settings_system_ac_position">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="88"/>
       <source>Position of AC loads</source>
-      <translation>Позиція карточок AC навантажень</translation>
+      <translation>Позиція віджетів AC споживачів</translation>
     </message>
     <message id="settings_system_ac_input_and_output">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="93"/>
@@ -7660,7 +7609,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
     <message id="acInputs_evcharger">
       <location filename="../../data/AcInputs.qml" line="28"/>
       <source>EV Charger</source>
-      <translation>EVCS</translation>
+      <translation>Зарядка EV</translation>
     </message>
     <message id="acInputs_heat_pump">
       <location filename="../../data/AcInputs.qml" line="30"/>
@@ -7671,6 +7620,53 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="13"/>
       <source>Essential Loads</source>
       <translation>Основні навантаження</translation>
+    </message>
+    <message id="controlcard_generator_autostart_conditions">
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="46"/>
+      <source>Start and stop the generator based on the configured autostart conditions.</source>
+      <oldsource>The generator will start and stop based on the configured autostart conditions.</oldsource>
+      <translation>Запуск і зупинка генератора на основі налаштованих умов автозапуску.</translation>
+    </message>
+    <message id="page_genset_model_dc_genset_settings">
+      <location filename="../../components/PageGensetModel.qml" line="315"/>
+      <source>DC genset settings</source>
+      <translation>Налаштування генераторної установки постійного струму</translation>
+    </message>
+    <message id="alternator_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="32"/>
+      <source>Alternator Temperature</source>
+      <translation>Температура генератора</translation>
+    </message>
+    <message id="engine_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="90"/>
+      <source>Engine Temperature</source>
+      <translation>Температура двигуна</translation>
+    </message>
+    <message id="page_settings_run_time_and_service_total_run_time">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="48"/>
+      <source>Total run time</source>
+      <translation>Загальний час роботи</translation>
+    </message>
+    <message id="settings_network_security_profile">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="103"/>
+      <source>Network security profile</source>
+      <translation>Профіль мережевої безпеки</translation>
+    </message>
+    <message id="charger_history_last_x_days">
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="62"/>
+      <source>Last %1 days</source>
+      <extracomment>%1 = number of days of solar history that will be shown</extracomment>
+      <translation>Останні %1 днів</translation>
+    </message>
+    <message id="generator_start_dialog_will_stop_in_x">
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="70"/>
+      <source>Generator will stop in %1 unless autostart conditions are enabled that keep it running.</source>
+      <translation>Генератор зупиниться через %1, якщо не увімкнено умови автозапуску, які підтримують його роботу.</translation>
+    </message>
+    <message id="generator_start_dialog_will_run_until_manually_stopped">
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="72"/>
+      <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
+      <translation>Генератор працюватиме до тих пір, поки не буде зупинений вручну, якщо не будуть увімкнені умови автоматичного запуску, які підтримують його роботу.</translation>
     </message>
   </context>
   <context>
@@ -10107,6 +10103,44 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="828"/>
       <source>Processor failure</source>
       <translation>Несправність процесора</translation>
+    </message>
+  </context>
+  <context>
+    <name>EnvironmentInputs</name>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <source>Battery</source>
+      <translation>Акумуляторна батарея</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <source>Fridge</source>
+      <translation>Холодильник</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <source>Generic</source>
+      <translation>Загальне</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
+      <source>Room</source>
+      <translation>Кімната</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
+      <source>Outdoor</source>
+      <translation>На відкритому повітрі</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
+      <source>Water Heater</source>
+      <translation>Водонагрівач</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
+      <source>Freezer</source>
+      <translation>Морозильна камера</translation>
     </message>
   </context>
 </TS>

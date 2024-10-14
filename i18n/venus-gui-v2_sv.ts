@@ -239,11 +239,6 @@
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
       <translation>Autostart inaktiveras och generatorn startar inte automatiskt baserat på de inställda villkoren.</translation>
     </message>
-    <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="46"/>
-      <source>The generator will start and stop based on the configured autostart conditions.</source>
-      <translation>Generatorn startar och stoppar baserat på de inställda autostart-villkoren.</translation>
-    </message>
     <message id="controlcard_generator_subcard_button_manual_stop">
       <location filename="../../components/GeneratorManualControlButton.qml" line="34"/>
       <source>Manual Stop</source>
@@ -265,27 +260,27 @@
       <translation>Brytare</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="193"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="74"/>
       <source>Access level</source>
       <translation>Åtkomstnivå</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="198"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="79"/>
       <source>User</source>
       <translation>Användare</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="81"/>
       <source>User &amp; Installer</source>
       <translation>Användare &amp; Installatör</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="202"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="83"/>
       <source>Superuser</source>
       <translation>Superanvändare</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="204"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="85"/>
       <source>Service</source>
       <translation>Konfigurerbar tjänst: {name}</translation>
     </message>
@@ -385,17 +380,17 @@
       <translation>Generatorn hittades  inte vid AC-ingången</translation>
     </message>
     <message id="settings_page_run_time_and_service_accumulated_running_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="134"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="140"/>
       <source>Accumulated running time since last test run</source>
       <translation>Sammanlagd drifttid sedan senaste provdrift</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_next_test_run">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="110"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="116"/>
       <source>Time to next test run</source>
       <translation>Tid till nästa provdrift</translation>
     </message>
     <message id="settings_page_run_time_and_service_running_now">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="127"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="133"/>
       <source>Running now</source>
       <translation>I drift nu</translation>
     </message>
@@ -410,7 +405,7 @@
       <translation>Starta generator</translation>
     </message>
     <message id="settings_page_run_time_and_service_daily_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="64"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="70"/>
       <source>Daily run time</source>
       <translation>Daglig drift</translation>
     </message>
@@ -1241,57 +1236,57 @@
       <translation>Skanna igen</translation>
     </message>
     <message id="settings_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="239"/>
       <source>SSH on LAN</source>
       <translation>SSH på LAN</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="248"/>
       <source>Remote support</source>
       <translation>Fjärrsupport</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="255"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="254"/>
       <source>Remote support tunnel</source>
       <translation>Fjärrsupporttunnel</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="263"/>
       <source>Remote support IP and port</source>
       <translation>Fjärrstödd IP och port</translation>
     </message>
     <message id="settings_reboot_now">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="300"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="299"/>
       <source>Reboot now</source>
       <translation>Starta om nu</translation>
     </message>
     <message id="settings_audible_alarm">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="326"/>
       <source>Audible alarm</source>
       <translation>Ljudlarm</translation>
     </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="346"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="345"/>
       <source>Demo mode</source>
       <translation>Demoinställning</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="355"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="354"/>
       <source>ESS demo</source>
       <translation>ESS-demo</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="357"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="356"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>Båt/Husbil demo 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="359"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="358"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>Båt/husbil demo 2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="369"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="368"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>Vid start av demoläge kommer några inställningar att ändras och användargränssnittet blockeras under en stund.</translation>
     </message>
@@ -1341,44 +1336,38 @@
       <translation>Sluttid tysta timmar</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="311"/>
+      <location filename="../../components/PageGensetModel.qml" line="303"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="105"/>
       <source>Run time and service</source>
       <translation>Drifttid och service</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_daily_run_time_counters">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="84"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="90"/>
       <source>Reset daily run time counters</source>
       <translation>Återställ räknare för daglig drift</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="93"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="99"/>
       <source>The daily runtime counter has been reset</source>
       <translation>Räknaren för daglig drift har återställts</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_cant_reset_while_running">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="102"/>
       <source>It is not possible to modify the counters while the generator is running</source>
       <translation>Det går inte att ändra räknarna när generatorn är i drift</translation>
     </message>
-    <message id="page_settings_run_time_and_service_total_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="42"/>
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="51"/>
-      <source>Generator total run time (hours)</source>
-      <translation>Generatorns totala drifttid (timmar)</translation>
-    </message>
     <message id="page_settings_generator_service_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="153"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="159"/>
       <source>Generator service interval (hours)</source>
       <translation>Generatorserviceintervall (timmar)</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_time_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="161"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="167"/>
       <source>Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer.</source>
       <translation>Servicetidsintervall inställt till %1t. Använd knappen ”Återställa servicetimer” för att återställa servicetimern.</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_service_timer">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="172"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
       <source>Reset service timer</source>
       <translation>Återställa servicetimer</translation>
     </message>
@@ -2641,21 +2630,6 @@ Documentation på https://ve3.nl/vol</translation>
       <source>Chart</source>
       <translation>Diagram</translation>
     </message>
-    <message id="charger_history_last_7_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="52"/>
-      <source>Last 7 days</source>
-      <translation>Senaste 7 dagar</translation>
-    </message>
-    <message id="charger_history_last_14_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="54"/>
-      <source>Last 14 days</source>
-      <translation>Senaste 14 dagar</translation>
-    </message>
-    <message id="charger_history_last_30_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="56"/>
-      <source>Last 30 days</source>
-      <translation>Senaste 30 dagar</translation>
-    </message>
     <message id="listitems_alarm_level_warning">
       <location filename="../../components/listitems/ListAlarm.qml" line="21"/>
       <source>Warning</source>
@@ -3455,12 +3429,12 @@ Documentation på https://ve3.nl/vol</translation>
       <translation>Utgång</translation>
     </message>
     <message id="alternator_wakespeed_field_drive">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="67"/>
       <source>Field drive</source>
       <translation>Fältdrift</translation>
     </message>
     <message id="alternator_wakespeed_engine_speed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="81"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="82"/>
       <source>Engine speed</source>
       <translation>Motorvarvtal</translation>
     </message>
@@ -3913,17 +3887,17 @@ Documentation på https://ve3.nl/vol</translation>
       <translation>Tryck</translation>
     </message>
     <message id="temperature_offset">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="39"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="43"/>
       <source>Offset</source>
       <translation>Offset</translation>
     </message>
     <message id="temperature_scale">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="52"/>
       <source>Scale</source>
       <translation>Skala</translation>
     </message>
     <message id="temperature_sensor_voltage">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="58"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="62"/>
       <source>Sensor voltage</source>
       <translation>Sensorspänning</translation>
     </message>
@@ -4996,11 +4970,6 @@ Vill du fortsätta?</translation>
       <source>Timed run</source>
       <translation>Klockad drift</translation>
     </message>
-    <message id="controlcard_generator_startdialog_description">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="71"/>
-      <source>Generator will stop after the set time, unless autostart condition is met, in which case it will keep running.</source>
-      <translation>Generatorn stoppar efter den inställda tiden, om inte autostart-villkoren uppfylls. I så fall fortsätter den att vara i drift.</translation>
-    </message>
     <message id="controlcard_generator_stopdialog_stop_now">
       <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="13"/>
       <source>Stop Now</source>
@@ -5192,7 +5161,7 @@ Vill du fortsätta?</translation>
       <translation>Inställning låst för åtkomstnivå</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="211"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="92"/>
       <source>Incorrect password</source>
       <translation>Felaktigt lösenord</translation>
     </message>
@@ -5818,16 +5787,6 @@ Vill du fortsätta?</translation>
       <source>High</source>
       <translation>Hög</translation>
     </message>
-    <message id="temperature_type_fridge">
-      <location filename="../../data/EnvironmentInputs.qml" line="22"/>
-      <source>Fridge</source>
-      <translation>Kyl</translation>
-    </message>
-    <message id="temperature_type_generic">
-      <location filename="../../data/EnvironmentInputs.qml" line="25"/>
-      <source>Generic</source>
-      <translation>Allmän</translation>
-    </message>
     <message id="ess_state_keep_batteries_charged">
       <location filename="../../data/Ess.qml" line="32"/>
       <source>Keep batteries charged</source>
@@ -6210,37 +6169,37 @@ Vill du fortsätta?</translation>
       <translation>Observera att om du ändrar miniminivån för "tid kvar urladdning" ändrar du även inställningen för "låg laddningsstatus" i relämenyn</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="105"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
       <source>Operation time</source>
       <translation>Drifttid</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="121"/>
       <source>Charged Ah</source>
       <translation>Laddad Ah</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="122"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="130"/>
       <source>Cycles started</source>
       <translation>Påbörjade cykler</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="137"/>
       <source>Cycles completed</source>
       <translation>Slutförda cykler</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="144"/>
       <source>Number of power-ups</source>
       <translation>Antal uppstarter</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="143"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="151"/>
       <source>Number of deep discharges</source>
       <translation>Antal djupa urladdningar</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="162"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="170"/>
       <source>Charge cycle history</source>
       <translation>Laddningscykelhistorik</translation>
     </message>
@@ -6250,7 +6209,7 @@ Vill du fortsätta?</translation>
       <translation>Sensorvärde vid full</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="143"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
       <source>Time to service</source>
       <translation>Tid till service</translation>
     </message>
@@ -6267,7 +6226,7 @@ Vill du fortsätta?</translation>
       <translation>Säkerställ att generatorn inte är ansluten till AC-ingång %1 när du använder detta alternativ.</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_timer_has_been_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="184"/>
       <source>The service timer has been reset</source>
       <translation>Servicetimern har återställts.</translation>
     </message>
@@ -6385,12 +6344,12 @@ Vill du fortsätta?</translation>
       <translation>Utveckling (Internt Victron)</translation>
     </message>
     <message id="dialoglayer_rebooting">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="312"/>
       <source>Rebooting...</source>
       <translation>Startar om ...</translation>
     </message>
     <message id="settings_enable_status_leds">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="339"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="338"/>
       <source>Enable status LEDs</source>
       <translation>Aktivera status-LED</translation>
     </message>
@@ -6701,12 +6660,12 @@ Observera att denna meny endast visar Carlo Gavazzi-mätare anslutna över RS485
       <translation>Motor RPM</translation>
     </message>
     <message id="devicelist_motordrive_motortemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="26"/>
       <source>Motor Temperature</source>
       <translation>Motortemperatur</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="50"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="55"/>
       <source>Controller Temperature</source>
       <translation>Controllertemperatur</translation>
     </message>
@@ -7193,68 +7152,63 @@ See documentation for further information.</oldsource>
       <source>Connection information</source>
       <translation>Anslutningsinformation</translation>
     </message>
-    <message id="settings_security_profile">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="79"/>
-      <source>Security profile</source>
-      <translation>Säkerhetsprofil</translation>
-    </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="108"/>
       <source>Please select...</source>
       <translation>Var vänlig välj...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="112"/>
       <source>Secured</source>
       <translation>Säkrad</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="115"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Lösenordet är skyddat och nätverkskommunikationen är krypterad</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="120"/>
       <source>Weak</source>
       <translation>Svag</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="123"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Lösenordet är skyddat men nätverkskommunikationen är inte krypterad</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="128"/>
       <source>Unsecured</source>
       <translation>Osäkrad</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="131"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Inget lösenord och nätverkskommunikationen är inte krypterad</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="224"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>Lösenordet måste innehålla minst 8 tecken</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="171"/>
       <source>Select 'Secured' profile?</source>
       <translation>Välja ”säkrad” profil?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="150"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="174"/>
       <source>Select 'Weak' profile?</source>
       <translation>Välja ”svag” profil?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="177"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Välja ”osäkrad” profil?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="161"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="185"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -7265,26 +7219,26 @@ See documentation for further information.</oldsource>
 • Osäkra inställningar kan inte aktiveras</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="188"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Lokala nätverkstjänster är lösenordsskyddade
 • Även okrypterad åtkomst till lokala webbsidor är aktiverad (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="191"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Lokala nätverkstjänster kräver inget lösenord
 • Även okrypterad åtkomst till lokala webbsidor är aktiverad (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="217"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="216"/>
       <source>Root password</source>
       <translation>Root-lösenord</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="270"/>
       <source>Logout</source>
       <translation>Utloggning</translation>
     </message>
@@ -7294,17 +7248,17 @@ See documentation for further information.</oldsource>
       <translation>Logga ut nu</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="285"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="284"/>
       <source>Log out?</source>
       <translation>Logga ut?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="287"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="286"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Detta kopplar från alla lokala nätverksanslutningar.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="289"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="288"/>
       <source>Log out</source>
       <translation>Logga ut</translation>
     </message>
@@ -7380,33 +7334,28 @@ See documentation for further information.</oldsource>
       <source>Heatsink temperature</source>
       <translation>Kylflänstemperatur</translation>
     </message>
-    <message id="page_genset_model_bms_settings">
-      <location filename="../../components/PageGensetModel.qml" line="323"/>
-      <source>BMS Settings</source>
-      <translation>BMS-inställningar</translation>
-    </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="361"/>
+      <location filename="../../components/PageGensetModel.qml" line="353"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>Laddningsspänningen styrs för närvarande av BMS.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="367"/>
+      <location filename="../../components/PageGensetModel.qml" line="359"/>
       <source>Charge current limit</source>
       <translation>Landströmbegränsning</translation>
     </message>
     <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="377"/>
+      <location filename="../../components/PageGensetModel.qml" line="369"/>
       <source>BMS Controlled</source>
       <translation>BMS kontrollerad</translation>
     </message>
     <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="383"/>
+      <location filename="../../components/PageGensetModel.qml" line="375"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>BMS-kontrolenl är automatiskt påslagen när en BMS finns tillgänglig. Återställ den om systemkonfigurationen har ändrats eller om det inte finns någon BMS.</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_time_disabled">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="165"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="171"/>
       <source>Service timer disabled.</source>
       <translation>Servicetimer inaktiverad.</translation>
     </message>
@@ -7600,7 +7549,7 @@ Efter att du har lagt till/aktiverat ett nytt nätverk måste du godkänna en g�
       <translation>Aktiv men inga tjänster (500 kbit/s)</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="231"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="230"/>
       <source>Root password changed to %1</source>
       <translation>Root-lösenord ändrat till %1</translation>
     </message>
@@ -7659,6 +7608,53 @@ Efter att du har lagt till/aktiverat ett nytt nätverk måste du godkänna en g�
       <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="13"/>
       <source>Essential Loads</source>
       <translation>Nödvändiga belastningar</translation>
+    </message>
+    <message id="controlcard_generator_autostart_conditions">
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="46"/>
+      <source>Start and stop the generator based on the configured autostart conditions.</source>
+      <oldsource>The generator will start and stop based on the configured autostart conditions.</oldsource>
+      <translation></translation>
+    </message>
+    <message id="page_genset_model_dc_genset_settings">
+      <location filename="../../components/PageGensetModel.qml" line="315"/>
+      <source>DC genset settings</source>
+      <translation></translation>
+    </message>
+    <message id="alternator_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="32"/>
+      <source>Alternator Temperature</source>
+      <translation></translation>
+    </message>
+    <message id="engine_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="90"/>
+      <source>Engine Temperature</source>
+      <translation></translation>
+    </message>
+    <message id="page_settings_run_time_and_service_total_run_time">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="48"/>
+      <source>Total run time</source>
+      <translation>Total drifttid</translation>
+    </message>
+    <message id="settings_network_security_profile">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="103"/>
+      <source>Network security profile</source>
+      <translation></translation>
+    </message>
+    <message id="charger_history_last_x_days">
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="62"/>
+      <source>Last %1 days</source>
+      <extracomment>%1 = number of days of solar history that will be shown</extracomment>
+      <translation></translation>
+    </message>
+    <message id="generator_start_dialog_will_stop_in_x">
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="70"/>
+      <source>Generator will stop in %1 unless autostart conditions are enabled that keep it running.</source>
+      <translation></translation>
+    </message>
+    <message id="generator_start_dialog_will_run_until_manually_stopped">
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="72"/>
+      <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
+      <translation></translation>
     </message>
   </context>
   <context>
@@ -10093,6 +10089,44 @@ Efter att du har lagt till/aktiverat ett nytt nätverk måste du godkänna en g�
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="828"/>
       <source>Processor failure</source>
       <translation>Processorfel</translation>
+    </message>
+  </context>
+  <context>
+    <name>EnvironmentInputs</name>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <source>Battery</source>
+      <translation>Batteri</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <source>Fridge</source>
+      <translation>Kyl</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <source>Generic</source>
+      <translation>Allmän</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
+      <source>Room</source>
+      <translation></translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
+      <source>Outdoor</source>
+      <translation></translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
+      <source>Water Heater</source>
+      <translation></translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
+      <source>Freezer</source>
+      <translation></translation>
     </message>
   </context>
 </TS>
