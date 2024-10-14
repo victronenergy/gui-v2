@@ -12,7 +12,7 @@ ListItem {
 	property string bindPrefix
 	property alias textModel: repeater.model
 	property int numOfPhases: 1
-	property bool _multiPhase: numOfPhases > 1
+	property bool multiPhase: numOfPhases > 1
 	property bool errorItem: false
 	property string alarmSuffix
 
@@ -33,9 +33,18 @@ ListItem {
 
 			delegate: Label {
 				id: label
-				visible: index === 0
-						 ? modelData.isValid && !alarmGroup.phase1Alarm.isValid
-						 : modelData.isValid && numOfPhases >= index
+
+				visible: {
+					if (index === 0) {
+						// Note: multi's connected to the CAN-bus still report these and don't
+						// report per phase alarms, so hide it if per phase L1 is available.
+						return modelData.isValid && !alarmGroup.phase1Alarm.isValid
+					} else if (index === 1) {
+						return modelData.isValid
+					} else {
+						return modelData.isValid && root.multiPhase && numOfPhases >= index
+					}
+				}
 				anchors.verticalCenter: parent.verticalCenter
 				width: Math.max(
 						   (separator.visible
@@ -45,7 +54,7 @@ ListItem {
 				font.pixelSize: Theme.font_size_body2
 				color: Theme.color_listItem_secondaryText
 				text: modelData === undefined ? "--" : modelData.displayText
-				horizontalAlignment: numOfPhases === 1 ? Text.AlignRight : Text.AlignHCenter
+				horizontalAlignment: separator.visible ? Text.AlignHCenter : Text.AlignRight
 				elide: Text.ElideRight
 
 				Rectangle {

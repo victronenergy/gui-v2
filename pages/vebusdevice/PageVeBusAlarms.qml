@@ -37,11 +37,21 @@ Page {
 					model: VeBusDeviceAlarmStatusModel { id: alarmStatusModel }
 
 					VeBusAlarm {
+						id: alarmDelegate
+
+						required property int index
+						required property string pathSuffix
+						required property bool errorItem
+						required property bool multiPhase
+						required property bool showOnlyIfMulti
+
 						text: alarmStatusModel.displayTexts[index]
 						bindPrefix: veBusDevice.serviceUid
-						numOfPhases: multiPhase ? root.numberOfPhases : 1
+						numOfPhases: root.numberOfPhases
+						multiPhase: alarmDelegate.multiPhase
 						alarmSuffix: pathSuffix
-						errorItem: errorItem
+						errorItem: alarmDelegate.errorItem
+						allowed: defaultAllowed && (!showOnlyIfMulti || root.isMulti)
 					}
 				}
 			}
