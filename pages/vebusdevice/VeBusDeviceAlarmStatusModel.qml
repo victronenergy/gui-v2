@@ -18,11 +18,11 @@ ListModel {
 		//% "Phase rotation"
 		qsTrId("vebus_device_phase_rotation")
 	]
-	ListElement { pathSuffix: "/LowBattery";		errorItem: false;	multiPhase: true	}
-	ListElement { pathSuffix: "/HighTemperature";	errorItem: false;	multiPhase: true	}
-	ListElement { pathSuffix: "/Overload";			errorItem: false;	multiPhase: true	}
-	ListElement { pathSuffix: "/Ripple";			errorItem: false;	multiPhase: true	}
-	ListElement { pathSuffix: "/VoltageSensor";		errorItem: true;	multiPhase: false	}
-	ListElement { pathSuffix: "/TemperatureSensor";	errorItem: true;	multiPhase: false	}
-	ListElement { pathSuffix: "/PhaseRotation";		errorItem: true;	multiPhase: false	}
+	ListElement { pathSuffix: "/LowBattery";		errorItem: false;	multiPhase: true;	showOnlyIfMulti: false	}
+	ListElement { pathSuffix: "/HighTemperature";	errorItem: false;	multiPhase: true;	showOnlyIfMulti: false	}
+	ListElement { pathSuffix: "/Overload";			errorItem: false;	multiPhase: true;	showOnlyIfMulti: false	}
+	ListElement { pathSuffix: "/Ripple";			errorItem: false;	multiPhase: true;	showOnlyIfMulti: false	}
+	ListElement { pathSuffix: "/VoltageSensor";		errorItem: true;	multiPhase: false;	showOnlyIfMulti: true	}
+	ListElement { pathSuffix: "/TemperatureSensor";	errorItem: true;	multiPhase: false;	showOnlyIfMulti: true	}
+	ListElement { pathSuffix: "/PhaseRotation";		errorItem: true;	multiPhase: false;	showOnlyIfMulti: true	}
 }
