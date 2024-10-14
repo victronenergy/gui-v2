@@ -239,11 +239,6 @@
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
       <translation>Otomatik başlatma devre dışı bırakılacak ve jeneratör yapılandırılan koşullara göre otomatik olarak başlamayacaktır.</translation>
     </message>
-    <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="46"/>
-      <source>The generator will start and stop based on the configured autostart conditions.</source>
-      <translation>Jeneratör, yapılandırılmış otomatik başlatma koşullarına göre başlayacak ve duracaktır.</translation>
-    </message>
     <message id="controlcard_generator_subcard_button_manual_stop">
       <location filename="../../components/GeneratorManualControlButton.qml" line="34"/>
       <source>Manual Stop</source>
@@ -265,27 +260,27 @@
       <translation>Anahtarlar</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="193"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="74"/>
       <source>Access level</source>
       <translation>Access level</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="198"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="79"/>
       <source>User</source>
       <translation>Kullanıcı</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="81"/>
       <source>User &amp; Installer</source>
       <translation>Kullanıcı &amp; Yükleyici</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="202"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="83"/>
       <source>Superuser</source>
       <translation>Süper Kullanıcı</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="204"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="85"/>
       <source>Service</source>
       <translation>Servis</translation>
     </message>
@@ -385,17 +380,17 @@
       <translation>AC girişinde jeneratör algılanmadı</translation>
     </message>
     <message id="settings_page_run_time_and_service_accumulated_running_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="134"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="140"/>
       <source>Accumulated running time since last test run</source>
       <translation>Son testten  beri birikmiş çalışma süresi</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_next_test_run">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="110"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="116"/>
       <source>Time to next test run</source>
       <translation>Sonraki test zamanı</translation>
     </message>
     <message id="settings_page_run_time_and_service_running_now">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="127"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="133"/>
       <source>Running now</source>
       <translation>Şimdi çalışıyor</translation>
     </message>
@@ -410,7 +405,7 @@
       <translation>Jeneratörü başlat</translation>
     </message>
     <message id="settings_page_run_time_and_service_daily_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="64"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="70"/>
       <source>Daily run time</source>
       <translation>Günlük çalışma süresi</translation>
     </message>
@@ -1241,57 +1236,57 @@
       <translation>Tekrar tara</translation>
     </message>
     <message id="settings_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="239"/>
       <source>SSH on LAN</source>
       <translation>LAN'daki SSH</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="248"/>
       <source>Remote support</source>
       <translation>Uzaktan Destek</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="255"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="254"/>
       <source>Remote support tunnel</source>
       <translation>Uzaktan destek tüneli</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="263"/>
       <source>Remote support IP and port</source>
       <translation>Uzaktan destek IP'si ve bağlantı noktası</translation>
     </message>
     <message id="settings_reboot_now">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="300"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="299"/>
       <source>Reboot now</source>
       <translation>Yeniden başlat</translation>
     </message>
     <message id="settings_audible_alarm">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="326"/>
       <source>Audible alarm</source>
       <translation>Sesli alarm</translation>
     </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="346"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="345"/>
       <source>Demo mode</source>
       <translation>Demo modu</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="355"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="354"/>
       <source>ESS demo</source>
       <translation>ESS demosu</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="357"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="356"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>Tekne/Karavan demosu 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="359"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="358"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>Tekne/Karavan demosu 2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="369"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="368"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>Demo modunun başlatılması bazı ayarları değiştirecek ve kullanıcı arayüzü bir süreliğine yanıt vermeyecektir.</translation>
     </message>
@@ -1341,44 +1336,38 @@
       <translation>Durgun saatler bitiş zamanı</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="311"/>
+      <location filename="../../components/PageGensetModel.qml" line="303"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="105"/>
       <source>Run time and service</source>
       <translation>Çalışma süresi ve servis</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_daily_run_time_counters">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="84"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="90"/>
       <source>Reset daily run time counters</source>
       <translation>Günlük çalışma süresi sayaçlarını sıfırlayın</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="93"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="99"/>
       <source>The daily runtime counter has been reset</source>
       <translation>Günlük çalışma süresi sayacı sıfırlandı</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_cant_reset_while_running">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="102"/>
       <source>It is not possible to modify the counters while the generator is running</source>
       <translation>Jeneratör çalışırken sayaçları değiştiremezsiniz</translation>
     </message>
-    <message id="page_settings_run_time_and_service_total_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="42"/>
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="51"/>
-      <source>Generator total run time (hours)</source>
-      <translation>Jeneratör toplam çalışma süresi (saat)</translation>
-    </message>
     <message id="page_settings_generator_service_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="153"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="159"/>
       <source>Generator service interval (hours)</source>
       <translation>Jeneratör servis aralığı (saat)</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_time_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="161"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="167"/>
       <source>Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer.</source>
       <translation>Servis zaman aralığı %1h olarak ayarlandı. Servis zamanlayıcısını sıfırlamak için 'Servis zamanlayıcısını sıfırla' düğmesini kullanın.</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_service_timer">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="172"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
       <source>Reset service timer</source>
       <translation>Servis zamanlayıcısını sıfırla</translation>
     </message>
@@ -2641,21 +2630,6 @@ Documentation at https://ve3.nl/vol</translation>
       <source>Chart</source>
       <translation>Grafik</translation>
     </message>
-    <message id="charger_history_last_7_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="52"/>
-      <source>Last 7 days</source>
-      <translation>Son 7 gün</translation>
-    </message>
-    <message id="charger_history_last_14_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="54"/>
-      <source>Last 14 days</source>
-      <translation>Son 14 gün</translation>
-    </message>
-    <message id="charger_history_last_30_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="56"/>
-      <source>Last 30 days</source>
-      <translation>Son 30 gün</translation>
-    </message>
     <message id="listitems_alarm_level_warning">
       <location filename="../../components/listitems/ListAlarm.qml" line="21"/>
       <source>Warning</source>
@@ -3457,12 +3431,12 @@ Documentation at https://ve3.nl/vol</translation>
       <translation>Çıkış</translation>
     </message>
     <message id="alternator_wakespeed_field_drive">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="67"/>
       <source>Field drive</source>
       <translation>Field drive</translation>
     </message>
     <message id="alternator_wakespeed_engine_speed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="81"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="82"/>
       <source>Engine speed</source>
       <translation>Motor hızı</translation>
     </message>
@@ -3915,17 +3889,17 @@ Documentation at https://ve3.nl/vol</translation>
       <translation>Basınç</translation>
     </message>
     <message id="temperature_offset">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="39"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="43"/>
       <source>Offset</source>
       <translation>Ofset</translation>
     </message>
     <message id="temperature_scale">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="52"/>
       <source>Scale</source>
       <translation>Ölçek</translation>
     </message>
     <message id="temperature_sensor_voltage">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="58"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="62"/>
       <source>Sensor voltage</source>
       <translation>Sensör voltajı</translation>
     </message>
@@ -4998,11 +4972,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>Timed run</source>
       <translation>çalışmış süreç</translation>
     </message>
-    <message id="controlcard_generator_startdialog_description">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="71"/>
-      <source>Generator will stop after the set time, unless autostart condition is met, in which case it will keep running.</source>
-      <translation>Jeneratör, otomatik başlatma koşulu karşılanmadığı sürece ayarlanan süreden sonra duracaktır, bu durumda çalışmaya devam edecektir.</translation>
-    </message>
     <message id="controlcard_generator_stopdialog_stop_now">
       <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="13"/>
       <source>Stop Now</source>
@@ -5194,7 +5163,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Erişim seviyesi için kilitli ayarı</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="211"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="92"/>
       <source>Incorrect password</source>
       <translation>Yanlış parola</translation>
     </message>
@@ -5820,16 +5789,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>High</source>
       <translation>Yüksek</translation>
     </message>
-    <message id="temperature_type_fridge">
-      <location filename="../../data/EnvironmentInputs.qml" line="22"/>
-      <source>Fridge</source>
-      <translation>Buzdolabı</translation>
-    </message>
-    <message id="temperature_type_generic">
-      <location filename="../../data/EnvironmentInputs.qml" line="25"/>
-      <source>Generic</source>
-      <translation>Jenerik</translation>
-    </message>
     <message id="ess_state_keep_batteries_charged">
       <location filename="../../data/Ess.qml" line="32"/>
       <source>Keep batteries charged</source>
@@ -6212,37 +6171,37 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Boşaltma katına gitme süresi ayarının değiştirilmesinin röle menüsündeki Düşük şarj durumu ayarını da değiştirdiğini unutmayın.</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="105"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
       <source>Operation time</source>
       <translation>Operasyon zamanı</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="121"/>
       <source>Charged Ah</source>
       <translation>Ücretli Ah</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="122"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="130"/>
       <source>Cycles started</source>
       <translation>Döngüler başladı</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="137"/>
       <source>Cycles completed</source>
       <translation>Döngüler tamamlanan</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="144"/>
       <source>Number of power-ups</source>
       <translation>ilk-acilis sayısı</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="143"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="151"/>
       <source>Number of deep discharges</source>
       <translation>Derin deşarj sayısı</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="162"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="170"/>
       <source>Charge cycle history</source>
       <translation>Şarj döngüsü geçmişi</translation>
     </message>
@@ -6252,7 +6211,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Dolu olduğunda sensör değeri</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="143"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
       <source>Time to service</source>
       <translation>Hizmet süresi</translation>
     </message>
@@ -6269,7 +6228,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Bu seçeneği kullanırken jeneratörün AC giriş %1'e bağlı olmadığından emin olun</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_timer_has_been_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="184"/>
       <source>The service timer has been reset</source>
       <translation>Servis zamanlayıcısı sıfırlandı</translation>
     </message>
@@ -6387,12 +6346,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Geliştir (Victron intern)</translation>
     </message>
     <message id="dialoglayer_rebooting">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="312"/>
       <source>Rebooting...</source>
       <translation>Yeniden başlatılıyor...</translation>
     </message>
     <message id="settings_enable_status_leds">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="339"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="338"/>
       <source>Enable status LEDs</source>
       <translation>Durum LED'lerini etkinleştirin</translation>
     </message>
@@ -6703,12 +6662,12 @@ Bu menünün sadece RS485 üzerinden bağlı Carlo Gavazzi sayaçlarını göste
       <translation>Motor RPM</translation>
     </message>
     <message id="devicelist_motordrive_motortemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="26"/>
       <source>Motor Temperature</source>
       <translation>Motor sıcaklığı</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="50"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="55"/>
       <source>Controller Temperature</source>
       <translation>Kontrolör sıcaklığı</translation>
     </message>
@@ -7172,7 +7131,7 @@ See documentation for further information.</oldsource>
     <message id="application_content_touch_input_disabled">
       <location filename="../../ApplicationContent.qml" line="87"/>
       <source>Touch input disabled</source>
-      <translation>Dokunma Girişi devre dışı</translation>
+      <translation>Dokunmatik Girişi devre dışı</translation>
     </message>
     <message id="notifications_acknowledge_alerts">
       <location filename="../../components/StatusBar.qml" line="127"/>
@@ -7200,68 +7159,63 @@ See documentation for further information.</oldsource>
       <source>Connection information</source>
       <translation>Bağlantı bilgileri</translation>
     </message>
-    <message id="settings_security_profile">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="79"/>
-      <source>Security profile</source>
-      <translation>Güvenlik Profili</translation>
-    </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="108"/>
       <source>Please select...</source>
       <translation>Lütfen seçiniz...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="112"/>
       <source>Secured</source>
       <translation>Güvenli</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="115"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Parola korumalı ve ağ iletişimi şifrelenmiştir</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="120"/>
       <source>Weak</source>
       <translation>Zayıf</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="123"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Parola korumalı, ancak ağ iletişimi şifrelenmemiş</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="128"/>
       <source>Unsecured</source>
       <translation>Teminatsız</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="131"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Şifre yok ve ağ iletişimi şifrelenmemiş</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="224"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>Şifrenin en az 8 karakter uzunluğunda olması gerekir</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="171"/>
       <source>Select 'Secured' profile?</source>
       <translation>'Güvenli' profili seçin?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="150"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="174"/>
       <source>Select 'Weak' profile?</source>
       <translation>'Zayıf' profili mi seçtiniz?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="177"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>'Güvencesiz' profili seçin?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="161"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="185"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -7272,26 +7226,26 @@ See documentation for further information.</oldsource>
 - Güvensiz ayarlar etkinleştirilemez</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="188"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Yerel ağ hizmetleri parola korumalıdır
 - Yerel web sitelerine şifrelenmemiş erişim de etkinleştirilmiştir (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="191"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Yerel ağ hizmetlerinin parolaya ihtiyacı yoktur
 - Yerel web sitelerine şifrelenmemiş erişim de etkinleştirilmiştir (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="217"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="216"/>
       <source>Root password</source>
       <translation>Kök parola</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="270"/>
       <source>Logout</source>
       <translation>Çıkış Yap</translation>
     </message>
@@ -7301,17 +7255,17 @@ See documentation for further information.</oldsource>
       <translation>Şimdi çıkış yap</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="285"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="284"/>
       <source>Log out?</source>
       <translation>Oturumu kapatayım mı?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="287"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="286"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Bu işlem tüm yerel ağ bağlantılarını kesecektir.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="289"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="288"/>
       <source>Log out</source>
       <translation>Çıkış Yap</translation>
     </message>
@@ -7349,7 +7303,7 @@ See documentation for further information.</oldsource>
       <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="159"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
-      <translation>Evet, aboneliğimi iptal et</translation>
+      <translation>Evet</translation>
     </message>
     <message id="number_field_input_too_long">
       <location filename="../../components/listitems/ListIntField.qml" line="21"/>
@@ -7387,33 +7341,28 @@ See documentation for further information.</oldsource>
       <source>Heatsink temperature</source>
       <translation>Soğutucu sıcaklığı</translation>
     </message>
-    <message id="page_genset_model_bms_settings">
-      <location filename="../../components/PageGensetModel.qml" line="323"/>
-      <source>BMS Settings</source>
-      <translation>BMS ayarları</translation>
-    </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="361"/>
+      <location filename="../../components/PageGensetModel.qml" line="353"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>Şarj voltajı şu anda BMS tarafından kontrol edilmektedir.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="367"/>
+      <location filename="../../components/PageGensetModel.qml" line="359"/>
       <source>Charge current limit</source>
       <translation>Şarj Akımı Sınırı</translation>
     </message>
     <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="377"/>
+      <location filename="../../components/PageGensetModel.qml" line="369"/>
       <source>BMS Controlled</source>
       <translation>BMS Kontrollü</translation>
     </message>
     <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="383"/>
+      <location filename="../../components/PageGensetModel.qml" line="375"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>Bir BMS mevcut olduğunda BMS kontrolü otomatik olarak etkinleştirilir. Sistem yapılandırması değişirse veya mevcut BMS yoksa sıfırlayın.</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_time_disabled">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="165"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="171"/>
       <source>Service timer disabled.</source>
       <translation>Servis zamanlayıcısı devre dışı.</translation>
     </message>
@@ -7511,7 +7460,7 @@ Lütfen bekleyin veya internet bağlantınızı kontrol edin.</translation>
     <message id="settings_tailscale_enable">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="164"/>
       <source>Enable Tailscale</source>
-      <translation>Kuyruk Ölçeğini Etkinleştir</translation>
+      <translation>Tailscale Ölçeğini Etkinleştir</translation>
     </message>
     <message id="settings_tailscale_machinename">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="199"/>
@@ -7578,7 +7527,7 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
     <message id="settings_tailscale_advanced_custom_tailscale_up_arguments">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="305"/>
       <source>Custom "tailscale up" arguments</source>
-      <translation>Özel "kuyruk ölçeği büyütme" argümanları</translation>
+      <translation>Özel "tailscale ölçeği büyütme" argümanları</translation>
     </message>
     <message id="settings_tailscale_advanced_custom_server_url">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="316"/>
@@ -7607,7 +7556,7 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
       <translation>Açık, ancak hizmet yok (500 kbit/s)</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="231"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="230"/>
       <source>Root password changed to %1</source>
       <translation>Kök parolası %1 olarak değiştirildi</translation>
     </message>
@@ -7666,6 +7615,53 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
       <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="13"/>
       <source>Essential Loads</source>
       <translation>Temel Yükler</translation>
+    </message>
+    <message id="controlcard_generator_autostart_conditions">
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="46"/>
+      <source>Start and stop the generator based on the configured autostart conditions.</source>
+      <oldsource>The generator will start and stop based on the configured autostart conditions.</oldsource>
+      <translation>Yapılandırılmış otomatik başlatma koşullarına göre jeneratörü başlatın ve durdurun.</translation>
+    </message>
+    <message id="page_genset_model_dc_genset_settings">
+      <location filename="../../components/PageGensetModel.qml" line="315"/>
+      <source>DC genset settings</source>
+      <translation>DC jeneratör ayarları</translation>
+    </message>
+    <message id="alternator_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="32"/>
+      <source>Alternator Temperature</source>
+      <translation>Alternatör Sıcaklığı</translation>
+    </message>
+    <message id="engine_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="90"/>
+      <source>Engine Temperature</source>
+      <translation>Motor Sıcaklığı</translation>
+    </message>
+    <message id="page_settings_run_time_and_service_total_run_time">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="48"/>
+      <source>Total run time</source>
+      <translation>Toplam çalışma süresi</translation>
+    </message>
+    <message id="settings_network_security_profile">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="103"/>
+      <source>Network security profile</source>
+      <translation>Ağ Güvenliği Profili</translation>
+    </message>
+    <message id="charger_history_last_x_days">
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="62"/>
+      <source>Last %1 days</source>
+      <extracomment>%1 = number of days of solar history that will be shown</extracomment>
+      <translation>Son %1 gün</translation>
+    </message>
+    <message id="generator_start_dialog_will_stop_in_x">
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="70"/>
+      <source>Generator will stop in %1 unless autostart conditions are enabled that keep it running.</source>
+      <translation>Çalışmaya devam etmesini sağlayan otomatik başlatma koşulları etkinleştirilmediği sürece jeneratör %1'de duracaktır.</translation>
+    </message>
+    <message id="generator_start_dialog_will_run_until_manually_stopped">
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="72"/>
+      <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
+      <translation>Jeneratör, çalışmasını sağlayan otomatik başlatma koşulları etkinleştirilmediği sürece manuel olarak durdurulana kadar çalışacaktır.</translation>
     </message>
   </context>
   <context>
@@ -9280,7 +9276,7 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="101"/>
       <source>AC voltage too low</source>
-      <translation>AC gerilimi çok düşük</translation>
+      <translation>AC voltaj çok düşük</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="102"/>
@@ -10100,6 +10096,44 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="828"/>
       <source>Processor failure</source>
       <translation>İşlemci arızası</translation>
+    </message>
+  </context>
+  <context>
+    <name>EnvironmentInputs</name>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <source>Battery</source>
+      <translation>Akü</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <source>Fridge</source>
+      <translation>Buzdolabı</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <source>Generic</source>
+      <translation>Jenerik</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
+      <source>Room</source>
+      <translation>Oda</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
+      <source>Outdoor</source>
+      <translation>Dış mekan</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
+      <source>Water Heater</source>
+      <translation>Su ısıtıcı</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
+      <source>Freezer</source>
+      <translation>Dondurucu</translation>
     </message>
   </context>
 </TS>

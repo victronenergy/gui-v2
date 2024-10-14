@@ -239,11 +239,6 @@
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
       <translation>Funkce Autostart bude zakázána a generátor se nebude automaticky spouštět na základě nakonfigurovaných podmínek.</translation>
     </message>
-    <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="46"/>
-      <source>The generator will start and stop based on the configured autostart conditions.</source>
-      <translation>Generátor se spustí a zastaví na základě nakonfigurovaných podmínek automatického spuštění.</translation>
-    </message>
     <message id="controlcard_generator_subcard_button_manual_stop">
       <location filename="../../components/GeneratorManualControlButton.qml" line="34"/>
       <source>Manual Stop</source>
@@ -265,27 +260,27 @@
       <translation>Přepínače</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="193"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="74"/>
       <source>Access level</source>
       <translation>Úroveň přístupu</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="198"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="79"/>
       <source>User</source>
       <translation>Uživatel</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="81"/>
       <source>User &amp; Installer</source>
       <translation>Uživatel a technik</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="202"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="83"/>
       <source>Superuser</source>
       <translation>Superuživatel</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="204"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="85"/>
       <source>Service</source>
       <translation>Servis</translation>
     </message>
@@ -385,17 +380,17 @@
       <translation>Na AC vstupu není detekován generátor</translation>
     </message>
     <message id="settings_page_run_time_and_service_accumulated_running_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="134"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="140"/>
       <source>Accumulated running time since last test run</source>
       <translation>Celková doba chodu od posledního testu</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_next_test_run">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="110"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="116"/>
       <source>Time to next test run</source>
       <translation>Doba do dalšího testu</translation>
     </message>
     <message id="settings_page_run_time_and_service_running_now">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="127"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="133"/>
       <source>Running now</source>
       <translation>Nyní v chodu</translation>
     </message>
@@ -410,7 +405,7 @@
       <translation>Spustit generátor</translation>
     </message>
     <message id="settings_page_run_time_and_service_daily_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="64"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="70"/>
       <source>Daily run time</source>
       <translation>Doba chodu za den</translation>
     </message>
@@ -1241,57 +1236,57 @@
       <translation>Znovu vyhledat</translation>
     </message>
     <message id="settings_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="239"/>
       <source>SSH on LAN</source>
       <translation>SSH na LAN</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="248"/>
       <source>Remote support</source>
       <translation>Vzdálená podpora</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="255"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="254"/>
       <source>Remote support tunnel</source>
       <translation>Tunel vzdálené podpory</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="263"/>
       <source>Remote support IP and port</source>
       <translation>IP a port vzdálené podpory</translation>
     </message>
     <message id="settings_reboot_now">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="300"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="299"/>
       <source>Reboot now</source>
       <translation>Restartovat nyní</translation>
     </message>
     <message id="settings_audible_alarm">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="326"/>
       <source>Audible alarm</source>
       <translation>Akustický alarm</translation>
     </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="346"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="345"/>
       <source>Demo mode</source>
       <translation>Demo režim</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="355"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="354"/>
       <source>ESS demo</source>
       <translation>Demo ESS</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="357"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="356"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>Demo pro loď / obytné auto 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="359"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="358"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>Demo pro loď / obytné auto 2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="369"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="368"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>Spuštění demo režimu změní některá nastavení a uživatelské rozhraní nebude v dané chvíli reagovat.</translation>
     </message>
@@ -1341,44 +1336,38 @@
       <translation>Koncový čas nočního klidu</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="311"/>
+      <location filename="../../components/PageGensetModel.qml" line="303"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="105"/>
       <source>Run time and service</source>
       <translation>Doba provozu a servis</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_daily_run_time_counters">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="84"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="90"/>
       <source>Reset daily run time counters</source>
       <translation>Resetovat čítače času denního chodu</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="93"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="99"/>
       <source>The daily runtime counter has been reset</source>
       <translation>Čítač denního chodu byl resetován</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_cant_reset_while_running">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="96"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="102"/>
       <source>It is not possible to modify the counters while the generator is running</source>
       <translation>Není možné upravit čítače, pokud je generátor v chodu</translation>
     </message>
-    <message id="page_settings_run_time_and_service_total_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="42"/>
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="51"/>
-      <source>Generator total run time (hours)</source>
-      <translation>Celková doba chodu generátoru (hodiny)</translation>
-    </message>
     <message id="page_settings_generator_service_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="153"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="159"/>
       <source>Generator service interval (hours)</source>
       <translation>Servisní interval generátoru (v hodinách)</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_time_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="161"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="167"/>
       <source>Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer.</source>
       <translation>Servisní časový interval nastaven na %1h. Tlačítkem "Resetovat servisní časovač" resetujete servisní časovač.</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_service_timer">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="172"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
       <source>Reset service timer</source>
       <translation>Resetování servisního časovače</translation>
     </message>
@@ -2641,21 +2630,6 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <source>Chart</source>
       <translation>Graf</translation>
     </message>
-    <message id="charger_history_last_7_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="52"/>
-      <source>Last 7 days</source>
-      <translation>Posledních 7 dní</translation>
-    </message>
-    <message id="charger_history_last_14_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="54"/>
-      <source>Last 14 days</source>
-      <translation>Posledních 14 dní</translation>
-    </message>
-    <message id="charger_history_last_30_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="56"/>
-      <source>Last 30 days</source>
-      <translation>Posledních 30 dní</translation>
-    </message>
     <message id="listitems_alarm_level_warning">
       <location filename="../../components/listitems/ListAlarm.qml" line="21"/>
       <source>Warning</source>
@@ -3457,12 +3431,12 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Výstup</translation>
     </message>
     <message id="alternator_wakespeed_field_drive">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="67"/>
       <source>Field drive</source>
       <translation>Polní pohon</translation>
     </message>
     <message id="alternator_wakespeed_engine_speed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="81"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="82"/>
       <source>Engine speed</source>
       <translation>Otáčky motoru</translation>
     </message>
@@ -3915,17 +3889,17 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Tlak</translation>
     </message>
     <message id="temperature_offset">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="39"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="43"/>
       <source>Offset</source>
       <translation>Korekce</translation>
     </message>
     <message id="temperature_scale">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="52"/>
       <source>Scale</source>
       <translation>Měřítko</translation>
     </message>
     <message id="temperature_sensor_voltage">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="58"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="62"/>
       <source>Sensor voltage</source>
       <translation>Napětí snímače</translation>
     </message>
@@ -4998,11 +4972,6 @@ Chcete pokračovat?</translation>
       <source>Timed run</source>
       <translation>Časovaný běh</translation>
     </message>
-    <message id="controlcard_generator_startdialog_description">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="71"/>
-      <source>Generator will stop after the set time, unless autostart condition is met, in which case it will keep running.</source>
-      <translation>Generátor se po uplynutí nastaveného času zastaví, pokud není splněna podmínka autostartu, v takovém případě bude pokračovat v provozu.</translation>
-    </message>
     <message id="controlcard_generator_stopdialog_stop_now">
       <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="13"/>
       <source>Stop Now</source>
@@ -5194,7 +5163,7 @@ Chcete pokračovat?</translation>
       <translation>Nastavení uzamčené úrovně přístupu</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="211"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="92"/>
       <source>Incorrect password</source>
       <translation>Chybné heslo</translation>
     </message>
@@ -5820,16 +5789,6 @@ Chcete pokračovat?</translation>
       <source>High</source>
       <translation>Vysoko</translation>
     </message>
-    <message id="temperature_type_fridge">
-      <location filename="../../data/EnvironmentInputs.qml" line="22"/>
-      <source>Fridge</source>
-      <translation>Lednička</translation>
-    </message>
-    <message id="temperature_type_generic">
-      <location filename="../../data/EnvironmentInputs.qml" line="25"/>
-      <source>Generic</source>
-      <translation>Obecné</translation>
-    </message>
     <message id="ess_state_keep_batteries_charged">
       <location filename="../../data/Ess.qml" line="32"/>
       <source>Keep batteries charged</source>
@@ -6212,37 +6171,37 @@ Chcete pokračovat?</translation>
       <translation>Všimněte si, že změnou nastavení dolní meze vybíjení Time-to-go se změní také nastavení Low state-of-charge (Nízký stav nabití) v nabídce relé.</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="105"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
       <source>Operation time</source>
       <translation>Doba provozu</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="121"/>
       <source>Charged Ah</source>
       <translation>Nabité Ah</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="122"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="130"/>
       <source>Cycles started</source>
       <translation>Zahájení cyklů</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="137"/>
       <source>Cycles completed</source>
       <translation>Dokončené cykly</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="144"/>
       <source>Number of power-ups</source>
       <translation>Počet bonusů</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="143"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="151"/>
       <source>Number of deep discharges</source>
       <translation>Počet hlubokých výbojů</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="162"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="170"/>
       <source>Charge cycle history</source>
       <translation>Historie nabíjecích cyklů</translation>
     </message>
@@ -6252,7 +6211,7 @@ Chcete pokračovat?</translation>
       <translation>Hodnota čidla, když je nádrž plná</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="143"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
       <source>Time to service</source>
       <translation>Čas do servisu</translation>
     </message>
@@ -6269,7 +6228,7 @@ Chcete pokračovat?</translation>
       <translation>Při použití této možnosti se ujistěte, že generátor není připojen ke vstupu AC %1.</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_timer_has_been_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="184"/>
       <source>The service timer has been reset</source>
       <translation>Časovač služby byl vynulován</translation>
     </message>
@@ -6387,12 +6346,12 @@ Chcete pokračovat?</translation>
       <translation>Vyvíjet (interní Victron)</translation>
     </message>
     <message id="dialoglayer_rebooting">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="312"/>
       <source>Rebooting...</source>
       <translation>Restartuji...</translation>
     </message>
     <message id="settings_enable_status_leds">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="339"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="338"/>
       <source>Enable status LEDs</source>
       <translation>Povolení stavových LED diod</translation>
     </message>
@@ -6703,12 +6662,12 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <translation>Otáčky motoru</translation>
     </message>
     <message id="devicelist_motordrive_motortemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="26"/>
       <source>Motor Temperature</source>
       <translation>Teplota motoru</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="50"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="55"/>
       <source>Controller Temperature</source>
       <translation>Teplota ovladače</translation>
     </message>
@@ -7195,68 +7154,63 @@ See documentation for further information.</oldsource>
       <source>Connection information</source>
       <translation>Informace o připojení</translation>
     </message>
-    <message id="settings_security_profile">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="79"/>
-      <source>Security profile</source>
-      <translation>Bezpečnostní profil</translation>
-    </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="108"/>
       <source>Please select...</source>
       <translation>Vyberte prosím...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="112"/>
       <source>Secured</source>
       <translation>Zabezpečeno</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="115"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Chráněno heslem a síťová komunikace je šifrovaná.</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="120"/>
       <source>Weak</source>
       <translation>Slabé</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="123"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Chráněno heslem, ale síťová komunikace není šifrována.</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="128"/>
       <source>Unsecured</source>
       <translation>Nezajištěné</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="131"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Žádné heslo a síťová komunikace není šifrovaná.</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="224"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>Heslo musí mít alespoň 8 znaků</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="171"/>
       <source>Select 'Secured' profile?</source>
       <translation>Zvolit profil "Zabezpečený"?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="150"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="174"/>
       <source>Select 'Weak' profile?</source>
       <translation>Zvolit profil "Slabý"?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="177"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Zvolit profil "Nezajištěný"?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="161"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="185"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -7267,26 +7221,26 @@ See documentation for further information.</oldsource>
 - Nezabezpečená nastavení nelze povolit</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="188"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Místní síťové služby jsou chráněny heslem
 - Je povolen i nešifrovaný přístup k místním webovým stránkám (HTTP/HTTPS).</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="191"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Místní síťové služby nepotřebují heslo
 - Je povolen i nešifrovaný přístup k místním webovým stránkám (HTTP/HTTPS).</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="217"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="216"/>
       <source>Root password</source>
       <translation>Kořenové heslo</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="270"/>
       <source>Logout</source>
       <translation>Odhlásit se</translation>
     </message>
@@ -7296,17 +7250,17 @@ See documentation for further information.</oldsource>
       <translation>Odhlásit se</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="285"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="284"/>
       <source>Log out?</source>
       <translation>Odhlásit se?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="287"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="286"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Tím se odpojí všechna místní síťová připojení.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="289"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="288"/>
       <source>Log out</source>
       <translation>Odhlásit se</translation>
     </message>
@@ -7382,33 +7336,28 @@ See documentation for further information.</oldsource>
       <source>Heatsink temperature</source>
       <translation>Teplota chladiče</translation>
     </message>
-    <message id="page_genset_model_bms_settings">
-      <location filename="../../components/PageGensetModel.qml" line="323"/>
-      <source>BMS Settings</source>
-      <translation>Nastavení BMS</translation>
-    </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="361"/>
+      <location filename="../../components/PageGensetModel.qml" line="353"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>Nabíjecí napětí je v současné době řízeno systémem BMS.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="367"/>
+      <location filename="../../components/PageGensetModel.qml" line="359"/>
       <source>Charge current limit</source>
       <translation>Omezení nabíjecího proudu</translation>
     </message>
     <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="377"/>
+      <location filename="../../components/PageGensetModel.qml" line="369"/>
       <source>BMS Controlled</source>
       <translation>Řízeno BMS</translation>
     </message>
     <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="383"/>
+      <location filename="../../components/PageGensetModel.qml" line="375"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>Kontrola BMS se aktivuje automaticky, když je BMS přítomný. Vynulujte, pokud se konfigurace systému změnila nebo žádný BMS není k dispozici.</translation>
     </message>
     <message id="page_settings_run_time_and_service_service_time_disabled">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="165"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="171"/>
       <source>Service timer disabled.</source>
       <translation>Časovač služby je vypnutý.</translation>
     </message>
@@ -7602,7 +7551,7 @@ Po přidání/povolení nové sítě je třeba ji jednou schválit v konzole spr
       <translation>Nahoře, ale bez služeb (500 kbit/s)</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="231"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="230"/>
       <source>Root password changed to %1</source>
       <translation>Heslo kořene změněno na %1</translation>
     </message>
@@ -7661,6 +7610,53 @@ Po přidání/povolení nové sítě je třeba ji jednou schválit v konzole spr
       <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="13"/>
       <source>Essential Loads</source>
       <translation>Základní zatížení</translation>
+    </message>
+    <message id="controlcard_generator_autostart_conditions">
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="46"/>
+      <source>Start and stop the generator based on the configured autostart conditions.</source>
+      <oldsource>The generator will start and stop based on the configured autostart conditions.</oldsource>
+      <translation>Spouštění a zastavování generátoru na základě nakonfigurovaných podmínek automatického spouštění.</translation>
+    </message>
+    <message id="page_genset_model_dc_genset_settings">
+      <location filename="../../components/PageGensetModel.qml" line="315"/>
+      <source>DC genset settings</source>
+      <translation>Nastavení stejnosměrné elektrocentrály</translation>
+    </message>
+    <message id="alternator_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="32"/>
+      <source>Alternator Temperature</source>
+      <translation>Teplota alternátoru</translation>
+    </message>
+    <message id="engine_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="90"/>
+      <source>Engine Temperature</source>
+      <translation>Teplota motoru</translation>
+    </message>
+    <message id="page_settings_run_time_and_service_total_run_time">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="48"/>
+      <source>Total run time</source>
+      <translation>Celková doba chodu</translation>
+    </message>
+    <message id="settings_network_security_profile">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="103"/>
+      <source>Network security profile</source>
+      <translation>Profil zabezpečení sítě</translation>
+    </message>
+    <message id="charger_history_last_x_days">
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="62"/>
+      <source>Last %1 days</source>
+      <extracomment>%1 = number of days of solar history that will be shown</extracomment>
+      <translation>Posledních %1 dní</translation>
+    </message>
+    <message id="generator_start_dialog_will_stop_in_x">
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="70"/>
+      <source>Generator will stop in %1 unless autostart conditions are enabled that keep it running.</source>
+      <translation>Generátor se zastaví v %1, pokud nejsou povoleny podmínky automatického spuštění, které jej udržují v chodu.</translation>
+    </message>
+    <message id="generator_start_dialog_will_run_until_manually_stopped">
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="72"/>
+      <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
+      <translation>Generátor poběží, dokud nebude ručně zastaven, pokud nejsou povoleny podmínky automatického spuštění, které jej udržují v chodu.</translation>
     </message>
   </context>
   <context>
@@ -10095,6 +10091,44 @@ Po přidání/povolení nové sítě je třeba ji jednou schválit v konzole spr
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="828"/>
       <source>Processor failure</source>
       <translation>Selhání procesoru</translation>
+    </message>
+  </context>
+  <context>
+    <name>EnvironmentInputs</name>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <source>Battery</source>
+      <translation>Baterie</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <source>Fridge</source>
+      <translation>Lednička</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <source>Generic</source>
+      <translation>Obecné</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
+      <source>Room</source>
+      <translation>Pokoj</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
+      <source>Outdoor</source>
+      <translation>Venkovní</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
+      <source>Water Heater</source>
+      <translation>Ohřívač vody</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
+      <source>Freezer</source>
+      <translation>Mrazák</translation>
     </message>
   </context>
 </TS>
