@@ -585,10 +585,11 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/dc-in/PageDcMeterHistory.qml
     pages/settings/devicelist/inverter/PageInverter.qml
     pages/settings/devicelist/inverter/PageSolarStats.qml
+    pages/settings/devicelist/rs/PageMultiRs.qml
     pages/settings/devicelist/rs/PageRsAlarms.qml
     pages/settings/devicelist/rs/PageRsAlarmSettings.qml
-    pages/settings/devicelist/rs/PageMultiRs.qml
     pages/settings/devicelist/rs/PageRsSystem.qml
+    pages/settings/devicelist/rs/PageRsSystemAlarms.qml
     pages/settings/devicelist/rs/PageRsSystemDevices.qml
     pages/settings/devicelist/rs/PageRsSystemEss.qml
     pages/settings/devicelist/tank/PageTankAlarm.qml

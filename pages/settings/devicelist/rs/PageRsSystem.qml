@@ -69,6 +69,15 @@ Page {
 			}
 
 			ListNavigationItem {
+				//% "System alarms"
+				text: qsTrId("rssystem_system_alarms")
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemAlarms.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+			}
+
+			ListNavigationItem {
 				text: CommonWords.alarm_setup
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarmSettings.qml",
