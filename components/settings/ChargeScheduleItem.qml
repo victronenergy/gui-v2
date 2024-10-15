@@ -139,8 +139,9 @@ ListNavigationItem {
 					}
 
 					ListTimeSelector {
-						//% "Duration (hh:mm)"
+						//% "Duration"
 						text: qsTrId("cgwacs_battery_schedule_duration")
+						button.text: dataItem.value > 0 ? Utils.secondsToString(dataItem.value) : "--"
 						dataItem.uid: root._scheduleSource + "/Duration"
 						allowed: defaultAllowed && itemEnabled.checked
 						maximumHour: 9999
