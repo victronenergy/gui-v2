@@ -214,12 +214,20 @@ void BackendConnection::reloadPage()
 	}
 }
 
+void BackendConnection::openUrl(const QString &url)
+{
+	const QString s = QStringLiteral("window.open(\"%1\", \"_blank\");").arg(url);
+	const QByteArray ba = s.toLocal8Bit();
+	emscripten_run_script(ba.constData());
+}
+
 #else
 
 void BackendConnection::onNetworkConfigChanged(const QVariant var) { Q_UNUSED(var); }
 void BackendConnection::onReloadPageTimerExpired() {}
 void BackendConnection::securityProtocolChanged() {}
 void BackendConnection::reloadPage() {}
+void BackendConnection::openUrl(const QString &) {}
 
 #endif
 

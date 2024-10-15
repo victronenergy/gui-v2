@@ -77,6 +77,7 @@ QtObject {
 		setMockSettingValue("SystemSetup/AcInput2", 3)
 		setMockSettingValue("SystemSetup/HasAcInLoads", 1)
 		setMockSettingValue("Gui/DemoMode", 1)
+		setMockSettingValue("Gui2/OnBoarding", 1)
 
 		setMockSystemValue("AvailableBatteryServices", '{"default": "Automatic", "nobattery": "No battery monitor", "com.victronenergy.vebus/257": "Quattro 24/3000/70-2x50 on VE.Bus", "com.victronenergy.battery/0": "Lynx Smart BMS 500 on VE.Can"}')
 		setMockSystemValue("AutoSelectedBatteryService", "Lynx Smart BMS 500 on VE.Can")

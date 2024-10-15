@@ -10,14 +10,15 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
+	// Skip the fade and logo animations on WebAssembly as startup speed is more important.
+	property bool showSplashAnimation: Qt.platform.os != "wasm"
+	readonly property bool allPagesLoaded: Global.allPagesLoaded
+
 	color: Theme.color_background_primary
 	visible: Global.splashScreenVisible
 
-	property bool allPagesLoaded: Global.allPagesLoaded
 	onAllPagesLoadedChanged: {
-		if (Qt.platform.os == "wasm") {
-			// skip the fade and logo animations on WebAssembly
-			// as startup speed is more important.
+		if (!showSplashAnimation) {
 			hideSplashView()
 		}
 	}
@@ -62,7 +63,7 @@ Rectangle {
 			}
 		}
 
-		source: Qt.platform.os == "wasm" ? null
+		source: !root.showSplashAnimation ? ""
 			: Theme.colorScheme === Theme.Light
 				? Theme.screenSize === Theme.SevenInch
 				  ? "qrc:/images/gauge_intro_7_matte_white.gif"
@@ -127,8 +128,7 @@ Rectangle {
 	SequentialAnimation {
 		id: initialFadeAnimation
 
-		running: Global.allPagesLoaded && Qt.platform.os != "wasm"
-
+		running: Global.dataManagerLoaded && !welcomeLoader.active && Global.allPagesLoaded && root.showSplashAnimation
 		PropertyAction {
 			target: extraInfoColumn
 			property: "nextOpacity"
@@ -273,5 +273,25 @@ Rectangle {
 				: BackendConnection.mqttClientError === BackendConnection.MqttClient_Mqtt5SpecificError ? qsTrId("splash_view_mqtt5_error")
 				: "")
 		}
+	}
+
+	Loader {
+		id: welcomeLoader
+
+		active: Global.dataManagerLoaded && (onboardingDone.isValid && onboardingDone.value !== 1)
+		anchors.fill: parent
+		sourceComponent: WelcomeView {
+			anchors.centerIn: parent
+		}
+		onLoaded: {
+			// If the welcome screen is shown, force the splash animation to be shown even on wasm
+			// so that there is a nicer transition from the welcome to the main screen.
+			root.showSplashAnimation = true
+		}
+	}
+
+	VeQuickItem {
+		id: onboardingDone
+		uid: Global.dataManagerLoaded ? Global.systemSettings.serviceUid + "/Settings/Gui2/OnBoarding" : ""
 	}
 }

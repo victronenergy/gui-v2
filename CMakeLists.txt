@@ -624,7 +624,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/solar/SolarChargerPage.qml
     pages/solar/SolarDeviceListPage.qml
     pages/solar/SolarHistoryPage.qml
-
     pages/vebusdevice/PageAcSensor.qml
     pages/vebusdevice/PageAcSensors.qml
     pages/vebusdevice/PageVeBusAdvanced.qml
@@ -647,6 +646,8 @@ set (VENUS_QML_MODULE_SOURCES
     pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml
     pages/vebusdevice/VeBusDeviceInfoModel.qml
     pages/vebusdevice/VeBusDeviceKwhCountersModel.qml
+    pages/welcome/WelcomePage.qml
+    pages/welcome/WelcomeView.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${VENUS_QML_MODULE_SOURCES})
@@ -1109,6 +1110,14 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_checkmark_32.svg
         images/icon_close_32.svg
         images/icon_info_32.svg
+        images/welcome-brief.png
+        images/welcome-controls.png
+        images/welcome-dark.png
+        images/welcome-landing.png
+        images/welcome-more.png
+        images/welcome-overview.png
+        images/welcome-qrCode.png
+        images/welcome-units.png
         images/widget_connector_nub_horizontal.svg
         images/widget_connector_nub_vertical.svg
         images/wind.svg
