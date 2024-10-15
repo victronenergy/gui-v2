@@ -71,7 +71,7 @@ Page {
 				device.errorCode <= 0
 						? Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power)
 						  //: %1 = error number
-						  //% "Error: %1"
+						  //% "Error: #%1"
 						: qsTrId("devicelist_solarcharger_error").arg(device.errorCode)
 			]
 			break;
