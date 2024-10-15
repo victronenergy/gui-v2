@@ -172,7 +172,7 @@ QtObject {
 				_productName.setValue("SmartSolar Charger MPPT 100/50")
 				_customName.setValue("My Solar Charger " + deviceInstance)
 				_state.setValue(VenusOS.SolarCharger_State_ExternalControl)
-				_errorCode.setValue(0)
+				_errorCode.setValue(Math.floor(Math.random() * 30))
 				root.setRandomErrors(serviceUid + "/History/Overall")
 			}
 		}
