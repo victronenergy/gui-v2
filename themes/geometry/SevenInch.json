@@ -323,6 +323,10 @@
     "geometry_levelsPage_environment_humidityGauge_gradient_position2": 0.49,
     "geometry_levelsPage_environment_humidityGauge_gradient_position3": 0.9,
 
+    "geometry_welcome_header_bottomMargin": 4,
+    "geometry_welcome_title_bottomMargin": 8,
+    "geometry_welcome_button_spacing": 8,
+
     "geometry_gradientList_bottomMargin": 16,
     "geometry_gradientList_spacing": 4,
     "geometry_viewGradient_height": 28,

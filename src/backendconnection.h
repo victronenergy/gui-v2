@@ -122,6 +122,7 @@ public:
 	Q_INVOKABLE void logout();
 	Q_INVOKABLE void securityProtocolChanged();
 	Q_INVOKABLE void reloadPage();
+	Q_INVOKABLE void openUrl(const QString &url);
 
 	// Move this to some mock data manager when available
 	Q_INVOKABLE void setMockValue(const QString &uid, const QVariant &value);
