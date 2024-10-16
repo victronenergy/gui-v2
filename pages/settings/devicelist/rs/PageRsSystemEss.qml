@@ -11,6 +11,12 @@ Page {
 
 	property string bindPrefix
 
+	VeQuickItem {
+		id: dEssModeItem
+
+		uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
+	}
+
 	GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
@@ -28,6 +34,16 @@ Page {
 				suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
 				to: 100
 				stepSize: 5
+			}
+
+			ListNavigationItem {
+				//% "Dynamic ESS"
+				text: qsTrId("settings_rs_ess_dess")
+				allowed: dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml",
+							{ title: text })
+				}
 			}
 		}
 	}
