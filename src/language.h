@@ -30,7 +30,6 @@ class LanguageModel : public QAbstractListModel
 	Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged FINAL)
 	Q_PROPERTY(QString currentDisplayText READ currentDisplayText NOTIFY currentDisplayTextChanged FINAL)
 	Q_PROPERTY(int count READ rowCount CONSTANT FINAL)
-	Q_PROPERTY(QString unsupportedLanguageMessage READ unsupportedLanguageMessage WRITE setUnsupportedLanguageMessage NOTIFY unsupportedLanguageMessageChanged FINAL)
 
 public:
 	enum Role {
@@ -47,9 +46,6 @@ public:
 	int currentIndex() const;
 	QString currentDisplayText() const;
 
-	QString unsupportedLanguageMessage() const;
-	void setUnsupportedLanguageMessage(const QString &msg);
-
 	Q_INVOKABLE int languageAt(int index) const;
 	Q_INVOKABLE void setFontFamily(const QUrl &fontUrl, const QString &fontFamily);
 
@@ -60,7 +56,6 @@ signals:
 	void currentLanguageChanged();
 	void currentIndexChanged();
 	void currentDisplayTextChanged();
-	void unsupportedLanguageMessageChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -79,7 +74,6 @@ private:
 
 	QHash<int, QByteArray> m_roleNames;
 	QList<LanguageData> m_languages;
-	QString m_unsupportedLanguageMessage;
 	int m_currentIndex = -1;
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
 };
@@ -91,6 +85,7 @@ class Language : public QObject
 	QML_SINGLETON
 	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage NOTIFY currentLanguageChanged FINAL)
 	Q_PROPERTY(QUrl fontFileUrl READ fontFileUrl NOTIFY fontFileUrlChanged FINAL)
+	Q_PROPERTY(QString fontUrlPrefix READ fontUrlPrefix WRITE setFontUrlPrefix NOTIFY fontUrlPrefixChanged FINAL)
 
 public:
 	static Language* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
@@ -98,6 +93,8 @@ public:
 	Language& operator=(const Victron::VenusOS::Language&) = delete;
 
 	Q_ENUM(QLocale::Language)
+
+	void init();
 
 	Q_INVOKABLE void retranslate(); // triggers world binding re-evaluation
 
@@ -110,11 +107,14 @@ public:
 	Q_INVOKABLE bool setCurrentLanguage(QLocale::Language language);
 
 	QUrl fontFileUrl() const;
+	QString fontUrlPrefix() const;
+	void setFontUrlPrefix(const QString &prefix);
 
 Q_SIGNALS:
 	void languageChangeFailed();
 	void currentLanguageChanged();
 	void fontFileUrlChanged();
+	void fontUrlPrefixChanged();
 
 private:
 	explicit Language(QQmlEngine* engine);
@@ -123,6 +123,7 @@ private:
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
 	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
 	QUrl m_fontFileUrl;
+	QString m_fontUrlPrefix;
 };
 
 } /* VenusOS */
