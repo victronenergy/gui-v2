@@ -221,6 +221,14 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 
+EM_JS(const char *, getLocationHrefUtf8, (), {
+    let locationString = location.href;
+    let length = lengthBytesUTF8(locationString) + 1;
+    let locationUtf8 = _malloc(length);
+    stringToUTF8(locationString, locationUtf8, length);
+    return locationUtf8;
+});
+
 EM_JS(int, getWindowInnerWidth, (), {
   return window.innerWidth;
 });
@@ -307,7 +315,17 @@ int main(int argc, char *argv[])
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
 	/* Force construction of translator */
-	Victron::VenusOS::Language::create();
+	Victron::VenusOS::Language *languageLoader = Victron::VenusOS::Language::create();
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	const QUrl currentLocation(QString::fromUtf8(getLocationHrefUtf8()));
+	const QString fontUrlPrefix = currentLocation.host().contains(QStringLiteral("vrm.victronenergy.com"))
+		? QStringLiteral("https://updates.victronenergy.com/fonts/") // VRM specific fonts location
+		: QStringLiteral("%1://%2%3/fonts/")
+			.arg(currentLocation.scheme(),
+				currentLocation.host(),
+				currentLocation.port() >= 0 ? QStringLiteral(":%1").arg(currentLocation.port()) : QString());
+	languageLoader->setFontUrlPrefix(fontUrlPrefix);
+#endif
 
 	/* Force construction of fps counter */
 	Victron::VenusOS::FrameRateModel* fpsCounter = Victron::VenusOS::FrameRateModel::create();

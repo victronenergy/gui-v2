@@ -88,6 +88,7 @@ Page {
 				currentIndex: optionModel.currentIndex
 				secondaryText: optionModel.currentDisplayText
 				popDestination: undefined // don't pop page automatically.
+				updateCurrentIndexOnClick: false // don't update the radio button selection automatically.
 
 				onOptionClicked: function(index) {
 					// The SystemSettings data point listener will trigger retranslateUi()
