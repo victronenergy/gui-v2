@@ -23,6 +23,15 @@ Page {
 		}
 	}
 
+	Component {
+		id: hasAcSystem
+
+		ListLabel {
+			//% "For Multi-RS and HS19 devices, ESS settings are available on the RS System product page."
+			text: qsTrId("settings_ess_rs_information")
+		}
+	}
+
 	ObjectModel {
 		id: essSettings
 
@@ -313,7 +322,7 @@ Page {
 	}
 
 	GradientListView {
-		header: root._valid ? null : noEssHeader
+		header: root._valid ? null : (Global.acSystemDevices.model.count > 0 ? hasAcSystem : noEssHeader)
 		model: root._valid ? essSettings : null
 	}
 
