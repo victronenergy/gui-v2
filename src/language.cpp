@@ -17,7 +17,7 @@ using namespace Victron::VenusOS;
 
 namespace {
 
-QUrl fontUrlForLanguage(QLocale::Language language)
+QUrl fontUrlForLanguage(QLocale::Language language, const QString &urlPrefix = QString())
 {
 	static const QHash<QLocale::Language, QString> fontFileNames = {
 		{ QLocale::Arabic, QStringLiteral("DejaVuSans.ttf") },
@@ -28,13 +28,14 @@ QUrl fontUrlForLanguage(QLocale::Language language)
 	static const QUrl defaultFontUrl = QUrl("qrc:/fonts/Roboto-Regular.ttf");
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-	Q_UNUSED(language);
-	// On wasm, the custom font files are not available. Just use the default font.
-	return defaultFontUrl;
-
+	// On wasm, load the custom font files from relative path /fonts/<fontfile>
+	const QString fileName = fontFileNames.value(language);
+	if (!fileName.isEmpty()) {
+		return QUrl(QStringLiteral("%1%2").arg(urlPrefix, fileName));
+	}
 #elif not defined(VENUS_DESKTOP_BUILD)
 	// On device, look for the system-installed font files.
-	QString fileName = fontFileNames.value(language);
+	const QString fileName = fontFileNames.value(language);
 	if (!fileName.isEmpty()) {
 		return QUrl::fromLocalFile("/usr/lib/fonts/" + fileName);
 	}
@@ -49,11 +50,8 @@ QUrl fontUrlForLanguage(QLocale::Language language)
 bool isLanguageRenderingSupported(QLocale::Language language)
 {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-	// On wasm, the scripts for these languages cannot be rendered by the default Museo font.
+	// On wasm, the scripts for these languages cannot be rendered by an available font.
 	switch (language) {
-	case QLocale::Chinese:
-	case QLocale::Thai:
-		return false;
 	default:
 		break;
 	}
@@ -132,30 +130,6 @@ QString LanguageModel::currentDisplayText() const
 	return languageDisplayName(data.language, data.name);
 }
 
-QString LanguageModel::unsupportedLanguageMessage() const
-{
-	return m_unsupportedLanguageMessage;
-}
-
-void LanguageModel::setUnsupportedLanguageMessage(const QString &msg)
-{
-	if (m_unsupportedLanguageMessage != msg) {
-		m_unsupportedLanguageMessage = msg;
-		emit unsupportedLanguageMessageChanged();
-
-		if (!isLanguageRenderingSupported(m_currentLanguage)) {
-			emit currentDisplayTextChanged();
-		}
-
-		for (int i = 0; i < m_languages.count(); ++i) {
-			if (!isLanguageRenderingSupported(m_languages.at(i).language)) {
-				static const QList<int> roles = { Qt::DisplayRole };
-				emit dataChanged(createIndex(i, 0), createIndex(i, 0), roles);
-			}
-		}
-	}
-}
-
 int LanguageModel::languageAt(int index) const
 {
 	if (index < 0 || index >= m_languages.count()) {
@@ -203,25 +177,11 @@ QVariant LanguageModel::data(const QModelIndex &index, int role) const
 
 void LanguageModel::addLanguage(const QString &name, const QString &code, QLocale::Language language)
 {
-	m_languages.append({name, code, fontUrlForLanguage(language), QString(), language });
+	m_languages.append({name, code, fontUrlForLanguage(language, Language::create()->fontUrlPrefix()), QString(), language });
 }
 
 QString LanguageModel::languageDisplayName(QLocale::Language language, const QString &name) const
 {
-#if defined(VENUS_WEBASSEMBLY_BUILD)
-	// For languages that cannot be rendered by the default font in wasm, show the language name
-	// in English, so that the name can be rendered.
-	switch (language) {
-	case QLocale::Chinese:
-		return QStringLiteral("Chinese %1").arg(m_unsupportedLanguageMessage);
-	case QLocale::Thai:
-		return QStringLiteral("Thai %1").arg(m_unsupportedLanguageMessage);
-	default:
-		break;
-	}
-#else
-	Q_UNUSED(language);
-#endif
 	return name;
 }
 
@@ -239,7 +199,11 @@ Language* Language::create(QQmlEngine *, QJSEngine *)
 
 Language::Language(QQmlEngine*) : QObject(nullptr)
 {
-	/* Load appropriate translations for current locale, e.g. :/i18n/venus-gui-v2_fr.qm */
+}
+
+void Language::init() // call this after setting the fontUrlPrefix if required.
+{
+	// Load appropriate translations for current locale, e.g. :/i18n/venus-gui-v2_fr.qm
 	if (!installTranslatorForLanguage(QLocale().language())) {
 		qCWarning(venusGui) << "Falling back to English as locale catalogue failed to load.";
 		installTranslatorForLanguage(QLocale::English); // fallback to default language.
@@ -281,6 +245,19 @@ bool Language::setCurrentLanguage(QLocale::Language language)
 QUrl Language::fontFileUrl() const
 {
 	return m_fontFileUrl;
+}
+
+QString Language::fontUrlPrefix() const
+{
+	return m_fontUrlPrefix;
+}
+
+void Language::setFontUrlPrefix(const QString &prefix)
+{
+	if (m_fontUrlPrefix != prefix) {
+		m_fontUrlPrefix = prefix;
+		emit fontUrlPrefixChanged();
+	}
 }
 
 bool Language::setCurrentLanguageCode(const QString &code)
@@ -342,7 +319,7 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 	}
 
 	m_currentLanguage = language;
-	m_fontFileUrl = fontUrlForLanguage(language);
+	m_fontFileUrl = fontUrlForLanguage(language, fontUrlPrefix());
 
 	return true;
 }
