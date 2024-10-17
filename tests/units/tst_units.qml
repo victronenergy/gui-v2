@@ -254,4 +254,13 @@ TestCase {
 		quantity = Units.getDisplayText(unit, 1.9612345, 4)
 		compare(quantity.number, "1.9612")
 	}
+
+	function test_backendConnectionServiceUidFromName() {
+		const deviceInstance = 1
+		const serviceType = "com.victronenergy.battery.lynxparallel" + deviceInstance
+
+		compare(dbusBackend.serviceUidFromName(serviceType, deviceInstance), "dbus/com.victronenergy.battery.lynxparallel1")
+
+		compare(mqttBackend.serviceUidFromName(serviceType, deviceInstance), "mqtt/battery/1")
+	}
 }

@@ -8,7 +8,7 @@ project(tst_units LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml QuickTest Quick)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml QuickTest Quick DBus Mqtt)
 
 qt_add_executable(tst_units
     tst_units.cpp
@@ -20,6 +20,23 @@ qt_add_executable(tst_units
     ../../src/units.cpp
     ../../src/veutil/inc/veutil/qt/unit_conversion.hpp
     ../../src/veutil/src/qt/unit_conversion.cpp
+
+    ../../src/backendconnection.h
+    ../../src/backendconnection.cpp
+
+    ../../src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
+    ../../src/veutil/src/qt/ve_qitems_mqtt.cpp
+    ../../src/veutil/inc/veutil/qt/ve_qitem.hpp
+    ../../src/veutil/src/qt/ve_qitem.cpp
+    ../../src/veutil/inc/veutil/qt/ve_dbus_connection.hpp
+    ../../src/veutil/inc/veutil/qt/ve_qitems_dbus.hpp
+    ../../src/veutil/inc/veutil/qt/vebus_error.hpp
+    ../../src/veutil/src/qt/ve_dbus_connection.cpp
+    ../../src/veutil/src/qt/ve_qitems_dbus.cpp
+    ../../src/veutil/src/qt/vebus_error.cpp
+
+    ../../src/veqitemmockproducer.h
+    ../../src/veqitemmockproducer.cpp
 )
 
 include_directories(../../src ../../src/veutil/inc/veutil/qt ../../src/veutil/inc)
@@ -46,8 +63,11 @@ endif()
 target_link_libraries(tst_units PRIVATE
     Qt6::Core
     Qt6::Gui
+    Qt6::Qml
     Qt6::QuickTest
     Qt6::Quick
+    Qt6::DBus
+    Qt6::Mqtt
 )
 
 add_test(NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})

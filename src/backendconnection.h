@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QQmlEngine>
 #include <QNetworkAccessManager>
+#include <QMqttClient>
 
 #include "veutil/qt/ve_qitems_mqtt.hpp"
 
@@ -36,6 +37,7 @@ class BackendConnection : public QObject
 	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged FINAL)
 	Q_PROPERTY(bool needsWasmKeyboardHandler READ needsWasmKeyboardHandler WRITE setNeedsWasmKeyboardHandler NOTIFY needsWasmKeyboardHandlerChanged FINAL)
 
+	friend class BackendConnectionTester;
 public:
 	enum SourceType {
 		UnknownSource,
@@ -181,6 +183,29 @@ private:
 #endif
 	QNetworkAccessManager *m_network = nullptr;
 };
+
+class BackendConnectionTester : public QObject
+{
+	Q_OBJECT
+
+public:
+	BackendConnectionTester();
+	Victron::VenusOS::BackendConnection mqttBackend, dbusBackend;
+
+public slots:
+	void applicationAvailable()
+	{
+		// Initialization that only requires the QGuiApplication object to be available
+	}
+
+	void qmlEngineAvailable(QQmlEngine *engine); // Initialization requiring the QQmlEngine to be constructed
+
+	void cleanupTestCase()
+	{
+		// Implement custom resource cleanup
+	}
+};
+
 
 }
 }
