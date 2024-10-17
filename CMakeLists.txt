@@ -970,6 +970,19 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
     )
+
+    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/wasm/index.html")
+    add_custom_target(WasmFiles SOURCES wasm/index.html)
+    add_custom_command(
+       TARGET ${PROJECT_NAME} POST_BUILD
+       COMMAND ${CMAKE_COMMAND} -E copy
+            "${CMAKE_CURRENT_SOURCE_DIR}/wasm/index.html"
+            "${CMAKE_CURRENT_BINARY_DIR}/venus-gui-v2.html"
+       COMMAND ${CMAKE_COMMAND} -E copy
+            "${CMAKE_CURRENT_SOURCE_DIR}/images/victronenergy.svg"
+            "${CMAKE_CURRENT_BINARY_DIR}/victronenergy.svg"
+)
+
 elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
     list(APPEND venusCompileFlags  ${UNIX_COMPILE_FLAGS})
     qt_add_executable(${PROJECT_NAME}
