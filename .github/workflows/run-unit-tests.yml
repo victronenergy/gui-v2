@@ -48,6 +48,20 @@ jobs:
         modules: 'qtwebsockets qt5compat qtshadertools'
         dir: '/opt/hostedtoolcache'
 
+    - name: Install QtMQTT
+      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
+      run: |
+        echo installing QtMQTT
+        git clone https://github.com/qt/qtmqtt.git
+        cd qtmqtt
+        git checkout $QT_VERSION
+        mkdir build-qtmqtt && cd build-qtmqtt
+        export PATH=$PATH:/opt/hostedtoolcache/Qt/Tools/CMake/bin
+        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/gcc_64
+        ${QTDIR}/bin/qt-configure-module ..
+        cmake --build .
+        cmake --install . --prefix ${QTDIR} --verbose
+
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type

@@ -659,7 +659,8 @@ QVariant BackendConnection::mockValue(const QString &uid) const
 	return QVariant();
 }
 
-BackendConnectionTester::BackendConnectionTester() {
+BackendConnectionTester::BackendConnectionTester()
+{
 	mqttBackend.setType(Victron::VenusOS::BackendConnection::SourceType::MqttSource);
 	dbusBackend.setType(Victron::VenusOS::BackendConnection::SourceType::DBusSource);
 }
