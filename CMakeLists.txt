@@ -525,6 +525,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsModbusDiscovered.qml
     pages/settings/PageSettingsModbusTcp.qml
     pages/settings/PageSettingsModbusTcpServices.qml
+    pages/settings/PageSettingsNodeRed.qml
     pages/settings/PageSettingsRelay.qml
     pages/settings/PageSettingsRelayTempSensors.qml
     pages/settings/PageSettingsRootfsSelect.qml
