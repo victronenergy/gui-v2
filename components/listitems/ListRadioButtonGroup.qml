@@ -36,6 +36,7 @@ ListNavigationItem {
 			? optionModel[currentIndex].value
 			: undefined
 
+	property bool updateCurrentIndexOnClick: true
 	property bool updateDataOnClick: true
 	property var popDestination: null   // if undefined, will not automatically pop page when value is selected
 	property var validatePassword
@@ -218,7 +219,11 @@ ListNavigationItem {
 					}
 
 					onClicked: {
-						optionsListView.currentIndex = model.index
+						if (root.updateCurrentIndexOnClick) {
+							optionsListView.currentIndex = model.index
+						} else {
+							optionsListView.selectionChanged = true
+						}
 						if (bottomContentLoader.sourceComponent === passwordComponent) {
 							bottomContentLoader.item.focusPasswordInput()
 						} else {

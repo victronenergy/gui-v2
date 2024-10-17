@@ -91,6 +91,7 @@ class Language : public QObject
 	QML_SINGLETON
 	Q_PROPERTY(QLocale::Language current READ getCurrentLanguage NOTIFY currentLanguageChanged FINAL)
 	Q_PROPERTY(QUrl fontFileUrl READ fontFileUrl NOTIFY fontFileUrlChanged FINAL)
+	Q_PROPERTY(QString fontUrlPrefix READ fontUrlPrefix WRITE setFontUrlPrefix NOTIFY fontUrlPrefixChanged FINAL)
 
 public:
 	static Language* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
@@ -110,11 +111,14 @@ public:
 	Q_INVOKABLE bool setCurrentLanguage(QLocale::Language language);
 
 	QUrl fontFileUrl() const;
+	QString fontUrlPrefix() const;
+	void setFontUrlPrefix(const QString &prefix);
 
 Q_SIGNALS:
 	void languageChangeFailed();
 	void currentLanguageChanged();
 	void fontFileUrlChanged();
+	void fontUrlPrefixChanged();
 
 private:
 	explicit Language(QQmlEngine* engine);
@@ -123,6 +127,7 @@ private:
 	QLocale::Language m_currentLanguage = QLocale::AnyLanguage;
 	QHash<QLocale::Language, QTranslator*> m_loadedTranslators;
 	QUrl m_fontFileUrl;
+	QString m_fontUrlPrefix;
 };
 
 } /* VenusOS */
