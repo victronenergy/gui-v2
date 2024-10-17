@@ -20,6 +20,7 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonValue>
 #include <QtCore/QJsonArray>
+#include <QQmlContext>
 
 namespace Victron {
 namespace VenusOS {
@@ -656,6 +657,18 @@ QVariant BackendConnection::mockValue(const QString &uid) const
 		return producer->value(uid);
 	}
 	return QVariant();
+}
+
+BackendConnectionTester::BackendConnectionTester() {
+	mqttBackend.setType(Victron::VenusOS::BackendConnection::SourceType::MqttSource);
+	dbusBackend.setType(Victron::VenusOS::BackendConnection::SourceType::DBusSource);
+}
+
+void BackendConnectionTester::qmlEngineAvailable(QQmlEngine *engine)
+{
+	// Initialization requiring the QQmlEngine to be constructed
+	engine->rootContext()->setContextProperty("mqttBackend", &mqttBackend);
+	engine->rootContext()->setContextProperty("dbusBackend", &dbusBackend);
 }
 
 }
