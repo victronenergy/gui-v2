@@ -12,7 +12,7 @@ Page {
 	property var battery
 
 	readonly property bool isFiamm48TL: productId.value === ProductInfo.ProductId_Battery_Fiamm48TL
-	readonly property bool isParallelBms: productId.value === ProductInfo.ProductId_Battery_ParallelBms
+	readonly property bool isParallelBms: nrOfBmses.dataItem.isValid
 
 	title: battery.name
 
@@ -126,7 +126,7 @@ Page {
 				//% "Total Capacity"
 				text: qsTrId("devicelist_battery_total_capacity")
 				dataItem.uid: root.battery.serviceUid + "/Capacity"
-				allowed: defaultAllowed && numberOfBms.allowed
+				allowed: defaultAllowed && root.isParallelBms
 				unit: VenusOS.Units_AmpHour
 			}
 
@@ -138,16 +138,16 @@ Page {
 				//% "System voltage"
 				text: qsTrId("devicelist_battery_system_voltage")
 				dataItem.uid: BackendConnection.serviceUidFromName("com.victronenergy.battery.lynxparallel" + _n2kDeviceInstance.value, _n2kDeviceInstance.value) + "/Dc/0/Voltage"
-				allowed: defaultAllowed && _n2kDeviceInstance.isValid && root.battery.state === VenusOS.Battery_State_Pending
+				allowed: defaultAllowed && !root.isParallelBms && root.battery.state === VenusOS.Battery_State_Pending
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTextItem {
-				id: numberOfBms
+				id: nrOfBmses
 				//% "Number of BMSes"
 				text: qsTrId("devicelist_battery_number_of_bmses")
 				dataItem.uid: root.battery.serviceUid + "/NumberOfBmses"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: defaultAllowed && root.isParallelBms
 			}
 
 			ListQuantityItem {
