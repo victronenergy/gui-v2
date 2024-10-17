@@ -16,8 +16,6 @@ Page {
 		id: chargerListView
 
 		model: ObjectModel {
-			// TODO add 'active alarms' section for this charger
-
 			ListLabel {
 				allowed: lowBatteryAlarm.visible || highBatteryAlarm.visible || highTemperatureAlarm.visible || shortCircuitAlarm.visible
 				leftPadding: 0
@@ -63,27 +61,17 @@ Page {
 			}
 
 			ListLabel {
-				allowed: root.solarCharger.errorModel.count > 0
+				allowed: root.solarCharger.errorCode > 0
 				leftPadding: 0
 				color: Theme.color_listItem_secondaryText
 				font.pixelSize: Theme.font_size_caption
-				//: Details of most recent errors
-				//% "Last Errors"
-				text: qsTrId("charger_alarms_header_last_errors")
+				//% "Active Error"
+				text: qsTrId("charger_alarms_header_active_errors")
 			}
 
-			Column {
-				width: parent ? parent.width : 0
-
-				Repeater {
-					model: root.solarCharger.errorModel
-
-					delegate: ListTextItem {
-						text: ChargerError.description(model.errorCode)
-						secondaryText: root.solarCharger.errorModel.count === 1 ? ""
-								: CommonWords.lastErrorName(model.index)
-					}
-				}
+			ListTextItem {
+				allowed: root.solarCharger.errorCode > 0
+				text: ChargerError.description(root.solarCharger.errorCode)
 			}
 		}
 	}

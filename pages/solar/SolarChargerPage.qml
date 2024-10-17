@@ -135,20 +135,26 @@ Page {
 			}
 
 			ListNavigationItem {
+				// This is the number of active alarms, plus the active error (if present).
+				readonly property int itemCount: (lowBatteryAlarm.isValid ? 1 : 0)
+						+ (highBatteryAlarm.isValid ? 1 : 0)
+						+ (highTemperatureAlarm.isValid ? 1 : 0)
+						+ (shortCircuitAlarm.isValid ? 1 : 0)
+						+ (root.solarCharger.errorCode > 0 ? 1 : 0)
+
 				//% "Alarms & Errors"
 				text: qsTrId("charger_alarms_alarms_and_errors")
 				secondaryText: enabled
-					? (root.solarCharger.errorModel.count > 0
+					? (itemCount > 0
 						  //: Shows number of items found. %1 = number of items
 						  //% "%1 found"
-						? qsTrId("charger_history_found_with_count").arg(root.solarCharger.errorModel.count)
+						? qsTrId("charger_history_found_with_count").arg(itemCount)
 						: "")
 					: CommonWords.none_errors
-				secondaryLabel.color: root.solarCharger.errorModel.count ? Theme.color_critical : Theme.color_font_secondary
+				secondaryLabel.color: itemCount ? Theme.color_critical : Theme.color_font_secondary
 
 				// Only enable if there is content on the alarms/errors page.
-				enabled: lowBatteryAlarm.isValid || highBatteryAlarm.isValid || highTemperatureAlarm.isValid || shortCircuitAlarm.isValid
-						 || root.solarCharger.errorModel.count
+				enabled: itemCount > 0 || root.solarCharger.errorModel.count
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/solar/SolarChargerAlarmsAndErrorsPage.qml",
