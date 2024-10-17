@@ -10,8 +10,9 @@ import QtQuick.Controls.impl as CP
 SwipeViewPage {
 	id: root
 
+	property alias currentTabIndex: tabBar.currentIndex
+
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-	fullScreenWhenIdle: true
 	//% "Levels"
 	navButtonText: qsTrId("nav_levels")
 	navButtonIcon: "qrc:/images/levels.svg"
@@ -23,9 +24,6 @@ SwipeViewPage {
 
 	TabBar {
 		id: tabBar
-
-		// Prefer a tab that is enabled.
-		property int _preferredIndex: model[0].enabled || !model[1].enabled ? 0 : 1
 
 		anchors {
 			top: parent.top
@@ -55,8 +53,8 @@ SwipeViewPage {
 			{ value: qsTrId("levels_page_environment"), enabled: Global.environmentInputs.model.count > 0 }
 		]
 
-		currentIndex: _preferredIndex
-		onCurrentIndexChanged: _preferredIndex = currentIndex   // once user selects a tab, don't use the default index anymore
+		// Prefer a tab that is enabled.
+		currentIndex: model[0].enabled || !model[1].enabled ? 0 : 1
 	}
 
 	TanksTab {
