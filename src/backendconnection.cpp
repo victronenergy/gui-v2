@@ -575,7 +575,7 @@ QString BackendConnection::serviceUidForType(const QString &serviceType) const
 	// /DeviceInstance = 0 for the service, or there is only a single instance of this service and
 	// so it can be accessed as if it had /DeviceInstance = 0.
 	//
-	// E.g. for a service like com.victronenergy.system, returns:
+	// E.g. for a service name like "com.victronenergy.system", returns:
 	//  - D-Bus: dbus/com.victronenergy.system
 	//  - MQTT: mqtt/system/0
 	//  - Mock: mock/com.victronenergy.system
@@ -593,7 +593,7 @@ QString BackendConnection::serviceTypeFromUid(const QString &uid) const
 	case DBusSource:
 	case MockSource:
 	{
-		// uid format is "<dbus|mock>/com.victronenergy.<serviceType>[.suffx]/*"
+		// uid format is "<dbus|mock>/com.victronenergy.<serviceType>[.suffix]/*"
 		const QString serviceTypePart = uid.split('/').value(1);
 		return serviceTypePart.split('.').value(2);
 	}
@@ -606,7 +606,7 @@ QString BackendConnection::serviceTypeFromUid(const QString &uid) const
 
 QString BackendConnection::serviceUidFromName(const QString &serviceName, int deviceInstance) const
 {
-	// serviceName format is "com.victronenergy.<serviceType>[.suffx]/*"
+	// serviceName format is "com.victronenergy.<serviceType>[.suffix]/*"
 	if (serviceName.isEmpty() || deviceInstance < 0) {
 		return QString();
 	}
