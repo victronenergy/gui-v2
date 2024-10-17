@@ -6,7 +6,6 @@
 #include <QtQuickTest/quicktest.h>
 #include "units.h"
 #include "quantityinfo.h"
-#include "backendconnection.h"
 
 template <typename T> static QObject *singletonFactory(QQmlEngine *, QJSEngine *)
 {
@@ -19,10 +18,6 @@ int main(int argc, char **argv) \
 	qmlRegisterType<Victron::Units::QuantityInfo>("Victron.VenusOS", 2, 0, "QuantityInfo");
 	qmlRegisterSingletonType<Victron::Units::Units>("Victron.VenusOS", 2, 0, "Units", singletonFactory<Victron::Units::Units>);
 
-	Victron::VenusOS::BackendConnectionTester backendConnectionTester;
-
 	QTEST_SET_MAIN_SOURCE_PATH
-	return quick_test_main_with_setup(argc, argv, "tst_units", nullptr, &backendConnectionTester);
+	return quick_test_main(argc, argv, "tst_units", nullptr);
 }
-
-#include "tst_units.moc"
