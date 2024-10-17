@@ -79,7 +79,7 @@ Page {
 
 			text: CommonWords.state
 			allowed: root.startStopBindPrefix === root.generator0ServiceUid
-			secondaryText: activeCondition.isValid ? Global.generators.stateToText(generatorState.value, activeCondition.value) : '---'
+			secondaryText: activeCondition.isValid ? Global.generators.stateAndCondition(generatorState.value, activeCondition.value) : '---'
 
 			VeQuickItem {
 				id: activeCondition
