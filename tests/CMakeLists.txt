@@ -19,4 +19,4 @@ endif()
 add_subdirectory(firmwareversion)
 add_subdirectory(units)
 add_subdirectory(screenblanker)
-
+add_subdirectory(backendconnection)

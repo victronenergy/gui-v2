@@ -206,7 +206,6 @@ public slots:
 	}
 };
 
-
 }
 }
 
