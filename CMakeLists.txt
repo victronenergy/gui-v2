@@ -66,8 +66,8 @@ endif()
 if (${VENUS_DESKTOP_BUILD})
     add_compile_definitions(VENUS_DESKTOP_BUILD)
     enable_testing()
+    add_subdirectory(tests)
 endif()
-add_subdirectory(tests)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
