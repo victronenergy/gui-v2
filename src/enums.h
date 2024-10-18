@@ -709,9 +709,19 @@ public:
 		InputValidation_ValidateAndSave,
 	};
 	Q_ENUM(InputValidation_ValidateMode)
+
+	enum OnboardingState {
+		OnboardingState_NotCompleted,
+		OnboardingState_CompletedOnDevice = 0x01,
+		OnboardingState_CompletedOnWasm = 0x02
+	};
+	Q_ENUM(OnboardingState)
+	Q_DECLARE_FLAGS(OnboardingStateFlag, OnboardingState)
 };
 
 }
 }
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Victron::VenusOS::Enums::OnboardingStateFlag)
 
 #endif // VICTRON_VENUSOS_GUI_V2_ENUMS_H
