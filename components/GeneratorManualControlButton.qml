@@ -25,9 +25,9 @@ ListItemButton {
 	// state at the time dialog was opened. This avoid changing the color of the button
 	// when it is visible below the open start/stop dialogs.
 	checked: _generatorStateBeforeDialogOpen < 0
-			 ? _state.value === VenusOS.Generators_State_Running
-			   || _state.value === VenusOS.Generators_State_WarmUp
-			 : _generatorStateBeforeDialogOpen === VenusOS.Generators_State_Running
+			 ? _runningByConditionCode.value === VenusOS.Generators_RunningBy_Manual
+			 : _generatorStateBeforeDialogOpen === VenusOS.Generators_State_Running 
+			   && _runningByConditionCode.value === VenusOS.Generators_RunningBy_Manual
 
 	text: checked
 			//% "Manual Stop"
@@ -48,8 +48,7 @@ ListItemButton {
 			return
 		}
 
-		if (_state.value === VenusOS.Generators_State_Running
-				|| _state.value === VenusOS.Generators_State_WarmUp) {
+		if (_runningByConditionCode.value === VenusOS.Generators_RunningBy_Manual) {
 			Global.dialogLayer.open(generatorStopDialogComponent)
 		} else {
 			Global.dialogLayer.open(generatorStartDialogComponent)
@@ -59,6 +58,11 @@ ListItemButton {
 	VeQuickItem {
 		id: _state
 		uid: root.generatorUid ? root.generatorUid + "/State" : ""
+	}
+
+	VeQuickItem {
+		id: _runningByConditionCode
+		uid: root.generatorUid ? root.generatorUid + "/RunningByConditionCode" : ""
 	}
 
 	VeQuickItem {

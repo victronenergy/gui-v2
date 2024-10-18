@@ -31,6 +31,7 @@ ModalDialog {
 
 	readonly property Generator generator: Generator { serviceUid: root.generatorUid }
 	readonly property int generatorState: generator ? generator.state : VenusOS.Generators_State_Stopped
+	readonly property int generatorRunningBy: generator ? generator.runningBy : VenusOS.Generators_RunningBy_NotRunning
 	property var runGeneratorAction
 
 	title: CommonWords.generator

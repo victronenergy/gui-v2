@@ -23,6 +23,15 @@ GeneratorDialog {
 		}
 	}
 
+	// Invoked when manually starting generator while it was already running due to a condition.
+	onGeneratorRunningByChanged: {
+		if (root.open) {
+			if (generatorRunningBy != VenusOS.Generators_RunningBy_Manual) {
+				root.accept()
+			}
+		}
+	}
+
 	runGeneratorAction: function() {
 		root.generator.stop()
 	}

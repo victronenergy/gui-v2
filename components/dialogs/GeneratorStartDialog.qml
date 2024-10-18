@@ -13,10 +13,9 @@ GeneratorDialog {
 	acceptText: qsTrId("controlcard_generator_startdialog_start_now")
 	secondaryTitle: CommonWords.manual_start
 
-	onGeneratorStateChanged: {
+	onGeneratorRunningByChanged: {
 		if (root.open) {
-			if (generatorState == VenusOS.Generators_State_Running
-					|| generatorState == VenusOS.Generators_State_WarmUp) {
+			if (generatorRunningBy == VenusOS.Generators_RunningBy_Manual) {
 				root.accept()
 			}
 		}
