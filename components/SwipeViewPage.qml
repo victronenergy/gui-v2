@@ -25,7 +25,7 @@ Page {
 	// If we use 'visible: Global.mainView && Global.mainView.swipeView.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)', we
 	// briefly see the Settings page displayed on top of the Brief page.
 	visible: Global.mainView &&
-			 (view.moving
+			 ((view && view.moving && Global.mainView.swipeView)
 			 ? Global.mainView.swipeView.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)
 			 : SwipeView.isCurrentItem) // 'SwipeView.isCurrentItem' correctly returns false for the Settings page on Startup.
 }
