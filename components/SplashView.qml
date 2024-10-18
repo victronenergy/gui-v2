@@ -278,7 +278,9 @@ Rectangle {
 	Loader {
 		id: welcomeLoader
 
-		active: Global.dataManagerLoaded && (onboardingDone.isValid && onboardingDone.value !== 1)
+		active: Global.dataManagerLoaded && onboardingState.isValid
+				&& ( (Qt.platform.os === "wasm" && !(onboardingState.value & VenusOS.OnboardingState_DoneWasm))
+				  || (Qt.platform.os !== "wasm" && !(onboardingState.value & VenusOS.OnboardingState_DoneNative)) )
 		anchors.fill: parent
 		sourceComponent: WelcomeView {
 			anchors.centerIn: parent
@@ -291,7 +293,7 @@ Rectangle {
 	}
 
 	VeQuickItem {
-		id: onboardingDone
+		id: onboardingState
 		uid: Global.dataManagerLoaded ? Global.systemSettings.serviceUid + "/Settings/Gui2/OnBoarding" : ""
 	}
 }
