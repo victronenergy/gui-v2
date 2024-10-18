@@ -323,19 +323,3 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 
 	return true;
 }
-
-void Language::retranslate()
-{
-	QQmlEngine* engine = nullptr;
-	QQmlContext* context = QQmlEngine::contextForObject(this);
-
-	if (context) {
-		engine = QQmlEngine::contextForObject(this)->engine();
-	}
-
-	if (engine) {
-		engine->retranslate();
-	} else {
-		qCWarning(venusGui) << "Unable to retranslate";
-	}
-}

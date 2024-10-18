@@ -54,7 +54,6 @@ QtObject {
 	property bool splashScreenVisible: true
 	property bool dataManagerLoaded
 	property bool allPagesLoaded
-	property bool changingLanguage
 
 	property string firmwareInstalledBuild // don't clear this on UI reload.  it needs to survive reconnection.
 	property bool firmwareInstalledBuildUpdated // as above.
@@ -94,9 +93,8 @@ QtObject {
 		// unload the gui.
 		dataManagerLoaded = false
 
-		// note: we don't reset `main` or `changingLanguage`
-		// as main will never be destroyed during the ui rebuild,
-		// and we handle changingLanguage specially.
+		// note: we don't reset `main
+		// as main will never be destroyed during the ui rebuild.
 		pageManager = null
 		mainView = null
 		mockDataSimulator = null

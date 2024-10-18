@@ -96,8 +96,6 @@ public:
 
 	void init();
 
-	Q_INVOKABLE void retranslate(); // triggers world binding re-evaluation
-
 	Q_INVOKABLE QString toString(QLocale::Language language) const;
 	Q_INVOKABLE QString toCode(QLocale::Language language) const;
 	Q_INVOKABLE bool setCurrentLanguageCode(const QString &code);
