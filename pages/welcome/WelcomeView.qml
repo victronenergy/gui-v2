@@ -45,7 +45,7 @@ Rectangle {
 			text: qsTrId("welcome_skip")
 			flat: true
 			color: Theme.color_ok
-			onClicked: onboardingDone.setValue(1)
+			onClicked: onboardingState.setDoneFlag()
 		}
 
 		ProgressBar {
@@ -145,7 +145,7 @@ Rectangle {
 			}
 			onNextClicked: {
 				if (stackView.depth === welcomePages.count) {
-					onboardingDone.setValue(1)
+					onboardingState.setDoneFlag()
 				} else {
 					stackView.push(welcomePages.objectAt(stackView.depth))
 				}
@@ -169,7 +169,16 @@ Rectangle {
 	}
 
 	VeQuickItem {
-		id: onboardingDone
+		id: onboardingState
+
+		function setDoneFlag() {
+			if (Qt.platform.os === "wasm") {
+				setValue(value | VenusOS.OnboardingState_DoneWasm)
+			} else {
+				setValue(value | VenusOS.OnboardingState_DoneNative)
+			}
+		}
+
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui2/OnBoarding"
 	}
 }
