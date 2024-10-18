@@ -315,7 +315,9 @@ int main(int argc, char *argv[])
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
 	/* Force construction of translator */
-	Victron::VenusOS::Language *languageLoader = Victron::VenusOS::Language::create();
+	Victron::VenusOS::Language *languageLoader = Victron::VenusOS::Language::create(&engine);
+	QObject::connect(languageLoader, &Victron::VenusOS::Language::currentLanguageChanged,
+		&engine, &QQmlEngine::retranslate);
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	const QUrl currentLocation(QString::fromUtf8(getLocationHrefUtf8()));
 	const QString fontUrlPrefix = currentLocation.host().contains(QStringLiteral("vrm.victronenergy.com"))

@@ -197,18 +197,19 @@ QtObject {
 	}
 
 	property VeQuickItem language: VeQuickItem {
+		id: languageChangeListener
+		property bool changingLanguage: false
 		uid: root.serviceUid + "/Settings/Gui/Language"
 		onValueChanged: {
-			if (value !== undefined && !Global.changingLanguage
+			if (!languageChangeListener.changingLanguage
+					&& value !== undefined
 					&& value != Language.toCode(Language.current)) {
-				Global.changingLanguage = true
+				languageChangeListener.changingLanguage = true
 				if (!Language.setCurrentLanguageCode(value)) {
 					// failed.  set the settings value back to the previous one.
 					setValue(Language.toCode(Language.current))
-					Qt.callLater(function() { Global.changingLanguage = false })
-				} else {
-					Qt.callLater(Global.main.retranslateUi)
 				}
+				Qt.callLater(function() { languageChangeListener.changingLanguage = false })
 			}
 		}
 	}

@@ -91,11 +91,11 @@ Page {
 				updateCurrentIndexOnClick: false // don't update the radio button selection automatically.
 
 				onOptionClicked: function(index) {
-					// The SystemSettings data point listener will trigger retranslateUi()
+					// The SystemSettings data point listener will set the Language.
 					// It may take a few seconds for the backend to deliver the value
-					// change to the other data point.  So, display a message to the user.
-					languageDataItem.setValue(Language.toCode(optionModel.languageAt(index)))
+					// change to that other data point.  So, display a message to the user.
 					Global.dialogLayer.open(changingLanguageDialog)
+					languageDataItem.setValue(Language.toCode(optionModel.languageAt(index)))
 				}
 
 				LanguageModel {
@@ -130,19 +130,22 @@ Page {
 					ModalWarningDialog {
 						id: dlg
 						property bool languageChangeFailed
-						dialogDoneOptions: dlg.languageChangeFailed
-							? VenusOS.ModalDialog_DoneOptions_OkOnly
-							: VenusOS.ModalDialog_DoneOptions_NoOptions
+						property bool languageChangeSucceeded
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
 						//% "Changing language"
 						title: qsTrId("settings_language_changing_language")
 						description: dlg.languageChangeFailed
 							  //% "Failed to change language!"
 							? qsTrId("settings_language_change_failed")
+							: dlg.languageChangeSucceeded
+							  //% "Successfully changed language!"
+							? qsTrId("settings_language_change_succeeded")
 							  //% "Please wait while the language is changed."
 							: qsTrId("settings_language_please_wait")
 						Connections {
 							target: Language
-							function onLanguageChangeFailed() { dlg.languageChangeFailed = true }
+							function onLanguageChangeFailed() { dlg.languageChangeFailed = true; dlg.languageChangeSucceeded = false }
+							function onCurrentLanguageChanged() { if (!dlg.languageChangeFailed) { dlg.languageChangeSucceeded = true } }
 						}
 					}
 				}
