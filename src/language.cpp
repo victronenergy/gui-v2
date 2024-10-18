@@ -88,6 +88,8 @@ LanguageModel::LanguageModel(QObject *parent)
 	addLanguage("Українська", "uk", QLocale::Ukrainian);
 	addLanguage("中文", "zh_CN", QLocale::Chinese);
 	addLanguage("العربية", "ar", QLocale::Arabic);
+
+	setCurrentLanguage(Language::create()->getCurrentLanguage());
 }
 
 LanguageModel::~LanguageModel()
