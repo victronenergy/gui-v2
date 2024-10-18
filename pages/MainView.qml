@@ -67,7 +67,7 @@ Item {
 		asynchronous: true
 		sourceComponent: swipeViewComponent
 
-		visible: swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
+		visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
 	}
 
 	Component {
@@ -205,7 +205,7 @@ Item {
 		y: root.height + 4  // nudge below the visible area for wasm
 		color: root.backgroundColor
 		opacity: 0
-		model: swipeView.contentModel
+		model: swipeView ? swipeView.contentModel : null
 
 		onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
 
