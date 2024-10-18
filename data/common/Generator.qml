@@ -15,6 +15,36 @@ Device {
 	readonly property int runtime: _runtime.value || 0
 	readonly property int runningBy: _runningBy.isValid ? _runningBy.value : 0
 
+	readonly property string runningByText: Global.generators.runningByText(runningBy)
+	readonly property string stateText: Global.generators.stateText(state)
+
+	readonly property bool isRunning: {
+		switch (state) {
+		case VenusOS.Generators_State_Running:
+		case VenusOS.Generators_State_WarmUp:
+		case VenusOS.Generators_State_CoolDown:
+		case VenusOS.Generators_State_Stopping:
+			return true
+		default:
+			return false
+		}
+	}
+
+	readonly property bool isAutoStarted: {
+		switch (runningBy) {
+		case VenusOS.Generators_RunningBy_LossOfCommunication:
+		case VenusOS.Generators_RunningBy_Soc:
+		case VenusOS.Generators_RunningBy_AcLoad:
+		case VenusOS.Generators_RunningBy_BatteryCurrent:
+		case VenusOS.Generators_RunningBy_BatteryVoltage:
+		case VenusOS.Generators_RunningBy_InverterHighTemperature:
+		case VenusOS.Generators_RunningBy_InverterOverload:
+			return true
+		default:
+			return false
+		}
+	}
+
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: serviceUid + "/State"
 	}
