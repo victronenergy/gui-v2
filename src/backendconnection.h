@@ -114,6 +114,15 @@ public:
 	bool needsWasmKeyboardHandler() const;
 	void setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler);
 
+	// Each service type (system, settings, battery, etc.) has a base uid, which has different
+	// forms on D-Bus and MQTT:
+	// - D-Bus uid: "dbus/<serviceName>"
+	//   E.g. "dbus/com.victronenergy.system", "dbus/com.victronenergy.battery.lynxparallel"
+	//   (The serviceName format is "com.victronenergy.<serviceType>[.suffix]/*".)
+	// - MQTT uid: "mqtt/<serviceType>/<deviceInstance>"
+	//   E.g. "mqtt/system/0", "mqtt/battery/256"
+	//   (Unlike for D-Bus, MQTT uids never have a suffix after the serviceType, so the device
+	//   instance number must be available to create the MQTT uid.)
 	Q_INVOKABLE QString serviceUidForType(const QString &serviceType) const;
 	Q_INVOKABLE QString serviceTypeFromUid(const QString &uid) const;
 	Q_INVOKABLE QString serviceUidFromName(const QString &serviceName, int deviceInstance) const;
