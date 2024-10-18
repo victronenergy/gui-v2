@@ -91,7 +91,7 @@
       <translation>Мін. SOC:</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="174"/>
+      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="175"/>
       <source>Enter password</source>
       <translation>Введіть пароль</translation>
     </message>
@@ -894,7 +894,7 @@ could be better and more universal</extracomment>
       <translation>Мова</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="138"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="136"/>
       <source>Changing language</source>
       <translation>Зміна мови</translation>
     </message>
@@ -914,7 +914,7 @@ could be better and more universal</extracomment>
       <translation>Струм (Ампер)</translation>
     </message>
     <message id="settings_units">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="154"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="156"/>
       <source>Units</source>
       <translation>Одиниці</translation>
     </message>
@@ -1342,7 +1342,7 @@ could be better and more universal</extracomment>
       <translation>Час закінчення тихих годин</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="303"/>
+      <location filename="../../components/PageGensetModel.qml" line="290"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="105"/>
       <source>Run time and service</source>
       <translation>Час роботи та обслуговування</translation>
@@ -1555,42 +1555,42 @@ If that doesn't work, check sim-card in a phone to make sure that there is credi
       <translation>Асистента ESS не знайдено</translation>
     </message>
     <message id="settings_ess_grid_metering">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="58"/>
       <source>Grid metering</source>
       <translation>Вимірювання мережі</translation>
     </message>
     <message id="settings_ess_external_meter">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="54"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="63"/>
       <source>External meter</source>
       <translation>Зовнішній лічильник</translation>
     </message>
     <message id="settings_ess_inverter_charger">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="56"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="65"/>
       <source>Inverter/Charger</source>
       <translation>Інв./Зарядний</translation>
     </message>
     <message id="settings_ess_inverter_ac_output_in_use">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="72"/>
       <source>Inverter AC output in use</source>
       <translation>Вихід AC інвертора використовується</translation>
     </message>
     <message id="settings_ess_multiphase_regulation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="83"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="92"/>
       <source>Multiphase regulation</source>
       <translation>Багатофазне регулювання</translation>
     </message>
     <message id="settings_ess_phase_compensation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="100"/>
       <source>Total of all phases</source>
       <translation>Сумарно за всіма фазами</translation>
     </message>
     <message id="settings_ess_individual_phase">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="102"/>
       <source>Individual phase</source>
       <translation>Окрема фаза</translation>
     </message>
     <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="108"/>
       <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
 
 CAUTION: Use only if required by the utility provider.</source>
@@ -1599,7 +1599,7 @@ CAUTION: Use only if required by the utility provider.</source>
 УВАГА: Використовуйте тільки якщо цього вимагає постачальник електроенергії.</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="111"/>
       <source>The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).
 
 Use unless prohibited by the utility provider.</source>
@@ -1608,17 +1608,17 @@ Use unless prohibited by the utility provider.</source>
 Використовуйте, якщо це не заборонено постачальником електроенергії.</translation>
     </message>
     <message id="settings_rs_ess_min_soc">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="31"/>
       <source>Minimum SOC (unless grid fails)</source>
       <translation>Найнижчий рівень заряду (якщо немає збоїв у мережі)</translation>
     </message>
     <message id="settings_ess_active_soc_limit">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="127"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="136"/>
       <source>Active SOC limit</source>
       <translation>Активне обмеження рівня заряду</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="245"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="254"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>Обмеження піків</translation>
@@ -1634,12 +1634,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Завжди</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="160"/>
       <source>Discharge disabled</source>
       <translation>Розряджання вимкнене</translation>
     </message>
     <message id="settings_ess_battery_life_slow_charge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
       <source>Slow charge</source>
       <translation>Повільне заряджання</translation>
     </message>
@@ -1654,32 +1654,32 @@ Use unless prohibited by the utility provider.</source>
       <translation>Повторне заряджання</translation>
     </message>
     <message id="settings_ess_limit_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="174"/>
       <source>Limit charge power</source>
       <translation>Обмежити потужність заряджання</translation>
     </message>
     <message id="settings_ess_max_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="193"/>
       <source>Maximum charge power</source>
       <translation>Максимальна потужність заряджання</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="196"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="205"/>
       <source>Limit inverter power</source>
       <translation>Обмежте потужність інвертора</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="215"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="224"/>
       <source>Maximum inverter power</source>
       <translation>Максимальна потужність інвертора</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="234"/>
       <source>Grid setpoint</source>
       <translation>Точка обміну з мережею</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="234"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="243"/>
       <source>Grid feed-in</source>
       <translation>Подача живлення в мережу</translation>
     </message>
@@ -2092,34 +2092,34 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Жодне реле не налаштоване на активацію за температурою. Перейдіть на сторінку налаштувань реле, розташовану в головному меню налаштувань, і встановіть функцію реле на "Температура".</translation>
     </message>
     <message id="settings_firmware_version_switch_option">
-      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="47"/>
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="51"/>
       <source>This option allows you to switch between the current and the previous firmware version. No internet or sdcard needed.</source>
       <translation>Ця опція дає змогу перемикатися між поточною та попередньою версією прошивки. Не потребує з’єднання з Інтернетом або SD-картки.</translation>
     </message>
     <message id="settings_firmware_current_version">
-      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="83"/>
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="94"/>
       <source>Firmware %1 (%2)</source>
       <extracomment>%1 = current firmware version, %2 = current firmware build number</extracomment>
       <translation>Прошивка %1 (%2)</translation>
     </message>
     <message id="settings_firmware_press_to_boot">
-      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="62"/>
       <source>Press to boot</source>
       <translation>Натисніть для завантаження</translation>
     </message>
     <message id="settings_firmware_rebooting_to">
-      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="69"/>
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="80"/>
       <source>Rebooting to %1</source>
       <extracomment>%1 = backup version</extracomment>
       <translation>Перезавантаження до %1</translation>
     </message>
     <message id="settings_firmware_switching_not_possible">
-      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="84"/>
       <source>Switching firmware version is not possible when auto update is set to "Check and update". Set auto update to "Disabled" or "Check only" to enable this option.</source>
       <translation>Зміна версії прошивки неможлива, якщо для автооновлення встановлено значення "Перевіряти й оновлювати". Щоб увімкнути цю опцію, встановіть значення автооновлення "Відключено" або "Лише перевіряти".</translation>
     </message>
     <message id="settings_firmware_backup_not_available">
-      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="101"/>
       <source>Backup firmware not available</source>
       <translation>Резервне копіювання прошивки недоступне</translation>
     </message>
@@ -3678,37 +3678,37 @@ Documentation at https://ve3.nl/vol</source>
       <translation>3-фазний</translation>
     </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../components/PageGensetModel.qml" line="171"/>
+      <location filename="../../components/PageGensetModel.qml" line="158"/>
       <source>AC</source>
       <translation>AC</translation>
     </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../components/PageGensetModel.qml" line="210"/>
+      <location filename="../../components/PageGensetModel.qml" line="197"/>
       <source>Engine</source>
       <translation>Двигун</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="254"/>
+      <location filename="../../components/PageGensetModel.qml" line="241"/>
       <source>Coolant temperature</source>
       <translation>Температура теплоносія</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="262"/>
+      <location filename="../../components/PageGensetModel.qml" line="249"/>
       <source>Exhaust temperature</source>
       <translation>Температура вихлопу</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="269"/>
+      <location filename="../../components/PageGensetModel.qml" line="256"/>
       <source>Winding temperature</source>
       <translation>Температура обмотки</translation>
     </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="283"/>
+      <location filename="../../components/PageGensetModel.qml" line="270"/>
       <source>Starter battery voltage</source>
       <translation>Напруга стартерної батареї</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../components/PageGensetModel.qml" line="291"/>
+      <location filename="../../components/PageGensetModel.qml" line="278"/>
       <source>Number of starts</source>
       <translation>Кількість стартів</translation>
     </message>
@@ -4150,7 +4150,7 @@ Do you want to continue?</source>
       <translation>Лічильник якості мережі Фаза L%1, пристрій %2 (%3)</translation>
     </message>
     <message id="vebus_device_error_8_11_report">
-      <location filename="../../pages/vebusdevice/PageVeBusAlarms.qml" line="51"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAlarms.qml" line="61"/>
       <source>VE.Bus Error 8 / 11 report</source>
       <translation>Звіт про помилку VE.Bus 8 / 11</translation>
     </message>
@@ -4312,8 +4312,8 @@ Do you want to continue?</source>
       <source>Voltage sense error</source>
       <translation>Помилка датчика напруги</translation>
     </message>
-    <message id="common_words_alarm_setting_overload">
-      <location filename="../../components/CommonWords.qml" line="52"/>
+    <message id="rssystemalarms_overload">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="48"/>
       <source>Overload</source>
       <extracomment>Alarm configuration when 'overload' state is triggered</extracomment>
       <translation>Перевантаження</translation>
@@ -4329,8 +4329,8 @@ Do you want to continue?</source>
       <source>Voltage Sensor</source>
       <translation>Датчик напруги</translation>
     </message>
-    <message id="vebus_device_phase_rotation">
-      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml" line="19"/>
+    <message id="rssystemalarms_phase_rotation">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="27"/>
       <source>Phase rotation</source>
       <translation>Чергування фаз</translation>
     </message>
@@ -5168,7 +5168,7 @@ Do you want to continue?</source>
       <translation>Неочищена вода</translation>
     </message>
     <message id="settings_radio_button_group_no_access">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="61"/>
+      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="62"/>
       <source>Setting locked for access level</source>
       <translation>Налаштування заблоковано для рівня доступу</translation>
     </message>
@@ -5177,13 +5177,13 @@ Do you want to continue?</source>
       <source>Incorrect password</source>
       <translation>Неправильний пароль</translation>
     </message>
-    <message id="nav_brief">
-      <location filename="../../pages/BriefPage.qml" line="135"/>
+    <message id="welcome_brief_title">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="82"/>
       <source>Brief</source>
       <translation>Коротко</translation>
     </message>
-    <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="397"/>
+    <message id="welcome_overview_title">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="91"/>
       <source>Overview</source>
       <translation>Огляд</translation>
     </message>
@@ -5290,18 +5290,13 @@ Do you want to continue?</source>
       <source>Not set</source>
       <translation>Не задано</translation>
     </message>
-    <message id="cgwacs_battery_schedule_duration">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="143"/>
-      <source>Duration (hh:mm)</source>
-      <translation>Тривалість (гг:хв)</translation>
-    </message>
     <message id="cgwacs_battery_schedule_soc_limit">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="153"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="154"/>
       <source>SOC limit</source>
       <translation>Ліміт SOC</translation>
     </message>
     <message id="cgwacs_battery_schedule_self_consumption_above_limit">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="164"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="165"/>
       <source>Self-consumption above limit</source>
       <translation>Власне споживання вище ліміту</translation>
     </message>
@@ -5311,7 +5306,7 @@ Do you want to continue?</source>
       <translation>PV</translation>
     </message>
     <message id="cgwacs_battery_schedule_pv_and_battery">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="171"/>
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="172"/>
       <source>PV &amp; Battery</source>
       <translation>PV і Батарея</translation>
     </message>
@@ -6075,8 +6070,8 @@ Do you want to continue?</source>
       <source>Test</source>
       <translation>Тест</translation>
     </message>
-    <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="191"/>
+    <message id="settings_rs_ess_dess">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="41"/>
       <source>Dynamic ESS</source>
       <translation>Динамічна ESS</translation>
     </message>
@@ -6170,7 +6165,7 @@ Do you want to continue?</source>
       <translation>Версія програми</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="246"/>
+      <location filename="../../components/PageGensetModel.qml" line="233"/>
       <source>Oil temperature</source>
       <translation>Температура масла</translation>
     </message>
@@ -6249,19 +6244,14 @@ Do you want to continue?</source>
       <translation>Безперервне сканування може перешкоджати роботі Wi-Fi.</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="164"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Мінімальний і максимальний діапазони індикаторів</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="174"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="176"/>
       <source>Onscreen UI (GX Touch &amp; Ekrano)</source>
       <translation>Екранний інтерфейс (GX Touch і Ekrano)</translation>
-    </message>
-    <message id="settings_display_standard_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="181"/>
-      <source>Standard version</source>
-      <translation>Стандартна версія</translation>
     </message>
     <message id="settings_restarting_app">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="213"/>
@@ -6285,18 +6275,13 @@ Do you want to continue?</source>
       <extracomment>%1 = the UI version that the system has switched to.</extracomment>
       <translation>Екранний інтерфейс користувача змінився на %1.</translation>
     </message>
-    <message id="settings_language_no_browser_support">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="103"/>
-      <source>(no browser support)</source>
-      <translation>(браузер не підтримує)</translation>
-    </message>
     <message id="settings_language_change_failed">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="139"/>
       <source>Failed to change language!</source>
       <translation>Не вдалося змінити мову!</translation>
     </message>
     <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="144"/>
       <source>Please wait while the language is changed.</source>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>Будь ласка, зачекайте, поки мова зміниться.</translation>
@@ -6388,22 +6373,22 @@ Do you want to continue?</source>
       <translation>Тривога спрацьовує, якщо функцію автозапуску вимкнено більше ніж на 10 хвилин</translation>
     </message>
     <message id="settings_ess_self_consumption_battery">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="70"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="79"/>
       <source>Self-consumption from battery</source>
       <translation>Самоспоживання від батареї</translation>
     </message>
     <message id="settings_ess_all_system_loads">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="75"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="84"/>
       <source>All system loads</source>
       <translation>Всі навантаження системи</translation>
     </message>
     <message id="settings_ess_only_critical_loads">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="77"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="86"/>
       <source>Only critical loads</source>
       <translation>Тільки критичні навантаження</translation>
     </message>
     <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="139"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="148"/>
       <source>Battery life state</source>
       <oldsource>BatteryLife state</oldsource>
       <translation>Стан заряду батареї</translation>
@@ -6817,16 +6802,6 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <source>Imbalance</source>
       <translation>Незбалансовано</translation>
     </message>
-    <message id="settings_display_beta_version">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="186"/>
-      <source>Gui-v2 version</source>
-      <translation>Версія Gui-v2</translation>
-    </message>
-    <message id="settings_display_beta_version_caption">
-      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="188"/>
-      <source>Beta, check the announcement first.</source>
-      <translation>Бета-версія, спершу перевірте анонс.</translation>
-    </message>
     <message id="settings_ess_use_this_option_for_systems_no_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="56"/>
       <source>Use this option in systems that do not perform peak shaving.</source>
@@ -6929,7 +6904,7 @@ See documentation for further information.</oldsource>
       <translation>Це обмеження струму налаштоване як фіксоване і не може бути змінене користувачем.</translation>
     </message>
     <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="98"/>
       <source>RS devices</source>
       <translation>Пристрої RS</translation>
     </message>
@@ -7075,29 +7050,24 @@ See documentation for further information.</oldsource>
       <source>Genset status</source>
       <translation>Стан генератора</translation>
     </message>
-    <message id="ac-in-clear-genset_error">
-      <location filename="../../components/PageGensetModel.qml" line="150"/>
-      <source>Clear genset error</source>
-      <translation>Очистити помилку генератора</translation>
-    </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../components/PageGensetModel.qml" line="198"/>
+      <location filename="../../components/PageGensetModel.qml" line="185"/>
       <source>Remote start mode</source>
       <translation>Режим дистанційного запуску</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../components/PageGensetModel.qml" line="238"/>
+      <location filename="../../components/PageGensetModel.qml" line="225"/>
       <source>Oil pressure</source>
       <oldsource>Oil Pressure</oldsource>
       <translation>Тиск оливи</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="254"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
       <source>Scheduled charge levels</source>
       <translation>Заплановані рівні заряду</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="257"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="266"/>
       <source>Active (%1)</source>
       <translation>Активна (%1)</translation>
     </message>
@@ -7305,7 +7275,7 @@ See documentation for further information.</oldsource>
       <translation>'%1' не є числом.</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="159"/>
+      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="160"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation>Підтвердження</translation>
@@ -7342,27 +7312,27 @@ See documentation for further information.</oldsource>
       <translation>Коди помилок генераторної установки</translation>
     </message>
     <message id="genset_heatsink_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="276"/>
+      <location filename="../../components/PageGensetModel.qml" line="263"/>
       <source>Heatsink temperature</source>
       <translation>Температура радіатора</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="353"/>
+      <location filename="../../components/PageGensetModel.qml" line="340"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>Напруга заряду наразі контролюється системою BMS.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="359"/>
+      <location filename="../../components/PageGensetModel.qml" line="346"/>
       <source>Charge current limit</source>
       <translation>Обмеження зарядного струму</translation>
     </message>
     <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="369"/>
+      <location filename="../../components/PageGensetModel.qml" line="356"/>
       <source>BMS Controlled</source>
       <translation>Під керуванням BMS</translation>
     </message>
     <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="375"/>
+      <location filename="../../components/PageGensetModel.qml" line="362"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>Керування BMS вмикається автоматично за наявності BMS. Скиньте, якщо змінилася конфігурація системи або якщо відсутня BMS.</translation>
     </message>
@@ -7565,12 +7535,6 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <source>Root password changed to %1</source>
       <translation>Рут-пароль змінено на %1</translation>
     </message>
-    <message id="settings_relay_generator_start_stop">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="28"/>
-      <source>Relay controlled genset</source>
-      <oldsource>Generator start/stop</oldsource>
-      <translation>Генераторна установка з релейним керуванням</translation>
-    </message>
     <message id="settings_relay_genset_helper_relay">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="30"/>
       <source>Connected genset helper relay</source>
@@ -7628,7 +7592,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>Запуск і зупинка генератора на основі налаштованих умов автозапуску.</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
-      <location filename="../../components/PageGensetModel.qml" line="315"/>
+      <location filename="../../components/PageGensetModel.qml" line="302"/>
       <source>DC genset settings</source>
       <translation>Налаштування генераторної установки постійного струму</translation>
     </message>
@@ -7667,6 +7631,152 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="72"/>
       <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
       <translation>Генератор працюватиме до тих пір, поки не буде зупинений вручну, якщо не будуть увімкнені умови автоматичного запуску, які підтримують його роботу.</translation>
+    </message>
+    <message id="settings_display_classic_ui">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="183"/>
+      <source>Classic UI</source>
+      <translation>Класичний інтерфейс</translation>
+    </message>
+    <message id="settings_display_new_ui">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="188"/>
+      <source>New UI</source>
+      <translation>Новий інтерфейс</translation>
+    </message>
+    <message id="settings_language_change_succeeded">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="142"/>
+      <source>Successfully changed language!</source>
+      <translation>Успішно змінили мову!</translation>
+    </message>
+    <message id="page_settings_fronius_inverter_power_limiting">
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="64"/>
+      <source>Power limiting</source>
+      <translation>Обмеження потужності</translation>
+    </message>
+    <message id="settings_ess_rs_information">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="31"/>
+      <source>For Multi-RS and HS19 devices, ESS settings are available on the RS System product page.</source>
+      <translation>Для пристроїв Multi-RS і HS19 налаштування ESS доступні на сторінці продукту RS System.</translation>
+    </message>
+    <message id="settings_relay_genset_start_stop">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="28"/>
+      <source>Genset start/stop</source>
+      <translation>Запуск/зупинка генераторної установки</translation>
+    </message>
+    <message id="settings_firmware_switching_not_possible_indeterminate_profile">
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="70"/>
+      <source>Switching firmware version is not possible without "Network Security Profile" in "Settings / General" being selected.</source>
+      <translation>Перемикання версії прошивки неможливе, якщо не вибрано "Профіль мережевої безпеки" у розділі "Налаштування/Загальні".</translation>
+    </message>
+    <message id="cgwacs_battery_schedule_duration">
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="143"/>
+      <source>Duration</source>
+      <oldsource>Duration (hh:mm)</oldsource>
+      <translation>Тривалість</translation>
+    </message>
+    <message id="rssystem_system_alarms">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="73"/>
+      <source>System alarms</source>
+      <translation>Системні тривоги</translation>
+    </message>
+    <message id="rs_no_system_alarms">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="60"/>
+      <source>No system alarms</source>
+      <translation>Відсутність системних тривог</translation>
+    </message>
+    <message id="welcome_page_back">
+      <location filename="../../pages/welcome/WelcomePage.qml" line="94"/>
+      <source>Back</source>
+      <translation>Назад</translation>
+    </message>
+    <message id="welcome_whatsnew">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="35"/>
+      <source>What's New</source>
+      <translation>Новинки</translation>
+    </message>
+    <message id="welcome_skip">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="45"/>
+      <source>Skip</source>
+      <translation>пропустити</translation>
+    </message>
+    <message id="welcome_landing_title">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="64"/>
+      <source>Welcome!</source>
+      <translation>Ласкаво просимо!</translation>
+    </message>
+    <message id="welcome_landing_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="70"/>
+      <source>We’re excited to introduce a completely redesigned interface that enhances both the usability and aesthetics of your GX.
+
+With streamlined navigation and a fresh look, everything you love is now even easier to access and more visually appealing.</source>
+      <translation>Ми раді представити вам повністю оновлений інтерфейс, який покращує як зручність використання, так і естетику вашого GX.
+
+Завдяки спрощеній навігації та свіжому вигляду, все, що ви любите, стало ще доступнішим та привабливішим.</translation>
+    </message>
+    <message id="welcome_colors_title">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="74"/>
+      <source>Dark - light mode</source>
+      <translation>Темний - світлий режим</translation>
+    </message>
+    <message id="welcome_colors_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="78"/>
+      <source>Different environments call for different display settings. Dark and Light Modes ensure the best viewing experience no matter where you are.</source>
+      <translation>Різні середовища вимагають різних налаштувань дисплея. Темний і світлий режими забезпечують найкращі враження від перегляду незалежно від того, де ви знаходитесь.</translation>
+    </message>
+    <message id="welcome_brief_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="87"/>
+      <source>All the key information you need, presented in a clean and simple layout. The centerpiece is a customizable widget featuring rings, giving you quick access to your system insights at a glance.</source>
+      <translation>Вся ключова інформація, яка вам потрібна, представлена в чистому і простому макеті. Центральним елементом є настроюваний віджет з кільцями, що надає швидкий доступ до інформації про вашу систему з першого погляду.</translation>
+    </message>
+    <message id="welcome_overview_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="95"/>
+      <source>Gain greater control with our updated Overview panel, featuring real-time system data — all in one place for easy monitoring.</source>
+      <translation>Отримайте більше контролю з нашою оновленою панеллю огляду, яка відображає системні дані в реальному часі - все в одному місці для зручного моніторингу.</translation>
+    </message>
+    <message id="welcome_controls_title">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="99"/>
+      <source>Controls</source>
+      <translation>Управління:</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="103"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. </source>
+      <translation>Всі щоденні елементи керування тепер об'єднані в новій панелі "Елементи керування". </translation>
+    </message>
+    <message id="welcome_units_title">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="107"/>
+      <source>Watts &amp; Amps</source>
+      <translation>Вати та ампер</translation>
+    </message>
+    <message id="welcome_units_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="111"/>
+      <source>You can now switch between Watts and Amps. Choose the unit that best fits your preference.</source>
+      <translation>Тепер ви можете перемикатися між ватами та амперами. Виберіть одиницю виміру, яка найкраще відповідає вашим уподобанням.</translation>
+    </message>
+    <message id="welcome_more_title">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="115"/>
+      <source>Learn more</source>
+      <translation>Вивчайте більше</translation>
+    </message>
+    <message id="welcome_more_text_wasm">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="120"/>
+      <source>Access the link below to find out more about the Renewed UI.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</source>
+      <extracomment>%1 = link to URL with more information</extracomment>
+      <translation>Перейдіть за посиланням нижче, щоб дізнатися більше про оновлений інтерфейс.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
+    </message>
+    <message id="welcome_more_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="122"/>
+      <source>Scan the QR code to find out more about the Renewed UI.</source>
+      <translation>Відскануйте QR-код, щоб дізнатися більше про оновлений інтерфейс.</translation>
+    </message>
+    <message id="welcome_done">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="138"/>
+      <source>Done</source>
+      <translation>Готово</translation>
+    </message>
+    <message id="welcome_next">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="140"/>
+      <source>Next</source>
+      <translation>Далі</translation>
     </message>
   </context>
   <context>
