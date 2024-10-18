@@ -20,10 +20,11 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 			const url = model.get(i).url
 			if (url.endsWith("/" + pageName)) {
 				_currentIndex = i
-				return
+				return true
 			}
 		}
 		console.warn("setCurrentPage(): cannot find page", pageName)
+		return false
 	}
 
 	function setCurrentIndex(index) {
@@ -35,6 +36,11 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 			return
 		}
 		_currentIndex = index
+	}
+
+	function getCurrentPage() {
+		const url = model.get(currentIndex).url
+		return url.substring(url.lastIndexOf("/") + 1)
 	}
 
 	width: parent.width

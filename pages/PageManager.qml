@@ -10,9 +10,9 @@ QtObject {
 	id: root
 
 	property QtObject emitter: QtObject {
-		signal pagePushRequested(var obj, var properties)
-		signal pagePopRequested(var toPage)
-		signal popAllPagesRequested()
+		signal pagePushRequested(obj: var, properties: var, operation: int)
+		signal pagePopRequested(toPage: var, operation: int)
+		signal popAllPagesRequested(operation: int)
 	}
 
 	property NavBar navBar
@@ -30,23 +30,21 @@ QtObject {
 	property Timer idleModeTimer: Timer {
 		running: !Global.splashScreenVisible
 			&& !!Global.mainView
-			&& Global.mainView.currentPage !== null && Global.mainView.currentPage !== undefined
-			&& Global.mainView.currentPage.fullScreenWhenIdle
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			&& BackendConnection.applicationVisible
 		interval: Theme.animation_page_idleResize_timeout
 		onTriggered: root.interactivity = VenusOS.PageManager_InteractionMode_EnterIdleMode
 	}
 
-	function pushPage(obj, properties) {
-		emitter.pagePushRequested(obj, properties)
+	function pushPage(obj, properties, operation = PageStack.PushTransition) {
+		emitter.pagePushRequested(obj, properties, operation)
 	}
 
-	function popPage(toPage) {
-		emitter.pagePopRequested(toPage)
+	function popPage(toPage, operation = PageStack.PopTransition) {
+		emitter.pagePopRequested(toPage, operation)
 	}
 
-	function popAllPages() {
-		emitter.popAllPagesRequested()
+	function popAllPages(operation = PageStack.PopTransition) {
+		emitter.popAllPagesRequested(operation)
 	}
 }
