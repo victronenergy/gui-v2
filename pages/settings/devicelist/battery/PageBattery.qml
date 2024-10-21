@@ -123,6 +123,13 @@ Page {
 			}
 
 			ListQuantityItem {
+				text: "Current (last 5 minutes avg.)"
+				dataItem.uid: root.battery.serviceUid + "/CurrentAvg"
+				allowed: defaultAllowed && dataItem.isValid
+				unit: VenusOS.Units_Amp
+			}
+
+			ListQuantityItem {
 				//% "Total Capacity"
 				text: qsTrId("devicelist_battery_total_capacity")
 				dataItem.uid: root.battery.serviceUid + "/Capacity"
@@ -167,6 +174,13 @@ Page {
 			ListTemperatureItem {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.battery.serviceUid + "/Dc/0/Temperature"
+				allowed: defaultAllowed && dataItem.isValid
+				unit: Global.systemSettings.temperatureUnit
+			}
+
+			ListTemperatureItem {
+				text: "MOSFET Temperature"
+				dataItem.uid: root.battery.serviceUid + "/System/MOSTemperature"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: Global.systemSettings.temperatureUnit
 			}
@@ -242,6 +256,54 @@ Page {
 				secondaryText: Utils.secondsToString(root.battery.timeToGo)
 			}
 
+			ListTextItem {
+				//% "Time-to-SoC 0%"
+				text: "Time-to-SoC 0%"
+				allowed: defaultAllowed && dataItem.seen
+				dataItem.uid: root.battery.serviceUid + "/TimeToSoC/0"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListTextItem {
+				//% "Time-to-SoC 10%"
+				text: "Time-to-SoC 10%"
+				allowed: defaultAllowed && dataItem.seen
+				dataItem.uid: root.battery.serviceUid + "/TimeToSoC/10"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListTextItem {
+				//% "Time-to-SoC 20%"
+				text: "Time-to-SoC 20%"
+				allowed: defaultAllowed && dataItem.seen
+				dataItem.uid: root.battery.serviceUid + "/TimeToSoC/20"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListTextItem {
+				//% "Time-to-SoC 80%"
+				text: "Time-to-SoC 80%"
+				allowed: defaultAllowed && dataItem.seen
+				dataItem.uid: root.battery.serviceUid + "/TimeToSoC/80"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListTextItem {
+				//% "Time-to-SoC 90%"
+				text: "Time-to-SoC 90%"
+				allowed: defaultAllowed && dataItem.seen
+				dataItem.uid: root.battery.serviceUid + "/TimeToSoC/90"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListTextItem {
+				//% "Time-to-SoC 100%"
+				text: "Time-to-SoC 100%"
+				allowed: defaultAllowed && dataItem.seen
+				dataItem.uid: root.battery.serviceUid + "/TimeToSoC/100"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
 			ListRelayState {
 				dataItem.uid: root.battery.serviceUid + "/Relay/0/State"
 			}
@@ -262,6 +324,14 @@ Page {
 				BatteryDetails {
 					id: batteryDetails
 					bindPrefix: root.battery.serviceUid
+				}
+			}
+
+			ListNavigationItem {
+				text: "Cell Voltages"
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryCells.qml",
+							{ "title": text, "bindPrefix": root.battery.serviceUid })
 				}
 			}
 
