@@ -27,6 +27,13 @@ Page {
 			}
 
 			ListAlarm {
+				//% "High cell voltage"
+				text: qsTrId("batteryalarms_high_cell_voltage")
+				dataItem.uid: root.bindPrefix + "/Alarms/HighCellVoltage"
+				allowed: defaultAllowed && dataItem.isValid
+			}
+
+			ListAlarm {
 				//% "High charge current"
 				text: qsTrId("batteryalarms_high_charge_current")
 				dataItem.uid: root.bindPrefix + "/Alarms/HighChargeCurrent"
