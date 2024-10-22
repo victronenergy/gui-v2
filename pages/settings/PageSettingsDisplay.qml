@@ -171,9 +171,13 @@ Page {
 				id: runningVersion
 
 				property ModalWarningDialog _restartDialog
+				property VeQuickItem onScreenGuiv2Possible: VeQuickItem { uid: Global.venusPlatform.serviceUid + "/Gui/OnScreenGuiv2Supported" }
 
-				//% "Onscreen UI (GX Touch & Ekrano)"
-				text: qsTrId("settings_display_onscreen_ui")
+				text: onScreenGuiv2Possible.value === true ?
+					//% "User interface"
+					qsTrId("settings_display_onscreen_ui") :
+					//% "User interface (Remote Console)"
+					qsTrId("settings_display_remote_console_ui")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RunningVersion"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				updateDataOnClick: false
@@ -198,6 +202,7 @@ Page {
 						_restartDialog = restartDialogComponent.createObject(Global.dialogLayer)
 					}
 					_restartDialog.versionName = optionModel[index].display
+					_restartDialog.settingText = runningVersion.text
 					_restartDialog.open()
 					dataItem.setValue(optionModel[index].value)
 				}
@@ -206,20 +211,23 @@ Page {
 					id: restartDialogComponent
 
 					ModalWarningDialog {
+						property string settingText // "User inferface" or "User inferface (Remote Console)"
 						property string versionName
 
 						title: BackendConnection.type === BackendConnection.DBusSource
 							  //% "Restarting application..."
 							? qsTrId("settings_restarting_app")
-							  //% "Application restarted"
-							: qsTrId("settings_app_restarted")
+							  //: %1 = The name of the setting being updated
+							  //% "%1 updated"
+							: qsTrId("settings_app_restarted").arg(settingText)
 						description: BackendConnection.type === BackendConnection.DBusSource
 							  //: %1 = the UI version that the system is switching to
-							  //% "Onscreen UI will switch to %1."
+							  //% "User inferface will switch to %1."
 							? qsTrId("settings_switch_ui").arg(versionName)
-							   //: %1 = the UI version that the system has switched to.
-							  //% "Onscreen UI has switched to %1."
-							: qsTrId("settings_has_switched_ui").arg(versionName)
+							  //: %1 = The name of the setting being updated
+							  //: %2 = the UI version that the system has switched to.
+							  //% "%1 is set to %2"
+							: qsTrId("settings_has_switched_ui").arg(settingText).arg(versionName)
 
 						dialogDoneOptions: BackendConnection.type === BackendConnection.DBusSource
 								? VenusOS.ModalDialog_DoneOptions_NoOptions
