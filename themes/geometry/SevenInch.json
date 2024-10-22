@@ -291,7 +291,7 @@
     "geometry_levelsPage_subgauges_horizontalMargin": 24,
     "geometry_levelsPage_subgauges_bottomMargin": 10,
     "geometry_levelsPage_subgauges_spacing": 8,
-    "geometry_levelsPage_tankMergeThreshold": 8,
+    "geometry_levelsPage_tankMergeThreshold": 7,
     "geometry_levelsPage_tankGauge_radius": 7,
     "geometry_levelsPage_max_tank_count": 6,
 
