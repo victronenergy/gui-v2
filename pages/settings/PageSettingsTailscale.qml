@@ -72,7 +72,12 @@ Page {
 			returnValue = qsTrId("settings_tailscale_wait_for_response")
 		} else if (connectState == 7) {
 			//% "Connect this GX device to your Tailscale account by opening this link:"
-			returnValue = qsTrId("settings_tailscale_wait_for_login") + "\n\n" + loginLink
+			returnValue = qsTrId("settings_tailscale_wait_for_login") + "<br /><br />"
+			if (Qt.platform.os === "wasm") {
+				returnValue += "<a href=\"" + loginLink + "\">" + loginLink + "</a>"
+			} else {
+				returnValue += loginLink
+			}
 		} else if (connectState == 8) {
 			//% "Please wait or check your internet connection."
 			returnValue = qsTrId("settings_tailscale_check_internet_connection")
@@ -84,7 +89,7 @@ Page {
 
 		if (tailscaleEnabled && !tailscaleConnected && connectState != 7 && errorMessageItem.isValid && errorMessageItem.value !== "") {
 			//% "ERROR: %1"
-			returnValue += "\n\n" + qsTrId("settings_tailscale_error").arg(errorMessageItem.value)
+			returnValue += "<br /><br />" + qsTrId("settings_tailscale_error").arg(errorMessageItem.value)
 		}
 
 		return returnValue
@@ -169,6 +174,9 @@ Page {
 				text: root.serviceState
 				allowed: root.tailscaleEnabled && root.serviceState !== ""
 				horizontalAlignment: Text.AlignHCenter
+				onLinkActivated: (linkText) => {
+					BackendConnection.openUrl(linkText)
+				}
 			}
 
 			Rectangle {
