@@ -278,9 +278,7 @@ Rectangle {
 	Loader {
 		id: welcomeLoader
 
-		active: Global.dataManagerLoaded && onboardingState.isValid
-				&& ( (Qt.platform.os === "wasm" && !(onboardingState.value & VenusOS.OnboardingState_DoneWasm))
-				  || (Qt.platform.os !== "wasm" && !(onboardingState.value & VenusOS.OnboardingState_DoneNative)) )
+		active: Global.dataManagerLoaded && Global.systemSettings.needsOnboarding
 		anchors.fill: parent
 		sourceComponent: WelcomeView {
 			anchors.centerIn: parent
@@ -290,10 +288,5 @@ Rectangle {
 			// so that there is a nicer transition from the welcome to the main screen.
 			root.showSplashAnimation = true
 		}
-	}
-
-	VeQuickItem {
-		id: onboardingState
-		uid: Global.dataManagerLoaded ? Global.systemSettings.serviceUid + "/Settings/Gui2/OnBoarding" : ""
 	}
 }

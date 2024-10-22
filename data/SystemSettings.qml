@@ -10,6 +10,7 @@ QtObject {
 	id: root
 
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
+	readonly property bool needsOnboarding: !_onboardingState.done
 
 	property int electricalQuantity: VenusOS.Units_None
 	property int temperatureUnit: VenusOS.Units_None
@@ -105,6 +106,10 @@ QtObject {
 		default:
 			return ""
 		}
+	}
+
+	function setOnboardingDone() {
+		_onboardingState.setDoneFlag()
 	}
 
 	property VeQuickItem accessLevel: VeQuickItem {
@@ -298,6 +303,26 @@ QtObject {
 
 	readonly property VeQuickItem _preventFeedback: VeQuickItem {
 		uid: root.serviceUid + "/Settings/CGwacs/PreventFeedback"
+	}
+
+	readonly property VeQuickItem _onboardingState: VeQuickItem {
+		readonly property bool done: _forceOnboardingDone
+			|| (isValid
+				&& ( (Qt.platform.os === "wasm" && (value & VenusOS.OnboardingState_DoneWasm))
+					|| (Qt.platform.os !== "wasm" && (value & VenusOS.OnboardingState_DoneNative)) ) )
+
+		property bool _forceOnboardingDone
+
+		function setDoneFlag() {
+			_forceOnboardingDone = true
+			if (Qt.platform.os === "wasm") {
+				setValue(value | VenusOS.OnboardingState_DoneWasm)
+			} else {
+				setValue(value | VenusOS.OnboardingState_DoneNative)
+			}
+		}
+
+		uid: root.serviceUid + "/Settings/Gui2/OnBoarding"
 	}
 
 	function reset() {
