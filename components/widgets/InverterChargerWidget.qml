@@ -45,16 +45,33 @@ OverviewWidget {
 				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				right: parent.right
 				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				bottom: parent.bottom
+				bottom: systemReasonText.top
 			}
 			text: Global.system.systemStateToText(Global.system.state)
 			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 			minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
 			fontSizeMode: Text.VerticalFit
-
 			wrapMode: Text.Wrap
 			maximumLineCount: 4
 			elide: Text.ElideRight
+		},
+		Label {
+			id: systemReasonText
+
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				right: parent.right
+				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				bottom: parent.bottom
+				bottomMargin: Theme.geometry_overviewPage_widget_content_verticalMargin
+			}
+			text: systemReason.text
+			wrapMode: Text.WordWrap
+			color: Theme.color_font_secondary
+			SystemReason {
+				id: systemReason
+			}
 		}
 	]
 
