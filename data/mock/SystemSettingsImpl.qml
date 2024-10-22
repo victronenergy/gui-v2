@@ -9,6 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	property SystemReason systemReason: SystemReason {}
+
 	function setMockSettingValue(settingId, value) {
 		Global.mockDataSimulator.setMockValue("com.victronenergy.settings/Settings/" + settingId, value)
 	}
@@ -104,6 +106,14 @@ QtObject {
 		setMockSettingValue("SystemSetup/BmsInstance", -1)
 		setMockSystemValue("ActiveBmsService", "com.victronenergy.battery.ttyUSB1")
 		setMockSystemValue("ActiveBmsInstance", 1)
+
+		//systemReason.lowSoc.setValue(1)
+		//systemReason.batteryLife.setValue(1)
+		systemReason.chargeDisabled.setValue(1)
+		systemReason.dischargeDisabled.setValue(1)
+		//systemReason.slowCharge.setValue(1)
+		//systemReason.userChargeLimited.setValue(1)
+		//systemReason.userDischargeLimited.setValue(1)
 
 		setMockSystemValue("SystemType", "ESS")
 		setMockSystemValue("Hub", 4)
