@@ -120,7 +120,6 @@ Rectangle {
 				? qsTrId("welcome_more_text_wasm").arg("https://ve3.nl/gx-nui-ob")
 				  //% "Scan the QR code to find out more about the Renewed UI."
 				: qsTrId("welcome_more_text"),
-			qrCodeUrl: Qt.platform.os === "wasm" ? "" : "qrc:/images/welcome-qrCode.png"
 		}
 	]
 
@@ -131,7 +130,8 @@ Rectangle {
 			imageUrl: modelData.imageUrl
 			title: modelData.title
 			text: modelData.text
-			qrCodeUrl: modelData.qrCodeUrl || ""
+			qrCodeUrl: model.index < welcomePageModel.length - 1 || Qt.platform.os === "wasm" ? ""
+					: (Theme.colorScheme === Theme.Light ? "qrc:/images/welcome-qrCode-light.png" : "qrc:/images/welcome-qrCode.png")
 			backButtonEnabled: model.index > 0
 			nextButtonText: model.index === welcomePages.count - 1
 				  //% "Done"

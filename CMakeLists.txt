@@ -1118,6 +1118,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/welcome-more.png
         images/welcome-overview.png
         images/welcome-qrCode.png
+        images/welcome-qrCode-light.png
         images/welcome-units.png
         images/widget_connector_nub_horizontal.svg
         images/widget_connector_nub_vertical.svg
