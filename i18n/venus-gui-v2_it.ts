@@ -2480,12 +2480,6 @@ Documentazione disponibile su https://ve3.nl/vol</translation>
       <source>High battery voltage alarm</source>
       <translation>Allarme alta tensione batteria</translation>
     </message>
-    <message id="charger_alarms_header_last_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="72"/>
-      <source>Last Errors</source>
-      <extracomment>Details of most recent errors</extracomment>
-      <translation>Errori più recenti</translation>
-    </message>
     <message id="common_words_last_error">
       <location filename="../../components/CommonWords.qml" line="559"/>
       <source>Last error</source>
@@ -2604,7 +2598,7 @@ Documentazione disponibile su https://ve3.nl/vol</translation>
       <translation>Carico</translation>
     </message>
     <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="144"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="151"/>
       <source>%1 found</source>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>%1 trovato</translation>
@@ -2616,7 +2610,7 @@ Documentazione disponibile su https://ve3.nl/vol</translation>
       <translation>%1 Cronologia</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="190"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="196"/>
       <source>Networked operation</source>
       <translation>Funzionamento in rete</translation>
     </message>
@@ -2776,12 +2770,6 @@ Documentazione disponibile su https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/debug/PageDebug.qml" line="50"/>
       <source>Enable frame-rate visualizer</source>
       <translation>Attivare il visualizzatore di frequenza dei fotogrammi</translation>
-    </message>
-    <message id="devicelist_solarcharger_error">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
-      <source>Error: %1</source>
-      <extracomment>%1 = error number</extracomment>
-      <translation>Errore: %1</translation>
     </message>
     <message id="devicelist_unsupported">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="208"/>
@@ -6096,7 +6084,7 @@ Si desidera continuare?</translation>
       <translation>Solo inverter</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="60"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="58"/>
       <source>Short circuit alarm</source>
       <translation>Allarme cortocircuito</translation>
     </message>
@@ -6416,7 +6404,7 @@ Si desidera continuare?</translation>
       <translation>Istanze dispositivo VRM</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="51"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="49"/>
       <source>High temperature alarm</source>
       <translation>Allarme temperatura alta</translation>
     </message>
@@ -6427,7 +6415,7 @@ Si desidera continuare?</translation>
       <translation>Controllato dal BMS</translation>
     </message>
     <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="139"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="146"/>
       <source>Alarms &amp; Errors</source>
       <oldsource>Alarms and Errors</oldsource>
       <translation>Allarmi ed Errori</translation>
@@ -7760,6 +7748,18 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../pages/welcome/WelcomeView.qml" line="140"/>
       <source>Next</source>
       <translation>Successivo</translation>
+    </message>
+    <message id="devicelist_solarcharger_error">
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
+      <source>Error: #%1</source>
+      <extracomment>%1 = error number</extracomment>
+      <oldsource>Error: %1</oldsource>
+      <translation></translation>
+    </message>
+    <message id="charger_alarms_header_active_errors">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="69"/>
+      <source>Active Error</source>
+      <translation></translation>
     </message>
   </context>
   <context>

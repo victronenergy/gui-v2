@@ -2480,12 +2480,6 @@ Documentație la https://ve3.nl/vol</translation>
       <source>High battery voltage alarm</source>
       <translation>Alarma tensiune ridicata baterie</translation>
     </message>
-    <message id="charger_alarms_header_last_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="72"/>
-      <source>Last Errors</source>
-      <extracomment>Details of most recent errors</extracomment>
-      <translation>Ultimele erori</translation>
-    </message>
     <message id="common_words_last_error">
       <location filename="../../components/CommonWords.qml" line="559"/>
       <source>Last error</source>
@@ -2604,7 +2598,7 @@ Documentație la https://ve3.nl/vol</translation>
       <translation>Incarcare</translation>
     </message>
     <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="144"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="151"/>
       <source>%1 found</source>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>%1 găsit</translation>
@@ -2616,7 +2610,7 @@ Documentație la https://ve3.nl/vol</translation>
       <translation>%1 Istoric</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="190"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="196"/>
       <source>Networked operation</source>
       <translation>Functionare in retea</translation>
     </message>
@@ -2776,12 +2770,6 @@ Documentație la https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/debug/PageDebug.qml" line="50"/>
       <source>Enable frame-rate visualizer</source>
       <translation>Activare vizualizator rată de cadre</translation>
-    </message>
-    <message id="devicelist_solarcharger_error">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
-      <source>Error: %1</source>
-      <extracomment>%1 = error number</extracomment>
-      <translation>Eroare: %1</translation>
     </message>
     <message id="devicelist_unsupported">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="208"/>
@@ -6099,7 +6087,7 @@ Doriți să continuați?</translation>
       <translation>Doar invertor</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="60"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="58"/>
       <source>Short circuit alarm</source>
       <translation>Alarmă de scurtcircuit</translation>
     </message>
@@ -6419,7 +6407,7 @@ Doriți să continuați?</translation>
       <translation>Instanțe de dispozitive VRM</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="51"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="49"/>
       <source>High temperature alarm</source>
       <translation>Alarma de temperatură ridicată</translation>
     </message>
@@ -6430,7 +6418,7 @@ Doriți să continuați?</translation>
       <translation>Controlat de BMS</translation>
     </message>
     <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="139"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="146"/>
       <source>Alarms &amp; Errors</source>
       <oldsource>Alarms and Errors</oldsource>
       <translation>Alarme și erori</translation>
@@ -7578,22 +7566,22 @@ După adăugarea/activarea unei noi rețele, trebuie să o aprobați o dată în
       <location filename="../../pages/controlcards/GeneratorCard.qml" line="46"/>
       <source>Start and stop the generator based on the configured autostart conditions.</source>
       <oldsource>The generator will start and stop based on the configured autostart conditions.</oldsource>
-      <translation></translation>
+      <translation>Porniți și opriți generatorul pe baza condițiilor de pornire automată configurate.</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
       <location filename="../../components/PageGensetModel.qml" line="302"/>
       <source>DC genset settings</source>
-      <translation></translation>
+      <translation>Setări grup electrogen DC</translation>
     </message>
     <message id="alternator_temperature">
       <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="32"/>
       <source>Alternator Temperature</source>
-      <translation></translation>
+      <translation>Temperatura alternatorului</translation>
     </message>
     <message id="engine_temperature">
       <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="90"/>
       <source>Engine Temperature</source>
-      <translation></translation>
+      <translation>Temperatura motorului</translation>
     </message>
     <message id="page_settings_run_time_and_service_total_run_time">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="48"/>
@@ -7603,74 +7591,74 @@ După adăugarea/activarea unei noi rețele, trebuie să o aprobați o dată în
     <message id="settings_network_security_profile">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="103"/>
       <source>Network security profile</source>
-      <translation></translation>
+      <translation>Profil de securitate a rețelei</translation>
     </message>
     <message id="charger_history_last_x_days">
       <location filename="../../pages/solar/SolarHistoryPage.qml" line="62"/>
       <source>Last %1 days</source>
       <extracomment>%1 = number of days of solar history that will be shown</extracomment>
-      <translation></translation>
+      <translation>Ultimele %1 zile</translation>
     </message>
     <message id="generator_start_dialog_will_stop_in_x">
       <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="70"/>
       <source>Generator will stop in %1 unless autostart conditions are enabled that keep it running.</source>
-      <translation></translation>
+      <translation>Generatorul se va opri în %1, cu excepția cazului în care sunt activate condiții de pornire automată care îl mențin în funcțiune.</translation>
     </message>
     <message id="generator_start_dialog_will_run_until_manually_stopped">
       <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="72"/>
       <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
-      <translation></translation>
+      <translation>Generatorul va funcționa până când este oprit manual, cu excepția cazului în care sunt activate condiții de pornire automată care îl mențin în funcțiune.</translation>
     </message>
     <message id="settings_display_classic_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="183"/>
       <source>Classic UI</source>
-      <translation></translation>
+      <translation>Interfață clasică</translation>
     </message>
     <message id="settings_display_new_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="188"/>
       <source>New UI</source>
-      <translation></translation>
+      <translation>UI nouă</translation>
     </message>
     <message id="settings_language_change_succeeded">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="142"/>
       <source>Successfully changed language!</source>
-      <translation></translation>
+      <translation>Limba schimbată cu succes!</translation>
     </message>
     <message id="page_settings_fronius_inverter_power_limiting">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="64"/>
       <source>Power limiting</source>
-      <translation></translation>
+      <translation>Limitarea puterii</translation>
     </message>
     <message id="settings_ess_rs_information">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="31"/>
       <source>For Multi-RS and HS19 devices, ESS settings are available on the RS System product page.</source>
-      <translation></translation>
+      <translation>Pentru dispozitivele Multi-RS și HS19, setările ESS sunt disponibile pe pagina produsului RS System.</translation>
     </message>
     <message id="settings_relay_genset_start_stop">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="28"/>
       <source>Genset start/stop</source>
-      <translation></translation>
+      <translation>Pornirea/oprirea grupului electrogenerator</translation>
     </message>
     <message id="settings_firmware_switching_not_possible_indeterminate_profile">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="70"/>
       <source>Switching firmware version is not possible without "Network Security Profile" in "Settings / General" being selected.</source>
-      <translation></translation>
+      <translation>Schimbarea versiunii firmware nu este posibilă fără a selecta "Profil de securitate rețea" în "Setări / General".</translation>
     </message>
     <message id="cgwacs_battery_schedule_duration">
       <location filename="../../components/settings/ChargeScheduleItem.qml" line="143"/>
       <source>Duration</source>
       <oldsource>Duration (hh:mm)</oldsource>
-      <translation></translation>
+      <translation>Durată</translation>
     </message>
     <message id="rssystem_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="73"/>
       <source>System alarms</source>
-      <translation></translation>
+      <translation>Alarme de sistem</translation>
     </message>
     <message id="rs_no_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="60"/>
       <source>No system alarms</source>
-      <translation></translation>
+      <translation>Nicio alarmă de sistem</translation>
     </message>
     <message id="welcome_page_back">
       <location filename="../../pages/welcome/WelcomePage.qml" line="94"/>
@@ -7680,64 +7668,66 @@ După adăugarea/activarea unei noi rețele, trebuie să o aprobați o dată în
     <message id="welcome_whatsnew">
       <location filename="../../pages/welcome/WelcomeView.qml" line="35"/>
       <source>What's New</source>
-      <translation></translation>
+      <translation>Ce este nou</translation>
     </message>
     <message id="welcome_skip">
       <location filename="../../pages/welcome/WelcomeView.qml" line="45"/>
       <source>Skip</source>
-      <translation></translation>
+      <translation>Salt</translation>
     </message>
     <message id="welcome_landing_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="64"/>
       <source>Welcome!</source>
-      <translation></translation>
+      <translation>Bine ați venit!</translation>
     </message>
     <message id="welcome_landing_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="70"/>
       <source>We’re excited to introduce a completely redesigned interface that enhances both the usability and aesthetics of your GX.
 
 With streamlined navigation and a fresh look, everything you love is now even easier to access and more visually appealing.</source>
-      <translation></translation>
+      <translation>Suntem încântați să vă prezentăm o interfață complet reproiectată, care îmbunătățește atât ușurința în utilizare, cât și estetica GX-ului dvs.
+
+Cu o navigare simplificată și un aspect nou, tot ceea ce vă place este acum și mai ușor de accesat și mai atrăgător din punct de vedere vizual.</translation>
     </message>
     <message id="welcome_colors_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="74"/>
       <source>Dark - light mode</source>
-      <translation></translation>
+      <translation>Mod întunecat - luminos</translation>
     </message>
     <message id="welcome_colors_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="78"/>
       <source>Different environments call for different display settings. Dark and Light Modes ensure the best viewing experience no matter where you are.</source>
-      <translation></translation>
+      <translation>Mediile diferite necesită setări de afișare diferite. Modurile întuneric și lumină asigură cea mai bună experiență de vizionare, indiferent de locul în care vă aflați.</translation>
     </message>
     <message id="welcome_brief_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="87"/>
       <source>All the key information you need, presented in a clean and simple layout. The centerpiece is a customizable widget featuring rings, giving you quick access to your system insights at a glance.</source>
-      <translation></translation>
+      <translation>Toate informațiile cheie de care aveți nevoie, prezentate într-un aspect simplu și curat. Piesa centrală este un widget personalizabil cu inele, care vă oferă acces rapid la informațiile despre sistem dintr-o singură privire.</translation>
     </message>
     <message id="welcome_overview_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="95"/>
       <source>Gain greater control with our updated Overview panel, featuring real-time system data — all in one place for easy monitoring.</source>
-      <translation></translation>
+      <translation>Obțineți un control sporit cu panoul nostru de prezentare actualizat, care oferă date în timp real despre sistem - toate într-un singur loc pentru o monitorizare ușoară.</translation>
     </message>
     <message id="welcome_controls_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="99"/>
       <source>Controls</source>
-      <translation></translation>
+      <translation>Controale</translation>
     </message>
     <message id="welcome_controls_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="103"/>
       <source>All the day to day controls are now combined together in the new Controls pane. </source>
-      <translation></translation>
+      <translation>Toate controalele de zi cu zi sunt acum combinate în noul panou Controale. </translation>
     </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="107"/>
       <source>Watts &amp; Amps</source>
-      <translation></translation>
+      <translation>Watts &amp; Amperi</translation>
     </message>
     <message id="welcome_units_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="111"/>
       <source>You can now switch between Watts and Amps. Choose the unit that best fits your preference.</source>
-      <translation></translation>
+      <translation>Acum puteți comuta între wați și amperi. Alegeți unitatea care se potrivește cel mai bine preferințelor dvs.</translation>
     </message>
     <message id="welcome_more_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="115"/>
@@ -7748,22 +7738,34 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../pages/welcome/WelcomeView.qml" line="120"/>
       <source>Access the link below to find out more about the Renewed UI.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</source>
       <extracomment>%1 = link to URL with more information</extracomment>
-      <translation></translation>
+      <translation>Accesați link-ul de mai jos pentru a afla mai multe despre IU reînnoită.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
     </message>
     <message id="welcome_more_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="122"/>
       <source>Scan the QR code to find out more about the Renewed UI.</source>
-      <translation></translation>
+      <translation>Scanați codul QR pentru a afla mai multe despre IU reînnoită.</translation>
     </message>
     <message id="welcome_done">
       <location filename="../../pages/welcome/WelcomeView.qml" line="138"/>
       <source>Done</source>
-      <translation></translation>
+      <translation>Efectuat</translation>
     </message>
     <message id="welcome_next">
       <location filename="../../pages/welcome/WelcomeView.qml" line="140"/>
       <source>Next</source>
       <translation>Următor</translation>
+    </message>
+    <message id="devicelist_solarcharger_error">
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
+      <source>Error: #%1</source>
+      <extracomment>%1 = error number</extracomment>
+      <oldsource>Error: %1</oldsource>
+      <translation>Eroare: #%1</translation>
+    </message>
+    <message id="charger_alarms_header_active_errors">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="69"/>
+      <source>Active Error</source>
+      <translation>Eroare activă</translation>
     </message>
   </context>
   <context>
@@ -10220,22 +10222,22 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message>
       <location filename="../../data/EnvironmentInputs.qml" line="36"/>
       <source>Room</source>
-      <translation></translation>
+      <translation>Camera</translation>
     </message>
     <message>
       <location filename="../../data/EnvironmentInputs.qml" line="42"/>
       <source>Outdoor</source>
-      <translation></translation>
+      <translation>În aer liber</translation>
     </message>
     <message>
       <location filename="../../data/EnvironmentInputs.qml" line="48"/>
       <source>Water Heater</source>
-      <translation></translation>
+      <translation>Încălzitor de apă</translation>
     </message>
     <message>
       <location filename="../../data/EnvironmentInputs.qml" line="54"/>
       <source>Freezer</source>
-      <translation></translation>
+      <translation>Congelator</translation>
     </message>
   </context>
 </TS>
