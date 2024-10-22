@@ -2480,12 +2480,6 @@ Dokumentation unter https://ve3.nl/vol</translation>
       <source>High battery voltage alarm</source>
       <translation>Alarm Batteriespannung hoch</translation>
     </message>
-    <message id="charger_alarms_header_last_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="72"/>
-      <source>Last Errors</source>
-      <extracomment>Details of most recent errors</extracomment>
-      <translation>Letzte Fehler</translation>
-    </message>
     <message id="common_words_last_error">
       <location filename="../../components/CommonWords.qml" line="559"/>
       <source>Last error</source>
@@ -2604,7 +2598,7 @@ Dokumentation unter https://ve3.nl/vol</translation>
       <translation>Last</translation>
     </message>
     <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="144"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="151"/>
       <source>%1 found</source>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>%1 gefunden</translation>
@@ -2616,7 +2610,7 @@ Dokumentation unter https://ve3.nl/vol</translation>
       <translation>%1 Verlauf</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="190"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="196"/>
       <source>Networked operation</source>
       <translation>Vernetzter Betrieb</translation>
     </message>
@@ -2776,12 +2770,6 @@ Dokumentation unter https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/debug/PageDebug.qml" line="50"/>
       <source>Enable frame-rate visualizer</source>
       <translation>Visualisierung der Bildrate aktivieren</translation>
-    </message>
-    <message id="devicelist_solarcharger_error">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
-      <source>Error: %1</source>
-      <extracomment>%1 = error number</extracomment>
-      <translation>Fehler: %1</translation>
     </message>
     <message id="devicelist_unsupported">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="208"/>
@@ -6098,7 +6086,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Nur Wechselrichter</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="60"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="58"/>
       <source>Short circuit alarm</source>
       <translation>Kurzschlussalarm</translation>
     </message>
@@ -6419,7 +6407,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>VRM-Geräte-Instanzen</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="51"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="49"/>
       <source>High temperature alarm</source>
       <translation>Alarm hohe Temperatur</translation>
     </message>
@@ -6430,7 +6418,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>BMS gesteuert</translation>
     </message>
     <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="139"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="146"/>
       <source>Alarms &amp; Errors</source>
       <oldsource>Alarms and Errors</oldsource>
       <translation>Alarme &amp; Fehler</translation>
@@ -7634,7 +7622,7 @@ Nachdem Sie ein neues Netzwerk hinzugefügt/aktiviert haben, müssen Sie es einm
     <message id="settings_language_change_succeeded">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="142"/>
       <source>Successfully changed language!</source>
-      <translation>Erfolgreich die Sprache gewechselt!</translation>
+      <translation>Sprache erfolgreich geändert!</translation>
     </message>
     <message id="page_settings_fronius_inverter_power_limiting">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="64"/>
@@ -7665,7 +7653,7 @@ Nachdem Sie ein neues Netzwerk hinzugefügt/aktiviert haben, müssen Sie es einm
     <message id="rssystem_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="73"/>
       <source>System alarms</source>
-      <translation>System Alarme</translation>
+      <translation>Systemalarme</translation>
     </message>
     <message id="rs_no_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="60"/>
@@ -7680,17 +7668,17 @@ Nachdem Sie ein neues Netzwerk hinzugefügt/aktiviert haben, müssen Sie es einm
     <message id="welcome_whatsnew">
       <location filename="../../pages/welcome/WelcomeView.qml" line="35"/>
       <source>What's New</source>
-      <translation>What's new</translation>
+      <translation>Was ist neu</translation>
     </message>
     <message id="welcome_skip">
       <location filename="../../pages/welcome/WelcomeView.qml" line="45"/>
       <source>Skip</source>
-      <translation>überspringen</translation>
+      <translation>Überspringen</translation>
     </message>
     <message id="welcome_landing_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="64"/>
       <source>Welcome!</source>
-      <translation>Herzlich willkommen!</translation>
+      <translation>Willkommen!</translation>
     </message>
     <message id="welcome_landing_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="70"/>
@@ -7699,17 +7687,17 @@ Nachdem Sie ein neues Netzwerk hinzugefügt/aktiviert haben, müssen Sie es einm
 With streamlined navigation and a fresh look, everything you love is now even easier to access and more visually appealing.</source>
       <translation>Wir freuen uns, Ihnen eine völlig neu gestaltete Benutzeroberfläche vorstellen zu können, die sowohl die Benutzerfreundlichkeit als auch die Ästhetik Ihres GX verbessert.
 
-Mit einer gestrafften Navigation und einem neuen Look ist alles, was Sie lieben, jetzt noch einfacher zu erreichen und optisch ansprechender.</translation>
+Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch einfacher zugänglich und optisch ansprechender.</translation>
     </message>
     <message id="welcome_colors_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="74"/>
       <source>Dark - light mode</source>
-      <translation>Dunkelheit - heller Modus</translation>
+      <translation>Dunkel-Hell-Modus</translation>
     </message>
     <message id="welcome_colors_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="78"/>
       <source>Different environments call for different display settings. Dark and Light Modes ensure the best viewing experience no matter where you are.</source>
-      <translation>Unterschiedliche Umgebungen erfordern unterschiedliche Bildschirmeinstellungen. Die Modi "Dunkel" und "Hell" sorgen für ein optimales Seherlebnis, egal wo Sie sich befinden.</translation>
+      <translation>Unterschiedliche Umgebungen erfordern unterschiedliche Bildschirmeinstellungen. Die Modi "Dunkel" und "Hell" sorgen für ein optimales Seherlebnis, egal wo Sie sind.</translation>
     </message>
     <message id="welcome_brief_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="87"/>
@@ -7750,12 +7738,12 @@ Mit einer gestrafften Navigation und einem neuen Look ist alles, was Sie lieben,
       <location filename="../../pages/welcome/WelcomeView.qml" line="120"/>
       <source>Access the link below to find out more about the Renewed UI.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</source>
       <extracomment>%1 = link to URL with more information</extracomment>
-      <translation>Unter dem folgenden Link finden Sie weitere Informationen über die erneuerte Benutzeroberfläche.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
+      <translation>Unter dem folgenden Link finden Sie weitere Informationen über die erneuerte UI.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
     </message>
     <message id="welcome_more_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="122"/>
       <source>Scan the QR code to find out more about the Renewed UI.</source>
-      <translation>Scannen Sie den QR-Code, um mehr über die Renewed UI zu erfahren.</translation>
+      <translation>Scannen Sie den QR-Code, um mehr über die erneuerte UI zu erfahren.</translation>
     </message>
     <message id="welcome_done">
       <location filename="../../pages/welcome/WelcomeView.qml" line="138"/>
@@ -7766,6 +7754,18 @@ Mit einer gestrafften Navigation und einem neuen Look ist alles, was Sie lieben,
       <location filename="../../pages/welcome/WelcomeView.qml" line="140"/>
       <source>Next</source>
       <translation>Weiter</translation>
+    </message>
+    <message id="devicelist_solarcharger_error">
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
+      <source>Error: #%1</source>
+      <extracomment>%1 = error number</extracomment>
+      <oldsource>Error: %1</oldsource>
+      <translation>Fehler: #%1</translation>
+    </message>
+    <message id="charger_alarms_header_active_errors">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="69"/>
+      <source>Active Error</source>
+      <translation>Aktiver Fehler</translation>
     </message>
   </context>
   <context>

@@ -2487,12 +2487,6 @@ Documentation at https://ve3.nl/vol</source>
       <source>High battery voltage alarm</source>
       <translation>Тривога через високу напругу батареї</translation>
     </message>
-    <message id="charger_alarms_header_last_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="72"/>
-      <source>Last Errors</source>
-      <extracomment>Details of most recent errors</extracomment>
-      <translation>Останні помилки</translation>
-    </message>
     <message id="common_words_last_error">
       <location filename="../../components/CommonWords.qml" line="559"/>
       <source>Last error</source>
@@ -2612,7 +2606,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Спожив.</translation>
     </message>
     <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="144"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="151"/>
       <source>%1 found</source>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>%1 знайдено</translation>
@@ -2624,7 +2618,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>%1 Історія</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="190"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="196"/>
       <source>Networked operation</source>
       <translation>Робота в мережі</translation>
     </message>
@@ -2784,12 +2778,6 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/debug/PageDebug.qml" line="50"/>
       <source>Enable frame-rate visualizer</source>
       <translation>Увімкнути візуалізатор частоти кадрів</translation>
-    </message>
-    <message id="devicelist_solarcharger_error">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
-      <source>Error: %1</source>
-      <extracomment>%1 = error number</extracomment>
-      <translation>Помилка: %1</translation>
     </message>
     <message id="devicelist_unsupported">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="208"/>
@@ -6110,7 +6098,7 @@ Do you want to continue?</source>
       <translation>Тільки інвертор</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="60"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="58"/>
       <source>Short circuit alarm</source>
       <translation>Тривога через коротке замикання</translation>
     </message>
@@ -6430,7 +6418,7 @@ Do you want to continue?</source>
       <translation>Екземпляри пристроїв VRM</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="51"/>
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="49"/>
       <source>High temperature alarm</source>
       <translation>Тривога через високу температуру</translation>
     </message>
@@ -6441,7 +6429,7 @@ Do you want to continue?</source>
       <translation>Під керуванням BMS</translation>
     </message>
     <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="139"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="146"/>
       <source>Alarms &amp; Errors</source>
       <oldsource>Alarms and Errors</oldsource>
       <translation>Тривоги та помилки</translation>
@@ -7745,12 +7733,12 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="107"/>
       <source>Watts &amp; Amps</source>
-      <translation>Вати та ампер</translation>
+      <translation>Вати та Ампери</translation>
     </message>
     <message id="welcome_units_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="111"/>
       <source>You can now switch between Watts and Amps. Choose the unit that best fits your preference.</source>
-      <translation>Тепер ви можете перемикатися між ватами та амперами. Виберіть одиницю виміру, яка найкраще відповідає вашим уподобанням.</translation>
+      <translation>Тепер ви можете перемикатися між Ватами та Амперами. Виберіть одиницю виміру, яка найкраще відповідає вашим уподобанням.</translation>
     </message>
     <message id="welcome_more_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="115"/>
@@ -7777,6 +7765,18 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../pages/welcome/WelcomeView.qml" line="140"/>
       <source>Next</source>
       <translation>Далі</translation>
+    </message>
+    <message id="devicelist_solarcharger_error">
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
+      <source>Error: #%1</source>
+      <extracomment>%1 = error number</extracomment>
+      <oldsource>Error: %1</oldsource>
+      <translation>Помилка: #%1</translation>
+    </message>
+    <message id="charger_alarms_header_active_errors">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="69"/>
+      <source>Active Error</source>
+      <translation>Активна помилка</translation>
     </message>
   </context>
   <context>
