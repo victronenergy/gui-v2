@@ -79,7 +79,7 @@ Page {
 						text: {
 							const modeText = Global.batteries.modeToText(modelData.mode)
 							if (modelData.mode === VenusOS.Battery_Mode_Discharging) {
-								return modeText + " - " + Global.batteries.timeToGoText(modelData, VenusOS.Battery_TimeToGo_LongFormat)
+								return modeText + " - " + Global.batteries.timeToGoText(modelData.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
 							}
 							return modeText
 						}
