@@ -63,7 +63,9 @@ Page {
 		onValueChanged: {
 			const roles = value
 			role.optionModel = roles ? roles.map(function(v) {
-				return { "display": Global.acInputs.roleName(v), "value": v }
+				// heatpump feature is not properly supported yet. So, hide it unless it is the
+				// currently selected option.
+				return { "display": Global.acInputs.roleName(v), "value": v, "readOnly": v === "heatpump" }
 			}) : []
 		}
 	}

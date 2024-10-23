@@ -73,10 +73,21 @@ QtObject {
 				}
 			}
 
+			readonly property VeQuickItem _allowedRoles: VeQuickItem {
+				uid: pvInverter.serviceUid + "/AllowedRoles"
+			}
+
+			readonly property VeQuickItem _role: VeQuickItem {
+				uid: pvInverter.serviceUid + "/Role"
+			}
+
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("My PV Inverter " + deviceInstance)
 				_statusCode.setValue(Math.random() * VenusOS.PvInverter_StatusCode_Error)
+				_productId.setValue(45058) // dummy value so that ProductId is not invalid, so PageAcIn.qml will show some content
+				_allowedRoles.setValue(Global.acInputs.roles.map((roleInfo) => { return roleInfo.role }))
+				_role.setValue("pvinverter")
 			}
 		}
 	}
