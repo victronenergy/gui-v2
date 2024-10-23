@@ -182,7 +182,7 @@ OverviewWidget {
 				color: Theme.color_font_secondary
 			}
 			Label {
-				text: Global.batteries.timeToGoText(Global.batteries.system, VenusOS.Battery_TimeToGo_ShortFormat)
+				text: Global.batteries.timeToGoText(Global.batteries.system.timeToGo, VenusOS.Battery_TimeToGo_ShortFormat)
 				color: Theme.color_font_primary
 				width: parent.width
 				elide: Text.ElideRight

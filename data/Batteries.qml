@@ -27,11 +27,11 @@ QtObject {
 		model.clear()
 	}
 
-	function timeToGoText(battery, format) {
-		if ((battery.timeToGo || 0) <= 0) {
+	function timeToGoText(timeToGo, format) {
+		if ((timeToGo || 0) <= 0) {
 			return ""
 		}
-		const text = Utils.secondsToString(battery.timeToGo)
+		const text = Utils.secondsToString(timeToGo)
 		if (format === VenusOS.Battery_TimeToGo_LongFormat) {
 			//: %1 = time remaining, e.g. '3h 2m'
 			//% "%1 to go"
@@ -41,14 +41,14 @@ QtObject {
 		}
 	}
 
-	function batteryIcon(battery) {
-		return isNaN(battery.power) || battery.power === 0 ? "qrc:/images/icon_battery_24.svg"
-			: (battery.power > 0 ? "qrc:/images/icon_battery_charging_24.svg" : "qrc:/images/icon_battery_discharging_24.svg")
+	function batteryIcon(power) {
+		return isNaN(power) || power === 0 ? "qrc:/images/icon_battery_24.svg"
+			: (power > 0 ? "qrc:/images/icon_battery_charging_24.svg" : "qrc:/images/icon_battery_discharging_24.svg")
 	}
 
-	function batteryMode(battery) {
-		return isNaN(battery.power) || battery.power === 0 ? VenusOS.Battery_Mode_Idle
-			: (battery.power > 0 ? VenusOS.Battery_Mode_Charging : VenusOS.Battery_Mode_Discharging)
+	function batteryMode(power) {
+		return isNaN(power) || power === 0 ? VenusOS.Battery_Mode_Idle
+			: (power > 0 ? VenusOS.Battery_Mode_Charging : VenusOS.Battery_Mode_Discharging)
 	}
 
 	function modeToText(mode) {

@@ -15,8 +15,8 @@ QtObject {
 	readonly property real current: _current.isValid ? _current.value : NaN
 	readonly property real temperature: _temperature.isValid ? _temperature.value : NaN
 	readonly property real timeToGo: _timeToGo.isValid ? _timeToGo.value : NaN
-	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(battery) : ""
-	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(battery) : -1
+	readonly property string icon: !!Global.batteries ? Global.batteries.batteryIcon(power) : ""
+	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(power) : -1
 
 	readonly property VeQuickItem _stateOfCharge: VeQuickItem {
 		uid: Global.system.serviceUid + "/Dc/Battery/Soc"
