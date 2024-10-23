@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Templates as T
 
 Page {
 	id: root
@@ -298,13 +299,26 @@ Page {
 				//% "Reboot now"
 				button.text: qsTrId("settings_reboot_now")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: {
-					Global.venusPlatform.reboot()
-					Global.dialogLayer.open(rebootDialogComponent)
+				onClicked: Global.dialogLayer.open(confirmRebootDialogComponent)
+
+				Component {
+					id: confirmRebootDialogComponent
+
+					ModalWarningDialog {
+						//% "Press 'OK' to reboot"
+						title: qsTrId("press_ok_to_reboot")
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						onClosed: {
+							if (result === T.Dialog.Accepted) {
+								Global.venusPlatform.reboot()
+								Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
+							}
+						}
+					}
 				}
 
 				Component {
-					id: rebootDialogComponent
+					id: rebootingDialogComponent
 
 					ModalWarningDialog {
 						title: BackendConnection.type === BackendConnection.DBusSource
