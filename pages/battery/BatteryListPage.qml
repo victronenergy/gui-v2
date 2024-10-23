@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -17,92 +18,100 @@ Page {
 		model: batteryModel
 		spacing: Theme.geometry_gradientList_spacing
 		delegate: ListItemBackground {
+			id: batteryDelegate
+
+			required property var device
+			readonly property string serviceType: BackendConnection.serviceTypeFromUid(device.serviceUid)
+
 			height: Theme.geometry_batteryListPage_item_height
 
-			Column {
-				anchors {
-					left: parent.left
-					leftMargin: Theme.geometry_listItem_content_horizontalMargin
-					right: arrowIcon.left
-					verticalCenter: parent.verticalCenter
-				}
-				spacing: Theme.geometry_batteryListPage_item_verticalSpacing
+			RowLayout {
+				width: parent.width
+				height: Theme.geometry_batteryListPage_item_height
 
-				Row {
-					id: topRow
-					width: parent.width
+				Column {
+					id: leftColumn
+					Layout.fillWidth: true
+					Layout.leftMargin: Theme.geometry_listItem_content_horizontalMargin
+					spacing: Theme.geometry_batteryListPage_item_verticalSpacing
 
 					Label {
 						id: nameLabel
 
-						width: parent.width - socLabel.width - Theme.geometry_listItem_content_spacing
 						elide: Text.ElideRight
-						text: modelData.name
+						text: batteryDelegate.device.customName
 						font.pixelSize: Theme.font_size_body2
 					}
-
-					QuantityLabel {
-						id: socLabel
-
-						height: nameLabel.height
-						value: modelData.stateOfCharge
-						unit: VenusOS.Units_Percentage
-						font.pixelSize: Theme.font_size_body2
-					}
-				}
-
-				Row {
-					id: bottomRow
-					width: parent.width
 
 					QuantityRow {
 						id: measurementsRow
 
-						anchors.verticalCenter: parent.verticalCenter
-						leftPadding: -(measurementsRow.quantityMetrics.spacing * 2) // align first quantity label with battery name
-						height: parent.height
+						height: nameLabel.height
+						showFirstSeparator: true    // otherwise this row does not align with the battery name
 
 						model: [
-							{ value: modelData.voltage, unit: VenusOS.Units_Volt_DC },
-							{ value: modelData.current, unit: VenusOS.Units_Amp },
-							{ value: modelData.power, unit: VenusOS.Units_Watt },
+							{ value: batteryDelegate.device.voltage, unit: VenusOS.Units_Volt_DC },
+							{ value: batteryDelegate.device.current, unit: VenusOS.Units_Amp, visible: !isNaN(batteryDelegate.device.current) },
+							{ value: batteryDelegate.device.power, unit: VenusOS.Units_Watt, visible: !isNaN(batteryDelegate.device.power) },
 							{
-								value: Global.systemSettings.convertFromCelsius(modelData.temperature),
-								unit: Global.systemSettings.temperatureUnit
+								value: Global.systemSettings.convertFromCelsius(batteryDelegate.device.temperature),
+								unit: Global.systemSettings.temperatureUnit,
+								visible: !isNaN(batteryDelegate.device.temperature)
 							}
 						]
+
+						// Show additional separator at the end, to balance with the first separator.
+						Rectangle {
+							width: Theme.geometry_listItem_separator_width
+							height: nameLabel.height
+							color: Theme.color_listItem_separator
+						}
+					}
+				}
+
+				Column {
+					Layout.fillWidth: true
+					spacing: Theme.geometry_batteryListPage_item_verticalSpacing
+
+					QuantityLabel {
+						id: socLabel
+
+						width: parent.width
+						height: nameLabel.height
+						alignment: Text.AlignRight
+						value: batteryDelegate.device.soc
+						unit: VenusOS.Units_Percentage
+						font.pixelSize: Theme.font_size_body2
+						visible: !isNaN(batteryDelegate.device.soc)
 					}
 
 					Label {
-						anchors.verticalCenter: parent.verticalCenter
-						width: parent.width - measurementsRow.width - Theme.geometry_listItem_content_spacing
+						id: modeLabel
+						width: parent.width
+						horizontalAlignment: Text.AlignRight
 						elide: Text.ElideRight
 						font.pixelSize: Theme.font_size_body2
 						color: Theme.color_listItem_secondaryText
+						visible: !isNaN(batteryDelegate.device.power)
 						text: {
-							const modeText = Global.batteries.modeToText(modelData.mode)
-							if (modelData.mode === VenusOS.Battery_Mode_Discharging) {
-								return modeText + " - " + Global.batteries.timeToGoText(modelData.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
+							const modeText = Global.batteries.modeToText(batteryDelegate.device.mode)
+							if (batteryDelegate.device.mode === VenusOS.Battery_Mode_Discharging
+									&& batteryDelegate.device.timetogo > 0) {
+								return modeText + " - " + Global.batteries.timeToGoText(batteryDelegate.device.timetogo, VenusOS.Battery_TimeToGo_LongFormat)
+							} else {
+								return modeText
 							}
-							return modeText
 						}
-						horizontalAlignment: Text.AlignRight
 					}
-
 				}
-			}
 
-			CP.ColorImage {
-				id: arrowIcon
-
-				anchors {
-					right: parent.right
-					rightMargin: Theme.geometry_listItem_content_horizontalMargin
-					verticalCenter: parent.verticalCenter
+				CP.ColorImage {
+					Layout.rightMargin: Theme.geometry_listItem_content_horizontalMargin
+					source: "qrc:/images/icon_arrow_32.svg"
+					rotation: 180
+					color: mouseArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
+					opacity: mouseArea.enabled ? 1 : 0
 				}
-				source: "qrc:/images/icon_arrow_32.svg"
-				rotation: 180
-				color: mouseArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			}
 
 			ListPressArea {
@@ -110,22 +119,41 @@ Page {
 
 				radius: parent.radius
 				anchors.fill: parent
+				enabled: batteryDelegate.device.instance >= 0
+						&& ["vebus","genset","battery"].indexOf(batteryDelegate.serviceType) >= 0
 				onClicked: {
-					if (BackendConnection.serviceTypeFromUid(modelData.serviceUid) === "vebus") {
-						const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(modelData.serviceUid)
+					// TODO use a generic helper to open a page based on the service type/uid. See issue #1388
+					let deviceIndex
+					if (batteryDelegate.serviceType === "vebus") {
+						deviceIndex = Global.inverterChargers.veBusDevices.indexOf(batteryDelegate.device.serviceUid)
 						if (deviceIndex >= 0) {
 							const veBusDevice = Global.inverterChargers.veBusDevices.deviceAt(deviceIndex)
-							Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
-								"title": veBusDevice.name,
+							Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
+								"title": Qt.binding(function() { return veBusDevice.name }),
 								"veBusDevice": veBusDevice
 							})
 						}
-						return
+					} else if (batteryDelegate.serviceType === "genset") {
+						Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
+							"title": genericDevice.customName,
+							"bindPrefix": batteryDelegate.device.serviceUid
+						})
+					} else {
+						deviceIndex = Global.batteries.model.indexOf(batteryDelegate.device.serviceUid)
+						if (deviceIndex >= 0) {
+							const batteryDevice = Global.batteries.model.deviceAt(deviceIndex)
+							Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml", {
+								"title": Qt.binding(function() { return batteryDevice.name }),
+								"battery": batteryDevice,
+							})
+						}
 					}
-
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
-							{ "title": modelData.name, "battery": modelData })
 				}
+			}
+
+			Device {
+				id: genericDevice
+				serviceUid: batteryDelegate.device.instance >= 0 ? batteryDelegate.device.serviceUid : ""
 			}
 		}
 	}
@@ -135,34 +163,65 @@ Page {
 		id: batteryModel
 	}
 
+	// The battery list is a list of JSON values like this:
+	// [{'active_battery_service': 1,'current': 55,'id': com.victronenergy.battery.ttyO0,'instance': 256,'name': House battery,'power': 1337,'soc': 98.4,'state': 1,'timetogo': 38040,'voltage': 24.3}]
+	// Only 'id', 'name' and 'active_battery_service' are guaranteed to be present for each battery.
 	VeQuickItem {
 		uid: Global.system.serviceUid + "/Batteries"
 		onValueChanged: {
-			let i
 			if (!isValid) {
 				batteryModel.deleteAllAndClear()
 				return
 			}
-			// Value is a list of key-value pairs with info about each battery.
-			const batteryUids = value.map((info) => BackendConnection.serviceUidFromName(info.id, info.instance))
+
+			const batteryList = value
+			const batteryUids = batteryList.map((info) => BackendConnection.serviceUidFromName(info.id, info.instance || 0))
 
 			// Remove batteries that are not in this list
 			batteryModel.intersect(batteryUids)
 
-			// Add new battery objects
-			for (i = 0; i < batteryUids.length; ++i) {
-				if (batteryModel.indexOf(batteryUids[i]) < 0) {
-					batteryComponent.createObject(batteryModel, { serviceUid: batteryUids[i] })
+			// Add new battery objects, or update existing ones in the list.
+			const propertyNames = [ "current", "instance", "power", "soc", "temperature", "timetogo", "voltage" ]
+			for (let i = 0; i < batteryUids.length; ++i) {
+				const batteryInfo = batteryList[i]
+				let batteryObject
+				const batteryIndex = batteryModel.indexOf(batteryUids[i])
+				if (batteryIndex < 0) {
+					batteryObject = batteryComponent.createObject(batteryModel, {
+						serviceUid: batteryUids[i],
+						deviceInstance: batteryInfo.instance || 0,  // always provide an instance so that BaseDevice::valid, so device is added to model
+						customName: batteryInfo.name || "",
+					})
+				} else {
+					batteryObject = batteryModel.deviceAt(batteryIndex)
+				}
+				for (const propertyName of propertyNames) {
+					if (batteryInfo[propertyName] !== undefined) {
+						batteryObject[propertyName] = batteryInfo[propertyName]
+					}
 				}
 			}
 		}
 	}
 
+	component BatteryListDevice : BaseDevice {
+		id: battery
+
+		property real current: NaN
+		property int instance: -1
+		property real power: NaN
+		property real soc: NaN
+		property real temperature: NaN
+		property int timetogo: 0
+		property real voltage: NaN
+		readonly property int mode: Global.batteries.batteryMode(power)
+	}
+
 	Component {
 		id: batteryComponent
 
-		Battery {
-			id: battery
+		BatteryListDevice {
+		   id: battery
 
 			onValidChanged: {
 				if (valid) {
