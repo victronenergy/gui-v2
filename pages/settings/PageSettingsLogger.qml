@@ -116,6 +116,8 @@ Page {
 			}
 
 			ListSwitch {
+				id: useHttps
+
 				//% "Use secure connection (HTTPS)"
 				text: qsTrId("settings_https_enabled")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/HttpsEnabled"
@@ -140,6 +142,42 @@ Page {
 					triggeredOnStart: true
 					onTriggered: parent.secondaryText = root.timeAgo(parent.dataItem.value)
 				}
+			}
+
+			ListTextItem {
+				id: connectionStatus
+
+				// Status of vrmlogger
+				property VeQuickItem httpsConnectionError: VeQuickItem {
+					uid: root.loggerServiceUid + "/Vrm/ConnectionError"
+				}
+
+				/*
+				 * Status of the MQTT bridges, type bool, set to undefined when the bridge is not
+				 * supposed to run. In other words: when it has a value and is false, then there is a problem.
+				 */
+				property VeQuickItem mqttRealtimeConnected: VeQuickItem {
+					uid: Global.venusPlatform.serviceUid + "/Mqtt/Bridges/GXdbus/Connected"
+				}
+				property VeQuickItem mqttRealtimeStatus: VeQuickItem {
+					uid: Global.venusPlatform.serviceUid + "/Mqtt/Bridges/GXdbus/ConnectionStatus"
+				}
+				property VeQuickItem mqttRpcConnected: VeQuickItem {
+					uid: Global.venusPlatform.serviceUid + "/Mqtt/Bridges/GXrpc/Connected"
+				}
+				property VeQuickItem mqttRpcStatus: VeQuickItem {
+					uid: Global.venusPlatform.serviceUid + "/Mqtt/Bridges/GXrpc/ConnectionStatus"
+				}
+
+				readonly property bool anyError:
+					httpsConnectionError.value ||
+					mqttRealtimeConnected.value === false ||
+					mqttRpcConnected.value === false
+
+				//% "Connection status"
+				text: qsTrId("settings_connection_status")
+				secondaryText: CommonWords.no_error
+				allowed: !anyError
 			}
 
 			ListTextItem {
@@ -175,10 +213,14 @@ Page {
 						return ""
 					}
 				}
-				//% "Connection error"
-				text: qsTrId("settings_connection_error")
-				secondaryText: stringForErrorCode(dataItem.value)
-				dataItem.uid: root.loggerServiceUid + "/Vrm/ConnectionError"
+
+				text: useHttps.dataItem.value ?
+					//% "Connection status (HTTPS channel)"
+					qsTrId("settings_connection_error_https_channel") :
+					//% "Connection status (HTTP channel)"
+					qsTrId("settings_connection_error_http_channel")
+				secondaryText: stringForErrorCode(connectionStatus.httpsConnectionError.value)
+				allowed: !connectionStatus.allowed
 			}
 
 			ListItem {
@@ -190,6 +232,20 @@ Page {
 					id: errorMessage
 					uid: root.loggerServiceUid + "/Vrm/ConnectionErrorMessage"
 				}
+			}
+
+			ListTextItem {
+				//% "Connection status (MQTT Real-time channel)"
+				text: qsTrId("settings_connection_error_realtime_channel")
+				secondaryText: connectionStatus.mqttRealtimeStatus.value || ''
+				allowed: !connectionStatus.allowed && connectionStatus.mqttRealtimeConnected.isValid
+			}
+
+			ListTextItem {
+				//% "Connection status (MQTT RPC channel)"
+				text: qsTrId("settings_connection_error_rpc_channel")
+				secondaryText: connectionStatus.mqttRpcStatus.value || ''
+				allowed: !connectionStatus.allowed && connectionStatus.mqttRpcConnected.isValid
 			}
 
 			ListSwitch {
