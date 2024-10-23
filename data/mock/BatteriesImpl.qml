@@ -105,6 +105,33 @@ QtObject {
 		}
 	}
 
+	function updateBatteriesList() {
+		const batteryList = [
+			{
+				// System battery
+				active_battery_service: true,
+				current: dummyBattery.current,
+				id: dummyBattery.serviceUid.substring(BackendConnection.uidPrefix().length + 1),
+				instance: dummyBattery.deviceInstance,
+				name: dummyBattery.name,
+				power: dummyBattery.power,
+				soc: dummyBattery.stateOfCharge,
+				state: dummyBattery.state,
+				temperature: dummyBattery.temperature,
+				timetogo: dummyBattery.timeToGo,
+				voltage: dummyBattery.voltage,
+			},
+			{
+				// Starter battery, which does not have an instance number
+				active_battery_service: false,
+				id: "com.victronenergy.battery.ttyUSB2:1",
+				name: "My starter battery",
+				voltage: 0.029999999329447746
+			}
+		]
+		Global.mockDataSimulator.setMockValue(Global.system.serviceUid + "/Batteries", batteryList)
+	}
+
 	property Battery dummyBattery: Battery {
 		serviceUid: "mock/com.victronenergy.battery.ttyUSB1"
 
@@ -124,12 +151,7 @@ QtObject {
 
 			Global.batteries.system = dummyBattery
 			Global.batteries.addBattery(dummyBattery)
-
-			const batteryList = [{
-				id: "com.victronenergy.battery.ttyUSB1",
-				instance: 1,
-			}]
-			Global.mockDataSimulator.setMockValue(Global.system.serviceUid + "/Batteries", batteryList)
+			root.updateBatteriesList()
 		}
 	}
 
@@ -176,6 +198,7 @@ QtObject {
 					: 0
 			Global.batteries.system._power.setValue(power)
 			Global.batteries.system._current.setValue(power * 0.1)
+			root.updateBatteriesList()
 		}
 	}
 

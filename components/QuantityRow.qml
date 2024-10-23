@@ -11,6 +11,7 @@ Row {
 
 	property alias model: quantityRepeater.model
 	property alias quantityMetrics: quantityMetrics
+	property bool showFirstSeparator
 
 	// In table mode, items are spaced out without separators between them.
 	// (TODO if not tableMode, then invalid items should be hidden, instead of showing them as "--".)
@@ -40,7 +41,7 @@ Row {
 				height: textLabel.height
 				visible: root._showSeparators
 						&& quantityDelegate.showValue
-						&& model.index !== 0
+						&& (model.index !== 0 || root.showFirstSeparator)
 
 				Rectangle {
 					anchors.horizontalCenter: parent.horizontalCenter
