@@ -63,7 +63,7 @@ Page {
 		onValueChanged: {
 			const roles = value
 			role.optionModel = roles ? roles.map(function(v) {
-				return { "display": Global.acInputs.roleName(v), "value": v }
+				return { "display": Global.acInputs.roleName(v), "value": v, "readOnly": v === "heatpump" }
 			}) : []
 		}
 	}
