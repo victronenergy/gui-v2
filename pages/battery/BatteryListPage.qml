@@ -76,6 +76,8 @@ Page {
 					QuantityLabel {
 						id: socLabel
 
+						readonly property int statusLevel: Theme.getValueStatus(value, VenusOS.Gauges_ValueType_FallingPercentage)
+
 						width: parent.width
 						height: nameLabel.height
 						alignment: Text.AlignRight
@@ -83,6 +85,14 @@ Page {
 						unit: VenusOS.Units_Percentage
 						font.pixelSize: Theme.font_size_body2
 						visible: !isNaN(batteryDelegate.device.soc)
+						valueColor: batteryDelegate.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_primary
+								: statusLevel === Theme.Critical ? Theme.color_red
+								: statusLevel === Theme.Warning ? Theme.color_orange
+								: Theme.color_green
+						unitColor: batteryDelegate.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_secondary
+								: statusLevel === Theme.Critical ? Theme.color_red
+								: statusLevel === Theme.Warning ? Theme.color_orange
+								: Theme.color_green
 					}
 
 					Label {
