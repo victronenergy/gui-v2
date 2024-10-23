@@ -54,7 +54,7 @@ Page {
 				id: setTotalRunTime
 
 				//% "Generator total run time (hours)"
-				text: qsTrId("page_settings_run_time_and_service_total_run_time")
+				text: qsTrId("page_settings_run_time_and_service_generator_total_run_time")
 				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60) + "h"
 				dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
 				enabled: userHasWriteAccess && state.value === 0
