@@ -213,14 +213,14 @@ QtObject {
 				const phaseCurrent = phases.get(i).current
 				const phasePower = phases.get(i).power
 				if (event.modifiers & Qt.ControlModifier) {
-					phases.setProperty(i, "current", 0)
-					phases.setProperty(i, "power", 0)
+					phases.setValue(i, PhaseModel.CurrentRole, 0)
+					phases.setValue(i, PhaseModel.PowerRole, 0)
 				} else if (event.modifiers & Qt.ShiftModifier) {
-					phases.setProperty(i, "current", phaseCurrent + 5)
-					phases.setProperty(i, "power", phasePower + 100)
+					phases.setValue(i, PhaseModel.CurrentRole, phaseCurrent + 5)
+					phases.setValue(i, PhaseModel.PowerRole, phasePower + 100)
 				} else {
-					phases.setProperty(i, "current", phaseCurrent - 5)
-					phases.setProperty(i, "power", phasePower - 100)
+					phases.setValue(i, PhaseModel.CurrentRole, phaseCurrent - 5)
+					phases.setValue(i, PhaseModel.PowerRole, phasePower - 100)
 				}
 			}
 			event.accepted = true
