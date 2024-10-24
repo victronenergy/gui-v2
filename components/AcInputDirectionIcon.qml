@@ -12,7 +12,7 @@ import Victron.VenusOS
 // When the power is positive, show the ">" blue arrow if ESS feedback is enabled.
 CP.ColorImage {
 	visible: Global.acInputs.activeInput
-			 && (Global.acInputs.activeInput.power < 0 || Global.systemSettings.essFeedbackToGridEnabled)
+			 && (Global.acInputs.activeInput.power < 0 || Global.system.feedbackEnabled)
 	source: !!Global.acInputs.activeInput
 			? (Global.acInputs.activeInput.power < 0 ? "qrc:/images/icon_to_grid.svg" : "qrc:/images/icon_from_grid.svg")
 			: ""

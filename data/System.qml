@@ -17,6 +17,7 @@ QtObject {
 	readonly property bool hasVebusEss: _systemType.value === "ESS" || _systemType.value === "Hub-4"
 	readonly property bool showInputLoads: load.acIn.hasPower
 			&& (hasVebusEss ? (hasGridMeter && _withoutGridMeter.value === 0) : hasGridMeter)
+	readonly property bool feedbackEnabled: _feedbackEnabled.value === 1
 
 	readonly property QtObject load: SystemLoad {
 		systemServiceUid: root.serviceUid
@@ -107,6 +108,10 @@ QtObject {
 
 	readonly property VeQuickItem _withoutGridMeter: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
+	}
+
+	readonly property VeQuickItem _feedbackEnabled: VeQuickItem {
+		uid: root.serviceUid + "/Ac/ActiveIn/FeedbackEnabled"
 	}
 
 	function systemStateToText(s) {
