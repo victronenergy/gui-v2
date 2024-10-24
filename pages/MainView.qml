@@ -62,15 +62,16 @@ Item {
 		onTriggered: root.loadStartPage()
 	}
 
-	// Auto-select the start page after 1 minute, if needed.
-	Timer {
-		running: Global.systemSettings.startPageConfiguration.autoSelect
-				 && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
-		interval: Global.systemSettings.startPageConfiguration.autoSelectTimeout * 1000
-		onTriggered: {
-			const mainPageName = root.pageManager.navBar.getCurrentPage()
-			const mainPage = swipeView.getCurrentPage()
-			Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.pageUrls)
+	// Auto-select the start page when the application is idle, if configured to do so.
+	Connections {
+		target: Global
+		enabled: Global.systemSettings.startPageConfiguration.autoSelect
+		function onApplicationActiveChanged() {
+			if (!Global.applicationActive) {
+				const mainPageName = root.pageManager.navBar.getCurrentPage()
+				const mainPage = swipeView.getCurrentPage()
+				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.pageUrls)
+			}
 		}
 	}
 

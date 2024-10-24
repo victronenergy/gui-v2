@@ -17,6 +17,7 @@ QtObject {
 	property VeQItemTableModel dataServiceModel: null
 	property var firmwareUpdate
 	property var allDevicesModel
+	property bool applicationActive: true
 
 	readonly property string fontFamily: _defaultFontLoader.name
 	readonly property string quantityFontFamily: _quantityFontLoader.name

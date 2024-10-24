@@ -20,7 +20,7 @@
     "animation_generator_settings_valueOutOfRange_toastNotification_autoClose_duration": 3000,
     "animation_page_idleOpacity_duration": 250,
     "animation_page_idleResize_duration": 250,
-    "animation_page_idleResize_timeout": 6000,
+    "animation_page_idleResize_timeout": 8000,
     "animation_overviewPage_connector_fade_duration": 100,
     "animation_overviewPage_widget_battery_animation_duration": 1200,
     "animation_overviewPage_widget_battery_animation_pause_duration": 800,
