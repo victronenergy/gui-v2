@@ -7,9 +7,12 @@ import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-// When ESS feedback to grid is enabled, show an arrow indicating the flow direction.
+// When the power is negative, show the "<" green arrow, and don't show a minus symbol. Do this
+// regardless of whether ESS feedback is enabled.
+// When the power is positive, show the ">" blue arrow if ESS feedback is enabled.
 CP.ColorImage {
-	visible: Global.systemSettings.essFeedbackToGridEnabled && Global.acInputs.activeInput
+	visible: Global.acInputs.activeInput
+			 && (Global.acInputs.activeInput.power < 0 || Global.systemSettings.essFeedbackToGridEnabled)
 	source: !!Global.acInputs.activeInput
 			? (Global.acInputs.activeInput.power < 0 ? "qrc:/images/icon_to_grid.svg" : "qrc:/images/icon_from_grid.svg")
 			: ""
