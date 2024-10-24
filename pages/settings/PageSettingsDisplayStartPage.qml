@@ -59,7 +59,7 @@ Page {
 						topPadding: 0
 						bottomPadding: 0
 						color: Theme.color_font_secondary
-						//% "Go to this page when the application is inactive."
+						//% "Go to this page when the application starts."
 						text: qsTrId("settings_startpage_description")
 					}
 				]
