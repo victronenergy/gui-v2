@@ -132,11 +132,7 @@ QtObject {
 			break
 		case Qt.Key_F:
 		{
-			// Toggle ESS feed-in
-			const feedIn = root.mockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn") === 1
-			const preventFeedback = root.mockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/PreventFeedback") === 1
-			root.setMockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn", feedIn ? 0 : 1)
-			root.setMockValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/PreventFeedback", preventFeedback ? 0 : 1)
+			root.setMockValue(Global.system.serviceUid + "/Ac/ActiveIn/FeedbackEnabled", Global.system.feedbackEnabled ? 0 : 1)
 			event.accepted = true
 			break
 		}

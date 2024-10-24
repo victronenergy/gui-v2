@@ -20,9 +20,6 @@ QtObject {
 		systemSettingsUid: root.serviceUid
 	}
 
-	readonly property bool essFeedbackToGridEnabled: _hubSetting.value === VenusOS.System_HubSetting_Ess
-			&& (_overvoltageFeedIn.value === 1 || _preventFeedback.value === 0)
-
 	function canAccess(level) {
 		return accessLevel.isValid && accessLevel.value >= level
 	}
@@ -294,18 +291,6 @@ QtObject {
 				break
 			}
 		}
-	}
-
-	readonly property VeQuickItem _hubSetting: VeQuickItem {
-		uid: Global.system.serviceUid + "/Hub"
-	}
-
-	readonly property VeQuickItem _overvoltageFeedIn: VeQuickItem {
-		uid: root.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn"
-	}
-
-	readonly property VeQuickItem _preventFeedback: VeQuickItem {
-		uid: root.serviceUid + "/Settings/CGwacs/PreventFeedback"
 	}
 
 	readonly property VeQuickItem _onboardingState: VeQuickItem {
