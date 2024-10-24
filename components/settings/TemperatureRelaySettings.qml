@@ -85,7 +85,7 @@ Column {
 	ListSpinBox {
 		id: cClear
 
-		//% "Deativation value"
+		//% "Deactivation value"
 		text: qsTrId("settings_relay_deactivation_value")
 		dataItem.uid: "%1/%2/ClearValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
