@@ -1113,6 +1113,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_checkmark_32.svg
         images/icon_close_32.svg
         images/icon_info_32.svg
+        images/icon_info_48.svg
         images/welcome-brief.png
         images/welcome-controls.png
         images/welcome-dark.png

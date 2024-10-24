@@ -51,10 +51,12 @@ Item {
 	property Component _firmwareVersionRestartDialog: Component {
 		ModalWarningDialog {
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
-			//% "Firmware version update detected"
-			title: qsTrId("firmware_installed_build_version_update_detected")
+			//% "GX device has been updated"
+			title: qsTrId("firmware_installed_build_gx_device_updated")
 			//% "Page will automatically reload in ten seconds to load the latest version."
 			description: qsTrId("firmware_installed_build_page_will_reload")
+			icon.source: "qrc:/images/icon_info_48.svg"
+			icon.color: Theme.color_blue
 			Timer {
 				running: true
 				interval: 10*1000
