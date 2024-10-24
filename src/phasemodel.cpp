@@ -71,6 +71,16 @@ void PhaseModel::setValue(int index, Role role, const qreal value)
 	}
 }
 
+QVariantMap PhaseModel::get(int index) const
+{
+	QVariantMap map;
+	static const auto roleNames = this->roleNames();
+	for (auto it = roleNames.constBegin(); it != roleNames.constEnd(); ++it) {
+		map.insert(it.value(), data(this->index(index, 0), it.key()));
+	}
+	return map;
+}
+
 QVariant PhaseModel::data(const QModelIndex &index, int role) const
 {
 	const int row = index.row();

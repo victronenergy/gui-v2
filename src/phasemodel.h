@@ -44,6 +44,7 @@ public:
 	QVariant data(const QModelIndex& index, int role) const override;
 
 	Q_INVOKABLE void setValue(int index, Role role, const qreal value);
+	Q_INVOKABLE QVariantMap get(int index) const;
 
 Q_SIGNALS:
 	void countChanged();
