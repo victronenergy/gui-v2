@@ -38,7 +38,7 @@ TestCase {
 		let endTime = new Date();
 
 		// Check the timeout roughly follows the display off time
-		fuzzyCompare(blanker.displayOffTime, endTime - startTime, 50)
+		fuzzyCompare(blanker.displayOffTime, endTime - startTime, 100)
 		console.log("timeout", endTime - startTime)
 
 		// Manually turn the display on

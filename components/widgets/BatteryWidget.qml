@@ -175,6 +175,21 @@ OverviewWidget {
 				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 			}
 			Label {
+				id: essStatus
+
+				text: systemReason.text
+				font.pixelSize: Theme.font_size_body1
+				width: parent.width
+				wrapMode: Text.WordWrap
+				color: Theme.color_font_secondary
+				// There is not enough room to display the system reason text when the nav bar is visible
+				visible: Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle && systemReason.flags.length > 0
+
+				SystemReason {
+					id: systemReason
+				}
+			}
+			Label {
 				text: Global.batteries.modeToText(batteryData.mode)
 				font.pixelSize: Theme.font_size_body1
 				width: parent.width
