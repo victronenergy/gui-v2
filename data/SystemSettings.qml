@@ -10,7 +10,7 @@ QtObject {
 	id: root
 
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
-	readonly property bool needsOnboarding: !_onboardingState.done
+	readonly property bool needsOnboarding: _onboardingState.needsOnboarding
 
 	property int electricalQuantity: VenusOS.Units_None
 	property int temperatureUnit: VenusOS.Units_None
@@ -309,10 +309,10 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _onboardingState: VeQuickItem {
-		readonly property bool done: _forceOnboardingDone
-			|| (isValid
-				&& ( (Qt.platform.os === "wasm" && (value & VenusOS.OnboardingState_DoneWasm))
-					|| (Qt.platform.os !== "wasm" && (value & VenusOS.OnboardingState_DoneNative)) ) )
+		readonly property bool needsOnboarding: !_forceOnboardingDone
+			&& isValid
+			&& ( (Qt.platform.os === "wasm" && !(value & VenusOS.OnboardingState_DoneWasm))
+				|| (Qt.platform.os !== "wasm" && !(value & VenusOS.OnboardingState_DoneNative)) )
 
 		property bool _forceOnboardingDone
 
