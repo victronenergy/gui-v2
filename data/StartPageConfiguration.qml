@@ -14,7 +14,6 @@ QtObject {
 	readonly property bool hasStartPage: _startPageName.isValid && _startPageName.value !== ""
 	readonly property bool autoSelect: _startPageMode.value === VenusOS.StartPage_Mode_AutoSelect
 	readonly property int startPageTimeout: _startPageTimeout.value || 0     // in seconds
-	readonly property int autoSelectTimeout: 60 // in seconds
 
 	readonly property var options: [
 		{
