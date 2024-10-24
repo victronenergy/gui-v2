@@ -132,7 +132,7 @@ function formatAsHHMMSS(seconds, showUnits) {
 function formatGeneratorRuntime(seconds) {
 	return seconds < 60
 			? secondsToString(seconds)
-			: formatAsHHMM(seconds / 60)
+			: formatAsHHMM(seconds)
 }
 
 function reactToSignalOnce(sig, slot) {
