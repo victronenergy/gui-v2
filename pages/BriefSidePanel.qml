@@ -120,7 +120,6 @@ exported power v  0.4 |   /
 				  */
 
 			readonly property bool _graphShowsFeedIn: acInputGraphRange.minimumCurrent < 0
-					&& Global.systemSettings.essFeedbackToGridEnabled
 			property real _prevGraphMin
 			property real _prevGraphMax
 
