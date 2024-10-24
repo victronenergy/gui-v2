@@ -80,6 +80,9 @@ Item {
 		anchors.fill: parent
 
 		onPressed: function(mouse) {
+			Global.applicationActive = true
+			appIdleTimer.restart()
+
 			if (Global.isGxDevice && !touchEnabled.value) {
 				//% "Touch input disabled"
 				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("application_content_touch_input_disabled"), 1000)
@@ -100,6 +103,13 @@ Item {
 				mouse.accepted = true
 			}
 		}
+	}
+
+	Timer {
+		id: appIdleTimer
+		running: true
+		interval: 60000
+		onTriggered: Global.applicationActive = false
 	}
 
 	// We rely on the implicit Z ordering, so dialog/notification layers be declared after the other views.
