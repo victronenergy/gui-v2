@@ -71,6 +71,14 @@ ObjectModel {
 	}
 
 	ListQuantityItem {
+		//% "Utilization"
+		text: qsTrId("alternator_wakespeed_utilization")
+		dataItem.uid: root.bindPrefix + "/Utilization"
+		unit: VenusOS.Units_Percentage
+		allowed: defaultAllowed && dataItem.isValid
+	}
+
+	ListQuantityItem {
 		text: CommonWords.speed
 		dataItem.uid: root.bindPrefix + "/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
