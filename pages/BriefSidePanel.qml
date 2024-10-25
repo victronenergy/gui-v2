@@ -33,6 +33,8 @@ ColumnLayout {
 				&& Global.acInputs.activeInput
 		visible: loadersActive
 		quantityLabel.dataObject: Global.acInputs.generatorInput
+		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+		quantityLabel.acInputMode: true
 		sideComponent: Item {
 			width: generatorLabel.width
 			height: generatorLabel.height
@@ -57,6 +59,12 @@ ColumnLayout {
 			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
 			animationEnabled: root.animationEnabled
 			inputMode: true
+		}
+
+		AcInputDirectionIcon {
+			id: generatorDirectionIcon
+			parent: generatorWidget.quantityLabel
+			anchors.verticalCenter: parent.verticalCenter
 		}
 	}
 
