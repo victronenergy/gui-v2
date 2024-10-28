@@ -243,6 +243,8 @@ Page {
 		property int timetogo: 0
 		property real voltage: NaN
 		readonly property int mode: Global.batteries.batteryMode(power)
+
+		name: customName
 	}
 
 	Component {
