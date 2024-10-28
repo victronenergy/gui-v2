@@ -136,8 +136,9 @@ Page {
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				from: 0
 				to: root.evCharger.maxCurrent
-				dataItem.uid: root.evCharger.serviceUid + "/Current"
+				dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
 				allowed: defaultAllowed && dataItem.isValid
+				enabled: chargeMode.value !== VenusOS.Evcs_Mode_Auto
 			}
 
 			ListSwitch {
