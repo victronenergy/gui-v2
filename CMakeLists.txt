@@ -836,6 +836,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/EssImpl.qml
     data/mock/EvChargersImpl.qml
     data/mock/GeneratorsImpl.qml
+    data/mock/HeatPumpsImpl.qml
     data/mock/MeteoDevicesImpl.qml
     data/mock/MockDataManager.qml
     data/mock/MotorDrivesImpl.qml
