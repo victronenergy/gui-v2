@@ -31,6 +31,7 @@ AggregateDeviceModel {
 		gridDeviceModel,
 		gensetDeviceModel,
 		acLoadDeviceModel,
+		heatPumpDeviceModel
 
 	].concat(Global.tanks.allTankModels)
 
@@ -47,5 +48,10 @@ AggregateDeviceModel {
 	readonly property AcInDeviceModel acLoadDeviceModel: AcInDeviceModel {
 		serviceType: "acload"
 		modelId: "acload"
+	}
+
+	readonly property AcInDeviceModel heatPumpDeviceModel: AcInDeviceModel {
+		serviceType: "heatpump"
+		modelId: "heatpump"
 	}
 }

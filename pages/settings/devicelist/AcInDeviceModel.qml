@@ -39,24 +39,23 @@ BaseDeviceModel {
 		}
 	}
 
-	property var modelLoader: Loader {
-		sourceComponent: BackendConnection.type === BackendConnection.DBusSource ? dbusModelComponent
-			 : BackendConnection.type === BackendConnection.MqttSource ? mqttModelComponent
-			 : null
+	property Loader modelLoader: Loader {
+		sourceComponent: BackendConnection.type === BackendConnection.MqttSource ? mqttModelComponent
+			 : dbusOrMockModelComponent
 	}
 
-	property var dbusModelComponent: Component {
+	property Component dbusOrMockModelComponent: Component {
 		VeQItemSortTableModel {
 			dynamicSortFilter: true
 			filterRole: VeQItemTableModel.UniqueIdRole
-			filterRegExp: "^dbus/com\.victronenergy\." + root.serviceType + "\."
-			model: BackendConnection.type === BackendConnection.DBusSource ? Global.dataServiceModel : null
+			filterRegExp: "^%1/com\.victronenergy\.%2\.".arg(BackendConnection.uidPrefix()).arg(root.serviceType)
+			model: Global.dataServiceModel
 		}
 	}
 
-	property var mqttModelComponent: Component {
+	property Component mqttModelComponent: Component {
 		VeQItemTableModel {
-			uids: BackendConnection.type === BackendConnection.MqttSource ? ["mqtt/" + root.serviceType ] : []
+			uids: ["mqtt/" + root.serviceType ]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 	}

@@ -32,6 +32,7 @@ QtObject {
 			property var ess: EssImpl {}
 			property var evChargers: EvChargersImpl {}
 			property var generators: GeneratorsImpl {}
+			property var heatPumps: HeatPumpsImpl { }
 			property var inverterChargers: InverterChargersImpl {}
 			property var meteoDevices: MeteoDevicesImpl { }
 			property var motorDrives: MotorDrivesImpl { }
@@ -44,5 +45,12 @@ QtObject {
 			property var tanks: TanksImpl {}
 			property var unsupportedDevices: UnsupportedDevicesImpl { }
 		}
+	}
+
+	property VeQItemTableModel servicesTableModel: VeQItemTableModel {
+		uids: ["mock"]
+		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+
+		Component.onCompleted: Global.dataServiceModel = servicesTableModel
 	}
 }
