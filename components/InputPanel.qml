@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.VirtualKeyboard as QtVirtualKeyboard
+import QtQuick.VirtualKeyboard.Settings
 import Victron.VenusOS
 
 // *** This file can be edited directly on the cerbo filesystem,
@@ -107,5 +108,28 @@ QtVirtualKeyboard.InputPanel {
 			root.focusedItem = textField
 			root.focusedFlickable = flickable
 		}
+	}
+
+	LanguageModel {
+		id: languageModel
+	}
+
+	Instantiator {
+		id: instantiator
+
+		model: languageModel
+		delegate: FontLoader {
+			source: model.fontFileUrl
+			onStatusChanged: {
+				if (status === FontLoader.Ready) {
+					languageModel.setFontFamily(source, name)
+				}
+			}
+		}
+	}
+
+
+	Component.onCompleted: {
+		VirtualKeyboardSettings.activeLocales = ["en_US", "cs_CZ", "da_DK", "de_DE", "es_ES", "fr_FR", "it_IT", "nl_NL", "pl_PL", "ru_RU", "ro_RO", "sv_SE", "th_TH", "tr_TR", "uk_UA", "zh_CN", "ar_AR"]
 	}
 }
