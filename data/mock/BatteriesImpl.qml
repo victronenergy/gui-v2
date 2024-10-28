@@ -106,12 +106,13 @@ QtObject {
 	}
 
 	function updateBatteriesList() {
+		const dummyBatteryServiceName = dummyBattery.serviceUid.substring(BackendConnection.uidPrefix().length + 1)
 		const batteryList = [
 			{
 				// System battery
 				active_battery_service: true,
 				current: dummyBattery.current,
-				id: dummyBattery.serviceUid.substring(BackendConnection.uidPrefix().length + 1),
+				id: dummyBatteryServiceName,
 				instance: dummyBattery.deviceInstance,
 				name: dummyBattery.name,
 				power: dummyBattery.power,
@@ -124,7 +125,7 @@ QtObject {
 			{
 				// Starter battery, which does not have an instance number
 				active_battery_service: false,
-				id: "com.victronenergy.battery.ttyUSB2:1",
+				id: dummyBatteryServiceName + ":1",
 				name: "My starter battery",
 				voltage: 0.029999999329447746
 			}

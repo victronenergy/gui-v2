@@ -185,14 +185,32 @@ Page {
 			}
 
 			const batteryList = value
-			const batteryUids = batteryList.map((info) => BackendConnection.serviceUidFromName(info.id, info.instance || 0))
+			let batteryUids = []
+			let i
+			for (i = 0; i < batteryList.length; ++i) {
+				const serviceName = batteryList[i].id
+				if (batteryList[i].instance === undefined) {
+					// This is a not a real battery; there is an id number on the end of the service
+					// name, like com.victronenergy.battery.ttyUSB1:1, and there is no device
+					// 'instance'. So, use the service name as the uid, else if we use a dummy
+					// instance, it might be the same as the instance of a real battery, and they
+					// would have the same uids within the device model.
+					// (Normally the service name couldn't be used as the uid, but since the JSON
+					// provides all data to be shown in the battery list, the uid won't be used to
+					// fetch any other data.)
+					batteryUids.push(serviceName)
+				} else {
+					// This is a real battery, with a valid (device) instance.
+					batteryUids.push(BackendConnection.serviceUidFromName(serviceName, batteryList[i].instance))
+				}
+			}
 
 			// Remove batteries that are not in this list
 			batteryModel.intersect(batteryUids)
 
 			// Add new battery objects, or update existing ones in the list.
 			const propertyNames = [ "current", "instance", "power", "soc", "temperature", "timetogo", "voltage" ]
-			for (let i = 0; i < batteryUids.length; ++i) {
+			for (i = 0; i < batteryUids.length; ++i) {
 				const batteryInfo = batteryList[i]
 				let batteryObject
 				const batteryIndex = batteryModel.indexOf(batteryUids[i])
