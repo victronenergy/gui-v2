@@ -69,17 +69,17 @@ Rectangle {
 			}
 		}
 
-		Item {
+		Image {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			Layout.minimumHeight: qrCodeImage.height
+			Layout.minimumHeight: 100
+			Layout.maximumHeight: 200
 			Layout.verticalStretchFactor: root.qrCodeUrl ? 1 : -1
 			Layout.topMargin: Theme.geometry_page_content_horizontalMargin
-
-			Image {
-				id: qrCodeImage
-				source: root.qrCodeUrl
-			}
+			Layout.bottomMargin: Theme.geometry_page_content_horizontalMargin
+			horizontalAlignment: Image.AlignLeft
+			fillMode: Image.PreserveAspectFit
+			source: root.qrCodeUrl
 		}
 
 		RowLayout {
