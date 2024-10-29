@@ -21,6 +21,8 @@ QtVirtualKeyboard.InputPanel {
 	property real toContentY
 	property real toHeight
 
+	readonly property string localeName: Language.currentLocaleName
+
 	function acceptMouseEvent(item, itemMouseX, itemMouseY) {
 		if (!Qt.inputMethod.visible || !item || !focusedItem) {
 			return false
@@ -128,8 +130,22 @@ QtVirtualKeyboard.InputPanel {
 		}
 	}
 
+	function _setVkbLocale() {
+		let locale = localeName
+		// fixup "ar_EG" -> "ar_AR" if necessary
+		if (localeName.startsWith("ar_")) {
+			locale = "ar_AR"
+		}
+		if (VirtualKeyboardSettings.activeLocales.indexOf(locale) >= 0) {
+			VirtualKeyboardSettings.locale = locale
+		} else if (VirtualKeyboardSettings.activeLocales.length) {
+			console.warn("Unknown locale: " + locale + " not in " + VirtualKeyboardSettings.activeLocales)
+		}
+	}
 
+	onLocaleNameChanged: _setVkbLocale()
 	Component.onCompleted: {
 		VirtualKeyboardSettings.activeLocales = ["en_US", "cs_CZ", "da_DK", "de_DE", "es_ES", "fr_FR", "it_IT", "nl_NL", "pl_PL", "ru_RU", "ro_RO", "sv_SE", "th_TH", "tr_TR", "uk_UA", "zh_CN", "ar_AR"]
+		_setVkbLocale()
 	}
 }
