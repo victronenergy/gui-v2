@@ -303,9 +303,6 @@ QtObject {
 	//% "This setting is disabled when a VE.Bus BMS is connected."
 	readonly property string noAdjustableByBms: qsTrId("common_words_setting_disabled_when_bms_connected")
 
-	//% "This setting is disabled. Possible reasons are \"Overruled by remote\" is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure."
-	readonly property string noAdjustableTextByConfig: qsTrId("common_words_setting_disabled_by_config")
-
 	//% "No error"
 	readonly property string no_error: qsTrId("common_words_no_error")
 

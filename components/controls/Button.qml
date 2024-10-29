@@ -12,10 +12,10 @@ import Victron.VenusOS
 CT.Button {
 	id: root
 
-	property color color: !enabled ? Theme.color_font_disabled
+	property color color: !showEnabled ? Theme.color_font_disabled
 			: down ? Theme.color_button_down_text
 			: Theme.color_font_primary
-	property color backgroundColor: !enabled ? Theme.color_background_disabled
+	property color backgroundColor: !showEnabled ? Theme.color_background_disabled
 			: down ? downColor
 			: flat ? "transparent"
 			: Theme.color_darkOk
@@ -23,6 +23,7 @@ CT.Button {
 			: Theme.color_ok
 	property alias border: backgroundRect.border
 	property alias radius: backgroundRect.radius
+	property bool showEnabled: enabled
 
 	onPressed: pressEffect.start(pressX/width, pressY/height)
 	onReleased: pressEffect.stop()
@@ -49,7 +50,7 @@ CT.Button {
 
 		color: root.backgroundColor
 		border.width: root.flat ? 0 : Theme.geometry_button_border_width
-		border.color: Theme.color_ok
+		border.color: root.showEnabled ? Theme.color_ok : Theme.color_font_disabled
 		radius: Theme.geometry_button_radius
 
 		PressEffect {
