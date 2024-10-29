@@ -12,7 +12,7 @@ QtObject {
 	// The "first" inverter/charger is from one of com.victronenergy.vebus, com.victronenergy.acsystem
 	// or com.victronenergy.inverter (in that order of preference). If there is more than one service
 	// for a particular type, the one with the lowest device instance will be used.
-	readonly property var first: veBusDevices.firstObject || acSystemDevices.firstObject || inverterDevices.firstObject
+	readonly property var firstObject: veBusDevices.firstObject || acSystemDevices.firstObject || inverterDevices.firstObject
 
 	// Devices from com.victronenergy.vebus
 	property DeviceModel veBusDevices: DeviceModel {
