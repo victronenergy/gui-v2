@@ -79,6 +79,7 @@ Page {
 								width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
 								serviceUid: root.serviceUid
 								inputNumber: modelData.inputNumber
+								inputType: modelData.inputType
 							}
 						]
 					}
