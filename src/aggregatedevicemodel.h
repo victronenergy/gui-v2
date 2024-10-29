@@ -73,6 +73,7 @@ private:
 	};
 
 	void sourceModelRowsInserted(const QModelIndex &parent, int first, int last);
+	void sourceModelRowsAboutToBeRemoved(const QModelIndex &parent, int first, int last);
 	int indexOf(const QString &deviceInfoId) const;
 	int indexOf(const BaseDevice *device) const;
 	int insertionIndex(BaseDevice *device) const;
