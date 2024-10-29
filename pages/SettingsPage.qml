@@ -112,7 +112,8 @@ SwipeViewPage {
 			{
 				//% "Generator start/stop"
 				text: qsTrId("settings_generator_start_stop"),
-				page: "/pages/settings/PageRelayGenerator.qml"
+				page: "/pages/settings/PageRelayGenerator.qml",
+				allowed: relay0.isValid
 			},
 			{
 				//% "Tank pump"
