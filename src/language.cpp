@@ -244,6 +244,11 @@ bool Language::setCurrentLanguage(QLocale::Language language)
 	}
 }
 
+QString Language::getCurrentLocaleName() const
+{
+	return QLocale(m_currentLanguage).name();
+}
+
 QUrl Language::fontFileUrl() const
 {
 	return m_fontFileUrl;
