@@ -129,6 +129,7 @@ Page {
 								width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
 								serviceUid: root.veBusDevice.serviceUid
 								inputNumber: modelData.inputNumber
+								inputType: modelData.inputType
 							}
 						]
 					}

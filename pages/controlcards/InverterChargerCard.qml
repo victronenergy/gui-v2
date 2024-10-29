@@ -50,6 +50,7 @@ ControlCard {
 					content.children: CurrentLimitButton {
 						serviceUid: root.serviceUid
 						inputNumber: modelData.inputNumber
+						inputType: modelData.inputType
 					}
 				}
 

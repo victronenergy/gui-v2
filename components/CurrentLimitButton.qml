@@ -11,6 +11,7 @@ ListItemButton {
 
 	property string serviceUid
 	property int inputNumber
+	property int inputType: -1
 
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
@@ -76,6 +77,7 @@ ListItemButton {
 
 		CurrentLimitDialog {
 			productId: productIdItem.isValid ? productIdItem.value : 0
+			title: Global.acInputs.currentLimitTypeToText(root.inputType)
 			secondaryTitle: CommonWords.acInput(root.inputNumber)
 			onAccepted: currentLimitItem.setValue(value)
 		}
