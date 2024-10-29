@@ -210,22 +210,22 @@
       <translation>Generator Start/Stopp</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/SettingsPage.qml" line="119"/>
+      <location filename="../../pages/SettingsPage.qml" line="120"/>
       <source>Tank pump</source>
       <translation>Tankpumpe</translation>
     </message>
     <message id="settings_services">
-      <location filename="../../pages/SettingsPage.qml" line="129"/>
+      <location filename="../../pages/SettingsPage.qml" line="130"/>
       <source>Services</source>
       <translation>Dienste</translation>
     </message>
     <message id="settings_io">
-      <location filename="../../pages/SettingsPage.qml" line="134"/>
+      <location filename="../../pages/SettingsPage.qml" line="135"/>
       <source>I/O</source>
       <translation>I/O</translation>
     </message>
     <message id="settings_venus_os_large_features">
-      <location filename="../../pages/SettingsPage.qml" line="139"/>
+      <location filename="../../pages/SettingsPage.qml" line="140"/>
       <source>Venus OS Large features</source>
       <translation>Venus OS Large Funktionen</translation>
     </message>
@@ -656,11 +656,6 @@
       <location filename="../../pages/settings/PageHub4Debug.qml" line="93"/>
       <source>Limits (P)</source>
       <translation>Grenzwerte (P)</translation>
-    </message>
-    <message id="settings_generator_function_not_enabled">
-      <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
-      <source>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</source>
-      <translation>Generator Start/Stop Funkt nicht aktiviert, gehe zu Relaiseinst und setze Funkt. auf "Generator Start/Stop"</translation>
     </message>
     <message id="settings_batteries_battery_visible">
       <location filename="../../pages/settings/PageSettingsBatteries.qml" line="15"/>
@@ -6325,7 +6320,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Geräteliste</translation>
     </message>
     <message id="settings_vrm_device_instances">
-      <location filename="../../pages/SettingsPage.qml" line="145"/>
+      <location filename="../../pages/SettingsPage.qml" line="146"/>
       <source>VRM device instances</source>
       <oldsource>VRM Device Instances</oldsource>
       <translation>VRM-Geräte-Instanzen</translation>
@@ -7896,6 +7891,12 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
       <location filename="../../components/InverterChargerModeButton.qml" line="39"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>Der Modus ist in der Systemkonfiguration festgelegt. Er kann nicht angepasst werden.</translation>
+    </message>
+    <message id="settings_generator_function_not_enabled">
+      <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
+      <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
+      <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
+      <translation>Die Generator-Start/Stopp-Funktion ist nicht aktiviert, gehen Sie zu den Relaiseinstellungen und stellen Sie die Funktion auf "Aggregat-Start/Stopp".</translation>
     </message>
   </context>
   <context>
