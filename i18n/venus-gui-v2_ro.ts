@@ -7897,7 +7897,7 @@ Cu o navigare simplificată și un aspect nou, tot ceea ce vă place este acum �
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
-      <translation></translation>
+      <translation>Functia start/stop a generatorului nu este activa, mergi la configurari releu si seteaza-l pe "Start/Stop genset"</translation>
     </message>
   </context>
   <context>

@@ -7888,7 +7888,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
-      <translation></translation>
+      <translation>وظيفة التشغيل/التوقيف للمولد غير مفعلة، اذهب إلى إعدادات المرحل واختر وظيفة "تشغيل/توقيف المولد"</translation>
     </message>
   </context>
   <context>

@@ -7895,7 +7895,7 @@ Med strömlinjeformad navigering och en fräsch look blir allting du älskar än
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
-      <translation></translation>
+      <translation>Generatorns start/stopp-funktion är inte på, gå till reläinställningarna och ändra funktionen till "Genset start/stopp"</translation>
     </message>
   </context>
   <context>

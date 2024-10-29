@@ -7894,7 +7894,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
-      <translation></translation>
+      <translation>La funcion de arranque/parada de generador no esta habilitada, vaya a los ajustes de relé y seleccione la funcion "Arranque/parada generador"</translation>
     </message>
   </context>
   <context>
