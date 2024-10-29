@@ -46,6 +46,7 @@ QuantityTable {
 	]
 	labelHorizontalAlignment: Qt.AlignRight
 	headerComponent: AsymmetricRoundedRectangle {
+		layer.enabled: false // if 'layer.enabled' is true, any child text looks rough on wasm builds
 		width: root.width
 		height: Theme.geometry_vebusDeviceListPage_quantityTable_header_height
 		roundedSide: VenusOS.AsymmetricRoundedRectangle_RoundedSide_Top
