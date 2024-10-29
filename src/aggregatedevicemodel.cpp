@@ -88,6 +88,7 @@ void AggregateDeviceModel::setSourceModels(const QVariantList &models)
 			connect(device, &BaseDevice::validChanged, this, &AggregateDeviceModel::deviceValidChanged);
 		}
 		connect(model, &BaseDeviceModel::rowsInserted, this, &AggregateDeviceModel::sourceModelRowsInserted);
+		connect(model, &BaseDeviceModel::rowsAboutToBeRemoved, this, &AggregateDeviceModel::sourceModelRowsAboutToBeRemoved);
 	}
 	m_sourceModels = models;
 
@@ -228,6 +229,44 @@ void AggregateDeviceModel::cleanUp()
 		}
 	}
 	m_deviceInfos.clear();
+}
+
+void AggregateDeviceModel::sourceModelRowsAboutToBeRemoved(const QModelIndex &, int first, int last)
+{
+	BaseDeviceModel *sourceModel = qobject_cast<BaseDeviceModel *>(sender());
+	if (!sourceModel) {
+		qmlInfo(this) << "rowsRemoved() signal was not from a BaseDeviceModel!";
+		return;
+	}
+
+	const int prevCount = count();
+
+	// If a source model is about to remove a valid device, then remove it from this aggregate
+	// model. (If the device is invalid, do not remove it; in that case, it should remain in this
+	// model but be marked as "Not connected", as per deviceValidChanged().)
+	for (int i = last; i >= first; --i) {
+		BaseDevice *device = sourceModel->deviceAt(i);
+		if (!device) {
+			qmlInfo(this) << "cannot find device to remove at index " << i << " from model "
+						  << sourceModel->objectName() << " with count:" << sourceModel->count();
+			continue;
+		}
+		if (device->isValid()) {
+			const int removalIndex = indexOf(DeviceInfo::infoId(device, sourceModel));
+			if (removalIndex < 0) {
+				qmlInfo(this) << "cannot find device" << device->serviceUid() << "in this aggregate model!";
+				continue;
+			}
+			device->disconnect(this);
+			beginRemoveRows(QModelIndex(), removalIndex, removalIndex);
+			m_deviceInfos.removeAt(removalIndex);
+			endRemoveRows();
+		}
+	}
+
+	if (prevCount != count()) {
+		emit countChanged();
+	}
 }
 
 void AggregateDeviceModel::sourceModelRowsInserted(const QModelIndex &, int first, int last)
