@@ -14,14 +14,20 @@ ListItemButton {
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
+	readonly property bool modeAdjustable: modeIsAdjustable.isValid && !!modeIsAdjustable.value
 
 	text: serviceType !== "inverter" || isInverterChargerItem.value === 1
 			? Global.inverterChargers.inverterChargerModeToText(modeItem.value)
 			: Global.inverterChargers.inverterModeToText(modeItem.value)
+
+	// TODO need to show a different indicator (like in settings pages) when a control is disabled
+	// due to reduced user access level. This is different from when the control is disabled due to
+	// the mode not being adjustable.
 	enabled: userHasWriteAccess
+	showEnabled: modeAdjustable
 
 	onClicked: {
-		if (modeIsAdjustable.isValid && !modeIsAdjustable.value) {
+		if (!modeAdjustable) {
 			if (dmc.isValid) {
 				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc,
 											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
@@ -29,7 +35,8 @@ ListItemButton {
 				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms,
 											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 			} else {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableTextByConfig,
+				//% "The mode is fixed in the system configuration. It cannot be adjusted."
+				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("inverter_mode_not_adjustable"),
 											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 			}
 			return

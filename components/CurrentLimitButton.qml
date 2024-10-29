@@ -15,25 +15,32 @@ ListItemButton {
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
+	readonly property bool limitAdjustable: currentLimitIsAdjustable.isValid && !!currentLimitIsAdjustable.value
+
+	function _currentLimitNotAdjustableText() {
+		if (serviceType !== "acsystem") {
+			if (dmc.isValid) {
+				return CommonWords.noAdjustableByDmc
+			} else if (bmsMode.isValid) {
+				return CommonWords.noAdjustableByBms
+			}
+		}
+		//% "This current limit is fixed in the system configuration. It cannot be adjusted."
+		return qsTrId("rs_current_limit_not_adjustable")
+	}
 
 	text: Units.getCombinedDisplayText(VenusOS.Units_Amp, currentLimitItem.value)
+
+	// TODO need to show a different indicator (like in settings pages) when a control is disabled
+	// due to reduced user access level. This is different from when the control is disabled due to
+	// the current limit not being adjustable.
 	enabled: userHasWriteAccess
+	showEnabled: limitAdjustable
 
 	onClicked: {
-		if (!currentLimitIsAdjustable.isValid || !currentLimitIsAdjustable.value) {
-			if (serviceType === "acsystem") {
-				//% "This current limit is configured as fixed, not user changeable."
-				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("rs_current_limit_not_adjustable"), 5000)
-			} else if (dmc.isValid) {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc,
-											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
-			} else if (bmsMode.isValid) {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms,
-											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
-			} else {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableTextByConfig,
-											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
-			}
+		if (!limitAdjustable) {
+			Global.showToastNotification(VenusOS.Notification_Info, root._currentLimitNotAdjustableText(),
+										 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 			return
 		}
 		Global.dialogLayer.open(currentLimitDialogComponent, { value: currentLimitItem.value })
