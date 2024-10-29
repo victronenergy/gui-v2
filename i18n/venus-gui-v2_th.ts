@@ -210,22 +210,22 @@
       <translation>เครื่องกำเนิดไฟฟ้าเริ่มต้น/หยุด</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/SettingsPage.qml" line="119"/>
+      <location filename="../../pages/SettingsPage.qml" line="120"/>
       <source>Tank pump</source>
       <translation>ปั๊มถัง</translation>
     </message>
     <message id="settings_services">
-      <location filename="../../pages/SettingsPage.qml" line="129"/>
+      <location filename="../../pages/SettingsPage.qml" line="130"/>
       <source>Services</source>
       <translation>บริการ</translation>
     </message>
     <message id="settings_io">
-      <location filename="../../pages/SettingsPage.qml" line="134"/>
+      <location filename="../../pages/SettingsPage.qml" line="135"/>
       <source>I/O</source>
       <translation>อินพุต/เอาต์พุต</translation>
     </message>
     <message id="settings_venus_os_large_features">
-      <location filename="../../pages/SettingsPage.qml" line="139"/>
+      <location filename="../../pages/SettingsPage.qml" line="140"/>
       <source>Venus OS Large features</source>
       <translation>Venus OS คุณสมบัติขนาดใหญ่</translation>
     </message>
@@ -656,11 +656,6 @@
       <location filename="../../pages/settings/PageHub4Debug.qml" line="93"/>
       <source>Limits (P)</source>
       <translation>ขีดจำกัด (P)</translation>
-    </message>
-    <message id="settings_generator_function_not_enabled">
-      <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
-      <source>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</source>
-      <translation>ไม่ได้เปิดใช้งานฟังก์ชันเริ่ม/หยุดเครื่องกำเนิดไฟฟ้า ไปที่การตั้งค่ารีเลย์และตั้งค่าฟังก์ชันเป็น "เริ่ม/หยุดเครื่องกำเนิดไฟฟ้า"</translation>
     </message>
     <message id="settings_batteries_battery_visible">
       <location filename="../../pages/settings/PageSettingsBatteries.qml" line="15"/>
@@ -6323,7 +6318,7 @@ Do you want to continue?</source>
       <translation>รายการอุปกรณ์</translation>
     </message>
     <message id="settings_vrm_device_instances">
-      <location filename="../../pages/SettingsPage.qml" line="145"/>
+      <location filename="../../pages/SettingsPage.qml" line="146"/>
       <source>VRM device instances</source>
       <oldsource>VRM Device Instances</oldsource>
       <translation>อินสแตนซ์อุปกรณ์ VRM</translation>
@@ -7893,6 +7888,12 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../components/InverterChargerModeButton.qml" line="39"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>โหมดนี้ถูกกำหนดไว้ในการกำหนดค่าระบบแล้ว ไม่สามารถปรับเปลี่ยนได้</translation>
+    </message>
+    <message id="settings_generator_function_not_enabled">
+      <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
+      <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
+      <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
+      <translation>ไม่สามารถเปิดใช้งานฟังก์ชันการสตาร์ท/หยุดเครื่องกำเนิดไฟฟ้าได้ ให้ไปที่การตั้งค่ารีเลย์และตั้งค่าฟังก์ชันเป็น "การสตาร์ท/หยุดเครื่องกำเนิดไฟฟ้า"</translation>
     </message>
   </context>
   <context>
