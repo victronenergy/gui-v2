@@ -23,7 +23,7 @@ OverviewWidget {
 						{ "bindPrefix": charger.serviceUid, "title": charger.name })
 			} else {
 				// Show page for inverter, vebus and acsystem services
-				const device = Global.inverterChargers.first
+				const device = Global.inverterChargers.firstObject
 				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
 						{ "serviceUid": device.serviceUid, "title": device.name })
 			}
@@ -34,7 +34,7 @@ OverviewWidget {
 	title: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
-	enabled: !!Global.inverterChargers.first || Global.chargers.model.count
+	enabled: !!Global.inverterChargers.firstObject || Global.chargers.model.count
 	quantityLabel.visible: false
 	rightPadding: Theme.geometry_overviewPage_widget_sideGauge_margins
 	extraContentChildren: [
