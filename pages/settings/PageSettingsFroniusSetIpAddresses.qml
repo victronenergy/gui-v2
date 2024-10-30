@@ -12,12 +12,27 @@ Page {
 
 	property var _addDialog
 
+	function _addOrUpdateAddress(ipAddress, index = -1) {
+		let addresses = settingsListView.ipAddresses.value ? settingsListView.ipAddresses.value.split(',') : []
+		if (index >= addresses.length) {
+			console.warn("invalid index", index, "/IPAddresses length is:", addresses.length)
+			return
+		}
+		if (index < 0) {
+			addresses.push(ipAddress)
+		} else {
+			addresses[index] = ipAddress
+		}
+		settingsListView.ipAddresses.setValue(addresses.join(','))
+	}
+
 	topRightButton: VenusOS.StatusBar_RightButton_Add
 
 	IpAddressListView {
 		id: settingsListView
 
 		ipAddresses.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/IPAddresses"
+		onIpAddressUpdated: (index, ipAddress) => { root._addOrUpdateAddress(ipAddress, index) }
 	}
 
 	Connections {
@@ -25,9 +40,7 @@ Page {
 		enabled: root.isCurrentPage
 
 		function onRightButtonClicked() {
-			const addresses = settingsListView.ipAddresses.value ? settingsListView.ipAddresses.value.split(',') : []
-			addresses.push("192.168.1.1")
-			settingsListView.ipAddresses.setValue(addresses.join(','))
+			root._addOrUpdateAddress("192.168.1.1", -1)
 		}
 	}
 }

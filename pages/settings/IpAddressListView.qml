@@ -12,8 +12,9 @@ GradientListView {
 	id: root
 
 	property alias ipAddresses: ipAddresses
-
 	property var _removalDialog
+
+	signal ipAddressUpdated(index : int, ipAddress : string)
 
 	model: ipAddresses.value ? ipAddresses.value.split(',') : []
 
@@ -32,6 +33,7 @@ GradientListView {
 
 		text: CommonWords.ip_address + ' ' + (model.index + 1)
 		secondaryText: modelData
+		saveInput: function() { root.ipAddressUpdated(model.index, textField.text) }
 
 		content.children: [
 			defaultContent,
