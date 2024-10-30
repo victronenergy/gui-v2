@@ -17,14 +17,14 @@ Device {
 	readonly property real power: _power.isValid ? _power.value : NaN
 	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
 
-	readonly property QtObject phases: QtObject {
-		property int count
-
+	readonly property PhaseModel phases: PhaseModel {
 		function updateCount(maxPhaseCount) {
-			count = Math.max(count, maxPhaseCount)
+			// pvinverter services do not have /NumberOfPhases, so manually update the phase model
+			// count when phase measurements are detected.
+			phaseCount = Math.max(count, maxPhaseCount)
 		}
 
-		function get(index) {
+		function getPhase(index) {
 			return _phases.objectAt(index)
 		}
 
@@ -43,18 +43,22 @@ Device {
 				readonly property VeQuickItem _phaseEnergy: VeQuickItem {
 					uid: phaseUid + "/Energy/Forward"
 					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onValueChanged: phases.setValue(index, PhaseModel.EnergyRole, value)
 				}
 				readonly property VeQuickItem _phasePower: VeQuickItem {
 					uid: phaseUid + "/Power"
 					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onValueChanged: phases.setValue(index, PhaseModel.PowerRole, value)
 				}
 				readonly property VeQuickItem _phaseCurrent: VeQuickItem {
 					uid: phaseUid + "/Current"
 					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onValueChanged: phases.setValue(index, PhaseModel.CurrentRole, value)
 				}
 				readonly property VeQuickItem _phaseVoltage: VeQuickItem {
 					uid: phaseUid + "/Voltage"
 					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onValueChanged: phases.setValue(index, PhaseModel.VoltageRole, value)
 				}
 			}
 		}

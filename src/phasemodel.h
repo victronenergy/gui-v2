@@ -24,7 +24,9 @@ public:
 	enum Role {
 		NameRole = Qt::UserRole,
 		PowerRole,
-		CurrentRole
+		CurrentRole,
+		VoltageRole,
+		EnergyRole
 	};
 	Q_ENUM(Role)
 
@@ -56,8 +58,10 @@ protected:
 
 private:
 	struct Phase {
-		qreal power = 0;
-		qreal current = 0;
+		qreal power = qQNaN();
+		qreal current = qQNaN();
+		qreal voltage = qQNaN();
+		qreal energy = qQNaN();
 	};
 
 	void resetModel();

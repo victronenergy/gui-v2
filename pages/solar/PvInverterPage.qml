@@ -69,7 +69,7 @@ Page {
 						{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 					]
 					valueForModelIndex: function(phaseIndex, column) {
-						const phase = root.pvInverter.phases.get(phaseIndex)
+						const phase = root.pvInverter.phases.getPhase(phaseIndex)
 						const columnProperties = ["name", "energy", "voltage", "current", "power"]
 						return phase[columnProperties[column]]
 					}
