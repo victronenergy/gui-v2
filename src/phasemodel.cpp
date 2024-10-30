@@ -66,6 +66,14 @@ void PhaseModel::setValue(int index, Role role, const qreal value)
 		phase.current = value;
 		emit dataChanged(createIndex(index, 0), createIndex(index, 0), { CurrentRole });
 		break;
+	case VoltageRole:
+		phase.voltage = value;
+		emit dataChanged(createIndex(index, 0), createIndex(index, 0), { VoltageRole });
+		break;
+	case EnergyRole:
+		phase.energy = value;
+		emit dataChanged(createIndex(index, 0), createIndex(index, 0), { EnergyRole });
+		break;
 	default:
 		break;
 	}
@@ -101,6 +109,10 @@ QVariant PhaseModel::data(const QModelIndex &index, int role) const
 		return phase.power;
 	case CurrentRole:
 		return phase.current;
+	case VoltageRole:
+		return phase.voltage;
+	case EnergyRole:
+		return phase.energy;
 	default:
 		return QVariant();
 	}
@@ -133,7 +145,9 @@ QHash<int, QByteArray> PhaseModel::roleNames() const
 	static QHash<int, QByteArray> roles = {
 		{ NameRole, "name" },
 		{ PowerRole, "power" },
-		{ CurrentRole, "current" }
+		{ CurrentRole, "current" },
+		{ VoltageRole, "voltage" },
+		{ EnergyRole, "energy" }
 	};
 	return roles;
 }
