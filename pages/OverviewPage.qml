@@ -840,23 +840,22 @@ SwipeViewPage {
 		EvcsWidget {
 			id: evcsWidget
 
-			// The EVCS widget may have connectors to the Inverter/Charger, AC Loads or Essential
-			// Loads, depending on whether AC loads are split, and the "Position" configuration
-			// of the EV chargers on the system.
+			// The EVCS widget may have connectors to the AC Loads or Essential Loads, depending on
+			// whether AC loads are split into AC Loads + Essential Loads, and also depending on the
+			// "Position" configuration of the EV chargers on the system.
 			//
 			// If showing combined AC loads:
-			//  - connect to Inverter/Charger
+			//  - connect to AC Loads
 			// If splitting loads into (input) AC Loads and (output) Essential Loads:
 			//  - connect to AC Loads, if there are any EV chargers with /Position=1 (AC-In)
 			//  - connect to Essential Loads, if there are any EV chargers with /Position=0 (AC-Out)
-			readonly property bool connectToInverterCharger: visible && !Global.system.showInputLoads
 			readonly property bool connectToAcLoads: visible
-					&& Global.system.showInputLoads
-					&& Global.evChargers.acInputPositionCount > 0
+					&& (!Global.system.showInputLoads  // AC loads are combined
+						|| Global.evChargers.acInputPositionCount > 0) // AC loads are split, and AC-in position is in use
 			readonly property bool connectToEssentialLoads: visible
-					&& Global.system.showInputLoads
-					&& Global.system.hasAcOutSystem
-					&& Global.evChargers.acOutputPositionCount > 0
+					&& Global.system.showInputLoads     // AC loads are split
+					&& Global.system.hasAcOutSystem     // Essential Loads should be visible
+					&& Global.evChargers.acOutputPositionCount > 0  // AC-out position is in use
 
 			// When connecting the EVCS widget to the AC Loads and Essential Loads widgets, the
 			// connector line should not travel vertically in a straight line. Instead, move the
@@ -868,36 +867,7 @@ SwipeViewPage {
 			expanded: root._expandLayout
 			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
-			connectors: [ inverterToEvcsConnector, acLoadsToEvcsConnector, essentialLoadsToEvcsConnector ]
-
-			// Connector for Inverter/Charger -> EVCS
-			WidgetConnectorAnchor {
-				id: inverterToEvcsStartAnchor
-				parent: inverterChargerWidget
-				location: VenusOS.WidgetConnector_Location_Right
-				visible: evcsWidget.connectToInverterCharger
-			}
-			WidgetConnectorAnchor {
-				id: inverterToEvcsEndAnchor
-				location: VenusOS.WidgetConnector_Location_Left
-				visible: evcsWidget.connectToInverterCharger
-			}
-			WidgetConnector {
-				id: inverterToEvcsConnector
-				parent: root
-				visible: evcsWidget.connectToInverterCharger
-				startWidget: inverterChargerWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
-				endWidget: evcsWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: root._expandLayout
-				animateGeometry: root._animateGeometry
-				animationEnabled: root.animationEnabled
-				animationMode: root.isCurrentPage
-						&& Global.evChargers.power > Theme.geometry_overviewPage_connector_animationPowerThreshold
-					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
-					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
-			}
+			connectors: [ acLoadsToEvcsConnector, essentialLoadsToEvcsConnector ]
 
 			// Connector for AC Loads -> EVCS
 			WidgetConnectorAnchor {

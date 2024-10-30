@@ -269,7 +269,7 @@ QtObject {
 			}
 		},
 		{
-			name: "AC Loads only because showInputLoads=false; EVCS connected to Inverter/Charger",
+			name: "AC Loads only because showInputLoads=false; EVCS connected to AC Loads only",
 			system: { showInputLoads: false, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
