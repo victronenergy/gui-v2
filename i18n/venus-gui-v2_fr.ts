@@ -928,7 +928,7 @@
     <message id="settings_dvcc_instructions">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="19"/>
       <source>&lt;b&gt;CAUTION:&lt;/b&gt; Read the manual before adjusting.</source>
-      <translation>&lt;b&gt;CAUTION:&lt;/b&gt; Lire le manuel avant de procéder au réglage.</translation>
+      <translation>&lt;b&gt;ATTENTION:&lt;/b&gt; Lire le manuel avant de procéder au réglage.</translation>
     </message>
     <message id="settings_dvcc_limit_managed_battery_charge_voltage">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="40"/>
@@ -1029,7 +1029,7 @@
     <message id="settings_stored_backup_firmware">
       <location filename="../../pages/settings/PageSettingsFirmware.qml" line="49"/>
       <source>Stored backup firmware</source>
-      <translation>Micrologiciel sauvegardé stocké</translation>
+      <translation>Micrologiciel de secours stocké</translation>
     </message>
     <message id="settings_firmware_check_for_updates_on_sd_usb">
       <location filename="../../pages/settings/PageSettingsFirmwareOffline.qml" line="19"/>
@@ -1056,7 +1056,7 @@
     <message id="settings_firmware_build_date_time">
       <location filename="../../pages/settings/PageSettingsFirmwareOffline.qml" line="50"/>
       <source>Firmware build date/time</source>
-      <translation>Date/Heure de fabrication du micrologiciel</translation>
+      <translation>Date/Heure de compilation du micrologiciel</translation>
     </message>
     <message id="settings_auto_update">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="19"/>
@@ -1949,7 +1949,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_vrm_storage_contains_firmware_error">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="298"/>
       <source>Contains firmware image. Not using.</source>
-      <translation>Contient image micrologicielle. Pas utilisée.</translation>
+      <translation>Contient le micrologiciel. Pas utilisée.</translation>
     </message>
     <message id="settings_vrm_storage_not_writable_error">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="300"/>
@@ -2079,7 +2079,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_firmware_version_switch_option">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="51"/>
       <source>This option allows you to switch between the current and the previous firmware version. No internet or sdcard needed.</source>
-      <translation>Cette option vous permet d'alterner entre les versions de micrologiciel actuelle et anterieure. Internet ou carte SD ne sont pas neccesaires.</translation>
+      <translation>Cette option vous permet d'alterner entre les versions de micrologiciel actuelle et antérieure. Internet ou carte SD ne sont pas necessaires.</translation>
     </message>
     <message id="settings_firmware_current_version">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="94"/>
@@ -2090,7 +2090,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_firmware_press_to_boot">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="62"/>
       <source>Press to boot</source>
-      <translation>Appuyer pour redémarrer</translation>
+      <translation>Appuyer pour démarrer</translation>
     </message>
     <message id="settings_firmware_rebooting_to">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="80"/>
@@ -2106,7 +2106,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_firmware_backup_not_available">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="101"/>
       <source>Backup firmware not available</source>
-      <translation>Micrologiciel sauvegardé pas disponible</translation>
+      <translation>Micrologiciel de secours indisponible</translation>
     </message>
     <message id="settings_services_modbus_tcp">
       <location filename="../../pages/settings/PageSettingsServices.qml" line="16"/>
@@ -2227,7 +2227,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_tank_sensor">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="67"/>
       <source>Tank sensor</source>
-      <translation>Sonde du réservoir</translation>
+      <translation>Sonde de réservoir</translation>
     </message>
     <message id="settings_tank_start_level">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="90"/>
@@ -2636,7 +2636,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="tank_status_short_circuited">
       <location filename="../../data/Tanks.qml" line="132"/>
       <source>Short circuited</source>
-      <translation>court-circuité</translation>
+      <translation>Court-circuité</translation>
     </message>
     <message id="tank_status_reverse_polarity">
       <location filename="../../data/Tanks.qml" line="135"/>
@@ -2745,7 +2745,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_rvc_tank_instance">
       <location filename="../../pages/settings/PageSettingsRvcDeviceConfiguration.qml" line="102"/>
       <source>Tank instance</source>
-      <translation>Instance réservoir</translation>
+      <translation>Instance de réservoir</translation>
     </message>
     <message id="settings_rvc_devices">
       <location filename="../../pages/settings/PageSettingsRvcDevices.qml" line="15"/>
@@ -2967,7 +2967,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="vebus_device_press_to_redetect">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="198"/>
       <source>Press to redetect</source>
-      <translation>appuyer pour détecter à nouveau la batterie</translation>
+      <translation>Appuyer pour scanner</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="427"/>
@@ -3052,7 +3052,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="batterydetails_highest_cell_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="29"/>
       <source>Highest cell voltage</source>
-      <translation>Tension la plus haute de la cellule</translation>
+      <translation>Tension de cellule la plus haute</translation>
     </message>
     <message id="batterydetails_minimum_cell_temperature">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="39"/>
@@ -3294,7 +3294,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="batterysettingsbattery_press_to_sync">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="147"/>
       <source>Press to sync</source>
-      <translation>Appuyer pour synchro</translation>
+      <translation>Appuyer pour synchroniser</translation>
     </message>
     <message id="batterysettingsbattery_calibrate_zero_current">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="160"/>
@@ -3901,7 +3901,7 @@ NOTE : La mise à jour peut arrêter temporairement le système.</translation>
     <message id="vebus_device_press_to_update">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="105"/>
       <source>Press to update</source>
-      <translation>Appuyer sur pour mettre à jour</translation>
+      <translation>Appuyer pour mettre à jour</translation>
     </message>
     <message id="vebus_device_updating_the_mk3">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="109"/>
@@ -4071,7 +4071,7 @@ Voulez-vous continuer ?</translation>
     <message id="vebus_device_press_to_restart">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="211"/>
       <source>Press to restart</source>
-      <translation>Appuyer pour démarrer</translation>
+      <translation>Appuyer pour redémarrer</translation>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="219"/>
@@ -4132,7 +4132,7 @@ Voulez-vous continuer ?</translation>
       <location filename="../../pages/vebusdevice/PageVeBusDeviceInfo.qml" line="34"/>
       <location filename="../../pages/vebusdevice/PageVeBusDeviceInfo.qml" line="38"/>
       <source>Serial numbers</source>
-      <translation>Numéros de série</translation>
+      <translation>Numéro(s) de série</translation>
     </message>
     <message id="vebus_device_last_vebus_error_11_report">
       <location filename="../../pages/vebusdevice/PageVeBusError11Device.qml" line="33"/>
@@ -4203,7 +4203,7 @@ Voulez-vous continuer ?</translation>
     <message id="vebus_error_11_reporting_requires_v454">
       <location filename="../../pages/vebusdevice/PageVeBusError11View.qml" line="25"/>
       <source>VE.Bus Error 11 reporting requires minimum VE.Bus firmware version 454.</source>
-      <translation>Pour obtenir le rapport d'erreur 11 du VE.Bus, la version micrologicielle 454 ou supérieure est nécessaire.</translation>
+      <translation>Pour obtenir le rapport d'erreur 11 du VE.Bus, le micrologiciel 454 ou supérieure est nécessaire.</translation>
     </message>
     <message id="vebus_quirks">
       <location filename="../../pages/vebusdevice/PageVeBusKwhCounters.qml" line="20"/>
@@ -4310,7 +4310,7 @@ Voulez-vous continuer ?</translation>
     <message id="vebus_device_multi_control_version">
       <location filename="../../pages/vebusdevice/VeBusDeviceInfoModel.qml" line="17"/>
       <source>Multi Control version</source>
-      <translation>Version de Contrôle du Multi</translation>
+      <translation>Version du Multi Control</translation>
     </message>
     <message id="vebus_device_bms_version">
       <location filename="../../pages/vebusdevice/VeBusDeviceInfoModel.qml" line="19"/>
@@ -7522,12 +7522,12 @@ Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois
     <message id="settings_display_classic_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="194"/>
       <source>Classic UI</source>
-      <translation>IU classic</translation>
+      <translation>Interface classique</translation>
     </message>
     <message id="settings_display_new_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="199"/>
       <source>New UI</source>
-      <translation>Nouvelle interface utilisateur</translation>
+      <translation>Nouvelle interface</translation>
     </message>
     <message id="settings_language_change_succeeded">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="142"/>
@@ -7558,7 +7558,7 @@ Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois
       <location filename="../../components/settings/ChargeScheduleItem.qml" line="143"/>
       <source>Duration</source>
       <oldsource>Duration (hh:mm)</oldsource>
-      <translation>Durée &lt;wbr&gt;(hh:mm)</translation>
+      <translation>Durée</translation>
     </message>
     <message id="rssystem_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="74"/>
@@ -7568,7 +7568,7 @@ Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois
     <message id="rs_no_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="60"/>
       <source>No system alarms</source>
-      <translation>Pas d'alarmes du système</translation>
+      <translation>Pas d'alarmes système</translation>
     </message>
     <message id="welcome_page_back">
       <location filename="../../pages/welcome/WelcomePage.qml" line="94"/>
@@ -7602,12 +7602,12 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message id="welcome_colors_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="74"/>
       <source>Dark - light mode</source>
-      <translation>Sombre - mode clair</translation>
+      <translation>Mode Sombre - Clair</translation>
     </message>
     <message id="welcome_colors_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="78"/>
       <source>Different environments call for different display settings. Dark and Light Modes ensure the best viewing experience no matter where you are.</source>
-      <translation>Des environnements différents nécessitent des réglages d'affichage différents. Les modes sombre et lumineux garantissent une expérience visuelle optimale, quel que soit l'endroit où vous vous trouvez.</translation>
+      <translation>Des environnements différents nécessitent des réglages d'affichage différents. Les modes sombre et clair garantissent une expérience visuelle optimale, quel que soit l'endroit où vous vous trouvez.</translation>
     </message>
     <message id="welcome_brief_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="87"/>
@@ -7617,7 +7617,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message id="welcome_overview_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="95"/>
       <source>Gain greater control with our updated Overview panel, featuring real-time system data — all in one place for easy monitoring.</source>
-      <translation>Vous bénéficiez d'un meilleur contrôle grâce à notre nouveau panneau d'affichage, qui contient des données en temps réel sur le système, le tout regroupé en un seul endroit pour faciliter la surveillance.</translation>
+      <translation>Vous bénéficiez d'un meilleur contrôle grâce à notre nouveau tableau de bord, qui contient des données en temps réel sur le système, le tout regroupé en un seul endroit pour faciliter la surveillance.</translation>
     </message>
     <message id="welcome_controls_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="99"/>
@@ -7627,12 +7627,12 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message id="welcome_controls_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="103"/>
       <source>All the day to day controls are now combined together in the new Controls pane. </source>
-      <translation>Tous les contrôles quotidiens sont désormais regroupés dans le nouveau volet Contrôles. </translation>
+      <translation>Tous les contrôles utiles sont désormais regroupés dans le nouveau volet Contrôles. </translation>
     </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="107"/>
       <source>Watts &amp; Amps</source>
-      <translation>Watts et ampères</translation>
+      <translation>Watts &amp; Ampères</translation>
     </message>
     <message id="welcome_units_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="111"/>
@@ -7680,7 +7680,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message id="page_settings_run_time_and_service_generator_total_run_time">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="57"/>
       <source>Generator total run time (hours)</source>
-      <translation>Durée de fonctionnement totale du générateur (h)</translation>
+      <translation>Durée de fonctionnement totale du générateur (heures)</translation>
     </message>
     <message id="settings_startpage_name">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="37"/>
@@ -7729,7 +7729,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="31"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="45"/>
       <source>Node-RED factory reset</source>
-      <translation>Réinitialisation d'usine du Node-RED</translation>
+      <translation>Remise à zéro de Node-RED</translation>
     </message>
     <message id="page_settings_nodered_factory_reset_confirmation">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="47"/>
@@ -7785,22 +7785,22 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message id="settings_soc_condition">
       <location filename="../../data/Generators.qml" line="79"/>
       <source>SOC condition</source>
-      <translation>Condition SOC</translation>
+      <translation>Condition % Batterie</translation>
     </message>
     <message id="settings_ac_load_condition">
       <location filename="../../data/Generators.qml" line="82"/>
       <source>AC load condition</source>
-      <translation>Condition de charge en courant alternatif</translation>
+      <translation>Condition consommation CA</translation>
     </message>
     <message id="settings_battery_current_condition">
       <location filename="../../data/Generators.qml" line="85"/>
       <source>Battery current condition</source>
-      <translation>État de la batterie</translation>
+      <translation>Condition courant batterie</translation>
     </message>
     <message id="settings_battery_voltage_condition">
       <location filename="../../data/Generators.qml" line="88"/>
       <source>Battery voltage condition</source>
-      <translation>État de la tension de la batterie</translation>
+      <translation>Condition tension batterie</translation>
     </message>
     <message id="settings_inverter_overload_condition">
       <location filename="../../data/Generators.qml" line="94"/>
@@ -7898,7 +7898,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
-      <translation>La fonction de démarrage/arrêt du générateur n'est pas activée, allez dans les réglages du relais et réglez la fonction sur "Genset start/stop".</translation>
+      <translation>La fonction de démarrage/arrêt du générateur n'est pas activée, allez dans les réglages du relai et réglez la fonction sur "Arrêter/Démarrer Générateur".</translation>
     </message>
   </context>
   <context>
