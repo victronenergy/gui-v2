@@ -23,7 +23,7 @@ AcWidget {
 	quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
 	quantityLabel.acInputMode: true
 	phaseCount: connected ? input.phases.count : 0
-	enabled: !!input
+	enabled: !!inputInfo
 	extraContentLoader.sourceComponent: ThreePhaseDisplay {
 		width: parent.width
 		model: root.input.phases
@@ -32,15 +32,15 @@ AcWidget {
 	}
 
 	onClicked: {
-		if (root.input.serviceType === "acsystem") {
+		const inputServiceUid = BackendConnection.serviceUidFromName(root.inputInfo.serviceName, root.inputInfo.deviceInstance)
+		if (root.inputInfo.serviceType === "acsystem") {
 			Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml",
-					{ "title": root.input.name, "bindPrefix": root.input.serviceUid })
-		} else if (root.input.serviceType === "vebus") {
-			const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(root.input.serviceUid)
+					{ "bindPrefix": inputServiceUid })
+		} else if (root.inputInfo.serviceType === "vebus") {
+			const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(inputServiceUid)
 			if (deviceIndex >= 0) {
 				const veBusDevice = Global.inverterChargers.veBusDevices.deviceAt(deviceIndex)
 				Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
-					"title": veBusDevice.name,
 					"veBusDevice": veBusDevice
 				})
 			}
@@ -49,8 +49,7 @@ AcWidget {
 
 		// Assume this is on a grid/genset service
 		Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
-			"title": root.input.name,
-			"bindPrefix": root.input.serviceUid
+			"bindPrefix": inputServiceUid
 		})
 	}
 
