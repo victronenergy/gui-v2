@@ -7648,12 +7648,12 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <location filename="../../pages/welcome/WelcomeView.qml" line="120"/>
       <source>Access the link below to find out more about the Renewed UI.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</source>
       <extracomment>%1 = link to URL with more information</extracomment>
-      <translation>Accédez au lien ci-dessous pour en savoir plus sur l'assurance-chômage renouvelée.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
+      <translation>Accédez au lien ci-dessous pour en savoir plus sur la nouvelle interface utilisateur.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
     </message>
     <message id="welcome_more_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="122"/>
       <source>Scan the QR code to find out more about the Renewed UI.</source>
-      <translation>Scannez le code QR pour en savoir plus sur l'assurance-chômage renouvelée.</translation>
+      <translation>Scannez le code QR pour en savoir plus sur la nouvelle interface utilisateur.</translation>
     </message>
     <message id="welcome_done">
       <location filename="../../pages/welcome/WelcomeView.qml" line="138"/>
@@ -7718,7 +7718,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message id="page_settings_fronius_inverter_power_limiting_label">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="75"/>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
-      <translation>Cet onduleur PV prend en charge la limitation de la puissance. Désactivez ce paramètre s'il interfère avec le fonctionnement normal.</translation>
+      <translation>Cet onduleur PV prend en charge la limitation de puissance. Désactivez ce paramètre s'il interfère avec le fonctionnement normal.</translation>
     </message>
     <message id="press_ok_to_reboot">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="309"/>
@@ -7764,7 +7764,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message id="controlcard_generator_autostarted">
       <location filename="../../components/CommonWords.qml" line="80"/>
       <source>Auto-started • %1</source>
-      <translation>Démarrage automatique - %1</translation>
+      <translation>Démarrage automatique • %1</translation>
     </message>
     <message id="settings_relay_deactivation_value">
       <location filename="../../components/settings/TemperatureRelaySettings.qml" line="89"/>
@@ -7775,7 +7775,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message id="generator_not_running">
       <location filename="../../data/Generators.qml" line="67"/>
       <source>Not running</source>
-      <translation>Pas en cours d'exécution</translation>
+      <translation>Pas démarré</translation>
     </message>
     <message id="settings_loss_of_communication">
       <location filename="../../data/Generators.qml" line="76"/>
