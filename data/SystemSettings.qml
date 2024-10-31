@@ -11,6 +11,8 @@ QtObject {
 
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
 	readonly property bool needsOnboarding: _onboardingState.needsOnboarding
+			// It's hard to skip onboarding without touch, so disable onboarding if touch is disabled.
+			&& _touchEnabled.isValid && _touchEnabled.value !== 0
 
 	property int electricalQuantity: VenusOS.Units_None
 	property int temperatureUnit: VenusOS.Units_None
@@ -311,6 +313,10 @@ QtObject {
 		}
 
 		uid: root.serviceUid + "/Settings/Gui2/OnBoarding"
+	}
+
+	readonly property VeQuickItem _touchEnabled: VeQuickItem {
+		uid: root.serviceUid + "/Settings/Gui/TouchEnabled"
 	}
 
 	function reset() {
