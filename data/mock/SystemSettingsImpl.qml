@@ -79,6 +79,7 @@ QtObject {
 		setMockSettingValue("SystemSetup/AcInput2", 3)
 		setMockSettingValue("SystemSetup/HasAcInLoads", 1)
 		setMockSettingValue("Gui/DemoMode", 1)
+		setMockSettingValue("Gui/TouchEnabled", 1)
 		setMockSettingValue("Gui2/OnBoarding", VenusOS.OnboardingState_DoneNative | VenusOS.OnboardingState_DoneWasm)   // set to 0 to enable onboarding
 		setMockSettingValue("Gui2/StartPage", VenusOS.StartPage_Mode_AutoSelect)
 		setMockSettingValue("Gui2/StartPageName", "")
