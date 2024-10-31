@@ -7588,7 +7588,7 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
     <message id="welcome_skip">
       <location filename="../../pages/welcome/WelcomeView.qml" line="45"/>
       <source>Skip</source>
-      <translation>atl</translation>
+      <translation>Atla</translation>
     </message>
     <message id="welcome_landing_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="64"/>
@@ -7723,7 +7723,7 @@ Kolaylaştırılmış navigasyon ve yeni bir görünümle, sevdiğiniz her şeye
     <message id="page_settings_fronius_inverter_power_limiting_label">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="75"/>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
-      <translation>Bu FV inverter güç sınırlama desteğine sahiptir. Normal çalışmayı engelliyorsa bu ayarı devre dışı bırakın.</translation>
+      <translation>Bu PV inverter güç sınırlama desteğine sahiptir. Normal çalışmayı engelliyorsa bu ayarı devre dışı bırakın.</translation>
     </message>
     <message id="press_ok_to_reboot">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="309"/>
@@ -7836,7 +7836,7 @@ Kolaylaştırılmış navigasyon ve yeni bir görünümle, sevdiğiniz her şeye
       <location filename="../../data/StartPageConfiguration.qml" line="28"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
-      <translation>Brief (yan panel açık)</translation>
+      <translation>Bilgi  (yan panel açık)</translation>
     </message>
     <message id="startpage_option_levels_tanks">
       <location filename="../../data/StartPageConfiguration.qml" line="40"/>
@@ -7864,8 +7864,8 @@ Kolaylaştırılmış navigasyon ve yeni bir görünümle, sevdiğiniz her şeye
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="20"/>
       <source>After %n minute(s)</source>
       <translation>
-        <numerusform>n dakika(lar)dan sonra</numerusform>
-        <numerusform></numerusform>
+        <numerusform>%n dakika sonra</numerusform>
+        <numerusform>%n dakika sonra</numerusform>
       </translation>
     </message>
     <message id="settings_startpage_description">

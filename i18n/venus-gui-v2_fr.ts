@@ -7859,9 +7859,9 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="20"/>
       <source>After %n minute(s)</source>
       <translation>
+        <numerusform>Après %n minute</numerusform>
+        <numerusform>Après %n minute</numerusform>
         <numerusform>Après %n minute(s)</numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
       </translation>
     </message>
     <message id="settings_startpage_description">

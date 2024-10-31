@@ -7480,7 +7480,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
     <message id="overview_widget_essential_loads_title">
       <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="13"/>
       <source>Essential Loads</source>
-      <translation>Основні навантаження</translation>
+      <translation>Важливі Спож.</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
       <location filename="../../pages/controlcards/GeneratorCard.qml" line="66"/>
@@ -7870,9 +7870,9 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>After %n minute(s)</source>
       <translation>
         <numerusform>Через %n хвилин(и)</numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
+        <numerusform>Через %n хвилин(и)</numerusform>
+        <numerusform>Через %n хвилин(и)</numerusform>
+        <numerusform>Через %n хвилин(и)</numerusform>
       </translation>
     </message>
     <message id="settings_startpage_description">
@@ -10353,7 +10353,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message>
       <location filename="../../data/EnvironmentInputs.qml" line="18"/>
       <source>Battery</source>
-      <translation>Акумуляторна батарея</translation>
+      <translation>Батарея</translation>
     </message>
     <message>
       <location filename="../../data/EnvironmentInputs.qml" line="24"/>

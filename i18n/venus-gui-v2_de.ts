@@ -7684,7 +7684,7 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
     <message id="settings_startpage_name">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="37"/>
       <source>Start page</source>
-      <translation>Start Seite</translation>
+      <translation>Startseite</translation>
     </message>
     <message id="settings_display_onscreen_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="185"/>
@@ -7694,7 +7694,7 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
     <message id="settings_display_remote_console_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="187"/>
       <source>User interface (Remote Console)</source>
-      <translation>Benutzeroberfläche (Remote Console)</translation>
+      <translation>Benutzeroberfläche (Remote Konsole)</translation>
     </message>
     <message id="settings_app_restarted">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="234"/>
@@ -7712,7 +7712,7 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="242"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
-      <translation>%1 wird auf %2 gesetzt</translation>
+      <translation>%1 ist auf %2 gesetzt</translation>
     </message>
     <message id="page_settings_fronius_inverter_power_limiting_label">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="75"/>
@@ -7738,7 +7738,7 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
     <message id="settings_connection_status">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="178"/>
       <source>Connection status</source>
-      <translation>Status der Verbindung</translation>
+      <translation>Verbindungsstatus</translation>
     </message>
     <message id="settings_connection_error_https_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="219"/>
@@ -7779,7 +7779,7 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
     <message id="settings_loss_of_communication">
       <location filename="../../data/Generators.qml" line="76"/>
       <source>Loss of communication</source>
-      <translation>Verlust der Kommunikation</translation>
+      <translation>Kommunikationsverlust</translation>
     </message>
     <message id="settings_soc_condition">
       <location filename="../../data/Generators.qml" line="79"/>
@@ -7794,17 +7794,17 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
     <message id="settings_battery_current_condition">
       <location filename="../../data/Generators.qml" line="85"/>
       <source>Battery current condition</source>
-      <translation>Stromzustand der Batterie</translation>
+      <translation>Batterie Stromzustand</translation>
     </message>
     <message id="settings_battery_voltage_condition">
       <location filename="../../data/Generators.qml" line="88"/>
       <source>Battery voltage condition</source>
-      <translation>Zustand der Batteriespannung</translation>
+      <translation>Batterie Spannungszustand</translation>
     </message>
     <message id="settings_inverter_overload_condition">
       <location filename="../../data/Generators.qml" line="94"/>
       <source>Inverter overload condition</source>
-      <translation>Überlastungszustand des Wechselrichters</translation>
+      <translation>Wechselrichter Überlastungszustand</translation>
     </message>
     <message id="ess_flags">
       <location filename="../../components/SystemReason.qml" line="15"/>
@@ -7814,23 +7814,23 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
     <message id="systemreason_charge_discharge_disabled">
       <location filename="../../components/SystemReason.qml" line="47"/>
       <source>ESS %1 Charge/Discharge Disabled</source>
-      <translation>ESS %1 Ladung/Entladung Deaktiviert</translation>
+      <translation>ESS %1 Laden/Entladen Deaktiviert</translation>
     </message>
     <message id="systemreason_charge_disabled">
       <location filename="../../components/SystemReason.qml" line="50"/>
       <source>ESS %1 Charge Disabled</source>
-      <translation>ESS %1 Charge Deaktiviert</translation>
+      <translation>ESS %1 Laden Deaktiviert</translation>
     </message>
     <message id="systemreason_discharge_disabled">
       <location filename="../../components/SystemReason.qml" line="53"/>
       <source>ESS %1 Discharge Disabled</source>
-      <translation>ESS %1 Entladung Deaktiviert</translation>
+      <translation>ESS %1 Entladen Deaktiviert</translation>
     </message>
     <message id="startpage_option_brief_with_panel">
       <location filename="../../data/StartPageConfiguration.qml" line="28"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
-      <translation>Brief (Seitenwand offen)</translation>
+      <translation>Kurzansicht (Seitenbereich offen)</translation>
     </message>
     <message id="startpage_option_levels_tanks">
       <location filename="../../data/StartPageConfiguration.qml" line="40"/>
@@ -7842,12 +7842,12 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
       <location filename="../../data/StartPageConfiguration.qml" line="46"/>
       <source>Levels (Environment)</source>
       <extracomment>The 'Levels' page, with the "Environment" section opened</extracomment>
-      <translation>Levels (Umwelt)</translation>
+      <translation>Füllstände (Umgebung)</translation>
     </message>
     <message id="startpage_option_battery list">
       <location filename="../../data/StartPageConfiguration.qml" line="51"/>
       <source>Battery list</source>
-      <translation>Akku-Liste</translation>
+      <translation>Batterieliste</translation>
     </message>
     <message id="firmware_installed_build_gx_device_updated">
       <location filename="../../pages/DialogLayer.qml" line="55"/>
@@ -7859,7 +7859,7 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
       <source>After %n minute(s)</source>
       <translation>
         <numerusform>Nach %n Minute(n)</numerusform>
-        <numerusform></numerusform>
+        <numerusform>Nach %n Minute(n)</numerusform>
       </translation>
     </message>
     <message id="settings_startpage_description">
@@ -7896,7 +7896,7 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
-      <translation>Die Generator-Start/Stopp-Funktion ist nicht aktiviert, gehen Sie zu den Relaiseinstellungen und stellen Sie die Funktion auf "Aggregat-Start/Stopp".</translation>
+      <translation>Die Start-/Stoppfunktion des Generators ist nicht aktiviert. Gehen Sie zu den Relaiseinstellungen und stellen Sie die Funktion auf „Generator Start/Stopp“ ein.</translation>
     </message>
   </context>
   <context>
