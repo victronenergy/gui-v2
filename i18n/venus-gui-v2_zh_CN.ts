@@ -4679,7 +4679,7 @@ Do you want to continue?</source>
       <location filename="../../components/listitems/ListAlarm.qml" line="17"/>
       <source>OK</source>
       <extracomment>Voltage alarm is at "OK" level</extracomment>
-      <translation>正常</translation>
+      <translation>确认</translation>
     </message>
     <message id="common_words_on">
       <location filename="../../components/CommonWords.qml" line="329"/>
@@ -7882,18 +7882,18 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message id="rs_current_limit_not_adjustable">
       <location filename="../../components/CurrentLimitButton.qml" line="30"/>
       <source>This current limit is fixed in the system configuration. It cannot be adjusted.</source>
-      <translation>该电流限制在系统配置中是固定的。无法调整。</translation>
+      <translation>该电流限制在系统配置中是固定的，无法调整。</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
       <location filename="../../components/InverterChargerModeButton.qml" line="39"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
-      <translation>该模式在系统配置中是固定的。无法调整。</translation>
+      <translation>该模式在系统配置中是固定的，无法调整。</translation>
     </message>
     <message id="settings_generator_function_not_enabled">
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
-      <translation>发电机启动/停止功能未启用，进入继电器设置，将功能设置为 "发电机组启动/停止"。</translation>
+      <translation>。发电机启动/停止功能未启用。进入继电器设置，将功能设置为 "发电机组启动/停止"。</translation>
     </message>
   </context>
   <context>
