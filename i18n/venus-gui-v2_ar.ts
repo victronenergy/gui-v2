@@ -7672,45 +7672,45 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message id="settings_startpage_name">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="37"/>
       <source>Start page</source>
-      <translation></translation>
+      <translation>صفحة البدء</translation>
     </message>
     <message id="settings_display_onscreen_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="185"/>
       <source>User interface</source>
-      <translation></translation>
+      <translation>واجهة المستخدم</translation>
     </message>
     <message id="settings_display_remote_console_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="187"/>
       <source>User interface (Remote Console)</source>
-      <translation></translation>
+      <translation>واجهة المستخدم (وحدة التحكم عن بعد)</translation>
     </message>
     <message id="settings_app_restarted">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="234"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
-      <translation></translation>
+      <translation>%1محدث</translation>
     </message>
     <message id="settings_switch_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="238"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
-      <translation></translation>
+      <translation>ستتبدل واجهة المستخدم إلى %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="242"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
-      <translation></translation>
+      <translation>تم ضبط %1 إلى %2.</translation>
     </message>
     <message id="page_settings_fronius_inverter_power_limiting_label">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="75"/>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
-      <translation></translation>
+      <translation>يدعم المعاكس الضوئي تحديد الطاقة. عطل هذه الخاصية إذا كانت تتداخل مع التشغيل العادي.</translation>
     </message>
     <message id="press_ok_to_reboot">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="309"/>
       <source>Press 'OK' to reboot</source>
-      <translation></translation>
+      <translation>اضغط على «نعم» لإعادة التشغيل</translation>
     </message>
     <message id="page_settings_nodered_factory_reset">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="31"/>
@@ -7726,32 +7726,32 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message id="settings_connection_status">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="178"/>
       <source>Connection status</source>
-      <translation></translation>
+      <translation>حالة الاتصال</translation>
     </message>
     <message id="settings_connection_error_https_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="219"/>
       <source>Connection status (HTTPS channel)</source>
-      <translation></translation>
+      <translation>حالة الاتصال (قناة HTTPS)</translation>
     </message>
     <message id="settings_connection_error_http_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="221"/>
       <source>Connection status (HTTP channel)</source>
-      <translation></translation>
+      <translation>حالة الاتصال (قناة HTTP)</translation>
     </message>
     <message id="settings_connection_error_realtime_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="239"/>
       <source>Connection status (MQTT Real-time channel)</source>
-      <translation></translation>
+      <translation>حالة الاتصال (قناة MQTT في الوقت الفعلي)</translation>
     </message>
     <message id="settings_connection_error_rpc_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="246"/>
       <source>Connection status (MQTT RPC channel)</source>
-      <translation></translation>
+      <translation>حالة الاتصال (قناة MQTT RPC)</translation>
     </message>
     <message id="controlcard_generator_autostarted">
       <location filename="../../components/CommonWords.qml" line="80"/>
       <source>Auto-started • %1</source>
-      <translation></translation>
+      <translation>بدأ التشغيل تلقائيا• %1</translation>
     </message>
     <message id="settings_relay_deactivation_value">
       <location filename="../../components/settings/TemperatureRelaySettings.qml" line="89"/>
@@ -7762,127 +7762,127 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message id="generator_not_running">
       <location filename="../../data/Generators.qml" line="67"/>
       <source>Not running</source>
-      <translation></translation>
+      <translation>لا يعمل</translation>
     </message>
     <message id="settings_loss_of_communication">
       <location filename="../../data/Generators.qml" line="76"/>
       <source>Loss of communication</source>
-      <translation></translation>
+      <translation>فقد الاتصال</translation>
     </message>
     <message id="settings_soc_condition">
       <location filename="../../data/Generators.qml" line="79"/>
       <source>SOC condition</source>
-      <translation></translation>
+      <translation>حالة مستوى شحن البطارية</translation>
     </message>
     <message id="settings_ac_load_condition">
       <location filename="../../data/Generators.qml" line="82"/>
       <source>AC load condition</source>
-      <translation></translation>
+      <translation>حالة حمل التيار المتردد</translation>
     </message>
     <message id="settings_battery_current_condition">
       <location filename="../../data/Generators.qml" line="85"/>
       <source>Battery current condition</source>
-      <translation></translation>
+      <translation>حالة تيار البطارية</translation>
     </message>
     <message id="settings_battery_voltage_condition">
       <location filename="../../data/Generators.qml" line="88"/>
       <source>Battery voltage condition</source>
-      <translation></translation>
+      <translation>حالة الجهد الكهربائي للبطارية</translation>
     </message>
     <message id="settings_inverter_overload_condition">
       <location filename="../../data/Generators.qml" line="94"/>
       <source>Inverter overload condition</source>
-      <translation></translation>
+      <translation>حالة الحمل الزائد في المعاكس</translation>
     </message>
     <message id="ess_flags">
       <location filename="../../components/SystemReason.qml" line="15"/>
       <source>ESS %1</source>
-      <translation></translation>
+      <translation>الديناميكي %1</translation>
     </message>
     <message id="systemreason_charge_discharge_disabled">
       <location filename="../../components/SystemReason.qml" line="47"/>
       <source>ESS %1 Charge/Discharge Disabled</source>
-      <translation></translation>
+      <translation>الديناميكي %1 التحميل/ تفريغ الشحن معطل</translation>
     </message>
     <message id="systemreason_charge_disabled">
       <location filename="../../components/SystemReason.qml" line="50"/>
       <source>ESS %1 Charge Disabled</source>
-      <translation></translation>
+      <translation>الديناميكي %1التحميل معطل</translation>
     </message>
     <message id="systemreason_discharge_disabled">
       <location filename="../../components/SystemReason.qml" line="53"/>
       <source>ESS %1 Discharge Disabled</source>
-      <translation></translation>
+      <translation>الديناميكي %1 تفريغ الشحن معطل</translation>
     </message>
     <message id="startpage_option_brief_with_panel">
       <location filename="../../data/StartPageConfiguration.qml" line="28"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
-      <translation></translation>
+      <translation>مختصر (اللوحة الجانبية مفتوحة)</translation>
     </message>
     <message id="startpage_option_levels_tanks">
       <location filename="../../data/StartPageConfiguration.qml" line="40"/>
       <source>Levels (Tanks)</source>
       <extracomment>The 'Levels' page, with the "Tanks" section opened</extracomment>
-      <translation></translation>
+      <translation>المستويات (الخزانات)</translation>
     </message>
     <message id="startpage_option_levels_environment">
       <location filename="../../data/StartPageConfiguration.qml" line="46"/>
       <source>Levels (Environment)</source>
       <extracomment>The 'Levels' page, with the "Environment" section opened</extracomment>
-      <translation></translation>
+      <translation>المستويات (البيئة)</translation>
     </message>
     <message id="startpage_option_battery list">
       <location filename="../../data/StartPageConfiguration.qml" line="51"/>
       <source>Battery list</source>
-      <translation></translation>
+      <translation>قائمة البطارية</translation>
     </message>
     <message id="firmware_installed_build_gx_device_updated">
       <location filename="../../pages/DialogLayer.qml" line="55"/>
       <source>GX device has been updated</source>
-      <translation></translation>
+      <translation>تم تحديث جهاز GX</translation>
     </message>
     <message id="settings_startpage_timeout_minutes" numerus="yes">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="20"/>
       <source>After %n minute(s)</source>
       <translation>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
+        <numerusform>بعد %n دقيقة/دقائق</numerusform>
+        <numerusform>بعد %n دقيقة/دقائق</numerusform>
+        <numerusform>بعد %n دقيقة/دقائق</numerusform>
+        <numerusform>بعد %n دقيقة/دقائق</numerusform>
+        <numerusform>بعد %n دقيقة/دقائق</numerusform>
+        <numerusform>بعد %n دقيقة/دقائق</numerusform>
       </translation>
     </message>
     <message id="settings_startpage_description">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="63"/>
       <source>Go to this page when the application starts.</source>
-      <translation></translation>
+      <translation>انتقل إلى هذه الصفحة حينما يبدأ التطبيق في العمل.</translation>
     </message>
     <message id="settings_startpage_timeout">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="74"/>
       <source>Timeout</source>
-      <translation></translation>
+      <translation>انتهاء المهلة</translation>
     </message>
     <message id="settings_startpage_timeout_description">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="84"/>
       <source>Revert to the start page when the application is inactive.</source>
-      <translation></translation>
+      <translation>اذهب إلى صفحة البدء عندما يكون التطبيق غير نشط.</translation>
     </message>
     <message id="settings_startpage_auto_description">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="115"/>
       <source>After one minute of inactivity, select the current page as the start page, if it is in this list.</source>
-      <translation></translation>
+      <translation>بعد دقيقة من عدم النشاط اختر الصفحة الحالية لتكون صفحة البدء إذا كانت في هذه القائمة.</translation>
     </message>
     <message id="rs_current_limit_not_adjustable">
       <location filename="../../components/CurrentLimitButton.qml" line="30"/>
       <source>This current limit is fixed in the system configuration. It cannot be adjusted.</source>
-      <translation></translation>
+      <translation>حد التيار مثبت في تكوين النظام. لا يمكن تعديله.</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
       <location filename="../../components/InverterChargerModeButton.qml" line="39"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
-      <translation></translation>
+      <translation>الوضع مثبت في تكوين النظام. لا يمكن تعديله.</translation>
     </message>
     <message id="settings_generator_function_not_enabled">
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>

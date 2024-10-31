@@ -7469,7 +7469,7 @@ Nachdem Sie ein neues Netzwerk hinzugefügt/aktiviert haben, müssen Sie es einm
     <message id="overview_widget_essential_loads_title">
       <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="13"/>
       <source>Essential Loads</source>
-      <translation>Unverzichtbare Lasten</translation>
+      <translation>Essentielle Lasten</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
       <location filename="../../pages/controlcards/GeneratorCard.qml" line="66"/>
