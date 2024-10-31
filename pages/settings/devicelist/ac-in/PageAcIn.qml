@@ -11,6 +11,13 @@ Page {
 
 	property string bindPrefix
 
+	title: acInDevice.name
+
+	Device {
+		id: acInDevice
+		serviceUid: root.bindPrefix
+	}
+
 	VeQuickItem {
 		id: productIdDataItem
 

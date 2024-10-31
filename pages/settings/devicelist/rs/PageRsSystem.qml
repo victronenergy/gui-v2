@@ -12,9 +12,16 @@ Page {
 	property string bindPrefix
 	readonly property bool multiPhase: numberOfPhases.isValid && numberOfPhases.value > 1
 
+	title: acSystemDevice.name
+
 	VeQuickItem {
 		id: numberOfPhases
 		uid: root.bindPrefix + "/Ac/NumberOfPhases"
+	}
+
+	Device {
+		id: acSystemDevice
+		serviceUid: root.bindPrefix
 	}
 
 	GradientListView {
