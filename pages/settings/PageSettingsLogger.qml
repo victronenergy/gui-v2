@@ -45,6 +45,7 @@ Page {
 				text: qsTrId("settings_logging_vrm_portal")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Network/VrmPortal"
 				updateDataOnClick: false
+				updateCurrentIndexOnClick: false // track backend value, set only when confirmation dialog is accepted.
 				popDestination: undefined   // do not automatically pop page when value is selected
 				optionModel: [
 					{ display: CommonWords.off, value: VenusOS.Vrm_PortalMode_Off },
