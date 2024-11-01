@@ -14,7 +14,7 @@ ListItemButton {
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
-	readonly property bool modeAdjustable: modeIsAdjustable.isValid && !!modeIsAdjustable.value
+	readonly property bool modeAdjustable: modeIsAdjustable.value !== 0
 
 	text: serviceType !== "inverter" || isInverterChargerItem.value === 1
 			? Global.inverterChargers.inverterChargerModeToText(modeItem.value)

@@ -16,7 +16,7 @@ ListItemButton {
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
-	readonly property bool limitAdjustable: currentLimitIsAdjustable.isValid && !!currentLimitIsAdjustable.value
+	readonly property bool limitAdjustable: currentLimitIsAdjustable.value !== 0
 
 	function _currentLimitNotAdjustableText() {
 		if (serviceType !== "acsystem") {

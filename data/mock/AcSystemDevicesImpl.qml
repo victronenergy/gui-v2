@@ -73,7 +73,7 @@ Item {
 				acSystem.setMockValue("/Ac/In/1/CurrentLimitIsAdjustable", 1)
 				acSystem.setMockValue("/Ac/In/1/Type", VenusOS.AcInputs_InputSource_Shore)
 				acSystem.setMockValue("/Ac/In/2/CurrentLimit", 20.25)
-				acSystem.setMockValue("/Ac/In/2/CurrentLimitIsAdjustable", 1)
+				acSystem.setMockValue("/Ac/In/2/CurrentLimitIsAdjustable", 0)
 				acSystem.setMockValue("/Ac/In/2/Type", VenusOS.AcInputs_InputSource_Grid)
 				acSystem.setMockValue("/State", Math.floor(Math.random() * VenusOS.System_State_FaultCondition))
 				acSystem.setMockValue("/Mode", VenusOS.Inverter_Mode_Off)
