@@ -136,10 +136,10 @@ Page {
 
 			ListNavigationItem {
 				// This is the number of active alarms, plus the active error (if present).
-				readonly property int itemCount: (lowBatteryAlarm.isValid ? 1 : 0)
-						+ (highBatteryAlarm.isValid ? 1 : 0)
-						+ (highTemperatureAlarm.isValid ? 1 : 0)
-						+ (shortCircuitAlarm.isValid ? 1 : 0)
+				readonly property int itemCount: (lowBatteryAlarm.isValid && lowBatteryAlarm.value !== 0 ? 1 : 0)
+						+ (highBatteryAlarm.isValid && highBatteryAlarm.value !== 0 ? 1 : 0)
+						+ (highTemperatureAlarm.isValid && highTemperatureAlarm.value !== 0 ? 1 : 0)
+						+ (shortCircuitAlarm.isValid && shortCircuitAlarm.value !== 0 ? 1 : 0)
 						+ (root.solarCharger.errorCode > 0 ? 1 : 0)
 
 				//% "Alarms & Errors"
