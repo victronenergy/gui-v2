@@ -12,6 +12,8 @@ ControlCard {
 	property string serviceUid
 	property string name
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
+	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
+	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 
 	icon.source: "qrc:/images/inverter_charger.svg"
 	title.text: serviceType === "inverter"
@@ -27,6 +29,11 @@ ControlCard {
 	VeQuickItem {
 		id: stateItem
 		uid: root.serviceUid + "/State"
+	}
+
+	VeQuickItem {
+		id: essModeItem
+		uid: root.serviceUid + "/Settings/Ess/Mode"
 	}
 
 	Column {
@@ -67,6 +74,32 @@ ControlCard {
 					serviceUid: root.serviceUid
 				}
 			]
+		}
+
+		FlatListItemSeparator {}
+
+		ListItem {
+			text: CommonWords.ess
+			flat: true
+			allowed: essModeItem.isValid
+			content.children: [
+				ListItemButton {
+					font.pixelSize: Theme.font_size_body1
+					text: Global.ess.essStateToButtonText(essModeItem.value)
+					enabled: userHasWriteAccess
+					onClicked: {
+						Global.dialogLayer.open(essModeDialogComponent, { essMode: essModeItem.value })
+					}
+				}
+			]
+		}
+	}
+
+	Component {
+		id: essModeDialogComponent
+
+		InverterChargerEssModeDialog {
+			onAccepted: essModeItem.setValue(essMode)
 		}
 	}
 }
