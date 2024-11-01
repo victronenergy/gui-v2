@@ -36,6 +36,11 @@ ControlCard {
 		uid: root.serviceUid + "/Settings/Ess/Mode"
 	}
 
+	VeQuickItem {
+		id: essMinSocItem
+		uid: root.serviceUid + "/Settings/Ess/MinimumSocLimit"
+	}
+
 	Column {
 		anchors {
 			top: parent.status.bottom
@@ -93,6 +98,15 @@ ControlCard {
 				}
 			]
 		}
+
+		ListButton {
+			//% "Minimum SOC"
+			text: qsTrId("controlcard_inverter_charger_ess_minimum_soc")
+			flat: true
+			allowed: essMinSocItem.isValid
+			button.text: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)
+			onClicked: Global.dialogLayer.open(essMinSocDialogComponent)
+		}
 	}
 
 	Component {
@@ -100,6 +114,15 @@ ControlCard {
 
 		InverterChargerEssModeDialog {
 			onAccepted: essModeItem.setValue(essMode)
+		}
+	}
+
+	Component {
+		id: essMinSocDialogComponent
+
+		ESSMinimumSOCDialog {
+			minimumStateOfCharge: essMinSocItem.value
+			onAccepted: essMinSocItem.setValue(minimumStateOfCharge)
 		}
 	}
 }
