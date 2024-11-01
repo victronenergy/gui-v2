@@ -49,13 +49,6 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocal"
 			}
 
-			ListSwitch {
-				//% "Console on VE.Direct 1"
-				text: qsTrId("settings_services_console_on_vedirect1")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/Console/Enabled"
-				showAccessLevel: VenusOS.User_AccessType_SuperUser
-			}
-
 			Column {
 				width: parent ? parent.width : 0
 
