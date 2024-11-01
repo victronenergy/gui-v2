@@ -98,8 +98,7 @@ Rectangle {
 			//% "Controls"
 			title: qsTrId("welcome_controls_title"),
 			imageUrl: "qrc:/images/welcome-controls.png",
-			//% "All the day to day controls are now combined together in the new Controls pane. "
-			//% Accessible from anywhere by tapping the dedicated button on top left of the display."
+			//% "All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display."
 			text: qsTrId("welcome_controls_text")
 		},
 		{
