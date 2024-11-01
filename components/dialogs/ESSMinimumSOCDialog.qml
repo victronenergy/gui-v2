@@ -11,14 +11,6 @@ ModalDialog {
 
 	property int minimumStateOfCharge
 
-	onAboutToShow: {
-		minimumStateOfCharge = Global.ess.minimumStateOfCharge
-	}
-
-	onAccepted: {
-		Global.ess.setMinimumStateOfChargeRequested(minimumStateOfCharge)
-	}
-
 	//% "Minimum SOC"
 	title: qsTrId("ess_card_minimum_soc")
 
