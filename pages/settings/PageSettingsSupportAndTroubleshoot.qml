@@ -49,12 +49,24 @@ Page {
 			//% "No"
             return "No"
 		} else if (systemHooksState === 1) {
+            //% "No, but enabled at next boot (rc.local)"
+            return "No, but enabled at next boot (rc.local)"
+        } else if (systemHooksState === 2) {
+            //% "No, but enabled at next boot (rcS.local)"
+            return "No, but enabled at next boot (rcS.local)"
+        } else if (systemHooksState === 3) {
+            //% "No, but enabled at next boot (rc.local and rcS.local)"
+            return "No, but enabled at next boot (rc.local and rcS.local)"
+		} else if (systemHooksState === 4) {
+            //% "Yes, but disabled at next boot"
+            return "Yes, but disabled at next boot"
+		} else if (systemHooksState === 5) {
             //% "Yes (rc.local)"
             return "Yes (rc.local)"
-        } else if (systemHooksState === 2) {
+		} else if (systemHooksState === 6) {
             //% "Yes (rcS.local)"
             return "Yes (rcS.local)"
-        } else if (systemHooksState === 3) {
+		} else if (systemHooksState === 7) {
             //% "Yes (rc.local and rcS.local)"
             return "Yes (rc.local and rcS.local)"
 		} else {
@@ -69,11 +81,14 @@ Page {
         let isOk = false
 
         if (firmwareOnlineAvailableBuild == "" && firmwareOnlineAvailableVersion == "") {
+            //% ""
             result = "Yes"
             isOk = true
         } else if (Global.firmwareUpdate.checkingForUpdate) {
+            //% ""
             result = "Checking..."
         } else if (firmwareState == FirmwareUpdater.ErrorDuringChecking) {
+            //% ""
             result = "Online check failed"
         } else if  (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
             if (progress.value) {
@@ -86,8 +101,8 @@ Page {
             result = qsTrId("settings_firmware_online_installing").arg(Global.firmwareUpdate.onlineAvailableVersion)
         } else {
             //: %1 = firmware version
-            //% "Press to update to %1"
-            result = qsTrId("No: %1 is available").arg(Global.firmwareUpdate.onlineAvailableVersion)
+            //% "No, %1 is available"
+            result = qsTr("No, %1 is available").arg(Global.firmwareUpdate.onlineAvailableVersion)
         }
 
         return returnString ? result : isOk
@@ -146,7 +161,7 @@ Page {
 		model: ObjectModel {
 
 			ListNavigationItem {
-				//% "System integrity"
+				//% ""
 				text: "System integrity"
                 secondaryText: getSystemState()
                 secondaryLabel.color: fsModifiedState === 0 && systemHooksState === 0 ? Theme.color_font_primary : Theme.color_red
@@ -162,28 +177,33 @@ Page {
 							model: ObjectModel {
 
                                 ListLabel {
+                                    //% ""
                                     text: "System integrity checks"
                                 }
 
                                 ListTextItem {
+                                    //% ""
                                     text: "System state"
                                     secondaryText: getSystemState()
                                     secondaryLabel.color: fsModifiedState === 0 && systemHooksState === 0 ? Theme.color_green : Theme.color_red
                                 }
 
                                 ListTextItem {
-                                    text: "System hooks present"
+                                    //% ""
+                                    text: "System hooks enabled"
                                     secondaryText: getSystemHooksState()
-                                    secondaryLabel.color: systemHooksState === 0 ? Theme.color_green : Theme.color_red
+                                    secondaryLabel.color: systemHooksState === 0 ? Theme.color_green : systemHooksState < 4 ? Theme.color_orange : Theme.color_red
                                 }
 
                                 ListTextItem {
+                                    //% ""
                                     text: "Firmware integrity"
                                     secondaryText: getFsModifiedState()
                                     secondaryLabel.color: fsModifiedState === 0 ? Theme.color_green : Theme.color_red
                                 }
 
                                 ListTextItem {
+                                    //% ""
                                     text: "Latest firmware version installed?"
                                     secondaryText: getFirmwareState()
                                     secondaryLabel.color: getFirmwareState(false) ? Theme.color_green : Theme.color_red
@@ -215,6 +235,7 @@ Page {
 
                                 ListSwitch {
                                     id: disableAllModifications
+                                    //% ""
                                     text: "Disable all modifications"
                                     /*
                                     Venus Platform
@@ -229,6 +250,9 @@ Page {
                                     onCheckedChanged: {
                                         if (disableAllModifications.checked) {
                                             Global.dialogLayer.open(askForRebootDialogComponent)
+                                        } else {
+                                            // Run system integrity check
+                                            startCheckItem.setValue(1)
                                         }
                                     }
 
@@ -236,13 +260,16 @@ Page {
                                         id: askForRebootDialogComponent
 
                                         ModalWarningDialog {
-                                            //% "Press 'OK' to reinstall root fs and reboot."
+                                            //% ""
                                             title: "To apply changes a reboot is needed.<br>Press 'OK' to reboot now."
                                             dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
                                             onClosed: {
                                                 if (result === T.Dialog.Accepted) {
                                                     Global.venusPlatform.reboot()
                                                     Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
+                                                } else {
+                                                    // Run system integrity check
+                                                    startCheckItem.setValue(1)
                                                 }
                                             }
                                         }
@@ -250,8 +277,9 @@ Page {
                                 }
 
                                 ListButton {
+                                    //% ""
                                     text: "Restore firmware integrity"
-                                    //% "Reboot now"
+                                    //% ""
                                     button.text: "Press to restore"
                                     writeAccessLevel: VenusOS.User_AccessType_User
                                     onClicked: Global.dialogLayer.open(confirmReinstallDialogComponent)
@@ -260,7 +288,7 @@ Page {
                                         id: confirmReinstallDialogComponent
 
                                         ModalWarningDialog {
-                                            //% "Press 'OK' to reinstall root fs and reboot."
+                                            //% ""
                                             title: "This will disable all modifications, download and reinstall the firmware.<br>Internet connectivity is required.<br>Press 'OK' to continue."
                                             dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
                                             onClosed: {
@@ -316,15 +344,15 @@ Page {
                                 */
 
                                 ListNavigationItem {
-                                    //% "Online updates"
-                                    text: qsTrId("Firmware: Online updates")
+                                    //% ""
+                                    text: qsTrId("Firmware: Online update")
                                     onClicked: {
                                         Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
                                     }
                                 }
 
                                 ListNavigationItem {
-                                    //% "Install firmware from SD/USB"
+                                    //% ""
                                     text: qsTrId("Firmware: Install from SD/USB")
                                     onClicked: {
                                         Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
@@ -339,7 +367,7 @@ Page {
                                 Global.firmwareUpdate.checkForUpdate(VenusOS.Firmware_UpdateType_Online)
                             }
 
-                            // Start checking for root fs status
+                            // Run system integrity check
                             startCheckItem.setValue(1)
 
                         }
@@ -348,9 +376,8 @@ Page {
             }
 
             ListNavigationItem {
-                //% "Useful links"
+                //% ""
                 text: "Useful links"
-                // secondaryText: ""
                 onClicked: {
                     Global.pageManager.pushPage(usefulLinksListItem, {"title": text})
                 }
@@ -363,13 +390,16 @@ Page {
                             model: ObjectModel {
 
                                 ListButton {
+                                    //% ""
                                     text: "Check the FAQ"
+                                    //% ""
                                     button.text: "Open in a new tab"
                                     allowed: defaultAllowed && Qt.platform.os === "wasm"
                                     onClicked: BackendConnection.openUrl("https://www.victronenergy.com/media/pg/Energy_Storage_System/en/faq.html")
                                 }
 
                                 ListItem {
+                                    //% ""
                                     text: "Check the FAQ"
                                     // allowed: defaultAllowed && Qt.platform.os !== "wasm"
                                     content.children: [
@@ -387,13 +417,16 @@ Page {
                                 }
 
                                 ListButton {
+                                    //% ""
                                     text: "Check how to troubleshoot"
+                                    //% ""
                                     button.text: "Open in a new tab"
                                     allowed: defaultAllowed && Qt.platform.os === "wasm"
                                     onClicked: BackendConnection.openUrl("https://www.victronenergy.com/media/pg/Venus_GX/en/troubleshooting.html")
                                 }
 
                                 ListItem {
+                                    //% ""
                                     text: "Check how to troubleshoot"
                                     // allowed: defaultAllowed && Qt.platform.os !== "wasm"
                                     content.children: [
@@ -414,13 +447,16 @@ Page {
                                 }
 
                                 ListButton {
+                                    //% ""
                                     text: "Check the forum"
+                                    //% ""
                                     button.text: "Open in a new tab"
                                     allowed: defaultAllowed && Qt.platform.os === "wasm"
                                     onClicked: BackendConnection.openUrl("https://community.victronenergy.com/")
                                 }
 
                                 ListItem {
+                                    //% ""
                                     text: "Check the forum"
                                     // allowed: defaultAllowed && Qt.platform.os !== "wasm"
                                     content.children: [
@@ -438,13 +474,16 @@ Page {
                                 }
 
                                 ListButton {
+                                    //% ""
                                     text: "Find a local distributor"
+                                    //% ""
                                     button.text: "Open in a new tab"
                                     allowed: defaultAllowed && Qt.platform.os === "wasm"
                                     onClicked: BackendConnection.openUrl("https://www.victronenergy.com/where-to-buy")
                                 }
 
                                 ListItem {
+                                    //% ""
                                     text: "Find a local distributor"
                                     // allowed: defaultAllowed && Qt.platform.os !== "wasm"
                                     content.children: [
@@ -469,7 +508,7 @@ Page {
     }
 
     Component.onCompleted: {
-        // Start checking for root fs status
+        // Run system integrity check
         startCheckItem.setValue(1)
     }
 }
