@@ -69,7 +69,7 @@
     </message>
     <message id="controlcard_generator_disableautostartdialog_description">
         <location filename="../pages/controlcards/GeneratorCard.qml" line="73"/>
-        <source>Autostart will be disabled and the generator won&apos;t automatically start based on the configured conditions.</source>
+        <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
@@ -2492,7 +2492,7 @@
     </message>
     <message id="batterysettingrelay_always_open_dont_use_the_relay">
         <location filename="../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="37"/>
-        <source>Always open (don&apos;t use the relay)</source>
+        <source>Always open (don't use the relay)</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="batterysettingrelay_low_state_of_charge_setting_note">
@@ -3680,7 +3680,7 @@
     </message>
     <message id="settings_page_relay_generator_start_info">
         <location filename="../pages/settings/PageGenerator.qml" line="169"/>
-        <source>Starting, generator won&apos;t stop till user intervention</source>
+        <source>Starting, generator won't stop till user intervention</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="settings_page_relay_generator_start_timer">
@@ -3841,7 +3841,7 @@
     </message>
     <message id="page_settings_generator_service_time_interval">
         <location filename="../pages/settings/PageGeneratorRuntimeService.qml" line="84"/>
-        <source>Service time interval set to %1h. Use the &apos;Reset service timer&apos; button to reset the service timer.</source>
+        <source>Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="page_settings_generator_reset_service_timer">
@@ -3999,7 +3999,7 @@
     </message>
     <message id="settings_generator_function_not_enabled">
         <location filename="../pages/settings/PageRelayGenerator.qml" line="25"/>
-        <source>Generator start/stop function is not enabled, go to relay settings and set function to &quot;Generator start/stop&quot;</source>
+        <source>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="settings_batteries_battery_visible">
@@ -4841,7 +4841,7 @@
     </message>
     <message id="settings_gps_format_dms_example">
         <location filename="../pages/settings/PageSettingsGpsList.qml" line="86"/>
-        <source>52° 20&apos; 41.6&quot; N, 5° 13&apos; 12.3&quot; E</source>
+        <source>52° 20' 41.6" N, 5° 13' 12.3" E</source>
         <extracomment>Example of GPS data in the &apos;Degrees, Minutes, Seconds&apos; format</extracomment>
         <translation type="unfinished"></translation>
     </message>
@@ -5620,7 +5620,7 @@ Documentation at https://ve3.nl/vol</source>
     </message>
     <message id="settings_relay_no_temperature_relay">
         <location filename="../pages/settings/PageSettingsRelayTempSensors.qml" line="113"/>
-        <source>No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to &quot;Temperature&quot;.</source>
+        <source>No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to "Temperature".</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="settings_remoteconsole_reboot_warning">
@@ -5709,7 +5709,7 @@ First time use? Make sure to either set or disable the password check.</source>
     </message>
     <message id="settings_firmware_switching_not_possible">
         <location filename="../pages/settings/PageSettingsRootfsSelect.qml" line="73"/>
-        <source>Switching firmware version is not possible when auto update is set to &quot;Check and update&quot;. Set auto update to &quot;Disabled&quot; or &quot;Check only&quot; to enable this option.</source>
+        <source>Switching firmware version is not possible when auto update is set to "Check and update". Set auto update to "Disabled" or "Check only" to enable this option.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="settings_firmware_current_version">
@@ -5933,7 +5933,7 @@ First time use? Make sure to either set or disable the password check.</source>
     </message>
     <message id="settings_pump_function_not_enabled">
         <location filename="../pages/settings/PageSettingsTankPump.qml" line="39"/>
-        <source>Tank pump start/stop function is not enabled. Go to relay settings and set function to &quot;Tank pump&quot;.</source>
+        <source>Tank pump start/stop function is not enabled. Go to relay settings and set function to "Tank pump".</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="settings_pump_state">
@@ -7031,12 +7031,12 @@ Do you want to continue?</source>
     </message>
     <message id="vebus_no_adjustable_text_by_config">
         <location filename="../pages/vebusdevice/VeBusDeviceModeButton.qml" line="25"/>
-        <source>This setting is disabled. Possible reasons are &quot;Overruled by remote&quot; is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure.</source>
+        <source>This setting is disabled. Possible reasons are "Overruled by remote" is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="vebus_device_setting_disabled">
         <location filename="../components/AcInputsCurrentLimits.qml" line="16"/>
-        <source>This setting is disabled. Possible reasons are &quot;Overruled by remote&quot; is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure.</source>
+        <source>This setting is disabled. Possible reasons are "Overruled by remote" is not enabled or an assistant is preventing the adjustment. Please, check the inverter configuration with VEConfigure.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="%1%">
@@ -7426,12 +7426,12 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
         <location filename="../components/CommonWords.qml" line="247"/>
-        <source>This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute &apos;Redetect system&apos; that is available below on this menu.</source>
+        <source>This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
         <location filename="../components/CommonWords.qml" line="250"/>
-        <source>This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute &apos;Redetect system&apos; that is available below on this menu.</source>
+        <source>This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="common_words_no_error">
@@ -7830,7 +7830,7 @@ Do you want to continue?</source>
     </message>
     <message id="deviceinstanceswap_already_assigned_description_with_name">
         <location filename="../components/dialogs/VrmInstanceSwapDialog.qml" line="100"/>
-        <source>Device instance %1 is already used by &apos;%3&apos;. Swap device instances and assign that to %2?</source>
+        <source>Device instance %1 is already used by '%3'. Swap device instances and assign that to %2?</source>
         <extracomment>%1 and %2 are unique device instance numbers, %3 = another device&apos;s name</extracomment>
         <translation type="unfinished"></translation>
     </message>
