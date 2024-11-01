@@ -33,11 +33,12 @@ QtObject {
 	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>. There are always two inputs.
 	property AcInputSystemInfo input1Info: AcInputSystemInfo {
 		inputIndex: 0
-		isActiveInput: valid && source === _activeInputSource.sourceAsInt
+		isActiveInput: root.isActiveInputInfo(input1Info)
 	}
 	property AcInputSystemInfo input2Info: AcInputSystemInfo {
 		inputIndex: 1
-		isActiveInput: valid && source === _activeInputSource.sourceAsInt
+		isActiveInput: root.isActiveInputInfo(input2Info)
+				&& !input1Info.isActiveInput    // sanity check to ensure that there is only 1 active input at a time
 	}
 
 	readonly property VeQuickItem _activeInputSource: VeQuickItem {
@@ -45,8 +46,24 @@ QtObject {
 		uid: Global.system.serviceUid + "/Ac/ActiveIn/Source"
 	}
 
+	readonly property VeQuickItem _activeInputServiceType: VeQuickItem {
+		uid: Global.system.serviceUid + "/Ac/ActiveIn/ServiceType"
+	}
+
 	readonly property Component _activeAcInputComponent: Component {
 		ActiveAcInput {}
+	}
+
+	function isActiveInputInfo(inputInfo) {
+		if (!inputInfo.valid) {
+			return false
+		}
+		if (_activeInputSource.isValid) {
+			return inputInfo.source === _activeInputSource.sourceAsInt
+		} else if (_activeInputServiceType.isValid) {
+			return inputInfo.serviceType === _activeInputServiceType.value
+		}
+		return false
 	}
 
 	// Set activeInput to a valid object when /Ac/ActiveIn/Source is set to a valid source and
