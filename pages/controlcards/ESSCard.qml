@@ -55,7 +55,10 @@ ControlCard {
 			Component {
 				id: minSocDialogComponent
 
-				ESSMinimumSOCDialog { }
+				ESSMinimumSOCDialog {
+					minimumStateOfCharge: Global.ess.minimumStateOfCharge
+					onAccepted: Global.ess.setMinimumStateOfChargeRequested(minimumStateOfCharge)
+				}
 			}
 		}
 
