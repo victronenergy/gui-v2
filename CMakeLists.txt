@@ -311,6 +311,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/dialogs/GeneratorStartDialog.qml
     components/dialogs/GeneratorStopDialog.qml
     components/dialogs/InverterChargerModeDialog.qml
+    components/dialogs/InverterChargerEssModeDialog.qml
     components/dialogs/ModalDialog.qml
     components/dialogs/ModalWarningDialog.qml
     components/dialogs/NumberSelectorDialog.qml

@@ -28,14 +28,32 @@ QtObject {
 	}
 
 	readonly property var stateModel: [
-		//% "Optimized with battery life"
-		{ display: qsTrId("ess_state_optimized_with_battery_life"), value: VenusOS.Ess_State_OptimizedWithBatteryLife },
-		//% "Optimized without battery life"
-		{ display: qsTrId("ess_state_optimized_without_battery_life"), value: VenusOS.Ess_State_OptimizedWithoutBatteryLife },
-		//% "Keep batteries charged"
-		{ display: qsTrId("ess_state_keep_batteries_charged"), value: VenusOS.Ess_State_KeepBatteriesCharged },
-		//% "External control"
-		{ display: qsTrId("ess_state_external_control"), value: VenusOS.Ess_State_ExternalControl },
+		{
+			//% "Optimized with battery life"
+			display: qsTrId("ess_state_optimized_with_battery_life"),
+			//% "Optimized + battery life"
+			buttonText: qsTrId("ess_state_optimized_with_battery_life_button"),
+			value: VenusOS.Ess_State_OptimizedWithBatteryLife
+		},
+		{
+			//% "Optimized without battery life"
+			display: qsTrId("ess_state_optimized_without_battery_life"),
+			//% "Optimized"
+			buttonText: qsTrId("ess_state_optimized_without_battery_life_button"),
+			value: VenusOS.Ess_State_OptimizedWithoutBatteryLife
+		},
+		{
+			//% "Keep batteries charged"
+			display: qsTrId("ess_state_keep_batteries_charged"),
+			//% "Keep charged"
+			buttonText: qsTrId("ess_state_keep_batteries_charged_button"),
+			value: VenusOS.Ess_State_KeepBatteriesCharged
+		},
+		{
+			//% "External control"
+			display: qsTrId("ess_state_external_control"),
+			value: VenusOS.Ess_State_ExternalControl
+		}
 	]
 
 	function essStateToText(s) {
@@ -43,6 +61,16 @@ QtObject {
 			const row = stateModel[i]
 			if (row.value === s) {
 				return row.display
+			}
+		}
+		return ""
+	}
+
+	function essStateToButtonText(s) {
+		for (let i = 0; i < stateModel.length; ++i) {
+			const row = stateModel[i]
+			if (row.value === s) {
+				return (row.buttonText === undefined) ? row.display : row.buttonText
 			}
 		}
 		return ""
