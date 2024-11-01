@@ -19,7 +19,7 @@ For more technical information on Venus OS, see the [Venus OS wiki](https://gith
 - running locally on the GX). For that, various features have been added to venus-platform (like starting a reboot, or starting a firmware update) so that the
 - command for that can be issued over D-Bus / MQTT. Same for creation of settings; they need to be created elsewhere.
 
-**Status:** This is available for public preview, and lots of work needs to be done before official release/inclusion in Venus OS.
+**Status:** gui-v2, know as "New UI" was released in Venus OS 3.50.
 
 **How to install:** See https://bit.ly/gui-v2
 
