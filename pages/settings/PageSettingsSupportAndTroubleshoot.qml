@@ -11,13 +11,12 @@ import QtQuick.Templates as T
 Page {
 	id: root
 
-    readonly property string firmwareInstalledBuild: firmwareInstalledBuildItem.isValid ? firmwareInstalledBuildItem.value : ""
-	readonly property string firmwareInstalledVersion: firmwareInstalledVersionItem.isValid ? firmwareInstalledVersionItem.value : ""
+    // readonly property string firmwareInstalledBuild: firmwareInstalledBuildItem.isValid ? firmwareInstalledBuildItem.value : ""
+	// readonly property string firmwareInstalledVersion: firmwareInstalledVersionItem.isValid ? firmwareInstalledVersionItem.value : ""
     readonly property string firmwareOnlineAvailableBuild: firmwareOnlineAvailableBuildItem.isValid ? firmwareOnlineAvailableBuildItem.value : ""
     readonly property string firmwareOnlineAvailableVersion: firmwareOnlineAvailableVersionItem.isValid ? firmwareOnlineAvailableVersionItem.value : ""
     readonly property bool firmwareOnlineCheck: firmwareOnlineCheckItem.isValid ? firmwareOnlineCheckItem.value : false
     readonly property int firmwareState: firmwareStateItem.isValid ? firmwareStateItem.value : FirmwareUpdater.Idle
-    // readonly property int systemCheck: startCheckItem.isValid ? startCheckItem.value : 0
     readonly property int fsModifiedState: fsModifiedStateItem.isValid ? fsModifiedStateItem.value : -1
     readonly property int systemHooksState: systemHooksStateItem.isValid ? systemHooksStateItem.value : -1
 
@@ -39,8 +38,8 @@ Page {
             //% "Modified"
             return "Modified"
 		} else {
-            //% "Unknown"
-            return "Unknown"
+            //% "Unknown: %1"
+            return "Unknown: %1".arg(fsModifiedState)
         }
 	}
 
@@ -49,17 +48,17 @@ Page {
 			//% "No"
             return "No"
 		} else if (systemHooksState === 1) {
-            //% "No, but enabled at next boot (rc.local)"
-            return "No, but enabled at next boot (rc.local)"
+            //% "No, but enable at next boot (rc.local)"
+            return "No, but enable at next boot (rc.local)"
         } else if (systemHooksState === 2) {
-            //% "No, but enabled at next boot (rcS.local)"
-            return "No, but enabled at next boot (rcS.local)"
+            //% "No, but enable at next boot (rcS.local)"
+            return "No, but enable at next boot (rcS.local)"
         } else if (systemHooksState === 3) {
-            //% "No, but enabled at next boot (rc.local and rcS.local)"
-            return "No, but enabled at next boot (rc.local and rcS.local)"
+            //% "No, but enable at next boot (rc.local and rcS.local)"
+            return "No, but enable at next boot (rc.local and rcS.local)"
 		} else if (systemHooksState === 4) {
-            //% "Yes, but disabled at next boot"
-            return "Yes, but disabled at next boot"
+            //% "Yes, but disable at next boot"
+            return "Yes, but disable at next boot"
 		} else if (systemHooksState === 5) {
             //% "Yes (rc.local)"
             return "Yes (rc.local)"
@@ -70,8 +69,8 @@ Page {
             //% "Yes (rc.local and rcS.local)"
             return "Yes (rc.local and rcS.local)"
 		} else {
-            //% "Unknown"
-            return "Unknown"
+            //% "Unknown: %1"
+            return "Unknown: %1".arg(systemHooksState)
         }
 	}
 
@@ -114,6 +113,17 @@ Page {
     }
 
 	VeQuickItem {
+		id: signalK
+		uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+	}
+
+	VeQuickItem {
+		id: nodeRed
+		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+	}
+
+    /*
+	VeQuickItem {
 		id: firmwareInstalledBuildItem
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 	}
@@ -121,6 +131,7 @@ Page {
 		id: firmwareInstalledVersionItem
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 	}
+    */
     VeQuickItem {
         id: firmwareOnlineAvailableBuildItem
         uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableVersion"
@@ -142,7 +153,7 @@ Page {
         uid: Global.venusPlatform.serviceUid + "/SystemIntegrity/ForceFirmwareReinstall"
     }
     VeQuickItem {
-        id: startCheckItem
+        id: systemIntegrityStartCheckItem
         uid: Global.venusPlatform.serviceUid + "/SystemIntegrity/StartCheck"
     }
     VeQuickItem {
@@ -189,6 +200,12 @@ Page {
                                 }
 
                                 ListTextItem {
+                                    //% "HQ serial number"
+                                    text: "HQ serial number"
+                                    dataItem.uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber"
+                                }
+
+                                ListTextItem {
                                     //% ""
                                     text: "System hooks enabled"
                                     secondaryText: getSystemHooksState()
@@ -210,21 +227,22 @@ Page {
                                     }
 
                                 ListTextItem {
-                                    text: CommonWords.firmware_version
+                                    // text: CommonWords.firmware_version
+                                    text: "Installed firmware version"
                                     secondaryText: FirmwareVersion.versionText(dataItem.value, "venus")
                                     dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
                                 }
 
                                 ListTextItem {
-                                    //% "Build date/time"
-                                    text: qsTrId("settings_build_date_time")
+                                    // text: qsTrId("settings_build_date_time")
+                                    text: "Installed build date/time"
                                     dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
                                 }
 
                                 ListTextItem {
-                                    //% "HQ serial number"
-                                    text: "HQ serial number"
-                                    dataItem.uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber"
+                                    //% ""
+                                    text: "Installed image type"
+                                    secondaryText: signalK.isValid || nodeRed.isValid ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
                                 }
 
 
@@ -248,11 +266,15 @@ Page {
                                     dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SystemIntegrity/AllModificationsDisabled"
 
                                     onCheckedChanged: {
-                                        if (disableAllModifications.checked) {
+                                        // Show the dialog only if it doesn't match the current state
+                                        if (
+                                            (!disableAllModifications.checked && systemHooksState < 4)
+                                            ||
+                                            (disableAllModifications.checked && systemHooksState >= 4)
+                                        ) {
                                             Global.dialogLayer.open(askForRebootDialogComponent)
                                         } else {
-                                            // Run system integrity check
-                                            startCheckItem.setValue(1)
+                                            systemIntegrityStartCheckItem.setValue(1)
                                         }
                                     }
 
@@ -268,8 +290,7 @@ Page {
                                                     Global.venusPlatform.reboot()
                                                     Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
                                                 } else {
-                                                    // Run system integrity check
-                                                    startCheckItem.setValue(1)
+                                                    systemIntegrityStartCheckItem.setValue(1)
                                                 }
                                             }
                                         }
@@ -278,7 +299,50 @@ Page {
 
                                 ListButton {
                                     //% ""
-                                    text: "Restore firmware integrity"
+                                    text: "Reboot now to apply changes"
+                                    //% "Reboot now"
+                                    button.text: qsTrId("settings_reboot_now")
+                                    writeAccessLevel: VenusOS.User_AccessType_User
+                                    allowed: defaultAllowed && systemHooksState >= 1 && systemHooksState <= 4
+                                    onClicked: Global.dialogLayer.open(confirmRebootDialogComponent)
+
+                                    Component {
+                                        id: confirmRebootDialogComponent
+
+                                        ModalWarningDialog {
+                                            //% "Press 'OK' to reboot"
+                                            title: qsTrId("press_ok_to_reboot")
+                                            dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+                                            onClosed: {
+                                                if (result === T.Dialog.Accepted) {
+                                                    Global.venusPlatform.reboot()
+                                                    Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    Component {
+                                        id: rebootingDialogComponent
+
+                                        ModalWarningDialog {
+                                            title: BackendConnection.type === BackendConnection.DBusSource
+                                                //% "Rebooting..."
+                                                ? qsTrId("dialoglayer_rebooting")
+                                                //% "Device has been rebooted."
+                                                : qsTrId("dialoglayer_rebooted")
+
+                                            // On device, dialog cannot be dismissed; just wait until device is rebooted.
+                                            dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
+                                            footer.enabled: BackendConnection.type !== BackendConnection.DBusSource
+                                            footer.opacity: footer.enabled ? 1 : 0
+                                        }
+                                    }
+                                }
+
+                                ListButton {
+                                    //% ""
+                                    text: "Firmware: Restore integrity"
                                     //% ""
                                     button.text: "Press to restore"
                                     writeAccessLevel: VenusOS.User_AccessType_User
@@ -301,47 +365,6 @@ Page {
                                     }
 
                                 }
-
-                                /*
-                                ListButton {
-                                    id: installUpdate
-
-                                    text: "Is Venus OS on the latest version?"
-                                    button.text: {
-                                        if (firmwareOnlineAvailableBuild == "" && firmwareOnlineAvailableVersion == "") {
-                                            return "Yes"
-                                        } else if (Global.firmwareUpdate.checkingForUpdate) {
-                                            return "Checking..."
-                                        } else if (firmwareState == FirmwareUpdater.ErrorDuringChecking) {
-                                            return "Online check failed"
-                                        } else if  (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
-                                            if (progress.value) {
-                                                //: Firmware update progress. %1 = firmware version, %2 = current update progress
-                                                //% "Installing %1 %2%"
-                                                return qsTrId("settings_firmware_online_installing_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(progress.value)
-                                            }
-                                            //: %1 = firmware version
-                                            //% "Installing %1..."
-                                            return qsTrId("settings_firmware_online_installing").arg(Global.firmwareUpdate.onlineAvailableVersion)
-                                        } else {
-                                            //: %1 = firmware version
-                                            //% "Press to update to %1"
-                                            return qsTrId("settings_firmware_online_press_to_update_to").arg(Global.firmwareUpdate.onlineAvailableVersion)
-                                        }
-                                    }
-
-                                    enabled: !Global.firmwareUpdate.busy && !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
-                                    writeAccessLevel: VenusOS.User_AccessType_User
-                                    onClicked: {
-                                        Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
-                                    }
-
-                                    VeQuickItem {
-                                        id: progress
-                                        uid: Global.venusPlatform.serviceUid + "/Firmware/Progress"
-                                    }
-                                }
-                                */
 
                                 ListNavigationItem {
                                     //% ""
@@ -368,7 +391,7 @@ Page {
                             }
 
                             // Run system integrity check
-                            startCheckItem.setValue(1)
+                            systemIntegrityStartCheckItem.setValue(1)
 
                         }
                     }
@@ -508,7 +531,6 @@ Page {
     }
 
     Component.onCompleted: {
-        // Run system integrity check
-        startCheckItem.setValue(1)
+        systemIntegrityStartCheckItem.setValue(1)
     }
 }
