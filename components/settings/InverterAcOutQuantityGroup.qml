@@ -42,7 +42,7 @@ Column {
 
 		//: %1 = phase number (1-3)
 		//% "AC Out L%1"
-		text: qsTrId("inverter_ac-out_num").arg(isNaN(acPhase.value) ? 1 : acPhase.value + 1)
+		text: qsTrId("inverter_ac-out_num").arg(acPhaseNumber.isValid ? acPhaseNumber.value + 1 : 1)
 		allowed: root.isInverterCharger
 		textModel: [
 			{ value: acPhase.voltage, unit: VenusOS.Units_Volt_AC },
