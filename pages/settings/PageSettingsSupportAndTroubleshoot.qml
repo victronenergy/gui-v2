@@ -106,12 +106,17 @@ Page {
     }
 
 	VeQuickItem {
-		id: signalK
+		id: hqSerialNumberItem
+		uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber"
+	}
+
+	VeQuickItem {
+		id: signalKItem
 		uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
 	}
 
 	VeQuickItem {
-		id: nodeRed
+		id: nodeRedItem
 		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 	}
 
@@ -199,12 +204,13 @@ Page {
                                 ListTextItem {
                                     //% "HQ serial number"
                                     text: "HQ serial number"
-                                    dataItem.uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber"
+                                    secondaryText: hqSerialNumberItem.value != "" ? hqSerialNumberItem.value : "Not a Victron Energy device"
+                                    secondaryLabel.color: hqSerialNumberItem.value != "" ? Theme.color_green : Theme.color_red
                                 }
 
                                 ListTextItem {
                                     //% ""
-                                    text: "System hooks enabled"
+                                    text: "Modifications loaded at boot"
                                     secondaryText: getSystemHooksState()
                                     secondaryLabel.color: systemHooksState === 0 ? Theme.color_green : systemHooksState < 4 ? Theme.color_orange : Theme.color_red
                                 }
@@ -239,7 +245,7 @@ Page {
                                 ListTextItem {
                                     //% ""
                                     text: "Installed image type"
-                                    secondaryText: signalK.isValid || nodeRed.isValid ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
+                                    secondaryText: signalKItem.isValid || nodeRedItem.isValid ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
                                 }
 
 
