@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="ar">
   <context>
-    <name></name>
+    <name/>
     <message id="settings_tailscale_disabled">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="118"/>
       <source>Disabled</source>
@@ -29,6 +29,26 @@
       <source>Auto</source>
       <translation>آلي</translation>
     </message>
+    <message id="common_words_battery">
+      <location filename="../../components/CommonWords.qml" line="83"/>
+      <source>Battery</source>
+      <translation type="unfinished">بطارية</translation>
+    </message>
+    <message id="common_words_connected">
+      <location filename="../../components/CommonWords.qml" line="113"/>
+      <source>Connected</source>
+      <translation type="unfinished">متصل</translation>
+    </message>
+    <message id="common_words_disconnected">
+      <location filename="../../components/CommonWords.qml" line="146"/>
+      <source>Disconnected</source>
+      <translation type="unfinished">منفصل</translation>
+    </message>
+    <message id="common_words_generator">
+      <location filename="../../components/CommonWords.qml" line="177"/>
+      <source>Generator</source>
+      <translation type="unfinished">مولد</translation>
+    </message>
     <message id="common_words_high_battery_voltage">
       <location filename="../../components/CommonWords.qml" line="186"/>
       <source>High battery voltage</source>
@@ -52,13 +72,12 @@
     <message id="settings_startpage_none">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="53"/>
       <source>None</source>
-      <extracomment>Indicates no phase</extracomment>
       <translation>لا أحد</translation>
     </message>
     <message id="common_words_position_ac">
       <location filename="../../components/CommonWords.qml" line="359"/>
       <source>Position</source>
-      <extracomment>EVCS AC input/output position</extracomment>
+      <extracomment>AC input or output position</extracomment>
       <translation>الموقع</translation>
     </message>
     <message id="common_words_speed">
@@ -88,6 +107,11 @@
       <location filename="../../pages/controlcards/ESSCard.qml" line="50"/>
       <source>Minimum SOC</source>
       <translation>أدنى حالة للشحن</translation>
+    </message>
+    <message id="settings_radio_button_group_unknown">
+      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="46"/>
+      <source>Unknown</source>
+      <translation type="unfinished">مجهول</translation>
     </message>
     <message id="settings_radio_button_enter_password">
       <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="175"/>
@@ -234,6 +258,11 @@
       <source>Battery life limit: %1%</source>
       <translation>حد عمر البطارية: %1%</translation>
     </message>
+    <message id="controlcard_generator_label_autostart">
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="60"/>
+      <source>Autostart</source>
+      <translation type="unfinished">التشغيل الآلي</translation>
+    </message>
     <message id="controlcard_generator_disableautostartdialog_description">
       <location filename="../../pages/controlcards/GeneratorCard.qml" line="94"/>
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
@@ -248,6 +277,12 @@
       <location filename="../../components/GeneratorManualControlButton.qml" line="37"/>
       <source>Manual Start</source>
       <translation>البدء الآلي</translation>
+    </message>
+    <message id="evcs_ac_position">
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="20"/>
+      <source>Position</source>
+      <extracomment>EVCS AC input/output position</extracomment>
+      <translation type="unfinished">الموقع</translation>
     </message>
     <message id="evcs_autostart">
       <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="36"/>
@@ -283,6 +318,11 @@
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="86"/>
       <source>Service</source>
       <translation>خادم</translation>
+    </message>
+    <message id="settings_dvcc_dvcc">
+      <location filename="../../pages/settings/DvccCommonSettings.qml" line="17"/>
+      <source>DVCC</source>
+      <translation type="unfinished">نظام التحكم للجهد الكهربائي الموزع</translation>
     </message>
     <message id="settings_dvcc_switch_reset_vebus_after_disabling_dvcc">
       <location filename="../../pages/settings/DvccCommonSettings.qml" line="23"/>
@@ -325,7 +365,7 @@
       <translation>التوقف عندما يكون %1 أقل من</translation>
     </message>
     <message id="settings_fronius_remove_ip_address">
-      <location filename="../../pages/settings/IpAddressListView.qml" line="51"/>
+      <location filename="../../pages/settings/IpAddressListView.qml" line="53"/>
       <source>Remove IP address?</source>
       <translation>هل تريد حذف عنوان بروتوكول الإنترنت؟</translation>
     </message>
@@ -348,6 +388,11 @@
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="141"/>
       <source>Name</source>
       <translation>اسم</translation>
+    </message>
+    <message id="settings_deviceinfo_name">
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="56"/>
+      <source>Name</source>
+      <translation type="unfinished">اسم</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="66"/>
@@ -424,6 +469,11 @@
       <source>AC output</source>
       <translation>خرج التيار المتردد</translation>
     </message>
+    <message id="ac_output">
+      <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="29"/>
+      <source>AC output</source>
+      <translation type="unfinished">خرج التيار المتردد</translation>
+    </message>
     <message id="page_generator_ac_load_use_ac_load">
       <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="39"/>
       <source>Use AC Load to start/stop</source>
@@ -469,6 +519,16 @@
       <source>Unavailable monitor, set another</source>
       <translation>الشاشة غير متاحة، عيّن غيرها</translation>
     </message>
+    <message id="page_generator_conditions_battery_monitor">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="49"/>
+      <source>Battery monitor</source>
+      <translation type="unfinished">شاشة البطارية</translation>
+    </message>
+    <message id="page_generator_conditions_unavailable_monitor_set_another">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="51"/>
+      <source>Unavailable monitor, set another</source>
+      <translation type="unfinished">الشاشة غير متاحة، عيّن غيرها</translation>
+    </message>
     <message id="page_generator_conditions_on_loss_of_communication">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="58"/>
       <source>On loss of communication</source>
@@ -493,6 +553,11 @@
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="95"/>
       <source>Battery SOC</source>
       <translation>بطارية SOC</translation>
+    </message>
+    <message id="page_generator_conditions_inverter_high_temperature">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="129"/>
+      <source>Inverter high temperature</source>
+      <translation type="unfinished">درجة حرارة عالية في المعاكس</translation>
     </message>
     <message id="settings_inverter_high_temperature">
       <location filename="../../data/Generators.qml" line="91"/>
@@ -682,6 +747,16 @@
       <source>Active battery monitor</source>
       <translation>شاشة البطارية مفعلة</translation>
     </message>
+    <message id="settings_batteries_name">
+      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="100"/>
+      <source>Name</source>
+      <translation type="unfinished">اسم</translation>
+    </message>
+    <message id="settings_batteries_enter_name">
+      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="102"/>
+      <source>Enter name</source>
+      <translation type="unfinished">إدخال الاسم</translation>
+    </message>
     <message id="settings_system_enter_user_defined_name">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
       <source>Enter name</source>
@@ -736,6 +811,11 @@
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="60"/>
       <source>CAN-bus profile</source>
       <translation>ضابط مجال الشبكة-بيانات المسار التجميعي</translation>
+    </message>
+    <message id="settings_disabled">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="65"/>
+      <source>Disabled</source>
+      <translation type="unfinished">معطل</translation>
     </message>
     <message id="settings_canbus_vecan_lynx_ion_bms">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="70"/>
@@ -797,6 +877,11 @@
       <source>Check Unique id numbers</source>
       <translation>تحقق من هوية الأرقام الفريدة</translation>
     </message>
+    <message id="settings_canbus_unique_id_press_to_check">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="183"/>
+      <source>Press to check</source>
+      <translation type="unfinished">اضغط للتحقق</translation>
+    </message>
     <message id="settings_canbus_unique_id_conflict">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="196"/>
       <source>There is another device connected with this unique number, please select a new number.</source>
@@ -838,17 +923,17 @@
       <translation>ثلاثون ثانية</translation>
     </message>
     <message id="settings_1_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="95"/>
       <source>1 min</source>
       <translation>دقيقة</translation>
     </message>
     <message id="settings_10_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="99"/>
       <source>10 min</source>
       <translation>عشرة دقائق</translation>
     </message>
     <message id="settings_30_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="103"/>
       <source>30 min</source>
       <translation>ثلاثون دقيقة</translation>
     </message>
@@ -955,6 +1040,11 @@
       <source>Unavailable sensor, set another</source>
       <translation>مستشعر غير متوفر، اختر واحدا آخر</translation>
     </message>
+    <message id="settings_system_unavailable_sensor">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="82"/>
+      <source>Unavailable sensor, set another</source>
+      <translation type="unfinished">مستشعر غير متوفر، اختر واحدا آخر</translation>
+    </message>
     <message id="settings_dvcc_used_sensor">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="103"/>
       <source>Used sensor</source>
@@ -1011,6 +1101,12 @@
       <source>Auto selected</source>
       <translation>التحديد التلقائي</translation>
     </message>
+    <message id="settings_dvcc_auto_selected_none">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="192"/>
+      <source>None</source>
+      <extracomment>Indicates no option is selected</extracomment>
+      <translation type="unfinished">لا أحد</translation>
+    </message>
     <message id="settings_build_date_time">
       <location filename="../../pages/settings/PageSettingsFirmware.qml" line="27"/>
       <source>Build date/time</source>
@@ -1046,6 +1142,12 @@
       <source>Installing %1</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>تثبيت %1</translation>
+    </message>
+    <message id="settings_firmware_offline_press_to_install">
+      <location filename="../../pages/settings/PageSettingsFirmwareOffline.qml" line="36"/>
+      <source>Press to update to %1</source>
+      <extracomment>%1 = firmware version</extracomment>
+      <translation type="unfinished">اضغط للتحديث إلى %1</translation>
     </message>
     <message id="settings_firmware_online_press_to_update_to">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="93"/>
@@ -1114,6 +1216,12 @@
       <extracomment>Firmware update progress. %1 = firmware version, %2 = current update progress</extracomment>
       <translation>تثبيت %1 %2%</translation>
     </message>
+    <message id="settings_firmware_online_installing">
+      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="89"/>
+      <source>Installing %1...</source>
+      <extracomment>%1 = firmware version</extracomment>
+      <translation type="unfinished">جارٍ التثبيت %1...</translation>
+    </message>
     <message id="settings_firmware_update_build_date_time">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="112"/>
       <source>Update build date/time</source>
@@ -1145,32 +1253,32 @@
       <translation>منفذ بروتوكول التحكم في الإرسال</translation>
     </message>
     <message id="page_settings_fronius_inverter_multiphase">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="36"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="30"/>
       <source>Multiphase</source>
       <translation>متعدد الاطوار</translation>
     </message>
     <message id="page_settings_fronius_inverter_l1">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="46"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="40"/>
       <source>L1</source>
       <translation>L1</translation>
     </message>
     <message id="page_settings_fronius_inverter_l2">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="48"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="42"/>
       <source>L2</source>
       <translation>L2</translation>
     </message>
     <message id="page_settings_fronius_inverter_l3">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="44"/>
       <source>L3</source>
       <translation>L3</translation>
     </message>
     <message id="page_settings_fronius_inverter_split_phase">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="46"/>
       <source>Split-phase (L1+L2)</source>
       <translation>مرحلة-مجزأة (L1+L2)</translation>
     </message>
     <message id="page_settings_fronius_inverter_show">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="59"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="53"/>
       <source>Show</source>
       <translation>إظهار</translation>
     </message>
@@ -1194,6 +1302,16 @@
       <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="61"/>
       <source>AC-Out MP</source>
       <translation>AC-Out MP</translation>
+    </message>
+    <message id="page_setting_fronius_inverters_ac_in1_l">
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="49"/>
+      <source>AC-In1 L%1</source>
+      <translation type="unfinished">AC-In1 L%1/&gt;</translation>
+    </message>
+    <message id="page_setting_fronius_inverters_ac_in1_phase_unknown">
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="53"/>
+      <source>AC-In1 --</source>
+      <translation type="unfinished">AC-In1 --</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_out_l">
       <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="67"/>
@@ -1250,10 +1368,20 @@
       <source>Remote support IP and port</source>
       <translation>عنوان IP ومنفذ دعم عن بعد</translation>
     </message>
+    <message id="settings_logout_now">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="273"/>
+      <source>Log out now</source>
+      <translation type="unfinished">تسجيل خروج الآن</translation>
+    </message>
     <message id="settings_reboot_now">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="300"/>
       <source>Reboot now</source>
       <translation>إعادة التشغيل الآن</translation>
+    </message>
+    <message id="dialoglayer_rebooted">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="328"/>
+      <source>Device has been rebooted.</source>
+      <translation type="unfinished">تم إعادة تشغيل الجهاز.</translation>
     </message>
     <message id="settings_audible_alarm">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="340"/>
@@ -1493,6 +1621,11 @@ If that doesn't work, check sim-card in a phone to make sure that there is credi
       <source>Ready</source>
       <translation>جاهز</translation>
     </message>
+    <message id="page_settings_gsm_unknown_error">
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="128"/>
+      <source>Unknown error</source>
+      <translation type="unfinished">خطأ غير معروف</translation>
+    </message>
     <message id="page_settings_gsm_pin">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="136"/>
       <source>PIN</source>
@@ -1596,6 +1729,16 @@ Use unless prohibited by the utility provider.</source>
 
 يتم الاستخدام ما لم يحظر بواسطة مقدم خدمات المرافق.</translation>
     </message>
+    <message id="settings_ess_inactive">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="268"/>
+      <source>Inactive</source>
+      <translation type="unfinished">غير نشط</translation>
+    </message>
+    <message id="settings_ess_dynamic">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="298"/>
+      <source>Dynamic ESS</source>
+      <translation type="unfinished">نظام تخزين الطاقة الديناميكي (ESS)</translation>
+    </message>
     <message id="settings_rs_ess_min_soc">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="31"/>
       <source>Minimum SOC (unless grid fails)</source>
@@ -1605,6 +1748,16 @@ Use unless prohibited by the utility provider.</source>
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="136"/>
       <source>Active SOC limit</source>
       <translation>الحد النشط لـ SoC</translation>
+    </message>
+    <message id="settings_ess_battery_life_sustain">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="164"/>
+      <source>Sustain</source>
+      <translation type="unfinished">ركيزة</translation>
+    </message>
+    <message id="settings_ess_battery_life_recharge">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="166"/>
+      <source>Recharge</source>
+      <translation type="unfinished">الشحن</translation>
     </message>
     <message id="settings_ess_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="254"/>
@@ -1790,199 +1943,204 @@ Documentation على  https://ve3.nl/vol</translation>
       <translation>مؤجل بمقدار %1ثانية</translation>
     </message>
     <message id="settings_vrm_portal_id">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="86"/>
       <source>VRM Portal ID</source>
       <translation>معرف بوابة VRM</translation>
     </message>
     <message id="settings_log_interval">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="92"/>
       <source>Log interval</source>
       <translation>فترة التسجيل</translation>
     </message>
     <message id="settings_5_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="97"/>
       <source>5 min</source>
       <translation>خمس دقائق</translation>
     </message>
     <message id="settings_15_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="101"/>
       <source>15 min</source>
       <translation>15 دقيقة</translation>
     </message>
     <message id="settings_1_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="105"/>
       <source>1 hour</source>
       <translation>ساعة</translation>
     </message>
     <message id="settings_2_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="107"/>
       <source>2 hours</source>
       <translation>ساعتان</translation>
     </message>
     <message id="settings_4_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="109"/>
       <source>4 hours</source>
       <translation>أربع ساعات</translation>
     </message>
     <message id="settings_12_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="111"/>
       <source>12 hours</source>
       <translation>12 ساعة</translation>
     </message>
     <message id="settings_1_day">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="113"/>
       <source>1 day</source>
       <translation>يوم</translation>
     </message>
     <message id="settings_https_enabled">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="122"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="123"/>
       <source>Use secure connection (HTTPS)</source>
       <translation>استخدم اتصال آمن (HTTPS)</translation>
     </message>
     <message id="settings_last_contact">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="134"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="135"/>
       <source>Last contact</source>
       <translation>آخر تواصل</translation>
     </message>
     <message id="settings_connection_error_150">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="190"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="191"/>
       <source>#150 Unexpected response text</source>
       <translation>#150 نص استجابة غير متوقع</translation>
     </message>
     <message id="settings_connection_error_151">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="193"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="194"/>
       <source>#151 Unexpected HTTP response</source>
       <translation>#151 رد HTTP غير متوقع</translation>
     </message>
     <message id="settings_connection_error_152">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="196"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="197"/>
       <source>#152 Connection timeout</source>
       <translation>#152 انتهت مدة الاتصال</translation>
     </message>
     <message id="settings_connection_error_153">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="199"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="200"/>
       <source>#153 Connection error</source>
       <translation>#153 خطأ في الاتصال</translation>
     </message>
     <message id="settings_connection_error_154">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="202"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="203"/>
       <source>#154 DNS failure</source>
       <translation>#154 عطل خدمة اسم النطاق</translation>
     </message>
     <message id="settings_connection_error_155">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="205"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="206"/>
       <source>#155 Routing error</source>
       <translation>#155 خطأ في التوجيه </translation>
     </message>
     <message id="settings_connection_error_156">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="208"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="209"/>
       <source>#156 VRM unavailable</source>
       <translation>#156 VRM غير متاح</translation>
     </message>
     <message id="settings_connection_error_157">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="211"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="212"/>
       <source>#159 Unknown error</source>
       <translation>#159 خطأ غير معروف</translation>
     </message>
     <message id="settings_vrm_error_message">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="228"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="229"/>
       <source>Error message: 
 %1</source>
       <translation>رسالة خطأ 
 %1/&gt;</translation>
     </message>
     <message id="settings_no_contact_reboot">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="253"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="254"/>
       <source>Reboot device when no contact</source>
       <translation>أعد تشفيل الجهاز إذا لم تجد اتصال</translation>
     </message>
     <message id="settings_vrm_no_contact_reset_delay">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="264"/>
       <source>No contact reset delay (hh:mm)</source>
       <translation>إذا لم تجد اتصال أعد ضبط المرحل (س:د)</translation>
     </message>
     <message id="settings_vrm_storage_location">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="269"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="270"/>
       <source>Storage location</source>
       <translation>مكان التخزين</translation>
     </message>
     <message id="settings_vrm_no_buffer_active">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="272"/>
       <source>No buffer active</source>
       <translation>لا يوجج موازنة مفعلة</translation>
     </message>
     <message id="settings_vrm_internal_storage">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="274"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="275"/>
       <source>Internal storage</source>
       <translation>تخزين داخلي</translation>
     </message>
     <message id="settings_vrm_transferring">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="276"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="277"/>
       <source>Transferring</source>
       <translation>يتم النقل</translation>
     </message>
     <message id="settings_vrm_external_storage">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="278"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="279"/>
       <source>External storage</source>
       <translation>التخزين الخارجي</translation>
     </message>
+    <message id="settings_vrm_unknown_error">
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="288"/>
+      <source>Unknown error</source>
+      <translation type="unfinished">خطأ غير معروف</translation>
+    </message>
     <message id="settings_vrm_no_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="290"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="291"/>
       <source>No Error</source>
       <translation>لا يوجد خطأ</translation>
     </message>
     <message id="settings_vrm_no_space_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="292"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="293"/>
       <source>No space left on storage</source>
       <translation>لم يتبقى مكان في التخزين</translation>
     </message>
     <message id="settings_vrm_io_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="294"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="295"/>
       <source>IO error</source>
       <translation>خطأ في المدخلات والمخرجات</translation>
     </message>
     <message id="settings_vrm_mount_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="296"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="297"/>
       <source>Mount error</source>
       <translation>خطأ في التركيب</translation>
     </message>
     <message id="settings_vrm_storage_contains_firmware_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="298"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="299"/>
       <source>Contains firmware image. Not using.</source>
       <translation>يحتوي على صورة البرامج المبيتة. لا يتم استخدامه.</translation>
     </message>
     <message id="settings_vrm_storage_not_writable_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="300"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="301"/>
       <source>SD card / USB stick not writable</source>
       <translation>بطاقة إس دي / شريحة يو إس بي غير قابلة للكتابة</translation>
     </message>
     <message id="settings_vrm_free_disk_space">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="309"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="310"/>
       <source>Free disk space</source>
       <translation>مساحة حرة في القرص</translation>
     </message>
     <message id="settings_vrm_byte">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="312"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="313"/>
       <source>byte</source>
       <translation>بايت</translation>
     </message>
     <message id="settings_vrm_bytes">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="314"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="315"/>
       <source>bytes</source>
       <translation>بايتس</translation>
     </message>
     <message id="settings_vrm_stored_records">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="322"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="323"/>
       <source>Stored records</source>
       <translation>السجلات المخزنة</translation>
     </message>
     <message id="settings_vrm_records_count">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="325"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="326"/>
       <source>%1 records</source>
       <translation>%1 سجلات</translation>
     </message>
     <message id="settings_vrm_oldest_record_age">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="333"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="334"/>
       <source>Oldest record age</source>
       <translation>أقدم عمر للسجل</translation>
     </message>
@@ -2025,6 +2183,17 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="26"/>
       <source>Alarm relay</source>
       <translation>إنذار المرحل</translation>
+    </message>
+    <message id="settings_relay_tank_pump">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="32"/>
+      <source>Tank pump</source>
+      <translation type="unfinished">مضخة الخزان</translation>
+    </message>
+    <message id="settings_relay_manual">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="34"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="75"/>
+      <source>Manual</source>
+      <translation type="unfinished">يدوي</translation>
     </message>
     <message id="settings_relay_alarm_polarity">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="43"/>
@@ -2092,6 +2261,12 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Press to boot</source>
       <translation>اضغط للتشغيل</translation>
     </message>
+    <message id="settings_firmware_backup_version">
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="59"/>
+      <source>Firmware %1 (%2)</source>
+      <extracomment>%1 = backup version, %2 = backup version build number</extracomment>
+      <translation type="unfinished">البرنامج الثابت %1 (%2)</translation>
+    </message>
     <message id="settings_firmware_rebooting_to">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="80"/>
       <source>Rebooting to %1</source>
@@ -2113,13 +2288,8 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Modbus TCP</source>
       <translation>نمط المسار التجميعي بروتوكول التحكم في الإرسال</translation>
     </message>
-    <message id="settings_services_console_on_vedirect1">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="54"/>
-      <source>Console on VE.Direct 1</source>
-      <translation>وحدة التحكم والمراقبية على VE.Direct 1</translation>
-    </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsServices.qml" line="80"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>ناقل شبكة التحكم في النطاق عبر بروتوكول التحكم في نقل البيانات/ بروتوكول الإنترنت (معالجة الأخطاء)</translation>
     </message>
@@ -2147,6 +2317,16 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="225"/>
       <source>Automatic</source>
       <translation>آلي</translation>
+    </message>
+    <message id="settings_system_grid">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="18"/>
+      <source>Grid</source>
+      <translation type="unfinished">الشبكة</translation>
+    </message>
+    <message id="settings_system_name_auto">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="44"/>
+      <source>Automatic</source>
+      <translation type="unfinished">آلي</translation>
     </message>
     <message id="settings_system_name_user_defined">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="53"/>
@@ -2208,6 +2388,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Solar charger current control</source>
       <translation>منظم تيار الشاحن الضوئي</translation>
     </message>
+    <message id="settings_system_status_bms_params">
+      <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="44"/>
+      <source>BMS control</source>
+      <translation type="unfinished">التحكم بنظام إدارة البطارية</translation>
+    </message>
     <message id="charger_network_bms_control">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="128"/>
       <source>BMS control</source>
@@ -2223,6 +2408,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="47"/>
       <source>Pump state</source>
       <translation>حالة المضخة</translation>
+    </message>
+    <message id="settings_pump_auto">
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="56"/>
+      <source>Auto</source>
+      <translation type="unfinished">آلي</translation>
     </message>
     <message id="settings_tank_sensor">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="67"/>
@@ -2289,6 +2479,16 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="221"/>
       <source>IP configuration</source>
       <translation>هيئة بروبوكول الإنترنت</translation>
+    </message>
+    <message id="settings_tcpip_manual">
+      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="227"/>
+      <source>Manual</source>
+      <translation type="unfinished">يدوي</translation>
+    </message>
+    <message id="settings_tcpip_off">
+      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="229"/>
+      <source>Off</source>
+      <translation type="unfinished">مطفأ</translation>
     </message>
     <message id="settings_tcpip_fixed">
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="231"/>
@@ -2506,15 +2706,25 @@ Documentation على  https://ve3.nl/vol</translation>
       <translation>وضعية الإعداد</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="101"/>
+      <location filename="../../data/SystemSettings.qml" line="103"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>مستقل</translation>
+    </message>
+    <message id="charger_standalone">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="45"/>
+      <source>Standalone</source>
+      <translation type="unfinished">مستقل</translation>
     </message>
     <message id="charger_charge">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="48"/>
       <source>Charge</source>
       <translation>تحميل</translation>
+    </message>
+    <message id="charger_external_control">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="51"/>
+      <source>External control</source>
+      <translation type="unfinished">التحكم الخارجي</translation>
     </message>
     <message id="charger_charge_hub_1">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="54"/>
@@ -2546,8 +2756,13 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Master setting</source>
       <translation>إعداد الرئيسي</translation>
     </message>
+    <message id="charger_slave">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="85"/>
+      <source>Slave</source>
+      <translation type="unfinished">تابع</translation>
+    </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="85"/>
+      <location filename="../../data/SystemSettings.qml" line="87"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>تابع</translation>
@@ -2575,13 +2790,17 @@ Documentation على  https://ve3.nl/vol</translation>
     <message id="common_words_reset">
       <location filename="../../components/CommonWords.qml" line="388"/>
       <source>Reset</source>
-      <extracomment>Reset the BMS control</extracomment>
       <translation>إعادة ضبط</translation>
     </message>
     <message id="charger_network_bms_control_info">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="140"/>
       <source>BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present.</source>
       <translation>يتم تفعيل نظام إدارة المبنى تلقائيًا عند تثبيت النظام. إعادة الضبط في حالة تغيير إعدادات النظام أو في حالة عدم تثبيت نظام إدارة المبنى.</translation>
+    </message>
+    <message id="charger_total_pv_power">
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="50"/>
+      <source>Total PV Power</source>
+      <translation type="unfinished">إجمالي الطاقة الكهروضوئية</translation>
     </message>
     <message id="charger_load">
       <location filename="../../pages/solar/SolarChargerPage.qml" line="116"/>
@@ -2594,10 +2813,16 @@ Documentation على  https://ve3.nl/vol</translation>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>%1 موجود</translation>
     </message>
+    <message id="charger_history_name">
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="188"/>
+      <source>%1 History</source>
+      <extracomment>Solar charger historic data information. %1 = charger name</extracomment>
+      <translation type="unfinished">%1 التاريخ</translation>
+    </message>
     <message id="settings_multirs_history_name">
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="114"/>
       <source>%1 History</source>
-      <extracomment>Solar charger historic data information. %1 = charger name</extracomment>
+      <extracomment>Multi RS historic PV data information. %1 = Multi RS name</extracomment>
       <translation>%1 التاريخ</translation>
     </message>
     <message id="charger_networked_operation">
@@ -2621,16 +2846,22 @@ Documentation على  https://ve3.nl/vol</translation>
       <extracomment>Voltage alarm is at "Warning" level</extracomment>
       <translation>تحذير</translation>
     </message>
+    <message id="listitems_alarm_level_alarm">
+      <location filename="../../components/listitems/ListAlarm.qml" line="25"/>
+      <source>Alarm</source>
+      <extracomment>Voltage alarm is at "Alarm" level</extracomment>
+      <translation type="unfinished">إنذار</translation>
+    </message>
     <message id="digitalinputs_state_alarm">
       <location filename="../../data/DigitalInputs.qml" line="80"/>
       <source>Alarm</source>
-      <extracomment>Relay function is 'alarm'</extracomment>
+      <extracomment>Digital input is in 'alarm' state</extracomment>
       <translation>إنذار</translation>
     </message>
     <message id="components_volumeunit_volume">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="56"/>
       <source>Volume</source>
-      <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
+      <extracomment>Title for a list of units of volume (e.g. cubic meters, liters, gallons)</extracomment>
       <translation>الحجم</translation>
     </message>
     <message id="tank_status_short_circuited">
@@ -2778,10 +3009,26 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Relay function</source>
       <translation>عمل المرحل</translation>
     </message>
+    <message id="batterysettingrelay_alarm">
+      <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="31"/>
+      <source>Alarm</source>
+      <extracomment>Relay function is 'alarm'</extracomment>
+      <translation type="unfinished">إنذار</translation>
+    </message>
     <message id="batterysettingrelay_charger_or_generator_start_stop">
       <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="33"/>
       <source>Charger or generator start/stop</source>
       <translation>بدء/وقف الشاحن أو المولد</translation>
+    </message>
+    <message id="batterysettingrelay_manual_control">
+      <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="35"/>
+      <source>Manual control</source>
+      <translation type="unfinished">تحكم يدوي</translation>
+    </message>
+    <message id="batterysettingrelay_fuse_blown">
+      <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="122"/>
+      <source>Fuse blown</source>
+      <translation type="unfinished">انصهار متضخم</translation>
     </message>
     <message id="common_words_manual_control">
       <location filename="../../components/CommonWords.qml" line="256"/>
@@ -2807,6 +3054,12 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="18"/>
       <source>Status LEDs</source>
       <translation>حالة الثنائيات الباعثة للضوء</translation>
+    </message>
+    <message id="batterydiagnostics_none">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="42"/>
+      <source>None</source>
+      <extracomment>Indicates no alarm is set</extracomment>
+      <translation type="unfinished">لا أحد</translation>
     </message>
     <message id="batterydiagnostics_main_switch">
       <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="48"/>
@@ -2836,7 +3089,7 @@ Documentation على  https://ve3.nl/vol</translation>
     <message id="common_words_switch">
       <location filename="../../components/CommonWords.qml" line="462"/>
       <source>Switch</source>
-      <extracomment>Change the battery mode</extracomment>
+      <extracomment>Change the mode value</extracomment>
       <translation>مبدل</translation>
     </message>
     <message id="devicelist_battery_initializing">
@@ -2904,6 +3157,21 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Top section voltage</source>
       <translation>الفرع الأعلى للتيار</translation>
     </message>
+    <message id="battery_bank_error_communication">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="95"/>
+      <source>Communication error</source>
+      <translation type="unfinished">خطأ في الاتصال</translation>
+    </message>
+    <message id="battery_state_of_health">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="161"/>
+      <source>State of health</source>
+      <translation type="unfinished">حالة الصلاحية</translation>
+    </message>
+    <message id="battery_bus_voltage">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="191"/>
+      <source>Bus voltage</source>
+      <translation type="unfinished">الجهد الكهربائي للمسار التجميعي</translation>
+    </message>
     <message id="battery_bottom_section_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="207"/>
       <source>Bottom section voltage</source>
@@ -2964,6 +3232,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Redetect Battery</source>
       <translation>إعادة كشف البطارية</translation>
     </message>
+    <message id="battery_press_to_redetect">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="420"/>
+      <source>Press to redetect</source>
+      <translation type="unfinished">اضغط لإعادة الكشف</translation>
+    </message>
     <message id="vebus_device_press_to_redetect">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="198"/>
       <source>Press to redetect</source>
@@ -2989,6 +3262,16 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Low SOC</source>
       <translation>SoC منخفض</translation>
     </message>
+    <message id="batteryalarms_high_battery_voltage">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="24"/>
+      <source>High battery voltage</source>
+      <translation type="unfinished">جهد البطارية مرتفع</translation>
+    </message>
+    <message id="batteryalarms_low_soc">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
+      <source>Low SOC</source>
+      <translation type="unfinished">SoC منخفض</translation>
+    </message>
     <message id="batteryalarms_low_starter_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="59"/>
       <source>Low starter voltage</source>
@@ -3008,6 +3291,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="92"/>
       <source>Mid-point voltage</source>
       <translation>تيار نقطة الوسط</translation>
+    </message>
+    <message id="batteryalarms_fuse_blown">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="99"/>
+      <source>Fuse blown</source>
+      <translation type="unfinished">انصهار متضخم</translation>
     </message>
     <message id="batteryalarms_high_internal_temperature">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="106"/>
@@ -3241,6 +3529,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Capacity</source>
       <translation>استيعاب</translation>
     </message>
+    <message id="batterysettingsbattery_capacity">
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="39"/>
+      <source>Capacity</source>
+      <translation type="unfinished">استيعاب</translation>
+    </message>
     <message id="batterysettingsbattery_charged_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="48"/>
       <source>Charged voltage</source>
@@ -3316,6 +3609,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>No power on busbar</source>
       <translation>لا توجد طاقة على قضيب التجميع</translation>
     </message>
+    <message id="lynxdistributor_connection_lost">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="49"/>
+      <source>Connection lost</source>
+      <translation type="unfinished">اتصال مفقود</translation>
+    </message>
     <message id="lynxdistributor_count_fuses_blown" numerus="yes">
       <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="61"/>
       <source>%n fuse(s) blown</source>
@@ -3355,6 +3653,26 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Shutdowns due error</source>
       <translation>إغلاق بسبب الأخطاء</translation>
     </message>
+    <message id="lynxiondiagnostics_last_error">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml" line="29"/>
+      <source>Last error</source>
+      <translation type="unfinished">آخر خطأ</translation>
+    </message>
+    <message id="lynxiondiagnostics_2nd_last_error">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml" line="31"/>
+      <source>2nd last error</source>
+      <translation type="unfinished">ثاني آخر خطأ</translation>
+    </message>
+    <message id="lynxiondiagnostics_3rd_last_error">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml" line="33"/>
+      <source>3rd last error</source>
+      <translation type="unfinished">ثالث آخر خطأ</translation>
+    </message>
+    <message id="lynxiondiagnostics_4th_last_error">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml" line="35"/>
+      <source>4th last error</source>
+      <translation type="unfinished">رابع آخر خطأ</translation>
+    </message>
     <message id="lynxionio_system_switch">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="18"/>
       <source>System Switch</source>
@@ -3374,6 +3692,16 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/battery/BatteryListPage.qml" line="15"/>
       <source>Batteries</source>
       <translation>بطاريات</translation>
+    </message>
+    <message id="lynxionsystem_capacity">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="18"/>
+      <source>Capacity</source>
+      <translation type="unfinished">استيعاب</translation>
+    </message>
+    <message id="lynxionsystem_batteries">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="25"/>
+      <source>Batteries</source>
+      <translation type="unfinished">بطاريات</translation>
     </message>
     <message id="lynxionsystem_parallel">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="31"/>
@@ -3395,10 +3723,20 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Min/max cell temperature</source>
       <translation>الحد الأدنى/الحد الأعلى لحرارة الخلية</translation>
     </message>
+    <message id="lynxionsystem_balancing">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="89"/>
+      <source>Balancing</source>
+      <translation type="unfinished">يقوم بالموازنة</translation>
+    </message>
     <message id="lynxionsystem_balancer_balancing">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="107"/>
       <source>Balancing</source>
       <translation>يقوم بالموازنة</translation>
+    </message>
+    <message id="lynxionsystem_balancer_unknown">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="114"/>
+      <source>Unknown</source>
+      <translation type="unfinished">مجهول</translation>
     </message>
     <message id="dc_output">
       <location filename="../../components/settings/ListDcOutputQuantityGroup.qml" line="16"/>
@@ -3506,6 +3844,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Remaining</source>
       <translation>المتبقي</translation>
     </message>
+    <message id="devicelist_tanksensor_sensor_battery">
+      <location filename="../../pages/settings/devicelist/tank/PageTankSensor.qml" line="46"/>
+      <source>Sensor battery</source>
+      <translation type="unfinished">بطارية المستشعر</translation>
+    </message>
     <message id="temperature_sensor_battery">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="78"/>
       <source>Sensor battery</source>
@@ -3535,6 +3878,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="113"/>
       <source>Custom</source>
       <translation>تخصيص</translation>
+    </message>
+    <message id="devicelist_tanksetup_custom">
+      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="54"/>
+      <source>Custom</source>
+      <translation type="unfinished">تخصيص</translation>
     </message>
     <message id="devicelist_tanksetup_sensor_value_when_empty">
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="60"/>
@@ -3588,6 +3936,12 @@ Documentation على  https://ve3.nl/vol</translation>
       <extracomment>The sensor level (as a percentage) for this tank shape point</extracomment>
       <translation>مستوى المستشعر</translation>
     </message>
+    <message id="devicelist_tankshape_volume">
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="170"/>
+      <source>Volume</source>
+      <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
+      <translation type="unfinished">الحجم</translation>
+    </message>
     <message id="devicelist_tankshape_duplicate_sensor_level">
       <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="229"/>
       <source>Duplicate sensor level values are not allowed.</source>
@@ -3634,6 +3988,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Switch position</source>
       <translation>موضع المفتاح</translation>
     </message>
+    <message id="ac-in-setup_single_phase">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="137"/>
+      <source>Single phase</source>
+      <translation type="unfinished">طور مفرد</translation>
+    </message>
     <message id="ac-in-setup_two_phase">
       <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="139"/>
       <source>2-phase</source>
@@ -3644,6 +4003,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>3-phase</source>
       <translation>3-طور</translation>
     </message>
+    <message id="ac-in-setup_devices">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="156"/>
+      <source>Devices</source>
+      <translation type="unfinished">أجهزة</translation>
+    </message>
     <message id="ac-in-genset_ac">
       <location filename="../../components/PageGensetModel.qml" line="158"/>
       <source>AC</source>
@@ -3653,6 +4017,16 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../components/PageGensetModel.qml" line="197"/>
       <source>Engine</source>
       <translation>المحرك</translation>
+    </message>
+    <message id="ac-in-genset_speed">
+      <location filename="../../components/PageGensetModel.qml" line="210"/>
+      <source>Speed</source>
+      <translation type="unfinished">السرعة</translation>
+    </message>
+    <message id="ac-in-genset_load">
+      <location filename="../../components/PageGensetModel.qml" line="217"/>
+      <source>Load</source>
+      <translation type="unfinished">تحميل</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
       <location filename="../../components/PageGensetModel.qml" line="241"/>
@@ -3678,6 +4052,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../components/PageGensetModel.qml" line="278"/>
       <source>Number of starts</source>
       <translation>عدد مرات بدء التشغيل</translation>
+    </message>
+    <message id="genset_bms_control">
+      <location filename="../../components/PageGensetModel.qml" line="369"/>
+      <source>BMS control</source>
+      <translation type="unfinished">التحكم بنظام إدارة البطارية</translation>
     </message>
     <message id="ac-in-modeldefault_front_selector_locked">
       <location filename="../../components/settings/ListAcInError.qml" line="23"/>
@@ -3736,6 +4115,12 @@ Documentation على  https://ve3.nl/vol</translation>
       <extracomment>%1 = CT device number</extracomment>
       <translation>محول التيار %1</translation>
     </message>
+    <message id="smappeect_phase_none">
+      <location filename="../../pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml" line="53"/>
+      <source>None</source>
+      <extracomment>Indicates no phase</extracomment>
+      <translation type="unfinished">لا أحد</translation>
+    </message>
     <message id="smappeect_flashing_led_indicates_this_ct">
       <location filename="../../pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml" line="62"/>
       <source>Flashing LED indicates this CT</source>
@@ -3778,6 +4163,16 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="20"/>
       <source>Inverted</source>
       <translation>محول</translation>
+    </message>
+    <message id="digitalinput_enable_alarm">
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="40"/>
+      <source>Enable alarm</source>
+      <translation type="unfinished">تفعيل الإنذار</translation>
+    </message>
+    <message id="digitalinput_inverted">
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="46"/>
+      <source>Inverted</source>
+      <translation type="unfinished">محول</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
       <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="52"/>
@@ -3844,6 +4239,16 @@ Documentation على  https://ve3.nl/vol</translation>
       <source>Reset counter</source>
       <translation>عداد ضبط النظام</translation>
     </message>
+    <message id="temperature_short_circuited">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="38"/>
+      <source>Short circuited</source>
+      <translation type="unfinished">حدثت دائرة قصر</translation>
+    </message>
+    <message id="temperature_reverse_polarity">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="41"/>
+      <source>Reverse polarity</source>
+      <translation type="unfinished">قطبية معاكسة</translation>
+    </message>
     <message id="temperature_sensor_battery_low">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="44"/>
       <source>Sensor battery low</source>
@@ -3858,6 +4263,11 @@ Documentation على  https://ve3.nl/vol</translation>
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="68"/>
       <source>Pressure</source>
       <translation>الضغط</translation>
+    </message>
+    <message id="temperature_sensor_battery_status_low">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="99"/>
+      <source>Low</source>
+      <translation type="unfinished">منخفض</translation>
     </message>
     <message id="temperature_offset">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="43"/>
@@ -3911,10 +4321,20 @@ NOTE: The update might temporarily stop the system.</source>
       <source>Updating the MK3, values will reappear after the update is complete</source>
       <translation>تحديث MK3، ستظهر القيم مرة أخرى بعد استكمال التحديث</translation>
     </message>
+    <message id="vebus_device_charging_to_100">
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="141"/>
+      <source>Charging the battery to 100%</source>
+      <translation type="unfinished">شحن البطارية إلى 100%</translation>
+    </message>
     <message id="vebus_device_charging_the_battery_to_100">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="156"/>
       <source>Charging the battery to 100%</source>
       <translation>شحن البطارية إلى 100%</translation>
+    </message>
+    <message id="vebus_device_page_advanced">
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="252"/>
+      <source>Advanced</source>
+      <translation type="unfinished">متقدم</translation>
     </message>
     <message id="vebus_device_in_progress">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="143"/>
@@ -4026,6 +4446,11 @@ Do you want to continue?</source>
       <source>Starting...</source>
       <translation>البدء...</translation>
     </message>
+    <message id="vebus_device_starting">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="107"/>
+      <source>Starting...</source>
+      <translation type="unfinished">البدء...</translation>
+    </message>
     <message id="vebus_device_press_to_interrupt">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="110"/>
       <source>Press to interrupt</source>
@@ -4090,6 +4515,16 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="235"/>
       <source>ESS Relay test</source>
       <translation>اختبار مرحل ESS</translation>
+    </message>
+    <message id="vebus_device_ess_relay_test_completed">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="241"/>
+      <source>Completed</source>
+      <translation type="unfinished">مكتمل</translation>
+    </message>
+    <message id="vebus_device_ess_relay_test_pending">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="243"/>
+      <source>Pending</source>
+      <translation type="unfinished">قيد الانتظار</translation>
     </message>
     <message id="cycle_history_completed">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="31"/>
@@ -4276,7 +4711,6 @@ Do you want to continue?</source>
     <message id="rssystemalarms_overload">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="48"/>
       <source>Overload</source>
-      <extracomment>Alarm configuration when 'overload' state is triggered</extracomment>
       <translation>حمل زائد</translation>
     </message>
     <message id="common_words_alarm_setting_dc_ripple">
@@ -4289,6 +4723,11 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml" line="16"/>
       <source>Voltage Sensor</source>
       <translation>حساس التيار</translation>
+    </message>
+    <message id="vebus_device_phase_rotation">
+      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml" line="19"/>
+      <source>Phase rotation</source>
+      <translation type="unfinished">تناوب المرحلة</translation>
     </message>
     <message id="rssystemalarms_phase_rotation">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="27"/>
@@ -4349,7 +4788,7 @@ Do you want to continue?</source>
     <message id="common_words_ac_input_role">
       <location filename="../../components/CommonWords.qml" line="21"/>
       <source>Role</source>
-      <extracomment>The role for an AC input (grid meter, genset, acload, etc.)</extracomment>
+      <extracomment>The role for an AC input (grid, genset, acload, etc.)</extracomment>
       <translation>الدور</translation>
     </message>
     <message id="common_words_ac_load">
@@ -4388,6 +4827,18 @@ Do you want to continue?</source>
       <source>Active</source>
       <extracomment>Status is 'active'</extracomment>
       <translation>نشط</translation>
+    </message>
+    <message id="common_words_alarm">
+      <location filename="../../components/CommonWords.qml" line="48"/>
+      <source>Alarm</source>
+      <extracomment>Voltage alarm is at "Alarm" level</extracomment>
+      <translation type="unfinished">إنذار</translation>
+    </message>
+    <message id="common_words_alarm_setting_overload">
+      <location filename="../../components/CommonWords.qml" line="52"/>
+      <source>Overload</source>
+      <extracomment>Alarm configuration when 'overload' state is triggered</extracomment>
+      <translation type="unfinished">حمل زائد</translation>
     </message>
     <message id="common_words_alarm_status">
       <location filename="../../components/CommonWords.qml" line="62"/>
@@ -4484,6 +4935,11 @@ Do you want to continue?</source>
       <source>Device</source>
       <extracomment>Title for device information</extracomment>
       <translation>الجهاز</translation>
+    </message>
+    <message id="common_words_disabled">
+      <location filename="../../components/CommonWords.qml" line="140"/>
+      <source>Disabled</source>
+      <translation type="unfinished">معطل</translation>
     </message>
     <message id="common_words_discharging">
       <location filename="../../components/CommonWords.qml" line="143"/>
@@ -4584,6 +5040,11 @@ Do you want to continue?</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation>غير نشط</translation>
     </message>
+    <message id="common_words_inverter_charger">
+      <location filename="../../components/CommonWords.qml" line="218"/>
+      <source>Inverter / Charger</source>
+      <translation type="unfinished">محول التردد/ الشاحن</translation>
+    </message>
     <message id="common_words_ip_address">
       <location filename="../../components/CommonWords.qml" line="228"/>
       <source>IP address</source>
@@ -4666,7 +5127,7 @@ Do you want to continue?</source>
       <translation>لا يوجد خطأ</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="91"/>
+      <location filename="../../data/AcInputs.qml" line="108"/>
       <source>Not available</source>
       <translation>غير متوفر</translation>
     </message>
@@ -5261,6 +5722,11 @@ Do you want to continue?</source>
       <source>Self-consumption above limit</source>
       <translation>الاستهلاك الذاتي زائد عن الحد</translation>
     </message>
+    <message id="cgwacs_battery_schedule_pv">
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="170"/>
+      <source>PV</source>
+      <translation type="unfinished">جهاز ضوئي</translation>
+    </message>
     <message id="settings_multirs_pv">
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="198"/>
       <source>PV</source>
@@ -5280,6 +5746,12 @@ Do you want to continue?</source>
       <location filename="../../components/settings/ListAlarmState.qml" line="11"/>
       <source>Alarm state</source>
       <translation>حالة المنبه</translation>
+    </message>
+    <message id="devicelist_battery_alarm_state">
+      <location filename="../../components/settings/ListAlarmState.qml" line="19"/>
+      <source>Alarm</source>
+      <extracomment>Alarm state is active</extracomment>
+      <translation type="unfinished">إنذار</translation>
     </message>
     <message id="clear_history_button_clear_history">
       <location filename="../../components/settings/ListClearHistoryButton.qml" line="15"/>
@@ -5441,6 +5913,11 @@ Do you want to continue?</source>
       <source>Max Voltage</source>
       <translation>أقصى جهد كهربي</translation>
     </message>
+    <message id="charger_history_box_max_voltage">
+      <location filename="../../components/SolarDetailBox.qml" line="64"/>
+      <source>Max Voltage</source>
+      <translation type="unfinished">أقصى جهد كهربي</translation>
+    </message>
     <message id="charger_history_box_max_current">
       <location filename="../../components/SolarDetailBox.qml" line="70"/>
       <source>Max Current</source>
@@ -5451,6 +5928,24 @@ Do you want to continue?</source>
       <source>Charge time</source>
       <extracomment>Statistics for battery charging time</extracomment>
       <translation>زمن الشحن</translation>
+    </message>
+    <message id="charger_history_box_bulk">
+      <location filename="../../components/SolarDetailBox.qml" line="136"/>
+      <source>Bulk</source>
+      <extracomment>Battery: time spent in 'Bulk' mode</extracomment>
+      <translation type="unfinished">كتلة</translation>
+    </message>
+    <message id="charger_history_box_float">
+      <location filename="../../components/SolarDetailBox.qml" line="148"/>
+      <source>Float</source>
+      <extracomment>Battery: time spent in 'Float' mode</extracomment>
+      <translation type="unfinished">بالتعويم</translation>
+    </message>
+    <message id="charger_history_hr">
+      <location filename="../../components/SolarDetailBox.qml" line="174"/>
+      <source>hr</source>
+      <extracomment>Abbreviation of "hour"</extracomment>
+      <translation type="unfinished">ساعة</translation>
     </message>
     <message id="solarchargers_state_bulk">
       <location filename="../../data/SolarChargers.qml" line="57"/>
@@ -5522,6 +6017,11 @@ Do you want to continue?</source>
       <source>Connecting</source>
       <translation>جاري الاتصال</translation>
     </message>
+    <message id="splash_view_connecting">
+      <location filename="../../components/SplashView.qml" line="236"/>
+      <source>Connecting</source>
+      <translation type="unfinished">جاري الاتصال</translation>
+    </message>
     <message id="splash_view_connected">
       <location filename="../../components/SplashView.qml" line="238"/>
       <source>Connected, awaiting broker messages</source>
@@ -5583,7 +6083,7 @@ Do you want to continue?</source>
       <translation>إنذار صامت</translation>
     </message>
     <message id="vebus_device_page_total_power">
-      <location filename="../../components/ThreePhaseQuantityTable.qml" line="76"/>
+      <location filename="../../components/ThreePhaseQuantityTable.qml" line="77"/>
       <source>Total Power</source>
       <translation>إجمالي الطاقة</translation>
     </message>
@@ -5632,10 +6132,20 @@ Do you want to continue?</source>
       <source>Retrieving IP address</source>
       <translation>استرجاع عنوان بروتوكول الإنترنت</translation>
     </message>
+    <message id="utils_connman_connected">
+      <location filename="../../components/Utils.js" line="280"/>
+      <source>Connected</source>
+      <translation type="unfinished">متصل</translation>
+    </message>
     <message id="utils_connman_disconnect">
       <location filename="../../components/Utils.js" line="283"/>
       <source>Disconnect</source>
       <translation>فصل</translation>
+    </message>
+    <message id="utils_connman_disconnected">
+      <location filename="../../components/Utils.js" line="287"/>
+      <source>Disconnected</source>
+      <translation type="unfinished">منفصل</translation>
     </message>
     <message id="overview_widget_acloads_title">
       <location filename="../../components/widgets/AcLoadsWidget.qml" line="17"/>
@@ -5659,24 +6169,29 @@ Do you want to continue?</source>
       <translation>رياح</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="98"/>
+      <location filename="../../data/AcInputs.qml" line="115"/>
       <source>Shore</source>
       <translation>دعامة</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="124"/>
+      <location filename="../../data/AcInputs.qml" line="141"/>
       <source>Grid current limit</source>
       <translation>حد تيار الشبكة</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="127"/>
+      <location filename="../../data/AcInputs.qml" line="144"/>
       <source>Generator current limit</source>
       <translation>حد تيار المولد</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="130"/>
+      <location filename="../../data/AcInputs.qml" line="147"/>
       <source>Shore current limit</source>
       <translation>حد تيار الشاطئ</translation>
+    </message>
+    <message id="acInputs_statusCode_stopping">
+      <location filename="../../data/AcInputs.qml" line="169"/>
+      <source>Stopping</source>
+      <translation type="unfinished">توقف</translation>
     </message>
     <message id="page_generator_stopping">
       <location filename="../../data/Generators.qml" line="55"/>
@@ -5751,19 +6266,24 @@ Do you want to continue?</source>
       <translation>مرتفع</translation>
     </message>
     <message id="ess_state_keep_batteries_charged">
-      <location filename="../../data/Ess.qml" line="32"/>
+      <location filename="../../data/Ess.qml" line="36"/>
       <source>Keep batteries charged</source>
       <translation>حافظ على أن تكون البطاريات مشحونة</translation>
     </message>
     <message id="ess_state_optimized_with_battery_life">
-      <location filename="../../data/Ess.qml" line="34"/>
+      <location filename="../../data/Ess.qml" line="32"/>
       <source>Optimized with battery life</source>
       <translation>محسن مع عمر البطارية</translation>
     </message>
     <message id="ess_state_optimized_without_battery_life">
-      <location filename="../../data/Ess.qml" line="36"/>
+      <location filename="../../data/Ess.qml" line="34"/>
       <source>Optimized without battery life</source>
       <translation>محسن دون عمر البطارية</translation>
+    </message>
+    <message id="ess_state_external_control">
+      <location filename="../../data/Ess.qml" line="38"/>
+      <source>External control</source>
+      <translation type="unfinished">التحكم الخارجي</translation>
     </message>
     <message id="evchargers_status_charged">
       <location filename="../../data/EvChargers.qml" line="94"/>
@@ -5824,6 +6344,11 @@ Do you want to continue?</source>
       <location filename="../../data/EvChargers.qml" line="133"/>
       <source>Start charging</source>
       <translation>ابدأ الشحن</translation>
+    </message>
+    <message id="evchargers_mode_scheduled">
+      <location filename="../../data/EvChargers.qml" line="162"/>
+      <source>Scheduled</source>
+      <translation type="unfinished">مجدول</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
       <location filename="../../data/System.qml" line="193"/>
@@ -5901,6 +6426,11 @@ Do you want to continue?</source>
       <source>Equalize</source>
       <translation>معادلة</translation>
     </message>
+    <message id="solarchargers_state_external control">
+      <location filename="../../data/SolarChargers.qml" line="72"/>
+      <source>External control</source>
+      <translation type="unfinished">التحكم الخارجي</translation>
+    </message>
     <message id="inverters_state_aes_mode">
       <location filename="../../data/System.qml" line="123"/>
       <source>AES mode</source>
@@ -5956,6 +6486,11 @@ Do you want to continue?</source>
       <source>Power supply mode</source>
       <translation>وضع إمدادات الطاقة</translation>
     </message>
+    <message id="inverters_state_sustain">
+      <location filename="../../data/System.qml" line="156"/>
+      <source>Sustain</source>
+      <translation type="unfinished">ركيزة</translation>
+    </message>
     <message id="inverters_state_wakeup">
       <location filename="../../data/System.qml" line="160"/>
       <source>Wake up</source>
@@ -5991,31 +6526,36 @@ Do you want to continue?</source>
       <source>Test</source>
       <translation>معاينة</translation>
     </message>
+    <message id="inverters_state_dynamic_ess">
+      <location filename="../../data/System.qml" line="196"/>
+      <source>Dynamic ESS</source>
+      <translation type="unfinished">نظام تخزين الطاقة الديناميكي (ESS)</translation>
+    </message>
     <message id="settings_rs_ess_dess">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="41"/>
       <source>Dynamic ESS</source>
       <translation>نظام تخزين الطاقة الديناميكي (ESS)</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="89"/>
+      <location filename="../../data/SystemSettings.qml" line="91"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>رئيس المجموعة</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="93"/>
+      <location filename="../../data/SystemSettings.qml" line="95"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>نموذج رئيسي</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="97"/>
+      <location filename="../../data/SystemSettings.qml" line="99"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>مجموعة ونموذج رئيسي</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="105"/>
+      <location filename="../../data/SystemSettings.qml" line="107"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>رئيس مجموعة وقائم بذاته</translation>
@@ -6029,6 +6569,16 @@ Do you want to continue?</source>
       <location filename="../../data/InverterChargers.qml" line="88"/>
       <source>Inverter only</source>
       <translation>فقط المعاكس</translation>
+    </message>
+    <message id="charger_alarms_low_battery_voltage_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="31"/>
+      <source>Low battery voltage alarm</source>
+      <translation type="unfinished">إنذار جهد البطارية المنخفض</translation>
+    </message>
+    <message id="charger_alarms_high_battery_voltage_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="40"/>
+      <source>High battery voltage alarm</source>
+      <translation type="unfinished">منبه جهد البطارية المرتفعة</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
       <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="58"/>
@@ -6060,8 +6610,8 @@ Do you want to continue?</source>
     <message id="controlcard_inverter_charger">
       <location filename="../../pages/controlcards/InverterChargerCard.qml" line="23"/>
       <source>Inverter / Charger (%1)</source>
-      <extracomment>%1 = the inverter/charger name</extracomment>
       <oldsource>Inverter / Charger</oldsource>
+      <extracomment>%1 = the inverter/charger name</extracomment>
       <translation>محول التردد/ الشاحن (%1)</translation>
     </message>
     <message id="settings_page_debug_display_cpu_usage">
@@ -6169,6 +6719,11 @@ Do you want to continue?</source>
       <source>Minimum and maximum gauge ranges</source>
       <translation>الحد الأدنى والحد الأقصى لنطاقات القياس</translation>
     </message>
+    <message id="settings_brief_view_start_page">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="172"/>
+      <source>Start page</source>
+      <translation type="unfinished">صفحة البدء</translation>
+    </message>
     <message id="settings_restarting_app">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="231"/>
       <source>Restarting application...</source>
@@ -6178,6 +6733,26 @@ Do you want to continue?</source>
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="139"/>
       <source>Failed to change language!</source>
       <translation>فشل في تغيير اللغة!</translation>
+    </message>
+    <message id="settings_displayoff_1min">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="45"/>
+      <source>1 min</source>
+      <translation type="unfinished">دقيقة</translation>
+    </message>
+    <message id="settings_displayoff_10min">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="47"/>
+      <source>10 min</source>
+      <translation type="unfinished">عشرة دقائق</translation>
+    </message>
+    <message id="settings_displayoff_30min">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="49"/>
+      <source>30 min</source>
+      <translation type="unfinished">ثلاثون دقيقة</translation>
+    </message>
+    <message id="settings_displayoff_never">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="51"/>
+      <source>Never</source>
+      <translation type="unfinished">أبدا</translation>
     </message>
     <message id="settings_language_please_wait">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="144"/>
@@ -6286,6 +6861,11 @@ Do you want to continue?</source>
       <source>Only critical loads</source>
       <translation>الأحمال الحرجة فقط</translation>
     </message>
+    <message id="settings_ess_min_soc">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="120"/>
+      <source>Minimum SOC (unless grid fails)</source>
+      <translation type="unfinished">الحد الأدنى لـ SoC (إلا إذا فشلت الشبكة)</translation>
+    </message>
     <message id="settings_ess_batteryLife_state">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="148"/>
       <source>Battery life state</source>
@@ -6321,6 +6901,11 @@ Do you want to continue?</source>
       <source>Device list</source>
       <oldsource>Device List</oldsource>
       <translation>قائمة الأجهزة</translation>
+    </message>
+    <message id="settings_ethernet">
+      <location filename="../../pages/SettingsPage.qml" line="88"/>
+      <source>Ethernet</source>
+      <translation type="unfinished">إيثرنت</translation>
     </message>
     <message id="settings_vrm_device_instances">
       <location filename="../../pages/SettingsPage.qml" line="146"/>
@@ -6384,16 +6969,48 @@ Do you want to continue?</source>
       <source>Minimum current</source>
       <translation>الحد الأدنى للتيار</translation>
     </message>
+    <message id="common_words_none_errors">
+      <location filename="../../components/CommonWords.qml" line="311"/>
+      <source>None</source>
+      <extracomment>Indicates there are no errors</extracomment>
+      <translation type="unfinished">لا أحد</translation>
+    </message>
+    <message id="common_words_not_available">
+      <location filename="../../components/CommonWords.qml" line="314"/>
+      <source>Not available</source>
+      <translation type="unfinished">غير متوفر</translation>
+    </message>
+    <message id="common_words_off">
+      <location filename="../../components/CommonWords.qml" line="320"/>
+      <source>Off</source>
+      <translation type="unfinished">مطفأ</translation>
+    </message>
+    <message id="common_words_ok">
+      <location filename="../../components/CommonWords.qml" line="326"/>
+      <source>OK</source>
+      <translation type="unfinished">صحيح</translation>
+    </message>
     <message id="common_words_overall_history">
       <location filename="../../components/CommonWords.qml" line="342"/>
       <source>Overall history</source>
       <translation>السجل الإجمالي</translation>
     </message>
+    <message id="common_words_settings">
+      <location filename="../../components/CommonWords.qml" line="407"/>
+      <source>Settings</source>
+      <translation type="unfinished">الإعدادات</translation>
+    </message>
+    <message id="common_words_unknown_status">
+      <location filename="../../components/CommonWords.qml" line="488"/>
+      <source>Unknown</source>
+      <extracomment>Status = "unknown"</extracomment>
+      <translation type="unfinished">مجهول</translation>
+    </message>
     <message id="common_words_yield_today">
       <location filename="../../components/CommonWords.qml" line="514"/>
       <source>Yield Today</source>
-      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <oldsource>Yield today</oldsource>
+      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <translation>الناتج اليوم</translation>
     </message>
     <message id="settings_firmware_installed_rebooting">
@@ -6751,6 +7368,11 @@ See documentation for further information.</oldsource>
       <source>Wired</source>
       <translation>موصول بالأسلاك</translation>
     </message>
+    <message id="nav_brief">
+      <location filename="../../pages/BriefPage.qml" line="155"/>
+      <source>Brief</source>
+      <translation type="unfinished">مختصر</translation>
+    </message>
     <message id="nav_brief_close_side_panel_high_cpu">
       <location filename="../../pages/BriefPage.qml" line="487"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
@@ -6793,7 +7415,7 @@ See documentation for further information.</oldsource>
       <translation>متعقب</translation>
     </message>
     <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="106"/>
       <source>RS devices</source>
       <translation>أجهزة RS</translation>
     </message>
@@ -6929,6 +7551,11 @@ See documentation for further information.</oldsource>
       <source>Auto start functionality</source>
       <translation>وظيفة البدء التلقائي</translation>
     </message>
+    <message id="settings_page_genset_generator_run_time">
+      <location filename="../../components/PageGensetModel.qml" line="76"/>
+      <source>Current run time</source>
+      <translation type="unfinished">وقت التشغيل الحالي</translation>
+    </message>
     <message id="ac-in-genset_auto_control_status">
       <location filename="../../components/PageGensetModel.qml" line="84"/>
       <source>Control status</source>
@@ -7058,6 +7685,16 @@ See documentation for further information.</oldsource>
       <source>No password and the network communication is not encrypted</source>
       <translation>لا توجد كلمة مرور والاتصال الشبكي غير مشفر</translation>
     </message>
+    <message id="settings_security_too_short_password">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="139"/>
+      <source>Password needs to be at least 8 characters long</source>
+      <translation type="unfinished">يجب أن تحتوي كلمة المرور على الأقل على 8 رموز</translation>
+    </message>
+    <message id="settings_root_enter_password">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="220"/>
+      <source>Enter password</source>
+      <translation type="unfinished">إدخال كلمة المرور</translation>
+    </message>
     <message id="settings_root_too_short_password">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="225"/>
       <source>Password needs to be at least 8 characters long</source>
@@ -7129,22 +7766,22 @@ See documentation for further information.</oldsource>
       <translation>تسجيل الخروج</translation>
     </message>
     <message id="settings_vrm_portal_readonly">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="53"/>
       <source>Read-only</source>
       <translation>للقراءة فقط</translation>
     </message>
     <message id="settings_vrm_portal_full">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="54"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="55"/>
       <source>Full</source>
       <translation>ممتلئ</translation>
     </message>
     <message id="settings_vrm_portal_mode_confirm_title">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="75"/>
       <source>Are you sure?</source>
       <translation>هل أنت متأكد؟</translation>
     </message>
     <message id="settings_vrm_portal_mode_confirm_description">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="77"/>
       <source>Changing this setting to Read-only or Off will lock you out.</source>
       <translation>يؤدي تغيير هذا الإعداد إلى "للقراءة فقط" أو "إيقاف" إلى حظر وصولك إليه.</translation>
     </message>
@@ -7199,6 +7836,11 @@ See documentation for further information.</oldsource>
       <location filename="../../components/PageGensetModel.qml" line="263"/>
       <source>Heatsink temperature</source>
       <translation>حرارة المصرف الحراري</translation>
+    </message>
+    <message id="genset_charge_voltage">
+      <location filename="../../components/PageGensetModel.qml" line="329"/>
+      <source>Charge voltage</source>
+      <translation type="unfinished">الجهد الكهربائي للشحن</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
       <location filename="../../components/PageGensetModel.qml" line="340"/>
@@ -7523,11 +8165,6 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <source>Successfully changed language!</source>
       <translation>تم تغيير اللغة بنجاح!</translation>
     </message>
-    <message id="page_settings_fronius_inverter_power_limiting">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
-      <source>Power limiting</source>
-      <translation>تحديد الطاقة</translation>
-    </message>
     <message id="settings_ess_rs_information">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="31"/>
       <source>For Multi-RS and HS19 devices, ESS settings are available on the RS System product page.</source>
@@ -7550,7 +8187,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>المدة</translation>
     </message>
     <message id="rssystem_system_alarms">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="74"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="81"/>
       <source>System alarms</source>
       <translation>نظام الإنذارات</translation>
     </message>
@@ -7612,51 +8249,52 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>التحكمات</translation>
     </message>
     <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="103"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. </source>
-      <translation>تم دمج جميع عناصر التحكم اليومية الآن في لوحة التحكم الجديدة. </translation>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
+      <translation type="unfinished">تم دمج جميع عناصر التحكم اليومية الآن في لوحة التحكم الجديدة. </translation>
     </message>
     <message id="welcome_units_title">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="107"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
       <source>Watts &amp; Amps</source>
       <translation>الوات والأمبير</translation>
     </message>
     <message id="welcome_units_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="111"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="110"/>
       <source>You can now switch between Watts and Amps. Choose the unit that best fits your preference.</source>
       <translation>يمكنك الآن التبديل بين الوات والأمبير. اختر الوحدة الأمثل لك.</translation>
     </message>
     <message id="welcome_more_title">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="115"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="114"/>
       <source>Learn more</source>
       <translation>اعرف المزيد</translation>
     </message>
     <message id="welcome_more_text_wasm">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="120"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="119"/>
       <source>Access the link below to find out more about the Renewed UI.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</source>
       <extracomment>%1 = link to URL with more information</extracomment>
       <translation>يمكنك زيارة الرابط أدناه لمعرفة المزيد حول واجهة المستخدم المجددة.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
     </message>
     <message id="welcome_more_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="122"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="121"/>
       <source>Scan the QR code to find out more about the Renewed UI.</source>
       <translation>امسح رمز الاستجابة السريعة QR لمعرفة المزيد حول واجهة المستخدم المجددة.</translation>
     </message>
     <message id="welcome_done">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="138"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="137"/>
       <source>Done</source>
       <translation>تم</translation>
     </message>
     <message id="welcome_next">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="140"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="139"/>
       <source>Next</source>
       <translation>التالي</translation>
     </message>
     <message id="devicelist_solarcharger_error">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
       <source>Error: #%1</source>
-      <extracomment>%1 = error number</extracomment>
       <oldsource>Error: %1</oldsource>
+      <extracomment>%1 = error number</extracomment>
       <translation>خطأ: #%1</translation>
     </message>
     <message id="charger_alarms_header_active_errors">
@@ -7702,11 +8340,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>تم ضبط %1 إلى %2.</translation>
     </message>
-    <message id="page_settings_fronius_inverter_power_limiting_label">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="75"/>
-      <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
-      <translation>يدعم المعاكس الضوئي تحديد الطاقة. عطل هذه الخاصية إذا كانت تتداخل مع التشغيل العادي.</translation>
-    </message>
     <message id="press_ok_to_reboot">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="309"/>
       <source>Press 'OK' to reboot</source>
@@ -7724,27 +8357,27 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>هل أنت متأكد أنك تريد إعادة ضبط المصنع لأداة التطوير Node-RED؟ سيحذف هذا كل التدفقات الخاصة بك.</translation>
     </message>
     <message id="settings_connection_status">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="178"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="179"/>
       <source>Connection status</source>
       <translation>حالة الاتصال</translation>
     </message>
     <message id="settings_connection_error_https_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="220"/>
       <source>Connection status (HTTPS channel)</source>
       <translation>حالة الاتصال (قناة HTTPS)</translation>
     </message>
     <message id="settings_connection_error_http_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="221"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="222"/>
       <source>Connection status (HTTP channel)</source>
       <translation>حالة الاتصال (قناة HTTP)</translation>
     </message>
     <message id="settings_connection_error_realtime_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="239"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="240"/>
       <source>Connection status (MQTT Real-time channel)</source>
       <translation>حالة الاتصال (قناة MQTT في الوقت الفعلي)</translation>
     </message>
     <message id="settings_connection_error_rpc_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="247"/>
       <source>Connection status (MQTT RPC channel)</source>
       <translation>حالة الاتصال (قناة MQTT RPC)</translation>
     </message>
@@ -7814,11 +8447,23 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>ESS %1 Discharge Disabled</source>
       <translation>الديناميكي %1 تفريغ الشحن معطل</translation>
     </message>
+    <message id="startpage_option_brief_without_panel">
+      <location filename="../../data/StartPageConfiguration.qml" line="22"/>
+      <source>Brief</source>
+      <extracomment>The 'Brief' page</extracomment>
+      <translation type="unfinished">مختصر</translation>
+    </message>
     <message id="startpage_option_brief_with_panel">
       <location filename="../../data/StartPageConfiguration.qml" line="28"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
       <translation>مختصر (اللوحة الجانبية مفتوحة)</translation>
+    </message>
+    <message id="startpage_option_overview">
+      <location filename="../../data/StartPageConfiguration.qml" line="34"/>
+      <source>Overview</source>
+      <extracomment>The 'Overview' page</extracomment>
+      <translation type="unfinished">نظرة عامة</translation>
     </message>
     <message id="startpage_option_levels_tanks">
       <location filename="../../data/StartPageConfiguration.qml" line="40"/>
@@ -7890,609 +8535,70 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>وظيفة التشغيل/التوقيف للمولد غير مفعلة، اذهب إلى إعدادات المرحل واختر وظيفة "تشغيل/توقيف المولد"</translation>
     </message>
-  </context>
-  <context>
-    <name>TzAfricaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="10"/>
-      <source>Morocco Standard Time</source>
-      <translation>التوقيت المعياري للمغرب</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="11"/>
-      <source>W. Central Africa Standard Time</source>
-      <translation>التوقيت المعياري لغرب وسط أفريقيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="12"/>
-      <source>South Africa Standard Time</source>
-      <translation>التوقيت المعياري لجنوب أفريقيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="13"/>
-      <source>Namibia Standard Time</source>
-      <translation>التوقيت المعياري لناميبيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="14"/>
-      <source>Egypt Standard Time</source>
-      <translation>التوقيت المعياري لمصر</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="15"/>
-      <source>E. Africa Standard Time</source>
-      <translation>التوقيت المعياري لشرق أفريقيا</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAmericaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="10"/>
-      <source>Argentina Standard Time</source>
-      <translation>التوقيت المعياري للأرجنتين</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="11"/>
-      <source>E. South America Standard Time</source>
-      <translation>التوقيت المعياري لشرق جنوب أمريكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="12"/>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="13"/>
-      <source>Greenland Standard Time</source>
-      <translation>التوقيت المعياري لجرينلاند</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="14"/>
-      <source>Montevideo Standard Time</source>
-      <translation>التوقيت المعياري لمونتفيدو</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="15"/>
-      <source>Newfoundland Standard Time</source>
-      <translation>التوقيت المعياري لنيوفاوندلاند</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="16"/>
-      <source>SA Eastern Standard Time</source>
-      <translation>التوقيت المعياري المنطقة الشرقية لجنوب أمريكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="17"/>
-      <source>Atlantic Standard Time</source>
-      <translation>التوقيت المعياري للأطلسي</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="18"/>
-      <source>Central Brazilian Standard Time</source>
-      <translation>التوقيت المعياري لوسط البرازيل</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="19"/>
-      <source>Pacific SA Standard Time</source>
-      <translation>التوقيت المعياري لمنطقة المحيط الهادئ لجنوب أمريكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="20"/>
-      <source>Paraguay Standard Time</source>
-      <translation>التوقيت المعياري لباراغواي</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="21"/>
-      <source>SA Western Standard Time</source>
-      <translation>التوقيت المعياري لغرب جنوب أمريكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="22"/>
-      <source>Venezuela Standard Time</source>
-      <translation>التوقيت المعياري لفنزويلا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="23"/>
-      <source>Eastern Standard Time</source>
-      <translation>التوقيت المعياري للشرق</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="24"/>
-      <source>SA Pacific Standard Time</source>
-      <translation>التوقيت المعياري لمنطقة المحيط الهادئ لجنوب أمريكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="25"/>
-      <source>US Eastern Standard Time</source>
-      <translation>التوقيت المعياري لشرق الولايات المتحدة</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="26"/>
-      <source>Canada Central Standard Time</source>
-      <translation>التوقيت المعياري لوسط الكندا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="27"/>
-      <source>Central America Standard Time</source>
-      <translation>التوقيت المعياري لوسط أمريكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="28"/>
-      <source>Central Standard Time (Mexico)</source>
-      <translation>التوقيت المعياري للوسط (المكسيك)</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="29"/>
-      <source>Central Standard Time</source>
-      <translation>التوقيت المعياري للوسط</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="30"/>
-      <source>Mountain Standard Time (Mexico)</source>
-      <translation>التوقيت المعياري للجبل (المكسيك)</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="31"/>
-      <source>Mountain Standard Time</source>
-      <translation>التوقيت المعياري للجبل</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="32"/>
-      <source>US Mountain Standard Time</source>
-      <translation>التوقيت المعياري لجبل الولايات المتحدة</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="33"/>
-      <source>Pacific Standard Time (Mexico)</source>
-      <translation>التوقيت المعياري للهادئ (المكسيك)</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="34"/>
-      <source>Pacific Standard Time</source>
-      <translation>التوقيت المعياري للهادئ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="35"/>
-      <source>Alaskan Standard Time</source>
-      <translation>التوقيت المعياري لألاسكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="36"/>
-      <source>Hawaii-Aleutian</source>
-      <translation>التوقيت المعياري لهاواي-إليوتينس</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAntarcticaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="10"/>
-      <source>New Zealand Standard Time</source>
-      <translation>التوقيت المعياري لنيوزيلندا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="11"/>
-      <source>Central Pacific Standard Time</source>
-      <translation>التوقيت المعياري لوسط الهادئ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="12"/>
-      <source>West Pacific Standard Time</source>
-      <translation>التوقيت المعياري لغرب الهادئ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="13"/>
-      <source>W. Australia Standard Time</source>
-      <translation>التوقيت المعياري لغرب أستراليا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="14"/>
-      <source>SE Asia Standard Time</source>
-      <translation>التوقيت المعياري لجنوب شرق آسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="15"/>
-      <source>Central Asia Standard Time</source>
-      <translation>التوقيت المعياري لوسط آسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="16"/>
-      <source>West Asia Standard Time</source>
-      <translation>التوقيت المعياري لغرب آسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="17"/>
-      <source>E. Africa Standard Time</source>
-      <translation>التوقيت المعياري لشرق أفريقيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="18"/>
-      <source>Pacific SA Standard Time</source>
-      <translation>التوقيت المعياري لمنطقة المحيط الهادئ لجنوب أمريكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="19"/>
-      <source>SA Western Standard Time</source>
-      <translation>التوقيت المعياري لغرب جنوب أمريكا</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzArcticData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzArcticData.qml" line="10"/>
-      <source>W. Europe Standard Time</source>
-      <translation>التوقيت المعياري لغرب أوروبا</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAsiaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="10"/>
-      <source>Kamchatka Standard Time</source>
-      <translation>التوقيت المعياري لكامشاتكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="11"/>
-      <source>Magadan Standard Time</source>
-      <translation>التوقيت المعياري لماجادان</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="12"/>
-      <source>Vladivostok Standard Time</source>
-      <translation>التوقيت المعياري لفلاديفوستوك</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="13"/>
-      <source>Yakutsk Standard Time</source>
-      <translation>التوقيت المعياري لياكتسك</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="14"/>
-      <source>Tokyo Standard Time</source>
-      <translation>التوقيت المعياري لطوكيو</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="15"/>
-      <source>Korea Standard Time</source>
-      <translation>التوقيت المعياري لكوريا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="16"/>
-      <source>Singapore Standard Time</source>
-      <translation>التوقيت المعياري لسنغافورة</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="17"/>
-      <source>Ulaanbaatar Standard Time</source>
-      <translation>التوقيت المعياري لأولان باتور</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="18"/>
-      <source>Taipei Standard Time</source>
-      <translation>التوقيت المعياري لتايبيه</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="19"/>
-      <source>North Asia East Standard Time</source>
-      <translation>التوقيت المعياري لشمال شرق آسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="20"/>
-      <source>China Standard Time</source>
-      <translation>التوقيت المعياري للصين</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="21"/>
-      <source>SE Asia Standard Time</source>
-      <translation>التوقيت المعياري لجنوب شرق آسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="22"/>
-      <source>North Asia Standard Time</source>
-      <translation>التوقيت المعياري لشمال آسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="23"/>
-      <source>Myanmar Standard Time</source>
-      <translation>التوقيت المعياري لبورما</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="24"/>
-      <source>N. Central Asia Standard Time</source>
-      <translation>التوقيت المعياري لشمال وسط آسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="25"/>
-      <source>Central Asia Standard Time</source>
-      <translation>التوقيت المعياري لوسط آسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="26"/>
-      <source>Bangladesh Standard Time</source>
-      <translation>التوقيت المعياري لبنغلاديش</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="27"/>
-      <source>Nepal Standard Time</source>
-      <translation>التوقيت المعياري للنيبال</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="28"/>
-      <source>Sri Lanka Standard Time</source>
-      <translation>التوقيت المعياري لسريلانكا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="29"/>
-      <source>India Standard Time</source>
-      <translation>التوقيت المعياري للهند</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="30"/>
-      <source>West Asia Standard Time</source>
-      <translation>التوقيت المعياري لغرب آسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="31"/>
-      <source>Pakistan Standard Time</source>
-      <translation>التوقيت المعياري لباكستان</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="32"/>
-      <source>Ekaterinburg Standard Time</source>
-      <translation>التوقيت المعياري ليكترينبورغ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="33"/>
-      <source>Georgian Standard Time</source>
-      <translation>التوقيت المعياري لجورجيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="34"/>
-      <source>Caucasus Standard Time</source>
-      <translation>التوقيت المعياري للقوقاز</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="35"/>
-      <source>Azerbaijan Standard Time</source>
-      <translation>التوقيت المعياري لأذربجان</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="36"/>
-      <source>Arabian Standard Time</source>
-      <translation>التوقيت المعياري العربي</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="37"/>
-      <source>Afghanistan Standard Time</source>
-      <translation>التوقيت المعياري أفغانستان</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="38"/>
-      <source>Iran Standard Time</source>
-      <translation>التوقيت المعياري لإيران</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="39"/>
-      <source>Arabic Standard Time</source>
-      <translation>التوقيت المعياري العربي</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="40"/>
-      <source>Arab Standard Time</source>
-      <translation>التوقيت المعياري العربي</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="41"/>
-      <source>Syria Standard Time</source>
-      <translation>التوقيت المعياري لسوريا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="42"/>
-      <source>Middle East Standard Time</source>
-      <translation>التوقيت المعياري للشرق الأوسط</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="43"/>
-      <source>Jordan Standard Time</source>
-      <translation>التوقيت المعياري للأردن</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="44"/>
-      <source>Israel Standard Time</source>
-      <translation>التوقيت المعياري لإسرائيل</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAtlanticData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="10"/>
-      <source>Greenwich Standard Time</source>
-      <translation>التوقيت المعياري لغرينتش</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="11"/>
-      <source>Azores Standard Time</source>
-      <translation>التوقيت المعياري للأزور</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="12"/>
-      <source>Cape Verde Standard Time</source>
-      <translation>التوقيت المعياري للرأس الأخضر</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAustraliaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="10"/>
-      <source>Tasmania Standard Time</source>
-      <translation>التوقيت المعياري لتاسمانيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="11"/>
-      <source>E. Australia Standard Time</source>
-      <translation>التوقيت المعياري لشرق أستراليا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="12"/>
-      <source>AUS Eastern Standard Time</source>
-      <translation>التوقيت المعياري لشرق أستراليا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="13"/>
-      <source>Cen. Australia Standard Time</source>
-      <translation>التوقيت المعياري لوسط أستراليا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="14"/>
-      <source>AUS Central Standard Time</source>
-      <translation>التوقيت المعياري لوسط أستراليا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="15"/>
-      <source>W. Australia Standard Time</source>
-      <translation>التوقيت المعياري لغرب أستراليا</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzEtcData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="10"/>
-      <source>GMT +12</source>
-      <translation>توقيت غرنتش +12</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="11"/>
-      <source>GMT </source>
-      <translation>GMT</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="12"/>
-      <source>Mid-Atlantic Standard Time</source>
-      <translation>التوقيت المعياري لوسط الأطلسي</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="13"/>
-      <source>GMT -02</source>
-      <translation>توقيت غرينتش -02</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="14"/>
-      <source>GMT -11</source>
-      <translation>GMT -11</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="15"/>
-      <source>Dateline Standard Time</source>
-      <translation>التوقيت المعياري لخط التاريخ</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzEuropeData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="10"/>
-      <source>GMT Standard Time</source>
-      <translation>التوقيت المعياري لغرينتش</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="11"/>
-      <source>Central Europe Standard Time</source>
-      <translation>التوقيت المعياري لوسط أوروبا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="12"/>
-      <source>Central European Standard Time</source>
-      <translation>التوقيت المعياري لوسط أوروبا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="13"/>
-      <source>Romance Standard Time</source>
-      <translation>التوقيت المعياري لوسط أوروبا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="14"/>
-      <source>W. Europe Standard Time</source>
-      <translation>التوقيت المعياري لغرب أوروبا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="15"/>
-      <source>E. Europe Standard Time</source>
-      <translation>التوقيت المعياري لشرق أوروبا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="16"/>
-      <source>FLE Standard Time</source>
-      <translation>التوقيت المعياري لفنلندا ليتوانيا إستونيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="17"/>
-      <source>GTB Standard Time</source>
-      <translation>التوقيت المعياري لليونان تركيا بلغاريا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="18"/>
-      <source>Belarus Standard Time</source>
-      <translation>التوقيت المعياري لبلاروسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="19"/>
-      <source>Russian Standard Time</source>
-      <translation>التوقيت المعياري لروسيا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="20"/>
-      <source>Turkey Standard Time</source>
-      <translation>التوقيت المعياري لتركيا</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzIndianData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzIndianData.qml" line="10"/>
-      <source>Mauritius Standard Time</source>
-      <translation>التوقيت المعياري لموريشيوس</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzIndianData.qml" line="11"/>
-      <source>Christmas Island Standard Time</source>
-      <translation>الوقت المعياري لجزيرة كريسماس</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzPacificData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="10"/>
-      <source>Tonga Standard Time</source>
-      <translation>التوقيت المعياري لتونغا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="11"/>
-      <source>Fiji Standard Time</source>
-      <translation>التوقيت المعياري لفيجي</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="12"/>
-      <source>New Zealand Standard Time</source>
-      <translation>التوقيت المعياري لنيوزيلندا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="13"/>
-      <source>Central Pacific Standard Time</source>
-      <translation>التوقيت المعياري لوسط الهادئ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="14"/>
-      <source>West Pacific Standard Time</source>
-      <translation>التوقيت المعياري لغرب الهادئ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="15"/>
-      <source>Samoa Standard Time</source>
-      <translation>التوقيت المعياري لساموا</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="16"/>
-      <source>Hawaiian Standard Time</source>
-      <translation>التوقيت المعياري لهاواي</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="17"/>
-      <source>Easter Island Standard Time</source>
-      <translation>الوقت المعياري لجزيرة الفصح</translation>
+    <message id="temperature_type_unknown">
+      <location filename="../../data/EnvironmentInputs.qml" line="77"/>
+      <source>Unknown</source>
+      <translation type="unfinished">مجهول</translation>
+    </message>
+    <message id="brief_solar_yield">
+      <location filename="../../pages/BriefSidePanel.qml" line="18"/>
+      <source>Solar yield</source>
+      <translation type="unfinished">إنتاج الطاقة الشمسية</translation>
+    </message>
+    <message id="brief_dc_input">
+      <location filename="../../pages/BriefSidePanel.qml" line="207"/>
+      <source>DC input</source>
+      <translation type="unfinished">دخل التيار المستمر</translation>
+    </message>
+    <message id="brief_ac_loads">
+      <location filename="../../pages/BriefSidePanel.qml" line="248"/>
+      <source>AC Loads</source>
+      <translation type="unfinished">تحميلات التيار المتردد</translation>
+    </message>
+    <message id="brief_dc_loads">
+      <location filename="../../pages/BriefSidePanel.qml" line="276"/>
+      <source>DC Loads</source>
+      <translation type="unfinished">أحمال التيار المستمر</translation>
+    </message>
+    <message id="nav_overview">
+      <location filename="../../pages/OverviewPage.qml" line="397"/>
+      <source>Overview</source>
+      <translation type="unfinished">نظرة عامة</translation>
+    </message>
+    <message id="settings_state">
+      <location filename="../../pages/settings/PageCanbusStatus.qml" line="101"/>
+      <source>State</source>
+      <translation type="unfinished">الحالة</translation>
+    </message>
+    <message id="inverter_pv">
+      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="66"/>
+      <source>PV</source>
+      <translation type="unfinished">جهاز ضوئي</translation>
+    </message>
+    <message id="inverter_total_yield">
+      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="86"/>
+      <source>Total yield</source>
+      <translation type="unfinished">الإنتاجية الكلية</translation>
+    </message>
+    <message id="inverter_system_yield">
+      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="94"/>
+      <source>System yield</source>
+      <translation type="unfinished">إنتاجية النظام</translation>
+    </message>
+    <message id="vebus_device_alarm_only">
+      <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="18"/>
+      <source>Alarm only</source>
+      <translation type="unfinished">منبه فقط</translation>
+    </message>
+    <message id="vebus_device_alarms_and_warnings">
+      <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="20"/>
+      <source>Alarms &amp; warnings</source>
+      <translation type="unfinished">إنذارات وتنبيهات</translation>
+    </message>
+    <message id="vebus_device_alarm_group_warning">
+      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmGroup.qml" line="44"/>
+      <source>Warning</source>
+      <translation type="unfinished">تحذير</translation>
     </message>
   </context>
   <context>
@@ -8680,6 +8786,15 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="117"/>
       <source>Terminal over temperature</source>
       <translation>المحطة تجاوزت درجة الحرارة</translation>
+    </message>
+  </context>
+  <context>
+    <name>CRE</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="838"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="843"/>
+      <source>Unknown error: </source>
+      <translation>خطأ غير معروف:</translation>
     </message>
   </context>
   <context>
@@ -9057,414 +9172,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     </message>
   </context>
   <context>
-    <name>PageAcInSetup</name>
-    <message>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="124"/>
-      <source>Set the switch in an unlocked position to modify the settings.</source>
-      <translation>اضبط المفتاح في وضع إلغاء القفل لتعديل الإعدادات.</translation>
-    </message>
-  </context>
-  <context>
-    <name>QGuiApplication</name>
-    <message>
-      <location filename="../../src/main.cpp" line="100"/>
-      <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
-      <translation>استخدم مصدر بيانات D-Bus: اتصل بعنوان D-Bus المحدد.</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="101"/>
-      <source>address</source>
-      <comment>D-Bus address</comment>
-      <translation>عنوان</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="105"/>
-      <source>Use D-Bus data source: connect to the default D-Bus address</source>
-      <translation>استخدم مصدر بيانات D-Bus: اتصل بعنوان D-Bus الافتراضي</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="110"/>
-      <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
-      <translation>استخدم مصدر بيانات MQTT: اتصل بعنوان وسيط MQTT المحدد.</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="111"/>
-      <source>address</source>
-      <comment>MQTT broker address</comment>
-      <translation>عنوان</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="116"/>
-      <source>MQTT data source device portal id.</source>
-      <translation>معرف بوابة جهاز مصدر بيانات MQTT.</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="117"/>
-      <source>portalId</source>
-      <translation>معرّف البوابة</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="121"/>
-      <source>MQTT VRM webhost shard</source>
-      <translation>جزء مضيف الويب MQTT VRM</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="122"/>
-      <source>shard</source>
-      <comment>MQTT VRM webhost shard</comment>
-      <translation>جزء</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="126"/>
-      <source>MQTT data source username</source>
-      <translation>اسم مستخدم مصدر بيانات MQTT</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="127"/>
-      <source>user</source>
-      <comment>MQTT broker username.</comment>
-      <translation>مستخدم</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="131"/>
-      <source>MQTT data source password</source>
-      <translation>كلمة مرور مصدر بيانات MQTT</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="132"/>
-      <source>pass</source>
-      <comment>MQTT broker password.</comment>
-      <translation>اجتياز</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="136"/>
-      <source>MQTT data source token</source>
-      <translation>رمز مصدر بيانات MQTT</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="137"/>
-      <source>token</source>
-      <comment>MQTT broker auth token.</comment>
-      <translation>رمز</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="141"/>
-      <source>Enable FPS counter</source>
-      <translation>تمكين عداد FPS</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="145"/>
-      <source>Skip splash screen</source>
-      <translation>تخطي شاشة البداية</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="149"/>
-      <source>Use mock data source for testing.</source>
-      <translation>استخدم مصدر بيانات وهميًا للاختبار.</translation>
-    </message>
-  </context>
-  <context>
-    <name>VebusError</name>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="10"/>
-      <source>Device switched off</source>
-      <translation>الجهاز مطفأ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="13"/>
-      <source>Mixed old/new MK2</source>
-      <translation>جديد/قديم MK2 مخلوط</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="16"/>
-      <source>Expected devices error</source>
-      <translation>أخطاء أجهزة مرتقبة</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="19"/>
-      <source>No other device detected</source>
-      <translation>ليست هناك أجهزة أخرى مكتشفة</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="22"/>
-      <source>Overvoltage on AC-out</source>
-      <translation>تيار زائد في التيار المتردد الخارج</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="25"/>
-      <source>DDC program error</source>
-      <translation>خطأ في برنامج DDC</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="28"/>
-      <source>VE.Bus BMS without assistant</source>
-      <translation>نظام إدارة البطارية للمسار التجميعي VE بدون مساعد</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="31"/>
-      <source>Ground relay test failed</source>
-      <translation>اختبار مرحل المؤرض قد فشل</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="34"/>
-      <source>System time sync error</source>
-      <translation>خطأ في تزامن وقت النظام</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="37"/>
-      <source>Grid relay test fault</source>
-      <translation>خطأ في فحص مرحل الشبكة</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="40"/>
-      <source>Config mismatch with 2nd mcu</source>
-      <translation>الإعدادات لا تتطابق مع المتحكم الدقيق الثاني</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="43"/>
-      <source>Device transmit error</source>
-      <translation>خطأ في مراسلة الجهاز</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="46"/>
-      <source>Awaiting configuration or dongle missing</source>
-      <translation>قيد انتظار التكوين أو أن الدونجل مفقود</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="49"/>
-      <source>Phase master missing</source>
-      <translation>الوحدة الرئيسية للطور مفقودة</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="52"/>
-      <source>Overvoltage has occurred</source>
-      <translation>قد حصل إفراط بالتيار</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="55"/>
-      <source>Slave does not have AC input!</source>
-      <translation>التابع ليس لديه تيار متردد داخل!</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="58"/>
-      <source>Device can't be slave</source>
-      <translation>هذا الجهاز لا يكون تابعا</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="61"/>
-      <source>System protection initiated</source>
-      <translation>حماية النظام بدأت</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="64"/>
-      <source>Firmware incompatibiltiy</source>
-      <translation>عدم التوافق في البرامج المبيتة</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="67"/>
-      <source>Internal error</source>
-      <translation>خطأ داخلي</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="70"/>
-      <source>Failing relay test prevents connection</source>
-      <translation>يحول فشل اختبار التتابع دون الاتصال</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="73"/>
-      <source>VE.Bus error</source>
-      <translation>خطأ في المسار التجميعي VE</translation>
-    </message>
-  </context>
-  <context>
-    <name>Wakespeed</name>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="138"/>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="143"/>
-      <source>Unknown error: </source>
-      <translation>خطأ غير معروف:</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="151"/>
-      <source>Internal error</source>
-      <translation>خطأ داخلي</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="156"/>
-      <source>No error</source>
-      <translation>لا يوجد خطأ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="159"/>
-      <source>Battery high temperature</source>
-      <translation>بطارية مرتفعة الحرارة</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="162"/>
-      <source>Battery high voltage</source>
-      <translation>بطارية مرتفعة التيار</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="165"/>
-      <source>Battery low voltage</source>
-      <translation>الجهد الكهربائي للبطارية منخفض</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="168"/>
-      <source>Battery voltage exceeded configured max</source>
-      <translation>جهد البطارية تجاوز الحد الأقصى المحدد</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="175"/>
-      <source>Alternator high temperature</source>
-      <translation>ارتفاع درجة حرارة مولد التيار</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="178"/>
-      <source>Alternator high RPM</source>
-      <translation>ارتفاع عدد دورات مولد التيار</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="181"/>
-      <source>Field drive FET high temperature</source>
-      <translation>ارتفاع درجة حرارة ترانزستور المجال المؤثر لمحرك المجال</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="184"/>
-      <source>Required sensor missing</source>
-      <translation>الحساس المطلوب مفقود</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="187"/>
-      <source>Alternator low voltage</source>
-      <translation>انخفاض الجهد الكهربي لمولد التيار</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="190"/>
-      <source>Alternator high voltage offset</source>
-      <translation>تعديل الجهد الكهربي المرتفع لمولد التيار</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="193"/>
-      <source>Alternator Voltage exceeded configured max</source>
-      <translation>تجاوز الجهد الكهربي لمولد التيار الحد الأقصى المحدد</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="196"/>
-      <source>Alternator high voltage</source>
-      <translation>مولد التيار ذو الجهد العالي</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="199"/>
-      <source>Battery disconnected</source>
-      <translation>فصل البطارية</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="202"/>
-      <source>Battery high voltage disconnect</source>
-      <translation>فصل البطارية عالية الجهد</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="205"/>
-      <source>Battery instance ouf of range</source>
-      <translation>البطارية خارج النطاق</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="208"/>
-      <source>Too many BMS's</source>
-      <translation>عدد كبير للغاية من BMS</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="211"/>
-      <source>Battery about to disconnect</source>
-      <translation>البطارية على وشك الفصل</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="214"/>
-      <source>Too many devices to track</source>
-      <translation>عدد كبير للغاية من الأجهزة التي يتعين تتبعها</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="217"/>
-      <source>Battery low voltage disconnect</source>
-      <translation>فصل البطارية منخفضة الجهد</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="220"/>
-      <source>Battery high current disconnect</source>
-      <translation>فصل البطارية مرتفعة التيار</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="223"/>
-      <source>Battery high temperature disconnect</source>
-      <translation>فصل البطارية ذات درجة الحرارة المرتفعة</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="226"/>
-      <source>Battery low temperature disconnect</source>
-      <translation>فصل البطارية ذات درجة الحرارة المنخفضة</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="229"/>
-      <source>BMS connection lost</source>
-      <translation>اتصال إدارة نظام البطاريات مفقود</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="232"/>
-      <source>ATC Disabled</source>
-      <translation>تعطيل ATC</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="235"/>
-      <source>DC/DC converter not ready</source>
-      <translation>محول الجهد المستمر غير جاهز</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="238"/>
-      <source>DC/DC high primary voltage</source>
-      <translation>ارتفاع الجهد الكهربي الرئيسي للجهد المستمر</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="241"/>
-      <source>DC/DC low primary voltage</source>
-      <translation>انخفاض الجهد الكهربي الرئيسي للجهد المستمر</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="244"/>
-      <source>DC/DC high secondary voltage</source>
-      <translation>ارتفاع الجهد الكهربي الثانوي للجهد المستمر</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="247"/>
-      <source>DC/DC low secondary voltage</source>
-      <translation>انخفاض الجهد الكهربي الثانوي للجهد المستمر</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="250"/>
-      <source>DC/DC high temperature</source>
-      <translation>ارتفاع درجة حرارة الجهد المستمر</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="253"/>
-      <source>DC/DC misconfiguration</source>
-      <translation>خطأ إعداد الجهد المستمر</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
-      <source>Battery temperature sensor defective</source>
-      <translation>مستشعر درجة حرارة البطارية معيب</translation>
-    </message>
-  </context>
-  <context>
-    <name>CRE</name>
-    <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="838"/>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="843"/>
-      <source>Unknown error: </source>
-      <translation>خطأ غير معروف:</translation>
-    </message>
-  </context>
-  <context>
     <name>DEIF</name>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="857"/>
@@ -9480,6 +9187,44 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="247"/>
       <source>Unknown error: </source>
       <translation>خطأ غير معروف:</translation>
+    </message>
+  </context>
+  <context>
+    <name>EnvironmentInputs</name>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <source>Battery</source>
+      <translation>بطارية</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <source>Fridge</source>
+      <translation>المبرد</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <source>Generic</source>
+      <translation>عام</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
+      <source>Room</source>
+      <translation>غرفة</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
+      <source>Outdoor</source>
+      <translation>الخارج</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
+      <source>Water Heater</source>
+      <translation>سخان الماء</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
+      <source>Freezer</source>
+      <translation>ثلاجة تجميد</translation>
     </message>
   </context>
   <context>
@@ -10326,41 +10071,1006 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     </message>
   </context>
   <context>
-    <name>EnvironmentInputs</name>
+    <name>PageAcInSetup</name>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
-      <source>Battery</source>
-      <translation>بطارية</translation>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="124"/>
+      <source>Set the switch in an unlocked position to modify the settings.</source>
+      <translation>اضبط المفتاح في وضع إلغاء القفل لتعديل الإعدادات.</translation>
+    </message>
+  </context>
+  <context>
+    <name>QGuiApplication</name>
+    <message>
+      <location filename="../../src/main.cpp" line="100"/>
+      <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
+      <translation>استخدم مصدر بيانات D-Bus: اتصل بعنوان D-Bus المحدد.</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
-      <source>Fridge</source>
-      <translation>المبرد</translation>
+      <location filename="../../src/main.cpp" line="101"/>
+      <source>address</source>
+      <comment>D-Bus address</comment>
+      <translation>عنوان</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
-      <source>Generic</source>
-      <translation>عام</translation>
+      <location filename="../../src/main.cpp" line="105"/>
+      <source>Use D-Bus data source: connect to the default D-Bus address</source>
+      <translation>استخدم مصدر بيانات D-Bus: اتصل بعنوان D-Bus الافتراضي</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
-      <source>Room</source>
-      <translation>غرفة</translation>
+      <location filename="../../src/main.cpp" line="110"/>
+      <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
+      <translation>استخدم مصدر بيانات MQTT: اتصل بعنوان وسيط MQTT المحدد.</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
-      <source>Outdoor</source>
-      <translation>الخارج</translation>
+      <location filename="../../src/main.cpp" line="111"/>
+      <source>address</source>
+      <comment>MQTT broker address</comment>
+      <translation>عنوان</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
-      <source>Water Heater</source>
-      <translation>سخان الماء</translation>
+      <location filename="../../src/main.cpp" line="116"/>
+      <source>MQTT data source device portal id.</source>
+      <translation>معرف بوابة جهاز مصدر بيانات MQTT.</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
-      <source>Freezer</source>
-      <translation>ثلاجة تجميد</translation>
+      <location filename="../../src/main.cpp" line="117"/>
+      <source>portalId</source>
+      <translation>معرّف البوابة</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="121"/>
+      <source>MQTT VRM webhost shard</source>
+      <translation>جزء مضيف الويب MQTT VRM</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="122"/>
+      <source>shard</source>
+      <comment>MQTT VRM webhost shard</comment>
+      <translation>جزء</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="126"/>
+      <source>MQTT data source username</source>
+      <translation>اسم مستخدم مصدر بيانات MQTT</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="127"/>
+      <source>user</source>
+      <comment>MQTT broker username.</comment>
+      <translation>مستخدم</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="131"/>
+      <source>MQTT data source password</source>
+      <translation>كلمة مرور مصدر بيانات MQTT</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="132"/>
+      <source>pass</source>
+      <comment>MQTT broker password.</comment>
+      <translation>اجتياز</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="136"/>
+      <source>MQTT data source token</source>
+      <translation>رمز مصدر بيانات MQTT</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="137"/>
+      <source>token</source>
+      <comment>MQTT broker auth token.</comment>
+      <translation>رمز</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="141"/>
+      <source>Enable FPS counter</source>
+      <translation>تمكين عداد FPS</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="145"/>
+      <source>Skip splash screen</source>
+      <translation>تخطي شاشة البداية</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="149"/>
+      <source>Use mock data source for testing.</source>
+      <translation>استخدم مصدر بيانات وهميًا للاختبار.</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAfricaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="10"/>
+      <source>Morocco Standard Time</source>
+      <translation>التوقيت المعياري للمغرب</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="11"/>
+      <source>W. Central Africa Standard Time</source>
+      <translation>التوقيت المعياري لغرب وسط أفريقيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="12"/>
+      <source>South Africa Standard Time</source>
+      <translation>التوقيت المعياري لجنوب أفريقيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="13"/>
+      <source>Namibia Standard Time</source>
+      <translation>التوقيت المعياري لناميبيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="14"/>
+      <source>Egypt Standard Time</source>
+      <translation>التوقيت المعياري لمصر</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="15"/>
+      <source>E. Africa Standard Time</source>
+      <translation>التوقيت المعياري لشرق أفريقيا</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAmericaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="10"/>
+      <source>Argentina Standard Time</source>
+      <translation>التوقيت المعياري للأرجنتين</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="11"/>
+      <source>E. South America Standard Time</source>
+      <translation>التوقيت المعياري لشرق جنوب أمريكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="12"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="13"/>
+      <source>Greenland Standard Time</source>
+      <translation>التوقيت المعياري لجرينلاند</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="14"/>
+      <source>Montevideo Standard Time</source>
+      <translation>التوقيت المعياري لمونتفيدو</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="15"/>
+      <source>Newfoundland Standard Time</source>
+      <translation>التوقيت المعياري لنيوفاوندلاند</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="16"/>
+      <source>SA Eastern Standard Time</source>
+      <translation>التوقيت المعياري المنطقة الشرقية لجنوب أمريكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="17"/>
+      <source>Atlantic Standard Time</source>
+      <translation>التوقيت المعياري للأطلسي</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="18"/>
+      <source>Central Brazilian Standard Time</source>
+      <translation>التوقيت المعياري لوسط البرازيل</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="19"/>
+      <source>Pacific SA Standard Time</source>
+      <translation>التوقيت المعياري لمنطقة المحيط الهادئ لجنوب أمريكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="20"/>
+      <source>Paraguay Standard Time</source>
+      <translation>التوقيت المعياري لباراغواي</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="21"/>
+      <source>SA Western Standard Time</source>
+      <translation>التوقيت المعياري لغرب جنوب أمريكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="22"/>
+      <source>Venezuela Standard Time</source>
+      <translation>التوقيت المعياري لفنزويلا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="23"/>
+      <source>Eastern Standard Time</source>
+      <translation>التوقيت المعياري للشرق</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="24"/>
+      <source>SA Pacific Standard Time</source>
+      <translation>التوقيت المعياري لمنطقة المحيط الهادئ لجنوب أمريكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="25"/>
+      <source>US Eastern Standard Time</source>
+      <translation>التوقيت المعياري لشرق الولايات المتحدة</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="26"/>
+      <source>Canada Central Standard Time</source>
+      <translation>التوقيت المعياري لوسط الكندا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="27"/>
+      <source>Central America Standard Time</source>
+      <translation>التوقيت المعياري لوسط أمريكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="28"/>
+      <source>Central Standard Time (Mexico)</source>
+      <translation>التوقيت المعياري للوسط (المكسيك)</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="29"/>
+      <source>Central Standard Time</source>
+      <translation>التوقيت المعياري للوسط</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="30"/>
+      <source>Mountain Standard Time (Mexico)</source>
+      <translation>التوقيت المعياري للجبل (المكسيك)</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="31"/>
+      <source>Mountain Standard Time</source>
+      <translation>التوقيت المعياري للجبل</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="32"/>
+      <source>US Mountain Standard Time</source>
+      <translation>التوقيت المعياري لجبل الولايات المتحدة</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="33"/>
+      <source>Pacific Standard Time (Mexico)</source>
+      <translation>التوقيت المعياري للهادئ (المكسيك)</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="34"/>
+      <source>Pacific Standard Time</source>
+      <translation>التوقيت المعياري للهادئ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="35"/>
+      <source>Alaskan Standard Time</source>
+      <translation>التوقيت المعياري لألاسكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="36"/>
+      <source>Hawaii-Aleutian</source>
+      <translation>التوقيت المعياري لهاواي-إليوتينس</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAntarcticaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="10"/>
+      <source>New Zealand Standard Time</source>
+      <translation>التوقيت المعياري لنيوزيلندا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="11"/>
+      <source>Central Pacific Standard Time</source>
+      <translation>التوقيت المعياري لوسط الهادئ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="12"/>
+      <source>West Pacific Standard Time</source>
+      <translation>التوقيت المعياري لغرب الهادئ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="13"/>
+      <source>W. Australia Standard Time</source>
+      <translation>التوقيت المعياري لغرب أستراليا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="14"/>
+      <source>SE Asia Standard Time</source>
+      <translation>التوقيت المعياري لجنوب شرق آسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="15"/>
+      <source>Central Asia Standard Time</source>
+      <translation>التوقيت المعياري لوسط آسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="16"/>
+      <source>West Asia Standard Time</source>
+      <translation>التوقيت المعياري لغرب آسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="17"/>
+      <source>E. Africa Standard Time</source>
+      <translation>التوقيت المعياري لشرق أفريقيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="18"/>
+      <source>Pacific SA Standard Time</source>
+      <translation>التوقيت المعياري لمنطقة المحيط الهادئ لجنوب أمريكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="19"/>
+      <source>SA Western Standard Time</source>
+      <translation>التوقيت المعياري لغرب جنوب أمريكا</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzArcticData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzArcticData.qml" line="10"/>
+      <source>W. Europe Standard Time</source>
+      <translation>التوقيت المعياري لغرب أوروبا</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAsiaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="10"/>
+      <source>Kamchatka Standard Time</source>
+      <translation>التوقيت المعياري لكامشاتكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="11"/>
+      <source>Magadan Standard Time</source>
+      <translation>التوقيت المعياري لماجادان</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="12"/>
+      <source>Vladivostok Standard Time</source>
+      <translation>التوقيت المعياري لفلاديفوستوك</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="13"/>
+      <source>Yakutsk Standard Time</source>
+      <translation>التوقيت المعياري لياكتسك</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="14"/>
+      <source>Tokyo Standard Time</source>
+      <translation>التوقيت المعياري لطوكيو</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="15"/>
+      <source>Korea Standard Time</source>
+      <translation>التوقيت المعياري لكوريا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="16"/>
+      <source>Singapore Standard Time</source>
+      <translation>التوقيت المعياري لسنغافورة</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="17"/>
+      <source>Ulaanbaatar Standard Time</source>
+      <translation>التوقيت المعياري لأولان باتور</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="18"/>
+      <source>Taipei Standard Time</source>
+      <translation>التوقيت المعياري لتايبيه</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="19"/>
+      <source>North Asia East Standard Time</source>
+      <translation>التوقيت المعياري لشمال شرق آسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="20"/>
+      <source>China Standard Time</source>
+      <translation>التوقيت المعياري للصين</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="21"/>
+      <source>SE Asia Standard Time</source>
+      <translation>التوقيت المعياري لجنوب شرق آسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="22"/>
+      <source>North Asia Standard Time</source>
+      <translation>التوقيت المعياري لشمال آسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="23"/>
+      <source>Myanmar Standard Time</source>
+      <translation>التوقيت المعياري لبورما</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="24"/>
+      <source>N. Central Asia Standard Time</source>
+      <translation>التوقيت المعياري لشمال وسط آسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="25"/>
+      <source>Central Asia Standard Time</source>
+      <translation>التوقيت المعياري لوسط آسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="26"/>
+      <source>Bangladesh Standard Time</source>
+      <translation>التوقيت المعياري لبنغلاديش</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="27"/>
+      <source>Nepal Standard Time</source>
+      <translation>التوقيت المعياري للنيبال</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="28"/>
+      <source>Sri Lanka Standard Time</source>
+      <translation>التوقيت المعياري لسريلانكا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="29"/>
+      <source>India Standard Time</source>
+      <translation>التوقيت المعياري للهند</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="30"/>
+      <source>West Asia Standard Time</source>
+      <translation>التوقيت المعياري لغرب آسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="31"/>
+      <source>Pakistan Standard Time</source>
+      <translation>التوقيت المعياري لباكستان</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="32"/>
+      <source>Ekaterinburg Standard Time</source>
+      <translation>التوقيت المعياري ليكترينبورغ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="33"/>
+      <source>Georgian Standard Time</source>
+      <translation>التوقيت المعياري لجورجيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="34"/>
+      <source>Caucasus Standard Time</source>
+      <translation>التوقيت المعياري للقوقاز</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="35"/>
+      <source>Azerbaijan Standard Time</source>
+      <translation>التوقيت المعياري لأذربجان</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="36"/>
+      <source>Arabian Standard Time</source>
+      <translation>التوقيت المعياري العربي</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="37"/>
+      <source>Afghanistan Standard Time</source>
+      <translation>التوقيت المعياري أفغانستان</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="38"/>
+      <source>Iran Standard Time</source>
+      <translation>التوقيت المعياري لإيران</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="39"/>
+      <source>Arabic Standard Time</source>
+      <translation>التوقيت المعياري العربي</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="40"/>
+      <source>Arab Standard Time</source>
+      <translation>التوقيت المعياري العربي</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="41"/>
+      <source>Syria Standard Time</source>
+      <translation>التوقيت المعياري لسوريا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="42"/>
+      <source>Middle East Standard Time</source>
+      <translation>التوقيت المعياري للشرق الأوسط</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="43"/>
+      <source>Jordan Standard Time</source>
+      <translation>التوقيت المعياري للأردن</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="44"/>
+      <source>Israel Standard Time</source>
+      <translation>التوقيت المعياري لإسرائيل</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAtlanticData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="10"/>
+      <source>Greenwich Standard Time</source>
+      <translation>التوقيت المعياري لغرينتش</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="11"/>
+      <source>Azores Standard Time</source>
+      <translation>التوقيت المعياري للأزور</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="12"/>
+      <source>Cape Verde Standard Time</source>
+      <translation>التوقيت المعياري للرأس الأخضر</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAustraliaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="10"/>
+      <source>Tasmania Standard Time</source>
+      <translation>التوقيت المعياري لتاسمانيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="11"/>
+      <source>E. Australia Standard Time</source>
+      <translation>التوقيت المعياري لشرق أستراليا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="12"/>
+      <source>AUS Eastern Standard Time</source>
+      <translation>التوقيت المعياري لشرق أستراليا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="13"/>
+      <source>Cen. Australia Standard Time</source>
+      <translation>التوقيت المعياري لوسط أستراليا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="14"/>
+      <source>AUS Central Standard Time</source>
+      <translation>التوقيت المعياري لوسط أستراليا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="15"/>
+      <source>W. Australia Standard Time</source>
+      <translation>التوقيت المعياري لغرب أستراليا</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzEtcData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="10"/>
+      <source>GMT +12</source>
+      <translation>توقيت غرنتش +12</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="11"/>
+      <source>GMT </source>
+      <translation>GMT</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="12"/>
+      <source>Mid-Atlantic Standard Time</source>
+      <translation>التوقيت المعياري لوسط الأطلسي</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="13"/>
+      <source>GMT -02</source>
+      <translation>توقيت غرينتش -02</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="14"/>
+      <source>GMT -11</source>
+      <translation>GMT -11</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="15"/>
+      <source>Dateline Standard Time</source>
+      <translation>التوقيت المعياري لخط التاريخ</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzEuropeData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="10"/>
+      <source>GMT Standard Time</source>
+      <translation>التوقيت المعياري لغرينتش</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="11"/>
+      <source>Central Europe Standard Time</source>
+      <translation>التوقيت المعياري لوسط أوروبا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="12"/>
+      <source>Central European Standard Time</source>
+      <translation>التوقيت المعياري لوسط أوروبا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="13"/>
+      <source>Romance Standard Time</source>
+      <translation>التوقيت المعياري لوسط أوروبا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="14"/>
+      <source>W. Europe Standard Time</source>
+      <translation>التوقيت المعياري لغرب أوروبا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="15"/>
+      <source>E. Europe Standard Time</source>
+      <translation>التوقيت المعياري لشرق أوروبا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="16"/>
+      <source>FLE Standard Time</source>
+      <translation>التوقيت المعياري لفنلندا ليتوانيا إستونيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="17"/>
+      <source>GTB Standard Time</source>
+      <translation>التوقيت المعياري لليونان تركيا بلغاريا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="18"/>
+      <source>Belarus Standard Time</source>
+      <translation>التوقيت المعياري لبلاروسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="19"/>
+      <source>Russian Standard Time</source>
+      <translation>التوقيت المعياري لروسيا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="20"/>
+      <source>Turkey Standard Time</source>
+      <translation>التوقيت المعياري لتركيا</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzIndianData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzIndianData.qml" line="10"/>
+      <source>Mauritius Standard Time</source>
+      <translation>التوقيت المعياري لموريشيوس</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzIndianData.qml" line="11"/>
+      <source>Christmas Island Standard Time</source>
+      <translation>الوقت المعياري لجزيرة كريسماس</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzPacificData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="10"/>
+      <source>Tonga Standard Time</source>
+      <translation>التوقيت المعياري لتونغا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="11"/>
+      <source>Fiji Standard Time</source>
+      <translation>التوقيت المعياري لفيجي</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="12"/>
+      <source>New Zealand Standard Time</source>
+      <translation>التوقيت المعياري لنيوزيلندا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="13"/>
+      <source>Central Pacific Standard Time</source>
+      <translation>التوقيت المعياري لوسط الهادئ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="14"/>
+      <source>West Pacific Standard Time</source>
+      <translation>التوقيت المعياري لغرب الهادئ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="15"/>
+      <source>Samoa Standard Time</source>
+      <translation>التوقيت المعياري لساموا</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="16"/>
+      <source>Hawaiian Standard Time</source>
+      <translation>التوقيت المعياري لهاواي</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="17"/>
+      <source>Easter Island Standard Time</source>
+      <translation>الوقت المعياري لجزيرة الفصح</translation>
+    </message>
+  </context>
+  <context>
+    <name>VebusError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="10"/>
+      <source>Device switched off</source>
+      <translation>الجهاز مطفأ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="13"/>
+      <source>Mixed old/new MK2</source>
+      <translation>جديد/قديم MK2 مخلوط</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="16"/>
+      <source>Expected devices error</source>
+      <translation>أخطاء أجهزة مرتقبة</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="19"/>
+      <source>No other device detected</source>
+      <translation>ليست هناك أجهزة أخرى مكتشفة</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="22"/>
+      <source>Overvoltage on AC-out</source>
+      <translation>تيار زائد في التيار المتردد الخارج</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="25"/>
+      <source>DDC program error</source>
+      <translation>خطأ في برنامج DDC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="28"/>
+      <source>VE.Bus BMS without assistant</source>
+      <translation>نظام إدارة البطارية للمسار التجميعي VE بدون مساعد</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="31"/>
+      <source>Ground relay test failed</source>
+      <translation>اختبار مرحل المؤرض قد فشل</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="34"/>
+      <source>System time sync error</source>
+      <translation>خطأ في تزامن وقت النظام</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="37"/>
+      <source>Grid relay test fault</source>
+      <translation>خطأ في فحص مرحل الشبكة</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="40"/>
+      <source>Config mismatch with 2nd mcu</source>
+      <translation>الإعدادات لا تتطابق مع المتحكم الدقيق الثاني</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="43"/>
+      <source>Device transmit error</source>
+      <translation>خطأ في مراسلة الجهاز</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="46"/>
+      <source>Awaiting configuration or dongle missing</source>
+      <translation>قيد انتظار التكوين أو أن الدونجل مفقود</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="49"/>
+      <source>Phase master missing</source>
+      <translation>الوحدة الرئيسية للطور مفقودة</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="52"/>
+      <source>Overvoltage has occurred</source>
+      <translation>قد حصل إفراط بالتيار</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="55"/>
+      <source>Slave does not have AC input!</source>
+      <translation>التابع ليس لديه تيار متردد داخل!</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="58"/>
+      <source>Device can't be slave</source>
+      <translation>هذا الجهاز لا يكون تابعا</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="61"/>
+      <source>System protection initiated</source>
+      <translation>حماية النظام بدأت</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="64"/>
+      <source>Firmware incompatibiltiy</source>
+      <translation>عدم التوافق في البرامج المبيتة</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="67"/>
+      <source>Internal error</source>
+      <translation>خطأ داخلي</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="70"/>
+      <source>Failing relay test prevents connection</source>
+      <translation>يحول فشل اختبار التتابع دون الاتصال</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="73"/>
+      <source>VE.Bus error</source>
+      <translation>خطأ في المسار التجميعي VE</translation>
+    </message>
+  </context>
+  <context>
+    <name>Wakespeed</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="138"/>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="143"/>
+      <source>Unknown error: </source>
+      <translation>خطأ غير معروف:</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="151"/>
+      <source>Internal error</source>
+      <translation>خطأ داخلي</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="156"/>
+      <source>No error</source>
+      <translation>لا يوجد خطأ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="159"/>
+      <source>Battery high temperature</source>
+      <translation>بطارية مرتفعة الحرارة</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="162"/>
+      <source>Battery high voltage</source>
+      <translation>بطارية مرتفعة التيار</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="165"/>
+      <source>Battery low voltage</source>
+      <translation>الجهد الكهربائي للبطارية منخفض</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="168"/>
+      <source>Battery voltage exceeded configured max</source>
+      <translation>جهد البطارية تجاوز الحد الأقصى المحدد</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="175"/>
+      <source>Alternator high temperature</source>
+      <translation>ارتفاع درجة حرارة مولد التيار</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="178"/>
+      <source>Alternator high RPM</source>
+      <translation>ارتفاع عدد دورات مولد التيار</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="181"/>
+      <source>Field drive FET high temperature</source>
+      <translation>ارتفاع درجة حرارة ترانزستور المجال المؤثر لمحرك المجال</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="184"/>
+      <source>Required sensor missing</source>
+      <translation>الحساس المطلوب مفقود</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="187"/>
+      <source>Alternator low voltage</source>
+      <translation>انخفاض الجهد الكهربي لمولد التيار</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="190"/>
+      <source>Alternator high voltage offset</source>
+      <translation>تعديل الجهد الكهربي المرتفع لمولد التيار</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="193"/>
+      <source>Alternator Voltage exceeded configured max</source>
+      <translation>تجاوز الجهد الكهربي لمولد التيار الحد الأقصى المحدد</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="196"/>
+      <source>Alternator high voltage</source>
+      <translation>مولد التيار ذو الجهد العالي</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="199"/>
+      <source>Battery disconnected</source>
+      <translation>فصل البطارية</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="202"/>
+      <source>Battery high voltage disconnect</source>
+      <translation>فصل البطارية عالية الجهد</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="205"/>
+      <source>Battery instance ouf of range</source>
+      <translation>البطارية خارج النطاق</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="208"/>
+      <source>Too many BMS's</source>
+      <translation>عدد كبير للغاية من BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="211"/>
+      <source>Battery about to disconnect</source>
+      <translation>البطارية على وشك الفصل</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="214"/>
+      <source>Too many devices to track</source>
+      <translation>عدد كبير للغاية من الأجهزة التي يتعين تتبعها</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="217"/>
+      <source>Battery low voltage disconnect</source>
+      <translation>فصل البطارية منخفضة الجهد</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="220"/>
+      <source>Battery high current disconnect</source>
+      <translation>فصل البطارية مرتفعة التيار</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="223"/>
+      <source>Battery high temperature disconnect</source>
+      <translation>فصل البطارية ذات درجة الحرارة المرتفعة</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="226"/>
+      <source>Battery low temperature disconnect</source>
+      <translation>فصل البطارية ذات درجة الحرارة المنخفضة</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="229"/>
+      <source>BMS connection lost</source>
+      <translation>اتصال إدارة نظام البطاريات مفقود</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="232"/>
+      <source>ATC Disabled</source>
+      <translation>تعطيل ATC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="235"/>
+      <source>DC/DC converter not ready</source>
+      <translation>محول الجهد المستمر غير جاهز</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="238"/>
+      <source>DC/DC high primary voltage</source>
+      <translation>ارتفاع الجهد الكهربي الرئيسي للجهد المستمر</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="241"/>
+      <source>DC/DC low primary voltage</source>
+      <translation>انخفاض الجهد الكهربي الرئيسي للجهد المستمر</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="244"/>
+      <source>DC/DC high secondary voltage</source>
+      <translation>ارتفاع الجهد الكهربي الثانوي للجهد المستمر</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="247"/>
+      <source>DC/DC low secondary voltage</source>
+      <translation>انخفاض الجهد الكهربي الثانوي للجهد المستمر</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="250"/>
+      <source>DC/DC high temperature</source>
+      <translation>ارتفاع درجة حرارة الجهد المستمر</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="253"/>
+      <source>DC/DC misconfiguration</source>
+      <translation>خطأ إعداد الجهد المستمر</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
+      <source>Battery temperature sensor defective</source>
+      <translation>مستشعر درجة حرارة البطارية معيب</translation>
     </message>
   </context>
 </TS>
