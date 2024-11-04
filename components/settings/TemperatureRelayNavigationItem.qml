@@ -100,20 +100,28 @@ ListNavigationItem {
 	VeQuickItem {
 		id: c0Set
 		uid: settingsBindPrefix + "/0/SetValue"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 
 	VeQuickItem {
 		id: c1Set
 		uid: settingsBindPrefix + "/1/SetValue"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 
 	VeQuickItem {
 		id: c0Clear
 		uid: settingsBindPrefix + "/0/ClearValue"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 
 	VeQuickItem {
 		id: c1Clear
 		uid: settingsBindPrefix + "/1/ClearValue"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 }
