@@ -15,6 +15,7 @@ QtObject {
 	readonly property bool hasGridMeter: _gridDeviceType.isValid
 	readonly property bool hasAcOutSystem: _hasAcOutSystem.isValid && _hasAcOutSystem.value === 1
 	readonly property bool hasVebusEss: _systemType.value === "ESS" || _systemType.value === "Hub-4"
+	readonly property bool hasEss: hasVebusEss || _systemType.value === "AC System"
 	readonly property bool showInputLoads: load.acIn.hasPower
 			&& (hasVebusEss ? (hasGridMeter && _withoutGridMeter.value === 0) : hasGridMeter)
 	readonly property bool feedbackEnabled: _feedbackEnabled.value === 1
