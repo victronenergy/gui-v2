@@ -261,7 +261,7 @@ Page {
 		ListNavigationItem {
 			//% "Scheduled charge levels"
 			text: qsTrId("settings_ess_scheduled_charge_levels")
-			secondaryText: scheduleSoc.valid
+			secondaryText: scheduleSoc.isValid
 					  //% "Active (%1)"
 					? qsTrId("settings_ess_active").arg(scheduleSoc.text)
 					  //% "Inactive"
