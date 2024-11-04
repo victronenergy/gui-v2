@@ -20,6 +20,8 @@ Page {
     readonly property int fsModifiedState: fsModifiedStateItem.isValid ? fsModifiedStateItem.value : -1
     readonly property int systemHooksState: systemHooksStateItem.isValid ? systemHooksStateItem.value : -1
 
+	property bool restoreFirmwareIntegrityPressed: false
+
     function getSystemState() {
         if (fsModifiedState === 0 && systemHooksState === 0) {
             //% "Supported"
@@ -89,15 +91,6 @@ Page {
         } else if (firmwareState == FirmwareUpdater.ErrorDuringChecking) {
             //% ""
             result = "Online check failed"
-        } else if  (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
-            if (progress.value) {
-                //: Firmware update progress. %1 = firmware version, %2 = current update progress
-                //% "Installing %1 %2%"
-                result = qsTrId("settings_firmware_online_installing_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(progress.value)
-            }
-            //: %1 = firmware version
-            //% "Installing %1..."
-            result = qsTrId("settings_firmware_online_installing").arg(Global.firmwareUpdate.onlineAvailableVersion)
         } else {
             //: %1 = firmware version
             //% "No, %1 is available"
@@ -143,6 +136,10 @@ Page {
     VeQuickItem {
         id: firmwareOnlineCheckItem
         uid: Global.venusPlatform.serviceUid + "/Firmware/Online/Check"
+    }
+    VeQuickItem {
+        id: firmwareProgressItem
+        uid: Global.venusPlatform.serviceUid + "/Firmware/Progress"
     }
     VeQuickItem {
         id: firmwareStateItem
@@ -266,11 +263,17 @@ Page {
                                     dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SystemIntegrity/AllModificationsDisabled"
 
                                     onCheckedChanged: {
-                                        // Show the dialog only if it doesn't match the current state
+                                        // Show the dialog only if
+                                        // - restore integrity button was not pressed
+                                        // - it doesn't match the current state
                                         if (
-                                            (!disableAllModifications.checked && systemHooksState < 4)
-                                            ||
-                                            (disableAllModifications.checked && systemHooksState >= 4)
+                                            !restoreFirmwareIntegrityPressed
+                                            &&
+                                            (
+                                                (!disableAllModifications.checked && systemHooksState < 4)
+                                                ||
+                                                (disableAllModifications.checked && systemHooksState >= 4)
+                                            )
                                         ) {
                                             Global.dialogLayer.open(askForRebootDialogComponent)
                                         } else {
@@ -344,7 +347,21 @@ Page {
                                     //% ""
                                     text: "Firmware: Restore integrity"
                                     //% ""
-                                    button.text: "Press to restore"
+                                    button.text: {
+                                        if  (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
+                                            if (firmwareProgressItem.value) {
+                                                //: Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update progress
+                                                //% "Installing %1 %2%"
+                                                qsTrId("settings_firmware_online_installing_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(firmwareProgressItem.value)
+                                            }
+                                            //: %1 = firmware version
+                                            //% "Installing %1..."
+                                            qsTrId("settings_firmware_online_installing").arg(Global.firmwareUpdate.onlineAvailableVersion)
+                                        } else {
+                                            //% ""
+                                            "Press to restore"
+                                        }
+                                    }
                                     writeAccessLevel: VenusOS.User_AccessType_User
                                     onClicked: Global.dialogLayer.open(confirmReinstallDialogComponent)
 
@@ -353,10 +370,11 @@ Page {
 
                                         ModalWarningDialog {
                                             //% ""
-                                            title: "This will disable all modifications, download and reinstall the firmware.<br>Internet connectivity is required.<br>Press 'OK' to continue."
+                                            title: "This will disable all modifications, download and reinstall the latest available firmware.<br>Internet connectivity is required.<br>Press 'OK' to continue."
                                             dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
                                             onClosed: {
                                                 if (result === T.Dialog.Accepted) {
+                                                    restoreFirmwareIntegrityPressed = true
                                                     allModificationsDisabledItem.setValue(1)
                                                     forceFirmwareReinstallItem.setValue(1)
                                                 }
