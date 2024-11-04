@@ -28,12 +28,12 @@ QtObject {
 	}
 
 	readonly property var stateModel: [
-		//% "Keep batteries charged"
-		{ display: qsTrId("ess_state_keep_batteries_charged"), value: VenusOS.Ess_State_KeepBatteriesCharged },
 		//% "Optimized with battery life"
 		{ display: qsTrId("ess_state_optimized_with_battery_life"), value: VenusOS.Ess_State_OptimizedWithBatteryLife },
 		//% "Optimized without battery life"
 		{ display: qsTrId("ess_state_optimized_without_battery_life"), value: VenusOS.Ess_State_OptimizedWithoutBatteryLife },
+		//% "Keep batteries charged"
+		{ display: qsTrId("ess_state_keep_batteries_charged"), value: VenusOS.Ess_State_KeepBatteriesCharged },
 		//% "External control"
 		{ display: qsTrId("ess_state_external_control"), value: VenusOS.Ess_State_ExternalControl },
 	]
