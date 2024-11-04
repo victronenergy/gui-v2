@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="th">
   <context>
-    <name></name>
+    <name/>
     <message id="settings_tailscale_disabled">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="118"/>
       <source>Disabled</source>
@@ -29,6 +29,26 @@
       <source>Auto</source>
       <translation>อัตโนมัติ</translation>
     </message>
+    <message id="common_words_battery">
+      <location filename="../../components/CommonWords.qml" line="83"/>
+      <source>Battery</source>
+      <translation type="unfinished">แบตเตอรี่</translation>
+    </message>
+    <message id="common_words_connected">
+      <location filename="../../components/CommonWords.qml" line="113"/>
+      <source>Connected</source>
+      <translation type="unfinished">เชื่อมต่อแล้ว</translation>
+    </message>
+    <message id="common_words_disconnected">
+      <location filename="../../components/CommonWords.qml" line="146"/>
+      <source>Disconnected</source>
+      <translation type="unfinished">ตัดการเชื่อมต่อ</translation>
+    </message>
+    <message id="common_words_generator">
+      <location filename="../../components/CommonWords.qml" line="177"/>
+      <source>Generator</source>
+      <translation type="unfinished">เครื่องกำเนิดไฟฟ้า</translation>
+    </message>
     <message id="common_words_high_battery_voltage">
       <location filename="../../components/CommonWords.qml" line="186"/>
       <source>High battery voltage</source>
@@ -52,13 +72,12 @@
     <message id="settings_startpage_none">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="53"/>
       <source>None</source>
-      <extracomment>Indicates no phase</extracomment>
       <translation>ไม่มี</translation>
     </message>
     <message id="common_words_position_ac">
       <location filename="../../components/CommonWords.qml" line="359"/>
       <source>Position</source>
-      <extracomment>EVCS AC input/output position</extracomment>
+      <extracomment>AC input or output position</extracomment>
       <translation>ตำแหน่ง</translation>
     </message>
     <message id="common_words_speed">
@@ -88,6 +107,11 @@
       <location filename="../../pages/controlcards/ESSCard.qml" line="50"/>
       <source>Minimum SOC</source>
       <translation>SOC ขั้นต่ำ</translation>
+    </message>
+    <message id="settings_radio_button_group_unknown">
+      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="46"/>
+      <source>Unknown</source>
+      <translation type="unfinished">ไม่รู้จัก</translation>
     </message>
     <message id="settings_radio_button_enter_password">
       <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="175"/>
@@ -234,6 +258,11 @@
       <source>Battery life limit: %1%</source>
       <translation>ขีดจำกัดอายุการใช้งานแบตเตอรี่: %1%</translation>
     </message>
+    <message id="controlcard_generator_label_autostart">
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="60"/>
+      <source>Autostart</source>
+      <translation type="unfinished">เริ่มอัตโนมัติ</translation>
+    </message>
     <message id="controlcard_generator_disableautostartdialog_description">
       <location filename="../../pages/controlcards/GeneratorCard.qml" line="94"/>
       <source>Autostart will be disabled and the generator won't automatically start based on the configured conditions.</source>
@@ -248,6 +277,12 @@
       <location filename="../../components/GeneratorManualControlButton.qml" line="37"/>
       <source>Manual Start</source>
       <translation>เริ่มด้วยตัวเอง</translation>
+    </message>
+    <message id="evcs_ac_position">
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="20"/>
+      <source>Position</source>
+      <extracomment>EVCS AC input/output position</extracomment>
+      <translation type="unfinished">ตำแหน่ง</translation>
     </message>
     <message id="evcs_autostart">
       <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="36"/>
@@ -283,6 +318,11 @@
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="86"/>
       <source>Service</source>
       <translation>บริการ</translation>
+    </message>
+    <message id="settings_dvcc_dvcc">
+      <location filename="../../pages/settings/DvccCommonSettings.qml" line="17"/>
+      <source>DVCC</source>
+      <translation type="unfinished">DVCC</translation>
     </message>
     <message id="settings_dvcc_switch_reset_vebus_after_disabling_dvcc">
       <location filename="../../pages/settings/DvccCommonSettings.qml" line="23"/>
@@ -325,7 +365,7 @@
       <translation>หยุดเมื่อ %1 ต่ำกว่า</translation>
     </message>
     <message id="settings_fronius_remove_ip_address">
-      <location filename="../../pages/settings/IpAddressListView.qml" line="51"/>
+      <location filename="../../pages/settings/IpAddressListView.qml" line="53"/>
       <source>Remove IP address?</source>
       <translation>ลบที่อยู่ IP?</translation>
     </message>
@@ -348,6 +388,11 @@
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="141"/>
       <source>Name</source>
       <translation>ชื่อ</translation>
+    </message>
+    <message id="settings_deviceinfo_name">
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="56"/>
+      <source>Name</source>
+      <translation type="unfinished">ชื่อ</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="66"/>
@@ -424,6 +469,11 @@
       <source>AC output</source>
       <translation>เอาต์พุต AC</translation>
     </message>
+    <message id="ac_output">
+      <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="29"/>
+      <source>AC output</source>
+      <translation type="unfinished">เอาต์พุต AC</translation>
+    </message>
     <message id="page_generator_ac_load_use_ac_load">
       <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="39"/>
       <source>Use AC Load to start/stop</source>
@@ -469,6 +519,16 @@
       <source>Unavailable monitor, set another</source>
       <translation>การตรวจสอบไม่พร้อมใช้งาน ตั้งค่าอื่น</translation>
     </message>
+    <message id="page_generator_conditions_battery_monitor">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="49"/>
+      <source>Battery monitor</source>
+      <translation type="unfinished">การตรวจสอบแบตเตอรี่</translation>
+    </message>
+    <message id="page_generator_conditions_unavailable_monitor_set_another">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="51"/>
+      <source>Unavailable monitor, set another</source>
+      <translation type="unfinished">การตรวจสอบไม่พร้อมใช้งาน ตั้งค่าอื่น</translation>
+    </message>
     <message id="page_generator_conditions_on_loss_of_communication">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="58"/>
       <source>On loss of communication</source>
@@ -493,6 +553,11 @@
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="95"/>
       <source>Battery SOC</source>
       <translation>แบตเตอรี่ SOC</translation>
+    </message>
+    <message id="page_generator_conditions_inverter_high_temperature">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="129"/>
+      <source>Inverter high temperature</source>
+      <translation type="unfinished">อินเวอร์เตอร์อุณหภูมิสูง</translation>
     </message>
     <message id="settings_inverter_high_temperature">
       <location filename="../../data/Generators.qml" line="91"/>
@@ -682,6 +747,16 @@
       <source>Active battery monitor</source>
       <translation>จอภาพแบตเตอรี่ที่ใช้งาน</translation>
     </message>
+    <message id="settings_batteries_name">
+      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="100"/>
+      <source>Name</source>
+      <translation type="unfinished">ชื่อ</translation>
+    </message>
+    <message id="settings_batteries_enter_name">
+      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="102"/>
+      <source>Enter name</source>
+      <translation type="unfinished">ใส่ชื่อ</translation>
+    </message>
     <message id="settings_system_enter_user_defined_name">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
       <source>Enter name</source>
@@ -736,6 +811,11 @@
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="60"/>
       <source>CAN-bus profile</source>
       <translation>โปรไฟล์ CAN บัส</translation>
+    </message>
+    <message id="settings_disabled">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="65"/>
+      <source>Disabled</source>
+      <translation type="unfinished">พิการ</translation>
     </message>
     <message id="settings_canbus_vecan_lynx_ion_bms">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="70"/>
@@ -797,6 +877,11 @@
       <source>Check Unique id numbers</source>
       <translation>ตรวจสอบหมายเลขประจำตัวที่ไม่ซ้ำ</translation>
     </message>
+    <message id="settings_canbus_unique_id_press_to_check">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="183"/>
+      <source>Press to check</source>
+      <translation type="unfinished">กดเพื่อตรวจสอบ</translation>
+    </message>
     <message id="settings_canbus_unique_id_conflict">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="196"/>
       <source>There is another device connected with this unique number, please select a new number.</source>
@@ -838,17 +923,17 @@
       <translation>30 วินาที</translation>
     </message>
     <message id="settings_1_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="95"/>
       <source>1 min</source>
       <translation>1 นาที</translation>
     </message>
     <message id="settings_10_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="99"/>
       <source>10 min</source>
       <translation>10 นาที</translation>
     </message>
     <message id="settings_30_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="103"/>
       <source>30 min</source>
       <translation>30 นาที</translation>
     </message>
@@ -955,6 +1040,11 @@
       <source>Unavailable sensor, set another</source>
       <translation>เซ็นเซอร์ไม่พร้อมใช้งาน ตั้งค่าอื่น</translation>
     </message>
+    <message id="settings_system_unavailable_sensor">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="82"/>
+      <source>Unavailable sensor, set another</source>
+      <translation type="unfinished">เซ็นเซอร์ไม่พร้อมใช้งาน ตั้งค่าอื่น</translation>
+    </message>
     <message id="settings_dvcc_used_sensor">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="103"/>
       <source>Used sensor</source>
@@ -1011,6 +1101,12 @@
       <source>Auto selected</source>
       <translation>เลือกอัตโนมัติ</translation>
     </message>
+    <message id="settings_dvcc_auto_selected_none">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="192"/>
+      <source>None</source>
+      <extracomment>Indicates no option is selected</extracomment>
+      <translation type="unfinished">ไม่มี</translation>
+    </message>
     <message id="settings_build_date_time">
       <location filename="../../pages/settings/PageSettingsFirmware.qml" line="27"/>
       <source>Build date/time</source>
@@ -1046,6 +1142,12 @@
       <source>Installing %1</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>กำลังติดตั้ง %1</translation>
+    </message>
+    <message id="settings_firmware_offline_press_to_install">
+      <location filename="../../pages/settings/PageSettingsFirmwareOffline.qml" line="36"/>
+      <source>Press to update to %1</source>
+      <extracomment>%1 = firmware version</extracomment>
+      <translation type="unfinished">กดเพื่ออัปเดตเป็น %1</translation>
     </message>
     <message id="settings_firmware_online_press_to_update_to">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="93"/>
@@ -1114,6 +1216,12 @@
       <extracomment>Firmware update progress. %1 = firmware version, %2 = current update progress</extracomment>
       <translation>กำลังติดตั้ง %1 %2%</translation>
     </message>
+    <message id="settings_firmware_online_installing">
+      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="89"/>
+      <source>Installing %1...</source>
+      <extracomment>%1 = firmware version</extracomment>
+      <translation type="unfinished">กำลังติดตั้ง %1...</translation>
+    </message>
     <message id="settings_firmware_update_build_date_time">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="112"/>
       <source>Update build date/time</source>
@@ -1145,32 +1253,32 @@
       <translation>พอร์ต TCP</translation>
     </message>
     <message id="page_settings_fronius_inverter_multiphase">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="36"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="30"/>
       <source>Multiphase</source>
       <translation>มัลติเฟส</translation>
     </message>
     <message id="page_settings_fronius_inverter_l1">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="46"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="40"/>
       <source>L1</source>
       <translation>L1</translation>
     </message>
     <message id="page_settings_fronius_inverter_l2">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="48"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="42"/>
       <source>L2</source>
       <translation>L2</translation>
     </message>
     <message id="page_settings_fronius_inverter_l3">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="44"/>
       <source>L3</source>
       <translation>L3 พาวเวอร์</translation>
     </message>
     <message id="page_settings_fronius_inverter_split_phase">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="46"/>
       <source>Split-phase (L1+L2)</source>
       <translation>แยกเฟส (L1+L2)</translation>
     </message>
     <message id="page_settings_fronius_inverter_show">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="59"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="53"/>
       <source>Show</source>
       <translation>แสดง</translation>
     </message>
@@ -1194,6 +1302,16 @@
       <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="61"/>
       <source>AC-Out MP</source>
       <translation>AC-Out ส.ส</translation>
+    </message>
+    <message id="page_setting_fronius_inverters_ac_in1_l">
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="49"/>
+      <source>AC-In1 L%1</source>
+      <translation type="unfinished">เอซีอิน1 L%1</translation>
+    </message>
+    <message id="page_setting_fronius_inverters_ac_in1_phase_unknown">
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="53"/>
+      <source>AC-In1 --</source>
+      <translation type="unfinished">เอซี-อิน1 --</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_out_l">
       <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="67"/>
@@ -1250,10 +1368,20 @@
       <source>Remote support IP and port</source>
       <translation>รองรับ IP และพอร์ตระยะไกล</translation>
     </message>
+    <message id="settings_logout_now">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="273"/>
+      <source>Log out now</source>
+      <translation type="unfinished">ออกจากระบบตอนนี้</translation>
+    </message>
     <message id="settings_reboot_now">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="300"/>
       <source>Reboot now</source>
       <translation>รีบูทเดี๋ยวนี้</translation>
+    </message>
+    <message id="dialoglayer_rebooted">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="328"/>
+      <source>Device has been rebooted.</source>
+      <translation type="unfinished">อุปกรณ์ได้รับการรีบูตแล้ว</translation>
     </message>
     <message id="settings_audible_alarm">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="340"/>
@@ -1493,6 +1621,11 @@ If that doesn't work, check sim-card in a phone to make sure that there is credi
       <source>Ready</source>
       <translation>พร้อม</translation>
     </message>
+    <message id="page_settings_gsm_unknown_error">
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="128"/>
+      <source>Unknown error</source>
+      <translation type="unfinished">ข้อผิดพลาดที่ไม่รู้จัก</translation>
+    </message>
     <message id="page_settings_gsm_pin">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="136"/>
       <source>PIN</source>
@@ -1596,6 +1729,16 @@ Use unless prohibited by the utility provider.</source>
 
 ใช้เว้นแต่จะได้รับอนุญาตจากผู้ให้บริการสาธารณูปโภค</translation>
     </message>
+    <message id="settings_ess_inactive">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="268"/>
+      <source>Inactive</source>
+      <translation type="unfinished">ไม่ใช้งาน</translation>
+    </message>
+    <message id="settings_ess_dynamic">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="298"/>
+      <source>Dynamic ESS</source>
+      <translation type="unfinished">ไดนามิก ESS</translation>
+    </message>
     <message id="settings_rs_ess_min_soc">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="31"/>
       <source>Minimum SOC (unless grid fails)</source>
@@ -1605,6 +1748,16 @@ Use unless prohibited by the utility provider.</source>
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="136"/>
       <source>Active SOC limit</source>
       <translation>ขีด จำกัด SOC ที่ใช้งานอยู่</translation>
+    </message>
+    <message id="settings_ess_battery_life_sustain">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="164"/>
+      <source>Sustain</source>
+      <translation type="unfinished">ยังชีพประคับประคอง</translation>
+    </message>
+    <message id="settings_ess_battery_life_recharge">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="166"/>
+      <source>Recharge</source>
+      <translation type="unfinished">เติมเงิน</translation>
     </message>
     <message id="settings_ess_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="254"/>
@@ -1790,199 +1943,204 @@ Documentation at https://ve3.nl/vol</source>
       <translation>เลื่อนออกไป %1s</translation>
     </message>
     <message id="settings_vrm_portal_id">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="86"/>
       <source>VRM Portal ID</source>
       <translation>รหัสพอร์ทัล VRM</translation>
     </message>
     <message id="settings_log_interval">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="92"/>
       <source>Log interval</source>
       <translation>ช่วงเวลาการบันทึก</translation>
     </message>
     <message id="settings_5_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="97"/>
       <source>5 min</source>
       <translation>5 นาที</translation>
     </message>
     <message id="settings_15_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="101"/>
       <source>15 min</source>
       <translation>15 นาที</translation>
     </message>
     <message id="settings_1_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="105"/>
       <source>1 hour</source>
       <translation>1 ชั่วโมง</translation>
     </message>
     <message id="settings_2_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="107"/>
       <source>2 hours</source>
       <translation>2 ชั่วโมง</translation>
     </message>
     <message id="settings_4_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="109"/>
       <source>4 hours</source>
       <translation>4 ชั่วโมง</translation>
     </message>
     <message id="settings_12_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="111"/>
       <source>12 hours</source>
       <translation>12 ชั่วโมง</translation>
     </message>
     <message id="settings_1_day">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="113"/>
       <source>1 day</source>
       <translation>1 วัน</translation>
     </message>
     <message id="settings_https_enabled">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="122"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="123"/>
       <source>Use secure connection (HTTPS)</source>
       <translation>ใช้การเชื่อมต่อที่ปลอดภัย (HTTPS)</translation>
     </message>
     <message id="settings_last_contact">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="134"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="135"/>
       <source>Last contact</source>
       <translation>ผู้ติดต่อล่าสุด</translation>
     </message>
     <message id="settings_connection_error_150">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="190"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="191"/>
       <source>#150 Unexpected response text</source>
       <translation>#150 ข้อความตอบกลับที่ไม่คาดคิด</translation>
     </message>
     <message id="settings_connection_error_151">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="193"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="194"/>
       <source>#151 Unexpected HTTP response</source>
       <translation>#151 การตอบสนอง HTTP ที่ไม่คาดคิด</translation>
     </message>
     <message id="settings_connection_error_152">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="196"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="197"/>
       <source>#152 Connection timeout</source>
       <translation>#152 หมดเวลาการเชื่อมต่อ</translation>
     </message>
     <message id="settings_connection_error_153">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="199"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="200"/>
       <source>#153 Connection error</source>
       <translation>#153 ข้อผิดพลาดในการเชื่อมต่อ</translation>
     </message>
     <message id="settings_connection_error_154">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="202"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="203"/>
       <source>#154 DNS failure</source>
       <translation>#154 DNS ล้มเหลว</translation>
     </message>
     <message id="settings_connection_error_155">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="205"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="206"/>
       <source>#155 Routing error</source>
       <translation>#155 ข้อผิดพลาดในการกำหนดเส้นทาง</translation>
     </message>
     <message id="settings_connection_error_156">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="208"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="209"/>
       <source>#156 VRM unavailable</source>
       <translation>#156 VRM ไม่พร้อมใช้งาน</translation>
     </message>
     <message id="settings_connection_error_157">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="211"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="212"/>
       <source>#159 Unknown error</source>
       <translation>#159 ข้อผิดพลาดที่ไม่รู้จัก</translation>
     </message>
     <message id="settings_vrm_error_message">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="228"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="229"/>
       <source>Error message: 
 %1</source>
       <translation>ข้อความผิดพลาด:
 %1</translation>
     </message>
     <message id="settings_no_contact_reboot">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="253"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="254"/>
       <source>Reboot device when no contact</source>
       <translation>รีบูตอุปกรณ์เมื่อไม่มีการติดต่อ</translation>
     </message>
     <message id="settings_vrm_no_contact_reset_delay">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="264"/>
       <source>No contact reset delay (hh:mm)</source>
       <translation>ไม่มีความล่าช้าในการรีเซ็ตการติดต่อ (hh:mm)</translation>
     </message>
     <message id="settings_vrm_storage_location">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="269"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="270"/>
       <source>Storage location</source>
       <translation>สถานที่จัดเก็บ</translation>
     </message>
     <message id="settings_vrm_no_buffer_active">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="272"/>
       <source>No buffer active</source>
       <translation>ไม่มีบัฟเฟอร์ที่ใช้งานอยู่</translation>
     </message>
     <message id="settings_vrm_internal_storage">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="274"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="275"/>
       <source>Internal storage</source>
       <translation>ที่เก็บข้อมูลภายใน</translation>
     </message>
     <message id="settings_vrm_transferring">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="276"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="277"/>
       <source>Transferring</source>
       <translation>กำลังโอน</translation>
     </message>
     <message id="settings_vrm_external_storage">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="278"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="279"/>
       <source>External storage</source>
       <translation>จัดเก็บข้อมูลภายนอก</translation>
     </message>
+    <message id="settings_vrm_unknown_error">
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="288"/>
+      <source>Unknown error</source>
+      <translation type="unfinished">ข้อผิดพลาดที่ไม่รู้จัก</translation>
+    </message>
     <message id="settings_vrm_no_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="290"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="291"/>
       <source>No Error</source>
       <translation>ไม่มีข้อผิดพลาด</translation>
     </message>
     <message id="settings_vrm_no_space_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="292"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="293"/>
       <source>No space left on storage</source>
       <translation>ไม่มีพื้นที่เหลือในการจัดเก็บ</translation>
     </message>
     <message id="settings_vrm_io_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="294"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="295"/>
       <source>IO error</source>
       <translation>IO error</translation>
     </message>
     <message id="settings_vrm_mount_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="296"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="297"/>
       <source>Mount error</source>
       <translation>เมานต์ผิดพลาด</translation>
     </message>
     <message id="settings_vrm_storage_contains_firmware_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="298"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="299"/>
       <source>Contains firmware image. Not using.</source>
       <translation>มีอิมเมจเฟิร์มแวร์ ไม่ใช้.</translation>
     </message>
     <message id="settings_vrm_storage_not_writable_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="300"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="301"/>
       <source>SD card / USB stick not writable</source>
       <translation>การ์ด SD / USB stick ไม่สามารถเขียนได้</translation>
     </message>
     <message id="settings_vrm_free_disk_space">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="309"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="310"/>
       <source>Free disk space</source>
       <translation>พื้นที่ว่างในดิสก์</translation>
     </message>
     <message id="settings_vrm_byte">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="312"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="313"/>
       <source>byte</source>
       <translation>ไบต์</translation>
     </message>
     <message id="settings_vrm_bytes">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="314"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="315"/>
       <source>bytes</source>
       <translation>ไบต์</translation>
     </message>
     <message id="settings_vrm_stored_records">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="322"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="323"/>
       <source>Stored records</source>
       <translation>บันทึกที่เก็บไว้</translation>
     </message>
     <message id="settings_vrm_records_count">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="325"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="326"/>
       <source>%1 records</source>
       <translation>%1 บันทึก</translation>
     </message>
     <message id="settings_vrm_oldest_record_age">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="333"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="334"/>
       <source>Oldest record age</source>
       <translation>อายุบันทึกเก่าที่สุด</translation>
     </message>
@@ -2025,6 +2183,17 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="26"/>
       <source>Alarm relay</source>
       <translation>รีเลย์ปลุก</translation>
+    </message>
+    <message id="settings_relay_tank_pump">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="32"/>
+      <source>Tank pump</source>
+      <translation type="unfinished">ปั๊มถัง</translation>
+    </message>
+    <message id="settings_relay_manual">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="34"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="75"/>
+      <source>Manual</source>
+      <translation type="unfinished">คู่มือ</translation>
     </message>
     <message id="settings_relay_alarm_polarity">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="43"/>
@@ -2092,6 +2261,12 @@ Documentation at https://ve3.nl/vol</source>
       <source>Press to boot</source>
       <translation>กดเพื่อบูต</translation>
     </message>
+    <message id="settings_firmware_backup_version">
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="59"/>
+      <source>Firmware %1 (%2)</source>
+      <extracomment>%1 = backup version, %2 = backup version build number</extracomment>
+      <translation type="unfinished">เฟิร์มแวร์ %1 (%2)</translation>
+    </message>
     <message id="settings_firmware_rebooting_to">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="80"/>
       <source>Rebooting to %1</source>
@@ -2113,13 +2288,8 @@ Documentation at https://ve3.nl/vol</source>
       <source>Modbus TCP</source>
       <translation>Modbus TCP</translation>
     </message>
-    <message id="settings_services_console_on_vedirect1">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="54"/>
-      <source>Console on VE.Direct 1</source>
-      <translation>คอนโซลบน VE.Direct 1</translation>
-    </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsServices.qml" line="80"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>CAN บัสผ่าน TCP/IP (ดีบัก)</translation>
     </message>
@@ -2147,6 +2317,16 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="225"/>
       <source>Automatic</source>
       <translation>อัตโนมัติ</translation>
+    </message>
+    <message id="settings_system_grid">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="18"/>
+      <source>Grid</source>
+      <translation type="unfinished">กริด</translation>
+    </message>
+    <message id="settings_system_name_auto">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="44"/>
+      <source>Automatic</source>
+      <translation type="unfinished">อัตโนมัติ</translation>
     </message>
     <message id="settings_system_name_user_defined">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="53"/>
@@ -2208,6 +2388,11 @@ Documentation at https://ve3.nl/vol</source>
       <source>Solar charger current control</source>
       <translation>ตัวควบคุมกระแสไฟชาร์จพลังงานแสงอาทิตย์</translation>
     </message>
+    <message id="settings_system_status_bms_params">
+      <location filename="../../pages/settings/PageSettingsSystemStatus.qml" line="44"/>
+      <source>BMS control</source>
+      <translation type="unfinished">ตัวควบคุม BMS</translation>
+    </message>
     <message id="charger_network_bms_control">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="128"/>
       <source>BMS control</source>
@@ -2223,6 +2408,11 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="47"/>
       <source>Pump state</source>
       <translation>สถานะปั๊ม</translation>
+    </message>
+    <message id="settings_pump_auto">
+      <location filename="../../pages/settings/PageSettingsTankPump.qml" line="56"/>
+      <source>Auto</source>
+      <translation type="unfinished">อัตโนมัติ</translation>
     </message>
     <message id="settings_tank_sensor">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="67"/>
@@ -2289,6 +2479,16 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="221"/>
       <source>IP configuration</source>
       <translation>การกำหนดค่า IP</translation>
+    </message>
+    <message id="settings_tcpip_manual">
+      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="227"/>
+      <source>Manual</source>
+      <translation type="unfinished">คู่มือ</translation>
+    </message>
+    <message id="settings_tcpip_off">
+      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="229"/>
+      <source>Off</source>
+      <translation type="unfinished">ปิด</translation>
     </message>
     <message id="settings_tcpip_fixed">
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="231"/>
@@ -2506,15 +2706,25 @@ Documentation at https://ve3.nl/vol</source>
       <translation>การตั้งค่าโหมด</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="101"/>
+      <location filename="../../data/SystemSettings.qml" line="103"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>สแตนด์อโลน</translation>
+    </message>
+    <message id="charger_standalone">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="45"/>
+      <source>Standalone</source>
+      <translation type="unfinished">สแตนด์อโลน</translation>
     </message>
     <message id="charger_charge">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="48"/>
       <source>Charge</source>
       <translation>โหลด</translation>
+    </message>
+    <message id="charger_external_control">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="51"/>
+      <source>External control</source>
+      <translation type="unfinished">การควบคุมภายนอก</translation>
     </message>
     <message id="charger_charge_hub_1">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="54"/>
@@ -2546,8 +2756,13 @@ Documentation at https://ve3.nl/vol</source>
       <source>Master setting</source>
       <translation>การตั้งค่าหลัก</translation>
     </message>
+    <message id="charger_slave">
+      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="85"/>
+      <source>Slave</source>
+      <translation type="unfinished">ตัวรอง</translation>
+    </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="85"/>
+      <location filename="../../data/SystemSettings.qml" line="87"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>ตัวรอง</translation>
@@ -2575,13 +2790,17 @@ Documentation at https://ve3.nl/vol</source>
     <message id="common_words_reset">
       <location filename="../../components/CommonWords.qml" line="388"/>
       <source>Reset</source>
-      <extracomment>Reset the BMS control</extracomment>
       <translation>รีเซ็ต</translation>
     </message>
     <message id="charger_network_bms_control_info">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="140"/>
       <source>BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present.</source>
       <translation>การควบคุม BMS จะถูกเปิดใช้งานโดยอัตโนมัติเมื่อมี BMS รีเซ็ตหากการกำหนดค่าระบบเปลี่ยนแปลงหรือหากไม่มี BMS</translation>
+    </message>
+    <message id="charger_total_pv_power">
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="50"/>
+      <source>Total PV Power</source>
+      <translation type="unfinished">พลัง PV ทั้งหมด</translation>
     </message>
     <message id="charger_load">
       <location filename="../../pages/solar/SolarChargerPage.qml" line="116"/>
@@ -2594,10 +2813,16 @@ Documentation at https://ve3.nl/vol</source>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>พบ %1</translation>
     </message>
+    <message id="charger_history_name">
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="188"/>
+      <source>%1 History</source>
+      <extracomment>Solar charger historic data information. %1 = charger name</extracomment>
+      <translation type="unfinished">%1 ประวัติศาสตร์</translation>
+    </message>
     <message id="settings_multirs_history_name">
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="114"/>
       <source>%1 History</source>
-      <extracomment>Solar charger historic data information. %1 = charger name</extracomment>
+      <extracomment>Multi RS historic PV data information. %1 = Multi RS name</extracomment>
       <translation>%1 ประวัติศาสตร์</translation>
     </message>
     <message id="charger_networked_operation">
@@ -2621,16 +2846,22 @@ Documentation at https://ve3.nl/vol</source>
       <extracomment>Voltage alarm is at "Warning" level</extracomment>
       <translation>คำเตือน</translation>
     </message>
+    <message id="listitems_alarm_level_alarm">
+      <location filename="../../components/listitems/ListAlarm.qml" line="25"/>
+      <source>Alarm</source>
+      <extracomment>Voltage alarm is at "Alarm" level</extracomment>
+      <translation type="unfinished">เตือน</translation>
+    </message>
     <message id="digitalinputs_state_alarm">
       <location filename="../../data/DigitalInputs.qml" line="80"/>
       <source>Alarm</source>
-      <extracomment>Relay function is 'alarm'</extracomment>
+      <extracomment>Digital input is in 'alarm' state</extracomment>
       <translation>เตือน</translation>
     </message>
     <message id="components_volumeunit_volume">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="56"/>
       <source>Volume</source>
-      <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
+      <extracomment>Title for a list of units of volume (e.g. cubic meters, liters, gallons)</extracomment>
       <translation>ปริมาณ</translation>
     </message>
     <message id="tank_status_short_circuited">
@@ -2778,10 +3009,26 @@ Documentation at https://ve3.nl/vol</source>
       <source>Relay function</source>
       <translation>ฟังก์ชั่นรีเลย์</translation>
     </message>
+    <message id="batterysettingrelay_alarm">
+      <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="31"/>
+      <source>Alarm</source>
+      <extracomment>Relay function is 'alarm'</extracomment>
+      <translation type="unfinished">เตือน</translation>
+    </message>
     <message id="batterysettingrelay_charger_or_generator_start_stop">
       <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="33"/>
       <source>Charger or generator start/stop</source>
       <translation>ชาร์จเจอร์หรือเครื่องกำเนิดไฟฟ้า เริ่ม/หยุด</translation>
+    </message>
+    <message id="batterysettingrelay_manual_control">
+      <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="35"/>
+      <source>Manual control</source>
+      <translation type="unfinished">ควบคุมด้วยมือ</translation>
+    </message>
+    <message id="batterysettingrelay_fuse_blown">
+      <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="122"/>
+      <source>Fuse blown</source>
+      <translation type="unfinished">ฟิวส์ขาด</translation>
     </message>
     <message id="common_words_manual_control">
       <location filename="../../components/CommonWords.qml" line="256"/>
@@ -2807,6 +3054,12 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="18"/>
       <source>Status LEDs</source>
       <translation>ไฟ LED แสดงสถานะ</translation>
+    </message>
+    <message id="batterydiagnostics_none">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="42"/>
+      <source>None</source>
+      <extracomment>Indicates no alarm is set</extracomment>
+      <translation type="unfinished">ไม่มี</translation>
     </message>
     <message id="batterydiagnostics_main_switch">
       <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="48"/>
@@ -2836,7 +3089,7 @@ Documentation at https://ve3.nl/vol</source>
     <message id="common_words_switch">
       <location filename="../../components/CommonWords.qml" line="462"/>
       <source>Switch</source>
-      <extracomment>Change the battery mode</extracomment>
+      <extracomment>Change the mode value</extracomment>
       <translation>สวิตช์</translation>
     </message>
     <message id="devicelist_battery_initializing">
@@ -2904,6 +3157,21 @@ Documentation at https://ve3.nl/vol</source>
       <source>Top section voltage</source>
       <translation>แรงดันไฟฟ้าส่วนบน</translation>
     </message>
+    <message id="battery_bank_error_communication">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="95"/>
+      <source>Communication error</source>
+      <translation type="unfinished">ข้อผิดพลาดในการสื่อสาร</translation>
+    </message>
+    <message id="battery_state_of_health">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="161"/>
+      <source>State of health</source>
+      <translation type="unfinished">สถานะของสุขภาพ</translation>
+    </message>
+    <message id="battery_bus_voltage">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="191"/>
+      <source>Bus voltage</source>
+      <translation type="unfinished">แรงดันบัส</translation>
+    </message>
     <message id="battery_bottom_section_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="207"/>
       <source>Bottom section voltage</source>
@@ -2964,6 +3232,11 @@ Documentation at https://ve3.nl/vol</source>
       <source>Redetect Battery</source>
       <translation>ตรวจหาแบตเตอรี่อีกครั้ง</translation>
     </message>
+    <message id="battery_press_to_redetect">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="420"/>
+      <source>Press to redetect</source>
+      <translation type="unfinished">กดเพื่อตรวจหาอีกครั้ง</translation>
+    </message>
     <message id="vebus_device_press_to_redetect">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="198"/>
       <source>Press to redetect</source>
@@ -2989,6 +3262,16 @@ Documentation at https://ve3.nl/vol</source>
       <source>Low SOC</source>
       <translation>SOC ต่ำ</translation>
     </message>
+    <message id="batteryalarms_high_battery_voltage">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="24"/>
+      <source>High battery voltage</source>
+      <translation type="unfinished">แรงดันแบตเตอรี่สูง</translation>
+    </message>
+    <message id="batteryalarms_low_soc">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
+      <source>Low SOC</source>
+      <translation type="unfinished">SOC ต่ำ</translation>
+    </message>
     <message id="batteryalarms_low_starter_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="59"/>
       <source>Low starter voltage</source>
@@ -3008,6 +3291,11 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="92"/>
       <source>Mid-point voltage</source>
       <translation>แรงดันไฟฟ้าจุดกึ่งกลาง</translation>
+    </message>
+    <message id="batteryalarms_fuse_blown">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="99"/>
+      <source>Fuse blown</source>
+      <translation type="unfinished">ฟิวส์ขาด</translation>
     </message>
     <message id="batteryalarms_high_internal_temperature">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="106"/>
@@ -3241,6 +3529,11 @@ Documentation at https://ve3.nl/vol</source>
       <source>Capacity</source>
       <translation>ความจุ</translation>
     </message>
+    <message id="batterysettingsbattery_capacity">
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="39"/>
+      <source>Capacity</source>
+      <translation type="unfinished">ความจุ</translation>
+    </message>
     <message id="batterysettingsbattery_charged_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="48"/>
       <source>Charged voltage</source>
@@ -3316,6 +3609,11 @@ Documentation at https://ve3.nl/vol</source>
       <source>No power on busbar</source>
       <translation>ไม่มีไฟบนบัสบาร์</translation>
     </message>
+    <message id="lynxdistributor_connection_lost">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="49"/>
+      <source>Connection lost</source>
+      <translation type="unfinished">ขาดการเชื่อมต่อ</translation>
+    </message>
     <message id="lynxdistributor_count_fuses_blown" numerus="yes">
       <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="61"/>
       <source>%n fuse(s) blown</source>
@@ -3350,6 +3648,26 @@ Documentation at https://ve3.nl/vol</source>
       <source>Shutdowns due error</source>
       <translation>ปิดระบบเนื่องจากข้อผิดพลาด</translation>
     </message>
+    <message id="lynxiondiagnostics_last_error">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml" line="29"/>
+      <source>Last error</source>
+      <translation type="unfinished">ข้อผิดพลาดล่าสุด</translation>
+    </message>
+    <message id="lynxiondiagnostics_2nd_last_error">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml" line="31"/>
+      <source>2nd last error</source>
+      <translation type="unfinished">ผิดพลาดครั้งที่ 2</translation>
+    </message>
+    <message id="lynxiondiagnostics_3rd_last_error">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml" line="33"/>
+      <source>3rd last error</source>
+      <translation type="unfinished">ผิดพลาดครั้งที่ 3</translation>
+    </message>
+    <message id="lynxiondiagnostics_4th_last_error">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml" line="35"/>
+      <source>4th last error</source>
+      <translation type="unfinished">ผิดพลาดครั้งที่ 4</translation>
+    </message>
     <message id="lynxionio_system_switch">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="18"/>
       <source>System Switch</source>
@@ -3369,6 +3687,16 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/battery/BatteryListPage.qml" line="15"/>
       <source>Batteries</source>
       <translation>แบตเตอรี่</translation>
+    </message>
+    <message id="lynxionsystem_capacity">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="18"/>
+      <source>Capacity</source>
+      <translation type="unfinished">ความจุ</translation>
+    </message>
+    <message id="lynxionsystem_batteries">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="25"/>
+      <source>Batteries</source>
+      <translation type="unfinished">แบตเตอรี่</translation>
     </message>
     <message id="lynxionsystem_parallel">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="31"/>
@@ -3390,10 +3718,20 @@ Documentation at https://ve3.nl/vol</source>
       <source>Min/max cell temperature</source>
       <translation>อุณหภูมิเซลล์ต่ำสุด/สูงสุด</translation>
     </message>
+    <message id="lynxionsystem_balancing">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="89"/>
+      <source>Balancing</source>
+      <translation type="unfinished">การทรงตัว</translation>
+    </message>
     <message id="lynxionsystem_balancer_balancing">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="107"/>
       <source>Balancing</source>
       <translation>การทรงตัว</translation>
+    </message>
+    <message id="lynxionsystem_balancer_unknown">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="114"/>
+      <source>Unknown</source>
+      <translation type="unfinished">ไม่รู้จัก</translation>
     </message>
     <message id="dc_output">
       <location filename="../../components/settings/ListDcOutputQuantityGroup.qml" line="16"/>
@@ -3501,6 +3839,11 @@ Documentation at https://ve3.nl/vol</source>
       <source>Remaining</source>
       <translation>ที่เหลืออยู่</translation>
     </message>
+    <message id="devicelist_tanksensor_sensor_battery">
+      <location filename="../../pages/settings/devicelist/tank/PageTankSensor.qml" line="46"/>
+      <source>Sensor battery</source>
+      <translation type="unfinished">แบตเตอรี่เซนเซอร์</translation>
+    </message>
     <message id="temperature_sensor_battery">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="78"/>
       <source>Sensor battery</source>
@@ -3530,6 +3873,11 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="113"/>
       <source>Custom</source>
       <translation>กำหนดเอง</translation>
+    </message>
+    <message id="devicelist_tanksetup_custom">
+      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="54"/>
+      <source>Custom</source>
+      <translation type="unfinished">กำหนดเอง</translation>
     </message>
     <message id="devicelist_tanksetup_sensor_value_when_empty">
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="60"/>
@@ -3583,6 +3931,12 @@ Documentation at https://ve3.nl/vol</source>
       <extracomment>The sensor level (as a percentage) for this tank shape point</extracomment>
       <translation>ระดับเซนเซอร์</translation>
     </message>
+    <message id="devicelist_tankshape_volume">
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="170"/>
+      <source>Volume</source>
+      <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
+      <translation type="unfinished">ปริมาณ</translation>
+    </message>
     <message id="devicelist_tankshape_duplicate_sensor_level">
       <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="229"/>
       <source>Duplicate sensor level values are not allowed.</source>
@@ -3629,6 +3983,11 @@ Documentation at https://ve3.nl/vol</source>
       <source>Switch position</source>
       <translation>สลับตำแหน่ง</translation>
     </message>
+    <message id="ac-in-setup_single_phase">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="137"/>
+      <source>Single phase</source>
+      <translation type="unfinished">เฟสเดียว</translation>
+    </message>
     <message id="ac-in-setup_two_phase">
       <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="139"/>
       <source>2-phase</source>
@@ -3639,6 +3998,11 @@ Documentation at https://ve3.nl/vol</source>
       <source>3-phase</source>
       <translation>3 เฟส</translation>
     </message>
+    <message id="ac-in-setup_devices">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="156"/>
+      <source>Devices</source>
+      <translation type="unfinished">อุปกรณ์</translation>
+    </message>
     <message id="ac-in-genset_ac">
       <location filename="../../components/PageGensetModel.qml" line="158"/>
       <source>AC</source>
@@ -3648,6 +4012,16 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../components/PageGensetModel.qml" line="197"/>
       <source>Engine</source>
       <translation>เครื่องยนต์</translation>
+    </message>
+    <message id="ac-in-genset_speed">
+      <location filename="../../components/PageGensetModel.qml" line="210"/>
+      <source>Speed</source>
+      <translation type="unfinished">ความเร็ว</translation>
+    </message>
+    <message id="ac-in-genset_load">
+      <location filename="../../components/PageGensetModel.qml" line="217"/>
+      <source>Load</source>
+      <translation type="unfinished">โหลด</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
       <location filename="../../components/PageGensetModel.qml" line="241"/>
@@ -3673,6 +4047,11 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../components/PageGensetModel.qml" line="278"/>
       <source>Number of starts</source>
       <translation>จำนวนการเริ่มต้น</translation>
+    </message>
+    <message id="genset_bms_control">
+      <location filename="../../components/PageGensetModel.qml" line="369"/>
+      <source>BMS control</source>
+      <translation type="unfinished">ตัวควบคุม BMS</translation>
     </message>
     <message id="ac-in-modeldefault_front_selector_locked">
       <location filename="../../components/settings/ListAcInError.qml" line="23"/>
@@ -3731,6 +4110,12 @@ Documentation at https://ve3.nl/vol</source>
       <extracomment>%1 = CT device number</extracomment>
       <translation>กะรัต %1</translation>
     </message>
+    <message id="smappeect_phase_none">
+      <location filename="../../pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml" line="53"/>
+      <source>None</source>
+      <extracomment>Indicates no phase</extracomment>
+      <translation type="unfinished">ไม่มี</translation>
+    </message>
     <message id="smappeect_flashing_led_indicates_this_ct">
       <location filename="../../pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml" line="62"/>
       <source>Flashing LED indicates this CT</source>
@@ -3773,6 +4158,16 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="20"/>
       <source>Inverted</source>
       <translation>คว่ำ</translation>
+    </message>
+    <message id="digitalinput_enable_alarm">
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="40"/>
+      <source>Enable alarm</source>
+      <translation type="unfinished">เปิดใช้งานการเตือน</translation>
+    </message>
+    <message id="digitalinput_inverted">
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="46"/>
+      <source>Inverted</source>
+      <translation type="unfinished">คว่ำ</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
       <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="52"/>
@@ -3839,6 +4234,16 @@ Documentation at https://ve3.nl/vol</source>
       <source>Reset counter</source>
       <translation>รีเซ็ตตัวนับ</translation>
     </message>
+    <message id="temperature_short_circuited">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="38"/>
+      <source>Short circuited</source>
+      <translation type="unfinished">ลัดวงจร</translation>
+    </message>
+    <message id="temperature_reverse_polarity">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="41"/>
+      <source>Reverse polarity</source>
+      <translation type="unfinished">ขั้วย้อนกลับ</translation>
+    </message>
     <message id="temperature_sensor_battery_low">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="44"/>
       <source>Sensor battery low</source>
@@ -3853,6 +4258,11 @@ Documentation at https://ve3.nl/vol</source>
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="68"/>
       <source>Pressure</source>
       <translation>ความกดดัน</translation>
+    </message>
+    <message id="temperature_sensor_battery_status_low">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="99"/>
+      <source>Low</source>
+      <translation type="unfinished">ต่ำ</translation>
     </message>
     <message id="temperature_offset">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="43"/>
@@ -3906,10 +4316,20 @@ NOTE: The update might temporarily stop the system.</source>
       <source>Updating the MK3, values will reappear after the update is complete</source>
       <translation>การอัปเดต MK3 ค่าต่างๆ จะปรากฏขึ้นอีกครั้งหลังจากการอัปเดตเสร็จสิ้น</translation>
     </message>
+    <message id="vebus_device_charging_to_100">
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="141"/>
+      <source>Charging the battery to 100%</source>
+      <translation type="unfinished">ชาร์จแบตเตอรี่ให้เต็ม 100%</translation>
+    </message>
     <message id="vebus_device_charging_the_battery_to_100">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="156"/>
       <source>Charging the battery to 100%</source>
       <translation>ชาร์จแบตเตอรี่ให้เต็ม 100%</translation>
+    </message>
+    <message id="vebus_device_page_advanced">
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="252"/>
+      <source>Advanced</source>
+      <translation type="unfinished">ขั้นสูง</translation>
     </message>
     <message id="vebus_device_in_progress">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="143"/>
@@ -4021,6 +4441,11 @@ Do you want to continue?</source>
       <source>Starting...</source>
       <translation>เริ่ม...</translation>
     </message>
+    <message id="vebus_device_starting">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="107"/>
+      <source>Starting...</source>
+      <translation type="unfinished">เริ่ม...</translation>
+    </message>
     <message id="vebus_device_press_to_interrupt">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="110"/>
       <source>Press to interrupt</source>
@@ -4085,6 +4510,16 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="235"/>
       <source>ESS Relay test</source>
       <translation>การทดสอบรีเลย์ ESS</translation>
+    </message>
+    <message id="vebus_device_ess_relay_test_completed">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="241"/>
+      <source>Completed</source>
+      <translation type="unfinished">สมบูรณ์</translation>
+    </message>
+    <message id="vebus_device_ess_relay_test_pending">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="243"/>
+      <source>Pending</source>
+      <translation type="unfinished">รอดำเนินการ</translation>
     </message>
     <message id="cycle_history_completed">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="31"/>
@@ -4271,7 +4706,6 @@ Do you want to continue?</source>
     <message id="rssystemalarms_overload">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="48"/>
       <source>Overload</source>
-      <extracomment>Alarm configuration when 'overload' state is triggered</extracomment>
       <translation>โอเวอร์โหลด</translation>
     </message>
     <message id="common_words_alarm_setting_dc_ripple">
@@ -4284,6 +4718,11 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml" line="16"/>
       <source>Voltage Sensor</source>
       <translation>เซ็นเซอร์แรงดันไฟฟ้า</translation>
+    </message>
+    <message id="vebus_device_phase_rotation">
+      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml" line="19"/>
+      <source>Phase rotation</source>
+      <translation type="unfinished">การหมุนเฟส</translation>
     </message>
     <message id="rssystemalarms_phase_rotation">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="27"/>
@@ -4344,7 +4783,7 @@ Do you want to continue?</source>
     <message id="common_words_ac_input_role">
       <location filename="../../components/CommonWords.qml" line="21"/>
       <source>Role</source>
-      <extracomment>The role for an AC input (grid meter, genset, acload, etc.)</extracomment>
+      <extracomment>The role for an AC input (grid, genset, acload, etc.)</extracomment>
       <translation>หน้าที่</translation>
     </message>
     <message id="common_words_ac_load">
@@ -4383,6 +4822,18 @@ Do you want to continue?</source>
       <source>Active</source>
       <extracomment>Status is 'active'</extracomment>
       <translation>คล่องแคล่ว</translation>
+    </message>
+    <message id="common_words_alarm">
+      <location filename="../../components/CommonWords.qml" line="48"/>
+      <source>Alarm</source>
+      <extracomment>Voltage alarm is at "Alarm" level</extracomment>
+      <translation type="unfinished">เตือน</translation>
+    </message>
+    <message id="common_words_alarm_setting_overload">
+      <location filename="../../components/CommonWords.qml" line="52"/>
+      <source>Overload</source>
+      <extracomment>Alarm configuration when 'overload' state is triggered</extracomment>
+      <translation type="unfinished">โอเวอร์โหลด</translation>
     </message>
     <message id="common_words_alarm_status">
       <location filename="../../components/CommonWords.qml" line="62"/>
@@ -4479,6 +4930,11 @@ Do you want to continue?</source>
       <source>Device</source>
       <extracomment>Title for device information</extracomment>
       <translation>อุปกรณ์</translation>
+    </message>
+    <message id="common_words_disabled">
+      <location filename="../../components/CommonWords.qml" line="140"/>
+      <source>Disabled</source>
+      <translation type="unfinished">พิการ</translation>
     </message>
     <message id="common_words_discharging">
       <location filename="../../components/CommonWords.qml" line="143"/>
@@ -4579,6 +5035,11 @@ Do you want to continue?</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation>ไม่ใช้งาน</translation>
     </message>
+    <message id="common_words_inverter_charger">
+      <location filename="../../components/CommonWords.qml" line="218"/>
+      <source>Inverter / Charger</source>
+      <translation type="unfinished">อินเวอร์เตอร์/เครื่องชาร์จ</translation>
+    </message>
     <message id="common_words_ip_address">
       <location filename="../../components/CommonWords.qml" line="228"/>
       <source>IP address</source>
@@ -4661,7 +5122,7 @@ Do you want to continue?</source>
       <translation>ไม่มีข้อผิดพลาด</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="91"/>
+      <location filename="../../data/AcInputs.qml" line="108"/>
       <source>Not available</source>
       <translation>ไม่ว่าง</translation>
     </message>
@@ -5256,6 +5717,11 @@ Do you want to continue?</source>
       <source>Self-consumption above limit</source>
       <translation>การใช้งานเกินขีดจำกัด</translation>
     </message>
+    <message id="cgwacs_battery_schedule_pv">
+      <location filename="../../components/settings/ChargeScheduleItem.qml" line="170"/>
+      <source>PV</source>
+      <translation type="unfinished">PV</translation>
+    </message>
     <message id="settings_multirs_pv">
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="198"/>
       <source>PV</source>
@@ -5275,6 +5741,12 @@ Do you want to continue?</source>
       <location filename="../../components/settings/ListAlarmState.qml" line="11"/>
       <source>Alarm state</source>
       <translation>สถานะปลุก</translation>
+    </message>
+    <message id="devicelist_battery_alarm_state">
+      <location filename="../../components/settings/ListAlarmState.qml" line="19"/>
+      <source>Alarm</source>
+      <extracomment>Alarm state is active</extracomment>
+      <translation type="unfinished">เตือน</translation>
     </message>
     <message id="clear_history_button_clear_history">
       <location filename="../../components/settings/ListClearHistoryButton.qml" line="15"/>
@@ -5436,6 +5908,11 @@ Do you want to continue?</source>
       <source>Max Voltage</source>
       <translation>แรงดันไฟฟ้าสูงสุด</translation>
     </message>
+    <message id="charger_history_box_max_voltage">
+      <location filename="../../components/SolarDetailBox.qml" line="64"/>
+      <source>Max Voltage</source>
+      <translation type="unfinished">แรงดันไฟฟ้าสูงสุด</translation>
+    </message>
     <message id="charger_history_box_max_current">
       <location filename="../../components/SolarDetailBox.qml" line="70"/>
       <source>Max Current</source>
@@ -5446,6 +5923,24 @@ Do you want to continue?</source>
       <source>Charge time</source>
       <extracomment>Statistics for battery charging time</extracomment>
       <translation>เวลาชาร์จ</translation>
+    </message>
+    <message id="charger_history_box_bulk">
+      <location filename="../../components/SolarDetailBox.qml" line="136"/>
+      <source>Bulk</source>
+      <extracomment>Battery: time spent in 'Bulk' mode</extracomment>
+      <translation type="unfinished">จำนวนมาก</translation>
+    </message>
+    <message id="charger_history_box_float">
+      <location filename="../../components/SolarDetailBox.qml" line="148"/>
+      <source>Float</source>
+      <extracomment>Battery: time spent in 'Float' mode</extracomment>
+      <translation type="unfinished">ลอย</translation>
+    </message>
+    <message id="charger_history_hr">
+      <location filename="../../components/SolarDetailBox.qml" line="174"/>
+      <source>hr</source>
+      <extracomment>Abbreviation of "hour"</extracomment>
+      <translation type="unfinished">ชม</translation>
     </message>
     <message id="solarchargers_state_bulk">
       <location filename="../../data/SolarChargers.qml" line="57"/>
@@ -5517,6 +6012,11 @@ Do you want to continue?</source>
       <source>Connecting</source>
       <translation>กำลังเชื่อมต่อ</translation>
     </message>
+    <message id="splash_view_connecting">
+      <location filename="../../components/SplashView.qml" line="236"/>
+      <source>Connecting</source>
+      <translation type="unfinished">กำลังเชื่อมต่อ</translation>
+    </message>
     <message id="splash_view_connected">
       <location filename="../../components/SplashView.qml" line="238"/>
       <source>Connected, awaiting broker messages</source>
@@ -5578,7 +6078,7 @@ Do you want to continue?</source>
       <translation>ปลุกเงียบ</translation>
     </message>
     <message id="vebus_device_page_total_power">
-      <location filename="../../components/ThreePhaseQuantityTable.qml" line="76"/>
+      <location filename="../../components/ThreePhaseQuantityTable.qml" line="77"/>
       <source>Total Power</source>
       <translation>พลังทั้งหมด</translation>
     </message>
@@ -5627,10 +6127,20 @@ Do you want to continue?</source>
       <source>Retrieving IP address</source>
       <translation>กำลังเรียกที่อยู่ IP</translation>
     </message>
+    <message id="utils_connman_connected">
+      <location filename="../../components/Utils.js" line="280"/>
+      <source>Connected</source>
+      <translation type="unfinished">เชื่อมต่อแล้ว</translation>
+    </message>
     <message id="utils_connman_disconnect">
       <location filename="../../components/Utils.js" line="283"/>
       <source>Disconnect</source>
       <translation>ตัดการเชื่อมต่อ</translation>
+    </message>
+    <message id="utils_connman_disconnected">
+      <location filename="../../components/Utils.js" line="287"/>
+      <source>Disconnected</source>
+      <translation type="unfinished">ตัดการเชื่อมต่อ</translation>
     </message>
     <message id="overview_widget_acloads_title">
       <location filename="../../components/widgets/AcLoadsWidget.qml" line="17"/>
@@ -5654,24 +6164,29 @@ Do you want to continue?</source>
       <translation>ลม</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="98"/>
+      <location filename="../../data/AcInputs.qml" line="115"/>
       <source>Shore</source>
       <translation>ชายฝั่ง</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="124"/>
+      <location filename="../../data/AcInputs.qml" line="141"/>
       <source>Grid current limit</source>
       <translation>ขีด จำกัด ปัจจุบันของกริด</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="127"/>
+      <location filename="../../data/AcInputs.qml" line="144"/>
       <source>Generator current limit</source>
       <translation>ขีด จำกัด กระแสไฟของเครื่องกำเนิดไฟฟ้า</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="130"/>
+      <location filename="../../data/AcInputs.qml" line="147"/>
       <source>Shore current limit</source>
       <translation>ขีดจำกัดกระแสฝั่ง</translation>
+    </message>
+    <message id="acInputs_statusCode_stopping">
+      <location filename="../../data/AcInputs.qml" line="169"/>
+      <source>Stopping</source>
+      <translation type="unfinished">หยุด</translation>
     </message>
     <message id="page_generator_stopping">
       <location filename="../../data/Generators.qml" line="55"/>
@@ -5746,19 +6261,24 @@ Do you want to continue?</source>
       <translation>สูง</translation>
     </message>
     <message id="ess_state_keep_batteries_charged">
-      <location filename="../../data/Ess.qml" line="32"/>
+      <location filename="../../data/Ess.qml" line="36"/>
       <source>Keep batteries charged</source>
       <translation>เก็บแบตเตอรี่ไว้</translation>
     </message>
     <message id="ess_state_optimized_with_battery_life">
-      <location filename="../../data/Ess.qml" line="34"/>
+      <location filename="../../data/Ess.qml" line="32"/>
       <source>Optimized with battery life</source>
       <translation>ปรับให้เหมาะสมด้วยอายุการใช้งานแบตเตอรี่</translation>
     </message>
     <message id="ess_state_optimized_without_battery_life">
-      <location filename="../../data/Ess.qml" line="36"/>
+      <location filename="../../data/Ess.qml" line="34"/>
       <source>Optimized without battery life</source>
       <translation>ปรับให้เหมาะสมโดยไม่ต้องใช้แบตเตอรี่</translation>
+    </message>
+    <message id="ess_state_external_control">
+      <location filename="../../data/Ess.qml" line="38"/>
+      <source>External control</source>
+      <translation type="unfinished">การควบคุมภายนอก</translation>
     </message>
     <message id="evchargers_status_charged">
       <location filename="../../data/EvChargers.qml" line="94"/>
@@ -5819,6 +6339,11 @@ Do you want to continue?</source>
       <location filename="../../data/EvChargers.qml" line="133"/>
       <source>Start charging</source>
       <translation>เริ่มการชาร์จ</translation>
+    </message>
+    <message id="evchargers_mode_scheduled">
+      <location filename="../../data/EvChargers.qml" line="162"/>
+      <source>Scheduled</source>
+      <translation type="unfinished">กำหนดการ</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
       <location filename="../../data/System.qml" line="193"/>
@@ -5896,6 +6421,11 @@ Do you want to continue?</source>
       <source>Equalize</source>
       <translation>Equalize</translation>
     </message>
+    <message id="solarchargers_state_external control">
+      <location filename="../../data/SolarChargers.qml" line="72"/>
+      <source>External control</source>
+      <translation type="unfinished">การควบคุมภายนอก</translation>
+    </message>
     <message id="inverters_state_aes_mode">
       <location filename="../../data/System.qml" line="123"/>
       <source>AES mode</source>
@@ -5951,6 +6481,11 @@ Do you want to continue?</source>
       <source>Power supply mode</source>
       <translation>โหมดพาวเวอร์ซัพพลาย</translation>
     </message>
+    <message id="inverters_state_sustain">
+      <location filename="../../data/System.qml" line="156"/>
+      <source>Sustain</source>
+      <translation type="unfinished">ยังชีพประคับประคอง</translation>
+    </message>
     <message id="inverters_state_wakeup">
       <location filename="../../data/System.qml" line="160"/>
       <source>Wake up</source>
@@ -5986,31 +6521,36 @@ Do you want to continue?</source>
       <source>Test</source>
       <translation>ทดสอบ</translation>
     </message>
+    <message id="inverters_state_dynamic_ess">
+      <location filename="../../data/System.qml" line="196"/>
+      <source>Dynamic ESS</source>
+      <translation type="unfinished">ไดนามิก ESS</translation>
+    </message>
     <message id="settings_rs_ess_dess">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="41"/>
       <source>Dynamic ESS</source>
       <translation>ไดนามิก ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="89"/>
+      <location filename="../../data/SystemSettings.qml" line="91"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>กลุ่มตัวหลัก</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="93"/>
+      <location filename="../../data/SystemSettings.qml" line="95"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>อินสแตนซ์มาสเตอร์</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="97"/>
+      <location filename="../../data/SystemSettings.qml" line="99"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>ต้นแบบกลุ่มและอินสแตนซ์</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="105"/>
+      <location filename="../../data/SystemSettings.qml" line="107"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>สแตนด์อโลน &amp; หัวหน้ากลุ่ม</translation>
@@ -6024,6 +6564,16 @@ Do you want to continue?</source>
       <location filename="../../data/InverterChargers.qml" line="88"/>
       <source>Inverter only</source>
       <translation>อินเวอร์เตอร์เท่านั้น</translation>
+    </message>
+    <message id="charger_alarms_low_battery_voltage_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="31"/>
+      <source>Low battery voltage alarm</source>
+      <translation type="unfinished">สัญญาณเตือนแรงดันแบตเตอรี่ต่ำ</translation>
+    </message>
+    <message id="charger_alarms_high_battery_voltage_alarm">
+      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="40"/>
+      <source>High battery voltage alarm</source>
+      <translation type="unfinished">สัญญาณเตือนแรงดันแบตเตอรี่สูง</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
       <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="58"/>
@@ -6055,8 +6605,8 @@ Do you want to continue?</source>
     <message id="controlcard_inverter_charger">
       <location filename="../../pages/controlcards/InverterChargerCard.qml" line="23"/>
       <source>Inverter / Charger (%1)</source>
-      <extracomment>%1 = the inverter/charger name</extracomment>
       <oldsource>Inverter / Charger</oldsource>
+      <extracomment>%1 = the inverter/charger name</extracomment>
       <translation>อินเวอร์เตอร์ / เครื่องชาร์จ (%1)</translation>
     </message>
     <message id="settings_page_debug_display_cpu_usage">
@@ -6164,6 +6714,11 @@ Do you want to continue?</source>
       <source>Minimum and maximum gauge ranges</source>
       <translation>ช่วงเกจขั้นต่ำและสูงสุด</translation>
     </message>
+    <message id="settings_brief_view_start_page">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="172"/>
+      <source>Start page</source>
+      <translation type="unfinished">หน้าแรก</translation>
+    </message>
     <message id="settings_restarting_app">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="231"/>
       <source>Restarting application...</source>
@@ -6173,6 +6728,26 @@ Do you want to continue?</source>
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="139"/>
       <source>Failed to change language!</source>
       <translation>ไม่สามารถเปลี่ยนภาษาได้!</translation>
+    </message>
+    <message id="settings_displayoff_1min">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="45"/>
+      <source>1 min</source>
+      <translation type="unfinished">1 นาที</translation>
+    </message>
+    <message id="settings_displayoff_10min">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="47"/>
+      <source>10 min</source>
+      <translation type="unfinished">10 นาที</translation>
+    </message>
+    <message id="settings_displayoff_30min">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="49"/>
+      <source>30 min</source>
+      <translation type="unfinished">30 นาที</translation>
+    </message>
+    <message id="settings_displayoff_never">
+      <location filename="../../pages/settings/PageSettingsDisplay.qml" line="51"/>
+      <source>Never</source>
+      <translation type="unfinished">ไม่เคย</translation>
     </message>
     <message id="settings_language_please_wait">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="144"/>
@@ -6281,6 +6856,11 @@ Do you want to continue?</source>
       <source>Only critical loads</source>
       <translation>โหลดวิกฤติเท่านั้น</translation>
     </message>
+    <message id="settings_ess_min_soc">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="120"/>
+      <source>Minimum SOC (unless grid fails)</source>
+      <translation type="unfinished">SOC ขั้นต่ำ (เว้นแต่กริดจะล้มเหลว)</translation>
+    </message>
     <message id="settings_ess_batteryLife_state">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="148"/>
       <source>Battery life state</source>
@@ -6316,6 +6896,11 @@ Do you want to continue?</source>
       <source>Device list</source>
       <oldsource>Device List</oldsource>
       <translation>รายการอุปกรณ์</translation>
+    </message>
+    <message id="settings_ethernet">
+      <location filename="../../pages/SettingsPage.qml" line="88"/>
+      <source>Ethernet</source>
+      <translation type="unfinished">อีเธอร์เน็ต</translation>
     </message>
     <message id="settings_vrm_device_instances">
       <location filename="../../pages/SettingsPage.qml" line="146"/>
@@ -6379,16 +6964,48 @@ Do you want to continue?</source>
       <source>Minimum current</source>
       <translation>กระแสไฟฟ้าขั้นต่ำ</translation>
     </message>
+    <message id="common_words_none_errors">
+      <location filename="../../components/CommonWords.qml" line="311"/>
+      <source>None</source>
+      <extracomment>Indicates there are no errors</extracomment>
+      <translation type="unfinished">ไม่มี</translation>
+    </message>
+    <message id="common_words_not_available">
+      <location filename="../../components/CommonWords.qml" line="314"/>
+      <source>Not available</source>
+      <translation type="unfinished">ไม่ว่าง</translation>
+    </message>
+    <message id="common_words_off">
+      <location filename="../../components/CommonWords.qml" line="320"/>
+      <source>Off</source>
+      <translation type="unfinished">ปิด</translation>
+    </message>
+    <message id="common_words_ok">
+      <location filename="../../components/CommonWords.qml" line="326"/>
+      <source>OK</source>
+      <translation type="unfinished">ตกลง</translation>
+    </message>
     <message id="common_words_overall_history">
       <location filename="../../components/CommonWords.qml" line="342"/>
       <source>Overall history</source>
       <translation>ประวัติโดยรวม</translation>
     </message>
+    <message id="common_words_settings">
+      <location filename="../../components/CommonWords.qml" line="407"/>
+      <source>Settings</source>
+      <translation type="unfinished">การตั้งค่า</translation>
+    </message>
+    <message id="common_words_unknown_status">
+      <location filename="../../components/CommonWords.qml" line="488"/>
+      <source>Unknown</source>
+      <extracomment>Status = "unknown"</extracomment>
+      <translation type="unfinished">ไม่รู้จัก</translation>
+    </message>
     <message id="common_words_yield_today">
       <location filename="../../components/CommonWords.qml" line="514"/>
       <source>Yield Today</source>
-      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <oldsource>Yield today</oldsource>
+      <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <translation>ผลผลิตวันนี้</translation>
     </message>
     <message id="settings_firmware_installed_rebooting">
@@ -6746,6 +7363,11 @@ See documentation for further information.</oldsource>
       <source>Wired</source>
       <translation>แบบมีสาย</translation>
     </message>
+    <message id="nav_brief">
+      <location filename="../../pages/BriefPage.qml" line="155"/>
+      <source>Brief</source>
+      <translation type="unfinished">รวบรัด</translation>
+    </message>
     <message id="nav_brief_close_side_panel_high_cpu">
       <location filename="../../pages/BriefPage.qml" line="487"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
@@ -6788,7 +7410,7 @@ See documentation for further information.</oldsource>
       <translation>ตัวติดตาม</translation>
     </message>
     <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="106"/>
       <source>RS devices</source>
       <translation>อุปกรณ์อาร์เอส</translation>
     </message>
@@ -6924,6 +7546,11 @@ See documentation for further information.</oldsource>
       <source>Auto start functionality</source>
       <translation>ฟังก์ชั่นสตาร์ทอัตโนมัติ</translation>
     </message>
+    <message id="settings_page_genset_generator_run_time">
+      <location filename="../../components/PageGensetModel.qml" line="76"/>
+      <source>Current run time</source>
+      <translation type="unfinished">เวลาการทำงานปัจจุบัน</translation>
+    </message>
     <message id="ac-in-genset_auto_control_status">
       <location filename="../../components/PageGensetModel.qml" line="84"/>
       <source>Control status</source>
@@ -7053,6 +7680,16 @@ See documentation for further information.</oldsource>
       <source>No password and the network communication is not encrypted</source>
       <translation>ไม่มีรหัสผ่านและการสื่อสารเครือข่ายไม่ได้เข้ารหัส</translation>
     </message>
+    <message id="settings_security_too_short_password">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="139"/>
+      <source>Password needs to be at least 8 characters long</source>
+      <translation type="unfinished">รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</translation>
+    </message>
+    <message id="settings_root_enter_password">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="220"/>
+      <source>Enter password</source>
+      <translation type="unfinished">ใส่รหัสผ่าน</translation>
+    </message>
     <message id="settings_root_too_short_password">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="225"/>
       <source>Password needs to be at least 8 characters long</source>
@@ -7129,22 +7766,22 @@ See documentation for further information.</oldsource>
       <translation>ออกจากระบบ</translation>
     </message>
     <message id="settings_vrm_portal_readonly">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="53"/>
       <source>Read-only</source>
       <translation>อ่านอย่างเดียว</translation>
     </message>
     <message id="settings_vrm_portal_full">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="54"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="55"/>
       <source>Full</source>
       <translation>เต็ม</translation>
     </message>
     <message id="settings_vrm_portal_mode_confirm_title">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="75"/>
       <source>Are you sure?</source>
       <translation>คุณแน่ใจมั้ย?</translation>
     </message>
     <message id="settings_vrm_portal_mode_confirm_description">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="77"/>
       <source>Changing this setting to Read-only or Off will lock you out.</source>
       <translation>การเปลี่ยนการตั้งค่านี้เป็นอ่านอย่างเดียวหรือปิดจะทำให้คุณล็อคออก</translation>
     </message>
@@ -7199,6 +7836,11 @@ See documentation for further information.</oldsource>
       <location filename="../../components/PageGensetModel.qml" line="263"/>
       <source>Heatsink temperature</source>
       <translation>อุณหภูมิของฮีทซิงค์</translation>
+    </message>
+    <message id="genset_charge_voltage">
+      <location filename="../../components/PageGensetModel.qml" line="329"/>
+      <source>Charge voltage</source>
+      <translation type="unfinished">แรงดันไฟชาร์จ</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
       <location filename="../../components/PageGensetModel.qml" line="340"/>
@@ -7531,11 +8173,6 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <source>Successfully changed language!</source>
       <translation>เปลี่ยนภาษาสำเร็จแล้ว!</translation>
     </message>
-    <message id="page_settings_fronius_inverter_power_limiting">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
-      <source>Power limiting</source>
-      <translation>การจำกัดอำนาจ</translation>
-    </message>
     <message id="settings_ess_rs_information">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="31"/>
       <source>For Multi-RS and HS19 devices, ESS settings are available on the RS System product page.</source>
@@ -7558,7 +8195,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>ระยะเวลา</translation>
     </message>
     <message id="rssystem_system_alarms">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="74"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="81"/>
       <source>System alarms</source>
       <translation>ระบบแจ้งเตือน</translation>
     </message>
@@ -7622,51 +8259,52 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>การควบคุม</translation>
     </message>
     <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="103"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. </source>
-      <translation>ตอนนี้การควบคุมรายวันทั้งหมดจะถูกรวมไว้ด้วยกันในบานหน้าต่างการควบคุมใหม่ </translation>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
+      <translation type="unfinished">ตอนนี้การควบคุมรายวันทั้งหมดจะถูกรวมไว้ด้วยกันในบานหน้าต่างการควบคุมใหม่ </translation>
     </message>
     <message id="welcome_units_title">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="107"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
       <source>Watts &amp; Amps</source>
       <translation>วัตต์และแอมป์</translation>
     </message>
     <message id="welcome_units_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="111"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="110"/>
       <source>You can now switch between Watts and Amps. Choose the unit that best fits your preference.</source>
       <translation>คุณสามารถสลับระหว่างวัตต์และแอมแปร์ได้แล้ว เลือกหน่วยที่ตรงกับความต้องการของคุณมากที่สุด</translation>
     </message>
     <message id="welcome_more_title">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="115"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="114"/>
       <source>Learn more</source>
       <translation>เรียนรู้เพิ่มเติม</translation>
     </message>
     <message id="welcome_more_text_wasm">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="120"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="119"/>
       <source>Access the link below to find out more about the Renewed UI.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</source>
       <extracomment>%1 = link to URL with more information</extracomment>
       <translation>เข้าถึงลิงก์ด้านล่างเพื่อดูข้อมูลเพิ่มเติมเกี่ยวกับ UI ที่ได้รับการปรับปรุงใหม่&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
     </message>
     <message id="welcome_more_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="122"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="121"/>
       <source>Scan the QR code to find out more about the Renewed UI.</source>
       <translation>สแกนรหัส QR เพื่อดูข้อมูลเพิ่มเติมเกี่ยวกับ UI ที่ได้รับการปรับปรุงใหม่</translation>
     </message>
     <message id="welcome_done">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="138"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="137"/>
       <source>Done</source>
       <translation>เสร็จแล้ว</translation>
     </message>
     <message id="welcome_next">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="140"/>
+      <location filename="../../pages/welcome/WelcomeView.qml" line="139"/>
       <source>Next</source>
       <translation>ต่อไป</translation>
     </message>
     <message id="devicelist_solarcharger_error">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
       <source>Error: #%1</source>
-      <extracomment>%1 = error number</extracomment>
       <oldsource>Error: %1</oldsource>
+      <extracomment>%1 = error number</extracomment>
       <translation>ข้อผิดพลาด: #%1</translation>
     </message>
     <message id="charger_alarms_header_active_errors">
@@ -7712,11 +8350,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 ถูกตั้งค่าเป็น %2</translation>
     </message>
-    <message id="page_settings_fronius_inverter_power_limiting_label">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="75"/>
-      <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
-      <translation>อินเวอร์เตอร์ PV นี้รองรับการจำกัดพลังงาน ปิดใช้งานการตั้งค่านี้หากรบกวนการทำงานปกติ</translation>
-    </message>
     <message id="press_ok_to_reboot">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="309"/>
       <source>Press 'OK' to reboot</source>
@@ -7734,27 +8367,27 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ต Node-RED เป็นค่าเริ่มต้นจากโรงงาน การดำเนินการนี้จะลบโฟลว์ทั้งหมดของคุณ</translation>
     </message>
     <message id="settings_connection_status">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="178"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="179"/>
       <source>Connection status</source>
       <translation>สถานะการเชื่อมต่อ</translation>
     </message>
     <message id="settings_connection_error_https_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="220"/>
       <source>Connection status (HTTPS channel)</source>
       <translation>สถานะการเชื่อมต่อ (ช่อง HTTPS)</translation>
     </message>
     <message id="settings_connection_error_http_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="221"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="222"/>
       <source>Connection status (HTTP channel)</source>
       <translation>สถานะการเชื่อมต่อ (ช่อง HTTP)</translation>
     </message>
     <message id="settings_connection_error_realtime_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="239"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="240"/>
       <source>Connection status (MQTT Real-time channel)</source>
       <translation>สถานะการเชื่อมต่อ (ช่อง MQTT เรียลไทม์)</translation>
     </message>
     <message id="settings_connection_error_rpc_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="247"/>
       <source>Connection status (MQTT RPC channel)</source>
       <translation>สถานะการเชื่อมต่อ (ช่อง MQTT RPC)</translation>
     </message>
@@ -7824,11 +8457,23 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 ปิดการใช้งานการระบายออก</translation>
     </message>
+    <message id="startpage_option_brief_without_panel">
+      <location filename="../../data/StartPageConfiguration.qml" line="22"/>
+      <source>Brief</source>
+      <extracomment>The 'Brief' page</extracomment>
+      <translation type="unfinished">รวบรัด</translation>
+    </message>
     <message id="startpage_option_brief_with_panel">
       <location filename="../../data/StartPageConfiguration.qml" line="28"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
       <translation>กางเกงชั้นใน (แผงด้านข้างเปิด)</translation>
+    </message>
+    <message id="startpage_option_overview">
+      <location filename="../../data/StartPageConfiguration.qml" line="34"/>
+      <source>Overview</source>
+      <extracomment>The 'Overview' page</extracomment>
+      <translation type="unfinished">ภาพรวม</translation>
     </message>
     <message id="startpage_option_levels_tanks">
       <location filename="../../data/StartPageConfiguration.qml" line="40"/>
@@ -7895,609 +8540,70 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>ไม่สามารถเปิดใช้งานฟังก์ชันการสตาร์ท/หยุดเครื่องกำเนิดไฟฟ้าได้ ให้ไปที่การตั้งค่ารีเลย์และตั้งค่าฟังก์ชันเป็น "การสตาร์ท/หยุดเครื่องกำเนิดไฟฟ้า"</translation>
     </message>
-  </context>
-  <context>
-    <name>TzAfricaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="10"/>
-      <source>Morocco Standard Time</source>
-      <translation>เวลามาตรฐานโมร็อกโก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="11"/>
-      <source>W. Central Africa Standard Time</source>
-      <translation>W. เวลามาตรฐานแอฟริกากลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="12"/>
-      <source>South Africa Standard Time</source>
-      <translation>เวลามาตรฐานของแอฟริกาใต้</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="13"/>
-      <source>Namibia Standard Time</source>
-      <translation>เวลามาตรฐานนามิเบีย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="14"/>
-      <source>Egypt Standard Time</source>
-      <translation>เวลามาตรฐานอียิปต์</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="15"/>
-      <source>E. Africa Standard Time</source>
-      <translation>E. เวลามาตรฐานแอฟริกา</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAmericaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="10"/>
-      <source>Argentina Standard Time</source>
-      <translation>เวลามาตรฐานอาร์เจนตินา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="11"/>
-      <source>E. South America Standard Time</source>
-      <translation>E. เวลามาตรฐานของอเมริกาใต้</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="12"/>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="13"/>
-      <source>Greenland Standard Time</source>
-      <translation>เวลามาตรฐานกรีนแลนด์</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="14"/>
-      <source>Montevideo Standard Time</source>
-      <translation>เวลามาตรฐานมอนเตวิเดโอ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="15"/>
-      <source>Newfoundland Standard Time</source>
-      <translation>เวลามาตรฐานนิวฟันด์แลนด์</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="16"/>
-      <source>SA Eastern Standard Time</source>
-      <translation>SA เวลามาตรฐานตะวันออก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="17"/>
-      <source>Atlantic Standard Time</source>
-      <translation>เวลามาตรฐานแอตแลนติก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="18"/>
-      <source>Central Brazilian Standard Time</source>
-      <translation>เวลามาตรฐานของบราซิลตอนกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="19"/>
-      <source>Pacific SA Standard Time</source>
-      <translation>เวลามาตรฐานแปซิฟิก SA</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="20"/>
-      <source>Paraguay Standard Time</source>
-      <translation>เวลามาตรฐานปารากวัย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="21"/>
-      <source>SA Western Standard Time</source>
-      <translation>SA เวลามาตรฐานตะวันตก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="22"/>
-      <source>Venezuela Standard Time</source>
-      <translation>เวลามาตรฐานของเวเนซุเอลา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="23"/>
-      <source>Eastern Standard Time</source>
-      <translation>เวลามาตรฐานตะวันออก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="24"/>
-      <source>SA Pacific Standard Time</source>
-      <translation>เวลามาตรฐานแปซิฟิกของ SA</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="25"/>
-      <source>US Eastern Standard Time</source>
-      <translation>เวลามาตรฐานตะวันออกของสหรัฐอเมริกา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="26"/>
-      <source>Canada Central Standard Time</source>
-      <translation>เวลามาตรฐานกลางของแคนาดา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="27"/>
-      <source>Central America Standard Time</source>
-      <translation>เวลามาตรฐานของอเมริกากลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="28"/>
-      <source>Central Standard Time (Mexico)</source>
-      <translation>เวลามาตรฐานตอนกลาง (เม็กซิโก)</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="29"/>
-      <source>Central Standard Time</source>
-      <translation>เวลามาตรฐานตอนกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="30"/>
-      <source>Mountain Standard Time (Mexico)</source>
-      <translation>เวลามาตรฐานแถบภูเขาสูง (เม็กซิโก)</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="31"/>
-      <source>Mountain Standard Time</source>
-      <translation>เวลามาตรฐานบนภูเขา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="32"/>
-      <source>US Mountain Standard Time</source>
-      <translation>เวลามาตรฐานภูเขาของสหรัฐอเมริกา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="33"/>
-      <source>Pacific Standard Time (Mexico)</source>
-      <translation>เวลามาตรฐานแปซิฟิก (เม็กซิโก)</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="34"/>
-      <source>Pacific Standard Time</source>
-      <translation>เวลามาตรฐานแปซิฟิก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="35"/>
-      <source>Alaskan Standard Time</source>
-      <translation>เวลามาตรฐานอลาสก้า</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="36"/>
-      <source>Hawaii-Aleutian</source>
-      <translation>ฮาวาย-Aleutian</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAntarcticaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="10"/>
-      <source>New Zealand Standard Time</source>
-      <translation>เวลามาตรฐานของนิวซีแลนด์</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="11"/>
-      <source>Central Pacific Standard Time</source>
-      <translation>เวลามาตรฐานแปซิฟิกกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="12"/>
-      <source>West Pacific Standard Time</source>
-      <translation>เวลามาตรฐานแปซิฟิกตะวันตก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="13"/>
-      <source>W. Australia Standard Time</source>
-      <translation>เวลามาตรฐานของออสเตรเลียตะวันตก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="14"/>
-      <source>SE Asia Standard Time</source>
-      <translation>เวลามาตรฐานเอเชียตะวันออกเฉียงใต้</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="15"/>
-      <source>Central Asia Standard Time</source>
-      <translation>เวลามาตรฐานเอเชียกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="16"/>
-      <source>West Asia Standard Time</source>
-      <translation>เวลามาตรฐานเอเชียตะวันตก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="17"/>
-      <source>E. Africa Standard Time</source>
-      <translation>E. เวลามาตรฐานแอฟริกา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="18"/>
-      <source>Pacific SA Standard Time</source>
-      <translation>เวลามาตรฐานแปซิฟิก SA</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="19"/>
-      <source>SA Western Standard Time</source>
-      <translation>SA เวลามาตรฐานตะวันตก</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzArcticData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzArcticData.qml" line="10"/>
-      <source>W. Europe Standard Time</source>
-      <translation>เวลามาตรฐานยุโรปตะวันตก</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAsiaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="10"/>
-      <source>Kamchatka Standard Time</source>
-      <translation>เวลามาตรฐานคัมชัตกา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="11"/>
-      <source>Magadan Standard Time</source>
-      <translation>เวลามาตรฐานมากาดาน</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="12"/>
-      <source>Vladivostok Standard Time</source>
-      <translation>เวลามาตรฐานวลาดีวอสตอค</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="13"/>
-      <source>Yakutsk Standard Time</source>
-      <translation>เวลามาตรฐานยาคุตสค์</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="14"/>
-      <source>Tokyo Standard Time</source>
-      <translation>เวลามาตรฐานโตเกียว</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="15"/>
-      <source>Korea Standard Time</source>
-      <translation>เวลามาตรฐานเกาหลี</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="16"/>
-      <source>Singapore Standard Time</source>
-      <translation>เวลามาตรฐานสิงคโปร์</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="17"/>
-      <source>Ulaanbaatar Standard Time</source>
-      <translation>เวลามาตรฐานอูลานบาตอร์</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="18"/>
-      <source>Taipei Standard Time</source>
-      <translation>เวลามาตรฐานไทเป</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="19"/>
-      <source>North Asia East Standard Time</source>
-      <translation>เวลามาตรฐานเอเชียเหนือตะวันออก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="20"/>
-      <source>China Standard Time</source>
-      <translation>เวลามาตรฐานของจีน</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="21"/>
-      <source>SE Asia Standard Time</source>
-      <translation>เวลามาตรฐานเอเชียตะวันออกเฉียงใต้</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="22"/>
-      <source>North Asia Standard Time</source>
-      <translation>เวลามาตรฐานเอเชียเหนือ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="23"/>
-      <source>Myanmar Standard Time</source>
-      <translation>เวลามาตรฐานของเมียนมาร์</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="24"/>
-      <source>N. Central Asia Standard Time</source>
-      <translation>เวลามาตรฐานเอเชียกลางเหนือ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="25"/>
-      <source>Central Asia Standard Time</source>
-      <translation>เวลามาตรฐานเอเชียกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="26"/>
-      <source>Bangladesh Standard Time</source>
-      <translation>เวลามาตรฐานบังกลาเทศ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="27"/>
-      <source>Nepal Standard Time</source>
-      <translation>เวลามาตรฐานเนปาล</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="28"/>
-      <source>Sri Lanka Standard Time</source>
-      <translation>เวลามาตรฐานศรีลังกา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="29"/>
-      <source>India Standard Time</source>
-      <translation>เวลามาตรฐานอินเดีย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="30"/>
-      <source>West Asia Standard Time</source>
-      <translation>เวลามาตรฐานเอเชียตะวันตก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="31"/>
-      <source>Pakistan Standard Time</source>
-      <translation>เวลามาตรฐานของปากีสถาน</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="32"/>
-      <source>Ekaterinburg Standard Time</source>
-      <translation>เวลามาตรฐานเอคาเตรินเบิร์ก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="33"/>
-      <source>Georgian Standard Time</source>
-      <translation>เวลามาตรฐานจอร์เจีย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="34"/>
-      <source>Caucasus Standard Time</source>
-      <translation>เวลามาตรฐานคอเคซัส</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="35"/>
-      <source>Azerbaijan Standard Time</source>
-      <translation>เวลามาตรฐานอาเซอร์ไบจาน</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="36"/>
-      <source>Arabian Standard Time</source>
-      <translation>เวลามาตรฐานอาหรับ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="37"/>
-      <source>Afghanistan Standard Time</source>
-      <translation>เวลามาตรฐานอัฟกานิสถาน</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="38"/>
-      <source>Iran Standard Time</source>
-      <translation>เวลามาตรฐานอิหร่าน</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="39"/>
-      <source>Arabic Standard Time</source>
-      <translation>เวลามาตรฐานภาษาอาหรับ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="40"/>
-      <source>Arab Standard Time</source>
-      <translation>เวลามาตรฐานอาหรับ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="41"/>
-      <source>Syria Standard Time</source>
-      <translation>เวลามาตรฐานซีเรีย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="42"/>
-      <source>Middle East Standard Time</source>
-      <translation>เวลามาตรฐานตะวันออกกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="43"/>
-      <source>Jordan Standard Time</source>
-      <translation>เวลามาตรฐานจอร์แดน</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="44"/>
-      <source>Israel Standard Time</source>
-      <translation>เวลามาตรฐานของอิสราเอล</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAtlanticData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="10"/>
-      <source>Greenwich Standard Time</source>
-      <translation>เวลามาตรฐานกรีนิช</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="11"/>
-      <source>Azores Standard Time</source>
-      <translation>เวลามาตรฐานอะซอเรส</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="12"/>
-      <source>Cape Verde Standard Time</source>
-      <translation>เวลามาตรฐานเคปเวิร์ด</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzAustraliaData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="10"/>
-      <source>Tasmania Standard Time</source>
-      <translation>เวลามาตรฐานแทสเมเนีย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="11"/>
-      <source>E. Australia Standard Time</source>
-      <translation>E. เวลามาตรฐานของออสเตรเลีย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="12"/>
-      <source>AUS Eastern Standard Time</source>
-      <translation>เวลามาตรฐานตะวันออกของ AUS</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="13"/>
-      <source>Cen. Australia Standard Time</source>
-      <translation>เซน เวลามาตรฐานของออสเตรเลีย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="14"/>
-      <source>AUS Central Standard Time</source>
-      <translation>เวลามาตรฐานกลาง AUS</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="15"/>
-      <source>W. Australia Standard Time</source>
-      <translation>เวลามาตรฐานของออสเตรเลียตะวันตก</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzEtcData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="10"/>
-      <source>GMT +12</source>
-      <translation>GMT +12</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="11"/>
-      <source>GMT </source>
-      <translation>GMT</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="12"/>
-      <source>Mid-Atlantic Standard Time</source>
-      <translation>เวลามาตรฐานกลางมหาสมุทรแอตแลนติก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="13"/>
-      <source>GMT -02</source>
-      <translation>GMT -02</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="14"/>
-      <source>GMT -11</source>
-      <translation>GMT -11</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="15"/>
-      <source>Dateline Standard Time</source>
-      <translation>Dateline เวลามาตรฐาน</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzEuropeData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="10"/>
-      <source>GMT Standard Time</source>
-      <translation>เวลามาตรฐาน GMT</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="11"/>
-      <source>Central Europe Standard Time</source>
-      <translation>เวลามาตรฐานยุโรปกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="12"/>
-      <source>Central European Standard Time</source>
-      <translation>เวลามาตรฐานยุโรปกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="13"/>
-      <source>Romance Standard Time</source>
-      <translation>เวลามาตรฐานโรแมนติก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="14"/>
-      <source>W. Europe Standard Time</source>
-      <translation>เวลามาตรฐานยุโรปตะวันตก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="15"/>
-      <source>E. Europe Standard Time</source>
-      <translation>เวลามาตรฐานยุโรปตะวันออก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="16"/>
-      <source>FLE Standard Time</source>
-      <translation>เวลามาตรฐาน FLE</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="17"/>
-      <source>GTB Standard Time</source>
-      <translation>เวลามาตรฐาน GTB</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="18"/>
-      <source>Belarus Standard Time</source>
-      <translation>เวลามาตรฐานเบลารุส</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="19"/>
-      <source>Russian Standard Time</source>
-      <translation>เวลามาตรฐานรัสเซีย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="20"/>
-      <source>Turkey Standard Time</source>
-      <translation>เวลามาตรฐานของตุรกี</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzIndianData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzIndianData.qml" line="10"/>
-      <source>Mauritius Standard Time</source>
-      <translation>เวลามาตรฐานมอริเชียส</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzIndianData.qml" line="11"/>
-      <source>Christmas Island Standard Time</source>
-      <translation>เวลามาตรฐานของเกาะคริสต์มาส</translation>
-    </message>
-  </context>
-  <context>
-    <name>TzPacificData</name>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="10"/>
-      <source>Tonga Standard Time</source>
-      <translation>เวลามาตรฐานตองกา</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="11"/>
-      <source>Fiji Standard Time</source>
-      <translation>เวลามาตรฐานฟิจิ</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="12"/>
-      <source>New Zealand Standard Time</source>
-      <translation>เวลามาตรฐานของนิวซีแลนด์</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="13"/>
-      <source>Central Pacific Standard Time</source>
-      <translation>เวลามาตรฐานแปซิฟิกกลาง</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="14"/>
-      <source>West Pacific Standard Time</source>
-      <translation>เวลามาตรฐานแปซิฟิกตะวันตก</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="15"/>
-      <source>Samoa Standard Time</source>
-      <translation>เวลามาตรฐานซามัว</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="16"/>
-      <source>Hawaiian Standard Time</source>
-      <translation>เวลามาตรฐานฮาวาย</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzPacificData.qml" line="17"/>
-      <source>Easter Island Standard Time</source>
-      <translation>เวลามาตรฐานของเกาะอีสเตอร์</translation>
+    <message id="temperature_type_unknown">
+      <location filename="../../data/EnvironmentInputs.qml" line="77"/>
+      <source>Unknown</source>
+      <translation type="unfinished">ไม่รู้จัก</translation>
+    </message>
+    <message id="brief_solar_yield">
+      <location filename="../../pages/BriefSidePanel.qml" line="18"/>
+      <source>Solar yield</source>
+      <translation type="unfinished">ผลผลิตพลังงานแสงอาทิตย์</translation>
+    </message>
+    <message id="brief_dc_input">
+      <location filename="../../pages/BriefSidePanel.qml" line="207"/>
+      <source>DC input</source>
+      <translation type="unfinished">อินพุตกระแสตรง</translation>
+    </message>
+    <message id="brief_ac_loads">
+      <location filename="../../pages/BriefSidePanel.qml" line="248"/>
+      <source>AC Loads</source>
+      <translation type="unfinished">โหลด AC</translation>
+    </message>
+    <message id="brief_dc_loads">
+      <location filename="../../pages/BriefSidePanel.qml" line="276"/>
+      <source>DC Loads</source>
+      <translation type="unfinished">โหลดไฟฟ้ากระแสตรง</translation>
+    </message>
+    <message id="nav_overview">
+      <location filename="../../pages/OverviewPage.qml" line="397"/>
+      <source>Overview</source>
+      <translation type="unfinished">ภาพรวม</translation>
+    </message>
+    <message id="settings_state">
+      <location filename="../../pages/settings/PageCanbusStatus.qml" line="101"/>
+      <source>State</source>
+      <translation type="unfinished">สถานะ</translation>
+    </message>
+    <message id="inverter_pv">
+      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="66"/>
+      <source>PV</source>
+      <translation type="unfinished">PV</translation>
+    </message>
+    <message id="inverter_total_yield">
+      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="86"/>
+      <source>Total yield</source>
+      <translation type="unfinished">ผลตอบแทนรวม</translation>
+    </message>
+    <message id="inverter_system_yield">
+      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="94"/>
+      <source>System yield</source>
+      <translation type="unfinished">ผลตอบแทนของระบบ</translation>
+    </message>
+    <message id="vebus_device_alarm_only">
+      <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="18"/>
+      <source>Alarm only</source>
+      <translation type="unfinished">การแจ้งเตือนเท่านั้น</translation>
+    </message>
+    <message id="vebus_device_alarms_and_warnings">
+      <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="20"/>
+      <source>Alarms &amp; warnings</source>
+      <translation type="unfinished">การแจ้งเตือนและคำเตือน</translation>
+    </message>
+    <message id="vebus_device_alarm_group_warning">
+      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmGroup.qml" line="44"/>
+      <source>Warning</source>
+      <translation type="unfinished">คำเตือน</translation>
     </message>
   </context>
   <context>
@@ -8685,6 +8791,15 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="117"/>
       <source>Terminal over temperature</source>
       <translation>เทอร์มินัลเกินอุณหภูมิ</translation>
+    </message>
+  </context>
+  <context>
+    <name>CRE</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="838"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="843"/>
+      <source>Unknown error: </source>
+      <translation>ข้อผิดพลาดที่ไม่รู้จัก:</translation>
     </message>
   </context>
   <context>
@@ -9062,414 +9177,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     </message>
   </context>
   <context>
-    <name>PageAcInSetup</name>
-    <message>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="124"/>
-      <source>Set the switch in an unlocked position to modify the settings.</source>
-      <translation>ตั้งสวิตช์ในตำแหน่งปลดล็อคเพื่อแก้ไขการตั้งค่า</translation>
-    </message>
-  </context>
-  <context>
-    <name>QGuiApplication</name>
-    <message>
-      <location filename="../../src/main.cpp" line="100"/>
-      <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
-      <translation>ใช้แหล่งข้อมูล D-Bus: เชื่อมต่อกับที่อยู่ D-Bus ที่ระบุ</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="101"/>
-      <source>address</source>
-      <comment>D-Bus address</comment>
-      <translation>ที่อยู่</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="105"/>
-      <source>Use D-Bus data source: connect to the default D-Bus address</source>
-      <translation>ใช้แหล่งข้อมูล D-Bus: เชื่อมต่อกับที่อยู่ D-Bus เริ่มต้น</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="110"/>
-      <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
-      <translation>ใช้แหล่งข้อมูล MQTT: เชื่อมต่อกับที่อยู่โบรกเกอร์ MQTT ที่ระบุ</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="111"/>
-      <source>address</source>
-      <comment>MQTT broker address</comment>
-      <translation>ที่อยู่</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="116"/>
-      <source>MQTT data source device portal id.</source>
-      <translation>รหัสพอร์ทัลอุปกรณ์แหล่งข้อมูล MQTT</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="117"/>
-      <source>portalId</source>
-      <translation>รหัสพอร์ทัล</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="121"/>
-      <source>MQTT VRM webhost shard</source>
-      <translation>ชาร์ดเว็บโฮสต์ MQTT VRM</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="122"/>
-      <source>shard</source>
-      <comment>MQTT VRM webhost shard</comment>
-      <translation>เศษ</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="126"/>
-      <source>MQTT data source username</source>
-      <translation>ชื่อผู้ใช้แหล่งข้อมูล MQTT</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="127"/>
-      <source>user</source>
-      <comment>MQTT broker username.</comment>
-      <translation>ผู้ใช้</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="131"/>
-      <source>MQTT data source password</source>
-      <translation>รหัสผ่านแหล่งข้อมูล MQTT</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="132"/>
-      <source>pass</source>
-      <comment>MQTT broker password.</comment>
-      <translation>ผ่าน</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="136"/>
-      <source>MQTT data source token</source>
-      <translation>โทเค็นแหล่งข้อมูล MQTT</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="137"/>
-      <source>token</source>
-      <comment>MQTT broker auth token.</comment>
-      <translation>โทเค็น</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="141"/>
-      <source>Enable FPS counter</source>
-      <translation>เปิดใช้งานตัวนับ FPS</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="145"/>
-      <source>Skip splash screen</source>
-      <translation>ข้ามหน้าจอเริ่มต้น</translation>
-    </message>
-    <message>
-      <location filename="../../src/main.cpp" line="149"/>
-      <source>Use mock data source for testing.</source>
-      <translation>ใช้แหล่งข้อมูลจำลองสำหรับการทดสอบ</translation>
-    </message>
-  </context>
-  <context>
-    <name>VebusError</name>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="10"/>
-      <source>Device switched off</source>
-      <translation>อุปกรณ์ถูกปิด</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="13"/>
-      <source>Mixed old/new MK2</source>
-      <translation>แบบผสมเก่า/ใหม่ MK2 .</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="16"/>
-      <source>Expected devices error</source>
-      <translation>ข้อผิดพลาดของอุปกรณ์ที่คาดไว้</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="19"/>
-      <source>No other device detected</source>
-      <translation>ไม่พบอุปกรณ์อื่น</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="22"/>
-      <source>Overvoltage on AC-out</source>
-      <translation>แรงดันไฟเกินใน AC-ขาออก</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="25"/>
-      <source>DDC program error</source>
-      <translation>ข้อผิดพลาดของโปรแกรม DDC</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="28"/>
-      <source>VE.Bus BMS without assistant</source>
-      <translation>VE.Bus BMS ไม่มีผู้ช่วย</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="31"/>
-      <source>Ground relay test failed</source>
-      <translation>การทดสอบการถ่ายทอดกราวด์ล้มเหลว</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="34"/>
-      <source>System time sync error</source>
-      <translation>ข้อผิดพลาดในการซิงค์เวลาของระบบ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="37"/>
-      <source>Grid relay test fault</source>
-      <translation>ข้อผิดพลาดการทดสอบรีเลย์กริด</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="40"/>
-      <source>Config mismatch with 2nd mcu</source>
-      <translation>การตั้งค่าไม่ตรงกันกับ mcu . ตัวที่ 2</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="43"/>
-      <source>Device transmit error</source>
-      <translation>ข้อผิดพลาดในการส่งอุปกรณ์</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="46"/>
-      <source>Awaiting configuration or dongle missing</source>
-      <translation>กำลังรอการกำหนดค่าหรือดองเกิลหายไป</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="49"/>
-      <source>Phase master missing</source>
-      <translation>เฟสมาสเตอร์หายไป</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="52"/>
-      <source>Overvoltage has occurred</source>
-      <translation>เกิดแรงดันไฟเกิน</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="55"/>
-      <source>Slave does not have AC input!</source>
-      <translation>สเลฟไม่มีอินพุต AC!</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="58"/>
-      <source>Device can't be slave</source>
-      <translation>อุปกรณ์ไม่สามารถเป็นทาสได้</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="61"/>
-      <source>System protection initiated</source>
-      <translation>การป้องกันระบบเริ่มต้นขึ้น</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="64"/>
-      <source>Firmware incompatibiltiy</source>
-      <translation>เฟิร์มแวร์ไม่เข้ากัน</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="67"/>
-      <source>Internal error</source>
-      <translation>ข้อผิดพลาดภายใน</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="70"/>
-      <source>Failing relay test prevents connection</source>
-      <translation>การทดสอบรีเลย์ล้มเหลวป้องกันการเชื่อมต่อ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="73"/>
-      <source>VE.Bus error</source>
-      <translation>ข้อผิดพลาดของ VE.Bus</translation>
-    </message>
-  </context>
-  <context>
-    <name>Wakespeed</name>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="138"/>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="143"/>
-      <source>Unknown error: </source>
-      <translation>ข้อผิดพลาดที่ไม่รู้จัก:</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="151"/>
-      <source>Internal error</source>
-      <translation>ข้อผิดพลาดภายใน</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="156"/>
-      <source>No error</source>
-      <translation>ไม่มีข้อผิดพลาด</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="159"/>
-      <source>Battery high temperature</source>
-      <translation>อุณหภูมิสูงแบตเตอรี่</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="162"/>
-      <source>Battery high voltage</source>
-      <translation>แบตเตอรี่ไฟฟ้าแรงสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="165"/>
-      <source>Battery low voltage</source>
-      <translation>แรงดันไฟต่ำของแบตเตอรี่</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="168"/>
-      <source>Battery voltage exceeded configured max</source>
-      <translation>แรงดันแบตเตอรี่เกินการกำหนดค่าสูงสุด</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="175"/>
-      <source>Alternator high temperature</source>
-      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับอุณหภูมิสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="178"/>
-      <source>Alternator high RPM</source>
-      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับ RPM สูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="181"/>
-      <source>Field drive FET high temperature</source>
-      <translation>ไดรฟ์ภาคสนาม FET อุณหภูมิสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="184"/>
-      <source>Required sensor missing</source>
-      <translation>ขาดเซ็นเซอร์ที่จำเป็น</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="187"/>
-      <source>Alternator low voltage</source>
-      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับแรงดันต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="190"/>
-      <source>Alternator high voltage offset</source>
-      <translation>ออฟเซ็ตไฟฟ้าแรงสูงกระแสสลับ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="193"/>
-      <source>Alternator Voltage exceeded configured max</source>
-      <translation>แรงดันไฟฟ้ากระแสสลับเกินกำหนดmax</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="196"/>
-      <source>Alternator high voltage</source>
-      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับแรงสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="199"/>
-      <source>Battery disconnected</source>
-      <translation>ถอดแบตเตอรี่</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="202"/>
-      <source>Battery high voltage disconnect</source>
-      <translation>ตัดการเชื่อมต่อไฟฟ้าแรงสูงของแบตเตอรี่</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="205"/>
-      <source>Battery instance ouf of range</source>
-      <translation>อินสแตนซ์แบตเตอรี่อยู่นอกช่วง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="208"/>
-      <source>Too many BMS's</source>
-      <translation>BMS มากเกินไป</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="211"/>
-      <source>Battery about to disconnect</source>
-      <translation>เกี่ยวกับการตัดการเชื่อมต่อแบตเตอรี่</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="214"/>
-      <source>Too many devices to track</source>
-      <translation>มีอุปกรณ์ให้ติดตามมากเกินไป</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="217"/>
-      <source>Battery low voltage disconnect</source>
-      <translation>ตัดการเชื่อมต่อ แบตเตอรี่แรงดันต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="220"/>
-      <source>Battery high current disconnect</source>
-      <translation>ตัดการเชื่อมต่อ กระแสไฟของแบตเตอรี่สูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="223"/>
-      <source>Battery high temperature disconnect</source>
-      <translation>ตัดการเชื่อมต่อ แบตเตอรี่อุณหภูมิสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="226"/>
-      <source>Battery low temperature disconnect</source>
-      <translation>ตัดการเชื่อมต่อ แบตเตอรี่อุณหภูมิต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="229"/>
-      <source>BMS connection lost</source>
-      <translation>ขาดการเชื่อมต่อ BMS</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="232"/>
-      <source>ATC Disabled</source>
-      <translation>ATC พิการ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="235"/>
-      <source>DC/DC converter not ready</source>
-      <translation>ตัวแปลง DC/DC ไม่พร้อมทำงาน</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="238"/>
-      <source>DC/DC high primary voltage</source>
-      <translation>DC/DC แรงดันไฟฟ้าหลักสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="241"/>
-      <source>DC/DC low primary voltage</source>
-      <translation>DC/DC แรงดันไฟหลักต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="244"/>
-      <source>DC/DC high secondary voltage</source>
-      <translation>DC/DC แรงดันไฟฟ้าทุติยภูมิสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="247"/>
-      <source>DC/DC low secondary voltage</source>
-      <translation>DC/DC แรงดันไฟฟ้าทุติยภูมิต่ำ</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="250"/>
-      <source>DC/DC high temperature</source>
-      <translation>DC/DC อุณหภูมิสูง</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="253"/>
-      <source>DC/DC misconfiguration</source>
-      <translation>การกำหนดค่า DC/DC ผิดพลาด</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
-      <source>Battery temperature sensor defective</source>
-      <translation>เซ็นเซอร์อุณหภูมิแบตเตอรี่ชำรุด</translation>
-    </message>
-  </context>
-  <context>
-    <name>CRE</name>
-    <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="838"/>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="843"/>
-      <source>Unknown error: </source>
-      <translation>ข้อผิดพลาดที่ไม่รู้จัก:</translation>
-    </message>
-  </context>
-  <context>
     <name>DEIF</name>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="857"/>
@@ -9485,6 +9192,44 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="247"/>
       <source>Unknown error: </source>
       <translation>ข้อผิดพลาดที่ไม่รู้จัก:</translation>
+    </message>
+  </context>
+  <context>
+    <name>EnvironmentInputs</name>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <source>Battery</source>
+      <translation>แบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <source>Fridge</source>
+      <translation>ตู้เย็น</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <source>Generic</source>
+      <translation>ทั่วไป</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
+      <source>Room</source>
+      <translation>ห้อง</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
+      <source>Outdoor</source>
+      <translation>กลางแจ้ง</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
+      <source>Water Heater</source>
+      <translation>เครื่องทำน้ำอุ่น</translation>
+    </message>
+    <message>
+      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
+      <source>Freezer</source>
+      <translation>ช่องแช่แข็ง</translation>
     </message>
   </context>
   <context>
@@ -10331,41 +10076,1006 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     </message>
   </context>
   <context>
-    <name>EnvironmentInputs</name>
+    <name>PageAcInSetup</name>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
-      <source>Battery</source>
-      <translation>แบตเตอรี่</translation>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="124"/>
+      <source>Set the switch in an unlocked position to modify the settings.</source>
+      <translation>ตั้งสวิตช์ในตำแหน่งปลดล็อคเพื่อแก้ไขการตั้งค่า</translation>
+    </message>
+  </context>
+  <context>
+    <name>QGuiApplication</name>
+    <message>
+      <location filename="../../src/main.cpp" line="100"/>
+      <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
+      <translation>ใช้แหล่งข้อมูล D-Bus: เชื่อมต่อกับที่อยู่ D-Bus ที่ระบุ</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
-      <source>Fridge</source>
-      <translation>ตู้เย็น</translation>
+      <location filename="../../src/main.cpp" line="101"/>
+      <source>address</source>
+      <comment>D-Bus address</comment>
+      <translation>ที่อยู่</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
-      <source>Generic</source>
-      <translation>ทั่วไป</translation>
+      <location filename="../../src/main.cpp" line="105"/>
+      <source>Use D-Bus data source: connect to the default D-Bus address</source>
+      <translation>ใช้แหล่งข้อมูล D-Bus: เชื่อมต่อกับที่อยู่ D-Bus เริ่มต้น</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
-      <source>Room</source>
-      <translation>ห้อง</translation>
+      <location filename="../../src/main.cpp" line="110"/>
+      <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
+      <translation>ใช้แหล่งข้อมูล MQTT: เชื่อมต่อกับที่อยู่โบรกเกอร์ MQTT ที่ระบุ</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
-      <source>Outdoor</source>
-      <translation>กลางแจ้ง</translation>
+      <location filename="../../src/main.cpp" line="111"/>
+      <source>address</source>
+      <comment>MQTT broker address</comment>
+      <translation>ที่อยู่</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
-      <source>Water Heater</source>
-      <translation>เครื่องทำน้ำอุ่น</translation>
+      <location filename="../../src/main.cpp" line="116"/>
+      <source>MQTT data source device portal id.</source>
+      <translation>รหัสพอร์ทัลอุปกรณ์แหล่งข้อมูล MQTT</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
-      <source>Freezer</source>
-      <translation>ช่องแช่แข็ง</translation>
+      <location filename="../../src/main.cpp" line="117"/>
+      <source>portalId</source>
+      <translation>รหัสพอร์ทัล</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="121"/>
+      <source>MQTT VRM webhost shard</source>
+      <translation>ชาร์ดเว็บโฮสต์ MQTT VRM</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="122"/>
+      <source>shard</source>
+      <comment>MQTT VRM webhost shard</comment>
+      <translation>เศษ</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="126"/>
+      <source>MQTT data source username</source>
+      <translation>ชื่อผู้ใช้แหล่งข้อมูล MQTT</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="127"/>
+      <source>user</source>
+      <comment>MQTT broker username.</comment>
+      <translation>ผู้ใช้</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="131"/>
+      <source>MQTT data source password</source>
+      <translation>รหัสผ่านแหล่งข้อมูล MQTT</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="132"/>
+      <source>pass</source>
+      <comment>MQTT broker password.</comment>
+      <translation>ผ่าน</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="136"/>
+      <source>MQTT data source token</source>
+      <translation>โทเค็นแหล่งข้อมูล MQTT</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="137"/>
+      <source>token</source>
+      <comment>MQTT broker auth token.</comment>
+      <translation>โทเค็น</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="141"/>
+      <source>Enable FPS counter</source>
+      <translation>เปิดใช้งานตัวนับ FPS</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="145"/>
+      <source>Skip splash screen</source>
+      <translation>ข้ามหน้าจอเริ่มต้น</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="149"/>
+      <source>Use mock data source for testing.</source>
+      <translation>ใช้แหล่งข้อมูลจำลองสำหรับการทดสอบ</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAfricaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="10"/>
+      <source>Morocco Standard Time</source>
+      <translation>เวลามาตรฐานโมร็อกโก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="11"/>
+      <source>W. Central Africa Standard Time</source>
+      <translation>W. เวลามาตรฐานแอฟริกากลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="12"/>
+      <source>South Africa Standard Time</source>
+      <translation>เวลามาตรฐานของแอฟริกาใต้</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="13"/>
+      <source>Namibia Standard Time</source>
+      <translation>เวลามาตรฐานนามิเบีย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="14"/>
+      <source>Egypt Standard Time</source>
+      <translation>เวลามาตรฐานอียิปต์</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAfricaData.qml" line="15"/>
+      <source>E. Africa Standard Time</source>
+      <translation>E. เวลามาตรฐานแอฟริกา</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAmericaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="10"/>
+      <source>Argentina Standard Time</source>
+      <translation>เวลามาตรฐานอาร์เจนตินา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="11"/>
+      <source>E. South America Standard Time</source>
+      <translation>E. เวลามาตรฐานของอเมริกาใต้</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="12"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="13"/>
+      <source>Greenland Standard Time</source>
+      <translation>เวลามาตรฐานกรีนแลนด์</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="14"/>
+      <source>Montevideo Standard Time</source>
+      <translation>เวลามาตรฐานมอนเตวิเดโอ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="15"/>
+      <source>Newfoundland Standard Time</source>
+      <translation>เวลามาตรฐานนิวฟันด์แลนด์</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="16"/>
+      <source>SA Eastern Standard Time</source>
+      <translation>SA เวลามาตรฐานตะวันออก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="17"/>
+      <source>Atlantic Standard Time</source>
+      <translation>เวลามาตรฐานแอตแลนติก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="18"/>
+      <source>Central Brazilian Standard Time</source>
+      <translation>เวลามาตรฐานของบราซิลตอนกลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="19"/>
+      <source>Pacific SA Standard Time</source>
+      <translation>เวลามาตรฐานแปซิฟิก SA</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="20"/>
+      <source>Paraguay Standard Time</source>
+      <translation>เวลามาตรฐานปารากวัย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="21"/>
+      <source>SA Western Standard Time</source>
+      <translation>SA เวลามาตรฐานตะวันตก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="22"/>
+      <source>Venezuela Standard Time</source>
+      <translation>เวลามาตรฐานของเวเนซุเอลา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="23"/>
+      <source>Eastern Standard Time</source>
+      <translation>เวลามาตรฐานตะวันออก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="24"/>
+      <source>SA Pacific Standard Time</source>
+      <translation>เวลามาตรฐานแปซิฟิกของ SA</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="25"/>
+      <source>US Eastern Standard Time</source>
+      <translation>เวลามาตรฐานตะวันออกของสหรัฐอเมริกา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="26"/>
+      <source>Canada Central Standard Time</source>
+      <translation>เวลามาตรฐานกลางของแคนาดา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="27"/>
+      <source>Central America Standard Time</source>
+      <translation>เวลามาตรฐานของอเมริกากลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="28"/>
+      <source>Central Standard Time (Mexico)</source>
+      <translation>เวลามาตรฐานตอนกลาง (เม็กซิโก)</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="29"/>
+      <source>Central Standard Time</source>
+      <translation>เวลามาตรฐานตอนกลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="30"/>
+      <source>Mountain Standard Time (Mexico)</source>
+      <translation>เวลามาตรฐานแถบภูเขาสูง (เม็กซิโก)</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="31"/>
+      <source>Mountain Standard Time</source>
+      <translation>เวลามาตรฐานบนภูเขา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="32"/>
+      <source>US Mountain Standard Time</source>
+      <translation>เวลามาตรฐานภูเขาของสหรัฐอเมริกา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="33"/>
+      <source>Pacific Standard Time (Mexico)</source>
+      <translation>เวลามาตรฐานแปซิฟิก (เม็กซิโก)</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="34"/>
+      <source>Pacific Standard Time</source>
+      <translation>เวลามาตรฐานแปซิฟิก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="35"/>
+      <source>Alaskan Standard Time</source>
+      <translation>เวลามาตรฐานอลาสก้า</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="36"/>
+      <source>Hawaii-Aleutian</source>
+      <translation>ฮาวาย-Aleutian</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAntarcticaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="10"/>
+      <source>New Zealand Standard Time</source>
+      <translation>เวลามาตรฐานของนิวซีแลนด์</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="11"/>
+      <source>Central Pacific Standard Time</source>
+      <translation>เวลามาตรฐานแปซิฟิกกลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="12"/>
+      <source>West Pacific Standard Time</source>
+      <translation>เวลามาตรฐานแปซิฟิกตะวันตก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="13"/>
+      <source>W. Australia Standard Time</source>
+      <translation>เวลามาตรฐานของออสเตรเลียตะวันตก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="14"/>
+      <source>SE Asia Standard Time</source>
+      <translation>เวลามาตรฐานเอเชียตะวันออกเฉียงใต้</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="15"/>
+      <source>Central Asia Standard Time</source>
+      <translation>เวลามาตรฐานเอเชียกลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="16"/>
+      <source>West Asia Standard Time</source>
+      <translation>เวลามาตรฐานเอเชียตะวันตก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="17"/>
+      <source>E. Africa Standard Time</source>
+      <translation>E. เวลามาตรฐานแอฟริกา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="18"/>
+      <source>Pacific SA Standard Time</source>
+      <translation>เวลามาตรฐานแปซิฟิก SA</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAntarcticaData.qml" line="19"/>
+      <source>SA Western Standard Time</source>
+      <translation>SA เวลามาตรฐานตะวันตก</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzArcticData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzArcticData.qml" line="10"/>
+      <source>W. Europe Standard Time</source>
+      <translation>เวลามาตรฐานยุโรปตะวันตก</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAsiaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="10"/>
+      <source>Kamchatka Standard Time</source>
+      <translation>เวลามาตรฐานคัมชัตกา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="11"/>
+      <source>Magadan Standard Time</source>
+      <translation>เวลามาตรฐานมากาดาน</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="12"/>
+      <source>Vladivostok Standard Time</source>
+      <translation>เวลามาตรฐานวลาดีวอสตอค</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="13"/>
+      <source>Yakutsk Standard Time</source>
+      <translation>เวลามาตรฐานยาคุตสค์</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="14"/>
+      <source>Tokyo Standard Time</source>
+      <translation>เวลามาตรฐานโตเกียว</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="15"/>
+      <source>Korea Standard Time</source>
+      <translation>เวลามาตรฐานเกาหลี</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="16"/>
+      <source>Singapore Standard Time</source>
+      <translation>เวลามาตรฐานสิงคโปร์</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="17"/>
+      <source>Ulaanbaatar Standard Time</source>
+      <translation>เวลามาตรฐานอูลานบาตอร์</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="18"/>
+      <source>Taipei Standard Time</source>
+      <translation>เวลามาตรฐานไทเป</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="19"/>
+      <source>North Asia East Standard Time</source>
+      <translation>เวลามาตรฐานเอเชียเหนือตะวันออก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="20"/>
+      <source>China Standard Time</source>
+      <translation>เวลามาตรฐานของจีน</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="21"/>
+      <source>SE Asia Standard Time</source>
+      <translation>เวลามาตรฐานเอเชียตะวันออกเฉียงใต้</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="22"/>
+      <source>North Asia Standard Time</source>
+      <translation>เวลามาตรฐานเอเชียเหนือ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="23"/>
+      <source>Myanmar Standard Time</source>
+      <translation>เวลามาตรฐานของเมียนมาร์</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="24"/>
+      <source>N. Central Asia Standard Time</source>
+      <translation>เวลามาตรฐานเอเชียกลางเหนือ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="25"/>
+      <source>Central Asia Standard Time</source>
+      <translation>เวลามาตรฐานเอเชียกลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="26"/>
+      <source>Bangladesh Standard Time</source>
+      <translation>เวลามาตรฐานบังกลาเทศ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="27"/>
+      <source>Nepal Standard Time</source>
+      <translation>เวลามาตรฐานเนปาล</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="28"/>
+      <source>Sri Lanka Standard Time</source>
+      <translation>เวลามาตรฐานศรีลังกา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="29"/>
+      <source>India Standard Time</source>
+      <translation>เวลามาตรฐานอินเดีย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="30"/>
+      <source>West Asia Standard Time</source>
+      <translation>เวลามาตรฐานเอเชียตะวันตก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="31"/>
+      <source>Pakistan Standard Time</source>
+      <translation>เวลามาตรฐานของปากีสถาน</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="32"/>
+      <source>Ekaterinburg Standard Time</source>
+      <translation>เวลามาตรฐานเอคาเตรินเบิร์ก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="33"/>
+      <source>Georgian Standard Time</source>
+      <translation>เวลามาตรฐานจอร์เจีย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="34"/>
+      <source>Caucasus Standard Time</source>
+      <translation>เวลามาตรฐานคอเคซัส</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="35"/>
+      <source>Azerbaijan Standard Time</source>
+      <translation>เวลามาตรฐานอาเซอร์ไบจาน</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="36"/>
+      <source>Arabian Standard Time</source>
+      <translation>เวลามาตรฐานอาหรับ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="37"/>
+      <source>Afghanistan Standard Time</source>
+      <translation>เวลามาตรฐานอัฟกานิสถาน</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="38"/>
+      <source>Iran Standard Time</source>
+      <translation>เวลามาตรฐานอิหร่าน</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="39"/>
+      <source>Arabic Standard Time</source>
+      <translation>เวลามาตรฐานภาษาอาหรับ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="40"/>
+      <source>Arab Standard Time</source>
+      <translation>เวลามาตรฐานอาหรับ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="41"/>
+      <source>Syria Standard Time</source>
+      <translation>เวลามาตรฐานซีเรีย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="42"/>
+      <source>Middle East Standard Time</source>
+      <translation>เวลามาตรฐานตะวันออกกลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="43"/>
+      <source>Jordan Standard Time</source>
+      <translation>เวลามาตรฐานจอร์แดน</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAsiaData.qml" line="44"/>
+      <source>Israel Standard Time</source>
+      <translation>เวลามาตรฐานของอิสราเอล</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAtlanticData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="10"/>
+      <source>Greenwich Standard Time</source>
+      <translation>เวลามาตรฐานกรีนิช</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="11"/>
+      <source>Azores Standard Time</source>
+      <translation>เวลามาตรฐานอะซอเรส</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="12"/>
+      <source>Cape Verde Standard Time</source>
+      <translation>เวลามาตรฐานเคปเวิร์ด</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzAustraliaData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="10"/>
+      <source>Tasmania Standard Time</source>
+      <translation>เวลามาตรฐานแทสเมเนีย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="11"/>
+      <source>E. Australia Standard Time</source>
+      <translation>E. เวลามาตรฐานของออสเตรเลีย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="12"/>
+      <source>AUS Eastern Standard Time</source>
+      <translation>เวลามาตรฐานตะวันออกของ AUS</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="13"/>
+      <source>Cen. Australia Standard Time</source>
+      <translation>เซน เวลามาตรฐานของออสเตรเลีย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="14"/>
+      <source>AUS Central Standard Time</source>
+      <translation>เวลามาตรฐานกลาง AUS</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="15"/>
+      <source>W. Australia Standard Time</source>
+      <translation>เวลามาตรฐานของออสเตรเลียตะวันตก</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzEtcData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="10"/>
+      <source>GMT +12</source>
+      <translation>GMT +12</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="11"/>
+      <source>GMT </source>
+      <translation>GMT</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="12"/>
+      <source>Mid-Atlantic Standard Time</source>
+      <translation>เวลามาตรฐานกลางมหาสมุทรแอตแลนติก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="13"/>
+      <source>GMT -02</source>
+      <translation>GMT -02</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="14"/>
+      <source>GMT -11</source>
+      <translation>GMT -11</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="15"/>
+      <source>Dateline Standard Time</source>
+      <translation>Dateline เวลามาตรฐาน</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzEuropeData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="10"/>
+      <source>GMT Standard Time</source>
+      <translation>เวลามาตรฐาน GMT</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="11"/>
+      <source>Central Europe Standard Time</source>
+      <translation>เวลามาตรฐานยุโรปกลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="12"/>
+      <source>Central European Standard Time</source>
+      <translation>เวลามาตรฐานยุโรปกลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="13"/>
+      <source>Romance Standard Time</source>
+      <translation>เวลามาตรฐานโรแมนติก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="14"/>
+      <source>W. Europe Standard Time</source>
+      <translation>เวลามาตรฐานยุโรปตะวันตก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="15"/>
+      <source>E. Europe Standard Time</source>
+      <translation>เวลามาตรฐานยุโรปตะวันออก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="16"/>
+      <source>FLE Standard Time</source>
+      <translation>เวลามาตรฐาน FLE</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="17"/>
+      <source>GTB Standard Time</source>
+      <translation>เวลามาตรฐาน GTB</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="18"/>
+      <source>Belarus Standard Time</source>
+      <translation>เวลามาตรฐานเบลารุส</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="19"/>
+      <source>Russian Standard Time</source>
+      <translation>เวลามาตรฐานรัสเซีย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEuropeData.qml" line="20"/>
+      <source>Turkey Standard Time</source>
+      <translation>เวลามาตรฐานของตุรกี</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzIndianData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzIndianData.qml" line="10"/>
+      <source>Mauritius Standard Time</source>
+      <translation>เวลามาตรฐานมอริเชียส</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzIndianData.qml" line="11"/>
+      <source>Christmas Island Standard Time</source>
+      <translation>เวลามาตรฐานของเกาะคริสต์มาส</translation>
+    </message>
+  </context>
+  <context>
+    <name>TzPacificData</name>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="10"/>
+      <source>Tonga Standard Time</source>
+      <translation>เวลามาตรฐานตองกา</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="11"/>
+      <source>Fiji Standard Time</source>
+      <translation>เวลามาตรฐานฟิจิ</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="12"/>
+      <source>New Zealand Standard Time</source>
+      <translation>เวลามาตรฐานของนิวซีแลนด์</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="13"/>
+      <source>Central Pacific Standard Time</source>
+      <translation>เวลามาตรฐานแปซิฟิกกลาง</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="14"/>
+      <source>West Pacific Standard Time</source>
+      <translation>เวลามาตรฐานแปซิฟิกตะวันตก</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="15"/>
+      <source>Samoa Standard Time</source>
+      <translation>เวลามาตรฐานซามัว</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="16"/>
+      <source>Hawaiian Standard Time</source>
+      <translation>เวลามาตรฐานฮาวาย</translation>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzPacificData.qml" line="17"/>
+      <source>Easter Island Standard Time</source>
+      <translation>เวลามาตรฐานของเกาะอีสเตอร์</translation>
+    </message>
+  </context>
+  <context>
+    <name>VebusError</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="10"/>
+      <source>Device switched off</source>
+      <translation>อุปกรณ์ถูกปิด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="13"/>
+      <source>Mixed old/new MK2</source>
+      <translation>แบบผสมเก่า/ใหม่ MK2 .</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="16"/>
+      <source>Expected devices error</source>
+      <translation>ข้อผิดพลาดของอุปกรณ์ที่คาดไว้</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="19"/>
+      <source>No other device detected</source>
+      <translation>ไม่พบอุปกรณ์อื่น</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="22"/>
+      <source>Overvoltage on AC-out</source>
+      <translation>แรงดันไฟเกินใน AC-ขาออก</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="25"/>
+      <source>DDC program error</source>
+      <translation>ข้อผิดพลาดของโปรแกรม DDC</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="28"/>
+      <source>VE.Bus BMS without assistant</source>
+      <translation>VE.Bus BMS ไม่มีผู้ช่วย</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="31"/>
+      <source>Ground relay test failed</source>
+      <translation>การทดสอบการถ่ายทอดกราวด์ล้มเหลว</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="34"/>
+      <source>System time sync error</source>
+      <translation>ข้อผิดพลาดในการซิงค์เวลาของระบบ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="37"/>
+      <source>Grid relay test fault</source>
+      <translation>ข้อผิดพลาดการทดสอบรีเลย์กริด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="40"/>
+      <source>Config mismatch with 2nd mcu</source>
+      <translation>การตั้งค่าไม่ตรงกันกับ mcu . ตัวที่ 2</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="43"/>
+      <source>Device transmit error</source>
+      <translation>ข้อผิดพลาดในการส่งอุปกรณ์</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="46"/>
+      <source>Awaiting configuration or dongle missing</source>
+      <translation>กำลังรอการกำหนดค่าหรือดองเกิลหายไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="49"/>
+      <source>Phase master missing</source>
+      <translation>เฟสมาสเตอร์หายไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="52"/>
+      <source>Overvoltage has occurred</source>
+      <translation>เกิดแรงดันไฟเกิน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="55"/>
+      <source>Slave does not have AC input!</source>
+      <translation>สเลฟไม่มีอินพุต AC!</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="58"/>
+      <source>Device can't be slave</source>
+      <translation>อุปกรณ์ไม่สามารถเป็นทาสได้</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="61"/>
+      <source>System protection initiated</source>
+      <translation>การป้องกันระบบเริ่มต้นขึ้น</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="64"/>
+      <source>Firmware incompatibiltiy</source>
+      <translation>เฟิร์มแวร์ไม่เข้ากัน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="67"/>
+      <source>Internal error</source>
+      <translation>ข้อผิดพลาดภายใน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="70"/>
+      <source>Failing relay test prevents connection</source>
+      <translation>การทดสอบรีเลย์ล้มเหลวป้องกันการเชื่อมต่อ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="73"/>
+      <source>VE.Bus error</source>
+      <translation>ข้อผิดพลาดของ VE.Bus</translation>
+    </message>
+  </context>
+  <context>
+    <name>Wakespeed</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="138"/>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="143"/>
+      <source>Unknown error: </source>
+      <translation>ข้อผิดพลาดที่ไม่รู้จัก:</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="151"/>
+      <source>Internal error</source>
+      <translation>ข้อผิดพลาดภายใน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="156"/>
+      <source>No error</source>
+      <translation>ไม่มีข้อผิดพลาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="159"/>
+      <source>Battery high temperature</source>
+      <translation>อุณหภูมิสูงแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="162"/>
+      <source>Battery high voltage</source>
+      <translation>แบตเตอรี่ไฟฟ้าแรงสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="165"/>
+      <source>Battery low voltage</source>
+      <translation>แรงดันไฟต่ำของแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="168"/>
+      <source>Battery voltage exceeded configured max</source>
+      <translation>แรงดันแบตเตอรี่เกินการกำหนดค่าสูงสุด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="175"/>
+      <source>Alternator high temperature</source>
+      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับอุณหภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="178"/>
+      <source>Alternator high RPM</source>
+      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับ RPM สูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="181"/>
+      <source>Field drive FET high temperature</source>
+      <translation>ไดรฟ์ภาคสนาม FET อุณหภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="184"/>
+      <source>Required sensor missing</source>
+      <translation>ขาดเซ็นเซอร์ที่จำเป็น</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="187"/>
+      <source>Alternator low voltage</source>
+      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับแรงดันต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="190"/>
+      <source>Alternator high voltage offset</source>
+      <translation>ออฟเซ็ตไฟฟ้าแรงสูงกระแสสลับ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="193"/>
+      <source>Alternator Voltage exceeded configured max</source>
+      <translation>แรงดันไฟฟ้ากระแสสลับเกินกำหนดmax</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="196"/>
+      <source>Alternator high voltage</source>
+      <translation>เครื่องกำเนิดไฟฟ้ากระแสสลับแรงสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="199"/>
+      <source>Battery disconnected</source>
+      <translation>ถอดแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="202"/>
+      <source>Battery high voltage disconnect</source>
+      <translation>ตัดการเชื่อมต่อไฟฟ้าแรงสูงของแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="205"/>
+      <source>Battery instance ouf of range</source>
+      <translation>อินสแตนซ์แบตเตอรี่อยู่นอกช่วง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="208"/>
+      <source>Too many BMS's</source>
+      <translation>BMS มากเกินไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="211"/>
+      <source>Battery about to disconnect</source>
+      <translation>เกี่ยวกับการตัดการเชื่อมต่อแบตเตอรี่</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="214"/>
+      <source>Too many devices to track</source>
+      <translation>มีอุปกรณ์ให้ติดตามมากเกินไป</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="217"/>
+      <source>Battery low voltage disconnect</source>
+      <translation>ตัดการเชื่อมต่อ แบตเตอรี่แรงดันต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="220"/>
+      <source>Battery high current disconnect</source>
+      <translation>ตัดการเชื่อมต่อ กระแสไฟของแบตเตอรี่สูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="223"/>
+      <source>Battery high temperature disconnect</source>
+      <translation>ตัดการเชื่อมต่อ แบตเตอรี่อุณหภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="226"/>
+      <source>Battery low temperature disconnect</source>
+      <translation>ตัดการเชื่อมต่อ แบตเตอรี่อุณหภูมิต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="229"/>
+      <source>BMS connection lost</source>
+      <translation>ขาดการเชื่อมต่อ BMS</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="232"/>
+      <source>ATC Disabled</source>
+      <translation>ATC พิการ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="235"/>
+      <source>DC/DC converter not ready</source>
+      <translation>ตัวแปลง DC/DC ไม่พร้อมทำงาน</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="238"/>
+      <source>DC/DC high primary voltage</source>
+      <translation>DC/DC แรงดันไฟฟ้าหลักสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="241"/>
+      <source>DC/DC low primary voltage</source>
+      <translation>DC/DC แรงดันไฟหลักต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="244"/>
+      <source>DC/DC high secondary voltage</source>
+      <translation>DC/DC แรงดันไฟฟ้าทุติยภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="247"/>
+      <source>DC/DC low secondary voltage</source>
+      <translation>DC/DC แรงดันไฟฟ้าทุติยภูมิต่ำ</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="250"/>
+      <source>DC/DC high temperature</source>
+      <translation>DC/DC อุณหภูมิสูง</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="253"/>
+      <source>DC/DC misconfiguration</source>
+      <translation>การกำหนดค่า DC/DC ผิดพลาด</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="171"/>
+      <source>Battery temperature sensor defective</source>
+      <translation>เซ็นเซอร์อุณหภูมิแบตเตอรี่ชำรุด</translation>
     </message>
   </context>
 </TS>
