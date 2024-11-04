@@ -72,9 +72,9 @@ QtObject {
 				onTriggered: {
 					const zeroPower = Math.random() < 0.2
 					let totalPower = 0
-					for (let i = 0; i < evCharger.phases.count; ++i) {
-						const phasePower = zeroPower ? 0 : Math.random() * 50
-						phases.get(i)._power.setValue(phasePower)
+					for (let i = 0; i < evCharger.phases._phases.count; ++i) {
+						const phasePower = zeroPower ? 0 : 100 + Math.random() * 50
+						phases._phases.objectAt(i)._power.setValue(phasePower)
 						totalPower += phasePower
 					}
 
@@ -182,7 +182,7 @@ QtObject {
 							repeat: true
 							interval: 2000
 							onTriggered: {
-								_power.setValue(Math.random() * 100)
+								_power.setValue(100 + (Math.random() * 100))
 								Qt.callLater(energyMeter.updateTotals)
 							}
 						}
