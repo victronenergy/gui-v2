@@ -849,9 +849,10 @@ SwipeViewPage {
 			// If splitting loads into (input) AC Loads and (output) Essential Loads:
 			//  - connect to AC Loads, if there are any EV chargers with /Position=1 (AC-In)
 			//  - connect to Essential Loads, if there are any EV chargers with /Position=0 (AC-Out)
-			readonly property bool connectToAcLoads: visible
-					&& (!Global.system.showInputLoads  // AC loads are combined
-						|| Global.evChargers.acInputPositionCount > 0) // AC loads are split, and AC-in position is in use
+			readonly property bool connectToCombinedAcLoads: visible && !Global.system.showInputLoads
+			readonly property bool connectToSplitAcLoads: visible
+					&& Global.system.showInputLoads                 // AC loads are split
+					&& Global.evChargers.acInputPositionCount > 0   // AC-in position is in use
 			readonly property bool connectToEssentialLoads: visible
 					&& Global.system.showInputLoads     // AC loads are split
 					&& Global.system.hasAcOutSystem     // Essential Loads should be visible
@@ -875,18 +876,18 @@ SwipeViewPage {
 				parent: acLoadsWidget
 				location: VenusOS.WidgetConnector_Location_Left
 				offsetY: height + Theme.geometry_overviewPage_connector_anchor_spacing
-				visible: evcsWidget.connectToAcLoads
+				visible: evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads
 			}
 			WidgetConnectorAnchor {
 				id: acLoadsToEvcsEndAnchor
 				location: VenusOS.WidgetConnector_Location_Left
 				offsetY: -(height + Theme.geometry_overviewPage_connector_anchor_spacing)
-				visible: evcsWidget.connectToAcLoads
+				visible: evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads
 			}
 			WidgetConnector {
 				id: acLoadsToEvcsConnector
 				parent: root
-				visible: evcsWidget.connectToAcLoads
+				visible: evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads
 				startWidget: acLoadsWidget
 				startLocation: VenusOS.WidgetConnector_Location_Left
 				startOffsetY: acLoadsToEvcsStartAnchor.offsetY
@@ -898,7 +899,8 @@ SwipeViewPage {
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
-						&& Global.evChargers.acInputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						&& ( (evcsWidget.connectToCombinedAcLoads && Global.evChargers.power > Theme.geometry_overviewPage_connector_animationPowerThreshold)
+						  || (evcsWidget.connectToSplitAcLoads && Global.evChargers.acInputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold) )
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
