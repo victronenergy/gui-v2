@@ -21,6 +21,18 @@ Page {
 		{ display: qsTrId("settings_system_shore_power"), value: 3 },
 	]
 
+	VeQuickItem {
+		id: hasAcOutLoadsItem
+
+		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
+	}
+
+	VeQuickItem {
+		id: hasAcInLoadsItem
+
+		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcInLoads"
+	}
+
 	GradientListView {
 		model: ObjectModel {
 
@@ -86,23 +98,35 @@ Page {
 			ListRadioButtonGroup {
 				//% "Position of AC loads"
 				text: qsTrId("settings_system_ac_position")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcInLoads"
+				currentIndex: (hasAcInLoadsItem.value === 1 ? 1 : 0) + (
+					hasAcOutLoadsItem.value === 1 ? 2 : 0) - 1
 				optionModel: [
 					{
-						//% "AC input & output"
-						display: qsTrId("settings_system_ac_input_and_output"),
-						//% "Use this option when AC-loads are present on the input of the Inverter/Charger. Use this option if unsure."
-						caption: qsTrId("settings_system_ac_input_and_output_description"),
-						value: 1
+						//% "AC input only"
+						display: qsTrId("settings_system_ac_input_only"),
+						//% "The AC output of the Inverter/Charger is not used."
+						caption: qsTrId("settings_system_ac_input_only_description"),
+						readOnly: !Global.system.hasEss
 					},
 					{
 						//% "AC output only"
 						display: qsTrId("settings_system_ac_output_only"),
-						//% "Use this option when the system uses a grid meter, but all AC-loads are on the output of the Inverter/Charger."
+						//% "All AC loads are on the output of the Inverter/Charger."
 						caption: qsTrId("settings_system_ac_output_only_description"),
-						value: 0
+					},
+					{
+						//% "AC input & output"
+						display: qsTrId("settings_system_ac_input_and_output"),
+						//% "The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed."
+						caption: qsTrId("settings_system_ac_input_and_output_description"),
 					},
 				]
+
+				onOptionClicked: function(index) {
+					index += 1
+					hasAcInLoadsItem.setValue(index & 1)
+					hasAcOutLoadsItem.setValue((index & 2) >> 1)
+				}
 			}
 
 			ListRadioButtonGroup {
