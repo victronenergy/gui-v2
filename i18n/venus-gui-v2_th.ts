@@ -8258,12 +8258,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Controls</source>
       <translation>การควบคุม</translation>
     </message>
-    <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
-      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
-      <translation type="unfinished">ตอนนี้การควบคุมรายวันทั้งหมดจะถูกรวมไว้ด้วยกันในบานหน้าต่างการควบคุมใหม่ </translation>
-    </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
       <source>Watts &amp; Amps</source>
@@ -8539,6 +8533,11 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>ไม่สามารถเปิดใช้งานฟังก์ชันการสตาร์ท/หยุดเครื่องกำเนิดไฟฟ้าได้ ให้ไปที่การตั้งค่ารีเลย์และตั้งค่าฟังก์ชันเป็น "การสตาร์ท/หยุดเครื่องกำเนิดไฟฟ้า"</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <translation>ตอนนี้การควบคุมรายวันทั้งหมดถูกรวมเข้าด้วยกันในบานหน้าต่างการควบคุมใหม่ เข้าถึงได้จากทุกที่โดยแตะปุ่มเฉพาะที่ด้านบนซ้ายของจอแสดงผล</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>

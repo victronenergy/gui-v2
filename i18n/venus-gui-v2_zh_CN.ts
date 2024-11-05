@@ -8258,12 +8258,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Controls</source>
       <translation>控制</translation>
     </message>
-    <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
-      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
-      <translation type="unfinished">现在，所有日常控制功能都合并到了新的 "控制 "窗格中。 </translation>
-    </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
       <source>Watts &amp; Amps</source>
@@ -8539,6 +8533,11 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>。发电机启动/停止功能未启用。进入继电器设置，将功能设置为 "发电机组启动/停止"。</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <translation>现在，所有日常控制功能都集中在新的 "控制 "窗格中。点击显示屏左上角的专用按钮，即可在任何地方进行访问。</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>

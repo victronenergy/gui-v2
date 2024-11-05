@@ -8260,12 +8260,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Controls</source>
       <translation>Управління:</translation>
     </message>
-    <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
-      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
-      <translation type="unfinished">Всі щоденні елементи керування тепер об'єднані в новій панелі "Елементи керування". </translation>
-    </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
       <source>Watts &amp; Amps</source>
@@ -8543,6 +8537,11 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>Функція запуску/зупинки генератора не ввімкнена, перейдіть до налаштувань реле та встановіть функцію на "Запуск/зупинка генератора"</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <translation>Всі повсякденні елементи керування тепер об'єднані в новій панелі "Елементи керування". Доступ до неї можна отримати з будь-якого місця, натиснувши спеціальну кнопку у верхньому лівому кутку дисплея.</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>

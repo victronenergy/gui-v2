@@ -8260,12 +8260,6 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
       <source>Controls</source>
       <translation>Ovládací prvky</translation>
     </message>
-    <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
-      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
-      <translation type="unfinished">Všechny každodenní ovládací prvky jsou nyní sloučeny v novém podokně Ovládací prvky. </translation>
-    </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
       <source>Watts &amp; Amps</source>
@@ -8543,6 +8537,11 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>Funkce start/stop generátoru není povolena, přejděte do nastavení relé a nastavte funkci na "Genset start/stop".</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <translation>Všechny každodenní ovládací prvky jsou nyní sloučeny v novém podokně Ovládací prvky. Jsou přístupné odkudkoli klepnutím na vyhrazené tlačítko v levém horním rohu displeje.</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
