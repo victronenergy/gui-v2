@@ -197,7 +197,6 @@ Page {
 								//% "Press to redetect"
 							 : qsTrId("vebus_device_press_to_redetect")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				enabled: redetectSystem.isValid
 				onClicked: redetectSystem.setValue(1)
 			}
 
@@ -210,7 +209,6 @@ Page {
 								//% "Press to restart"
 							 : qsTrId("vebus_device_press_to_restart")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				enabled: systemReset.isValid
 				onClicked: systemReset.setValue(1)
 			}
 
