@@ -1487,7 +1487,7 @@
     <message id="page_settings_run_time_and_service_service_time_interval">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="167"/>
       <source>Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer.</source>
-      <translation>Servicezeitintervall auf %1h eingestellt. Verwenden Sie die Schaltfläche "Service-Timer zurücksetzen", um den Service-Timer zurückzusetzen.</translation>
+      <translation>Servicezeitintervall auf %1S eingestellt. Verwenden Sie die Schaltfläche "Service-Timer zurücksetzen", um den Service-Timer zurückzusetzen.</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_service_timer">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="178"/>
@@ -5631,7 +5631,7 @@ Möchtest Sie fortfahren?</translation>
       <location filename="../../components/Utils.js" line="258"/>
       <source>%1h %2m ago</source>
       <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
-      <translation>vor %1h %2m</translation>
+      <translation>vor %1S %2M</translation>
     </message>
     <message id="cgwacs_battery_schedule_every_day">
       <location filename="../../components/settings/ChargeScheduleItem.qml" line="17"/>
@@ -6091,12 +6091,12 @@ Möchtest Sie fortfahren?</translation>
     <message id="utils_format_days_hours">
       <location filename="../../components/Utils.js" line="186"/>
       <source>%1d %2h</source>
-      <translation>%1D %2h</translation>
+      <translation>%1D %2S</translation>
     </message>
     <message id="utils_format_hours_min">
       <location filename="../../components/Utils.js" line="191"/>
       <source>%1h %2m</source>
-      <translation>%1h %2m</translation>
+      <translation>%1S %2M</translation>
     </message>
     <message id="utils_format_min_sec">
       <location filename="../../components/Utils.js" line="212"/>
@@ -8259,12 +8259,6 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
       <source>Controls</source>
       <translation>Steuerung</translation>
     </message>
-    <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
-      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
-      <translation type="unfinished">Alle alltäglichen Steuerelemente sind jetzt im neuen Fenster "Steuerelemente" zusammengefasst. </translation>
-    </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
       <source>Watts &amp; Amps</source>
@@ -8541,6 +8535,11 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>Die Start-/Stoppfunktion des Generators ist nicht aktiviert. Gehen Sie zu den Relaiseinstellungen und stellen Sie die Funktion auf „Generator Start/Stopp“ ein.</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <translation>Alle alltäglichen Steuerelemente sind jetzt im neuen Fenster "Steuerelemente" zusammengefasst. Sie sind von überall aus zugänglich, indem Sie auf die entsprechende Schaltfläche oben links auf dem Display tippen.</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>

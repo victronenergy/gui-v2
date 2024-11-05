@@ -6716,7 +6716,7 @@ Si desidera continuare?</translation>
     <message id="settings_brief_view_start_page">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="172"/>
       <source>Start page</source>
-      <translation type="unfinished"/>
+      <translation type="unfinished">Pagina d’inizio</translation>
     </message>
     <message id="settings_restarting_app">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="231"/>
@@ -8254,12 +8254,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Controls</source>
       <translation>Comandi:</translation>
     </message>
-    <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
-      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
-      <translation type="unfinished">Tutti i controlli quotidiani sono ora riuniti nel nuovo quadro Controlli. </translation>
-    </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
       <source>Watts &amp; Amps</source>
@@ -8316,40 +8310,40 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message id="settings_startpage_name">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="37"/>
       <source>Start page</source>
-      <translation/>
+      <translation>Pagina d’inizio</translation>
     </message>
     <message id="settings_display_onscreen_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="185"/>
       <source>User interface</source>
-      <translation/>
+      <translation>Interfaccia utente</translation>
     </message>
     <message id="settings_display_remote_console_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="187"/>
       <source>User interface (Remote Console)</source>
-      <translation/>
+      <translation>Interfaccia utente (Consolle Remota)</translation>
     </message>
     <message id="settings_app_restarted">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="234"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
-      <translation/>
+      <translation>%1 aggiornato</translation>
     </message>
     <message id="settings_switch_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="238"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
-      <translation/>
+      <translation>L'interfaccia utente passa a %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="242"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
-      <translation/>
+      <translation>%1 è impostato su %2</translation>
     </message>
     <message id="press_ok_to_reboot">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="309"/>
       <source>Press 'OK' to reboot</source>
-      <translation/>
+      <translation>Premere “OK” per riavviare</translation>
     </message>
     <message id="page_settings_nodered_factory_reset">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="31"/>
@@ -8365,32 +8359,32 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message id="settings_connection_status">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="179"/>
       <source>Connection status</source>
-      <translation/>
+      <translation>Stato della connessione</translation>
     </message>
     <message id="settings_connection_error_https_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="220"/>
       <source>Connection status (HTTPS channel)</source>
-      <translation/>
+      <translation>Stato della connessione (canale HTTPS)</translation>
     </message>
     <message id="settings_connection_error_http_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="222"/>
       <source>Connection status (HTTP channel)</source>
-      <translation/>
+      <translation>Stato della connessione (canale HTTP)</translation>
     </message>
     <message id="settings_connection_error_realtime_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="240"/>
       <source>Connection status (MQTT Real-time channel)</source>
-      <translation/>
+      <translation>Stato della connessione (canale MQTT in tempo reale)</translation>
     </message>
     <message id="settings_connection_error_rpc_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="247"/>
       <source>Connection status (MQTT RPC channel)</source>
-      <translation/>
+      <translation>Stato della connessione (canale MQTT RPC)</translation>
     </message>
     <message id="controlcard_generator_autostarted">
       <location filename="../../components/CommonWords.qml" line="80"/>
       <source>Auto-started • %1</source>
-      <translation/>
+      <translation>Avviato automaticamente • %1</translation>
     </message>
     <message id="settings_relay_deactivation_value">
       <location filename="../../components/settings/TemperatureRelaySettings.qml" line="89"/>
@@ -8401,57 +8395,57 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message id="generator_not_running">
       <location filename="../../data/Generators.qml" line="67"/>
       <source>Not running</source>
-      <translation/>
+      <translation>Non in esecuzione</translation>
     </message>
     <message id="settings_loss_of_communication">
       <location filename="../../data/Generators.qml" line="76"/>
       <source>Loss of communication</source>
-      <translation/>
+      <translation>Perdita di comunicazione</translation>
     </message>
     <message id="settings_soc_condition">
       <location filename="../../data/Generators.qml" line="79"/>
       <source>SOC condition</source>
-      <translation/>
+      <translation>Condizioni SoC</translation>
     </message>
     <message id="settings_ac_load_condition">
       <location filename="../../data/Generators.qml" line="82"/>
       <source>AC load condition</source>
-      <translation/>
+      <translation>Condizioni carico CA</translation>
     </message>
     <message id="settings_battery_current_condition">
       <location filename="../../data/Generators.qml" line="85"/>
       <source>Battery current condition</source>
-      <translation/>
+      <translation>Condizioni corrente batteria</translation>
     </message>
     <message id="settings_battery_voltage_condition">
       <location filename="../../data/Generators.qml" line="88"/>
       <source>Battery voltage condition</source>
-      <translation/>
+      <translation>Condizioni tensione batteria</translation>
     </message>
     <message id="settings_inverter_overload_condition">
       <location filename="../../data/Generators.qml" line="94"/>
       <source>Inverter overload condition</source>
-      <translation/>
+      <translation>Condizioni di sovraccarico dell'inverter</translation>
     </message>
     <message id="ess_flags">
       <location filename="../../components/SystemReason.qml" line="15"/>
       <source>ESS %1</source>
-      <translation/>
+      <translation>ESS %1</translation>
     </message>
     <message id="systemreason_charge_discharge_disabled">
       <location filename="../../components/SystemReason.qml" line="47"/>
       <source>ESS %1 Charge/Discharge Disabled</source>
-      <translation/>
+      <translation>ESS %1 Carica/scarica disattivata</translation>
     </message>
     <message id="systemreason_charge_disabled">
       <location filename="../../components/SystemReason.qml" line="50"/>
       <source>ESS %1 Charge Disabled</source>
-      <translation/>
+      <translation>ESS %1 Carica disattivata</translation>
     </message>
     <message id="systemreason_discharge_disabled">
       <location filename="../../components/SystemReason.qml" line="53"/>
       <source>ESS %1 Discharge Disabled</source>
-      <translation/>
+      <translation>ESS %1 Scarica disattivata</translation>
     </message>
     <message id="startpage_option_brief_without_panel">
       <location filename="../../data/StartPageConfiguration.qml" line="22"/>
@@ -8463,7 +8457,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../data/StartPageConfiguration.qml" line="28"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
-      <translation/>
+      <translation>Sintesi (pannello laterale aperto)</translation>
     </message>
     <message id="startpage_option_overview">
       <location filename="../../data/StartPageConfiguration.qml" line="34"/>
@@ -8475,67 +8469,72 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../data/StartPageConfiguration.qml" line="40"/>
       <source>Levels (Tanks)</source>
       <extracomment>The 'Levels' page, with the "Tanks" section opened</extracomment>
-      <translation/>
+      <translation>Livelli (serbatoi)</translation>
     </message>
     <message id="startpage_option_levels_environment">
       <location filename="../../data/StartPageConfiguration.qml" line="46"/>
       <source>Levels (Environment)</source>
       <extracomment>The 'Levels' page, with the "Environment" section opened</extracomment>
-      <translation/>
+      <translation>Livelli (ambiente)</translation>
     </message>
     <message id="startpage_option_battery list">
       <location filename="../../data/StartPageConfiguration.qml" line="51"/>
       <source>Battery list</source>
-      <translation/>
+      <translation>Elenco delle batterie</translation>
     </message>
     <message id="firmware_installed_build_gx_device_updated">
       <location filename="../../pages/DialogLayer.qml" line="55"/>
       <source>GX device has been updated</source>
-      <translation/>
+      <translation>Il dispositivo GX è stato aggiornato</translation>
     </message>
     <message id="settings_startpage_timeout_minutes" numerus="yes">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="20"/>
       <source>After %n minute(s)</source>
       <translation>
-        <numerusform/>
-        <numerusform/>
+        <numerusform>Dopo %n minuti</numerusform>
+        <numerusform>Dopo %n minuti</numerusform>
       </translation>
     </message>
     <message id="settings_startpage_description">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="63"/>
       <source>Go to this page when the application starts.</source>
-      <translation/>
+      <translation>Entrare in questa pagina quando si avvia l’applicazione.</translation>
     </message>
     <message id="settings_startpage_timeout">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="74"/>
       <source>Timeout</source>
-      <translation/>
+      <translation>Timeout</translation>
     </message>
     <message id="settings_startpage_timeout_description">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="84"/>
       <source>Revert to the start page when the application is inactive.</source>
-      <translation/>
+      <translation>Torna alla pagina iniziale quando l'applicazione non è attiva.</translation>
     </message>
     <message id="settings_startpage_auto_description">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="115"/>
       <source>After one minute of inactivity, select the current page as the start page, if it is in this list.</source>
-      <translation/>
+      <translation>Dopo un minuto di inattività, selezionare la pagina corrente come pagina iniziale, se appare nell'elenco.</translation>
     </message>
     <message id="rs_current_limit_not_adjustable">
       <location filename="../../components/CurrentLimitButton.qml" line="30"/>
       <source>This current limit is fixed in the system configuration. It cannot be adjusted.</source>
-      <translation/>
+      <translation>Questo limite di corrente è stabilito nella configurazione del sistema. Non può essere regolato.</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
       <location filename="../../components/InverterChargerModeButton.qml" line="39"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
-      <translation/>
+      <translation>La modalità è stabilita nella configurazione del sistema. Non può essere regolata.</translation>
     </message>
     <message id="settings_generator_function_not_enabled">
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
-      <translation>Funzione avvio/arresto generatore non attivata, vai alle impostazioni relè e imposta la funzione "Avvio/arresto generatore"</translation>
+      <translation>Funzione avvio/arresto generatore non attivata, entrare nelle impostazioni relè e impostare la funzione "Avvio/arresto generatore"</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <translation/>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>

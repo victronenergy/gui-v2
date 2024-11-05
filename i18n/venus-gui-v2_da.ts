@@ -8260,12 +8260,6 @@ Med strømlinet navigation og et nyt look er alt det, du elsker, nu endnu letter
       <source>Controls</source>
       <translation>Kontrol</translation>
     </message>
-    <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
-      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
-      <translation type="unfinished">Alle de daglige kontroller er nu samlet i den nye kontrolrude. </translation>
-    </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
       <source>Watts &amp; Amps</source>
@@ -8504,7 +8498,7 @@ Med strømlinet navigation og et nyt look er alt det, du elsker, nu endnu letter
       <source>After %n minute(s)</source>
       <translation>
         <numerusform>Efter %n minut(ter)</numerusform>
-        <numerusform/>
+        <numerusform>Efter %n minut(ter)</numerusform>
       </translation>
     </message>
     <message id="settings_startpage_description">
@@ -8542,6 +8536,11 @@ Med strømlinet navigation og et nyt look er alt det, du elsker, nu endnu letter
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>Generatorens start/stop-funktion er ikke aktiveret, gå til relæindstillinger og sæt funktionen til "Genset start/stop"</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <translation>Alle de daglige kontroller er nu samlet i den nye kontrolrude. Den er tilgængelig overalt ved at trykke på den dedikerede knap øverst til venstre på skærmen.</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>

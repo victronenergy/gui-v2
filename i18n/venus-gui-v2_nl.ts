@@ -8110,7 +8110,7 @@ Nadat er een nieuw netwerk is toegevoegd/ingeschakeld, moet het eenmalig goedgek
     <message id="overview_widget_essential_loads_title">
       <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="13"/>
       <source>Essential Loads</source>
-      <translation>Essentiële belastingen</translation>
+      <translation>Essent. belastingen</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
       <location filename="../../pages/controlcards/GeneratorCard.qml" line="66"/>
@@ -8258,12 +8258,6 @@ Met een gestroomlijnde navigatie en een frisse look is alles waar je van houdt n
       <location filename="../../pages/welcome/WelcomeView.qml" line="99"/>
       <source>Controls</source>
       <translation>Besturingen</translation>
-    </message>
-    <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
-      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
-      <translation type="unfinished">Alle dagelijkse besturingselementen zijn nu samengevoegd in het nieuwe deelvenster Besturingselementen. </translation>
     </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
@@ -8541,6 +8535,11 @@ Met een gestroomlijnde navigatie en een frisse look is alles waar je van houdt n
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>Aggregaat start/stop-functie is niet ingeschakeld, ga naar relaisinstellingen en stel functie in op "Aggregaat start/stop".</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <translation>Alle dagelijkse besturingselementen zijn nu samengebracht in het nieuwe deelvenster Besturingselementen. Overal toegankelijk door op de speciale knop linksboven op het scherm te tikken.</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>

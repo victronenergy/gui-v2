@@ -332,7 +332,7 @@
     <message id="settings_dvcc_limit_charge_current">
       <location filename="../../pages/settings/DvccCommonSettings.qml" line="32"/>
       <source>Limit charge current</source>
-      <translation>Limiter courant de charge</translation>
+      <translation>Limiter le courant de charge</translation>
     </message>
     <message id="settings_dvcc_max_charge_current">
       <location filename="../../pages/settings/DvccCommonSettings.qml" line="44"/>
@@ -377,7 +377,7 @@
     <message id="settings_deviceinfo_connection">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="22"/>
       <source>Connection</source>
-      <translation>Connexion</translation>
+      <translation>Type d'interface</translation>
     </message>
     <message id="settings_deviceinfo_product">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="49"/>
@@ -462,7 +462,7 @@
     <message id="value_must_be_lower_than_start_value">
       <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="24"/>
       <source>Value must be lower than start value</source>
-      <translation>La valeur doit être &lt; à la valeur de démarrage</translation>
+      <translation>La valeur doit être inf. à la valeur de démarrage</translation>
     </message>
     <message id="settings_minmax_acout_max_power">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="123"/>
@@ -512,22 +512,22 @@
     <message id="settings_system_battery_monitor">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="126"/>
       <source>Battery monitor</source>
-      <translation>Contrôleur de batterie</translation>
+      <translation>Moniteur de batterie</translation>
     </message>
     <message id="settings_system_unavailable_monitor">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="129"/>
       <source>Unavailable monitor, set another</source>
-      <translation>Indisponible, en sélectionner un autre</translation>
+      <translation>Moniteur indisponible, en sélectionner un autre</translation>
     </message>
     <message id="page_generator_conditions_battery_monitor">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="49"/>
       <source>Battery monitor</source>
-      <translation type="unfinished">Contrôleur de batterie</translation>
+      <translation type="unfinished">Moniteur de batterie</translation>
     </message>
     <message id="page_generator_conditions_unavailable_monitor_set_another">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="51"/>
       <source>Unavailable monitor, set another</source>
-      <translation type="unfinished">Indisponible, en sélectionner un autre</translation>
+      <translation type="unfinished">Moniteur indisponible, en sélectionner un autre</translation>
     </message>
     <message id="page_generator_conditions_on_loss_of_communication">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="58"/>
@@ -547,7 +547,7 @@
     <message id="page_generator_conditions_stop_generator_when_ac_input_available">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="72"/>
       <source>Stop generator when AC-input is available</source>
-      <translation>Arrêt du générateur lorsque l'alimentation en courant alternatif est disponible</translation>
+      <translation>Arrêt du générateur lorsque l'entrée CA est disponible</translation>
     </message>
     <message id="page_generator_conditions_battery_soc">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="95"/>
@@ -577,7 +577,7 @@
     <message id="page_generator_conditions_periodic_run">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
       <source>Periodic run</source>
-      <translation>Exécution régulière</translation>
+      <translation>Exécution périodique</translation>
     </message>
     <message id="run_interval">
       <location filename="../../pages/settings/PageGeneratorTestRun.qml" line="25"/>
@@ -745,7 +745,7 @@
     <message id="settings_batteries_active_battery_monitor">
       <location filename="../../pages/settings/PageSettingsBatteries.qml" line="88"/>
       <source>Active battery monitor</source>
-      <translation>Contrôleur de batterie actif</translation>
+      <translation>Moniteur de batterie actif</translation>
     </message>
     <message id="settings_batteries_name">
       <location filename="../../pages/settings/PageSettingsBatteries.qml" line="100"/>
@@ -900,7 +900,7 @@
     <message id="settings_adaptive_brightness">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="20"/>
       <source>Adaptive brightness</source>
-      <translation>Luminosité adaptative</translation>
+      <translation>Luminosité automatique</translation>
     </message>
     <message id="settings_brightness">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="27"/>
@@ -910,7 +910,7 @@
     <message id="settings_display_off_time">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="35"/>
       <source>Display off time</source>
-      <translation>Durée avant extinction de l'affichage</translation>
+      <translation>Durée avant mise en veille de l'affichage</translation>
     </message>
     <message id="settings_displayoff_10sec">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="41"/>
@@ -962,7 +962,7 @@
     <message id="settings_brief_view_levels">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="76"/>
       <source>Brief view levels</source>
-      <translation>Niveaux de vue succincts</translation>
+      <translation>Niveaux sur la page "En bref"</translation>
     </message>
     <message id="settings_language">
       <location filename="../../pages/settings/PageSettingsDisplay.qml" line="84"/>
@@ -977,7 +977,7 @@
     <message id="settings_units_energy">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="18"/>
       <source>Electrical power display</source>
-      <translation>Affichage de la puissance électrique</translation>
+      <translation>Puissance électrique</translation>
     </message>
     <message id="settings_units_watts">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="22"/>
@@ -1028,12 +1028,12 @@
     <message id="settings_dvcc_shared_voltage_sense">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="62"/>
       <source>SVS - Shared voltage sense</source>
-      <translation>SVS - Sonde de tension partagée</translation>
+      <translation>SVS - Partage de la tension</translation>
     </message>
     <message id="settings_dvcc_shared_temp_sense">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="71"/>
       <source>STS - Shared temperature sense</source>
-      <translation>STS - Sonde de température partagée</translation>
+      <translation>STS - Partage de la température</translation>
     </message>
     <message id="settings_tank_unavailable_sensor">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="70"/>
@@ -1053,7 +1053,7 @@
     <message id="settings_dvcc_shared_current_sense">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="115"/>
       <source>SCS - Shared current sense</source>
-      <translation>SCS - Sonde de courant partagée</translation>
+      <translation>SCS - Partage du courant</translation>
     </message>
     <message id="settings_dvcc_scs_status">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="122"/>
@@ -1063,17 +1063,17 @@
     <message id="settings_dvcc_scs_disabled_external_control">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="130"/>
       <source>Disabled (external control)</source>
-      <translation>Désactivée (contrôle externe)</translation>
+      <translation>Désactivé (contrôle externe)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_chargers">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="132"/>
       <source>Disabled (no chargers)</source>
-      <translation>Désactivée (pas de chargeurs)</translation>
+      <translation>Désactivé (pas de chargeurs)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_battery_monitor">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="134"/>
       <source>Disabled (no battery monitor)</source>
-      <translation>Désactivée (pas de contrôleur de batterie)</translation>
+      <translation>Désactivée (pas de moniteur de batterie)</translation>
     </message>
     <message id="settings_dvcc_auto_selection">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="144"/>
@@ -1088,7 +1088,7 @@
     <message id="settings_dvcc_controlling_bms">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="150"/>
       <source>Controlling BMS</source>
-      <translation>Contrôle du BMS</translation>
+      <translation>Contrôle par BMS</translation>
     </message>
     <message id="settings_dvcc_unavailable_bms">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="156"/>
@@ -1110,7 +1110,7 @@
     <message id="settings_build_date_time">
       <location filename="../../pages/settings/PageSettingsFirmware.qml" line="27"/>
       <source>Build date/time</source>
-      <translation>Date/Heure de fabrication</translation>
+      <translation>Date/Heure de compilation</translation>
     </message>
     <message id="settings_online_updates">
       <location filename="../../pages/settings/PageSettingsFirmware.qml" line="33"/>
@@ -1183,7 +1183,7 @@
     <message id="settings_update_feed">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="35"/>
       <source>Update feed</source>
-      <translation>Mettre à jour le flux</translation>
+      <translation>Canal de mise à jour</translation>
     </message>
     <message id="settings_firmware_image_type">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="53"/>
@@ -1225,7 +1225,7 @@
     <message id="settings_firmware_update_build_date_time">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="112"/>
       <source>Update build date/time</source>
-      <translation>Date/Heure construction de la mise à jour</translation>
+      <translation>Date/Heure de compilation de la mise à jour</translation>
     </message>
     <message id="page_settings_fronius_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="30"/>
@@ -2296,7 +2296,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_system_shore_power">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="21"/>
       <source>Shore power</source>
-      <translation>Puissance de quai</translation>
+      <translation>Prise de quai</translation>
     </message>
     <message id="settings_system_name_vehicle">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="31"/>
@@ -2351,12 +2351,12 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_system_monitor_for_grid_failure">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="111"/>
       <source>Monitor for grid failure</source>
-      <translation>Contrôle pour défaillance réseau</translation>
+      <translation>Alerter en cas de défaillance réseau</translation>
     </message>
     <message id="settings_system_monitor_for_shore_disconnect">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="113"/>
       <source>Monitor for shore disconnect</source>
-      <translation>Contrôle pour déconnexion de quai</translation>
+      <translation>Alerter en cas de coupure alimentation quai</translation>
     </message>
     <message id="settings_system_auto_selected">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="151"/>
@@ -2578,7 +2578,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_tz_time_zone">
       <location filename="../../pages/settings/PageTzInfo.qml" line="117"/>
       <source>Time zone</source>
-      <translation>Fuseau  horaire</translation>
+      <translation>Fuseau horaire</translation>
     </message>
     <message id="settings_tz_africa">
       <location filename="../../pages/settings/PageTzInfo.qml" line="206"/>
@@ -2739,17 +2739,17 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="charger_charge_bms">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="60"/>
       <source>Charge &amp; BMS</source>
-      <translation>Charge et BMS</translation>
+      <translation>Charge &amp; BMS</translation>
     </message>
     <message id="charger_ext_control_bms">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="63"/>
       <source>Ext. Control &amp; BMS</source>
-      <translation>Contrôle ext. et BMS</translation>
+      <translation>Contrôle ext. &amp; BMS</translation>
     </message>
     <message id="charger_charge_hub_1_bms">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="66"/>
       <source>Charge, Hub-1 &amp; BMS</source>
-      <translation>Charge, Hub-1 et BMS</translation>
+      <translation>Charge, Hub-1 &amp; BMS</translation>
     </message>
     <message id="charger_master_setting">
       <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="77"/>
@@ -2833,7 +2833,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="charger_history_table_view">
       <location filename="../../pages/solar/SolarHistoryPage.qml" line="24"/>
       <source>Table view</source>
-      <translation>Vue du tableau</translation>
+      <translation>Tableau</translation>
     </message>
     <message id="charger_history_chart">
       <location filename="../../pages/solar/SolarHistoryPage.qml" line="26"/>
@@ -2986,7 +2986,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_page_debug_enable_fps_visualizer">
       <location filename="../../pages/settings/debug/PageDebug.qml" line="50"/>
       <source>Enable frame-rate visualizer</source>
-      <translation>Activer l'affichage de la fréquence des images</translation>
+      <translation>Afficher le nombre d'images par seconde</translation>
     </message>
     <message id="devicelist_unsupported">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="209"/>
@@ -3275,12 +3275,12 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="batteryalarms_low_starter_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="59"/>
       <source>Low starter voltage</source>
-      <translation>Tension batt.de démarrage basse</translation>
+      <translation>Tension batterie de démarrage basse</translation>
     </message>
     <message id="batteryalarms_high_starter_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="66"/>
       <source>High starter voltage</source>
-      <translation>Tension batt. de démarrage élevée</translation>
+      <translation>Tension batterie de démarrage élevée</translation>
     </message>
     <message id="batteryalarms_battery_temperature_sensor">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="85"/>
@@ -3422,12 +3422,12 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="batteryhistory_time_since_last_full_charge">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="97"/>
       <source>Time since last full charge</source>
-      <translation>Temps depuis dernière charge complète</translation>
+      <translation>Durée depuis dernière charge complète</translation>
     </message>
     <message id="batteryhistory_synchronisation_count">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="104"/>
       <source>Synchronisation count</source>
-      <translation>Compte de synchronisation</translation>
+      <translation>Nombre de synchronisations</translation>
     </message>
     <message id="batteryhistory_low_starter_bat_voltage_alarms">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="123"/>
@@ -3482,7 +3482,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="batterysettings_relay_on_battery_monitor">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="56"/>
       <source>Relay (on battery monitor)</source>
-      <translation>Relais (sur contrôleur de batterie)</translation>
+      <translation>Relais (sur moniteur de batterie)</translation>
     </message>
     <message id="batterysettings_restore_factory_defaults">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="66"/>
@@ -4136,7 +4136,7 @@ Documentation sur https://ve3.nl/vol</translation>
       <location filename="../../components/CommonWords.qml" line="301"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <oldsource>This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
-      <translation>Ce réglage est désactivé lorsqu'un multicontrôleur numérique est connecté.</translation>
+      <translation>Ce réglage est désactivé lorsqu'un "Digital Multi Control" est connecté.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
       <location filename="../../components/CommonWords.qml" line="304"/>
@@ -4409,7 +4409,7 @@ Voulez-vous continuer ?</translation>
     <message id="vebus_device_vebus_bms">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="293"/>
       <source>VE.Bus BMS</source>
-      <translation>BMS du VE.Bus</translation>
+      <translation>BMS VE.Bus</translation>
     </message>
     <message id="vebus_device_warning">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="87"/>
@@ -4753,7 +4753,7 @@ Voulez-vous continuer ?</translation>
     <message id="vebus_device_bms_version">
       <location filename="../../pages/vebusdevice/VeBusDeviceInfoModel.qml" line="19"/>
       <source>VE.Bus BMS version</source>
-      <translation>Version  BMS du VE.Bus</translation>
+      <translation>Version du BMS VE.Bus</translation>
     </message>
     <message id="ess_unless_grid_fails">
       <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="40"/>
@@ -4885,7 +4885,7 @@ Voulez-vous continuer ?</translation>
       <location filename="../../components/CommonWords.qml" line="102"/>
       <source>Charging</source>
       <extracomment>"Charging" state</extracomment>
-      <translation>Charge en cours</translation>
+      <translation>Chargement</translation>
     </message>
     <message id="common_words_clear_error_action">
       <location filename="../../components/CommonWords.qml" line="106"/>
@@ -4940,7 +4940,7 @@ Voulez-vous continuer ?</translation>
     <message id="common_words_discharging">
       <location filename="../../components/CommonWords.qml" line="143"/>
       <source>Discharging</source>
-      <translation>Déchargement en cours</translation>
+      <translation>Déchargement</translation>
     </message>
     <message id="evchargers_status_disconnected">
       <location filename="../../data/EvChargers.qml" line="86"/>
@@ -5429,7 +5429,7 @@ Voulez-vous continuer ?</translation>
     <message id="modaldialog_set">
       <location filename="../../components/dialogs/ModalDialog.qml" line="25"/>
       <source>Set</source>
-      <translation>Régler</translation>
+      <translation>Appliquer</translation>
     </message>
     <message id="common_words_cancel">
       <location filename="../../components/CommonWords.qml" line="95"/>
@@ -6031,7 +6031,7 @@ Voulez-vous continuer ?</translation>
     <message id="splash_view_ready">
       <location filename="../../components/SplashView.qml" line="242"/>
       <source>Connected, loading user interface</source>
-      <translation>Connecté, charge en cours interface utilisateur</translation>
+      <translation>Connecté, chargement de l'interface utilisateur</translation>
     </message>
     <message id="splash_view_invalid_protocol_version">
       <location filename="../../components/SplashView.qml" line="257"/>
@@ -6613,7 +6613,7 @@ Voulez-vous continuer ?</translation>
     <message id="settings_page_debug_display_cpu_usage">
       <location filename="../../pages/settings/debug/PageDebug.qml" line="57"/>
       <source>Display CPU usage</source>
-      <translation>Affichage de l'utilisation de l'unité centrale</translation>
+      <translation>Afficher utilisation processeur</translation>
     </message>
     <message id="settings_page_debug_quit_application">
       <location filename="../../pages/settings/debug/PageDebug.qml" line="40"/>
@@ -6624,7 +6624,7 @@ Voulez-vous continuer ?</translation>
     <message id="settings_page_debug_quit">
       <location filename="../../pages/settings/debug/PageDebug.qml" line="43"/>
       <source>Quit</source>
-      <translation>Démissionner</translation>
+      <translation>Fermer</translation>
     </message>
     <message id="settings_page_debug_application_version">
       <location filename="../../pages/settings/debug/PageDebug.qml" line="104"/>
@@ -6786,12 +6786,12 @@ Voulez-vous continuer ?</translation>
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="31"/>
       <source>Charge current limits</source>
       <oldsource>Charge Current limits</oldsource>
-      <translation>Charge Limites de courant</translation>
+      <translation>Limitations du courant de charge</translation>
     </message>
     <message id="settings_firmware_official_release">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="39"/>
       <source>Official release</source>
-      <translation>Communiqué officiel</translation>
+      <translation>Version officielle</translation>
     </message>
     <message id="settings_firmware_beta_release">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="41"/>
@@ -6942,7 +6942,7 @@ Voulez-vous continuer ?</translation>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
       <source>Equalization cannot be triggered during bulk charge state</source>
       <oldsource>Equalization cannot be triggered during bulk charge state.</oldsource>
-      <translation>L'égalisation ne peut pas être déclenchée pendant l'étape de bluk</translation>
+      <translation>L'égalisation ne peut pas être déclenchée pendant l'étape de bulk</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
       <location filename="../../components/CommonWords.qml" line="222"/>
@@ -6953,7 +6953,7 @@ Voulez-vous continuer ?</translation>
     <message id="common_words_maximum_current">
       <location filename="../../components/CommonWords.qml" line="268"/>
       <source>Maximum current</source>
-      <translation>Courant maximal</translation>
+      <translation>Courant maximum</translation>
     </message>
     <message id="common_words_maximum_power">
       <location filename="../../components/CommonWords.qml" line="271"/>
@@ -7105,7 +7105,7 @@ Notez que ce menu n'affiche que les compteurs Carlo Gavazzi connectés par RS485
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="17"/>
       <source>Auto-ranging</source>
       <extracomment>Whether to adjust the min/max values in the range dynamically, based on the lowest and highest values observed on the system.</extracomment>
-      <translation>Auto-rangement</translation>
+      <translation>Ajustement automatique</translation>
     </message>
     <message id="settings_minmax_autorange_desc">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="25"/>
@@ -7136,17 +7136,17 @@ Notez que ce menu n'affiche que les compteurs Carlo Gavazzi connectés par RS485
     <message id="settings_minmax_acout_max_acin1">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="129"/>
       <source>Maximum current: AC in 1 connected</source>
-      <translation>Courant maximum : AC en 1 connecté</translation>
+      <translation>Courant maximum : CA 1 connecté</translation>
     </message>
     <message id="settings_minmax_acout_max_acin2">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="137"/>
       <source>Maximum current: AC in 2 connected</source>
-      <translation>Courant maximum : AC en 2 connecté</translation>
+      <translation>Courant maximum : CA 2 connecté</translation>
     </message>
     <message id="settings_minmax_acout_max">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="145"/>
       <source>Maximum current: no AC inputs</source>
-      <translation>Courant maximal : pas d'entrées AC</translation>
+      <translation>Courant maximum : pas d'entrées CA</translation>
     </message>
     <message id="settings_minmax_dc_out">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="152"/>
@@ -7171,7 +7171,7 @@ Notez que ce menu n'affiche que les compteurs Carlo Gavazzi connectés par RS485
     <message id="devicelist_motordrive_controllertemperature">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="55"/>
       <source>Controller Temperature</source>
-      <translation>Contrôleur température</translation>
+      <translation>Température du contrôleur</translation>
     </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
@@ -7322,7 +7322,7 @@ Notez que ce menu n'affiche que les compteurs Carlo Gavazzi connectés par RS485
 The peak shaving threshold is set using the AC input current limit setting.
 
 See documentation for further information.</oldsource>
-      <translation>Utilisez cette option pour l'écrêtement des pointes.</translation>
+      <translation>Utilisez cette option pour l'écrêtement de la consommation.</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_no_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="73"/>
@@ -7659,7 +7659,7 @@ See documentation for further information.</oldsource>
     <message id="settings_security_profile_secured_caption">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="116"/>
       <source>Password protected and the network communication is encrypted</source>
-      <translation>Protection par mot de passe et cryptage de la communication réseau</translation>
+      <translation>Protection par mot de passe et chiffrage de la communication réseau</translation>
     </message>
     <message id="settings_security_profile_weak">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="121"/>
@@ -7669,17 +7669,17 @@ See documentation for further information.</oldsource>
     <message id="settings_security_profile_weak_caption">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="124"/>
       <source>Password protected, but the network communication is not encrypted</source>
-      <translation>Protégé par un mot de passe, mais la communication réseau n'est pas cryptée</translation>
+      <translation>Protégé par un mot de passe, mais la communication réseau n'est pas chiffrée</translation>
     </message>
     <message id="settings_security_profile_unsecured">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="129"/>
       <source>Unsecured</source>
-      <translation>Non garanti</translation>
+      <translation>Non sécurisé</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="132"/>
       <source>No password and the network communication is not encrypted</source>
-      <translation>Pas de mot de passe et la communication réseau n'est pas cryptée</translation>
+      <translation>Pas de mot de passe et la communication réseau n'est pas chiffrée</translation>
     </message>
     <message id="settings_security_too_short_password">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="139"/>
@@ -7717,29 +7717,29 @@ See documentation for further information.</oldsource>
 • The network communication is encrypted
 • A secure connection with VRM is enabled
 • Insecure settings cannot be enabled</source>
-      <translation>- Les services du réseau local sont protégés par un mot de passe
-- La communication réseau est cryptée
-- Une connexion sécurisée avec le VRM est activée
-- Les paramètres non sécurisés ne peuvent pas être activés</translation>
+      <translation>• Les services du réseau local sont protégés par un mot de passe
+• La communication réseau est chiffrée
+• Une connexion sécurisée avec VRM est activée
+• Les paramètres non sécurisés ne peuvent pas être activés</translation>
     </message>
     <message id="settings_security_profile_weak_description">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="189"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
-      <translation>- Les services du réseau local sont protégés par un mot de passe
-- L'accès non crypté aux sites web locaux est également activé (HTTP/HTTPS).</translation>
+      <translation>• Les services du réseau local sont protégés par un mot de passe
+• L'accès non chiffré aux sites web locaux est également activé (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="192"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
-      <translation>- Les services du réseau local ne nécessitent pas de mot de passe
-- L'accès non crypté aux sites web locaux est également autorisé (HTTP/HTTPS).</translation>
+      <translation>• Les services du réseau local ne nécessitent pas de mot de passe
+• L'accès non chiffré aux sites web locaux est également autorisé (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_root_password">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="217"/>
       <source>Root password</source>
-      <translation>Mot de passe racine</translation>
+      <translation>Mot de passe root</translation>
     </message>
     <message id="settings_logout">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="271"/>
@@ -8080,7 +8080,7 @@ Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois
     <message id="settings_system_ac_input_and_output_description">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="95"/>
       <source>Use this option when AC-loads are present on the input of the Inverter/Charger. Use this option if unsure.</source>
-      <translation>Utilisez cette option lorsque des charges CA sont présentes sur l'entrée de l'onduleur/du chargeur. Utiliser cette option en cas de doute.</translation>
+      <translation>Utilisez cette option lorsque des charges CA sont présentes sur l'entrée de l'onduleur/chargeur. Utilisez cette option si vous n'êtes pas sûr.</translation>
     </message>
     <message id="settings_system_ac_output_only">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
@@ -8258,12 +8258,6 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <location filename="../../pages/welcome/WelcomeView.qml" line="99"/>
       <source>Controls</source>
       <translation>Contrôles</translation>
-    </message>
-    <message id="welcome_controls_text">
-      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
-      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
-      <oldsource>All the day to day controls are now combined together in the new Controls pane. </oldsource>
-      <translation type="unfinished">Tous les contrôles utiles sont désormais regroupés dans le nouveau volet Contrôles. </translation>
     </message>
     <message id="welcome_units_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="106"/>
@@ -8480,13 +8474,13 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <location filename="../../data/StartPageConfiguration.qml" line="40"/>
       <source>Levels (Tanks)</source>
       <extracomment>The 'Levels' page, with the "Tanks" section opened</extracomment>
-      <translation>Niveaux (réservoirs)</translation>
+      <translation>Niveaux (Réservoirs)</translation>
     </message>
     <message id="startpage_option_levels_environment">
       <location filename="../../data/StartPageConfiguration.qml" line="46"/>
       <source>Levels (Environment)</source>
       <extracomment>The 'Levels' page, with the "Environment" section opened</extracomment>
-      <translation>Niveaux (environnement)</translation>
+      <translation>Niveaux (Environnement)</translation>
     </message>
     <message id="startpage_option_battery list">
       <location filename="../../data/StartPageConfiguration.qml" line="51"/>
@@ -8503,13 +8497,13 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <source>After %n minute(s)</source>
       <translation>
         <numerusform>Après %n minute</numerusform>
-        <numerusform>Après %n minute</numerusform>
+        <numerusform>Après %n minute(s)</numerusform>
       </translation>
     </message>
     <message id="settings_startpage_description">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="63"/>
       <source>Go to this page when the application starts.</source>
-      <translation>Rendez-vous sur cette page lorsque l'application démarre.</translation>
+      <translation>Ouvre cette page lorsque l'application démarre.</translation>
     </message>
     <message id="settings_startpage_timeout">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="74"/>
@@ -8541,6 +8535,11 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <oldsource>Generator start/stop function is not enabled, go to relay settings and set function to "Generator start/stop"</oldsource>
       <translation>La fonction de démarrage/arrêt du générateur n'est pas activée, allez dans les réglages du relai et réglez la fonction sur "Arrêter/Démarrer Générateur".</translation>
+    </message>
+    <message id="welcome_controls_text">
+      <location filename="../../pages/welcome/WelcomeView.qml" line="102"/>
+      <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
+      <translation>Tous les contrôles quotidiens sont désormais regroupés dans le nouveau volet Contrôles. Il est accessible de n'importe où en appuyant sur le bouton dédié en haut à gauche de l'écran.</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
@@ -8717,7 +8716,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="68"/>
       <source>Battery comm. error</source>
-      <translation>Erreur de batterie comm</translation>
+      <translation>Erreur de comm. batterie</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="71"/>
@@ -8772,7 +8771,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="105"/>
       <source>Interlock</source>
-      <translation>Interlock</translation>
+      <translation>Verrouillage</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="108"/>
@@ -9054,7 +9053,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="65"/>
       <source>BMS connection lost</source>
-      <translation>Connexion BLS perdue</translation>
+      <translation>Connexion BMS perdue</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="66"/>
@@ -11032,7 +11031,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="229"/>
       <source>BMS connection lost</source>
-      <translation>Connexion BLS perdue</translation>
+      <translation>Connexion BMS perdue</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="232"/>
