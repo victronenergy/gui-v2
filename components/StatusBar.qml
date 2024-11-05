@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.Controls as C
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Rectangle {
@@ -102,6 +103,48 @@ Rectangle {
 		anchors.centerIn: parent
 		font.pixelSize: 22
 		text: root.title.length > 0 ? root.title : ClockTime.currentTime
+	}
+
+	Row {
+		id: connectivityRow
+
+		anchors {
+			left: clockLabel.right
+			leftMargin: Theme.geometry_statusBar_rightSideRow_horizontalMargin
+			verticalCenter: parent.verticalCenter
+		}
+		spacing: Theme.geometry_statusBar_rightSideRow_horizontalMargin
+
+		CP.IconImage {
+			anchors.verticalCenter: parent.verticalCenter
+			color: Theme.color_font_primary
+			source: {
+				if (!signalStrength.isValid) {
+					return ""
+				} else if (signalStrength.value > 75) {
+					return "qrc:/images/icon_WiFi_4_32.svg"
+				} else if (signalStrength.value > 50) {
+					return "qrc:/images/icon_WiFi_3_32.svg"
+				} else if (signalStrength.value > 25) {
+					return "qrc:/images/icon_WiFi_2_32.svg"
+				} else if (signalStrength.value > 0) {
+					return "qrc:/images/icon_WiFi_1_32.svg"
+				} else {
+					return "qrc:/images/icon_WiFi_noconnection_32.svg"
+				}
+			}
+
+			VeQuickItem {
+				id: signalStrength
+
+				uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/SignalStrength"
+			}
+		}
+
+		GsmStatusIcon {
+			height: Theme.geometry_status_bar_gsmModem_icon_height
+			anchors.verticalCenter: parent.verticalCenter
+		}
 	}
 
 	Row {

@@ -390,6 +390,8 @@
     "geometry_settings_gsmModem_signalStrengthBars_bar_width": 4,
     "geometry_settings_gsmModem_signalStrengthBars_bar_incremental_height": 6,
 
+    "geometry_status_bar_gsmModem_icon_height": 24,
+
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
     "geometry_vebusDeviceListPage_quantityTable_firstColumn_width": 39,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,
