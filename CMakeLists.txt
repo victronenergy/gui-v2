@@ -1117,6 +1117,11 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_close_32.svg
         images/icon_info_32.svg
         images/icon_info_48.svg
+        images/icon_WiFi_1_32.svg
+        images/icon_WiFi_2_32.svg
+        images/icon_WiFi_3_32.svg
+        images/icon_WiFi_4_32.svg
+        images/icon_WiFi_noconnection_32.svg
         images/welcome-brief.png
         images/welcome-controls.png
         images/welcome-dark.png
