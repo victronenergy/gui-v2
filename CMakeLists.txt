@@ -282,6 +282,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/VeBusAcIODisplay.qml
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
+    components/WifiModel.qml
     components/ClassAndVrmInstance.qml
 
     components/controls/Button.qml
