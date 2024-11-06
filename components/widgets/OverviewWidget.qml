@@ -9,7 +9,7 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	property int type: VenusOS.OverviewWidget_Type_Unknown
+	required property int type
 	property int size: VenusOS.OverviewWidget_Size_M
 	property int preferredSize: VenusOS.OverviewWidget_PreferredSize_Any
 
