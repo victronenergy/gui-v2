@@ -23,12 +23,24 @@ Page {
 	property bool restoreFirmwareIntegrityPressed: false
 
     function getSystemState() {
-        if (fsModifiedState === 0 && systemHooksState === 0) {
+        if (fsModifiedState === 0 && systemHooksState === 0 && modelItem.value.indexOf("Raspberry") === -1) {
             //% "Supported"
             return "Supported"
         } else {
             //% "No Victron Energy support"
             return "No Victron Energy support"
+        }
+    }
+
+    function scaleBytes(bytes) {
+        if (bytes < 1024) {
+            return bytes + " B"
+        } else if (bytes < 1024 * 1024) {
+            return (bytes / 1024).toFixed(1) + " KB"
+        } else if (bytes < 1024 * 1024 * 1024) {
+            return (bytes / 1024 / 1024).toFixed(1) + " MB"
+        } else {
+            return (bytes / 1024 / 1024 / 1024).toFixed(1) + " GB"
         }
     }
 
@@ -111,6 +123,11 @@ Page {
 	}
 
 	VeQuickItem {
+		id: modelItem
+		uid: Global.venusPlatform.serviceUid + "/Device/Model"
+	}
+
+	VeQuickItem {
 		id: signalKItem
 		uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
 	}
@@ -151,6 +168,10 @@ Page {
         uid: Global.venusPlatform.serviceUid + "/Firmware/State"
     }
     VeQuickItem {
+        id: dataPartitionFreeSpaceItem
+        uid: Global.venusPlatform.serviceUid + "/SystemIntegrity/DataPartitionFreeSpace"
+    }
+    VeQuickItem {
         id: forceFirmwareReinstallItem
         uid: Global.venusPlatform.serviceUid + "/SystemIntegrity/ForceFirmwareReinstall"
     }
@@ -179,7 +200,7 @@ Page {
 
 			ListNavigationItem {
 				//% ""
-				text: "System integrity"
+				text: "Customization checks"
                 secondaryText: getSystemState()
                 secondaryLabel.color: fsModifiedState === 0 && systemHooksState === 0 ? Theme.color_font_primary : Theme.color_red
 				onClicked: {
@@ -195,7 +216,7 @@ Page {
 
                                 ListLabel {
                                     //% ""
-                                    text: "System integrity checks"
+                                    text: "Customization checks"
                                 }
 
                                 ListTextItem {
@@ -206,10 +227,35 @@ Page {
                                 }
 
                                 ListTextItem {
+                                    //% "Device model"
+                                    text: "Device model"
+                                    secondaryText: modelItem.value
+                                    secondaryLabel.color: modelItem.value.indexOf("Raspberry") === -1 ? Theme.color_green : Theme.color_red
+                                }
+
+                                ListTextItem {
                                     //% "HQ serial number"
                                     text: "HQ serial number"
-                                    secondaryText: hqSerialNumberItem.value != "" ? hqSerialNumberItem.value : "Not a Victron Energy device"
-                                    secondaryLabel.color: hqSerialNumberItem.value != "" ? Theme.color_green : Theme.color_red
+                                    //% ""
+                                    // secondaryText: hqSerialNumberItem.value != "" ? hqSerialNumberItem.value : "Unknown"
+                                    secondaryText: hqSerialNumberItem.value
+                                    // Value is missing on older devices, therefore do not use colors on that
+                                    // secondaryLabel.color: hqSerialNumberItem.value != "" ? Theme.color_green : Theme.color_red
+                                    allowed: defaultAllowed && hqSerialNumberItem.value != ""
+                                }
+
+                                ListTextItem {
+                                    //% ""
+                                    text: "Data partition free space"
+                                    secondaryText: scaleBytes(dataPartitionFreeSpaceItem.value)
+                                    // see https://github.com/victronenergy/meta-victronenergy-private/blob/d7ac2aa359412115a0173afd7953e83ab574edf7/recipes-ve/support-keys/support.sh#L22-L24
+                                    secondaryLabel.color: {
+                                        if (dataPartitionFreeSpaceItem.value < 1024 * 1024 * 10) {
+                                            return Theme.color_red;
+                                        } else {
+                                            return Theme.color_green;
+                                        }
+                                    }
                                 }
 
                                 ListTextItem {
@@ -261,7 +307,7 @@ Page {
 
 
                                 ListLabel {
-                                    text: "Tools to recover system integrity"
+                                    text: "Tools to normalize the system"
                                 }
 
                                 ListSwitch {
@@ -277,6 +323,16 @@ Page {
                                     - Disable rcS.local by renaming it to rcS.local.disabled
                                     */
                                     dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SystemIntegrity/AllModificationsDisabled"
+
+                                    bottomContentChildren: [
+                                        ListLabel {
+                                            width: Math.min(implicitWidth, disableAllModifications.maximumContentWidth)
+                                            topPadding: 0
+                                            bottomPadding: 0
+                                            color: Theme.color_font_secondary
+                                            text: "This disables all modifications, including SignalK and Node-RED."
+                                        }
+                                    ]
 
                                     onCheckedChanged: {
                                         // Show the dialog only if
@@ -361,7 +417,7 @@ Page {
 
                                 ListButton {
                                     //% ""
-                                    text: "Firmware: Restore integrity"
+                                    text: "Firmware: Restore clean state"
                                     //% ""
                                     button.text: {
                                         if  (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
