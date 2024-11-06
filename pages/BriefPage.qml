@@ -242,10 +242,10 @@ SwipeViewPage {
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-				phaseModel: !!Global.acInputs.activeInput ? Global.acInputs.activeInput.phases : null
+				phaseModel: Global.acInputs.highlightedInput?.phases
 				phaseModelProperty: "current"
-				minimumValue: !!Global.acInputs.activeInputInfo ? Global.acInputs.activeInputInfo.minimumCurrent : NaN
-				maximumValue: !!Global.acInputs.activeInputInfo ? Global.acInputs.activeInputInfo.maximumCurrent : NaN
+				minimumValue: !!Global.acInputs.highlightedInput ? Global.acInputs.highlightedInput.inputInfo.minimumCurrent : NaN
+				maximumValue: !!Global.acInputs.highlightedInput ? Global.acInputs.highlightedInput.inputInfo.maximumCurrent : NaN
 				inputMode: true
 
 				AcInputDirectionIcon {
@@ -255,7 +255,7 @@ SwipeViewPage {
 						bottom: acInGaugeQuantity.top
 						bottomMargin: Theme.geometry_briefPage_edgeGauge_quantityLabel_feedback_margin
 					}
-					input: Global.acInputs.activeInput
+					input: Global.acInputs.highlightedInput
 				}
 
 				ArcGaugeQuantityRow {
@@ -264,10 +264,10 @@ SwipeViewPage {
 					// When >= 2 left gauges, AC input is always the top one, so label aligns to
 					// the bottom.
 					alignment: Qt.AlignLeft | (gaugeParams.activeGaugeCount >= 2 ? Qt.AlignBottom : Qt.AlignVCenter)
-					icon.source: Global.acInputs.sourceIcon(Global.acInputs.findValidSource())
+					icon.source: Global.acInputs.sourceIcon(Global.acInputs.highlightedInput?.source ?? Global.acInputs.findValidSource())
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
-					quantityLabel.dataObject: Global.acInputs.activeInput
+					quantityLabel.dataObject: Global.acInputs.highlightedInput
 					quantityLabel.acInputMode: true
 				}
 			}

@@ -69,8 +69,8 @@ QtObject {
 		onTriggered: {
 			// Use some wild fluctuations that can be seen in the Brief side panel graph
 			const randomIndex = Math.floor(Math.random() * Global.system.load.ac.phases.count)
-			const currentLimit = Global.acInputs.activeInputInfo === Global.acInputs.input1Info ? _input1MaximumAcCurrent.value
-					: Global.acInputs.activeInputInfo === Global.acInputs.input2Info ? _input2MaximumAcCurrent.value
+			const currentLimit = Global.acInputs.highlightedInput?.inputInfo === Global.acInputs.input1Info ? _input1MaximumAcCurrent.value
+					: Global.acInputs.highlightedInput?.inputInfo === Global.acInputs.input2Info ? _input2MaximumAcCurrent.value
 					: _maximumAcCurrent.value
 			const current = Math.random() * currentLimit
 			const power = current * 10

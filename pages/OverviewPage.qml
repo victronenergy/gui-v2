@@ -361,6 +361,11 @@ SwipeViewPage {
 		}
 
 		if (connectorWidget.endWidget === inverterChargerWidget) {
+			// Only the connection to the "preferred" AC input should be animated.
+			if (connectorWidget.startWidget.input !== Global.acInputs.highlightedInput) {
+				return VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			}
+
 			// For AC inputs, positive power means energy is flowing towards inverter/charger,
 			// and negative power means energy is flowing towards the input.
 			return power > Theme.geometry_overviewPage_connector_animationPowerThreshold
