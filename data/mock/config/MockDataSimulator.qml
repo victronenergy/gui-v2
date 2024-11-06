@@ -204,7 +204,7 @@ QtObject {
 			break
 		case Qt.Key_P:
 		{
-			const phases = Global.acInputs.activeInput.phases
+			const phases = Global.acInputs.highlightedInput.phases
 			for (let i = 0; i < phases.count; ++i) {
 				const phaseCurrent = phases.get(i).current
 				const phasePower = phases.get(i).power

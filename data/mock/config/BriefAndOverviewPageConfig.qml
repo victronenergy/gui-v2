@@ -298,22 +298,23 @@ QtObject {
 			]
 		},
 		{
-			// Same as previous case, but Multi/Quattro input is connected. The UI should show the
-			// power/current for both inputs.
+			// Same as previous case, but Multi/Quattro input is connected.
+			// Generator is connected, but the Grid is the highlighted input.
 			name: "Generator on Multi/Quattro + Grid on energy meter (Generator connected but both operational)",
 			acInputs: [
 				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 },
-				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "grid", serviceName: "com.victronenergy.grid.ttyUSB0", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "grid", serviceName: "com.victronenergy.grid.ttyUSB0", phaseCount: 3, connected: 0 },
 			]
 		},
 		{
 			// Both inputs (generator and grid) are on dedicated energy meters.
+			// Generator is connected, but the Grid is the highlighted input.
 			// Generator data from com.victronenergy.genset.<suffix>/Ac/ActiveIn/Lx/{Power,Voltage,Current}.
 			// Grid data from com.victronenergy.grid.<suffix>/Ac/Lx/{Power,Voltage,Current}.
-			name: "Generator + Grid on dedicated energy meters (Grid connected but both operational)",
+			name: "Generator + Grid on energy meters (Grid connected but both operational)",
 			acInputs: [
-				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 0 },
-				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "grid", serviceName: "com.victronenergy.grid.ttyUSB0", phaseCount: 3, connected: 1},
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "grid", serviceName: "com.victronenergy.grid.ttyUSB0", phaseCount: 3, connected: 0},
 			]
 		},
 		{

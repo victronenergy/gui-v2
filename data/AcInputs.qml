@@ -13,6 +13,14 @@ QtObject {
 	property AcInput input1
 	property AcInput input2
 
+	// When the UI has to choose to show a single AC input (e.g. for Brief AC-in gauge), prefer the
+	// first Grid/Shore input that is operational, or otherwise, any operational input.
+	readonly property AcInput highlightedInput: _highlightInput(input1) ? input1
+			: _highlightInput(input2) ? input2
+			: input1?.operational ? input1
+			: input2?.operational ? input2
+			: null
+
 	readonly property AcInputSystemInfo activeInputInfo: input1Info.isActiveInput ? input1Info
 			: input2Info.isActiveInput ? input2Info
 			: null
@@ -175,6 +183,13 @@ QtObject {
 	function roleName(role) {
 		const match = roles.find(function(r) { return r.role === role })
 		return match ? match.name : "--"
+	}
+
+	function _highlightInput(input) {
+		return input
+				&& input.operational
+				&& (input.inputInfo.source === VenusOS.AcInputs_InputSource_Grid
+					|| input.inputInfo.source === VenusOS.AcInputs_InputSource_Shore)
 	}
 
 	Component.onCompleted: Global.acInputs = root
