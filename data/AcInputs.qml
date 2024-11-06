@@ -12,7 +12,6 @@ QtObject {
 	readonly property AcInput activeInput: input1Info.isActiveInput ? input1 : (input2Info.isActiveInput ? input2 : null)
 	property AcInput input1
 	property AcInput input2
-	readonly property ActiveAcInput generatorInput: activeInput && activeInput.source === VenusOS.AcInputs_InputSource_Generator ? activeInput : null
 
 	readonly property AcInputSystemInfo activeInputInfo: input1Info.isActiveInput ? input1Info
 			: input2Info.isActiveInput ? input2Info

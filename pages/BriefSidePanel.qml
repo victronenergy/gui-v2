@@ -13,6 +13,13 @@ ColumnLayout {
 	property bool animationEnabled
 	property string dcInputIconSource
 
+	readonly property AcInput generatorInput: Global.acInputs.input1?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1
+			: Global.acInputs.input2?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2
+			: null
+	readonly property AcInput nonGeneratorInput: Global.acInputs.input1?.source !== VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1
+			: Global.acInputs.input2?.source !== VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2
+			: null
+
 	BriefSidePanelWidget {
 		//% "Solar yield"
 		title: qsTrId("brief_solar_yield")
@@ -26,13 +33,12 @@ ColumnLayout {
 	// In most cases there is only 1 generator, so don't worry about other ones here.
 	BriefSidePanelWidget {
 		id: generatorWidget
+
 		title: Global.generators.model.count === 1 ? Global.generators.model.firstObject.name : CommonWords.generator
 		icon.source: "qrc:/images/generator.svg"
-		loadersActive: Global.acInputs.activeInputInfo
-				&& Global.acInputs.activeInputInfo.source === VenusOS.AcInputs_InputSource_Generator
-				&& Global.acInputs.activeInput
+		loadersActive: generatorInput && generatorInput.operational
 		visible: loadersActive
-		quantityLabel.dataObject: Global.acInputs.generatorInput
+		quantityLabel.dataObject: generatorInput
 		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
 		quantityLabel.acInputMode: true
 		sideComponent: Item {
@@ -53,10 +59,10 @@ ColumnLayout {
 			width: parent.width
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
-			phaseModel: root.visible ? Global.acInputs.activeInput.phases : null
+			phaseModel: root.visible ? generatorInput.phases : null
 			phaseModelProperty: "current"
-			minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
-			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
+			minimumValue: generatorInput.inputInfo.minimumCurrent
+			maximumValue: generatorInput.inputInfo.maximumCurrent
 			animationEnabled: root.animationEnabled
 			inputMode: true
 		}
@@ -65,28 +71,26 @@ ColumnLayout {
 			id: generatorDirectionIcon
 			parent: generatorWidget.quantityLabel
 			anchors.verticalCenter: parent.verticalCenter
-			input: Global.acInputs.activeInput
+			input: generatorInput
 		}
 	}
 
 	BriefSidePanelWidget {
 		id: acInputWidget
 
-		 title: loadersActive ? Global.acInputs.sourceToText(Global.acInputs.activeInputInfo.source) : ""
-		 icon.source: loadersActive ? Global.acInputs.sourceIcon(Global.acInputs.activeInputInfo.source) : ""
-		 quantityLabel.dataObject: Global.acInputs.activeInput
+		 title: loadersActive ? Global.acInputs.sourceToText(nonGeneratorInput.source) : ""
+		 icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
+		 quantityLabel.dataObject: nonGeneratorInput
 		 quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
 		 quantityLabel.acInputMode: true
-		 loadersActive: Global.acInputs.activeInputInfo
-				 && Global.acInputs.activeInputInfo.source !== VenusOS.AcInputs_InputSource_Generator
-				 && Global.acInputs.activeInput
+		 loadersActive: nonGeneratorInput && nonGeneratorInput.operational
 		 visible: loadersActive
 
 		 AcInputDirectionIcon {
 			 id: acInputDirectionIcon
 			 parent: acInputWidget.quantityLabel
 			 anchors.verticalCenter: parent.verticalCenter
-			 input: Global.acInputs.activeInput
+			 input: nonGeneratorInput
 		 }
 
 		 sideComponent: LoadGraph {
@@ -174,17 +178,17 @@ exported power v  0.4 |   /
 				// If the graph values may go below zero (i.e. it shows both import and export
 				// values) then use a min/max range that allows the mid-point to be zero. To do
 				// this, find the maximum range to be shown above or below the mid-point.
-				readonly property real maximumAboveZeroMidPoint: Global.acInputs.activeInputInfo.minimumCurrent < 0
-						&& Global.acInputs.activeInputInfo.maximumCurrent > 0
-					? Math.max(Math.abs(Global.acInputs.activeInputInfo.minimumCurrent), Global.acInputs.activeInputInfo.maximumCurrent)
+				readonly property real maximumAboveZeroMidPoint: nonGeneratorInput.inputInfo.minimumCurrent < 0
+						&& nonGeneratorInput.inputInfo.maximumCurrent > 0
+					? Math.max(Math.abs(nonGeneratorInput.inputInfo.minimumCurrent), nonGeneratorInput.inputInfo.maximumCurrent)
 					: NaN
 
-				phaseModel: root.visible ? Global.acInputs.activeInput.phases : null
+				phaseModel: root.visible ? nonGeneratorInput.phases : null
 				minimumCurrent: isNaN(maximumAboveZeroMidPoint)
-								? Global.acInputs.activeInputInfo.minimumCurrent
+								? nonGeneratorInput.inputInfo.minimumCurrent
 								: -maximumAboveZeroMidPoint
 				maximumCurrent: isNaN(maximumAboveZeroMidPoint)
-								? Global.acInputs.activeInputInfo.maximumCurrent
+								? nonGeneratorInput.inputInfo.maximumCurrent
 								: maximumAboveZeroMidPoint
 			}
 		}
@@ -193,10 +197,10 @@ exported power v  0.4 |   /
 			width: parent.width
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
-			phaseModel: root.visible ? Global.acInputs.activeInput.phases : null
+			phaseModel: root.visible ? nonGeneratorInput.phases : null
 			phaseModelProperty: "current"
-			minimumValue: Global.acInputs.activeInputInfo.minimumCurrent
-			maximumValue: Global.acInputs.activeInputInfo.maximumCurrent
+			minimumValue: nonGeneratorInput.inputInfo.minimumCurrent
+			maximumValue: nonGeneratorInput.inputInfo.maximumCurrent
 			animationEnabled: root.animationEnabled
 			inputMode: true
 		}
