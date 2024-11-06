@@ -423,7 +423,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/AcInputSettingsModel.qml
     data/common/AcInputSystemInfo.qml
     data/common/AcSystemDevice.qml
-    data/common/ActiveAcInput.qml
+    data/common/AcInput.qml
     data/common/Battery.qml
     data/common/Charger.qml
     data/common/DcDevice.qml

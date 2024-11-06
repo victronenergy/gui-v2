@@ -150,7 +150,6 @@ QtObject {
 				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 1, connected: 1 },
 				emptyAcInput,
 			],
-			acInputs: [ { source: VenusOS.AcInputs_InputSource_Grid, serviceType: "vebus", phaseCount: 1, connected: 1 }, emptyAcInput ],
 			system: { state: VenusOS.System_State_FloatCharging, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcdc","dcload"] } },
 			battery: { stateOfCharge: 100, current: 0 },
 			evcs: { chargers: [ { status: VenusOS.Evcs_Status_Charging, mode: VenusOS.Evcs_Mode_Auto } ] }
@@ -196,7 +195,7 @@ QtObject {
 			],
 		},
 		{
-			name: "Shore + Generator + Solar, Shore active",
+			name: "Shore + Generator + Solar, Shore active but genset also operational",
 			acInputs: [
 				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 },
 				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3 },
@@ -204,7 +203,7 @@ QtObject {
 			solar: { chargers: [ { phaseCount: 1 }, { power: 456 }, { power: 234 } ] },
 		},
 		{
-			name: "Shore + Generator + Solar, Generator active",
+			name: "Shore + Generator + Solar, Generator active but genset also operational",
 			acInputs: [
 				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3 },
 				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 1 },
@@ -214,8 +213,8 @@ QtObject {
 		{
 			name: "Shore + Generator with 3-phase, with 5 left-hand widgets in total",
 			acInputs: [
-				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3 },
-				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 0 },
 			],
 			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			solar: { chargers: [ { power: 456 } ] },
@@ -277,6 +276,54 @@ QtObject {
 					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.Evcs_Position_ACOutput },
 				]
 			}
+		},
+		{
+			// Two inputs on the Multi/Quattro. The quattro can only measure the one that is active.
+			// Both inputs get data from com.victronenergy.vebus.<suffix>/Ac/ActiveIn/Lx/{P,V,I,F}
+			// but only the one that has Connected=1 should show information on the UI.
+			name: "Generator + Shore on Multi/Quattro (Generator connected)",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 0 },
+			]
+		},
+		{
+			// One input (generator) on the Multi/Quattro, other input (grid) on dedicated energy meter.
+			// Generator data from com.victronenergy.vebus.<suffix>/Ac/ActiveIn/Lx/{P,V,I,F} (when active).
+			// Grid data from com.victronenergy.grid.<suffix>/Ac/Lx/{Power,Voltage,Current}.
+			name: "Generator on Multi/Quattro + Grid on energy meter (Grid connected)",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 0 },
+				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "grid", serviceName: "com.victronenergy.grid.ttyUSB0", phaseCount: 3, connected: 1 },
+			]
+		},
+		{
+			// Same as previous case, but Multi/Quattro input is connected. The UI should show the
+			// power/current for both inputs.
+			name: "Generator on Multi/Quattro + Grid on energy meter (Generator connected but both operational)",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "vebus", serviceName: "com.victronenergy.vebus.ttyUSB0", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "grid", serviceName: "com.victronenergy.grid.ttyUSB0", phaseCount: 3, connected: 1 },
+			]
+		},
+		{
+			// Both inputs (generator and grid) are on dedicated energy meters.
+			// Generator data from com.victronenergy.genset.<suffix>/Ac/ActiveIn/Lx/{Power,Voltage,Current}.
+			// Grid data from com.victronenergy.grid.<suffix>/Ac/Lx/{Power,Voltage,Current}.
+			name: "Generator + Grid on dedicated energy meters (Grid connected but both operational)",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", serviceName: "com.victronenergy.genset.ttyUSB0", phaseCount: 3, connected: 0 },
+				{ source: VenusOS.AcInputs_InputSource_Grid, serviceType: "grid", serviceName: "com.victronenergy.grid.ttyUSB0", phaseCount: 3, connected: 1},
+			]
+		},
+		{
+			// Multi-RS, which only one AC input.
+			// Input data comes from com.victronenergy.acsystem.socketcan_can0_vi0_uc162268/Ac/In/1/Lx/{P,V,I,F}.
+			name: "Generator on Multi-RS (connected)",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "acsystem", serviceName: "com.victronenergy.acsystem.ttyUSB0", phaseCount: 3, connected: 1 },
+				emptyAcInput,
+			]
 		},
 	]
 

@@ -32,15 +32,130 @@ QtObject {
 		setInputs([ gridInput, generatorInput ])
 	}
 
-	function setInputs(inputs) {
-		inputObjects.model = inputs
-		for (let i = 0; i < inputs.length; ++i) {
-			if (inputs[i].connected === 1) {
-				acSource.setValue(inputs[i].source)
-				return
+	function setMockValue(input, path, value) {
+		Global.mockDataSimulator.setMockValue(input.serviceUid + path, value)
+	}
+
+	function setInputs(inputConfigs) {
+		inputDeviceObjects.model = []
+
+		// Configure the system AC input info and input properties.
+		const inputInfos = [ Global.acInputs.input1Info, Global.acInputs.input2Info ]
+		const inputModelData = []
+		for (let i = 0; i < inputInfos.length; ++i) {
+			const inputInfo = inputInfos[i]
+			const inputConfig = inputConfigs[i]
+			const mandatoryProperties = ["source", "serviceType", "serviceName", "connected"]
+			let propertyName
+			for (propertyName of mandatoryProperties) {
+				// Reset the main properties for the AC-in system info.
+				inputInfo["_" + propertyName].setValue(undefined)
+			}
+			if (!inputConfig) {
+				// There is no AC-in configured at this index.
+				inputModelData.push({})
+				continue
+			}
+
+			inputInfo.inputIndex = i
+			inputInfo._deviceInstance.setValue(i)
+
+			// Hardcode the min/max currents
+			if (isNaN(inputInfo._minimumCurrent.value)) {
+				inputInfo._minimumCurrent.setValue(-20)
+			}
+			if (isNaN(inputInfo._maximumCurrent.value)) {
+				// Use a max bigger than 20 to check the side panel graph is still
+				// symmetrical above and below the threshold.
+				inputInfo._maximumCurrent.setValue(40)
+			}
+
+			for (let configProperty in inputConfig) {
+				const configValue = inputConfig[configProperty]
+				if (inputInfo["_" + configProperty] !== undefined) {
+					inputInfo["_" + configProperty].setValue(configValue)
+				}
+			}
+			inputModelData.push(inputConfig)
+		}
+
+		inputDeviceObjects.model = inputModelData
+		Qt.callLater(_updateActiveInfo)
+	}
+
+	function _updateActiveInfo() {
+		let activeSource = -1
+		let activeInValues = { vebus: -1, acsystem: -1 }
+		let inputObject
+		let i
+
+		// Find the connected source and ActiveIn value for each AC-in.
+		// The ActiveIn is only used for vebus and Multi RS services.
+		for (i = 0; i < inputDeviceObjects.count; ++i) {
+			inputObject = inputDeviceObjects.objectAt(i)
+			if (!!inputObject && inputObject.inputInfo.connected) {
+				activeSource = inputObject.inputInfo.source
+				if (activeInValues[inputObject.inputInfo.serviceType] !== undefined) {
+					activeInValues[inputObject.inputInfo.serviceType] = i
+				}
 			}
 		}
-		acSource.setValue(undefined)
+
+		// Set the system /Ac/ActiveIn/Source
+		acSource.setValue(activeSource >= 0 ? activeSource : undefined)
+
+		// Set the vebus and multi /Ac/ActiveIn/ActiveInput
+		for (const serviceType in activeInValues) {
+			const activeIn = activeInValues[serviceType]
+			if (activeIn < 0) {
+				continue
+			}
+			for (i = 0; i < inputDeviceObjects.count; ++i) {
+				inputObject = inputDeviceObjects.objectAt(i)
+				if (!!inputObject && inputObject.inputInfo.serviceType === serviceType) {
+					inputObject.setMockValue("/Ac/ActiveIn/ActiveInput", activeIn)
+				}
+			}
+		}
+	}
+
+	readonly property Instantiator inputDeviceObjects: Instantiator {
+		delegate: Device {
+			required property var modelData
+			required property int index
+			readonly property var inputInfo: Global.acInputs["input" + (index+1) + "Info"]
+
+			// For convenience, if this is a vebus service, then use the value of
+			// com.victronenergy.system/VebusService as the /ServiceName for this input (i.e.
+			// pretend this input is on that vebus service).
+			readonly property string vebusServiceUid: Global.system.veBus.serviceUid
+			onVebusServiceUidChanged: {
+				if (modelData.serviceType === "vebus") {
+					inputInfo._serviceName.setValue(vebusServiceUid.substr(6))
+				}
+			}
+
+			function setMockValue(path, value) {
+				Global.mockDataSimulator.setMockValue(serviceUid + path, value)
+			}
+
+			serviceUid: modelData.serviceName ? "mock/" + modelData.serviceName : ""
+
+			Component.onCompleted: {
+				_deviceInstance.setValue(index)
+				if (modelData.productId) {
+					_productId.setValue(modelData.productId)
+				}
+				const input = Global.acInputs["input" + (index+1)]
+				if (modelData.phaseCount !== undefined) {
+					if (inputInfo.serviceType === "vebus" || inputInfo.serviceType === "acsystem") {
+						setMockValue("/Ac/NumberOfPhases", modelData.phaseCount)
+					} else if (inputInfo.serviceType === "grid" || inputInfo.serviceType === "genset") {
+						setMockValue("/NrOfPhases", modelData.phaseCount)
+					}
+				}
+			}
+		}
 	}
 
 	property Connections mockConn: Connections {
@@ -70,89 +185,28 @@ QtObject {
 					const inputToDisconnect = acSource.value === firstInput.source ? firstInput : secondInput
 					inputToConnect._connected.setValue(1)
 					inputToDisconnect._connected.setValue(0)
-					acSource.setValue(inputToConnect.source)
+					root._updateActiveInfo()
 				}
 			}
-		}
-	}
-
-	readonly property Instantiator inputObjects: Instantiator {
-		model: null
-
-		delegate: QtObject {
-			id: input
-
-			required property int index
-			required property var modelData
-
-			readonly property Device device: Device {
-				serviceUid: "mock/" + input.modelData["serviceName"]
-
-				Component.onCompleted: {
-					_deviceInstance.setValue(input.index)
-					if (input.modelData["productId"]) {
-						device._productId.setValue(input.modelData["productId"])
-					}
-				}
-			}
-
-			readonly property AcInputSystemInfo inputSysInfo: AcInputSystemInfo {
-				inputIndex: input.index
-
-				// For convenience, if this is a vebus service, then use the value of
-				// com.victronenergy.system/VebusService as the /ServiceName for this input (i.e.
-				// pretend this input is on that vebus service).
-				readonly property string vebusServiceUid: Global.system.veBus.serviceUid
-				onVebusServiceUidChanged: {
-					if (serviceType === "vebus") {
-						_serviceName.setValue(vebusServiceUid)
-					}
-				}
-
-
-				Component.onCompleted: {
-					_deviceInstance.setValue(input.index)
-					const inputConnected = !!input.modelData["connected"]
-					for (let configProperty in input.modelData) {
-						const configValue = input.modelData[configProperty]
-						if (configProperty === "phaseCount") {
-							if (inputConnected) {
-								_numberOfPhases.setValue(configValue)
-							}
-						} else if (inputSysInfo["_" + configProperty] !== undefined) {
-							inputSysInfo["_" + configProperty].setValue(configValue)
-						}
-					}
-
-					// Hardcode the min/max currents
-					if (isNaN(_minimumCurrent.value)) {
-						_minimumCurrent.setValue(-20)
-					}
-					if (isNaN(_maximumCurrent.value)) {
-						// Use a max bigger than 20 to check the side panel graph is still
-						// symmetrical above and below the threshold.
-						_maximumCurrent.setValue(40)
-					}
-				}
-			}
-		}
-	}
-
-	readonly property VeQuickItem _numberOfPhases: VeQuickItem {
-		uid: Global.system.serviceUid + "/Ac/ActiveIn/NumberOfPhases"
-		Component.onCompleted: {
-			setValue(3)
 		}
 	}
 
 	property Timer _measurementsTimer: Timer {
-		running: Global.mockDataSimulator.timersActive && Global.acInputs.activeInput
+		running: Global.mockDataSimulator.timersActive
 		repeat: true
 		interval: 3000
 		triggeredOnStart: true
 		onTriggered: {
-			let totalPower = NaN
-			for (let i = 0; i < Global.acInputs.activeInput.phases.count; ++i) {
+			_updateMeasurements(Global.acInputs.input1)
+			_updateMeasurements(Global.acInputs.input2)
+		}
+
+		function _updateMeasurements(acInput) {
+			if (!acInput || !acInput.operational) {
+				return
+			}
+
+			for (let i = 0; i < acInput.phases.count; ++i) {
 				// For each phase, randomly choose between positive, negative and no energy.
 				// Positive energy value = imported energy, flowing towards inverter/charger.
 				// Negative energy value = exported energy, flowing towards grid.
@@ -165,10 +219,8 @@ QtObject {
 					current = Math.random() * 20 * (negativeEnergyFlow ? -1 : 1)
 					power = current * 10
 				}
-				totalPower = Units.sumRealNumbers(totalPower, power)
-				const activePhasePath = Global.system.serviceUid + "/Ac/ActiveIn/L" + (i + 1)
-				Global.mockDataSimulator.setMockValue(activePhasePath + "/Current", current)
-				Global.mockDataSimulator.setMockValue(activePhasePath + "/Power", power)
+				acInput._phaseMeasurements["powerL" + (i+1)].setValue(power)
+				acInput._phaseMeasurements["_currentL" + (i+1)].setValue(current)
 			}
 		}
 	}
