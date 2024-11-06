@@ -16,8 +16,8 @@ SwipeViewPage {
 	// Preferred order for the input widgets on the left hand side. When placing widgets, avoid / minimize connectors crossing each other.
 	readonly property var _leftWidgetOrder: [
 		// Top widgets: these widgets have to be up the top, as they connect to the 'inverter/charger widget', which is at the top of the center column.
-		VenusOS.OverviewWidget_Type_AcGenericInput,
-		VenusOS.OverviewWidget_Type_AcGeneratorInput,
+		VenusOS.OverviewWidget_Type_AcInput1,
+		VenusOS.OverviewWidget_Type_AcInput2,
 		// End top widgets
 
 		// Middle widgets: these widgets can connect to both the inverter/charger widget and the battery widget in the center column.
@@ -36,10 +36,8 @@ SwipeViewPage {
 	// Set a counter that updates whenever the layout should change.
 	// Use a delayed binding to avoid repopulating the model unnecessarily.
 	readonly property int _shouldResetWidgets: Global.dcInputs.model.count
-			+ Global.acInputs.input1Info.source
-			+ Global.acInputs.input1Info.connected
-			+ Global.acInputs.input2Info.source
-			+ Global.acInputs.input2Info.connected
+			+ (Global.acInputs.input1?.operational ? 1 : 0)
+			+ (Global.acInputs.input2?.operational ? 1 : 0)
 			+ (Global.system.showInputLoads ? 1 : 0)
 			+ (Global.system.hasAcOutSystem ? 1 : 0)
 			+ (Global.dcLoads.model.count === 0 || isNaN(Global.system.dc.power) ? 0 : 1)
@@ -126,11 +124,11 @@ SwipeViewPage {
 								? VenusOS.OverviewWidget_Size_L
 								: smallWidgetSize
 					}
-				} else if (preferLargeWidgetCount === 1 || preferLargeWidgetCount === 2) {
-					// If one or two prefer L size, then use M for those, and S otherwise.
+				} else if (preferLargeWidgetCount === 2) {
+					// If two prefer L size, then use M for those, and X/XS otherwise.
 					widget.size = widget.preferredSize === VenusOS.OverviewWidget_PreferredSize_PreferLarge
 							? VenusOS.OverviewWidget_Size_M
-							: VenusOS.OverviewWidget_Size_S
+							: (widgets.length === 3 ? VenusOS.OverviewWidget_Size_S : VenusOS.OverviewWidget_Size_XS)
 				} else {
 					// There are no size preferences, or all three prefer L size, so use the same
 					// size for all of them.
@@ -211,14 +209,16 @@ SwipeViewPage {
 		if (_createdWidgets[type] !== undefined) {
 			return _createdWidgets[type]
 		}
-		args = args || {}
+
+		// Some Overview widgets do not have a default type, so assign it here.
+		// E.g. AcInputWidget may have be created with AcInput1 or AcInput2 type.
+		args = Object.assign(args || {}, { type: type })
+
 		let widget = null
 		switch (type) {
-		case VenusOS.OverviewWidget_Type_AcGenericInput:
+		case VenusOS.OverviewWidget_Type_AcInput1:
+		case VenusOS.OverviewWidget_Type_AcInput2:
 			widget = acInputComponent.createObject(root, args)
-			break
-		case VenusOS.OverviewWidget_Type_AcGeneratorInput:
-			widget = acInputComponent.createObject(root, Object.assign(args, { type: VenusOS.OverviewWidget_Type_AcGeneratorInput }))
 			break
 		case VenusOS.OverviewWidget_Type_Alternator:
 			widget = alternatorComponent.createObject(root, args)
@@ -255,33 +255,18 @@ SwipeViewPage {
 		let widget
 		let i
 
-		const inputInfos = [ Global.acInputs.input1Info, Global.acInputs.input2Info ]
-		for (i = 0; i < inputInfos.length; ++i) {
-			const inputInfo = inputInfos[i]
-			if (!inputInfo) {
-				continue
-			}
-			switch (inputInfo.source) {
-			// Valid AC inputs:
-			case VenusOS.AcInputs_InputSource_Grid:
-			case VenusOS.AcInputs_InputSource_Shore:
-				widgetType = VenusOS.OverviewWidget_Type_AcGenericInput
-				break
-			case VenusOS.AcInputs_InputSource_Generator:
-				widgetType = VenusOS.OverviewWidget_Type_AcGeneratorInput
-				break
-			// Not a valid AC input:
-			case VenusOS.AcInputs_InputSource_NotAvailable:
-			case VenusOS.AcInputs_InputSource_Inverting:
-				continue
-			default:
-				console.warn("Unknown AC input source:", inputInfo.source)
-				continue
-			}
-			if (widgetType >= 0) {
-				widget = _createWidget(widgetType)
-				widget.inputInfo = inputInfo
-				widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
+		// Add AC-in widgets.
+		const acInputConfigs = [
+			{ input: Global.acInputs.input1, widgetType: VenusOS.OverviewWidget_Type_AcInput1 },
+			{ input: Global.acInputs.input2, widgetType: VenusOS.OverviewWidget_Type_AcInput2 },
+		]
+		for (const inputConfig of acInputConfigs) {
+			widget = _createWidget(inputConfig.widgetType)
+			if (!!inputConfig.input) {
+				widget.input = inputConfig.input
+				widgetCandidates.splice(_leftWidgetInsertionIndex(inputConfig.widgetType, widgetCandidates), 0, widget)
+			} else {
+				widget.input = null
 			}
 		}
 
