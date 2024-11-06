@@ -255,6 +255,7 @@ SwipeViewPage {
 						bottom: acInGaugeQuantity.top
 						bottomMargin: Theme.geometry_briefPage_edgeGauge_quantityLabel_feedback_margin
 					}
+					input: Global.acInputs.activeInput
 				}
 
 				ArcGaugeQuantityRow {

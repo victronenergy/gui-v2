@@ -95,5 +95,6 @@ AcWidget {
 		id: acInputDirectionIcon
 		parent: root.quantityLabel
 		anchors.verticalCenter: parent.verticalCenter
+		input: Global.acInputs.activeInput
 	}
 }

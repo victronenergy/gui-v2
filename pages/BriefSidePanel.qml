@@ -65,6 +65,7 @@ ColumnLayout {
 			id: generatorDirectionIcon
 			parent: generatorWidget.quantityLabel
 			anchors.verticalCenter: parent.verticalCenter
+			input: Global.acInputs.activeInput
 		}
 	}
 
@@ -85,6 +86,7 @@ ColumnLayout {
 			 id: acInputDirectionIcon
 			 parent: acInputWidget.quantityLabel
 			 anchors.verticalCenter: parent.verticalCenter
+			 input: Global.acInputs.activeInput
 		 }
 
 		 sideComponent: LoadGraph {
