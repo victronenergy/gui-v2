@@ -133,6 +133,10 @@ void PhaseModel::resetModel()
 	// Otherwise, use the phase count from the system as the model count.
 	m_modelCount = m_l2AndL1OutSummed ? 1 : m_phaseCount;
 
+	if (m_modelCount >= m_phases.count()) {
+		m_phases.resize(m_modelCount, Phase{});
+	}
+
 	endResetModel();
 
 	if (prevModelCount != count()) {
