@@ -155,6 +155,10 @@ Page {
         uid: Global.venusPlatform.serviceUid + "/SystemIntegrity/ForceFirmwareReinstall"
     }
     VeQuickItem {
+        id: systemIntegritySshKeyForRootPresentItem
+        uid: Global.venusPlatform.serviceUid + "/SystemIntegrity/SshKeyForRootPresent"
+    }
+    VeQuickItem {
         id: systemIntegrityStartCheckItem
         uid: Global.venusPlatform.serviceUid + "/SystemIntegrity/StartCheck"
     }
@@ -246,6 +250,12 @@ Page {
                                     //% ""
                                     text: "Installed image type"
                                     secondaryText: signalKItem.isValid || nodeRedItem.isValid ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
+                                }
+
+                                ListTextItem {
+                                    //% ""
+                                    text: "User SSH key present"
+                                    secondaryText: systemIntegritySshKeyForRootPresentItem.value === 1 ? "Yes" : "No"
                                 }
 
 
