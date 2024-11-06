@@ -10,32 +10,34 @@ QtObject {
 	id: root
 
 	property string bindPrefix
+	property string powerKey: "Power"
+	property string currentKey: "Current"
 
 	readonly property VeQuickItem powerL1: VeQuickItem {
-		uid: bindPrefix + "/L1/Power"
+		uid: bindPrefix ? bindPrefix + "/L1/" + root.powerKey : ""
 		onValueChanged: root.phases.setValue(0, PhaseModel.PowerRole, value)
 	}
 	readonly property VeQuickItem powerL2: VeQuickItem {
-		uid: bindPrefix + "/L2/Power"
+		uid: bindPrefix ? bindPrefix + "/L2/" + root.powerKey : ""
 		onValueChanged: root.phases.setValue(1, PhaseModel.PowerRole, value)
 	}
 	readonly property VeQuickItem powerL3: VeQuickItem {
-		uid: bindPrefix + "/L3/Power"
+		uid: bindPrefix ? bindPrefix + "/L3/" + root.powerKey : ""
 		onValueChanged: root.phases.setValue(2, PhaseModel.PowerRole, value)
 	}
 	readonly property VeQuickItem _currentL1: VeQuickItem {
-		uid: bindPrefix + "/L1/Current"
+		uid: bindPrefix ? bindPrefix + "/L1/" + root.currentKey : ""
 		onValueChanged: root.phases.setValue(0, PhaseModel.CurrentRole, value)
 	}
 	readonly property VeQuickItem _currentL2: VeQuickItem {
-		uid: bindPrefix + "/L2/Current"
+		uid: bindPrefix ? bindPrefix + "/L2/" + root.currentKey : ""
 		onValueChanged: root.phases.setValue(1, PhaseModel.CurrentRole, value)
 	}
 	readonly property VeQuickItem _currentL3: VeQuickItem {
-		uid: bindPrefix + "/L3/Current"
+		uid: bindPrefix ? bindPrefix + "/L3/" + root.currentKey : ""
 		onValueChanged: root.phases.setValue(2, PhaseModel.CurrentRole, value)
 	}
-	readonly property VeQuickItem _phaseCount: VeQuickItem { uid: bindPrefix + "/NumberOfPhases" }
+	readonly property VeQuickItem _phaseCount: VeQuickItem { uid: bindPrefix ? bindPrefix + "/NumberOfPhases" : "" }
 	property bool splitPhaseL2PassthruDisabled: false
 	property bool isAcOutput: false
 	property bool l2AndL1OutSummed: false

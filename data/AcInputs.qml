@@ -9,7 +9,9 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property ActiveAcInput activeInput
+	readonly property AcInput activeInput: input1Info.isActiveInput ? input1 : (input2Info.isActiveInput ? input2 : null)
+	property AcInput input1
+	property AcInput input2
 	readonly property ActiveAcInput generatorInput: activeInput && activeInput.source === VenusOS.AcInputs_InputSource_Generator ? activeInput : null
 
 	readonly property AcInputSystemInfo activeInputInfo: input1Info.isActiveInput ? input1Info
@@ -34,11 +36,13 @@ QtObject {
 	property AcInputSystemInfo input1Info: AcInputSystemInfo {
 		inputIndex: 0
 		isActiveInput: root.isActiveInputInfo(input1Info)
+		onValidChanged: input1 = root.resetInput(input1, input1Info)
 	}
 	property AcInputSystemInfo input2Info: AcInputSystemInfo {
 		inputIndex: 1
 		isActiveInput: root.isActiveInputInfo(input2Info)
 				&& !input1Info.isActiveInput    // sanity check to ensure that there is only 1 active input at a time
+		onValidChanged: input2 = root.resetInput(input2, input2Info)
 	}
 
 	readonly property VeQuickItem _activeInputSource: VeQuickItem {
@@ -50,8 +54,8 @@ QtObject {
 		uid: Global.system.serviceUid + "/Ac/ActiveIn/ServiceType"
 	}
 
-	readonly property Component _activeAcInputComponent: Component {
-		ActiveAcInput {}
+	readonly property Component _acInputComponent: Component {
+		AcInput {}
 	}
 
 	function isActiveInputInfo(inputInfo) {
@@ -66,36 +70,31 @@ QtObject {
 		return false
 	}
 
-	// Set activeInput to a valid object when /Ac/ActiveIn/Source is set to a valid source and
-	// triggers input1Info or input2Info to become the active input.
-	onActiveInputInfoChanged: {
-		if (activeInput) {
-			activeInput.destroy()
-			activeInput = null
-		}
-		if (activeInputInfo) {
-			const serviceUid = BackendConnection.type === BackendConnection.MqttSource
-				  // this looks like: 'mqtt/vebus/289/'
-				? "mqtt/" + activeInputInfo.serviceType + "/" + activeInputInfo.deviceInstance
-				  // this looks like: "dbus/com.victronenergy.vebus.ttyO1"
-				: BackendConnection.uidPrefix() + "/" + activeInputInfo.serviceName
-			activeInput = _activeAcInputComponent.createObject(root, { serviceUid: serviceUid, inputInfo: activeInputInfo })
-		}
-	}
-
 	function sourceValid(source) {
 		return source !== VenusOS.AcInputs_InputSource_NotAvailable && source !== VenusOS.AcInputs_InputSource_Inverting
 	}
 
 	function findValidSource() {
-		if (activeInput) {
-			return activeInput.source
-		} else if (sourceValid(input1Info.source)) {
+		if (sourceValid(input1Info.source)) {
 			return input1Info.source
 		} else if (sourceValid(input2Info.source)) {
 			return input2Info.source
 		}
 		return VenusOS.AcInputs_InputSource_NotAvailable
+	}
+
+	function resetInput(input, inputInfo) {
+		if (input) {
+			// Invalidate bindings in AcInput so that data is not fetched anymore.
+			input.inputInfo = null
+			input.destroy()
+		}
+
+		if (inputInfo.valid) {
+			const serviceUid = BackendConnection.serviceUidFromName(inputInfo.serviceName, inputInfo.deviceInstance)
+			return _acInputComponent.createObject(root, { serviceUid: serviceUid, inputInfo: inputInfo })
+		}
+		return null
 	}
 
 	function sourceToText(source) {
