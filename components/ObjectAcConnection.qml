@@ -16,13 +16,16 @@ QtObject {
 	readonly property VeQuickItem powerL1: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L1/" + root.powerKey : ""
 		onValueChanged: root.phases.setValue(0, PhaseModel.PowerRole, value)
+		onIsValidChanged: if (isValid) root._expandPhaseCount(1)
 	}
 	readonly property VeQuickItem powerL2: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L2/" + root.powerKey : ""
+		onIsValidChanged: if (isValid) root._expandPhaseCount(2)
 		onValueChanged: root.phases.setValue(1, PhaseModel.PowerRole, value)
 	}
 	readonly property VeQuickItem powerL3: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L3/" + root.powerKey : ""
+		onIsValidChanged: if (isValid) root._expandPhaseCount(3)
 		onValueChanged: root.phases.setValue(2, PhaseModel.PowerRole, value)
 	}
 	readonly property VeQuickItem _currentL1: VeQuickItem {
@@ -63,6 +66,12 @@ QtObject {
 		repeat: true
 		onTriggered: {
 			_power = (powerL1.value || 0) + (powerL2.value || 0) + (powerL3.value || 0)
+		}
+	}
+
+	function _expandPhaseCount(minimumCount) {
+		if (!_phaseCount.isValid) {
+			phases.phaseCount = Math.max(phases.count, minimumCount)
 		}
 	}
 }
