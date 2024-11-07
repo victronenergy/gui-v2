@@ -14,7 +14,6 @@ QtObject {
 
 	required property int inputIndex
 	readonly property string bindPrefix: Global.system.serviceUid + "/Ac/In/" + inputIndex
-	property bool isActiveInput
 	readonly property bool valid: deviceInstance >= 0 && serviceType.length && serviceName.length
 
 	readonly property bool connected: !!_connected.value

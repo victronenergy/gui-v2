@@ -9,7 +9,6 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	readonly property AcInput activeInput: input1Info.isActiveInput ? input1 : (input2Info.isActiveInput ? input2 : null)
 	property AcInput input1
 	property AcInput input2
 
@@ -20,13 +19,6 @@ QtObject {
 			: input1?.operational ? input1
 			: input2?.operational ? input2
 			: null
-
-	readonly property AcInputSystemInfo activeInputInfo: input1Info.isActiveInput ? input1Info
-			: input2Info.isActiveInput ? input2Info
-			: null
-
-	property real power: activeInput != null ? activeInput.power : NaN
-	property real current: activeInput != null ? activeInput.current : NaN
 
 	readonly property var roles: [
 		{ role: "grid", name: CommonWords.grid },
@@ -42,39 +34,15 @@ QtObject {
 	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>. There are always two inputs.
 	property AcInputSystemInfo input1Info: AcInputSystemInfo {
 		inputIndex: 0
-		isActiveInput: root.isActiveInputInfo(input1Info)
 		onValidChanged: input1 = root.resetInput(input1, input1Info)
 	}
 	property AcInputSystemInfo input2Info: AcInputSystemInfo {
 		inputIndex: 1
-		isActiveInput: root.isActiveInputInfo(input2Info)
-				&& !input1Info.isActiveInput    // sanity check to ensure that there is only 1 active input at a time
 		onValidChanged: input2 = root.resetInput(input2, input2Info)
-	}
-
-	readonly property VeQuickItem _activeInputSource: VeQuickItem {
-		readonly property int sourceAsInt: !isValid ? VenusOS.AcInputs_InputSource_NotAvailable : parseInt(value)
-		uid: Global.system.serviceUid + "/Ac/ActiveIn/Source"
-	}
-
-	readonly property VeQuickItem _activeInputServiceType: VeQuickItem {
-		uid: Global.system.serviceUid + "/Ac/ActiveIn/ServiceType"
 	}
 
 	readonly property Component _acInputComponent: Component {
 		AcInput {}
-	}
-
-	function isActiveInputInfo(inputInfo) {
-		if (!inputInfo.valid) {
-			return false
-		}
-		if (_activeInputSource.isValid) {
-			return inputInfo.source === _activeInputSource.sourceAsInt
-		} else if (_activeInputServiceType.isValid) {
-			return inputInfo.serviceType === _activeInputServiceType.value
-		}
-		return false
 	}
 
 	function sourceValid(source) {
