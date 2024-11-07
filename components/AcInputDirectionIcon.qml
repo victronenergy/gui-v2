@@ -17,7 +17,6 @@ CP.ColorImage {
 	source: !!input
 			? (input.power < 0 ? "qrc:/images/icon_to_grid.svg" : "qrc:/images/icon_from_grid.svg")
 			: ""
-	color: !input || (input.power || 0) === 0 ? Theme.color_background_disabled
-			: input.power < 0 ? Theme.color_green
-			: Theme.color_blue
+	opacity: (input?.power || 0) === 0 ? 0 : 1  // hide when power is 0
+	color: input?.power < 0 ? Theme.color_green : Theme.color_blue
 }
