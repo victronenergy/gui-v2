@@ -36,6 +36,15 @@ Page {
 				stepSize: 5
 			}
 
+			ListQuantityItem {
+				//% "Active SOC limit"
+				text: qsTrId("settings_rs_active_soc_limit")
+				allowed: defaultAllowed
+					&& essMode.dataItem.value === VenusOS.Ess_State_OptimizedWithBatteryLife
+				dataItem.uid: root.bindPrefix + "/Ess/ActiveSocLimit"
+				unit: VenusOS.Units_Percentage
+			}
+
 			ListNavigationItem {
 				//% "Dynamic ESS"
 				text: qsTrId("settings_rs_ess_dess")
