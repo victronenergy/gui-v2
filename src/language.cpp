@@ -205,10 +205,13 @@ Language::Language(QQmlEngine*) : QObject(nullptr)
 
 void Language::init() // call this after setting the fontUrlPrefix if required.
 {
+	// Install English as the default fallback catalogue.
+	installTranslatorForLanguage(QLocale::English);
+
 	// Load appropriate translations for current locale, e.g. :/i18n/venus-gui-v2_fr.qm
-	if (!installTranslatorForLanguage(QLocale().language())) {
+	if (QLocale().language() != QLocale::English
+			 && !installTranslatorForLanguage(QLocale().language())) {
 		qCWarning(venusGui) << "Falling back to English as locale catalogue failed to load.";
-		installTranslatorForLanguage(QLocale::English); // fallback to default language.
 	}
 }
 
@@ -283,7 +286,7 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	if (!isLanguageRenderingSupported(language)) {
 		qCWarning(venusGui) << "Cannot render language" << QLocale(language).name()
-				   << "with the default font on WASM";
+				<< "with the default font on WASM";
 		return false;
 	}
 #endif
@@ -310,7 +313,11 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 		}
 	}
 
-	if (!QCoreApplication::installTranslator(translator)) {
+	// English is the fallback catalogue, so we have special handling for it:
+	// ensure we install it the first time it is loaded, but never after that.
+	// All other languages need to be installed, as we will remove them on language change.
+	if ((language != QLocale::English || !alreadyLoaded)
+			&& !QCoreApplication::installTranslator(translator)) {
 		qCWarning(venusGui) << "Unable to install translator for locale" << QLocale(language).name();
 		translator->deleteLater();
 		if (m_loadedTranslators.value(language) == translator) {
@@ -319,7 +326,8 @@ bool Language::installTranslatorForLanguage(QLocale::Language language)
 		return false;
 	}
 
-	if (currTranslator) {
+	// On language change, uninstall the old catalogue (unless it was the fallback English one).
+	if (m_currentLanguage != QLocale::English && currTranslator) {
 		if (!QCoreApplication::removeTranslator(currTranslator)) {
 			qCWarning(venusGui) << "Unable to remove old translator for locale" << QLocale(language).name();
 		}
