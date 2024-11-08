@@ -152,6 +152,15 @@ Page {
 			}
 
 			ListNavigationItem {
+				text: CommonWords.ess
+				allowed: root.serviceType === "acsystem"
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemEss.qml",
+							{ "title": text, "bindPrefix": root.serviceUid })
+				}
+			}
+
+			ListNavigationItem {
 				text: CommonWords.product_page
 				onClicked: {
 					if (root.serviceType === "inverter") {
