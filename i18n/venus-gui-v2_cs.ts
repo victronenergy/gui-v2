@@ -102,9 +102,8 @@
       <source>Unknown error</source>
       <translation>Neznámá chyba</translation>
     </message>
-    <message id="ess_card_minimum_soc">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="23"/>
-      <location filename="../../pages/controlcards/ESSCard.qml" line="50"/>
+    <message id="controlcard_inverter_charger_ess_minimum_soc">
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="104"/>
       <source>Minimum SOC</source>
       <translation>Minimální SOC</translation>
     </message>
@@ -134,7 +133,7 @@
       <translation>Solární výnos</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="181"/>
+      <location filename="../../data/System.qml" line="182"/>
       <source>External control</source>
       <translation>Externí ovládání</translation>
     </message>
@@ -254,7 +253,7 @@
       <translation>Funkce zařízení Venus OS Large</translation>
     </message>
     <message id="ess_battery_life_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="69"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="72"/>
       <source>Battery life limit: %1%</source>
       <translation>Omezení životnosti baterie: %1%</translation>
     </message>
@@ -510,12 +509,12 @@
       <translation>Zastavit, když je výkon nižší než</translation>
     </message>
     <message id="settings_system_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="126"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="150"/>
       <source>Battery monitor</source>
       <translation>Monitor baterie</translation>
     </message>
     <message id="settings_system_unavailable_monitor">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="153"/>
       <source>Unavailable monitor, set another</source>
       <translation>Nedostupný monitor, nastavte jiný</translation>
     </message>
@@ -758,7 +757,7 @@
       <translation type="unfinished">Zadejte jméno</translation>
     </message>
     <message id="settings_system_enter_user_defined_name">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="74"/>
       <source>Enter name</source>
       <translation>Zadejte jméno</translation>
     </message>
@@ -1691,28 +1690,23 @@ Pokud to nefunguje, zkontrolujte kartu SIM v telefonu a ujistěte se, že na ní
       <source>Inverter/Charger</source>
       <translation>Měnič / nabíječka</translation>
     </message>
-    <message id="settings_ess_inverter_ac_output_in_use">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="72"/>
-      <source>Inverter AC output in use</source>
-      <translation>Na AC výstupu měniče zátěž</translation>
-    </message>
     <message id="settings_ess_multiphase_regulation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="84"/>
       <source>Multiphase regulation</source>
       <translation>Vícefázová regulace</translation>
     </message>
     <message id="settings_ess_phase_compensation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="92"/>
       <source>Total of all phases</source>
       <translation>Celkem všech fází</translation>
     </message>
     <message id="settings_ess_individual_phase">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="94"/>
       <source>Individual phase</source>
       <translation>Individuální fáze</translation>
     </message>
     <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="100"/>
       <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
 
 CAUTION: Use only if required by the utility provider.</source>
@@ -1721,7 +1715,7 @@ CAUTION: Use only if required by the utility provider.</source>
 UPOZORNĚNÍ: Používejte pouze v případě, že to vyžaduje dodavatel elektrické energie.</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="103"/>
       <source>The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).
 
 Use unless prohibited by the utility provider.</source>
@@ -1730,7 +1724,7 @@ Use unless prohibited by the utility provider.</source>
 Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</translation>
     </message>
     <message id="settings_ess_inactive">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
       <source>Inactive</source>
       <translation type="unfinished">Neaktivní</translation>
     </message>
@@ -1745,22 +1739,22 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Minimální hodnota stavu nabití (síť přítomna)</translation>
     </message>
     <message id="settings_ess_active_soc_limit">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="131"/>
       <source>Active SOC limit</source>
       <translation>Aktuální hodnota limitu SOC</translation>
     </message>
     <message id="settings_ess_battery_life_sustain">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="159"/>
       <source>Sustain</source>
       <translation type="unfinished">Udržování</translation>
     </message>
     <message id="settings_ess_battery_life_recharge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="166"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="161"/>
       <source>Recharge</source>
       <translation type="unfinished">Nabíjení</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="254"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="249"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>Špičkové holení</translation>
@@ -1776,52 +1770,52 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Vždy</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="155"/>
       <source>Discharge disabled</source>
       <translation>Vybití deaktivováno</translation>
     </message>
     <message id="settings_ess_battery_life_slow_charge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="157"/>
       <source>Slow charge</source>
       <translation>Pomalé nabíjení</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="187"/>
+      <location filename="../../data/System.qml" line="188"/>
       <source>Sustain</source>
       <translation>Udržování</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="190"/>
+      <location filename="../../data/System.qml" line="191"/>
       <source>Recharge</source>
       <translation>Nabíjení</translation>
     </message>
     <message id="settings_ess_limit_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="174"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="169"/>
       <source>Limit charge power</source>
       <translation>Limit nabíjecího výkonu</translation>
     </message>
     <message id="settings_ess_max_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="193"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="188"/>
       <source>Maximum charge power</source>
       <translation>Maximální nabíjecí výkon</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="205"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="200"/>
       <source>Limit inverter power</source>
       <translation>Omezení výkonu měniče</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
       <source>Maximum inverter power</source>
       <translation>Maximální odběr z baterie</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="234"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="229"/>
       <source>Grid setpoint</source>
       <translation>Hodnota síťového odběru</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
       <source>Grid feed-in</source>
       <translation>Přívod do mřížky</translation>
     </message>
@@ -2299,17 +2293,17 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Napájení ze sítě</translation>
     </message>
     <message id="settings_system_name_vehicle">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="31"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="43"/>
       <source>Vehicle</source>
       <translation>Vozidlo</translation>
     </message>
     <message id="settings_system_name_boat">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="45"/>
       <source>Boat</source>
       <translation>Loď</translation>
     </message>
     <message id="settings_system_name">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="50"/>
       <source>System name</source>
       <translation>Název systému</translation>
     </message>
@@ -2324,47 +2318,47 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation type="unfinished">Síť</translation>
     </message>
     <message id="settings_system_name_auto">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="56"/>
       <source>Automatic</source>
       <translation type="unfinished">Automatický</translation>
     </message>
     <message id="settings_system_name_user_defined">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="65"/>
       <source>User defined</source>
       <translation>Dle uživatele</translation>
     </message>
     <message id="settings_system_user_defined_name">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="72"/>
       <source>User-defined name</source>
       <translation>Název definovaný uživatelem</translation>
     </message>
     <message id="settings_system_ac_input_1">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="84"/>
       <source>AC input 1</source>
       <translation>AC vstup 1</translation>
     </message>
     <message id="settings_system_ac_input_2">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="93"/>
       <source>AC input 2</source>
       <translation>AC vstup 2</translation>
     </message>
     <message id="settings_system_monitor_for_grid_failure">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="135"/>
       <source>Monitor for grid failure</source>
       <translation>Vyhledat selhání sítě</translation>
     </message>
     <message id="settings_system_monitor_for_shore_disconnect">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="137"/>
       <source>Monitor for shore disconnect</source>
       <translation>Sledování odpojení od pobřežní sítě</translation>
     </message>
     <message id="settings_system_auto_selected">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="175"/>
       <source>Auto-selected</source>
       <translation>Automaticky vybrané</translation>
     </message>
     <message id="settings_system_has_dc_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="184"/>
       <source>Has DC system</source>
       <translation>Jsou přítomny DC spotřebiče</translation>
     </message>
@@ -3128,7 +3122,7 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Kontrola stykače</translation>
     </message>
     <message id="batteryalarms_state_of_health">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="59"/>
       <source>State of health</source>
       <translation>Stav životnosti</translation>
     </message>
@@ -3248,12 +3242,12 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Detekce baterie může trvat až 60 sekund. Během tohoto procesu může být název baterie nesprávný.</translation>
     </message>
     <message id="batteryalarms_high_charge_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="31"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="38"/>
       <source>High charge current</source>
       <translation>Vysoký nabíjecí proud</translation>
     </message>
     <message id="batteryalarms_high_discharge_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="38"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
       <source>High discharge current</source>
       <translation>Vysoký vybíjecí proud</translation>
     </message>
@@ -3268,67 +3262,67 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation type="unfinished">Vysoké napětí baterie</translation>
     </message>
     <message id="batteryalarms_low_soc">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="52"/>
       <source>Low SOC</source>
       <translation type="unfinished">Nízký stav nabití baterie</translation>
     </message>
     <message id="batteryalarms_low_starter_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="66"/>
       <source>Low starter voltage</source>
       <translation>Nízké napětí startovací baterie</translation>
     </message>
     <message id="batteryalarms_high_starter_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="73"/>
       <source>High starter voltage</source>
       <translation>Vysoké napětí startovací baterie</translation>
     </message>
     <message id="batteryalarms_battery_temperature_sensor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="85"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="92"/>
       <source>Battery temperature sensor</source>
       <translation>Čidlo teploty baterie</translation>
     </message>
     <message id="batteryalarms_mid_point_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="92"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="99"/>
       <source>Mid-point voltage</source>
       <translation>Střední napětí</translation>
     </message>
     <message id="batteryalarms_fuse_blown">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="106"/>
       <source>Fuse blown</source>
       <translation type="unfinished">Spálená pojistka</translation>
     </message>
     <message id="batteryalarms_high_internal_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="113"/>
       <source>High internal temperature</source>
       <translation>Vysoká vnitřní teplota</translation>
     </message>
     <message id="batteryalarms_low_charge_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="120"/>
       <source>Low charge temperature</source>
       <translation>Teplota nízkého stavu nabití</translation>
     </message>
     <message id="batteryalarms_high_charge_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="120"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="127"/>
       <source>High charge temperature</source>
       <translation>Teplota vysokého stavu nabití</translation>
     </message>
     <message id="batteryalarms_internal_failure">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="134"/>
       <source>Internal failure</source>
       <translation>Vnitřní chyba</translation>
     </message>
     <message id="batteryalarms_circuit_breaker_tripped">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="134"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="141"/>
       <source>Circuit breaker tripped</source>
       <translation>Vypnutí jističe</translation>
     </message>
     <message id="batteryalarms_cell_imbalance">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="148"/>
       <source>Cell imbalance</source>
       <translation>Nevyrovnané články</translation>
     </message>
     <message id="batteryalarms_low_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="148"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="155"/>
       <source>Low cell voltage</source>
       <translation>Nízké napětí článku</translation>
     </message>
@@ -4484,42 +4478,42 @@ Chcete pokračovat?</translation>
       <translation>Opakování detekce...</translation>
     </message>
     <message id="vebus_device_restart_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="206"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="205"/>
       <source>Restart VE.Bus system</source>
       <translation>Restartujte systém VE.Bus</translation>
     </message>
     <message id="vebus_device_restarting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="209"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="208"/>
       <source>Restarting...</source>
       <translation>Restartuji...</translation>
     </message>
     <message id="vebus_device_press_to_restart">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="211"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="210"/>
       <source>Press to restart</source>
       <translation>Stisknutím tlačítka restartujte</translation>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="219"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="217"/>
       <source>AC input 1 ignored</source>
       <translation>AC vstup 1 ignorován</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="227"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="225"/>
       <source>AC input 2 ignored</source>
       <translation>AC vstup 2 ignorován</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="235"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="233"/>
       <source>ESS Relay test</source>
       <translation>Kontrola ESS relé</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="241"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="239"/>
       <source>Completed</source>
       <translation type="unfinished">Hotovo</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="243"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="241"/>
       <source>Pending</source>
       <translation type="unfinished">Čekající</translation>
     </message>
@@ -4534,12 +4528,12 @@ Chcete pokračovat?</translation>
       <translation>Čekající</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="250"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="248"/>
       <source>VE.Bus diagnostics</source>
       <translation>Diagnostika VE.Bus</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="269"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="267"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>Čítač kvality sítě Fáze L%1, zařízení %2 (%3)</translation>
     </message>
@@ -4756,8 +4750,14 @@ Chcete pokračovat?</translation>
       <source>VE.Bus BMS version</source>
       <translation>Verze VE.Bus BMS</translation>
     </message>
+    <message id="ess_card_minimum_soc">
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="15"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="50"/>
+      <source>Minimum SOC</source>
+      <translation type="unfinished">Minimální SOC</translation>
+    </message>
     <message id="ess_unless_grid_fails">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="40"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="32"/>
       <source>Unless grid fails</source>
       <extracomment>Shown below the minimum state of charge, as configured by the user</extracomment>
       <translation>Pokud síť neselže</translation>
@@ -5124,7 +5124,7 @@ Chcete pokračovat?</translation>
       <translation>Žádná chyba</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="108"/>
+      <location filename="../../data/AcInputs.qml" line="82"/>
       <source>Not available</source>
       <translation>Není k dispozici</translation>
     </message>
@@ -6166,27 +6166,27 @@ Chcete pokračovat?</translation>
       <translation>Vítr</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="115"/>
+      <location filename="../../data/AcInputs.qml" line="89"/>
       <source>Shore</source>
       <translation>Pobřežní přípojka</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="141"/>
+      <location filename="../../data/AcInputs.qml" line="115"/>
       <source>Grid current limit</source>
       <translation>Omezení proudu v síti</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="144"/>
+      <location filename="../../data/AcInputs.qml" line="118"/>
       <source>Generator current limit</source>
       <translation>Omezení proudu generátoru</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="147"/>
+      <location filename="../../data/AcInputs.qml" line="121"/>
       <source>Shore current limit</source>
       <translation>Břehový proudový limit</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="169"/>
+      <location filename="../../data/AcInputs.qml" line="143"/>
       <source>Stopping</source>
       <translation type="unfinished">Zastavení</translation>
     </message>
@@ -6263,24 +6263,19 @@ Chcete pokračovat?</translation>
       <translation>Vysoko</translation>
     </message>
     <message id="ess_state_keep_batteries_charged">
-      <location filename="../../data/Ess.qml" line="36"/>
+      <location filename="../../data/Ess.qml" line="47"/>
       <source>Keep batteries charged</source>
       <translation>Udržovat baterie v nabitém stavu</translation>
     </message>
     <message id="ess_state_optimized_with_battery_life">
-      <location filename="../../data/Ess.qml" line="32"/>
+      <location filename="../../data/Ess.qml" line="33"/>
       <source>Optimized with battery life</source>
       <translation>Optimalizováno s ohledem na životnost baterie</translation>
     </message>
     <message id="ess_state_optimized_without_battery_life">
-      <location filename="../../data/Ess.qml" line="34"/>
+      <location filename="../../data/Ess.qml" line="40"/>
       <source>Optimized without battery life</source>
       <translation>Optimalizováno bez výdrže baterie</translation>
-    </message>
-    <message id="ess_state_external_control">
-      <location filename="../../data/Ess.qml" line="38"/>
-      <source>External control</source>
-      <translation type="unfinished">Externí ovládání</translation>
     </message>
     <message id="evchargers_status_charged">
       <location filename="../../data/EvChargers.qml" line="94"/>
@@ -6348,7 +6343,7 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">Naplánováno</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="193"/>
+      <location filename="../../data/System.qml" line="194"/>
       <source>Scheduled</source>
       <translation>Naplánováno</translation>
     </message>
@@ -6429,102 +6424,102 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">Externí ovládání</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="123"/>
+      <location filename="../../data/System.qml" line="124"/>
       <source>AES mode</source>
       <translation>Nízký výkon</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="126"/>
+      <location filename="../../data/System.qml" line="127"/>
       <source>Fault condition</source>
       <translation>Poruchový stav</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="129"/>
+      <location filename="../../data/System.qml" line="130"/>
       <source>Bulk charging</source>
       <translation>Rychlé nabíjení</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="132"/>
+      <location filename="../../data/System.qml" line="133"/>
       <source>Absorption charging</source>
       <translation>Absorpční nabíjení</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="135"/>
+      <location filename="../../data/System.qml" line="136"/>
       <source>Float charging</source>
       <translation>Udržovací nabíjení</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="138"/>
+      <location filename="../../data/System.qml" line="139"/>
       <source>Storage mode</source>
       <translation>Režim skladování</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="141"/>
+      <location filename="../../data/System.qml" line="142"/>
       <source>Equalization charging</source>
       <translation>Vyrovnávací nabíjení</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="144"/>
+      <location filename="../../data/System.qml" line="145"/>
       <source>Pass-thru</source>
       <translation>Pass-thru</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="147"/>
+      <location filename="../../data/System.qml" line="148"/>
       <source>Inverting</source>
       <translation>Měnič</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="150"/>
+      <location filename="../../data/System.qml" line="151"/>
       <source>Assisting</source>
       <translation>Asistence</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="153"/>
+      <location filename="../../data/System.qml" line="154"/>
       <source>Power supply mode</source>
       <translation>Režim dodávky energie</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="156"/>
+      <location filename="../../data/System.qml" line="157"/>
       <source>Sustain</source>
       <translation type="unfinished">Udržování</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="160"/>
+      <location filename="../../data/System.qml" line="161"/>
       <source>Wake up</source>
       <translation>Probuďte se</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="163"/>
+      <location filename="../../data/System.qml" line="164"/>
       <source>Repeated absorption</source>
       <translation>Opakovaná absorpce</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="166"/>
+      <location filename="../../data/System.qml" line="167"/>
       <source>Auto equalize</source>
       <translation>Automatické vyrovnávání</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="169"/>
+      <location filename="../../data/System.qml" line="170"/>
       <source>Battery safe</source>
       <translation>Systém Battery Safe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="172"/>
+      <location filename="../../data/System.qml" line="173"/>
       <source>Load detect</source>
       <translation>Detekce zatížení</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="175"/>
+      <location filename="../../data/System.qml" line="176"/>
       <source>Blocked</source>
       <translation>Zablokovaný</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="178"/>
+      <location filename="../../data/System.qml" line="179"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="196"/>
+      <location filename="../../data/System.qml" line="197"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamická ESS</translation>
     </message>
@@ -6593,7 +6588,7 @@ Chcete pokračovat?</translation>
       <translation>Stejnosměrný vstup</translation>
     </message>
     <message id="ess_recommended">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="71"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="63"/>
       <source>For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer.</source>
       <oldsource>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</oldsource>
       <translation>U lithiových baterií se nedoporučuje nabíjení pod 10 %. U ostatních typů baterií zjistěte v datasheetu minimální úroveň doporučenou výrobcem.</translation>
@@ -6605,7 +6600,7 @@ Chcete pokračovat?</translation>
       <translation>Zakázat autostart?</translation>
     </message>
     <message id="controlcard_inverter_charger">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="23"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="25"/>
       <source>Inverter / Charger (%1)</source>
       <oldsource>Inverter / Charger</oldsource>
       <extracomment>%1 = the inverter/charger name</extracomment>
@@ -6844,27 +6839,27 @@ Chcete pokračovat?</translation>
       <translation>Pokud je funkce autostart vypnutá déle než 10 minut, spustí se alarm.</translation>
     </message>
     <message id="settings_ess_self_consumption_battery">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="71"/>
       <source>Self-consumption from battery</source>
       <translation>Vlastní spotřeba z baterie</translation>
     </message>
     <message id="settings_ess_all_system_loads">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="76"/>
       <source>All system loads</source>
       <translation>Všechny systémové zátěže</translation>
     </message>
     <message id="settings_ess_only_critical_loads">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="78"/>
       <source>Only critical loads</source>
       <translation>Pouze kritická zatížení</translation>
     </message>
     <message id="settings_ess_min_soc">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="112"/>
       <source>Minimum SOC (unless grid fails)</source>
       <translation type="unfinished">Minimální hodnota stavu nabití (síť přítomna)</translation>
     </message>
     <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="143"/>
       <source>Battery life state</source>
       <oldsource>BatteryLife state</oldsource>
       <translation>Stav životnosti baterie</translation>
@@ -6882,13 +6877,13 @@ Chcete pokračovat?</translation>
       <translation>Přístup k Node-RED na adrese https://venus.local:1881 a prostřednictvím VRM.</translation>
     </message>
     <message id="settings_system_battery_measurements">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="166"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="190"/>
       <source>Battery measurements</source>
       <oldsource>Battery Measurements</oldsource>
       <translation>Měření na baterii</translation>
     </message>
     <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="172"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="196"/>
       <source>System status</source>
       <oldsource>System Status</oldsource>
       <translation>Stav systému</translation>
@@ -7083,7 +7078,7 @@ Chcete pokračovat?</translation>
       <translation>Stránka se automaticky načte za deset sekund, aby se načetla nejnovější verze.</translation>
     </message>
     <message id="controlcard_inverter">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="20"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="22"/>
       <source>Inverter (%1)</source>
       <extracomment>%1 = the inverter name</extracomment>
       <translation>Invertor (%1)</translation>
@@ -7371,7 +7366,7 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">Krátce</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="487"/>
+      <location filename="../../pages/BriefPage.qml" line="488"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Vysoké zatížení systému, zavřením bočního panelu se sníží zatížení procesoru</translation>
     </message>
@@ -7575,12 +7570,12 @@ See documentation for further information.</oldsource>
       <translation>Tlak oleje</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="258"/>
       <source>Scheduled charge levels</source>
       <translation>Naplánované úrovně nabití</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="266"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="261"/>
       <source>Active (%1)</source>
       <translation>Aktivní (%1)</translation>
     </message>
@@ -8069,29 +8064,19 @@ Po přidání/povolení nové sítě je třeba ji jednou schválit v konzole spr
       <translation>Připojené pomocné relé elektrocentrály</translation>
     </message>
     <message id="settings_system_ac_position">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
       <source>Position of AC loads</source>
       <translation>Poloha střídavých zátěží</translation>
     </message>
     <message id="settings_system_ac_input_and_output">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="119"/>
       <source>AC input &amp; output</source>
       <translation>Vstup a výstup střídavého proudu</translation>
     </message>
-    <message id="settings_system_ac_input_and_output_description">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="95"/>
-      <source>Use this option when AC-loads are present on the input of the Inverter/Charger. Use this option if unsure.</source>
-      <translation>Tuto možnost použijte, pokud je na vstupu měniče/ nabíječky přítomno střídavé zatížení. Tuto možnost použijte, pokud si nejste jisti.</translation>
-    </message>
     <message id="settings_system_ac_output_only">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="113"/>
       <source>AC output only</source>
       <translation>Pouze střídavý výstup</translation>
-    </message>
-    <message id="settings_system_ac_output_only_description">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
-      <source>Use this option when the system uses a grid meter, but all AC-loads are on the output of the Inverter/Charger.</source>
-      <translation>Tuto možnost použijte v případě, že systém používá síťový elektroměr, ale všechna střídavá zatížení jsou na výstupu měniče/nabíječky.</translation>
     </message>
     <message id="cgwacs_battery_schedule_monthly">
       <location filename="../../components/settings/ChargeScheduleItem.qml" line="23"/>
@@ -8099,12 +8084,12 @@ Po přidání/povolení nové sítě je třeba ji jednou schválit v konzole spr
       <translation>Měsíční</translation>
     </message>
     <message id="acInputs_evcharger">
-      <location filename="../../data/AcInputs.qml" line="28"/>
+      <location filename="../../data/AcInputs.qml" line="29"/>
       <source>EV Charger</source>
       <translation>Nabíječka pro elektromobily</translation>
     </message>
     <message id="acInputs_heat_pump">
-      <location filename="../../data/AcInputs.qml" line="30"/>
+      <location filename="../../data/AcInputs.qml" line="31"/>
       <source>Heat pump</source>
       <translation>Tepelné čerpadlo</translation>
     </message>
@@ -8543,33 +8528,83 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
       <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
       <translation>Všechny každodenní ovládací prvky jsou nyní sloučeny v novém podokně Ovládací prvky. Jsou přístupné odkudkoli klepnutím na vyhrazené tlačítko v levém horním rohu displeje.</translation>
     </message>
+    <message id="batteryalarms_high_cell_voltage">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="31"/>
+      <source>High cell voltage</source>
+      <translation>Vysoké napětí článků</translation>
+    </message>
+    <message id="settings_system_ac_input_only">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="106"/>
+      <source>AC input only</source>
+      <translation>Pouze vstup AC</translation>
+    </message>
+    <message id="settings_system_ac_input_only_description">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="108"/>
+      <source>The AC output of the Inverter/Charger is not used.</source>
+      <translation>Střídavý výstup měniče/nabíječky se nepoužívá.</translation>
+    </message>
+    <message id="settings_system_ac_output_only_description">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="115"/>
+      <source>All AC loads are on the output of the Inverter/Charger.</source>
+      <translation>Všechny střídavé zátěže jsou na výstupu měniče/nabíječky.</translation>
+    </message>
+    <message id="settings_system_ac_input_and_output_description">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="121"/>
+      <source>The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed.</source>
+      <translation>Systém automaticky zobrazí zatížení na vstupu měniče/ nabíječky, pokud je k dispozici síťový elektroměr. Zatížení na výstupu se zobrazuje vždy.</translation>
+    </message>
+    <message id="ess_state_optimized_with_battery_life_button">
+      <location filename="../../data/Ess.qml" line="35"/>
+      <source>Optimized + battery life</source>
+      <translation>Optimalizovaná + životnost baterie</translation>
+    </message>
+    <message id="ess_state_optimized_without_battery_life_button">
+      <location filename="../../data/Ess.qml" line="42"/>
+      <source>Optimized</source>
+      <translation>Optimalizované stránky</translation>
+    </message>
+    <message id="ess_state_keep_batteries_charged_button">
+      <location filename="../../data/Ess.qml" line="49"/>
+      <source>Keep charged</source>
+      <translation>Udržujte nabitý</translation>
+    </message>
+    <message id="ess_state_external_control">
+      <location filename="../../data/Ess.qml" line="54"/>
+      <source>External control</source>
+      <translation type="unfinished">Externí ovládání</translation>
+    </message>
+    <message id="controlcard_inverter_charger_ess_mode">
+      <location filename="../../components/dialogs/InverterChargerEssModeDialog.qml" line="18"/>
+      <source>ESS mode</source>
+      <translation>Režim ESS</translation>
+    </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
       <source>Unknown</source>
       <translation type="unfinished">Neznámý</translation>
     </message>
     <message id="brief_solar_yield">
-      <location filename="../../pages/BriefSidePanel.qml" line="18"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="25"/>
       <source>Solar yield</source>
       <translation type="unfinished">Solární výnos</translation>
     </message>
     <message id="brief_dc_input">
-      <location filename="../../pages/BriefSidePanel.qml" line="207"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="213"/>
       <source>DC input</source>
       <translation type="unfinished">Stejnosměrný vstup</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="248"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
       <source>AC Loads</source>
       <translation type="unfinished">AC zátěž</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="276"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="282"/>
       <source>DC Loads</source>
       <translation type="unfinished">DC zátěže</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="397"/>
+      <location filename="../../pages/OverviewPage.qml" line="387"/>
       <source>Overview</source>
       <translation type="unfinished">Přehled</translation>
     </message>

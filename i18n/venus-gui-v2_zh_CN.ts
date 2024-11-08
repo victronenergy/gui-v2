@@ -102,9 +102,8 @@
       <source>Unknown error</source>
       <translation>未知错误</translation>
     </message>
-    <message id="ess_card_minimum_soc">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="23"/>
-      <location filename="../../pages/controlcards/ESSCard.qml" line="50"/>
+    <message id="controlcard_inverter_charger_ess_minimum_soc">
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="104"/>
       <source>Minimum SOC</source>
       <translation>最小SOC</translation>
     </message>
@@ -134,7 +133,7 @@
       <translation>太阳能发电量</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="181"/>
+      <location filename="../../data/System.qml" line="182"/>
       <source>External control</source>
       <translation>外部控制</translation>
     </message>
@@ -254,7 +253,7 @@
       <translation>Venus OS 大版本功能</translation>
     </message>
     <message id="ess_battery_life_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="69"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="72"/>
       <source>Battery life limit: %1%</source>
       <translation>电池寿命限制：%1%</translation>
     </message>
@@ -510,12 +509,12 @@
       <translation>当功率低于时停止</translation>
     </message>
     <message id="settings_system_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="126"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="150"/>
       <source>Battery monitor</source>
       <translation>电池监测器</translation>
     </message>
     <message id="settings_system_unavailable_monitor">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="153"/>
       <source>Unavailable monitor, set another</source>
       <translation>监测仪不可用，设置另一监测仪</translation>
     </message>
@@ -758,7 +757,7 @@
       <translation type="unfinished">输入名称</translation>
     </message>
     <message id="settings_system_enter_user_defined_name">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="74"/>
       <source>Enter name</source>
       <translation>输入名称</translation>
     </message>
@@ -1691,28 +1690,23 @@ If that doesn't work, check sim-card in a phone to make sure that there is credi
       <source>Inverter/Charger</source>
       <translation>逆变器/充电器</translation>
     </message>
-    <message id="settings_ess_inverter_ac_output_in_use">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="72"/>
-      <source>Inverter AC output in use</source>
-      <translation>使用的逆变器交流输出</translation>
-    </message>
     <message id="settings_ess_multiphase_regulation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="84"/>
       <source>Multiphase regulation</source>
       <translation>多相调节</translation>
     </message>
     <message id="settings_ess_phase_compensation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="92"/>
       <source>Total of all phases</source>
       <translation>所有相位总计</translation>
     </message>
     <message id="settings_ess_individual_phase">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="94"/>
       <source>Individual phase</source>
       <translation>每个相位</translation>
     </message>
     <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="100"/>
       <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
 
 CAUTION: Use only if required by the utility provider.</source>
@@ -1721,7 +1715,7 @@ CAUTION: Use only if required by the utility provider.</source>
 注意：仅在电力公司要求时使用。</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="103"/>
       <source>The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).
 
 Use unless prohibited by the utility provider.</source>
@@ -1730,7 +1724,7 @@ Use unless prohibited by the utility provider.</source>
 除非电力公司禁止，否则请使用。</translation>
     </message>
     <message id="settings_ess_inactive">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
       <source>Inactive</source>
       <translation type="unfinished">不激活</translation>
     </message>
@@ -1745,22 +1739,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>最低放电量（除非电网故障）</translation>
     </message>
     <message id="settings_ess_active_soc_limit">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="131"/>
       <source>Active SOC limit</source>
       <translation>实际充电状态限制</translation>
     </message>
     <message id="settings_ess_battery_life_sustain">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="159"/>
       <source>Sustain</source>
       <translation type="unfinished">维持</translation>
     </message>
     <message id="settings_ess_battery_life_recharge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="166"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="161"/>
       <source>Recharge</source>
       <translation type="unfinished">重新充电</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="254"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="249"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>削峰</translation>
@@ -1776,52 +1770,52 @@ Use unless prohibited by the utility provider.</source>
       <translation>总是</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="155"/>
       <source>Discharge disabled</source>
       <translation>放电已禁用</translation>
     </message>
     <message id="settings_ess_battery_life_slow_charge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="157"/>
       <source>Slow charge</source>
       <translation>慢冲</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="187"/>
+      <location filename="../../data/System.qml" line="188"/>
       <source>Sustain</source>
       <translation>维持</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="190"/>
+      <location filename="../../data/System.qml" line="191"/>
       <source>Recharge</source>
       <translation>重新充电</translation>
     </message>
     <message id="settings_ess_limit_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="174"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="169"/>
       <source>Limit charge power</source>
       <translation>限制充电功率</translation>
     </message>
     <message id="settings_ess_max_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="193"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="188"/>
       <source>Maximum charge power</source>
       <translation>最大充电功率</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="205"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="200"/>
       <source>Limit inverter power</source>
       <translation>限制逆变器功率</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
       <source>Maximum inverter power</source>
       <translation>最大逆变器功率</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="234"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="229"/>
       <source>Grid setpoint</source>
       <translation>电网设定点</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
       <source>Grid feed-in</source>
       <translation>上网</translation>
     </message>
@@ -2299,17 +2293,17 @@ https://ve3.nl/vol 上的文档</translation>
       <translation>岸电</translation>
     </message>
     <message id="settings_system_name_vehicle">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="31"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="43"/>
       <source>Vehicle</source>
       <translation>车</translation>
     </message>
     <message id="settings_system_name_boat">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="45"/>
       <source>Boat</source>
       <translation>船</translation>
     </message>
     <message id="settings_system_name">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="50"/>
       <source>System name</source>
       <translation>系统名称</translation>
     </message>
@@ -2324,47 +2318,47 @@ https://ve3.nl/vol 上的文档</translation>
       <translation type="unfinished">电网</translation>
     </message>
     <message id="settings_system_name_auto">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="56"/>
       <source>Automatic</source>
       <translation type="unfinished">自动</translation>
     </message>
     <message id="settings_system_name_user_defined">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="65"/>
       <source>User defined</source>
       <translation>用户定义</translation>
     </message>
     <message id="settings_system_user_defined_name">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="72"/>
       <source>User-defined name</source>
       <translation>用户自定义名称</translation>
     </message>
     <message id="settings_system_ac_input_1">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="84"/>
       <source>AC input 1</source>
       <translation>交流输入1</translation>
     </message>
     <message id="settings_system_ac_input_2">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="93"/>
       <source>AC input 2</source>
       <translation>交流输入2</translation>
     </message>
     <message id="settings_system_monitor_for_grid_failure">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="135"/>
       <source>Monitor for grid failure</source>
       <translation>监测电网故障</translation>
     </message>
     <message id="settings_system_monitor_for_shore_disconnect">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="137"/>
       <source>Monitor for shore disconnect</source>
       <translation>监测岸电断开</translation>
     </message>
     <message id="settings_system_auto_selected">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="175"/>
       <source>Auto-selected</source>
       <translation>自动选择</translation>
     </message>
     <message id="settings_system_has_dc_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="184"/>
       <source>Has DC system</source>
       <translation>有直流系统</translation>
     </message>
@@ -3128,7 +3122,7 @@ https://ve3.nl/vol 上的文档</translation>
       <translation>接触器检查</translation>
     </message>
     <message id="batteryalarms_state_of_health">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="59"/>
       <source>State of health</source>
       <translation>健康状态</translation>
     </message>
@@ -3248,12 +3242,12 @@ https://ve3.nl/vol 上的文档</translation>
       <translation>重新检测电池可能要花60秒。期间电池名称可能有误。</translation>
     </message>
     <message id="batteryalarms_high_charge_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="31"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="38"/>
       <source>High charge current</source>
       <translation>充电电流大</translation>
     </message>
     <message id="batteryalarms_high_discharge_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="38"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
       <source>High discharge current</source>
       <translation>放电电流大</translation>
     </message>
@@ -3268,67 +3262,67 @@ https://ve3.nl/vol 上的文档</translation>
       <translation type="unfinished">电池电压高</translation>
     </message>
     <message id="batteryalarms_low_soc">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="52"/>
       <source>Low SOC</source>
       <translation type="unfinished">SOC低</translation>
     </message>
     <message id="batteryalarms_low_starter_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="66"/>
       <source>Low starter voltage</source>
       <translation>启动电池电压低</translation>
     </message>
     <message id="batteryalarms_high_starter_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="73"/>
       <source>High starter voltage</source>
       <translation>启动电压高</translation>
     </message>
     <message id="batteryalarms_battery_temperature_sensor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="85"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="92"/>
       <source>Battery temperature sensor</source>
       <translation>电池温度传感器</translation>
     </message>
     <message id="batteryalarms_mid_point_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="92"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="99"/>
       <source>Mid-point voltage</source>
       <translation>中间点电压</translation>
     </message>
     <message id="batteryalarms_fuse_blown">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="106"/>
       <source>Fuse blown</source>
       <translation type="unfinished">保险熔断</translation>
     </message>
     <message id="batteryalarms_high_internal_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="113"/>
       <source>High internal temperature</source>
       <translation>内部温度高</translation>
     </message>
     <message id="batteryalarms_low_charge_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="120"/>
       <source>Low charge temperature</source>
       <translation>充电温度低</translation>
     </message>
     <message id="batteryalarms_high_charge_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="120"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="127"/>
       <source>High charge temperature</source>
       <translation>充电温度高</translation>
     </message>
     <message id="batteryalarms_internal_failure">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="134"/>
       <source>Internal failure</source>
       <translation>内部故障</translation>
     </message>
     <message id="batteryalarms_circuit_breaker_tripped">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="134"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="141"/>
       <source>Circuit breaker tripped</source>
       <translation>断路器跳闸</translation>
     </message>
     <message id="batteryalarms_cell_imbalance">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="148"/>
       <source>Cell imbalance</source>
       <translation>电芯不平衡</translation>
     </message>
     <message id="batteryalarms_low_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="148"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="155"/>
       <source>Low cell voltage</source>
       <translation>电芯电压低</translation>
     </message>
@@ -4482,42 +4476,42 @@ Do you want to continue?</source>
       <translation>重新检测...</translation>
     </message>
     <message id="vebus_device_restart_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="206"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="205"/>
       <source>Restart VE.Bus system</source>
       <translation>重启 VE.Bus 系统</translation>
     </message>
     <message id="vebus_device_restarting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="209"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="208"/>
       <source>Restarting...</source>
       <translation>重新启动...</translation>
     </message>
     <message id="vebus_device_press_to_restart">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="211"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="210"/>
       <source>Press to restart</source>
       <translation>按重新启动</translation>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="219"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="217"/>
       <source>AC input 1 ignored</source>
       <translation>交流输入1已忽略</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="227"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="225"/>
       <source>AC input 2 ignored</source>
       <translation>交流输入2已忽略</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="235"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="233"/>
       <source>ESS Relay test</source>
       <translation>ESS继电器测试</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="241"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="239"/>
       <source>Completed</source>
       <translation type="unfinished">已完成</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="243"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="241"/>
       <source>Pending</source>
       <translation type="unfinished">等待中</translation>
     </message>
@@ -4532,12 +4526,12 @@ Do you want to continue?</source>
       <translation>等待中</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="250"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="248"/>
       <source>VE.Bus diagnostics</source>
       <translation>VE.Bus诊断</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="269"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="267"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>网络质量计数器相位 L%1，设备 %2 (%3)</translation>
     </message>
@@ -4754,8 +4748,14 @@ Do you want to continue?</source>
       <source>VE.Bus BMS version</source>
       <translation>VE.Bus BMS版本</translation>
     </message>
+    <message id="ess_card_minimum_soc">
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="15"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="50"/>
+      <source>Minimum SOC</source>
+      <translation type="unfinished">最小SOC</translation>
+    </message>
     <message id="ess_unless_grid_fails">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="40"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="32"/>
       <source>Unless grid fails</source>
       <extracomment>Shown below the minimum state of charge, as configured by the user</extracomment>
       <translation>除非电网丢失</translation>
@@ -5122,7 +5122,7 @@ Do you want to continue?</source>
       <translation>无错误</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="108"/>
+      <location filename="../../data/AcInputs.qml" line="82"/>
       <source>Not available</source>
       <translation>不可用</translation>
     </message>
@@ -6164,27 +6164,27 @@ Do you want to continue?</source>
       <translation>风</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="115"/>
+      <location filename="../../data/AcInputs.qml" line="89"/>
       <source>Shore</source>
       <translation>岸电</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="141"/>
+      <location filename="../../data/AcInputs.qml" line="115"/>
       <source>Grid current limit</source>
       <translation>电网电流限制</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="144"/>
+      <location filename="../../data/AcInputs.qml" line="118"/>
       <source>Generator current limit</source>
       <translation>发电机电流限制</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="147"/>
+      <location filename="../../data/AcInputs.qml" line="121"/>
       <source>Shore current limit</source>
       <translation>岸电电流限制</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="169"/>
+      <location filename="../../data/AcInputs.qml" line="143"/>
       <source>Stopping</source>
       <translation type="unfinished">停止</translation>
     </message>
@@ -6261,24 +6261,19 @@ Do you want to continue?</source>
       <translation>高</translation>
     </message>
     <message id="ess_state_keep_batteries_charged">
-      <location filename="../../data/Ess.qml" line="36"/>
+      <location filename="../../data/Ess.qml" line="47"/>
       <source>Keep batteries charged</source>
       <translation>让电池保持在充电状态</translation>
     </message>
     <message id="ess_state_optimized_with_battery_life">
-      <location filename="../../data/Ess.qml" line="32"/>
+      <location filename="../../data/Ess.qml" line="33"/>
       <source>Optimized with battery life</source>
       <translation>优化电池寿命</translation>
     </message>
     <message id="ess_state_optimized_without_battery_life">
-      <location filename="../../data/Ess.qml" line="34"/>
+      <location filename="../../data/Ess.qml" line="40"/>
       <source>Optimized without battery life</source>
       <translation>非电池长寿命优化</translation>
-    </message>
-    <message id="ess_state_external_control">
-      <location filename="../../data/Ess.qml" line="38"/>
-      <source>External control</source>
-      <translation type="unfinished">外部控制</translation>
     </message>
     <message id="evchargers_status_charged">
       <location filename="../../data/EvChargers.qml" line="94"/>
@@ -6346,7 +6341,7 @@ Do you want to continue?</source>
       <translation type="unfinished">已定时</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="193"/>
+      <location filename="../../data/System.qml" line="194"/>
       <source>Scheduled</source>
       <translation>已定时</translation>
     </message>
@@ -6427,102 +6422,102 @@ Do you want to continue?</source>
       <translation type="unfinished">外部控制</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="123"/>
+      <location filename="../../data/System.qml" line="124"/>
       <source>AES mode</source>
       <translation>节能模式</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="126"/>
+      <location filename="../../data/System.qml" line="127"/>
       <source>Fault condition</source>
       <translation>故障情况</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="129"/>
+      <location filename="../../data/System.qml" line="130"/>
       <source>Bulk charging</source>
       <translation>快充</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="132"/>
+      <location filename="../../data/System.qml" line="133"/>
       <source>Absorption charging</source>
       <translation>均充</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="135"/>
+      <location filename="../../data/System.qml" line="136"/>
       <source>Float charging</source>
       <translation>浮充</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="138"/>
+      <location filename="../../data/System.qml" line="139"/>
       <source>Storage mode</source>
       <translation>存储模式</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="141"/>
+      <location filename="../../data/System.qml" line="142"/>
       <source>Equalization charging</source>
       <translation>均衡充电</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="144"/>
+      <location filename="../../data/System.qml" line="145"/>
       <source>Pass-thru</source>
       <translation>直通</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="147"/>
+      <location filename="../../data/System.qml" line="148"/>
       <source>Inverting</source>
       <translation>逆变</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="150"/>
+      <location filename="../../data/System.qml" line="151"/>
       <source>Assisting</source>
       <translation>辅助供电</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="153"/>
+      <location filename="../../data/System.qml" line="154"/>
       <source>Power supply mode</source>
       <translation>电源模式</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="156"/>
+      <location filename="../../data/System.qml" line="157"/>
       <source>Sustain</source>
       <translation type="unfinished">维持</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="160"/>
+      <location filename="../../data/System.qml" line="161"/>
       <source>Wake up</source>
       <translation>唤醒</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="163"/>
+      <location filename="../../data/System.qml" line="164"/>
       <source>Repeated absorption</source>
       <translation>重复均充</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="166"/>
+      <location filename="../../data/System.qml" line="167"/>
       <source>Auto equalize</source>
       <translation>自动均衡</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="169"/>
+      <location filename="../../data/System.qml" line="170"/>
       <source>Battery safe</source>
       <translation>电池保护模式</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="172"/>
+      <location filename="../../data/System.qml" line="173"/>
       <source>Load detect</source>
       <translation>负载检测</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="175"/>
+      <location filename="../../data/System.qml" line="176"/>
       <source>Blocked</source>
       <translation>锁定</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="178"/>
+      <location filename="../../data/System.qml" line="179"/>
       <source>Test</source>
       <translation>测试</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="196"/>
+      <location filename="../../data/System.qml" line="197"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">动态ESS</translation>
     </message>
@@ -6591,7 +6586,7 @@ Do you want to continue?</source>
       <translation>直流输入</translation>
     </message>
     <message id="ess_recommended">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="71"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="63"/>
       <source>For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer.</source>
       <oldsource>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</oldsource>
       <translation>对于锂电池，不建议充电低于 10%。对于其他类型的电池，请查看数据表，了解制造商建议的最低电量。</translation>
@@ -6603,7 +6598,7 @@ Do you want to continue?</source>
       <translation>禁用自动启动？</translation>
     </message>
     <message id="controlcard_inverter_charger">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="23"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="25"/>
       <source>Inverter / Charger (%1)</source>
       <oldsource>Inverter / Charger</oldsource>
       <extracomment>%1 = the inverter/charger name</extracomment>
@@ -6842,27 +6837,27 @@ Do you want to continue?</source>
       <translation>如果自动启动功能被禁用超过 10 分钟，则会触发警报</translation>
     </message>
     <message id="settings_ess_self_consumption_battery">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="71"/>
       <source>Self-consumption from battery</source>
       <translation>从电池自消耗</translation>
     </message>
     <message id="settings_ess_all_system_loads">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="76"/>
       <source>All system loads</source>
       <translation>所有系统负载</translation>
     </message>
     <message id="settings_ess_only_critical_loads">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="78"/>
       <source>Only critical loads</source>
       <translation>只限关键负载</translation>
     </message>
     <message id="settings_ess_min_soc">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="112"/>
       <source>Minimum SOC (unless grid fails)</source>
       <translation type="unfinished">最低放电量（除非电网故障）</translation>
     </message>
     <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="143"/>
       <source>Battery life state</source>
       <oldsource>BatteryLife state</oldsource>
       <translation>电池寿命状态</translation>
@@ -6880,13 +6875,13 @@ Do you want to continue?</source>
       <translation>通过 https://venus.local:1881 和 VRM 访问 Node-RED。</translation>
     </message>
     <message id="settings_system_battery_measurements">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="166"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="190"/>
       <source>Battery measurements</source>
       <oldsource>Battery Measurements</oldsource>
       <translation>电池测量</translation>
     </message>
     <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="172"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="196"/>
       <source>System status</source>
       <oldsource>System Status</oldsource>
       <translation>系统状态</translation>
@@ -7081,7 +7076,7 @@ Do you want to continue?</source>
       <translation>页面将在十秒后自动重新加载，以加载最新版本。</translation>
     </message>
     <message id="controlcard_inverter">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="20"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="22"/>
       <source>Inverter (%1)</source>
       <extracomment>%1 = the inverter name</extracomment>
       <translation>逆变器(%1)</translation>
@@ -7369,7 +7364,7 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">概要</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="487"/>
+      <location filename="../../pages/BriefPage.qml" line="488"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>系统负载高，关闭侧板以减少 CPU 负载</translation>
     </message>
@@ -7573,12 +7568,12 @@ See documentation for further information.</oldsource>
       <translation>油压</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="258"/>
       <source>Scheduled charge levels</source>
       <translation>预定的充电水平</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="266"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="261"/>
       <source>Active (%1)</source>
       <translation>活动 (%1)</translation>
     </message>
@@ -8067,29 +8062,19 @@ Tailscale 将此功能称为子网路由，允许远程访问本地网络中的�
       <translation>已连接发电机组辅助继电器</translation>
     </message>
     <message id="settings_system_ac_position">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
       <source>Position of AC loads</source>
       <translation>交流负载的位置</translation>
     </message>
     <message id="settings_system_ac_input_and_output">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="119"/>
       <source>AC input &amp; output</source>
       <translation>交流电输入和输出</translation>
     </message>
-    <message id="settings_system_ac_input_and_output_description">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="95"/>
-      <source>Use this option when AC-loads are present on the input of the Inverter/Charger. Use this option if unsure.</source>
-      <translation>当逆变器/充电器的输入端存在交流负载时，请使用此选项。如果不确定，请使用此选项。</translation>
-    </message>
     <message id="settings_system_ac_output_only">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="113"/>
       <source>AC output only</source>
       <translation>仅交流输出</translation>
-    </message>
-    <message id="settings_system_ac_output_only_description">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
-      <source>Use this option when the system uses a grid meter, but all AC-loads are on the output of the Inverter/Charger.</source>
-      <translation>当系统使用电网表，但所有交流负载都在逆变器/充电器的输出上时，请使用此选项。</translation>
     </message>
     <message id="cgwacs_battery_schedule_monthly">
       <location filename="../../components/settings/ChargeScheduleItem.qml" line="23"/>
@@ -8097,12 +8082,12 @@ Tailscale 将此功能称为子网路由，允许远程访问本地网络中的�
       <translation>每月</translation>
     </message>
     <message id="acInputs_evcharger">
-      <location filename="../../data/AcInputs.qml" line="28"/>
+      <location filename="../../data/AcInputs.qml" line="29"/>
       <source>EV Charger</source>
       <translation>EVCS</translation>
     </message>
     <message id="acInputs_heat_pump">
-      <location filename="../../data/AcInputs.qml" line="30"/>
+      <location filename="../../data/AcInputs.qml" line="31"/>
       <source>Heat pump</source>
       <translation>热泵</translation>
     </message>
@@ -8539,33 +8524,83 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>All the day to day controls are now combined together in the new Controls pane. Accessible from anywhere by tapping the dedicated button on top left of the display.</source>
       <translation>现在，所有日常控制功能都集中在新的 "控制 "窗格中。点击显示屏左上角的专用按钮，即可在任何地方进行访问。</translation>
     </message>
+    <message id="batteryalarms_high_cell_voltage">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="31"/>
+      <source>High cell voltage</source>
+      <translation>电池电压高</translation>
+    </message>
+    <message id="settings_system_ac_input_only">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="106"/>
+      <source>AC input only</source>
+      <translation>仅限交流输入</translation>
+    </message>
+    <message id="settings_system_ac_input_only_description">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="108"/>
+      <source>The AC output of the Inverter/Charger is not used.</source>
+      <translation>不使用逆变器/充电器的交流输出。</translation>
+    </message>
+    <message id="settings_system_ac_output_only_description">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="115"/>
+      <source>All AC loads are on the output of the Inverter/Charger.</source>
+      <translation>所有交流负载都在逆变器/充电器的输出端。</translation>
+    </message>
+    <message id="settings_system_ac_input_and_output_description">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="121"/>
+      <source>The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed.</source>
+      <translation>如果有电网表，系统将自动显示逆变器/充电器输入端的负载。输出端负载始终显示。</translation>
+    </message>
+    <message id="ess_state_optimized_with_battery_life_button">
+      <location filename="../../data/Ess.qml" line="35"/>
+      <source>Optimized + battery life</source>
+      <translation>优化 + 电池寿命</translation>
+    </message>
+    <message id="ess_state_optimized_without_battery_life_button">
+      <location filename="../../data/Ess.qml" line="42"/>
+      <source>Optimized</source>
+      <translation>优化</translation>
+    </message>
+    <message id="ess_state_keep_batteries_charged_button">
+      <location filename="../../data/Ess.qml" line="49"/>
+      <source>Keep charged</source>
+      <translation>保持充电</translation>
+    </message>
+    <message id="ess_state_external_control">
+      <location filename="../../data/Ess.qml" line="54"/>
+      <source>External control</source>
+      <translation type="unfinished">外部控制</translation>
+    </message>
+    <message id="controlcard_inverter_charger_ess_mode">
+      <location filename="../../components/dialogs/InverterChargerEssModeDialog.qml" line="18"/>
+      <source>ESS mode</source>
+      <translation>ESS模式</translation>
+    </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
       <source>Unknown</source>
       <translation type="unfinished">未知</translation>
     </message>
     <message id="brief_solar_yield">
-      <location filename="../../pages/BriefSidePanel.qml" line="18"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="25"/>
       <source>Solar yield</source>
       <translation type="unfinished">太阳能发电量</translation>
     </message>
     <message id="brief_dc_input">
-      <location filename="../../pages/BriefSidePanel.qml" line="207"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="213"/>
       <source>DC input</source>
       <translation type="unfinished">直流输入</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="248"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
       <source>AC Loads</source>
       <translation type="unfinished">交流负载</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="276"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="282"/>
       <source>DC Loads</source>
       <translation type="unfinished">直流负载</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="397"/>
+      <location filename="../../pages/OverviewPage.qml" line="387"/>
       <source>Overview</source>
       <translation type="unfinished">总览</translation>
     </message>
