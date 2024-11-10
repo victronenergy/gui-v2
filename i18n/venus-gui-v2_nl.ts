@@ -8534,17 +8534,17 @@ Met een gestroomlijnde navigatie en een frisse look is alles waar je van houdt n
     <message id="settings_system_ac_input_only">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="106"/>
       <source>AC input only</source>
-      <translation>Alleen AC-ingang</translation>
+      <translation>Alleen AC ingang</translation>
     </message>
     <message id="settings_system_ac_input_only_description">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="108"/>
       <source>The AC output of the Inverter/Charger is not used.</source>
-      <translation>De AC-uitgang van de omvormer/lader wordt niet gebruikt.</translation>
+      <translation>De AC uitgang van de omvormer/lader wordt niet gebruikt.</translation>
     </message>
     <message id="settings_system_ac_output_only_description">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="115"/>
       <source>All AC loads are on the output of the Inverter/Charger.</source>
-      <translation>Alle AC-belastingen staan op de uitgang van de omvormer/lader.</translation>
+      <translation>Alle AC belastingen staan op de uitgang van de omvormer/lader.</translation>
     </message>
     <message id="settings_system_ac_input_and_output_description">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="121"/>
@@ -8564,7 +8564,7 @@ Met een gestroomlijnde navigatie en een frisse look is alles waar je van houdt n
     <message id="ess_state_keep_batteries_charged_button">
       <location filename="../../data/Ess.qml" line="49"/>
       <source>Keep charged</source>
-      <translation>Opgeladen blijven</translation>
+      <translation>Opgeladen houden</translation>
     </message>
     <message id="ess_state_external_control">
       <location filename="../../data/Ess.qml" line="54"/>
