@@ -7100,7 +7100,7 @@ Notez que ce menu n'affiche que les compteurs Carlo Gavazzi connectés par RS485
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="17"/>
       <source>Auto-ranging</source>
       <extracomment>Whether to adjust the min/max values in the range dynamically, based on the lowest and highest values observed on the system.</extracomment>
-      <translation>Ajustement auto. de la plage</translation>
+      <translation>Ajustement auto.</translation>
     </message>
     <message id="settings_minmax_autorange_desc">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="25"/>
