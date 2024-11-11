@@ -5430,7 +5430,7 @@ Do you want to continue?</source>
     <message id="modaldialog_set">
       <location filename="../../components/dialogs/ModalDialog.qml" line="25"/>
       <source>Set</source>
-      <translation>сентябрь</translation>
+      <translation>Установить</translation>
     </message>
     <message id="common_words_cancel">
       <location filename="../../components/CommonWords.qml" line="95"/>

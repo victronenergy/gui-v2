@@ -7337,7 +7337,7 @@ See documentation for further information.</oldsource>
     <message id="settings_ess_limit_ac_import_restrictions">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="104"/>
       <source>To use this feature, Grid metering must be set to External meter, and an up to date ESS assistant must be installed.</source>
-      <translation>Bu özelliği kullanmak için Izgara ölçümü Harici ölçüm olarak ayarlanmalı ve güncel bir ESS asistanı kurulmalıdır.</translation>
+      <translation>Bu özelliği kullanmak için Şebeke ölçümü Harici ölçüm olarak ayarlanmalı ve güncel bir ESS asistanı kurulmalıdır.</translation>
     </message>
     <message id="settings_ess_max_system_import_current">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="111"/>
