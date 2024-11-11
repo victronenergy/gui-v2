@@ -11,14 +11,24 @@ QtObject {
 
 	property AcInput input1
 	property AcInput input2
+	readonly property int activeInSource: _activeInSource.value ?? VenusOS.AcInputs_InputSource_NotAvailable
+	readonly property string activeInServiceType: _activeInServiceType.value || ""
 
-	// When the UI has to choose to show a single AC input (e.g. for Brief AC-in gauge), prefer the
-	// first Grid/Shore input that is operational, or otherwise, any operational input.
-	readonly property AcInput highlightedInput: _highlightInput(input1) ? input1
-			: _highlightInput(input2) ? input2
-			: input1?.operational ? input1
-			: input2?.operational ? input2
-			: null
+	readonly property AcInput highlightedInput: {
+		if (_activeInSource.isValid || _activeInServiceType.isValid) {
+			// If system /Ac/ActiveIn is set, find the input that matches it.
+			return _isSystemActiveInput(input1) ? input1
+					: _isSystemActiveInput(input2) ? input2
+					: null
+		} else {
+			// Prefer the first Grid/Shore input, or otherwise the first operational input.
+			return isGridOrShore(input1) ? input1
+				: isGridOrShore(input2) ? input2
+				: input1?.operational ? input1
+				: input2?.operational ? input2
+				: null
+		}
+	}
 
 	readonly property var roles: [
 		{ role: "grid", name: CommonWords.grid },
@@ -39,6 +49,14 @@ QtObject {
 	property AcInputSystemInfo input2Info: AcInputSystemInfo {
 		inputIndex: 1
 		onValidChanged: input2 = root.resetInput(input2, input2Info)
+	}
+
+	readonly property VeQuickItem _activeInSource: VeQuickItem {
+		uid: Global.system.serviceUid + "/Ac/ActiveIn/Source"
+	}
+
+	readonly property VeQuickItem _activeInServiceType: VeQuickItem {
+		uid: Global.system.serviceUid + "/Ac/ActiveIn/ServiceType"
 	}
 
 	readonly property Component _acInputComponent: Component {
@@ -159,11 +177,10 @@ QtObject {
 		return match ? match.name : "--"
 	}
 
-	function _highlightInput(input) {
+	function _isSystemActiveInput(input) {
 		return input
-				&& input.operational
-				&& (input.inputInfo.source === VenusOS.AcInputs_InputSource_Grid
-					|| input.inputInfo.source === VenusOS.AcInputs_InputSource_Shore)
+				&& ((_activeInSource.value !== VenusOS.AcInputs_InputSource_NotAvailable && input.source === _activeInSource.value)
+					|| (!!_activeInServiceType.value && input.serviceType === _activeInServiceType.value))
 	}
 
 	Component.onCompleted: Global.acInputs = root
