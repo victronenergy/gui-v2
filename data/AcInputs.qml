@@ -34,11 +34,11 @@ QtObject {
 	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>. There are always two inputs.
 	property AcInputSystemInfo input1Info: AcInputSystemInfo {
 		inputIndex: 0
-		onValidChanged: input1 = root.resetInput(input1, input1Info)
+		onServiceInfoChanged: input1 = root.resetInput(input1, input1Info)
 	}
 	property AcInputSystemInfo input2Info: AcInputSystemInfo {
 		inputIndex: 1
-		onValidChanged: input2 = root.resetInput(input2, input2Info)
+		onServiceInfoChanged: input2 = root.resetInput(input2, input2Info)
 	}
 
 	readonly property Component _acInputComponent: Component {

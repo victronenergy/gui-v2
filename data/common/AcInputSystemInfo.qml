@@ -24,24 +24,30 @@ QtObject {
 	readonly property real minimumCurrent: _minimumCurrent.isValid ? _minimumCurrent.value : NaN
 	readonly property real maximumCurrent: _maximumCurrent.isValid ? _maximumCurrent.value : NaN
 
+	signal serviceInfoChanged
+
 	readonly property VeQuickItem _connected: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/Connected" : ""
 	}
 
 	readonly property VeQuickItem _deviceInstance: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/DeviceInstance" : ""
+		onValueChanged: Qt.callLater(root.serviceInfoChanged)
 	}
 
 	readonly property VeQuickItem _serviceName: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/ServiceName" : ""
+		onValueChanged: Qt.callLater(root.serviceInfoChanged)
 	}
 
 	readonly property VeQuickItem _serviceType: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/ServiceType" : ""
+		onValueChanged: Qt.callLater(root.serviceInfoChanged)
 	}
 
 	readonly property VeQuickItem _source: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/Source" : ""
+		onValueChanged: Qt.callLater(root.serviceInfoChanged)
 	}
 
 	readonly property VeQuickItem _minimumCurrent: VeQuickItem {
