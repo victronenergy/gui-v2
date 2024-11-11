@@ -148,6 +148,12 @@ QtObject {
 		}
 	}
 
+	function isGridOrShore(input) {
+		return input
+				&& (input.source === VenusOS.AcInputs_InputSource_Grid
+					|| input.source === VenusOS.AcInputs_InputSource_Shore)
+	}
+
 	function roleName(role) {
 		const match = roles.find(function(r) { return r.role === role })
 		return match ? match.name : "--"
