@@ -47,12 +47,12 @@ Page {
 				]
 			}
 
-			ListRadioButtonGroupNoYes {
-				id: isActive
-				//% "Show"
-				text: qsTrId("page_settings_fronius_inverter_show")
-				dataItem.uid: bindPrefix + "/IsActive"
-			}
+            ListSwitch {
+                id: isActive
+                //% "Show"
+                text: qsTrId("page_settings_fronius_inverter_show")
+                dataItem.uid: bindPrefix + "/IsActive"
+            }
 		}
 	}
 }
