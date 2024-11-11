@@ -330,7 +330,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListPortField.qml
     components/listitems/ListRadioButton.qml
     components/listitems/ListRadioButtonGroup.qml
-    components/listitems/ListRadioButtonGroupNoYes.qml
     components/listitems/ListQuantityField.qml
     components/listitems/ListQuantityGroup.qml
     components/listitems/ListQuantityGroupNavigationItem.qml

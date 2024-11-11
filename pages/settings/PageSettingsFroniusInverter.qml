@@ -47,8 +47,7 @@ Page {
 				]
 			}
 
-			ListRadioButtonGroupNoYes {
-				id: isActive
+			ListSwitch {
 				//% "Show"
 				text: qsTrId("page_settings_fronius_inverter_show")
 				dataItem.uid: bindPrefix + "/IsActive"
