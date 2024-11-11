@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string modbusService: BackendConnection.serviceUidForType("modbusclient")
+	property string modbusService: BackendConnection.serviceUidFromName("com.victronenergy.modbusclient.tcp", 0)
 
 
 	property VeQItemSortTableModel devices: VeQItemSortTableModel {

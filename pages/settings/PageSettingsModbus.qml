@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string service: BackendConnection.serviceUidForType("modbusclient")
+	property string service: BackendConnection.serviceUidFromName("com.victronenergy.modbusclient.tcp", 0)
 	property string settings: Global.systemSettings.serviceUid + "/Settings/ModbusClient/tcp"
 
 	VeQuickItem {
