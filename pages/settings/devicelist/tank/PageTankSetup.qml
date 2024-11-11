@@ -61,8 +61,8 @@ Page {
 				allowed: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
 				dataItem.uid: root.bindPrefix + "/RawValueEmpty"
 				suffix: rawUnit.value || ""
-				decimals: 1
-				stepSize: 0.1
+				decimals: 3
+				stepSize: 0.005
 			}
 
 			ListSpinBox {
@@ -71,8 +71,8 @@ Page {
 				allowed: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
 				dataItem.uid: root.bindPrefix + "/RawValueFull"
 				suffix: rawUnit.value || ""
-				decimals: 1
-				stepSize: 0.1
+				decimals: 3
+				stepSize: 0.005
 			}
 
 			ListRadioButtonGroup {
