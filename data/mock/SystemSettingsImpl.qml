@@ -64,7 +64,7 @@ QtObject {
 	}
 
 	function setMockModbusClientValue(key, value) {
-		Global.mockDataSimulator.setMockValue(BackendConnection.serviceUidForType("modbusclient") + key, value)
+		Global.mockDataSimulator.setMockValue(BackendConnection.serviceUidFromName("com.victronenergy.modbusclient.tcp", 0) + key, value)
 	}
 
 	function setMockSettingsModbusClientValue(key, value) {
