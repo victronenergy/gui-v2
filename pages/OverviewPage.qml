@@ -16,8 +16,8 @@ SwipeViewPage {
 	// Preferred order for the input widgets on the left hand side. When placing widgets, avoid / minimize connectors crossing each other.
 	readonly property var _leftWidgetOrder: [
 		// Top widgets: these widgets have to be up the top, as they connect to the 'inverter/charger widget', which is at the top of the center column.
-		VenusOS.OverviewWidget_Type_AcInput1,
-		VenusOS.OverviewWidget_Type_AcInput2,
+		VenusOS.OverviewWidget_Type_AcInputPriority,
+		VenusOS.OverviewWidget_Type_AcInputOther,
 		// End top widgets
 
 		// Middle widgets: these widgets can connect to both the inverter/charger widget and the battery widget in the center column.
@@ -216,8 +216,8 @@ SwipeViewPage {
 
 		let widget = null
 		switch (type) {
-		case VenusOS.OverviewWidget_Type_AcInput1:
-		case VenusOS.OverviewWidget_Type_AcInput2:
+		case VenusOS.OverviewWidget_Type_AcInputPriority:
+		case VenusOS.OverviewWidget_Type_AcInputOther:
 			widget = acInputComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_Alternator:
@@ -257,9 +257,15 @@ SwipeViewPage {
 
 		// Add AC-in widgets.
 		const acInputConfigs = [
-			{ input: Global.acInputs.input1, widgetType: VenusOS.OverviewWidget_Type_AcInput1 },
-			{ input: Global.acInputs.input2, widgetType: VenusOS.OverviewWidget_Type_AcInput2 },
+			{ input: Global.acInputs.input1, widgetType: VenusOS.OverviewWidget_Type_AcInputPriority },
+			{ input: Global.acInputs.input2, widgetType: VenusOS.OverviewWidget_Type_AcInputOther },
 		]
+		if (Global.acInputs.isGridOrShore(Global.acInputs.input2)
+				&& !Global.acInputs.isGridOrShore(Global.acInputs.input1)) {
+			// Prefer to show the Grid/Shore AC input first, so swap the display order if needed.
+			acInputConfigs[0].widgetType = VenusOS.OverviewWidget_Type_AcInputOther
+			acInputConfigs[1].widgetType = VenusOS.OverviewWidget_Type_AcInputPriority
+		}
 		for (const inputConfig of acInputConfigs) {
 			widget = _createWidget(inputConfig.widgetType)
 			if (!!inputConfig.input) {
