@@ -36,6 +36,7 @@ SwipeViewPage {
 	// Set a counter that updates whenever the layout should change.
 	// Use a delayed binding to avoid repopulating the model unnecessarily.
 	readonly property int _shouldResetWidgets: Global.dcInputs.model.count
+			+ Global.acInputs.activeInSource
 			+ (Global.acInputs.input1?.operational ? 1 : 0)
 			+ (Global.acInputs.input2?.operational ? 1 : 0)
 			+ (Global.system.showInputLoads ? 1 : 0)
