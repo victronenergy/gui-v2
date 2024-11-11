@@ -15,6 +15,10 @@ BaseDevice {
 
 	readonly property VeQuickItem _customName: VeQuickItem {
 		uid: root.serviceUid ? root.serviceUid + "/CustomName" : ""
+		// When some devices (eg. BMSes), are turned off, the custom name value changes to 'undefined'
+		// before they become invalid. See https://github.com/victronenergy/gui-v2/issues/1705.
+		// Setting 'invalidate' to false retains the last valid value
+		invalidate: false
 	}
 
 	readonly property VeQuickItem _productId: VeQuickItem {
