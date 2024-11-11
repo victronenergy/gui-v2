@@ -13,11 +13,7 @@ Page {
 
 	GradientListView {
 		model: VeQItemTableModel {
-			uids: BackendConnection.type === BackendConnection.DBusSource
-				  ? [bindPrefix + "/Inverters"]
-				  : BackendConnection.type === BackendConnection.MqttSource
-					? ["mqtt/settings/0/Settings/Fronius/Inverters"]
-					: []
+            uids: [bindPrefix + "/Inverters"]
 
 			flags: VeQItemTableModel.AddChildren |
 				   VeQItemTableModel.AddNonLeaves |
