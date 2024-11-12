@@ -17,6 +17,11 @@ Page {
 		uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
 	}
 
+	VeQuickItem {
+		id: essMinSocItem
+		uid: bindPrefix + "/Settings/Ess/MinimumSocLimit"
+	}
+
 	GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
@@ -26,14 +31,20 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Settings/Ess/Mode"
 			}
 
-			ListSpinBox {
+			ListButton {
 				//% "Minimum SOC (unless grid fails)"
 				text: qsTrId("settings_rs_ess_min_soc")
-				allowed: essMode.dataItem.value < 2 // Optimised
-				dataItem.uid: root.bindPrefix + "/Settings/Ess/MinimumSocLimit"
-				suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
-				to: 100
-				stepSize: 5
+				button.text: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)
+				onClicked: Global.dialogLayer.open(minSocDialogComponent)
+
+				Component {
+					id: minSocDialogComponent
+
+					ESSMinimumSOCDialog {
+						minimumStateOfCharge: essMinSocItem.value
+						onAccepted: essMinSocItem.setValue(minimumStateOfCharge)
+					}
+				}
 			}
 
 			ListQuantityItem {
