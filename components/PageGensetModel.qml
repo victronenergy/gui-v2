@@ -18,8 +18,8 @@ ObjectModel {
 	// On MQTT, the startstop1 generator is the one with GensetService=com.victronenergy.genset.*
 	// (or GensetService=com.victronenergy.dcgenset.* if this is a dcgenset)
 	readonly property string startStop1Uid: BackendConnection.type === BackendConnection.MqttSource
-			? generatorWithGensetService
-			: BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop1"
+											? generatorWithGensetService
+											: BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop1"
 	property string generatorWithGensetService
 
 	property Instantiator generatorObjects: Instantiator {
@@ -29,7 +29,7 @@ ObjectModel {
 			onValueChanged: {
 				if ( (isValid && root.dcGenset && value.startsWith("com.victronenergy.dcgenset."))
 						|| (isValid && !root.dcGenset && value.startsWith("com.victronenergy.genset.")) ) {
-						root.generatorWithGensetService = model.device.serviceUid
+					root.generatorWithGensetService = model.device.serviceUid
 				}
 			}
 		}
@@ -37,8 +37,8 @@ ObjectModel {
 
 	readonly property bool dcGenset: serviceType === "dcgenset"
 	readonly property int nrOfPhases: phases.isValid ? phases.value
-												   : dcGenset ? 0
-															  : 3
+													 : dcGenset ? 0
+																: 3
 	readonly property VeQuickItem phases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
@@ -54,10 +54,37 @@ ObjectModel {
 	}
 
 	ListSwitch {
+		id: autostartSwitch
 		//% "Auto start functionality"
 		text: qsTrId("ac-in-genset_auto_start_functionality")
 		allowed: root.gensetEnabled.value === 1
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/AutoStartEnabled" : ""
+		updateDataOnClick: false
+
+		onClicked: if (!checked) {
+					   autostartSwitch.dataItem.setValue(true)
+				   } else {
+					   // check if they really want to disable
+					   Global.dialogLayer.open(confirmationDialogComponent)
+				   }
+
+		Component {
+			id: confirmationDialogComponent
+
+			ModalWarningDialog {
+				dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+
+				//% "Disable autostart?"
+				title: qsTrId("controlcard_generator_disableautostartdialog_title")
+
+				//% "Autostart will be disabled and the generator won't automatically start based on the configured conditions."
+				description: qsTrId("controlcard_generator_disableautostartdialog_description")
+
+				onAccepted: {
+					autostartSwitch.dataItem.setValue(false)
+				}
+			}
+		}
 	}
 
 	ListItem {
@@ -154,7 +181,7 @@ ObjectModel {
 			model: root.nrOfPhases
 			delegate: ListQuantityGroup {
 				text: phaseRepeater.count === 1
-						//% "AC"
+				//% "AC"
 					  ? qsTrId("ac-in-genset_ac")
 					  : CommonWords.ac_phase_x.arg(model.index + 1)
 
@@ -389,7 +416,7 @@ ObjectModel {
 		text: CommonWords.device_info_title
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
+										{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 	}
 }
