@@ -21,6 +21,7 @@
 #include <QtCore/QJsonValue>
 #include <QtCore/QJsonArray>
 #include <QQmlContext>
+#include <QFile>
 
 namespace Victron {
 namespace VenusOS {
@@ -576,6 +577,13 @@ void BackendConnection::setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandle
 		m_needsWasmKeyboardHandler = needsWasmKeyboardHandler;
 		emit needsWasmKeyboardHandlerChanged();
 	}
+}
+
+QUrl BackendConnection::demoImageFileName() const
+{
+	static const QUrl filePath = QUrl::fromLocalFile("/data/demo-brief.png");
+	static const bool fileExists = QFile::exists(filePath.toLocalFile());
+	return fileExists ? filePath : QUrl();
 }
 
 QString BackendConnection::serviceUidForType(const QString &serviceType) const

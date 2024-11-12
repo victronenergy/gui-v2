@@ -19,6 +19,17 @@ ObjectModel {
 
 	BriefPage {
 		view: root.view
+
+		Image {
+			width: status === Image.Null ? 0 : Theme.geometry_screen_width
+			fillMode: Image.PreserveAspectFit
+			source: BackendConnection.demoImageFileName
+			onStatusChanged: {
+				if (status === Image.Ready) {
+					console.log("Loaded demo image:", source)
+				}
+			}
+		}
 	}
 
 	OverviewPage {
