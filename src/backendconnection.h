@@ -32,6 +32,7 @@ class BackendConnection : public QObject
 	Q_PROPERTY(QString portalId READ portalId WRITE setPortalId NOTIFY portalIdChanged FINAL)
 	Q_PROPERTY(QString shard READ shard WRITE setShard NOTIFY shardChanged FINAL)
 	Q_PROPERTY(QString token READ token WRITE setToken NOTIFY tokenChanged FINAL)
+	Q_PROPERTY(QUrl demoImageFileName READ demoImageFileName CONSTANT FINAL)
 	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged FINAL)
 	Q_PROPERTY(bool vrm READ isVrm WRITE setVrm NOTIFY vrmChanged FINAL)
 	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged FINAL)
@@ -113,6 +114,8 @@ public:
 
 	bool needsWasmKeyboardHandler() const;
 	void setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler);
+
+	QUrl demoImageFileName() const;
 
 	// Each service type (system, settings, battery, etc.) has a base uid, which has different
 	// forms on D-Bus and MQTT:
