@@ -84,6 +84,7 @@ Page {
 
 				//% "Limit system AC import current"
 				text: qsTrId("settings_ess_limit_system_ac_import_current")
+				checkable: true
 				checked: systemAcInputLimit.value >= 0
 				enabled: userHasWriteAccess && withoutGridMeterItem.value === 0 && overruledShoreLimit.seen
 				onCheckedChanged: {
@@ -124,6 +125,7 @@ Page {
 
 				//% "Limit system AC export current"
 				text: qsTrId("settings_ess_limit_system_ac_export_current")
+				checkable: true
 				checked: systemAcExportLimit.value >= 0
 				enabled: userHasWriteAccess && withoutGridMeterItem.value === 0
 				onCheckedChanged: {
