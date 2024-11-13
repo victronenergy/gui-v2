@@ -145,7 +145,7 @@ Page {
 			}
 
 			ListTextItem {
-				//% "Time to service"
+				//% "Runtime until service"
 				text: qsTrId("settings_page_run_time_and_service_time_to_service")
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/ServiceCounter" : ""
 				secondaryText: Math.round(dataItem.value / 60 / 60) + "h"
