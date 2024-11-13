@@ -10,30 +10,10 @@ endif()
 cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'qt_add_qml_module' properly, you get errors at runtime like: "qrc:/main.qml:164 ApplicationContent is not a type\n"
 
 # CMAKE HINTS
+# see: https://github.com/victronenergy/gui-v2/wiki/How-to-build-venus-gui-v2
 #
 # Different build types:
 #   cmake -DCMAKE_BUILD_TYPE=[Debug|Release|RelWithDebInfo|MinSizeRelease] /path/to/CMakeLists.txt
-#
-# Faster builds, for use in development. This stops qml code from being compiled into C++ at build time. Will run slower on the target.
-#   cmake -DNO_CACHEGEN=true /path/to/CMakeLists.txt
-#
-# Load qml files from the file system, instead of from the compiled qml resources.
-#   cmake -DNO_CACHEGEN=true -DLOAD_QML_FROM_FILESYSTEM=true /path/to/CMakeLists.txt
-#   cmake --build . --parallel 8
-#   cmake --install .
-#
-#   This will create a directory 'install' in your build directory. If you copy the directory to a cerbo, and run the app from that directory,
-#   qml sources will be loaded at run time. You can edit sources directly on the cerbo, restart the app, and see your changes.
-#
-#   When running a desktop build in this way on linux, I had to specify LD_LIBRARY_PATH when starting the app, eg:
-#       $ LD_LIBRARY_PATH=/opt/Qt/6.5.2/gcc_64/lib/ ./appvenus-gui-v2
-#   For windows builds, run windeployqt6.exe venus-gui-v2.exe in the install dir to pull in all the Qt libs etc into the install dir too.
-#
-#   To build in this way from qtcreator, a custom build step has to be added.
-#   In the 'Projects' page, select 'Build', 'Add build step', with the following:
-#       Command: cmake
-#       Arguments: --install .
-#       Working directory: %{buildDir}
 #
 # Translations
 #   You can download the latest translations from poeditor if you have a token.
@@ -58,6 +38,7 @@ else()
 endif()
 
 option(LOAD_QML_FROM_FILESYSTEM "disable filesystem loading via cmake -DLOAD_QML_FROM_FILESYSTEM=OFF" ON) # Enabled by default
+option(NO_CACHEGEN "Enable bytecode compilation and lint processing for all qml files via cmake -NO_CACHEGEN=OFF" ON) # Enabled by default
 option(RUN_UNIT_TESTS "only affects desktop builds. Enable via cmake -DRUN_UNIT_TESTS=ON" OFF) # Disabled by default
 
 if (${CMAKE_SYSTEM_PROCESSOR} STREQUAL ${CMAKE_HOST_SYSTEM_PROCESSOR})
