@@ -60,8 +60,8 @@ SwipeViewPage {
 				page: "/pages/settings/PageSettingsDisplay.qml"
 			},
 			{
-				//% "VRM online portal"
-				text: qsTrId("settings_vrm_online_portal"),
+				//% "VRM Portal mode"
+				text: qsTrId("settings_vrm_portal_mode"),
 				page: "/pages/settings/PageSettingsLogger.qml"
 			},
 			{
