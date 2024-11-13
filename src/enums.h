@@ -280,7 +280,7 @@ public:
 	enum Generators_RunningBy {
 		Generators_RunningBy_NotRunning = 0,
 		Generators_RunningBy_Manual,
-		Generators_RunningBy_TestRun,
+		Generators_RunningBy_PeriodicRun,
 		Generators_RunningBy_LossOfCommunication,
 		Generators_RunningBy_Soc,
 		Generators_RunningBy_AcLoad,

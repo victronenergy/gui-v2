@@ -68,9 +68,9 @@ QtObject {
 		case VenusOS.Generators_RunningBy_Manual:
 			//% "Manually started"
 			return qsTrId("generator_manually_started")
-		case VenusOS.Generators_RunningBy_TestRun:
-			//% "Test run"
-			return qsTrId("generator_test_run")
+		case VenusOS.Generators_RunningBy_PeriodicRun:
+			//% "Periodic run"
+			return qsTrId("generator_periodic_run")
 		case VenusOS.Generators_RunningBy_LossOfCommunication:
 			//% "Loss of communication"
 			return qsTrId("settings_loss_of_communication")
@@ -100,7 +100,7 @@ QtObject {
 
 	function isAutoStarted(runningBy) {
 		switch (runningBy) {
-		case VenusOS.Generators_RunningBy_TestRun:
+		case VenusOS.Generators_RunningBy_PeriodicRun:
 		case VenusOS.Generators_RunningBy_LossOfCommunication:
 		case VenusOS.Generators_RunningBy_Soc:
 		case VenusOS.Generators_RunningBy_AcLoad:
