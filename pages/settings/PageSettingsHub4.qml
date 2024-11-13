@@ -167,15 +167,15 @@ Page {
 
 			//% "Limit charge power"
 			text: qsTrId("settings_ess_limit_charge_power")
-			checked: maxChargePower.value >= 0
+			checked: maxChargePower.dataItem.value >= 0
 			allowed: defaultAllowed
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& !(maxChargeCurrentControl.isValid && maxChargeCurrentControl.value)
 
 			onClicked: {
-				if (maxChargePower.value < 0) {
+				if (maxChargePower.dataItem.value < 0) {
 					maxChargePower.dataItem.setValue(1000)
-				} else if (maxChargePower.value >= 0) {
+				} else if (maxChargePower.dataItem.value >= 0) {
 					maxChargePower.dataItem.setValue(-1)
 				}
 			}
@@ -189,6 +189,7 @@ Page {
 			allowed: defaultAllowed && maxChargePowerSwitch.visible && maxChargePowerSwitch.checked
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
+			from: 0
 			to: 200000
 			stepSize: 50
 		}
@@ -198,15 +199,15 @@ Page {
 
 			//% "Limit inverter power"
 			text: qsTrId("settings_ess_limit_inverter_power")
-			checked: maxDischargePower.value >= 0
+			checked: maxDischargePower.dataItem.value >= 0
 			allowed: defaultAllowed
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 			onClicked: {
-				if (maxDischargePower.value < 0) {
+				if (maxDischargePower.dataItem.value < 0) {
 					maxDischargePower.dataItem.setValue(1000)
-				} else if (maxDischargePower.value >= 0) {
+				} else if (maxDischargePower.dataItem.value >= 0) {
 					maxDischargePower.dataItem.setValue(-1)
 				}
 			}
@@ -220,6 +221,7 @@ Page {
 			allowed: defaultAllowed && maxInverterPowerSwitch.visible && maxInverterPowerSwitch.checked
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
+			from: 0
 			to: 300000
 			stepSize: 50
 		}
