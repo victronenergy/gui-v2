@@ -100,6 +100,7 @@ QtObject {
 
 	function isAutoStarted(runningBy) {
 		switch (runningBy) {
+		case VenusOS.Generators_RunningBy_TestRun:
 		case VenusOS.Generators_RunningBy_LossOfCommunication:
 		case VenusOS.Generators_RunningBy_Soc:
 		case VenusOS.Generators_RunningBy_AcLoad:
