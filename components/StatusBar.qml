@@ -11,6 +11,7 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
+	required property PageStack pageStack
 	property string title
 
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
@@ -22,6 +23,7 @@ Rectangle {
 
 	signal leftButtonClicked()
 	signal rightButtonClicked()
+	signal popToPage(toPage: Page)
 
 	width: parent.width
 	height: Theme.geometry_statusBar_height
@@ -98,11 +100,51 @@ Rectangle {
 		onClicked: root.leftButtonClicked()
 	}
 
+	Breadcrumbs {
+		id: breadcrumbs
+
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry_settings_breadcrumb_topMargin
+			left: leftButton.right
+			leftMargin: Theme.geometry_settings_breadcrumb_horizontalMargin
+			right: rightButtonRow.left
+			verticalCenter: leftButton.verticalCenter
+		}
+		height: Theme.geometry_settings_breadcrumb_height
+		model: root.pageStack.depth + 1 // '+ 1' because we insert a dummy breadcrumb with the text "Settings"
+		visible: count >= 2
+
+		getText: function(index) {
+			return index === 0
+					? Global.pageManager.navBar.activeButtonText // eg: "Settings"
+					: pageStack.get(index - 1).title // eg: "Device list"
+		}
+
+		onClicked: function(index) {
+			const isTopBreadcrumb = index === breadcrumbs.count - 1
+			const isBottomBreadcrumb = index === 0
+
+			if (isBottomBreadcrumb) { // the bottom breadcrumb is a special case, we inserted a dummy breadcrumb with the text "Settings" which doesn't relate to anything in the pageStack
+				Global.pageManager.popAllPages()
+				return
+			}
+
+			if (isTopBreadcrumb) { // ignore clicks on the top of the breadcrumb trail. We don't need to navigate there, we are already there...
+				return
+			}
+
+			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
+		}
+	}
+
+
 	Label {
 		id: clockLabel
 		anchors.centerIn: parent
 		font.pixelSize: 22
-		text: root.title.length > 0 ? root.title : ClockTime.currentTime
+		visible: !breadcrumbs.visible
+		text: ClockTime.currentTime
 	}
 
 	Row {
@@ -113,6 +155,7 @@ Rectangle {
 			leftMargin: Theme.geometry_statusBar_rightSideRow_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
+		visible: !breadcrumbs.visible
 		spacing: Theme.geometry_statusBar_rightSideRow_horizontalMargin
 
 		CP.IconImage {
@@ -199,6 +242,7 @@ Rectangle {
 			enabled: !!Global.pageManager
 					&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 					&& root.rightButton != VenusOS.StatusBar_RightButton_None
+			visible: enabled
 
 			icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
 					? "qrc:/images/icon_sidepanel_on_32.svg"

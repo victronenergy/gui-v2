@@ -11,6 +11,7 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 
 	required property var model
 	readonly property int currentIndex: _currentIndex
+	readonly property string activeButtonText: model ? model.get(currentIndex).navButtonText : ""
 
 	// External components should not write to these properties.
 	property int _currentIndex

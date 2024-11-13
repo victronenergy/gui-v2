@@ -120,5 +120,10 @@
     "color_solarHistoryErrorView_secondaryText": "color_dimWhite",
 
     "color_settings_gsmModem_signalStrength_inactive": "color_darkGray2",
-    "color_settings_gsmModem_signalStrength_active": "color_gray2"
+    "color_settings_gsmModem_signalStrength_active": "color_gray2",
+
+    "color_settings_breadcrumb_background_top_page": "color_navigationBar_button_on",
+    "color_settings_breadcrumb_background": "#B2C6D9",
+    "color_settings_breadcrumb_primaryText": "color_gray9",
+    "color_settings_breadcrumb_secondaryText": "color_font_primary"
 }

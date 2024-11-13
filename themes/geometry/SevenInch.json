@@ -333,6 +333,8 @@
     "geometry_viewGradient_position2": 0.55,
     "geometry_viewGradient_position3": 1,
 
+    "geometry_breadcrumbs_viewGradient_width": 0.04,
+
     "geometry_quantityTable_row_height": 32,
     "geometry_quantityTable_bottomMargin": 14,
     "geometry_quantityTable_horizontalSpacing": 48,
@@ -391,6 +393,10 @@
     "geometry_settings_gsmModem_signalStrengthBars_bar_incremental_height": 6,
 
     "geometry_status_bar_gsmModem_icon_height": 24,
+
+    "geometry_settings_breadcrumb_height": 38,
+    "geometry_settings_breadcrumb_horizontalMargin": 15,
+    "geometry_settings_breadcrumb_topMargin": 9,
 
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
     "geometry_vebusDeviceListPage_quantityTable_firstColumn_width": 39,
