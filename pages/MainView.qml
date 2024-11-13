@@ -366,6 +366,7 @@ Item {
 	StatusBar {
 		id: statusBar
 
+		pageStack: pageStack
 		title: !!root.currentPage ? root.currentPage.title || "" : ""
 		leftButton: {
 			const customButton = !!root.currentPage ? root.currentPage.topLeftButton : VenusOS.StatusBar_LeftButton_None
@@ -392,6 +393,10 @@ Item {
 			default:
 				break
 			}
+		}
+
+		onPopToPage: function(toPage) {
+			pageManager.popPage(toPage)
 		}
 
 		Component.onCompleted: pageManager.statusBar = statusBar

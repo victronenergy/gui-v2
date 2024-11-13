@@ -11,6 +11,9 @@ QtObject {
 
 	property QtObject emitter: QtObject {
 		signal pagePushRequested(obj: var, properties: var, operation: int)
+
+		// NB. 'toPage' has to be a 'var', not a 'Page', otherwise 'emitter.pagePopRequested(undefined, operation)' becomes 'emitter.pagePopRequested(null, operation)',
+		// which pops all the way to the bottom of the stack, instead of just a single page.
 		signal pagePopRequested(toPage: var, operation: int)
 		signal popAllPagesRequested(operation: int)
 	}

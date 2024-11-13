@@ -185,6 +185,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/AsymmetricRoundedRectangle.qml
     components/BarGauge.qml
     components/BarGaugeBase.qml
+    components/Breadcrumbs.qml
     components/BriefSidePanelWidget.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
@@ -1055,6 +1056,8 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         fonts/Roboto-Regular.ttf
         images/acloads.svg
         images/alternator.svg
+        images/breadcrumb_lhs.svg
+        images/breadcrumb_rhs.svg
         images/icon_battery_24.svg
         images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
