@@ -41,9 +41,16 @@ QtObject {
 		// 0xA00BC0 => vA0.0B.C0
 		// 0xA00BFF => vA0.0B
 
-		// Return the version as-is, if the version is not a hex number.
-		const versionString = typeof(version) === "string" ? version : version.toString()
-		if (!versionString.match(/^[0-9A-F]+$/i)) {
+		// Return the version as-is, if the version is already a string. This
+		// means the driver already knows the best formatting.
+		if (typeof(version) === "string") {
+			return version
+		}
+
+		// Since string is already handled up above, this handles cases
+		// where firmware is has a decimal point.
+		if (!Number.isInteger(version)) {
+			const versionString = version.toString()
 			return versionString.startsWith("v") ? version : "v" + version
 		}
 
