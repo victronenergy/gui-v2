@@ -558,6 +558,11 @@
       <source>Inverter high temperature</source>
       <translation type="unfinished">Temperatura ridicata invertor</translation>
     </message>
+    <message id="page_generator_conditions_periodic_run">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+      <source>Periodic run</source>
+      <translation type="unfinished">Functionare periodica</translation>
+    </message>
     <message id="settings_inverter_high_temperature">
       <location filename="../../data/Generators.qml" line="91"/>
       <source>Inverter high temperature</source>
@@ -573,8 +578,8 @@
       <source>Start on overload warning</source>
       <translation>Porneste la avertizarea de supraincarcare</translation>
     </message>
-    <message id="page_generator_conditions_periodic_run">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+    <message id="generator_periodic_run">
+      <location filename="../../data/Generators.qml" line="73"/>
       <source>Periodic run</source>
       <translation>Functionare periodica</translation>
     </message>
@@ -1724,12 +1729,12 @@ Use unless prohibited by the utility provider.</source>
 Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
     </message>
     <message id="settings_ess_inactive">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="265"/>
       <source>Inactive</source>
       <translation type="unfinished">Inactiv</translation>
     </message>
     <message id="settings_ess_dynamic">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="298"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="300"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">SSE dinamic</translation>
     </message>
@@ -1754,7 +1759,7 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <translation type="unfinished">Încărcare</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="251"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>Reducere a consumului de energie</translation>
@@ -1800,22 +1805,22 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <translation>Putere de incarcare maxima</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="201"/>
       <source>Limit inverter power</source>
       <translation>Limiteaza puterea invertorului</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="220"/>
       <source>Maximum inverter power</source>
       <translation>Putere maxima invertor</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="231"/>
       <source>Grid setpoint</source>
       <translation>Valoare referinta retea</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="240"/>
       <source>Grid feed-in</source>
       <translation>Injectare in retea</translation>
     </message>
@@ -5124,7 +5129,7 @@ Doriți să continuați?</translation>
       <translation>Nicio eroare</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="82"/>
+      <location filename="../../data/AcInputs.qml" line="100"/>
       <source>Not available</source>
       <translation>Indisponibil</translation>
     </message>
@@ -6166,27 +6171,27 @@ Doriți să continuați?</translation>
       <translation>Vânt</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="89"/>
+      <location filename="../../data/AcInputs.qml" line="107"/>
       <source>Shore</source>
       <translation>Tarm</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="115"/>
+      <location filename="../../data/AcInputs.qml" line="133"/>
       <source>Grid current limit</source>
       <translation>Limita de curent de rețea</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="118"/>
+      <location filename="../../data/AcInputs.qml" line="136"/>
       <source>Generator current limit</source>
       <translation>Limita de curent a generatorului</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="121"/>
+      <location filename="../../data/AcInputs.qml" line="139"/>
       <source>Shore current limit</source>
       <translation>Limita de curent la mal</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="143"/>
+      <location filename="../../data/AcInputs.qml" line="161"/>
       <source>Stopping</source>
       <translation type="unfinished">Oprire</translation>
     </message>
@@ -6356,11 +6361,6 @@ Doriți să continuați?</translation>
       <location filename="../../data/Generators.qml" line="52"/>
       <source>Cool-down</source>
       <translation>Răcire</translation>
-    </message>
-    <message id="generator_test_run">
-      <location filename="../../data/Generators.qml" line="73"/>
-      <source>Test run</source>
-      <translation>Pornire test</translation>
     </message>
     <message id="generator_manually_started">
       <location filename="../../data/Generators.qml" line="70"/>
@@ -6677,11 +6677,6 @@ Doriți să continuați?</translation>
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="70"/>
       <source>Sensor value when full</source>
       <translation>Valoare senzor la stare plin</translation>
-    </message>
-    <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
-      <source>Time to service</source>
-      <translation>Timp de service</translation>
     </message>
     <message id="settings_page_relay_generator_auto_start_enabled">
       <location filename="../../pages/settings/PageGenerator.qml" line="53"/>
@@ -7336,22 +7331,22 @@ See documentation for further information.</oldsource>
       <translation>Limitați curentul de import al sistemului de curent alternativ</translation>
     </message>
     <message id="settings_ess_limit_ac_import_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="105"/>
       <source>To use this feature, Grid metering must be set to External meter, and an up to date ESS assistant must be installed.</source>
       <translation>Pentru a utiliza această funcție, Contorizarea rețelei trebuie să fie setată pe Contor extern și trebuie să fie instalat un asistent ESS actualizat.</translation>
     </message>
     <message id="settings_ess_max_system_import_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="112"/>
       <source>Maximum system import current (per phase)</source>
       <translation>Curent maxim de import al sistemului (pe fază)</translation>
     </message>
     <message id="settings_ess_limit_ac_export_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="146"/>
       <source>Grid metering must be set to External meter to use this feature.</source>
       <translation>Pentru a utiliza această funcție, Contorizarea rețelei trebuie să fie setată pe Contor extern.</translation>
     </message>
     <message id="settings_ess_max_system_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="153"/>
       <source>Maximum system export current (per phase)</source>
       <translation>Curent maxim de export al sistemului (pe fază)</translation>
     </message>
@@ -7438,7 +7433,7 @@ See documentation for further information.</oldsource>
       <translation>CAN-bus BMS HV (500 kbit/s)</translation>
     </message>
     <message id="settings_ess_limit_system_ac_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="126"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="127"/>
       <source>Limit system AC export current</source>
       <translation>Limitarea curentului de export de curent alternativ al sistemului</translation>
     </message>
@@ -7570,12 +7565,12 @@ See documentation for further information.</oldsource>
       <translation>Presiune ulei</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="260"/>
       <source>Scheduled charge levels</source>
       <translation>Niveluri de încărcare programate</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
       <source>Active (%1)</source>
       <translation>Activ (%1)</translation>
     </message>
@@ -8084,12 +8079,12 @@ După adăugarea/activarea unei noi rețele, trebuie să o aprobați o dată în
       <translation>Lunar</translation>
     </message>
     <message id="acInputs_evcharger">
-      <location filename="../../data/AcInputs.qml" line="29"/>
+      <location filename="../../data/AcInputs.qml" line="39"/>
       <source>EV Charger</source>
       <translation>Încărcător EV</translation>
     </message>
     <message id="acInputs_heat_pump">
-      <location filename="../../data/AcInputs.qml" line="31"/>
+      <location filename="../../data/AcInputs.qml" line="41"/>
       <source>Heat pump</source>
       <translation>Pompă de căldură</translation>
     </message>
@@ -8578,6 +8573,11 @@ Cu o navigare simplificată și un aspect nou, tot ceea ce vă place este acum �
       <source>ESS mode</source>
       <translation/>
     </message>
+    <message id="settings_page_run_time_and_service_time_to_service">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
+      <source>Runtime until service</source>
+      <translation/>
+    </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
       <source>Unknown</source>
@@ -8604,7 +8604,7 @@ Cu o navigare simplificată și un aspect nou, tot ceea ce vă place este acum �
       <translation type="unfinished">Consumatori DC</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="387"/>
+      <location filename="../../pages/OverviewPage.qml" line="394"/>
       <source>Overview</source>
       <translation type="unfinished">Sitem</translation>
     </message>

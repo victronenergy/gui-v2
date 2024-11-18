@@ -558,6 +558,11 @@
       <source>Inverter high temperature</source>
       <translation type="unfinished">İnvertör yüksek sıcaklık</translation>
     </message>
+    <message id="page_generator_conditions_periodic_run">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+      <source>Periodic run</source>
+      <translation type="unfinished">Periyodik çalıştırma</translation>
+    </message>
     <message id="settings_inverter_high_temperature">
       <location filename="../../data/Generators.qml" line="91"/>
       <source>Inverter high temperature</source>
@@ -573,8 +578,8 @@
       <source>Start on overload warning</source>
       <translation>Aşırı yük uyarısında başlat</translation>
     </message>
-    <message id="page_generator_conditions_periodic_run">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+    <message id="generator_periodic_run">
+      <location filename="../../data/Generators.qml" line="73"/>
       <source>Periodic run</source>
       <translation>Periyodik çalıştırma</translation>
     </message>
@@ -1724,12 +1729,12 @@ Use unless prohibited by the utility provider.</source>
 Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translation>
     </message>
     <message id="settings_ess_inactive">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="265"/>
       <source>Inactive</source>
       <translation type="unfinished">Aktif değil</translation>
     </message>
     <message id="settings_ess_dynamic">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="298"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="300"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dinamik ESS</translation>
     </message>
@@ -1754,7 +1759,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation type="unfinished">Re-Şarj</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="251"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>Peak shaving</translation>
@@ -1800,22 +1805,22 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Maksimum şarj gücü</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="201"/>
       <source>Limit inverter power</source>
       <translation>İnvertör gücünü sınırla</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="220"/>
       <source>Maximum inverter power</source>
       <translation>Maksimum invertör gücü</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="231"/>
       <source>Grid setpoint</source>
       <translation>Grid Setpoint</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="240"/>
       <source>Grid feed-in</source>
       <translation>Şebeke'ye Satış</translation>
     </message>
@@ -5123,7 +5128,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Hata yok</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="82"/>
+      <location filename="../../data/AcInputs.qml" line="100"/>
       <source>Not available</source>
       <translation>Kullanılamıyor</translation>
     </message>
@@ -6165,27 +6170,27 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Rüzgar</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="89"/>
+      <location filename="../../data/AcInputs.qml" line="107"/>
       <source>Shore</source>
       <translation>Sahil</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="115"/>
+      <location filename="../../data/AcInputs.qml" line="133"/>
       <source>Grid current limit</source>
       <translation>Şebeke Akım Sınırı</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="118"/>
+      <location filename="../../data/AcInputs.qml" line="136"/>
       <source>Generator current limit</source>
       <translation>Jeneratör Akım Limiti</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="121"/>
+      <location filename="../../data/AcInputs.qml" line="139"/>
       <source>Shore current limit</source>
       <translation>Sahil Akım Limiti</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="143"/>
+      <location filename="../../data/AcInputs.qml" line="161"/>
       <source>Stopping</source>
       <translation type="unfinished">Duruyor</translation>
     </message>
@@ -6355,11 +6360,6 @@ Devam etmek istiyor musunuz?</translation>
       <location filename="../../data/Generators.qml" line="52"/>
       <source>Cool-down</source>
       <translation>Soğuma</translation>
-    </message>
-    <message id="generator_test_run">
-      <location filename="../../data/Generators.qml" line="73"/>
-      <source>Test run</source>
-      <translation>Test başlat</translation>
     </message>
     <message id="generator_manually_started">
       <location filename="../../data/Generators.qml" line="70"/>
@@ -6676,11 +6676,6 @@ Devam etmek istiyor musunuz?</translation>
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="70"/>
       <source>Sensor value when full</source>
       <translation>Dolu olduğunda sensör değeri</translation>
-    </message>
-    <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
-      <source>Time to service</source>
-      <translation>Hizmet süresi</translation>
     </message>
     <message id="settings_page_relay_generator_auto_start_enabled">
       <location filename="../../pages/settings/PageGenerator.qml" line="53"/>
@@ -7335,22 +7330,22 @@ See documentation for further information.</oldsource>
       <translation>Sistem AC ithalat akımını sınırlayın</translation>
     </message>
     <message id="settings_ess_limit_ac_import_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="105"/>
       <source>To use this feature, Grid metering must be set to External meter, and an up to date ESS assistant must be installed.</source>
       <translation>Bu özelliği kullanmak için Şebeke ölçümü Harici ölçüm olarak ayarlanmalı ve güncel bir ESS asistanı kurulmalıdır.</translation>
     </message>
     <message id="settings_ess_max_system_import_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="112"/>
       <source>Maximum system import current (per phase)</source>
       <translation>Maksimum sistem ithalat akımı (faz başına)</translation>
     </message>
     <message id="settings_ess_limit_ac_export_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="146"/>
       <source>Grid metering must be set to External meter to use this feature.</source>
       <translation>Bu özelliği kullanmak için ızgara ölçümü Harici ölçüm olarak ayarlanmalıdır.</translation>
     </message>
     <message id="settings_ess_max_system_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="153"/>
       <source>Maximum system export current (per phase)</source>
       <translation>Maksimum sistem ihracat akımı (faz başına)</translation>
     </message>
@@ -7437,7 +7432,7 @@ See documentation for further information.</oldsource>
       <translation>CAN-bus BMS HV (500 kbit/s)</translation>
     </message>
     <message id="settings_ess_limit_system_ac_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="126"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="127"/>
       <source>Limit system AC export current</source>
       <translation>Limit sistem AC ihracat akımı</translation>
     </message>
@@ -7572,12 +7567,12 @@ See documentation for further information.</oldsource>
       <translation>Yağ Basıncı</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="260"/>
       <source>Scheduled charge levels</source>
       <translation>Planlanmış şarj seviyeleri</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
       <source>Active (%1)</source>
       <translation>Active (%1)</translation>
     </message>
@@ -8088,12 +8083,12 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
       <translation>Aylık</translation>
     </message>
     <message id="acInputs_evcharger">
-      <location filename="../../data/AcInputs.qml" line="29"/>
+      <location filename="../../data/AcInputs.qml" line="39"/>
       <source>EV Charger</source>
       <translation>EVCS</translation>
     </message>
     <message id="acInputs_heat_pump">
-      <location filename="../../data/AcInputs.qml" line="31"/>
+      <location filename="../../data/AcInputs.qml" line="41"/>
       <source>Heat pump</source>
       <translation>Isı pompası</translation>
     </message>
@@ -8580,6 +8575,11 @@ Kolaylaştırılmış navigasyon ve yeni bir görünümle, sevdiğiniz her şeye
       <source>ESS mode</source>
       <translation>ESS mod</translation>
     </message>
+    <message id="settings_page_run_time_and_service_time_to_service">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
+      <source>Runtime until service</source>
+      <translation/>
+    </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
       <source>Unknown</source>
@@ -8606,7 +8606,7 @@ Kolaylaştırılmış navigasyon ve yeni bir görünümle, sevdiğiniz her şeye
       <translation type="unfinished">dcLoads</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="387"/>
+      <location filename="../../pages/OverviewPage.qml" line="394"/>
       <source>Overview</source>
       <translation type="unfinished">Görünüm</translation>
     </message>

@@ -558,6 +558,11 @@
       <source>Inverter high temperature</source>
       <translation type="unfinished">Alta temperatura inverter</translation>
     </message>
+    <message id="page_generator_conditions_periodic_run">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+      <source>Periodic run</source>
+      <translation type="unfinished">Funzionamento periodico</translation>
+    </message>
     <message id="settings_inverter_high_temperature">
       <location filename="../../data/Generators.qml" line="91"/>
       <source>Inverter high temperature</source>
@@ -573,8 +578,8 @@
       <source>Start on overload warning</source>
       <translation>Avvia in caso di avviso sovraccarico</translation>
     </message>
-    <message id="page_generator_conditions_periodic_run">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+    <message id="generator_periodic_run">
+      <location filename="../../data/Generators.qml" line="73"/>
       <source>Periodic run</source>
       <translation>Funzionamento periodico</translation>
     </message>
@@ -1724,12 +1729,12 @@ Use unless prohibited by the utility provider.</source>
 Utilizzare se non è vietato dal gestore della rete</translation>
     </message>
     <message id="settings_ess_inactive">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="265"/>
       <source>Inactive</source>
       <translation type="unfinished">Inattivo</translation>
     </message>
     <message id="settings_ess_dynamic">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="298"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="300"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">ESS dinamico</translation>
     </message>
@@ -1754,7 +1759,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation type="unfinished">Caricamento</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="251"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>Riduzione dei picchi</translation>
@@ -1800,22 +1805,22 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Potenza di carica massima</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="201"/>
       <source>Limit inverter power</source>
       <translation>Limite potenza inverter</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="220"/>
       <source>Maximum inverter power</source>
       <translation>Massima potenza inverter</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="231"/>
       <source>Grid setpoint</source>
       <translation>Impostazione rete</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="240"/>
       <source>Grid feed-in</source>
       <translation>Iniezione a rete</translation>
     </message>
@@ -5121,7 +5126,7 @@ Si desidera continuare?</translation>
       <translation>Nessun errore</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="82"/>
+      <location filename="../../data/AcInputs.qml" line="100"/>
       <source>Not available</source>
       <translation>Non disponibile</translation>
     </message>
@@ -6163,27 +6168,27 @@ Si desidera continuare?</translation>
       <translation>Vento</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="89"/>
+      <location filename="../../data/AcInputs.qml" line="107"/>
       <source>Shore</source>
       <translation>Banchina</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="115"/>
+      <location filename="../../data/AcInputs.qml" line="133"/>
       <source>Grid current limit</source>
       <translation>Limite di corrente di rete</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="118"/>
+      <location filename="../../data/AcInputs.qml" line="136"/>
       <source>Generator current limit</source>
       <translation>Limite di corrente del generatore</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="121"/>
+      <location filename="../../data/AcInputs.qml" line="139"/>
       <source>Shore current limit</source>
       <translation>Limite di corrente da banchina</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="143"/>
+      <location filename="../../data/AcInputs.qml" line="161"/>
       <source>Stopping</source>
       <translation type="unfinished">In interruzione</translation>
     </message>
@@ -6353,11 +6358,6 @@ Si desidera continuare?</translation>
       <location filename="../../data/Generators.qml" line="52"/>
       <source>Cool-down</source>
       <translation>Raffreddamento</translation>
-    </message>
-    <message id="generator_test_run">
-      <location filename="../../data/Generators.qml" line="73"/>
-      <source>Test run</source>
-      <translation>Esecuzione di prova</translation>
     </message>
     <message id="generator_manually_started">
       <location filename="../../data/Generators.qml" line="70"/>
@@ -6674,11 +6674,6 @@ Si desidera continuare?</translation>
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="70"/>
       <source>Sensor value when full</source>
       <translation>Valore sensore quando è pieno</translation>
-    </message>
-    <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
-      <source>Time to service</source>
-      <translation>Tempo rimanente al servizio</translation>
     </message>
     <message id="settings_page_relay_generator_auto_start_enabled">
       <location filename="../../pages/settings/PageGenerator.qml" line="53"/>
@@ -7333,22 +7328,22 @@ See documentation for further information.</oldsource>
       <translation>Limitazione della corrente di importazione CA del sistema</translation>
     </message>
     <message id="settings_ess_limit_ac_import_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="105"/>
       <source>To use this feature, Grid metering must be set to External meter, and an up to date ESS assistant must be installed.</source>
       <translation>Per utilizzare questa funzione, la Misurazione della rete deve essere impostata su Contatore esterno e deve essere installato un assistente ESS aggiornato.</translation>
     </message>
     <message id="settings_ess_max_system_import_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="112"/>
       <source>Maximum system import current (per phase)</source>
       <translation>Massima corrente di importazione del sistema (per fase)</translation>
     </message>
     <message id="settings_ess_limit_ac_export_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="146"/>
       <source>Grid metering must be set to External meter to use this feature.</source>
       <translation>Per utilizzare questa funzione, la Misurazione della rete deve essere impostata su Contatore esterno.</translation>
     </message>
     <message id="settings_ess_max_system_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="153"/>
       <source>Maximum system export current (per phase)</source>
       <translation>Massima corrente di esportazione del sistema (per fase)</translation>
     </message>
@@ -7435,7 +7430,7 @@ See documentation for further information.</oldsource>
       <translation>CAN-bus BMS HV (500 kbit/s)</translation>
     </message>
     <message id="settings_ess_limit_system_ac_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="126"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="127"/>
       <source>Limit system AC export current</source>
       <translation>Limitazione della corrente di esportazione CA del sistema</translation>
     </message>
@@ -7567,12 +7562,12 @@ See documentation for further information.</oldsource>
       <translation>Pressione dell'olio</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="260"/>
       <source>Scheduled charge levels</source>
       <translation>Livelli di carica programmati</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
       <source>Active (%1)</source>
       <translation>Attivo (%1)</translation>
     </message>
@@ -8080,12 +8075,12 @@ Dopo aver aggiunto/attivato una nuova rete, è necessario approvarla una volta n
       <translation>Mensilmente</translation>
     </message>
     <message id="acInputs_evcharger">
-      <location filename="../../data/AcInputs.qml" line="29"/>
+      <location filename="../../data/AcInputs.qml" line="39"/>
       <source>EV Charger</source>
       <translation>Caricabatterie EV</translation>
     </message>
     <message id="acInputs_heat_pump">
-      <location filename="../../data/AcInputs.qml" line="31"/>
+      <location filename="../../data/AcInputs.qml" line="41"/>
       <source>Heat pump</source>
       <translation>Pompa di calore</translation>
     </message>
@@ -8571,6 +8566,11 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>ESS mode</source>
       <translation>Modalità ESS</translation>
     </message>
+    <message id="settings_page_run_time_and_service_time_to_service">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
+      <source>Runtime until service</source>
+      <translation/>
+    </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
       <source>Unknown</source>
@@ -8597,7 +8597,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation type="unfinished">Carichi CC</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="387"/>
+      <location filename="../../pages/OverviewPage.qml" line="394"/>
       <source>Overview</source>
       <translation type="unfinished">Panoramica</translation>
     </message>
