@@ -558,6 +558,11 @@
       <source>Inverter high temperature</source>
       <translation type="unfinished">อินเวอร์เตอร์อุณหภูมิสูง</translation>
     </message>
+    <message id="page_generator_conditions_periodic_run">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+      <source>Periodic run</source>
+      <translation type="unfinished">วิ่งเป็นระยะ</translation>
+    </message>
     <message id="settings_inverter_high_temperature">
       <location filename="../../data/Generators.qml" line="91"/>
       <source>Inverter high temperature</source>
@@ -573,8 +578,8 @@
       <source>Start on overload warning</source>
       <translation>เริ่มด้วยคำเตือนการโอเวอร์โหลด</translation>
     </message>
-    <message id="page_generator_conditions_periodic_run">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+    <message id="generator_periodic_run">
+      <location filename="../../data/Generators.qml" line="73"/>
       <source>Periodic run</source>
       <translation>วิ่งเป็นระยะ</translation>
     </message>
@@ -1724,12 +1729,12 @@ Use unless prohibited by the utility provider.</source>
 ใช้เว้นแต่จะได้รับอนุญาตจากผู้ให้บริการสาธารณูปโภค</translation>
     </message>
     <message id="settings_ess_inactive">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="265"/>
       <source>Inactive</source>
       <translation type="unfinished">ไม่ใช้งาน</translation>
     </message>
     <message id="settings_ess_dynamic">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="298"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="300"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">ไดนามิก ESS</translation>
     </message>
@@ -1754,7 +1759,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">เติมเงิน</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="251"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>การใช้สูงสุด</translation>
@@ -1800,22 +1805,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>กำลังชาร์จสูงสุด</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="201"/>
       <source>Limit inverter power</source>
       <translation>จำกัดกำลังของอินเวอร์เตอร์</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="220"/>
       <source>Maximum inverter power</source>
       <translation>กำลังสูงสุดของอินเวอร์เตอร์</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="231"/>
       <source>Grid setpoint</source>
       <translation>จุดตั้งค่ากริด</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="240"/>
       <source>Grid feed-in</source>
       <translation>กริดป้อนเข้า</translation>
     </message>
@@ -5122,7 +5127,7 @@ Do you want to continue?</source>
       <translation>ไม่มีข้อผิดพลาด</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="82"/>
+      <location filename="../../data/AcInputs.qml" line="100"/>
       <source>Not available</source>
       <translation>ไม่ว่าง</translation>
     </message>
@@ -6164,27 +6169,27 @@ Do you want to continue?</source>
       <translation>ลม</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="89"/>
+      <location filename="../../data/AcInputs.qml" line="107"/>
       <source>Shore</source>
       <translation>ชายฝั่ง</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="115"/>
+      <location filename="../../data/AcInputs.qml" line="133"/>
       <source>Grid current limit</source>
       <translation>ขีด จำกัด ปัจจุบันของกริด</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="118"/>
+      <location filename="../../data/AcInputs.qml" line="136"/>
       <source>Generator current limit</source>
       <translation>ขีด จำกัด กระแสไฟของเครื่องกำเนิดไฟฟ้า</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="121"/>
+      <location filename="../../data/AcInputs.qml" line="139"/>
       <source>Shore current limit</source>
       <translation>ขีดจำกัดกระแสฝั่ง</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="143"/>
+      <location filename="../../data/AcInputs.qml" line="161"/>
       <source>Stopping</source>
       <translation type="unfinished">หยุด</translation>
     </message>
@@ -6354,11 +6359,6 @@ Do you want to continue?</source>
       <location filename="../../data/Generators.qml" line="52"/>
       <source>Cool-down</source>
       <translation>เย็นลง</translation>
-    </message>
-    <message id="generator_test_run">
-      <location filename="../../data/Generators.qml" line="73"/>
-      <source>Test run</source>
-      <translation>ทดสอบการทำงาน</translation>
     </message>
     <message id="generator_manually_started">
       <location filename="../../data/Generators.qml" line="70"/>
@@ -6675,11 +6675,6 @@ Do you want to continue?</source>
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="70"/>
       <source>Sensor value when full</source>
       <translation>ค่าเซ็นเซอร์เมื่อเต็ม</translation>
-    </message>
-    <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
-      <source>Time to service</source>
-      <translation>เวลาให้บริการ</translation>
     </message>
     <message id="settings_page_relay_generator_auto_start_enabled">
       <location filename="../../pages/settings/PageGenerator.qml" line="53"/>
@@ -7334,22 +7329,22 @@ See documentation for further information.</oldsource>
       <translation>จำกัดกระแสการนำเข้า AC ของระบบ</translation>
     </message>
     <message id="settings_ess_limit_ac_import_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="105"/>
       <source>To use this feature, Grid metering must be set to External meter, and an up to date ESS assistant must be installed.</source>
       <translation>หากต้องการใช้คุณลักษณะนี้ ต้องตั้งค่าการวัดกริดเป็นมิเตอร์ภายนอก และต้องติดตั้งตัวช่วย ESS ที่ทันสมัย</translation>
     </message>
     <message id="settings_ess_max_system_import_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="112"/>
       <source>Maximum system import current (per phase)</source>
       <translation>กระแสนำเข้าระบบสูงสุด (ต่อเฟส)</translation>
     </message>
     <message id="settings_ess_limit_ac_export_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="146"/>
       <source>Grid metering must be set to External meter to use this feature.</source>
       <translation>ต้องตั้งค่าการวัดแสงตารางเป็นมิเตอร์ภายนอกเพื่อใช้คุณสมบัตินี้</translation>
     </message>
     <message id="settings_ess_max_system_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="153"/>
       <source>Maximum system export current (per phase)</source>
       <translation>กระแสส่งออกระบบสูงสุด (ต่อเฟส)</translation>
     </message>
@@ -7436,7 +7431,7 @@ See documentation for further information.</oldsource>
       <translation>CAN-bus BMS HV (500 กิโลบิต/วินาที)</translation>
     </message>
     <message id="settings_ess_limit_system_ac_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="126"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="127"/>
       <source>Limit system AC export current</source>
       <translation>จำกัด ระบบกระแสไฟส่งออก AC</translation>
     </message>
@@ -7568,12 +7563,12 @@ See documentation for further information.</oldsource>
       <translation>แรงดันน้ำมัน</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="260"/>
       <source>Scheduled charge levels</source>
       <translation>ระดับการชาร์จตามกำหนดเวลา</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
       <source>Active (%1)</source>
       <translation>ใช้งานอยู่ (%1)</translation>
     </message>
@@ -8082,12 +8077,12 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>รายเดือน</translation>
     </message>
     <message id="acInputs_evcharger">
-      <location filename="../../data/AcInputs.qml" line="29"/>
+      <location filename="../../data/AcInputs.qml" line="39"/>
       <source>EV Charger</source>
       <translation>เครื่องชาร์จ EV</translation>
     </message>
     <message id="acInputs_heat_pump">
-      <location filename="../../data/AcInputs.qml" line="31"/>
+      <location filename="../../data/AcInputs.qml" line="41"/>
       <source>Heat pump</source>
       <translation>ปั๊มความร้อน</translation>
     </message>
@@ -8574,6 +8569,11 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>ESS mode</source>
       <translation>โหมด ESS</translation>
     </message>
+    <message id="settings_page_run_time_and_service_time_to_service">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
+      <source>Runtime until service</source>
+      <translation/>
+    </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
       <source>Unknown</source>
@@ -8600,7 +8600,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation type="unfinished">โหลดไฟฟ้ากระแสตรง</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="387"/>
+      <location filename="../../pages/OverviewPage.qml" line="394"/>
       <source>Overview</source>
       <translation type="unfinished">ภาพรวม</translation>
     </message>

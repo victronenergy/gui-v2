@@ -558,6 +558,11 @@
       <source>Inverter high temperature</source>
       <translation type="unfinished">Température élevée convertisseur</translation>
     </message>
+    <message id="page_generator_conditions_periodic_run">
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+      <source>Periodic run</source>
+      <translation type="unfinished">Mise en marche périodique</translation>
+    </message>
     <message id="settings_inverter_high_temperature">
       <location filename="../../data/Generators.qml" line="91"/>
       <source>Inverter high temperature</source>
@@ -573,8 +578,8 @@
       <source>Start on overload warning</source>
       <translation>Démarrer si avertissement de surcharge</translation>
     </message>
-    <message id="page_generator_conditions_periodic_run">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+    <message id="generator_periodic_run">
+      <location filename="../../data/Generators.qml" line="73"/>
       <source>Periodic run</source>
       <translation>Mise en marche périodique</translation>
     </message>
@@ -1724,12 +1729,12 @@ Use unless prohibited by the utility provider.</source>
 A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
     </message>
     <message id="settings_ess_inactive">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="265"/>
       <source>Inactive</source>
       <translation type="unfinished">Inactif</translation>
     </message>
     <message id="settings_ess_dynamic">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="298"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="300"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamic ESS</translation>
     </message>
@@ -1754,7 +1759,7 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation type="unfinished">Recharge</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="251"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>Ecrêtage</translation>
@@ -1800,22 +1805,22 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation>Puissance de charge maximale</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="201"/>
       <source>Limit inverter power</source>
       <translation>Limiter puissance convertisseur</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="220"/>
       <source>Maximum inverter power</source>
       <translation>Puissance maximale convertisseur</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="231"/>
       <source>Grid setpoint</source>
       <translation>Point de consigne du réseau</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="240"/>
       <source>Grid feed-in</source>
       <translation>Injection dans le réseau</translation>
     </message>
@@ -2166,7 +2171,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_relay_function_relay1">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="20"/>
       <source>Function (Relay 1)</source>
-      <translation>Fonction (Relais 1)</translation>
+      <translation>Fonction (Relai 1)</translation>
     </message>
     <message id="settings_relay_function">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="22"/>
@@ -2176,7 +2181,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_relay_alarm_relay">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="26"/>
       <source>Alarm relay</source>
-      <translation>Relais d'alarme</translation>
+      <translation>Relai d'alarme</translation>
     </message>
     <message id="settings_relay_tank_pump">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="32"/>
@@ -2192,7 +2197,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_relay_alarm_polarity">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="43"/>
       <source>Alarm relay polarity</source>
-      <translation>Polarité du relais d'alarme</translation>
+      <translation>Polarité du relai d'alarme</translation>
     </message>
     <message id="settings_relay_normally_open">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="48"/>
@@ -2207,12 +2212,12 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_relay_relay1on">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="59"/>
       <source>Relay 1 on</source>
-      <translation>Relais 1 Activé</translation>
+      <translation>Relai 1 Activé</translation>
     </message>
     <message id="settings_relay_on">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="61"/>
       <source>Relay on</source>
-      <translation>Relais activé</translation>
+      <translation>Relai activé</translation>
     </message>
     <message id="settings_relay_function_relay2">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="70"/>
@@ -2222,7 +2227,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_relay_relay2on">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="84"/>
       <source>Relay 2 on</source>
-      <translation>Relais 2 Activé</translation>
+      <translation>Relai 2 Activé</translation>
     </message>
     <message id="settings_relay_temp_control_rules">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="92"/>
@@ -2237,7 +2242,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_relay_no_temperature_relay">
       <location filename="../../pages/settings/PageSettingsRelayTempSensors.qml" line="121"/>
       <source>No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to "Temperature".</source>
-      <translation>Aucun relais n'est configuré pour être activé par la température. Allez à la page des réglages du relais située dans le menu principal des réglages et réglez la fonction du relais sur "Température".</translation>
+      <translation>Aucun relai n'est configuré pour être activé par la température. Allez à la page des réglages du relai située dans le menu principal des réglages et réglez la fonction du relai sur "Température".</translation>
     </message>
     <message id="settings_firmware_version_switch_option">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="51"/>
@@ -2396,7 +2401,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="settings_pump_function_not_enabled">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="38"/>
       <source>Tank pump start/stop function is not enabled. Go to relay settings and set function to "Tank pump".</source>
-      <translation>La fonction de démarrage/arrêt de la pompe du réservoir n'est pas activée. Allez dans les réglages du relais et réglez la fonction sur "Pompe du réservoir".</translation>
+      <translation>La fonction de démarrage/arrêt de la pompe du réservoir n'est pas activée. Allez dans les réglages du relai et réglez la fonction sur "Pompe du réservoir".</translation>
     </message>
     <message id="settings_pump_state">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="47"/>
@@ -3001,7 +3006,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="batterysettingrelay_relay_function">
       <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="26"/>
       <source>Relay function</source>
-      <translation>Fonction relais</translation>
+      <translation>Fonction relai</translation>
     </message>
     <message id="batterysettingrelay_alarm">
       <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="31"/>
@@ -3032,7 +3037,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="batterysettingrelay_always_open_dont_use_the_relay">
       <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="37"/>
       <source>Always open (don't use the relay)</source>
-      <translation>Toujours ouvert (ne pas utiliser le relais)</translation>
+      <translation>Toujours ouvert (ne pas utiliser le relai)</translation>
     </message>
     <message id="batterysettingrelay_low_state_of_charge_setting_note">
       <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="51"/>
@@ -3476,7 +3481,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="batterysettings_relay_on_battery_monitor">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="56"/>
       <source>Relay (on battery monitor)</source>
-      <translation>Relais (sur moniteur de batterie)</translation>
+      <translation>Relai (sur moniteur de batterie)</translation>
     </message>
     <message id="batterysettings_restore_factory_defaults">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="66"/>
@@ -3671,7 +3676,7 @@ Documentation sur https://ve3.nl/vol</translation>
     <message id="lynxionio_external_relay">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="37"/>
       <source>External relay</source>
-      <translation>Relais externe</translation>
+      <translation>Relai externe</translation>
     </message>
     <message id="lynxionio_programmable_contact">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="45"/>
@@ -4504,7 +4509,7 @@ Voulez-vous continuer ?</translation>
     <message id="vebus_device_ess_relay_test">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="233"/>
       <source>ESS Relay test</source>
-      <translation>Test du relais ESS</translation>
+      <translation>Test du relai ESS</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="239"/>
@@ -4590,7 +4595,7 @@ Voulez-vous continuer ?</translation>
     <message id="vebus_device_ground_relay_error">
       <location filename="../../pages/vebusdevice/PageVeBusError11Device.qml" line="73"/>
       <source>GND Relay Error</source>
-      <translation>GND Erreur de relais</translation>
+      <translation>GND Erreur de relai</translation>
     </message>
     <message id="vebus_device_umains_mismatch">
       <location filename="../../pages/vebusdevice/PageVeBusError11Device.qml" line="80"/>
@@ -4605,7 +4610,7 @@ Voulez-vous continuer ?</translation>
     <message id="vebus_device_drive_of_bf_relay_mismatch">
       <location filename="../../pages/vebusdevice/PageVeBusError11Device.qml" line="94"/>
       <source>Drive of BF relay mismatch</source>
-      <translation>Inadéquation entre l'entraînement et le relais BF</translation>
+      <translation>Inadéquation entre l'entraînement et le relai BF</translation>
     </message>
     <message id="vebus_device_error_pe2_open">
       <location filename="../../pages/vebusdevice/PageVeBusError11Device.qml" line="101"/>
@@ -5123,7 +5128,7 @@ Voulez-vous continuer ?</translation>
       <translation>Aucune erreur</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="82"/>
+      <location filename="../../data/AcInputs.qml" line="100"/>
       <source>Not available</source>
       <translation>Indisponible</translation>
     </message>
@@ -5204,7 +5209,7 @@ Voulez-vous continuer ?</translation>
       <location filename="../../components/CommonWords.qml" line="385"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
-      <translation>Relais</translation>
+      <translation>Relai</translation>
     </message>
     <message id="common_words_reboot">
       <location filename="../../components/CommonWords.qml" line="391"/>
@@ -5772,7 +5777,7 @@ Voulez-vous continuer ?</translation>
     <message id="list_relay_state">
       <location filename="../../components/settings/ListRelayState.qml" line="11"/>
       <source>Relay state</source>
-      <translation>État relais</translation>
+      <translation>État relai</translation>
     </message>
     <message id="batteryhistory_reset_history_on_the_monitor_itself">
       <location filename="../../components/settings/ListResetHistoryLabel.qml" line="29"/>
@@ -6165,27 +6170,27 @@ Voulez-vous continuer ?</translation>
       <translation>Eolien</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="89"/>
+      <location filename="../../data/AcInputs.qml" line="107"/>
       <source>Shore</source>
       <translation>Quai</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="115"/>
+      <location filename="../../data/AcInputs.qml" line="133"/>
       <source>Grid current limit</source>
       <translation>Limite de courant réseau</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="118"/>
+      <location filename="../../data/AcInputs.qml" line="136"/>
       <source>Generator current limit</source>
       <translation>Limite de courant générateur</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="121"/>
+      <location filename="../../data/AcInputs.qml" line="139"/>
       <source>Shore current limit</source>
       <translation>Limite de courant de quai</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="143"/>
+      <location filename="../../data/AcInputs.qml" line="161"/>
       <source>Stopping</source>
       <translation type="unfinished">Arrêt en cours</translation>
     </message>
@@ -6355,11 +6360,6 @@ Voulez-vous continuer ?</translation>
       <location filename="../../data/Generators.qml" line="52"/>
       <source>Cool-down</source>
       <translation>Refroidissement</translation>
-    </message>
-    <message id="generator_test_run">
-      <location filename="../../data/Generators.qml" line="73"/>
-      <source>Test run</source>
-      <translation>Test de fonctionnement</translation>
     </message>
     <message id="generator_manually_started">
       <location filename="../../data/Generators.qml" line="70"/>
@@ -6635,7 +6635,7 @@ Voulez-vous continuer ?</translation>
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
       <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu.</source>
       <oldsource>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu</oldsource>
-      <translation>Notez que la modification du réglage de l'étage de décharge Time-to-go modifie également le réglage de l'état de charge bas dans le menu des relais.</translation>
+      <translation>Notez que la modification du réglage de l'étage de décharge Time-to-go modifie également le réglage de l'état de charge bas dans le menu des relai.</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
       <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
@@ -6676,11 +6676,6 @@ Voulez-vous continuer ?</translation>
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="70"/>
       <source>Sensor value when full</source>
       <translation>Valeur du capteur quand plein</translation>
-    </message>
-    <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
-      <source>Time to service</source>
-      <translation>Délai de mise en service</translation>
     </message>
     <message id="settings_page_relay_generator_auto_start_enabled">
       <location filename="../../pages/settings/PageGenerator.qml" line="53"/>
@@ -7335,22 +7330,22 @@ See documentation for further information.</oldsource>
       <translation>Limiter le courant d'importation AC du système</translation>
     </message>
     <message id="settings_ess_limit_ac_import_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="105"/>
       <source>To use this feature, Grid metering must be set to External meter, and an up to date ESS assistant must be installed.</source>
       <translation>Pour utiliser cette fonction, le compteur de réseau doit être réglé sur Compteur externe et un assistant ESS à jour doit être installé.</translation>
     </message>
     <message id="settings_ess_max_system_import_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="112"/>
       <source>Maximum system import current (per phase)</source>
       <translation>Courant d'importation maximal du système (par phase)</translation>
     </message>
     <message id="settings_ess_limit_ac_export_restrictions">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="146"/>
       <source>Grid metering must be set to External meter to use this feature.</source>
       <translation>Pour utiliser cette fonction, le compteur de réseau doit être réglé sur Compteur externe.</translation>
     </message>
     <message id="settings_ess_max_system_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="153"/>
       <source>Maximum system export current (per phase)</source>
       <translation>Courant d'exportation maximal du système (par phase)</translation>
     </message>
@@ -7437,7 +7432,7 @@ See documentation for further information.</oldsource>
       <translation>CAN-bus BMS HV (500 kbit/s)</translation>
     </message>
     <message id="settings_ess_limit_system_ac_export_current">
-      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="126"/>
+      <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="127"/>
       <source>Limit system AC export current</source>
       <translation>Limiter le courant d'exportation CA du système</translation>
     </message>
@@ -7569,12 +7564,12 @@ See documentation for further information.</oldsource>
       <translation>Pression d'huile</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="260"/>
       <source>Scheduled charge levels</source>
       <translation>Niveaux de charge plannifiés</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
       <source>Active (%1)</source>
       <translation>Actif (%1)</translation>
     </message>
@@ -8034,7 +8029,7 @@ Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois
     <message id="genset_controller_requires_helper_relay">
       <location filename="../../components/PageGensetModel.qml" line="53"/>
       <source>This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to "Connected genset helper relay".</source>
-      <translation>Ce contrôleur de groupe électrogène nécessite un relais d'assistance pour être contrôlé, mais le relais d'assistance n'est pas configuré. Veuillez configurer le relais 1 sous Paramètres → Relais sur "Relais d'assistance du groupe électrogène connecté".</translation>
+      <translation>Ce contrôleur de groupe électrogène nécessite un relai d'assistance pour être contrôlé, mais le relai d'assistance n'est pas configuré. Veuillez configurer le relai 1 sous Paramètres → Relai sur "Relai d'assistance du groupe électrogène connecté".</translation>
     </message>
     <message id="batteryhistory_high_starter_bat_voltage_alarms">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="130"/>
@@ -8060,7 +8055,7 @@ Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois
     <message id="settings_relay_genset_helper_relay">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="30"/>
       <source>Connected genset helper relay</source>
-      <translation>Relais d'aide du groupe électrogène connecté</translation>
+      <translation>Relai d'aide du groupe électrogène connecté</translation>
     </message>
     <message id="settings_system_ac_position">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
@@ -8083,12 +8078,12 @@ Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois
       <translation>Mensuel</translation>
     </message>
     <message id="acInputs_evcharger">
-      <location filename="../../data/AcInputs.qml" line="29"/>
+      <location filename="../../data/AcInputs.qml" line="39"/>
       <source>EV Charger</source>
       <translation>EVCS</translation>
     </message>
     <message id="acInputs_heat_pump">
-      <location filename="../../data/AcInputs.qml" line="31"/>
+      <location filename="../../data/AcInputs.qml" line="41"/>
       <source>Heat pump</source>
       <translation>Pompe à chaleur</translation>
     </message>
@@ -8576,6 +8571,11 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <source>ESS mode</source>
       <translation>mode ESS</translation>
     </message>
+    <message id="settings_page_run_time_and_service_time_to_service">
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
+      <source>Runtime until service</source>
+      <translation/>
+    </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
       <source>Unknown</source>
@@ -8602,7 +8602,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <translation type="unfinished">Charges DC</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="387"/>
+      <location filename="../../pages/OverviewPage.qml" line="394"/>
       <source>Overview</source>
       <translation type="unfinished">Vue d'ensemble</translation>
     </message>
@@ -9068,12 +9068,12 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="60"/>
       <source>ACIN1 relay test fault</source>
-      <translation>Défaillance test relais ACIN1</translation>
+      <translation>Défaillance test relai ACIN1</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="61"/>
       <source>ACIN2 relay test fault</source>
-      <translation>Défaillante test relais ACIN2</translation>
+      <translation>Défaillante test relai ACIN2</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="63"/>
@@ -9825,7 +9825,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="205"/>
       <source>Forced switch off load relay</source>
-      <translation>Interruption forcée du relais de charge</translation>
+      <translation>Interruption forcée du relai de charge</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="206"/>
@@ -10862,7 +10862,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="31"/>
       <source>Ground relay test failed</source>
-      <translation>Échec du test de relais de terre</translation>
+      <translation>Échec du test de relai de terre</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="34"/>
@@ -10872,7 +10872,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="37"/>
       <source>Grid relay test fault</source>
-      <translation>Défaut test du relais de réseau</translation>
+      <translation>Défaut test du relai de réseau</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="40"/>
@@ -10927,7 +10927,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="70"/>
       <source>Failing relay test prevents connection</source>
-      <translation>L'échec du test de relais empêche la connexion</translation>
+      <translation>L'échec du test de relai empêche la connexion</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="73"/>
