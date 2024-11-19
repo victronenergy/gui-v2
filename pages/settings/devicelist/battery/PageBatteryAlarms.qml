@@ -41,6 +41,13 @@ Page {
 			}
 
 			ListAlarm {
+				//% "High current"
+				text: qsTrId("batteryalarms_high_current")
+				dataItem.uid: root.bindPrefix + "/Alarms/HighCurrent"
+				allowed: defaultAllowed && dataItem.isValid
+			}
+
+			ListAlarm {
 				//% "High discharge current"
 				text: qsTrId("batteryalarms_high_discharge_current")
 				dataItem.uid: root.bindPrefix + "/Alarms/HighDischargeCurrent"
@@ -154,6 +161,20 @@ Page {
 				//% "Low cell voltage"
 				text: qsTrId("batteryalarms_low_cell_voltage")
 				dataItem.uid: root.bindPrefix + "/Alarms/LowCellVoltage"
+				allowed: defaultAllowed && dataItem.isValid
+			}
+
+			ListAlarm {
+				//% "BMS cable fault"
+				text: qsTrId("batteryalarms_bms_cable")
+				dataItem.uid: root.bindPrefix + "/Alarms/BmsCable"
+				allowed: defaultAllowed && dataItem.isValid
+			}
+
+			ListAlarm {
+				//% "Bad contactor"
+				text: qsTrId("batteryalarms_contactor")
+				dataItem.uid: root.bindPrefix + "/Alarms/Contactor"
 				allowed: defaultAllowed && dataItem.isValid
 			}
 		}
