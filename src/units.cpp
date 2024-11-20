@@ -94,7 +94,9 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Temperature_Celsius:    // fall through
 	case VenusOS::Enums::Units_Temperature_Fahrenheit: // fall through
 	case VenusOS::Enums::Units_Temperature_Kelvin:     // fall through
-	case VenusOS::Enums::Units_RevolutionsPerMinute: return 0;
+	case VenusOS::Enums::Units_RevolutionsPerMinute:   // fall through
+	case VenusOS::Enums::Units_CardinalDirection:      // fall through
+		return 0;
 	default:
 		// VoltAmpere
 		// Amp
@@ -150,6 +152,8 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("hPa");
 	case VenusOS::Enums::Units_Kilopascal:
 		return QStringLiteral("kPa");
+	case VenusOS::Enums::Units_CardinalDirection:
+		return DegreesSymbol;
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
 		return QString();
@@ -197,6 +201,7 @@ bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Temperature_Kelvin:
 	case VenusOS::Enums::Units_Hectopascal:
 	case VenusOS::Enums::Units_Kilopascal:
+	case VenusOS::Enums::Units_CardinalDirection:
 	default:
 		return false;
 	}
@@ -255,6 +260,11 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 			? formattingLocale()->toString(99.0, 'f', 0)
 			: formattingLocale()->toString(100.0, 'f', 0);
 		return quantity;
+	}
+
+	if (unit == VenusOS::Enums::Units_CardinalDirection) {
+		value = fmod(value + 360, 360);
+		quantity.unit += " " + formatWindDirection(static_cast<int>(value));
 	}
 
 	qreal scaledValue = value;
@@ -427,6 +437,29 @@ qreal Units::sumRealNumbersList(const QList<qreal> &numbers) const
 int Units::unitToVeUnit(VenusOS::Enums::Units_Type unit) const
 {
 	return static_cast<int>(::unitToVeUnit(unit));
+}
+
+QString Units::formatWindDirection(int degrees) const {
+	const QString directions[] = {
+		//% "N"
+		qtTrId("direction_north"),
+		//% "NE"
+		qtTrId("direction_northeast"),
+		//% "E"
+		qtTrId("direction_east"),
+		//% "SE"
+		qtTrId("direction_southeast"),
+		//% "S"
+		qtTrId("direction_south"),
+		//% "SW"
+		qtTrId("direction_southwest"),
+		//% "W"
+		qtTrId("direction_west"),
+		//% "NW"
+		qtTrId("direction_northwest")
+	};
+	const int index = static_cast<int>((degrees + 22.5) / 45.0) % 8;
+	return directions[index];
 }
 
 } // Units

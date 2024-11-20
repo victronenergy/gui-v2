@@ -83,6 +83,7 @@ public:
 		Units_Speed_MetresPerSecond,
 		Units_Hectopascal,
 		Units_Kilopascal,
+		Units_CardinalDirection,
 	};
 	Q_ENUM(Units_Type)
 

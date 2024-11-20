@@ -74,6 +74,14 @@ Page {
 			}
 
 			ListQuantityItem {
+				dataItem.uid: bindPrefix + "/WindDirection"
+				//% "Wind direction"
+				text: qsTrId("page_meteo_wind_direction")
+				allowed: dataItem.isValid
+				unit: VenusOS.Units_CardinalDirection
+			}
+
+			ListQuantityItem {
 				dataItem.uid: bindPrefix + "/InstallationPower"
 				//% "Installation Power"
 				text: qsTrId("page_meteo_installation_power")
