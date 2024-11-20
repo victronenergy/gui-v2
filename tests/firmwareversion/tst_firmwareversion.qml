@@ -52,6 +52,9 @@ TestCase {
 
 		// Sample of generic devices
 		compare(FirmwareVersion.versionText(345), "v1.59")
+
+		// IMT devices has float firmware version
+		compare(FirmwareVersion.versionText(3.14), "v3.14")
 	}
 
 	function test_version_none() {
