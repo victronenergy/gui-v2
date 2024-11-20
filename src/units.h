@@ -98,6 +98,9 @@ public:
 		qreal normalized = qMax(fromMin, qMin(fromMax, n));
 		return qFuzzyIsNull(fromRange) ? 0.0 : ((((normalized - fromMin) / fromRange) * toRange) + toMin);
 	}
+
+private:
+	QString formatWindDirection(int degrees) const;
 };
 
 }

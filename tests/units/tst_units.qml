@@ -45,6 +45,22 @@ TestCase {
 		expect(VenusOS.Units_Percentage, 100, "100", "%")
 	}
 
+	function test_windDirection() {
+		expect(VenusOS.Units_CardinalDirection, NaN, "--", "°")
+		expect(VenusOS.Units_CardinalDirection, 0, "0", "° direction_north")
+		expect(VenusOS.Units_CardinalDirection, 45, "45", "° direction_northeast")
+		expect(VenusOS.Units_CardinalDirection, 90, "90", "° direction_east")
+		expect(VenusOS.Units_CardinalDirection, 135, "135", "° direction_southeast")
+		expect(VenusOS.Units_CardinalDirection, 180, "180", "° direction_south")
+		expect(VenusOS.Units_CardinalDirection, 215, "215", "° direction_southwest")
+		expect(VenusOS.Units_CardinalDirection, 270, "270", "° direction_west")
+		expect(VenusOS.Units_CardinalDirection, 315, "315", "° direction_northwest")
+		expect(VenusOS.Units_CardinalDirection, 360, "0", "° direction_north")
+		expect(VenusOS.Units_CardinalDirection, -23, "337", "° direction_northwest")
+		expect(VenusOS.Units_CardinalDirection, 400, "40", "° direction_northeast")
+		expect(VenusOS.Units_CardinalDirection, 23.6, "24", "° direction_northeast")
+	}
+
 	function test_precisionZero() {
 		var units = [VenusOS.Units_Volume_Liter,
 					 VenusOS.Units_Volume_GallonImperial,
