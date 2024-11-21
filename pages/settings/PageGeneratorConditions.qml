@@ -11,13 +11,6 @@ Page {
 
 	property string bindPrefix
 	property string startStopBindPrefix
-	property var availableBatteryMonitors: availableBatteryServices.isValid ? availableBatteryServices.value : ""
-
-	VeQuickItem {
-		id: availableBatteryServices
-
-		uid: Global.system.serviceUid + "/AvailableBatteryMeasurements"
-	}
 
 	VeQuickItem {
 		id: stopOnAc1Item
@@ -51,6 +44,23 @@ Page {
 				defaultSecondaryText: qsTrId("page_generator_conditions_unavailable_monitor_set_another")
 				dataItem.uid: bindPrefix + "/BatteryService"
 				allowed: dataItem.value !== "default"
+
+				VeQuickItem {
+					id: availableBatteryServices
+
+					uid: Global.system.serviceUid + "/AvailableBatteryMeasurements"
+					onValueChanged: {
+						if (value === undefined) {
+							return
+						}
+						const modelArray = Utils.jsonSettingsToModel(value)
+						if (modelArray) {
+							monitorService.optionModel = modelArray
+						} else {
+							console.warn("Unable to parse data from", source)
+						}
+					}
+				}
 			}
 
 			ListRadioButtonGroup {
