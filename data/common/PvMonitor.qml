@@ -36,6 +36,17 @@ Instantiator {
 		root.totalCurrent = _totalCurrent
 	}
 
+	function _updateMaximumPhaseCount() {
+		let _maxPhaseCount = 0
+		for (let i = 0; i < count; ++i) {
+			const acPvDelegate = root.objectAt(i)
+			if (!!acPvDelegate) {
+				_maxPhaseCount = Math.max(_maxPhaseCount, acPvDelegate.phaseCount)
+			}
+		}
+		root.maxPhaseCount = _maxPhaseCount
+	}
+
 	model: [
 		Global.system.serviceUid + "/Ac/PvOnGrid",
 		Global.system.serviceUid + "/Ac/PvOnGenset",
@@ -46,6 +57,7 @@ Instantiator {
 		id: acPvDelegate
 
 		readonly property string serviceUid: modelData
+		readonly property int phaseCount: vePhaseCount.value || 0
 
 		readonly property VeQuickItem vePhaseCount: VeQuickItem {
 			uid: acPvDelegate.serviceUid + "/NumberOfPhases"
@@ -53,15 +65,7 @@ Instantiator {
 				const phaseCount = value === undefined ? 0 : value
 				if (pvPhases.count !== phaseCount) {
 					pvPhases.model = phaseCount
-
-					let _maxPhaseCount = 0
-					for (let i = 0; i < count; ++i) {
-						const acPvDelegate = root.objectAt(i)
-						if (!!acPvDelegate) {
-							_maxPhaseCount = Math.max(_maxPhaseCount, acPvDelegate.vePhaseCount.value || 0)
-						}
-					}
-					root.maxPhaseCount = _maxPhaseCount
+					Qt.callLater(root._updateMaximumPhaseCount)
 				}
 			}
 		}
