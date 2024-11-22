@@ -62,6 +62,8 @@ QtObject {
 					// cannot be summed across multiple phases.
 					return NaN
 				}
+				// There are one or more PV inverters, which are all single-phase, so it's safe to
+				// return a total current as they should all have the same PV output voltage.
 				return _pvMonitor.totalCurrent
 			} else if (Global.solarChargers.model.count > 0) {
 				return _dcPvCurrent.isValid ? _dcPvCurrent.value : NaN
