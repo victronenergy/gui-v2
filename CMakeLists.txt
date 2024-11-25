@@ -214,6 +214,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/CurrentLimitButton.qml
     components/DateSelector.qml
     components/Device.qml
+    components/DeviceListDelegate.qml
     components/DynamicValueRange.qml
     components/ElectricalQuantityLabel.qml
     components/EnvironmentGauge.qml
@@ -588,6 +589,37 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/dc-in/PageDcMeterModel.qml
     pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml
     pages/settings/devicelist/dc-in/PageDcMeterHistory.qml
+    pages/settings/devicelist/delegates/AcInDeviceListDelegate.qml
+    pages/settings/devicelist/delegates/DcMeterDeviceListDelegate.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_acload.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_acsystem.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_alternator.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_battery.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_charger.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_dcdc.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_dcgenset.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_dcload.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_dcsource.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_dcsystem.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_digitalinput.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_evcharger.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_fuelcell.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_genset.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_grid.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_heatpump.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_inverter.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_meteo.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_motordrive.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_multi.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_pulsemeter.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_pvinverter.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_solarcharger.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_tank.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_temperature.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_unsupported.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_vebus.qml
+    pages/settings/devicelist/delegates/DisconnectedDeviceListDelegate.qml
+    pages/settings/devicelist/delegates/GensetDeviceListDelegate.qml
     pages/settings/devicelist/inverter/PageInverter.qml
     pages/settings/devicelist/inverter/PageSolarStats.qml
     pages/settings/devicelist/rs/PageMultiRs.qml
