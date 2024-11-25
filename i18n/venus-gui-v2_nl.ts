@@ -133,7 +133,7 @@
       <translation>Zon opbrengst</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="182"/>
+      <location filename="../../data/System.qml" line="184"/>
       <source>External control</source>
       <translation>Externe besturing</translation>
     </message>
@@ -444,7 +444,7 @@
       <translation>Handmatig starten</translation>
     </message>
     <message id="page_generator_conditions_start_generator">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="64"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="74"/>
       <source>Start generator</source>
       <translation>Aggregaat starten</translation>
     </message>
@@ -519,47 +519,47 @@
       <translation>Onbeschikbare monitor, stel een andere in</translation>
     </message>
     <message id="page_generator_conditions_battery_monitor">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="49"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="42"/>
       <source>Battery monitor</source>
       <translation type="unfinished">Accumonitor</translation>
     </message>
     <message id="page_generator_conditions_unavailable_monitor_set_another">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="51"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="44"/>
       <source>Unavailable monitor, set another</source>
       <translation type="unfinished">Onbeschikbare monitor, stel een andere in</translation>
     </message>
     <message id="page_generator_conditions_on_loss_of_communication">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="58"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="68"/>
       <source>On loss of communication</source>
       <translation>Bij communicatie verlies</translation>
     </message>
     <message id="page_generator_conditions_stop_generator">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="62"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="72"/>
       <source>Stop generator</source>
       <translation>Aggregaat stoppen</translation>
     </message>
     <message id="page_generator_conditions_keep_generator_running">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="66"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="76"/>
       <source>Keep generator running</source>
       <translation>Laat aggregaat draaien</translation>
     </message>
     <message id="page_generator_conditions_stop_generator_when_ac_input_available">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="72"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="82"/>
       <source>Stop generator when AC-input is available</source>
       <translation>Stop aggregaat, als AC ingang beschikbaar is</translation>
     </message>
     <message id="page_generator_conditions_battery_soc">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="95"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="105"/>
       <source>Battery SOC</source>
       <translation>Accu laadtoestand</translation>
     </message>
     <message id="page_generator_conditions_inverter_high_temperature">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="129"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="139"/>
       <source>Inverter high temperature</source>
       <translation type="unfinished">Hoge temperatuur omvormer</translation>
     </message>
     <message id="page_generator_conditions_periodic_run">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="149"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="159"/>
       <source>Periodic run</source>
       <translation type="unfinished">Periodiek in bedrijf</translation>
     </message>
@@ -569,12 +569,12 @@
       <translation>Hoge temperatuur omvormer</translation>
     </message>
     <message id="page_generator_conditions_start_on_high_temperature_warning">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="131"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="141"/>
       <source>Start on high temperature warning</source>
       <translation>Starten bij melding hoge temperatuur</translation>
     </message>
     <message id="page_generator_conditions_start_on_overload_warning">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="140"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="150"/>
       <source>Start on overload warning</source>
       <translation>Starten bij melding overbelasting</translation>
     </message>
@@ -1282,63 +1282,63 @@
       <translation>Gesplitste fase (L1 + L2)</translation>
     </message>
     <message id="page_settings_fronius_inverter_show">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="52"/>
       <source>Show</source>
       <translation>Weergeven</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_in1_mp">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="43"/>
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="95"/>
       <source>AC-In1 MP</source>
       <translation>AC In1 MP</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_in1_l1">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="105"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="101"/>
       <source>AC-In1 L%1</source>
       <translation>AC In1 L%1</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_in1_unknown">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="109"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="105"/>
       <source>AC-In1 --</source>
       <translation>AC In1 --</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_out_mp">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="57"/>
       <source>AC-Out MP</source>
       <translation>AC uit MP</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_in1_l">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="45"/>
       <source>AC-In1 L%1</source>
       <translation type="unfinished">AC In1 L%1</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_in1_phase_unknown">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="49"/>
       <source>AC-In1 --</source>
       <translation type="unfinished">AC In1 --</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_out_l">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="67"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="63"/>
       <source>AC-Out L%1</source>
       <translation>AC uit L%1</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_out_phase_unknown">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="67"/>
       <source>AC-Out --</source>
       <translation>AC uit --</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_in2_mp">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="76"/>
       <source>AC-In2 MP</source>
       <translation>AC In2 MP</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_in2_l1">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="82"/>
       <source>AC-In2 L%1</source>
       <translation>AC In2 L%1</translation>
     </message>
     <message id="page_setting_fronius_inverters_ac_in2_phase_unknown">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="86"/>
       <source>AC-In2 --</source>
       <translation>AC In2 --</translation>
     </message>
@@ -1728,6 +1728,16 @@ Use unless prohibited by the utility provider.</source>
 
 Gebruik tenzij verboden door de energieleverancier.</translation>
     </message>
+    <message id="settings_ess_battery_life_sustain">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="159"/>
+      <source>Sustain</source>
+      <translation type="unfinished">Onderhouden</translation>
+    </message>
+    <message id="settings_ess_battery_life_recharge">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="161"/>
+      <source>Recharge</source>
+      <translation type="unfinished">Opnieuw laden</translation>
+    </message>
     <message id="settings_ess_inactive">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="265"/>
       <source>Inactive</source>
@@ -1739,24 +1749,14 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation type="unfinished">Dynamic ESS</translation>
     </message>
     <message id="settings_rs_ess_min_soc">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="31"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="36"/>
       <source>Minimum SOC (unless grid fails)</source>
       <translation>Minimale laadtoestand (tenzij net uitvalt)</translation>
     </message>
-    <message id="settings_ess_active_soc_limit">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="131"/>
+    <message id="settings_rs_active_soc_limit">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="52"/>
       <source>Active SOC limit</source>
       <translation>Huidige laadtoestand limiet</translation>
-    </message>
-    <message id="settings_ess_battery_life_sustain">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="159"/>
-      <source>Sustain</source>
-      <translation type="unfinished">Onderhouden</translation>
-    </message>
-    <message id="settings_ess_battery_life_recharge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="161"/>
-      <source>Recharge</source>
-      <translation type="unfinished">Opnieuw laden</translation>
     </message>
     <message id="settings_ess_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="251"/>
@@ -1785,12 +1785,12 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Langzaam laden</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="188"/>
+      <location filename="../../data/System.qml" line="190"/>
       <source>Sustain</source>
       <translation>Onderhouden</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="191"/>
+      <location filename="../../data/System.qml" line="193"/>
       <source>Recharge</source>
       <translation>Opnieuw laden</translation>
     </message>
@@ -2441,7 +2441,7 @@ Documentatie op https://ve3.nl/vol</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="146"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="82"/>
       <source>[Hidden]</source>
       <translation>[Verborgen]</translation>
     </message>
@@ -2541,27 +2541,27 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation>Apparaat# %1</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="150"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="72"/>
       <source>No access points</source>
       <translation>Geen toegangspunten</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="74"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Geen WiFi-adapter aangesloten</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="29"/>
       <source>Create access point</source>
       <translation>Access point maken</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="64"/>
       <source>Wi-Fi networks</source>
       <translation>WiFi netwerken</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="53"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Access Point uitzetten?</translation>
     </message>
@@ -2896,22 +2896,22 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation>Laad modus</translation>
     </message>
     <message id="evcs_manual_caption">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="117"/>
+      <location filename="../../data/EvChargers.qml" line="32"/>
       <source>Start and stop the process yourself. Use this for quick charges and close monitoring.</source>
       <translation>Start en stop het proces zelf. Gebruik dit voor snel laden en nauwgezette bewaking.</translation>
     </message>
     <message id="evcs_auto_caption">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="123"/>
+      <location filename="../../data/EvChargers.qml" line="38"/>
       <source>Starts and stops based on the battery charge level. Optimal for overnight and extended charges to avoid overcharging.</source>
       <translation>Start en stopt op basis van het laadniveau van de accu. Optimaal voor 's nachts en langere ladingen om te veel laden te voorkomen.</translation>
     </message>
     <message id="evcs_scheduled_caption">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="129"/>
+      <location filename="../../data/EvChargers.qml" line="44"/>
       <source>Lower electricity rates during off-peak hours or if you want to ensure that your EV is fully charged and ready to go at a specific time.</source>
       <translation>Lagere elektriciteitstarieven tijdens daluren of als ervoor gezord moet worden dat de EV volledig opgeladen is en klaar om te vertrekken op een specifiek tijdstip.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="146"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="127"/>
       <source>Enable charging</source>
       <translation>Laden toestaan</translation>
     </message>
@@ -3128,7 +3128,7 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation>Magneetschakelaar check</translation>
     </message>
     <message id="batteryalarms_state_of_health">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="66"/>
       <source>State of health</source>
       <translation>Gezondheidstoestand</translation>
     </message>
@@ -3253,12 +3253,12 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation>Hoge laadstroom</translation>
     </message>
     <message id="batteryalarms_high_discharge_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="52"/>
       <source>High discharge current</source>
       <translation>Hoge ontladingsstroom</translation>
     </message>
     <message id="evchargers_status_low_state_of_charge">
-      <location filename="../../data/EvChargers.qml" line="106"/>
+      <location filename="../../data/EvChargers.qml" line="127"/>
       <source>Low SOC</source>
       <translation>Lage laadstatus</translation>
     </message>
@@ -3268,67 +3268,67 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation type="unfinished">Hoge accuspanning</translation>
     </message>
     <message id="batteryalarms_low_soc">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="59"/>
       <source>Low SOC</source>
       <translation type="unfinished">Lage laadstatus</translation>
     </message>
     <message id="batteryalarms_low_starter_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="73"/>
       <source>Low starter voltage</source>
       <translation>Lage startaccu spanning</translation>
     </message>
     <message id="batteryalarms_high_starter_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="80"/>
       <source>High starter voltage</source>
       <translation>Hoge startaccu spanning</translation>
     </message>
     <message id="batteryalarms_battery_temperature_sensor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="92"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="99"/>
       <source>Battery temperature sensor</source>
       <translation>Accutemperatuursensor</translation>
     </message>
     <message id="batteryalarms_mid_point_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="106"/>
       <source>Mid-point voltage</source>
       <translation>Middelpuntspanning</translation>
     </message>
     <message id="batteryalarms_fuse_blown">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="113"/>
       <source>Fuse blown</source>
       <translation type="unfinished">Zekering doorgebrand</translation>
     </message>
     <message id="batteryalarms_high_internal_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="120"/>
       <source>High internal temperature</source>
       <translation>Hoge interne temperatuur</translation>
     </message>
     <message id="batteryalarms_low_charge_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="120"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="127"/>
       <source>Low charge temperature</source>
       <translation>Lage laadtemperatuur</translation>
     </message>
     <message id="batteryalarms_high_charge_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="134"/>
       <source>High charge temperature</source>
       <translation>Hoge laadtemperatuur</translation>
     </message>
     <message id="batteryalarms_internal_failure">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="134"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="141"/>
       <source>Internal failure</source>
       <translation>Interne storing</translation>
     </message>
     <message id="batteryalarms_circuit_breaker_tripped">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="148"/>
       <source>Circuit breaker tripped</source>
       <translation>Zekeringautomaat geactiveerd</translation>
     </message>
     <message id="batteryalarms_cell_imbalance">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="148"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="155"/>
       <source>Cell imbalance</source>
       <translation>Onbalans cel</translation>
     </message>
     <message id="batteryalarms_low_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="155"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="162"/>
       <source>Low cell voltage</source>
       <translation>Lage celspanning</translation>
     </message>
@@ -3710,27 +3710,27 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation>In serie</translation>
     </message>
     <message id="lynxionsystem_min_max_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="43"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="49"/>
       <source>Min/max cell voltage</source>
       <translation>Min/max. celspanning</translation>
     </message>
     <message id="lynxionsystem_min_max_cell_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="63"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="69"/>
       <source>Min/max cell temperature</source>
       <translation>Min/max. celtemperatuur</translation>
     </message>
     <message id="lynxionsystem_balancing">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="95"/>
       <source>Balancing</source>
       <translation type="unfinished">Balanceren</translation>
     </message>
     <message id="lynxionsystem_balancer_balancing">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="107"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="113"/>
       <source>Balancing</source>
       <translation>Balanceren</translation>
     </message>
     <message id="lynxionsystem_balancer_unknown">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="114"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="120"/>
       <source>Unknown</source>
       <translation type="unfinished">Onbekend</translation>
     </message>
@@ -3746,7 +3746,7 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation>Veld aansturing</translation>
     </message>
     <message id="alternator_wakespeed_engine_speed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="82"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="90"/>
       <source>Engine speed</source>
       <translation>Motor toerental</translation>
     </message>
@@ -4903,7 +4903,7 @@ Do you want to continue?</source>
       <translation>Gesloten</translation>
     </message>
     <message id="evchargers_status_connected">
-      <location filename="../../data/EvChargers.qml" line="89"/>
+      <location filename="../../data/EvChargers.qml" line="110"/>
       <source>Connected</source>
       <translation>Verbonden</translation>
     </message>
@@ -4946,7 +4946,7 @@ Do you want to continue?</source>
       <translation>Ontladen</translation>
     </message>
     <message id="evchargers_status_disconnected">
-      <location filename="../../data/EvChargers.qml" line="86"/>
+      <location filename="../../data/EvChargers.qml" line="107"/>
       <source>Disconnected</source>
       <oldsource>Unplugged</oldsource>
       <translation>Losgekoppeld</translation>
@@ -5343,7 +5343,7 @@ Do you want to continue?</source>
       <translation>Uniek Identity nummer</translation>
     </message>
     <message id="evchargers_status_unknown">
-      <location filename="../../data/EvChargers.qml" line="149"/>
+      <location filename="../../data/EvChargers.qml" line="170"/>
       <source>Unknown</source>
       <translation>Onbekend</translation>
     </message>
@@ -6077,7 +6077,7 @@ Do you want to continue?</source>
       <translation>MQTT protocol niveau 5 fout</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="142"/>
+      <location filename="../../components/StatusBar.qml" line="185"/>
       <source>Silence alarm</source>
       <translation>Alarm uitschakelen</translation>
     </message>
@@ -6280,72 +6280,72 @@ Do you want to continue?</source>
       <translation>Geoptimaliseerd zonder BatteryLife</translation>
     </message>
     <message id="evchargers_status_charged">
-      <location filename="../../data/EvChargers.qml" line="94"/>
+      <location filename="../../data/EvChargers.qml" line="115"/>
       <source>Charged</source>
       <translation>Geladen</translation>
     </message>
     <message id="evchargers_status_waiting_for_sun">
-      <location filename="../../data/EvChargers.qml" line="97"/>
+      <location filename="../../data/EvChargers.qml" line="118"/>
       <source>Waiting for sun</source>
       <translation>Wacht op zon</translation>
     </message>
     <message id="evchargers_status_waiting_for_rfid">
-      <location filename="../../data/EvChargers.qml" line="100"/>
+      <location filename="../../data/EvChargers.qml" line="121"/>
       <source>Waiting for RFID</source>
       <translation>Wacht op RFID</translation>
     </message>
     <message id="evchargers_status_waiting_for_start">
-      <location filename="../../data/EvChargers.qml" line="103"/>
+      <location filename="../../data/EvChargers.qml" line="124"/>
       <source>Waiting for start</source>
       <translation>Wacht op start</translation>
     </message>
     <message id="evchargers_status_ground_test_error">
-      <location filename="../../data/EvChargers.qml" line="109"/>
+      <location filename="../../data/EvChargers.qml" line="130"/>
       <source>Ground test error</source>
       <translation>Fout aardingstest</translation>
     </message>
     <message id="evchargers_status_cp_input_test_error">
-      <location filename="../../data/EvChargers.qml" line="115"/>
+      <location filename="../../data/EvChargers.qml" line="136"/>
       <source>CP input test error</source>
       <translation>Fout bij testen CP ingang</translation>
     </message>
     <message id="evchargers_status_residual_current_detected">
-      <location filename="../../data/EvChargers.qml" line="118"/>
+      <location filename="../../data/EvChargers.qml" line="139"/>
       <source>Residual current detected</source>
       <translation>Lekstroom gedetecteerd</translation>
     </message>
     <message id="evchargers_status_undervoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="121"/>
+      <location filename="../../data/EvChargers.qml" line="142"/>
       <source>Undervoltage detected</source>
       <translation>Te lage spanning gedetecteerd</translation>
     </message>
     <message id="evchargers_status_overvoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="124"/>
+      <location filename="../../data/EvChargers.qml" line="145"/>
       <source>Overvoltage detected</source>
       <translation>Te hoge spanning gedetecteerd</translation>
     </message>
     <message id="evchargers_status_overheating_detected">
-      <location filename="../../data/EvChargers.qml" line="127"/>
+      <location filename="../../data/EvChargers.qml" line="148"/>
       <source>Overheating detected</source>
       <translation>Oververhitting gedetecteerd</translation>
     </message>
     <message id="evchargers_status_charging_limit">
-      <location filename="../../data/EvChargers.qml" line="130"/>
+      <location filename="../../data/EvChargers.qml" line="151"/>
       <source>Charging limit</source>
       <translation>Laad limiet</translation>
     </message>
     <message id="evchargers_status_start_charging">
-      <location filename="../../data/EvChargers.qml" line="133"/>
+      <location filename="../../data/EvChargers.qml" line="154"/>
       <source>Start charging</source>
       <translation>Start laden</translation>
     </message>
     <message id="evchargers_mode_scheduled">
-      <location filename="../../data/EvChargers.qml" line="162"/>
+      <location filename="../../data/EvChargers.qml" line="183"/>
       <source>Scheduled</source>
       <translation type="unfinished">Geplanned</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="194"/>
+      <location filename="../../data/System.qml" line="196"/>
       <source>Scheduled</source>
       <translation>Geplanned</translation>
     </message>
@@ -6421,107 +6421,107 @@ Do you want to continue?</source>
       <translation type="unfinished">Externe besturing</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="124"/>
+      <location filename="../../data/System.qml" line="126"/>
       <source>AES mode</source>
       <translation>AES modus</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="127"/>
+      <location filename="../../data/System.qml" line="129"/>
       <source>Fault condition</source>
       <translation>Foutconditie</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="130"/>
+      <location filename="../../data/System.qml" line="132"/>
       <source>Bulk charging</source>
       <translation>Bulk laden</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="133"/>
+      <location filename="../../data/System.qml" line="135"/>
       <source>Absorption charging</source>
       <translation>Absorptie laden</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="136"/>
+      <location filename="../../data/System.qml" line="138"/>
       <source>Float charging</source>
       <translation>Druppel laden</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="139"/>
+      <location filename="../../data/System.qml" line="141"/>
       <source>Storage mode</source>
       <translation>Opslag modus</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="142"/>
+      <location filename="../../data/System.qml" line="144"/>
       <source>Equalization charging</source>
       <translation>Egalisatie laden</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="145"/>
+      <location filename="../../data/System.qml" line="147"/>
       <source>Pass-thru</source>
       <translation>Doorvoer</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="148"/>
+      <location filename="../../data/System.qml" line="150"/>
       <source>Inverting</source>
       <translation>Omvormen</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="151"/>
+      <location filename="../../data/System.qml" line="153"/>
       <source>Assisting</source>
       <translation>Assisteren</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="154"/>
+      <location filename="../../data/System.qml" line="156"/>
       <source>Power supply mode</source>
       <translation>Voeding modus</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="157"/>
+      <location filename="../../data/System.qml" line="159"/>
       <source>Sustain</source>
       <translation type="unfinished">Onderhouden</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="161"/>
+      <location filename="../../data/System.qml" line="163"/>
       <source>Wake up</source>
       <translation>Wakker worden</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="164"/>
+      <location filename="../../data/System.qml" line="166"/>
       <source>Repeated absorption</source>
       <translation>Herhaalde absorptie</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="169"/>
       <source>Auto equalize</source>
       <translation>Automatisch egaliseren</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="170"/>
+      <location filename="../../data/System.qml" line="172"/>
       <source>Battery safe</source>
       <translation>BatterySafe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="173"/>
+      <location filename="../../data/System.qml" line="175"/>
       <source>Load detect</source>
       <translation>Belasting detectie</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="176"/>
+      <location filename="../../data/System.qml" line="178"/>
       <source>Blocked</source>
       <translation>Geblokkeerd</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="179"/>
+      <location filename="../../data/System.qml" line="181"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="197"/>
+      <location filename="../../data/System.qml" line="199"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamic ESS</translation>
     </message>
     <message id="settings_rs_ess_dess">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="41"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="61"/>
       <source>Dynamic ESS</source>
       <translation>Dynamic ESS</translation>
     </message>
@@ -6575,7 +6575,7 @@ Do you want to continue?</source>
       <translation>Alarm kortsluiting</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="51"/>
       <source>Disable Access Point</source>
       <translation>AP uitzetten</translation>
     </message>
@@ -6636,37 +6636,37 @@ Do you want to continue?</source>
       <translation>Let op dat het wijzigen van de instelling voor de Tijd tot ontladingsvloer ook de instelling voor de Lage laadstatus in het relaismenu verandert.</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="121"/>
       <source>Operation time</source>
       <translation>Bedrijfstijd</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="121"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
       <source>Charged Ah</source>
       <translation>Ah opgeladen</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="130"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="138"/>
       <source>Cycles started</source>
       <translation>Cycli begonnen</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="137"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="145"/>
       <source>Cycles completed</source>
       <translation>Cycli voltooid</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="144"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="152"/>
       <source>Number of power-ups</source>
       <translation>Aantal inschakelingen</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="151"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="159"/>
       <source>Number of deep discharges</source>
       <translation>Aantal diepe ontladingen</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="170"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="178"/>
       <source>Charge cycle history</source>
       <translation>Geschiedenis laadcyclus</translation>
     </message>
@@ -6682,7 +6682,7 @@ Do you want to continue?</source>
       <translation>Autostart-functionaliteit</translation>
     </message>
     <message id="page_generator_conditions_make_sure_generator_is_not_connected">
-      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="87"/>
+      <location filename="../../pages/settings/PageGeneratorConditions.qml" line="97"/>
       <source>Make sure that the generator is not connected to AC input %1 when using this option</source>
       <oldsource>Make sure that the generator is not connected to AC input %1 when using this option.</oldsource>
       <translation>Zorg ervoor dat het aggregaat niet is aangesloten op AC ingang %1 als deze optie gebruikt wordt.</translation>
@@ -6850,6 +6850,11 @@ Do you want to continue?</source>
       <source>Minimum SOC (unless grid fails)</source>
       <translation type="unfinished">Minimale laadtoestand (tenzij net uitvalt)</translation>
     </message>
+    <message id="settings_ess_active_soc_limit">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="131"/>
+      <source>Active SOC limit</source>
+      <translation type="unfinished">Huidige laadtoestand limiet</translation>
+    </message>
     <message id="settings_ess_batteryLife_state">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="143"/>
       <source>Battery life state</source>
@@ -7009,30 +7014,30 @@ Do you want to continue?</source>
       <translation>Aanraakscherm besturing</translation>
     </message>
     <message id="evchargers_status_welded_contacts_error">
-      <location filename="../../data/EvChargers.qml" line="112"/>
+      <location filename="../../data/EvChargers.qml" line="133"/>
       <source>Welded contacts test error (shorted)</source>
       <oldsource>Welded contacts error</oldsource>
       <translation>Testfout vastgesmolten contacten (kortgesloten)</translation>
     </message>
     <message id="evchargers_status_switching_to_three_phase">
-      <location filename="../../data/EvChargers.qml" line="136"/>
+      <location filename="../../data/EvChargers.qml" line="157"/>
       <source>Switching to 3 phase</source>
       <oldsource>Switching to 3-phase</oldsource>
       <translation>Overschakelen naar 3 fasen</translation>
     </message>
     <message id="evchargers_status_switching_to_single_phase">
-      <location filename="../../data/EvChargers.qml" line="139"/>
+      <location filename="../../data/EvChargers.qml" line="160"/>
       <source>Switching to 1 phase</source>
       <oldsource>Switching to single phase</oldsource>
       <translation>Overschakelen naar 1 fase</translation>
     </message>
     <message id="evchargers_status_stop_charging">
-      <location filename="../../data/EvChargers.qml" line="142"/>
+      <location filename="../../data/EvChargers.qml" line="163"/>
       <source>Stop charging</source>
       <translation>Stop met opladen</translation>
     </message>
     <message id="evchargers_status_reserved">
-      <location filename="../../data/EvChargers.qml" line="146"/>
+      <location filename="../../data/EvChargers.qml" line="167"/>
       <source>Reserved</source>
       <translation>Gereserveerd</translation>
     </message>
@@ -7283,17 +7288,17 @@ Let op: dit menu toont alleen Carlo Gavazzi meters die zijn aangesloten via RS48
       <translation>Ongeldige accu configuratie</translation>
     </message>
     <message id="lynxionsystem_balancer_status">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="97"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="103"/>
       <source>Balancer status</source>
       <translation>Balancer status</translation>
     </message>
     <message id="lynxionsystem_balancer_balanced">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="104"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="110"/>
       <source>Balanced</source>
       <translation>Gebalanceerd</translation>
     </message>
     <message id="lynxionsystem_balancer_imbalance">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="110"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="116"/>
       <source>Imbalance</source>
       <translation>Onbalans</translation>
     </message>
@@ -7353,12 +7358,12 @@ See documentation for further information.</oldsource>
       <translation>Bedraad</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../pages/BriefPage.qml" line="155"/>
+      <location filename="../../pages/BriefPage.qml" line="153"/>
       <source>Brief</source>
       <translation type="unfinished">Kort</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="488"/>
+      <location filename="../../pages/BriefPage.qml" line="486"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Hoge systeembelasting, sluit het zijpaneel om CPU belasting te verminderen</translation>
     </message>
@@ -7399,7 +7404,7 @@ See documentation for further information.</oldsource>
       <translation>Trackers</translation>
     </message>
     <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="98"/>
       <source>RS devices</source>
       <translation>RS apparaten</translation>
     </message>
@@ -7611,7 +7616,7 @@ See documentation for further information.</oldsource>
       <translation>Aanraakscherm uitgeschakeld</translation>
     </message>
     <message id="notifications_acknowledge_alerts">
-      <location filename="../../components/StatusBar.qml" line="127"/>
+      <location filename="../../components/StatusBar.qml" line="170"/>
       <source>Acknowledge alerts</source>
       <translation>Waarschuwingen bevestigen</translation>
     </message>
@@ -8109,7 +8114,7 @@ Nadat er een nieuw netwerk is toegevoegd/ingeschakeld, moet het eenmalig goedgek
       <translation>Temperatuur dynamo</translation>
     </message>
     <message id="engine_temperature">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="90"/>
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="98"/>
       <source>Engine Temperature</source>
       <translation>Temperatuur motor</translation>
     </message>
@@ -8575,6 +8580,37 @@ Met een gestroomlijnde navigatie en een frisse look is alles waar je van houdt n
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
       <source>Runtime until service</source>
       <translation>Bedrijfstijd tot onderhoud</translation>
+    </message>
+    <message id="batteryalarms_high_current">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
+      <source>High current</source>
+      <translation/>
+    </message>
+    <message id="batteryalarms_bms_cable">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="169"/>
+      <source>BMS cable fault</source>
+      <translation/>
+    </message>
+    <message id="batteryalarms_contactor">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="176"/>
+      <source>Bad contactor</source>
+      <translation/>
+    </message>
+    <message id="lynxionsystem_cells_per_battery">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="43"/>
+      <source>Cells per battery</source>
+      <translation/>
+    </message>
+    <message id="alternator_wakespeed_utilization">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="75"/>
+      <source>Utilization</source>
+      <translation/>
+    </message>
+    <message id="controlcard_evcs_title">
+      <location filename="../../pages/controlcards/EVCSCard.qml" line="24"/>
+      <source>EVCS (%1)</source>
+      <extracomment>%1 = the EVCS name</extracomment>
+      <translation/>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
