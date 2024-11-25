@@ -83,7 +83,7 @@ Item {
 		}
 		font.pixelSize: flat ? Theme.font_size_body1 : Theme.font_size_body2
 		wrapMode: Text.Wrap
-		width: root.availableWidth - content.width
+		width: root.availableWidth - content.width - Theme.geometry_listItem_content_spacing
 	}
 
 	Row {
