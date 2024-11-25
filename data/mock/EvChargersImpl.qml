@@ -110,6 +110,7 @@ QtObject {
 				Global.mockDataSimulator.setMockValue(serviceUid + "/StartStop", 1)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/AutoStart", 1)
 				Global.mockDataSimulator.setMockValue(serviceUid + "/EnableDisplay", 1)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/SetCurrent", 16)
 
 				// Device info
 				Global.mockDataSimulator.setMockValue(serviceUid + "/Mgmt/Connection", serviceUid)
