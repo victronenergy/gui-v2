@@ -20,19 +20,17 @@ ModalDialog {
 		Repeater {
 			id: repeater
 			model: Global.ess.stateModel
-			delegate: Component {
-				Column {
-					width: parent.width
+			delegate: Column {
+				width: parent.width
 
-					ListRadioButton {
-						flat: true
-						checked: modelData.value === root.essMode
-						text: modelData.display
-						onClicked: root.essMode = modelData.value
-					}
-
-					SeparatorBar { visible: model.index !== repeater.count - 1 }
+				ListRadioButton {
+					flat: true
+					checked: modelData.value === root.essMode
+					text: modelData.display
+					onClicked: root.essMode = modelData.value
 				}
+
+				SeparatorBar { visible: model.index !== repeater.count - 1 }
 			}
 		}
 	}
