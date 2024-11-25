@@ -289,6 +289,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/dialogs/DialogShadow.qml
     components/dialogs/VrmInstanceSwapDialog.qml
     components/dialogs/ESSMinimumSOCDialog.qml
+    components/dialogs/EvcsChargerModeDialog.qml
     components/dialogs/GeneratorDialog.qml
     components/dialogs/GeneratorStartDialog.qml
     components/dialogs/GeneratorStopDialog.qml
@@ -450,6 +451,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/SettingsPage.qml
     pages/TanksTab.qml
     pages/controlcards/ESSCard.qml
+    pages/controlcards/EVCSCard.qml
     pages/controlcards/GeneratorCard.qml
     pages/controlcards/InverterChargerCard.qml
     pages/controlcards/SwitchesCard.qml
