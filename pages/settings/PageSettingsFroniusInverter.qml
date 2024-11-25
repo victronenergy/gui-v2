@@ -18,6 +18,12 @@ Page {
 		uid: bindPrefix + "/PhaseCount"
 	}
 
+	VeQuickItem {
+		id: limiterSupportedItem
+
+		uid: bindPrefix + "/LimiterSupported"
+	}
+
 	GradientListView {
 		model: ObjectModel {
 			PvInverterPositionRadioButtonGroup {
@@ -48,9 +54,27 @@ Page {
 			}
 
 			ListSwitch {
+				id: isActive
 				//% "Show"
 				text: qsTrId("page_settings_fronius_inverter_show")
 				dataItem.uid: bindPrefix + "/IsActive"
+			}
+
+			ListRadioButtonGroup {
+				//% "Power limiting"
+				text: qsTrId("page_settings_fronius_inverter_power_limiting")
+				dataItem.uid: bindPrefix + "/EnableLimiter"
+				allowed: isActive.dataItem.value === 1 && limiterSupportedItem.value === 1
+				optionModel: [
+					{ display: CommonWords.disabled, value: 0 },
+					{ display: CommonWords.enabled, value: 1 }
+				]
+				bottomContentChildren: [
+					ListLabel {
+						//% "This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation."
+						text: qsTrId("page_settings_fronius_inverter_power_limiting_label")
+					}
+				]
 			}
 		}
 	}
