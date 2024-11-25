@@ -18,8 +18,6 @@ QtObject {
 			const inputObj = inputComponent.createObject(root, {
 				serviceUid: "mock/com.victronenergy.digitalinput.ttyUSB" + deviceInstanceNum,
 				deviceInstance: deviceInstanceNum,
-				type: Math.random() * VenusOS.DigitalInput_Type_Generator,
-				state: Math.random() * VenusOS.DigitalInput_State_Stopped
 			})
 		}
 	}
@@ -29,6 +27,8 @@ QtObject {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("Digital input %1".arg(deviceInstance))
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Type", Math.floor(Math.random() * VenusOS.DigitalInput_Type_Generator))
+				Global.mockDataSimulator.setMockValue(serviceUid + "/State", Math.floor(Math.random() * VenusOS.DigitalInput_State_Stopped))
 			}
 		}
 	}
