@@ -24,6 +24,27 @@ QtObject {
 
 	readonly property var maxCurrentPresets: [6, 8, 10, 14, 16, 24, 32].map(function(v) { return { value: v } })
 
+	readonly property var modeOptionModel: [
+		{
+			display: chargerModeToText(VenusOS.Evcs_Mode_Manual),
+			value: VenusOS.Evcs_Mode_Manual,
+			//% "Start and stop the process yourself. Use this for quick charges and close monitoring."
+			caption: qsTrId("evcs_manual_caption")
+		},
+		{
+			display: Global.evChargers.chargerModeToText(VenusOS.Evcs_Mode_Auto),
+			value: VenusOS.Evcs_Mode_Auto,
+			//% "Starts and stops based on the battery charge level. Optimal for overnight and extended charges to avoid overcharging."
+			caption: qsTrId("evcs_auto_caption")
+		},
+		{
+			display: Global.evChargers.chargerModeToText(VenusOS.Evcs_Mode_Scheduled),
+			value: VenusOS.Evcs_Mode_Scheduled,
+			//% "Lower electricity rates during off-peak hours or if you want to ensure that your EV is fully charged and ready to go at a specific time."
+			caption: qsTrId("evcs_scheduled_caption")
+		}
+	]
+
 	function addCharger(evCharger) {
 		if (model.addDevice(evCharger)) {
 			updateTotals()

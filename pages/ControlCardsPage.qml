@@ -56,6 +56,20 @@ Page {
 				spacing: Theme.geometry_controlCardsPage_spacing
 
 				Repeater {
+					model: Global.evChargers.model
+
+					EVCSCard {
+						width: root.cardWidth
+						evCharger: model.device
+					}
+				}
+			}
+
+			Row {
+				height: cardsView.height
+				spacing: Theme.geometry_controlCardsPage_spacing
+
+				Repeater {
 					model: Global.generators.model
 
 					GeneratorCard {
