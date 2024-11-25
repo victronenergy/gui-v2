@@ -15,7 +15,9 @@ QtObject {
 		for (let i = 0; i < 3; ++i) {
 			createCharger({
 				position: i % 2 === 0 ? VenusOS.Evcs_Position_ACInput : VenusOS.Evcs_Position_ACOutput,
-				nrOfPhases: i + 1
+				nrOfPhases: i + 1,
+				status: Math.floor(Math.random() * VenusOS.Evcs_Status_Charged),
+				mode: Math.floor(Math.random() * VenusOS.Evcs_Mode_Scheduled),
 			})
 		}
 		createEnergyMeter()
@@ -91,7 +93,7 @@ QtObject {
 				interval: 3000
 
 				onTriggered: {
-					evCharger._status.setValue(Math.random() * VenusOS.Evcs_Status_OverheatingDetected)
+					evCharger._status.setValue(Math.floor(Math.random() * VenusOS.Evcs_Status_OverheatingDetected))
 				}
 			}
 

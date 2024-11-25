@@ -24,6 +24,7 @@ QtObject {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("PulseMeter %1".arg(deviceInstance))
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Aggregate", Math.random() * 100)
 			}
 		}
 	}
