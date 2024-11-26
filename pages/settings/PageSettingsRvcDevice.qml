@@ -21,17 +21,17 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.model_name
 				dataItem.uid: root.bindPrefix + "/ModelName"
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.manufacturer
 				dataItem.uid: root.bindPrefix + "/ManufacturerName"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Source Address"
 				text: qsTrId("settings_rvc_source_address")
 				secondaryText: Utils.toHexFormat(dataItem.value)
@@ -42,17 +42,17 @@ Page {
 				bindPrefix: root.bindPrefix
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.serial_number
 				dataItem.uid: root.bindPrefix + "/Serial"
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.unique_identity_number
 				dataItem.uid: root.bindPrefix + "/RvcUniqueNumber"
 			}
 
-			ListTextItem {
+			ListText {
 				id: vrmInstance
 
 				text: CommonWords.vrm_instance

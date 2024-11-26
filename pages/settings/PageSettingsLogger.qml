@@ -81,7 +81,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "VRM Portal ID"
 				text: qsTrId("settings_vrm_portal_id")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/UniqueId"
@@ -130,7 +130,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Last contact"
 				text: qsTrId("settings_last_contact")
 				dataItem.uid: root.loggerServiceUid + "/Vrm/TimeLastContact"
@@ -145,7 +145,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				id: connectionStatus
 
 				// Status of vrmlogger
@@ -181,7 +181,7 @@ Page {
 				allowed: !anyError
 			}
 
-			ListTextItem {
+			ListText {
 				function stringForErrorCode(errorCode) {
 					switch (errorCode) {
 					case 0:
@@ -235,14 +235,14 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Connection status (MQTT Real-time channel)"
 				text: qsTrId("settings_connection_error_realtime_channel")
 				secondaryText: connectionStatus.mqttRealtimeStatus.value || ''
 				allowed: !connectionStatus.allowed && connectionStatus.mqttRealtimeConnected.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Connection status (MQTT RPC channel)"
 				text: qsTrId("settings_connection_error_rpc_channel")
 				secondaryText: connectionStatus.mqttRpcStatus.value || ''
@@ -305,7 +305,7 @@ Page {
 				allowed: !!dataItem.value
 			}
 
-			ListTextItem { // This 'flickers' between values for ~30s after inserting a usb stick. Dbus-spy shows that the underlying data point flickers also. Old gui also flickers.
+			ListText { // This 'flickers' between values for ~30s after inserting a usb stick. Dbus-spy shows that the underlying data point flickers also. Old gui also flickers.
 				//% "Free disk space"
 				text: qsTrId("settings_vrm_free_disk_space")
 				secondaryText: Utils.qtyToString(dataItem.value,
@@ -318,7 +318,7 @@ Page {
 
 			MountStateListButton {}
 
-			ListTextItem {
+			ListText {
 				//% "Stored records"
 				text: qsTrId("settings_vrm_stored_records")
 				dataItem.uid: root.loggerServiceUid + "/Buffer/Count"
@@ -326,7 +326,7 @@ Page {
 				secondaryText: qsTrId("settings_vrm_records_count").arg(dataItem.value ? dataItem.value : 0)
 			}
 
-			ListTextItem {
+			ListText {
 				id: oldestBacklogItemAge
 
 				property var timeNow: Math.round(new Date() / 1000)

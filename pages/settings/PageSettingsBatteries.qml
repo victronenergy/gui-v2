@@ -82,7 +82,7 @@ Page {
 				Page {
 					GradientListView {
 						model: ObjectModel {
-							ListTextItem {
+							ListText {
 								text: root._visibleText
 								//% "Active battery monitor"
 								secondaryText: qsTrId("settings_batteries_active_battery_monitor")

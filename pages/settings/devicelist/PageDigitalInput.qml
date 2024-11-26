@@ -14,7 +14,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListTextItem {
+			ListText {
 				text: CommonWords.state
 				dataItem.uid: root.bindPrefix + "/State"
 				secondaryText: Global.digitalInputs.inputStateToText(dataItem.value)

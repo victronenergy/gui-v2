@@ -213,14 +213,14 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "IPv4"
 				text: qsTrId("settings_tailscale_ipv4")
 				dataItem.uid: root.tailscaleServiceUid + "/IPv4"
 				allowed: dataItem.isValid && dataItem.value !== "" && root.tailscaleConnected
 			}
 
-			ListTextItem {
+			ListText {
 				//% "IPv6"
 				text: qsTrId("settings_tailscale_ipv6")
 				dataItem.uid: root.tailscaleServiceUid + "/IPv6"

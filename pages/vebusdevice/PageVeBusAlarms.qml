@@ -25,7 +25,7 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.vebus_error
 				dataItem.uid: veBusDevice.serviceUid + "/VebusError"
 			}

@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListTextItem {
+ListText {
 	//% "Alarm state"
 	text: qsTrId("list_alarm_state")
 	allowed: defaultAllowed && dataItem.isValid

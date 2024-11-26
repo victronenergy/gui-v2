@@ -71,7 +71,7 @@ ObjectModel {
 		]
 	}
 
-	ListTextItem {
+	ListText {
 		//% "Current run time"
 		text: qsTrId("settings_page_genset_generator_run_time")
 		secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
@@ -79,7 +79,7 @@ ObjectModel {
 		allowed: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
 	}
 
-	ListTextItem {
+	ListText {
 		//% "Control status"
 		text: qsTrId("ac-in-genset_auto_control_status")
 		secondaryText: activeCondition.isValid ? Global.generators.stateAndCondition(generatorState.value, activeCondition.value) : "--"
@@ -102,7 +102,7 @@ ObjectModel {
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
 	}
 
-	ListTextItem {
+	ListText {
 		//% "Genset status"
 		text: qsTrId("ac-in-genset_status")
 		secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
@@ -180,7 +180,7 @@ ObjectModel {
 		}
 	}
 
-	ListTextItem {
+	ListText {
 		//% "Remote start mode"
 		text: qsTrId("ac-in-genset_remote_start_mode")
 		dataItem.uid: root.bindPrefix + "/RemoteStartModeEnabled"
@@ -273,7 +273,7 @@ ObjectModel {
 							unit: VenusOS.Units_Volt_DC
 						}
 
-						ListTextItem {
+						ListText {
 							//% "Number of starts"
 							text: qsTrId("ac-in-genset_number_of_starts")
 							dataItem.uid: root.bindPrefix + "/Engine/Starts"
@@ -335,7 +335,7 @@ ObjectModel {
 							enabled: bmsControlled.dataItem.value === 0
 						}
 
-						ListTextItem {
+						ListText {
 							//% "The charge voltage is currently controlled by the BMS."
 							text: qsTrId("genset_charge_voltage_controlled_by_bms")
 							allowed: defaultAllowed && bmsControlled.dataItem.value === 1
@@ -349,7 +349,7 @@ ObjectModel {
 							allowed: defaultAllowed && dataItem.isValid
 						}
 
-						ListTextItem {
+						ListText {
 							id: bmsControlled
 
 							//% "BMS Controlled"

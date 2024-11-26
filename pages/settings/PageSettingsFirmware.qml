@@ -14,7 +14,7 @@ Page {
 
 		model: ObjectModel {
 
-			ListTextItem {
+			ListText {
 				id: remotePort
 
 				text: CommonWords.firmware_version
@@ -22,7 +22,7 @@ Page {
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Build date/time"
 				text: qsTrId("settings_build_date_time")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"

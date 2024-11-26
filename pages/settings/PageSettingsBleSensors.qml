@@ -73,7 +73,7 @@ Page {
 								dynamicSortFilter: true
 								filterFlags: VeQItemSortTableModel.FilterInvalid
 							}
-							delegate: ListTextItem {
+							delegate: ListText {
 								text: model.item.itemParent().id
 								dataItem.uid: model.item.uid
 							}

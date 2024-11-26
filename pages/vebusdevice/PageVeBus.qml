@@ -83,7 +83,7 @@ Page {
 				]
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.state
 				secondaryText: Global.system.systemStateToText(Global.system.state)
 			}
@@ -136,7 +136,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Charging the battery to 100%"
 				text: qsTrId("vebus_device_charging_to_100")
 				//% "In progress"

@@ -133,7 +133,7 @@ Page {
 				suffix: "%"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Current offset"
 				text: qsTrId("batterysettingsbattery_current_offset")
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/CurrentOffset"

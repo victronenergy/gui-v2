@@ -44,7 +44,7 @@ Page {
 		ObjectModel {
 			id: modemConnected
 
-			ListTextItem {
+			ListText {
 				id: status
 
 				//% "Internet"
@@ -53,7 +53,7 @@ Page {
 				dataItem.uid: bindPrefix + "/Connected"
 			}
 
-			ListTextItem {
+			ListText {
 				id: carrier
 
 				//% "Carrier"
@@ -94,7 +94,7 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Sim status"
 				text: qsTrId("page_settings_gsm_sim_status")
 				secondaryText: {
@@ -141,7 +141,7 @@ Page {
 				allowed: dataItem.isValid && [11, 16].indexOf(simStatus.value)  > -1
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.ip_address
 				dataItem.uid: bindPrefix + "/IP"
 				allowed: status.dataItem.value === 1
@@ -219,7 +219,7 @@ Page {
 				allowed: useAuth.checked
 			}
 
-			ListTextItem {
+			ListText {
 				//% "IMEI"
 				text: qsTrId("page_settings_gsm_imei")
 				dataItem.uid: bindPrefix + "/IMEI"

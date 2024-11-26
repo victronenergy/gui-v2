@@ -22,7 +22,7 @@ PageDeviceInfo {
 			Repeater {
 				model: VeBusDeviceInfoModel { }
 
-				ListTextItem {
+				ListText {
 					text: displayText
 					dataItem.uid: root.bindPrefix + pathSuffix
 				}

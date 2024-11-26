@@ -111,7 +111,7 @@ Page {
 				]
 			}
 
-			ListTextItem {
+			ListText {
 				id: em24SwitchPos
 				//% "Switch position"
 				text: qsTrId("ac-in-setup_switch_position")

@@ -40,26 +40,26 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.low_voltage_alarms
 				dataItem.uid: root.bindPrefix + "/History/LowVoltageAlarms"
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.high_voltage_alarms
 				dataItem.uid: root.bindPrefix + "/History/HighVoltageAlarms"
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Low aux voltage alarms"
 				text: qsTrId("dcmeter_history_low_aux_voltage_alarms")
 				dataItem.uid: visible ? root.bindPrefix + "/History/LowStarterVoltageAlarms" : ""
 				allowed: defaultAllowed && root.showStarterVoltage
 			}
 
-			ListTextItem {
+			ListText {
 				//% "High aux voltage alarms"
 				text: qsTrId("dcmeter_history_high_aux_voltage_alarms")
 				dataItem.uid: visible ? root.bindPrefix + "/History/HighStarterVoltageAlarms" : ""

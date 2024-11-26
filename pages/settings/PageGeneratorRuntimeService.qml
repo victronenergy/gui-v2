@@ -43,7 +43,7 @@ Page {
 
 		model: ObjectModel {
 
-			ListTextItem {
+			ListText {
 				//% "Total run time"
 				text: qsTrId("page_settings_run_time_and_service_total_run_time")
 				allowed: gensetOperatingHours.isValid
@@ -76,7 +76,7 @@ Page {
 					Page {
 						GradientListView {
 							model: _dates
-							delegate: ListTextItem {
+							delegate: ListText {
 								text: Qt.formatDate(new Date(parseInt(_dates[index]) * 1000), "dd-MM-yyyy") // TODO: locale-specific date format?
 								secondaryText: Utils.secondsToString(JSON.parse(historicalData.value)[_dates[index]], false)
 							}
@@ -110,7 +110,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				id: nextTestRun
 				//% "Time to next test run"
 				text: qsTrId("settings_page_run_time_and_service_time_to_next_test_run")
@@ -135,7 +135,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Accumulated running time since last test run"
 				text: qsTrId("settings_page_run_time_and_service_accumulated_running_time")
 				showAccessLevel: VenusOS.User_AccessType_Service
@@ -144,7 +144,7 @@ Page {
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/TestRunIntervalRuntime" : ""
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Runtime until service"
 				text: qsTrId("settings_page_run_time_and_service_time_to_service")
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/ServiceCounter" : ""

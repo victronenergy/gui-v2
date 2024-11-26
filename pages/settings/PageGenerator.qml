@@ -66,7 +66,7 @@ Page {
 			]
 		}
 
-		ListTextItem {
+		ListText {
 			//% "Current run time"
 			text: qsTrId("settings_page_relay_generator_run_time")
 			secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
@@ -74,7 +74,7 @@ Page {
 			allowed: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
 		}
 
-		ListTextItem {
+		ListText {
 			id: state
 
 			text: CommonWords.state

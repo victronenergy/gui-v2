@@ -118,7 +118,7 @@ Page {
 	ObjectModel {
 		id: disconnectedModel
 
-		ListTextItem {
+		ListText {
 			text: CommonWords.state
 			secondaryText: root._wifi
 					 //% "Connection lost"
@@ -131,12 +131,12 @@ Page {
 	ObjectModel {
 		id: connectedModel
 
-		ListTextItem {
+		ListText {
 			text: CommonWords.state
 			secondaryText: Utils.connmanServiceState(service.state)
 		}
 
-		ListTextItem {
+		ListText {
 			//% "Name"
 			text: qsTrId("settings_tcpip_name")
 			secondaryText: !root._wifi
@@ -207,7 +207,7 @@ Page {
 		}
 
 		// TODO: Report MAC address (BSSID) of Wi-Fi networks (see Venus issue #364)
-		ListTextItem {
+		ListText {
 			//% "MAC address"
 			text: qsTrId("settings_tcpip_mac_address")
 			secondaryText: service.macAddress
@@ -277,7 +277,7 @@ Page {
 			saveInput: function() { setServiceProperty("Nameserver", textField.text) }
 		}
 
-		ListTextItem {
+		ListText {
 			id: linklocal
 
 			//% "Link-local IP address"

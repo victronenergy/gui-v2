@@ -67,7 +67,7 @@ Page {
 				stepSize: 100
 			}
 
-			ListTextItem {
+			ListText {
 				id: feedInLimitingActive
 				//% "Feed-in limiting active"
 				text: qsTrId("settings_ess_feed_in_limiting_active")

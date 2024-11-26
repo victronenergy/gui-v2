@@ -21,7 +21,7 @@ Column {
 			  : qsTrId("cycle_history_num").arg(cycle)
 	}
 
-	ListTextItem {
+	ListText {
 		text: CommonWords.status
 		dataItem.uid: root.bindPrefix + "/TerminationReason"
 		secondaryText: {
@@ -48,7 +48,7 @@ Column {
 		}
 	}
 
-	ListTextItem {
+	ListText {
 		//% "Elapsed time"
 		text: qsTrId("cycle_history_elapsed_time")
 		secondaryText: Utils.secondsToString(Units.sumRealNumbersList([bulkTime.value, absorptionTime.value, reconditionTime.value, floatTime.value, storageTime.value]), true)
@@ -88,7 +88,7 @@ Column {
 		VeQuickItem { id: endVoltage; uid: root.bindPrefix + "/EndVoltage" }
 	}
 
-	ListTextItem {
+	ListText {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/Error"
 		secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText

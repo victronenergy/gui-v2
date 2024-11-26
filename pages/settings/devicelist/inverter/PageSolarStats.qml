@@ -46,7 +46,7 @@ Page {
 						uidPrefix: root.bindPrefix + "/History/Overall"
 					}
 
-					delegate: ListTextItem {
+					delegate: ListText {
 						text: errorModel.count === 1 ? "" : CommonWords.lastErrorName(model.index)
 						secondaryText: ChargerError.description(model.errorCode)
 					}

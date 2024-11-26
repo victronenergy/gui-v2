@@ -118,7 +118,7 @@ Page {
 				suffix: "s"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Sensor value"
 				text: qsTrId("devicelist_tanksetup_sensor_value")
 				dataItem.uid: root.bindPrefix + "/RawValue"

@@ -44,7 +44,7 @@ Page {
 			text: root._formatName(productName.value, serviceName.value)
 
 			bottomContentChildren: [
-				ListTextItem {
+				ListText {
 					id: serviceDetails
 					implicitHeight: serviceDetails.primaryLabel.height
 					text: root._shortServiceName(serviceName.value)

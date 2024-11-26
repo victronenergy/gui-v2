@@ -13,32 +13,32 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListTextItem {
+			ListText {
 				//% "Capacity"
 				text: qsTrId("lynxionsystem_capacity")
 				dataItem.uid: root.bindPrefix + "/Capacity"
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Batteries"
 				text: qsTrId("lynxionsystem_batteries")
 				dataItem.uid: root.bindPrefix + "/System/NrOfBatteries"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Parallel"
 				text: qsTrId("lynxionsystem_parallel")
 				dataItem.uid: root.bindPrefix + "/System/BatteriesParallel"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Series"
 				text: qsTrId("lynxionsystem_series")
 				dataItem.uid: root.bindPrefix + "/System/BatteriesSeries"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Cells per battery"
 				text: qsTrId("lynxionsystem_cells_per_battery")
 				dataItem.uid: root.bindPrefix + "/System/NrOfCellsPerBattery"
@@ -90,7 +90,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Balancing"
 				text: qsTrId("lynxionsystem_balancing")
 				dataItem.uid: root.bindPrefix + "/Balancing"
@@ -98,7 +98,7 @@ Page {
 				secondaryText: CommonWords.activeOrInactive(dataItem.value)
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Balancer status"
 				text: qsTrId("lynxionsystem_balancer_status")
 				dataItem.uid: root.bindPrefix + "/Balancer/Status"

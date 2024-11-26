@@ -22,7 +22,7 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.state
 				secondaryText: Global.system.systemStateToText(dataItem.value)
 				dataItem.uid: root.bindPrefix + "/State"
@@ -100,7 +100,7 @@ Page {
 				allowed: dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
 				secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText

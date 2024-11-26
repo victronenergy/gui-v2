@@ -14,12 +14,12 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.model_name
 				dataItem.uid: root.bindPrefix + "/ModelName"
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.custom_name
 				dataItem.uid: root.bindPrefix + "/CustomName"
 			}
@@ -35,12 +35,12 @@ Page {
 				dataItem.uid: root.bindPrefix + "/DeviceInstance"
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.manufacturer
 				dataItem.uid: root.bindPrefix + "/Manufacturer"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Network Address"
 				text: qsTrId("settings_vecan_nad")
 				dataItem.uid: root.bindPrefix + "/Nad"
@@ -50,12 +50,12 @@ Page {
 				bindPrefix: root.bindPrefix
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.serial_number
 				dataItem.uid: root.bindPrefix + "/Serial"
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.unique_identity_number
 				dataItem.uid: root.bindPrefix + "/N2kUniqueNumber"
 			}

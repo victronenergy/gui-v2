@@ -327,7 +327,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListTemperature.qml
     components/listitems/ListTextField.qml
     components/listitems/ListTextGroup.qml
-    components/listitems/ListTextItem.qml
+    components/listitems/ListText.qml
     components/listitems/ListTextItemSecondaryLabel.qml
     components/listitems/ListTimeSelector.qml
 

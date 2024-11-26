@@ -38,14 +38,14 @@ Page {
 				value: allowed ? root.history.averageDischarge.value : NaN
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Total charge cycles"
 				text: qsTrId("batteryhistory_total_charge_cycles")
 				allowed: defaultAllowed && root.history.allowsChargeCycles
 				secondaryText: allowed ? root.history.chargeCycles.value : ""
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Number of full discharges"
 				text: qsTrId("batteryhistory_number_of_full_discharges")
 				allowed: defaultAllowed && root.history.allowsFullDischarges
@@ -92,40 +92,40 @@ Page {
 				precision: 3
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Time since last full charge"
 				text: qsTrId("batteryhistory_time_since_last_full_charge")
 				allowed: defaultAllowed && root.history.allowsTimeSinceLastFullCharge
 				secondaryText: allowed ? Utils.secondsToString(root.history.timeSinceLastFullCharge.value) : ""
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Synchronisation count"
 				text: qsTrId("batteryhistory_synchronisation_count")
 				allowed: defaultAllowed && root.history.allowsAutomaticSyncs
 				secondaryText: allowed ? root.history.automaticSyncs.value : ""
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.low_voltage_alarms
 				allowed: defaultAllowed && root.history.allowsLowVoltageAlarms
 				secondaryText: allowed ? root.history.lowVoltageAlarms.value : ""
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.high_voltage_alarms
 				allowed: defaultAllowed && root.history.allowsHighVoltageAlarms
 				secondaryText: allowed ? root.history.highVoltageAlarms.value : ""
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Low starter battery voltage alarms"
 				text: qsTrId("batteryhistory_low_starter_bat_voltage_alarms")
 				allowed: defaultAllowed && root.history.allowsLowStarterVoltageAlarms
 				secondaryText: allowed ? root.history.lowStarterVoltageAlarms.value : ""
 			}
 
-			ListTextItem {
+			ListText {
 				//% "High starter battery voltage alarms"
 				text: qsTrId("batteryhistory_high_starter_bat_voltage_alarms")
 				allowed: defaultAllowed && root.history.allowsHighStarterVoltageAlarms

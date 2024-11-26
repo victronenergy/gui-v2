@@ -23,7 +23,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListTextItem {
+			ListText {
 				text: CommonWords.status
 				dataItem.uid: root.bindPrefix + "/Status"
 				allowed: defaultAllowed && dataItem.isValid

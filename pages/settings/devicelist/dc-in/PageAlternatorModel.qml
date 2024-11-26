@@ -34,28 +34,28 @@ ObjectModel {
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
-	ListTextItem {
+	ListText {
 		text: CommonWords.state
 		secondaryText: Global.system.systemStateToText(dataItem.value)
 		allowed: defaultAllowed && dataItem.isValid
 		dataItem.uid: root.bindPrefix + "/State"
 	}
 
-	ListTextItem {
+	ListText {
 		text: CommonWords.network_status
 		secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
 		dataItem.uid: root.bindPrefix + "/Link/NetworkStatus"
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
-	ListTextItem {
+	ListText {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/ErrorCode"
 		allowed: defaultAllowed && dataItem.isValid
 		secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 	}
 
-	ListTextItem {
+	ListText {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/Error/0/Id"
 		allowed: defaultAllowed && dataItem.isValid
@@ -116,7 +116,7 @@ ObjectModel {
 		ObjectModel {
 			id: overallHistoryModel
 
-			ListTextItem {
+			ListText {
 				//% "Operation time"
 				text: qsTrId("alternator_wakespeed_operation_time")
 				secondaryText: Utils.secondsToString(dataItem.value, true)
@@ -133,28 +133,28 @@ ObjectModel {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Cycles started"
 				text: qsTrId("alternator_wakespeed_cycles_started")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesStarted"
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Cycles completed"
 				text: qsTrId("alternator_wakespeed_cycles_completed")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesCompleted"
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Number of power-ups"
 				text: qsTrId("alternator_wakespeed_nr_of_power_ups")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfPowerups"
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Number of deep discharges"
 				text: qsTrId("alternator_wakespeed_nr_of_deep_discharges")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfDeepDischarges"

@@ -86,7 +86,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				id: currentVersion
 
 				//: %1 = current firmware version, %2 = current firmware build number
@@ -96,7 +96,7 @@ Page {
 				allowed: currentVersionItem.isValid && root._switchingEnabled
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Backup firmware not available"
 				text: qsTrId("settings_firmware_backup_not_available")
 				allowed: !currentVersion.visible && !backupVersion.visible && !root._rebooting

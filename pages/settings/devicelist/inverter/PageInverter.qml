@@ -33,7 +33,7 @@ Page {
 				]
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.state
 				secondaryText: Global.system.systemStateToText(dataItem.value)
 				dataItem.uid: root.bindPrefix + "/State"
@@ -110,7 +110,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
 				allowed: defaultAllowed && root.isInverterCharger

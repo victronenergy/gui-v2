@@ -38,7 +38,7 @@ Page {
 				horizontalAlignment: Text.AlignHCenter
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Time of last error"
 				text: qsTrId("settings_modbus_time_of_last_error")
 				secondaryText: timestamp.isValid ? Qt.formatDateTime(new Date(timestamp.value * 1000), "yyyy-MM-dd hh:mm:ss") : ""

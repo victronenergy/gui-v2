@@ -119,12 +119,12 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				text: "Text only"
 				secondaryText: "Status text"
 			}
 
-			ListTextItem {
+			ListText {
 				text: "Text only, from dbus source"
 				dataItem.uid: Global.system.serviceUid + "/FirmwareBuild"
 			}
@@ -283,7 +283,7 @@ Page {
 				]
 			}
 
-			ListTextItem {
+			ListText {
 				text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum occaecat cupidatat"
 				secondaryText: "Occaecat cupidatat"
 			}

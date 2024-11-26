@@ -57,7 +57,7 @@ Page {
 													   )
 			}
 
-			ListTextItem {
+			ListText {
 				text: "Multi SOC"
 				dataItem.uid: root.bindPrefix + "/Soc"
 			}

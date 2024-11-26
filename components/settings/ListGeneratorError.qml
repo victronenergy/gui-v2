@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListTextItem {
+ListText {
 	id: root
 
 	text: CommonWords.error

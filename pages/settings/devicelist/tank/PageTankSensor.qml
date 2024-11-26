@@ -13,7 +13,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListTextItem {
+			ListText {
 				text: CommonWords.status
 				dataItem.uid: root.bindPrefix + "/Status"
 				secondaryText: Global.tanks.statusToText(dataItem.value)

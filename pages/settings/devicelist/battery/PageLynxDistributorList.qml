@@ -85,7 +85,7 @@ Page {
 							allowed: !distributorDelegate.connected
 						}
 						model: distributorDelegate.connected ? distributorDelegate.fuseInfoList : 0
-						delegate: ListTextItem {
+						delegate: ListText {
 							//: %1 = name of this fuse
 							//% "Fuse %1"
 							text: modelData.fuseName || qsTrId("lynxdistributor_fuse_name").arg(modelData.fuseNumber + 1)
