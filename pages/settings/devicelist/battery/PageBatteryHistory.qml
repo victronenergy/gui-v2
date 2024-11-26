@@ -148,13 +148,13 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: CommonWords.minimum_temperature
 				allowed: defaultAllowed && root.history.allowsMinimumTemperature
 				value: allowed ? root.history.minimumTemperature.value : NaN
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: CommonWords.maximum_temperature
 				allowed: defaultAllowed && root.history.allowsMaximumTemperature
 				value: allowed ? root.history.maximumTemperature.value : NaN

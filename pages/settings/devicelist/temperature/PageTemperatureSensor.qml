@@ -49,7 +49,7 @@ Page {
 				}
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: CommonWords.temperature
 				dataItem.uid: bindPrefix + "/Temperature"
 				precision: 0

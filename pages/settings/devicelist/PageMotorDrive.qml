@@ -21,7 +21,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				//% "Motor Temperature"
 				text: qsTrId("devicelist_motordrive_motortemperature")
 				dataItem.uid: root.bindPrefix + "/Motor/Temperature"
@@ -50,7 +50,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				//% "Controller Temperature"
 				text: qsTrId("devicelist_motordrive_controllertemperature")
 				dataItem.uid: root.bindPrefix + "/Controller/Temperature"

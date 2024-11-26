@@ -35,7 +35,7 @@ Page {
 				unit: Global.systemSettings.volumeUnit
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: CommonWords.temperature
 				dataItem.uid: root.bindPrefix + "/Temperature"
 				allowed: defaultAllowed && dataItem.isValid

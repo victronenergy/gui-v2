@@ -26,7 +26,7 @@ ObjectModel {
 		bindPrefix: root.bindPrefix
 	}
 
-	ListTemperatureItem {
+	ListTemperature {
 		text: CommonWords.temperature
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 		allowed: defaultAllowed && dataItem.isValid

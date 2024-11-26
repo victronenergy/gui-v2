@@ -70,7 +70,7 @@ Page {
 				}
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 				allowed: defaultAllowed && dataItem.isValid

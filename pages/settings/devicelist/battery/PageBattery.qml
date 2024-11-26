@@ -164,14 +164,14 @@ Page {
 				unit: VenusOS.Units_Percentage
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.battery.serviceUid + "/Dc/0/Temperature"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: Global.systemSettings.temperatureUnit
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				//% "Air temperature"
 				text: qsTrId("battery_air_temp")
 				dataItem.uid: root.battery.serviceUid + "/AirTemperature"

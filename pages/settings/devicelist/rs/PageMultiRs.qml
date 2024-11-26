@@ -52,7 +52,7 @@ Page {
 				unit: VenusOS.Units_Percentage
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 				allowed: dataItem.isValid
