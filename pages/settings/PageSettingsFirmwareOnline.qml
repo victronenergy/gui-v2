@@ -66,7 +66,7 @@ Page {
 				}
 			}
 
-			FirmwareCheckListButton {
+			ListFirmwareCheckButton {
 				//% "Check for updates"
 				text: qsTrId("settings_firmware_check_for_updates")
 				updateType: VenusOS.Firmware_UpdateType_Online
