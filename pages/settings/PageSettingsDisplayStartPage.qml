@@ -54,7 +54,7 @@ Page {
 					}
 				}
 				bottomContentChildren: [
-					ListLabel {
+					PrimaryListLabel {
 						width: Math.min(implicitWidth, startPageNavigation.width)
 						topPadding: 0
 						bottomPadding: 0
@@ -75,7 +75,7 @@ Page {
 				optionModel: root._timeoutOptions()
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPageTimeout"
 				bottomContentChildren: [
-					ListLabel {
+					PrimaryListLabel {
 						width: Math.min(implicitWidth, startPageTimeout.width)
 						topPadding: 0
 						bottomPadding: 0
@@ -106,7 +106,7 @@ Page {
 						dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPage"
 						invertSourceValue: true
 						bottomContentChildren: [
-							ListLabel {
+							PrimaryListLabel {
 								width: Math.min(implicitWidth, startPageMode.width)
 								topPadding: 0
 								bottomPadding: 0

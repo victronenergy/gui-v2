@@ -309,7 +309,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListIpAddressField.qml
     components/listitems/ListItem.qml
     components/listitems/ListItemBackground.qml
-    components/listitems/ListLabel.qml
+    components/listitems/PrimaryListLabel.qml
     components/listitems/ListNavigationItem.qml
     components/listitems/ListPortField.qml
     components/listitems/ListRadioButton.qml

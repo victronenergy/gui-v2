@@ -14,7 +14,7 @@ Page {
 		id: settingsListView
 
 		model: ObjectModel {
-			ListLabel {
+			PrimaryListLabel {
 				text: "This page demonstrates the components that can be used to build settings pages."
 			}
 
@@ -273,7 +273,7 @@ Page {
 				text: "Custom bottom content item"
 
 				bottomContentChildren: [
-					ListLabel {
+					PrimaryListLabel {
 						width: Math.min(implicitWidth, customListItem.maximumContentWidth)
 						topPadding: 0
 						bottomPadding: 0

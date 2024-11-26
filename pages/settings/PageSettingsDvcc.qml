@@ -14,7 +14,7 @@ Page {
 		id: dvccSettings
 
 		model: ObjectModel {
-			ListLabel {
+			PrimaryListLabel {
 				//% "<b>CAUTION:</b> Read the manual before adjusting."
 				text: qsTrId("settings_dvcc_instructions")
 				allowed: commonSettings.userHasWriteAccess

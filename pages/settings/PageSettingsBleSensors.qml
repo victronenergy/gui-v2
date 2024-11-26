@@ -48,7 +48,7 @@ Page {
 				allowed: enable.checked
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				//% "Continuous scanning may interfere with Wi-Fi operation."
 				text: qsTrId("settings_continuous_scan_may_interfere")
 				allowed: contScan.checked

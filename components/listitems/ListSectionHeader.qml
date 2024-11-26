@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListLabel {
+PrimaryListLabel {
 	topPadding: Theme.geometry_listSectionHeader_topPadding
 	bottomPadding: Theme.geometry_listSectionHeader_bottomPadding
 	color: Theme.color_font_secondary

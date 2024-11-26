@@ -144,7 +144,7 @@ Page {
 				allowed: root._isVecan || root._isRvc
 				dataItem.uid: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
 
-				bottomContentChildren: ListLabel {
+				bottomContentChildren: PrimaryListLabel {
 					allowed: text.length > 0
 					color: Theme.color_font_secondary
 					text: root._isVecan
@@ -188,7 +188,7 @@ Page {
 						: 0
 
 				bottomContentChildren: [
-					ListLabel {
+					PrimaryListLabel {
 						id: uniqueIdConflictLabel
 						topPadding: 0
 						bottomPadding: 0
@@ -196,7 +196,7 @@ Page {
 						text: qsTrId("settings_canbus_unique_id_conflict")
 						allowed: vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1
 					},
-					ListLabel {
+					PrimaryListLabel {
 						id: uniqueIdOkLabel
 						topPadding: 0
 						bottomPadding: 0

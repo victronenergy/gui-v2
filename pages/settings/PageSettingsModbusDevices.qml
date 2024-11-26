@@ -33,7 +33,7 @@ Page {
 
 
 	GradientListView {
-		header: ListLabel {
+		header: PrimaryListLabel {
 			horizontalAlignment: Text.AlignHCenter
 			allowed: !_devices.value
 			//% "No Modbus devices saved"

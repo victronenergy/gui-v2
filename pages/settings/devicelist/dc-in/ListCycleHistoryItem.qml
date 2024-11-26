@@ -12,7 +12,7 @@ Column {
 	property int cycle
 	property string bindPrefix
 
-	ListLabel {
+	PrimaryListLabel {
 		text: cycle == 0
 				//% "Active cycle"
 			  ? qsTrId("cycle_history_active")

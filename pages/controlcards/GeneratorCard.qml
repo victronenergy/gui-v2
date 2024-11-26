@@ -61,7 +61,7 @@ ControlCard {
 		checked: root.generator.autoStart
 		flat: true
 		bottomContent.children: [
-			ListLabel {
+			PrimaryListLabel {
 				//% "Start and stop the generator based on the configured autostart conditions."
 				text: qsTrId("controlcard_generator_autostart_conditions")
 				color: Theme.color_font_secondary

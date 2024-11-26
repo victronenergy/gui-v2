@@ -96,7 +96,7 @@ Page {
 				}
 
 				bottomContentChildren: [
-					ListLabel {
+					PrimaryListLabel {
 						allowed: !maxSystemAcInputCurrentSwitch.enabled
 						topPadding: 0
 						bottomPadding: 0
@@ -137,7 +137,7 @@ Page {
 				}
 
 				bottomContentChildren: [
-					ListLabel {
+					PrimaryListLabel {
 						allowed: !maxSystemAcExportCurrentSwitch.enabled
 						topPadding: 0
 						bottomPadding: 0

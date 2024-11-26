@@ -57,7 +57,7 @@ Page {
 				]
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				//% "Flashing LED indicates this CT"
 				text: qsTrId("smappeect_flashing_led_indicates_this_ct")
 				horizontalAlignment: Text.AlignHCenter

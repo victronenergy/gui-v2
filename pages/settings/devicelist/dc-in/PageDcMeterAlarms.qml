@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		header: ListLabel {
+		header: PrimaryListLabel {
 			//% "No alarms"
 			text: qsTrId("dcmeter_alarms_no_alarms")
 			allowed: !lowVoltage.visible

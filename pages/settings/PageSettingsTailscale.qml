@@ -170,7 +170,7 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/Enabled"
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				text: root.serviceState
 				allowed: root.tailscaleEnabled && root.serviceState !== ""
 				horizontalAlignment: Text.AlignHCenter
@@ -277,7 +277,7 @@ Page {
 									}
 								}
 
-								ListLabel {
+								PrimaryListLabel {
 									//% "Explanation:\n\n"
 									//% "This feature, called subnet routes by Tailscale, "
 									//% "allows remote access to other devices in the local network(s).\n\n"

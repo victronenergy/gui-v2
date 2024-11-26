@@ -31,7 +31,7 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				//% "No errors reported"
 				text: lastError.isValid ? lastError.value : qsTrId("settings_modbus_no_errors")
 				allowed: enableModbusTcp.checked

@@ -143,7 +143,7 @@ ListNavigationItem {
 
 							width: parent.width
 
-							ListLabel {
+							PrimaryListLabel {
 								topPadding: 0
 								color: Theme.color_font_secondary
 								text: bottomContentLoader.caption
@@ -209,7 +209,7 @@ ListNavigationItem {
 					Component {
 						id: captionComponent
 
-						ListLabel {
+						PrimaryListLabel {
 							topPadding: 0
 							bottomPadding: 0
 							color: Theme.color_font_secondary

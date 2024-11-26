@@ -16,7 +16,7 @@ Page {
 		id: chargerListView
 
 		model: ObjectModel {
-			ListLabel {
+			PrimaryListLabel {
 				allowed: lowBatteryAlarm.visible || highBatteryAlarm.visible || highTemperatureAlarm.visible || shortCircuitAlarm.visible
 				leftPadding: 0
 				color: Theme.color_listItem_secondaryText
@@ -60,7 +60,7 @@ Page {
 				allowed: dataItem.isValid
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				allowed: root.solarCharger.errorCode > 0
 				leftPadding: 0
 				color: Theme.color_listItem_secondaryText

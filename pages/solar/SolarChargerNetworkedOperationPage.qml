@@ -133,7 +133,7 @@ Page {
 				}
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				id: bmsControlInfoLabel
 
 				//% "BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present."
