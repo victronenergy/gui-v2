@@ -331,7 +331,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/SecondaryListLabel.qml
     components/listitems/ListTimeSelector.qml
 
-    components/settings/ActiveAcInputTextItem.qml
+    components/settings/ListActiveAcInput.qml
     components/settings/AlarmLevelRadioButtonGroup.qml
     components/settings/ChargeScheduleItem.qml
     components/settings/FirmwareCheckListButton.qml

@@ -58,7 +58,7 @@ Page {
 				allowed: dataItem.isValid
 			}
 
-			ActiveAcInputTextItem {
+			ListActiveAcInput {
 				bindPrefix: root.bindPrefix
 			}
 
