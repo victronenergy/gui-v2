@@ -146,7 +146,7 @@ SwipeViewPage {
 				}
 			}
 
-			ListSectionHeader {
+			SectionHeader {
 				id: history
 
 				text: CommonWords.history
