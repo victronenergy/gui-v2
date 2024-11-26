@@ -13,7 +13,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			VolumeUnitRadioButtonGroup {}
+			ListVolumeUnitRadioButtonGroup {}
 
 			ListSwitch {
 				//% "Inverted"

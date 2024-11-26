@@ -50,7 +50,7 @@ Page {
 				}
 			}
 
-			VolumeUnitRadioButtonGroup {
+			ListVolumeUnitRadioButtonGroup {
 				//: Title for a list of units of volume (e.g. cubic meters, liters, gallons)
 				//% "Volume"
 				text: qsTrId("components_volumeunit_volume")

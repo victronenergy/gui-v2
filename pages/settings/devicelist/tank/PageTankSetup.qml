@@ -92,7 +92,7 @@ Page {
 				suffix: "%"
 			}
 
-			VolumeUnitRadioButtonGroup {}
+			ListVolumeUnitRadioButtonGroup {}
 
 			ListNavigation {
 				//% "Custom shape"
