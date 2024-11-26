@@ -20,19 +20,15 @@ OverviewWidget {
 				Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
 					"bindPrefix": batteryUids[0],
 				})
-				return
+			} else {
+				// Assume this is a battery service
+				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml", {
+					"bindPrefix": batteryUids[0]
+				})
 			}
-
-			// Assume this is a battery service
-			const batteryIndex = Global.batteries.model.indexOf(batteryUids[0])
-			if (batteryIndex >= 0) {
-				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
-						{ "battery": Global.batteries.model.deviceAt(batteryIndex) })
-				return
-			}
+		} else {
+			Global.pageManager.pushPage("/pages/battery/BatteryListPage.qml")
 		}
-
-		Global.pageManager.pushPage("/pages/battery/BatteryListPage.qml")
 	}
 
 	readonly property var batteryData: Global.batteries.system

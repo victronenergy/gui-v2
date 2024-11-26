@@ -9,18 +9,22 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var battery
-
+	required property string bindPrefix
 	readonly property bool isFiamm48TL: productId.value === ProductInfo.ProductId_Battery_Fiamm48TL
 	readonly property bool isParallelBms: nrOfBmses.dataItem.isValid
 
 	title: battery.name
 
+	Device {
+		id: battery
+		serviceUid: root.bindPrefix
+	}
+
 	GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
 				text: CommonWords.switch_mode
-				dataItem.uid: root.battery.serviceUid + "/Mode"
+				dataItem.uid: root.bindPrefix + "/Mode"
 				allowed: defaultAllowed && dataItem.isValid
 				optionModel: [
 					{ display: CommonWords.off, value: 4, readOnly: true },
@@ -31,7 +35,7 @@ Page {
 
 			ListText {
 				text: CommonWords.state
-				dataItem.uid: root.battery.serviceUid + "/State"
+				dataItem.uid: root.bindPrefix + "/State"
 				allowed: defaultAllowed && dataItem.isValid
 				secondaryText: {
 					if (!dataItem.isValid) {
@@ -79,7 +83,7 @@ Page {
 
 			ListText {
 				text: CommonWords.error
-				dataItem.uid: root.battery.serviceUid + "/ErrorCode"
+				dataItem.uid: root.bindPrefix + "/ErrorCode"
 				allowed: defaultAllowed && dataItem.isValid
 				secondaryText: BmsError.description(dataItem.value)
 			}
@@ -87,7 +91,7 @@ Page {
 			ListText {
 				//% "Battery bank error"
 				text: qsTrId("battery_bank_error")
-				dataItem.uid: root.battery.serviceUid + "/ErrorCode"
+				dataItem.uid: root.bindPrefix + "/ErrorCode"
 				allowed: defaultAllowed && (errorComm.isValid || errorVoltage.isValid || errorNrOfBatteries.isValid || errorInvalidConfig.isValid)
 				secondaryText: {
 					if (errorComm.isValid && errorComm.value) {
@@ -107,66 +111,86 @@ Page {
 					}
 				}
 
-				VeQuickItem { id: errorComm; uid: root.battery.serviceUid + "/Errors/SmartLithium/Communication" }
-				VeQuickItem { id: errorVoltage; uid: root.battery.serviceUid + "/Errors/SmartLithium/Voltage" }
-				VeQuickItem { id: errorNrOfBatteries; uid: root.battery.serviceUid + "/Errors/SmartLithium/NrOfBatteries" }
-				VeQuickItem { id: errorInvalidConfig; uid: root.battery.serviceUid + "/Errors/SmartLithium/InvalidConfiguration" }
+				VeQuickItem { id: errorComm; uid: root.bindPrefix + "/Errors/SmartLithium/Communication" }
+				VeQuickItem { id: errorVoltage; uid: root.bindPrefix + "/Errors/SmartLithium/Voltage" }
+				VeQuickItem { id: errorNrOfBatteries; uid: root.bindPrefix + "/Errors/SmartLithium/NrOfBatteries" }
+				VeQuickItem { id: errorInvalidConfig; uid: root.bindPrefix + "/Errors/SmartLithium/InvalidConfiguration" }
 			}
 
 			ListQuantityGroup {
 				text: CommonWords.battery
 				textModel: [
-					{ value: root.battery.voltage, unit: VenusOS.Units_Volt_DC },
-					{ value: root.battery.current, unit: VenusOS.Units_Amp },
-					{ value: root.battery.power, unit: VenusOS.Units_Watt }
+					{ value: batteryVoltage.value, unit: VenusOS.Units_Volt_DC },
+					{ value: batteryCurrent.value, unit: VenusOS.Units_Amp },
+					{ value: batteryPower.value, unit: VenusOS.Units_Watt }
 				]
+
+				VeQuickItem {
+					id: batteryVoltage
+					uid: root.bindPrefix + "/Dc/0/Voltage"
+				}
+
+				VeQuickItem {
+					id: batteryCurrent
+					uid: root.bindPrefix + "/Dc/0/Current"
+				}
+
+				VeQuickItem {
+					id: batteryPower
+					uid: root.bindPrefix + "/Dc/0/Power"
+				}
 			}
 
 			ListQuantity {
 				//% "Total Capacity"
 				text: qsTrId("devicelist_battery_total_capacity")
-				dataItem.uid: root.battery.serviceUid + "/Capacity"
+				dataItem.uid: root.bindPrefix + "/Capacity"
 				allowed: defaultAllowed && root.isParallelBms
 				unit: VenusOS.Units_AmpHour
 			}
 
 			ListQuantity {
 				readonly property VeQuickItem _n2kDeviceInstance: VeQuickItem {
-					uid: battery.serviceUid + "/N2kDeviceInstance"
+					uid: root.bindPrefix + "/N2kDeviceInstance"
 				}
 
 				//% "System voltage"
 				text: qsTrId("devicelist_battery_system_voltage")
 				dataItem.uid: BackendConnection.serviceUidFromName("com.victronenergy.battery.lynxparallel" + _n2kDeviceInstance.value, _n2kDeviceInstance.value) + "/Dc/0/Voltage"
-				allowed: defaultAllowed && !root.isParallelBms && root.battery.state === VenusOS.Battery_State_Pending
+				allowed: defaultAllowed && !root.isParallelBms && batteryState.value === VenusOS.Battery_State_Pending
 				unit: VenusOS.Units_Volt_DC
+
+				VeQuickItem {
+					id: batteryState
+					uid: root.bindPrefix + "/State"
+				}
 			}
 
 			ListText {
 				id: nrOfBmses
 				//% "Number of BMSes"
 				text: qsTrId("devicelist_battery_number_of_bmses")
-				dataItem.uid: root.battery.serviceUid + "/NumberOfBmses"
+				dataItem.uid: root.bindPrefix + "/NumberOfBmses"
 				allowed: defaultAllowed && root.isParallelBms
 			}
 
 			ListQuantity {
 				text: CommonWords.state_of_charge
-				value: root.battery.stateOfCharge
+				dataItem.uid: root.bindPrefix + "/Soc"
 				unit: VenusOS.Units_Percentage
 			}
 
 			ListQuantity {
 				//% "State of health"
 				text: qsTrId("battery_state_of_health")
-				dataItem.uid: root.battery.serviceUid + "/Soh"
+				dataItem.uid: root.bindPrefix + "/Soh"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Percentage
 			}
 
 			ListTemperature {
 				text: CommonWords.battery_temperature
-				dataItem.uid: root.battery.serviceUid + "/Dc/0/Temperature"
+				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: Global.systemSettings.temperatureUnit
 			}
@@ -174,14 +198,14 @@ Page {
 			ListTemperature {
 				//% "Air temperature"
 				text: qsTrId("battery_air_temp")
-				dataItem.uid: root.battery.serviceUid + "/AirTemperature"
+				dataItem.uid: root.bindPrefix + "/AirTemperature"
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListQuantity {
 				//% "Starter voltage"
 				text: qsTrId("battery_starter_voltage")
-				dataItem.uid: root.battery.serviceUid + "/Dc/1/Voltage"
+				dataItem.uid: root.bindPrefix + "/Dc/1/Voltage"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
@@ -189,7 +213,7 @@ Page {
 			ListQuantity {
 				//% "Bus voltage"
 				text: qsTrId("battery_bus_voltage")
-				dataItem.uid: root.battery.serviceUid + "/BusVoltage"
+				dataItem.uid: root.bindPrefix + "/BusVoltage"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
@@ -198,7 +222,7 @@ Page {
 				//% "Top section voltage"
 				text: qsTrId("battery_top_section_voltage")
 				allowed: midVoltage.isValid
-				value: midVoltage.isValid && !isNaN(root.battery.voltage) ? root.battery.voltage - midVoltage.value : NaN
+				value: midVoltage.isValid && batteryVoltage.isValid ? batteryVoltage.value - midVoltage.value : NaN
 				unit: VenusOS.Units_Volt_DC
 			}
 
@@ -213,7 +237,7 @@ Page {
 			ListQuantity {
 				//% "Mid-point deviation"
 				text: qsTrId("battery_mid_point_deviation")
-				dataItem.uid: root.battery.serviceUid + "/Dc/0/MidVoltageDeviation"
+				dataItem.uid: root.bindPrefix + "/Dc/0/MidVoltageDeviation"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Percentage
 			}
@@ -221,7 +245,7 @@ Page {
 			ListQuantity {
 				//% "Consumed AmpHours"
 				text: qsTrId("battery_consumed_amphours")
-				dataItem.uid: root.battery.serviceUid + "/ConsumedAmphours"
+				dataItem.uid: root.bindPrefix + "/ConsumedAmphours"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_AmpHour
 			}
@@ -229,7 +253,7 @@ Page {
 			ListQuantity {
 				//% "Bus voltage"
 				text: qsTrId("battery_buss_voltage")
-				dataItem.uid: root.battery.serviceUid + "/BussVoltage"
+				dataItem.uid: root.bindPrefix + "/BussVoltage"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
@@ -237,17 +261,17 @@ Page {
 			ListText {
 				//% "Time-to-go"
 				text: qsTrId("battery_time_to_go")
-				dataItem.uid: root.battery.serviceUid + "/TimeToGo"
+				dataItem.uid: root.bindPrefix + "/TimeToGo"
 				allowed: defaultAllowed && dataItem.seen
-				secondaryText: Utils.secondsToString(root.battery.timeToGo)
+				secondaryText: Utils.secondsToString(dataItem.value)
 			}
 
 			ListRelayState {
-				dataItem.uid: root.battery.serviceUid + "/Relay/0/State"
+				dataItem.uid: root.bindPrefix + "/Relay/0/State"
 			}
 
 			ListAlarmState {
-				dataItem.uid: root.battery.serviceUid + "/Alarms/Alarm"
+				dataItem.uid: root.bindPrefix + "/Alarms/Alarm"
 			}
 
 			ListNavigation {
@@ -256,12 +280,12 @@ Page {
 				allowed: defaultAllowed && batteryDetails.hasAllowedItem
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDetails.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid, "details": batteryDetails })
+							{ "title": text, "bindPrefix": root.bindPrefix, "details": batteryDetails })
 				}
 
 				BatteryDetails {
 					id: batteryDetails
-					bindPrefix: root.battery.serviceUid
+					bindPrefix: root.bindPrefix
 				}
 			}
 
@@ -270,7 +294,7 @@ Page {
 				allowed: !root.isParallelBms
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryAlarms.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}
 
@@ -280,7 +304,7 @@ Page {
 				allowed: moduleAlarmModel.rowCount > 0
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryModuleAlarms.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid, alarmModel: moduleAlarmModel })
+							{ "title": text, "bindPrefix": root.bindPrefix, alarmModel: moduleAlarmModel })
 				}
 			}
 
@@ -289,12 +313,12 @@ Page {
 				allowed: !isFiamm48TL && batteryHistory.hasAllowedItem
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryHistory.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid, "history": batteryHistory })
+							{ "title": text, "bindPrefix": root.bindPrefix, "history": batteryHistory })
 				}
 
 				BatteryHistory {
 					id: batteryHistory
-					bindPrefix: root.battery.serviceUid
+					bindPrefix: root.bindPrefix
 				}
 			}
 
@@ -303,7 +327,7 @@ Page {
 				allowed: hasSettings.value === 1
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatterySettings.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}
 
@@ -315,12 +339,12 @@ Page {
 				allowed: lastError.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 
 				VeQuickItem {
 					id: lastError
-					uid: root.battery.serviceUid + "/Diagnostics/LastErrors/1/Error"
+					uid: root.bindPrefix + "/Diagnostics/LastErrors/1/Error"
 				}
 			}
 
@@ -330,7 +354,7 @@ Page {
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/Page48TlDiagnostics.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}
 
@@ -341,12 +365,12 @@ Page {
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxDistributorList.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 
 				VeQuickItem {
 					id: nrOfDistributors
-					uid: root.battery.serviceUid + "/NrOfDistributors"
+					uid: root.bindPrefix + "/NrOfDistributors"
 				}
 			}
 
@@ -356,12 +380,12 @@ Page {
 				allowed: allowToCharge.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonIo.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 
 				VeQuickItem {
 					id: allowToCharge
-					uid: root.battery.serviceUid + "/Io/AllowToCharge"
+					uid: root.bindPrefix + "/Io/AllowToCharge"
 				}
 			}
 
@@ -371,12 +395,12 @@ Page {
 				allowed: nrOfBatteries.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonSystem.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 
 				VeQuickItem {
 					id: nrOfBatteries
-					uid: root.battery.serviceUid +"/System/NrOfBatteries"
+					uid: root.bindPrefix +"/System/NrOfBatteries"
 				}
 			}
 
@@ -384,7 +408,7 @@ Page {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 			}
 
@@ -394,22 +418,22 @@ Page {
 				allowed: cvl.isValid || ccl.isValid || dcl.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryParameters.qml",
-							{ "title": text, "bindPrefix": root.battery.serviceUid })
+							{ "title": text, "bindPrefix": root.bindPrefix })
 				}
 
 				VeQuickItem {
 					id: cvl
-					uid: root.battery.serviceUid + "/Info/MaxChargeVoltage"
+					uid: root.bindPrefix + "/Info/MaxChargeVoltage"
 				}
 
 				VeQuickItem {
 					id: ccl
-					uid: root.battery.serviceUid + "/Info/MaxChargeCurrent"
+					uid: root.bindPrefix + "/Info/MaxChargeCurrent"
 				}
 
 				VeQuickItem {
 					id: dcl
-					uid: root.battery.serviceUid + "/Info/MaxDischargeCurrent"
+					uid: root.bindPrefix + "/Info/MaxDischargeCurrent"
 				}
 			}
 
@@ -429,7 +453,7 @@ Page {
 
 				VeQuickItem {
 					id: redetect
-					uid: root.battery.serviceUid + "/Redetect"
+					uid: root.bindPrefix + "/Redetect"
 				}
 			}
 		}
@@ -437,17 +461,17 @@ Page {
 
 	VeQuickItem {
 		id: midVoltage
-		uid: root.battery.serviceUid + "/Dc/0/MidVoltage"
+		uid: root.bindPrefix + "/Dc/0/MidVoltage"
 	}
 
 	VeQuickItem {
 		id: productId
-		uid: root.battery.serviceUid + "/ProductId"
+		uid: root.bindPrefix + "/ProductId"
 	}
 
 	VeQuickItem {
 		id: hasSettings
-		uid: root.battery.serviceUid + "/Settings/HasSettings"
+		uid: root.bindPrefix + "/Settings/HasSettings"
 	}
 
 	VeQItemSortTableModel {
@@ -456,7 +480,7 @@ Page {
 		filterRegExp: "\/Module[0-9]\/Id$"
 		filterFlags: VeQItemSortTableModel.FilterInvalid
 		model: VeQItemTableModel {
-			uids: [root.battery.serviceUid + "/Diagnostics"]
+			uids: [root.bindPrefix + "/Diagnostics"]
 		}
 	}
 }
