@@ -176,7 +176,7 @@ Page {
 				value: allowed ? root.history.chargedEnergy.value : NaN
 			}
 
-			ListResetHistoryLabel {
+			ListResetHistory {
 				visible: !clearHistory.visible
 			}
 
