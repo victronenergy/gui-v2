@@ -52,7 +52,7 @@ Page {
 				}
 			}
 
-			PvInverterPositionRadioButtonGroup {
+			ListPvInverterPositionRadioButtonGroup {
 				id: positions
 				dataItem.uid: root.devicePath + "/Position"
 				allowed: root.serviceType === "pvinverter"

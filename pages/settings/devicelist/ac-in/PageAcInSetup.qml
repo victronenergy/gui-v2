@@ -89,7 +89,7 @@ Page {
 				}
 			}
 
-			PvInverterPositionRadioButtonGroup {
+			ListPvInverterPositionRadioButtonGroup {
 				dataItem.uid: root.bindPrefix + "/Position"
 				allowed: role.currentValue === "pvinverter"
 			}

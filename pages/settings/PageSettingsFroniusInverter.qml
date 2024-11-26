@@ -26,7 +26,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			PvInverterPositionRadioButtonGroup {
+			ListPvInverterPositionRadioButtonGroup {
 				dataItem.uid: bindPrefix + "/Position"
 			}
 
