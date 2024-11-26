@@ -328,7 +328,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListTextField.qml
     components/listitems/ListTextGroup.qml
     components/listitems/ListText.qml
-    components/listitems/ListTextItemSecondaryLabel.qml
+    components/listitems/SecondaryListLabel.qml
     components/listitems/ListTimeSelector.qml
 
     components/settings/ActiveAcInputTextItem.qml

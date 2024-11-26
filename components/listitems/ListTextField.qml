@@ -191,7 +191,7 @@ ListItem {
 		readonlyLabel
 	]
 
-	ListTextItemSecondaryLabel {
+	SecondaryListLabel {
 		id: readonlyLabel
 
 		text: textField.text.length > 0 ? textField.text : "--"
