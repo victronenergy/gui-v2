@@ -316,7 +316,7 @@ Page {
 				dataItem.uid: root.loggerServiceUid + "/Buffer/FreeDiskSpace"
 			}
 
-			MountStateListButton {}
+			ListMountStateButton {}
 
 			ListText {
 				//% "Stored records"
