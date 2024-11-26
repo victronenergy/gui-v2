@@ -59,7 +59,7 @@ Page {
 				}
 			}
 
-			ListSectionHeader {
+			SectionHeader {
 				//% "Wi-Fi networks"
 				text: qsTrId("settings_wifi_networks")
 				allowed: scanItem.isValid && accessPoint.isValid

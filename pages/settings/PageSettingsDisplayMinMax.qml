@@ -74,7 +74,7 @@ Page {
 
 						width: parent ? parent.width : 0
 
-						ListSectionHeader {
+						SectionHeader {
 							text: {
 								const inputInfo = Global.acInputs["input" + (index + 1) + "Info"]
 								if (inputInfo.source === VenusOS.AcInputs_InputSource_NotAvailable) {
@@ -106,7 +106,7 @@ Page {
 				}
 			}
 
-			ListSectionHeader {
+			SectionHeader {
 				//% "DC input"
 				text: qsTrId("settings_minmax_dc_input")
 			}
@@ -118,7 +118,7 @@ Page {
 				unit: VenusOS.Units_Watt
 			}
 
-			ListSectionHeader {
+			SectionHeader {
 				//% "AC output"
 				text: qsTrId("settings_minmax_acout_max_power")
 			}
@@ -147,7 +147,7 @@ Page {
 				unit: VenusOS.Units_Amp
 			}
 
-			ListSectionHeader {
+			SectionHeader {
 				//% "DC output"
 				text: qsTrId("settings_minmax_dc_out")
 			}
@@ -159,7 +159,7 @@ Page {
 				unit: VenusOS.Units_Watt
 			}
 
-			ListSectionHeader {
+			SectionHeader {
 				//% "Solar"
 				text: qsTrId("settings_minmax_solar")
 			}

@@ -319,7 +319,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListQuantityGroupNavigation.qml
     components/listitems/ListQuantity.qml
     components/listitems/ListRangeSlider.qml
-    components/listitems/ListSectionHeader.qml
+    components/listitems/SectionHeader.qml
     components/listitems/ListSlider.qml
     components/listitems/ListSpinBox.qml
     components/listitems/ListSwitch.qml
