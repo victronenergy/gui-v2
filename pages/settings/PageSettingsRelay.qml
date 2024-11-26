@@ -87,7 +87,7 @@ Page {
 					&& relay1Function.currentValue === VenusOS.Relay_Function_Manual
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Temperature control rules"
 				text: qsTrId("settings_relay_temp_control_rules")
 				allowed: relayFunction.currentValue === VenusOS.Relay_Function_Temperature

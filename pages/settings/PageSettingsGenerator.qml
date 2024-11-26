@@ -24,7 +24,7 @@ Page {
 
 		model: ObjectModel {
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Conditions"
 				text: qsTrId("page_settings_generator_conditions")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorConditions.qml", { title: text, bindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
@@ -38,7 +38,7 @@ Page {
 				decimals: 0
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Warm-up & cool-down"
 				text: qsTrId("settings_page_generator_warm_up_cool_down")
 				allowed: capabilities.value & warmupCapability

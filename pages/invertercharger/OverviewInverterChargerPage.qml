@@ -151,7 +151,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.ess
 				allowed: root.serviceType === "acsystem"
 				onClicked: {
@@ -160,7 +160,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.product_page
 				onClicked: {
 					if (root.serviceType === "inverter") {

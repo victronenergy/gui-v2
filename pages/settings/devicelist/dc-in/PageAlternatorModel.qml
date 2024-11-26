@@ -100,7 +100,7 @@ ObjectModel {
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		text: CommonWords.overall_history
 		allowed: overallHistoryMonitor.hasVisibleItem
 		onClicked: {
@@ -173,7 +173,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		//% "Charge cycle history"
 		text: qsTrId("alternator_wakespeed_charge_cycle_history")
 		allowed: historyCyclesAvailable.isValid
@@ -204,7 +204,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		text: CommonWords.device_info_title
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

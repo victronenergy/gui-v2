@@ -11,7 +11,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListNavigationItem {
+			ListNavigation {
 				//% "Modbus TCP"
 				text: qsTrId("settings_services_modbus_tcp")
 				secondaryText: modbus.value === 1 ? CommonWords.enabled : CommonWords.disabled
@@ -26,7 +26,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Tailscale (remote VPN access)"
 				text: qsTrId("settings_services_tailscale_remote_vpn_access")
 				secondaryText: tailscale.value === 1 ? CommonWords.enabled : CommonWords.disabled
@@ -54,7 +54,7 @@ Page {
 
 				Repeater {
 					model: canInterface.value || []
-					delegate: ListNavigationItem {
+					delegate: ListNavigation {
 						text: modelData["name"] || ""
 						onClicked: Global.pageManager.pushPage(canBusComponent, { title: text })
 

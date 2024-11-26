@@ -20,7 +20,7 @@ Page {
 				secondaryText: Global.digitalInputs.inputStateToText(dataItem.value)
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.setup
 				onClicked: {
 					Global.pageManager.pushPage(settingsComponent, { "title": text })
@@ -64,7 +64,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

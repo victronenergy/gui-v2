@@ -13,7 +13,7 @@ Page {
 
 	GradientListView {
 		model: 8 // Up to 8 (A-H)
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			id: distributorDelegate
 
 			readonly property string distributor: String.fromCharCode(65 + model.index)

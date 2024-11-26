@@ -128,7 +128,7 @@ ObjectModel {
 				: qsTrId("ac-in-modeldefault_phase_sequence_ordered")
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		text: CommonWords.setup
 		allowed: allowedRoles.isValid
 		onClicked: {
@@ -142,7 +142,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		text: CommonWords.device_info_title
 		onClicked: {
 			Global.pageManager.pushPage(deviceInfoComponent, { "title": text })

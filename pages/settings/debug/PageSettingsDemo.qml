@@ -18,7 +18,7 @@ Page {
 				text: "This page demonstrates the components that can be used to build settings pages."
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: "Page launch"
 				secondaryText: "Secondary text"
 				onClicked: Global.pageManager.pushPage(newPageComponent, { title: "Page name" })

@@ -97,7 +97,7 @@ Page {
 				secondaryLabel.color: root.pvInverter.errorCode > 0 ? Theme.color_critical : Theme.color_font_secondary
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

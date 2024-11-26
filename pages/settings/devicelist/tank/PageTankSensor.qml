@@ -61,7 +61,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.setup
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankSetup.qml",
@@ -69,7 +69,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

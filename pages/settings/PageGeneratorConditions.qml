@@ -122,7 +122,7 @@ Page {
 				unit: "V"
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.ac_load
 				secondaryText: acLoadEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorAcLoad.qml", { title: text, bindPrefix: root.bindPrefix + "/AcLoad"})
@@ -154,7 +154,7 @@ Page {
 				bindPrefix: root.bindPrefix + "/InverterOverload"
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Periodic run"
 				text: qsTrId("page_generator_conditions_periodic_run")
 				secondaryText: testRunEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled

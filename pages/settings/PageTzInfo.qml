@@ -112,7 +112,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Time zone"
 				text: qsTrId("settings_tz_time_zone")
 				secondaryText: root._findTimeZoneName(tzData.region, tzData.city)

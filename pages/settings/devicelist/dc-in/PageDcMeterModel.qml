@@ -48,7 +48,7 @@ ObjectModel {
 		dataItem.uid: root.bindPrefix + "/Alarms/Alarm"
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		text: CommonWords.alarms
 		allowed: !isSssDcEnergyMeter
 		onClicked: {
@@ -57,7 +57,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		text: CommonWords.history
 		allowed: !isSssDcEnergyMeter
 		onClicked: {
@@ -66,7 +66,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		text: CommonWords.device_info_title
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

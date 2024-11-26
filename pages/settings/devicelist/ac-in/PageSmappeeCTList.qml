@@ -21,7 +21,7 @@ Page {
 				   | VeQItemTableModel.DontAddItem
 		}
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			id: menu
 
 			readonly property int ctIndex: model.id

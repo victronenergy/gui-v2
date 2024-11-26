@@ -27,7 +27,7 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Analog inputs"
 				text: qsTrId("settings_io_analog_inputs")
 				allowed: defaultAllowed && analogModel.rowCount > 0
@@ -55,7 +55,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Digital inputs"
 				text: qsTrId("settings_io_digital_inputs")
 				allowed: defaultAllowed && digitalModel.rowCount > 0
@@ -96,7 +96,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Bluetooth sensors"
 				text: qsTrId("settings_io_bt_sensors")
 				allowed: hasBluetoothSupport.value

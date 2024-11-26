@@ -22,7 +22,7 @@ Page {
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem | VeQItemTableModel.UseLocalValues
 		}
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			text: model.id
 			secondaryText: {
 				if (enabled) {

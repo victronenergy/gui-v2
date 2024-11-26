@@ -71,7 +71,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Brief view levels"
 				text: qsTrId("settings_brief_view_levels")
 				onClicked: {
@@ -151,7 +151,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Units"
 				text: qsTrId("settings_units")
 				onClicked: {
@@ -159,7 +159,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Minimum and maximum gauge ranges"
 				text: qsTrId("settings_display_minmax")
 				onClicked: {
@@ -167,7 +167,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Start page"
 				text: qsTrId("settings_brief_view_start_page")
 				onClicked: {

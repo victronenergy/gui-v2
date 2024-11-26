@@ -105,7 +105,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Relay/0/State"
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.daily_history
 				allowed: root.trackerCount > 0
 				onClicked: {
@@ -124,7 +124,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.overall_history
 				allowed: root.trackerCount > 0
 				onClicked: {
@@ -133,7 +133,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.alarm_status
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
@@ -141,7 +141,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

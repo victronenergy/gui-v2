@@ -20,7 +20,7 @@ Page {
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			text: {
 				let name = modelName.value || ""
 				if (vrmInstance.value) {

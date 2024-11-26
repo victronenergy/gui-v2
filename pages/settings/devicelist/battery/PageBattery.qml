@@ -250,7 +250,7 @@ Page {
 				dataItem.uid: root.battery.serviceUid + "/Alarms/Alarm"
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Details"
 				text: qsTrId("battery_details")
 				allowed: defaultAllowed && batteryDetails.hasAllowedItem
@@ -265,7 +265,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.alarms
 				allowed: !root.isParallelBms
 				onClicked: {
@@ -274,7 +274,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Module level alarms"
 				text: qsTrId("battery_module_level_alarms")
 				allowed: moduleAlarmModel.rowCount > 0
@@ -284,7 +284,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.history
 				allowed: !isFiamm48TL && batteryHistory.hasAllowedItem
 				onClicked: {
@@ -298,7 +298,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.settings
 				allowed: hasSettings.value === 1
 				onClicked: {
@@ -307,7 +307,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				id: lynxIonDiagnostics
 
 				//% "Diagnostics"
@@ -324,7 +324,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: lynxIonDiagnostics.text
 				allowed: isFiamm48TL
 
@@ -334,7 +334,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Fuses"
 				text: qsTrId("battery_settings_fuses")
 				allowed: nrOfDistributors.isValid && nrOfDistributors.value > 0
@@ -350,7 +350,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "IO"
 				text: qsTrId("battery_settings_io")
 				allowed: allowToCharge.isValid
@@ -365,7 +365,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "System"
 				text: qsTrId("battery_settings_system")
 				allowed: nrOfBatteries.isValid
@@ -380,7 +380,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
@@ -388,7 +388,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Parameters"
 				text: qsTrId("battery_settings_parameters")
 				allowed: cvl.isValid || ccl.isValid || dcl.isValid

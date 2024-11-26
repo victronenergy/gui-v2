@@ -26,7 +26,7 @@ Page {
 				width: parent ? parent.width : 0
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Charge current limits"
 				text: qsTrId("settings_dvcc_charge_current_limits")
 				showAccessLevel: VenusOS.User_AccessType_Service

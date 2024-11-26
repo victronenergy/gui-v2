@@ -40,13 +40,13 @@ Page {
 				allowed: userHasWriteAccess
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Saved devices"
 				text: qsTrId("page_settings_modbus_saved_devices")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusDevices.qml", {"title": root.title})
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Discovered devices"
 				text: qsTrId("page_settings_modbus_discovered_devices")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusDiscovered.qml", {"title": root.title})

@@ -15,7 +15,7 @@ import Victron.VenusOS
 // The default behaviour supports a simple array-based model. When using a ListModel or C++ model,
 // set the currentIndex and secondaryText properties manually.
 
-ListNavigationItem {
+ListNavigation {
 	id: root
 
 	readonly property alias dataItem: dataItem

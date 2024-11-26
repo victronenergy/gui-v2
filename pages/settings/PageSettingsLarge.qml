@@ -31,7 +31,7 @@ Page {
 				allowed: signalk.checked
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				id: nodered
 
 				//% "Node-RED"

@@ -48,7 +48,7 @@ Page {
 				secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

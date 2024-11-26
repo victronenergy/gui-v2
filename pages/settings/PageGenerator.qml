@@ -97,7 +97,7 @@ Page {
 			dataItem.uid: root.startStopBindPrefix + "/Error"
 		}
 
-		ListNavigationItem {
+		ListNavigation {
 			text: CommonWords.settings
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
@@ -105,7 +105,7 @@ Page {
 			}
 		}
 
-		ListNavigationItem {
+		ListNavigation {
 			//% "Run time and service"
 			text: qsTrId("page_settings_generator_run_time_and_service")
 			onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",

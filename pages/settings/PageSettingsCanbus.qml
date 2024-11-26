@@ -116,7 +116,7 @@ Page {
 				]
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Devices"
 				text: qsTrId("settings_devices")
 				allowed: root._isVecan || root._isRvc
@@ -231,7 +231,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.network_status
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageCanbusStatus.qml",

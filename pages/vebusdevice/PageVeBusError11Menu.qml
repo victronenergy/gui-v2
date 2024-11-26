@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListNavigationItem {
+ListNavigation {
 	id: root
 
 	property int _index

@@ -38,7 +38,7 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.ac_sensors
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml", {
 														   "title": text,
@@ -47,7 +47,7 @@ Page {
 													   )
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: "kWh Counters"
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusKwhCounters.qml", {
 														   "title": text,

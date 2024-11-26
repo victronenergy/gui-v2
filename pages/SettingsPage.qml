@@ -153,7 +153,7 @@ SwipeViewPage {
 			},
 		]
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			text: modelData.text
 			showAccessLevel: modelData.showAccessLevel || VenusOS.User_AccessType_User
 			allowed: defaultAllowed && (modelData.allowed === undefined || modelData.allowed === true)

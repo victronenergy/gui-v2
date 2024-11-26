@@ -144,7 +144,7 @@ Page {
 				allowed: preferRenewableEnergy.value === 2
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: chargeInProcess ?
 						  //% "Press to stop"
 						  qsTrId("vebus_device_press_to_stop")
@@ -247,7 +247,7 @@ Page {
 				serviceUid: root.veBusDevice.serviceUid
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Advanced"
 				text: qsTrId("vebus_device_page_advanced")
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAdvanced.qml",
@@ -256,7 +256,7 @@ Page {
 													   })
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.alarm_status
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAlarms.qml",
 													   {
@@ -266,7 +266,7 @@ Page {
 													   })
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.alarm_setup
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAlarmSettings.qml",
 													   {
@@ -288,7 +288,7 @@ Page {
 				allowed: bmsType.value === VenusOS.VeBusDevice_Bms_Type_VeBus && !bmsMode.isValid
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "VE.Bus BMS"
 				text: qsTrId("vebus_device_vebus_bms")
 				allowed: bmsExpected.value === 1
@@ -298,7 +298,7 @@ Page {
 													   })
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.ac_sensors
 				showAccessLevel: VenusOS.User_AccessType_Service
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml", {
@@ -308,7 +308,7 @@ Page {
 													   )
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.debug
 				showAccessLevel: VenusOS.User_AccessType_Service
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusDebug.qml", {
@@ -318,7 +318,7 @@ Page {
 													   )
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusDeviceInfo.qml", {
 														   "title": text,

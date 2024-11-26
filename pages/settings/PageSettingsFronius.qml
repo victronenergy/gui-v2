@@ -25,7 +25,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListNavigationItem {
+			ListNavigation {
 				//% "Inverters"
 				text: qsTrId("page_settings_fronius_inverters")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverters.qml", {"title": text})
@@ -38,13 +38,13 @@ Page {
 				onClicked: autoDetectItem.setValue(autoDetectItem.value === 0 ? 1 : 0)
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Detected IP addresses"
 				text: qsTrId("page_settings_fronius_detected_ip_addresses")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": text})
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Add IP address manually"
 				text: qsTrId("page_settings_fronius_add_ip_address_manually")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": text})

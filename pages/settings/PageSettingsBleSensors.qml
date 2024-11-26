@@ -54,7 +54,7 @@ Page {
 				allowed: contScan.checked
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Bluetooth adapters"
 				text: qsTrId("settings_io_bluetooth_adapters")
 				allowed: enable.checked
