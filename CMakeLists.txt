@@ -316,7 +316,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListRadioButtonGroup.qml
     components/listitems/ListQuantityField.qml
     components/listitems/ListQuantityGroup.qml
-    components/listitems/ListQuantityGroupNavigationItem.qml
+    components/listitems/ListQuantityGroupNavigation.qml
     components/listitems/ListQuantityItem.qml
     components/listitems/ListRangeSlider.qml
     components/listitems/ListSectionHeader.qml
