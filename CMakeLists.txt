@@ -351,7 +351,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/ListPvInverterPositionRadioButtonGroup.qml
     components/settings/SettingsRangeSlider.qml
     components/settings/SettingsSlider.qml
-    components/settings/TemperatureRelayNavigationItem.qml
+    components/settings/ListTemperatureRelay.qml
     components/settings/TemperatureRelaySettings.qml
     components/settings/VolumeUnitRadioButtonGroup.qml
 
