@@ -68,7 +68,7 @@ Page {
 				}
 			}
 
-			ActiveAcInputTextItem {
+			ListActiveAcInput {
 				bindPrefix: root.bindPrefix
 			}
 

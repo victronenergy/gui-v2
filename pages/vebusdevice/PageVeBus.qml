@@ -239,7 +239,7 @@ Page {
 				text: CommonWords.battery_temperature
 			}
 
-			ActiveAcInputTextItem {
+			ListActiveAcInput {
 				bindPrefix: root.veBusDevice.serviceUid
 			}
 

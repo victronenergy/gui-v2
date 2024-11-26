@@ -115,7 +115,7 @@ Page {
 				}
 			}
 
-			ActiveAcInputTextItem {
+			ListActiveAcInput {
 				bindPrefix: root.serviceUid
 				allowed: root.serviceType !== "inverter"
 			}
